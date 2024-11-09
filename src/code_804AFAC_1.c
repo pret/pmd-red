@@ -53,7 +53,7 @@ extern const Position gAdjacentTileOffsets[];
 void sub_804B534(s32 a0, s32 a1, s32 a2, s32 a3);
 bool8 sub_804C70C(s32, UnkDungeonGlobal_unk1C574 *);
 void GenerateStandardFloor(s32 a0, s32 a1, UnkDungeonGlobal_unk1C574 *a2);
-void sub_804B72C(UnkDungeonGlobal_unk1C574 *a0);
+void GenerateOuterRingFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateCrossroadsFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateLineFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateCrossFloor(UnkDungeonGlobal_unk1C574 *a0);
@@ -195,7 +195,7 @@ void sub_804AFAC(void)
                         gDungeon->unk3A08 = 1;
                         break;
                     case 3:
-                        sub_804B72C(unkPtr);
+                        GenerateOuterRingFloor(unkPtr);
                         r10 = TRUE;
                         break;
                     case 4:
@@ -646,7 +646,7 @@ void NAKED sub_804AFAC(void)
 "_0804B294: .4byte 0x00003a08\n"
 "_0804B298:\n"
 "	mov r0, r8\n"
-"	bl sub_804B72C\n"
+"	bl GenerateOuterRingFloor\n"
 "	movs r2, 0x1\n"
 "	mov r10, r2\n"
 "	b _0804B2F6\n"
@@ -1079,666 +1079,154 @@ void GenerateStandardFloor(s32 gridSizeX, s32 gridSizeY, UnkDungeonGlobal_unk1C5
     GenerateSecondaryStructures(grid, gridSizeX, gridSizeY);
 }
 
-// Decompile once data structure is better understood
-
-#ifdef NONMATCHING
-void sub_804B72C(UnkDungeonGlobal_unk1C574 *unkPtr)
+// GenerateOuterRingFloor - Generates on a 6x4 grid, with the outer border of grid cells being hallways and the inner 4x2 grid being rooms.
+void GenerateOuterRingFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
 {
-    struct GridCell grid[15][15];
+    struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
+    s32 listX[GRID_CELL_LEN];
+    s32 listY[GRID_CELL_LEN];
+    s32 x, y;
+    s32 currRoomIndex;
+	s32 gridSizeX = 6;
+	s32 gridSizeY = 4;
+	// These are needed to match. Perhaps they wanted the code to be clear that inside = rooms, and outside = hallways.
+    bool8 outerIsRoom = FALSE;
+    bool8 innerIsRoom = TRUE;
 
-    sp.listX[0] = 0;
-    sp.listX[1] = 5;
-    sp.listX[3] = 28;
-    sp.listX[5] = 51
-    sp.listX[6] = 56;
-    sp.listX[2] = 16;
-    sp.listX[4] = 29;
+	listX[0] = 0;
+	listX[1] = 5;
+    listX[3] = 28;
+    listX[5] = 51;
+	listX[6] = 56;
+    listX[2] = 16;
+	listX[4] = 39;
 
-    sp.listY[0] = 2;
-    sp.listY[1] = 7;
-    sp.listY[2] = 16;
-    sp.listY[3] = 25;
-    sp.listY[4] = 30;
+	listY[0] = 2;
+	listY[1] = 7;
+	listY[2] = 16;
+	listY[3] = 25;
+	listY[4] = 30;
 
-    InitDungeonGrid(grid, 6, 4);
+	InitDungeonGrid(grid, gridSizeX, gridSizeY);
+
+	// Mark the outer ring as not being rooms
+	for (x = 0; x < gridSizeX; x++) {
+		grid[x][0].isRoom = outerIsRoom;
+		grid[x][gridSizeY - 1].isRoom = outerIsRoom;
+	}
+
+	for (y = 0; y < gridSizeY; y++) {
+		grid[0][y].isRoom = outerIsRoom;
+		grid[gridSizeX - 1][y].isRoom = outerIsRoom;
+	}
+
+	// Mark the inner tiles as rooms
+	for (x = 1; x < gridSizeX - 1; x++) {
+		for (y = 1; y < gridSizeY - 1; y++) {
+			grid[x][y].isRoom = innerIsRoom;
+		}
+	}
+
+    currRoomIndex = 0;
+
+	for (y = 0; y < gridSizeY; y++) {
+		for (x = 0; x < gridSizeX; x++) {
+			if (grid[x][y].isRoom) {
+				// Room
+				s32 curX, curY;
+                s32 minX = listX[x] + 2;
+                s32 minY = listY[y] + 2;
+				s32 rangeX = listX[x + 1] - listX[x] - 3;
+				s32 rangeY = listY[y + 1] - listY[y] - 3;
+
+				s32 roomSizeX = DungeonRandRange(5, rangeX);
+				s32 roomSizeY = DungeonRandRange(4, rangeY);
+				s32 startX = DungeonRandInt(rangeX - roomSizeX) + minX;
+				s32 startY = DungeonRandInt(rangeY - roomSizeY) + minY;
+				s32 endX = startX + roomSizeX;
+				s32 endY = startY + roomSizeY;
+
+				grid[x][y].start.x = startX;
+				grid[x][y].end.x = endX;
+				grid[x][y].start.y = startY;
+				grid[x][y].end.y = startY + roomSizeY;
+				for (curX = startX; curX < endX; curX++) {
+					for (curY = startY; curY < endY; curY++) {
+						SetTerrainNormal(GetTileSafe(curX, curY));
+                        GetTileSafe(curX, curY)->room = currRoomIndex;
+					}
+				}
+
+				currRoomIndex++;
+			}
+			else
+			{
+				// Hallway Anchor
+				s32 minX = listX[x] + 1;
+                s32 minY = listY[y] + 1;
+                s32 rangeX = listX[x + 1] - listX[x] - 3;
+                s32 rangeY = listY[y + 1] - listY[y] - 3;
+				s32 startX = DungeonRandRange(minX, minX + rangeX);
+				s32 startY = DungeonRandRange(minY, minY + rangeY);
+
+				grid[x][y].start.x = startX;
+				grid[x][y].end.x = startX + 1;
+				grid[x][y].start.y = startY;
+				grid[x][y].end.y = startY + 1;
+
+				SetTerrainNormal(GetTileSafe(startX, startY));
+				GetTileSafe(startX, startY)->room = CORRIDOR_ROOM;
+			}
+		}
+	}
+
+	grid[0][0].connectedToRight = TRUE;
+	grid[1][0].connectedToLeft = TRUE;
+	grid[1][0].connectedToRight = TRUE;
+	grid[2][0].connectedToLeft = TRUE;
+	grid[2][0].connectedToRight = TRUE;
+	grid[3][0].connectedToLeft = TRUE;
+	grid[3][0].connectedToRight = TRUE;
+	grid[4][0].connectedToLeft = TRUE;
+	grid[4][0].connectedToRight = TRUE;
+	grid[5][0].connectedToLeft = TRUE;
+	grid[0][0].connectedToBottom = TRUE;
+	grid[0][1].connectedToTop = TRUE;
+	grid[0][1].connectedToBottom = TRUE;
+	grid[0][2].connectedToTop = TRUE;
+	grid[0][2].connectedToBottom = TRUE;
+	grid[0][3].connectedToTop = TRUE;
+	grid[0][3].connectedToRight = TRUE;
+	grid[1][3].connectedToLeft = TRUE;
+	grid[1][3].connectedToRight = TRUE;
+	grid[2][3].connectedToLeft = TRUE;
+	grid[2][3].connectedToRight = TRUE;
+	grid[3][3].connectedToLeft = TRUE;
+	grid[3][3].connectedToRight = TRUE;
+	grid[4][3].connectedToLeft = TRUE;
+	grid[4][3].connectedToRight = TRUE;
+	grid[5][3].connectedToLeft = TRUE;
+	grid[5][0].connectedToBottom = TRUE;
+	grid[5][1].connectedToTop = TRUE;
+	grid[5][1].connectedToBottom = TRUE;
+	grid[5][2].connectedToTop = TRUE;
+	grid[5][2].connectedToBottom = TRUE;
+	grid[5][3].connectedToTop = TRUE;
+
+	AssignRandomGridCellConnections(grid, gridSizeX, gridSizeY, unkPtr);
+	CreateGridCellConnections(grid, gridSizeX, gridSizeY, listX, listY, FALSE);
+
+	EnsureConnectedGrid(grid, gridSizeX, gridSizeY, listX, listY);
+
+	GenerateKecleonShop(grid, gridSizeX, gridSizeY, gUnknown_202F1B0);
+	GenerateMonsterHouse(grid, gridSizeX, gridSizeY, gUnknown_202F1B2);
+
+	GenerateExtraHallways(grid, gridSizeX, gridSizeY, unkPtr->unk13);
+	GenerateRoomImperfections(grid, gridSizeX, gridSizeY);
 }
-#else
-NAKED void sub_804B72C(UnkDungeonGlobal_unk1C574 *unkPtr)
-{
-    asm_unified("push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	ldr r4, _0804B9AC\n"
-"	add sp, r4\n"
-"	movs r1, 0xE5\n"
-"	lsls r1, 5\n"
-"	add r1, sp\n"
-"	str r0, [r1]\n"
-"	movs r5, 0\n"
-"	movs r6, 0x1\n"
-"	ldr r1, _0804B9B0\n"
-"	add r1, sp\n"
-"	str r5, [r1]\n"
-"	movs r0, 0x5\n"
-"	str r0, [r1, 0x4]\n"
-"	movs r0, 0x1C\n"
-"	str r0, [r1, 0xC]\n"
-"	movs r0, 0x33\n"
-"	str r0, [r1, 0x14]\n"
-"	movs r0, 0x38\n"
-"	str r0, [r1, 0x18]\n"
-"	movs r2, 0x10\n"
-"	str r2, [r1, 0x8]\n"
-"	movs r0, 0x27\n"
-"	str r0, [r1, 0x10]\n"
-"	ldr r1, _0804B9B4\n"
-"	add r1, sp\n"
-"	movs r0, 0x2\n"
-"	str r0, [r1]\n"
-"	movs r0, 0x7\n"
-"	str r0, [r1, 0x4]\n"
-"	str r2, [r1, 0x8]\n"
-"	movs r0, 0x19\n"
-"	str r0, [r1, 0xC]\n"
-"	movs r0, 0x1E\n"
-"	str r0, [r1, 0x10]\n"
-"	add r0, sp, 0x8\n"
-"	movs r1, 0x6\n"
-"	movs r2, 0x4\n"
-"	bl InitDungeonGrid\n"
-"	mov r2, sp\n"
-"	adds r2, 0x3B\n"
-"	ldr r3, _0804B9B8\n"
-"	add r3, sp\n"
-"	str r2, [r3]\n"
-"	mov r4, sp\n"
-"	adds r4, 0x3C\n"
-"	ldr r0, _0804B9BC\n"
-"	add r0, sp\n"
-"	str r4, [r0]\n"
-"	mov r1, sp\n"
-"	adds r1, 0x5B\n"
-"	ldr r2, _0804B9C0\n"
-"	add r2, sp\n"
-"	str r1, [r2]\n"
-"	mov r3, sp\n"
-"	adds r3, 0x5C\n"
-"	movs r4, 0xE6\n"
-"	lsls r4, 5\n"
-"	add r4, sp\n"
-"	str r3, [r4]\n"
-"	mov r0, sp\n"
-"	adds r0, 0x7B\n"
-"	ldr r1, _0804B9C4\n"
-"	add r1, sp\n"
-"	str r0, [r1]\n"
-"	mov r2, sp\n"
-"	adds r2, 0x7E\n"
-"	ldr r3, _0804B9C8\n"
-"	add r3, sp\n"
-"	str r2, [r3]\n"
-"	add r1, sp, 0x68\n"
-"	add r0, sp, 0x8\n"
-"	movs r2, 0xF0\n"
-"	lsls r2, 1\n"
-"	movs r4, 0x6\n"
-"_0804B7CC:\n"
-"	strb r5, [r0, 0xA]\n"
-"	strb r5, [r1, 0xA]\n"
-"	adds r1, r2\n"
-"	adds r0, r2\n"
-"	subs r4, 0x1\n"
-"	cmp r4, 0\n"
-"	bne _0804B7CC\n"
-"	movs r2, 0x6\n"
-"	subs r2, 0x1\n"
-"	movs r4, 0x4\n"
-"	cmp r4, 0\n"
-"	beq _0804B80C\n"
-"	lsls r0, r2, 4\n"
-"	subs r0, r2\n"
-"	lsls r0, 5\n"
-"	add r0, sp\n"
-"	adds r0, 0x8\n"
-"	add r1, sp, 0x8\n"
-"	ldr r3, _0804B9CC\n"
-"	add r3, sp\n"
-"	str r4, [r3]\n"
-"_0804B7F6:\n"
-"	strb r5, [r1, 0xA]\n"
-"	strb r5, [r0, 0xA]\n"
-"	adds r0, 0x20\n"
-"	adds r1, 0x20\n"
-"	ldr r3, _0804B9CC\n"
-"	add r3, sp\n"
-"	ldr r4, [r3]\n"
-"	subs r4, 0x1\n"
-"	str r4, [r3]\n"
-"	cmp r4, 0\n"
-"	bne _0804B7F6\n"
-"_0804B80C:\n"
-"	movs r4, 0x1\n"
-"	cmp r4, r2\n"
-"	bge _0804B848\n"
-"	movs r1, 0x3\n"
-"_0804B814:\n"
-"	adds r5, r4, 0x1\n"
-"	mov r8, r5\n"
-"	cmp r1, 0x1\n"
-"	ble _0804B842\n"
-"	lsls r0, r4, 4\n"
-"	subs r0, r4\n"
-"	lsls r0, 5\n"
-"	add r0, sp\n"
-"	adds r0, 0x8\n"
-"	adds r0, 0x20\n"
-"	subs r3, r1, 0x1\n"
-"	ldr r4, _0804B9CC\n"
-"	add r4, sp\n"
-"	str r3, [r4]\n"
-"_0804B830:\n"
-"	strb r6, [r0, 0xA]\n"
-"	adds r0, 0x20\n"
-"	ldr r3, _0804B9CC\n"
-"	add r3, sp\n"
-"	ldr r5, [r3]\n"
-"	subs r5, 0x1\n"
-"	str r5, [r3]\n"
-"	cmp r5, 0\n"
-"	bne _0804B830\n"
-"_0804B842:\n"
-"	mov r4, r8\n"
-"	cmp r4, r2\n"
-"	blt _0804B814\n"
-"_0804B848:\n"
-"	movs r4, 0\n"
-"	ldr r5, _0804B9D0\n"
-"	add r5, sp\n"
-"	str r4, [r5]\n"
-"	ldr r0, _0804B9CC\n"
-"	add r0, sp\n"
-"	str r4, [r0]\n"
-"	cmp r4, 0x4\n"
-"	blt _0804B85C\n"
-"	b _0804BA8C\n"
-"_0804B85C:\n"
-"	movs r4, 0\n"
-"	ldr r2, _0804B9CC\n"
-"	add r2, sp\n"
-"	ldr r1, [r2]\n"
-"	adds r1, 0x1\n"
-"	ldr r2, _0804B9D4\n"
-"	add r2, sp\n"
-"	str r1, [r2]\n"
-"	cmp r4, 0x6\n"
-"	blt _0804B872\n"
-"	b _0804BA7A\n"
-"_0804B872:\n"
-"	ldr r3, _0804B9B0\n"
-"	add r3, sp\n"
-"	ldr r5, _0804B9D8\n"
-"	add r5, sp\n"
-"	str r3, [r5]\n"
-"	ldr r0, _0804B9B4\n"
-"	add r0, sp\n"
-"	ldr r1, _0804B9DC\n"
-"	add r1, sp\n"
-"	str r0, [r1]\n"
-"	ldr r2, _0804B9CC\n"
-"	add r2, sp\n"
-"	ldr r2, [r2]\n"
-"	lsls r0, r2, 2\n"
-"	ldr r3, [r1]\n"
-"	adds r0, r3, r0\n"
-"	ldr r3, _0804B9E0\n"
-"	add r3, sp\n"
-"	str r0, [r3]\n"
-"_0804B898:\n"
-"	lsls r0, r4, 4\n"
-"	subs r0, r4\n"
-"	ldr r5, _0804B9CC\n"
-"	add r5, sp\n"
-"	ldr r5, [r5]\n"
-"	adds r0, r5\n"
-"	lsls r0, 5\n"
-"	mov r7, sp\n"
-"	adds r7, r0\n"
-"	adds r7, 0x8\n"
-"	ldrb r0, [r7, 0xA]\n"
-"	cmp r0, 0\n"
-"	bne _0804B8B4\n"
-"	b _0804B9F4\n"
-"_0804B8B4:\n"
-"	lsls r0, r4, 2\n"
-"	ldr r1, _0804B9D8\n"
-"	add r1, sp\n"
-"	ldr r1, [r1]\n"
-"	adds r0, r1, r0\n"
-"	ldr r1, [r0]\n"
-"	adds r2, r1, 0x2\n"
-"	mov r10, r2\n"
-"	ldr r3, _0804B9E0\n"
-"	add r3, sp\n"
-"	ldr r3, [r3]\n"
-"	ldr r2, [r3]\n"
-"	adds r5, r2, 0x2\n"
-"	ldr r0, _0804B9E4\n"
-"	add r0, sp\n"
-"	str r5, [r0]\n"
-"	adds r4, 0x1\n"
-"	mov r9, r4\n"
-"	lsls r0, r4, 2\n"
-"	ldr r3, _0804B9D8\n"
-"	add r3, sp\n"
-"	ldr r3, [r3]\n"
-"	adds r0, r3, r0\n"
-"	ldr r4, [r0]\n"
-"	subs r4, r1\n"
-"	subs r4, 0x3\n"
-"	ldr r5, _0804B9D4\n"
-"	add r5, sp\n"
-"	ldr r5, [r5]\n"
-"	lsls r0, r5, 2\n"
-"	ldr r1, _0804B9DC\n"
-"	add r1, sp\n"
-"	ldr r1, [r1]\n"
-"	adds r0, r1, r0\n"
-"	ldr r5, [r0]\n"
-"	subs r5, r2\n"
-"	subs r5, 0x3\n"
-"	movs r0, 0x5\n"
-"	adds r1, r4, 0\n"
-"	bl DungeonRandRange\n"
-"	mov r8, r0\n"
-"	movs r0, 0x4\n"
-"	adds r1, r5, 0\n"
-"	bl DungeonRandRange\n"
-"	adds r6, r0, 0\n"
-"	mov r2, r8\n"
-"	subs r4, r2\n"
-"	adds r0, r4, 0\n"
-"	bl DungeonRandInt\n"
-"	adds r4, r0, 0\n"
-"	add r4, r10\n"
-"	subs r5, r6\n"
-"	adds r0, r5, 0\n"
-"	bl DungeonRandInt\n"
-"	ldr r5, _0804B9E4\n"
-"	add r5, sp\n"
-"	ldr r3, [r5]\n"
-"	adds r3, r0\n"
-"	mov r10, r3\n"
-"	mov r0, r8\n"
-"	adds r3, r4, r0\n"
-"	add r6, r10\n"
-"	strh r4, [r7]\n"
-"	strh r3, [r7, 0x4]\n"
-"	mov r1, r10\n"
-"	strh r1, [r7, 0x2]\n"
-"	strh r6, [r7, 0x6]\n"
-"	mov r8, r9\n"
-"	ldr r5, _0804B9D0\n"
-"	add r5, sp\n"
-"	ldr r2, [r5]\n"
-"	adds r2, 0x1\n"
-"	ldr r5, _0804B9E8\n"
-"	add r5, sp\n"
-"	str r2, [r5]\n"
-"	cmp r4, r3\n"
-"	bge _0804B99E\n"
-"_0804B956:\n"
-"	mov r5, r10\n"
-"	adds r7, r4, 0x1\n"
-"	cmp r5, r6\n"
-"	bge _0804B998\n"
-"	ldr r0, _0804B9EC\n"
-"	mov r9, r0\n"
-"_0804B962:\n"
-"	adds r0, r4, 0\n"
-"	adds r1, r5, 0\n"
-"	ldr r2, _0804B9F0\n"
-"	add r2, sp\n"
-"	str r3, [r2]\n"
-"	bl GetTileSafe\n"
-"	ldrh r1, [r0]\n"
-"	mov r2, r9\n"
-"	ands r1, r2\n"
-"	movs r2, 0x1\n"
-"	orrs r1, r2\n"
-"	strh r1, [r0]\n"
-"	adds r0, r4, 0\n"
-"	adds r1, r5, 0\n"
-"	bl GetTileSafe\n"
-"	ldr r1, _0804B9D0\n"
-"	add r1, sp\n"
-"	ldrb r1, [r1]\n"
-"	strb r1, [r0, 0x9]\n"
-"	adds r5, 0x1\n"
-"	ldr r2, _0804B9F0\n"
-"	add r2, sp\n"
-"	ldr r3, [r2]\n"
-"	cmp r5, r6\n"
-"	blt _0804B962\n"
-"_0804B998:\n"
-"	adds r4, r7, 0\n"
-"	cmp r4, r3\n"
-"	blt _0804B956\n"
-"_0804B99E:\n"
-"	ldr r3, _0804B9E8\n"
-"	add r3, sp\n"
-"	ldr r3, [r3]\n"
-"	ldr r4, _0804B9D0\n"
-"	add r4, sp\n"
-"	str r3, [r4]\n"
-"	b _0804BA72\n"
-"	.align 2, 0\n"
-"_0804B9AC: .4byte 0xffffe320\n"
-"_0804B9B0: .4byte 0x00001c28\n"
-"_0804B9B4: .4byte 0x00001c64\n"
-"_0804B9B8: .4byte 0x00001cd4\n"
-"_0804B9BC: .4byte 0x00001cd8\n"
-"_0804B9C0: .4byte 0x00001cbc\n"
-"_0804B9C4: .4byte 0x00001cc4\n"
-"_0804B9C8: .4byte 0x00001cc8\n"
-"_0804B9CC: .4byte 0x00001ca4\n"
-"_0804B9D0: .4byte 0x00001ca8\n"
-"_0804B9D4: .4byte 0x00001ccc\n"
-"_0804B9D8: .4byte 0x00001cac\n"
-"_0804B9DC: .4byte 0x00001cb4\n"
-"_0804B9E0: .4byte 0x00001cb8\n"
-"_0804B9E4: .4byte 0x00001cb0\n"
-"_0804B9E8: .4byte 0x00001cd0\n"
-"_0804B9EC: .4byte 0x0000fffc\n"
-"_0804B9F0: .4byte 0x00001cdc\n"
-"_0804B9F4:\n"
-"	lsls r0, r4, 2\n"
-"	ldr r5, _0804BBE8\n"
-"	add r5, sp\n"
-"	ldr r5, [r5]\n"
-"	adds r0, r5, r0\n"
-"	ldr r2, [r0]\n"
-"	adds r0, r2, 0x1\n"
-"	ldr r1, _0804BBEC\n"
-"	add r1, sp\n"
-"	ldr r1, [r1]\n"
-"	ldr r3, [r1]\n"
-"	adds r6, r3, 0x1\n"
-"	adds r4, 0x1\n"
-"	mov r8, r4\n"
-"	lsls r1, r4, 2\n"
-"	adds r1, r5, r1\n"
-"	ldr r1, [r1]\n"
-"	subs r1, r2\n"
-"	subs r1, 0x3\n"
-"	ldr r5, _0804BBF0\n"
-"	add r5, sp\n"
-"	ldr r5, [r5]\n"
-"	lsls r2, r5, 2\n"
-"	ldr r4, _0804BBF4\n"
-"	add r4, sp\n"
-"	ldr r4, [r4]\n"
-"	adds r2, r4, r2\n"
-"	ldr r4, [r2]\n"
-"	subs r4, r3\n"
-"	subs r4, 0x3\n"
-"	adds r1, r0, r1\n"
-"	bl DungeonRandRange\n"
-"	adds r5, r0, 0\n"
-"	adds r4, r6, r4\n"
-"	adds r0, r6, 0\n"
-"	adds r1, r4, 0\n"
-"	bl DungeonRandRange\n"
-"	adds r4, r0, 0\n"
-"	strh r5, [r7]\n"
-"	adds r0, r5, 0x1\n"
-"	strh r0, [r7, 0x4]\n"
-"	strh r4, [r7, 0x2]\n"
-"	adds r0, r4, 0x1\n"
-"	strh r0, [r7, 0x6]\n"
-"	adds r0, r5, 0\n"
-"	adds r1, r4, 0\n"
-"	bl GetTileSafe\n"
-"	ldrh r1, [r0]\n"
-"	ldr r3, _0804BBF8\n"
-"	adds r2, r3, 0\n"
-"	ands r1, r2\n"
-"	movs r2, 0x1\n"
-"	orrs r1, r2\n"
-"	strh r1, [r0]\n"
-"	adds r0, r5, 0\n"
-"	adds r1, r4, 0\n"
-"	bl GetTileSafe\n"
-"	movs r1, 0xFF\n"
-"	strb r1, [r0, 0x9]\n"
-"_0804BA72:\n"
-"	mov r4, r8\n"
-"	cmp r4, 0x6\n"
-"	bge _0804BA7A\n"
-"	b _0804B898\n"
-"_0804BA7A:\n"
-"	ldr r4, _0804BBF0\n"
-"	add r4, sp\n"
-"	ldr r4, [r4]\n"
-"	ldr r5, _0804BBFC\n"
-"	add r5, sp\n"
-"	str r4, [r5]\n"
-"	cmp r4, 0x4\n"
-"	bge _0804BA8C\n"
-"	b _0804B85C\n"
-"_0804BA8C:\n"
-"	add r1, sp, 0x8\n"
-"	movs r6, 0\n"
-"	movs r0, 0x1\n"
-"	strb r0, [r1, 0x16]\n"
-"	ldr r1, _0804BC00\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	movs r1, 0xFF\n"
-"	lsls r1, 1\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC04\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC08\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC0C\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC10\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC14\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC18\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC1C\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	add r1, sp, 0x8\n"
-"	strb r0, [r1, 0x14]\n"
-"	ldr r5, _0804BC20\n"
-"	add r5, sp\n"
-"	ldr r5, [r5]\n"
-"	strb r0, [r5]\n"
-"	ldr r1, _0804BC24\n"
-"	add r1, sp\n"
-"	ldr r1, [r1]\n"
-"	strb r0, [r1]\n"
-"	ldr r2, _0804BC28\n"
-"	add r2, sp\n"
-"	ldr r2, [r2]\n"
-"	strb r0, [r2]\n"
-"	movs r3, 0xE6\n"
-"	lsls r3, 5\n"
-"	add r3, sp\n"
-"	ldr r3, [r3]\n"
-"	strb r0, [r3]\n"
-"	ldr r4, _0804BC2C\n"
-"	add r4, sp\n"
-"	ldr r4, [r4]\n"
-"	strb r0, [r4]\n"
-"	ldr r5, _0804BC30\n"
-"	add r5, sp\n"
-"	ldr r5, [r5]\n"
-"	strb r0, [r5]\n"
-"	ldr r1, _0804BC34\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC38\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC3C\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC40\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC44\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC48\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC4C\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC50\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC54\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC58\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC5C\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC60\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC64\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC68\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804BC6C\n"
-"	add r1, sp\n"
-"	strb r0, [r1]\n"
-"	add r0, sp, 0x8\n"
-"	movs r1, 0x6\n"
-"	movs r2, 0x4\n"
-"	movs r4, 0xE5\n"
-"	lsls r4, 5\n"
-"	add r4, sp\n"
-"	ldr r3, [r4]\n"
-"	bl AssignRandomGridCellConnections\n"
-"	ldr r5, _0804BC70\n"
-"	add r5, sp\n"
-"	ldr r4, _0804BC74\n"
-"	add r4, sp\n"
-"	str r4, [sp]\n"
-"	str r6, [sp, 0x4]\n"
-"	add r0, sp, 0x8\n"
-"	movs r1, 0x6\n"
-"	movs r2, 0x4\n"
-"	adds r3, r5, 0\n"
-"	bl CreateGridCellConnections\n"
-"	str r4, [sp]\n"
-"	add r0, sp, 0x8\n"
-"	movs r1, 0x6\n"
-"	movs r2, 0x4\n"
-"	adds r3, r5, 0\n"
-"	bl EnsureConnectedGrid\n"
-"	ldr r0, _0804BC78\n"
-"	movs r5, 0\n"
-"	ldrsh r3, [r0, r5]\n"
-"	add r0, sp, 0x8\n"
-"	movs r1, 0x6\n"
-"	movs r2, 0x4\n"
-"	bl GenerateKecleonShop\n"
-"	ldr r0, _0804BC7C\n"
-"	movs r1, 0\n"
-"	ldrsh r3, [r0, r1]\n"
-"	add r0, sp, 0x8\n"
-"	movs r1, 0x6\n"
-"	movs r2, 0x4\n"
-"	bl GenerateMonsterHouse\n"
-"	movs r2, 0xE5\n"
-"	lsls r2, 5\n"
-"	add r2, sp\n"
-"	ldr r2, [r2]\n"
-"	ldrb r3, [r2, 0x13]\n"
-"	add r0, sp, 0x8\n"
-"	movs r1, 0x6\n"
-"	movs r2, 0x4\n"
-"	bl GenerateExtraHallways\n"
-"	add r0, sp, 0x8\n"
-"	movs r1, 0x6\n"
-"	movs r2, 0x4\n"
-"	bl GenerateRoomImperfections\n"
-"	movs r3, 0xE7\n"
-"	lsls r3, 5\n"
-"	add sp, r3\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_0804BBE8: .4byte 0x00001cac\n"
-"_0804BBEC: .4byte 0x00001cb8\n"
-"_0804BBF0: .4byte 0x00001ccc\n"
-"_0804BBF4: .4byte 0x00001cb4\n"
-"_0804BBF8: .4byte 0x0000fffc\n"
-"_0804BBFC: .4byte 0x00001ca4\n"
-"_0804BC00: .4byte 0x000001fd\n"
-"_0804BC04: .4byte 0x000003dd\n"
-"_0804BC08: .4byte 0x000003de\n"
-"_0804BC0C: .4byte 0x000005bd\n"
-"_0804BC10: .4byte 0x000005be\n"
-"_0804BC14: .4byte 0x0000079d\n"
-"_0804BC18: .4byte 0x0000079e\n"
-"_0804BC1C: .4byte 0x0000097d\n"
-"_0804BC20: .4byte 0x00001cd4\n"
-"_0804BC24: .4byte 0x00001cd8\n"
-"_0804BC28: .4byte 0x00001cbc\n"
-"_0804BC2C: .4byte 0x00001cc4\n"
-"_0804BC30: .4byte 0x00001cc8\n"
-"_0804BC34: .4byte 0x0000025d\n"
-"_0804BC38: .4byte 0x0000025e\n"
-"_0804BC3C: .4byte 0x0000043d\n"
-"_0804BC40: .4byte 0x0000043e\n"
-"_0804BC44: .4byte 0x0000061d\n"
-"_0804BC48: .4byte 0x0000061e\n"
-"_0804BC4C: .4byte 0x000007fd\n"
-"_0804BC50: .4byte 0x000007fe\n"
-"_0804BC54: .4byte 0x000009dd\n"
-"_0804BC58: .4byte 0x0000097c\n"
-"_0804BC5C: .4byte 0x0000099b\n"
-"_0804BC60: .4byte 0x0000099c\n"
-"_0804BC64: .4byte 0x000009bb\n"
-"_0804BC68: .4byte 0x000009bc\n"
-"_0804BC6C: .4byte 0x000009db\n"
-"_0804BC70: .4byte 0x00001c28\n"
-"_0804BC74: .4byte 0x00001c64\n"
-"_0804BC78: .4byte gUnknown_202F1B0\n"
-"_0804BC7C: .4byte gUnknown_202F1B2");
-}
-#endif // NONMATCHING
 
 /*
  * GenerateCrossroadsFloor - Generates a floor layout with hallways on the inside and rooms on the outside, with empty corners.
- *
  * Also nicknamed "Ladder Layout" by some.
  */
 void GenerateCrossroadsFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
@@ -1807,12 +1295,12 @@ void GenerateCrossroadsFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
 				s32 rangeX = listX[x + 1] - listX[x] - 3;
 				s32 rangeY = listY[y + 1] - listY[y] - 3;
 
-				s32 room_size_x = DungeonRandRange(5, rangeX);
-				s32 room_size_y = DungeonRandRange(4, rangeY);
-				s32 startX = DungeonRandInt(rangeX - room_size_x) + minX;
-				s32 startY = DungeonRandInt(rangeY - room_size_y) + minY;
-				s32 endX = startX + room_size_x;
-				s32 endY = startY + room_size_y;
+				s32 roomSizeX = DungeonRandRange(5, rangeX);
+				s32 roomSizeY = DungeonRandRange(4, rangeY);
+				s32 startX = DungeonRandInt(rangeX - roomSizeX) + minX;
+				s32 startY = DungeonRandInt(rangeY - roomSizeY) + minY;
+				s32 endX = startX + roomSizeX;
+				s32 endY = startY + roomSizeY;
 
 				grid[x][y].start.x = startX;
                 grid[x][y].end.x = endX;
