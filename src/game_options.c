@@ -67,7 +67,7 @@ bool8 GameOptionsNotChange(GameOptions *r0)
     return TRUE;
 }
 
-void WriteGameOptions(struct unkStruct_8094924 *param_1)
+void WriteGameOptionsBits(DataSerializer *param_1)
 {
     u8 zero;
     u8 neg_1;
@@ -77,7 +77,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     neg_1 = -1;
     zero = 0;
 
-    SaveIntegerBits(param_1, &gGameOptionsRef->windowColor, 2);
+    WriteBits(param_1, &gGameOptionsRef->windowColor, 2);
 
     if(gGameOptionsRef->unk9 != 0)
     {
@@ -87,7 +87,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    SaveIntegerBits(param_1, puVar2, 1);
+    WriteBits(param_1, puVar2, 1);
 
     if(gGameOptionsRef->unkA != 0)
     {
@@ -97,7 +97,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    SaveIntegerBits(param_1, puVar2, 1);
+    WriteBits(param_1, puVar2, 1);
 
     if(gGameOptionsRef->playerGender != MALE)
     {
@@ -107,7 +107,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    SaveIntegerBits(param_1, puVar2, 1);
+    WriteBits(param_1, puVar2, 1);
 
     if(gGameOptionsRef->dungeonSpeed != DUNGEON_SPEED_SLOW)
     {
@@ -117,7 +117,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    SaveIntegerBits(param_1, puVar2, 1);
+    WriteBits(param_1, puVar2, 1);
 
     if(gGameOptionsRef->FarOffPals != FAROFFPALS_SELF)
     {
@@ -127,7 +127,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    SaveIntegerBits(param_1, puVar2, 1);
+    WriteBits(param_1, puVar2, 1);
 
     if(gGameOptionsRef->damageTurn)
     {
@@ -137,7 +137,7 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    SaveIntegerBits(param_1, puVar2, 1);
+    WriteBits(param_1, puVar2, 1);
 
     if(gGameOptionsRef->gridEnable)
     {
@@ -147,43 +147,43 @@ void WriteGameOptions(struct unkStruct_8094924 *param_1)
     {
         puVar2 = &zero;
     }
-    SaveIntegerBits(param_1, puVar2, 1);
+    WriteBits(param_1, puVar2, 1);
 
-    SaveIntegerBits(param_1, &gGameOptionsRef->mapOption, NUM_GBA_MAP_OPTIONS);
-    SaveIntegerBits(param_1, &gGameOptionsRef->unkC, 2);
+    WriteBits(param_1, &gGameOptionsRef->mapOption, NUM_GBA_MAP_OPTIONS);
+    WriteBits(param_1, &gGameOptionsRef->unkC, 2);
 }
 
-void ReadGameOptions(struct unkStruct_8094924 *param_1)
+void ReadGameOptionsBits(DataSerializer *param_1)
 {
     u8 byteArray[4];
-    RestoreIntegerBits(param_1, byteArray, 2);
+    ReadBits(param_1, byteArray, 2);
     gGameOptionsRef->windowColor  = byteArray[0] & NUM_WINDOW_COLORS;
 
-    RestoreIntegerBits(param_1, byteArray, 1);
+    ReadBits(param_1, byteArray, 1);
     gGameOptionsRef->unk9  = byteArray[0] & 1;
 
-    RestoreIntegerBits(param_1, byteArray, 1);
+    ReadBits(param_1, byteArray, 1);
     gGameOptionsRef->unkA  = byteArray[0] & 1;
 
-    RestoreIntegerBits(param_1, byteArray, 1);
+    ReadBits(param_1, byteArray, 1);
     gGameOptionsRef->playerGender  = byteArray[0] & 1;
 
-    RestoreIntegerBits(param_1, byteArray, 1);
+    ReadBits(param_1, byteArray, 1);
     gGameOptionsRef->dungeonSpeed  = byteArray[0] & 1;
 
-    RestoreIntegerBits(param_1, byteArray, 1);
+    ReadBits(param_1, byteArray, 1);
     gGameOptionsRef->FarOffPals  = byteArray[0] & 1;
 
-    RestoreIntegerBits(param_1, byteArray, 1);
+    ReadBits(param_1, byteArray, 1);
     gGameOptionsRef->damageTurn  = byteArray[0] & 1;
 
-    RestoreIntegerBits(param_1, byteArray, 1);
+    ReadBits(param_1, byteArray, 1);
     gGameOptionsRef->gridEnable  = byteArray[0] & 1;
 
-    RestoreIntegerBits(param_1, byteArray, 3);
+    ReadBits(param_1, byteArray, 3);
     gGameOptionsRef->mapOption  = byteArray[0] & NUM_DS_MAP_OPTIONS;
 
-    RestoreIntegerBits(param_1, byteArray, 2);
+    ReadBits(param_1, byteArray, 2);
     gGameOptionsRef->unkC  = byteArray[0] & 3;
 
     SetWindowBGColor();

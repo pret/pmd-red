@@ -66,7 +66,7 @@ void DeleteDebugMenu(void)
 u32 UpdateDebugMenu(void)
 {
     u32 nextMenu;
-    s32 counter;
+    s32 i;
     s32 debugMenuAction;
 
     nextMenu = MENU_NO_SCREEN_CHANGE;
@@ -99,8 +99,8 @@ u32 UpdateDebugMenu(void)
             nextMenu = MENU_MAIN_SCREEN;
             break;
         case MENU_DEBUG_MENU_H_OPEN:
-            for (counter = 0; counter < 0x20; counter++)
-                sub_80976F8(counter);
+            for (i = 0; i < AA_MAX; i++)
+                SetAdventureAchievement(i);
 
             nextMenu = MENU_MAIN_SCREEN;
             break;

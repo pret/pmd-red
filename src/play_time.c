@@ -75,18 +75,18 @@ void DeconstructPlayTime(struct PlayTimeStruct *r0, u32 *outHours, u32 *outMinut
     }
 }
 
-void WritePlayTime(struct unkStruct_8094924 *r0)
+void WritePlayTimeBits(DataSerializer *r0)
 {
-    SaveIntegerBits(r0, &gPlayTimeRef->frames, 6);
-    SaveIntegerBits(r0, &gPlayTimeRef->seconds, 6);
-    SaveIntegerBits(r0, &gPlayTimeRef->minutes, 6);
-    SaveIntegerBits(r0, &gPlayTimeRef->hours, 14);
+    WriteBits(r0, &gPlayTimeRef->frames, 6);
+    WriteBits(r0, &gPlayTimeRef->seconds, 6);
+    WriteBits(r0, &gPlayTimeRef->minutes, 6);
+    WriteBits(r0, &gPlayTimeRef->hours, 14);
 }
 
-void ReadPlayTime(struct unkStruct_8094924 *r0)
+void ReadPlayTimeBits(DataSerializer *r0)
 {
-    RestoreIntegerBits(r0, &gPlayTimeRef->frames, 6);
-    RestoreIntegerBits(r0, &gPlayTimeRef->seconds, 6);
-    RestoreIntegerBits(r0, &gPlayTimeRef->minutes, 6);
-    RestoreIntegerBits(r0, &gPlayTimeRef->hours, 14);
+    ReadBits(r0, &gPlayTimeRef->frames, 6);
+    ReadBits(r0, &gPlayTimeRef->seconds, 6);
+    ReadBits(r0, &gPlayTimeRef->minutes, 6);
+    ReadBits(r0, &gPlayTimeRef->hours, 14);
 }

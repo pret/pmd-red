@@ -298,7 +298,7 @@ extern void sub_8047104(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
 extern void sub_804700C(void);
-extern void sub_8097810(void);
+extern void IncrementThievingSuccesses(void);
 extern void sub_803E13C(void);
 extern void sub_80841EC(void);
 extern void sub_8084424(void);
@@ -315,7 +315,7 @@ extern void sub_8068614(void);
 extern void sub_80840A4(void);
 extern void sub_803E178(void);
 extern void sub_80848F0(void);
-extern void sub_8097890(void);
+extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
 extern void DisplayPreFightDialogue(void);
 extern void sub_8071DA4(Entity *);
@@ -332,7 +332,7 @@ extern void sub_80521D0(void);
 extern void sub_803F27C(u8);
 extern void sub_807E7FC(u8);
 extern void sub_80095CC(u32, u32);
-extern void sub_8081BF4(u8 *r0, u32 r1);
+extern void ReadDungeonState(u8 *r0, u32 r1);
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern void sub_8068A84(PokemonStruct1 *pokemon);
 extern void sub_807EAA0(u32, u32);
@@ -371,7 +371,7 @@ extern void sub_803EAF0(u32, u32);
 extern void sub_806A914(u8 a0, u8 a1, u8 a2);
 extern void sub_803F4A0(Entity *a0);
 extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
-extern void sub_8080B30(u8 *param_1,u32 param_2);
+extern void WriteDungeonState(u8 *param_1,u32 param_2);
 extern void sub_8046F84(s32 itemFlag);
 extern bool8 sub_8083C50(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
@@ -469,7 +469,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     sub_8042E98();
     gUnknown_202F32C = 0;
     if (r6) {
-        sub_8081BF4(gSerializedData_203B41C, 0x4800);
+        ReadDungeonState(gSerializedData_203B41C, 0x4800);
         sub_8049840();
     }
     if (r9) {
@@ -686,7 +686,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
 
         if (!r6) {
             sub_80848F0();
-            sub_8097890();
+            IncrementAdventureFloorsExplored();
         }
 
         gUnknown_203B40C = 1;
@@ -824,7 +824,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         gUnknown_203B40C = 0;
 
         if (gDungeon->unk3 != 0) {
-            sub_8080B30(gSerializedData_203B41C, 0x4800);
+            WriteDungeonState(gSerializedData_203B41C, 0x4800);
             r8->unk7C = 3;
             r8->unk80 = gDungeon->dungeonLocation;
             check = FALSE;
@@ -834,7 +834,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             s16 var;
 
             if (gDungeon->unk6 != 0) {
-                sub_8080B30(gSerializedData_203B41C, 0x4800);
+                WriteDungeonState(gSerializedData_203B41C, 0x4800);
             }
             else {
                 sub_8046F84(ITEM_FLAG_IN_SHOP);
@@ -854,14 +854,14 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             else if (gDungeon->unk11 == 2) {
                 sub_8083AB0(0x229, NULL, GetLeader());
                 if (gDungeon->unk66E != 0) {
-                    sub_8097810();
+                    IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 3) {
                 sub_8083AB0(0x22A, NULL, GetLeader());
                 if (gDungeon->unk66E != 0) {
-                    sub_8097810();
+                    IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
@@ -873,13 +873,13 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             else if (gDungeon->unk678 == 1 && sub_8043D10() == 2 && gDungeon->unk654 == 2) {
                 sub_8083AB0(0x228, NULL, GetLeader());
                 if (gDungeon->unk66E != 0) {
-                    sub_8097810();
+                    IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else {
                 if (gDungeon->unk66E != 0) {
-                    sub_8097810();
+                    IncrementThievingSuccesses();
                 }
                 if (gDungeon->dungeonLocation.floor + 1 < gDungeon->unk1CEC8) {
                     gDungeon->dungeonLocation.floor++;

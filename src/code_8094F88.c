@@ -21,10 +21,10 @@ EWRAM_DATA UNUSED static u32 fill0 = {0}; // 203B484 is size 0x5C and I need to 
 EWRAM_DATA u32 gUnknown_20392E8[0x36] = {0};
 EWRAM_DATA unkStruct_203B48C gUnknown_20393C0 = {0};
 
-extern void SaveDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
-extern void RestoreDungeonLocation(struct unkStruct_8094924*, DungeonLocation*);
-extern void xxx_save_poke_sub_c_808F41C(struct unkStruct_8094924* a1, struct unkPokeSubStruct_C* unkC);
-extern void xxx_restore_poke_sub_c_808F410(struct unkStruct_8094924*, struct unkPokeSubStruct_C*);
+extern void WriteDungeonLocationBits(DataSerializer*, DungeonLocation*);
+extern void ReadDungeonLocationBits(DataSerializer*, DungeonLocation*);
+extern void WritePoke1LevelBits(DataSerializer* a1, struct unkPokeSubStruct_C* unkC);
+extern void ReadPoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);
 
 void sub_80950BC(void)
 {
@@ -78,11 +78,11 @@ void sub_8095118(void)
   }
 }
 
-void nullsub_206(void)
+UNUSED static void nullsub_206(void)
 {
 }
 
-void nullsub_207(void)
+UNUSED static void nullsub_207(void)
 {
 }
 
@@ -308,138 +308,161 @@ u32 sub_80954B4(void)
         return 0;
 }
 
-u32 sub_80954CC(u8 *a, u32 b)
+
+
+
+
+
+// New file?
+
+
+
+
+
+
+
+
+
+u32 sub_80954CC(u8 *buffer, u32 size)
 {
-    struct unkStruct_8094924 backup;
-    PokemonStruct1 *temp;
-    s32 index;
+    DataSerializer backup;
+    PokemonStruct1 *mon;
+    s32 i;
 
-    xxx_init_struct_8094924_restore_809485C(&backup, a, b);
-    for(index = 0; index < 0x20; index++)
-    {
-        sub_8095774(&backup, &gUnknown_203B480[index]);
-    }
-    RestoreIntegerBits(&backup, &gUnknown_203B484->unk0, 0x20);
-    temp  = &gUnknown_203B484->unk4;
-    memset(temp, 0, sizeof(PokemonStruct1));
-    RestoreIntegerBits(&backup, &temp->unk0, 2);
-    RestoreIntegerBits(&backup, &temp->isTeamLeader, 1);
-    RestoreIntegerBits(&backup, &temp->level, 7);
-    RestoreDungeonLocation(&backup, &temp->dungeonLocation);
-    RestoreIntegerBits(&backup, &temp->speciesNum, 9);
-    xxx_restore_poke_sub_c_808F410(&backup, &temp->unkC[0]);
-    xxx_restore_poke_sub_c_808F410(&backup, &temp->unkC[1]);
-    RestoreIntegerBits(&backup, &temp->IQ, 0xA);
-    RestoreIntegerBits(&backup, &temp->pokeHP, 0xA);
-    RestoreIntegerBits(&backup, &temp->offense.att[0], 8);
-    RestoreIntegerBits(&backup, &temp->offense.att[1], 8);
-    RestoreIntegerBits(&backup, &temp->offense.def[0], 8);
-    RestoreIntegerBits(&backup, &temp->offense.def[1], 8);
-    RestoreIntegerBits(&backup, &temp->currExp, 0x18);
-    RestoreIntegerBits(&backup, &temp->IQSkills, 0x18);
-    RestoreIntegerBits(&backup, &temp->tacticIndex, 4);
-    RestoreHeldItem(&backup, &temp->heldItem);
-    RestorePokemonMoves(&backup, temp->moves);
-    RestoreIntegerBits(&backup, temp->name, 0x50);
+    InitBitReader(&backup, buffer, size);
 
-    RestoreIntegerBits(&backup, &gUnknown_203B48C->unk0, 0x20);
-    for(index = 0; index < 0x20; index++)
-    {
-        RestoreIntegerBits(&backup, &gUnknown_203B48C->unk4[index], 0x20);
+    for (i = 0; i < 32; i++) {
+        sub_8095774(&backup, &gUnknown_203B480[i]);
     }
+
+    ReadBits(&backup, &gUnknown_203B484->unk0, 32);
+
+    mon = &gUnknown_203B484->unk4;
+    memset(mon, 0, sizeof(PokemonStruct1));
+
+    ReadBits(&backup, &mon->unk0, 2);
+    ReadBits(&backup, &mon->isTeamLeader, 1);
+    ReadBits(&backup, &mon->level, 7);
+    ReadDungeonLocationBits(&backup, &mon->dungeonLocation);
+    ReadBits(&backup, &mon->speciesNum, 9);
+    ReadPoke1LevelBits(&backup, &mon->unkC[0]);
+    ReadPoke1LevelBits(&backup, &mon->unkC[1]);
+    ReadBits(&backup, &mon->IQ, 10);
+    ReadBits(&backup, &mon->pokeHP, 10);
+    ReadBits(&backup, &mon->offense.att[0], 8);
+    ReadBits(&backup, &mon->offense.att[1], 8);
+    ReadBits(&backup, &mon->offense.def[0], 8);
+    ReadBits(&backup, &mon->offense.def[1], 8);
+    ReadBits(&backup, &mon->currExp, 24);
+    ReadBits(&backup, &mon->IQSkills, 24);
+    ReadBits(&backup, &mon->tacticIndex, 4);
+    ReadHeldItemBits(&backup, &mon->heldItem);
+    ReadPoke1MovesBits(&backup, mon->moves);
+    ReadBits(&backup, mon->name, 10 * 8);
+
+    ReadBits(&backup, &gUnknown_203B48C->unk0, 32);
+    for (i = 0; i < 32; i++) {
+        ReadBits(&backup, &gUnknown_203B48C->unk4[i], 32);
+    }
+
     nullsub_102(&backup);
-    return backup.unk8;
+    return backup.count;
 }
 
-u32 sub_8095624(u8 *a, u32 b)
+u32 sub_8095624(u8 *buffer, u32 b)
 {
-    struct unkStruct_8094924 backup;
-    PokemonStruct1 *temp;
-    s32 index;
+    DataSerializer backup;
+    PokemonStruct1 *mon;
+    s32 i;
 
-    xxx_init_struct_8094924_save_809486C(&backup, a, b);
-    for(index = 0; index < 0x20; index++)
-    {
-        sub_8095824(&backup, &gUnknown_203B480[index]);
-    }
-    SaveIntegerBits(&backup, &gUnknown_203B484->unk0, 0x20);
-    temp  = &gUnknown_203B484->unk4;
-    SaveIntegerBits(&backup, &temp->unk0, 2);
-    SaveIntegerBits(&backup, &temp->isTeamLeader, 1);
-    SaveIntegerBits(&backup, &temp->level, 7);
-    SaveDungeonLocation(&backup, &temp->dungeonLocation);
-    SaveIntegerBits(&backup, &temp->speciesNum, 9);
-    xxx_save_poke_sub_c_808F41C(&backup, &temp->unkC[0]);
-    xxx_save_poke_sub_c_808F41C(&backup, &temp->unkC[1]);
-    SaveIntegerBits(&backup, &temp->IQ, 0xA);
-    SaveIntegerBits(&backup, &temp->pokeHP, 0xA);
-    SaveIntegerBits(&backup, &temp->offense.att[0], 8);
-    SaveIntegerBits(&backup, &temp->offense.att[1], 8);
-    SaveIntegerBits(&backup, &temp->offense.def[0], 8);
-    SaveIntegerBits(&backup, &temp->offense.def[1], 8);
-    SaveIntegerBits(&backup, &temp->currExp, 0x18);
-    SaveIntegerBits(&backup, &temp->IQSkills, 0x18);
-    SaveIntegerBits(&backup, &temp->tacticIndex, 4);
-    SaveHeldItem(&backup, &temp->heldItem);
-    SavePokemonMoves(&backup, temp->moves);
-    SaveIntegerBits(&backup, temp->name, 0x50);
+    InitBitWriter(&backup, buffer, b);
 
-    SaveIntegerBits(&backup, &gUnknown_203B48C->unk0, 0x20);
-    for(index = 0; index < 0x20; index++)
-    {
-        SaveIntegerBits(&backup, &gUnknown_203B48C->unk4[index], 0x20);
+    for (i = 0; i < 32; i++) {
+        sub_8095824(&backup, &gUnknown_203B480[i]);
     }
+
+    WriteBits(&backup, &gUnknown_203B484->unk0, 32);
+
+    mon = &gUnknown_203B484->unk4;
+
+    WriteBits(&backup, &mon->unk0, 2);
+    WriteBits(&backup, &mon->isTeamLeader, 1);
+    WriteBits(&backup, &mon->level, 7);
+    WriteDungeonLocationBits(&backup, &mon->dungeonLocation);
+    WriteBits(&backup, &mon->speciesNum, 9);
+    WritePoke1LevelBits(&backup, &mon->unkC[0]);
+    WritePoke1LevelBits(&backup, &mon->unkC[1]);
+    WriteBits(&backup, &mon->IQ, 10);
+    WriteBits(&backup, &mon->pokeHP, 10);
+    WriteBits(&backup, &mon->offense.att[0], 8);
+    WriteBits(&backup, &mon->offense.att[1], 8);
+    WriteBits(&backup, &mon->offense.def[0], 8);
+    WriteBits(&backup, &mon->offense.def[1], 8);
+    WriteBits(&backup, &mon->currExp, 24);
+    WriteBits(&backup, &mon->IQSkills, 24);
+    WriteBits(&backup, &mon->tacticIndex, 4);
+    WriteHeldItemBits(&backup, &mon->heldItem);
+    WritePoke1MovesBits(&backup, mon->moves);
+    WriteBits(&backup, mon->name, 10 * 8);
+
+    WriteBits(&backup, &gUnknown_203B48C->unk0, 32);
+
+    for (i = 0; i < 32; i++) {
+        WriteBits(&backup, &gUnknown_203B48C->unk4[i], 32);
+    }
+  
     nullsub_102(&backup);
-    return backup.unk8;
+    return backup.count;
 }
 
-void sub_8095774(struct unkStruct_8094924 * a, unkStruct_203B480 *b)
+void sub_8095774(DataSerializer * a, unkStruct_203B480 *b)
 {
     u8 temp;
 
-    RestoreIntegerBits(a, &b->mailType, 4);
-    RestoreDungeonLocation(a, &b->unk4.dungeon);
-    RestoreIntegerBits(a, &b->unk4.seed, 0x18);
-    RestoreIntegerBits(a, &b->clientSpecies, 0x9);
-    RestoreIntegerBits(a, &b->unk10.unk10, 0x20);
-    RestoreIntegerBits(a, &b->playerName, 0x50);
-    RestoreIntegerBits(a, &b->item.flags, 0x8);
-    RestoreIntegerBits(a, &b->item.quantity, 0x8);
-    RestoreIntegerBits(a, &b->item.id, 0x8);
-    RestoreIntegerBits(a, &b->unk24, 0x20);
-    RestoreIntegerBits(a, &b->unk28, 0x20);
-    RestoreIntegerBits(a, &b->rescuesAllowed, 0x8);
+    ReadBits(a, &b->mailType, 4);
+    ReadDungeonLocationBits(a, &b->unk4.dungeon);
+    ReadBits(a, &b->unk4.seed, 24);
+    ReadBits(a, &b->clientSpecies, 9);
+    ReadBits(a, &b->unk10.unk10, 32);
+    ReadBits(a, &b->playerName, 10 * 8);
+    ReadBits(a, &b->item.flags, 8);
+    ReadBits(a, &b->item.quantity, 8);
+    ReadBits(a, &b->item.id, 8);
+    ReadBits(a, &b->unk24, 32);
+    ReadBits(a, &b->unk28, 32);
+    ReadBits(a, &b->rescuesAllowed, 8);
 
-    RestoreIntegerBits(a, &temp, 1);
+    ReadBits(a, &temp, 1);
     b->unk2D = temp & 1;
 }
 
-void sub_8095824(struct unkStruct_8094924 * a, unkStruct_203B480 *b)
+void sub_8095824(DataSerializer * a, unkStruct_203B480 *b)
 {
     u8 neg1;
     u8 zero;
-    u8 *puVar2;
+    u8 *ptr;
+
     neg1 = -1;
     zero = 0;
 
-    SaveIntegerBits(a, &b->mailType, 4);
-    SaveDungeonLocation(a, &b->unk4.dungeon);
-    SaveIntegerBits(a, &b->unk4.seed, 0x18);
-    SaveIntegerBits(a, &b->clientSpecies, 0x9);
-    SaveIntegerBits(a, &b->unk10.unk10, 0x20);
-    SaveIntegerBits(a, &b->playerName, 0x50);
-    SaveIntegerBits(a, &b->item.flags, 0x8);
-    SaveIntegerBits(a, &b->item.quantity, 0x8);
-    SaveIntegerBits(a, &b->item.id, 0x8);
-    SaveIntegerBits(a, &b->unk24, 0x20);
-    SaveIntegerBits(a, &b->unk28, 0x20);
-    SaveIntegerBits(a, &b->rescuesAllowed, 0x8);
+    WriteBits(a, &b->mailType, 4);
+    WriteDungeonLocationBits(a, &b->unk4.dungeon);
+    WriteBits(a, &b->unk4.seed, 24);
+    WriteBits(a, &b->clientSpecies, 9);
+    WriteBits(a, &b->unk10.unk10, 32);
+    WriteBits(a, &b->playerName, 10 * 8);
+    WriteBits(a, &b->item.flags, 8);
+    WriteBits(a, &b->item.quantity, 8);
+    WriteBits(a, &b->item.id, 8);
+    WriteBits(a, &b->unk24, 32);
+    WriteBits(a, &b->unk28, 32);
+    WriteBits(a, &b->rescuesAllowed, 8);
 
-    if(b->unk2D != 0)
-        puVar2 = &neg1;
+    if (b->unk2D != 0)
+        ptr = &neg1;
     else
-        puVar2 = &zero;
-    SaveIntegerBits(a, puVar2, 1);
+        ptr = &zero;
+    WriteBits(a, ptr, 1);
 }
 
 void sub_80958E4(u32 *a, u32 b)

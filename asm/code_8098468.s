@@ -400,7 +400,7 @@ _080987C0:
 	bl DeleteGroundEffects
 	bl sub_809C658
 	bl nullsub_16
-	bl sub_8097944
+	bl UpdateAdventureAchievements
 	cmp r7, r4
 	beq _08098848
 	adds r0, r7, 0

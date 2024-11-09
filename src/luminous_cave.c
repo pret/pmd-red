@@ -313,7 +313,7 @@ static void UpdateLuminousCaveDialogue(void)
             monName = GetMonSpecies(sLuminousCaveWork->evolveStatus.targetEvolveSpecies);
             strcpy(gFormatBuffer_Monsters[1],monName);
             sLuminousCaveWork->evolutionComplete = TRUE;
-            sub_80977D0();
+            IncrementNumEvolved();
             sub_808F734(sLuminousCaveWork->pokeStruct,sLuminousCaveWork->evolveStatus.targetEvolveSpecies);
             nullsub_104();
             sLuminousCaveWork->pokeStruct = GetPlayerPokemonStruct();

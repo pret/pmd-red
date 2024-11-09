@@ -42,8 +42,8 @@ extern bool8 sub_800DAB4(u16, u8*, s32);
 extern bool8 sub_800DAB8(void);
 extern u32 SaveRecruitedPokemon(u8 *, u32);
 extern u32 RestoreRecruitedPokemon(void* a, s32 b);
-extern u32 SavePokemonStruct2(u8 *, u32);
-extern u32 RestorePokemonStruct2(void* a, s32 b);
+extern u32 SavePoke2s(u8 *, u32);
+extern u32 RestorePoke2s(void* a, s32 b);
 extern u32 sub_80954CC(void* a, s32 b);
 extern u32 sub_8095624(u8 *, u32);
 extern u32 RestoreMailInfo(void* a, s32 b);
@@ -57,9 +57,9 @@ u32 sub_8011C1C(void)
     return gUnknown_203B17C;
 }
 
-void sub_8011C28(u32 in)
+void sub_8011C28(u32 x)
 {
-    gUnknown_203B17C = in;
+    gUnknown_203B17C = x;
 }
 
 s32 sub_8011C34(void)
@@ -67,9 +67,9 @@ s32 sub_8011C34(void)
     return gUnknown_202DE28;
 }
 
-void sub_8011C40(s32 in)
+void sub_8011C40(s32 x)
 {
-    gUnknown_202DE28 = in;
+    gUnknown_202DE28 = x;
 }
 
 char *GetGameInternalName(void)
@@ -232,11 +232,11 @@ u32 ReadSaveFromPak(u32 *a)
             saveStatus = 3;
         }
         r4 += 0x4650;
-        r1 = RestorePokemonStruct2(r4, 0x258);
+        r1 = RestorePoke2s(r4, 150 * 4);
         if (r1 != playerSave->unk428) {
             saveStatus = 3;
         }
-        r4 += 0x258;
+        r4 += 150 * 4;
         r1 = RestoreTeamInventory(r4, 0x1D8);
         if (r1 != playerSave->savedTeamInventory) {
             saveStatus = 3;
@@ -252,7 +252,7 @@ u32 ReadSaveFromPak(u32 *a)
             saveStatus = 3;
         }
         r4 += 0x8;
-        r1 = sub_8097D98(r4, 0x100);
+        r1 = RestoreAdventureData(r4, 0x100);
         if (r1 != playerSave->unk43C) {
             saveStatus = 3;
         }
@@ -350,22 +350,22 @@ u32 WriteSavetoPak(s32 *param_1, u32 param_2)
 
   playerSave->savedRecruitedPokemon = SaveRecruitedPokemon(array_ptr,0x4650);
   array_ptr += 0x4650;
-  playerSave->unk428 = SavePokemonStruct2(array_ptr,0x258);
-  array_ptr += 0x258;
+  playerSave->unk428 = SavePoke2s(array_ptr, 150 * 4);
+  array_ptr += 150 * 4;
   playerSave->savedTeamInventory = SaveTeamInventory(array_ptr,0x1D8);
   array_ptr += 0x1D8;
   playerSave->savedRescueTeamInfo = SaveRescueTeamInfo(array_ptr,0x10);
   array_ptr += 0x10;
   playerSave->savedFriendAreas = SaveFriendAreas(array_ptr,8);
   array_ptr += 8;
-  playerSave->unk43C = sub_8097D60(array_ptr,0x100);
+  playerSave->unk43C = SaveAdventureData(array_ptr, 0x100);
   array_ptr += 0x100;
   playerSave->unk440 = sub_8095624(array_ptr,0x594);
   array_ptr += 0x594;
   playerSave->savedMailInfo = SaveMailInfo(array_ptr,0x221);
 
-  saveStatus1 = WriteSaveSector(param_1,(u8 *)playerSave,sizeof(struct UnkStruct_sub_8011DAC));
-  saveStatus2 = WriteSaveSector(param_1,(u8 *)playerSave,sizeof(struct UnkStruct_sub_8011DAC));
+  saveStatus1 = WriteSaveSector(param_1, (u8 *)playerSave, sizeof(struct UnkStruct_sub_8011DAC));
+  saveStatus2 = WriteSaveSector(param_1, (u8 *)playerSave, sizeof(struct UnkStruct_sub_8011DAC));
   MemoryFree(playerSave);
 
   if (saveStatus1 != SAVE_COMPLETED)
@@ -410,7 +410,7 @@ u32 sub_8012240(void)
     status = WriteFlashData(0x1F, (u8 *)r5, sizeof(struct unk_struct));
     xxx_call_start_bg_music();
     MemoryFree(r5);
-    if(status != 0)
+    if (status != 0)
         return SAVE_FAILED;
     else
         return SAVE_COMPLETED;
@@ -423,12 +423,14 @@ void sub_8012284(void)
     InitializePlayerData();
 }
 
+// Is this the new game func?
 void sub_8012298(void)
 {
-    sub_80976A8();
+    ResetAdventureInfo();
     sub_80122A8();
 }
 
+// Init new game?
 void sub_80122A8(void)
 {
     sub_80122D0();

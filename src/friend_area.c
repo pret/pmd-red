@@ -227,34 +227,34 @@ void sub_80926F8(u8 a0, unkStruct_8092638 *a1, u8 a2)
 
 u32 SaveFriendAreas(u8 *r0, u32 size)
 {
-    struct unkStruct_8094924 unk;
+    DataSerializer unk;
     u32 temp;
     s32 i;
 
-    xxx_init_struct_8094924_save_809486C(&unk, r0, size);
+    InitBitWriter(&unk, r0, size);
 
     for (i = 0; i < NUM_FRIEND_AREAS; i++) {
         if (gFriendAreas[i] != 0)
             temp = -1;
         else
             temp = 0;
-        SaveIntegerBits(&unk, (u8*)&temp, 1);
+        WriteBits(&unk, (u8*)&temp, 1);
     }
 
     nullsub_102(&unk);
-    return unk.unk8;
+    return unk.count;
 }
 
 u32 ReadSavedFriendAreas(u8 *r0, s32 size)
 {
-    struct unkStruct_8094924 unk;
+    DataSerializer unk;
     u32 temp;
     s32 i;
 
-    xxx_init_struct_8094924_restore_809485C(&unk, r0, size);
+    InitBitReader(&unk, r0, size);
 
     for (i = 0; i < NUM_FRIEND_AREAS; i++) {
-        RestoreIntegerBits(&unk, &temp, 1);
+        ReadBits(&unk, &temp, 1);
         // It's setting whether we have the friend area or not
         if (temp & 1)
             gFriendAreas[i] = TRUE;
@@ -263,5 +263,5 @@ u32 ReadSavedFriendAreas(u8 *r0, s32 size)
     }
 
     nullsub_102(&unk);
-    return unk.unk8;
+    return unk.count;
 }

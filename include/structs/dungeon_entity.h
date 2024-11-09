@@ -26,6 +26,8 @@
 #define STAT_STAGE_ACCURACY 0
 #define STAT_STAGE_EVASION 1
 
+#define NUM_PICKED_IQ_SKILLS 3
+
 typedef struct unkStruct_8044CC8
 {
     u8 actionUseIndex;
@@ -37,7 +39,7 @@ typedef struct ActionContainer
 {
     /* 0x0 */ u16 action;
     /* 0x2 */ u8 direction;
-    u8 fill3;
+    u8 unk3;
     // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
     /* 0x4 */ unkStruct_8044CC8 unk4[2];
     // Position of the target that the Pokémon wants throw an item at.
@@ -224,8 +226,10 @@ typedef struct EntityInfo
     /* 0x68 */ Position prevPos[NUM_PREV_POS];
     /* 0x78 */ AITarget aiTarget;
     // Bitwise flags corresponding to selected IQ skills.
-    /* 0x8C */ u8 IQSkillMenuFlags[4]; // IQ skills selected in the IQ skills menu.
-    /* 0x90 */ u8 IQSkillFlags[4];
+    /* 0x8C */ u8 IQSkillMenuFlags[NUM_PICKED_IQ_SKILLS]; // IQ skills selected in the IQ skills menu.
+    u8 padding8F;
+    /* 0x90 */ u8 IQSkillFlags[NUM_PICKED_IQ_SKILLS];
+    u8 padding93;
     /* 0x94 */ u8 tactic;
     u8 fill95[0x98 - 0x95];
     /* 0x98 */ u32 unk98;

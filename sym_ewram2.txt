@@ -225,7 +225,7 @@ gUnknown_203B40C: /* 203B40C (sub_803E46C - PrintFieldMessage) */
 gUnknown_203B40D: /* 203B40D (sub_803E250 - sub_807E698) */
 	.space 0x3
 
-gUnknown_203B410: /* 203B410 (sub_8040150 - sub_8082280) */
+gUnknown_203B410: /* 203B410 (sub_8040150 - RestoreDungeonEntity) */
 	.space 0x4
 
 .include "src/code_8042B34.o"
@@ -258,7 +258,7 @@ gUnknown_203B43C: /* 203B43C (sub_8065FB4) */
 gUnknown_203B444: /* 203B444 (sub_807DF38) */
 	.space 0xC
 
-gLeaderPointer: /* 203B450 (xxx_dungeon_8042F6C - sub_8082280) */
+gLeaderPointer: /* 203B450 (xxx_dungeon_8042F6C - RestoreDungeonEntity) */
 	.space 0x4
 
     .include "src/dungeon_random.o"

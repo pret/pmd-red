@@ -87,8 +87,7 @@ static void DisplayAdventureLog(void)
     s32 i;
     s32 r4; // r4
     s32 r6; // r6
-    u8 temp;
-    s32 v1, v2, v3, v4, v5, v6;
+    u8 aa;
 
     CallPrepareTextbox_8008C54(sAdventureLog->s0.unk34);
     sub_80073B8(sAdventureLog->s0.unk34);
@@ -102,42 +101,49 @@ static void DisplayAdventureLog(void)
     sub_8012BC4(r6, 0, sAdventureLog->s0.input.unk1E + 1, 1, 7, sAdventureLog->s0.unk34);
 
     for (i = 0; i < sAdventureLog->s0.input.unk1A; i++) {
-        temp = (sAdventureLog->s0.input.unk1E * sAdventureLog->s0.input.unk1C) + i;
+        aa = (sAdventureLog->s0.input.unk1E * sAdventureLog->s0.input.unk1C) + i;
 
-        if (sub_8097710(temp)) {
-            switch (temp) {
-                case 12:
-                    v1 = sub_80978B8();
+        if (GetAdventureAchievement(aa)) {
+            switch (aa) {
+                case AA_NUM_FLOORS_EXPLORED: {
+                    s32 v1 = GetAdventureFloorsExplored();
                     gFormatArgs[0] = (s16)v1;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
-                case 7:
-                    v2 = sub_8097880();
+                }
+                case AA_NUM_MOVES_LEARNED: {
+                    s32 v2 = GetAdventureMovesLearned();
                     gFormatArgs[0] = (s16)v2;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
-                case 11:
-                    v3 = sub_8097838();
+                }
+                case AA_NUM_THIEVING_SUCCESSES: {
+                    s32 v3 = GetThievingSuccesses();
                     gFormatArgs[0] = (s16)v3;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
-                case 8:
-                    v4 = sub_80977B8();
+                }
+                case AA_NUM_FRIEND_RESCUE_SUCCESSES: {
+                    s32 v4 = GetFriendRescueSuccesses();
                     gFormatArgs[0] = v4;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
-                case 9:
-                    v5 = sub_80977F8();
+                }
+                case AA_NUM_POKEMON_EVOLVED: {
+                    s32 v5 = GetAdventureNumEvolved();
                     gFormatArgs[0] = v5;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
-                case 10:
-                    v6 = sub_8097870();
+                }
+                case AA_NUM_POKEMON_JOINED: {
+                    s32 v6 = GetAdventureNumJoined();
                     gFormatArgs[0] = (s16)v6;
                     // fallthrough
-                default:
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(temp), sAdventureLog->s0.unk34, 0);
+                }
+                default: {
+                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
+                }
             }
         }
         else

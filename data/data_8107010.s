@@ -89,7 +89,7 @@ gUnknown_8107178: @ 8107178
 .string "pksdir0\0"
 @ ???
 .string "pksdir0\0"
-@ sub_8080B30 - sub_808217C
+@ WriteDungeonState - sub_808217C
 .string "pksdir0\0"
 
 .global gYayoiSan

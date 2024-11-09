@@ -264,6 +264,8 @@ typedef struct Dungeon
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];
     /* 0x5F4 */ u8 faintStringBuffer[80];
+
+    // TODO: This is the start of a struct that is 0x58 bytes (dungeon data that persists between save/reload). See sub_8080B90 and sub_8081C50
     /* 0x644 */ DungeonLocation dungeonLocation;
     /* 0x648 */ DungeonLocation dungeonLocation2;
     struct unkStruct_Dungeon64C unk64C;
@@ -277,7 +279,7 @@ typedef struct Dungeon
     u8 unk65B;
     u8 unk65C;
     u8 unk65D;
-    u8 fill65e[0x660 - 0x65e];
+    u8 fill65e[2];
     /* 0x660 */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
     s16 unk662;
     s16 unk664;
@@ -312,7 +314,8 @@ typedef struct Dungeon
     s32 unk694;
     u8 unk698;
     u8 unk699;
-    u8 fill69A[0x69C - 0x69A];
+    u8 fill69A[2];
+
     EntityInfo unk69C[4];
     EntityInfo unkEBC[1]; // Unsure about the size... See sub_8082A08()
     u8 fill10C4[0x343C - 0x10C4];
@@ -350,11 +353,9 @@ typedef struct Dungeon
     Position unkE218;
     Position unkE21C; // stair location?
     Position unkE220[8];
-    u32 unkE240;
-    u8 fillE244[0xE250 - 0xE244];
-    u32 unkE250;
-    u8 fillE254[0xE260 - 0xE254];
-    u32 unkE260;
+    u32 unkE240[4];
+    u32 unkE250[4];
+    u16 unkE260[2];
     /* 0xE264 */ Weather weather; // Uses the weather constants in weather.h.
     /* 0xE27C */ Tile unkE27C[8][8];
     /* 0xE87C */ u8 unkE87C[8][8];

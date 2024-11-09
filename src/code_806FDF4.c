@@ -797,7 +797,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             pokeStruct2->itemSlot = param_3->heldItem;
             BoundedCopyStringtoBuffer(pokeStruct2->name,GetMonSpecies(param_3->id),10);
 
-            sub_8097848();
+            IncrementAdventureNumJoined();
 
             if (sub_806B8CC(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
                 TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA058);
@@ -1061,7 +1061,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       UnlockFriendArea(friendArea);
       flag = TRUE;
     }
-    sub_8097848();
+    IncrementAdventureNumJoined();
     sub_8068FE0(entity2,500,entity1);
     if (sub_806B8CC(local_74.id,local_74.pos.x,local_74.pos.y,pokeStruct2,&local_2c,0,0) == 0) {
       pokeStruct2->unk0 = 0;

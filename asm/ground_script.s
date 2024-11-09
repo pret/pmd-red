@@ -487,7 +487,7 @@ _080A195A:
 	movs r2, 0xA
 	bl sub_80922B4
 _080A1968:
-	bl sub_8097848
+	bl IncrementAdventureNumJoined
 	bl _080A236A
 	.align 2, 0
 _080A1970: .4byte gUnknown_8116710
@@ -526,7 +526,7 @@ _080A1988:
 	bne _080A19C2
 	b _080A1EBE
 _080A19C2:
-	bl sub_8097848
+	bl IncrementAdventureNumJoined
 	ldrh r1, [r4]
 	movs r0, 0x2
 	orrs r0, r1
@@ -626,7 +626,7 @@ _080A1A70:
 	bl sub_808D2E8
 	cmp r0, 0
 	beq _080A1A9A
-	bl sub_8097848
+	bl IncrementAdventureNumJoined
 _080A1A9A:
 	movs r0, 0x92
 	movs r1, 0
@@ -641,7 +641,7 @@ _080A1A9A:
 	bl sub_808D2E8
 	cmp r0, 0
 	beq _080A1ABC
-	bl sub_8097848
+	bl IncrementAdventureNumJoined
 _080A1ABC:
 	movs r0, 0x90
 	movs r1, 0
@@ -660,7 +660,7 @@ _080A1ACC:
 	bne _080A1AE2
 	bl _080A236A
 _080A1AE2:
-	bl sub_8097848
+	bl IncrementAdventureNumJoined
 	bl _080A236A
 	.align 2, 0
 _080A1AEC: .4byte gUnknown_8116788
@@ -1121,7 +1121,7 @@ _080A1EAC:
 	adds r2, 0x1
 	cmp r2, 0x9
 	ble _080A1EAC
-	bl sub_8097848
+	bl IncrementAdventureNumJoined
 _080A1EBE:
 	movs r0, 0x1
 	b _080A236C

@@ -19,136 +19,109 @@ s16 sub_8094828(u16 moveID, u8 id)
     }
 }
 
-void xxx_init_struct_8094924_restore_809485C(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
+
+
+// New file here
+
+
+void InitBitReader(DataSerializer *r0, u8 *buffer, s32 bufLen)
 {
-    r0->unk0 = r1;
-    r0->unk8 = 0;
+    r0->stream = buffer;
+    r0->count = 0;
     r0->unkC = 0;
-    r0->unk4 = &r1[size];
+    r0->end = buffer + bufLen;
 }
 
-void xxx_init_struct_8094924_save_809486C(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
+void InitBitWriter(DataSerializer *r0, u8 *buffer, s32 bufLen)
 {
-    r0->unk0 = r1;
-    r0->unk8 = 0;
+    r0->stream = buffer;
+    r0->count = 0;
     r0->unkC = 0;
-    r0->unk4 = &r1[size];
-    MemoryClear8(r1, size);
+    r0->end = buffer + bufLen;
+    MemoryClear8(buffer, bufLen);
 }
 
-// Related to reading/writing bits
-void nullsub_102(struct unkStruct_8094924 *r0)
+// Finish reading/writing bits
+void nullsub_102(DataSerializer *r0)
 {
 
 }
 
-void SaveIntegerBits(struct unkStruct_8094924 *r0, void *r1, s32 size)
+void WriteBits(DataSerializer *r0, void *src, s32 numBits)
 {
-    s32 r5;
-    u8 *r6;
+    s32 curBit;
+    u8 *curByte;
 
-    r5 = 0;
-    r6 = r1;
+    curBit = 0;
+    curByte = src;
 
+    while (numBits != 0) {
+        if ((*curByte >> curBit) & 1)
+            *r0->stream |= (1 << r0->count);
 
-    if(size != 0)
-    {
-        while(size != 0)
-        {
-            if(( *(r6) >> r5) & 1)
-            {
-                *r0->unk0 |= (1 << r0->unk8);
-            }
-            r5++;
-            if(r5 == 8)
-            {
-                r6++;
-                r5 = 0;
-            }
-            r0->unk8++;
-            if(r0->unk8 == 8)
-            {
-                r0->unk0++;
-                r0->unk8 = 0;
-            }
-            r0->unkC++;
-            size--;
+        curBit++;
+        if (curBit == 8) {
+            curByte++;
+            curBit = 0;
         }
+
+        r0->count++;
+        if (r0->count == 8) {
+            r0->stream++;
+            r0->count = 0;
+        }
+
+        r0->unkC++;
+        numBits--;
     }
 }
 
-// Unused
-NAKED
-void sub_80948E4(struct unkStruct_8094924 *r0, u8 *r1, s32 size)
+UNUSED void sub_80948E4(DataSerializer *seri, void *src, s32 numBytes)
 {
-	asm_unified("\tpush {r4-r6,lr}\n"
-	"\tadds r4, r0, 0\n"
-	"\tadds r5, r2, 0\n"
-	"\tadds r6, r1, 0\n"
-	"\tcmp r5, 0\n"
-	"\tbeq _0809491C\n"
-"_080948F0:\n"
-	"\tldrb r1, [r6]\n"
-	"\tldr r0, [r4, 0x8]\n"
-	"\tlsls r1, r0\n"
-	"\tldr r3, [r4]\n"
-	"\tldrb r2, [r3]\n"
-	"\tadds r0, r1, 0\n"
-	"\torrs r0, r2\n"
-	"\tstrb r0, [r3]\n"
-	"\tldr r2, [r4]\n"
-	"\tadds r0, r2, 0x1\n"
-	"\tstr r0, [r4]\n"
-	"\tasrs r1, 8\n"
-	"\tldrb r0, [r2, 0x1]\n"
-	"\torrs r1, r0\n"
-	"\tstrb r1, [r2, 0x1]\n"
-	"\tadds r6, 0x1\n"
-	"\tldr r0, [r4, 0xC]\n"
-	"\tadds r0, 0x8\n"
-	"\tstr r0, [r4, 0xC]\n"
-	"\tsubs r5, 0x1\n"
-	"\tcmp r5, 0\n"
-	"\tbne _080948F0\n"
-"_0809491C:\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r0}\n"
-	"\tbx r0");
+    s32 iVar1;
+    u8 *curByte;
+
+    curByte = src;
+
+    while (numBytes != 0) {
+        iVar1 = (*curByte << seri->count);
+        *seri->stream |= iVar1;
+        seri->stream++;
+        *seri->stream |= iVar1 >> 8;
+        curByte++;
+        seri->unkC += 8;
+        numBytes--;
+    }
 }
 
-void RestoreIntegerBits(struct unkStruct_8094924 *r0, void *r1, s32 size)
+void ReadBits(DataSerializer *r0, void *dst, s32 numBits)
 {
-    s32 r6;
-    u8 *r2;
+    s32 curBit;
+    u8 *curByte;
 
-    r6 = 0;
-    r2 = r1;
+    curBit = 0;
+    curByte = dst;
 
+    while (numBits != 0) {
+        if (curBit == 0)
+            *curByte = 0;
 
-    if(size != 0)
-    {
-        while(size != 0)
-        {
-            if(r6 == 0)
-                *r2 = 0;
-            if(( *(r0->unk0) >> r0->unk8) & 1)
-            {
-                *r2 |= (1 << r6);
-            }
-            r6++;
-            if(r6 == 8)
-            {
-                r2++;
-                r6 = 0;
-            }
-            r0->unk8++;
-            if(r0->unk8 == 8)
-            {
-                r0->unk0++;
-                r0->unk8 = 0;
-            }
-            r0->unkC++;
-            size--;
+        if ((*r0->stream >> r0->count) & 1)
+            *curByte |= (1 << curBit);
+
+        curBit++;
+        if (curBit == 8) {
+            curByte++;
+            curBit = 0;
         }
+
+        r0->count++;
+        if (r0->count == 8) {
+            r0->stream++;
+            r0->count = 0;
+        }
+
+        r0->unkC++;
+        numBits--;
     }
 }

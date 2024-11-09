@@ -36,7 +36,7 @@ u8 sub_803D110(u8 *param_1, u8 *param_2, s32 size)
     s32 index1;
     s32 newSize;
     s32 save;
-    unkStruct_8094924 auStack_88;
+    DataSerializer auStack_88;
     u8 local_78 [56];
     u8 auStack_40 [36];
 
@@ -62,11 +62,11 @@ u8 sub_803D110(u8 *param_1, u8 *param_2, s32 size)
 
     newSize >>= 3;
     save = newSize;
-    xxx_init_struct_8094924_save_809486C(&auStack_88,auStack_40, save);
+    InitBitWriter(&auStack_88,auStack_40, save);
 
     for(index1 = 0; index1 < size; index1++)
     {
-        SaveIntegerBits(&auStack_88, &local_78[index1], 5);
+        WriteBits(&auStack_88, &local_78[index1], 5);
     }
     nullsub_102(&auStack_88);
     MemoryCopy8(param_2, auStack_40, save);
@@ -77,7 +77,7 @@ void sub_803D1A8(u8 *param_1, u8 *param_2, s32 size)
 {
     s32 index;
     s32 newSize;
-    unkStruct_8094924 auStack_5c;
+    DataSerializer auStack_5c;
     u8 local_4c [56];
 
     newSize = size * 5 + 5;
@@ -85,10 +85,10 @@ void sub_803D1A8(u8 *param_1, u8 *param_2, s32 size)
         newSize = size * 5 + 0xc;
     }
     newSize >>= 3;
-    xxx_init_struct_8094924_restore_809485C(&auStack_5c, param_2, newSize);
+    InitBitReader(&auStack_5c, param_2, newSize);
     for(index = 0; index < size; index++)
     {
-        RestoreIntegerBits(&auStack_5c, &local_4c[index], 5);
+        ReadBits(&auStack_5c, &local_4c[index], 5);
     }
 
     nullsub_102(&auStack_5c);
@@ -105,7 +105,7 @@ bool8 sub_803D204(u8 *buffer,unkStruct_203B480 *param_2)
   u8 local_c4 [34];
   u8 translateBuffer [PASSWORD_BUFFER_SIZE];
   u8 localBuffer [PASSWORD_BUFFER_SIZE];
-  unkStruct_8094924 uStack_30;
+  DataSerializer uStack_30;
   s32 index;
 
     checksum = 0;
@@ -127,7 +127,7 @@ bool8 sub_803D204(u8 *buffer,unkStruct_203B480 *param_2)
           checksum += local_c4[index] + index;
         }
         if (local_c4[0] == checksum) {
-          xxx_init_struct_8094924_restore_809485C(&uStack_30,&local_c4[1],33);
+          InitBitReader(&uStack_30,&local_c4[1],33);
           sub_8095774(&uStack_30,param_2);
           nullsub_102(&uStack_30);
           return TRUE;
@@ -143,7 +143,7 @@ void sub_803D2C0(u8 *buffer, unkStruct_203B480 *mail)
     u8 local_c0 [34];
     u8 buffer1 [PASSWORD_BUFFER_SIZE];
     u8 buffer2 [PASSWORD_BUFFER_SIZE];
-    unkStruct_8094924 auStack_2c;
+    DataSerializer auStack_2c;
 
     checksum = 0;
 
@@ -152,7 +152,7 @@ void sub_803D2C0(u8 *buffer, unkStruct_203B480 *mail)
         local_c0[index] = 0;
     }
 
-    xxx_init_struct_8094924_save_809486C(&auStack_2c,&local_c0[1],33);
+    InitBitWriter(&auStack_2c,&local_c0[1],33);
     sub_8095824(&auStack_2c,mail);
     nullsub_102(&auStack_2c);
     for(index = 1; index < 34; index++)
@@ -176,7 +176,7 @@ bool8 DecodeWonderMailPassword(u8* buffer, WonderMail *mail)
     u8 local_70 [16];
     u8 local_60 [24];
     u8 password [24];
-    unkStruct_8094924 puVar1;
+    DataSerializer puVar1;
 
     checksum = 0;
     MemoryCopy8(password,buffer,24);
@@ -199,8 +199,8 @@ bool8 DecodeWonderMailPassword(u8* buffer, WonderMail *mail)
             checksum += (local_70[index] + index);
         }
         if (local_70[0] == checksum) {
-            xxx_init_struct_8094924_restore_809485C(&puVar1,&local_70[1],0xc);
-            RestoreWonderMail(&puVar1,mail);
+            InitBitReader(&puVar1,&local_70[1],0xc);
+            ReadWonderMailBits(&puVar1,mail);
             nullsub_102(&puVar1);
             return TRUE;
         }
@@ -215,7 +215,7 @@ void sub_803D414(u8 *buffer,WonderMail *mail)
     u8 local_6c [15];
     u8 local_5c [24];
     u8 auStack_44 [24];
-    unkStruct_8094924 uStack_2c;
+    DataSerializer uStack_2c;
 
     checksum = 0;
     for(index = 0; index < 0xF; index++)
@@ -223,8 +223,8 @@ void sub_803D414(u8 *buffer,WonderMail *mail)
         local_6c[index] = 0;
     }
 
-    xxx_init_struct_8094924_save_809486C(&uStack_2c,&local_6c[1],12);
-    SaveWonderMail(&uStack_2c,mail);
+    InitBitWriter(&uStack_2c,&local_6c[1],12);
+    WriteWonderMailBits(&uStack_2c,mail);
     nullsub_102(&uStack_2c);
 
     for(index = 1; index < 0xF; index++)

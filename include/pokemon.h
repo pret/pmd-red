@@ -11,7 +11,9 @@
 
 enum PokemonUnk0Flags
 {
-    FLAG_ON_TEAM = 2,
+    FLAG_NONE = 0,
+    FLAG_UNK_1 = 1,
+    FLAG_ON_TEAM = 2, // Mon is not on "standby"
 };
 
 // size: 0x1A4
@@ -83,8 +85,8 @@ s32 GetUnownIndex(s16 index);
 void GenerateHiddenPower(HiddenPower *);
 s32 GetEvolutionSequence(PokemonStruct1 *pokemon, EvolveStage *);
 void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 *, PokemonStruct1 *, s32);
-void SavePokemonStruct(unkStruct_8094924 *, PokemonStruct1 *pokemon);
-void RestorePokemonStruct(unkStruct_8094924 *, PokemonStruct1 *);
+void WritePoke1Bits(DataSerializer *, PokemonStruct1 *pokemon);
+void ReadPoke1Bits(DataSerializer *, PokemonStruct1 *);
 s32 sub_808E218(unkStruct_808E218_arg *, PokemonStruct1 *pokemon);
 void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID);
 void sub_808D0D8(PokemonStruct1 *pokemon);
@@ -100,12 +102,12 @@ extern s32 sub_808D580(s32 *);
 
 static inline bool8 PokemonFlag1(PokemonStruct1 *mon)
 {
-    return ((mon->unk0 & 1));
+    return (mon->unk0 & FLAG_UNK_1);
 }
 
 static inline bool8 PokemonFlag2(PokemonStruct1 *mon)
 {
-    return (((mon->unk0 >> (FLAG_ON_TEAM - 1)) & 1));
+    return ((mon->unk0 >> (FLAG_ON_TEAM - 1)) & 1);
 }
 
 static inline void SetPokemonFlag2(PokemonStruct1 *mon)

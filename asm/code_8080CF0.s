@@ -5,8 +5,8 @@
 
   	.text
 
-	thumb_func_start sub_8082280
-sub_8082280:
+	thumb_func_start RestoreDungeonEntity
+RestoreDungeonEntity:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -25,25 +25,25 @@ sub_8082280:
 	movs r1, 0
 	bl memset
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x214]
 	add r4, sp, 0x208
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80831F8
+	bl ReadPosition8
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x218]
 	adds r0, r5, 0
-	bl sub_8083158
+	bl ReadU16
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x21C]
@@ -51,7 +51,7 @@ sub_8082280:
 	movs r0, 0
 	str r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083158
+	bl ReadU16
 	mov r1, sp
 	strh r0, [r1]
 	adds r0, r5, 0
@@ -63,89 +63,89 @@ sub_8082280:
 	mov r1, sp
 	strh r0, [r1, 0x2]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	mov r1, sp
 	strb r0, [r1, 0x6]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	mov r1, sp
 	strb r0, [r1, 0x7]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	mov r1, sp
 	strb r0, [r1, 0x8]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	mov r1, sp
 	strb r0, [r1, 0x9]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	mov r1, sp
 	strb r0, [r1, 0xA]
 	add r1, sp, 0x40
 	adds r0, r5, 0
-	bl sub_8082F64
+	bl ReadJoinedAt
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0xC]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0xE]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0x10]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0x12]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	mov r1, sp
 	strb r0, [r1, 0x14]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	mov r1, sp
 	strb r0, [r1, 0x15]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	mov r1, sp
 	strb r0, [r1, 0x16]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	mov r1, sp
 	strb r0, [r1, 0x17]
 	adds r0, r5, 0
 	bl sub_80831A0
 	str r0, [sp, 0x18]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0x1C]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0x1E]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0x20]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0x22]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0x24]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0x26]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	mov r1, sp
 	strh r0, [r1, 0x28]
 	adds r0, r5, 0
@@ -162,7 +162,7 @@ sub_8082280:
 	str r0, [sp, 0x38]
 	add r1, sp, 0x44
 	adds r0, r5, 0
-	bl sub_8082CBC
+	bl ReadActionContainer
 	adds r0, r5, 0
 	bl sub_8082BFC
 	add r1, sp, 0x5C
@@ -269,20 +269,20 @@ sub_8082280:
 _080824DC:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80831F8
+	bl ReadPosition8
 	adds r4, 0x4
 	subs r6, 0x1
 	cmp r6, 0
 	bge _080824DC
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl sub_8082CE4
+	bl ReadAITarget
 	adds r0, r5, 0
 	mov r1, r8
-	bl sub_8082D28
+	bl Read3Bytes
 	adds r0, r5, 0
 	mov r1, r9
-	bl sub_8082D28
+	bl Read3Bytes
 	adds r0, r5, 0
 	bl sub_8082C84
 	movs r4, 0
@@ -290,7 +290,7 @@ _080824DC:
 	strb r0, [r3]
 	adds r0, r5, 0
 	ldr r1, [sp, 0x270]
-	bl sub_8082F80
+	bl ReadHiddenPower
 	adds r0, r5, 0
 	bl sub_80831A0
 	ldr r1, [sp, 0x274]
@@ -305,93 +305,93 @@ _080824DC:
 	str r0, [r3]
 	adds r0, r5, 0
 	ldr r1, [sp, 0x284]
-	bl sub_8082D34
+	bl ReadSleep
 	adds r0, r5, 0
 	ldr r1, [sp, 0x288]
-	bl sub_8082D50
+	bl ReadNonVolatile
 	adds r0, r5, 0
 	ldr r1, [sp, 0x28C]
-	bl sub_8082D7C
+	bl ReadImmobilize
 	adds r0, r5, 0
 	ldr r1, [sp, 0x290]
-	bl sub_8082DA8
+	bl ReadVolatileStatus
 	adds r0, r5, 0
 	ldr r1, [sp, 0x294]
-	bl sub_8082DC4
+	bl ReadCharging
 	adds r0, r5, 0
 	ldr r1, [sp, 0x298]
-	bl sub_8082DE8
+	bl ReadProtection
 	adds r0, r5, 0
 	ldr r1, [sp, 0x29C]
-	bl sub_8082E04
+	bl ReadWaiting
 	adds r0, r5, 0
 	ldr r1, [sp, 0x220]
-	bl sub_8082E38
+	bl ReadLinked
 	adds r0, r5, 0
 	ldr r1, [sp, 0x224]
-	bl sub_8082E6C
+	bl ReadMoveStatus
 	adds r0, r5, 0
 	ldr r1, [sp, 0x228]
 	bl sub_8082E88
 	adds r0, r5, 0
 	ldr r1, [sp, 0x22C]
-	bl sub_8082E94
+	bl ReadTransformStatus
 	adds r0, r5, 0
 	ldr r1, [sp, 0x230]
-	bl sub_8082EB0
+	bl ReadEyesightStatus
 	adds r0, r5, 0
 	ldr r1, [sp, 0x234]
-	bl sub_8082ECC
+	bl ReadMuzzled
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r1, [sp, 0x238]
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r2, [sp, 0x23C]
 	strb r0, [r2]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r3, [sp, 0x240]
 	strb r0, [r3]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r1, [sp, 0x244]
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r2, [sp, 0x248]
 	strb r0, [r2]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	ldr r3, [sp, 0x25C]
 	strb r0, [r3]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r1, [sp, 0x24C]
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r2, [sp, 0x250]
 	strb r0, [r2]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r3, [sp, 0x254]
 	strb r0, [r3]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	ldr r1, [sp, 0x258]
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r2, [sp, 0x260]
 	strb r0, [r2]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	ldr r3, [sp, 0x264]
 	strb r0, [r3]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	ldr r1, [sp, 0x268]
 	strb r0, [r1]
 	adds r0, r5, 0
@@ -409,20 +409,20 @@ _080824DC:
 	add r1, sp, 0x108
 	adds r0, r5, 0
 	movs r2, 0x5
-	bl sub_8083288
+	bl xxx_ReadBytes
 	ldr r1, _08082674
 	add r1, sp
 	adds r0, r5, 0
 	movs r2, 0x5
-	bl sub_8083288
+	bl xxx_ReadBytes
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	movs r1, 0x89
 	lsls r1, 1
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	b _08082678
 	.align 2, 0
 _0808266C: .4byte 0xfffffd60
@@ -433,14 +433,14 @@ _08082678:
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	add r1, sp, 0x114
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
 	add r1, sp, 0x118
 	adds r0, r5, 0
-	bl sub_8082F1C
+	bl ReadMoves
 	add r1, sp, 0x13C
 	adds r0, r5, 0
 	bl sub_8082F48
@@ -448,131 +448,131 @@ _08082678:
 	adds r0, r5, 0
 	bl sub_8082F48
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	add r1, sp, 0x144
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r1, _0808281C
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r1, _08082820
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	movs r1, 0xA3
 	lsls r1, 1
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	add r1, sp, 0x148
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r1, _08082824
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	movs r1, 0xA5
 	lsls r1, 1
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r1, _08082828
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	add r1, sp, 0x14C
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083158
+	bl ReadU16
 	movs r1, 0xA7
 	lsls r1, 1
 	add r1, sp
 	strh r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083158
+	bl ReadU16
 	add r1, sp, 0x150
 	strh r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	movs r1, 0xA9
 	lsls r1, 1
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	ldr r1, _0808282C
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	add r1, sp, 0x154
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	ldr r1, _08082830
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_80831DC
+	bl ReadBool8
 	movs r1, 0xAB
 	lsls r1, 1
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	add r1, sp, 0x164
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	ldr r1, _08082834
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	movs r1, 0xB3
 	lsls r1, 1
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	ldr r1, _08082838
 	add r1, sp
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	add r1, sp, 0x168
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083188
+	bl ReadU8
 	ldr r1, _0808283C
 	add r1, sp
 	strb r0, [r1]
 	add r1, sp, 0x16C
 	adds r0, r5, 0
-	bl sub_80831F8
+	bl ReadPosition8
 	adds r0, r5, 0
 	bl sub_80831C8
 	add r1, sp, 0x174
 	str r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083158
+	bl ReadU16
 	add r1, sp, 0x178
 	strh r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	add r1, sp, 0x1F8
 	strh r0, [r1]
 	adds r0, r5, 0
-	bl sub_8083170
+	bl ReadS16
 	movs r1, 0xFD
 	lsls r1, 1
 	add r1, sp
@@ -688,7 +688,7 @@ _080828BE:
 _080828D4: .4byte 0x0000020a
 _080828D8: .4byte gLeaderPointer
 _080828DC: .4byte gUnknown_203B410
-	thumb_func_end sub_8082280
+	thumb_func_end RestoreDungeonEntity
 
 	thumb_func_start sub_80828E0
 sub_80828E0:
