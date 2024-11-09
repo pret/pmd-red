@@ -1690,7 +1690,7 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
         bool32 isFalseSwipe = (move->id == MOVE_FALSE_SWIPE);
 
         if (HasAbility(target, ABILITY_ILLUMINATE)) {
-            gDungeon->unk662 = 999;
+            gDungeon->unk644.unk1E = 999;
             gDungeon->unk17B34 = target;
             gDungeon->unk17B40 = target->spawnGenID;
         }

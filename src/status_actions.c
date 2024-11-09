@@ -922,7 +922,7 @@ bool8 sub_805BEC8(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 bool8 EscapeOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
-    if (gDungeon->unk66E != 0) {
+    if (gDungeon->unk644.unk2A != 0) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD4DC); // $m0 can't escape!
     }
     else {

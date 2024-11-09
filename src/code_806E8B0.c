@@ -396,7 +396,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         }
 
         // ALSO needed to match. unk694 chosen randomly and it worked with matching.
-        ASM_MATCH_TRICK(gDungeon->unk694);
+        ASM_MATCH_TRICK(gDungeon->unk644.unk50);
         gDungeon->unk134.unk150 = sub_800A048(&unkSp8);
         {
             s32 rnd = DungeonRandInt(0x4000);

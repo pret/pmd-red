@@ -51,13 +51,13 @@ void sub_8075900(Entity *pokemon, u8 r1)
         {
             if(!sub_8044B28())
             {
-                if(!gDungeon->monsterHouseTriggered)
+                if(!gDungeon->unk644.monsterHouseTriggered)
                 {
                     if((GetTileAtEntitySafe(pokemon)->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
                     {
                         // It's a monster house!
                         TryDisplayDungeonLoggableMessage(GetLeader(), gPtrItsaMonsterHouseMessage);
-                        gDungeon->monsterHouseTriggeredEvent = TRUE;
+                        gDungeon->unk644.monsterHouseTriggeredEvent = TRUE;
                         sub_807AB38(pokemon, r1);
                         sub_8041888(0);
                         if(sub_803F428(&pokemon->pos.x) != 0)

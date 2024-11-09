@@ -485,7 +485,7 @@ void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
     entityInfo->HP = newHP;
   }
 
-  gDungeon->bossSongIndex = songIndex;
+  gDungeon->unk644.bossSongIndex = songIndex;
   SetDefaultIQSkills(entityInfo->IQSkillMenuFlags, entityInfo->bossFlag);
   LoadIQSkills(pokemon);
 }
@@ -501,7 +501,7 @@ u8 sub_8086AE4(s16 _index)
 {
     s32 pokeIndex = _index;
 
-    if(gDungeon->unk65C == 0)
+    if(gDungeon->unk644.unk18 == 0)
         return 1;
     else
         return HasRecruitedMon(pokeIndex);
@@ -3816,8 +3816,8 @@ void sub_808B1CC(u8 itemID)
     Position pos;
     Item item;
 
-    pos.x = gDungeon->unk684;
-    pos.y = gDungeon->unk686;
+    pos.x = gDungeon->unk644.unk40;
+    pos.y = gDungeon->unk644.unk42;
     if ((pos.x < 0) || (pos.y  < 0)) {
         entity = GetLeader();
         if (entity == NULL) {
@@ -4164,7 +4164,7 @@ void JirachiWish(void)
         sub_803E708(10,0x46);
         DisplayDungeonDialogue(&gUnknown_8105D9C);
         sub_803E708(10,0x46);
-        gDungeon->unk674 = 1;
+        gDungeon->unk644.unk30 = 1;
     }
     break;
   }

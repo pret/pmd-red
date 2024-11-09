@@ -198,12 +198,12 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
   size = GetBodySize(targetInfo->apparentID);
   if ((1 < ((u16)(gDungeon->bossBattleIndex - 4))) && (gDungeon->bossBattleIndex != 9) && (gDungeon->bossBattleIndex != 0xf)) {
     if ((u16)(gDungeon->bossBattleIndex - 0x2cU) < 5) {
-      if (gDungeon->unk65C == 0) {
+      if (gDungeon->unk644.unk18 == 0) {
           return FALSE;
       }
     }
     else if (gDungeon->bossBattleIndex == 0x31) {
-      if (gDungeon->fill655[4] == 0) {
+      if (gDungeon->unk644.unk15 == 0) {
         return FALSE;
       }
       if (sub_8097900(0x19e) == 0) {
@@ -212,12 +212,12 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
 
     }
     else {
-      if (IsRecruitingEnabled((gDungeon->dungeonLocation).id) == 0) {
+      if (IsRecruitingEnabled((gDungeon->unk644.dungeonLocation).id) == 0) {
           return FALSE;
       }
     }
   }
-  if (gDungeon->unk65D == 0)
+  if (gDungeon->unk644.unk19 == 0)
   {
     if (((
     (2 < (u16)(targetInfo->id - 0x90)) &&
@@ -689,8 +689,8 @@ bool8 sub_806F9BC(s16 species)
     unkStruct_8092638 auStack_18;
 
     id = species;
-    if (((gDungeon->unk658 == 0) || (sub_808529C(id) == 0)) ||
-        ((id == MONSTER_MEW && (gDungeon->unk678 == 1)))) {
+    if (((gDungeon->unk644.unk14 == 0) || (sub_808529C(id) == 0)) ||
+        ((id == MONSTER_MEW && (gDungeon->unk644.unk34 == 1)))) {
         return FALSE;
     }
     else if (id == MONSTER_LATIAS)
@@ -779,7 +779,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             pokeStruct2->unkA = -1;
             pokeStruct2->unkC = pokeIndex;
             pokeStruct2->speciesNum = param_3->id;
-            (pokeStruct2->dungeonLocation) = gDungeon->dungeonLocation;
+            (pokeStruct2->dungeonLocation) = gDungeon->unk644.dungeonLocation;
             pokeStruct2->unk10 = param_3->HP;
             pokeStruct2->unk12 = param_3->HP;
             pokeStruct2->belly = param_3->belly;
@@ -1039,7 +1039,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
     pokeStruct2->unkA = -1;
     pokeStruct2->unkC = index;
     pokeStruct2->speciesNum = local_74.id;
-    pokeStruct2->dungeonLocation = gDungeon->dungeonLocation;
+    pokeStruct2->dungeonLocation = gDungeon->unk644.dungeonLocation;
     pokeStruct2->unk10 = local_74.HP;
     pokeStruct2->unk12 = local_74.HP;
     pokeStruct2->belly = local_74.belly;

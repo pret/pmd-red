@@ -83,7 +83,7 @@ void sub_8046D20(void)
 
 u8 sub_8046D70(void)
 {
-    if(gDungeon->unk68A)
+    if(gDungeon->unk644.unk46)
         return 0;
     else
         return 0;

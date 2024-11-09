@@ -365,9 +365,9 @@ void IdentityItemHolders(Entity *pokemon, Entity *target)
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
     entityInfo = GetEntInfo(target);
-    if (!gDungeon->itemHoldersIdentified) {
+    if (!gDungeon->unk644.itemHoldersIdentified) {
         nullsub_89(target);
-        gDungeon->itemHoldersIdentified = TRUE;
+        gDungeon->unk644.itemHoldersIdentified = TRUE;
         EntityUpdateStatusSprites(target);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC028);
     }

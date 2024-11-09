@@ -42,7 +42,7 @@ void PlayStairsSound(void)
     switch (sub_8043D10()) {
         case 0:
         default:
-            songIndex = IsStairDirectionUp(gDungeon->dungeonLocation.id) ? 340 : 341;
+            songIndex = IsStairDirectionUp(gDungeon->unk644.dungeonLocation.id) ? 340 : 341;
             break;
         case 1:
         case 2:

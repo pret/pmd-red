@@ -62,7 +62,7 @@ void sub_8083AB0(s16 param_0, Entity * target, Entity * entity)
   temp->spAtk = entityInfo->atk[1];
   temp->def = entityInfo->def[0];
   temp->spDef = entityInfo->def[1];
-  temp->dungeonLocation = gDungeon->dungeonLocation;
+  temp->dungeonLocation = gDungeon->unk644.dungeonLocation;
   attackPtr = &temp->attBoost;
   *attackPtr = 0;
   spAttPtr = &temp->spAttBoost;
@@ -128,8 +128,8 @@ bool8 sub_8083C88(u8 param_1)
 
   temp = &gDungeon->unk1CE98;
 
-  if ((!HasCheckpoint(gDungeon->dungeonLocation.id) &&
-      ((gDungeon->unk65C != 0) || (param_1 != 0))) ||
+  if ((!HasCheckpoint(gDungeon->unk644.dungeonLocation.id) &&
+      ((gDungeon->unk644.unk18 != 0) || (param_1 != 0))) ||
      (temp->moveID != 0x227)) {
     return TRUE;
   }
@@ -188,19 +188,19 @@ void sub_8083D88(void)
 void PlayDungeonFailBGM(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_FAIL);
-  gDungeon->unk66F = 0;
-  gDungeon->monsterHouseTriggeredEvent = FALSE;
-  gDungeon->unk699 = 0;
-  gDungeon->bossSongIndex = STOP_BGM;
+  gDungeon->unk644.unk2B = 0;
+  gDungeon->unk644.monsterHouseTriggeredEvent = FALSE;
+  gDungeon->unk644.unk55 = 0;
+  gDungeon->unk644.bossSongIndex = STOP_BGM;
 }
 
 void PlayDungeonCompleteBGM(void)
 {
   DungeonStartNewBGM(MUS_DUNGEON_COMPLETE);
-  gDungeon->unk66F = 0;
-  gDungeon->monsterHouseTriggeredEvent = FALSE;
-  gDungeon->unk699 = 0;
-  gDungeon->bossSongIndex = STOP_BGM;
+  gDungeon->unk644.unk2B = 0;
+  gDungeon->unk644.monsterHouseTriggeredEvent = FALSE;
+  gDungeon->unk644.unk55 = 0;
+  gDungeon->unk644.bossSongIndex = STOP_BGM;
 }
 
 void sub_8083E28(void)
@@ -282,16 +282,16 @@ void UpdateDungeonMusic(void)
 
   musPlayer = &gDungeon->musPlayer;
 
-  bossSongIndex = &gDungeon->bossSongIndex;
+  bossSongIndex = &gDungeon->unk644.bossSongIndex;
   newSongIndex = *bossSongIndex;
   if (newSongIndex == STOP_BGM) {
-    if (gDungeon->unk66F != 0) {
+    if (gDungeon->unk644.unk2B != 0) {
         newSongIndex = MUS_STOP_THIEF;
     }
-    else if (gDungeon->monsterHouseTriggeredEvent) {
+    else if (gDungeon->unk644.monsterHouseTriggeredEvent) {
         newSongIndex = MUS_MONSTER_HOUSE;
       }
-    else if (gDungeon->unk699 != 0) {
+    else if (gDungeon->unk644.unk55 != 0) {
         newSongIndex = MUS_KECLEON_SHOP;
     }
     else {

@@ -171,7 +171,7 @@ void DungeonHandlePlayerInput(void)
         return;
     }
 
-    gDungeon->unk673 = 0;
+    gDungeon->unk644.unk2F = 0;
     sub_8040A78();
     if (gDungeon->unk1 != 0) {
         gDungeon->unk1 = 0;
@@ -193,7 +193,7 @@ void DungeonHandlePlayerInput(void)
         EntityInfo *leaderInfo = GetEntInfo(leader);
 
         sub_80978C8(leaderInfo->id);
-        if (gDungeon->unk66C != 0) {
+        if (gDungeon->unk644.unk28 != 0) {
             if (sub_805E874() != 0) {
                 leaderInfo->action.action = 2;
                 leaderInfo->action.unk4[0].actionUseIndex = 0;
@@ -248,7 +248,7 @@ void DungeonHandlePlayerInput(void)
 
             if (gRealInputs.held & A_BUTTON && gRealInputs.held & B_BUTTON && FixedPointToInt(leaderInfo->belly) != 0) {
                 sub_8044C50(1);
-                gDungeon->unk673 = 1;
+                gDungeon->unk644.unk2F = 1;
                 break;
             }
 
@@ -259,14 +259,14 @@ void DungeonHandlePlayerInput(void)
                 if (gRealInputs.held & B_BUTTON) {
                     if (FixedPointToInt(leaderInfo->belly) != 0) {
                         sub_8044C50(1);
-                        gDungeon->unk673 = 1;
+                        gDungeon->unk644.unk2F = 1;
                         break;
                     }
                 }
                 else if (ShouldMonsterRunAwayAndShowEffect(leader, TRUE)) {
                     TryDisplayDungeonLoggableMessage(leader, gUnknown_80FD4B0);
                     sub_8044C50(1);
-                    gDungeon->unk673 = 1;
+                    gDungeon->unk644.unk2F = 1;
                     break;
                 }
                 else if (gRealInputs.held & L_BUTTON) {
@@ -460,7 +460,7 @@ void DungeonHandlePlayerInput(void)
                 sub_803E46C(0x2F);
             }
 
-            if (gDungeon->unk66D != 0 && !sInDiagonalMode) {
+            if (gDungeon->unk644.unk29 != 0 && !sInDiagonalMode) {
                 dpadDiagonal = dpadSimple = gRealInputs.pressed;
             }
             else {
@@ -532,13 +532,13 @@ void DungeonHandlePlayerInput(void)
                                 TryDisplayDungeonLoggableMessage(leader, immobilizedMsg);
                             }
                             sub_8044C50(1);
-                            gDungeon->unk673 = 1;
+                            gDungeon->unk644.unk2F = 1;
                         }
                         else {
                             sub_8044C50(2);
                             if ((gRealInputs.held & B_BUTTON || bPress) && FixedPointToInt(leaderInfo->belly) != 0) {
                                 if (GetEntInfo(leader)->volatileStatus.volatileStatus != STATUS_CONFUSED) {
-                                    gDungeon->unk66C = 1;
+                                    gDungeon->unk644.unk28 = 1;
                                 }
                                 leaderInfo->action.unk4[0].actionUseIndex = 0;
                             }
@@ -568,7 +568,7 @@ void DungeonHandlePlayerInput(void)
             sub_8044C50(0);
         }
         else if ((r6.a0_8) == 0) {
-            gDungeon->unk66D = 0;
+            gDungeon->unk644.unk29 = 0;
             if (leaderInfo->action.action != 0) {
                 if (!IsNotAttacking(leader, FALSE)) {
                     sub_803E46C(0xF);
@@ -1380,9 +1380,9 @@ void sub_805E738(Entity *a0)
 
 void sub_805E804(void)
 {
-    gDungeon->unk66D |= gDungeon->unk66C;
-    gDungeon->unk66C = 0;
-    while (gDungeon->unk66D != 0 && gRealInputs.held & R_BUTTON) {
+    gDungeon->unk644.unk29 |= gDungeon->unk644.unk28;
+    gDungeon->unk644.unk28 = 0;
+    while (gDungeon->unk644.unk29 != 0 && gRealInputs.held & R_BUTTON) {
         sub_803E46C(0x54);
     }
 }
@@ -1406,7 +1406,7 @@ bool8 sub_805E874(void)
     s32 yAdjacent = y + gAdjacentTileOffsets[direction].y;
     s32 room;
 
-    if (dungeon->unk66C == 0)
+    if (dungeon->unk644.unk28 == 0)
         return FALSE;
     if (leaderTile->object != NULL)
         return FALSE;
@@ -1719,11 +1719,11 @@ void sub_805F02C(void)
     else if (sub_8047084(ITEM_FLAG_IN_SHOP) || sub_807EF48()) {
         DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C08);
     }
-    else if (gDungeon->unk66E) {
+    else if (gDungeon->unk644.unk2A) {
         DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C2C);
     }
     else {
-        gDungeon->unk679 = 0;
+        gDungeon->unk644.unk35 = 0;
         r8->isTeamLeader = TRUE;
         leaderInfo->isTeamLeader = FALSE;
         for (i = 0; i < 4; i++) {
@@ -2891,7 +2891,7 @@ void sub_8060900(Entity *a0)
             sub_8044F5C(9, item->id);
             if (GetItemCategory(item->id) != CATEGORY_POKE) {
                 bool32 r2 = 0;
-                if (gDungeon->unk65B != 0) {
+                if (gDungeon->unk644.unk17 != 0) {
                     if (gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].flags & ITEM_FLAG_EXISTS) {
                         r2 = TRUE;
                     }
@@ -2905,7 +2905,7 @@ void sub_8060900(Entity *a0)
                 }
             }
         }
-        if (sUnknownActionUnk4.actionUseIndex == 128 && gDungeon->unk65B != 0) {
+        if (sUnknownActionUnk4.actionUseIndex == 128 && gDungeon->unk644.unk17 != 0) {
             sub_8044F5C(10, item->id);
         }
         val_sub8044DC8 = sub_8044DC8(item);
@@ -2965,7 +2965,7 @@ void sub_8060900(Entity *a0)
                 }
             }
         }
-        else if (gDungeon->unk65B) {
+        else if (gDungeon->unk644.unk17) {
             if (gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].flags & ITEM_FLAG_EXISTS) {
                 sub_8044F5C(0x3E, item->id);
             }
@@ -3026,7 +3026,7 @@ void sub_8060900(Entity *a0)
             if (GetItemCategory(item->id) == CATEGORY_TMS_HMS) r5 = TRUE;
             if (GetItemCategory(item->id) == CATEGORY_ORBS) r5 = TRUE;
 
-            if (gDungeon->unk65B) {
+            if (gDungeon->unk644.unk17) {
                 if (r4) {
                     sub_8044F5C(0x3E, item->id);
                 }
@@ -3095,7 +3095,7 @@ s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
     s32 i;
     s32 count = 0;
 
-    if (gDungeon->unk65B && !a1) {
+    if (gDungeon->unk644.unk17 && !a1) {
         if (gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS) {
             a0[count++] = 0;
         }
@@ -3161,7 +3161,7 @@ bool8 sub_8060E38(Entity *a0)
         }
     }
 
-    if (!gDungeon->unk65B) {
+    if (!gDungeon->unk644.unk17) {
         var_84.a0[0].unk4 = 3;
         var_84.a0[0].unk8.unk0.arr[1]++;
     }
@@ -3438,7 +3438,7 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
     sub_8044F5C(0x1B, 0);
     sub_8044F5C(0x19, 0);
     if (!monInfo->isTeamLeader) {
-        if (!gDungeon->unk65D && (monInfo->joinedAt.joinedAt != DUNGEON_JOIN_LOCATION_PARTNER || gDungeon->unk65C)) {
+        if (!gDungeon->unk644.unk19 && (monInfo->joinedAt.joinedAt != DUNGEON_JOIN_LOCATION_PARTNER || gDungeon->unk644.unk18)) {
             sub_8044F5C(0x34, 0);
         }
         sub_8044F5C(0x1C, 0);
@@ -3447,7 +3447,7 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
     if (!monInfo->isTeamLeader) {
         sub_8044F5C(0x1A, 0);
     }
-    if (!monInfo->isTeamLeader && gDungeon->unk65C && CanLeaderSwitch(gDungeon->dungeonLocation.id)) {
+    if (!monInfo->isTeamLeader && gDungeon->unk644.unk18 && CanLeaderSwitch(gDungeon->unk644.dungeonLocation.id)) {
         bool32 r5;
 
         sub_8044F5C(0x3B, 0);

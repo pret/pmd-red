@@ -1313,10 +1313,10 @@ void sub_803FB74(void)
     }
 
     arrPtr = gUnknown_202B038[0][0];
-    unkFloor = gDungeon->unk14 + gDungeon->dungeonLocation.floor;
+    unkFloor = gDungeon->unk14 + gDungeon->unk644.dungeonLocation.floor;
     if (strPtr->unk3A != unkFloor) {
         strPtr->unk3A = unkFloor;
-        if (IsStairDirectionUp(gDungeon->dungeonLocation.id)) {
+        if (IsStairDirectionUp(gDungeon->unk644.dungeonLocation.id)) {
             arrPtr[1] = 0;
         }
         else {

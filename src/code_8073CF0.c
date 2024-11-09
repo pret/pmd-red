@@ -177,7 +177,7 @@ void sub_8073D14(Entity *entity)
         Item *carriedItems[INVENTORY_SIZE + 1]; // plus held
         s32 newQuantity;
 
-        if (gDungeon->unk65B && !_entityInfo->isNotTeamMember) {
+        if (gDungeon->unk644.unk17 && !_entityInfo->isNotTeamMember) {
             for (i = 0; i < INVENTORY_SIZE; i++) {
                 carriedItems[i] = &gTeamInventoryRef->teamItems[i];
                 inventoryIds[i] = i;
@@ -361,13 +361,13 @@ void sub_8074094(Entity *entity)
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            if (gDungeon->unk679 < 10)
-                gDungeon->unk679++;
-            if (gDungeon->unk679 == 1)
+            if (gDungeon->unk644.unk35 < 10)
+                gDungeon->unk644.unk35++;
+            if (gDungeon->unk644.unk35 == 1)
                 str = gUnknown_80FD5DC;
-            if (gDungeon->unk679 == 2)
+            if (gDungeon->unk644.unk35 == 2)
                 str = gUnknown_80FD608, sound = FALSE;
-            if (gDungeon->unk679 == 3)
+            if (gDungeon->unk644.unk35 == 3)
                 str = gUnknown_80FD628, sound = FALSE;
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
@@ -377,7 +377,7 @@ void sub_8074094(Entity *entity)
                 str = NULL;
         }
         else {
-            gDungeon->unk679 = 0;
+            gDungeon->unk644.unk35 = 0;
         }
 
         if (str != NULL) {
@@ -930,7 +930,7 @@ bool8 UseAttack(Entity *a0)
 
     savedEntityPtr = gDungeon->unkB8;
     gDungeon->unkB8 = a0;
-    if (gDungeon->unk66C == 0 && r9) {
+    if (gDungeon->unk644.unk28 == 0 && r9) {
         sub_80526D0(0x35);
         for (loop = 0; loop < 24 / gUnknown_202F378; loop++) {
             sub_803E46C(7);

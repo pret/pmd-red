@@ -196,12 +196,13 @@ struct unkStruct_Dungeon5C4_sub
     Entity *unkC;
 };
 
-struct unkStruct_Dungeon64C
+// size: 0x8
+typedef struct unkStruct_Dungeon64C
 {
     u8 unk0;
     u8 unk1;
     u32 unk4;
-};
+} unkStruct_Dungeon64C;
 
 #define UNK_1BBD4_STR_COUNT 10
 
@@ -229,6 +230,56 @@ struct MessageLogString
     u8 unk2;
     u8 str[MESSAGE_LOG_BUFFER_SIZE];
 };
+
+// size: 0x58
+typedef struct unkDungeon644
+{
+    /* 0x0 */ DungeonLocation dungeonLocation;
+    /* 0x4 */ DungeonLocation dungeonLocation2;
+    /* 0x8 */ unkStruct_Dungeon64C unk8;
+    /* 0x10 */ u8 unk10;
+    /* 0x11 */ u8 fill11[3];
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 unk15;
+    /* 0x16 */ u8 unk16;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u8 unk18;
+    /* 0x19 */ u8 unk19;
+    /* 0x1A */ u8 fill1A[2];
+    /* 0x1C */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
+    /* 0x1E */ s16 unk1E;
+    /* 0x20 */ s16 unk20;
+    /* 0x22 */ s16 windTurns; // Turns remaining before getting swept out of the dungeon.
+    /* 0x24 */ u16 unk24;
+    /* 0x26 */ u16 bossSongIndex;
+    /* 0x28 */ u8 unk28;
+    /* 0x29 */ u8 unk29;
+    /* 0x2A */ u8 unk2A;
+    /* 0x2B */ u8 unk2B;
+    /* 0x2C */ u8 unk2C;
+    /* 0x2D */ bool8 monsterHouseTriggered;
+    /* 0x2E */ bool8 monsterHouseTriggeredEvent;
+    /* 0x2F */ u8 unk2F;
+    /* 0x30 */ u8 unk30;
+    /* 0x31 */ u8 unk31;
+    /* 0x32 */ bool8 itemHoldersIdentified;
+    /* 0x33 */ u8 fill33;
+    /* 0x34 */ u8 unk34;
+    /* 0x35 */ u8 unk35;
+    /* 0x36 */ u8 unk36;
+    /* 0x37 */ s8 unk37;
+    /* 0x38 */ u32 unk38;
+    /* 0x3C */ u32 unk3C;
+    /* 0x40 */ s16 unk40;
+    /* 0x42 */ s16 unk42;
+    /* 0x44 */ s16 unk44;
+    /* 0x46 */ u8 unk46;
+    /* 0x48 */ s32 unk48;
+    /* 0x4C */ s32 unk4C;
+    /* 0x50 */ s32 unk50;
+    /* 0x54 */ u8 unk54;
+    /* 0x55 */ u8 unk55;
+} unkDungeon644;
 
 // size: 0x1CEDC
 typedef struct Dungeon
@@ -264,61 +315,10 @@ typedef struct Dungeon
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];
     /* 0x5F4 */ u8 faintStringBuffer[80];
-
-    // TODO: This is the start of a struct that is 0x58 bytes (dungeon data that persists between save/reload). See sub_8080B90 and sub_8081C50
-    /* 0x644 */ DungeonLocation dungeonLocation;
-    /* 0x648 */ DungeonLocation dungeonLocation2;
-    struct unkStruct_Dungeon64C unk64C;
-    u8 unk654;
-    u8 fill655;
-    u8 fill656;
-    u8 fill657;
-    u8 unk658;
-    u8 unk659;
-    u8 unk65A;
-    u8 unk65B;
-    u8 unk65C;
-    u8 unk65D;
-    u8 fill65e[2];
-    /* 0x660 */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
-    s16 unk662;
-    s16 unk664;
-    /* 0x666 */ s16 windTurns; // Turns remaining before getting swept out of the dungeon.
-    /* 0x668 */ u16 unk668;
-    u16 bossSongIndex;
-    u8 unk66C;
-    u8 unk66D;
-    /* 0x66E */ u8 unk66E;
-    u8 unk66F;
-    u8 unk670;
-    /* 0x671 */ bool8 monsterHouseTriggered;
-    /* 0x672 */ bool8 monsterHouseTriggeredEvent;
-    u8 unk673;
-    u8 unk674;
-    u8 unk675;
-    /* 0x676 */ bool8 itemHoldersIdentified;
-    u8 unk677;
-    u8 unk678;
-    u8 unk679;
-    u8 unk67A;
-    s8 unk67B;
-    u32 unk67C;
-    u32 unk680;
-    s16 unk684;
-    s16 unk686;
-    s16 unk688;
-    /* 0x68A */ u8 unk68A;
-    u8 fill68B;
-    s32 unk68C;
-    s32 unk690;
-    s32 unk694;
-    u8 unk698;
-    u8 unk699;
-    u8 fill69A[2];
-
-    EntityInfo unk69C[4];
-    EntityInfo unkEBC[1]; // Unsure about the size... See sub_8082A08()
-    u8 fill10C4[0x343C - 0x10C4];
+    unkDungeon644 unk644; // This data persists between save/reload. See sub_8080B90 and sub_8081C50
+    EntityInfo unk69C[MAX_TEAM_MEMBERS];
+    EntityInfo unkEBC[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
+    u8 fill2F3C[0x343C - 0x2F3C];
     /* 0x343C */ UnkDungeonGlobal_unk1CD98 unk343C[32];
     u8 fill353C[0x363c-0x353c];
     /* 0x363C */ u8 expYieldRankings[NUM_MONSTERS];
@@ -335,9 +335,9 @@ typedef struct Dungeon
     /* 0x37FE */ bool8 deoxysDefeat; // Flag set for deoxys in Meteor Cave
     /* 0x37FE */ u8 unk37FF;
     s16 unk3800;
-    u8 fill3802[0x3904 - 0x3802];
+    EntityInfo *unk3804[DUNGEON_MAX_ITEMS];
     /* 0x3904 */ s16 unk3904;
-    u8 fill3906[0x3A08 - 0x3906];
+    EntityInfo *unk3908[DUNGEON_MAX_TRAPS];
     /* 0x3A08 */ u8 unk3A08;
     /* 0x3A09 */ u8 unk3A09;
     /* 0x3A0A */ u8 unk3A0A;

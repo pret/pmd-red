@@ -698,7 +698,7 @@ void TryDisplayGeneralTutorialMessage(void)
     if (DislayTutorialMsg(leader, &gUnknown_80FF020, TRUE)) return;
     if (DislayTutorialMsg(leader, &gUnknown_80FF080, TRUE)) return;
     if (DislayTutorialMsg(leader, &gUnknown_80FF0D8, TRUE)) return;
-    if (gDungeon->dungeonLocation.id == DUNGEON_THUNDERWAVE_CAVE) {
+    if (gDungeon->unk644.dungeonLocation.id == DUNGEON_THUNDERWAVE_CAVE) {
         if (DislayTutorialMsg(leader, &gUnknown_80FF13C, TRUE)) return;
         if (DislayTutorialMsg(leader, &gUnknown_80FF1B4, TRUE)) return;
         if (DislayTutorialMsg(leader, &gMovementTutorial, TRUE)) return;
@@ -834,11 +834,11 @@ void sub_8052FB8(const u8 *str)
 
 const u8 *GetCurrentDungeonName(void)
 {
-    if (gDungeon->unk678 == 1) {
+    if (gDungeon->unk644.unk34 == 1) {
         return GetDungeonName1(DUNGEON_OUT_ON_RESCUE);
     }
     else {
-        return GetDungeonName1(gDungeon->dungeonLocation.id);
+        return GetDungeonName1(gDungeon->unk644.dungeonLocation.id);
     }
 }
 

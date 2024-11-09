@@ -221,7 +221,7 @@ void EntityUpdateStatusSprites(Entity *entity)
         spriteStatus = spriteStatus | STATUS_SPRITE_LOWHP;
       }
     }
-    if ((gDungeon->itemHoldersIdentified) && (entityInfo->heldItem.flags & ITEM_FLAG_EXISTS)) {
+    if ((gDungeon->unk644.itemHoldersIdentified) && (entityInfo->heldItem.flags & ITEM_FLAG_EXISTS)) {
       spriteStatus = spriteStatus | STATUS_SPRITE_LOWHP;
     }
     if ( (entityInfo->offensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) ||

@@ -173,7 +173,7 @@ void WriteDungeonState(u8 *buffer, u32 bufLen)
 void sub_8080B90(DataSerializer *param_1)
 {
     Write8Bytes(param_1, gMisakiSan);
-    WriteBytes(param_1, &gDungeon->dungeonLocation, 0x58);
+    WriteBytes(param_1, &gDungeon->unk644, sizeof(unkDungeon644));
 }
 
 void WriteDungeonItems(DataSerializer *param_1)
@@ -826,7 +826,7 @@ void ReadDungeonState(u8 *buffer, u32 bufLen)
 void sub_8081C50(DataSerializer *r0)
 {
     sub_8083018(r0, gMisakiSan);
-    ReadBytes(r0, &gDungeon->dungeonLocation, 0x58);
+    ReadBytes(r0, &gDungeon->unk644, sizeof(unkDungeon644));
 }
 
 void sub_8081C7C(DataSerializer *r0)
