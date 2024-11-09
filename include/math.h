@@ -54,12 +54,12 @@ bool8 F48_16_IsZero(s48_16 *a);
 void F48_16_SDiv(s48_16 *dst, s48_16 *a, s48_16 *b);
 void F48_16_SMul(s48_16 *dst, s48_16 *a, s48_16 *b);
 
-s32 sub_8009FB8(s32 x, s32 y);
-void sub_800A020(s48_16 *dst, u32);
-u32 sub_800A048(s48_16 *a);
-void sub_800A088(s48_16 *a, s32 b);
-bool8 sub_800A2F0(s48_16 *a, s48_16 *b);
-void sub_800A6D0(s48_16 *dst, s48_16 *a, s48_16 *b);
-void sub_800A6F0(s48_16 *dst, s48_16 *a, s48_16 *b);
+s32 FP24_8_Hypot(s32 x, s32 y);
+void FP48_16_FromS32(s48_16 *dst, u32);
+u32 FP48_16_ToS32(s48_16 *a);
+void FP48_16_FromF248(s48_16 *a, s24_8 b);
+bool8 FP48_16_SLessThan(s48_16 *a, s48_16 *b);
+void FP48_16_Add(s48_16 *dst, s48_16 *a, s48_16 *b);
+void FP48_16_Subtract(s48_16 *dst, s48_16 *a, s48_16 *b);
 
 #endif // GUARD_MATH_H

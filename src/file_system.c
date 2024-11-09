@@ -12,7 +12,7 @@ static EWRAM_DATA_2 u32 sFileCacheCursorPosition = {0};
 // ???
 extern s32 sprintf(char *, const char *, ...);
 
-UNUSED static void sub_800A894(UnkFileStruct *r0, s32 r1)
+UNUSED static void FP48_16_Log(UnkFileStruct *r0, s32 r1)
 {
     s32 temp;
 

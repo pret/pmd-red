@@ -92,7 +92,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
   normalOrFightingType = FALSE;
   pokemonInfo = GetEntInfo(pokemon);
   targetInfo = GetEntInfo(target);
-  sub_800A020(param_1, 1);
+  FP48_16_FromS32(param_1, 1);
   param_5->unkD = 0;
   param_5->unkE = 0;
   hasWonderGuard = FALSE;
@@ -138,7 +138,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
     }
     if ((type == TYPE_FIRE) && (GetFlashFireStatus(target) != FLASH_FIRE_STATUS_NONE)) {
       gDungeon->unk134.fill16E[0] = TRUE;
-      sub_800A020(param_1,0);
+      FP48_16_FromS32(param_1,0);
       param_5->effectiveness = EFFECTIVENESS_IMMUNE;
       param_5->unkD = 0;
       param_5->unkE = 1;
@@ -146,7 +146,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
     }
     if ((type == TYPE_GROUND) && (HasAbility(target, ABILITY_LEVITATE))) {
       gDungeon->unk134.fill16E[1] = TRUE;
-      sub_800A020(param_1,0);
+      FP48_16_FromS32(param_1,0);
       param_5->effectiveness = EFFECTIVENESS_IMMUNE;
       param_5->unkD = 0;
       param_5->unkE = 1;

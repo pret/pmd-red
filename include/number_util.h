@@ -1,12 +1,14 @@
 #ifndef GUARD_NUMBER_UTIL_H
 #define GUARD_NUMBER_UTIL_H
 
+// Fixed point with an integer part and fraction part in thousandths
 typedef struct FixedPoint
 {
     s16 unk0;
     s16 unk2;
 } FixedPoint;
 
+// Binary 48.16 fixed point
 typedef struct s48_16
 {
     s32 hi;

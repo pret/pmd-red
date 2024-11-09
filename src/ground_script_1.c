@@ -1062,7 +1062,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 scriptData->pos2.x = curCmd.arg1 << 8;
                 scriptData->pos2.y = curCmd.arg2 << 8;
                 if (curCmd.op == 0x7d || curCmd.op == 0x83) {
-                    scriptData->unk2A = sub_8009FB8(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
+                    scriptData->unk2A = FP24_8_Hypot(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
                     if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
                 } else {
                     scriptData->unk2A = curCmd.argShort;
@@ -1074,7 +1074,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 scriptData->pos2.x = scriptData->pos1.x + (curCmd.arg1 << 8);
                 scriptData->pos2.y = scriptData->pos1.y + (curCmd.arg2 << 8);
                 if (curCmd.op == 0x7e || curCmd.op == 0x84) {
-                    scriptData->unk2A = sub_8009FB8(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
+                    scriptData->unk2A = FP24_8_Hypot(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
                     if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
                 } else {
                     scriptData->unk2A = curCmd.argShort;
@@ -1097,7 +1097,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 scriptData->pos2.y = scriptData->pos1.y + ((OtherRandInt(curCmd.arg2 * 2 + 1) - curCmd.arg2) << 8);
 #endif
                 if (curCmd.op == 0x7f || curCmd.op == 0x85) {
-                    scriptData->unk2A = sub_8009FB8(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
+                    scriptData->unk2A = FP24_8_Hypot(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
                     if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
                 } else {
                     scriptData->unk2A = curCmd.argShort;
@@ -1109,7 +1109,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 scriptData->pos2 = scriptData->pos1;
                 GroundLink_GetPos((s16)curCmd.arg1, &scriptData->pos2);
                 if (curCmd.op == 0x80 || curCmd.op == 0x86) {
-                    scriptData->unk2A = sub_8009FB8(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
+                    scriptData->unk2A = FP24_8_Hypot(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
                     if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
                 } else {
                     scriptData->unk2A = curCmd.argShort;
@@ -1123,7 +1123,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 scriptData->pos2.x = scriptData->pos2.x + ((OtherRandInt(cap) - curCmd.argShort) << 8);
                 scriptData->pos2.y = scriptData->pos2.y + ((OtherRandInt(cap) - curCmd.argShort) << 8);
                 if (curCmd.op == 0x81 || curCmd.op == 0x87) {
-                    scriptData->unk2A = sub_8009FB8(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
+                    scriptData->unk2A = FP24_8_Hypot(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
                     if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
                 } else {
                     scriptData->unk2A = curCmd.argShort;
@@ -1136,7 +1136,7 @@ s32 ExecuteScriptCommand(Action *action) {
                     action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                     sub_80A8FD8(ret, &scriptData->pos2);
                     if (curCmd.op == 0x82 || curCmd.op == 0x88) {
-                        scriptData->unk2A = sub_8009FB8(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
+                        scriptData->unk2A = FP24_8_Hypot(scriptData->pos2.x - scriptData->pos1.x, scriptData->pos2.y - scriptData->pos1.y) / curCmd.argShort;
                         if (scriptData->unk2A <= 0) scriptData->unk2A = 1;
                     } else {
                         scriptData->unk2A = curCmd.argShort;

@@ -311,7 +311,7 @@ void sub_809D25C(void)
     case 3:
         r2 = (gUnknown_20399E8.unk1C.a0 - gUnknown_20399E8.unk14.a0) / 256;
         r1 = (gUnknown_20399E8.unk1C.a4 - gUnknown_20399E8.unk14.a4) / 256;
-        gUnknown_20399E8.unk10 = ((sub_8009FB8(r2 << 8, r1 << 8) / 256) << 8) / gUnknown_20399E8.unkC;
+        gUnknown_20399E8.unk10 = ((FP24_8_Hypot(r2 << 8, r1 << 8) / 256) << 8) / gUnknown_20399E8.unkC;
         if (gUnknown_20399E8.unk10 <= 0)
             gUnknown_20399E8.unk10 = 1;
         gUnknown_20399E8.unk8 = 2;

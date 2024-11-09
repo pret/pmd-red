@@ -289,7 +289,7 @@ static u24_8 u24_8_div(u24_8 x, u24_8 y)
     return r9;
 }
 
-UNUSED s32 sub_8009F68(s32 x, s32 y)
+UNUSED s32 FP24_8_Pow(s32 x, s32 y)
 {
     s32 uVar1;
     s32 sVar1;
@@ -313,7 +313,7 @@ UNUSED s32 sub_8009F68(s32 x, s32 y)
     return s24_8_div(0x100, sVar1);
 }
 
-s32 sub_8009FB8(s32 x, s32 y)
+s32 FP24_8_Hypot(s32 x, s32 y)
 {
     s32 r4;
     s32 i;
@@ -348,7 +348,7 @@ s32 sub_8009FB8(s32 x, s32 y)
     return r5;
 }
 
-void sub_800A020(s48_16 *param_1, u32 param_2)
+void FP48_16_FromS32(s48_16 *param_1, u32 param_2)
 {
 #ifndef NONMATCHING
     register u32 temp asm("r4");
@@ -365,7 +365,7 @@ void sub_800A020(s48_16 *param_1, u32 param_2)
 
 }
 
-u32 sub_800A048(s48_16 *a)
+u32 FP48_16_ToS32(s48_16 *a)
 {
     u32 uVar1;
 
@@ -376,7 +376,7 @@ u32 sub_800A048(s48_16 *a)
     return uVar1;
 }
 
-UNUSED u32 sub_800A068(u32 *a)
+UNUSED u32 FP48_16_ToF248(u32 *a)
 {
     u32 uVar1;
 
@@ -387,7 +387,7 @@ UNUSED u32 sub_800A068(u32 *a)
     return uVar1;
 }
 
-void sub_800A088(s48_16 *a, s32 b)
+void FP48_16_FromF248(s48_16 *a, s32 b)
 {
     a->lo = b << 8;
     a->hi = b >> 24;
@@ -556,7 +556,7 @@ static bool8 F48_16_IsNegative(s48_16 *a)
     return FALSE;
 }
 
-bool8 sub_800A2F0(s48_16 *a, s48_16 *b)
+bool8 FP48_16_SLessThan(s48_16 *a, s48_16 *b)
 {
     s32 r1;
     u32 a0;
@@ -824,7 +824,7 @@ static void F48_16_UDiv(s48_16 *dst, s48_16 *a, s48_16 *b)
     }
 }
 
-void sub_800A6D0(s48_16 *dst, s48_16 *a, s48_16 *b)
+void FP48_16_Add(s48_16 *dst, s48_16 *a, s48_16 *b)
 {
     s32 s0;
     u32 s4;
@@ -838,7 +838,7 @@ void sub_800A6D0(s48_16 *dst, s48_16 *a, s48_16 *b)
     dst->lo = s4;
 }
 
-void sub_800A6F0(s48_16 *dst, s48_16 *a, s48_16 *b)
+void FP48_16_Subtract(s48_16 *dst, s48_16 *a, s48_16 *b)
 {
     s32 s0;
     u32 s4;
@@ -852,7 +852,7 @@ void sub_800A6F0(s48_16 *dst, s48_16 *a, s48_16 *b)
     dst->lo = s4;
 }
 
-// Similar to sub_8009F68
+// Similar to FP24_8_Pow
 UNUSED void F48_16_Pow(s48_16 *dst, s48_16 *a, s32 b)
 {
     s48_16 aa;
@@ -886,8 +886,8 @@ UNUSED void F48_16_Pow(s48_16 *dst, s48_16 *a, s32 b)
     dst->lo = res.lo;
 }
 
-// Similar to sub_8009FB8
-UNUSED void sub_800A78C(s48_16 *dst, s48_16 *a, s48_16 *b)
+// Similar to FP24_8_Hypot
+UNUSED void FP48_16_Hypot(s48_16 *dst, s48_16 *a, s48_16 *b)
 {
     u32 temp;
     s32 i;
@@ -901,7 +901,7 @@ UNUSED void sub_800A78C(s48_16 *dst, s48_16 *a, s48_16 *b)
     F48_16_Abs(&sp0);
     F48_16_Abs(&sp8);
 
-    if (sub_800A2F0(&sp0, &sp8)) {
+    if (FP48_16_SLessThan(&sp0, &sp8)) {
         sp10 = sp0;
         sp0 = sp8;
         sp8 = sp10;
