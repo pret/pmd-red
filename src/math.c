@@ -6,8 +6,8 @@
 
 static void F48_16_UDiv(s48_16 *, s48_16 *, s48_16 *);
 static void F48_16_UMul(s48_16 *, s48_16 *, s48_16 *);
-static u24_8 u24_8_div(u24_8, u24_8);
-static u24_8 u24_8_mul(u24_8, u24_8);
+static s24_8 u24_8_div(s24_8, s24_8);
+static s24_8 u24_8_mul(s24_8, s24_8);
 
 /**
  * This function computes a value modulo 3, using a lookup table for values less
@@ -92,25 +92,25 @@ s24_8 s24_8_mul(s24_8 x, s24_8 y)
     bool8 sgn0;
     bool8 sgn1;
 
-    sgn0 = x < 0;
-    sgn1 = y < 0;
+    sgn0 = x.raw < 0;
+    sgn1 = y.raw < 0;
 
-    if (x == 0)
-        return 0;
+    if (x.raw == 0)
+        return (s24_8){0};
 
-    if (y == 0)
-        return 0;
+    if (y.raw == 0)
+        return (s24_8){0};
 
     if (sgn0)
-        x = -x;
+        x.raw = -x.raw;
 
     if (sgn1)
-        y = -y;
+        y.raw = -y.raw;
 
     ret = u24_8_mul(x, y);
 
     if (sgn0 != sgn1)
-        ret = -ret;
+        ret.raw = -ret.raw;
 
     return ret;
 }
@@ -129,25 +129,25 @@ static s24_8 s24_8_div(s24_8 x, s24_8 y)
     bool8 sgn0;
     bool8 sgn1;
 
-    sgn0 = x < 0;
-    sgn1 = y < 0;
+    sgn0 = x.raw < 0;
+    sgn1 = y.raw < 0;
 
-    if (y == 0)
-        return INT32_MAX;
+    if (y.raw == 0)
+        return (s24_8){INT32_MAX};
 
-    if (x == 0)
-        return 0;
+    if (x.raw == 0)
+        return (s24_8){0};
 
     if (sgn0)
-        x = -x;
+        x.raw = -x.raw;
 
     if (sgn1)
-        y = -y;
+        y.raw = -y.raw;
 
     ret = u24_8_div(x, y);
 
     if (sgn0 != sgn1)
-        ret = -ret;
+        ret.raw = -ret.raw;
 
     return ret;
 }
@@ -160,7 +160,7 @@ static s24_8 s24_8_div(s24_8 x, s24_8 y)
  *
  * @return        The product `x*y` as an unsigned 24.8 fixed-point number.
  */
-static u24_8 u24_8_mul(u24_8 x, u24_8 y)
+static s24_8 u24_8_mul(s24_8 x, s24_8 y)
 {
     // We need 64 bits for intermediate steps of the multiplication.
     u32 x_h, x_l;
@@ -171,13 +171,13 @@ static u24_8 u24_8_mul(u24_8 x, u24_8 y)
     u32 high_bit_mask;
     u32 round_up;
 
-    if (x == 0 || y == 0)
-        return 0;
+    if (x.raw == 0 || y.raw == 0)
+        return (s24_8){0};
 
     x_h = 0;
-    x_l = x;
+    x_l = x.raw;
     y_h = 0;
-    y_l = y;
+    y_l = y.raw;
     out_h = 0;
     out_l = 0;
     high_bit_mask = 0x80 << 24; // high bit of u32
@@ -215,7 +215,7 @@ static u24_8 u24_8_mul(u24_8 x, u24_8 y)
         ++out_l;
     }
 
-    return out_l;
+    return (s24_8){out_l};
 }
 
 /**
@@ -226,7 +226,7 @@ static u24_8 u24_8_mul(u24_8 x, u24_8 y)
  *
  * @return        The quotient `x/y` as an unsigned 24.8 fixed-point number.
  */
-static u24_8 u24_8_div(u24_8 x, u24_8 y)
+static s24_8 u24_8_div(s24_8 x, s24_8 y)
 {
     bool8 bVar1;
     u32 r9;
@@ -240,15 +240,15 @@ static u24_8 u24_8_div(u24_8 x, u24_8 y)
     s32 sl;
     s32 temp;
 
-    if (y == 0)
-        return INT32_MAX;
+    if (y.raw == 0)
+        return (s24_8){INT32_MAX};
 
-    if (x == 0)
-        return 0;
+    if (x.raw == 0)
+        return (s24_8){0};
 
-    r7 = x >> 24;
-    r6 = x << 8;
-    sl = y;
+    r7 = (u32)x.raw >> 24;
+    r6 = x.raw << 8;
+    sl = y.raw;
     r9 = 0;
     r5 = 0;
     r4 = 0;
@@ -286,19 +286,19 @@ static u24_8 u24_8_div(u24_8 x, u24_8 y)
             r9 |= r8;
     }
 
-    return r9;
+    return (s24_8){r9};
 }
 
-UNUSED s32 FP24_8_Pow(s32 x, s32 y)
+UNUSED s24_8 FP24_8_Pow(s24_8 x, s32 y)
 {
     s32 uVar1;
-    s32 sVar1;
+    s24_8 sVar1;
 
     uVar1 = y;
     if (uVar1 < 0)
         uVar1 = -uVar1;
 
-    sVar1 = 0x100;
+    sVar1 = IntToF248(1);
 
     for (; uVar1 != 0; uVar1 >>= 1) {
         if (uVar1 & 1)
@@ -310,37 +310,37 @@ UNUSED s32 FP24_8_Pow(s32 x, s32 y)
     if (y >= 0)
         return sVar1;
 
-    return s24_8_div(0x100, sVar1);
+    return s24_8_div(IntToF248(1), sVar1);
 }
 
-s32 FP24_8_Hypot(s32 x, s32 y)
+s24_8 FP24_8_Hypot(s24_8 x, s24_8 y)
 {
-    s32 r4;
+    s24_8 r4;
     s32 i;
-    s32 r5;
-    s32 r6;
+    s24_8 r5;
+    s24_8 r6;
 
     r5 = x;
     r6 = y;
 
-    if (r5 < 0)
-        r5 = -r5;
+    if (r5.raw < 0)
+        r5.raw = -r5.raw;
 
-    if (r6 < 0)
-        r6 = -r6;
+    if (r6.raw < 0)
+        r6.raw = -r6.raw;
 
-    if (r5 < r6) {
+    if (r5.raw < r6.raw) {
         r4 = r5;
         r5 = r6;
         r6 = r4;
     }
 
-    if (r6 != 0) {
+    if (r6.raw != 0) {
         for (i = 2; i >= 0; i--) {
             r4 = s24_8_div(r6, r5);
             r4 = s24_8_mul(r4, r4);
-            r4 = s24_8_div(r4, r4 + 0x400);
-            r5 += s24_8_mul(r5, r4) * 2;
+            r4 = s24_8_div(r4, F248_Add(r4, IntToF248(4)));
+            r5 = F248_Add(r5, F248_MulInt(s24_8_mul(r5, r4), 2));
             r6 = s24_8_mul(r6, r4);
         }
     }
@@ -376,21 +376,21 @@ u32 FP48_16_ToS32(s48_16 *a)
     return uVar1;
 }
 
-UNUSED u32 FP48_16_ToF248(u32 *a)
+UNUSED s24_8 FP48_16_ToF248(s48_16 *a)
 {
     u32 uVar1;
 
-    uVar1 = ((u8)a[0] << 24) | a[1] >> 8;
-    if (a[1] & 0x8000)
+    uVar1 = ((u8)a->hi << 24) | a->lo >> 8;
+    if (a->lo & 0x8000)
         uVar1++;
 
-    return uVar1;
+    return (s24_8){uVar1};
 }
 
-void FP48_16_FromF248(s48_16 *a, s32 b)
+void FP48_16_FromF248(s48_16 *a, s24_8 b)
 {
-    a->lo = b << 8;
-    a->hi = b >> 24;
+    a->lo = b.raw << 8;
+    a->hi = b.raw >> 24;
 
     if (a->hi & 0x80)
         a->hi |= ~0x7F;

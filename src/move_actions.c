@@ -361,7 +361,7 @@ bool32 sub_8057824(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
 bool32 sub_805783C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,0x80,TRUE);
+  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,FloatToF248(0.5),TRUE);
   return TRUE;
 }
 
@@ -551,7 +551,7 @@ bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, u32 param_4)
 
 bool8 sub_8057C68(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    ChangeDefenseMultiplierTarget(pokemon, target, gUnknown_8106A4C, 0x40, 1);
+    ChangeDefenseMultiplierTarget(pokemon, target, gUnknown_8106A4C, FloatToF248(0.25), 1);
     return TRUE;
 }
 
@@ -680,7 +680,7 @@ bool8 sub_8057ED0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     flag = TRUE;
     if(sub_805727C(pokemon, target, gUnknown_80F4E04))
     {
-        ChangeAttackMultiplierTarget(pokemon, target, gUnknown_8106A4C, 0x80, FALSE);
+        ChangeAttackMultiplierTarget(pokemon, target, gUnknown_8106A4C, FloatToF248(0.5), FALSE);
     }
   }
   return flag;
@@ -692,8 +692,8 @@ bool8 sub_8057F24(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
   entityInfo = GetEntInfo(pokemon);
   entityInfo->HP = 1;
-  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,0x40,TRUE);
-  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A50,0x40,TRUE);
+  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,FloatToF248(0.25),TRUE);
+  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A50,FloatToF248(0.25),TRUE);
   entityInfo->unk154 = 1;
   return TRUE;
 }

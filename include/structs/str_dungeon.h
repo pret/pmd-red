@@ -170,7 +170,7 @@ struct unkStruct_Dungeon134_sub
     u32 unk150;
     u32 unk154;
     u32 unk158;
-    u32 unk15C;
+    s24_8 unk15C;
     u8 unk160;
     u8 unk161;
     u8 unk162;

@@ -30,6 +30,7 @@
 #include "position_util.h"
 #include "exclusive_pokemon.h"
 #include "trap.h"
+#include "math.h"
 
 extern u32 gDungeonBrightness;
 
@@ -1013,11 +1014,11 @@ void ZapdosDropInEffect(Entity *zapdosEntity)
 
   GetEntInfo(zapdosEntity)->unk15C = 1;
   GetEntInfo(zapdosEntity)->unk15E = 0;
-  GetEntInfo(zapdosEntity)->unk174 = 200;
+  GetEntInfo(zapdosEntity)->unk174.raw = 200; // incorrect value? Overwritten immediately anyway
   PlaySoundEffect(0x1ea);
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    GetEntInfo(zapdosEntity)->unk174 = iVar1 * 256;
+    GetEntInfo(zapdosEntity)->unk174 = IntToF248_2(iVar1);
     sub_803E46C(0x46);
   }
   sub_803E708(0x1e,0x46);
@@ -1262,11 +1263,11 @@ void MoltresDropInEffect(Entity * moltresEntity)
 
   GetEntInfo(moltresEntity)->unk15C = 1;
   GetEntInfo(moltresEntity)->unk15E = 0;
-  GetEntInfo(moltresEntity)->unk174 = 0xc800;
+  GetEntInfo(moltresEntity)->unk174 = IntToF248_2(200);
   PlaySoundEffect(0x1f8);
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    GetEntInfo(moltresEntity)->unk174 = iVar1 * 256;
+    GetEntInfo(moltresEntity)->unk174 = IntToF248_2(iVar1);
     sub_803E46C(0x46);
   }
 }
@@ -1668,7 +1669,7 @@ void sub_8088484(Entity *param_1)
   PlaySoundEffect(0x1ea);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 5)
   {
-    GetEntInfo(param_1)->unk174 = iVar1 * 256;
+    GetEntInfo(param_1)->unk174 = IntToF248_2(iVar1);
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,0);
     sub_803E46C(0x46);
   }
@@ -2477,24 +2478,24 @@ void RayquazaPostStoryPreFightDialogue(void)
 
 void RayquazaDropInEffect(Entity *rayquazaEntity)
 {
-  s32 iVar1;
-  s32 iVar2;
+  s24_8 iVar1;
+  s24_8 iVar2;
 
   GetEntInfo(rayquazaEntity)->unk15E = 0;
-  iVar2 = 51200;
-  iVar1 = 0x600;
+  iVar2 = IntToF248_2(200);
+  iVar1 = IntToF248_2(6);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2 = iVar2 - iVar1;
-    iVar1 -= 0x18;
-    if (iVar1 < 0x14) {
-      iVar1 = 0x14;
+    iVar2.raw = iVar2.raw - iVar1.raw; // must be .raw
+    iVar1 = F248_Sub(iVar1, FloatToF248_2(3./32.));
+    if (F248LessThanFloat(iVar1, 0.08)) {
+      iVar1 = FloatToF248(0.08);
     }
-    if (iVar2 < 0) break;
+    if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(rayquazaEntity)->unk174 = iVar2;
     sub_803E46C(0x46);
   }
-  GetEntInfo(rayquazaEntity)->unk174 = 0;
+  GetEntInfo(rayquazaEntity)->unk174 = IntToF248_2(0);
 }
 
 void RayquazaScreenFlash(void)
@@ -2750,24 +2751,24 @@ void MewtwoReFightDialogue(void)
 
 void MewtwoDropInEffect(Entity *mewtwoEntity)
 {
-  s32 iVar1;
-  s32 iVar2;
+  s24_8 iVar1;
+  s24_8 iVar2;
 
   GetEntInfo(mewtwoEntity)->unk15E = 0;
-  iVar2 = 51200;
-  iVar1 = 0x400;
+  iVar2 = IntToF248_2(200);
+  iVar1 = IntToF248_2(4);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2 = iVar2 - iVar1;
-    iVar1 -= 11;
-    if (iVar1 < 0x1e) {
-      iVar1 = 0x1e;
+    iVar2.raw -= iVar1.raw;
+    iVar1 = F248_Sub(iVar1, FloatToF248_2(0.045));
+    if (F248LessThanFloat(iVar1, 0.12)) {
+      iVar1 = FloatToF248_2(0.12);
     }
-    if (iVar2 < 0) break;
+    if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(mewtwoEntity)->unk174 = iVar2;
     sub_803E46C(0x46);
   }
-  GetEntInfo(mewtwoEntity)->unk174 = 0;
+  GetEntInfo(mewtwoEntity)->unk174 = IntToF248_2(0);
 }
 
 void MewtwoScreenFlash(void)
@@ -3209,24 +3210,24 @@ void SuicunePostStoryPreFightDialogue(void)
 
 void sub_808A528(Entity * param_1)
 {
-  s32 iVar1;
-  s32 iVar2;
+  s24_8 iVar1;
+  s24_8 iVar2;
 
   GetEntInfo(param_1)->unk15E = 0;
-  iVar2 = 51200;
-  iVar1 = 3072;
+  iVar2 = IntToF248(200);
+  iVar1 = IntToF248(12);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2 = iVar2 - iVar1;
-    iVar1 -= 96;
-    if (iVar1 < 20) {
-      iVar1 = 20;
+    iVar2.raw -= iVar1.raw;
+    iVar1 = F248_Sub(iVar1, FloatToF248(0.375));
+    if (F248LessThanFloat(iVar1, 0.08)) {
+      iVar1 = FloatToF248_2(0.08);
     }
-    if (iVar2 < 0) break;
+    if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(param_1)->unk174 = iVar2;
     sub_803E46C(70);
   }
-  GetEntInfo(param_1)->unk174 = 0;
+  GetEntInfo(param_1)->unk174 = IntToF248_2(0);
 }
 
 void SuicuneScreenFlash(void)
@@ -3387,24 +3388,24 @@ void HoOhReFightDialogue(void)
 
 void HoOhDropInEffect(Entity * param_1)
 {
-  s32 iVar1;
-  s32 iVar2;
+  s24_8 iVar1;
+  s24_8 iVar2;
 
   GetEntInfo(param_1)->unk15E = 0;
-  iVar2 = 51200;
-  iVar1 = 3072;
+  iVar2 = IntToF248(200);
+  iVar1 = IntToF248(12);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2 = iVar2 - iVar1;
-    iVar1 -= 96;
-    if (iVar1 < 20) {
-      iVar1 = 20;
+    iVar2.raw -= iVar1.raw;
+    iVar1 = F248_Sub(iVar1, FloatToF248(0.375));
+    if (F248LessThanFloat(iVar1, 0.08)) {
+      iVar1 = FloatToF248_2(0.08);
     }
-    if (iVar2 < 0) break;
+    if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(param_1)->unk174 = iVar2;
     sub_803E46C(70);
   }
-  GetEntInfo(param_1)->unk174 = 0;
+  GetEntInfo(param_1)->unk174 = IntToF248_2(0);
 }
 
 void HoOhScreenFlash(void)
@@ -4244,25 +4245,25 @@ void sub_808BBA8(Entity *jirachiEntity)
 
 void JirachiDropInEffect(Entity *jirachiEntity)
 {
-  s32 iVar1;
-  s32 iVar2;
+  s24_8 iVar1;
+  s24_8 iVar2;
 
   sub_80861F8(0x1b,jirachiEntity,0);
   sub_8086A54(jirachiEntity);
   sub_80861B8(jirachiEntity,0xe,DIRECTION_SOUTH);
-  iVar1 = 0xa000;
-  iVar2 = 0x200;
+  iVar1 = IntToF248(160);
+  iVar2 = IntToF248(2);
   PlaySoundEffect(0x1f8);
-  while( 1 ) {
-    iVar1 = iVar1 - iVar2;
-    if (iVar1 < 0x1800) {
-      iVar2 = 0x100;
+  while (1) {
+    iVar1.raw = iVar1.raw - iVar2.raw; // FRAGILE! Subtraction and assignment below must use .raw
+    if (F248LessThanInt(iVar1, 24)) {
+      iVar2.raw = IntToF248_2(1).raw;
     }
-    if (iVar1 < 0) break;
+    if (F248LessThanInt(iVar1, 0)) break;
     GetEntInfo(jirachiEntity)->unk174 = iVar1;
     sub_803E46C(0x46);
   }
- GetEntInfo(jirachiEntity)->unk174 = 0;
+  GetEntInfo(jirachiEntity)->unk174 = IntToF248_2(0);
 }
 
 void JirachiSpinEffect(Entity * jirachiEntity)
@@ -4880,11 +4881,11 @@ void sub_808C8E0(Entity *entity)
   PlaySoundEffect(0x1a5);
   sub_806CDD4(entity, 0, DIRECTION_SOUTH);
   for(iVar1 = 0; iVar1 < 16; iVar1++){
-    GetEntInfo(entity)->unk174 = iVar1 * 256;
+    GetEntInfo(entity)->unk174 = IntToF248_2(iVar1);
     sub_803E46C(0x46);
   }
   for(iVar1 = 16; iVar1 < 200; iVar1 += 4){
-    GetEntInfo(entity)->unk174 = iVar1 * 256;
+    GetEntInfo(entity)->unk174 = IntToF248_2(iVar1);
     sub_803E46C(0x46);
   }
   sub_8086A3C(entity);

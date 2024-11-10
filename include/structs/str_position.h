@@ -11,7 +11,7 @@ typedef struct Position
 // size: 0x8
 typedef struct Position32
 {
-    /* 0x0 */ s32 x;
+    /* 0x0 */ s32 x; // TODO: convert to s24_8 across the codebase
     /* 0x4 */ s32 y;
 } Position32;
 

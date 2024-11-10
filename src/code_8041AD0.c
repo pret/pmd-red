@@ -1,4 +1,5 @@
 #include "global.h"
+#include "math.h"
 #include "code_800E9A8.h"
 #include "code_803E46C.h"
 #include "code_803E724.h"
@@ -223,10 +224,10 @@ void EntityUpdateStatusSprites(Entity *entity)
     if ((gDungeon->unk644.itemHoldersIdentified) && (entityInfo->heldItem.flags & ITEM_FLAG_EXISTS)) {
       spriteStatus = spriteStatus | STATUS_SPRITE_LOWHP;
     }
-    if ( (entityInfo->offensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->offensiveMultipliers[1] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->defensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->defensiveMultipliers[1] < DEFAULT_STAT_MULTIPLIER) ||
+    if ((F248LessThanInt(entityInfo->offensiveMultipliers[0], 1)) ||
+        (F248LessThanInt(entityInfo->offensiveMultipliers[1], 1)) ||
+        (F248LessThanInt(entityInfo->defensiveMultipliers[0], 1)) ||
+        (F248LessThanInt(entityInfo->defensiveMultipliers[1], 1)) ||
         (entityInfo->offensiveStages[0] < DEFAULT_STAT_STAGE) ||
         (entityInfo->offensiveStages[1] < DEFAULT_STAT_STAGE) ||
         (entityInfo->defensiveStages[0] < DEFAULT_STAT_STAGE) ||

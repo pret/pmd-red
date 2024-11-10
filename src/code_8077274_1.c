@@ -17,6 +17,7 @@
 #include "dungeon_util.h"
 #include "move_effects_target.h"
 #include "moves.h"
+#include "math.h"
 #include "pokemon.h"
 #include "pokemon_mid.h"
 #include "status_checks_1.h"
@@ -704,7 +705,7 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
       for (index = 0, iVar8 = 0xc7ff; index < 400; index++) {
         bVar2 = TRUE;
         if (entityInfo->unkFF == 1)
-            if(iVar7 = entityInfo->unk174, bVar2 = FALSE, iVar7 > iVar8) // unk174 -> u32 to s32
+            if(iVar7 = entityInfo->unk174.raw, bVar2 = FALSE, iVar7 > iVar8) // unk174 -> u32 to s32
             {
                 bVar2 = TRUE;
             }
@@ -1025,12 +1026,12 @@ void sub_8079E34(Entity * pokemon, Entity * target, bool8 param_3)
         entityInfo->hitChanceStages[index] = DEFAULT_STAT_STAGE;
         statChanged = TRUE;
       }
-      if (entityInfo->offensiveMultipliers[index] != DEFAULT_STAT_MULTIPLIER) {
-        entityInfo->offensiveMultipliers[index] = DEFAULT_STAT_MULTIPLIER;
+      if (!F248EqualsInt(entityInfo->offensiveMultipliers[index], 1)) {
+        entityInfo->offensiveMultipliers[index] = IntToF248(1);
         statChanged = TRUE;
       }
-      if (entityInfo->defensiveMultipliers[index] != DEFAULT_STAT_MULTIPLIER) {
-        entityInfo->defensiveMultipliers[index] = DEFAULT_STAT_MULTIPLIER;
+      if (!F248EqualsInt(entityInfo->defensiveMultipliers[index], 1)) {
+        entityInfo->defensiveMultipliers[index] = IntToF248(1);
         statChanged = TRUE;
       }
     }

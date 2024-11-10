@@ -23,6 +23,7 @@
 #include "text_util.h"
 #include "dungeon_util_1.h"
 #include "type_chart.h"
+#include "math.h"
 
 extern u8 gFormatBuffer_FriendArea[];
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
@@ -132,7 +133,7 @@ void sub_806F500(void)
     temp->unk140[6] = 0;
     temp->unk150 = 0;
     temp->unk158 = 0;
-    temp->unk15C = 0;
+    temp->unk15C = IntToF248(0);
     temp->unk160 = 0;
     temp->unk161 = 0;
     temp->unk162 = 0;
