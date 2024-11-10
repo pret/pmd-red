@@ -79,7 +79,6 @@ void sub_805E738(Entity *a0);
 void sub_803E708(s32 a0, s32 a1);
 void sub_8040A78(void);
 void sub_805E804(void);
-void sub_8049ED4(void);
 void sub_8064BE0(void);
 void sub_8075680(u32);
 void sub_8094C88(void);

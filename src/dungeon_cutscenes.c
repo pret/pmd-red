@@ -3,6 +3,7 @@
 #include "code_800E9A8.h"
 #include "code_803E46C.h"
 #include "code_803E668.h"
+#include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_8045A00.h"
 #include "code_80861A8.h"
@@ -377,7 +378,6 @@ extern void DeoxysScreenFlash(void);
 extern void sub_8085EB0(void);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
-extern void sub_8049ED4(void);
 extern void sub_8040A84(void);
 extern void sub_8086A54(Entity *);
 extern void sub_806BFC0(EntityInfo *, u32);
@@ -386,7 +386,6 @@ extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80421C0(Entity *, u32);
 extern void sub_80464C8(Entity *, Position *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, Position *, u32);

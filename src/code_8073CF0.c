@@ -529,7 +529,7 @@ void sub_8074094(Entity *entity)
     if (entityInfo->linked.linkedStatus == STATUS_LEECH_SEED) {
         if (entityInfo->linked.linkedStatusDamageCountdown == 0 || --entityInfo->linked.linkedStatusDamageCountdown == 0) {
             s32 hp = gUnknown_80F4FB4;
-            Entity *target = gDungeon->allPokemon[entityInfo->linked.unkD8];
+            Entity *target = gDungeon->allPokemon[entityInfo->linked.unk8];
 
             entityInfo->linked.linkedStatusDamageCountdown = gUnknown_80F4F40;
             if (target == NULL) {
@@ -537,7 +537,7 @@ void sub_8074094(Entity *entity)
             }
             else {
                 EntityInfo *targetInfo = GetEntInfo(target);
-                if (targetInfo->unk98 != entityInfo->linked.unkD4) {
+                if (targetInfo->unk98 != entityInfo->linked.unk4) {
                     entityInfo->linked.linkedStatus = 0;
                 }
                 else {

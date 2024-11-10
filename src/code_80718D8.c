@@ -4,6 +4,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
+#include "code_8041AD0.h"
 #include "code_8045A00.h"
 #include "code_8077274_1.h"
 #include "constants/dungeon.h"
@@ -50,7 +51,6 @@ extern u8 *gUnknown_80FF730[];
 extern u8 gUnknown_8107010[8];
 extern u8 *gUnknown_8107018[3];
 
-extern void sub_80421C0(Entity *pokemon, u16 r1);
 void sub_8083D58(void);
 void sub_8072778(Entity *, Entity *, u8, u8);
 bool8 sub_80725A4(Entity *, Entity *);

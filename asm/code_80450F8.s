@@ -87,7 +87,7 @@ _0804540C:
 	strh r2, [r0, 0x2]
 	movs r0, 0
 	mov r1, r8
-	bl sub_8069F54
+	bl GetMonsterApparentID
 	ldr r1, [r4, 0x70]
 	strh r0, [r1, 0x4]
 	ldr r0, [r4, 0x70]
@@ -95,7 +95,7 @@ _0804540C:
 	strb r5, [r0, 0x6]
 	movs r0, 0
 	mov r1, r8
-	bl sub_8069F54
+	bl GetMonsterApparentID
 	lsls r0, 16
 	asrs r0, 16
 	bl GetSpriteData
@@ -280,7 +280,7 @@ _0804557A:
 	strh r2, [r0, 0x2]
 	movs r0, 0
 	mov r1, r8
-	bl sub_8069F54
+	bl GetMonsterApparentID
 	ldr r1, [r4, 0x70]
 	strh r0, [r1, 0x4]
 	ldr r0, [r4, 0x70]
@@ -288,7 +288,7 @@ _0804557A:
 	strb r3, [r0, 0x6]
 	movs r0, 0
 	mov r1, r8
-	bl sub_8069F54
+	bl GetMonsterApparentID
 	lsls r0, 16
 	asrs r0, 16
 	bl GetSpriteData

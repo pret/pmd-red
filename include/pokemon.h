@@ -36,7 +36,7 @@ void LoadMonsterParameters(void);
 unkStruct_203B45C *GetRecruitedPokemon(void);
 void InitializeRecruitedPokemon(void);
 
-// These two need to be overridden in status_actions.c
+// This needs to be overridden in status_actions.c
 // Uncomment when fixed
 //u8 GetBodySize(s16 index);
 

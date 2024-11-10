@@ -64,7 +64,6 @@ extern u32 gUnknown_3001018[];
 
 extern void sub_8040A84();
 extern void sub_8083D44(void);
-extern void sub_8049ED4(void);
 extern void sub_8040A84(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);

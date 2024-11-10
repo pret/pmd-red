@@ -1,6 +1,6 @@
 #include "global.h"
+#include "code_8041AD0.h"
 #include "code_804267C.h"
-
 #include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"
@@ -24,7 +24,6 @@ extern void sub_8040238(void);
 extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
 extern void sub_804178C(u32);
 extern void sub_80416A4(Position *r0, u32 r1, bool8 r2);
-extern void sub_80421C0(Entity *pokemon, u16 r1);
 extern void sub_80429A0(Entity *);
 extern void sub_8042B34(u32, u32, u32);
 extern bool8 sub_8042CC0(void);

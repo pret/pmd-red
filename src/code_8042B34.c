@@ -35,6 +35,7 @@
 #include "constants/dungeon.h"
 #include "constants/monster.h"
 #include "constants/trap.h"
+#include "dungeon_serializer.h"
 
 extern void sub_800EE5C(s32);
 extern void sub_800EF64(void);
@@ -243,7 +244,7 @@ void sub_8042EC8(Entity *a0, s32 a1)
 }
 
 extern u8 gUnknown_203B40C;
-extern u16 gUnknown_203B410;
+extern Position gUnknown_203B410;
 extern u8 *gSerializedData_203B41C;
 
 struct Substruct_xxx_dungeon_8042F6C
@@ -332,13 +333,11 @@ extern void sub_80521D0(void);
 extern void sub_803F27C(u8);
 extern void sub_807E7FC(u8);
 extern void sub_80095CC(u32, u32);
-extern void ReadDungeonState(u8 *r0, u32 r1);
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern void sub_8068A84(PokemonStruct1 *pokemon);
 extern void sub_807EAA0(u32, u32);
 extern void sub_803D4D0(void);
 extern void sub_80842F0(void);
-extern void sub_8082B40(void);
 extern void sub_80427AC(void);
 extern void sub_806AA70(void);
 extern void sub_803D8F0(void);
@@ -357,7 +356,6 @@ extern void sub_8045CB0(void);
 extern void sub_807FA18(void);
 extern void sub_806A974(void);
 extern void sub_806CF60(void);
-extern void sub_8049ED4(void);
 extern void sub_8049884(void);
 extern void sub_8068F80(void);
 extern bool8 sub_8044B28(void);
@@ -371,7 +369,6 @@ extern void sub_803EAF0(u32, u32);
 extern void sub_806A914(u8 a0, u8 a1, u8 a2);
 extern void sub_803F4A0(Entity *a0);
 extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
-extern void WriteDungeonState(u8 *param_1,u32 param_2);
 extern void sub_8046F84(s32 itemFlag);
 extern bool8 sub_8083C50(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
@@ -400,7 +397,7 @@ extern const u8 *const gUnknown_80F89B4;
 extern const u8 *const gUnknown_80F89D4;
 extern const u8 *const gUnknown_80F89D8;
 
-extern const s16 gUnknown_80F6850[];
+extern const s16 gUnknown_80F6850[4];
 extern const s16 gDungeonMusic[];
 
 extern OpenedFile *gDungeonNameBannerPalette;
@@ -433,8 +430,8 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         dungeonPtr[i] = 0;
     }
 
-    gUnknown_203B410 = 0; // Needed to match
-    gUnknown_203B410 = 100;
+    gUnknown_203B410.x = 0; // Needed to match
+    gUnknown_203B410.x = 100;
 
     if (!r6) {
         gDungeon->unk644.unk34 = r8->unkF;
@@ -565,7 +562,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             rnd = DungeonRandInt(4);
             gDungeon->unk37FD = 0;
             gDungeon->deoxysDefeat = FALSE;
-            gDungeon->unk3800 = gUnknown_80F6850[rnd];
+            gDungeon->deoxysForm = gUnknown_80F6850[rnd];
             gDungeon->unk37FF = 0;
             gDungeon->unk644.unk31 = 0;
         }
@@ -824,7 +821,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         gUnknown_203B40C = 0;
 
         if (gDungeon->unk3 != 0) {
-            WriteDungeonState(gSerializedData_203B41C, 0x4800);
+            SaveDungeonState(gSerializedData_203B41C, 0x4800);
             r8->unk7C = 3;
             r8->unk80 = gDungeon->unk644.dungeonLocation;
             check = FALSE;
@@ -834,7 +831,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             s16 var;
 
             if (gDungeon->unk6 != 0) {
-                WriteDungeonState(gSerializedData_203B41C, 0x4800);
+                SaveDungeonState(gSerializedData_203B41C, 0x4800);
             }
             else {
                 sub_8046F84(ITEM_FLAG_IN_SHOP);

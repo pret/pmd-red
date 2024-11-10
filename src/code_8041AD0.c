@@ -37,7 +37,6 @@ extern void PlaySoundEffect(u32);
 extern u8 sub_803F428(Position *pos);
 extern void sub_8041550(Entity *pokemon, u32, u32, u32, u32, u32);
 
-void sub_80421C0(Entity *pokemon, u16 r1);
 void EntityUpdateStatusSprites(Entity *entity);
 
 extern s32 gDungeonBrightness;

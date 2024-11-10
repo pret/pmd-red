@@ -35,6 +35,7 @@
 #include "code_8041AD0.h"
 #include "type_chart.h"
 #include "dungeon_message.h"
+#include "dungeon_map_access.h"
 
 extern u8 gUnknown_202F221;
 
@@ -288,7 +289,6 @@ extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
 extern bool8 sub_8045888(Entity *r0);
-extern void sub_8049ED4(void);
 
 extern const s32 gUnknown_8106A4C;
 extern const s16 gUnknown_80F4E10;
@@ -473,11 +473,11 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
     if (r9) {
         EntityInfo *targetInfo = GetEntInfo(target);
         if (targetInfo->linked.linkedStatus == STATUS_DESTINY_BOND) {
-            Entity *destBondTarget = gDungeon->allPokemon[targetInfo->linked.unkD8];
+            Entity *destBondTarget = gDungeon->allPokemon[targetInfo->linked.unk8];
             if (destBondTarget == NULL) {
                 targetInfo->linked.linkedStatus = 0;
             }
-            else if (GetEntInfo(destBondTarget)->unk98 != targetInfo->linked.unkD4) {
+            else if (GetEntInfo(destBondTarget)->unk98 != targetInfo->linked.unk4) {
                 targetInfo->linked.linkedStatus = 0;
             }
             else {

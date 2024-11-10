@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_803E668.h"
+#include "code_8041AD0.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
@@ -85,7 +86,6 @@ extern u8 *gUnknown_80F9BD8[];
 
 #include "data/code_8048480.h"
 
-extern void sub_80421C0(Entity *r0, u16 r1);
 extern void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
 extern u8 sub_806A538(s32);
 extern void sub_8051E7C(Entity *pokemon);

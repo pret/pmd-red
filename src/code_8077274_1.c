@@ -22,6 +22,7 @@
 #include "status_checks_1.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
+#include "dungeon_map_access.h"
 
 extern u8 *gUnknown_80FA8BC[];
 extern u8 *gUnknown_80FA824[];
@@ -165,12 +166,11 @@ extern s16 gUnknown_80F4F1C[];
 extern u8 *gUnknown_80FBF68[];
 extern u8 *gUnknown_80FBF84[];
 
-extern void sub_8049ED4();
 extern void sub_8040A84();
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
 extern void sub_807EC28(bool8);
-extern s32 sub_8069F54(Entity *param_1, s16 param_2);
+extern s32 GetMonsterApparentID(Entity *param_1, s16 param_2);
 extern void sub_806A898(Entity *, u32, u32);
 extern void HealTargetHP(Entity *pokemon, Entity *r1, s16, s16, u32);
 extern void DealDamageToEntity(Entity *, s16, u32, u32);
@@ -260,7 +260,7 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
 
             for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
                 species = ExtractSpeciesIndex(&auStack544[DungeonRandInt(iVar5) * 2]);
-                apparentID_s16 = sub_8069F54(target, species);
+                apparentID_s16 = GetMonsterApparentID(target, species);
                 apparentID = apparentID_s16;
 
                 if (apparentID != entityInfo->apparentID && sub_806AA0C(apparentID, 1)) {
@@ -1427,7 +1427,7 @@ void SendLinkedEndMessage(Entity * pokemon, Entity * target)
             break;
     }
     entityInfo->linked.linkedStatus = STATUS_NONE;
-    entityInfo->linked.unkD8 = 0xff;
+    entityInfo->linked.unk8 = 0xff;
     EntityUpdateStatusSprites(target);
   }
 }
@@ -1486,7 +1486,7 @@ void SendTransformEndMessage(Entity * pokemon, Entity *target)
             TryDisplayDungeonLoggableMessage(target,*gUnknown_80FABBC);
             break;
         case STATUS_TRANSFORMED:
-            entityInfo->apparentID = sub_8069F54(target, entityInfo->id);
+            entityInfo->apparentID = GetMonsterApparentID(target, entityInfo->id);
             target->axObj.spriteFile = GetSpriteData(entityInfo->apparentID);
             uVar3 = sub_806CEBC(target);
             sub_806CCB4(target,uVar3);

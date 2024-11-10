@@ -2,6 +2,7 @@
 #include "dungeon_items.h"
 
 #include "code_803E668.h"
+#include "code_8041AD0.h"
 #include "code_8045A00.h"
 #include "code_80861A8.h"
 #include "code_80869E4.h"
@@ -20,7 +21,6 @@ extern u8 *gUnknown_81053A8[];
 extern u8 *gUnknown_8105434[];
 
 extern void sub_80416E0(Position32 *r0, u32, bool8);
-extern void sub_80421C0(Entity *, u32);
 extern void sub_80855E4(void *);
 extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);

@@ -37,6 +37,7 @@
 #include "code_8045A00.h"
 #include "code_803E668.h"
 #include "code_803E46C.h"
+#include "code_8041AD0.h"
 
 extern void sub_80429C8(Entity *r0);
 extern u8 sub_803F428(Position *);
@@ -74,7 +75,6 @@ extern void sub_8042930(Entity *r0);
 extern void sub_8041B48(Entity *pokemon);
 extern void sub_8041BA8(Entity *pokemon);
 extern void sub_8042950(Entity *r0);
-extern void sub_80421C0(Entity *pokemon, u16 r1);
 extern bool8 sub_8057634(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 YawnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 NightmareMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);

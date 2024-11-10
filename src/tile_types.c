@@ -88,7 +88,6 @@ extern void sub_80498A8(s32, s32);
 extern void sub_80402AC(s32, s32);
 extern void sub_8049BB0(s32, s32);
 void sub_8042A14(Position *);
-extern void sub_8049ED4(void);
 
 bool8 PosHasItem(Position *pos)
 {
