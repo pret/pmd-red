@@ -1023,6 +1023,10 @@ struct GridCell
 
 #define GRID_CELL_LEN 15
 
+void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 x2, s32 y2, s32 a4, UnkDungeonGlobal_unk1C574 *unkPtr);
+void sub_8050F90(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, s32 a5, s32 x2, s32 y2);
+void sub_8051438(struct GridCell *cell, s32 a1);
+extern void sub_8051288(s32 a0);
 void GetGridPositions(s32 *listX, s32 *listY, s32 gridSizeX, s32 gridSizeY);
 void InitDungeonGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
 void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
@@ -1615,15 +1619,12 @@ void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, UnkDungeonGlobal_un
     GenerateSecondaryStructures(grid, gridSizeX, gridSizeY);
 }
 
-void sub_804C790(s32 x1, s32 y1, s32 x2, s32 y2, s32 a4, UnkDungeonGlobal_unk1C574 *unkPtr);
-extern void sub_8051288(s32 a0);
-
 bool8 sub_804C70C(s32 a0, UnkDungeonGlobal_unk1C574 *unkPtr)
 {
     struct FileFixedmapPosStruct **fileData = (void *) gDungeon->unk13568->data;
     s32 x1 = fileData[a0]->x;
     s32 y1 = fileData[a0]->y;
-    s32 x2, y2;
+    s32 gridSizeX, gridSizeY;
 
     if (x1 == 0 || y1 == 0) {
         GenerateOneRoomMonsterHouseFloor();
@@ -1634,19 +1635,16 @@ bool8 sub_804C70C(s32 a0, UnkDungeonGlobal_unk1C574 *unkPtr)
         return TRUE;
     }
     else {
-        x2 = DUNGEON_MAX_SIZE_X / (x1 + 4);
-        if (x2 <= 1)
-            x2 = 1;
-        y2 = DUNGEON_MAX_SIZE_Y / (y1 + 4);
-        if (y2 <= 1)
-            y2 = 1;
-        sub_804C790(x2, y2, x1, y1, a0, unkPtr);
+        gridSizeX = DUNGEON_MAX_SIZE_X / (x1 + 4);
+        if (gridSizeX <= 1)
+            gridSizeX = 1;
+        gridSizeY = DUNGEON_MAX_SIZE_Y / (y1 + 4);
+        if (gridSizeY <= 1)
+            gridSizeY = 1;
+        sub_804C790(gridSizeX, gridSizeY, x1, y1, a0, unkPtr);
         return FALSE;
     }
 }
-
-void sub_8050F90(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 x1, s32 y1, s32 *a3, s32 *a4, s32 a5, s32 x2, s32 y2);
-void sub_8051438(struct GridCell *cell, s32 a1);
 
 void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 x2, s32 y2, s32 a4, UnkDungeonGlobal_unk1C574 *unkPtr)
 {
@@ -1684,7 +1682,7 @@ void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 x2, s32 y2, s32 a4, UnkDungeo
 
 /*
  * GenerateOneRoomMonsterHouseFloor - Generates a floor layout with just one large room which is a Monster House.
- * This generator is used as a fallback in the event generation fails too many times.
+ * This generator is used as a fallback if the event generation fails too many times.
  */
 void GenerateOneRoomMonsterHouseFloor(void)
 {
@@ -2338,4 +2336,249 @@ static void AssignRandomGridCellConnections(struct GridCell grid[GRID_CELL_LEN][
 
     AssignGridCellConnections(grid, gridSizeX, gridSizeY, cursorX, cursorY, unkPtr);
 }
+
+/*
+ * AssignGridCellConnections - Responsible for assigning connections to randomly adjacent grid cells
+ *
+ * Connections begin from the grid cell at (cursorX, cursorY), and are created using a
+ * random walk with momentum.
+ *
+ * There's a 50% chance it will continue in the same direction, otherwise it will be assigned a new random direction.
+ * If the direction traveled runs into the border of the map, the direction turns counterclockwise.
+ * If the direction walks towards an invalid grid tile, nothing happens and iteration continues.
+ *
+ * The random walk will be repeated floorConnectivity number of times (specified in FloorProperties)
+ *
+ * Once finished, if dead ends are disabled, an additional phase occurs to remove dead end hallway anchors (not rooms)
+ * The original implementation contains a bug when applying new connections to these rooms, where the incorrect
+ * grid cell index will be checked for validity (always the grid cell to the right), so some connections may go to
+ * invalid tiles or not be applied to valid ones.
+ *
+ */
+
+enum CardinalDirection
+{
+	CARDINAL_DIR_RIGHT,
+	CARDINAL_DIR_UP,
+	CARDINAL_DIR_LEFT,
+	CARDINAL_DIR_DOWN,
+	NUM_CARDINAL_DIRECTIONS
+};
+
+#define CARDINAL_DIRECTION_MASK 3
+
+void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 cursorX, s32 cursorY, UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+	s32 i;
+    s32 x = cursorX;
+    s32 y = cursorY;
+	s32 floorConnectivity = unkPtr->unk5;
+	// Draw a random connection direction.
+	// Connect the current cell with the cell to the:
+	//	0: east
+	// 	1: north
+	//	2: west
+	// 	3: south
+	s32 cardinalDirection = DungeonRandInt(NUM_CARDINAL_DIRECTIONS);
+
+	// Try to connect the current cell to another grid cell, repeat based on floorConnectivity
+	for (i = 0; i < floorConnectivity; i++) {
+		// Keep moving in the same cardinalDirection with probability 1/2 ("momentum" to connect in a straight line)
+		// Less forks and less doubling back
+		s32 test = DungeonRandInt(NUM_CARDINAL_DIRECTIONS * 2);
+		s32 newDirection = DungeonRandInt(NUM_CARDINAL_DIRECTIONS);
+
+		if (test < NUM_CARDINAL_DIRECTIONS) {
+			// Shuffle to a new cardinalDirection
+			cardinalDirection = newDirection;
+		}
+
+		// Make sure our cardinalDirection isn't going into a border
+		// If so, rotate counterclockwise
+		while (1) {
+            bool8 notOk = FALSE;
+			switch (cardinalDirection & CARDINAL_DIRECTION_MASK) {
+				case CARDINAL_DIR_RIGHT:
+					if (x < gridSizeX - 1)
+                        notOk = TRUE;
+                    else
+                        cardinalDirection++;
+					break;
+				case CARDINAL_DIR_UP:
+					if (y > 0)
+                        notOk = TRUE;
+                    else
+                        cardinalDirection++;
+					break;
+				case CARDINAL_DIR_LEFT:
+					if (x > 0)
+                        notOk = TRUE;
+                    else
+                        cardinalDirection++;
+					break;
+				case CARDINAL_DIR_DOWN:
+					if (y < gridSizeY - 1)
+                        notOk = TRUE;
+                    else
+                        cardinalDirection++;
+					break;
+			}
+
+			if (notOk)
+                break;
+		}
+
+		// Set the connection, then move in that cardinalDirection
+		switch (cardinalDirection & CARDINAL_DIRECTION_MASK) {
+		    case CARDINAL_DIR_RIGHT:
+		        if (!grid[x + 1][y].isInvalid) {
+                    grid[x][y].connectedToRight = TRUE;
+                    grid[x + 1][y].connectedToLeft = TRUE;
+
+                    x++;
+		        }
+                break;
+            case CARDINAL_DIR_UP:
+                if (!grid[x][y - 1].isInvalid) {
+                    grid[x][y].connectedToTop = TRUE;
+                    grid[x][y - 1].connectedToBottom = TRUE;
+
+                    y--;
+                }
+                break;
+            case CARDINAL_DIR_LEFT:
+                if (!grid[x - 1][y].isInvalid) {
+                    grid[x][y].connectedToLeft = TRUE;
+                    grid[x - 1][y].connectedToRight = TRUE;
+
+                    x--;
+                }
+                break;
+            case CARDINAL_DIR_DOWN:
+                if (!grid[x][y + 1].isInvalid) {
+                    grid[x][y].connectedToBottom = TRUE;
+                    grid[x][y + 1].connectedToTop = TRUE;
+
+                    y++;
+                }
+                break;
+		}
+	}
+
+	if (unkPtr->unkB)
+        return;
+
+    // No dead ends, add some extra connections!
+    while (1) {
+        bool8 more = FALSE;
+
+        // Locate potential dead ends
+        for (x = 0; x < gridSizeX; x++) {
+            for (y = 0; y < gridSizeY; y++) {
+                if (grid[x][y].isInvalid)
+                    continue;
+                if (!grid[x][y].isRoom)
+                {
+                    // Find which cardinalDirections this tile is connected in
+                    s32 countConnect = 0;
+
+                    if (grid[x][y].connectedToTop) countConnect++;
+                    if (grid[x][y].connectedToBottom) countConnect++;
+                    if (grid[x][y].connectedToLeft) countConnect++;
+                    if (grid[x][y].connectedToRight) countConnect++;
+
+                    if (countConnect == 1) {
+                        s32 i;
+                        bool8 ok;
+
+                        // This tile has only one connection, it's a dead end
+                        // Connect it to a random other cell to remove the dead end
+
+                        cardinalDirection = DungeonRandInt(NUM_CARDINAL_DIRECTIONS);
+
+                        for (i = 0, ok = FALSE; i < 8; i++) {
+                            switch (cardinalDirection & CARDINAL_DIRECTION_MASK) {
+                                case CARDINAL_DIR_RIGHT:
+                                    if (x < gridSizeX - 1 && !grid[x][y].connectedToRight)
+                                        ok = TRUE;
+                                    else
+                                        cardinalDirection++;
+                                    break;
+                                case CARDINAL_DIR_UP:
+                                    if (y > 0 && !grid[x][y].connectedToTop)
+                                        ok = TRUE;
+                                    else
+                                        cardinalDirection++;
+                                    break;
+                                case CARDINAL_DIR_LEFT:
+                                    if (x > 0 && !grid[x][y].connectedToLeft)
+                                        ok = TRUE;
+                                    else
+                                        cardinalDirection++;
+                                    break;
+                                case CARDINAL_DIR_DOWN:
+                                    if (y < gridSizeY - 1 && !grid[x][y].connectedToBottom)
+                                        ok = TRUE;
+                                    else
+                                        cardinalDirection++;
+                                    break;
+                            }
+
+                            // Once we find a successful cardinalDirection, stop
+                            if (ok)
+                                break;
+                        }
+
+                        // We couldn't find any successful cardinalDirection, give up.
+                        if (!ok)
+                            continue;
+
+                        // This section retains the original functionality
+                        switch (cardinalDirection & CARDINAL_DIRECTION_MASK) {
+                            case CARDINAL_DIR_RIGHT:
+                                if (!grid[x + 1][y].isInvalid) {
+                                    grid[x][y].connectedToRight = TRUE;
+                                    grid[x + 1][y].connectedToLeft = TRUE;
+
+                                    more = TRUE;
+                                }
+                                break;
+                            // BUG: the wrong grid index is used for the validity check
+                            case CARDINAL_DIR_UP:
+                                if (!grid[x + 1][y].isInvalid) {
+                                    grid[x][y].connectedToTop = TRUE;
+                                    grid[x][y - 1].connectedToBottom = TRUE;
+
+                                    more = TRUE;
+                                }
+                                break;
+                            // BUG: the wrong grid index is used for the validity check
+                            case CARDINAL_DIR_LEFT:
+                                if (!grid[x + 1][y].isInvalid) {
+                                    grid[x][y].connectedToLeft = TRUE;
+                                    grid[x - 1][y].connectedToRight = TRUE;
+
+                                    more = TRUE;
+                                }
+                                break;
+                            // BUG: the wrong grid index is used for the validity check
+                            case CARDINAL_DIR_DOWN:
+                                if (!grid[x + 1][y].isInvalid) {
+                                    grid[x][y].connectedToBottom = TRUE;
+                                    grid[x][y + 1].connectedToTop = TRUE;
+
+                                    more = TRUE;
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!more)
+            break;
+    }
+}
+
 //
