@@ -558,7 +558,7 @@ ALIGNED(4) const u8 gUnknown_80E8A7C[] = _(
     "Send your thanks to your friend!");
 
 ALIGNED(4) const u8 gUnknown_80E8AC8[] = _("Client:");
-ALIGNED(4) const u8 gUnknown_80E8AD0[] = _("%s{COLOR GREEN}{UNK_ICON_81_69}%s{UNK_ICON_81_6A}{RESET}");
+ALIGNED(4) const u8 gUnknown_80E8AD0[] = _("%s{COLOR GREEN}（%s）{RESET}");
 ALIGNED(4) const u8 gUnknown_80E8AE0[] = _("Objective:");
 ALIGNED(4) const u8 gUnknown_80E8AEC[] = _("Friend Rescue");
 ALIGNED(4) const u8 gUnknown_80E8AFC[] = _("Deliver {COLOR GREEN}%s{RESET}.");

@@ -1,427 +1,163 @@
-// TODO: Find a way to #define the text and insert them in arrays without declarations
-
-static const u8 sUnknown_80E8BB0[];
-static const u8 sUnknown_80E8BB4[];
-static const u8 sUnknown_80E8BB8[];
-static const u8 sUnknown_80E8BBC[];
-static const u8 sUnknown_80E8BC0[];
-static const u8 sUnknown_80E8BC4[];
-static const u8 sUnknown_80E8BC8[];
-
 static const u8 * const sUnknown_80E8B94[7] = {
-    sUnknown_80E8BC8,
-    sUnknown_80E8BC4,
-    sUnknown_80E8BC0,
-    sUnknown_80E8BBC,
-    sUnknown_80E8BB8,
-    sUnknown_80E8BB4,
-    sUnknown_80E8BB0
+    _("　"),
+    _("{ENVELOPE_CLOSED}"),
+    _("{ICON_BLANK}"),
+    _("{ENVELOPE_OPEN}"),
+    _("{THANK_YOU_MAIL}"),
+    _("{ICON_GO}"),
+    _("{ICON_NEWS}"),
 };
-
-ALIGNED(4) static const u8 sUnknown_80E8BB0[] = _("{UNK_ICON_83_C3}");
-ALIGNED(4) static const u8 sUnknown_80E8BB4[] = _("{UNK_ICON_83_C2}");
-ALIGNED(4) static const u8 sUnknown_80E8BB8[] = _("{UNK_ICON_83_C1}");
-ALIGNED(4) static const u8 sUnknown_80E8BBC[] = _("{UNK_ICON_83_C0}");
-ALIGNED(4) static const u8 sUnknown_80E8BC0[] = _("{UNK_ICON_40}");
-ALIGNED(4) static const u8 sUnknown_80E8BC4[] = _("{UNK_ICON_84_87}");
-ALIGNED(4) static const u8 sUnknown_80E8BC8[] = _("　");
 
 static const u8 * const sUnknown_80E8BCC[4] = {
-    sUnknown_80E8BC8,
-    "Suspend",
-    "Take Job",
-    "Done"
+    _("　"),
+    _("Suspend"),
+    _("Take Job"),
+    _("Done"),
 };
-
-static const u8 sUnknown_80E8C14[];
-static const u8 sUnknown_80E8C18[];
-static const u8 sUnknown_80E8C20[];
-static const u8 sUnknown_80E8C28[];
-static const u8 sUnknown_80E8C30[];
-static const u8 sUnknown_80E8C38[];
-static const u8 sUnknown_80E8C40[];
 
 // Used in sub_803C1F0 for some reason
 const u8 * const gUnknown_80E8BF8[7] = {
-    sUnknown_80E8C40,
-    sUnknown_80E8C38,
-    sUnknown_80E8C30,
-    sUnknown_80E8C28,
-    sUnknown_80E8C20,
-    sUnknown_80E8C18,
-    sUnknown_80E8C14
+    _("{COLOR DEFAULT}E{RESET}"),
+    _("{COLOR GREEN}D{RESET}"),
+    _("{COLOR GREEN}C{RESET}"),
+    _("{COLOR CYAN}B{RESET}"),
+    _("{COLOR CYAN}A{RESET}"),
+    _("{COLOR RED}S{RESET}"),
+    _("{STAR_BULLET}"),
 };
-
-ALIGNED(4) static const u8 sUnknown_80E8C14[] = _("{STAR_BULLET}");
-ALIGNED(4) static const u8 sUnknown_80E8C18[] = _("{COLOR RED}S{RESET}");
-ALIGNED(4) static const u8 sUnknown_80E8C20[] = _("{COLOR CYAN}A{RESET}");
-ALIGNED(4) static const u8 sUnknown_80E8C28[] = _("{COLOR CYAN}B{RESET}");
-ALIGNED(4) static const u8 sUnknown_80E8C30[] = _("{COLOR GREEN}C{RESET}");
-ALIGNED(4) static const u8 sUnknown_80E8C38[] = _("{COLOR GREEN}D{RESET}");
-ALIGNED(4) static const u8 sUnknown_80E8C40[] = _("{COLOR DEFAULT}E{RESET}");
-
-static const u8 sUnknown_80E8C60[];
-static const u8 sUnknown_80E8C64[];
-static const u8 sUnknown_80E8C70[];
-static const u8 sUnknown_80E8C7C[];
-static const u8 sUnknown_80E8C84[];
-static const u8 sUnknown_80E8C90[];
 
 static const u8 * const gMissionRewardText[6] = {
-    sUnknown_80E8C90,
-    sUnknown_80E8C84,
-    sUnknown_80E8C7C,
-    sUnknown_80E8C70,
-    sUnknown_80E8C64,
-    sUnknown_80E8C60
+    _("%d {POKE}"),
+    _("%d {POKE} + ?"),
+    _("{COLOR GREEN}%s{RESET}"),
+    _("{COLOR GREEN}%s{RESET} + ?"),
+    _("Friend Area"),
+    _("???"),
 };
-
-ALIGNED(4) static const u8 sUnknown_80E8C60[] = _("???");
-ALIGNED(4) static const u8 sUnknown_80E8C64[] = _("Friend Area");
-ALIGNED(4) static const u8 sUnknown_80E8C70[] = _("{COLOR GREEN}%s{RESET} + ?");
-ALIGNED(4) static const u8 sUnknown_80E8C7C[] = _("{COLOR GREEN}%s{RESET}");
-ALIGNED(4) static const u8 sUnknown_80E8C84[] = _("%d {POKE} + ?");
-ALIGNED(4) static const u8 sUnknown_80E8C90[] = _("%d {POKE}");
-
-static const u8 sUnknown_80E8CD4[];
-static const u8 sUnknown_80E8CE0[];
-static const u8 sUnknown_80E8CF4[];
-static const u8 sUnknown_80E8D0C[];
-static const u8 sUnknown_80E8D18[];
-static const u8 sUnknown_80E8D28[];
-static const u8 sUnknown_80E8D44[];
-static const u8 sUnknown_80E8D5C[];
-static const u8 sUnknown_80E8D6C[];
-static const u8 sUnknown_80E8D7C[];
-static const u8 sUnknown_80E8D88[];
-static const u8 sUnknown_80E8DA4[];
-static const u8 sUnknown_80E8DB4[];
-static const u8 sUnknown_80E8DC8[];
-static const u8 sUnknown_80E8DDC[];
 
 static const u8 * const gUnknown_80E8C98[15] = {
-    sUnknown_80E8DDC,
-    sUnknown_80E8DC8,
-    sUnknown_80E8DB4,
-    sUnknown_80E8DA4,
-    sUnknown_80E8D88,
-    sUnknown_80E8D7C,
-    sUnknown_80E8D6C,
-    sUnknown_80E8D5C,
-    sUnknown_80E8D44,
-    sUnknown_80E8D28,
-    sUnknown_80E8D18,
-    sUnknown_80E8D0C,
-    sUnknown_80E8CF4,
-    sUnknown_80E8CE0,
-    sUnknown_80E8CD4
+    _("Help!"),
+    _("I can't get out!"),
+    _("I'm in trouble..."),
+    _("I'm scared!"),
+    _("I can't seem to get out."),
+    _("I'm lost."),
+    _("I was attacked!"),
+    _("I fainted..."),
+    _("I'm not a fighter..."),
+    _("I'm too tired to move."),
+    _("I was KO'd..."),
+    _("Where am I?"),
+    _("I'm sad and lonely."),
+    _("I can't get home!"),
+    _("Help me!"),
 };
-
-ALIGNED(4) static const u8 sUnknown_80E8CD4[] = _("Help me!");
-ALIGNED(4) static const u8 sUnknown_80E8CE0[] = _("I can't get home!");
-ALIGNED(4) static const u8 sUnknown_80E8CF4[] = _("I'm sad and lonely.");
-ALIGNED(4) static const u8 sUnknown_80E8D0C[] = _("Where am I?");
-ALIGNED(4) static const u8 sUnknown_80E8D18[] = _("I was KO'd...");
-ALIGNED(4) static const u8 sUnknown_80E8D28[] = _("I'm too tired to move.");
-ALIGNED(4) static const u8 sUnknown_80E8D44[] = _("I'm not a fighter...");
-ALIGNED(4) static const u8 sUnknown_80E8D5C[] = _("I fainted...");
-ALIGNED(4) static const u8 sUnknown_80E8D6C[] = _("I was attacked!");
-ALIGNED(4) static const u8 sUnknown_80E8D7C[] = _("I'm lost.");
-ALIGNED(4) static const u8 sUnknown_80E8D88[] = _("I can't seem to get out.");
-ALIGNED(4) static const u8 sUnknown_80E8DA4[] = _("I'm scared!");
-ALIGNED(4) static const u8 sUnknown_80E8DB4[] = _("I'm in trouble...");
-ALIGNED(4) static const u8 sUnknown_80E8DC8[] = _("I can't get out!");
-ALIGNED(4) static const u8 sUnknown_80E8DDC[] = _("Help!");
-
-static const u8 sUnknown_80E8E18[];
-static const u8 sUnknown_80E8E2C[];
-static const u8 sUnknown_80E8E4C[];
-static const u8 sUnknown_80E8E6C[];
-static const u8 sUnknown_80E8E80[];
-static const u8 sUnknown_80E8E98[];
-static const u8 sUnknown_80E8EB4[];
-static const u8 sUnknown_80E8ED0[];
-static const u8 sUnknown_80E8EF8[];
-static const u8 sUnknown_80E8F10[];
-static const u8 sUnknown_80E8F2C[];
-static const u8 sUnknown_80E8F50[];
-static const u8 sUnknown_80E8F7C[];
 
 static const u8 * const gUnknown_80E8DE4[13] = {
-    sUnknown_80E8F7C,
-    sUnknown_80E8F50,
-    sUnknown_80E8F2C,
-    sUnknown_80E8F10,
-    sUnknown_80E8EF8,
-    sUnknown_80E8ED0,
-    sUnknown_80E8EB4,
-    sUnknown_80E8E98,
-    sUnknown_80E8E80,
-    sUnknown_80E8E6C,
-    sUnknown_80E8E4C,
-    sUnknown_80E8E2C,
-    sUnknown_80E8E18
+    _("I don't know how I did it, but I can't exit!"),
+    _("I was attacked when I was sitting still!"),
+    _("I'm simply no good at fighting."),
+    _("I got lost in this dungeon!"),
+    _("This dungeon is scary!"),
+    _("Fighting the tough foe was a mistake..."),
+    _("I've reached my limit..."),
+    _("I'm close to fainting..."),
+    _("I lost in a battle..."),
+    _("I was done in..."),
+    _("Whoa! It's too rough here..."),
+    _("I can't move another step."),
+    _("I'm famished..."),
 };
-
-ALIGNED(4) static const u8 sUnknown_80E8E18[] = _("I'm famished...");
-ALIGNED(4) static const u8 sUnknown_80E8E2C[] = _("I can't move another step.");
-ALIGNED(4) static const u8 sUnknown_80E8E4C[] = _("Whoa! It's too rough here...");
-ALIGNED(4) static const u8 sUnknown_80E8E6C[] = _("I was done in...");
-ALIGNED(4) static const u8 sUnknown_80E8E80[] = _("I lost in a battle...");
-ALIGNED(4) static const u8 sUnknown_80E8E98[] = _("I'm close to fainting...");
-ALIGNED(4) static const u8 sUnknown_80E8EB4[] = _("I've reached my limit...");
-ALIGNED(4) static const u8 sUnknown_80E8ED0[] = _("Fighting the tough foe was a mistake...");
-ALIGNED(4) static const u8 sUnknown_80E8EF8[] = _("This dungeon is scary!");
-ALIGNED(4) static const u8 sUnknown_80E8F10[] = _("I got lost in this dungeon!");
-ALIGNED(4) static const u8 sUnknown_80E8F2C[] = _("I'm simply no good at fighting.");
-ALIGNED(4) static const u8 sUnknown_80E8F50[] = _("I was attacked when I was sitting still!");
-ALIGNED(4) static const u8 sUnknown_80E8F7C[] = _("I don't know how I did it, but I can't exit!");
-
-static const u8 sUnknown_80E8FE4[];
-static const u8 sUnknown_80E8FF4[];
-static const u8 sUnknown_80E900C[];
-static const u8 sUnknown_80E9024[];
-static const u8 sUnknown_80E903C[];
-static const u8 sUnknown_80E9064[];
-static const u8 sUnknown_80E907C[];
-static const u8 sUnknown_80E9090[];
-static const u8 sUnknown_80E90B4[];
-static const u8 sUnknown_80E90D4[];
-static const u8 sUnknown_80E90E8[];
-static const u8 sUnknown_80E90F4[];
 
 static const u8 * const gUnknown_80E8FB0[13] = {
-    sUnknown_80E90F4,
-    sUnknown_80E90E8,
-    sUnknown_80E90D4,
-    sUnknown_80E90B4,
-    sUnknown_80E9090,
-    sUnknown_80E907C,
-    sUnknown_80E9064,
-    sUnknown_80E903C,
-    sUnknown_80E9024,
-    sUnknown_80E900C,
-    sUnknown_80E8DDC,
-    sUnknown_80E8FF4,
-    sUnknown_80E8FE4
+    _("Please, I need help!"),
+    _("Someone!"),
+    _("Someone, help!"),
+    _("I feel faint... Please help..."),
+    _("Why? Why is everyone attacking me?"),
+    _("Where am I? Help!"),
+    _("Wroooooaaar! Someone!"),
+    _("My consciousness is slipping... Help..."),
+    _("Rescue is requested!"),
+    _("Someone, please help!"),
+    _("Help!"),
+    _("...Gasp! Waaaaaaaah!"),
+    _("Aiyeeeeeeeeh!"),
 };
-
-ALIGNED(4) static const u8 sUnknown_80E8FE4[] = _("Aiyeeeeeeeeh!");
-ALIGNED(4) static const u8 sUnknown_80E8FF4[] = _("...Gasp! Waaaaaaaah!");
-ALIGNED(4) static const u8 sUnknown_80E900C[] = _("Someone, please help!");
-ALIGNED(4) static const u8 sUnknown_80E9024[] = _("Rescue is requested!");
-ALIGNED(4) static const u8 sUnknown_80E903C[] = _("My consciousness is slipping... Help...");
-ALIGNED(4) static const u8 sUnknown_80E9064[] = _("Wroooooaaar! Someone!");
-ALIGNED(4) static const u8 sUnknown_80E907C[] = _("Where am I? Help!");
-ALIGNED(4) static const u8 sUnknown_80E9090[] = _("Why? Why is everyone attacking me?");
-ALIGNED(4) static const u8 sUnknown_80E90B4[] = _("I feel faint... Please help...");
-ALIGNED(4) static const u8 sUnknown_80E90D4[] = _("Someone, help!");
-ALIGNED(4) static const u8 sUnknown_80E90E8[] = _("Someone!");
-ALIGNED(4) static const u8 sUnknown_80E90F4[] = _("Please, I need help!");
-
-static const u8 sUnknown_80E9134[];
-static const u8 sUnknown_80E9144[];
-static const u8 sUnknown_80E914C[];
-static const u8 sUnknown_80E9160[];
-static const u8 sUnknown_80E9170[];
-static const u8 sUnknown_80E917C[];
-static const u8 sUnknown_80E9190[];
-static const u8 sUnknown_80E91A8[];
-static const u8 sUnknown_80E91BC[];
 
 static const u8 * const gUnknown_80E910C[10] = {
-    sUnknown_80E91BC,
-    sUnknown_80E91A8,
-    sUnknown_80E9190,
-    sUnknown_80E917C,
-    sUnknown_80E8DDC,
-    sUnknown_80E9170,
-    sUnknown_80E9160,
-    sUnknown_80E914C,
-    sUnknown_80E9144,
-    sUnknown_80E9134
+    _("Please help {COLOR YELLOW}%s{RESET}!"),
+    _("{COLOR YELLOW}%s{RESET} needs help!"),
+    _("Hurry, save {COLOR YELLOW}%s{RESET}!"),
+    _("Failed to return."),
+    _("Help!"),
+    _("Somebody!"),
+    _("I'm worried."),
+    _("Hasn't come back."),
+    _("Hurry!"),
+    _("Disappearance!"),
 };
-
-ALIGNED(4) static const u8 sUnknown_80E9134[] = _("Disappearance!");
-ALIGNED(4) static const u8 sUnknown_80E9144[] = _("Hurry!");
-ALIGNED(4) static const u8 sUnknown_80E914C[] = _("Hasn't come back.");
-ALIGNED(4) static const u8 sUnknown_80E9160[] = _("I'm worried.");
-ALIGNED(4) static const u8 sUnknown_80E9170[] = _("Somebody!");
-ALIGNED(4) static const u8 sUnknown_80E917C[] = _("Failed to return.");
-ALIGNED(4) static const u8 sUnknown_80E9190[] = _("Hurry, save {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 sUnknown_80E91A8[] = _("{COLOR YELLOW}%s{RESET} needs help!");
-ALIGNED(4) static const u8 sUnknown_80E91BC[] = _("Please help {COLOR YELLOW}%s{RESET}!");
-
-static const u8 sUnknown_80E9288[];
-static const u8 sUnknown_80E92A4[];
-static const u8 sUnknown_80E92C4[];
-static const u8 sUnknown_80E92E0[];
-static const u8 sUnknown_80E9300[];
-static const u8 sUnknown_80E9328[];
-static const u8 sUnknown_80E9344[];
-static const u8 sUnknown_80E9358[];
-static const u8 sUnknown_80E9378[];
-static const u8 sUnknown_80E9394[];
-static const u8 sUnknown_80E93B8[];
-static const u8 sUnknown_80E93E0[];
-static const u8 sUnknown_80E9400[];
-static const u8 sUnknown_80E9420[];
-static const u8 sUnknown_80E9440[];
-static const u8 sUnknown_80E9460[];
-static const u8 sUnknown_80E9480[];
-static const u8 sUnknown_80E94A0[];
-static const u8 sUnknown_80E94C0[];
-static const u8 sUnknown_80E94E0[];
-static const u8 sUnknown_80E94FC[];
-static const u8 sUnknown_80E951C[];
-static const u8 sUnknown_80E9538[];
-static const u8 sUnknown_80E955C[];
-static const u8 sUnknown_80E9588[];
-static const u8 sUnknown_80E95AC[];
-static const u8 sUnknown_80E95C8[];
-static const u8 sUnknown_80E95EC[];
-static const u8 sUnknown_80E9608[];
-static const u8 sUnknown_80E9628[];
-static const u8 sUnknown_80E9650[];
-static const u8 sUnknown_80E9668[];
-static const u8 sUnknown_80E9688[];
-static const u8 sUnknown_80E96A8[];
-static const u8 sUnknown_80E96C4[];
-static const u8 sUnknown_80E96E4[];
-static const u8 sUnknown_80E9708[];
-static const u8 sUnknown_80E9728[];
-static const u8 sUnknown_80E9748[];
-static const u8 sUnknown_80E976C[];
-static const u8 sUnknown_80E9788[];
-static const u8 sUnknown_80E97A0[];
-static const u8 sUnknown_80E97C4[];
-static const u8 sUnknown_80E97E0[];
-static const u8 sUnknown_80E97FC[];
 
 static const u8 * const gUnknown_80E91D4[45] = {
-    sUnknown_80E97FC,
-    sUnknown_80E97E0,
-    sUnknown_80E97C4,
-    sUnknown_80E97A0,
-    sUnknown_80E9788,
-    sUnknown_80E976C,
-    sUnknown_80E9748,
-    sUnknown_80E9728,
-    sUnknown_80E9708,
-    sUnknown_80E96E4,
-    sUnknown_80E96C4,
-    sUnknown_80E96A8,
-    sUnknown_80E9688,
-    sUnknown_80E9668,
-    sUnknown_80E9650,
-    sUnknown_80E9628,
-    sUnknown_80E9608,
-    sUnknown_80E95EC,
-    sUnknown_80E95C8,
-    sUnknown_80E95AC,
-    sUnknown_80E9588,
-    sUnknown_80E955C,
-    sUnknown_80E9538,
-    sUnknown_80E951C,
-    sUnknown_80E94FC,
-    sUnknown_80E94E0,
-    sUnknown_80E94C0,
-    sUnknown_80E94A0,
-    sUnknown_80E9480,
-    sUnknown_80E9460,
-    sUnknown_80E9440,
-    sUnknown_80E9420,
-    sUnknown_80E9400,
-    sUnknown_80E93E0,
-    sUnknown_80E93B8,
-    sUnknown_80E9394,
-    sUnknown_80E9378,
-    sUnknown_80E9358,
-    sUnknown_80E9344,
-    sUnknown_80E9328,
-    sUnknown_80E9300,
-    sUnknown_80E92E0,
-    sUnknown_80E92C4,
-    sUnknown_80E92A4,
-    sUnknown_80E9288
+    _("{COLOR YELLOW}%s{RESET} passed out from the heat!"),
+    _("{COLOR YELLOW}%s{RESET} may be endangered!"),
+    _("{COLOR YELLOW}%s{RESET} is still missing."),
+    _("{COLOR YELLOW}%s{RESET} hasn't been heard from!"),
+    _("{COLOR YELLOW}%s{RESET} can't swim!"),
+    _("{COLOR YELLOW}%s{RESET} hasn't come back!"),
+    _("{COLOR YELLOW}%s{RESET} might be unable to return."),
+    _("{COLOR YELLOW}%s{RESET} may be facing danger!"),
+    _("{COLOR YELLOW}%s{RESET} appears to be injured!"),
+    _("{COLOR YELLOW}%s{RESET} went missing this morning!"),
+    _("{COLOR YELLOW}%s{RESET} is too scared to move!"),
+    _("{COLOR YELLOW}%s{RESET} may be confused!"),
+    _("{COLOR YELLOW}%s{RESET} appears to be freezing!"),
+    _("Trouble may have found {COLOR YELLOW}%s{RESET}!"),
+    _("{COLOR YELLOW}%s{RESET} was paralyzed!"),
+    _("{COLOR YELLOW}%s{RESET}'s whereabouts are unknown!"),
+    _("I'm worried about {COLOR YELLOW}%s{RESET}!"),
+    _("{COLOR YELLOW}%s{RESET} has been cornered!"),
+    _("{COLOR YELLOW}%s{RESET}'s been gone a long time!"),
+    _("{COLOR YELLOW}%s{RESET} is about to faint!"),
+    _("{COLOR YELLOW}%s{RESET} may have fainted already!"),
+    _("It appears as if {COLOR YELLOW}%s{RESET} can't escape!"),
+    _("{COLOR YELLOW}%s{RESET} was attacked by assailants!"),
+    _("{COLOR YELLOW}%s{RESET} hasn't reemerged!"),
+    _("{COLOR YELLOW}%s{RESET} appears to be helpless!"),
+    _("{COLOR YELLOW}%s{RESET} is stuck in a cave!"),
+    _("{COLOR YELLOW}%s{RESET} appears to be trapped!"),
+    _("Something happened to {COLOR YELLOW}%s{RESET}!"),
+    _("{COLOR YELLOW}%s{RESET} was attacked, maybe!"),
+    _("{COLOR YELLOW}%s{RESET} is running out of time!"),
+    _("I got separated from {COLOR YELLOW}%s{RESET}."),
+    _("Hurry, bring back {COLOR YELLOW}%s{RESET}."),
+    _("{COLOR YELLOW}%s{RESET} is too hungry to move!"),
+    _("{COLOR YELLOW}%s{RESET} is fighting all alone!"),
+    _("I'm worried for {COLOR YELLOW}%s{RESET}'s safety!"),
+    _("{COLOR YELLOW}%s{RESET} may have had an accident!"),
+    _("{COLOR YELLOW}%s{RESET} appears to be lost!"),
+    _("{COLOR YELLOW}%s{RESET} appears to be stuck!"),
+    _("{COLOR YELLOW}%s{RESET} is lost!"),
+    _("{COLOR YELLOW}%s{RESET} went the wrong way!"),
+    _("{COLOR YELLOW}%s{RESET}'s been missing three days!"),
+    _("{COLOR YELLOW}%s{RESET} can't walk anymore!"),
+    _("I can't contact {COLOR YELLOW}%s{RESET}!"),
+    _("I lost contact with {COLOR YELLOW}%s{RESET}!"),
+    _("{COLOR YELLOW}%s{RESET} fell into a trap!"),
 };
-
-ALIGNED(4) static const u8 sUnknown_80E9288[] = _("{COLOR YELLOW}%s{RESET} fell into a trap!");
-ALIGNED(4) static const u8 sUnknown_80E92A4[] = _("I lost contact with {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 sUnknown_80E92C4[] = _("I can't contact {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 sUnknown_80E92E0[] = _("{COLOR YELLOW}%s{RESET} can't walk anymore!");
-ALIGNED(4) static const u8 sUnknown_80E9300[] = _("{COLOR YELLOW}%s{RESET}'s been missing three days!");
-ALIGNED(4) static const u8 sUnknown_80E9328[] = _("{COLOR YELLOW}%s{RESET} went the wrong way!");
-ALIGNED(4) static const u8 sUnknown_80E9344[] = _("{COLOR YELLOW}%s{RESET} is lost!");
-ALIGNED(4) static const u8 sUnknown_80E9358[] = _("{COLOR YELLOW}%s{RESET} appears to be stuck!");
-ALIGNED(4) static const u8 sUnknown_80E9378[] = _("{COLOR YELLOW}%s{RESET} appears to be lost!");
-ALIGNED(4) static const u8 sUnknown_80E9394[] = _("{COLOR YELLOW}%s{RESET} may have had an accident!");
-ALIGNED(4) static const u8 sUnknown_80E93B8[] = _("I'm worried for {COLOR YELLOW}%s{RESET}'s safety!");
-ALIGNED(4) static const u8 sUnknown_80E93E0[] = _("{COLOR YELLOW}%s{RESET} is fighting all alone!");
-ALIGNED(4) static const u8 sUnknown_80E9400[] = _("{COLOR YELLOW}%s{RESET} is too hungry to move!");
-ALIGNED(4) static const u8 sUnknown_80E9420[] = _("Hurry, bring back {COLOR YELLOW}%s{RESET}.");
-ALIGNED(4) static const u8 sUnknown_80E9440[] = _("I got separated from {COLOR YELLOW}%s{RESET}.");
-ALIGNED(4) static const u8 sUnknown_80E9460[] = _("{COLOR YELLOW}%s{RESET} is running out of time!");
-ALIGNED(4) static const u8 sUnknown_80E9480[] = _("{COLOR YELLOW}%s{RESET} was attacked, maybe!");
-ALIGNED(4) static const u8 sUnknown_80E94A0[] = _("Something happened to {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 sUnknown_80E94C0[] = _("{COLOR YELLOW}%s{RESET} appears to be trapped!");
-ALIGNED(4) static const u8 sUnknown_80E94E0[] = _("{COLOR YELLOW}%s{RESET} is stuck in a cave!");
-ALIGNED(4) static const u8 sUnknown_80E94FC[] = _("{COLOR YELLOW}%s{RESET} appears to be helpless!");
-ALIGNED(4) static const u8 sUnknown_80E951C[] = _("{COLOR YELLOW}%s{RESET} hasn't reemerged!");
-ALIGNED(4) static const u8 sUnknown_80E9538[] = _("{COLOR YELLOW}%s{RESET} was attacked by assailants!");
-ALIGNED(4) static const u8 sUnknown_80E955C[] = _("It appears as if {COLOR YELLOW}%s{RESET} can't escape!");
-ALIGNED(4) static const u8 sUnknown_80E9588[] = _("{COLOR YELLOW}%s{RESET} may have fainted already!");
-ALIGNED(4) static const u8 sUnknown_80E95AC[] = _("{COLOR YELLOW}%s{RESET} is about to faint!");
-ALIGNED(4) static const u8 sUnknown_80E95C8[] = _("{COLOR YELLOW}%s{RESET}'s been gone a long time!");
-ALIGNED(4) static const u8 sUnknown_80E95EC[] = _("{COLOR YELLOW}%s{RESET} has been cornered!");
-ALIGNED(4) static const u8 sUnknown_80E9608[] = _("I'm worried about {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 sUnknown_80E9628[] = _("{COLOR YELLOW}%s{RESET}'s whereabouts are unknown!");
-ALIGNED(4) static const u8 sUnknown_80E9650[] = _("{COLOR YELLOW}%s{RESET} was paralyzed!");
-ALIGNED(4) static const u8 sUnknown_80E9668[] = _("Trouble may have found {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 sUnknown_80E9688[] = _("{COLOR YELLOW}%s{RESET} appears to be freezing!");
-ALIGNED(4) static const u8 sUnknown_80E96A8[] = _("{COLOR YELLOW}%s{RESET} may be confused!");
-ALIGNED(4) static const u8 sUnknown_80E96C4[] = _("{COLOR YELLOW}%s{RESET} is too scared to move!");
-ALIGNED(4) static const u8 sUnknown_80E96E4[] = _("{COLOR YELLOW}%s{RESET} went missing this morning!");
-ALIGNED(4) static const u8 sUnknown_80E9708[] = _("{COLOR YELLOW}%s{RESET} appears to be injured!");
-ALIGNED(4) static const u8 sUnknown_80E9728[] = _("{COLOR YELLOW}%s{RESET} may be facing danger!");
-ALIGNED(4) static const u8 sUnknown_80E9748[] = _("{COLOR YELLOW}%s{RESET} might be unable to return.");
-ALIGNED(4) static const u8 sUnknown_80E976C[] = _("{COLOR YELLOW}%s{RESET} hasn't come back!");
-ALIGNED(4) static const u8 sUnknown_80E9788[] = _("{COLOR YELLOW}%s{RESET} can't swim!");
-ALIGNED(4) static const u8 sUnknown_80E97A0[] = _("{COLOR YELLOW}%s{RESET} hasn't been heard from!");
-ALIGNED(4) static const u8 sUnknown_80E97C4[] = _("{COLOR YELLOW}%s{RESET} is still missing.");
-ALIGNED(4) static const u8 sUnknown_80E97E0[] = _("{COLOR YELLOW}%s{RESET} may be endangered!");
-ALIGNED(4) static const u8 sUnknown_80E97FC[] = _("{COLOR YELLOW}%s{RESET} passed out from the heat!");
-
-static const u8 sUnknown_80E9848[];
-static const u8 sUnknown_80E985C[];
-static const u8 sUnknown_80E987C[];
-static const u8 sUnknown_80E9898[];
-static const u8 sUnknown_80E98B4[];
-static const u8 sUnknown_80E98DC[];
-static const u8 sUnknown_80E98F0[];
-static const u8 sUnknown_80E9908[];
 
 static const u8 * const gUnknown_80E9820[10] = {
-    sUnknown_80E9908,
-    sUnknown_80E98F0,
-    sUnknown_80E98DC,
-    sUnknown_80E98B4,
-    sUnknown_80E8CD4,
-    sUnknown_80E9898,
-    sUnknown_80E90D4,
-    sUnknown_80E987C,
-    sUnknown_80E985C,
-    sUnknown_80E9848
+    _("Please! Someone help!"),
+    _("Please! I need help!"),
+    _("Someone! Anyone?"),
+    _("I don't care who it is! Please help!"),
+    _("Help me!"),
+    _("I'm pleading for help!"),
+    _("Someone, help!"),
+    _("Please send a rescue team!"),
+    _("A rescue is urgently needed!"),
+    _("Reward upon rescue!"),
 };
-
-ALIGNED(4) static const u8 sUnknown_80E9848[] = _("Reward upon rescue!");
-ALIGNED(4) static const u8 sUnknown_80E985C[] = _("A rescue is urgently needed!");
-ALIGNED(4) static const u8 sUnknown_80E987C[] = _("Please send a rescue team!");
-ALIGNED(4) static const u8 sUnknown_80E9898[] = _("I'm pleading for help!");
-ALIGNED(4) static const u8 sUnknown_80E98B4[] = _("I don't care who it is! Please help!");
-ALIGNED(4) static const u8 sUnknown_80E98DC[] = _("Someone! Anyone?");
-ALIGNED(4) static const u8 sUnknown_80E98F0[] = _("Please! I need help!");
-ALIGNED(4) static const u8 sUnknown_80E9908[] = _("Please! Someone help!");
 
 static const u8 sUnknown_80E99C8[];
 static const u8 sUnknown_80E9A0C[];
@@ -845,292 +581,114 @@ ALIGNED(4) static const u8 sUnknown_80EADFC[] = _(
 
 ALIGNED(4) static const u8 sUnknown_80EAE44[] = _("Please save my friend!");
 
-static const u8 EscortMe_Text[];
-static const u8 TakeMeWith_Text[];
-static const u8 WantToSee_Text[];
-static const u8 TakeMe_Text[];
-
 // Escort Mission Text
 static const u8 * const gUnknown_80EAE5C[4] = {
-    TakeMe_Text,
-    WantToSee_Text,
-    TakeMeWith_Text,
-    EscortMe_Text
+    _("Take me!"),
+    _("I want to see {COLOR YELLOW}%s{RESET}."),
+    _("Please take me with you!"),
+    _("Escort me!"),
 };
-
-ALIGNED(4) static const u8 EscortMe_Text[] = _("Escort me!");
-ALIGNED(4) static const u8 TakeMeWith_Text[] = _("Please take me with you!");
-ALIGNED(4) static const u8 WantToSee_Text[] = _("I want to see {COLOR YELLOW}%s{RESET}.");
-ALIGNED(4) static const u8 TakeMe_Text[] = _("Take me!");
-
-static const u8 CloseFriends_80EAF08[];
-static const u8 Apologize_80EAF2C[];
-static const u8 MustMeet_80EAF4C[];
-static const u8 HaveToMeet_80EAF70[];
-static const u8 HaveToGo_80EAF94[];
-static const u8 LongTime_80EAFA4[];
-static const u8 SickWorry_80EAFD4[];
-static const u8 FaintedInside_80EAFF0[];
-static const u8 HasntReturned_80EB014[];
-static const u8 WantToHelp_80EB030[];
-static const u8 InTrouble_80EB048[];
-static const u8 WaitingForever_80EB06C[];
-static const u8 WaitingInDungeon_80EB090[];
-static const u8 TooWeak_80EB0B4[];
-static const u8 OwnPower_80EB0DC[];
-static const u8 GoMyself_80EB0FC[];
-static const u8 WorriedAbout_80EB118[];
-static const u8 WantMeet_80EB138[];
-static const u8 PromisedMeet_80EB158[];
-static const u8 WaitingForMe_80EB17C[];
 
 static const u8 * const gUnknown_80EAEB8[20] = {
-    WaitingForMe_80EB17C,
-    PromisedMeet_80EB158,
-    WantMeet_80EB138,
-    WorriedAbout_80EB118,
-    GoMyself_80EB0FC,
-    OwnPower_80EB0DC,
-    TooWeak_80EB0B4,
-    WaitingInDungeon_80EB090,
-    WaitingForever_80EB06C,
-    InTrouble_80EB048,
-    WantToHelp_80EB030,
-    HasntReturned_80EB014,
-    FaintedInside_80EAFF0,
-    SickWorry_80EAFD4,
-    LongTime_80EAFA4,
-    HaveToGo_80EAF94,
-    HaveToMeet_80EAF70,
-    MustMeet_80EAF4C,
-    Apologize_80EAF2C,
-    CloseFriends_80EAF08
+    _("{COLOR YELLOW}%s{RESET} is waiting for me!"),
+    _("We promised to meet in the dungeon!"),
+    _("I want to meet with {COLOR YELLOW}%s{RESET}."),
+    _("I'm worried about {COLOR YELLOW}%s{RESET}..."),
+    _("I can't go by myself..."),
+    _("I can't go on my own power..."),
+    _("I'm too weak. It's not possible."),
+    _("{COLOR YELLOW}%s{RESET} is waiting in the dungeon."),
+    _("{COLOR YELLOW}%s{RESET} has been waiting forever..."),
+    _("Hurry, {COLOR YELLOW}%s{RESET} is in trouble..."),
+    _("I want to help {COLOR YELLOW}%s{RESET}!"),
+    _("{COLOR YELLOW}%s{RESET} hasn't returned!"),
+    _("{COLOR YELLOW}%s{RESET} may have fainted inside..."),
+    _("I'm sick with worry..."),
+    _("We haven't seen each other in a long time."),
+    _("I have to go!"),
+    _("We have to meet--whatever it takes!"),
+    _("I don't care how--we must meet!"),
+    _("I want to apologize to {COLOR YELLOW}%s{RESET}."),
+    _("I'm close friends with {COLOR YELLOW}%s{RESET}!"),
 };
-
-ALIGNED(4) static const u8 CloseFriends_80EAF08[] = _("I'm close friends with {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 Apologize_80EAF2C[] = _("I want to apologize to {COLOR YELLOW}%s{RESET}.");
-ALIGNED(4) static const u8 MustMeet_80EAF4C[] = _("I don't care how--we must meet!");
-ALIGNED(4) static const u8 HaveToMeet_80EAF70[] = _("We have to meet--whatever it takes!");
-ALIGNED(4) static const u8 HaveToGo_80EAF94[] = _("I have to go!");
-ALIGNED(4) static const u8 LongTime_80EAFA4[] = _("We haven't seen each other in a long time.");
-ALIGNED(4) static const u8 SickWorry_80EAFD4[] = _("I'm sick with worry...");
-ALIGNED(4) static const u8 FaintedInside_80EAFF0[] = _("{COLOR YELLOW}%s{RESET} may have fainted inside...");
-ALIGNED(4) static const u8 HasntReturned_80EB014[] = _("{COLOR YELLOW}%s{RESET} hasn't returned!");
-ALIGNED(4) static const u8 WantToHelp_80EB030[] = _("I want to help {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 InTrouble_80EB048[] = _("Hurry, {COLOR YELLOW}%s{RESET} is in trouble...");
-ALIGNED(4) static const u8 WaitingForever_80EB06C[] = _("{COLOR YELLOW}%s{RESET} has been waiting forever...");
-ALIGNED(4) static const u8 WaitingInDungeon_80EB090[] = _("{COLOR YELLOW}%s{RESET} is waiting in the dungeon.");
-ALIGNED(4) static const u8 TooWeak_80EB0B4[] = _("I'm too weak. It's not possible.");
-ALIGNED(4) static const u8 OwnPower_80EB0DC[] = _("I can't go on my own power...");
-ALIGNED(4) static const u8 GoMyself_80EB0FC[] = _("I can't go by myself...");
-ALIGNED(4) static const u8 WorriedAbout_80EB118[] = _("I'm worried about {COLOR YELLOW}%s{RESET}...");
-ALIGNED(4) static const u8 WantMeet_80EB138[] = _("I want to meet with {COLOR YELLOW}%s{RESET}.");
-ALIGNED(4) static const u8 PromisedMeet_80EB158[] = _("We promised to meet in the dungeon!");
-ALIGNED(4) static const u8 WaitingForMe_80EB17C[] = _("{COLOR YELLOW}%s{RESET} is waiting for me!");
-
-static const u8 SomeonePleaseEscort[];
-static const u8 PleaseEscortMe[];
-static const u8 PleaseTakeMeThere[];
-static const u8 PleaseTakeMeToSee[];
 
 static const u8 * const gUnknown_80EB198[4] = {
-    PleaseTakeMeToSee,
-    PleaseTakeMeThere,
-    PleaseEscortMe,
-    SomeonePleaseEscort
+    _("Please take me to see {COLOR YELLOW}%s{RESET}!"),
+    _("Please take me there with you!"),
+    _("Please escort me there!"),
+    _("Someone, please escort me!"),
 };
 
-ALIGNED(4) static const u8 SomeonePleaseEscort[] = _("Someone, please escort me!");
-ALIGNED(4) static const u8 PleaseEscortMe[] = _("Please escort me there!");
-ALIGNED(4) static const u8 PleaseTakeMeThere[] = _("Please take me there with you!");
-ALIGNED(4) static const u8 PleaseTakeMeToSee[] = _("Please take me to see {COLOR YELLOW}%s{RESET}!");
-
-static const u8 Without_80EB238[];
-static const u8 Worried_80EB250[];
-static const u8 WantMeet_80EB274[];
-static const u8 HelpMeet_80EB294[];
-static const u8 Escort_80EB2AC[];
-static const u8 TakeMeet_80EB2CC[];
 
 static const u8 * const gUnknown_80EB220[6] = {
-    TakeMeet_80EB2CC,
-    Escort_80EB2AC,
-    HelpMeet_80EB294,
-    WantMeet_80EB274,
-    Worried_80EB250,
-    Without_80EB238
+    _("Please! Take me to meet {COLOR YELLOW}%s{RESET}!"),
+    _("Please escort me to my {COLOR YELLOW}%s{RESET}!"),
+    _("Help me meet {COLOR YELLOW}%s{RESET}!"),
+    _("I really want to meet {COLOR YELLOW}%s{RESET}!"),
+    _("I'm so worried about {COLOR YELLOW}%s{RESET}..."),
+    _("Without {COLOR YELLOW}%s{RESET}, I..."),
 };
-
-ALIGNED(4) static const u8 Without_80EB238[] = _("Without {COLOR YELLOW}%s{RESET}, I...");
-ALIGNED(4) static const u8 Worried_80EB250[] = _("I'm so worried about {COLOR YELLOW}%s{RESET}...");
-ALIGNED(4) static const u8 WantMeet_80EB274[] = _("I really want to meet {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 HelpMeet_80EB294[] = _("Help me meet {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 Escort_80EB2AC[] = _("Please escort me to my {COLOR YELLOW}%s{RESET}!");
-ALIGNED(4) static const u8 TakeMeet_80EB2CC[] = _("Please! Take me to meet {COLOR YELLOW}%s{RESET}!");
-
-static const u8 Lonely_80EB308[];
-static const u8 NoGood_80EB334[];
-static const u8 MeansEverything_80EB35C[];
-static const u8 WePromised_80EB37C[];
-static const u8 WeBelong_80EB3A4[];
-static const u8 WeInLove_80EB3CC[];
 
 static const u8 * const gUnknown_80EB2F0[6] = {
-    WeInLove_80EB3CC,
-    WeBelong_80EB3A4,
-    WePromised_80EB37C,
-    MeansEverything_80EB35C,
-    NoGood_80EB334,
-    Lonely_80EB308
+    _("We're in love! Please, take me there!"),
+    _("We belong together! Please escort me!"),
+    _("We've promised our futures together."),
+    _("This means everything to me!"),
+    _("It's no good if we're not together!"),
+    _("I'm very lonely! Please take me with you!"),
 };
-
-ALIGNED(4) static const u8 Lonely_80EB308[] = _("I'm very lonely! Please take me with you!");
-ALIGNED(4) static const u8 NoGood_80EB334[] = _("It's no good if we're not together!");
-ALIGNED(4) static const u8 MeansEverything_80EB35C[] = _("This means everything to me!");
-ALIGNED(4) static const u8 WePromised_80EB37C[] = _("We've promised our futures together.");
-ALIGNED(4) static const u8 WeBelong_80EB3A4[] = _("We belong together! Please escort me!");
-ALIGNED(4) static const u8 WeInLove_80EB3CC[] = _("We're in love! Please, take me there!");
-
-static const u8 sUnknown_80EB450[];
-static const u8 sUnknown_80EB470[];
-static const u8 sUnknown_80EB494[];
-static const u8 sUnknown_80EB4AC[];
-static const u8 sUnknown_80EB4C0[];
-static const u8 sUnknown_80EB4E0[];
-static const u8 sUnknown_80EB500[];
-static const u8 sUnknown_80EB524[];
-static const u8 sUnknown_80EB54C[];
-static const u8 sUnknown_80EB568[];
-static const u8 sUnknown_80EB590[];
-static const u8 sUnknown_80EB5B4[];
-static const u8 sUnknown_80EB5D4[];
-static const u8 sUnknown_80EB5F8[];
-static const u8 sUnknown_80EB618[];
-static const u8 sUnknown_80EB638[];
-static const u8 sUnknown_80EB654[];
-static const u8 sUnknown_80EB67C[];
-static const u8 sUnknown_80EB6A0[];
-static const u8 sUnknown_80EB6C0[];
-static const u8 sUnknown_80EB6E4[];
-static const u8 sUnknown_80EB708[];
 
 // Item Delivery Mission Text
 static const u8 * const gUnknown_80EB3F8[22] = {
-    sUnknown_80EB708,
-    sUnknown_80EB6E4,
-    sUnknown_80EB6C0,
-    sUnknown_80EB6A0,
-    sUnknown_80EB67C,
-    sUnknown_80EB654,
-    sUnknown_80EB638,
-    sUnknown_80EB618,
-    sUnknown_80EB5F8,
-    sUnknown_80EB5D4,
-    sUnknown_80EB5B4,
-    sUnknown_80EB590,
-    sUnknown_80EB568,
-    sUnknown_80EB54C,
-    sUnknown_80EB524,
-    sUnknown_80EB500,
-    sUnknown_80EB4E0,
-    sUnknown_80EB4C0,
-    sUnknown_80EB4AC,
-    sUnknown_80EB494,
-    sUnknown_80EB470,
-    sUnknown_80EB450
+    _("Having one {COLOR GREEN}%s{RESET} is reassuring."),
+    _("{COLOR GREEN}%s{RESET}--it's convenient to have."),
+    _("{COLOR GREEN}%s{RESET} wanted after long search."),
+    _("{COLOR GREEN}%s{RESET} wanted for exploration."),
+    _("{COLOR GREEN}%s{RESET}--I'd love to utilize one!"),
+    _("{COLOR GREEN}%s{RESET}--I can't leave without it."),
+    _("{COLOR GREEN}%s{RESET} wanted as a charm."),
+    _("{COLOR GREEN}%s{RESET}! Seeking in quantity!"),
+    _("Help this {COLOR GREEN}%s{RESET} collector!"),
+    _("I can't find one more {COLOR GREEN}%s{RESET}."),
+    _("Hard-to-find {COLOR GREEN}%s{RESET} sought."),
+    _("{COLOR GREEN}%s{RESET}--I get scared without it!"),
+    _("I can't sleep without it: {COLOR GREEN}%s{RESET}."),
+    _("{COLOR GREEN}%s{RESET} makes me strong."),
+    _("{COLOR GREEN}%s{RESET}--it's my mom's favorite."),
+    _("{COLOR GREEN}%s{RESET}'s texture is comforting."),
+    _("{COLOR GREEN}%s{RESET} wanted to test effects."),
+    _("{COLOR GREEN}%s{RESET} wanted for nostalgia."),
+    _("I lost my {COLOR GREEN}%s{RESET}."),
+    _("Wanted: my own {COLOR GREEN}%s{RESET}."),
+    _("The item {COLOR GREEN}%s{RESET} is the in thing!"),
+    _("Is it true about the {COLOR GREEN}%s{RESET}?"),
 };
 
-ALIGNED(4) static const u8 sUnknown_80EB450[] = _("Is it true about the {COLOR GREEN}%s{RESET}?");
-ALIGNED(4) static const u8 sUnknown_80EB470[] = _("The item {COLOR GREEN}%s{RESET} is the in thing!");
-ALIGNED(4) static const u8 sUnknown_80EB494[] = _("Wanted: my own {COLOR GREEN}%s{RESET}.");
-ALIGNED(4) static const u8 sUnknown_80EB4AC[] = _("I lost my {COLOR GREEN}%s{RESET}.");
-ALIGNED(4) static const u8 sUnknown_80EB4C0[] = _("{COLOR GREEN}%s{RESET} wanted for nostalgia.");
-ALIGNED(4) static const u8 sUnknown_80EB4E0[] = _("{COLOR GREEN}%s{RESET} wanted to test effects.");
-ALIGNED(4) static const u8 sUnknown_80EB500[] = _("{COLOR GREEN}%s{RESET}'s texture is comforting.");
-ALIGNED(4) static const u8 sUnknown_80EB524[] = _("{COLOR GREEN}%s{RESET}--it's my mom's favorite.");
-ALIGNED(4) static const u8 sUnknown_80EB54C[] = _("{COLOR GREEN}%s{RESET} makes me strong.");
-ALIGNED(4) static const u8 sUnknown_80EB568[] = _("I can't sleep without it: {COLOR GREEN}%s{RESET}.");
-ALIGNED(4) static const u8 sUnknown_80EB590[] = _("{COLOR GREEN}%s{RESET}--I get scared without it!");
-ALIGNED(4) static const u8 sUnknown_80EB5B4[] = _("Hard-to-find {COLOR GREEN}%s{RESET} sought.");
-ALIGNED(4) static const u8 sUnknown_80EB5D4[] = _("I can't find one more {COLOR GREEN}%s{RESET}.");
-ALIGNED(4) static const u8 sUnknown_80EB5F8[] = _("Help this {COLOR GREEN}%s{RESET} collector!");
-ALIGNED(4) static const u8 sUnknown_80EB618[] = _("{COLOR GREEN}%s{RESET}! Seeking in quantity!");
-ALIGNED(4) static const u8 sUnknown_80EB638[] = _("{COLOR GREEN}%s{RESET} wanted as a charm.");
-ALIGNED(4) static const u8 sUnknown_80EB654[] = _("{COLOR GREEN}%s{RESET}--I can't leave without it.");
-ALIGNED(4) static const u8 sUnknown_80EB67C[] = _("{COLOR GREEN}%s{RESET}--I'd love to utilize one!");
-ALIGNED(4) static const u8 sUnknown_80EB6A0[] = _("{COLOR GREEN}%s{RESET} wanted for exploration.");
-ALIGNED(4) static const u8 sUnknown_80EB6C0[] = _("{COLOR GREEN}%s{RESET} wanted after long search.");
-ALIGNED(4) static const u8 sUnknown_80EB6E4[] = _("{COLOR GREEN}%s{RESET}--it's convenient to have.");
-ALIGNED(4) static const u8 sUnknown_80EB708[] = _("Having one {COLOR GREEN}%s{RESET} is reassuring.");
-
-static const u8 sUnknown_80EB784[];
-static const u8 sUnknown_80EB7A8[];
-static const u8 sUnknown_80EB7D8[];
-static const u8 sUnknown_80EB800[];
-static const u8 sUnknown_80EB818[];
-static const u8 sUnknown_80EB82C[];
-static const u8 sUnknown_80EB850[];
-static const u8 sUnknown_80EB86C[];
-static const u8 sUnknown_80EB890[];
-static const u8 sUnknown_80EB8AC[];
-static const u8 sUnknown_80EB8D0[];
-static const u8 sUnknown_80EB8E8[];
-static const u8 sUnknown_80EB90C[];
-static const u8 sUnknown_80EB930[];
-static const u8 sUnknown_80EB95C[];
-static const u8 sUnknown_80EB97C[];
-static const u8 sUnknown_80EB9A0[];
-static const u8 sUnknown_80EB9BC[];
-static const u8 sUnknown_80EB9D0[];
-static const u8 sUnknown_80EB9E8[];
-static const u8 sUnknown_80EBA00[];
 
 static const u8 * const gUnknown_80EB72C[22] = {
-    sUnknown_80EBA00,
-    sUnknown_80EB9E8,
-    sUnknown_80EB9D0,
-    sUnknown_80EB9BC,
-    sUnknown_80EB9A0,
-    sUnknown_80EB97C,
-    sUnknown_80EB95C,
-    sUnknown_80EB930,
-    sUnknown_80EB90C,
-    sUnknown_80EB8E8,
-    sUnknown_80EB8D0,
-    sUnknown_80EB8AC,
-    sUnknown_80EB890,
-    sUnknown_80EB86C,
-    sUnknown_80EB850,
-    sUnknown_80EB9A0,
-    sUnknown_80EB82C,
-    sUnknown_80EB818,
-    sUnknown_80EB800,
-    sUnknown_80EB7D8,
-    sUnknown_80EB7A8,
-    sUnknown_80EB784
+    _("Please! May I have one?"),
+    _("Please trade me one!"),
+    _("Please find one for me!"),
+    _("Please give me one!"),
+    _("Please share one with me!"),
+    _("Please! I must have one delivered!"),
+    _("Please help! Reward offered!"),
+    _("Please! I'm offering a generous reward!"),
+    _("I'm looking forward to your help!"),
+    _("Please let me know if you find one!"),
+    _("Please search for it!"),
+    _("Please help! I'm counting on you!"),
+    _("Please! I need your help!"),
+    _("Please help! You're my only hope!"),
+    _("Please share a little bit!"),
+    _("Please share one with me!"),
+    _("Please! I need some cooperation!"),
+    _("Please help me out!"),
+    _("Please! Please help me!"),
+    _("Please help! I'm offering a reward!"),
+    _("Please help! I'll make it worth your time!"),
+    _("Please contact me if you find it!"),
 };
-
-ALIGNED(4) static const u8 sUnknown_80EB784[] = _("Please contact me if you find it!");
-ALIGNED(4) static const u8 sUnknown_80EB7A8[] = _("Please help! I'll make it worth your time!");
-ALIGNED(4) static const u8 sUnknown_80EB7D8[] = _("Please help! I'm offering a reward!");
-ALIGNED(4) static const u8 sUnknown_80EB800[] = _("Please! Please help me!");
-ALIGNED(4) static const u8 sUnknown_80EB818[] = _("Please help me out!");
-ALIGNED(4) static const u8 sUnknown_80EB82C[] = _("Please! I need some cooperation!");
-ALIGNED(4) static const u8 sUnknown_80EB850[] = _("Please share a little bit!");
-ALIGNED(4) static const u8 sUnknown_80EB86C[] = _("Please help! You're my only hope!");
-ALIGNED(4) static const u8 sUnknown_80EB890[] = _("Please! I need your help!");
-ALIGNED(4) static const u8 sUnknown_80EB8AC[] = _("Please help! I'm counting on you!");
-ALIGNED(4) static const u8 sUnknown_80EB8D0[] = _("Please search for it!");
-ALIGNED(4) static const u8 sUnknown_80EB8E8[] = _("Please let me know if you find one!");
-ALIGNED(4) static const u8 sUnknown_80EB90C[] = _("I'm looking forward to your help!");
-ALIGNED(4) static const u8 sUnknown_80EB930[] = _("Please! I'm offering a generous reward!");
-ALIGNED(4) static const u8 sUnknown_80EB95C[] = _("Please help! Reward offered!");
-ALIGNED(4) static const u8 sUnknown_80EB97C[] = _("Please! I must have one delivered!");
-ALIGNED(4) static const u8 sUnknown_80EB9A0[] = _("Please share one with me!");
-ALIGNED(4) static const u8 sUnknown_80EB9BC[] = _("Please give me one!");
-ALIGNED(4) static const u8 sUnknown_80EB9D0[] = _("Please find one for me!");
-ALIGNED(4) static const u8 sUnknown_80EB9E8[] = _("Please trade me one!");
-ALIGNED(4) static const u8 sUnknown_80EBA00[] = _("Please! May I have one?");
 
 static const u8 sNewFriendAreasText[];
 static const u8 sNewFriendAreasHeadline[];
