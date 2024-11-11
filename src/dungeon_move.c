@@ -36,11 +36,11 @@
 #include "status_actions.h"
 #include "code_8045A00.h"
 #include "code_803E668.h"
+#include "code_803E724.h"
 #include "code_803E46C.h"
 #include "code_8041AD0.h"
 
 extern void sub_80429C8(Entity *r0);
-extern u8 sub_803F428(Position *);
 extern bool8 sub_8045888(Entity *r0);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);

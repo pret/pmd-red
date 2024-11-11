@@ -3,6 +3,7 @@
 #include "dungeon.h"
 #include "structs/dungeon_entity.h"
 #include "code_803E46C.h"
+#include "code_803E724.h"
 #include "string_format.h"
 #include "code_800E9E4.h"
 #include "menu_input.h"
@@ -30,7 +31,6 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, u8 r2);
 static bool8 sub_8052DC0(Entity *);
 
 extern bool8 sub_8045888(Entity *pokemon);
-extern u8 sub_803F428(Position *);
 extern void sub_805E804(void);
 extern void sub_803EAF0(s32, s32);
 extern void sub_8040238(void);
@@ -171,7 +171,7 @@ void TryDisplayDungeonLoggableMessage5(Entity *pokemon, Position *pos, const u8 
 {
     u8 flag;
     flag = sub_8045888(pokemon) ? TRUE : FALSE;
-    if(sub_803F428(pos) != 0)
+    if(sub_803F428(pos))
     {
         flag = TRUE;
     }

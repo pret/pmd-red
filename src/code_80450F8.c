@@ -1,5 +1,6 @@
 #include "global.h"
 #include "structs/str_dungeon.h"
+#include "code_803E724.h"
 #include "code_80450F8.h"
 #include "dungeon_map_access.h"
 #include "dungeon_range.h"
@@ -491,4 +492,53 @@ bool8 sub_8045804(Entity *ent)
             return FALSE;
         }
     }
+}
+
+bool8 sub_8045888(Entity *ent)
+{
+    if (ent->isVisible) {
+        s32 x = (ent->pixelPos.x / 256) - gDungeon->unk181e8.cameraPixelPos.x;
+        s32 y = (ent->pixelPos.y / 256) - gDungeon->unk181e8.cameraPixelPos.y;
+    
+        if (x >= -32 && y >= -32 && x <= 272 && y <= 192) {
+            UnkDungeonGlobal_unk181E8_sub *saveTyping = &gDungeon->unk181e8;
+        
+            switch (GetEntityType(ent)) {
+                case ENTITY_ITEM: {
+                    if (!saveTyping->unk1820E && !sub_803F428(&ent->pos))
+                        return FALSE;
+                    break;
+                }
+                case ENTITY_MONSTER: {
+                    EntityInfo *monInfo = GetEntInfo(ent);
+
+                    if (monInfo->isNotTeamMember) {
+                        if (!gDungeon->unk181e8.unk1820F && monInfo->transformStatus.transformStatus == STATUS_INVISIBLE)
+                            return FALSE;
+
+                        if (!saveTyping->unk1820D && !sub_803F428(&ent->pos))
+                            return FALSE;
+                    }
+                    break;
+                }
+                case ENTITY_TRAP: {
+                    if (!gDungeon->unk181e8.unk1820F && !ent->isVisible)
+                        return FALSE;
+                    break;
+                }
+                case ENTITY_NOTHING: 
+                case ENTITY_UNK_5: {
+                    return FALSE;
+                }
+                case ENTITY_UNK_4:
+                default: {
+                    break;
+                }
+            }
+
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }

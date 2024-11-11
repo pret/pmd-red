@@ -22,6 +22,7 @@
 #include "dungeon_items.h"
 #include "constants/item.h"
 #include "constants/status.h"
+#include "code_803E724.h"
 
 extern s32 gDungeonBrightness;
 extern u32 gUnknown_202EDD0;

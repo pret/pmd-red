@@ -1,6 +1,7 @@
 #include "global.h"
 #include "code_800E9A8.h"
 #include "code_803E46C.h"
+#include "code_803E724.h"
 #include "code_804267C.h"
 #include "code_806CD90.h"
 #include "code_8041AD0.h"
@@ -34,7 +35,6 @@ extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
 extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
 extern u32 sub_806F62C(u32);
 extern void PlaySoundEffect(u32);
-extern u8 sub_803F428(Position *pos);
 extern void sub_8041550(Entity *pokemon, u32, u32, u32, u32, u32);
 
 void EntityUpdateStatusSprites(Entity *entity);
@@ -869,7 +869,7 @@ void sub_80421C0(Entity *pokemon, u16 r1)
 
 void sub_80421EC(Position *pos, u16 r1)
 {
-    if(sub_803F428(pos) != 0)
+    if(sub_803F428(pos))
         PlaySoundEffect(r1);
 }
 
