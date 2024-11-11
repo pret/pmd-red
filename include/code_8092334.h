@@ -3,10 +3,10 @@
 
 #include "data_serializer.h"
 
-void nullsub_102(DataSerializer *seri);
-void ReadBits(DataSerializer *seri, void *dst, s32 numBits);
-void WriteBits(DataSerializer *seri, void *src, s32 numBits);
+void FinishBitSerializer(DataSerializer *seri);
 void InitBitReader(DataSerializer *seri, u8 *buffer, s32 bufLen);
 void InitBitWriter(DataSerializer *seri, u8 *buffer, s32 bufLen);
+void ReadBits(DataSerializer *seri, void *dst, s32 numBits);
+void WriteBits(DataSerializer *seri, void *src, s32 numBits);
 
 #endif // GUARD_CODE_8092334_H

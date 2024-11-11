@@ -1127,7 +1127,7 @@ s32 SaveTeamInventory(u8* unk0, u32 size)
   WriteBits(&unk, &gTeamInventoryRef->teamMoney, 24);
   WriteBits(&unk, &gTeamInventoryRef->teamSavings, 24);
 
-  nullsub_102(&unk);
+  FinishBitSerializer(&unk);
   return unk.count;
 }
 
@@ -1152,7 +1152,7 @@ s32 RestoreTeamInventory(u8 *unk0, u32 size)
     ReadBits(&unk, &gTeamInventoryRef->teamMoney, 24);
     ReadBits(&unk, &gTeamInventoryRef->teamSavings, 24);
 
-    nullsub_102(&unk);
+    FinishBitSerializer(&unk);
     return unk.count;
 }
 

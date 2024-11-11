@@ -68,7 +68,7 @@ u8 sub_803D110(u8 *param_1, u8 *param_2, s32 size)
     {
         WriteBits(&auStack_88, &local_78[index1], 5);
     }
-    nullsub_102(&auStack_88);
+    FinishBitSerializer(&auStack_88);
     MemoryCopy8(param_2, auStack_40, save);
     return 1;
 }
@@ -91,7 +91,7 @@ void sub_803D1A8(u8 *param_1, u8 *param_2, s32 size)
         ReadBits(&auStack_5c, &local_4c[index], 5);
     }
 
-    nullsub_102(&auStack_5c);
+    FinishBitSerializer(&auStack_5c);
     for(index = 0; index < size; index++)
     {
         *param_1++ = sub_803D100(local_4c[index]);
@@ -129,7 +129,7 @@ bool8 sub_803D204(u8 *buffer,unkStruct_203B480 *param_2)
         if (local_c4[0] == checksum) {
           InitBitReader(&uStack_30,&local_c4[1],33);
           sub_8095774(&uStack_30,param_2);
-          nullsub_102(&uStack_30);
+          FinishBitSerializer(&uStack_30);
           return TRUE;
         }
     }
@@ -154,7 +154,7 @@ void sub_803D2C0(u8 *buffer, unkStruct_203B480 *mail)
 
     InitBitWriter(&auStack_2c,&local_c0[1],33);
     sub_8095824(&auStack_2c,mail);
-    nullsub_102(&auStack_2c);
+    FinishBitSerializer(&auStack_2c);
     for(index = 1; index < 34; index++)
     {
         checksum += + local_c0[index] + index;
@@ -201,7 +201,7 @@ bool8 DecodeWonderMailPassword(u8* buffer, WonderMail *mail)
         if (local_70[0] == checksum) {
             InitBitReader(&puVar1,&local_70[1],0xc);
             ReadWonderMailBits(&puVar1,mail);
-            nullsub_102(&puVar1);
+            FinishBitSerializer(&puVar1);
             return TRUE;
         }
     }
@@ -225,7 +225,7 @@ void sub_803D414(u8 *buffer,WonderMail *mail)
 
     InitBitWriter(&uStack_2c,&local_6c[1],12);
     WriteWonderMailBits(&uStack_2c,mail);
-    nullsub_102(&uStack_2c);
+    FinishBitSerializer(&uStack_2c);
 
     for(index = 1; index < 0xF; index++)
     {

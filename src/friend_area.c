@@ -241,7 +241,7 @@ u32 SaveFriendAreas(u8 *r0, u32 size)
         WriteBits(&unk, (u8*)&temp, 1);
     }
 
-    nullsub_102(&unk);
+    FinishBitSerializer(&unk);
     return unk.count;
 }
 
@@ -262,6 +262,6 @@ u32 ReadSavedFriendAreas(u8 *r0, s32 size)
             gFriendAreas[i] = FALSE;
     }
 
-    nullsub_102(&unk);
+    FinishBitSerializer(&unk);
     return unk.count;
 }

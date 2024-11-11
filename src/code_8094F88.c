@@ -365,7 +365,7 @@ u32 sub_80954CC(u8 *buffer, u32 size)
         ReadBits(&backup, &gUnknown_203B48C->unk4[i], 32);
     }
 
-    nullsub_102(&backup);
+    FinishBitSerializer(&backup);
     return backup.count;
 }
 
@@ -411,7 +411,7 @@ u32 sub_8095624(u8 *buffer, u32 b)
         WriteBits(&backup, &gUnknown_203B48C->unk4[i], 32);
     }
   
-    nullsub_102(&backup);
+    FinishBitSerializer(&backup);
     return backup.count;
 }
 

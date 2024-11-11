@@ -375,7 +375,7 @@ u32 SaveAdventureData(u8 *buffer, u32 bufLen)
     WriteAdventureBits(&seri);
     WriteExclusivePokemon(&seri);
 
-    nullsub_102(&seri);
+    FinishBitSerializer(&seri);
     return seri.count;
 }
 
@@ -390,6 +390,6 @@ u32 RestoreAdventureData(u8 *buffer, u32 bufLen)
     ReadAdventureBits(&seri);
     ReadExclusivePokemon(&seri);
 
-    nullsub_102(&seri);
+    FinishBitSerializer(&seri);
     return seri.count;
 }

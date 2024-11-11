@@ -1379,7 +1379,7 @@ u32 RestoreMailInfo(u8 *r0, u32 size)
         ReadBits(&backup, &gUnknown_203B490->unk230[index].sub.seed, 24);
         ReadDungeonLocationBits(&backup, &gUnknown_203B490->unk230[index].sub.dungeon);
     }
-    nullsub_102(&backup);
+    FinishBitSerializer(&backup);
     return backup.count;
 }
 
@@ -1423,7 +1423,7 @@ u32 SaveMailInfo(u8 *r0, u32 size)
         WriteBits(&backup, &gUnknown_203B490->unk230[index].sub.seed, 0x18);
         WriteDungeonLocationBits(&backup, &gUnknown_203B490->unk230[index].sub.dungeon);
     }
-    nullsub_102(&backup);
+    FinishBitSerializer(&backup);
     return backup.count;
 }
 

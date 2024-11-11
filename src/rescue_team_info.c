@@ -134,7 +134,7 @@ u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
         puVar2 = &zero;
     }
     WriteBits(&auStack36,puVar2,1);
-    nullsub_102(&auStack36);
+    FinishBitSerializer(&auStack36);
     return auStack36.count;
 }
 
@@ -148,6 +148,6 @@ u32 ReadRescueTeamInfo(u8 *param_1, u32 size)
   ReadBits(&auStack32, &gRescueTeamInfoRef->teamRankPts, 0x20);
   ReadBits(&auStack32, byteArray, 1);
   gRescueTeamInfoRef->isTeamRenamed = byteArray[0] & 1;
-  nullsub_102(&auStack32);
+  FinishBitSerializer(&auStack32);
   return auStack32.count;
 }

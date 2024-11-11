@@ -41,10 +41,8 @@ void InitBitWriter(DataSerializer *r0, u8 *buffer, s32 bufLen)
     MemoryClear8(buffer, bufLen);
 }
 
-// Finish reading/writing bits
-void nullsub_102(DataSerializer *r0)
+void FinishBitSerializer(DataSerializer *seri)
 {
-
 }
 
 void WriteBits(DataSerializer *r0, void *src, s32 numBits)

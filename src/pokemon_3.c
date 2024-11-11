@@ -706,7 +706,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     // Team leader
     WriteBits(&backup, &teamLeader, 16);
 
-    nullsub_102(&backup);
+    FinishBitSerializer(&backup);
     return backup.count;
 }
 
@@ -745,7 +745,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
     if ((u16)data_s16 < NUM_MONSTERS)
         gRecruitedPokemonRef->pokemon[data_s16].isTeamLeader = TRUE;
 
-    nullsub_102(&backup);
+    FinishBitSerializer(&backup);
     return backup.count;
 }
 
@@ -839,7 +839,7 @@ s32 SavePoke2s(u8* buffer, s32 size)
     WriteBits(&backup, &pokemon2->name, 10 * 8);
   }
 
-  nullsub_102(&backup);
+  FinishBitSerializer(&backup);
   return backup.count;
 }
 
@@ -888,7 +888,7 @@ s32 RestorePoke2s(u8* a1, s32 size)
     ReadBits(&backup, &pokemon2->name, 80);
   }
 
-  nullsub_102(&backup);
+  FinishBitSerializer(&backup);
   return backup.count;
 }
 
