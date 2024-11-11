@@ -3280,5 +3280,5 @@ MoveDescriptionNone:
 
 .global MoveNameNone
 MoveNameNone:
-.string "なにのも？\0"
+.string "なにもの？\0"
 .align 2,0

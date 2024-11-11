@@ -29,7 +29,7 @@ $(LEARNSET_DATA): $(LEARNSET_DIR)/learnset_data.json
 	$(DUNGEONJSON) learnset pmd-red $<
 
 data_learnset_ptrs: ${LEARNSET_DATA};
-	echo '.4byte 0' >> $(LEARNSET_PTRS)
+	echo '.4byte 0' > $(LEARNSET_PTRS)
 	echo '.4byte 0' >> $(LEARNSET_PTRS)
 	cat $(LEARNSET_DATA) | grep .global >> $(LEARNSET_PTRS)
 ifeq ($(shell uname -s), Darwin)
