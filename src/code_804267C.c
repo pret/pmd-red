@@ -29,7 +29,7 @@ extern void sub_80429A0(Entity *);
 extern void sub_8042B34(u32, u32, u32);
 extern bool8 sub_8042CC0(void);
 extern void sub_8042D7C(void);
-extern u8 sub_8043D10(void);
+extern u8 GetFloorType(void);
 extern bool8 sub_8045888(Entity *);
 
 // This func plays the appropriate ascend/descend SFX for stairs depending on the direction
@@ -39,7 +39,7 @@ void PlayStairsSound(void)
 
     songIndex = 997;
 
-    switch (sub_8043D10()) {
+    switch (GetFloorType()) {
         case 0:
         default:
             songIndex = IsStairDirectionUp(gDungeon->dungeonLocation.id) ? 340 : 341;

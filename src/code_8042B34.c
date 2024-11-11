@@ -8,6 +8,7 @@
 #include "code_800E9A8.h"
 #include "dungeon_util.h"
 #include "dungeon_message.h"
+#include "dungeon_generation.h"
 #include "bg_control.h"
 #include "random.h"
 #include "file_system.h"
@@ -390,7 +391,7 @@ extern Entity *gLeaderPointer;
 void sub_8044124(void);
 void sub_8043FD0(void);
 void sub_806B404(void);
-u8 sub_8043D10(void);
+u8 GetFloorType(void);
 
 extern const u8 *gUnknown_80FEC48;
 extern const u8 *gUnknown_80FEC7C;
@@ -871,7 +872,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
                 sub_8083AB0(var, NULL, GetLeader());
                 check = TRUE;
             }
-            else if (gDungeon->unk678 == 1 && sub_8043D10() == 2 && gDungeon->unk654 == 2) {
+            else if (gDungeon->unk678 == 1 && GetFloorType() == FLOOR_TYPE_RESCUE && gDungeon->unk654 == 2) {
                 sub_8083AB0(0x228, NULL, GetLeader());
                 if (gDungeon->unk66E != 0) {
                     sub_8097810();
@@ -993,14 +994,14 @@ bool8 sub_8043CE4(s32 dungeonId)
     return (gDungeonWaterType[dungeonId] == 2);
 }
 
-u8 sub_8043D10(void)
+u8 GetFloorType(void)
 {
     if (gDungeon->unk678 == 1 && gDungeon->unk64C.unk1 == gDungeon->dungeonLocation.floor)
-        return 2;
+        return FLOOR_TYPE_RESCUE;
     else if (IsBossFight())
-        return 1;
+        return FLOOR_TYPE_FIXED;
     else
-        return 0;
+        return FLOOR_TYPE_NORMAL;
 }
 
 void sub_8043D50(s32 *a0, s32 *a1)

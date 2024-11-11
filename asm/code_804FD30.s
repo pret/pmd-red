@@ -125,7 +125,7 @@ _0804FFAA:
 	ldr r0, _08050240
 	add r0, r9
 	strh r1, [r0]
-	bl sub_8043D10
+	bl GetFloorType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

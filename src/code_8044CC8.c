@@ -21,7 +21,7 @@ extern s32 gUnknown_202EE6C;
 
 bool8 sub_80461C8(Position *, u32);
 void sub_80460F8(Position *, Item *, u32);
-extern u8 sub_8043D10(void);
+extern u8 GetFloorType(void);
 extern bool8 sub_8045888(Entity *);
 
 EWRAM_DATA struct unkStruct_202EE44 gUnknown_202EE44[10] = {0};
@@ -156,7 +156,7 @@ u8 *sub_8044EC8(s32 param_1)
 
     uVar1 = gUnknown_202EE44[param_1].unk0;
 
-    if ((uVar1 == 0x26) && (sub_8043D10() == 2)) {
+    if ((uVar1 == 0x26) && (GetFloorType() == 2)) {
         return *gUnknown_80F91EC;
     }
     else {

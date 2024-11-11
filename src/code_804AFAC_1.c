@@ -1,4 +1,5 @@
 #include "global.h"
+#include "dungeon_generation.h"
 #include "file_system.h"
 #include "tile_types.h"
 #include "dungeon_map_access.h"
@@ -37,7 +38,7 @@ extern void sub_804FC74(void);
 void sub_804EB30(void);
 void sub_804E9DC(void);
 extern void GenerateTwoRoomsWithMonsterHouseFloor(void);
-extern u8 sub_8043D10();
+extern u8 GetFloorType();
 extern bool8 sub_8050C30(s32 a0, s32 a1, u8 a2);
 extern void sub_806C330(s32 a0, s32 a1, s16 a2, u8 a3);
 
@@ -285,7 +286,7 @@ void sub_804AFAC(void)
         sub_804FBE8();
         if (gDungeon->unkE218.x != -1 && gDungeon->unkE218.y != -1)
         {
-            if (sub_8043D10() == 1)
+            if (GetFloorType() == 1)
                 break;
             if (gDungeon->unkE21C.x != -1 && gDungeon->unkE21C.y != -1 && sub_8050C30(gDungeon->unkE21C.x, gDungeon->unkE21C.y, 0))
                 break;
@@ -828,7 +829,7 @@ void NAKED sub_804AFAC(void)
 "	ldrsh r0, [r0, r6]\n"
 "	cmp r0, r4\n"
 "	beq _0804B42A\n"
-"	bl sub_8043D10\n"
+"	bl GetFloorType\n"
 "	lsls r0, 24\n"
 "	lsrs r0, 24\n"
 "	cmp r0, 0x1\n"
@@ -2171,11 +2172,6 @@ void AssignRooms(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSiz
 
 	gUnknown_202F1AD = FALSE;
 }
-
-// Todo: move to header
-#define GENERATION_CONSTANT_MERGE_ROOMS_CHANCE 5 // (0 to 100) probability to merge two rooms together
-#define GENERATION_CONSTANT_NO_IMPERFECTIONS_CHANCE 60 // (0 to 100) probability that a room will not have imperfections, if it was already flagged for them
-#define GENERATION_CONSTANT_SECONDARY_STRUCTURE_FLAG_CHANCE 80 // (0 to 100) probability that a room will be flagged to have a secondary structure.
 
 /*
  * CreateRoomsAndAnchors - Creates the rectangle regions of open terrain for each room
@@ -3627,7 +3623,7 @@ void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
     gUnknown_202F1D8.x = -1;
     gUnknown_202F1D8.y = -1;
 
-	if (gUnknown_202F1AB || sub_8043D10() == 2 || chance == 0)
+	if (gUnknown_202F1AB || GetFloorType() == FLOOR_TYPE_RESCUE || chance == 0)
         return;
 	if (chance <= DungeonRandInt(100))
         return;
@@ -3761,6 +3757,130 @@ void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
 			gUnknown_202F1D8.y = curY;
 
 			return;
+		}
+	}
+}
+
+/*
+ * GenerateMonsterHouse - Possibly generate a monster house on the floor.
+ *
+ * A Monster House will be generated with a probability determined by the Monster House spawn chance, and only
+ * if the floor supports one (no kecleon shop, no non-MH outlaw missions, no special floor types)
+ *
+ * A Monster House will be generated in a random room that's valid, connected, not merged, not a maze room, and
+ * is not a few unknown conditions.
+ */
+void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance)
+{
+	// To spawn a monster house on this floor:
+	// - It must meet the probability chance
+	// - not have a kecleon shop
+	// - Be an outlaw monster house floor or not be a special destination floor with a target
+	// - Be a Normal Floor Type
+
+	s32 i;
+	bool8 values[256];
+	s32 x, y;
+	s32 numValid;
+	Dungeon *dungeon = gDungeon;
+
+	if (chance == 0 || chance <= DungeonRandInt(100))
+        return;
+	if (gUnknown_202F1AA)
+        return;
+	if (gDungeon->unk688 != 0)
+        return;
+    if (GetFloorType() != FLOOR_TYPE_NORMAL)
+        return;
+
+	numValid = 0;
+
+	for (x = 0; x < gridSizeX; x++) {
+		for (y = 0; y < gridSizeY; y++) {
+			// A grid cell can have a monster house if it:
+			// - is valid
+			// - is not a merged room
+			// - is connected
+			// - is a room
+			// - is not a maze
+			// - and some other unknown condition
+			if (grid[x][y].isInvalid)
+                continue;
+            if (grid[x][y].hasBeenMerged)
+                continue;
+            if (!grid[x][y].isConnected)
+                continue;
+            if (!grid[x][y].isRoom)
+                continue;
+            if (grid[x][y].isKecleonShop)
+                continue;
+            if (grid[x][y].unk15)
+                continue;
+            if (grid[x][y].isMazeRoom)
+                continue;
+            if (grid[x][y].hasSecondaryStructure)
+                continue;
+
+            numValid++;
+		}
+	}
+
+	if (numValid == 0)
+        return;
+
+	// Have a single 1, the rest as 0's
+	for (i = 0; i < 256; i++) {
+        values[i] = FALSE;
+	}
+	values[0] = TRUE;
+
+	// Shuffle values
+	for (i = 0; i < 64; i++) {
+        s32 temp;
+		s32 a = DungeonRandInt(numValid);
+		s32 b = DungeonRandInt(numValid);
+
+		SWAP(values[a], values[b], temp);
+	}
+
+    // Counter
+	i = 0;
+	for (x = 0; x < gridSizeX; x++) {
+		for (y = 0; y < gridSizeY; y++) {
+            if (grid[x][y].isInvalid)
+                continue;
+            if (grid[x][y].hasBeenMerged)
+                continue;
+            if (!grid[x][y].isConnected)
+                continue;
+            if (!grid[x][y].isRoom)
+                continue;
+            if (grid[x][y].isKecleonShop)
+                continue;
+            if (grid[x][y].unk15)
+                continue;
+            if (grid[x][y].isMazeRoom)
+                continue;
+            if (grid[x][y].hasSecondaryStructure)
+                continue;
+
+            if (values[i]) {
+                s32 curX, curY;
+                // The selected room can support a monster house
+                // Generate one!
+                gUnknown_202F1AB = TRUE;
+                grid[x][y].isMonsterHouse = TRUE;
+
+                for (curX = grid[x][y].start.x; curX < grid[x][y].end.x; curX++) {
+                    for (curY = grid[x][y].start.y; curY < grid[x][y].end.y; curY++) {
+                        GetTileSafe(curX, curY)->terrainType |= TERRAIN_TYPE_IN_MONSTER_HOUSE;
+                        dungeon->unk3A0C = GetTile(curX, curY)->room;
+                    }
+                }
+                return;
+            }
+
+            i++;
 		}
 	}
 }

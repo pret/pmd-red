@@ -73,7 +73,7 @@ bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(Position *, u32);
 
 bool8 sub_8045888(Entity *);
-u8 sub_8043D10(void);
+u8 GetFloorType(void);
 void sub_8068FE0(Entity *, u32, Entity *);
 void sub_8045C28(Item *, u8 , u8);
 void sub_8045BF8(u8 *, Item *);
@@ -551,7 +551,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                 sub_803E708(0x1e,0x48);
             }
             if (info->isTeamLeader) {
-                if (sub_8043D10() != 2) {
+                if (GetFloorType() != 2) {
                     info->unk15C = 1;
                     info->unk15E = 1;
                     sub_803E708(0x28,0x4b);
