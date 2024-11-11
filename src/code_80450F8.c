@@ -9,6 +9,70 @@
 
 // Related to sub_80828E0
 // 93.08% https://decomp.me/scratch/AYGBN
+/*Entity *sub_80453AC(s16 id)
+{
+    s32 something; // r1
+    s32 uVar8; // r2
+    Entity *entity; // r4
+    s32 r5;
+    u8 bodySize; // r6
+    s32 id_; // r8
+    //register s32 id_ asm("r8"); // r8
+    s32 r9;
+
+    id_ = id; // SpeciesId() ?
+    r9 = -1;
+    bodySize = GetBodySize(id_);
+
+    for (r5 = 0; r5 <= MAX_TEAM_BODY_SIZE - bodySize; r5++) {
+        for (uVar8 = 0; uVar8 < bodySize; uVar8++) {
+            if (gUnknown_202EE70[r5 + uVar8] != 0)
+                break;
+        }
+
+        if (uVar8 == bodySize) {
+            r9 = r5;
+            break;
+        }
+    }
+
+    if (r9 != -1) {
+        for (r5 = 0; r5 < MAX_TEAM_MEMBERS; r5++) {
+            entity = gDungeon->teamPokemon[r5];
+            if (!EntityExists(entity)) {
+                entity->type = ENTITY_MONSTER;
+                entity->unk24 = r5;
+                entity->axObj.info = &gDungeon->unk69C[r5];
+                entity->axObj.info->id = id_;
+                entity->axObj.info->apparentID = sub_8069F54(NULL, id_);
+                entity->axObj.info->isNotTeamMember = FALSE;
+
+                entity->axObj.spriteFile = GetSpriteData(sub_8069F54(NULL, id_));
+                entity->axObj.unk40_maybeAnimTimer = (r9 * 0x10) + 0x40;
+                entity->axObj.unk42_animId1 = 7;
+                entity->axObj.unk44_direction1 = 0;
+                entity->axObj.unk43_animId2 = 0xFF;
+                entity->axObj.unk45_orientation = 1;
+                entity->axObj.unk47 = 1;
+
+                entity->unk1C = 0;
+                sub_8045ACC();
+                entity->axObj.info->unk167 = r9;
+                entity->axObj.info->unk168 = bodySize;
+
+                for (something = 0; something < bodySize; something++) {
+                    gUnknown_202EE70[r9] = 1;
+                    r9++;
+                }
+
+                entity->spawnGenID = gDungeon->unk668++;
+                return entity;
+            }
+        }
+    }
+
+    return NULL;
+}*/
 NAKED
 Entity *sub_80453AC(s16 id)
 {
@@ -195,6 +259,74 @@ Entity *sub_80453AC(s16 id)
 
 // Related to sub_8082A08
 // 91.51% https://decomp.me/scratch/Fp0Kw
+/*Entity *sub_804550C(s16 a)
+{
+    s32 something; // r1
+    s32 uVar8; // r2
+    Entity *entity; // r4
+    s32 r5;
+    u8 r6;
+    s32 id; // r8
+    s32 r9;
+    s32 timer; // sp0
+
+    id = a;
+    r9 = -1;
+    r6 = GetBodySize(id);
+
+    for (r5 = 0; r5 <= DUNGEON_MAX_WILD_POKEMON_BODY_SIZE - r6; r5++) {
+        for (uVar8 = 0; uVar8 < r6; uVar8++) {
+            if (gUnknown_202EE76[r5 + uVar8] != 0)
+                break;
+        }
+
+        if (uVar8 == r6) {
+            r9 = r5;
+            break;
+        }
+    }
+
+    if (r9 != -1) {
+        for (r5 = 0; r5 < DUNGEON_MAX_WILD_POKEMON_BODY_SIZE; r5++) {
+            timer = (r9 * 0x10) + 0xA0;
+            entity = gDungeon->wildPokemon[r5];
+            if (!EntityExists(entity)) {
+                entity->type = ENTITY_MONSTER;
+                entity->unk24 = r5;
+                entity->unk22 = 0;
+                entity->axObj.info = &gDungeon->unkEBC[r5];
+                entity->axObj.info->id = id;
+                entity->axObj.info->apparentID = sub_8069F54(NULL, id);
+                entity->axObj.info->isNotTeamMember = TRUE;
+
+                entity->axObj.spriteFile = GetSpriteData(sub_8069F54(NULL, id));
+                entity->axObj.unk40_maybeAnimTimer = timer;
+                entity->axObj.unk42_animId1 = 7;
+                entity->axObj.unk44_direction1 = 0;
+                entity->axObj.unk43_animId2 = 0xFF;
+                entity->axObj.unk45_orientation = 1;
+                entity->axObj.unk47 = 1;
+
+                entity->unk1C = 0;
+
+                entity->axObj.info->unk167 = r9;
+                entity->axObj.info->unk168 = r6;
+
+                for (something = 0; something < r6; something++) {
+                    gUnknown_202EE76[r9] = 1;
+                    r9++;
+                }
+
+                sub_8045ACC();
+
+                entity->spawnGenID = gDungeon->unk668++;
+                return entity;
+            }
+        }
+    }
+
+    return NULL;
+}*/
 NAKED
 Entity *sub_804550C(s16 a)
 {
