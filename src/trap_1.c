@@ -17,7 +17,7 @@ extern u8 gYayoiSan[];
 extern void sub_8082FA8(unkStruct_8094924 *, void *, s32);
 
 void SaveTile(unkStruct_8094924 *r0, Tile *tile);
-void sub_80830F8(void * , u32*);
+void sub_80830F8(void * , void*);
 void sub_808312C(void *, u32 *);
 void SaveDungeonWeather(unkStruct_8094924 *r0, Weather *weather);
 void sub_8083078(void *, u32);
@@ -87,8 +87,8 @@ u8 sub_8083188(unkStruct_8094924 *r0);
 s16 sub_8083170(unkStruct_8094924 *r0);
 void sub_80831F8(unkStruct_8094924 *r0, Position *);
 void RestoreDungeonWeather(unkStruct_8094924 *r0, Weather *);
-void sub_8083220(unkStruct_8094924 *r0, u32 *);
-void sub_8083260(unkStruct_8094924 *r0, u32 *);
+void sub_8083220(unkStruct_8094924 *r0, void *);
+void sub_8083260(unkStruct_8094924 *r0, void *);
 void RestoreTile(unkStruct_8094924 *r0, Tile *);
 extern u16 sub_8083158(unkStruct_8094924 *param_1);
 void sub_80820A8(unkStruct_8094924 *r0, Item *);
@@ -513,7 +513,7 @@ void sub_8081454(unkStruct_8094924 *param_1)
     {
         SavePosition(param_1,&gDungeon->unkE220[iVar4]);
     }
-    sub_80830F8(param_1,&gDungeon->unkE240);
+    sub_80830F8(param_1,&gDungeon->kecleonShopPos);
     sub_80830F8(param_1,&gDungeon->unkE250);
     sub_808312C(param_1,&gDungeon->unkE260);
 
@@ -846,9 +846,9 @@ void sub_8081C7C(unkStruct_8094924 *r0)
     {
         sub_80831F8(r0,&gDungeon->unkE220[iVar7]);
     }
-    sub_8083220(r0,&gDungeon->unkE240);
-    sub_8083220(r0,&gDungeon->unkE240 + 0x4);
-    sub_8083260(r0,&gDungeon->unkE240 + 0x8);
+    sub_8083220(r0,&gDungeon->kecleonShopPos);
+    sub_8083220(r0,&gDungeon->unkE250);
+    sub_8083260(r0,&gDungeon->unkE260);
 
 
     for(y = 0; y < 8; y++)

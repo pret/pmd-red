@@ -5,6 +5,7 @@
 #include "structs/str_position.h"
 
 #define MAX_ROOM_COUNT 32 // Empirical max, not sure if the code supports any more.
+#define ROOM_0xFE 0xFE // Anchor?
 #define CORRIDOR_ROOM 0xFF
 
 enum TerrainType

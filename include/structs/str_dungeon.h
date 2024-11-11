@@ -230,6 +230,15 @@ struct MessageLogString
     u8 str[MESSAGE_LOG_BUFFER_SIZE];
 };
 
+#define DEFAULT_MAX_POSITION 9999
+struct MinMaxPosition
+{
+    s32 minX;
+    s32 minY;
+    s32 maxX;
+    s32 maxY;
+};
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -350,8 +359,7 @@ typedef struct Dungeon
     Position unkE218;
     Position unkE21C; // stair location?
     Position unkE220[8];
-    u32 unkE240;
-    u8 fillE244[0xE250 - 0xE244];
+    struct MinMaxPosition kecleonShopPos;
     u32 unkE250;
     u8 fillE254[0xE260 - 0xE254];
     u32 unkE260;
