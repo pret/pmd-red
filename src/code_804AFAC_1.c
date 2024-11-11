@@ -996,7 +996,7 @@ struct GridCell
     Position start;
     Position end;
     bool8 isInvalid;
-    bool8 unk9;
+    bool8 hasSecondaryStructure;
     bool8 isRoom;
     bool8 isConnected;
     bool8 unk12;
@@ -1010,10 +1010,10 @@ struct GridCell
     bool8 connectedToBottom;
     bool8 connectedToLeft;
     bool8 connectedToRight;
-    bool8 unk23;
-    bool8 unk24;
-    bool8 unk25;
-    bool8 unk26;
+    bool8 shouldConnectToTop;
+    bool8 shouldConnectToBottom;
+    bool8 shouldConnectToLeft;
+    bool8 shouldConnectToRight;
     bool8 unk27;
     bool8 flagImperfect;
     bool8 flagSecondaryStructure;
@@ -1042,6 +1042,7 @@ void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
 void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance);
 void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 numExtraHallways);
 static void MergeRoomsVertically(s32 roomX, s32 roomY1, s32 room_dy, struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN]);
+void CreateHallway(s32 startX, s32 startY, s32 endX, s32 endY, bool8 vertical, s32 turnX, s32 turnY);
 
 /*
  * GenerateStandardFloor - Generates a standard, typical floor layout.
@@ -2040,11 +2041,11 @@ void InitDungeonGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gri
             grid[x][y].connectedToLeft = FALSE;
             grid[x][y].connectedToBottom = FALSE;
             grid[x][y].connectedToTop = FALSE;
-            grid[x][y].unk26 = FALSE;
-            grid[x][y].unk25 = FALSE;
-            grid[x][y].unk24 = FALSE;
-            grid[x][y].unk23 = FALSE;
-            grid[x][y].unk9 = FALSE;
+            grid[x][y].shouldConnectToRight = FALSE;
+            grid[x][y].shouldConnectToLeft = FALSE;
+            grid[x][y].shouldConnectToBottom = FALSE;
+            grid[x][y].shouldConnectToTop = FALSE;
+            grid[x][y].hasSecondaryStructure = FALSE;
             grid[x][y].hasBeenMerged = FALSE;
             grid[x][y].isMazeRoom = FALSE;
             grid[x][y].isMerged = FALSE;
@@ -2163,6 +2164,7 @@ void AssignRooms(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSiz
 }
 
 #define GENERATION_CONSTANT_SECONDARY_STRUCTURE_FLAG_CHANCE 80
+#define GENERATION_CONSTANT_MERGE_ROOMS_CHANCE 5
 
 /*
  * CreateRoomsAndAnchors - Creates the rectangle regions of open terrain for each room
@@ -2579,6 +2581,386 @@ void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
         if (!more)
             break;
     }
+}
+
+/*
+ * CreateGridCellConnections - Creates connections through generating hallways and merging rooms
+ *
+ * First, connection links are copied over to a work array for managing hallway generation.
+ *
+ * Then, for each connection specified between two cells, a hallway is generated based on the following:
+ * 	- If the cell is a hallway anchor, the hallway is generated based on the exact point of the anchor tile
+ * 	- If the cell is a room, the hallway is generated based on a random interior point inside the room
+ *
+ * See: CreateHallway for how these points generate the hallway path
+ *
+ * Finally, if room merging is enabled there is a 9.75% chance that two connected rooms will be merged
+ * into a single larger room. (9.75% comes from two 5% rolls, one for each of the two rooms being merged)
+ * A room can only participate in a merge once.
+ *
+ * Merged rooms take up the full tile space occupied between the two rooms.
+ *
+ */
+void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, bool8 disableRoomMerging)
+{
+    s32 x, y;
+
+    // Validate and copy grid connections over to a work array
+    for (x = 0; x < gridSizeX; x++) {
+        for (y = 0; y < gridSizeY; y++) {
+			if (grid[x][y].isInvalid) {
+                // For invalid cells, assign no connections
+
+				grid[x][y].shouldConnectToTop = FALSE;
+				grid[x][y].shouldConnectToBottom = FALSE;
+				grid[x][y].shouldConnectToLeft = FALSE;
+				grid[x][y].shouldConnectToRight = FALSE;
+			}
+			else {
+				// For valid cells, remove cell connections beyond the grid bounds
+				if (x <= 0) {
+					grid[x][y].connectedToLeft = FALSE;
+				}
+
+				if (y <= 0) {
+					grid[x][y].connectedToTop = FALSE;
+				}
+
+				if (x >= gridSizeX - 1) {
+					grid[x][y].connectedToRight = FALSE;
+				}
+
+				if (y >= gridSizeY - 1) {
+					grid[x][y].connectedToBottom = FALSE;
+				}
+
+				// Assign the connections
+				grid[x][y].shouldConnectToTop = grid[x][y].connectedToTop;
+				grid[x][y].shouldConnectToBottom = grid[x][y].connectedToBottom;
+				grid[x][y].shouldConnectToLeft = grid[x][y].connectedToLeft;
+				grid[x][y].shouldConnectToRight = grid[x][y].connectedToRight;
+			}
+		}
+	}
+
+	for (x = 0; x < gridSizeX; x++) {
+		for (y = 0; y < gridSizeY; y++) {
+		    s32 pt_x, pt_y, pt2_x, pt2_y;
+
+			if (grid[x][y].isInvalid)
+                continue;
+
+			if (grid[x][y].isRoom) {
+				// Room, pick a random point in the interior of the room
+				pt_x = DungeonRandRange(grid[x][y].start.x + 1, grid[x][y].end.x - 1);
+				pt_y = DungeonRandRange(grid[x][y].start.y + 1, grid[x][y].end.y - 1);
+			}
+			else {
+                // Hallway anchor, point is the 1x1 we've placed
+				pt_x = grid[x][y].start.x;
+				pt_y = grid[x][y].start.y;
+			}
+
+			if (grid[x][y].shouldConnectToTop) {
+				// Connect to the cell above
+				if (!grid[x][y - 1].isInvalid) {
+					if (grid[x][y - 1].isRoom) {
+						// Room, pick a random interior x coordinate
+						pt2_x = DungeonRandRange(grid[x][y - 1].start.x + 1, grid[x][y - 1].end.x - 1);
+					}
+					else {
+                        // Anchor, use the central x coordinate
+						pt2_x = grid[x][y - 1].start.x;
+					}
+
+					// Create the hallway
+					CreateHallway(pt_x, grid[x][y].start.y, pt2_x, grid[x][y - 1].end.y - 1, TRUE, listX[x], listY[y]);
+				}
+
+				// Mark the connection and unassign it so we don't try to draw
+				// a second connection from the other way
+
+				grid[x][y].shouldConnectToTop = FALSE;
+				grid[x][y - 1].shouldConnectToBottom = FALSE;
+				grid[x][y].isConnected = TRUE;
+				grid[x][y - 1].isConnected = TRUE;
+			}
+
+			if (grid[x][y].shouldConnectToBottom) {
+				// Connect to the cell below
+				if (!grid[x][y + 1].isInvalid) {
+					if (grid[x][y + 1].isRoom) {
+                        // Room, pick a random interior x coordinate
+						pt2_x = DungeonRandRange(grid[x][y + 1].start.x + 1, grid[x][y + 1].end.x - 1);
+					}
+					else {
+						// Anchor, use the central x coordinate
+						pt2_x = grid[x][y + 1].start.x;
+					}
+
+					// Create the hallway
+					CreateHallway(pt_x, grid[x][y].end.y - 1, pt2_x, grid[x][y + 1].start.y, TRUE, listX[x], listY[y + 1] - 1);
+				}
+
+				// Mark the connection and unassign it so we don't try to draw
+				// a second connection from the other way
+
+				grid[x][y].shouldConnectToBottom = FALSE;
+				grid[x][y + 1].shouldConnectToTop = FALSE;
+				grid[x][y].isConnected = TRUE;
+				grid[x][y + 1].isConnected = TRUE;
+			}
+
+			if (grid[x][y].shouldConnectToLeft) {
+				// Connect to the cell on the left
+				if (!grid[x - 1][y].isInvalid) {
+					if (grid[x - 1][y].isRoom) {
+                        // Room, pick a random interior y coordinate
+						pt2_y = DungeonRandRange(grid[x - 1][y].start.y + 1, grid[x - 1][y].end.y - 1);
+					}
+					else {
+						// Anchor, use the central y coordinate
+						pt2_y = grid[x - 1][y].start.y;
+					}
+
+					// Create the hallway
+					// Using (grid[x-1][y].start.x - 1) is a bug, it should be (grid[x-1][y].end.x - 1)
+					// But CreateHallway has safety checks making the end result the same anyways.
+					CreateHallway(grid[x][y].start.x, pt_y, grid[x - 1][y].start.x - 1, pt2_y, FALSE, listX[x], listY[y]);
+				}
+
+				// Mark the connection and unassign it so we don't try to draw
+				// a second connection from the other way
+
+				grid[x][y].shouldConnectToLeft = FALSE;
+				grid[x - 1][y].shouldConnectToRight = FALSE;
+				grid[x][y].isConnected = TRUE;
+				grid[x - 1][y].isConnected = TRUE;
+			}
+
+			if (grid[x][y].shouldConnectToRight) {
+				// Connect to the cell on the right
+				if (!grid[x + 1][y].isInvalid) {
+					if (grid[x + 1][y].isRoom) {
+                        // Room, pick a random interior y coordinate
+						pt2_y = DungeonRandRange(grid[x + 1][y].start.y + 1, grid[x + 1][y].end.y - 1);
+					}
+					else {
+						// Anchor, use the central y coordinate
+						pt2_y = grid[x + 1][y].start.y;
+					}
+
+					// Create the hallway
+					CreateHallway(grid[x][y].end.x - 1, pt_y, grid[x + 1][y].start.x, pt2_y, FALSE, listX[x + 1] - 1, listY[y]);
+				}
+
+				// Mark the connection and unassign it so we don't try to draw
+				// a second connection from the other way
+
+				grid[x][y].shouldConnectToRight = FALSE;
+				grid[x + 1][y].shouldConnectToLeft = FALSE;
+				grid[x][y].isConnected = TRUE;
+				grid[x + 1][y].isConnected = TRUE;
+			}
+		}
+	}
+
+	// If we don't want to merge rooms, we're done
+	if (disableRoomMerging) {
+		return;
+	}
+
+	// If we do, we can try to merge some!
+	for (x = 0; x < gridSizeX; x++) {
+		for (y = 0; y < gridSizeY; y++) {
+			s32 chance = DungeonRandInt(100);
+
+			// Conditions for merging a room:
+			// - rolls for merge chance
+			// - valid
+			// - connected to another room
+			// - not already merged
+			// - not have a secondary structure
+			// - is a room, not an anchor
+			if (chance < GENERATION_CONSTANT_MERGE_ROOMS_CHANCE &&
+				!grid[x][y].isInvalid &&
+				grid[x][y].isConnected &&
+				!grid[x][y].isMerged &&
+				!grid[x][y].hasSecondaryStructure &&
+				grid[x][y].isRoom)
+            {
+				s32 chanceTwo = DungeonRandInt(4);
+
+				// Verify the same for the target room
+				switch (chanceTwo) {
+                    case 0:
+                        if (x > 0 &&
+                            grid[x - 1][y].isConnected &&
+                            !grid[x - 1][y].isInvalid &&
+                            grid[x - 1][y].isRoom &&
+                            !grid[x - 1][y].hasSecondaryStructure &&
+                            !grid[x - 1][y].isMerged)
+                        {
+                            // Merge with the room to the left
+                            s32 curX, curY;
+                            s32 srcX = grid[x - 1][y].start.x;
+                            s32 srcY = min(grid[x - 1][y].start.y, grid[x][y].start.y);
+                            s32 dstX = grid[x][y].end.x;
+                            s32 dstY = max(grid[x - 1][y].end.y, grid[x][y].end.y);
+
+                            // Use the original room's index
+                            s32 mergeRoomIndex = GetTile(grid[x][y].start.x, grid[x][y].start.y)->room;
+
+                            // Carve out the merged room
+                            for (curX = srcX; curX < dstX; curX++) {
+                                for (curY = srcY; curY < dstY; curY++) {
+                                    Tile *tile = GetTileSafe(curX, curY);
+
+                                    SetTerrainNormal(tile);
+                                    tile->room = mergeRoomIndex;
+                                }
+                            }
+
+                            // Update room boundaries
+                            grid[x - 1][y].start.x = srcX;
+                            grid[x - 1][y].end.x = dstX;
+                            grid[x - 1][y].start.y = srcY;
+                            grid[x - 1][y].end.y = dstY;
+
+                            // Mark merge flags on both rooms
+                            grid[x][y].isMerged = TRUE;
+                            grid[x - 1][y].isMerged = TRUE;
+                            grid[x][y].isConnected = FALSE;
+                            grid[x][y].hasBeenMerged = TRUE;
+                        }
+                        break;
+                    case 1:
+                        if (y >= 1 &&
+                            grid[x][y - 1].isConnected &&
+                            !grid[x][y - 1].isInvalid &&
+                            grid[x][y - 1].isRoom &&
+                            !grid[x][y - 1].hasSecondaryStructure &&
+                            !grid[x][y - 1].isMerged)
+                        {
+                            // Merge with the room above
+                            s32 curX, curY;
+                            s32 srcX = min(grid[x][y - 1].start.x, grid[x][y].start.x);
+                            s32 srcY = grid[x][y - 1].start.y;
+                            s32 dstX = max(grid[x][y - 1].end.x, grid[x][y].end.x);
+                            s32 dstY = grid[x][y].end.y;
+
+                            // Use the original room's index
+                            s32 mergeRoomIndex = GetTile(grid[x][y].start.x, grid[x][y].start.y)->room;
+
+                            // Carve out the merged room
+                            for (curX = srcX; curX < dstX; curX++) {
+                                for (curY = srcY; curY < dstY; curY++) {
+                                    Tile *tile = GetTileSafe(curX, curY);
+
+                                    SetTerrainNormal(tile);
+                                    tile->room = mergeRoomIndex;
+                                }
+                            }
+
+                            // Update room boundaries
+                            grid[x][y - 1].start.x = srcX;
+                            grid[x][y - 1].end.x = dstX;
+                            grid[x][y - 1].start.y = srcY;
+                            grid[x][y - 1].end.y = dstY;
+
+                            // Mark merge flags on both rooms
+                            grid[x][y].isMerged = TRUE;
+                            grid[x][y - 1].isMerged = TRUE;
+                            grid[x][y].isConnected = FALSE;
+                            grid[x][y].hasBeenMerged = TRUE;
+                        }
+                        break;
+                    case 2:
+                        if (x <= gridSizeX - 2 &&
+                            grid[x + 1][y].isConnected &&
+                            !grid[x + 1][y].isInvalid &&
+                             grid[x + 1][y].isRoom &&
+                            !grid[x + 1][y].hasSecondaryStructure &&
+                            !grid[x + 1][y].isMerged)
+                        {
+                            // Merge with the room to the right
+                            s32 curX, curY;
+                            s32 srcX = grid[x][y].start.x;
+                            s32 srcY = min(grid[x][y].start.y, grid[x + 1][y].start.y);
+                            s32 dstX = grid[x + 1][y].end.x;
+                            s32 dstY = max(grid[x][y].end.y, grid[x + 1][y].end.y);
+
+                            // Use the original room's index
+                            s32 mergeRoomIndex = GetTile(grid[x][y].start.x, grid[x][y].start.y)->room;
+
+                            // Carve out the merged room
+                            for (curX = srcX; curX < dstX; curX++) {
+                                for (curY = srcY; curY < dstY; curY++) {
+                                    Tile *tile = GetTileSafe(curX, curY);
+
+                                    SetTerrainNormal(tile);
+                                    tile->room = mergeRoomIndex;
+                                }
+                            }
+
+                            // Update room boundaries
+                            grid[x][y].start.x = srcX;
+                            grid[x][y].end.x = dstX;
+                            grid[x][y].start.y = srcY;
+                            grid[x][y].end.y = dstY;
+
+                            // Mark merge flags on both rooms
+                            grid[x + 1][y].isMerged = TRUE;
+                            grid[x][y].isMerged = TRUE;
+                            grid[x + 1][y].isConnected = FALSE;
+                            grid[x + 1][y].hasBeenMerged = TRUE;
+                        }
+                        break;
+                    case 3:
+                        if (y <= gridSizeY - 2 &&
+                            grid[x][y + 1].isConnected &&
+                            !grid[x][y + 1].isInvalid &&
+                            grid[x][y + 1].isRoom &&
+                            !grid[x][y + 1].hasSecondaryStructure &&
+                            !grid[x][y + 1].isMerged)
+                        {
+                            // Merge with the room below
+                            s32 curX, curY;
+                            s32 srcX = min(grid[x][y].start.x, grid[x][y + 1].start.x);
+                            s32 srcY = grid[x][y].start.y;
+                            s32 dstX = max(grid[x][y].end.x, grid[x][y + 1].end.x);
+                            s32 dstY = grid[x][y + 1].end.y;
+
+                            // Use the original room's index
+                            s32 mergeRoomIndex = GetTile(grid[x][y].start.x, grid[x][y].start.y)->room;
+
+                            // Carve out the merged room
+                            for (curX = srcX; curX < dstX; curX++) {
+                                for (curY = srcY; curY < dstY; curY++) {
+                                    Tile *tile = GetTileSafe(curX, curY);
+
+                                    SetTerrainNormal(tile);
+                                    tile->room = mergeRoomIndex;
+                                }
+                            }
+
+                            // Update room boundaries
+                            grid[x][y].start.x = srcX;
+                            grid[x][y].end.x = dstX;
+                            grid[x][y].start.y = srcY;
+                            grid[x][y].end.y = dstY;
+
+                            // Mark merge flags on both rooms
+                            grid[x][y + 1].isMerged = TRUE;
+                            grid[x][y].isMerged = TRUE;
+                            grid[x][y + 1].isConnected = FALSE;
+                            grid[x][y + 1].hasBeenMerged = TRUE;
+                        }
+                        break;
+				}
+			}
+		}
+	}
 }
 
 //
