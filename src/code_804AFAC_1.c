@@ -70,13 +70,29 @@ struct FileFixedmapPosStruct
     u8 y;
 };
 
-static inline void SetTerrainNormal(Tile *tile)
+// Helper functions for terrain flags
+static inline void SetTerrainType(Tile *tile, u32 terrainType)
 {
     tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    tile->terrainType |= TERRAIN_TYPE_NORMAL;
+    tile->terrainType |= terrainType;
 }
 
-static inline u32 GetTerrain(Tile *tile)
+static inline void SetTerrainNormal(Tile *tile)
+{
+    SetTerrainType(tile, TERRAIN_TYPE_NORMAL);
+}
+
+static inline void SetTerrainSecondary(Tile *tile)
+{
+    SetTerrainType(tile, TERRAIN_TYPE_SECONDARY);
+}
+
+static inline void SetTerrainWall(Tile *tile)
+{
+    SetTerrainType(tile, TERRAIN_TYPE_WALL);
+}
+
+static inline u32 GetTerrainType(Tile *tile)
 {
     return tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
 }
@@ -972,15 +988,15 @@ void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
             Tile *tile = GetTileSafe(x, y);
 
             tile->terrainType &= ~(TERRAIN_TYPE_UNK_2);
-            if (tile->room == CORRIDOR_ROOM && (GetTerrain(tile) == TERRAIN_TYPE_NORMAL)) {
-                if (x > 0 && (GetTerrain(GetTile(x - 1, y)) == TERRAIN_TYPE_NORMAL))
+            if (tile->room == CORRIDOR_ROOM && (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL)) {
+                if (x > 0 && (GetTerrainType(GetTile(x - 1, y)) == TERRAIN_TYPE_NORMAL))
                     unkCount++;
-                if (y > 0 && (GetTerrain(GetTile(x, y - 1)) == TERRAIN_TYPE_NORMAL))
+                if (y > 0 && (GetTerrainType(GetTile(x, y - 1)) == TERRAIN_TYPE_NORMAL))
                     unkCount++;
-                if (x < DUNGEON_MAX_SIZE_X - 2 && (GetTerrain(GetTile(x + 1, y)) == TERRAIN_TYPE_NORMAL))
+                if (x < DUNGEON_MAX_SIZE_X - 2 && (GetTerrainType(GetTile(x + 1, y)) == TERRAIN_TYPE_NORMAL))
                     unkCount++;
                 // BUG: It should check for y and not x. Not sure if it has any effect, because this function is called only once with maxY equal to DUNGEON_MAX_SIZE_Y
-                if (x < DUNGEON_MAX_SIZE_Y - 2 && (GetTerrain(GetTile(x, y + 1)) == TERRAIN_TYPE_NORMAL))
+                if (x < DUNGEON_MAX_SIZE_Y - 2 && (GetTerrainType(GetTile(x, y + 1)) == TERRAIN_TYPE_NORMAL))
                     unkCount++;
 
                 if (unkCount > 2) {
@@ -1858,7 +1874,7 @@ void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
 
 		// Keep walking until an obstacle is encountered
 		while (1) {
-			if (GetTerrain(GetTile(currX, currY)) != TERRAIN_TYPE_NORMAL)
+			if (GetTerrainType(GetTile(currX, currY)) != TERRAIN_TYPE_NORMAL)
                 break;
 
             currX += gAdjacentTileOffsets[direction].x;
@@ -1866,7 +1882,7 @@ void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
 		}
 
 		// Abort if we reached secondary terrain
-		if (GetTerrain(GetTile(currX, currY)) == TERRAIN_TYPE_SECONDARY)
+		if (GetTerrainType(GetTile(currX, currY)) == TERRAIN_TYPE_SECONDARY)
             continue;
 
 		// Check that the current tile is at least 2 away from the map border
@@ -1887,13 +1903,13 @@ void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
 		// Make sure the direction 90 degrees counterclockwise isn't an open tile
 		checkX = gAdjacentTileOffsets[(direction + 2) & DIRECTION_MASK_CARDINAL].x;
 		checkY = gAdjacentTileOffsets[(direction + 2) & DIRECTION_MASK_CARDINAL].y;
-		if (GetTerrain(GetTile(currX + checkX, currY + checkY)) == TERRAIN_TYPE_NORMAL)
+		if (GetTerrainType(GetTile(currX + checkX, currY + checkY)) == TERRAIN_TYPE_NORMAL)
             continue;
 
 		// Do the same for 90 degrees clockwise (or 270 counterclockwise) and make sure it's not an open tile
 		checkX2 = gAdjacentTileOffsets[(direction - 2) & DIRECTION_MASK_CARDINAL].x;
 		checkY2 = gAdjacentTileOffsets[(direction - 2) & DIRECTION_MASK_CARDINAL].y;
-		if (GetTerrain(GetTile(currX + checkX2, currY + checkY2)) == TERRAIN_TYPE_NORMAL)
+		if (GetTerrainType(GetTile(currX + checkX2, currY + checkY2)) == TERRAIN_TYPE_NORMAL)
             continue;
 
 		// Number of steps to walk in one direction before turning
@@ -1909,7 +1925,7 @@ void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
 
 			if (currX <= 1 || currY <= 1 || currX >= DUNGEON_MAX_SIZE_X - 1 || currY >= DUNGEON_MAX_SIZE_Y - 1)
                 break;
-			if (GetTerrain(GetTile(currX, currY)) == TERRAIN_TYPE_NORMAL)
+			if (GetTerrainType(GetTile(currX, currY)) == TERRAIN_TYPE_NORMAL)
                 break;
 			if (GetTile(currX, currY)->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
                 break;
@@ -1917,33 +1933,33 @@ void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
             willNotMakeSquare = TRUE;
 
 			// Check Bottom to Right
-			if ((GetTerrain(GetTile(currX + 1, currY)) == TERRAIN_TYPE_NORMAL) &&
-                (GetTerrain(GetTile(currX + 1, currY + 1)) == TERRAIN_TYPE_NORMAL) &&
-				(GetTerrain(GetTile(currX, currY + 1)) == TERRAIN_TYPE_NORMAL))
+			if ((GetTerrainType(GetTile(currX + 1, currY)) == TERRAIN_TYPE_NORMAL) &&
+                (GetTerrainType(GetTile(currX + 1, currY + 1)) == TERRAIN_TYPE_NORMAL) &&
+				(GetTerrainType(GetTile(currX, currY + 1)) == TERRAIN_TYPE_NORMAL))
 			{
 				willNotMakeSquare = FALSE;
 			}
 
 			// Check Top to Right
-			if ((GetTerrain(GetTile(currX + 1, currY)) == TERRAIN_TYPE_NORMAL) &&
-				(GetTerrain(GetTile(currX + 1, currY - 1)) == TERRAIN_TYPE_NORMAL) &&
-				(GetTerrain(GetTile(currX, currY - 1)) == TERRAIN_TYPE_NORMAL))
+			if ((GetTerrainType(GetTile(currX + 1, currY)) == TERRAIN_TYPE_NORMAL) &&
+				(GetTerrainType(GetTile(currX + 1, currY - 1)) == TERRAIN_TYPE_NORMAL) &&
+				(GetTerrainType(GetTile(currX, currY - 1)) == TERRAIN_TYPE_NORMAL))
             {
 				willNotMakeSquare = FALSE;
 			}
 
 			// Check Bottom to Left
-			if ((GetTerrain(GetTile(currX - 1, currY)) == TERRAIN_TYPE_NORMAL) &&
-				(GetTerrain(GetTile(currX - 1, currY + 1)) == TERRAIN_TYPE_NORMAL) &&
-				(GetTerrain(GetTile(currX, currY + 1)) == TERRAIN_TYPE_NORMAL))
+			if ((GetTerrainType(GetTile(currX - 1, currY)) == TERRAIN_TYPE_NORMAL) &&
+				(GetTerrainType(GetTile(currX - 1, currY + 1)) == TERRAIN_TYPE_NORMAL) &&
+				(GetTerrainType(GetTile(currX, currY + 1)) == TERRAIN_TYPE_NORMAL))
             {
 				willNotMakeSquare = FALSE;
 			}
 
 			// Check Top to Left
-			if ((GetTerrain(GetTile(currX - 1, currY)) == TERRAIN_TYPE_NORMAL) &&
-				(GetTerrain(GetTile(currX - 1, currY - 1)) == TERRAIN_TYPE_NORMAL) &&
-				(GetTerrain(GetTile(currX, currY - 1)) == TERRAIN_TYPE_NORMAL))
+			if ((GetTerrainType(GetTile(currX - 1, currY)) == TERRAIN_TYPE_NORMAL) &&
+				(GetTerrainType(GetTile(currX - 1, currY - 1)) == TERRAIN_TYPE_NORMAL) &&
+				(GetTerrainType(GetTile(currX, currY - 1)) == TERRAIN_TYPE_NORMAL))
 			{
 				willNotMakeSquare = FALSE;
 			}
@@ -1957,13 +1973,13 @@ void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
 			// Make sure the direction 90 degrees counterclockwise isn't an open tile
 			checkX = gAdjacentTileOffsets[(direction + 2) & DIRECTION_MASK_CARDINAL].x;
 			checkY = gAdjacentTileOffsets[(direction + 2) & DIRECTION_MASK_CARDINAL].y;
-			if (GetTerrain(GetTile(currX + checkX, currY + checkY)) == TERRAIN_TYPE_NORMAL)
+			if (GetTerrainType(GetTile(currX + checkX, currY + checkY)) == TERRAIN_TYPE_NORMAL)
                 break;
 
 			// Do the same for 90 degrees clockwise (or 270 counterclockwise) and make sure it's not an open tile
 			checkX2 = gAdjacentTileOffsets[(direction - 2) & DIRECTION_MASK_CARDINAL].x;
 			checkY2 = gAdjacentTileOffsets[(direction - 2) & DIRECTION_MASK_CARDINAL].y;
-			if (GetTerrain(GetTile(currX + checkX2, currY + checkY2)) == TERRAIN_TYPE_NORMAL)
+			if (GetTerrainType(GetTile(currX + checkX2, currY + checkY2)) == TERRAIN_TYPE_NORMAL)
                 break;
 
 			j--;
@@ -2163,8 +2179,10 @@ void AssignRooms(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSiz
 	gUnknown_202F1AD = FALSE;
 }
 
-#define GENERATION_CONSTANT_SECONDARY_STRUCTURE_FLAG_CHANCE 80
-#define GENERATION_CONSTANT_MERGE_ROOMS_CHANCE 5
+// Todo: move to header
+#define GENERATION_CONSTANT_MERGE_ROOMS_CHANCE 5 // (0 to 100) probability to merge two rooms together
+#define GENERATION_CONSTANT_NO_IMPERFECTIONS_CHANCE 60 // (0 to 100) probability that a room will not have imperfections, if it was already flagged for them
+#define GENERATION_CONSTANT_SECONDARY_STRUCTURE_FLAG_CHANCE 80 // (0 to 100) probability that a room will be flagged to have a secondary structure.
 
 /*
  * CreateRoomsAndAnchors - Creates the rectangle regions of open terrain for each room
@@ -2961,6 +2979,551 @@ void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
 			}
 		}
 	}
+}
+
+extern const bool8 gUnknown_80F6DD5[][NUM_DIRECTIONS];
+
+/*
+ * GenerateRoomImperfections - Attempt to generate room imperfections for each room, if flagged to do so.
+ *
+ * Rooms are flagged for whether to allow imperfections in CreateRoomsAndAnchors.
+ * Each qualifying flagged room has a 40% chance to generate imperfections in the room.
+ *
+ * Imperfections are generated by randomly growing walls of the room inwards
+ * for a certain number of iterations, depending on the average length of the room.
+ *
+ * Each iteration will go in both a counterclockwise and clockwise generation movement (not necessarily for the same corner though)
+ *
+ * We pick a random corner, derive our direction from the movement being used, then seek up to 10 tiles for one to replace.
+ * We avoid getting too close to hallways and ensure our cardinal neighbor tiles match what we expect for open terrain.
+ */
+void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY)
+{
+    s32 x, y;
+
+	for (x = 0; x < gridSizeX; x++) {
+		for (y = 0; y < gridSizeY; y++) {
+            s32 counter, length;
+			// To have imperfections a room must:
+			// - be valid
+			// - not have been merged
+			// - be a room
+			// - be connected
+			// - not have a secondary structure
+			// - not be a maze room
+			// - be flagged to be made imperfect
+			if (grid[x][y].isInvalid)
+                continue;
+            if (grid[x][y].hasBeenMerged)
+                continue;
+			if (grid[x][y].isMerged)
+                continue;
+			if (!grid[x][y].isConnected)
+                continue;
+			if (!grid[x][y].isRoom)
+                continue;
+			if (grid[x][y].hasSecondaryStructure)
+                continue;
+			if (grid[x][y].isMazeRoom)
+                continue;
+			if (!grid[x][y].flagImperfect)
+                continue;
+
+			// Roll for imperfections
+			// By default, is a 40% chance that the room will still have imperfections
+			if (DungeonRandInt(100) < GENERATION_CONSTANT_NO_IMPERFECTIONS_CHANCE)
+                continue;
+
+			length = grid[x][y].end.x - grid[x][y].start.x + (grid[x][y].end.y - grid[x][y].start.y);
+			length /= 4;
+			if (length == 0)
+                length = 1;
+
+			// Shrink the room from its corners either in the x or y direction
+			// Repeat the number of times equal to the average room length
+			for (counter = 0; counter < length; counter++) {
+                s32 i, v;
+				for (i = 0; i < 2; i++) {
+					// Start from one of four corners
+					// i == 0 => fill in walls counterclockwise
+					// i == 1 => fill in walls clockwise
+					s32 pt_x, pt_y;
+					s32 moveX, moveY;
+					s32 startingCorner = DungeonRandInt(4);
+
+					switch (startingCorner) {
+					    // Top-left corner
+                        case 0:
+                        default:
+                            pt_x = grid[x][y].start.x;
+                            pt_y = grid[x][y].start.y;
+                            if (i != 0) {
+                                moveX = 1;
+                                moveY = 0;
+                            }
+                            else {
+                                moveX = 0;
+                                moveY = 1;
+                            }
+                            break;
+                        // Top-right corner
+                        case 1:
+                            pt_x = grid[x][y].end.x - 1;
+                            pt_y = grid[x][y].start.y;
+                            if (i != 0) {
+                                moveX = 0;
+                                moveY = 1;
+                            }
+                            else {
+                                moveX = -1;
+                                moveY = 0;
+                            }
+                            break;
+                        // Bottom-right corner
+                        case 2:
+                            pt_x = grid[x][y].end.x - 1;
+                            pt_y = grid[x][y].end.y - 1;
+
+                            if (i != 0) {
+                                moveX = -1;
+                                moveY = 0;
+                            }
+                            else {
+                                moveX = 0;
+                                moveY = -1;
+                            }
+                            break;
+                        // Bottom-left corner
+                        case 3:
+                            pt_x = grid[x][y].start.x;
+                            pt_y = grid[x][y].end.y - 1;
+
+                            if (i != 0) {
+                                moveX = 0;
+                                moveY = -1;
+                            }
+                            else {
+                                moveX = 1;
+                                moveY = 0;
+                            }
+                            break;
+					}
+
+					// Search up to 10 tiles for a new tile to replace
+					// from the selected starting corner and direction
+					for (v = 0; v < 10; v++) {
+						// Make sure we're still in bounds
+                        if (pt_x < grid[x][y].start.x || pt_x >= grid[x][y].end.x)
+                            break;
+                        if (pt_y < grid[x][y].start.y || pt_y >= grid[x][y].end.y)
+                            break;
+
+						if (GetTerrainType(GetTile(pt_x, pt_y)) == TERRAIN_TYPE_NORMAL) {
+							// Make sure there aren't any hallways within 2 spaces from the current tile
+							// If there are, skip filling it in
+
+							s32 direction = DIRECTION_SOUTH;
+							while (direction < NUM_DIRECTIONS) {
+                                s32 offsetX, offsetY;
+								s32 nextX = pt_x + gAdjacentTileOffsets[direction].x;
+								s32 nextY = pt_y + gAdjacentTileOffsets[direction].y;
+
+								bool8 found = FALSE;
+								for (offsetY = -1; offsetY <= 1; offsetY++) {
+                                    for (offsetX = -1; offsetX <= 1; offsetX++) {
+										// Search for open terrain which is not a part of a room (a hallway)
+										Tile *tile = GetTile(nextX + offsetX, nextY + offsetY);
+
+										if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
+                                            continue;
+                                        if (tile->room == CORRIDOR_ROOM) {
+                                            found = TRUE;
+                                        }
+
+                                        if (found)
+                                            break;
+									}
+
+									if (found)
+                                        break;
+								}
+
+								if (found)
+                                    break;
+
+								direction++;
+							}
+
+							// If direction == NUM_DIRECTIONS, we didn't find any hallways and are good to proceed
+							if (direction == NUM_DIRECTIONS) {
+								// Check that our cardinal neighbors' terrain types match what we expect for generating new tiles in this direction
+								// For example, if we're generating from the top-left corner, we should only expect tiles
+								// below us or to our right to have open terrain. If another tile does, we should stop
+								// because the resulting room may look strange otherwise
+
+								direction = DIRECTION_SOUTH;
+								while (direction < NUM_DIRECTIONS) {
+									s32 nextX = gAdjacentTileOffsets[direction].x;
+									s32 nextY = gAdjacentTileOffsets[direction].y;
+									bool8 isOpen = (GetTerrainType(GetTile(pt_x + nextX, pt_y + nextY)) == TERRAIN_TYPE_NORMAL);
+
+									if (gUnknown_80F6DD5[startingCorner][direction] != isOpen)
+                                        break;
+
+									// Advance by 2 to only check cardinal directions
+									direction += 2;
+								}
+
+								// If direction == NUM_DIRECTIONS, the neighbors match what we expect
+								if (direction == NUM_DIRECTIONS) {
+									// Fill in the current open floor tile with a wall
+									SetTerrainWall(GetTileSafe(pt_x, pt_y));
+								}
+							}
+
+							break;
+						}
+						else {
+							// The terrain is filled or already a wall, move to the next tile
+							pt_x += moveX;
+							pt_y += moveY;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/*
+ * CreateHallway - Creates a hallway between two points.
+ *
+ *        |---------B
+ *        |
+ * A------|
+ *
+ * The hallway generated consists of two parallel paths connected by a perpendicular "kink" in the path
+ * The "kink" in a path occurs along (turn_x, turnY), which in practice is the grid cell boundary
+ * If the paths trace same line, no "kink" will be generated
+ *
+ * If generation runs into an existing open tile, creation stops prematurely (such as another hallway).
+ *
+ * The vertical flag specifies whether the hallway is being generated horizontally or vertically
+ */
+void CreateHallway(s32 x, s32 y, s32 endX, s32 endY, bool8 vertical, s32 turnX_, s32 turnY_)
+{
+    s32 startX = x;
+    s32 startY = y;
+    s32 turnX = turnX_;
+    s32 turnY = turnY_;
+	s32 counter;
+
+	if (vertical) {
+        // Vertical hallway
+
+        counter = 0;
+		// Create the vertical line between the starting point and the grid cell boundary
+		while (y != turnY) {
+			if (counter++ >= DUNGEON_MAX_SIZE_X)
+                return; // Sanity check!
+
+			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
+				SetTerrainNormal(GetTileSafe(x, y));
+			}
+			else {
+				// If we find open floor, stop here
+				// The hall has connected up to an existing hall
+				if (x != startX || y != startY)
+                    return;
+			}
+
+			if (y < turnY) {
+				y++;
+			}
+			else {
+				y--;
+			}
+		}
+
+		counter = 0;
+		// Create the horizontal line to connect the horizontal lines at two different x values
+		while (x != endX) {
+			if (counter++ >= DUNGEON_MAX_SIZE_X)
+                return; // Sanity check!
+
+			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
+				SetTerrainNormal(GetTileSafe(x, y));
+			}
+			else {
+				if (x != startX || y != startY)
+                    return;
+			}
+
+			if (x < endX) {
+				x++;
+			}
+			else {
+				x--;
+			}
+		}
+
+		counter = 0;
+		// Create the vertical line between the end point and the grid cell
+		while (y != endY) {
+			if (counter++ >= DUNGEON_MAX_SIZE_X)
+                return;
+
+			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
+				SetTerrainNormal(GetTileSafe(x, y));
+			}
+			else {
+				if (x != startX || y != startY)
+                    return;
+			}
+
+			if (y < endY) {
+				y++;
+			}
+			else {
+				y--;
+			}
+		}
+	}
+	else {
+		// Horizontal hallway
+
+		counter = 0;
+		// Create the horizontal line between the starting point and the grid cell boundary
+		while (x != turnX) {
+			if (counter++ >= DUNGEON_MAX_SIZE_X)
+                return; // Sanity check!
+
+			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
+				SetTerrainNormal(GetTileSafe(x, y));
+			}
+			else {
+				// If we find open floor, stop here
+				// The hall has connected up to an existing hall
+				if (x != startX || y != startY)
+                    return;
+			}
+
+			if (x < turnX) {
+				x++;
+			}
+			else {
+				x--;
+			}
+		}
+
+		counter = 0;
+		// Create the vertical line to connect the horizontal lines at two different y values
+		while (y != endY) {
+			if (counter++ >= DUNGEON_MAX_SIZE_X)
+                return;
+
+			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
+				SetTerrainNormal(GetTileSafe(x, y));
+			}
+			else {
+				if (x != startX || y != startY)
+                    return;
+			}
+
+			if (y < endY) {
+				y++;
+			}
+			else {
+				y--;
+			}
+		}
+
+		counter = 0;
+		// Create the horizontal line between the end point and the grid cell
+		while (x != endX) {
+			if (counter++ >= DUNGEON_MAX_SIZE_X)
+                return;
+
+			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
+				SetTerrainNormal(GetTileSafe(x, y));
+			}
+			else {
+				if (x != startX || y != startY)
+                    return;
+			}
+
+            if (x < endX) {
+				x++;
+			}
+			else {
+				x--;
+			}
+		}
+	}
+}
+
+/*
+ * EnsureConnectedGrid - Ensure the grid forms a connected graph (all valid cells are reachable) by adding hallways to unreachable cells
+ *
+ * If the unconnected cell is a hallway anchor, it will be ignored and filled in.
+ * If the unconnected cell is a room, it will check all adjacent directions for a connected room, then add a hallway between if found.
+ *
+ * If no eligible room is found, the room will be removed and filled back in.
+ */
+void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY)
+{
+    s32 x, y;
+
+    for (x = 0; x < gridSizeX; x++) {
+		for (y = 0; y < gridSizeY; y++) {
+			// If any of these is TRUE, this cell is fine and we don't need to worry about it
+			if (grid[x][y].isInvalid)
+                continue;
+            if (grid[x][y].hasBeenMerged)
+                continue;
+            if (grid[x][y].isConnected)
+                continue;
+
+			if (grid[x][y].isRoom && !grid[x][y].hasSecondaryStructure) {
+				// Unconnected room
+				s32 pt_x, pt_y;
+				s32 rnd_x = DungeonRandRange(grid[x][y].start.x + 1, grid[x][y].end.x - 1);
+				s32 rnd_y = DungeonRandRange(grid[x][y].start.y + 1, grid[x][y].end.y - 1);
+
+				if (y > 0 && !grid[x][y - 1].isInvalid && !grid[x][y - 1].isMerged && grid[x][y - 1].isConnected) {
+					// Attempt to connect to the grid cell above if it's connected
+					if (grid[x][y - 1].isRoom) {
+                        // Room, take random interior x coordinate
+						pt_x = DungeonRandRange(grid[x][y - 1].start.x + 1, grid[x][y - 1].end.x - 1);
+						pt_y = DungeonRandRange(grid[x][y - 1].start.y + 1, grid[x][y - 1].end.y - 1); // Unused
+					}
+					else {
+						// Anchor, take center x
+						pt_x = grid[x][y - 1].start.x;
+						pt_y = grid[x][y - 1].start.y; // Unused
+					}
+
+					CreateHallway(rnd_x, grid[x][y].start.y, pt_x, grid[x][y - 1].end.y - 1, TRUE, listX[x], listY[y]);
+
+					grid[x][y].isConnected = TRUE;
+					grid[x][y].connectedToTop = TRUE;
+					grid[x][y - 1].connectedToBottom = TRUE;
+				}
+				else if (y < gridSizeY - 1 && !grid[x][y + 1].isInvalid && !grid[x][y + 1].isMerged && grid[x][y + 1].isConnected) {
+					// Attempt to connect to the grid cell below if it's connected
+					if (grid[x][y + 1].isRoom) {
+					    // Room, take random interior x coordinate
+                        pt_x = DungeonRandRange(grid[x][y + 1].start.x + 1, grid[x][y + 1].end.x - 1);
+						pt_y = DungeonRandRange(grid[x][y + 1].start.y + 1, grid[x][y + 1].end.y - 1); // Unused
+					}
+					else {
+						// Anchor, take center x
+						pt_x = grid[x][y + 1].start.x;
+						pt_y = grid[x][y + 1].start.y; // Unused
+					}
+
+					CreateHallway(rnd_x, grid[x][y].end.y - 1, pt_x, grid[x][y + 1].start.y, TRUE, listX[x], listY[y + 1] - 1);
+
+					grid[x][y].isConnected = TRUE;
+					grid[x][y].connectedToBottom = TRUE;
+					grid[x][y + 1].connectedToTop = TRUE;
+				}
+				else if (x > 0 && !grid[x - 1][y].isInvalid && !grid[x - 1][y].isMerged && grid[x - 1][y].isConnected) {
+					// Attempt to connect to the grid cell left if it's connected
+					if (grid[x - 1][y].isRoom) {
+                        // Room, take random interior y coordinate
+						pt_x = DungeonRandRange(grid[x - 1][y].start.x + 1, grid[x - 1][y].end.x - 1); //Unused
+						pt_y = DungeonRandRange(grid[x - 1][y].start.y + 1, grid[x - 1][y].end.y - 1);
+					}
+					else {
+						// Anchor, take center y
+						pt_x = grid[x - 1][y].start.x; // Unused
+						pt_y = grid[x - 1][y].start.y;
+					}
+
+					// Typo? Would expect grid[x - 1][y].end.x - 1 for 3rd parameter
+					CreateHallway(grid[x][y].start.x, rnd_y, grid[x - 1][y].start.x - 1, pt_y, FALSE, listX[x], listY[y]);
+
+					grid[x][y].isConnected = TRUE;
+					grid[x][y].connectedToLeft = TRUE;
+					grid[x - 1][y].connectedToRight = TRUE;
+				}
+				else if (x < gridSizeX - 1 && !grid[x + 1][y].isInvalid && !grid[x + 1][y].isMerged && grid[x + 1][y].isConnected) {
+					// Attempt to connect to the grid cell right if it's connected
+					if (grid[x + 1][y].isRoom) {
+                        // Room, take random interior y coordinate
+						pt_x = DungeonRandRange(grid[x + 1][y].start.x + 1, grid[x + 1][y].end.x - 1); // Unused
+						pt_y = DungeonRandRange(grid[x + 1][y].start.y + 1, grid[x + 1][y].end.y - 1);
+					}
+                    else {
+						// Anchor, take center y
+						pt_x = grid[x + 1][y].start.x; // Unused
+						pt_y = grid[x + 1][y].start.y;
+					}
+
+					CreateHallway(grid[x][y].end.x - 1, rnd_y, grid[x + 1][y].start.x, pt_y, FALSE, listX[x + 1] - 1, listY[y]);
+
+					grid[x][y].isConnected = TRUE;
+					grid[x][y].connectedToRight = TRUE;
+					grid[x + 1][y].connectedToLeft = TRUE;
+				}
+			}
+			else {
+				// Unconnected anchor, don't bother trying.
+
+				// Just fill it in with wall tiles
+                Tile *tile = GetTileSafe(grid[x][y].start.x, grid[x][y].start.y);
+                SetTerrainWall(tile);
+
+				// Also remove any spawn flags
+				// TODO: rename to spawn_or_visibility_flags stairs/item/trap
+				tile->unk4 &= ~(0x1);
+				tile->unk4 &= ~(0x2);
+				tile->unk4 &= ~(0x4);
+			}
+		}
+	}
+
+	// If any rooms are still unconnected (meaning attempts to connect failed)
+	// Fill in the rooms
+	for (x = 0; x < gridSizeX; x++) {
+		for (y = 0; y < gridSizeY; y++) {
+		    s32 curX, curY;
+			if (grid[x][y].isInvalid || grid[x][y].hasBeenMerged || grid[x][y].isConnected || grid[x][y].unk15)
+                continue;
+
+			for (curX = grid[x][y].start.x; curX < grid[x][y].end.x; curX++) {
+				for (curY = grid[x][y].start.y; curY < grid[x][y].end.y; curY++) {
+					Tile *tile = GetTileSafe(curX, curY);
+                    // Set it to wall terrain
+					SetTerrainWall(tile);
+
+					// Remove any spawn flags
+					tile->unk4 &= ~(0x2);
+                    tile->unk4 &= ~(0x1);
+                    tile->unk4 &= ~(0x4);
+
+					// Set room index to 0xFF (not a room)
+					tile->room = CORRIDOR_ROOM;
+				}
+			}
+		}
+	}
+}
+
+/*
+ * SetTerrainObstacleChecked - Sets terrain on a specific tile as an obstacle (either a wall or secondary terrain)
+ *
+ * If secondary terrain is requested and the room indices match, secondary terrain (water/lava) will be placed for the tile.
+ *
+ * Otherwise, the tile will be a wall.
+ */
+void SetTerrainObstacleChecked(Tile *tile, bool8 useSecondaryTerrain, u8 roomIndex)
+{
+    SetTerrainWall(tile);
+    if (useSecondaryTerrain && tile->room == roomIndex) {
+        SetTerrainSecondary(tile);
+    }
 }
 
 //
