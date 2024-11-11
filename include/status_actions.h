@@ -4,14 +4,14 @@
 #include "constants/move.h"
 #include "structs/dungeon_entity.h"
 
-bool8 sub_805B668(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 DreamEaterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 sub_805B734(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 RecycleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 ReflectMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-bool8 sub_805B808(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 DragonRageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 sub_805B884(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 SkullBashMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-bool8 sub_805B910(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 LusterPurgeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 sub_805B968(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 RockSmashMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 sub_805BA44(Entity *pokemon, Entity *target, Move *move, s32 param_4);
