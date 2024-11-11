@@ -391,7 +391,7 @@ Entity *sub_804550C(s16 a)
 );
 }
 
-Entity *sub_8045684(u8 a, Position *pos, u8 c)
+Entity *sub_8045684(u8 trapID, Position *pos, u8 c)
 {
     Entity *entity;
     s32 i;
@@ -401,7 +401,7 @@ Entity *sub_8045684(u8 a, Position *pos, u8 c)
         if (!EntityExists(entity)) {
             entity->type = ENTITY_TRAP;
             entity->axObj.info.trap = &gDungeon->unk3908[i];
-            entity->axObj.info.trap->unk0 = a;
+            entity->axObj.info.trap->id = trapID;
             entity->axObj.info.trap->unk1 = c;
 
             entity->unk1C = 0;
@@ -457,19 +457,19 @@ bool8 sub_8045804(Entity *ent)
 {
     UnkDungeonGlobal_unk181E8_sub* saveTyping;
     Entity* camTarget;
-    EntityInfo *entInfo;
+    EntityInfo *monInfo;
 
     switch (GetEntityType(ent)) {
         case ENTITY_MONSTER: {
             if (ent->isVisible) {
                 saveTyping = &gDungeon->unk181e8;
                 camTarget = saveTyping->cameraTarget;
-                entInfo = GetEntInfo(ent);
+                monInfo = GetEntInfo(ent);
 
-                if (!entInfo->isNotTeamMember)
+                if (!monInfo->isNotTeamMember)
                     return TRUE;
 
-                if (!saveTyping->unk1820F && entInfo->transformStatus.transformStatus == STATUS_INVISIBLE)
+                if (!saveTyping->unk1820F && monInfo->transformStatus.transformStatus == STATUS_INVISIBLE)
                     return FALSE;
                 
                 if (saveTyping->unk1820B || saveTyping->unk1820D)
@@ -480,6 +480,9 @@ bool8 sub_8045804(Entity *ent)
             }
             return FALSE;
         }
+        /*case ENTITY_TRAP:
+        case ENTITY_ITEM:
+        case ENTITY_UNK_4:*/
         default: {
             return TRUE;
         }

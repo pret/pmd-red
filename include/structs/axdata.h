@@ -88,7 +88,7 @@ struct axObject
     {
         struct Item* item;
         struct EntityInfo* monster;
-        struct EntTrapInfo* trap;
+        struct Trap* trap;
     } info;
 };
 

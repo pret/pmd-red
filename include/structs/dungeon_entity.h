@@ -352,13 +352,6 @@ typedef struct EntityInfo
     u8 unk204;
 } EntityInfo;
 
-// size: 0x4
-typedef struct EntTrapInfo
-{
-    /* 0x0 */ u8 unk0;
-    /* 0x0 */ u8 unk1;
-} EntTrapInfo;
-
 // size: 0x74 | Used for Pokémon, items, and traps.
 typedef struct Entity
 {
@@ -475,11 +468,6 @@ static inline void SetExpMultplier(EntityInfo *info)
 {
     if (!ExpMultiplierChanged(info))
         SetRegularExpMultiplier(info);
-}
-
-static inline EntityInfo *GetEntInfo(Entity *ent)
-{
-    return ent->axObj.info.monster;
 }
 
 #endif

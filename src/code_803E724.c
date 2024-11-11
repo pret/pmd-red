@@ -849,9 +849,9 @@ void sub_803F27C(bool8 a0)
         strPtr->blinded = 0;
         strPtr->hallucinating = 0;
         strPtr->unk1820F = 0;
-        strPtr->unk1820D = 0;
+        strPtr->unk1820D = FALSE;
         strPtr->unk18211 = 0;
-        strPtr->unk1820E = 0;
+        strPtr->unk1820E = FALSE;
         strPtr->unk1820B = 0;
         strPtr->unk1820C = 0;
     }
@@ -979,8 +979,8 @@ void sub_803F580(u8 a0)
         strPtr->cameraPixelPos.y = (cameraTarget->pixelPos.y / 256) - 96;
 
         if (HasHeldItem(cameraTarget, ITEM_X_RAY_SPECS) && info->isTeamLeader) {
-            strPtr->unk1820D = 1;
-            strPtr->unk1820E = 1;
+            strPtr->unk1820D = TRUE;
+            strPtr->unk1820E = TRUE;
         }
         else {
             strPtr->unk1820D = info->powerEars;
@@ -1112,8 +1112,8 @@ void sub_803F878(s32 a0, s32 a1)
     strPtr->cameraPixelPos.y = (a1 / 256) - 96;
     strPtr->cameraPos.x = a0 / 6144;
     strPtr->cameraPos.y = a1 / 6144;
-    strPtr->unk1820D = 0;
-    strPtr->unk1820E = 0;
+    strPtr->unk1820D = FALSE;
+    strPtr->unk1820E = FALSE;
     strPtr->unk18211 = 0;
     strPtr->unk18216 = 0;
 

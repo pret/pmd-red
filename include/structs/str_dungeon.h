@@ -7,6 +7,7 @@
 #include "structs/map.h"
 #include "structs/rgb.h"
 #include "structs/str_position.h"
+#include "structs/str_traps.h"
 #include "sprite.h"
 
 #define DUNGEON_MAX_SIZE_X 56
@@ -356,7 +357,7 @@ typedef struct Dungeon
     /* 0x3800 */ s16 deoxysForm;
     Item unk3804[DUNGEON_MAX_ITEMS];
     /* 0x3904 */ s16 unk3904;
-    EntTrapInfo unk3908[DUNGEON_MAX_TRAPS];
+    Trap unk3908[DUNGEON_MAX_TRAPS];
     /* 0x3A08 */ bool8 unk3A08;
     /* 0x3A09 */ bool8 unk3A09;
     /* 0x3A0A */ bool8 unk3A0A;
