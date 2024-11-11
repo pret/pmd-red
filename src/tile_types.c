@@ -5,7 +5,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 
-const u8 gDungeonWaterType[] = {
+const u8 gDungeonWaterType[76] = {
     DUNGEON_WATER_TYPE_NONE,
     DUNGEON_WATER_TYPE_NONE,
     DUNGEON_WATER_TYPE_NONE,

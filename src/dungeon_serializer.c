@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_800F958.h"
+#include "code_80450F8.h"
 #include "code_8045A00.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
@@ -133,7 +134,6 @@ static Entity* sub_8082A08(s16 id, s16 apparentID, s32 index);
 
 // These externs are from other files
 extern u8 GetBodySize(s16 index);
-extern Entity *sub_8045684(u8, Position *, u8);
 extern void sub_80460F8(Position *, Item *, u32);
 
 void SaveDungeonState(u8 *buffer, u32 bufLen)
@@ -1145,10 +1145,10 @@ static Entity* sub_80828E0(s16 id, s16 apparentID, s32 index)
     entity = gDungeon->teamPokemon[index];
     entity->type = ENTITY_MONSTER;
     entity->unk24 = index;
-    entity->axObj.info = &gDungeon->unk69C[index];
-    entity->axObj.info->id = id_;
-    entity->axObj.info->apparentID = appID;
-    entity->axObj.info->isNotTeamMember = FALSE;
+    entity->axObj.info.monster = &gDungeon->unk69C[index];
+    entity->axObj.info.monster->id = id_;
+    entity->axObj.info.monster->apparentID = appID;
+    entity->axObj.info.monster->isNotTeamMember = FALSE;
 
     entity->axObj.spriteFile = GetSpriteData(appID);
     entity->axObj.unk40_maybeAnimTimer = (r4 * 0x10) + 0x40;
@@ -1160,8 +1160,8 @@ static Entity* sub_80828E0(s16 id, s16 apparentID, s32 index)
 
     entity->unk1C = 0;
     sub_8045ACC();
-    entity->axObj.info->unk167 = r4;
-    entity->axObj.info->unk168 = apparentBodySize;
+    entity->axObj.info.monster->unk167 = r4;
+    entity->axObj.info.monster->unk168 = apparentBodySize;
 
     for (r1 = 0; r1 < apparentBodySize; r1++) {
         gUnknown_202EE70[r4] = 1;
@@ -1213,10 +1213,10 @@ static Entity* sub_8082A08(s16 id, s16 apparentID, s32 index)
     entity->type = ENTITY_MONSTER;
     entity->unk24 = index;
     entity->unk22 = 0;
-    entity->axObj.info = &gDungeon->unkEBC[index];
-    entity->axObj.info->id = id_;
-    entity->axObj.info->apparentID = appID;
-    entity->axObj.info->isNotTeamMember = TRUE;
+    entity->axObj.info.monster = &gDungeon->unkEBC[index];
+    entity->axObj.info.monster->id = id_;
+    entity->axObj.info.monster->apparentID = appID;
+    entity->axObj.info.monster->isNotTeamMember = TRUE;
 
     entity->axObj.spriteFile = GetSpriteData(appID);
     entity->axObj.unk40_maybeAnimTimer = (r8 * 0x10) + 0xA0;
@@ -1227,8 +1227,8 @@ static Entity* sub_8082A08(s16 id, s16 apparentID, s32 index)
     entity->axObj.unk47 = 1;
 
     entity->unk1C = 0;
-    entity->axObj.info->unk167 = r8;
-    entity->axObj.info->unk168 = apparentBodySize;
+    entity->axObj.info.monster->unk167 = r8;
+    entity->axObj.info.monster->unk168 = apparentBodySize;
 
     for (r1 = 0; r1 < apparentBodySize; r1++) {
         gUnknown_202EE76[r8] = 1;

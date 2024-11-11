@@ -354,9 +354,9 @@ typedef struct Dungeon
     /* 0x37FE */ bool8 unk37FF;
     // dungeon_serializer.c refers to this as a u16 but elsewhere it's handled as a s16
     /* 0x3800 */ s16 deoxysForm;
-    EntityInfo *unk3804[DUNGEON_MAX_ITEMS]; // TODO: ItemInfo[DUNGEON_MAX_ITEMS]
+    Item unk3804[DUNGEON_MAX_ITEMS];
     /* 0x3904 */ s16 unk3904;
-    EntityInfo *unk3908[DUNGEON_MAX_TRAPS]; // TODO: TrapInfo[DUNGEON_MAX_TRAPS]
+    EntTrapInfo unk3908[DUNGEON_MAX_TRAPS];
     /* 0x3A08 */ bool8 unk3A08;
     /* 0x3A09 */ bool8 unk3A09;
     /* 0x3A0A */ bool8 unk3A0A;

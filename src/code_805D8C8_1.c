@@ -2297,7 +2297,7 @@ typedef struct UnkTextStruct3 {
 } UnkTextStruct3;
 
 extern void sub_803ECB4(UnkTextStruct3 *a0, u8 a1);
-void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, UnkTextStruct2_sub2 *a5);
+static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, UnkTextStruct2_sub2 *a5);
 
 // Inline needed to (fake?)match.
 static inline void sub_805FC30_SetUpTxtStruct(UnkTextStruct3 *src)
@@ -2660,7 +2660,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
 extern const struct UnkTextStruct2 gUnknown_8106B6C;
 extern const struct unkStruct_8090F58 gUnknown_8106B60;
 
-void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, UnkTextStruct2_sub2 *a5)
+static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, UnkTextStruct2_sub2 *a5)
 {
     s32 i, x, y;
     s32 r10;
@@ -2785,8 +2785,9 @@ void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 
     default: {
             Entity *chosenTeamMember = gDungeon->teamPokemon[sUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
             if (EntityExists(chosenTeamMember)) {
-                Item *item = &GetEntInfo(chosenTeamMember)->heldItem;
-                SetMessageArgument_2(gFormatBuffer_Monsters[0], chosenTeamMember->axObj.info, 0);
+                EntityInfo *monInfo = GetEntInfo(chosenTeamMember);
+                Item *item = &monInfo->heldItem;
+                SetMessageArgument_2(gFormatBuffer_Monsters[0], monInfo, 0);
                 PrintFormattedStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
                 if (item->flags & ITEM_FLAG_EXISTS) {
                     gUnknown_202EE10.unk1A++;

@@ -84,7 +84,12 @@ struct axObject
     u8 unk45_orientation;
     u8 unk46;
     u8 unk47;
-    /* 0x48 */ struct EntityInfo* info;
+    /* 0x48 */ union
+    {
+        struct Item* item;
+        struct EntityInfo* monster;
+        struct EntTrapInfo* trap;
+    } info;
 };
 
 // size: 0x80? (assuming it's the last sub-struct of GroundLives)

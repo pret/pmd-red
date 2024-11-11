@@ -5,6 +5,7 @@
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
 #include "code_8041AD0.h"
+#include "code_80450F8.h"
 #include "code_8045A00.h"
 #include "code_8077274_1.h"
 #include "constants/dungeon.h"

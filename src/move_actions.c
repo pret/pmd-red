@@ -186,7 +186,7 @@ extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u3
 extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_8045C28(Item *, u8 , u8);
-extern void sub_805A7D4(Entity *, Entity *, Item *, Position *);
+static void sub_805A7D4(Entity *, Entity *, Item *, Position *);
 extern void MudWaterSportEffect(u32);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_806A6E8(Entity *);
@@ -2632,7 +2632,7 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     }
 }
 
-void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
+static void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
 {
   Entity stackEntity;
 
@@ -2640,7 +2640,7 @@ void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
   stackEntity.unk24 = 0;
   stackEntity.isVisible = TRUE;
   stackEntity.unk22 = 0;
-  stackEntity.axObj.info = (EntityInfo*) item;
+  stackEntity.axObj.info.item = item;
   stackEntity.pos.x = target->pos.x + pos->x;
   stackEntity.pos.y = target->pos.y + pos->y;
   SetEntityPixelPos(&stackEntity,(target->pos.x * 0x18 + 4) * 0x100,

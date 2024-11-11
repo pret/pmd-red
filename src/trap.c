@@ -2,6 +2,7 @@
 #include "trap.h"
 
 #include "code_803E668.h"
+#include "code_80450F8.h"
 #include "code_8041AD0.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
@@ -85,7 +86,6 @@ void sub_8071DA4(Entity *);
 extern u8 sub_803F428(Position *pos);
 void sub_806A1E8(Entity *pokemon);
 u8 sub_803D6FC(void);
-Entity *sub_8045684(u8, Position *, u8);
 extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
 
 void sub_807FC3C(Position *pos, u32 trapID, u32 param_3)

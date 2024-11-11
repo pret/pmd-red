@@ -1,15 +1,15 @@
 #ifndef GUARD_DUNGEON_ENTITY_H
 #define GUARD_DUNGEON_ENTITY_H
 
-#include "constants/global.h"
 #include "constants/dungeon_action.h"
-#include "structs/str_position.h"
-#include "sprite.h"
+#include "constants/global.h"
+#include "constants/status.h"
+#include "structs/axdata.h"
 #include "structs/str_items.h"
 #include "structs/str_moves.h"
-#include "structs/axdata.h"
-
+#include "structs/str_position.h"
 #include "number_util.h"
+#include "sprite.h"
 
 #define MAX_STAT_STAGE 20
 #define STAT_MULTIPLIER_THRESHOLD 63
@@ -352,6 +352,13 @@ typedef struct EntityInfo
     u8 unk204;
 } EntityInfo;
 
+// size: 0x4
+typedef struct EntTrapInfo
+{
+    /* 0x0 */ u8 unk0;
+    /* 0x0 */ u8 unk1;
+} EntTrapInfo;
+
 // size: 0x74 | Used for Pokémon, items, and traps.
 typedef struct Entity
 {
@@ -472,7 +479,7 @@ static inline void SetExpMultplier(EntityInfo *info)
 
 static inline EntityInfo *GetEntInfo(Entity *ent)
 {
-    return ent->axObj.info;
+    return ent->axObj.info.monster;
 }
 
 #endif
