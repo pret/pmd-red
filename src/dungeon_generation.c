@@ -33,7 +33,7 @@ extern void sub_804FD30(void);
 extern void sub_80518F0(void);
 extern void sub_804FCCC(void);
 extern void GenerateOneRoomMonsterHouseFloor(void);
-extern void sub_804FBE8(void);
+extern void ResolveInvalidSpawns(void);
 extern void sub_804FC74(void);
 void sub_804EB30(void);
 void sub_804E9DC(void);
@@ -43,6 +43,7 @@ extern bool8 sub_8050C30(s32 a0, s32 a1, u8 a2);
 extern void sub_806C330(s32 a0, s32 a1, s16 a2, u8 a3);
 
 extern const Position gAdjacentTileOffsets[];
+extern const bool8 gUnknown_80F6DD5[][NUM_DIRECTIONS];
 
 void sub_804B534(s32 a0, s32 a1, s32 a2, s32 a3);
 bool8 sub_804C70C(s32, UnkDungeonGlobal_unk1C574 *);
@@ -283,7 +284,7 @@ void sub_804AFAC(void)
         r4 = (DungeonRandInt(100) < unkPtr->connectedToTop);
         sub_804FF08(unkPtr, r4);
         sub_8050438(unkPtr, r4);
-        sub_804FBE8();
+        ResolveInvalidSpawns();
         if (gDungeon->unkE218.x != -1 && gDungeon->unkE218.y != -1)
         {
             if (GetFloorType() == 1)
@@ -302,7 +303,7 @@ void sub_804AFAC(void)
         sub_804E9DC();
         sub_804FF08(unkPtr, FALSE);
         sub_8050438(unkPtr, FALSE);
-        sub_804FBE8();
+        ResolveInvalidSpawns();
     }
 
     if (gUnknown_202F1D8.x >= 0 && gUnknown_202F1D8.y >= 0) {
@@ -812,7 +813,7 @@ void NAKED sub_804AFAC(void)
 "	mov r0, r8\n"
 "	adds r1, r4, 0\n"
 "	bl sub_8050438\n"
-"	bl sub_804FBE8\n"
+"	bl ResolveInvalidSpawns\n"
 "	ldr r5, _0804B4C0\n"
 "	ldr r1, [r5]\n"
 "	ldr r6, _0804B4C8\n"
@@ -888,7 +889,7 @@ void NAKED sub_804AFAC(void)
 "	mov r0, r8\n"
 "	movs r1, 0\n"
 "	bl sub_8050438\n"
-"	bl sub_804FBE8\n"
+"	bl ResolveInvalidSpawns\n"
 "_0804B474:\n"
 "	ldr r1, _0804B4B8\n"
 "	movs r2, 0\n"
@@ -2984,8 +2985,6 @@ void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
 	}
 }
 
-extern const bool8 gUnknown_80F6DD5[][NUM_DIRECTIONS];
-
 /*
  * GenerateRoomImperfections - Attempt to generate room imperfections for each room, if flagged to do so.
  *
@@ -3479,10 +3478,9 @@ void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
                 SetTerrainWall(tile);
 
 				// Also remove any spawn flags
-				// TODO: rename to spawn_or_visibility_flags stairs/item/trap
-				tile->unk4 &= ~(0x1);
-				tile->unk4 &= ~(0x2);
-				tile->unk4 &= ~(0x4);
+				tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_STAIRS);
+				tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
+				tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_TRAP);
 			}
 		}
 	}
@@ -3502,9 +3500,9 @@ void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
 					SetTerrainWall(tile);
 
 					// Remove any spawn flags
-					tile->unk4 &= ~(0x2);
-                    tile->unk4 &= ~(0x1);
-                    tile->unk4 &= ~(0x4);
+					tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
+                    tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_STAIRS);
+                    tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_TRAP);
 
 					// Set room index to 0xFF (not a room)
 					tile->room = CORRIDOR_ROOM;
@@ -3736,8 +3734,8 @@ void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
                     tile->terrainType |= TERRAIN_TYPE_SHOP;
 
 					// Restrict monsters and stairs from spawning here
-					tile->unk4 &= ~(0x8);
-					tile->unk4 &= ~(0x1);
+					tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_MONSTER);
+					tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_STAIRS);
 
 					// Ensure the borders are assigned properly
 					if (dungeon->kecleonShopPos.minX > curX) {
@@ -3761,7 +3759,7 @@ void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
 			// Sets an unknown spawn flag for all tiles in the room
 			for (curX = grid[x][y].start.x; curX < grid[x][y].end.x; curX++) {
 				for (curY = grid[x][y].start.y; curY < grid[x][y].end.y; curY++) {
-                    GetTileSafe(curX, curY)->unk4 |= 0x10;
+                    GetTileSafe(curX, curY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
 				}
 			}
 
@@ -4205,7 +4203,7 @@ void SetSpawnFlag5(struct GridCell *gridCell)
 
 	for (x = gridCell->start.x; x < gridCell->end.x; x++) {
 		for (y = gridCell->start.y; y < gridCell->end.y; y++) {
-            GetTileSafe(x, y)->unk4 |= 0x20;
+            GetTileSafe(x, y)->spawnOrVisibilityFlags |= SPAWN_FLAG_UNK5;
 		}
 	}
 }
@@ -4336,18 +4334,19 @@ void GenerateSecondaryStructure(struct GridCell *gridCell)
                     SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY), TERRAIN_TYPE_UNK_2);
                     SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY + 1), TERRAIN_TYPE_UNK_2);
 
+                    // Trap
+                    GetTileSafe(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_TRAP;
                     // Warp Tile ?
-                    GetTileSafe(middleX - 1, middleY - 1)->unk4 |= 0x4;
-                    GetTileSafe(middleX - 1, middleY - 1)->unk4 |= 0x40;
+                    GetTileSafe(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_UNK6;
 
-                    // Items ?
-                    GetTileSafe(middleX, middleY - 1)->unk4 |= 0x2;
-                    GetTileSafe(middleX - 1, middleY)->unk4 |= 0x2;
-                    GetTileSafe(middleX, middleY)->unk4 |= 0x2;
-                    GetTileSafe(middleX - 1, middleY - 1)->unk4 |= 0x10;
-                    GetTileSafe(middleX, middleY - 1)->unk4 |= 0x10;
-                    GetTileSafe(middleX - 1, middleY)->unk4 |= 0x10;
-                    GetTileSafe(middleX, middleY)->unk4 |= 0x10;
+                    // Items
+                    GetTileSafe(middleX, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+                    GetTileSafe(middleX - 1, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+                    GetTileSafe(middleX, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+                    GetTileSafe(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileSafe(middleX, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileSafe(middleX - 1, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileSafe(middleX, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
 
                     gridCell->hasSecondaryStructure = TRUE;
                 }
@@ -4435,6 +4434,45 @@ void GenerateSecondaryStructure(struct GridCell *gridCell)
 				gridCell->hasSecondaryStructure = TRUE;
             }
             break;
+    }
+}
+
+/*
+ * ResolveInvalidSpawns - Resolve any potentially invalid spawns on tiles.
+ *
+ * Obstacles can't spawn traps, impassable obstacles can't spawn items (you aren't able to reach them)
+ *
+ * A tile marked for the stairs must not have a trap there
+ *
+ * A tile marked for an item also must not have a trap there
+ */
+void ResolveInvalidSpawns(void)
+{
+    s32 x, y;
+
+    for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+        for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+            Tile *tile = GetTileSafe(x, y);
+            if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL) {
+                if (tile->terrainType & (TERRAIN_TYPE_UNK_8 | TERRAIN_TYPE_IMPASSABLE_WALL)) {
+                    // This tile is an impassable obstacle, make sure no items spawn here
+                    tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
+                }
+                // This tile is an obstacle, make sure no traps spawn here
+                tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_TRAP);
+            }
+
+            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_STAIRS) {
+                // This tile has the stairs, make sure the stairs bit is set and
+				// make sure no traps spawn here
+                tile->terrainType |= TERRAIN_TYPE_STAIRS;
+                tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_TRAP);
+            }
+            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_ITEM) {
+                //This tile is an item spawn, make sure no traps spawn here
+                tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_TRAP);
+            }
+        }
     }
 }
 

@@ -767,7 +767,7 @@ void SaveIQFlags(unkStruct_8094924 *r0, u8 *r1)
 void SaveTile(unkStruct_8094924 *r0, Tile *tile)
 {
     sub_8083030(r0, tile->terrainType);
-    sub_8083030(r0, tile->unk4);
+    sub_8083030(r0, tile->spawnOrVisibilityFlags);
     sub_8082FA8(r0, &tile->room, 1);
     sub_8082FA8(r0, &tile->unkE, 1);
 }
@@ -866,7 +866,7 @@ void RestoreTile(unkStruct_8094924 *r0, Tile *tile)
 {
     memset(tile, 0, sizeof(Tile));
     tile->terrainType = sub_8083158(r0);
-    tile->unk4 = sub_8083158(r0);
+    tile->spawnOrVisibilityFlags = sub_8083158(r0);
 
     sub_8082FE0(r0, (u32 *)&tile->room, 1);
     sub_8082FE0(r0, (u32 *)&tile->unkE, 1);

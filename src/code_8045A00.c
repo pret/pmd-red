@@ -157,7 +157,7 @@ void sub_8045CB0(void)
       }
       tile = GetTile(x,y);
 
-      if (((tile->terrainType & TERRAIN_TYPE_STAIRS) == 0) && ((tile->unk4 & 2) != 0)) {
+      if (((tile->terrainType & TERRAIN_TYPE_STAIRS) == 0) && ((tile->spawnOrVisibilityFlags & 2) != 0)) {
         shopFlag = FALSE;
         pos.x = x;
         pos.y = y;

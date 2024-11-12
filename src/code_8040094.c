@@ -38,7 +38,7 @@ void HandleLuminousOrbAction(Entity *pokemon)
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
     {
       mapTile = GetTileSafe(XCoord, YCoord);
-      mapTile->unk4 = mapTile->unk4 | 1;
+      mapTile->spawnOrVisibilityFlags |= 1;
     }
   }
   sub_803F580(0);

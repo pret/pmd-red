@@ -35,13 +35,25 @@ enum CrossableTerrain
     NUM_CROSSABLE_TERRAIN
 };
 
+enum SpawnFlags
+{
+    SPAWN_FLAG_STAIRS = 1 << 0, // x1 - This tile has the stairs.
+    SPAWN_FLAG_ITEM = 1 << 1, // x2 - This tile has an item on it.
+    SPAWN_FLAG_TRAP = 1 << 2, // x4 - This tile has a trap on it.
+    SPAWN_FLAG_MONSTER = 1 << 3, // x8 - This tile has a monster on it.
+    SPAWN_FLAG_SPECIAL_TILE = 1 << 4, // x10 - This is a special tile, such as for Kecleon Shops, items, and traps.
+    SPAWN_FLAG_UNK5 = 1 << 5, // 0x20 - Not fully understood field relating to Secondary Structures. Set to true for all tiles in secondary structure rooms except for Cross or Dot rooms.
+    SPAWN_FLAG_UNK6 = 1 << 6, // 0x40 - Not fully understood field. In the dungeon algorithm, it is set to true on a Warp tile.
+    SPAWN_FLAG_UNK7 = 1 << 7, // 0x80 - Not fully understood field. In the dungeon algorithm, it is set to true for all tiles in a Divider secondary structure room.
+};
+
 // size: 0x18
 typedef struct Tile
 {
     // Uses the TerrainType bit flags.
     /* 0x0 */ u16 terrainType;
     u8 fill2[0x4 - 0x2];
-    u16 unk4;
+    u16 spawnOrVisibilityFlags; // Tracks the kinds of entities which should be spawned on this tile. See: SpawnFlags
     u16 unk6;
     u8 unk8;
     /* 0x9 */ u8 room;

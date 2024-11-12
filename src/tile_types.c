@@ -170,7 +170,7 @@ bool8 sub_804AE08(Position *pos)
     if(!(tile->terrainType & (TERRAIN_TYPE_UNK_8 | TERRAIN_TYPE_IMPASSABLE_WALL))) {
         uVar6 = TRUE;
         tile->terrainType = (tile->terrainType & ~(TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) | TERRAIN_TYPE_NORMAL;
-        tile->unk4 = tile->unk4 | 0x10;
+        tile->spawnOrVisibilityFlags = tile->spawnOrVisibilityFlags | 0x10;
 
         for(y = -1; y < 2; y++)
         {
@@ -192,8 +192,8 @@ void sub_804AE84(Position *pos)
   s32 y;
   
   tile = GetTileSafe(pos->x,pos->y);
-  if ((tile->unk4 & 0x10) != 0) {
-    tile->unk4 = tile->unk4 & 0xffef;
+  if ((tile->spawnOrVisibilityFlags & 0x10) != 0) {
+    tile->spawnOrVisibilityFlags = tile->spawnOrVisibilityFlags & 0xffef;
 
     for(y = -1; y < 2; y++)
     {
