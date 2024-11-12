@@ -135,14 +135,8 @@ typedef struct ScriptRef
 
 extern const ScriptRef gFunctionScriptTable[];
 
-struct CompactPos {
-    u8 xTiles;
-    u8 yTiles;
-    u8 xFlags;
-    u8 yFlags;
-};
 struct GroundLink {
-    struct CompactPos pos;
+    CompactPos pos;
     u8 width;
     u8 height;
     u8 ret;
@@ -153,7 +147,7 @@ typedef struct GroundLivesData {
     u8 unk1;
     u8 width;
     u8 height;
-    struct CompactPos pos;
+    CompactPos pos;
     const ScriptCommand *scripts[4];
 } GroundLivesData;
 typedef struct GroundObjectData {
@@ -161,7 +155,7 @@ typedef struct GroundObjectData {
     u8 unk1;
     u8 width;
     u8 height;
-    struct CompactPos pos;
+    CompactPos pos;
     const ScriptCommand *scripts[4];
 } GroundObjectData;
 typedef struct GroundEffectData {
@@ -169,7 +163,7 @@ typedef struct GroundEffectData {
     u8 unk1;
     u8 width;
     u8 height;
-    struct CompactPos pos;
+    CompactPos pos;
     const ScriptCommand *script;
 } GroundEffectData;
 typedef struct GroundEventData {
@@ -177,7 +171,7 @@ typedef struct GroundEventData {
     u8 unk1;
     u8 width;
     u8 height;
-    struct CompactPos pos;
+    CompactPos pos;
     const ScriptRef *script;
 } GroundEventData;
 
