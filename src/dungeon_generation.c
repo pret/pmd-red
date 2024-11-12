@@ -2315,6 +2315,19 @@ void CreateRoomsAndAnchors(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
 	}
 }
 
+/*
+ * GenerateSecondaryStructures - Attempt to generate secondary structures in flagged rooms.
+ *
+ * For a valid flagged room with no extra features, one of the following will attempt to generate:
+ * 0. No Secondary Structure
+ * 1. A maze (made of water/lava walls), or a "plus" sign fallback, or a single dot in the center fallback
+ * 2. Checkerboard pattern of water/lava
+ * 3. A central pool in the room made of water/lava
+ * 4. A central island with items and a warp tile, surrounded by water/lava
+ * 5. A horizontal or vertical line of water/lava splitting the room in two.
+ *
+ * If a room doesn't meet the conditions for the secondary structure chosen, it will be left unchanged.
+ */
 void GenerateSecondaryStructures(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY)
 {
     s32 x, y;
@@ -4177,16 +4190,17 @@ void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bo
 	}
 }
 
-void sub_804F5C4(Tile *tile, u32 terrainFlag)
+void SetTerrainSecondaryWithFlag(Tile *tile, u32 additionalFlag)
 {
     SetTerrainSecondary(tile);
-    tile->terrainType |= terrainFlag;
+    tile->terrainType |= additionalFlag;
 }
 
 /*
  * SetSpawnFlag5 - Sets unknown spawn flag 0x5 on all tiles in a room
  */
-void SetSpawnFlag5(struct GridCell *gridCell) {
+void SetSpawnFlag5(struct GridCell *gridCell)
+{
     s32 x, y;
 
 	for (x = gridCell->start.x; x < gridCell->end.x; x++) {
@@ -4226,6 +4240,202 @@ bool8 IsNextToHallway(s32 x, s32 y)
 	}
 
 	return FALSE;
+}
+
+// See GenerateSecondaryStructures for more information.
+void GenerateSecondaryStructure(struct GridCell *gridCell)
+{
+    switch (DungeonRandInt(6)) {
+        // Generate a "split room" with two sides separated by a line of water/lava
+        case SECONDARY_STRUCTURE_DIVIDER:
+            if (gUnknown_202F1C8 != 0) {
+                s32 i;
+
+                gUnknown_202F1C8--;
+
+				SetSpawnFlag5(gridCell);
+				if (DungeonRandInt(2) != 0) {
+					// Split the room with a vertical line
+                    s32 curX, curY;
+					bool8 invalid = FALSE;
+					s32 middleX = (gridCell->start.x + gridCell->end.x) / 2;
+
+					for (i = gridCell->start.y; i < gridCell->end.y; i++) {
+						if (IsNextToHallway(middleX, i)) {
+							invalid = TRUE;
+							break;
+						}
+					}
+
+					if (!invalid) {
+						for (i = gridCell->start.y; i < gridCell->end.y; i++) {
+                            SetTerrainSecondaryWithFlag(GetTileSafe(middleX, i), 0);
+						}
+
+						for (curX = gridCell->start.x; curX < middleX; curX++) {
+							for (curY = gridCell->start.y; curY < gridCell->end.y; curY++) {
+                                GetTileSafe(curX, curY)->terrainType |= TERRAIN_TYPE_UNK_7;
+							}
+						}
+
+						gridCell->hasSecondaryStructure = TRUE;
+					}
+				}
+				else {
+                    // Split the room with a horizontal line
+                    s32 curX, curY;
+                    bool8 invalid = FALSE;
+                    s32 middleY = (gridCell->start.y + gridCell->end.y) / 2;
+
+					for (i = gridCell->start.x; i < gridCell->end.x; i++) {
+						if (IsNextToHallway(i, middleY)) {
+							invalid = TRUE;
+							break;
+						}
+					}
+
+					if (!invalid) {
+						for (i = gridCell->start.x; i < gridCell->end.x; i++) {
+							SetTerrainSecondaryWithFlag(GetTileSafe(i, middleY), 0);
+						}
+
+						for (curY = gridCell->start.y; curY < middleY; curY++) {
+                            for (curX = gridCell->start.x; curX < gridCell->end.x; curX++) {
+								GetTileSafe(curX, curY)->terrainType |= TERRAIN_TYPE_UNK_7;
+							}
+						}
+
+						gridCell->hasSecondaryStructure = TRUE;
+					}
+				}
+            }
+            break;
+        case SECONDARY_STRUCTURE_ISLAND:
+            if ((gridCell->end.x - gridCell->start.x) >= 6 && (gridCell->end.y - gridCell->start.y) >= 6) {
+                s32 middleX = (gridCell->start.x + gridCell->end.x) / 2;
+                s32 middleY = (gridCell->start.y + gridCell->end.y) / 2;
+                // Both dimensions are at least 6. Generate an "island" with lava, items, and a Warp Tile at the center
+                if (gUnknown_202F1C8 != 0) {
+                    gUnknown_202F1C8--;
+
+                    SetSpawnFlag5(gridCell);
+
+                    // Water "Moat"
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY - 2), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 1, middleY - 2), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY - 2), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 2), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY - 1), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY + 1), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY + 1), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 1, middleY + 1), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY + 1), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 2), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 1), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY + 1), TERRAIN_TYPE_UNK_2);
+
+                    // Warp Tile ?
+                    GetTileSafe(middleX - 1, middleY - 1)->unk4 |= 0x4;
+                    GetTileSafe(middleX - 1, middleY - 1)->unk4 |= 0x40;
+
+                    // Items ?
+                    GetTileSafe(middleX, middleY - 1)->unk4 |= 0x2;
+                    GetTileSafe(middleX - 1, middleY)->unk4 |= 0x2;
+                    GetTileSafe(middleX, middleY)->unk4 |= 0x2;
+                    GetTileSafe(middleX - 1, middleY - 1)->unk4 |= 0x10;
+                    GetTileSafe(middleX, middleY - 1)->unk4 |= 0x10;
+                    GetTileSafe(middleX - 1, middleY)->unk4 |= 0x10;
+                    GetTileSafe(middleX, middleY)->unk4 |= 0x10;
+
+                    gridCell->hasSecondaryStructure = TRUE;
+                }
+            }
+            break;
+        case SECONDARY_STRUCTURE_POOL:
+            if ((gridCell->end.x - gridCell->start.x) >= 5 && (gridCell->end.y - gridCell->start.y) >= 5) {
+                s32 curX, curY;
+                // Both dimensions are at least 5, generate a "pool" of water/lava
+
+                s32 randX1 = DungeonRandRange(gridCell->start.x + 2, gridCell->end.x - 3);
+                s32 randY1 = DungeonRandRange(gridCell->start.y + 2, gridCell->end.y - 3);
+                s32 randX2 = DungeonRandRange(gridCell->start.x + 2, gridCell->end.x - 3);
+                s32 randY2 = DungeonRandRange(gridCell->start.y + 2, gridCell->end.y - 3);
+
+                if (gUnknown_202F1C8 != 0) {
+                    gUnknown_202F1C8--;
+
+                    SetSpawnFlag5(gridCell);
+
+                    if (randX1 > randX2) {
+                        s32 temp;
+                        SWAP(randX1, randX2, temp);
+                    }
+
+                    if (randY1 > randY2) {
+                        s32 temp;
+                        SWAP(randY1, randY2, temp);
+                    }
+
+                    for (curX = randX1; curX <= randX2; curX++) {
+                        for (curY = randY1; curY <= randY2; curY++) {
+                            SetTerrainSecondaryWithFlag(GetTileSafe(curX, curY), 0);
+                        }
+                    }
+
+                    gridCell->hasSecondaryStructure = TRUE;
+                }
+            }
+            break;
+        case SECONDARY_STRUCTURE_CHECKERBOARD:
+            if ((gridCell->end.x - gridCell->start.x) % 2 != 0 && (gridCell->end.y - gridCell->start.y) % 2 != 0 && gUnknown_202F1C8 != 0) {
+                s32 i;
+                // Dimensions are odd, generate diagonal stripes/checkerboard of water/lava
+                gUnknown_202F1C8--;
+
+                SetSpawnFlag5(gridCell);
+
+                for (i = 0; i < 64; i++) {
+                    s32 randX = DungeonRandInt(gridCell->end.x - gridCell->start.x);
+                    s32 randY = DungeonRandInt(gridCell->end.y - gridCell->start.y);
+                    if ((randX + randY) % 2 != 0) {
+                        SetTerrainSecondaryWithFlag(GetTileSafe(gridCell->start.x + randX, gridCell->start.y + randY), 0);
+                    }
+                }
+
+                gridCell->hasSecondaryStructure = TRUE;
+            }
+            break;
+        case SECONDARY_STRUCTURE_MAZE_PLUS_DOT:
+            if (gUnknown_202F1C8 != 0) {
+                gUnknown_202F1C8--;
+
+                // If the dimensions are odd, generate a maze room
+				if ((gridCell->end.x - gridCell->start.x) % 2 == 0 || (gridCell->end.y - gridCell->start.y) % 2 == 0) {
+                    s32 middleX = (gridCell->start.x + gridCell->end.x) / 2;
+                    s32 middleY = (gridCell->start.y + gridCell->end.y) / 2;
+					if ((gridCell->end.x - gridCell->start.x) >= 5 && (gridCell->end.y - gridCell->start.y) >= 5) {
+						// Both dimensions are at least 5, generate a water/lava cross in the center
+						SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY), 0);
+						SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY + 1), 0);
+						SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 1, middleY), 0);
+						SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY - 1), 0);
+					}
+
+                    // Generate a single water/lava spot in the center
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY), 0);
+				}
+				else {
+                    // Both dimensions are odd. Generate a maze room
+					SetSpawnFlag5(gridCell);
+					GenerateMaze(gridCell, TRUE);
+				}
+
+				gridCell->hasSecondaryStructure = TRUE;
+            }
+            break;
+    }
 }
 
 //
