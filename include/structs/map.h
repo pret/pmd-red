@@ -19,7 +19,7 @@ enum TerrainType
     TERRAIN_TYPE_SHOP = 1 << 5, // x20
     TERRAIN_TYPE_IN_MONSTER_HOUSE = 1 << 6, // x40
     TERRAIN_TYPE_UNK_7 = 1 << 7, // x80
-    TERRAIN_TYPE_UNK_8 = 1 << 8, // x100
+    TERRAIN_TYPE_UNBREAKABLE = 1 << 8, // x100 // Cannot be broken by Absolute Mover. Set naturally on key doors.
     TERRAIN_TYPE_STAIRS = 1 << 9, // x200
     TERRAIN_TYPE_UNK_x400 = 1 << 10,
     TERRAIN_TYPE_UNK_x800 = 1 << 11,

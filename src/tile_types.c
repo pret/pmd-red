@@ -128,7 +128,7 @@ bool8 sub_804AD34(Position *pos)
   iVar8 = 0;
   tile = GetTileSafe(pos->x,pos->y);
   if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
-    if(!(tile->terrainType & (TERRAIN_TYPE_UNK_8 | TERRAIN_TYPE_IMPASSABLE_WALL))){
+    if(!(tile->terrainType & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL))){
     iVar8 = 1;
     tile->terrainType = (tile->terrainType & ~(TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) | TERRAIN_TYPE_NORMAL;
 
@@ -167,7 +167,7 @@ bool8 sub_804AE08(Position *pos)
   tile = GetTileSafe(pos->x,pos->y);
 
   if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
-    if(!(tile->terrainType & (TERRAIN_TYPE_UNK_8 | TERRAIN_TYPE_IMPASSABLE_WALL))) {
+    if(!(tile->terrainType & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL))) {
         uVar6 = TRUE;
         tile->terrainType = (tile->terrainType & ~(TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) | TERRAIN_TYPE_NORMAL;
         tile->spawnOrVisibilityFlags = tile->spawnOrVisibilityFlags | 0x10;

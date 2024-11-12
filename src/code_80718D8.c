@@ -118,7 +118,7 @@ void sub_8071B48(void)
         }
       }
       if (dungeon->unk66E == 0) {
-        if (gDungeon->unk3A0C == 0xff) {
+        if (gDungeon->monsterHouseRoom == 0xff) {
             if (counter >= gUnknown_80F4DA6) {
               return;
             }

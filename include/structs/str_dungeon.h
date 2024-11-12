@@ -113,30 +113,33 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     s16 unk42; // x42
 } UnkDungeonGlobal_unk181E8_sub; // x44
 
+#define ROOM_FLAG_ALLOW_SECONDARY_TERRAIN 0x1
+#define ROOM_FLAG_ALLOW_IMPERFECTIONS 0x4
+
 // Sizeof: 0x1C
 typedef struct UnkDungeonGlobal_unk1C574
 {
     u8 unk0;
-    s8 unk1;
+    s8 roomDensity;
     u8 unk2;
     u8 unk3;
     u8 unk4;
-    u8 unk5;
+    u8 floorConnectivity;
     u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
+    u8 kecleonShopChance; // Percentage chance 0-100%
+    u8 monsterHouseChance; // Percentage chance 0-100%
+    u8 mazeRoomChance; // Percentage chance 0-100%
     u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
+    bool8 allowDeadEnds;
+    u8 secondaryStructuresBudget; // Maximum number of secondary structures that can be generated
+    u8 roomFlags; // See ROOM_FLAG_
     u8 unkE;
-    u8 unkF;
-    u8 unk10;
+    u8 itemDensity;
+    u8 trapDensity;
     u8 unk11;
     u8 unk12;
-    u8 unk13;
-    u8 unk14;
+    u8 numExtraHallways;
+    u8 buriedItemDensity; // Density of buried items (in walls)
     u8 unk15;
     u8 unk16;
     u8 unk17;
@@ -342,13 +345,13 @@ typedef struct Dungeon
     /* 0x37FE */ u8 unk37FF;
     s16 unk3800;
     u8 fill3802[0x3904 - 0x3802];
-    /* 0x3904 */ s16 unk3904;
+    /* 0x3904 */ s16 numItems;
     u8 fill3906[0x3A08 - 0x3906];
     /* 0x3A08 */ u8 unk3A08;
     /* 0x3A09 */ u8 unk3A09;
     /* 0x3A0A */ u8 unk3A0A;
     /* 0x3A0B */ u8 unk3A0B;
-    u8 unk3A0C;
+    /* 0x3A0C */ u8 monsterHouseRoom; // room index of monster house
     /* 0x3A0D */ u8 unk3A0D;
     /* 0x3A0E */ s16 tileset;
     /* 0x3A10 */ s16 unk3A10;
@@ -356,8 +359,8 @@ typedef struct Dungeon
     /* 0x3A14 */ s16 bossBattleIndex;
     /* 0x3A16 */ s16 unk3A16;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
-    Position unkE218;
-    Position unkE21C; // stair location?
+    /* 0xEA18 */ Position playerSpawn;
+    Position stairsSpawn; // stairs location
     Position unkE220[8];
     struct MinMaxPosition kecleonShopPos;
     u32 unkE250;

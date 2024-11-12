@@ -9,6 +9,12 @@
 #define GENERATION_CONSTANT_NO_IMPERFECTIONS_CHANCE 60 // (0 to 100) probability that a room will not have imperfections, if it was already flagged for them
 #define GENERATION_CONSTANT_SECONDARY_STRUCTURE_FLAG_CHANCE 80 // (0 to 100) probability that a room will be flagged to have a secondary structure.
 
+enum FloorSize {
+	FLOOR_SIZE_LARGE,
+	FLOOR_SIZE_SMALL,
+	FLOOR_SIZE_MEDIUM,
+};
+
 enum FloorType {
 	FLOOR_TYPE_NORMAL,
 	FLOOR_TYPE_FIXED, // Fixed room

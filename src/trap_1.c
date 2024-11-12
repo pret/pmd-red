@@ -487,7 +487,7 @@ void sub_8081454(unkStruct_8094924 *param_1)
     sub_80830B4(param_1, gDungeon->unk3A09);
     sub_80830B4(param_1, gDungeon->unk3A0A);
     sub_80830B4(param_1, gDungeon->unk3A0B);
-    sub_8083060(param_1, gDungeon->unk3A0C);
+    sub_8083060(param_1, gDungeon->monsterHouseRoom);
     sub_8083060(param_1, gDungeon->unk3A0D);
     sub_8083048(param_1, gDungeon->tileset);
     sub_8083048(param_1,gDungeon->unk3A10);
@@ -504,8 +504,8 @@ void sub_8081454(unkStruct_8094924 *param_1)
     }
 
 
-    SavePosition(param_1,&gDungeon->unkE218);
-    SavePosition(param_1,&gDungeon->unkE21C);
+    SavePosition(param_1,&gDungeon->playerSpawn);
+    SavePosition(param_1,&gDungeon->stairsSpawn);
 
 
 
@@ -824,7 +824,7 @@ void sub_8081C7C(unkStruct_8094924 *r0)
     gDungeon->unk3A09 = sub_80831DC(r0);
     gDungeon->unk3A0A = sub_80831DC(r0);
     gDungeon->unk3A0B = sub_80831DC(r0);
-    gDungeon->unk3A0C = sub_8083188(r0);
+    gDungeon->monsterHouseRoom = sub_8083188(r0);
     gDungeon->unk3A0D = sub_8083188(r0);
     gDungeon->tileset = sub_8083170(r0);
     gDungeon->unk3A10 = sub_8083170(r0);
@@ -839,8 +839,8 @@ void sub_8081C7C(unkStruct_8094924 *r0)
             RestoreTile(r0,&gDungeon->tiles[y][x]);
         }
     }
-    sub_80831F8(r0,&gDungeon->unkE218);
-    sub_80831F8(r0,&gDungeon->unkE21C);
+    sub_80831F8(r0,&gDungeon->playerSpawn);
+    sub_80831F8(r0,&gDungeon->stairsSpawn);
 
     for(iVar7 = 0; iVar7 < 8; iVar7++)
     {

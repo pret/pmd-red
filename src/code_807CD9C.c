@@ -220,7 +220,6 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
     EntityInfo *info;
     u32 direction;
     Position local_2c;
-    Position pos2;
     bool8 flag;
 
     info = GetEntInfo(target);
@@ -237,8 +236,8 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
     }
     if (param_3 == 1)
     {
-        pos2 = gDungeon->unkE21C;
-        if(pos2.x == target->pos.x && pos2.y == target->pos.y) {
+        Position stairsPosition = gDungeon->stairsSpawn;
+        if(stairsPosition.x == target->pos.x && stairsPosition.y == target->pos.y) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC9A0); // It's already on the stairs!
             PetrifiedStatusTarget(pokemon,target);
             return;
@@ -273,7 +272,7 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
             }
             break;
         case 1:
-            if (!sub_808384C(&local_2c,&gDungeon->unkE21C)) {
+            if (!sub_808384C(&local_2c,&gDungeon->stairsSpawn)) {
                 local_2c = target->pos;
                 flag = TRUE;
             }
