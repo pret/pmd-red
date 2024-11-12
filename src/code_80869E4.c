@@ -44,7 +44,7 @@ void SpriteShockEffect(Entity *entity)
 
 static void sub_80862DC(Entity *entity)
 {
-    Position32 pos;
+    PixelPos pos;
     pos.x = entity->pixelPos.x;
     pos.y = entity->pixelPos.y + 0x3800;
 
@@ -55,7 +55,7 @@ static void sub_80862DC(Entity *entity)
 
 static void sub_8086310(Entity *entity)
 {
-    Position32 pos;
+    PixelPos pos;
     pos.x = entity->pixelPos.x;
     pos.y = entity->pixelPos.y + 0x9000;
 
@@ -67,7 +67,7 @@ static void sub_8086310(Entity *entity)
 
 static void sub_8086348(Entity *entity)
 {
-    Position32 pos;
+    PixelPos pos;
     pos.x = entity->pixelPos.x + 0x7800;
     pos.y = entity->pixelPos.y - 0x2000;
 
@@ -78,7 +78,7 @@ static void sub_8086348(Entity *entity)
 
 static void sub_8086384(Entity *entity)
 {
-    Position32 pos;
+    PixelPos pos;
     pos.x = entity->pixelPos.x + 0x7800;
     pos.y = entity->pixelPos.y;
 

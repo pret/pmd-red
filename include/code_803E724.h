@@ -3,6 +3,6 @@
 
 #include "structs/str_position.h"
 
-bool8 sub_803F428(Position *pos);
+bool8 sub_803F428(DungeonPos *pos);
 
 #endif // GUARD_CODE_803E724_H

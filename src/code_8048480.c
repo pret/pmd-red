@@ -154,7 +154,7 @@ void sub_80482FC(Entity *, Entity *, u32, u8);
 
 extern void sub_8071DA4(Entity *);
 extern void SetShopkeeperAggression(Entity *, Entity *);
-extern void sub_80464C8(Entity *, Position *, Item *);
+extern void sub_80464C8(Entity *, DungeonPos *, Item *);
 extern void sub_806A6E8(Entity *);
 extern void sub_8042390(Entity *, Item *);
 

@@ -51,18 +51,18 @@ extern void sub_800EE5C(u32);
 extern void sub_800EF64(void);
 
 u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
-s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3);
+s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3);
 
-s32 sub_80416A4(Position *pos_1, u32 param_2, bool8 param_3)
+s32 sub_80416A4(DungeonPos *pos_1, u32 param_2, bool8 param_3)
 {
-  Position32 pos;
+  PixelPos pos;
 
   pos.x = pos_1->x * 0x1800 + 0xc00;
   pos.y = pos_1->y * 0x1800 + 0x1000;
   return sub_80416E0(&pos, param_2, param_3);
 }
 
-s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3)
+s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
 {
   int counter;
   s32 ret;
@@ -850,7 +850,7 @@ void sub_804218C(Entity *pokemon, Entity *target)
     sub_804151C(target, 0x2A, 1);
 }
 
-void sub_804219C(Position32 *pos)
+void sub_804219C(PixelPos *pos)
 {
     sub_80416E0(pos, 0x90, TRUE);
 }
@@ -868,7 +868,7 @@ void sub_80421C0(Entity *pokemon, u16 r1)
             PlaySoundEffect(r1);
 }
 
-void sub_80421EC(Position *pos, u16 r1)
+void sub_80421EC(DungeonPos *pos, u16 r1)
 {
     if(sub_803F428(pos))
         PlaySoundEffect(r1);

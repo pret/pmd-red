@@ -42,25 +42,25 @@ void sub_806A5B8(Entity *);
 u8 sub_8045888(Entity *);
 void sub_807EC28(u32);
 void sub_80694C0(Entity *, s32, s32, s32);
-void sub_807D068(Entity *, Position *);
+void sub_807D068(Entity *, DungeonPos *);
 u8 sub_8044B28(void);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);
 extern void sub_803F580(u32);
-bool8 sub_808384C(Position *, Position *);
-u8 sub_8083660(Position *);
+bool8 sub_808384C(DungeonPos *, DungeonPos *);
+u8 sub_8083660(DungeonPos *);
 
 void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
 {
     Tile *tile;
     int iVar8;
     bool8 flag;
-    Position sp_0x18;
+    DungeonPos sp_0x18;
     Move move;
     int sp_0x24;
     Entity *sp_0x28;
-    Position32 sp_0x2C;
+    PixelPos sp_0x2C;
 
     sp_0x24 = 10;
     if (IsCurrentFixedRoomBossFight()) {
@@ -162,7 +162,7 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
     }
 }
 
-void sub_807D068(Entity *pokemon, Position *pos)
+void sub_807D068(Entity *pokemon, DungeonPos *pos)
 {
     int pixelX;
     int posY;
@@ -171,7 +171,7 @@ void sub_807D068(Entity *pokemon, Position *pos)
     int counter;
     int iVar8;
     s32 diff;
-    Position32 local_34;
+    PixelPos local_34;
     int incrementX;
     int incrementY;
 
@@ -215,12 +215,13 @@ _0807D11E:
     sub_803E46C(0x1a);
 }
 
-void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
+void sub_807D148(Entity *pokemon, Entity *target, u32 param_3,
+                 DungeonPos *pos)
 {
     EntityInfo *info;
     u32 direction;
-    Position local_2c;
-    Position pos2;
+    DungeonPos local_2c;
+    DungeonPos pos2;
     bool8 flag;
 
     info = GetEntInfo(target);

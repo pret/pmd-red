@@ -33,7 +33,7 @@
 typedef struct unkStruct_8044CC8
 {
     /* 0x0 */ u8 actionUseIndex;
-    /* 0x4 */ Position lastItemThrowPosition;
+    /* 0x4 */ DungeonPos lastItemThrowPosition;
 } unkStruct_8044CC8;
 
 // size: 0x18
@@ -45,7 +45,7 @@ typedef struct ActionContainer
     // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
     /* 0x4 */ unkStruct_8044CC8 unk4[2];
     // Position of the target that the Pokémon wants throw an item at.
-    /* 0x14 */ Position itemTargetPosition;
+    /* 0x14 */ DungeonPos itemTargetPosition;
 } ActionContainer;
 
 // size: 0x4
@@ -72,7 +72,7 @@ typedef struct AITarget
     /* 0x4 */ u16 aiTargetSpawnGenID;
     /* 0x8 */ struct Entity *aiTarget;
     /* 0xC */ u32 unkC;
-    /* 0x10 */ Position aiTargetPos;
+    /* 0x10 */ DungeonPos aiTargetPos;
 } AITarget;
 
 // size: 0x4
@@ -179,11 +179,11 @@ typedef struct Muzzled
 // size: 0x1C
 typedef struct Unk_Entity_x184
 {
-    /* 0x184 - 0x0 */ Position previousTargetMovePosition1;
-    /* 0x188 - 0x4 */ Position32 previousTargetMovePosition2;
+    /* 0x184 - 0x0 */ DungeonPos previousTargetMovePosition1;
+    /* 0x188 - 0x4 */ PixelPos previousTargetMovePosition2;
     /* 0x190 - 0xC */ s32 lastMoveDirection; // The last direction that the Pokémon moved in.
     // Number of tiles that the Pokémon moved last, multiplied by 0x100.
-    /* 0x194 - 0x10*/ Position32 lastMoveIncrement;
+    /* 0x194 - 0x10*/ PixelPos lastMoveIncrement;
     /* 0x19C - 0x18 */ s16 walkAnimFramesLeft; // Set when the Pokémon starts moving, and counts down until the Pokémon's walk animation stops.
     /* 0x19e - 0x1a */ u8 unk1A;
 } Unk_Entity_x184;
@@ -241,7 +241,7 @@ typedef struct EntityInfo
     /* 0x5E */ u8 abilities[2];
     /* 0x60 */ Item heldItem;
     /* 0x64 */ u8 unk64;
-    /* 0x68 */ Position prevPos[NUM_PREV_POS];
+    /* 0x68 */ DungeonPos prevPos[NUM_PREV_POS];
     /* 0x78 */ AITarget aiTarget;
     // Bitwise flags corresponding to selected IQ skills.
     /* 0x8C */ u8 IQSkillMenuFlags[NUM_PICKED_IQ_SKILLS]; // IQ skills selected in the IQ skills menu.
@@ -336,8 +336,8 @@ typedef struct EntityInfo
     /* 0x167 */ u8 unk167;
     /* 0x168 */ u8 unk168;
     /* 0x169 */ u8 turnsSinceWarpScarfActivation;
-    /* 0x16C */ Position targetPos;
-    /* 0x170 */ Position pixelPos;
+    /* 0x16C */ DungeonPos targetPos;
+    /* 0x170 */ DungeonPos pixelPos;
     s24_8 unk174;
     u16 abilityEffectFlags; // See enum AbilityEffectFlags
     /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
@@ -356,12 +356,12 @@ typedef struct EntityInfo
 typedef struct Entity
 {
     /* 0x0 */ u32 type;
-    /* 0x4 */ Position pos;
-    /* 0x8 */ Position prevPos;
+    /* 0x4 */ DungeonPos pos;
+    /* 0x8 */ DungeonPos prevPos;
     // The center of the entity acccording to pixel-space coordinates, using the same origin as posWorld.
     // X = (posWorld * 24 + 16) * 256, while Y = (posWorld * 24 + 12) * 256.
-    /* 0xC */ Position32 pixelPos;
-    /* 0x14 */ Position32 prevPixelPos;
+    /* 0xC */ PixelPos pixelPos;
+    /* 0x14 */ PixelPos prevPixelPos;
     s32 unk1C;
     /* 0x20 */ bool8 isVisible; // Turned off when a Pokémon faints.
     u8 fill21;

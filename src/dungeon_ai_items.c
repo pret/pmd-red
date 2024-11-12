@@ -110,7 +110,7 @@ void AIDecideUseItem(Entity *pokemon)
             }
             else if (itemType == CATEGORY_THROWN_ARC)
             {
-                Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
+                DungeonPos potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
                 GetPossibleAIArcItemTargets(pokemon, item, potentialTargetPositions, TRUE);
                 if (gAIThrowItemActionChoiceCount == 0)
                 {
@@ -233,7 +233,7 @@ void AIDecideUseItem(Entity *pokemon)
                         u8 itemType = GetItemCategory(item->id);
                         if (itemType == CATEGORY_THROWN_ARC)
                         {
-                            Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
+                            DungeonPos potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
                             GetPossibleAIArcItemTargets(pokemon, item, potentialTargetPositions, FALSE);
                             if (gAIThrowItemActionChoiceCount != 0)
                             {
@@ -312,7 +312,9 @@ void GetPossibleAIThrownItemDirections(Entity *pokemon, s32 thrownAIFlag, Item *
     }
 }
 
-void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item, Position potentialTargets[], bool8 ignoreRollChance)
+void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item,
+                                 DungeonPos potentialTargets[],
+                                 bool8 ignoreRollChance)
 {
     s32 i;
     gAIThrowItemActionChoiceCount = 0;
@@ -340,7 +342,7 @@ void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item, Position potential
             }
             if (distance <= 10)
             {
-                Position *newPotentialTarget;
+                DungeonPos *newPotentialTarget;
                 if (!ignoreRollChance)
                 {
                     u32 itemWeight = GetAIUseItemProbability(targetPokemon, item, ITEM_TARGET_OTHER);

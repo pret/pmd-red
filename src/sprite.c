@@ -12,7 +12,7 @@ static EWRAM_DATA s16 sUnknown_2025672[8] = {0};
 UNUSED // TODO: Remove the "UNUSED" attribute after AddAxSprite is done
 #endif
 static EWRAM_DATA s16 sUnknown_2025682[9] = {0};
-static EWRAM_DATA Position sUnknown_2025694 = {0};
+static EWRAM_DATA DungeonPos sUnknown_2025694 = {0};
 static EWRAM_DATA u32 sUnknown_2025698 = {0};
 UNUSED static EWRAM_DATA u32 sUnused1 = {0}; // 202569C
 static EWRAM_DATA SpriteList sUnknown_20256A0 = {0};
@@ -755,7 +755,7 @@ void CopySpritesToOam(void)
     sOAMSpriteCount = count;
 }
 
-void SetSavingIconCoords(Position *pos)
+void SetSavingIconCoords(DungeonPos *pos)
 {
     if (pos == NULL) {
         sUnknown_2025694.x = 0;

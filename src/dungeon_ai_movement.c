@@ -556,7 +556,7 @@ bool8 AvoidEnemies(Entity *pokemon)
             struct Tile *tile = GetTile(pokemon->pos.x, pokemon->pos.y);
             if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
             {
-                Position aiTargetPos;
+                DungeonPos aiTargetPos;
                 s32 targetDir;
                 aiTargetPos.x = pokemon->pos.x;
                 aiTargetPos.y = pokemon->pos.y;
@@ -593,7 +593,7 @@ bool8 AvoidEnemies(Entity *pokemon)
                 // If there are any room exits that the Pokémon can head towards without moving
                 // closer to the target, head towards the furthest eligible exit.
                 s32 naturalJunctionListCounts;
-                Position *naturalJunctionList = gDungeon->naturalJunctionList[room];
+                DungeonPos *naturalJunctionList = gDungeon->naturalJunctionList[room];
                 s32 furthestTargetExitIndex;
                 s32 furthestTargetToExitDistance;
                 s32 distanceX;
@@ -735,7 +735,7 @@ bool8 Wander(Entity *pokemon)
     else
     {
         s32 naturalJunctionListCounts = gDungeon->naturalJunctionListCounts[room];
-        Position *naturalJunctionList = gDungeon->naturalJunctionList[room];
+        DungeonPos *naturalJunctionList = gDungeon->naturalJunctionList[room];
         if (pokemonInfo->moveRandomly)
         {
             s32 targetFacingDir = DungeonRandInt(NUM_DIRECTIONS);

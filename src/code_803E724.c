@@ -899,7 +899,7 @@ void sub_803F38C(void)
     nullsub_5(0xFF, &gFontPalette[palId].pal[15]);
 }
 
-bool8 sub_803F428(Position *pos)
+bool8 sub_803F428(DungeonPos *pos)
 {
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
     Entity *cameraEntity = strPtr->cameraTarget;

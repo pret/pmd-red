@@ -20,7 +20,7 @@ extern u8 *gUnknown_8105360[];
 extern u8 *gUnknown_81053A8[];
 extern u8 *gUnknown_8105434[];
 
-extern void sub_80416E0(Position32 *r0, u32, bool8);
+extern void sub_80416E0(PixelPos *r0, u32, bool8);
 extern void sub_80855E4(void *);
 extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);

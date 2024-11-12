@@ -39,14 +39,14 @@ extern void sub_807F43C(Entity *, Entity *);
 extern void sub_807DC68(Entity *, Entity *);
 extern u32 sub_803D73C(u32);
 extern void sub_8045C28(Item *, u8 , u8);
-extern void sub_80464C8(Entity *, Position *, Item *);
+extern void sub_80464C8(Entity *, DungeonPos *, Item *);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void sub_807FC3C(Position *, u32, u32);
-extern void sub_8042A64(Position *);
+extern void sub_807FC3C(DungeonPos *, u32, u32);
+extern void sub_8042A64(DungeonPos *);
 extern void sub_8040A84(void);
 extern void sub_80498A8(s32, s32);
-extern void sub_8042A54(Position *);
+extern void sub_8042A54(DungeonPos *);
 extern void sub_8049BB0(s32, s32);
 extern s16 sub_8057600(Move*, u32);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
@@ -60,8 +60,8 @@ extern void sub_806BB6C(Entity *, s32);
 extern void sub_807E254(Entity *, Entity *, u32);
 extern u32 HandleDamagingMove(Entity *, Entity *, Move *, u32, u32);
 extern void sub_806A6E8(Entity *);
-extern u8 sub_8069D18(Position *);
-extern u8 sub_804AD34(Position *);
+extern u8 sub_8069D18(DungeonPos *);
+extern u8 sub_804AD34(DungeonPos *);
 
 // TODO include dungeon_ai.h when SqueezedStatusTarget is figured out
 extern void LowerDefenseStageTarget(Entity *, Entity *, s32, s32, u8, bool8);
@@ -653,7 +653,7 @@ bool8 sub_805B968(Entity * pokemon, Entity * target, Move * move, s32 param_4)
 
 bool8 RockSmashMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    Position pos;
+    DungeonPos pos;
     bool8 flag = FALSE;
 
     if (sub_8069D18(&pos) != 0) {
@@ -947,7 +947,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 param_
     s32 xCoord, yCoord;
     struct RoomData *room;
     s32 topLeftCornerX, topLeftCornerY;
-    Position pos;
+    DungeonPos pos;
     bool8 foundTrap = FALSE;
     tile = GetTileAtEntitySafe(target);
     if (IsBossFight()) {
@@ -1099,7 +1099,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
     int y;
     bool8 filledInTile;
     int x;
-    Position tileCoords;
+    DungeonPos tileCoords;
 
     filledInTile = FALSE;
     targetInfo = GetEntInfo(target);
@@ -1153,7 +1153,7 @@ bool8 TrapperOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 bool8 sub_805C3F8(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     Item stack;
-    Position posStruct = target->pos;
+    DungeonPos posStruct = target->pos;
 
     if(GetEntInfo(target)->monsterBehavior != BEHAVIOR_FIXED_ENEMY)
     {

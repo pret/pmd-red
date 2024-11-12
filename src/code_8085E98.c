@@ -14,7 +14,7 @@ extern const unkStruct_2039DB0 gUnknown_8107374;
 void sub_800EF64(void);
 void sub_800EE5C(s32);
 void sub_8085F44(s32);
-void sub_800E90C(Position *);
+void sub_800E90C(DungeonPos *);
 void sub_8088EE8(void);
 void sub_8088848(void);
 void sub_808A718(void);
@@ -30,7 +30,8 @@ void sub_8085EB0(void)
     gDungeon->unk181e8.unk18215 = 1;
 }
 
-u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,Position *param_4,bool32 param_5)
+u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4,
+                bool32 param_5)
 {
     u32 uVar1;
     unkStruct_80416E0 local_40;

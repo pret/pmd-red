@@ -33,7 +33,7 @@ struct MonPortraitMsg
 {
     OpenedFile *faceFile;
     struct PortraitGfx *faceData;
-    Position pos;
+    DungeonPos pos;
     u8 spriteId; // Which mon's sprite to use. For example Kecleon has multiple sprites depending on whether it's green or purple.
     bool8 flip; // Whether the mon's sprite is flipped.
     u8 unkE;

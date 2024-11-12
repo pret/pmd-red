@@ -14,7 +14,7 @@
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
 extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
 
-extern Position gUnknown_203B410;
+extern DungeonPos gUnknown_203B410;
 extern Entity *gLeaderPointer; // 203B450
 
 #include "data/dungeon_serializer.h"
@@ -66,7 +66,7 @@ static s32 ReadSpeedStage(DataSerializer *seri);
 static u8 ReadTactic(DataSerializer *seri);
 static u8 ReadDecoyAITracker(DataSerializer *seri);
 static void ReadTile(DataSerializer *seri, Tile *dst);
-static void ReadTilePos(DataSerializer *seri, Position *dst);
+static void ReadTilePos(DataSerializer *seri, DungeonPos *dst);
 static void ReadInvisibleClassStatus(DataSerializer *seri, InvisibleClassStatus *dst);
 static u8 ReadType(DataSerializer *seri);
 static u16 ReadU16(DataSerializer *seri);
@@ -112,7 +112,7 @@ static void WriteSureShotClassStatus(DataSerializer *seri, SureShotClassStatus* 
 static void WriteMuzzled(DataSerializer *seri, Muzzled *src);
 static void WriteBurnClassStatus(DataSerializer *seri, BurnClassStatus *src);
 static void WriteReflectClassStatus(DataSerializer *seri, ReflectClassStatus *src);
-static void WriteTilePos(DataSerializer *seri, Position *src);
+static void WriteTilePos(DataSerializer *seri, DungeonPos *src);
 static void WriteS16(DataSerializer *seri, s16 value);
 static void WriteSleepClassStatus(DataSerializer *seri, SleepClassStatus* src);
 static void WriteSpeedCounters(DataSerializer *seri, u8 *src, u32 numCounters);
@@ -134,7 +134,7 @@ static Entity* sub_8082A08(s16 id, s16 apparentID, s32 index);
 
 // These externs are from other files
 extern u8 GetBodySize(s16 index);
-extern void sub_80460F8(Position *, Item *, u32);
+extern void sub_80460F8(DungeonPos *, Item *, u32);
 
 void SaveDungeonState(u8 *buffer, u32 bufLen)
 {
@@ -868,7 +868,7 @@ static void ReadDungeonItems(DataSerializer *seri)
 {
     s32 i;
     Item item;
-    Position pos;
+    DungeonPos pos;
 
     ReadBlame(seri, sMisakiSan);
 
@@ -894,7 +894,7 @@ static void ReadDungeonTraps(DataSerializer *seri)
     s32 counter;
     Tile *tile;
     Entity *entity;
-    Position pos;
+    DungeonPos pos;
     u8 isVisible;
     u8 unk1;
     u8 trapID;
@@ -952,7 +952,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     s32 i;
     EntityInfo *monEntInfo;
     EntityInfo entInfo = {0};
-    Position monPos;
+    DungeonPos monPos;
     bool8 shouldSpawnMon;
     u32 monIsVisible;
     u32 spawnGenID;
@@ -1245,7 +1245,7 @@ void sub_8082B40(void)
     EntityInfo *info;
     Entity *entity;
     s32 i;
-    Position pos;
+    DungeonPos pos;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         entity = gDungeon->activePokemon[i];
@@ -1627,7 +1627,7 @@ static void WriteBool8(DataSerializer *seri, bool8 value)
     WriteBytes(seri, &local_8, 1);
 }
 
-static void WriteTilePos(DataSerializer *seri, Position *src)
+static void WriteTilePos(DataSerializer *seri, DungeonPos *src)
 {
     WriteBytes(seri, &src->x, 1);
     WriteBytes(seri, &src->y, 1);
@@ -1708,7 +1708,7 @@ static bool8 ReadBool8(DataSerializer *seri)
     return local_8 != 0;
 }
 
-static void ReadTilePos(DataSerializer *seri, Position *dst)
+static void ReadTilePos(DataSerializer *seri, DungeonPos *dst)
 {
     dst->x = 0;
     dst->y = 0;

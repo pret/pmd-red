@@ -62,7 +62,7 @@ const u8 gTreatmentData[3][2][2][2] = {
     }
 };
 
-bool8 sub_8070F3C(Entity * pokemon, Position *pos, s32 direction)
+bool8 sub_8070F3C(Entity * pokemon, DungeonPos *pos, s32 direction)
 {
   u8 terrain;
   struct Tile *tile;

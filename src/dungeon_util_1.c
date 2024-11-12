@@ -248,7 +248,7 @@ void sub_8085890(s32 x, s32 y)
     sub_803F878(x, y);
 }
 
-void ShiftCameraToPosition(Position32 *posStruct, s32 cameraSteps)
+void ShiftCameraToPosition(PixelPos *posStruct, s32 cameraSteps)
 {
   s32 XPos;
   s32 YPos;

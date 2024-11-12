@@ -763,9 +763,9 @@ void sub_804A49C(s32 a0, s32 a1)
     sub_80098F8(3);
 }
 
-void sub_804A728(Position *pos, s32 a1, u8 a2, u8 a3)
+void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3)
 {
-    Position spArray[6];
+    DungeonPos spArray[6];
     u16 *src;
     s32 k;
     Entity *leader;
@@ -774,7 +774,7 @@ void sub_804A728(Position *pos, s32 a1, u8 a2, u8 a3)
     s32 r5;
     s32 r10;
     s32 r9;
-    Position var_48;
+    DungeonPos var_48;
     s32 var_38, var_34;
     s32 x, x2, y;
     Dungeon *dungeon = gDungeon;
@@ -983,7 +983,7 @@ void sub_804AAD4(void)
     gDungeon->unk104C0 = maxRooms + 1;
 }
 
-void sub_804AC20(Position *pos)
+void sub_804AC20(DungeonPos *pos)
 {
     s32 y;
     struct Tile *tile2;

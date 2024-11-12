@@ -6,7 +6,7 @@
 bool8 CanSeeTarget(Entity *entity, Entity *targetEntity);
 bool8 CanTargetEntity(Entity *entity, Entity *targetEntity);
 bool8 sub_8045A70(Entity *entity, Entity *targetEntity);
-bool8 sub_8045AAC(Entity *entity, Position *pos);
-bool8 CanTargetPosition(Entity *entity, Position *pos);
+bool8 sub_8045AAC(Entity *entity, DungeonPos *pos);
+bool8 CanTargetPosition(Entity *entity, DungeonPos *pos);
 
 #endif

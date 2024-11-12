@@ -57,8 +57,8 @@ typedef struct ScriptData
     /* 0x2C */ u16 unk2C;
     // padding
     /* 0x30 */ s32 unk30;
-    /* 0x34 */ Position32 pos1;
-    /* 0x3C */ Position32 pos2;
+    /* 0x34 */ PixelPos pos1;
+    /* 0x3C */ PixelPos pos2;
     /* 0x44 */ u8  unk44[4];
     /* 0x48 */ s32 unk48;
     /* 0x4C */ u8  unk4C;
@@ -78,14 +78,14 @@ typedef struct CallbackData
     // padding
     // All callbacks take the parentObject as first parameter
     /* 0x04 */ s16 (*getIndex)(void*); // id related
-    /* 0x08 */ void (*getSize)(void*, Position32 *out);
-    /* 0x0C */ void (*getHitboxCenter)(void*, Position32 *out);
+    /* 0x08 */ void (*getSize)(void*, PixelPos *out);
+    /* 0x0C */ void (*getHitboxCenter)(void*, PixelPos *out);
     /* 0x10 */ void (*getPosHeightAndUnk)(void*, u32 *height, u32 *unk);
     /* 0x14 */ void (*getDirection)(void*, s8 *dir);
     /* 0x18 */ void (*getFlags)(void*, u32 *flags);
-    /* 0x1C */ void (*setHitboxPos)(void*, Position32 *posOrNull);
-    /* 0x20 */ void (*setPositionBounds)(void*, Position32 *from, Position32 *to);
-    /* 0x24 */ bool8 (*moveReal)(void*, Position32*);
+    /* 0x1C */ void (*setHitboxPos)(void*, PixelPos *posOrNull);
+    /* 0x20 */ void (*setPositionBounds)(void*, PixelPos *from, PixelPos *to);
+    /* 0x24 */ bool8 (*moveReal)(void*, PixelPos*);
     /* 0x28 */ void (*setPosHeight)(void*, u32 height);
     /* 0x2C */ void (*setDirection)(void*, s8 dir); // direction must be signed char!
     /* 0x30 */ void (*setEventIndex)(void*, u16);
@@ -94,7 +94,7 @@ typedef struct CallbackData
     /* 0x3C */ void (*setFlags)(void*, u32 bits);
     /* 0x40 */ void (*clearFlags)(void*, u32 bits);
     /* 0x44 */ void (*func44_livesOnlySpriteRelated)(void*, u32);
-    /* 0x48 */ void (*moveRelative)(void*, Position32*);
+    /* 0x48 */ void (*moveRelative)(void*, PixelPos*);
     /* 0x4C */ bool8 (*func4C_spriteRelatedCheck)(void*);
     /* 0x50 */ bool8 (*func50_spriteRelated)(void*);
 } CallbackData;

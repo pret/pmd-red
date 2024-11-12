@@ -69,12 +69,12 @@ bool8 sub_8045A70(Entity *entity, Entity *targetEntity)
    return FALSE;
 }
 
-bool8 sub_8045AAC(Entity *entity, Position *pos)
+bool8 sub_8045AAC(Entity *entity, DungeonPos *pos)
 {
     return IsPositionActuallyInSight(&entity->pos, pos);
 }
 
-bool8 CanTargetPosition(Entity *entity, Position *pos)
+bool8 CanTargetPosition(Entity *entity, DungeonPos *pos)
 {
     return IsPositionInSight(&entity->pos, pos);
 }

@@ -12,6 +12,6 @@ Tile *GetTile(s32 x, s32 y);
 Tile *GetTileSafe(s32 x, s32 y);
 
 void sub_8049ED4(void);
-void sub_804AC20(Position *pos);
+void sub_804AC20(DungeonPos *pos);
 
 #endif // GUARD_DUNGEON_MAP_ACCESS_H

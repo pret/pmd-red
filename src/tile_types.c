@@ -87,9 +87,9 @@ const u8 gDungeonWaterType[76] = {
 extern void sub_80498A8(s32, s32);
 extern void sub_80402AC(s32, s32);
 extern void sub_8049BB0(s32, s32);
-void sub_8042A14(Position *);
+void sub_8042A14(DungeonPos *);
 
-bool8 PosHasItem(Position *pos)
+bool8 PosHasItem(DungeonPos *pos)
 {
   struct Tile *tile;
   Entity *entity;
@@ -102,7 +102,7 @@ bool8 PosHasItem(Position *pos)
   return FALSE;
 }
 
-Entity *GetMonsterAtPos(Position *pos)
+Entity *GetMonsterAtPos(DungeonPos *pos)
 {
   struct Tile *tile;
   Entity *entity;
@@ -115,7 +115,7 @@ Entity *GetMonsterAtPos(Position *pos)
   return NULL;
 }
 
-bool8 sub_804AD34(Position *pos)
+bool8 sub_804AD34(DungeonPos *pos)
 {
   struct Tile *tile;
   s32 x;
@@ -155,7 +155,7 @@ bool8 sub_804AD34(Position *pos)
   return iVar8;
 }
 
-bool8 sub_804AE08(Position *pos)
+bool8 sub_804AE08(DungeonPos *pos)
 {
   struct Tile *tile;
   s32 x;
@@ -182,7 +182,7 @@ bool8 sub_804AE08(Position *pos)
   return uVar6;
 }
 
-void sub_804AE84(Position *pos)
+void sub_804AE84(DungeonPos *pos)
 {
   struct Tile *tile;
   s32 x;

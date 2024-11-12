@@ -22,7 +22,7 @@ extern void sub_8073D14(Entity *);
 void sub_8075680(void)
 {
     u32 direction;
-    Position *targetPos;
+    DungeonPos *targetPos;
     Entity *entity;
     EntityInfo *info;
     int index;

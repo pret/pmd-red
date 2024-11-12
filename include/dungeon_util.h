@@ -6,13 +6,13 @@
 #include "structs/str_position.h"
 #include "structs/str_traps.h"
 
-extern const Position gAdjacentTileOffsets[NUM_DIRECTIONS];
+extern const DungeonPos gAdjacentTileOffsets[NUM_DIRECTIONS];
 
 bool8 EntityExists(Entity *pokemon);
 u32 GetEntityType(Entity *entity);
 u8 GetEntityRoom(Entity *entity);
 struct Tile *GetTileAtEntitySafe(Entity *entity);
-void sub_804535C(Entity *entity, Position32 *pos);
+void sub_804535C(Entity *entity, PixelPos *pos);
 void SetEntityPixelPos(Entity *entity, s32 x, s32 y);
 void IncreaseEntityPixelPos(Entity *entity, s32 x, s32 y);
 

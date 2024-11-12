@@ -3,7 +3,7 @@
 #include "dungeon_util.h"
 #include "code_8069D4C.h"
 
-u32 sub_8069D18(Position *pos,Entity *entity)
+u32 sub_8069D18(DungeonPos *pos,Entity *entity)
 {
     EntityInfo *info;
 

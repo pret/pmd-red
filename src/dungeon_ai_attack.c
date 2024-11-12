@@ -61,7 +61,7 @@ extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *
 extern void sub_8045BF8(u8 *, struct Item *);
 extern void sub_8044DF0(struct Entity *, u32, u32);
 extern void sub_8071DA4(struct Entity *);
-extern void sub_804AC20(struct Position *);
+extern void sub_804AC20(DungeonPos *);
 extern void sub_807EC28(bool8);
 extern void sub_806A5B8(struct Entity *entity);
 

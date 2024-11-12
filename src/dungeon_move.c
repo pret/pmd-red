@@ -55,14 +55,14 @@ extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
 extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
-extern void sub_800569C(Position *, axdata *, u8);
+extern void sub_800569C(DungeonPos *, axdata *, u8);
 extern u8 GetBodySize(s16 index);
 extern void sub_800EF10(u16 r0);
 extern s32 sub_800E710(s16 a0, u16 a1);
-extern void sub_800E3AC(s32 a0, Position *pos, s32 a2);
-extern void sub_8041168(Entity *entity, Entity *entity2, Move *,Position *);
+extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
+extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
 extern Entity *sub_80696A8(Entity *a0);
-extern Entity *GetMonsterAtPos(Position *pos);
+extern Entity *GetMonsterAtPos(DungeonPos *pos);
 extern Entity *sub_80696FC(Entity *);
 extern Entity *sub_806977C(Entity *);
 extern void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct DamageStruct *dmgStruct);
@@ -2265,13 +2265,13 @@ struct UnkStruct_sub_800E308_1
 {
     s16 unk0;
     s16 unk2;
-    Position unk4;
-    Position unk8;
+    DungeonPos unk4;
+    DungeonPos unk8;
     s32 unkC;
     s32 unk10;
 };
 
-// Maybe Position? Maybe not, sub_800E308 is called only by sub_8056564, so :shrug:
+// Maybe DungeonPos? Maybe not, sub_800E308 is called only by sub_8056564, so :shrug:
 struct UnkStruct_sub_800E308_2
 {
     s16 u0;
@@ -2281,7 +2281,7 @@ struct UnkStruct_sub_800E308_2
 extern s32 sub_800E308(struct UnkStruct_sub_800E308_1 *, struct UnkStruct_sub_800E308_2 *);
 
 #ifdef NONMATCHING // https://decomp.me/scratch/fTUsI
-s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
+s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
 {
     struct UnkStruct_sub_800E308_1 unkSp1;
     struct UnkStruct_sub_800E308_2 unkSp2;
@@ -2291,7 +2291,7 @@ s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
         unkStruct_80BDBC4 *unkStruct = sub_800ECB8(sub_80412E0(move->id, GetApparentWeather(entity), 1));
         s32 unk6 = unkStruct->unk6;
         // This part with unkPos doesn't match
-        Position32 unkPos = {pos->x * 0x1800, pos->y * 0x1800};
+        PixelPos unkPos = {pos->x * 0x1800, pos->y * 0x1800};
 
         unkPos.x += 0x1000;
         unkPos.y += 0xC00;
@@ -2311,7 +2311,7 @@ s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
                             someRetVal);
             }
             else {
-                unkSp1.unk8 = (Position) {0};
+                unkSp1.unk8 = (DungeonPos) {0};
             }
             unkSp1.unk0 = sub_80412E0(move->id, GetApparentWeather(entity), 1);
             unkSp1.unk2 = entInfo->apparentID;
@@ -2327,7 +2327,7 @@ s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
     return -1;
 }
 #else
-NAKED s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
+NAKED s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
 {
     asm_unified("push {r4-r7,lr}\n"
 	"	mov r7, r9\n"
@@ -2541,8 +2541,8 @@ static const s32 gUnknown_81069D4[NUM_DIRECTIONS] =
 // This function looks important, but what does it do?
 void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32 isLinkedMove)
 {
-    Position var_68;
-    Position var_64;
+    DungeonPos var_68;
+    DungeonPos var_64;
     Entity *targetsArray[2]; // Only 2 hmm
     s32 var_4C, var_48;
     s32 i, j;
@@ -2621,7 +2621,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
 
     for (i = 0; i < a2; i++)
     {
-        Position var_68Before;
+        DungeonPos var_68Before;
         Tile *tile;
 
         if (var_68.x < 0 || var_68.y < 0 || var_68.x > 55 || var_68.y > 31)
@@ -2631,7 +2631,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
         var_68.x += var_4C;
         var_68.y += var_48;
         if (sub_803F428(&var_68) && !gDungeon->unk181e8.blinded) {
-            Position32 pos32;
+            PixelPos pos32;
             pos32.x = (var_68Before.x * 0x1800) + 0xC00;
             pos32.y = (var_68Before.y * 0x1800) + 0x1000;
             var_28 = var_30 * (var_4C << 8);
@@ -2828,7 +2828,7 @@ static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *mov
         }
         for (i = 0; i < to; i++, direction++) {
             Entity *targetEntity;
-            Position unkPositon;
+            DungeonPos unkPositon;
 
             direction &= DIRECTION_MASK;
             unkPositon.x = attacker->pos.x + gAdjacentTileOffsets[direction].x ;

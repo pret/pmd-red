@@ -52,7 +52,7 @@ void FatalError(void* loc, char* fmt, ...) __attribute__((noreturn));
 char sub_8002984(s32, u8);
 u32 VecDirection8Radial();
 u32 SizedDeltaDirection4();
-u8 SizedDeltaDirection8(Position32*, Position32*, Position32*, Position32*);
+u8 SizedDeltaDirection8(PixelPos*, PixelPos*, PixelPos*, PixelPos*);
 
 bool8 sub_8021700(s32);
 bool8 sub_802FCF0(void);
@@ -93,13 +93,13 @@ s32 HasItemInInventory(u8);
 u32 sub_809CC90();
 void sub_809D0BC(void);
 void sub_809D124(s32, s32, s32);
-void sub_809D158(s32, Position32*);
+void sub_809D158(s32, PixelPos*);
 void sub_809D170(s32, s32);
-void sub_809D190(s32, Position32*, s32);
+void sub_809D190(s32, PixelPos*, s32);
 void sub_809D1A8(s32, s32, s32);
-void sub_809D1CC(s32, Position32*, s32);
+void sub_809D1CC(s32, PixelPos*, s32);
 void sub_809D1E4(s32, s32, s32);
-void sub_809D208(s32, Position32*, s32);
+void sub_809D208(s32, PixelPos*, s32);
 void sub_809D220(s32, s32, s32);
 u32 sub_809D52C();
 bool8 GroundCancelAllEntities(void);
@@ -111,14 +111,14 @@ void sub_80A8BD8(s16, s32*);
 u32 sub_80A8C2C();
 u32 sub_80A8C98();
 char *sub_80A8D54(s16);
-s16 sub_80A8FD8(s32, Position32*);
-s16 sub_80A8F9C(s32, Position32*);
+s16 sub_80A8FD8(s32, PixelPos*);
+s16 sub_80A8F9C(s32, PixelPos*);
 u32 sub_80A9050();
 u32 sub_80A9090();
-s16 sub_80AC448(s16, Position32*);
-s32 sub_80AC49C(s16, Position32*);
-s16 sub_80AD360(s16, Position32*);
-s16 sub_80AD3B4(s16, Position32*);
+s16 sub_80AC448(s16, PixelPos*);
+s32 sub_80AC49C(s16, PixelPos*);
+s16 sub_80AD360(s16, PixelPos*);
+s16 sub_80AD3B4(s16, PixelPos*);
 u32 GroundLink_GetPos();
 u32 GroundLink_GetArea();
 void DeleteGroundEvents(void);
@@ -139,7 +139,7 @@ extern struct { const char *unk0; s32 unk4; } gChoices[9];
 extern char gUnknown_2039D98[12];
 extern int gNumChoices;
 
-extern Position32 gUnknown_81164DC;
+extern PixelPos gUnknown_81164DC;
 extern char gUnknown_81165D4[];
 extern char gUnknown_81165F4[];
 extern char gUnknown_811660C[];
@@ -404,7 +404,7 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0x19: {
                 s8 unk[4];
                 GroundObjectData *obj;
-                Position32 pos;
+                PixelPos pos;
                 s16 res;
                 s32 group;
                 s32 sector;
@@ -431,7 +431,7 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0x1a: {
                 s8 unk;
                 GroundEffectData *eff;
-                Position32 pos;
+                PixelPos pos;
                 s16 res;
                 s32 group;
                 s32 sector;
@@ -541,10 +541,10 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0x21: {
                 s32 ret;
                 s32 unk;
-                Position32 pos1;
-                Position32 pos2;
-                Position32 pos3;
-                Position32 pos4;
+                PixelPos pos1;
+                PixelPos pos2;
+                PixelPos pos3;
+                PixelPos pos4;
                 s32 tmp;
                 ret = (s16)sub_80A7AE8((s16)curCmd.arg1);
                 if (ret >= 0) {
@@ -864,7 +864,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0x50: {
                 Action *ptr;
-                Position32 pos;
+                PixelPos pos;
                 s8 c;
                 {
                     Action *tmp = (Action*)sub_809D52C(action->unkC.arr);
@@ -880,9 +880,9 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x51: {
-                Position32 posIn;
-                Position32 posOut1;
-                Position32 posOut2;
+                PixelPos posIn;
+                PixelPos posOut1;
+                PixelPos posOut2;
                 action->callbacks->getHitboxCenter(action->parentObject, &posIn);
                 GroundLink_GetArea(curCmd.argShort, &posOut1, &posOut2, &posIn);
                 action->callbacks->setPositionBounds(action->parentObject, &posOut1, &posOut2);
@@ -920,7 +920,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x58: {
-                Position32 unk;
+                PixelPos unk;
                 unk.x = curCmd.arg1 << 8;
                 unk.y = curCmd.arg2 << 8;
                 action->callbacks->moveReal(action->parentObject, &unk);
@@ -928,7 +928,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x59: {
-                Position32 unk;
+                PixelPos unk;
                 unk.x = curCmd.argShort << 8;
                 unk.y = curCmd.arg1 << 8;
                 action->callbacks->moveRelative(action->parentObject, &unk);
@@ -939,12 +939,13 @@ s32 ExecuteScriptCommand(Action *action) {
                 u32 unk[2];
                 unk[0] = OtherRandInt(curCmd.argShort) << 8;
                 unk[1] = OtherRandInt(curCmd.arg1) << 8;
-                action->callbacks->moveRelative(action->parentObject, (Position32*)unk);
+                action->callbacks->moveRelative(action->parentObject,
+                                                (PixelPos*)unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
             case 0x5b: {
-                Position32 unk;
+                PixelPos unk;
                 action->callbacks->getHitboxCenter(action->parentObject, &unk);
                 GroundLink_GetPos((s16)curCmd.arg1, &unk);
                 action->callbacks->moveReal(action->parentObject, &unk); // landing end of unwanted tailmerge
@@ -952,7 +953,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x5c: {
-                Position32 pos, pos1, pos2;
+                PixelPos pos, pos1, pos2;
                 action->callbacks->getHitboxCenter(action->parentObject, &pos);
                 GroundLink_GetArea((s16)curCmd.arg1, &pos1, &pos2, &pos);
                 pos.x = pos1.x + OtherRandInt(pos2.x - pos1.x);
@@ -962,7 +963,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x5d: {
-                Position32 unk;
+                PixelPos unk;
                 s16 res = sub_80A7AE8((s16)curCmd.arg1);
                 if (res >= 0) {
                     sub_80A8FD8(res, &unk);
@@ -973,7 +974,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x5e: {
-                Position32 pos;
+                PixelPos pos;
                 s32 height;
                 s32 dir;
                 pos.x = GetScriptVarArrayValue(NULL, POSITION_X, (u16)curCmd.arg1);
@@ -992,7 +993,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x5f: {
-                Position32 pos;
+                PixelPos pos;
                 u32 height;
                 u32 wat;
                 s8 dir;
@@ -1018,7 +1019,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x62: case 0x6a: {
-                Position32 pos;
+                PixelPos pos;
                 action->callbacks->getHitboxCenter(action->parentObject, &pos);
                 scriptData->pos2.x = pos.x + (curCmd.arg1 << 8);
                 scriptData->pos2.y = pos.y + (curCmd.arg2 << 8);
@@ -1196,7 +1197,7 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0x8e: case 0x8f: case 0x90: {
                 bool8 flag = FALSE;
                 s8 dir;
-                Position32 pos1, pos2, pos3, pos4;
+                PixelPos pos1, pos2, pos3, pos4;
                 switch (curCmd.op) {
                     case 0x8e: {
                         s32 val = (s16)sub_80A7AE8((s16)curCmd.arg1);
@@ -1282,7 +1283,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0x99: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
-                Position32 unk;
+                PixelPos unk;
                 switch(action->unk8[0]) {
                     case 1:
                         sub_80A8FD8(id, &unk);
@@ -1321,7 +1322,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0x9c: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
-                Position32 unk;
+                PixelPos unk;
                 switch(action->unk8[0]) {
                     case 1:
                         sub_80A8FD8(id, &unk);
@@ -1360,7 +1361,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0x9f: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
-                Position32 unk;
+                PixelPos unk;
                 switch(action->unk8[0]) {
                     case 1:
                         sub_80A8FD8(id, &unk);
@@ -1399,7 +1400,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0xa2: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
-                Position32 unk;
+                PixelPos unk;
                 switch(action->unk8[0]) {
                     case 1:
                         sub_80A8FD8(id, &unk);
@@ -1571,7 +1572,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0xc0 ... 0xcb: {
                 s32 val;
-                Position32 pos, pos2, pos3;
+                PixelPos pos, pos2, pos3;
                 switch (curCmd.op) {
                     case 0xc0: {
                         val = GetScriptVarValue(scriptData->localVars.buf, curCmd.argShort);
@@ -1625,7 +1626,7 @@ s32 ExecuteScriptCommand(Action *action) {
                     case 0xc8: {
                         s16 tmp = (s16)sub_80A7AE8((s16)curCmd.arg1);
                         if (tmp >= 0) {
-                            Position32 pos1, pos2, pos3, pos4;
+                            PixelPos pos1, pos2, pos3, pos4;
                             action->callbacks->getHitboxCenter(action->parentObject, &pos1);
                             action->callbacks->getSize(action->parentObject, &pos2);
                             sub_80A8FD8(tmp, &pos3);
@@ -1642,7 +1643,7 @@ s32 ExecuteScriptCommand(Action *action) {
                     case 0xc9: {
                         s16 tmp = (s16)sub_80A7AE8((s16)curCmd.arg1);
                         if (tmp >= 0) {
-                            Position32 pos1, pos2, pos3;
+                            PixelPos pos1, pos2, pos3;
                             action->callbacks->getHitboxCenter(action->parentObject, &pos1);
                             action->callbacks->getSize(action->parentObject, &pos2);
                             sub_80A8FD8(tmp, &pos3);

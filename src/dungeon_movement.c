@@ -66,7 +66,7 @@ u8 sub_807034C(s16 id, struct Tile *tile)
     return TRUE;
 }
 
-u8 sub_80703A0(Entity *pokemon, Position *pos)
+u8 sub_80703A0(Entity *pokemon, DungeonPos *pos)
 {
     struct Tile *tile;
     u8 crossableTerrain;
@@ -128,7 +128,7 @@ bool8 CanCrossWalls(Entity *pokemon)
     return FALSE;
 }
 
-bool8 sub_807049C(Entity *pokemon, Position *pos)
+bool8 sub_807049C(Entity *pokemon, DungeonPos *pos)
 {
     s32 crossableTerrain;
     struct Tile *tile;
@@ -170,7 +170,7 @@ bool8 sub_807049C(Entity *pokemon, Position *pos)
     return TRUE;
 }
 
-bool8 sub_8070564(Entity *pokemon, Position *pos)
+bool8 sub_8070564(Entity *pokemon, DungeonPos *pos)
 {
     u8 crossableTerrain;
     struct Tile *tile;
@@ -216,7 +216,7 @@ bool8 sub_8070564(Entity *pokemon, Position *pos)
     return TRUE;
 }
 
-bool8 sub_80705F0(Entity *pokemon, Position *pos)
+bool8 sub_80705F0(Entity *pokemon, DungeonPos *pos)
 {
     s32 crossableTerrain;
     struct Tile *tile;
@@ -256,7 +256,7 @@ bool8 sub_80705F0(Entity *pokemon, Position *pos)
     return TRUE;
 }
 
-bool8 sub_80706A4(Entity *pokemon, Position *pos)
+bool8 sub_80706A4(Entity *pokemon, DungeonPos *pos)
 {
     s32 crossableTerrain;
     struct Tile *tile;

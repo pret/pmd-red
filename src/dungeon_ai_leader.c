@@ -50,7 +50,7 @@ void sub_8041888(u8 param_1);
 void sub_8085140(void);
 void sub_807360C(void);
 void sub_805EFB4(Entity *, u8);
-void sub_8074FB0(Entity *, u8, Position *);
+void sub_8074FB0(Entity *, u8, DungeonPos *);
 
 void HandlePlaceItemAction(Entity *);
 void HandlePickUpPlayerAction(Entity *);
@@ -72,7 +72,7 @@ extern u8 sub_8044B28(void);
 extern u8 UseAttack(Entity *);
 void sub_806A1E8(Entity *pokemon);
 extern void sub_80694C0(Entity *, s32, s32, u32);
-bool8 sub_804AE08(Position *pos);
+bool8 sub_804AE08(DungeonPos *pos);
 void HandlePickUpAIAction(Entity *pokemon);
 void HandleThrowItemAIAction(Entity *pokemon);
 void HandleEatAIAction(Entity *pokemon);
@@ -114,8 +114,8 @@ bool8 sub_8072CF4(Entity *entity)
     s32 index;
     EntityInfo *info;
     bool8 bVar14;
-    Position pos;
-    Position pos1;
+    DungeonPos pos;
+    DungeonPos pos1;
 
     sub_804178C(1);
     gUnknown_203B434 = 1;

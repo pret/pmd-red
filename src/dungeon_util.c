@@ -15,7 +15,7 @@ void sub_806C51C(Entity *entity);
 extern void sub_80462AC(Entity * ,u32, u32, u32, u32);
 extern void sub_807FA9C();
 
-const Position gAdjacentTileOffsets[] = {
+const DungeonPos gAdjacentTileOffsets[] = {
     {0, 1},
     {1, 1},
     {1, 0},
@@ -177,7 +177,7 @@ void sub_804522C(void) {
     }
 }
 
-void sub_804535C(Entity *entity, Position32 *pos)
+void sub_804535C(Entity *entity, PixelPos *pos)
 {
 
   if (pos != NULL) {

@@ -183,17 +183,18 @@ void sub_8075900(Entity *pokemon, u8 r1);
 extern u8 sub_8044B28(void);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);
+extern void sub_804652C(Entity *, Entity *, Item *, u32, DungeonPos *);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_8045C28(Item *, u8 , u8);
-static void sub_805A7D4(Entity *, Entity *, Item *, Position *);
+static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 extern void MudWaterSportEffect(u32);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_806A6E8(Entity *);
 
 extern void sub_806ABAC(Entity *, Entity *);
 extern u8 sub_806F4A4(Entity *, u32);
-extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
+extern void sub_807DF38(Entity *pokemon, Entity *target, DungeonPos *pos, u32,
+			u8 moveType, s16);
 extern void nullsub_92(Entity *);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern u8 sub_807EAA0(u32, u32);
@@ -2459,7 +2460,7 @@ bool8 sub_805A464(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool32 flag;
   Item item;
-  Position pos;
+  DungeonPos pos;
 
   flag = FALSE;
   if (HandleDamagingMove(pokemon, target, move, 0x100, param_4) != 0) {
@@ -2592,7 +2593,7 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     EntityInfo *entityInfo;
     EntityInfo *targetEntityInfo;
     Item heldItem;
-    Position pos;
+    DungeonPos pos;
 
     entityInfo = GetEntInfo(pokemon);
     targetEntityInfo = GetEntInfo(target);
@@ -2632,7 +2633,8 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     }
 }
 
-static void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
+static void sub_805A7D4(Entity * pokemon, Entity * target, Item *item,
+                 DungeonPos *pos)
 {
   Entity stackEntity;
 
@@ -2655,10 +2657,10 @@ bool8 sub_805A85C(Entity * pokemon, Entity * target, Move *move, u32 param_4)
   int x;
   int y;
   int counter;
-  Position *r9;
-  Position pos1;
+  DungeonPos *r9;
+  DungeonPos pos1;
   Move stackMove;
-  Position32 pos2;
+  PixelPos pos2;
   struct Tile *tile;
   Entity *entity;
   s32 temp;
@@ -2735,9 +2737,9 @@ _0805A9FE:
 _0805AA5E:
     if (EntityExists(target)) {
 #ifndef NOMATCHING
-      register Position *pos asm("r1");
+      register DungeonPos *pos asm("r1");
 #else
-      Position *pos;
+      DungeonPos *pos;
 #endif
       sub_804535C(target, NULL);
       pos = r9;

@@ -23,7 +23,7 @@ struct unkStruct_806B7F8
     u32 unk4;
     u16 level;
     u8 fillA[0xC - 0xA];
-    struct Position pos;
+    DungeonPos pos;
     u8 unk10;
 };
 

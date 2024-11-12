@@ -20,8 +20,8 @@ typedef struct DungeonPokemonSprite
     /* 0xC */ u32 status;
     /* 0x10 */ u8 visible;
     /* 0x11 */ u8 unk11;
-    /* 0x14 */ Position pos;
-    /* 0x18 */ Position statusOffsets[2];
+    /* 0x14 */ DungeonPos pos;
+    /* 0x18 */ DungeonPos statusOffsets[2];
     /* 0x20 */ u32 unk20;
     /* 0x24 */ u32 unk24;
     /* 0x28 */ DungeonPokemonStatusSprite statusSprites[2];

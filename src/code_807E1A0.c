@@ -19,7 +19,7 @@ extern void sub_805E804(void);
 void sub_806A2BC(Entity *pokemon, u8 param_2);
 extern u8 sub_8044B28(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
-extern void nullsub_93(Position *);
+extern void nullsub_93(DungeonPos *);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 extern void sub_807EC28(bool8);
@@ -69,8 +69,8 @@ void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s16 param_4,s32 para
 
 void sub_807E254(Entity *pokemon,Entity *target)
 {
-  Position pokemonPos;
-  Position targetPos;
+  DungeonPos pokemonPos;
+  DungeonPos targetPos;
 
 
   if (HasAbility(pokemon, ABILITY_SUCTION_CUPS)) {

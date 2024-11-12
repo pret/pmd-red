@@ -524,7 +524,7 @@ Entity *sub_804550C(s16 a)
 );
 }
 
-Entity *sub_8045684(u8 trapID, Position *pos, u8 c)
+Entity *sub_8045684(u8 trapID, DungeonPos *pos, u8 c)
 {
     Entity *entity;
     s32 i;
@@ -548,7 +548,7 @@ Entity *sub_8045684(u8 trapID, Position *pos, u8 c)
     return NULL;
 }
 
-Entity *sub_8045708(Position *pos)
+Entity *sub_8045708(DungeonPos *pos)
 {
     s32 i;
     Entity *ent;

@@ -387,16 +387,16 @@ extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80464C8(Entity *, Position *, Item *);
+extern void sub_80464C8(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
-extern u32 sub_8085EC8(u32, u32, u32, Position *, u32);
+extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_807EAA0(u32, u32);
 extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
 extern void sub_8085374(void);
 extern void sub_8045C28(Item *, u8 , u8 *);
-extern void sub_8046860(Entity *, Position *, Item *, u32);
+extern void sub_8046860(Entity *, DungeonPos *, Item *, u32);
 extern u32 sub_803D73C(u32);
-extern void sub_80460F8(Position *, Item *, u8);
+extern void sub_80460F8(DungeonPos *, Item *, u8);
 extern u8 sub_8044B28(void);
 extern bool8 sub_8085B80(struct_8085B80 *);
 
@@ -453,7 +453,7 @@ void MoltresScreenFlash2(s32 r0, s32 r1);
 void MoltresScreenFlash3(void);
 void MoltresScreenDarken(void);
 void EnableJirachiWishWarpTile(void);
-void sub_808BB3C(Position *pos);
+void sub_808BB3C(DungeonPos *pos);
 void sub_8087144();
 void SkarmoryEntry(Entity *);
 
@@ -561,8 +561,8 @@ void SkarmoryPreFightDialogue(void)
   Entity * diglettEntity;
   Entity * skarmoryEntity;
 
-  Position32 pos1;
-  Position32 pos2;
+  PixelPos pos1;
+  PixelPos pos2;
 
   leaderEntity = xxx_call_GetLeader(); // Player
   partnerEntity = GetPartnerEntity(); // Partner
@@ -618,7 +618,7 @@ void SkarmoryReFightDialogue(void)
 {
   Entity * leaderEntity;
   Entity * skarmoryEntity;
-  Position32 pos;
+  PixelPos pos;
 
   leaderEntity = xxx_call_GetLeader();
   skarmoryEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SKARMORY);
@@ -2123,7 +2123,7 @@ void MagmaCavernMidDialogue(void)
   Entity * groudonEntity;
   Entity * alakazamEntity;
   s16 IDStack [2];
-  Position32 pos;
+  PixelPos pos;
 
   leaderEntity = xxx_call_GetLeader();
   partnerEntity = GetPartnerEntity();
@@ -3314,7 +3314,7 @@ void HoOhPreFightDialogue(void)
 {
   Entity * leaderEntity;
   Entity * HoOhEntity;
-  Position32 local_14;
+  PixelPos local_14;
 
   leaderEntity = xxx_call_GetLeader();
   HoOhEntity = GetEntityFromMonsterBehavior(BEHAVIOR_HO_OH);
@@ -3353,7 +3353,7 @@ void HoOhReFightDialogue(void)
 {
   Entity * leaderEntity;
   Entity * HoOhEntity;
-  Position32 local_14;
+  PixelPos local_14;
 
   leaderEntity = xxx_call_GetLeader();
   HoOhEntity = GetEntityFromMonsterBehavior(BEHAVIOR_HO_OH);
@@ -3494,8 +3494,8 @@ void LatiosPreFightDialogue(void)
 {
   Entity * leaderEntity;
   Entity * LatiosEntity;
-  Position32 local_18;
-  Position local_19;
+  PixelPos local_18;
+  DungeonPos local_19;
 
   leaderEntity = xxx_call_GetLeader();
   LatiosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_LATIOS);
@@ -3652,7 +3652,7 @@ void sub_808ADCC(void)
   }
 }
 
-void sub_808AE54(u8 param_1,u8 param_2,Position *param_3)
+void sub_808AE54(u8 param_1,u8 param_2,DungeonPos *param_3)
 {
   Entity * leaderEntity;
   s16 IDStack[2];
@@ -3675,7 +3675,7 @@ void sub_808AE54(u8 param_1,u8 param_2,Position *param_3)
 }
 
 
-void sub_808AEC8(u8 param_1,u8 param_2,Position *param_3)
+void sub_808AEC8(u8 param_1,u8 param_2,DungeonPos *param_3)
 {
   Entity * leaderEntity;
   s16 IDStack[2];
@@ -3697,7 +3697,7 @@ void sub_808AEC8(u8 param_1,u8 param_2,Position *param_3)
   }
 }
 
-void sub_808AF3C(u8 param_1,u8 param_2,Position *param_3)
+void sub_808AF3C(u8 param_1,u8 param_2,DungeonPos *param_3)
 {
   Entity * leaderEntity;
   s16 IDStack[2];
@@ -3813,7 +3813,7 @@ void sub_808B1CC(u8 itemID)
 {
     Entity *entity;
     Tile *tile;
-    Position pos;
+    DungeonPos pos;
     Item item;
 
     pos.x = gDungeon->unk644.unk40;
@@ -3992,7 +3992,7 @@ void JirachiWish(void)
 {
   u8 friendArea;
   Entity *jirachiEntity;
-  Position *LeaderPos;
+  DungeonPos *LeaderPos;
   Entity *leaderEntity;
   s32 wishChoice;
   s32 counter;
@@ -4001,9 +4001,9 @@ void JirachiWish(void)
   Item auStack152 [9];
   Item itemStack [9];
   Item strengthItems [9];
-  Position pos1;
-  Position pos2;
-  Position pos3;
+  DungeonPos pos1;
+  DungeonPos pos2;
+  DungeonPos pos3;
 
   jirachiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_JIRACHI);
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
@@ -4220,14 +4220,14 @@ void JirachiWishGrantFlash(void)
   sub_8085EB0();
 }
 
-void sub_808BB3C(Position *pos1)
+void sub_808BB3C(DungeonPos *pos1)
 {
 #ifndef NONMATCHING
   register s32 iVar1 asm("r0");
 #else
   s32 iVar1;
 #endif
-  Position newPos;
+  DungeonPos newPos;
 
   iVar1 = pos1->x * 0x1800 + 0xc00;
   newPos.x = iVar1 / 256;
