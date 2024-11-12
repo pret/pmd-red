@@ -5,8 +5,8 @@
 
   	.text
 
-	thumb_func_start sub_807D510
-sub_807D510:
+	thumb_func_start HandleTrawlOrbAction
+HandleTrawlOrbAction:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -623,10 +623,10 @@ _0807D9F4:
 _0807DA08: .4byte gUnknown_80FE034
 _0807DA0C: .4byte 0x00000d08
 _0807DA10: .4byte 0x00000d2c
-	thumb_func_end sub_807D510
+	thumb_func_end HandleTrawlOrbAction
 
-	thumb_func_start sub_807DA14
-sub_807DA14:
+	thumb_func_start HandlePounceOrbAction
+HandlePounceOrbAction:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -790,10 +790,10 @@ _0807DB5E:
 	.align 2, 0
 _0807DB6C: .4byte gDungeon
 _0807DB70: .4byte 0x00003a08
-	thumb_func_end sub_807DA14
+	thumb_func_end HandlePounceOrbAction
 
-	thumb_func_start sub_807DB74
-sub_807DB74:
+	thumb_func_start HandleDroughtOrbAction
+HandleDroughtOrbAction:
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -910,10 +910,10 @@ _0807DC54:
 	.align 2, 0
 _0807DC60: .4byte gUnknown_80FD060
 _0807DC64: .4byte gDungeon
-	thumb_func_end sub_807DB74
+	thumb_func_end HandleDroughtOrbAction
 
-	thumb_func_start sub_807DC68
-sub_807DC68:
+	thumb_func_start HandleOneRoomOrb
+HandleOneRoomOrb:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1260,7 +1260,7 @@ _0807DF28: .4byte 0x00003a0c
 _0807DF2C: .4byte 0x000135cc
 _0807DF30: .4byte gUnknown_80FD3A0
 _0807DF34: .4byte 0x00003a08
-	thumb_func_end sub_807DC68
+	thumb_func_end HandleOneRoomOrb
 
 	thumb_func_start sub_807DF38
 sub_807DF38:

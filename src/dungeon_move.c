@@ -69,7 +69,7 @@ extern void MarkLastUsedMonMove(Entity *entity, Move *move);
 extern s32 sub_8057070(Move *move);
 extern bool8 MoveRequiresCharging(Entity* pokemon,u16 param_2);
 extern s32 sub_800ED20(u16 param_1);
-extern bool32 sub_8058F04(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool32 EarthquakeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern void sub_8042930(Entity *r0);
 extern void sub_8041B48(Entity *pokemon);
 extern void sub_8041BA8(Entity *pokemon);
@@ -92,11 +92,11 @@ extern bool8 FakeTearsMoveAction(Entity *pokemon, Entity *target, Move *move, s3
 extern bool8 SpiteMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SmokescreenMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 FlatterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057FF4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 WillOWispMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 ReturnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 FlameWheelMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80581D0(Entity *pokemon, Entity *target, Move *move, u32 param_4);
-extern bool8 sub_8058B3C(Entity *pokemon, Entity *target, Move *move, u32 param_4);
+extern bool8 BasicFireMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4);
+extern bool8 BasicIceMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4);
 extern bool8 GustMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 DisableMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 CrunchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -130,7 +130,7 @@ extern bool8 sub_8059528(Entity *pokemon, Entity *target, Move *move, s32 param_
 extern bool8 SmogMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SacredFireMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_80595EC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805C138(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 OneShotOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 MuddyWaterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 TwisterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 TwineedleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -157,12 +157,12 @@ extern bool8 CurseMoveAction(Entity *pokemon, Entity *target, Move *move, s32 pa
 extern bool8 sub_805A568(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 FocusEnergyMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SuperpowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A688(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DynamicPunchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SecretPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805AC90(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805AD04(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AD34(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FeatherDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BeatUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BlastBurnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 CrushClawMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -188,88 +188,88 @@ extern bool8 LusterPurgeMoveAction(Entity *pokemon, Entity *target, Move *move, 
 extern bool8 DragonRageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 FakeOutMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 StunSporeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059FC8(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 param_5);
-extern bool8 sub_8059E54(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 param_5);
+extern bool8 HiJumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 param_5);
+extern bool8 JumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param_4,u8 param_5);
 extern void SetShopkeeperAggression(Entity *, Entity *);
 extern bool8 MoveCausesPaused(Move *move);
 extern void sub_8069F9C(Entity *pokemon,Entity * target,Move *move);
 extern void sub_806A120(Entity *pokemon,Entity * target,Move *move);
 extern bool8 sub_8058C98(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
-extern bool8 sub_805B3FC(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
-extern bool8 sub_805A5E8(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
-extern bool8 sub_8058B84(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059714(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80576F8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059080(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059D58(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B164(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059A18(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MetalClawMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
+extern bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
+extern bool8 MeteorMashMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SonicboomMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BasicSleepMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ThunderboltMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ZapCannonMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TailGlowMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MinimizeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80582D4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BasicRaiseAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 RageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059B94(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B3B4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059588(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A2B0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B2FC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SwordsDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 CalmMindMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 GrowthMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 AmnesiaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DefenseCurlMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_8059CD8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058A7C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057F7C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057ED0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058CEC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A2C8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057C68(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 CosmicPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 OctazookaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 AuroraBeamMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PsychoBoostMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 GrowlMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ScreechMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SolarBeamMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SkyAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058D38(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 UproarMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SandstormMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SafeguardMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 MistMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 LightScreenMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805768C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057F24(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MementoMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_80599EC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80589D4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059AC4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A4D4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SynthesisMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MoonlightMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 RestMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_8058EE0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_8058A08(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 CounterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BideMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805836C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 Bide2MoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 TrapperOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805A450(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 RazorWindMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 FocusPunchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 MagicCoatMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057748(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MorningSunMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 MudWaterSportMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A4FC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058C48(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 IngrainMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PsywaveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SpikesMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_80578EC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80588A8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 HazeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 WishMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057E6C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059CF0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80582AC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058A54(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 OverheatMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 WarpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BasicRaiseDefenseMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SureShotMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 VitalThrowMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 FlyMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059F38(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BounceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 DiveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 DigMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057824(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805825C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SweetScentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DoubleTeamMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 GrudgeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A4C0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 AssistMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805AAD0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805B314(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 ProtectMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059004(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80597F0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SelfDestructMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ExplosionMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 ChargeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058D44(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 WaterSpoutMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 StockpileMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SpitUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SwallowMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -277,27 +277,27 @@ extern bool8 RainDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s3
 extern bool8 InvisifyOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 MirrorCoatMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 PerishSongMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057CD0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 WeatherBallMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SunnyDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 EndureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 HelpingHandMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BellyDrumMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80578FC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057BB4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BubbleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 StringShotMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 TransformMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 HailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058234(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A85C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ExposeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SplashMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 ReboundOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 NaturePowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057E50(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MirrorMoveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 ConversionMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SnatchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 HandleColorChange(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 PsychUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B618(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MetronomeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 Conversion2MoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
 s32 HandleDamagingMove(Entity *, Entity *, Move *, s32, s32);
@@ -617,10 +617,10 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
 
                 switch (moveId) {
                     case MOVE_HI_JUMP_KICK:
-                        sub_8059FC8(attacker, currTarget, move, itemId, 1);
+                        HiJumpKickMoveAction(attacker, currTarget, move, itemId, 1);
                         break;
                     case MOVE_JUMP_KICK:
-                        sub_8059E54(attacker, currTarget, move, itemId, 1);
+                        JumpKickMoveAction(attacker, currTarget, move, itemId, 1);
                         break;
                 }
 
@@ -725,13 +725,13 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0, itemId) != 0);
                         break;
                     case MOVE_EARTHQUAKE:
-                        moveHadEffect = sub_8058F04(attacker, currTarget, move, itemId);
+                        moveHadEffect = EarthquakeMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_GUST:
                         moveHadEffect = GustMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_STRUGGLE:
-                        moveHadEffect = sub_805B968(attacker, currTarget, move, itemId);
+                        moveHadEffect = StruggleMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_FLAME_WHEEL:
                         moveHadEffect = FlameWheelMoveAction(attacker, currTarget, move, itemId);
@@ -741,13 +741,13 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_HEAT_WAVE:
                     case MOVE_EMBER:
                     case MOVE_FIRE_PUNCH:
-                        moveHadEffect = sub_80581D0(attacker, currTarget, move, itemId);
+                        moveHadEffect = BasicFireMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_POWDER_SNOW:
                     case MOVE_BLIZZARD:
                     case MOVE_ICE_PUNCH:
                     case MOVE_ICE_BEAM:
-                        moveHadEffect = sub_8058B3C(attacker, currTarget, move, itemId);
+                        moveHadEffect = BasicIceMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_FRENZY_PLANT:
                     case MOVE_HYDRO_CANNON:
@@ -774,7 +774,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = sub_80595EC(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ONE_SHOT:
-                        moveHadEffect = sub_805C138(attacker, currTarget, move, itemId);
+                        moveHadEffect = OneShotOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_CLAMP:
                     case MOVE_BIND:
@@ -804,10 +804,10 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = sub_8058C98(attacker, currTarget, move, gUnknown_8106A4C, itemId);
                         break;
                     case MOVE_METAL_CLAW:
-                        moveHadEffect = sub_805B3FC(attacker, currTarget, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = MetalClawMoveAction(attacker, currTarget, move, gUnknown_8106A4C, itemId);
                         break;
                     case MOVE_STEEL_WING:
-                        moveHadEffect = sub_805A5E8(attacker, currTarget, move, gUnknown_8106A4C, itemId);
+                        moveHadEffect = SteelWingMoveAction(attacker, currTarget, move, gUnknown_8106A4C, itemId);
                         break;
                     case MOVE_POISON_TAIL:
                         moveHadEffect = PoisonTailMoveAction(attacker, currTarget, move, itemId);
@@ -882,7 +882,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = TriAttackMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_METEOR_MASH:
-                        moveHadEffect = sub_8058B84(attacker, currTarget, move, itemId);
+                        moveHadEffect = MeteorMashMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_BLAZE_KICK:
                         moveHadEffect = BlazeKickMoveAction(attacker, currTarget, move, itemId);
@@ -897,7 +897,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = FakeOutMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SONICBOOM:
-                        moveHadEffect = sub_8059714(attacker, currTarget, move, itemId);
+                        moveHadEffect = SonicboomMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_DRAGON_RAGE:
                         moveHadEffect = DragonRageMoveAction(attacker, currTarget, move, itemId);
@@ -915,13 +915,13 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_GRASSWHISTLE:
                     case MOVE_HYPNOSIS:
                     case MOVE_SLEEP_POWDER:
-                        moveHadEffect = sub_80576F8(attacker, currTarget, move, itemId);
+                        moveHadEffect = BasicSleepMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_YAWN:
                         moveHadEffect = YawnMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_THUNDERBOLT:
-                        moveHadEffect = sub_8059080(attacker, currTarget, move, itemId);
+                        moveHadEffect = ThunderboltMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_BLOCK:
                         moveHadEffect = BlockMoveAction(attacker, currTarget, move, itemId);
@@ -947,7 +947,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = GlareMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ZAP_CANNON:
-                        moveHadEffect = sub_8059D58(attacker, currTarget, move, itemId);
+                        moveHadEffect = ZapCannonMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SUPERPOWER:
                         moveHadEffect = SuperpowerMoveAction(attacker, currTarget, move, itemId);
@@ -958,7 +958,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = RockTombMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_DYNAMICPUNCH:
-                        moveHadEffect = sub_805A688(attacker, currTarget, move, itemId);
+                        moveHadEffect = DynamicPunchMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_FAKE_TEARS:
                         moveHadEffect = FakeTearsMoveAction(attacker, currTarget, move, itemId);
@@ -972,13 +972,13 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = PainSplitMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_TAIL_GLOW:
-                        moveHadEffect = sub_805B164(attacker, currTarget, move, itemId);
+                        moveHadEffect = TailGlowMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_MINIMIZE:
-                        moveHadEffect = sub_8059A18(attacker, currTarget, move, itemId);
+                        moveHadEffect = MinimizeMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_DRAGON_DANCE:
-                        moveHadEffect = sub_805B884(attacker, currTarget, move, itemId);
+                        moveHadEffect = DragonDanceMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_BULK_UP:
                         moveHadEffect = BulkUpMoveAction(attacker, currTarget, move, itemId);
@@ -986,25 +986,25 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_SHARPEN:
                     case MOVE_HOWL:
                     case MOVE_MEDITATE:
-                        moveHadEffect = sub_80582D4(attacker, currTarget, move, itemId);
+                        moveHadEffect = BasicRaiseAttackMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_RAGE:
                         moveHadEffect = RageMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SWORDS_DANCE:
-                        moveHadEffect = sub_8059B94(attacker, currTarget, move, itemId);
+                        moveHadEffect = SwordsDanceMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_CALM_MIND:
-                        moveHadEffect = sub_805B3B4(attacker, currTarget, move, itemId);
+                        moveHadEffect = CalmMindMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_GROWTH:
-                        moveHadEffect = sub_8059588(attacker, currTarget, move, itemId);
+                        moveHadEffect = GrowthMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_AMNESIA:
-                        moveHadEffect = sub_805A2B0(attacker, currTarget, move, itemId);
+                        moveHadEffect = AmnesiaMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_DEFENSE_CURL:
-                        moveHadEffect = sub_805B2FC(attacker, currTarget, move, itemId);
+                        moveHadEffect = DefenseCurlMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_IRON_DEFENSE:
                     case MOVE_ACID_ARMOR:
@@ -1012,32 +1012,32 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = sub_8059CD8(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_COSMIC_POWER:
-                        moveHadEffect = sub_8058A7C(attacker, currTarget, move, itemId);
+                        moveHadEffect = CosmicPowerMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_MUDDY_WATER:
                         moveHadEffect = MuddyWaterMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_OCTAZOOKA:
-                        moveHadEffect = sub_8057F7C(attacker, currTarget, move, itemId);
+                        moveHadEffect = OctazookaMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_AURORA_BEAM:
-                        moveHadEffect = sub_8057ED0(attacker, currTarget, move, itemId);
+                        moveHadEffect = AuroraBeamMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_PSYCHO_BOOST:
-                        moveHadEffect = sub_8058CEC(attacker, currTarget, move, itemId);
+                        moveHadEffect = PsychoBoostMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SCARY_FACE:
                     case MOVE_COTTON_SPORE:
                         moveHadEffect = ScaryFaceMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_GROWL:
-                        moveHadEffect = sub_805A2C8(attacker, currTarget, move, itemId);
+                        moveHadEffect = GrowlMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_FEATHERDANCE:
-                        moveHadEffect = sub_805AD34(attacker, currTarget, move, itemId);
+                        moveHadEffect = FeatherDanceMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SCREECH:
-                        moveHadEffect = sub_8057C68(attacker, currTarget, move, itemId);
+                        moveHadEffect = ScreechMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SEISMIC_TOSS:
                     case MOVE_NIGHT_SHADE:
@@ -1075,7 +1075,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = SkyAttackMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SLOW_DOWN:
-                        moveHadEffect = sub_805BE90(attacker, currTarget, move, itemId);
+                        moveHadEffect = SlowDownMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_OUTRAGE:
                     case MOVE_PETAL_DANCE:
@@ -1085,7 +1085,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = WrapMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_UPROAR:
-                        moveHadEffect = sub_8058D38(attacker, currTarget, move, itemId);
+                        moveHadEffect = UproarMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_POISON_FANG:
                         moveHadEffect = PoisonFangMoveAction(attacker, currTarget, move, itemId);
@@ -1113,20 +1113,20 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = sub_805768C(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_MEMENTO:
-                        moveHadEffect = sub_8057F24(attacker, currTarget, move, itemId);
+                        moveHadEffect = MementoMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SOFTBOILED:
                     case MOVE_MILK_DRINK:
                         moveHadEffect = sub_80599EC(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SYNTHESIS:
-                        moveHadEffect = sub_80589D4(attacker, currTarget, move, itemId);
+                        moveHadEffect = SynthesisMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_MOONLIGHT:
-                        moveHadEffect = sub_8059AC4(attacker, currTarget, move, itemId);
+                        moveHadEffect = MoonlightMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_REST:
-                        moveHadEffect = sub_805A4D4(attacker, currTarget, move, itemId);
+                        moveHadEffect = RestMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_RECOVER:
                     case MOVE_SLACK_OFF:
@@ -1139,7 +1139,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = TrickMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_TAKEAWAY:
-                        moveHadEffect = sub_805BA50(attacker, currTarget, move, itemId);
+                        moveHadEffect = TakeawayMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_THIEF:
                     case MOVE_COVET:
@@ -1158,7 +1158,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = BideMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_BIDE_2:
-                        moveHadEffect = sub_805836C(attacker, currTarget, move, itemId);
+                        moveHadEffect = Bide2MoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_TRAPPER:
                         moveHadEffect = TrapperOrbAction(attacker, currTarget, move, itemId);
@@ -1170,7 +1170,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = CurseMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_HI_JUMP_KICK:
-                        moveHadEffect = sub_8059FC8(attacker, currTarget, move, itemId, 0);
+                        moveHadEffect = HiJumpKickMoveAction(attacker, currTarget, move, itemId, 0);
                         break;
                     case MOVE_BLAST_BURN:
                         moveHadEffect = BlastBurnMoveAction(attacker, currTarget, move, itemId);
@@ -1191,10 +1191,10 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = NightmareMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_MORNING_SUN:
-                        moveHadEffect = sub_8057748(attacker, currTarget, move, itemId);
+                        moveHadEffect = MorningSunMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_VACUUM_CUT:
-                        moveHadEffect = sub_805C1BC(attacker, currTarget, move, itemId);
+                        moveHadEffect = VacuumCutMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_MUD_SPORT:
                     case MOVE_WATER_SPORT:
@@ -1208,13 +1208,13 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = LeerMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_WILL_O_WISP:
-                        moveHadEffect = sub_8057FF4(attacker, currTarget, move, itemId);
+                        moveHadEffect = WillOWispMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_INGRAIN:
-                        moveHadEffect = sub_805A4FC(attacker, currTarget, move, itemId);
+                        moveHadEffect = IngrainMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_PSYWAVE:
-                        moveHadEffect = sub_8058C48(attacker, currTarget, move, itemId);
+                        moveHadEffect = PsywaveMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_LEECH_SEED:
                         moveHadEffect = LeechSeedMoveAction(attacker, currTarget, move, itemId);
@@ -1228,13 +1228,13 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = sub_80578EC(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_HAZE:
-                        moveHadEffect = sub_80588A8(attacker, currTarget, move, itemId);
+                        moveHadEffect = HazeMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_POWER_EARS:
                         moveHadEffect = RadarOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SIESTA:
-                        moveHadEffect = sub_805BC70(attacker, currTarget, move, itemId);
+                        moveHadEffect = SiestaMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SMELLINGSALT:
                         moveHadEffect = SmellingSaltMoveAction(attacker, currTarget, move, itemId);
@@ -1260,7 +1260,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = sub_8059528(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_OVERHEAT:
-                        moveHadEffect = sub_8057E6C(attacker, currTarget, move, itemId);
+                        moveHadEffect = OverheatMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_TOXIC:
                         moveHadEffect = ToxicMoveAction(attacker, currTarget, move, itemId);
@@ -1278,14 +1278,14 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = FalseSwipeMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_TWO_EDGE:
-                        moveHadEffect = sub_805BC98(attacker, currTarget, move, itemId);
+                        moveHadEffect = TwoEdgeMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ENDEAVOR:
                         moveHadEffect = EndeavorMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_BATON_PASS:
                     case MOVE_SWITCHER:
-                        moveHadEffect = sub_805BB74(attacker, currTarget, move, itemId);
+                        moveHadEffect = SwitcherOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_DREAM_EATER:
                         moveHadEffect = DreamEaterMoveAction(attacker, currTarget, move, itemId);
@@ -1298,10 +1298,10 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         break;
                     case MOVE_TELEPORT:
                     case MOVE_WARP:
-                        moveHadEffect = sub_8059CF0(attacker, currTarget, move, itemId);
+                        moveHadEffect = WarpMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_DROUGHT:
-                        moveHadEffect = sub_805BF34(attacker, currTarget, move, itemId);
+                        moveHadEffect = DroughtOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SEE_STAIRS:
                         moveHadEffect = StairsOrbAction(attacker, currTarget, move, itemId);
@@ -1311,11 +1311,11 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         break;
                     case MOVE_HARDEN:
                     case MOVE_WITHDRAW:
-                        moveHadEffect = sub_80582AC(attacker, currTarget, move, itemId);
+                        moveHadEffect = BasicRaiseDefenseMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_MIND_READER:
                     case MOVE_LOCK_ON:
-                        moveHadEffect = sub_8058A54(attacker, currTarget, move, itemId);
+                        moveHadEffect = SureShotMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_VITAL_THROW:
                         moveHadEffect = VitalThrowMoveAction(attacker, currTarget, move, itemId);
@@ -1324,7 +1324,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = FlyMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_BOUNCE:
-                        moveHadEffect = sub_8059F38(attacker, currTarget, move, itemId);
+                        moveHadEffect = BounceMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_DIVE:
                         moveHadEffect = DiveMoveAction(attacker, currTarget, move, itemId);
@@ -1333,10 +1333,10 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = DigMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SWEET_SCENT:
-                        moveHadEffect = sub_8057824(attacker, currTarget, move, itemId);
+                        moveHadEffect = SweetScentMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_DOUBLE_TEAM:
-                        moveHadEffect = sub_805825C(attacker, currTarget, move, itemId);
+                        moveHadEffect = DoubleTeamMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_KNOCK_OFF:
                         moveHadEffect = KnockOffMoveAction(attacker, currTarget, move, itemId);
@@ -1357,7 +1357,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = PetrifyOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ASSIST:
-                        moveHadEffect = sub_805A4C0(attacker, currTarget, move, itemId);
+                        moveHadEffect = AssistMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_DOOM_DESIRE:
                     case MOVE_FUTURE_SIGHT:
@@ -1372,7 +1372,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = sub_805B314(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_JUMP_KICK:
-                        moveHadEffect = sub_8059E54(attacker, currTarget, move, itemId, 0);
+                        moveHadEffect = JumpKickMoveAction(attacker, currTarget, move, itemId, 0);
                         break;
                     case MOVE_PROTECT:
                     case MOVE_DETECT:
@@ -1389,10 +1389,10 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = ReversalMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SELFDESTRUCT:
-                        moveHadEffect = sub_8059004(attacker, currTarget, move, itemId);
+                        moveHadEffect = SelfDestructMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_EXPLOSION:
-                        moveHadEffect = sub_80597F0(attacker, currTarget, move, itemId);
+                        moveHadEffect = ExplosionMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_CHARGE:
                         moveHadEffect = ChargeMoveAction(attacker, currTarget, move, itemId);
@@ -1404,7 +1404,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = LowKickMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_WATER_SPOUT:
-                        moveHadEffect = sub_8058D44(attacker, currTarget, move, itemId);
+                        moveHadEffect = WaterSpoutMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ERUPTION:
                         moveHadEffect = EruptionMoveAction(attacker, currTarget, move, itemId);
@@ -1449,7 +1449,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = EncoreMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_WEATHER_BALL:
-                        moveHadEffect = sub_8057CD0(attacker, currTarget, move, itemId);
+                        moveHadEffect = WeatherBallMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SUNNY_DAY:
                         moveHadEffect = SunnyDayMoveAction(attacker, currTarget, move, itemId);
@@ -1458,7 +1458,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = PayDayMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ONE_ROOM:
-                        moveHadEffect = sub_805C2A0(attacker, currTarget, move, itemId);
+                        moveHadEffect = OneRoomOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ENDURE:
                         moveHadEffect = EndureMoveAction(attacker, currTarget, move, itemId);
@@ -1476,10 +1476,10 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = CharmMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_BUBBLE:
-                        moveHadEffect = sub_80578FC(attacker, currTarget, move, itemId);
+                        moveHadEffect = BubbleMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_STRING_SHOT:
-                        moveHadEffect = sub_8057BB4(attacker, currTarget, move, itemId);
+                        moveHadEffect = StringShotMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ROCK_SMASH:
                     case MOVE_EXCAVATE:
@@ -1496,16 +1496,16 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         break;
                     case MOVE_ODOR_SLEUTH:
                     case MOVE_FORESIGHT:
-                        moveHadEffect = sub_8058234(attacker, currTarget, move, itemId);
+                        moveHadEffect = ExposeMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SPLASH:
-                        moveHadEffect = sub_805A85C(attacker, currTarget, move, itemId);
+                        moveHadEffect = SplashMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_TRANSFER:
                         moveHadEffect = TransferOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_STAY_AWAY:
-                        moveHadEffect = sub_805BB98(attacker, currTarget, move, itemId);
+                        moveHadEffect = StayawayOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_BEAT_UP:
                         moveHadEffect = BeatUpMoveAction(attacker, currTarget, move, itemId);
@@ -1521,7 +1521,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = sub_805C080(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_REVIVER:
-                        moveHadEffect = sub_805C1E4(attacker, currTarget, move, itemId);
+                        moveHadEffect = ReviverOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ESCAPE:
                         moveHadEffect = EscapeOrbAction(attacker, currTarget, move, itemId);
@@ -1533,13 +1533,13 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = NaturePowerMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ITEMIZE:
-                        moveHadEffect = sub_805C3F8(attacker, currTarget, move, itemId);
+                        moveHadEffect = ItemizeOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_SKETCH:
                         moveHadEffect = SketchMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_MIRROR_MOVE:
-                        moveHadEffect = sub_8057E50(attacker, currTarget, move, itemId);
+                        moveHadEffect = MirrorMoveMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ROLE_PLAY:
                         moveHadEffect = RolePlayMoveAction(attacker, currTarget, move, itemId);
@@ -1578,7 +1578,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = SilenceOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_METRONOME:
-                        moveHadEffect = sub_805B618(attacker, currTarget, move, itemId);
+                        moveHadEffect = MetronomeMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_HP_GAUGE:
                         moveHadEffect = IdentifyOrbAction(attacker, currTarget, move, itemId);
@@ -1587,17 +1587,17 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveHadEffect = Conversion2MoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_POUNCE:
-                        moveHadEffect = sub_805BEB8(attacker, currTarget, move, itemId);
+                        moveHadEffect = PounceOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_TRAWL:
-                        moveHadEffect = sub_805BEC8(attacker, currTarget, move, itemId);
+                        moveHadEffect = TrawlOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_MIMIC:
                         moveHadEffect = MimicMoveAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_STRENGTH:
                     case MOVE_HURL:
-                        moveHadEffect = sub_805C45C(attacker, currTarget, move, itemId);
+                        moveHadEffect = HurlOrbAction(attacker, currTarget, move, itemId);
                         break;
                     case MOVE_ECHO:
                         moveHadEffect = sub_805C208(attacker, currTarget, move, itemId);

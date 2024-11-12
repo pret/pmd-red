@@ -17,7 +17,7 @@ extern bool8 FakeTearsMoveAction(Entity *pokemon, Entity *target, Move *move, s3
 extern bool8 SpiteMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SmokescreenMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 FlatterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057FF4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 WillOWispMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 ReturnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 FlameWheelMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 GustMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -77,12 +77,12 @@ extern bool8 PayDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 p
 extern bool8 CurseMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805A568(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SuperpowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A688(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DynamicPunchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SecretPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805AC90(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805AD04(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AD34(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FeatherDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BeatUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BlastBurnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 CrushClawMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -130,7 +130,7 @@ const struct CalledMove gMetronomeCalledMoves[METRONOME_AVAILABLE_CALLED_MOVES] 
     {MOVE_SPITE, SpiteMoveAction},
     {MOVE_SMOKESCREEN, SmokescreenMoveAction},
     {MOVE_FLATTER, FlatterMoveAction},
-    {MOVE_WILL_O_WISP, sub_8057FF4},
+    {MOVE_WILL_O_WISP, WillOWispMoveAction},
     {MOVE_RETURN, ReturnMoveAction},
     {MOVE_FLAME_WHEEL, FlameWheelMoveAction},
     {MOVE_GUST, GustMoveAction},
@@ -190,12 +190,12 @@ const struct CalledMove gMetronomeCalledMoves[METRONOME_AVAILABLE_CALLED_MOVES] 
     {MOVE_CURSE, CurseMoveAction},
     {MOVE_FRENZY_PLANT, sub_805A568},
     {MOVE_SUPERPOWER, SuperpowerMoveAction},
-    {MOVE_DYNAMICPUNCH, sub_805A688},
+    {MOVE_DYNAMICPUNCH, DynamicPunchMoveAction},
     {MOVE_KNOCK_OFF, KnockOffMoveAction},
     {MOVE_SECRET_POWER, SecretPowerMoveAction},
     {MOVE_DIZZY_PUNCH, sub_805AC90},
     {MOVE_IMPRISON, sub_805AD04},
-    {MOVE_FEATHERDANCE, sub_805AD34},
+    {MOVE_FEATHERDANCE, FeatherDanceMoveAction},
     {MOVE_BEAT_UP, BeatUpMoveAction},
     {MOVE_BLAST_BURN, BlastBurnMoveAction},
     {MOVE_CRUSH_CLAW, CrushClawMoveAction},
