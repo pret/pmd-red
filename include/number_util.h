@@ -22,6 +22,10 @@ typedef struct s24_8 {
     s32 raw;
 } s24_8;
 
+#define F248_ZERO ((s24_8){})
+#define F248_ONE ((s24_8){0x100})
+#define F248_MAX ((s24_8){0x7FFFFFFF})
+
 /**
  * This type represents a signed 48.16 fixed-point number, where the 48 most
  * significant bits are the integer part and the 16 least significant bits are
@@ -32,6 +36,9 @@ typedef struct s48_16
     s32 hi;
     u32 lo; // some math.c funcs require this to be a u32, but other funcs check if it's negative (aka >= INT32_MAX)
 } s48_16;
+#define F4816_ZERO ((s48_16){})
+#define F4816_ONE ((s48_16){0, 0x10000})
+#define F4816_MAX ((s48_16){0x7FFFFFFF, 0xFFFFFFFF})
 
 FixedPoint FixedPoint_Add(FixedPoint a, FixedPoint b);
 FixedPoint FixedPoint_Subtract(FixedPoint a, FixedPoint b);

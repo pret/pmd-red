@@ -3,6 +3,7 @@
 #include "math.h"
 
 #include "data/math.h"
+#include "structs/str_position.h"
 
 static void F48_16_UDiv(s48_16 *, s48_16 *, s48_16 *);
 static void F48_16_UMul(s48_16 *, s48_16 *, s48_16 *);
@@ -32,13 +33,13 @@ s32 sin_4096(s32 x)
 {
     switch (x & 0xc00) {
         case 0x000:
-            return gFastSinLookup[x & 0x3ff];
+            return sFastSinLookup[x & 0x3ff];
         case 0x400:
-            return gFastSinLookup[0x3ff - (x & 0x3ff)];
+            return sFastSinLookup[0x3ff - (x & 0x3ff)];
         case 0x800:
-            return -gFastSinLookup[x & 0x3ff];
+            return -sFastSinLookup[x & 0x3ff];
         case 0xc00:
-            return -gFastSinLookup[0x3ff - (x & 0x3ff)];
+            return -sFastSinLookup[0x3ff - (x & 0x3ff)];
     }
 
     return 0;
@@ -48,13 +49,13 @@ s32 cos_4096(s32 x)
 {
     switch (x & 0xc00) {
         case 0x000:
-            return gFastSinLookup[0x3ff - (x & 0x3ff)];
+            return sFastSinLookup[0x3ff - (x & 0x3ff)];
         case 0x400:
-            return -gFastSinLookup[x & 0x3ff];
+            return -sFastSinLookup[x & 0x3ff];
         case 0x800:
-            return -gFastSinLookup[0x3ff - (x & 0x3ff)];
+            return -sFastSinLookup[0x3ff - (x & 0x3ff)];
         case 0xc00:
-            return gFastSinLookup[x & 0x3ff];
+            return sFastSinLookup[x & 0x3ff];
     }
 
     return 0;
@@ -172,7 +173,7 @@ static s24_8 u24_8_mul(s24_8 x, s24_8 y)
     u32 round_up;
 
     if (x.raw == 0 || y.raw == 0)
-        return (s24_8){0};
+        return F248_ZERO;
 
     x_h = 0;
     x_l = x.raw;
@@ -241,10 +242,10 @@ static s24_8 u24_8_div(s24_8 x, s24_8 y)
     s32 temp;
 
     if (y.raw == 0)
-        return (s24_8){INT32_MAX};
+        return F248_MAX;
 
     if (x.raw == 0)
-        return (s24_8){0};
+        return F248_ZERO;
 
     r7 = (u32)x.raw >> 24;
     r6 = x.raw << 8;
@@ -298,7 +299,7 @@ UNUSED s24_8 FP24_8_Pow(s24_8 x, s32 y)
     if (uVar1 < 0)
         uVar1 = -uVar1;
 
-    sVar1 = IntToF248(1);
+    sVar1 = F248_ONE;
 
     for (; uVar1 != 0; uVar1 >>= 1) {
         if (uVar1 & 1)
@@ -310,7 +311,7 @@ UNUSED s24_8 FP24_8_Pow(s24_8 x, s32 y)
     if (y >= 0)
         return sVar1;
 
-    return s24_8_div(IntToF248(1), sVar1);
+    return s24_8_div(F248_ONE, sVar1);
 }
 
 s24_8 FP24_8_Hypot(s24_8 x, s24_8 y)
@@ -348,21 +349,18 @@ s24_8 FP24_8_Hypot(s24_8 x, s24_8 y)
     return r5;
 }
 
-void FP48_16_FromS32(s48_16 *param_1, u32 param_2)
+void FP48_16_FromS32(s48_16 *dst, s32 src)
 {
-#ifndef NONMATCHING
-    register u32 temp asm("r4");
+    dst->hi = (src & ~0xFFFFu) >> 16;
+    dst->lo = (src &  0xFFFFu) << 16;
+
+    // BUG: Should be checking top bit of src, or using dst->hi here (see FP48_16_FromF248)
+#ifdef BUGFIX
+    if (dst->hi & 0x8000)
 #else
-    u32 temp;
+    if (src & 0x8000)
 #endif
-
-    temp = 0xFFFF0000;
-    param_1->hi = param_2 >> 16;
-    param_1->lo = param_2 << 16;
-
-    if (param_2 & 0x8000)
-        param_1->hi |= temp;
-
+        dst->hi |= ~0xFFFF;
 }
 
 u32 FP48_16_ToS32(s48_16 *a)
@@ -398,118 +396,119 @@ void FP48_16_FromF248(s48_16 *a, s24_8 b)
         a->hi &= 0x7f;
 }
 
-s32 sub_800A0B0(s48_16 *a)
+// returns 12-bit angle
+s32 Atan2_4096(PixelPos *a)
 {
-    s32 r2;
-    s32 r3;
+    s32 y;
+    s32 x;
     s32 idx;
     s32 divi;
 
-    r2 = a->lo;
-    r3 = a->hi;
-    if (r2 == 0 && r3 == 0)
+    y = a->y;
+    x = a->x;
+    if (y == 0 && x == 0)
         return 0;
 
-    if (r2 > 0) {
-        if (r3 > 0) {
-            if (r2 < r3) {
-                divi = r3 / 256;
+    if (y > 0) {
+        if (x > 0) {
+            if (y < x) {
+                divi = F248ToInt((s24_8){x});
                 if (divi == 0)
                     return 0x200;
 
-                idx = r2 / divi;
+                idx = y / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return gFastUnknownFn1Lookup[idx] << 4;
+
+                return sFastAtan2Lookup256[idx] << 4;
             }
-            else { // r2 >= r3
-                divi = r2 / 256;
+            else { // y >= x
+                divi = F248ToInt((s24_8){y});
                 if (divi == 0)
                     return 0x200;
 
-                idx = r3 / divi;
+                idx = x / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (0x40 - gFastUnknownFn1Lookup[idx]) << 4;
+
+                return (0x40 - sFastAtan2Lookup256[idx]) << 4;
             }
         }
-        else { // r3 <= 0
-            r3 = -r3;
-            if (r2 < r3) {
-                divi = r3 / 256;
+        else { // x <= 0
+            x = -x;
+            if (y < x) {
+                divi = F248ToInt((s24_8){x});
                 if (divi == 0)
                     return 0x600;
 
-                idx = r2 / divi;
+                idx = y / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (0x80 - gFastUnknownFn1Lookup[idx]) << 4;
+
+                return (0x80 - sFastAtan2Lookup256[idx]) << 4;
             }
-            else { // r2 >= r3
-                divi = r2 / 256;
+            else { // y >= x
+                divi = F248ToInt((s24_8){y});
                 if (divi == 0)
                     return 0x600;
 
-                idx = r3 / divi;
+                idx = x / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (gFastUnknownFn1Lookup[idx] + 0x40) << 4;
+
+                return (sFastAtan2Lookup256[idx] + 0x40) << 4;
             }
         }
     }
-    else { // r2 <= 0
-        r2 = -r2;
-        if (r3 > 0) {
-            if (r2 < r3) {
-                divi = r3 / 256;
+    else { // y <= 0
+        y = -y;
+        if (x > 0) {
+            if (y < x) {
+                divi = F248ToInt((s24_8){x});
                 if (divi == 0)
                     return 0xE00;
 
-                idx = r2 / divi;
+                idx = y / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (0x100 - gFastUnknownFn1Lookup[idx]) << 4;
+
+                return (0x100 - sFastAtan2Lookup256[idx]) << 4;
             }
-            else { // r2 >= r3
-                divi = r2 / 256;
+            else { // y >= x
+                divi = F248ToInt((s24_8){y});
                 if (divi == 0)
                     return 0xE00;
 
-                idx = r3 / divi;
+                idx = x / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (gFastUnknownFn1Lookup[idx] + 0xC0) << 4;
+
+                return (sFastAtan2Lookup256[idx] + 0xC0) << 4;
             }
         }
-        else { // r3 <= 0
-            r3 = -r3;
-            if (r2 < r3) {
-                divi = r3 / 256;
+        else { // x <= 0
+            x = -x;
+            if (y < x) {
+                divi = F248ToInt((s24_8){x});
                 if (divi == 0)
                     return 0xA00;
 
-                idx = r2 / divi;
+                idx = y / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (gFastUnknownFn1Lookup[idx] + 0x80) << 4;
+
+                return (sFastAtan2Lookup256[idx] + 0x80) << 4;
             }
-            else { // r2 >= r3
-                divi = r2 / 256;
+            else { // y >= x
+                divi = F248ToInt((s24_8){y});
                 if (divi == 0)
                     return 0xA00;
 
-                idx = r3 / divi;
+                idx = x / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (0xC0 - gFastUnknownFn1Lookup[idx]) << 4;
+
+                return (0xC0 - sFastAtan2Lookup256[idx]) << 4;
             }
         }
     }

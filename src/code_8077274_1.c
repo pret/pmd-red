@@ -1027,11 +1027,11 @@ void sub_8079E34(Entity * pokemon, Entity * target, bool8 param_3)
         statChanged = TRUE;
       }
       if (!F248EqualsInt(entityInfo->offensiveMultipliers[index], 1)) {
-        entityInfo->offensiveMultipliers[index] = IntToF248(1);
+        entityInfo->offensiveMultipliers[index] = F248_ONE;
         statChanged = TRUE;
       }
       if (!F248EqualsInt(entityInfo->defensiveMultipliers[index], 1)) {
-        entityInfo->defensiveMultipliers[index] = IntToF248(1);
+        entityInfo->defensiveMultipliers[index] = F248_ONE;
         statChanged = TRUE;
       }
     }

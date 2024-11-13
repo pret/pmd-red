@@ -133,7 +133,7 @@ void sub_806F500(void)
     temp->unk140[6] = 0;
     temp->unk150 = 0;
     temp->unk158 = 0;
-    temp->unk15C = IntToF248(0);
+    temp->unk15C = F248_ZERO;
     temp->unk160 = 0;
     temp->unk161 = 0;
     temp->unk162 = 0;
