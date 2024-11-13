@@ -1347,7 +1347,7 @@ NAKED static void TryCreateModeArrows(Entity *leader)
 
 void sub_805E738(Entity *a0)
 {
-    Tile *tile;
+    const Tile *tile;
     s32 i, j;
     EntityInfo *entityInfo = GetEntInfo(a0);
     if (entityInfo->blinkerClassStatus.status != 1 && entityInfo->blinkerClassStatus.status != 2) {
@@ -1401,7 +1401,7 @@ bool8 sub_805E874(void)
     s32 direction = GetEntInfo(leader)->action.direction;
     s32 x = leader->pos.x;
     s32 y = leader->pos.y;
-    Tile *leaderTile = GetTile(x, y);
+    const Tile *leaderTile = GetTile(x, y);
     s32 xAdjacent = x + gAdjacentTileOffsets[direction].x;
     s32 yAdjacent = y + gAdjacentTileOffsets[direction].y;
     s32 room;
@@ -1426,7 +1426,7 @@ bool8 sub_805E874(void)
     }
 
     for (j = -1; j < 2; j++) {
-        Tile *tile = GetTile(x + gAdjacentTileOffsets[(direction + j) & 7].x, y + gAdjacentTileOffsets[(direction + j) & 7].y);
+        const Tile *tile = GetTile(x + gAdjacentTileOffsets[(direction + j) & 7].x, y + gAdjacentTileOffsets[(direction + j) & 7].y);
         if (tile->monster != NULL)
             return FALSE;
         if (tile->terrainType & TERRAIN_TYPE_STAIRS)
@@ -1443,7 +1443,7 @@ bool8 sub_805E874(void)
 
     for (i = -1; i < 2; i++) {
         for (j = -1; j < 2; j++) {
-            Tile *tile = GetTile(x + i, y + j);
+            const Tile *tile = GetTile(x + i, y + j);
             if (tile->object != NULL) {
                 for (k = 0; k < 3; k++) {
                     if (x + i == xArray[k] && y + j == yArray[k])
@@ -1528,7 +1528,7 @@ bool8 sub_805EC2C(Entity *a0, s32 x, s32 y)
 bool8 sub_805EC4C(Entity *a0, u8 a1)
 {
     DungeonPos pos;
-    Tile *tile;
+    const Tile *tile;
     EntityInfo *tileMonsterInfo;
     Entity *tileMonster;
     EntityInfo *entityInfo = GetEntInfo(a0);
@@ -2054,7 +2054,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
         }
         else if (var_28 == 4) {
             Entity *leader = GetLeader();
-            Tile *tile = GetTile(leader->pos.x, leader->pos.y);
+            const Tile *tile = GetTile(leader->pos.x, leader->pos.y);
             Entity *tileObject = tile->object;
             if (tileObject != NULL) {
                 if (GetEntityType(tileObject) == ENTITY_ITEM) {
@@ -2757,7 +2757,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextS
         }
         break;
     case 2: {
-            Tile *tile = GetTile(a1->pos.x, a1->pos.y);
+            const Tile *tile = GetTile(a1->pos.x, a1->pos.y);
             Item *item = GetItemData(tile->object);
             PrintFormattedStringOnWindow(x, 0, gFieldItemMenuGroundTextPtr, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {

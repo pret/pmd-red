@@ -53,7 +53,7 @@ u8 sub_8083660(DungeonPos *);
 
 void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
 {
-    Tile *tile;
+    const Tile *tile;
     int iVar8;
     bool8 flag;
     DungeonPos sp_0x18;
@@ -370,7 +370,7 @@ void sub_807D3CC(Entity *param_1)
 
 bool8 ExposeTrap(s32 x,s32 y)
 {
-    Tile *tile;
+    const Tile *tile;
     Entity *trap;
 
     tile = GetTile(x,y);

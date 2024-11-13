@@ -132,7 +132,7 @@ bool8 CannotAttack(Entity *pokemon, bool8 skipSleep)
 bool8 CanMoveInDirection(Entity *pokemon, u32 direction)
 {
     u8 crossableTerrain = GetCrossableTerrain(GetEntInfo(pokemon)->id);
-    struct Tile *currentMapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
+    const Tile *currentMapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
         pokemon->pos.y + gAdjacentTileOffsets[direction].y);
 
     if (currentMapTile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL || currentMapTile->monster != NULL)

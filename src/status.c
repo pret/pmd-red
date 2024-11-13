@@ -433,7 +433,7 @@ void CringeStatusTarget(Entity * pokemon,Entity * target, bool8 displayMessage)
 
 void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
-  struct Tile *mapTile;
+  const Tile *mapTile;
   EntityInfo *entityInfo;
   Entity *mapPokemonEntity;
   int index;

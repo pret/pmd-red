@@ -13,7 +13,7 @@ void sub_804FBE8(void)
     {
         for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
         {
-          tile = GetTileSafe(x,y);
+          tile = GetTileMut(x,y);
           if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL) {
             if ((tile->terrainType & (TERRAIN_TYPE_UNK_8 | TERRAIN_TYPE_IMPASSABLE_WALL)) != 0) {
               tile->unk4 &= 0xfffd;
@@ -42,7 +42,7 @@ void sub_804FC74(void)
         for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
         {
             if ((GetTile(x, y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY) {
-                tile = GetTileSafe(x,y);
+                tile = GetTileMut(x,y);
                 tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
                 tile->terrainType |= (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
             }
@@ -61,7 +61,7 @@ void sub_804FCCC(void)
         for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
         {
             if ((GetTile(x, y)->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) != 0) {
-                tile = GetTileSafe(x,y);
+                tile = GetTileMut(x,y);
                 tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
             }
         }
@@ -100,7 +100,7 @@ void sub_804FD30(void)
   {
     for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
     {
-        sub_804FD10(GetTileSafe(x,y));
+        sub_804FD10(GetTileMut(x,y));
 
         if ((boundsCheck(x,     y - 1)) ||
             (boundsCheck(x + 1, y - 1)) ||
@@ -111,7 +111,7 @@ void sub_804FD30(void)
             (boundsCheck(x - 1, y)) ||
             (boundsCheck(x - 1, y - 1)))
         {
-            GetTileSafe(x,y)->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            GetTileMut(x,y)->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
         }
       }
     }

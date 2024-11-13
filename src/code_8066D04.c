@@ -282,7 +282,7 @@ void HandleUseItemAction(Entity *param_1)
 void HandlePlaceItemAction(Entity *param_1)
 {
     Item *item;
-    Tile *tile;
+    const Tile *tile;
     EntityInfo *info;
 #ifndef NONMATCHING
     register Entity *entity asm("r4");

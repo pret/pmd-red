@@ -70,7 +70,7 @@ void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level); // TODO: change to 
 
 void sub_8071B48(void)
 {
-  struct Tile *tile;
+  const Tile *tile;
   struct Entity *entity2;
   struct Entity *entity;
   int index;

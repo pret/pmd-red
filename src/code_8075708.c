@@ -56,7 +56,7 @@ void sub_8075708(Entity *entity)
 {
     bool8 bVar1;
     bool8 bVar2;
-    Tile *tile;
+    const Tile *tile;
     Trap *trapData;
     Entity *trap;
     EntityInfo *info;
@@ -121,7 +121,7 @@ void sub_8075708(Entity *entity)
 
 u32 sub_8075818(Entity *entity)
 {
-    struct Tile *tile;
+    const Tile *tile;
     EntityInfo *entityInfo;
     Entity *subEntity;
     Item *item;

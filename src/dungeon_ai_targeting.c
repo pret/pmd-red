@@ -65,7 +65,7 @@ const u8 gTreatmentData[3][2][2][2] = {
 bool8 sub_8070F3C(Entity * pokemon, DungeonPos *pos, s32 direction)
 {
   u8 terrain;
-  struct Tile *tile;
+  const Tile *tile;
 
   terrain = GetCrossableTerrain(GetEntInfo(pokemon)->id);
 
@@ -109,7 +109,7 @@ bool8 sub_8070F3C(Entity * pokemon, DungeonPos *pos, s32 direction)
 
 bool8 sub_8070F14(Entity * pokemon, s32 direction)
 {
-  struct Tile *tile;
+  const Tile *tile;
 
 
   tile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
@@ -128,7 +128,7 @@ bool8 sub_8070F14(Entity * pokemon, s32 direction)
 bool8 sub_8070F80(Entity * pokemon, s32 direction)
 {
   u8 terrain;
-  struct Tile *tile;
+  const Tile *tile;
 
   terrain = GetCrossableTerrain(GetEntInfo(pokemon)->id);
 
@@ -173,7 +173,7 @@ bool8 sub_8070F80(Entity * pokemon, s32 direction)
 bool8 sub_8071058(Entity * pokemon, s32 direction)
 {
   u8 terrain;
-  struct Tile *tile;
+  const Tile *tile;
 
   terrain = GetCrossableTerrain(GetEntInfo(pokemon)->id);
 
@@ -218,7 +218,7 @@ bool8 sub_8071058(Entity * pokemon, s32 direction)
 bool8 CanAttackInDirection(Entity *pokemon, s32 direction)
 {
     u8 crossableTerrain = GetCrossableTerrain(GetEntInfo(pokemon)->id);
-    struct Tile *tile;
+    const Tile *tile;
     if (crossableTerrain < CROSSABLE_TERRAIN_CREVICE)
     {
         crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
@@ -265,7 +265,8 @@ bool8 CanAttackInDirection(Entity *pokemon, s32 direction)
 bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemonInFront)
 {
     u8 crossableTerrain = GetCrossableTerrain(GetEntInfo(pokemon)->id);
-    struct Tile *frontTile, *currentTile;
+    const Tile *currentTile;
+    const Tile *frontTile;
     *pokemonInFront = FALSE;
     frontTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
         pokemon->pos.y + gAdjacentTileOffsets[direction].y);
@@ -365,7 +366,7 @@ bool8 IsAtJunction(Entity *pokemon)
     }
     else
     {
-        struct Tile *mapTile;
+        const Tile *mapTile;
         char walkableNeighborFlags;
         if (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA
            && crossableTerrain == CROSSABLE_TERRAIN_LIQUID

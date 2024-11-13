@@ -104,7 +104,7 @@ void AIMovement(Entity *pokemon, bool8 showRunAwayEffect)
 bool8 CanTakeItem(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
-    struct Tile *mapTile;
+    const Tile *mapTile;
     Entity *object;
     if (!EntityExists(pokemon) || CheckVariousConditions(pokemon))
     {
@@ -310,7 +310,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         {
             for (x = minX; x <= maxX; x++)
             {
-                Entity *object = GetTileSafe(x, y)->object;
+                Entity *object = GetTileMut(x, y)->object;
                 if (object && GetEntityType(object) == ENTITY_ITEM)
                 {
                     pokemonInfo->aiTarget.aiObjective = AI_TAKE_ITEM;
@@ -553,7 +553,7 @@ bool8 AvoidEnemies(Entity *pokemon)
     {
         if (room == closestTargetRoom && room != CORRIDOR_ROOM)
         {
-            struct Tile *tile = GetTile(pokemon->pos.x, pokemon->pos.y);
+            const Tile *tile = GetTile(pokemon->pos.x, pokemon->pos.y);
             if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
             {
                 DungeonPos aiTargetPos;
@@ -563,7 +563,7 @@ bool8 AvoidEnemies(Entity *pokemon)
                 // Scan for a direction leading outside the room.
                 for (targetDir = 0; targetDir < NUM_DIRECTIONS; targetDir++)
                 {
-                    struct Tile *adjacentTile;
+                    const Tile *adjacentTile;
                     aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetDir].x;
                     aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetDir].y;
                     adjacentTile = GetTile(aiTargetPos.x, aiTargetPos.y);

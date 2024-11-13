@@ -41,7 +41,7 @@ bool8 sub_80461C8(DungeonPos *, u32);
 
 Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2)
 {
-  Tile *tile;
+  const Tile *tile;
   Item *item;
   EntityInfo *info;
 

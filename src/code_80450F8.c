@@ -554,7 +554,7 @@ Entity *sub_8045708(DungeonPos *pos)
     Entity *ent;
 
     if (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA
-        && (GetTileSafe(pos->x, pos->y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY) {
+        && (GetTileMut(pos->x, pos->y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY) {
         return NULL;
     }
 

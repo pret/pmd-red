@@ -65,14 +65,14 @@ Item* GetItemData_1(Entity *entity)
     return entity->axObj.info.item;
 }
 
-Tile *GetTileAtEntity(Entity *entity)
+const Tile *GetTileAtEntity(Entity *entity)
 {
     return GetTile(entity->pos.x, entity->pos.y);
 }
 
 Tile *GetTileAtEntitySafe(Entity *entity)
 {
-    return GetTileSafe(entity->pos.x, entity->pos.y);
+    return GetTileMut(entity->pos.x, entity->pos.y);
 }
 
 void sub_804513C(void)

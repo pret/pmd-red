@@ -333,7 +333,7 @@ bool8 VitalThrowMoveAction(Entity * pokemon, Entity * target, Move *move, s32 pa
 
 bool8 DigMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    struct Tile *tile;
+    Tile *tile;
     bool8 flag;
 
     flag = FALSE;
@@ -2661,7 +2661,7 @@ bool8 sub_805A85C(Entity * pokemon, Entity * target, Move *move, u32 param_4)
   DungeonPos pos1;
   Move stackMove;
   PixelPos pos2;
-  struct Tile *tile;
+  Tile *tile;
   Entity *entity;
   s32 temp;
   s32 temp2;
@@ -2704,7 +2704,7 @@ _0805A8C2:
       sub_803E46C(0x2c);
     }
   }
-  tile = GetTileSafe(pos1.x,pos1.y);
+  tile = GetTileMut(pos1.x,pos1.y);
   entity = tile->monster;
   if (entity != NULL) {
     if (GetEntityType(entity) == ENTITY_MONSTER) {

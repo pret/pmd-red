@@ -399,7 +399,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
             {
                 // Double assignment to fix a regswap.
                 s16 rangeTargetingFlags = rangeTargetingFlags2 = targetingFlags & 0xF0;
-                struct Tile *adjacentTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[i].x,
+                const Tile *adjacentTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[i].x,
                     pokemon->pos.y + gAdjacentTileOffsets[i].y);
                 Entity *adjacentPokemon = adjacentTile->monster;
                 if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) == ENTITY_MONSTER)
@@ -433,7 +433,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
     {
         for (i = 0; i < NUM_DIRECTIONS; i++)
         {
-            struct Tile *targetTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[i].x,
+            const Tile *targetTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[i].x,
                 pokemon->pos.y + gAdjacentTileOffsets[i].y);
             if (CanAttackInDirection(pokemon, i))
             {
@@ -917,7 +917,7 @@ bool8 IsTargetInRange(Entity *pokemon, Entity *targetPokemon, s32 direction, s32
         s32 i;
         for (i = 0; i <= effectiveMaxRange; i++)
         {
-            struct Tile *mapTile;
+            const Tile *mapTile;
             currentPosX += adjacentTileOffsetX;
             currentPosY += adjacentTileOffsetY;
             if (currentPosX <= 0 || currentPosY <= 0 ||

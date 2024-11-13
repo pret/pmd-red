@@ -2577,7 +2577,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
     var_48 = gAdjacentTileOffsets[attackerInfo->action.direction].y;
     for (i = 0; i < a2; i++)
     {
-        Tile *tile;
+        const Tile *tile;
 
         if (var_68.x < 0 || var_68.y < 0 || var_68.x > 55 || var_68.y > 31)
             break;
@@ -2622,7 +2622,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
     for (i = 0; i < a2; i++)
     {
         DungeonPos var_68Before;
-        Tile *tile;
+        const Tile *tile;
 
         if (var_68.x < 0 || var_68.y < 0 || var_68.x > 55 || var_68.y > 31)
             break;

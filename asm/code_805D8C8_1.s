@@ -1489,7 +1489,7 @@ sub_80694C0:
 	mov r9, r3
 	adds r0, r7, 0
 	mov r1, r8
-	bl GetTileSafe
+	bl GetTileMut
 	mov r10, r0
 	ldr r5, [r4, 0x70]
 	adds r6, r5, 0
@@ -1536,7 +1536,7 @@ _08069522:
 	blt _08069552
 	adds r1, r0, 0
 	adds r0, r2, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r1, r0, 0
 	ldr r0, [r1, 0x10]
 	cmp r0, r4

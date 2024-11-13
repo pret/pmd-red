@@ -1055,7 +1055,7 @@ void sub_8043D60(void)
 
     for (y = 0; y < 32; y++) {
         for (x = 0; x < 56; x++) {
-            Entity *object = GetTileSafe(x, y)->object;
+            Entity *object = GetTileMut(x, y)->object;
             if (EntityExists(object) && GetEntityType(object) == ENTITY_TRAP) {
                 Trap *trapData = GetTrapData(object);
                 if (trapData->id == 27) {

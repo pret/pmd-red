@@ -468,8 +468,8 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
   bool8 isNotBurned;
   bool8 hasSynchronized;
   EntityInfo *entityInfo;
-  struct Tile *tile_1;
-  struct Tile *tile_2;
+  const Tile *tile_1;
+  const Tile *tile_2;
   Entity *entity;
   s32 index;
 
@@ -556,7 +556,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
   bool8 isNotPoisoned;
   bool8 hasSynchronized;
   EntityInfo *entityInfo;
-  struct Tile *tile;
+  const Tile *tile;
   Entity *entity;
   s32 index;
 
@@ -645,7 +645,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
   bool8 isNotBadlyPoisoned;
   bool8 hasSynchronized;
   EntityInfo *entityInfo;
-  struct Tile *tile;
+  const Tile *tile;
   Entity *entity;
   s32 index;
 
@@ -725,7 +725,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
 void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   EntityInfo *entityInfo;
-  struct Tile *tile;
+  const Tile *tile;
 
   if (!EntityExists(target)) {
     return;

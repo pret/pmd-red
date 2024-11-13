@@ -100,7 +100,7 @@ static inline void fu(EntityInfo *entityInfo, s16 id)
 void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
 {
   OpenedFile *file;
-  Tile *tile;
+  const Tile *tile;
   int index;
   s32 id_s32;
   EntityInfo *entityInfo;

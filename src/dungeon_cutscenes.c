@@ -3828,7 +3828,7 @@ void sub_808B1CC(u8 itemID)
         pos.y = entity->pos.y;
     }
     sub_807FE04(&pos, 0);
-    tile = GetTileSafe(pos.x, pos.y);
+    tile = GetTileMut(pos.x, pos.y);
     tile->terrainType = tile->terrainType | TERRAIN_TYPE_STAIRS;
     if (((itemID != ITEM_NOTHING) && (sub_80860A8(itemID) == 0)) &&
         (sub_80860A8(ITEM_MUSIC_BOX) == 0)) {
@@ -4060,7 +4060,7 @@ void JirachiWish(void)
         }
         pos1.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
         pos1.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
-        if ((GetTileSafe(pos1.x, pos1.y)->terrainType & 3) != 0) {
+        if ((GetTileMut(pos1.x, pos1.y)->terrainType & 3) != 0) {
           PlaySoundEffect(0x14c);
           sub_808BB3C(&pos1);
           sub_8046860(jirachiEntity,&pos1,auStack152,9);
@@ -4086,7 +4086,7 @@ void JirachiWish(void)
         pos2.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
         pos2.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
 
-        if ((GetTileSafe(pos2.x, pos2.y)->terrainType & 3) != 0) {
+        if ((GetTileMut(pos2.x, pos2.y)->terrainType & 3) != 0) {
           PlaySoundEffect(400);
           sub_808BB3C(&pos2);
           sub_8046860(jirachiEntity,&pos2,itemStack,9);
@@ -4140,7 +4140,7 @@ void JirachiWish(void)
           pos3.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
           pos3.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
 
-          if ((GetTileSafe(pos3.x, pos3.y)->terrainType & 3) != 0) {
+          if ((GetTileMut(pos3.x, pos3.y)->terrainType & 3) != 0) {
             PlaySoundEffect(400);
             sub_808BB3C(&pos3);
             sub_8046860(jirachiEntity,&pos3,strengthItems,4);
@@ -4303,9 +4303,9 @@ void JirachiWishGrantDialogue(Entity *jirachiEntity)
 // Warp Tile is created but not enabled until the Wish is done with EnableJirachiWishWarpTile
 void CreateJirachiWishWarpTile(void)
 {
-  struct Tile *tile;
+  Tile *tile;
 
-  tile = GetTileSafe(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
+  tile = GetTileMut(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
   tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
   tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
   tile->terrainType &= ~TERRAIN_TYPE_STAIRS;
@@ -4317,9 +4317,9 @@ void CreateJirachiWishWarpTile(void)
 
 void EnableJirachiWishWarpTile(void)
 {
-  struct Tile *tile;
+  Tile *tile;
 
-  tile = GetTileSafe(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
+  tile = GetTileMut(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
   tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
   tile->terrainType |= TERRAIN_TYPE_NORMAL;
   tile->terrainType &= ~TERRAIN_TYPE_IMPASSABLE_WALL;

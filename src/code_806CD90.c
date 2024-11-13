@@ -237,7 +237,7 @@ void sub_806CF60(void)
 
 u32 sub_806CF98(Entity *entity)
 {
-    struct Tile *mapTile;
+    const Tile *mapTile;
     u32 shadowSize;
     u16 terrainType;
     EntityInfo *entityInfo;

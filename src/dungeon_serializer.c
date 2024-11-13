@@ -910,7 +910,7 @@ static void ReadDungeonTraps(DataSerializer *seri)
         ReadTilePos(seri, &pos);
 
         if (trapID != 0xFF) {
-            tile = GetTileSafe(pos.x, pos.y);
+            tile = GetTileMut(pos.x, pos.y);
             entity = sub_8045684(trapID, &pos, unk1);
             if (entity) {
                 tile->object = entity;
@@ -1090,7 +1090,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
 
         if (mon != NULL) {
             monEntInfo = GetEntInfo(mon);
-            tile = GetTileSafe(monPos.x, monPos.y);
+            tile = GetTileMut(monPos.x, monPos.y);
             mon->prevPos = monPos;
             mon->pos = monPos;
             tile->monster = mon;
@@ -1255,7 +1255,7 @@ void sub_8082B40(void)
             sub_806CCB4(entity, sub_806CEBC(entity));
             pos = entity->pos;
             AddPokemonDungeonSprite(info->unk98, info->apparentID, &pos, 3);
-            entity->room = GetTileSafe(entity->pos.x, entity->pos.y)->room;
+            entity->room = GetTileMut(entity->pos.x, entity->pos.y)->room;
         }
     }
 }

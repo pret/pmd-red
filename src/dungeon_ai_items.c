@@ -156,7 +156,7 @@ void AIDecideUseItem(Entity *pokemon)
             else if (toolboxIndex == 0)
             {
                 // This seems unused. toolboxIndex can never be 0.
-                struct Tile *mapTile = GetTile(pokemon->pos.x, pokemon->pos.y);
+                const Tile *mapTile = GetTile(pokemon->pos.x, pokemon->pos.y);
                 Entity *object = mapTile->object;
                 if (object != null)
                 {

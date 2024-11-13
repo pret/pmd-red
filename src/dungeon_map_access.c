@@ -16,8 +16,8 @@
 #include "game_options.h"
 #include "dungeon_visibility.h"
 
-extern unkStruct_202F190 gUnknown_80F69D4;
-extern unkStruct_202F190 gUnknown_80F69EC;
+extern const unkStruct_202F190 gUnknown_80F69D4;
+extern const unkStruct_202F190 gUnknown_80F69EC;
 extern u8 gUnknown_80F6A04[];
 extern u8 gUnknown_80F6A10[];
 extern u8 gUnknown_80F6A28[];
@@ -32,9 +32,9 @@ extern const s16 gUnknown_80F6C06[];
 EWRAM_DATA OpenedFile *gDungeonPaletteFile = {0};
 EWRAM_DATA unkStruct_202EE8C gUnknown_202EE8C[32] = {0};
 EWRAM_DATA OpenedFile *gUnknown_202F18C = {0};
-EWRAM_DATA unkStruct_202F190 gUnknown_202F190 = {0};
+EWRAM_DATA unkStruct_202F190 gOutOfBoundsTileData = {0};
 
-EWRAM_DATA_2 unkStruct_202F190 *gUnknown_203B430 = {0};
+EWRAM_DATA_2 const unkStruct_202F190 *gUnknown_203B430 = {0};
 
 extern u8 sub_8043CE4(u32);
 extern void sub_80402AC(s32, s32);
@@ -42,7 +42,7 @@ extern int sprintf(char *, const char *, ...);
 void sub_8049BB0(s32, s32);
 void sub_80498A8(s32, s32);
 
-Tile *GetTile(s32 x, s32 y)
+const Tile *GetTile(s32 x, s32 y)
 {
     if (x >= 0 && y >= 0 && x < DUNGEON_MAX_SIZE_X && y < DUNGEON_MAX_SIZE_Y)
     {
@@ -51,12 +51,12 @@ Tile *GetTile(s32 x, s32 y)
     return (Tile *) gUnknown_203B430->unk0;
 }
 
-Tile *GetTileSafe(s32 x, s32 y)
+Tile *GetTileMut(s32 x, s32 y)
 {
     if (x < 0 || y < 0 || x >= DUNGEON_MAX_SIZE_X || y >= DUNGEON_MAX_SIZE_Y)
     {
-        Tile *tile = (Tile *) gUnknown_202F190.unk0;
-        gUnknown_202F190 = *gUnknown_203B430;
+        Tile *tile = (Tile *) gOutOfBoundsTileData.unk0;
+        gOutOfBoundsTileData = *gUnknown_203B430;
         return tile;
     }
     return gDungeon->tilePointers[y][x];
@@ -190,10 +190,10 @@ void sub_80498A8(int x,int y)
   sp_0x20 = GetTile(x, y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
   if (gDungeon->tileset >= 0x40) {
     if ((0x17 >= x) && (0x17 >= y)) {
-        GetTileSafe(x,y)->unk8 = gDungeon->unk12C24[y * 0x18 + x];
+        GetTileMut(x,y)->unk8 = gDungeon->unk12C24[y * 0x18 + x];
     }
     else {
-      GetTileSafe(x,y)->unk8 = 0;
+      GetTileMut(x,y)->unk8 = 0;
     }
   }
   else
@@ -325,7 +325,7 @@ void sub_80498A8(int x,int y)
     if (IsBossFight()) {
       r4 = 0;
     }
-    GetTileSafe(x,y)->unk8 = gDungeon->unk12C24[r4 + r7 * 3];
+    GetTileMut(x,y)->unk8 = gDungeon->unk12C24[r4 + r7 * 3];
   }
 }
 
@@ -436,17 +436,17 @@ void sub_8049BB0(s32 x, s32 y)
     if (y > 29)
         flags[CROSSABLE_TERRAIN_WALL] &= ~(0x80 | 0x1 | 0x2);
 
-    GetTileSafe(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_REGULAR] = flags[CROSSABLE_TERRAIN_REGULAR];
-    GetTileSafe(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_LIQUID] = flags[CROSSABLE_TERRAIN_LIQUID];
-    GetTileSafe(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_CREVICE] = flags[CROSSABLE_TERRAIN_CREVICE];
-    GetTileSafe(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_WALL] = flags[CROSSABLE_TERRAIN_WALL];
+    GetTileMut(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_REGULAR] = flags[CROSSABLE_TERRAIN_REGULAR];
+    GetTileMut(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_LIQUID] = flags[CROSSABLE_TERRAIN_LIQUID];
+    GetTileMut(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_CREVICE] = flags[CROSSABLE_TERRAIN_CREVICE];
+    GetTileMut(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_WALL] = flags[CROSSABLE_TERRAIN_WALL];
 }
 
 void sub_8049ED4(void)
 {
     bool32 hallucinating, unk1820F;
     u16 *src;
-    Tile *tile;
+    const Tile *tile;
     s32 r7;
     s32 i;
     s32 r10;
@@ -562,7 +562,7 @@ void sub_8049ED4(void)
 
 void sub_804A1F0(s32 a0, s32 a1)
 {
-    Tile *tile;
+    const Tile *tile;
     u16 *src;
     bool32 hallucinating, unk1820F;
     s32 xTemp, yTemp;
@@ -664,7 +664,7 @@ void sub_804A1F0(s32 a0, s32 a1)
 
 void sub_804A49C(s32 a0, s32 a1)
 {
-    Tile *tile;
+    const Tile *tile;
     u16 *src;
     bool32 hallucinating, unk1820F;
     s32 xTemp, yTemp;
@@ -906,12 +906,12 @@ void sub_804AAAC(void)
 {
     s32 x;
     s32 y;
-    struct Tile *tile;
+    Tile *tile;
     for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
     {
         for(x = 0; x < DUNGEON_MAX_SIZE_X; x++)
         {
-            tile = GetTileSafe(x,y);
+            tile = GetTileMut(x,y);
             tile->unk4 = 0;
         }
     }
@@ -919,7 +919,7 @@ void sub_804AAAC(void)
 
 void sub_804AAD4(void)
 {
-    struct Tile *tile;
+    const Tile *tile;
     struct RoomData *room1;
     struct RoomData *room2;
     s32 roomIndex;
@@ -986,8 +986,8 @@ void sub_804AAD4(void)
 void sub_804AC20(DungeonPos *pos)
 {
     s32 y;
-    struct Tile *tile2;
-    struct Tile *tile;
+    const Tile *tile2;
+    Tile *tile;
     s32 yMax;
     u32 visibilityRange;
     s32 xMin;
@@ -1023,7 +1023,7 @@ void sub_804AC20(DungeonPos *pos)
         }
         for (y = yMin; y <= yMax; y++) {
             for (x = xMin; x <= xMax; x++) {
-                tile = GetTileSafe(x,y);
+                tile = GetTileMut(x,y);
                 tile->unk4 = tile->unk4 | 3;
                 sub_80402AC(x,y);
             }

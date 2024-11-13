@@ -131,7 +131,7 @@ void sub_8045CB0(void)
   u32 x;
   int y;
   int yCounter;
-  struct Tile *tile;
+  const Tile *tile;
   u32 uVar5;
   int xCounter;
   Item item;

@@ -831,7 +831,7 @@ _0807DBB6:
 _0807DBB8:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -971,7 +971,7 @@ _0807DCD8:
 	movs r6, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	ldr r3, _0807DD6C
@@ -1094,7 +1094,7 @@ _0807DDC8:
 _0807DDCA:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r3, 0x80
@@ -1141,7 +1141,7 @@ _0807DE1A:
 	beq _0807DE30
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	movs r1, 0x40
 	orrs r1, r2
@@ -1402,7 +1402,7 @@ _0807E014:
 	bgt _0807E112
 	cmp r1, 0x1F
 	bgt _0807E112
-	bl GetTileSafe
+	bl GetTileMut
 	mov r8, r0
 	ldr r0, [sp, 0x18]
 	movs r2, 0

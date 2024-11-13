@@ -2468,7 +2468,7 @@ _0807FA1E:
 _0807FA22:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r4, r0, 0
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x4

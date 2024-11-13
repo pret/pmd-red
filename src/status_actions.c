@@ -940,7 +940,7 @@ bool8 sub_805BF34(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 
 bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 param_4)
 {
-    struct Tile *tile;
+    const Tile *tile;
     Entity *object;
     Trap *trapData;
     s32 bottomRightCornerX, bottomRightCornerY;
@@ -972,7 +972,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 param_
         ++topLeftCornerY; --topLeftCornerY;
         for (xCoord = bottomRightCornerX; xCoord <= topLeftCornerX; xCoord++) {
             for (yCoord = bottomRightCornerY; yCoord <= topLeftCornerY; yCoord++) {
-                object = GetTileSafe(xCoord, yCoord)->object;
+                object = GetTileMut(xCoord, yCoord)->object;
                 if (((object != 0) && (GetEntityType(object) == ENTITY_TRAP)) &&
                     (trapData = GetTrapData(object), trapData->id != TRAP_WONDER_TILE)) {
                     pos.y = yCoord;
@@ -1094,7 +1094,7 @@ bool8 sub_805C2A0(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
 bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
 {
-    struct Tile *tileToFill;
+    Tile *tileToFill;
     EntityInfo *targetInfo;
     int y;
     bool8 filledInTile;
@@ -1114,7 +1114,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
         tileCoords.y = target->pos.y + gAdjacentTileOffsets[targetInfo->action.direction].y;
 
         sub_8042A54(&tileCoords);
-        tileToFill = GetTileSafe(tileCoords.x,tileCoords.y);
+        tileToFill = GetTileMut(tileCoords.x,tileCoords.y);
         if ((tileToFill->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY) {
             tileToFill->terrainType = (tileToFill->terrainType & ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) | TERRAIN_TYPE_NORMAL;
 
