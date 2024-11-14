@@ -101,7 +101,7 @@ void sub_807E254(Entity *pokemon,Entity *target)
         sub_807EC28(FALSE);
       }
       sub_806A5B8(pokemon);
-      sub_8075900(pokemon,gDungeon->unk3A08);
+      sub_8075900(pokemon,gDungeon->forceMonsterHouse);
     }
 
     if (EntityExists(target)) {
@@ -110,7 +110,7 @@ void sub_807E254(Entity *pokemon,Entity *target)
         sub_807EC28(FALSE);
       }
       sub_806A5B8(target);
-      sub_8075900(target,gDungeon->unk3A08);
+      sub_8075900(target,gDungeon->forceMonsterHouse);
     }
   }
 }

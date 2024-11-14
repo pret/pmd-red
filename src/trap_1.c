@@ -483,7 +483,7 @@ void sub_8081454(unkStruct_8094924 *param_1)
     int iVar4;
 
     sub_808300C(param_1,gMisakiSan);
-    sub_80830B4(param_1, gDungeon->unk3A08);
+    sub_80830B4(param_1, gDungeon->forceMonsterHouse);
     sub_80830B4(param_1, gDungeon->unk3A09);
     sub_80830B4(param_1, gDungeon->unk3A0A);
     sub_80830B4(param_1, gDungeon->unk3A0B);
@@ -820,7 +820,7 @@ void sub_8081C7C(unkStruct_8094924 *r0)
     s32 iVar7;
 
     sub_8083018(r0,gMisakiSan);
-    gDungeon->unk3A08 = sub_80831DC(r0);
+    gDungeon->forceMonsterHouse = sub_80831DC(r0);
     gDungeon->unk3A09 = sub_80831DC(r0);
     gDungeon->unk3A0A = sub_80831DC(r0);
     gDungeon->unk3A0B = sub_80831DC(r0);

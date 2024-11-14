@@ -1065,7 +1065,7 @@ void HandleUseOrbAction(Entity *pokemon)
         }
 
         sub_806A5B8(pokemon);
-        sub_8075900(pokemon, gDungeon->unk3A08);
+        sub_8075900(pokemon, gDungeon->forceMonsterHouse);
     }
     else if (r4)
         sub_8044D40(&act, 0);

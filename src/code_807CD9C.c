@@ -157,7 +157,7 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
                 sub_807EC28(FALSE);
             }
             sub_806A5B8(target);
-            sub_8075900(target,gDungeon->unk3A08);
+            sub_8075900(target,gDungeon->forceMonsterHouse);
         }
     }
 }
@@ -321,7 +321,7 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
         sub_807EC28(0);
     }
     sub_806A5B8(target);
-    sub_8075900(target,gDungeon->unk3A08);
+    sub_8075900(target,gDungeon->forceMonsterHouse);
 }
 
 void sub_807D3CC(Entity *param_1)

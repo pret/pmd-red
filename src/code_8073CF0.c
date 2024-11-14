@@ -1019,7 +1019,7 @@ bool8 UseAttack(Entity *a0)
 
                 sub_8071DA4(mon);
                 sub_8046D20();
-                sub_8075900(mon, gDungeon->unk3A08);
+                sub_8075900(mon, gDungeon->forceMonsterHouse);
             }
             if (!EntityExists(mon))
                 continue;

@@ -107,9 +107,9 @@ void GenerateCrossFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateBeetleFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, UnkDungeonGlobal_unk1C574 *unkPtr);
 void sub_8051654(UnkDungeonGlobal_unk1C574 *a0);
-void sub_80506F0(s32 a0, UnkDungeonGlobal_unk1C574 *a1);
+void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unkPtr);
 void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse);
-void sub_8050438(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse);
+void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse);
 
 EWRAM_DATA u8 gUnknown_202F1A8 = 0;
 EWRAM_DATA u8 gUnknown_202F1A9 = 0;
@@ -210,7 +210,7 @@ void sub_804AFAC(void)
             ResetFloor();
             gDungeon->playerSpawn.x = -1;
             gDungeon->playerSpawn.y = -1;
-            gDungeon->unk3A08 = 0;
+            gDungeon->forceMonsterHouse = 0;
             if (gDungeon->bossBattleIndex != 0) {
                 if (sub_804C70C(gDungeon->bossBattleIndex, unkPtr)) {
                     break;
@@ -247,7 +247,7 @@ void sub_804AFAC(void)
                     y = 1;
                 }
 
-                gDungeon->unk3A08 = 0;
+                gDungeon->forceMonsterHouse = 0;
                 gDungeon->monsterHouseRoom = 0xFF;
                 gUnknown_202F1D0 = r7;
                 switch (r7 & 0xF) {
@@ -270,7 +270,7 @@ void sub_804AFAC(void)
                         break;
                     case 2:
                         GenerateOneRoomMonsterHouseFloor();
-                        gDungeon->unk3A08 = 1;
+                        gDungeon->forceMonsterHouse = 1;
                         break;
                     case 3:
                         GenerateOuterRingFloor(unkPtr);
@@ -282,7 +282,7 @@ void sub_804AFAC(void)
                         break;
                     case 5:
                         GenerateTwoRoomsWithMonsterHouseFloor();
-                        gDungeon->unk3A08 = 1;
+                        gDungeon->forceMonsterHouse = 1;
                         break;
                     case 6:
                         GenerateLineFloor(unkPtr);
@@ -342,15 +342,15 @@ void sub_804AFAC(void)
             gUnknown_202F1D8.x = -1;
             gUnknown_202F1D8.y = -1;
             GenerateOneRoomMonsterHouseFloor();
-            gDungeon->unk3A08 = 1;
+            gDungeon->forceMonsterHouse = 1;
         }
         sub_804E9DC();
         if (r10) {
-            sub_80506F0(1, unkPtr);
+            GenerateSecondaryTerrainFormations(1, unkPtr);
         }
         r4 = (DungeonRandInt(100) < unkPtr->connectedToTop);
         SpawnNonEnemies(unkPtr, r4);
-        sub_8050438(unkPtr, r4);
+        SpawnEnemies(unkPtr, r4);
         ResolveInvalidSpawns();
         if (gDungeon->playerSpawn.x != -1 && gDungeon->playerSpawn.y != -1)
         {
@@ -366,10 +366,10 @@ void sub_804AFAC(void)
         gUnknown_202F1D8.y = -1;
         ResetFloor();
         GenerateOneRoomMonsterHouseFloor();
-        gDungeon->unk3A08 = 1;
+        gDungeon->forceMonsterHouse = TRUE;
         sub_804E9DC();
         SpawnNonEnemies(unkPtr, FALSE);
-        sub_8050438(unkPtr, FALSE);
+        SpawnEnemies(unkPtr, FALSE);
         ResolveInvalidSpawns();
     }
 
@@ -863,7 +863,7 @@ void NAKED sub_804AFAC(void)
 "	beq _0804B3AA\n"
 "	movs r0, 0x1\n"
 "	mov r1, r8\n"
-"	bl sub_80506F0\n"
+"	bl GenerateSecondaryTerrainFormations\n"
 "_0804B3AA:\n"
 "	movs r0, 0x64\n"
 "	bl DungeonRandInt\n"
@@ -879,7 +879,7 @@ void NAKED sub_804AFAC(void)
 "	bl SpawnNonEnemies\n"
 "	mov r0, r8\n"
 "	adds r1, r4, 0\n"
-"	bl sub_8050438\n"
+"	bl SpawnEnemies\n"
 "	bl ResolveInvalidSpawns\n"
 "	ldr r5, _0804B4C0\n"
 "	ldr r1, [r5]\n"
@@ -955,7 +955,7 @@ void NAKED sub_804AFAC(void)
 "	bl SpawnNonEnemies\n"
 "	mov r0, r8\n"
 "	movs r1, 0\n"
-"	bl sub_8050438\n"
+"	bl SpawnEnemies\n"
 "	bl ResolveInvalidSpawns\n"
 "_0804B474:\n"
 "	ldr r1, _0804B4B8\n"
@@ -4607,9 +4607,10 @@ void ShuffleSpawnPositions(struct PositionU8 *spawns, s32 count)
  * See below for specific conditions on each type of spawn.
  */
 extern const s16 gUnknown_80F4DA0;
+extern const s16 gUnknown_80F4DA4;
 void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse)
 {
-    struct PositionU8 validSpawns[1792];
+    struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
     s32 count;
     s32 randIndex;
     s32 i;
@@ -4936,6 +4937,462 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 			s32 spawnIndex = DungeonRandInt(count);
 			dungeon->playerSpawn.x = validSpawns[spawnIndex].x;
 			dungeon->playerSpawn.y = validSpawns[spawnIndex].y;
+		}
+	}
+}
+
+/*
+ * SpawnEnemies - Spawns all enemies, including those in forced monster houses
+ */
+void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse)
+{
+	struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
+    s32 count;
+    s32 randIndex;
+    s32 i;
+    s32 x, y;
+    Dungeon *dungeon = gDungeon;
+    s32 numEnemies, numMonsterHouseEnemies;
+    s32 enemyDensity = unkPtr->enemyDensity;
+
+	if (enemyDensity > 0) {
+		// Positive means value with variance
+		numEnemies = DungeonRandRange(enemyDensity / 2, enemyDensity);
+
+		if (numEnemies < 1) {
+			numEnemies = 1;
+		}
+	}
+	else {
+        // Negative means exact value.
+		// Bug - abs is missing, also it should be s8, not u8
+		numEnemies = enemyDensity;
+	}
+
+    count = 0;
+	for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+		for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+			// Enemies can spawn on tiles that are:
+			// - Open Terrain
+			// - In a room
+			// - Not in a Kecleon Shop
+			// - Don't have stairs, an item
+			// - Not a special tile that can't be broken by Absolute Mover
+			// - Not where the player spawns
+			Tile *tile = GetTile(x, y);
+			if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
+                continue;
+            if (tile->room == CORRIDOR_ROOM)
+                continue;
+            if (tile->terrainType & TERRAIN_TYPE_SHOP)
+                continue;
+            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_ITEM)
+                continue;
+            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_STAIRS)
+                continue;
+            if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+                continue;
+            if (tile->terrainType & TERRAIN_TYPE_UNBREAKABLE)
+                continue;
+            if (x == dungeon->playerSpawn.x && y == dungeon->playerSpawn.y)
+                continue;
+
+            validSpawns[count].x = x;
+            validSpawns[count].y = y;
+            count++;
+		}
+	}
+
+	if (count != 0) {
+        // ?
+        if (gDungeon->unk688) {
+            numEnemies++;
+        }
+        if (numEnemies != 0) {
+            // Randomly select among the valid enemy spawn spots
+            ShuffleSpawnPositions(validSpawns, count);
+            randIndex = DungeonRandInt(count);
+
+            for (i = 0; i < numEnemies; i++) {
+                Tile *tile = GetTileSafe(validSpawns[randIndex].x, validSpawns[randIndex].y);
+                 // Spawn an enemy here
+                tile->spawnOrVisibilityFlags |= SPAWN_FLAG_MONSTER;
+
+                randIndex++;
+                if (randIndex == count) {
+                    // Wrap around to the start
+                    randIndex = 0;
+                }
+            }
+        }
+	}
+
+	if (!dungeon->forceMonsterHouse) {
+		return;
+	}
+
+	// This floor was marked to force a monster house
+	// Place extra enemy spawns in the Monster House room
+
+	numMonsterHouseEnemies = gUnknown_80F4DA4;
+    count = 0;
+	if (isEmptyMonsterHouse) {
+		// An "empty" monster house only spawns 3 enemies
+		numMonsterHouseEnemies = 3;
+	}
+
+	numMonsterHouseEnemies = (numMonsterHouseEnemies * 3) / 2;
+
+	for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+        s32 y;
+		for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+			// Monster House enemies can spawn on tiles that are:
+			// - Open Terrain
+			// - In a room
+			// - Not in a Kecleon Shop
+			// - Not a special tile that can't be broken by Absolute Mover
+			// - Not where the player spawns
+			// - In the monster house room
+
+			Tile *tile = GetTile(x, y);
+			if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
+                continue;
+            if (tile->room == CORRIDOR_ROOM)
+                continue;
+            if (tile->terrainType & TERRAIN_TYPE_SHOP)
+                continue;
+            if (tile->terrainType & TERRAIN_TYPE_UNBREAKABLE)
+                continue;
+            if (!(tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
+                continue;
+            if (x == dungeon->playerSpawn.x && y == dungeon->playerSpawn.y)
+                continue;
+
+            validSpawns[count].x = x;
+            validSpawns[count].y = y;
+            count++;
+		}
+	}
+
+	if (count != 0) {
+		numEnemies = DungeonRandRange((7 * count) / 10, (8 * count) / 10);
+
+        if (numEnemies == 0) {
+            numEnemies = 1;
+        }
+
+		if (numEnemies >= numMonsterHouseEnemies) {
+			// Don't spawn more enemies than the designated limit
+			numEnemies = numMonsterHouseEnemies;
+		}
+
+		// Randomly select among the valid enemy spawn spots
+        ShuffleSpawnPositions(validSpawns, count);
+        randIndex = DungeonRandInt(count);
+
+        for (i = 0; i < numEnemies; i++) {
+            Tile *tile = GetTileSafe(validSpawns[randIndex].x, validSpawns[randIndex].y);
+             // Spawn an enemy here
+            tile->spawnOrVisibilityFlags |= SPAWN_FLAG_MONSTER;
+
+            randIndex++;
+            if (randIndex == count) {
+                // Wrap around to the start
+                randIndex = 0;
+            }
+        }
+	}
+}
+
+/*
+ * SetSecondaryTerrainOnWall - Set a specific tile to have secondary terrain if the tile
+ * is a passable wall.
+ */
+void SetSecondaryTerrainOnWall(Tile *tile)
+{
+    bool8 isWall = TRUE;
+    if (GetTerrainType(tile) != TERRAIN_TYPE_WALL)
+        isWall = FALSE;
+    if (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
+        isWall = FALSE;
+
+    if (isWall) {
+        SetTerrainSecondary(tile);
+    }
+}
+
+/*
+ * GenerateSecondaryTerrainFormations - Generates secondary terrain (water/lava) formations
+ *
+ * This generation includes rivers, lakes along the river path, and standalone lakes.
+ *
+ * The river flows from top-to-bottom or bottom-to-top, using a random walk ending when the walk
+ * goes out of bounds or finds existing secondary terrain. Because of this, rivers can end prematurely
+ * when a lake is generated.
+ *
+ * Lakes are a large collection of secondary terrain generated around a central point.
+ * Standalone lakes are generated based on secondary_terrain_density
+ *
+ * The formations will never cut into room tiles, but can pass through to the other side.
+ */
+extern const s32 gUnknown_80F6DF8[8];
+void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    s32 num_tiles_fill;
+    s32 dir_x, dir_y;
+    bool8 dir_y_upwards;
+    s32 steps_until_lake;
+    s32 j;
+    s32 offsetX;
+    s32 offsetY;
+    s32 numToGen;
+    s32 densityN;
+    s32 x, y;
+
+	if (!(unkPtr->roomFlags & flag))
+        return;
+
+
+	// Generate 1-3 "river+lake" formations
+    numToGen = gUnknown_80F6DF8[DungeonRandInt(ARRAY_COUNT(gUnknown_80F6DF8))];
+	//for (i = 0; i < numToGen; i++) {
+    for (;numToGen != 0; numToGen--) {
+		// Randomly pick between starting from the bottom going up, or from the top going down
+
+
+		if (DungeonRandInt(100) < 50) {
+            dir_y_upwards = TRUE;
+			y = DUNGEON_MAX_SIZE_Y - 1;
+			dir_y = -1;
+		}
+		else {
+		    dir_y_upwards = FALSE;
+			y = 0;
+			dir_y = 1;
+		}
+
+		steps_until_lake = DungeonRandInt(50) + 10;
+
+		// Pick a random column in the interior to start the river on
+		x = DungeonRandRange(2, DUNGEON_MAX_SIZE_X - 2);
+		dir_x = 0;
+
+		while (1) {
+			// Fill in tiles in chunks of size 2-7 before changing the flow direction
+			num_tiles_fill = DungeonRandInt(6) + 2;
+            //for (v = 0; v < num_tiles_fill; v++) {
+			while (num_tiles_fill != 0) {
+				if (x >= 0 && x < DUNGEON_MAX_SIZE_X) {
+					if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_SECONDARY) {
+						if (!PosIsOutOfBounds(x, y)) {
+    						// Fill in secondary terrain as we go
+    						SetSecondaryTerrainOnWall(GetTileSafe(x, y));
+    					}
+					}
+                    else {
+                        goto LABEL;
+                    }
+				}
+                num_tiles_fill--;
+
+				// Move to the next tile
+				x += dir_x;
+				y += dir_y;
+
+				// Vertically out of bounds, stop
+				if (y < 0 || y >= DUNGEON_MAX_SIZE_Y) {
+                    break;
+				}
+
+				steps_until_lake--;
+				if (steps_until_lake != 0)
+                    continue;
+
+				// After we go a certain number of steps, make a "lake"
+
+				// This loop will attempt to generate new lake tiles up to 64 times
+				// We select a random tile, check for space and nearby secondary terrain tiles,
+				// then if verified add a new lake tile.
+				for (j = 0; j < 64; j++) {
+					// Each tile is in a random location +-3 tiles from the current cursor in either direction
+					s32 offsetX = DungeonRandInt(7) - 3;
+					s32 offsetY = DungeonRandInt(7) - 3;
+
+                    // Check that there's enough space for a lake within a 2 tile margin of the map bounds
+                    if (offsetX + x < 2 || offsetX + x >= DUNGEON_MAX_SIZE_X - 2 || offsetY + y < 2 || offsetY + y >= DUNGEON_MAX_SIZE_Y - 2)
+                        continue;
+
+                    // Make secondary terrain here if it's within 2 tiles
+                    // of a tile that's currently secondary terrain
+                    // This results in a "cluster" akin to a lake
+                    if (GetTerrainType(GetTile(offsetX + x + 1, offsetY + y + 1)) == TERRAIN_TYPE_SECONDARY ||
+                        GetTerrainType(GetTile(offsetX + x + 1, offsetY + y + 0)) == TERRAIN_TYPE_SECONDARY ||
+                        GetTerrainType(GetTile(offsetX + x + 1, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY ||
+                        GetTerrainType(GetTile(offsetX + x + 0, offsetY + y + 1)) == TERRAIN_TYPE_SECONDARY ||
+                        GetTerrainType(GetTile(offsetX + x + 0, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY ||
+                        GetTerrainType(GetTile(offsetX + x - 1, offsetY + y + 1)) == TERRAIN_TYPE_SECONDARY ||
+                        GetTerrainType(GetTile(offsetX + x - 1, offsetY + y + 0)) == TERRAIN_TYPE_SECONDARY ||
+                        GetTerrainType(GetTile(offsetX + x - 1, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY)
+                    {
+                        if (!PosIsOutOfBounds(x + offsetX, y + offsetY)) {
+                            SetSecondaryTerrainOnWall(GetTileSafe(offsetX + x, offsetY + y));
+                        }
+                    }
+				}
+
+				// Finalization/gap-filling step because the random approach
+				// might leave weird gaps. Go through every tile and do an
+				// on line nearest-neighbor interpolation of secondary terrain
+				// tiles to smoothen out the "lake"
+				for (offsetX = -3; offsetX <= 3; offsetX++) {
+					for (offsetY = -3; offsetY <= 3; offsetY++) {
+						s32 numAdjacent = 0;
+                        s32 xPlus1, yPlus1;
+
+                        if (offsetX + x < 2 || offsetX + x >= DUNGEON_MAX_SIZE_X - 2 || offsetY + y < 2 || offsetY + y >= DUNGEON_MAX_SIZE_Y - 2)
+                            continue;
+
+                        // Count the number of secondary terrain tiles adjacent (all 8 directions)
+                        xPlus1 = offsetX + x  + 1;
+                        yPlus1 = offsetY + y + 1;
+
+                        if (GetTerrainType(GetTile(xPlus1, yPlus1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x  + 1, offsetY + y + 0)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x  + 1, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x  + 0, offsetY + y + 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x  + 0, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x  - 1, offsetY + y + 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x  - 1, offsetY + y + 0)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x  - 1, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+
+                        // If at least half are secondary terrain, make this tile secondary terrain as well
+                        if (numAdjacent >= 4 && !PosIsOutOfBounds(x + offsetX , y + offsetY)) {
+                            SetSecondaryTerrainOnWall(GetTileSafe(offsetX + x , offsetY + y));
+                        }
+					}
+				}
+			}
+
+			// Creating a lake doesn't mean we are done yet
+			// but it's likely that the next iteration will hit the tile
+			// stopping condition for secondary terrain, if not the river continues
+
+            // Alternate between horizontal and vertical movement each iteration
+            if (dir_x != 0) {
+                // The y direction never reverses, ensuring the river doesn't
+                // double back on itself and cuts across the map only once
+                if (dir_y_upwards) {
+                    dir_y = -1;
+                }
+                else {
+                    dir_y = 1;
+                }
+
+                dir_x = 0;
+            }
+            else {
+                //Randomly pick between left and right
+                if (DungeonRandInt(100) < 50) {
+                    dir_x = -1;
+                }
+                else {
+                    dir_x = 1;
+                }
+
+                dir_y = 0;
+            }
+
+			if (y < 0 || y >= DUNGEON_MAX_SIZE_Y) {
+                LABEL:
+				// Vertically out of bounds, stop
+				break;
+			}
+		}
+    }
+
+	// Generate standalone lakes secondary_terrain_density # of times
+	for (densityN = 0; densityN < unkPtr->unk15; densityN++) {
+        s32 x, y;
+        bool8 table[10][10];
+		// Try to pick a random tile in the interior to seed the "lake"
+		// Incredibly unlikely to fail
+        s32 rnd_y = 0;
+		s32 rnd_x = 0;
+        s32 n = 0;
+
+        // Up to 200 attempts
+		while (n < 200) {
+			rnd_x = DungeonRandRange(0, DUNGEON_MAX_SIZE_X);
+			rnd_y = DungeonRandRange(0, DUNGEON_MAX_SIZE_Y);
+
+			if (rnd_x >= 1 && rnd_x < DUNGEON_MAX_SIZE_X - 1 && rnd_y >= 1 && rnd_y < DUNGEON_MAX_SIZE_Y - 1)
+                break;
+
+			n++;
+		}
+
+		if (n == 200)
+            continue;
+
+		// Make a 10x10 grid with TRUE on the boundary and FALSE on the interior
+		for (x = 0; x < 10; x++) {
+			for (y = 0; y < 10; y++) {
+				if (x == 0 || x == 9 || y == 0 || y == 9) {
+					table[x][y] = TRUE;
+				}
+				else {
+					table[x][y] = FALSE;
+				}
+			}
+		}
+
+		// Generate an "inverse lake" by spreading the TRUE values inwards
+		for (n = 0; n < 80; n++) {
+			// Pick a random interior point on the 10x10 grid
+			x = DungeonRandInt(8) + 1;
+			y = DungeonRandInt(8) + 1;
+
+			if (table[x - 1][y] || table[x + 1][y] || table[x][y - 1] || table[x][y + 1]) {
+				table[x][y] = TRUE;
+			}
+		}
+
+		// Iterate through the grid, any spaces which are still FALSE form the inverse-inverse lake
+		// or as some may prefer to call it, just a regular lake!
+		for (x = 0; x < 10; x++) {
+			for (y = 0; y < 10; y++) {
+				if (!table[x][y]) {
+					// Shift the 0-10 random offset position into +- 5 to center around the lake seed tile
+                    SetSecondaryTerrainOnWall(GetTileSafe(x + rnd_x - 5, y + rnd_y - 5));
+				}
+			}
+		}
+	}
+
+	// Clean up secondary terrain that got in places it shouldn't
+	for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+		for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+            Tile *tile = GetTileSafe(x, y);
+			if (GetTerrainType(tile) != TERRAIN_TYPE_SECONDARY)
+                continue;
+
+			// Revert tiles back to open terrain if:
+			// - in a kecleon shop
+			// - in a monster house
+			// - is an unbreakable tile
+			// - on a stairs spawn point
+			// This really shouldn't happen since we only place terrain on wall tiles to begin with,
+			// but it provides additional safety
+
+			if (tile->terrainType & (TERRAIN_TYPE_SHOP | TERRAIN_TYPE_IN_MONSTER_HOUSE | TERRAIN_TYPE_UNBREAKABLE) || (tile->spawnOrVisibilityFlags & SPAWN_FLAG_STAIRS)) {
+                SetTerrainNormal(tile);
+            }
+            else {
+                // Revert to wall tiles if they're on the soft/hard borders
+                if (x <= 1 || x >= DUNGEON_MAX_SIZE_X - 1 || y <= 1 || y >= DUNGEON_MAX_SIZE_Y - 1) {
+                    SetTerrainWall(tile);
+                }
+            }
 		}
 	}
 }

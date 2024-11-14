@@ -2749,7 +2749,7 @@ _0805AA5E:
         sub_807EC28(FALSE);
       }
       sub_806A5B8(target);
-      sub_8075900(target,gDungeon->unk3A08);
+      sub_8075900(target,gDungeon->forceMonsterHouse);
     }
   }
   return TRUE;

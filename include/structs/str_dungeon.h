@@ -125,7 +125,7 @@ typedef struct UnkDungeonGlobal_unk1C574
     u8 unk3;
     u8 unk4;
     u8 floorConnectivity;
-    u8 unk6;
+    u8 enemyDensity;
     u8 kecleonShopChance; // Percentage chance 0-100%
     u8 monsterHouseChance; // Percentage chance 0-100%
     u8 mazeRoomChance; // Percentage chance 0-100%
@@ -347,7 +347,7 @@ typedef struct Dungeon
     u8 fill3802[0x3904 - 0x3802];
     /* 0x3904 */ s16 numItems;
     u8 fill3906[0x3A08 - 0x3906];
-    /* 0x3A08 */ u8 unk3A08;
+    /* 0x3A08 */ bool8 forceMonsterHouse; // Forces the current floor to have monster house
     /* 0x3A09 */ u8 unk3A09;
     /* 0x3A0A */ u8 unk3A0A;
     /* 0x3A0B */ u8 unk3A0B;

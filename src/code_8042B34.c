@@ -751,7 +751,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
         else {
             sub_80427AC();
-            sub_8075900(GetLeader(), gDungeon->unk3A08);
+            sub_8075900(GetLeader(), gDungeon->forceMonsterHouse);
             sub_807EAA0(1, 0);
         }
 
