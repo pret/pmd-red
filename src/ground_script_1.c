@@ -1683,6 +1683,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xd2 ... 0xd8: {
+                // DS: Assert(TRUE, "Script command call error SWITCH MENY") [sic]
                 const char *out = curCmd.argPtr;
                 gNumChoices = 0;
                 scriptData->branchDiscriminant = 0;
@@ -1765,21 +1766,21 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0xe6: {
                 scriptData->savedScript = scriptData->script;
             } //fallthrough
-            case 0xe7: { // ???
+            case 0xe7: {
                 scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 break;
             }
-            case 0xe8: { // SAVE_AND_TRIGGER
+            case 0xe8: {
                 scriptData->savedScript = scriptData->script;
             } // fallthrough
-            case 0xe9: { // TRIGGER
+            case 0xe9: {
                 scriptData->script.ptr2 = scriptData->script.ptr = gFunctionScriptTable[curCmd.argShort].script;
                 break;
             }
-            case 0xea: { // SAVE_AND_RUN_STATION
+            case 0xea: {
                 scriptData->savedScript = scriptData->script;
             } // fallthrough
-            case 0xeb: { // RUN_STATION
+            case 0xeb: {
                 ScriptInfoSmall info;
                 u32 group, sector;
                 u32 tmp = gUnknown_2039A34;
@@ -1804,13 +1805,15 @@ s32 ExecuteScriptCommand(Action *action) {
                 GroundMap_ExecuteEnter(gUnknown_2039A34);
                 break;
             }
-            case 0xed: { // DELETE_SAVED
+            case 0xed: {
+                // DS: if (scriptData->savedScript.ptr == NULL) Assert(FALSE, "Script flash stack error");
                 scriptData->savedScript.ptr = NULL;
                 scriptData->savedScript.ptr2 = NULL;
                 break;
             }
-            case 0xee: { // RESTORE_SAVED
+            case 0xee: {
                 if (scriptData->savedScript.ptr == NULL) {
+                    // DS: Assert(FALSE, "Script return stack error");
                     return 0;
                 }
                 scriptData->script = scriptData->savedScript;
@@ -1819,6 +1822,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xef:
+                // DS: if (scriptData->savedScript.ptr != NULL) Assert(FALSE, "Script end stack error");
                 return 0;
             case 0xf0:
                 return 1;
