@@ -13,7 +13,7 @@ enum TerrainType
     TERRAIN_TYPE_WALL = 0, // x0 When neither TERRAIN_TYPE_NORMAL nor TERRAIN_TYPE_SECONDARY are set
     TERRAIN_TYPE_NORMAL = 1 << 0, // x1
     TERRAIN_TYPE_SECONDARY = 1 << 1, // Water or lava depending on the dungeon. x2
-    TERRAIN_TYPE_UNK_2 = 1 << 2, // x4
+    TERRAIN_TYPE_CORNER_CUTTABLE = 1 << 2, // x4 This tile can be corner-cut when walking. Seemingly only used during dungeon generation.
     TERRAIN_TYPE_NATURAL_JUNCTION = 1 << 3, // x8
     TERRAIN_TYPE_IMPASSABLE_WALL = 1 << 4, // x10
     TERRAIN_TYPE_SHOP = 1 << 5, // x20
@@ -24,6 +24,7 @@ enum TerrainType
     TERRAIN_TYPE_UNK_x400 = 1 << 10,
     TERRAIN_TYPE_UNK_x800 = 1 << 11,
     TERRAIN_TYPE_UNK_x1000 = 1 << 12,
+    TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS = 1 << 15, // 0x8000
 };
 
 enum CrossableTerrain

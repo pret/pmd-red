@@ -276,11 +276,6 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
     .include "src/dungeon_map_access.o"
 	.include "src/dungeon_generation.o"
 
-gUnknown_202F1D4: /* 202F1D4 (sub_8050C30) */
-	.space 0x4
-gUnknown_202F1D8: /* 202F1D8 (sub_804AFAC - sub_804EBC8) */
-	.space 0x4
-
 gUnknown_202F1DC: /* 202F1DC (sub_80511F0 - sub_8051438) */
 	.space 0x4
 gUnknown_202F1E0: /* 202F1E0 (sub_80511F0) */

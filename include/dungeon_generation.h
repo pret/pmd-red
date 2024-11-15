@@ -31,5 +31,6 @@ enum SecondaryStructureType {
     SECONDARY_STRUCTURE_DIVIDER, // A "divider" of secondary terrain will split the room in half randomly either horizontally or vertically.
 };
 
+bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable);
 
 #endif

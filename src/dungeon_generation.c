@@ -11,9 +11,6 @@
 extern const u8 gUnknown_80F6DCC[];
 extern struct FileArchive gDungeonFileArchive;
 
-extern Position gUnknown_202F1D8;
-
-
 extern void ResetFloor(void);
 extern void ResetFloor(void);
 extern void sub_80518F0(void);
@@ -21,7 +18,6 @@ extern void GenerateOneRoomMonsterHouseFloor(void);
 extern void ResolveInvalidSpawns(void);
 extern void GenerateTwoRoomsWithMonsterHouseFloor(void);
 extern u8 GetFloorType();
-extern bool8 sub_8050C30(s32 a0, s32 a1, u8 a2);
 extern void sub_806C330(s32 a0, s32 a1, s16 a2, u8 a3);
 
 extern const Position gAdjacentTileOffsets[];
@@ -110,6 +106,7 @@ void sub_8051654(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unkPtr);
 void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse);
 void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse);
+bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable);
 
 EWRAM_DATA u8 gUnknown_202F1A8 = 0;
 EWRAM_DATA u8 gUnknown_202F1A9 = 0;
@@ -125,6 +122,8 @@ EWRAM_DATA struct MinMaxPosition sKecleonShopPosition = {0};
 static EWRAM_DATA s32 sSecondaryStructuresBudget = 0;
 static EWRAM_DATA s32 sNumRooms = 0;
 EWRAM_DATA s32 gUnknown_202F1D0 = 0;
+static EWRAM_DATA s32 sNumTilesReachableFromStairs = 0;
+static EWRAM_DATA Position sKecleonShopMiddlePos = {0};
 
 struct PositionU8
 {
@@ -205,8 +204,8 @@ void sub_804AFAC(void)
                 sSecondaryStructuresBudget = 0;
             }
             gUnknown_202F1A9 = 0;
-            gUnknown_202F1D8.x = -1;
-            gUnknown_202F1D8.y = -1;
+            sKecleonShopMiddlePos.x = -1;
+            sKecleonShopMiddlePos.y = -1;
             ResetFloor();
             gDungeon->playerSpawn.x = -1;
             gDungeon->playerSpawn.y = -1;
@@ -339,8 +338,8 @@ void sub_804AFAC(void)
         }
 
         if (j == 10) {
-            gUnknown_202F1D8.x = -1;
-            gUnknown_202F1D8.y = -1;
+            sKecleonShopMiddlePos.x = -1;
+            sKecleonShopMiddlePos.y = -1;
             GenerateOneRoomMonsterHouseFloor();
             gDungeon->forceMonsterHouse = 1;
         }
@@ -356,14 +355,14 @@ void sub_804AFAC(void)
         {
             if (GetFloorType() == 1)
                 break;
-            if (gDungeon->stairsSpawn.x != -1 && gDungeon->stairsSpawn.y != -1 && sub_8050C30(gDungeon->stairsSpawn.x, gDungeon->stairsSpawn.y, 0))
+            if (gDungeon->stairsSpawn.x != -1 && gDungeon->stairsSpawn.y != -1 && StairsAlwaysReachable(gDungeon->stairsSpawn.x, gDungeon->stairsSpawn.y, 0))
                 break;
         }
     }
 
     if (i == 10) {
-        gUnknown_202F1D8.x = -1;
-        gUnknown_202F1D8.y = -1;
+        sKecleonShopMiddlePos.x = -1;
+        sKecleonShopMiddlePos.y = -1;
         ResetFloor();
         GenerateOneRoomMonsterHouseFloor();
         gDungeon->forceMonsterHouse = TRUE;
@@ -373,8 +372,8 @@ void sub_804AFAC(void)
         ResolveInvalidSpawns();
     }
 
-    if (gUnknown_202F1D8.x >= 0 && gUnknown_202F1D8.y >= 0) {
-        sub_806C330(gUnknown_202F1D8.x, gUnknown_202F1D8.y, 380, 0);
+    if (sKecleonShopMiddlePos.x >= 0 && sKecleonShopMiddlePos.y >= 0) {
+        sub_806C330(sKecleonShopMiddlePos.x, sKecleonShopMiddlePos.y, 380, 0);
     }
 
     if (sKecleonShopPosition.unk0 >= 0) {
@@ -582,7 +581,7 @@ void NAKED sub_804AFAC(void)
 "_0804B14C: .4byte 0x0000e21e\n"
 "_0804B150: .4byte 0x00003a16\n"
 "_0804B154: .4byte gUnknown_202F1A9\n"
-"_0804B158: .4byte gUnknown_202F1D8\n"
+"_0804B158: .4byte sKecleonShopMiddlePos\n"
 "_0804B15C: .4byte 0x00003a08\n"
 "_0804B160: .4byte 0x00003a14\n"
 "_0804B164:\n"
@@ -920,7 +919,7 @@ void NAKED sub_804AFAC(void)
 "	movs r2, 0\n"
 "	ldrsh r1, [r1, r2]\n"
 "	movs r2, 0\n"
-"	bl sub_8050C30\n"
+"	bl StairsAlwaysReachable\n"
 "	lsls r0, 24\n"
 "	cmp r0, 0\n"
 "	bne _0804B436\n"
@@ -990,7 +989,7 @@ void NAKED sub_804AFAC(void)
 "	b _0804B4EA\n"
 "	.align 2, 0\n"
 "_0804B4B4: .4byte gUnknown_202F1A9\n"
-"_0804B4B8: .4byte gUnknown_202F1D8\n"
+"_0804B4B8: .4byte sKecleonShopMiddlePos\n"
 "_0804B4BC: .4byte 0x0000ffff\n"
 "_0804B4C0: .4byte gDungeon\n"
 "_0804B4C4: .4byte 0x00003a08\n"
@@ -1049,7 +1048,7 @@ void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
             s32 unkCount = 0;
             Tile *tile = GetTileSafe(x, y);
 
-            tile->terrainType &= ~(TERRAIN_TYPE_UNK_2);
+            tile->terrainType &= ~(TERRAIN_TYPE_CORNER_CUTTABLE);
             if (tile->room == CORRIDOR_ROOM && (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL)) {
                 if (x > 0 && (GetTerrainType(GetTile(x - 1, y)) == TERRAIN_TYPE_NORMAL))
                     unkCount++;
@@ -3632,8 +3631,8 @@ void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
     s32 i, j;
     Dungeon *dungeon = gDungeon;
 
-    gUnknown_202F1D8.x = -1;
-    gUnknown_202F1D8.y = -1;
+    sKecleonShopMiddlePos.x = -1;
+    sKecleonShopMiddlePos.y = -1;
 
 	if (sHasMonsterHouse || GetFloorType() == FLOOR_TYPE_RESCUE || chance == 0)
         return;
@@ -3765,8 +3764,8 @@ void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
 
             curX = (sKecleonShopPosition.minX + sKecleonShopPosition.maxX) / 2;
             curY = (sKecleonShopPosition.minY + sKecleonShopPosition.maxY) / 2;
-			gUnknown_202F1D8.x = curX;
-			gUnknown_202F1D8.y = curY;
+			sKecleonShopMiddlePos.x = curX;
+			sKecleonShopMiddlePos.y = curY;
 
 			return;
 		}
@@ -4319,20 +4318,20 @@ void GenerateSecondaryStructure(struct GridCell *gridCell)
                     SetSpawnFlag5(gridCell);
 
                     // Water "Moat"
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY - 2), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 1, middleY - 2), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY - 2), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 2), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY - 1), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY + 1), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY + 1), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 1, middleY + 1), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY + 1), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 2), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 1), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY), TERRAIN_TYPE_UNK_2);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY + 1), TERRAIN_TYPE_UNK_2);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 1, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY - 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 1, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
 
                     // Trap
                     GetTileSafe(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_TRAP;
@@ -4524,7 +4523,9 @@ void ResetTile(Tile *tile)
 // PosIsOutOfBounds - Checks if a position is out of bounds on the map.
 static inline bool8 PosIsOutOfBounds(s32 x, s32 y)
 {
-    if (x < 0 || (y < 0))
+    if (x < 0)
+        return TRUE;
+    if (y < 0)
         return TRUE;
     if (DUNGEON_MAX_SIZE_X <= x)
         return TRUE;
@@ -5136,76 +5137,76 @@ void SetSecondaryTerrainOnWall(Tile *tile)
  * The formations will never cut into room tiles, but can pass through to the other side.
  */
 extern const s32 gUnknown_80F6DF8[8];
+// This function IS IMPOSSIBLE TO MATCH! Tried with 3 different compiler outputs and got nothing. Functionally it is the same, for the gba it's just a stack difference.
+// https://decomp.me/scratch/9E4Uj - Red
+// https://decomp.me/scratch/sA4YH - Blue
+// https://decomp.me/scratch/SNyV8 - Sky
+#ifdef NONMATCHING
 void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unkPtr)
 {
-    s32 num_tiles_fill;
-    s32 dir_x, dir_y;
-    bool8 dir_y_upwards;
-    s32 steps_until_lake;
-    s32 j;
-    s32 offsetX;
-    s32 offsetY;
-    s32 numToGen;
     s32 densityN;
     s32 x, y;
+    // Stack
+
+    s32 numToGen;
+    s32 numTilesFill;
 
 	if (!(unkPtr->roomFlags & flag))
         return;
 
-
 	// Generate 1-3 "river+lake" formations
-    numToGen = gUnknown_80F6DF8[DungeonRandInt(ARRAY_COUNT(gUnknown_80F6DF8))];
-	//for (i = 0; i < numToGen; i++) {
-    for (;numToGen != 0; numToGen--) {
-		// Randomly pick between starting from the bottom going up, or from the top going down
+    for (numToGen = gUnknown_80F6DF8[DungeonRandInt(ARRAY_COUNT(gUnknown_80F6DF8))]; numToGen != 0; numToGen--) {
+        s32 dirX, dirY;
+        bool8 upwards;
+        s32 stepsUntilLake;
+        s32 j;
+        s32 offsetX;
+        s32 offsetY;
 
-
+        // Randomly pick between starting from the bottom going up, or from the top going down
 		if (DungeonRandInt(100) < 50) {
-            dir_y_upwards = TRUE;
+            upwards = TRUE;
 			y = DUNGEON_MAX_SIZE_Y - 1;
-			dir_y = -1;
+			dirY = -1;
 		}
 		else {
-		    dir_y_upwards = FALSE;
+		    upwards = FALSE;
 			y = 0;
-			dir_y = 1;
+			dirY = 1;
 		}
 
-		steps_until_lake = DungeonRandInt(50) + 10;
+		stepsUntilLake = DungeonRandInt(50) + 10;
 
 		// Pick a random column in the interior to start the river on
 		x = DungeonRandRange(2, DUNGEON_MAX_SIZE_X - 2);
-		dir_x = 0;
+		dirX = 0;
 
 		while (1) {
 			// Fill in tiles in chunks of size 2-7 before changing the flow direction
-			num_tiles_fill = DungeonRandInt(6) + 2;
-            //for (v = 0; v < num_tiles_fill; v++) {
-			while (num_tiles_fill != 0) {
+			numTilesFill = DungeonRandInt(6) + 2;
+			while (numTilesFill != 0) {
 				if (x >= 0 && x < DUNGEON_MAX_SIZE_X) {
-					if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_SECONDARY) {
-						if (!PosIsOutOfBounds(x, y)) {
-    						// Fill in secondary terrain as we go
-    						SetSecondaryTerrainOnWall(GetTileSafe(x, y));
-    					}
+					if (GetTerrainType(GetTile(x, y)) == TERRAIN_TYPE_SECONDARY) {
+						goto LABEL;
 					}
-                    else {
-                        goto LABEL;
+                    if (!PosIsOutOfBounds(x, y)) {
+                        // Fill in secondary terrain as we go
+                        SetSecondaryTerrainOnWall(GetTileSafe(x, y));
                     }
 				}
-                num_tiles_fill--;
+                numTilesFill--;
 
 				// Move to the next tile
-				x += dir_x;
-				y += dir_y;
+				x += dirX;
+				y += dirY;
 
 				// Vertically out of bounds, stop
 				if (y < 0 || y >= DUNGEON_MAX_SIZE_Y) {
                     break;
 				}
 
-				steps_until_lake--;
-				if (steps_until_lake != 0)
+				stepsUntilLake--;
+				if (stepsUntilLake != 0)
                     continue;
 
 				// After we go a certain number of steps, make a "lake"
@@ -5245,6 +5246,7 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
 				// on line nearest-neighbor interpolation of secondary terrain
 				// tiles to smoothen out the "lake"
 				for (offsetX = -3; offsetX <= 3; offsetX++) {
+
 					for (offsetY = -3; offsetY <= 3; offsetY++) {
 						s32 numAdjacent = 0;
                         s32 xPlus1, yPlus1;
@@ -5253,17 +5255,17 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
                             continue;
 
                         // Count the number of secondary terrain tiles adjacent (all 8 directions)
-                        xPlus1 = offsetX + x  + 1;
+                        xPlus1 = offsetX + x + 1;
                         yPlus1 = offsetY + y + 1;
 
                         if (GetTerrainType(GetTile(xPlus1, yPlus1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
-                        if (GetTerrainType(GetTile(offsetX + x  + 1, offsetY + y + 0)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
-                        if (GetTerrainType(GetTile(offsetX + x  + 1, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
-                        if (GetTerrainType(GetTile(offsetX + x  + 0, offsetY + y + 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
-                        if (GetTerrainType(GetTile(offsetX + x  + 0, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
-                        if (GetTerrainType(GetTile(offsetX + x  - 1, offsetY + y + 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
-                        if (GetTerrainType(GetTile(offsetX + x  - 1, offsetY + y + 0)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
-                        if (GetTerrainType(GetTile(offsetX + x  - 1, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x + 1, offsetY + y + 0)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x + 1, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x + 0, offsetY + y + 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x + 0, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x - 1, offsetY + y + 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x - 1, offsetY + y + 0)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
+                        if (GetTerrainType(GetTile(offsetX + x - 1, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY) numAdjacent++;
 
                         // If at least half are secondary terrain, make this tile secondary terrain as well
                         if (numAdjacent >= 4 && !PosIsOutOfBounds(x + offsetX , y + offsetY)) {
@@ -5278,28 +5280,28 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
 			// stopping condition for secondary terrain, if not the river continues
 
             // Alternate between horizontal and vertical movement each iteration
-            if (dir_x != 0) {
+            if (dirX != 0) {
                 // The y direction never reverses, ensuring the river doesn't
                 // double back on itself and cuts across the map only once
-                if (dir_y_upwards) {
-                    dir_y = -1;
+                if (upwards) {
+                    dirY = -1;
                 }
                 else {
-                    dir_y = 1;
+                    dirY = 1;
                 }
 
-                dir_x = 0;
+                dirX = 0;
             }
             else {
                 //Randomly pick between left and right
                 if (DungeonRandInt(100) < 50) {
-                    dir_x = -1;
+                    dirX = -1;
                 }
                 else {
-                    dir_x = 1;
+                    dirX = 1;
                 }
 
-                dir_y = 0;
+                dirY = 0;
             }
 
 			if (y < 0 || y >= DUNGEON_MAX_SIZE_Y) {
@@ -5316,16 +5318,16 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
         bool8 table[10][10];
 		// Try to pick a random tile in the interior to seed the "lake"
 		// Incredibly unlikely to fail
-        s32 rnd_y = 0;
-		s32 rnd_x = 0;
+        s32 rndY = 0;
+		s32 rndX = 0;
         s32 n = 0;
 
         // Up to 200 attempts
 		while (n < 200) {
-			rnd_x = DungeonRandRange(0, DUNGEON_MAX_SIZE_X);
-			rnd_y = DungeonRandRange(0, DUNGEON_MAX_SIZE_Y);
+			rndX = DungeonRandRange(0, DUNGEON_MAX_SIZE_X);
+			rndY = DungeonRandRange(0, DUNGEON_MAX_SIZE_Y);
 
-			if (rnd_x >= 1 && rnd_x < DUNGEON_MAX_SIZE_X - 1 && rnd_y >= 1 && rnd_y < DUNGEON_MAX_SIZE_Y - 1)
+			if (rndX >= 1 && rndX < DUNGEON_MAX_SIZE_X - 1 && rndY >= 1 && rndY < DUNGEON_MAX_SIZE_Y - 1)
                 break;
 
 			n++;
@@ -5363,7 +5365,7 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
 			for (y = 0; y < 10; y++) {
 				if (!table[x][y]) {
 					// Shift the 0-10 random offset position into +- 5 to center around the lake seed tile
-                    SetSecondaryTerrainOnWall(GetTileSafe(x + rnd_x - 5, y + rnd_y - 5));
+                    SetSecondaryTerrainOnWall(GetTileSafe(x + rndX - 5, y + rndY - 5));
 				}
 			}
 		}
@@ -5396,5 +5398,877 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
 		}
 	}
 }
+
+#else
+NAKED void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+    asm_unified("\n"
+"	push {r4-r7,lr}\n"
+"	mov r7, r10\n"
+"	mov r6, r9\n"
+"	mov r5, r8\n"
+"	push {r5-r7}\n"
+"	sub sp, 0xA4\n"
+"	str r1, [sp, 0x64]\n"
+"	ldrb r1, [r1, 0xD]\n"
+"	ands r1, r0\n"
+"	cmp r1, 0\n"
+"	bne _08050708\n"
+"	b _08050C20\n"
+"_08050708:\n"
+"	ldr r4, _08050738\n"
+"	movs r0, 0x8\n"
+"	bl DungeonRandInt\n"
+"	lsls r0, 2\n"
+"	adds r0, r4\n"
+"	ldr r4, [r0]\n"
+"	cmp r4, 0\n"
+"	bne _0805071C\n"
+"	b _08050A7C\n"
+"_0805071C:\n"
+"	movs r0, 0x64\n"
+"	bl DungeonRandInt\n"
+"	cmp r0, 0x31\n"
+"	bgt _0805073C\n"
+"	movs r0, 0x1\n"
+"	str r0, [sp, 0x74]\n"
+"	movs r1, 0x1F\n"
+"	mov r10, r1\n"
+"	movs r2, 0x1\n"
+"	negs r2, r2\n"
+"	str r2, [sp, 0x70]\n"
+"	b _08050746\n"
+"	.align 2, 0\n"
+"_08050738: .4byte gUnknown_80F6DF8\n"
+"_0805073C:\n"
+"	movs r0, 0\n"
+"	str r0, [sp, 0x74]\n"
+"	mov r10, r0\n"
+"	movs r1, 0x1\n"
+"	str r1, [sp, 0x70]\n"
+"_08050746:\n"
+"	movs r0, 0x32\n"
+"	bl DungeonRandInt\n"
+"	adds r0, 0xA\n"
+"	str r0, [sp, 0x78]\n"
+"	movs r0, 0x2\n"
+"	movs r1, 0x36\n"
+"	bl DungeonRandRange\n"
+"	mov r9, r0\n"
+"	movs r2, 0\n"
+"	str r2, [sp, 0x6C]\n"
+"	subs r4, 0x1\n"
+"	str r4, [sp, 0x98]\n"
+"_08050762:\n"
+"	movs r0, 0x6\n"
+"	bl DungeonRandInt\n"
+"	adds r0, 0x2\n"
+"	str r0, [sp, 0x68]\n"
+"	cmp r0, 0\n"
+"	bne _08050772\n"
+"	b _08050A38\n"
+"_08050772:\n"
+"	mov r0, r9\n"
+"	cmp r0, 0x37\n"
+"	bhi _080507B8\n"
+"	mov r1, r10\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	movs r0, 0x3\n"
+"	ands r0, r1\n"
+"	cmp r0, 0x2\n"
+"	bne _0805078A\n"
+"	b _08050A74\n"
+"_0805078A:\n"
+"	mov r1, r9\n"
+"	cmp r1, 0\n"
+"	blt _080507A2\n"
+"	mov r2, r10\n"
+"	cmp r2, 0\n"
+"	blt _080507A2\n"
+"	mov r0, r9\n"
+"	cmp r0, 0x37\n"
+"	bgt _080507A2\n"
+"	mov r1, r10\n"
+"	cmp r1, 0x1F\n"
+"	ble _080507A6\n"
+"_080507A2:\n"
+"	movs r0, 0x1\n"
+"	b _080507A8\n"
+"_080507A6:\n"
+"	movs r0, 0\n"
+"_080507A8:\n"
+"	cmp r0, 0\n"
+"	bne _080507B8\n"
+"	mov r0, r9\n"
+"	mov r1, r10\n"
+"	bl GetTileSafe\n"
+"	bl SetSecondaryTerrainOnWall\n"
+"_080507B8:\n"
+"	ldr r2, [sp, 0x68]\n"
+"	subs r2, 0x1\n"
+"	str r2, [sp, 0x68]\n"
+"	ldr r0, [sp, 0x6C]\n"
+"	add r9, r0\n"
+"	ldr r1, [sp, 0x70]\n"
+"	add r10, r1\n"
+"	mov r2, r10\n"
+"	cmp r2, 0x1F\n"
+"	bls _080507CE\n"
+"	b _08050A38\n"
+"_080507CE:\n"
+"	ldr r0, [sp, 0x78]\n"
+"	subs r0, 0x1\n"
+"	str r0, [sp, 0x78]\n"
+"	cmp r0, 0\n"
+"	beq _080507DA\n"
+"	b _08050A30\n"
+"_080507DA:\n"
+"	movs r1, 0x3F\n"
+"	str r1, [sp, 0x7C]\n"
+"_080507DE:\n"
+"	movs r0, 0x7\n"
+"	bl DungeonRandInt\n"
+"	subs r0, 0x3\n"
+"	str r0, [sp, 0x84]\n"
+"	movs r0, 0x7\n"
+"	bl DungeonRandInt\n"
+"	subs r1, r0, 0x3\n"
+"	ldr r6, [sp, 0x84]\n"
+"	add r6, r9\n"
+"	subs r0, r6, 0x2\n"
+"	cmp r0, 0x33\n"
+"	bhi _080508DA\n"
+"	mov r2, r10\n"
+"	adds r5, r1, r2\n"
+"	cmp r5, 0x1\n"
+"	ble _080508DA\n"
+"	cmp r5, 0x1D\n"
+"	bgt _080508DA\n"
+"	adds r4, r6, 0x1\n"
+"	adds r0, r5, 0x1\n"
+"	mov r8, r0\n"
+"	adds r0, r4, 0\n"
+"	mov r1, r8\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	movs r2, 0x3\n"
+"	adds r0, r2, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0x2\n"
+"	beq _080508B2\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r5, 0\n"
+"	str r2, [sp, 0x9C]\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	adds r0, r2, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0x2\n"
+"	beq _080508B2\n"
+"	subs r7, r5, 0x1\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r7, 0\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	adds r0, r2, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0x2\n"
+"	beq _080508B2\n"
+"	adds r0, r6, 0\n"
+"	mov r1, r8\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	adds r0, r2, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0x2\n"
+"	beq _080508B2\n"
+"	adds r0, r6, 0\n"
+"	adds r1, r7, 0\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	adds r0, r2, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0x2\n"
+"	beq _080508B2\n"
+"	subs r4, r6, 0x1\n"
+"	adds r0, r4, 0\n"
+"	mov r1, r8\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	adds r0, r2, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0x2\n"
+"	beq _080508B2\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r5, 0\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	adds r0, r2, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0x2\n"
+"	beq _080508B2\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r7, 0\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	adds r0, r2, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0x2\n"
+"	bne _080508DA\n"
+"_080508B2:\n"
+"	ldr r0, [sp, 0x84]\n"
+"	add r0, r9\n"
+"	cmp r0, 0\n"
+"	blt _080508C6\n"
+"	cmp r5, 0\n"
+"	blt _080508C6\n"
+"	cmp r0, 0x37\n"
+"	bgt _080508C6\n"
+"	cmp r5, 0x1F\n"
+"	ble _080508CA\n"
+"_080508C6:\n"
+"	movs r1, 0x1\n"
+"	b _080508CC\n"
+"_080508CA:\n"
+"	movs r1, 0\n"
+"_080508CC:\n"
+"	cmp r1, 0\n"
+"	bne _080508DA\n"
+"	adds r1, r5, 0\n"
+"	bl GetTileSafe\n"
+"	bl SetSecondaryTerrainOnWall\n"
+"_080508DA:\n"
+"	ldr r1, [sp, 0x7C]\n"
+"	subs r1, 0x1\n"
+"	str r1, [sp, 0x7C]\n"
+"	cmp r1, 0\n"
+"	blt _080508E6\n"
+"	b _080507DE\n"
+"_080508E6:\n"
+"	movs r0, 0x3\n"
+"	negs r0, r0\n"
+"_080508EA:\n"
+"	movs r2, 0x3\n"
+"	negs r2, r2\n"
+"	str r2, [sp, 0x80]\n"
+"	mov r1, r9\n"
+"	adds r1, r0, r1\n"
+"	str r1, [sp, 0x90]\n"
+"	adds r0, 0x1\n"
+"	str r0, [sp, 0x8C]\n"
+"	adds r7, r1, 0\n"
+"	mov r5, r10\n"
+"	subs r5, 0x3\n"
+"_08050900:\n"
+"	movs r6, 0\n"
+"	subs r0, r7, 0x2\n"
+"	cmp r0, 0x33\n"
+"	bls _0805090A\n"
+"	b _08050A1A\n"
+"_0805090A:\n"
+"	str r5, [sp, 0x88]\n"
+"	str r5, [sp, 0x94]\n"
+"	cmp r5, 0x1\n"
+"	bgt _08050914\n"
+"	b _08050A1A\n"
+"_08050914:\n"
+"	cmp r5, 0x1D\n"
+"	ble _0805091A\n"
+"	b _08050A1A\n"
+"_0805091A:\n"
+"	adds r4, r7, 0x1\n"
+"	adds r3, r5, 0x1\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r3, 0\n"
+"	str r3, [sp, 0xA0]\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	movs r2, 0x3\n"
+"	mov r8, r2\n"
+"	mov r0, r8\n"
+"	ands r0, r1\n"
+"	ldr r3, [sp, 0xA0]\n"
+"	cmp r0, 0x2\n"
+"	bne _0805093A\n"
+"	movs r6, 0x1\n"
+"_0805093A:\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r5, 0\n"
+"	str r3, [sp, 0xA0]\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	mov r0, r8\n"
+"	ands r0, r1\n"
+"	ldr r3, [sp, 0xA0]\n"
+"	cmp r0, 0x2\n"
+"	bne _08050952\n"
+"	adds r6, 0x1\n"
+"_08050952:\n"
+"	subs r2, r5, 0x1\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r2, 0\n"
+"	str r2, [sp, 0x9C]\n"
+"	str r3, [sp, 0xA0]\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	mov r0, r8\n"
+"	ands r0, r1\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	ldr r3, [sp, 0xA0]\n"
+"	cmp r0, 0x2\n"
+"	bne _08050970\n"
+"	adds r6, 0x1\n"
+"_08050970:\n"
+"	adds r0, r7, 0\n"
+"	adds r1, r3, 0\n"
+"	str r2, [sp, 0x9C]\n"
+"	str r3, [sp, 0xA0]\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	mov r0, r8\n"
+"	ands r0, r1\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	ldr r3, [sp, 0xA0]\n"
+"	cmp r0, 0x2\n"
+"	bne _0805098C\n"
+"	adds r6, 0x1\n"
+"_0805098C:\n"
+"	adds r0, r7, 0\n"
+"	adds r1, r2, 0\n"
+"	str r2, [sp, 0x9C]\n"
+"	str r3, [sp, 0xA0]\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	mov r0, r8\n"
+"	ands r0, r1\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	ldr r3, [sp, 0xA0]\n"
+"	cmp r0, 0x2\n"
+"	bne _080509A8\n"
+"	adds r6, 0x1\n"
+"_080509A8:\n"
+"	subs r4, r7, 0x1\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r3, 0\n"
+"	str r2, [sp, 0x9C]\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	mov r0, r8\n"
+"	ands r0, r1\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	cmp r0, 0x2\n"
+"	bne _080509C2\n"
+"	adds r6, 0x1\n"
+"_080509C2:\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r5, 0\n"
+"	str r2, [sp, 0x9C]\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	mov r0, r8\n"
+"	ands r0, r1\n"
+"	ldr r2, [sp, 0x9C]\n"
+"	cmp r0, 0x2\n"
+"	bne _080509DA\n"
+"	adds r6, 0x1\n"
+"_080509DA:\n"
+"	adds r0, r4, 0\n"
+"	adds r1, r2, 0\n"
+"	bl GetTile\n"
+"	ldrh r1, [r0]\n"
+"	mov r0, r8\n"
+"	ands r0, r1\n"
+"	cmp r0, 0x2\n"
+"	bne _080509EE\n"
+"	adds r6, 0x1\n"
+"_080509EE:\n"
+"	cmp r6, 0x3\n"
+"	ble _08050A1A\n"
+"	cmp r7, 0\n"
+"	blt _08050A04\n"
+"	cmp r5, 0\n"
+"	blt _08050A04\n"
+"	cmp r7, 0x37\n"
+"	bgt _08050A04\n"
+"	ldr r0, [sp, 0x88]\n"
+"	cmp r0, 0x1F\n"
+"	ble _08050A08\n"
+"_08050A04:\n"
+"	movs r0, 0x1\n"
+"	b _08050A0A\n"
+"_08050A08:\n"
+"	movs r0, 0\n"
+"_08050A0A:\n"
+"	cmp r0, 0\n"
+"	bne _08050A1A\n"
+"	ldr r0, [sp, 0x90]\n"
+"	ldr r1, [sp, 0x94]\n"
+"	bl GetTileSafe\n"
+"	bl SetSecondaryTerrainOnWall\n"
+"_08050A1A:\n"
+"	adds r5, 0x1\n"
+"	ldr r1, [sp, 0x80]\n"
+"	adds r1, 0x1\n"
+"	str r1, [sp, 0x80]\n"
+"	cmp r1, 0x3\n"
+"	bgt _08050A28\n"
+"	b _08050900\n"
+"_08050A28:\n"
+"	ldr r0, [sp, 0x8C]\n"
+"	cmp r0, 0x3\n"
+"	bgt _08050A30\n"
+"	b _080508EA\n"
+"_08050A30:\n"
+"	ldr r2, [sp, 0x68]\n"
+"	cmp r2, 0\n"
+"	beq _08050A38\n"
+"	b _08050772\n"
+"_08050A38:\n"
+"	ldr r0, [sp, 0x6C]\n"
+"	cmp r0, 0\n"
+"	beq _08050A54\n"
+"	movs r1, 0x1\n"
+"	str r1, [sp, 0x70]\n"
+"	ldr r2, [sp, 0x74]\n"
+"	cmp r2, 0\n"
+"	beq _08050A4E\n"
+"	movs r0, 0x1\n"
+"	negs r0, r0\n"
+"	str r0, [sp, 0x70]\n"
+"_08050A4E:\n"
+"	movs r1, 0\n"
+"	str r1, [sp, 0x6C]\n"
+"	b _08050A6C\n"
+"_08050A54:\n"
+"	movs r0, 0x64\n"
+"	bl DungeonRandInt\n"
+"	movs r2, 0x1\n"
+"	str r2, [sp, 0x6C]\n"
+"	cmp r0, 0x31\n"
+"	bgt _08050A68\n"
+"	movs r0, 0x1\n"
+"	negs r0, r0\n"
+"	str r0, [sp, 0x6C]\n"
+"_08050A68:\n"
+"	movs r1, 0\n"
+"	str r1, [sp, 0x70]\n"
+"_08050A6C:\n"
+"	mov r2, r10\n"
+"	cmp r2, 0x1F\n"
+"	bhi _08050A74\n"
+"	b _08050762\n"
+"_08050A74:\n"
+"	ldr r4, [sp, 0x98]\n"
+"	cmp r4, 0\n"
+"	beq _08050A7C\n"
+"	b _0805071C\n"
+"_08050A7C:\n"
+"	movs r0, 0\n"
+"	ldr r1, [sp, 0x64]\n"
+"	ldrb r1, [r1, 0x15]\n"
+"	cmp r0, r1\n"
+"	blt _08050A88\n"
+"	b _08050BAE\n"
+"_08050A88:\n"
+"	movs r2, 0\n"
+"	mov r8, r2\n"
+"	mov r9, r2\n"
+"	movs r5, 0\n"
+"	adds r0, 0x1\n"
+"	mov r10, r0\n"
+"	b _08050A98\n"
+"_08050A96:\n"
+"	adds r5, 0x1\n"
+"_08050A98:\n"
+"	cmp r5, 0xC7\n"
+"	bgt _08050AC2\n"
+"	movs r0, 0\n"
+"	movs r1, 0x38\n"
+"	bl DungeonRandRange\n"
+"	mov r9, r0\n"
+"	movs r0, 0\n"
+"	movs r1, 0x20\n"
+"	bl DungeonRandRange\n"
+"	mov r8, r0\n"
+"	mov r0, r9\n"
+"	subs r0, 0x1\n"
+"	cmp r0, 0x35\n"
+"	bhi _08050A96\n"
+"	mov r0, r8\n"
+"	cmp r0, 0\n"
+"	ble _08050A96\n"
+"	cmp r0, 0x1E\n"
+"	bgt _08050A96\n"
+"_08050AC2:\n"
+"	cmp r5, 0xC8\n"
+"	beq _08050BA2\n"
+"	movs r7, 0\n"
+"	movs r3, 0x1\n"
+"	movs r1, 0\n"
+"_08050ACC:\n"
+"	movs r2, 0\n"
+"	lsls r0, r7, 2\n"
+"	adds r4, r7, 0x1\n"
+"	adds r0, r7\n"
+"	lsls r0, 1\n"
+"	add r0, sp\n"
+"_08050AD8:\n"
+"	cmp r7, 0\n"
+"	beq _08050AE8\n"
+"	cmp r7, 0x9\n"
+"	beq _08050AE8\n"
+"	cmp r2, 0\n"
+"	beq _08050AE8\n"
+"	cmp r2, 0x9\n"
+"	bne _08050AEC\n"
+"_08050AE8:\n"
+"	strb r3, [r0]\n"
+"	b _08050AEE\n"
+"_08050AEC:\n"
+"	strb r1, [r0]\n"
+"_08050AEE:\n"
+"	adds r0, 0x1\n"
+"	adds r2, 0x1\n"
+"	cmp r2, 0x9\n"
+"	ble _08050AD8\n"
+"	adds r7, r4, 0\n"
+"	cmp r7, 0x9\n"
+"	ble _08050ACC\n"
+"	movs r5, 0x4F\n"
+"_08050AFE:\n"
+"	movs r0, 0x8\n"
+"	bl DungeonRandInt\n"
+"	adds r4, r0, 0\n"
+"	adds r7, r4, 0x1\n"
+"	movs r0, 0x8\n"
+"	bl DungeonRandInt\n"
+"	adds r2, r0, 0x1\n"
+"	lsls r0, r4, 2\n"
+"	adds r0, r4\n"
+"	lsls r0, 1\n"
+"	adds r0, r2, r0\n"
+"	add r0, sp\n"
+"	ldrb r0, [r0]\n"
+"	cmp r0, 0\n"
+"	bne _08050B50\n"
+"	adds r1, r7, 0x1\n"
+"	lsls r0, r1, 2\n"
+"	adds r0, r1\n"
+"	lsls r0, 1\n"
+"	adds r0, r2, r0\n"
+"	add r0, sp\n"
+"	ldrb r0, [r0]\n"
+"	cmp r0, 0\n"
+"	bne _08050B50\n"
+"	lsls r0, r7, 2\n"
+"	adds r0, r7\n"
+"	lsls r1, r0, 1\n"
+"	subs r0, r1, 0x1\n"
+"	adds r0, r2, r0\n"
+"	add r0, sp\n"
+"	ldrb r0, [r0]\n"
+"	cmp r0, 0\n"
+"	bne _08050B50\n"
+"	adds r0, r1, 0x1\n"
+"	adds r0, r2, r0\n"
+"	add r0, sp\n"
+"	ldrb r0, [r0]\n"
+"	cmp r0, 0\n"
+"	beq _08050B60\n"
+"_08050B50:\n"
+"	lsls r0, r7, 2\n"
+"	adds r0, r7\n"
+"	lsls r0, 1\n"
+"	adds r0, r2, r0\n"
+"	mov r2, sp\n"
+"	adds r1, r2, r0\n"
+"	movs r0, 0x1\n"
+"	strb r0, [r1]\n"
+"_08050B60:\n"
+"	subs r5, 0x1\n"
+"	cmp r5, 0\n"
+"	bge _08050AFE\n"
+"	movs r7, 0\n"
+"_08050B68:\n"
+"	lsls r0, r7, 2\n"
+"	adds r4, r7, 0x1\n"
+"	adds r0, r7\n"
+"	lsls r0, 1\n"
+"	mov r6, r8\n"
+"	subs r6, 0x5\n"
+"	mov r1, sp\n"
+"	adds r5, r0, r1\n"
+"	add r7, r9\n"
+"	movs r2, 0x9\n"
+"_08050B7C:\n"
+"	ldrb r0, [r5]\n"
+"	cmp r0, 0\n"
+"	bne _08050B92\n"
+"	subs r0, r7, 0x5\n"
+"	adds r1, r6, 0\n"
+"	str r2, [sp, 0x9C]\n"
+"	bl GetTileSafe\n"
+"	bl SetSecondaryTerrainOnWall\n"
+"	ldr r2, [sp, 0x9C]\n"
+"_08050B92:\n"
+"	adds r6, 0x1\n"
+"	adds r5, 0x1\n"
+"	subs r2, 0x1\n"
+"	cmp r2, 0\n"
+"	bge _08050B7C\n"
+"	adds r7, r4, 0\n"
+"	cmp r7, 0x9\n"
+"	ble _08050B68\n"
+"_08050BA2:\n"
+"	mov r0, r10\n"
+"	ldr r2, [sp, 0x64]\n"
+"	ldrb r2, [r2, 0x15]\n"
+"	cmp r0, r2\n"
+"	bge _08050BAE\n"
+"	b _08050A88\n"
+"_08050BAE:\n"
+"	movs r0, 0\n"
+"	mov r9, r0\n"
+"	movs r6, 0x1\n"
+"	ldr r1, _08050BF4\n"
+"	adds r5, r1, 0\n"
+"_08050BB8:\n"
+"	movs r2, 0\n"
+"	mov r10, r2\n"
+"	mov r4, r9\n"
+"	adds r4, 0x1\n"
+"_08050BC0:\n"
+"	mov r0, r9\n"
+"	mov r1, r10\n"
+"	bl GetTileSafe\n"
+"	adds r2, r0, 0\n"
+"	ldrh r3, [r2]\n"
+"	movs r0, 0x3\n"
+"	ands r0, r3\n"
+"	cmp r0, 0x2\n"
+"	bne _08050C10\n"
+"	movs r1, 0xB0\n"
+"	lsls r1, 1\n"
+"	adds r0, r1, 0\n"
+"	ands r0, r3\n"
+"	cmp r0, 0\n"
+"	bne _08050BEA\n"
+"	ldrh r1, [r2, 0x4]\n"
+"	adds r0, r6, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0\n"
+"	beq _08050BF8\n"
+"_08050BEA:\n"
+"	adds r0, r3, 0\n"
+"	ands r0, r5\n"
+"	orrs r0, r6\n"
+"	b _08050C0E\n"
+"	.align 2, 0\n"
+"_08050BF4: .4byte 0x0000fffc\n"
+"_08050BF8:\n"
+"	mov r0, r9\n"
+"	subs r0, 0x2\n"
+"	cmp r0, 0x34\n"
+"	bhi _08050C0A\n"
+"	mov r0, r10\n"
+"	cmp r0, 0x1\n"
+"	ble _08050C0A\n"
+"	cmp r0, 0x1E\n"
+"	ble _08050C10\n"
+"_08050C0A:\n"
+"	ldrh r0, [r2]\n"
+"	ands r0, r5\n"
+"_08050C0E:\n"
+"	strh r0, [r2]\n"
+"_08050C10:\n"
+"	movs r1, 0x1\n"
+"	add r10, r1\n"
+"	mov r2, r10\n"
+"	cmp r2, 0x1F\n"
+"	ble _08050BC0\n"
+"	mov r9, r4\n"
+"	cmp r4, 0x37\n"
+"	ble _08050BB8\n"
+"_08050C20:\n"
+"	add sp, 0xA4\n"
+"	pop {r3-r5}\n"
+"	mov r8, r3\n"
+"	mov r9, r4\n"
+"	mov r10, r5\n"
+"	pop {r4-r7}\n"
+"	pop {r0}\n"
+"	bx r0\n");
+}
+#endif // NONMATCHING
+
+#define STAIRS_FLAG_CANNOT_CORNER_CUT 0x1 // Set to `true` for non-open terrain tiles which have `TERRAIN_TYPE_CORNER_CUTTABLE` in their [TerrainFlags]
+#define STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT 0x2 // Set to `true` for secondary terrain tiles which have `TERRAIN_TYPE_CORNER_CUTTABLE` in their [TerrainFlags]
+#define STAIRS_FLAG_UNKNOWN 0x4 // Not fully understood field. Is tested in relation to corners, but appears to never be set to `true`.
+#define STAIRS_FLAG_STARTING_POINT 0x10 // Determines the starting point for graph traversal, set to `true` on the Stairs tile.
+#define STAIRS_FLAG_IN_VISIT_QUEUE 0x40 // Set to `true` for tiles which are currently queued to be visited.
+#define STAIRS_FLAG_VISITED 0x80 // Set to `true` for tiles which have been visit
+
+/*
+ * StairsAlwaysReachable - Checks that the stairs are always reachable from every walkable tile on the floor
+ *
+ * Uses a graph-traversal similar to Breadth-First Search (but with slightly different order due to how
+ * iteration works))
+ *
+ * If any tile is walkable but wasn't reached, this function will return FALSE.
+ * If every tile was reached, this function will return TRUE.
+ */
+bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable)
+{
+    s32 x, y;
+	u8 test[DUNGEON_MAX_SIZE_X][DUNGEON_MAX_SIZE_Y];
+
+	for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+		for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+		    Tile *tile = GetTileSafe(x, y);
+            u16 terrain = GetTerrainType(tile);
+
+            test[x][y] = 0;
+			if (markUnreachable) {
+				// Reset all unreachable flags on tiles, they'll be recomputed from scratch
+				tile->terrainType &= ~(TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS);
+			}
+
+			if (terrain != TERRAIN_TYPE_NORMAL) {
+				if (!(tile->terrainType & TERRAIN_TYPE_CORNER_CUTTABLE)) {
+					test[x][y] |= STAIRS_FLAG_CANNOT_CORNER_CUT;
+				}
+			}
+
+			if (terrain == TERRAIN_TYPE_SECONDARY) {
+				if (!(tile->terrainType & TERRAIN_TYPE_CORNER_CUTTABLE)) {
+					test[x][y] |= STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT;
+				}
+			}
+		}
+	}
+
+	test[stairsX][stairsY] |= STAIRS_FLAG_STARTING_POINT | STAIRS_FLAG_IN_VISIT_QUEUE;
+
+	if (gDungeon->stairsSpawn.x != stairsX || gDungeon->stairsSpawn.y != stairsY) {
+		return FALSE;
+	}
+
+	sNumTilesReachableFromStairs = 0;
+
+	// Uses a semi-BFS starting from the stairs until all reachable tiles
+	// have been visited
+	while (1) {
+        s32 checked = 0;
+		sNumTilesReachableFromStairs += 1;
+
+		for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+			for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+				if (!(test[x][y] & STAIRS_FLAG_VISITED) && test[x][y] & STAIRS_FLAG_IN_VISIT_QUEUE) {
+					checked++;
+					test[x][y] &= ~(STAIRS_FLAG_IN_VISIT_QUEUE);
+					test[x][y] |= STAIRS_FLAG_VISITED;
+
+					// Queue up in cardinal directions of this tile
+
+					// Left
+					if (x > 0 && !(test[x - 1][y] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_VISITED))) {
+						test[x - 1][y] |= STAIRS_FLAG_IN_VISIT_QUEUE;
+					}
+
+					// Up
+					if (y > 0 && !(test[x][y - 1] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_VISITED))) {
+						test[x][y - 1] |= STAIRS_FLAG_IN_VISIT_QUEUE;
+					}
+
+					// Right
+					if (x < DUNGEON_MAX_SIZE_X - 1 && !(test[x + 1][y] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_VISITED))) {
+						test[x + 1][y] |= STAIRS_FLAG_IN_VISIT_QUEUE;
+					}
+
+					// Down
+					if (y < DUNGEON_MAX_SIZE_Y - 1 && !(test[x][y + 1] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_VISITED))) {
+						test[x][y + 1] |= STAIRS_FLAG_IN_VISIT_QUEUE;
+					}
+
+					// Up-left
+					if (x > 0 && y > 0
+                        && !(test[x - 1][y - 1] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_VISITED | STAIRS_FLAG_UNKNOWN))
+                        && !(test[x - 1][y] & STAIRS_FLAG_CANNOT_CORNER_CUT)
+                        && !(test[x][y - 1] & STAIRS_FLAG_CANNOT_CORNER_CUT))
+                    {
+                        test[x - 1][y - 1] |= STAIRS_FLAG_IN_VISIT_QUEUE;
+                    }
+
+					// Up-Right
+					if (x < DUNGEON_MAX_SIZE_X - 1 && y > 0
+                        && !(test[x + 1][y - 1] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_VISITED | STAIRS_FLAG_UNKNOWN))
+                        && !(test[x + 1][y] & STAIRS_FLAG_CANNOT_CORNER_CUT)
+                        && !(test[x][y - 1] & STAIRS_FLAG_CANNOT_CORNER_CUT))
+                    {
+                        test[x + 1][y - 1] |= STAIRS_FLAG_IN_VISIT_QUEUE;
+                    }
+
+					// Down-left
+					if (x > 0 && y < DUNGEON_MAX_SIZE_Y - 1
+                        && !(test[x - 1][y + 1] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_VISITED | STAIRS_FLAG_UNKNOWN))
+                        && !(test[x - 1][y] & STAIRS_FLAG_CANNOT_CORNER_CUT)
+                        && !(test[x][y + 1] & STAIRS_FLAG_CANNOT_CORNER_CUT))
+                    {
+                        test[x - 1][y + 1] |= STAIRS_FLAG_IN_VISIT_QUEUE;
+                    }
+
+					// Down-right
+					if (x < DUNGEON_MAX_SIZE_X - 1 && y < DUNGEON_MAX_SIZE_Y - 1
+                        && !(test[x + 1][y + 1] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_VISITED | STAIRS_FLAG_UNKNOWN))
+                        && !(test[x + 1][y] & STAIRS_FLAG_CANNOT_CORNER_CUT)
+                        && !(test[x][y + 1] & STAIRS_FLAG_CANNOT_CORNER_CUT))
+                    {
+                        test[x + 1][y + 1] |= STAIRS_FLAG_IN_VISIT_QUEUE;
+                    }
+				}
+			}
+		}
+
+        if (checked == 0)
+            break;
+	}
+
+	for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+		for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+            Tile *tile = GetTileSafe(x, y);
+
+            if (!(test[x][y] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_UNKNOWN | STAIRS_FLAG_VISITED))) {
+                // This is an open tile that wasn't visited by BFS, which means it's unreachable from the starting stairs
+                if (markUnreachable) {
+                    tile->terrainType |= TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS;
+                }
+                else {
+                    // unbreakable tiles can't really be navigated onto anyways, so if
+					// we can ignore the tile (otherwise it's a problem!)
+					if (!(tile->terrainType & TERRAIN_TYPE_UNBREAKABLE)) {
+                        return FALSE;
+					}
+                }
+            }
+		}
+	}
+
+	return TRUE;
+}
+
+/*
+void sub_8050F90(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, s32 a5, s32 x2, s32 y2)
+{
+
+}
+*/
 
 //
