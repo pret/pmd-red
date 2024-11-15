@@ -44,7 +44,7 @@ enum AdventureAchievement
 // size: 0xC4
 struct unkStruct_203B494
 {
-    /* 0x4 */ u32 achievements; // Adventure achievement flags
+    /* 0x0 */ u32 achievements; // Adventure achievement flags
     /* 0x4 */ s32 numAdventures;
     /* 0x8 */ s32 friendRescueSuccesses;
     /* 0xC */ s32 numEvolved;
