@@ -75,8 +75,8 @@ void sub_804225C(Entity *, DungeonPos *, u8);
 void sub_8071DA4(Entity *);
 void sub_806A1E8(Entity *pokemon);
 u8 sub_803D6FC(void);
-extern void sub_807DF38(Entity *pokemon, Entity *target, DungeonPos *pos, u32,
-			u8 moveType, s16);
+Entity *sub_8045684(u8, DungeonPos *, u8);
+extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 
 void sub_807FC3C(DungeonPos *pos, u32 trapID, u32 param_3)
 {
@@ -463,12 +463,12 @@ void HandlePoisonTrap(Entity *pokemon, Entity *target)
 
 void HandleSelfdestructTrap(Entity *pokemon, Entity *target)
 {
-    sub_807DF38(pokemon, target, &target->pos, 1, TYPE_NONE, 0x212);
+    HandleExplosion(pokemon, target, &target->pos, 1, TYPE_NONE, 0x212);
 }
 
 void HandleExplosionTrap(Entity *pokemon, Entity *target)
 {
-    sub_807DF38(pokemon, target, &target->pos, 2, TYPE_NONE, 0x212);
+    HandleExplosion(pokemon, target, &target->pos, 2, TYPE_NONE, 0x212);
 }
 
 void HandleGrimyTrap(Entity *pokemon, Entity *target)

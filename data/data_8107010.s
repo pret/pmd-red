@@ -48,7 +48,7 @@ gUnknown_810702C: @ 810702C
 .string "pksdir0\0"
 .string "pksdir0\0"
 .string "pksdir0\0"
-@ sub_807DF38
+@ HandleExplosion 
 .string "pksdir0\0"
 
 .global gUnknown_81070E8

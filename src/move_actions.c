@@ -193,8 +193,7 @@ extern void sub_806A6E8(Entity *);
 
 extern void EndAbilityImmuneStatus(Entity *, Entity *);
 extern u8 sub_806F4A4(Entity *, u32);
-extern void sub_807DF38(Entity *pokemon, Entity *target, DungeonPos *pos, u32,
-			u8 moveType, s16);
+extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 extern void nullsub_92(Entity *);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern u8 sub_807EAA0(u32, u32);
@@ -1506,7 +1505,7 @@ bool8 LickMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
 bool8 SelfDestructMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-    sub_807DF38(pokemon, target, &target->pos, 1, GetMoveType(move), sub_8057600(move, param_4));
+    HandleExplosion(pokemon, target, &target->pos, 1, GetMoveType(move), sub_8057600(move, param_4));
     return TRUE;
 }
 
@@ -1849,7 +1848,7 @@ bool8 FlyMoveAction(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 
 bool8 ExplosionMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 {
-    sub_807DF38(pokemon,target,&target->pos,2,GetMoveType(move),sub_8057600(move,param_4));
+    HandleExplosion(pokemon,target,&target->pos,2,GetMoveType(move),sub_8057600(move,param_4));
     return TRUE;
 }
 

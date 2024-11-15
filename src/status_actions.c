@@ -57,7 +57,7 @@ extern void HandlePounceOrbAction(Entity *, Entity *, s32);
 extern s16 sub_803D970(u32);
 extern bool8 sub_806AA0C(s32, u32);
 extern void sub_806BB6C(Entity *, s32);
-extern void sub_807E254(Entity *, Entity *, u32);
+extern void HandleSwitcherOrb(Entity *, Entity *, u32);
 extern u32 HandleDamagingMove(Entity *, Entity *, Move *, u32, u32);
 extern void sub_806A6E8(Entity *);
 extern u8 sub_8069D18(DungeonPos *);
@@ -739,7 +739,7 @@ bool8 ReboundOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_
 bool8 SwitcherOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     SetExpMultplier(GetEntInfo(pokemon));
-    sub_807E254(pokemon, target, 1);
+    HandleSwitcherOrb(pokemon, target, 1);
     return TRUE;
 }
 
