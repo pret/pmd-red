@@ -182,7 +182,7 @@ static void GenerateNewQuestionOrGender(void)
     sPersonalityTestTracker->QuestionCounter++;
 
     if (sPersonalityTestTracker->QuestionCounter > MAX_ASKED_QUESTIONS) {
-        CreateMenuDialogueBoxAndPortrait(gGenderText, 0, 0, gGenderMenu, 0, 3, 0, 0, 257);
+        CreateMenuDialogueBoxAndPortrait(sGender0, 0, 0, gGenderMenu, 0, 3, 0, 0, 257);
         sPersonalityTestTracker->TestState = PERSONALITY_PLAYER_GENDER;
     }
     else {

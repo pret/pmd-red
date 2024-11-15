@@ -523,6 +523,12 @@ SECTIONS {
         src/load_screen.o(.rodata);
         src/wonder_mail_main_menu.o(.rodata);
         src/debug_menu1.o(.rodata);
+        src/debug_unused1.o(.rodata);
+        src/debug_unused2.o(.rodata);
+        src/debug_unused3.o(.rodata);
+        src/debug_unused4.o(.rodata);
+        src/debug_unused5.o(.rodata);
+        src/debug_unused6.o(.rodata);
         src/debug_menu2.o(.rodata);
         src/debug_menu3.o(.rodata);
         src/debug_menu4.o(.rodata);

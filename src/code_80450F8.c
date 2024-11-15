@@ -270,7 +270,7 @@ Entity *sub_80453AC(s16 id)
     s32 r9;
     s32 timer; // sp0
 
-    id = a;
+    id = a; // SpeciesId() ?
     r9 = -1;
     r6 = GetBodySize(id);
 

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_8097670.h"
 #include "constants/friend_area.h"
 #include "constants/main_menu.h"

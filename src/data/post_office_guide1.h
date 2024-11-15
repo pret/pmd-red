@@ -21,68 +21,43 @@ enum PostOfficeMenuActions
     SEND_THANK_YOU_MAIL
 };
 
-static const u8 sPostOffice[];
-static const u8 sBulletinBoard[];
-static const u8 sDelivery[];
-static const u8 sFriendRescue[];
-static const u8 sCancel[];
-
-static const MenuItem sPostOfficeHelpStartMenu[] =
-{
-    {sPostOffice, POST_OFFICE},
-    {sBulletinBoard, BULLETIN_BOARD},
-    {sDelivery, DELIVERY},
-    {sFriendRescue, FRIEND_RESCUE},
-    {sCancel, CANCEL},
+static const MenuItem sPostOfficeHelpStartMenu[] = {
+    {_("Post Office"), POST_OFFICE},
+    {_("Bulletin Board"), BULLETIN_BOARD},
+    {_("Delivery"), DELIVERY},
+    {_("{COLOR YELLOW}Friend Rescue{RESET} "), FRIEND_RESCUE},
+    {_("Cancel"), CANCEL},
     {NULL, EXIT}
 };
-
-ALIGNED(4) static const u8 sCancel[] = _("Cancel");
-ALIGNED(4) static const u8 sFriendRescue[] = _("{COLOR YELLOW}Friend Rescue{RESET} ");
-ALIGNED(4) static const u8 sDelivery[] = _("Delivery");
-ALIGNED(4) static const u8 sBulletinBoard[] = _("Bulletin Board");
-ALIGNED(4) static const u8 sPostOffice[] = _("Post Office");
-
-static const u8 sFriendRescueInfo[];
-static const u8 sGoRescue[];
-static const u8 sGetHelp[];
-static const u8 sDeletingMailInfo[];
-static const u8 sExit[];
 
 static const MenuItem gPostOfficeHelpFriendRescueMenu[] =
 {
-    {sFriendRescueInfo, FRIEND_RESCUE_INFO},
-    {sGoRescue, GO_RESCUE},
-    {sGetHelp, GET_HELP_MENU},
-    {sDeletingMailInfo, DELETING_MAIL},
-    {sExit, EXIT},
+    {_("Friend Rescue Info"), FRIEND_RESCUE_INFO},
+    {_("{COLOR YELLOW}Go rescue{RESET} "), GO_RESCUE},
+    {_("{COLOR YELLOW}Get help{RESET} "), GET_HELP_MENU},
+    {_("Deleting Mail Info"), DELETING_MAIL},
+    {_("Exit"), EXIT},
     {NULL, EXIT}
 };
 
-ALIGNED(4) static const u8 sExit[] = _("Exit");
-ALIGNED(4) static const u8 sDeletingMailInfo[] = _("Deleting Mail Info");
-ALIGNED(4) static const u8 sGetHelp[] = _("{COLOR YELLOW}Get help{RESET} ");
-ALIGNED(4) static const u8 sGoRescue[] = _("{COLOR YELLOW}Go rescue{RESET} ");
-ALIGNED(4) static const u8 sFriendRescueInfo[] = _("Friend Rescue Info");
-
 static const MenuItem sPostOfficeHelpGoRescueMenu[] =
 {
-    {"Rescue Procedures", RESCUE_PROCEDURES},
-    {"Receive SOS Mail", RECEIVE_SOS_MAIL},
-    {"Leave for Rescue", LEAVE_FOR_RESCUE},
-    {"Send A-OK Mail", SEND_AOK_MAIL},
-    {"Get Thank-You Mail", GET_THANK_YOU_MAIL},
-    {sExit, EXIT}, // Typing "Exit" as a literal will automatically point to the previous one also
+    {_("Rescue Procedures"), RESCUE_PROCEDURES},
+    {_("Receive SOS Mail"), RECEIVE_SOS_MAIL},
+    {_("Leave for Rescue"), LEAVE_FOR_RESCUE},
+    {_("Send A-OK Mail"), SEND_AOK_MAIL},
+    {_("Get Thank-You Mail"), GET_THANK_YOU_MAIL},
+    {_("Exit"), EXIT},
     {NULL, EXIT}
 };
 
 static const MenuItem sPostOfficeHelpGetHelpMenu[] =
 {
-    {"Getting Help", GETTING_HELP},
-    {"Send SOS Mail", SEND_SOS_MAIL},
-    {"Receive A-OK Mail", RECEIVE_AOK_MAIL},
-    {"Send Thank-You Mail", SEND_THANK_YOU_MAIL},
-    {sExit, EXIT}, // Typing "Exit" as a literal will automatically point to the previous one also
+    {_("Getting Help"), GETTING_HELP},
+    {_("Send SOS Mail"), SEND_SOS_MAIL},
+    {_("Receive A-OK Mail"), RECEIVE_AOK_MAIL},
+    {_("Send Thank-You Mail"), SEND_THANK_YOU_MAIL},
+    {_("Exit"), EXIT},
     {NULL, EXIT}
 };
 

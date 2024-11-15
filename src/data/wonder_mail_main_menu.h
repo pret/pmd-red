@@ -1,35 +1,31 @@
-
-
-const MenuItem gSelectWonderMailModeMainMenuItems[3] =
-{
-    {"Send", WONDER_MAIL_MODE_SEND},
-    {"Receive", WONDER_MAIL_MODE_RECEIVE},
+const MenuItem gSelectWonderMailModeMainMenuItems[] = {
+    {_("Send"), WONDER_MAIL_MODE_SEND},
+    {_("Receive"), WONDER_MAIL_MODE_RECEIVE},
     {NULL, 0}
 };
 
-const MenuItem gSendWonderMailMainMenuItems[4] =
-{
-    {"Game Link cable", WONDER_MAIL_GAME_LINK},
-    {"Password", -1},
-    {"Cancel", 8},
+const MenuItem gSendWonderMailMainMenuItems[] = {
+    {_("Game Link cable"), WONDER_MAIL_GAME_LINK},
+    {_("Password"), -1},
+    {_("Cancel"), 8},
     {NULL, 0}
 
 };
 
-const MenuItem gReceiveWonderMailMainMenuItems[4] =
-{
-    {"Game Link cable", WONDER_MAIL_GAME_LINK},
-    {"Password", WONDER_MAIL_PASSWORD},
-    {"Cancel", 8},
+const MenuItem gReceiveWonderMailMainMenuItems[] = {
+    {_("Game Link cable"), WONDER_MAIL_GAME_LINK},
+    {_("Password"), WONDER_MAIL_PASSWORD},
+    {_("Cancel"), 8},
     {NULL, 0}
 };
 
-const MenuItem gUnknown_80E78F8[3] =
-{
-    {"Yes", 6},
-    {"Cancel", 0},
+const MenuItem gUnknown_80E78F8[] = {
+    {_("Yes"), 6},
+    {_("Cancel"), 0},
     {NULL, 0}
 };
+
+
 
 ALIGNED(4) const char gUnknown_80E7914[] = "There was a communication error.";
 

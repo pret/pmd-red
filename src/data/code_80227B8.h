@@ -1,7 +1,7 @@
 static const MenuItem sUnknown_80DC584[3] =
 {
-    {"Yes", 2},
-    {"No", 3},
+    {_("Yes"), 2},
+    {_("No"), 3},
     {NULL, 1},
 };
 

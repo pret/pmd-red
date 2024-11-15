@@ -1,54 +1,44 @@
-
-
-const MenuItem gUnknown_80DD970[] =
-{
-    {"Receive SOS Mail", 0x0},
-    {"Leave for Rescue", 0x1},
-    {"Send A-OK Mail", 0x2},
-    {"Delete Mail", 0x3},
-    {"Cancel", 0xA},
-    {NULL, 0xA}
+const MenuItem gUnknown_80DD970[] = {
+    {_("Receive SOS Mail"), 0},
+    {_("Leave for Rescue"), 1},
+    {_("Send A-OK Mail"), 2},
+    {_("Delete Mail"), 3},
+    {_("Cancel"), 10},
+    {NULL, 10}
 };
 
-const MenuItem gUnknown_80DD9EC[] =
-{
-    {"Delete SOS Mail", 0x5},
-    {"Delete A-OK Mail", 0x6},
-    {"Delete All Mail", 0x7},
-    {"Cancel", 0xA},
-    {NULL, 0xA}
+const MenuItem gUnknown_80DD9EC[] = {
+    {_("Delete SOS Mail"), 5},
+    {_("Delete A-OK Mail"), 6},
+    {_("Delete All Mail"), 7},
+    {_("Cancel"), 10},
+    {NULL, 10}
 };
 
-const MenuItem gUnknown_80DDA48[] =
-{
-    {"Yes", 0x8},
-    {"Cancel", 0xA},
-    {NULL, 0xA}
+const MenuItem gUnknown_80DDA48[] = {
+    {_("Yes"), 8},
+    {_("Cancel"), 10},
+    {NULL, 10}
 };
 
-const MenuItem gUnknown_80DDA64[] =
-{
-    {"Yes", 0x8},
-    {"No", 0x9},
-    {NULL, 0xA}
+const MenuItem gUnknown_80DDA64[] = {
+    {_("Yes"), 8},
+    {_("No"), 9},
+    {NULL, 10}
 };
 
-const MenuItem gUnknown_80DDA80[] =
-{
-    {"Yes", 0x8},
-    {"No", 0x9},
-    {"Cancel", 0xA},
-    {NULL, 0xA}
+const MenuItem gUnknown_80DDA80[] = {
+    {_("Yes"), 8},
+    {_("No"), 9},
+    {_("Cancel"), 10},
+    {NULL, 10}
 };
 
-const MenuItem gUnknown_80DDAA0[] =
-{
-    {SendWOPokemon, 0x12},
-    {"Cancel", 0xA},
-    {NULL, 0xA},
+const MenuItem gUnknown_80DDAA0[] = {
+    {_("Send w/o Pokémon"), 18},
+    {_("Cancel"), 10},
+    {NULL, 10},
 };
-
-ALIGNED(4) const u8 SendWOPokemon[] = _("Send w/o Pokémon");
 
 const UnkTextStruct2 gUnknown_80DDACC =
 {
@@ -70,31 +60,27 @@ const UnkTextStruct2 gUnknown_80DDAE4 =
     NULL
 };
 
-const MenuItem gUnknown_80DDAFC[] =
-{
-    {"Confirm", 0xB},
-    {"Info", 0xC},
-    {NULL, 0xA},
+const MenuItem gUnknown_80DDAFC[] = {
+    {_("Confirm"), 11},
+    {_("Info"), 12},
+    {NULL, 10},
 };
 
-const MenuItem gUnknown_80DDB24[] =
-{
-    {"Game Link cable", 0xD},
-    {"Password", 0xF},
-    {"Cancel", 0xA},
-    {NULL, 0xA},
+const MenuItem gUnknown_80DDB24[] = {
+    {_("Game Link cable"), 13},
+    {_("Password"), 15},
+    {_("Cancel"), 10},
+    {NULL, 10},
 };
 
-const MenuItem gUnknown_80DDB60[] =
-{
-    {SendPokemon_80DDB98, 0x11},
-    {DontSendPokemon_80DDB80, 0x12},
-    {"Cancel", 0xA},
-    {NULL, 0xA},
+const MenuItem gUnknown_80DDB60[] = {
+    {_("Send Pokémon"), 17},
+    {_("Don't Send Pokémon"), 18},
+    {_("Cancel"), 10},
+    {NULL, 10},
 };
 
-ALIGNED(4) const u8 DontSendPokemon_80DDB80[] = _("Don't Send Pokémon");
-ALIGNED(4) const u8 SendPokemon_80DDB98[] = _("Send Pokémon");
+
 
 ALIGNED(4) const char gUnknown_80DDBA8[] = _(
 	" What you need to do is\n"
