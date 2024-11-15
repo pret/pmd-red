@@ -356,7 +356,7 @@ typedef struct Dungeon
     /* 0x3A0E */ s16 tileset;
     /* 0x3A10 */ s16 unk3A10;
     /* 0x3A12 */ s16 unk3A12;
-    /* 0x3A14 */ s16 bossBattleIndex;
+    /* 0x3A14 */ s16 fixedRoomId;
     /* 0x3A16 */ s16 unk3A16;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     /* 0xEA18 */ Position playerSpawn;

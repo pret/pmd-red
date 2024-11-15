@@ -66,10 +66,10 @@ struct GridCell
 
 #define GRID_CELL_LEN 15
 
-void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 x2, s32 y2, s32 a4, UnkDungeonGlobal_unk1C574 *unkPtr);
-void sub_8050F90(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, s32 a5, s32 x2, s32 y2);
-void sub_8051438(struct GridCell *gridCell, s32 a1);
-extern void sub_8051288(s32 a0);
+static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomId, UnkDungeonGlobal_unk1C574 *unkPtr);
+static void CreateRoomsAndAnchorsForFixedFloor(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, s32 a5, s32 fixedRoomSizeX, s32 fixedRoomSizeY);
+void sub_8051438(struct GridCell *gridCell, s32 fixedRoomId);
+void sub_8051288(s32 fixedRoomId);
 void GetGridPositions(s32 *listX, s32 *listY, s32 gridSizeX, s32 gridSizeY);
 void InitDungeonGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
 void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
@@ -94,7 +94,7 @@ void sub_804FC74(void);
 void sub_804EB30(void);
 void sub_804E9DC(void);
 void sub_804B534(s32 a0, s32 a1, s32 a2, s32 a3);
-bool8 sub_804C70C(s32, UnkDungeonGlobal_unk1C574 *);
+bool8 GenerateFixedFloor(s32 fixedRoomId, UnkDungeonGlobal_unk1C574 *unkPtr);
 void GenerateStandardFloor(s32 a0, s32 a1, UnkDungeonGlobal_unk1C574 *a2);
 void GenerateOuterRingFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateCrossroadsFloor(UnkDungeonGlobal_unk1C574 *a0);
@@ -210,8 +210,9 @@ void sub_804AFAC(void)
             gDungeon->playerSpawn.x = -1;
             gDungeon->playerSpawn.y = -1;
             gDungeon->forceMonsterHouse = 0;
-            if (gDungeon->bossBattleIndex != 0) {
-                if (sub_804C70C(gDungeon->bossBattleIndex, unkPtr)) {
+            if (gDungeon->fixedRoomId != 0) {
+                // Check for a full-floor fixed room, if this is the case, generation is done.
+                if (GenerateFixedFloor(gDungeon->fixedRoomId, unkPtr)) {
                     break;
                 }
             }
@@ -545,7 +546,7 @@ void NAKED sub_804AFAC(void)
 "	cmp r0, 0\n"
 "	beq _0804B164\n"
 "	mov r1, r8\n"
-"	bl sub_804C70C\n"
+"	bl GenerateFixedFloor\n"
 "	lsls r0, 24\n"
 "	cmp r0, 0\n"
 "	beq _0804B0E4\n"
@@ -1644,34 +1645,34 @@ void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, UnkDungeonGlobal_un
     GenerateSecondaryStructures(grid, gridSizeX, gridSizeY);
 }
 
-bool8 sub_804C70C(s32 a0, UnkDungeonGlobal_unk1C574 *unkPtr)
+bool8 GenerateFixedFloor(s32 fixedRoomId, UnkDungeonGlobal_unk1C574 *unkPtr)
 {
     struct PositionU8 **fileData = (void *) gDungeon->unk13568->data;
-    s32 x1 = fileData[a0]->x;
-    s32 y1 = fileData[a0]->y;
+    s32 fixedRoomSizeX = fileData[fixedRoomId]->x;
+    s32 fixedRoomSizeY = fileData[fixedRoomId]->y;
     s32 gridSizeX, gridSizeY;
 
-    if (x1 == 0 || y1 == 0) {
+    if (fixedRoomSizeX == 0 || fixedRoomSizeY == 0) {
         GenerateOneRoomMonsterHouseFloor();
         return FALSE;
     }
-    else if (a0 < 50) {
-        sub_8051288(a0);
+    else if (fixedRoomId < 50) {
+        sub_8051288(fixedRoomId);
         return TRUE;
     }
     else {
-        gridSizeX = DUNGEON_MAX_SIZE_X / (x1 + 4);
+        gridSizeX = DUNGEON_MAX_SIZE_X / (fixedRoomSizeX + 4);
         if (gridSizeX <= 1)
             gridSizeX = 1;
-        gridSizeY = DUNGEON_MAX_SIZE_Y / (y1 + 4);
+        gridSizeY = DUNGEON_MAX_SIZE_Y / (fixedRoomSizeY + 4);
         if (gridSizeY <= 1)
             gridSizeY = 1;
-        sub_804C790(gridSizeX, gridSizeY, x1, y1, a0, unkPtr);
+        sub_804C790(gridSizeX, gridSizeY, fixedRoomSizeX, fixedRoomSizeY, fixedRoomId, unkPtr);
         return FALSE;
     }
 }
 
-void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 x2, s32 y2, s32 a4, UnkDungeonGlobal_unk1C574 *unkPtr)
+static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomId, UnkDungeonGlobal_unk1C574 *unkPtr)
 {
     s32 tries;
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
@@ -1696,13 +1697,13 @@ void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 x2, s32 y2, s32 a4, UnkDungeo
         if (grid[cursorX][cursorY].isRoom)
             break;
     }
-    sub_8050F90(grid, gridSizeX, gridSizeY, listX, listY, r10, x2, y2);
+    CreateRoomsAndAnchorsForFixedFloor(grid, gridSizeX, gridSizeY, listX, listY, r10, fixedRoomSizeX, fixedRoomSizeY);
     if (gridSizeX != 1 || gridSizeY != 1) {
         AssignGridCellConnections(grid, gridSizeX, gridSizeY, cursorX, cursorY, unkPtr);
         CreateGridCellConnections(grid, gridSizeX, gridSizeY, listX, listY, TRUE);
         EnsureConnectedGrid(grid, gridSizeX, gridSizeY, listX, listY);
     }
-    sub_8051438(&grid[cursorX][cursorY], a4);
+    sub_8051438(&grid[cursorX][cursorY], fixedRoomId);
 }
 
 /*
@@ -6264,10 +6265,167 @@ bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable)
 	return TRUE;
 }
 
-/*
-void sub_8050F90(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, s32 a5, s32 x2, s32 y2)
+static void CreateRoomsAndAnchorsForFixedFloor(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, s32 a5, s32 fixedRoomSizeX, s32 fixedRoomSizeY)
 {
+    s32 roomNumber = 0;
+    s32 var_48 = 0;
+    s32 x, y;
 
+	for (y = 0; y < gridSizeY; y++) {
+		for (x = 0; x < gridSizeX; var_48++, x++) {
+            s32 minX = listX[x] + 2;
+            s32 minY = listY[y] + 2;
+			s32 rangeX = listX[x + 1] - listX[x] - 4;
+			s32 rangeY = listY[y + 1] - listY[y] - 4;
+			s32 minRoomSizeX = 5;
+			s32 minRoomSizeY = 5;
+
+			if (gridSizeX <= 2) {
+                minRoomSizeX = 10;
+                rangeX = 14;
+			}
+			if (gridSizeY == 1) {
+                minRoomSizeY = 16;
+                rangeY = 24;
+			}
+
+			if (grid[x][y].isRoom) {
+                // This cell is a room!
+                s32 roomSizeX, roomSizeY;
+                s32 startX, endX;
+                s32 startY, endY;
+                s32 roomX, roomY;
+
+                if (var_48 != a5) {
+                    roomSizeX = DungeonRandRange(minRoomSizeX, rangeX);
+                    roomSizeY = DungeonRandRange(minRoomSizeY, rangeY);
+
+                    // Force small rooms to have odd-numbered dimensions (?)
+                    if ((roomSizeX | 1) < rangeX) {
+                        roomSizeX |= 1;
+                    }
+
+                    if ((roomSizeY | 1) < rangeY) {
+                        roomSizeY |= 1;
+                    }
+
+                    // Aspect ratio 2/3 < x/y < 3/2
+                    if (roomSizeX > (roomSizeY * 3) / 2) {
+                        roomSizeX = (roomSizeY * 3) / 2;
+                    }
+
+                    if (roomSizeY > (roomSizeX * 3) / 2) {
+                        roomSizeY = (roomSizeX * 3) / 2;
+                    }
+
+                    startX = DungeonRandInt(rangeX - roomSizeX) + minX;
+                    startY = DungeonRandInt(rangeY - roomSizeY) + minY;
+                    endX = startX + roomSizeX;
+                    endY = startY + roomSizeY;
+                }
+                else {
+                    startX = minX;
+                    startY = minY;
+                    endX = startX + fixedRoomSizeX;
+                    endY = startY + fixedRoomSizeY;
+                }
+
+				// Create the room!
+				grid[x][y].start.x = startX;
+                grid[x][y].end.x = endX;
+				grid[x][y].start.y = startY;
+				grid[x][y].end.y = endY;
+
+				for (roomX = startX; roomX < endX; roomX++) {
+					for (roomY = startY; roomY < endY; roomY++) {
+                        SetTerrainNormal(GetTileSafe(roomX, roomY));
+                        GetTileSafe(roomX, roomY)->room = roomNumber;
+					}
+				}
+
+				if (var_48 != a5) {
+                    grid[x][y].flagSecondaryStructure = TRUE;
+				}
+
+				roomNumber++;
+			}
+			else {
+                // This cell is not a room, create a 1x1 hallway anchor
+                s32 pt_x, pt_y;
+                s32 unk_x1 = 2;
+                s32 unk_x2 = 4;
+                s32 unk_y1 = 2;
+                s32 unk_y2 = 4;
+
+				if (x == 0) {
+					unk_x1 = 1;
+				}
+				if (y == 0) {
+					unk_y1 = 1;
+				}
+
+                if (x == gridSizeX - 1) {
+					unk_x2 = 2;
+				}
+				if (y == gridSizeY - 1) {
+					unk_y2 = 2;
+				}
+
+                pt_x = DungeonRandRange(minX + unk_x1, minX + rangeX - unk_x2);
+                pt_y = DungeonRandRange(minY + unk_y1, minY + rangeY - unk_y2);
+
+				grid[x][y].start.x = pt_x;
+                grid[x][y].end.x = pt_x + 1;
+				grid[x][y].start.y = pt_y;
+				grid[x][y].end.y = pt_y + 1;
+
+				// Flag the tile as open to serve as a hallway anchor
+				SetTerrainNormal(GetTileSafe(pt_x, pt_y));
+
+				// Set the room index to 0xFE for anchor
+				GetTileSafe(pt_x, pt_y)->room = CORRIDOR_ROOM;
+			}
+		}
+	}
+}
+
+extern u8 *gUnknown_202F1DC;
+extern u8 gUnknown_202F1E0;
+extern u8 gUnknown_202F1E1;
+
+u8 sub_80511F0(void)
+{
+    if (gUnknown_202F1E1 != 0) {
+        gUnknown_202F1E1--;
+        return gUnknown_202F1E0;
+    }
+
+    gUnknown_202F1E0 = *gUnknown_202F1DC;
+    gUnknown_202F1DC++;
+    if (gUnknown_202F1E0 == 14) {
+        gUnknown_202F1E0 = *gUnknown_202F1DC;
+        gUnknown_202F1DC++;
+    }
+    else {
+        gUnknown_202F1E1 = gUnknown_202F1E0 & 0xF;
+        gUnknown_202F1E0 = (gUnknown_202F1E0 & 0xF0) >> 4;
+    }
+    return gUnknown_202F1E0;
+}
+
+bool8 sub_8051A74(Tile *tile, u8 a1, s32 x, s32 y, u8 a5);
+
+bool8 sub_805124C(Tile *tile, u8 a1, s32 x, s32 y, u8 a5)
+{
+    tile->terrainType |= TERRAIN_TYPE_UNBREAKABLE;
+    tile->unkE = 0;
+    return sub_8051A74(tile, a1, x, y, a5);
+}
+
+/*
+void sub_8051288(s32 fixedRoomId)
+{
+    Dungeon *dungeon = gDungeon;
 }
 */
 

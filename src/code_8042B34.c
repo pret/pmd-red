@@ -610,7 +610,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             gDungeon->weather.weather = 0;
             gDungeon->tileset = gDungeon->unk1C574.unk2;
             gDungeon->unk3A10 = gDungeon->unk1C574.unk3;
-            gDungeon->bossBattleIndex = gDungeon->unk1C574.unk12;
+            gDungeon->fixedRoomId = gDungeon->unk1C574.unk12;
             sub_807E5E4(0);
             sub_80842F0();
         }

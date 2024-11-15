@@ -492,7 +492,7 @@ void sub_8081454(unkStruct_8094924 *param_1)
     sub_8083048(param_1, gDungeon->tileset);
     sub_8083048(param_1,gDungeon->unk3A10);
     sub_8083048(param_1, gDungeon->unk3A12);
-    sub_8083048(param_1, gDungeon->bossBattleIndex);
+    sub_8083048(param_1, gDungeon->fixedRoomId);
     sub_8083048(param_1, gDungeon->unk3A16);
     for(iVar1 = 0; iVar1 < DUNGEON_MAX_SIZE_Y; iVar1++)
     {
@@ -829,7 +829,7 @@ void sub_8081C7C(unkStruct_8094924 *r0)
     gDungeon->tileset = sub_8083170(r0);
     gDungeon->unk3A10 = sub_8083170(r0);
     gDungeon->unk3A12 = sub_8083170(r0);
-    gDungeon->bossBattleIndex = sub_8083170(r0);
+    gDungeon->fixedRoomId = sub_8083170(r0);
     gDungeon->unk3A16 = sub_8083170(r0);
 
     for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
