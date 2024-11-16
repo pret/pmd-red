@@ -42,6 +42,7 @@ static void ReadDungeonUnkE240(DataSerializer *seri, unkDungeonE240 *dst);
 static void ReadDungeonUnkE260(DataSerializer *seri, unkDungeonE260 *dst);
 static void ReadDungeonVisibility(DataSerializer *seri);
 static void ReadEyesightStatus(DataSerializer *seri, EyesightStatus *dst);
+static s24_8 ReadF24_8(DataSerializer *seri);
 static void ReadHiddenPower(DataSerializer *seri, HiddenPower *dst);
 static void ReadImmobilize(DataSerializer *seri, Immobilize *dst);
 static void ReadIQSkills(DataSerializer *seri, u8 *dst);
@@ -59,7 +60,6 @@ static void ReadMuzzled(DataSerializer *seri, Muzzled *dst);
 static void ReadNonVolatile(DataSerializer *seri, NonVolatile *dst);
 static void ReadProtection(DataSerializer *seri, Protection *dst);
 static s16 ReadS16(DataSerializer *seri);
-static s32 ReadS32(DataSerializer *seri);
 static void ReadSleep(DataSerializer *seri, Sleep *dst);
 static void ReadSpeedCounters(DataSerializer *seri, u8 *dst, u32 numCounters);
 static s32 ReadSpeedStage(DataSerializer *seri);
@@ -95,6 +95,7 @@ static void WriteDungeonUnkE240(DataSerializer *seri, unkDungeonE240 *src);
 static void WriteDungeonUnkE260(DataSerializer *seri, unkDungeonE260 *src);
 static void WriteDungeonVisibility(DataSerializer *seri);
 static void WriteEyesightStatus(DataSerializer *seri, EyesightStatus *src);
+static void WriteF24_8(DataSerializer *seri, s24_8 value);
 static void WriteHiddenPower(DataSerializer *seri, HiddenPower *src);
 static void WriteImmobilize(DataSerializer *seri, Immobilize *src);
 static void WriteIQSkills(DataSerializer *seri, u8 *src);
@@ -113,7 +114,6 @@ static void WriteNonVolatile(DataSerializer *seri, NonVolatile *src);
 static void WriteProtection(DataSerializer *seri, Protection *src);
 static void WriteTilePos(DataSerializer *seri, Position *src);
 static void WriteS16(DataSerializer *seri, s16 value);
-static void WriteS32(DataSerializer *seri, s32 value);
 static void WriteSleep(DataSerializer *seri, Sleep* src);
 static void WriteSpeedCounters(DataSerializer *seri, u8 *src, u32 numCounters);
 static void WriteSpeedStage(DataSerializer *seri, s32 value);
@@ -307,10 +307,10 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteS16(seri, info->hitChanceStages[0]);
     WriteS16(seri, info->hitChanceStages[1]);
     WriteS16(seri, info->flashFireBoost);
-    WriteS32(seri, info->offensiveMultipliers[0]);
-    WriteS32(seri, info->offensiveMultipliers[1]);
-    WriteS32(seri, info->defensiveMultipliers[0]);
-    WriteS32(seri, info->defensiveMultipliers[1]);
+    WriteF24_8(seri, info->offensiveMultipliers[0]);
+    WriteF24_8(seri, info->offensiveMultipliers[1]);
+    WriteF24_8(seri, info->defensiveMultipliers[0]);
+    WriteF24_8(seri, info->defensiveMultipliers[1]);
     WriteActionContainer(seri, &info->action);
     WriteType(seri, info->types[0]);
     WriteType(seri, info->types[1]);
@@ -390,7 +390,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteU8(seri, info->unk168);
     WriteU8(seri, info->turnsSinceWarpScarfActivation);
     WriteTilePos(seri, &info->targetPos);
-    WriteS32(seri, info->unk174);
+    WriteF24_8(seri, info->unk174);
     WriteU16(seri, info->abilityEffectFlags);
     WriteS16(seri, info->unk1F8);
     WriteS16(seri, info->mobileTurnTimer);
@@ -990,10 +990,10 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.hitChanceStages[0] = ReadS16(seri);
     entInfo.hitChanceStages[1] = ReadS16(seri);
     entInfo.flashFireBoost = ReadS16(seri);
-    entInfo.offensiveMultipliers[0] = ReadS32(seri);
-    entInfo.offensiveMultipliers[1] = ReadS32(seri);
-    entInfo.defensiveMultipliers[0] = ReadS32(seri);
-    entInfo.defensiveMultipliers[1] = ReadS32(seri);
+    entInfo.offensiveMultipliers[0] = ReadF24_8(seri);
+    entInfo.offensiveMultipliers[1] = ReadF24_8(seri);
+    entInfo.defensiveMultipliers[0] = ReadF24_8(seri);
+    entInfo.defensiveMultipliers[1] = ReadF24_8(seri);
     ReadActionContainer(seri, &entInfo.action);
     entInfo.types[0] = ReadType(seri);
     entInfo.types[1] = ReadType(seri);
@@ -1074,7 +1074,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.unk168 = ReadU8(seri);
     entInfo.turnsSinceWarpScarfActivation = ReadU8(seri);
     ReadTilePos(seri, &entInfo.targetPos);
-    entInfo.unk174 = ReadS32(seri);
+    entInfo.unk174 = ReadF24_8(seri);
     entInfo.abilityEffectFlags = ReadU16(seri);
     entInfo.unk1F8 = ReadS16(seri);
     entInfo.mobileTurnTimer = ReadS16(seri);
@@ -1600,18 +1600,18 @@ static void WriteU32(DataSerializer *seri, u32 value)
     WriteBytes(seri, &uStack_8, 4);
 }
 
-UNUSED static void sub_808308C(DataSerializer *seri, u32 value)
+UNUSED static void WriteS32(DataSerializer *seri, s32 value)
 {
-    u32 uStack_8;
+    s32 uStack_8;
 
     uStack_8 = value;
 
     WriteBytes(seri, &uStack_8, 4);
 }
 
-static void WriteS32(DataSerializer *seri, s32 value)
+static void WriteF24_8(DataSerializer *seri, s24_8 value)
 {
-    s32 uStack_8;
+    s24_8 uStack_8;
 
     uStack_8 = value;
 
@@ -1684,17 +1684,17 @@ static u32 ReadU32(DataSerializer *seri)
     return local_8;
 }
 
-UNUSED static u32 sub_80831B4(DataSerializer *seri)
+UNUSED static s32 ReadS32(DataSerializer *seri)
 {
-    u32 local_8;
+    s32 local_8;
 
     ReadBytes(seri, &local_8, 4);
     return local_8;
 }
 
-static s32 ReadS32(DataSerializer *seri)
+static s24_8 ReadF24_8(DataSerializer *seri)
 {
-    s32 local_8;
+    s24_8 local_8;
 
     ReadBytes(seri, &local_8, 4);
     return local_8;

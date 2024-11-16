@@ -8,6 +8,7 @@
 #include "structs/str_items.h"
 #include "structs/str_moves.h"
 #include "structs/str_position.h"
+#include "math.h"
 #include "number_util.h"
 #include "sprite.h"
 
@@ -231,9 +232,9 @@ typedef struct EntityInfo
     /* 0x28 */ s16 flashFireBoost;
     // These start at 0x1000, and are halved by certain moves like Screech to lower the corresponding stat.
     // Index 0 is Attack. Index 1 is Special Attack.
-    /* 0x2C */ s32 offensiveMultipliers[2];
+    /* 0x2C */ s24_8 offensiveMultipliers[2];
     // Index 0 is Defense. Index 1 is Special Defense.
-    /* 0x34 */ s32 defensiveMultipliers[2];
+    /* 0x34 */ s24_8 defensiveMultipliers[2];
     /* 0x3C */ HiddenPower hiddenPower;
     /* 0x40 */ JoinedAt joinedAt; // Uses the dungeon index in dungeon.h.
     /* 0x44 */ ActionContainer action;
@@ -338,7 +339,7 @@ typedef struct EntityInfo
     /* 0x169 */ u8 turnsSinceWarpScarfActivation;
     /* 0x16C */ Position targetPos;
     /* 0x170 */ Position pixelPos;
-    u32 unk174;
+    s24_8 unk174;
     u16 abilityEffectFlags; // See enum AbilityEffectFlags
     /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
     // Previous value of targetPosition for movement, 1 and 2 moves ago.
