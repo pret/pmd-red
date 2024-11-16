@@ -3,11 +3,6 @@
 
 #include "structs/map.h"
 
-typedef struct unkStruct_202F190
-{
-    Tile *unk0[6];
-} unkStruct_202F190;
-
 const Tile *GetTile(s32 x, s32 y);
 Tile *GetTileMut(s32 x, s32 y);
 

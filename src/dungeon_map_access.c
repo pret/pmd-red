@@ -16,8 +16,8 @@
 #include "game_options.h"
 #include "dungeon_visibility.h"
 
-extern const unkStruct_202F190 gUnknown_80F69D4;
-extern const unkStruct_202F190 gUnknown_80F69EC;
+extern const Tile gOtherOobTile;
+extern const Tile gWaterOobTile;
 extern u8 gUnknown_80F6A04[];
 extern u8 gUnknown_80F6A10[];
 extern u8 gUnknown_80F6A28[];
@@ -32,9 +32,9 @@ extern const s16 gUnknown_80F6C06[];
 EWRAM_DATA OpenedFile *gDungeonPaletteFile = {0};
 EWRAM_DATA unkStruct_202EE8C gUnknown_202EE8C[32] = {0};
 EWRAM_DATA OpenedFile *gUnknown_202F18C = {0};
-EWRAM_DATA unkStruct_202F190 gOutOfBoundsTileData = {0};
+EWRAM_DATA Tile gOutOfBoundsTileData = {0};
 
-EWRAM_DATA_2 const unkStruct_202F190 *gUnknown_203B430 = {0};
+EWRAM_DATA_2 const Tile *gCurTilesetOobTile = {0};
 
 extern u8 sub_8043CE4(u32);
 extern void sub_80402AC(s32, s32);
@@ -48,15 +48,15 @@ const Tile *GetTile(s32 x, s32 y)
     {
         return gDungeon->tilePointers[y][x];
     }
-    return (Tile *) gUnknown_203B430->unk0;
+    return gCurTilesetOobTile;
 }
 
 Tile *GetTileMut(s32 x, s32 y)
 {
     if (x < 0 || y < 0 || x >= DUNGEON_MAX_SIZE_X || y >= DUNGEON_MAX_SIZE_Y)
     {
-        Tile *tile = (Tile *) gOutOfBoundsTileData.unk0;
-        gOutOfBoundsTileData = *gUnknown_203B430;
+        Tile *tile = &gOutOfBoundsTileData;
+        gOutOfBoundsTileData = *gCurTilesetOobTile;
         return tile;
     }
     return gDungeon->tilePointers[y][x];
@@ -139,10 +139,10 @@ void sub_8049820(void)
 void sub_8049840(void)
 {
   if (sub_8043CE4(gDungeon->tileset) != 0) {
-    gUnknown_203B430 = &gUnknown_80F69EC;
+    gCurTilesetOobTile = &gWaterOobTile;
   }
   else {
-    gUnknown_203B430 = &gUnknown_80F69D4;
+    gCurTilesetOobTile = &gOtherOobTile;
   }
 }
 
