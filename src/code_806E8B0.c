@@ -391,7 +391,6 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             #endif // NONMATCHING
 
             gDungeon->unk134.unk15C = arg8_Match = arg8;
-            //ASM_MATCH_TRICK(arg8);
             FP48_16_FromF248(&unkSp10, arg8_Match);
             F48_16_SMul(&unkSp8, &unkSp8, &unkSp10);
         }

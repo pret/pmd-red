@@ -14,8 +14,6 @@ bool8 GroundLivesNotifyAll(s16);
 bool8 GroundObjectsNotifyAll(s16);
 bool8 GroundEffectsNotifyAll(s16);
 
-// TODO: this is still WIP
-
 void GroundScript_Unlock(void) 
 {
     s32 index;
