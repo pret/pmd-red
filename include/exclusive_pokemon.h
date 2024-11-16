@@ -57,7 +57,7 @@ void SetTutorialFlag(s32 param_1);
 bool32 GetTutorialFlag(s32 param_1);
 bool8 IsExclusivePokemonUnlocked(s16 pokeID);
 void UnlockExclusivePokemon(s16 pokeID);
-void WriteExclusivePokemon(struct unkStruct_8094924 *r0);
-void ReadExclusivePokemon(struct unkStruct_8094924 *r0);
+void WriteExclusivePokemon(DataSerializer *r0);
+void ReadExclusivePokemon(DataSerializer *r0);
 
 #endif // GUARD_EXCLUSIVE_POKEMON_H

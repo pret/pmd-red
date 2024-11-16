@@ -816,7 +816,7 @@ void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage)
                     entityInfo->linked.linkedStatusTurns = CalculateStatusTurns(target, gUnknown_80F4EB0, TRUE) + 1;
                     entityInfo->linked.linkedStatusDamageCountdown = 0;
                     nullsub_78(target);
-                    entityInfo->linked.unkD8 = 0xff;
+                    entityInfo->linked.unk8 = 0xff;
                     break;
                 case STATUS_LEECH_SEED:
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAE7C);
@@ -825,9 +825,9 @@ void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage)
             for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
             {
                 if (pokemon == gDungeon->allPokemon[index]) {
-                    entityInfo->linked.unkD8 = index;
+                    entityInfo->linked.unk8 = index;
                     entityInfo2 = GetEntInfo(pokemon);
-                    entityInfo->linked.unkD4 = entityInfo2->unk98;
+                    entityInfo->linked.unk4 = entityInfo2->unk98;
                 }
             }
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAE58);
@@ -852,7 +852,7 @@ void sub_8078084(Entity * pokemon)
             entityInfo2 = GetEntInfo(target);
             if((u8)(entityInfo2->linked.linkedStatus - 1) <= 1)
             {
-                if(entityInfo2->linked.unkD4 == entityInfo->unk98)
+                if(entityInfo2->linked.unk4 == entityInfo->unk98)
                 {
                     entityInfo2->linked.linkedStatus = STATUS_NONE;
                     EntityUpdateStatusSprites(target);
@@ -884,7 +884,7 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
             entityInfo->linked.linkedStatusTurns = CalculateStatusTurns(target,gUnknown_80F4EF0,TRUE) + 1;
             entityInfo->linked.linkedStatusDamageCountdown = zero;
             nullsub_74(target);
-            entityInfo->linked.unkD8 = 0xff;
+            entityInfo->linked.unk8 = 0xff;
         }
         else
         {
@@ -894,9 +894,9 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
         for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
         {
             if (target == gDungeon->allPokemon[index]) {
-                entityInfo->linked.unkD8 = index;
+                entityInfo->linked.unk8 = index;
                 entityInfo2 = GetEntInfo(target);
-                entityInfo->linked.unkD4 = entityInfo2->unk98;
+                entityInfo->linked.unk4 = entityInfo2->unk98;
             }
         }
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBB4C);
@@ -984,7 +984,7 @@ void FocusEnergyStatusTarget(Entity *pokemon, Entity * target)
   }
 }
 
-void sub_80783C4(Entity * pokemon, Entity * target, u8 param_3)
+void sub_80783C4(Entity * pokemon, Entity * target, bool8 param_3)
 {
   EntityInfo *targetEntityInfo;
   EntityInfo *entityInfo;
@@ -1016,7 +1016,7 @@ void sub_80783C4(Entity * pokemon, Entity * target, u8 param_3)
       }
       targetEntityInfo->waitingStruct.waitingStatus = STATUS_DECOY;
       targetEntityInfo->waitingStruct.enemyDecoy = GetEntInfo(pokemon)->isNotTeamMember;
-      targetEntityInfo->waitingStruct.unkCA = param_3;
+      targetEntityInfo->waitingStruct.unk2 = param_3;
       targetEntityInfo->waitingStruct.waitingStatusTurns = CalculateStatusTurns(target,gUnknown_80F4ED0,TRUE) + 1;
       targetEntityInfo->waitingStruct.curseDamageCountdown = 0;
       sub_806CCB4(target,sub_806CEBC(target));

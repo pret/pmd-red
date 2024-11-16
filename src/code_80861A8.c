@@ -5,6 +5,7 @@
 #include "code_803E668.h"
 #include "code_806CD90.h"
 #include "dungeon_music.h"
+#include "dungeon_util.h"
 
 extern const unkStruct_2039DB0 gUnknown_8107380;
 

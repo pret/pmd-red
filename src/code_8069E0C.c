@@ -23,12 +23,13 @@
 
 struct unkStruct_80F520C
 {
-    u8 unk0;
-    u8 unk1;
-    s16 unk2;
+    u8 unk0; // types0
+    u8 unk1; // Most likely just padding and should be removed
+    s16 unk2; // monsterID
 };
 
-extern struct unkStruct_80F520C gUnknown_80F520C[];
+// Castform Forecast ability data
+extern struct unkStruct_80F520C gUnknown_80F520C[WEATHER_RANDOM];
 
 extern u8 gUnknown_80F51E4[];
 extern u8 *gUnknown_80FCC7C[];
@@ -93,17 +94,15 @@ void TriggerWeatherAbilities(void)
   }
 }
 
-s32 sub_8069F54(Entity *pokemon, s16 param_2)
+s32 GetMonsterApparentID(Entity *pokemon, s16 id)
 {
-  if ((((param_2 * 0x10000) + 0xfe880000U) >> 0x10) < 4) {
-    if (HasAbility(pokemon, ABILITY_FORECAST)) {
-        return gUnknown_80F520C[GetApparentWeather(pokemon)].unk2;
+    if (id == MONSTER_CASTFORM || id == MONSTER_CASTFORM_SNOWY || id == MONSTER_CASTFORM_SUNNY || id == MONSTER_CASTFORM_RAINY) {
+        if (HasAbility(pokemon, ABILITY_FORECAST))
+            return gUnknown_80F520C[GetApparentWeather(pokemon)].unk2;
+        return MONSTER_CASTFORM;
     }
-    else {
-        return 0x178;
-    }
-  }
-  return param_2;
+
+    return id;
 }
 
 static inline u8 sub_8069F9C_sub(Entity *pokemon)

@@ -330,7 +330,7 @@ s32 CalcSpeedStage(Entity *pokemon)
     speed++;
   }
   if ((entityInfo->id == MONSTER_KECLEON) && entityInfo->isNotTeamMember &&
-     gDungeon->unk66E) {
+     gDungeon->unk644.unk2A) {
     speed++;
   }
   if (speed < 0) {

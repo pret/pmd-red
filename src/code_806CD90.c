@@ -35,6 +35,7 @@
 #include "code_8041AD0.h"
 #include "type_chart.h"
 #include "dungeon_message.h"
+#include "dungeon_map_access.h"
 
 extern u8 gUnknown_202F221;
 
@@ -288,7 +289,6 @@ extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
 extern bool8 sub_8045888(Entity *r0);
-extern void sub_8049ED4(void);
 
 extern const s32 gUnknown_8106A4C;
 extern const s16 gUnknown_80F4E10;
@@ -473,11 +473,11 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
     if (r9) {
         EntityInfo *targetInfo = GetEntInfo(target);
         if (targetInfo->linked.linkedStatus == STATUS_DESTINY_BOND) {
-            Entity *destBondTarget = gDungeon->allPokemon[targetInfo->linked.unkD8];
+            Entity *destBondTarget = gDungeon->allPokemon[targetInfo->linked.unk8];
             if (destBondTarget == NULL) {
                 targetInfo->linked.linkedStatus = 0;
             }
-            else if (GetEntInfo(destBondTarget)->unk98 != targetInfo->linked.unkD4) {
+            else if (GetEntInfo(destBondTarget)->unk98 != targetInfo->linked.unk4) {
                 targetInfo->linked.linkedStatus = 0;
             }
             else {
@@ -736,7 +736,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
     else {
         PokemonStruct2 *recruitedMon = &gRecruitedPokemonRef->pokemon2[targetData->teamIndex];
-        if (targetData->isTeamLeader || (targetData->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk65C == 0)) {
+        if (targetData->isTeamLeader || (targetData->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk644.unk18 == 0)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9CEC[r8]);
         }
         else if (IsClientOrTeamBase(targetData->joinedAt.joinedAt)) {
@@ -746,7 +746,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
         }
         else if (sub_806A58C(recruitedMon->unkA)) {
-            if (gDungeon->unk65D != 0) {
+            if (gDungeon->unk644.unk19 != 0) {
                 DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D8C[r8]);
             }
             else {
@@ -775,8 +775,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 targetData->unk14C = 1;
                 targetData->belly = targetData->maxBelly;
                 if (targetData->isTeamLeader) {
-                    gDungeon->unk679 = 0;
-                    gDungeon->itemHoldersIdentified = 0;
+                    gDungeon->unk644.unk35 = 0;
+                    gDungeon->unk644.itemHoldersIdentified = 0;
                 }
                 ZeroOutItem(&targetData->heldItem);
                 if (targetData->waitingStruct.waitingStatus == STATUS_SNATCH) {
@@ -832,8 +832,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 targetData->unk14C = 1;
                 targetData->belly = targetData->maxBelly;
                 if (targetData->isTeamLeader) {
-                    gDungeon->unk679 = 0;
-                    gDungeon->itemHoldersIdentified = 0;
+                    gDungeon->unk644.unk35 = 0;
+                    gDungeon->unk644.itemHoldersIdentified = 0;
                 }
                 ZeroOutItem(heldItem);
                 if (targetData->waitingStruct.waitingStatus == STATUS_SNATCH) {
@@ -887,8 +887,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             targetData->unk14C = 1;
             targetData->belly = targetData->maxBelly;
             if (targetData->isTeamLeader) {
-                gDungeon->unk679 = 0;
-                gDungeon->itemHoldersIdentified = 0;
+                gDungeon->unk644.unk35 = 0;
+                gDungeon->unk644.itemHoldersIdentified = 0;
             }
             if (targetData->waitingStruct.waitingStatus == STATUS_SNATCH) {
                 SendWaitingEndMessage(attacker, target, STATUS_SNATCH);
@@ -914,7 +914,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         ZeroOutItem(&targetData->heldItem);
     }
     if (targetData->bossFlag) {
-        gDungeon->bossSongIndex = 999;
+        gDungeon->unk644.bossSongIndex = 999;
     }
 
     // Give exp
@@ -956,7 +956,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 }
             }
             else {
-                if (DoEnemiesEvolveWhenKOed(gDungeon->dungeonLocation.id)) {
+                if (DoEnemiesEvolveWhenKOed(gDungeon->unk644.dungeonLocation.id)) {
                     attackerData->unk149 = 1;
                     gDungeon->unkD = 1;
                 }

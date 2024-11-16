@@ -1479,7 +1479,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xb2: {
-                sub_80976F8(curCmd.argShort);
+                SetAdventureAchievement(curCmd.argShort);
                 break;
             }
             case 0xb3: {

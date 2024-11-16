@@ -421,7 +421,7 @@ _0807E9A4:
 	movs r0, 0x2
 	ldrsh r1, [r4, r0]
 	adds r0, r5, 0
-	bl sub_8069F54
+	bl GetMonsterApparentID
 	b _0807E9D8
 	.align 2, 0
 _0807E9D0: .4byte 0xfffffe88

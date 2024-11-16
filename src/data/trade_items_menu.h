@@ -1,12 +1,12 @@
-static const MenuItem sUnknown_80E60A0[3] = {
-    {"Send item", 1},
-    {"Receive item", 2},
+static const MenuItem sUnknown_80E60A0[] = {
+    {_("Send item"), 1},
+    {_("Receive item"), 2},
     {NULL, 0},
 };
 
-static const MenuItem sUnknown_80E60D4[3] = {
-    {"Send item", -1},
-    {"Receive item", 2},
+static const MenuItem sUnknown_80E60D4[] = {
+    {_("Send item"), -1},
+    {_("Receive item"), 2},
     {NULL, 0},
 };
 
@@ -20,10 +20,10 @@ static const UnkTextStruct2 sUnknown_80E60EC =
     NULL
 };
 
-static const MenuItem sUnknown_80E6104[4] = {
-    {"Confirm", 3},
-    {"Info", 4},
-    {"Cancel", 7},
+static const MenuItem sUnknown_80E6104[] = {
+    {_("Confirm"), 3},
+    {_("Info"), 4},
+    {_("Cancel"), 7},
     {NULL, 0},
 };
 
@@ -37,9 +37,9 @@ static const UnkTextStruct2 unused =
     NULL
 };
 
-static const MenuItem sUnknown_80E6154[3] = {
-    {"Yes", 5},
-    {"No", 6},
+static const MenuItem sUnknown_80E6154[] = {
+    {_("Yes"), 5},
+    {_("No"), 6},
     {NULL, 0},
 };
 
@@ -53,9 +53,9 @@ static const UnkTextStruct2 sUnknown_80E6174 =
     NULL
 };
 
-static const MenuItem sUnknown_80E618C[3] = {
-    {"Yes", 5},
-    {"Cancel", 0},
+static const MenuItem sUnknown_80E618C[] = {
+    {_("Yes"), 5},
+    {_("Cancel"), 0},
     {NULL, 0},
 };
 

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "charge_move.h"
 #include "code_803E46C.h"
+#include "code_803E724.h"
 #include "code_8045A00.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
@@ -180,13 +181,12 @@ extern void sub_806A5B8(Entity *entity);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 void sub_8075900(Entity *pokemon, u8 r1);
 extern u8 sub_8044B28(void);
-extern u8 sub_803F428(Position *pos);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_8045C28(Item *, u8 , u8);
-extern void sub_805A7D4(Entity *, Entity *, Item *, Position *);
+static void sub_805A7D4(Entity *, Entity *, Item *, Position *);
 extern void MudWaterSportEffect(u32);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_806A6E8(Entity *);
@@ -2632,7 +2632,7 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     }
 }
 
-void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
+static void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
 {
   Entity stackEntity;
 
@@ -2640,7 +2640,7 @@ void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
   stackEntity.unk24 = 0;
   stackEntity.isVisible = TRUE;
   stackEntity.unk22 = 0;
-  stackEntity.axObj.info = (EntityInfo*) item;
+  stackEntity.axObj.info.item = item;
   stackEntity.pos.x = target->pos.x + pos->x;
   stackEntity.pos.y = target->pos.y + pos->y;
   SetEntityPixelPos(&stackEntity,(target->pos.x * 0x18 + 4) * 0x100,
@@ -2695,7 +2695,7 @@ _0805A8C2:
   pos2.y = ((temp2 - target->pixelPos.y) / 0xc);
 
 
-  if (((check = sub_803F428(&target->pos), r9 = &target->pos, check != 0)) || (sub_803F428(&pos1) != 0)) {
+  if (((check = sub_803F428(&target->pos), r9 = &target->pos, check)) || (sub_803F428(&pos1))) {
     for(counter = 0; counter < 0xC; counter++)
     {
       IncreaseEntityPixelPos(target,pos2.x,pos2.y);
@@ -2718,7 +2718,7 @@ _0805A8C2:
     else {
 _0805A9FE:
       if (EntityExists(target)) {
-        if ((sub_803F428(r9) != 0) || (sub_803F428(&pos1) != 0)) {
+        if ((sub_803F428(r9)) || (sub_803F428(&pos1))) {
           for(counter = 0; counter < 0xC; counter++)
           {
             IncreaseEntityPixelPos(target, -pos2.x,-pos2.y);

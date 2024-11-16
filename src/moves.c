@@ -1515,74 +1515,74 @@ void sub_8094060(Move *srcMoves, Move *destMoves)
         destMoves[j++].moveFlags = 0;
 }
 
-static void SavePokemonMove(struct unkStruct_8094924 *r0, Move *move)
+static void WritePoke1MoveBits(DataSerializer *r0, Move *move)
 {
-    SaveIntegerBits(r0, &move->moveFlags, 4);
-    SaveIntegerBits(r0, &move->id, 9);
-    SaveIntegerBits(r0, &move->PP, 7);
+    WriteBits(r0, &move->moveFlags, 4);
+    WriteBits(r0, &move->id, 9);
+    WriteBits(r0, &move->PP, 7);
 }
 
-static void RestorePokemonMove(struct unkStruct_8094924 *r0, Move *move)
+static void ReadPoke1MoveBits(DataSerializer *r0, Move *move)
 {
-    RestoreIntegerBits(r0, &move->moveFlags, 4);
-    RestoreIntegerBits(r0, &move->id, 9);
-    RestoreIntegerBits(r0, &move->PP, 7);
+    ReadBits(r0, &move->moveFlags, 4);
+    ReadBits(r0, &move->id, 9);
+    ReadBits(r0, &move->PP, 7);
 }
 
-void SavePokemonMoves(struct unkStruct_8094924 *r0, Move *moveSet)
-{
-    s32 i;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        SavePokemonMove(r0, &moveSet[i]);
-}
-
-void RestorePokemonMoves(struct unkStruct_8094924 *r0, Move *moveSet)
+void WritePoke1MovesBits(DataSerializer *r0, Move *moveSet)
 {
     s32 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
-        RestorePokemonMove(r0, &moveSet[i]);
+        WritePoke1MoveBits(r0, &moveSet[i]);
 }
 
-static void sub_8094148(struct unkStruct_8094924 *r0, Move *move)
-{
-    SaveIntegerBits(r0, &move->moveFlags, 4);
-    SaveIntegerBits(r0, &move->moveFlags2, 1);
-    SaveIntegerBits(r0, &move->id, 9);
-    SaveIntegerBits(r0, &move->PP, 7);
-    SaveIntegerBits(r0, &move->ginseng, 7);
-}
-
-void sub_8094184(struct unkStruct_8094924 *r0, struct Moves *r1)
+void ReadPoke1MovesBits(DataSerializer *r0, Move *moveSet)
 {
     s32 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
-        sub_8094148(r0, &r1->moves[i]);
-
-    SaveIntegerBits(r0, &r1->struggleMoveFlags, 8);
+        ReadPoke1MoveBits(r0, &moveSet[i]);
 }
 
-static void sub_80941B0(struct unkStruct_8094924 *r0, Move *move)
+static void WritePoke2MoveBits(DataSerializer *r0, Move *move)
+{
+    WriteBits(r0, &move->moveFlags, 4);
+    WriteBits(r0, &move->moveFlags2, 1);
+    WriteBits(r0, &move->id, 9);
+    WriteBits(r0, &move->PP, 7);
+    WriteBits(r0, &move->ginseng, 7);
+}
+
+void WritePoke2MovesBits(DataSerializer *r0, struct Moves *r1)
+{
+    s32 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        WritePoke2MoveBits(r0, &r1->moves[i]);
+
+    WriteBits(r0, &r1->struggleMoveFlags, 8);
+}
+
+static void ReadPoke2MoveBits(DataSerializer *r0, Move *move)
 {
     memset(move, 0, sizeof(Move));
-    RestoreIntegerBits(r0, &move->moveFlags, 4);
-    RestoreIntegerBits(r0, &move->moveFlags2, 1);
-    RestoreIntegerBits(r0, &move->id, 9);
-    RestoreIntegerBits(r0, &move->PP, 7);
-    RestoreIntegerBits(r0, &move->ginseng, 7);
+    ReadBits(r0, &move->moveFlags, 4);
+    ReadBits(r0, &move->moveFlags2, 1);
+    ReadBits(r0, &move->id, 9);
+    ReadBits(r0, &move->PP, 7);
+    ReadBits(r0, &move->ginseng, 7);
 }
 
-void sub_80941FC(struct unkStruct_8094924 *r0, struct Moves*r1)
+void ReadPoke2MovesBits(DataSerializer *r0, struct Moves*r1)
 {
     s32 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
-        sub_80941B0(r0, &r1->moves[i]);
+        ReadPoke2MoveBits(r0, &r1->moves[i]);
 
-    r1->struggleMoveFlags= 0;
-    RestoreIntegerBits(r0, &r1->struggleMoveFlags, 8);
+    r1->struggleMoveFlags = 0;
+    ReadBits(r0, &r1->struggleMoveFlags, 8);
 }
 
 bool8 DoesMoveCharge(u16 move)

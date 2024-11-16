@@ -64,7 +64,7 @@ void sub_8044820(void)
         {
           entityInfo->aiNextToTarget = FALSE;
           movSpeed = CalcSpeedStage(entity);
-          if (gSpeedTurns[movSpeed][gDungeon->fractionalTurn] != 0) {
+          if (gSpeedTurns[movSpeed][gDungeon->unk644.fractionalTurn] != 0) {
             if (!entityInfo->attacking) {
               entityInfo->flags &= ~(MOVEMENT_FLAG_UNK_14 | MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY);
               entityInfo->recalculateFollow = FALSE;
@@ -107,7 +107,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
   u32 isNotEnemy;
   s32 index;
   
-  if (gSpeedTurns[1][gDungeon->fractionalTurn] != 0) {
+  if (gSpeedTurns[1][gDungeon->unk644.fractionalTurn] != 0) {
     sub_8071B48();
     gDungeon->plusIsActive[0] = FALSE;
     gDungeon->plusIsActive[1] = FALSE;
@@ -151,7 +151,7 @@ void sub_8044AB4(void)
 {
   s32 index;
   
-  if (gSpeedTurns[1][gDungeon->fractionalTurn + 1] != 0) {
+  if (gSpeedTurns[1][gDungeon->unk644.fractionalTurn + 1] != 0) {
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
       if (EntityExists(gDungeon->allPokemon[index])) {
         UseAttack(0);
@@ -168,16 +168,16 @@ bool8 sub_8044B28(void)
 {
     if (gDungeon->unk4 == 0) {
         if (GetLeader() == NULL) {
-            gDungeon->unk654 = 1;
+            gDungeon->unk644.unk10 = 1;
         }
         else if (gDungeon->unk2 == 1) {
-            gDungeon->unk654 = 2;
+            gDungeon->unk644.unk10 = 2;
         }
         else if (gDungeon->unk2 != 2) {
             return FALSE;
         }
         else {
-            gDungeon->unk654 = 2;
+            gDungeon->unk644.unk10 = 2;
         }
     }
     return TRUE;

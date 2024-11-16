@@ -220,7 +220,7 @@ static void sub_8016FF8(void)
         case 7:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_HAS_NOTHING], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_STORAGE_EMPTY], 0, gKangaskhanStorageWork->monPortraitPtr, 0x10D);
             break;
         case 8:
             gKangaskhanStorageWork->fallbackState = KANGASKHAN_STORAGE_MAIN_MENU;
@@ -231,12 +231,12 @@ static void sub_8016FF8(void)
             sub_8090E14(gFormatBuffer_Items[0], &gKangaskhanStorageWork->storedItem, 0);
             gKangaskhanStorageWork->fallbackState = 14;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__INVALID_ITEM], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_INVALID_ITEM], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
             break;
         case 10:
             gKangaskhanStorageWork->fallbackState = 14;
             gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
-            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT__TOO_MANY_OF_ITEM], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
+            CreateDialogueBoxAndPortrait(gCommonKangStorage[gKangaskhanStorageWork->mode][KANG_DLG_DEPOSIT_TOO_MANY_OF_ITEM], 0, gKangaskhanStorageWork->monPortraitPtr, 0x30D);
             break;
         case 11:
             gKangaskhanStorageWork->fallbackState = 13;

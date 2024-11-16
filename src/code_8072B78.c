@@ -2,9 +2,10 @@
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
 #include "dungeon_map_access.h"
+#include "dungeon_message.h"
 #include "dungeon_movement.h"
 #include "dungeon_random.h"
-#include "dungeon_message.h"
+#include "dungeon_util.h"
 #include "moves.h"
 #include "pokemon_mid.h"
 #include "pokemon_mid.h"
@@ -13,7 +14,6 @@
 #include "structs/map.h"
 #include "structs/str_pokemon.h"
 
-extern Position gAdjacentTileOffsets[];
 extern u8 *gUnknown_80FE2EC[];
 
 struct unkStruct_806B7F8

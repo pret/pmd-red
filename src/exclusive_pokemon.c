@@ -197,7 +197,7 @@ void UnlockExclusivePokemon(s16 pokeID)
     }
 }
 
-void WriteExclusivePokemon(struct unkStruct_8094924 *r0)
+void WriteExclusivePokemon(DataSerializer *r0)
 {
     s32 index;
     u8 *puVar2;
@@ -212,21 +212,21 @@ void WriteExclusivePokemon(struct unkStruct_8094924 *r0)
     zero = 0;
 
 
-    SaveIntegerBits(r0, gUnknown_203B498, 1);
+    WriteBits(r0, gUnknown_203B498, 1);
     for(index = 0; index < MONSTER_MAX; index++)
     {
         stack_0 = sub_8098134(index);
-        SaveIntegerBits(r0, &stack_0, 1);
+        WriteBits(r0, &stack_0, 1);
     }
     for(index = 0; index < 64; index++)
     {
         stack_1 = sub_8098100(index);
-        SaveIntegerBits(r0, &stack_1, 1);
+        WriteBits(r0, &stack_1, 1);
     }
     for(index = 0; index < 31; index++)
     {
         stack_2 = GetTutorialFlag(index);
-        SaveIntegerBits(r0, &stack_2, 1);
+        WriteBits(r0, &stack_2, 1);
     }
     for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
     {
@@ -234,11 +234,11 @@ void WriteExclusivePokemon(struct unkStruct_8094924 *r0)
             puVar2 = &neg_1;
         else
             puVar2 = &zero;
-        SaveIntegerBits(r0, puVar2, 1);
+        WriteBits(r0, puVar2, 1);
     }
 }
 
-void ReadExclusivePokemon(struct unkStruct_8094924 *r0)
+void ReadExclusivePokemon(DataSerializer *r0)
 {
     s32 index;
     u8 stack_0;
@@ -247,28 +247,28 @@ void ReadExclusivePokemon(struct unkStruct_8094924 *r0)
     u8 stack_3;
 
     memset(gUnknown_203B498, 0, sizeof(struct ExclusivePokemonData));
-    RestoreIntegerBits(r0, gUnknown_203B498, 1);
+    ReadBits(r0, gUnknown_203B498, 1);
     for(index = 0; index < MONSTER_MAX; index++)
     {
-        RestoreIntegerBits(r0, &stack_0, 1);
+        ReadBits(r0, &stack_0, 1);
         if(stack_0)
             sub_80980B4(index);
     }
     for(index = 0; index < 64; index++)
     {
-        RestoreIntegerBits(r0, &stack_1, 1);
+        ReadBits(r0, &stack_1, 1);
         if(stack_1)
             sub_8097FA8(index);
     }
     for(index = 0; index < 31; index++)
     {
-        RestoreIntegerBits(r0, &stack_2, 1);
+        ReadBits(r0, &stack_2, 1);
         if(stack_2)
             SetTutorialFlag(index);
     }
     for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
     {
-        RestoreIntegerBits(r0, &stack_3, 1);
+        ReadBits(r0, &stack_3, 1);
 
         do; while(0); // do/while needed for matching - jiang
 

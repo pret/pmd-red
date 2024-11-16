@@ -42,7 +42,7 @@ void sub_80847D4(void)
 
 void sub_8084854(struct unkData_8107234 *param_1)
 {
-  if (gDungeon->unk678 != 0) {
+  if (gDungeon->unk644.unk34 != 0) {
        gDungeon->unk3A0D = param_1->unk0[5];
   }
   else
@@ -64,7 +64,7 @@ void sub_8084854(struct unkData_8107234 *param_1)
       }
     }
   }
-  gDungeon->unk675 = 1;
+  gDungeon->unk644.unk31 = 1;
   sub_807E5E4(WEATHER_CLEAR);
 }
 

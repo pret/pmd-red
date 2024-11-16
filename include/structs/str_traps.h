@@ -3,7 +3,8 @@
 
 #include "constants/trap.h"
 
-typedef struct Trap 
+// size: 0x4
+typedef struct Trap
 {
     /* 0x0 */ u8 id;
     /* 0x1 */ u8 unk1;
