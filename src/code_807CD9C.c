@@ -75,18 +75,18 @@ extern void sub_803F580(u32);
 bool8 sub_808384C(DungeonPos *, DungeonPos *);
 u8 sub_8083660(DungeonPos *);
 
-void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
+void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
 {
     const Tile *tile;
     int iVar8;
     bool8 flag;
-    DungeonPos sp_0x18;
+    DungeonPos pos;
     Move move;
-    int sp_0x24;
-    Entity *sp_0x28;
-    PixelPos sp_0x2C;
+    int counter;
+    Entity *entity;
+    PixelPos pos32;
 
-    sp_0x24 = 10;
+    counter = 10;
     if (IsCurrentFixedRoomBossFight()) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC9E8); // It couldn't be knocked flying!
         return;
@@ -110,35 +110,35 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
             sub_80421C0(target,0x1a3);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F8A0C); // {POKEMON_0} was blown away!
             flag = TRUE;
-            sp_0x28 = NULL;
+            entity = NULL;
 
-            for(; sp_0x24 > 0; sp_0x24--)
+            for(; counter > 0; counter--)
             {
-                sp_0x18 = target->pos;
-                sp_0x18.x += gAdjacentTileOffsets[direction].x;
-                sp_0x18.y += gAdjacentTileOffsets[direction].y;
-                if ((((sp_0x18.x < 0) || (sp_0x18.y < 0)) || (DUNGEON_MAX_SIZE_X <= sp_0x18.x)) ||
-                    (DUNGEON_MAX_SIZE_Y <= sp_0x18.y)) goto _0807CF20;
-                sp_0x2C.x = gAdjacentTileOffsets[direction].x << 0xA;
-                sp_0x2C.y = gAdjacentTileOffsets[direction].y << 0xA;
+                pos = target->pos;
+                pos.x += gAdjacentTileOffsets[direction].x;
+                pos.y += gAdjacentTileOffsets[direction].y;
+                if ((((pos.x < 0) || (pos.y < 0)) || (DUNGEON_MAX_SIZE_X <= pos.x)) ||
+                    (DUNGEON_MAX_SIZE_Y <= pos.y)) goto _0807CF20;
+                pos32.x = gAdjacentTileOffsets[direction].x << 0xA;
+                pos32.y = gAdjacentTileOffsets[direction].y << 0xA;
 
                 for(iVar8 = 0; iVar8 < 6; iVar8++)
                 {
-                    IncreaseEntityPixelPos(target,sp_0x2C.x,sp_0x2C.y);
+                    IncreaseEntityPixelPos(target,pos32.x,pos32.y);
                     if (sub_8045888(target) != 0) {
                         sub_803E46C(0x19);
                     }
                 }
-                tile = GetTile(sp_0x18.x, sp_0x18.y);
+                tile = GetTile(pos.x, pos.y);
                 if (tile->monster != NULL) {
-                    sp_0x28 = tile->monster;
+                    entity = tile->monster;
                     goto _0807CF26;
                 }
-                if (sub_80705F0(target,&sp_0x18)){
+                if (sub_80705F0(target,&pos)){
                     flag = (tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0 ? FALSE : TRUE;
                     goto _0807CF20;
                 }
-                sub_80694C0(target,sp_0x18.x,sp_0x18.y,1);
+                sub_80694C0(target,pos.x,pos.y,1);
             }
 
 
@@ -153,11 +153,11 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
             if (sub_8044B28()) {
                 return;
             }
-            if (sp_0x28 != NULL) {
+            if (entity != NULL) {
                 InitPokemonMove(&move,0x163);
-                if (!sub_80571F0(sp_0x28,&move)) {
-                    TrySendImmobilizeSleepEndMsg(pokemon,sp_0x28);
-                    sub_806F370(pokemon,sp_0x28,gUnknown_80F4F90,0,0,0,0x21a,0,0,0);
+                if (!sub_80571F0(entity,&move)) {
+                    TrySendImmobilizeSleepEndMsg(pokemon,entity);
+                    sub_806F370(pokemon,entity,gUnknown_80F4F90,0,0,0,0x21a,0,0,0);
                 }
             }
             if (sub_8044B28()) {
@@ -1036,7 +1036,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
     DungeonPos pos;
     u32 direction = r2;
     info = GetEntInfo(target);
-    if(HasAbility(target, 0xE))
+    if(HasAbility(target, ABILITY_SUCTION_CUPS))
     {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FCB98);
@@ -1057,7 +1057,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
         pos.x = target->pos.x + gAdjacentTileOffsets[direction].x;
         pos.y = target->pos.y + gAdjacentTileOffsets[direction].y;
 
-        if(pos.x <= 0 || pos.y <= 0 || pos.x > 0x36 || pos.y > 0x1E) break;
+        if(pos.x <= 0 || pos.y <= 0 || pos.x > DUNGEON_MAX_SIZE_X - 2 || pos.y > DUNGEON_MAX_SIZE_Y - 2) break;
         
         tile = GetTile(pos.x, pos.y);
 
@@ -1107,8 +1107,8 @@ void HandleDroughtOrbAction(Entity *pokemon, Entity *target) {
 		return;
 	}
 
-	for (y = 0; y < 0x20; y++)
-		for(x = 0; x < 0x38; x++)
+	for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
+		for(x = 0; x < DUNGEON_MAX_SIZE_X; x++)
 		{
 			tile = GetTileMut(x, y);
 			if((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY)
@@ -1119,8 +1119,8 @@ void HandleDroughtOrbAction(Entity *pokemon, Entity *target) {
 				flag = TRUE;
 			}
 		}
-	for (y = 0; y < 0x20; y++)
-		for(x = 0; x < 0x38; x++)
+	for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
+		for(x = 0; x < DUNGEON_MAX_SIZE_X; x++)
 			sub_8049BB0(x, y);
 
 	if(flag)

@@ -700,6 +700,6 @@ void HandleWhirlwindTrap(Entity *pokemon, Entity *target)
 {
     if(target)
     {
-        sub_807CD9C(pokemon, target, DungeonRandInt(NUM_DIRECTIONS));
+        BlowAwayTarget(pokemon, target, DungeonRandInt(NUM_DIRECTIONS));
     }
 }

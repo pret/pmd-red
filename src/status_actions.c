@@ -205,7 +205,7 @@ bool8 PoisonTailMoveAction(Entity * pokemon, Entity * target, Move *move, s32 pa
 
 bool8 RoarMoveAction(Entity * pokemon, Entity * target)
 {
-    sub_807CD9C(pokemon, target, GetEntInfo(pokemon)->action.direction);
+    BlowAwayTarget(pokemon, target, GetEntInfo(pokemon)->action.direction);
     return TRUE;
 }
 
