@@ -75,7 +75,7 @@ void TriggerWeatherAbilities(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeon->allPokemon[index];
+      entity = gDungeon->activePokemon[index];
       if (EntityExists(entity)) {
         if (HasAbility(entity, ABILITY_DRIZZLE)) {
             gDungeon->weather.naturalWeather[WEATHER_RAIN] = 1;
@@ -171,7 +171,7 @@ void sub_8069F9C(Entity *pokemon,Entity * target,Move *move)
       }
       iVar6->abilities[abilityIndex] = local_20[randomIndex];
       gDungeon->unkC = 1;
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCC7C);
       sub_8042900(target);
       sub_806ABAC(pokemon,target);
@@ -189,7 +189,7 @@ _0806A068:
         iVar6->types[0] = type;
         iVar6->types[1] = TYPE_NONE;
         iVar6->isColorChanged = TRUE;
-        SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         __src = GetUnformattedTypeString(iVar6->types[0]);
         strcpy(gFormatBuffer_Items[0],__src);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCAC);
@@ -207,14 +207,14 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
   EntityInfo *entityInfo;
 
   if ((((EntityExists(pokemon)) && (EntityExists(target))) && (pokemon != target))
-     && (entityInfo = GetEntInfo(target), entityInfo->protection.protectionStatus == STATUS_CONVERSION2)) {
+     && (entityInfo = GetEntInfo(target), entityInfo->reflectClassStatus.status == STATUS_CONVERSION2)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
     uVar2_u32 = sub_8092364(moveType);
     if (uVar2_u32 != TYPE_NONE) {
       entityInfo->types[0] = uVar2_u32;
       entityInfo->types[1] = 0;
       sub_8041BBC(target);
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       typeString = GetUnformattedTypeString(uVar2_u32);
       strcpy(gFormatBuffer_Items[0],typeString);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDCC8);
@@ -300,8 +300,8 @@ void sub_806A338(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
-        if (EntityExists(entity) && (GetEntInfo(entity)->waitingStruct.waitingStatus == STATUS_SNATCH))
+        entity = gDungeon->activePokemon[index];
+        if (EntityExists(entity) && (GetEntInfo(entity)->curseClassStatus.status == STATUS_SNATCH))
         {
             gDungeon->snatchPokemon = entity;
             ASM_MATCH_TRICK(entity);

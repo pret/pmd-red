@@ -4,7 +4,7 @@
   	.syntax unified
 
   	.text
-  
+
 	thumb_func_start sub_80732F0
 sub_80732F0:
 	push {r4-r7,lr}
@@ -148,11 +148,11 @@ _080733FC:
 	ldr r0, _08073438
 	mov r1, r8
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _0807343C
 	ldr r1, [r0]
 	mov r0, r8
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	movs r0, 0x7
 	mov r1, r9
 	ands r1, r0
@@ -360,11 +360,11 @@ _0807359C:
 	ldr r0, _08073600
 	adds r1, r7, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _08073604
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	movs r0, 0x7
 	mov r1, r8
 	ands r1, r0

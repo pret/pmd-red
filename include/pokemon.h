@@ -41,7 +41,7 @@ void InitializeRecruitedPokemon(void);
 //u8 GetBodySize(s16 index);
 
 
-void CopyMonsterNametoBuffer(u8 * buffer, s16 index);
+void CopyMonsterNameToBuffer(u8 * buffer, s16 index);
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index);
 void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 colorNum);
 void sub_808D930(u8 *buffer, s32 index);
@@ -58,7 +58,7 @@ char * GetMonSpecies(s16 index);
 s32 GetMovementSpeed(s16 index);
 u8 GetMovementType(s16 index);
 u8 GetRegenSpeed(s16 index);
-bool8 CanMove(s16 index);
+bool8 GetCanMoveFlag(s16 index);
 u8 GetChanceAsleep(s16 index);
 u32 GetWeight(s16 index);
 u32 GetSize(s16 index);

@@ -355,7 +355,7 @@ _080A184C:
 	bl sub_80A8BFC
 	lsls r0, 16
 	asrs r0, 16
-	bl CanMove
+	bl GetCanMoveFlag
 	b _080A171E
 _080A185E:
 	lsls r0, r5, 16

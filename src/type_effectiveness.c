@@ -237,7 +237,7 @@ bool8 sub_806E100(unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u
       gDungeon->unk134.fill16E[8] = TRUE;
       F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
     }
-    if ((type == TYPE_ELECTRIC) && (pokemonInfo->charging.chargingStatus == STATUS_CHARGING)) {
+    if ((type == TYPE_ELECTRIC) && (pokemonInfo->bideClassStatus.status == STATUS_CHARGING)) {
       gDungeon->unk134.fill16E[9] = TRUE;
       F48_16_SMul(param_1,param_1, &gUnknown_8106F0C);
     }
@@ -394,7 +394,7 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
     {
         return 2;
     }
-    if (moveType == TYPE_ELECTRIC && userData->charging.chargingStatus == STATUS_CHARGING)
+    if (moveType == TYPE_ELECTRIC && userData->bideClassStatus.status == STATUS_CHARGING)
     {
         weight *= 2;
     }

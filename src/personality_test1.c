@@ -376,7 +376,7 @@ static void PromptNewQuestion(void)
 
 static void PrintPersonalityTypeDescription(void)
 {
-    CopyMonsterNametoBuffer(gFormatBuffer_Monsters[0], sPersonalityTestTracker->StarterID);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[0], sPersonalityTestTracker->StarterID);
     CreateDialogueBoxAndPortrait(sPersonalityTypeDescriptionTable[sPersonalityTestTracker->playerNature], 0, 0, 0x101);
 }
 

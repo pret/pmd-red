@@ -65,7 +65,7 @@ _08045E1E:
 	ldr r0, _08045E38
 	adds r1, r7, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _08045E3C
 	b _08046048
 	.align 2, 0
@@ -278,7 +278,7 @@ _08045FAC:
 _08045FD0:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _08045FF2
 	.align 2, 0
 _08045FDC: .4byte 0x00ff0008
@@ -288,7 +288,7 @@ _08045FE8:
 	ldr r0, _08045FFC
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _08045FF2:
 	ldrb r0, [r5, 0x2]
 	bl TryDisplayItemPickupTutorialMessage
@@ -331,12 +331,12 @@ _0804602E:
 	ldr r0, _08046058
 	adds r1, r7, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _0804605C
 _08046048:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _080460E0
 	.align 2, 0
 _08046054: .4byte gFormatBuffer_Items
@@ -374,12 +374,12 @@ _08046094:
 	ldr r0, _080460B8
 	adds r1, r7, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _080460BC
 _080460AC:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _080460DA
 	.align 2, 0
 _080460B8: .4byte gFormatBuffer_Monsters
@@ -394,7 +394,7 @@ _080460C0:
 	ldr r0, _080460F4
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _080460DA:
 	ldrb r0, [r5, 0x2]
 	bl TryDisplayItemPickupTutorialMessage
@@ -996,7 +996,7 @@ sub_804652C:
 	ldr r0, _080465A4
 	ldr r1, [r0]
 	mov r0, r10
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	mov r0, r9
 	ldrb r1, [r0]
 	movs r0, 0x1
@@ -1721,7 +1721,7 @@ _08046B0A:
 	ldr r4, _08046B38
 	add r4, sp
 	ldr r0, [r4]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _08046C7C
 	.align 2, 0
 _08046B2C: .4byte 0x0000052c
@@ -1734,7 +1734,7 @@ _08046B3C:
 	ldr r5, _08046B50
 	add r5, sp
 	ldr r0, [r5]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _08046C7C
 	.align 2, 0
 _08046B4C: .4byte gItemLost
@@ -1748,7 +1748,7 @@ _08046B54:
 	ldr r2, _08046C94
 	add r2, sp
 	ldr r0, [r2]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _08046B68:
 	movs r3, 0
 	mov r9, r3

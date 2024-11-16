@@ -70,11 +70,11 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
     else
     {
         if (pokemon == target) {
-            SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCA10); // {POKEMON_0} couldn't be knocked flying!
             return;
         }
-        SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCBCC); // {POKEMON_0} is anchored! It can't be knocked flying!
             return;
@@ -226,7 +226,7 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, Position *pos)
     info = GetEntInfo(target);
     flag = FALSE;
 
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAE8);
         return;
@@ -358,12 +358,12 @@ void sub_807D3CC(Entity *param_1)
         }
     }
     if (flag) {
-        TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80FD2F8); // All traps were exposed
+        LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80FD2F8); // All traps were exposed
         sub_8040A84();
         sub_8049ED4();
     }
     else {
-        TryDisplayDungeonLoggableMessage(param_1,*gUnknown_80FD320); // There appears to be no hidden traps.
+        LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80FD320); // There appears to be no hidden traps.
     }
 }
 

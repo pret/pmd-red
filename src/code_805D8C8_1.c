@@ -263,7 +263,7 @@ void DungeonHandlePlayerInput(void)
                     }
                 }
                 else if (ShouldMonsterRunAwayAndShowEffect(leader, TRUE)) {
-                    TryDisplayDungeonLoggableMessage(leader, gUnknown_80FD4B0);
+                    LogMessageByIdWithPopupCheckUser(leader, gUnknown_80FD4B0);
                     sub_8044C50(1);
                     gDungeon->unk644.unk2F = 1;
                     break;
@@ -278,7 +278,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (i == MAX_MON_MOVES) {
-                        TryDisplayDungeonLoggableMessage(leader, gUnknown_80F8A28);
+                        LogMessageByIdWithPopupCheckUser(leader, gUnknown_80F8A28);
                         break;
                     }
 
@@ -304,7 +304,7 @@ void DungeonHandlePlayerInput(void)
                         }
                     }
                     if (!canUseMove) {
-                        TryDisplayDungeonLoggableMessage(leader, gUnknown_80F8A4C);
+                        LogMessageByIdWithPopupCheckUser(leader, gUnknown_80F8A4C);
                     }
                     else {
                         SetMonsterActionFields(&leaderInfo->action, ACTION_USE_MOVE_PLAYER);
@@ -502,19 +502,19 @@ void DungeonHandlePlayerInput(void)
                     if (sub_805EC4C(leader, 1))
                         break;
 
-                    if (leaderInfo->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD) {
+                    if (leaderInfo->frozenClassStatus.status == STATUS_SHADOW_HOLD) {
                         immobilizedMsg = gUnknown_80F8A84, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_CONSTRICTION) {
+                    else if (leaderInfo->frozenClassStatus.status == STATUS_CONSTRICTION) {
                         immobilizedMsg = gUnknown_80F8A6C, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) {
+                    else if (leaderInfo->frozenClassStatus.status == STATUS_INGRAIN) {
                         immobilizedMsg = gUnknown_80F8AB0, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_WRAP) {
+                    else if (leaderInfo->frozenClassStatus.status == STATUS_WRAP) {
                         immobilizedMsg = gUnknown_80F8ADC, canMoveFlags |= 1;
                     }
-                    else if (leaderInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) {
+                    else if (leaderInfo->frozenClassStatus.status == STATUS_WRAPPED) {
                         immobilizedMsg = gUnknown_80F8B0C, canMoveFlags |= 1;
                     }
 
@@ -528,7 +528,7 @@ void DungeonHandlePlayerInput(void)
                     if (!(canMoveFlags & 2)) {
                         if (canMoveFlags & 1) {
                             if (immobilizedMsg != NULL) {
-                                TryDisplayDungeonLoggableMessage(leader, immobilizedMsg);
+                                LogMessageByIdWithPopupCheckUser(leader, immobilizedMsg);
                             }
                             sub_8044C50(1);
                             gDungeon->unk644.unk2F = 1;
@@ -536,7 +536,7 @@ void DungeonHandlePlayerInput(void)
                         else {
                             sub_8044C50(2);
                             if ((gRealInputs.held & B_BUTTON || bPress) && FixedPointToInt(leaderInfo->belly) != 0) {
-                                if (GetEntInfo(leader)->volatileStatus.volatileStatus != STATUS_CONFUSED) {
+                                if (GetEntInfo(leader)->cringeClassStatus.status != STATUS_CONFUSED) {
                                     gDungeon->unk644.unk28 = 1;
                                 }
                                 leaderInfo->action.unk4[0].actionUseIndex = 0;
@@ -1349,7 +1349,7 @@ void sub_805E738(Entity *a0)
     Tile *tile;
     s32 i, j;
     EntityInfo *entityInfo = GetEntInfo(a0);
-    if (entityInfo->eyesightStatus.eyesightStatus != 1 && entityInfo->eyesightStatus.eyesightStatus != 2) {
+    if (entityInfo->blinkerClassStatus.status != 1 && entityInfo->blinkerClassStatus.status != 2) {
         // What???
         for (i = 0; i < 1; i++) {
             bool8 r9 = FALSE;
@@ -1544,29 +1544,29 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     if (tileMonsterInfo->isNotTeamMember
         && (tileMonsterInfo->shopkeeper != 1 && tileMonsterInfo->shopkeeper != 2)
         && !IsClientOrTeamBase(tileMonsterInfo->joinedAt.joinedAt)
-        && tileMonsterInfo->clientType != CLIENT_TYPE_CLIENT) {
+        && tileMonsterInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET) {
         return FALSE;
     }
 
-    if (entityInfo->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD) return FALSE;
-    if (entityInfo->immobilize.immobilizeStatus == STATUS_FROZEN) return FALSE;
-    if (entityInfo->immobilize.immobilizeStatus == STATUS_CONSTRICTION) return FALSE;
-    if (entityInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) return FALSE;
-    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAP) return FALSE;
-    if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) return FALSE;
+    if (entityInfo->frozenClassStatus.status == STATUS_SHADOW_HOLD) return FALSE;
+    if (entityInfo->frozenClassStatus.status == STATUS_FROZEN) return FALSE;
+    if (entityInfo->frozenClassStatus.status == STATUS_CONSTRICTION) return FALSE;
+    if (entityInfo->frozenClassStatus.status == STATUS_INGRAIN) return FALSE;
+    if (entityInfo->frozenClassStatus.status == STATUS_WRAP) return FALSE;
+    if (entityInfo->frozenClassStatus.status == STATUS_WRAPPED) return FALSE;
 
-    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD) return FALSE;
-    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_FROZEN) return FALSE;
-    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_CONSTRICTION) return FALSE;
-    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) return FALSE;
-    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_WRAP) return FALSE;
-    if (tileMonsterInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) return FALSE;
+    if (tileMonsterInfo->frozenClassStatus.status == STATUS_SHADOW_HOLD) return FALSE;
+    if (tileMonsterInfo->frozenClassStatus.status == STATUS_FROZEN) return FALSE;
+    if (tileMonsterInfo->frozenClassStatus.status == STATUS_CONSTRICTION) return FALSE;
+    if (tileMonsterInfo->frozenClassStatus.status == STATUS_INGRAIN) return FALSE;
+    if (tileMonsterInfo->frozenClassStatus.status == STATUS_WRAP) return FALSE;
+    if (tileMonsterInfo->frozenClassStatus.status == STATUS_WRAPPED) return FALSE;
 
-    if (entityInfo->volatileStatus.volatileStatus == STATUS_CONFUSED) return FALSE;
-    if (tileMonsterInfo->volatileStatus.volatileStatus == STATUS_CONFUSED) return FALSE;
+    if (entityInfo->cringeClassStatus.status == STATUS_CONFUSED) return FALSE;
+    if (tileMonsterInfo->cringeClassStatus.status == STATUS_CONFUSED) return FALSE;
 
-    if (tileMonsterInfo->sleep.sleep != STATUS_NONE && tileMonsterInfo->sleep.sleep != STATUS_SLEEPLESS && tileMonsterInfo->sleep.sleep != STATUS_YAWNING)  return FALSE;
-    if (entityInfo->sleep.sleep != STATUS_NONE      && entityInfo->sleep.sleep != STATUS_SLEEPLESS      && entityInfo->sleep.sleep != STATUS_YAWNING)       return FALSE;
+    if (tileMonsterInfo->sleepClassStatus.status != STATUS_NONE && tileMonsterInfo->sleepClassStatus.status != STATUS_SLEEPLESS && tileMonsterInfo->sleepClassStatus.status != STATUS_YAWNING)  return FALSE;
+    if (entityInfo->sleepClassStatus.status != STATUS_NONE      && entityInfo->sleepClassStatus.status != STATUS_SLEEPLESS      && entityInfo->sleepClassStatus.status != STATUS_YAWNING)       return FALSE;
 
     if (IsChargingAnyTwoTurnMove(tileMonster, FALSE)) return FALSE;
     if (!sub_8070F80(a0, entityInfo->action.direction)) return FALSE;
@@ -1603,7 +1603,7 @@ void sub_805EE30(void)
         return;
 
     tile = GetTileAtEntitySafe(leader);
-    if (IQSkillIsEnabled(leader, IQ_SUPER_MOBILE) && GetEntInfo(leader)->transformStatus.transformStatus != STATUS_MOBILE && !HasHeldItem(leader, ITEM_MOBILE_SCARF))
+    if (IQSkillIsEnabled(leader, IQ_SUPER_MOBILE) && GetEntInfo(leader)->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(leader, ITEM_MOBILE_SCARF))
         sub_804AE84(&leader->pos);
     if (tile->terrainType & TERRAIN_TYPE_STAIRS)
         gDungeon->unk1 = 1;
@@ -1667,7 +1667,7 @@ bool8 sub_805EF60(Entity *a0, EntityInfo *a1)
         return FALSE;
     if (!sub_8070BC0(a0))
         return FALSE;
-    if (GetEntInfo(r4)->isNotTeamMember && GetEntInfo(r4)->clientType != CLIENT_TYPE_CLIENT && GetEntInfo(r4)->shopkeeper != 1)
+    if (GetEntInfo(r4)->isNotTeamMember && GetEntInfo(r4)->monsterBehavior != BEHAVIOR_RESCUE_TARGET && GetEntInfo(r4)->shopkeeper != 1)
         return FALSE;
 
     SetMonsterActionFields(&a1->action, ACTION_TALK_FIELD);
@@ -1678,11 +1678,11 @@ void sub_805EFB4(Entity *a0, bool8 a1)
 {
     s32 i;
     EntityInfo *leaderInfo = GetLeaderInfo();
-    if (a1 && leaderInfo->volatileStatus.volatileStatus == STATUS_COWERING) {
+    if (a1 && leaderInfo->cringeClassStatus.status == STATUS_COWERING) {
         leaderInfo->action.direction += 4;
         leaderInfo->action.direction &= 7;
     }
-    else if (leaderInfo->volatileStatus.volatileStatus == STATUS_CONFUSED) {
+    else if (leaderInfo->cringeClassStatus.status == STATUS_CONFUSED) {
         s32 rnd = DungeonRandInt(8);
         for (i = 0; i < 8; i++) {
             if (a1 || CanMoveInDirection(a0, rnd)) {
@@ -1752,8 +1752,8 @@ void sub_805F02C(void)
         sub_803F508(r7);
         sub_8041AD0(leader);
         sub_8041AE0(GetLeader());
-        SetMessageArgument(gFormatBuffer_Monsters[0], r7, 0);
-        TryDisplayDungeonLoggableMessage(r7, gUnknown_80F9BB0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], r7, 0);
+        LogMessageByIdWithPopupCheckUser(r7, gUnknown_80F9BB0);
         sub_807EC28(FALSE);
         r8->unk64 = 0;
         leaderInfo->unk64 = 0;
@@ -2115,7 +2115,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                         break;
                 }
                 else {
-                    SetMessageArgument(gFormatBuffer_Monsters[0], GetLeader(), 0);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], GetLeader(), 0);
                     DisplayDungeonMessage(0, gUnknown_80FDE18, 1);
                 }
             }
@@ -2251,7 +2251,7 @@ void DrawFieldMenu(u8 a0)
             Entity *teamMon = gDungeon->teamPokemon[i];
             if (EntityExists(teamMon)) {
                 EntityInfo *monInfo = GetEntInfo(teamMon);
-                SetMessageArgument(gFormatBuffer_Monsters[0], teamMon, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], teamMon, 0);
                 gFormatArgs[0] = monInfo->HP;
                 gFormatArgs[1] = monInfo->maxHPStat;
                 PrintFormattedStringOnWindow(4, yLoop, gUnknown_80F91E0, 2, 0);
@@ -3652,7 +3652,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                         monInfo->aiTarget.unkC = 0;
                         monInfo->aiTarget.aiTargetSpawnGenID = 0;
                         if (!monInfo->isTeamLeader) {
-                            MoveIfPossible(teamMon, TRUE);
+                            AIMovement(teamMon, TRUE);
                         }
                     }
                     else {

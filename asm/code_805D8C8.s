@@ -2171,7 +2171,7 @@ sub_8062B74:
 	ldr r0, _08062BD0
 	mov r1, r10
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _08062BD4
 	ldr r2, [r0]
 	movs r0, 0
@@ -2322,7 +2322,7 @@ sub_8062CA8:
 	ldr r0, _08062CF8
 	adds r1, r4, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _08062CFC
 	ldr r2, [r0]
 	movs r0, 0
@@ -3429,7 +3429,7 @@ sub_8063578:
 	ldr r0, _080635FC
 	ldr r1, [sp, 0x14]
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	lsls r4, 3
 	adds r4, 0xA
 	ldr r0, _08063600
@@ -4122,7 +4122,7 @@ _08063AEC:
 	ldr r0, _08063B2C
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _08063B3A
 	.align 2, 0
 _08063B1C: .4byte gDungeon
@@ -4134,7 +4134,7 @@ _08063B30:
 	ldr r0, _08063B50
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _08063B3A:
 	movs r0, 0x78
 	movs r1, 0x1F
@@ -4442,7 +4442,7 @@ _08063D70:
 	ldr r0, _08063DAC
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _08063DBA
 	.align 2, 0
 _08063D98: .4byte gDungeon
@@ -4455,7 +4455,7 @@ _08063DB0:
 	ldr r0, _08063DD0
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _08063DBA:
 	movs r0, 0x78
 	movs r1, 0x1F
@@ -5474,7 +5474,7 @@ sub_806455C:
 	ldr r1, [r4, 0x14]
 	add r0, sp, 0x4
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	str r5, [sp]
 	movs r0, 0x8
 	movs r1, 0x12

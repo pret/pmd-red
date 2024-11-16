@@ -50,7 +50,7 @@ void sub_806CC10(void)
     s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activePokemon[i];
 
         if (EntityExists(entity)) {
             entityInfo = GetEntInfo(entity);
@@ -70,7 +70,7 @@ void sub_806CC70(void)
     Entity *entity;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activePokemon[i];
 
         if (EntityExists(entity))
             sub_806CCB4(entity, sub_806CEBC(entity));
@@ -96,7 +96,7 @@ void sub_806CCB4(Entity *entity, u8 a1)
     entity->axObj.unk47 = 0;
     sVar1 = entity->axObj.unk40_maybeAnimTimer;
 
-    if (info->waitingStruct.waitingStatus != STATUS_DECOY && !flag)
+    if (info->curseClassStatus.status != STATUS_DECOY && !flag)
         AxResInitFile(&entity->axObj.axdata,
                       entity->axObj.spriteFile, entity->axObj.unk42_animId1,
                       entity->axObj.unk44_direction1, sVar1,
@@ -117,7 +117,7 @@ void sub_806CD90(void)
     Entity *entity;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activePokemon[i];
 
         if (EntityExists(entity))
             sub_806CCB4(entity, sub_806CEBC(entity));
@@ -177,19 +177,19 @@ void sub_806CE94(Entity *entity, u32 newDir)
 
 u8 sub_806CEBC(Entity *entity)
 {
-    u8 sleep;
+    u8 sleepClassStatus;
     EntityInfo *entityInfo;
 
     entityInfo = GetEntInfo(entity);
-    sleep = entityInfo->sleep.sleep;
+    sleepClassStatus = entityInfo->sleepClassStatus.status;
 
-    if (sleep == STATUS_SLEEP || sleep == STATUS_NAPPING || sleep == STATUS_NIGHTMARE) {
-        if (entityInfo->apparentID != MONSTER_SUDOWOODO || entityInfo->sleep.sleepTurns != 0x7F)
+    if (sleepClassStatus == STATUS_SLEEP || sleepClassStatus == STATUS_NAPPING || sleepClassStatus == STATUS_NIGHTMARE) {
+        if (entityInfo->apparentID != MONSTER_SUDOWOODO || entityInfo->sleepClassStatus.turns != 0x7F)
             return 5;
         else
             return 7;
     }
-    if (entityInfo->charging.chargingStatus == STATUS_BIDE)
+    if (entityInfo->bideClassStatus.status == STATUS_BIDE)
         return 11;
     return 7;
 }
@@ -228,7 +228,7 @@ void sub_806CF60(void)
     s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activePokemon[i];
 
         if (EntityExists(entity))
             sub_806CF98(entity);
@@ -342,19 +342,19 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         return;
 
     r9 = arg8;
-    if (CheckVariousStatuses(target) || GetEntInfo(target)->charging.chargingStatus != 0)
+    if (CheckVariousStatuses(target) || GetEntInfo(target)->bideClassStatus.status != 0)
         r9 = FALSE;
     if (r9
         && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1
         && attacker != target
         && IsTypePhysical(dmgStruct->type)
-        && GetEntInfo(target)->protection.protectionStatus == STATUS_VITAL_THROW)
+        && GetEntInfo(target)->reflectClassStatus.status == STATUS_VITAL_THROW)
     {
         sub_8042730(target, attacker);
         sub_807F43C(target, attacker);
     }
 
-    if (GetEntInfo(target)->charging.chargingStatus == STATUS_ENRAGED) {
+    if (GetEntInfo(target)->bideClassStatus.status == STATUS_ENRAGED) {
         RaiseAttackStageTarget(attacker, target, gUnknown_8106A4C, 1);
     }
 
@@ -366,15 +366,15 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         && abs(attacker->pos.x - target->pos.x) <= 1 && abs(attacker->pos.y - target->pos.y) <= 1)
     {
         bool32 isPhysical = IsTypePhysical(dmgStruct->type);
-        if (GetEntInfo(target)->protection.protectionStatus == STATUS_COUNTER && isPhysical) {
+        if (GetEntInfo(target)->reflectClassStatus.status == STATUS_COUNTER && isPhysical) {
             sub_8041B18(target);
             returnDmg += 4;
         }
-        if (GetEntInfo(target)->protection.protectionStatus == STATUS_MINI_COUNTER && isPhysical) {
+        if (GetEntInfo(target)->reflectClassStatus.status == STATUS_MINI_COUNTER && isPhysical) {
             sub_8041B18(target);
             returnDmg += 1;
         }
-        if (GetEntInfo(target)->protection.protectionStatus == STATUS_MIRROR_COAT && !isPhysical) {
+        if (GetEntInfo(target)->reflectClassStatus.status == STATUS_MIRROR_COAT && !isPhysical) {
             sub_8041B90(target);
             returnDmg += 4;
         }
@@ -472,13 +472,13 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
     // Destiny Bond
     if (r9) {
         EntityInfo *targetInfo = GetEntInfo(target);
-        if (targetInfo->linked.linkedStatus == STATUS_DESTINY_BOND) {
-            Entity *destBondTarget = gDungeon->allPokemon[targetInfo->linked.unk8];
+        if (targetInfo->leechSeedClassStatus.status == STATUS_DESTINY_BOND) {
+            Entity *destBondTarget = gDungeon->activePokemon[targetInfo->leechSeedClassStatus.unk8];
             if (destBondTarget == NULL) {
-                targetInfo->linked.linkedStatus = 0;
+                targetInfo->leechSeedClassStatus.status = 0;
             }
-            else if (GetEntInfo(destBondTarget)->unk98 != targetInfo->linked.unk4) {
-                targetInfo->linked.linkedStatus = 0;
+            else if (GetEntInfo(destBondTarget)->unk98 != targetInfo->leechSeedClassStatus.unk4) {
+                targetInfo->leechSeedClassStatus.status = 0;
             }
             else {
                 sub_8041D00(destBondTarget, target);
@@ -513,29 +513,29 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     TrySendImmobilizeSleepEndMsg(attacker, target);
     SetShopkeeperAggression(attacker, target);
     if (GetEntityType(attacker) == ENTITY_MONSTER
-        && GetEntInfo(attacker)->moveStatus.moveStatus == STATUS_SET_DAMAGE
+        && GetEntInfo(attacker)->sureShotClassStatus.status == STATUS_SET_DAMAGE
         && dmgStruct->unkE == 0)
     {
         dmgStruct->dmg = gUnknown_80F4F8C;
     }
 
     if (arg4 != 0x20E && HasAbility(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
-        SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
         TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCA90);
         sub_8042238(attacker, target);
         dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
-    if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN) {
-        SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+    if (targetData->frozenClassStatus.status == STATUS_FROZEN) {
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
         TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9600);
         sub_8042238(attacker, target);
         dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
 
-    if ((targetData->sleep.sleep == STATUS_SLEEP || targetData->sleep.sleep == STATUS_NAPPING || targetData->sleep.sleep == STATUS_NIGHTMARE)
-        && targetData->sleep.sleepTurns == 0x7F)
+    if ((targetData->sleepClassStatus.status == STATUS_SLEEP || targetData->sleepClassStatus.status == STATUS_NAPPING || targetData->sleepClassStatus.status == STATUS_NIGHTMARE)
+        && targetData->sleepClassStatus.turns == 0x7F)
     {
         WakeUpPokemon(target);
     }
@@ -568,8 +568,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         }
     }
 
-    SetMessageArgument(gFormatBuffer_Monsters[0], attacker, 0);
-    SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
     if (dmgStruct->dmg == 0) {
         if (sub_8045888(attacker) && sub_8045888(target)) {
             if (targetData->unk152 == 0) {
@@ -639,7 +639,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             else {
                 unkBool = FALSE;
             }
-            if (targetData->eyesightStatus.eyesightStatus == STATUS_BLINKER || targetData->eyesightStatus.eyesightStatus == STATUS_CROSS_EYED)
+            if (targetData->blinkerClassStatus.status == STATUS_BLINKER || targetData->blinkerClassStatus.status == STATUS_CROSS_EYED)
                 unkBool = FALSE;
             if (unkBool) {
                 EntityInfo *info = GetEntInfo(target);
@@ -659,7 +659,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     else
         targetData->HP = 0;
 
-    if (targetData->protection.protectionStatus == STATUS_ENDURING) {
+    if (targetData->reflectClassStatus.status == STATUS_ENDURING) {
         if (targetData->HP == 0) {
             targetData->HP = 1;
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_8100548);
@@ -694,7 +694,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
 
     // 0 HP
-    if (targetData->transformStatus.transformStatus == STATUS_TRANSFORMED) {
+    if (targetData->invisibleClassStatus.status == STATUS_TRANSFORMED) {
         SendTransformEndMessage(attacker, target);
     }
 
@@ -715,8 +715,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         r8 = 0;
 
     targetData->unk14C = 0;
-    SetMessageArgument(gFormatBuffer_Monsters[0], attacker, 0);
-    SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
     if (dmgStruct->residualDmgType == 19 || dmgStruct->residualDmgType == 20) {
         if (targetData->isNotTeamMember) {
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9E44);
@@ -727,7 +727,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
     else if (targetData->isNotTeamMember)
     {
-        if (targetData->clientType == CLIENT_TYPE_CLIENT) {
+        if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
         }
         else {
@@ -742,7 +742,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         else if (IsClientOrTeamBase(targetData->joinedAt.joinedAt)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DAC[r8]);
         }
-        else if (targetData->clientType == CLIENT_TYPE_CLIENT) {
+        else if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
         }
         else if (sub_806A58C(recruitedMon->unkA)) {
@@ -758,7 +758,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         }
     }
 
-    if (targetData->immobilize.immobilizeStatus == STATUS_WRAP || targetData->immobilize.immobilizeStatus == STATUS_WRAPPED) {
+    if (targetData->frozenClassStatus.status == STATUS_WRAP || targetData->frozenClassStatus.status == STATUS_WRAPPED) {
         sub_8076CB4(targetData->unk9C);
     }
 
@@ -779,11 +779,11 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                     gDungeon->unk644.itemHoldersIdentified = 0;
                 }
                 ZeroOutItem(&targetData->heldItem);
-                if (targetData->waitingStruct.waitingStatus == STATUS_SNATCH) {
-                    SendWaitingEndMessage(attacker, target, STATUS_SNATCH);
+                if (targetData->curseClassStatus.status == STATUS_SNATCH) {
+                    EndCurseClassStatus(attacker, target, STATUS_SNATCH);
                 }
-                else if (targetData->waitingStruct.waitingStatus == STATUS_DECOY) {
-                    SendWaitingEndMessage(attacker, target, STATUS_DECOY);
+                else if (targetData->curseClassStatus.status == STATUS_DECOY) {
+                    EndCurseClassStatus(attacker, target, STATUS_DECOY);
                 }
                 sub_8078084(target);
                 sub_806BFC0(targetData, 0);
@@ -791,7 +791,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
                 EntityUpdateStatusSprites(target);
-                SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
                 DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
                 sub_806F63C(target);
                 return FALSE;
@@ -836,11 +836,11 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                     gDungeon->unk644.itemHoldersIdentified = 0;
                 }
                 ZeroOutItem(heldItem);
-                if (targetData->waitingStruct.waitingStatus == STATUS_SNATCH) {
-                    SendWaitingEndMessage(attacker, target, STATUS_SNATCH);
+                if (targetData->curseClassStatus.status == STATUS_SNATCH) {
+                    EndCurseClassStatus(attacker, target, STATUS_SNATCH);
                 }
-                else if (targetData->waitingStruct.waitingStatus == STATUS_DECOY) {
-                    SendWaitingEndMessage(attacker, target, STATUS_DECOY);
+                else if (targetData->curseClassStatus.status == STATUS_DECOY) {
+                    EndCurseClassStatus(attacker, target, STATUS_DECOY);
                 }
                 sub_8078084(target);
                 sub_806BFC0(targetData, 0);
@@ -848,8 +848,8 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
                 EntityUpdateStatusSprites(target);
-                SetMessageArgument(gFormatBuffer_Monsters[0], target, 0);
-                SetMessageArgument(gFormatBuffer_Monsters[1], teamMember, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], teamMember, 0);
                 DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD484);
                 sub_806F63C(target);
                 return FALSE;
@@ -890,11 +890,11 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 gDungeon->unk644.unk35 = 0;
                 gDungeon->unk644.itemHoldersIdentified = 0;
             }
-            if (targetData->waitingStruct.waitingStatus == STATUS_SNATCH) {
-                SendWaitingEndMessage(attacker, target, STATUS_SNATCH);
+            if (targetData->curseClassStatus.status == STATUS_SNATCH) {
+                EndCurseClassStatus(attacker, target, STATUS_SNATCH);
             }
-            else if (targetData->waitingStruct.waitingStatus == STATUS_DECOY) {
-                SendWaitingEndMessage(attacker, target, STATUS_DECOY);
+            else if (targetData->curseClassStatus.status == STATUS_DECOY) {
+                EndCurseClassStatus(attacker, target, STATUS_DECOY);
             }
             sub_8078084(target);
             sub_806BFC0(targetData, 0);
@@ -902,7 +902,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_806A390(target);
             sub_806CCB4(target, sub_806CEBC(target));
             EntityUpdateStatusSprites(target);
-            SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80FD46C);
             sub_806F63C(target);
             return FALSE;

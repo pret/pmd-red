@@ -16,18 +16,18 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 
-extern u32 gStatusSpriteMasks_SleepStatus[];
-extern u32 gStatusSpriteMasks_NonVolatileStatus[];
-extern u32 gStatusSpriteMasks_ImmobilizeStatus[];
-extern u32 gStatusSpriteMasks_VolatileStatus[];
-extern u32 gStatusSpriteMasks_ChargingStatus[];
-extern u32 gStatusSpriteMasks_ProtectionStatus[];
-extern u32 gStatusSpriteMasks_WaitingStatus[];
-extern u32 gStatusSpriteMasks_LinkedStatus[];
-extern u32 gStatusSpriteMasks_MoveStatus[];
-extern u32 gStatusSpriteMasks_ItemStatus[];
-extern u32 gStatusSpriteMasks_TransformStatus[];
-extern u32 gStatusSpriteMasks_EyesightStatus[];
+extern u32 gStatusSpriteMasks_SleepClassStatus[];
+extern u32 gStatusSpriteMasks_BurnClassStatus[];
+extern u32 gStatusSpriteMasks_FrozenClassStatus[];
+extern u32 gStatusSpriteMasks_CringeClassStatus[];
+extern u32 gStatusSpriteMasks_BideClassStatus[];
+extern u32 gStatusSpriteMasks_ReflectClassStatus[];
+extern u32 gStatusSpriteMasks_CurseClassStatus[];
+extern u32 gStatusSpriteMasks_LeechSeedClassStatus[];
+extern u32 gStatusSpriteMasks_SureShotClassStatus[];
+extern u32 gStatusSpriteMasks_LongTossClassStatus[];
+extern u32 gStatusSpriteMasks_InvisibleClassStatus[];
+extern u32 gStatusSpriteMasks_BlinkerClassStatus[];
 extern u32 gStatusSpriteMasks_MuzzledStatus[];
 
 
@@ -154,7 +154,7 @@ void sub_8041888(u8 param_1)
     EntityInfo *entityInfo;
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
+        entity = gDungeon->activePokemon[index];
         if(EntityExists(entity))
         {
             entityInfo = GetEntInfo(entity);
@@ -182,26 +182,26 @@ void EntityUpdateStatusSprites(Entity *entity)
 
     if (entityInfo->id == 0xb9) {
       // NOTE: clean this up sometime
-      temp = entityInfo->sleep.sleepTurns;
+      temp = entityInfo->sleepClassStatus.turns;
       flag = 0x7f;
       temp ^= flag;
       flag = (temp) != 0;
     }
     if (flag) {
-      spriteStatus = gStatusSpriteMasks_SleepStatus[entityInfo->sleep.sleep];
+      spriteStatus = gStatusSpriteMasks_SleepClassStatus[entityInfo->sleepClassStatus.status];
     }
     spriteStatus = spriteStatus |
-            gStatusSpriteMasks_NonVolatileStatus[entityInfo->nonVolatile.nonVolatileStatus] |
-            gStatusSpriteMasks_ImmobilizeStatus[entityInfo->immobilize.immobilizeStatus] |
-            gStatusSpriteMasks_VolatileStatus[entityInfo->volatileStatus.volatileStatus] |
-            gStatusSpriteMasks_ChargingStatus[entityInfo->charging.chargingStatus] |
-            gStatusSpriteMasks_ProtectionStatus[entityInfo->protection.protectionStatus] |
-            gStatusSpriteMasks_WaitingStatus[entityInfo->waitingStruct.waitingStatus] |
-            gStatusSpriteMasks_LinkedStatus[entityInfo->linked.linkedStatus] |
-            gStatusSpriteMasks_MoveStatus[entityInfo->moveStatus.moveStatus] |
-            gStatusSpriteMasks_ItemStatus[entityInfo->itemStatus.itemStatus] |
-            gStatusSpriteMasks_TransformStatus[entityInfo->transformStatus.transformStatus] |
-            gStatusSpriteMasks_EyesightStatus[entityInfo->eyesightStatus.eyesightStatus] |
+            gStatusSpriteMasks_BurnClassStatus[entityInfo->burnClassStatus.status] |
+            gStatusSpriteMasks_FrozenClassStatus[entityInfo->frozenClassStatus.status] |
+            gStatusSpriteMasks_CringeClassStatus[entityInfo->cringeClassStatus.status] |
+            gStatusSpriteMasks_BideClassStatus[entityInfo->bideClassStatus.status] |
+            gStatusSpriteMasks_ReflectClassStatus[entityInfo->reflectClassStatus.status] |
+            gStatusSpriteMasks_CurseClassStatus[entityInfo->curseClassStatus.status] |
+            gStatusSpriteMasks_LeechSeedClassStatus[entityInfo->leechSeedClassStatus.status] |
+            gStatusSpriteMasks_SureShotClassStatus[entityInfo->sureShotClassStatus.status] |
+            gStatusSpriteMasks_LongTossClassStatus[entityInfo->longTossClassStatus.status] |
+            gStatusSpriteMasks_InvisibleClassStatus[entityInfo->invisibleClassStatus.status] |
+            gStatusSpriteMasks_BlinkerClassStatus[entityInfo->blinkerClassStatus.status] |
             gStatusSpriteMasks_MuzzledStatus[entityInfo->muzzled.muzzled];
 
     if (entityInfo->grudge) {

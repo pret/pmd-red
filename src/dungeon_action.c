@@ -48,7 +48,7 @@ void sub_8044820(void)
   Entity * entity;
   Entity * entity2;
   s32 index;
-  
+
   for (index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++) {
     entity = gDungeon->wildPokemon[index];
     if (EntityExists(entity)) {
@@ -62,7 +62,7 @@ void sub_8044820(void)
         }
         else
         {
-          entityInfo->aiNextToTarget = FALSE;
+          entityInfo->aiAllySkip = FALSE;
           movSpeed = CalcSpeedStage(entity);
           if (gSpeedTurns[movSpeed][gDungeon->unk644.fractionalTurn] != 0) {
             if (!entityInfo->attacking) {
@@ -88,12 +88,12 @@ void sub_8044820(void)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
       entity2 = gDungeon->wildPokemon[index];
-      if ((EntityExists(entity2)) && (entityInfo2 = GetEntInfo(entity2), entityInfo2->aiNextToTarget))
+      if ((EntityExists(entity2)) && (entityInfo2 = GetEntInfo(entity2), entityInfo2->aiAllySkip))
       {
         sub_8074094(entity2);
         if (EntityExists(entity2)) {
           sub_8071DA4(entity2);
-          entityInfo2->aiNextToTarget = FALSE;
+          entityInfo2->aiAllySkip = FALSE;
         }
       }
     }
@@ -106,7 +106,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
   Entity *entity;
   u32 isNotEnemy;
   s32 index;
-  
+
   if (gSpeedTurns[1][gDungeon->unk644.fractionalTurn] != 0) {
     sub_8071B48();
     gDungeon->plusIsActive[0] = FALSE;
@@ -118,7 +118,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
+        entity = gDungeon->activePokemon[index];
         if (EntityExists(entity)) {
             entityInfo = GetEntInfo(entity);
             entityInfo->attacking = FALSE;
@@ -137,7 +137,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
             }
             if (HasAbility(entity, ABILITY_MINUS)) {
                 gDungeon->minusIsActive[isNotEnemy] = TRUE;
-            }  
+            }
             if (HasAbility(entity, ABILITY_PLUS)) {
                 gDungeon->plusIsActive[isNotEnemy] = TRUE;
             }
@@ -150,10 +150,10 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
 void sub_8044AB4(void)
 {
   s32 index;
-  
+
   if (gSpeedTurns[1][gDungeon->unk644.fractionalTurn + 1] != 0) {
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
-      if (EntityExists(gDungeon->allPokemon[index])) {
+      if (EntityExists(gDungeon->activePokemon[index])) {
         UseAttack(0);
         break;
       }
@@ -182,7 +182,7 @@ bool8 sub_8044B28(void)
     }
     return TRUE;
 }
- 
+
 bool8 sub_8044B84(void)
 {
     if(gDungeon->unk10 != 0)
@@ -198,7 +198,7 @@ u8 *sub_8044BA8(u16 param_1, u8 id)
 {
   u32 uVar3;
   u32 uVar4;
-  
+
   if ((param_1 == 0x26) && (sub_8043D10() == 2)) {
     return *gUnknown_80F91EC;
   }
@@ -260,7 +260,7 @@ void SetMonsterActionFields(ActionContainer *actionPointer, u16 action)
 
 void SetActionPassTurnOrWalk(ActionContainer *actionPointer, s16 species)
 {
-    if (CanMove(species))
+    if (GetCanMoveFlag(species))
     {
         actionPointer->action = ACTION_WALK;
     }

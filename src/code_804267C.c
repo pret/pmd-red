@@ -103,14 +103,14 @@ void sub_80427AC(void)
     s32 i;
 
     for (i = 0; i < 20; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activePokemon[i];
         if (EntityExists(entity)) {
             enInfo = GetEntInfo(entity);
             if (enInfo->unkF3) {
                 enInfo->unkF3 = FALSE;
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
-                    SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
                     DisplayDungeonLoggableMessageTrue(entity, *gPtrFeralFoundItemMessage);
                 }
             }

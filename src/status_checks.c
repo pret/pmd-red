@@ -24,47 +24,47 @@ extern const char *gPtrInfatuatedMessage[];
 extern u8 *gUnknown_80F95EC[];
 extern char *gPtrMoveInterruptedMessage[];
 
-bool8 HasStatusAffectingActions(Entity *pokemon)
+bool8 HasStatusThatPreventsActing(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
-    SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
     SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
-    switch (pokemonInfo->sleep.sleep)
+    switch (pokemonInfo->sleepClassStatus.status)
     {
         case STATUS_NIGHTMARE:
         case STATUS_SLEEP:
         case STATUS_NAPPING:
             return TRUE;
     }
-    switch (pokemonInfo->immobilize.immobilizeStatus)
+    switch (pokemonInfo->frozenClassStatus.status)
     {
         case STATUS_FROZEN:
-            TryDisplayDungeonLoggableMessage(pokemon, *gPtrFrozenMessage);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gPtrFrozenMessage);
             return TRUE;
         case STATUS_WRAP:
-            TryDisplayDungeonLoggableMessage(pokemon, *gPtrWrappedAroundMessage);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gPtrWrappedAroundMessage);
             return TRUE;
         case STATUS_WRAPPED:
-            TryDisplayDungeonLoggableMessage(pokemon, *gPtrWrappedByMessage);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gPtrWrappedByMessage);
             return TRUE;
         case STATUS_PETRIFIED:
             return TRUE;
     }
-    switch (pokemonInfo->volatileStatus.volatileStatus)
+    switch (pokemonInfo->cringeClassStatus.status)
     {
         case STATUS_PAUSED:
-            TryDisplayDungeonLoggableMessage(pokemon, *gPtrPausedMessage);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gPtrPausedMessage);
             return TRUE;
         case STATUS_INFATUATED:
-            TryDisplayDungeonLoggableMessage(pokemon, *gPtrInfatuatedMessage);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gPtrInfatuatedMessage);
             return TRUE;
     }
-    if (pokemonInfo->charging.chargingStatus == STATUS_BIDE)
+    if (pokemonInfo->bideClassStatus.status == STATUS_BIDE)
     {
-        TryDisplayDungeonLoggableMessage(pokemon, *gPtrBideMessage);
+        LogMessageByIdWithPopupCheckUser(pokemon, *gPtrBideMessage);
         return TRUE;
     }
-    if (pokemonInfo->waitingStruct.waitingStatus == STATUS_DECOY)
+    if (pokemonInfo->curseClassStatus.status == STATUS_DECOY)
     {
         SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
         pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
@@ -76,7 +76,7 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
     {
         return TRUE;
     }
-    if (pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
+    if (pokemonInfo->blinkerClassStatus.status == STATUS_BLINKER)
     {
         if (!CanMoveInDirection(pokemon, pokemonInfo->action.direction))
         {
@@ -93,10 +93,10 @@ bool8 HasStatusAffectingActions(Entity *pokemon)
             SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
             return TRUE;
         }
-        DecideAttack(pokemon);
+        ChooseAIMove(pokemon);
         return TRUE;
     }
-    if (pokemonInfo->eyesightStatus.eyesightStatus == STATUS_CROSS_EYED)
+    if (pokemonInfo->blinkerClassStatus.status == STATUS_CROSS_EYED)
     {
         SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
         pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
@@ -117,60 +117,60 @@ bool8 sub_80701A4(Entity *pokemon)
 
   pokemonInfo = GetEntInfo(pokemon);
   flag = FALSE;
-  SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
   SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
-  switch(pokemonInfo->sleep.sleep)
+  switch(pokemonInfo->sleepClassStatus.status)
   {
       case STATUS_SLEEP:
       case STATUS_NIGHTMARE:
       case STATUS_NAPPING:
-          TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80F95EC);
+          LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80F95EC);
           return TRUE;
   }
 
-  switch(pokemonInfo->immobilize.immobilizeStatus)
+  switch(pokemonInfo->frozenClassStatus.status)
   {
     case STATUS_FROZEN:
-        TryDisplayDungeonLoggableMessage(pokemon,*gPtrFrozenMessage);
+        LogMessageByIdWithPopupCheckUser(pokemon,*gPtrFrozenMessage);
         return TRUE;
     case STATUS_WRAP:
-        TryDisplayDungeonLoggableMessage(pokemon,*gPtrWrappedAroundMessage);
+        LogMessageByIdWithPopupCheckUser(pokemon,*gPtrWrappedAroundMessage);
         return TRUE;
     case STATUS_WRAPPED:
-        TryDisplayDungeonLoggableMessage(pokemon,*gPtrWrappedByMessage);
+        LogMessageByIdWithPopupCheckUser(pokemon,*gPtrWrappedByMessage);
         return TRUE;
     case STATUS_PETRIFIED:
         return TRUE;
   }
 
-  switch(pokemonInfo->volatileStatus.volatileStatus) {
+  switch(pokemonInfo->cringeClassStatus.status) {
     case STATUS_CONFUSED:
         flag = TRUE;
         goto _0807026C;
     case STATUS_PAUSED:
-        TryDisplayDungeonLoggableMessage(pokemon,*gPtrPausedMessage);
+        LogMessageByIdWithPopupCheckUser(pokemon,*gPtrPausedMessage);
         return TRUE;
     case STATUS_INFATUATED:
-        TryDisplayDungeonLoggableMessage(pokemon,*gPtrInfatuatedMessage);
+        LogMessageByIdWithPopupCheckUser(pokemon,*gPtrInfatuatedMessage);
         return TRUE;
     default:
     case STATUS_NONE:
     case STATUS_CRINGE:
     case 8:
     _0807026C:
-        if (pokemonInfo->charging.chargingStatus == STATUS_BIDE) {
-             TryDisplayDungeonLoggableMessage(pokemon,*gPtrBideMessage);
+        if (pokemonInfo->bideClassStatus.status == STATUS_BIDE) {
+             LogMessageByIdWithPopupCheckUser(pokemon,*gPtrBideMessage);
              return TRUE;
         }
-        else if (((pokemonInfo->charging.chargingStatus != STATUS_NONE) && (pokemonInfo->charging.chargingStatus != STATUS_CHARGING)) && (pokemonInfo->charging.chargingStatus != STATUS_ENRAGED)) {
+        else if (((pokemonInfo->bideClassStatus.status != STATUS_NONE) && (pokemonInfo->bideClassStatus.status != STATUS_CHARGING)) && (pokemonInfo->bideClassStatus.status != STATUS_ENRAGED)) {
             if (flag) {
-                TryDisplayDungeonLoggableMessage(pokemon,*gPtrMoveInterruptedMessage);
+                LogMessageByIdWithPopupCheckUser(pokemon,*gPtrMoveInterruptedMessage);
             }
             else {
                 for(index = 0, move = pokemonInfo->moves.moves; index < MAX_MON_MOVES; move++, index++) {
                     if ((move->moveFlags & MOVE_FLAG_EXISTS) &&
-                    (MoveMatchesChargingStatus(pokemon,move)) &&
-                    (pokemonInfo->charging.chargingStatusMoveIndex == index)) {
+                    (MoveMatchesBideClassStatus(pokemon,move)) &&
+                    (pokemonInfo->bideClassStatus.moveSlot == index)) {
                         SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_MOVE_PLAYER);
                         index_1 = index;
                         r7 = &pokemonInfo->action.unk4[1].actionUseIndex;

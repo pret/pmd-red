@@ -225,7 +225,7 @@ bool8 HandleColorChange(Entity * pokemon, Entity * target)
         entityInfo->types[0] = newType;
         entityInfo->types[1] = TYPE_NONE;
         entityInfo->isColorChanged = TRUE;
-        SetMessageArgument(gFormatBuffer_Monsters[1],target,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
         typeString = GetUnformattedTypeString(newType);
         strcpy(gFormatBuffer_Items[0], typeString);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEB08);
@@ -314,7 +314,7 @@ bool8 sub_805B264(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     gDungeon->unk181e8.unk18200 = gUnknown_8106A8C[r3];
     gDungeon->unk181e8.unk18204 = 0;
     iVar5 = gUnknown_80F4F94[r3];
-    if (entityInfo->charging.chargingStatus == STATUS_DIGGING) {
+    if (entityInfo->bideClassStatus.status == STATUS_DIGGING) {
         iVar5 *= 2;
     }
     r6 = sub_8055864(pokemon,target,move,iVar5,param_4) ? TRUE : FALSE;
@@ -438,7 +438,7 @@ bool8 MimicMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4
             }
         }
     }
-    SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
     if (moveCounter != 0) {
         SetExpMultplier(entityInfo);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDCE4);
@@ -601,7 +601,7 @@ bool8 SkullBashMoveAction(Entity * pokemon, Entity * target, Move * move, s32 pa
 {
     bool8 flag;
 
-    if (MoveMatchesChargingStatus(pokemon,move)) {
+    if (MoveMatchesBideClassStatus(pokemon,move)) {
         flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F4F58,param_4) != 0 ? 1 : 0;
         sub_8079764(pokemon);
     }
@@ -696,8 +696,8 @@ bool8 sub_805BA50(Entity * pokemon, Entity * target, Move *move, s32 param_4)
             iVar3 = GetEntInfo(pokemon);
             iVar5 = GetEntInfo(target);
             iVar6 = GetEntInfo(target);
-            SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
-            SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
             if (HasAbility(target, ABILITY_STICKY_HOLD)) {
                 return TRUE;
             }
@@ -857,8 +857,8 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 param_
         entityInfo = GetEntInfo(target);
         targetID = entityInfo->id;
         oldID = entityInfo->id;
-        SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
-        if (entityInfo->clientType != CLIENT_TYPE_NONE) {
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
+        if (entityInfo->monsterBehavior != BEHAVIOR_FIXED_ENEMY) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD450);
             return FALSE;
         }
@@ -882,7 +882,7 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 param_
         }
     }
     else {
-        SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD450);
     }
     return didTransfer;
@@ -920,7 +920,7 @@ bool8 sub_805BEC8(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 
 bool8 EscapeOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
     if (gDungeon->unk644.unk2A != 0) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD4DC); // $m0 can't escape!
     }
@@ -951,7 +951,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 param_
     bool8 foundTrap = FALSE;
     tile = GetTileAtEntitySafe(target);
     if (IsBossFight()) {
-        TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80FD1EC);
+        LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FD1EC);
         return FALSE;
     }
     else
@@ -1104,7 +1104,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
     filledInTile = FALSE;
     targetInfo = GetEntInfo(target);
     if (IsBossFight()) {
-        TryDisplayDungeonLoggableMessage(pokemon,*gUnknown_80FD0B8);
+        LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FD0B8);
         return FALSE;
     }
     else
@@ -1155,7 +1155,7 @@ bool8 sub_805C3F8(Entity *pokemon, Entity *target, Move *move, s32 param_4)
     Item stack;
     Position posStruct = target->pos;
 
-    if(GetEntInfo(target)->clientType != CLIENT_TYPE_NONE)
+    if(GetEntInfo(target)->monsterBehavior != BEHAVIOR_FIXED_ENEMY)
     {
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FF678);
         return FALSE;

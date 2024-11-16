@@ -158,7 +158,7 @@ static void sub_803A3BC(void)
         speciesIndex = index * 0x10000 >> 0x10; // TODO: dumb way to force s16. Temp var may fix the regswap
         memset(moves, 0, sizeof(moves));
         moves[0] = MOVE_DOUBLESLAP;
-        CopyMonsterNametoBuffer(buffer, speciesIndex);
+        CopyMonsterNameToBuffer(buffer, speciesIndex);
         CopyStringtoBuffer(buffer, buffer);
         buffer[0] = 0x40;
         sub_808CFD0(&pokemon, speciesIndex, buffer, ITEM_CHERI_BERRY, (DungeonLocation *)&loc, moves);

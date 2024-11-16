@@ -5,6 +5,6 @@
 
 extern const s16 gConfusedAttackChance;
 
-bool8 HasStatusAffectingActions(Entity *pokemon);
+bool8 HasStatusThatPreventsActing(Entity *pokemon);
 
 #endif

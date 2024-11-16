@@ -229,7 +229,7 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
     (targetInfo->id != MONSTER_JIRACHI) &&
     (targetInfo->id != MONSTER_RAYQUAZA) &&
     (targetInfo->id != MONSTER_DEOXYS_NORMAL) &&
-    (targetInfo->id != 0MONSTER_REGIROCK &&
+    (targetInfo->id != MONSTER_REGIROCK &&
     (targetInfo->id != MONSTER_REGICE) &&
     (targetInfo->id != MONSTER_REGISTEEL)) || (HasRecruitedMon(targetInfo->id) == 0)) &&
      (sub_806F9BC(targetInfo->id) != 0)) {
@@ -243,7 +243,7 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
         iVar5 = -iVar5;
       }
       if (((iVar5 < 2) && (targetInfo->joinedAt.joinedAt != 0x4A)) &&
-         (targetInfo->clientType != 1 && (CanSeeTarget(target,pokemon))
+         (targetInfo->monsterBehavior != 1 && (CanSeeTarget(target,pokemon))
           )) {
         sub_806F910();
         iVar4 = DungeonRandInt(1000);
@@ -746,7 +746,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
 
     if (DisplayDungeonYesNoMessage(0,*gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
-            TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA004);
+            LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA004);
         }
         return 0;
     }
@@ -759,7 +759,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
         }
 
         if (pokeIndex == MAX_TEAM_MEMBERS) {
-            TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA030);
+            LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA030);
             return FALSE;
         }
         else {
@@ -800,7 +800,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             IncrementAdventureNumJoined();
 
             if (sub_806B8CC(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
-                TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA058);
+                LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA058);
                 pokeStruct2->unk0 = 0;
             }
             else {
@@ -812,10 +812,10 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                     }
                 }
                 sub_808D9DC(gFormatBuffer_Monsters[0],pokeStruct2,0);
-                TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA0F0);
+                LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA0F0);
                 if (flag) {
                     leader = xxx_call_GetLeader();
-                    SetMessageArgument(gFormatBuffer_Monsters[0],leader,0);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
                     sub_8092558(gFormatBuffer_FriendArea,friendArea);
                     PlaySound(0xce);
                     DisplayDungeonMessage(0,*gUnknown_80FA120,1);
@@ -1074,7 +1074,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       }
       if (flag) {
         leader = xxx_call_GetLeader();
-        SetMessageArgument(gFormatBuffer_Monsters[0],leader,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
         sub_8092558(gFormatBuffer_FriendArea,friendArea);
         PlaySound(0xce);
         DisplayDungeonMessage(0,*gUnknown_80FA120,1);

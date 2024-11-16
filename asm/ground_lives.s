@@ -3103,7 +3103,7 @@ _080A8F30:
 	ldrsh r1, [r0, r2]
 _080A8F34:
 	adds r0, r4, 0
-	bl CopyMonsterNametoBuffer
+	bl CopyMonsterNameToBuffer
 	b _080A8F44
 _080A8F3C:
 	ldr r1, _080A8F4C

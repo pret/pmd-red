@@ -77,104 +77,104 @@ typedef struct AITarget
 } AITarget;
 
 // size: 0x4
-typedef struct Sleep
+typedef struct SleepClassStatus
 {
-    /* 0x0 */ u8 sleep;
-    /* 0x1 */ u8 sleepTurns;
-} Sleep;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} SleepClassStatus;
 
 // size: 0x4
-typedef struct NonVolatile
+typedef struct BurnClassStatus
 {
-    /* 0x0 */ u8 nonVolatileStatus;
-    /* 0x1 */ u8 nonVolatileStatusTurns;
-    /* 0x2 */ u8 nonVolatileStatusDamageCountdown;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+    /* 0x2 */ u8 damageCountdown;
     /* 0x3 */ u8 unk4;
-} NonVolatile;
+} BurnClassStatus;
 
 // size: 0xC
-typedef struct Immobilize
+typedef struct FrozenClassStatus
 {
-    /* 0x0 */ u8 immobilizeStatus;
+    /* 0x0 */ u8 status;
     /* 0x4 */ s32 unk4;
-    /* 0x8 */ u8 immobilizeStatusTurns;
-    /* 0x9 */ u8 immobilizeStatusDamageCountdown;
-} Immobilize;
+    /* 0x8 */ u8 turns;
+    /* 0x9 */ u8 damageCountdown;
+} FrozenClassStatus;
 
 // size: 0x4
-typedef struct Volatile
+typedef struct CringeClassStatus
 {
-    /* 0x0 */ u8 volatileStatus;
-    /* 0x1 */ u8 volatileStatusTurns;
-} Volatile;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} CringeClassStatus;
 
 // size: 0x4
-typedef struct Charging
+typedef struct BideClassStatus
 {
-    /* 0x0 */ u8 chargingStatus;
-    /* 0x1 */ u8 chargingStatusTurns;
-    /* 0x2 */ u8 chargingStatusMoveIndex; // The position of the move in the Pokémon's moveset that triggered the status.
-} Charging;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+    /* 0x2 */ u8 moveSlot; // The position of the move in the Pokémon's moveset that triggered the status.
+} BideClassStatus;
 
 // size: 0x4
-typedef struct Protection
+typedef struct ReflectClassStatus
 {
-    /* 0x0 */ u8 protectionStatus;
-    /* 0x1 */ u8 protectionStatusTurns;
-} Protection;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} ReflectClassStatus;
 
 // size: 0x8
-typedef struct Waiting
+typedef struct CurseClassStatus
 {
-    /* 0x0 */ u8 waitingStatus;
-    /* 0x1 */ bool8 enemyDecoy; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
+    /* 0x0 */ u8 status;
+    /* 0x1 */ bool8 applierNonTeamMemberFlag; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
     /* 0x2 */ bool8 unk2;
-    /* 0x3 */ u8 waitingStatusTurns;
-    /* 0x4 */ u8 curseDamageCountdown;
-} Waiting;
+    /* 0x3 */ u8 turns;
+    /* 0x4 */ u8 damageCountdown;
+} CurseClassStatus;
 
 // size: 0xC
-typedef struct Linked
+typedef struct LeechSeedClassStatus
 {
-    /* 0x0 */ u8 linkedStatus;
+    /* 0x0 */ u8 status;
     /* 0x4 */ u32 unk4;
     /* 0x8 */ u8 unk8;
-    /* 0x9 */ u8 linkedStatusTurns;
-    /* 0xA */ u8 linkedStatusDamageCountdown;
-} Linked;
+    /* 0x9 */ u8 turns;
+    /* 0xA */ u8 damageCountdown;
+} LeechSeedClassStatus;
 
 // size: 0x4
-typedef struct MoveStatus
+typedef struct SureShotClassStatus
 {
-    /* 0x0 */ u8 moveStatus;
-    /* 0x0 */ u8 moveStatusTurns;
-} MoveStatus;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} SureShotClassStatus;
 
 // size: 0x4
-typedef struct ItemStatus
+typedef struct LongTossClassStatus
 {
-    /* 0x0 */ u8 itemStatus;
-} ItemStatus;
+    /* 0x0 */ u8 status;
+} LongTossClassStatus;
 
 // size: 0x4
-typedef struct TransformStatus
+typedef struct InvisibleClassStatus
 {
-    /* 0x0 */ u8 transformStatus;
-    /* 0x0 */ u8 transformStatusTurns;
-} TransformStatus;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} InvisibleClassStatus;
 
 // size: 0x4
-typedef struct EyesightStatus
+typedef struct BlinkerClassStatus
 {
-    /* 0x0 */ u8 eyesightStatus;
-    /* 0x0 */ u8 eyesightStatusTurns;
-} EyesightStatus;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} BlinkerClassStatus;
 
 // size: 0x4
 typedef struct Muzzled
 {
     /* 0x0 */ bool8 muzzled;
-    /* 0x1 */ u8 muzzledTurns;
+    /* 0x1 */ u8 turns;
 } Muzzled;
 
 // size: 0x1C
@@ -254,22 +254,22 @@ typedef struct EntityInfo
     /* 0x98 */ u32 unk98;
     /* 0x9C */ u32 unk9C;
     /* 0xA0 */ s32 unkA0;
-    /* 0xA4 */ u8 clientType;
+    /* 0xA4 */ u8 monsterBehavior;
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
     // See status.h for which statuses are in each group.
-    /* 0xA8 */ Sleep sleep;
-    /* 0xAC */ NonVolatile nonVolatile;
-    /* 0xB0 */ Immobilize immobilize;
-    /* 0xBC */ Volatile volatileStatus;
-    /* 0xC0 */ Charging charging;
-    /* 0xC4 */ Protection protection;
-    /* 0xC8 */ Waiting waitingStruct;
-    /* 0xD0 */ Linked linked;
-    /* 0xDC */ MoveStatus moveStatus;
-    /* 0xE0 */ ItemStatus itemStatus;
-    /* 0xE4 */ TransformStatus transformStatus;
-    /* 0xE8 */ EyesightStatus eyesightStatus;
+    /* 0xA8 */ SleepClassStatus sleepClassStatus;
+    /* 0xAC */ BurnClassStatus burnClassStatus;
+    /* 0xB0 */ FrozenClassStatus frozenClassStatus;
+    /* 0xBC */ CringeClassStatus cringeClassStatus;
+    /* 0xC0 */ BideClassStatus bideClassStatus;
+    /* 0xC4 */ ReflectClassStatus reflectClassStatus;
+    /* 0xC8 */ CurseClassStatus curseClassStatus;
+    /* 0xD0 */ LeechSeedClassStatus leechSeedClassStatus;
+    /* 0xDC */ SureShotClassStatus sureShotClassStatus;
+    /* 0xE0 */ LongTossClassStatus longTossClassStatus;
+    /* 0xE4 */ InvisibleClassStatus invisibleClassStatus;
+    /* 0xE8 */ BlinkerClassStatus blinkerClassStatus;
     /* 0xEC */ Muzzled muzzled;
     /* 0xF0 */ bool8 powerEars;
     /* 0xF1 */ bool8 scanning;
@@ -289,7 +289,7 @@ typedef struct EntityInfo
     /* 0xFD */ u8 perishSongTurns; // When this reaches 0, the Pokémon faints from Perish Song. Doubles as a bool for whether the Pokémon is afflicted by Perish Song.
     u8 unkFE;
     u8 unkFF;
-    /* 0x100 */ u8 targetingDecoy; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.
+    /* 0x100 */ u8 decoyAITracker; // If the Pokémon is targeting a decoy, this indicates whether the decoy target is a team or wild Pokémon.
     /* 0x104 */ s32 speedStage;
     // The turn counter for movement speed up/down is split into five timers each. Multiple timers are used if the Pokémon is affected by multiple
     // speed-up/slow effects at once, like using Agility twice.
@@ -303,7 +303,7 @@ typedef struct EntityInfo
     /* 0x118 */ Moves moves;
     /* 0x13C */ FixedPoint belly;
     /* 0x140 */ FixedPoint maxBelly;
-    /* 0x144 */ bool8 aiNextToTarget; // True if an AI Pokémon is following another Pokémon and is already adjacent to them.
+    /* 0x144 */ bool8 aiAllySkip; // True if an AI Pokémon is following another Pokémon and is already adjacent to them.
     /* 0x145 */ bool8 recalculateFollow; // Used by the AI to defer a movement decision until after all other Pokémon have moved.
     /* 0x146 */ u8 unk146;
     /* 0x147 */ bool8 waiting; // True if an AI Pokémon decided to do nothing this turn.
@@ -430,13 +430,45 @@ enum AIObjective
     AI_TAKE_ITEM
 };
 
-enum ClientType
+enum MonsterBehavior
 {
-    CLIENT_TYPE_NONE,
-    CLIENT_TYPE_CLIENT, // Used for mission clients that need rescuing.
-    CLIENT_TYPE_PARTNER,
-    // 3
-    CLIENT_TYPE_DONT_MOVE = 4 // Used for Diglett in the Skarmory boss fight.
+    BEHAVIOR_FIXED_ENEMY,
+    BEHAVIOR_RESCUE_TARGET, // Used for mission clients that need rescuing.
+    BEHAVIOR_ALLY,
+    BEHAVIOR_SKARMORY,
+    BEHAVIOR_DIGLETT, // Used for Diglett in the Skarmory boss fight.
+    BEHAVIOR_5, // 5 and 6 are probably Gengar and Ekans, but not sure which is which.
+    BEHAVIOR_6,
+    BEHAVIOR_MEDICHAM,
+    BEHAVIOR_ZAPDOS,
+    BEHAVIOR_MOLTRES,
+    BEHAVIOR_ALAKAZAM_1,
+    BEHAVIOR_GROUDON_1,
+    BEHAVIOR_ALAKAZAM_2,
+    BEHAVIOR_ARTICUNO,
+    BEHAVIOR_GROUDON_2,
+    BEHAVIOR_RAYQUAZA,
+    BEHAVIOR_16,
+    BEHAVIOR_MEWTWO,
+    BEHAVIOR_ENTEI,
+    BEHAVIOR_RAIKOU,
+    BEHAVIOR_SUICUNE,
+    BEHAVIOR_HO_OH,
+    BEHAVIOR_LATIOS,
+    BEHAVIOR_REGIROCK,
+    BEHAVIOR_REGICE,
+    BEHAVIOR_REGISTEEL,
+    BEHAVIOR_JIRACHI,
+    BEHAVIOR_LUGIA,
+    BEHAVIOR_KYOGRE,
+    BEHAVIOR_29,
+    BEHAVIOR_CELEBI,
+    BEHAVIOR_SMEARGLE,
+    BEHAVIOR_32,
+    BEHAVIOR_33,
+    BEHAVIOR_34,
+    BEHAVIOR_35,
+    BEHAVIOR_36,
 };
 
 enum VisualFlag

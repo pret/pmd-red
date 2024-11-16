@@ -30,8 +30,8 @@ static void ReadBelly(DataSerializer *seri, FixedPoint *dst);
 static void ReadBlame(DataSerializer *seri, const u8 *expected);
 static bool8 ReadBool8(DataSerializer *seri);
 static void ReadBytes(DataSerializer *seri, void *dst, s32 numBytes);
-static void ReadCharging(DataSerializer *seri, Charging *dst);
-static u8 ReadClientType(DataSerializer *seri);
+static void ReadBideClassStatus(DataSerializer *seri, BideClassStatus *dst);
+static u8 ReadMonsterBehavior(DataSerializer *seri);
 static void ReadDungeonFloor(DataSerializer *seri);
 static void ReadDungeonItems(DataSerializer *seri);
 static void ReadDungeonMonsters(DataSerializer *seri);
@@ -41,39 +41,39 @@ static void ReadDungeonUnk644(DataSerializer *seri);
 static void ReadDungeonUnkE240(DataSerializer *seri, unkDungeonE240 *dst);
 static void ReadDungeonUnkE260(DataSerializer *seri, unkDungeonE260 *dst);
 static void ReadDungeonVisibility(DataSerializer *seri);
-static void ReadEyesightStatus(DataSerializer *seri, EyesightStatus *dst);
+static void ReadBlinkerClassStatus(DataSerializer *seri, BlinkerClassStatus *dst);
 static s24_8 ReadF24_8(DataSerializer *seri);
 static void ReadHiddenPower(DataSerializer *seri, HiddenPower *dst);
-static void ReadImmobilize(DataSerializer *seri, Immobilize *dst);
+static void ReadFrozenClassStatus(DataSerializer *seri, FrozenClassStatus *dst);
 static void ReadIQSkills(DataSerializer *seri, u8 *dst);
 static void ReadItem(DataSerializer *seri, Item *dst);
-static void ReadItemStatus(DataSerializer *seri, ItemStatus *dst);
+static void ReadLongTossClassStatus(DataSerializer *seri, LongTossClassStatus *dst);
 static void ReadJoinedAt(DataSerializer *seri, JoinedAt *dst);
-static void ReadLinked(DataSerializer *seri, Linked *dst);
+static void ReadLeechSeedClassStatus(DataSerializer *seri, LeechSeedClassStatus *dst);
 static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index);
 static s16 ReadMonsterID(DataSerializer *seri);
 static u8 ReadMonsterUnk64(DataSerializer *seri);
 static u8 ReadMonsterUnkFF(DataSerializer *seri);
 static void ReadMoves(DataSerializer *seri, Moves *dst);
-static void ReadMoveStatus(DataSerializer *seri, MoveStatus *dst);
+static void ReadSureShotClassStatus(DataSerializer *seri, SureShotClassStatus *dst);
 static void ReadMuzzled(DataSerializer *seri, Muzzled *dst);
-static void ReadNonVolatile(DataSerializer *seri, NonVolatile *dst);
-static void ReadProtection(DataSerializer *seri, Protection *dst);
+static void ReadBurnClassStatus(DataSerializer *seri, BurnClassStatus *dst);
+static void ReadReflectClassStatus(DataSerializer *seri, ReflectClassStatus *dst);
 static s16 ReadS16(DataSerializer *seri);
-static void ReadSleep(DataSerializer *seri, Sleep *dst);
+static void ReadSleepClassStatus(DataSerializer *seri, SleepClassStatus *dst);
 static void ReadSpeedCounters(DataSerializer *seri, u8 *dst, u32 numCounters);
 static s32 ReadSpeedStage(DataSerializer *seri);
 static u8 ReadTactic(DataSerializer *seri);
-static u8 ReadTargetingDecoy(DataSerializer *seri);
+static u8 ReadDecoyAITracker(DataSerializer *seri);
 static void ReadTile(DataSerializer *seri, Tile *dst);
 static void ReadTilePos(DataSerializer *seri, Position *dst);
-static void ReadTransformStatus(DataSerializer *seri, TransformStatus *dst);
+static void ReadInvisibleClassStatus(DataSerializer *seri, InvisibleClassStatus *dst);
 static u8 ReadType(DataSerializer *seri);
 static u16 ReadU16(DataSerializer *seri);
 static u32 ReadU32(DataSerializer *seri);
 static u8 ReadU8(DataSerializer *seri);
-static void ReadVolatileStatus(DataSerializer *seri, Volatile *dst);
-static void ReadWaiting(DataSerializer *seri, Waiting *dst);
+static void ReadCringeClassStatus(DataSerializer *seri, CringeClassStatus *dst);
+static void ReadCurseClassStatus(DataSerializer *seri, CurseClassStatus *dst);
 static void ReadWeather(DataSerializer *seri, Weather *dst);
 
 static void WriteAbility(DataSerializer *seri, u8 value);
@@ -83,8 +83,8 @@ static void WriteBelly(DataSerializer *seri, FixedPoint *src);
 static void WriteBlame(DataSerializer *seri, const u8 *blame);
 static void WriteBool8(DataSerializer *seri, bool8 value);
 static void WriteBytes(DataSerializer *seri, void *src, s32 numBytes);
-static void WriteCharging(DataSerializer *seri, Charging *src);
-static void WriteClientType(DataSerializer *seri, u8 value);
+static void WriteBideClassStatus(DataSerializer *seri, BideClassStatus *src);
+static void WriteMonsterBehavior(DataSerializer *seri, u8 value);
 static void WriteDungeonFloor(DataSerializer *seri);
 static void WriteDungeonItems(DataSerializer *seri);
 static void WriteDungeonMonsters(DataSerializer *seri);
@@ -94,39 +94,39 @@ static void WriteDungeonUnk644(DataSerializer *seri);
 static void WriteDungeonUnkE240(DataSerializer *seri, unkDungeonE240 *src);
 static void WriteDungeonUnkE260(DataSerializer *seri, unkDungeonE260 *src);
 static void WriteDungeonVisibility(DataSerializer *seri);
-static void WriteEyesightStatus(DataSerializer *seri, EyesightStatus *src);
+static void WriteBlinkerClassStatus(DataSerializer *seri, BlinkerClassStatus *src);
 static void WriteF24_8(DataSerializer *seri, s24_8 value);
 static void WriteHiddenPower(DataSerializer *seri, HiddenPower *src);
-static void WriteImmobilize(DataSerializer *seri, Immobilize *src);
+static void WriteFrozenClassStatus(DataSerializer *seri, FrozenClassStatus *src);
 static void WriteIQSkills(DataSerializer *seri, u8 *src);
 static void WriteItem(DataSerializer *seri, Item *src);
-static void WriteItemStatus(DataSerializer *seri, ItemStatus *src);
+static void WriteLongTossClassStatus(DataSerializer *seri, LongTossClassStatus *src);
 static void WriteJoinedAt(DataSerializer *seri, JoinedAt *src);
-static void WriteLinked(DataSerializer *seri, Linked *src);
+static void WriteLeechSeedClassStatus(DataSerializer *seri, LeechSeedClassStatus *src);
 static void WriteMonster(DataSerializer *seri, Entity *src);
 static void WriteMonsterID(DataSerializer *seri, s16 value);
 static void WriteMonsterUnk64(DataSerializer *seri, u8 value);
 static void WriteMonsterUnkFF(DataSerializer *seri, u8 value);
 static void WriteMoves(DataSerializer *seri, Moves *src);
-static void WriteMoveStatus(DataSerializer *seri, MoveStatus* src);
+static void WriteSureShotClassStatus(DataSerializer *seri, SureShotClassStatus* src);
 static void WriteMuzzled(DataSerializer *seri, Muzzled *src);
-static void WriteNonVolatile(DataSerializer *seri, NonVolatile *src);
-static void WriteProtection(DataSerializer *seri, Protection *src);
+static void WriteBurnClassStatus(DataSerializer *seri, BurnClassStatus *src);
+static void WriteReflectClassStatus(DataSerializer *seri, ReflectClassStatus *src);
 static void WriteTilePos(DataSerializer *seri, Position *src);
 static void WriteS16(DataSerializer *seri, s16 value);
-static void WriteSleep(DataSerializer *seri, Sleep* src);
+static void WriteSleepClassStatus(DataSerializer *seri, SleepClassStatus* src);
 static void WriteSpeedCounters(DataSerializer *seri, u8 *src, u32 numCounters);
 static void WriteSpeedStage(DataSerializer *seri, s32 value);
 static void WriteTactic(DataSerializer *seri, u8 value);
-static void WriteTargetingDecoy(DataSerializer *seri, u8 value);
+static void WriteDecoyAITracker(DataSerializer *seri, u8 value);
 static void WriteTile(DataSerializer *seri, Tile *src);
-static void WriteTransformStatus(DataSerializer *seri, TransformStatus *src);
+static void WriteInvisibleClassStatus(DataSerializer *seri, InvisibleClassStatus *src);
 static void WriteType(DataSerializer *seri, u8 value);
 static void WriteU16(DataSerializer *seri, u16 value);
 static void WriteU32(DataSerializer *seri, u32 value);
 static void WriteU8(DataSerializer *seri, u8 value);
-static void WriteVolatile(DataSerializer *seri, Volatile *src);
-static void WriteWaiting(DataSerializer *seri, Waiting *src);
+static void WriteCringeClassStatus(DataSerializer *seri, CringeClassStatus *src);
+static void WriteCurseClassStatus(DataSerializer *seri, CurseClassStatus *src);
 static void WriteWeather(DataSerializer *seri, Weather *src);
 
 static Entity* sub_80828E0(s16 id, s16 apparentID, s32 index);
@@ -236,7 +236,7 @@ static void WriteDungeonMonsters(DataSerializer *seri)
     WriteBool8(seri, gDungeon->plusIsActive[1]);
     WriteBool8(seri, gDungeon->minusIsActive[0]);
     WriteBool8(seri, gDungeon->minusIsActive[1]);
-    WriteBool8(seri, gDungeon->decoyActive);
+    WriteBool8(seri, gDungeon->decoyIsActive);
     WriteBool8(seri, gDungeon->unk37FD);
     WriteBool8(seri, gDungeon->deoxysDefeat);
     WriteBool8(seri, gDungeon->unk37FF);
@@ -330,18 +330,18 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteU32(seri, info->unk98);
     WriteU32(seri, info->unk9C);
     WriteU32(seri, info->unkA0);
-    WriteSleep(seri, &info->sleep);
-    WriteNonVolatile(seri, &info->nonVolatile);
-    WriteImmobilize(seri, &info->immobilize);
-    WriteVolatile(seri, &info->volatileStatus);
-    WriteCharging(seri, &info->charging);
-    WriteProtection(seri, &info->protection);
-    WriteWaiting(seri, &info->waitingStruct);
-    WriteLinked(seri, &info->linked);
-    WriteMoveStatus(seri, &info->moveStatus);
-    WriteItemStatus(seri, &info->itemStatus);
-    WriteTransformStatus(seri, &info->transformStatus);
-    WriteEyesightStatus(seri, &info->eyesightStatus);
+    WriteSleepClassStatus(seri, &info->sleepClassStatus);
+    WriteBurnClassStatus(seri, &info->burnClassStatus);
+    WriteFrozenClassStatus(seri, &info->frozenClassStatus);
+    WriteCringeClassStatus(seri, &info->cringeClassStatus);
+    WriteBideClassStatus(seri, &info->bideClassStatus);
+    WriteReflectClassStatus(seri, &info->reflectClassStatus);
+    WriteCurseClassStatus(seri, &info->curseClassStatus);
+    WriteLeechSeedClassStatus(seri, &info->leechSeedClassStatus);
+    WriteSureShotClassStatus(seri, &info->sureShotClassStatus);
+    WriteLongTossClassStatus(seri, &info->longTossClassStatus);
+    WriteInvisibleClassStatus(seri, &info->invisibleClassStatus);
+    WriteBlinkerClassStatus(seri, &info->blinkerClassStatus);
     WriteMuzzled(seri, &info->muzzled);
     WriteBool8(seri, info->powerEars);
     WriteBool8(seri, info->scanning);
@@ -357,7 +357,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteU8(seri, info->perishSongTurns);
     WriteU8(seri, info->unkFE);
     WriteMonsterUnkFF(seri, info->unkFF);
-    WriteTargetingDecoy(seri, info->targetingDecoy);
+    WriteDecoyAITracker(seri, info->decoyAITracker);
     WriteSpeedStage(seri, info->speedStage);
     WriteSpeedCounters(seri, info->speedUpCounters, NUM_SPEED_COUNTERS);
     WriteSpeedCounters(seri, info->speedDownCounters, NUM_SPEED_COUNTERS);
@@ -367,7 +367,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteMoves(seri, &info->moves);
     WriteBelly(seri, &info->belly);
     WriteBelly(seri, &info->maxBelly);
-    WriteBool8(seri, info->aiNextToTarget);
+    WriteBool8(seri, info->aiAllySkip);
     WriteBool8(seri, info->recalculateFollow);
     WriteBool8(seri, info->waiting);
     WriteBool8(seri, info->unk146);
@@ -395,7 +395,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteS16(seri, info->unk1F8);
     WriteS16(seri, info->mobileTurnTimer);
     WriteU32(seri, info->expGainedInTurn);
-    WriteClientType(seri, info->clientType);
+    WriteMonsterBehavior(seri, info->monsterBehavior);
 }
 
 static void WriteDungeonFloor(DataSerializer *seri)
@@ -526,7 +526,7 @@ static void WriteMonsterUnkFF(DataSerializer *seri, u8 value)
     WriteBytes(seri, &stack, 1);
 }
 
-static void WriteTargetingDecoy(DataSerializer *seri, u8 value)
+static void WriteDecoyAITracker(DataSerializer *seri, u8 value)
 {
     u8 stack;
 
@@ -551,7 +551,7 @@ static void WriteHiddenPower(DataSerializer *seri, HiddenPower *src)
     WriteType(seri, src->hiddenPowerType);
 }
 
-static void WriteClientType(DataSerializer *seri, u8 value)
+static void WriteMonsterBehavior(DataSerializer *seri, u8 value)
 {
     WriteU8(seri, value);
 }
@@ -572,92 +572,92 @@ static void WriteAITarget(DataSerializer *seri, AITarget* src)
     WriteTilePos(seri, &src->aiTargetPos);
 }
 
-static void WriteSleep(DataSerializer *seri, Sleep* src)
+static void WriteSleepClassStatus(DataSerializer *seri, SleepClassStatus* src)
 {
-    WriteBytes(seri, &src->sleep, 1);
-    WriteU8(seri, src->sleepTurns);
+    WriteBytes(seri, &src->status, 1);
+    WriteU8(seri, src->turns);
 }
 
-static void WriteNonVolatile(DataSerializer *seri, NonVolatile *src)
+static void WriteBurnClassStatus(DataSerializer *seri, BurnClassStatus *src)
 {
-    WriteBytes(seri, &src->nonVolatileStatus, 1);
-    WriteU8(seri, src->nonVolatileStatusTurns);
-    WriteU8(seri, src->nonVolatileStatusDamageCountdown);
+    WriteBytes(seri, &src->status, 1);
+    WriteU8(seri, src->turns);
+    WriteU8(seri, src->damageCountdown);
     WriteU8(seri, src->unk4);
 }
 
-static void WriteImmobilize(DataSerializer *seri, Immobilize *src)
+static void WriteFrozenClassStatus(DataSerializer *seri, FrozenClassStatus *src)
 {
-    WriteBytes(seri, &src->immobilizeStatus, 1);
-    WriteU8(seri, src->immobilizeStatusTurns);
-    WriteU8(seri, src->immobilizeStatusDamageCountdown);
+    WriteBytes(seri, &src->status, 1);
+    WriteU8(seri, src->turns);
+    WriteU8(seri, src->damageCountdown);
     WriteU32(seri, src->unk4);
 }
 
-static void WriteVolatile(DataSerializer *seri, Volatile *src)
+static void WriteCringeClassStatus(DataSerializer *seri, CringeClassStatus *src)
 {
-    WriteBytes(seri, &src->volatileStatus, 1);
-    WriteU8(seri, src->volatileStatusTurns);
+    WriteBytes(seri, &src->status, 1);
+    WriteU8(seri, src->turns);
 }
 
-static void WriteCharging(DataSerializer *seri, Charging *src)
+static void WriteBideClassStatus(DataSerializer *seri, BideClassStatus *src)
 {
-    WriteBytes(seri, &src->chargingStatus, 1);
-    WriteU8(seri, src->chargingStatusTurns);
-    WriteU8(seri, src->chargingStatusMoveIndex);
+    WriteBytes(seri, &src->status, 1);
+    WriteU8(seri, src->turns);
+    WriteU8(seri, src->moveSlot);
 }
 
-static void WriteProtection(DataSerializer *seri, Protection *src)
+static void WriteReflectClassStatus(DataSerializer *seri, ReflectClassStatus *src)
 {
-    WriteBytes(seri, &src->protectionStatus, 1);
-    WriteU8(seri, src->protectionStatusTurns);
+    WriteBytes(seri, &src->status, 1);
+    WriteU8(seri, src->turns);
 }
 
-static void WriteWaiting(DataSerializer *seri, Waiting *src)
+static void WriteCurseClassStatus(DataSerializer *seri, CurseClassStatus *src)
 {
-    WriteBytes(seri, &src->waitingStatus, 1);
-    WriteBool8(seri, src->enemyDecoy);
+    WriteBytes(seri, &src->status, 1);
+    WriteBool8(seri, src->applierNonTeamMemberFlag);
     WriteBool8(seri, src->unk2);
-    WriteU8(seri, src->waitingStatusTurns);
-    WriteU8(seri, src->curseDamageCountdown);
+    WriteU8(seri, src->turns);
+    WriteU8(seri, src->damageCountdown);
 }
 
-static void WriteLinked(DataSerializer *seri, Linked *src)
+static void WriteLeechSeedClassStatus(DataSerializer *seri, LeechSeedClassStatus *src)
 {
-    WriteBytes(seri, &src->linkedStatus, 1);
+    WriteBytes(seri, &src->status, 1);
     WriteU32(seri, src->unk4);
     WriteU8(seri, src->unk8);
-    WriteU8(seri, src->linkedStatusTurns);
-    WriteU8(seri, src->linkedStatusDamageCountdown);
+    WriteU8(seri, src->turns);
+    WriteU8(seri, src->damageCountdown);
 }
 
-static void WriteMoveStatus(DataSerializer *seri, MoveStatus* src)
+static void WriteSureShotClassStatus(DataSerializer *seri, SureShotClassStatus* src)
 {
-    WriteBytes(seri, &src->moveStatus, 1);
-    WriteU8(seri, src->moveStatusTurns);
+    WriteBytes(seri, &src->status, 1);
+    WriteU8(seri, src->turns);
 }
 
-static void WriteItemStatus(DataSerializer *seri, ItemStatus *src)
+static void WriteLongTossClassStatus(DataSerializer *seri, LongTossClassStatus *src)
 {
-    WriteBytes(seri, &src->itemStatus, 1);
+    WriteBytes(seri, &src->status, 1);
 }
 
-static void WriteTransformStatus(DataSerializer *seri, TransformStatus *src)
+static void WriteInvisibleClassStatus(DataSerializer *seri, InvisibleClassStatus *src)
 {
-    WriteBytes(seri, &src->transformStatus, 1);
-    WriteU8(seri, src->transformStatusTurns);
+    WriteBytes(seri, &src->status, 1);
+    WriteU8(seri, src->turns);
 }
 
-static void WriteEyesightStatus(DataSerializer *seri, EyesightStatus *src)
+static void WriteBlinkerClassStatus(DataSerializer *seri, BlinkerClassStatus *src)
 {
-    WriteBytes(seri, &src->eyesightStatus, 1);
-    WriteU8(seri, src->eyesightStatusTurns);
+    WriteBytes(seri, &src->status, 1);
+    WriteU8(seri, src->turns);
 }
 
 static void WriteMuzzled(DataSerializer *seri, Muzzled *src)
 {
     WriteBytes(seri, &src->muzzled, 1);
-    WriteU8(seri, src->muzzledTurns);
+    WriteU8(seri, src->turns);
 }
 
 static void WriteMove(DataSerializer *seri, Move *src)
@@ -932,7 +932,7 @@ static void ReadDungeonMonsters(DataSerializer *seri)
     gDungeon->plusIsActive[1] = ReadBool8(seri);
     gDungeon->minusIsActive[0] = ReadBool8(seri);
     gDungeon->minusIsActive[1] = ReadBool8(seri);
-    gDungeon->decoyActive = ReadBool8(seri);
+    gDungeon->decoyIsActive = ReadBool8(seri);
     gDungeon->unk37FD = ReadBool8(seri);
     gDungeon->deoxysDefeat = ReadBool8(seri);
     gDungeon->unk37FF = ReadBool8(seri);
@@ -1013,18 +1013,18 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.unk98 = ReadU32(seri);
     entInfo.unk9C = ReadU32(seri);
     entInfo.unkA0 = ReadU32(seri);
-    ReadSleep(seri, &entInfo.sleep);
-    ReadNonVolatile(seri,&entInfo. nonVolatile);
-    ReadImmobilize(seri, &entInfo.immobilize);
-    ReadVolatileStatus(seri, &entInfo.volatileStatus);
-    ReadCharging(seri, &entInfo.charging);
-    ReadProtection(seri, &entInfo.protection);
-    ReadWaiting(seri, &entInfo.waitingStruct);
-    ReadLinked(seri, &entInfo.linked);
-    ReadMoveStatus(seri, &entInfo.moveStatus);
-    ReadItemStatus(seri, &entInfo.itemStatus);
-    ReadTransformStatus(seri, &entInfo.transformStatus);
-    ReadEyesightStatus(seri, &entInfo.eyesightStatus);
+    ReadSleepClassStatus(seri, &entInfo.sleepClassStatus);
+    ReadBurnClassStatus(seri,&entInfo. burnClassStatus);
+    ReadFrozenClassStatus(seri, &entInfo.frozenClassStatus);
+    ReadCringeClassStatus(seri, &entInfo.cringeClassStatus);
+    ReadBideClassStatus(seri, &entInfo.bideClassStatus);
+    ReadReflectClassStatus(seri, &entInfo.reflectClassStatus);
+    ReadCurseClassStatus(seri, &entInfo.curseClassStatus);
+    ReadLeechSeedClassStatus(seri, &entInfo.leechSeedClassStatus);
+    ReadSureShotClassStatus(seri, &entInfo.sureShotClassStatus);
+    ReadLongTossClassStatus(seri, &entInfo.longTossClassStatus);
+    ReadInvisibleClassStatus(seri, &entInfo.invisibleClassStatus);
+    ReadBlinkerClassStatus(seri, &entInfo.blinkerClassStatus);
     ReadMuzzled(seri, &entInfo.muzzled);
     entInfo.powerEars = ReadBool8(seri);
     entInfo.scanning = ReadBool8(seri);
@@ -1041,7 +1041,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.unkFE = ReadU8(seri);
     entInfo.unkFF = ReadMonsterUnkFF(seri);
 
-    entInfo.targetingDecoy = ReadTargetingDecoy(seri);
+    entInfo.decoyAITracker = ReadDecoyAITracker(seri);
     entInfo.speedStage = ReadSpeedStage(seri);
     ReadSpeedCounters(seri, entInfo.speedUpCounters, NUM_SPEED_COUNTERS);
     ReadSpeedCounters(seri, entInfo.speedDownCounters, NUM_SPEED_COUNTERS);
@@ -1051,7 +1051,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     ReadMoves(seri, &entInfo.moves);
     ReadBelly(seri, &entInfo.belly);
     ReadBelly(seri, &entInfo.maxBelly);
-    entInfo.aiNextToTarget = ReadBool8(seri);
+    entInfo.aiAllySkip = ReadBool8(seri);
     entInfo.recalculateFollow = ReadBool8(seri);
     entInfo.waiting = ReadBool8(seri);
     entInfo.unk146 = ReadBool8(seri);
@@ -1079,7 +1079,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.unk1F8 = ReadS16(seri);
     entInfo.mobileTurnTimer = ReadS16(seri);
     entInfo.expGainedInTurn = ReadU32(seri);
-    entInfo.clientType = ReadClientType(seri);
+    entInfo.monsterBehavior = ReadMonsterBehavior(seri);
 
     gLeaderPointer = NULL;
     if (shouldSpawnMon) {
@@ -1248,7 +1248,7 @@ void sub_8082B40(void)
     Position pos;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activePokemon[i];
         if (EntityExists(entity)) {
             info = GetEntInfo(entity);
             entity->axObj.spriteFile = GetSpriteData(info->apparentID);
@@ -1310,7 +1310,7 @@ static u8 ReadMonsterUnkFF(DataSerializer *seri)
     return temp[0];
 }
 
-static u8 ReadTargetingDecoy(DataSerializer *seri)
+static u8 ReadDecoyAITracker(DataSerializer *seri)
 {
     u8 temp[4];
 
@@ -1340,7 +1340,7 @@ static u8 ReadTactic(DataSerializer *seri)
     return temp[0];
 }
 
-static u8 ReadClientType(DataSerializer *seri)
+static u8 ReadMonsterBehavior(DataSerializer *seri)
 {
     u8 temp[4];
 
@@ -1375,92 +1375,92 @@ static void ReadIQSkills(DataSerializer *seri, u8 *dst)
     ReadBytes(seri, dst, NUM_PICKED_IQ_SKILLS);
 }
 
-static void ReadSleep(DataSerializer *seri, Sleep *dst)
+static void ReadSleepClassStatus(DataSerializer *seri, SleepClassStatus *dst)
 {
-    ReadBytes(seri, &dst->sleep, 1);
-    dst->sleepTurns = ReadU8(seri);
+    ReadBytes(seri, &dst->status, 1);
+    dst->turns = ReadU8(seri);
 }
 
-static void ReadNonVolatile(DataSerializer *seri, NonVolatile *dst)
+static void ReadBurnClassStatus(DataSerializer *seri, BurnClassStatus *dst)
 {
-    ReadBytes(seri, &dst->nonVolatileStatus, 1);
-    dst->nonVolatileStatusTurns = ReadU8(seri);
-    dst->nonVolatileStatusDamageCountdown = ReadU8(seri);
+    ReadBytes(seri, &dst->status, 1);
+    dst->turns = ReadU8(seri);
+    dst->damageCountdown = ReadU8(seri);
     dst->unk4 = ReadU8(seri);
 }
 
-static void ReadImmobilize(DataSerializer *seri, Immobilize *dst)
+static void ReadFrozenClassStatus(DataSerializer *seri, FrozenClassStatus *dst)
 {
-    ReadBytes(seri, &dst->immobilizeStatus, 1);
-    dst->immobilizeStatusTurns = ReadU8(seri);
-    dst->immobilizeStatusDamageCountdown = ReadU8(seri);
+    ReadBytes(seri, &dst->status, 1);
+    dst->turns = ReadU8(seri);
+    dst->damageCountdown = ReadU8(seri);
     dst->unk4 = ReadU32(seri);
 }
 
-static void ReadVolatileStatus(DataSerializer *seri, Volatile *dst)
+static void ReadCringeClassStatus(DataSerializer *seri, CringeClassStatus *dst)
 {
-    ReadBytes(seri, &dst->volatileStatus, 1);
-    dst->volatileStatusTurns = ReadU8(seri);
+    ReadBytes(seri, &dst->status, 1);
+    dst->turns = ReadU8(seri);
 }
 
-static void ReadCharging(DataSerializer *seri, Charging *dst)
+static void ReadBideClassStatus(DataSerializer *seri, BideClassStatus *dst)
 {
-    ReadBytes(seri, &dst->chargingStatus, 1);
-    dst->chargingStatusTurns = ReadU8(seri);
-    dst->chargingStatusMoveIndex = ReadU8(seri);
+    ReadBytes(seri, &dst->status, 1);
+    dst->turns = ReadU8(seri);
+    dst->moveSlot = ReadU8(seri);
 }
 
-static void ReadProtection(DataSerializer *seri, Protection *dst)
+static void ReadReflectClassStatus(DataSerializer *seri, ReflectClassStatus *dst)
 {
-    ReadBytes(seri, &dst->protectionStatus, 1);
-    dst->protectionStatusTurns = ReadU8(seri);
+    ReadBytes(seri, &dst->status, 1);
+    dst->turns = ReadU8(seri);
 }
 
-static void ReadWaiting(DataSerializer *seri, Waiting *dst)
+static void ReadCurseClassStatus(DataSerializer *seri, CurseClassStatus *dst)
 {
-    ReadBytes(seri, &dst->waitingStatus, 1);
-    dst->enemyDecoy = ReadBool8(seri);
+    ReadBytes(seri, &dst->status, 1);
+    dst->applierNonTeamMemberFlag = ReadBool8(seri);
     dst->unk2 = ReadBool8(seri);
-    dst->waitingStatusTurns = ReadU8(seri);
-    dst->curseDamageCountdown = ReadU8(seri);
+    dst->turns = ReadU8(seri);
+    dst->damageCountdown = ReadU8(seri);
 }
 
-static void ReadLinked(DataSerializer *seri, Linked *dst)
+static void ReadLeechSeedClassStatus(DataSerializer *seri, LeechSeedClassStatus *dst)
 {
-    ReadBytes(seri, &dst->linkedStatus, 1);
+    ReadBytes(seri, &dst->status, 1);
     dst->unk4 = ReadU32(seri);
     dst->unk8 = ReadU8(seri);
-    dst->linkedStatusTurns = ReadU8(seri);
-    dst->linkedStatusDamageCountdown = ReadU8(seri);
+    dst->turns = ReadU8(seri);
+    dst->damageCountdown = ReadU8(seri);
 }
 
-static void ReadMoveStatus(DataSerializer *seri, MoveStatus *dst)
+static void ReadSureShotClassStatus(DataSerializer *seri, SureShotClassStatus *dst)
 {
-    ReadBytes(seri, &dst->moveStatus, 1);
-    dst->moveStatusTurns = ReadU8(seri);
+    ReadBytes(seri, &dst->status, 1);
+    dst->turns = ReadU8(seri);
 }
 
-static void ReadItemStatus(DataSerializer *seri, ItemStatus *dst)
+static void ReadLongTossClassStatus(DataSerializer *seri, LongTossClassStatus *dst)
 {
-    ReadBytes(seri, &dst->itemStatus, 1);
+    ReadBytes(seri, &dst->status, 1);
 }
 
-static void ReadTransformStatus(DataSerializer *seri, TransformStatus *dst)
+static void ReadInvisibleClassStatus(DataSerializer *seri, InvisibleClassStatus *dst)
 {
-    ReadBytes(seri, &dst->transformStatus, 1);
-    dst->transformStatusTurns = ReadU8(seri);
+    ReadBytes(seri, &dst->status, 1);
+    dst->turns = ReadU8(seri);
 }
 
-static void ReadEyesightStatus(DataSerializer *seri, EyesightStatus *dst)
+static void ReadBlinkerClassStatus(DataSerializer *seri, BlinkerClassStatus *dst)
 {
-    ReadBytes(seri, &dst->eyesightStatus, 1);
-    dst->eyesightStatusTurns = ReadU8(seri);
+    ReadBytes(seri, &dst->status, 1);
+    dst->turns = ReadU8(seri);
 }
 
 static void ReadMuzzled(DataSerializer *seri, Muzzled *dst)
 {
     ReadBytes(seri, &dst->muzzled, 1);
-    dst->muzzledTurns = ReadU8(seri);
+    dst->turns = ReadU8(seri);
 }
 
 static void ReadMove(DataSerializer *seri, Move *dst)
@@ -1522,7 +1522,7 @@ static void WriteBytes(DataSerializer *seri, void *src, s32 numBytes)
         curByte++;
         numBytes--;
         seri->count++;
-    } 
+    }
 }
 
 static void InitReader(DataSerializer *seri, u8 *buffer, u32 bufLen)
@@ -1544,7 +1544,7 @@ static void ReadBytes(DataSerializer *seri, void *dst, s32 numBytes)
         curByte++;
         numBytes--;
         seri->count++;
-    } 
+    }
 }
 
 static void FinishSerializer(DataSerializer *seri)

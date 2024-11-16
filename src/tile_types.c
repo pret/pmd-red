@@ -93,7 +93,7 @@ bool8 PosHasItem(Position *pos)
 {
   struct Tile *tile;
   Entity *entity;
-  
+
   tile = GetTile(pos->x,pos->y);
   entity = tile->object;
   if ((entity != NULL) && (GetEntityType(entity) == ENTITY_ITEM)) {
@@ -106,7 +106,7 @@ Entity *GetMonsterAtPos(Position *pos)
 {
   struct Tile *tile;
   Entity *entity;
-  
+
   tile = GetTile(pos->x,pos->y);
   entity = tile->monster;
   if ((entity != NULL) && (entity->type == ENTITY_MONSTER)) {
@@ -123,7 +123,7 @@ bool8 sub_804AD34(Position *pos)
   s32 y;
   bool8 iVar8;
   s32 index;
-  
+
   iVar8 = 0;
   tile = GetTileSafe(pos->x,pos->y);
   if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
@@ -144,7 +144,7 @@ bool8 sub_804AD34(Position *pos)
   if (iVar8 != 0) {
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeon->allPokemon[index];
+      entity = gDungeon->activePokemon[index];
       if (EntityExists(entity)) {
         sub_806CF98(entity);
       }
@@ -161,7 +161,7 @@ bool8 sub_804AE08(Position *pos)
   s32 x;
   s32 y;
   bool8 uVar6;
-  
+
   uVar6 = FALSE;
   tile = GetTileSafe(pos->x,pos->y);
 
@@ -189,7 +189,7 @@ void sub_804AE84(Position *pos)
   Entity * entity;
   s32 index;
   s32 y;
-  
+
   tile = GetTileSafe(pos->x,pos->y);
   if ((tile->unk4 & 0x10) != 0) {
     tile->unk4 = tile->unk4 & 0xffef;
@@ -205,7 +205,7 @@ void sub_804AE84(Position *pos)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeon->allPokemon[index];
+      entity = gDungeon->activePokemon[index];
       if (EntityExists(entity)) {
         sub_806CF98(entity);
       }

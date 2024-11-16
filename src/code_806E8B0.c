@@ -215,7 +215,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         atkStat = statCalc / 256;
 
         defStatStage = targetInfo->defensiveStages[splitIndex];
-        if (splitIndex == 0 && targetInfo->charging.chargingStatus == STATUS_SKULL_BASH) {
+        if (splitIndex == 0 && targetInfo->bideClassStatus.status == STATUS_SKULL_BASH) {
             gDungeon->unk134.unk17A = 1;
             defStatStage++;
         }
@@ -323,7 +323,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             s32 flashFireStatus = GetFlashFireStatus(target);
             if (flashFireStatus != FLASH_FIRE_STATUS_NONE && targetInfo->unk152 == 0 && arg_10) {
                 targetInfo->unk152 = 1;
-                SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
                 if (flashFireStatus == FLASH_FIRE_STATUS_MAXED) {
                     TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FAE00); // Fire moves won't become stronger!
                 }
@@ -333,12 +333,12 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             }
         }
         if (arg_10) {
-            if (splitIndex == 0 && targetInfo->protection.protectionStatus == STATUS_REFLECT) {
+            if (splitIndex == 0 && targetInfo->reflectClassStatus.status == STATUS_REFLECT) {
                 sub_8041B74(target);
                 F48_16_SMul(&unkSp9, &unkSp9, &gUnknown_8106F1C);
                 gDungeon->unk134.unk166 = 1;
             }
-            if (splitIndex == 1 && targetInfo->protection.protectionStatus == STATUS_LIGHT_SCREEN) {
+            if (splitIndex == 1 && targetInfo->reflectClassStatus.status == STATUS_LIGHT_SCREEN) {
                 sub_8041B5C(target);
                 F48_16_SMul(&unkSp9, &unkSp9, &gUnknown_8106F1C);
                 gDungeon->unk134.unk167 = 1;
@@ -356,7 +356,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
                 critOdds = critChance;
             }
 
-            if (attackerInfo->moveStatus.moveStatus == STATUS_FOCUS_ENERGY) {
+            if (attackerInfo->sureShotClassStatus.status == STATUS_FOCUS_ENERGY) {
                 critOdds = 999;
                 gDungeon->unk134.unk168 = 1;
             }

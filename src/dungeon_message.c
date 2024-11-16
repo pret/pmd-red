@@ -120,7 +120,7 @@ void sub_805229C(void)
     return sub_80526D0(0x50);
 }
 
-void TryDisplayDungeonLoggableMessage(Entity *pokemon, const u8 *str)
+void LogMessageByIdWithPopupCheckUser(Entity *pokemon, const u8 *str)
 {
     if (sub_8045888(pokemon)){
         DisplayMessageAddToLog(pokemon, str, TRUE);
@@ -624,7 +624,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
 void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
 {
     if (EntityExists(leader)) {
-        SetMessageArgument(gFormatBuffer_Monsters[0], leader, 0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], leader, 0);
         ids[0] = GetEntInfo(leader)->apparentID;
     }
     else {
@@ -633,7 +633,7 @@ void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
     }
 
     if (EntityExists(partner)) {
-        SetMessageArgument(gFormatBuffer_Monsters[1], partner, 0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], partner, 0);
         ids[1] = GetEntInfo(partner)->apparentID;
     }
     else {

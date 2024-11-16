@@ -602,9 +602,9 @@ bool8 sub_8045804(Entity *ent)
                 if (!monInfo->isNotTeamMember)
                     return TRUE;
 
-                if (!saveTyping->unk1820F && monInfo->transformStatus.transformStatus == STATUS_INVISIBLE)
+                if (!saveTyping->unk1820F && monInfo->invisibleClassStatus.status == STATUS_INVISIBLE)
                     return FALSE;
-                
+
                 if (saveTyping->unk1820B || saveTyping->unk1820D)
                     return TRUE;
 
@@ -631,10 +631,10 @@ bool8 sub_8045888(Entity *ent)
     if (ent->isVisible) {
         s32 x = (ent->pixelPos.x / 256) - gDungeon->unk181e8.cameraPixelPos.x;
         s32 y = (ent->pixelPos.y / 256) - gDungeon->unk181e8.cameraPixelPos.y;
-    
+
         if (x >= -32 && y >= -32 && x <= 272 && y <= 192) {
             UnkDungeonGlobal_unk181E8_sub *saveTyping = &gDungeon->unk181e8;
-        
+
             switch (GetEntityType(ent)) {
                 case ENTITY_ITEM: {
                     if (!saveTyping->unk1820E && !sub_803F428(&ent->pos))
@@ -645,7 +645,7 @@ bool8 sub_8045888(Entity *ent)
                     EntityInfo *monInfo = GetEntInfo(ent);
 
                     if (monInfo->isNotTeamMember) {
-                        if (!gDungeon->unk181e8.unk1820F && monInfo->transformStatus.transformStatus == STATUS_INVISIBLE)
+                        if (!gDungeon->unk181e8.unk1820F && monInfo->invisibleClassStatus.status == STATUS_INVISIBLE)
                             return FALSE;
 
                         if (!saveTyping->unk1820D && !sub_803F428(&ent->pos))
@@ -658,7 +658,7 @@ bool8 sub_8045888(Entity *ent)
                         return FALSE;
                     break;
                 }
-                case ENTITY_NOTHING: 
+                case ENTITY_NOTHING:
                 case ENTITY_UNK_5: {
                     return FALSE;
                 }

@@ -322,12 +322,12 @@ sub_8084448:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	adds r0, r5, 0
 	bl sub_8070BC0
 	lsls r0, 24
@@ -516,12 +516,12 @@ sub_80845E0:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	adds r4, 0x50
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	adds r0, r6, 0
 	bl sub_8070BC0
 	lsls r0, 24
@@ -585,7 +585,7 @@ _08084680:
 	ldr r0, _0808469C
 	adds r1, r7, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	adds r0, r7, 0
 	bl sub_8070BC0
 	lsls r0, 24

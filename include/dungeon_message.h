@@ -24,7 +24,7 @@ void sub_80521D0(void);
 void sub_8052210(bool8 a0);
 
 // These functions display the string if certain conditions are met. The conditions differ depending on the function. The string is then saved to the message log.
-void TryDisplayDungeonLoggableMessage(Entity *pokemon, const u8 *str);
+void LogMessageByIdWithPopupCheckUser(Entity *pokemon, const u8 *str);
 void TryDisplayDungeonLoggableMessage2(Entity *pokemon, const u8 *str);
 void TryDisplayDungeonLoggableMessage3(Entity *attacker, Entity *target, const u8 *str);
 void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const u8 *str);

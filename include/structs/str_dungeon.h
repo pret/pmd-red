@@ -349,7 +349,7 @@ typedef struct Dungeon
     /* 0x37F4 */ s32 unk37F4;
     /* 0x37F8 */ bool8 plusIsActive[2]; // Index 0: Enemy , Index 1: Team
     /* 0x37FA */ bool8 minusIsActive[2]; // Index 0: Enemy , Index 1: Team
-    /* 0x37FC */ bool8 decoyActive;
+    /* 0x37FC */ bool8 decoyIsActive;
     /* 0x37FD */ bool8 unk37FD;
     /* 0x37FE */ bool8 deoxysDefeat; // Flag set for deoxys in Meteor Cave
     /* 0x37FE */ bool8 unk37FF;
@@ -404,7 +404,7 @@ typedef struct Dungeon
     u8 fill1357A[0x1357C - 0x1357A];
     /* 0x1357C */ Entity *teamPokemon[MAX_TEAM_MEMBERS];
     /* 0x1358C */ Entity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
-    /* 0x135CC */ Entity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
+    /* 0x135CC */ Entity *activePokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
     /* 0x1361C */ Entity *items[DUNGEON_MAX_ITEMS];
     /* 0x1371C */ Entity *traps[DUNGEON_MAX_TRAPS];
     /* 0x1381C */ Entity teamPokemonEntities[MAX_TEAM_MEMBERS];

@@ -65,7 +65,7 @@ extern void sub_804AC20(struct Position *);
 extern void sub_807EC28(bool8);
 extern void sub_806A5B8(struct Entity *entity);
 
-void DecideAttack(Entity *pokemon)
+void ChooseAIMove(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     s32 i;
@@ -84,17 +84,17 @@ void DecideAttack(Entity *pokemon)
     if (CannotAttack(pokemon, FALSE) ||
         ShouldMonsterRunAwayAndShowEffect(pokemon, TRUE) ||
         HasTactic(pokemon, TACTIC_KEEP_YOUR_DISTANCE) ||
-        (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED && DungeonRandOutcome(gConfusedAttackChance)))
+        (pokemonInfo->cringeClassStatus.status == STATUS_CONFUSED && DungeonRandOutcome(gConfusedAttackChance)))
     {
         return;
     }
-    if (pokemonInfo->charging.chargingStatus != STATUS_NONE)
+    if (pokemonInfo->bideClassStatus.status != STATUS_NONE)
     {
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (pokemonInfo->moves.moves[i].moveFlags & MOVE_FLAG_EXISTS &&
-                MoveMatchesChargingStatus(pokemon, &pokemonInfo->moves.moves[i]) &&
-                pokemonInfo->charging.chargingStatusMoveIndex == i)
+                MoveMatchesBideClassStatus(pokemon, &pokemonInfo->moves.moves[i]) &&
+                pokemonInfo->bideClassStatus.moveSlot == i)
             {
                 s32 chosenMoveIndex;
                 SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_MOVE_AI);
@@ -206,7 +206,7 @@ void DecideAttack(Entity *pokemon)
             move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI)
         {
             aiPossibleMove[i].canBeUsed = TRUE;
-            if (pokemonInfo->charging.chargingStatus == chargeStatus)
+            if (pokemonInfo->bideClassStatus.status == chargeStatus)
             {
                 if (move->id == MOVE_CHARGE)
                 {
@@ -235,10 +235,10 @@ void DecideAttack(Entity *pokemon)
         }
     }
     aiPossibleMove[REGULAR_ATTACK_INDEX].weight = 0;
-    if (!IQSkillIsEnabled(pokemon, IQ_EXCLUSIVE_MOVE_USER) && pokemonInfo->charging.chargingStatus != chargeStatus)
+    if (!IQSkillIsEnabled(pokemon, IQ_EXCLUSIVE_MOVE_USER) && pokemonInfo->bideClassStatus.status != chargeStatus)
     {
         aiPossibleMove[REGULAR_ATTACK_INDEX].canBeUsed = TRUE;
-        if (pokemonInfo->charging.chargingStatus == chargeStatus)
+        if (pokemonInfo->bideClassStatus.status == chargeStatus)
         {
             // Never reached? Charge already skips the regular attack in the outer block.
             aiPossibleMove[REGULAR_ATTACK_INDEX].weight = 1;
@@ -370,7 +370,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
     targetingFlags = GetMoveTargetAndRangeForPokemon(pokemon, move, TRUE);
     hasStatusChecker = IQSkillIsEnabled(pokemon, IQ_STATUS_CHECKER);
     aiPossibleMove->canBeUsed = FALSE;
-    if ((pokemonInfo->volatileStatus.volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move)) ||
+    if ((pokemonInfo->cringeClassStatus.status == STATUS_TAUNTED && !MoveIgnoresTaunted(move)) ||
         (hasStatusChecker && !CanUseOnSelfWithStatusChecker(pokemon, move)))
     {
         return 1;
@@ -380,7 +380,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         rangeTargetingFlags == TARGETING_FLAG_TARGET_FRONTAL_CONE ||
         rangeTargetingFlags == TARGETING_FLAG_TARGET_AROUND)
     {
-        if (pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER)
+        if (pokemonInfo->blinkerClassStatus.status == STATUS_BLINKER)
         {
             u8 direction = pokemonInfo->action.direction;
             i = direction; // Fixes a regswap.
@@ -422,7 +422,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            Entity *target = gDungeon->allPokemon[i];
+            Entity *target = gDungeon->activePokemon[i];
             if (EntityExists(target) && CanSeeTarget(pokemon, target))
             {
                 numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
@@ -467,7 +467,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         }
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            Entity *target = gDungeon->allPokemon[i];
+            Entity *target = gDungeon->activePokemon[i];
             if (EntityExists(target) && pokemon != target)
             {
                 s32 direction = GetDirectionTowardsPosition(&pokemon->pos, &target->pos);
@@ -491,7 +491,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
-            Entity *target = gDungeon->allPokemon[i];
+            Entity *target = gDungeon->activePokemon[i];
             if (EntityExists(target))
             {
                 numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
@@ -674,8 +674,8 @@ bool8 IsAITargetEligible(s32 targetingFlags, Entity *user, Entity *target, Move 
         checkThirdParty:
         hasTarget = TRUE;
         if (targetData->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER ||
-            targetData->clientType == CLIENT_TYPE_DONT_MOVE ||
-            targetData->clientType == CLIENT_TYPE_CLIENT)
+            targetData->monsterBehavior == BEHAVIOR_DIGLETT ||
+            targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
         {
             returnFalse:
             return FALSE;
@@ -805,7 +805,7 @@ bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     s32 numPotentialTargets = 0;
     s32 direction = pokemonInfo->action.direction;
-    s32 faceTurnLimit = pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER ? 1 : 8;
+    s32 faceTurnLimit = pokemonInfo->blinkerClassStatus.status == STATUS_BLINKER ? 1 : 8;
     s32 i;
     s32 potentialAttackTargetDirections[NUM_DIRECTIONS];
     s32 potentialAttackTargetWeights[NUM_DIRECTIONS];
@@ -821,7 +821,7 @@ bool8 TargetRegularAttack(Entity *pokemon, u32 *targetDir, bool8 checkPetrified)
             GetEntityType(target) == ENTITY_MONSTER &&
             CanAttackInDirection(pokemon, direction) &&
             GetTreatmentBetweenMonsters(pokemon, target, FALSE, checkPetrified) == TREATMENT_TREAT_AS_ENEMY &&
-            (!hasStatusChecker || GetEntInfo(target)->immobilize.immobilizeStatus != STATUS_FROZEN))
+            (!hasStatusChecker || GetEntInfo(target)->frozenClassStatus.status != STATUS_FROZEN))
         {
             potentialAttackTargetDirections[numPotentialTargets] = direction;
             potentialAttackTargetWeights[numPotentialTargets] = WeightMove(pokemon, TARGETING_FLAG_TARGET_OTHER, target, TYPE_NONE);
@@ -988,14 +988,14 @@ void HandleUseOrbAction(Entity *pokemon)
 
     if (item->flags & ITEM_FLAG_STICKY) {
         sub_8045BF8(gFormatBuffer_Items[0], item);
-        TryDisplayDungeonLoggableMessage(pokemon, *gItemStickyDoesntWorkText);
+        LogMessageByIdWithPopupCheckUser(pokemon, *gItemStickyDoesntWorkText);
         return;
     }
 
     act = entityInfo->action;
 
     if (IsBossFight()) {
-        TryDisplayDungeonLoggableMessage(pokemon, *gPtrMysteriousPowerPreventedUseMessage);
+        LogMessageByIdWithPopupCheckUser(pokemon, *gPtrMysteriousPowerPreventedUseMessage);
         r4 = TRUE;
     }
     else {
@@ -1013,22 +1013,22 @@ void HandleUseOrbAction(Entity *pokemon)
             }
         }
 
-        if (entityInfo->volatileStatus.volatileStatus == 1) {
-            SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
-            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC714);
+        if (entityInfo->cringeClassStatus.status == 1) {
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FC714);
             r4 = FALSE;
             r8 = FALSE;
         }
-        else if (entityInfo->volatileStatus.volatileStatus == 7) {
-            SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
-            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC718);
+        else if (entityInfo->cringeClassStatus.status == 7) {
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FC718);
             r4 = FALSE;
             r8 = FALSE;
         }
-        else if (entityInfo->nonVolatile.nonVolatileStatus == 4)
+        else if (entityInfo->burnClassStatus.status == 4)
         {
-            SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
-            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FC6A8);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FC6A8);
             r4 = FALSE;
             r8 = FALSE;
         }

@@ -1010,7 +1010,7 @@ _080690A2:
 	adds r0, r2
 	mov r1, r8
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	b _08069484
 	.align 2, 0
 _080690E4: .4byte gDungeon
@@ -1283,7 +1283,7 @@ _0806930A:
 	adds r0, r2
 	mov r1, r8
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	b _08069352
 	.align 2, 0
 _0806932C: .4byte gUnknown_202EE70
@@ -1301,7 +1301,7 @@ _08069338:
 	adds r0, r3
 	mov r1, r8
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 _08069352:
 	bl GetLeader
 	cmp r0, 0
@@ -1515,7 +1515,7 @@ _080694FC:
 _0806950A:
 	adds r0, r4, 0
 	adds r1, r4, 0
-	bl SendImmobilizeEndMessage
+	bl EndFrozenClassStatus
 _08069512:
 	movs r0, 0x4
 	ldrsh r2, [r4, r0]

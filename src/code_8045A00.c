@@ -32,7 +32,7 @@ void sub_8045ACC(void)
   {
     entity = gDungeon->teamPokemon[index];
     if (EntityExists(entity)) {
-      gDungeon->allPokemon[pokeCount] = entity;
+      gDungeon->activePokemon[pokeCount] = entity;
       pokeCount++;
     }
   }
@@ -41,12 +41,12 @@ void sub_8045ACC(void)
   {
     entity = gDungeon->wildPokemon[index];
     if (EntityExists(entity)) {
-      gDungeon->allPokemon[pokeCount] = entity;
+      gDungeon->activePokemon[pokeCount] = entity;
       pokeCount++;
     }
   }
   for (; pokeCount < DUNGEON_MAX_POKEMON; pokeCount++) {
-    gDungeon->allPokemon[pokeCount] = NULL;
+    gDungeon->activePokemon[pokeCount] = NULL;
   }
 }
 
@@ -64,7 +64,7 @@ s32 GetTeamMemberEntityIndex(Entity *pokemon)
   return -1;
 }
 
-void SetMessageArgument(u8 *buffer, Entity *entity, u32 param_3)
+void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3)
 {
   switch(GetEntityType(entity))
   {

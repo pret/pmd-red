@@ -269,7 +269,7 @@ bool8 ComparePokemonNames(s16 a1, s16 a2)
     return FALSE;
 }
 
-void CopyMonsterNametoBuffer(u8 * buffer, s16 index)
+void CopyMonsterNameToBuffer(u8 * buffer, s16 index)
 {
     strncpy(buffer, gMonsterParameters[index].species, 0x14);
 }
@@ -397,7 +397,7 @@ u8 GetRegenSpeed(s16 index)
     return ((u8)(gMonsterParameters[index].regenSpeed) << 25) >> 24;
 }
 
-bool8 CanMove(s16 index)
+bool8 GetCanMoveFlag(s16 index)
 {
     return gMonsterParameters[index].canMove;
 }

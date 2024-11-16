@@ -49,7 +49,7 @@ void sub_807360C(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
+        entity = gDungeon->activePokemon[index];
         if(EntityExists(entity))
         {
             if(GetEntInfo(entity)->unk152 != 0)
@@ -281,7 +281,7 @@ void GetPossibleAIThrownItemDirections(Entity *pokemon, s32 thrownAIFlag, Item *
     }
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        Entity *targetPokemon = gDungeon->allPokemon[i];
+        Entity *targetPokemon = gDungeon->activePokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon)
         {
             s32 targetingFlags;
@@ -318,7 +318,7 @@ void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item, Position potential
     gAIThrowItemActionChoiceCount = 0;
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        Entity *targetPokemon = gDungeon->allPokemon[i];
+        Entity *targetPokemon = gDungeon->activePokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon &&
             CanSeeTarget(pokemon, targetPokemon) && GetTreatmentBetweenMonsters(pokemon, targetPokemon, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)
         {
@@ -366,7 +366,7 @@ void TargetThrownItem(Entity *pokemon, Entity *targetPokemon, Item *item, s32 ta
     distanceX = distanceX < 0 ? -distanceX : distanceX;
     distanceY = pokemon->pos.y - targetPokemon->pos.y;
     distanceY = distanceY < 0 ? -distanceY : distanceY;
-    if (GetEntInfo(pokemon)->itemStatus.itemStatus == STATUS_NONE)
+    if (GetEntInfo(pokemon)->longTossClassStatus.status == STATUS_NONE)
     {
         s32 distance = distanceY < distanceX ? distanceX : distanceY;
         if (distance > RANGED_ATTACK_RANGE)

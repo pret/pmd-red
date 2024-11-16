@@ -341,7 +341,7 @@ bool8 DigMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD14C); // It can only be used on land!
     }
     else {
-        if (MoveMatchesChargingStatus(pokemon,move)) {
+        if (MoveMatchesBideClassStatus(pokemon,move)) {
             HandleDamagingMove(pokemon,target,move,gUnknown_80F4F68,param_4);
             sub_8079764(pokemon);
         }
@@ -451,8 +451,8 @@ bool8 PainSplitMoveAction(Entity *attacker, Entity *target, Move *move, s32 para
     if (targetInfo->HP > targetInfo->maxHPStat) {
         targetInfo->HP = targetInfo->maxHPStat;
     }
-    SetMessageArgument(gFormatBuffer_Monsters[0],attacker,0);
-    SetMessageArgument(gFormatBuffer_Monsters[1],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],attacker,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
     SetExpMultplier(attackerInfo);
 
     // $m0 and $m1 shared their HP
@@ -505,8 +505,8 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
   }
   if (isTormented)
   {
-    if(entityInfo->charging.chargingStatus == STATUS_BIDE) {
-        entityInfo->charging.chargingStatus = STATUS_NONE;
+    if(entityInfo->bideClassStatus.status == STATUS_BIDE) {
+        entityInfo->bideClassStatus.status = STATUS_NONE;
     }
   }
   else
@@ -590,7 +590,7 @@ bool8 WhirlpoolMoveAction(Entity * pokemon, Entity * target, Move * move, u32 pa
   u8 chargeStatus;
 
   flag = FALSE;
-  chargeStatus = GetEntInfo(target)->charging.chargingStatus;
+  chargeStatus = GetEntInfo(target)->bideClassStatus.status;
   uVar3 = 0x100;
   if (chargeStatus == STATUS_DIVING) {
     uVar3 = 0x200;
@@ -624,7 +624,7 @@ bool8 sub_8057D9C(Entity * pokemon, Entity * target, Move *move, s32 param_4)
         }
     }
 
-    SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
     if (flag) {
         TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FD350);
     }
@@ -728,7 +728,7 @@ bool8 sub_8057FF4(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   if (flashFireStatus != FLASH_FIRE_STATUS_NONE) {
     if (GetEntInfo(target)->unk152 == 0) {
       GetEntInfo(target)->unk152 = 1;
-      SetMessageArgument(gFormatBuffer_Monsters[1],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
       if (flashFireStatus == FLASH_FIRE_STATUS_MAXED) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAE00); // Fire moves won't become stronger
       }
@@ -780,7 +780,7 @@ bool8 GrudgeMoveAction(Entity *pokemon, Entity * target, Move *move, s32 param_4
 
   hasGrudge = FALSE;
   entityInfo = GetEntInfo(target);
-  SetMessageArgument(gFormatBuffer_Monsters[1],target,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
   if (entityInfo->grudge) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD2B4);
   }
@@ -852,7 +852,7 @@ bool8 sub_8058270(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
   r3 = 1;
   targetInfo = GetEntInfo(target);
-  if(targetInfo->charging.chargingStatus == STATUS_FLYING || targetInfo->charging.chargingStatus == STATUS_BOUNCING)
+  if(targetInfo->bideClassStatus.status == STATUS_FLYING || targetInfo->bideClassStatus.status == STATUS_BOUNCING)
     r3 = 2;
   flag =  HandleDamagingMove(pokemon,target,move,r3 << 8,param_4) ? TRUE : FALSE;
   return flag;
@@ -880,7 +880,7 @@ bool8 RazorWindMoveAction(Entity * pokemon, Entity * target, Move * move, u32 pa
 {
   bool8 flag;
 
-  if (MoveMatchesChargingStatus(pokemon,move)) {
+  if (MoveMatchesBideClassStatus(pokemon,move)) {
     flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F4F50,param_4) ? TRUE : FALSE;
     sub_8079764(pokemon);
   }
@@ -985,7 +985,7 @@ bool8 sub_8058548(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 r5;
 
   r5 = 0x80 << 1;
-  if((GetEntInfo(pokemon)->nonVolatile.nonVolatileStatus) != STATUS_NONE)
+  if((GetEntInfo(pokemon)->burnClassStatus.status) != STATUS_NONE)
     r5 = gUnknown_80F4F6C;
   flag =  HandleDamagingMove(pokemon,target,move,r5,param_4) ? TRUE : FALSE;
   return flag;
@@ -1011,9 +1011,9 @@ bool8 BrickBreakMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   bool8 flag;
 
   flag = FALSE;
-  if ((GetEntInfo(target)->protection.protectionStatus == STATUS_REFLECT) || (GetEntInfo(target)->protection.protectionStatus == STATUS_LIGHT_SCREEN)) {
+  if ((GetEntInfo(target)->reflectClassStatus.status == STATUS_REFLECT) || (GetEntInfo(target)->reflectClassStatus.status == STATUS_LIGHT_SCREEN)) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD104); // The barrier was shattered
-    SendProtectionEndMessage(pokemon,target);
+    EndReflectClassStatus(pokemon,target);
     flag = TRUE;
   }
 
@@ -1040,7 +1040,7 @@ bool8 FocusPunchMoveAction(Entity * pokemon, Entity * target, Move * move, u32 p
 {
   bool8 flag;
 
-  if (MoveMatchesChargingStatus(pokemon,move)) {
+  if (MoveMatchesBideClassStatus(pokemon,move)) {
     flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F4F54,param_4) ? TRUE : FALSE;
     sub_8079764(pokemon);
   }
@@ -1109,9 +1109,9 @@ bool8 sub_80587E8(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 {
   bool8 flag;
 
-  if (GetEntInfo(target)->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
+  if (GetEntInfo(target)->burnClassStatus.status == STATUS_PARALYSIS) {
     flag = HandleDamagingMove(pokemon,target,move,0x80 << 2,param_4) ? TRUE : FALSE;
-    SendNonVolatileEndMessage(pokemon, target);
+    EndBurnClassStatus(pokemon, target);
   }
   else {
     flag = HandleDamagingMove(pokemon,target,move,0x80 << 1,param_4) ? TRUE : FALSE;
@@ -1237,7 +1237,7 @@ bool8 SkyAttackMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param
 {
     bool8 flag = FALSE;
 
-    if(MoveMatchesChargingStatus(pokemon, move))
+    if(MoveMatchesBideClassStatus(pokemon, move))
     {
         if (HandleDamagingMove(pokemon, target, move, gUnknown_80F4F4C, param_4) != 0) {
            flag = TRUE;
@@ -1409,7 +1409,7 @@ bool8 PsychUpMoveAction(Entity * pokemon, Entity * target, Move * move, u32 para
     iVar4->offensiveMultipliers[index] = iVar3->offensiveMultipliers[index];
     iVar4->defensiveMultipliers[index] = iVar3->defensiveMultipliers[index];
   }
-  SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
   TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBD58); // It psyched itself up!
   SetExpMultplier(iVar4);
   return TRUE;
@@ -1455,7 +1455,7 @@ bool32 sub_8058F04(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   iVar3 = 1;
   gDungeon->unk181e8.unk18200 = 0xc;
   gDungeon->unk181e8.unk18204 = 0;
-  if (entityInfo->charging.chargingStatus == STATUS_DIGGING) {
+  if (entityInfo->bideClassStatus.status == STATUS_DIGGING) {
     iVar3 = 2;
   }
   flag = HandleDamagingMove(pokemon,target,move,iVar3 << 8,param_4);
@@ -1799,7 +1799,7 @@ bool8 SolarBeamMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param
   s32 movePower;
 
   weather = GetApparentWeather(pokemon);
-  if ((weather == WEATHER_SUNNY) || (MoveMatchesChargingStatus(pokemon,move))) {
+  if ((weather == WEATHER_SUNNY) || (MoveMatchesBideClassStatus(pokemon,move))) {
     movePower = gSolarBeamMovePower;
 
     if (((weather == WEATHER_SANDSTORM) || (weather == WEATHER_RAIN)) || weather == WEATHER_HAIL) {
@@ -1830,7 +1830,7 @@ bool8 FlyMoveAction(Entity * pokemon, Entity * target, Move * move, u32 param_4)
   bool8 flag;
 
   flag = FALSE;
-  if (MoveMatchesChargingStatus(pokemon,move)) {
+  if (MoveMatchesBideClassStatus(pokemon,move)) {
       flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F4F5C,param_4) != 0 ? TRUE : FALSE;
       sub_8079764(pokemon);
   }
@@ -1855,7 +1855,7 @@ bool8 DiveMoveAction(Entity * pokemon, Entity * target, Move * move, u32 param_4
   if (IsTileGround(GetTileAtEntitySafe(pokemon))) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD128);
   }
-  else if (MoveMatchesChargingStatus(pokemon,move)) {
+  else if (MoveMatchesBideClassStatus(pokemon,move)) {
       flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F4F64,param_4) != 0 ? TRUE : FALSE;
       sub_8079764(pokemon);
   }
@@ -1894,7 +1894,7 @@ bool8 sub_8059928(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 
   iVar2 = 1;
   flag = FALSE;
-  if ((u8)(GetEntInfo(target)->charging.chargingStatus - 7) <= 1){
+  if ((u8)(GetEntInfo(target)->bideClassStatus.status - 7) <= 1){
       iVar2 = 2;
   }
   if (HandleDamagingMove(pokemon,target,move,iVar2 << 8,param_4) != 0)
@@ -2188,7 +2188,7 @@ bool8 sub_8059F38(Entity * pokemon,Entity * target,Move * move,u32 param_4)
   bool8 flag;
 
   flag = FALSE;
-  if (MoveMatchesChargingStatus(pokemon, move)) {
+  if (MoveMatchesBideClassStatus(pokemon, move)) {
     if (HandleDamagingMove(pokemon, target, move, gUnknown_80F4F60, param_4) != 0) {
       flag = TRUE;
       if (sub_805727C(pokemon, target, gUnknown_80F4DCC) != 0) {
@@ -2278,8 +2278,8 @@ bool8 sub_805A120(Entity * pokemon,Entity * target, Move *move, u32 param_4)
     r8 = GetEntInfo(target);
     sp = r8;
 
-    SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
-    SetMessageArgument(gFormatBuffer_Monsters[1],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
     if (HasAbility(target, ABILITY_STICKY_HOLD)) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCE4);
         return FALSE;
@@ -2378,7 +2378,7 @@ bool8 SurfMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   u32 uVar2;
 
   flag = FALSE;
-  if (GetEntInfo(target)->charging.chargingStatus == STATUS_DIVING) {
+  if (GetEntInfo(target)->bideClassStatus.status == STATUS_DIVING) {
       uVar2 = 0x200;
   }
   else
@@ -2596,8 +2596,8 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
 
     entityInfo = GetEntInfo(pokemon);
     targetEntityInfo = GetEntInfo(target);
-    SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
-    SetMessageArgument(gFormatBuffer_Monsters[1], target, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
     if (HasAbility(target, ABILITY_STICKY_HOLD))
     {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCE8);
@@ -2646,7 +2646,7 @@ static void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position 
   SetEntityPixelPos(&stackEntity,(target->pos.x * 0x18 + 4) * 0x100,
               (target->pos.y * 0x18 + 4) * 0x100);
   stackEntity.spawnGenID = 0;
-  SetMessageArgument(gFormatBuffer_Items[0],&stackEntity,0);
+  SubstitutePlaceholderStringTags(gFormatBuffer_Items[0],&stackEntity,0);
   sub_804652C(pokemon,&stackEntity,item,1,0);
 }
 
@@ -2774,7 +2774,7 @@ bool8 BellyDrumMoveAction(Entity * pokemon,Entity * target, Move *move, u32 para
     flag = TRUE;
   }
   else {
-    SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC5CC);
   }
   return flag;
@@ -2887,7 +2887,7 @@ bool32 sub_805AD54(Entity * pokemon, Entity * target, Move *move, u32 param_4)
              && GetTreatmentBetweenMonsters(pokemon,targetEntity,FALSE,FALSE) == TREATMENT_TREAT_AS_ALLY)
         {
             EntityInfo *targetInfo = GetEntInfo(targetEntity);
-            if (targetInfo->clientType != CLIENT_TYPE_CLIENT && !IsClientOrTeamBase(targetInfo->joinedAt.joinedAt)) {
+            if (targetInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET && !IsClientOrTeamBase(targetInfo->joinedAt.joinedAt)) {
                 sub_807D148(pokemon,targetEntity,2,&target->pos);
                 flag = TRUE;
                 SetExpMultplier(info);
