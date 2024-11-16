@@ -346,7 +346,7 @@ _0806A650:
 	bne _0806A6D2
 	adds r0, r6, 0
 	adds r1, r6, 0
-	bl SendNonVolatileEndMessage
+	bl EndBurnClassStatus
 	b _0806A6D2
 _0806A664:
 	cmp r1, 0
@@ -1072,7 +1072,7 @@ sub_806ABAC:
 	bne _0806ABD4
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendNonVolatileEndMessage
+	bl EndBurnClassStatus
 _0806ABD4:
 	adds r0, r4, 0
 	movs r1, 0x40
@@ -1087,7 +1087,7 @@ _0806ABD4:
 	bne _0806ABF4
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendVolatileEndMessage
+	bl EndCringeClassStatus
 _0806ABF4:
 	adds r0, r4, 0
 	movs r1, 0x42
@@ -1102,7 +1102,7 @@ _0806ABF4:
 	bne _0806AC14
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendNonVolatileEndMessage
+	bl EndBurnClassStatus
 _0806AC14:
 	adds r0, r4, 0
 	movs r1, 0x29
@@ -1117,7 +1117,7 @@ _0806AC14:
 	bne _0806AC34
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendVolatileEndMessage
+	bl EndCringeClassStatus
 _0806AC34:
 	adds r0, r4, 0
 	movs r1, 0x36
@@ -1147,7 +1147,7 @@ _0806AC66:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl SendSleepEndMessage
+	bl EndSleepClassStatus
 _0806AC72:
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -1180,7 +1180,7 @@ _0806AC92:
 	bhi _0806ACB8
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendNonVolatileEndMessage
+	bl EndBurnClassStatus
 _0806ACB8:
 	adds r0, r4, 0
 	movs r1, 0x25
@@ -1199,7 +1199,7 @@ _0806ACB8:
 	bne _0806ACE0
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendProtectionEndMessage
+	bl EndReflectClassStatus
 _0806ACE0:
 	pop {r4-r6}
 	pop {r0}

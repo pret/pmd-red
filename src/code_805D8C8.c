@@ -20,7 +20,7 @@ void sub_8068768(void)
     s32 i;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        entity = gDungeon->activeMonsterPtrs[i];
+        entity = gDungeon->activePokemon[i];
 
         if (entity != NULL && EntityExists(entity))
             LoadPokemonSprite(GetEntInfo(entity)->apparentID, FALSE);

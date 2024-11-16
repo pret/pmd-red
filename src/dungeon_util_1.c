@@ -157,7 +157,7 @@ Entity *GetEntityFromMonsterBehavior(u8 entityType)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->activeMonsterPtrs[index];
+        entity = gDungeon->activePokemon[index];
         if ((EntityExists(entity)) && (GetEntInfo(entity)->monsterBehavior == entityType)) return entity;
     }
     return NULL;
@@ -219,7 +219,7 @@ void sub_80857B8(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->activeMonsterPtrs[index];
+        entity = gDungeon->activePokemon[index];
         if (EntityExists(entity)) {
             entityInfo = GetEntInfo(entity);
             if ((gDungeon->unk4 == 0) && (gDungeon->unk2 == 0)) {

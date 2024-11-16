@@ -537,8 +537,8 @@ void EyedropSeedItemAction(Entity *pokemon, Entity *target)
 
 void CheriBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if(GetEntInfo(target)->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS)
-        SendNonVolatileEndMessage(pokemon, target);
+    if(GetEntInfo(target)->burnClassStatus.status == STATUS_PARALYSIS)
+        EndBurnClassStatus(pokemon, target);
     else
         // Pointer to "But nothing happened!"
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F89F4);
@@ -547,8 +547,8 @@ void CheriBerryItemAction(Entity *pokemon, Entity *target)
 void PechaBerryItemAction(Entity *pokemon, Entity *target)
 {
     EntityInfo *entInfo = GetEntInfo(target);
-    if(entInfo->nonVolatile.nonVolatileStatus == STATUS_POISONED || entInfo->nonVolatile.nonVolatileStatus == STATUS_BADLY_POISONED)
-        SendNonVolatileEndMessage(pokemon, target);
+    if(entInfo->burnClassStatus.status == STATUS_POISONED || entInfo->burnClassStatus.status == STATUS_BADLY_POISONED)
+        EndBurnClassStatus(pokemon, target);
     else
         // Pointer to "But nothing happened!"
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F89F4);
@@ -592,8 +592,8 @@ void DoomSeedItemAction(Entity *pokemon, Entity *target)
 
 void RawstBerryItemAction(Entity *pokemon, Entity *target)
 {
-    if(GetEntInfo(target)->nonVolatile.nonVolatileStatus == STATUS_BURN)
-        SendNonVolatileEndMessage(pokemon, target);
+    if(GetEntInfo(target)->burnClassStatus.status == STATUS_BURN)
+        EndBurnClassStatus(pokemon, target);
     else
     {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
@@ -694,7 +694,7 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     else {
         uVar1 = gUnknown_80F4FA4;
     }
-    if (entityInfo_1->immobilize.immobilizeStatus == STATUS_FROZEN) {
+    if (entityInfo_1->frozenClassStatus.status == STATUS_FROZEN) {
       EndFrozenClassStatus(pokemon, target);
     }
     sub_806F370(pokemon, target, uVar1, 1, auStack28, 0, 0x216, 0, 0, 0);
@@ -717,7 +717,7 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
       else {
         uVar1 = gUnknown_80F4FA6;
       }
-      if (entityInfo->immobilize.immobilizeStatus == STATUS_FROZEN) {
+      if (entityInfo->frozenClassStatus.status == STATUS_FROZEN) {
         EndFrozenClassStatus(pokemon, entity);
       }
       sub_806F370(pokemon, entity, uVar1, 1, auStack28, 0, 0x216, 0, 0, 0);

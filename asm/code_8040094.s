@@ -2501,7 +2501,7 @@ _080414A0:
 _080414A4:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl MoveMatchesChargingStatus
+	bl MoveMatchesBideClassStatus
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

@@ -3,7 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 
-u8 sub_8075BF4(Entity * pokemon, s32 sleepTurns);
+u8 sub_8075BF4(Entity * pokemon, s32 sleepClassStatusTurns);
 void sub_8075C58(Entity * pokemon, Entity * target, s32 turns, bool8 displayMessage);
 bool8 CannotSleep(Entity * pokemon, Entity * target, u8 param_3, bool8 displayMessage);
 void NightmareStatusTarget(Entity * pokemon, Entity * target, s32 turns);

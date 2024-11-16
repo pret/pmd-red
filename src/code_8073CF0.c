@@ -422,19 +422,19 @@ void sub_8074094(Entity *entity)
     }
 
 // Statuses
-    if (entityInfo->sleep.sleep == STATUS_YAWNING) {
+    if (entityInfo->sleepClassStatus.status == STATUS_YAWNING) {
         UseAttack(NULL);
         if (!EntityExists(entity) || sub_8044B28())
             return;
         sub_80420B8(entity);
     }
 
-    if (entityInfo->nonVolatile.nonVolatileStatus == STATUS_BURN) {
-        if (entityInfo->nonVolatile.nonVolatileStatusDamageCountdown == 0 || --entityInfo->nonVolatile.nonVolatileStatusDamageCountdown == 0) {
+    if (entityInfo->burnClassStatus.status == STATUS_BURN) {
+        if (entityInfo->burnClassStatus.damageCountdown == 0 || --entityInfo->burnClassStatus.damageCountdown == 0) {
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = gUnknown_80F4F32;
+            entityInfo->burnClassStatus.damageCountdown = gUnknown_80F4F32;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gUnknown_80F4F70, 1, 0x208);
         }
@@ -442,24 +442,24 @@ void sub_8074094(Entity *entity)
             return;
     }
 
-    if (entityInfo->nonVolatile.nonVolatileStatus == STATUS_POISONED) {
-        if (entityInfo->nonVolatile.nonVolatileStatusDamageCountdown == 0 || --entityInfo->nonVolatile.nonVolatileStatusDamageCountdown == 0) {
+    if (entityInfo->burnClassStatus.status == STATUS_POISONED) {
+        if (entityInfo->burnClassStatus.damageCountdown == 0 || --entityInfo->burnClassStatus.damageCountdown == 0) {
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = gUnknown_80F4F34;
+            entityInfo->burnClassStatus.damageCountdown = gUnknown_80F4F34;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gUnknown_80F4F72, 3, 0x20A);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
     }
-    else if (entityInfo->nonVolatile.nonVolatileStatus == STATUS_BADLY_POISONED) {
-        if (entityInfo->nonVolatile.nonVolatileStatusDamageCountdown == 0 || --entityInfo->nonVolatile.nonVolatileStatusDamageCountdown == 0) {
-            s32 turns = entityInfo->nonVolatile.unk4;
-            if (entityInfo->nonVolatile.unk4 < 29)
-                entityInfo->nonVolatile.unk4++;
-            entityInfo->nonVolatile.nonVolatileStatusDamageCountdown = gUnknown_80F4F36;
+    else if (entityInfo->burnClassStatus.status == STATUS_BADLY_POISONED) {
+        if (entityInfo->burnClassStatus.damageCountdown == 0 || --entityInfo->burnClassStatus.damageCountdown == 0) {
+            s32 turns = entityInfo->burnClassStatus.unk4;
+            if (entityInfo->burnClassStatus.unk4 < 29)
+                entityInfo->burnClassStatus.unk4++;
+            entityInfo->burnClassStatus.damageCountdown = gUnknown_80F4F36;
             if (turns >= 29)
                 turns = 29;
 
@@ -474,47 +474,47 @@ void sub_8074094(Entity *entity)
             return;
     }
 
-    if (entityInfo->immobilize.immobilizeStatus == STATUS_CONSTRICTION) {
-        if (entityInfo->immobilize.immobilizeStatusDamageCountdown == 0 || --entityInfo->immobilize.immobilizeStatusDamageCountdown == 0) {
+    if (entityInfo->frozenClassStatus.status == STATUS_CONSTRICTION) {
+        if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            entityInfo->immobilize.immobilizeStatusDamageCountdown = gUnknown_80F4F38;
+            entityInfo->frozenClassStatus.damageCountdown = gUnknown_80F4F38;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            sub_8041C4C(entity, entityInfo->immobilize.unk4);
+            sub_8041C4C(entity, entityInfo->frozenClassStatus.unk4);
             DealDamageToEntity(entity, gUnknown_80F4F74, 2, 0x209);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
     }
-    else if (entityInfo->immobilize.immobilizeStatus == STATUS_WRAPPED) {
-        if (entityInfo->immobilize.immobilizeStatusDamageCountdown == 0 || --entityInfo->immobilize.immobilizeStatusDamageCountdown == 0) {
+    else if (entityInfo->frozenClassStatus.status == STATUS_WRAPPED) {
+        if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            entityInfo->immobilize.immobilizeStatusDamageCountdown = gUnknown_80F4F3A;
+            entityInfo->frozenClassStatus.damageCountdown = gUnknown_80F4F3A;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gUnknown_80F4F76, 5, 0x20B);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
     }
-    else if (entityInfo->immobilize.immobilizeStatus == STATUS_INGRAIN) {
-        if (entityInfo->immobilize.immobilizeStatusDamageCountdown == 0 || --entityInfo->immobilize.immobilizeStatusDamageCountdown == 0) {
+    else if (entityInfo->frozenClassStatus.status == STATUS_INGRAIN) {
+        if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            entityInfo->immobilize.immobilizeStatusDamageCountdown = gUnknown_80F4F3C;
+            entityInfo->frozenClassStatus.damageCountdown = gUnknown_80F4F3C;
             HealTargetHP(entity, entity, gUnknown_80F4FB2, 0, TRUE);
         }
     }
 
-    if (entityInfo->waitingStruct.waitingStatus == STATUS_CURSED) {
-        if (entityInfo->waitingStruct.curseDamageCountdown == 0 || --entityInfo->waitingStruct.curseDamageCountdown == 0) {
+    if (entityInfo->curseClassStatus.status == STATUS_CURSED) {
+        if (entityInfo->curseClassStatus.damageCountdown == 0 || --entityInfo->curseClassStatus.damageCountdown == 0) {
             s32 dmg = entityInfo->maxHPStat / 4;
             if (dmg == 0)
                 dmg = 1;
-            entityInfo->waitingStruct.curseDamageCountdown = gUnknown_80F4F3E;
+            entityInfo->curseClassStatus.damageCountdown = gUnknown_80F4F3E;
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
@@ -526,19 +526,19 @@ void sub_8074094(Entity *entity)
             return;
     }
 
-    if (entityInfo->linked.linkedStatus == STATUS_LEECH_SEED) {
-        if (entityInfo->linked.linkedStatusDamageCountdown == 0 || --entityInfo->linked.linkedStatusDamageCountdown == 0) {
+    if (entityInfo->linked.status == STATUS_LEECH_SEED) {
+        if (entityInfo->linked.damageCountdown == 0 || --entityInfo->linked.damageCountdown == 0) {
             s32 hp = gUnknown_80F4FB4;
-            Entity *target = gDungeon->activeMonsterPtrs[entityInfo->linked.unkD8];
+            Entity *target = gDungeon->activePokemon[entityInfo->linked.unkD8];
 
-            entityInfo->linked.linkedStatusDamageCountdown = gUnknown_80F4F40;
+            entityInfo->linked.damageCountdown = gUnknown_80F4F40;
             if (target == NULL) {
-                entityInfo->linked.linkedStatus = 0;
+                entityInfo->linked.status = 0;
             }
             else {
                 EntityInfo *targetInfo = GetEntInfo(target);
                 if (targetInfo->unk98 != entityInfo->linked.unkD4) {
-                    entityInfo->linked.linkedStatus = 0;
+                    entityInfo->linked.status = 0;
                 }
                 else {
                     bool8 dmgUser = HasAbility(entity, ABILITY_LIQUID_OOZE);
@@ -547,7 +547,7 @@ void sub_8074094(Entity *entity)
                     if (!EntityExists(entity) || !EntityExists(target) || sub_8044B28())
                         return;
 
-                    if (entityInfo->immobilize.immobilizeStatus != STATUS_FROZEN) {
+                    if (entityInfo->frozenClassStatus.status != STATUS_FROZEN) {
                         TrySendImmobilizeSleepEndMsg(entity, entity);
                         DealDamageToEntity(entity, hp, 9, 0x20D);
                         if (dmgUser) {
@@ -574,7 +574,7 @@ void sub_8074094(Entity *entity)
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], entity, 0);
             LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FEB30);
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            if (entityInfo->protection.protectionStatus == STATUS_PROTECT) {
+            if (entityInfo->reflectClassStatus.status == STATUS_PROTECT) {
                 LogMessageByIdWithPopupCheckUser(entity, gPtrProtectSavedItMessage);
             }
             else {
@@ -585,10 +585,10 @@ void sub_8074094(Entity *entity)
         }
     }
 
-    if (entityInfo->charging.chargingStatus == STATUS_BIDE) {
-        sub_80838EC(&entityInfo->charging.chargingStatusTurns);
-        if (entityInfo->charging.chargingStatusTurns == 0) {
-            entityInfo->charging.chargingStatus = 0;
+    if (entityInfo->bideClassStatus.status == STATUS_BIDE) {
+        sub_80838EC(&entityInfo->bideClassStatus.turns);
+        if (entityInfo->bideClassStatus.turns == 0) {
+            entityInfo->bideClassStatus.status = 0;
             if (!CheckVariousStatuses2(entity, FALSE) && !CannotAttack(entity, FALSE) && !CheckVariousStatuses(entity)) {
                 Move bideMove;
 
@@ -606,10 +606,10 @@ void sub_8074094(Entity *entity)
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    if (entityInfo->charging.chargingStatus == STATUS_ENRAGED) {
-        sub_80838EC(&entityInfo->charging.chargingStatusTurns);
-        if (entityInfo->charging.chargingStatusTurns == 0) {
-            entityInfo->charging.chargingStatus = 0;
+    if (entityInfo->bideClassStatus.status == STATUS_ENRAGED) {
+        sub_80838EC(&entityInfo->bideClassStatus.turns);
+        if (entityInfo->bideClassStatus.turns == 0) {
+            entityInfo->bideClassStatus.status = 0;
             entityInfo->unk14A = 0;
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
             LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FABD8);
@@ -635,7 +635,7 @@ void TickStatusHeal(Entity *entity)
     entityInfo = GetEntInfo(entity);
 
     // HP heal
-    if (entityInfo->unk146 == 0 && entityInfo->nonVolatile.nonVolatileStatus != STATUS_POISONED && entityInfo->nonVolatile.nonVolatileStatus != STATUS_BADLY_POISONED) {
+    if (entityInfo->unk146 == 0 && entityInfo->burnClassStatus.status != STATUS_POISONED && entityInfo->burnClassStatus.status != STATUS_BADLY_POISONED) {
         s32 r4 = 0;
 
         if (!entityInfo->isNotTeamMember)
@@ -644,7 +644,7 @@ void TickStatusHeal(Entity *entity)
         if (r4 != 0) {
             if (HasHeldItem(entity, ITEM_HEAL_RIBBON))
                 r4 += gUnknown_80F4FC4;
-            if (entityInfo->protection.protectionStatus == STATUS_WISH)
+            if (entityInfo->reflectClassStatus.status == STATUS_WISH)
                 r4 += gUnknown_80F4FC0;
             if (HasAbility(entity, ABILITY_RAIN_DISH) && GetApparentWeather(entity) == WEATHER_RAIN)
                 r4 += gUnknown_80F4FC2;
@@ -665,90 +665,90 @@ void TickStatusHeal(Entity *entity)
         }
     }
 
-    if (entityInfo->sleep.sleep != 0) {
-        sub_80838EC(&entityInfo->sleep.sleepTurns);
-        if (entityInfo->sleep.sleepTurns == 0) {
-            SendSleepEndMessage(entity, entity, TRUE, TRUE);
+    if (entityInfo->sleepClassStatus.status != 0) {
+        sub_80838EC(&entityInfo->sleepClassStatus.turns);
+        if (entityInfo->sleepClassStatus.turns == 0) {
+            EndSleepClassStatus(entity, entity, TRUE, TRUE);
         }
     }
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    if (entityInfo->nonVolatile.nonVolatileStatus != 0) {
-        sub_80838EC(&entityInfo->nonVolatile.nonVolatileStatusTurns);
-        if (entityInfo->nonVolatile.nonVolatileStatusTurns == 0) {
-            SendNonVolatileEndMessage(entity, entity);
+    if (entityInfo->burnClassStatus.status != 0) {
+        sub_80838EC(&entityInfo->burnClassStatus.turns);
+        if (entityInfo->burnClassStatus.turns == 0) {
+            EndBurnClassStatus(entity, entity);
         }
     }
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    if (entityInfo->immobilize.immobilizeStatus != 0) {
-        sub_80838EC(&entityInfo->immobilize.immobilizeStatusTurns);
-        if (entityInfo->immobilize.immobilizeStatusTurns == 0) {
+    if (entityInfo->frozenClassStatus.status != 0) {
+        sub_80838EC(&entityInfo->frozenClassStatus.turns);
+        if (entityInfo->frozenClassStatus.turns == 0) {
             EndFrozenClassStatus(entity, entity);
         }
     }
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    if (entityInfo->volatileStatus.volatileStatus != 0) {
-        sub_80838EC(&entityInfo->volatileStatus.volatileStatusTurns);
-        if (entityInfo->volatileStatus.volatileStatusTurns == 0) {
-            SendVolatileEndMessage(entity, entity);
+    if (entityInfo->cringeClassStatus.status != 0) {
+        sub_80838EC(&entityInfo->cringeClassStatus.turns);
+        if (entityInfo->cringeClassStatus.turns == 0) {
+            EndCringeClassStatus(entity, entity);
         }
     }
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    if (entityInfo->protection.protectionStatus != 0) {
-        sub_80838EC(&entityInfo->protection.protectionStatusTurns);
-        if (entityInfo->protection.protectionStatusTurns == 0) {
-            SendProtectionEndMessage(entity, entity);
+    if (entityInfo->reflectClassStatus.status != 0) {
+        sub_80838EC(&entityInfo->reflectClassStatus.turns);
+        if (entityInfo->reflectClassStatus.turns == 0) {
+            EndReflectClassStatus(entity, entity);
         }
     }
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    if (entityInfo->waitingStruct.waitingStatus != 0) {
-        sub_80838EC(&entityInfo->waitingStruct.waitingStatusTurns);
-        if (entityInfo->waitingStruct.waitingStatusTurns == 0) {
-            SendWaitingEndMessage(entity, entity, 0);
+    if (entityInfo->curseClassStatus.status != 0) {
+        sub_80838EC(&entityInfo->curseClassStatus.turns);
+        if (entityInfo->curseClassStatus.turns == 0) {
+            EndCurseClassStatus(entity, entity, 0);
         }
     }
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    if (entityInfo->linked.linkedStatus != 0) {
-        sub_80838EC(&entityInfo->linked.linkedStatusTurns);
-        if (entityInfo->linked.linkedStatusTurns == 0) {
-            SendLinkedEndMessage(entity, entity);
+    if (entityInfo->linked.status != 0) {
+        sub_80838EC(&entityInfo->linked.turns);
+        if (entityInfo->linked.turns == 0) {
+            EndLeechSeedClassStatus(entity, entity);
         }
     }
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    if (entityInfo->moveStatus.moveStatus != 0) {
-        sub_80838EC(&entityInfo->moveStatus.moveStatusTurns);
-        if (entityInfo->moveStatus.moveStatusTurns == 0) {
+    if (entityInfo->sureShotClassStatus.status != 0) {
+        sub_80838EC(&entityInfo->sureShotClassStatus.turns);
+        if (entityInfo->sureShotClassStatus.turns == 0) {
             SendMoveEndMessage(entity, entity);
         }
     }
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    if (entityInfo->transformStatus.transformStatus != 0) {
-        sub_80838EC(&entityInfo->transformStatus.transformStatusTurns);
-        if (entityInfo->transformStatus.transformStatusTurns == 0) {
+    if (entityInfo->invisibleClassStatus.status != 0) {
+        sub_80838EC(&entityInfo->invisibleClassStatus.turns);
+        if (entityInfo->invisibleClassStatus.turns == 0) {
             SendTransformEndMessage(entity, entity);
         }
     }
     if (!EntityExists(entity) || sub_8044B28())
         return;
 
-    if (entityInfo->eyesightStatus.eyesightStatus != 0) {
-        sub_80838EC(&entityInfo->eyesightStatus.eyesightStatusTurns);
-        if (entityInfo->eyesightStatus.eyesightStatusTurns == 0) {
+    if (entityInfo->blinkerClassStatus.status != 0) {
+        sub_80838EC(&entityInfo->blinkerClassStatus.turns);
+        if (entityInfo->blinkerClassStatus.turns == 0) {
             SendEyesightEndMessage(entity, entity);
         }
     }
@@ -756,8 +756,8 @@ void TickStatusHeal(Entity *entity)
         return;
 
     if (entityInfo->muzzled.muzzled != 0) {
-        sub_80838EC(&entityInfo->muzzled.muzzledTurns);
-        if (entityInfo->muzzled.muzzledTurns == 0) {
+        sub_80838EC(&entityInfo->muzzled.turns);
+        if (entityInfo->muzzled.turns == 0) {
             SendMuzzledEndMessage(entity, entity);
         }
     }
@@ -893,7 +893,7 @@ bool8 UseAttack(Entity *a0)
         gUnknown_202F378 = 1;
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        Entity *mon = gDungeon->activeMonsterPtrs[i];
+        Entity *mon = gDungeon->activePokemon[i];
         if (EntityExists(mon)) {
             EntityInfo *monInfo = GetEntInfo(mon);
             if (monInfo->numMoveTiles == 0) {
@@ -935,7 +935,7 @@ bool8 UseAttack(Entity *a0)
         for (loop = 0; loop < 24 / gUnknown_202F378; loop++) {
             sub_803E46C(7);
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-                Entity *mon = gDungeon->activeMonsterPtrs[i];
+                Entity *mon = gDungeon->activePokemon[i];
                 if (EntityExists(mon)) {
                     EntityInfo *monInfo = GetEntInfo(mon);
                     Unk_Entity_x184 *strPtr = &monInfo->unk184[monInfo->notMoving];
@@ -963,7 +963,7 @@ bool8 UseAttack(Entity *a0)
     }
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-        Entity *mon = gDungeon->activeMonsterPtrs[i];
+        Entity *mon = gDungeon->activePokemon[i];
         if (EntityExists(mon)) {
             EntityInfo *monInfo = GetEntInfo(mon);
             monInfo->numMoveTiles = 0;
@@ -979,7 +979,7 @@ bool8 UseAttack(Entity *a0)
         for (loop = 0; loop < DUNGEON_MAX_POKEMON; loop++) {
             Position monPosBefore;
             EntityInfo *monInfo;
-            Entity *mon = gDungeon->activeMonsterPtrs[loop];
+            Entity *mon = gDungeon->activePokemon[loop];
 
             if (!EntityExists(mon))
                 continue;

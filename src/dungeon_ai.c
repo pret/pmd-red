@@ -74,7 +74,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     if (pokemonInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)
     {
-        if (pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
+        if (pokemonInfo->frozenClassStatus.status == STATUS_PETRIFIED)
         {
             EndFrozenClassStatus(pokemon, pokemon);
         }
@@ -107,14 +107,14 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                     Entity *target;
                     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
                     {
-                        target = gDungeon->activeMonsterPtrs[i];
+                        target = gDungeon->activePokemon[i];
                         if (EntityExists(target) &&
-                            GetEntInfo(target)->waitingStruct.waitingStatus == STATUS_DECOY &&
+                            GetEntInfo(target)->curseClassStatus.status == STATUS_DECOY &&
                             CanSeeTarget(pokemon, target))
                         {
-                            bool8 decoyApplierNonTeamMemberFlag = GetEntInfo(target)->waitingStruct.decoyApplierNonTeamMemberFlag;
+                            bool8 applierNonTeamMemberFlag = GetEntInfo(target)->curseClassStatus.applierNonTeamMemberFlag;
                             u8 decoyAITracker = DECOY_AI_TEAM;
-                            if (decoyApplierNonTeamMemberFlag)
+                            if (applierNonTeamMemberFlag)
                             {
                                 decoyAITracker = DECOY_AI_WILD;
                             }
@@ -143,7 +143,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                             {
                                 return;
                             }
-                            if (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED)
+                            if (pokemonInfo->cringeClassStatus.status == STATUS_CONFUSED)
                             {
                                 SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                             }
@@ -158,7 +158,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                         }
                         else
                         {
-                            if (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED)
+                            if (pokemonInfo->cringeClassStatus.status == STATUS_CONFUSED)
                             {
                                 SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                             }

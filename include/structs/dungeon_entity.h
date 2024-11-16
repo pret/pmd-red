@@ -69,93 +69,93 @@ typedef struct AITarget
 
 } AITarget;
 
-typedef struct Sleep
+typedef struct SleepClassStatus
 {
-    /* 0x0 */ u8 sleep;
-    /* 0x1 */ u8 sleepTurns;
-} Sleep;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} SleepClassStatus;
 
-typedef struct NonVolatile
+typedef struct BurnClassStatus
 {
-    /* 0x0 */ u8 nonVolatileStatus;
-    /* 0x1 */ u8 nonVolatileStatusTurns;
-    /* 0x2 */ u8 nonVolatileStatusDamageCountdown;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+    /* 0x2 */ u8 damageCountdown;
     /* 0x3 */ u8 unk4;
-} NonVolatile;
+} BurnClassStatus;
 
-typedef struct Immobilize
+typedef struct FrozenClassStatus
 {
-    /* 0x0 */ u8 immobilizeStatus;
+    /* 0x0 */ u8 status;
     /* 0x4 */ s32 unk4;
-    /* 0x8 */ u8 immobilizeStatusTurns;
-    /* 0x9 */ u8 immobilizeStatusDamageCountdown;
-} Immobilize;
+    /* 0x8 */ u8 turns;
+    /* 0x9 */ u8 damageCountdown;
+} FrozenClassStatus;
 
-typedef struct Volatile
+typedef struct CringeClassStatus
 {
-    /* 0x0 */ u8 volatileStatus;
-    /* 0x1 */ u8 volatileStatusTurns;
-} Volatile;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} CringeClassStatus;
 
-typedef struct Charging
+typedef struct BideClassStatus
 {
-    /* 0x0 */ u8 chargingStatus;
-    /* 0x1 */ u8 chargingStatusTurns;
-    /* 0x2 */ u8 chargingStatusMoveIndex; // The position of the move in the Pokémon's moveset that triggered the status.
-} Charging;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+    /* 0x2 */ u8 moveSlot; // The position of the move in the Pokémon's moveset that triggered the status.
+} BideClassStatus;
 
-typedef struct Protection
+typedef struct ReflectClassStatus
 {
-    /* 0x0 */ u8 protectionStatus;
-    /* 0x1 */ u8 protectionStatusTurns;
-} Protection;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} ReflectClassStatus;
 
-typedef struct Waiting
+typedef struct CurseClassStatus
 {
-    /* 0xC8 */ u8 waitingStatus;
-    /* 0xC9 */ bool8 decoyApplierNonTeamMemberFlag; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
-    u8 unkCA;
-    /* 0xCB */ u8 waitingStatusTurns;
-    /* 0xCC */ u8 curseDamageCountdown;
-} Waiting;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ bool8 applierNonTeamMemberFlag; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
+    u8 unk2;
+    /* 0x3 */ u8 turns;
+    /* 0x4 */ u8 damageCountdown;
+} CurseClassStatus;
 
-typedef struct Linked
+typedef struct LeechSeedClassStatus
 {
-    /* 0xD0 */ u8 linkedStatus;
-    /* 0xD4 */ u32 unkD4;
-    /* 0xD8 */ u8 unkD8;
-    /* 0xD9 */ u8 linkedStatusTurns;
-    /* 0xDA */ u8 linkedStatusDamageCountdown;
-} Linked;
+    /* 0x0 */ u8 status;
+    /* 0x4 */ u32 unkD4;
+    /* 0x8 */ u8 unkD8;
+    /* 0x9 */ u8 turns;
+    /* 0xA */ u8 damageCountdown;
+} LeechSeedClassStatus;
 
 
-typedef struct MoveStatus
+typedef struct SureShotClassStatus
 {
-    /* 0xDC */ u8 moveStatus;
-    /* 0xDD */ u8 moveStatusTurns;
-} MoveStatus;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} SureShotClassStatus;
 
-typedef struct ItemStatus
+typedef struct LongTossClassStatus
 {
-    /* 0xE0 */ u8 itemStatus;
-} ItemStatus;
+    /* 0x0 */ u8 status;
+} LongTossClassStatus;
 
-typedef struct TransformStatus
+typedef struct InvisibleClassStatus
 {
-    /* 0xE4 */ u8 transformStatus;
-    /* 0xE5 */ u8 transformStatusTurns;
-} TransformStatus;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} InvisibleClassStatus;
 
-typedef struct EyesightStatus
+typedef struct BlinkerClassStatus
 {
-    /* 0xE8 */ u8 eyesightStatus;
-    /* 0xE9 */ u8 eyesightStatusTurns;
-} EyesightStatus;
+    /* 0x0 */ u8 status;
+    /* 0x1 */ u8 turns;
+} BlinkerClassStatus;
 
 typedef struct Muzzled
 {
-    /* 0xEC */ bool8 muzzled;
-    /* 0xED */ u8 muzzledTurns;
+    /* 0x0 */ bool8 muzzled;
+    /* 0x1 */ u8 turns;
 } Muzzled;
 
 typedef struct Unk_Entity_x184
@@ -235,18 +235,18 @@ typedef struct EntityInfo
     u8 fillA5[0xA8 - 0xA5];
     // Statuses are split into groups based on which ones can't overlap.
     // See status.h for which statuses are in each group.
-    /* 0xA8 */ Sleep sleep;
-    /* 0xAC */ NonVolatile nonVolatile;
-    /* 0xB0 */ Immobilize immobilize;
-    /* 0xBC */ Volatile volatileStatus;
-    /* 0xC0 */ Charging charging;
-    /* 0xC4 */ Protection protection;
-    /* 0xC8 */ Waiting waitingStruct;
-    /* 0xD0 */ Linked linked;
-    /* 0xDC */ MoveStatus moveStatus;
-    /* 0xE0 */ ItemStatus itemStatus;
-    /* 0xE4 */ TransformStatus transformStatus;
-    /* 0xE8 */ EyesightStatus eyesightStatus;
+    /* 0xA8 */ SleepClassStatus sleepClassStatus;
+    /* 0xAC */ BurnClassStatus burnClassStatus;
+    /* 0xB0 */ FrozenClassStatus frozenClassStatus;
+    /* 0xBC */ CringeClassStatus cringeClassStatus;
+    /* 0xC0 */ BideClassStatus bideClassStatus;
+    /* 0xC4 */ ReflectClassStatus reflectClassStatus;
+    /* 0xC8 */ CurseClassStatus curseClassStatus;
+    /* 0xD0 */ LeechSeedClassStatus linked;
+    /* 0xDC */ SureShotClassStatus sureShotClassStatus;
+    /* 0xE0 */ LongTossClassStatus longTossClassStatus;
+    /* 0xE4 */ InvisibleClassStatus invisibleClassStatus;
+    /* 0xE8 */ BlinkerClassStatus blinkerClassStatus;
     /* 0xEC */ Muzzled muzzled;
     /* 0xF0 */ bool8 powerEars;
     /* 0xF1 */ bool8 scanning;

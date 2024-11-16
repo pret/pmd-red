@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_STATUS_H
 #define GUARD_CONSTANTS_STATUS_H
 
-// Sleep statuses
+// Sleep class statuses
 #define STATUS_NONE 0
 #define STATUS_SLEEP 1
 #define STATUS_SLEEPLESS 2
@@ -9,13 +9,13 @@
 #define STATUS_YAWNING 4
 #define STATUS_NAPPING 5
 
-// Non-volatile statuses
+// Burn class statuses
 #define STATUS_BURN 1
 #define STATUS_POISONED 2
 #define STATUS_BADLY_POISONED 3
 #define STATUS_PARALYSIS 4
 
-// Immobilize statuses
+// Frozen class statuses
 #define STATUS_FROZEN 1
 #define STATUS_SHADOW_HOLD 2
 #define STATUS_WRAP 3
@@ -24,7 +24,7 @@
 #define STATUS_PETRIFIED 6
 #define STATUS_CONSTRICTION 7
 
-// Volatile statuses
+// Cringe class statuses
 #define STATUS_CRINGE 1
 #define STATUS_CONFUSED 2
 #define STATUS_PAUSED 3
@@ -33,7 +33,7 @@
 #define STATUS_ENCORE 6
 #define STATUS_INFATUATED 7
 
-// Charging statuses
+// Bide class statuses
 #define STATUS_BIDE 1
 #define STATUS_SOLARBEAM 2
 #define STATUS_SKY_ATTACK 3
@@ -47,7 +47,7 @@
 #define STATUS_CHARGING 11
 #define STATUS_ENRAGED 12
 
-// Protection statuses
+// ReflectClassStatus statuses
 #define STATUS_REFLECT 1
 #define STATUS_SAFEGUARD 2
 #define STATUS_LIGHT_SCREEN 3
@@ -63,31 +63,31 @@
 #define STATUS_VITAL_THROW 13
 #define STATUS_MIST 14
 
-// Waiting statuses
+// Curse class statuses
 #define STATUS_CURSED 1
 #define STATUS_DECOY 2
 #define STATUS_SNATCH 3
 
-// Linked statuses
+// Leech Seed class statuses
 #define STATUS_LEECH_SEED 1
 #define STATUS_DESTINY_BOND 2
 
-// Move statuses
+// Sure Shot class statuses
 #define STATUS_SURE_SHOT 1
 #define STATUS_WHIFFER 2
 #define STATUS_SET_DAMAGE 3
 #define STATUS_FOCUS_ENERGY 4
 
-// Item statuses
+// Long Toss class statuses
 #define STATUS_LONG_TOSS 1
 #define STATUS_PIERCE 2
 
-// Transform statuses
+// Invisible class statuses
 #define STATUS_INVISIBLE 1
 #define STATUS_TRANSFORMED 2
 #define STATUS_MOBILE 3
 
-// Eyesight statuses
+// Blinker class statuses
 #define STATUS_BLINKER 1
 #define STATUS_CROSS_EYED 2
 #define STATUS_EYEDROPS 3

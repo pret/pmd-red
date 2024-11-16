@@ -29,7 +29,7 @@ void sub_8082B40(void)
 
   for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
   {
-    entity = gDungeon->activeMonsterPtrs[index];
+    entity = gDungeon->activePokemon[index];
     if (EntityExists(entity)) {
       info = GetEntInfo(entity);
       entity->axObj.spriteFile = GetSpriteData(info->apparentID);
@@ -158,69 +158,69 @@ void sub_8082D28(unkStruct_8094924 *param_1, u8 *param_2)
     sub_8082FE0(param_1, param_2, 3);
 }
 
-void sub_8082D34(unkStruct_8094924 *param_1, Sleep *sleep)
+void sub_8082D34(unkStruct_8094924 *param_1, SleepClassStatus *sleepClassStatus)
 {
-    sub_8082FE0(param_1, &sleep->sleep, 1);
-    sleep->sleepTurns = sub_8083188(param_1);
+    sub_8082FE0(param_1, &sleepClassStatus->status, 1);
+    sleepClassStatus->turns = sub_8083188(param_1);
 }
 
-void sub_8082D50(unkStruct_8094924 *param_1, NonVolatile *nonvoltaile)
+void sub_8082D50(unkStruct_8094924 *param_1, BurnClassStatus *burnClassStatus)
 {
-    sub_8082FE0(param_1, &nonvoltaile->nonVolatileStatus, 1);
-    nonvoltaile->nonVolatileStatusTurns = sub_8083188(param_1);
-    nonvoltaile->nonVolatileStatusDamageCountdown = sub_8083188(param_1);
-    nonvoltaile->unk4 = sub_8083188(param_1);
+    sub_8082FE0(param_1, &burnClassStatus->status, 1);
+    burnClassStatus->turns = sub_8083188(param_1);
+    burnClassStatus->damageCountdown = sub_8083188(param_1);
+    burnClassStatus->unk4 = sub_8083188(param_1);
 }
 
-void sub_8082D7C(unkStruct_8094924 *param_1, Immobilize *immobilze)
+void sub_8082D7C(unkStruct_8094924 *param_1, FrozenClassStatus *frozenClassStatus)
 {
-    sub_8082FE0(param_1, &immobilze->immobilizeStatus, 1);
-    immobilze->immobilizeStatusTurns = sub_8083188(param_1);
-    immobilze->immobilizeStatusDamageCountdown = sub_8083188(param_1);
-    immobilze->unk4 = sub_80831A0(param_1);
+    sub_8082FE0(param_1, &frozenClassStatus->status, 1);
+    frozenClassStatus->turns = sub_8083188(param_1);
+    frozenClassStatus->damageCountdown = sub_8083188(param_1);
+    frozenClassStatus->unk4 = sub_80831A0(param_1);
 }
 
-void sub_8082DA8(unkStruct_8094924 *param_1, Volatile *volatileStatus)
+void sub_8082DA8(unkStruct_8094924 *param_1, CringeClassStatus *cringeClassStatus)
 {
-    sub_8082FE0(param_1, &volatileStatus->volatileStatus, 1);
-    volatileStatus->volatileStatusTurns = sub_8083188(param_1);
+    sub_8082FE0(param_1, &cringeClassStatus->status, 1);
+    cringeClassStatus->turns = sub_8083188(param_1);
 }
 
-void sub_8082DC4(unkStruct_8094924 *param_1, Charging *charging)
+void sub_8082DC4(unkStruct_8094924 *param_1, BideClassStatus *bideClassStatus)
 {
-    sub_8082FE0(param_1, &charging->chargingStatus, 1);
-    charging->chargingStatusTurns = sub_8083188(param_1);
-    charging->chargingStatusMoveIndex = sub_8083188(param_1);
+    sub_8082FE0(param_1, &bideClassStatus->status, 1);
+    bideClassStatus->turns = sub_8083188(param_1);
+    bideClassStatus->moveSlot = sub_8083188(param_1);
 }
 
-void sub_8082DE8(unkStruct_8094924 *param_1, Protection *protect)
+void sub_8082DE8(unkStruct_8094924 *param_1, ReflectClassStatus *reflectClassStatus)
 {
-    sub_8082FE0(param_1, &protect->protectionStatus, 1);
-    protect->protectionStatusTurns = sub_8083188(param_1);
+    sub_8082FE0(param_1, &reflectClassStatus->status, 1);
+    reflectClassStatus->turns = sub_8083188(param_1);
 }
 
-void sub_8082E04(unkStruct_8094924 *param_1, Waiting *waiting)
+void sub_8082E04(unkStruct_8094924 *param_1, CurseClassStatus *curseClassStatus)
 {
-    sub_8082FE0(param_1, &waiting->waitingStatus, 1);
-    waiting->decoyApplierNonTeamMemberFlag = sub_80831DC(param_1);
-    waiting->unkCA = sub_80831DC(param_1);
-    waiting->waitingStatusTurns = sub_8083188(param_1);
-    waiting->curseDamageCountdown = sub_8083188(param_1);
+    sub_8082FE0(param_1, &curseClassStatus->status, 1);
+    curseClassStatus->applierNonTeamMemberFlag = sub_80831DC(param_1);
+    curseClassStatus->unk2 = sub_80831DC(param_1);
+    curseClassStatus->turns = sub_8083188(param_1);
+    curseClassStatus->damageCountdown = sub_8083188(param_1);
 }
 
-void sub_8082E38(unkStruct_8094924 *param_1, Linked *linked)
+void sub_8082E38(unkStruct_8094924 *param_1, LeechSeedClassStatus *leechSeedClassStatus)
 {
-    sub_8082FE0(param_1, &linked->linkedStatus, 1);
-    linked->unkD4 = sub_80831A0(param_1);
-    linked->unkD8 = sub_8083188(param_1);
-    linked->linkedStatusTurns = sub_8083188(param_1);
-    linked->linkedStatusDamageCountdown = sub_8083188(param_1);
+    sub_8082FE0(param_1, &leechSeedClassStatus->status, 1);
+    leechSeedClassStatus->unkD4 = sub_80831A0(param_1);
+    leechSeedClassStatus->unkD8 = sub_8083188(param_1);
+    leechSeedClassStatus->turns = sub_8083188(param_1);
+    leechSeedClassStatus->damageCountdown = sub_8083188(param_1);
 }
 
-void sub_8082E6C(unkStruct_8094924 *param_1, MoveStatus *moveStatus)
+void sub_8082E6C(unkStruct_8094924 *param_1, SureShotClassStatus *sureShotClassStatus)
 {
-    sub_8082FE0(param_1, &moveStatus->moveStatus, 1);
-    moveStatus->moveStatusTurns = sub_8083188(param_1);
+    sub_8082FE0(param_1, &sureShotClassStatus->status, 1);
+    sureShotClassStatus->turns = sub_8083188(param_1);
 }
 
 void sub_8082E88(unkStruct_8094924 *param_1, u8 *param_2, s32 size)
@@ -228,22 +228,22 @@ void sub_8082E88(unkStruct_8094924 *param_1, u8 *param_2, s32 size)
     sub_8082FE0(param_1, param_2, 1);
 }
 
-void sub_8082E94(unkStruct_8094924 *param_1, TransformStatus *transform)
+void sub_8082E94(unkStruct_8094924 *param_1, InvisibleClassStatus *invisibleClassStatus)
 {
-    sub_8082FE0(param_1, &transform->transformStatus, 1);
-    transform->transformStatusTurns = sub_8083188(param_1);
+    sub_8082FE0(param_1, &invisibleClassStatus->status, 1);
+    invisibleClassStatus->turns = sub_8083188(param_1);
 }
 
-void sub_8082EB0(unkStruct_8094924 *param_1, EyesightStatus *eyesight)
+void sub_8082EB0(unkStruct_8094924 *param_1, BlinkerClassStatus *blinkerClassStatus)
 {
-    sub_8082FE0(param_1, &eyesight->eyesightStatus, 1);
-    eyesight->eyesightStatusTurns = sub_8083188(param_1);
+    sub_8082FE0(param_1, &blinkerClassStatus->status, 1);
+    blinkerClassStatus->turns = sub_8083188(param_1);
 }
 
 void sub_8082ECC(unkStruct_8094924 *param_1, Muzzled *muzzle)
 {
     sub_8082FE0(param_1, (u8 *)&muzzle->muzzled, 1);
-    muzzle->muzzledTurns = sub_8083188(param_1);
+    muzzle->turns = sub_8083188(param_1);
 }
 
 void RestoreDungeonPokemonMove(unkStruct_8094924 *param_1, Move *move)

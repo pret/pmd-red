@@ -118,7 +118,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->activeMonsterPtrs[index];
+        entity = gDungeon->activePokemon[index];
         if (EntityExists(entity)) {
             entityInfo = GetEntInfo(entity);
             entityInfo->attacking = FALSE;
@@ -153,7 +153,7 @@ void sub_8044AB4(void)
 
   if (gSpeedTurns[1][gDungeon->fractionalTurn + 1] != 0) {
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
-      if (EntityExists(gDungeon->activeMonsterPtrs[index])) {
+      if (EntityExists(gDungeon->activePokemon[index])) {
         UseAttack(0);
         break;
       }

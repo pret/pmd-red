@@ -150,7 +150,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         s32 i;
         if (gDungeon->decoyIsActive)
         {
-            possibleTargets = gDungeon->activeMonsterPtrs;
+            possibleTargets = gDungeon->activePokemon;
             maxPossibleTargets = DUNGEON_MAX_POKEMON;
         }
         else if (pokemonInfo->isNotTeamMember)
@@ -178,7 +178,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
                         continue;
                     }
                 }
-                else if (!pokemonInfo->isNotTeamMember && GetEntInfo(target)->immobilize.immobilizeStatus == STATUS_PETRIFIED)
+                else if (!pokemonInfo->isNotTeamMember && GetEntInfo(target)->frozenClassStatus.status == STATUS_PETRIFIED)
                 {
                     continue;
                 }
@@ -513,7 +513,7 @@ bool8 AvoidEnemies(Entity *pokemon)
     s32 i;
     if (gDungeon->decoyIsActive)
     {
-        possibleTargets = gDungeon->activeMonsterPtrs;
+        possibleTargets = gDungeon->activePokemon;
         numPossibleTargets = DUNGEON_MAX_POKEMON;
     }
     else if (pokemonInfo->isNotTeamMember)

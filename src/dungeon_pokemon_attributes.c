@@ -26,7 +26,7 @@ extern bool8 sub_805744C(Entity *, Move *, u32);
 
 bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
-  if (GetEntInfo(target)->protection.protectionStatus == STATUS_SAFEGUARD) {
+  if (GetEntInfo(target)->reflectClassStatus.status == STATUS_SAFEGUARD) {
     if (displayMessage) {
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC2FC);
@@ -38,7 +38,7 @@ bool8 HasSafeguardStatus(Entity * pokemon, Entity * target, bool8 displayMessage
 
 bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
-  if (GetEntInfo(target)->protection.protectionStatus == STATUS_MIST) {
+  if (GetEntInfo(target)->reflectClassStatus.status == STATUS_MIST) {
     if (displayMessage) {
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
       TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FC31C);
@@ -63,7 +63,7 @@ bool8 sub_80717A4(Entity *pokemon, u16 moveID)
   s32 index;
 
   entityInfo = GetEntInfo(pokemon);
-  if ((entityInfo->sleep.sleep != STATUS_SLEEP) && (entityInfo->sleep.sleep != STATUS_NAPPING) && (entityInfo->sleep.sleep != STATUS_NIGHTMARE)) {
+  if ((entityInfo->sleepClassStatus.status != STATUS_SLEEP) && (entityInfo->sleepClassStatus.status != STATUS_NAPPING) && (entityInfo->sleepClassStatus.status != STATUS_NIGHTMARE)) {
       return FALSE;
   }
   else
@@ -126,7 +126,7 @@ bool8 MonsterIsType(Entity *pokemon, u8 type)
 bool8 CanSeeInvisibleMonsters(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
-    if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_EYEDROPS)
+    if (pokemonInfo->blinkerClassStatus.status != STATUS_EYEDROPS)
     {
         if (!HasHeldItem(pokemon, ITEM_GOGGLE_SPECS))
             return FALSE;

@@ -30,7 +30,7 @@ void sub_8075680(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->activeMonsterPtrs[index];
+        entity = gDungeon->activePokemon[index];
         if ((EntityExists(entity)) && (info = GetEntInfo(entity), !info->isTeamLeader)) {
             targetPos = &(info->targetPos);
 
@@ -67,7 +67,7 @@ void sub_8075708(Entity *entity)
         return;
     }
     tile = GetTileAtEntitySafe(entity);
-    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->transformStatus.transformStatus != STATUS_MOBILE)) &&
+    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->invisibleClassStatus.status != STATUS_MOBILE)) &&
         (!HasHeldItem(entity, ITEM_MOBILE_SCARF))) {
         sub_804AE84(&entity->pos);
     }

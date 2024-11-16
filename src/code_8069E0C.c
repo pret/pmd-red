@@ -74,7 +74,7 @@ void TriggerWeatherAbilities(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeon->activeMonsterPtrs[index];
+      entity = gDungeon->activePokemon[index];
       if (EntityExists(entity)) {
         if (HasAbility(entity, ABILITY_DRIZZLE)) {
             gDungeon->weather.naturalWeather[WEATHER_RAIN] = 1;
@@ -208,7 +208,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
   EntityInfo *entityInfo;
 
   if ((((EntityExists(pokemon)) && (EntityExists(target))) && (pokemon != target))
-     && (entityInfo = GetEntInfo(target), entityInfo->protection.protectionStatus == STATUS_CONVERSION2)) {
+     && (entityInfo = GetEntInfo(target), entityInfo->reflectClassStatus.status == STATUS_CONVERSION2)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
     uVar2_u32 = sub_8092364(moveType);
     if (uVar2_u32 != TYPE_NONE) {
@@ -301,8 +301,8 @@ void sub_806A338(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->activeMonsterPtrs[index];
-        if (EntityExists(entity) && (GetEntInfo(entity)->waitingStruct.waitingStatus == STATUS_SNATCH))
+        entity = gDungeon->activePokemon[index];
+        if (EntityExists(entity) && (GetEntInfo(entity)->curseClassStatus.status == STATUS_SNATCH))
         {
             gDungeon->snatchPokemon = entity;
             ASM_MATCH_TRICK(entity);

@@ -32,7 +32,7 @@ void sub_8045ACC(void)
   {
     entity = gDungeon->teamPokemon[index];
     if (EntityExists(entity)) {
-      gDungeon->activeMonsterPtrs[pokeCount] = entity;
+      gDungeon->activePokemon[pokeCount] = entity;
       pokeCount++;
     }
   }
@@ -41,12 +41,12 @@ void sub_8045ACC(void)
   {
     entity = gDungeon->wildPokemon[index];
     if (EntityExists(entity)) {
-      gDungeon->activeMonsterPtrs[pokeCount] = entity;
+      gDungeon->activePokemon[pokeCount] = entity;
       pokeCount++;
     }
   }
   for (; pokeCount < DUNGEON_MAX_POKEMON; pokeCount++) {
-    gDungeon->activeMonsterPtrs[pokeCount] = NULL;
+    gDungeon->activePokemon[pokeCount] = NULL;
   }
 }
 

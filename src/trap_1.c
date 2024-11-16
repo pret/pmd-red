@@ -54,20 +54,20 @@ void SaveSpeedStage(unkStruct_8094924 *param_1, s32 param_2);
 void sub_8081854(unkStruct_8094924 *param_1, s32 param_2);
 void sub_808183C(unkStruct_8094924 *param_1, s32 param_2);
 void SaveMuzzledStatus(unkStruct_8094924 *param_1, Muzzled *param_2);
-void SaveEyesightStatus(unkStruct_8094924 *param_1, EyesightStatus *param_2);
-void SaveTransformStatus(unkStruct_8094924 *param_1, TransformStatus *param_2);
-void SaveItemStatus(unkStruct_8094924 *param_1, ItemStatus *param_2);
-void SaveMoveStatus(unkStruct_8094924 *param_1, MoveStatus* param_2);
-void SaveLinkedStatus(unkStruct_8094924 *param_1, Linked *param_2);
-void SaveVolatileStatus(unkStruct_8094924 *param_1, Volatile *param_2);
-void SaveImmobilizeStatus(unkStruct_8094924 *param_1, Immobilize *param_2);
-void SaveNonVolatileStatus(unkStruct_8094924 *param_1, NonVolatile *param_2);
-void SaveEntitySleep(unkStruct_8094924 *param_1, Sleep* param_2);
+void SaveBlinkerClassStatus(unkStruct_8094924 *param_1, BlinkerClassStatus *param_2);
+void SaveInvisibleClassStatus(unkStruct_8094924 *param_1, InvisibleClassStatus *param_2);
+void SaveLongTossClassStatus(unkStruct_8094924 *param_1, LongTossClassStatus *param_2);
+void SaveSureShotClassStatus(unkStruct_8094924 *param_1, SureShotClassStatus* param_2);
+void SaveLeechSeedClassStatus(unkStruct_8094924 *param_1, LeechSeedClassStatus *param_2);
+void SaveCringeClassStatus(unkStruct_8094924 *param_1, CringeClassStatus *param_2);
+void SaveFrozenClassStatus(unkStruct_8094924 *param_1, FrozenClassStatus *param_2);
+void SaveBurnClassStatus(unkStruct_8094924 *param_1, BurnClassStatus *param_2);
+void SaveSleepClassStatus(unkStruct_8094924 *param_1, SleepClassStatus* param_2);
 void SaveTactic(unkStruct_8094924 *param_1, u8 param_2);
 void SaveDungeonHiddenPower(unkStruct_8094924 *param_1, HiddenPower *param_2);
-void SaveChargingStatus(unkStruct_8094924 *param_1, Charging *param_2);
-void SaveProtectionStatus(unkStruct_8094924 *param_1, Protection *param_2);
-void SaveWaitingStatus(unkStruct_8094924 *param_1, Waiting *param_2);
+void SaveBideClassStatus(unkStruct_8094924 *param_1, BideClassStatus *param_2);
+void SaveReflectClassStatus(unkStruct_8094924 *param_1, ReflectClassStatus *param_2);
+void SaveCurseClassStatus(unkStruct_8094924 *param_1, CurseClassStatus *param_2);
 void SaveSpeedCounters(unkStruct_8094924 *param_1, u8 *speedCounters, u32 numCounters);
 void SaveClientType(unkStruct_8094924 *param_1, u8 param_2);
 void sub_80421C0(Entity *, u16);
@@ -270,18 +270,18 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     u32 *puStack_98;
     u32 *puStack_94;
     u8 *puStack_90;
-    Sleep *puStack_8c;
-    NonVolatile *puStack_88;
-    Immobilize *puStack_84;
-    Volatile *puStack_80;
-    Charging *puStack_7c;
-    Protection *puStack_78;
-    Waiting *puStack_74;
-    Linked *puStack_70;
-    MoveStatus *puStack_6c;
-    ItemStatus *puStack_68;
-    TransformStatus *puStack_64;
-    EyesightStatus *puStack_60;
+    SleepClassStatus *puStack_8c;
+    BurnClassStatus *puStack_88;
+    FrozenClassStatus *puStack_84;
+    CringeClassStatus *puStack_80;
+    BideClassStatus *puStack_7c;
+    ReflectClassStatus *puStack_78;
+    CurseClassStatus *puStack_74;
+    LeechSeedClassStatus *puStack_70;
+    SureShotClassStatus *puStack_6c;
+    LongTossClassStatus *puStack_68;
+    InvisibleClassStatus *puStack_64;
+    BlinkerClassStatus *puStack_60;
     Muzzled *pbStack_5c;
     bool8 *pbStack_58;
     bool8 *pbStack_54;
@@ -364,18 +364,18 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     puStack_9c = &info->unk98;
     puStack_98 = &info->unk9C;
     puStack_94 = &info->unkA0;
-    puStack_8c = &info->sleep;
-    puStack_88 = &info->nonVolatile;
-    puStack_84 = &info->immobilize;
-    puStack_80 = &info->volatileStatus;
-    puStack_7c = &info->charging;
-    puStack_78 = &info->protection;
-    puStack_74 = &info->waitingStruct;
+    puStack_8c = &info->sleepClassStatus;
+    puStack_88 = &info->burnClassStatus;
+    puStack_84 = &info->frozenClassStatus;
+    puStack_80 = &info->cringeClassStatus;
+    puStack_7c = &info->bideClassStatus;
+    puStack_78 = &info->reflectClassStatus;
+    puStack_74 = &info->curseClassStatus;
     puStack_70 = &info->linked;
-    puStack_6c = &info->moveStatus;
-    puStack_68 = &info->itemStatus;
-    puStack_64 = &info->transformStatus;
-    puStack_60 = &info->eyesightStatus;
+    puStack_6c = &info->sureShotClassStatus;
+    puStack_68 = &info->longTossClassStatus;
+    puStack_64 = &info->invisibleClassStatus;
+    puStack_60 = &info->blinkerClassStatus;
     pbStack_5c = &info->muzzled;
     pbStack_58 = &info->powerEars;
     pbStack_54 = &info->scanning;
@@ -408,18 +408,18 @@ void SaveEntity(unkStruct_8094924 *param_1, Entity *param_2)
     sub_8083078(param_1,*puStack_9c);
     sub_8083078(param_1,*puStack_98);
     sub_8083078(param_1,*puStack_94);
-    SaveEntitySleep(param_1,puStack_8c);
-    SaveNonVolatileStatus(param_1,puStack_88);
-    SaveImmobilizeStatus(param_1,puStack_84);
-    SaveVolatileStatus(param_1,puStack_80);
-    SaveChargingStatus(param_1,puStack_7c);
-    SaveProtectionStatus(param_1,puStack_78);
-    SaveWaitingStatus(param_1,puStack_74);
-    SaveLinkedStatus(param_1,puStack_70);
-    SaveMoveStatus(param_1,puStack_6c);
-    SaveItemStatus(param_1,puStack_68);
-    SaveTransformStatus(param_1,puStack_64);
-    SaveEyesightStatus(param_1,puStack_60);
+    SaveSleepClassStatus(param_1,puStack_8c);
+    SaveBurnClassStatus(param_1,puStack_88);
+    SaveFrozenClassStatus(param_1,puStack_84);
+    SaveCringeClassStatus(param_1,puStack_80);
+    SaveBideClassStatus(param_1,puStack_7c);
+    SaveReflectClassStatus(param_1,puStack_78);
+    SaveCurseClassStatus(param_1,puStack_74);
+    SaveLeechSeedClassStatus(param_1,puStack_70);
+    SaveSureShotClassStatus(param_1,puStack_6c);
+    SaveLongTossClassStatus(param_1,puStack_68);
+    SaveInvisibleClassStatus(param_1,puStack_64);
+    SaveBlinkerClassStatus(param_1,puStack_60);
     SaveMuzzledStatus(param_1,pbStack_5c);
     sub_80830B4(param_1,*pbStack_58);
     sub_80830B4(param_1,*pbStack_54);
@@ -646,92 +646,92 @@ void SaveAITargetStatus(unkStruct_8094924 *param_1, AITarget* param_2)
     SavePosition(param_1, &param_2->aiTargetPos);
 }
 
-void SaveEntitySleep(unkStruct_8094924 *param_1, Sleep* param_2)
+void SaveSleepClassStatus(unkStruct_8094924 *param_1, SleepClassStatus* param_2)
 {
-    sub_8082FA8(param_1, &param_2->sleep, 1);
-    sub_8083060(param_1, param_2->sleepTurns);
+    sub_8082FA8(param_1, &param_2->status, 1);
+    sub_8083060(param_1, param_2->turns);
 }
 
-void SaveNonVolatileStatus(unkStruct_8094924 *param_1, NonVolatile *param_2)
+void SaveBurnClassStatus(unkStruct_8094924 *param_1, BurnClassStatus *param_2)
 {
-    sub_8082FA8(param_1, &param_2->nonVolatileStatus, 1);
-    sub_8083060(param_1, param_2->nonVolatileStatusTurns);
-    sub_8083060(param_1, param_2->nonVolatileStatusDamageCountdown);
+    sub_8082FA8(param_1, &param_2->status, 1);
+    sub_8083060(param_1, param_2->turns);
+    sub_8083060(param_1, param_2->damageCountdown);
     sub_8083060(param_1, param_2->unk4);
 }
 
-void SaveImmobilizeStatus(unkStruct_8094924 *param_1, Immobilize *param_2)
+void SaveFrozenClassStatus(unkStruct_8094924 *param_1, FrozenClassStatus *param_2)
 {
-    sub_8082FA8(param_1, &param_2->immobilizeStatus, 1);
-    sub_8083060(param_1, param_2->immobilizeStatusTurns);
-    sub_8083060(param_1, param_2->immobilizeStatusDamageCountdown);
+    sub_8082FA8(param_1, &param_2->status, 1);
+    sub_8083060(param_1, param_2->turns);
+    sub_8083060(param_1, param_2->damageCountdown);
     sub_8083078(param_1, param_2->unk4);
 }
 
-void SaveVolatileStatus(unkStruct_8094924 *param_1, Volatile *param_2)
+void SaveCringeClassStatus(unkStruct_8094924 *param_1, CringeClassStatus *param_2)
 {
-    sub_8082FA8(param_1, &param_2->volatileStatus, 1);
-    sub_8083060(param_1, param_2->volatileStatusTurns);
+    sub_8082FA8(param_1, &param_2->status, 1);
+    sub_8083060(param_1, param_2->turns);
 }
 
-void SaveChargingStatus(unkStruct_8094924 *param_1, Charging *param_2)
+void SaveBideClassStatus(unkStruct_8094924 *param_1, BideClassStatus *param_2)
 {
-    sub_8082FA8(param_1, &param_2->chargingStatus, 1);
-    sub_8083060(param_1, param_2->chargingStatusTurns);
-    sub_8083060(param_1, param_2->chargingStatusMoveIndex);
+    sub_8082FA8(param_1, &param_2->status, 1);
+    sub_8083060(param_1, param_2->turns);
+    sub_8083060(param_1, param_2->moveSlot);
 }
 
-void SaveProtectionStatus(unkStruct_8094924 *param_1, Protection *param_2)
+void SaveReflectClassStatus(unkStruct_8094924 *param_1, ReflectClassStatus *param_2)
 {
-    sub_8082FA8(param_1, &param_2->protectionStatus, 1);
-    sub_8083060(param_1, param_2->protectionStatusTurns);
+    sub_8082FA8(param_1, &param_2->status, 1);
+    sub_8083060(param_1, param_2->turns);
 }
 
-void SaveWaitingStatus(unkStruct_8094924 *param_1, Waiting *param_2)
+void SaveCurseClassStatus(unkStruct_8094924 *param_1, CurseClassStatus *param_2)
 {
-    sub_8082FA8(param_1, &param_2->waitingStatus, 1);
-    sub_80830B4(param_1, param_2->decoyApplierNonTeamMemberFlag);
-    sub_80830B4(param_1, param_2->unkCA);
-    sub_8083060(param_1, param_2->waitingStatusTurns);
-    sub_8083060(param_1, param_2->curseDamageCountdown);
+    sub_8082FA8(param_1, &param_2->status, 1);
+    sub_80830B4(param_1, param_2->applierNonTeamMemberFlag);
+    sub_80830B4(param_1, param_2->unk2);
+    sub_8083060(param_1, param_2->turns);
+    sub_8083060(param_1, param_2->damageCountdown);
 }
 
-void SaveLinkedStatus(unkStruct_8094924 *param_1, Linked *param_2)
+void SaveLeechSeedClassStatus(unkStruct_8094924 *param_1, LeechSeedClassStatus *param_2)
 {
-    sub_8082FA8(param_1, &param_2->linkedStatus, 1);
+    sub_8082FA8(param_1, &param_2->status, 1);
     sub_8083078(param_1, param_2->unkD4);
     sub_8083060(param_1, param_2->unkD8);
-    sub_8083060(param_1, param_2->linkedStatusTurns);
-    sub_8083060(param_1, param_2->linkedStatusDamageCountdown);
+    sub_8083060(param_1, param_2->turns);
+    sub_8083060(param_1, param_2->damageCountdown);
 }
 
-void SaveMoveStatus(unkStruct_8094924 *param_1, MoveStatus* param_2)
+void SaveSureShotClassStatus(unkStruct_8094924 *param_1, SureShotClassStatus* param_2)
 {
-    sub_8082FA8(param_1, &param_2->moveStatus, 1);
-    sub_8083060(param_1, param_2->moveStatusTurns);
+    sub_8082FA8(param_1, &param_2->status, 1);
+    sub_8083060(param_1, param_2->turns);
 }
 
-void SaveItemStatus(unkStruct_8094924 *param_1, ItemStatus *param_2)
+void SaveLongTossClassStatus(unkStruct_8094924 *param_1, LongTossClassStatus *param_2)
 {
-    sub_8082FA8(param_1, &param_2->itemStatus, 1);
+    sub_8082FA8(param_1, &param_2->status, 1);
 }
 
-void SaveTransformStatus(unkStruct_8094924 *param_1, TransformStatus *param_2)
+void SaveInvisibleClassStatus(unkStruct_8094924 *param_1, InvisibleClassStatus *param_2)
 {
-    sub_8082FA8(param_1, &param_2->transformStatus, 1);
-    sub_8083060(param_1, param_2->transformStatusTurns);
+    sub_8082FA8(param_1, &param_2->status, 1);
+    sub_8083060(param_1, param_2->turns);
 }
 
-void SaveEyesightStatus(unkStruct_8094924 *param_1, EyesightStatus *param_2)
+void SaveBlinkerClassStatus(unkStruct_8094924 *param_1, BlinkerClassStatus *param_2)
 {
-    sub_8082FA8(param_1, &param_2->eyesightStatus, 1);
-    sub_8083060(param_1, param_2->eyesightStatusTurns);
+    sub_8082FA8(param_1, &param_2->status, 1);
+    sub_8083060(param_1, param_2->turns);
 }
 
 void SaveMuzzledStatus(unkStruct_8094924 *param_1, Muzzled *param_2)
 {
     sub_8082FA8(param_1, &param_2->muzzled, 1);
-    sub_8083060(param_1, param_2->muzzledTurns);
+    sub_8083060(param_1, param_2->turns);
 }
 
 void SaveEntityMove(unkStruct_8094924 *r0, Move *r1)

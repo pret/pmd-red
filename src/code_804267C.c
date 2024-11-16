@@ -104,7 +104,7 @@ void sub_80427AC(void)
     s32 i;
 
     for (i = 0; i < 20; i++) {
-        entity = gDungeon->activeMonsterPtrs[i];
+        entity = gDungeon->activePokemon[i];
         if (EntityExists(entity)) {
             enInfo = GetEntInfo(entity);
             if (enInfo->unkF3) {

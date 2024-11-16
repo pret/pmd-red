@@ -993,7 +993,7 @@ void sub_803F580(u8 a0)
         unk18214 = strPtr->unk18214;
         if (unk18214 == 0) {
             u32 unkVar;
-            if (info->eyesightStatus.eyesightStatus == STATUS_BLINKER) {
+            if (info->blinkerClassStatus.status == STATUS_BLINKER) {
                 strPtr->blinded = 1;
                 unkVar = 0xE;
             }
@@ -1016,7 +1016,7 @@ void sub_803F580(u8 a0)
         }
 
         before = strPtr->hallucinating;
-        if (info->eyesightStatus.eyesightStatus == STATUS_CROSS_EYED) {
+        if (info->blinkerClassStatus.status == STATUS_CROSS_EYED) {
             strPtr->hallucinating = 1;
         }
         else {
@@ -1066,7 +1066,7 @@ void sub_803F580(u8 a0)
 
         if (strPtr->cameraPos.x != strPtr->cameraPosMirror.x || strPtr->cameraPos.y != strPtr->cameraPosMirror.y) {
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-                Entity *mon = gDungeon->activeMonsterPtrs[i];
+                Entity *mon = gDungeon->activePokemon[i];
                 if (EntityExists(mon)) {
                     sub_80402AC(mon->pos.x, mon->pos.y);
                 }

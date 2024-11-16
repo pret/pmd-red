@@ -103,7 +103,7 @@ void sub_804513C(void)
 
   for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
   {
-      gDungeon->activeMonsterPtrs[index] = NULL;
+      gDungeon->activePokemon[index] = NULL;
   }
 
   for (index = 0; index < DUNGEON_MAX_ITEMS; index++)
@@ -132,7 +132,7 @@ void sub_804522C(void) {
     {
         for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
         {
-            entity = gDungeon->activeMonsterPtrs[index];
+            entity = gDungeon->activePokemon[index];
             if(EntityExists(entity))
             {
                 if(entity == gDungeon->unk181e8.cameraTarget)

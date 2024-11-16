@@ -315,7 +315,7 @@ bool8 sub_805B264(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     gDungeon->unk181e8.unk18200 = gUnknown_8106A8C[r3];
     gDungeon->unk181e8.unk18204 = 0;
     iVar5 = gUnknown_80F4F94[r3];
-    if (entityInfo->charging.chargingStatus == STATUS_DIGGING) {
+    if (entityInfo->bideClassStatus.status == STATUS_DIGGING) {
         iVar5 *= 2;
     }
     r6 = sub_8055864(pokemon,target,move,iVar5,param_4) ? TRUE : FALSE;
@@ -602,7 +602,7 @@ bool8 SkullBashMoveAction(Entity * pokemon, Entity * target, Move * move, s32 pa
 {
     bool8 flag;
 
-    if (MoveMatchesChargingStatus(pokemon,move)) {
+    if (MoveMatchesBideClassStatus(pokemon,move)) {
         flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F4F58,param_4) != 0 ? 1 : 0;
         sub_8079764(pokemon);
     }
