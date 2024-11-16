@@ -10,6 +10,8 @@ typedef struct unkStruct_202F190
 
 Tile *GetTile(s32 x, s32 y);
 Tile *GetTileSafe(s32 x, s32 y);
+
+void sub_8049ED4(void);
 void sub_804AC20(Position *pos);
 
-#endif
+#endif // GUARD_DUNGEON_MAP_ACCESS_H

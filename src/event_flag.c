@@ -149,29 +149,29 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
   switch(param_1_s32)
   {
       case 3:
-        if (((u32)(param_2 - 1) < 0x1b)) {
+        if (param_2 > 0 && param_2 < 28) {
             if (ScriptVarScenarioAfter(SCENARIO_MAIN,8,-1)) {
-                sub_80976F8(0);
+                SetAdventureAchievement(AA_HILL_OF_ANCIENTS);
             }
-            if (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,3)) {
-                sub_80976F8(1);
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN,11,3)) {
+                SetAdventureAchievement(AA_FUGITIVE);
             }
-            if (ScriptVarScenarioAfter(SCENARIO_MAIN,0x11,0)) {
-                sub_80976F8(2);
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN,17,0)) {
+                SetAdventureAchievement(AA_PREVENT_METEOR);
             }
         }
         break;
       case 4:
-        if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x1f,0) == 0) {
-            sub_80976F8(4);
+        if (ScriptVarScenarioBefore(SCENARIO_SUB1,31,0) == 0) {
+            SetAdventureAchievement(AA_TEAM_BASE_DONE);
         }
-        if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x20,0) == 0) {
-            sub_80976F8(5);
+        if (ScriptVarScenarioBefore(SCENARIO_SUB1,32,0) == 0) {
+            SetAdventureAchievement(AA_SMEARGLE);
         }
         break;
       case 0xC:
-        if(ScriptVarScenarioBefore(SCENARIO_SUB9,0x37,2) == 0) {
-            sub_80976F8(3);
+        if(ScriptVarScenarioBefore(SCENARIO_SUB9,55,2) == 0) {
+            SetAdventureAchievement(AA_BROKE_CURSE);
         }
         break;
   }

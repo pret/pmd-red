@@ -3136,7 +3136,7 @@ sub_806BB6C:
 	str r6, [sp, 0xC]
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_8069F54
+	bl GetMonsterApparentID
 	lsls r0, 16
 	adds r1, r7, 0
 	adds r1, 0x22

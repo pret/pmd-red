@@ -17,9 +17,11 @@
 #include "status.h"
 #include "type_chart.h"
 #include "dungeon_random.h"
+#include "code_80450F8.h"
 #include "code_8045A00.h"
 #include "dungeon_items.h"
 #include "structs/str_damage.h"
+#include "dungeon_util.h"
 
 void sub_8042940(Entity *r0);
 void sub_80428B0(Entity *r0);
@@ -30,7 +32,6 @@ extern bool8 sub_806E100(struct unkStruct_80943A8 *param_1, Entity *pokemon, Ent
 extern void sub_8041B74(Entity *pokemon);
 extern void sub_8041B5C(Entity *pokemon);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
-extern void sub_80457DC(Entity *);
 
 extern const s32 gUnknown_80F54B4[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
 extern const s32 gUnknown_80F504C[];
@@ -396,7 +397,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         }
 
         // ALSO needed to match. unk694 chosen randomly and it worked with matching.
-        ASM_MATCH_TRICK(gDungeon->unk694);
+        ASM_MATCH_TRICK(gDungeon->unk644.unk50);
         gDungeon->unk134.unk150 = sub_800A048(&unkSp8);
         {
             s32 rnd = DungeonRandInt(0x4000);

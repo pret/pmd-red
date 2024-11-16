@@ -807,16 +807,16 @@ void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage)
       }
       else
         {
-            switch(entityInfo->linked.status)
+            switch(entityInfo->leechSeedClassStatus.status)
             {
                 case STATUS_DESTINY_BOND:
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAA8C);
                 default:
-                    entityInfo->linked.status = STATUS_LEECH_SEED;
-                    entityInfo->linked.turns = CalculateStatusTurns(target, gUnknown_80F4EB0, TRUE) + 1;
-                    entityInfo->linked.damageCountdown = 0;
+                    entityInfo->leechSeedClassStatus.status = STATUS_LEECH_SEED;
+                    entityInfo->leechSeedClassStatus.turns = CalculateStatusTurns(target, gUnknown_80F4EB0, TRUE) + 1;
+                    entityInfo->leechSeedClassStatus.damageCountdown = 0;
                     nullsub_78(target);
-                    entityInfo->linked.unkD8 = 0xff;
+                    entityInfo->leechSeedClassStatus.unk8 = 0xff;
                     break;
                 case STATUS_LEECH_SEED:
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAE7C);
@@ -825,9 +825,9 @@ void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage)
             for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
             {
                 if (pokemon == gDungeon->activePokemon[index]) {
-                    entityInfo->linked.unkD8 = index;
+                    entityInfo->leechSeedClassStatus.unk8 = index;
                     entityInfo2 = GetEntInfo(pokemon);
-                    entityInfo->linked.unkD4 = entityInfo2->unk98;
+                    entityInfo->leechSeedClassStatus.unk4 = entityInfo2->unk98;
                 }
             }
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAE58);
@@ -850,11 +850,11 @@ void sub_8078084(Entity * pokemon)
         target = gDungeon->activePokemon[index];
         if (EntityExists(target)) {
             entityInfo2 = GetEntInfo(target);
-            if((u8)(entityInfo2->linked.status - 1) <= 1)
+            if((u8)(entityInfo2->leechSeedClassStatus.status - 1) <= 1)
             {
-                if(entityInfo2->linked.unkD4 == entityInfo->unk98)
+                if(entityInfo2->leechSeedClassStatus.unk4 == entityInfo->unk98)
                 {
-                    entityInfo2->linked.status = STATUS_NONE;
+                    entityInfo2->leechSeedClassStatus.status = STATUS_NONE;
                     EntityUpdateStatusSprites(target);
                 }
             }
@@ -874,17 +874,17 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
      (GetEntityType(target) == ENTITY_MONSTER)) {
         entityInfo = GetEntInfo(pokemon);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-        status = &entityInfo->linked.status;
-        if (entityInfo->linked.status != STATUS_DESTINY_BOND)
+        status = &entityInfo->leechSeedClassStatus.status;
+        if (entityInfo->leechSeedClassStatus.status != STATUS_DESTINY_BOND)
         {
-            if (entityInfo->linked.status == STATUS_LEECH_SEED)
+            if (entityInfo->leechSeedClassStatus.status == STATUS_LEECH_SEED)
                 TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FA79C);
             zero = 0;
             *status = STATUS_DESTINY_BOND;
-            entityInfo->linked.turns = CalculateStatusTurns(target,gUnknown_80F4EF0,TRUE) + 1;
-            entityInfo->linked.damageCountdown = zero;
+            entityInfo->leechSeedClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4EF0,TRUE) + 1;
+            entityInfo->leechSeedClassStatus.damageCountdown = zero;
             nullsub_74(target);
-            entityInfo->linked.unkD8 = 0xff;
+            entityInfo->leechSeedClassStatus.unk8 = 0xff;
         }
         else
         {
@@ -894,9 +894,9 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
         for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
         {
             if (target == gDungeon->activePokemon[index]) {
-                entityInfo->linked.unkD8 = index;
+                entityInfo->leechSeedClassStatus.unk8 = index;
                 entityInfo2 = GetEntInfo(target);
-                entityInfo->linked.unkD4 = entityInfo2->unk98;
+                entityInfo->leechSeedClassStatus.unk4 = entityInfo2->unk98;
             }
         }
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBB4C);
@@ -984,7 +984,7 @@ void FocusEnergyStatusTarget(Entity *pokemon, Entity * target)
   }
 }
 
-void sub_80783C4(Entity * pokemon, Entity * target, u8 param_3)
+void sub_80783C4(Entity * pokemon, Entity * target, bool8 param_3)
 {
   EntityInfo *targetEntityInfo;
   EntityInfo *entityInfo;

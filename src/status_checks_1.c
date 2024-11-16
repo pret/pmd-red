@@ -138,7 +138,7 @@ bool8 HasNegativeStatus(Entity *pokemon)
         pokemonInfo->cringeClassStatus.status != STATUS_NONE ||
         pokemonInfo->curseClassStatus.status == STATUS_CURSED ||
         pokemonInfo->curseClassStatus.status == STATUS_DECOY ||
-        pokemonInfo->linked.status == STATUS_LEECH_SEED ||
+        pokemonInfo->leechSeedClassStatus.status == STATUS_LEECH_SEED ||
         pokemonInfo->sureShotClassStatus.status == STATUS_WHIFFER ||
         pokemonInfo->blinkerClassStatus.status == STATUS_BLINKER ||
         pokemonInfo->blinkerClassStatus.status == STATUS_CROSS_EYED ||

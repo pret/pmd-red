@@ -2,6 +2,7 @@
 #include "dungeon_ai.h"
 
 #include "code_803E668.h"
+#include "code_803E724.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
@@ -41,7 +42,6 @@ extern char *gPtrItsaMonsterHouseMessage;
 extern u8 sub_8044B28(void);
 extern void sub_807AB38(Entity *, u32);
 extern void sub_8041888(u32);
-extern u8 sub_803F428(s16 *);
 
 void sub_8075900(Entity *pokemon, u8 r1)
 {
@@ -51,16 +51,16 @@ void sub_8075900(Entity *pokemon, u8 r1)
         {
             if(!sub_8044B28())
             {
-                if(!gDungeon->monsterHouseTriggered)
+                if(!gDungeon->unk644.monsterHouseTriggered)
                 {
                     if((GetTileAtEntitySafe(pokemon)->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
                     {
                         // It's a monster house!
                         LogMessageByIdWithPopupCheckUser(GetLeader(), gPtrItsaMonsterHouseMessage);
-                        gDungeon->monsterHouseTriggeredEvent = TRUE;
+                        gDungeon->unk644.monsterHouseTriggeredEvent = TRUE;
                         sub_807AB38(pokemon, r1);
                         sub_8041888(0);
-                        if(sub_803F428(&pokemon->pos.x) != 0)
+                        if(sub_803F428(&pokemon->pos))
                             sub_803E708(0x78, 0x39);
                     }
                 }

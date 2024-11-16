@@ -45,7 +45,6 @@ extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u3
 extern void sub_807FC3C(Position *, u32, u32);
 extern void sub_8042A64(Position *);
 extern void sub_8040A84(void);
-extern void sub_8049ED4(void);
 extern void sub_80498A8(s32, s32);
 extern void sub_8042A54(Position *);
 extern void sub_8049BB0(s32, s32);
@@ -80,7 +79,7 @@ extern void sub_8075C58(Entity *, Entity *, s32, s32);
 
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern bool8 MoveRequiresCharging(Entity* pokemon,u16 moveID);
-extern void sub_80783C4(Entity *, Entity *, u32);
+extern void sub_80783C4(Entity *, Entity *, bool8);
 
 
 // NOTE: Override pokemon.c types for these two funcs
@@ -342,7 +341,7 @@ bool8 sub_805B2FC(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 
 bool8 sub_805B314(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
-    sub_80783C4(pokemon, target, 1);
+    sub_80783C4(pokemon, target, TRUE);
     return TRUE;
 }
 
@@ -922,7 +921,7 @@ bool8 sub_805BEC8(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 bool8 EscapeOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-    if (gDungeon->unk66E != 0) {
+    if (gDungeon->unk644.unk2A != 0) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD4DC); // $m0 can't escape!
     }
     else {

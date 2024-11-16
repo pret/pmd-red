@@ -18,6 +18,7 @@
 #include "move_effects_target.h"
 #include "moves.h"
 #include "move_util.h"
+#include "code_8041AD0.h"
 
 extern u32 gUnknown_202EDCC;
 
@@ -38,7 +39,6 @@ bool8 ExposeTrap(s32 x, s32 y);
 void sub_8040A84();
 void sub_8049ED4();
 void sub_806A5B8(Entity *);
-void sub_80421C0(Entity *, u32);
 u8 sub_8045888(Entity *);
 void sub_807EC28(u32);
 void sub_80694C0(Entity *, s32, s32, s32);

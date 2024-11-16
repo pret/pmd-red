@@ -223,7 +223,7 @@ bool8 sub_8072CF4(Entity *entity)
             HandleUseMoveAIAction(entity);
             break;
         case ACTION_STAIRS:
-            if ((gDungeon->dungeonLocation.id == DUNGEON_METEOR_CAVE) && (!gDungeon->deoxysDefeat)) {
+            if ((gDungeon->unk644.dungeonLocation.id == DUNGEON_METEOR_CAVE) && (!gDungeon->deoxysDefeat)) {
                 LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FA5B4); // It's impossible to go down the stairs now!
             }
             else

@@ -216,7 +216,7 @@ SECTIONS {
         src/dungeon_action.o(.text);
         src/code_8044CC8.o(.text);
         src/dungeon_util.o(.text);
-        asm/code_80450F8.o(.text);
+        src/code_80450F8.o(.text);
         src/dungeon_visibility.o(.text);
         src/code_8045A00.o(.text);
         asm/code_8045A00.o(.text);
@@ -278,8 +278,7 @@ SECTIONS {
         src/trap.o(.text);
         asm/code_807FCD4.o(.text);
         src/trap_1.o(.text);
-        asm/code_8080CF0.o(.text);
-        src/code_8083288.o(.text);
+        src/dungeon_serializer.o(.text);
         src/dungeon_range.o(.text);
         src/code_808333C.o(.text);
         src/dungeon_leader.o(.text);
@@ -524,6 +523,12 @@ SECTIONS {
         src/load_screen.o(.rodata);
         src/wonder_mail_main_menu.o(.rodata);
         src/debug_menu1.o(.rodata);
+        src/debug_unused1.o(.rodata);
+        src/debug_unused2.o(.rodata);
+        src/debug_unused3.o(.rodata);
+        src/debug_unused4.o(.rodata);
+        src/debug_unused5.o(.rodata);
+        src/debug_unused6.o(.rodata);
         src/debug_menu2.o(.rodata);
         src/debug_menu3.o(.rodata);
         src/debug_menu4.o(.rodata);
@@ -557,6 +562,8 @@ SECTIONS {
         src/dungeon_capabilities.o(.rodata);
         src/dungeon_ai_targeting.o(.rodata);
         data/data_8107010.o(.rodata);
+        src/dungeon_serializer.o(.rodata);
+        data/data_8107224.o(.rodata);
         src/game_options.o(.rodata);
         data/data_8109964.o(.rodata);
         src/code_80972F4.o(.rodata);

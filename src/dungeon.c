@@ -145,18 +145,18 @@ u8 sub_80902C8(u8 dungeon)
         return gUnknown_81077E8[dungeon];
 }
 
-void SaveDungeonLocation(struct unkStruct_8094924* r0, DungeonLocation* r1)
+void WriteDungeonLocationBits(DataSerializer* r0, DungeonLocation* src)
 {
-    SaveIntegerBits(r0, &r1->id, 0x7);
-    SaveIntegerBits(r0, &r1->floor, 0x7);
+    WriteBits(r0, &src->id, 7);
+    WriteBits(r0, &src->floor, 7);
 }
 
-void RestoreDungeonLocation(struct unkStruct_8094924* r0, DungeonLocation* r1)
+void ReadDungeonLocationBits(DataSerializer* r0, DungeonLocation* dst)
 {
-    r1->id = 0;
-    r1->floor = 0;
-    RestoreIntegerBits(r0, &r1->id, 0x7);
-    RestoreIntegerBits(r0, &r1->floor, 0x7);
+    dst->id = 0;
+    dst->floor = 0;
+    ReadBits(r0, &dst->id, 7);
+    ReadBits(r0, &dst->floor, 7);
 }
 
 bool8 DoEnemiesEvolveWhenKOed(u8 dungeon)

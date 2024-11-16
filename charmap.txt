@@ -115,6 +115,7 @@
 '”' = 7E 39 34
 '•' = 95
 @ 96, 97 are not hyphens, 'er', and 're' superscripts in kanji_a
+INVALID_SEQUENCE_976C = 97 6C
 '˜' = 98
 '™' = 99
 'š' = 9A

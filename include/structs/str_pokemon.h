@@ -23,7 +23,7 @@ typedef struct unkPokeSubStruct_C
 // size: 0x58
 typedef struct PokemonStruct1
 {
-    u16 unk0; // Probably a union: Sometimes ldrh and sometimes ldrb. Recruited??
+    u16 unk0; // Probably a union: Sometimes ldrh and sometimes ldrb. Recruited?? "sub_80954CC" only loads 2 bits of info
     /* 0x2 */ bool8 isTeamLeader;
     /* 0x3 */ u8 level;
     /* 0x4 */ DungeonLocation dungeonLocation;
@@ -71,8 +71,8 @@ typedef struct PokemonStruct2
     /* 0x18 */ u32 currExp;
     /* 0x1C */ Moves moves;
     /* 0x40 */ Item itemSlot; // heldItem
-    FixedPoint belly; // some struct
-    FixedPoint maxBelly; // some struct (same type as 44)
+    /* 0x44 */ FixedPoint belly;
+    /* 0x48 */ FixedPoint maxBelly;
     /* 0x4C */ u32 IQSkills; // unk20
     /* 0x50 */ u8 tacticIndex;
     /* 0x54 */ HiddenPower hiddenPower;

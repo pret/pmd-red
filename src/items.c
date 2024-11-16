@@ -1108,76 +1108,78 @@ bool8 AddKecleonWareItem(u8 itemIndex) {
 
 s32 SaveTeamInventory(u8* unk0, u32 size)
 {
-  struct unkStruct_8094924 unk;
+  DataSerializer unk;
   s32 i;
 
-  xxx_init_struct_8094924_save_809486C(&unk, unk0, size);
+  InitBitWriter(&unk, unk0, size);
   for (i = 0; i < INVENTORY_SIZE; i++) {
-    SaveItemSlot(&unk, &gTeamInventoryRef->teamItems[i]);
+    WriteItemSlotBits(&unk, &gTeamInventoryRef->teamItems[i]);
   }
   for (i = 0; i < STORAGE_SIZE; i++) {
-    SaveIntegerBits(&unk, &gTeamInventoryRef->teamStorage[i], 10);
+    WriteBits(&unk, &gTeamInventoryRef->teamStorage[i], 10);
   }
   for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    SaveHeldItem(&unk, &gTeamInventoryRef->kecleonShopItems[i]);
+    WriteHeldItemBits(&unk, &gTeamInventoryRef->kecleonShopItems[i]);
   }
   for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    SaveHeldItem(&unk, &gTeamInventoryRef->kecleonWareItems[i]);
+    WriteHeldItemBits(&unk, &gTeamInventoryRef->kecleonWareItems[i]);
   }
-  SaveIntegerBits(&unk, &gTeamInventoryRef->teamMoney, 24);
-  SaveIntegerBits(&unk, &gTeamInventoryRef->teamSavings, 24);
-  nullsub_102(&unk);
-  return unk.unk8;
+  WriteBits(&unk, &gTeamInventoryRef->teamMoney, 24);
+  WriteBits(&unk, &gTeamInventoryRef->teamSavings, 24);
+
+  FinishBitSerializer(&unk);
+  return unk.count;
 }
 
 s32 RestoreTeamInventory(u8 *unk0, u32 size)
 {
-  struct unkStruct_8094924 unk;
-  s32 i;
+    DataSerializer unk;
+    s32 i;
 
-  xxx_init_struct_8094924_restore_809485C(&unk, unk0, size);
-  for (i = 0; i < INVENTORY_SIZE; i++) {
-    RestoreItemSlot(&unk, &gTeamInventoryRef->teamItems[i]);
-  }
-  for (i = 0; i < STORAGE_SIZE; i++) {
-    RestoreIntegerBits(&unk, &gTeamInventoryRef->teamStorage[i], 10);
-  }
-  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    RestoreHeldItem(&unk, &gTeamInventoryRef->kecleonShopItems[i]);
-  }
-  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    RestoreHeldItem(&unk, &gTeamInventoryRef->kecleonWareItems[i]);
-  }
-  RestoreIntegerBits(&unk, &gTeamInventoryRef->teamMoney, 24);
-  RestoreIntegerBits(&unk, &gTeamInventoryRef->teamSavings, 24);
-  nullsub_102(&unk);
-  return unk.unk8;
+    InitBitReader(&unk, unk0, size);
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        ReadItemSlotBits(&unk, &gTeamInventoryRef->teamItems[i]);
+    }
+    for (i = 0; i < STORAGE_SIZE; i++) {
+        ReadBits(&unk, &gTeamInventoryRef->teamStorage[i], 10);
+    }
+    for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
+        ReadHeldItemBits(&unk, &gTeamInventoryRef->kecleonShopItems[i]);
+    }
+    for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
+        ReadHeldItemBits(&unk, &gTeamInventoryRef->kecleonWareItems[i]);
+    }
+    ReadBits(&unk, &gTeamInventoryRef->teamMoney, 24);
+    ReadBits(&unk, &gTeamInventoryRef->teamSavings, 24);
+
+    FinishBitSerializer(&unk);
+    return unk.count;
 }
 
-void RestoreHeldItem(struct unkStruct_8094924 *a1, BulkItem *item)
+void ReadHeldItemBits(DataSerializer *a1, BulkItem *item)
 {
-  RestoreIntegerBits(a1, &item->id, 8);
-  RestoreIntegerBits(a1, &item->quantity, 7);
+  ReadBits(a1, &item->id, 8);
+  ReadBits(a1, &item->quantity, 7);
 }
 
-void SaveHeldItem(struct unkStruct_8094924 *a1, BulkItem *item)
+void WriteHeldItemBits(DataSerializer *a1, BulkItem *item)
 {
-  SaveIntegerBits(a1, &item->id, 8);
-  SaveIntegerBits(a1, &item->quantity, 7);
+  WriteBits(a1, &item->id, 8);
+  WriteBits(a1, &item->quantity, 7);
 }
 
-void RestoreItemSlot(struct unkStruct_8094924 *a1, Item *slot)
+void ReadItemSlotBits(DataSerializer *a1, Item *slot)
 {
-  RestoreIntegerBits(a1, &slot->flags, 8);
-  RestoreIntegerBits(a1, &slot->quantity, 7);
-  RestoreIntegerBits(a1, &slot->id, 8);
+  ReadBits(a1, &slot->flags, 8);
+  ReadBits(a1, &slot->quantity, 7);
+  ReadBits(a1, &slot->id, 8);
 }
 
-void SaveItemSlot(struct unkStruct_8094924 *a1, Item *slot)
+void WriteItemSlotBits(DataSerializer *a1, Item *slot)
 {
-  SaveIntegerBits(a1, &slot->flags, 8);
-  SaveIntegerBits(a1, &slot->quantity, 7);
-  SaveIntegerBits(a1, &slot->id, 8);
+  WriteBits(a1, &slot->flags, 8);
+  WriteBits(a1, &slot->quantity, 7);
+  WriteBits(a1, &slot->id, 8);
 }
 
 const char *sub_8091E50(u8 index)

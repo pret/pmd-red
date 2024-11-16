@@ -17,7 +17,6 @@
 #include "position_util.h"
 #include "trap.h"
 
-extern void sub_8049ED4(void);
 extern void sub_8073D14(Entity *);
 
 void sub_8075680(void)

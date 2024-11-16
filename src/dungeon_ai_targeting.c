@@ -274,7 +274,7 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
         return FALSE;
     }
     if (frontTile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE &&
-        !gDungeon->monsterHouseTriggered &&
+        !gDungeon->unk644.monsterHouseTriggered &&
         IQSkillIsEnabled(pokemon, IQ_HOUSE_AVOIDER))
     {
         return FALSE;

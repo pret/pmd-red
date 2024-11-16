@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800F958.h"
 #include "dungeon_pokemon_sprites.h"
 #include "memory.h"
 
@@ -7,7 +8,8 @@ extern DungeonPokemonSprite* GetDungeonPokemonSprite(s32 id);
 
 extern Position gUnknown_80D3564;
 
-void AddPokemonDungeonSprite(s32 id, s16 species, Position *pos, u32 r3) {
+void AddPokemonDungeonSprite(s32 id, s16 species, Position *pos, u32 r3)
+{
     DungeonPokemonSprite *dSprite;
     DungeonPokemonSprite *newSprite;
     Position newPos;

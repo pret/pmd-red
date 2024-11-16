@@ -2,6 +2,9 @@
 #include "trap.h"
 
 #include "code_803E668.h"
+#include "code_803E724.h"
+#include "code_80450F8.h"
+#include "code_8041AD0.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
@@ -79,14 +82,10 @@ void sub_8045C28(Item *, u8 , u8);
 void sub_8045BF8(u8 *, Item *);
 void DealDamageToEntity(Entity *,s16,u32,u32);
 void sub_806F480(Entity *, u32);
-extern void sub_80421C0(Entity *, u32);
 void sub_804225C(Entity *, Position *, u8);
 void sub_8071DA4(Entity *);
-extern u8 sub_803F428(Position *pos);
 void sub_806A1E8(Entity *pokemon);
-void sub_8049ED4(void);
 u8 sub_803D6FC(void);
-Entity *sub_8045684(u8, Position *, u8);
 extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
 
 void sub_807FC3C(Position *pos, u32 trapID, u32 param_3)
@@ -266,7 +265,7 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
             text = *gUnknown_80FDB7C;
         }
         if (text != NULL) {
-            if (sub_803F428(pos) != '\0') {
+            if (sub_803F428(pos)) {
                 sub_8049ED4();
             }
             TryDisplayDungeonLoggableMessage3(pokemon,target,text);
@@ -275,7 +274,7 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
             }
         }
     }
-    if (sub_803F428(pos) != '\0') {
+    if (sub_803F428(pos)) {
         sub_80421C0(0,0x15c);
         sub_8049ED4();
         sub_804225C(pokemon,pos,trapData->id);

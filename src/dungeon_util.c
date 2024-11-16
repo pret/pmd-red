@@ -47,22 +47,22 @@ u8 GetEntityRoom(Entity *entity)
 
 Trap* GetTrapData(Entity *entity)
 {
-    return (Trap *) GetEntInfo(entity);
+    return entity->axObj.info.trap;
 }
 
 Item* GetItemData(Entity *entity)
 {
-    return (Item *) GetEntInfo(entity);
+    return entity->axObj.info.item;
 }
 
 Trap* GetTrapData_1(Entity *entity)
 {
-    return (Trap *) GetEntInfo(entity);
+    return entity->axObj.info.trap;
 }
 
 Item* GetItemData_1(Entity *entity)
 {
-    return (Item*) GetEntInfo(entity);
+    return entity->axObj.info.item;
 }
 
 Tile *GetTileAtEntity(Entity *entity)

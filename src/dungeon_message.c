@@ -3,6 +3,7 @@
 #include "dungeon.h"
 #include "structs/dungeon_entity.h"
 #include "code_803E46C.h"
+#include "code_803E724.h"
 #include "string_format.h"
 #include "code_800E9E4.h"
 #include "menu_input.h"
@@ -30,7 +31,6 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, u8 r2);
 static bool8 sub_8052DC0(Entity *);
 
 extern bool8 sub_8045888(Entity *pokemon);
-extern u8 sub_803F428(Position *);
 extern void sub_805E804(void);
 extern void sub_803EAF0(s32, s32);
 extern void sub_8040238(void);
@@ -171,7 +171,7 @@ void TryDisplayDungeonLoggableMessage5(Entity *pokemon, Position *pos, const u8 
 {
     u8 flag;
     flag = sub_8045888(pokemon) ? TRUE : FALSE;
-    if(sub_803F428(pos) != 0)
+    if(sub_803F428(pos))
     {
         flag = TRUE;
     }
@@ -698,7 +698,7 @@ void TryDisplayGeneralTutorialMessage(void)
     if (DislayTutorialMsg(leader, &gUnknown_80FF020, TRUE)) return;
     if (DislayTutorialMsg(leader, &gUnknown_80FF080, TRUE)) return;
     if (DislayTutorialMsg(leader, &gUnknown_80FF0D8, TRUE)) return;
-    if (gDungeon->dungeonLocation.id == DUNGEON_THUNDERWAVE_CAVE) {
+    if (gDungeon->unk644.dungeonLocation.id == DUNGEON_THUNDERWAVE_CAVE) {
         if (DislayTutorialMsg(leader, &gUnknown_80FF13C, TRUE)) return;
         if (DislayTutorialMsg(leader, &gUnknown_80FF1B4, TRUE)) return;
         if (DislayTutorialMsg(leader, &gMovementTutorial, TRUE)) return;
@@ -834,11 +834,11 @@ void sub_8052FB8(const u8 *str)
 
 const u8 *GetCurrentDungeonName(void)
 {
-    if (gDungeon->unk678 == 1) {
+    if (gDungeon->unk644.unk34 == 1) {
         return GetDungeonName1(DUNGEON_OUT_ON_RESCUE);
     }
     else {
-        return GetDungeonName1(gDungeon->dungeonLocation.id);
+        return GetDungeonName1(gDungeon->unk644.dungeonLocation.id);
     }
 }
 

@@ -35,16 +35,16 @@ extern const u8 *gUnknown_8113870[];
 
 extern struct unkStruct_8113080 gUnknown_8113080[];
 
-void sub_809447C(struct unkStruct_8094924 *r0, u8 *r1)
+void ReadBellyBits(DataSerializer *r0, FixedPoint *dst)
 {
-    RestoreIntegerBits(r0, r1, 0x10);
-    RestoreIntegerBits(r0, r1 + 2, 0x10);
+    ReadBits(r0, &dst->unk0, 16);
+    ReadBits(r0, &dst->unk2, 16);
 }
 
-void sub_809449C(struct unkStruct_8094924 *r0, u8 *r1)
+void WriteBellyBits(DataSerializer *r0, FixedPoint *src)
 {
-    SaveIntegerBits(r0, r1, 0x10);
-    SaveIntegerBits(r0, r1 + 2, 0x10);
+    WriteBits(r0, &src->unk0, 16);
+    WriteBits(r0, &src->unk2, 16);
 }
 
 static void sub_80944BC(s16 moveID, u8 *buffer)

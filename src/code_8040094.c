@@ -19,7 +19,6 @@ extern OpenedFile *gUnknown_202EE04;
 extern void sub_803F7BC(void);
 
 extern void sub_803F580(u32);
-extern void sub_8049ED4();
 extern void sub_8040A84();
 
 extern const char *gUnknown_80FD040; // It became brighter on the floor

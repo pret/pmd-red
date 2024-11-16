@@ -125,7 +125,7 @@ void sub_8097418(s16 index,bool32 param_2)
   bool8 param_2_u8 = param_2;
   if (index_s32 != 0xd) {
     if ((param_2_u8) && (SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_JOB_LIST,index_s32,0), index_s32 < 0x1f)) {
-      const MissionText *mt = &gStoryMissionText[index_s32];
+      const MissionText *mt = &sStoryMissionText[index_s32];
       if (mt->unk4 != 0xFF) {
         sub_8097FA8(mt->unk4);
       }
@@ -169,7 +169,7 @@ const u8 *GetCurrentMissionText(s16 index)
 {
     if(index < 0x1F)
     {
-        const MissionText *mt = &gStoryMissionText[index];
+        const MissionText *mt = &sStoryMissionText[index];
         return mt->text;
     }
     else

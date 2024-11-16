@@ -1,14 +1,16 @@
 #ifndef GUARD_DUNGEON_ENTITY_H
 #define GUARD_DUNGEON_ENTITY_H
 
+#include "constants/dungeon_action.h"
 #include "constants/global.h"
-#include "structs/str_position.h"
-#include "sprite.h"
+#include "constants/status.h"
+#include "structs/axdata.h"
 #include "structs/str_items.h"
 #include "structs/str_moves.h"
-#include "structs/axdata.h"
-
+#include "structs/str_position.h"
+#include "math.h"
 #include "number_util.h"
+#include "sprite.h"
 
 #define MAX_STAT_STAGE 20
 #define STAT_MULTIPLIER_THRESHOLD 63
@@ -26,10 +28,13 @@
 #define STAT_STAGE_ACCURACY 0
 #define STAT_STAGE_EVASION 1
 
+#define NUM_PICKED_IQ_SKILLS 3
+
+// size: 0x8
 typedef struct unkStruct_8044CC8
 {
-    u8 actionUseIndex;
-    Position lastItemThrowPosition;
+    /* 0x0 */ u8 actionUseIndex;
+    /* 0x4 */ Position lastItemThrowPosition;
 } unkStruct_8044CC8;
 
 // size: 0x18
@@ -37,25 +42,28 @@ typedef struct ActionContainer
 {
     /* 0x0 */ u16 action;
     /* 0x2 */ u8 direction;
-    u8 fill3;
+    u8 unk3;
     // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
     /* 0x4 */ unkStruct_8044CC8 unk4[2];
     // Position of the target that the Pokémon wants throw an item at.
     /* 0x14 */ Position itemTargetPosition;
 } ActionContainer;
 
+// size: 0x4
 typedef struct HiddenPower
 {
     /* 0x0 */ s16 hiddenPowerBasePower;
     /* 0x2 */ u8 hiddenPowerType;
 } HiddenPower;
 
+// size: 0x4
 typedef struct JoinedAt
 {
     /* 0x0 */ u8 joinedAt;
     /* 0x1 */ u8 unk1;
 } JoinedAt;
 
+// size: 0x14
 typedef struct AITarget
 {
     /* 0x0 */ u8 aiObjective;
@@ -66,15 +74,16 @@ typedef struct AITarget
     /* 0x8 */ struct Entity *aiTarget;
     /* 0xC */ u32 unkC;
     /* 0x10 */ Position aiTargetPos;
-
 } AITarget;
 
+// size: 0x4
 typedef struct SleepClassStatus
 {
     /* 0x0 */ u8 status;
     /* 0x1 */ u8 turns;
 } SleepClassStatus;
 
+// size: 0x4
 typedef struct BurnClassStatus
 {
     /* 0x0 */ u8 status;
@@ -83,6 +92,7 @@ typedef struct BurnClassStatus
     /* 0x3 */ u8 unk4;
 } BurnClassStatus;
 
+// size: 0xC
 typedef struct FrozenClassStatus
 {
     /* 0x0 */ u8 status;
@@ -91,12 +101,14 @@ typedef struct FrozenClassStatus
     /* 0x9 */ u8 damageCountdown;
 } FrozenClassStatus;
 
+// size: 0x4
 typedef struct CringeClassStatus
 {
     /* 0x0 */ u8 status;
     /* 0x1 */ u8 turns;
 } CringeClassStatus;
 
+// size: 0x4
 typedef struct BideClassStatus
 {
     /* 0x0 */ u8 status;
@@ -104,60 +116,68 @@ typedef struct BideClassStatus
     /* 0x2 */ u8 moveSlot; // The position of the move in the Pokémon's moveset that triggered the status.
 } BideClassStatus;
 
+// size: 0x4
 typedef struct ReflectClassStatus
 {
     /* 0x0 */ u8 status;
     /* 0x1 */ u8 turns;
 } ReflectClassStatus;
 
+// size: 0x8
 typedef struct CurseClassStatus
 {
     /* 0x0 */ u8 status;
     /* 0x1 */ bool8 applierNonTeamMemberFlag; // True if the Pokémon is a decoy and a wild Pokémon (i.e., not an allied Pokémon).
-    u8 unk2;
+    /* 0x2 */ bool8 unk2;
     /* 0x3 */ u8 turns;
     /* 0x4 */ u8 damageCountdown;
 } CurseClassStatus;
 
+// size: 0xC
 typedef struct LeechSeedClassStatus
 {
     /* 0x0 */ u8 status;
-    /* 0x4 */ u32 unkD4;
-    /* 0x8 */ u8 unkD8;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u8 unk8;
     /* 0x9 */ u8 turns;
     /* 0xA */ u8 damageCountdown;
 } LeechSeedClassStatus;
 
-
+// size: 0x4
 typedef struct SureShotClassStatus
 {
     /* 0x0 */ u8 status;
     /* 0x1 */ u8 turns;
 } SureShotClassStatus;
 
+// size: 0x4
 typedef struct LongTossClassStatus
 {
     /* 0x0 */ u8 status;
 } LongTossClassStatus;
 
+// size: 0x4
 typedef struct InvisibleClassStatus
 {
     /* 0x0 */ u8 status;
     /* 0x1 */ u8 turns;
 } InvisibleClassStatus;
 
+// size: 0x4
 typedef struct BlinkerClassStatus
 {
     /* 0x0 */ u8 status;
     /* 0x1 */ u8 turns;
 } BlinkerClassStatus;
 
+// size: 0x4
 typedef struct Muzzled
 {
     /* 0x0 */ bool8 muzzled;
     /* 0x1 */ u8 turns;
 } Muzzled;
 
+// size: 0x1C
 typedef struct Unk_Entity_x184
 {
     /* 0x184 - 0x0 */ Position previousTargetMovePosition1;
@@ -167,12 +187,13 @@ typedef struct Unk_Entity_x184
     /* 0x194 - 0x10*/ Position32 lastMoveIncrement;
     /* 0x19C - 0x18 */ s16 walkAnimFramesLeft; // Set when the Pokémon starts moving, and counts down until the Pokémon's walk animation stops.
     /* 0x19e - 0x1a */ u8 unk1A;
-} Unk_Entity_x184 ;
+} Unk_Entity_x184;
 
+// size: 0x24
 typedef struct Moves
 {
-    /* 0x118 */ Move moves[MAX_MON_MOVES];
-    /* 0x138 */ u8 struggleMoveFlags;
+    /* 0x0 */ Move moves[MAX_MON_MOVES];
+    /* 0x20 */ u8 struggleMoveFlags;
 } Moves;
 
 // size: 0x208
@@ -211,9 +232,9 @@ typedef struct EntityInfo
     /* 0x28 */ s16 flashFireBoost;
     // These start at 0x1000, and are halved by certain moves like Screech to lower the corresponding stat.
     // Index 0 is Attack. Index 1 is Special Attack.
-    /* 0x2C */ s32 offensiveMultipliers[2];
+    /* 0x2C */ s24_8 offensiveMultipliers[2];
     // Index 0 is Defense. Index 1 is Special Defense.
-    /* 0x34 */ s32 defensiveMultipliers[2];
+    /* 0x34 */ s24_8 defensiveMultipliers[2];
     /* 0x3C */ HiddenPower hiddenPower;
     /* 0x40 */ JoinedAt joinedAt; // Uses the dungeon index in dungeon.h.
     /* 0x44 */ ActionContainer action;
@@ -224,8 +245,10 @@ typedef struct EntityInfo
     /* 0x68 */ Position prevPos[NUM_PREV_POS];
     /* 0x78 */ AITarget aiTarget;
     // Bitwise flags corresponding to selected IQ skills.
-    /* 0x8C */ u8 IQSkillMenuFlags[4]; // IQ skills selected in the IQ skills menu.
-    /* 0x90 */ u8 IQSkillFlags[4];
+    /* 0x8C */ u8 IQSkillMenuFlags[NUM_PICKED_IQ_SKILLS]; // IQ skills selected in the IQ skills menu.
+    u8 padding8F;
+    /* 0x90 */ u8 IQSkillFlags[NUM_PICKED_IQ_SKILLS];
+    u8 padding93;
     /* 0x94 */ u8 tactic;
     u8 fill95[0x98 - 0x95];
     /* 0x98 */ u32 unk98;
@@ -242,7 +265,7 @@ typedef struct EntityInfo
     /* 0xC0 */ BideClassStatus bideClassStatus;
     /* 0xC4 */ ReflectClassStatus reflectClassStatus;
     /* 0xC8 */ CurseClassStatus curseClassStatus;
-    /* 0xD0 */ LeechSeedClassStatus linked;
+    /* 0xD0 */ LeechSeedClassStatus leechSeedClassStatus;
     /* 0xDC */ SureShotClassStatus sureShotClassStatus;
     /* 0xE0 */ LongTossClassStatus longTossClassStatus;
     /* 0xE4 */ InvisibleClassStatus invisibleClassStatus;
@@ -316,7 +339,7 @@ typedef struct EntityInfo
     /* 0x169 */ u8 turnsSinceWarpScarfActivation;
     /* 0x16C */ Position targetPos;
     /* 0x170 */ Position pixelPos;
-    u32 unk174;
+    s24_8 unk174;
     u16 abilityEffectFlags; // See enum AbilityEffectFlags
     /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
     // Previous value of targetPosition for movement, 1 and 2 moves ago.
@@ -478,11 +501,6 @@ static inline void SetExpMultplier(EntityInfo *info)
 {
     if (!ExpMultiplierChanged(info))
         SetRegularExpMultiplier(info);
-}
-
-static inline EntityInfo *GetEntInfo(Entity *ent)
-{
-    return ent->axObj.info;
 }
 
 #endif

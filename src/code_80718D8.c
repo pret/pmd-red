@@ -4,6 +4,8 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
+#include "code_8041AD0.h"
+#include "code_80450F8.h"
 #include "code_8045A00.h"
 #include "code_8077274_1.h"
 #include "constants/dungeon.h"
@@ -50,7 +52,6 @@ extern u8 *gUnknown_80FF730[];
 extern u8 gUnknown_8107010[8];
 extern u8 *gUnknown_8107018[3];
 
-extern void sub_80421C0(Entity *pokemon, u16 r1);
 void sub_8083D58(void);
 void sub_8072778(Entity *, Entity *, u8, u8);
 bool8 sub_80725A4(Entity *, Entity *);
@@ -82,21 +83,21 @@ void sub_8071B48(void)
 
   entityPtr = NULL;
   dungeon = gDungeon;
-  if ((dungeon->unk664 != 0) &&
-     ((dungeon->dungeonLocation.id != DUNGEON_METEOR_CAVE || (dungeon->unk37FD == 0)))) {
-    dungeon->unk662++;
-    if (dungeon->unk66E == 0) {
-      if ( dungeon->unk662 < gUnknown_80F4DAA) {
+  if ((dungeon->unk644.unk20 != 0) &&
+     ((dungeon->unk644.dungeonLocation.id != DUNGEON_METEOR_CAVE || (dungeon->unk37FD == 0)))) {
+    dungeon->unk644.unk1E++;
+    if (dungeon->unk644.unk2A == 0) {
+      if ( dungeon->unk644.unk1E < gUnknown_80F4DAA) {
         return;
       }
     }
     else {
-      if ( dungeon->unk662 < gUnknown_80F4DAC) {
+      if ( dungeon->unk644.unk1E < gUnknown_80F4DAC) {
         return;
       }
     }
 
-    if (dungeon->unk662 > 900) {
+    if (dungeon->unk644.unk1E > 900) {
       entity2 = dungeon->unk17B34;
       if ((EntityExists(entity2)) && (entity2->spawnGenID == dungeon->unk17B40)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity2,0);
@@ -104,7 +105,7 @@ void sub_8071B48(void)
       }
     }
 
-      dungeon->unk662 = 0;
+      dungeon->unk644.unk1E = 0;
       dungeon->unk17B34 = NULL;
 
       counter = 0;
@@ -117,7 +118,7 @@ void sub_8071B48(void)
           counter++;
         }
       }
-      if (dungeon->unk66E == 0) {
+      if (dungeon->unk644.unk2A == 0) {
         if (gDungeon->unk3A0C == 0xff) {
             if (counter >= gUnknown_80F4DA6) {
               return;
@@ -135,7 +136,7 @@ void sub_8071B48(void)
         DisplayDungeonLoggableMessageTrue(0,*gUnknown_80FED68);
         sub_8042920(entityPtr);
       }
-      if (dungeon->unk66E != 0) {
+      if (dungeon->unk644.unk2A != 0) {
         index1 = 0x17c;
       }
       else {
@@ -150,7 +151,7 @@ void sub_8071B48(void)
         local_2c.species = index1;
         local_2c.level = level;
         local_2c.unk2 = 0;
-        if(DungeonRandInt(100) < GetRandomMovementChance(gDungeon->dungeonLocation.id))
+        if(DungeonRandInt(100) < GetRandomMovementChance(gDungeon->unk644.dungeonLocation.id))
         {
             local_2c.unk4 = 1;
         }
@@ -586,7 +587,7 @@ void sub_807218C(Entity *pokemon)
         }
         else if(info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
         {
-            if(gDungeon->unk65C == 0)
+            if(gDungeon->unk644.unk18 == 0)
                 r3 = 1;
         }
         sub_806A3D4(buffer, r1, 3, r3);

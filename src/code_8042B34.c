@@ -35,6 +35,7 @@
 #include "constants/dungeon.h"
 #include "constants/monster.h"
 #include "constants/trap.h"
+#include "dungeon_serializer.h"
 
 extern void sub_800EE5C(s32);
 extern void sub_800EF64(void);
@@ -243,7 +244,7 @@ void sub_8042EC8(Entity *a0, s32 a1)
 }
 
 extern u8 gUnknown_203B40C;
-extern u16 gUnknown_203B410;
+extern Position gUnknown_203B410;
 extern u8 *gSerializedData_203B41C;
 
 struct Substruct_xxx_dungeon_8042F6C
@@ -266,7 +267,7 @@ struct UnkStruct_xxx_dungeon_8042F6C
     u8 unkF;
     u8 unk10;
     u8 unk11;
-    struct unkStruct_Dungeon64C unk14;
+    unkStruct_Dungeon64C unk14;
     PokemonStruct1 unk1C;
     u8 *unk74;
     Dungeon *unk78;
@@ -298,7 +299,7 @@ extern void sub_8047104(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
 extern void sub_804700C(void);
-extern void sub_8097810(void);
+extern void IncrementThievingSuccesses(void);
 extern void sub_803E13C(void);
 extern void sub_80841EC(void);
 extern void sub_8084424(void);
@@ -315,7 +316,7 @@ extern void sub_8068614(void);
 extern void sub_80840A4(void);
 extern void sub_803E178(void);
 extern void sub_80848F0(void);
-extern void sub_8097890(void);
+extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
 extern void DisplayPreFightDialogue(void);
 extern void sub_8071DA4(Entity *);
@@ -332,13 +333,11 @@ extern void sub_80521D0(void);
 extern void sub_803F27C(u8);
 extern void sub_807E7FC(u8);
 extern void sub_80095CC(u32, u32);
-extern void sub_8081BF4(u8 *r0, u32 r1);
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern void sub_8068A84(PokemonStruct1 *pokemon);
 extern void sub_807EAA0(u32, u32);
 extern void sub_803D4D0(void);
 extern void sub_80842F0(void);
-extern void sub_8082B40(void);
 extern void sub_80427AC(void);
 extern void sub_806AA70(void);
 extern void sub_803D8F0(void);
@@ -357,7 +356,6 @@ extern void sub_8045CB0(void);
 extern void sub_807FA18(void);
 extern void sub_806A974(void);
 extern void sub_806CF60(void);
-extern void sub_8049ED4(void);
 extern void sub_8049884(void);
 extern void sub_8068F80(void);
 extern bool8 sub_8044B28(void);
@@ -371,7 +369,6 @@ extern void sub_803EAF0(u32, u32);
 extern void sub_806A914(u8 a0, u8 a1, u8 a2);
 extern void sub_803F4A0(Entity *a0);
 extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
-extern void sub_8080B30(u8 *param_1,u32 param_2);
 extern void sub_8046F84(s32 itemFlag);
 extern bool8 sub_8083C50(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
@@ -400,7 +397,7 @@ extern const u8 *const gUnknown_80F89B4;
 extern const u8 *const gUnknown_80F89D4;
 extern const u8 *const gUnknown_80F89D8;
 
-extern const s16 gUnknown_80F6850[];
+extern const s16 gUnknown_80F6850[4];
 extern const s16 gDungeonMusic[];
 
 extern OpenedFile *gDungeonNameBannerPalette;
@@ -433,24 +430,24 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         dungeonPtr[i] = 0;
     }
 
-    gUnknown_203B410 = 0; // Needed to match
-    gUnknown_203B410 = 100;
+    gUnknown_203B410.x = 0; // Needed to match
+    gUnknown_203B410.x = 100;
 
     if (!r6) {
-        gDungeon->unk678 = r8->unkF;
-        gDungeon->unk64C = r8->unk14;
-        gDungeon->windTurns = GetTurnLimit(r8->unk4.id);
-        gDungeon->unk67A = 0;
-        gDungeon->unk67B = GetRescuesAllowed(r8->unk4.id);
+        gDungeon->unk644.unk34 = r8->unkF;
+        gDungeon->unk644.unk8 = r8->unk14;
+        gDungeon->unk644.windTurns = GetTurnLimit(r8->unk4.id);
+        gDungeon->unk644.unk36 = 0;
+        gDungeon->unk644.unk37 = GetRescuesAllowed(r8->unk4.id);
     }
-    gDungeon->unk698 = 0;
-    gDungeon->unk699 = 0;
-    gDungeon->unk65C = r8->unk9;
-    gDungeon->unk65A = r8->unkC;
-    gDungeon->unk658 = r8->unkA;
-    gDungeon->unk659 = r8->unkB;
-    gDungeon->unk65B = r8->unkD;
-    gDungeon->unk65D = r8->unkE;
+    gDungeon->unk644.unk54 = 0;
+    gDungeon->unk644.unk55 = 0;
+    gDungeon->unk644.unk18 = r8->unk9;
+    gDungeon->unk644.unk16 = r8->unkC;
+    gDungeon->unk644.unk14 = r8->unkA;
+    gDungeon->unk644.unk15 = r8->unkB;
+    gDungeon->unk644.unk17 = r8->unkD;
+    gDungeon->unk644.unk19 = r8->unkE;
     StopDungeonBGM();
     sub_803D4AC();
     sub_804513C();
@@ -469,7 +466,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     sub_8042E98();
     gUnknown_202F32C = 0;
     if (r6) {
-        sub_8081BF4(gSerializedData_203B41C, 0x4800);
+        ReadDungeonState(gSerializedData_203B41C, 0x4800);
         sub_8049840();
     }
     if (r9) {
@@ -479,35 +476,35 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     if (!r6) {
         gDungeon->unk181e8.unk1820B = 1;
         gDungeon->unk181e8.unk1820C = 1;
-        if (gDungeon->unk678 == 1) {
-            gDungeon->dungeonLocation.id = r8->unk14.unk0;
-            gDungeon->dungeonLocation.floor = 1;
+        if (gDungeon->unk644.unk34 == 1) {
+            gDungeon->unk644.dungeonLocation.id = r8->unk14.unk0;
+            gDungeon->unk644.dungeonLocation.floor = 1;
         }
         else {
-            gDungeon->dungeonLocation = r8->unk4;
+            gDungeon->unk644.dungeonLocation = r8->unk4;
         }
 
-        gDungeon->unk674 = 0;
+        gDungeon->unk644.unk30 = 0;
         EnforceMaxItemsAndMoney();
     }
     if (!r6) {
-        if (gDungeon->unk678 == 1) {
-            gDungeon->unk67C = r8->unk14.unk4;
+        if (gDungeon->unk644.unk34 == 1) {
+            gDungeon->unk644.unk38 = r8->unk14.unk4;
         }
         else {
-            gDungeon->unk67C = Rand32Bit() & 0xFFFFFF;
+            gDungeon->unk644.unk38 = Rand32Bit() & 0xFFFFFF;
         }
-        sub_808408C(gDungeon->unk67C);
+        sub_808408C(gDungeon->unk644.unk38);
     }
     if (!r6) {
-        if (!sub_80980A4() && gDungeon->dungeonLocation.id == DUNGEON_TINY_WOODS) {
+        if (!sub_80980A4() && gDungeon->unk644.dungeonLocation.id == DUNGEON_TINY_WOODS) {
             sub_8043FD0();
         }
         sub_806890C();
     }
 
     if (r9) {
-        gFormatArgs[0] = gDungeon->unk67B;
+        gFormatArgs[0] = gDungeon->unk644.unk37;
         if (gFormatArgs[0] != 0) {
             DisplayDungeonMessage(0, gUnknown_80FEC48, 1);
         }
@@ -518,7 +515,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
 
     if (r10) {
         r8->unk1C.heldItem.id = 0;
-        if (IsLevelResetTo1(gDungeon->dungeonLocation.id)) {
+        if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
             sub_808D0D8(&r8->unk1C);
         }
         sub_8068A84(&r8->unk1C);
@@ -528,7 +525,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
     }
 
     sub_8068614();
-    if (!r6 && gDungeon->unk678 == 1) {
+    if (!r6 && gDungeon->unk644.unk34 == 1) {
         if (sub_8099394(&sp)) {
             unkStruct_203B480 *mailStr = GetMailatIndex(sp);
             if (mailStr->rescuesAllowed) {
@@ -553,9 +550,9 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         gLeaderPointer = NULL;
         gDungeon->unk0 = 0;
         if (!r6) {
-            gDungeon->unk680 = YetAnotherRandom24();
-            gDungeon->unk668 = 10;
-            InitDungeonRNG(gDungeon->unk680);
+            gDungeon->unk644.unk3C = YetAnotherRandom24();
+            gDungeon->unk644.unk24 = 10;
+            InitDungeonRNG(gDungeon->unk644.unk3C);
         }
         gDungeon->unk37EC = 0;
         if (!r6) {
@@ -565,9 +562,9 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             rnd = DungeonRandInt(4);
             gDungeon->unk37FD = 0;
             gDungeon->deoxysDefeat = FALSE;
-            gDungeon->unk3800 = gUnknown_80F6850[rnd];
+            gDungeon->deoxysForm = gUnknown_80F6850[rnd];
             gDungeon->unk37FF = 0;
-            gDungeon->unk675 = 0;
+            gDungeon->unk644.unk31 = 0;
         }
         sub_803D4D0();
         gDungeon->unk1 = 0;
@@ -588,23 +585,23 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         gDungeon->unkE = 0;
         gDungeon->unk1BDD4.unk1C05E = 0;
         if (!r6) {
-            gDungeon->unk679 = 0;
-            gDungeon->unk68C = 0;
-            gDungeon->unk690 = 0;
-            gDungeon->unk694 = 0;
-            gDungeon->fractionalTurn = 0;
-            gDungeon->unk662 = 0;
-            gDungeon->unk66E = 0;
-            gDungeon->unk66F = 0;
-            gDungeon->unk670 = 0;
-            gDungeon->itemHoldersIdentified = 0;
-            gDungeon->monsterHouseTriggered = 0;
-            gDungeon->monsterHouseTriggeredEvent = 0;
-            gDungeon->bossSongIndex = 999;
-            gDungeon->unk688 = 0;
-            gDungeon->unk68A = 0;
-            gDungeon->unk684 = 99;
-            gDungeon->unk686 = 99;
+            gDungeon->unk644.unk35 = 0;
+            gDungeon->unk644.unk48 = 0;
+            gDungeon->unk644.unk4C = 0;
+            gDungeon->unk644.unk50 = 0;
+            gDungeon->unk644.fractionalTurn = 0;
+            gDungeon->unk644.unk1E = 0;
+            gDungeon->unk644.unk2A = 0;
+            gDungeon->unk644.unk2B = 0;
+            gDungeon->unk644.unk2C = 0;
+            gDungeon->unk644.itemHoldersIdentified = 0;
+            gDungeon->unk644.monsterHouseTriggered = 0;
+            gDungeon->unk644.monsterHouseTriggeredEvent = 0;
+            gDungeon->unk644.bossSongIndex = 999;
+            gDungeon->unk644.unk44 = 0;
+            gDungeon->unk644.unk46 = 0;
+            gDungeon->unk644.unk40 = 99;
+            gDungeon->unk644.unk42 = 99;
             gDungeon->weather.weather = 0;
             gDungeon->tileset = gDungeon->unk1C574.unk2;
             gDungeon->unk3A10 = gDungeon->unk1C574.unk3;
@@ -639,8 +636,8 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
 
         if (!r6) {
             sub_804AFAC();
-            gDungeon->windTurns = GetTurnLimit(gDungeon->dungeonLocation.id);
-            gDungeon->unk67A = 0;
+            gDungeon->unk644.windTurns = GetTurnLimit(gDungeon->unk644.dungeonLocation.id);
+            gDungeon->unk644.unk36 = 0;
         }
         sub_804AAD4();
         sub_8049B8C();
@@ -663,8 +660,8 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         if (!r6) {
             sub_807FA18();
             sub_8045CB0();
-            gDungeon->unk694 = gDungeon->unk68C;
-            gDungeon->unk690 = 0;
+            gDungeon->unk644.unk50 = gDungeon->unk644.unk48;
+            gDungeon->unk644.unk4C = 0;
             sub_8051E3C();
             sub_804AAAC();
         }
@@ -686,7 +683,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
 
         if (!r6) {
             sub_80848F0();
-            sub_8097890();
+            IncrementAdventureFloorsExplored();
         }
 
         gUnknown_203B40C = 1;
@@ -706,8 +703,8 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         sub_8040150(r6);
         sub_8040A84();
         gDungeon->unkB8 = NULL;
-        gDungeon->unk66C = 0;
-        gDungeon->unk66D = 0;
+        gDungeon->unk644.unk28 = 0;
+        gDungeon->unk644.unk29 = 0;
         gDungeon->unk12 = 99;
         gDungeon->unk0 = 1;
 
@@ -757,7 +754,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         if (gDungeon->unk5 == 0) {
             bool8 param = TRUE;
 
-            gDungeon->unk654 = 0;
+            gDungeon->unk644.unk10 = 0;
             gDungeon->unk181e8.unk18218 = 0;
             gDungeon->unk181e8.unk18219 = 1;
             do {
@@ -771,12 +768,12 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             sub_8071DA4(leader);
         }
 
-        if (gDungeon->unk654 != 1) {
+        if (gDungeon->unk644.unk10 != 1) {
             if (sub_8043ED0(TRUE)) {
-                gDungeon->unk654 = 1;
+                gDungeon->unk644.unk10 = 1;
             }
         }
-        if (gDungeon->unk654 == 1 || gDungeon->unk11 != 0) {
+        if (gDungeon->unk644.unk10 == 1 || gDungeon->unk11 != 0) {
             if (gDungeon->unk6 == 0) {
                 sub_806AA70();
             }
@@ -794,7 +791,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         if (gDungeon->unk3 == 0
             && gDungeon->unk6 == 0
             && gDungeon->musPlayer.queuedSongIndex == 0x72
-            && gDungeon->dungeonLocation.id == DUNGEON_BURIED_RELIC)
+            && gDungeon->unk644.dungeonLocation.id == DUNGEON_BURIED_RELIC)
         {
             DungeonFadeOutBGM(60);
         }
@@ -824,9 +821,9 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         gUnknown_203B40C = 0;
 
         if (gDungeon->unk3 != 0) {
-            sub_8080B30(gSerializedData_203B41C, 0x4800);
+            SaveDungeonState(gSerializedData_203B41C, 0x4800);
             r8->unk7C = 3;
-            r8->unk80 = gDungeon->dungeonLocation;
+            r8->unk80 = gDungeon->unk644.dungeonLocation;
             check = FALSE;
         }
         else
@@ -834,15 +831,15 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             s16 var;
 
             if (gDungeon->unk6 != 0) {
-                sub_8080B30(gSerializedData_203B41C, 0x4800);
+                SaveDungeonState(gSerializedData_203B41C, 0x4800);
             }
             else {
                 sub_8046F84(ITEM_FLAG_IN_SHOP);
             }
             sub_806C1D8();
 
-            if (gDungeon->unk654 == 1) {
-                if (gDungeon->unk66E != 0) {
+            if (gDungeon->unk644.unk10 == 1) {
+                if (gDungeon->unk644.unk2A != 0) {
                     sub_804700C();
                 }
                 check = TRUE;
@@ -853,15 +850,15 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             }
             else if (gDungeon->unk11 == 2) {
                 sub_8083AB0(0x229, NULL, GetLeader());
-                if (gDungeon->unk66E != 0) {
-                    sub_8097810();
+                if (gDungeon->unk644.unk2A != 0) {
+                    IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else if (gDungeon->unk11 == 3) {
                 sub_8083AB0(0x22A, NULL, GetLeader());
-                if (gDungeon->unk66E != 0) {
-                    sub_8097810();
+                if (gDungeon->unk644.unk2A != 0) {
+                    IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
@@ -870,21 +867,21 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
                 sub_8083AB0(var, NULL, GetLeader());
                 check = TRUE;
             }
-            else if (gDungeon->unk678 == 1 && sub_8043D10() == 2 && gDungeon->unk654 == 2) {
+            else if (gDungeon->unk644.unk34 == 1 && sub_8043D10() == 2 && gDungeon->unk644.unk10 == 2) {
                 sub_8083AB0(0x228, NULL, GetLeader());
-                if (gDungeon->unk66E != 0) {
-                    sub_8097810();
+                if (gDungeon->unk644.unk2A != 0) {
+                    IncrementThievingSuccesses();
                 }
                 check = TRUE;
             }
             else {
-                if (gDungeon->unk66E != 0) {
-                    sub_8097810();
+                if (gDungeon->unk644.unk2A != 0) {
+                    IncrementThievingSuccesses();
                 }
-                if (gDungeon->dungeonLocation.floor + 1 < gDungeon->unk1CEC8) {
-                    gDungeon->dungeonLocation.floor++;
-                    if (gDungeon->dungeonLocation.id == DUNGEON_FROSTY_FOREST
-                        && gDungeon->dungeonLocation.floor == 6
+                if (gDungeon->unk644.dungeonLocation.floor + 1 < gDungeon->unk1CEC8) {
+                    gDungeon->unk644.dungeonLocation.floor++;
+                    if (gDungeon->unk644.dungeonLocation.id == DUNGEON_FROSTY_FOREST
+                        && gDungeon->unk644.dungeonLocation.floor == 6
                         && !sub_8098100(0x1F))
                     {
                         sub_8097FA8(0x1F);
@@ -917,7 +914,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         sub_80095CC(1, 0x14);
         sub_803E13C();
         sub_800CDA8(4);
-        if (gDungeon->unk6 == 0 && sub_8083C88(gDungeon->unk678)) {
+        if (gDungeon->unk6 == 0 && sub_8083C88(gDungeon->unk644.unk34)) {
             sub_80841EC();
         }
 
@@ -925,9 +922,9 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             if (gDungeon->unk6 != 0) {
                 r8->unk7C = -2;
                 memset(&r8->unk84, 0, sizeof(r8->unk84));
-                r8->unk80 = gDungeon->dungeonLocation;
-                r8->unk84.a0 = gDungeon->dungeonLocation;
-                r8->unk84.a4 = gDungeon->unk67C;
+                r8->unk80 = gDungeon->unk644.dungeonLocation;
+                r8->unk84.a0 = gDungeon->unk644.dungeonLocation;
+                r8->unk84.a4 = gDungeon->unk644.unk38;
 
             }
             else {
@@ -935,10 +932,10 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             }
         }
         else if (sub_8083C50()) {
-            if (gDungeon->unk678 == 1) {
+            if (gDungeon->unk644.unk34 == 1) {
                 r8->unk7C = 4;
             }
-            else if (gDungeon->unk678 == 0) {
+            else if (gDungeon->unk644.unk34 == 0) {
                 r8->unk7C = 1;
                 sub_8084424();
             }
@@ -946,7 +943,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
                 r8->unk7C = 1;
                 sub_8084424();
             }
-            r8->unk7E = gDungeon->unk674;
+            r8->unk7E = gDungeon->unk644.unk30;
         }
         else {
             r8->unk7C = 2;
@@ -994,7 +991,7 @@ bool8 sub_8043CE4(s32 dungeonId)
 
 u8 sub_8043D10(void)
 {
-    if (gDungeon->unk678 == 1 && gDungeon->unk64C.unk1 == gDungeon->dungeonLocation.floor)
+    if (gDungeon->unk644.unk34 == 1 && gDungeon->unk644.unk8.unk1 == gDungeon->unk644.dungeonLocation.floor)
         return 2;
     else if (IsBossFight())
         return 1;
@@ -1042,7 +1039,7 @@ void sub_8043D60(void)
             monInfo = GetEntInfo(mon);
             monInfo->HP = monInfo->maxHPStat;
             monInfo->belly = monInfo->maxBelly;
-            gDungeon->itemHoldersIdentified = FALSE;
+            gDungeon->unk644.itemHoldersIdentified = FALSE;
             sub_806BFC0(monInfo, 0);
             monInfo->apparentID = monInfo->id;
             monInfo->perishSongTurns = 0;
@@ -1184,7 +1181,7 @@ void EnforceMaxItemsAndMoney(void)
 {
     s32 i;
 
-    if (GetMaxItemsAllowed(gDungeon->dungeonLocation.id) == 0)
+    if (GetMaxItemsAllowed(gDungeon->unk644.dungeonLocation.id) == 0)
     {
         for (i = 0; i < INVENTORY_SIZE; i++) {
             ZeroOutItem(&gTeamInventoryRef->teamItems[i]);
@@ -1197,7 +1194,7 @@ void EnforceMaxItemsAndMoney(void)
         }
     }
 
-    if (!IsKeepMoney(gDungeon->dungeonLocation.id)) {
+    if (!IsKeepMoney(gDungeon->unk644.dungeonLocation.id)) {
         gTeamInventoryRef->teamMoney = 0;
     }
 }

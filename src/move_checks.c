@@ -266,7 +266,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_DESTINY_BOND:
-            if (pokemonInfo->linked.status == STATUS_DESTINY_BOND)
+            if (pokemonInfo->leechSeedClassStatus.status == STATUS_DESTINY_BOND)
             {
                 return FALSE;
             }
@@ -837,7 +837,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_LEECH_SEED:
-            if (targetData->linked.status == STATUS_LEECH_SEED)
+            if (targetData->leechSeedClassStatus.status == STATUS_LEECH_SEED)
             {
                 return FALSE;
             }

@@ -68,10 +68,10 @@ bool8 IsInvalidItemReward(u8 itemID);
 bool8 HasGummiItem(void);
 void GetGummiItemStatBoost(PokemonStruct1* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi);
 
-void RestoreHeldItem(unkStruct_8094924 *, BulkItem *);
-void SaveHeldItem(unkStruct_8094924 *, BulkItem *);
-void RestoreItemSlot(unkStruct_8094924 *, Item *);
-void SaveItemSlot(unkStruct_8094924 *, Item *);
+void ReadHeldItemBits(DataSerializer *, BulkItem *);
+void WriteHeldItemBits(DataSerializer *, BulkItem *);
+void ReadItemSlotBits(DataSerializer *, Item *);
+void WriteItemSlotBits(DataSerializer *, Item *);
 s32 RestoreTeamInventory(u8 *, u32 size);
 s32 SaveTeamInventory(u8 *, u32 size);
 

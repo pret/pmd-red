@@ -36,10 +36,11 @@
 #include "status_actions.h"
 #include "code_8045A00.h"
 #include "code_803E668.h"
+#include "code_803E724.h"
 #include "code_803E46C.h"
+#include "code_8041AD0.h"
 
 extern void sub_80429C8(Entity *r0);
-extern u8 sub_803F428(Position *);
 extern bool8 sub_8045888(Entity *r0);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);
@@ -74,7 +75,6 @@ extern void sub_8042930(Entity *r0);
 extern void sub_8041B48(Entity *pokemon);
 extern void sub_8041BA8(Entity *pokemon);
 extern void sub_8042950(Entity *r0);
-extern void sub_80421C0(Entity *pokemon, u16 r1);
 extern bool8 sub_8057634(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 YawnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 NightmareMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -1690,7 +1690,7 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
         bool32 isFalseSwipe = (move->id == MOVE_FALSE_SWIPE);
 
         if (HasAbility(target, ABILITY_ILLUMINATE)) {
-            gDungeon->unk662 = 999;
+            gDungeon->unk644.unk1E = 999;
             gDungeon->unk17B34 = target;
             gDungeon->unk17B40 = target->spawnGenID;
         }
