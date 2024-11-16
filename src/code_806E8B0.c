@@ -28,14 +28,14 @@ void sub_80428B0(Entity *r0);
 void sub_80428C4(Entity *r0);
 
 extern void sub_806F500(void);
-extern bool8 sub_806E100(struct unkStruct_80943A8 *param_1, Entity *pokemon, Entity *target, u8 type, struct DamageStruct *dmgStruct);
+extern bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, struct DamageStruct *dmgStruct);
 extern void sub_8041B74(Entity *pokemon);
 extern void sub_8041B5C(Entity *pokemon);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
 
 extern const s32 gUnknown_80F54B4[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
-extern const s32 gUnknown_80F504C[];
-extern const s32 gUnknown_80F50A0[];
+extern const s24_8 gUnknown_80F504C[];
+extern const s24_8 gUnknown_80F50A0[];
 extern const s16 gUnknown_810AC60;
 extern const s16 gUnknown_810AC68;
 extern const s16 gUnknown_810AC64;
@@ -44,10 +44,10 @@ extern const s16 gUnknown_810AC68;
 extern const s16 gUnknown_810AC62;
 extern const s16 gUnknown_80F4DAE;
 extern const s16 gUnknown_80F4DB0;
-extern struct unkStruct_80943A8 gUnknown_8106F24;
-extern struct unkStruct_80943A8 gUnknown_8106F04;
-extern struct unkStruct_80943A8 gUnknown_8106F1C;
-extern struct unkStruct_80943A8 gUnknown_8106F14;
+extern s48_16 gUnknown_8106F24;
+extern s48_16 gUnknown_8106F04;
+extern s48_16 gUnknown_8106F1C;
+extern s48_16 gUnknown_8106F14;
 extern const u8 *const gUnknown_80FAE00;
 extern const u8 *const gUnknown_80FADD8;
 extern const u8 *const gUnknown_80FEE04;
@@ -154,7 +154,7 @@ static inline void SetDamageOne(struct DamageStruct *dmgStruct, u8 moveType)
     dmgStruct->tookNoDamage = FALSE;
 }
 
-void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s32 critChance, struct DamageStruct *dmgStruct, s32 arg8, u16 moveId, bool8 arg_10)
+void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s32 critChance, struct DamageStruct *dmgStruct, s24_8 arg8, u16 moveId, bool8 arg_10)
 {
     EntityInfo *attackerInfo = GetEntInfo(attacker);
     EntityInfo *targetInfo = GetEntInfo(target);
@@ -169,21 +169,21 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
     }
     else {
         s32 atkStatStage, defStatStage;
-        s32 statCalc;
+        s24_8 statCalc;
         s32 atkStat, defStat;
         s32 rand;
         s32 r6;
-        struct unkStruct_80943A8 unkSp1;
-        struct unkStruct_80943A8 unkSp2;
-        struct unkStruct_80943A8 unkSp3;
-        struct unkStruct_80943A8 unkSp4;
-        struct unkStruct_80943A8 unkSp5;
-        struct unkStruct_80943A8 unkSp6;
-        struct unkStruct_80943A8 unkSp7;
-        struct unkStruct_80943A8 unkSp8;
-        struct unkStruct_80943A8 unkSp9;
-        struct unkStruct_80943A8 unkSp10;
-        struct unkStruct_80943A8 unkSp11;
+        s48_16 unkSp1;
+        s48_16 unkSp2;
+        s48_16 unkSp3;
+        s48_16 unkSp4;
+        s48_16 unkSp5;
+        s48_16 unkSp6;
+        s48_16 unkSp7;
+        s48_16 unkSp8;
+        s48_16 unkSp9;
+        s48_16 unkSp10;
+        s48_16 unkSp11;
         bool8 r5;
 
         dmgStruct->type = moveType;
@@ -210,9 +210,9 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
 
         gDungeon->unk134.unk13E[0] = atkStatStage;
         gDungeon->unk134.unk140[0] = attackerInfo->atk[splitIndex] + movePower;
-        statCalc = s24_8_mul((attackerInfo->atk[splitIndex] + movePower) * 256, gUnknown_80F504C[atkStatStage]);
+        statCalc = s24_8_mul(IntToF248(attackerInfo->atk[splitIndex] + movePower), gUnknown_80F504C[atkStatStage]);
         statCalc = s24_8_mul(statCalc, attackerInfo->offensiveMultipliers[splitIndex]);
-        atkStat = statCalc / 256;
+        atkStat = F248ToInt(statCalc);
 
         defStatStage = targetInfo->defensiveStages[splitIndex];
         if (splitIndex == 0 && targetInfo->bideClassStatus.status == STATUS_SKULL_BASH) {
@@ -234,9 +234,9 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
 
         gDungeon->unk134.unk13E[1] = defStatStage;
         gDungeon->unk134.unk140[1] = targetInfo->def[splitIndex];
-        statCalc = s24_8_mul((targetInfo->def[splitIndex]) * 256, gUnknown_80F50A0[defStatStage]);
+        statCalc = s24_8_mul(IntToF248(targetInfo->def[splitIndex]), gUnknown_80F50A0[defStatStage]);
         statCalc = s24_8_mul(statCalc, targetInfo->defensiveMultipliers[splitIndex]);
-        defStat = statCalc / 256;
+        defStat = F248ToInt(statCalc);
 
         rand = DungeonRandInt(100);
         if (splitIndex == 0) {
@@ -276,13 +276,13 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         attackerInfo->previousVisualFlags &= ~(0x100);
         attackerInfo->visualFlags &= ~(0x100);
         ApplyAtkDefStatBoosts(attacker, target, moveType, &atkStat, &defStat, rand);
-        sub_800A020(&unkSp1, atkStat - defStat);
-        sub_800A020(&unkSp2, 8);
+        FP48_16_FromS32(&unkSp1, atkStat - defStat);
+        FP48_16_FromS32(&unkSp2, 8);
         F48_16_SDiv(&unkSp1, &unkSp1, &unkSp2);
         if (!attackerInfo->isNotTeamMember) {
-            sub_800A020(&unkSp2, attackerInfo->level);
-            unkSp3.s0 = 0;
-            unkSp3.s4 = 0xAAAA;
+            FP48_16_FromS32(&unkSp2, attackerInfo->level);
+            unkSp3.hi = 0;
+            unkSp3.lo = 0xAAAA;
             F48_16_SMul(&unkSp2, &unkSp2, &unkSp3);
             r6 = (attackerInfo->level * 2) / 3;
         }
@@ -290,31 +290,31 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             s32 unkAtkStat2 = attackerInfo->atk[splitIndex];
             s32 unkDefStat2 = 1;
             ApplyAtkDefStatBoosts(attacker, target, moveType, &unkAtkStat2, &unkDefStat2, rand);
-            sub_800A020(&unkSp2, unkAtkStat2);
-            sub_800A020(&unkSp3, 3);
+            FP48_16_FromS32(&unkSp2, unkAtkStat2);
+            FP48_16_FromS32(&unkSp3, 3);
             F48_16_SDiv(&unkSp2, &unkSp2, &unkSp3);
             r6 = unkAtkStat2 / 3;
         }
-        sub_800A6D0(&unkSp4, &unkSp1, &unkSp2);
+        FP48_16_Add(&unkSp4, &unkSp1, &unkSp2);
         gDungeon->unk134.unk140[5] = r6;
-        gDungeon->unk134.unk140[6] = sub_800A048(&unkSp4);
+        gDungeon->unk134.unk140[6] = FP48_16_ToS32(&unkSp4);
         unkSp5 = unkSp4;
         unkSp7 = unkSp4;
         F48_16_SMul(&unkSp5, &unkSp5, &unkSp5);
-        unkSp6.s0 = 0;
-        unkSp6.s4 = 0xCCC;
+        unkSp6.hi = 0;
+        unkSp6.lo = 0xCCC;
         F48_16_SMul(&unkSp5, &unkSp5, &unkSp6);
-        sub_800A020(&unkSp6, 2);
+        FP48_16_FromS32(&unkSp6, 2);
         F48_16_SMul(&unkSp7, &unkSp7, &unkSp6);
-        sub_800A020(&unkSp6, defStat);
-        sub_800A6F0(&unkSp7, &unkSp7, &unkSp6);
-        sub_800A020(&unkSp6, 10);
-        sub_800A6D0(&unkSp7, &unkSp7, &unkSp6);
-        sub_800A6D0(&unkSp8, &unkSp5, &unkSp7);
-        if (sub_800A2F0(&gUnknown_8106F24, &unkSp8)) {
+        FP48_16_FromS32(&unkSp6, defStat);
+        FP48_16_Subtract(&unkSp7, &unkSp7, &unkSp6);
+        FP48_16_FromS32(&unkSp6, 10);
+        FP48_16_Add(&unkSp7, &unkSp7, &unkSp6);
+        FP48_16_Add(&unkSp8, &unkSp5, &unkSp7);
+        if (FP48_16_SLessThan(&gUnknown_8106F24, &unkSp8)) {
             unkSp8 = gUnknown_8106F24;
         }
-        if (sub_800A2F0(&unkSp8, &gUnknown_8106F04)) {
+        if (FP48_16_SLessThan(&unkSp8, &gUnknown_8106F04)) {
             unkSp8 = gUnknown_8106F04;
         }
         r5 = sub_806E100(&unkSp9, attacker, target, moveType, dmgStruct);
@@ -380,37 +380,36 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             }
         }
 
-        gDungeon->unk134.unk154 = sub_800A048(&unkSp8);
+        gDungeon->unk134.unk154 = FP48_16_ToS32(&unkSp8);
         F48_16_SMul(&unkSp8, &unkSp8, &unkSp9);
         {
             // Ugly hack needed to match
             #ifdef NONMATCHING
-            s32 arg8_Match;
+            s24_8 arg8_Match;
             #else
-            register s32 arg8_Match asm("r2");
+            register s24_8 arg8_Match asm("r2");
             #endif // NONMATCHING
 
             gDungeon->unk134.unk15C = arg8_Match = arg8;
-            ASM_MATCH_TRICK(arg8);
-            sub_800A088(&unkSp10, arg8_Match);
+            FP48_16_FromF248(&unkSp10, arg8_Match);
             F48_16_SMul(&unkSp8, &unkSp8, &unkSp10);
         }
 
         // ALSO needed to match. unk694 chosen randomly and it worked with matching.
         ASM_MATCH_TRICK(gDungeon->unk644.unk50);
-        gDungeon->unk134.unk150 = sub_800A048(&unkSp8);
+        gDungeon->unk134.unk150 = FP48_16_ToS32(&unkSp8);
         {
             s32 rnd = DungeonRandInt(0x4000);
-            unkSp9.s0 = 0;
-            unkSp9.s4 = 0xE000 + rnd;
+            unkSp9.hi = 0;
+            unkSp9.lo = 0xE000 + rnd;
         }
         F48_16_SMul(&unkSp8, &unkSp8, &unkSp9);
-        sub_800A020(&unkSp11, 100);
+        FP48_16_FromS32(&unkSp11, 100);
 
         F48_16_SMul(&unkSp9, &unkSp11, &unkSp9);
-        gDungeon->unk134.unk158 = sub_800A048(&unkSp9);
+        gDungeon->unk134.unk158 = FP48_16_ToS32(&unkSp9);
 
-        dmgStruct->dmg = sub_800A048(&unkSp8);
+        dmgStruct->dmg = FP48_16_ToS32(&unkSp8);
         dmgStruct->residualDmgType = 0;
         if (dmgStruct->dmg == 0) {
             dmgStruct->isCrit = FALSE;
@@ -420,8 +419,8 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
 
 void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct DamageStruct *dmgStruct)
 {
-    struct unkStruct_80943A8 unkSp1;
-    struct unkStruct_80943A8 unkSp2;
+    s48_16 unkSp1;
+    s48_16 unkSp2;
     s32 a2New = a2;
 
     if (a2New <= 0) a2New = 1;
@@ -429,9 +428,9 @@ void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct D
 
     dmgStruct->type = moveType;
     sub_806E100(&unkSp1, attacker, target, moveType, dmgStruct);
-    sub_800A020(&unkSp2, a2New);
+    FP48_16_FromS32(&unkSp2, a2New);
     F48_16_SMul(&unkSp2, &unkSp2, &unkSp1);
-    dmgStruct->dmg = sub_800A048(&unkSp2);
+    dmgStruct->dmg = FP48_16_ToS32(&unkSp2);
     dmgStruct->residualDmgType = 0;
 }
 

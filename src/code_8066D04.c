@@ -28,12 +28,12 @@ extern u8 *gUnknown_80F8E28[];
 
 extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8045BF8(u8 *, Item *);
-u8 sub_80460F8(Position *, Item *, u32);
+u8 sub_80460F8(DungeonPos *, Item *, u32);
 extern void sub_807AB38(Entity *, u32);
 extern Entity * sub_8044DA4(Entity *param_1,int param_2);
 extern void sub_806A6E8(Entity *);
 extern void sub_8044DF0(Entity *, u32, u32);
-extern void sub_8045DB4(Position *, u32);
+extern void sub_8045DB4(DungeonPos *, u32);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {
@@ -282,7 +282,7 @@ void HandleUseItemAction(Entity *param_1)
 void HandlePlaceItemAction(Entity *param_1)
 {
     Item *item;
-    Tile *tile;
+    const Tile *tile;
     EntityInfo *info;
 #ifndef NONMATCHING
     register Entity *entity asm("r4");

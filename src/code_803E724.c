@@ -899,7 +899,7 @@ void sub_803F38C(void)
     nullsub_5(0xFF, &gFontPalette[palId].pal[15]);
 }
 
-bool8 sub_803F428(Position *pos)
+bool8 sub_803F428(DungeonPos *pos)
 {
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
     Entity *cameraEntity = strPtr->cameraTarget;
@@ -1081,7 +1081,7 @@ void sub_803F580(u8 a0)
 void sub_803F7BC(void)
 {
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
-    Tile *tile = GetTile(strPtr->cameraPos.x, strPtr->cameraPos.y);
+    const Tile *tile = GetTile(strPtr->cameraPos.x, strPtr->cameraPos.y);
     u32 roomId = tile->room;
 
     if (strPtr->unk1820B != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {

@@ -18,7 +18,7 @@ extern struct unkStruct_8090F58 gUnknown_80F6990;
 
 void sub_8045BF8(u8 *, Item *);
 extern u32 sub_803D73C(u32);
-void sub_80460F8(Position *, Item *, u32);
+void sub_80460F8(DungeonPos *, Item *, u32);
 
 void sub_8045ACC(void)
 {
@@ -131,11 +131,11 @@ void sub_8045CB0(void)
   u32 x;
   int y;
   int yCounter;
-  struct Tile *tile;
+  const Tile *tile;
   u32 uVar5;
   int xCounter;
   Item item;
-  Position pos;
+  DungeonPos pos;
   u32 flag;
 
   x = DungeonRandInt(DUNGEON_MAX_SIZE_X);

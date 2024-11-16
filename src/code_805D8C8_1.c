@@ -68,8 +68,9 @@ extern void sub_8083D30(void);
 extern void sub_8083D08(void);
 extern void sub_806A6E8(Entity *);
 extern bool8 sub_8047084(s32 itemFlag);
-extern void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4);
-extern void sub_8045DB4(Position *, u32);
+extern void sub_807FE9C(Entity *pokemon, DungeonPos *pos, int param_3,
+			char param_4);
+extern void sub_8045DB4(DungeonPos *, u32);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
@@ -116,7 +117,7 @@ void sub_8063A70(ActionContainer *a0, bool8 a1);
 void sub_8063CF0(ActionContainer *a0, bool8 a1);
 void sub_8067768(UNUSED ActionContainer *a0);
 void ShowTacticsMenu(ActionContainer *a0);
-void sub_804A728(Position *pos, s32 a1, u8 a2, u8 a3);
+void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_80643AC(Entity *pokemon);
 extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
@@ -1346,7 +1347,7 @@ NAKED static void TryCreateModeArrows(Entity *leader)
 
 void sub_805E738(Entity *a0)
 {
-    Tile *tile;
+    const Tile *tile;
     s32 i, j;
     EntityInfo *entityInfo = GetEntInfo(a0);
     if (entityInfo->blinkerClassStatus.status != 1 && entityInfo->blinkerClassStatus.status != 2) {
@@ -1400,7 +1401,7 @@ bool8 sub_805E874(void)
     s32 direction = GetEntInfo(leader)->action.direction;
     s32 x = leader->pos.x;
     s32 y = leader->pos.y;
-    Tile *leaderTile = GetTile(x, y);
+    const Tile *leaderTile = GetTile(x, y);
     s32 xAdjacent = x + gAdjacentTileOffsets[direction].x;
     s32 yAdjacent = y + gAdjacentTileOffsets[direction].y;
     s32 room;
@@ -1425,7 +1426,7 @@ bool8 sub_805E874(void)
     }
 
     for (j = -1; j < 2; j++) {
-        Tile *tile = GetTile(x + gAdjacentTileOffsets[(direction + j) & 7].x, y + gAdjacentTileOffsets[(direction + j) & 7].y);
+        const Tile *tile = GetTile(x + gAdjacentTileOffsets[(direction + j) & 7].x, y + gAdjacentTileOffsets[(direction + j) & 7].y);
         if (tile->monster != NULL)
             return FALSE;
         if (tile->terrainType & TERRAIN_TYPE_STAIRS)
@@ -1442,7 +1443,7 @@ bool8 sub_805E874(void)
 
     for (i = -1; i < 2; i++) {
         for (j = -1; j < 2; j++) {
-            Tile *tile = GetTile(x + i, y + j);
+            const Tile *tile = GetTile(x + i, y + j);
             if (tile->object != NULL) {
                 for (k = 0; k < 3; k++) {
                     if (x + i == xArray[k] && y + j == yArray[k])
@@ -1520,14 +1521,14 @@ bool8 sub_805E874(void)
 
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y)
 {
-    Position pos = {.x = x, .y = y};
+    DungeonPos pos = {.x = x, .y = y};
     return sub_8070564(a0, &pos);
 }
 
 bool8 sub_805EC4C(Entity *a0, u8 a1)
 {
-    Position pos;
-    Tile *tile;
+    DungeonPos pos;
+    const Tile *tile;
     EntityInfo *tileMonsterInfo;
     Entity *tileMonster;
     EntityInfo *entityInfo = GetEntInfo(a0);
@@ -2053,7 +2054,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
         }
         else if (var_28 == 4) {
             Entity *leader = GetLeader();
-            Tile *tile = GetTile(leader->pos.x, leader->pos.y);
+            const Tile *tile = GetTile(leader->pos.x, leader->pos.y);
             Entity *tileObject = tile->object;
             if (tileObject != NULL) {
                 if (GetEntityType(tileObject) == ENTITY_ITEM) {
@@ -2378,7 +2379,7 @@ bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0)
 
 s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
 
-void sub_8060890(Position *a0);
+void sub_8060890(DungeonPos *a0);
 bool8 sub_8060860(s32 a0);
 void sub_8060900(Entity *a0);
 s32 sub_8060800(UnkTextStruct2_sub2 *a0, s32 a1);
@@ -2756,7 +2757,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextS
         }
         break;
     case 2: {
-            Tile *tile = GetTile(a1->pos.x, a1->pos.y);
+            const Tile *tile = GetTile(a1->pos.x, a1->pos.y);
             Item *item = GetItemData(tile->object);
             PrintFormattedStringOnWindow(x, 0, gFieldItemMenuGroundTextPtr, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
@@ -2849,7 +2850,7 @@ bool8 sub_8060860(s32 a0)
         return TRUE;
 }
 
-void sub_8060890(Position *a0)
+void sub_8060890(DungeonPos *a0)
 {
     s32 var = sUnknown_202F248[gUnknown_202EE10.unk1E];
     switch (var)
@@ -3088,7 +3089,7 @@ void sub_8060D24(UNUSED ActionContainer *a0)
     sub_803EAF0(0, NULL);
 }
 
-extern bool8 PosHasItem(Position *pos);
+extern bool8 PosHasItem(DungeonPos *pos);
 
 s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
 {
@@ -3281,7 +3282,7 @@ bool8 sub_8060E38(Entity *a0)
     return ret;
 }
 
-bool32 sub_8069D18(Position *a0, Entity *a1);
+bool32 sub_8069D18(DungeonPos *a0, Entity *a1);
 
 extern const u8 gTeamFormat[];
 extern const u8 gHeartRedTiny[];
@@ -3302,7 +3303,7 @@ extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
 void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bool8 a2)
 {
     s32 r0;
-    Position pos;
+    DungeonPos pos;
     s32 i;
 
     s32 count = 0;

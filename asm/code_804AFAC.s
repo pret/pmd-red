@@ -679,7 +679,7 @@ _0804B55A:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0xC]
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrh r0, [r2]
 	ldr r6, _0804B630
@@ -1196,7 +1196,7 @@ _0804B962:
 	ldr r2, _0804B9F0
 	add r2, sp
 	str r3, [r2]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -1205,7 +1205,7 @@ _0804B962:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldr r1, _0804B9D0
 	add r1, sp
 	ldrb r1, [r1]
@@ -1294,7 +1294,7 @@ _0804B9F4:
 	strh r0, [r7, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r3, _0804BBF8
 	adds r2, r3, 0
@@ -1304,7 +1304,7 @@ _0804B9F4:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 _0804BA72:
@@ -1805,7 +1805,7 @@ _0804BE84:
 	ldr r2, _0804BEFC
 	add r2, sp
 	str r3, [r2]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	mov r2, r8
 	ands r1, r2
@@ -1814,7 +1814,7 @@ _0804BE84:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldr r1, _0804BEE0
 	add r1, sp
 	ldrb r1, [r1]
@@ -1902,7 +1902,7 @@ _0804BF00:
 	strh r0, [r7, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r6, _0804C090
 	adds r2, r6, 0
@@ -1912,7 +1912,7 @@ _0804BF00:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 _0804BF88:
@@ -2563,7 +2563,7 @@ _0804C4C2:
 _0804C4CE:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ands r1, r7
 	movs r2, 0x1
@@ -3164,7 +3164,7 @@ _0804C95C:
 _0804C972:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	mov r2, r8
 	ands r1, r2
@@ -3173,7 +3173,7 @@ _0804C972:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	mov r1, r9
 	strb r1, [r0, 0x9]
 	adds r4, 0x1
@@ -3373,7 +3373,7 @@ _0804CB0C:
 	lsls r2, 5
 	add r2, sp
 	str r3, [r2]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	mov r2, r8
 	ands r1, r2
@@ -3382,7 +3382,7 @@ _0804CB0C:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0xE5
 	lsls r1, 5
 	add r1, sp
@@ -3871,7 +3871,7 @@ _0804CEFA:
 	beq _0804CF16
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r3, _0804D018
 	adds r2, r3, 0
@@ -4544,7 +4544,7 @@ _0804D3E0:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	str r3, [sp, 0x34]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -4553,7 +4553,7 @@ _0804D3E0:
 	strh r1, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	mov r1, sp
 	ldrb r1, [r1, 0x10]
 	strb r1, [r0, 0x9]
@@ -4680,7 +4680,7 @@ _0804D4BA:
 	strh r0, [r7, 0x6]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r3, _0804D530
 	adds r2, r3, 0
@@ -4690,7 +4690,7 @@ _0804D4BA:
 	strh r1, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0xFE
 	strb r1, [r0, 0x9]
 _0804D508:
@@ -5815,7 +5815,7 @@ _0804DCF0:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r3, [sp, 0x54]
 	ands r1, r3
@@ -5945,7 +5945,7 @@ _0804DDE0:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r3, [sp, 0x54]
 	ands r1, r3
@@ -6076,7 +6076,7 @@ _0804DED0:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r3, [sp, 0x54]
 	ands r1, r3
@@ -6195,7 +6195,7 @@ _0804DFB6:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x54]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	mov r2, r9
 	ands r1, r2
@@ -6617,7 +6617,7 @@ _0804E2AA:
 	bne _0804E2F0
 	adds r0, r7, 0
 	mov r1, r8
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	ldr r4, _0804E2CC
 	adds r1, r4, 0
@@ -6723,7 +6723,7 @@ _0804E360:
 	beq _0804E390
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	ldr r3, _0804E38C
 	adds r1, r3, 0
@@ -6773,7 +6773,7 @@ _0804E3BC:
 	beq _0804E3EC
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	ldr r3, _0804E3E8
 	adds r1, r3, 0
@@ -6829,7 +6829,7 @@ _0804E420:
 	beq _0804E450
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	ldr r3, _0804E44C
 	adds r1, r3, 0
@@ -6883,7 +6883,7 @@ _0804E482:
 	beq _0804E4B0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	ldr r3, _0804E4AC
 	adds r1, r3, 0
@@ -6930,7 +6930,7 @@ _0804E4D0:
 	beq _0804E508
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	ldr r3, _0804E504
 	adds r1, r3, 0
@@ -6979,7 +6979,7 @@ _0804E52C:
 	beq _0804E564
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	ldr r3, _0804E560
 	adds r1, r3, 0
@@ -7379,7 +7379,7 @@ _0804E848:
 	ldrsh r0, [r6, r1]
 	movs r2, 0x2
 	ldrsh r1, [r6, r2]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r3, _0804E99C
 	adds r2, r3, 0
@@ -7494,7 +7494,7 @@ _0804E908:
 _0804E926:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	ldr r3, _0804E99C
 	adds r1, r3, 0
@@ -7628,7 +7628,7 @@ _0804EA0E:
 	ble _0804EA4E
 	subs r0, r5, 0x1
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -7653,7 +7653,7 @@ _0804EA4E:
 	ble _0804EA82
 	subs r1, r4, 0x1
 	adds r0, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -7680,7 +7680,7 @@ _0804EA82:
 	bgt _0804EABA
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -7707,7 +7707,7 @@ _0804EABA:
 	bgt _0804EB0E
 	mov r0, r10
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0xFF
@@ -7740,7 +7740,7 @@ _0804EAF4:
 	bne _0804EB0E
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0xFF
 	strb r1, [r0, 0x9]
 _0804EB0E:
@@ -8099,7 +8099,7 @@ _0804ED98:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	str r3, [sp, 0x50]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	movs r1, 0x20
 	orrs r1, r2
@@ -8185,7 +8185,7 @@ _0804EE18:
 _0804EE38:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x10
 	orrs r1, r2
@@ -8466,7 +8466,7 @@ _0804F046:
 _0804F05A:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	movs r1, 0x40
 	orrs r1, r2
@@ -8971,7 +8971,7 @@ _0804F40A:
 	beq _0804F438
 	subs r0, r6, 0x1
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ands r1, r7
 	movs r2, 0x2
@@ -8982,7 +8982,7 @@ _0804F434: .4byte 0x0000fffc
 _0804F438:
 	subs r0, r6, 0x1
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ands r1, r7
 _0804F444:
@@ -9057,7 +9057,7 @@ _0804F4BA:
 	movs r7, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -9140,7 +9140,7 @@ _0804F550:
 _0804F55A:
 	adds r0, r5, 0x1
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -9150,7 +9150,7 @@ _0804F55A:
 _0804F570:
 	subs r1, r4, 0x1
 	adds r0, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -9160,7 +9160,7 @@ _0804F570:
 _0804F586:
 	subs r0, r5, 0x1
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -9170,7 +9170,7 @@ _0804F586:
 _0804F59C:
 	adds r1, r4, 0x1
 	adds r0, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	mov r1, r9
 	mov r3, r8
 	lsrs r2, r3, 24
@@ -9220,7 +9220,7 @@ _0804F5E2:
 _0804F5F0:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x20
 	orrs r1, r2
@@ -9400,7 +9400,7 @@ _0804F730:
 _0804F73C:
 	mov r0, r8
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0
 	bl sub_804F5C4
 	adds r4, 0x1
@@ -9425,7 +9425,7 @@ _0804F75E:
 _0804F76C:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	movs r1, 0x80
 	orrs r1, r2
@@ -9482,7 +9482,7 @@ _0804F7C8:
 _0804F7D4:
 	adds r0, r4, 0
 	mov r1, r8
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0
 	bl sub_804F5C4
 	adds r4, 0x1
@@ -9507,7 +9507,7 @@ _0804F7F6:
 _0804F804:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	movs r1, 0x80
 	orrs r1, r2
@@ -9568,7 +9568,7 @@ _0804F864:
 	mov r10, r0
 	adds r0, r5, 0
 	mov r1, r10
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r1, [sp]
@@ -9576,12 +9576,12 @@ _0804F864:
 	mov r9, r1
 	mov r0, r9
 	mov r1, r10
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r0, [sp]
 	mov r1, r10
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r2, [sp]
@@ -9589,118 +9589,118 @@ _0804F864:
 	mov r8, r2
 	mov r0, r8
 	mov r1, r10
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r6, [sp, 0x4]
 	subs r6, 0x1
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	adds r0, r5, 0
 	ldr r1, [sp, 0x4]
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r4, [sp, 0x4]
 	adds r4, 0x1
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r9
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	ldr r0, [sp]
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	mov r1, r10
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	ldr r1, [sp, 0x4]
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r8
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0x4
 	bl sub_804F5C4
 	mov r0, r9
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0, 0x4]
 	movs r1, 0x4
 	orrs r1, r2
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0, 0x4]
 	movs r2, 0x40
 	orrs r1, r2
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0, 0x4]
 	movs r4, 0x2
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	ldr r1, [sp, 0x4]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0, 0x4]
 	movs r4, 0x10
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	mov r0, r9
 	ldr r1, [sp, 0x4]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0, 0x4]
 	orrs r1, r4
 	strh r1, [r0, 0x4]
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0, 0x4]
 	orrs r4, r1
 	strh r4, [r0, 0x4]
@@ -9789,7 +9789,7 @@ _0804FA6C:
 _0804FA76:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0
 	bl sub_804F5C4
 	adds r4, 0x1
@@ -9861,7 +9861,7 @@ _0804FAD4:
 	movs r4, 0x2
 	ldrsh r1, [r7, r4]
 	adds r1, r2
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0
 	bl sub_804F5C4
 _0804FB14:
@@ -9917,28 +9917,28 @@ _0804FB54:
 	ble _0804FBAE
 	adds r0, r5, 0x1
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0
 	bl sub_804F5C4
 	adds r1, r4, 0x1
 	adds r0, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0
 	bl sub_804F5C4
 	subs r0, r5, 0x1
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0
 	bl sub_804F5C4
 	subs r1, r4, 0x1
 	adds r0, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0
 	bl sub_804F5C4
 _0804FBAE:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	movs r1, 0
 	bl sub_804F5C4
 	b _0804FBD2

@@ -86,7 +86,7 @@ _0807ABC6:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	str r2, [sp, 0x1A4]
-	bl GetTileSafe
+	bl GetTileMut
 	adds r1, r0, 0
 	ldr r0, [r1, 0x10]
 	ldr r2, [sp, 0x1A4]
@@ -176,7 +176,7 @@ _0807AC72:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	str r2, [sp, 0x1A4]
-	bl GetTileSafe
+	bl GetTileMut
 	adds r1, r0, 0
 	ldr r0, [r1, 0x10]
 	ldr r2, [sp, 0x1A4]

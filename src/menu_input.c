@@ -66,7 +66,7 @@ const s32 gUnknown_80D4830[9] = {
 extern s16 sub_8009614(u32, u32);
 
 static void sub_8013134(MenuInputStruct *, u32, u32);
-static void sub_801332C(Position *a0);
+static void sub_801332C(DungeonPos *a0);
 static void sub_8013470(MenuInputStruct *);
 static bool8 sub_8013DD0(unkStructFor8013AA0 *);
 
@@ -716,8 +716,8 @@ void nullsub_34(MenuInputStructSub *a0, s32 a1)
 {
 }
 
-// Maybe Position
-static void sub_801332C(Position *a0)
+// Maybe DungeonPos
+static void sub_801332C(DungeonPos *a0)
 {
     SpriteOAM sp = {};
     SpriteOAM* ptr;

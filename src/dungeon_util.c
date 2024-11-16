@@ -15,7 +15,7 @@ void sub_806C51C(Entity *entity);
 extern void sub_80462AC(Entity * ,u32, u32, u32, u32);
 extern void sub_807FA9C();
 
-const Position gAdjacentTileOffsets[] = {
+const DungeonPos gAdjacentTileOffsets[] = {
     {0, 1},
     {1, 1},
     {1, 0},
@@ -65,14 +65,14 @@ Item* GetItemData_1(Entity *entity)
     return entity->axObj.info.item;
 }
 
-Tile *GetTileAtEntity(Entity *entity)
+const Tile *GetTileAtEntity(Entity *entity)
 {
     return GetTile(entity->pos.x, entity->pos.y);
 }
 
 Tile *GetTileAtEntitySafe(Entity *entity)
 {
-    return GetTileSafe(entity->pos.x, entity->pos.y);
+    return GetTileMut(entity->pos.x, entity->pos.y);
 }
 
 void sub_804513C(void)
@@ -177,7 +177,7 @@ void sub_804522C(void) {
     }
 }
 
-void sub_804535C(Entity *entity, Position32 *pos)
+void sub_804535C(Entity *entity, PixelPos *pos)
 {
 
   if (pos != NULL) {

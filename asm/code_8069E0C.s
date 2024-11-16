@@ -102,7 +102,7 @@ _0806A488:
 	movs r2, 0x6
 	ldrsh r1, [r6, r2]
 	adds r1, r7
-	bl GetTileSafe
+	bl GetTileMut
 	adds r4, r0, 0
 	ldr r0, [r4, 0x10]
 	cmp r0, 0

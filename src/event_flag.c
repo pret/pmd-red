@@ -177,49 +177,54 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
   }
 }
 
-bool8 ScriptVarScenarioBefore(s16 param_1,u32 param_2,s32 param_3)
+bool8 ScriptVarScenarioBefore(s16 varId,u32 pMain,s32 pSub)
 {
-  s32 uVar1;
-  s32 iVar2;
-  
-  uVar1 = GetScriptVarArrayValue(NULL,param_1,0);
-  iVar2 = GetScriptVarArrayValue(NULL,param_1,1);
-  if ((uVar1 != 0x3a) &&
-     (uVar1 < param_2 || (param_3 >= 0 && (uVar1 == param_2) && (iVar2 < param_3)))) {
+  s32 sMain;
+  s32 sSub;
+
+  sMain = GetScriptVarArrayValue(NULL, varId, 0);
+  sSub = GetScriptVarArrayValue(NULL, varId, 1);
+  if (sMain == 0x3a) {
+    // DS: Assert(FALSE, "debug mode scenario comp %3d %3d %3d", varId, pMain, pSub)
+    return FALSE;
+  } else if (sMain < pMain) {
     return TRUE;
-  }
-  else {
+  } else if (pSub >= 0 && sMain == pMain && sSub < pSub) {
+    return TRUE;
+  } else {
     return FALSE;
   }
 }
 
-bool8 ScriptVarScenarioEqual(s16 param_1,u32 param_2,s32 param_3)
+bool8 ScriptVarScenarioEqual(s16 varId,u32 pMain,s32 pSub)
 {
-  s32 uVar1;
-  s32 iVar2;
-  
-  uVar1 = GetScriptVarArrayValue(NULL, param_1, 0);
-  iVar2 = GetScriptVarArrayValue(NULL, param_1, 1);
-  if (((uVar1 == param_2 && (((param_3 < 0) || (iVar2 == param_3)))))) {
-    return TRUE;
+  s32 sMain;
+  s32 sSub;
+
+  sMain = GetScriptVarArrayValue(NULL, varId, 0);
+  sSub = GetScriptVarArrayValue(NULL, varId, 1);
+  if (sMain == pMain) {
+    if (pSub < 0) return TRUE;
+    if (sSub == pSub) return TRUE;
   }
-  else {
-    return FALSE;
-  }
+  return FALSE;
 }
 
-bool8 ScriptVarScenarioAfter(s16 param_1,u32 param_2,s32 param_3)
+bool8 ScriptVarScenarioAfter(s16 varId,u32 pMain,s32 pSub)
 {
-  s32 uVar1;
-  s32 iVar2;
-  
-  uVar1 = GetScriptVarArrayValue(NULL, param_1, 0);
-  iVar2 = GetScriptVarArrayValue(NULL, param_1, 1);
-  if ((uVar1 != 0x3a) &&
-     ((uVar1 > param_2 || (((param_3 >= 0 && (uVar1 == param_2)) && (iVar2 > param_3)))))) {
+  s32 sMain;
+  s32 sSub;
+
+  sMain = GetScriptVarArrayValue(NULL, varId, 0);
+  sSub = GetScriptVarArrayValue(NULL, varId, 1);
+  if (sMain == 0x3a) {
+    // DS: Assert(FALSE, "debug mode scenario comp %3d %3d %3d", varId, pMain, pSub)
+    return FALSE;
+  } else if (sMain > pMain) {
     return TRUE;
-  }
-  else {
+  } else if (pSub >= 0 && sMain == pMain && sSub > pSub) {
+    return TRUE;
+  } else {
     return FALSE;
   }
 }

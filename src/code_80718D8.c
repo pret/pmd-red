@@ -23,7 +23,7 @@ struct unkStruct_806B7F8
     u32 unk4;
     u16 level;
     u8 fillA[2];
-    struct Position pos;
+    DungeonPos pos;
     u8 unk10;
 };
 
@@ -65,12 +65,12 @@ extern void sub_8042920(struct Entity *r0);
 extern s16 sub_803D970(u32);
 extern s32 sub_803DA20(s32 param_1);
 extern bool8 sub_806AA0C(s32, u32);
-extern bool8 sub_8083660(struct Position *param_1);
+extern bool8 sub_8083660(DungeonPos *param_1);
 void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level); // TODO: change to s32
 
 void sub_8071B48(void)
 {
-  struct Tile *tile;
+  const Tile *tile;
   struct Entity *entity2;
   struct Entity *entity;
   int index;

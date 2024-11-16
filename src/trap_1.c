@@ -8,13 +8,13 @@
 
 // TODO: Merge this file with trap.c after "HandlePokemonTrap" is in c
 
-extern void sub_804687C(Entity *, Position *, Position *, Item *, u32);
+extern void sub_804687C(Entity *, DungeonPos *, DungeonPos *, Item *, u32);
 
 void HandleTripTrap(Entity *pokemon, Entity *target)
 {
     u32 direction;
     EntityInfo *info;
-    Position pos;
+    DungeonPos pos;
     Item item;
 
     if (target != NULL) {

@@ -30,6 +30,7 @@
 #include "position_util.h"
 #include "exclusive_pokemon.h"
 #include "trap.h"
+#include "math.h"
 
 extern u32 gDungeonBrightness;
 
@@ -386,16 +387,16 @@ extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80464C8(Entity *, Position *, Item *);
+extern void sub_80464C8(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
-extern u32 sub_8085EC8(u32, u32, u32, Position *, u32);
+extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_807EAA0(u32, u32);
 extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
 extern void sub_8085374(void);
 extern void sub_8045C28(Item *, u8 , u8 *);
-extern void sub_8046860(Entity *, Position *, Item *, u32);
+extern void sub_8046860(Entity *, DungeonPos *, Item *, u32);
 extern u32 sub_803D73C(u32);
-extern void sub_80460F8(Position *, Item *, u8);
+extern void sub_80460F8(DungeonPos *, Item *, u8);
 extern u8 sub_8044B28(void);
 extern bool8 sub_8085B80(struct_8085B80 *);
 
@@ -452,7 +453,7 @@ void MoltresScreenFlash2(s32 r0, s32 r1);
 void MoltresScreenFlash3(void);
 void MoltresScreenDarken(void);
 void EnableJirachiWishWarpTile(void);
-void sub_808BB3C(Position *pos);
+void sub_808BB3C(DungeonPos *pos);
 void sub_8087144();
 void SkarmoryEntry(Entity *);
 
@@ -560,8 +561,8 @@ void SkarmoryPreFightDialogue(void)
   Entity * diglettEntity;
   Entity * skarmoryEntity;
 
-  Position32 pos1;
-  Position32 pos2;
+  PixelPos pos1;
+  PixelPos pos2;
 
   leaderEntity = xxx_call_GetLeader(); // Player
   partnerEntity = GetPartnerEntity(); // Partner
@@ -617,7 +618,7 @@ void SkarmoryReFightDialogue(void)
 {
   Entity * leaderEntity;
   Entity * skarmoryEntity;
-  Position32 pos;
+  PixelPos pos;
 
   leaderEntity = xxx_call_GetLeader();
   skarmoryEntity = GetEntityFromMonsterBehavior(BEHAVIOR_SKARMORY);
@@ -1013,11 +1014,11 @@ void ZapdosDropInEffect(Entity *zapdosEntity)
 
   GetEntInfo(zapdosEntity)->unk15C = 1;
   GetEntInfo(zapdosEntity)->unk15E = 0;
-  GetEntInfo(zapdosEntity)->unk174 = 200;
+  GetEntInfo(zapdosEntity)->unk174.raw = 200; // incorrect value? Overwritten immediately anyway
   PlaySoundEffect(0x1ea);
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    GetEntInfo(zapdosEntity)->unk174 = iVar1 * 256;
+    GetEntInfo(zapdosEntity)->unk174 = IntToF248_2(iVar1);
     sub_803E46C(0x46);
   }
   sub_803E708(0x1e,0x46);
@@ -1262,11 +1263,11 @@ void MoltresDropInEffect(Entity * moltresEntity)
 
   GetEntInfo(moltresEntity)->unk15C = 1;
   GetEntInfo(moltresEntity)->unk15E = 0;
-  GetEntInfo(moltresEntity)->unk174 = 0xc800;
+  GetEntInfo(moltresEntity)->unk174 = IntToF248_2(200);
   PlaySoundEffect(0x1f8);
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
-    GetEntInfo(moltresEntity)->unk174 = iVar1 * 256;
+    GetEntInfo(moltresEntity)->unk174 = IntToF248_2(iVar1);
     sub_803E46C(0x46);
   }
 }
@@ -1668,7 +1669,7 @@ void sub_8088484(Entity *param_1)
   PlaySoundEffect(0x1ea);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 5)
   {
-    GetEntInfo(param_1)->unk174 = iVar1 * 256;
+    GetEntInfo(param_1)->unk174 = IntToF248_2(iVar1);
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,0);
     sub_803E46C(0x46);
   }
@@ -2122,7 +2123,7 @@ void MagmaCavernMidDialogue(void)
   Entity * groudonEntity;
   Entity * alakazamEntity;
   s16 IDStack [2];
-  Position32 pos;
+  PixelPos pos;
 
   leaderEntity = xxx_call_GetLeader();
   partnerEntity = GetPartnerEntity();
@@ -2477,24 +2478,24 @@ void RayquazaPostStoryPreFightDialogue(void)
 
 void RayquazaDropInEffect(Entity *rayquazaEntity)
 {
-  s32 iVar1;
-  s32 iVar2;
+  s24_8 iVar1;
+  s24_8 iVar2;
 
   GetEntInfo(rayquazaEntity)->unk15E = 0;
-  iVar2 = 51200;
-  iVar1 = 0x600;
+  iVar2 = IntToF248_2(200);
+  iVar1 = IntToF248_2(6);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2 = iVar2 - iVar1;
-    iVar1 -= 0x18;
-    if (iVar1 < 0x14) {
-      iVar1 = 0x14;
+    iVar2.raw = iVar2.raw - iVar1.raw; // must be .raw
+    iVar1 = F248_Sub(iVar1, FloatToF248_2(3./32.));
+    if (F248LessThanFloat(iVar1, 0.08)) {
+      iVar1 = FloatToF248(0.08);
     }
-    if (iVar2 < 0) break;
+    if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(rayquazaEntity)->unk174 = iVar2;
     sub_803E46C(0x46);
   }
-  GetEntInfo(rayquazaEntity)->unk174 = 0;
+  GetEntInfo(rayquazaEntity)->unk174 = IntToF248_2(0);
 }
 
 void RayquazaScreenFlash(void)
@@ -2750,24 +2751,24 @@ void MewtwoReFightDialogue(void)
 
 void MewtwoDropInEffect(Entity *mewtwoEntity)
 {
-  s32 iVar1;
-  s32 iVar2;
+  s24_8 iVar1;
+  s24_8 iVar2;
 
   GetEntInfo(mewtwoEntity)->unk15E = 0;
-  iVar2 = 51200;
-  iVar1 = 0x400;
+  iVar2 = IntToF248_2(200);
+  iVar1 = IntToF248_2(4);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2 = iVar2 - iVar1;
-    iVar1 -= 11;
-    if (iVar1 < 0x1e) {
-      iVar1 = 0x1e;
+    iVar2.raw -= iVar1.raw;
+    iVar1 = F248_Sub(iVar1, FloatToF248_2(0.045));
+    if (F248LessThanFloat(iVar1, 0.12)) {
+      iVar1 = FloatToF248_2(0.12);
     }
-    if (iVar2 < 0) break;
+    if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(mewtwoEntity)->unk174 = iVar2;
     sub_803E46C(0x46);
   }
-  GetEntInfo(mewtwoEntity)->unk174 = 0;
+  GetEntInfo(mewtwoEntity)->unk174 = IntToF248_2(0);
 }
 
 void MewtwoScreenFlash(void)
@@ -3209,24 +3210,24 @@ void SuicunePostStoryPreFightDialogue(void)
 
 void sub_808A528(Entity * param_1)
 {
-  s32 iVar1;
-  s32 iVar2;
+  s24_8 iVar1;
+  s24_8 iVar2;
 
   GetEntInfo(param_1)->unk15E = 0;
-  iVar2 = 51200;
-  iVar1 = 3072;
+  iVar2 = IntToF248(200);
+  iVar1 = IntToF248(12);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2 = iVar2 - iVar1;
-    iVar1 -= 96;
-    if (iVar1 < 20) {
-      iVar1 = 20;
+    iVar2.raw -= iVar1.raw;
+    iVar1 = F248_Sub(iVar1, FloatToF248(0.375));
+    if (F248LessThanFloat(iVar1, 0.08)) {
+      iVar1 = FloatToF248_2(0.08);
     }
-    if (iVar2 < 0) break;
+    if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(param_1)->unk174 = iVar2;
     sub_803E46C(70);
   }
-  GetEntInfo(param_1)->unk174 = 0;
+  GetEntInfo(param_1)->unk174 = IntToF248_2(0);
 }
 
 void SuicuneScreenFlash(void)
@@ -3313,7 +3314,7 @@ void HoOhPreFightDialogue(void)
 {
   Entity * leaderEntity;
   Entity * HoOhEntity;
-  Position32 local_14;
+  PixelPos local_14;
 
   leaderEntity = xxx_call_GetLeader();
   HoOhEntity = GetEntityFromMonsterBehavior(BEHAVIOR_HO_OH);
@@ -3352,7 +3353,7 @@ void HoOhReFightDialogue(void)
 {
   Entity * leaderEntity;
   Entity * HoOhEntity;
-  Position32 local_14;
+  PixelPos local_14;
 
   leaderEntity = xxx_call_GetLeader();
   HoOhEntity = GetEntityFromMonsterBehavior(BEHAVIOR_HO_OH);
@@ -3387,24 +3388,24 @@ void HoOhReFightDialogue(void)
 
 void HoOhDropInEffect(Entity * param_1)
 {
-  s32 iVar1;
-  s32 iVar2;
+  s24_8 iVar1;
+  s24_8 iVar2;
 
   GetEntInfo(param_1)->unk15E = 0;
-  iVar2 = 51200;
-  iVar1 = 3072;
+  iVar2 = IntToF248(200);
+  iVar1 = IntToF248(12);
   PlaySoundEffect(0x1f8);
   while( 1 ) {
-    iVar2 = iVar2 - iVar1;
-    iVar1 -= 96;
-    if (iVar1 < 20) {
-      iVar1 = 20;
+    iVar2.raw -= iVar1.raw;
+    iVar1 = F248_Sub(iVar1, FloatToF248(0.375));
+    if (F248LessThanFloat(iVar1, 0.08)) {
+      iVar1 = FloatToF248_2(0.08);
     }
-    if (iVar2 < 0) break;
+    if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(param_1)->unk174 = iVar2;
     sub_803E46C(70);
   }
-  GetEntInfo(param_1)->unk174 = 0;
+  GetEntInfo(param_1)->unk174 = IntToF248_2(0);
 }
 
 void HoOhScreenFlash(void)
@@ -3493,8 +3494,8 @@ void LatiosPreFightDialogue(void)
 {
   Entity * leaderEntity;
   Entity * LatiosEntity;
-  Position32 local_18;
-  Position local_19;
+  PixelPos local_18;
+  DungeonPos local_19;
 
   leaderEntity = xxx_call_GetLeader();
   LatiosEntity = GetEntityFromMonsterBehavior(BEHAVIOR_LATIOS);
@@ -3651,7 +3652,7 @@ void sub_808ADCC(void)
   }
 }
 
-void sub_808AE54(u8 param_1,u8 param_2,Position *param_3)
+void sub_808AE54(u8 param_1,u8 param_2,DungeonPos *param_3)
 {
   Entity * leaderEntity;
   s16 IDStack[2];
@@ -3674,7 +3675,7 @@ void sub_808AE54(u8 param_1,u8 param_2,Position *param_3)
 }
 
 
-void sub_808AEC8(u8 param_1,u8 param_2,Position *param_3)
+void sub_808AEC8(u8 param_1,u8 param_2,DungeonPos *param_3)
 {
   Entity * leaderEntity;
   s16 IDStack[2];
@@ -3696,7 +3697,7 @@ void sub_808AEC8(u8 param_1,u8 param_2,Position *param_3)
   }
 }
 
-void sub_808AF3C(u8 param_1,u8 param_2,Position *param_3)
+void sub_808AF3C(u8 param_1,u8 param_2,DungeonPos *param_3)
 {
   Entity * leaderEntity;
   s16 IDStack[2];
@@ -3812,7 +3813,7 @@ void sub_808B1CC(u8 itemID)
 {
     Entity *entity;
     Tile *tile;
-    Position pos;
+    DungeonPos pos;
     Item item;
 
     pos.x = gDungeon->unk644.unk40;
@@ -3827,7 +3828,7 @@ void sub_808B1CC(u8 itemID)
         pos.y = entity->pos.y;
     }
     sub_807FE04(&pos, 0);
-    tile = GetTileSafe(pos.x, pos.y);
+    tile = GetTileMut(pos.x, pos.y);
     tile->terrainType = tile->terrainType | TERRAIN_TYPE_STAIRS;
     if (((itemID != ITEM_NOTHING) && (sub_80860A8(itemID) == 0)) &&
         (sub_80860A8(ITEM_MUSIC_BOX) == 0)) {
@@ -3991,7 +3992,7 @@ void JirachiWish(void)
 {
   u8 friendArea;
   Entity *jirachiEntity;
-  Position *LeaderPos;
+  DungeonPos *LeaderPos;
   Entity *leaderEntity;
   s32 wishChoice;
   s32 counter;
@@ -4000,9 +4001,9 @@ void JirachiWish(void)
   Item auStack152 [9];
   Item itemStack [9];
   Item strengthItems [9];
-  Position pos1;
-  Position pos2;
-  Position pos3;
+  DungeonPos pos1;
+  DungeonPos pos2;
+  DungeonPos pos3;
 
   jirachiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_JIRACHI);
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
@@ -4059,7 +4060,7 @@ void JirachiWish(void)
         }
         pos1.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
         pos1.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
-        if ((GetTileSafe(pos1.x, pos1.y)->terrainType & 3) != 0) {
+        if ((GetTileMut(pos1.x, pos1.y)->terrainType & 3) != 0) {
           PlaySoundEffect(0x14c);
           sub_808BB3C(&pos1);
           sub_8046860(jirachiEntity,&pos1,auStack152,9);
@@ -4085,7 +4086,7 @@ void JirachiWish(void)
         pos2.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
         pos2.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
 
-        if ((GetTileSafe(pos2.x, pos2.y)->terrainType & 3) != 0) {
+        if ((GetTileMut(pos2.x, pos2.y)->terrainType & 3) != 0) {
           PlaySoundEffect(400);
           sub_808BB3C(&pos2);
           sub_8046860(jirachiEntity,&pos2,itemStack,9);
@@ -4139,7 +4140,7 @@ void JirachiWish(void)
           pos3.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
           pos3.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
 
-          if ((GetTileSafe(pos3.x, pos3.y)->terrainType & 3) != 0) {
+          if ((GetTileMut(pos3.x, pos3.y)->terrainType & 3) != 0) {
             PlaySoundEffect(400);
             sub_808BB3C(&pos3);
             sub_8046860(jirachiEntity,&pos3,strengthItems,4);
@@ -4219,14 +4220,14 @@ void JirachiWishGrantFlash(void)
   sub_8085EB0();
 }
 
-void sub_808BB3C(Position *pos1)
+void sub_808BB3C(DungeonPos *pos1)
 {
 #ifndef NONMATCHING
   register s32 iVar1 asm("r0");
 #else
   s32 iVar1;
 #endif
-  Position newPos;
+  DungeonPos newPos;
 
   iVar1 = pos1->x * 0x1800 + 0xc00;
   newPos.x = iVar1 / 256;
@@ -4244,25 +4245,25 @@ void sub_808BBA8(Entity *jirachiEntity)
 
 void JirachiDropInEffect(Entity *jirachiEntity)
 {
-  s32 iVar1;
-  s32 iVar2;
+  s24_8 iVar1;
+  s24_8 iVar2;
 
   sub_80861F8(0x1b,jirachiEntity,0);
   sub_8086A54(jirachiEntity);
   sub_80861B8(jirachiEntity,0xe,DIRECTION_SOUTH);
-  iVar1 = 0xa000;
-  iVar2 = 0x200;
+  iVar1 = IntToF248(160);
+  iVar2 = IntToF248(2);
   PlaySoundEffect(0x1f8);
-  while( 1 ) {
-    iVar1 = iVar1 - iVar2;
-    if (iVar1 < 0x1800) {
-      iVar2 = 0x100;
+  while (1) {
+    iVar1.raw = iVar1.raw - iVar2.raw; // FRAGILE! Subtraction and assignment below must use .raw
+    if (F248LessThanInt(iVar1, 24)) {
+      iVar2.raw = IntToF248_2(1).raw;
     }
-    if (iVar1 < 0) break;
+    if (F248LessThanInt(iVar1, 0)) break;
     GetEntInfo(jirachiEntity)->unk174 = iVar1;
     sub_803E46C(0x46);
   }
- GetEntInfo(jirachiEntity)->unk174 = 0;
+  GetEntInfo(jirachiEntity)->unk174 = IntToF248_2(0);
 }
 
 void JirachiSpinEffect(Entity * jirachiEntity)
@@ -4302,9 +4303,9 @@ void JirachiWishGrantDialogue(Entity *jirachiEntity)
 // Warp Tile is created but not enabled until the Wish is done with EnableJirachiWishWarpTile
 void CreateJirachiWishWarpTile(void)
 {
-  struct Tile *tile;
+  Tile *tile;
 
-  tile = GetTileSafe(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
+  tile = GetTileMut(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
   tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
   tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
   tile->terrainType &= ~TERRAIN_TYPE_STAIRS;
@@ -4316,9 +4317,9 @@ void CreateJirachiWishWarpTile(void)
 
 void EnableJirachiWishWarpTile(void)
 {
-  struct Tile *tile;
+  Tile *tile;
 
-  tile = GetTileSafe(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
+  tile = GetTileMut(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
   tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
   tile->terrainType |= TERRAIN_TYPE_NORMAL;
   tile->terrainType &= ~TERRAIN_TYPE_IMPASSABLE_WALL;
@@ -4880,11 +4881,11 @@ void sub_808C8E0(Entity *entity)
   PlaySoundEffect(0x1a5);
   sub_806CDD4(entity, 0, DIRECTION_SOUTH);
   for(iVar1 = 0; iVar1 < 16; iVar1++){
-    GetEntInfo(entity)->unk174 = iVar1 * 256;
+    GetEntInfo(entity)->unk174 = IntToF248_2(iVar1);
     sub_803E46C(0x46);
   }
   for(iVar1 = 16; iVar1 < 200; iVar1 += 4){
-    GetEntInfo(entity)->unk174 = iVar1 * 256;
+    GetEntInfo(entity)->unk174 = IntToF248_2(iVar1);
     sub_803E46C(0x46);
   }
   sub_8086A3C(entity);

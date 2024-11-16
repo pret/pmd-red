@@ -87,11 +87,11 @@ const u8 gDungeonWaterType[76] = {
 extern void sub_80498A8(s32, s32);
 extern void sub_80402AC(s32, s32);
 extern void sub_8049BB0(s32, s32);
-void sub_8042A14(Position *);
+void sub_8042A14(DungeonPos *);
 
-bool8 PosHasItem(Position *pos)
+bool8 PosHasItem(DungeonPos *pos)
 {
-  struct Tile *tile;
+  const Tile *tile;
   Entity *entity;
 
   tile = GetTile(pos->x,pos->y);
@@ -102,9 +102,9 @@ bool8 PosHasItem(Position *pos)
   return FALSE;
 }
 
-Entity *GetMonsterAtPos(Position *pos)
+Entity *GetMonsterAtPos(DungeonPos *pos)
 {
-  struct Tile *tile;
+  const Tile *tile;
   Entity *entity;
 
   tile = GetTile(pos->x,pos->y);
@@ -115,9 +115,9 @@ Entity *GetMonsterAtPos(Position *pos)
   return NULL;
 }
 
-bool8 sub_804AD34(Position *pos)
+bool8 sub_804AD34(DungeonPos *pos)
 {
-  struct Tile *tile;
+  Tile *tile;
   s32 x;
   Entity * entity;
   s32 y;
@@ -125,7 +125,7 @@ bool8 sub_804AD34(Position *pos)
   s32 index;
 
   iVar8 = 0;
-  tile = GetTileSafe(pos->x,pos->y);
+  tile = GetTileMut(pos->x,pos->y);
   if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
     if(!(tile->terrainType & (TERRAIN_TYPE_UNK_8 | TERRAIN_TYPE_IMPASSABLE_WALL))){
     iVar8 = 1;
@@ -155,15 +155,15 @@ bool8 sub_804AD34(Position *pos)
   return iVar8;
 }
 
-bool8 sub_804AE08(Position *pos)
+bool8 sub_804AE08(DungeonPos *pos)
 {
-  struct Tile *tile;
+  Tile *tile;
   s32 x;
   s32 y;
   bool8 uVar6;
 
   uVar6 = FALSE;
-  tile = GetTileSafe(pos->x,pos->y);
+  tile = GetTileMut(pos->x,pos->y);
 
   if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
     if(!(tile->terrainType & (TERRAIN_TYPE_UNK_8 | TERRAIN_TYPE_IMPASSABLE_WALL))) {
@@ -182,15 +182,15 @@ bool8 sub_804AE08(Position *pos)
   return uVar6;
 }
 
-void sub_804AE84(Position *pos)
+void sub_804AE84(DungeonPos *pos)
 {
-  struct Tile *tile;
+  Tile *tile;
   s32 x;
   Entity * entity;
   s32 index;
   s32 y;
 
-  tile = GetTileSafe(pos->x,pos->y);
+  tile = GetTileMut(pos->x,pos->y);
   if ((tile->unk4 & 0x10) != 0) {
     tile->unk4 = tile->unk4 & 0xffef;
 

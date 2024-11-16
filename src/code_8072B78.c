@@ -23,7 +23,7 @@ struct unkStruct_806B7F8
     u32 unk4;
     u16 level;
     u8 fillA[0xC - 0xA];
-    struct Position pos;
+    DungeonPos pos;
     u8 unk10;
 };
 
@@ -100,7 +100,7 @@ static inline void fu(EntityInfo *entityInfo, s16 id)
 void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
 {
   OpenedFile *file;
-  Tile *tile;
+  const Tile *tile;
   int index;
   s32 id_s32;
   EntityInfo *entityInfo;

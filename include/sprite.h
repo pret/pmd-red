@@ -34,7 +34,7 @@ void BlinkSavingIcon(void);
 void CopySpritesToOam(void);
 void InitSprites(void);
 void ResetSprites(bool8);
-void SetSavingIconCoords(Position *);
+void SetSavingIconCoords(DungeonPos *);
 void sub_8004E8C(unkStruct_2039DB0 *);
 void sub_8005180(void);
 void sub_8005304(void);

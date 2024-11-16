@@ -11,6 +11,7 @@
 #include "dungeon_leader.h"
 #include "dungeon_util.h"
 #include "random.h"
+#include "math.h"
 #include "structs/str_dungeon.h"
 
 extern s32 gUnknown_202F3D8;
@@ -179,7 +180,7 @@ void sub_80856E0(Entity * pokemon, s32 direction)
 
     for(counter = 0; counter < 5; counter++)
     {
-        entityInfo->unk174 += 0x200;
+        entityInfo->unk174 = F248_Add(entityInfo->unk174, IntToF248(2));
         sub_803E46C(0x46);
     }
     entityInfo->action.direction = direction & DIRECTION_MASK;
@@ -187,10 +188,10 @@ void sub_80856E0(Entity * pokemon, s32 direction)
 
     for(counter = 0; counter < 5; counter++)
     {
-        entityInfo->unk174 -= 0x200;
+        entityInfo->unk174 = F248_Sub(entityInfo->unk174, IntToF248(2));
         sub_803E46C(0x46);
     }
-    entityInfo->unk174 = 0;
+    entityInfo->unk174.raw = 0; // weird one that doesn't match with struct assignment
     sub_803E46C(0x46);
 }
 
@@ -247,7 +248,7 @@ void sub_8085890(s32 x, s32 y)
     sub_803F878(x, y);
 }
 
-void ShiftCameraToPosition(Position32 *posStruct, s32 cameraSteps)
+void ShiftCameraToPosition(PixelPos *posStruct, s32 cameraSteps)
 {
   s32 XPos;
   s32 YPos;

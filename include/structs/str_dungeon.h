@@ -77,10 +77,10 @@ typedef struct DungeonMusicPlayer
 // Size unknown?
 typedef struct UnkDungeonGlobal_unk181E8_sub
 {
-    /* 0x181E8 */ Position cameraPos;       // x0
-    /* 0x181EC */ Position cameraPosMirror; // x4
-    /* 0x181F0 */ Position cameraPixelPos;  // x8
-    /* 0x181F4 */ Position cameraPixelPosMirror; // xC
+    /* 0x181E8 */ DungeonPos cameraPos;       // x0
+    /* 0x181EC */ DungeonPos cameraPosMirror; // x4
+    /* 0x181F0 */ DungeonPos cameraPixelPos;  // x8
+    /* 0x181F4 */ DungeonPos cameraPixelPosMirror; // xC
     /* 0x181F8 */ Entity *cameraTarget; // x10
     u32 unk181FC; // x14
     u32 unk18200; // x18
@@ -170,7 +170,7 @@ struct unkStruct_Dungeon134_sub
     u32 unk150;
     u32 unk154;
     u32 unk158;
-    u32 unk15C;
+    s24_8 unk15C;
     u8 unk160;
     u8 unk161;
     u8 unk162;
@@ -370,9 +370,9 @@ typedef struct Dungeon
     /* 0x3A14 */ s16 bossBattleIndex;
     /* 0x3A16 */ s16 unk3A16;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
-    Position unkE218;
-    Position unkE21C; // stair location?
-    Position unkE220[8];
+    DungeonPos unkE218;
+    DungeonPos unkE21C; // stair location?
+    DungeonPos unkE220[8];
     unkDungeonE240 unkE240;
     unkDungeonE240 unkE250;
     unkDungeonE260 unkE260;
@@ -384,7 +384,7 @@ typedef struct Dungeon
     u8 unk104C0;
     /* 0x104C4 */ RoomData roomData[MAX_ROOM_COUNT];
     /* 0x10844 */ s16 naturalJunctionListCounts[MAX_ROOM_COUNT];
-    /* 0x10884 */ Position naturalJunctionList[MAX_ROOM_COUNT][MAX_ROOM_COUNT]; // Arrays of room exits for each room.
+    /* 0x10884 */ DungeonPos naturalJunctionList[MAX_ROOM_COUNT][MAX_ROOM_COUNT]; // Arrays of room exits for each room.
     u16 unk11884[250][9];
     u16 unk12A18[20][9];
     u16 unk12B80[9];
@@ -398,7 +398,7 @@ typedef struct Dungeon
     u8 fill1356D[0x13570 - 0x1356D];
     /* 0x13570 */ u8 unk13570;
     u8 fill13571[0x13574 - 0x13571];
-    /* 0x13574 */ Position trapPos;
+    /* 0x13574 */ DungeonPos trapPos;
     /* 0x13578 */ u8 trapID;
     /* 0x13579 */ u8 unk13579;
     u8 fill1357A[0x1357C - 0x1357A];

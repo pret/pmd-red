@@ -448,7 +448,7 @@ bool8 IsAdjacentToEnemy(Entity *pokemon)
     s32 direction;
     for (direction = 0; direction < NUM_DIRECTIONS; direction++)
     {
-        struct Tile *mapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
+        const Tile *mapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
         Entity *adjacentPokemon = mapTile->monster;
         if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) != ENTITY_NOTHING &&
             GetTreatmentBetweenMonsters(pokemon, adjacentPokemon, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)

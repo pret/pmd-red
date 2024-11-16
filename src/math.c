@@ -3,11 +3,12 @@
 #include "math.h"
 
 #include "data/math.h"
+#include "structs/str_position.h"
 
-static void F48_16_UDiv(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
-static void F48_16_UMul(unkStruct_80943A8 *, unkStruct_80943A8 *, unkStruct_80943A8 *);
-static u24_8 u24_8_div(u24_8, u24_8);
-static u24_8 u24_8_mul(u24_8, u24_8);
+static void F48_16_UDiv(s48_16 *, s48_16 *, s48_16 *);
+static void F48_16_UMul(s48_16 *, s48_16 *, s48_16 *);
+static s24_8 u24_8_div(s24_8, s24_8);
+static s24_8 u24_8_mul(s24_8, s24_8);
 
 /**
  * This function computes a value modulo 3, using a lookup table for values less
@@ -32,13 +33,13 @@ s32 sin_4096(s32 x)
 {
     switch (x & 0xc00) {
         case 0x000:
-            return gFastSinLookup[x & 0x3ff];
+            return sFastSinLookup[x & 0x3ff];
         case 0x400:
-            return gFastSinLookup[0x3ff - (x & 0x3ff)];
+            return sFastSinLookup[0x3ff - (x & 0x3ff)];
         case 0x800:
-            return -gFastSinLookup[x & 0x3ff];
+            return -sFastSinLookup[x & 0x3ff];
         case 0xc00:
-            return -gFastSinLookup[0x3ff - (x & 0x3ff)];
+            return -sFastSinLookup[0x3ff - (x & 0x3ff)];
     }
 
     return 0;
@@ -48,13 +49,13 @@ s32 cos_4096(s32 x)
 {
     switch (x & 0xc00) {
         case 0x000:
-            return gFastSinLookup[0x3ff - (x & 0x3ff)];
+            return sFastSinLookup[0x3ff - (x & 0x3ff)];
         case 0x400:
-            return -gFastSinLookup[x & 0x3ff];
+            return -sFastSinLookup[x & 0x3ff];
         case 0x800:
-            return -gFastSinLookup[0x3ff - (x & 0x3ff)];
+            return -sFastSinLookup[0x3ff - (x & 0x3ff)];
         case 0xc00:
-            return gFastSinLookup[x & 0x3ff];
+            return sFastSinLookup[x & 0x3ff];
     }
 
     return 0;
@@ -92,25 +93,25 @@ s24_8 s24_8_mul(s24_8 x, s24_8 y)
     bool8 sgn0;
     bool8 sgn1;
 
-    sgn0 = x < 0;
-    sgn1 = y < 0;
+    sgn0 = x.raw < 0;
+    sgn1 = y.raw < 0;
 
-    if (x == 0)
-        return 0;
+    if (x.raw == 0)
+        return (s24_8){0};
 
-    if (y == 0)
-        return 0;
+    if (y.raw == 0)
+        return (s24_8){0};
 
     if (sgn0)
-        x = -x;
+        x.raw = -x.raw;
 
     if (sgn1)
-        y = -y;
+        y.raw = -y.raw;
 
     ret = u24_8_mul(x, y);
 
     if (sgn0 != sgn1)
-        ret = -ret;
+        ret.raw = -ret.raw;
 
     return ret;
 }
@@ -129,25 +130,25 @@ static s24_8 s24_8_div(s24_8 x, s24_8 y)
     bool8 sgn0;
     bool8 sgn1;
 
-    sgn0 = x < 0;
-    sgn1 = y < 0;
+    sgn0 = x.raw < 0;
+    sgn1 = y.raw < 0;
 
-    if (y == 0)
-        return INT32_MAX;
+    if (y.raw == 0)
+        return (s24_8){INT32_MAX};
 
-    if (x == 0)
-        return 0;
+    if (x.raw == 0)
+        return (s24_8){0};
 
     if (sgn0)
-        x = -x;
+        x.raw = -x.raw;
 
     if (sgn1)
-        y = -y;
+        y.raw = -y.raw;
 
     ret = u24_8_div(x, y);
 
     if (sgn0 != sgn1)
-        ret = -ret;
+        ret.raw = -ret.raw;
 
     return ret;
 }
@@ -160,7 +161,7 @@ static s24_8 s24_8_div(s24_8 x, s24_8 y)
  *
  * @return        The product `x*y` as an unsigned 24.8 fixed-point number.
  */
-static u24_8 u24_8_mul(u24_8 x, u24_8 y)
+static s24_8 u24_8_mul(s24_8 x, s24_8 y)
 {
     // We need 64 bits for intermediate steps of the multiplication.
     u32 x_h, x_l;
@@ -171,13 +172,13 @@ static u24_8 u24_8_mul(u24_8 x, u24_8 y)
     u32 high_bit_mask;
     u32 round_up;
 
-    if (x == 0 || y == 0)
-        return 0;
+    if (x.raw == 0 || y.raw == 0)
+        return F248_ZERO;
 
     x_h = 0;
-    x_l = x;
+    x_l = x.raw;
     y_h = 0;
-    y_l = y;
+    y_l = y.raw;
     out_h = 0;
     out_l = 0;
     high_bit_mask = 0x80 << 24; // high bit of u32
@@ -215,7 +216,7 @@ static u24_8 u24_8_mul(u24_8 x, u24_8 y)
         ++out_l;
     }
 
-    return out_l;
+    return (s24_8){out_l};
 }
 
 /**
@@ -226,7 +227,7 @@ static u24_8 u24_8_mul(u24_8 x, u24_8 y)
  *
  * @return        The quotient `x/y` as an unsigned 24.8 fixed-point number.
  */
-static u24_8 u24_8_div(u24_8 x, u24_8 y)
+static s24_8 u24_8_div(s24_8 x, s24_8 y)
 {
     bool8 bVar1;
     u32 r9;
@@ -240,15 +241,15 @@ static u24_8 u24_8_div(u24_8 x, u24_8 y)
     s32 sl;
     s32 temp;
 
-    if (y == 0)
-        return INT32_MAX;
+    if (y.raw == 0)
+        return F248_MAX;
 
-    if (x == 0)
-        return 0;
+    if (x.raw == 0)
+        return F248_ZERO;
 
-    r7 = x >> 24;
-    r6 = x << 8;
-    sl = y;
+    r7 = (u32)x.raw >> 24;
+    r6 = x.raw << 8;
+    sl = y.raw;
     r9 = 0;
     r5 = 0;
     r4 = 0;
@@ -286,19 +287,19 @@ static u24_8 u24_8_div(u24_8 x, u24_8 y)
             r9 |= r8;
     }
 
-    return r9;
+    return (s24_8){r9};
 }
 
-UNUSED s32 sub_8009F68(s32 x, s32 y)
+UNUSED s24_8 FP24_8_Pow(s24_8 x, s32 y)
 {
     s32 uVar1;
-    s32 sVar1;
+    s24_8 sVar1;
 
     uVar1 = y;
     if (uVar1 < 0)
         uVar1 = -uVar1;
 
-    sVar1 = 0x100;
+    sVar1 = F248_ONE;
 
     for (; uVar1 != 0; uVar1 >>= 1) {
         if (uVar1 & 1)
@@ -310,37 +311,37 @@ UNUSED s32 sub_8009F68(s32 x, s32 y)
     if (y >= 0)
         return sVar1;
 
-    return s24_8_div(0x100, sVar1);
+    return s24_8_div(F248_ONE, sVar1);
 }
 
-s32 sub_8009FB8(s32 x, s32 y)
+s24_8 FP24_8_Hypot(s24_8 x, s24_8 y)
 {
-    s32 r4;
+    s24_8 r4;
     s32 i;
-    s32 r5;
-    s32 r6;
+    s24_8 r5;
+    s24_8 r6;
 
     r5 = x;
     r6 = y;
 
-    if (r5 < 0)
-        r5 = -r5;
+    if (r5.raw < 0)
+        r5.raw = -r5.raw;
 
-    if (r6 < 0)
-        r6 = -r6;
+    if (r6.raw < 0)
+        r6.raw = -r6.raw;
 
-    if (r5 < r6) {
+    if (r5.raw < r6.raw) {
         r4 = r5;
         r5 = r6;
         r6 = r4;
     }
 
-    if (r6 != 0) {
+    if (r6.raw != 0) {
         for (i = 2; i >= 0; i--) {
             r4 = s24_8_div(r6, r5);
             r4 = s24_8_mul(r4, r4);
-            r4 = s24_8_div(r4, r4 + 0x400);
-            r5 += s24_8_mul(r5, r4) * 2;
+            r4 = s24_8_div(r4, F248_Add(r4, IntToF248(4)));
+            r5 = F248_Add(r5, F248_MulInt(s24_8_mul(r5, r4), 2));
             r6 = s24_8_mul(r6, r4);
         }
     }
@@ -348,262 +349,260 @@ s32 sub_8009FB8(s32 x, s32 y)
     return r5;
 }
 
-void sub_800A020(unkStruct_80943A8 *param_1, u32 param_2)
+void FP48_16_FromS32(s48_16 *dst, s32 src)
 {
-#ifndef NONMATCHING
-    register u32 temp asm("r4");
+    dst->hi = (src & ~0xFFFFu) >> 16;
+    dst->lo = (src &  0xFFFFu) << 16;
+
+    // BUG: Should be checking top bit of src, or using dst->hi here (see FP48_16_FromF248)
+#ifdef BUGFIX
+    if (dst->hi & 0x8000)
 #else
-    u32 temp;
+    if (src & 0x8000)
 #endif
-
-    temp = 0xFFFF0000;
-    param_1->s0 = param_2 >> 16;
-    param_1->s4 = param_2 << 16;
-
-    if (param_2 & 0x8000)
-        param_1->s0 |= temp;
-
+        dst->hi |= ~0xFFFF;
 }
 
-u32 sub_800A048(unkStruct_80943A8 *a)
+u32 FP48_16_ToS32(s48_16 *a)
 {
     u32 uVar1;
 
-    uVar1 = ((u16)a->s0 << 16) | (a->s4 >> 16);
-    if (a->s4 & 0x8000)
+    uVar1 = ((u16) a->hi << 16) | (a->lo >> 16);
+    if (a->lo & 0x8000)
         uVar1++;
 
     return uVar1;
 }
 
-UNUSED u32 sub_800A068(u32 *a)
+UNUSED s24_8 FP48_16_ToF248(s48_16 *a)
 {
     u32 uVar1;
 
-    uVar1 = ((u8)a[0] << 24) | a[1] >> 8;
-    if (a[1] & 0x8000)
+    uVar1 = ((u8)a->hi << 24) | a->lo >> 8;
+    if (a->lo & 0x8000)
         uVar1++;
 
-    return uVar1;
+    return (s24_8){uVar1};
 }
 
-void sub_800A088(unkStruct_80943A8 *a, s32 b)
+void FP48_16_FromF248(s48_16 *a, s24_8 b)
 {
-    a->s4 = b << 8;
-    a->s0 = b >> 24;
+    a->lo = b.raw << 8;
+    a->hi = b.raw >> 24;
 
-    if (a->s0 & 0x80)
-        a->s0 |= ~0x7F;
+    if (a->hi & 0x80)
+        a->hi |= ~0x7F;
     else
-        a->s0 &= 0x7f;
+        a->hi &= 0x7f;
 }
 
-s32 sub_800A0B0(unkStruct_80943A8 *a)
+// returns 12-bit angle
+s32 Atan2_4096(PixelPos *a)
 {
-    s32 r2;
-    s32 r3;
+    s32 y;
+    s32 x;
     s32 idx;
     s32 divi;
 
-    r2 = a->s4;
-    r3 = a->s0;
-    if (r2 == 0 && r3 == 0)
+    y = a->y;
+    x = a->x;
+    if (y == 0 && x == 0)
         return 0;
 
-    if (r2 > 0) {
-        if (r3 > 0) {
-            if (r2 < r3) {
-                divi = r3 / 256;
+    if (y > 0) {
+        if (x > 0) {
+            if (y < x) {
+                divi = F248ToInt((s24_8){x});
                 if (divi == 0)
                     return 0x200;
 
-                idx = r2 / divi;
+                idx = y / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return gFastUnknownFn1Lookup[idx] << 4;
+
+                return sFastAtan2Lookup256[idx] << 4;
             }
-            else { // r2 >= r3
-                divi = r2 / 256;
+            else { // y >= x
+                divi = F248ToInt((s24_8){y});
                 if (divi == 0)
                     return 0x200;
 
-                idx = r3 / divi;
+                idx = x / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (0x40 - gFastUnknownFn1Lookup[idx]) << 4;
+
+                return (0x40 - sFastAtan2Lookup256[idx]) << 4;
             }
         }
-        else { // r3 <= 0
-            r3 = -r3;
-            if (r2 < r3) {
-                divi = r3 / 256;
+        else { // x <= 0
+            x = -x;
+            if (y < x) {
+                divi = F248ToInt((s24_8){x});
                 if (divi == 0)
                     return 0x600;
 
-                idx = r2 / divi;
+                idx = y / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (0x80 - gFastUnknownFn1Lookup[idx]) << 4;
+
+                return (0x80 - sFastAtan2Lookup256[idx]) << 4;
             }
-            else { // r2 >= r3
-                divi = r2 / 256;
+            else { // y >= x
+                divi = F248ToInt((s24_8){y});
                 if (divi == 0)
                     return 0x600;
 
-                idx = r3 / divi;
+                idx = x / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (gFastUnknownFn1Lookup[idx] + 0x40) << 4;
+
+                return (sFastAtan2Lookup256[idx] + 0x40) << 4;
             }
         }
     }
-    else { // r2 <= 0
-        r2 = -r2;
-        if (r3 > 0) {
-            if (r2 < r3) {
-                divi = r3 / 256;
+    else { // y <= 0
+        y = -y;
+        if (x > 0) {
+            if (y < x) {
+                divi = F248ToInt((s24_8){x});
                 if (divi == 0)
                     return 0xE00;
 
-                idx = r2 / divi;
+                idx = y / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (0x100 - gFastUnknownFn1Lookup[idx]) << 4;
+
+                return (0x100 - sFastAtan2Lookup256[idx]) << 4;
             }
-            else { // r2 >= r3
-                divi = r2 / 256;
+            else { // y >= x
+                divi = F248ToInt((s24_8){y});
                 if (divi == 0)
                     return 0xE00;
 
-                idx = r3 / divi;
+                idx = x / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (gFastUnknownFn1Lookup[idx] + 0xC0) << 4;
+
+                return (sFastAtan2Lookup256[idx] + 0xC0) << 4;
             }
         }
-        else { // r3 <= 0
-            r3 = -r3;
-            if (r2 < r3) {
-                divi = r3 / 256;
+        else { // x <= 0
+            x = -x;
+            if (y < x) {
+                divi = F248ToInt((s24_8){x});
                 if (divi == 0)
                     return 0xA00;
 
-                idx = r2 / divi;
+                idx = y / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (gFastUnknownFn1Lookup[idx] + 0x80) << 4;
+
+                return (sFastAtan2Lookup256[idx] + 0x80) << 4;
             }
-            else { // r2 >= r3
-                divi = r2 / 256;
+            else { // y >= x
+                divi = F248ToInt((s24_8){y});
                 if (divi == 0)
                     return 0xA00;
 
-                idx = r3 / divi;
+                idx = x / divi;
                 if (idx > 0xFF)
                     idx = 0xFF;
-            
-                return (0xC0 - gFastUnknownFn1Lookup[idx]) << 4;
+
+                return (0xC0 - sFastAtan2Lookup256[idx]) << 4;
             }
         }
     }
 }
 
-static void F48_16_Negate(unkStruct_80943A8 *a)
+static void F48_16_Negate(s48_16 *a)
 {
-    a->s0 = ~a->s0;
-    a->s4 = ~a->s4 + 1;
+    a->hi = ~a->hi;
+    a->lo = ~a->lo + 1;
 
-    if (a->s4 == 0)
-        a->s0++;
+    if (a->lo == 0)
+        a->hi++;
 }
 
-static void F48_16_Abs(unkStruct_80943A8 *a)
+static void F48_16_Abs(s48_16 *a)
 {
-    if (a->s0 < 0) {
-        a->s0 = ~a->s0;
-        a->s4 = ~a->s4 + 1;
+    if (a->hi < 0) {
+        a->hi = ~a->hi;
+        a->lo = ~a->lo + 1;
 
-        if (a->s4 == 0)
-            a->s0++;
+        if (a->lo == 0)
+            a->hi++;
     }
 }
 
-bool8 F48_16_IsZero(unkStruct_80943A8 *a)
+bool8 F48_16_IsZero(s48_16 *a)
 {
-    if (a->s0 == 0 && a->s4 == 0)
+    if (a->hi == 0 && a->lo == 0)
         return TRUE;
     return FALSE;
 }
 
-UNUSED bool8 F48_16_IsEqual(unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+UNUSED bool8 F48_16_IsEqual(s48_16 *a, s48_16 *b)
 {
-    if (a->s0 == b->s0 && a->s4 == b->s4)
+    if (a->hi == b->hi && a->lo == b->lo)
         return TRUE;
     return FALSE;
 }
 
-static bool8 F48_16_IsNegative(unkStruct_80943A8 *a)
+static bool8 F48_16_IsNegative(s48_16 *a)
 {
-    if (a->s0 < 0)
+    if (a->hi < 0)
         return TRUE;
     return FALSE;
 }
 
-bool8 sub_800A2F0(unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+bool8 FP48_16_SLessThan(s48_16 *a, s48_16 *b)
 {
     s32 r1;
     u32 a0;
     s32 b0;
 
-    a0 = a->s0;
+    a0 = a->hi;
     r1 = a0 >> 31;
 
-    b0 = b->s0;
+    b0 = b->hi;
     if (b0 < 0)
         r1 |= 0x2;
 
     switch (r1) {
         case 0:
         default:
-            return u32_pair_less_than(a0, a->s4, b0, b->s4);
+            return u32_pair_less_than(a0, a->lo, b0, b->lo);
         case 1:
             return TRUE;
         case 2:
             return FALSE;
         case 3:
-            return !u32_pair_less_than(a0, a->s4, b0, b->s4);
+            return !u32_pair_less_than(a0, a->lo, b0, b->lo);
     }
 }
 
-void F48_16_SMul(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+void F48_16_SMul(s48_16 *dst, s48_16 *a, s48_16 *b)
 {
     bool8 aIsNegative;
     bool8 bIsNegative;
-    unkStruct_80943A8 aa;
-    unkStruct_80943A8 bb;
-    unkStruct_80943A8 res;
+    s48_16 aa;
+    s48_16 bb;
+    s48_16 res;
 
-    aa.s0 = a->s0;
-    aa.s4 = a->s4;
-    bb.s0 = b->s0;
-    bb.s4 = b->s4;
+    aa.hi = a->hi;
+    aa.lo = a->lo;
+    bb.hi = b->hi;
+    bb.lo = b->lo;
     aIsNegative = F48_16_IsNegative(&aa);
     bIsNegative = F48_16_IsNegative(&bb);
 
     if (F48_16_IsZero(&aa)) {
-        dst->s0 = 0;
-        dst->s4 = 0;
+        dst->hi = 0;
+        dst->lo = 0;
     }
     else if (F48_16_IsZero(&bb)) {
-        dst->s0 = 0;
-        dst->s4 = 0;
+        dst->hi = 0;
+        dst->lo = 0;
     }
     else {
         if (aIsNegative)
@@ -616,33 +615,33 @@ void F48_16_SMul(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8
         if (aIsNegative != bIsNegative)
             F48_16_Negate(&res);
 
-        dst->s0 = res.s0;
-        dst->s4 = res.s4;
+        dst->hi = res.hi;
+        dst->lo = res.lo;
     }
 }
 
-void F48_16_SDiv(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+void F48_16_SDiv(s48_16 *dst, s48_16 *a, s48_16 *b)
 {
     bool8 aIsNegative;
     bool8 bIsNegative;
-    unkStruct_80943A8 aa;
-    unkStruct_80943A8 bb;
-    unkStruct_80943A8 res;
+    s48_16 aa;
+    s48_16 bb;
+    s48_16 res;
 
-    aa.s0 = a->s0;
-    aa.s4 = a->s4;
-    bb.s0 = b->s0;
-    bb.s4 = b->s4;
+    aa.hi = a->hi;
+    aa.lo = a->lo;
+    bb.hi = b->hi;
+    bb.lo = b->lo;
     aIsNegative = F48_16_IsNegative(&aa);
     bIsNegative = F48_16_IsNegative(&bb);
 
     if (F48_16_IsZero(&bb)) {
-        dst->s0 = INT32_MAX;
-        dst->s4 = UINT32_MAX;
+        dst->hi = INT32_MAX;
+        dst->lo = UINT32_MAX;
     }
     else if (F48_16_IsZero(&aa)) {
-        dst->s0 = 0;
-        dst->s4 = 0;
+        dst->hi = 0;
+        dst->lo = 0;
     }
     else {
         if (aIsNegative)
@@ -655,33 +654,33 @@ void F48_16_SDiv(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8
         if (aIsNegative != bIsNegative)
             F48_16_Negate(&res);
 
-        dst->s0 = res.s0;
-        dst->s4 = res.s4;
+        dst->hi = res.hi;
+        dst->lo = res.lo;
     }
 }
 
-static void F48_16_Square(unkStruct_80943A8 *a)
+static void F48_16_Square(s48_16 *a)
 {
-    unkStruct_80943A8 aa;
-    unkStruct_80943A8 res;
+    s48_16 aa;
+    s48_16 res;
 
-    aa.s0 = a->s0;
-    aa.s4 = a->s4;
+    aa.hi = a->hi;
+    aa.lo = a->lo;
 
     if (F48_16_IsZero(&aa)) {
-        a->s0 = 0;
-        a->s4 = 0;
+        a->hi = 0;
+        a->lo = 0;
     }
     else {
         F48_16_Abs(&aa);
         F48_16_UMul(&res, &aa, &aa);
-        a->s0 = res.s0;
-        a->s4 = res.s4;
+        a->hi = res.hi;
+        a->lo = res.lo;
     }
 }
 
 // Regswap https://decomp.me/scratch/HNmlz
-static void F48_16_UMul(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+static void F48_16_UMul(s48_16 *dst, s48_16 *a, s48_16 *b)
 {
     u32 sl;
     u32 r1;
@@ -697,18 +696,18 @@ static void F48_16_UMul(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
     s32 i;
     
     if (F48_16_IsZero(a)) {
-        dst->s0 = 0;
-        dst->s4 = 0;
+        dst->hi = 0;
+        dst->lo = 0;
     }
     else if (F48_16_IsZero(b)) {
-        dst->s0 = 0;
-        dst->s4 = 0;
+        dst->hi = 0;
+        dst->lo = 0;
     }
     else {
-        r1 = a->s0;
-        r4 = a->s4;
-        sl = b->s0;
-        r2 = b->s4;
+        r1 = a->hi;
+        r4 = a->lo;
+        sl = b->hi;
+        r2 = b->lo;
         r6 = 0;
         r5 = 0;
 
@@ -745,13 +744,13 @@ static void F48_16_UMul(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
         if (r1 != 0)
             r5++;
 
-        dst->s0 = r6;
-        dst->s4 = r5;
+        dst->hi = r6;
+        dst->lo = r5;
     }
 }
 
 // Similar to u24_8_div
-static void F48_16_UDiv(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+static void F48_16_UDiv(s48_16 *dst, s48_16 *a, s48_16 *b)
 {
     s32 temp;
     bool8 r1;
@@ -766,18 +765,18 @@ static void F48_16_UDiv(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
     s32 i;
 
     if (F48_16_IsZero(b)) {
-        dst->s0 = INT32_MAX;
-        dst->s4 = UINT32_MAX;
+        dst->hi = INT32_MAX;
+        dst->lo = UINT32_MAX;
     }
     else if (F48_16_IsZero(a)) {
-        dst->s0 = 0;
-        dst->s4 = 0;
+        dst->hi = 0;
+        dst->lo = 0;
     }
     else {
-        r7 = (a->s0 << 16) | (a->s4 >> 16);
-        r6 = (a->s4 << 16) | 0x8000;
-        sp4 = b->s0;
-        sp8 = b->s4;
+        r7 = (a->hi << 16) | (a->lo >> 16);
+        r6 = (a->lo << 16) | 0x8000;
+        sp4 = b->hi;
+        sp8 = b->lo;
         spC = 0; // Effectively unused
         r9 = 0;
         r5 = 0;
@@ -819,54 +818,54 @@ static void F48_16_UDiv(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
                 r9 |= 0x1;
         }
 
-        dst->s0 = spC;
-        dst->s4 = r9;
+        dst->hi = spC;
+        dst->lo = r9;
     }
 }
 
-void sub_800A6D0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+void FP48_16_Add(s48_16 *dst, s48_16 *a, s48_16 *b)
 {
     s32 s0;
     u32 s4;
 
-    s0 = a->s0 + b->s0;
-    s4 = a->s4 + b->s4;
-    if (s4 < a->s4)
+    s0 = a->hi + b->hi;
+    s4 = a->lo + b->lo;
+    if (s4 < a->lo)
         s0++;
 
-    dst->s0 = s0;
-    dst->s4 = s4;
+    dst->hi = s0;
+    dst->lo = s4;
 }
 
-void sub_800A6F0(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+void FP48_16_Subtract(s48_16 *dst, s48_16 *a, s48_16 *b)
 {
     s32 s0;
     u32 s4;
 
-    s0 = a->s0 - b->s0;
-    s4 = a->s4 - b->s4;
-    if (s4 > a->s4)
+    s0 = a->hi - b->hi;
+    s4 = a->lo - b->lo;
+    if (s4 > a->lo)
         s0--;
 
-    dst->s0 = s0;
-    dst->s4 = s4;
+    dst->hi = s0;
+    dst->lo = s4;
 }
 
-// Similar to sub_8009F68
-UNUSED void F48_16_Pow(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, s32 b)
+// Similar to FP24_8_Pow
+UNUSED void F48_16_Pow(s48_16 *dst, s48_16 *a, s32 b)
 {
-    unkStruct_80943A8 aa;
+    s48_16 aa;
     s32 bb;
-    unkStruct_80943A8 res;
+    s48_16 res;
 
-    aa.s0 = a->s0;
-    aa.s4 = a->s4;
+    aa.hi = a->hi;
+    aa.lo = a->lo;
     bb = b;
     if (bb < 0)
         bb = -bb;
 
-    res.s0 = 0;
-    res.s4 = 0x10000;
+    res.hi = 0;
+    res.lo = 0x10000;
 
     for (; bb != 0; bb >>= 1) {
         if (bb & 1)
@@ -876,32 +875,32 @@ UNUSED void F48_16_Pow(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, s32 b)
     }
 
     if (b < 0) {
-        unkStruct_80943A8 idk;
-        idk.s0 = 0;
-        idk.s4 = 0x10000;
+        s48_16 idk;
+        idk.hi = 0;
+        idk.lo = 0x10000;
         F48_16_SDiv(&res, &idk, &res);
     }
 
-    dst->s0 = res.s0;
-    dst->s4 = res.s4;
+    dst->hi = res.hi;
+    dst->lo = res.lo;
 }
 
-// Similar to sub_8009FB8
-UNUSED void sub_800A78C(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_80943A8 *b)
+// Similar to FP24_8_Hypot
+UNUSED void FP48_16_Hypot(s48_16 *dst, s48_16 *a, s48_16 *b)
 {
     u32 temp;
     s32 i;
-    unkStruct_80943A8 sp0;
-    unkStruct_80943A8 sp8;
-    unkStruct_80943A8 sp10;
-    unkStruct_80943A8 sp18;
+    s48_16 sp0;
+    s48_16 sp8;
+    s48_16 sp10;
+    s48_16 sp18;
 
     sp0 = *a;
     sp8 = *b;
     F48_16_Abs(&sp0);
     F48_16_Abs(&sp8);
 
-    if (sub_800A2F0(&sp0, &sp8)) {
+    if (FP48_16_SLessThan(&sp0, &sp8)) {
         sp10 = sp0;
         sp0 = sp8;
         sp8 = sp10;
@@ -913,24 +912,24 @@ UNUSED void sub_800A78C(unkStruct_80943A8 *dst, unkStruct_80943A8 *a, unkStruct_
         do {
             F48_16_SDiv(&sp10, &sp8, &sp0);
             F48_16_Square(&sp10);
-            sp18.s0 = sp10.s0;
-            sp18.s4 = sp10.s4 + 0x40000;
+            sp18.hi = sp10.hi;
+            sp18.lo = sp10.lo + 0x40000;
 
-            if (sp18.s4 < sp10.s4)
-                sp18.s0++;
+            if (sp18.lo < sp10.lo)
+                sp18.hi++;
 
             F48_16_SDiv(&sp10, &sp10, &sp18);
             F48_16_SMul(&sp18, &sp0, &sp10);
-            sp18.s0 <<= 1;
-            if ((s32)sp18.s4 < 0)
-                sp18.s0 |= 0x1;
+            sp18.hi <<= 1;
+            if ((s32) sp18.lo < 0)
+                sp18.hi |= 0x1;
 
-            sp18.s4 <<= 1;
-            temp = sp0.s4;
-            sp0.s0 += sp18.s0;
-            sp0.s4 = temp + sp18.s4;
-            if (temp > sp0.s4)
-                sp0.s0++;
+            sp18.lo <<= 1;
+            temp = sp0.lo;
+            sp0.hi += sp18.hi;
+            sp0.lo = temp + sp18.lo;
+            if (temp > sp0.lo)
+                sp0.hi++;
 
             if (i == 2)
                 break;

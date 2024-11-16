@@ -36,12 +36,12 @@ extern u8 *gUnknown_80F91EC[];
 
 extern u8 sub_8043D10(void);
 extern bool8 sub_8045888(Entity *);
-void sub_80460F8(Position *, Item *, u32);
-bool8 sub_80461C8(Position *, u32);
+void sub_80460F8(DungeonPos *, Item *, u32);
+bool8 sub_80461C8(DungeonPos *, u32);
 
 Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2)
 {
-  Tile *tile;
+  const Tile *tile;
   Item *item;
   EntityInfo *info;
 
@@ -134,7 +134,7 @@ void sub_8044E24(Entity *entity,int index,u32 unused)
 {
   Item *itemPtr;
   EntityInfo *info;
-  Position *pos;
+  DungeonPos *pos;
   Item item;
 
   itemPtr = sub_8044D90(entity,index,unused);

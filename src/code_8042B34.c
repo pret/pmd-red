@@ -41,7 +41,7 @@ extern void sub_800EE5C(s32);
 extern void sub_800EF64(void);
 extern void sub_800F15C(s32);
 
-struct Sub_UnkStruct_203B414 // Maybe Position?
+struct Sub_UnkStruct_203B414 // Maybe DungeonPos?
 {
     s16 a0;
     s16 a2;
@@ -218,8 +218,9 @@ void sub_8042E98(void)
     }
 }
 
-extern void sub_800569C(Position *, axdata *, u8);
-extern void sub_800EB24(s32 param_1, Position *param_2, Position *param_3, s32 param_4, s32 param_5);
+extern void sub_800569C(DungeonPos *, axdata *, u8);
+extern void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3,
+			s32 param_4, s32 param_5);
 
 void sub_8042EC8(Entity *a0, s32 a1)
 {
@@ -228,8 +229,8 @@ void sub_8042EC8(Entity *a0, s32 a1)
     for (i = 0; i < 3; i++) {
         struct unkStruct_Dungeon5C4_sub *strPtr = &gDungeon->unk5C4[i];
         if (strPtr->unk0 >= 0 && strPtr->unkC == a0) {
-            Position sp8 = {a0->pixelPos.x / 256, a0->pixelPos.y / 256};
-            Position sp4 = {0};
+            DungeonPos sp8 = {a0->pixelPos.x / 256, a0->pixelPos.y / 256};
+            DungeonPos sp4 = {0};
             EntityInfo *entInfo = GetEntInfo(a0);
 
             if (strPtr->unk8 != -1) {
@@ -244,7 +245,7 @@ void sub_8042EC8(Entity *a0, s32 a1)
 }
 
 extern u8 gUnknown_203B40C;
-extern Position gUnknown_203B410;
+extern DungeonPos gUnknown_203B410;
 extern u8 *gSerializedData_203B41C;
 
 struct Substruct_xxx_dungeon_8042F6C
@@ -1054,7 +1055,7 @@ void sub_8043D60(void)
 
     for (y = 0; y < 32; y++) {
         for (x = 0; x < 56; x++) {
-            Entity *object = GetTileSafe(x, y)->object;
+            Entity *object = GetTileMut(x, y)->object;
             if (EntityExists(object) && GetEntityType(object) == ENTITY_TRAP) {
                 Trap *trapData = GetTrapData(object);
                 if (trapData->id == 27) {

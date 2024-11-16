@@ -609,7 +609,7 @@ _0800FE3C:
 	lsls r0, 8
 	str r0, [sp, 0x10]
 	add r0, sp, 0xC
-	bl sub_800A0B0
+	bl Atan2_4096
 	adds r2, r0, 0
 	ldr r0, [sp, 0xC]
 	cmp r0, 0
@@ -1294,7 +1294,7 @@ _08010392:
 	str r0, [sp, 0xC]
 	str r3, [sp, 0x10]
 	add r0, sp, 0xC
-	bl sub_800A0B0
+	bl Atan2_4096
 	ldr r1, _08010474
 	adds r3, r0, r1
 	cmp r3, 0

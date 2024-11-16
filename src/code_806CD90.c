@@ -237,7 +237,7 @@ void sub_806CF60(void)
 
 u32 sub_806CF98(Entity *entity)
 {
-    struct Tile *mapTile;
+    const Tile *mapTile;
     u32 shadowSize;
     u16 terrainType;
     EntityInfo *entityInfo;
@@ -284,7 +284,7 @@ extern void sub_806F63C(Entity *r0);
 extern void sub_8078084(Entity * pokemon);
 extern void sub_800DBBC(void);
 extern void sub_8045C28(Item *Item, u8 itemID, u32 param_3);
-extern void sub_80464C8(Entity *, Position *, Item *);
+extern void sub_80464C8(Entity *, DungeonPos *, Item *);
 extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
@@ -817,7 +817,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 }
             }
             if (i != MAX_TEAM_MEMBERS) {
-                Position monPos; // r4
+                DungeonPos monPos; // r4
 
                 sub_8042148(target);
 

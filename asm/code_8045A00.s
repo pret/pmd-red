@@ -442,7 +442,7 @@ _08046110:
 	ldrsh r0, [r5, r1]
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
-	bl GetTileSafe
+	bl GetTileMut
 	str r4, [r0, 0x14]
 	ldrh r1, [r0]
 	movs r0, 0x20
@@ -528,7 +528,7 @@ sub_80461C8:
 	ldrsh r0, [r2, r1]
 	movs r3, 0x2
 	ldrsh r1, [r2, r3]
-	bl GetTileSafe
+	bl GetTileMut
 	adds r6, r0, 0
 	ldr r5, [r6, 0x14]
 	cmp r5, 0

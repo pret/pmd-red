@@ -41,11 +41,11 @@ extern void sub_8067110(Entity *);
 extern void sub_80671A0(Entity *);
 extern void sub_8073D14(Entity *);
 extern void sub_8045BF8(u8 *, Item *);
-extern bool8 sub_80461C8(Position *, u32);
+extern bool8 sub_80461C8(DungeonPos *, u32);
 extern void sub_805229C(void);
 extern void sub_807E8F0(Entity *);
 extern void sub_80444F4(Entity *pokemon);
-extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, Position *r3);
+extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, DungeonPos *r3);
 extern void sub_80420B8(Entity *pokemon);
 extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);
@@ -105,10 +105,10 @@ extern const s16 gUnknown_80F4F74;
 extern const s16 gUnknown_80F4FC2;
 extern const s16 gUnknown_80F4F76;
 extern const s16 gUnknown_80F4F36;
-extern unkStruct_80943A8 gUnknown_80F54F4[8];
+extern s48_16 gUnknown_80F54F4[8];
 extern const s32 gUnknown_80F60DC[];
 
-extern const Position gUnknown_80F4D44[];
+extern const DungeonPos gUnknown_80F4D44[];
 
 bool8 UseAttack(Entity *a0);
 void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
@@ -309,7 +309,7 @@ void sub_8074094(Entity *entity)
     }
 
     if (entityInfo->isTeamLeader) {
-        unkStruct_80943A8 sp8, sp10;
+        s48_16 sp8, sp10;
         FixedPoint var_38;
         FixedPoint bellyBefore;
         bool8 sound;
@@ -334,11 +334,11 @@ void sub_8074094(Entity *entity)
         if (r4 > 19)
             r4 = 19;
 
-        sp8.s0 = 0;
-        sp8.s4 = 6554;
+        sp8.hi = 0;
+        sp8.lo = 6554;
         F48_16_SMul(&sp10, &sp8, &gUnknown_80F54F4[r4]);
         if (entityInfo->unk153 > 1)
-            sp10.s4 += (gUnknown_80F60DC[entityInfo->unk153] << 0x10);
+            sp10.lo += (gUnknown_80F60DC[entityInfo->unk153] << 0x10);
         entityInfo->unk153 = 0;
 
         bellyBefore = entityInfo->belly;
@@ -797,7 +797,7 @@ void TickStatusHeal(Entity *entity)
     }
 }
 
-void sub_8074FB0(Entity *entity, s32 a1, Position *pos)
+void sub_8074FB0(Entity *entity, s32 a1, DungeonPos *pos)
 {
     Unk_Entity_x184 *strPtr;
     EntityInfo *entityInfo = GetEntInfo(entity);
@@ -910,7 +910,7 @@ bool8 UseAttack(Entity *a0)
                 }
             }
             else {
-                Position32 pos;
+                PixelPos pos;
 
                 monInfo->flags |= 0x2000;
                 pos.x = (monInfo->unk184[0].previousTargetMovePosition2.x * 0x1800) + 0xC00;
@@ -948,7 +948,7 @@ bool8 UseAttack(Entity *a0)
                                 monInfo->numMoveTiles = 0;
                             }
                             else {
-                                Position32 pos;
+                                PixelPos pos;
 
                                 pos.x = (monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.x * 0x1800) + 0xC00;
                                 pos.y = (monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.y * 0x1800) + 0x1000;
@@ -977,7 +977,7 @@ bool8 UseAttack(Entity *a0)
     sub_807AA30();
     for (j = 0; j < 2; j++) {
         for (loop = 0; loop < DUNGEON_MAX_POKEMON; loop++) {
-            Position monPosBefore;
+            DungeonPos monPosBefore;
             EntityInfo *monInfo;
             Entity *mon = gDungeon->activePokemon[loop];
 

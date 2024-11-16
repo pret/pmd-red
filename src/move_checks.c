@@ -1,4 +1,5 @@
 #include "global.h"
+#include "math.h"
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
@@ -358,7 +359,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             break;
         case MOVE_DIG:
         {
-            struct Tile *tile = GetTileAtEntitySafe(pokemon);
+            Tile *tile = GetTileAtEntitySafe(pokemon);
             if (!IsTileGround(tile) || (tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL)
             {
                 return FALSE;
@@ -586,7 +587,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_CHARM:
-            if (targetData->offensiveMultipliers[STAT_STAGE_ATK] < STAT_MULTIPLIER_THRESHOLD)
+            if (F248LessThanFloat(targetData->offensiveMultipliers[STAT_STAGE_ATK], STAT_MULTIPLIER_THRESHOLD))
             {
                 return FALSE;
             }
@@ -628,7 +629,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_SCREECH:
-            if (targetData->defensiveMultipliers[STAT_STAGE_DEF] < STAT_MULTIPLIER_THRESHOLD)
+            if (F248LessThanFloat(targetData->defensiveMultipliers[STAT_STAGE_DEF], STAT_MULTIPLIER_THRESHOLD))
             {
                 return FALSE;
             }
@@ -652,8 +653,8 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_MEMENTO:
-            if (targetData->offensiveMultipliers[STAT_STAGE_ATK] < STAT_MULTIPLIER_THRESHOLD &&
-                targetData->offensiveMultipliers[STAT_STAGE_SP_ATK] < STAT_MULTIPLIER_THRESHOLD)
+            if (F248LessThanFloat(targetData->offensiveMultipliers[STAT_STAGE_ATK], STAT_MULTIPLIER_THRESHOLD) &&
+                F248LessThanFloat(targetData->offensiveMultipliers[STAT_STAGE_SP_ATK], STAT_MULTIPLIER_THRESHOLD))
             {
                 return FALSE;
             }
@@ -728,8 +729,8 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
                 if (targetData->offensiveStages[i] < DEFAULT_STAT_STAGE) break;
                 if (targetData->defensiveStages[i] < DEFAULT_STAT_STAGE) break;
                 if (targetData->hitChanceStages[i] < DEFAULT_STAT_STAGE ||
-                    targetData->offensiveMultipliers[i] < DEFAULT_STAT_MULTIPLIER ||
-                    targetData->defensiveMultipliers[i] < DEFAULT_STAT_MULTIPLIER)
+                    F248LessThanInt(targetData->offensiveMultipliers[i], 1) ||
+                    F248LessThanInt(targetData->defensiveMultipliers[i], 1))
                 {
                     break;
                 }
@@ -753,8 +754,8 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
                 if (userData->offensiveStages[i] < targetData->offensiveStages[i]) break;
                 if (userData->defensiveStages[i] < targetData->defensiveStages[i] ||
                     userData->hitChanceStages[i] < targetData->hitChanceStages[i] ||
-                    userData->offensiveMultipliers[i] < targetData->offensiveMultipliers[i] ||
-                    userData->defensiveMultipliers[i] < targetData->defensiveMultipliers[i])
+                    userData->offensiveMultipliers[i].raw < targetData->offensiveMultipliers[i].raw ||
+                    userData->defensiveMultipliers[i].raw < targetData->defensiveMultipliers[i].raw)
                 {
                     break;
                 }

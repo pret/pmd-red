@@ -167,7 +167,8 @@ void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const u
     }
 }
 
-void TryDisplayDungeonLoggableMessage5(Entity *pokemon, Position *pos, const u8 *str)
+void TryDisplayDungeonLoggableMessage5(Entity *pokemon, DungeonPos *pos,
+                                       const u8 *str)
 {
     u8 flag;
     flag = sub_8045888(pokemon) ? TRUE : FALSE;
@@ -416,7 +417,7 @@ void DisplayDungeonLoggableMessage(Entity *pokemon, const u8 *str)
 
 struct Struct_sub_808CDB0
 {
-    Position pos;
+    DungeonPos pos;
     bool8 flip;
 };
 

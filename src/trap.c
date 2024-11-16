@@ -64,7 +64,7 @@ struct unkStruct_806B7F8
     u32 unk4;
     u16 level;
     u8 fillA[2];
-    struct Position pos;
+    DungeonPos pos;
     u8 unk10;
 };
 extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
@@ -73,7 +73,7 @@ void sub_806A9B4(Entity *, u32);
 
 s16 sub_803D970(u32);
 bool8 sub_806AA0C(s32, s32);
-void sub_80421EC(Position *, u32);
+void sub_80421EC(DungeonPos *, u32);
 
 bool8 sub_8045888(Entity *);
 u8 sub_8043D10(void);
@@ -82,13 +82,14 @@ void sub_8045C28(Item *, u8 , u8);
 void sub_8045BF8(u8 *, Item *);
 void DealDamageToEntity(Entity *,s16,u32,u32);
 void sub_806F480(Entity *, u32);
-void sub_804225C(Entity *, Position *, u8);
+void sub_804225C(Entity *, DungeonPos *, u8);
 void sub_8071DA4(Entity *);
 void sub_806A1E8(Entity *pokemon);
 u8 sub_803D6FC(void);
-extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
+extern void sub_807DF38(Entity *pokemon, Entity *target, DungeonPos *pos, u32,
+			u8 moveType, s16);
 
-void sub_807FC3C(Position *pos, u32 trapID, u32 param_3)
+void sub_807FC3C(DungeonPos *pos, u32 trapID, u32 param_3)
 {
   gDungeon->trapPos.x = pos->x;
   gDungeon->trapPos.y = pos->y;
@@ -97,9 +98,9 @@ void sub_807FC3C(Position *pos, u32 trapID, u32 param_3)
   gDungeon->unk13570 = 1;
 }
 
-bool8 CanLayTrap(Position *pos)
+bool8 CanLayTrap(DungeonPos *pos)
 {
-    struct Tile *tile = GetTileSafe(pos->x, pos->y);
+    Tile *tile = GetTileMut(pos->x, pos->y);
     if (tile->terrainType & TERRAIN_TYPE_STAIRS ||
         tile->room == CORRIDOR_ROOM ||
         tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
@@ -118,14 +119,14 @@ bool8 CanLayTrap(Position *pos)
     return TRUE;
 }
 
-bool8 LayTrap(Position *pos, u8 trapID, u8 param_3)
+bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3)
 {
     Tile *tile;
     Entity *entity;
     int counter;
     u16 terrainType;
 
-    tile = GetTileSafe(pos->x, pos->y);
+    tile = GetTileMut(pos->x, pos->y);
     if (TRAP_SPIKE_TRAP < trapID) {
         counter = 0;
         while ((counter < 0x1e && (trapID = sub_803D6FC(), trapID == TRAP_WONDER_TILE))) {
@@ -183,11 +184,11 @@ bool8 sub_807FD84(Entity *entity)
     return flag;
 }
 
-bool8 sub_807FE04(Position *pos, char param_2)
+bool8 sub_807FE04(DungeonPos *pos, char param_2)
 {
     Tile *tile;
 
-    tile = GetTileSafe(pos->x,pos->y);
+    tile = GetTileMut(pos->x,pos->y);
     if ((tile->object != NULL) && (GetEntityType(tile->object) == ENTITY_TRAP)) {
         tile->object->type = 0;
         tile->object = NULL;
@@ -201,9 +202,9 @@ bool8 sub_807FE04(Position *pos, char param_2)
     }
 }
 
-bool8 sub_807FE44(Position *pos, char param_2)
+bool8 sub_807FE44(DungeonPos *pos, char param_2)
 {
-    Tile *tile;
+    const Tile *tile;
 
     tile = GetTile(pos->x,pos->y);
     if ((tile->object != NULL) && (GetEntityType(tile->object) == ENTITY_TRAP)) {
@@ -223,7 +224,7 @@ void GetTrapName(u8 *buffer, u8 trapIndex)
     strcpy(buffer, gTrapNames[trapIndex]);
 }
 
-void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
+void sub_807FE9C(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
 {
     Tile *tile;
     bool8 flag1;
@@ -235,7 +236,7 @@ void sub_807FE9C(Entity *pokemon, Position *pos, int param_3, char param_4)
     Entity *target;
     u8 *text;
 
-    tile = GetTileSafe(pos->x,pos->y);
+    tile = GetTileMut(pos->x,pos->y);
     entity = tile->object;
     flag1 = FALSE;
     if (entity == NULL) {
@@ -578,7 +579,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
     }
 }
 
-void HandleSummonTrap(Entity *pokemon,Position *pos)
+void HandleSummonTrap(Entity *pokemon,DungeonPos *pos)
 {
   s32 r4;
   u32 direction;

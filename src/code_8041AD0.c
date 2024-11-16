@@ -1,4 +1,5 @@
 #include "global.h"
+#include "math.h"
 #include "code_800E9A8.h"
 #include "code_803E46C.h"
 #include "code_803E724.h"
@@ -50,18 +51,18 @@ extern void sub_800EE5C(u32);
 extern void sub_800EF64(void);
 
 u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
-s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3);
+s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3);
 
-s32 sub_80416A4(Position *pos_1, u32 param_2, bool8 param_3)
+s32 sub_80416A4(DungeonPos *pos_1, u32 param_2, bool8 param_3)
 {
-  Position32 pos;
+  PixelPos pos;
 
   pos.x = pos_1->x * 0x1800 + 0xc00;
   pos.y = pos_1->y * 0x1800 + 0x1000;
   return sub_80416E0(&pos, param_2, param_3);
 }
 
-s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3)
+s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
 {
   int counter;
   s32 ret;
@@ -223,10 +224,10 @@ void EntityUpdateStatusSprites(Entity *entity)
     if ((gDungeon->unk644.itemHoldersIdentified) && (entityInfo->heldItem.flags & ITEM_FLAG_EXISTS)) {
       spriteStatus = spriteStatus | STATUS_SPRITE_LOWHP;
     }
-    if ( (entityInfo->offensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->offensiveMultipliers[1] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->defensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->defensiveMultipliers[1] < DEFAULT_STAT_MULTIPLIER) ||
+    if ((F248LessThanInt(entityInfo->offensiveMultipliers[0], 1)) ||
+        (F248LessThanInt(entityInfo->offensiveMultipliers[1], 1)) ||
+        (F248LessThanInt(entityInfo->defensiveMultipliers[0], 1)) ||
+        (F248LessThanInt(entityInfo->defensiveMultipliers[1], 1)) ||
         (entityInfo->offensiveStages[0] < DEFAULT_STAT_STAGE) ||
         (entityInfo->offensiveStages[1] < DEFAULT_STAT_STAGE) ||
         (entityInfo->defensiveStages[0] < DEFAULT_STAT_STAGE) ||
@@ -849,7 +850,7 @@ void sub_804218C(Entity *pokemon, Entity *target)
     sub_804151C(target, 0x2A, 1);
 }
 
-void sub_804219C(Position32 *pos)
+void sub_804219C(PixelPos *pos)
 {
     sub_80416E0(pos, 0x90, TRUE);
 }
@@ -867,7 +868,7 @@ void sub_80421C0(Entity *pokemon, u16 r1)
             PlaySoundEffect(r1);
 }
 
-void sub_80421EC(Position *pos, u16 r1)
+void sub_80421EC(DungeonPos *pos, u16 r1)
 {
     if(sub_803F428(pos))
         PlaySoundEffect(r1);

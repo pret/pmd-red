@@ -183,17 +183,18 @@ void sub_8075900(Entity *pokemon, u8 r1);
 extern u8 sub_8044B28(void);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void sub_804652C(Entity *, Entity *, Item *, u32, Position *);
+extern void sub_804652C(Entity *, Entity *, Item *, u32, DungeonPos *);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_8045C28(Item *, u8 , u8);
-static void sub_805A7D4(Entity *, Entity *, Item *, Position *);
+static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 extern void MudWaterSportEffect(u32);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_806A6E8(Entity *);
 
 extern void sub_806ABAC(Entity *, Entity *);
 extern u8 sub_806F4A4(Entity *, u32);
-extern void sub_807DF38(Entity *pokemon, Entity *target, Position *pos, u32, u8 moveType, s16);
+extern void sub_807DF38(Entity *pokemon, Entity *target, DungeonPos *pos, u32,
+			u8 moveType, s16);
 extern void nullsub_92(Entity *);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern u8 sub_807EAA0(u32, u32);
@@ -332,7 +333,7 @@ bool8 VitalThrowMoveAction(Entity * pokemon, Entity * target, Move *move, s32 pa
 
 bool8 DigMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    struct Tile *tile;
+    Tile *tile;
     bool8 flag;
 
     flag = FALSE;
@@ -361,7 +362,7 @@ bool32 sub_8057824(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
 bool32 sub_805783C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,0x80,TRUE);
+  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,FloatToF248(0.5),TRUE);
   return TRUE;
 }
 
@@ -551,7 +552,7 @@ bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, u32 param_4)
 
 bool8 sub_8057C68(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    ChangeDefenseMultiplierTarget(pokemon, target, gUnknown_8106A4C, 0x40, 1);
+    ChangeDefenseMultiplierTarget(pokemon, target, gUnknown_8106A4C, FloatToF248(0.25), 1);
     return TRUE;
 }
 
@@ -680,7 +681,7 @@ bool8 sub_8057ED0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     flag = TRUE;
     if(sub_805727C(pokemon, target, gUnknown_80F4E04))
     {
-        ChangeAttackMultiplierTarget(pokemon, target, gUnknown_8106A4C, 0x80, FALSE);
+        ChangeAttackMultiplierTarget(pokemon, target, gUnknown_8106A4C, FloatToF248(0.5), FALSE);
     }
   }
   return flag;
@@ -692,8 +693,8 @@ bool8 sub_8057F24(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 
   entityInfo = GetEntInfo(pokemon);
   entityInfo->HP = 1;
-  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,0x40,TRUE);
-  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A50,0x40,TRUE);
+  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A4C,FloatToF248(0.25),TRUE);
+  ChangeAttackMultiplierTarget(pokemon,target,gUnknown_8106A50,FloatToF248(0.25),TRUE);
   entityInfo->unk154 = 1;
   return TRUE;
 }
@@ -2459,7 +2460,7 @@ bool8 sub_805A464(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool32 flag;
   Item item;
-  Position pos;
+  DungeonPos pos;
 
   flag = FALSE;
   if (HandleDamagingMove(pokemon, target, move, 0x100, param_4) != 0) {
@@ -2592,7 +2593,7 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     EntityInfo *entityInfo;
     EntityInfo *targetEntityInfo;
     Item heldItem;
-    Position pos;
+    DungeonPos pos;
 
     entityInfo = GetEntInfo(pokemon);
     targetEntityInfo = GetEntInfo(target);
@@ -2632,7 +2633,8 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     }
 }
 
-static void sub_805A7D4(Entity * pokemon, Entity * target, Item *item, Position *pos)
+static void sub_805A7D4(Entity * pokemon, Entity * target, Item *item,
+                 DungeonPos *pos)
 {
   Entity stackEntity;
 
@@ -2655,11 +2657,11 @@ bool8 sub_805A85C(Entity * pokemon, Entity * target, Move *move, u32 param_4)
   int x;
   int y;
   int counter;
-  Position *r9;
-  Position pos1;
+  DungeonPos *r9;
+  DungeonPos pos1;
   Move stackMove;
-  Position32 pos2;
-  struct Tile *tile;
+  PixelPos pos2;
+  Tile *tile;
   Entity *entity;
   s32 temp;
   s32 temp2;
@@ -2702,7 +2704,7 @@ _0805A8C2:
       sub_803E46C(0x2c);
     }
   }
-  tile = GetTileSafe(pos1.x,pos1.y);
+  tile = GetTileMut(pos1.x,pos1.y);
   entity = tile->monster;
   if (entity != NULL) {
     if (GetEntityType(entity) == ENTITY_MONSTER) {
@@ -2735,9 +2737,9 @@ _0805A9FE:
 _0805AA5E:
     if (EntityExists(target)) {
 #ifndef NOMATCHING
-      register Position *pos asm("r1");
+      register DungeonPos *pos asm("r1");
 #else
-      Position *pos;
+      DungeonPos *pos;
 #endif
       sub_804535C(target, NULL);
       pos = r9;
