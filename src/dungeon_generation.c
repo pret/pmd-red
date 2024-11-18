@@ -102,7 +102,7 @@ void GenerateLineFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateCrossFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateBeetleFloor(UnkDungeonGlobal_unk1C574 *a0);
 void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, UnkDungeonGlobal_unk1C574 *unkPtr);
-void sub_8051654(UnkDungeonGlobal_unk1C574 *a0);
+void sub_8051654(UnkDungeonGlobal_unk1C574 *unkPtr);
 void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unkPtr);
 void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse);
 void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse);
@@ -124,12 +124,6 @@ static EWRAM_DATA s32 sNumRooms = 0;
 EWRAM_DATA s32 gUnknown_202F1D0 = 0;
 static EWRAM_DATA s32 sNumTilesReachableFromStairs = 0;
 static EWRAM_DATA Position sKecleonShopMiddlePos = {0};
-
-struct PositionU8
-{
-    u8 x;
-    u8 y;
-};
 
 // Helper functions for terrain flags
 static inline void SetTerrainType(Tile *tile, u32 terrainType)
@@ -157,6 +151,14 @@ static inline u32 GetTerrainType(Tile *tile)
 {
     return tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
 }
+
+struct FixedRoomsData
+{
+    u8 x;
+    u8 y;
+    u8 unk2;
+    u8 unk3[0]; // Not sure about the size;
+};
 
 // Some weird-ass regswap prevents the function from being matched - https://decomp.me/scratch/9SUV3
 #ifdef NONMATCHING
@@ -1647,9 +1649,8 @@ void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, UnkDungeonGlobal_un
 
 bool8 GenerateFixedFloor(s32 fixedRoomId, UnkDungeonGlobal_unk1C574 *unkPtr)
 {
-    struct PositionU8 **fileData = (void *) gDungeon->unk13568->data;
-    s32 fixedRoomSizeX = fileData[fixedRoomId]->x;
-    s32 fixedRoomSizeY = fileData[fixedRoomId]->y;
+    s32 fixedRoomSizeX = ((struct FixedRoomsData **)(gDungeon->unk13568->data))[fixedRoomId]->x;
+    s32 fixedRoomSizeY = ((struct FixedRoomsData **)(gDungeon->unk13568->data))[fixedRoomId]->y;
     s32 gridSizeX, gridSizeY;
 
     if (fixedRoomSizeX == 0 || fixedRoomSizeY == 0) {
@@ -4577,6 +4578,12 @@ void ResetFloor(void)
     }
 }
 
+struct PositionU8
+{
+    u8 x;
+    u8 y;
+};
+
 /*
  * ShuffleSpawnPositions - Randomly shuffle an array of spawn positions
  */
@@ -6426,48 +6433,52 @@ void sub_8051288(s32 fixedRoomId)
 {
     s32 x, y;
     Dungeon *dungeon = gDungeon;
-    struct PositionU8 **fileData = (void *) dungeon->unk13568->data;
-    s32 fixedRoomSizeX = fileData[fixedRoomId]->x;
-    s32 fixedRoomSizeY = fileData[fixedRoomId]->y;
+    s32 fixedRoomSizeX = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->x;
+    s32 fixedRoomSizeY = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->y;
 
     dungeon->unkE260.x = fixedRoomSizeX;
     dungeon->unkE260.y = fixedRoomSizeY;
-    // FIX ME
-    gUnknown_202F1DC = ((u8 **)(dungeon->unk13568->data))[fixedRoomId] + 3;
+    gUnknown_202F1DC = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->unk3;
     gUnknown_202F1E1 = 0;
-    for (x = 5; x < fixedRoomSizeX + 5; x++) {
-        for (y = 5; y < fixedRoomSizeY + 5; y++) {
+
+    for (y = 5; y < fixedRoomSizeY + 5; y++) {
+        for (x = 5; x < fixedRoomSizeX + 5; x++) {
             u8 unk = sub_80511F0();
             if (sub_805124C(GetTileSafe(x, y), unk, x, y, 1)) {
-                dungeon->unkE260.x = x;
-                dungeon->unkE260.y = y;
+                dungeon->stairsSpawn.x = x;
+                dungeon->stairsSpawn.y = y;
             }
         }
     }
 
-    for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
-        for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
-            if (y > 4)
-
-            Tile *tile = GetTileSafe(x, y);
-            if (GetTerrainType(tile) == TERRAIN_TYPE_WALL) {
-                tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
-            }
-        }
-    }
-
-    if (fixedRoomId != 4) {
-        for (x = 0; x < 17; x++) {
-            for (y = 0; y < 5; y++) {
+    for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+        for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+            if (x <= 4 || x >= fixedRoomSizeX + 5 || y <= 4 || y >= fixedRoomSizeY + 5) {
                 Tile *tile = GetTileSafe(x, y);
                 tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+                if (gUnknown_202F1A8 != 0) {
+                    SetTerrainType(tile, TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+                }
+                else {
+                    SetTerrainWall(tile);
+                }
             }
         }
     }
 
-    if (gDungeon->tileset < 64) {
-        for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
-            for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+    if (fixedRoomId == 4) {
+        for (y = 5; y < 17; y++) {
+            for (x = 2; x < 5; x++) {
+                Tile *tile = GetTileSafe(x, y);
+                tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+                SetTerrainWall(tile);
+            }
+        }
+    }
+
+    if (gDungeon->tileset >= 64) {
+        for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+            for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
                 Tile *tile = GetTileSafe(x, y);
                 if (GetTerrainType(tile) == TERRAIN_TYPE_WALL) {
                     tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
@@ -6478,5 +6489,66 @@ void sub_8051288(s32 fixedRoomId)
 
     sub_804E9DC();
 }
+
+void sub_8051438(struct GridCell *gridCell, s32 fixedRoomId)
+{
+    s32 x, y;
+    Dungeon *dungeon = gDungeon;
+
+    gUnknown_202F1DC = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->unk3;
+    gUnknown_202F1E1 = 0;
+
+    if (((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->unk2 & 1) {
+        s32 yIndex;
+
+        dungeon->unkE250.minX = gridCell->start.x;
+        dungeon->unkE250.minY = gridCell->start.y;
+        dungeon->unkE250.maxX = gridCell->end.x;
+        dungeon->unkE250.maxY = gridCell->end.y;
+
+        yIndex = 0;
+        for (y = gridCell->start.y; y < gridCell->end.y; y++) {
+            s32 xIndex = 0;
+            for (x = gridCell->start.x; x < gridCell->end.x; x++) {
+                u8 roomId;
+                u8 unk = sub_80511F0();
+                Tile *tile = GetTileSafe(x, y);
+
+                dungeon->unkE87C[xIndex][yIndex] = unk;
+                sub_805124C(&dungeon->unkE27C[xIndex][yIndex], unk, x, y, 0);
+                roomId = tile->room;
+                *tile = dungeon->unkE27C[xIndex][yIndex];
+                if (x >= gridCell->start.x + 2 && x < gridCell->end.x - 2 && y >= gridCell->start.y + 2 && y < gridCell->end.y - 2) {
+                    tile->terrainType = TERRAIN_TYPE_IMPASSABLE_WALL | TERRAIN_TYPE_UNBREAKABLE;
+                    tile->unkE = 0xE;
+                }
+                tile->room = roomId;
+                dungeon->unkE8BC = roomId;
+                xIndex++;
+            }
+            yIndex++;
+        }
+    }
+    else {
+        for (y = gridCell->start.y; y < gridCell->end.y; y++) {
+            for (x = gridCell->start.x; x < gridCell->end.x; x++) {
+                u8 unk = sub_80511F0();
+                Tile *tile = GetTileSafe(x, y);
+                u8 roomId = tile->room;
+
+                sub_805124C(tile, unk, x, y, 1);
+                tile->room = roomId;
+                dungeon->unkE8BC = roomId;
+            }
+        }
+    }
+}
+
+/*
+void sub_8051654(UnkDungeonGlobal_unk1C574 *unkPtr)
+{
+
+}
+*/
 
 //

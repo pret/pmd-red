@@ -363,13 +363,12 @@ typedef struct Dungeon
     Position stairsSpawn; // stairs location
     Position unkE220[8];
     struct MinMaxPosition kecleonShopPos;
-    u32 unkE250;
-    u8 fillE254[0xE260 - 0xE254];
+    struct MinMaxPosition unkE250;
     Position unkE260;
     /* 0xE264 */ Weather weather; // Uses the weather constants in weather.h.
     /* 0xE27C */ Tile unkE27C[8][8];
     /* 0xE87C */ u8 unkE87C[8][8];
-    u32 fillE8BC;
+    /* 0xE8BC */ u8 unkE8BC; // Seems to be some tile's room index;
     /* 0xE8C0 */ Tile *tilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 unk104C0;
     /* 0x104C4 */ RoomData roomData[MAX_ROOM_COUNT];
