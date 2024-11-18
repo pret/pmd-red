@@ -49,7 +49,7 @@ void sub_807360C(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
+        entity = gDungeon->activePokemon[index];
         if(EntityExists(entity))
         {
             if(GetEntInfo(entity)->unk152 != 0)
@@ -110,7 +110,7 @@ void AIDecideUseItem(Entity *pokemon)
             }
             else if (itemType == CATEGORY_THROWN_ARC)
             {
-                Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
+                DungeonPos potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
                 GetPossibleAIArcItemTargets(pokemon, item, potentialTargetPositions, TRUE);
                 if (gAIThrowItemActionChoiceCount == 0)
                 {
@@ -156,7 +156,7 @@ void AIDecideUseItem(Entity *pokemon)
             else if (toolboxIndex == 0)
             {
                 // This seems unused. toolboxIndex can never be 0.
-                struct Tile *mapTile = GetTile(pokemon->pos.x, pokemon->pos.y);
+                const Tile *mapTile = GetTile(pokemon->pos.x, pokemon->pos.y);
                 Entity *object = mapTile->object;
                 if (object != null)
                 {
@@ -233,7 +233,7 @@ void AIDecideUseItem(Entity *pokemon)
                         u8 itemType = GetItemCategory(item->id);
                         if (itemType == CATEGORY_THROWN_ARC)
                         {
-                            Position potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
+                            DungeonPos potentialTargetPositions[NUM_POTENTIAL_ROCK_TARGETS];
                             GetPossibleAIArcItemTargets(pokemon, item, potentialTargetPositions, FALSE);
                             if (gAIThrowItemActionChoiceCount != 0)
                             {
@@ -281,7 +281,7 @@ void GetPossibleAIThrownItemDirections(Entity *pokemon, s32 thrownAIFlag, Item *
     }
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        Entity *targetPokemon = gDungeon->allPokemon[i];
+        Entity *targetPokemon = gDungeon->activePokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon)
         {
             s32 targetingFlags;
@@ -312,13 +312,15 @@ void GetPossibleAIThrownItemDirections(Entity *pokemon, s32 thrownAIFlag, Item *
     }
 }
 
-void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item, Position potentialTargets[], bool8 ignoreRollChance)
+void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item,
+                                 DungeonPos potentialTargets[],
+                                 bool8 ignoreRollChance)
 {
     s32 i;
     gAIThrowItemActionChoiceCount = 0;
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        Entity *targetPokemon = gDungeon->allPokemon[i];
+        Entity *targetPokemon = gDungeon->activePokemon[i];
         if (EntityExists(targetPokemon) && pokemon != targetPokemon &&
             CanSeeTarget(pokemon, targetPokemon) && GetTreatmentBetweenMonsters(pokemon, targetPokemon, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)
         {
@@ -340,7 +342,7 @@ void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item, Position potential
             }
             if (distance <= 10)
             {
-                Position *newPotentialTarget;
+                DungeonPos *newPotentialTarget;
                 if (!ignoreRollChance)
                 {
                     u32 itemWeight = GetAIUseItemProbability(targetPokemon, item, ITEM_TARGET_OTHER);
@@ -366,7 +368,7 @@ void TargetThrownItem(Entity *pokemon, Entity *targetPokemon, Item *item, s32 ta
     distanceX = distanceX < 0 ? -distanceX : distanceX;
     distanceY = pokemon->pos.y - targetPokemon->pos.y;
     distanceY = distanceY < 0 ? -distanceY : distanceY;
-    if (GetEntInfo(pokemon)->itemStatus.itemStatus == STATUS_NONE)
+    if (GetEntInfo(pokemon)->longTossClassStatus.status == STATUS_NONE)
     {
         s32 distance = distanceY < distanceX ? distanceX : distanceY;
         if (distance > RANGED_ATTACK_RANGE)

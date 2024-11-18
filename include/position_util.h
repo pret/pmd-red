@@ -3,7 +3,7 @@
 
 #include "structs/str_position.h"
 
-s32 GetDirectionTowardsPosition(Position *originPos, Position *targetPos);
-s32 GetDistance(Position *pos1, Position *pos2);
+s32 GetDirectionTowardsPosition(DungeonPos *originPos, DungeonPos *targetPos);
+s32 GetDistance(DungeonPos *pos1, DungeonPos *pos2);
 
 #endif

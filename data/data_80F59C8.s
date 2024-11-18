@@ -308,8 +308,8 @@ gUnknown_80F6624: @ 80F6624
 .byte 0xb9, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0xba, 0x01, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
 .byte 0xbb, 0x01, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00
 
-.global gStatusSpriteMasks_SleepStatus
-gStatusSpriteMasks_SleepStatus: @ 80F669C
+.global gStatusSpriteMasks_SleepClassStatus
+gStatusSpriteMasks_SleepClassStatus: @ 80F669C
 .4byte 0                       @ STATUS_NONE
 .4byte STATUS_SPRITE_SLEEP     @ STATUS_SLEEP
 .4byte STATUS_SPRITE_SLEEPLESS @ STATUS_SLEEPLESS
@@ -317,16 +317,16 @@ gStatusSpriteMasks_SleepStatus: @ 80F669C
 .4byte 0                       @ STATUS_YAWNING
 .4byte STATUS_SPRITE_SLEEP     @ STATUS_NAPPING
 
-.global gStatusSpriteMasks_NonVolatileStatus
-gStatusSpriteMasks_NonVolatileStatus: @ 80F66B4
+.global gStatusSpriteMasks_BurnClassStatus
+gStatusSpriteMasks_BurnClassStatus: @ 80F66B4
 .4byte 0                            @ STATUS_NONE
 .4byte STATUS_SPRITE_BURNED         @ STATUS_BURN
 .4byte STATUS_SPRITE_POISONED       @ STATUS_POISONED
 .4byte STATUS_SPRITE_BADLY_POISONED @ STATUS_BADLY_POISONED
 .4byte 0                            @ STATUS_PARALYSIS
 
-.global gStatusSpriteMasks_ImmobilizeStatus
-gStatusSpriteMasks_ImmobilizeStatus: @ 80F66C8
+.global gStatusSpriteMasks_FrozenClassStatus
+gStatusSpriteMasks_FrozenClassStatus: @ 80F66C8
 .4byte 0                    @ STATUS_NONE
 .4byte STATUS_SPRITE_FROZEN @ STATUS_FROZEN
 .4byte 0                    @ STATUS_SHADOW_HOLD
@@ -336,8 +336,8 @@ gStatusSpriteMasks_ImmobilizeStatus: @ 80F66C8
 .4byte 0                    @ STATUS_PETRIFIED
 .4byte 0                    @ STATUS_CONSTRICTION
 
-.global gStatusSpriteMasks_VolatileStatus
-gStatusSpriteMasks_VolatileStatus: @ 80F66E8
+.global gStatusSpriteMasks_CringeClassStatus
+gStatusSpriteMasks_CringeClassStatus: @ 80F66E8
 .4byte 0                      @ STATUS_NONE
 .4byte 0                      @ STATUS_CRINGE
 .4byte STATUS_SPRITE_CONFUSED @ STATUS_CONFUSED
@@ -347,8 +347,8 @@ gStatusSpriteMasks_VolatileStatus: @ 80F66E8
 .4byte STATUS_SPRITE_ENCORE   @ STATUS_ENCORE
 .4byte 0                      @ STATUS_INFATUATED
 
-.global gStatusSpriteMasks_ChargingStatus
-gStatusSpriteMasks_ChargingStatus: @ 80F6708
+.global gStatusSpriteMasks_BideClassStatus
+gStatusSpriteMasks_BideClassStatus: @ 80F6708
 .4byte 0 @ STATUS_NONE
 .4byte 0 @ STATUS_BIDE
 .4byte 0 @ STATUS_SOLARBEAM
@@ -363,8 +363,8 @@ gStatusSpriteMasks_ChargingStatus: @ 80F6708
 .4byte 0 @ STATUS_CHARGING
 .4byte 0 @ STATUS_ENRAGED
 
-.global gStatusSpriteMasks_ProtectionStatus
-gStatusSpriteMasks_ProtectionStatus: @ 80F673C
+.global gStatusSpriteMasks_ReflectClassStatus
+gStatusSpriteMasks_ReflectClassStatus: @ 80F673C
 .4byte 0                           @ STATUS_NONE
 .4byte STATUS_SPRITE_SHIELD_BLUE   @ STATUS_REFLECT
 .4byte STATUS_SPRITE_SHIELD_RED    @ STATUS_SAFEGUARD
@@ -381,42 +381,42 @@ gStatusSpriteMasks_ProtectionStatus: @ 80F673C
 .4byte STATUS_SPRITE_SHIELD_GREEN  @ STATUS_VITAL_THROW
 .4byte STATUS_SPRITE_SHIELD_BLUE   @ STATUS_MIST
 
-.global gStatusSpriteMasks_WaitingStatus
-gStatusSpriteMasks_WaitingStatus: @ 80F6778
+.global gStatusSpriteMasks_CurseClassStatus
+gStatusSpriteMasks_CurseClassStatus: @ 80F6778
 .4byte 0                    @ STATUS_NONE
 .4byte STATUS_SPRITE_CURSED @ STATUS_CURSED
 .4byte 0                    @ STATUS_DECOY
 .4byte STATUS_SPRITE_SNATCH @ STATUS_SNATCH
 
-.global gStatusSpriteMasks_LinkedStatus
-gStatusSpriteMasks_LinkedStatus: @ 80F6788
+.global gStatusSpriteMasks_LeechSeedClassStatus
+gStatusSpriteMasks_LeechSeedClassStatus: @ 80F6788
 .4byte 0 @ STATUS_NONE
 .4byte 0 @ STATUS_LEECH_SEED
 .4byte 0 @ STATUS_DESTINY_BOND
 
-.global gStatusSpriteMasks_MoveStatus
-gStatusSpriteMasks_MoveStatus: @ 80F6794
+.global gStatusSpriteMasks_SureShotClassStatus
+gStatusSpriteMasks_SureShotClassStatus: @ 80F6794
 .4byte 0                          @ STATUS_NONE
 .4byte STATUS_SPRITE_SURE_SHOT    @ STATUS_SURE_SHOT
 .4byte STATUS_SPRITE_WHIFFER      @ STATUS_WHIFFER
 .4byte STATUS_SPRITE_SET_DAMAGE   @ STATUS_SET_DAMAGE
 .4byte STATUS_SPRITE_FOCUS_ENERGY @ STATUS_FOCUS_ENERGY
 
-.global gStatusSpriteMasks_ItemStatus
-gStatusSpriteMasks_ItemStatus: @ 80F67A8
+.global gStatusSpriteMasks_LongTossClassStatus
+gStatusSpriteMasks_LongTossClassStatus: @ 80F67A8
 .4byte 0 @ STATUS_NONE
 .4byte 0 @ STATUS_LONG_TOSS
 .4byte 0 @ STATUS_PIERCE
 
-.global gStatusSpriteMasks_TransformStatus
-gStatusSpriteMasks_TransformStatus: @ 80F67B4
+.global gStatusSpriteMasks_InvisibleClassStatus
+gStatusSpriteMasks_InvisibleClassStatus: @ 80F67B4
 .4byte 0 @ STATUS_NONE
 .4byte 0 @ STATUS_INVISIBLE
 .4byte 0 @ STATUS_TRANSFORMED
 .4byte 0 @ STATUS_MOBILE
 
-.global gStatusSpriteMasks_EyesightStatus
-gStatusSpriteMasks_EyesightStatus: @ 80F67C4
+.global gStatusSpriteMasks_BlinkerClassStatus
+gStatusSpriteMasks_BlinkerClassStatus: @ 80F67C4
 .4byte 0                        @ STATUS_NONE
 .4byte STATUS_SPRITE_BLINKER    @ STATUS_BLINKER
 .4byte STATUS_SPRITE_CROSS_EYED @ STATUS_CROSS_EYED
@@ -465,7 +465,8 @@ gUnknown_80F683C: @ 80F683C
 .global gUnknown_80F6850
 gUnknown_80F6850: @ 80F6850
 @ replacing .incbin "baserom.gba", 0xF6850, 0x10
-.byte 0x9e, 0x01, 0xa1, 0x01, 0xa2, 0x01, 0xa3, 0x01, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00
+.byte 0x9e, 0x01, 0xa1, 0x01, 0xa2, 0x01, 0xa3, 0x01
+.byte 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00
 
 .global gSpeedTurns
 gSpeedTurns: @ 80F6860
@@ -521,14 +522,14 @@ gUnknown_80F69A8: @ 80F69A8
 .byte 0x69, 0x72, 0x30, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00, 0x70, 0x6b, 0x73, 0x64
 .byte 0x69, 0x72, 0x30, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00
 
-.global gUnknown_80F69D4
-gUnknown_80F69D4: @ 80F69D4
+.global gOtherOobTile
+gOtherOobTile: @ 80F69D4
 @ replacing .incbin "baserom.gba", 0xF69D4, 0x18
 .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-.global gUnknown_80F69EC
-gUnknown_80F69EC: @ 80F69EC
+.global gWaterOobTile
+gWaterOobTile: @ 80F69EC
 @ replacing .incbin "baserom.gba", 0xF69EC, 0x18
 .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00

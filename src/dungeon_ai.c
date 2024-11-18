@@ -2,6 +2,7 @@
 #include "dungeon_ai.h"
 
 #include "code_803E668.h"
+#include "code_803E724.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
@@ -41,7 +42,6 @@ extern char *gPtrItsaMonsterHouseMessage;
 extern u8 sub_8044B28(void);
 extern void sub_807AB38(Entity *, u32);
 extern void sub_8041888(u32);
-extern u8 sub_803F428(s16 *);
 
 void sub_8075900(Entity *pokemon, u8 r1)
 {
@@ -51,16 +51,16 @@ void sub_8075900(Entity *pokemon, u8 r1)
         {
             if(!sub_8044B28())
             {
-                if(!gDungeon->monsterHouseTriggered)
+                if(!gDungeon->unk644.monsterHouseTriggered)
                 {
                     if((GetTileAtEntitySafe(pokemon)->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
                     {
                         // It's a monster house!
-                        TryDisplayDungeonLoggableMessage(GetLeader(), gPtrItsaMonsterHouseMessage);
-                        gDungeon->monsterHouseTriggeredEvent = TRUE;
+                        LogMessageByIdWithPopupCheckUser(GetLeader(), gPtrItsaMonsterHouseMessage);
+                        gDungeon->unk644.monsterHouseTriggeredEvent = TRUE;
                         sub_807AB38(pokemon, r1);
                         sub_8041888(0);
-                        if(sub_803F428(&pokemon->pos.x) != 0)
+                        if(sub_803F428(&pokemon->pos))
                             sub_803E708(0x78, 0x39);
                     }
                 }
@@ -74,23 +74,23 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     if (pokemonInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)
     {
-        if (pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
+        if (pokemonInfo->frozenClassStatus.status == STATUS_PETRIFIED)
         {
-            SendImmobilizeEndMessage(pokemon, pokemon);
+            EndFrozenClassStatus(pokemon, pokemon);
         }
     }
     else
     {
-        pokemonInfo->targetingDecoy = TARGETING_DECOY_NONE;
-        if (pokemonInfo->clientType == CLIENT_TYPE_NONE || IsMovingClient(pokemon))
+        pokemonInfo->decoyAITracker = DECOY_AI_NONE;
+        if (pokemonInfo->monsterBehavior == BEHAVIOR_FIXED_ENEMY || ShouldRunMonsterAI(pokemon))
         {
-            if (pokemonInfo->clientType != CLIENT_TYPE_CLIENT && pokemonInfo->useHeldItem)
+            if (pokemonInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET && pokemonInfo->useHeldItem)
             {
                 if (CheckVariousConditions(pokemon))
                 {
                     pokemonInfo->useHeldItem = FALSE;
-                    SetMessageArgument(gFormatBuffer_Monsters[0], pokemon, 0);
-                    TryDisplayDungeonLoggableMessage(pokemon, gPtrCouldntBeUsedMessage);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
+                    LogMessageByIdWithPopupCheckUser(pokemon, gPtrCouldntBeUsedMessage);
                     return;
                 }
                 AIDecideUseItem(pokemon);
@@ -99,32 +99,32 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                     return;
                 }
             }
-            if (!HasStatusAffectingActions(pokemon))
+            if (!HasStatusThatPreventsActing(pokemon))
             {
-                if (gDungeon->decoyActive)
+                if (gDungeon->decoyIsActive)
                 {
                     s32 i;
                     Entity *target;
                     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
                     {
-                        target = gDungeon->allPokemon[i];
+                        target = gDungeon->activePokemon[i];
                         if (EntityExists(target) &&
-                            GetEntInfo(target)->waitingStruct.waitingStatus == STATUS_DECOY &&
+                            GetEntInfo(target)->curseClassStatus.status == STATUS_DECOY &&
                             CanSeeTarget(pokemon, target))
                         {
-                            bool8 enemyDecoy = GetEntInfo(target)->waitingStruct.enemyDecoy;
-                            u8 targetingDecoy = TARGETING_DECOY_TEAM;
-                            if (enemyDecoy)
+                            bool8 applierNonTeamMemberFlag = GetEntInfo(target)->curseClassStatus.applierNonTeamMemberFlag;
+                            u8 decoyAITracker = DECOY_AI_TEAM;
+                            if (applierNonTeamMemberFlag)
                             {
-                                targetingDecoy = TARGETING_DECOY_WILD;
+                                decoyAITracker = DECOY_AI_WILD;
                             }
-                            pokemonInfo->targetingDecoy = targetingDecoy;
+                            pokemonInfo->decoyAITracker = decoyAITracker;
                             break;
                         }
                     }
                 }
                 ClearMonsterActionFields(&pokemonInfo->action);
-                if (pokemonInfo->clientType == CLIENT_TYPE_CLIENT)
+                if (pokemonInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
                 {
                     SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                     pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
@@ -138,47 +138,47 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                     {
                         if (!IQSkillIsEnabled(pokemon, IQ_DEDICATED_TRAVELER))
                         {
-                            DecideAttack(pokemon);
+                            ChooseAIMove(pokemon);
                             if (pokemonInfo->action.action != ACTION_NOTHING)
                             {
                                 return;
                             }
-                            if (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED)
+                            if (pokemonInfo->cringeClassStatus.status == STATUS_CONFUSED)
                             {
                                 SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                             }
                             else
                             {
-                                if (!CanMove(pokemonInfo->id))
+                                if (!GetCanMoveFlag(pokemonInfo->id))
                                 {
                                     return;
                                 }
-                                MoveIfPossible(pokemon, TRUE);
+                                AIMovement(pokemon, TRUE);
                             }
                         }
                         else
                         {
-                            if (pokemonInfo->volatileStatus.volatileStatus == STATUS_CONFUSED)
+                            if (pokemonInfo->cringeClassStatus.status == STATUS_CONFUSED)
                             {
                                 SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
                             }
                             else
                             {
-                                if (CanMove(pokemonInfo->id))
+                                if (GetCanMoveFlag(pokemonInfo->id))
                                 {
-                                    MoveIfPossible(pokemon, TRUE);
+                                    AIMovement(pokemon, TRUE);
                                 }
                                 if (pokemonInfo->action.action > ACTION_PASS_TURN)
                                 {
                                     return;
                                 }
-                                DecideAttack(pokemon);
+                                ChooseAIMove(pokemon);
                                 if (pokemonInfo->action.action <= ACTION_PASS_TURN)
                                 {
                                     return;
                                 }
                                 pokemonInfo->aiTarget.aiNotNextToTarget = FALSE;
-                                pokemonInfo->aiNextToTarget = FALSE;
+                                pokemonInfo->aiAllySkip = FALSE;
                                 pokemonInfo->waiting = FALSE;
                             }
                         }

@@ -14,9 +14,9 @@ typedef struct UnkSpriteMem
 // size: 0x20
 typedef struct axdata1
 {
-    /* 0x0 */ Position pos;
-    /* 0x4 */ Position offset;
-    /* 0x8 */ Position shadow;
+    /* 0x0 */ DungeonPos pos;
+    /* 0x4 */ DungeonPos offset;
+    /* 0x8 */ DungeonPos shadow;
     u32 unkC;
     u32 unk10;
     /* 0x14 */ s16 vramTileOrMaybeAnimTimer;
@@ -43,8 +43,8 @@ typedef struct ax_anim
     /* 0x0 */ u8 frames;
     /* 0x1 */ u8 unkFlags;
     /* 0x2 */ s16 poseId;
-    /* 0x4 */ Position offset;
-    /* 0x8 */ Position shadow;
+    /* 0x4 */ DungeonPos offset;
+    /* 0x8 */ DungeonPos shadow;
 } ax_anim;
 
 // size: 0x3C
@@ -84,7 +84,12 @@ struct axObject
     u8 unk45_orientation;
     u8 unk46;
     u8 unk47;
-    /* 0x48 */ struct EntityInfo* info;
+    /* 0x48 */ union
+    {
+        struct Item* item;
+        struct EntityInfo* monster;
+        struct Trap* trap;
+    } info;
 };
 
 // size: 0x80? (assuming it's the last sub-struct of GroundLives)

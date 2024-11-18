@@ -25,11 +25,11 @@ typedef struct MenuInputStruct
     s32 unk0;
     u16 unk4;
     s16 unk6;
-    Position unk8; // Maybe Position
-    s16 unkC; // Maybe Position
+    DungeonPos unk8; // Maybe DungeonPos
+    s16 unkC; // Maybe DungeonPos
     s16 unkE;
     u32 unk10;
-    Position unk14; // Maybe Position
+    DungeonPos unk14; // Maybe DungeonPos
     /* 0x18 */ s16 menuIndex;
     s16 unk1A;
     s16 unk1C;

@@ -44,7 +44,7 @@ s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
         }
         if (displayMessage && SetVisualFlags(GetEntInfo(pokemon), 0x40, flag)) {
             sub_80429B4(pokemon);
-            TryDisplayDungeonLoggableMessage(pokemon, *gUnknown_80FEE80);
+            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FEE80);
         }
         if (flag) {
             return 2;
@@ -59,20 +59,20 @@ void SetMessageArgument_2(u8 *buffer, EntityInfo *param_2, s32 colorNum)
 {
     if (((gDungeon->unk181e8.blinded ||
         gDungeon->unk181e8.hallucinating) ||
-        (param_2->transformStatus.transformStatus == STATUS_INVISIBLE)) &&
+        (param_2->invisibleClassStatus.status == STATUS_INVISIBLE)) &&
         (param_2->isNotTeamMember))
     {
         strcpy(buffer, *gUnknown_80F8988);
     }
     else
     {
-        if (param_2->waitingStruct.waitingStatus == STATUS_DECOY) {
+        if (param_2->curseClassStatus.status == STATUS_DECOY) {
             strcpy(buffer, *gUnknown_80F8968);
         }
         else
         {
             if (param_2->isNotTeamMember) {
-                if ((param_2->joinedAt.joinedAt == 0x4A) || (param_2->clientType == CLIENT_TYPE_CLIENT)) {
+                if ((param_2->joinedAt.joinedAt == 0x4A) || (param_2->monsterBehavior == BEHAVIOR_RESCUE_TARGET)) {
                     CopyYellowMonsterNametoBuffer(buffer, param_2->apparentID);
                 }
                 else
@@ -88,7 +88,7 @@ void SetMessageArgument_2(u8 *buffer, EntityInfo *param_2, s32 colorNum)
 
 void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum)
 {
-    if (entityInfo->waitingStruct.waitingStatus == STATUS_DECOY) {
+    if (entityInfo->curseClassStatus.status == STATUS_DECOY) {
         sprintfStatic(buffer, gUnknown_8106FA4, colorNum + 0x30, *gUnknown_80F8974);
     }
     else if (entityInfo->isNotTeamMember) {
@@ -103,20 +103,20 @@ void sub_80709C8(u8 *buffer, EntityInfo *entityInfo)
 {
     if (((gDungeon->unk181e8.blinded ||
           gDungeon->unk181e8.hallucinating) ||
-          (entityInfo->transformStatus.transformStatus == STATUS_INVISIBLE)) &&
+          (entityInfo->invisibleClassStatus.status == STATUS_INVISIBLE)) &&
           (entityInfo->isNotTeamMember))
     {
             strcpy(buffer, *gUnknown_80F8994);
     }
     else
     {
-        if (entityInfo->waitingStruct.waitingStatus == STATUS_DECOY) {
+        if (entityInfo->curseClassStatus.status == STATUS_DECOY) {
             strcpy(buffer, *gUnknown_80F8974);
         }
         else
         {
             if (entityInfo->isNotTeamMember) {
-                CopyMonsterNametoBuffer(buffer, entityInfo->apparentID);
+                CopyMonsterNameToBuffer(buffer, entityInfo->apparentID);
             }
             else
             {
@@ -130,18 +130,18 @@ bool8 HasNegativeStatus(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     s32 i;
-    if (pokemonInfo->sleep.sleep == STATUS_SLEEP ||
-        pokemonInfo->sleep.sleep == STATUS_NIGHTMARE ||
-        pokemonInfo->sleep.sleep == STATUS_YAWNING ||
-        pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_NONE ||
-        (pokemonInfo->immobilize.immobilizeStatus != STATUS_INGRAIN && pokemonInfo->immobilize.immobilizeStatus != STATUS_NONE) ||
-        pokemonInfo->volatileStatus.volatileStatus != STATUS_NONE ||
-        pokemonInfo->waitingStruct.waitingStatus == STATUS_CURSED ||
-        pokemonInfo->waitingStruct.waitingStatus == STATUS_DECOY ||
-        pokemonInfo->linked.linkedStatus == STATUS_LEECH_SEED ||
-        pokemonInfo->moveStatus.moveStatus == STATUS_WHIFFER ||
-        pokemonInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER ||
-        pokemonInfo->eyesightStatus.eyesightStatus == STATUS_CROSS_EYED ||
+    if (pokemonInfo->sleepClassStatus.status == STATUS_SLEEP ||
+        pokemonInfo->sleepClassStatus.status == STATUS_NIGHTMARE ||
+        pokemonInfo->sleepClassStatus.status == STATUS_YAWNING ||
+        pokemonInfo->burnClassStatus.status != STATUS_NONE ||
+        (pokemonInfo->frozenClassStatus.status != STATUS_INGRAIN && pokemonInfo->frozenClassStatus.status != STATUS_NONE) ||
+        pokemonInfo->cringeClassStatus.status != STATUS_NONE ||
+        pokemonInfo->curseClassStatus.status == STATUS_CURSED ||
+        pokemonInfo->curseClassStatus.status == STATUS_DECOY ||
+        pokemonInfo->leechSeedClassStatus.status == STATUS_LEECH_SEED ||
+        pokemonInfo->sureShotClassStatus.status == STATUS_WHIFFER ||
+        pokemonInfo->blinkerClassStatus.status == STATUS_BLINKER ||
+        pokemonInfo->blinkerClassStatus.status == STATUS_CROSS_EYED ||
         pokemonInfo->muzzled.muzzled == TRUE ||
         pokemonInfo->exposed ||
         pokemonInfo->perishSongTurns != 0)
@@ -168,9 +168,9 @@ bool8 HasNegativeStatus(Entity *pokemon)
 
 bool8 IsSleeping(Entity *pokemon)
 {
-    if (GetEntInfo(pokemon)->sleep.sleep != STATUS_SLEEP &&
-        GetEntInfo(pokemon)->sleep.sleep != STATUS_NAPPING &&
-        GetEntInfo(pokemon)->sleep.sleep != STATUS_NIGHTMARE)
+    if (GetEntInfo(pokemon)->sleepClassStatus.status != STATUS_SLEEP &&
+        GetEntInfo(pokemon)->sleepClassStatus.status != STATUS_NAPPING &&
+        GetEntInfo(pokemon)->sleepClassStatus.status != STATUS_NIGHTMARE)
     {
         return FALSE;
     }

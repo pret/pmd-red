@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ -d "$DEVKITARM/bin/" ]]; then
+if [[ -n "$DEVKITARM" ]]; then
     OBJDUMP_BIN="$DEVKITARM/bin/arm-none-eabi-objdump"
 else
     OBJDUMP_BIN="arm-none-eabi-objdump"

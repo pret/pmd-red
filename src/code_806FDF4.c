@@ -23,6 +23,7 @@
 #include "text_util.h"
 #include "dungeon_util_1.h"
 #include "type_chart.h"
+#include "math.h"
 
 extern u8 gFormatBuffer_FriendArea[];
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
@@ -132,7 +133,7 @@ void sub_806F500(void)
     temp->unk140[6] = 0;
     temp->unk150 = 0;
     temp->unk158 = 0;
-    temp->unk15C = 0;
+    temp->unk15C = F248_ZERO;
     temp->unk160 = 0;
     temp->unk161 = 0;
     temp->unk162 = 0;
@@ -198,12 +199,12 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
   size = GetBodySize(targetInfo->apparentID);
   if ((1 < ((u16)(gDungeon->fixedRoomId - 4))) && (gDungeon->fixedRoomId != 9) && (gDungeon->fixedRoomId != 0xf)) {
     if ((u16)(gDungeon->fixedRoomId - 0x2cU) < 5) {
-      if (gDungeon->unk65C == 0) {
+      if (gDungeon->unk644.unk18 == 0) {
           return FALSE;
       }
     }
     else if (gDungeon->fixedRoomId == 0x31) {
-      if (gDungeon->fill655[4] == 0) {
+      if (gDungeon->unk644.unk15 == 0) {
         return FALSE;
       }
       if (sub_8097900(0x19e) == 0) {
@@ -212,12 +213,12 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
 
     }
     else {
-      if (IsRecruitingEnabled((gDungeon->dungeonLocation).id) == 0) {
+      if (IsRecruitingEnabled((gDungeon->unk644.dungeonLocation).id) == 0) {
           return FALSE;
       }
     }
   }
-  if (gDungeon->unk65D == 0)
+  if (gDungeon->unk644.unk19 == 0)
   {
     if (((
     (2 < (u16)(targetInfo->id - 0x90)) &&
@@ -229,7 +230,7 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
     (targetInfo->id != MONSTER_JIRACHI) &&
     (targetInfo->id != MONSTER_RAYQUAZA) &&
     (targetInfo->id != MONSTER_DEOXYS_NORMAL) &&
-    (targetInfo->id != 0MONSTER_REGIROCK &&
+    (targetInfo->id != MONSTER_REGIROCK &&
     (targetInfo->id != MONSTER_REGICE) &&
     (targetInfo->id != MONSTER_REGISTEEL)) || (HasRecruitedMon(targetInfo->id) == 0)) &&
      (sub_806F9BC(targetInfo->id) != 0)) {
@@ -243,7 +244,7 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
         iVar5 = -iVar5;
       }
       if (((iVar5 < 2) && (targetInfo->joinedAt.joinedAt != 0x4A)) &&
-         (targetInfo->clientType != 1 && (CanSeeTarget(target,pokemon))
+         (targetInfo->monsterBehavior != 1 && (CanSeeTarget(target,pokemon))
           )) {
         sub_806F910();
         iVar4 = DungeonRandInt(1000);
@@ -689,8 +690,8 @@ bool8 sub_806F9BC(s16 species)
     unkStruct_8092638 auStack_18;
 
     id = species;
-    if (((gDungeon->unk658 == 0) || (sub_808529C(id) == 0)) ||
-        ((id == MONSTER_MEW && (gDungeon->unk678 == 1)))) {
+    if (((gDungeon->unk644.unk14 == 0) || (sub_808529C(id) == 0)) ||
+        ((id == MONSTER_MEW && (gDungeon->unk644.unk34 == 1)))) {
         return FALSE;
     }
     else if (id == MONSTER_LATIAS)
@@ -746,7 +747,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
 
     if (DisplayDungeonYesNoMessage(0,*gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
-            TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA004);
+            LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA004);
         }
         return 0;
     }
@@ -759,7 +760,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
         }
 
         if (pokeIndex == MAX_TEAM_MEMBERS) {
-            TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA030);
+            LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA030);
             return FALSE;
         }
         else {
@@ -779,7 +780,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             pokeStruct2->unkA = -1;
             pokeStruct2->unkC = pokeIndex;
             pokeStruct2->speciesNum = param_3->id;
-            (pokeStruct2->dungeonLocation) = gDungeon->dungeonLocation;
+            (pokeStruct2->dungeonLocation) = gDungeon->unk644.dungeonLocation;
             pokeStruct2->unk10 = param_3->HP;
             pokeStruct2->unk12 = param_3->HP;
             pokeStruct2->belly = param_3->belly;
@@ -797,10 +798,10 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             pokeStruct2->itemSlot = param_3->heldItem;
             BoundedCopyStringtoBuffer(pokeStruct2->name,GetMonSpecies(param_3->id),10);
 
-            sub_8097848();
+            IncrementAdventureNumJoined();
 
             if (sub_806B8CC(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
-                TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA058);
+                LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA058);
                 pokeStruct2->unk0 = 0;
             }
             else {
@@ -812,10 +813,10 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                     }
                 }
                 sub_808D9DC(gFormatBuffer_Monsters[0],pokeStruct2,0);
-                TryDisplayDungeonLoggableMessage(entity1,*gUnknown_80FA0F0);
+                LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA0F0);
                 if (flag) {
                     leader = xxx_call_GetLeader();
-                    SetMessageArgument(gFormatBuffer_Monsters[0],leader,0);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
                     sub_8092558(gFormatBuffer_FriendArea,friendArea);
                     PlaySound(0xce);
                     DisplayDungeonMessage(0,*gUnknown_80FA120,1);
@@ -1039,7 +1040,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
     pokeStruct2->unkA = -1;
     pokeStruct2->unkC = index;
     pokeStruct2->speciesNum = local_74.id;
-    pokeStruct2->dungeonLocation = gDungeon->dungeonLocation;
+    pokeStruct2->dungeonLocation = gDungeon->unk644.dungeonLocation;
     pokeStruct2->unk10 = local_74.HP;
     pokeStruct2->unk12 = local_74.HP;
     pokeStruct2->belly = local_74.belly;
@@ -1061,7 +1062,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       UnlockFriendArea(friendArea);
       flag = TRUE;
     }
-    sub_8097848();
+    IncrementAdventureNumJoined();
     sub_8068FE0(entity2,500,entity1);
     if (sub_806B8CC(local_74.id,local_74.pos.x,local_74.pos.y,pokeStruct2,&local_2c,0,0) == 0) {
       pokeStruct2->unk0 = 0;
@@ -1074,7 +1075,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       }
       if (flag) {
         leader = xxx_call_GetLeader();
-        SetMessageArgument(gFormatBuffer_Monsters[0],leader,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
         sub_8092558(gFormatBuffer_FriendArea,friendArea);
         PlaySound(0xce);
         DisplayDungeonMessage(0,*gUnknown_80FA120,1);

@@ -3,6 +3,7 @@
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
 #include "cpu.h"
+#include "math.h"
 #include "sprite.h"
 
 extern u8 gUnknown_2026E38;
@@ -26,10 +27,6 @@ extern const s16 gUnknown_80B802A[16 * 10];
 extern const s16 gUnknown_80B816A[16 * 10];
 extern const s16 gUnknown_80B82AA[16 * 10];
 extern const s16 gUnknown_80B83EA[16 * 10];
-
-// code_8009804.s
-extern s32 sin_abs_4096(s32);
-extern s32 cos_4096(s32);
 
 static void sub_800561C(struct axMapSprite *, s32, s32, const RGB *);
 const RGB *sub_8005674(struct axMapSprite *, s32);
@@ -87,11 +84,11 @@ const RGB *sub_8005674(struct axMapSprite *a0, s32 vramIdx)
     return a0->pal;
 }
 
-void sub_800569C(Position *a0, struct axObject *a1, u8 a2)
+void sub_800569C(DungeonPos *a0, struct axObject *a1, u8 a2)
 {
-    Position *ptr;
-    Position *ptr2;
-    Position *ptr3;
+    DungeonPos *ptr;
+    DungeonPos *ptr2;
+    DungeonPos *ptr3;
 
     a0->x = 0;
     a0->y = 0;
@@ -100,7 +97,7 @@ void sub_800569C(Position *a0, struct axObject *a1, u8 a2)
         return;
 
     if (a1->axdata.paletteData != NULL) {
-        ptr = &((Position*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
+        ptr = &((DungeonPos*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
         ptr2 = &ptr[a2];
         if (*&ptr2->x == 99 && *&ptr2->y == 99) {
             a0->x = 99;
@@ -118,16 +115,16 @@ void sub_800569C(Position *a0, struct axObject *a1, u8 a2)
     }
 }
 
-void sub_8005700(Position *a0, struct axObject *a1)
+void sub_8005700(DungeonPos *a0, struct axObject *a1)
 {
     s32 i;
-    Position *ptr;
+    DungeonPos *ptr;
 
     if (!(a1->axdata.flags >> 15))
         return;
 
     if (a1->axdata.paletteData != NULL) {
-        ptr = &((Position*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
+        ptr = &((DungeonPos*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
         for (i = 0; i < 4; i++) {
             if (*&ptr[i].x == 99 && *&ptr[i].y == 99) {
                 a0->x = 99;
@@ -162,7 +159,7 @@ void sub_8005770(s32 param_1, const RGB *color, s32 brightness, const RGB *ramp)
         SetBGPaletteBufferColorRGB((param_1 + 0x10) * 0x10 + i, &color[i], brightness, ramp);
 }
 
-// Maybe Position
+// Maybe DungeonPos
 void nullsub_7(s16 *a0)
 {}
 
@@ -539,7 +536,7 @@ void sub_8005838(s32 *a0, u8 kind)
                 k = iVar11;
                 j = iVar11;
                 for (sp10 = 0; sp10 < 0x400; sp10 += spC) {
-                    s32 tmp1 = sin_abs_4096(sp10) * val3 / 256;
+                    s32 tmp1 = sin_4096(sp10) * val3 / 256;
 
                     sp14 = (val2 + tmp1) / 256;
                     r8 = (val2 - tmp1) / 256;

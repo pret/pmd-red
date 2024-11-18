@@ -20,7 +20,7 @@ extern void GenerateTwoRoomsWithMonsterHouseFloor(void);
 extern u8 GetFloorType();
 extern void sub_806C330(s32 a0, s32 a1, s16 a2, u8 a3);
 
-extern const Position gAdjacentTileOffsets[];
+extern const DungeonPos gAdjacentTileOffsets[];
 extern const bool8 gUnknown_80F6DD5[][NUM_DIRECTIONS];
 
 enum CardinalDirection
@@ -36,8 +36,8 @@ enum CardinalDirection
 
 struct GridCell
 {
-    Position start;
-    Position end;
+    DungeonPos start;
+    DungeonPos end;
     bool8 isInvalid;
     bool8 hasSecondaryStructure;
     bool8 isRoom;
@@ -123,7 +123,7 @@ static EWRAM_DATA s32 sSecondaryStructuresBudget = 0;
 static EWRAM_DATA s32 sNumRooms = 0;
 EWRAM_DATA s32 gUnknown_202F1D0 = 0;
 static EWRAM_DATA s32 sNumTilesReachableFromStairs = 0;
-static EWRAM_DATA Position sKecleonShopMiddlePos = {0};
+static EWRAM_DATA DungeonPos sKecleonShopMiddlePos = {0};
 
 // Helper functions for terrain flags
 static inline void SetTerrainType(Tile *tile, u32 terrainType)
@@ -147,7 +147,7 @@ static inline void SetTerrainWall(Tile *tile)
     SetTerrainType(tile, TERRAIN_TYPE_WALL);
 }
 
-static inline u32 GetTerrainType(Tile *tile)
+static inline u32 GetTerrainType(const Tile *tile)
 {
     return tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
 }
@@ -316,7 +316,7 @@ void sub_804AFAC(void)
 
                 for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
                     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
-                        Tile *tile = GetTile(x, y);
+                        const Tile *tile = GetTile(x, y);
                         if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL && tile->room <= 240) {
                             countRooms++;
                             if (tile->room < 64) {
@@ -1049,7 +1049,7 @@ void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
     for (x = xStart; x < maxX; x++) {
         for (y = yStart; y < maxY; y++) {
             s32 unkCount = 0;
-            Tile *tile = GetTileSafe(x, y);
+            Tile *tile = GetTileMut(x, y);
 
             tile->terrainType &= ~(TERRAIN_TYPE_CORNER_CUTTABLE);
             if (tile->room == CORRIDOR_ROOM && (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL)) {
@@ -1184,8 +1184,8 @@ void GenerateOuterRingFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
 				grid[x][y].end.y = startY + roomSizeY;
 				for (curX = startX; curX < endX; curX++) {
 					for (curY = startY; curY < endY; curY++) {
-						SetTerrainNormal(GetTileSafe(curX, curY));
-                        GetTileSafe(curX, curY)->room = currRoomIndex;
+						SetTerrainNormal(GetTileMut(curX, curY));
+                        GetTileMut(curX, curY)->room = currRoomIndex;
 					}
 				}
 
@@ -1206,8 +1206,8 @@ void GenerateOuterRingFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
 				grid[x][y].start.y = startY;
 				grid[x][y].end.y = startY + 1;
 
-				SetTerrainNormal(GetTileSafe(startX, startY));
-				GetTileSafe(startX, startY)->room = CORRIDOR_ROOM;
+				SetTerrainNormal(GetTileMut(startX, startY));
+				GetTileMut(startX, startY)->room = CORRIDOR_ROOM;
 			}
 		}
 	}
@@ -1340,8 +1340,8 @@ void GenerateCrossroadsFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
 				grid[x][y].end.y = endY;
 				for (curX = startX; curX < endX; curX++) {
 					for (curY = startY; curY < endY; curY++) {
-                        SetTerrainNormal(GetTileSafe(curX, curY));
-                        GetTileSafe(curX, curY)->room = currRoomIndex;
+                        SetTerrainNormal(GetTileMut(curX, curY));
+                        GetTileMut(curX, curY)->room = currRoomIndex;
 					}
 				}
 
@@ -1361,8 +1361,8 @@ void GenerateCrossroadsFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
 				grid[x][y].start.y = startY;
 				grid[x][y].end.y = startY + 1;
 
-				SetTerrainNormal(GetTileSafe(startX, startY));
-				GetTileSafe(startX, startY)->room = CORRIDOR_ROOM;
+				SetTerrainNormal(GetTileMut(startX, startY));
+				GetTileMut(startX, startY)->room = CORRIDOR_ROOM;
 			}
 		}
 	}
@@ -1550,7 +1550,7 @@ static void MergeRoomsVertically(s32 roomX, s32 roomY1, s32 room_dy, struct Grid
 
     for (x = xStart; x < xEnd; x++) {
         for (y = yStart; y < yEnd; y++) {
-            Tile *tile = GetTileSafe(x, y);
+            Tile *tile = GetTileMut(x, y);
             SetTerrainNormal(tile);
             tile->room = roomId;
         }
@@ -1729,8 +1729,8 @@ void GenerateOneRoomMonsterHouseFloor(void)
 
     for (x = grid[0][0].start.x; x < grid[0][0].end.x; x++) {
         for (y = grid[0][0].start.y; y < grid[0][0].end.y; y++) {
-            SetTerrainNormal(GetTileSafe(x, y));
-            GetTileSafe(x, y)->room = 0;
+            SetTerrainNormal(GetTileMut(x, y));
+            GetTileMut(x, y)->room = 0;
         }
     }
     GenerateMonsterHouse(grid, 1, 1, 999);
@@ -1776,8 +1776,8 @@ void GenerateTwoRoomsWithMonsterHouseFloor(void)
 
             for (currX = startX; currX < endX; currX++) {
                 for (currY = startY; currY < endY; currY++) {
-                    SetTerrainNormal(GetTileSafe(currX, currY));
-                    GetTileSafe(currX, currY)->room = currRoomId;
+                    SetTerrainNormal(GetTileMut(currX, currY));
+                    GetTileMut(currX, currY)->room = currRoomId;
                 }
             }
             currRoomId++;
@@ -1977,7 +1977,7 @@ void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
 			// If TRUE, make the tile open, it will not produce a 2x2 opening
 			// If FALSE, it will abort from neighbor checks so we don't break here
 			if (willNotMakeSquare) {
-                SetTerrainNormal(GetTileSafe(currX, currY));
+                SetTerrainNormal(GetTileMut(currX, currY));
 			}
 
 			// Make sure the direction 90 degrees counterclockwise isn't an open tile
@@ -2251,8 +2251,8 @@ void CreateRoomsAndAnchors(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
 
 				for (roomX = startX; roomX < endX; roomX++) {
 					for (roomY = startY; roomY < endY; roomY++) {
-                        SetTerrainNormal(GetTileSafe(roomX, roomY));
-                        GetTileSafe(roomX, roomY)->room = roomNumber;
+                        SetTerrainNormal(GetTileMut(roomX, roomY));
+                        GetTileMut(roomX, roomY)->room = roomNumber;
 					}
 				}
 
@@ -2319,10 +2319,10 @@ void CreateRoomsAndAnchors(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
 				grid[x][y].end.y = pt_y + 1;
 
 				// Flag the tile as open to serve as a hallway anchor
-				SetTerrainNormal(GetTileSafe(pt_x, pt_y));
+				SetTerrainNormal(GetTileMut(pt_x, pt_y));
 
 				// Set the room index to 0xFE for anchor
-				GetTileSafe(pt_x, pt_y)->room = ROOM_0xFE;
+				GetTileMut(pt_x, pt_y)->room = ROOM_0xFE;
 			}
 		}
 	}
@@ -2837,7 +2837,7 @@ void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
                             // Carve out the merged room
                             for (curX = srcX; curX < dstX; curX++) {
                                 for (curY = srcY; curY < dstY; curY++) {
-                                    Tile *tile = GetTileSafe(curX, curY);
+                                    Tile *tile = GetTileMut(curX, curY);
 
                                     SetTerrainNormal(tile);
                                     tile->room = mergeRoomIndex;
@@ -2878,7 +2878,7 @@ void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
                             // Carve out the merged room
                             for (curX = srcX; curX < dstX; curX++) {
                                 for (curY = srcY; curY < dstY; curY++) {
-                                    Tile *tile = GetTileSafe(curX, curY);
+                                    Tile *tile = GetTileMut(curX, curY);
 
                                     SetTerrainNormal(tile);
                                     tile->room = mergeRoomIndex;
@@ -2919,7 +2919,7 @@ void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
                             // Carve out the merged room
                             for (curX = srcX; curX < dstX; curX++) {
                                 for (curY = srcY; curY < dstY; curY++) {
-                                    Tile *tile = GetTileSafe(curX, curY);
+                                    Tile *tile = GetTileMut(curX, curY);
 
                                     SetTerrainNormal(tile);
                                     tile->room = mergeRoomIndex;
@@ -2960,7 +2960,7 @@ void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
                             // Carve out the merged room
                             for (curX = srcX; curX < dstX; curX++) {
                                 for (curY = srcY; curY < dstY; curY++) {
-                                    Tile *tile = GetTileSafe(curX, curY);
+                                    Tile *tile = GetTileMut(curX, curY);
 
                                     SetTerrainNormal(tile);
                                     tile->room = mergeRoomIndex;
@@ -3135,7 +3135,7 @@ void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
 								for (offsetY = -1; offsetY <= 1; offsetY++) {
                                     for (offsetX = -1; offsetX <= 1; offsetX++) {
 										// Search for open terrain which is not a part of a room (a hallway)
-										Tile *tile = GetTile(nextX + offsetX, nextY + offsetY);
+										const Tile *tile = GetTile(nextX + offsetX, nextY + offsetY);
 
 										if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
                                             continue;
@@ -3180,7 +3180,7 @@ void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
 								// If direction == NUM_DIRECTIONS, the neighbors match what we expect
 								if (direction == NUM_DIRECTIONS) {
 									// Fill in the current open floor tile with a wall
-									SetTerrainWall(GetTileSafe(pt_x, pt_y));
+									SetTerrainWall(GetTileMut(pt_x, pt_y));
 								}
 							}
 
@@ -3231,7 +3231,7 @@ void CreateHallway(s32 x, s32 y, s32 endX, s32 endY, bool8 vertical, s32 turnX_,
                 return; // Sanity check!
 
 			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
-				SetTerrainNormal(GetTileSafe(x, y));
+				SetTerrainNormal(GetTileMut(x, y));
 			}
 			else {
 				// If we find open floor, stop here
@@ -3255,7 +3255,7 @@ void CreateHallway(s32 x, s32 y, s32 endX, s32 endY, bool8 vertical, s32 turnX_,
                 return; // Sanity check!
 
 			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
-				SetTerrainNormal(GetTileSafe(x, y));
+				SetTerrainNormal(GetTileMut(x, y));
 			}
 			else {
 				if (x != startX || y != startY)
@@ -3277,7 +3277,7 @@ void CreateHallway(s32 x, s32 y, s32 endX, s32 endY, bool8 vertical, s32 turnX_,
                 return;
 
 			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
-				SetTerrainNormal(GetTileSafe(x, y));
+				SetTerrainNormal(GetTileMut(x, y));
 			}
 			else {
 				if (x != startX || y != startY)
@@ -3302,7 +3302,7 @@ void CreateHallway(s32 x, s32 y, s32 endX, s32 endY, bool8 vertical, s32 turnX_,
                 return; // Sanity check!
 
 			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
-				SetTerrainNormal(GetTileSafe(x, y));
+				SetTerrainNormal(GetTileMut(x, y));
 			}
 			else {
 				// If we find open floor, stop here
@@ -3326,7 +3326,7 @@ void CreateHallway(s32 x, s32 y, s32 endX, s32 endY, bool8 vertical, s32 turnX_,
                 return;
 
 			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
-				SetTerrainNormal(GetTileSafe(x, y));
+				SetTerrainNormal(GetTileMut(x, y));
 			}
 			else {
 				if (x != startX || y != startY)
@@ -3348,7 +3348,7 @@ void CreateHallway(s32 x, s32 y, s32 endX, s32 endY, bool8 vertical, s32 turnX_,
                 return;
 
 			if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL) {
-				SetTerrainNormal(GetTileSafe(x, y));
+				SetTerrainNormal(GetTileMut(x, y));
 			}
 			else {
 				if (x != startX || y != startY)
@@ -3475,7 +3475,7 @@ void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
 				// Unconnected anchor, don't bother trying.
 
 				// Just fill it in with wall tiles
-                Tile *tile = GetTileSafe(grid[x][y].start.x, grid[x][y].start.y);
+                Tile *tile = GetTileMut(grid[x][y].start.x, grid[x][y].start.y);
                 SetTerrainWall(tile);
 
 				// Also remove any spawn flags
@@ -3496,7 +3496,7 @@ void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
 
 			for (curX = grid[x][y].start.x; curX < grid[x][y].end.x; curX++) {
 				for (curY = grid[x][y].start.y; curY < grid[x][y].end.y; curY++) {
-					Tile *tile = GetTileSafe(curX, curY);
+					Tile *tile = GetTileMut(curX, curY);
                     // Set it to wall terrain
 					SetTerrainWall(tile);
 
@@ -3539,7 +3539,7 @@ void sub_804E9DC(void)
 
             if (GetTile(x, y)->room == CORRIDOR_ROOM) {
                 if (x > 0) {
-                    Tile *tile = GetTileSafe(x - 1, y);
+                    Tile *tile = GetTileMut(x - 1, y);
                     if (tile->room != CORRIDOR_ROOM) {
                         tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
 
@@ -3549,7 +3549,7 @@ void sub_804E9DC(void)
                     }
                 }
                 if (y > 0) {
-                    Tile *tile = GetTileSafe(x, y - 1);
+                    Tile *tile = GetTileMut(x, y - 1);
                     if (tile->room != CORRIDOR_ROOM) {
                         // Yes, these |= have to be duplicated in order to match. Either it's an error and they wanted to use a different flag, or just copy-pasted it twice.
                         tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
@@ -3560,7 +3560,7 @@ void sub_804E9DC(void)
                     }
                 }
                 if (y < DUNGEON_MAX_SIZE_Y - 1) {
-                    Tile *tile = GetTileSafe(x, y + 1);
+                    Tile *tile = GetTileMut(x, y + 1);
                     if (tile->room != CORRIDOR_ROOM) {
                         tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
                         tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
@@ -3570,7 +3570,7 @@ void sub_804E9DC(void)
                     }
                 }
                 if (x < DUNGEON_MAX_SIZE_X - 1) {
-                    Tile *tile = GetTileSafe(x + 1, y);
+                    Tile *tile = GetTileMut(x + 1, y);
                     if (tile->room != CORRIDOR_ROOM) {
                         tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
                         tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
@@ -3581,7 +3581,7 @@ void sub_804E9DC(void)
                 }
             }
             else if (GetTile(x, y)->room == ROOM_0xFE) {
-                GetTileSafe(x, y)->room = CORRIDOR_ROOM;
+                GetTileMut(x, y)->room = CORRIDOR_ROOM;
             }
         }
     }
@@ -3730,7 +3730,7 @@ void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
 			// a 1-tile border from the room walls
 			for (curX = sKecleonShopPosition.minX; curX < sKecleonShopPosition.maxX; curX++) {
 				for (curY = sKecleonShopPosition.minY; curY < sKecleonShopPosition.maxY; curY++) {
-                    Tile *tile = GetTileSafe(curX, curY);
+                    Tile *tile = GetTileMut(curX, curY);
 
                     tile->terrainType |= TERRAIN_TYPE_SHOP;
 
@@ -3760,7 +3760,7 @@ void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
 			// Sets an unknown spawn flag for all tiles in the room
 			for (curX = grid[x][y].start.x; curX < grid[x][y].end.x; curX++) {
 				for (curY = grid[x][y].start.y; curY < grid[x][y].end.y; curY++) {
-                    GetTileSafe(curX, curY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileMut(curX, curY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
 				}
 			}
 
@@ -3801,7 +3801,7 @@ void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s3
         return;
 	if (sHasKecleonShop)
         return;
-	if (gDungeon->unk688 != 0)
+	if (gDungeon->unk644.unk44 != 0)
         return;
     if (GetFloorType() != FLOOR_TYPE_NORMAL)
         return;
@@ -3886,7 +3886,7 @@ void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s3
 
                 for (curX = grid[x][y].start.x; curX < grid[x][y].end.x; curX++) {
                     for (curY = grid[x][y].start.y; curY < grid[x][y].end.y; curY++) {
-                        GetTileSafe(curX, curY)->terrainType |= TERRAIN_TYPE_IN_MONSTER_HOUSE;
+                        GetTileMut(curX, curY)->terrainType |= TERRAIN_TYPE_IN_MONSTER_HOUSE;
                         dungeon->monsterHouseRoom = GetTile(curX, curY)->room;
                     }
                 }
@@ -4076,10 +4076,10 @@ void GenerateMaze(struct GridCell *gridCell, bool8 useSecondaryTerrain)
 		for (curY = gridCell->start.y + 3; curY < gridCell->end.y - 3; curY += 2) {
 			if (GetTerrainType(GetTile(curX, curY)) == TERRAIN_TYPE_NORMAL) {
 				if (useSecondaryTerrain) {
-                    SetTerrainSecondary(GetTileSafe(curX - 1, curY));
+                    SetTerrainSecondary(GetTileMut(curX - 1, curY));
 				}
 				else {
-					SetTerrainWall(GetTileSafe(curX - 1, curY));
+					SetTerrainWall(GetTileMut(curX - 1, curY));
 				}
 
 				// More random walks
@@ -4101,7 +4101,7 @@ void GenerateMaze(struct GridCell *gridCell, bool8 useSecondaryTerrain)
  *  [ | ] [   ] [   ]   =>	[ W ] [   ] [   ]  => etc.
  *  [ o ] [   ] [ W ]		[ W ] [   ] [ W ]
  *
- * First, an obstacle is placed at the given position (see: SetTerrainObstacleChecked)
+ * First, an obstacle is placed at the given DungeonPos (see: SetTerrainObstacleChecked)
  *
  * Then, a random direction is selected, searching for an open tile distance 2 away from (x0, y0).
  * Each direction is attempted rotating counter-clockwise until an open tile is found or all directions are exhausted.
@@ -4115,13 +4115,13 @@ void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bo
 		s32 direction = DungeonRandInt(NUM_CARDINAL_DIRECTIONS);
         s32 i = 0;
 
-		SetTerrainObstacleChecked(GetTileSafe(x0, y0), useSecondaryTerrain, roomIndex);
+		SetTerrainObstacleChecked(GetTileMut(x0, y0), useSecondaryTerrain, roomIndex);
 
         while (1) {
 			s32 offsetX, offsetY;
 			s32 posX, posY;
 
-			// Offset from our current position to look 2 tiles in a given direction
+			// Offset from our current DungeonPos to look 2 tiles in a given direction
 			switch (direction & CARDINAL_DIRECTION_MASK) {
                 case CARDINAL_DIR_RIGHT:
                     offsetX = 2;
@@ -4144,7 +4144,7 @@ void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bo
 
             posX = x0 + offsetX;
 
-			// Check that this position is in-bounds
+			// Check that this DungeonPos is in-bounds
             if (xMin <= posX && xMax > posX) {
                 posY = y0 + offsetY;
                 if (yMin <= posY && yMax > posY) {
@@ -4166,22 +4166,22 @@ void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bo
 		// then move to the open terrain we found.
 		switch (direction & CARDINAL_DIRECTION_MASK) {
 		    case CARDINAL_DIR_RIGHT:
-                SetTerrainObstacleChecked(GetTileSafe(x0 + 1, y0), useSecondaryTerrain, roomIndex);
+                SetTerrainObstacleChecked(GetTileMut(x0 + 1, y0), useSecondaryTerrain, roomIndex);
 
 				x0 += 2;
                 break;
             case CARDINAL_DIR_UP:
-                SetTerrainObstacleChecked(GetTileSafe(x0, y0 - 1), useSecondaryTerrain, roomIndex);
+                SetTerrainObstacleChecked(GetTileMut(x0, y0 - 1), useSecondaryTerrain, roomIndex);
 
 				y0 -= 2;
                 break;
             case CARDINAL_DIR_LEFT:
-                SetTerrainObstacleChecked(GetTileSafe(x0 - 1, y0), useSecondaryTerrain, roomIndex);
+                SetTerrainObstacleChecked(GetTileMut(x0 - 1, y0), useSecondaryTerrain, roomIndex);
 
 				x0 -= 2;
                 break;
             case CARDINAL_DIR_DOWN:
-                SetTerrainObstacleChecked(GetTileSafe(x0, y0 + 1), useSecondaryTerrain, roomIndex);
+                SetTerrainObstacleChecked(GetTileMut(x0, y0 + 1), useSecondaryTerrain, roomIndex);
 
 				y0 += 2;
                 break;
@@ -4204,13 +4204,13 @@ void SetSpawnFlag5(struct GridCell *gridCell)
 
 	for (x = gridCell->start.x; x < gridCell->end.x; x++) {
 		for (y = gridCell->start.y; y < gridCell->end.y; y++) {
-            GetTileSafe(x, y)->spawnOrVisibilityFlags |= SPAWN_FLAG_UNK5;
+            GetTileMut(x, y)->spawnOrVisibilityFlags |= SPAWN_FLAG_UNK5;
 		}
 	}
 }
 
 /*
- * IsNextToHallway - Checks if a tile position is either in a hallway or next to one.
+ * IsNextToHallway - Checks if a tile DungeonPos is either in a hallway or next to one.
  */
 bool8 IsNextToHallway(s32 x, s32 y)
 {
@@ -4268,12 +4268,12 @@ void GenerateSecondaryStructure(struct GridCell *gridCell)
 
 					if (!invalid) {
 						for (i = gridCell->start.y; i < gridCell->end.y; i++) {
-                            SetTerrainSecondaryWithFlag(GetTileSafe(middleX, i), 0);
+                            SetTerrainSecondaryWithFlag(GetTileMut(middleX, i), 0);
 						}
 
 						for (curX = gridCell->start.x; curX < middleX; curX++) {
 							for (curY = gridCell->start.y; curY < gridCell->end.y; curY++) {
-                                GetTileSafe(curX, curY)->terrainType |= TERRAIN_TYPE_UNK_7;
+                                GetTileMut(curX, curY)->terrainType |= TERRAIN_TYPE_UNK_7;
 							}
 						}
 
@@ -4295,12 +4295,12 @@ void GenerateSecondaryStructure(struct GridCell *gridCell)
 
 					if (!invalid) {
 						for (i = gridCell->start.x; i < gridCell->end.x; i++) {
-							SetTerrainSecondaryWithFlag(GetTileSafe(i, middleY), 0);
+							SetTerrainSecondaryWithFlag(GetTileMut(i, middleY), 0);
 						}
 
 						for (curY = gridCell->start.y; curY < middleY; curY++) {
                             for (curX = gridCell->start.x; curX < gridCell->end.x; curX++) {
-								GetTileSafe(curX, curY)->terrainType |= TERRAIN_TYPE_UNK_7;
+								GetTileMut(curX, curY)->terrainType |= TERRAIN_TYPE_UNK_7;
 							}
 						}
 
@@ -4320,34 +4320,34 @@ void GenerateSecondaryStructure(struct GridCell *gridCell)
                     SetSpawnFlag5(gridCell);
 
                     // Water "Moat"
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 1, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY - 1), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 2, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 1, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY - 1), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY), TERRAIN_TYPE_CORNER_CUTTABLE);
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX - 2, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX - 1, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX + 1, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX - 2, middleY - 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX - 2, middleY), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX - 2, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX - 2, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX - 1, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX + 1, middleY - 2), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX + 1, middleY - 1), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX + 1, middleY), TERRAIN_TYPE_CORNER_CUTTABLE);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX + 1, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
 
                     // Trap
-                    GetTileSafe(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_TRAP;
+                    GetTileMut(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_TRAP;
                     // Warp Tile ?
-                    GetTileSafe(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_UNK6;
+                    GetTileMut(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_UNK6;
 
                     // Items
-                    GetTileSafe(middleX, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
-                    GetTileSafe(middleX - 1, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
-                    GetTileSafe(middleX, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
-                    GetTileSafe(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
-                    GetTileSafe(middleX, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
-                    GetTileSafe(middleX - 1, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
-                    GetTileSafe(middleX, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileMut(middleX, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+                    GetTileMut(middleX - 1, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+                    GetTileMut(middleX, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+                    GetTileMut(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileMut(middleX, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileMut(middleX - 1, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileMut(middleX, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
 
                     gridCell->hasSecondaryStructure = TRUE;
                 }
@@ -4380,7 +4380,7 @@ void GenerateSecondaryStructure(struct GridCell *gridCell)
 
                     for (curX = randX1; curX <= randX2; curX++) {
                         for (curY = randY1; curY <= randY2; curY++) {
-                            SetTerrainSecondaryWithFlag(GetTileSafe(curX, curY), 0);
+                            SetTerrainSecondaryWithFlag(GetTileMut(curX, curY), 0);
                         }
                     }
 
@@ -4400,7 +4400,7 @@ void GenerateSecondaryStructure(struct GridCell *gridCell)
                     s32 randX = DungeonRandInt(gridCell->end.x - gridCell->start.x);
                     s32 randY = DungeonRandInt(gridCell->end.y - gridCell->start.y);
                     if ((randX + randY) % 2 != 0) {
-                        SetTerrainSecondaryWithFlag(GetTileSafe(gridCell->start.x + randX, gridCell->start.y + randY), 0);
+                        SetTerrainSecondaryWithFlag(GetTileMut(gridCell->start.x + randX, gridCell->start.y + randY), 0);
                     }
                 }
 
@@ -4417,14 +4417,14 @@ void GenerateSecondaryStructure(struct GridCell *gridCell)
                     s32 middleY = (gridCell->start.y + gridCell->end.y) / 2;
 					if ((gridCell->end.x - gridCell->start.x) >= 5 && (gridCell->end.y - gridCell->start.y) >= 5) {
 						// Both dimensions are at least 5, generate a water/lava cross in the center
-						SetTerrainSecondaryWithFlag(GetTileSafe(middleX + 1, middleY), 0);
-						SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY + 1), 0);
-						SetTerrainSecondaryWithFlag(GetTileSafe(middleX - 1, middleY), 0);
-						SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY - 1), 0);
+						SetTerrainSecondaryWithFlag(GetTileMut(middleX + 1, middleY), 0);
+						SetTerrainSecondaryWithFlag(GetTileMut(middleX, middleY + 1), 0);
+						SetTerrainSecondaryWithFlag(GetTileMut(middleX - 1, middleY), 0);
+						SetTerrainSecondaryWithFlag(GetTileMut(middleX, middleY - 1), 0);
 					}
 
                     // Generate a single water/lava spot in the center
-                    SetTerrainSecondaryWithFlag(GetTileSafe(middleX, middleY), 0);
+                    SetTerrainSecondaryWithFlag(GetTileMut(middleX, middleY), 0);
 				}
 				else {
                     // Both dimensions are odd. Generate a maze room
@@ -4453,7 +4453,7 @@ void ResolveInvalidSpawns(void)
 
     for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
-            Tile *tile = GetTileSafe(x, y);
+            Tile *tile = GetTileMut(x, y);
             if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL) {
                 if (tile->terrainType & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL)) {
                     // This tile is an impassable obstacle, make sure no items spawn here
@@ -4485,7 +4485,7 @@ void sub_804FC74(void)
     for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
             if (GetTerrainType(GetTile(x, y)) == TERRAIN_TYPE_SECONDARY) {
-                SetTerrainType(GetTileSafe(x,y), TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+                SetTerrainType(GetTileMut(x,y), TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
             }
         }
     }
@@ -4501,7 +4501,7 @@ void EnsureImpassableTilesAreWalls(void)
     for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
             if (GetTile(x, y)->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) {
-                SetTerrainWall(GetTileSafe(x,y));
+                SetTerrainWall(GetTileMut(x,y));
             }
         }
     }
@@ -4522,7 +4522,7 @@ void ResetTile(Tile *tile)
     tile->object = NULL;
 }
 
-// PosIsOutOfBounds - Checks if a position is out of bounds on the map.
+// PosIsOutOfBounds - Checks if a DungeonPos is out of bounds on the map.
 static inline bool8 PosIsOutOfBounds(s32 x, s32 y)
 {
     if (x < 0)
@@ -4543,7 +4543,7 @@ void ResetFloor(void)
     // Reset Room Tiles
     for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
-            ResetTile(GetTileSafe(x,y));
+            ResetTile(GetTileMut(x,y));
 
             if ((PosIsOutOfBounds(x,     y - 1)) ||
                 (PosIsOutOfBounds(x + 1, y - 1)) ||
@@ -4554,12 +4554,12 @@ void ResetFloor(void)
                 (PosIsOutOfBounds(x - 1, y))     ||
                 (PosIsOutOfBounds(x - 1, y - 1)))
             {
-                GetTileSafe(x,y)->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+                GetTileMut(x,y)->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
             }
         }
     }
 
-    // Reset Stairs Position
+    // Reset Stairs DungeonPos
     gDungeon->stairsSpawn.x = -1;
     gDungeon->stairsSpawn.y = -1;
 
@@ -4639,7 +4639,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 				// - Not a junction tile (next to a hallway)
 				// - Not a special tile that can't be broken by Absolute Mover
 
-				Tile *tile = GetTile(x, y);
+                const Tile *tile = GetTile(x, y);
 				if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
                     continue;
                 if (tile->room == CORRIDOR_ROOM)
@@ -4664,7 +4664,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 		if (count != 0) {
 			// Randomly select one of the valid tiles to spawn the stairs on
 			s32 stairsIndex = DungeonRandInt(count);
-			Tile *stairsTile = GetTileSafe(validSpawns[stairsIndex].x, validSpawns[stairsIndex].y);
+			Tile *stairsTile = GetTileMut(validSpawns[stairsIndex].x, validSpawns[stairsIndex].y);
 
 			stairsTile->spawnOrVisibilityFlags |= SPAWN_FLAG_STAIRS;
 			stairsTile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
@@ -4677,7 +4677,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
                 u32 stairsRoomIndex = stairsTile->room;
                 for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
                     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
-                        Tile *tile = GetTileSafe(x, y);
+                        Tile *tile = GetTileMut(x, y);
                         if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL && tile->room == stairsRoomIndex) {
                             tile->terrainType |= TERRAIN_TYPE_IN_MONSTER_HOUSE;
                             dungeon->monsterHouseRoom = tile->room;
@@ -4701,7 +4701,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 			// - Not a junction tile (next to a hallway)
 			// - Not a special tile that can't be broken by Absolute Mover
 
-			Tile *tile = GetTile(x, y);
+			const Tile *tile = GetTile(x, y);
             if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
                 continue;
             if (tile->room == CORRIDOR_ROOM)
@@ -4736,7 +4736,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 			ShuffleSpawnPositions(validSpawns, count);
 			randIndex = DungeonRandInt(count);
 			for (i = 0; i < numItems; i++) {
-				Tile *tile = GetTileSafe(validSpawns[randIndex].x, validSpawns[randIndex].y);
+				Tile *tile = GetTileMut(validSpawns[randIndex].x, validSpawns[randIndex].y);
                 tile->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
 
                 randIndex++;
@@ -4775,7 +4775,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 			ShuffleSpawnPositions(validSpawns, count);
 			randIndex = DungeonRandInt(count);
 			for (i = 0; i < numItems; i++) {
-				Tile *tile = GetTileSafe(validSpawns[randIndex].x, validSpawns[randIndex].y);
+				Tile *tile = GetTileMut(validSpawns[randIndex].x, validSpawns[randIndex].y);
                 tile->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
 
                 randIndex++;
@@ -4796,7 +4796,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 				// - not in a kecleon shop (how would they be?)
 				// - in a Monster House
 				// - not a junction (near a hallway)
-				Tile *tile = GetTile(x, y);
+				const Tile *tile = GetTile(x, y);
                 if (tile->terrainType & TERRAIN_TYPE_SHOP)
                     continue;
                 if (!(tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
@@ -4827,14 +4827,14 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
         ShuffleSpawnPositions(validSpawns, count);
         randIndex = DungeonRandInt(count);
         for (i = 0; i < numItems; i++) {
-            Tile *tile = GetTileSafe(validSpawns[randIndex].x, validSpawns[randIndex].y);
+            Tile *tile = GetTileMut(validSpawns[randIndex].x, validSpawns[randIndex].y);
 
             // 50/50 chance of spawning an item or a trap
             if (DungeonRandInt(2) != 0) {
                 // Spawn an item
                 tile->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
             }
-            else if (gDungeon->unk65C) {
+            else if (gDungeon->unk644.unk18) {
                 tile->spawnOrVisibilityFlags |= SPAWN_FLAG_TRAP;
             }
 
@@ -4858,7 +4858,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 			// - Not a junction tile (next to a hallway)
 			// - Not a special tile that can't be broken by Absolute Mover
 
-			Tile *tile = GetTile(x, y);
+			const Tile *tile = GetTile(x, y);
             if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
                 continue;
             if (tile->room == CORRIDOR_ROOM)
@@ -4892,7 +4892,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 			ShuffleSpawnPositions(validSpawns, count);
 			trapIndex = DungeonRandInt(count);
 			for (i = 0; i < numTraps; i++) {
-				Tile *tile = GetTileSafe(validSpawns[trapIndex].x, validSpawns[trapIndex].y);
+				Tile *tile = GetTileMut(validSpawns[trapIndex].x, validSpawns[trapIndex].y);
                 tile->spawnOrVisibilityFlags |= SPAWN_FLAG_TRAP;
 
                 trapIndex++;
@@ -4917,7 +4917,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 				// - Not a special tile that can't be broken by Absolute Mover
 				// - Not an item, enemy, or trap spawn
 
-				Tile *tile = GetTile(x, y);
+				const Tile *tile = GetTile(x, y);
                 if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
                     continue;
                 if (tile->room == CORRIDOR_ROOM)
@@ -4988,7 +4988,7 @@ void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse)
 			// - Don't have stairs, an item
 			// - Not a special tile that can't be broken by Absolute Mover
 			// - Not where the player spawns
-			Tile *tile = GetTile(x, y);
+			const Tile *tile = GetTile(x, y);
 			if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
                 continue;
             if (tile->room == CORRIDOR_ROOM)
@@ -5014,7 +5014,7 @@ void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse)
 
 	if (count != 0) {
         // ?
-        if (gDungeon->unk688) {
+        if (gDungeon->unk644.unk44) {
             numEnemies++;
         }
         if (numEnemies != 0) {
@@ -5023,7 +5023,7 @@ void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse)
             randIndex = DungeonRandInt(count);
 
             for (i = 0; i < numEnemies; i++) {
-                Tile *tile = GetTileSafe(validSpawns[randIndex].x, validSpawns[randIndex].y);
+                Tile *tile = GetTileMut(validSpawns[randIndex].x, validSpawns[randIndex].y);
                  // Spawn an enemy here
                 tile->spawnOrVisibilityFlags |= SPAWN_FLAG_MONSTER;
 
@@ -5063,7 +5063,7 @@ void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse)
 			// - Not where the player spawns
 			// - In the monster house room
 
-			Tile *tile = GetTile(x, y);
+			const Tile *tile = GetTile(x, y);
 			if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
                 continue;
             if (tile->room == CORRIDOR_ROOM)
@@ -5100,7 +5100,7 @@ void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse)
         randIndex = DungeonRandInt(count);
 
         for (i = 0; i < numEnemies; i++) {
-            Tile *tile = GetTileSafe(validSpawns[randIndex].x, validSpawns[randIndex].y);
+            Tile *tile = GetTileMut(validSpawns[randIndex].x, validSpawns[randIndex].y);
              // Spawn an enemy here
             tile->spawnOrVisibilityFlags |= SPAWN_FLAG_MONSTER;
 
@@ -5199,7 +5199,7 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
 					}
                     if (!PosIsOutOfBounds(x, y)) {
                         // Fill in secondary terrain as we go
-                        SetSecondaryTerrainOnWall(GetTileSafe(x, y));
+                        SetSecondaryTerrainOnWall(GetTileMut(x, y));
                     }
 				}
                 numTilesFill--;
@@ -5244,7 +5244,7 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
                         GetTerrainType(GetTile(offsetX + x - 1, offsetY + y - 1)) == TERRAIN_TYPE_SECONDARY)
                     {
                         if (!PosIsOutOfBounds(x + offsetX, y + offsetY)) {
-                            SetSecondaryTerrainOnWall(GetTileSafe(offsetX + x, offsetY + y));
+                            SetSecondaryTerrainOnWall(GetTileMut(offsetX + x, offsetY + y));
                         }
                     }
 				}
@@ -5277,7 +5277,7 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
 
                         // If at least half are secondary terrain, make this tile secondary terrain as well
                         if (numAdjacent >= 4 && !PosIsOutOfBounds(x + offsetX , y + offsetY)) {
-                            SetSecondaryTerrainOnWall(GetTileSafe(offsetX + x , offsetY + y));
+                            SetSecondaryTerrainOnWall(GetTileMut(offsetX + x , offsetY + y));
                         }
 					}
 				}
@@ -5372,8 +5372,8 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
 		for (x = 0; x < 10; x++) {
 			for (y = 0; y < 10; y++) {
 				if (!table[x][y]) {
-					// Shift the 0-10 random offset position into +- 5 to center around the lake seed tile
-                    SetSecondaryTerrainOnWall(GetTileSafe(x + rndX - 5, y + rndY - 5));
+					// Shift the 0-10 random offset Position into +- 5 to center around the lake seed tile
+                    SetSecondaryTerrainOnWall(GetTileMut(x + rndX - 5, y + rndY - 5));
 				}
 			}
 		}
@@ -5382,7 +5382,7 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
 	// Clean up secondary terrain that got in places it shouldn't
 	for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
 		for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
-            Tile *tile = GetTileSafe(x, y);
+            Tile *tile = GetTileMut(x, y);
 			if (GetTerrainType(tile) != TERRAIN_TYPE_SECONDARY)
                 continue;
 
@@ -5510,7 +5510,7 @@ NAKED void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C57
 "	bne _080507B8\n"
 "	mov r0, r9\n"
 "	mov r1, r10\n"
-"	bl GetTileSafe\n"
+"	bl GetTileMut\n"
 "	bl SetSecondaryTerrainOnWall\n"
 "_080507B8:\n"
 "	ldr r2, [sp, 0x68]\n"
@@ -5651,7 +5651,7 @@ NAKED void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C57
 "	cmp r1, 0\n"
 "	bne _080508DA\n"
 "	adds r1, r5, 0\n"
-"	bl GetTileSafe\n"
+"	bl GetTileMut\n"
 "	bl SetSecondaryTerrainOnWall\n"
 "_080508DA:\n"
 "	ldr r1, [sp, 0x7C]\n"
@@ -5819,7 +5819,7 @@ NAKED void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C57
 "	bne _08050A1A\n"
 "	ldr r0, [sp, 0x90]\n"
 "	ldr r1, [sp, 0x94]\n"
-"	bl GetTileSafe\n"
+"	bl GetTileMut\n"
 "	bl SetSecondaryTerrainOnWall\n"
 "_08050A1A:\n"
 "	adds r5, 0x1\n"
@@ -6023,7 +6023,7 @@ NAKED void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C57
 "	subs r0, r7, 0x5\n"
 "	adds r1, r6, 0\n"
 "	str r2, [sp, 0x9C]\n"
-"	bl GetTileSafe\n"
+"	bl GetTileMut\n"
 "	bl SetSecondaryTerrainOnWall\n"
 "	ldr r2, [sp, 0x9C]\n"
 "_08050B92:\n"
@@ -6056,7 +6056,7 @@ NAKED void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C57
 "_08050BC0:\n"
 "	mov r0, r9\n"
 "	mov r1, r10\n"
-"	bl GetTileSafe\n"
+"	bl GetTileMut\n"
 "	adds r2, r0, 0\n"
 "	ldrh r3, [r2]\n"
 "	movs r0, 0x3\n"
@@ -6140,7 +6140,7 @@ bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable)
 
 	for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
 		for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
-		    Tile *tile = GetTileSafe(x, y);
+		    Tile *tile = GetTileMut(x, y);
             u16 terrain = GetTerrainType(tile);
 
             test[x][y] = 0;
@@ -6251,7 +6251,7 @@ bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable)
 
 	for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
 		for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
-            Tile *tile = GetTileSafe(x, y);
+            Tile *tile = GetTileMut(x, y);
 
             if (!(test[x][y] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_UNKNOWN | STAIRS_FLAG_VISITED))) {
                 // This is an open tile that wasn't visited by BFS, which means it's unreachable from the starting stairs
@@ -6345,8 +6345,8 @@ static void CreateRoomsAndAnchorsForFixedFloor(struct GridCell grid[GRID_CELL_LE
 
 				for (roomX = startX; roomX < endX; roomX++) {
 					for (roomY = startY; roomY < endY; roomY++) {
-                        SetTerrainNormal(GetTileSafe(roomX, roomY));
-                        GetTileSafe(roomX, roomY)->room = roomNumber;
+                        SetTerrainNormal(GetTileMut(roomX, roomY));
+                        GetTileMut(roomX, roomY)->room = roomNumber;
 					}
 				}
 
@@ -6387,10 +6387,10 @@ static void CreateRoomsAndAnchorsForFixedFloor(struct GridCell grid[GRID_CELL_LE
 				grid[x][y].end.y = pt_y + 1;
 
 				// Flag the tile as open to serve as a hallway anchor
-				SetTerrainNormal(GetTileSafe(pt_x, pt_y));
+				SetTerrainNormal(GetTileMut(pt_x, pt_y));
 
 				// Set the room index to 0xFE for anchor
-				GetTileSafe(pt_x, pt_y)->room = CORRIDOR_ROOM;
+				GetTileMut(pt_x, pt_y)->room = CORRIDOR_ROOM;
 			}
 		}
 	}
@@ -6436,15 +6436,15 @@ void sub_8051288(s32 fixedRoomId)
     s32 fixedRoomSizeX = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->x;
     s32 fixedRoomSizeY = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->y;
 
-    dungeon->unkE260.x = fixedRoomSizeX;
-    dungeon->unkE260.y = fixedRoomSizeY;
+    dungeon->unkE260.unk0 = fixedRoomSizeX;
+    dungeon->unkE260.unk2 = fixedRoomSizeY;
     gUnknown_202F1DC = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->unk3;
     gUnknown_202F1E1 = 0;
 
     for (y = 5; y < fixedRoomSizeY + 5; y++) {
         for (x = 5; x < fixedRoomSizeX + 5; x++) {
             u8 unk = sub_80511F0();
-            if (sub_805124C(GetTileSafe(x, y), unk, x, y, 1)) {
+            if (sub_805124C(GetTileMut(x, y), unk, x, y, 1)) {
                 dungeon->stairsSpawn.x = x;
                 dungeon->stairsSpawn.y = y;
             }
@@ -6454,7 +6454,7 @@ void sub_8051288(s32 fixedRoomId)
     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
         for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
             if (x <= 4 || x >= fixedRoomSizeX + 5 || y <= 4 || y >= fixedRoomSizeY + 5) {
-                Tile *tile = GetTileSafe(x, y);
+                Tile *tile = GetTileMut(x, y);
                 tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
                 if (gUnknown_202F1A8 != 0) {
                     SetTerrainType(tile, TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
@@ -6469,7 +6469,7 @@ void sub_8051288(s32 fixedRoomId)
     if (fixedRoomId == 4) {
         for (y = 5; y < 17; y++) {
             for (x = 2; x < 5; x++) {
-                Tile *tile = GetTileSafe(x, y);
+                Tile *tile = GetTileMut(x, y);
                 tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
                 SetTerrainWall(tile);
             }
@@ -6479,7 +6479,7 @@ void sub_8051288(s32 fixedRoomId)
     if (gDungeon->tileset >= 64) {
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
             for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
-                Tile *tile = GetTileSafe(x, y);
+                Tile *tile = GetTileMut(x, y);
                 if (GetTerrainType(tile) == TERRAIN_TYPE_WALL) {
                     tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
                 }
@@ -6512,7 +6512,7 @@ void sub_8051438(struct GridCell *gridCell, s32 fixedRoomId)
             for (x = gridCell->start.x; x < gridCell->end.x; x++) {
                 u8 roomId;
                 u8 unk = sub_80511F0();
-                Tile *tile = GetTileSafe(x, y);
+                Tile *tile = GetTileMut(x, y);
 
                 dungeon->unkE87C[xIndex][yIndex] = unk;
                 sub_805124C(&dungeon->unkE27C[xIndex][yIndex], unk, x, y, 0);
@@ -6533,7 +6533,7 @@ void sub_8051438(struct GridCell *gridCell, s32 fixedRoomId)
         for (y = gridCell->start.y; y < gridCell->end.y; y++) {
             for (x = gridCell->start.x; x < gridCell->end.x; x++) {
                 u8 unk = sub_80511F0();
-                Tile *tile = GetTileSafe(x, y);
+                Tile *tile = GetTileMut(x, y);
                 u8 roomId = tile->room;
 
                 sub_805124C(tile, unk, x, y, 1);

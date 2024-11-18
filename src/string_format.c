@@ -34,7 +34,7 @@ void sub_80140B4(UnkTextStruct2 *a0)
 
 void sub_80140DC(void)
 {
-    Position pos;
+    DungeonPos pos;
 
     pos.x = 200;
     pos.y = 128;
@@ -44,7 +44,7 @@ void sub_80140DC(void)
 
 void sub_80140F8(void)
 {
-    Position pos;
+    DungeonPos pos;
 
     pos.x = 188;
     pos.y = 64;
@@ -92,7 +92,7 @@ struct UnkStruct_203B198
     UnkTextStruct2 unk0;
     u8 unk18;
     u32 unk1C;
-    Position unk20;
+    DungeonPos unk20;
     u16 unk24;
     u16 unk26;
     u16 unk28;

@@ -7,6 +7,7 @@
 #include "structs/map.h"
 #include "structs/rgb.h"
 #include "structs/str_position.h"
+#include "structs/str_traps.h"
 #include "sprite.h"
 
 #define DUNGEON_MAX_SIZE_X 56
@@ -24,17 +25,17 @@ typedef struct DungeonLocation
     /* 0x1 */ u8 floor;
 } DungeonLocation;
 
+// size: 0x18
 typedef struct Weather
 {
-    /* 0xE264 */ u8 weather; // Uses the weather constants in weather.h.
-    u8 unkE265; // Uses the weather constants in weather.h
-    /* 0xE266 */ u8 weatherDamageCounter; // Timer for applying sandstorm/hail damage periodically.
-    /* 0xE267 */ u8 unkE267[8];
-    /* 0xE26F */ u8 naturalWeather[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
-    /* 0xE277 */ u8 mudSportTurns;
-    /* 0xE278 */ u8 waterSportTurns;
-    /* 0xE279 */ bool8 nullifyWeather; // Air Lock and Cloud Nine toggle this to disable weather effects
-
+    /* 0x0 */ u8 weather; // Uses the weather constants in weather.h.
+    /* 0x1 */ u8 unkE265; // Uses the weather constants in weather.h
+    /* 0x2 */ u8 weatherDamageCounter; // Timer for applying sandstorm/hail damage periodically.
+    /* 0x3 */ u8 unkE267[8];
+    /* 0xB */ u8 naturalWeather[8]; // The weather at the start of the floor. If the weather changes, then expires, revert back to the starting weather.
+    /* 0x13 */ u8 mudSportTurns;
+    /* 0x14 */ u8 waterSportTurns;
+    /* 0x15 */ bool8 nullifyWeather; // Air Lock and Cloud Nine toggle this to disable weather effects
 } Weather;
 
 // size: 0x30
@@ -66,6 +67,8 @@ typedef struct DungeonMusicPlayer
     /* 0x0 */ u32 state;
     /* 0x4 */ u32 fadeOutSpeed;
     /* 0x8 */ u16 fadeInSpeed;
+
+    // dungeon_serializer.c refers to these 3 as s16, but they are almost always handled as u16
     /* 0xA */ u16 songIndex;
     /* 0xC */ u16 pastSongIndex;
     /* 0xE */ u16 queuedSongIndex;
@@ -74,10 +77,10 @@ typedef struct DungeonMusicPlayer
 // Size unknown?
 typedef struct UnkDungeonGlobal_unk181E8_sub
 {
-    /* 0x181E8 */ Position cameraPos;       // x0
-    /* 0x181EC */ Position cameraPosMirror; // x4
-    /* 0x181F0 */ Position cameraPixelPos;  // x8
-    /* 0x181F4 */ Position cameraPixelPosMirror; // xC
+    /* 0x181E8 */ DungeonPos cameraPos;       // x0
+    /* 0x181EC */ DungeonPos cameraPosMirror; // x4
+    /* 0x181F0 */ DungeonPos cameraPixelPos;  // x8
+    /* 0x181F4 */ DungeonPos cameraPixelPosMirror; // xC
     /* 0x181F8 */ Entity *cameraTarget; // x10
     u32 unk181FC; // x14
     u32 unk18200; // x18
@@ -85,15 +88,15 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     u8 unk18208; // x20
     /* 0x18209 */ u8 visibilityRange; // x21 Dungeon light level.
     /* 0x1820A */ bool8 blinded; // x22 Blacks out the screen when the player has the Blinker status.
-    u8 unk1820B; // x23
-    u8 unk1820C; // x24
-    u8 unk1820D; // x25
-    u8 unk1820E; // x26
-    u8 unk1820F; // x27
+    bool8 unk1820B; // x23
+    bool8 unk1820C; // x24
+    bool8 unk1820D; // x25
+    bool8 unk1820E; // x26
+    bool8 unk1820F; // x27
     /* 0x18210 */ bool8 hallucinating; // x28 Displays Substitute and flower sprites when the player has the Cross-Eyed status.
-    u8 unk18211; // x29
+    bool8 unk18211; // x29
     u8 unk18212; // x2A
-    u8 unk18213; // x2B
+    bool8 unk18213; // x2B
     u8 unk18214; // x2C
     u8 unk18215; // x2D
     u8 unk18216; // x2E
@@ -170,7 +173,7 @@ struct unkStruct_Dungeon134_sub
     u32 unk150;
     u32 unk154;
     u32 unk158;
-    u32 unk15C;
+    s24_8 unk15C;
     u8 unk160;
     u8 unk161;
     u8 unk162;
@@ -199,12 +202,13 @@ struct unkStruct_Dungeon5C4_sub
     Entity *unkC;
 };
 
-struct unkStruct_Dungeon64C
+// size: 0x8
+typedef struct unkStruct_Dungeon64C
 {
     u8 unk0;
     u8 unk1;
     u32 unk4;
-};
+} unkStruct_Dungeon64C;
 
 #define UNK_1BBD4_STR_COUNT 10
 
@@ -242,6 +246,63 @@ struct MinMaxPosition
     s32 maxY;
 };
 
+// size: 0x58
+typedef struct unkDungeon644
+{
+    /* 0x0 */ DungeonLocation dungeonLocation;
+    /* 0x4 */ DungeonLocation dungeonLocation2;
+    /* 0x8 */ unkStruct_Dungeon64C unk8;
+    /* 0x10 */ u8 unk10;
+    /* 0x11 */ u8 fill11[3];
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 unk15;
+    /* 0x16 */ u8 unk16;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u8 unk18;
+    /* 0x19 */ u8 unk19;
+    /* 0x1A */ u8 fill1A[2];
+    /* 0x1C */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
+    /* 0x1E */ s16 unk1E;
+    /* 0x20 */ s16 unk20;
+    /* 0x22 */ s16 windTurns; // Turns remaining before getting swept out of the dungeon.
+    /* 0x24 */ u16 unk24;
+    /* 0x26 */ u16 bossSongIndex;
+    /* 0x28 */ u8 unk28;
+    /* 0x29 */ u8 unk29;
+    /* 0x2A */ u8 unk2A;
+    /* 0x2B */ u8 unk2B;
+    /* 0x2C */ u8 unk2C;
+    /* 0x2D */ bool8 monsterHouseTriggered;
+    /* 0x2E */ bool8 monsterHouseTriggeredEvent;
+    /* 0x2F */ u8 unk2F;
+    /* 0x30 */ u8 unk30;
+    /* 0x31 */ u8 unk31;
+    /* 0x32 */ bool8 itemHoldersIdentified;
+    /* 0x33 */ u8 fill33;
+    /* 0x34 */ u8 unk34;
+    /* 0x35 */ u8 unk35;
+    /* 0x36 */ u8 unk36;
+    /* 0x37 */ s8 unk37;
+    /* 0x38 */ u32 unk38;
+    /* 0x3C */ u32 unk3C;
+    /* 0x40 */ s16 unk40;
+    /* 0x42 */ s16 unk42;
+    /* 0x44 */ s16 unk44;
+    /* 0x46 */ u8 unk46;
+    /* 0x48 */ s32 unk48;
+    /* 0x4C */ s32 unk4C;
+    /* 0x50 */ s32 unk50;
+    /* 0x54 */ u8 unk54;
+    /* 0x55 */ u8 unk55;
+} unkDungeon644;
+
+// size: 0x4
+typedef struct unkDungeonE260
+{
+    /* 0x0 */ u16 unk0;
+    /* 0x2 */ u16 unk2;
+} unkDungeonE260;
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -276,58 +337,10 @@ typedef struct Dungeon
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];
     /* 0x5F4 */ u8 faintStringBuffer[80];
-    /* 0x644 */ DungeonLocation dungeonLocation;
-    /* 0x648 */ DungeonLocation dungeonLocation2;
-    struct unkStruct_Dungeon64C unk64C;
-    u8 unk654;
-    u8 fill655;
-    u8 fill656;
-    u8 fill657;
-    u8 unk658;
-    u8 unk659;
-    u8 unk65A;
-    u8 unk65B;
-    u8 unk65C;
-    u8 unk65D;
-    u8 fill65e[0x660 - 0x65e];
-    /* 0x660 */ s16 fractionalTurn; // Handles turn order when Pokémon have different movement speeds.
-    s16 unk662;
-    s16 unk664;
-    /* 0x666 */ s16 windTurns; // Turns remaining before getting swept out of the dungeon.
-    /* 0x668 */ u16 unk668;
-    u16 bossSongIndex;
-    u8 unk66C;
-    u8 unk66D;
-    /* 0x66E */ u8 unk66E;
-    u8 unk66F;
-    u8 unk670;
-    /* 0x671 */ bool8 monsterHouseTriggered;
-    /* 0x672 */ bool8 monsterHouseTriggeredEvent;
-    u8 unk673;
-    u8 unk674;
-    u8 unk675;
-    /* 0x676 */ bool8 itemHoldersIdentified;
-    u8 unk677;
-    u8 unk678;
-    u8 unk679;
-    u8 unk67A;
-    s8 unk67B;
-    u32 unk67C;
-    u32 unk680;
-    s16 unk684;
-    s16 unk686;
-    s16 unk688;
-    /* 0x68A */ u8 unk68A;
-    u8 fill68B;
-    s32 unk68C;
-    s32 unk690;
-    s32 unk694;
-    u8 unk698;
-    u8 unk699;
-    u8 fill69A[0x69C - 0x69A];
-    EntityInfo unk69C[4];
-    EntityInfo unkEBC[1]; // Unsure about the size... See sub_8082A08()
-    u8 fill10C4[0x343C - 0x10C4];
+    unkDungeon644 unk644;
+    EntityInfo unk69C[MAX_TEAM_MEMBERS];
+    EntityInfo unkEBC[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
+    u8 fill2F3C[0x343C - 0x2F3C];
     /* 0x343C */ UnkDungeonGlobal_unk1CD98 unk343C[32];
     u8 fill353C[0x363c-0x353c];
     /* 0x363C */ u8 expYieldRankings[NUM_MONSTERS];
@@ -339,18 +352,19 @@ typedef struct Dungeon
     /* 0x37F4 */ s32 unk37F4;
     /* 0x37F8 */ bool8 plusIsActive[2]; // Index 0: Enemy , Index 1: Team
     /* 0x37FA */ bool8 minusIsActive[2]; // Index 0: Enemy , Index 1: Team
-    /* 0x37FC */ bool8 decoyActive;
-    /* 0x37FD */ u8 unk37FD;
+    /* 0x37FC */ bool8 decoyIsActive;
+    /* 0x37FD */ bool8 unk37FD;
     /* 0x37FE */ bool8 deoxysDefeat; // Flag set for deoxys in Meteor Cave
-    /* 0x37FE */ u8 unk37FF;
-    s16 unk3800;
-    u8 fill3802[0x3904 - 0x3802];
+    /* 0x37FE */ bool8 unk37FF;
+    // dungeon_serializer.c refers to this as a u16 but elsewhere it's handled as a s16
+    /* 0x3800 */ s16 deoxysForm;
+    Item unk3804[DUNGEON_MAX_ITEMS];
     /* 0x3904 */ s16 numItems;
-    u8 fill3906[0x3A08 - 0x3906];
+    Trap unk3908[DUNGEON_MAX_TRAPS];
     /* 0x3A08 */ bool8 forceMonsterHouse; // Forces the current floor to have monster house
-    /* 0x3A09 */ u8 unk3A09;
-    /* 0x3A0A */ u8 unk3A0A;
-    /* 0x3A0B */ u8 unk3A0B;
+    /* 0x3A09 */ bool8 unk3A09;
+    /* 0x3A0A */ bool8 unk3A0A;
+    /* 0x3A0B */ bool8 unk3A0B;
     /* 0x3A0C */ u8 monsterHouseRoom; // room index of monster house
     /* 0x3A0D */ u8 unk3A0D;
     /* 0x3A0E */ s16 tileset;
@@ -359,12 +373,12 @@ typedef struct Dungeon
     /* 0x3A14 */ s16 fixedRoomId;
     /* 0x3A16 */ s16 unk3A16;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
-    /* 0xEA18 */ Position playerSpawn;
-    Position stairsSpawn; // stairs location
-    Position unkE220[8];
+    /* 0xEA18 */ DungeonPos playerSpawn;
+    DungeonPos stairsSpawn; // stairs location
+    DungeonPos unkE220[8];
     struct MinMaxPosition kecleonShopPos;
     struct MinMaxPosition unkE250;
-    Position unkE260;
+    unkDungeonE260 unkE260;
     /* 0xE264 */ Weather weather; // Uses the weather constants in weather.h.
     /* 0xE27C */ Tile unkE27C[8][8];
     /* 0xE87C */ u8 unkE87C[8][8];
@@ -373,7 +387,7 @@ typedef struct Dungeon
     u8 unk104C0;
     /* 0x104C4 */ RoomData roomData[MAX_ROOM_COUNT];
     /* 0x10844 */ s16 naturalJunctionListCounts[MAX_ROOM_COUNT];
-    /* 0x10884 */ Position naturalJunctionList[MAX_ROOM_COUNT][MAX_ROOM_COUNT]; // Arrays of room exits for each room.
+    /* 0x10884 */ DungeonPos naturalJunctionList[MAX_ROOM_COUNT][MAX_ROOM_COUNT]; // Arrays of room exits for each room.
     u16 unk11884[250][9];
     u16 unk12A18[20][9];
     u16 unk12B80[9];
@@ -388,13 +402,13 @@ typedef struct Dungeon
     u8 fill1356D[0x13570 - 0x1356D];
     /* 0x13570 */ u8 unk13570;
     u8 fill13571[0x13574 - 0x13571];
-    /* 0x13574 */ Position trapPos;
+    /* 0x13574 */ DungeonPos trapPos;
     /* 0x13578 */ u8 trapID;
     /* 0x13579 */ u8 unk13579;
     u8 fill1357A[0x1357C - 0x1357A];
     /* 0x1357C */ Entity *teamPokemon[MAX_TEAM_MEMBERS];
     /* 0x1358C */ Entity *wildPokemon[DUNGEON_MAX_WILD_POKEMON];
-    /* 0x135CC */ Entity *allPokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
+    /* 0x135CC */ Entity *activePokemon[DUNGEON_MAX_POKEMON]; // Contains both team and wild Pokémon
     /* 0x1361C */ Entity *items[DUNGEON_MAX_ITEMS];
     /* 0x1371C */ Entity *traps[DUNGEON_MAX_TRAPS];
     /* 0x1381C */ Entity teamPokemonEntities[MAX_TEAM_MEMBERS];

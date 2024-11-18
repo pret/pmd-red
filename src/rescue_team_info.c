@@ -112,7 +112,7 @@ bool8 GetIsTeamRenamed(void)
 u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
 
 {
-    struct unkStruct_8094924 auStack36;
+    DataSerializer auStack36;
     u8 neg1;
     u8 zero;
     u8 *puVar2;
@@ -120,9 +120,9 @@ u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
     neg1 = -1;
     zero = 0;
 
-    xxx_init_struct_8094924_save_809486C(&auStack36, param_1, size);
-    SaveIntegerBits(&auStack36, gRescueTeamInfoRef->teamName, 0x58);
-    SaveIntegerBits(&auStack36, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
+    InitBitWriter(&auStack36, param_1, size);
+    WriteBits(&auStack36, gRescueTeamInfoRef->teamName, 0x58);
+    WriteBits(&auStack36, (u8 *)&gRescueTeamInfoRef->teamRankPts, 0x20);
     gRescueTeamInfoRef->isTeamRenamed = sub_80023E4(0);
 
     if (gRescueTeamInfoRef->isTeamRenamed)
@@ -133,21 +133,21 @@ u32 SaveRescueTeamInfo(u8 *param_1, u32 size)
     {
         puVar2 = &zero;
     }
-    SaveIntegerBits(&auStack36,puVar2,1);
-    nullsub_102(&auStack36);
-    return auStack36.unk8;
+    WriteBits(&auStack36,puVar2,1);
+    FinishBitSerializer(&auStack36);
+    return auStack36.count;
 }
 
 u32 ReadRescueTeamInfo(u8 *param_1, u32 size)
 {
-  struct unkStruct_8094924 auStack32;
+  DataSerializer auStack32;
   u8 byteArray[4];
 
-  xxx_init_struct_8094924_restore_809485C(&auStack32, param_1, size);
-  RestoreIntegerBits(&auStack32, gRescueTeamInfoRef->teamName, 0x58);
-  RestoreIntegerBits(&auStack32, &gRescueTeamInfoRef->teamRankPts, 0x20);
-  RestoreIntegerBits(&auStack32, byteArray, 1);
+  InitBitReader(&auStack32, param_1, size);
+  ReadBits(&auStack32, gRescueTeamInfoRef->teamName, 0x58);
+  ReadBits(&auStack32, &gRescueTeamInfoRef->teamRankPts, 0x20);
+  ReadBits(&auStack32, byteArray, 1);
   gRescueTeamInfoRef->isTeamRenamed = byteArray[0] & 1;
-  nullsub_102(&auStack32);
-  return auStack32.unk8;
+  FinishBitSerializer(&auStack32);
+  return auStack32.count;
 }

@@ -22,6 +22,7 @@
 #include "dungeon_items.h"
 #include "constants/item.h"
 #include "constants/status.h"
+#include "code_803E724.h"
 
 extern s32 gDungeonBrightness;
 extern u32 gUnknown_202EDD0;
@@ -64,7 +65,6 @@ extern u32 gUnknown_3001018[];
 
 extern void sub_8040A84();
 extern void sub_8083D44(void);
-extern void sub_8049ED4(void);
 extern void sub_8040A84(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
@@ -850,9 +850,9 @@ void sub_803F27C(bool8 a0)
         strPtr->blinded = 0;
         strPtr->hallucinating = 0;
         strPtr->unk1820F = 0;
-        strPtr->unk1820D = 0;
+        strPtr->unk1820D = FALSE;
         strPtr->unk18211 = 0;
-        strPtr->unk1820E = 0;
+        strPtr->unk1820E = FALSE;
         strPtr->unk1820B = 0;
         strPtr->unk1820C = 0;
     }
@@ -899,7 +899,7 @@ void sub_803F38C(void)
     nullsub_5(0xFF, &gFontPalette[palId].pal[15]);
 }
 
-bool8 sub_803F428(Position *pos)
+bool8 sub_803F428(DungeonPos *pos)
 {
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
     Entity *cameraEntity = strPtr->cameraTarget;
@@ -980,8 +980,8 @@ void sub_803F580(u8 a0)
         strPtr->cameraPixelPos.y = (cameraTarget->pixelPos.y / 256) - 96;
 
         if (HasHeldItem(cameraTarget, ITEM_X_RAY_SPECS) && info->isTeamLeader) {
-            strPtr->unk1820D = 1;
-            strPtr->unk1820E = 1;
+            strPtr->unk1820D = TRUE;
+            strPtr->unk1820E = TRUE;
         }
         else {
             strPtr->unk1820D = info->powerEars;
@@ -993,7 +993,7 @@ void sub_803F580(u8 a0)
         unk18214 = strPtr->unk18214;
         if (unk18214 == 0) {
             u32 unkVar;
-            if (info->eyesightStatus.eyesightStatus == STATUS_BLINKER) {
+            if (info->blinkerClassStatus.status == STATUS_BLINKER) {
                 strPtr->blinded = 1;
                 unkVar = 0xE;
             }
@@ -1016,7 +1016,7 @@ void sub_803F580(u8 a0)
         }
 
         before = strPtr->hallucinating;
-        if (info->eyesightStatus.eyesightStatus == STATUS_CROSS_EYED) {
+        if (info->blinkerClassStatus.status == STATUS_CROSS_EYED) {
             strPtr->hallucinating = 1;
         }
         else {
@@ -1066,7 +1066,7 @@ void sub_803F580(u8 a0)
 
         if (strPtr->cameraPos.x != strPtr->cameraPosMirror.x || strPtr->cameraPos.y != strPtr->cameraPosMirror.y) {
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-                Entity *mon = gDungeon->allPokemon[i];
+                Entity *mon = gDungeon->activePokemon[i];
                 if (EntityExists(mon)) {
                     sub_80402AC(mon->pos.x, mon->pos.y);
                 }
@@ -1081,7 +1081,7 @@ void sub_803F580(u8 a0)
 void sub_803F7BC(void)
 {
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
-    Tile *tile = GetTile(strPtr->cameraPos.x, strPtr->cameraPos.y);
+    const Tile *tile = GetTile(strPtr->cameraPos.x, strPtr->cameraPos.y);
     u32 roomId = tile->room;
 
     if (strPtr->unk1820B != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {
@@ -1113,8 +1113,8 @@ void sub_803F878(s32 a0, s32 a1)
     strPtr->cameraPixelPos.y = (a1 / 256) - 96;
     strPtr->cameraPos.x = a0 / 6144;
     strPtr->cameraPos.y = a1 / 6144;
-    strPtr->unk1820D = 0;
-    strPtr->unk1820E = 0;
+    strPtr->unk1820D = FALSE;
+    strPtr->unk1820E = FALSE;
     strPtr->unk18211 = 0;
     strPtr->unk18216 = 0;
 
@@ -1313,10 +1313,10 @@ void sub_803FB74(void)
     }
 
     arrPtr = gUnknown_202B038[0][0];
-    unkFloor = gDungeon->unk14 + gDungeon->dungeonLocation.floor;
+    unkFloor = gDungeon->unk14 + gDungeon->unk644.dungeonLocation.floor;
     if (strPtr->unk3A != unkFloor) {
         strPtr->unk3A = unkFloor;
-        if (IsStairDirectionUp(gDungeon->dungeonLocation.id)) {
+        if (IsStairDirectionUp(gDungeon->unk644.dungeonLocation.id)) {
             arrPtr[1] = 0;
         }
         else {

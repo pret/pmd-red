@@ -111,7 +111,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_PROTEIN:
-            if (pokemonInfo->atk > 249)
+            if (pokemonInfo->atk[0] > 249)
             {
                 itemWeight = 0;
             }
@@ -121,7 +121,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_CALCIUM:
-            if (pokemonInfo->spAtk > 249)
+            if (pokemonInfo->atk[1] > 249)
             {
                 itemWeight = 0;
             }
@@ -131,7 +131,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_IRON:
-            if (pokemonInfo->def > 249)
+            if (pokemonInfo->def[0] > 249)
             {
                 itemWeight = 0;
             }
@@ -141,7 +141,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_ZINC:
-            if (pokemonInfo->spDef > 249)
+            if (pokemonInfo->def[1] > 249)
             {
                 itemWeight = 0;
             }
@@ -202,7 +202,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_ALLURE_SEED:
-            if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_CROSS_EYED)
+            if (pokemonInfo->blinkerClassStatus.status != STATUS_CROSS_EYED)
             {
                 if (IsAdjacentToEnemy(targetPokemon))
                 {
@@ -219,7 +219,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_CHERI_BERRY:
-            if (pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_PARALYSIS)
+            if (pokemonInfo->burnClassStatus.status != STATUS_PARALYSIS)
             {
                 return 0;
             }
@@ -233,7 +233,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_TOTTER_SEED:
-            if (pokemonInfo->volatileStatus.volatileStatus != STATUS_CONFUSED)
+            if (pokemonInfo->cringeClassStatus.status != STATUS_CONFUSED)
             {
                 if (IsAdjacentToEnemy(targetPokemon))
                 {
@@ -250,8 +250,8 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_PECHA_BERRY:
-            if (pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_POISONED &&
-                pokemonInfo->nonVolatile.nonVolatileStatus != STATUS_BADLY_POISONED)
+            if (pokemonInfo->burnClassStatus.status != STATUS_POISONED &&
+                pokemonInfo->burnClassStatus.status != STATUS_BADLY_POISONED)
             {
                 return 0;
             }
@@ -265,7 +265,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_BLINKER_SEED:
-            if (pokemonInfo->eyesightStatus.eyesightStatus != STATUS_BLINKER)
+            if (pokemonInfo->blinkerClassStatus.status != STATUS_BLINKER)
             {
                 if (IsAdjacentToEnemy(targetPokemon))
                 {
@@ -316,9 +316,9 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             itemWeight = 40;
             break;
         case ITEM_SLEEP_SEED:
-            if (pokemonInfo->sleep.sleep != STATUS_SLEEP &&
-                pokemonInfo->sleep.sleep != STATUS_NAPPING &&
-                pokemonInfo->sleep.sleep != STATUS_NIGHTMARE)
+            if (pokemonInfo->sleepClassStatus.status != STATUS_SLEEP &&
+                pokemonInfo->sleepClassStatus.status != STATUS_NAPPING &&
+                pokemonInfo->sleepClassStatus.status != STATUS_NIGHTMARE)
             {
                 if (IsAdjacentToEnemy(targetPokemon))
                 {
@@ -335,7 +335,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_CHESTO_BERRY:
-            if (pokemonInfo->sleep.sleep != STATUS_SLEEPLESS)
+            if (pokemonInfo->sleepClassStatus.status != STATUS_SLEEPLESS)
             {
                 itemWeight = 5;
             }
@@ -358,7 +358,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             itemWeight = 80;
             break;
         case ITEM_RAWST_BERRY:
-            if (pokemonInfo->nonVolatile.nonVolatileStatus == STATUS_BURN)
+            if (pokemonInfo->burnClassStatus.status == STATUS_BURN)
             {
                 return 50;
             }
@@ -388,7 +388,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_STUN_SEED:
-            if (pokemonInfo->immobilize.immobilizeStatus == STATUS_PETRIFIED)
+            if (pokemonInfo->frozenClassStatus.status == STATUS_PETRIFIED)
             {
                 return 0;
             }
@@ -448,7 +448,7 @@ bool8 IsAdjacentToEnemy(Entity *pokemon)
     s32 direction;
     for (direction = 0; direction < NUM_DIRECTIONS; direction++)
     {
-        struct Tile *mapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
+        const Tile *mapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
         Entity *adjacentPokemon = mapTile->monster;
         if (adjacentPokemon != NULL && GetEntityType(adjacentPokemon) != ENTITY_NOTHING &&
             GetTreatmentBetweenMonsters(pokemon, adjacentPokemon, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)

@@ -1,6 +1,8 @@
 #include "global.h"
+#include "math.h"
 #include "code_800E9A8.h"
 #include "code_803E46C.h"
+#include "code_803E724.h"
 #include "code_804267C.h"
 #include "code_806CD90.h"
 #include "code_8041AD0.h"
@@ -15,18 +17,18 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 
-extern u32 gStatusSpriteMasks_SleepStatus[];
-extern u32 gStatusSpriteMasks_NonVolatileStatus[];
-extern u32 gStatusSpriteMasks_ImmobilizeStatus[];
-extern u32 gStatusSpriteMasks_VolatileStatus[];
-extern u32 gStatusSpriteMasks_ChargingStatus[];
-extern u32 gStatusSpriteMasks_ProtectionStatus[];
-extern u32 gStatusSpriteMasks_WaitingStatus[];
-extern u32 gStatusSpriteMasks_LinkedStatus[];
-extern u32 gStatusSpriteMasks_MoveStatus[];
-extern u32 gStatusSpriteMasks_ItemStatus[];
-extern u32 gStatusSpriteMasks_TransformStatus[];
-extern u32 gStatusSpriteMasks_EyesightStatus[];
+extern u32 gStatusSpriteMasks_SleepClassStatus[];
+extern u32 gStatusSpriteMasks_BurnClassStatus[];
+extern u32 gStatusSpriteMasks_FrozenClassStatus[];
+extern u32 gStatusSpriteMasks_CringeClassStatus[];
+extern u32 gStatusSpriteMasks_BideClassStatus[];
+extern u32 gStatusSpriteMasks_ReflectClassStatus[];
+extern u32 gStatusSpriteMasks_CurseClassStatus[];
+extern u32 gStatusSpriteMasks_LeechSeedClassStatus[];
+extern u32 gStatusSpriteMasks_SureShotClassStatus[];
+extern u32 gStatusSpriteMasks_LongTossClassStatus[];
+extern u32 gStatusSpriteMasks_InvisibleClassStatus[];
+extern u32 gStatusSpriteMasks_BlinkerClassStatus[];
 extern u32 gStatusSpriteMasks_MuzzledStatus[];
 
 
@@ -34,10 +36,8 @@ extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
 extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
 extern u32 sub_806F62C(u32);
 extern void PlaySoundEffect(u32);
-extern u8 sub_803F428(Position *pos);
 extern void sub_8041550(Entity *pokemon, u32, u32, u32, u32, u32);
 
-void sub_80421C0(Entity *pokemon, u16 r1);
 void EntityUpdateStatusSprites(Entity *entity);
 
 extern s32 gDungeonBrightness;
@@ -51,18 +51,18 @@ extern void sub_800EE5C(u32);
 extern void sub_800EF64(void);
 
 u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
-s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3);
+s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3);
 
-s32 sub_80416A4(Position *pos_1, u32 param_2, bool8 param_3)
+s32 sub_80416A4(DungeonPos *pos_1, u32 param_2, bool8 param_3)
 {
-  Position32 pos;
+  PixelPos pos;
 
   pos.x = pos_1->x * 0x1800 + 0xc00;
   pos.y = pos_1->y * 0x1800 + 0x1000;
   return sub_80416E0(&pos, param_2, param_3);
 }
 
-s32 sub_80416E0(Position32 *pos, u32 param_2, bool8 param_3)
+s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
 {
   int counter;
   s32 ret;
@@ -155,7 +155,7 @@ void sub_8041888(u8 param_1)
     EntityInfo *entityInfo;
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
+        entity = gDungeon->activePokemon[index];
         if(EntityExists(entity))
         {
             entityInfo = GetEntInfo(entity);
@@ -183,26 +183,26 @@ void EntityUpdateStatusSprites(Entity *entity)
 
     if (entityInfo->id == 0xb9) {
       // NOTE: clean this up sometime
-      temp = entityInfo->sleep.sleepTurns;
+      temp = entityInfo->sleepClassStatus.turns;
       flag = 0x7f;
       temp ^= flag;
       flag = (temp) != 0;
     }
     if (flag) {
-      spriteStatus = gStatusSpriteMasks_SleepStatus[entityInfo->sleep.sleep];
+      spriteStatus = gStatusSpriteMasks_SleepClassStatus[entityInfo->sleepClassStatus.status];
     }
     spriteStatus = spriteStatus |
-            gStatusSpriteMasks_NonVolatileStatus[entityInfo->nonVolatile.nonVolatileStatus] |
-            gStatusSpriteMasks_ImmobilizeStatus[entityInfo->immobilize.immobilizeStatus] |
-            gStatusSpriteMasks_VolatileStatus[entityInfo->volatileStatus.volatileStatus] |
-            gStatusSpriteMasks_ChargingStatus[entityInfo->charging.chargingStatus] |
-            gStatusSpriteMasks_ProtectionStatus[entityInfo->protection.protectionStatus] |
-            gStatusSpriteMasks_WaitingStatus[entityInfo->waitingStruct.waitingStatus] |
-            gStatusSpriteMasks_LinkedStatus[entityInfo->linked.linkedStatus] |
-            gStatusSpriteMasks_MoveStatus[entityInfo->moveStatus.moveStatus] |
-            gStatusSpriteMasks_ItemStatus[entityInfo->itemStatus.itemStatus] |
-            gStatusSpriteMasks_TransformStatus[entityInfo->transformStatus.transformStatus] |
-            gStatusSpriteMasks_EyesightStatus[entityInfo->eyesightStatus.eyesightStatus] |
+            gStatusSpriteMasks_BurnClassStatus[entityInfo->burnClassStatus.status] |
+            gStatusSpriteMasks_FrozenClassStatus[entityInfo->frozenClassStatus.status] |
+            gStatusSpriteMasks_CringeClassStatus[entityInfo->cringeClassStatus.status] |
+            gStatusSpriteMasks_BideClassStatus[entityInfo->bideClassStatus.status] |
+            gStatusSpriteMasks_ReflectClassStatus[entityInfo->reflectClassStatus.status] |
+            gStatusSpriteMasks_CurseClassStatus[entityInfo->curseClassStatus.status] |
+            gStatusSpriteMasks_LeechSeedClassStatus[entityInfo->leechSeedClassStatus.status] |
+            gStatusSpriteMasks_SureShotClassStatus[entityInfo->sureShotClassStatus.status] |
+            gStatusSpriteMasks_LongTossClassStatus[entityInfo->longTossClassStatus.status] |
+            gStatusSpriteMasks_InvisibleClassStatus[entityInfo->invisibleClassStatus.status] |
+            gStatusSpriteMasks_BlinkerClassStatus[entityInfo->blinkerClassStatus.status] |
             gStatusSpriteMasks_MuzzledStatus[entityInfo->muzzled.muzzled];
 
     if (entityInfo->grudge) {
@@ -221,13 +221,13 @@ void EntityUpdateStatusSprites(Entity *entity)
         spriteStatus = spriteStatus | STATUS_SPRITE_LOWHP;
       }
     }
-    if ((gDungeon->itemHoldersIdentified) && (entityInfo->heldItem.flags & ITEM_FLAG_EXISTS)) {
+    if ((gDungeon->unk644.itemHoldersIdentified) && (entityInfo->heldItem.flags & ITEM_FLAG_EXISTS)) {
       spriteStatus = spriteStatus | STATUS_SPRITE_LOWHP;
     }
-    if ( (entityInfo->offensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->offensiveMultipliers[1] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->defensiveMultipliers[0] < DEFAULT_STAT_MULTIPLIER) ||
-        (entityInfo->defensiveMultipliers[1] < DEFAULT_STAT_MULTIPLIER) ||
+    if ((F248LessThanInt(entityInfo->offensiveMultipliers[0], 1)) ||
+        (F248LessThanInt(entityInfo->offensiveMultipliers[1], 1)) ||
+        (F248LessThanInt(entityInfo->defensiveMultipliers[0], 1)) ||
+        (F248LessThanInt(entityInfo->defensiveMultipliers[1], 1)) ||
         (entityInfo->offensiveStages[0] < DEFAULT_STAT_STAGE) ||
         (entityInfo->offensiveStages[1] < DEFAULT_STAT_STAGE) ||
         (entityInfo->defensiveStages[0] < DEFAULT_STAT_STAGE) ||
@@ -850,7 +850,7 @@ void sub_804218C(Entity *pokemon, Entity *target)
     sub_804151C(target, 0x2A, 1);
 }
 
-void sub_804219C(Position32 *pos)
+void sub_804219C(PixelPos *pos)
 {
     sub_80416E0(pos, 0x90, TRUE);
 }
@@ -868,9 +868,9 @@ void sub_80421C0(Entity *pokemon, u16 r1)
             PlaySoundEffect(r1);
 }
 
-void sub_80421EC(Position *pos, u16 r1)
+void sub_80421EC(DungeonPos *pos, u16 r1)
 {
-    if(sub_803F428(pos) != 0)
+    if(sub_803F428(pos))
         PlaySoundEffect(r1);
 }
 

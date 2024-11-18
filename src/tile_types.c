@@ -5,7 +5,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 
-const u8 gDungeonWaterType[] = {
+const u8 gDungeonWaterType[76] = {
     DUNGEON_WATER_TYPE_NONE,
     DUNGEON_WATER_TYPE_NONE,
     DUNGEON_WATER_TYPE_NONE,
@@ -87,14 +87,13 @@ const u8 gDungeonWaterType[] = {
 extern void sub_80498A8(s32, s32);
 extern void sub_80402AC(s32, s32);
 extern void sub_8049BB0(s32, s32);
-void sub_8042A14(Position *);
-extern void sub_8049ED4(void);
+void sub_8042A14(DungeonPos *);
 
-bool8 sub_804ACE4(Position *pos)
+bool8 PosHasItem(DungeonPos *pos)
 {
-  struct Tile *tile;
+  const Tile *tile;
   Entity *entity;
-  
+
   tile = GetTile(pos->x,pos->y);
   entity = tile->object;
   if ((entity != NULL) && (GetEntityType(entity) == ENTITY_ITEM)) {
@@ -103,11 +102,11 @@ bool8 sub_804ACE4(Position *pos)
   return FALSE;
 }
 
-Entity *sub_804AD0C(Position *pos)
+Entity *GetMonsterAtPos(DungeonPos *pos)
 {
-  struct Tile *tile;
+  const Tile *tile;
   Entity *entity;
-  
+
   tile = GetTile(pos->x,pos->y);
   entity = tile->monster;
   if ((entity != NULL) && (entity->type == ENTITY_MONSTER)) {
@@ -116,17 +115,17 @@ Entity *sub_804AD0C(Position *pos)
   return NULL;
 }
 
-bool8 sub_804AD34(Position *pos)
+bool8 sub_804AD34(DungeonPos *pos)
 {
-  struct Tile *tile;
+  Tile *tile;
   s32 x;
   Entity * entity;
   s32 y;
   bool8 iVar8;
   s32 index;
-  
+
   iVar8 = 0;
-  tile = GetTileSafe(pos->x,pos->y);
+  tile = GetTileMut(pos->x,pos->y);
   if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
     if(!(tile->terrainType & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL))){
     iVar8 = 1;
@@ -145,7 +144,7 @@ bool8 sub_804AD34(Position *pos)
   if (iVar8 != 0) {
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeon->allPokemon[index];
+      entity = gDungeon->activePokemon[index];
       if (EntityExists(entity)) {
         sub_806CF98(entity);
       }
@@ -156,15 +155,15 @@ bool8 sub_804AD34(Position *pos)
   return iVar8;
 }
 
-bool8 sub_804AE08(Position *pos)
+bool8 sub_804AE08(DungeonPos *pos)
 {
-  struct Tile *tile;
+  Tile *tile;
   s32 x;
   s32 y;
   bool8 uVar6;
-  
+
   uVar6 = FALSE;
-  tile = GetTileSafe(pos->x,pos->y);
+  tile = GetTileMut(pos->x,pos->y);
 
   if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
     if(!(tile->terrainType & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL))) {
@@ -183,17 +182,17 @@ bool8 sub_804AE08(Position *pos)
   return uVar6;
 }
 
-void sub_804AE84(Position *pos)
+void sub_804AE84(DungeonPos *pos)
 {
-  struct Tile *tile;
+  Tile *tile;
   s32 x;
   Entity * entity;
   s32 index;
   s32 y;
-  
-  tile = GetTileSafe(pos->x,pos->y);
+
+  tile = GetTileMut(pos->x,pos->y);
   if ((tile->spawnOrVisibilityFlags & 0x10) != 0) {
-    tile->spawnOrVisibilityFlags = tile->spawnOrVisibilityFlags & 0xffef;
+    tile->spawnOrVisibilityFlags &= 0xffef;
 
     for(y = -1; y < 2; y++)
     {
@@ -206,7 +205,7 @@ void sub_804AE84(Position *pos)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeon->allPokemon[index];
+      entity = gDungeon->activePokemon[index];
       if (EntityExists(entity)) {
         sub_806CF98(entity);
       }

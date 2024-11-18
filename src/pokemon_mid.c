@@ -269,7 +269,7 @@ bool8 ComparePokemonNames(s16 a1, s16 a2)
     return FALSE;
 }
 
-void CopyMonsterNametoBuffer(u8 * buffer, s16 index)
+void CopyMonsterNameToBuffer(u8 * buffer, s16 index)
 {
     strncpy(buffer, gMonsterParameters[index].species, 0x14);
 }
@@ -397,7 +397,7 @@ u8 GetRegenSpeed(s16 index)
     return ((u8)(gMonsterParameters[index].regenSpeed) << 25) >> 24;
 }
 
-bool8 CanMove(s16 index)
+bool8 GetCanMoveFlag(s16 index)
 {
     return gMonsterParameters[index].canMove;
 }
@@ -696,7 +696,7 @@ const u8* DecompressMoveID(const u8* src, u16* moveID)
     return src;
 }
 
-s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
+s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints)
 {
   const u8* stream;
   u16 moveID;  // moveID
@@ -720,20 +720,20 @@ s32 sub_808E0AC(u16* a1, s16 species, s32 a3, s32 IQPoints)
     stream = DecompressMoveID(stream, &moveID);
     v12 = *stream++;
 
-    if (v12 > a3)
+    if (v12 > level)
       break;
-    if (v12 == a3) {
-      bool8 cond = 1;
+    if (v12 == level) {
+      bool8 cond = TRUE;
 
       // NOTE: these moves require IQ to be > 333
-      if ((moveID == MOVE_FRENZY_PLANT) && (IQPoints < gFrenzyPlantIQReq)) cond = 0;
-      if ((moveID == MOVE_HYDRO_CANNON) && (IQPoints < gHydroCannonIQReq)) cond = 0;
-      if ((moveID == MOVE_BLAST_BURN) && (IQPoints < gBlastBurnIQReq)) cond = 0;
-      if ((moveID == MOVE_VOLT_TACKLE) && (IQPoints < gVoltTackleIQReq)) cond = 0;
+      if ((moveID == MOVE_FRENZY_PLANT) && (IQPoints < gFrenzyPlantIQReq)) cond = FALSE;
+      if ((moveID == MOVE_HYDRO_CANNON) && (IQPoints < gHydroCannonIQReq)) cond = FALSE;
+      if ((moveID == MOVE_BLAST_BURN) && (IQPoints < gBlastBurnIQReq)) cond = FALSE;
+      if ((moveID == MOVE_VOLT_TACKLE) && (IQPoints < gVoltTackleIQReq)) cond = FALSE;
 
       if (cond) {
         if (count < 16) {
-          *a1++ = moveID;
+          *dst++ = moveID;
           ++count;
         }
       }
@@ -928,7 +928,7 @@ void sub_808E490(Move* a1, s16 species)
 {
     u16 buffer[0x10]; // of moveIDs
     s32 i;
-    s32 count = sub_808E0AC(buffer, species, 1, 999);
+    s32 count = GetMovesLearnedAtLevel(buffer, species, 1, 999);
     if (count == 0) {
         count = 1;
         buffer[0] = MOVE_ITEM_TOSS;

@@ -23,12 +23,13 @@
 
 struct unkStruct_80F520C
 {
-    u8 unk0;
-    u8 unk1;
-    s16 unk2;
+    u8 unk0; // types0
+    u8 unk1; // Most likely just padding and should be removed
+    s16 unk2; // monsterID
 };
 
-extern struct unkStruct_80F520C gUnknown_80F520C[];
+// Castform Forecast ability data
+extern struct unkStruct_80F520C gUnknown_80F520C[WEATHER_RANDOM];
 
 extern u8 gUnknown_80F51E4[];
 extern u8 *gUnknown_80FCC7C[];
@@ -74,7 +75,7 @@ void TriggerWeatherAbilities(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeon->allPokemon[index];
+      entity = gDungeon->activePokemon[index];
       if (EntityExists(entity)) {
         if (HasAbility(entity, ABILITY_DRIZZLE)) {
             gDungeon->weather.naturalWeather[WEATHER_RAIN] = 1;
@@ -93,17 +94,15 @@ void TriggerWeatherAbilities(void)
   }
 }
 
-s32 sub_8069F54(Entity *pokemon, s16 param_2)
+s32 GetMonsterApparentID(Entity *pokemon, s16 id)
 {
-  if ((((param_2 * 0x10000) + 0xfe880000U) >> 0x10) < 4) {
-    if (HasAbility(pokemon, ABILITY_FORECAST)) {
-        return gUnknown_80F520C[GetApparentWeather(pokemon)].unk2;
+    if (id == MONSTER_CASTFORM || id == MONSTER_CASTFORM_SNOWY || id == MONSTER_CASTFORM_SUNNY || id == MONSTER_CASTFORM_RAINY) {
+        if (HasAbility(pokemon, ABILITY_FORECAST))
+            return gUnknown_80F520C[GetApparentWeather(pokemon)].unk2;
+        return MONSTER_CASTFORM;
     }
-    else {
-        return 0x178;
-    }
-  }
-  return param_2;
+
+    return id;
 }
 
 static inline u8 sub_8069F9C_sub(Entity *pokemon)
@@ -172,7 +171,7 @@ void sub_8069F9C(Entity *pokemon,Entity * target,Move *move)
       }
       iVar6->abilities[abilityIndex] = local_20[randomIndex];
       gDungeon->unkC = 1;
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCC7C);
       sub_8042900(target);
       sub_806ABAC(pokemon,target);
@@ -190,7 +189,7 @@ _0806A068:
         iVar6->types[0] = type;
         iVar6->types[1] = TYPE_NONE;
         iVar6->isColorChanged = TRUE;
-        SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         __src = GetUnformattedTypeString(iVar6->types[0]);
         strcpy(gFormatBuffer_Items[0],__src);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCAC);
@@ -208,14 +207,14 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
   EntityInfo *entityInfo;
 
   if ((((EntityExists(pokemon)) && (EntityExists(target))) && (pokemon != target))
-     && (entityInfo = GetEntInfo(target), entityInfo->protection.protectionStatus == STATUS_CONVERSION2)) {
+     && (entityInfo = GetEntInfo(target), entityInfo->reflectClassStatus.status == STATUS_CONVERSION2)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
     uVar2_u32 = sub_8092364(moveType);
     if (uVar2_u32 != TYPE_NONE) {
       entityInfo->types[0] = uVar2_u32;
       entityInfo->types[1] = 0;
       sub_8041BBC(target);
-      SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       typeString = GetUnformattedTypeString(uVar2_u32);
       strcpy(gFormatBuffer_Items[0],typeString);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDCC8);
@@ -301,8 +300,8 @@ void sub_806A338(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
-        if (EntityExists(entity) && (GetEntInfo(entity)->waitingStruct.waitingStatus == STATUS_SNATCH))
+        entity = gDungeon->activePokemon[index];
+        if (EntityExists(entity) && (GetEntInfo(entity)->curseClassStatus.status == STATUS_SNATCH))
         {
             gDungeon->snatchPokemon = entity;
             ASM_MATCH_TRICK(entity);

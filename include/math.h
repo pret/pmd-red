@@ -2,33 +2,19 @@
 #define GUARD_MATH_H
 
 #include "gba/types.h"
+#include "number_util.h"
 
 /**
- * This type represents a signed 24.8 fixed-point number, where the 24 most
- * significant bits are the integer part and the 8 least significant bits are
- * the fractional part.
- */
-typedef s32 s24_8;
-
-/**
- * This type represents an unsigned 24.8 fixed-point number, where the 24 most
- * significant bits are the integer part and the 8 least significant bits are
- * the fractional part.
- */
-typedef u32 u24_8;
-
-/**
- * This function computes a value modulo 3, using a lookup table for values less
- * than 0x100.
+ * This function computes the cosine of of `x` using a lookup table. The period of
+ * the function is `4096`, and the range is `[-256, 256]`.
  *
- * @warning This function performs an invalid memory access if x < 0.
- * Hopefully it's never actually used.
+ * @note Mathematically, `cos(abs(t)) = cos(t)`, unlike the case in `sin_4096()` above.
  *
- * @param[in] x     The value to get modulo 3. Must be non-negative.
+ * @param[in] x     The value to get the cosine of.
  *
- * @return          The value of x modulo 3.
+ * @return          `floor(256 * cos(pi * x / 2048))` as a signed 32-bit integer.
  */
-u32 fast_mod_3(s32 x);
+s32 cos_4096(s32 x);
 
 /**
  * This function computes the sine of the absolute value of `x` using a lookup
@@ -38,36 +24,7 @@ u32 fast_mod_3(s32 x);
  *
  * @return          `floor(256 * sin(pi * abs(x) / 2048))` as a signed 32-bit integer.
  */
-s32 sin_abs_4096(s32 x);
-
-/**
- * This function computes the cosine of of `x` using a lookup table. The period of
- * the function is `4096`, and the range is `[-256, 256]`.
- *
- * @note Mathematically, `cos(abs(t)) = cos(t)`, unlike the case in `sin_abs_4096()` above.
- *
- * @param[in] x     The value to get the cosine of.
- *
- * @return          `floor(256 * cos(pi * x / 2048))` as a signed 32-bit integer.
- */
-s32 cos_4096(s32 x);
-
-/**
- * This function lexicographically compares two pairs of u32s.
- *
- * @note The call signature of this might change if it makes sense to pack the
- *       inputs into a struct representing, say, a 64-bit unsigned integer. Doing
- *       so does affect the generated assembly; the current approach is the simplest
- *       match.
- *
- * @param[in] x_hi  The high 32 bits of the first pair.
- * @param[in] x_lo  The low 32 bits of the first pair.
- * @param[in] y_hi  The high 32 bits of the second pair.
- * @param[in] y_lo  The low 32 bits of the second pair.
- *
- * @return          `TRUE` if `x < y`, `FALSE` otherwise.
- */
-bool8 u32_pair_less_than(u32 x_hi, u32 x_lo, u32 y_hi, u32 y_lo);
+s32 sin_4096(s32 x);
 
 /**
  * This function multiplies two signed 24.8 fixed-point numbers.
@@ -79,35 +36,50 @@ bool8 u32_pair_less_than(u32 x_hi, u32 x_lo, u32 y_hi, u32 y_lo);
  */
 s24_8 s24_8_mul(s24_8 x, s24_8 y);
 
-/**
- * This function divides two signed 24.8 fixed-point numbers.
- *
- * @param[in] x   The dividend.
- * @param[in] y   The divisor.
- *
- * @returns       The quotient `x/y` as a signed 24.8 fixed-point number.
- */
-s32 s24_8_div(s32 x, s32 y);
+bool8 F48_16_IsZero(s48_16 *a);
+void F48_16_SDiv(s48_16 *dst, s48_16 *a, s48_16 *b);
+void F48_16_SMul(s48_16 *dst, s48_16 *a, s48_16 *b);
 
-/**
- * This function multiplies two unsigned 24.8 fixed-point numbers.
- *
- * @param[in] x   The first factor.
- * @param[in] y   The second factor.
- *
- * @return        The product `x*y` as an unsigned 24.8 fixed-point number.
- */
-u24_8 u24_8_mul(u24_8 x, u24_8 y);
+s24_8 FP24_8_Hypot(s24_8 x, s24_8 y);
+void FP48_16_FromS32(s48_16 *dst, s32 src);
+u32 FP48_16_ToS32(s48_16 *a);
+void FP48_16_FromF248(s48_16 *a, s24_8 b);
+bool8 FP48_16_SLessThan(s48_16 *a, s48_16 *b);
+void FP48_16_Add(s48_16 *dst, s48_16 *a, s48_16 *b);
+void FP48_16_Subtract(s48_16 *dst, s48_16 *a, s48_16 *b);
 
-/**
- * This function divides two unsigned 24.8 fixed-point numbers.
- *
- * @param[in] x   The first factor.
- * @param[in] y   The second factor.
- *
- * @return        The quotient `x/y` as an unsigned 24.8 fixed-point number.
- */
-u24_8 u24_8_div(u24_8 x, u24_8 y);
+//static inline bool8 F248Equal(s24_8 x, s24_8 y) {
+//    return x.raw == y.raw;
+//}
 
+#define F248LessThanInt(x, y) (x.raw < 0x100 * y)
+#define F248LessThanFloat(x, y) (x.raw < (int)(y * 0x100))
+#define FloatLessThanF248(x, y) ((int)(x * 0x100) < y.raw)
+//static inline bool8 F248LessThanOne(s24_8 x) {
+//    return x.raw < 0x100;
+//}
+#define F248LessThan(x, y) (x.raw < y.raw)
+#define F248GreaterThan(x, y) (x.raw > y.raw)
+#define F248Equal(x, y) (x.raw == y.raw)
+#define F248EqualsInt(x, y) (x.raw == 0x100 * y)
+
+//static inline bool8 F248LessThan(s24_8 x, s24_8 y) {
+//    return x.raw < y.raw;
+//}
+
+#define F248_AddInt(x, y) ((s24_8){x.raw + 0x100 * y})
+#define F248_SubInt(x, y) ((s24_8){x.raw - 0x100 * y})
+
+static inline s24_8 F248_Add(s24_8 x, s24_8 y) {
+    return (s24_8){x.raw + y.raw};
+}
+
+static inline s24_8 F248_Sub(s24_8 x, s24_8 y) {
+    return (s24_8){x.raw - y.raw};
+}
+
+static inline s24_8 F248_MulInt(s24_8 x, s32 y) {
+    return (s24_8){x.raw * y};
+}
 
 #endif // GUARD_MATH_H

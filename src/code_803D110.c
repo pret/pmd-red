@@ -83,17 +83,17 @@ void sub_803D4D0(void)
     OpenedFile *file;
     struct UnkDungeonFileData *strPtr;
 
-    sub_80901D8(&gDungeon->dungeonLocation2, &gDungeon->dungeonLocation);
-    if (gDungeon->unk1C570.id == gDungeon->dungeonLocation2.id && gDungeon->unk1C570.floor == gDungeon->dungeonLocation2.floor)
+    sub_80901D8(&gDungeon->unk644.dungeonLocation2, &gDungeon->unk644.dungeonLocation);
+    if (gDungeon->unk1C570.id == gDungeon->unk644.dungeonLocation2.id && gDungeon->unk1C570.floor == gDungeon->unk644.dungeonLocation2.floor)
         return;
 
-    gDungeon->unk1C570 = gDungeon->dungeonLocation2;
+    gDungeon->unk1C570 = gDungeon->unk644.dungeonLocation2;
     file = OpenFileAndGetFileDataPtr(gUnknown_80F4D8C, &gDungeonFileArchive);
 
     strPtr = &file->data.dungData->unk0[gDungeon->unk1C570.id][gDungeon->unk1C570.floor];
 
-    gDungeon->unk1CEC8 = GetDungeonFloorCount(gDungeon->dungeonLocation.id);
-    gDungeon->unk14 = sub_80902C8(gDungeon->dungeonLocation.id);
+    gDungeon->unk1CEC8 = GetDungeonFloorCount(gDungeon->unk644.dungeonLocation.id);
+    gDungeon->unk14 = sub_80902C8(gDungeon->unk644.dungeonLocation.id);
 
     gDungeon->unk1C574 = file->data.dungData->unk4[strPtr->unk0];
 
@@ -564,8 +564,8 @@ void ShowDungeonNameBanner(void)
     }
     CpuClear((void *)(VRAM + 0x140), 0x1C00);
     if (sub_80848EC()) {
-        s32 r8 = gDungeon->dungeonLocation.floor + gDungeon->unk14;
-        const u8 *dungName = GetDungeonName2(gDungeon->dungeonLocation.id);
+        s32 r8 = gDungeon->unk644.dungeonLocation.floor + gDungeon->unk14;
+        const u8 *dungName = GetDungeonName2(gDungeon->unk644.dungeonLocation.id);
         s32 r5 = 10;
 
         for (r7 = 0; r7 < 8; r7++) {
@@ -579,7 +579,7 @@ void ShowDungeonNameBanner(void)
         }
 
         var = sub_803DC14(dungName, (224 - CalcStringWidth(dungName)) / 2, 0);
-        if (IsStairDirectionUp(gDungeon->dungeonLocation.id))
+        if (IsStairDirectionUp(gDungeon->unk644.dungeonLocation.id))
             r6 = gUnknown_80F6108;
         else
             r6 = gUnknown_80F610C;
@@ -1069,11 +1069,11 @@ void sub_803E178(void)
     s32 val = GetFloorType();
 
     if (val == 0) {
-        if (gDungeon->dungeonLocation.id == DUNGEON_METEOR_CAVE && !gDungeon->deoxysDefeat) {
+        if (gDungeon->unk644.dungeonLocation.id == DUNGEON_METEOR_CAVE && !gDungeon->deoxysDefeat) {
             gDungeon->unk3A12 = 28;
         }
         else {
-            gDungeon->unk3A12 = (IsStairDirectionUp(gDungeon->dungeonLocation.id) != FALSE) ? 23 : 22;
+            gDungeon->unk3A12 = (IsStairDirectionUp(gDungeon->unk644.dungeonLocation.id) != FALSE) ? 23 : 22;
         }
     }
     else if (val == 1) {

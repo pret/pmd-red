@@ -52,7 +52,7 @@ bool8 IsCurrentFixedRoomBossFight()
 
 bool8 IsMakuhitaTrainingMaze(void)
 {
-    if( (u8)(gDungeon->dungeonLocation.id - DUNGEON_NORMAL_MAZE_2) < NUM_DUNGEON_MAZE)
+    if( (u8)(gDungeon->unk644.dungeonLocation.id - DUNGEON_NORMAL_MAZE_2) < NUM_DUNGEON_MAZE)
         return TRUE;
     else
         return FALSE;
@@ -79,9 +79,9 @@ void RunFractionalTurn(bool8 param_1)
             sub_8044820();
             if (!sub_8044B28()) {
               sub_8044AB4();
-              gDungeon->fractionalTurn++;
-              if (gDungeon->fractionalTurn == 24) {
-                 gDungeon->fractionalTurn = 0;
+              gDungeon->unk644.fractionalTurn++;
+              if (gDungeon->unk644.fractionalTurn == 24) {
+                 gDungeon->unk644.fractionalTurn = 0;
               }
             }
           }
@@ -105,7 +105,7 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
   {
     TriggerWeatherAbilities();
     movSpeed = CalcSpeedStage(entity);
-    if (gSpeedTurns[movSpeed][gDungeon->fractionalTurn] == 0) {
+    if (gSpeedTurns[movSpeed][gDungeon->unk644.fractionalTurn] == 0) {
         return FALSE;
     }
     else
@@ -123,8 +123,8 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
           else
           {
             if ((UseAttack(0) == 0) &&
-                ((gDungeon->unk66C != 0 ||
-                (gDungeon->unk673 != 0)))) {
+                ((gDungeon->unk644.unk28 != 0 ||
+                (gDungeon->unk644.unk2F != 0)))) {
                 sub_803E46C(0xc);
             }
             GetEntInfo(entity)->speedStageChanged = FALSE;
@@ -161,7 +161,7 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
             }
             else {
                 if (!GetEntInfo(entity)->speedStageChanged) break;
-                gDungeon->fractionalTurn = 0;
+                gDungeon->unk644.fractionalTurn = 0;
             }
           }
         }
@@ -182,7 +182,7 @@ static void sub_8044454(void)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeon->allPokemon[index];
+      entity = gDungeon->activePokemon[index];
       if ((EntityExists(entity)) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (sub_8044B28()) break;
         TickStatusHeal(entity);
@@ -210,7 +210,7 @@ void sub_80444F4(Entity *pokemon)
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-      entity = gDungeon->allPokemon[index];
+      entity = gDungeon->activePokemon[index];
       if ((EntityExists(entity)) && (pokemon != entity) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (sub_8044B28()) break;
         RunMonsterAI(entity, 0);

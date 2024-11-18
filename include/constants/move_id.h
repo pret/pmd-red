@@ -418,4 +418,6 @@
 #define MOVE_MD1_2 0x19B // Unused
 #define MOVE_PIERCE 0x19C
 
+#define NUM_MOVE_IDS (MOVE_PIERCE + 1)
+
 #endif

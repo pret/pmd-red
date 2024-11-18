@@ -165,7 +165,7 @@ _0807D634:
 	ldr r2, _0807D650
 	add r2, sp
 	ldr r0, [r2]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _0807D9F4
 	.align 2, 0
 _0807D650: .4byte 0x00000d08
@@ -485,7 +485,7 @@ _0807D8B0:
 	adds r0, r4, 0
 	bl IncreaseEntityPixelPos
 	mov r0, r10
-	bl sin_abs_4096
+	bl sin_4096
 	add r2, sp, 0x20
 	adds r2, r5
 	lsls r1, r0, 1
@@ -585,7 +585,7 @@ _0807D996:
 	ldr r2, _0807D9C4
 	add r2, sp
 	ldr r0, [r2]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _0807D9EE
 	.align 2, 0
 _0807D9B4: .4byte gUnknown_80F4468
@@ -605,7 +605,7 @@ _0807D9E0:
 	ldr r3, _0807DA0C
 	add r3, sp
 	ldr r0, [r3]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _0807D9EE:
 	movs r0, 0x1
 	bl sub_807EC28
@@ -647,7 +647,7 @@ sub_807DA14:
 	ldr r0, _0807DA48
 	adds r1, r6, 0
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _0807DA4C
 	b _0807DA5C
 	.align 2, 0
@@ -818,7 +818,7 @@ _0807DB94:
 _0807DBA0:
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _0807DC54
 	.align 2, 0
 _0807DBAC: .4byte gUnknown_80FD08C
@@ -831,7 +831,7 @@ _0807DBB6:
 _0807DBB8:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x3
@@ -878,7 +878,7 @@ _0807DBF4:
 	ldr r0, _0807DC2C
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _0807DC3A
 	.align 2, 0
 _0807DC24: .4byte 0x0000fffc
@@ -888,7 +888,7 @@ _0807DC30:
 	ldr r0, _0807DC60
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _0807DC3A:
 	ldr r0, _0807DC64
 	ldr r0, [r0]
@@ -953,7 +953,7 @@ _0807DCAC:
 _0807DCB8:
 	ldr r1, [r0]
 	mov r0, r9
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _0807DF0E
 	.align 2, 0
 _0807DCC4: .4byte gUnknown_80FD3D0
@@ -971,7 +971,7 @@ _0807DCD8:
 	movs r6, 0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	ldr r3, _0807DD6C
@@ -1094,7 +1094,7 @@ _0807DDC8:
 _0807DDCA:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r3, 0x80
@@ -1141,7 +1141,7 @@ _0807DE1A:
 	beq _0807DE30
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r2, [r0]
 	movs r1, 0x40
 	orrs r1, r2
@@ -1192,7 +1192,7 @@ _0807DE74:
 	ldr r0, _0807DF30
 	ldr r1, [r0]
 	mov r0, r9
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	movs r0, 0x28
 	movs r1, 0x2B
 	bl sub_803E708
@@ -1316,7 +1316,7 @@ _0807DF8E:
 	ldr r0, _0807DFB0
 	mov r1, r10
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	b _0807DFC2
 	.align 2, 0
 _0807DFA8: .4byte gDungeon
@@ -1346,7 +1346,7 @@ _0807DFD4:
 	ldr r0, _0807E184
 	mov r1, r10
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _0807E188
 	ldr r2, [r0]
 	ldr r0, [sp, 0x8]
@@ -1402,7 +1402,7 @@ _0807E014:
 	bgt _0807E112
 	cmp r1, 0x1F
 	bgt _0807E112
-	bl GetTileSafe
+	bl GetTileMut
 	mov r8, r0
 	ldr r0, [sp, 0x18]
 	movs r2, 0

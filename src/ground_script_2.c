@@ -10,51 +10,41 @@ extern u32 gUnlockBranchLabels[];
 extern u8 gScriptLockConds[];
 extern u8 gUnknown_8116848[];
 
-s32 GroundLivesNotifyAll(s16);
-s32 GroundObjectsNotifyAll(s16);
-s32 GroundEffectsNotifyAll(s16);
+bool8 GroundLivesNotifyAll(s16);
+bool8 GroundObjectsNotifyAll(s16);
+bool8 GroundEffectsNotifyAll(s16);
 
-// TODO: this is still WIP
+void GroundScript_Unlock(void) 
+{
+    s32 index;
+    bool8 cond;
 
-// void GroundScript_Unlock(void) 
-// {
-//     s32 index;
-//     u8 temp;
-//     s16 temp_s16;
-// 
-//     if(gAnyScriptLocked != 0)
-//     {
-//         gAnyScriptLocked = 0;
-//         for(index = 0; index < 0x81; index++)
-//         {
-//             if(gScriptLocks[index] != 0)
-//             {
-//                 Log(1, gUnknown_8116848, index);
-//                 temp = GroundMapNotifyAll(index);
-//                 temp |= GroundLivesNotifyAll(index);
-//                 temp |= GroundObjectsNotifyAll(index);
-//                 temp |= GroundEffectsNotifyAll(index);
-// 
-//                 if(gScriptLockConds[index] != 0)
-//                 {
-//                    if (temp != 0)
-//                    {
-//                         temp_s16 = index;
-//                         temp_s16 |= 0x80;
-//                         GroundMapNotifyAll(temp_s16);
-//                         GroundLivesNotifyAll(temp_s16);
-//                         GroundObjectsNotifyAll(temp_s16);
-//                         GroundEffectsNotifyAll(temp_s16);
-//                         gScriptLockConds[index] = 0;
-//                    }
-//                 }
-//                 else {
-//                    gScriptLocks[index] = 0;
-//                 }
-//             }
-//         }
-//     }
-// }
+    if(gAnyScriptLocked == 0) return;
+
+    gAnyScriptLocked = 0;
+    index = 0;
+    for (index = 0; index <= 0x80; index++) {
+        if(gScriptLocks[index] != 0) {
+            Log(1, gUnknown_8116848, index);
+            cond  = GroundMapNotifyAll(index);
+            cond |= GroundLivesNotifyAll(index);
+            cond |= GroundObjectsNotifyAll(index);
+            cond |= GroundEffectsNotifyAll(index);
+
+            if(gScriptLockConds[index] != 0) {
+               if (cond) {
+                    GroundMapNotifyAll(index | 0x80);
+                    GroundLivesNotifyAll(index | 0x80);
+                    GroundObjectsNotifyAll(index | 0x80);
+                    GroundEffectsNotifyAll(index | 0x80);
+                    gScriptLocks[index] = gScriptLockConds[index] = 0;
+               }
+            } else {
+               gScriptLocks[index] = 0;
+            }
+        }
+    }
+}
 
 const ScriptCommand *FindLabel(Action *action, s32 r1)
 {
@@ -69,12 +59,12 @@ const ScriptCommand *FindLabel(Action *action, s32 r1)
         script = *scriptPtr;
         scriptPtr++;
 
-        if(script.op == 0xF4)
-        {
-            if(r1 == script.argShort)
-                return scriptPtr;
-        }
+        if(script.op == 0xF4 && r1 == script.argShort) break;
+
+        // DS: Assert(script.op != 0, "script search label error %d", label)
+        // DS: Assert(script.op != 0xF6, "script search label error %d", label)
     }
+    return scriptPtr;
 }
 
 const ScriptCommand *ResolveJump(Action *action, s32 r1)

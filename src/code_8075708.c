@@ -17,20 +17,19 @@
 #include "position_util.h"
 #include "trap.h"
 
-extern void sub_8049ED4(void);
 extern void sub_8073D14(Entity *);
 
 void sub_8075680(void)
 {
     u32 direction;
-    Position *targetPos;
+    DungeonPos *targetPos;
     Entity *entity;
     EntityInfo *info;
     int index;
 
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
-        entity = gDungeon->allPokemon[index];
+        entity = gDungeon->activePokemon[index];
         if ((EntityExists(entity)) && (info = GetEntInfo(entity), !info->isTeamLeader)) {
             targetPos = &(info->targetPos);
 
@@ -57,7 +56,7 @@ void sub_8075708(Entity *entity)
 {
     bool8 bVar1;
     bool8 bVar2;
-    Tile *tile;
+    const Tile *tile;
     Trap *trapData;
     Entity *trap;
     EntityInfo *info;
@@ -67,7 +66,7 @@ void sub_8075708(Entity *entity)
         return;
     }
     tile = GetTileAtEntitySafe(entity);
-    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->transformStatus.transformStatus != STATUS_MOBILE)) &&
+    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->invisibleClassStatus.status != STATUS_MOBILE)) &&
         (!HasHeldItem(entity, ITEM_MOBILE_SCARF))) {
         sub_804AE84(&entity->pos);
     }
@@ -122,7 +121,7 @@ void sub_8075708(Entity *entity)
 
 u32 sub_8075818(Entity *entity)
 {
-    struct Tile *tile;
+    const Tile *tile;
     EntityInfo *entityInfo;
     Entity *subEntity;
     Item *item;

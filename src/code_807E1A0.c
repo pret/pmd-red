@@ -19,7 +19,7 @@ extern void sub_805E804(void);
 void sub_806A2BC(Entity *pokemon, u8 param_2);
 extern u8 sub_8044B28(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
-extern void nullsub_93(Position *);
+extern void nullsub_93(DungeonPos *);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 extern void sub_807EC28(bool8);
@@ -69,17 +69,17 @@ void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s16 param_4,s32 para
 
 void sub_807E254(Entity *pokemon,Entity *target)
 {
-  Position pokemonPos;
-  Position targetPos;
+  DungeonPos pokemonPos;
+  DungeonPos targetPos;
 
 
   if (HasAbility(pokemon, ABILITY_SUCTION_CUPS)) {
-    SetMessageArgument(gFormatBuffer_Monsters[0],pokemon,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else if(HasAbility(target, ABILITY_SUCTION_CUPS))
   {
-    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
   else
@@ -123,56 +123,56 @@ void sub_807E378(void)
   leader = GetLeader();
   if (EntityExists(leader)) {
 
-    uVar2 = gDungeon->windTurns;
-    if ((gDungeon->windTurns < 1) ||
-       (gDungeon->windTurns--, ((uVar2 - 1) << 0x10) < 1)) {
-      gDungeon->unk67A = 3;
+    uVar2 = gDungeon->unk644.windTurns;
+    if ((gDungeon->unk644.windTurns < 1) ||
+       (gDungeon->unk644.windTurns--, ((uVar2 - 1) << 0x10) < 1)) {
+      gDungeon->unk644.unk36 = 3;
     }
 
-    if (gDungeon->unk67A == 0) {
-      if (gDungeon->windTurns < 0xfa) {
+    if (gDungeon->unk644.unk36 == 0) {
+      if (gDungeon->unk644.windTurns < 0xfa) {
         sub_805E804();
         sub_806A2BC(leader,1);
         UseAttack(leader);
         if (sub_8044B28() == 0) {
-          TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9C4C);
+          LogMessageByIdWithPopupCheckUser(leader,*gUnknown_80F9C4C);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],0);
-          gDungeon->unk67A = 1;
+          gDungeon->unk644.unk36 = 1;
         }
       }
     }
-    else if (gDungeon->unk67A == 1) {
-      if (gDungeon->windTurns < 0x96) {
+    else if (gDungeon->unk644.unk36 == 1) {
+      if (gDungeon->unk644.windTurns < 0x96) {
         sub_805E804();
         sub_806A2BC(leader,1);
         UseAttack(leader);
         if (sub_8044B28() == 0) {
-          TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9C70);
+          LogMessageByIdWithPopupCheckUser(leader,*gUnknown_80F9C70);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],1);
-          gDungeon->unk67A = 2;
+          gDungeon->unk644.unk36 = 2;
         }
       }
     }
-    else if (gDungeon->unk67A == 2) {
-      if (gDungeon->windTurns < 0x32) {
+    else if (gDungeon->unk644.unk36 == 2) {
+      if (gDungeon->unk644.windTurns < 0x32) {
         sub_805E804();
         sub_806A2BC(leader,1);
         UseAttack(leader);
         if (sub_8044B28() == 0) {
-          TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9C8C);
+          LogMessageByIdWithPopupCheckUser(leader,*gUnknown_80F9C8C);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],2);
-          gDungeon->unk67A = 3;
+          gDungeon->unk644.unk36 = 3;
         }
       }
     }
-    else if (gDungeon->windTurns < 1) {
+    else if (gDungeon->unk644.windTurns < 1) {
       sub_805E804();
       sub_806A2BC(leader,1);
       UseAttack(leader);
       if (sub_8044B28() == 0) {
-        TryDisplayDungeonLoggableMessage(leader,*gUnknown_80F9CBC);
+        LogMessageByIdWithPopupCheckUser(leader,*gUnknown_80F9CBC);
         sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],3);
-        gDungeon->unk67A = 4;
+        gDungeon->unk644.unk36 = 4;
         sub_8068FE0(leader,0x21e,leader);
       }
     }

@@ -102,7 +102,7 @@ _0806A488:
 	movs r2, 0x6
 	ldrsh r1, [r6, r2]
 	adds r1, r7
-	bl GetTileSafe
+	bl GetTileMut
 	adds r4, r0, 0
 	ldr r0, [r4, 0x10]
 	cmp r0, 0
@@ -306,7 +306,7 @@ _0806A5CE:
 	bne _0806A608
 	adds r0, r6, 0
 	adds r1, r6, 0
-	bl SendImmobilizeEndMessage
+	bl EndFrozenClassStatus
 _0806A608:
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
@@ -346,7 +346,7 @@ _0806A650:
 	bne _0806A6D2
 	adds r0, r6, 0
 	adds r1, r6, 0
-	bl SendNonVolatileEndMessage
+	bl EndBurnClassStatus
 	b _0806A6D2
 _0806A664:
 	cmp r1, 0
@@ -399,7 +399,7 @@ _0806A6C4:
 	beq _0806A6D2
 	adds r0, r6, 0
 	mov r1, r8
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _0806A6D2:
 	add sp, 0x4
 	pop {r3}
@@ -663,7 +663,7 @@ sub_806A898:
 	b _0806A8C8
 _0806A8C2:
 	adds r0, r4, 0
-	bl MoveIfPossible
+	bl AIMovement
 _0806A8C8:
 	movs r0, 0xB6
 	lsls r0, 1
@@ -817,7 +817,7 @@ _0806A9E0:
 _0806A9E6:
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _0806AA02
 	.align 2, 0
 _0806A9F0: .4byte gPtrLinkMoveOneUseWarningMessage
@@ -827,7 +827,7 @@ _0806A9F4:
 	ldr r0, _0806AA08
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _0806AA02:
 	pop {r4,r5}
 	pop {r0}
@@ -1072,7 +1072,7 @@ sub_806ABAC:
 	bne _0806ABD4
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendNonVolatileEndMessage
+	bl EndBurnClassStatus
 _0806ABD4:
 	adds r0, r4, 0
 	movs r1, 0x40
@@ -1087,7 +1087,7 @@ _0806ABD4:
 	bne _0806ABF4
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendVolatileEndMessage
+	bl EndCringeClassStatus
 _0806ABF4:
 	adds r0, r4, 0
 	movs r1, 0x42
@@ -1102,7 +1102,7 @@ _0806ABF4:
 	bne _0806AC14
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendNonVolatileEndMessage
+	bl EndBurnClassStatus
 _0806AC14:
 	adds r0, r4, 0
 	movs r1, 0x29
@@ -1117,7 +1117,7 @@ _0806AC14:
 	bne _0806AC34
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendVolatileEndMessage
+	bl EndCringeClassStatus
 _0806AC34:
 	adds r0, r4, 0
 	movs r1, 0x36
@@ -1147,7 +1147,7 @@ _0806AC66:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl SendSleepEndMessage
+	bl EndSleepClassStatus
 _0806AC72:
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -1162,7 +1162,7 @@ _0806AC72:
 	bne _0806AC92
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendImmobilizeEndMessage
+	bl EndFrozenClassStatus
 _0806AC92:
 	adds r0, r4, 0
 	movs r1, 0x45
@@ -1180,7 +1180,7 @@ _0806AC92:
 	bhi _0806ACB8
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendNonVolatileEndMessage
+	bl EndBurnClassStatus
 _0806ACB8:
 	adds r0, r4, 0
 	movs r1, 0x25
@@ -1199,7 +1199,7 @@ _0806ACB8:
 	bne _0806ACE0
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl SendProtectionEndMessage
+	bl EndReflectClassStatus
 _0806ACE0:
 	pop {r4-r6}
 	pop {r0}
@@ -3136,7 +3136,7 @@ sub_806BB6C:
 	str r6, [sp, 0xC]
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_8069F54
+	bl GetMonsterApparentID
 	lsls r0, 16
 	adds r1, r7, 0
 	adds r1, 0x22

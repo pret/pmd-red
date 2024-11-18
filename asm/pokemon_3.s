@@ -753,7 +753,7 @@ _0808FDB0:
 	movs r3, 0
 	ldrsh r1, [r2, r3]
 	adds r0, r6, 0
-	bl CopyMonsterNametoBuffer
+	bl CopyMonsterNameToBuffer
 	ldr r1, _0808FEF4
 	mov r2, r10
 	movs r3, 0

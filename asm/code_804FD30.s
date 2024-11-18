@@ -69,7 +69,7 @@ _080516CA:
 	ldr r0, [r5]
 	adds r1, r4, 0
 	str r2, [sp, 0xC]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -102,7 +102,7 @@ _0805170A:
 	ldr r0, [r5, 0x8]
 	adds r1, r4, 0
 	str r2, [sp, 0xC]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -148,7 +148,7 @@ _08051762:
 	ldr r1, [r5, 0x4]
 	adds r0, r4, 0
 	str r2, [sp, 0xC]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -181,7 +181,7 @@ _080517A2:
 	ldr r1, [r5, 0xC]
 	adds r0, r4, 0
 	str r2, [sp, 0xC]
-	bl GetTileSafe
+	bl GetTileMut
 	ldrh r1, [r0]
 	ldr r2, [sp, 0xC]
 	ands r1, r2
@@ -221,7 +221,7 @@ _080517EC:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	str r3, [sp, 0x10]
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrh r1, [r2]
 	movs r0, 0x20
@@ -285,7 +285,7 @@ _08051864:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	str r3, [sp, 0x10]
-	bl GetTileSafe
+	bl GetTileMut
 	adds r6, r0, 0
 	ldrh r1, [r6]
 	movs r0, 0x20
@@ -361,7 +361,7 @@ sub_80518F0:
 _080518F8:
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl GetTileSafe
+	bl GetTileMut
 	adds r4, r0, 0
 	bl ResetTile
 	cmp r5, 0
@@ -375,7 +375,7 @@ _0805190E:
 _08051914:
 	adds r0, r5, 0
 	movs r1, 0x1E
-	bl GetTileSafe
+	bl GetTileMut
 	adds r4, r0, 0
 	bl ResetTile
 	cmp r5, 0
@@ -529,7 +529,7 @@ sub_8051A24:
 	mov r8, r3
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r7, r0, 0
 	lsls r4, 16
 	lsls r5, 16
@@ -982,7 +982,7 @@ _08051E42:
 _08051E46:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r2, r0, 0
 	ldrb r0, [r2, 0xE]
 	cmp r0, 0xF
@@ -1022,7 +1022,7 @@ sub_8051E7C:
 	movs r3, 0x6
 	ldrsh r1, [r2, r3]
 	subs r1, 0x1
-	bl GetTileSafe
+	bl GetTileMut
 	str r0, [sp, 0x8]
 	ldrh r1, [r0]
 	movs r0, 0x80
@@ -1033,7 +1033,7 @@ sub_8051E7C:
 	ldr r0, _08051EB4
 	ldr r1, [r0]
 	mov r0, r9
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _080520F6
 	.align 2, 0
 _08051EB4: .4byte gUnknown_80FDDF0
@@ -1122,7 +1122,7 @@ _08051F10:
 	bge _08051FCA
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r4, r0, 0
 	ldrh r0, [r4]
 	movs r3, 0x80
@@ -1293,7 +1293,7 @@ _0805207A:
 	ldr r0, _080520E8
 	ldr r1, [r0]
 	mov r0, r9
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	movs r0, 0x14
 	movs r1, 0x3C
 	bl sub_803E708
@@ -1314,7 +1314,7 @@ _080520EC:
 	ldr r0, _08052108
 	ldr r1, [r0]
 	mov r0, r9
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _080520F6:
 	add sp, 0x14
 	pop {r3-r5}

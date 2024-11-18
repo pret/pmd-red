@@ -2,6 +2,7 @@
 #include "dungeon_items.h"
 
 #include "code_803E668.h"
+#include "code_8041AD0.h"
 #include "code_8045A00.h"
 #include "code_80861A8.h"
 #include "code_80869E4.h"
@@ -19,8 +20,7 @@ extern u8 *gUnknown_8105360[];
 extern u8 *gUnknown_81053A8[];
 extern u8 *gUnknown_8105434[];
 
-extern void sub_80416E0(Position32 *r0, u32, bool8);
-extern void sub_80421C0(Entity *, u32);
+extern void sub_80416E0(PixelPos *r0, u32, bool8);
 extern void sub_80855E4(void *);
 extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);
@@ -83,7 +83,7 @@ void sub_8046D20(void)
 
 u8 sub_8046D70(void)
 {
-    if(gDungeon->unk68A)
+    if(gDungeon->unk644.unk46)
         return 0;
     else
         return 0;
@@ -149,7 +149,7 @@ void MusicBoxCreation(void)
     sub_80416E0(&entity->pixelPos,0x10c,FALSE);
     sub_80421C0(entity,0xd7);
     sub_803E708(0x3c,0x41);
-    SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
     DisplayDungeonMessage(0,*gUnknown_81053A8,1);
     sub_803E708(10,0x41);
     PlaySoundEffect(0xd4);

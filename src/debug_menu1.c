@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_8097670.h"
 #include "constants/friend_area.h"
 #include "constants/main_menu.h"
@@ -66,7 +67,7 @@ void DeleteDebugMenu(void)
 u32 UpdateDebugMenu(void)
 {
     u32 nextMenu;
-    s32 counter;
+    s32 i;
     s32 debugMenuAction;
 
     nextMenu = MENU_NO_SCREEN_CHANGE;
@@ -99,8 +100,8 @@ u32 UpdateDebugMenu(void)
             nextMenu = MENU_MAIN_SCREEN;
             break;
         case MENU_DEBUG_MENU_H_OPEN:
-            for (counter = 0; counter < 0x20; counter++)
-                sub_80976F8(counter);
+            for (i = 0; i < AA_MAX; i++)
+                SetAdventureAchievement(i);
 
             nextMenu = MENU_MAIN_SCREEN;
             break;
@@ -157,7 +158,7 @@ static void sub_803A3BC(void)
         speciesIndex = index * 0x10000 >> 0x10; // TODO: dumb way to force s16. Temp var may fix the regswap
         memset(moves, 0, sizeof(moves));
         moves[0] = MOVE_DOUBLESLAP;
-        CopyMonsterNametoBuffer(buffer, speciesIndex);
+        CopyMonsterNameToBuffer(buffer, speciesIndex);
         CopyStringtoBuffer(buffer, buffer);
         buffer[0] = 0x40;
         sub_808CFD0(&pokemon, speciesIndex, buffer, ITEM_CHERI_BERRY, (DungeonLocation *)&loc, moves);

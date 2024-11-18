@@ -16,16 +16,16 @@ bool8 CanSeeTarget(Entity *entity, Entity *targetEntity)
     {
         if (entity->type == ENTITY_MONSTER)
         {
-            if (!CanSeeInvisibleMonsters(entity) && GetEntInfo(targetEntity)->transformStatus.transformStatus == STATUS_INVISIBLE)
+            if (!CanSeeInvisibleMonsters(entity) && GetEntInfo(targetEntity)->invisibleClassStatus.status == STATUS_INVISIBLE)
             {
                 return FALSE;
             }
-            if (GetEntInfo(entity)->eyesightStatus.eyesightStatus == STATUS_BLINKER)
+            if (GetEntInfo(entity)->blinkerClassStatus.status == STATUS_BLINKER)
             {
                 return FALSE;
             }
         }
-        else if (GetEntInfo(targetEntity)->transformStatus.transformStatus == STATUS_INVISIBLE)
+        else if (GetEntInfo(targetEntity)->invisibleClassStatus.status == STATUS_INVISIBLE)
         {
             return FALSE;
         }
@@ -43,16 +43,16 @@ bool8 CanTargetEntity(Entity *entity, Entity *targetEntity)
     {
         if (entity->type == ENTITY_MONSTER)
         {
-            if (!CanSeeInvisibleMonsters(entity) && GetEntInfo(targetEntity)->transformStatus.transformStatus == STATUS_INVISIBLE)
+            if (!CanSeeInvisibleMonsters(entity) && GetEntInfo(targetEntity)->invisibleClassStatus.status == STATUS_INVISIBLE)
             {
                 return FALSE;
             }
-            if (GetEntInfo(entity)->eyesightStatus.eyesightStatus == STATUS_BLINKER)
+            if (GetEntInfo(entity)->blinkerClassStatus.status == STATUS_BLINKER)
             {
                 return FALSE;
             }
         }
-        else if (GetEntInfo(targetEntity)->transformStatus.transformStatus == STATUS_INVISIBLE)
+        else if (GetEntInfo(targetEntity)->invisibleClassStatus.status == STATUS_INVISIBLE)
         {
             return FALSE;
         }
@@ -69,12 +69,12 @@ bool8 sub_8045A70(Entity *entity, Entity *targetEntity)
    return FALSE;
 }
 
-bool8 sub_8045AAC(Entity *entity, Position *pos)
+bool8 sub_8045AAC(Entity *entity, DungeonPos *pos)
 {
     return IsPositionActuallyInSight(&entity->pos, pos);
 }
 
-bool8 CanTargetPosition(Entity *entity, Position *pos)
+bool8 CanTargetPosition(Entity *entity, DungeonPos *pos)
 {
     return IsPositionInSight(&entity->pos, pos);
 }

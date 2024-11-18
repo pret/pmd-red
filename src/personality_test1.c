@@ -182,7 +182,7 @@ static void GenerateNewQuestionOrGender(void)
     sPersonalityTestTracker->QuestionCounter++;
 
     if (sPersonalityTestTracker->QuestionCounter > MAX_ASKED_QUESTIONS) {
-        CreateMenuDialogueBoxAndPortrait(gGenderText, 0, 0, gGenderMenu, 0, 3, 0, 0, 257);
+        CreateMenuDialogueBoxAndPortrait(sGender0, 0, 0, gGenderMenu, 0, 3, 0, 0, 257);
         sPersonalityTestTracker->TestState = PERSONALITY_PLAYER_GENDER;
     }
     else {
@@ -376,7 +376,7 @@ static void PromptNewQuestion(void)
 
 static void PrintPersonalityTypeDescription(void)
 {
-    CopyMonsterNametoBuffer(gFormatBuffer_Monsters[0], sPersonalityTestTracker->StarterID);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[0], sPersonalityTestTracker->StarterID);
     CreateDialogueBoxAndPortrait(sPersonalityTypeDescriptionTable[sPersonalityTestTracker->playerNature], 0, 0, 0x101);
 }
 

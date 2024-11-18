@@ -3,8 +3,8 @@
 
 #include "structs/str_position.h"
 
-bool8 IsPositionActuallyInSight(Position *pos1, Position *pos2);
-bool8 IsPositionInSight(Position *pos1, Position *pos2);
-bool8 IsTargetTwoTilesAway(Position *pos1, Position *pos2);
+bool8 IsPositionActuallyInSight(DungeonPos *pos1, DungeonPos *pos2);
+bool8 IsPositionInSight(DungeonPos *pos1, DungeonPos *pos2);
+bool8 IsTargetTwoTilesAway(DungeonPos *pos1, DungeonPos *pos2);
 
 #endif

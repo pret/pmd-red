@@ -1,6 +1,6 @@
 #include "global.h"
+#include "code_8041AD0.h"
 #include "code_804267C.h"
-
 #include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"
@@ -23,8 +23,7 @@ extern const u8 *gPtrFeralFoundItemMessage[];
 extern void sub_8040238(void);
 extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
 extern void sub_804178C(u32);
-extern void sub_80416A4(Position *r0, u32 r1, bool8 r2);
-extern void sub_80421C0(Entity *pokemon, u16 r1);
+extern void sub_80416A4(DungeonPos *r0, u32 r1, bool8 r2);
 extern void sub_80429A0(Entity *);
 extern void sub_8042B34(u32, u32, u32);
 extern bool8 sub_8042CC0(void);
@@ -42,7 +41,7 @@ void PlayStairsSound(void)
     switch (GetFloorType()) {
         case 0:
         default:
-            songIndex = IsStairDirectionUp(gDungeon->dungeonLocation.id) ? 340 : 341;
+            songIndex = IsStairDirectionUp(gDungeon->unk644.dungeonLocation.id) ? 340 : 341;
             break;
         case 1:
         case 2:
@@ -104,14 +103,14 @@ void sub_80427AC(void)
     s32 i;
 
     for (i = 0; i < 20; i++) {
-        entity = gDungeon->allPokemon[i];
+        entity = gDungeon->activePokemon[i];
         if (EntityExists(entity)) {
             enInfo = GetEntInfo(entity);
             if (enInfo->unkF3) {
                 enInfo->unkF3 = FALSE;
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
-                    SetMessageArgument(gFormatBuffer_Monsters[0], entity, 0);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
                     DisplayDungeonLoggableMessageTrue(entity, *gPtrFeralFoundItemMessage);
                 }
             }
@@ -237,13 +236,13 @@ void sub_80429E8(Entity *r0)
     sub_804151C(r0, 0x11d, 1);
 }
 
-void sub_80429FC(Position *r0)
+void sub_80429FC(DungeonPos *r0)
 {
     sub_80416A4(r0, 0x19E, TRUE);
     sub_80421C0(NULL, 0xD4);
 }
 
-void sub_8042A14(Position *r0)
+void sub_8042A14(DungeonPos *r0)
 {
     sub_80416A4(r0, 0x36, TRUE);
 }
@@ -253,7 +252,7 @@ void sub_8042A24(Entity *r0)
     sub_804151C(r0, 0x15, 1);
 }
 
-void sub_8042A34(Position *r0)
+void sub_8042A34(DungeonPos *r0)
 {
     sub_80416A4(r0, 0x13E, FALSE);
 }
@@ -263,12 +262,12 @@ void sub_8042A44(Entity *r0)
     sub_804151C(r0, 0xDA << 1, 1);
 }
 
-void sub_8042A54(Position *r0)
+void sub_8042A54(DungeonPos *r0)
 {
     sub_80416A4(r0, 0x37, TRUE);
 }
 
-void sub_8042A64(Position *r0)
+void sub_8042A64(DungeonPos *r0)
 {
     sub_80416A4(r0, 0x29, TRUE);
 }

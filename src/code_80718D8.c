@@ -4,6 +4,8 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
+#include "code_8041AD0.h"
+#include "code_80450F8.h"
 #include "code_8045A00.h"
 #include "code_8077274_1.h"
 #include "constants/dungeon.h"
@@ -21,7 +23,7 @@ struct unkStruct_806B7F8
     u32 unk4;
     u16 level;
     u8 fillA[2];
-    struct Position pos;
+    DungeonPos pos;
     u8 unk10;
 };
 
@@ -50,7 +52,6 @@ extern u8 *gUnknown_80FF730[];
 extern u8 gUnknown_8107010[8];
 extern u8 *gUnknown_8107018[3];
 
-extern void sub_80421C0(Entity *pokemon, u16 r1);
 void sub_8083D58(void);
 void sub_8072778(Entity *, Entity *, u8, u8);
 bool8 sub_80725A4(Entity *, Entity *);
@@ -64,12 +65,12 @@ extern void sub_8042920(struct Entity *r0);
 extern s16 sub_803D970(u32);
 extern s32 sub_803DA20(s32 param_1);
 extern bool8 sub_806AA0C(s32, u32);
-extern bool8 sub_8083660(struct Position *param_1);
+extern bool8 sub_8083660(DungeonPos *param_1);
 void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level); // TODO: change to s32
 
 void sub_8071B48(void)
 {
-  struct Tile *tile;
+  const Tile *tile;
   struct Entity *entity2;
   struct Entity *entity;
   int index;
@@ -82,29 +83,29 @@ void sub_8071B48(void)
 
   entityPtr = NULL;
   dungeon = gDungeon;
-  if ((dungeon->unk664 != 0) &&
-     ((dungeon->dungeonLocation.id != DUNGEON_METEOR_CAVE || (dungeon->unk37FD == 0)))) {
-    dungeon->unk662++;
-    if (dungeon->unk66E == 0) {
-      if ( dungeon->unk662 < gUnknown_80F4DAA) {
+  if ((dungeon->unk644.unk20 != 0) &&
+     ((dungeon->unk644.dungeonLocation.id != DUNGEON_METEOR_CAVE || (dungeon->unk37FD == 0)))) {
+    dungeon->unk644.unk1E++;
+    if (dungeon->unk644.unk2A == 0) {
+      if ( dungeon->unk644.unk1E < gUnknown_80F4DAA) {
         return;
       }
     }
     else {
-      if ( dungeon->unk662 < gUnknown_80F4DAC) {
+      if ( dungeon->unk644.unk1E < gUnknown_80F4DAC) {
         return;
       }
     }
 
-    if (dungeon->unk662 > 900) {
+    if (dungeon->unk644.unk1E > 900) {
       entity2 = dungeon->unk17B34;
       if ((EntityExists(entity2)) && (entity2->spawnGenID == dungeon->unk17B40)) {
-        SetMessageArgument(gFormatBuffer_Monsters[0],entity2,0);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity2,0);
         entityPtr = entity2;
       }
     }
 
-      dungeon->unk662 = 0;
+      dungeon->unk644.unk1E = 0;
       dungeon->unk17B34 = NULL;
 
       counter = 0;
@@ -117,7 +118,7 @@ void sub_8071B48(void)
           counter++;
         }
       }
-      if (dungeon->unk66E == 0) {
+      if (dungeon->unk644.unk2A == 0) {
         if (gDungeon->monsterHouseRoom == 0xff) {
             if (counter >= gUnknown_80F4DA6) {
               return;
@@ -135,7 +136,7 @@ void sub_8071B48(void)
         DisplayDungeonLoggableMessageTrue(0,*gUnknown_80FED68);
         sub_8042920(entityPtr);
       }
-      if (dungeon->unk66E != 0) {
+      if (dungeon->unk644.unk2A != 0) {
         index1 = 0x17c;
       }
       else {
@@ -150,7 +151,7 @@ void sub_8071B48(void)
         local_2c.species = index1;
         local_2c.level = level;
         local_2c.unk2 = 0;
-        if(DungeonRandInt(100) < GetRandomMovementChance(gDungeon->dungeonLocation.id))
+        if(DungeonRandInt(100) < GetRandomMovementChance(gDungeon->unk644.dungeonLocation.id))
         {
             local_2c.unk4 = 1;
         }
@@ -449,7 +450,7 @@ void sub_8071DA4(Entity *entity)
 "	ldr r0, _08071FF8\n"
 "	mov r1, r8\n"
 "	movs r2, 0\n"
-"	bl SetMessageArgument\n"
+"	bl SubstitutePlaceholderStringTags\n"
 "	lsls r1, r4, 24\n"
 "	lsrs r1, 24\n"
 "	ldr r0, _08071FFC\n"
@@ -514,10 +515,10 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
             GetAvailTacticsforLvl_Bool(tacticsBuffer1,info->level);
         }
         maxHP = info->maxHPStat;
-        atk[0] = info->atk;
-        atk[1] = info->spAtk;
-        def[0] = info->def;
-        def[1] = info->spDef;
+        atk[0] = info->atk[0];
+        atk[1] = info->atk[1];
+        def[0] = info->def[0];
+        def[1] = info->def[1];
         if (!IsClientOrTeamBase(info->joinedAt.joinedAt)) {
             newLevel = info->level + level;
             if (99 < newLevel) {
@@ -529,10 +530,10 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
                 flag |= (sub_80723D0(pokemon,target,param_4,param_5));
                 if ((flag != 0) && (!info->isNotTeamMember)) {
                     gFormatArgs[0] = info->maxHPStat - maxHP;
-                    gFormatArgs[1] = info->atk - atk[0];
-                    gFormatArgs[2] = info->def - def[0];
-                    gFormatArgs[3] = info->spAtk - atk[1];
-                    gFormatArgs[4] = info->spDef - def[1];
+                    gFormatArgs[1] = info->atk[0] - atk[0];
+                    gFormatArgs[2] = info->def[0] - def[0];
+                    gFormatArgs[3] = info->atk[1] - atk[1];
+                    gFormatArgs[4] = info->def[1] - def[1];
                     if (param_4 != 0) {
                         sub_807218C(target);
                     }
@@ -544,7 +545,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
             for(tacticIndex = 0; tacticIndex < NUM_TACTICS; tacticIndex++)
             {
                 if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
-                    SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
                     CopyTacticsNameToBuffer(gFormatBuffer_Items[0],tacticIndex);
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FF730);
                 }
@@ -553,7 +554,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
         info->expGainedInTurn = 0;
         info->unk149 = 0;
         if ((flag == 0) && (param_4 != 0)) {
-            SetMessageArgument(gFormatBuffer_Monsters[0],target,0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F9B74);
         }
     }
@@ -586,7 +587,7 @@ void sub_807218C(Entity *pokemon)
         }
         else if(info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
         {
-            if(gDungeon->unk65C == 0)
+            if(gDungeon->unk644.unk18 == 0)
                 r3 = 1;
         }
         sub_806A3D4(buffer, r1, 3, r3);
@@ -668,7 +669,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
 
         if(!flag)
         {
-            SetMessageArgument(gFormatBuffer_Monsters[0], target, 0);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
             TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F9B94);
         }
     }
@@ -734,10 +735,10 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
             info->HP = info->maxHPStat;
         }
 
-        gUnknown_202F31C[0] = info->atk;
-        gUnknown_202F31C[1] = info->spAtk;
-        gUnknown_202F324[0] = info->def;
-        gUnknown_202F324[1] = info->spDef;
+        gUnknown_202F31C[0] = info->atk[0];
+        gUnknown_202F31C[1] = info->atk[1];
+        gUnknown_202F324[0] = info->def[0];
+        gUnknown_202F324[1] = info->def[1];
 
         gUnknown_202F31C[0] += leveldata.gainAtt;
         gUnknown_202F31C[1] += leveldata.gainSPAtt;
@@ -757,10 +758,10 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
         LoadIQSkills(target);
         sub_8079764(target);
 
-        info->atk = gUnknown_202F31C[0];
-        info->spAtk = gUnknown_202F31C[1];
-        info->def = gUnknown_202F324[0];
-        info->spDef = gUnknown_202F324[1];
+        info->atk[0] = gUnknown_202F31C[0];
+        info->atk[1] = gUnknown_202F31C[1];
+        info->def[0] = gUnknown_202F324[0];
+        info->def[1] = gUnknown_202F324[1];
 
         sub_8072778(pokemon, target, param_3, param_4);
     }
@@ -828,10 +829,10 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
                 info->HP = info->maxHPStat;
             }
 
-            gUnknown_202F31C[0] = info->atk;
-            gUnknown_202F31C[1] = info->spAtk;
-            gUnknown_202F324[0] = info->def;
-            gUnknown_202F324[1] = info->spDef;
+            gUnknown_202F31C[0] = info->atk[0];
+            gUnknown_202F31C[1] = info->atk[1];
+            gUnknown_202F324[0] = info->def[0];
+            gUnknown_202F324[1] = info->def[1];
 
             gUnknown_202F31C[0] -= leveldata.gainAtt;
             gUnknown_202F31C[1] -= leveldata.gainSPAtt;
@@ -851,10 +852,10 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
             LoadIQSkills(target);
             sub_8079764(target);
 
-            info->atk = gUnknown_202F31C[0];
-            info->spAtk = gUnknown_202F31C[1];
-            info->def = gUnknown_202F324[0];
-            info->spDef = gUnknown_202F324[1];
+            info->atk[0] = gUnknown_202F31C[0];
+            info->atk[1] = gUnknown_202F31C[1];
+            info->def[0] = gUnknown_202F324[0];
+            info->def[1] = gUnknown_202F324[1];
         }
     }
 

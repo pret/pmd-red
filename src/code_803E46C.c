@@ -38,7 +38,7 @@ void sub_800E90C();
 void sub_8042E5C();
 void sub_8040B60();
 void sub_8040788();
-void sub_800F7D0(Position *);
+void sub_800F7D0(DungeonPos *);
 void sub_803E874(s32, s32);
 void sub_803EAF0(s32, s32);
 

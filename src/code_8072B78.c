@@ -2,9 +2,10 @@
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
 #include "dungeon_map_access.h"
+#include "dungeon_message.h"
 #include "dungeon_movement.h"
 #include "dungeon_random.h"
-#include "dungeon_message.h"
+#include "dungeon_util.h"
 #include "moves.h"
 #include "pokemon_mid.h"
 #include "pokemon_mid.h"
@@ -13,7 +14,6 @@
 #include "structs/map.h"
 #include "structs/str_pokemon.h"
 
-extern Position gAdjacentTileOffsets[];
 extern u8 *gUnknown_80FE2EC[];
 
 struct unkStruct_806B7F8
@@ -23,7 +23,7 @@ struct unkStruct_806B7F8
     u32 unk4;
     u16 level;
     u8 fillA[0xC - 0xA];
-    struct Position pos;
+    DungeonPos pos;
     u8 unk10;
 };
 
@@ -100,7 +100,7 @@ static inline void fu(EntityInfo *entityInfo, s16 id)
 void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
 {
   OpenedFile *file;
-  Tile *tile;
+  const Tile *tile;
   int index;
   s32 id_s32;
   EntityInfo *entityInfo;

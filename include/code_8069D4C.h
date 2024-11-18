@@ -14,7 +14,7 @@ struct unkStruct_8069D4C_sub
 struct unkStruct_8069D4C
 {
     s16 id;
-    Position pos;
+    DungeonPos pos;
     s16 HP;
     struct unkStruct_8069D4C_sub offense;
     u16 level;

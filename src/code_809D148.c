@@ -1,5 +1,6 @@
 #include "global.h"
 #include "other_random.h"
+#include "math.h"
 #include "memory.h"
 
 struct unkStruct_809D158
@@ -261,7 +262,6 @@ extern s32 sub_80AC448(s16 a0, struct unkStruct_809D158 *a1);
 extern s32 sub_80AD360(s16 a0, struct unkStruct_809D158 *a1);
 extern void sub_800290C(struct unkStruct_809D158 *a0, s32 a1);
 extern void sub_8002934(struct unkStruct_809D158 *a0, struct unkStruct_809D158 *a1, struct unkStruct_809D158 *a2, u32 a3, u32 a4);
-extern s32 sub_8009FB8(s32 a0, s32 a1);
 extern bool8 sub_80A579C(struct unkStruct_809D158 *a0, struct unkStruct_809D158 *a1);
 
 void sub_809D25C(void)
@@ -311,7 +311,7 @@ void sub_809D25C(void)
     case 3:
         r2 = (gUnknown_20399E8.unk1C.a0 - gUnknown_20399E8.unk14.a0) / 256;
         r1 = (gUnknown_20399E8.unk1C.a4 - gUnknown_20399E8.unk14.a4) / 256;
-        gUnknown_20399E8.unk10 = ((sub_8009FB8(r2 << 8, r1 << 8) / 256) << 8) / gUnknown_20399E8.unkC;
+        gUnknown_20399E8.unk10 = (F248ToInt(FP24_8_Hypot(IntToF248(r2), IntToF248(r1))) << 8) / gUnknown_20399E8.unkC;
         if (gUnknown_20399E8.unk10 <= 0)
             gUnknown_20399E8.unk10 = 1;
         gUnknown_20399E8.unk8 = 2;

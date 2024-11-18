@@ -228,7 +228,7 @@ _0807E816:
 	ldr r0, _0807E884
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _0807E844:
 	movs r5, 0
 _0807E846:
@@ -421,7 +421,7 @@ _0807E9A4:
 	movs r0, 0x2
 	ldrsh r1, [r4, r0]
 	adds r0, r5, 0
-	bl sub_8069F54
+	bl GetMonsterApparentID
 	b _0807E9D8
 	.align 2, 0
 _0807E9D0: .4byte 0xfffffe88
@@ -494,7 +494,7 @@ MudWaterSportEffect:
 	bl GetLeader
 	ldr r1, _0807EA68
 	ldr r1, [r1]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	b _0807EA8C
 	.align 2, 0
 _0807EA5C: .4byte gUnknown_80F4EAC
@@ -514,7 +514,7 @@ _0807EA6C:
 	bl GetLeader
 	ldr r1, _0807EA9C
 	ldr r1, [r1]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _0807EA8C:
 	pop {r0}
 	bx r0
@@ -677,7 +677,7 @@ _0807EBA6:
 	bl GetLeader
 	ldr r1, _0807EC1C
 	ldr r1, [r1]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _0807EBD4:
 	ldr r4, _0807EC14
 	ldr r0, [r4]
@@ -697,7 +697,7 @@ _0807EBD4:
 	bl GetLeader
 	ldr r1, _0807EC24
 	ldr r1, [r1]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 _0807EC00:
 	ldr r0, [sp, 0x8]
 	add sp, 0xC
@@ -1621,7 +1621,7 @@ sub_807F33C:
 	bl GetLeader
 	ldr r1, _0807F428
 	ldr r1, [r1]
-	bl TryDisplayDungeonLoggableMessage
+	bl LogMessageByIdWithPopupCheckUser
 	movs r6, 0
 _0807F360:
 	movs r5, 0
@@ -1748,7 +1748,7 @@ sub_807F43C:
 	ldr r0, _0807F468
 	mov r1, r8
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _0807F46C
 	b _0807F694
 	.align 2, 0
@@ -1761,7 +1761,7 @@ _0807F470:
 	ldr r0, _0807F488
 	mov r1, r8
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _0807F48C
 	ldr r2, [r0]
 	mov r0, r8
@@ -2046,7 +2046,7 @@ _0807F6A8:
 	ldr r0, _0807F860
 	mov r1, r8
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _0807F864
 	ldr r2, [r0]
 	ldr r0, [sp, 0xEC]
@@ -2173,7 +2173,7 @@ _0807F794:
 	cmp r0, 0
 	beq _0807F7E6
 	ldr r0, [sp, 0x100]
-	bl sin_abs_4096
+	bl sin_4096
 	lsls r0, 5
 	mov r3, r8
 	str r0, [r3, 0x1C]
@@ -2468,7 +2468,7 @@ _0807FA1E:
 _0807FA22:
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl GetTileSafe
+	bl GetTileMut
 	adds r4, r0, 0
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x4

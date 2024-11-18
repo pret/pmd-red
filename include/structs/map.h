@@ -72,7 +72,7 @@ typedef struct RoomData
     u8 unk0;
     u8 unk1;
     // All coordinates are inclusive.
-    // These are not aligned properly to use the Position struct.
+    // These are not aligned properly to use the DungeonPos struct.
     /* 0x2 */ s16 bottomRightCornerX;
     /* 0x4 */ s16 bottomRightCornerY;
     /* 0x6 */ s16 topLeftCornerX;

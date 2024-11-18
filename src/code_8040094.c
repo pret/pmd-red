@@ -19,7 +19,6 @@ extern OpenedFile *gUnknown_202EE04;
 extern void sub_803F7BC(void);
 
 extern void sub_803F580(u32);
-extern void sub_8049ED4();
 extern void sub_8040A84();
 
 extern const char *gUnknown_80FD040; // It became brighter on the floor
@@ -27,7 +26,6 @@ extern const char *gUnknown_80FD040; // It became brighter on the floor
 // Luminous Orb???
 void HandleLuminousOrbAction(Entity *pokemon)
 {
-  struct Tile *mapTile;
   int XCoord;
   int YCoord;
 
@@ -37,14 +35,14 @@ void HandleLuminousOrbAction(Entity *pokemon)
   {
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
     {
-      mapTile = GetTileSafe(XCoord, YCoord);
+      Tile *mapTile = GetTileMut(XCoord, YCoord);
       mapTile->spawnOrVisibilityFlags |= 1;
     }
   }
   sub_803F580(0);
   sub_8049ED4();
   sub_8040A84();
-  TryDisplayDungeonLoggableMessage(pokemon, gUnknown_80FD040);
+  LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD040);
 }
 
 void sub_8040094(u8 r0)

@@ -33,6 +33,6 @@ extern const u8* const gCommonKecleonBros[KECLEON_BROS_MODE_COUNT][KECLEON_DLG_M
 extern const u8* const gCommonWigglytuff[WIGGLYTUFF_SHOP_MODE_COUNT][WIGGLY_DLG_MAX];
 extern const u8* const gCommonGulpin[GULPIN_SHOP_MODE_DIALOGUE_COUNT][GULPIN_DLG_MAX];
 extern const u8* const gCommonMakuhita[MAKUHITA_DOJO_MODE_COUNT][MAKUHITA_DLG_MAX];
-extern const Hints gCommonHints[NUM_HINTS];
+extern const Hints gCommonHints[HINT_MAX];
 
 #endif // GUARD_COMMON_STRINGS_H

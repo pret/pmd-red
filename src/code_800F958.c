@@ -1,16 +1,17 @@
 #include "global.h"
+#include "code_800F958.h"
 #include "dungeon_pokemon_sprites.h"
 #include "memory.h"
 
 extern DungeonPokemonSprite *NewDungeonPokemonSprite(void);
 extern DungeonPokemonSprite* GetDungeonPokemonSprite(s32 id);
 
-extern Position gUnknown_80D3564;
+extern DungeonPos gUnknown_80D3564;
 
-void AddPokemonDungeonSprite(s32 id, s16 species, Position *pos, u32 r3) {
+void AddPokemonDungeonSprite(s32 id, s16 species, DungeonPos *pos, u32 r3) {
     DungeonPokemonSprite *dSprite;
     DungeonPokemonSprite *newSprite;
-    Position newPos;
+    DungeonPos newPos;
     s32 species_s32;
 
     species_s32 = species;
@@ -55,7 +56,8 @@ void DeletePokemonDungeonSprite(s32 id)
     MemoryClear8((u8 *)dSprite, sizeof(DungeonPokemonSprite));
 }
 
-void sub_800F958(s32 dungeonSpriteID, Position *pos, Position *statusOffsets, u32 a3)
+void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos,
+                 DungeonPos *statusOffsets, u32 a3)
 {
     DungeonPokemonSprite *dSprite;
 

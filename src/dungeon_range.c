@@ -5,11 +5,11 @@
 #include "dungeon_map_access.h"
 #include "structs/map.h"
 
-bool8 IsPositionActuallyInSight(Position *pos1, Position *pos2)
+bool8 IsPositionActuallyInSight(DungeonPos *pos1, DungeonPos *pos2)
 {
     u8 pos1Room;
     u8 visibility = gDungeon->unk181e8.visibilityRange;
-    struct Tile *tile1;
+    const Tile *tile1;
     if (visibility == 0)
     {
         visibility = 2;
@@ -47,9 +47,9 @@ bool8 IsPositionActuallyInSight(Position *pos1, Position *pos2)
     }
 }
 
-bool8 IsPositionInSight(Position *pos1, Position *pos2)
+bool8 IsPositionInSight(DungeonPos *pos1, DungeonPos *pos2)
 {
-  struct Tile *tile;
+  const Tile *tile;
   u8 pos1Room;
   s32 xDiff;
   s32 yDiff;
@@ -97,9 +97,9 @@ returnFalse:
   return TRUE;
 }
 
-void sub_80833E8(Position *param_1, s32 *param_2)
+void sub_80833E8(DungeonPos *param_1, s32 *param_2)
 {
-  struct Tile *tile;
+  const Tile *tile;
   struct RoomData *mapRoom;
   u32 visibility;
   u32 room;
@@ -125,10 +125,10 @@ void sub_80833E8(Position *param_1, s32 *param_2)
   }
 }
 
-bool8 IsTargetTwoTilesAway(Position *pos1, Position *pos2)
+bool8 IsTargetTwoTilesAway(DungeonPos *pos1, DungeonPos *pos2)
 {
     s32 i;
-    struct Tile *tile;
+    const Tile *tile;
     s32 diff;
     s32 x1;
     s32 y1;

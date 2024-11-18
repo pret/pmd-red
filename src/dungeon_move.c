@@ -36,13 +36,14 @@
 #include "status_actions.h"
 #include "code_8045A00.h"
 #include "code_803E668.h"
+#include "code_803E724.h"
 #include "code_803E46C.h"
+#include "code_8041AD0.h"
 
 extern void sub_80429C8(Entity *r0);
-extern u8 sub_803F428(Position *);
 extern bool8 sub_8045888(Entity *r0);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
-extern void sub_806EAF4(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);
+extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);
 extern s16 sub_8057600(Move *move, s32 itemID);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8042238(Entity *pokemon, Entity *target);
@@ -54,27 +55,26 @@ extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
 extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
-extern void sub_800569C(Position *, axdata *, u8);
+extern void sub_800569C(DungeonPos *, axdata *, u8);
 extern u8 GetBodySize(s16 index);
 extern void sub_800EF10(u16 r0);
 extern s32 sub_800E710(s16 a0, u16 a1);
-extern void sub_800E3AC(s32 a0, Position *pos, s32 a2);
-extern void sub_8041168(Entity *entity, Entity *entity2, Move *,Position *);
+extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
+extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
 extern Entity *sub_80696A8(Entity *a0);
-extern Entity *sub_804AD0C(Position *pos);
+extern Entity *GetMonsterAtPos(DungeonPos *pos);
 extern Entity *sub_80696FC(Entity *);
 extern Entity *sub_806977C(Entity *);
 extern void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct DamageStruct *dmgStruct);
 extern void sub_806ACE8(Entity *entity, Move *move);
 extern s32 sub_8057070(Move *move);
-extern bool8 sub_805755C(Entity* pokemon,u16 param_2);
+extern bool8 MoveRequiresCharging(Entity* pokemon,u16 param_2);
 extern s32 sub_800ED20(u16 param_1);
 extern bool32 sub_8058F04(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern void sub_8042930(Entity *r0);
 extern void sub_8041B48(Entity *pokemon);
 extern void sub_8041BA8(Entity *pokemon);
 extern void sub_8042950(Entity *r0);
-extern void sub_80421C0(Entity *pokemon, u16 r1);
 extern bool8 sub_8057634(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 YawnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 NightmareMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -513,12 +513,12 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
             sub_806A1E8(currTarget);
             TrySendImmobilizeSleepEndMsg(attacker, currTarget);
             r4 = FALSE;
-            if (!MoveMatchesChargingStatus(attacker, move)) {
-                r4 = (sub_805755C(attacker, move->id) != 0);
+            if (!MoveMatchesBideClassStatus(attacker, move)) {
+                r4 = (MoveRequiresCharging(attacker, move->id) != 0);
             }
 
             if (!lightRodRedirect) {
-                if (targetInfo->protection.protectionStatus == STATUS_MAGIC_COAT) {
+                if (targetInfo->reflectClassStatus.status == STATUS_MAGIC_COAT) {
                     if (IsReflectedByMagicCoat(moveId) && sub_8055988(attacker, currTarget)) {
                         TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FC52C); // The target~27s Magic Coat bounced it back!
                         sub_8041B48(currTarget);
@@ -529,7 +529,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                         moveRedirected = TRUE;
                     }
                 }
-                else if (targetInfo->protection.protectionStatus == STATUS_MIRROR_MOVE) {
+                else if (targetInfo->reflectClassStatus.status == STATUS_MIRROR_MOVE) {
                     s32 target = GetMoveTargetAndRangeForPokemon(attacker, move, FALSE);
                     if (moveId != MOVE_REGULAR_ATTACK
                         && moveId != MOVE_PROJECTILE
@@ -548,11 +548,11 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                 }
             }
             if (!lightRodRedirect) {
-                if (targetInfo->protection.protectionStatus == STATUS_PROTECT) {
+                if (targetInfo->reflectClassStatus.status == STATUS_PROTECT) {
                     s16 targetFlags = GetMoveTargetAndRangeForPokemon(attacker, move, FALSE);
                     s32 targetFlagsAnd = targetFlags & 0xF;
                     if ((targetFlagsAnd == 0 || targetFlagsAnd == 4 || targetFlagsAnd == 5 || targetFlagsAnd == 2) && !r4) {
-                        SetMessageArgument(gFormatBuffer_Monsters[1], currTarget, 0);
+                        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], currTarget, 0);
                         TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FC574); // protected itself!
                         moveHits = FALSE;
                     }
@@ -565,7 +565,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
 
             if (moveHits) {
                 if (HasAbility(currTarget, ABILITY_SOUNDPROOF) && IsSoundMove(move)) {
-                    SetMessageArgument(gFormatBuffer_Monsters[1], currTarget, 0);
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], currTarget, 0);
                     TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_8100524); // Soundproof suppressed the sound move!
                     moveHits = FALSE;
                 }
@@ -622,7 +622,6 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_JUMP_KICK:
                         sub_8059E54(attacker, currTarget, move, itemId, 1);
                         break;
-
                 }
 
                 if (sub_8044B28())
@@ -1622,7 +1621,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     }
                 }
                 else {
-                    if (MoveCausesPaused(move) && sub_8057308(attacker, 0)) {
+                    if (MoveCausesPaused(move) && RollSecondaryEffect(attacker, 0)) {
                         gUnknown_202F222 = 1;
                     }
                 }
@@ -1667,7 +1666,7 @@ s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s32 r9, s32
     s32 movePower = GetMovePower(attacker, move);
     s32 critChance = GetMoveCritChance(move);
 
-    sub_806EAF4(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
+    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
     unk = sub_8057600(move, itemId);
     return TryHitTarget(attacker, target, move, &dmgStruct, unk);
 }
@@ -1679,7 +1678,7 @@ s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s32 r
     s32 movePower = GetMovePower(attacker, move);
     s32 critChance = GetMoveCritChance(move);
 
-    sub_806EAF4(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
+    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
     unk = sub_8057600(move, itemId);
     return TryHitTarget(attacker, target, move, &dmgStruct, unk);
 }
@@ -1691,7 +1690,7 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
         bool32 isFalseSwipe = (move->id == MOVE_FALSE_SWIPE);
 
         if (HasAbility(target, ABILITY_ILLUMINATE)) {
-            gDungeon->unk662 = 999;
+            gDungeon->unk644.unk1E = 999;
             gDungeon->unk17B34 = target;
             gDungeon->unk17B40 = target->spawnGenID;
         }
@@ -1708,10 +1707,10 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
         else {
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9688); // It took no damage!
         }
-        dmgStruct->unkF = 1;
+        dmgStruct->tookNoDamage = TRUE;
     }
 
-    if (dmgStruct->unkF != 0) {
+    if (dmgStruct->tookNoDamage) {
         return 0;
     }
 
@@ -1729,7 +1728,7 @@ s32 sub_8055864(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 i
 
     sub_806F2BC(attacker, target, moveType, param_4, &dmgStruct);
     HandleDealingDamage(attacker, target, &dmgStruct, FALSE, TRUE, sub_8057600(move, itemId), TRUE, 0);
-    if (dmgStruct.unkF != 0) {
+    if (dmgStruct.tookNoDamage) {
         return 0;
     }
 
@@ -1805,19 +1804,19 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
 
     attackerInfo->abilityEffectFlags = 0;
     attackerInfo->unk159 = 0;
-    if (attackerInfo->volatileStatus.volatileStatus == STATUS_CRINGE) {
-        SetMessageArgument(gFormatBuffer_Monsters[0], attacker, 0);
-        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC714); // is cringing!
+    if (attackerInfo->cringeClassStatus.status == STATUS_CRINGE) {
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
+        LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FC714); // is cringing!
         return FALSE;
     }
-    else if (attackerInfo->volatileStatus.volatileStatus == STATUS_INFATUATED) {
-        SetMessageArgument(gFormatBuffer_Monsters[0], attacker, 0);
-        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC718); // is infatuated!
+    else if (attackerInfo->cringeClassStatus.status == STATUS_INFATUATED) {
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
+        LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FC718); // is infatuated!
         return FALSE;
     }
-    else if (attackerInfo->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS) {
-        SetMessageArgument(gFormatBuffer_Monsters[0], attacker, 0);
-        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6A8); // is paralyzed!
+    else if (attackerInfo->burnClassStatus.status == STATUS_PARALYSIS) {
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
+        LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FC6A8); // is paralyzed!
         return FALSE;
     }
 
@@ -1861,7 +1860,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
         if (MoveFlagExists(currMove)) {
             bool32 moveUsable = TRUE;
             bool32 var_28 = FALSE;
-            bool32 statusMoveMatch = MoveMatchesChargingStatus(attacker, currMove);
+            bool32 statusMoveMatch = MoveMatchesBideClassStatus(attacker, currMove);
 
             if (currMove->PP != 0) {
                 if (!statusMoveMatch) {
@@ -1871,7 +1870,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
             else {
                 if (!statusMoveMatch) {
                     sub_80928C0(gFormatBuffer_Items[0],  currMove, NULL);
-                    TryDisplayDungeonLoggableMessage(attacker, gUnknown_80F93C8); // The move can't be used!
+                    LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80F93C8); // The move can't be used!
                     moveUsable = FALSE;
                 }
             }
@@ -1886,7 +1885,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
 
                     assistMove.id = sub_8057144(attacker);
                     sub_80928C0(gFormatBuffer_Items[0], &assistMove, NULL);
-                    TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FD2DC); // Assist:
+                    LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FD2DC); // Assist:
                     moveWasUsed = TryUseChosenMove(attacker, var_34, itemId, arg_0, isLinkedMove, &assistMove);
                 }
                 else {
@@ -1904,10 +1903,10 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
 
                 if (unkBefore == gUnknown_202F208) {
                     if (itemId == 0) {
-                        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC690); // The currMove failed!
+                        LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FC690); // The currMove failed!
                     }
                     else {
-                        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6A4); // The Orb failed!
+                        LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FC6A4); // The Orb failed!
                     }
                 }
             }
@@ -1936,7 +1935,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
                         assistMove.id = sub_8057144(attacker);
                         movePtr = &assistMove;
                         sub_80928C0(gFormatBuffer_Items[0], &assistMove, NULL);
-                        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FD2DC); // Assist:
+                        LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FD2DC); // Assist:
                     }
                     TryUseChosenMove(attacker, 0, itemId, arg_0, isLinkedMove, movePtr);
                 }
@@ -1967,48 +1966,48 @@ static void TriggerTargetAbilityEffect(Entity *attacker)
         EntityInfo *entInfo = GetEntInfo(attacker);
 
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_ARENA_TRAP) {
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEEA4); // Arena Trap prevents movement!
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEEA4); // Arena Trap prevents movement!
             ImmobilizedStatusTarget(attacker, attacker);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_SHADOW_TAG) {
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEEC8); // Shadow Tag prevents movement!
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEEC8); // Shadow Tag prevents movement!
             ImmobilizedStatusTarget(attacker, attacker);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_MAGNET_PULL) {
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEEEC); // Magnet Pull prevents movement!
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEEEC); // Magnet Pull prevents movement!
             ImmobilizedStatusTarget(attacker, attacker);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_STATIC) {
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF0C); // Static caused paralysis!
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF0C); // Static caused paralysis!
             ParalyzeStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_PRLZ) {
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF30); // Effect Spore scattered spores
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF30); // Effect Spore scattered spores
             ParalyzeStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_POISON_POINT) {
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF4C); // Poison Point struck!
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF4C); // Poison Point struck!
             PoisonedStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_PSN) {
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF50); // Effect Spore scattered spores!
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF50); // Effect Spore scattered spores!
             PoisonedStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_SLP) {
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF54); // Effect Spore scattered spores!
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF54); // Effect Spore scattered spores!
             sub_8075C58(attacker, attacker, CalculateStatusTurns(attacker, gUnknown_80F4E74, TRUE), TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_FLAME_BODY) {
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF74); // Flame Body caused a burn!
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF74); // Flame Body caused a burn!
             BurnedStatusTarget(attacker, attacker, TRUE, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_CUTE_CHARM) {
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEF98); // Cute Charm caused infatuation
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF98); // Cute Charm caused infatuation
             InfatuateStatusTarget(attacker, attacker, TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_STENCH) {
-            SetMessageArgument(gFormatBuffer_Monsters[0], attacker, 0);
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FEFD0); // A horrid stench billowed out
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEFD0); // A horrid stench billowed out
             sub_80428A0(attacker);
             entInfo->terrifiedTurns = gUnknown_80F5004;
         }
@@ -2069,7 +2068,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
         {
         var_28 = 1;
         if ((move->id != MOVE_SOLARBEAM || GetApparentWeather(attacker) != WEATHER_SUNNY) && DoesMoveCharge(move->id)) {
-            if (!MoveMatchesChargingStatus(attacker, move)) {
+            if (!MoveMatchesBideClassStatus(attacker, move)) {
                 var_28 = 0;
             }
         }
@@ -2077,7 +2076,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
 
     SetMessageArgument_2(gFormatBuffer_Monsters[0], GetEntInfo(attacker), 0);
     sub_80928C0(gFormatBuffer_Items[0], move, NULL);
-    if (MoveMatchesChargingStatus(attacker, move)) {
+    if (MoveMatchesBideClassStatus(attacker, move)) {
         msg = gUnknown_80FC72C; // mon loosed move
         GetEntInfo(attacker)->unkFF = 0;
         moveUsable = sub_805744C(attacker, move, TRUE);
@@ -2097,25 +2096,25 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     }
 
     if (GetEntInfo(attacker)->muzzled.muzzled == TRUE && FailsWhileMuzzled(move->id)) {
-        SetMessageArgument(gFormatBuffer_Monsters[0], attacker, 0);
-        TryDisplayDungeonLoggableMessage(attacker, msg);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
+        LogMessageByIdWithPopupCheckUser(attacker, msg);
         sub_803E708(0xA, 0x3F);
-        TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC710); // is muzzled!
+        LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FC710); // is muzzled!
         return FALSE;
     }
     else if (!moveUsable) {
         SetMessageArgument_2(gFormatBuffer_Monsters[0], GetEntInfo(attacker), 0);
         if (itemId == 0) {
             sub_80928C0(gFormatBuffer_Items[0], move, NULL);
-            TryDisplayDungeonLoggableMessage(attacker, msg);
+            LogMessageByIdWithPopupCheckUser(attacker, msg);
             sub_803E708(0xA, 0x3F);
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6D0); // But the move couldn't be used!
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FC6D0); // But the move couldn't be used!
         }
         else {
             BufferItemName(gFormatBuffer_Items[0], itemId, NULL);
-            TryDisplayDungeonLoggableMessage(attacker, msg);
+            LogMessageByIdWithPopupCheckUser(attacker, msg);
             sub_803E708(0xA, 0x3F);
-            TryDisplayDungeonLoggableMessage(attacker, gUnknown_80FC6FC); // But Orbs are prevented from being used!
+            LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FC6FC); // But Orbs are prevented from being used!
         }
         return FALSE;
     }
@@ -2172,7 +2171,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
             sub_806A1E8(gUnknown_203B438);
         }
 
-        if (GetEntInfo(attacker)->volatileStatus.volatileStatus != STATUS_CONFUSED && GetEntInfo(attacker)->volatileStatus.volatileStatus != STATUS_COWERING) {
+        if (GetEntInfo(attacker)->cringeClassStatus.status != STATUS_CONFUSED && GetEntInfo(attacker)->cringeClassStatus.status != STATUS_COWERING) {
             EntityInfo *entInfo = GetEntInfo(attacker);
             entInfo->targetPos.x = 0;
             entInfo->targetPos.y = 0;
@@ -2198,8 +2197,8 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
 
 
     if (gUnknown_202F21A != 0) {
-        SendImmobilizeEndMessage(attacker, attacker);
-        SendLinkedEndMessage(attacker, attacker);
+        EndFrozenClassStatus(attacker, attacker);
+        EndLeechSeedClassStatus(attacker, attacker);
     }
 
     if (gUnknown_202F219 != 0 && EntityExists(attacker)) {
@@ -2266,13 +2265,13 @@ struct UnkStruct_sub_800E308_1
 {
     s16 unk0;
     s16 unk2;
-    Position unk4;
-    Position unk8;
+    DungeonPos unk4;
+    DungeonPos unk8;
     s32 unkC;
     s32 unk10;
 };
 
-// Maybe Position? Maybe not, sub_800E308 is called only by sub_8056564, so :shrug:
+// Maybe DungeonPos? Maybe not, sub_800E308 is called only by sub_8056564, so :shrug:
 struct UnkStruct_sub_800E308_2
 {
     s16 u0;
@@ -2282,7 +2281,7 @@ struct UnkStruct_sub_800E308_2
 extern s32 sub_800E308(struct UnkStruct_sub_800E308_1 *, struct UnkStruct_sub_800E308_2 *);
 
 #ifdef NONMATCHING // https://decomp.me/scratch/fTUsI
-s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
+s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
 {
     struct UnkStruct_sub_800E308_1 unkSp1;
     struct UnkStruct_sub_800E308_2 unkSp2;
@@ -2292,7 +2291,7 @@ s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
         unkStruct_80BDBC4 *unkStruct = sub_800ECB8(sub_80412E0(move->id, GetApparentWeather(entity), 1));
         s32 unk6 = unkStruct->unk6;
         // This part with unkPos doesn't match
-        Position32 unkPos = {pos->x * 0x1800, pos->y * 0x1800};
+        PixelPos unkPos = {pos->x * 0x1800, pos->y * 0x1800};
 
         unkPos.x += 0x1000;
         unkPos.y += 0xC00;
@@ -2312,7 +2311,7 @@ s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
                             someRetVal);
             }
             else {
-                unkSp1.unk8 = (Position) {0};
+                unkSp1.unk8 = (DungeonPos) {0};
             }
             unkSp1.unk0 = sub_80412E0(move->id, GetApparentWeather(entity), 1);
             unkSp1.unk2 = entInfo->apparentID;
@@ -2328,7 +2327,7 @@ s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
     return -1;
 }
 #else
-NAKED s32 sub_8056564(Entity *entity, Position *pos, Move *move, s32 r4)
+NAKED s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
 {
     asm_unified("push {r4-r7,lr}\n"
 	"	mov r7, r9\n"
@@ -2542,8 +2541,8 @@ static const s32 gUnknown_81069D4[NUM_DIRECTIONS] =
 // This function looks important, but what does it do?
 void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32 isLinkedMove)
 {
-    Position var_68;
-    Position var_64;
+    DungeonPos var_68;
+    DungeonPos var_64;
     Entity *targetsArray[2]; // Only 2 hmm
     s32 var_4C, var_48;
     s32 i, j;
@@ -2578,7 +2577,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
     var_48 = gAdjacentTileOffsets[attackerInfo->action.direction].y;
     for (i = 0; i < a2; i++)
     {
-        Tile *tile;
+        const Tile *tile;
 
         if (var_68.x < 0 || var_68.y < 0 || var_68.x > 55 || var_68.y > 31)
             break;
@@ -2593,7 +2592,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
             break;
     }
 
-    if (sub_805755C(attacker, move->id) && !MoveMatchesChargingStatus(attacker, move)) {
+    if (MoveRequiresCharging(attacker, move->id) && !MoveMatchesBideClassStatus(attacker, move)) {
         var_34 = -1;
     }
     else {
@@ -2622,8 +2621,8 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
 
     for (i = 0; i < a2; i++)
     {
-        Position var_68Before;
-        Tile *tile;
+        DungeonPos var_68Before;
+        const Tile *tile;
 
         if (var_68.x < 0 || var_68.y < 0 || var_68.x > 55 || var_68.y > 31)
             break;
@@ -2632,7 +2631,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
         var_68.x += var_4C;
         var_68.y += var_48;
         if (sub_803F428(&var_68) && !gDungeon->unk181e8.blinded) {
-            Position32 pos32;
+            PixelPos pos32;
             pos32.x = (var_68Before.x * 0x1800) + 0xC00;
             pos32.y = (var_68Before.y * 0x1800) + 0x1000;
             var_28 = var_30 * (var_4C << 8);
@@ -2643,7 +2642,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
                     s32 r2;
 
                     if (a3 != 0) {
-                        r3 = sin_abs_4096(r9 / 256) * var_3C;
+                        r3 = sin_4096(r9 / 256) * var_3C;
                     }
                     else {
                         r3 = 0;
@@ -2673,9 +2672,9 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
                 bool8 canHitAnyone = FALSE;
                 s32 targetFlags;
                 EntityInfo *attackerInfo = GetEntInfo(attacker);
-                if (attackerInfo->volatileStatus.volatileStatus == STATUS_CONFUSED
-                    || attackerInfo->eyesightStatus.eyesightStatus == STATUS_BLINKER
-                    || attackerInfo->volatileStatus.volatileStatus == STATUS_COWERING)
+                if (attackerInfo->cringeClassStatus.status == STATUS_CONFUSED
+                    || attackerInfo->blinkerClassStatus.status == STATUS_BLINKER
+                    || attackerInfo->cringeClassStatus.status == STATUS_COWERING)
                 {
                     canHitAnyone = TRUE;
                 }
@@ -2715,9 +2714,9 @@ static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accu
         return TRUE;
     if (move->id == MOVE_REGULAR_ATTACK && IQSkillIsEnabled(attacker, IQ_SURE_HIT_ATTACKER))
         return TRUE;
-    if (attackerInfo->moveStatus.moveStatus == STATUS_SURE_SHOT)
+    if (attackerInfo->sureShotClassStatus.status == STATUS_SURE_SHOT)
         return TRUE;
-    if (attackerInfo->moveStatus.moveStatus == STATUS_WHIFFER)
+    if (attackerInfo->sureShotClassStatus.status == STATUS_WHIFFER)
         return FALSE;
     if (accuracy > 100)
         return TRUE;
@@ -2787,10 +2786,10 @@ static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *mov
     s32 targetFlags;
     s32 targetFlagsAnd;
     s32 arrId = 0;
-    bool8 canHitPartner = (GetEntInfo(attacker)->volatileStatus.volatileStatus == STATUS_CONFUSED
-                    || GetEntInfo(attacker)->eyesightStatus.eyesightStatus == STATUS_BLINKER
-                    || GetEntInfo(attacker)->volatileStatus.volatileStatus == STATUS_COWERING);
-    bool8 canHitSelf = (GetEntInfo(attacker)->volatileStatus.volatileStatus == STATUS_CONFUSED || GetEntInfo(attacker)->volatileStatus.volatileStatus == STATUS_COWERING);
+    bool8 canHitPartner = (GetEntInfo(attacker)->cringeClassStatus.status == STATUS_CONFUSED
+                    || GetEntInfo(attacker)->blinkerClassStatus.status == STATUS_BLINKER
+                    || GetEntInfo(attacker)->cringeClassStatus.status == STATUS_COWERING);
+    bool8 canHitSelf = (GetEntInfo(attacker)->cringeClassStatus.status == STATUS_CONFUSED || GetEntInfo(attacker)->cringeClassStatus.status == STATUS_COWERING);
 
     if (IQSkillIsEnabled(attacker, IQ_NONTRAITOR)) {
         canHitSelf = FALSE;
@@ -2798,7 +2797,7 @@ static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *mov
     }
     targetFlags = GetMoveTargetAndRangeForPokemon(attacker, move, FALSE);
     if ((targetFlags & 0xF) == 4) {
-        bool32 usable = MoveMatchesChargingStatus(attacker, move);
+        bool32 usable = MoveMatchesBideClassStatus(attacker, move);
         if (move->id == MOVE_SOLARBEAM && GetApparentWeather(attacker) == WEATHER_SUNNY) {
             usable = TRUE;
         }
@@ -2829,12 +2828,12 @@ static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *mov
         }
         for (i = 0; i < to; i++, direction++) {
             Entity *targetEntity;
-            Position unkPositon;
+            DungeonPos unkPositon;
 
             direction &= DIRECTION_MASK;
             unkPositon.x = attacker->pos.x + gAdjacentTileOffsets[direction].x ;
             unkPositon.y = attacker->pos.y + gAdjacentTileOffsets[direction].y;
-            targetEntity = sub_804AD0C(&unkPositon);
+            targetEntity = GetMonsterAtPos(&unkPositon);
             if (targetEntity != NULL) {
                 arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, targetEntity, move, canHitPartner);
             }
@@ -2843,7 +2842,7 @@ static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *mov
     else if (targetFlagsAnd == 0x30) {
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-            Entity *dungeonMon = gDungeon->allPokemon[i];
+            Entity *dungeonMon = gDungeon->activePokemon[i];
             if (EntityExists(dungeonMon) && sub_8045A70(attacker, dungeonMon)) {
                 if (dungeonMon == attacker) {
                     arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, attacker, move, canHitSelf);
@@ -2881,7 +2880,7 @@ static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *mov
     else if (targetFlagsAnd == 0x60) {
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
-            Entity *dungeonMon = gDungeon->allPokemon[i];
+            Entity *dungeonMon = gDungeon->activePokemon[i];
             if (EntityExists(dungeonMon)) {
                 arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, dungeonMon, move, canHitPartner);
             }
@@ -2909,7 +2908,7 @@ static s32 SetNewTarget(s32 targetArrId, Entity **targetsArray, s32 targetFlags_
         return targetArrId;
     if (targetInfo->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER)
         return targetArrId;
-    if (targetInfo->clientType == CLIENT_TYPE_DONT_MOVE || targetInfo->clientType == CLIENT_TYPE_CLIENT)
+    if (targetInfo->monsterBehavior == BEHAVIOR_DIGLETT || targetInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
         return targetArrId;
 
     if (canHitAnyone) {
@@ -2963,7 +2962,7 @@ static s32 SetNewTarget(s32 targetArrId, Entity **targetsArray, s32 targetFlags_
 struct MultiTurnChargeMove
 {
     u16 moveID;
-    u8 chargingStatus;
+    u8 status;
 };
 
 const struct MultiTurnChargeMove gMultiTurnChargeMoves[10] = {
@@ -2979,7 +2978,7 @@ const struct MultiTurnChargeMove gMultiTurnChargeMoves[10] = {
     {MOVE_NOTHING, STATUS_NONE}
 };
 
-const u32 gMultiTurnChargingStatuses[10] = {
+const u32 gMultiTurnBideClassStatuses[10] = {
     STATUS_SOLARBEAM,
     STATUS_SKY_ATTACK,
     STATUS_RAZOR_WIND,
@@ -3011,7 +3010,7 @@ bool8 MoveCausesPaused(Move *move)
     return FALSE;
 }
 
-bool8 MoveMatchesChargingStatus(Entity *pokemon, Move *move)
+bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move)
 {
     if (!EntityExists(pokemon))
     {
@@ -3028,7 +3027,7 @@ bool8 MoveMatchesChargingStatus(Entity *pokemon, Move *move)
                 return FALSE;
             }
             if (move->id == gMultiTurnChargeMoves[i].moveID &&
-                pokemonInfo->charging.chargingStatus == gMultiTurnChargeMoves[i].chargingStatus)
+                pokemonInfo->bideClassStatus.status == gMultiTurnChargeMoves[i].status)
             {
                 return TRUE;
             }
@@ -3047,26 +3046,26 @@ bool8 IsChargingAnyTwoTurnMove(Entity *pokemon, bool8 checkCharge)
     {
         EntityInfo *pokemonInfo = GetEntInfo(pokemon);
         int i = 0;
-        u8 *chargingStatusPointer = &pokemonInfo->charging.chargingStatus;
-        u8 *chargingStatusPointer2;
+        u8 *bideClassStatusPointer = &pokemonInfo->bideClassStatus.status;
+        u8 *bideClassStatusPointer2;
         u8 chargeStatus = STATUS_CHARGING;
         for (; i < 100; i++)
         {
-            u8 currentStatus = gMultiTurnChargingStatuses[i];
-            u8 chargingStatus;
+            u8 currentStatus = gMultiTurnBideClassStatuses[i];
+            u8 bideClassStatus;
             if (currentStatus == STATUS_NONE)
             {
                 return FALSE;
             }
-            chargingStatus = *chargingStatusPointer;
-            chargingStatusPointer2 = &pokemonInfo->charging.chargingStatus;
-            if (chargingStatus == currentStatus)
+            bideClassStatus = *bideClassStatusPointer;
+            bideClassStatusPointer2 = &pokemonInfo->bideClassStatus.status;
+            if (bideClassStatus == currentStatus)
             {
                 return TRUE;
             }
         }
-        // BUG: This condition is never reached because the for loop terminates by returning FALSE at the end of the gMultiTurnChargingStatuses array.
-        if (checkCharge && *chargingStatusPointer2 == chargeStatus)
+        // BUG: This condition is never reached because the for loop terminates by returning FALSE at the end of the gMultiTurnBideClassStatuses array.
+        if (checkCharge && *bideClassStatusPointer2 == chargeStatus)
         {
             return TRUE;
         }
@@ -3082,13 +3081,13 @@ u32 sub_8057144(Entity * pokemon)
     nMoves = 0;
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
-        Entity *dungeonMon = gDungeon->allPokemon[i];
+        Entity *dungeonMon = gDungeon->activePokemon[i];
         if (EntityExists(dungeonMon)) {
             Move *moves = GetEntInfo(dungeonMon)->moves.moves;
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 if (moves[j].moveFlags & MOVE_FLAG_EXISTS
-                    && !sub_805755C(pokemon, moves[j].id)
+                    && !MoveRequiresCharging(pokemon, moves[j].id)
                     && moves[j].id != MOVE_SKETCH
                     && nMoves < 80) {
                     moveStack[nMoves++] = &moves[j];
@@ -3121,10 +3120,10 @@ bool8 sub_80571F0(Entity * pokemon, Move *move)
             return TRUE;
     }
     else if (entityInfo->unkFF == 2) {
-        if (entityInfo->charging.chargingStatus == STATUS_DIVING) {
+        if (entityInfo->bideClassStatus.status == STATUS_DIVING) {
             if (move->id == MOVE_WHIRLPOOL || move->id == MOVE_SURF) return FALSE;
         }
-        else if (entityInfo->charging.chargingStatus == STATUS_DIGGING) {
+        else if (entityInfo->bideClassStatus.status == STATUS_DIGGING) {
             moveID = move->id;
             if (moveID == MOVE_EARTHQUAKE || moveID == MOVE_MAGNITUDE) return FALSE;
             if (moveID == MOVE_NATURE_POWER) {
@@ -3176,7 +3175,7 @@ bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
     return uVar2;
 }
 
-bool8 sub_8057308(Entity *pokemon, s32 chance)
+bool8 RollSecondaryEffect(Entity *pokemon, s32 chance)
 {
     if(!EntityExists(pokemon))
         return FALSE;
@@ -3228,11 +3227,11 @@ bool8 CanMonsterUseMove(Entity *pokemon, Move *move, bool8 hasPPChecker)
         {
             return FALSE;
         }
-        if (pokemonInfo->volatileStatus.volatileStatus == STATUS_TAUNTED && !MoveIgnoresTaunted(move))
+        if (pokemonInfo->cringeClassStatus.status == STATUS_TAUNTED && !MoveIgnoresTaunted(move))
         {
             return FALSE;
         }
-        if (pokemonInfo->volatileStatus.volatileStatus == STATUS_ENCORE)
+        if (pokemonInfo->cringeClassStatus.status == STATUS_ENCORE)
         {
             if (move->id == MOVE_STRUGGLE)
             {
@@ -3260,8 +3259,8 @@ bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3)
         return FALSE;
     }
     if (param_3 != 0) {
-      if ((entityInfo->volatileStatus.volatileStatus == STATUS_TAUNTED) && (!MoveIgnoresTaunted(move))) return FALSE;
-      if (entityInfo->volatileStatus.volatileStatus == STATUS_ENCORE) {
+      if ((entityInfo->cringeClassStatus.status == STATUS_TAUNTED) && (!MoveIgnoresTaunted(move))) return FALSE;
+      if (entityInfo->cringeClassStatus.status == STATUS_ENCORE) {
         if (move->id == MOVE_STRUGGLE) {
           if((entityInfo->moves.struggleMoveFlags & MOVE_FLAG_LAST_USED) == 0) return FALSE;
         }

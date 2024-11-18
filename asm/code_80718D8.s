@@ -39,7 +39,7 @@ _080727A8:
 	movs r4, 0xC
 	ldrsh r3, [r0, r4]
 	mov r0, sp
-	bl sub_808E0AC
+	bl GetMovesLearnedAtLevel
 	adds r7, r0, 0
 	add r4, sp, 0x20
 	movs r1, 0x8C
@@ -359,7 +359,7 @@ _08072A0C:
 	ldr r0, _08072A44
 	mov r1, r9
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _08072A48
 	add r1, sp, 0x40
 	bl strcpy
@@ -417,7 +417,7 @@ _08072A92:
 	ldr r0, _08072AC0
 	mov r1, r9
 	movs r2, 0
-	bl SetMessageArgument
+	bl SubstitutePlaceholderStringTags
 	ldr r0, _08072AC4
 	ldr r1, [r0]
 	mov r0, r9

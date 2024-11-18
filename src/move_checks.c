@@ -1,4 +1,5 @@
 #include "global.h"
+#include "math.h"
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
@@ -114,20 +115,20 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_RAGE:
-            if (pokemonInfo->charging.chargingStatus == STATUS_ENRAGED)
+            if (pokemonInfo->bideClassStatus.status == STATUS_ENRAGED)
             {
                 return FALSE;
             }
             break;
         case MOVE_COUNTER:
         case MOVE_PURSUIT:
-            if (pokemonInfo->protection.protectionStatus == STATUS_COUNTER)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_COUNTER)
             {
                 return FALSE;
             }
             break;
         case MOVE_MIRROR_MOVE:
-            if (pokemonInfo->protection.protectionStatus == STATUS_MIRROR_MOVE)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_MIRROR_MOVE)
             {
                 return FALSE;
             }
@@ -159,7 +160,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             break;
         case MOVE_BIDE:
         case MOVE_REVENGE:
-            if (pokemonInfo->charging.chargingStatus == STATUS_BIDE)
+            if (pokemonInfo->bideClassStatus.status == STATUS_BIDE)
             {
                 return FALSE;
             }
@@ -181,7 +182,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
         }
         case MOVE_LOCK_ON:
         case MOVE_MIND_READER:
-            if (pokemonInfo->moveStatus.moveStatus == STATUS_SURE_SHOT)
+            if (pokemonInfo->sureShotClassStatus.status == STATUS_SURE_SHOT)
             {
                 return FALSE;
             }
@@ -193,25 +194,25 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_ENDURE:
-            if (pokemonInfo->protection.protectionStatus == STATUS_ENDURING)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_ENDURING)
             {
                 return FALSE;
             }
             break;
         case MOVE_CHARGE:
-            if (pokemonInfo->charging.chargingStatus == STATUS_CHARGING)
+            if (pokemonInfo->bideClassStatus.status == STATUS_CHARGING)
             {
                 return FALSE;
             }
             break;
         case MOVE_MIST:
-            if (pokemonInfo->protection.protectionStatus == STATUS_MIST)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_MIST)
             {
                 return FALSE;
             }
             break;
         case MOVE_LIGHT_SCREEN:
-            if (pokemonInfo->protection.protectionStatus == STATUS_LIGHT_SCREEN)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_LIGHT_SCREEN)
             {
                 return FALSE;
             }
@@ -223,7 +224,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_INGRAIN:
-            if (pokemonInfo->immobilize.immobilizeStatus == STATUS_INGRAIN || pokemonInfo->maxHPStat / 2 < pokemonInfo->HP)
+            if (pokemonInfo->frozenClassStatus.status == STATUS_INGRAIN || pokemonInfo->maxHPStat / 2 < pokemonInfo->HP)
             {
                 return FALSE;
             }
@@ -242,7 +243,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             break;
         case MOVE_DOOM_DESIRE:
         case MOVE_FUTURE_SIGHT:
-            if (pokemonInfo->moveStatus.moveStatus == STATUS_SET_DAMAGE)
+            if (pokemonInfo->sureShotClassStatus.status == STATUS_SET_DAMAGE)
             {
                 return FALSE;
             }
@@ -266,19 +267,19 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_DESTINY_BOND:
-            if (pokemonInfo->linked.linkedStatus == STATUS_DESTINY_BOND)
+            if (pokemonInfo->leechSeedClassStatus.status == STATUS_DESTINY_BOND)
             {
                 return FALSE;
             }
             break;
         case MOVE_MIRROR_COAT:
-            if (pokemonInfo->protection.protectionStatus == STATUS_MIRROR_COAT)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_MIRROR_COAT)
             {
                 return FALSE;
             }
             break;
         case MOVE_REFLECT:
-            if (pokemonInfo->protection.protectionStatus == STATUS_REFLECT)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_REFLECT)
             {
                 return FALSE;
             }
@@ -290,14 +291,14 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_MAGIC_COAT:
-            if (pokemonInfo->protection.protectionStatus == STATUS_MAGIC_COAT)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_MAGIC_COAT)
             {
                 return FALSE;
             }
             break;
         case MOVE_DETECT:
         case MOVE_PROTECT:
-            if (pokemonInfo->protection.protectionStatus == STATUS_PROTECT)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_PROTECT)
             {
                 return FALSE;
             }
@@ -321,19 +322,19 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_SAFEGUARD:
-            if (pokemonInfo->protection.protectionStatus == STATUS_SAFEGUARD)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_SAFEGUARD)
             {
                 return FALSE;
             }
             break;
         case MOVE_INVISIFY:
-            if (pokemonInfo->transformStatus.transformStatus == STATUS_INVISIBLE)
+            if (pokemonInfo->invisibleClassStatus.status == STATUS_INVISIBLE)
             {
                 return FALSE;
             }
             break;
         case MOVE_FOCUS_ENERGY:
-            if (pokemonInfo->moveStatus.moveStatus == STATUS_FOCUS_ENERGY)
+            if (pokemonInfo->sureShotClassStatus.status == STATUS_FOCUS_ENERGY)
             {
                 return FALSE;
             }
@@ -358,7 +359,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             break;
         case MOVE_DIG:
         {
-            struct Tile *tile = GetTileAtEntitySafe(pokemon);
+            Tile *tile = GetTileAtEntitySafe(pokemon);
             if (!IsTileGround(tile) || (tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL)
             {
                 return FALSE;
@@ -395,7 +396,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
         case MOVE_DECOY_MAKER:
         case MOVE_FOLLOW_ME:
         case MOVE_SUBSTITUTE:
-            if (gDungeon->decoyActive)
+            if (gDungeon->decoyIsActive)
             {
                 return FALSE;
             }
@@ -432,13 +433,13 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_WISH:
-            if (pokemonInfo->isNotTeamMember || pokemonInfo->protection.protectionStatus == STATUS_WISH)
+            if (pokemonInfo->isNotTeamMember || pokemonInfo->reflectClassStatus.status == STATUS_WISH)
             {
                 return FALSE;
             }
             break;
         case MOVE_TRANSFORM:
-            if (pokemonInfo->transformStatus.transformStatus == STATUS_TRANSFORMED)
+            if (pokemonInfo->invisibleClassStatus.status == STATUS_TRANSFORMED)
             {
                 return FALSE;
             }
@@ -461,7 +462,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_SNATCH:
-            if (pokemonInfo->waitingStruct.waitingStatus == STATUS_SNATCH)
+            if (pokemonInfo->curseClassStatus.status == STATUS_SNATCH)
             {
                 return FALSE;
             }
@@ -483,7 +484,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_CONVERSION_2:
-            if (pokemonInfo->protection.protectionStatus == STATUS_CONVERSION2)
+            if (pokemonInfo->reflectClassStatus.status == STATUS_CONVERSION2)
             {
                 return FALSE;
             }
@@ -546,7 +547,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
     EntityInfo *userData = GetEntInfo(user);
     EntityInfo *targetData = GetEntInfo(target);
     s32 i;
-    if (targetData->immobilize.immobilizeStatus == STATUS_FROZEN && MoveCannotHitFrozen(move))
+    if (targetData->frozenClassStatus.status == STATUS_FROZEN && MoveCannotHitFrozen(move))
     {
         return FALSE;
     }
@@ -564,7 +565,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_YAWN:
-            if (targetData->sleep.sleep == STATUS_YAWNING)
+            if (targetData->sleepClassStatus.status == STATUS_YAWNING)
             {
                 return FALSE;
             }
@@ -574,7 +575,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_NIGHTMARE:
-            if (targetData->sleep.sleep == STATUS_NIGHTMARE)
+            if (targetData->sleepClassStatus.status == STATUS_NIGHTMARE)
             {
                 return FALSE;
             }
@@ -586,13 +587,13 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_CHARM:
-            if (targetData->offensiveMultipliers[STAT_STAGE_ATK] < STAT_MULTIPLIER_THRESHOLD)
+            if (F248LessThanFloat(targetData->offensiveMultipliers[STAT_STAGE_ATK], STAT_MULTIPLIER_THRESHOLD))
             {
                 return FALSE;
             }
             break;
         case MOVE_ENCORE:
-            if (targetData->volatileStatus.volatileStatus == STATUS_ENCORE)
+            if (targetData->cringeClassStatus.status == STATUS_ENCORE)
             {
                 return FALSE;
             }
@@ -628,7 +629,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_SCREECH:
-            if (targetData->defensiveMultipliers[STAT_STAGE_DEF] < STAT_MULTIPLIER_THRESHOLD)
+            if (F248LessThanFloat(targetData->defensiveMultipliers[STAT_STAGE_DEF], STAT_MULTIPLIER_THRESHOLD))
             {
                 return FALSE;
             }
@@ -646,20 +647,20 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_SMOKESCREEN:
-            if (targetData->moveStatus.moveStatus == STATUS_WHIFFER)
+            if (targetData->sureShotClassStatus.status == STATUS_WHIFFER)
             {
                 return FALSE;
             }
             break;
         case MOVE_MEMENTO:
-            if (targetData->offensiveMultipliers[STAT_STAGE_ATK] < STAT_MULTIPLIER_THRESHOLD &&
-                targetData->offensiveMultipliers[STAT_STAGE_SP_ATK] < STAT_MULTIPLIER_THRESHOLD)
+            if (F248LessThanFloat(targetData->offensiveMultipliers[STAT_STAGE_ATK], STAT_MULTIPLIER_THRESHOLD) &&
+                F248LessThanFloat(targetData->offensiveMultipliers[STAT_STAGE_SP_ATK], STAT_MULTIPLIER_THRESHOLD))
             {
                 return FALSE;
             }
             break;
         case MOVE_WILL_O_WISP:
-            if (targetData->nonVolatile.nonVolatileStatus == STATUS_BURN)
+            if (targetData->burnClassStatus.status == STATUS_BURN)
             {
                 return FALSE;
             }
@@ -682,7 +683,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_GLARE:
         case MOVE_STUN_SPORE:
         case MOVE_THUNDER_WAVE:
-            if (targetData->nonVolatile.nonVolatileStatus == STATUS_PARALYSIS)
+            if (targetData->burnClassStatus.status == STATUS_PARALYSIS)
             {
                 return FALSE;
             }
@@ -716,7 +717,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_BLOCK:
         case MOVE_MEAN_LOOK:
         case MOVE_SPIDER_WEB:
-            if (targetData->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD)
+            if (targetData->frozenClassStatus.status == STATUS_SHADOW_HOLD)
             {
                 return FALSE;
             }
@@ -728,8 +729,8 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
                 if (targetData->offensiveStages[i] < DEFAULT_STAT_STAGE) break;
                 if (targetData->defensiveStages[i] < DEFAULT_STAT_STAGE) break;
                 if (targetData->hitChanceStages[i] < DEFAULT_STAT_STAGE ||
-                    targetData->offensiveMultipliers[i] < DEFAULT_STAT_MULTIPLIER ||
-                    targetData->defensiveMultipliers[i] < DEFAULT_STAT_MULTIPLIER)
+                    F248LessThanInt(targetData->offensiveMultipliers[i], 1) ||
+                    F248LessThanInt(targetData->defensiveMultipliers[i], 1))
                 {
                     break;
                 }
@@ -741,7 +742,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             break;
         }
         case MOVE_UPROAR:
-            if (targetData->sleep.sleep == STATUS_SLEEPLESS)
+            if (targetData->sleepClassStatus.status == STATUS_SLEEPLESS)
             {
                 return FALSE;
             }
@@ -753,8 +754,8 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
                 if (userData->offensiveStages[i] < targetData->offensiveStages[i]) break;
                 if (userData->defensiveStages[i] < targetData->defensiveStages[i] ||
                     userData->hitChanceStages[i] < targetData->hitChanceStages[i] ||
-                    userData->offensiveMultipliers[i] < targetData->offensiveMultipliers[i] ||
-                    userData->defensiveMultipliers[i] < targetData->defensiveMultipliers[i])
+                    userData->offensiveMultipliers[i].raw < targetData->offensiveMultipliers[i].raw ||
+                    userData->defensiveMultipliers[i].raw < targetData->defensiveMultipliers[i].raw)
                 {
                     break;
                 }
@@ -774,7 +775,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_TAUNT:
-            if (targetData->volatileStatus.volatileStatus == STATUS_TAUNTED)
+            if (targetData->cringeClassStatus.status == STATUS_TAUNTED)
             {
                 return FALSE;
             }
@@ -809,7 +810,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_CURSE:
             if (MonsterIsType(user, TYPE_GHOST))
             {
-                if (targetData->waitingStruct.waitingStatus == STATUS_CURSED)
+                if (targetData->curseClassStatus.status == STATUS_CURSED)
                 {
                     return FALSE;
                 }
@@ -825,7 +826,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             break;
         case MOVE_IMPRISON:
         case MOVE_OBSERVER:
-            if (targetData->volatileStatus.volatileStatus == STATUS_PAUSED)
+            if (targetData->cringeClassStatus.status == STATUS_PAUSED)
             {
                 return FALSE;
             }
@@ -837,7 +838,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_LEECH_SEED:
-            if (targetData->linked.linkedStatus == STATUS_LEECH_SEED)
+            if (targetData->leechSeedClassStatus.status == STATUS_LEECH_SEED)
             {
                 return FALSE;
             }
@@ -856,34 +857,34 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
             }
             break;
         case MOVE_ATTRACT:
-            if (targetData->volatileStatus.volatileStatus == STATUS_INFATUATED)
+            if (targetData->cringeClassStatus.status == STATUS_INFATUATED)
             {
                 return FALSE;
             }
             break;
         case MOVE_WRAP:
-            if (targetData->immobilize.immobilizeStatus == STATUS_WRAP)
+            if (targetData->frozenClassStatus.status == STATUS_WRAP)
             {
                 return FALSE;
             }
-            if (targetData->immobilize.immobilizeStatus == STATUS_WRAPPED)
+            if (targetData->frozenClassStatus.status == STATUS_WRAPPED)
             {
                 return FALSE;
             }
             break;
         case MOVE_TOXIC:
-            if (targetData->nonVolatile.nonVolatileStatus == STATUS_BADLY_POISONED)
+            if (targetData->burnClassStatus.status == STATUS_BADLY_POISONED)
             {
                 return FALSE;
             }
             break;
         case MOVE_POISON_GAS:
         case MOVE_POISONPOWDER:
-            if (targetData->nonVolatile.nonVolatileStatus == STATUS_POISONED)
+            if (targetData->burnClassStatus.status == STATUS_POISONED)
             {
                 return FALSE;
             }
-            if (targetData->nonVolatile.nonVolatileStatus == STATUS_BADLY_POISONED)
+            if (targetData->burnClassStatus.status == STATUS_BADLY_POISONED)
             {
                 return FALSE;
             }
@@ -895,7 +896,7 @@ bool8 CanUseOnTargetWithStatusChecker(Entity *user, Entity *target, Move *move)
         case MOVE_SWEET_KISS:
         case MOVE_TEETER_DANCE:
         case MOVE_TOTTER:
-            if (targetData->volatileStatus.volatileStatus == STATUS_CONFUSED)
+            if (targetData->cringeClassStatus.status == STATUS_CONFUSED)
             {
                 return FALSE;
             }

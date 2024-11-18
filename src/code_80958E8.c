@@ -30,8 +30,8 @@ u8 sub_8095E78(void);
 bool8 sub_80963B4(void);
 s32 CalculateMailChecksum(WonderMail *mail);
 
-extern void SaveDungeonLocation(unkStruct_8094924*, DungeonLocation*);
-extern void RestoreDungeonLocation(unkStruct_8094924*, DungeonLocation*);
+extern void WriteDungeonLocationBits(DataSerializer*, DungeonLocation*);
+extern void ReadDungeonLocationBits(DataSerializer*, DungeonLocation*);
 extern void sub_803C4F0(WonderMail *);
 extern void sub_803C3E0(WonderMail *);
 extern void sub_803C45C(WonderMail *);
@@ -1289,13 +1289,13 @@ s32 CalculateMailChecksum(WonderMail *mail)
     sum += mail->unk4.dungeon.id;
     sum += mail->unk4.dungeon.floor;
 
-    sum += mail->unk4.seed << 0x8;
+    sum += mail->unk4.seed << 8;
 
-    sum += mail->clientSpecies << 0xC;
+    sum += mail->clientSpecies << 12;
 
-    sum += mail->targetSpecies << 0x10;
+    sum += mail->targetSpecies << 16;
 
-    sum += mail->targetItem << 0x18;
+    sum += mail->targetItem << 24;
 
     sum += mail->rewardType;
 
@@ -1310,10 +1310,10 @@ void sub_8096EEC(WonderMail *mail)
 {
     s32 index;
 
-    for(index = 15; index > 0; index--)
-    {
+    for (index = 16 - 1; index > 0; index--) {
          gUnknown_203B490->unk230[index] =  gUnknown_203B490->unk230[index - 1];
     }
+
     gUnknown_203B490->unk230[0].sub = mail->unk4;
     gUnknown_203B490->unk230[0].checksum = CalculateMailChecksum(mail);
 }
@@ -1326,7 +1326,7 @@ bool8 sub_8096F50(WonderMail *mail)
 
     checksum = CalculateMailChecksum(mail);
 
-    for (index = 0; index < 0x10; index++) {
+    for (index = 0; index < 16; index++) {
         temp  = &gUnknown_203B490->unk230[index];
         if (temp->sub.dungeon.id == mail->unk4.dungeon.id)
             if (temp->sub.dungeon.floor == mail->unk4.dungeon.floor)
@@ -1341,66 +1341,66 @@ bool8 sub_8096F50(WonderMail *mail)
 u32 RestoreMailInfo(u8 *r0, u32 size)
 {
     s32 index;
-    unkStruct_8094924 backup;
+    DataSerializer backup;
     u32 temp;
 
-    xxx_init_struct_8094924_restore_809485C(&backup, r0, size);
+    InitBitReader(&backup, r0, size);
     for(index = 0; index < NUM_MAILBOX_SLOTS; index++)
     {
-        RestoreWonderMail(&backup, &gUnknown_203B490->mailboxSlots[index]);
+        ReadWonderMailBits(&backup, &gUnknown_203B490->mailboxSlots[index]);
     }
     for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
-        RestoreWonderMail(&backup, &gUnknown_203B490->pelipperBoardJobs[index]);
+        ReadWonderMailBits(&backup, &gUnknown_203B490->pelipperBoardJobs[index]);
     }
     for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
-        RestoreWonderMail(&backup, &gUnknown_203B490->jobSlots[index]);
+        ReadWonderMailBits(&backup, &gUnknown_203B490->jobSlots[index]);
     }
-    for(index = 0; index < 0x38; index++)
+    for(index = 0; index < 56; index++)
     {
-        RestoreIntegerBits(&backup, &temp, 1);
+        ReadBits(&backup, &temp, 1);
         if(temp & 1)
             gUnknown_203B490->PKMNNewsReceived[index] = TRUE;
         else
             gUnknown_203B490->PKMNNewsReceived[index] = FALSE;
     }
-    RestoreIntegerBits(&backup, &temp, 1);
+    ReadBits(&backup, &temp, 1);
     if(temp & 1)
         gUnknown_203B490->unk328 = TRUE;
     else
         gUnknown_203B490->unk328 = FALSE;
     
-    RestoreIntegerBits(&backup, gUnknown_203B490->unk190, 0x140);
-    RestoreIntegerBits(&backup, gUnknown_203B490->unk1B8, 0x3C0);
-    for(index = 0; index < 0x10; index++)
+    ReadBits(&backup, gUnknown_203B490->unk190, 40 * 8);
+    ReadBits(&backup, gUnknown_203B490->unk1B8, 120 * 8);
+    for (index = 0; index < 16; index++)
     {
-        RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].checksum, 0x20);
-        RestoreIntegerBits(&backup, &gUnknown_203B490->unk230[index].sub.seed, 0x18);
-        RestoreDungeonLocation(&backup, &gUnknown_203B490->unk230[index].sub.dungeon);
+        ReadBits(&backup, &gUnknown_203B490->unk230[index].checksum, 32);
+        ReadBits(&backup, &gUnknown_203B490->unk230[index].sub.seed, 24);
+        ReadDungeonLocationBits(&backup, &gUnknown_203B490->unk230[index].sub.dungeon);
     }
-    nullsub_102(&backup);
-    return backup.unk8;
+    FinishBitSerializer(&backup);
+    return backup.count;
 }
 
 u32 SaveMailInfo(u8 *r0, u32 size)
 {
     s32 index;
-    unkStruct_8094924 backup;
+    DataSerializer backup;
     u32 temp;
 
-    xxx_init_struct_8094924_save_809486C(&backup, r0, size);
+    InitBitWriter(&backup, r0, size);
     for(index = 0; index < NUM_MAILBOX_SLOTS; index++)
     {
-        SaveWonderMail(&backup, &gUnknown_203B490->mailboxSlots[index]);
+        WriteWonderMailBits(&backup, &gUnknown_203B490->mailboxSlots[index]);
     }
     for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
-        SaveWonderMail(&backup, &gUnknown_203B490->pelipperBoardJobs[index]);
+        WriteWonderMailBits(&backup, &gUnknown_203B490->pelipperBoardJobs[index]);
     }
     for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
     {
-        SaveWonderMail(&backup, &gUnknown_203B490->jobSlots[index]);
+        WriteWonderMailBits(&backup, &gUnknown_203B490->jobSlots[index]);
     }
     for(index = 0; index < 0x38; index++)
     {
@@ -1408,51 +1408,51 @@ u32 SaveMailInfo(u8 *r0, u32 size)
             temp = -1;
         else
             temp = 0;
-        SaveIntegerBits(&backup, &temp, 1);
+        WriteBits(&backup, &temp, 1);
     }
     if(gUnknown_203B490->unk328)
         temp = -1;
     else
         temp = 0;
-    SaveIntegerBits(&backup, &temp, 1);
-    SaveIntegerBits(&backup, gUnknown_203B490->unk190, 0x140);
-    SaveIntegerBits(&backup, gUnknown_203B490->unk1B8, 0x3C0);
+    WriteBits(&backup, &temp, 1);
+    WriteBits(&backup, gUnknown_203B490->unk190, 0x140);
+    WriteBits(&backup, gUnknown_203B490->unk1B8, 0x3C0);
     for(index = 0; index < 0x10; index++)
     {
-        SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].checksum, 0x20);
-        SaveIntegerBits(&backup, &gUnknown_203B490->unk230[index].sub.seed, 0x18);
-        SaveDungeonLocation(&backup, &gUnknown_203B490->unk230[index].sub.dungeon);
+        WriteBits(&backup, &gUnknown_203B490->unk230[index].checksum, 0x20);
+        WriteBits(&backup, &gUnknown_203B490->unk230[index].sub.seed, 0x18);
+        WriteDungeonLocationBits(&backup, &gUnknown_203B490->unk230[index].sub.dungeon);
     }
-    nullsub_102(&backup);
-    return backup.unk8;
+    FinishBitSerializer(&backup);
+    return backup.count;
 }
 
-void RestoreWonderMail(unkStruct_8094924 *a, WonderMail *b)
+void ReadWonderMailBits(DataSerializer *a, WonderMail *b)
 {
-    RestoreIntegerBits(a, &b->mailType, 4);
-    RestoreIntegerBits(a, &b->missionType, 3);
-    RestoreIntegerBits(a, &b->unk2, 4);
-    RestoreIntegerBits(a, &b->clientSpecies, 9);
-    RestoreIntegerBits(a, &b->targetSpecies, 9);
-    RestoreIntegerBits(a, &b->targetItem, 8);
-    RestoreIntegerBits(a, &b->rewardType, 4);
-    RestoreIntegerBits(a, &b->itemReward, 8);
-    RestoreIntegerBits(a, &b->friendAreaReward, 6);
-    RestoreIntegerBits(a, &b->unk4.seed, 0x18);
-    RestoreDungeonLocation(a, &b->unk4.dungeon);
+    ReadBits(a, &b->mailType, 4);
+    ReadBits(a, &b->missionType, 3);
+    ReadBits(a, &b->unk2, 4);
+    ReadBits(a, &b->clientSpecies, 9);
+    ReadBits(a, &b->targetSpecies, 9);
+    ReadBits(a, &b->targetItem, 8);
+    ReadBits(a, &b->rewardType, 4);
+    ReadBits(a, &b->itemReward, 8);
+    ReadBits(a, &b->friendAreaReward, 6);
+    ReadBits(a, &b->unk4.seed, 24);
+    ReadDungeonLocationBits(a, &b->unk4.dungeon);
 }
 
-void SaveWonderMail(unkStruct_8094924 *a, WonderMail *b)
+void WriteWonderMailBits(DataSerializer *a, WonderMail *b)
 {
-    SaveIntegerBits(a, &b->mailType, 4);
-    SaveIntegerBits(a, &b->missionType, 3);
-    SaveIntegerBits(a, &b->unk2, 4);
-    SaveIntegerBits(a, &b->clientSpecies, 9);
-    SaveIntegerBits(a, &b->targetSpecies, 9);
-    SaveIntegerBits(a, &b->targetItem, 8);
-    SaveIntegerBits(a, &b->rewardType, 4);
-    SaveIntegerBits(a, &b->itemReward, 8);
-    SaveIntegerBits(a, &b->friendAreaReward, 6);
-    SaveIntegerBits(a, &b->unk4.seed, 0x18);
-    SaveDungeonLocation(a, &b->unk4.dungeon);
+    WriteBits(a, &b->mailType, 4);
+    WriteBits(a, &b->missionType, 3);
+    WriteBits(a, &b->unk2, 4);
+    WriteBits(a, &b->clientSpecies, 9);
+    WriteBits(a, &b->targetSpecies, 9);
+    WriteBits(a, &b->targetItem, 8);
+    WriteBits(a, &b->rewardType, 4);
+    WriteBits(a, &b->itemReward, 8);
+    WriteBits(a, &b->friendAreaReward, 6);
+    WriteBits(a, &b->unk4.seed, 24);
+    WriteDungeonLocationBits(a, &b->unk4.dungeon);
 }

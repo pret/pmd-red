@@ -149,77 +149,82 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
   switch(param_1_s32)
   {
       case 3:
-        if (((u32)(param_2 - 1) < 0x1b)) {
+        if (param_2 > 0 && param_2 < 28) {
             if (ScriptVarScenarioAfter(SCENARIO_MAIN,8,-1)) {
-                sub_80976F8(0);
+                SetAdventureAchievement(AA_HILL_OF_ANCIENTS);
             }
-            if (ScriptVarScenarioAfter(SCENARIO_MAIN,0xb,3)) {
-                sub_80976F8(1);
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN,11,3)) {
+                SetAdventureAchievement(AA_FUGITIVE);
             }
-            if (ScriptVarScenarioAfter(SCENARIO_MAIN,0x11,0)) {
-                sub_80976F8(2);
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN,17,0)) {
+                SetAdventureAchievement(AA_PREVENT_METEOR);
             }
         }
         break;
       case 4:
-        if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x1f,0) == 0) {
-            sub_80976F8(4);
+        if (ScriptVarScenarioBefore(SCENARIO_SUB1,31,0) == 0) {
+            SetAdventureAchievement(AA_TEAM_BASE_DONE);
         }
-        if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x20,0) == 0) {
-            sub_80976F8(5);
+        if (ScriptVarScenarioBefore(SCENARIO_SUB1,32,0) == 0) {
+            SetAdventureAchievement(AA_SMEARGLE);
         }
         break;
       case 0xC:
-        if(ScriptVarScenarioBefore(SCENARIO_SUB9,0x37,2) == 0) {
-            sub_80976F8(3);
+        if(ScriptVarScenarioBefore(SCENARIO_SUB9,55,2) == 0) {
+            SetAdventureAchievement(AA_BROKE_CURSE);
         }
         break;
   }
 }
 
-bool8 ScriptVarScenarioBefore(s16 param_1,u32 param_2,s32 param_3)
+bool8 ScriptVarScenarioBefore(s16 varId,u32 pMain,s32 pSub)
 {
-  s32 uVar1;
-  s32 iVar2;
-  
-  uVar1 = GetScriptVarArrayValue(NULL,param_1,0);
-  iVar2 = GetScriptVarArrayValue(NULL,param_1,1);
-  if ((uVar1 != 0x3a) &&
-     (uVar1 < param_2 || (param_3 >= 0 && (uVar1 == param_2) && (iVar2 < param_3)))) {
+  s32 sMain;
+  s32 sSub;
+
+  sMain = GetScriptVarArrayValue(NULL, varId, 0);
+  sSub = GetScriptVarArrayValue(NULL, varId, 1);
+  if (sMain == 0x3a) {
+    // DS: Assert(FALSE, "debug mode scenario comp %3d %3d %3d", varId, pMain, pSub)
+    return FALSE;
+  } else if (sMain < pMain) {
     return TRUE;
-  }
-  else {
+  } else if (pSub >= 0 && sMain == pMain && sSub < pSub) {
+    return TRUE;
+  } else {
     return FALSE;
   }
 }
 
-bool8 ScriptVarScenarioEqual(s16 param_1,u32 param_2,s32 param_3)
+bool8 ScriptVarScenarioEqual(s16 varId,u32 pMain,s32 pSub)
 {
-  s32 uVar1;
-  s32 iVar2;
-  
-  uVar1 = GetScriptVarArrayValue(NULL, param_1, 0);
-  iVar2 = GetScriptVarArrayValue(NULL, param_1, 1);
-  if (((uVar1 == param_2 && (((param_3 < 0) || (iVar2 == param_3)))))) {
-    return TRUE;
+  s32 sMain;
+  s32 sSub;
+
+  sMain = GetScriptVarArrayValue(NULL, varId, 0);
+  sSub = GetScriptVarArrayValue(NULL, varId, 1);
+  if (sMain == pMain) {
+    if (pSub < 0) return TRUE;
+    if (sSub == pSub) return TRUE;
   }
-  else {
-    return FALSE;
-  }
+  return FALSE;
 }
 
-bool8 ScriptVarScenarioAfter(s16 param_1,u32 param_2,s32 param_3)
+bool8 ScriptVarScenarioAfter(s16 varId,u32 pMain,s32 pSub)
 {
-  s32 uVar1;
-  s32 iVar2;
-  
-  uVar1 = GetScriptVarArrayValue(NULL, param_1, 0);
-  iVar2 = GetScriptVarArrayValue(NULL, param_1, 1);
-  if ((uVar1 != 0x3a) &&
-     ((uVar1 > param_2 || (((param_3 >= 0 && (uVar1 == param_2)) && (iVar2 > param_3)))))) {
+  s32 sMain;
+  s32 sSub;
+
+  sMain = GetScriptVarArrayValue(NULL, varId, 0);
+  sSub = GetScriptVarArrayValue(NULL, varId, 1);
+  if (sMain == 0x3a) {
+    // DS: Assert(FALSE, "debug mode scenario comp %3d %3d %3d", varId, pMain, pSub)
+    return FALSE;
+  } else if (sMain > pMain) {
     return TRUE;
-  }
-  else {
+  } else if (pSub >= 0 && sMain == pMain && sSub > pSub) {
+    return TRUE;
+  } else {
     return FALSE;
   }
 }

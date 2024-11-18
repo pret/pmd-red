@@ -50,7 +50,7 @@ void sub_8041888(u8 param_1);
 void sub_8085140(void);
 void sub_807360C(void);
 void sub_805EFB4(Entity *, u8);
-void sub_8074FB0(Entity *, u8, Position *);
+void sub_8074FB0(Entity *, u8, DungeonPos *);
 
 void HandlePlaceItemAction(Entity *);
 void HandlePickUpPlayerAction(Entity *);
@@ -72,7 +72,7 @@ extern u8 sub_8044B28(void);
 extern u8 UseAttack(Entity *);
 void sub_806A1E8(Entity *pokemon);
 extern void sub_80694C0(Entity *, s32, s32, u32);
-bool8 sub_804AE08(Position *pos);
+bool8 sub_804AE08(DungeonPos *pos);
 void HandlePickUpAIAction(Entity *pokemon);
 void HandleThrowItemAIAction(Entity *pokemon);
 void HandleEatAIAction(Entity *pokemon);
@@ -96,7 +96,7 @@ Entity* GetLeaderIfVisible(Entity *pokemon)
     {
         Entity *leader = GetLeader();
         if (leader &&
-            GetEntInfo(leader)->waitingStruct.waitingStatus != STATUS_DECOY &&
+            GetEntInfo(leader)->curseClassStatus.status != STATUS_DECOY &&
             GetTreatmentBetweenMonsters(pokemon, leader, FALSE, FALSE) == TREATMENT_TREAT_AS_ALLY &&
             CanTargetEntity(pokemon, leader))
         {
@@ -114,8 +114,8 @@ bool8 sub_8072CF4(Entity *entity)
     s32 index;
     EntityInfo *info;
     bool8 bVar14;
-    Position pos;
-    Position pos1;
+    DungeonPos pos;
+    DungeonPos pos1;
 
     sub_804178C(1);
     gUnknown_203B434 = 1;
@@ -169,23 +169,23 @@ bool8 sub_8072CF4(Entity *entity)
     gUnknown_202F222 = 0;
     switch(info->action.action) {
         case ACTION_WALK:
-            if(info->immobilize.immobilizeStatus == STATUS_SHADOW_HOLD)
+            if(info->frozenClassStatus.status == STATUS_SHADOW_HOLD)
             {
                 goto _282;
             }
-            else if(info->immobilize.immobilizeStatus == STATUS_CONSTRICTION)
+            else if(info->frozenClassStatus.status == STATUS_CONSTRICTION)
             {
                 goto _282;
             }
-            else if(info->immobilize.immobilizeStatus == STATUS_INGRAIN)
+            else if(info->frozenClassStatus.status == STATUS_INGRAIN)
             {
                 goto _282;
             }
-            else if(info->immobilize.immobilizeStatus == STATUS_WRAP)
+            else if(info->frozenClassStatus.status == STATUS_WRAP)
             {
                 goto _282;
             }
-            else if(info->immobilize.immobilizeStatus == STATUS_WRAPPED)
+            else if(info->frozenClassStatus.status == STATUS_WRAPPED)
             {
             _282:
                 info->action.action = ACTION_NOTHING;
@@ -210,7 +210,7 @@ bool8 sub_8072CF4(Entity *entity)
                     pos.y = entity->pos.y;
                     sub_80694C0(entity,pos1.x,pos1.y,0);
                     sub_8074FB0(entity,(info->action).direction,&pos);
-                    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->transformStatus.transformStatus != STATUS_MOBILE)) &&
+                    if (((IQSkillIsEnabled(entity, IQ_SUPER_MOBILE)) && (info->invisibleClassStatus.status != STATUS_MOBILE)) &&
                         (!HasHeldItem(entity,ITEM_MOBILE_SCARF))) {
                         sub_804AE08(&entity->pos);
                     }
@@ -223,8 +223,8 @@ bool8 sub_8072CF4(Entity *entity)
             HandleUseMoveAIAction(entity);
             break;
         case ACTION_STAIRS:
-            if ((gDungeon->dungeonLocation.id == DUNGEON_METEOR_CAVE) && (!gDungeon->deoxysDefeat)) {
-                TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FA5B4); // It's impossible to go down the stairs now!
+            if ((gDungeon->unk644.dungeonLocation.id == DUNGEON_METEOR_CAVE) && (!gDungeon->deoxysDefeat)) {
+                LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FA5B4); // It's impossible to go down the stairs now!
             }
             else
             {
@@ -282,8 +282,8 @@ bool8 sub_8072CF4(Entity *entity)
                 sub_80671A0(entity);
                 break;
             }
-            SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
-            TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FE6D4);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
+            LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FE6D4);
             break;
         case ACTION_TALK_FIELD:
             HandleTalkFieldAction(entity);
@@ -310,8 +310,8 @@ bool8 sub_8072CF4(Entity *entity)
             HandleThrowItemAIAction(entity);
             break;
         case ACTION_SECOND_THOUGHTS:
-            SetMessageArgument(gFormatBuffer_Monsters[0],entity,0);
-            TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FE478);
+            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
+            LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FE478);
             break;
         default:
             info->action.action = ACTION_PASS_TURN;
@@ -339,7 +339,7 @@ bool8 sub_8072CF4(Entity *entity)
                     }
                 }
                 if (bVar4) {
-                    TryDisplayDungeonLoggableMessage(entity,*gUnknown_80FD2CC);
+                    LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FD2CC);
                 }
             }
             sub_807360C();
@@ -358,7 +358,7 @@ bool8 sub_8072CF4(Entity *entity)
                     sub_8046D20();
                 }
                 sub_8041888(0);
-                if (((EntityExists(entity)) && (!info->aiNextToTarget)) && (!bVar14)) {
+                if (((EntityExists(entity)) && (!info->aiAllySkip)) && (!bVar14)) {
                     if (sub_80706A4(entity,&entity->pos) != '\0') {
                         sub_807D148(entity,entity,0,0);
                     }

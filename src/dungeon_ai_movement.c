@@ -43,7 +43,7 @@ struct CanMoveInDirectionInfo
 
 const s32 gFaceDirectionIncrements[] = {0, 1, -1, 2, -2, 3, -3, 4, 0, -1, 1, -2, 2, -3, 3, 4};
 
-void MoveIfPossible(Entity *pokemon, bool8 showRunAwayEffect)
+void AIMovement(Entity *pokemon, bool8 showRunAwayEffect)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     pokemonInfo->aiTarget.aiNotNextToTarget = FALSE;
@@ -67,7 +67,7 @@ void MoveIfPossible(Entity *pokemon, bool8 showRunAwayEffect)
     {
         pokemonInfo->action.action = ACTION_NOTHING;
     }
-    else if (pokemonInfo->clientType == CLIENT_TYPE_CLIENT)
+    else if (pokemonInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
     {
         SetActionPassTurnOrWalk(&pokemonInfo->action, pokemonInfo->id);
         pokemonInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
@@ -104,7 +104,7 @@ void MoveIfPossible(Entity *pokemon, bool8 showRunAwayEffect)
 bool8 CanTakeItem(Entity *pokemon)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
-    struct Tile *mapTile;
+    const Tile *mapTile;
     Entity *object;
     if (!EntityExists(pokemon) || CheckVariousConditions(pokemon))
     {
@@ -148,9 +148,9 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         bool8 canCrossWalls;
         s32 targetDistance;
         s32 i;
-        if (gDungeon->decoyActive)
+        if (gDungeon->decoyIsActive)
         {
-            possibleTargets = gDungeon->allPokemon;
+            possibleTargets = gDungeon->activePokemon;
             maxPossibleTargets = DUNGEON_MAX_POKEMON;
         }
         else if (pokemonInfo->isNotTeamMember)
@@ -169,16 +169,16 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         for (i = 0; i < maxPossibleTargets; i++)
         {
             Entity *target = possibleTargets[i];
-            if (EntityExists(target) && GetEntInfo(target)->clientType == CLIENT_TYPE_NONE)
+            if (EntityExists(target) && GetEntInfo(target)->monsterBehavior == BEHAVIOR_FIXED_ENEMY)
             {
-                if (gDungeon->decoyActive)
+                if (gDungeon->decoyIsActive)
                 {
                     if (GetTreatmentBetweenMonsters(pokemon, target, FALSE, TRUE) != TREATMENT_TREAT_AS_ENEMY)
                     {
                         continue;
                     }
                 }
-                else if (!pokemonInfo->isNotTeamMember && GetEntInfo(target)->immobilize.immobilizeStatus == STATUS_PETRIFIED)
+                else if (!pokemonInfo->isNotTeamMember && GetEntInfo(target)->frozenClassStatus.status == STATUS_PETRIFIED)
                 {
                     continue;
                 }
@@ -310,7 +310,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         {
             for (x = minX; x <= maxX; x++)
             {
-                Entity *object = GetTileSafe(x, y)->object;
+                Entity *object = GetTileMut(x, y)->object;
                 if (object && GetEntityType(object) == ENTITY_ITEM)
                 {
                     pokemonInfo->aiTarget.aiObjective = AI_TAKE_ITEM;
@@ -405,7 +405,7 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
         if (!pokemonInfo->isNotTeamMember && !pokemonInfo->recalculateFollow)
         {
             pokemonInfo->aiTarget.aiNotNextToTarget = TRUE;
-            pokemonInfo->aiNextToTarget = TRUE;
+            pokemonInfo->aiAllySkip = TRUE;
             SetMonsterActionFields(&pokemonInfo->action, ACTION_PASS_TURN);
             pokemonInfo->waiting = TRUE;
             return;
@@ -492,11 +492,11 @@ void DecideMovement(Entity *pokemon, bool8 showRunAwayEffect)
     if (pokemonInfo->isTeamLeader)
     {
         pokemonInfo->aiTarget.aiNotNextToTarget = FALSE;
-        pokemonInfo->aiNextToTarget = FALSE;
+        pokemonInfo->aiAllySkip = FALSE;
     }
     else if (pokemonInfo->aiTarget.aiNotNextToTarget)
     {
-        pokemonInfo->aiNextToTarget = TRUE;
+        pokemonInfo->aiAllySkip = TRUE;
     }
 }
 
@@ -511,9 +511,9 @@ bool8 AvoidEnemies(Entity *pokemon)
     Entity **possibleTargets;
     s32 numPossibleTargets;
     s32 i;
-    if (gDungeon->decoyActive)
+    if (gDungeon->decoyIsActive)
     {
-        possibleTargets = gDungeon->allPokemon;
+        possibleTargets = gDungeon->activePokemon;
         numPossibleTargets = DUNGEON_MAX_POKEMON;
     }
     else if (pokemonInfo->isNotTeamMember)
@@ -534,7 +534,7 @@ bool8 AvoidEnemies(Entity *pokemon)
         if (EntityExists(target) && CanSeeTarget(pokemon, target))
         {
             s32 distance;
-            if (gDungeon->decoyActive && GetTreatmentBetweenMonsters(pokemon, target, FALSE, TRUE) != TREATMENT_TREAT_AS_ENEMY)
+            if (gDungeon->decoyIsActive && GetTreatmentBetweenMonsters(pokemon, target, FALSE, TRUE) != TREATMENT_TREAT_AS_ENEMY)
             {
                 continue;
             }
@@ -553,17 +553,17 @@ bool8 AvoidEnemies(Entity *pokemon)
     {
         if (room == closestTargetRoom && room != CORRIDOR_ROOM)
         {
-            struct Tile *tile = GetTile(pokemon->pos.x, pokemon->pos.y);
+            const Tile *tile = GetTile(pokemon->pos.x, pokemon->pos.y);
             if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
             {
-                Position aiTargetPos;
+                DungeonPos aiTargetPos;
                 s32 targetDir;
                 aiTargetPos.x = pokemon->pos.x;
                 aiTargetPos.y = pokemon->pos.y;
                 // Scan for a direction leading outside the room.
                 for (targetDir = 0; targetDir < NUM_DIRECTIONS; targetDir++)
                 {
-                    struct Tile *adjacentTile;
+                    const Tile *adjacentTile;
                     aiTargetPos.x = pokemon->pos.x + gAdjacentTileOffsets[targetDir].x;
                     aiTargetPos.y = pokemon->pos.y + gAdjacentTileOffsets[targetDir].y;
                     adjacentTile = GetTile(aiTargetPos.x, aiTargetPos.y);
@@ -593,7 +593,7 @@ bool8 AvoidEnemies(Entity *pokemon)
                 // If there are any room exits that the Pokémon can head towards without moving
                 // closer to the target, head towards the furthest eligible exit.
                 s32 naturalJunctionListCounts;
-                Position *naturalJunctionList = gDungeon->naturalJunctionList[room];
+                DungeonPos *naturalJunctionList = gDungeon->naturalJunctionList[room];
                 s32 furthestTargetExitIndex;
                 s32 furthestTargetToExitDistance;
                 s32 distanceX;
@@ -735,7 +735,7 @@ bool8 Wander(Entity *pokemon)
     else
     {
         s32 naturalJunctionListCounts = gDungeon->naturalJunctionListCounts[room];
-        Position *naturalJunctionList = gDungeon->naturalJunctionList[room];
+        DungeonPos *naturalJunctionList = gDungeon->naturalJunctionList[room];
         if (pokemonInfo->moveRandomly)
         {
             s32 targetFacingDir = DungeonRandInt(NUM_DIRECTIONS);
