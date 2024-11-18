@@ -1919,50 +1919,42 @@ UNUSED static void nullsub_157(void)
 {
 }
 
-// https://decomp.me/scratch/4tFKb
-void sub_8007AA4(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
+void sub_8007AA4(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
 {
-    s32 r2;
-    s32 r3;
-    UnkTextStruct1 *r4;
-    u32 ip;
-    u32 *dest;
-    struct unkStruct_80B8848 dataLOL;
+    struct UnkTextStruct1 *r4 = &a0[a1];
+    u32 ip = gUnknown_80B853C[color & 0xF] + 0x11111111;
+    struct unkStruct_80B8848 dataLOL = gUnknown_80B8848;
+    s32 r3 = y / 8;
+    u32 *dest = r4->unk18 + ((r4->unk4 * r3 + x / 8) * 8);
+    s32 r2 = x / 8;
 
-    r4 = &a0[a1];
-    ip = gUnknown_80B853C[color & 0xF] + 0x11111111;
-    #ifndef NONMATCHING
-    asm("" : : : "r8");
-    #endif // NONMATCHING
-    dataLOL = gUnknown_80B8848;
-    a4++; a4--;
-    r3 = y / 8;
-
-    dest = r4->unk18 + ((r4->unk4 * r3 + x / 8) * 8);
-    r2 = x / 8;
     dest += r3 * -8 + y;
     ip &= dataLOL.arr[x & 7];
 
-    if (r2 >= r4->unk4)
-        return;
-    goto thecheck;
-label:
-    y++;
-    dest++;
-    if ((y % 8) == 0)
-        dest += r4->unk20;
-    a4--;
-thecheck:
-    if (a4 <= 0 || r3 >= r4->unk8)
-        return;
+    if (r2 < r4->unk4) {
+        // This goto looks like a fakematch, but I couldn't get it to work otherwise.
+        goto LOOP_MIDDLE;
+        while (1) {
+            y++;
+            dest++;
+            if ((y % 8) == 0)
+                dest += r4->unk20;
+            a4--;
 
-    dest[0] |= ip;
+        LOOP_MIDDLE:
+            if (a4 <= 0)
+                return;
+            if (r3 >= r4->unk8)
+                return;
 
-    if (r4->unk3C > dest)
-        r4->unk3C = dest;
-    if (r4->unk40 < dest)
-        r4->unk40 = dest;
-    goto label;
+            dest[0] |= ip;
+
+            if (r4->unk3C > dest)
+                r4->unk3C = dest;
+            if (r4->unk40 < dest)
+                r4->unk40 = dest;
+        }
+    }
 }
 
 void sub_8007B7C(u32 a0, s32 x, s32 y, s32 a3, u32 color)
