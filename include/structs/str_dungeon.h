@@ -123,7 +123,7 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
 // Defines many of the key properties for dungeon generation, such as the type of layout, base number of rooms, and floor connectivity.
 typedef struct FloorProperties
 {
-    u8 unk0;
+    u8 layout;
     s8 roomDensity;
     u8 unk2;
     u8 unk3;
@@ -148,7 +148,7 @@ typedef struct FloorProperties
     u8 unk16;
     u8 unk17;
     u8 unk18;
-    u8 unk19;
+    u8 itemlessMonsterHouseChance; // Chance that a monster house will be itemless
     u8 unk1A;
 } FloorProperties;
 
@@ -371,7 +371,7 @@ typedef struct Dungeon
     /* 0x3A0E */ s16 tileset;
     /* 0x3A10 */ s16 unk3A10;
     /* 0x3A12 */ s16 unk3A12;
-    /* 0x3A14 */ s16 fixedRoomId;
+    /* 0x3A14 */ s16 fixedRoomNumber;
     /* 0x3A16 */ s16 unk3A16;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     /* 0xEA18 */ DungeonPos playerSpawn;

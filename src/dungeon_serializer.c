@@ -414,7 +414,7 @@ static void WriteDungeonFloor(DataSerializer *seri)
     WriteS16(seri, gDungeon->tileset);
     WriteS16(seri,gDungeon->unk3A10);
     WriteS16(seri, gDungeon->unk3A12);
-    WriteS16(seri, gDungeon->fixedRoomId);
+    WriteS16(seri, gDungeon->fixedRoomNumber);
     WriteS16(seri, gDungeon->unk3A16);
 
     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
@@ -776,7 +776,7 @@ static void ReadDungeonFloor(DataSerializer *seri)
     gDungeon->tileset = ReadS16(seri);
     gDungeon->unk3A10 = ReadS16(seri);
     gDungeon->unk3A12 = ReadS16(seri);
-    gDungeon->fixedRoomId = ReadS16(seri);
+    gDungeon->fixedRoomNumber = ReadS16(seri);
     gDungeon->unk3A16 = ReadS16(seri);
 
     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {

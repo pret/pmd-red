@@ -311,7 +311,6 @@ extern void sub_803DF60(void);
 extern void sub_803E02C(void);
 extern void sub_8049840(void);
 extern void sub_80847D4(void);
-extern void sub_804AFAC(void);
 extern void sub_8043D60(void);
 extern void sub_806890C(void);
 extern void sub_8068614(void);
@@ -607,7 +606,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             gDungeon->weather.weather = 0;
             gDungeon->tileset = gDungeon->unk1C574.unk2;
             gDungeon->unk3A10 = gDungeon->unk1C574.unk3;
-            gDungeon->fixedRoomId = gDungeon->unk1C574.unk12;
+            gDungeon->fixedRoomNumber = gDungeon->unk1C574.unk12;
             sub_807E5E4(0);
             sub_80842F0();
         }
@@ -637,7 +636,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         ShowDungeonNameBanner();
 
         if (!r6) {
-            sub_804AFAC();
+            GenerateFloor();
             gDungeon->unk644.windTurns = GetTurnLimit(gDungeon->unk644.dungeonLocation.id);
             gDungeon->unk644.unk36 = 0;
         }

@@ -20,18 +20,18 @@ void sub_8084854(struct unkData_8107234 *);
 
 void sub_80847D4(void)
 {
-    u32 fixedRoomId;
+    u32 fixedRoomNumber;
     s32 index;
 
     gDungeon->unk3A0D = 0;
     gDungeon->unk1356C = 0;
     sub_8040A84();
     for(index = 0; index < 0x3e7 && gUnknown_8107234[index].unk0[0] != 0;  index++) {
-        fixedRoomId = gDungeon->fixedRoomId;
-        if (fixedRoomId - 0x1c < 0x16) {
-            fixedRoomId = 0x1b;
+        fixedRoomNumber = gDungeon->fixedRoomNumber;
+        if (fixedRoomNumber - 0x1c < 0x16) {
+            fixedRoomNumber = 0x1b;
         }
-        if (fixedRoomId == gUnknown_8107234[index].unk0[0])
+        if (fixedRoomNumber == gUnknown_8107234[index].unk0[0])
         {
             sub_8084854(&gUnknown_8107234[index]);
             break;

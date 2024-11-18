@@ -9,6 +9,26 @@
 #define GENERATION_CONSTANT_NO_IMPERFECTIONS_CHANCE 60 // (0 to 100) probability that a room will not have imperfections, if it was already flagged for them
 #define GENERATION_CONSTANT_SECONDARY_STRUCTURE_FLAG_CHANCE 80 // (0 to 100) probability that a room will be flagged to have a secondary structure.
 
+enum FloorLayout {
+    LAYOUT_LARGE,
+	LAYOUT_SMALL,
+	LAYOUT_ONE_ROOM_MONSTER_HOUSE,
+	LAYOUT_OUTER_RING,
+	LAYOUT_CROSSROADS,
+	LAYOUT_TWO_ROOMS_WITH_MONSTER_HOUSE,
+	LAYOUT_LINE,
+	LAYOUT_CROSS,
+	LAYOUT_LARGE_0x8,
+	LAYOUT_BEETLE,
+	LAYOUT_OUTER_ROOMS,
+	LAYOUT_MEDIUM,
+	LAYOUT_UNUSED_0xC,
+	LAYOUT_UNUSED_0xD,
+	LAYOUT_UNUSED_0xE,
+	LAYOUT_UNUSED_0xF,
+	NUM_FLOOR_LAYOUTS
+};
+
 enum FloorSize {
 	FLOOR_SIZE_LARGE,
 	FLOOR_SIZE_SMALL,
@@ -31,6 +51,7 @@ enum SecondaryStructureType {
     SECONDARY_STRUCTURE_DIVIDER, // A "divider" of secondary terrain will split the room in half randomly either horizontally or vertically.
 };
 
+void GenerateFloor(void);
 bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable);
 
 #endif

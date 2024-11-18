@@ -274,7 +274,7 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
 	.space 0x10
 
     .include "src/dungeon_map_access.o"
-	.include "src/dungeon_generation.o"
+    .include "src/dungeon_generation.o"
     .include "src/dungeon_message.o"
     .include "src/dungeon_move.o"
     .include "src/code_805D8C8_1.o"

@@ -65,10 +65,10 @@ struct GridCell
 
 #define GRID_CELL_LEN 15
 
-static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomId, FloorProperties *floorProps);
+static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomNumber, FloorProperties *floorProps);
 static void CreateRoomsAndAnchorsForFixedFloor(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, s32 a5, s32 fixedRoomSizeX, s32 fixedRoomSizeY);
-void sub_8051438(struct GridCell *gridCell, s32 fixedRoomId);
-void sub_8051288(s32 fixedRoomId);
+void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber);
+void sub_8051288(s32 fixedRoomNumber);
 void GetGridPositions(s32 *listX, s32 *listY, s32 gridSizeX, s32 gridSizeY);
 void InitDungeonGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
 void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
@@ -91,9 +91,9 @@ void CreateHallway(s32 startX, s32 startY, s32 endX, s32 endY, bool8 vertical, s
 void EnsureImpassableTilesAreWalls(void);
 void sub_804FC74(void);
 void sub_804EB30(void);
-void sub_804E9DC(void);
+void FinalizeJunctions(void);
 void sub_804B534(s32 a0, s32 a1, s32 a2, s32 a3);
-bool8 GenerateFixedFloor(s32 fixedRoomId, FloorProperties *floorProps);
+bool8 ProcessFixedRoom(s32 fixedRoomNumber, FloorProperties *floorProps);
 void GenerateStandardFloor(s32 a0, s32 a1, FloorProperties *a2);
 void GenerateOuterRingFloor(FloorProperties *a0);
 void GenerateCrossroadsFloor(FloorProperties *a0);
@@ -108,20 +108,20 @@ void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse);
 bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable);
 void ResetInnerBoundaryTileRows(void);
 
-EWRAM_DATA u8 gUnknown_202F1A8 = 0;
-EWRAM_DATA u8 gUnknown_202F1A9 = 0;
+EWRAM_DATA bool8 gUnknown_202F1A8 = FALSE;
+static EWRAM_DATA bool8 sInvalidGeneration = FALSE;
 static EWRAM_DATA bool8 sHasKecleonShop = FALSE;
-EWRAM_DATA bool8 sHasMonsterHouse = FALSE;
+static EWRAM_DATA bool8 sHasMonsterHouse = FALSE;
 static EWRAM_DATA bool8 sHasMaze = FALSE;
 static EWRAM_DATA bool8 sSecondSpawn = FALSE;
 static EWRAM_DATA u8 sFloorSize = 0;
 static EWRAM_DATA s16 sKecleonShopChance = 0;
 static EWRAM_DATA s16 sMonsterHouseChance = 0;
 static EWRAM_DATA u8 sStairsRoomIndex = 0;
-EWRAM_DATA struct MinMaxPosition sKecleonShopPosition = {0};
+static EWRAM_DATA struct MinMaxPosition sKecleonShopPosition = {0};
 static EWRAM_DATA s32 sSecondaryStructuresBudget = 0;
 static EWRAM_DATA s32 sNumRooms = 0;
-EWRAM_DATA s32 gUnknown_202F1D0 = 0;
+static EWRAM_DATA s32 sFloorLayout = 0;
 static EWRAM_DATA s32 sNumTilesReachableFromStairs = 0;
 static EWRAM_DATA DungeonPos sKecleonShopMiddlePos = {0};
 
@@ -160,13 +160,32 @@ struct FixedRoomsData
     u8 unk3[0]; // Not sure about the size;
 };
 
-// Some weird-ass regswap prevents the function from being matched - https://decomp.me/scratch/9SUV3
-#ifdef NONMATCHING
-void sub_804AFAC(void)
+/*
+ * GenerateFloor - The Master Function for generating a dungeon floor
+ *
+ * Runs based on 3 loop levels of safety
+ *
+ * Innermost Loop: 32 attempts for deciding the maximum rooms in each dimension for the floor
+ * 		- The dimensions are capped at 6x4 (but we can randomize outside this range and fail)
+ * 		- Must maintain a certain number of tiles per grid cell in both dimensions
+ * 		- If this loop fails 32 times, defaults to a 4x4 maximum
+ *
+ * Inner Main Loop: 10 attempts for the main layout of a floor
+ * 		- This loop can fail by being marked invalid during generation
+ * 		- Or, it can fail by having < 2 rooms or < 20 room tiles
+ * 		- This occurs prior to secondary terrain generation
+ * 		- If the loop fails 10 times, defaults to generating a One-Room Monster House
+ *
+ * Outermost Loop: 10 attempts for everything involved in generating a layout
+ * 		- This is where secondary terrain generation and junction additions takes place
+ * 		- This loop can fail during spawn location verification (can you get to the stairs?)
+ * 		- If the loop fails 10 times, defaults to generating a One-Room Monster House
+ */
+void GenerateFloor(void)
 {
     s32 x, y;
-    s32 i, j, k;
-    bool8 r10 = FALSE;
+    s32 spawnAttempts;
+    bool8 secondaryGen = FALSE;
     FloorProperties *floorProps = &gDungeon->unk1C574;
 
     gDungeon->unk13568 = OpenFileAndGetFileDataPtr(gUnknown_80F6DCC, &gDungeonFileArchive);
@@ -178,208 +197,238 @@ void sub_804AFAC(void)
     sFloorSize = 0;
     sKecleonShopChance = floorProps->kecleonShopChance;
     sMonsterHouseChance = floorProps->monsterHouseChance;
-    sSecondSpawn = 1;
-    sKecleonShopPosition.unk0 = -1;
-    sKecleonShopPosition.unk8 = -1;
-    sKecleonShopPosition.unk4 = -1;
-    sKecleonShopPosition.unkC = -1;
+    sSecondSpawn = TRUE;
+    sKecleonShopPosition.minX = -1;
+    sKecleonShopPosition.maxX = -1;
+    sKecleonShopPosition.minY = -1;
+    sKecleonShopPosition.maxY = -1;
 
     ResetFloor();
 
-    gDungeon->unk664 = floorProps->unk6;
+    gDungeon->unk644.unk20 = abs(floorProps->enemyDensity);
 
     gDungeon->unk3A09 = 0;
     gDungeon->unk3A0A = 0;
 
     sSecondaryStructuresBudget = floorProps->secondaryStructuresBudget;
 
-    for (i = 0; i < 10; i++) {
-        bool32 r4 = 0;
+    for (spawnAttempts = 0; spawnAttempts < 10; spawnAttempts++) {
+        s32 genAttempts;
+        bool32 isEmptyMonsterHouse;
 
         gDungeon->playerSpawn.x = -1;
         gDungeon->playerSpawn.y = -1;
         gDungeon->stairsSpawn.x = -1;
         gDungeon->stairsSpawn.y = -1;
-        for (j = 0; j < 10; j++) {
-            gDungeon->unk3A16 = j;
-            if (j > 0) {
+        // Actual generation attempts, up to 10 times per entity
+        for (genAttempts = 0; genAttempts < 10; genAttempts++) {
+            gDungeon->unk3A16 = genAttempts;
+            if (genAttempts > 0) {
                 sSecondaryStructuresBudget = 0;
             }
-            gUnknown_202F1A9 = 0;
+            sInvalidGeneration = FALSE;
             sKecleonShopMiddlePos.x = -1;
             sKecleonShopMiddlePos.y = -1;
+
             ResetFloor();
+
             gDungeon->playerSpawn.x = -1;
             gDungeon->playerSpawn.y = -1;
-            gDungeon->forceMonsterHouse = 0;
-            if (gDungeon->fixedRoomId != 0) {
+            gDungeon->forceMonsterHouse = FALSE;
+            if (gDungeon->fixedRoomNumber != 0) {
                 // Check for a full-floor fixed room, if this is the case, generation is done.
-                if (GenerateFixedFloor(gDungeon->fixedRoomId, floorProps)) {
+                if (ProcessFixedRoom(gDungeon->fixedRoomNumber, floorProps)) {
                     break;
                 }
             }
             else {
-                u8 r7 = floorProps->unk0;
+                s32 gridSizeX, gridSizeY;
+                s32 attempts;
+                u8 layout = floorProps->layout;
 
-                k = 32;
+                // Attempt to generate random grid dimensions
+                attempts = 32;
                 while (1) {
-                    if (r7 != 8) {
-                        x = DungeonRandRange(2, 9);
-                        y = DungeonRandRange(2, 8);
+                    if (layout != LAYOUT_LARGE_0x8) {
+                        gridSizeX = DungeonRandRange(2, 9);
+                        gridSizeY = DungeonRandRange(2, 8);
                     }
                     else {
-                        x = DungeonRandRange(2, 5);
-                        y = DungeonRandRange(2, 4);
+                        gridSizeX = DungeonRandRange(2, 5);
+                        gridSizeY = DungeonRandRange(2, 4);
                     }
 
-                    if (x <= 6 && y <= 4) {
+                    // Limit overall dimensions
+                    if (gridSizeX <= 6 && gridSizeY <= 4) {
                         break;
                     }
-                    if (--k == 0) {
-                        x = 4;
-                        y = 4;
+                    if (--attempts == 0) {
+                        // We failed to generate random grid dimensions, default to 4x4
+                        gridSizeX = 4;
+                        gridSizeY = 4;
                         break;
                     }
                 }
 
-                if (DUNGEON_MAX_SIZE_X / x < 8) {
-                    x = 1;
+                // Make sure there are at least 7 tiles per grid cell in both
+                // dimensions. Otherwise, the grid size is too big so default to 1
+                if (DUNGEON_MAX_SIZE_X / gridSizeX < 8) {
+                    gridSizeX = 1;
                 }
-                if (DUNGEON_MAX_SIZE_Y / y < 8) {
-                    y = 1;
+                if (DUNGEON_MAX_SIZE_Y / gridSizeY < 8) {
+                    gridSizeY = 1;
                 }
 
-                gDungeon->forceMonsterHouse = 0;
+                gDungeon->forceMonsterHouse = FALSE;
                 gDungeon->monsterHouseRoom = 0xFF;
-                gUnknown_202F1D0 = r7;
-                switch (r7 & 0xF) {
-                    case 1:
-                        y = DungeonRandInt(2) + 2;
-                        sFloorSize = 1;
-                        GenerateStandardFloor(4, y, floorProps);
-                        r10 = TRUE;
+                sFloorLayout = layout;
+                switch (layout % NUM_FLOOR_LAYOUTS) {
+                    case LAYOUT_SMALL:
+                        gridSizeX = 4;
+                        gridSizeY = DungeonRandInt(2) + 2;
+                        sFloorSize = FLOOR_SIZE_SMALL;
+                        GenerateStandardFloor(gridSizeX, gridSizeY, floorProps);
+                        secondaryGen = TRUE;
                         break;
-                    case 11:
-                        y = DungeonRandInt(2) + 2;
-                        sFloorSize = 2;
-                        GenerateStandardFloor(4, y, floorProps);
-                        r10 = TRUE;
+                    case LAYOUT_MEDIUM:
+                        gridSizeX = 4;
+                        gridSizeY = DungeonRandInt(2) + 2;
+                        sFloorSize = FLOOR_SIZE_MEDIUM;
+                        GenerateStandardFloor(gridSizeX, gridSizeY, floorProps);
+                        secondaryGen = TRUE;
                         break;
-                    case 0:
+                    case LAYOUT_LARGE:
+                    case LAYOUT_LARGE_0x8:
                     default:
-                        GenerateStandardFloor(x, y, floorProps);
-                        r10 = TRUE;
+                        GenerateStandardFloor(gridSizeX, gridSizeY, floorProps);
+                        secondaryGen = TRUE;
                         break;
-                    case 2:
+                    case LAYOUT_ONE_ROOM_MONSTER_HOUSE:
                         GenerateOneRoomMonsterHouseFloor();
-                        gDungeon->forceMonsterHouse = 1;
+                        gDungeon->forceMonsterHouse = TRUE;
                         break;
-                    case 3:
+                    case LAYOUT_OUTER_RING:
                         GenerateOuterRingFloor(floorProps);
-                        r10 = TRUE;
+                        secondaryGen = TRUE;
                         break;
-                    case 4:
+                    case LAYOUT_CROSSROADS:
                         GenerateCrossroadsFloor(floorProps);
-                        r10 = TRUE;
+                        secondaryGen = TRUE;
                         break;
-                    case 5:
+                    case LAYOUT_TWO_ROOMS_WITH_MONSTER_HOUSE:
                         GenerateTwoRoomsWithMonsterHouseFloor();
-                        gDungeon->forceMonsterHouse = 1;
+                        gDungeon->forceMonsterHouse = TRUE;
                         break;
-                    case 6:
+                    case LAYOUT_LINE:
                         GenerateLineFloor(floorProps);
-                        r10 = TRUE;
+                        secondaryGen = TRUE;
                         break;
-                    case 7:
+                    case LAYOUT_CROSS:
                         GenerateCrossFloor(floorProps);
                         break;
-                    case 9:
+                    case LAYOUT_BEETLE:
                         GenerateBeetleFloor(floorProps);
                         break;
-                    case 10:
-                        GenerateOuterRoomsFloor(x, y, floorProps);
-                        r10 = TRUE;
+                    case LAYOUT_OUTER_ROOMS:
+                        GenerateOuterRoomsFloor(gridSizeX, gridSizeY, floorProps);
+                        secondaryGen = TRUE;
                         break;
                 }
             }
 
             ResetInnerBoundaryTileRows();
             EnsureImpassableTilesAreWalls();
-            if (gUnknown_202F1A9 == 0) {
-                s32 countSp = 0;
-                u8 spArray[64];
-                s32 countRooms = 0;
 
-                for (k = 0; k < 64; k++) {
-                    spArray[k] = 0;
+            // Nothing failed during generation. This variable is always set to FALSE, so the check always passes
+            if (!sInvalidGeneration) {
+                // We need to make sure there are at least 2 rooms with at least 20 total tiles
+                s32 numRooms = 0;
+                bool8 rooms[64];
+                s32 roomTiles = 0;
+                s32 i;
+
+                for (i = 0; i < 64; i++) {
+                    rooms[i] = FALSE;
                 }
 
                 for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
                     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
                         const Tile *tile = GetTile(x, y);
                         if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL && tile->room <= 240) {
-                            countRooms++;
+                            roomTiles++;
                             if (tile->room < 64) {
-                                spArray[tile->room] = 1;
+                                rooms[tile->room] = TRUE;
                             }
                         }
                     }
                 }
 
-                countSp = 0;
+                numRooms = 0;
                 // In order to match, 'y' had to be re-used as an iterator var
                 for (y = 0; y < 64; y++) {
-                    if (spArray[y]) {
-                        countSp++;
+                    if (rooms[y]) {
+                        numRooms++;
                     }
                 }
 
-                if (countRooms >= 30 && countSp > 1) {
-                    break;
+                if (roomTiles >= 30 && numRooms >= 2) {
+                    break; // This layout is good!
                 }
             }
         }
 
-        if (j == 10) {
+        // If we fail to generate a layout in 10 attempts, just abort and make a one-room Monster House
+        if (genAttempts == 10) {
             sKecleonShopMiddlePos.x = -1;
             sKecleonShopMiddlePos.y = -1;
             GenerateOneRoomMonsterHouseFloor();
-            gDungeon->forceMonsterHouse = 1;
+            gDungeon->forceMonsterHouse = TRUE;
         }
-        sub_804E9DC();
-        if (r10) {
-            GenerateSecondaryTerrainFormations(1, floorProps);
+
+        // We will be guaranteed to have a good layout by this point
+        FinalizeJunctions();
+        if (secondaryGen) {
+            GenerateSecondaryTerrainFormations(ROOM_FLAG_ALLOW_SECONDARY_TERRAIN, floorProps);
         }
-        r4 = (DungeonRandInt(100) < floorProps->connectedToTop);
-        SpawnNonEnemies(floorProps, r4);
-        SpawnEnemies(floorProps, r4);
-        ResolveInvalidSpawns();
-        if (gDungeon->playerSpawn.x != -1 && gDungeon->playerSpawn.y != -1)
-        {
-            if (GetFloorType() == 1)
+
+        isEmptyMonsterHouse = (DungeonRandInt(100) < floorProps->itemlessMonsterHouseChance);
+        SpawnNonEnemies(floorProps, isEmptyMonsterHouse);
+        SpawnEnemies(floorProps, isEmptyMonsterHouse);
+
+        ResolveInvalidSpawns(); // Make sure multiple flags aren't set for one tile
+        if (gDungeon->playerSpawn.x != -1 && gDungeon->playerSpawn.y != -1) {
+            // This is for normal fixed rooms, we don't need to validate the stairs in this scenario
+			// Since it's fixed already
+            if (GetFloorType() == FLOOR_TYPE_FIXED)
                 break;
-            if (gDungeon->stairsSpawn.x != -1 && gDungeon->stairsSpawn.y != -1 && StairsAlwaysReachable(gDungeon->stairsSpawn.x, gDungeon->stairsSpawn.y, 0))
-                break;
+            if (gDungeon->stairsSpawn.x != -1 && gDungeon->stairsSpawn.y != -1 && StairsAlwaysReachable(gDungeon->stairsSpawn.x, gDungeon->stairsSpawn.y, FALSE))
+                break; // We can reach the stairs, we're good!
         }
+
+        // Something went bad with spawns, we'll need to retry on a new generation
     }
 
-    if (i == 10) {
+    // If we fail with spawns (or otherwise) 10 times, opt for a One-Room Monster House generation
+    if (spawnAttempts == 10) {
         sKecleonShopMiddlePos.x = -1;
         sKecleonShopMiddlePos.y = -1;
+
         ResetFloor();
         GenerateOneRoomMonsterHouseFloor();
         gDungeon->forceMonsterHouse = TRUE;
-        sub_804E9DC();
+
+        FinalizeJunctions();
         SpawnNonEnemies(floorProps, FALSE);
         SpawnEnemies(floorProps, FALSE);
         ResolveInvalidSpawns();
+        // We don't care about validating because this is our bailout, so we're done!
     }
 
     if (sKecleonShopMiddlePos.x >= 0 && sKecleonShopMiddlePos.y >= 0) {
         sub_806C330(sKecleonShopMiddlePos.x, sKecleonShopMiddlePos.y, 380, 0);
     }
 
-    if (sKecleonShopPosition.unk0 >= 0) {
+    if (sKecleonShopPosition.minX >= 0) {
         sub_8051654(floorProps);
         gDungeon->unk3A0A = 1;
     }
@@ -388,660 +437,12 @@ void sub_804AFAC(void)
     }
 
     sub_804B534(0, 0, DUNGEON_MAX_SIZE_X, DUNGEON_MAX_SIZE_Y);
-    if (gUnknown_202F1A8 != 0) {
+    if (gUnknown_202F1A8) {
         sub_804FC74();
     }
 
     CloseFile(gDungeon->unk13568);
 }
-#else
-void NAKED sub_804AFAC(void)
-{
-    asm_unified("	push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	sub sp, 0x44\n"
-"	movs r0, 0\n"
-"	mov r10, r0\n"
-"	ldr r4, _0804B0E8\n"
-"	ldr r0, [r4]\n"
-"	ldr r1, _0804B0EC\n"
-"	adds r1, r0\n"
-"	mov r8, r1\n"
-"	ldr r0, _0804B0F0\n"
-"	ldr r1, _0804B0F4\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	ldr r2, [r4]\n"
-"	ldr r3, _0804B0F8\n"
-"	adds r1, r2, r3\n"
-"	str r0, [r1]\n"
-"	ldr r0, _0804B0FC\n"
-"	mov r6, r10\n"
-"	strb r6, [r0]\n"
-"	ldr r0, _0804B100\n"
-"	strb r6, [r0]\n"
-"	ldr r0, _0804B104\n"
-"	strb r6, [r0]\n"
-"	ldr r5, _0804B108\n"
-"	movs r3, 0\n"
-"	ldr r1, _0804B10C\n"
-"	ldr r0, _0804B110\n"
-"	adds r2, r0\n"
-"	movs r6, 0\n"
-"	ldrsh r0, [r2, r6]\n"
-"	adds r0, r1\n"
-"	ldrb r0, [r0]\n"
-"	cmp r0, 0x2\n"
-"	bne _0804AFFC\n"
-"	movs r3, 0x1\n"
-"_0804AFFC:\n"
-"	strb r3, [r5]\n"
-"	ldr r1, _0804B114\n"
-"	movs r0, 0xFF\n"
-"	strb r0, [r1]\n"
-"	ldr r0, _0804B118\n"
-"	mov r1, r10\n"
-"	strb r1, [r0]\n"
-"	ldr r1, _0804B11C\n"
-"	mov r2, r8\n"
-"	ldrb r0, [r2, 0x7]\n"
-"	strh r0, [r1]\n"
-"	ldr r1, _0804B120\n"
-"	ldrb r0, [r2, 0x8]\n"
-"	strh r0, [r1]\n"
-"	ldr r1, _0804B124\n"
-"	movs r0, 0x1\n"
-"	strb r0, [r1]\n"
-"	ldr r1, _0804B128\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	str r0, [r1]\n"
-"	str r0, [r1, 0x8]\n"
-"	str r0, [r1, 0x4]\n"
-"	str r0, [r1, 0xC]\n"
-"	bl ResetFloor\n"
-"	ldr r3, [r4]\n"
-"	mov r6, r8\n"
-"	ldrb r2, [r6, 0x6]\n"
-"	ldr r1, _0804B12C\n"
-"	adds r0, r3, r1\n"
-"	movs r1, 0\n"
-"	strh r2, [r0]\n"
-"	ldr r2, _0804B130\n"
-"	adds r0, r3, r2\n"
-"	strb r1, [r0]\n"
-"	ldr r0, [r4]\n"
-"	ldr r3, _0804B134\n"
-"	adds r0, r3\n"
-"	strb r1, [r0]\n"
-"	ldr r1, _0804B138\n"
-"	mov r6, r8\n"
-"	ldrb r0, [r6, 0xC]\n"
-"	str r0, [r1]\n"
-"	movs r0, 0\n"
-"	str r0, [sp, 0x40]\n"
-"_0804B058:\n"
-"	ldr r0, _0804B0E8\n"
-"	ldr r2, [r0]\n"
-"	ldr r3, _0804B13C\n"
-"	adds r1, r2, r3\n"
-"	ldr r0, _0804B140\n"
-"	strh r0, [r1]\n"
-"	ldr r6, _0804B144\n"
-"	adds r1, r2, r6\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	strh r0, [r1]\n"
-"	ldr r0, _0804B148\n"
-"	adds r1, r2, r0\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	strh r0, [r1]\n"
-"	ldr r1, _0804B14C\n"
-"	adds r2, r1\n"
-"	strh r0, [r2]\n"
-"	movs r2, 0\n"
-"	mov r9, r2\n"
-"_0804B082:\n"
-"	ldr r4, _0804B0E8\n"
-"	ldr r0, [r4]\n"
-"	ldr r3, _0804B150\n"
-"	adds r0, r3\n"
-"	movs r5, 0\n"
-"	movs r1, 0\n"
-"	mov r6, r9\n"
-"	strh r6, [r0]\n"
-"	mov r0, r9\n"
-"	cmp r0, 0\n"
-"	ble _0804B09C\n"
-"	ldr r0, _0804B138\n"
-"	str r1, [r0]\n"
-"_0804B09C:\n"
-"	ldr r0, _0804B154\n"
-"	strb r5, [r0]\n"
-"	ldr r1, _0804B158\n"
-"	ldr r0, _0804B140\n"
-"	strh r0, [r1]\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	strh r0, [r1, 0x2]\n"
-"	bl ResetFloor\n"
-"	ldr r1, [r4]\n"
-"	ldr r3, _0804B13C\n"
-"	adds r2, r1, r3\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	strh r0, [r2]\n"
-"	ldr r6, _0804B144\n"
-"	adds r2, r1, r6\n"
-"	strh r0, [r2]\n"
-"	ldr r0, _0804B15C\n"
-"	adds r1, r0\n"
-"	strb r5, [r1]\n"
-"	ldr r0, [r4]\n"
-"	ldr r2, _0804B160\n"
-"	adds r1, r0, r2\n"
-"	movs r3, 0\n"
-"	ldrsh r0, [r1, r3]\n"
-"	cmp r0, 0\n"
-"	beq _0804B164\n"
-"	mov r1, r8\n"
-"	bl GenerateFixedFloor\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0804B0E4\n"
-"	b _0804B376\n"
-"_0804B0E4:\n"
-"	b _0804B2F6\n"
-"	.align 2, 0\n"
-"_0804B0E8: .4byte gDungeon\n"
-"_0804B0EC: .4byte 0x0001c574\n"
-"_0804B0F0: .4byte gUnknown_80F6DCC\n"
-"_0804B0F4: .4byte gDungeonFileArchive\n"
-"_0804B0F8: .4byte 0x00013568\n"
-"_0804B0FC: .4byte sHasKecleonShop\n"
-"_0804B100: .4byte sHasMonsterHouse\n"
-"_0804B104: .4byte sHasMaze\n"
-"_0804B108: .4byte gUnknown_202F1A8\n"
-"_0804B10C: .4byte gDungeonWaterType\n"
-"_0804B110: .4byte 0x00003a0e\n"
-"_0804B114: .4byte sStairsRoomIndex\n"
-"_0804B118: .4byte sFloorSize\n"
-"_0804B11C: .4byte sKecleonShopChance\n"
-"_0804B120: .4byte sMonsterHouseChance\n"
-"_0804B124: .4byte sSecondSpawn\n"
-"_0804B128: .4byte sKecleonShopPosition\n"
-"_0804B12C: .4byte 0x00000664\n"
-"_0804B130: .4byte 0x00003a09\n"
-"_0804B134: .4byte 0x00003a0a\n"
-"_0804B138: .4byte sSecondaryStructuresBudget\n"
-"_0804B13C: .4byte 0x0000e218\n"
-"_0804B140: .4byte 0x0000ffff\n"
-"_0804B144: .4byte 0x0000e21a\n"
-"_0804B148: .4byte 0x0000e21c\n"
-"_0804B14C: .4byte 0x0000e21e\n"
-"_0804B150: .4byte 0x00003a16\n"
-"_0804B154: .4byte gUnknown_202F1A9\n"
-"_0804B158: .4byte sKecleonShopMiddlePos\n"
-"_0804B15C: .4byte 0x00003a08\n"
-"_0804B160: .4byte 0x00003a14\n"
-"_0804B164:\n"
-"	mov r0, r8\n"
-"	ldrb r7, [r0]\n"
-"	movs r6, 0x20\n"
-"_0804B16A:\n"
-"	cmp r7, 0x8\n"
-"	beq _0804B17E\n"
-"	movs r0, 0x2\n"
-"	movs r1, 0x9\n"
-"	bl DungeonRandRange\n"
-"	adds r5, r0, 0\n"
-"	movs r0, 0x2\n"
-"	movs r1, 0x8\n"
-"	b _0804B18C\n"
-"_0804B17E:\n"
-"	movs r0, 0x2\n"
-"	movs r1, 0x5\n"
-"	bl DungeonRandRange\n"
-"	adds r5, r0, 0\n"
-"	movs r0, 0x2\n"
-"	movs r1, 0x4\n"
-"_0804B18C:\n"
-"	bl DungeonRandRange\n"
-"	adds r4, r0, 0\n"
-"	cmp r5, 0x6\n"
-"	bgt _0804B19A\n"
-"	cmp r4, 0x4\n"
-"	ble _0804B1A4\n"
-"_0804B19A:\n"
-"	subs r6, 0x1\n"
-"	cmp r6, 0\n"
-"	bne _0804B16A\n"
-"	movs r5, 0x4\n"
-"	movs r4, 0x4\n"
-"_0804B1A4:\n"
-"	movs r0, 0x38\n"
-"	adds r1, r5, 0\n"
-"	bl __divsi3\n"
-"	cmp r0, 0x7\n"
-"	bgt _0804B1B2\n"
-"	movs r5, 0x1\n"
-"_0804B1B2:\n"
-"	movs r0, 0x20\n"
-"	adds r1, r4, 0\n"
-"	bl __divsi3\n"
-"	cmp r0, 0x7\n"
-"	bgt _0804B1C0\n"
-"	movs r4, 0x1\n"
-"_0804B1C0:\n"
-"	ldr r2, _0804B1EC\n"
-"	ldr r0, [r2]\n"
-"	ldr r1, _0804B1F0\n"
-"	adds r0, r1\n"
-"	movs r1, 0\n"
-"	strb r1, [r0]\n"
-"	ldr r0, [r2]\n"
-"	ldr r2, _0804B1F4\n"
-"	adds r0, r2\n"
-"	movs r1, 0xFF\n"
-"	strb r1, [r0]\n"
-"	ldr r0, _0804B1F8\n"
-"	str r7, [r0]\n"
-"	movs r0, 0xF\n"
-"	ands r0, r7\n"
-"	cmp r0, 0xB\n"
-"	bhi _0804B274\n"
-"	lsls r0, 2\n"
-"	ldr r1, _0804B1FC\n"
-"	adds r0, r1\n"
-"	ldr r0, [r0]\n"
-"	mov pc, r0\n"
-"	.align 2, 0\n"
-"_0804B1EC: .4byte gDungeon\n"
-"_0804B1F0: .4byte 0x00003a08\n"
-"_0804B1F4: .4byte 0x00003a0c\n"
-"_0804B1F8: .4byte gUnknown_202F1D0\n"
-"_0804B1FC: .4byte _0804B200\n"
-"	.align 2, 0\n"
-"_0804B200:\n"
-"	.4byte _0804B274\n"
-"	.4byte _0804B230\n"
-"	.4byte _0804B280\n"
-"	.4byte _0804B298\n"
-"	.4byte _0804B2A4\n"
-"	.4byte _0804B2B0\n"
-"	.4byte _0804B2CC\n"
-"	.4byte _0804B2D8\n"
-"	.4byte _0804B274\n"
-"	.4byte _0804B2E0\n"
-"	.4byte _0804B2E8\n"
-"	.4byte _0804B250\n"
-"_0804B230:\n"
-"	movs r0, 0x2\n"
-"	bl DungeonRandInt\n"
-"	adds r4, r0, 0x2\n"
-"	ldr r1, _0804B24C\n"
-"	movs r0, 0x1\n"
-"	strb r0, [r1]\n"
-"	movs r0, 0x4\n"
-"	adds r1, r4, 0\n"
-"	mov r2, r8\n"
-"	bl GenerateStandardFloor\n"
-"	b _0804B2AA\n"
-"	.align 2, 0\n"
-"_0804B24C: .4byte sFloorSize\n"
-"_0804B250:\n"
-"	movs r0, 0x2\n"
-"	bl DungeonRandInt\n"
-"	adds r4, r0, 0x2\n"
-"	ldr r1, _0804B270\n"
-"	movs r0, 0x2\n"
-"	strb r0, [r1]\n"
-"	movs r0, 0x4\n"
-"	adds r1, r4, 0\n"
-"	mov r2, r8\n"
-"	bl GenerateStandardFloor\n"
-"	movs r6, 0x1\n"
-"	mov r10, r6\n"
-"	b _0804B2F6\n"
-"	.align 2, 0\n"
-"_0804B270: .4byte sFloorSize\n"
-"_0804B274:\n"
-"	adds r0, r5, 0\n"
-"	adds r1, r4, 0\n"
-"	mov r2, r8\n"
-"	bl GenerateStandardFloor\n"
-"	b _0804B2D2\n"
-"_0804B280:\n"
-"	bl GenerateOneRoomMonsterHouseFloor\n"
-"	ldr r0, _0804B290\n"
-"	ldr r0, [r0]\n"
-"	ldr r1, _0804B294\n"
-"	adds r0, r1\n"
-"	b _0804B2BC\n"
-"	.align 2, 0\n"
-"_0804B290: .4byte gDungeon\n"
-"_0804B294: .4byte 0x00003a08\n"
-"_0804B298:\n"
-"	mov r0, r8\n"
-"	bl GenerateOuterRingFloor\n"
-"	movs r2, 0x1\n"
-"	mov r10, r2\n"
-"	b _0804B2F6\n"
-"_0804B2A4:\n"
-"	mov r0, r8\n"
-"	bl GenerateCrossroadsFloor\n"
-"_0804B2AA:\n"
-"	movs r3, 0x1\n"
-"	mov r10, r3\n"
-"	b _0804B2F6\n"
-"_0804B2B0:\n"
-"	bl GenerateTwoRoomsWithMonsterHouseFloor\n"
-"	ldr r0, _0804B2C4\n"
-"	ldr r0, [r0]\n"
-"	ldr r6, _0804B2C8\n"
-"	adds r0, r6\n"
-"_0804B2BC:\n"
-"	movs r1, 0x1\n"
-"	strb r1, [r0]\n"
-"	b _0804B2F6\n"
-"	.align 2, 0\n"
-"_0804B2C4: .4byte gDungeon\n"
-"_0804B2C8: .4byte 0x00003a08\n"
-"_0804B2CC:\n"
-"	mov r0, r8\n"
-"	bl GenerateLineFloor\n"
-"_0804B2D2:\n"
-"	movs r0, 0x1\n"
-"	mov r10, r0\n"
-"	b _0804B2F6\n"
-"_0804B2D8:\n"
-"	mov r0, r8\n"
-"	bl GenerateCrossFloor\n"
-"	b _0804B2F6\n"
-"_0804B2E0:\n"
-"	mov r0, r8\n"
-"	bl GenerateBeetleFloor\n"
-"	b _0804B2F6\n"
-"_0804B2E8:\n"
-"	adds r0, r5, 0\n"
-"	adds r1, r4, 0\n"
-"	mov r2, r8\n"
-"	bl GenerateOuterRoomsFloor\n"
-"	movs r1, 0x1\n"
-"	mov r10, r1\n"
-"_0804B2F6:\n"
-"	bl ResetInnerBoundaryTileRows\n"
-"	bl EnsureImpassableTilesAreWalls\n"
-"	ldr r0, _0804B4B4\n"
-"	ldrb r0, [r0]\n"
-"	cmp r0, 0\n"
-"	bne _0804B36A\n"
-"	movs r7, 0\n"
-"	movs r1, 0\n"
-"	mov r0, sp\n"
-"	adds r0, 0x3F\n"
-"_0804B30E:\n"
-"	strb r1, [r0]\n"
-"	subs r0, 0x1\n"
-"	cmp r0, sp\n"
-"	bge _0804B30E\n"
-"	movs r5, 0\n"
-"_0804B318:\n"
-"	movs r4, 0\n"
-"	adds r6, r5, 0x1\n"
-"_0804B31C:\n"
-"	adds r0, r5, 0\n"
-"	adds r1, r4, 0\n"
-"	bl GetTile\n"
-"	adds r1, r0, 0\n"
-"	ldrh r0, [r1]\n"
-"	movs r2, 0x3\n"
-"	ands r2, r0\n"
-"	cmp r2, 0x1\n"
-"	bne _0804B340\n"
-"	ldrb r0, [r1, 0x9]\n"
-"	cmp r0, 0xF0\n"
-"	bhi _0804B340\n"
-"	adds r7, 0x1\n"
-"	cmp r0, 0x3F\n"
-"	bhi _0804B340\n"
-"	add r0, sp\n"
-"	strb r2, [r0]\n"
-"_0804B340:\n"
-"	adds r4, 0x1\n"
-"	cmp r4, 0x1F\n"
-"	ble _0804B31C\n"
-"	adds r5, r6, 0\n"
-"	cmp r5, 0x37\n"
-"	ble _0804B318\n"
-"	movs r1, 0\n"
-"	movs r4, 0\n"
-"_0804B350:\n"
-"	mov r2, sp\n"
-"	adds r0, r2, r4\n"
-"	ldrb r0, [r0]\n"
-"	cmp r0, 0\n"
-"	beq _0804B35C\n"
-"	adds r1, 0x1\n"
-"_0804B35C:\n"
-"	adds r4, 0x1\n"
-"	cmp r4, 0x3F\n"
-"	ble _0804B350\n"
-"	cmp r7, 0x1D\n"
-"	ble _0804B36A\n"
-"	cmp r1, 0x1\n"
-"	bgt _0804B376\n"
-"_0804B36A:\n"
-"	movs r3, 0x1\n"
-"	add r9, r3\n"
-"	mov r6, r9\n"
-"	cmp r6, 0x9\n"
-"	bgt _0804B376\n"
-"	b _0804B082\n"
-"_0804B376:\n"
-"	mov r0, r9\n"
-"	cmp r0, 0xA\n"
-"	bne _0804B398\n"
-"	ldr r1, _0804B4B8\n"
-"	ldr r0, _0804B4BC\n"
-"	strh r0, [r1]\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	strh r0, [r1, 0x2]\n"
-"	bl GenerateOneRoomMonsterHouseFloor\n"
-"	ldr r0, _0804B4C0\n"
-"	ldr r0, [r0]\n"
-"	ldr r1, _0804B4C4\n"
-"	adds r0, r1\n"
-"	movs r1, 0x1\n"
-"	strb r1, [r0]\n"
-"_0804B398:\n"
-"	bl sub_804E9DC\n"
-"	mov r2, r10\n"
-"	cmp r2, 0\n"
-"	beq _0804B3AA\n"
-"	movs r0, 0x1\n"
-"	mov r1, r8\n"
-"	bl GenerateSecondaryTerrainFormations\n"
-"_0804B3AA:\n"
-"	movs r0, 0x64\n"
-"	bl DungeonRandInt\n"
-"	movs r4, 0\n"
-"	mov r3, r8\n"
-"	ldrb r3, [r3, 0x19]\n"
-"	cmp r0, r3\n"
-"	bge _0804B3BC\n"
-"	movs r4, 0x1\n"
-"_0804B3BC:\n"
-"	mov r0, r8\n"
-"	adds r1, r4, 0\n"
-"	bl SpawnNonEnemies\n"
-"	mov r0, r8\n"
-"	adds r1, r4, 0\n"
-"	bl SpawnEnemies\n"
-"	bl ResolveInvalidSpawns\n"
-"	ldr r5, _0804B4C0\n"
-"	ldr r1, [r5]\n"
-"	ldr r6, _0804B4C8\n"
-"	adds r0, r1, r6\n"
-"	movs r2, 0\n"
-"	ldrsh r0, [r0, r2]\n"
-"	movs r4, 0x1\n"
-"	negs r4, r4\n"
-"	cmp r0, r4\n"
-"	beq _0804B42A\n"
-"	ldr r3, _0804B4CC\n"
-"	adds r0, r1, r3\n"
-"	movs r6, 0\n"
-"	ldrsh r0, [r0, r6]\n"
-"	cmp r0, r4\n"
-"	beq _0804B42A\n"
-"	bl GetFloorType\n"
-"	lsls r0, 24\n"
-"	lsrs r0, 24\n"
-"	cmp r0, 0x1\n"
-"	beq _0804B436\n"
-"	ldr r1, [r5]\n"
-"	ldr r0, _0804B4D0\n"
-"	adds r2, r1, r0\n"
-"	movs r3, 0\n"
-"	ldrsh r0, [r2, r3]\n"
-"	cmp r0, r4\n"
-"	beq _0804B42A\n"
-"	ldr r6, _0804B4D4\n"
-"	adds r1, r6\n"
-"	movs r3, 0\n"
-"	ldrsh r0, [r1, r3]\n"
-"	cmp r0, r4\n"
-"	beq _0804B42A\n"
-"	movs r6, 0\n"
-"	ldrsh r0, [r2, r6]\n"
-"	movs r2, 0\n"
-"	ldrsh r1, [r1, r2]\n"
-"	movs r2, 0\n"
-"	bl StairsAlwaysReachable\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _0804B436\n"
-"_0804B42A:\n"
-"	ldr r3, [sp, 0x40]\n"
-"	adds r3, 0x1\n"
-"	str r3, [sp, 0x40]\n"
-"	cmp r3, 0x9\n"
-"	bgt _0804B436\n"
-"	b _0804B058\n"
-"_0804B436:\n"
-"	ldr r6, [sp, 0x40]\n"
-"	cmp r6, 0xA\n"
-"	bne _0804B474\n"
-"	ldr r1, _0804B4B8\n"
-"	ldr r0, _0804B4BC\n"
-"	strh r0, [r1]\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	strh r0, [r1, 0x2]\n"
-"	bl ResetFloor\n"
-"	bl GenerateOneRoomMonsterHouseFloor\n"
-"	ldr r0, _0804B4C0\n"
-"	ldr r0, [r0]\n"
-"	ldr r1, _0804B4C4\n"
-"	adds r0, r1\n"
-"	movs r1, 0x1\n"
-"	strb r1, [r0]\n"
-"	bl sub_804E9DC\n"
-"	mov r0, r8\n"
-"	movs r1, 0\n"
-"	bl SpawnNonEnemies\n"
-"	mov r0, r8\n"
-"	movs r1, 0\n"
-"	bl SpawnEnemies\n"
-"	bl ResolveInvalidSpawns\n"
-"_0804B474:\n"
-"	ldr r1, _0804B4B8\n"
-"	movs r2, 0\n"
-"	ldrsh r0, [r1, r2]\n"
-"	cmp r0, 0\n"
-"	blt _0804B498\n"
-"	movs r3, 0x2\n"
-"	ldrsh r0, [r1, r3]\n"
-"	cmp r0, 0\n"
-"	blt _0804B498\n"
-"	movs r6, 0\n"
-"	ldrsh r0, [r1, r6]\n"
-"	movs r2, 0x2\n"
-"	ldrsh r1, [r1, r2]\n"
-"	movs r2, 0xBE\n"
-"	lsls r2, 1\n"
-"	movs r3, 0\n"
-"	bl sub_806C330\n"
-"_0804B498:\n"
-"	ldr r0, _0804B4D8\n"
-"	ldr r0, [r0]\n"
-"	cmp r0, 0\n"
-"	blt _0804B4E0\n"
-"	mov r0, r8\n"
-"	bl sub_8051654\n"
-"	ldr r0, _0804B4C0\n"
-"	ldr r0, [r0]\n"
-"	ldr r3, _0804B4DC\n"
-"	adds r0, r3\n"
-"	movs r1, 0x1\n"
-"	b _0804B4EA\n"
-"	.align 2, 0\n"
-"_0804B4B4: .4byte gUnknown_202F1A9\n"
-"_0804B4B8: .4byte sKecleonShopMiddlePos\n"
-"_0804B4BC: .4byte 0x0000ffff\n"
-"_0804B4C0: .4byte gDungeon\n"
-"_0804B4C4: .4byte 0x00003a08\n"
-"_0804B4C8: .4byte 0x0000e218\n"
-"_0804B4CC: .4byte 0x0000e21a\n"
-"_0804B4D0: .4byte 0x0000e21c\n"
-"_0804B4D4: .4byte 0x0000e21e\n"
-"_0804B4D8: .4byte sKecleonShopPosition\n"
-"_0804B4DC: .4byte 0x00003a0a\n"
-"_0804B4E0:\n"
-"	ldr r0, _0804B524\n"
-"	ldr r0, [r0]\n"
-"	ldr r6, _0804B528\n"
-"	adds r0, r6\n"
-"	movs r1, 0\n"
-"_0804B4EA:\n"
-"	strb r1, [r0]\n"
-"	movs r0, 0\n"
-"	movs r1, 0\n"
-"	movs r2, 0x38\n"
-"	movs r3, 0x20\n"
-"	bl sub_804B534\n"
-"	ldr r0, _0804B52C\n"
-"	ldrb r0, [r0]\n"
-"	cmp r0, 0\n"
-"	beq _0804B504\n"
-"	bl sub_804FC74\n"
-"_0804B504:\n"
-"	ldr r0, _0804B524\n"
-"	ldr r0, [r0]\n"
-"	ldr r1, _0804B530\n"
-"	adds r0, r1\n"
-"	ldr r0, [r0]\n"
-"	bl CloseFile\n"
-"	add sp, 0x44\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_0804B524: .4byte gDungeon\n"
-"_0804B528: .4byte 0x00003a0a\n"
-"_0804B52C: .4byte gUnknown_202F1A8\n"
-"_0804B530: .4byte 0x00013568\n");
-}
-#endif // NONMATCHING
 
 void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
 {
@@ -1647,18 +1048,18 @@ void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, FloorProperties *fl
     GenerateSecondaryStructures(grid, gridSizeX, gridSizeY);
 }
 
-bool8 GenerateFixedFloor(s32 fixedRoomId, FloorProperties *floorProps)
+bool8 ProcessFixedRoom(s32 fixedRoomNumber, FloorProperties *floorProps)
 {
-    s32 fixedRoomSizeX = ((struct FixedRoomsData **)(gDungeon->unk13568->data))[fixedRoomId]->x;
-    s32 fixedRoomSizeY = ((struct FixedRoomsData **)(gDungeon->unk13568->data))[fixedRoomId]->y;
+    s32 fixedRoomSizeX = ((struct FixedRoomsData **)(gDungeon->unk13568->data))[fixedRoomNumber]->x;
+    s32 fixedRoomSizeY = ((struct FixedRoomsData **)(gDungeon->unk13568->data))[fixedRoomNumber]->y;
     s32 gridSizeX, gridSizeY;
 
     if (fixedRoomSizeX == 0 || fixedRoomSizeY == 0) {
         GenerateOneRoomMonsterHouseFloor();
         return FALSE;
     }
-    else if (fixedRoomId < 50) {
-        sub_8051288(fixedRoomId);
+    else if (fixedRoomNumber < 50) {
+        sub_8051288(fixedRoomNumber);
         return TRUE;
     }
     else {
@@ -1668,12 +1069,12 @@ bool8 GenerateFixedFloor(s32 fixedRoomId, FloorProperties *floorProps)
         gridSizeY = DUNGEON_MAX_SIZE_Y / (fixedRoomSizeY + 4);
         if (gridSizeY <= 1)
             gridSizeY = 1;
-        sub_804C790(gridSizeX, gridSizeY, fixedRoomSizeX, fixedRoomSizeY, fixedRoomId, floorProps);
+        sub_804C790(gridSizeX, gridSizeY, fixedRoomSizeX, fixedRoomSizeY, fixedRoomNumber, floorProps);
         return FALSE;
     }
 }
 
-static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomId, FloorProperties *floorProps)
+static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomNumber, FloorProperties *floorProps)
 {
     s32 tries;
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
@@ -1704,7 +1105,7 @@ static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fi
         CreateGridCellConnections(grid, gridSizeX, gridSizeY, listX, listY, TRUE);
         EnsureConnectedGrid(grid, gridSizeX, gridSizeY, listX, listY);
     }
-    sub_8051438(&grid[cursorX][cursorY], fixedRoomId);
+    sub_8051438(&grid[cursorX][cursorY], fixedRoomNumber);
 }
 
 /*
@@ -3528,7 +2929,34 @@ void SetTerrainObstacleChecked(Tile *tile, bool8 useSecondaryTerrain, u8 roomInd
     }
 }
 
-void sub_804E9DC(void)
+/*
+ * FinalizeJunctions - Finalizes junction tiles by setting the junction flag and verifying the tiles are open terrain
+ *
+ * Due to the nature of how this function iterates left-to-right / top-to-bottom, by identifying junctions as any
+ * open, non-hallway tile (roomIndex !== 0xFF) adjacent to an open, hallway tile (roomIndex == 0xFF), the function
+ * runs into issues handling hallway anchors (roomIndex == 0xFE). The room index of hallway anchors is set to 0xFF using
+ * the same loop, which means a hallway anchor may or may not be considered a junction depending on how the connected
+ * hallways are oriented.
+ *
+ * For example, in the configuration below, the "o" tile would be marked as a junction because the neighboring hallway tile
+ * to its left comes earlier in iteration, while "o" still has the room index 0xFE, with the algorithm mistaking it for a
+ * room tile.
+ *
+ * X X X X X
+ * - - - o X
+ * X X X | X
+ * X X X | X
+ *
+ * Alternatively, in the configuration below, the "o" tile would not be marked as a junction because it comes earlier in
+ * iteration than any of its neighboring hallway tiles, so its room index is set to 0xFF before it can be marked as a junction.
+ * This configuration is actually the only one where a hallway anchor will not be marked as a junction.
+ *
+ * X X X X X
+ * X o - - -
+ * X | X X X
+ * X | X X X
+ */
+void FinalizeJunctions(void)
 {
     s32 x, y;
 
@@ -3537,17 +2965,21 @@ void sub_804E9DC(void)
             if (GetTerrainType(GetTile(x, y)) != TERRAIN_TYPE_NORMAL)
                 continue;
 
+            // Not in a room
             if (GetTile(x, y)->room == CORRIDOR_ROOM) {
+                // Tile to the left is in a room (or anchor), mark junction
                 if (x > 0) {
                     Tile *tile = GetTileMut(x - 1, y);
                     if (tile->room != CORRIDOR_ROOM) {
                         tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
 
+                        // If there's any water/lava on the junction tile, remove it
                         if (GetTerrainType(tile) == TERRAIN_TYPE_SECONDARY) {
                             SetTerrainType(tile, TERRAIN_TYPE_NORMAL);
                         }
                     }
                 }
+                // Tile above is in a room
                 if (y > 0) {
                     Tile *tile = GetTileMut(x, y - 1);
                     if (tile->room != CORRIDOR_ROOM) {
@@ -3559,6 +2991,7 @@ void sub_804E9DC(void)
                         }
                     }
                 }
+                // Tile below is in a room
                 if (y < DUNGEON_MAX_SIZE_Y - 1) {
                     Tile *tile = GetTileMut(x, y + 1);
                     if (tile->room != CORRIDOR_ROOM) {
@@ -3569,6 +3002,7 @@ void sub_804E9DC(void)
                         }
                     }
                 }
+                //Tile to the right is in a room
                 if (x < DUNGEON_MAX_SIZE_X - 1) {
                     Tile *tile = GetTileMut(x + 1, y);
                     if (tile->room != CORRIDOR_ROOM) {
@@ -3580,6 +3014,7 @@ void sub_804E9DC(void)
                     }
                 }
             }
+            // Hallway Anchor
             else if (GetTile(x, y)->room == ROOM_0xFE) {
                 GetTileMut(x, y)->room = CORRIDOR_ROOM;
             }
@@ -4974,8 +4409,7 @@ void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 	}
 	else {
         // Negative means exact value.
-		// Bug - abs is missing, also it should be s8, not u8
-		numEnemies = enemyDensity;
+		numEnemies = abs(enemyDensity);
 	}
 
     count = 0;
@@ -6430,16 +5864,16 @@ bool8 sub_805124C(Tile *tile, u8 a1, s32 x, s32 y, u8 a5)
     return sub_8051A74(tile, a1, x, y, a5);
 }
 
-void sub_8051288(s32 fixedRoomId)
+void sub_8051288(s32 fixedRoomNumber)
 {
     s32 x, y;
     Dungeon *dungeon = gDungeon;
-    s32 fixedRoomSizeX = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->x;
-    s32 fixedRoomSizeY = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->y;
+    s32 fixedRoomSizeX = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomNumber]->x;
+    s32 fixedRoomSizeY = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomNumber]->y;
 
     dungeon->unkE260.unk0 = fixedRoomSizeX;
     dungeon->unkE260.unk2 = fixedRoomSizeY;
-    gUnknown_202F1DC = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->unk3;
+    gUnknown_202F1DC = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomNumber]->unk3;
     gUnknown_202F1E1 = 0;
 
     for (y = 5; y < fixedRoomSizeY + 5; y++) {
@@ -6457,7 +5891,7 @@ void sub_8051288(s32 fixedRoomId)
             if (x <= 4 || x >= fixedRoomSizeX + 5 || y <= 4 || y >= fixedRoomSizeY + 5) {
                 Tile *tile = GetTileMut(x, y);
                 tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
-                if (gUnknown_202F1A8 != 0) {
+                if (gUnknown_202F1A8) {
                     SetTerrainType(tile, TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
                 }
                 else {
@@ -6467,7 +5901,7 @@ void sub_8051288(s32 fixedRoomId)
         }
     }
 
-    if (fixedRoomId == 4) {
+    if (fixedRoomNumber == 4) {
         for (y = 5; y < 17; y++) {
             for (x = 2; x < 5; x++) {
                 Tile *tile = GetTileMut(x, y);
@@ -6488,18 +5922,18 @@ void sub_8051288(s32 fixedRoomId)
         }
     }
 
-    sub_804E9DC();
+    FinalizeJunctions();
 }
 
-void sub_8051438(struct GridCell *gridCell, s32 fixedRoomId)
+void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber)
 {
     s32 x, y;
     Dungeon *dungeon = gDungeon;
 
-    gUnknown_202F1DC = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->unk3;
+    gUnknown_202F1DC = ((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomNumber]->unk3;
     gUnknown_202F1E1 = 0;
 
-    if (((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomId]->unk2 & 1) {
+    if (((struct FixedRoomsData **)(dungeon->unk13568->data))[fixedRoomNumber]->unk2 & 1) {
         s32 yIndex;
 
         dungeon->unkE250.minX = gridCell->start.x;
