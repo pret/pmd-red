@@ -13,21 +13,10 @@
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "structs/str_pokemon.h"
+#include "structs/str_806B7F8.h"
 
 extern u8 *gUnknown_80FE2EC[];
 
-struct unkStruct_806B7F8
-{
-    u16 species;
-    u8 unk2;
-    u32 unk4;
-    u16 level;
-    u8 fillA[0xC - 0xA];
-    DungeonPos pos;
-    u8 unk10;
-};
-
-extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 extern void sub_806BFC0(EntityInfo *, u32);
 void sub_8069E0C(Entity *pokemon);
 void sub_8042A44(Entity *r0);

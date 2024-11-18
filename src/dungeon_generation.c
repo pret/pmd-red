@@ -4,9 +4,15 @@
 #include "tile_types.h"
 #include "dungeon_map_access.h"
 #include "dungeon_random.h"
+#include "items.h"
+#include "pokemon.h"
+#include "code_80450F8.h"
 #include "constants/direction.h"
+#include "constants/item.h"
+#include "constants/monster.h"
 #include "structs/str_dungeon.h"
 #include "structs/map.h"
+#include "structs/str_806B7F8.h"
 
 extern const u8 gUnknown_80F6DCC[];
 extern struct FileArchive gDungeonFileArchive;
@@ -6105,4 +6111,210 @@ void ResetInnerBoundaryTileRows(void)
             tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
         }
     }
+}
+
+bool8 sub_805210C(u8 itemId);
+
+extern void sub_80460F8(DungeonPos *, Item *, u32);
+extern s32 sub_803DA20(s16 species);
+
+void sub_805193C(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
+{
+    Item item;
+    DungeonPos pos = {x, y};
+
+    if (sub_805210C(itemId)) {
+        xxx_init_itemslot_8090A8C(&item, ITEM_LINK_CABLE, 0);
+    }
+    else {
+        xxx_init_itemslot_8090A8C(&item, itemId, 0);
+    }
+
+    item.flags |= itemFlags;
+    if (quantity != 0) {
+        item.quantity = quantity;
+    }
+
+    sub_80460F8(&pos, &item, 1);
+}
+
+// s16 species memes strike again. Will the fix ever be discovered?
+void sub_8051998(s16 species_, s32 x, s32 y, u32 unk2_)
+{
+    struct unkStruct_806B7F8 unkStruct;
+    s32 species = SpeciesId(species_);
+    u8 unk2 = unk2_;
+
+    if (species_ == MONSTER_DECOY) {
+        unkStruct.species = MONSTER_POLIWAG;
+        unkStruct.level = sub_803DA20(MONSTER_POLIWAG);
+        unkStruct.unk2 = unk2;
+        unkStruct.unk4 = 0;
+        unkStruct.unk10 = 0;
+        unkStruct.pos.x = x;
+        unkStruct.pos.y = y;
+        sub_806B7F8(&unkStruct, TRUE);
+    }
+    else if (species != MONSTER_NONE) {
+        unkStruct.species = species;
+        unkStruct.level = sub_803DA20(species);
+        unkStruct.unk2 = unk2;
+        unkStruct.unk4 = 0;
+        unkStruct.unk10 = 0;
+        unkStruct.pos.x = x;
+        unkStruct.pos.y = y;
+        sub_806B7F8(&unkStruct, TRUE);
+    }
+}
+
+void sub_8051A24(u8 trapId, s32 x, s32 y, bool8 isVisible)
+{
+    DungeonPos pos;
+    Entity *trapEntity;
+    Tile *tile = GetTileMut(x, y);
+
+    pos.x = x;
+    pos.y = y;
+    trapEntity = sub_8045684(trapId, &pos, 0);
+    if (trapEntity != NULL) {
+        tile->object = trapEntity;
+        trapEntity->isVisible = isVisible;
+    }
+}
+
+struct UnkStruct_80F6D20
+{
+    u8 unk0;
+    s16 unk2;
+    u32 unk4;
+    s16 unk8;
+    u8 unkA;
+    u8 unkB;
+    u8 fillC;
+    u8 unkD;
+    u8 unkE;
+};
+
+extern const struct UnkStruct_80F6D20 gUnknown_80F6D20[];
+
+extern void sub_8049840(void);
+
+bool8 sub_8051A74(Tile *tile, u8 a1, s32 x, s32 y, u8 a5)
+{
+    if (a1 > 0xF) {
+        SetTerrainNormal(tile);
+    }
+
+    switch (a1) {
+        case 69:
+            gDungeon->unk644.unk40 = x;
+            gDungeon->unk644.unk42 = y;
+            sub_8051A24(0xB, x, y, FALSE);
+            // fall through
+        case 0:
+            SetTerrainNormal(tile);
+            tile->room = 0;
+            return FALSE;
+        case 1:
+            SetTerrainWall(tile);
+            tile->terrainType &= ~(TERRAIN_TYPE_UNBREAKABLE);
+            tile->room = CORRIDOR_ROOM;
+            return FALSE;
+        case 4:
+            SetTerrainNormal(tile);
+            tile->room = 0;
+            gDungeon->playerSpawn.x = x;
+            gDungeon->playerSpawn.x = y;
+            tile->room = 0;
+            return FALSE;
+        case 5:
+            SetTerrainNormal(tile);
+            tile->room = 0;
+            return FALSE;
+        case 6:
+            SetTerrainType(tile, TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL);
+            tile->terrainType &= ~(TERRAIN_TYPE_UNBREAKABLE);
+            tile->room = CORRIDOR_ROOM;
+            return FALSE;
+        case 7:
+            gUnknown_202F1A8 = 1;
+            sub_8049840();
+            SetTerrainType(tile, TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL);
+            tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            tile->room = CORRIDOR_ROOM;
+            return FALSE;
+        case 8:
+        case 67:
+            SetTerrainNormal(tile);
+            tile->spawnOrVisibilityFlags |= SPAWN_FLAG_STAIRS;
+            tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
+            tile->room = 0;
+            gDungeon->stairsSpawn.x = x;
+            gDungeon->stairsSpawn.y = y;
+            return FALSE;
+        case 68:
+            tile->terrainType |= TERRAIN_TYPE_UNK_x800;
+            SetTerrainNormal(tile);
+            tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
+            tile->room = 0;
+            return FALSE;
+        case 9:
+            SetTerrainNormal(tile);
+            tile->room = CORRIDOR_ROOM;
+            return FALSE;
+        case 11:
+            SetTerrainNormal(tile);
+            tile->terrainType |= TERRAIN_TYPE_UNK_x800;
+            tile->room = 0;
+            return FALSE;
+        case 12:
+            SetTerrainNormal(tile);
+            tile->terrainType |= TERRAIN_TYPE_UNK_x1000;
+            tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            tile->terrainType |= TERRAIN_TYPE_UNK_x800;
+            tile->room = 0;
+            return FALSE;
+        case 2:
+        case 13:
+        case 14:
+            SetTerrainWall(tile);
+            tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            tile->room = CORRIDOR_ROOM;
+            return FALSE;
+        default:
+            if (a1 > 16 && a1 < 190) {
+                if (gUnknown_80F6D20[a1].unk0 != 0) {
+                    if (a5) {
+                        sub_805193C(gUnknown_80F6D20[a1].unk0, x, y, gUnknown_80F6D20[a1].unk2, gUnknown_80F6D20[a1].unk4);
+                    }
+                    else {
+                        gDungeon->unk644.unk47 = gUnknown_80F6D20[a1].unk0;
+                    }
+                }
+                else {
+                    if (gUnknown_80F6D20[a1].unk4 != 0) {
+                        gDungeon->unkE220[gUnknown_80F6D20[a1].unk4 - 1].x = x;
+                        gDungeon->unkE220[gUnknown_80F6D20[a1].unk4 - 1].y = y;
+                    }
+                }
+
+                if (gUnknown_80F6D20[a1].unk8 != 0) {
+                    sub_8051998(gUnknown_80F6D20[a1].unk8, x, y, gUnknown_80F6D20[a1].unkA);
+                }
+
+                if (gUnknown_80F6D20[a1].unkB != 20 && a5) {
+                    sub_8051A24(gUnknown_80F6D20[a1].unkB, x, y, gUnknown_80F6D20[a1].unkD);
+                }
+
+                if (gUnknown_80F6D20[a1].unkD != 0) {
+                    SetTerrainSecondary(tile);
+                }
+            }
+            break;
+        case 3:
+        case 15:
+            return FALSE;
+    }
+
+    return FALSE;
 }

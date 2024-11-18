@@ -290,6 +290,7 @@ typedef struct unkDungeon644
     /* 0x42 */ s16 unk42;
     /* 0x44 */ s16 unk44;
     /* 0x46 */ u8 unk46;
+    /* 0x47 */ u8 unk47;
     /* 0x48 */ s32 unk48;
     /* 0x4C */ s32 unk4C;
     /* 0x50 */ s32 unk50;

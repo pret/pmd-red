@@ -24,6 +24,7 @@
 #include "status.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
+#include "structs/str_806B7F8.h"
 
 extern u8 *gTrapNames[];
 extern u8 *gUnknown_80FC5FC[];
@@ -56,18 +57,6 @@ extern s16 gUnknown_80F4F86;
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 extern s16 gUnknown_80F4F8A;
-
-struct unkStruct_806B7F8
-{
-    s16 species;
-    u8 unk2;
-    u32 unk4;
-    u16 level;
-    u8 fillA[2];
-    DungeonPos pos;
-    u8 unk10;
-};
-extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 
 void sub_806A9B4(Entity *, u32);
 

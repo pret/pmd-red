@@ -15,17 +15,7 @@
 #include "dungeon.h"
 #include "pokemon_3.h"
 #include "status_checks_1.h"
-
-struct unkStruct_806B7F8
-{
-    s16 species;
-    u8 unk2;
-    u32 unk4;
-    u16 level;
-    u8 fillA[2];
-    DungeonPos pos;
-    u8 unk10;
-};
+#include "structs/str_806B7F8.h"
 
 EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
 EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};
@@ -60,7 +50,6 @@ bool8 sub_80723D0(Entity *, Entity *, u8, u8);
 void sub_807218C(Entity *);
 void sub_806A2BC(Entity *, u32);
 void sub_806A3D4(u8 *, s32, s32, s32);
-extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
 extern void sub_8042920(struct Entity *r0);
 extern s16 sub_803D970(u32);
 extern s32 sub_803DA20(s32 param_1);
