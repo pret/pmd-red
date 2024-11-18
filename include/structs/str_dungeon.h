@@ -365,7 +365,7 @@ typedef struct Dungeon
     struct MinMaxPosition kecleonShopPos;
     u32 unkE250;
     u8 fillE254[0xE260 - 0xE254];
-    u32 unkE260;
+    Position unkE260;
     /* 0xE264 */ Weather weather; // Uses the weather constants in weather.h.
     /* 0xE27C */ Tile unkE27C[8][8];
     /* 0xE87C */ u8 unkE87C[8][8];

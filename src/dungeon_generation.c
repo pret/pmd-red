@@ -6422,11 +6422,61 @@ bool8 sub_805124C(Tile *tile, u8 a1, s32 x, s32 y, u8 a5)
     return sub_8051A74(tile, a1, x, y, a5);
 }
 
-/*
 void sub_8051288(s32 fixedRoomId)
 {
+    s32 x, y;
     Dungeon *dungeon = gDungeon;
+    struct PositionU8 **fileData = (void *) dungeon->unk13568->data;
+    s32 fixedRoomSizeX = fileData[fixedRoomId]->x;
+    s32 fixedRoomSizeY = fileData[fixedRoomId]->y;
+
+    dungeon->unkE260.x = fixedRoomSizeX;
+    dungeon->unkE260.y = fixedRoomSizeY;
+    // FIX ME
+    gUnknown_202F1DC = ((u8 **)(dungeon->unk13568->data))[fixedRoomId] + 3;
+    gUnknown_202F1E1 = 0;
+    for (x = 5; x < fixedRoomSizeX + 5; x++) {
+        for (y = 5; y < fixedRoomSizeY + 5; y++) {
+            u8 unk = sub_80511F0();
+            if (sub_805124C(GetTileSafe(x, y), unk, x, y, 1)) {
+                dungeon->unkE260.x = x;
+                dungeon->unkE260.y = y;
+            }
+        }
+    }
+
+    for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+        for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+            if (y > 4)
+
+            Tile *tile = GetTileSafe(x, y);
+            if (GetTerrainType(tile) == TERRAIN_TYPE_WALL) {
+                tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            }
+        }
+    }
+
+    if (fixedRoomId != 4) {
+        for (x = 0; x < 17; x++) {
+            for (y = 0; y < 5; y++) {
+                Tile *tile = GetTileSafe(x, y);
+                tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            }
+        }
+    }
+
+    if (gDungeon->tileset < 64) {
+        for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+            for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+                Tile *tile = GetTileSafe(x, y);
+                if (GetTerrainType(tile) == TERRAIN_TYPE_WALL) {
+                    tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+                }
+            }
+        }
+    }
+
+    sub_804E9DC();
 }
-*/
 
 //

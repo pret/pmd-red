@@ -18,7 +18,7 @@ extern void sub_8082FA8(unkStruct_8094924 *, void *, s32);
 
 void SaveTile(unkStruct_8094924 *r0, Tile *tile);
 void sub_80830F8(void * , void*);
-void sub_808312C(void *, u32 *);
+void sub_808312C(void *, void *);
 void SaveDungeonWeather(unkStruct_8094924 *r0, Weather *weather);
 void sub_8083078(void *, u32);
 void sub_80830B4(void *, u8);
