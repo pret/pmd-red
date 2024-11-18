@@ -120,7 +120,8 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
 #define ROOM_FLAG_ALLOW_IMPERFECTIONS 0x4
 
 // Sizeof: 0x1C
-typedef struct UnkDungeonGlobal_unk1C574
+// Defines many of the key properties for dungeon generation, such as the type of layout, base number of rooms, and floor connectivity.
+typedef struct FloorProperties
 {
     u8 unk0;
     s8 roomDensity;
@@ -149,7 +150,7 @@ typedef struct UnkDungeonGlobal_unk1C574
     u8 unk18;
     u8 unk19;
     u8 unk1A;
-} UnkDungeonGlobal_unk1C574;
+} FloorProperties;
 
 typedef struct UnkDungeonGlobal_unk1C590
 {
@@ -428,7 +429,7 @@ typedef struct Dungeon
     struct UnkStructDungeon1BDD4 unk1BDD4;
     struct MessageLogString messageLogStrings[MESSAGE_LOG_STRINGS_COUNT];
     /* 0x1C570 */ DungeonLocation unk1C570;
-    /* 0x1C574 */ UnkDungeonGlobal_unk1C574 unk1C574;
+    /* 0x1C574 */ FloorProperties unk1C574;
     /* 0x1C590 */ UnkDungeonGlobal_unk1C590 unk1C590[4];
     u16 unk1CD70[20];
     UnkDungeonGlobal_unk1CD98 unk1CD98[32];

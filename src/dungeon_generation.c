@@ -13,7 +13,6 @@ extern struct FileArchive gDungeonFileArchive;
 
 extern void ResetFloor(void);
 extern void ResetFloor(void);
-extern void sub_80518F0(void);
 extern void GenerateOneRoomMonsterHouseFloor(void);
 extern void ResolveInvalidSpawns(void);
 extern void GenerateTwoRoomsWithMonsterHouseFloor(void);
@@ -66,7 +65,7 @@ struct GridCell
 
 #define GRID_CELL_LEN 15
 
-static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomId, UnkDungeonGlobal_unk1C574 *unkPtr);
+static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomId, FloorProperties *floorProps);
 static void CreateRoomsAndAnchorsForFixedFloor(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, s32 a5, s32 fixedRoomSizeX, s32 fixedRoomSizeY);
 void sub_8051438(struct GridCell *gridCell, s32 fixedRoomId);
 void sub_8051288(s32 fixedRoomId);
@@ -79,8 +78,8 @@ void AssignRooms(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSiz
 void CreateRoomsAndAnchors(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, u32 roomFlags);
 void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, bool8 disableRoomMerging);
 void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY);
-static void AssignRandomGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, UnkDungeonGlobal_unk1C574 *unkPtr);
-void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 cursorX, s32 cursorY, UnkDungeonGlobal_unk1C574 *unkPtr);
+static void AssignRandomGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, FloorProperties *floorProps);
+void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 cursorX, s32 cursorY, FloorProperties *floorProps);
 void GenerateMazeRoom(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance);
 void GenerateMaze(struct GridCell *gridCell, bool8 useSecondaryTerrain);
 void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bool8 useSecondaryTerrain, u32 roomIndex);
@@ -94,19 +93,20 @@ void sub_804FC74(void);
 void sub_804EB30(void);
 void sub_804E9DC(void);
 void sub_804B534(s32 a0, s32 a1, s32 a2, s32 a3);
-bool8 GenerateFixedFloor(s32 fixedRoomId, UnkDungeonGlobal_unk1C574 *unkPtr);
-void GenerateStandardFloor(s32 a0, s32 a1, UnkDungeonGlobal_unk1C574 *a2);
-void GenerateOuterRingFloor(UnkDungeonGlobal_unk1C574 *a0);
-void GenerateCrossroadsFloor(UnkDungeonGlobal_unk1C574 *a0);
-void GenerateLineFloor(UnkDungeonGlobal_unk1C574 *a0);
-void GenerateCrossFloor(UnkDungeonGlobal_unk1C574 *a0);
-void GenerateBeetleFloor(UnkDungeonGlobal_unk1C574 *a0);
-void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, UnkDungeonGlobal_unk1C574 *unkPtr);
-void sub_8051654(UnkDungeonGlobal_unk1C574 *unkPtr);
-void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unkPtr);
-void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse);
-void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse);
+bool8 GenerateFixedFloor(s32 fixedRoomId, FloorProperties *floorProps);
+void GenerateStandardFloor(s32 a0, s32 a1, FloorProperties *a2);
+void GenerateOuterRingFloor(FloorProperties *a0);
+void GenerateCrossroadsFloor(FloorProperties *a0);
+void GenerateLineFloor(FloorProperties *a0);
+void GenerateCrossFloor(FloorProperties *a0);
+void GenerateBeetleFloor(FloorProperties *a0);
+void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, FloorProperties *floorProps);
+void sub_8051654(FloorProperties *floorProps);
+void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps);
+void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse);
+void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse);
 bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable);
+void ResetInnerBoundaryTileRows(void);
 
 EWRAM_DATA u8 gUnknown_202F1A8 = 0;
 EWRAM_DATA u8 gUnknown_202F1A9 = 0;
@@ -167,7 +167,7 @@ void sub_804AFAC(void)
     s32 x, y;
     s32 i, j, k;
     bool8 r10 = FALSE;
-    UnkDungeonGlobal_unk1C574 *unkPtr = &gDungeon->unk1C574;
+    FloorProperties *floorProps = &gDungeon->unk1C574;
 
     gDungeon->unk13568 = OpenFileAndGetFileDataPtr(gUnknown_80F6DCC, &gDungeonFileArchive);
     sHasKecleonShop = FALSE;
@@ -176,8 +176,8 @@ void sub_804AFAC(void)
     gUnknown_202F1A8 = (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_WATER);
     sStairsRoomIndex = 0xFF;
     sFloorSize = 0;
-    sKecleonShopChance = unkPtr->kecleonShopChance;
-    sMonsterHouseChance = unkPtr->monsterHouseChance;
+    sKecleonShopChance = floorProps->kecleonShopChance;
+    sMonsterHouseChance = floorProps->monsterHouseChance;
     sSecondSpawn = 1;
     sKecleonShopPosition.unk0 = -1;
     sKecleonShopPosition.unk8 = -1;
@@ -186,12 +186,12 @@ void sub_804AFAC(void)
 
     ResetFloor();
 
-    gDungeon->unk664 = unkPtr->unk6;
+    gDungeon->unk664 = floorProps->unk6;
 
     gDungeon->unk3A09 = 0;
     gDungeon->unk3A0A = 0;
 
-    sSecondaryStructuresBudget = unkPtr->secondaryStructuresBudget;
+    sSecondaryStructuresBudget = floorProps->secondaryStructuresBudget;
 
     for (i = 0; i < 10; i++) {
         bool32 r4 = 0;
@@ -214,12 +214,12 @@ void sub_804AFAC(void)
             gDungeon->forceMonsterHouse = 0;
             if (gDungeon->fixedRoomId != 0) {
                 // Check for a full-floor fixed room, if this is the case, generation is done.
-                if (GenerateFixedFloor(gDungeon->fixedRoomId, unkPtr)) {
+                if (GenerateFixedFloor(gDungeon->fixedRoomId, floorProps)) {
                     break;
                 }
             }
             else {
-                u8 r7 = unkPtr->unk0;
+                u8 r7 = floorProps->unk0;
 
                 k = 32;
                 while (1) {
@@ -256,18 +256,18 @@ void sub_804AFAC(void)
                     case 1:
                         y = DungeonRandInt(2) + 2;
                         sFloorSize = 1;
-                        GenerateStandardFloor(4, y, unkPtr);
+                        GenerateStandardFloor(4, y, floorProps);
                         r10 = TRUE;
                         break;
                     case 11:
                         y = DungeonRandInt(2) + 2;
                         sFloorSize = 2;
-                        GenerateStandardFloor(4, y, unkPtr);
+                        GenerateStandardFloor(4, y, floorProps);
                         r10 = TRUE;
                         break;
                     case 0:
                     default:
-                        GenerateStandardFloor(x, y, unkPtr);
+                        GenerateStandardFloor(x, y, floorProps);
                         r10 = TRUE;
                         break;
                     case 2:
@@ -275,11 +275,11 @@ void sub_804AFAC(void)
                         gDungeon->forceMonsterHouse = 1;
                         break;
                     case 3:
-                        GenerateOuterRingFloor(unkPtr);
+                        GenerateOuterRingFloor(floorProps);
                         r10 = TRUE;
                         break;
                     case 4:
-                        GenerateCrossroadsFloor(unkPtr);
+                        GenerateCrossroadsFloor(floorProps);
                         r10 = TRUE;
                         break;
                     case 5:
@@ -287,23 +287,23 @@ void sub_804AFAC(void)
                         gDungeon->forceMonsterHouse = 1;
                         break;
                     case 6:
-                        GenerateLineFloor(unkPtr);
+                        GenerateLineFloor(floorProps);
                         r10 = TRUE;
                         break;
                     case 7:
-                        GenerateCrossFloor(unkPtr);
+                        GenerateCrossFloor(floorProps);
                         break;
                     case 9:
-                        GenerateBeetleFloor(unkPtr);
+                        GenerateBeetleFloor(floorProps);
                         break;
                     case 10:
-                        GenerateOuterRoomsFloor(x, y, unkPtr);
+                        GenerateOuterRoomsFloor(x, y, floorProps);
                         r10 = TRUE;
                         break;
                 }
             }
 
-            sub_80518F0();
+            ResetInnerBoundaryTileRows();
             EnsureImpassableTilesAreWalls();
             if (gUnknown_202F1A9 == 0) {
                 s32 countSp = 0;
@@ -348,11 +348,11 @@ void sub_804AFAC(void)
         }
         sub_804E9DC();
         if (r10) {
-            GenerateSecondaryTerrainFormations(1, unkPtr);
+            GenerateSecondaryTerrainFormations(1, floorProps);
         }
-        r4 = (DungeonRandInt(100) < unkPtr->connectedToTop);
-        SpawnNonEnemies(unkPtr, r4);
-        SpawnEnemies(unkPtr, r4);
+        r4 = (DungeonRandInt(100) < floorProps->connectedToTop);
+        SpawnNonEnemies(floorProps, r4);
+        SpawnEnemies(floorProps, r4);
         ResolveInvalidSpawns();
         if (gDungeon->playerSpawn.x != -1 && gDungeon->playerSpawn.y != -1)
         {
@@ -370,8 +370,8 @@ void sub_804AFAC(void)
         GenerateOneRoomMonsterHouseFloor();
         gDungeon->forceMonsterHouse = TRUE;
         sub_804E9DC();
-        SpawnNonEnemies(unkPtr, FALSE);
-        SpawnEnemies(unkPtr, FALSE);
+        SpawnNonEnemies(floorProps, FALSE);
+        SpawnEnemies(floorProps, FALSE);
         ResolveInvalidSpawns();
     }
 
@@ -380,7 +380,7 @@ void sub_804AFAC(void)
     }
 
     if (sKecleonShopPosition.unk0 >= 0) {
-        sub_8051654(unkPtr);
+        sub_8051654(floorProps);
         gDungeon->unk3A0A = 1;
     }
     else {
@@ -773,7 +773,7 @@ void NAKED sub_804AFAC(void)
 "	movs r1, 0x1\n"
 "	mov r10, r1\n"
 "_0804B2F6:\n"
-"	bl sub_80518F0\n"
+"	bl ResetInnerBoundaryTileRows\n"
 "	bl EnsureImpassableTilesAreWalls\n"
 "	ldr r0, _0804B4B4\n"
 "	ldrb r0, [r0]\n"
@@ -1083,7 +1083,7 @@ void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
  * 6. Create additional "extra hallways" with random walks outside of existing rooms
  * 7. Finalize extra room details with imperfections (unused in vanilla?), and structures with secondary terrain
  */
-void GenerateStandardFloor(s32 gridSizeX, s32 gridSizeY, UnkDungeonGlobal_unk1C574 *unkPtr)
+void GenerateStandardFloor(s32 gridSizeX, s32 gridSizeY, FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -1093,26 +1093,26 @@ void GenerateStandardFloor(s32 gridSizeX, s32 gridSizeY, UnkDungeonGlobal_unk1C5
 
     InitDungeonGrid(grid, gridSizeX, gridSizeY);
 
-    AssignRooms(grid, gridSizeX, gridSizeY, unkPtr->roomDensity);
+    AssignRooms(grid, gridSizeX, gridSizeY, floorProps->roomDensity);
 
-    CreateRoomsAndAnchors(grid, gridSizeX, gridSizeY, listX, listY, unkPtr->roomFlags);
+    CreateRoomsAndAnchors(grid, gridSizeX, gridSizeY, listX, listY, floorProps->roomFlags);
 
-    AssignRandomGridCellConnections(grid, gridSizeX, gridSizeY, unkPtr);
+    AssignRandomGridCellConnections(grid, gridSizeX, gridSizeY, floorProps);
     CreateGridCellConnections(grid, gridSizeX, gridSizeY, listX, listY, FALSE);
 
     EnsureConnectedGrid(grid, gridSizeX, gridSizeY, listX, listY);
 
-    GenerateMazeRoom(grid, gridSizeX, gridSizeY, unkPtr->mazeRoomChance);
+    GenerateMazeRoom(grid, gridSizeX, gridSizeY, floorProps->mazeRoomChance);
     GenerateKecleonShop(grid, gridSizeX, gridSizeY, sKecleonShopChance);
     GenerateMonsterHouse(grid, gridSizeX, gridSizeY, sMonsterHouseChance);
 
-    GenerateExtraHallways(grid, gridSizeX, gridSizeY, unkPtr->numExtraHallways);
+    GenerateExtraHallways(grid, gridSizeX, gridSizeY, floorProps->numExtraHallways);
     GenerateRoomImperfections(grid, gridSizeX, gridSizeY);
     GenerateSecondaryStructures(grid, gridSizeX, gridSizeY);
 }
 
 // GenerateOuterRingFloor - Generates on a 6x4 grid, with the outer border of grid cells being hallways and the inner 4x2 grid being rooms.
-void GenerateOuterRingFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
+void GenerateOuterRingFloor(FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -1245,7 +1245,7 @@ void GenerateOuterRingFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
 	grid[5][2].connectedToBottom = TRUE;
 	grid[5][3].connectedToTop = TRUE;
 
-	AssignRandomGridCellConnections(grid, gridSizeX, gridSizeY, unkPtr);
+	AssignRandomGridCellConnections(grid, gridSizeX, gridSizeY, floorProps);
 	CreateGridCellConnections(grid, gridSizeX, gridSizeY, listX, listY, FALSE);
 
 	EnsureConnectedGrid(grid, gridSizeX, gridSizeY, listX, listY);
@@ -1253,7 +1253,7 @@ void GenerateOuterRingFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
 	GenerateKecleonShop(grid, gridSizeX, gridSizeY, sKecleonShopChance);
 	GenerateMonsterHouse(grid, gridSizeX, gridSizeY, sMonsterHouseChance);
 
-	GenerateExtraHallways(grid, gridSizeX, gridSizeY, unkPtr->numExtraHallways);
+	GenerateExtraHallways(grid, gridSizeX, gridSizeY, floorProps->numExtraHallways);
 	GenerateRoomImperfections(grid, gridSizeX, gridSizeY);
 }
 
@@ -1261,7 +1261,7 @@ void GenerateOuterRingFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
  * GenerateCrossroadsFloor - Generates a floor layout with hallways on the inside and rooms on the outside, with empty corners.
  * Also nicknamed "Ladder Layout" by some.
  */
-void GenerateCrossroadsFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
+void GenerateCrossroadsFloor(FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -1387,12 +1387,12 @@ void GenerateCrossroadsFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
 	GenerateKecleonShop(grid, gridSizeX, gridSizeY, sKecleonShopChance);
 	GenerateMonsterHouse(grid, gridSizeX, gridSizeY, sMonsterHouseChance);
 
-	GenerateExtraHallways(grid, gridSizeX, gridSizeY, unkPtr->numExtraHallways);
+	GenerateExtraHallways(grid, gridSizeX, gridSizeY, floorProps->numExtraHallways);
 	GenerateRoomImperfections(grid, gridSizeX, gridSizeY);
 }
 
 // GenerateLineFloor - Generates a floor layout with 5 grid cells in a horizontal line.
-void GenerateLineFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
+void GenerateLineFloor(FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -1414,10 +1414,10 @@ void GenerateLineFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
     gridSizeX = 5, gridSizeY = 1;
     InitDungeonGrid(grid, gridSizeX, gridSizeY);
 
-    AssignRooms(grid, gridSizeX, gridSizeY, unkPtr->roomDensity);
-    CreateRoomsAndAnchors(grid, gridSizeX, gridSizeY, listX, listY, unkPtr->roomFlags);
+    AssignRooms(grid, gridSizeX, gridSizeY, floorProps->roomDensity);
+    CreateRoomsAndAnchors(grid, gridSizeX, gridSizeY, listX, listY, floorProps->roomFlags);
 
-    AssignRandomGridCellConnections(grid, gridSizeX, gridSizeY, unkPtr);
+    AssignRandomGridCellConnections(grid, gridSizeX, gridSizeY, floorProps);
     CreateGridCellConnections(grid, gridSizeX, gridSizeY, listX, listY, disableRoomMerging);
 
     EnsureConnectedGrid(grid, gridSizeX, gridSizeY, listX, listY);
@@ -1425,12 +1425,12 @@ void GenerateLineFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
     GenerateKecleonShop(grid, gridSizeX, gridSizeY, sKecleonShopChance);
     GenerateMonsterHouse(grid, gridSizeX, gridSizeY, sMonsterHouseChance);
 
-    GenerateExtraHallways(grid, gridSizeX, gridSizeY, unkPtr->numExtraHallways);
+    GenerateExtraHallways(grid, gridSizeX, gridSizeY, floorProps->numExtraHallways);
     GenerateRoomImperfections(grid, gridSizeX, gridSizeY);
 }
 
 // GenerateCrossFloor - Generates a floor layout with 5 rooms arranged in a "plus" or "cross" configuration.
-void GenerateCrossFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
+void GenerateCrossFloor(FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -1463,7 +1463,7 @@ void GenerateCrossFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
     grid[0][2].isInvalid = TRUE;
     grid[2][2].isInvalid = TRUE;
 
-    CreateRoomsAndAnchors(grid, gridSizeX, gridSizeY, listX, listY, unkPtr->roomFlags);
+    CreateRoomsAndAnchors(grid, gridSizeX, gridSizeY, listX, listY, floorProps->roomFlags);
 
     grid[0][1].connectedToRight = TRUE;
     grid[1][1].connectedToLeft = TRUE;
@@ -1480,13 +1480,13 @@ void GenerateCrossFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
     GenerateKecleonShop(grid, gridSizeX, gridSizeY, sKecleonShopChance);
     GenerateMonsterHouse(grid, gridSizeX, gridSizeY, sMonsterHouseChance);
 
-    GenerateExtraHallways(grid, gridSizeX, gridSizeY, unkPtr->numExtraHallways);
+    GenerateExtraHallways(grid, gridSizeX, gridSizeY, floorProps->numExtraHallways);
     GenerateRoomImperfections(grid, gridSizeX, gridSizeY);
 }
 
 // GenerateBeetleFloor - Generates a floor layout in a "beetle" shape, with a
 // 3x3 grid of rooms, a merged center column, and hallways along each row
-void GenerateBeetleFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
+void GenerateBeetleFloor(FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -1512,7 +1512,7 @@ void GenerateBeetleFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
         }
     }
 
-    CreateRoomsAndAnchors(grid, gridSizeX, gridSizeY, listX, listY, unkPtr->roomFlags);
+    CreateRoomsAndAnchors(grid, gridSizeX, gridSizeY, listX, listY, floorProps->roomFlags);
 
     // Connect rooms in the same row together
     for (y = 0; y < 3; y++) {
@@ -1532,7 +1532,7 @@ void GenerateBeetleFloor(UnkDungeonGlobal_unk1C574 *unkPtr)
     GenerateKecleonShop(grid, gridSizeX, gridSizeY, sKecleonShopChance);
     GenerateMonsterHouse(grid, gridSizeX, gridSizeY, sMonsterHouseChance);
 
-    GenerateExtraHallways(grid, gridSizeX, gridSizeY, unkPtr->numExtraHallways);
+    GenerateExtraHallways(grid, gridSizeX, gridSizeY, floorProps->numExtraHallways);
     GenerateRoomImperfections(grid, gridSizeX, gridSizeY);
 }
 
@@ -1569,7 +1569,7 @@ static void MergeRoomsVertically(s32 roomX, s32 roomY1, s32 room_dy, struct Grid
 
 // GenerateOuterRoomsFloor - Generates a floor layout with a ring of rooms and nothing on the interior.
 // This layout is bugged and will not properly connect rooms for gridSizeX < 3.
-void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, UnkDungeonGlobal_unk1C574 *unkPtr)
+void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -1595,7 +1595,7 @@ void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, UnkDungeonGlobal_un
         }
     }
 
-    CreateRoomsAndAnchors(grid, gridSizeX, gridSizeY, listX, listY, unkPtr->roomFlags);
+    CreateRoomsAndAnchors(grid, gridSizeX, gridSizeY, listX, listY, floorProps->roomFlags);
 
     // Maybe Todo: Add EpicYoshiMaster's fixed implementation of this function
 
@@ -1638,16 +1638,16 @@ void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, UnkDungeonGlobal_un
 
     EnsureConnectedGrid(grid, gridSizeX, gridSizeY, listX, listY);
 
-    GenerateMazeRoom(grid, gridSizeX, gridSizeY, unkPtr->mazeRoomChance);
+    GenerateMazeRoom(grid, gridSizeX, gridSizeY, floorProps->mazeRoomChance);
     GenerateKecleonShop(grid, gridSizeX, gridSizeY, sKecleonShopChance);
     GenerateMonsterHouse(grid, gridSizeX, gridSizeY, sMonsterHouseChance);
 
-    GenerateExtraHallways(grid, gridSizeX, gridSizeY, unkPtr->numExtraHallways);
+    GenerateExtraHallways(grid, gridSizeX, gridSizeY, floorProps->numExtraHallways);
     GenerateRoomImperfections(grid, gridSizeX, gridSizeY);
     GenerateSecondaryStructures(grid, gridSizeX, gridSizeY);
 }
 
-bool8 GenerateFixedFloor(s32 fixedRoomId, UnkDungeonGlobal_unk1C574 *unkPtr)
+bool8 GenerateFixedFloor(s32 fixedRoomId, FloorProperties *floorProps)
 {
     s32 fixedRoomSizeX = ((struct FixedRoomsData **)(gDungeon->unk13568->data))[fixedRoomId]->x;
     s32 fixedRoomSizeY = ((struct FixedRoomsData **)(gDungeon->unk13568->data))[fixedRoomId]->y;
@@ -1668,12 +1668,12 @@ bool8 GenerateFixedFloor(s32 fixedRoomId, UnkDungeonGlobal_unk1C574 *unkPtr)
         gridSizeY = DUNGEON_MAX_SIZE_Y / (fixedRoomSizeY + 4);
         if (gridSizeY <= 1)
             gridSizeY = 1;
-        sub_804C790(gridSizeX, gridSizeY, fixedRoomSizeX, fixedRoomSizeY, fixedRoomId, unkPtr);
+        sub_804C790(gridSizeX, gridSizeY, fixedRoomSizeX, fixedRoomSizeY, fixedRoomId, floorProps);
         return FALSE;
     }
 }
 
-static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomId, UnkDungeonGlobal_unk1C574 *unkPtr)
+static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomId, FloorProperties *floorProps)
 {
     s32 tries;
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
@@ -1684,7 +1684,7 @@ static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fi
 
     GetGridPositions(listX, listY, gridSizeX, gridSizeY);
     InitDungeonGrid(grid, gridSizeX, gridSizeY);
-    AssignRooms(grid, gridSizeX, gridSizeY, unkPtr->roomDensity);
+    AssignRooms(grid, gridSizeX, gridSizeY, floorProps->roomDensity);
     for (cursorX = 0; cursorX < gridSizeX; cursorX++) {
         for (cursorY = 0; cursorY < gridSizeY; cursorY++) {
             grid[cursorX][cursorY].unk27 = 1;
@@ -1700,7 +1700,7 @@ static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fi
     }
     CreateRoomsAndAnchorsForFixedFloor(grid, gridSizeX, gridSizeY, listX, listY, r10, fixedRoomSizeX, fixedRoomSizeY);
     if (gridSizeX != 1 || gridSizeY != 1) {
-        AssignGridCellConnections(grid, gridSizeX, gridSizeY, cursorX, cursorY, unkPtr);
+        AssignGridCellConnections(grid, gridSizeX, gridSizeY, cursorX, cursorY, floorProps);
         CreateGridCellConnections(grid, gridSizeX, gridSizeY, listX, listY, TRUE);
         EnsureConnectedGrid(grid, gridSizeX, gridSizeY, listX, listY);
     }
@@ -2365,12 +2365,12 @@ void GenerateSecondaryStructures(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_L
     }
 }
 
-static void AssignRandomGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, UnkDungeonGlobal_unk1C574 *unkPtr)
+static void AssignRandomGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, FloorProperties *floorProps)
 {
     s32 cursorX = DungeonRandInt(gridSizeX);
     s32 cursorY = DungeonRandInt(gridSizeY);
 
-    AssignGridCellConnections(grid, gridSizeX, gridSizeY, cursorX, cursorY, unkPtr);
+    AssignGridCellConnections(grid, gridSizeX, gridSizeY, cursorX, cursorY, floorProps);
 }
 
 /*
@@ -2392,12 +2392,12 @@ static void AssignRandomGridCellConnections(struct GridCell grid[GRID_CELL_LEN][
  *
  */
 
-void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 cursorX, s32 cursorY, UnkDungeonGlobal_unk1C574 *unkPtr)
+void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 cursorX, s32 cursorY, FloorProperties *floorProps)
 {
 	s32 i;
     s32 x = cursorX;
     s32 y = cursorY;
-	s32 floorConnectivity = unkPtr->floorConnectivity;
+	s32 floorConnectivity = floorProps->floorConnectivity;
 	// Draw a random connection direction.
 	// Connect the current cell with the cell to the:
 	//	0: east
@@ -2490,7 +2490,7 @@ void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
 		}
 	}
 
-	if (unkPtr->allowDeadEnds)
+	if (floorProps->allowDeadEnds)
         return;
 
     // No dead ends, add some extra connections!
@@ -4617,7 +4617,7 @@ void ShuffleSpawnPositions(struct PositionU8 *spawns, s32 count)
  */
 extern const s16 gUnknown_80F4DA0;
 extern const s16 gUnknown_80F4DA4;
-void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse)
+void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 {
     struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
     s32 count;
@@ -4722,7 +4722,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 	}
 
 	if (count != 0) {
-		s32 numItems = unkPtr->itemDensity;
+		s32 numItems = floorProps->itemDensity;
 		if (numItems != 0) {
 			// Add variation to the item count
 			numItems = DungeonRandRange(numItems - 2, numItems + 2);
@@ -4763,7 +4763,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 	}
 
 	if (count != 0) {
-		s32 numItems = unkPtr->buriedItemDensity;
+		s32 numItems = floorProps->buriedItemDensity;
 
 		if (numItems != 0) {
 			// Add variation to the item count
@@ -4879,7 +4879,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 	}
 
 	if (count != 0) {
-		s32 numTraps = DungeonRandRange(unkPtr->trapDensity / 2, unkPtr->trapDensity);
+		s32 numTraps = DungeonRandRange(floorProps->trapDensity / 2, floorProps->trapDensity);
 
 		if (numTraps > 0) {
             s32 trapIndex;
@@ -4953,7 +4953,7 @@ void SpawnNonEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHous
 /*
  * SpawnEnemies - Spawns all enemies, including those in forced monster houses
  */
-void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse)
+void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 {
 	struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
     s32 count;
@@ -4962,7 +4962,7 @@ void SpawnEnemies(UnkDungeonGlobal_unk1C574 *unkPtr, bool8 isEmptyMonsterHouse)
     s32 x, y;
     Dungeon *dungeon = gDungeon;
     s32 numEnemies, numMonsterHouseEnemies;
-    s32 enemyDensity = unkPtr->enemyDensity;
+    s32 enemyDensity = floorProps->enemyDensity;
 
 	if (enemyDensity > 0) {
 		// Positive means value with variance
@@ -5150,7 +5150,7 @@ extern const s32 gUnknown_80F6DF8[8];
 // https://decomp.me/scratch/sA4YH - Blue
 // https://decomp.me/scratch/SNyV8 - Sky
 #ifdef NONMATCHING
-void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unkPtr)
+void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps)
 {
     s32 densityN;
     s32 x, y;
@@ -5159,7 +5159,7 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
     s32 numToGen;
     s32 numTilesFill;
 
-	if (!(unkPtr->roomFlags & flag))
+	if (!(floorProps->roomFlags & flag))
         return;
 
 	// Generate 1-3 "river+lake" formations
@@ -5321,7 +5321,7 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
     }
 
 	// Generate standalone lakes secondary_terrain_density # of times
-	for (densityN = 0; densityN < unkPtr->unk15; densityN++) {
+	for (densityN = 0; densityN < floorProps->unk15; densityN++) {
         s32 x, y;
         bool8 table[10][10];
 		// Try to pick a random tile in the interior to seed the "lake"
@@ -5408,7 +5408,7 @@ void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unk
 }
 
 #else
-NAKED void GenerateSecondaryTerrainFormations(u32 flag, UnkDungeonGlobal_unk1C574 *unkPtr)
+NAKED void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps)
 {
     asm_unified("\n"
 "	push {r4-r7,lr}\n"
@@ -6396,9 +6396,10 @@ static void CreateRoomsAndAnchorsForFixedFloor(struct GridCell grid[GRID_CELL_LE
 	}
 }
 
-extern u8 *gUnknown_202F1DC;
-extern u8 gUnknown_202F1E0;
-extern u8 gUnknown_202F1E1;
+static EWRAM_DATA u8 *gUnknown_202F1DC = NULL;
+static EWRAM_DATA u8 gUnknown_202F1E0 = 0;
+static EWRAM_DATA u8 gUnknown_202F1E1 = 0;
+static UNUSED EWRAM_DATA s32 sUnusedEwram = 0;
 
 u8 sub_80511F0(void)
 {
@@ -6544,11 +6545,130 @@ void sub_8051438(struct GridCell *gridCell, s32 fixedRoomId)
     }
 }
 
-/*
-void sub_8051654(UnkDungeonGlobal_unk1C574 *unkPtr)
+extern const s16 gUnknown_80F57D4[][3][3];
+
+void sub_8051654(FloorProperties *floorProps)
 {
+    s32 i, n;
+    s32 x, y;
+    s32 middleX, middleY;
+    s32 rangeX = 3, rangeY = 3;
+    s32 xIndex, yIndex;
+    s32 r10;
 
+    // Note: These loops make no sense as the range is always at least 3 - which means the loop always breaks after the first iteration.
+    // In fact, pmd red's compiler optimizes out these loops completely. These are however needed to match and were NOT optimized by blue's compiler which proves that's how it was written.
+    for (n = 0; n < 20; n++) {
+        rangeX = DungeonRandRange(3, (sKecleonShopPosition.maxX - sKecleonShopPosition.minX) - 2);
+        if (rangeX < 3)
+            rangeX = 3;
+        if (rangeX >= 3)
+            break;
+    }
+
+    for (n = 0; n < 20; n++) {
+        rangeY = DungeonRandRange(3, (sKecleonShopPosition.maxY - sKecleonShopPosition.minY) - 2);
+        if (rangeY < 3)
+            rangeY = 3;
+        if (rangeY >= 3)
+            break;
+    }
+
+    r10 = DungeonRandRange(2, 4);
+    for (i = 0; i < r10; i++) {
+        if (sKecleonShopPosition.maxX - sKecleonShopPosition.minX <= rangeX)
+            break;
+
+        if (DungeonRandInt(100) < 50) {
+            s32 y;
+            for (y = sKecleonShopPosition.minY; y < sKecleonShopPosition.maxY; y++) {
+                GetTileMut(sKecleonShopPosition.minX, y)->terrainType &= ~(TERRAIN_TYPE_SHOP);
+            }
+            sKecleonShopPosition.minX++;
+        }
+        else {
+            s32 y;
+            sKecleonShopPosition.maxX--;
+            for (y = sKecleonShopPosition.minY; y < sKecleonShopPosition.maxY; y++) {
+                GetTileMut(sKecleonShopPosition.maxX, y)->terrainType &= ~(TERRAIN_TYPE_SHOP);
+            }
+        }
+    }
+
+    for (i = 0; i < r10; i++) {
+        if (sKecleonShopPosition.maxY - sKecleonShopPosition.minY <= rangeY)
+            break;
+
+        if (DungeonRandInt(100) < 50) {
+            s32 x;
+            for (x = sKecleonShopPosition.minX; x < sKecleonShopPosition.maxX; x++) {
+                GetTileMut(x, sKecleonShopPosition.minY)->terrainType &= ~(TERRAIN_TYPE_SHOP);
+            }
+            sKecleonShopPosition.minY++;
+        }
+        else {
+            s32 x;
+            sKecleonShopPosition.maxY--;
+            for (x = sKecleonShopPosition.minX; x < sKecleonShopPosition.maxX; x++) {
+                GetTileMut(x, sKecleonShopPosition.maxY)->terrainType &= ~(TERRAIN_TYPE_SHOP);
+            }
+        }
+    }
+
+    for (x = sKecleonShopPosition.minX; x < sKecleonShopPosition.maxX; x++) {
+        for (y = sKecleonShopPosition.minY; y < sKecleonShopPosition.maxY; y++) {
+            Tile *tile = GetTileMut(x, y);
+            if (!(tile->terrainType & TERRAIN_TYPE_SHOP))
+                continue;
+            if (!(tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION))
+                continue;
+
+            tile->terrainType &= ~(TERRAIN_TYPE_SHOP);
+        }
+    }
+
+    middleX = (sKecleonShopPosition.minX + sKecleonShopPosition.maxX) / 2 - 1;
+    middleY = (sKecleonShopPosition.minY + sKecleonShopPosition.maxY) / 2 - 1;
+    xIndex = 0;
+    for (x = middleX; x < middleX + 3; x++, xIndex++) {
+        yIndex = 0;
+        for (y = middleY; y < middleY + 3; y++, yIndex++) {
+            Tile *tile = GetTileMut(x, y);
+            if (!(tile->terrainType & TERRAIN_TYPE_SHOP))
+                continue;
+            if ((tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
+                continue;
+            if ((tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION))
+                continue;
+
+            if (gUnknown_80F57D4[floorProps->unk18][yIndex][xIndex] > DungeonRandInt(100)) {
+                tile->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+            }
+        }
+    }
 }
-*/
 
-//
+/*
+ * ResetInnerBoundaryTileRows - Resets inner boundary tile rows (y == 1 and y == 30)
+ * to their initial state of all wall tiles, with impassable walls at the edges.
+ *
+ * This is needed because during generation these soft border walls may have been altered or breached.
+ */
+void ResetInnerBoundaryTileRows(void)
+{
+    s32 x;
+
+    for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+        Tile *tile = GetTileMut(x, 1);
+        ResetTile(tile);
+        if (x == 0 || x == DUNGEON_MAX_SIZE_X - 1) {
+            tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+        }
+
+        tile = GetTileMut(x, 30);
+        ResetTile(tile);
+        if (x == 0 || x == DUNGEON_MAX_SIZE_X - 1) {
+            tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+        }
+    }
+}

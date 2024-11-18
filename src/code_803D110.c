@@ -54,7 +54,7 @@ struct UnkDungeonFileData
 struct UnkDataFileStruct
 {
     struct UnkDungeonFileData **unk0;
-    UnkDungeonGlobal_unk1C574 *unk4;
+    FloorProperties *unk4;
     u16 **unk8;
     UnkDungeonGlobal_unk1CD98 **unkC;
     u16 **unk10;
