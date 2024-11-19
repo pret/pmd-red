@@ -269,9 +269,10 @@ bool8 ComparePokemonNames(s16 a1, s16 a2)
     return FALSE;
 }
 
-void CopyMonsterNameToBuffer(u8 * buffer, s16 index)
+void CopyMonsterNameToBuffer(u8 * buffer, s32 index)
 {
-    strncpy(buffer, gMonsterParameters[index].species, 0x14);
+    s16 index_s16 = index;
+    strncpy(buffer, gMonsterParameters[index_s16].species, 0x14);
 }
 
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index)
@@ -423,9 +424,10 @@ u8 GetFriendArea(s32 index)
     return gMonsterParameters[index_s32].friendArea;
 }
 
-u16 GetBaseHP(s16 index)
+u16 GetBaseHP(s32 index)
 {
-    return gMonsterParameters[index].baseHP;
+    s16 index_s32 = index;
+    return gMonsterParameters[index_s32].baseHP;
 }
 
 bool8 MonsterIDCanThrowItems(s16 index)
