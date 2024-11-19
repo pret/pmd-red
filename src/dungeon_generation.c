@@ -3,10 +3,13 @@
 #include "file_system.h"
 #include "tile_types.h"
 #include "dungeon_map_access.h"
+#include "dungeon_message.h"
 #include "dungeon_random.h"
+#include "dungeon_util.h"
 #include "items.h"
 #include "pokemon.h"
 #include "code_80450F8.h"
+#include "code_803E668.h"
 #include "constants/direction.h"
 #include "constants/item.h"
 #include "constants/monster.h"
@@ -17,15 +20,15 @@
 extern const u8 gUnknown_80F6DCC[];
 extern struct FileArchive gDungeonFileArchive;
 
-extern void ResetFloor(void);
-extern void ResetFloor(void);
-extern void GenerateOneRoomMonsterHouseFloor(void);
-extern void ResolveInvalidSpawns(void);
-extern void GenerateTwoRoomsWithMonsterHouseFloor(void);
+extern void sub_80460F8(DungeonPos *, Item *, u32);
+extern s32 sub_803DA20(s16 species);
+extern void sub_8049840(void);
+extern void sub_80429FC(DungeonPos *r0);
+extern void sub_80498A8(s32, s32);
+extern void sub_8049B8C(void);
 extern u8 GetFloorType();
 extern void sub_806C330(s32 a0, s32 a1, s16 a2, u8 a3);
 
-extern const DungeonPos gAdjacentTileOffsets[];
 extern const bool8 gUnknown_80F6DD5[][NUM_DIRECTIONS];
 
 enum CardinalDirection
@@ -71,48 +74,50 @@ struct GridCell
 
 #define GRID_CELL_LEN 15
 
+static void ResetFloor(void);
 static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fixedRoomSizeY, s32 fixedRoomNumber, FloorProperties *floorProps);
 static void CreateRoomsAndAnchorsForFixedFloor(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, s32 a5, s32 fixedRoomSizeX, s32 fixedRoomSizeY);
-void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber);
-void sub_8051288(s32 fixedRoomNumber);
-void GetGridPositions(s32 *listX, s32 *listY, s32 gridSizeX, s32 gridSizeY);
-void InitDungeonGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
-void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
-void GenerateSecondaryStructure(struct GridCell *gridCell);
-void GenerateSecondaryStructures(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
-void AssignRooms(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 roomsNumber);
-void CreateRoomsAndAnchors(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, u32 roomFlags);
-void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, bool8 disableRoomMerging);
-void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY);
+static void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber);
+static void sub_8051288(s32 fixedRoomNumber);
+static void GetGridPositions(s32 *listX, s32 *listY, s32 gridSizeX, s32 gridSizeY);
+static void InitDungeonGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
+static void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
+static void GenerateSecondaryStructure(struct GridCell *gridCell);
+static void GenerateSecondaryStructures(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY);
+static void AssignRooms(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 roomsNumber);
+static void CreateRoomsAndAnchors(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, u32 roomFlags);
+static void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, bool8 disableRoomMerging);
+static void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY);
 static void AssignRandomGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, FloorProperties *floorProps);
-void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 cursorX, s32 cursorY, FloorProperties *floorProps);
-void GenerateMazeRoom(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance);
-void GenerateMaze(struct GridCell *gridCell, bool8 useSecondaryTerrain);
-void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bool8 useSecondaryTerrain, u32 roomIndex);
-void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance);
-void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance);
-void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 numExtraHallways);
+static void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 cursorX, s32 cursorY, FloorProperties *floorProps);
+static void GenerateMazeRoom(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance);
+static void GenerateMaze(struct GridCell *gridCell, bool8 useSecondaryTerrain);
+static void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bool8 useSecondaryTerrain, u32 roomIndex);
+static void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance);
+static void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance);
+static void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 numExtraHallways);
 static void MergeRoomsVertically(s32 roomX, s32 roomY1, s32 room_dy, struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN]);
-void CreateHallway(s32 startX, s32 startY, s32 endX, s32 endY, bool8 vertical, s32 turnX, s32 turnY);
-void EnsureImpassableTilesAreWalls(void);
-void sub_804FC74(void);
-void sub_804EB30(void);
-void FinalizeJunctions(void);
-void sub_804B534(s32 a0, s32 a1, s32 a2, s32 a3);
-bool8 ProcessFixedRoom(s32 fixedRoomNumber, FloorProperties *floorProps);
-void GenerateStandardFloor(s32 a0, s32 a1, FloorProperties *a2);
-void GenerateOuterRingFloor(FloorProperties *a0);
-void GenerateCrossroadsFloor(FloorProperties *a0);
-void GenerateLineFloor(FloorProperties *a0);
-void GenerateCrossFloor(FloorProperties *a0);
-void GenerateBeetleFloor(FloorProperties *a0);
-void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, FloorProperties *floorProps);
-void sub_8051654(FloorProperties *floorProps);
-void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps);
-void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse);
-void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse);
-bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable);
-void ResetInnerBoundaryTileRows(void);
+static void CreateHallway(s32 startX, s32 startY, s32 endX, s32 endY, bool8 vertical, s32 turnX, s32 turnY);
+static void EnsureImpassableTilesAreWalls(void);
+static void sub_804FC74(void);
+static void FinalizeJunctions(void);
+static void sub_804B534(s32 a0, s32 a1, s32 a2, s32 a3);
+static bool8 ProcessFixedRoom(s32 fixedRoomNumber, FloorProperties *floorProps);
+static void GenerateStandardFloor(s32 a0, s32 a1, FloorProperties *a2);
+static void GenerateOuterRingFloor(FloorProperties *a0);
+static void GenerateCrossroadsFloor(FloorProperties *a0);
+static void GenerateLineFloor(FloorProperties *a0);
+static void GenerateCrossFloor(FloorProperties *a0);
+static void GenerateBeetleFloor(FloorProperties *a0);
+static void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, FloorProperties *floorProps);
+static void sub_8051654(FloorProperties *floorProps);
+static void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps);
+static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse);
+static void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse);
+static void ResetInnerBoundaryTileRows(void);
+static void GenerateOneRoomMonsterHouseFloor(void);
+static void ResolveInvalidSpawns(void);
+static void GenerateTwoRoomsWithMonsterHouseFloor(void);
 
 EWRAM_DATA bool8 gUnknown_202F1A8 = FALSE;
 static EWRAM_DATA bool8 sInvalidGeneration = FALSE;
@@ -450,7 +455,7 @@ void GenerateFloor(void)
     CloseFile(gDungeon->unk13568);
 }
 
-void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
+static void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
 {
     s32 x, y;
     for (x = xStart; x < maxX; x++) {
@@ -490,7 +495,7 @@ void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
  * 6. Create additional "extra hallways" with random walks outside of existing rooms
  * 7. Finalize extra room details with imperfections (unused in vanilla?), and structures with secondary terrain
  */
-void GenerateStandardFloor(s32 gridSizeX, s32 gridSizeY, FloorProperties *floorProps)
+static void GenerateStandardFloor(s32 gridSizeX, s32 gridSizeY, FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -519,7 +524,7 @@ void GenerateStandardFloor(s32 gridSizeX, s32 gridSizeY, FloorProperties *floorP
 }
 
 // GenerateOuterRingFloor - Generates on a 6x4 grid, with the outer border of grid cells being hallways and the inner 4x2 grid being rooms.
-void GenerateOuterRingFloor(FloorProperties *floorProps)
+static void GenerateOuterRingFloor(FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -668,7 +673,7 @@ void GenerateOuterRingFloor(FloorProperties *floorProps)
  * GenerateCrossroadsFloor - Generates a floor layout with hallways on the inside and rooms on the outside, with empty corners.
  * Also nicknamed "Ladder Layout" by some.
  */
-void GenerateCrossroadsFloor(FloorProperties *floorProps)
+static void GenerateCrossroadsFloor(FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -799,7 +804,7 @@ void GenerateCrossroadsFloor(FloorProperties *floorProps)
 }
 
 // GenerateLineFloor - Generates a floor layout with 5 grid cells in a horizontal line.
-void GenerateLineFloor(FloorProperties *floorProps)
+static void GenerateLineFloor(FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -837,7 +842,7 @@ void GenerateLineFloor(FloorProperties *floorProps)
 }
 
 // GenerateCrossFloor - Generates a floor layout with 5 rooms arranged in a "plus" or "cross" configuration.
-void GenerateCrossFloor(FloorProperties *floorProps)
+static void GenerateCrossFloor(FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -893,7 +898,7 @@ void GenerateCrossFloor(FloorProperties *floorProps)
 
 // GenerateBeetleFloor - Generates a floor layout in a "beetle" shape, with a
 // 3x3 grid of rooms, a merged center column, and hallways along each row
-void GenerateBeetleFloor(FloorProperties *floorProps)
+static void GenerateBeetleFloor(FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -976,7 +981,7 @@ static void MergeRoomsVertically(s32 roomX, s32 roomY1, s32 room_dy, struct Grid
 
 // GenerateOuterRoomsFloor - Generates a floor layout with a ring of rooms and nothing on the interior.
 // This layout is bugged and will not properly connect rooms for gridSizeX < 3.
-void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, FloorProperties *floorProps)
+static void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, FloorProperties *floorProps)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -1054,7 +1059,7 @@ void GenerateOuterRoomsFloor(s32 gridSizeX_, s32 gridSizeY_, FloorProperties *fl
     GenerateSecondaryStructures(grid, gridSizeX, gridSizeY);
 }
 
-bool8 ProcessFixedRoom(s32 fixedRoomNumber, FloorProperties *floorProps)
+static bool8 ProcessFixedRoom(s32 fixedRoomNumber, FloorProperties *floorProps)
 {
     s32 fixedRoomSizeX = ((struct FixedRoomsData **)(gDungeon->unk13568->data))[fixedRoomNumber]->x;
     s32 fixedRoomSizeY = ((struct FixedRoomsData **)(gDungeon->unk13568->data))[fixedRoomNumber]->y;
@@ -1118,7 +1123,7 @@ static void sub_804C790(s32 gridSizeX, s32 gridSizeY, s32 fixedRoomSizeX, s32 fi
  * GenerateOneRoomMonsterHouseFloor - Generates a floor layout with just one large room which is a Monster House.
  * This generator is used as a fallback if the event generation fails too many times.
  */
-void GenerateOneRoomMonsterHouseFloor(void)
+static void GenerateOneRoomMonsterHouseFloor(void)
 {
     s32 x, y;
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
@@ -1144,7 +1149,7 @@ void GenerateOneRoomMonsterHouseFloor(void)
 }
 
 // GenerateTwoRoomsWithMonsterHouseFloor - Generates a floor layout with two rooms (left and right), with one being a Monster House.
-void GenerateTwoRoomsWithMonsterHouseFloor(void)
+static void GenerateTwoRoomsWithMonsterHouseFloor(void)
 {
     struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN];
     s32 listX[GRID_CELL_LEN];
@@ -1228,7 +1233,7 @@ void GenerateTwoRoomsWithMonsterHouseFloor(void)
  *
  * Repeat 4-8 until a check fails.
  */
-void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 numExtraHallways)
+static void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 numExtraHallways)
 {
     s32 i, j;
 
@@ -1426,7 +1431,7 @@ void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
 }
 
 // GetGridPositions - Determines the starting positions of grid cells based on the given floor grid dimensions
-void GetGridPositions(s32 *listX, s32 *listY, s32 gridSizeX, s32 gridSizeY)
+static void GetGridPositions(s32 *listX, s32 *listY, s32 gridSizeX, s32 gridSizeY)
 {
     s32 i, sum;
 
@@ -1449,7 +1454,7 @@ void GetGridPositions(s32 *listX, s32 *listY, s32 gridSizeX, s32 gridSizeY)
  * The dungeon grid is an array of grid cells stored in column-major order
  * (to give contiguous storage to cells with the same x value), with a fixed column size of 15.
  */
-void InitDungeonGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY)
+static void InitDungeonGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY)
 {
     s32 x, y;
 
@@ -1502,7 +1507,7 @@ void InitDungeonGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gri
  */
 
 #define ROOM_BITS_COUNT 256 // Despite max rooms being 32, randomRoomBits can hold up to 256 possible rooms
-void AssignRooms(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 roomsNumber)
+static void AssignRooms(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 roomsNumber)
 {
     bool8 randomRoomBits[ROOM_BITS_COUNT];
     s32 i, nShuffles;
@@ -1602,7 +1607,7 @@ void AssignRooms(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSiz
  *
  * If the room is an anchor, a single tile is placed with a hallway indicator for later.
  */
-void CreateRoomsAndAnchors(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, u32 roomFlags)
+static void CreateRoomsAndAnchors(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, u32 roomFlags)
 {
     s32 roomNumber = 0;
     s32 x, y;
@@ -1748,7 +1753,7 @@ void CreateRoomsAndAnchors(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s
  *
  * If a room doesn't meet the conditions for the secondary structure chosen, it will be left unchanged.
  */
-void GenerateSecondaryStructures(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY)
+static void GenerateSecondaryStructures(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY)
 {
     s32 x, y;
 
@@ -1799,7 +1804,7 @@ static void AssignRandomGridCellConnections(struct GridCell grid[GRID_CELL_LEN][
  *
  */
 
-void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 cursorX, s32 cursorY, FloorProperties *floorProps)
+static void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 cursorX, s32 cursorY, FloorProperties *floorProps)
 {
 	s32 i;
     s32 x = cursorX;
@@ -2031,7 +2036,7 @@ void AssignGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
  * Merged rooms take up the full tile space occupied between the two rooms.
  *
  */
-void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, bool8 disableRoomMerging)
+static void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY, bool8 disableRoomMerging)
 {
     s32 x, y;
 
@@ -2407,7 +2412,7 @@ void CreateGridCellConnections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
  * We pick a random corner, derive our direction from the movement being used, then seek up to 10 tiles for one to replace.
  * We avoid getting too close to hallways and ensure our cardinal neighbor tiles match what we expect for open terrain.
  */
-void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY)
+static void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY)
 {
     s32 x, y;
 
@@ -2620,7 +2625,7 @@ void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN
  *
  * The vertical flag specifies whether the hallway is being generated horizontally or vertically
  */
-void CreateHallway(s32 x, s32 y, s32 endX, s32 endY, bool8 vertical, s32 turnX_, s32 turnY_)
+static void CreateHallway(s32 x, s32 y, s32 endX, s32 endY, bool8 vertical, s32 turnX_, s32 turnY_)
 {
     s32 startX = x;
     s32 startY = y;
@@ -2780,7 +2785,7 @@ void CreateHallway(s32 x, s32 y, s32 endX, s32 endY, bool8 vertical, s32 turnX_,
  *
  * If no eligible room is found, the room will be removed and filled back in.
  */
-void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY)
+static void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 *listX, s32 *listY)
 {
     s32 x, y;
 
@@ -2927,7 +2932,7 @@ void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
  *
  * Otherwise, the tile will be a wall.
  */
-void SetTerrainObstacleChecked(Tile *tile, bool8 useSecondaryTerrain, u8 roomIndex)
+static void SetTerrainObstacleChecked(Tile *tile, bool8 useSecondaryTerrain, u8 roomIndex)
 {
     SetTerrainWall(tile);
     if (useSecondaryTerrain && tile->room == roomIndex) {
@@ -2962,7 +2967,7 @@ void SetTerrainObstacleChecked(Tile *tile, bool8 useSecondaryTerrain, u8 roomInd
  * X | X X X
  * X | X X X
  */
-void FinalizeJunctions(void)
+static void FinalizeJunctions(void)
 {
     s32 x, y;
 
@@ -3066,7 +3071,7 @@ void sub_804EB30(void)
  * The kecleon shop will occupy the whole room interior, with a one tile margin from the room walls.
  * Kecleon shop tiles restrict monster and stair spawns.
  */
-void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance)
+static void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance)
 {
     s16 listX[GRID_CELL_LEN];
     s16 listY[GRID_CELL_LEN];
@@ -3224,7 +3229,7 @@ void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32
  * A Monster House will be generated in a random room that's valid, connected, not merged, not a maze room, and
  * is not a few unknown conditions.
  */
-void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance)
+static void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance)
 {
 	// To spawn a monster house on this floor:
 	// - It must meet the probability chance
@@ -3351,7 +3356,7 @@ void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s3
  * Candidate maze rooms have to be valid, connected, have odd dimensions, and not have any other features.
  * If any candidates are found, the game will select one of these rooms and call GenerateMaze.
  */
-void GenerateMazeRoom(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance)
+static void GenerateMazeRoom(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gridSizeX, s32 gridSizeY, s32 chance)
 {
     bool8 values[256];
     s32 i;
@@ -3459,7 +3464,7 @@ void GenerateMazeRoom(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LEN], s32 gr
  * surrounded by striples of obstacles (maze walls).
  *
  */
-void GenerateMaze(struct GridCell *gridCell, bool8 useSecondaryTerrain)
+static void GenerateMaze(struct GridCell *gridCell, bool8 useSecondaryTerrain)
 {
     s32 curX, curY;
     u8 roomIndex;
@@ -3550,7 +3555,7 @@ void GenerateMaze(struct GridCell *gridCell, bool8 useSecondaryTerrain)
  * If an open tile is found, an obstacle is placed between the two tiles, and (x0, y0) moves to the new open tile.
  * This process continues until no valid open tile can be found.
  */
-void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bool8 useSecondaryTerrain, u32 roomIndex)
+static void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bool8 useSecondaryTerrain, u32 roomIndex)
 {
 	while (1) {
 		s32 direction = DungeonRandInt(NUM_CARDINAL_DIRECTIONS);
@@ -3630,7 +3635,7 @@ void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 yMax, bo
 	}
 }
 
-void SetTerrainSecondaryWithFlag(Tile *tile, u32 additionalFlag)
+static void SetTerrainSecondaryWithFlag(Tile *tile, u32 additionalFlag)
 {
     SetTerrainSecondary(tile);
     tile->terrainType |= additionalFlag;
@@ -3639,7 +3644,7 @@ void SetTerrainSecondaryWithFlag(Tile *tile, u32 additionalFlag)
 /*
  * SetSpawnFlag5 - Sets unknown spawn flag 0x5 on all tiles in a room
  */
-void SetSpawnFlag5(struct GridCell *gridCell)
+static void SetSpawnFlag5(struct GridCell *gridCell)
 {
     s32 x, y;
 
@@ -3653,7 +3658,7 @@ void SetSpawnFlag5(struct GridCell *gridCell)
 /*
  * IsNextToHallway - Checks if a tile DungeonPos is either in a hallway or next to one.
  */
-bool8 IsNextToHallway(s32 x, s32 y)
+static bool8 IsNextToHallway(s32 x, s32 y)
 {
     s32 offsetX, offsetY;
     s32 posX, posY;
@@ -3683,7 +3688,7 @@ bool8 IsNextToHallway(s32 x, s32 y)
 }
 
 // See GenerateSecondaryStructures for more information.
-void GenerateSecondaryStructure(struct GridCell *gridCell)
+static void GenerateSecondaryStructure(struct GridCell *gridCell)
 {
     switch (DungeonRandInt(6)) {
         // Generate a "split room" with two sides separated by a line of water/lava
@@ -3888,7 +3893,7 @@ void GenerateSecondaryStructure(struct GridCell *gridCell)
  *
  * A tile marked for an item also must not have a trap there
  */
-void ResolveInvalidSpawns(void)
+static void ResolveInvalidSpawns(void)
 {
     s32 x, y;
 
@@ -3919,7 +3924,7 @@ void ResolveInvalidSpawns(void)
 }
 
 // Converts Secondary terrain to both secondary and normal. Possibly to note that it's a water tile?
-void sub_804FC74(void)
+static void sub_804FC74(void)
 {
     s32 x, y;
 
@@ -3935,7 +3940,7 @@ void sub_804FC74(void)
 /*
  * EnsureImpassableTilesAreWalls - Force all tiles with the impassable flag to be set as walls.
  */
-void EnsureImpassableTilesAreWalls(void)
+static void EnsureImpassableTilesAreWalls(void)
 {
     s32 x, y;
 
@@ -3948,7 +3953,7 @@ void EnsureImpassableTilesAreWalls(void)
     }
 }
 
-void ResetTile(Tile *tile)
+static void ResetTile(Tile *tile)
 {
     tile->terrainType = 0;
     tile->spawnOrVisibilityFlags = 0;
@@ -3977,7 +3982,7 @@ static inline bool8 PosIsOutOfBounds(s32 x, s32 y)
     return FALSE;
 }
 
-void ResetFloor(void)
+static void ResetFloor(void)
 {
     s32 x, y;
 
@@ -4028,7 +4033,7 @@ struct PositionU8
 /*
  * ShuffleSpawnPositions - Randomly shuffle an array of spawn positions
  */
-void ShuffleSpawnPositions(struct PositionU8 *spawns, s32 count)
+static void ShuffleSpawnPositions(struct PositionU8 *spawns, s32 count)
 {
     s32 i;
 	// Do twice as many swaps as there are items in the array
@@ -4058,7 +4063,7 @@ void ShuffleSpawnPositions(struct PositionU8 *spawns, s32 count)
  */
 extern const s16 gUnknown_80F4DA0;
 extern const s16 gUnknown_80F4DA4;
-void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
+static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 {
     struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
     s32 count;
@@ -4394,7 +4399,7 @@ void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 /*
  * SpawnEnemies - Spawns all enemies, including those in forced monster houses
  */
-void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
+static void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 {
 	struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
     s32 count;
@@ -4590,7 +4595,7 @@ extern const s32 gUnknown_80F6DF8[8];
 // https://decomp.me/scratch/sA4YH - Blue
 // https://decomp.me/scratch/SNyV8 - Sky
 #ifdef NONMATCHING
-void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps)
+static void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps)
 {
     s32 densityN;
     s32 x, y;
@@ -4848,7 +4853,7 @@ void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps)
 }
 
 #else
-NAKED void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps)
+NAKED static void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps)
 {
     asm_unified("\n"
 "	push {r4-r7,lr}\n"
@@ -5841,7 +5846,7 @@ static EWRAM_DATA u8 gUnknown_202F1E0 = 0;
 static EWRAM_DATA u8 gUnknown_202F1E1 = 0;
 static UNUSED EWRAM_DATA s32 sUnusedEwram = 0;
 
-u8 sub_80511F0(void)
+static u8 sub_80511F0(void)
 {
     if (gUnknown_202F1E1 != 0) {
         gUnknown_202F1E1--;
@@ -5861,16 +5866,17 @@ u8 sub_80511F0(void)
     return gUnknown_202F1E0;
 }
 
-bool8 sub_8051A74(Tile *tile, u8 a1, s32 x, s32 y, u8 a5);
+static bool8 PlaceFixedRoomTile(Tile *tile, u8 a1, s32 x, s32 y, u8 a5);
+static bool8 sub_805210C(u8 itemId);
 
-bool8 sub_805124C(Tile *tile, u8 a1, s32 x, s32 y, u8 a5)
+static bool8 sub_805124C(Tile *tile, u8 a1, s32 x, s32 y, u8 a5)
 {
     tile->terrainType |= TERRAIN_TYPE_UNBREAKABLE;
     tile->unkE = 0;
-    return sub_8051A74(tile, a1, x, y, a5);
+    return PlaceFixedRoomTile(tile, a1, x, y, a5);
 }
 
-void sub_8051288(s32 fixedRoomNumber)
+static void sub_8051288(s32 fixedRoomNumber)
 {
     s32 x, y;
     Dungeon *dungeon = gDungeon;
@@ -5931,7 +5937,7 @@ void sub_8051288(s32 fixedRoomNumber)
     FinalizeJunctions();
 }
 
-void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber)
+static void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber)
 {
     s32 x, y;
     Dungeon *dungeon = gDungeon;
@@ -5987,7 +5993,7 @@ void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber)
 
 extern const s16 gUnknown_80F57D4[][3][3];
 
-void sub_8051654(FloorProperties *floorProps)
+static void sub_8051654(FloorProperties *floorProps)
 {
     s32 i, n;
     s32 x, y;
@@ -6094,7 +6100,7 @@ void sub_8051654(FloorProperties *floorProps)
  *
  * This is needed because during generation these soft border walls may have been altered or breached.
  */
-void ResetInnerBoundaryTileRows(void)
+static void ResetInnerBoundaryTileRows(void)
 {
     s32 x;
 
@@ -6113,12 +6119,7 @@ void ResetInnerBoundaryTileRows(void)
     }
 }
 
-bool8 sub_805210C(u8 itemId);
-
-extern void sub_80460F8(DungeonPos *, Item *, u32);
-extern s32 sub_803DA20(s16 species);
-
-void sub_805193C(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
+static void sub_805193C(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
 {
     Item item;
     DungeonPos pos = {x, y};
@@ -6139,7 +6140,7 @@ void sub_805193C(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
 }
 
 // s16 species memes strike again. Will the fix ever be discovered?
-void sub_8051998(s16 species_, s32 x, s32 y, u32 unk2_)
+static void sub_8051998(s16 species_, s32 x, s32 y, u32 unk2_, u32 UNUSED unused)
 {
     struct unkStruct_806B7F8 unkStruct;
     s32 species = SpeciesId(species_);
@@ -6167,7 +6168,7 @@ void sub_8051998(s16 species_, s32 x, s32 y, u32 unk2_)
     }
 }
 
-void sub_8051A24(u8 trapId, s32 x, s32 y, bool8 isVisible)
+static void SpawnEnemyTrapAtPos(u8 trapId, s32 x, s32 y, bool8 isVisible)
 {
     DungeonPos pos;
     Entity *trapEntity;
@@ -6175,7 +6176,7 @@ void sub_8051A24(u8 trapId, s32 x, s32 y, bool8 isVisible)
 
     pos.x = x;
     pos.y = y;
-    trapEntity = sub_8045684(trapId, &pos, 0);
+    trapEntity = SpawnTrap(trapId, &pos, 0);
     if (trapEntity != NULL) {
         tile->object = trapEntity;
         trapEntity->isVisible = isVisible;
@@ -6190,59 +6191,58 @@ struct UnkStruct_80F6D20
     s16 unk8;
     u8 unkA;
     u8 unkB;
-    u8 fillC;
+    u8 unkC;
     u8 unkD;
     u8 unkE;
 };
 
 extern const struct UnkStruct_80F6D20 gUnknown_80F6D20[];
 
-extern void sub_8049840(void);
-
-bool8 sub_8051A74(Tile *tile, u8 a1, s32 x, s32 y, u8 a5)
+// Used to spawn a single tile when generating a fixed room. The tile might contain an item or a monster.
+static bool8 PlaceFixedRoomTile(Tile *tile, u8 fixedRoomActionId, s32 x, s32 y, bool8 a5)
 {
-    if (a1 > 0xF) {
+    if (fixedRoomActionId > 0xF) {
         SetTerrainNormal(tile);
     }
 
-    switch (a1) {
+    switch (fixedRoomActionId) {
         case 69:
             gDungeon->unk644.unk40 = x;
             gDungeon->unk644.unk42 = y;
-            sub_8051A24(0xB, x, y, FALSE);
+            SpawnEnemyTrapAtPos(TRAP_SEAL_TRAP, x, y, FALSE);
             // fall through
         case 0:
             SetTerrainNormal(tile);
             tile->room = 0;
-            return FALSE;
+            break;
         case 1:
             SetTerrainWall(tile);
             tile->terrainType &= ~(TERRAIN_TYPE_UNBREAKABLE);
             tile->room = CORRIDOR_ROOM;
-            return FALSE;
+            break;
         case 4:
             SetTerrainNormal(tile);
-            tile->room = 0;
             gDungeon->playerSpawn.x = x;
-            gDungeon->playerSpawn.x = y;
+            gDungeon->playerSpawn.y = y;
             tile->room = 0;
-            return FALSE;
+            break;
         case 5:
-            SetTerrainNormal(tile);
+            SetTerrainSecondary(tile);
             tile->room = 0;
-            return FALSE;
+            break;
         case 6:
             SetTerrainType(tile, TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL);
-            tile->terrainType &= ~(TERRAIN_TYPE_UNBREAKABLE);
             tile->room = CORRIDOR_ROOM;
-            return FALSE;
+            break;
         case 7:
             gUnknown_202F1A8 = 1;
             sub_8049840();
+            // fall through
+        case 10:
             SetTerrainType(tile, TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL);
             tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
             tile->room = CORRIDOR_ROOM;
-            return FALSE;
+            break;
         case 8:
         case 67:
             SetTerrainNormal(tile);
@@ -6251,70 +6251,198 @@ bool8 sub_8051A74(Tile *tile, u8 a1, s32 x, s32 y, u8 a5)
             tile->room = 0;
             gDungeon->stairsSpawn.x = x;
             gDungeon->stairsSpawn.y = y;
-            return FALSE;
+            break;
         case 68:
             tile->terrainType |= TERRAIN_TYPE_UNK_x800;
             SetTerrainNormal(tile);
             tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
             tile->room = 0;
-            return FALSE;
+            break;
         case 9:
             SetTerrainNormal(tile);
             tile->room = CORRIDOR_ROOM;
-            return FALSE;
+            break;
         case 11:
             SetTerrainNormal(tile);
             tile->terrainType |= TERRAIN_TYPE_UNK_x800;
             tile->room = 0;
-            return FALSE;
+            break;
         case 12:
             SetTerrainNormal(tile);
             tile->terrainType |= TERRAIN_TYPE_UNK_x1000;
             tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
             tile->terrainType |= TERRAIN_TYPE_UNK_x800;
             tile->room = 0;
-            return FALSE;
+            break;
         case 2:
         case 13:
         case 14:
             SetTerrainWall(tile);
             tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
             tile->room = CORRIDOR_ROOM;
-            return FALSE;
+            break;
         default:
-            if (a1 > 16 && a1 < 190) {
-                if (gUnknown_80F6D20[a1].unk0 != 0) {
+            if (fixedRoomActionId > 15 && fixedRoomActionId < 220) {
+                const struct UnkStruct_80F6D20 *ptr = &gUnknown_80F6D20[fixedRoomActionId];
+                tile->room = ptr->unkC;
+                if (ptr->unk0 != 0) {
                     if (a5) {
-                        sub_805193C(gUnknown_80F6D20[a1].unk0, x, y, gUnknown_80F6D20[a1].unk2, gUnknown_80F6D20[a1].unk4);
+                        sub_805193C(ptr->unk0, x, y, ptr->unk2, ptr->unk4);
                     }
                     else {
-                        gDungeon->unk644.unk47 = gUnknown_80F6D20[a1].unk0;
+                        gDungeon->unk644.unk47 = ptr->unk0;
                     }
                 }
                 else {
-                    if (gUnknown_80F6D20[a1].unk4 != 0) {
-                        gDungeon->unkE220[gUnknown_80F6D20[a1].unk4 - 1].x = x;
-                        gDungeon->unkE220[gUnknown_80F6D20[a1].unk4 - 1].y = y;
+                    if (ptr->unk4 != 0) {
+                        gDungeon->unkE220[ptr->unk4 - 1].x = x;
+                        gDungeon->unkE220[ptr->unk4 - 1].y = y;
                     }
                 }
 
-                if (gUnknown_80F6D20[a1].unk8 != 0) {
-                    sub_8051998(gUnknown_80F6D20[a1].unk8, x, y, gUnknown_80F6D20[a1].unkA);
+                if (ptr->unk8 != 0) {
+                    sub_8051998(ptr->unk8, x, y, ptr->unkA, fixedRoomActionId);
                 }
 
-                if (gUnknown_80F6D20[a1].unkB != 20 && a5) {
-                    sub_8051A24(gUnknown_80F6D20[a1].unkB, x, y, gUnknown_80F6D20[a1].unkD);
+                if (ptr->unkB != 20 && a5) {
+                    SpawnEnemyTrapAtPos(ptr->unkB, x, y, ptr->unkD);
                 }
 
-                if (gUnknown_80F6D20[a1].unkD != 0) {
+                if (ptr->unkE != 0) {
                     SetTerrainSecondary(tile);
                 }
             }
             break;
         case 3:
         case 15:
-            return FALSE;
+            break;
     }
+
+    return FALSE;
+}
+
+void sub_8051E3C(void)
+{
+    s32 x, y;
+
+    for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+        for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+            Tile *tile = GetTileMut(x, y);
+            if (tile->unkE > 0xF) {
+                PlaceFixedRoomTile(tile, tile->unkE, x, y, FALSE);
+            }
+        }
+    }
+}
+
+extern const u8 *const gUnknown_80FDDF0;
+extern const u8 *const gUnknown_80FDDD0;
+
+void sub_8051E7C(Entity *pokemon)
+{
+    Tile *tile = GetTileMut(pokemon->pos.x, pokemon->pos.y - 1);
+
+    if (!(tile->terrainType & TERRAIN_TYPE_UNK_x1000)) {
+        LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FDDF0); // It can't be used here!
+    }
+    else if (!gDungeon->unk3A09) {
+        s32 x, y;
+        DungeonPos pos = {pokemon->pos.x, pokemon->pos.y - 1};
+        u32 roomId = GetEntityRoom(pokemon);
+
+        for (y = pokemon->pos.y - 21; y <= pokemon->pos.y + 19; y++) {
+            for (x = pokemon->pos.x -20; x <= pokemon->pos.x + 20; x++) {
+                Tile *loopTile;
+                s32 xDiff = x - gDungeon->unkE250.minX;
+                s32 yDiff = y - gDungeon->unkE250.minY;
+
+                if (xDiff < 0 || yDiff < 0)
+                    continue;
+                if (xDiff >= 8 || yDiff >= 8)
+                    continue;
+                if (x < gDungeon->unkE250.minX + 1 || y < gDungeon->unkE250.minY + 1)
+                    continue;
+                if (x >= gDungeon->unkE250.maxX - 1 || y >= gDungeon->unkE250.maxY - 1)
+                    continue;
+
+                loopTile = GetTileMut(x, y);
+                if (loopTile->terrainType & TERRAIN_TYPE_UNBREAKABLE) {
+                    loopTile->terrainType = gDungeon->unkE27C[xDiff][yDiff].terrainType;
+                    loopTile->spawnOrVisibilityFlags = gDungeon->unkE27C[xDiff][yDiff].spawnOrVisibilityFlags;
+                }
+
+                PlaceFixedRoomTile(loopTile, gDungeon->unkE87C[xDiff][yDiff], x, y, TRUE);
+                loopTile->spawnOrVisibilityFlags |= 3;
+                if (roomId != CORRIDOR_ROOM) {
+                    loopTile->room = roomId;
+                }
+            }
+        }
+
+        for (y = pokemon->pos.y - 21; y <= pokemon->pos.y + 19; y++) {
+            for (x = pokemon->pos.x -20; x <= pokemon->pos.x + 20; x++) {
+                s32 xDiff = x - gDungeon->unkE250.minX;
+                s32 yDiff = y - gDungeon->unkE250.minY;
+
+                if (xDiff < 0 || yDiff < 0)
+                    continue;
+                if (xDiff >= 8 || yDiff >= 8)
+                    continue;
+                if (x < gDungeon->unkE250.minX + 1 || y < gDungeon->unkE250.minY + 1)
+                    continue;
+                if (x >= gDungeon->unkE250.maxX - 1 || y >= gDungeon->unkE250.maxY - 1)
+                    continue;
+
+                sub_80498A8(x, y);
+            }
+        }
+
+        gDungeon->unk3A09 = TRUE;
+        tile->terrainType &= ~(TERRAIN_TYPE_IMPASSABLE_WALL | TERRAIN_TYPE_UNK_x1000);
+        sub_80498A8(pokemon->pos.x, pokemon->pos.y - 1);
+        sub_8049B8C();
+        sub_8049ED4();
+        sub_80429FC(&pos);
+        LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FDDD0); // The closed corridor was opened!
+        sub_803E708(0x14, 0x3C);
+    }
+    else {
+        LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FDDF0); // It can't be used here!
+    }
+}
+
+static inline bool8 MonHasItem(PokemonStruct1 *mon)
+{
+    return (mon->heldItem.id != 0);
+}
+
+static bool8 sub_805210C(u8 itemId)
+{
+    s32 i;
+
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        if (ItemExists(&gTeamInventoryRef->teamItems[i])) {
+            if (gTeamInventoryRef->teamItems[i].id == itemId)
+                return TRUE;
+        }
+    }
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        if (PokemonFlag1Struct2(&gRecruitedPokemonRef->pokemon2[i]) && ItemExists(&gRecruitedPokemonRef->pokemon2[i].itemSlot)) {
+            if (gRecruitedPokemonRef->pokemon2[i].itemSlot.id == itemId)
+                return TRUE;
+        }
+    }
+
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])) {
+            if (MonHasItem(&gRecruitedPokemonRef->pokemon[i]) && gRecruitedPokemonRef->pokemon[i].heldItem.id == itemId)
+                return TRUE;
+        }
+    }
+
+    if (gTeamInventoryRef->teamStorage[itemId] != 0)
+        return TRUE;
 
     return FALSE;
 }

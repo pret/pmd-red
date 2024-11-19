@@ -524,7 +524,7 @@ Entity *sub_804550C(s16 a)
 );
 }
 
-Entity *sub_8045684(u8 trapID, DungeonPos *pos, u8 c)
+Entity *SpawnTrap(u8 trapID, DungeonPos *pos, u8 c)
 {
     Entity *entity;
     s32 i;

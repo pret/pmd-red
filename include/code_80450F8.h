@@ -3,7 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 
-Entity *sub_8045684(u8 trapID, DungeonPos *pos, u8 c);
+Entity *SpawnTrap(u8 trapID, DungeonPos *pos, u8 c);
 Entity *sub_8045708(DungeonPos *pos);
 void sub_80457DC(Entity* ent);
 

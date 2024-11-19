@@ -227,7 +227,6 @@ SECTIONS {
         src/dungeon_map_access.o(.text);
         src/tile_types.o(.text);
         src/dungeon_generation.o(.text);
-        asm/code_804FD30.o(.text);
         src/dungeon_message.o(.text);
         src/dungeon_move.o(.text);
         src/move_actions.o(.text);

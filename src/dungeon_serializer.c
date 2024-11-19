@@ -911,7 +911,7 @@ static void ReadDungeonTraps(DataSerializer *seri)
 
         if (trapID != 0xFF) {
             tile = GetTileMut(pos.x, pos.y);
-            entity = sub_8045684(trapID, &pos, unk1);
+            entity = SpawnTrap(trapID, &pos, unk1);
             if (entity) {
                 tile->object = entity;
                 entity->isVisible = isVisible;

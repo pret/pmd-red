@@ -2497,7 +2497,7 @@ _0807FA56:
 	movs r0, 0x11
 	mov r1, sp
 	movs r2, 0x2
-	bl sub_8045684
+	bl SpawnTrap
 	cmp r0, 0
 	beq _0807FA88
 	str r0, [r4, 0x14]
@@ -2508,7 +2508,7 @@ _0807FA56:
 _0807FA72:
 	mov r1, sp
 	movs r2, 0
-	bl sub_8045684
+	bl SpawnTrap
 	cmp r0, 0
 	beq _0807FA88
 	str r0, [r4, 0x14]

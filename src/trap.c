@@ -138,7 +138,7 @@ bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3)
         tile->object->isVisible = TRUE;
     }
     else {
-        entity = sub_8045684(trapID,pos,param_3);
+        entity = SpawnTrap(trapID,pos,param_3);
         if (entity == NULL)
 _0807FD6E:
             return FALSE;

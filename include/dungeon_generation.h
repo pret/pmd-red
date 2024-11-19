@@ -53,5 +53,11 @@ enum SecondaryStructureType {
 
 void GenerateFloor(void);
 bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable);
+void sub_804EB30(void);
+void sub_8051E3C(void);
+
+#include "structs/dungeon_entity.h"
+
+void sub_8051E7C(Entity *pokemon);
 
 #endif
