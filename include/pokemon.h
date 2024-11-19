@@ -41,7 +41,7 @@ void InitializeRecruitedPokemon(void);
 //u8 GetBodySize(s16 index);
 
 
-void CopyMonsterNameToBuffer(u8 * buffer, s16 index);
+void CopyMonsterNameToBuffer(u8 * buffer, s32 index);
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index);
 void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 colorNum);
 void sub_808D930(u8 *buffer, s32 index);
@@ -63,7 +63,7 @@ u8 GetChanceAsleep(s16 index);
 u32 GetWeight(s16 index);
 u32 GetSize(s16 index);
 u8 GetFriendArea(s32 index);
-u16 GetBaseHP(s16 index);
+u16 GetBaseHP(s32 index);
 bool8 MonsterIDCanThrowItems(s16 index);
 u8 GetUnk12(s16 index);
 s16 GetPokemonEvolveFrom(s16 index);
