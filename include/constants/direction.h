@@ -2,7 +2,7 @@
 #define GUARD_CONSTANTS_DIRECTION_H
 
 #define DIRECTION_MASK 7
-#define DIRECTION_MASK_CARDINAL 6 // Only South, Easy, North and West
+#define DIRECTION_MASK_CARDINAL 6 // Only South, East, North and West
 
 enum Direction
 {
