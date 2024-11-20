@@ -16,7 +16,6 @@ extern s32 sub_80902C8(u8 dungeon);
 extern s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0);
 extern u32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
-extern u8 GetBodySize(s16 index);
 extern bool8 sub_80848EC(void);
 extern u8 sub_8043D10(void);
 extern const u8 *GetDungeonName2(u8 dungeon);

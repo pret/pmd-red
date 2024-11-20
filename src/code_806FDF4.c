@@ -45,7 +45,6 @@ u8 sub_806B8CC();
 bool8 sub_805FBE8(u8 *a0);
 void sub_8083D88();
 u8 sub_808529C(s32);
-extern u8 GetBodySize(s16 index);
 void nullsub_96(Entity *pokemon,Entity *target);
 u8 sub_8097900(s16);
 void sub_806F910(void);
