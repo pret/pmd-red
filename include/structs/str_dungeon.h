@@ -334,7 +334,7 @@ typedef struct Dungeon
     Entity *unkBC;
     u8 fillC0[0x134 - 0xC0];
     struct unkStruct_Dungeon134_sub unk134;
-    RGB colorRamp[0x100];
+    /* 0x47C */ RGB colorRamp[0x100];
     /* 0x57C */ u8 fill57C[0x5C0 - 0x57c];
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];
@@ -376,9 +376,9 @@ typedef struct Dungeon
     /* 0x3A16 */ s16 unk3A16;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     /* 0xEA18 */ DungeonPos playerSpawn;
-    DungeonPos stairsSpawn; // stairs location
+    /* 0xEA1C */ DungeonPos stairsSpawn; // stairs location
     DungeonPos unkE220[8];
-    struct MinMaxPosition kecleonShopPos;
+    /* 0xEA24 */ struct MinMaxPosition kecleonShopPos;
     struct MinMaxPosition unkE250;
     unkDungeonE260 unkE260;
     /* 0xE264 */ Weather weather; // Uses the weather constants in weather.h.
@@ -428,7 +428,7 @@ typedef struct Dungeon
     /* 0x181E8 */ UnkDungeonGlobal_unk181E8_sub unk181e8;
     u8 fill18220[0x1BDD4 - 0x1822C];
     struct UnkStructDungeon1BDD4 unk1BDD4;
-    struct MessageLogString messageLogStrings[MESSAGE_LOG_STRINGS_COUNT];
+    /* 0x1BE14 */ struct MessageLogString messageLogStrings[MESSAGE_LOG_STRINGS_COUNT];
     /* 0x1C570 */ DungeonLocation unk1C570;
     /* 0x1C574 */ FloorProperties unk1C574;
     /* 0x1C590 */ UnkDungeonGlobal_unk1C590 unk1C590[4];
