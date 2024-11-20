@@ -34,7 +34,7 @@ static bool8 xxx_dungeon_80442D0(bool8);
 
 bool8 IsBossFight()
 {
-    if (gDungeon->bossBattleIndex != 0 && gDungeon->bossBattleIndex <= 0x31)
+    if (gDungeon->fixedRoomNumber != 0 && gDungeon->fixedRoomNumber <= 0x31)
     {
         return TRUE;
     }

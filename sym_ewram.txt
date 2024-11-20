@@ -274,47 +274,7 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
 	.space 0x10
 
     .include "src/dungeon_map_access.o"
-
-gUnknown_202F1A8: /* 202F1A8 (sub_8043CE4 - sub_8051A74) */
-	.space 0x1
-gUnknown_202F1A9: /* 202F1A9 (sub_804AFAC) */
-	.space 0x1
-gUnknown_202F1AA: /* 202F1AA (sub_804AFAC - sub_804EEE4) */
-	.space 0x1
-gUnknown_202F1AB: /* 202F1AB (sub_804AFAC - sub_804EEE4) */
-	.space 0x1
-gUnknown_202F1AC: /* 202F1AC (sub_804AFAC - sub_804F278) */
-	.space 0x1
-gUnknown_202F1AD: /* 202F1AD (sub_804AFAC - sub_804D154) */
-	.space 0x1
-gUnknown_202F1AE: /* 202F1AE (sub_804AFAC - sub_804D084) */
-	.space 0x2
-gUnknown_202F1B0: /* 202F1B0 (sub_804AFAC - sub_804C53C) */
-	.space 0x2
-gUnknown_202F1B2: /* 202F1B2 (sub_804AFAC - sub_804C53C) */
-	.space 0x2
-gUnknown_202F1B4: /* 202F1B4 (sub_804AFAC - sub_804FF08) */
-	.space 0x4
-gUnknown_202F1B8: /* 202F1B8 (sub_804AFAC - sub_8051654) */
-	.space 0x10
-gUnknown_202F1C8: /* 202F1C8 (sub_804AFAC - sub_804F694) */
-	.space 0x4
-gUnknown_202F1CC: /* 202F1CC (sub_804D154) */
-	.space 0x4
-gUnknown_202F1D0: /* 202F1D0 (sub_804AFAC) */
-	.space 0x4
-gUnknown_202F1D4: /* 202F1D4 (sub_8050C30) */
-	.space 0x4
-gUnknown_202F1D8: /* 202F1D8 (sub_804AFAC - sub_804EBC8) */
-	.space 0x4
-
-gUnknown_202F1DC: /* 202F1DC (sub_80511F0 - sub_8051438) */
-	.space 0x4
-gUnknown_202F1E0: /* 202F1E0 (sub_80511F0) */
-	.space 0x1
-gUnknown_202F1E1: /* 202F1E1 (sub_80511F0 - sub_8051438) */
-	.space 0x7
-
+    .include "src/dungeon_generation.o"
     .include "src/dungeon_message.o"
     .include "src/dungeon_move.o"
     .include "src/code_805D8C8_1.o"

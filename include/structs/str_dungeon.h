@@ -116,37 +116,41 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     s16 unk42; // x42
 } UnkDungeonGlobal_unk181E8_sub; // x44
 
+#define ROOM_FLAG_ALLOW_SECONDARY_TERRAIN 0x1
+#define ROOM_FLAG_ALLOW_IMPERFECTIONS 0x4
+
 // Sizeof: 0x1C
-typedef struct UnkDungeonGlobal_unk1C574
+// Defines many of the key properties for dungeon generation, such as the type of layout, base number of rooms, and floor connectivity.
+typedef struct FloorProperties
 {
-    u8 unk0;
-    u8 unk1;
+    u8 layout;
+    s8 roomDensity;
     u8 unk2;
     u8 unk3;
     u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
+    u8 floorConnectivity;
+    u8 enemyDensity;
+    u8 kecleonShopChance; // Percentage chance 0-100%
+    u8 monsterHouseChance; // Percentage chance 0-100%
+    u8 mazeRoomChance; // Percentage chance 0-100%
     u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
+    bool8 allowDeadEnds;
+    u8 secondaryStructuresBudget; // Maximum number of secondary structures that can be generated
+    u8 roomFlags; // See ROOM_FLAG_
     u8 unkE;
-    u8 unkF;
-    u8 unk10;
+    u8 itemDensity;
+    u8 trapDensity;
     u8 unk11;
     u8 unk12;
-    u8 unk13;
-    u8 unk14;
+    u8 numExtraHallways;
+    u8 buriedItemDensity; // Density of buried items (in walls)
     u8 unk15;
     u8 unk16;
     u8 unk17;
     u8 unk18;
-    u8 unk19;
+    u8 itemlessMonsterHouseChance; // Chance that a monster house will be itemless
     u8 unk1A;
-} UnkDungeonGlobal_unk1C574;
+} FloorProperties;
 
 typedef struct UnkDungeonGlobal_unk1C590
 {
@@ -234,6 +238,15 @@ struct MessageLogString
     u8 str[MESSAGE_LOG_BUFFER_SIZE];
 };
 
+#define DEFAULT_MAX_POSITION 9999
+struct MinMaxPosition
+{
+    s32 minX;
+    s32 minY;
+    s32 maxX;
+    s32 maxY;
+};
+
 // size: 0x58
 typedef struct unkDungeon644
 {
@@ -277,21 +290,13 @@ typedef struct unkDungeon644
     /* 0x42 */ s16 unk42;
     /* 0x44 */ s16 unk44;
     /* 0x46 */ u8 unk46;
+    /* 0x47 */ u8 unk47;
     /* 0x48 */ s32 unk48;
     /* 0x4C */ s32 unk4C;
     /* 0x50 */ s32 unk50;
     /* 0x54 */ u8 unk54;
     /* 0x55 */ u8 unk55;
 } unkDungeon644;
-
-// size: 0x10
-typedef struct unkDungeonE240
-{
-    /* 0x0 */ u32 unk0;
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u32 unk8;
-    /* 0xC */ u32 unkC;
-} unkDungeonE240;
 
 // size: 0x4
 typedef struct unkDungeonE260
@@ -356,30 +361,30 @@ typedef struct Dungeon
     // dungeon_serializer.c refers to this as a u16 but elsewhere it's handled as a s16
     /* 0x3800 */ s16 deoxysForm;
     Item unk3804[DUNGEON_MAX_ITEMS];
-    /* 0x3904 */ s16 unk3904;
+    /* 0x3904 */ s16 numItems;
     Trap unk3908[DUNGEON_MAX_TRAPS];
-    /* 0x3A08 */ bool8 unk3A08;
+    /* 0x3A08 */ bool8 forceMonsterHouse; // Forces the current floor to have monster house
     /* 0x3A09 */ bool8 unk3A09;
     /* 0x3A0A */ bool8 unk3A0A;
     /* 0x3A0B */ bool8 unk3A0B;
-    u8 unk3A0C;
+    /* 0x3A0C */ u8 monsterHouseRoom; // room index of monster house
     /* 0x3A0D */ u8 unk3A0D;
     /* 0x3A0E */ s16 tileset;
     /* 0x3A10 */ s16 unk3A10;
     /* 0x3A12 */ s16 unk3A12;
-    /* 0x3A14 */ s16 bossBattleIndex;
+    /* 0x3A14 */ s16 fixedRoomNumber;
     /* 0x3A16 */ s16 unk3A16;
     /* 0x3A18 */ Tile tiles[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
-    DungeonPos unkE218;
-    DungeonPos unkE21C; // stair location?
+    /* 0xEA18 */ DungeonPos playerSpawn;
+    DungeonPos stairsSpawn; // stairs location
     DungeonPos unkE220[8];
-    unkDungeonE240 unkE240;
-    unkDungeonE240 unkE250;
+    struct MinMaxPosition kecleonShopPos;
+    struct MinMaxPosition unkE250;
     unkDungeonE260 unkE260;
     /* 0xE264 */ Weather weather; // Uses the weather constants in weather.h.
     /* 0xE27C */ Tile unkE27C[8][8];
     /* 0xE87C */ u8 unkE87C[8][8];
-    u32 fillE8BC;
+    /* 0xE8BC */ u8 unkE8BC; // Seems to be some tile's room index;
     /* 0xE8C0 */ Tile *tilePointers[DUNGEON_MAX_SIZE_Y][DUNGEON_MAX_SIZE_X];
     u8 unk104C0;
     /* 0x104C4 */ RoomData roomData[MAX_ROOM_COUNT];
@@ -393,7 +398,8 @@ typedef struct Dungeon
     u16 unk12BEC[9];
     u16 unk12BFE[19];
     u8 unk12C24[0x930];
-    u16 unk13554[12];
+    u16 unk13554[10];
+    OpenedFile *unk13568;
     u8 unk1356C;
     u8 fill1356D[0x13570 - 0x1356D];
     /* 0x13570 */ u8 unk13570;
@@ -424,7 +430,7 @@ typedef struct Dungeon
     struct UnkStructDungeon1BDD4 unk1BDD4;
     struct MessageLogString messageLogStrings[MESSAGE_LOG_STRINGS_COUNT];
     /* 0x1C570 */ DungeonLocation unk1C570;
-    /* 0x1C574 */ UnkDungeonGlobal_unk1C574 unk1C574;
+    /* 0x1C574 */ FloorProperties unk1C574;
     /* 0x1C590 */ UnkDungeonGlobal_unk1C590 unk1C590[4];
     u16 unk1CD70[20];
     UnkDungeonGlobal_unk1CD98 unk1CD98[32];

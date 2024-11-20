@@ -182,7 +182,7 @@ void HandleGiveItemAction(Entity *param_1)
     if (!info2->isTeamLeader) {
       info2->flags = info2->flags | MOVEMENT_FLAG_UNK_14;
     }
-    sub_807AB38(param_1,gDungeon->unk3A08);
+    sub_807AB38(param_1,gDungeon->forceMonsterHouse);
   }
 }
 
@@ -223,7 +223,7 @@ void HandleTakeItemAction(Entity *param_1)
       if (!info->isTeamLeader) {
         info->flags |= MOVEMENT_FLAG_UNK_14;
       }
-      sub_807AB38(param_1,gDungeon->unk3A08);
+      sub_807AB38(param_1,gDungeon->forceMonsterHouse);
     }
   }
 }
@@ -267,7 +267,7 @@ void sub_8066BD4(Entity *param_1)
     if (!info->isTeamLeader) {
       info->flags = info->flags | MOVEMENT_FLAG_UNK_14;
     }
-    sub_807AB38(param_1,gDungeon->unk3A08);
+    sub_807AB38(param_1,gDungeon->forceMonsterHouse);
   }
 }
 
@@ -325,7 +325,7 @@ void HandlePlaceItemAction(Entity *param_1)
                     PlaySoundEffect(0x14d);
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
                     LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E28);
-                    sub_807AB38(entity,gDungeon->unk3A08);
+                    sub_807AB38(entity,gDungeon->forceMonsterHouse);
                 }
             }
             else

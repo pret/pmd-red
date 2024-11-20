@@ -1081,7 +1081,7 @@ _0807DD94:
 	movs r3, 0
 	ldrsh r1, [r1, r3]
 	movs r2, 0x1
-	bl sub_8050C30
+	bl StairsAlwaysReachable
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807DE02
