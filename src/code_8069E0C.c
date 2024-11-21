@@ -105,98 +105,83 @@ s32 GetMonsterApparentID(Entity *pokemon, s16 id)
     return id;
 }
 
-static inline u8 sub_8069F9C_sub(Entity *pokemon)
+void sub_8069F9C(Entity *pokemon, Entity *target, Move *move)
 {
-    u32 weather;
-    weather = GetApparentWeather(pokemon);
-    return gUnknown_80F51E4[weather];
-}
+    s32 abilityIndex;
+    EntityInfo *targetInfo;
+    EntityInfo *pokemonInfo;
+    u8 abilities[4];
 
-void sub_8069F9C(Entity *pokemon,Entity * target,Move *move)
-{
-  u8 type;
-  u8 ability;
-  const char *__src;
-#ifndef NONMATCHING
-  register s32 abilityCounter asm("r1"); // r1
-#else
-  s32 abilityCounter;
-#endif
-  int randomIndex;
-  int abilityIndex;
-  EntityInfo *iVar6; // r7
-  EntityInfo *iVar7; // r2
-  EntityInfo *iVar8;
-  u8 local_20 [4];
+    if (!EntityExists(pokemon))
+        return;
+    if (!EntityExists(target))
+        return;
+    if (pokemon == target)
+        return;
 
-  if (!EntityExists(pokemon)) {
-    return;
-  }
-  if (!EntityExists(target)) {
-    return;
-  }
-  if (pokemon == target) {
-    return;
-  }
+    pokemonInfo = GetEntInfo(pokemon);
+    targetInfo = GetEntInfo(target);
+    abilityIndex = -1;
+    if (targetInfo->abilities[0] == ABILITY_TRACE) {
+        abilityIndex = 0;
+    }
+    if (targetInfo->abilities[1] == ABILITY_TRACE) {
+        abilityIndex = 1;
+    }
 
-  iVar7 = GetEntInfo(pokemon);
-  iVar8 = iVar7;
-  iVar6 = GetEntInfo(target);
-  abilityIndex = -1;
-  if (iVar6->abilities[0] == ABILITY_TRACE) {
-    abilityIndex = 0;
-  }
-  if (iVar6->abilities[1] == ABILITY_TRACE) {
-    abilityIndex = 1;
-  }
-  if (-1 < abilityIndex) {
-    abilityCounter = 0;
-    ability = iVar7->abilities[0];
-    if (ability != ABILITY_UNKNOWN) {
-      local_20[0] = ability;
-      abilityCounter = 1;
+    if (abilityIndex > -1) {
+        s32 randomIndex;
+        s32 abilityCounter = 0;
+        if (pokemonInfo->abilities[0] != ABILITY_UNKNOWN) {
+            abilities[0] = pokemonInfo->abilities[0];
+            abilityCounter = 1;
+        }
+        if (pokemonInfo->abilities[1] != ABILITY_UNKNOWN) {
+            abilities[abilityCounter] = pokemonInfo->abilities[1];
+            abilityCounter++;
+        }
+
+        if (abilityCounter != 0) {
+            if (abilityCounter == 1) {
+                randomIndex = 0;
+            }
+            else {
+                randomIndex = DungeonRandInt(abilityCounter);
+            }
+
+            if (randomIndex >= 0) {
+                targetInfo->abilities[abilityIndex] = abilities[randomIndex];
+                gDungeon->unkC = 1;
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
+                TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FCC7C);
+                sub_8042900(target);
+                sub_806ABAC(pokemon, target);
+            }
+        }
     }
-    ability = iVar8->abilities[1];
-    if (ability != ABILITY_UNKNOWN) {
-      local_20[abilityCounter] = ability;
-      abilityCounter++;
+
+    if (targetInfo->unk15A != 0) {
+        targetInfo->unk15A = 0;
+        if (HasAbility(target, ABILITY_COLOR_CHANGE)) {
+            u8 type = GetMoveTypeForMonster(pokemon,move);
+            if (move->id == MOVE_WEATHER_BALL) {
+                u32 weather = GetApparentWeather(pokemon);
+                type = gUnknown_80F51E4[weather];
+            }
+            if (type != TYPE_NONE && !MonsterIsType(target,type)) {
+                const u8 *str;
+
+                targetInfo->types[0] = type;
+                targetInfo->types[1] = TYPE_NONE;
+                targetInfo->isColorChanged = TRUE;
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
+                str = GetUnformattedTypeString(targetInfo->types[0]);
+                strcpy(gFormatBuffer_Items[0], str);
+                TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCAC);
+                sub_8042968(target);
+            }
+        }
     }
-    if (abilityCounter != 0) {
-      if (abilityCounter == 1) {
-        randomIndex = 0;
-      }
-      else {
-        randomIndex = DungeonRandInt(abilityCounter);
-        if (randomIndex < 0) goto _0806A068;
-      }
-      iVar6->abilities[abilityIndex] = local_20[randomIndex];
-      gDungeon->unkC = 1;
-      SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCC7C);
-      sub_8042900(target);
-      sub_806ABAC(pokemon,target);
-    }
-  }
-_0806A068:
-  if (iVar6->unk15A != 0) {
-    iVar6->unk15A = 0;
-    if (HasAbility(target, ABILITY_COLOR_CHANGE)) {
-      type = GetMoveTypeForMonster(pokemon,move);
-      if (move->id == MOVE_WEATHER_BALL) {
-        type = sub_8069F9C_sub(pokemon);
-      }
-      if ((type != TYPE_NONE) && (!MonsterIsType(target,type))) {
-        iVar6->types[0] = type;
-        iVar6->types[1] = TYPE_NONE;
-        iVar6->isColorChanged = TRUE;
-        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        __src = GetUnformattedTypeString(iVar6->types[0]);
-        strcpy(gFormatBuffer_Items[0],__src);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCAC);
-        sub_8042968(target);
-      }
-    }
-  }
 }
 
 void sub_806A120(Entity * pokemon, Entity * target, Move* move)
