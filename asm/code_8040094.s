@@ -285,7 +285,7 @@ _08040370:
 	mov r7, r10
 	ands r7, r0
 _08040378:
-	bl sub_8043D10
+	bl GetFloorType
 	lsls r0, 24
 	cmp r0, 0
 	bne _08040398
@@ -498,7 +498,7 @@ _08040500:
 	ands r0, r1
 	cmp r0, 0
 	beq _08040548
-	bl sub_8043D10
+	bl GetFloorType
 	lsls r0, 24
 	movs r6, 0x5
 	cmp r0, 0
@@ -513,7 +513,7 @@ _08040528:
 	ands r0, r1
 	cmp r0, 0
 	beq _08040548
-	bl sub_8043D10
+	bl GetFloorType
 	lsls r0, 24
 	movs r6, 0x5
 	cmp r0, 0

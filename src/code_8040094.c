@@ -26,7 +26,6 @@ extern const char *gUnknown_80FD040; // It became brighter on the floor
 // Luminous Orb???
 void HandleLuminousOrbAction(Entity *pokemon)
 {
-  Tile *mapTile;
   int XCoord;
   int YCoord;
 
@@ -36,8 +35,8 @@ void HandleLuminousOrbAction(Entity *pokemon)
   {
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
     {
-      mapTile = GetTileMut(XCoord, YCoord);
-      mapTile->unk4 = mapTile->unk4 | 1;
+      Tile *mapTile = GetTileMut(XCoord, YCoord);
+      mapTile->spawnOrVisibilityFlags |= 1;
     }
   }
   sub_803F580(0);

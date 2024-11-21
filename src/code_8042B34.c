@@ -8,6 +8,7 @@
 #include "code_800E9A8.h"
 #include "dungeon_util.h"
 #include "dungeon_message.h"
+#include "dungeon_generation.h"
 #include "bg_control.h"
 #include "random.h"
 #include "file_system.h"
@@ -310,7 +311,6 @@ extern void sub_803DF60(void);
 extern void sub_803E02C(void);
 extern void sub_8049840(void);
 extern void sub_80847D4(void);
-extern void sub_804AFAC(void);
 extern void sub_8043D60(void);
 extern void sub_806890C(void);
 extern void sub_8068614(void);
@@ -387,7 +387,7 @@ extern Entity *gLeaderPointer;
 void EnforceMaxItemsAndMoney(void);
 void sub_8043FD0(void);
 void sub_806B404(void);
-u8 sub_8043D10(void);
+u8 GetFloorType(void);
 
 extern const u8 *gUnknown_80FEC48;
 extern const u8 *gUnknown_80FEC7C;
@@ -606,7 +606,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             gDungeon->weather.weather = 0;
             gDungeon->tileset = gDungeon->unk1C574.unk2;
             gDungeon->unk3A10 = gDungeon->unk1C574.unk3;
-            gDungeon->bossBattleIndex = gDungeon->unk1C574.unk12;
+            gDungeon->fixedRoomNumber = gDungeon->unk1C574.unk12;
             sub_807E5E4(0);
             sub_80842F0();
         }
@@ -636,7 +636,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         ShowDungeonNameBanner();
 
         if (!r6) {
-            sub_804AFAC();
+            GenerateFloor();
             gDungeon->unk644.windTurns = GetTurnLimit(gDungeon->unk644.dungeonLocation.id);
             gDungeon->unk644.unk36 = 0;
         }
@@ -747,7 +747,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
         else {
             sub_80427AC();
-            sub_8075900(GetLeader(), gDungeon->unk3A08);
+            sub_8075900(GetLeader(), gDungeon->forceMonsterHouse);
             sub_807EAA0(1, 0);
         }
 
@@ -868,7 +868,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
                 sub_8083AB0(var, NULL, GetLeader());
                 check = TRUE;
             }
-            else if (gDungeon->unk644.unk34 == 1 && sub_8043D10() == 2 && gDungeon->unk644.unk10 == 2) {
+            else if (gDungeon->unk644.unk34 == 1 && GetFloorType() == FLOOR_TYPE_RESCUE && gDungeon->unk644.unk10 == 2) {
                 sub_8083AB0(0x228, NULL, GetLeader());
                 if (gDungeon->unk644.unk2A != 0) {
                     IncrementThievingSuccesses();
@@ -990,14 +990,14 @@ bool8 sub_8043CE4(s32 dungeonId)
     return (gDungeonWaterType[dungeonId] == 2);
 }
 
-u8 sub_8043D10(void)
+u8 GetFloorType(void)
 {
     if (gDungeon->unk644.unk34 == 1 && gDungeon->unk644.unk8.unk1 == gDungeon->unk644.dungeonLocation.floor)
-        return 2;
+        return FLOOR_TYPE_RESCUE;
     else if (IsBossFight())
-        return 1;
+        return FLOOR_TYPE_FIXED;
     else
-        return 0;
+        return FLOOR_TYPE_NORMAL;
 }
 
 void sub_8043D50(s32 *a0, s32 *a1)

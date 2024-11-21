@@ -141,7 +141,7 @@ extern void sub_804178C(u32);
 extern void sub_8041D5C(Entity *);
 extern void sub_8041D48(Entity *);
 extern void sub_8041D38(Entity * pokemon);
-extern u8 sub_8043D10(void);
+extern u8 GetFloorType(void);
 extern void sub_8041CDC(Entity *pokemon);
 extern void sub_8041CEC(Entity *pokemon);
 extern void nullsub_73(Entity *);
@@ -741,7 +741,7 @@ void HandleScannerOrb(Entity* pokemon, Entity* target)
 void HandleStairsOrb(Entity* pokemon, Entity* target)
 {
   if (EntityExists(target)) {
-    if(sub_8043D10())
+    if(GetFloorType())
     {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FAF3C);
     }

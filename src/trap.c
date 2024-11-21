@@ -24,6 +24,7 @@
 #include "status.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
+#include "structs/str_806B7F8.h"
 
 extern u8 *gTrapNames[];
 extern u8 *gUnknown_80FC5FC[];
@@ -57,18 +58,6 @@ extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 extern s16 gUnknown_80F4F8A;
 
-struct unkStruct_806B7F8
-{
-    s16 species;
-    u8 unk2;
-    u32 unk4;
-    u16 level;
-    u8 fillA[2];
-    DungeonPos pos;
-    u8 unk10;
-};
-extern Entity* sub_806B7F8(struct unkStruct_806B7F8 *, bool8);
-
 void sub_806A9B4(Entity *, u32);
 
 s16 sub_803D970(u32);
@@ -76,7 +65,7 @@ bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
 
 bool8 sub_8045888(Entity *);
-u8 sub_8043D10(void);
+u8 GetFloorType(void);
 void sub_8068FE0(Entity *, u32, Entity *);
 void sub_8045C28(Item *, u8 , u8);
 void sub_8045BF8(u8 *, Item *);
@@ -149,7 +138,7 @@ bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3)
         tile->object->isVisible = TRUE;
     }
     else {
-        entity = sub_8045684(trapID,pos,param_3);
+        entity = SpawnTrap(trapID,pos,param_3);
         if (entity == NULL)
 _0807FD6E:
             return FALSE;
@@ -551,7 +540,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                 sub_803E708(0x1e,0x48);
             }
             if (info->isTeamLeader) {
-                if (sub_8043D10() != 2) {
+                if (GetFloorType() != 2) {
                     info->unk15C = 1;
                     info->unk15E = 1;
                     sub_803E708(0x28,0x4b);

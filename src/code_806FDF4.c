@@ -196,13 +196,13 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
   targetInfo = target->info;
   iVar8 = -1;
   size = GetBodySize(targetInfo->apparentID);
-  if ((1 < ((u16)(gDungeon->bossBattleIndex - 4))) && (gDungeon->bossBattleIndex != 9) && (gDungeon->bossBattleIndex != 0xf)) {
-    if ((u16)(gDungeon->bossBattleIndex - 0x2cU) < 5) {
+  if ((1 < ((u16)(gDungeon->fixedRoomNumber - 4))) && (gDungeon->fixedRoomNumber != 9) && (gDungeon->fixedRoomNumber != 0xf)) {
+    if ((u16)(gDungeon->fixedRoomNumber - 0x2cU) < 5) {
       if (gDungeon->unk644.unk18 == 0) {
           return FALSE;
       }
     }
-    else if (gDungeon->bossBattleIndex == 0x31) {
+    else if (gDungeon->fixedRoomNumber == 0x31) {
       if (gDungeon->unk644.unk15 == 0) {
         return FALSE;
       }

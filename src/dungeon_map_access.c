@@ -479,7 +479,7 @@ void sub_8049ED4(void)
         else if (hallucinating) {
             src = &dungeon->unk11884[tile->unk8][r7];
         }
-        else if (tile->unk4 & 4) {
+        else if (tile->spawnOrVisibilityFlags & 4) {
             src = &dungeon->unk12BFE[r7];
         }
         else
@@ -524,7 +524,7 @@ void sub_8049ED4(void)
                 else if (hallucinating) {
                     src = &dungeon->unk11884[tile->unk8][r7];
                 }
-                else if (tile->unk4 & 4) {
+                else if (tile->spawnOrVisibilityFlags & 4) {
                     src = &dungeon->unk12BFE[r7];
                 }
                 else
@@ -912,7 +912,7 @@ void sub_804AAAC(void)
         for(x = 0; x < DUNGEON_MAX_SIZE_X; x++)
         {
             tile = GetTileMut(x,y);
-            tile->unk4 = 0;
+            tile->spawnOrVisibilityFlags = 0;
         }
     }
 }
@@ -1024,7 +1024,7 @@ void sub_804AC20(DungeonPos *pos)
         for (y = yMin; y <= yMax; y++) {
             for (x = xMin; x <= xMax; x++) {
                 tile = GetTileMut(x,y);
-                tile->unk4 = tile->unk4 | 3;
+                tile->spawnOrVisibilityFlags |= 3;
                 sub_80402AC(x,y);
             }
         }

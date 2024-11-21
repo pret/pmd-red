@@ -167,7 +167,7 @@ void sub_804522C(void) {
             }
         }
 
-        for(index = 0; index < gDungeon->unk3904; index++)
+        for(index = 0; index < gDungeon->numItems; index++)
         {
             sub_80462AC(gDungeon->items[index], crossEyed, 1, 0xFF, 0);
         }

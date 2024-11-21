@@ -17,7 +17,7 @@ extern s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0);
 extern u32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
 extern bool8 sub_80848EC(void);
-extern u8 sub_8043D10(void);
+extern u8 GetFloorType(void);
 extern const u8 *GetDungeonName2(u8 dungeon);
 extern void sub_8008DC8(s32 r0, s32 r1, u16 r2, u16 r3);
 
@@ -53,7 +53,7 @@ struct UnkDungeonFileData
 struct UnkDataFileStruct
 {
     struct UnkDungeonFileData **unk0;
-    UnkDungeonGlobal_unk1C574 *unk4;
+    FloorProperties *unk4;
     u16 **unk8;
     UnkDungeonGlobal_unk1CD98 **unkC;
     u16 **unk10;
@@ -1065,7 +1065,7 @@ void sub_803E13C(void)
 
 void sub_803E178(void)
 {
-    s32 val = sub_8043D10();
+    s32 val = GetFloorType();
 
     if (val == 0) {
         if (gDungeon->unk644.dungeonLocation.id == DUNGEON_METEOR_CAVE && !gDungeon->deoxysDefeat) {

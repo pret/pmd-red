@@ -27,7 +27,7 @@ extern const ItemText gActions[];
 
 extern void sub_8071B48(void);
 extern void sub_8043ED0(u32);
-extern u8 sub_8043D10(void);
+extern u8 GetFloorType(void);
 extern bool8 sub_8044B28(void);
 extern void sub_8086AC0(void);
 extern void sub_8043ED0(u32);
@@ -199,7 +199,7 @@ u8 *sub_8044BA8(u16 param_1, u8 id)
   u32 uVar3;
   u32 uVar4;
 
-  if ((param_1 == 0x26) && (sub_8043D10() == 2)) {
+  if ((param_1 == 0x26) && (GetFloorType() == 2)) {
     return *gUnknown_80F91EC;
   }
   else {

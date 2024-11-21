@@ -39,7 +39,7 @@ static void ReadDungeonMonsters(DataSerializer *seri);
 static void ReadDungeonMusic(DataSerializer *seri);
 static void ReadDungeonTraps(DataSerializer *seri);
 static void ReadDungeonUnk644(DataSerializer *seri);
-static void ReadDungeonUnkE240(DataSerializer *seri, unkDungeonE240 *dst);
+static void ReadDungeonkecleonShopPos(DataSerializer *seri, struct MinMaxPosition *dst);
 static void ReadDungeonUnkE260(DataSerializer *seri, unkDungeonE260 *dst);
 static void ReadDungeonVisibility(DataSerializer *seri);
 static void ReadBlinkerClassStatus(DataSerializer *seri, BlinkerClassStatus *dst);
@@ -92,7 +92,7 @@ static void WriteDungeonMonsters(DataSerializer *seri);
 static void WriteDungeonMusic(DataSerializer *seri);
 static void WriteDungeonTraps(DataSerializer *seri);
 static void WriteDungeonUnk644(DataSerializer *seri);
-static void WriteDungeonUnkE240(DataSerializer *seri, unkDungeonE240 *src);
+static void WriteDungeonkecleonShopPos(DataSerializer *seri, struct MinMaxPosition *src);
 static void WriteDungeonUnkE260(DataSerializer *seri, unkDungeonE260 *src);
 static void WriteDungeonVisibility(DataSerializer *seri);
 static void WriteBlinkerClassStatus(DataSerializer *seri, BlinkerClassStatus *src);
@@ -405,16 +405,16 @@ static void WriteDungeonFloor(DataSerializer *seri)
     s32 i;
 
     WriteBlame(seri, sMisakiSan);
-    WriteBool8(seri, gDungeon->unk3A08);
+    WriteBool8(seri, gDungeon->forceMonsterHouse);
     WriteBool8(seri, gDungeon->unk3A09);
     WriteBool8(seri, gDungeon->unk3A0A);
     WriteBool8(seri, gDungeon->unk3A0B);
-    WriteU8(seri, gDungeon->unk3A0C);
+    WriteU8(seri, gDungeon->monsterHouseRoom);
     WriteU8(seri, gDungeon->unk3A0D);
     WriteS16(seri, gDungeon->tileset);
     WriteS16(seri,gDungeon->unk3A10);
     WriteS16(seri, gDungeon->unk3A12);
-    WriteS16(seri, gDungeon->bossBattleIndex);
+    WriteS16(seri, gDungeon->fixedRoomNumber);
     WriteS16(seri, gDungeon->unk3A16);
 
     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
@@ -423,14 +423,14 @@ static void WriteDungeonFloor(DataSerializer *seri)
         }
     }
 
-    WriteTilePos(seri, &gDungeon->unkE218);
-    WriteTilePos(seri, &gDungeon->unkE21C);
+    WriteTilePos(seri, &gDungeon->playerSpawn);
+    WriteTilePos(seri, &gDungeon->stairsSpawn);
 
     for (i = 0; i < 8; i++)
         WriteTilePos(seri, &gDungeon->unkE220[i]);
 
-    WriteDungeonUnkE240(seri, &gDungeon->unkE240);
-    WriteDungeonUnkE240(seri, &gDungeon->unkE250);
+    WriteDungeonkecleonShopPos(seri, &gDungeon->kecleonShopPos);
+    WriteDungeonkecleonShopPos(seri, &gDungeon->unkE250);
     WriteDungeonUnkE260(seri, &gDungeon->unkE260);
 
     for (y = 0; y < 8; y++) {
@@ -693,7 +693,7 @@ static void WriteIQSkills(DataSerializer *seri, u8 *src)
 static void WriteTile(DataSerializer *seri, Tile *src)
 {
     WriteU16(seri, src->terrainType);
-    WriteU16(seri, src->unk4);
+    WriteU16(seri, src->spawnOrVisibilityFlags);
     WriteBytes(seri, &src->room, 1);
     WriteBytes(seri, &src->unkE, 1);
 }
@@ -767,16 +767,16 @@ static void ReadDungeonFloor(DataSerializer *seri)
 
     ReadBlame(seri, sMisakiSan);
 
-    gDungeon->unk3A08 = ReadBool8(seri);
+    gDungeon->forceMonsterHouse = ReadBool8(seri);
     gDungeon->unk3A09 = ReadBool8(seri);
     gDungeon->unk3A0A = ReadBool8(seri);
     gDungeon->unk3A0B = ReadBool8(seri);
-    gDungeon->unk3A0C = ReadU8(seri);
+    gDungeon->monsterHouseRoom = ReadU8(seri);
     gDungeon->unk3A0D = ReadU8(seri);
     gDungeon->tileset = ReadS16(seri);
     gDungeon->unk3A10 = ReadS16(seri);
     gDungeon->unk3A12 = ReadS16(seri);
-    gDungeon->bossBattleIndex = ReadS16(seri);
+    gDungeon->fixedRoomNumber = ReadS16(seri);
     gDungeon->unk3A16 = ReadS16(seri);
 
     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
@@ -785,14 +785,14 @@ static void ReadDungeonFloor(DataSerializer *seri)
         }
     }
 
-    ReadTilePos(seri, &gDungeon->unkE218);
-    ReadTilePos(seri, &gDungeon->unkE21C);
+    ReadTilePos(seri, &gDungeon->playerSpawn);
+    ReadTilePos(seri, &gDungeon->stairsSpawn);
 
     for (i = 0; i < 8; i++)
         ReadTilePos(seri, &gDungeon->unkE220[i]);
 
-    ReadDungeonUnkE240(seri, &gDungeon->unkE240);
-    ReadDungeonUnkE240(seri, &gDungeon->unkE250);
+    ReadDungeonkecleonShopPos(seri, &gDungeon->kecleonShopPos);
+    ReadDungeonkecleonShopPos(seri, &gDungeon->unkE250);
     ReadDungeonUnkE260(seri, &gDungeon->unkE260);
 
     for (y = 0; y < 8; y++) {
@@ -810,7 +810,7 @@ static void ReadTile(DataSerializer *seri, Tile *dst)
     memset(dst, 0, sizeof(Tile));
 
     dst->terrainType = ReadU16(seri);
-    dst->unk4 = ReadU16(seri);
+    dst->spawnOrVisibilityFlags = ReadU16(seri);
 
     ReadBytes(seri, &dst->room, 1);
     ReadBytes(seri, &dst->unkE, 1);
@@ -911,7 +911,7 @@ static void ReadDungeonTraps(DataSerializer *seri)
 
         if (trapID != 0xFF) {
             tile = GetTileMut(pos.x, pos.y);
-            entity = sub_8045684(trapID, &pos, unk1);
+            entity = SpawnTrap(trapID, &pos, unk1);
             if (entity) {
                 tile->object = entity;
                 entity->isVisible = isVisible;
@@ -1633,12 +1633,12 @@ static void WriteTilePos(DataSerializer *seri, DungeonPos *src)
     WriteBytes(seri, &src->y, 1);
 }
 
-static void WriteDungeonUnkE240(DataSerializer *seri, unkDungeonE240 *src)
+static void WriteDungeonkecleonShopPos(DataSerializer *seri, struct MinMaxPosition *src)
 {
-    WriteBytes(seri, &src->unk0, 1);
-    WriteBytes(seri, &src->unk4, 1);
-    WriteBytes(seri, &src->unk8, 1);
-    WriteBytes(seri, &src->unkC, 1);
+    WriteBytes(seri, &src->minX, 1);
+    WriteBytes(seri, &src->minY, 1);
+    WriteBytes(seri, &src->maxX, 1);
+    WriteBytes(seri, &src->maxY, 1);
 }
 
 static void WriteDungeonUnkE260(DataSerializer *seri, unkDungeonE260 *src)
@@ -1716,16 +1716,16 @@ static void ReadTilePos(DataSerializer *seri, DungeonPos *dst)
     ReadBytes(seri, &dst->y, 1);
 }
 
-static void ReadDungeonUnkE240(DataSerializer *seri, unkDungeonE240 *dst)
+static void ReadDungeonkecleonShopPos(DataSerializer *seri, struct MinMaxPosition *dst)
 {
-    dst->unk0 = 0;
-    dst->unk4 = 0;
-    dst->unk8 = 0;
-    dst->unkC = 0;
-    ReadBytes(seri, &dst->unk0, 1);
-    ReadBytes(seri, &dst->unk4, 1);
-    ReadBytes(seri, &dst->unk8, 1);
-    ReadBytes(seri, &dst->unkC, 1);
+    dst->minX = 0;
+    dst->minY = 0;
+    dst->maxX = 0;
+    dst->maxY = 0;
+    ReadBytes(seri, &dst->minX, 1);
+    ReadBytes(seri, &dst->minY, 1);
+    ReadBytes(seri, &dst->maxX, 1);
+    ReadBytes(seri, &dst->maxY, 1);
 }
 
 static void ReadDungeonUnkE260(DataSerializer *seri, unkDungeonE260 *dst)

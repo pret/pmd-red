@@ -157,7 +157,7 @@ void sub_807CD9C(Entity *pokemon, Entity *target, u32 direction)
                 sub_807EC28(FALSE);
             }
             sub_806A5B8(target);
-            sub_8075900(target,gDungeon->unk3A08);
+            sub_8075900(target,gDungeon->forceMonsterHouse);
         }
     }
 }
@@ -215,13 +215,11 @@ _0807D11E:
     sub_803E46C(0x1a);
 }
 
-void sub_807D148(Entity *pokemon, Entity *target, u32 param_3,
-                 DungeonPos *pos)
+void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
 {
     EntityInfo *info;
     u32 direction;
     DungeonPos local_2c;
-    DungeonPos pos2;
     bool8 flag;
 
     info = GetEntInfo(target);
@@ -238,8 +236,8 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3,
     }
     if (param_3 == 1)
     {
-        pos2 = gDungeon->unkE21C;
-        if(pos2.x == target->pos.x && pos2.y == target->pos.y) {
+        DungeonPos stairsPosition = gDungeon->stairsSpawn;
+        if(stairsPosition.x == target->pos.x && stairsPosition.y == target->pos.y) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC9A0); // It's already on the stairs!
             PetrifiedStatusTarget(pokemon,target);
             return;
@@ -274,7 +272,7 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3,
             }
             break;
         case 1:
-            if (!sub_808384C(&local_2c,&gDungeon->unkE21C)) {
+            if (!sub_808384C(&local_2c,&gDungeon->stairsSpawn)) {
                 local_2c = target->pos;
                 flag = TRUE;
             }
@@ -323,7 +321,7 @@ void sub_807D148(Entity *pokemon, Entity *target, u32 param_3,
         sub_807EC28(0);
     }
     sub_806A5B8(target);
-    sub_8075900(target,gDungeon->unk3A08);
+    sub_8075900(target,gDungeon->forceMonsterHouse);
 }
 
 void sub_807D3CC(Entity *param_1)

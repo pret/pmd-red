@@ -5979,7 +5979,7 @@ sub_80649A0:
 	bl sub_803ECB4
 	movs r0, 0
 	bl sub_80073B8
-	bl sub_8043D10
+	bl GetFloorType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6109,7 +6109,7 @@ _08064A58:
 	ldr r0, [sp, 0xE4]
 	movs r1, 0
 	bl sub_803ECB4
-	bl sub_8043D10
+	bl GetFloorType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
