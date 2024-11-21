@@ -280,35 +280,26 @@ void nullsub_95(void)
 
 void sub_806A338(void)
 {
-    Entity *entity;
-    s32 index;
+    s32 i;
 
-    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
-    {
-        entity = gDungeon->activePokemon[index];
-        if (EntityExists(entity) && (GetEntInfo(entity)->curseClassStatus.status == STATUS_SNATCH))
-        {
+    for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+        Entity *entity = gDungeon->activePokemon[i];
+        if (EntityExists(entity) && (GetEntInfo(entity)->curseClassStatus.status == STATUS_SNATCH)) {
             gDungeon->snatchPokemon = entity;
-            ASM_MATCH_TRICK(entity);
             gDungeon->unk17B3C = GetEntInfo(entity)->unk98;
-            break;
+            return;
         }
     }
 }
 
 void sub_806A390(Entity *pokemon)
 {
-    s32 index;
-    EntityInfo *info;
-    Move *move;
+    s32 i;
 
-    info = GetEntInfo(pokemon);
-    for(index = 0; index < MAX_MON_MOVES; index++)
-    {
-        move = &info->moves.moves[index];
-
-        if(move->moveFlags & MOVE_FLAG_EXISTS)
-        {
+    EntityInfo *info = GetEntInfo(pokemon);
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        Move *move = &info->moves.moves[i];
+        if (MoveFlagExists(move)) {
             move->moveFlags2 &= 0xF7;
             move->moveFlags2 &= 0xEF;
             move->moveFlags2 |= MOVE_FLAG2_UNK4;
@@ -316,3 +307,42 @@ void sub_806A390(Entity *pokemon)
         }
     }
 }
+
+// New file?
+
+/*
+#include "file_system.h"
+
+extern int sprintf(char *, const char *, ...);
+extern const u8 gUnknown_8106EA8[]; // talkp%d
+extern const u8 gUnknown_8106EB0[]; // talk%d
+extern const struct FileArchive gDungeonFileArchive;
+
+struct UnkTalkFileStruct
+{
+    const u8 *strings[10][4];
+};
+
+void sub_806A3D4(u8 *dst, s32 a1_, s32 id, bool8 a3)
+{
+    u8 fileName[12];
+    OpenedFile *file;
+    s32 strId;
+    const u8 **strings;
+    s16 a1 = a1_;
+
+    if (a3) {
+        sprintf(fileName, gUnknown_8106EA8, a1 / 10);
+    }
+    else {
+        sprintf(fileName, gUnknown_8106EB0, a1 / 10);
+    }
+
+    file = OpenFileAndGetFileDataPtr(fileName, &gDungeonFileArchive);
+
+    strId = a1 % 10;
+    strcpy(dst, ((struct UnkTalkFileStruct *)(file->data))->strings[strId][id]);
+    CloseFile(file);
+}
+
+*/
