@@ -15,10 +15,12 @@ struct unkShiftData
 // size: 0xC
 struct unkChar
 {
-    u32 *unk0;
+    u16 *unk0;
     u16 unk4;
     s16 unk6;
-    u32 fill8;
+    u8 fill8;
+    u8 fill9;
+    u8 unkA;
 };
 
 struct unkStruct_80B8824
