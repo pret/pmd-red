@@ -1083,7 +1083,7 @@ void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3
     }
 }
 
-u8 sub_808F700(PokemonStruct1 *pokemon)
+s32 sub_808F700(PokemonStruct1 *pokemon)
 {
     EvolveStatus evolveStatus;
 

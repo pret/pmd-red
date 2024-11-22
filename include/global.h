@@ -23,6 +23,12 @@
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 
+// s16 cause reg alloc problems in almost all functions where they're passed as arguments. This static inline sometimes helps with generating good asm.
+static inline s16 Self_s16(s16 a)
+{
+    return a;
+}
+
 // Sometimes incrementing and decrementing a variable changes how registers are allocated, which helps with matching functions. Functionality-wise this doesn't do anything.
 #ifdef NONMATCHING
 #define ASM_MATCH_TRICK(a) {;}

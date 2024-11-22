@@ -310,9 +310,10 @@ void sub_806A390(Entity *pokemon)
 
 // New file?
 
-/*
 #include "file_system.h"
 
+extern s32 sub_808F700(PokemonStruct1 *pokemon);
+extern Entity *sub_80696A8(Entity *a0);
 extern int sprintf(char *, const char *, ...);
 extern const u8 gUnknown_8106EA8[]; // talkp%d
 extern const u8 gUnknown_8106EB0[]; // talk%d
@@ -323,13 +324,13 @@ struct UnkTalkFileStruct
     const u8 *strings[10][4];
 };
 
-void sub_806A3D4(u8 *dst, s32 a1_, s32 id, bool8 a3)
+// https://decomp.me/scratch/beUzw s16 memes again
+#ifdef NONMATCHING
+void sub_806A3D4(u8 *dst, s16 a1, s32 id, bool8 a3)
 {
     u8 fileName[12];
     OpenedFile *file;
     s32 strId;
-    const u8 **strings;
-    s16 a1 = a1_;
 
     if (a3) {
         sprintf(fileName, gUnknown_8106EA8, a1 / 10);
@@ -344,5 +345,149 @@ void sub_806A3D4(u8 *dst, s32 a1_, s32 id, bool8 a3)
     strcpy(dst, ((struct UnkTalkFileStruct *)(file->data))->strings[strId][id]);
     CloseFile(file);
 }
+#else
+NAKED void sub_806A3D4(u8 *dst, s16 a1, s32 id, bool8 a3)
+{
+    asm_unified("push {r4-r7,lr}\n"
+"	sub sp, 0xC\n"
+"	adds r7, r0, 0\n"
+"	adds r6, r2, 0\n"
+"	lsls r1, 16\n"
+"	asrs r5, r1, 16\n"
+"	lsls r3, 24\n"
+"	cmp r3, 0\n"
+"	beq _0806A404\n"
+"	ldr r4, _0806A400\n"
+"	adds r0, r5, 0\n"
+"	movs r1, 0xA\n"
+"	bl __divsi3\n"
+"	adds r2, r0, 0\n"
+"	lsls r2, 16\n"
+"	asrs r2, 16\n"
+"	mov r0, sp\n"
+"	adds r1, r4, 0\n"
+"	bl sprintf\n"
+"	b _0806A41C\n"
+"	.align 2, 0\n"
+"_0806A400: .4byte gUnknown_8106EA8\n"
+"_0806A404:\n"
+"	ldr r4, _0806A450\n"
+"	adds r0, r5, 0\n"
+"	movs r1, 0xA\n"
+"	bl __divsi3\n"
+"	adds r2, r0, 0\n"
+"	lsls r2, 16\n"
+"	asrs r2, 16\n"
+"	mov r0, sp\n"
+"	adds r1, r4, 0\n"
+"	bl sprintf\n"
+"_0806A41C:\n"
+"	ldr r1, _0806A454\n"
+"	mov r0, sp\n"
+"	bl OpenFileAndGetFileDataPtr\n"
+"	adds r4, r0, 0\n"
+"	adds r0, r5, 0\n"
+"	movs r1, 0xA\n"
+"	bl __modsi3\n"
+"	lsls r0, 16\n"
+"	ldr r1, [r4, 0x4]\n"
+"	asrs r0, 12\n"
+"	adds r0, r1\n"
+"	lsls r1, r6, 2\n"
+"	adds r0, r1\n"
+"	ldr r1, [r0]\n"
+"	adds r0, r7, 0\n"
+"	bl strcpy\n"
+"	adds r0, r4, 0\n"
+"	bl CloseFile\n"
+"	add sp, 0xC\n"
+"	pop {r4-r7}\n"
+"	pop {r0}\n"
+"	bx r0\n"
+"	.align 2, 0\n"
+"_0806A450: .4byte gUnknown_8106EB0\n"
+"_0806A454: .4byte gDungeonFileArchive");
+}
+#endif // NONMATCHING
 
-*/
+bool8 sub_806A458(Entity *pokemon)
+{
+    s32 x, y;
+    s32 count = 0;
+    EntityInfo *info = GetEntInfo(pokemon);
+    bool8 isNotTeamMember = info->isNotTeamMember;
+
+    if (!sub_80696A8(pokemon))
+        return FALSE;
+
+    for (y = -1; y < 2; y++) {
+        for (x = -1; x < 2; x++) {
+            Tile *tile = GetTileMut(pokemon->pos.x + x, pokemon->pos.y + y);
+            if (tile->monster && GetEntityType(tile->monster) == ENTITY_MONSTER) {
+                if (GetEntInfo(tile->monster)->isNotTeamMember != isNotTeamMember)
+                    count++;
+            }
+        }
+    }
+    return (count > 1);
+}
+
+s32 sub_806A4DC(EntityInfo *info)
+{
+    PokemonStruct1 pokemon;
+    DungeonLocation loc;
+
+    loc.id = 0;
+    loc.floor = 1;
+
+    sub_808CFD0(&pokemon, info->id, NULL, 0, &loc, 0);
+
+    pokemon.speciesNum = info->id;
+    pokemon.level = info->level;
+    pokemon.IQ = info->IQ;
+    pokemon.offense.att[0] = info->atk[0];
+    pokemon.offense.def[0] = info->def[0];
+
+    return sub_808F700(&pokemon);
+}
+
+bool8 sub_806A538(s16 r0)
+{
+    s32 r0_1 = Self_s16(r0);
+    if (r0 == 0x55AA)
+        return TRUE;
+    if (r0 == 0x5AA5)
+        return TRUE;
+
+    if (r0_1 >= 0)
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 sub_806A564(s16 r0)
+{
+    if (r0 == 0x55AA)
+        return TRUE;
+    if (r0 == 0x5AA5)
+        return TRUE;
+
+    return FALSE;
+}
+
+bool8 sub_806A58C(s16 r0)
+{
+    if (r0 >= 0 && r0 <= 0x19C)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 sub_806A5A4(s16 r0)
+{
+    if (r0 < 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
