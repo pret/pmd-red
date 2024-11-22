@@ -9,6 +9,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_serializer.h"
 #include "dungeon_util.h"
+#include "pokemon.h"
 #include "structs/str_dungeon.h"
 
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
@@ -133,7 +134,6 @@ static Entity* sub_80828E0(s16 id, s16 apparentID, s32 index);
 static Entity* sub_8082A08(s16 id, s16 apparentID, s32 index);
 
 // These externs are from other files
-extern u8 GetBodySize(s16 index);
 extern void sub_80460F8(DungeonPos *, Item *, u32);
 
 void SaveDungeonState(u8 *buffer, u32 bufLen)

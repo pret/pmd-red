@@ -15,6 +15,7 @@
 #include "dungeon.h"
 #include "pokemon_3.h"
 #include "status_checks_1.h"
+#include "code_805D8C8.h"
 #include "structs/str_806B7F8.h"
 
 EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
@@ -55,6 +56,9 @@ extern s16 sub_803D970(u32);
 extern s32 sub_803DA20(s32 param_1);
 extern bool8 sub_806AA0C(s32, u32);
 extern bool8 sub_8083660(DungeonPos *param_1);
+extern bool8 sub_803D930(u32);
+extern void sub_8072B78(Entity *pokemon, Entity *target, s16 id);
+extern s32 sub_808E400(s32 _species, s16* _a2, bool32 bodySizeCheck, bool32 shedinjaCheck);
 void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level); // TODO: change to s32
 
 void sub_8071B48(void)
@@ -176,312 +180,109 @@ void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
   }
 }
 
-// https://decomp.me/scratch/Wcmvb - (98.45% matching - Seth)
-NAKED
 void sub_8071DA4(Entity *entity)
 {
-    asm_unified(
-"	push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	sub sp, 0xD4\n"
-"	str r0, [sp, 0xB4]\n"
-"	ldr r2, _08071E44\n"
-"	ldr r1, [r2]\n"
-"	ldrb r0, [r1, 0xD]\n"
-"	cmp r0, 0\n"
-"	bne _08071DBE\n"
-"	b _08071FE2\n"
-"_08071DBE:\n"
-"	movs r0, 0\n"
-"	strb r0, [r1, 0xD]\n"
-"	ldr r0, [r2]\n"
-"	ldrb r0, [r0, 0x10]\n"
-"	cmp r0, 0\n"
-"	beq _08071DCC\n"
-"	b _08071FE2\n"
-"_08071DCC:\n"
-"	ldr r0, [sp, 0xB4]\n"
-"	bl EntityExists\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _08071DE2\n"
-"	mov r0, sp\n"
-"	bl sub_80457DC\n"
-"	mov r0, sp\n"
-"	str r0, [sp, 0xB4]\n"
-"_08071DE2:\n"
-"	movs r4, 0\n"
-"_08071DE4:\n"
-"	movs r5, 0\n"
-"	ldr r0, _08071E44\n"
-"	ldr r0, [r0]\n"
-"	lsls r1, r4, 2\n"
-"	ldr r2, _08071E48\n"
-"	adds r0, r2\n"
-"	adds r0, r1\n"
-"	ldr r0, [r0]\n"
-"	mov r8, r0\n"
-"	movs r0, 0\n"
-"	str r0, [sp, 0xB8]\n"
-"	movs r1, 0\n"
-"	movs r2, 0\n"
-"	str r1, [sp, 0xBC]\n"
-"	str r2, [sp, 0xC0]\n"
-"	movs r0, 0\n"
-"	movs r1, 0\n"
-"	str r0, [sp, 0xC4]\n"
-"	str r1, [sp, 0xC8]\n"
-"	adds r1, r4, 0x1\n"
-"	str r1, [sp, 0xCC]\n"
-"	mov r2, r8\n"
-"	cmp r2, 0\n"
-"	bne _08071E16\n"
-"	b _08071FDA\n"
-"_08071E16:\n"
-"	mov r0, r8\n"
-"	bl EntityExists\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _08071E24\n"
-"	b _08071FDA\n"
-"_08071E24:\n"
-"	mov r0, r8\n"
-"	ldr r6, [r0, 0x70]\n"
-"	movs r1, 0xE\n"
-"	ldrsh r0, [r6, r1]\n"
-"	cmp r0, 0\n"
-"	bne _08071E32\n"
-"	b _08071FDA\n"
-"_08071E32:\n"
-"	adds r1, r6, 0\n"
-"	adds r1, 0xF9\n"
-"	ldrb r0, [r1]\n"
-"	cmp r0, 0\n"
-"	beq _08071E4C\n"
-"	add r2, sp, 0xB8\n"
-"	ldrb r2, [r2]\n"
-"	strb r2, [r1]\n"
-"	b _08071FCA\n"
-"	.align 2, 0\n"
-"_08071E44: .4byte gDungeon\n"
-"_08071E48: .4byte 0x000135cc\n"
-"_08071E4C:\n"
-"	movs r1, 254\n"
-"	lsls r1, 1\n"
-"	adds r0, r6, r1\n"
-"	ldr r0, [r0]\n"
-"	mov r10, r0\n"
-"	cmp r0, 0\n"
-"	beq _08071EB6\n"
-"	ldrb r0, [r6, 0x7]\n"
-"	cmp r0, 0\n"
-"	beq _08071E68\n"
-"	ldrb r1, [r6, 0x9]\n"
-"	add r0, sp, 0x74\n"
-"	bl GetAvailTacticsforLvl_Bool\n"
-"_08071E68:\n"
-"	movs r0, 0x10\n"
-"	ldrsh r2, [r6, r0]\n"
-"	str r2, [sp, 0xB8]\n"
-"	ldrb r1, [r6, 0x14]\n"
-"	str r1, [sp, 0xBC]\n"
-"	ldrb r2, [r6, 0x15]\n"
-"	str r2, [sp, 0xC0]\n"
-"	ldrb r0, [r6, 0x16]\n"
-"	str r0, [sp, 0xC4]\n"
-"	ldrb r1, [r6, 0x17]\n"
-"	str r1, [sp, 0xC8]\n"
-"	ldrb r0, [r6, 0x9]\n"
-"	cmp r0, 0x64\n"
-"	beq _08071EB6\n"
-"	ldr r0, [r6, 0x18]\n"
-"	add r0, r10\n"
-"	str r0, [r6, 0x18]\n"
-"	mov r2, r10\n"
-"	ldr r0, _08071EE8\n"
-"	str r2, [r0]\n"
-"	ldr r0, _08071EEC\n"
-"	adds r1, r6, 0\n"
-"	movs r2, 0\n"
-"	bl SetMessageArgument_2\n"
-"	ldr r0, _08071EF0\n"
-"	ldr r2, [r0]\n"
-"	ldr r0, [sp, 0xB4]\n"
-"	mov r1, r8\n"
-"	bl TryDisplayDungeonLoggableMessage3\n"
-"	ldr r0, [sp, 0xB4]\n"
-"	mov r1, r8\n"
-"	movs r2, 0x1\n"
-"	movs r3, 0x1\n"
-"	bl sub_80723D0\n"
-"	lsls r0, 24\n"
-"	lsrs r5, r0, 24\n"
-"_08071EB6:\n"
-"	ldr r1, _08071EF4\n"
-"	adds r0, r6, r1\n"
-"	ldrb r0, [r0]\n"
-"	adds r4, 0x1\n"
-"	str r4, [sp, 0xCC]\n"
-"	cmp r0, 0\n"
-"	beq _08071F3A\n"
-"	movs r2, 0x2\n"
-"	ldrsh r0, [r6, r2]\n"
-"	add r1, sp, 0x8C\n"
-"	movs r2, 0\n"
-"	movs r3, 0\n"
-"	bl sub_808E400\n"
-"	adds r7, r0, 0\n"
-"	add r0, sp, 0x8C\n"
-"	mov r9, r0\n"
-"	cmp r7, 0\n"
-"	beq _08071F38\n"
-"	adds r0, r7, 0\n"
-"	bl DungeonRandInt\n"
-"	adds r4, r0, 0\n"
-"	movs r1, 0\n"
-"	b _08071F02\n"
-"	.align 2, 0\n"
-"_08071EE8: .4byte gFormatArgs\n"
-"_08071EEC: .4byte gFormatBuffer_Monsters\n"
-"_08071EF0: .4byte gUnknown_80F9E64\n"
-"_08071EF4: .4byte 0x00000149\n"
-"_08071EF8:\n"
-"	adds r4, 0x1\n"
-"	cmp r4, r7\n"
-"	blt _08071F00\n"
-"	movs r4, 0\n"
-"_08071F00:\n"
-"	adds r1, 0x1\n"
-"_08071F02:\n"
-"	cmp r1, r7\n"
-"	bge _08071F38\n"
-"	lsls r0, r4, 1\n"
-"	mov r2, r9\n"
-"	adds r5, r2, r0\n"
-"	movs r2, 0\n"
-"	ldrsh r0, [r5, r2]\n"
-"	str r1, [sp, 0xD0]\n"
-"	bl sub_803D930\n"
-"	lsls r0, 24\n"
-"	ldr r1, [sp, 0xD0]\n"
-"	cmp r0, 0\n"
-"	beq _08071EF8\n"
-"	movs r2, 0\n"
-"	ldrsh r0, [r5, r2]\n"
-"	bl GetSpriteData\n"
-"	ldr r1, [sp, 0xD0]\n"
-"	cmp r0, 0\n"
-"	beq _08071EF8\n"
-"	movs r0, 0\n"
-"	ldrsh r2, [r5, r0]\n"
-"	ldr r0, [sp, 0xB4]\n"
-"	mov r1, r8\n"
-"	bl sub_8072B78\n"
-"_08071F38:\n"
-"	movs r5, 0\n"
-"_08071F3A:\n"
-"	cmp r5, 0\n"
-"	beq _08071F7A\n"
-"	ldrb r0, [r6, 0x6]\n"
-"	cmp r0, 0\n"
-"	bne _08071F7A\n"
-"	movs r1, 0x10\n"
-"	ldrsh r0, [r6, r1]\n"
-"	ldr r2, [sp, 0xB8]\n"
-"	subs r0, r2\n"
-"	ldr r1, _08071FF4\n"
-"	str r0, [r1]\n"
-"	ldrb r0, [r6, 0x14]\n"
-"	ldr r2, [sp, 0xBC]\n"
-"	subs r0, r2\n"
-"	str r0, [r1, 0x4]\n"
-"	ldrb r0, [r6, 0x16]\n"
-"	ldr r1, [sp, 0xC4]\n"
-"	subs r0, r1\n"
-"	ldr r2, _08071FF4\n"
-"	str r0, [r2, 0x8]\n"
-"	ldrb r0, [r6, 0x15]\n"
-"	ldr r1, [sp, 0xC0]\n"
-"	subs r0, r1\n"
-"	str r0, [r2, 0xC]\n"
-"	ldrb r0, [r6, 0x17]\n"
-"	ldr r2, [sp, 0xC8]\n"
-"	subs r0, r2\n"
-"	ldr r1, _08071FF4\n"
-"	str r0, [r1, 0x10]\n"
-"	mov r0, r8\n"
-"	bl sub_807218C\n"
-"_08071F7A:\n"
-"	mov r2, r10\n"
-"	cmp r2, 0\n"
-"	beq _08071FCA\n"
-"	ldrb r0, [r6, 0x7]\n"
-"	cmp r0, 0\n"
-"	beq _08071FCA\n"
-"	ldrb r1, [r6, 0x9]\n"
-"	add r0, sp, 0x80\n"
-"	bl GetAvailTacticsforLvl_Bool\n"
-"	movs r4, 0\n"
-"	add r7, sp, 0x74\n"
-"	add r5, sp, 0x80\n"
-"_08071F94:\n"
-"	adds r0, r7, r4\n"
-"	ldrb r0, [r0]\n"
-"	cmp r0, 0\n"
-"	bne _08071FC4\n"
-"	adds r0, r5, r4\n"
-"	ldrb r0, [r0]\n"
-"	cmp r0, 0x1\n"
-"	bne _08071FC4\n"
-"	ldr r0, _08071FF8\n"
-"	mov r1, r8\n"
-"	movs r2, 0\n"
-"	bl SubstitutePlaceholderStringTags\n"
-"	lsls r1, r4, 24\n"
-"	lsrs r1, 24\n"
-"	ldr r0, _08071FFC\n"
-"	bl CopyTacticsNameToBuffer\n"
-"	ldr r0, _08072000\n"
-"	ldr r2, [r0]\n"
-"	ldr r0, [sp, 0xB4]\n"
-"	mov r1, r8\n"
-"	bl TryDisplayDungeonLoggableMessage3\n"
-"_08071FC4:\n"
-"	adds r4, 0x1\n"
-"	cmp r4, 0xB\n"
-"	ble _08071F94\n"
-"_08071FCA:\n"
-"	movs r1, 254\n"
-"	lsls r1, 1\n"
-"	adds r0, r6, r1\n"
-"	movs r1, 0\n"
-"	str r1, [r0]\n"
-"	ldr r2, _08072004\n"
-"	adds r0, r6, r2\n"
-"	strb r1, [r0]\n"
-"_08071FDA:\n"
-"	ldr r4, [sp, 0xCC]\n"
-"	cmp r4, 0x13\n"
-"	bgt _08071FE2\n"
-"	b _08071DE4\n"
-"_08071FE2:\n"
-"	add sp, 0xD4\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_08071FF4: .4byte gFormatArgs\n"
-"_08071FF8: .4byte gFormatBuffer_Monsters\n"
-"_08071FFC: .4byte gFormatBuffer_Items\n"
-"_08072000: .4byte gUnknown_80FF730\n"
-"_08072004: .4byte 0x00000149");
+  int counter;
+  s16 *id;
+  Entity EStack_f4;
+  u8 tacticsBuffer1[NUM_TACTICS];
+  u8 tacticsBuffer2[NUM_TACTICS];
+  s16 idStack [20];
+  Entity *entityPtr; // 0xB4
+  s32 index;
+
+  entityPtr = entity;
+  if ((gDungeon->unkD != 0) && (gDungeon->unkD = 0, gDungeon->unk10 == 0)) {
+    if (!EntityExists(entityPtr)) {
+      sub_80457DC(&EStack_f4);
+      entityPtr = &EStack_f4;
+    }
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
+    {
+      EntityInfo *info;
+      bool8 flag = FALSE;
+      Entity *target = gDungeon->activePokemon[index];
+      s32 maxHP = 0;
+      u32 atk[2] = {0, 0};
+      u32 def[2] = {0, 0};
+
+      if (target == NULL)
+        continue;
+      if (!EntityExists(target))
+        continue;
+
+      info = GetEntInfo(target);
+      if (info->HP != 0) {
+        if (info->unkF9 != 0) {
+            info->unkF9 = 0;
+        }
+        else
+        {
+          s32 expGained = info->expGainedInTurn;
+          if (expGained != 0) {
+            if (info->isTeamLeader) {
+              GetAvailTacticsforLvl_Bool(tacticsBuffer1, info->level);
+            }
+            maxHP = info->maxHPStat;
+            atk[0] = info->atk[0];
+            atk[1] = info->atk[1];
+            def[0] = info->def[0];
+            def[1] = info->def[1];
+            if (info->level != 100) {
+              info->exp += expGained;
+              gFormatArgs[0] = expGained;
+              SetMessageArgument_2(gFormatBuffer_Monsters[0],info,0);
+              TryDisplayDungeonLoggableMessage3(entityPtr,target,*gUnknown_80F9E64); // $m0 gained $d0 Exp Points
+              flag = sub_80723D0(entityPtr,target,1,1);
+            }
+          }
+          if (info->unk149 != 0) {
+            s32 numMons = sub_808E400(info->id, idStack, FALSE, FALSE);
+            if (numMons != 0) {
+              s32 randIndex = DungeonRandInt(numMons);
+              for(counter = 0; counter < numMons; counter++)
+              {
+                id = &idStack[randIndex];
+                if ((sub_803D930(*id) != 0) && (GetSpriteData(*id) != NULL)) {
+                  sub_8072B78(entityPtr,target,*id);
+                  break;
+                }
+                randIndex++;
+                if (randIndex >= numMons) {
+                  randIndex = 0;
+                }
+              }
+            }
+            flag = FALSE;
+          }
+          if (flag && (!info->isNotTeamMember)) {
+            gFormatArgs[0] = info->maxHPStat - maxHP;
+            gFormatArgs[1] = info->atk[0] - atk[0];
+            gFormatArgs[2] = info->def[0] - def[0];
+            gFormatArgs[3] = info->atk[1] - atk[1];
+            gFormatArgs[4] = info->def[1] - def[1];
+            sub_807218C(target);
+          }
+          if ((expGained != 0) && (info->isTeamLeader)) {
+            s32 tacticIndex;
+
+            GetAvailTacticsforLvl_Bool(tacticsBuffer2,info->level);
+            for(tacticIndex = 0; tacticIndex < NUM_TACTICS; tacticIndex++)
+            {
+              if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
+                CopyTacticsNameToBuffer(gFormatBuffer_Items[0],tacticIndex);
+                TryDisplayDungeonLoggableMessage3(entityPtr,target,*gUnknown_80FF730); // $i0 was added to $m0's list of usable tactics
+              }
+            }
+          }
+        }
+        info->expGainedInTurn = 0;
+        info->unk149 = 0;
+      }
+    }
+  }
+  return;
 }
 
 void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 param_5)
