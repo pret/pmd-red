@@ -367,7 +367,7 @@ extern void LoadDungeonTilesetAssets(void);
 extern void LoadDungeonPokemonSprites(void);
 extern void ShowDungeonNameBanner(void);
 extern void sub_803EAF0(u32, u32);
-extern void sub_806A914(u8 a0, u8 a1, u8 a2);
+extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
 extern void sub_803F4A0(Entity *a0);
 extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 extern void sub_8046F84(s32 itemFlag);
@@ -674,7 +674,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         sub_8049ED4();
 
         if (!r6) {
-            sub_806A914(1, 0, 0);
+            sub_806A914(TRUE, FALSE, FALSE);
         }
         else {
             sub_806CF60();

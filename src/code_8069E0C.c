@@ -311,7 +311,18 @@ void sub_806A390(Entity *pokemon)
 // New file?
 
 #include "file_system.h"
+#include "tile_types.h"
+#include "position_util.h"
+#include "number_util.h"
+#include "pokemon_3.h"
+#include "code_8077274_1.h"
+#include "code_806CD90.h"
+#include "dungeon_capabilities.h"
+#include "status_checks_1.h"
+#include "dungeon_ai_movement.h"
+#include "constants/iq_skill.h"
 
+extern void EntityUpdateStatusSprites(Entity *);
 extern s32 sub_808F700(PokemonStruct1 *pokemon);
 extern Entity *sub_80696A8(Entity *a0);
 extern int sprintf(char *, const char *, ...);
@@ -491,3 +502,184 @@ bool8 sub_806A5A4(s16 r0)
         return FALSE;
 }
 
+extern const u8 *const gUnknown_80FD594;
+extern const u8 *const gUnknown_80FD5B8;
+extern const u8 *const gUnknown_80FEAC4;
+
+void sub_806A5B8(Entity *entity)
+{
+    s32 terrainType;
+
+    if (!EntityExists(entity))
+        return;
+
+    terrainType = GetTerrainType(GetTileAtEntitySafe(entity));
+    if (terrainType == TERRAIN_TYPE_SECONDARY) {
+        EntityInfo *info = GetEntInfo(entity);
+        // If lava - defrost and burn
+        if (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA) {
+            if (info->frozenClassStatus.status == STATUS_FROZEN) {
+                EndFrozenClassStatus(entity, entity);
+            }
+            if (GetMovementType(info->id) != 4 &&
+                info->id != MONSTER_HO_OH
+                && info->id != MONSTER_MOLTRES
+                && info->burnClassStatus.status != STATUS_BURN)
+            {
+                BurnedStatusTarget(entity, entity, 1, FALSE);
+            }
+        }
+        // It's water - heal burn
+        else {
+            if (info->burnClassStatus.status == STATUS_BURN) {
+                EndBurnClassStatus(entity, entity);
+            }
+        }
+    }
+    // If wall - decrement belly by 5
+    else if (terrainType == TERRAIN_TYPE_WALL) {
+        const u8 *str;
+        EntityInfo *info = GetEntInfo(entity);
+
+        if (info->isTeamLeader) {
+            FixedPoint bellyBefore = info->belly;
+            info->belly = FixedPoint_Subtract(bellyBefore, IntToFixedPointMacro(5));
+            str = NULL;
+            if (FixedPointToInt(bellyBefore) > 19 && FixedPointToInt(info->belly) <= 19) {
+                str = gUnknown_80FD594; // Getting hungry...
+            }
+            if (FixedPointToInt(bellyBefore) > 9 && FixedPointToInt(info->belly) <= 9) {
+                str = gUnknown_80FD5B8; // Getting dizzy from hunger...
+            }
+
+            if (str != NULL) {
+                LogMessageByIdWithPopupCheckUser(entity, str);
+            }
+        }
+    }
+}
+
+extern void sub_803F580(s32);
+extern void sub_8040A84(void);
+
+void sub_806A6E8(Entity *entity)
+{
+    EntityInfo *info = GetEntInfo(entity);
+
+    if (info->unk64 != info->heldItem.id) {
+        if (!info->isTeamLeader) {
+            if (info->heldItem.id == ITEM_HEAL_RIBBON || info->heldItem.id == ITEM_MUNCH_BELT) {
+                info->belly = FixedPoint_Subtract(info->belly, IntToFixedPoint(10));
+            }
+            else if (info->heldItem.id == ITEM_DIET_RIBBON) {
+                info->belly = IntToFixedPoint(0);
+            }
+
+            if (gDungeon->unk644.itemHoldersIdentified) {
+                EntityUpdateStatusSprites(entity);
+            }
+        }
+        else {
+            if (info->heldItem.id == ITEM_X_RAY_SPECS || info->unk64 == ITEM_X_RAY_SPECS) {
+                sub_803F580(1);
+                sub_8040A84();
+            }
+        }
+        sub_807AA30();
+    }
+
+    if (ItemExists(&info->heldItem)) {
+        info->unk64 = info->heldItem.id;
+    }
+    else {
+        info->unk64 = ITEM_NOTHING;
+    }
+}
+
+void DisplayMsgIfNewIqSkillLearned(EntityInfo *info, s32 pokeIq);
+
+UNUSED static void DisplayMsgIfTeamMonsLearnedNewIqSkill(void)
+{
+    s32 i;
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        Entity *entity = gDungeon->teamPokemon[i];
+        if (EntityExists(entity)) {
+            EntityInfo *info = GetEntInfo(entity);
+            if (info->IQ > 1) {
+                DisplayMsgIfNewIqSkillLearned(info, info->IQ - 1);
+            }
+        }
+    }
+}
+
+void DisplayMsgIfNewIqSkillLearned(EntityInfo *info, s32 iqBefore)
+{
+    s32 i, j;
+    u8 iqSkillsArrayBefore[NUM_IQ_SKILLS];
+    u8 iqSkillsArrayNow[NUM_IQ_SKILLS];
+    s32 numIqSkillsBefore = GetNumAvailableIQSkills(iqSkillsArrayBefore, iqBefore);
+    s32 numIqSkillsNow = GetNumAvailableIQSkills(iqSkillsArrayNow, info->IQ);
+
+    SetMessageArgument_2(gFormatBuffer_Monsters[0], info, 0);
+    for (i = 1; i < NUM_IQ_SKILLS; i++) {
+        bool8 hadIqSkillBefore = FALSE;
+        bool8 hasIqSkillNow = FALSE;
+
+        for (j = 0; j < numIqSkillsBefore; j++) {
+            if (iqSkillsArrayBefore[j] == i) {
+                hadIqSkillBefore = TRUE;
+                break;
+            }
+        }
+
+         for (j = 0; j < numIqSkillsNow; j++) {
+            if (iqSkillsArrayNow[j] == i) {
+                hasIqSkillNow = TRUE;
+                break;
+            }
+        }
+
+        if (hadIqSkillBefore != hasIqSkillNow) {
+            strcpy(gFormatBuffer_Items[0], GetIQSkillName(i));
+            DisplayDungeonLoggableMessageTrue(NULL, gUnknown_80FEAC4); // IQ rose! \n It learned the IQ skill 'i0'
+        }
+    }
+}
+
+void sub_806A898(Entity *entity, bool8 r7, bool8 showRunAwayEffect)
+{
+    EntityInfo *info = GetEntInfo(entity);
+    if (info->isTeamLeader) {
+        info->targetPos.x = entity->pos.x;
+        info->targetPos.y = entity->pos.y + 1;
+    }
+    else {
+        AIMovement(entity, showRunAwayEffect);
+    }
+
+    if (info->targetPos.x != 0 || info->targetPos.y != 0) {
+        if (!CheckVariousStatuses2(entity, TRUE) || !CheckVariousStatuses(entity)) {
+            s32 newDirection = GetDirectionTowardsPosition(&entity->pos, &info->targetPos);
+            info->action.direction = newDirection & DIRECTION_MASK;
+            if (r7) {
+                sub_806CE68(entity, newDirection);
+            }
+        }
+    }
+}
+
+void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect)
+{
+    s32 i;
+
+    for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+        Entity *entity = gDungeon->activePokemon[i];
+        if (EntityExists(entity)) {
+            EntityInfo *info = GetEntInfo(entity);
+            if (!a1 || info->monsterBehavior == 1) {
+                sub_806A898(entity, a0, showRunAwayEffect);
+            }
+        }
+    }
+}

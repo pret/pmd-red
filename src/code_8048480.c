@@ -108,7 +108,7 @@ extern void LevelDownTarget(Entity *pokemon, Entity *r1, u32 r2);
 extern void sub_806F370(Entity *pokemon, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
-extern void sub_806A7E8(EntityInfo *, s32);
+extern void DisplayMsgIfNewIqSkillLearned(EntityInfo *, s32);
 extern u32 HandleDamagingMove(struct Entity *, struct Entity *, struct Move *, u32, u32);
 
 void StunSeedItemAction(Entity *, Entity *);
@@ -774,7 +774,7 @@ void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD648[iVar4]);
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD6E8[iVar3]);
         LoadIQSkills(target);
-        sub_806A7E8(targetInfo,baseIQ);
+        DisplayMsgIfNewIqSkillLearned(targetInfo,baseIQ);
       }
     }
   }

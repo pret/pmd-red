@@ -136,33 +136,6 @@ static EWRAM_DATA s32 sFloorLayout = 0;
 static EWRAM_DATA s32 sNumTilesReachableFromStairs = 0;
 static EWRAM_DATA DungeonPos sKecleonShopMiddlePos = {0};
 
-// Helper functions for terrain flags
-static inline void SetTerrainType(Tile *tile, u32 terrainType)
-{
-    tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    tile->terrainType |= terrainType;
-}
-
-static inline void SetTerrainNormal(Tile *tile)
-{
-    SetTerrainType(tile, TERRAIN_TYPE_NORMAL);
-}
-
-static inline void SetTerrainSecondary(Tile *tile)
-{
-    SetTerrainType(tile, TERRAIN_TYPE_SECONDARY);
-}
-
-static inline void SetTerrainWall(Tile *tile)
-{
-    SetTerrainType(tile, TERRAIN_TYPE_WALL);
-}
-
-static inline u32 GetTerrainType(const Tile *tile)
-{
-    return tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-}
-
 struct FixedRoomsData
 {
     u8 x;

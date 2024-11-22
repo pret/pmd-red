@@ -50,6 +50,9 @@ FixedPoint FixedPoint_SetFromUnk(s48_16* param_1);
 FixedPoint FixedPoint_Div(FixedPoint a, FixedPoint b);
 s32 FixedPointToInt(FixedPoint a); // Always rounded up
 
+// Sometimes it's used directly as opposed to calling IntToFixedPoint
+#define IntToFixedPointMacro(x) ((FixedPoint){x, 0})
+
 #define IntToF248_2(x) ((s24_8){x * 0x100})
 #define FloatToF248_2(x) ((s24_8){(int)(x * 0x100)})
 static inline s24_8 IntToF248(s32 x) {
