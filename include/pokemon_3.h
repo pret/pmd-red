@@ -31,6 +31,8 @@ bool8 IsIQSkillSet(u8 *IQSkillFlags, u32 IQSkill);
 void SetDefaultIQSkills(u8 *param_1, bool8 enableSelfCurer);
 void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3);
 u32 sub_808F734(PokemonStruct1 *pokemon, s16 _species);
+s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0);
+s32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0);
 
 // pokemon_3.s
 extern void CreatePokemonInfoTabScreen(u32, s16, u32 *, u32 *, u32);

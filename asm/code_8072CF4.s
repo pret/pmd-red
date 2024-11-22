@@ -310,7 +310,7 @@ _08073532:
 	bl sub_80838EC
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl sub_806ACE8
+	bl MarkLastUsedMonMove
 	b _0807359C
 _0807354A:
 	movs r3, 0

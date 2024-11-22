@@ -19,6 +19,7 @@
 #include "moves.h"
 #include "math.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "pokemon_mid.h"
 #include "status_checks_1.h"
 #include "structs/dungeon_entity.h"
@@ -207,9 +208,8 @@ extern void nullsub_87(Entity *);
 extern void nullsub_86(Entity *);
 extern void sub_8041E0C(Entity *);
 extern void sub_8041DD8(Entity *r0, s32 r1); // NOTE: is s16 in another file
-extern s32 sub_803D870(void *, u32);
+extern s32 sub_803D870(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id);
 extern bool8 sub_806AA0C(s32, u32);
-u32 ExtractSpeciesIndex(PokemonStruct1 **r0); // TODO: look more into this and fix it.
 
 void MuzzleTarget(Entity *pokemon, Entity *target)
 {
@@ -241,7 +241,7 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
     s32 index;
     EntityInfo *entityInfo;
     OpenedFile *sprite;
-    PokemonStruct1 *auStack544[128];
+    UnkDungeonGlobal_unk1CD98 auStack544[64];
 
     if (!EntityExists(target))
         return;
@@ -260,7 +260,7 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
             sprite = NULL;
 
             for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
-                species = ExtractSpeciesIndex(&auStack544[DungeonRandInt(iVar5) * 2]);
+                species = ExtractSpeciesIndex(&auStack544[DungeonRandInt(iVar5)]);
                 apparentID_s16 = GetMonsterApparentID(target, species);
                 apparentID = apparentID_s16;
 

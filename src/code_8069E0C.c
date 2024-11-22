@@ -838,3 +838,91 @@ void EndAbilityImmuneStatus(Entity *attacker, Entity *target)
         }
     }
 }
+
+void MarkLastUsedMonMove(Entity *entity, Move *move)
+{
+    s32 i;
+    EntityInfo *entInfo = GetEntInfo(entity);
+
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        entInfo->moves.moves[i].moveFlags &= ~(MOVE_FLAG_LAST_USED);
+    }
+    entInfo->moves.struggleMoveFlags &= ~(MOVE_FLAG_LAST_USED);
+
+    if (move->id == MOVE_STRUGGLE) {
+        entInfo->moves.struggleMoveFlags |= MOVE_FLAG_LAST_USED;
+    }
+    else {
+        move->moveFlags |= MOVE_FLAG_LAST_USED;
+    }
+}
+
+extern s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id);
+extern void sub_8072AC8(u16 *param_1, s16 species, s32 param_3);
+
+s32 sub_806C444(s16 species, s32 level);
+s32 sub_806C488(s16 species, s32 level, s32 categoryIndex);
+s32 sub_806C4D4(s16 species, s32 level, s32 categoryIndex);
+
+void sub_806AD3C(void)
+{
+    s32 r10;
+    s32 i, j;
+    UnkDungeonGlobal_unk1CD98 sp[64];
+    unkDungeon2F3C *structPtr = gDungeon->unk2F3C;
+    s32 var_24 = sub_803D808(sp, 0);
+
+    for (i = 0; i < var_24; structPtr++, i++) {
+        structPtr->species = ExtractSpeciesIndex(&sp[i]);
+        structPtr->level = ExtractLevel(&sp[i]);
+        sub_8072AC8(structPtr->moves, structPtr->species, structPtr->level);
+        if (structPtr->moves[0] == MOVE_NOTHING) {
+            structPtr->moves[0] = MOVE_BLOWBACK;
+        }
+        structPtr->unkC = sub_806C444(structPtr->species, structPtr->level);
+
+        for (j = 0; j < 2; j++) {
+            structPtr->unkE[j]  = sub_806C488(structPtr->species, structPtr->level, j);
+            structPtr->unk10[j] = sub_806C4D4(structPtr->species, structPtr->level, j);
+        }
+    }
+
+    for (; i < 64; structPtr++, i++) {
+        structPtr->species = 0;
+    }
+
+    for (i = 0; i < MONSTER_MAX; i++) {
+        gDungeon->expYieldRankings[i] = 0;
+    }
+
+    r10 = 1;
+    for (i = 0; i < var_24; i++) {
+        s32 j;
+        s32 expSpecies = -1;
+        s32 expGain = -1;
+
+        for (j = 0; j < var_24; j++) {
+            s32 species = ExtractSpeciesIndex(&sp[j]);
+            if (gDungeon->expYieldRankings[species] == 0) {
+                s32 level = ExtractLevel(&sp[j]);
+                s32 exp = CalculateEXPGain(species, level);
+                if (expGain < exp) {
+                    expGain = exp;
+                    expSpecies = species;
+                }
+            }
+        }
+
+        if (expSpecies < 0)
+            break;
+
+        gDungeon->expYieldRankings[expSpecies] = r10;
+        r10 += 2;
+    }
+
+    for (i = 0; i < MONSTER_MAX; i++) {
+        if (gDungeon->expYieldRankings[i] == 0) {
+            gDungeon->expYieldRankings[i] = 1;
+        }
+    }
+}

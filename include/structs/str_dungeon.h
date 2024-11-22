@@ -305,6 +305,17 @@ typedef struct unkDungeonE260
     /* 0x2 */ u16 unk2;
 } unkDungeonE260;
 
+// Size: 0x14
+typedef struct unkDungeon2F3C
+{
+    /* 0x0 */ s16 species;
+    /* 0x2 */ s16 level;
+    /* 0x4 */ u16 moves[MAX_MON_MOVES];
+    /* 0xC */ u16 unkC;
+    /* 0xE */ u8 unkE[2];
+    /* 0x10 */ u8 unk10[2];
+} unkDungeon2F3C;
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -342,11 +353,10 @@ typedef struct Dungeon
     unkDungeon644 unk644;
     EntityInfo unk69C[MAX_TEAM_MEMBERS];
     EntityInfo unkEBC[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
-    u8 fill2F3C[0x343C - 0x2F3C];
+    /* 0x2F3C */ unkDungeon2F3C unk2F3C[64];
     /* 0x343C */ UnkDungeonGlobal_unk1CD98 unk343C[32];
     u8 fill353C[0x363c-0x353c];
-    /* 0x363C */ u8 expYieldRankings[NUM_MONSTERS];
-    u8 fill37D9[0x37E4 - 0x37D9];
+    /* 0x363C */ u8 expYieldRankings[MONSTER_MAX];
     /* 0x37E4 */ s32 unk37E4;
     u8 fill37E8[4];
     /* 0x37EC */ u8 unk37EC;

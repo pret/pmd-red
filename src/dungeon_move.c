@@ -65,7 +65,7 @@ extern Entity *GetMonsterAtPos(DungeonPos *pos);
 extern Entity *sub_80696FC(Entity *);
 extern Entity *sub_806977C(Entity *);
 extern void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct DamageStruct *dmgStruct);
-extern void sub_806ACE8(Entity *entity, Move *move);
+extern void MarkLastUsedMonMove(Entity *entity, Move *move);
 extern s32 sub_8057070(Move *move);
 extern bool8 MoveRequiresCharging(Entity* pokemon,u16 param_2);
 extern s32 sub_800ED20(u16 param_1);
@@ -2091,7 +2091,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     }
 
     if (moveUsable && r6) {
-        sub_806ACE8(attacker, move);
+        MarkLastUsedMonMove(attacker, move);
     }
 
     if (GetEntInfo(attacker)->muzzled.muzzled == TRUE && FailsWhileMuzzled(move->id)) {

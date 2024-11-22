@@ -274,7 +274,7 @@ s32 GetUnownIndex(s16 index)
     return 0;
 }
 
-u32 ExtractSpeciesIndex(PokemonStruct1 *r0)
+s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0)
 {
     return r0->unk0 & 0x000001ff;
 }
@@ -291,9 +291,10 @@ void sub_808E9D8(PokemonStruct1 *r0, s32 r1, s16 r2)
     r0->unk0 =  r2_32 | (r1 << 9) ;
 }
 
-u32 ExtractLevel(PokemonStruct1 *r0)
+s32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0)
 {
-    return (r0->unk0 >> 9);
+    u16 bitfield = r0->unk0;
+    return (bitfield >> 9);
 }
 
 // Unused
