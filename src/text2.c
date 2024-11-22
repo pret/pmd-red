@@ -1254,578 +1254,208 @@ bool8 sub_8007464(void)
     return FALSE;
 }
 
-// https://decomp.me/scratch/F06Ty
-NAKED
-u32 xxx_draw_char(UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5)
+extern const u32 gUnknown_80B853C[16];
+
+struct CharMapStruct
 {
-    asm_unified(
-    "push {r4-r7,lr}\n"
-    "\tmov r7, r10\n"
-    "\tmov r6, r9\n"
-    "\tmov r5, r8\n"
-    "\tpush {r5-r7}\n"
-    "\tsub sp, 0x28\n"
-    "\tadds r6, r1, 0\n"
-    "\tmov r10, r2\n"
-    "\tadds r4, r3, 0\n"
-    "\tldr r2, [sp, 0x48]\n"
-    "\tldr r3, [sp, 0x4C]\n"
-    "\tlsls r1, r3, 3\n"
-    "\tadds r1, r3\n"
-    "\tlsls r1, 3\n"
-    "\tadds r5, r0, r1\n"
-    "\tldr r1, _080074B8\n"
-    "\tmovs r0, 0xF\n"
-    "\tands r2, r0\n"
-    "\tlsls r2, 2\n"
-    "\tadds r2, r1\n"
-    "\tldr r2, [r2]\n"
-    "\tstr r2, [sp, 0x18]\n"
-    "\tldr r0, _080074BC\n"
-    "\tldr r0, [r0]\n"
-    "\tcmp r0, 0x1\n"
-    "\tbne _080074CC\n"
-    "\tcmp r4, 0x70\n"
-    "\tbeq _080074B0\n"
-    "\tcmp r4, 0x6A\n"
-    "\tbeq _080074B0\n"
-    "\tcmp r4, 0x71\n"
-    "\tbeq _080074B0\n"
-    "\tcmp r4, 0x79\n"
-    "\tbeq _080074B0\n"
-    "\tcmp r4, 0x67\n"
-    "\tbne _080074C0\n"
-"_080074B0:\n"
-    "\tmovs r0, 0x2\n"
-    "\tadd r10, r0\n"
-    "\tb _080074CC\n"
-    "\t.align 2, 0\n"
-"_080074B8: .4byte gUnknown_80B853C\n"
-"_080074BC: .4byte gCurrentCharmap\n"
-"_080074C0:\n"
-    "\tldr r0, _080074F8\n"
-    "\tcmp r4, r0\n"
-    "\tbne _080074CC\n"
-    "\tmovs r1, 0x2\n"
-    "\tnegs r1, r1\n"
-    "\tadd r10, r1\n"
-"_080074CC:\n"
-    "\tadds r0, r4, 0\n"
-    "\tbl GetCharacter\n"
-    "\tstr r0, [sp]\n"
-    "\tldr r2, [r0]\n"
-    "\tstr r2, [sp, 0x4]\n"
-    "\tstr r2, [sp, 0xC]\n"
-    "\tadds r3, r2, 0\n"
-    "\tsubs r3, 0x6\n"
-    "\tstr r3, [sp, 0x8]\n"
-    "\tldr r0, _080074FC\n"
-    "\tldrb r0, [r0]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _08007500\n"
-    "\tldr r4, [sp]\n"
-    "\tldrb r1, [r4, 0xA]\n"
-    "\tlsrs r7, r1, 1\n"
-    "\tmovs r0, 0x1\n"
-    "\tadds r2, r7, 0\n"
-    "\tands r2, r0\n"
-    "\tstr r2, [sp, 0x1C]\n"
-    "\tb _08007508\n"
-    "\t.align 2, 0\n"
-"_080074F8: .4byte 0x00008199\n"
-"_080074FC: .4byte gDrawTextShadow\n"
-"_08007500:\n"
-    "\tmovs r3, 0\n"
-    "\tstr r3, [sp, 0x1C]\n"
-    "\tldr r4, [sp]\n"
-    "\tldrb r1, [r4, 0xA]\n"
-"_08007508:\n"
-    "\tmovs r0, 0x1\n"
-    "\tands r0, r1\n"
-    "\tcmp r0, 0\n"
-    "\tbne _08007512\n"
-    "\tb _08007670\n"
-"_08007512:\n"
-    "\tmov r0, r10\n"
-    "\tcmp r0, 0\n"
-    "\tbge _0800751A\n"
-    "\tadds r0, 0x7\n"
-"_0800751A:\n"
-    "\tasrs r4, r0, 3\n"
-    "\tmovs r7, 0x4\n"
-    "\tldrsh r0, [r5, r7]\n"
-    "\tmuls r0, r4\n"
-    "\tadds r2, r6, 0\n"
-    "\tcmp r6, 0\n"
-    "\tbge _0800752A\n"
-    "\tadds r2, r6, 0x7\n"
-"_0800752A:\n"
-    "\tasrs r2, 3\n"
-    "\tadds r0, r2\n"
-    "\tlsls r0, 5\n"
-    "\tldr r1, [r5, 0x18]\n"
-    "\tadds r3, r1, r0\n"
-    "\tlsls r0, r4, 3\n"
-    "\tmov r1, r10\n"
-    "\tsubs r0, r1, r0\n"
-    "\tlsls r0, 2\n"
-    "\tadds r3, r0\n"
-    "\tlsls r0, r2, 3\n"
-    "\tsubs r0, r6, r0\n"
-    "\tlsls r0, 4\n"
-    "\tldr r1, _08007664\n"
-    "\tadds r0, r1\n"
-    "\tmov r12, r0\n"
-    "\tmov r9, r2\n"
-    "\tstr r4, [sp, 0x14]\n"
-    "\tmovs r2, 0x8\n"
-    "\tldrsh r0, [r5, r2]\n"
-    "\tcmp r4, r0\n"
-    "\tblt _08007558\n"
-    "\tb _0800786C\n"
-"_08007558:\n"
-    "\tmovs r4, 0\n"
-    "\tstr r4, [sp, 0x10]\n"
-    "\tldr r2, _08007668\n"
-    "\tldr r1, _0800766C\n"
-    "\tldr r0, [r1]\n"
-    "\tlsls r0, 2\n"
-    "\tadds r0, r2\n"
-    "\tldr r0, [r0]\n"
-    "\tcmp r4, r0\n"
-    "\tblt _0800756E\n"
-    "\tb _0800786C\n"
-"_0800756E:\n"
-    "\tadds r4, r2, 0\n"
-"_08007570:\n"
-    "\tldr r6, [sp, 0x4]\n"
-    "\tldrh r0, [r6, 0x2]\n"
-    "\tlsls r2, r0, 16\n"
-    "\tldrh r0, [r6]\n"
-    "\torrs r2, r0\n"
-    "\tcmp r2, 0\n"
-    "\tbeq _080075CC\n"
-    "\tmovs r7, 0x4\n"
-    "\tldrsh r0, [r5, r7]\n"
-    "\tcmp r9, r0\n"
-    "\tbge _080075A6\n"
-    "\tmov r0, r12\n"
-    "\tldr r1, [r0]\n"
-    "\tands r1, r2\n"
-    "\tldr r0, [r0, 0x8]\n"
-    "\tlsls r1, r0\n"
-    "\tldr r0, [r3]\n"
-    "\torrs r0, r1\n"
-    "\tstr r0, [r3]\n"
-    "\tldr r0, [r5, 0x3C]\n"
-    "\tcmp r0, r3\n"
-    "\tbls _0800759E\n"
-    "\tstr r3, [r5, 0x3C]\n"
-"_0800759E:\n"
-    "\tldr r0, [r5, 0x40]\n"
-    "\tcmp r0, r3\n"
-    "\tbcs _080075A6\n"
-    "\tstr r3, [r5, 0x40]\n"
-"_080075A6:\n"
-    "\tmovs r1, 0x4\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tsubs r0, 0x1\n"
-    "\tcmp r9, r0\n"
-    "\tbge _080075CC\n"
-    "\tadds r3, 0x20\n"
-    "\tmov r6, r12\n"
-    "\tldr r0, [r6, 0x4]\n"
-    "\tands r2, r0\n"
-    "\tldr r0, [r6, 0xC]\n"
-    "\tlsrs r2, r0\n"
-    "\tldr r0, [r3]\n"
-    "\torrs r0, r2\n"
-    "\tstr r0, [r3]\n"
-    "\tldr r0, [r5, 0x40]\n"
-    "\tcmp r0, r3\n"
-    "\tbcs _080075CA\n"
-    "\tstr r3, [r5, 0x40]\n"
-"_080075CA:\n"
-    "\tsubs r3, 0x20\n"
-"_080075CC:\n"
-    "\tldr r7, [sp, 0x4]\n"
-    "\tldrh r2, [r7, 0x4]\n"
-    "\tcmp r2, 0\n"
-    "\tbeq _08007620\n"
-    "\tmovs r1, 0x4\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tsubs r0, 0x1\n"
-    "\tcmp r9, r0\n"
-    "\tbge _080075FA\n"
-    "\tadds r3, 0x20\n"
-    "\tmov r6, r12\n"
-    "\tldr r1, [r6]\n"
-    "\tands r1, r2\n"
-    "\tldr r0, [r6, 0x8]\n"
-    "\tlsls r1, r0\n"
-    "\tldr r0, [r3]\n"
-    "\torrs r0, r1\n"
-    "\tstr r0, [r3]\n"
-    "\tldr r0, [r5, 0x40]\n"
-    "\tcmp r0, r3\n"
-    "\tbcs _080075F8\n"
-    "\tstr r3, [r5, 0x40]\n"
-"_080075F8:\n"
-    "\tsubs r3, 0x20\n"
-"_080075FA:\n"
-    "\tmovs r7, 0x4\n"
-    "\tldrsh r0, [r5, r7]\n"
-    "\tsubs r0, 0x2\n"
-    "\tcmp r9, r0\n"
-    "\tbge _08007620\n"
-    "\tadds r3, 0x40\n"
-    "\tmov r1, r12\n"
-    "\tldr r0, [r1, 0x4]\n"
-    "\tands r2, r0\n"
-    "\tldr r0, [r1, 0xC]\n"
-    "\tlsrs r2, r0\n"
-    "\tldr r0, [r3]\n"
-    "\torrs r0, r2\n"
-    "\tstr r0, [r3]\n"
-    "\tldr r0, [r5, 0x40]\n"
-    "\tcmp r0, r3\n"
-    "\tbcs _0800761E\n"
-    "\tstr r3, [r5, 0x40]\n"
-"_0800761E:\n"
-    "\tsubs r3, 0x40\n"
-"_08007620:\n"
-    "\tldr r2, [sp, 0x4]\n"
-    "\tadds r2, 0x6\n"
-    "\tstr r2, [sp, 0x4]\n"
-    "\tadds r3, 0x4\n"
-    "\tmovs r6, 0x1\n"
-    "\tadd r10, r6\n"
-    "\tmovs r0, 0x7\n"
-    "\tmov r7, r10\n"
-    "\tands r0, r7\n"
-    "\tcmp r0, 0\n"
-    "\tbne _0800764E\n"
-    "\tldr r0, [r5, 0x20]\n"
-    "\tlsls r0, 2\n"
-    "\tadds r3, r0\n"
-    "\tldr r0, [sp, 0x14]\n"
-    "\tadds r0, 0x1\n"
-    "\tstr r0, [sp, 0x14]\n"
-    "\tmovs r1, 0x8\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tldr r2, [sp, 0x14]\n"
-    "\tcmp r2, r0\n"
-    "\tblt _0800764E\n"
-    "\tb _0800786C\n"
-"_0800764E:\n"
-    "\tldr r6, [sp, 0x10]\n"
-    "\tadds r6, 0x1\n"
-    "\tstr r6, [sp, 0x10]\n"
-    "\tldr r7, _0800766C\n"
-    "\tldr r0, [r7]\n"
-    "\tlsls r0, 2\n"
-    "\tadds r0, r4\n"
-    "\tldr r0, [r0]\n"
-    "\tcmp r6, r0\n"
-    "\tblt _08007570\n"
-    "\tb _0800786C\n"
-    "\t.align 2, 0\n"
-"_08007664: .4byte gCharMasksOffsets\n"
-"_08007668: .4byte gCharHeight\n"
-"_0800766C: .4byte gCurrentCharmap\n"
-"_08007670:\n"
-    "\tmovs r0, 0\n"
-    "\tstr r0, [sp, 0x20]\n"
-    "\tmov r0, r10\n"
-    "\tcmp r0, 0\n"
-    "\tbge _0800767C\n"
-    "\tadds r0, 0x7\n"
-"_0800767C:\n"
-    "\tasrs r4, r0, 3\n"
-    "\tmovs r1, 0x4\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tadds r1, r4, 0\n"
-    "\tmuls r1, r0\n"
-    "\tadds r0, r6, 0\n"
-    "\tcmp r6, 0\n"
-    "\tbge _0800768E\n"
-    "\tadds r0, r6, 0x7\n"
-"_0800768E:\n"
-    "\tasrs r2, r0, 3\n"
-    "\tadds r0, r1, r2\n"
-    "\tlsls r0, 5\n"
-    "\tldr r1, [r5, 0x18]\n"
-    "\tadds r3, r1, r0\n"
-    "\tlsls r0, r4, 3\n"
-    "\tmov r7, r10\n"
-    "\tsubs r0, r7, r0\n"
-    "\tlsls r0, 2\n"
-    "\tadds r3, r0\n"
-    "\tlsls r0, r2, 3\n"
-    "\tsubs r0, r6, r0\n"
-    "\tlsls r0, 4\n"
-    "\tldr r1, _0800788C\n"
-    "\tadds r0, r1\n"
-    "\tmov r12, r0\n"
-    "\tmov r9, r2\n"
-    "\tstr r4, [sp, 0x14]\n"
-    "\tmovs r1, 0x8\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tcmp r4, r0\n"
-    "\tblt _080076BC\n"
-    "\tb _0800786C\n"
-"_080076BC:\n"
-    "\tmovs r2, 0\n"
-    "\tstr r2, [sp, 0x10]\n"
-    "\tldr r2, _08007890\n"
-    "\tldr r1, _08007894\n"
-    "\tldr r0, [r1]\n"
-    "\tlsls r0, 2\n"
-    "\tadds r0, r2\n"
-    "\tldr r0, [r0]\n"
-    "\tldr r4, [sp, 0x10]\n"
-    "\tcmp r4, r0\n"
-    "\tblt _080076D4\n"
-    "\tb _0800786C\n"
-"_080076D4:\n"
-    "\tldr r6, [sp, 0x4]\n"
-    "\tldrh r0, [r6, 0x2]\n"
-    "\tlsls r4, r0, 16\n"
-    "\tldrh r0, [r6]\n"
-    "\torrs r4, r0\n"
-    "\tldr r1, _08007898\n"
-    "\tands r1, r4\n"
-    "\tldr r0, [sp, 0x18]\n"
-    "\tands r0, r4\n"
-    "\tadds r2, r1, r0\n"
-    "\tldr r7, [sp, 0x1C]\n"
-    "\tcmp r7, 0\n"
-    "\tbeq _08007724\n"
-    "\tldr r1, [sp, 0xC]\n"
-    "\tldrh r0, [r1, 0x2]\n"
-    "\tlsls r0, 16\n"
-    "\tldrh r1, [r1]\n"
-    "\torrs r0, r1\n"
-    "\tlsls r1, r0, 4\n"
-    "\tmvns r6, r4\n"
-    "\tmov r8, r6\n"
-    "\tbics r1, r4\n"
-    "\tldr r7, _0800789C\n"
-    "\tldr r6, [r7]\n"
-    "\tands r1, r6\n"
-    "\torrs r2, r1\n"
-    "\tldr r0, [sp, 0x20]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _08007724\n"
-    "\tldr r1, [sp, 0x8]\n"
-    "\tldrh r0, [r1, 0x2]\n"
-    "\tlsls r0, 16\n"
-    "\tldrh r1, [r1]\n"
-    "\torrs r0, r1\n"
-    "\tlsls r1, r0, 4\n"
-    "\teors r1, r4\n"
-    "\tmov r4, r8\n"
-    "\tands r1, r4\n"
-    "\tands r1, r6\n"
-    "\torrs r2, r1\n"
-"_08007724:\n"
-    "\tcmp r2, 0\n"
-    "\tbeq _08007776\n"
-    "\tmovs r6, 0x4\n"
-    "\tldrsh r0, [r5, r6]\n"
-    "\tcmp r9, r0\n"
-    "\tbge _08007750\n"
-    "\tmov r7, r12\n"
-    "\tldr r1, [r7]\n"
-    "\tands r1, r2\n"
-    "\tldr r0, [r7, 0x8]\n"
-    "\tlsls r1, r0\n"
-    "\tldr r0, [r3]\n"
-    "\torrs r0, r1\n"
-    "\tstr r0, [r3]\n"
-    "\tldr r0, [r5, 0x3C]\n"
-    "\tcmp r0, r3\n"
-    "\tbls _08007748\n"
-    "\tstr r3, [r5, 0x3C]\n"
-"_08007748:\n"
-    "\tldr r0, [r5, 0x40]\n"
-    "\tcmp r0, r3\n"
-    "\tbcs _08007750\n"
-    "\tstr r3, [r5, 0x40]\n"
-"_08007750:\n"
-    "\tmovs r1, 0x4\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tsubs r0, 0x1\n"
-    "\tcmp r9, r0\n"
-    "\tbge _08007776\n"
-    "\tadds r3, 0x20\n"
-    "\tmov r4, r12\n"
-    "\tldr r0, [r4, 0x4]\n"
-    "\tands r2, r0\n"
-    "\tldr r0, [r4, 0xC]\n"
-    "\tlsrs r2, r0\n"
-    "\tldr r0, [r3]\n"
-    "\torrs r0, r2\n"
-    "\tstr r0, [r3]\n"
-    "\tldr r0, [r5, 0x40]\n"
-    "\tcmp r0, r3\n"
-    "\tbcs _08007774\n"
-    "\tstr r3, [r5, 0x40]\n"
-"_08007774:\n"
-    "\tsubs r3, 0x20\n"
-"_08007776:\n"
-    "\tldr r6, [sp, 0x4]\n"
-    "\tldrh r4, [r6, 0x4]\n"
-    "\tldr r1, _08007898\n"
-    "\tands r1, r4\n"
-    "\tldr r0, [sp, 0x18]\n"
-    "\tands r0, r4\n"
-    "\tadds r2, r1, r0\n"
-    "\tldr r7, [sp, 0x1C]\n"
-    "\tcmp r7, 0\n"
-    "\tbeq _080077CC\n"
-    "\tldr r1, [sp, 0xC]\n"
-    "\tldrh r0, [r1, 0x4]\n"
-    "\tlsls r1, r0, 4\n"
-    "\tldr r6, [sp, 0xC]\n"
-    "\tldrh r0, [r6, 0x2]\n"
-    "\tmovs r7, 0xF\n"
-    "\tmov r8, r7\n"
-    "\tlsrs r0, 12\n"
-    "\torrs r1, r0\n"
-    "\tmvns r0, r4\n"
-    "\tstr r0, [sp, 0x24]\n"
-    "\tbics r1, r4\n"
-    "\tldr r7, _0800789C\n"
-    "\tldr r6, [r7]\n"
-    "\tands r1, r6\n"
-    "\torrs r2, r1\n"
-    "\tldr r0, [sp, 0x20]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _080077CC\n"
-    "\tldr r1, [sp, 0x8]\n"
-    "\tldrh r0, [r1, 0x4]\n"
-    "\tlsls r1, r0, 4\n"
-    "\tldr r7, [sp, 0x8]\n"
-    "\tldrh r0, [r7, 0x2]\n"
-    "\tlsrs r0, 12\n"
-    "\tmov r7, r8\n"
-    "\tands r0, r7\n"
-    "\torrs r1, r0\n"
-    "\teors r1, r4\n"
-    "\tldr r0, [sp, 0x24]\n"
-    "\tands r1, r0\n"
-    "\tands r1, r6\n"
-    "\torrs r2, r1\n"
-"_080077CC:\n"
-    "\tcmp r2, 0\n"
-    "\tbeq _0800781C\n"
-    "\tmovs r1, 0x4\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tsubs r0, 0x1\n"
-    "\tcmp r9, r0\n"
-    "\tbge _080077F6\n"
-    "\tadds r3, 0x20\n"
-    "\tmov r4, r12\n"
-    "\tldr r1, [r4]\n"
-    "\tands r1, r2\n"
-    "\tldr r0, [r4, 0x8]\n"
-    "\tlsls r1, r0\n"
-    "\tldr r0, [r3]\n"
-    "\torrs r0, r1\n"
-    "\tstr r0, [r3]\n"
-    "\tldr r0, [r5, 0x40]\n"
-    "\tcmp r0, r3\n"
-    "\tbcs _080077F4\n"
-    "\tstr r3, [r5, 0x40]\n"
-"_080077F4:\n"
-    "\tsubs r3, 0x20\n"
-"_080077F6:\n"
-    "\tmovs r6, 0x4\n"
-    "\tldrsh r0, [r5, r6]\n"
-    "\tsubs r0, 0x2\n"
-    "\tcmp r9, r0\n"
-    "\tbge _0800781C\n"
-    "\tadds r3, 0x40\n"
-    "\tmov r7, r12\n"
-    "\tldr r0, [r7, 0x4]\n"
-    "\tands r2, r0\n"
-    "\tldr r0, [r7, 0xC]\n"
-    "\tlsrs r2, r0\n"
-    "\tldr r0, [r3]\n"
-    "\torrs r0, r2\n"
-    "\tstr r0, [r3]\n"
-    "\tldr r0, [r5, 0x40]\n"
-    "\tcmp r0, r3\n"
-    "\tbcs _0800781A\n"
-    "\tstr r3, [r5, 0x40]\n"
-"_0800781A:\n"
-    "\tsubs r3, 0x40\n"
-"_0800781C:\n"
-    "\tmovs r0, 0x1\n"
-    "\tstr r0, [sp, 0x20]\n"
-    "\tldr r1, [sp, 0x4]\n"
-    "\tadds r1, 0x6\n"
-    "\tstr r1, [sp, 0x4]\n"
-    "\tldr r2, [sp, 0x8]\n"
-    "\tadds r2, 0x6\n"
-    "\tstr r2, [sp, 0x8]\n"
-    "\tldr r4, [sp, 0xC]\n"
-    "\tadds r4, 0x6\n"
-    "\tstr r4, [sp, 0xC]\n"
-    "\tadds r3, 0x4\n"
-    "\tadd r10, r0\n"
-    "\tmovs r0, 0x7\n"
-    "\tmov r6, r10\n"
-    "\tands r0, r6\n"
-    "\tcmp r0, 0\n"
-    "\tbne _08007854\n"
-    "\tldr r0, [r5, 0x20]\n"
-    "\tlsls r0, 2\n"
-    "\tadds r3, r0\n"
-    "\tldr r7, [sp, 0x14]\n"
-    "\tadds r7, 0x1\n"
-    "\tstr r7, [sp, 0x14]\n"
-    "\tmovs r1, 0x8\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tcmp r7, r0\n"
-    "\tbge _0800786C\n"
-"_08007854:\n"
-    "\tldr r2, [sp, 0x10]\n"
-    "\tadds r2, 0x1\n"
-    "\tstr r2, [sp, 0x10]\n"
-    "\tldr r4, _08007894\n"
-    "\tldr r0, [r4]\n"
-    "\tlsls r0, 2\n"
-    "\tldr r6, _08007890\n"
-    "\tadds r0, r6\n"
-    "\tldr r0, [r0]\n"
-    "\tcmp r2, r0\n"
-    "\tbge _0800786C\n"
-    "\tb _080076D4\n"
-"_0800786C:\n"
-    "\tldr r7, [sp]\n"
-    "\tmovs r1, 0x6\n"
-    "\tldrsh r0, [r7, r1]\n"
-    "\tldr r2, _080078A0\n"
-    "\tmovs r3, 0\n"
-    "\tldrsh r1, [r2, r3]\n"
-    "\tadds r0, r1\n"
-    "\tadd sp, 0x28\n"
-    "\tpop {r3-r5}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tmov r10, r5\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r1}\n"
-    "\tbx r1\n"
-    "\t.align 2, 0\n"
-"_0800788C: .4byte gCharMasksOffsets\n"
-"_08007890: .4byte gCharHeight\n"
-"_08007894: .4byte gCurrentCharmap\n"
-"_08007898: .4byte 0x11111111\n"
-"_0800789C: .4byte gTextShadowMask\n"
-"_080078A0: .4byte gCharacterSpacing");
+    s32 unk0;
+    struct unkChar *unk4;
+};
+extern struct CharMapStruct *gCharmaps[];
+extern s32 gCurrentCharmap;
+extern s16 gCharacterSpacing;
+extern s32 gCharHeight[];
+extern u8 gDrawTextShadow;
+
+u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5)
+{
+    u32 *r3;
+    const struct unkShiftData *shiftData;
+    const struct unkChar *sp0;
+    u16 *local_44;
+    u16 *sp8;
+    u16 *local_3c;
+    s32 i;
+    s32 xDiv8, yDiv8;
+    struct UnkTextStruct1 *r5 = &a0[a5];
+    s32 sp18 = gUnknown_80B853C[color & 0xF];
+    u8 var_2C;
+    u32 r4;
+    u32 r2;
+
+    if (gCurrentCharmap == 1) {
+        if (a3 == 0x70 || a3 == 0x6A || a3 == 0x71 || a3 == 0x79 || a3 == 0x67)
+            y += 2;
+        else if (a3 == 0x8199)
+            y -= 2;
+    }
+
+    sp0 = GetCharacter(a3);
+    local_44 = sp0->unk0;
+    ASM_MATCH_TRICK(local_3c); // stack doesn't match without it
+    local_3c = sp0->unk0;
+    sp8 = sp0->unk0 - 3;
+
+    if (gDrawTextShadow != 0) {
+        var_2C = (sp0->unkA >> 1) & 1;
+    }
+    else {
+        var_2C = 0;
+    }
+
+    if (sp0->unkA & 1) {
+        r3 = r5->unk18 + ((((y / 8) * r5->unk4) + (x / 8)) * 8);
+        r3 += y - (y / 8 * 8);
+        shiftData = &gCharMasksOffsets[x - ((x / 8) * 8)];
+        xDiv8 = x / 8;
+        yDiv8 = y / 8;
+
+        if (yDiv8 < r5->unk8) {
+            for (i = 0; i < gCharHeight[gCurrentCharmap]; i++) {
+                r2 = (local_44[1] << 0x10) | (local_44[0]);
+                if (r2 != 0) {
+                    if (xDiv8 < r5->unk4) {
+                        *r3 |= (shiftData->bytesA & r2) << shiftData->shift_left;
+                        if (r5->unk3C > r3)
+                            r5->unk3C = r3;
+                        if (r5->unk40 < r3)
+                            r5->unk40 = r3;
+                    }
+                    if (xDiv8 < r5->unk4 - 1) {
+                        r3 += 8;
+                        r2 &= shiftData->bytesB;
+                        *r3 |= (r2) >> shiftData->shift_right;
+                        if (r5->unk40 < r3)
+                            r5->unk40 = r3;
+                        r3 -= 8;
+                    }
+                }
+
+                r2 = local_44[2];
+                if (r2 != 0) {
+                    if (xDiv8 < r5->unk4 - 1) {
+                        r3 += 8;
+                        *r3 |= (r2 & shiftData->bytesA) << shiftData->shift_left;
+                        if (r5->unk40 < r3)
+                            r5->unk40 = r3;
+                        r3 -= 8;
+                    }
+                    if (xDiv8 < r5->unk4 - 2) {
+                        r3 += 16;
+                        *r3 |= (r2 & shiftData->bytesB) >> shiftData->shift_right;
+                        if (r5->unk40 < r3)
+                            r5->unk40 = r3;
+                        r3 -= 16;
+                    }
+                }
+
+                local_44 += 3;
+                r3++;
+                y++;
+                if (y % 8 == 0) {
+                    r3 += r5->unk20;
+                    yDiv8++;
+                    if (yDiv8 >= r5->unk8)
+                        break;
+                }
+            }
+        }
+    }
+    else {
+        bool8 notFirstIteration = FALSE;
+        u32 r1;
+
+        r3 = r5->unk18 + ((((y / 8) * r5->unk4) + (x / 8)) * 8);
+        r3 += y - (y / 8 * 8);
+        shiftData = &gCharMasksOffsets[x - ((x / 8) * 8)];
+        xDiv8 = x / 8;
+        yDiv8 = y / 8;
+
+        if (yDiv8 < r5->unk8) {
+            for (i = 0; i < gCharHeight[gCurrentCharmap]; i++) {
+                r4 = (local_44[1] << 0x10) | (local_44[0]);
+                r2 = (0x11111111 & r4) + (sp18 & r4);
+
+                if (var_2C != 0) {
+                    r1 = ((local_3c[1] << 0x10) | local_3c[0]) << 4;
+                    r1 |= r4; // This doesn't really do anything since r4 bits are cleared, but it's needed to match.
+                    r1 &= ~(r4);
+                    r1 &= gTextShadowMask;
+                    r2 |= (r1);
+                    if (notFirstIteration) {
+                        r1 = (((sp8[1] << 0x10) | sp8[0]) << 4) ^ r4;
+                        r1 &= ~(r4);
+                        r2 |= (r1 & gTextShadowMask);
+                    }
+                }
+
+                if (r2 != 0) {
+                    if (xDiv8 < r5->unk4) {
+                        *r3 |= (r2 & shiftData->bytesA) << shiftData->shift_left;
+                        if (r5->unk3C > r3)
+                            r5->unk3C = r3;
+                        if (r5->unk40 < r3)
+                            r5->unk40 = r3;
+                    }
+                    if (xDiv8 < r5->unk4 - 1) {
+                        r3 += 8;
+                        *r3 |= (r2 & shiftData->bytesB) >> shiftData->shift_right;
+                        if (r5->unk40 < r3)
+                            r5->unk40 = r3;
+                        r3 -= 8;
+                    }
+                }
+
+                r4 = local_44[2];
+                r2 = (0x11111111 & r4) + (sp18 & r4);
+                if (var_2C != 0) {
+                    r1 = (local_3c[2] << 4) | ((local_3c[1] >> 0xC) & 0xF);
+                    r1 |= r4; // This doesn't really do anything since r4 bits are cleared, but it's needed to match.
+                    r1 &= ~(r4);
+                    r1 &= gTextShadowMask;
+                    r2 |= r1;
+                    if (notFirstIteration) {
+                        r1 = ((sp8[2] << 4) | ((sp8[1] >> 0xC) & 0xF)) ^ r4;
+                        r1 &= ~(r4);
+                        r1 &= gTextShadowMask;
+                        r2 |= (r1);
+                    }
+                }
+
+                if (r2 != 0) {
+                    if (xDiv8 < r5->unk4 - 1) {
+                        r3 += 8;
+                        *r3 |= (r2 & shiftData->bytesA) << shiftData->shift_left;
+                        if (r5->unk40 < r3)
+                            r5->unk40 = r3;
+                        r3 -= 8;
+                    }
+                    if (xDiv8 < r5->unk4 - 2) {
+                        r3 += 16;
+                        *r3 |= (r2 & shiftData->bytesB) >> shiftData->shift_right;
+                        if (r5->unk40 < r3)
+                            r5->unk40 = r3;
+                        r3 -= 16;
+                    }
+                }
+
+                notFirstIteration = TRUE;
+                local_44 += 3;
+                sp8 += 3;
+                local_3c += 3;
+                r3++;
+                y++;
+                if (y % 8 == 0) {
+                    r3 += r5->unk20;
+                    yDiv8++;
+                    if (yDiv8 >= r5->unk8)
+                        break;
+                }
+            }
+        }
+    }
+
+    return sp0->unk6 + gCharacterSpacing;
 }
 
 void sub_80078A4(u32 a0, s32 x, s32 y, s32 a3, u32 color)
@@ -2691,14 +2321,6 @@ void sub_80084A4(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32
 
 extern const struct unkChar gUnknown_80B86A4;
 
-struct CharMapStruct
-{
-    s32 unk0;
-    struct unkChar *unk4;
-};
-extern struct CharMapStruct *gCharmaps[];
-extern s32 gCurrentCharmap;
-
 // Oddly similar to sub_803DEC8
 const struct unkChar *GetCharacter(s32 chr)
 {
@@ -3239,8 +2861,6 @@ UNUSED void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
     }
     gUnknown_20274A5 = 1;
 }
-
-extern s16 gCharacterSpacing;
 
 s32 sub_8008ED0(const u8 *str)
 {
