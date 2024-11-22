@@ -20,6 +20,18 @@
 #include "structs/str_dungeon.h"
 #include "text_util.h"
 #include "weather.h"
+#include "file_system.h"
+#include "tile_types.h"
+#include "position_util.h"
+#include "exclusive_pokemon.h"
+#include "number_util.h"
+#include "pokemon_3.h"
+#include "code_8077274_1.h"
+#include "code_806CD90.h"
+#include "dungeon_capabilities.h"
+#include "status_checks_1.h"
+#include "dungeon_ai_movement.h"
+#include "constants/iq_skill.h"
 
 struct unkStruct_80F520C
 {
@@ -38,7 +50,7 @@ extern u8 *gUnknown_80FDCC8[];
 
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
-extern void sub_806ABAC(Entity *, Entity *);
+extern void EndAbilityImmuneStatus(Entity *, Entity *);
 void sub_8041BBC(Entity *r0);
 extern bool8 sub_8045888(Entity *);
 extern void sub_806A2BC(Entity *, u8);
@@ -155,7 +167,7 @@ void sub_8069F9C(Entity *pokemon, Entity *target, Move *move)
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
                 TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FCC7C);
                 sub_8042900(target);
-                sub_806ABAC(pokemon, target);
+                EndAbilityImmuneStatus(pokemon, target);
             }
         }
     }
@@ -307,20 +319,6 @@ void sub_806A390(Entity *pokemon)
         }
     }
 }
-
-// New file?
-
-#include "file_system.h"
-#include "tile_types.h"
-#include "position_util.h"
-#include "number_util.h"
-#include "pokemon_3.h"
-#include "code_8077274_1.h"
-#include "code_806CD90.h"
-#include "dungeon_capabilities.h"
-#include "status_checks_1.h"
-#include "dungeon_ai_movement.h"
-#include "constants/iq_skill.h"
 
 extern void EntityUpdateStatusSprites(Entity *);
 extern s32 sub_808F700(PokemonStruct1 *pokemon);
@@ -505,6 +503,9 @@ bool8 sub_806A5A4(s16 r0)
 extern const u8 *const gUnknown_80FD594;
 extern const u8 *const gUnknown_80FD5B8;
 extern const u8 *const gUnknown_80FEAC4;
+extern const u8 *const gPtrLinkMoveTwoUsesWarningMessage;
+extern const u8 *const gPtrLinkMoveOneUseWarningMessage;
+extern const u8 *const gPtrLinkedMovesComeApartMessage;
 
 void sub_806A5B8(Entity *entity)
 {
@@ -680,6 +681,160 @@ void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect)
             if (!a1 || info->monsterBehavior == 1) {
                 sub_806A898(entity, a0, showRunAwayEffect);
             }
+        }
+    }
+}
+
+void sub_806A974(void)
+{
+    s32 i;
+
+    for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+        Entity *entity = gDungeon->activePokemon[i];
+        if (EntityExists(entity)) {
+            EntityInfo *info = GetEntInfo(entity);
+            sub_806CE68(entity, info->action.direction);
+        }
+    }
+}
+
+void sub_806A9B4(Entity *entity, s32 moveIndex)
+{
+    if (EntityExists(entity)) {
+        EntityInfo *info = GetEntInfo(entity);
+        s32 ret = sub_80935B8(info->moves.moves, moveIndex);
+
+        if (ret == 0) {
+            LogMessageByIdWithPopupCheckUser(entity, gPtrLinkedMovesComeApartMessage);
+        }
+        else if (ret == 1) {
+            LogMessageByIdWithPopupCheckUser(entity, gPtrLinkMoveOneUseWarningMessage);
+        }
+        else if (ret == 2) {
+            LogMessageByIdWithPopupCheckUser(entity, gPtrLinkMoveTwoUsesWarningMessage);
+        }
+    }
+}
+
+// s16 again...
+bool8 sub_806AA0C(s16 _species, bool32 _a1)
+{
+    s32 species = _species;
+    bool8 a1 = _a1;
+    if (!IsExclusivePokemonUnlocked(_species))
+        return FALSE;
+
+    if (gDungeon->unk37FD && GetBaseSpecies(species) == MONSTER_DEOXYS_NORMAL)
+        return FALSE;
+
+    if (species == MONSTER_MEW) {
+        if (gDungeon->unk37FF || !a1)
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+extern void sub_8042B20(Entity *entity);
+extern void sub_8042B0C(Entity *entity);
+
+void sub_806AA70(void)
+{
+    s32 i;
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        Entity *entity = gDungeon->teamPokemon[i];
+        if (EntityExists(entity)) {
+            EntityInfo *info = GetEntInfo(entity);
+            s32 teamIndex = info->teamIndex;
+
+            if (info->isTeamLeader) {
+                if (gDungeon->unk11 == 1) {
+                    sub_8042B20(entity);
+                }
+                else {
+                    sub_8042B0C(entity);
+                }
+                entity->isVisible = FALSE;
+            }
+            else {
+                if (teamIndex >= 0) {
+                    bool8 unkBool = FALSE;
+                    PokemonStruct2 *monStruct2Ptr = &gRecruitedPokemonRef->pokemon2[teamIndex];
+
+                    if (gDungeon->unk11)
+                        unkBool = TRUE;
+                    else if (sub_806A564(monStruct2Ptr->unkA))
+                        unkBool = TRUE;
+                    else if (sub_806A58C(monStruct2Ptr->unkA))
+                        unkBool = TRUE;
+
+                    if (unkBool) {
+                        sub_8042B0C(entity);
+                        entity->isVisible = FALSE;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void sub_806AB2C(void)
+{
+    s32 i, j;
+
+    for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+        Entity *entity1 = gDungeon->activePokemon[i];
+        if (EntityExists(entity1)) {
+            EntityInfo *info1 = GetEntInfo(entity1);
+            for (j = 0; j < DUNGEON_MAX_POKEMON; j++) {
+                Entity *entity2 = gDungeon->activePokemon[j];
+                if (EntityExists(entity2) && entity1 != entity2 && info1->aiTarget.aiTargetSpawnGenID == entity2->spawnGenID) {
+                    info1->aiTarget.aiTarget = entity2;
+                }
+            }
+        }
+    }
+}
+
+void EndAbilityImmuneStatus(Entity *attacker, Entity *target)
+{
+    EntityInfo *targetInfo = GetEntInfo(target);
+
+    if (HasAbility(target, ABILITY_LIMBER) && targetInfo->burnClassStatus.status == STATUS_PARALYSIS) {
+        EndBurnClassStatus(attacker, target);
+    }
+
+    if (HasAbility(target, ABILITY_OWN_TEMPO) && targetInfo->cringeClassStatus.status == STATUS_CONFUSED) {
+        EndCringeClassStatus(attacker, target);
+    }
+
+    if (HasAbility(target, ABILITY_WATER_VEIL) && targetInfo->burnClassStatus.status == STATUS_BURN) {
+        EndBurnClassStatus(attacker, target);
+    }
+
+    if (HasAbility(target, ABILITY_OBLIVIOUS) && targetInfo->cringeClassStatus.status == STATUS_INFATUATED) {
+        EndCringeClassStatus(attacker, target);
+    }
+
+    if ((HasAbility(target, ABILITY_INSOMNIA) || HasAbility(target, ABILITY_VITAL_SPIRIT))
+        && (IsSleeping(target) || targetInfo->sleepClassStatus.status == STATUS_YAWNING))
+    {
+        EndSleepClassStatus(attacker, target, FALSE, TRUE);
+    }
+
+    if (HasAbility(target, ABILITY_MAGMA_ARMOR) && targetInfo->frozenClassStatus.status == STATUS_FROZEN) {
+        EndFrozenClassStatus(attacker, target);
+    }
+
+    if (HasAbility(target, ABILITY_IMMUNITY) && ENTITY_POISIONED(targetInfo)) {
+        EndBurnClassStatus(attacker, target);
+    }
+
+    if (HasAbility(target, ABILITY_FORECAST)) {
+        targetInfo->isColorChanged = FALSE;
+        if (targetInfo->reflectClassStatus.status == STATUS_CONVERSION2) {
+            EndReflectClassStatus(attacker, target);
         }
     }
 }

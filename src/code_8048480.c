@@ -547,11 +547,10 @@ void CheriBerryItemAction(Entity *pokemon, Entity *target)
 void PechaBerryItemAction(Entity *pokemon, Entity *target)
 {
     EntityInfo *entInfo = GetEntInfo(target);
-    if(entInfo->burnClassStatus.status == STATUS_POISONED || entInfo->burnClassStatus.status == STATUS_BADLY_POISONED)
+    if (ENTITY_POISIONED(entInfo))
         EndBurnClassStatus(pokemon, target);
     else
-        // Pointer to "But nothing happened!"
-        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F89F4);
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F89F4); // Pointer to "But nothing happened!"
 }
 
 void WarpSeedItemAction(Entity *pokemon, Entity *target)
