@@ -36,8 +36,6 @@ extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
 
-extern u8 GetBodySize(s16 index);
-
 struct unkStruct_8107654 {
   s16 unk0;
   s16 fill2;
@@ -373,9 +371,10 @@ u8 *GetCategoryString(s16 index)
     return gMonsterParameters[index].category;
 }
 
-u8 GetBodySize(s16 index)
+u8 GetBodySize(s32 index)
 {
-    return gMonsterParameters[index].bodySize;
+    s16 index_s16 = index;
+    return gMonsterParameters[index_s16].bodySize;
 }
 
 u8 GetShadowSize(s16 index)
@@ -898,32 +897,37 @@ s32 GetEvolutionSequence(PokemonStruct1* pokemon, struct EvolveStage* a2)
 #endif
 }
 
-s32 sub_808E400(s32 _species, s16* _a2, bool32 bodySizeCheck, bool32 shedinjaCheck)
+s32 sub_808E400(s32 _species, s16* _a2, bool32 _bodySizeCheck, bool32 _shedinjaCheck)
 {
-  // this is horrible
-  s32 i;
-  register s32 species asm("r9") = (s16)_species;
-  bool32 bodySizeCheck_bool32 = (bool8)bodySizeCheck;
-  bool32 shedinjaCheck_bool32 = (bool8)shedinjaCheck;
-  s32 count = 0;
-  register s16* a2 asm("r6");
-  i = 1;
-  a2 = _a2;
-  for (i = 1; i < MONSTER_MAX; i++) {
-    register s32 current asm("r8") = (s16)i;
-    if (species != GetPokemonEvolveFrom(i)) {
-      continue;
+    // This is horrible
+    s32 species = SpeciesId(_species);
+    bool8 bodySizeCheck = _bodySizeCheck;
+    bool8 shedinjaCheck = _shedinjaCheck;
+    s32 count = 0;
+    s32 i = 1;
+    s16 *a2 = _a2;
+
+    for (i = 1; i < MONSTER_MAX; i++) {
+        s32 loopSpeciesId = SpeciesId(i);
+        #ifdef NONMATCHING
+        s32 loopSpeciesId2 = SpeciesId(i);
+        #else
+        register s32 loopSpeciesId2 asm("r8") = SpeciesId(i);
+        #endif // NONMATCHING
+
+        if (species != GetPokemonEvolveFrom(loopSpeciesId)) {
+            continue;
+        }
+        if (!bodySizeCheck && GetBodySize(species) != GetBodySize(loopSpeciesId)) {
+            continue;
+        }
+        if (!shedinjaCheck && loopSpeciesId == MONSTER_SHEDINJA) {
+            continue;
+        }
+        *a2++ = loopSpeciesId2;
+        count++;
     }
-    if (!bodySizeCheck_bool32 && (GetBodySize(species) != GetBodySize(i))) {
-      continue;
-    }
-    if (!shedinjaCheck_bool32 && ((s16)i == MONSTER_SHEDINJA)) {
-      continue;
-    }
-    *a2++ = current;
-    count++;
-  }
-  return count;
+    return count;
 }
 
 void sub_808E490(Move* a1, s16 species)

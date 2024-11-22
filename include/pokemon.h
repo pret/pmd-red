@@ -36,11 +36,8 @@ void LoadMonsterParameters(void);
 unkStruct_203B45C *GetRecruitedPokemon(void);
 void InitializeRecruitedPokemon(void);
 
-// This needs to be overridden in status_actions.c
-// Uncomment when fixed
-//u8 GetBodySize(s16 index);
 
-
+u8 GetBodySize(s32 index);
 void CopyMonsterNameToBuffer(u8 * buffer, s32 index);
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index);
 void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 colorNum);
