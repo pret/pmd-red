@@ -2501,10 +2501,8 @@ static void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_C
             		// from the selected starting corner and direction
             		for (v = 0; v < 10; v++) {
                         // Make sure we're still in bounds
-                        if (pt_x < grid[x][y].start.x || pt_x >= grid[x][y].end.x)
-                            break;
-                        if (pt_y < grid[x][y].start.y || pt_y >= grid[x][y].end.y)
-                            break;
+                        if (pt_x < grid[x][y].start.x || pt_x >= grid[x][y].end.x) break;
+                        if (pt_y < grid[x][y].start.y || pt_y >= grid[x][y].end.y) break;
 
                         if (GetTerrainType(GetTile(pt_x, pt_y)) == TERRAIN_TYPE_NORMAL) {
                         	// Make sure there aren't any hallways within 2 spaces from the current tile
