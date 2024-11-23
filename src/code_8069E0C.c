@@ -7,7 +7,9 @@
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
+#include "dungeon_leader.h"
 #include "dungeon_map_access.h"
+#include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_message.h"
@@ -562,6 +564,7 @@ void sub_806A5B8(Entity *entity)
 
 extern void sub_803F580(s32);
 extern void sub_8040A84(void);
+extern void sub_806B678(void);
 
 void sub_806A6E8(Entity *entity)
 {
@@ -858,11 +861,11 @@ void MarkLastUsedMonMove(Entity *entity, Move *move)
 }
 
 extern s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id);
-extern void sub_8072AC8(u16 *param_1, s16 species, s32 param_3);
+extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
 
-s32 sub_806C444(s16 species, s32 level);
-s32 sub_806C488(s16 species, s32 level, s32 categoryIndex);
-s32 sub_806C4D4(s16 species, s32 level, s32 categoryIndex);
+s32 sub_806C444(s32 species, s32 level);
+s32 sub_806C488(s32 species, s32 level, s32 categoryIndex);
+s32 sub_806C4D4(s32 species, s32 level, s32 categoryIndex);
 
 void sub_806AD3C(void)
 {
@@ -926,3 +929,323 @@ void sub_806AD3C(void)
         }
     }
 }
+
+void sub_806AED8(Moves *moves, s16 *maxHPStat, u8 *atk, u8 *def, s16 _species, s32 level)
+{
+    s32 i;
+    s32 moveCategory;
+    s32 species = _species;
+    unkDungeon2F3C *structPtr = gDungeon->unk2F3C;
+
+    for (i = 0; i < 64; i++) {
+        s16 loopSpecies;
+
+        structPtr = &gDungeon->unk2F3C[i];
+        loopSpecies = SpeciesId(structPtr->species);
+        if (structPtr->species == 0)
+            break;
+
+        if (loopSpecies == species && structPtr->level == level) {
+            s32 moveIndex;
+
+            for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++) {
+                sub_8092AA8(&moves->moves[moveIndex], structPtr->moves[moveIndex]);
+            }
+            *maxHPStat = structPtr->unkC;
+            for (moveCategory = 0; moveCategory < 2; moveCategory++) {
+                atk[moveCategory] = structPtr->unkE[moveCategory];
+                def[moveCategory] = structPtr->unk10[moveCategory];
+            }
+
+            moves->struggleMoveFlags = 0;
+            return;
+        }
+    }
+
+    if (i == 64) {
+        s32 moveIndex;
+        u16 spMoves[MAX_MON_MOVES];
+
+        sub_8072AC8(spMoves, species, level);
+        for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++) {
+            sub_8092AA8(&moves->moves[moveIndex], spMoves[moveIndex]);
+        }
+        *maxHPStat = sub_806C444(species, level);
+        for (moveCategory = 0; moveCategory < 2; moveCategory++) {
+            atk[moveCategory] = sub_806C488(species, level, moveCategory);
+            def[moveCategory] = sub_806C4D4(species, level, moveCategory);
+        }
+
+
+    }
+    else {
+        s32 moveIndex;
+
+        structPtr->species = species;
+        structPtr->level = level;
+        sub_8072AC8(structPtr->moves, species, level);
+        structPtr->unkC = sub_806C444(structPtr->species, structPtr->level);
+        for (moveCategory = 0; moveCategory < 2; moveCategory++) {
+            structPtr->unkE[moveCategory]  = sub_806C488(structPtr->species, structPtr->level, moveCategory);
+            structPtr->unk10[moveCategory] = sub_806C4D4(structPtr->species, structPtr->level, moveCategory);
+        }
+        for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++) {
+            sub_8092AA8(&moves->moves[moveIndex], structPtr->moves[moveIndex]);
+        }
+
+        *maxHPStat = structPtr->unkC;
+        for (moveCategory = 0; moveCategory < 2; moveCategory++) {
+            atk[moveCategory] = structPtr->unkE[moveCategory];
+            def[moveCategory] = structPtr->unk10[moveCategory];
+        }
+    }
+
+    moves->struggleMoveFlags = 0;
+}
+
+UNUSED static s32 sub_806B09C(UnkDungeonGlobal_unk1CD98 *unkPtr, bool8 a1)
+{
+    s32 i, j;
+    s32 count = 0;
+    s16 *unk2Field;
+    UnkDungeonGlobal_unk1CD98 *loopPtr;
+
+    for (i = 0, unk2Field = unkPtr->unk2, loopPtr = unkPtr; i < MAX_TEAM_MEMBERS; i++) {
+        PokemonStruct2 *monStructPtr = &gRecruitedPokemonRef->pokemon2[i];
+
+        if (PokemonFlag1Struct2(monStructPtr) && PokemonFlag2Struct2(monStructPtr))
+        {
+            for (j = 0; j < count; j++) {
+                if (ExtractSpeciesIndex(&unkPtr[j]) == monStructPtr->speciesNum)
+                    break;
+            }
+
+            if (j == count) {
+                SetSpeciesLevelToExtract(loopPtr, 0, monStructPtr->speciesNum);
+                unk2Field[0] = 0;
+                unk2Field[1] = 0;
+                unk2Field += sizeof(*unkPtr) / sizeof(unkPtr->unk2[0]); // Hacky solution, because loopPtr->unk2[0/1] = 0; doesn't match
+                loopPtr++;
+                count++;
+            }
+        }
+    }
+
+    count = sub_803D808(unkPtr, count);
+    if (a1) {
+        SetSpeciesLevelToExtract(&unkPtr[count], 1, MONSTER_DECOY);
+        unkPtr[count].unk2[0] = 0;
+        unkPtr[count].unk2[1] = 0;
+        count++;
+    }
+
+    return count;
+}
+
+extern const DungeonPos gUnknown_80F4598[];
+
+bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, u32 *a4, bool8 a5, u8 a6);
+
+void sub_806B168(void)
+{
+    s32 count;
+    PokemonStruct2 *monPtrs[MAX_TEAM_MEMBERS];
+    PokemonStruct2 *monPtrs2[MAX_TEAM_MEMBERS]; // Leader and partner?
+    u8 playerSpawnRoomId = GetTile(gDungeon->playerSpawn.x, gDungeon->playerSpawn.y)->room;
+    s32 i;
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        PokemonStruct2 *currMonPtr = &gRecruitedPokemonRef->pokemon2[i];
+        currMonPtr->unkC = i;
+    }
+
+    // Populate monPtrs
+    count = 0;
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        PokemonStruct2 *currMonPtr = &gRecruitedPokemonRef->pokemon2[i];
+        if (PokemonFlag1Struct2(currMonPtr) && PokemonFlag2Struct2(currMonPtr)) {
+            monPtrs[count++] = currMonPtr;
+        }
+    }
+    for (; count < MAX_TEAM_MEMBERS; count++) {
+        monPtrs[count] = NULL;
+    }
+
+    // Populate monPtrs2
+    count = 0;
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        PokemonStruct2 *currMonPtr = monPtrs[i];
+        if (currMonPtr != NULL && currMonPtr->isTeamLeader) {
+            monPtrs[i] = NULL;
+            monPtrs2[count++] = currMonPtr;
+        }
+    }
+
+    if (gDungeon->unk644.unk18 == 0) {
+        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+            PokemonStruct2 *currMonPtr = monPtrs[i];
+            if (currMonPtr != NULL && currMonPtr->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER) {
+                monPtrs[i] = NULL;
+                monPtrs2[count++] = currMonPtr;
+            }
+        }
+    }
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        PokemonStruct2 *currMonPtr = monPtrs[i];
+        if (monPtrs[i] != NULL) {
+            monPtrs[i] = NULL;
+            monPtrs2[count++] = currMonPtr;
+        }
+    }
+    for (; count < MAX_TEAM_MEMBERS; count++) {
+        monPtrs2[count] = NULL;
+    }
+
+    // Do something else
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        PokemonStruct2 *currMonPtr = monPtrs2[i];
+
+        if (currMonPtr != NULL) {
+            s32 j;
+            const Tile *tile;
+            bool8 skipSecondLoop;
+
+            if (currMonPtr->speciesNum == MONSTER_CASTFORM_SNOWY || currMonPtr->speciesNum == MONSTER_CASTFORM_RAINY || currMonPtr->speciesNum == MONSTER_CASTFORM_SUNNY) {
+                currMonPtr->speciesNum = MONSTER_CASTFORM;
+            }
+
+            skipSecondLoop = FALSE;
+            j = 0;
+            while (1) {
+                DungeonPos unkPosition = gUnknown_80F4598[j];
+                if (unkPosition.x == 99)
+                    break;
+
+                tile = GetTile(unkPosition.x + gDungeon->playerSpawn.x, unkPosition.y + gDungeon->playerSpawn.y);
+                if (tile->room == playerSpawnRoomId && !sub_807034C(currMonPtr->speciesNum, tile)) {
+                    sub_806B8CC(currMonPtr->speciesNum, unkPosition.x + gDungeon->playerSpawn.x, unkPosition.y + gDungeon->playerSpawn.y, currMonPtr, NULL, TRUE, 0);
+                    skipSecondLoop = TRUE;
+                    break;
+                }
+                j++;
+            }
+
+            if (skipSecondLoop)
+                continue;
+
+            j = 0;
+            while (1) {
+                DungeonPos unkPosition = gUnknown_80F4598[j];
+                if (unkPosition.x == 99)
+                    break;
+
+                tile = GetTile(unkPosition.x + gDungeon->playerSpawn.x, unkPosition.y + gDungeon->playerSpawn.y);
+                if (!sub_807034C(currMonPtr->speciesNum, tile)) {
+                    sub_806B8CC(currMonPtr->speciesNum, unkPosition.x + gDungeon->playerSpawn.x, unkPosition.y + gDungeon->playerSpawn.y, currMonPtr, NULL, TRUE, 0);
+                    break;
+                }
+                j++;
+            }
+        }
+    }
+
+    sub_806B678();
+}
+
+extern bool8 sub_8083660(const DungeonPos *param_1);
+extern Entity *gLeaderPointer;
+
+void sub_806B404(void)
+{
+    Entity *leader;
+    s32 i;
+    PokemonStruct2 *monPtrs[MAX_TEAM_MEMBERS];
+    u8 roomId;
+    DungeonPos pos;
+    s32 count = 0;
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        PokemonStruct2 *currMonPtr = &gRecruitedPokemonRef->pokemon2[i];
+        if (PokemonFlag1Struct2(currMonPtr) && PokemonFlag2Struct2(currMonPtr) && currMonPtr->unkA == 0x55AA) {
+            monPtrs[count++] = currMonPtr;
+            break;
+        }
+    }
+    for (; count < MAX_TEAM_MEMBERS; count++) {
+        monPtrs[count] = NULL;
+    }
+
+    gLeaderPointer = NULL;
+    leader = GetLeader();
+    if (EntityExists(leader)) {
+        pos.x = leader->pos.x;
+        pos.y = leader->pos.y;
+    }
+    else {
+        pos.x = gDungeon->playerSpawn.x;
+        pos.y = gDungeon->playerSpawn.y;
+    }
+
+    roomId = GetTile(pos.x, pos.y)->room;
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        DungeonPos unkPosition;
+        bool8 skipNextLoop;
+        const Tile *tile;
+        s32 j;
+        PokemonStruct2 *currMonPtr = monPtrs[i];
+
+        if (currMonPtr != NULL && PokemonFlag1Struct2(currMonPtr) && PokemonFlag2Struct2(currMonPtr) && currMonPtr->unkA == 0x55AA) {
+            currMonPtr->unkA = 0x5AA5;
+            skipNextLoop = FALSE;
+            j = 0;
+            while (1) {
+                unkPosition = gUnknown_80F4598[j];
+                if (unkPosition.x == 99)
+                    break;
+
+                tile = GetTile(unkPosition.x + pos.x, unkPosition.y + pos.y);
+                if (tile->room == roomId && !sub_807034C(currMonPtr->speciesNum, tile)) {
+                    sub_806B8CC(currMonPtr->speciesNum, unkPosition.x + pos.x, unkPosition.y + pos.y, currMonPtr, NULL, TRUE, 0);
+                    skipNextLoop = TRUE;
+                    break;
+                }
+                j++;
+            }
+
+            if (skipNextLoop)
+                continue;
+
+            skipNextLoop = FALSE;
+            j = 0;
+            while (1) {
+                unkPosition = gUnknown_80F4598[j];
+                if (unkPosition.x == 99)
+                    break;
+
+                tile = GetTile(unkPosition.x + pos.x, unkPosition.y + pos.y);
+                if (!sub_807034C(currMonPtr->speciesNum, tile)) {
+                    sub_806B8CC(currMonPtr->speciesNum, unkPosition.x + pos.x, unkPosition.y + pos.y, currMonPtr, NULL, TRUE, 0);
+                    skipNextLoop = TRUE;
+                    break;
+                }
+                j++;
+            }
+
+            if (skipNextLoop)
+                continue;
+
+            for (j = 0; j <= 99; j++) {
+                if (sub_8083660(&unkPosition)) {
+                    const Tile *tile = GetTile(unkPosition.x, unkPosition.y);
+                    if (!sub_807034C(currMonPtr->speciesNum, tile)) {
+                        sub_806B8CC(currMonPtr->speciesNum, unkPosition.x, unkPosition.y, currMonPtr, NULL, TRUE, 0);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//

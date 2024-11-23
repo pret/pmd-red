@@ -285,16 +285,15 @@ void sub_808E9C4(PokemonStruct1 *r0, s16 r1)
     r0->unk0 =  ((0xFE << 8) & r0->unk0) | r1_s32 ;
 }
 
-void sub_808E9D8(PokemonStruct1 *r0, s32 r1, s16 r2)
+void SetSpeciesLevelToExtract(UnkDungeonGlobal_unk1CD98 *r0, s32 level, s32 species)
 {
-    s32 r2_32 = r2; // dumb cast to match
-    r0->unk0 =  r2_32 | (r1 << 9) ;
+    species = SpeciesId(species);
+    r0->unk0 = species | (level << 9) ;
 }
 
 s32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0)
 {
-    u16 bitfield = r0->unk0;
-    return (bitfield >> 9);
+    return (r0->unk0 >> 9);
 }
 
 // Unused

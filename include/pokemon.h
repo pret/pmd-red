@@ -112,6 +112,11 @@ static inline bool8 PokemonFlag2(PokemonStruct1 *mon)
     return (mon->unk0 >> (FLAG_ON_TEAM - 1)) & 1;
 }
 
+static inline bool8 PokemonFlag2Struct2(PokemonStruct2 *mon)
+{
+    return (mon->unk0 >> (FLAG_ON_TEAM - 1)) & 1;
+}
+
 static inline void SetPokemonFlag2(PokemonStruct1 *mon)
 {
     mon->unk0 |= FLAG_ON_TEAM;

@@ -160,7 +160,7 @@ typedef struct UnkDungeonGlobal_unk1C590
 
 typedef struct UnkDungeonGlobal_unk1CD98
 {
-    s16 unk0; // species
+    u16 unk0; // species and level
     s16 unk2[2];
 } UnkDungeonGlobal_unk1CD98;
 
