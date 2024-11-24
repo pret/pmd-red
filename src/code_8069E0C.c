@@ -34,6 +34,7 @@
 #include "status_checks_1.h"
 #include "dungeon_ai_movement.h"
 #include "constants/iq_skill.h"
+#include "structs/str_806B7F8.h"
 
 struct unkStruct_80F520C
 {
@@ -1107,6 +1108,7 @@ void sub_806B168(void)
         PokemonStruct2 *currMonPtr = monPtrs2[i];
 
         if (currMonPtr != NULL) {
+            DungeonPos unkPosition;
             s32 j;
             const Tile *tile;
             bool8 skipSecondLoop;
@@ -1118,7 +1120,7 @@ void sub_806B168(void)
             skipSecondLoop = FALSE;
             j = 0;
             while (1) {
-                DungeonPos unkPosition = gUnknown_80F4598[j];
+                unkPosition = gUnknown_80F4598[j];
                 if (unkPosition.x == 99)
                     break;
 
@@ -1136,7 +1138,7 @@ void sub_806B168(void)
 
             j = 0;
             while (1) {
-                DungeonPos unkPosition = gUnknown_80F4598[j];
+                unkPosition = gUnknown_80F4598[j];
                 if (unkPosition.x == 99)
                     break;
 
@@ -1246,6 +1248,127 @@ void sub_806B404(void)
             }
         }
     }
+}
+
+extern DungeonPos gUnknown_202EE0C;
+extern void sub_803F4A0(Entity *a0);
+extern bool8 sub_80860A8(u8 id);
+
+void sub_806B678(void)
+{
+    s32 i;
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        Entity *mon = gDungeon->teamPokemon[i];
+        if (EntityExists(mon)) {
+            EntityInfo *monInfo = GetEntInfo(mon);
+            if (monInfo->isTeamLeader) {
+                sub_803F4A0(mon);
+                gUnknown_202EE0C = mon->pos;
+                break;
+            }
+        }
+    }
+}
+/*    s16 species;
+    u8 unk2;
+    u32 unk4;
+    u16 level;
+    DungeonPos pos;
+    u8 unk10;*/
+
+extern s16 sub_803D970(u32);
+
+void sub_806B6C4(void)
+{
+    struct unkStruct_806B7F8 spStruct;
+    s32 i, j;
+    s32 x, y;
+    bool8 r8 = (gDungeon->unk644.unk44 != 0);
+
+    if (sub_80860A8(ITEM_MUSIC_BOX) && !HasRecruitedMon(MONSTER_MEW)) {
+        gDungeon->unk37FF = FALSE;
+    }
+    else {
+        gDungeon->unk37FF = TRUE;
+    }
+
+    x = DungeonRandInt(DUNGEON_MAX_SIZE_X);
+    y = DungeonRandInt(DUNGEON_MAX_SIZE_Y);
+
+    for (j = 0; j < DUNGEON_MAX_SIZE_Y; j++) {
+        y++;
+        if (y == DUNGEON_MAX_SIZE_Y) {y = 0;}
+
+        for (i = 0; i < DUNGEON_MAX_SIZE_X; i++) {
+            x++;
+            if (x == DUNGEON_MAX_SIZE_X) {x = 0;}
+
+            if (GetTile(x, y)->spawnOrVisibilityFlags & 8) {
+                bool8 r6 = FALSE;
+
+                if (r8) {
+                    spStruct.species = gDungeon->unk644.unk44;
+                    spStruct.level = 1;
+                    spStruct.unk2 = 1;
+                    r6 = TRUE;
+                }
+                else {
+                    spStruct.species = sub_803D970(0);
+                    spStruct.level = 0;
+                    spStruct.unk2 = 0;
+                }
+
+                spStruct.unk4 = 0;
+                spStruct.unk10 = 0;
+                spStruct.pos.x = x;
+                spStruct.pos.y = y;
+                if (r6 || sub_806AA0C(spStruct.species, TRUE)) {
+                    if (sub_806B7F8(&spStruct, FALSE)) {
+                        r8 = FALSE;
+                    }
+                }
+            }
+        }
+    }
+
+    if (r8) {
+        gDungeon->unkA = 1;
+    }
+}
+
+extern Entity *sub_804550C(s16 a);
+
+void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos);
+
+Entity* sub_806B7F8(struct unkStruct_806B7F8 *structPtr, bool8 a1)
+{
+    Entity *entity;
+    EntityInfo *entityInfo;
+    const Tile *tile = GetTile(structPtr->pos.x, structPtr->pos.y);
+
+    if (sub_807034C(structPtr->species, tile))
+        return FALSE;
+
+    entity = sub_804550C(structPtr->species);
+    if (entity == NULL)
+        return FALSE;
+
+    sub_806BC68(FALSE, entity, structPtr, &gUnknown_202EE0C);
+    entityInfo = GetEntInfo(entity);
+    entityInfo->isNotTeamMember = TRUE;
+    sub_806AED8(&entityInfo->moves, &entityInfo->maxHPStat, entityInfo->atk, entityInfo->def, entityInfo->id, entityInfo->level);
+    entityInfo->HP = entityInfo->maxHPStat;
+    entityInfo->moveRandomly = structPtr->unk4;
+    if (!structPtr->unk2 && !a1 && !structPtr->unk10) {
+        s32 rand = DungeonRandInt(100);
+        if (GetChanceAsleep(structPtr->species) > rand) {
+            sub_8075BF4(entity, 0x7F);
+            sub_806CE68(entity, NUM_DIRECTIONS);
+        }
+    }
+
+    return entity;
 }
 
 //
