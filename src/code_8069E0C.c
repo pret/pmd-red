@@ -19,6 +19,7 @@
 #include "move_effects_target.h"
 #include "moves.h"
 #include "pokemon.h"
+#include "pokemon_mid.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "text_util.h"
@@ -1951,7 +1952,7 @@ void sub_806C330(s32 _x, s32 _y, s16 _species, u32 _a3)
     unkDungeon57C *strPtr = &gDungeon->unk57C;
 
     for (i = 0; i < strPtr->unk40; i++) {
-        if (strPtr->unkArray[i].unk3 != 0 && strPtr->unkArray[i].unk4 == x && strPtr->unkArray[i].unk5 == y) {
+        if (strPtr->unkArray[i].unk3 && strPtr->unkArray[i].unk4 == x && strPtr->unkArray[i].unk5 == y) {
             s16 speciesMatchMe = SpeciesId(_species);
             strPtr->unkArray[i].unk0 = speciesMatchMe;
             strPtr->unkArray[i].unk2 = a3;
@@ -1959,8 +1960,8 @@ void sub_806C330(s32 _x, s32 _y, s16 _species, u32 _a3)
         }
     }
 
-    if (strPtr->unk40 < 8) {
-        strPtr->unkArray[strPtr->unk40].unk3 = 1;
+    if (strPtr->unk40 < UNK_DUNGEON57C_ARRAY_COUNT) {
+        strPtr->unkArray[strPtr->unk40].unk3 = TRUE;
         strPtr->unkArray[strPtr->unk40].unk4 = x;
         strPtr->unkArray[strPtr->unk40].unk5 = y;
         strPtr->unkArray[strPtr->unk40].unk0 = species;
@@ -1969,4 +1970,76 @@ void sub_806C330(s32 _x, s32 _y, s16 _species, u32 _a3)
         strPtr->unk40++;
     }
 }
+
+void sub_806C3C0(void)
+{
+    s32 i;
+    struct unkStruct_806B7F8 spStruct;
+    unkDungeon57C *strPtr = &gDungeon->unk57C;
+
+    for (i = 0; i < strPtr->unk40; i++) {
+        if (strPtr->unkArray[i].unk3) {
+            spStruct.species = strPtr->unkArray[i].unk0;
+            spStruct.level = 0;
+            spStruct.pos.x = strPtr->unkArray[i].unk4;
+            spStruct.pos.y = strPtr->unkArray[i].unk5;
+            spStruct.unk2 = strPtr->unkArray[i].unk2;
+            spStruct.unk4 = 0;
+            spStruct.unk10 = 0;
+            sub_806B7F8(&spStruct, TRUE);
+        }
+    }
+}
+
+void sub_806C42C(void)
+{
+    unkDungeon57C *strPtr = &gDungeon->unk57C;
+    strPtr->unk40 = 0;
+}
+
+s32 sub_806C444(s32 _species, s32 level)
+{
+    LevelData levelData;
+    s32 i;
+    s32 species = SpeciesId(_species);
+    s32 hpCount = GetBaseHP(species);
+
+    for (i = 2; i <= level; i++) {
+        GetPokemonLevelData(&levelData, species, i);
+        hpCount += levelData.gainHP;
+    }
+
+    return hpCount;
+}
+
+s32 sub_806C488(s32 _species, s32 level, s32 categoryIndex)
+{
+    LevelData levelData;
+    s32 i;
+    s32 species = SpeciesId(_species);
+    s32 offensiveCount = GetBaseOffensiveStat(species, categoryIndex);
+
+    for (i = 2; i <= level; i++) {
+        GetPokemonLevelData(&levelData, species, i);
+        offensiveCount += levelData.gainAtt[categoryIndex];
+    }
+
+    return offensiveCount;
+}
+
+s32 sub_806C4D4(s32 _species, s32 level, s32 categoryIndex)
+{
+    LevelData levelData;
+    s32 i;
+    s32 species = SpeciesId(_species);
+    s32 defensiveCount = GetBaseDefensiveStat(species, categoryIndex);
+
+    for (i = 2; i <= level; i++) {
+        GetPokemonLevelData(&levelData, species, i);
+        defensiveCount += levelData.gainDef[categoryIndex];
+    }
+
+    return defensiveCount;
+}
+
 //

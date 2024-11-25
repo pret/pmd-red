@@ -423,7 +423,7 @@ u8 GetFriendArea(s32 index)
     return gMonsterParameters[index_s32].friendArea;
 }
 
-u16 GetBaseHP(s32 index)
+s32 GetBaseHP(s32 index)
 {
     s16 index_s32 = index;
     return gMonsterParameters[index_s32].baseHP;
@@ -444,13 +444,13 @@ s16 GetPokemonEvolveFrom(s16 index)
     return gMonsterParameters[index].preEvolution.evolveFrom;
 }
 
-u16 GetBaseOffensiveStat(s32 index, u32 r1)
+s32 GetBaseOffensiveStat(s32 index, u32 r1)
 {
     s16 index_s16 = index;
     return gMonsterParameters[index_s16].baseAtkSpAtk[r1];
 }
 
-u16 GetBaseDefensiveStat(s32 index, u32 r1)
+s32 GetBaseDefensiveStat(s32 index, u32 r1)
 {
     s16 index_s16 = index;
     return gMonsterParameters[index_s16].baseDefSpDef[r1];
@@ -657,10 +657,10 @@ void sub_808DFDC(s32 a1, PokemonStruct2* a2)
     }
 }
 
-void GetPokemonLevelData(LevelData* a1, s16 _id, s32 level)
+void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level)
 {
   u8 buffer[12];
-  s32 id = _id;
+  s32 id = SpeciesId(_id);
 
   if ((s16)gLevelCurrentPokeId != id)
   {

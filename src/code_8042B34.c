@@ -1144,10 +1144,10 @@ void sub_8043FD0(void)
                 def = monStruct->offense.def[0];
                 spDef = monStruct->offense.def[1];
 
-                atk += levelData.gainAtt;
-                spAtk += levelData.gainSPAtt;
-                def += levelData.gainDef;
-                spDef += levelData.gainSPDef;
+                atk += levelData.gainAtt[0];
+                spAtk += levelData.gainAtt[1];
+                def += levelData.gainDef[0];
+                spDef += levelData.gainDef[1];
 
                 // TODO: Make 255 max define for stats
                 if (atk >= 255)     {atk = 255;}

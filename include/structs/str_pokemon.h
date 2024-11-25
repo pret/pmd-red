@@ -150,10 +150,8 @@ typedef struct LevelData
 {
     /* 0x0 */ s32 expRequired;
     /* 0x4 */ u16 gainHP;
-    /* 0x6 */ u8 gainAtt;
-    /* 0x7 */ u8 gainSPAtt;
-    /* 0x8 */ u8 gainDef;
-    /* 0x9 */ u8 gainSPDef;
+    /* 0x6 */ u8 gainAtt[2];
+    /* 0x8 */ u8 gainDef[2];
     u16 fillA;
 } LevelData;
 

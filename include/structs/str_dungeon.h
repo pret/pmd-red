@@ -320,9 +320,11 @@ typedef struct unkDungeon57CSub
     u8 unk5;
 } unkDungeon57CSub;
 
+#define UNK_DUNGEON57C_ARRAY_COUNT 8
+
 typedef struct unkDungeon57C
 {
-    unkDungeon57CSub unkArray[8];
+    unkDungeon57CSub unkArray[UNK_DUNGEON57C_ARRAY_COUNT];
     s32 unk40;
 } unkDungeon57C;
 

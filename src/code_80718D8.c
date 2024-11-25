@@ -530,10 +530,10 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
         gUnknown_202F324[0] = info->def[0];
         gUnknown_202F324[1] = info->def[1];
 
-        gUnknown_202F31C[0] += leveldata.gainAtt;
-        gUnknown_202F31C[1] += leveldata.gainSPAtt;
-        gUnknown_202F324[0] += leveldata.gainDef;
-        gUnknown_202F324[1] += leveldata.gainSPDef;
+        gUnknown_202F31C[0] += leveldata.gainAtt[0];
+        gUnknown_202F31C[1] += leveldata.gainAtt[1];
+        gUnknown_202F324[0] += leveldata.gainDef[0];
+        gUnknown_202F324[1] += leveldata.gainDef[1];
 
         if(gUnknown_202F31C[0] > 254)
             gUnknown_202F31C[0] = 255;
@@ -624,10 +624,10 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
             gUnknown_202F324[0] = info->def[0];
             gUnknown_202F324[1] = info->def[1];
 
-            gUnknown_202F31C[0] -= leveldata.gainAtt;
-            gUnknown_202F31C[1] -= leveldata.gainSPAtt;
-            gUnknown_202F324[0] -= leveldata.gainDef;
-            gUnknown_202F324[1] -= leveldata.gainSPDef;
+            gUnknown_202F31C[0] -= leveldata.gainAtt[0];
+            gUnknown_202F31C[1] -= leveldata.gainAtt[1];
+            gUnknown_202F324[0] -= leveldata.gainDef[0];
+            gUnknown_202F324[1] -= leveldata.gainDef[1];
 
             if(gUnknown_202F31C[0] <= 1)
                 gUnknown_202F31C[0] = 1;
