@@ -2889,7 +2889,7 @@ bool32 sub_805AD54(Entity * pokemon, Entity * target, Move *move, u32 param_4)
              && GetTreatmentBetweenMonsters(pokemon,targetEntity,FALSE,FALSE) == TREATMENT_TREAT_AS_ALLY)
         {
             EntityInfo *targetInfo = GetEntInfo(targetEntity);
-            if (targetInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET && !IsClientOrTeamBase(targetInfo->joinedAt.joinedAt)) {
+            if (targetInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET && !IsClientOrTeamBase(targetInfo->joinedAt.id)) {
                 sub_807D148(pokemon,targetEntity,2,&target->pos);
                 flag = TRUE;
                 SetExpMultplier(info);

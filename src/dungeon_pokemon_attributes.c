@@ -150,43 +150,41 @@ bool8 HasTactic(Entity *pokemon, u8 tactic)
 
 bool8 IQSkillIsEnabled(Entity *pokemon, u8 IQSkill)
 {
-    return IsIQSkillSet(GetEntInfo(pokemon)->IQSkillFlags, 1 << IQSkill);
+    return IsIQSkillSet(&GetEntInfo(pokemon)->IQSkillFlags, 1 << IQSkill);
 }
 
 bool8 IQSkillPairIsEnabled(Entity *pokemon, u8 IQSkill1, u8 IQSkill2)
 {
-    return IsIQSkillSet(GetEntInfo(pokemon)->IQSkillFlags,
-                        1 << IQSkill1 | 1 << IQSkill2);
+    return IsIQSkillSet(&GetEntInfo(pokemon)->IQSkillFlags, 1 << IQSkill1 | 1 << IQSkill2);
 }
 
 void LoadIQSkills(Entity *pokemon)
 {
-  u8 *iVar2;
   s32 IQSkill;
   EntityInfo *pokemonInfo;
 
   pokemonInfo = GetEntInfo(pokemon);
   if (pokemonInfo->isNotTeamMember) {
-    iVar2 = pokemonInfo->IQSkillFlags;
-    SetIQSkill(iVar2, IQ_STATUS_CHECKER);
-    SetIQSkill(iVar2, IQ_PP_CHECKER);
-    SetIQSkill(iVar2, IQ_ITEM_CATCHER);
+    IqSkillFlags *iqSkills = &pokemonInfo->IQSkillFlags;
+    SetIQSkill(iqSkills, IQ_STATUS_CHECKER);
+    SetIQSkill(iqSkills, IQ_PP_CHECKER);
+    SetIQSkill(iqSkills, IQ_ITEM_CATCHER);
     if (pokemonInfo->bossFlag)
-      SetIQSkill(iVar2, IQ_SELF_CURER);
+      SetIQSkill(iqSkills, IQ_SELF_CURER);
     if (pokemonInfo->level >= *gItemMasterMinWildLevel)
-      SetIQSkill(iVar2, IQ_ITEM_MASTER);
+      SetIQSkill(iqSkills, IQ_ITEM_MASTER);
     pokemonInfo->tactic = TACTIC_GO_AFTER_FOES;
   }
   else {
-    pokemonInfo->IQSkillFlags[0] = 0;
-    pokemonInfo->IQSkillFlags[1] = 0;
-    pokemonInfo->IQSkillFlags[2] = 0;
+    pokemonInfo->IQSkillFlags.flags[0] = 0;
+    pokemonInfo->IQSkillFlags.flags[1] = 0;
+    pokemonInfo->IQSkillFlags.flags[2] = 0;
     for(IQSkill = IQ_TYPE_ADVANTAGE_MASTER; IQSkill < NUM_IQ_SKILLS; IQSkill++)
     {
       if (HasIQForSkill(pokemonInfo->IQ,IQSkill) &&
-            IsIQSkillSet(pokemonInfo->IQSkillMenuFlags, 1 << IQSkill))
+            IsIQSkillSet(&pokemonInfo->IQSkillMenuFlags, 1 << IQSkill))
         {
-            SetIQSkill(pokemonInfo->IQSkillFlags,IQSkill);
+            SetIQSkill(&pokemonInfo->IQSkillFlags,IQSkill);
       }
     }
   }
@@ -239,8 +237,8 @@ bool8 MonsterCanThrowItems(EntityInfo *pokemon)
 
 static inline bool8 sub_8071A8C_sub(EntityInfo *pokemonInfo)
 {
-    if(pokemonInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON ||
-        pokemonInfo->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+    if(pokemonInfo->joinedAt.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON ||
+        pokemonInfo->joinedAt.id == DUNGEON_RESCUE_TEAM_BASE)
         return TRUE;
     else
         return FALSE;

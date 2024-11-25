@@ -736,10 +736,10 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
     else {
         PokemonStruct2 *recruitedMon = &gRecruitedPokemonRef->pokemon2[targetData->teamIndex];
-        if (targetData->isTeamLeader || (targetData->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk644.unk18 == 0)) {
+        if (targetData->isTeamLeader || (targetData->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk644.unk18 == 0)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9CEC[r8]);
         }
-        else if (IsClientOrTeamBase(targetData->joinedAt.joinedAt)) {
+        else if (IsClientOrTeamBase(targetData->joinedAt.id)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DAC[r8]);
         }
         else if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {

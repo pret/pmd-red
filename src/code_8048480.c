@@ -746,7 +746,7 @@ void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
              gUnknown_810A808[targetInfo->types[0]][gummiIndex] +
              gUnknown_810A808[targetInfo->types[1]][gummiIndex],0,1);
   if (!targetInfo->isNotTeamMember) {
-    if (!IsClientOrTeamBase(targetInfo->joinedAt.joinedAt)) {
+    if (!IsClientOrTeamBase(targetInfo->joinedAt.id)) {
       baseIQ = targetInfo->IQ;
       targetInfo->IQ += gummiBoost;
       currIQ = baseIQ + gummiBoost;
@@ -834,7 +834,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
                 if (entityInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
                     flag = FALSE;
                 }
-                if (IsClientOrTeamBase(entityInfo->joinedAt.joinedAt)) {
+                if (IsClientOrTeamBase(entityInfo->joinedAt.id)) {
                     flag = FALSE;
                 }
                 entityInfo->unk157 = flag;
@@ -896,7 +896,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
           if (pEVar6->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
             flag = FALSE;
           }
-          if (IsClientOrTeamBase(pEVar6->joinedAt.joinedAt)) {
+          if (IsClientOrTeamBase(pEVar6->joinedAt.id)) {
             flag = FALSE;
           }
           if (pEVar6->isTeamLeader) {
@@ -959,7 +959,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
         {
             flag = FALSE;
         }
-        if(IsClientOrTeamBase(entity1Info->joinedAt.joinedAt))
+        if(IsClientOrTeamBase(entity1Info->joinedAt.id))
         {
             flag = FALSE;
         }

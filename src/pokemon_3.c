@@ -559,74 +559,68 @@ s32 GetNumAvailableIQSkills(u8 *iqSkillBuffer, s32 pokeIQ)
   return availIQSkills;
 }
 
-void ToggleIQSkill(u8 *param_1, u32 skillIndex)
+void ToggleIQSkill(IqSkillFlags *iq, u32 skillIndex)
 {
-  int iVar2; // a mask?
-
-  iVar2 = 1 << (skillIndex);
-  if (IsIQSkillSet(param_1, iVar2)) {
-    param_1[0] = param_1[0] & ~iVar2;
-    param_1[1] = param_1[1] & ~(iVar2 >> 8);
-    param_1[2] = param_1[2] & ~(iVar2 >> 0x10);
-  }
-  else
-  {
-    SetIQSkill(param_1, skillIndex);
-  }
-}
-
-void SetIQSkill(u8 *param_1, u32 skillIndex)
-{
-  s32 iVar1;
-  s32 iqSkill;
-  s32 iqSkillGroup;
-  s32 iVar5;
-
-  for (iqSkill = 0, iqSkillGroup = gIQSkillGroups[skillIndex]; iqSkill < NUM_IQ_SKILLS; iqSkill++)
-  {
-    // Turn off each IQ Skill that's in the same group as the chosen skill
-    if (iqSkillGroup == gIQSkillGroups[iqSkill]) {
-      iVar1 = 1 << (iqSkill);
-      param_1[0] = param_1[0] & ~iVar1;
-      param_1[1] = param_1[1] & ~(iVar1 >> 8);
-      param_1[2] = param_1[2] & ~(iVar1 >> 0x10);
+    s32 bit = 1 << (skillIndex);
+    if (IsIQSkillSet(iq, bit)) {
+        iq->flags[0] &= ~(bit);
+        iq->flags[1] &= ~(bit >> 8);
+        iq->flags[2] &= ~(bit >> 16);
     }
-  }
-
-  iVar5 = 1 << (skillIndex);
-  param_1[0] |= iVar5;
-  param_1[1] |= (iVar5 >> 8);
-  param_1[2] |= (iVar5 >> 0x10);
+    else {
+        SetIQSkill(iq, skillIndex);
+    }
 }
 
-void SetDefaultIQSkills(u8 *param_1, bool8 enableSelfCurer)
+void SetIQSkill(IqSkillFlags *iq, u32 skillIndex)
 {
+    s32 iqSkill;
+    s32 iqSkillGroup;
+    s32 bit;
 
-  param_1[0] = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  SetIQSkill(param_1, IQ_ITEM_CATCHER);
-  SetIQSkill(param_1, IQ_COURSE_CHECKER);
-  SetIQSkill(param_1, IQ_ITEM_MASTER);
+    for (iqSkill = 0, iqSkillGroup = gIQSkillGroups[skillIndex]; iqSkill < NUM_IQ_SKILLS; iqSkill++) {
+        // Turn off each IQ Skill that's in the same group as the chosen skill
+        if (iqSkillGroup == gIQSkillGroups[iqSkill]) {
+            s32 bit = 1 << (iqSkill);
+            iq->flags[0] &= ~(bit);
+            iq->flags[1] &= ~(bit >> 8);
+            iq->flags[2] &= ~(bit >> 16);
+        }
+    }
 
-  // Flag is usually enabled for Boss fights.
-  if (enableSelfCurer) {
-    SetIQSkill(param_1, IQ_SELF_CURER);
-  }
+    bit = 1 << (skillIndex);
+    iq->flags[0] |= bit;
+    iq->flags[1] |= (bit >> 8);
+    iq->flags[2] |= (bit >> 16);
 }
 
-bool8 IsIQSkillSet(u8 *IQSkillFlags, u32 IQSkill)
+void SetDefaultIQSkills(IqSkillFlags *iq, bool8 enableSelfCurer)
 {
-  if (!(IQSkillFlags[0] & IQSkill) &&
-      !(IQSkillFlags[1] & IQSkill >> 8) &&
-      !(IQSkillFlags[2] & IQSkill >> 16))
-  {
-    return FALSE;
-  }
-  else
-  {
-    return TRUE;
-  }
+    iq->flags[0] = 0;
+    iq->flags[1] = 0;
+    iq->flags[2] = 0;
+    SetIQSkill(iq, IQ_ITEM_CATCHER);
+    SetIQSkill(iq, IQ_COURSE_CHECKER);
+    SetIQSkill(iq, IQ_ITEM_MASTER);
+
+    // Flag is usually enabled for Boss fights.
+    if (enableSelfCurer) {
+        SetIQSkill(iq, IQ_SELF_CURER);
+    }
+}
+
+bool8 IsIQSkillSet(IqSkillFlags *iq, u32 IQSkillBit)
+{
+    if (!(iq->flags[0] & IQSkillBit) &&
+        !(iq->flags[1] & IQSkillBit >> 8) &&
+        !(iq->flags[2] & IQSkillBit >> 16))
+    {
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
 }
 
 u32 sub_808ECFC(void)

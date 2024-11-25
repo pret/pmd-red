@@ -8,6 +8,8 @@
 #include "structs/str_items.h"
 #include "structs/str_moves.h"
 #include "structs/str_position.h"
+#include "structs/str_dungeon_location.h"
+#include "structs/str_iq_skill_flags.h"
 #include "math.h"
 #include "number_util.h"
 #include "sprite.h"
@@ -26,8 +28,6 @@
 #define STAT_STAGE_SP_DEF 1
 #define STAT_STAGE_ACCURACY 0
 #define STAT_STAGE_EVASION 1
-
-#define NUM_PICKED_IQ_SKILLS 3
 
 // size: 0x8
 typedef struct unkStruct_8044CC8
@@ -54,13 +54,6 @@ typedef struct HiddenPower
     /* 0x0 */ s16 hiddenPowerBasePower;
     /* 0x2 */ u8 hiddenPowerType;
 } HiddenPower;
-
-// size: 0x4
-typedef struct JoinedAt
-{
-    /* 0x0 */ u8 joinedAt;
-    /* 0x1 */ u8 unk1;
-} JoinedAt;
 
 // size: 0x14
 typedef struct AITarget
@@ -238,7 +231,7 @@ typedef struct EntityInfo
     // Index 0 is Defense. Index 1 is Special Defense.
     /* 0x34 */ s24_8 defensiveMultipliers[2];
     /* 0x3C */ HiddenPower hiddenPower;
-    /* 0x40 */ JoinedAt joinedAt; // Uses the dungeon index in dungeon.h.
+    /* 0x40 */ DungeonLocation joinedAt; // Uses the dungeon index in dungeon.h.
     /* 0x44 */ ActionContainer action;
     /* 0x5C */ u8 types[2];
     /* 0x5E */ u8 abilities[2];
@@ -247,10 +240,8 @@ typedef struct EntityInfo
     /* 0x68 */ DungeonPos prevPos[NUM_PREV_POS];
     /* 0x78 */ AITarget aiTarget;
     // Bitwise flags corresponding to selected IQ skills.
-    /* 0x8C */ u8 IQSkillMenuFlags[NUM_PICKED_IQ_SKILLS]; // IQ skills selected in the IQ skills menu.
-    u8 padding8F;
-    /* 0x90 */ u8 IQSkillFlags[NUM_PICKED_IQ_SKILLS];
-    u8 padding93;
+    /* 0x8C */ IqSkillFlags IQSkillMenuFlags; // IQ skills selected in the IQ skills menu.
+    /* 0x90 */ IqSkillFlags IQSkillFlags;
     /* 0x94 */ u8 tactic;
     u8 fill95[0x98 - 0x95];
     /* 0x98 */ u32 unk98;

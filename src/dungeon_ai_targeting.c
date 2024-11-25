@@ -534,9 +534,9 @@ u8 sub_807167C(Entity * pokemon, Entity * target)
   pokemonEntityData = GetEntInfo(pokemon);
   targetEntityInfo = GetEntInfo(target);
   if (pokemonEntityData->monsterBehavior != BEHAVIOR_RESCUE_TARGET) {
-    cannotUseItems = IsClientOrTeamBase(pokemonEntityData->joinedAt.joinedAt);
+    cannotUseItems = IsClientOrTeamBase(pokemonEntityData->joinedAt.id);
     if (!cannotUseItems && (pokemonEntityData->shopkeeper == SHOPKEEPER_MODE_NORMAL) && (targetEntityInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET)) {
-      cannotUseItems = IsClientOrTeamBase(targetEntityInfo->joinedAt.joinedAt);
+      cannotUseItems = IsClientOrTeamBase(targetEntityInfo->joinedAt.id);
       if (cannotUseItems || (targetEntityInfo->shopkeeper != SHOPKEEPER_MODE_NORMAL)) {
 error:
           return TREATMENT_IGNORE;

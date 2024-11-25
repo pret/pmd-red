@@ -8,6 +8,7 @@
 #include "structs/rgb.h"
 #include "structs/str_position.h"
 #include "structs/str_traps.h"
+#include "structs/str_dungeon_location.h"
 #include "sprite.h"
 
 #define DUNGEON_MAX_SIZE_X 56
@@ -17,13 +18,6 @@
 #define DUNGEON_MAX_POKEMON (MAX_TEAM_MEMBERS + DUNGEON_MAX_WILD_POKEMON)
 #define DUNGEON_MAX_TRAPS 64
 #define DUNGEON_MAX_ITEMS 64
-
-// size: 0x4
-typedef struct DungeonLocation
-{
-    /* 0x0 */ u8 id;
-    /* 0x1 */ u8 floor;
-} DungeonLocation;
 
 // size: 0x18
 typedef struct Weather

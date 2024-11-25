@@ -242,7 +242,7 @@ bool8 sub_806F660(Entity *pokemon,Entity *target)
       if (iVar5 < 0) {
         iVar5 = -iVar5;
       }
-      if (((iVar5 < 2) && (targetInfo->joinedAt.joinedAt != 0x4A)) &&
+      if (((iVar5 < 2) && (targetInfo->joinedAt.id != 0x4A)) &&
          (targetInfo->monsterBehavior != 1 && (CanSeeTarget(target,pokemon))
           )) {
         sub_806F910();
@@ -773,7 +773,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             pokeStruct2->isTeamLeader = FALSE;
             pokeStruct2->level = param_3->level;
             pokeStruct2->IQ = 1;
-            SetDefaultIQSkills((u8 *)&(pokeStruct2->IQSkills),FALSE);
+            SetDefaultIQSkills(&pokeStruct2->IQSkills,FALSE);
             pokeStruct2->hiddenPower = param_3->hiddenPower;
             pokeStruct2->tacticIndex = 0;
             pokeStruct2->unkA = -1;
@@ -1033,7 +1033,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
     pokeStruct2->isTeamLeader = FALSE;
     pokeStruct2->level = local_74.level;
     pokeStruct2->IQ = 1;
-    SetDefaultIQSkills((u8 *)&(pokeStruct2->IQSkills),FALSE);
+    SetDefaultIQSkills(&pokeStruct2->IQSkills,FALSE);
     pokeStruct2->hiddenPower = local_74.hiddenPower;
     pokeStruct2->tacticIndex = 0;
     pokeStruct2->unkA = -1;

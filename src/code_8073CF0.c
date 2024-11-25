@@ -143,7 +143,7 @@ void sub_8073D14(Entity *entity)
         return;
     if (entityInfo->shopkeeper == 1)
         return;
-    if (IsClientOrTeamBase(entityInfo->joinedAt.joinedAt))
+    if (IsClientOrTeamBase(entityInfo->joinedAt.id))
         return;
     if (entityInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
         return;

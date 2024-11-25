@@ -46,10 +46,10 @@ static void ReadBlinkerClassStatus(DataSerializer *seri, BlinkerClassStatus *dst
 static s24_8 ReadF24_8(DataSerializer *seri);
 static void ReadHiddenPower(DataSerializer *seri, HiddenPower *dst);
 static void ReadFrozenClassStatus(DataSerializer *seri, FrozenClassStatus *dst);
-static void ReadIQSkills(DataSerializer *seri, u8 *dst);
+static void ReadIQSkills(DataSerializer *seri, IqSkillFlags *dst);
 static void ReadItem(DataSerializer *seri, Item *dst);
 static void ReadLongTossClassStatus(DataSerializer *seri, LongTossClassStatus *dst);
-static void ReadJoinedAt(DataSerializer *seri, JoinedAt *dst);
+static void ReadDungeonLocation(DataSerializer *seri, DungeonLocation *dst);
 static void ReadLeechSeedClassStatus(DataSerializer *seri, LeechSeedClassStatus *dst);
 static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index);
 static s16 ReadMonsterID(DataSerializer *seri);
@@ -99,10 +99,10 @@ static void WriteBlinkerClassStatus(DataSerializer *seri, BlinkerClassStatus *sr
 static void WriteF24_8(DataSerializer *seri, s24_8 value);
 static void WriteHiddenPower(DataSerializer *seri, HiddenPower *src);
 static void WriteFrozenClassStatus(DataSerializer *seri, FrozenClassStatus *src);
-static void WriteIQSkills(DataSerializer *seri, u8 *src);
+static void WriteIQSkills(DataSerializer *seri, IqSkillFlags *src);
 static void WriteItem(DataSerializer *seri, Item *src);
 static void WriteLongTossClassStatus(DataSerializer *seri, LongTossClassStatus *src);
-static void WriteJoinedAt(DataSerializer *seri, JoinedAt *src);
+static void WriteDungeonLocation(DataSerializer *seri, DungeonLocation *src);
 static void WriteLeechSeedClassStatus(DataSerializer *seri, LeechSeedClassStatus *src);
 static void WriteMonster(DataSerializer *seri, Entity *src);
 static void WriteMonsterID(DataSerializer *seri, s16 value);
@@ -290,7 +290,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteU8(seri, info->shopkeeper);
     WriteU8(seri, info->level);
     WriteU8(seri, info->teamIndex);
-    WriteJoinedAt(seri, &info->joinedAt);
+    WriteDungeonLocation(seri, &info->joinedAt);
     WriteS16(seri, info->IQ);
     WriteS16(seri, info->HP);
     WriteS16(seri, info->maxHPStat);
@@ -323,8 +323,8 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
         WriteTilePos(seri, &info->prevPos[i]);
 
     WriteAITarget(seri, &info->aiTarget);
-    WriteIQSkills(seri, info->IQSkillMenuFlags);
-    WriteIQSkills(seri, info->IQSkillFlags);
+    WriteIQSkills(seri, &info->IQSkillMenuFlags);
+    WriteIQSkills(seri, &info->IQSkillFlags);
     WriteTactic(seri, info->tactic);
     WriteHiddenPower(seri, &info->hiddenPower);
     WriteU32(seri, info->unk98);
@@ -556,10 +556,10 @@ static void WriteMonsterBehavior(DataSerializer *seri, u8 value)
     WriteU8(seri, value);
 }
 
-static void WriteJoinedAt(DataSerializer *seri, JoinedAt *src)
+static void WriteDungeonLocation(DataSerializer *seri, DungeonLocation *src)
 {
-    WriteU8(seri, src->joinedAt);
-    WriteU8(seri, src->unk1);
+    WriteU8(seri, src->id);
+    WriteU8(seri, src->floor);
 }
 
 static void WriteAITarget(DataSerializer *seri, AITarget* src)
@@ -685,7 +685,7 @@ static void WriteBelly(DataSerializer *seri, FixedPoint *src)
     WriteS16(seri, src->unk2);
 }
 
-static void WriteIQSkills(DataSerializer *seri, u8 *src)
+static void WriteIQSkills(DataSerializer *seri, IqSkillFlags *src)
 {
     WriteBytes(seri, src, NUM_PICKED_IQ_SKILLS);
 }
@@ -973,7 +973,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     entInfo.shopkeeper = ReadU8(seri);
     entInfo.level = ReadU8(seri);
     entInfo.teamIndex = ReadU8(seri);
-    ReadJoinedAt(seri, &entInfo.joinedAt);
+    ReadDungeonLocation(seri, &entInfo.joinedAt);
     entInfo.IQ = ReadS16(seri);
     entInfo.HP = ReadS16(seri);
     entInfo.maxHPStat = ReadS16(seri);
@@ -1006,8 +1006,8 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
         ReadTilePos(seri, &entInfo.prevPos[i]);
 
     ReadAITarget(seri, &entInfo.aiTarget);
-    ReadIQSkills(seri, entInfo.IQSkillMenuFlags);
-    ReadIQSkills(seri, entInfo.IQSkillFlags);
+    ReadIQSkills(seri, &entInfo.IQSkillMenuFlags);
+    ReadIQSkills(seri, &entInfo.IQSkillFlags);
     entInfo.tactic = ReadTactic(seri);
     ReadHiddenPower(seri, &entInfo.hiddenPower);
     entInfo.unk98 = ReadU32(seri);
@@ -1370,7 +1370,7 @@ static void ReadAITarget(DataSerializer *seri, AITarget *dst)
     ReadTilePos(seri, &dst->aiTargetPos);
 }
 
-static void ReadIQSkills(DataSerializer *seri, u8 *dst)
+static void ReadIQSkills(DataSerializer *seri, IqSkillFlags *dst)
 {
     ReadBytes(seri, dst, NUM_PICKED_IQ_SKILLS);
 }
@@ -1491,10 +1491,10 @@ static void ReadBelly(DataSerializer *seri, FixedPoint *dst)
     dst->unk2 = ReadS16(seri);
 }
 
-static void ReadJoinedAt(DataSerializer *seri, JoinedAt *dst)
+static void ReadDungeonLocation(DataSerializer *seri, DungeonLocation *dst)
 {
-    dst->joinedAt = ReadU8(seri);
-    dst->unk1 = ReadU8(seri);
+    dst->id = ReadU8(seri);
+    dst->floor = ReadU8(seri);
 }
 
 static void ReadHiddenPower(DataSerializer *seri, HiddenPower *dst)

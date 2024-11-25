@@ -1045,7 +1045,7 @@ UNUSED static s32 sub_806B09C(UnkDungeonGlobal_unk1CD98 *unkPtr, bool8 a1)
 
 extern const DungeonPos gUnknown_80F4598[];
 
-bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, u32 *a4, bool8 a5, u8 a6);
+bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool8 a5, u8 a6);
 
 void sub_806B168(void)
 {
@@ -1338,6 +1338,7 @@ void sub_806B6C4(void)
 }
 
 extern Entity *sub_804550C(s16 a);
+extern Entity *sub_80453AC(s16 id);
 
 void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos);
 
@@ -1371,4 +1372,118 @@ Entity* sub_806B7F8(struct unkStruct_806B7F8 *structPtr, bool8 a1)
     return entity;
 }
 
+extern u8 gUnknown_202F32C;
+extern u8 sub_803D73C(s32 a0);
+extern bool8 IsBossFight(void);
+
+/*
+bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool8 a5, u8 a6)
+{
+    s32 i;
+    DungeonPos unkPosition;
+    struct unkStruct_806B7F8 spStruct;
+    s16 baseSpecies;
+    Entity *entity;
+    EntityInfo *entityInfo;
+    bool8 isTeamLeader = (monPtr->isTeamLeader != FALSE);
+
+    if (a4 != NULL) {
+        *a4 = NULL;
+    }
+
+    baseSpecies = GetBaseSpecies(species);
+    if (baseSpecies == MONSTER_DEOXYS_NORMAL) {
+        if (a5) {
+            species = gDungeon->deoxysForm;
+        }
+        else {
+            species = baseSpecies;
+        }
+    }
+
+    if (sub_807034C(species, GetTile(x, y)))
+        return FALSE;
+
+    entity = sub_80453AC(species);
+    if (entity == NULL)
+        return FALSE;
+
+    spStruct.pos.x = x;
+    spStruct.pos.y = y;
+    spStruct.species = species;
+    spStruct.level = monPtr->level;
+    spStruct.unk2 = 0;
+    spStruct.unk4 = 0;
+    spStruct.unk10 = 0;
+
+    unkPosition.x = gAdjacentTileOffsets[gUnknown_202F32C].x + x;
+    unkPosition.y = gAdjacentTileOffsets[gUnknown_202F32C].y + y;
+    sub_806BC68(TRUE, entity, &spStruct, (isTeamLeader ? &gUnknown_202EE0C : &unkPosition));
+
+    entityInfo = GetEntInfo(entity);
+    entityInfo->isNotTeamMember = FALSE;
+    entityInfo->shopkeeper = 0;
+    entityInfo->isTeamLeader = isTeamLeader;
+    entityInfo->unkF9 = a6;
+
+    gLeaderPointer = NULL;
+    if (isTeamLeader) {
+        gUnknown_202EE0C.x = x;
+        gUnknown_202EE0C.y = y;
+    }
+
+    entityInfo->HP = monPtr->unk10;
+    entityInfo->maxHPStat = monPtr->unk12;
+    entityInfo->exp = monPtr->currExp;
+
+    for (i = 0; i < 2; i++) {
+        entityInfo->atk[i] = monPtr->offense.att[i];
+        entityInfo->def[i] = monPtr->offense.def[i];
+    }
+
+    entityInfo->moves = monPtr->moves;
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        if (MoveFlagExists(&entityInfo->moves.moves[i])) {
+            entityInfo->moves.moves[i].moveFlags &= ~(MOVE_FLAG_LAST_USED);
+            entityInfo->moves.moves[i].moveFlags &= ~(MOVE_FLAG_REPLACE);
+        }
+    }
+    entityInfo->moves.struggleMoveFlags &= ~(MOVE_FLAG_LAST_USED);
+    entityInfo->moves.struggleMoveFlags &= ~(MOVE_FLAG_REPLACE);
+
+    entityInfo->level = monPtr->level;
+    entityInfo->IQ = monPtr->IQ;
+    entityInfo->tactic = monPtr->tacticIndex;
+    entityInfo->IQSkillFlags = monPtr->IQSkills;
+    entityInfo->IQSkillMenuFlags = monPtr->IQSkills;
+    entityInfo->hiddenPower = monPtr->hiddenPower;
+    entityInfo->joinedAt = monPtr->dungeonLocation;
+    entityInfo->maxBelly = monPtr->maxBelly;
+    entityInfo->teamIndex = monPtr->unkC;
+    entityInfo->heldItem = monPtr->itemSlot;
+    entityInfo->unkF3 = 0;
+    entityInfo->unk64 = 0;
+
+    // Pickup Check
+    if (gDungeon->unk644.dungeonLocation.id != DUNGEON_TINY_WOODS
+        && !IsBossFight()
+        && (entityInfo->abilities[0] == ABILITY_PICKUP || entityInfo->abilities[1] == ABILITY_PICKUP)
+        && !ItemExists(&entityInfo->heldItem))
+    {
+        u32 pickUpItem = sub_803D73C(0);
+        if (pickUpItem != ITEM_POKE) {
+            xxx_init_itemslot_8090A8C(&entityInfo->heldItem, pickUpItem, 0);
+            entityInfo->unkF3 = TRUE;
+        }
+    }
+
+    sub_806A6E8(entity);
+    LoadIQSkills(entity);
+    if (a4) {
+        *a4 = entity;
+    }
+
+    return TRUE;
+}
+*/
 //

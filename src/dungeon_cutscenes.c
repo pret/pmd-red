@@ -486,7 +486,7 @@ void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
   }
 
   gDungeon->unk644.bossSongIndex = songIndex;
-  SetDefaultIQSkills(entityInfo->IQSkillMenuFlags, entityInfo->bossFlag);
+  SetDefaultIQSkills(&entityInfo->IQSkillMenuFlags, entityInfo->bossFlag);
   LoadIQSkills(pokemon);
 }
 
