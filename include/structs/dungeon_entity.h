@@ -58,14 +58,14 @@ typedef struct HiddenPower
 // size: 0x14
 typedef struct AITarget
 {
-    /* 0x0 */ u8 aiObjective;
-    /* 0x1 */ bool8 aiNotNextToTarget;
-    /* 0x2 */ bool8 aiTargetingEnemy;
-    /* 0x3 */ bool8 aiTurningAround;
-    /* 0x4 */ u16 aiTargetSpawnGenID;
-    /* 0x8 */ struct Entity *aiTarget;
-    /* 0xC */ u32 unkC;
-    /* 0x10 */ DungeonPos aiTargetPos;
+    /* 0x0 */ u8 aiObjective; // 0x78
+    /* 0x1 */ bool8 aiNotNextToTarget; // 0x79
+    /* 0x2 */ bool8 aiTargetingEnemy; // 0x7A
+    /* 0x3 */ bool8 aiTurningAround; // 0x7B
+    /* 0x4 */ u16 aiTargetSpawnGenID; // 0x7C
+    /* 0x8 */ struct Entity *aiTarget; // 0x80
+    /* 0xC */ u32 unkC; // 0x84
+    /* 0x10 */ DungeonPos aiTargetPos; // 0x88
 } AITarget;
 
 // size: 0x4
@@ -333,7 +333,7 @@ typedef struct EntityInfo
     /* 0x16C */ DungeonPos targetPos;
     /* 0x170 */ DungeonPos pixelPos;
     s24_8 unk174;
-    u16 abilityEffectFlags; // See enum AbilityEffectFlags
+    /* 0x178 */ u16 abilityEffectFlags; // See enum AbilityEffectFlags
     /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
     // Previous value of targetPosition for movement, 1 and 2 moves ago.
     /* 0x184 */ Unk_Entity_x184 unk184[4];

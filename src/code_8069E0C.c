@@ -2,6 +2,7 @@
 #include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"
+#include "code_805D8C8.h"
 #include "constants/ability.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
@@ -1045,7 +1046,7 @@ UNUSED static s32 sub_806B09C(UnkDungeonGlobal_unk1CD98 *unkPtr, bool8 a1)
 
 extern const DungeonPos gUnknown_80F4598[];
 
-bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool8 a5, u8 a6);
+bool8 sub_806B8CC(s16 _species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool32 _a5, u32 _a6);
 
 void sub_806B168(void)
 {
@@ -1376,13 +1377,16 @@ extern u8 gUnknown_202F32C;
 extern u8 sub_803D73C(s32 a0);
 extern bool8 IsBossFight(void);
 
-/*
-bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool8 a5, u8 a6)
+bool8 sub_806B8CC(s16 _species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool32 _a5, u32 _a6)
 {
     s32 i;
     DungeonPos unkPosition;
     struct unkStruct_806B7F8 spStruct;
-    s16 baseSpecies;
+    // s16 memes
+    s32 species = SpeciesId(_species);
+    bool8 a5 = _a5;
+    u8 a6 = _a6;
+
     Entity *entity;
     EntityInfo *entityInfo;
     bool8 isTeamLeader = (monPtr->isTeamLeader != FALSE);
@@ -1391,13 +1395,12 @@ bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4
         *a4 = NULL;
     }
 
-    baseSpecies = GetBaseSpecies(species);
-    if (baseSpecies == MONSTER_DEOXYS_NORMAL) {
+    if (GetBaseSpecies(species) == MONSTER_DEOXYS_NORMAL) {
         if (a5) {
             species = gDungeon->deoxysForm;
         }
         else {
-            species = baseSpecies;
+            species = MONSTER_DEOXYS_NORMAL;
         }
     }
 
@@ -1418,7 +1421,7 @@ bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4
 
     unkPosition.x = gAdjacentTileOffsets[gUnknown_202F32C].x + x;
     unkPosition.y = gAdjacentTileOffsets[gUnknown_202F32C].y + y;
-    sub_806BC68(TRUE, entity, &spStruct, (isTeamLeader ? &gUnknown_202EE0C : &unkPosition));
+    sub_806BC68(TRUE, entity, &spStruct, (isTeamLeader ? &unkPosition : &gUnknown_202EE0C));
 
     entityInfo = GetEntInfo(entity);
     entityInfo->isNotTeamMember = FALSE;
@@ -1443,9 +1446,10 @@ bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4
 
     entityInfo->moves = monPtr->moves;
     for (i = 0; i < MAX_MON_MOVES; i++) {
-        if (MoveFlagExists(&entityInfo->moves.moves[i])) {
-            entityInfo->moves.moves[i].moveFlags &= ~(MOVE_FLAG_LAST_USED);
-            entityInfo->moves.moves[i].moveFlags &= ~(MOVE_FLAG_REPLACE);
+        Move *move = &entityInfo->moves.moves[i];
+        if (MoveFlagExists(move)) {
+            move->moveFlags &= ~(MOVE_FLAG_LAST_USED);
+            move->moveFlags &= ~(MOVE_FLAG_REPLACE);
         }
     }
     entityInfo->moves.struggleMoveFlags &= ~(MOVE_FLAG_LAST_USED);
@@ -1454,10 +1458,10 @@ bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4
     entityInfo->level = monPtr->level;
     entityInfo->IQ = monPtr->IQ;
     entityInfo->tactic = monPtr->tacticIndex;
-    entityInfo->IQSkillFlags = monPtr->IQSkills;
     entityInfo->IQSkillMenuFlags = monPtr->IQSkills;
     entityInfo->hiddenPower = monPtr->hiddenPower;
     entityInfo->joinedAt = monPtr->dungeonLocation;
+    entityInfo->belly = monPtr->belly;
     entityInfo->maxBelly = monPtr->maxBelly;
     entityInfo->teamIndex = monPtr->unkC;
     entityInfo->heldItem = monPtr->itemSlot;
@@ -1485,5 +1489,311 @@ bool8 sub_806B8CC(s16 species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4
 
     return TRUE;
 }
-*/
+
+extern void DeletePokemonDungeonSprite(s32 id);
+extern void sub_80429E8(Entity *r0);
+
+// s16 species memes ughh https://decomp.me/scratch/jcfzb
+#ifdef NONMATCHING
+void sub_806BB6C(Entity *entity, s16 _species)
+{
+    s32 species = _species;
+    s16 speciesMatch;
+    struct unkStruct_806B7F8 spStruct;
+    EntityInfo *entInfo = GetEntInfo(entity);
+
+    DeletePokemonDungeonSprite(entInfo->unk98);
+    speciesMatch = species;
+    spStruct.species = speciesMatch;
+    spStruct.level = 0;
+    spStruct.unk2 = 0;
+    spStruct.pos = entity->pos;
+    spStruct.unk4 = 0;
+{
+    s16 apparentSpeciesMatch;
+    s32 apparentSpecies = (GetMonsterApparentID(NULL, _species));
+
+    entity->unk22 = 0;
+    apparentSpeciesMatch = apparentSpecies;
+    GetEntInfo(entity)->apparentID = (apparentSpecies);
+    GetEntInfo(entity)->id = speciesMatch;
+    entity->axObj.spriteFile = GetSpriteData(apparentSpeciesMatch);
+}
+
+    entity->axObj.unk42_animId1 = 7;
+    entity->axObj.unk44_direction1 = 0;
+    entity->axObj.unk43_animId2 = 0xFF;
+    entity->axObj.unk45_orientation = 1;
+    entity->axObj.unk47 = 1;
+    entity->unk1C = 0;
+
+    if (entInfo->frozenClassStatus.status == STATUS_WRAP || entInfo->frozenClassStatus.status == STATUS_WRAPPED) {
+        sub_8076CB4(entInfo->unk9C);
+    }
+
+    sub_806BC68((entInfo->isNotTeamMember == FALSE), entity, &spStruct, NULL);
+    sub_806AED8(&entInfo->moves, &entInfo->maxHPStat, entInfo->atk, entInfo->def, entInfo->id, entInfo->level);
+    entInfo->HP = entInfo->maxHPStat;
+    entInfo->shopkeeper = 0;
+    sub_80429E8(entity);
+    EntityUpdateStatusSprites(entity);
+}
+#else
+NAKED void sub_806BB6C(Entity *entity, s16 _species)
+{
+    asm_unified("\n"
+"	push {r4-r7,lr}\n"
+"	mov r7, r10\n"
+"	mov r6, r9\n"
+"	mov r5, r8\n"
+"	push {r5-r7}\n"
+"	sub sp, 0x1C\n"
+"	adds r7, r0, 0\n"
+"	lsls r4, r1, 16\n"
+"	asrs r4, 16\n"
+"	ldr r0, [r7, 0x70]\n"
+"	mov r9, r0\n"
+"	mov r8, r9\n"
+"	adds r0, 0x98\n"
+"	ldr r0, [r0]\n"
+"	bl DeletePokemonDungeonSprite\n"
+"	add r0, sp, 0x8\n"
+"	movs r1, 0\n"
+"	mov r10, r1\n"
+"	movs r6, 0\n"
+"	lsls r5, r4, 16\n"
+"	lsrs r5, 16\n"
+"	strh r5, [r0]\n"
+"	strh r6, [r0, 0x8]\n"
+"	mov r2, r10\n"
+"	strb r2, [r0, 0x2]\n"
+"	ldr r0, [r7, 0x4]\n"
+"	str r0, [sp, 0x14]\n"
+"	str r6, [sp, 0xC]\n"
+"	movs r0, 0\n"
+"	adds r1, r4, 0\n"
+"	bl GetMonsterApparentID\n"
+"	lsls r0, 16\n"
+"	adds r1, r7, 0\n"
+"	adds r1, 0x22\n"
+"	mov r2, r10\n"
+"	strb r2, [r1]\n"
+"	ldr r1, [r7, 0x70]\n"
+"	asrs r2, r0, 16\n"
+"	lsrs r0, 16\n"
+"	strh r0, [r1, 0x4]\n"
+"	ldr r0, [r7, 0x70]\n"
+"	strh r5, [r0, 0x2]\n"
+"	adds r0, r2, 0\n"
+"	bl GetSpriteData\n"
+"	str r0, [r7, 0x64]\n"
+"	adds r1, r7, 0\n"
+"	adds r1, 0x6A\n"
+"	movs r0, 0x7\n"
+"	strb r0, [r1]\n"
+"	adds r0, r7, 0\n"
+"	adds r0, 0x6C\n"
+"	mov r5, r10\n"
+"	strb r5, [r0]\n"
+"	adds r1, 0x1\n"
+"	movs r0, 0xFF\n"
+"	strb r0, [r1]\n"
+"	adds r1, 0x2\n"
+"	movs r0, 0x1\n"
+"	strb r0, [r1]\n"
+"	adds r1, 0x2\n"
+"	strb r0, [r1]\n"
+"	str r6, [r7, 0x1C]\n"
+"	mov r0, r9\n"
+"	adds r0, 0xB0\n"
+"	ldrb r0, [r0]\n"
+"	subs r0, 0x3\n"
+"	lsls r0, 24\n"
+"	lsrs r0, 24\n"
+"	cmp r0, 0x1\n"
+"	bhi _0806BC08\n"
+"	mov r0, r9\n"
+"	adds r0, 0x9C\n"
+"	ldr r0, [r0]\n"
+"	bl sub_8076CB4\n"
+"_0806BC08:\n"
+"	movs r1, 0\n"
+"	mov r6, r9\n"
+"	ldrb r0, [r6, 0x6]\n"
+"	cmp r0, 0\n"
+"	bne _0806BC14\n"
+"	movs r1, 0x1\n"
+"_0806BC14:\n"
+"	adds r0, r1, 0\n"
+"	adds r1, r7, 0\n"
+"	add r2, sp, 0x8\n"
+"	movs r3, 0\n"
+"	bl sub_806BC68\n"
+"	movs r0, 0x8C\n"
+"	lsls r0, 1\n"
+"	add r0, r8\n"
+"	mov r1, r8\n"
+"	adds r1, 0x10\n"
+"	mov r2, r8\n"
+"	adds r2, 0x14\n"
+"	mov r3, r8\n"
+"	adds r3, 0x16\n"
+"	mov r5, r8\n"
+"	movs r6, 0x2\n"
+"	ldrsh r4, [r5, r6]\n"
+"	str r4, [sp]\n"
+"	ldrb r4, [r5, 0x9]\n"
+"	str r4, [sp, 0x4]\n"
+"	bl sub_806AED8\n"
+"	ldrh r0, [r5, 0x10]\n"
+"	strh r0, [r5, 0xE]\n"
+"	mov r0, r10\n"
+"	strb r0, [r5, 0x8]\n"
+"	adds r0, r7, 0\n"
+"	bl sub_80429E8\n"
+"	adds r0, r7, 0\n"
+"	bl EntityUpdateStatusSprites\n"
+"	add sp, 0x1C\n"
+"	pop {r3-r5}\n"
+"	mov r8, r3\n"
+"	mov r9, r4\n"
+"	mov r10, r5\n"
+"	pop {r4-r7}\n"
+"	pop {r0}\n"
+"	bx r0");
+}
+#endif // NONMATCHING
+
+extern s32 sub_803DA20(s32 param_1);
+extern void sub_806BFC0(EntityInfo *, u32);
+extern void sub_80694C0(Entity *, s32, s32, u32);
+extern void AddPokemonDungeonSprite(s32 id, s16 species, DungeonPos *pos, u32);
+
+void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos)
+{
+    DungeonPos entityPos;
+    EntityInfo *entInfo;
+
+    gDungeon->unkC = 1;
+    entInfo = GetEntInfo(entity);
+    sub_806BFC0(entInfo, 1);
+    entInfo->monsterBehavior = structPtr->unk2;
+    entity->isVisible = TRUE;
+    entity->unk22 = 0;
+    entity->prevPos.x = -1;
+    entity->prevPos.y = -1;
+    entity->pos.x = -2;
+    entity->pos.y = -2;
+
+    sub_80694C0(entity, structPtr->pos.x, structPtr->pos.y, 1);
+    sub_804535C(entity, NULL);
+
+    if (!a0) {
+        if (structPtr->species == MONSTER_KECLEON
+            && !gDungeon->unk644.unk2A
+            && gDungeon->unk3A0A
+            && !structPtr->unk2)
+        {
+            entInfo->shopkeeper = 1;
+        }
+        else {
+            entInfo->shopkeeper = 0;
+        }
+
+        if (GetBaseSpecies(entInfo->id) == MONSTER_DEOXYS_NORMAL) {
+            gDungeon->unk37FD = TRUE;
+        }
+        if (GetBaseSpecies(entInfo->id) == MONSTER_MEW) {
+            gDungeon->unk37FF = TRUE;
+        }
+    }
+
+    entInfo->unk98 = gDungeon->unk37F0;
+    gDungeon->unk37F0++;
+    entInfo->unk9C = 0;
+    if (structPtr->level == 0) {
+        entInfo->level = sub_803DA20(structPtr->species);
+    }
+    else {
+        entInfo->level = structPtr->level;
+    }
+
+    entInfo->moveRandomly = structPtr->unk4;
+    entInfo->IQ = 1;
+    SetDefaultIQSkills(&entInfo->IQSkillMenuFlags, FALSE);
+    GenerateHiddenPower(&entInfo->hiddenPower);
+    entInfo->maxHPStat = 1;
+    entInfo->HP = 1;
+    entInfo->belly = IntToFixedPoint(100);
+    entInfo->maxBelly = IntToFixedPoint(100);
+
+    if (pos != NULL) {
+        entInfo->targetPos = *pos;
+    }
+    else {
+        entInfo->targetPos.x = 0;
+        entInfo->targetPos.y = 0;
+    }
+
+    entInfo->flags = 0;
+    entInfo->aiAllySkip = FALSE;
+    entInfo->recalculateFollow = FALSE;
+    entInfo->numMoveTiles = 0;
+    entInfo->notMoving = 0;
+    entInfo->aiTarget.aiObjective = 0;
+    entInfo->aiTarget.aiTargetPos = entity->pos;
+    entInfo->aiTarget.aiTarget = NULL;
+    entInfo->aiTarget.unkC = 0;
+    entInfo->aiTarget.aiTargetSpawnGenID = 0;
+    entInfo->unkFF = 0;
+    entInfo->unk174.raw = 0;
+    entInfo->decoyAITracker = 0;
+    sub_806BFC0(entInfo, 1);
+    ZeroOutItem(&entInfo->heldItem);
+    entInfo->unk64 = 0;
+    entInfo->statusIcons = 0;
+    entInfo->unk164 = 0xFF;
+    entInfo->unk165 = 0xFF;
+    entInfo->expGainedInTurn = 0;
+    entInfo->waiting = 0;
+    entInfo->unk146 = 0;
+    entInfo->unk166 = 0;
+    entInfo->unk1F8 = 0;
+    entInfo->mobileTurnTimer = 0;
+    entInfo->attacking = FALSE;
+    entInfo->unk149 = FALSE;
+    entInfo->abilityEffectFlags = FALSE;
+    entInfo->terrifiedTurns = 0;
+    entInfo->useHeldItem = 0;
+    entInfo->unk14B = 0;
+    entInfo->unk14C = 1;
+    entInfo->visualFlags = 0;
+    entInfo->previousVisualFlags = 0;
+    entInfo->unk152 = 0;
+    entInfo->unk153 = 0;
+    entInfo->unk154 = 0;
+    entInfo->unk155 = 0;
+    entInfo->turnsSinceWarpScarfActivation = 0;
+    entInfo->perishSongTurns = 0;
+    entInfo->unkFE = 99;
+    entInfo->unk158 = 0;
+    entInfo->unk159 = 0;
+    entInfo->unk15A = 0;
+    CalcSpeedStage(entity);
+    entInfo->unk156 = 1;
+    entInfo->unk15C = 0;
+    entInfo->unk15E = 0;
+    entInfo->unk15D = 0;
+    entInfo->unk15F = 0;
+    entInfo->unk160 = 0;
+    if (entInfo->apparentID == MONSTER_DIGLETT || entInfo->apparentID == MONSTER_DUGTRIO) {
+        entInfo->unk156 = 0;
+    }
+
+    entityPos.x = entity->pos.x;
+    entityPos.y = entity->pos.y;
+    AddPokemonDungeonSprite(entInfo->unk98, entInfo->apparentID, &entityPos, gDungeon->unk181e8.unk18208);
+    LoadIQSkills(entity);
+    sub_806A898(entity, FALSE, FALSE);
+}
 //
