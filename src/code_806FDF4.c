@@ -178,472 +178,117 @@ void sub_806F63C(Entity *param_1)
     }
 }
 
-// https://decomp.me/scratch/2la6b - (96.72% matching - Seth)
-#ifdef NONMATCHING
-bool8 sub_806F660(Entity *pokemon,Entity *target)
+bool8 sub_806F660(Entity *pokemon, Entity *target)
 {
-  EntityInfo *pokemonInfo;
-  EntityInfo *targetInfo;
-  s32 size;
-  int iVar4;
-  s32 iVar5;
-  s32 uVar6;
+    s32 i;
+    s32 rand;
+    s32 recruitRate;
+    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
+    EntityInfo *targetInfo = GetEntInfo(target);
+    s32 foundIndex = -1;
+    s32 size = GetBodySize(targetInfo->apparentID);
 
-  int recruitRate;
-  s32 iVar8;
-  s32 index;
-  pokemonInfo = pokemon->info;
-  targetInfo = target->info;
-  iVar8 = -1;
-  size = GetBodySize(targetInfo->apparentID);
-  if ((1 < ((u16)(gDungeon->fixedRoomNumber - 4))) && (gDungeon->fixedRoomNumber != 9) && (gDungeon->fixedRoomNumber != 0xf)) {
-    if ((u16)(gDungeon->fixedRoomNumber - 0x2cU) < 5) {
-      if (gDungeon->unk644.unk18 == 0) {
-          return FALSE;
-      }
-    }
-    else if (gDungeon->fixedRoomNumber == 0x31) {
-      if (gDungeon->unk644.unk15 == 0) {
-        return FALSE;
-      }
-      if (sub_8097900(0x19e) == 0) {
-          return FALSE;
-      }
-
-    }
-    else {
-      if (IsRecruitingEnabled((gDungeon->unk644.dungeonLocation).id) == 0) {
-          return FALSE;
-      }
-    }
-  }
-  if (gDungeon->unk644.unk19 == 0)
-  {
-    if (((
-    (2 < (u16)(targetInfo->id - 0x90)) &&
-    (targetInfo->id != MONSTER_RAIKOU) &&
-    (targetInfo->id != MONSTER_ENTEI) &&
-    (targetInfo->id != MONSTER_SUICUNE) &&
-    (targetInfo->id != MONSTER_LATIAS) &&
-    (targetInfo->id != MONSTER_LATIOS) &&
-    (targetInfo->id != MONSTER_JIRACHI) &&
-    (targetInfo->id != MONSTER_RAYQUAZA) &&
-    (targetInfo->id != MONSTER_DEOXYS_NORMAL) &&
-    (targetInfo->id != MONSTER_REGIROCK &&
-    (targetInfo->id != MONSTER_REGICE) &&
-    (targetInfo->id != MONSTER_REGISTEEL)) || (HasRecruitedMon(targetInfo->id) == 0)) &&
-     (sub_806F9BC(targetInfo->id) != 0)) {
-    iVar5 = (pokemon->pos).x - (target->pos).x;
-    if (iVar5 < 0) {
-      iVar5 = -iVar5;
-    }
-    if (iVar5 < 2) {
-      iVar5 = (pokemon->pos).y - (target->pos).y;
-      if (iVar5 < 0) {
-        iVar5 = -iVar5;
-      }
-      if (((iVar5 < 2) && (targetInfo->joinedAt.id != 0x4A)) &&
-         (targetInfo->monsterBehavior != 1 && (CanSeeTarget(target,pokemon))
-          )) {
-        sub_806F910();
-        iVar4 = DungeonRandInt(1000);
-        recruitRate = GetRecruitRate(targetInfo->id);
-        if (recruitRate != -999) {
-          if (HasHeldItem(pokemon, ITEM_FRIEND_BOW)) { // FRIEND_BOW
-            recruitRate += gUnknown_80F5008;
-          }
-          recruitRate += gUnknown_80F5700[pokemonInfo->level];
-          if (iVar4 < recruitRate) {
-            for (index = 0; index <= (6 - size); index++)
-            {
-              for(uVar6 = 0; uVar6 < size; uVar6++)
-              {
-                  if (gUnknown_202EE70[index + uVar6] != 0) break;
-              }
-              iVar8 = index;
-              if (uVar6 == size)
-                  break;
-            }
-            if (iVar8 != -1) {
-              for(index = 0; index < 4; index++)
-              {
-                    if (((u8)(index[gRecruitedPokemonRef->pokemon2].unk0) & 1) == 0) break;
-              }
-              if (index != 4) {
-
-                for(index = 0; index < 4; index++)
-                {
-                    if (EntityExists(gDungeon->teamPokemon[index]) == 0) break;
-                }
-                if (index != 4) {
-                  return TRUE;
-                }
-              }
-            }
-            nullsub_96(pokemon,target);
-          }
+    if (gDungeon->fixedRoomNumber != 5 && gDungeon->fixedRoomNumber != 4 && gDungeon->fixedRoomNumber != 9 && gDungeon->fixedRoomNumber != 0xf) {
+        if ((gDungeon->fixedRoomNumber >= 0x2c && gDungeon->fixedRoomNumber <= 0x30)) {
+            if (gDungeon->unk644.unk18 == 0)
+                return FALSE;
         }
-      }
+        else if (gDungeon->fixedRoomNumber == 0x31) {
+            if (gDungeon->unk644.unk15 == 0)
+                return FALSE;
+            if (!sub_8097900(MONSTER_DEOXYS_NORMAL))
+                return FALSE;
+        }
+        else if (!IsRecruitingEnabled(gDungeon->unk644.dungeonLocation.id)) {
+            return FALSE;
+        }
     }
+
+    if (gDungeon->unk644.unk19 != 0)
+        return FALSE;
+
+    // Legendaries can only be recruited once.
+    if ((targetInfo->id == MONSTER_ARTICUNO ||
+         targetInfo->id == MONSTER_ZAPDOS ||
+         targetInfo->id == MONSTER_MOLTRES ||
+         targetInfo->id == MONSTER_ENTEI ||
+         targetInfo->id == MONSTER_RAIKOU ||
+         targetInfo->id == MONSTER_SUICUNE ||
+         targetInfo->id == MONSTER_LATIAS ||
+         targetInfo->id == MONSTER_LATIOS ||
+         targetInfo->id == MONSTER_JIRACHI ||
+         targetInfo->id == MONSTER_RAYQUAZA ||
+         targetInfo->id == MONSTER_DEOXYS_NORMAL ||
+         targetInfo->id == MONSTER_REGIROCK ||
+         targetInfo->id == MONSTER_REGICE ||
+         targetInfo->id == MONSTER_REGISTEEL)
+        && HasRecruitedMon(targetInfo->id))
+    {
+        return FALSE;
     }
-  }
-  return FALSE;
+
+    if (!sub_806F9BC(targetInfo->id))
+        return FALSE;
+    if (abs((pokemon->pos).x - (target->pos).x) >= 2 || abs((pokemon->pos).y - (target->pos).y) >= 2)
+        return FALSE;
+    if (targetInfo->joinedAt.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+        return FALSE;
+    if (targetInfo->monsterBehavior == 1)
+        return FALSE;
+    if (!CanSeeTarget(target,pokemon))
+        return FALSE;
+
+    sub_806F910();
+    rand = DungeonRandInt(1000);
+    recruitRate = GetRecruitRate(targetInfo->id);
+    if (recruitRate == -999)
+        return FALSE;
+
+    if (HasHeldItem(pokemon, ITEM_FRIEND_BOW)) {
+        recruitRate += gUnknown_80F5008;
+    }
+    recruitRate += gUnknown_80F5700[pokemonInfo->level];
+    if (rand >= recruitRate)
+        return FALSE;
+
+    for (i = 0; i <= (6 - size); i++) {
+        s32 j;
+        for (j = 0; j < size; j++) {
+            if (gUnknown_202EE70[i + j] != 0)
+                break;
+        }
+
+        if (j == size) {
+            foundIndex = i;
+            break;
+        }
+    }
+    if (foundIndex == -1) {
+        nullsub_96(pokemon, target);
+        return FALSE;
+    }
+
+    for (i = 0; i < 4; i++) {
+        if (!PokemonFlag1Struct2(&gRecruitedPokemonRef->pokemon2[i]))
+            break;
+    }
+    if (i == 4) {
+        nullsub_96(pokemon, target);
+        return FALSE;
+    }
+
+    for (i = 0; i < 4; i++) {
+        if (!EntityExists(gDungeon->teamPokemon[i]))
+            break;
+    }
+    if (i == 4) {
+        nullsub_96(pokemon, target);
+        return FALSE;
+    }
+
+    return TRUE;
 }
-#else
-NAKED
-bool8 sub_806F660(Entity *pokemon,Entity *target)
-{
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r7, r10\n"
-	"\tmov r6, r9\n"
-	"\tmov r5, r8\n"
-	"\tpush {r5-r7}\n"
-	"\tadds r6, r0, 0\n"
-	"\tmov r8, r1\n"
-	"\tldr r0, [r6, 0x70]\n"
-	"\tmov r10, r0\n"
-	"\tldr r4, [r1, 0x70]\n"
-	"\tmovs r1, 0x1\n"
-	"\tnegs r1, r1\n"
-	"\tmov r9, r1\n"
-	"\tmovs r2, 0x4\n"
-	"\tldrsh r0, [r4, r2]\n"
-	"\tbl GetBodySize\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r5, r0, 24\n"
-	"\tldr r0, _0806F6C0\n"
-	"\tldr r3, [r0]\n"
-	"\tldr r1, _0806F6C4\n"
-	"\tadds r0, r3, r1\n"
-	"\tldrh r2, [r0]\n"
-	"\tsubs r0, r2, 0x4\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tcmp r0, 0x1\n"
-	"\tbls _0806F702\n"
-	"\tlsls r0, r2, 16\n"
-	"\tasrs r1, r0, 16\n"
-	"\tcmp r1, 0x9\n"
-	"\tbeq _0806F702\n"
-	"\tcmp r1, 0xF\n"
-	"\tbeq _0806F702\n"
-	"\tadds r0, r2, 0\n"
-	"\tsubs r0, 0x2C\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tcmp r0, 0x4\n"
-	"\tbhi _0806F6CC\n"
-	"\tldr r2, _0806F6C8\n"
-	"\tadds r0, r3, r2\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0806F702\n"
-	"\tb _0806F8FC\n"
-	"\t.align 2, 0\n"
-"_0806F6C0: .4byte gDungeon\n"
-"_0806F6C4: .4byte 0x00003a14\n"
-"_0806F6C8: .4byte 0x0000065c\n"
-"_0806F6CC:\n"
-	"\tcmp r1, 0x31\n"
-	"\tbne _0806F6F0\n"
-	"\tldr r1, _0806F6EC\n"
-	"\tadds r0, r3, r1\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0806F6DC\n"
-	"\tb _0806F8FC\n"
-"_0806F6DC:\n"
-	"\tmovs r0, 0xCF\n"
-	"\tlsls r0, 1\n"
-	"\tbl sub_8097900\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0806F702\n"
-	"\tb _0806F8FC\n"
-	"\t.align 2, 0\n"
-"_0806F6EC: .4byte 0x00000659\n"
-"_0806F6F0:\n"
-	"\tldr r2, _0806F834\n"
-	"\tadds r0, r3, r2\n"
-	"\tldrb r0, [r0]\n"
-	"\tbl IsRecruitingEnabled\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0806F702\n"
-	"\tb _0806F8FC\n"
-"_0806F702:\n"
-	"\tldr r0, _0806F838\n"
-	"\tldr r0, [r0]\n"
-	"\tldr r3, _0806F83C\n"
-	"\tadds r0, r3\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0806F712\n"
-	"\tb _0806F8FC\n"
-"_0806F712:\n"
-	"\tldrh r1, [r4, 0x2]\n"
-	"\tadds r0, r1, 0\n"
-	"\tsubs r0, 0x90\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tcmp r0, 0x2\n"
-	"\tbls _0806F766\n"
-	"\tlsls r0, r1, 16\n"
-	"\tasrs r1, r0, 16\n"
-	"\tldr r0, _0806F840\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _0806F766\n"
-	"\tsubs r0, 0x1\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _0806F766\n"
-	"\tadds r0, 0x2\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _0806F766\n"
-	"\tadds r0, 0x8A\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _0806F766\n"
-	"\tadds r0, 0x1\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _0806F766\n"
-	"\tadds r0, 0x4\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _0806F766\n"
-	"\tsubs r0, 0x1\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _0806F766\n"
-	"\tadds r0, 0x2\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _0806F766\n"
-	"\tsubs r0, 0x9\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _0806F766\n"
-	"\tadds r0, 0x1\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _0806F766\n"
-	"\tadds r0, 0x1\n"
-	"\tcmp r1, r0\n"
-	"\tbne _0806F776\n"
-"_0806F766:\n"
-	"\tmovs r1, 0x2\n"
-	"\tldrsh r0, [r4, r1]\n"
-	"\tbl HasRecruitedMon\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0806F776\n"
-	"\tb _0806F8FC\n"
-"_0806F776:\n"
-	"\tmovs r2, 0x2\n"
-	"\tldrsh r0, [r4, r2]\n"
-	"\tbl sub_806F9BC\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0806F786\n"
-	"\tb _0806F8FC\n"
-"_0806F786:\n"
-	"\tmovs r3, 0x4\n"
-	"\tldrsh r1, [r6, r3]\n"
-	"\tmov r2, r8\n"
-	"\tmovs r3, 0x4\n"
-	"\tldrsh r0, [r2, r3]\n"
-	"\tsubs r1, r0\n"
-	"\tcmp r1, 0\n"
-	"\tbge _0806F798\n"
-	"\tnegs r1, r1\n"
-"_0806F798:\n"
-	"\tcmp r1, 0x1\n"
-	"\tble _0806F79E\n"
-	"\tb _0806F8FC\n"
-"_0806F79E:\n"
-	"\tmovs r0, 0x6\n"
-	"\tldrsh r1, [r6, r0]\n"
-	"\tmov r2, r8\n"
-	"\tmovs r3, 0x6\n"
-	"\tldrsh r0, [r2, r3]\n"
-	"\tsubs r1, r0\n"
-	"\tcmp r1, 0\n"
-	"\tbge _0806F7B0\n"
-	"\tnegs r1, r1\n"
-"_0806F7B0:\n"
-	"\tcmp r1, 0x1\n"
-	"\tble _0806F7B6\n"
-	"\tb _0806F8FC\n"
-"_0806F7B6:\n"
-	"\tadds r0, r4, 0\n"
-	"\tadds r0, 0x40\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, 0x4A\n"
-	"\tbne _0806F7C2\n"
-	"\tb _0806F8FC\n"
-"_0806F7C2:\n"
-	"\tadds r0, r4, 0\n"
-	"\tadds r0, 0xA4\n"
-	"\tldrb r0, [r0]\n"
-	"\tcmp r0, 0x1\n"
-	"\tbne _0806F7CE\n"
-	"\tb _0806F8FC\n"
-"_0806F7CE:\n"
-	"\tmov r0, r8\n"
-	"\tadds r1, r6, 0\n"
-	"\tbl CanSeeTarget\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0806F7DE\n"
-	"\tb _0806F8FC\n"
-"_0806F7DE:\n"
-	"\tbl sub_806F910\n"
-	"\tmovs r0, 0xFA\n"
-	"\tlsls r0, 2\n"
-	"\tbl DungeonRandInt\n"
-	"\tadds r7, r0, 0\n"
-	"\tmovs r1, 0x2\n"
-	"\tldrsh r0, [r4, r1]\n"
-	"\tbl GetRecruitRate\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r4, r0, 16\n"
-	"\tldr r0, _0806F844\n"
-	"\tcmp r4, r0\n"
-	"\tbne _0806F800\n"
-	"\tb _0806F8FC\n"
-"_0806F800:\n"
-	"\tadds r0, r6, 0\n"
-	"\tmovs r1, 0x2E\n"
-	"\tbl HasHeldItem\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0806F816\n"
-	"\tldr r0, _0806F848\n"
-	"\tmovs r2, 0\n"
-	"\tldrsh r0, [r0, r2]\n"
-	"\tadds r4, r0\n"
-"_0806F816:\n"
-	"\tldr r0, _0806F84C\n"
-	"\tmov r3, r10\n"
-	"\tldrb r1, [r3, 0x9]\n"
-	"\tlsls r1, 1\n"
-	"\tadds r1, r0\n"
-	"\tmovs r2, 0\n"
-	"\tldrsh r0, [r1, r2]\n"
-	"\tadds r4, r0\n"
-	"\tcmp r7, r4\n"
-	"\tbge _0806F8FC\n"
-	"\tmovs r4, 0\n"
-	"\tmovs r0, 0x6\n"
-	"\tsubs r3, r0, r5\n"
-	"\tldr r7, _0806F850\n"
-	"\tb _0806F856\n"
-	"\t.align 2, 0\n"
-"_0806F834: .4byte 0x00000644\n"
-"_0806F838: .4byte gDungeon\n"
-"_0806F83C: .4byte 0x0000065d\n"
-"_0806F840: .4byte 0x0000010d\n"
-"_0806F844: .4byte 0xfffffc19\n"
-"_0806F848: .4byte gUnknown_80F5008\n"
-"_0806F84C: .4byte gUnknown_80F5700\n"
-"_0806F850: .4byte gUnknown_202EE70\n"
-"_0806F854:\n"
-	"\tadds r4, 0x1\n"
-"_0806F856:\n"
-	"\tcmp r4, r3\n"
-	"\tbgt _0806F878\n"
-	"\tmovs r2, 0\n"
-	"\tcmp r2, r5\n"
-	"\tbge _0806F872\n"
-	"\tadds r1, r4, r7\n"
-	"\tb _0806F86C\n"
-"_0806F864:\n"
-	"\tadds r1, 0x1\n"
-	"\tadds r2, 0x1\n"
-	"\tcmp r2, r5\n"
-	"\tbge _0806F872\n"
-"_0806F86C:\n"
-	"\tldrb r0, [r1]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0806F864\n"
-"_0806F872:\n"
-	"\tcmp r2, r5\n"
-	"\tbne _0806F854\n"
-	"\tmov r9, r4\n"
-"_0806F878:\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tcmp r9, r0\n"
-	"\tbeq _0806F8F4\n"
-	"\tmovs r4, 0\n"
-	"\tldr r3, _0806F8BC\n"
-	"\tldr r0, [r3]\n"
-	"\tldr r2, _0806F8C0\n"
-	"\tadds r0, r2\n"
-	"\tldrb r1, [r0]\n"
-	"\tmovs r0, 0x1\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0806F8B4\n"
-	"\tadds r7, r3, 0\n"
-	"\tadds r5, r2, 0\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0x1\n"
-"_0806F89C:\n"
-	"\tadds r2, 0x64\n"
-	"\tadds r4, 0x1\n"
-	"\tcmp r4, 0x3\n"
-	"\tbgt _0806F8B4\n"
-	"\tldr r0, [r7]\n"
-	"\tadds r0, r2, r0\n"
-	"\tadds r0, r5\n"
-	"\tldrb r1, [r0]\n"
-	"\tadds r0, r3, 0\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0806F89C\n"
-"_0806F8B4:\n"
-	"\tcmp r4, 0x4\n"
-	"\tbeq _0806F8F4\n"
-	"\tmovs r4, 0\n"
-	"\tb _0806F8C6\n"
-	"\t.align 2, 0\n"
-"_0806F8BC: .4byte gRecruitedPokemonRef\n"
-"_0806F8C0: .4byte 0x00008df8\n"
-"_0806F8C4:\n"
-	"\tadds r4, 0x1\n"
-"_0806F8C6:\n"
-	"\tcmp r4, 0x3\n"
-	"\tbgt _0806F8E2\n"
-	"\tldr r0, _0806F8EC\n"
-	"\tldr r0, [r0]\n"
-	"\tlsls r1, r4, 2\n"
-	"\tldr r3, _0806F8F0\n"
-	"\tadds r0, r3\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tbl EntityExists\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0806F8C4\n"
-"_0806F8E2:\n"
-	"\tcmp r4, 0x4\n"
-	"\tbeq _0806F8F4\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _0806F8FE\n"
-	"\t.align 2, 0\n"
-"_0806F8EC: .4byte gDungeon\n"
-"_0806F8F0: .4byte 0x0001357c\n"
-"_0806F8F4:\n"
-	"\tadds r0, r6, 0\n"
-	"\tmov r1, r8\n"
-	"\tbl nullsub_96\n"
-"_0806F8FC:\n"
-	"\tmovs r0, 0\n"
-"_0806F8FE:\n"
-	"\tpop {r3-r5}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tmov r10, r5\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
-}
-#endif
+
 
 void nullsub_96(Entity *pokemon,Entity *target)
 {}
@@ -754,7 +399,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
     {
         for(pokeIndex = 0; pokeIndex < MAX_TEAM_MEMBERS; pokeIndex++)
         {
-            if (((u8)(pokeIndex[gRecruitedPokemonRef->pokemon2].unk0) & 1) == 0)
+            if (!(PokemonFlag1Struct2(&gRecruitedPokemonRef->pokemon2[pokeIndex])))
                 break;
         }
 
@@ -830,176 +475,48 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
     }
 }
 
-// https://decomp.me/scratch/LByEy (93.86% matching - Seth)
-
-#ifdef NONMATCHING
 bool8 sub_806FD18(Entity *param_1)
 {
-  s32 size;
-  s32 uVar3;
-  int iVar4;
-  EntityInfo *info;
-  int index;
+    s32 i, j;
 
-  info = GetEntInfo(param_1);
-  iVar4 = -1;
-  size = GetBodySize((int)info->apparentID);
-  if (sub_806F9BC((int)info->id) != 0) {
+    EntityInfo *info = GetEntInfo(param_1);
+    s32 validIndex = -1;
+    s32 size = GetBodySize(info->apparentID);
+    if (!sub_806F9BC(info->id))
+        return FALSE;
+
     sub_806F910();
-    for (index = 0; index <= (6 - size); index++) {
-      for(uVar3 = 0; uVar3 < size; uVar3++)
-      {
-          if (gUnknown_202EE70[index] != 0) break;
-            iVar4 = index;
-      }
-      if (uVar3 == size) break;
+    for (i = 0; i <= (6 - size); i++) {
+        for (j = 0; j < size; j++){
+            if (gUnknown_202EE70[i + j] != 0)
+                break;
+        }
+        if (j == size) {
+            validIndex = i;
+            break;
+        }
     }
-    if (iVar4 != -1) {
+    if (validIndex == -1)
+        return FALSE;
 
-        for(index = 0; index < 4; index++)
-        {
-            if (((u8)(index[gRecruitedPokemonRef->pokemon2].unk0) & 1) == 0) break;
-        }
 
-      if (index != 4) {
-        for(index = 0; index < 4; index++)
-        {
-            if(!EntityExists(gDungeon->teamPokemon[index])) break;
-        }
-        if (index != 4) {
-          return 1;
-        }
-      }
+    for (i = 0; i < 4; i++) {
+        if (!(PokemonFlag1Struct2(&gRecruitedPokemonRef->pokemon2[i])))
+            break;
     }
-  }
-  return 0;
-}
-#else
-NAKED
-bool8 sub_806FD18(Entity *param_1)
-{
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tldr r4, [r0, 0x70]\n"
-	"\tmovs r6, 0x1\n"
-	"\tnegs r6, r6\n"
-	"\tmovs r1, 0x4\n"
-	"\tldrsh r0, [r4, r1]\n"
-	"\tbl GetBodySize\n"
-	"\tlsls r0, 24\n"
-	"\tlsrs r5, r0, 24\n"
-	"\tmovs r2, 0x2\n"
-	"\tldrsh r0, [r4, r2]\n"
-	"\tbl sub_806F9BC\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0806FDEC\n"
-	"\tbl sub_806F910\n"
-	"\tmovs r4, 0\n"
-	"\tmovs r0, 0x6\n"
-	"\tsubs r3, r0, r5\n"
-	"\tldr r7, _0806FD48\n"
-	"\tb _0806FD4E\n"
-	"\t.align 2, 0\n"
-"_0806FD48: .4byte gUnknown_202EE70\n"
-"_0806FD4C:\n"
-	"\tadds r4, 0x1\n"
-"_0806FD4E:\n"
-	"\tcmp r4, r3\n"
-	"\tbgt _0806FD70\n"
-	"\tmovs r2, 0\n"
-	"\tcmp r2, r5\n"
-	"\tbge _0806FD6A\n"
-	"\tadds r1, r4, r7\n"
-	"\tb _0806FD64\n"
-"_0806FD5C:\n"
-	"\tadds r1, 0x1\n"
-	"\tadds r2, 0x1\n"
-	"\tcmp r2, r5\n"
-	"\tbge _0806FD6A\n"
-"_0806FD64:\n"
-	"\tldrb r0, [r1]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0806FD5C\n"
-"_0806FD6A:\n"
-	"\tcmp r2, r5\n"
-	"\tbne _0806FD4C\n"
-	"\tadds r6, r4, 0\n"
-"_0806FD70:\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tcmp r6, r0\n"
-	"\tbeq _0806FDEC\n"
-	"\tmovs r4, 0\n"
-	"\tldr r3, _0806FDB4\n"
-	"\tldr r0, [r3]\n"
-	"\tldr r2, _0806FDB8\n"
-	"\tadds r0, r2\n"
-	"\tldrb r1, [r0]\n"
-	"\tmovs r0, 0x1\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0806FDAC\n"
-	"\tadds r6, r3, 0\n"
-	"\tadds r5, r2, 0\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0x1\n"
-"_0806FD94:\n"
-	"\tadds r2, 0x64\n"
-	"\tadds r4, 0x1\n"
-	"\tcmp r4, 0x3\n"
-	"\tbgt _0806FDAC\n"
-	"\tldr r0, [r6]\n"
-	"\tadds r0, r2, r0\n"
-	"\tadds r0, r5\n"
-	"\tldrb r1, [r0]\n"
-	"\tadds r0, r3, 0\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0806FD94\n"
-"_0806FDAC:\n"
-	"\tcmp r4, 0x4\n"
-	"\tbeq _0806FDEC\n"
-	"\tmovs r4, 0\n"
-	"\tb _0806FDBE\n"
-	"\t.align 2, 0\n"
-"_0806FDB4: .4byte gRecruitedPokemonRef\n"
-"_0806FDB8: .4byte 0x00008df8\n"
-"_0806FDBC:\n"
-	"\tadds r4, 0x1\n"
-"_0806FDBE:\n"
-	"\tcmp r4, 0x3\n"
-	"\tbgt _0806FDDA\n"
-	"\tldr r0, _0806FDE4\n"
-	"\tldr r0, [r0]\n"
-	"\tlsls r1, r4, 2\n"
-	"\tldr r2, _0806FDE8\n"
-	"\tadds r0, r2\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tbl EntityExists\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0806FDBC\n"
-"_0806FDDA:\n"
-	"\tcmp r4, 0x4\n"
-	"\tbeq _0806FDEC\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _0806FDEE\n"
-	"\t.align 2, 0\n"
-"_0806FDE4: .4byte gDungeon\n"
-"_0806FDE8: .4byte 0x0001357c\n"
-"_0806FDEC:\n"
-	"\tmovs r0, 0\n"
-"_0806FDEE:\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r1}\n"
-	"\tbx r1"
-    );
-}
 
-#endif
+    if (i == 4)
+        return FALSE;
 
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        if(!EntityExists(gDungeon->teamPokemon[i]))
+            break;
+    }
+    if (i == MAX_TEAM_MEMBERS)
+        return FALSE;
+
+    return TRUE;
+}
 
 bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
 {
