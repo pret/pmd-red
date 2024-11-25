@@ -381,7 +381,7 @@ extern void sub_8049884(void);
 extern void sub_8049B8C(void);
 extern void sub_8040A84(void);
 extern void sub_8086A54(Entity *);
-extern void sub_806BFC0(EntityInfo *, u32);
+extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_808BBA8(Entity * );
 extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
@@ -4240,7 +4240,7 @@ void sub_808BB3C(DungeonPos *pos1)
 
 void sub_808BBA8(Entity *jirachiEntity)
 {
-  sub_806BFC0(GetEntInfo(jirachiEntity),0);
+  ResetMonEntityData(GetEntInfo(jirachiEntity),0);
 }
 
 void JirachiDropInEffect(Entity *jirachiEntity)

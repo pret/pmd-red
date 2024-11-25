@@ -39,7 +39,7 @@
 
 extern u8 gUnknown_202F221;
 
-extern void sub_806BFC0(EntityInfo *, u32);
+extern void ResetMonEntityData(EntityInfo *, u32);
 
 const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00 };
 
@@ -786,7 +786,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                     EndCurseClassStatus(attacker, target, STATUS_DECOY);
                 }
                 sub_8078084(target);
-                sub_806BFC0(targetData, 0);
+                ResetMonEntityData(targetData, 0);
                 sub_800DBBC();
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
@@ -843,7 +843,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                     EndCurseClassStatus(attacker, target, STATUS_DECOY);
                 }
                 sub_8078084(target);
-                sub_806BFC0(targetData, 0);
+                ResetMonEntityData(targetData, 0);
                 sub_800DBBC();
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
@@ -897,7 +897,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 EndCurseClassStatus(attacker, target, STATUS_DECOY);
             }
             sub_8078084(target);
-            sub_806BFC0(targetData, 0);
+            ResetMonEntityData(targetData, 0);
             sub_800DBBC();
             sub_806A390(target);
             sub_806CCB4(target, sub_806CEBC(target));

@@ -310,6 +310,22 @@ typedef struct unkDungeon2F3C
     /* 0x10 */ u8 unk10[2];
 } unkDungeon2F3C;
 
+// Size :0x8
+typedef struct unkDungeon57CSub
+{
+    s16 unk0;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+} unkDungeon57CSub;
+
+typedef struct unkDungeon57C
+{
+    unkDungeon57CSub unkArray[8];
+    s32 unk40;
+} unkDungeon57C;
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -340,7 +356,7 @@ typedef struct Dungeon
     u8 fillC0[0x134 - 0xC0];
     struct unkStruct_Dungeon134_sub unk134;
     /* 0x47C */ RGB colorRamp[0x100];
-    /* 0x57C */ u8 fill57C[0x5C0 - 0x57c];
+    /* 0x57C */ unkDungeon57C unk57C;
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];
     /* 0x5F4 */ u8 faintStringBuffer[80];

@@ -17,7 +17,7 @@
 
 extern u8 *gUnknown_80FE2EC[];
 
-extern void sub_806BFC0(EntityInfo *, u32);
+extern void ResetMonEntityData(EntityInfo *, u32);
 void sub_8069E0C(Entity *pokemon);
 void sub_8042A44(Entity *r0);
 void sub_8083D78(void);
@@ -105,7 +105,7 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
   GetPokemonLevelData(&levelData,id_s32,entityInfo->level);
   entityInfo->exp = levelData.expRequired;
   target->axObj.spriteFile = file;
-  sub_806BFC0(entityInfo,0);
+  ResetMonEntityData(entityInfo,0);
   sub_8069E0C(target);
   sub_806CCB4(target,7);
   TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE2EC);

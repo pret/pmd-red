@@ -409,7 +409,7 @@ void GenerateFloor(void)
     }
 
     if (sKecleonShopMiddlePos.x >= 0 && sKecleonShopMiddlePos.y >= 0) {
-        sub_806C330(sKecleonShopMiddlePos.x, sKecleonShopMiddlePos.y, 380, 0);
+        sub_806C330(sKecleonShopMiddlePos.x, sKecleonShopMiddlePos.y, MONSTER_KECLEON, 0);
     }
 
     if (sKecleonShopPosition.minX >= 0) {

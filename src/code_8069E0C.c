@@ -45,7 +45,7 @@ struct unkStruct_80F520C
 };
 
 // Castform Forecast ability data
-extern struct unkStruct_80F520C gUnknown_80F520C[WEATHER_RANDOM];
+extern const struct unkStruct_80F520C gUnknown_80F520C[WEATHER_RANDOM];
 
 extern u8 gUnknown_80F51E4[];
 extern u8 *gUnknown_80FCC7C[];
@@ -112,7 +112,7 @@ void TriggerWeatherAbilities(void)
 
 s32 GetMonsterApparentID(Entity *pokemon, s16 id)
 {
-    if (id == MONSTER_CASTFORM || id == MONSTER_CASTFORM_SNOWY || id == MONSTER_CASTFORM_SUNNY || id == MONSTER_CASTFORM_RAINY) {
+    if (id == MONSTER_CASTFORM || IS_CASTFORM_FORM_MONSTER(id)) {
         if (HasAbility(pokemon, ABILITY_FORECAST))
             return gUnknown_80F520C[GetApparentWeather(pokemon)].unk2;
         return MONSTER_CASTFORM;
@@ -1665,9 +1665,10 @@ NAKED void sub_806BB6C(Entity *entity, s16 _species)
 #endif // NONMATCHING
 
 extern s32 sub_803DA20(s32 param_1);
-extern void sub_806BFC0(EntityInfo *, u32);
 extern void sub_80694C0(Entity *, s32, s32, u32);
 extern void AddPokemonDungeonSprite(s32 id, s16 species, DungeonPos *pos, u32);
+
+void ResetMonEntityData(EntityInfo *, bool8 a1);
 
 void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos)
 {
@@ -1676,7 +1677,7 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
 
     gDungeon->unkC = 1;
     entInfo = GetEntInfo(entity);
-    sub_806BFC0(entInfo, 1);
+    ResetMonEntityData(entInfo, TRUE);
     entInfo->monsterBehavior = structPtr->unk2;
     entity->isVisible = TRUE;
     entity->unk22 = 0;
@@ -1748,7 +1749,7 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
     entInfo->unkFF = 0;
     entInfo->unk174.raw = 0;
     entInfo->decoyAITracker = 0;
-    sub_806BFC0(entInfo, 1);
+    ResetMonEntityData(entInfo, TRUE);
     ZeroOutItem(&entInfo->heldItem);
     entInfo->unk64 = 0;
     entInfo->statusIcons = 0;
@@ -1795,5 +1796,177 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
     AddPokemonDungeonSprite(entInfo->unk98, entInfo->apparentID, &entityPos, gDungeon->unk181e8.unk18208);
     LoadIQSkills(entity);
     sub_806A898(entity, FALSE, FALSE);
+}
+
+void ResetMonEntityData(EntityInfo *entInfo, bool8 setStatsToOne)
+{
+    s32 i;
+    bool8 hasForecast;
+
+    entInfo->sleepClassStatus.status = 0;
+    entInfo->sleepClassStatus.turns = 0;
+    entInfo->burnClassStatus.status = 0;
+    entInfo->burnClassStatus.turns = 0;
+    entInfo->burnClassStatus.damageCountdown = 0;
+    entInfo->burnClassStatus.unk4 = 0;
+    entInfo->frozenClassStatus.status = 0;
+    entInfo->frozenClassStatus.turns = 0;
+    entInfo->frozenClassStatus.damageCountdown = 0;
+    entInfo->frozenClassStatus.unk4 = 34;
+    entInfo->cringeClassStatus.status = 0;
+    entInfo->cringeClassStatus.turns = 0;
+    entInfo->bideClassStatus.status = 0;
+    entInfo->reflectClassStatus.status = 0;
+    entInfo->reflectClassStatus.turns = 0;
+    entInfo->curseClassStatus.status = 0;
+    entInfo->curseClassStatus.turns = 0;
+    entInfo->curseClassStatus.damageCountdown = 0;
+    entInfo->leechSeedClassStatus.status = 0;
+    entInfo->leechSeedClassStatus.turns = 0;
+    entInfo->leechSeedClassStatus.damageCountdown = 0;
+    entInfo->sureShotClassStatus.status = 0;
+    entInfo->sureShotClassStatus.turns = 0;
+    entInfo->longTossClassStatus.status = 0;
+    entInfo->invisibleClassStatus.status = 0;
+    entInfo->invisibleClassStatus.turns = 0;
+    entInfo->blinkerClassStatus.status = 0;
+    entInfo->blinkerClassStatus.turns = 0;
+    entInfo->muzzled.muzzled = FALSE;
+    entInfo->muzzled.turns = 0;
+    entInfo->powerEars = FALSE;
+    entInfo->scanning = FALSE;
+    entInfo->stairSpotter = FALSE;
+    entInfo->stairSpotter = FALSE;
+    entInfo->unk164 = 0xFF;
+    entInfo->unk165 = 0xFF;
+
+    for (i = 0; i < NUM_SPEED_COUNTERS; i++) {
+        entInfo->speedUpCounters[i] = 0;
+        entInfo->speedDownCounters[i] = 0;
+    }
+
+    hasForecast = FALSE;
+    for (i = 0; i < 2; i++) {
+        entInfo->abilities[i] = GetPokemonAbility(entInfo->id, i);
+        if (entInfo->abilities[i] == ABILITY_FORECAST) {
+            hasForecast = TRUE;
+        }
+        if (setStatsToOne) {
+            entInfo->atk[i] = 1;
+            entInfo->def[i] = 1;
+        }
+
+        entInfo->offensiveStages[i] = 10;
+        entInfo->defensiveStages[i] = 10;
+        entInfo->hitChanceStages[i] = 10;
+        entInfo->offensiveMultipliers[i].raw = IntToF248_2(1).raw;
+        entInfo->defensiveMultipliers[i].raw = IntToF248_2(1).raw;
+    }
+
+    if (hasForecast) {
+        entInfo->types[0] = gUnknown_80F520C[GetApparentWeather(NULL)].unk0;
+        entInfo->types[1] = TYPE_NONE;
+    }
+    else {
+        for (i = 0; i < 2; i++) {
+            entInfo->types[i] = GetPokemonType(entInfo->id, i);
+        }
+    }
+
+    gDungeon->unkC = 1;
+    entInfo->flashFireBoost = 0;
+    entInfo->stockpileStage = 0;
+    entInfo->perishSongTurns = 0;
+    entInfo->unk113 = 0;
+    entInfo->grudge = 0;
+    entInfo->expMultiplier = EXP_HALVED;
+    entInfo->exposed = FALSE;
+    entInfo->isColorChanged = 0;
+    entInfo->bossFlag = 0;
+    entInfo->unkFF = 0;
+}
+
+void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
+
+void sub_806C1D8(void)
+{
+    s32 i, j;
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        Entity *entity = gDungeon->teamPokemon[i];
+        if (EntityExists(entity)) {
+            EntityInfo *entInfo = GetEntInfo(entity);
+            s32 teamIndex = entInfo->teamIndex;
+            if (teamIndex >= 0) {
+                for (j = 0; j < MAX_MON_MOVES; j++) {
+                    if (MoveFlagExists(&entInfo->moves.moves[j])) {
+                        entInfo->moves.moves[j].moveFlags2 &= ~(1);
+                    }
+                }
+                sub_806C264(teamIndex, entInfo);
+            }
+        }
+    }
+}
+
+void sub_806C264(s32 teamIndex, EntityInfo *entInfo)
+{
+    s32 i;
+    PokemonStruct2 *monPtr = &gRecruitedPokemonRef->pokemon2[teamIndex];
+
+    monPtr->unk10 = entInfo->HP;
+    monPtr->unk12 = entInfo->maxHPStat;
+    monPtr->currExp = entInfo->exp;
+    for (i = 0; i < 2; i++) {
+        monPtr->offense.att[i] = entInfo->atk[i];
+        monPtr->offense.def[i] = entInfo->def[i];
+    }
+
+    if (IS_CASTFORM_FORM_MONSTER(entInfo->apparentID)) {
+        monPtr->speciesNum = MONSTER_CASTFORM;
+    }
+
+    monPtr->moves = entInfo->moves;
+    monPtr->level = entInfo->level;
+    monPtr->IQ = entInfo->IQ;
+    monPtr->IQSkills = entInfo->IQSkillMenuFlags;
+    monPtr->tacticIndex = entInfo->tactic;
+    monPtr->hiddenPower = entInfo->hiddenPower;
+    monPtr->belly = entInfo->belly;
+    monPtr->maxBelly = entInfo->maxBelly;
+    monPtr->itemSlot = entInfo->heldItem;
+    if (monPtr->unkA == 0x55AA) {
+        monPtr->unkA = 0x5AA5;
+    }
+}
+
+// s16 species memes again
+void sub_806C330(s32 _x, s32 _y, s16 _species, u32 _a3)
+{
+    s32 i;
+    s32 x = _x;
+    s32 y = _y;
+    s32 species = (_species);
+    u8 a3 = _a3;
+    unkDungeon57C *strPtr = &gDungeon->unk57C;
+
+    for (i = 0; i < strPtr->unk40; i++) {
+        if (strPtr->unkArray[i].unk3 != 0 && strPtr->unkArray[i].unk4 == x && strPtr->unkArray[i].unk5 == y) {
+            s16 speciesMatchMe = SpeciesId(_species);
+            strPtr->unkArray[i].unk0 = speciesMatchMe;
+            strPtr->unkArray[i].unk2 = a3;
+            return;
+        }
+    }
+
+    if (strPtr->unk40 < 8) {
+        strPtr->unkArray[strPtr->unk40].unk3 = 1;
+        strPtr->unkArray[strPtr->unk40].unk4 = x;
+        strPtr->unkArray[strPtr->unk40].unk5 = y;
+        strPtr->unkArray[strPtr->unk40].unk0 = species;
+        strPtr->unkArray[strPtr->unk40].unk2 = a3;
+
+        strPtr->unk40++;
+    }
 }
 //

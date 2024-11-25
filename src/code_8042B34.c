@@ -373,7 +373,7 @@ extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 extern void sub_8046F84(s32 itemFlag);
 extern bool8 sub_8083C50(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
-extern void sub_806BFC0(EntityInfo *, u32);
+extern void ResetMonEntityData(EntityInfo *, u32);
 extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 extern bool8 IsKeepMoney(u8 dungeon);
 extern void sub_8042B0C(Entity *);
@@ -1041,7 +1041,7 @@ void sub_8043D60(void)
             monInfo->HP = monInfo->maxHPStat;
             monInfo->belly = monInfo->maxBelly;
             gDungeon->unk644.itemHoldersIdentified = FALSE;
-            sub_806BFC0(monInfo, 0);
+            ResetMonEntityData(monInfo, 0);
             monInfo->apparentID = monInfo->id;
             monInfo->perishSongTurns = 0;
             for (i = 0; i < MAX_MON_MOVES; i++) {
