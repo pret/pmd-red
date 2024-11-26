@@ -39,6 +39,7 @@
 #include "dungeon_ai_movement.h"
 #include "constants/iq_skill.h"
 #include "structs/str_806B7F8.h"
+#include "structs/str_202ED28.h"
 
 struct unkStruct_80F520C
 {
@@ -2053,15 +2054,6 @@ void UpdateDungeonPokemonSprite(int id, short species, int status, char visible)
 extern void sub_8042EC8(Entity *a0, s32 a1);
 void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks);
 
-struct unkStruct_202ED28
-{
-    SpriteOAM sprite;
-    s16 unk8;
-    s16 unkA;
-};
-
-extern struct unkStruct_202ED28 gUnknown_202ED28[][6];
-
 static inline u16 GetUnkFlag(Entity *entity)
 {
     if ((entity->axObj.axdata.flags & 0x2000))
@@ -2105,14 +2097,14 @@ void sub_806C51C(Entity *entity)
         if (r2) {
             s32 r0;
             s32 r3 = sub_806CEBC(entity);
-            entity->fill21 = 1;
+            entity->unk21 = 1;
             if (entInfo->unkFE == 99) {
                 if (entity->axObj.unk43_animId2 <= 12) {
                     s32 r2;
                     if (entInfo->bideClassStatus.status == STATUS_BIDE) {
                         r2 = 2;
                     }
-                    else if (entity->fill23 < 3) {
+                    else if (entity->unk23 < 3) {
                         r2 = 0;
                     }
                     else {
@@ -2202,12 +2194,12 @@ void sub_806C51C(Entity *entity)
     }
 
     if (entity->pixelPos.x == entity->prevPixelPos.x && entity->pixelPos.y == entity->prevPixelPos.y) {
-        if (entity->fill23 < 10) {
-            entity->fill23++;
+        if (entity->unk23 < 10) {
+            entity->unk23++;
         }
     }
     else {
-        entity->fill23 = 0;
+        entity->unk23 = 0;
     }
 
     entity->prevPixelPos.x = entity->pixelPos.x;
@@ -2324,12 +2316,12 @@ void sub_806C51C(Entity *entity)
         if (entInfo->unk156 != 0) {
             u32 finalXSprite, finalYSprite;
 
-            finalXSprite = xSprite + spriteStructPtr->unk8;
+            finalXSprite = xSprite + spriteStructPtr->x;
             finalXSprite &= SPRITEOAM_MASK_X;
             spriteStructPtr->sprite.attrib2 &= ~SPRITEOAM_MASK_X;
             spriteStructPtr->sprite.attrib2 |= finalXSprite;
 
-            finalYSprite = ySprite + spriteStructPtr->unkA;
+            finalYSprite = ySprite + spriteStructPtr->y;
             finalYSprite &= SPRITEOAM_MAX_UNK6_4;
             finalYSprite <<= SPRITEOAM_SHIFT_UNK6_4;
             spriteStructPtr->sprite.unk6 &= 0xF;
