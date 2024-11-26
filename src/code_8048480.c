@@ -547,7 +547,7 @@ void CheriBerryItemAction(Entity *pokemon, Entity *target)
 void PechaBerryItemAction(Entity *pokemon, Entity *target)
 {
     EntityInfo *entInfo = GetEntInfo(target);
-    if (ENTITY_POISIONED(entInfo))
+    if (ENTITY_POISONED(entInfo))
         EndBurnClassStatus(pokemon, target);
     else
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F89F4); // Pointer to "But nothing happened!"

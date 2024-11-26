@@ -858,7 +858,7 @@ void EndAbilityImmuneStatus(Entity *attacker, Entity *target)
         EndFrozenClassStatus(attacker, target);
     }
 
-    if (HasAbility(target, ABILITY_IMMUNITY) && ENTITY_POISIONED(targetInfo)) {
+    if (HasAbility(target, ABILITY_IMMUNITY) && ENTITY_POISONED(targetInfo)) {
         EndBurnClassStatus(attacker, target);
     }
 

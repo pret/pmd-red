@@ -85,7 +85,7 @@ typedef struct BurnClassStatus
 } BurnClassStatus;
 
 // Useful when checking if a mon is poisoned without having to check for Poison and Bad Poison every time.
-#define ENTITY_POISIONED(entityInfo)((entityInfo->burnClassStatus.status == STATUS_POISONED || entityInfo->burnClassStatus.status == STATUS_BADLY_POISONED))
+#define ENTITY_POISONED(entityInfo)((entityInfo->burnClassStatus.status == STATUS_POISONED || entityInfo->burnClassStatus.status == STATUS_BADLY_POISONED))
 
 // size: 0xC
 typedef struct FrozenClassStatus
