@@ -64,6 +64,43 @@ extern bool8 sub_8045888(Entity *);
 extern void sub_806A2BC(Entity *, u8);
 extern void sub_804178C(u32);
 extern void sub_803F508(Entity *);
+extern void sub_8042B20(Entity *entity);
+extern void sub_8042B0C(Entity *entity);
+extern s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id);
+extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
+extern s16 sub_803D970(u32);
+extern bool8 sub_8083660(const DungeonPos *param_1);
+extern Entity *gLeaderPointer;
+extern DungeonPos gUnknown_202EE0C;
+extern void sub_803F4A0(Entity *a0);
+extern bool8 sub_80860A8(u8 id);
+extern u8 gUnknown_202F32C;
+extern u8 sub_803D73C(s32 a0);
+extern bool8 IsBossFight(void);
+extern void DeletePokemonDungeonSprite(s32 id);
+extern void sub_80429E8(Entity *r0);
+extern s32 sub_803DA20(s32 param_1);
+extern void sub_80694C0(Entity *, s32, s32, u32);
+extern void AddPokemonDungeonSprite(s32 id, s16 species, DungeonPos *pos, u32);
+extern s32 gUnknown_202EDCC;
+extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
+extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
+u32 EntityGetStatusSprites(Entity *entity);
+void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
+extern void sub_8042EC8(Entity *a0, s32 a1);
+void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks);
+extern Entity *sub_804550C(s16 a);
+extern Entity *sub_80453AC(s16 id);
+extern void sub_803F580(s32);
+extern void sub_8040A84(void);
+extern void sub_806B678(void);
+extern void EntityUpdateStatusSprites(Entity *);
+extern s32 sub_808F700(PokemonStruct1 *pokemon);
+extern Entity *sub_80696A8(Entity *a0);
+extern int sprintf(char *, const char *, ...);
+extern const u8 gUnknown_8106EA8[]; // talkp%d
+extern const u8 gUnknown_8106EB0[]; // talk%d
+extern const struct FileArchive gDungeonFileArchive;
 
 void sub_8069E0C(Entity *pokemon)
 {
@@ -328,14 +365,6 @@ void sub_806A390(Entity *pokemon)
     }
 }
 
-extern void EntityUpdateStatusSprites(Entity *);
-extern s32 sub_808F700(PokemonStruct1 *pokemon);
-extern Entity *sub_80696A8(Entity *a0);
-extern int sprintf(char *, const char *, ...);
-extern const u8 gUnknown_8106EA8[]; // talkp%d
-extern const u8 gUnknown_8106EB0[]; // talk%d
-extern const struct FileArchive gDungeonFileArchive;
-
 struct UnkTalkFileStruct
 {
     const u8 *strings[10][4];
@@ -568,10 +597,6 @@ void sub_806A5B8(Entity *entity)
     }
 }
 
-extern void sub_803F580(s32);
-extern void sub_8040A84(void);
-extern void sub_806B678(void);
-
 void sub_806A6E8(Entity *entity)
 {
     EntityInfo *info = GetEntInfo(entity);
@@ -744,9 +769,6 @@ bool8 sub_806AA0C(s16 _species, bool32 _a1)
     return TRUE;
 }
 
-extern void sub_8042B20(Entity *entity);
-extern void sub_8042B0C(Entity *entity);
-
 void sub_806AA70(void)
 {
     s32 i;
@@ -866,12 +888,13 @@ void MarkLastUsedMonMove(Entity *entity, Move *move)
     }
 }
 
-extern s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id);
-extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
-
 s32 sub_806C444(s32 species, s32 level);
 s32 sub_806C488(s32 species, s32 level, s32 categoryIndex);
 s32 sub_806C4D4(s32 species, s32 level, s32 categoryIndex);
+bool8 sub_806B8CC(s16 _species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool32 _a5, u32 _a6);
+void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos);
+void ResetMonEntityData(EntityInfo *, bool8 a1);
+void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
 
 void sub_806AD3C(void)
 {
@@ -1050,8 +1073,6 @@ UNUSED static s32 sub_806B09C(UnkDungeonGlobal_unk1CD98 *unkPtr, bool8 a1)
 
 extern const DungeonPos gUnknown_80F4598[];
 
-bool8 sub_806B8CC(s16 _species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool32 _a5, u32 _a6);
-
 void sub_806B168(void)
 {
     s32 count;
@@ -1160,9 +1181,6 @@ void sub_806B168(void)
     sub_806B678();
 }
 
-extern bool8 sub_8083660(const DungeonPos *param_1);
-extern Entity *gLeaderPointer;
-
 void sub_806B404(void)
 {
     Entity *leader;
@@ -1255,10 +1273,6 @@ void sub_806B404(void)
     }
 }
 
-extern DungeonPos gUnknown_202EE0C;
-extern void sub_803F4A0(Entity *a0);
-extern bool8 sub_80860A8(u8 id);
-
 void sub_806B678(void)
 {
     s32 i;
@@ -1281,8 +1295,6 @@ void sub_806B678(void)
     u16 level;
     DungeonPos pos;
     u8 unk10;*/
-
-extern s16 sub_803D970(u32);
 
 void sub_806B6C4(void)
 {
@@ -1342,11 +1354,6 @@ void sub_806B6C4(void)
     }
 }
 
-extern Entity *sub_804550C(s16 a);
-extern Entity *sub_80453AC(s16 id);
-
-void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos);
-
 Entity* sub_806B7F8(struct unkStruct_806B7F8 *structPtr, bool8 a1)
 {
     Entity *entity;
@@ -1376,10 +1383,6 @@ Entity* sub_806B7F8(struct unkStruct_806B7F8 *structPtr, bool8 a1)
 
     return entity;
 }
-
-extern u8 gUnknown_202F32C;
-extern u8 sub_803D73C(s32 a0);
-extern bool8 IsBossFight(void);
 
 bool8 sub_806B8CC(s16 _species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool32 _a5, u32 _a6)
 {
@@ -1493,9 +1496,6 @@ bool8 sub_806B8CC(s16 _species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a
 
     return TRUE;
 }
-
-extern void DeletePokemonDungeonSprite(s32 id);
-extern void sub_80429E8(Entity *r0);
 
 // s16 species memes ughh https://decomp.me/scratch/jcfzb
 #ifdef NONMATCHING
@@ -1667,12 +1667,6 @@ NAKED void sub_806BB6C(Entity *entity, s16 _species)
 "	bx r0");
 }
 #endif // NONMATCHING
-
-extern s32 sub_803DA20(s32 param_1);
-extern void sub_80694C0(Entity *, s32, s32, u32);
-extern void AddPokemonDungeonSprite(s32 id, s16 species, DungeonPos *pos, u32);
-
-void ResetMonEntityData(EntityInfo *, bool8 a1);
 
 void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos)
 {
@@ -1890,8 +1884,6 @@ void ResetMonEntityData(EntityInfo *entInfo, bool8 setStatsToOne)
     entInfo->unkFF = 0;
 }
 
-void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
-
 void sub_806C1D8(void)
 {
     s32 i, j;
@@ -2046,13 +2038,6 @@ s32 sub_806C4D4(s32 _species, s32 level, s32 categoryIndex)
 }
 
 extern const u8 gUnknown_8106EC8[][13];
-extern s32 gUnknown_202EDCC;
-extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
-extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
-u32 EntityGetStatusSprites(Entity *entity);
-void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
-extern void sub_8042EC8(Entity *a0, s32 a1);
-void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks);
 
 static inline u16 GetUnkFlag(Entity *entity)
 {
@@ -2331,5 +2316,3 @@ void sub_806C51C(Entity *entity)
         }
     }
 }
-
-//
