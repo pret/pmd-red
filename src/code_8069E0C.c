@@ -3,6 +3,8 @@
 #include "code_803E668.h"
 #include "code_8045A00.h"
 #include "code_805D8C8.h"
+#include "code_804267C.h"
+#include "random.h"
 #include "constants/ability.h"
 #include "constants/move_id.h"
 #include "constants/status.h"
@@ -2040,6 +2042,302 @@ s32 sub_806C4D4(s32 _species, s32 level, s32 categoryIndex)
     }
 
     return defensiveCount;
+}
+
+extern const u8 gUnknown_8106EC8[][13];
+extern s32 gUnknown_202EDCC;
+extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
+extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
+u32 EntityGetStatusSprites(Entity *entity);
+void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
+extern void sub_8042EC8(Entity *a0, s32 a1);
+void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks);
+
+struct unkStruct_202ED28
+{
+    SpriteOAM sprite;
+    s16 unk8;
+    s16 unkA;
+};
+
+extern struct unkStruct_202ED28 gUnknown_202ED28[][6];
+
+static inline u16 GetUnkFlag(Entity *entity)
+{
+    if ((entity->axObj.axdata.flags & 0x2000))
+        return 0;
+    else
+        return entity->axObj.axdata.flags >> 15;
+}
+
+void sub_806C51C(Entity *entity)
+{
+    s32 x, y, y2;
+    bool8 var_3C;
+    bool8 decoySprite;
+    s32 var_34;
+    DungeonPos pos1;
+    DungeonPos posArray[4];
+    u32 statusSprites;
+    bool8 r4;
+    u8 r7;
+    u16 spriteMasks[6];
+    s32 xSprite, ySprite;
+
+    EntityInfo *entInfo = GetEntInfo(entity);
+    if (gDungeon->unk181e8.cameraTarget == entity) {
+        decoySprite = FALSE;
+    }
+    else {
+        decoySprite = gDungeon->unk181e8.hallucinating;
+    }
+
+    if (entInfo->curseClassStatus.status == STATUS_DECOY) {
+        decoySprite = TRUE;
+    }
+
+    if (entity->axObj.unk43_animId2 == entity->axObj.unk42_animId1 && entity->axObj.unk45_orientation == entity->axObj.unk44_direction1 && entity->axObj.unk47 == 0) {
+        bool8 r2 = FALSE;
+
+        if (!GetUnkFlag(entity))
+            r2 = TRUE;
+
+        if (r2) {
+            s32 r0;
+            s32 r3 = sub_806CEBC(entity);
+            entity->fill21 = 1;
+            if (entInfo->unkFE == 99) {
+                if (entity->axObj.unk43_animId2 <= 12) {
+                    s32 r2;
+                    if (entInfo->bideClassStatus.status == STATUS_BIDE) {
+                        r2 = 2;
+                    }
+                    else if (entity->fill23 < 3) {
+                        r2 = 0;
+                    }
+                    else {
+                        r2 = 1;
+                    }
+
+                    r0 = gUnknown_8106EC8[r2][entity->axObj.unk43_animId2];
+                    if (r0 == 7) {
+                        r0 = r3;
+                    }
+                }
+                else {
+                    r0 = 99;
+                }
+            }
+            else {
+                r0 = entInfo->unkFE;
+            }
+
+            if (r0 != 99) {
+                entity->axObj.unk42_animId1 = r0;
+                entity->axObj.unk44_direction1 = entity->axObj.unk45_orientation & DIRECTION_MASK;
+                entity->axObj.unk47 = 1;
+                if (entity->axObj.unk42_animId1 == 6 && ++entity->axObj.unk46 == 16) {
+                    entity->axObj.unk42_animId1 = r3;
+                }
+            }
+        }
+    }
+
+    if (entity->axObj.unk43_animId2 != entity->axObj.unk42_animId1 || entity->axObj.unk45_orientation != entity->axObj.unk44_direction1 || entity->axObj.unk47 != 0) {
+        s32 r7;
+
+        entity->axObj.unk43_animId2 = entity->axObj.unk42_animId1;
+        entity->axObj.unk45_orientation = entity->axObj.unk44_direction1;
+        entity->axObj.unk47 = 0;
+        r7 = entity->axObj.unk40_maybeAnimTimer;
+        if (sub_808DA44(entInfo->apparentID, entity->axObj.unk42_animId1)) {
+            r7 = 0;
+        }
+
+        if (!decoySprite) {
+            s32 rnd = Rand32Bit() & 3;
+            AxResInitFile(&entity->axObj.axdata, entity->axObj.spriteFile, entity->axObj.unk42_animId1, entity->axObj.unk44_direction1, r7, rnd, FALSE);
+        }
+        else {
+            OpenedFile *spriteData = GetSpriteData(MONSTER_DECOY);
+            s32 rnd = Rand32Bit() & 3;
+            AxResInitFile(&entity->axObj.axdata, spriteData, entity->axObj.unk42_animId1, entity->axObj.unk44_direction1, r7, rnd, FALSE);
+        }
+
+        if (entity->axObj.unk42_animId1 != 6) {
+            entity->axObj.unk46 = 0;
+        }
+    }
+
+    if (gDungeon->unk1356C) {
+        if (entity->axObj.unk43_animId2 != 7 || GetMovementType(entInfo->apparentID) == 2) {
+            if (entInfo->unk15C != 0) {
+                if (entInfo->unk160 == 0) {
+                    if (entInfo->unk15F != 0) {
+                        RunAxAnimationFrame(&entity->axObj);
+                        RunAxAnimationFrame(&entity->axObj);
+                        RunAxAnimationFrame(&entity->axObj);
+                    }
+                    else {
+                        RunAxAnimationFrame(&entity->axObj);
+                    }
+                }
+            }
+            else {
+                RunAxAnimationFrame(&entity->axObj);
+            }
+        }
+    }
+    else {
+        if (entInfo->frozenClassStatus.status != STATUS_FROZEN && entInfo->frozenClassStatus.status != STATUS_PETRIFIED) {
+            if (gDungeon->unk644.unk28 != 0 && gDungeon->unk1BDD4.unk1C05F == 0) {
+                RunAxAnimationFrame(&entity->axObj);
+                RunAxAnimationFrame(&entity->axObj);
+            }
+            else if ((entity->axObj.unk43_animId2 == 0 || entity->axObj.unk43_animId2 == 7) && GetEntInfo(entity)->speedStage > 1) {
+                RunAxAnimationFrame(&entity->axObj);
+            }
+            RunAxAnimationFrame(&entity->axObj);
+        }
+    }
+
+    if (entity->pixelPos.x == entity->prevPixelPos.x && entity->pixelPos.y == entity->prevPixelPos.y) {
+        if (entity->fill23 < 10) {
+            entity->fill23++;
+        }
+    }
+    else {
+        entity->fill23 = 0;
+    }
+
+    entity->prevPixelPos.x = entity->pixelPos.x;
+    entity->prevPixelPos.y = entity->pixelPos.y;
+
+    x = (entity->pixelPos.x / 256) - gDungeon->unk181e8.cameraPixelPos.x;
+    y = (((entity->pixelPos.y - entity->unk1C) - entInfo->unk174.raw) / 256) - gDungeon->unk181e8.cameraPixelPos.y;
+    y2 = (entity->pixelPos.y / 256) - gDungeon->unk181e8.cameraPixelPos.y;
+    y2 /= 2;
+    if (entInfo->unk156 == 0) {
+        y2--;
+    }
+
+    if (entInfo->unk15C == 0) {
+        var_3C = sub_8042768(entity);
+    }
+    else {
+        if (entInfo->unk15D != 0) {
+            if (gUnknown_202EDCC & 4) {
+                x++;
+            }
+            else {
+                x--;
+            }
+        }
+        var_3C = (entInfo->unk15E == 0);
+    }
+
+    pos1.x = entity->pixelPos.x / 256;
+    pos1.y = ((entity->pixelPos.y - entity->unk1C) - entInfo->unk174.raw) / 256;
+
+    sub_8005700(posArray, &entity->axObj);
+    sub_800F958(entInfo->unk98, &pos1, posArray, gDungeon->unk181e8.unk18208);
+
+    statusSprites = EntityGetStatusSprites(entity);
+    UpdateDungeonPokemonSprite(entInfo->unk98, entInfo->apparentID, statusSprites, (var_3C && entInfo->unk14C));
+
+    sub_8042EC8(entity, y2);
+    if (entInfo->unk15C == 0) {
+        if (entInfo->unkFF == 1) {
+            if (entInfo->unk174.raw <= IntToF248_2(199.999).raw) {
+                entInfo->unk174.raw += IntToF248_2(8).raw;
+                if (entInfo->unk174.raw > IntToF248_2(200).raw) {
+                    entInfo->unk174.raw = IntToF248_2(200).raw;
+                }
+            }
+        }
+        else {
+            entInfo->unk174.raw -= IntToF248_2(12).raw;
+            if (entInfo->unk174.raw < IntToF248_2(0).raw) {
+                entInfo->unk174.raw = IntToF248_2(0).raw;
+            }
+        }
+    }
+
+    if (!var_3C)
+        return;
+
+    r4 = FALSE;
+    r7 = sub_806CF54(entity);
+    spriteMasks[0] = 0xF3FF;
+    spriteMasks[1] = 0xFFFF;
+    spriteMasks[2] = 0xF3FF;
+    spriteMasks[3] = 0;
+    spriteMasks[4] = 0;
+    spriteMasks[5] = gDungeon->unk181e8.unk18208 << 10;
+    if (entInfo->isNotTeamMember && (entInfo->apparentID == MONSTER_DEOXYS_ATTACK || entInfo->apparentID == MONSTER_DEOXYS_DEFENSE || entInfo->apparentID == MONSTER_DEOXYS_SPEED)) {
+        r4 = TRUE;
+    }
+    if (entInfo->invisibleClassStatus.status == STATUS_INVISIBLE && !gDungeon->unk181e8.unk1820F) {
+        r4 = TRUE;
+    }
+    if (r4) {
+        spriteMasks[3] |= 0x400;
+    }
+
+    var_34 = 0;
+    if (!entInfo->isNotTeamMember || entInfo->curseClassStatus.status == STATUS_DECOY) {
+        var_34 = 1;
+    }
+    if (IsClientOrTeamBase(entInfo->joinedAt.id) || entInfo->monsterBehavior == 1) {
+        var_34 = 1;
+    }
+
+    if (entInfo->unkFF != 2) {
+        s32 overworldPal;
+
+        if (entInfo->frozenClassStatus.status == STATUS_PETRIFIED || entInfo->burnClassStatus.status == STATUS_PARALYSIS || entInfo->frozenClassStatus.status == STATUS_SHADOW_HOLD) {
+            x += gUnknown_202EDCC & 2;
+        }
+
+        if (decoySprite) {
+            overworldPal = GetPokemonOverworldPalette(MONSTER_DECOY, 0);
+        }
+        else {
+            overworldPal = GetPokemonOverworldPalette(entInfo->apparentID, 0);
+        }
+
+        if (entity->unk22 == 0) {
+            DoAxFrame_800558C(&entity->axObj, x, y, y2, overworldPal, spriteMasks);
+        }
+        else if (entity->unk22 == 1 && (gUnknown_202EDCC & 1)) {
+            DoAxFrame_800558C(&entity->axObj, x, y, y2, overworldPal, spriteMasks);
+        }
+    }
+
+    entInfo->pixelPos.x = (entity->pixelPos.x / 256) + entity->axObj.axdata.sub1.shadow.x;
+    entInfo->pixelPos.y = (entity->pixelPos.y / 256) + entity->axObj.axdata.sub1.shadow.y;
+
+    xSprite = entInfo->pixelPos.x - gDungeon->unk181e8.cameraPixelPos.x;
+    ySprite = entInfo->pixelPos.y - gDungeon->unk181e8.cameraPixelPos.y;
+    if (xSprite >= -32 && ySprite >= -32 && xSprite <= 271 && ySprite <= 191 && r7 != 6 && entity->unk22 == 0) {
+        struct unkStruct_202ED28 *spriteStructPtr = &gUnknown_202ED28[var_34][r7];
+        if (entInfo->unk156 != 0) {
+            u32 finalXSprite, finalYSprite;
+
+            finalXSprite = xSprite + spriteStructPtr->unk8;
+            finalXSprite &= SPRITEOAM_MASK_X;
+            spriteStructPtr->sprite.attrib2 &= ~SPRITEOAM_MASK_X;
+            spriteStructPtr->sprite.attrib2 |= finalXSprite;
+
+            finalYSprite = ySprite + spriteStructPtr->unkA;
+            finalYSprite &= SPRITEOAM_MAX_UNK6_4;
+            finalYSprite <<= SPRITEOAM_SHIFT_UNK6_4;
+            spriteStructPtr->sprite.unk6 &= 0xF;
+            spriteStructPtr->sprite.unk6 |= finalYSprite;
+
+            AddSprite(&spriteStructPtr->sprite, 0, NULL, NULL);
+        }
+    }
 }
 
 //
