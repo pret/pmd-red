@@ -359,20 +359,7 @@ s32 sub_8035D74(void)
 
 UNUSED static void sub_8035D80(unkStruct_8035D94 *item)
 {
-#ifndef NONMATCHING
-    register u32 numItem asm("r1");
-#else
-    u32 numItem;
-#endif
-
-    u32 itemIndex;
-    MainMenu1Work *preload;
-
-    preload = sMainMenu;
-    numItem = item->numItems;
-    itemIndex = item->itemIndex.itemIndex_u32;
-    preload->unk30.itemIndex.itemIndex_u32 = itemIndex;
-    preload->unk30.numItems = numItem;
+    sMainMenu->unk30 = *item;
 }
 
 unkStruct_8035D94 *sub_8035D94(void)
