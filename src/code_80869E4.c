@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800E9E4.h"
 #include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_806CD90.h"
@@ -474,71 +475,18 @@ void SpriteLookAroundEffect(Entity *entity)
     sub_803E708(15, 70);
 }
 
-#ifdef NONMATCHING // 100% match, but params for sub_8002A70 are disputed... https://decomp.me/scratch/E3iF1
-void sub_80869E4(Entity *a0, s32 a1, u8 a2, s8 a3)
+void sub_80869E4(struct Entity *entity, s32 a1, u8 a2, s32 _someDirection)
 {
-    u32 r4;
-    s32 tmp;
-    struct EntityInfo* info;
+    s32 someDirection = (s8) _someDirection;
+    struct EntityInfo *info = GetEntInfo(entity);
+    s32 direction = (s8) info->action.direction;
 
-    tmp = (s8)a3;
-
-    info = GetEntInfo(a0);
-    r4 = (s8)info->action.direction;
-    while (r4 != tmp) {
-        r4 = sub_8002A70(r4, tmp, a2);
-        info->action.direction = r4 % 8;
-        sub_806CE68(a0, info->action.direction);
+    while (direction != someDirection) {
+        direction = (s8) sub_8002A70(direction, someDirection, a2);
+        info->action.direction = direction;
+        info->action.direction &= DIRECTION_MASK;
+        sub_806CE68(entity, info->action.direction);
         sub_803E708(a1, 70);
     }
 }
-#else
-NAKED
-void sub_80869E4(Entity *a0, s32 a1, u8 a2, s8 a3)
-{
-    asm_unified(
-    "push {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tadds r7, r0, 0\n"
-    "\tmov r9, r1\n"
-    "\tlsls r2, 24\n"
-    "\tlsrs r2, 24\n"
-    "\tmov r8, r2\n"
-    "\tlsls r3, 24\n"
-    "\tasrs r6, r3, 24\n"
-    "\tldr r0, [r7, 0x70]\n"
-    "\tadds r0, 0x46\n"
-    "\tmovs r4, 0\n"
-    "\tldrsb r4, [r0, r4]\n"
-    "\tcmp r4, r6\n"
-    "\tbeq _08086A30\n"
-    "\tadds r5, r0, 0\n"
-"_08086A08:\n"
-    "\tadds r0, r4, 0\n"
-    "\tadds r1, r6, 0\n"
-    "\tmov r2, r8\n"
-    "\tbl sub_8002A70\n"
-    "\tlsls r0, 24\n"
-    "\tasrs r4, r0, 24\n"
-    "\tmovs r0, 0x7\n"
-    "\tands r0, r4\n"
-    "\tstrb r0, [r5]\n"
-    "\tldrb r1, [r5]\n"
-    "\tadds r0, r7, 0\n"
-    "\tbl sub_806CE68\n"
-    "\tmov r0, r9\n"
-    "\tmovs r1, 0x46\n"
-    "\tbl sub_803E708\n"
-    "\tcmp r4, r6\n"
-    "\tbne _08086A08\n"
-"_08086A30:\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0");
-}
-#endif // NONMATCHING
+
