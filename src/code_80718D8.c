@@ -166,7 +166,7 @@ void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
 
   info = GetEntInfo(target);
   if (info->level != 100) {
-    if (!IsClientOrTeamBase(info->joinedAt.joinedAt)) {
+    if (!IsClientOrTeamBase(info->joinedAt.id)) {
       newExp = info->exp + exp;
       if (9999998 < newExp) {
         newExp = 9999999;
@@ -309,7 +309,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
         atk[1] = info->atk[1];
         def[0] = info->def[0];
         def[1] = info->def[1];
-        if (!IsClientOrTeamBase(info->joinedAt.joinedAt)) {
+        if (!IsClientOrTeamBase(info->joinedAt.id)) {
             newLevel = info->level + level;
             if (99 < newLevel) {
                 newLevel = 100;
@@ -367,15 +367,15 @@ void sub_807218C(Entity *pokemon)
     {
         r3 = 0;
         r1 = info->id;
-        if(info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+        if(info->joinedAt.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
         {
             r1 = 0x1A4;
         }
-        else if(info->joinedAt.joinedAt == DUNGEON_RESCUE_TEAM_BASE)
+        else if(info->joinedAt.id == DUNGEON_RESCUE_TEAM_BASE)
         {
             r1 = 0x1A5;
         }
-        else if(info->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER)
+        else if(info->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER)
         {
             if(gDungeon->unk644.unk18 == 0)
                 r3 = 1;
@@ -441,7 +441,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
     {
         flag = FALSE;
         info = GetEntInfo(target);
-        if(!IsClientOrTeamBase(info->joinedAt.joinedAt))
+        if(!IsClientOrTeamBase(info->joinedAt.id))
         {
             newLevel = info->level - level;
             if(newLevel <= 0)
@@ -480,7 +480,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
     exp = info->exp;
 
 
-    if(IsClientOrTeamBase(info->joinedAt.joinedAt))
+    if(IsClientOrTeamBase(info->joinedAt.id))
         return FALSE;
 
     for(level = info->level + 1; level <= 100; level++)
@@ -530,10 +530,10 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
         gUnknown_202F324[0] = info->def[0];
         gUnknown_202F324[1] = info->def[1];
 
-        gUnknown_202F31C[0] += leveldata.gainAtt;
-        gUnknown_202F31C[1] += leveldata.gainSPAtt;
-        gUnknown_202F324[0] += leveldata.gainDef;
-        gUnknown_202F324[1] += leveldata.gainSPDef;
+        gUnknown_202F31C[0] += leveldata.gainAtt[0];
+        gUnknown_202F31C[1] += leveldata.gainAtt[1];
+        gUnknown_202F324[0] += leveldata.gainDef[0];
+        gUnknown_202F324[1] += leveldata.gainDef[1];
 
         if(gUnknown_202F31C[0] > 254)
             gUnknown_202F31C[0] = 255;
@@ -577,7 +577,7 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
     oldLevel = info->level;
 
 
-    if(IsClientOrTeamBase(info->joinedAt.joinedAt)) return FALSE;
+    if(IsClientOrTeamBase(info->joinedAt.id)) return FALSE;
 
     for(level = 1; level < info->level; level++)
     {
@@ -624,10 +624,10 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
             gUnknown_202F324[0] = info->def[0];
             gUnknown_202F324[1] = info->def[1];
 
-            gUnknown_202F31C[0] -= leveldata.gainAtt;
-            gUnknown_202F31C[1] -= leveldata.gainSPAtt;
-            gUnknown_202F324[0] -= leveldata.gainDef;
-            gUnknown_202F324[1] -= leveldata.gainSPDef;
+            gUnknown_202F31C[0] -= leveldata.gainAtt[0];
+            gUnknown_202F31C[1] -= leveldata.gainAtt[1];
+            gUnknown_202F324[0] -= leveldata.gainDef[0];
+            gUnknown_202F324[1] -= leveldata.gainDef[1];
 
             if(gUnknown_202F31C[0] <= 1)
                 gUnknown_202F31C[0] = 1;

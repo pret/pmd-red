@@ -72,7 +72,7 @@ void SetMessageArgument_2(u8 *buffer, EntityInfo *param_2, s32 colorNum)
         else
         {
             if (param_2->isNotTeamMember) {
-                if ((param_2->joinedAt.joinedAt == 0x4A) || (param_2->monsterBehavior == BEHAVIOR_RESCUE_TARGET)) {
+                if ((param_2->joinedAt.id == 0x4A) || (param_2->monsterBehavior == BEHAVIOR_RESCUE_TARGET)) {
                     CopyYellowMonsterNametoBuffer(buffer, param_2->apparentID);
                 }
                 else

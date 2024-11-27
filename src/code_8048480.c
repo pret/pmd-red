@@ -108,7 +108,7 @@ extern void LevelDownTarget(Entity *pokemon, Entity *r1, u32 r2);
 extern void sub_806F370(Entity *pokemon, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
-extern void sub_806A7E8(EntityInfo *, s32);
+extern void DisplayMsgIfNewIqSkillLearned(EntityInfo *, s32);
 extern u32 HandleDamagingMove(struct Entity *, struct Entity *, struct Move *, u32, u32);
 
 void StunSeedItemAction(Entity *, Entity *);
@@ -547,11 +547,10 @@ void CheriBerryItemAction(Entity *pokemon, Entity *target)
 void PechaBerryItemAction(Entity *pokemon, Entity *target)
 {
     EntityInfo *entInfo = GetEntInfo(target);
-    if(entInfo->burnClassStatus.status == STATUS_POISONED || entInfo->burnClassStatus.status == STATUS_BADLY_POISONED)
+    if (ENTITY_POISONED(entInfo))
         EndBurnClassStatus(pokemon, target);
     else
-        // Pointer to "But nothing happened!"
-        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F89F4);
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F89F4); // Pointer to "But nothing happened!"
 }
 
 void WarpSeedItemAction(Entity *pokemon, Entity *target)
@@ -747,7 +746,7 @@ void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
              gUnknown_810A808[targetInfo->types[0]][gummiIndex] +
              gUnknown_810A808[targetInfo->types[1]][gummiIndex],0,1);
   if (!targetInfo->isNotTeamMember) {
-    if (!IsClientOrTeamBase(targetInfo->joinedAt.joinedAt)) {
+    if (!IsClientOrTeamBase(targetInfo->joinedAt.id)) {
       baseIQ = targetInfo->IQ;
       targetInfo->IQ += gummiBoost;
       currIQ = baseIQ + gummiBoost;
@@ -774,7 +773,7 @@ void HandleGummiItemAction(Entity *pokemon, Entity *target, u8 gummiIndex)
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD648[iVar4]);
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD6E8[iVar3]);
         LoadIQSkills(target);
-        sub_806A7E8(targetInfo,baseIQ);
+        DisplayMsgIfNewIqSkillLearned(targetInfo,baseIQ);
       }
     }
   }
@@ -835,7 +834,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
                 if (entityInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
                     flag = FALSE;
                 }
-                if (IsClientOrTeamBase(entityInfo->joinedAt.joinedAt)) {
+                if (IsClientOrTeamBase(entityInfo->joinedAt.id)) {
                     flag = FALSE;
                 }
                 entityInfo->unk157 = flag;
@@ -897,7 +896,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
           if (pEVar6->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
             flag = FALSE;
           }
-          if (IsClientOrTeamBase(pEVar6->joinedAt.joinedAt)) {
+          if (IsClientOrTeamBase(pEVar6->joinedAt.id)) {
             flag = FALSE;
           }
           if (pEVar6->isTeamLeader) {
@@ -960,7 +959,7 @@ bool32 sub_8048B9C(Entity *entity,Item *param_2)
         {
             flag = FALSE;
         }
-        if(IsClientOrTeamBase(entity1Info->joinedAt.joinedAt))
+        if(IsClientOrTeamBase(entity1Info->joinedAt.id))
         {
             flag = FALSE;
         }

@@ -39,7 +39,7 @@
 
 extern u8 gUnknown_202F221;
 
-extern void sub_806BFC0(EntityInfo *, u32);
+extern void ResetMonEntityData(EntityInfo *, u32);
 
 const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00 };
 
@@ -736,10 +736,10 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
     else {
         PokemonStruct2 *recruitedMon = &gRecruitedPokemonRef->pokemon2[targetData->teamIndex];
-        if (targetData->isTeamLeader || (targetData->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk644.unk18 == 0)) {
+        if (targetData->isTeamLeader || (targetData->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk644.unk18 == 0)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9CEC[r8]);
         }
-        else if (IsClientOrTeamBase(targetData->joinedAt.joinedAt)) {
+        else if (IsClientOrTeamBase(targetData->joinedAt.id)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DAC[r8]);
         }
         else if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
@@ -786,7 +786,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                     EndCurseClassStatus(attacker, target, STATUS_DECOY);
                 }
                 sub_8078084(target);
-                sub_806BFC0(targetData, 0);
+                ResetMonEntityData(targetData, 0);
                 sub_800DBBC();
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
@@ -843,7 +843,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                     EndCurseClassStatus(attacker, target, STATUS_DECOY);
                 }
                 sub_8078084(target);
-                sub_806BFC0(targetData, 0);
+                ResetMonEntityData(targetData, 0);
                 sub_800DBBC();
                 sub_806A390(target);
                 sub_806CCB4(target, sub_806CEBC(target));
@@ -897,7 +897,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 EndCurseClassStatus(attacker, target, STATUS_DECOY);
             }
             sub_8078084(target);
-            sub_806BFC0(targetData, 0);
+            ResetMonEntityData(targetData, 0);
             sub_800DBBC();
             sub_806A390(target);
             sub_806CCB4(target, sub_806CEBC(target));

@@ -367,13 +367,13 @@ extern void LoadDungeonTilesetAssets(void);
 extern void LoadDungeonPokemonSprites(void);
 extern void ShowDungeonNameBanner(void);
 extern void sub_803EAF0(u32, u32);
-extern void sub_806A914(u8 a0, u8 a1, u8 a2);
+extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
 extern void sub_803F4A0(Entity *a0);
 extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 extern void sub_8046F84(s32 itemFlag);
 extern bool8 sub_8083C50(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
-extern void sub_806BFC0(EntityInfo *, u32);
+extern void ResetMonEntityData(EntityInfo *, u32);
 extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 extern bool8 IsKeepMoney(u8 dungeon);
 extern void sub_8042B0C(Entity *);
@@ -674,7 +674,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         sub_8049ED4();
 
         if (!r6) {
-            sub_806A914(1, 0, 0);
+            sub_806A914(TRUE, FALSE, FALSE);
         }
         else {
             sub_806CF60();
@@ -1018,7 +1018,7 @@ void sub_8043D60(void)
 
             if (monInfo->shopkeeper == TRUE)
                 unk = FALSE;
-            if (IsClientOrTeamBase(monInfo->joinedAt.joinedAt))
+            if (IsClientOrTeamBase(monInfo->joinedAt.id))
                 unk = FALSE;
             if (monInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
                 unk = FALSE;
@@ -1041,7 +1041,7 @@ void sub_8043D60(void)
             monInfo->HP = monInfo->maxHPStat;
             monInfo->belly = monInfo->maxBelly;
             gDungeon->unk644.itemHoldersIdentified = FALSE;
-            sub_806BFC0(monInfo, 0);
+            ResetMonEntityData(monInfo, 0);
             monInfo->apparentID = monInfo->id;
             monInfo->perishSongTurns = 0;
             for (i = 0; i < MAX_MON_MOVES; i++) {
@@ -1144,10 +1144,10 @@ void sub_8043FD0(void)
                 def = monStruct->offense.def[0];
                 spDef = monStruct->offense.def[1];
 
-                atk += levelData.gainAtt;
-                spAtk += levelData.gainSPAtt;
-                def += levelData.gainDef;
-                spDef += levelData.gainSPDef;
+                atk += levelData.gainAtt[0];
+                spAtk += levelData.gainAtt[1];
+                def += levelData.gainDef[0];
+                spDef += levelData.gainDef[1];
 
                 // TODO: Make 255 max define for stats
                 if (atk >= 255)     {atk = 255;}

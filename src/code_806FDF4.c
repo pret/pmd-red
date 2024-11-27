@@ -231,7 +231,7 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
         return FALSE;
     if (abs((pokemon->pos).x - (target->pos).x) >= 2 || abs((pokemon->pos).y - (target->pos).y) >= 2)
         return FALSE;
-    if (targetInfo->joinedAt.joinedAt == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
+    if (targetInfo->joinedAt.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON)
         return FALSE;
     if (targetInfo->monsterBehavior == 1)
         return FALSE;
@@ -418,7 +418,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             pokeStruct2->isTeamLeader = FALSE;
             pokeStruct2->level = param_3->level;
             pokeStruct2->IQ = 1;
-            SetDefaultIQSkills((u8 *)&(pokeStruct2->IQSkills),FALSE);
+            SetDefaultIQSkills(&pokeStruct2->IQSkills,FALSE);
             pokeStruct2->hiddenPower = param_3->hiddenPower;
             pokeStruct2->tacticIndex = 0;
             pokeStruct2->unkA = -1;
@@ -550,7 +550,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
     pokeStruct2->isTeamLeader = FALSE;
     pokeStruct2->level = local_74.level;
     pokeStruct2->IQ = 1;
-    SetDefaultIQSkills((u8 *)&(pokeStruct2->IQSkills),FALSE);
+    SetDefaultIQSkills(&pokeStruct2->IQSkills,FALSE);
     pokeStruct2->hiddenPower = local_74.hiddenPower;
     pokeStruct2->tacticIndex = 0;
     pokeStruct2->unkA = -1;

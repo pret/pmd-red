@@ -8,22 +8,16 @@
 #include "structs/rgb.h"
 #include "structs/str_position.h"
 #include "structs/str_traps.h"
+#include "structs/str_dungeon_location.h"
 #include "sprite.h"
 
 #define DUNGEON_MAX_SIZE_X 56
 #define DUNGEON_MAX_SIZE_Y 32
 #define DUNGEON_MAX_WILD_POKEMON 16
 #define DUNGEON_MAX_WILD_POKEMON_BODY_SIZE 16
-#define DUNGEON_MAX_POKEMON MAX_TEAM_MEMBERS + DUNGEON_MAX_WILD_POKEMON
+#define DUNGEON_MAX_POKEMON (MAX_TEAM_MEMBERS + DUNGEON_MAX_WILD_POKEMON)
 #define DUNGEON_MAX_TRAPS 64
 #define DUNGEON_MAX_ITEMS 64
-
-// size: 0x4
-typedef struct DungeonLocation
-{
-    /* 0x0 */ u8 id;
-    /* 0x1 */ u8 floor;
-} DungeonLocation;
 
 // size: 0x18
 typedef struct Weather
@@ -160,7 +154,7 @@ typedef struct UnkDungeonGlobal_unk1C590
 
 typedef struct UnkDungeonGlobal_unk1CD98
 {
-    s16 unk0; // species
+    u16 unk0; // species and level
     s16 unk2[2];
 } UnkDungeonGlobal_unk1CD98;
 
@@ -305,6 +299,35 @@ typedef struct unkDungeonE260
     /* 0x2 */ u16 unk2;
 } unkDungeonE260;
 
+// Size: 0x14
+typedef struct unkDungeon2F3C
+{
+    /* 0x0 */ s16 species;
+    /* 0x2 */ s16 level;
+    /* 0x4 */ u16 moves[MAX_MON_MOVES];
+    /* 0xC */ u16 unkC;
+    /* 0xE */ u8 unkE[2];
+    /* 0x10 */ u8 unk10[2];
+} unkDungeon2F3C;
+
+// Size :0x8
+typedef struct unkDungeon57CSub
+{
+    s16 unk0;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+} unkDungeon57CSub;
+
+#define UNK_DUNGEON57C_ARRAY_COUNT 8
+
+typedef struct unkDungeon57C
+{
+    unkDungeon57CSub unkArray[UNK_DUNGEON57C_ARRAY_COUNT];
+    s32 unk40;
+} unkDungeon57C;
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -335,18 +358,17 @@ typedef struct Dungeon
     u8 fillC0[0x134 - 0xC0];
     struct unkStruct_Dungeon134_sub unk134;
     /* 0x47C */ RGB colorRamp[0x100];
-    /* 0x57C */ u8 fill57C[0x5C0 - 0x57c];
+    /* 0x57C */ unkDungeon57C unk57C;
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];
     /* 0x5F4 */ u8 faintStringBuffer[80];
     unkDungeon644 unk644;
     EntityInfo unk69C[MAX_TEAM_MEMBERS];
     EntityInfo unkEBC[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
-    u8 fill2F3C[0x343C - 0x2F3C];
+    /* 0x2F3C */ unkDungeon2F3C unk2F3C[64];
     /* 0x343C */ UnkDungeonGlobal_unk1CD98 unk343C[32];
     u8 fill353C[0x363c-0x353c];
-    /* 0x363C */ u8 expYieldRankings[NUM_MONSTERS];
-    u8 fill37D9[0x37E4 - 0x37D9];
+    /* 0x363C */ u8 expYieldRankings[MONSTER_MAX];
     /* 0x37E4 */ s32 unk37E4;
     u8 fill37E8[4];
     /* 0x37EC */ u8 unk37EC;

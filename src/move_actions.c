@@ -191,7 +191,7 @@ extern void MudWaterSportEffect(u32);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_806A6E8(Entity *);
 
-extern void sub_806ABAC(Entity *, Entity *);
+extern void EndAbilityImmuneStatus(Entity *, Entity *);
 extern u8 sub_806F4A4(Entity *, u32);
 extern void sub_807DF38(Entity *pokemon, Entity *target, DungeonPos *pos, u32,
 			u8 moveType, s16);
@@ -1639,8 +1639,8 @@ bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
     if (pokeEntityData->expMultiplier == EXP_HALVED) {
         pokeEntityData->expMultiplier = EXP_REGULAR;
     }
-    sub_806ABAC(pokemon,pokemon);
-    sub_806ABAC(pokemon,target);
+    EndAbilityImmuneStatus(pokemon,pokemon);
+    EndAbilityImmuneStatus(pokemon,target);
     flag = TRUE;
   }
   return flag;
@@ -2409,7 +2409,7 @@ bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     gDungeon->unkC = 1;
     SetExpMultplier(entityInfo);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC81C);
-    sub_806ABAC(pokemon, pokemon);
+    EndAbilityImmuneStatus(pokemon, pokemon);
     return TRUE;
   }
 }
@@ -2889,7 +2889,7 @@ bool32 sub_805AD54(Entity * pokemon, Entity * target, Move *move, u32 param_4)
              && GetTreatmentBetweenMonsters(pokemon,targetEntity,FALSE,FALSE) == TREATMENT_TREAT_AS_ALLY)
         {
             EntityInfo *targetInfo = GetEntInfo(targetEntity);
-            if (targetInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET && !IsClientOrTeamBase(targetInfo->joinedAt.joinedAt)) {
+            if (targetInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET && !IsClientOrTeamBase(targetInfo->joinedAt.id)) {
                 sub_807D148(pokemon,targetEntity,2,&target->pos);
                 flag = TRUE;
                 SetExpMultplier(info);

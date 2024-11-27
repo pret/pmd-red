@@ -5,6 +5,7 @@
 #include "structs/str_dungeon.h"
 #include "structs/str_items.h"
 #include "structs/str_moves.h"
+#include "structs/str_iq_skill_flags.h"
 
 // size: 0x4
 typedef struct Offense
@@ -33,7 +34,7 @@ typedef struct PokemonStruct1
     /* 0x16 */ s16 pokeHP;
     /* 0x18 */ Offense offense;
     /* 0x1C */ u32 currExp;
-    /* 0x20 */ u32 IQSkills;
+    /* 0x20 */ IqSkillFlags IQSkills;
     /* 0x24 */ u8 tacticIndex;
     /* 0x28 */ BulkItem heldItem;
     /* 0x2C */ Move moves[MAX_MON_MOVES];
@@ -73,7 +74,7 @@ typedef struct PokemonStruct2
     /* 0x40 */ Item itemSlot; // heldItem
     /* 0x44 */ FixedPoint belly;
     /* 0x48 */ FixedPoint maxBelly;
-    /* 0x4C */ u32 IQSkills; // unk20
+    /* 0x4C */ IqSkillFlags IQSkills;
     /* 0x50 */ u8 tacticIndex;
     /* 0x54 */ HiddenPower hiddenPower;
     /* 0x58 */ u8 name[POKEMON_NAME_LENGTH]; // name (other offset)
@@ -149,10 +150,8 @@ typedef struct LevelData
 {
     /* 0x0 */ s32 expRequired;
     /* 0x4 */ u16 gainHP;
-    /* 0x6 */ u8 gainAtt;
-    /* 0x7 */ u8 gainSPAtt;
-    /* 0x8 */ u8 gainDef;
-    /* 0x9 */ u8 gainSPDef;
+    /* 0x6 */ u8 gainAtt[2];
+    /* 0x8 */ u8 gainDef[2];
     u16 fillA;
 } LevelData;
 

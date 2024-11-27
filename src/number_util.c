@@ -78,9 +78,7 @@ FixedPoint sub_8094370(FixedPoint param_1, FixedPoint param_2)
 
 FixedPoint IntToFixedPoint(s32 a)
 {
-    FixedPoint p;
-    p.unk0 = a;
-    p.unk2 = 0;
+    FixedPoint p = IntToFixedPointMacro(a);
     return p;
 }
 

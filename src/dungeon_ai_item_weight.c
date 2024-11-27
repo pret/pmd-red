@@ -250,8 +250,7 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
             }
             break;
         case ITEM_PECHA_BERRY:
-            if (pokemonInfo->burnClassStatus.status != STATUS_POISONED &&
-                pokemonInfo->burnClassStatus.status != STATUS_BADLY_POISONED)
+            if (!ENTITY_POISONED(pokemonInfo))
             {
                 return 0;
             }

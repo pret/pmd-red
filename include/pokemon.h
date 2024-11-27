@@ -60,12 +60,12 @@ u8 GetChanceAsleep(s16 index);
 u32 GetWeight(s16 index);
 u32 GetSize(s16 index);
 u8 GetFriendArea(s32 index);
-u16 GetBaseHP(s32 index);
+s32 GetBaseHP(s32 index);
 bool8 MonsterIDCanThrowItems(s16 index);
 u8 GetUnk12(s16 index);
 s16 GetPokemonEvolveFrom(s16 index);
-u16 GetBaseOffensiveStat(s32 index, u32 r1);
-u16 GetBaseDefensiveStat(s32 index, u32 r1);
+s32 GetBaseOffensiveStat(s32 index, u32 r1);
+s32 GetBaseDefensiveStat(s32 index, u32 r1);
 u8 GetPokemonType(s32 index, u32 typeIndex);
 u8 GetPokemonAbility(s16 index, u32 abilityIndex);
 s16 GetDexInternalNo(s32 index, u32 r1);
@@ -108,6 +108,11 @@ static inline bool8 PokemonFlag1Struct2(PokemonStruct2 *mon)
 }
 
 static inline bool8 PokemonFlag2(PokemonStruct1 *mon)
+{
+    return (mon->unk0 >> (FLAG_ON_TEAM - 1)) & 1;
+}
+
+static inline bool8 PokemonFlag2Struct2(PokemonStruct2 *mon)
 {
     return (mon->unk0 >> (FLAG_ON_TEAM - 1)) & 1;
 }

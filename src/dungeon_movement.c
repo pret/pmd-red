@@ -38,13 +38,13 @@ u8 GetCrossableTerrain(s16 species)
     }
 }
 
-u8 sub_807034C(s16 id, const Tile *tile)
+u8 sub_807034C(s32 id, const Tile *tile)
 {
   s32 crossableTerrain;
   u16 tileFlags;
   s32 id_s32;
 
-  id_s32 = id;
+  id_s32 = SpeciesId(id);
 
   if ((tile->monster == NULL) && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) {
       crossableTerrain = GetCrossableTerrain(id_s32);

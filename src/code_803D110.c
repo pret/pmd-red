@@ -8,13 +8,12 @@
 #include "dungeon_random.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
+#include "pokemon_3.h"
 #include "game_options.h"
 #include "constants/dungeon.h"
 
 extern void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
 extern s32 sub_80902C8(u8 dungeon);
-extern s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0);
-extern u32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
 extern bool8 sub_80848EC(void);
 extern u8 GetFloorType(void);

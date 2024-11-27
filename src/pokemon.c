@@ -79,7 +79,7 @@ void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
      pokemon.IQ = 1;
      pokemon.unkC[0].level = 0;
      pokemon.unkC[1].level = 0;
-     SetDefaultIQSkills((u8*)&pokemon.IQSkills, FALSE);
+     SetDefaultIQSkills(&pokemon.IQSkills, FALSE);
      pokemon.speciesNum = species;
      pokemon.heldItem.id = ITEM_NOTHING;
      pokemon.heldItem.quantity = 0;
@@ -136,7 +136,7 @@ void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, D
     pokemon->dungeonLocation = *location;
     pokemon->unkC[0].level = 0;
     pokemon->unkC[1].level = 0;
-    SetDefaultIQSkills((u8*)&pokemon->IQSkills, FALSE);
+    SetDefaultIQSkills(&pokemon->IQSkills, FALSE);
 
     if(moveID != NULL)
     {
@@ -180,7 +180,7 @@ void sub_808D0D8(PokemonStruct1 *pokemon)
      pokemon->currExp = 0;
      pokemon->tacticIndex = 0;
      pokemon->IQ = 1;
-     SetDefaultIQSkills((u8*)&pokemon->IQSkills, FALSE);
+     SetDefaultIQSkills(&pokemon->IQSkills, FALSE);
      sub_808E490(pokemon->moves, pokemon->speciesNum);
 }
 
@@ -218,7 +218,7 @@ void sub_808D144(PokemonStruct1 *pokemon, struct unkStruct_808D144 *r1)
     pokemon->dungeonLocation = r1->dungeonLocation;
     pokemon->unkC[0].level = 0;
     pokemon->unkC[1].level = 0;
-    SetDefaultIQSkills((u8*)&pokemon->IQSkills, FALSE);
+    SetDefaultIQSkills(&pokemon->IQSkills, FALSE);
 
     for(i = 0; i < MAX_MON_MOVES; i++)
     {

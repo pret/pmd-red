@@ -8,7 +8,7 @@ struct unkStruct_806B7F8
     s16 species;
     u8 unk2;
     u32 unk4;
-    u16 level;
+    s16 level;
     DungeonPos pos;
     u8 unk10;
 };

@@ -183,7 +183,7 @@ static void HandleIQSkillMenuAction(void)
     switch (menuAction) {
         case IQ_SKILL_MENU_SWITCH: // Switch
             PlaySound(307);
-            ToggleIQSkill((u8 *)&sIQSkillMenu->pokeStruct->IQSkills, sIQSkillMenu->iqSkillIndex);
+            ToggleIQSkill(&sIQSkillMenu->pokeStruct->IQSkills, sIQSkillMenu->iqSkillIndex);
             SetIQSkillMenuState(IQ_SKILL_MENU_STATE_MAIN);
             break;
         case IQ_SKILL_MENU_INFO: // Info

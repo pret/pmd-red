@@ -1544,7 +1544,7 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     tileMonsterInfo = GetEntInfo(tileMonster);
     if (tileMonsterInfo->isNotTeamMember
         && (tileMonsterInfo->shopkeeper != 1 && tileMonsterInfo->shopkeeper != 2)
-        && !IsClientOrTeamBase(tileMonsterInfo->joinedAt.joinedAt)
+        && !IsClientOrTeamBase(tileMonsterInfo->joinedAt.id)
         && tileMonsterInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET) {
         return FALSE;
     }
@@ -3439,7 +3439,7 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
     sub_8044F5C(0x1B, 0);
     sub_8044F5C(0x19, 0);
     if (!monInfo->isTeamLeader) {
-        if (!gDungeon->unk644.unk19 && (monInfo->joinedAt.joinedAt != DUNGEON_JOIN_LOCATION_PARTNER || gDungeon->unk644.unk18)) {
+        if (!gDungeon->unk644.unk19 && (monInfo->joinedAt.id != DUNGEON_JOIN_LOCATION_PARTNER || gDungeon->unk644.unk18)) {
             sub_8044F5C(0x34, 0);
         }
         sub_8044F5C(0x1C, 0);
@@ -3471,7 +3471,7 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
         }
     }
 
-    if (IsClientOrTeamBase(monInfo->joinedAt.joinedAt)) {
+    if (IsClientOrTeamBase(monInfo->joinedAt.id)) {
         sub_8044FF0(0x19);
         sub_8044FF0(0x3B);
         sub_8044FF0(0x1A);

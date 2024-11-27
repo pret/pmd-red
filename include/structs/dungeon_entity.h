@@ -8,6 +8,8 @@
 #include "structs/str_items.h"
 #include "structs/str_moves.h"
 #include "structs/str_position.h"
+#include "structs/str_dungeon_location.h"
+#include "structs/str_iq_skill_flags.h"
 #include "math.h"
 #include "number_util.h"
 #include "sprite.h"
@@ -26,8 +28,6 @@
 #define STAT_STAGE_SP_DEF 1
 #define STAT_STAGE_ACCURACY 0
 #define STAT_STAGE_EVASION 1
-
-#define NUM_PICKED_IQ_SKILLS 3
 
 // size: 0x8
 typedef struct unkStruct_8044CC8
@@ -55,24 +55,17 @@ typedef struct HiddenPower
     /* 0x2 */ u8 hiddenPowerType;
 } HiddenPower;
 
-// size: 0x4
-typedef struct JoinedAt
-{
-    /* 0x0 */ u8 joinedAt;
-    /* 0x1 */ u8 unk1;
-} JoinedAt;
-
 // size: 0x14
 typedef struct AITarget
 {
-    /* 0x0 */ u8 aiObjective;
-    /* 0x1 */ bool8 aiNotNextToTarget;
-    /* 0x2 */ bool8 aiTargetingEnemy;
-    /* 0x3 */ bool8 aiTurningAround;
-    /* 0x4 */ u16 aiTargetSpawnGenID;
-    /* 0x8 */ struct Entity *aiTarget;
-    /* 0xC */ u32 unkC;
-    /* 0x10 */ DungeonPos aiTargetPos;
+    /* 0x0 */ u8 aiObjective; // 0x78
+    /* 0x1 */ bool8 aiNotNextToTarget; // 0x79
+    /* 0x2 */ bool8 aiTargetingEnemy; // 0x7A
+    /* 0x3 */ bool8 aiTurningAround; // 0x7B
+    /* 0x4 */ u16 aiTargetSpawnGenID; // 0x7C
+    /* 0x8 */ struct Entity *aiTarget; // 0x80
+    /* 0xC */ u32 unkC; // 0x84
+    /* 0x10 */ DungeonPos aiTargetPos; // 0x88
 } AITarget;
 
 // size: 0x4
@@ -90,6 +83,9 @@ typedef struct BurnClassStatus
     /* 0x2 */ u8 damageCountdown;
     /* 0x3 */ u8 unk4;
 } BurnClassStatus;
+
+// Useful when checking if a mon is poisoned without having to check for Poison and Bad Poison every time.
+#define ENTITY_POISONED(entityInfo)((entityInfo->burnClassStatus.status == STATUS_POISONED || entityInfo->burnClassStatus.status == STATUS_BADLY_POISONED))
 
 // size: 0xC
 typedef struct FrozenClassStatus
@@ -235,7 +231,7 @@ typedef struct EntityInfo
     // Index 0 is Defense. Index 1 is Special Defense.
     /* 0x34 */ s24_8 defensiveMultipliers[2];
     /* 0x3C */ HiddenPower hiddenPower;
-    /* 0x40 */ JoinedAt joinedAt; // Uses the dungeon index in dungeon.h.
+    /* 0x40 */ DungeonLocation joinedAt; // Uses the dungeon index in dungeon.h.
     /* 0x44 */ ActionContainer action;
     /* 0x5C */ u8 types[2];
     /* 0x5E */ u8 abilities[2];
@@ -244,10 +240,8 @@ typedef struct EntityInfo
     /* 0x68 */ DungeonPos prevPos[NUM_PREV_POS];
     /* 0x78 */ AITarget aiTarget;
     // Bitwise flags corresponding to selected IQ skills.
-    /* 0x8C */ u8 IQSkillMenuFlags[NUM_PICKED_IQ_SKILLS]; // IQ skills selected in the IQ skills menu.
-    u8 padding8F;
-    /* 0x90 */ u8 IQSkillFlags[NUM_PICKED_IQ_SKILLS];
-    u8 padding93;
+    /* 0x8C */ IqSkillFlags IQSkillMenuFlags; // IQ skills selected in the IQ skills menu.
+    /* 0x90 */ IqSkillFlags IQSkillFlags;
     /* 0x94 */ u8 tactic;
     u8 fill95[0x98 - 0x95];
     /* 0x98 */ u32 unk98;
@@ -339,7 +333,7 @@ typedef struct EntityInfo
     /* 0x16C */ DungeonPos targetPos;
     /* 0x170 */ DungeonPos pixelPos;
     s24_8 unk174;
-    u16 abilityEffectFlags; // See enum AbilityEffectFlags
+    /* 0x178 */ u16 abilityEffectFlags; // See enum AbilityEffectFlags
     /* 0x17A */ u16 mimicMoveIDs[MAX_MON_MOVES]; // All moves that Mimic has copied (not sure on size...)
     // Previous value of targetPosition for movement, 1 and 2 moves ago.
     /* 0x184 */ Unk_Entity_x184 unk184[4];
@@ -364,9 +358,9 @@ typedef struct Entity
     /* 0x14 */ PixelPos prevPixelPos;
     s32 unk1C;
     /* 0x20 */ bool8 isVisible; // Turned off when a Pokémon faints.
-    u8 fill21;
+    u8 unk21;
     u8 unk22;
-    u8 fill23;
+    u8 unk23;
     u8 unk24;
     /* 0x25 */ u8 room;
     // The global spawn index counter starts at 10. Each Pokémon that spawns increments the counter and

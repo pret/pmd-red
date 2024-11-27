@@ -136,33 +136,6 @@ static EWRAM_DATA s32 sFloorLayout = 0;
 static EWRAM_DATA s32 sNumTilesReachableFromStairs = 0;
 static EWRAM_DATA DungeonPos sKecleonShopMiddlePos = {0};
 
-// Helper functions for terrain flags
-static inline void SetTerrainType(Tile *tile, u32 terrainType)
-{
-    tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    tile->terrainType |= terrainType;
-}
-
-static inline void SetTerrainNormal(Tile *tile)
-{
-    SetTerrainType(tile, TERRAIN_TYPE_NORMAL);
-}
-
-static inline void SetTerrainSecondary(Tile *tile)
-{
-    SetTerrainType(tile, TERRAIN_TYPE_SECONDARY);
-}
-
-static inline void SetTerrainWall(Tile *tile)
-{
-    SetTerrainType(tile, TERRAIN_TYPE_WALL);
-}
-
-static inline u32 GetTerrainType(const Tile *tile)
-{
-    return tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-}
-
 struct FixedRoomsData
 {
     u8 x;
@@ -436,7 +409,7 @@ void GenerateFloor(void)
     }
 
     if (sKecleonShopMiddlePos.x >= 0 && sKecleonShopMiddlePos.y >= 0) {
-        sub_806C330(sKecleonShopMiddlePos.x, sKecleonShopMiddlePos.y, 380, 0);
+        sub_806C330(sKecleonShopMiddlePos.x, sKecleonShopMiddlePos.y, MONSTER_KECLEON, 0);
     }
 
     if (sKecleonShopPosition.minX >= 0) {
@@ -2528,10 +2501,8 @@ static void GenerateRoomImperfections(struct GridCell grid[GRID_CELL_LEN][GRID_C
             		// from the selected starting corner and direction
             		for (v = 0; v < 10; v++) {
                         // Make sure we're still in bounds
-                        if (pt_x < grid[x][y].start.x || pt_x >= grid[x][y].end.x)
-                            break;
-                        if (pt_y < grid[x][y].start.y || pt_y >= grid[x][y].end.y)
-                            break;
+                        if (pt_x < grid[x][y].start.x || pt_x >= grid[x][y].end.x) break;
+                        if (pt_y < grid[x][y].start.y || pt_y >= grid[x][y].end.y) break;
 
                         if (GetTerrainType(GetTile(pt_x, pt_y)) == TERRAIN_TYPE_NORMAL) {
                         	// Make sure there aren't any hallways within 2 spaces from the current tile

@@ -10,19 +10,12 @@ ALIGNED(4) const char gMeetNinetalesText[] =  "Meet Ninetales.";
 ALIGNED(4) const char gAvoidCaptureText[] = "Avoid capture.";
 ALIGNED(4) const char gFinalScenarioText[] = _("Defeat the final Pokémon.");
 
-// Needed to match
-static inline s16 Self(s16 a)
-{
-    return a;
-}
-
 bool8 sub_8097504(s16 mazeIndex)
 {
     s32 uVar3;
-    s32 mazeIndex_ = Self(mazeIndex);
-    if(mazeIndex < 17)
-    {
-        switch(mazeIndex) {
+    s32 mazeIndex_ = Self_s16(mazeIndex); // Needed to match
+    if (mazeIndex < 17) {
+        switch (mazeIndex) {
             case 2:
             case 10:
             case 11:
@@ -49,8 +42,7 @@ bool8 sub_8097504(s16 mazeIndex)
                 return TRUE;
         }
     }
-    else
-    {
+    else {
         if (mazeIndex_ > 22)  return FALSE;
         if (mazeIndex_ == 22) return FALSE;
         if (mazeIndex_ == 21) return FALSE;

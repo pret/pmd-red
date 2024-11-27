@@ -76,7 +76,7 @@ TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
 ASFLAGS         := -mcpu=arm7tdmi
 
-override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
+override CC1FLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm -g
 INCLUDE_PATHS   := -I include -I tools/agbcc/include
 CPPFLAGS        := -iquote include -I tools/agbcc/include -nostdinc -undef
 

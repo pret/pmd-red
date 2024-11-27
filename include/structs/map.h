@@ -10,9 +10,11 @@
 
 enum TerrainType
 {
+    // These 3 seem to indicate the 'main' type of the terrain. See helper functions for how they're set.
     TERRAIN_TYPE_WALL = 0, // x0 When neither TERRAIN_TYPE_NORMAL nor TERRAIN_TYPE_SECONDARY are set
     TERRAIN_TYPE_NORMAL = 1 << 0, // x1
     TERRAIN_TYPE_SECONDARY = 1 << 1, // Water or lava depending on the dungeon. x2
+    // Rest seems to be flags.
     TERRAIN_TYPE_CORNER_CUTTABLE = 1 << 2, // x4 This tile can be corner-cut when walking. Seemingly only used during dungeon generation.
     TERRAIN_TYPE_NATURAL_JUNCTION = 1 << 3, // x8
     TERRAIN_TYPE_IMPASSABLE_WALL = 1 << 4, // x10
@@ -83,5 +85,33 @@ typedef struct RoomData
     u32 unk14; // top left x
     u32 unk18; // top left y
 } RoomData;
+
+// Helper functions for main terrain types.
+static inline void SetTerrainType(Tile *tile, u32 terrainType)
+{
+    tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    tile->terrainType |= terrainType;
+}
+
+static inline void SetTerrainNormal(Tile *tile)
+{
+    SetTerrainType(tile, TERRAIN_TYPE_NORMAL);
+}
+
+static inline void SetTerrainSecondary(Tile *tile)
+{
+    SetTerrainType(tile, TERRAIN_TYPE_SECONDARY);
+}
+
+static inline void SetTerrainWall(Tile *tile)
+{
+    SetTerrainType(tile, TERRAIN_TYPE_WALL);
+}
+
+static inline u32 GetTerrainType(const Tile *tile)
+{
+    return tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+}
+
 
 #endif // GUARD_MAP_H

@@ -136,7 +136,7 @@ void BuildIQSkillList(void)
         y = sub_8013800(&sIQSkillListMenu->s24.s0.input, counter);
         strncpy(gFormatBuffer_Items[1], GetIQSkillName(skillIndex), 80);
 
-        if (IsIQSkillSet((u8 *)&sIQSkillListMenu->pokeStruct->IQSkills, 1 << skillIndex))
+        if (IsIQSkillSet(&sIQSkillListMenu->pokeStruct->IQSkills, 1 << skillIndex))
             strcpy(gFormatBuffer_Items[1] - 80, sStarBullet);
         else
             strcpy(gFormatBuffer_Items[1] - 80, sUnknown_80DBE18);
