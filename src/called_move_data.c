@@ -2,300 +2,300 @@
 #include "called_move_data.h"
 #include "constants/move_id.h"
 
-extern bool8 sub_8057634(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 YawnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 NightmareMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805783C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 CharmMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 EncoreMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057974(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SuperFangMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 PainSplitMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057BC4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057C88(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SwaggerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 RockSlideMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 WhirlpoolMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057D7C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057D9C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FakeTearsMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SpiteMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SmokescreenMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057FCC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8057FF4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805805C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805816C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058270(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80582C4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80583D8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058430(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058478(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80584C0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058548(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FlatterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 WillOWispMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ReturnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FlameWheelMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 GustMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DisableMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ShadowBallMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BiteMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ThunderMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 EndeavorMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FacadeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_8058580(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BrickBreakMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058638(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80586DC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058770(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80587E8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058838(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058858(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80588B8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80588F4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058930(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058A18(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058BF0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 RockTombMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 GigaDrainMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ReversalMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SmellingSaltMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MetalSoundMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TickleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 OutrageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 LowKickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 AncientPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 RapidSpinMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ScaryFaceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058FBC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80590D4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059190(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80591E4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 LickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FissureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ExtrasensoryMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 AbsorbMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059424(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805946C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 HeadbuttMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DoubleEdgeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_8059528(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059540(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80595A0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SmogMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SacredFireMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_80595EC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80598CC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059928(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059988(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MuddyWaterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TwisterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TwineedleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_8059A2C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059AA8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059AB8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059AF8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059D00(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059D48(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059D98(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059DA4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059DB4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059DC4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059E0C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SupersonicMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TauntMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 HornDrillMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ThundershockMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ThunderWaveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BlockMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PoisonGasMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ToxicMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PoisonFangMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PoisonStingMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 TriAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A120(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A210(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A258(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A2A0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TrickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 TripleKickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MudSlapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ThiefMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A3DC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A464(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 LeerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PayDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 CurseMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805A568(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 TickleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A688(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 SuperpowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DynamicPunchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SecretPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805AC90(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AD04(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AD34(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AD54(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AE3C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AE74(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AECC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ObserverOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FeatherDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BeatUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BlastBurnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 CrushClawMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 BlazeKickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 PresentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AFA4(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B028(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B074(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B0BC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 EruptionMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 GlareMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 PoisonTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 RoarMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805B17C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 WrapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B264(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B324(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MagnitudeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 MistBallMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 DestinyBondMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B388(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B3E0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B454(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FalseSwipeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 HiddenPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 AttractMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 MimicMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B53C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FrustrationMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 LeechSeedMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B668(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B910(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B808(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A408(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DreamEaterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 LusterPurgeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 DragonRageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 FakeOutMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 HandleRegularDamagingMove(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059050(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 StunSporeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
 // Todo: move this data to some better place once the file structure is better understood
 
 // These are random
 const struct CalledMove gMetronomeCalledMoves[METRONOME_AVAILABLE_CALLED_MOVES] =
 {
-    {MOVE_IRON_TAIL, sub_8057634},
+    {MOVE_IRON_TAIL, IronTailMoveAction},
     {MOVE_YAWN, YawnMoveAction},
     {MOVE_NIGHTMARE, NightmareMoveAction},
-    {MOVE_CHARM, sub_805783C},
+    {MOVE_CHARM, CharmMoveAction},
     {MOVE_ENCORE, EncoreMoveAction},
-    {MOVE_SUPER_FANG, sub_8057974},
+    {MOVE_SUPER_FANG, SuperFangMoveAction},
     {MOVE_PAIN_SPLIT, PainSplitMoveAction},
     {MOVE_TORMENT, TormentMoveAction},
-    {MOVE_SWAGGER, sub_8057BC4},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
+    {MOVE_SWAGGER, SwaggerMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_WHIRLPOOL, WhirlpoolMoveAction},
-    {MOVE_FAKE_TEARS, sub_8057D7C},
-    {MOVE_SPITE, sub_8057D9C},
+    {MOVE_FAKE_TEARS, FakeTearsMoveAction},
+    {MOVE_SPITE, SpiteMoveAction},
     {MOVE_SMOKESCREEN, SmokescreenMoveAction},
-    {MOVE_FLATTER, sub_8057FCC},
-    {MOVE_WILL_O_WISP, sub_8057FF4},
-    {MOVE_RETURN, sub_805805C},
-    {MOVE_FLAME_WHEEL, sub_805816C},
-    {MOVE_GUST, sub_8058270},
-    {MOVE_DISABLE, sub_80582C4},
-    {MOVE_CRUNCH, sub_80583D8},
-    {MOVE_BITE, sub_8058430},
-    {MOVE_THUNDER, sub_8058478},
-    {MOVE_ENDEAVOR, sub_80584C0},
-    {MOVE_FACADE, sub_8058548},
+    {MOVE_FLATTER, FlatterMoveAction},
+    {MOVE_WILL_O_WISP, WillOWispMoveAction},
+    {MOVE_RETURN, ReturnMoveAction},
+    {MOVE_FLAME_WHEEL, FlameWheelMoveAction},
+    {MOVE_GUST, GustMoveAction},
+    {MOVE_DISABLE, DisableMoveAction},
+    {MOVE_CRUNCH, ShadowBallMoveAction},
+    {MOVE_BITE, BiteMoveAction},
+    {MOVE_THUNDER, ThunderMoveAction},
+    {MOVE_ENDEAVOR, EndeavorMoveAction},
+    {MOVE_FACADE, FacadeMoveAction},
     {MOVE_CONSTRICT, sub_8058580},
     {MOVE_BRICK_BREAK, BrickBreakMoveAction},
-    {MOVE_ROCK_TOMB, sub_8058638},
-    {MOVE_GIGA_DRAIN, sub_80586DC},
-    {MOVE_REVERSAL, sub_8058770},
-    {MOVE_SMELLINGSALT, sub_80587E8},
-    {MOVE_METAL_SOUND, sub_8058838},
-    {MOVE_TICKLE, sub_8058858},
-    {MOVE_OUTRAGE, sub_80588B8},
-    {MOVE_LOW_KICK, sub_80588F4},
-    {MOVE_ANCIENTPOWER, sub_8058930},
-    {MOVE_RAPID_SPIN, sub_8058A18},
-    {MOVE_SCARY_FACE, sub_8058BF0},
+    {MOVE_ROCK_TOMB, RockTombMoveAction},
+    {MOVE_GIGA_DRAIN, GigaDrainMoveAction},
+    {MOVE_REVERSAL, ReversalMoveAction},
+    {MOVE_SMELLINGSALT, SmellingSaltMoveAction},
+    {MOVE_METAL_SOUND, MetalSoundMoveAction},
+    {MOVE_TICKLE, TickleMoveAction},
+    {MOVE_OUTRAGE, OutrageMoveAction},
+    {MOVE_LOW_KICK, LowKickMoveAction},
+    {MOVE_ANCIENTPOWER, AncientPowerMoveAction},
+    {MOVE_RAPID_SPIN, RapidSpinMoveAction},
+    {MOVE_SCARY_FACE, ScaryFaceMoveAction},
     {MOVE_SUBMISSION, sub_8058E5C},
-    {MOVE_LICK, sub_8058FBC},
-    {MOVE_FISSURE, sub_80590D4},
-    {MOVE_EXTRASENSORY, sub_8059190},
-    {MOVE_ABSORB, sub_80591E4},
+    {MOVE_LICK, LickMoveAction},
+    {MOVE_FISSURE, FissureMoveAction},
+    {MOVE_EXTRASENSORY, ExtrasensoryMoveAction},
+    {MOVE_ABSORB, AbsorbMoveAction},
     {MOVE_SKILL_SWAP, SkillSwapMoveAction},
-    {MOVE_HEADBUTT, sub_8059424},
-    {MOVE_DOUBLE_EDGE, sub_805946C},
+    {MOVE_HEADBUTT, HeadbuttMoveAction},
+    {MOVE_DOUBLE_EDGE, DoubleEdgeMoveAction},
     {MOVE_SAND_ATTACK, sub_8059528},
-    {MOVE_SMOG, sub_8059540},
-    {MOVE_SACRED_FIRE, sub_80595A0},
+    {MOVE_SMOG, SmogMoveAction},
+    {MOVE_SACRED_FIRE, SacredFireMoveAction},
     {MOVE_SHEER_COLD, sub_80595EC},
-    {MOVE_MUDDY_WATER, sub_80598CC},
-    {MOVE_TWISTER, sub_8059928},
-    {MOVE_TWINEEDLE, sub_8059988},
+    {MOVE_MUDDY_WATER, MuddyWaterMoveAction},
+    {MOVE_TWISTER, TwisterMoveAction},
+    {MOVE_TWINEEDLE, TwineedleMoveAction},
     {MOVE_SEISMIC_TOSS, sub_8059A2C},
-    {MOVE_SUPERSONIC, sub_8059AA8},
-    {MOVE_TAUNT, sub_8059AB8},
-    {MOVE_HORN_DRILL, sub_8059AF8},
-    {MOVE_THUNDERSHOCK, sub_8059D00},
-    {MOVE_THUNDER_WAVE, sub_8059D48},
-    {MOVE_BLOCK, sub_8059D98},
-    {MOVE_POISON_GAS, sub_8059DA4},
-    {MOVE_TOXIC, sub_8059DB4},
-    {MOVE_POISON_FANG, sub_8059DC4},
-    {MOVE_POISON_STING, sub_8059E0C},
+    {MOVE_SUPERSONIC, SupersonicMoveAction},
+    {MOVE_TAUNT, TauntMoveAction},
+    {MOVE_HORN_DRILL, HornDrillMoveAction},
+    {MOVE_THUNDERSHOCK, ThundershockMoveAction},
+    {MOVE_THUNDER_WAVE, ThunderWaveMoveAction},
+    {MOVE_BLOCK, BlockMoveAction},
+    {MOVE_POISON_GAS, PoisonGasMoveAction},
+    {MOVE_TOXIC, ToxicMoveAction},
+    {MOVE_POISON_FANG, PoisonFangMoveAction},
+    {MOVE_POISON_STING, PoisonStingMoveAction},
     {MOVE_TRI_ATTACK, TriAttackMoveAction},
-    {MOVE_TRICK, sub_805A120},
-    {MOVE_TRIPLE_KICK, sub_805A210},
-    {MOVE_MUD_SLAP, sub_805A258},
-    {MOVE_THIEF, sub_805A2A0},
+    {MOVE_TRICK, TrickMoveAction},
+    {MOVE_TRIPLE_KICK, TripleKickMoveAction},
+    {MOVE_MUD_SLAP, MudSlapMoveAction},
+    {MOVE_THIEF, ThiefMoveAction},
     {MOVE_ROLE_PLAY, RolePlayMoveAction},
-    {MOVE_LEER, sub_805A3DC},
-    {MOVE_PAY_DAY, sub_805A464},
+    {MOVE_LEER, LeerMoveAction},
+    {MOVE_PAY_DAY, PayDayMoveAction},
     {MOVE_CURSE, CurseMoveAction},
     {MOVE_FRENZY_PLANT, sub_805A568},
-    {MOVE_SUPERPOWER, TickleMoveAction},
-    {MOVE_DYNAMICPUNCH, sub_805A688},
+    {MOVE_SUPERPOWER, SuperpowerMoveAction},
+    {MOVE_DYNAMICPUNCH, DynamicPunchMoveAction},
     {MOVE_KNOCK_OFF, KnockOffMoveAction},
     {MOVE_SECRET_POWER, SecretPowerMoveAction},
     {MOVE_DIZZY_PUNCH, sub_805AC90},
-    {MOVE_IMPRISON, sub_805AD04},
-    {MOVE_FEATHERDANCE, sub_805AD34},
-    {MOVE_BEAT_UP, sub_805AD54},
-    {MOVE_BLAST_BURN, sub_805AE3C},
-    {MOVE_CRUSH_CLAW, sub_805AE74},
-    {MOVE_BLAZE_KICK, sub_805AECC},
+    {MOVE_IMPRISON, ObserverOrbAction},
+    {MOVE_FEATHERDANCE, FeatherDanceMoveAction},
+    {MOVE_BEAT_UP, BeatUpMoveAction},
+    {MOVE_BLAST_BURN, BlastBurnMoveAction},
+    {MOVE_CRUSH_CLAW, CrushClawMoveAction},
+    {MOVE_BLAZE_KICK, BlazeKickMoveAction},
     {MOVE_PRESENT, PresentMoveAction},
-    {MOVE_ERUPTION, sub_805AFA4},
-    {MOVE_GLARE, sub_805B028},
-    {MOVE_POISON_TAIL, sub_805B074},
-    {MOVE_ROAR, sub_805B0BC},
+    {MOVE_ERUPTION, EruptionMoveAction},
+    {MOVE_GLARE, GlareMoveAction},
+    {MOVE_POISON_TAIL, PoisonTailMoveAction},
+    {MOVE_ROAR, RoarMoveAction},
     {MOVE_FIRE_SPIN, sub_805B17C},
     {MOVE_WRAP, WrapMoveAction},
-    {MOVE_MAGNITUDE, sub_805B264},
-    {MOVE_MIST_BALL, sub_805B324},
+    {MOVE_MAGNITUDE, MagnitudeMoveAction},
+    {MOVE_MIST_BALL, MistBallMoveAction},
     {MOVE_DESTINY_BOND, DestinyBondMoveAction},
-    {MOVE_FALSE_SWIPE, sub_805B388},
-    {MOVE_HIDDEN_POWER, sub_805B3E0},
-    {MOVE_ATTRACT, sub_805B454},
+    {MOVE_FALSE_SWIPE, FalseSwipeMoveAction},
+    {MOVE_HIDDEN_POWER, HiddenPowerMoveAction},
+    {MOVE_ATTRACT, AttractMoveAction},
     {MOVE_MIMIC, MimicMoveAction},
-    {MOVE_FRUSTRATION, sub_805B53C},
+    {MOVE_FRUSTRATION, FrustrationMoveAction},
     {MOVE_LEECH_SEED, LeechSeedMoveAction},
-    {MOVE_DREAM_EATER, sub_805B668},
-    {MOVE_LUSTER_PURGE, sub_805B910},
-    {MOVE_DRAGON_RAGE, sub_805B808},
-    {MOVE_FAKE_OUT, sub_805A408},
+    {MOVE_DREAM_EATER, DreamEaterMoveAction},
+    {MOVE_LUSTER_PURGE, LusterPurgeMoveAction},
+    {MOVE_DRAGON_RAGE, DragonRageMoveAction},
+    {MOVE_FAKE_OUT, FakeOutMoveAction},
 };
 
 // These correspond to dungeon's tileset id
 const struct CalledMove gNaturePowerCalledMoves[] =
 {
     {MOVE_SURF, HandleRegularDamagingMove},
-    {MOVE_STUN_SPORE, sub_8059050},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_SHADOW_BALL, sub_80583D8},
-    {MOVE_SHADOW_BALL, sub_80583D8},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_SHADOW_BALL, sub_80583D8},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_STUN_SPORE, sub_8059050},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_EARTHQUAKE, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_STUN_SPORE, sub_8059050},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_SHADOW_BALL, sub_80583D8},
-    {MOVE_SHADOW_BALL, sub_80583D8},
-    {MOVE_SHADOW_BALL, sub_80583D8},
-    {MOVE_STUN_SPORE, sub_8059050},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_EARTHQUAKE, HandleRegularDamagingMove},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_STUN_SPORE, sub_8059050},
-    {MOVE_STUN_SPORE, sub_8059050},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_RAZOR_LEAF, HandleRegularDamagingMove},
-    {MOVE_SHADOW_BALL, sub_80583D8},
-    {MOVE_SHADOW_BALL, sub_80583D8},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
     {MOVE_RAZOR_LEAF, HandleRegularDamagingMove},
     {MOVE_RAZOR_LEAF, HandleRegularDamagingMove},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_SHADOW_BALL, sub_80583D8},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_STUN_SPORE, sub_8059050},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_EARTHQUAKE, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_SURF, HandleRegularDamagingMove},
-    {MOVE_STUN_SPORE, sub_8059050},
-    {MOVE_STUN_SPORE, sub_8059050},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_EARTHQUAKE, HandleRegularDamagingMove},
     {MOVE_BUBBLEBEAM, sub_8058580},
-    {MOVE_SHADOW_BALL, sub_80583D8},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_STUN_SPORE, sub_8059050},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_STUN_SPORE, sub_8059050},
-    {MOVE_SHADOW_BALL, sub_80583D8},
-    {MOVE_STUN_SPORE, sub_8059050},
-    {MOVE_STUN_SPORE, sub_8059050},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
+    {MOVE_STUN_SPORE, StunSporeMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_RAZOR_LEAF, HandleRegularDamagingMove},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_ROCK_SLIDE, sub_8057C88},
+    {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_SURF, HandleRegularDamagingMove},

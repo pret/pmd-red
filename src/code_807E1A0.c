@@ -67,7 +67,7 @@ void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s16 param_4,s32 para
   }
 }
 
-void sub_807E254(Entity *pokemon,Entity *target)
+void HandleSwitcherOrb(Entity *pokemon,Entity *target)
 {
   DungeonPos pokemonPos;
   DungeonPos targetPos;

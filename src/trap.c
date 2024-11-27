@@ -75,8 +75,8 @@ void sub_804225C(Entity *, DungeonPos *, u8);
 void sub_8071DA4(Entity *);
 void sub_806A1E8(Entity *pokemon);
 u8 sub_803D6FC(void);
-extern void sub_807DF38(Entity *pokemon, Entity *target, DungeonPos *pos, u32,
-			u8 moveType, s16);
+Entity *sub_8045684(u8, DungeonPos *, u8);
+extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 
 void sub_807FC3C(DungeonPos *pos, u32 trapID, u32 param_3)
 {
@@ -213,7 +213,7 @@ void GetTrapName(u8 *buffer, u8 trapIndex)
     strcpy(buffer, gTrapNames[trapIndex]);
 }
 
-void sub_807FE9C(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
+void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
 {
     Tile *tile;
     bool8 flag1;
@@ -435,7 +435,7 @@ void HandleSpinTrap(Entity *pokemon, Entity *target)
 void HandleWarpTrap(Entity *pokemon, Entity *target)
 {
     if(target != NULL)
-        sub_807D148(pokemon, target, 0, NULL);
+        WarpTarget(pokemon, target, 0, NULL);
 }
 
 void HandleSlumberTrap(Entity *pokemon, Entity *target)
@@ -445,7 +445,7 @@ void HandleSlumberTrap(Entity *pokemon, Entity *target)
     if(target != NULL)
     {
         turns  = CalculateStatusTurns(target, gUnknown_80F4E74, TRUE);
-        sub_8075C58(pokemon, target, turns, TRUE);
+        SleepStatusTarget(pokemon, target, turns, TRUE);
     }
 }
 
@@ -463,12 +463,12 @@ void HandlePoisonTrap(Entity *pokemon, Entity *target)
 
 void HandleSelfdestructTrap(Entity *pokemon, Entity *target)
 {
-    sub_807DF38(pokemon, target, &target->pos, 1, TYPE_NONE, 0x212);
+    HandleExplosion(pokemon, target, &target->pos, 1, TYPE_NONE, 0x212);
 }
 
 void HandleExplosionTrap(Entity *pokemon, Entity *target)
 {
-    sub_807DF38(pokemon, target, &target->pos, 2, TYPE_NONE, 0x212);
+    HandleExplosion(pokemon, target, &target->pos, 2, TYPE_NONE, 0x212);
 }
 
 void HandleGrimyTrap(Entity *pokemon, Entity *target)
@@ -700,6 +700,6 @@ void HandleWhirlwindTrap(Entity *pokemon, Entity *target)
 {
     if(target)
     {
-        sub_807CD9C(pokemon, target, DungeonRandInt(NUM_DIRECTIONS));
+        BlowAwayTarget(pokemon, target, DungeonRandInt(NUM_DIRECTIONS));
     }
 }

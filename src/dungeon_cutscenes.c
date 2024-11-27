@@ -375,7 +375,6 @@ extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F878(u32, s32);
 extern void BgColorCallNullsub4(void);
-extern void DeoxysScreenFlash(void);
 extern void sub_8085EB0(void);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
@@ -400,6 +399,9 @@ extern void sub_80460F8(DungeonPos *, Item *, u8);
 extern u8 sub_8044B28(void);
 extern bool8 sub_8085B80(struct_8085B80 *);
 
+void sub_808BBA8(Entity * );
+void DeoxysScreenFlash(void);
+void sub_8086A54(Entity *);
 void ZapdosScreenFlash(s32 numFlashes);
 void ZapdosDropInEffect(Entity *);
 void SetupDeoxysFightHP(Entity *r0);

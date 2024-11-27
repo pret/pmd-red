@@ -11,7 +11,7 @@ bool8 sub_807FD84(Entity *entity);
 bool8 sub_807FE04(DungeonPos *pos, char param_2);
 bool8 sub_807FE44(DungeonPos *pos, char param_2);
 void GetTrapName(u8 *buffer, u8 trapIndex);
-void sub_807FE9C(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
+void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 void HandleMudTrap(Entity *pokemon, Entity *target);
 void HandleStickyTrap(Entity *pokemon, Entity *target);
 void HandleGrimyTrap(Entity *pokemon, Entity *target);
@@ -26,6 +26,8 @@ void HandleSelfdestructTrap(Entity *pokemon, Entity *target);
 void HandleExplosionTrap(Entity *pokemon, Entity *target);
 void HandlePPZeroTrap(Entity *pokemon, Entity *target);
 void HandleWonderTile(Entity *pokemon, Entity *target);
+void HandleSealTrap(Entity *pokemon, Entity *target);
+void HandleWhirlwindTrap(Entity *entity, Entity *target);
 
 // code_807FCD4.s
 extern void HandleSealTrap(Entity *pokemon, Entity *target);

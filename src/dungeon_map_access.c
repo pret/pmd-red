@@ -39,8 +39,6 @@ EWRAM_DATA_2 const Tile *gCurTilesetOobTile = {0};
 extern u8 sub_8043CE4(u32);
 extern void sub_80402AC(s32, s32);
 extern int sprintf(char *, const char *, ...);
-void sub_8049BB0(s32, s32);
-void sub_80498A8(s32, s32);
 
 const Tile *GetTile(s32 x, s32 y)
 {

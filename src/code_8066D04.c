@@ -177,7 +177,7 @@ void HandleGiveItemAction(Entity *param_1)
     }
     sub_806A6E8(entity);
     if (sub_80706A4(entity,&entity->pos) != 0) {
-      sub_807D148(param_1,entity,0,0);
+      WarpTarget(param_1,entity,0,0);
     }
     if (!info2->isTeamLeader) {
       info2->flags = info2->flags | MOVEMENT_FLAG_UNK_14;
@@ -218,7 +218,7 @@ void HandleTakeItemAction(Entity *param_1)
       LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80F8D7C);
       sub_806A6E8(entity);
       if (sub_80706A4(entity,&entity->pos) != 0) {
-        sub_807D148(param_1,entity,0,0);
+        WarpTarget(param_1,entity,0,0);
       }
       if (!info->isTeamLeader) {
         info->flags |= MOVEMENT_FLAG_UNK_14;
@@ -262,7 +262,7 @@ void sub_8066BD4(Entity *param_1)
     PlaySoundEffect(0x14d);
     LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80F8DB4);
     if (sub_80706A4(entity,&entity->pos) != 0) {
-      sub_807D148(param_1,entity,0,0);
+      WarpTarget(param_1,entity,0,0);
     }
     if (!info->isTeamLeader) {
       info->flags = info->flags | MOVEMENT_FLAG_UNK_14;

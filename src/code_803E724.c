@@ -68,8 +68,6 @@ extern void sub_8083D44(void);
 extern void sub_8040A84(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
-extern void sub_804A1F0(s32 a0, s32 a1);
-extern void sub_804A49C(s32 a0, s32 a1);
 extern void sub_80402AC(s32, s32);
 
 void sub_803EC94(void);

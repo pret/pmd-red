@@ -68,8 +68,7 @@ extern void sub_8083D30(void);
 extern void sub_8083D08(void);
 extern void sub_806A6E8(Entity *);
 extern bool8 sub_8047084(s32 itemFlag);
-extern void sub_807FE9C(Entity *pokemon, DungeonPos *pos, int param_3,
-			char param_4);
+extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 extern void sub_8045DB4(DungeonPos *, u32);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
@@ -85,12 +84,10 @@ void sub_8075680(u32);
 void sub_8094C88(void);
 void sub_8040A84(void);
 void sub_8047158(void);
-void sub_804AA60(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 void sub_8044C10(u8 a0);
 u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
-void sub_8044C50(u16 a0);
 static void TryCreateModeArrows(Entity *leader);
 bool8 sub_8094C48(void);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
@@ -215,7 +212,7 @@ void DungeonHandlePlayerInput(void)
         }
 
         frames = 0;
-        sub_8044C50(0);
+        sub_8044C50(ACTION_NOTHING);
         sShowThreeArrows1 = FALSE;
         sShowThreeArrows2 = FALSE;
 
@@ -247,7 +244,7 @@ void DungeonHandlePlayerInput(void)
             }
 
             if (gRealInputs.held & A_BUTTON && gRealInputs.held & B_BUTTON && FixedPointToInt(leaderInfo->belly) != 0) {
-                sub_8044C50(1);
+                sub_8044C50(ACTION_PASS_TURN);
                 gDungeon->unk644.unk2F = 1;
                 break;
             }
@@ -258,14 +255,14 @@ void DungeonHandlePlayerInput(void)
             if (gRealInputs.pressed & A_BUTTON) {
                 if (gRealInputs.held & B_BUTTON) {
                     if (FixedPointToInt(leaderInfo->belly) != 0) {
-                        sub_8044C50(1);
+                        sub_8044C50(ACTION_PASS_TURN);
                         gDungeon->unk644.unk2F = 1;
                         break;
                     }
                 }
                 else if (ShouldMonsterRunAwayAndShowEffect(leader, TRUE)) {
                     LogMessageByIdWithPopupCheckUser(leader, gUnknown_80FD4B0);
-                    sub_8044C50(1);
+                    sub_8044C50(ACTION_PASS_TURN);
                     gDungeon->unk644.unk2F = 1;
                     break;
                 }
@@ -415,7 +412,7 @@ void DungeonHandlePlayerInput(void)
                 s32 i;
                 for (i = 0; i < INVENTORY_SIZE; i++) {
                     if (ItemExists(&gTeamInventoryRef->teamItems[i]) && ItemSet(&gTeamInventoryRef->teamItems[i])) {
-                        sub_8044C50(11);
+                        sub_8044C50(ACTION_THROW_ITEM_PLAYER);
                         leaderInfo->action.unk4[0].actionUseIndex = i +1;
                         leaderInfo->action.unk4[0].lastItemThrowPosition.x = 0;
                         leaderInfo->action.unk4[0].lastItemThrowPosition.y = 0;
@@ -531,11 +528,11 @@ void DungeonHandlePlayerInput(void)
                             if (immobilizedMsg != NULL) {
                                 LogMessageByIdWithPopupCheckUser(leader, immobilizedMsg);
                             }
-                            sub_8044C50(1);
+                            sub_8044C50(ACTION_PASS_TURN);
                             gDungeon->unk644.unk2F = 1;
                         }
                         else {
-                            sub_8044C50(2);
+                            sub_8044C50(ACTION_WALK);
                             if ((gRealInputs.held & B_BUTTON || bPress) && FixedPointToInt(leaderInfo->belly) != 0) {
                                 if (GetEntInfo(leader)->cringeClassStatus.status != STATUS_CONFUSED) {
                                     gDungeon->unk644.unk28 = 1;
@@ -565,7 +562,7 @@ void DungeonHandlePlayerInput(void)
             HandleTalkFieldAction(leader);
             if (sub_8044B28())
                 break;
-            sub_8044C50(0);
+            sub_8044C50(ACTION_NOTHING);
         }
         else if ((r6.a0_8) == 0) {
             gDungeon->unk644.unk29 = 0;
@@ -1632,7 +1629,7 @@ void sub_805EE30(void)
                     break;
             }
             if (!r7) {
-                sub_807FE9C(leader, &leader->pos, 0, 1);
+                HandleTrap(leader, &leader->pos, 0, 1);
             }
         }
         break;
