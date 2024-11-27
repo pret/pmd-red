@@ -75,7 +75,7 @@ extern void WrapTarget(Entity *, Entity *);
 
 // TODO having matching issues when this isn't s32..  (move_effects_target.h)
 extern void SqueezedStatusTarget(Entity *, Entity *, s32, bool32);
-extern void sub_8075C58(Entity *, Entity *, s32, s32);
+extern void SleepStatusTarget(Entity *, Entity *, s32, s32);
 
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern bool8 MoveRequiresCharging(Entity* pokemon,u16 moveID);
@@ -678,12 +678,12 @@ bool8 sub_805BA44(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     return TRUE;
 }
 
-bool8 TakeawayMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+bool8 ThiefAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    EntityInfo *iVar2;
-    EntityInfo *iVar3;
-    EntityInfo *iVar5;
-    EntityInfo *iVar6;
+    EntityInfo *pokemonInfo1;
+    EntityInfo *pokemonInfo2;
+    EntityInfo *targetInfo1;
+    EntityInfo *targetInfo2;
     bool8 flag;
     Item *pokeItem;
     Item *targetItem;
@@ -692,10 +692,10 @@ bool8 TakeawayMoveAction(Entity * pokemon, Entity * target, Move *move, s32 para
     if (HandleDamagingMove(pokemon,target,move,0x100,param_4) != 0) {
         flag = TRUE;
         if (sub_805727C(pokemon,target, 0) != 0) {
-            iVar2 = GetEntInfo(pokemon);
-            iVar3 = GetEntInfo(pokemon);
-            iVar5 = GetEntInfo(target);
-            iVar6 = GetEntInfo(target);
+            pokemonInfo1 = GetEntInfo(pokemon);
+            pokemonInfo2 = GetEntInfo(pokemon);
+            targetInfo1 = GetEntInfo(target);
+            targetInfo2 = GetEntInfo(target);
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
             if (HasAbility(target, ABILITY_STICKY_HOLD)) {
@@ -706,8 +706,8 @@ bool8 TakeawayMoveAction(Entity * pokemon, Entity * target, Move *move, s32 para
                 return TRUE;
             }
             else {
-                pokeItem = &iVar2->heldItem;
-                targetItem = &iVar5->heldItem;
+                pokeItem = &pokemonInfo1->heldItem;
+                targetItem = &targetInfo1->heldItem;
                 if ((pokeItem->flags & ITEM_FLAG_EXISTS) != 0) {
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC654); // $m0 has an item already!
                     return TRUE;
@@ -717,11 +717,11 @@ bool8 TakeawayMoveAction(Entity * pokemon, Entity * target, Move *move, s32 para
                     return TRUE;
                 }
                 else {
-                    iVar3->heldItem = iVar6->heldItem;
+                    pokemonInfo2->heldItem = targetInfo2->heldItem;
                     ZeroOutItem(targetItem);
                     sub_806A6E8(pokemon);
                     sub_806A6E8(target);
-                    SetExpMultplier(iVar3);
+                    SetExpMultplier(pokemonInfo2);
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC614); // Got $m1's item!
                 }
             }
@@ -745,7 +745,7 @@ bool8 SwitcherOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param
 
 bool8 StayawayOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    sub_807D148(pokemon, target, 1, NULL);
+    WarpTarget(pokemon, target, 1, NULL);
     return TRUE;
 }
 
@@ -787,9 +787,9 @@ bool8 CleanseOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_
     return isItemCleaned;
 }
 
-bool8 SiestaMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+bool8 SlumberOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    sub_8075C58(pokemon,target,CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
+    SleepStatusTarget(pokemon,target,CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
     return TRUE;
 }
 
@@ -994,7 +994,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 param_
     return foundTrap;
 }
 
-bool8 sub_805C080(Entity * pokemon, Entity *target, Move *move, s32 param_4)
+bool8 RollcallOrbAction(Entity * pokemon, Entity *target, Move *move, s32 param_4)
 {
     Entity **possibleTargets;
     s32 numPossibleTargets;
@@ -1015,7 +1015,7 @@ bool8 sub_805C080(Entity * pokemon, Entity *target, Move *move, s32 param_4)
         targetEntity = possibleTargets[index];
         if (((EntityExists(targetEntity)) && (pokemon != targetEntity)) &&
             (GetTreatmentBetweenMonsters(pokemon,targetEntity,TRUE,FALSE) == TREATMENT_TREAT_AS_ALLY)) {
-            sub_807D148(pokemon,targetEntity,2,&pokemon->pos);
+            WarpTarget(pokemon,targetEntity,2,&pokemon->pos);
             foundTarget = TRUE;
         }
     }

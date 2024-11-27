@@ -1188,7 +1188,7 @@ void EndSleepClassStatus(Entity * pokemon, Entity * target, bool8 param_3, bool8
         case STATUS_YAWNING:
             if (param_3) {
                 entityInfo->sleepClassStatus.status = STATUS_NONE;
-                sub_8075C58(pokemon,target,CalculateStatusTurns(target, gUnknown_80F4F2C, TRUE) + 1, TRUE);
+                SleepStatusTarget(pokemon,target,CalculateStatusTurns(target, gUnknown_80F4F2C, TRUE) + 1, TRUE);
                 return;
             }
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FA734);

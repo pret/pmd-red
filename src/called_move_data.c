@@ -22,7 +22,7 @@ extern bool8 ReturnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 p
 extern bool8 FlameWheelMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 GustMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 DisableMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 CrunchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ShadowBallMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BiteMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 ThunderMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 EndeavorMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -43,7 +43,7 @@ extern bool8 ScaryFaceMoveAction(Entity *pokemon, Entity *target, Move *move, s3
 extern bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 LickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 FissureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059190(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ExtrasensoryMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 AbsorbMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 HeadbuttMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -70,7 +70,7 @@ extern bool8 TriAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s3
 extern bool8 TrickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 TripleKickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 MudSlapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A2A0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ThiefMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 LeerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 PayDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -81,7 +81,7 @@ extern bool8 DynamicPunchMoveAction(Entity *pokemon, Entity *target, Move *move,
 extern bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 SecretPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 sub_805AC90(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AD04(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+extern bool8 ObserverOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 FeatherDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BeatUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 BlastBurnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -135,7 +135,7 @@ const struct CalledMove gMetronomeCalledMoves[METRONOME_AVAILABLE_CALLED_MOVES] 
     {MOVE_FLAME_WHEEL, FlameWheelMoveAction},
     {MOVE_GUST, GustMoveAction},
     {MOVE_DISABLE, DisableMoveAction},
-    {MOVE_CRUNCH, CrunchMoveAction},
+    {MOVE_CRUNCH, ShadowBallMoveAction},
     {MOVE_BITE, BiteMoveAction},
     {MOVE_THUNDER, ThunderMoveAction},
     {MOVE_ENDEAVOR, EndeavorMoveAction},
@@ -156,7 +156,7 @@ const struct CalledMove gMetronomeCalledMoves[METRONOME_AVAILABLE_CALLED_MOVES] 
     {MOVE_SUBMISSION, sub_8058E5C},
     {MOVE_LICK, LickMoveAction},
     {MOVE_FISSURE, FissureMoveAction},
-    {MOVE_EXTRASENSORY, sub_8059190},
+    {MOVE_EXTRASENSORY, ExtrasensoryMoveAction},
     {MOVE_ABSORB, AbsorbMoveAction},
     {MOVE_SKILL_SWAP, SkillSwapMoveAction},
     {MOVE_HEADBUTT, HeadbuttMoveAction},
@@ -183,7 +183,7 @@ const struct CalledMove gMetronomeCalledMoves[METRONOME_AVAILABLE_CALLED_MOVES] 
     {MOVE_TRICK, TrickMoveAction},
     {MOVE_TRIPLE_KICK, TripleKickMoveAction},
     {MOVE_MUD_SLAP, MudSlapMoveAction},
-    {MOVE_THIEF, sub_805A2A0},
+    {MOVE_THIEF, ThiefMoveAction},
     {MOVE_ROLE_PLAY, RolePlayMoveAction},
     {MOVE_LEER, LeerMoveAction},
     {MOVE_PAY_DAY, PayDayMoveAction},
@@ -194,7 +194,7 @@ const struct CalledMove gMetronomeCalledMoves[METRONOME_AVAILABLE_CALLED_MOVES] 
     {MOVE_KNOCK_OFF, KnockOffMoveAction},
     {MOVE_SECRET_POWER, SecretPowerMoveAction},
     {MOVE_DIZZY_PUNCH, sub_805AC90},
-    {MOVE_IMPRISON, sub_805AD04},
+    {MOVE_IMPRISON, ObserverOrbAction},
     {MOVE_FEATHERDANCE, FeatherDanceMoveAction},
     {MOVE_BEAT_UP, BeatUpMoveAction},
     {MOVE_BLAST_BURN, BlastBurnMoveAction},
@@ -228,11 +228,11 @@ const struct CalledMove gNaturePowerCalledMoves[] =
     {MOVE_SURF, HandleRegularDamagingMove},
     {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_STUN_SPORE, StunSporeMoveAction},
@@ -242,9 +242,9 @@ const struct CalledMove gNaturePowerCalledMoves[] =
     {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
     {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_EARTHQUAKE, HandleRegularDamagingMove},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
@@ -255,14 +255,14 @@ const struct CalledMove gNaturePowerCalledMoves[] =
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_RAZOR_LEAF, HandleRegularDamagingMove},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
     {MOVE_RAZOR_LEAF, HandleRegularDamagingMove},
     {MOVE_RAZOR_LEAF, HandleRegularDamagingMove},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
@@ -279,14 +279,14 @@ const struct CalledMove gNaturePowerCalledMoves[] =
     {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_EARTHQUAKE, HandleRegularDamagingMove},
     {MOVE_BUBBLEBEAM, sub_8058580},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_SWIFT, HandleRegularDamagingMove},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},
     {MOVE_STUN_SPORE, StunSporeMoveAction},
-    {MOVE_SHADOW_BALL, CrunchMoveAction},
+    {MOVE_SHADOW_BALL, ShadowBallMoveAction},
     {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_STUN_SPORE, StunSporeMoveAction},
     {MOVE_ROCK_SLIDE, RockSlideMoveAction},

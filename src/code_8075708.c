@@ -105,7 +105,7 @@ void sub_8075708(Entity *entity)
             }
         _ret:
             if (!bVar2) {
-                sub_807FE9C(entity, &entity->pos, 0, 1);
+                HandleTrap(entity, &entity->pos, 0, 1);
             }
             break;
         case ENTITY_ITEM:

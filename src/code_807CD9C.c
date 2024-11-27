@@ -168,7 +168,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
             }
             sub_806A5B8(target);
             if (sub_80706A4(target,&target->pos)) {
-                sub_807D148(target,target,0,0);
+                WarpTarget(target,target,0,0);
             }
             if (!EntityExists(target)) {
                 return;
@@ -239,7 +239,7 @@ _0807D11E:
     sub_803E46C(0x1a);
 }
 
-void sub_807D148(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
+void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
 {
     EntityInfo *info;
     u32 direction;
@@ -1073,7 +1073,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
     
     sub_806A5B8(target);
     if(sub_80706A4(target, &target->pos))
-        sub_807D148(target, target, 0, 0);
+        WarpTarget(target, target, 0, 0);
     if(EntityExists(target))
     {
         sub_806CE68(target, 8);
@@ -1253,7 +1253,7 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target) {
 		if (EntityExists(entity)) {
 			sub_806A5B8(entity);
 			if ((EntityExists(entity)) && (sub_80706A4(entity,&entity->pos))) {
-				sub_807D148(entity,entity,0,0);
+				WarpTarget(entity,entity,0,0);
 			}
 		}
 	}

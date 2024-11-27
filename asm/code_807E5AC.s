@@ -1034,7 +1034,7 @@ _0807EEA0:
 	adds r1, r5, 0
 	movs r2, 0x3
 	adds r3, r6, 0
-	bl sub_807D148
+	bl WarpTarget 
 	b _0807EE72
 _0807EEAE:
 	movs r6, 0
@@ -2301,7 +2301,7 @@ _0807F8BE:
 	mov r1, r8
 	movs r2, 0
 	movs r3, 0
-	bl sub_807D148
+	bl WarpTarget 
 	b _0807F8FA
 	.align 2, 0
 _0807F8D0: .4byte gAdjacentTileOffsets

@@ -297,8 +297,8 @@ bool8 sub_8072CF4(Entity *entity)
         case ACTION_REGULAR_ATTACK:
             sub_8067904(entity, MOVE_REGULAR_ATTACK);
             break;
-        case 0x25:
-            sub_807FE9C(entity,&entity->pos,0,0);
+        case ACTION_STEPPED_ON_TRAP:
+            HandleTrap(entity,&entity->pos,0,0);
             break;
         case ACTION_PICK_UP_AI:
             HandlePickUpAIAction(entity);
@@ -360,7 +360,7 @@ bool8 sub_8072CF4(Entity *entity)
                 sub_8041888(0);
                 if (((EntityExists(entity)) && (!info->aiAllySkip)) && (!bVar14)) {
                     if (sub_80706A4(entity,&entity->pos) != '\0') {
-                        sub_807D148(entity,entity,0,0);
+                        WarpTarget(entity,entity,0,0);
                     }
                     sub_8074094(entity);
                     sub_8071DA4(entity);

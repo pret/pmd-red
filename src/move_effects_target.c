@@ -192,7 +192,7 @@ u8 sub_8075BF4(Entity * pokemon, s32 sleepClassStatusTurns)
   return uVar4;
 }
 
-void sub_8075C58(Entity * pokemon, Entity * target, s32 turns, u8 displayMessage)
+void SleepStatusTarget(Entity * pokemon, Entity * target, s32 turns, u8 displayMessage)
 {
   u8 sleep;
   u8 cVar2;

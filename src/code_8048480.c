@@ -473,7 +473,7 @@ UNUSED void nullsub_205(void) { }
 
 void SleepSeedItemAction(Entity *pokemon, Entity *target)
 {
-    sub_8075C58(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
+    SleepStatusTarget(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
 }
 
 void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4)
@@ -555,7 +555,7 @@ void PechaBerryItemAction(Entity *pokemon, Entity *target)
 
 void WarpSeedItemAction(Entity *pokemon, Entity *target)
 {
-    sub_807D148(pokemon, target, 0, NULL);
+    WarpTarget(pokemon, target, 0, NULL);
 }
 
 void ChestoBerryItemAction(Entity *pokemon, Entity *target)

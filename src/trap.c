@@ -213,7 +213,7 @@ void GetTrapName(u8 *buffer, u8 trapIndex)
     strcpy(buffer, gTrapNames[trapIndex]);
 }
 
-void sub_807FE9C(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
+void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
 {
     Tile *tile;
     bool8 flag1;
@@ -435,7 +435,7 @@ void HandleSpinTrap(Entity *pokemon, Entity *target)
 void HandleWarpTrap(Entity *pokemon, Entity *target)
 {
     if(target != NULL)
-        sub_807D148(pokemon, target, 0, NULL);
+        WarpTarget(pokemon, target, 0, NULL);
 }
 
 void HandleSlumberTrap(Entity *pokemon, Entity *target)
@@ -445,7 +445,7 @@ void HandleSlumberTrap(Entity *pokemon, Entity *target)
     if(target != NULL)
     {
         turns  = CalculateStatusTurns(target, gUnknown_80F4E74, TRUE);
-        sub_8075C58(pokemon, target, turns, TRUE);
+        SleepStatusTarget(pokemon, target, turns, TRUE);
     }
 }
 

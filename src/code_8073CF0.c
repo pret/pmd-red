@@ -45,7 +45,7 @@ extern bool8 sub_80461C8(DungeonPos *, u32);
 extern void sub_805229C(void);
 extern void sub_807E8F0(Entity *);
 extern void sub_80444F4(Entity *pokemon);
-extern void sub_807D148(Entity *pokemon, Entity *r1, u32 r2, DungeonPos *r3);
+extern void WarpTarget(Entity *pokemon, Entity *r1, u32 r2, DungeonPos *r3);
 extern void sub_80420B8(Entity *pokemon);
 extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);
@@ -300,7 +300,7 @@ void sub_8074094(Entity *entity)
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            sub_807D148(entity, entity, 0, NULL);
+            WarpTarget(entity, entity, 0, NULL);
             if (entityInfo->isTeamLeader) {
                 gDungeon->unk1 = 0;
                 gDungeon->unk5C0 = -1;
@@ -1031,7 +1031,7 @@ bool8 UseAttack(Entity *a0)
 
             sub_806A5B8(mon);
             if (sub_80706A4(mon, &mon->pos)) {
-                sub_807D148(mon, mon, 0, NULL);
+                WarpTarget(mon, mon, 0, NULL);
             }
         }
     }

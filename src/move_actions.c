@@ -309,7 +309,7 @@ bool8 YawnMoveAction(Entity * pokemon, Entity *target, Move *move, s32 param_4)
 // NOTE: Is there a better name for this?
 bool8 BasicSleepMoveAction(Entity * pokemon, Entity *target, Move *move, s32 param_4)
 {
-    sub_8075C58(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
+    SleepStatusTarget(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
     return TRUE;
 }
 
@@ -917,7 +917,7 @@ bool8 Bide2MoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   return local_18;
 }
 
-bool8 CrunchMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
+bool8 ShadowBallMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
 
@@ -1084,8 +1084,6 @@ bool8 GigaDrainMoveAction(Entity * pokemon, Entity * target, Move * move, u32 pa
   return flag;
 }
 
-
-// NOTE: almost the same as sub_8058D44 and sub_805AFA4 in status_actions.c
 bool8 ReversalMoveAction(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 {
     s32 index;
@@ -1204,7 +1202,7 @@ bool8 SynthesisMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param
     return TRUE;
 }
 
-bool8 sub_8058A08(Entity *pokemon, Entity *target, Move *move, u32 param_4)
+bool8 AgilityMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     RaiseMovementSpeedTarget(pokemon, target, 0, TRUE);
     return TRUE;
@@ -1370,8 +1368,6 @@ bool8 UproarMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     return TRUE;
 }
 
-
-// NOTE: same as sub_8058770
 bool8 WaterSpoutMoveAction(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 {
     s32 index;
@@ -1427,7 +1423,7 @@ bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   bool8 flag;
 
   flag = FALSE;
-  if ((HandleDamagingMove(pokemon, target, move, 0x80 << 1, param_4) != 0) && (EntityExists(pokemon))) {
+  if ((HandleDamagingMove(pokemon, target, move, 0x100, param_4) != 0) && (EntityExists(pokemon))) {
     iVar2 = GetEntInfo(pokemon)->maxHPStat;
     if (iVar2 < 0) {
       iVar2 = iVar2 + 7;
@@ -1566,7 +1562,7 @@ bool8 FissureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
   return flag;
 }
 
-bool8 sub_8059190(Entity *pokemon, Entity *target, Move *move, u32 param_4)
+bool8 ExtrasensoryMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
 
@@ -2071,7 +2067,7 @@ bool8 sub_8059CD8(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
 bool8 WarpMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-    sub_807D148(pokemon, target, 0, NULL);
+    WarpTarget(pokemon, target, 0, NULL);
     return TRUE;
 }
 
@@ -2360,9 +2356,9 @@ bool8 MudSlapMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4
   return flag;
 }
 
-bool8 sub_805A2A0(Entity *pokemon, Entity *target, Move *move, u32 param_4)
+bool8 ThiefMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-    return TakeawayMoveAction(pokemon, target, move, param_4);
+    return ThiefAction(pokemon, target, move, param_4);
 }
 
 bool8 AmnesiaMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
@@ -2630,7 +2626,7 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
             sub_805A7D4(pokemon,target,&heldItem,&pos);
             if (sub_80706A4(target, &target->pos) != 0)
             {
-                sub_807D148(pokemon, target, 0, NULL);
+                WarpTarget(pokemon, target, 0, NULL);
             }
             return TRUE;
         }
@@ -2748,7 +2744,7 @@ _0805AA5E:
       sub_804535C(target, NULL);
       pos = r9;
       if (sub_80706A4(target, pos)) {
-        sub_807D148(pokemon,target,0,0);
+        WarpTarget(pokemon,target,0,0);
       }
       if (GetEntInfo(target)->isTeamLeader) {
         sub_804AC20(r9);
@@ -2805,7 +2801,7 @@ bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, Move *move, u32 p
                 PoisonedStatusTarget(pokemon,target,FALSE);
                 break;
             case 1:
-                sub_8075C58(pokemon,target,CalculateStatusTurns(target,gUnknown_80F4E74,TRUE),FALSE);
+                SleepStatusTarget(pokemon,target,CalculateStatusTurns(target,gUnknown_80F4E74,TRUE),FALSE);
                 break;
             case 2:
                 LowerMovementSpeedTarget(pokemon,target,1,FALSE);
@@ -2857,7 +2853,7 @@ bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
     return TRUE;
 }
 
-bool8 sub_805AD04(Entity *pokemon, Entity *target, Move *move, u32 param_4)
+bool8 ObserverOrbAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     PausedStatusTarget(pokemon, target, 1, CalculateStatusTurns(target, &gUnknown_80F4EE0, TRUE), TRUE);
     return TRUE;
@@ -2894,7 +2890,7 @@ bool32 BeatUpMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param
         {
             EntityInfo *targetInfo = GetEntInfo(targetEntity);
             if (targetInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET && !IsClientOrTeamBase(targetInfo->joinedAt.id)) {
-                sub_807D148(pokemon,targetEntity,2,&target->pos);
+                WarpTarget(pokemon,targetEntity,2,&target->pos);
                 flag = TRUE;
                 SetExpMultplier(info);
             }

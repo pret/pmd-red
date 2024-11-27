@@ -68,8 +68,7 @@ extern void sub_8083D30(void);
 extern void sub_8083D08(void);
 extern void sub_806A6E8(Entity *);
 extern bool8 sub_8047084(s32 itemFlag);
-extern void sub_807FE9C(Entity *pokemon, DungeonPos *pos, int param_3,
-			char param_4);
+extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 extern void sub_8045DB4(DungeonPos *, u32);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
@@ -1630,7 +1629,7 @@ void sub_805EE30(void)
                     break;
             }
             if (!r7) {
-                sub_807FE9C(leader, &leader->pos, 0, 1);
+                HandleTrap(leader, &leader->pos, 0, 1);
             }
         }
         break;
