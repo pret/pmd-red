@@ -279,63 +279,46 @@ void HandleUseItemAction(Entity *param_1)
   GetEntInfo(entity)->useHeldItem = TRUE;
 }
 
-void HandlePlaceItemAction(Entity *param_1)
+void HandlePlaceItemAction(Entity *entity)
 {
-    Item *item;
-    const Tile *tile;
-    EntityInfo *info;
-#ifndef NONMATCHING
-    register Entity *entity asm("r4");
-#else
-    Entity *entity;
-#endif
+    EntityInfo *info = GetEntInfo(entity);
+    Item *item = sub_8044D90(entity,0,4);
 
-    entity = param_1;
-
-    info = GetEntInfo(entity);
-    item = sub_8044D90(entity,0,4);
     sub_8045BF8(gFormatBuffer_Items[0],item);
     if (info->action.unk4[0].actionUseIndex == 0x80) {
         LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8DE0);
     }
-    else if ((info->action.unk4[0].actionUseIndex < 0x15) && ((item->flags & (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) == (ITEM_FLAG_STICKY | ITEM_FLAG_SET))) {
+    else if (info->action.unk4[0].actionUseIndex < 0x15 && (item->flags & (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) == (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) {
         LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8BE0);
     }
-    else if ((info->action.unk4[0].actionUseIndex == 0x81) && ((item->flags & ITEM_FLAG_STICKY))) {
+    else if (info->action.unk4[0].actionUseIndex == 0x81 && (item->flags & ITEM_FLAG_STICKY)) {
         LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8BE0);
     }
     else {
-        tile = GetTile(entity->pos.x, entity->pos.y);
-        if (!(tile->terrainType & TERRAIN_TYPE_STAIRS))
-        {
-            if(((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) &&
-                (tile->object == NULL)) {
-                item->flags &= ~(ITEM_FLAG_SET);
-                sub_8045BF8(gFormatBuffer_Items[0],item);
-                if (sub_80460F8(&entity->pos,item,1) == 0) {
-                _message:
-                    LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E04);
-                }
-                else
-                {
-                    item->id = ITEM_NOTHING;
-                    item->quantity = 0;
-                    item->flags = 0;
-                    FillInventoryGaps();
-                    PlaySoundEffect(0x14d);
-                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
-                    LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E28);
-                    sub_807AB38(entity,gDungeon->forceMonsterHouse);
-                }
-            }
-            else
-            {
-                goto _message;
-            }
+        const Tile *tile = GetTile(entity->pos.x, entity->pos.y);
+        if ((tile->terrainType & TERRAIN_TYPE_STAIRS)) {
+            LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E04);
         }
-        else
-        {
-            goto _message;
+        else if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL) {
+            LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E04);
+        }
+        else if (tile->object != NULL) {
+            LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E04);
+        }
+        else {
+            item->flags &= ~(ITEM_FLAG_SET);
+            sub_8045BF8(gFormatBuffer_Items[0],item);
+            if (sub_80460F8(&entity->pos,item,1) == 0) {
+                LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E04);
+            }
+            else {
+                ZeroOutItem(item);
+                FillInventoryGaps();
+                PlaySoundEffect(0x14d);
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
+                LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E28);
+                sub_807AB38(entity,gDungeon->forceMonsterHouse);
+            }
         }
     }
 }
