@@ -108,7 +108,7 @@ enum DungeonID
     NUM_DUNGEONS
 };
 
-static inline bool8 IsClientOrTeamBase(s32 joinedDungeon)
+static inline bool8 IsExperienceLocked(s32 joinedDungeon)
 {
     if (joinedDungeon == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON || joinedDungeon == DUNGEON_RESCUE_TEAM_BASE)
         return TRUE;

@@ -99,7 +99,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
             return;
         }
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
+        if (AbilityIsActive(target,ABILITY_SUCTION_CUPS)) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCBCC); // {POKEMON_0} is anchored! It can't be knocked flying!
             return;
         }
@@ -250,7 +250,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
     flag = FALSE;
 
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
+    if (AbilityIsActive(target,ABILITY_SUCTION_CUPS)) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAE8);
         return;
     }
@@ -1036,7 +1036,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
     DungeonPos pos;
     u32 direction = r2;
     info = GetEntInfo(target);
-    if(HasAbility(target, ABILITY_SUCTION_CUPS))
+    if(AbilityIsActive(target, ABILITY_SUCTION_CUPS))
     {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FCB98);
@@ -1058,19 +1058,19 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
         pos.y = target->pos.y + gAdjacentTileOffsets[direction].y;
 
         if(pos.x <= 0 || pos.y <= 0 || pos.x > DUNGEON_MAX_SIZE_X - 2 || pos.y > DUNGEON_MAX_SIZE_Y - 2) break;
-        
+
         tile = GetTile(pos.x, pos.y);
 
         if(tile->monster) break;
         if(!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))) break;
-    
+
         sub_80694C0(target, pos.x, pos.y, 0);
-    
+
         sub_804535C(target, 0);
         if(!sub_8045888(target)) continue;
         sub_803E46C(0x3A);
     }
-    
+
     sub_806A5B8(target);
     if(sub_80706A4(target, &target->pos))
         WarpTarget(target, target, 0, 0);
@@ -1083,7 +1083,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
             sub_807EC28(0);
         }
         sub_806A5B8(target);
-        
+
         sub_8075900(target, gDungeon->forceMonsterHouse);
     }
 }
@@ -1112,7 +1112,7 @@ void HandleDroughtOrbAction(Entity *pokemon, Entity *target) {
 		{
 			tile = GetTileMut(x, y);
 			if((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY)
-			{   
+			{
 				tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
 				tile->terrainType |= TERRAIN_TYPE_NORMAL;
 				sub_80498A8(x, y);
@@ -1179,7 +1179,7 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target) {
 					if ((tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE)) {
 						isMonsterHouse = TRUE;
 					}
-					if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_SECONDARY) 
+					if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_SECONDARY)
 						if(((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))) {
 							if (((x == 1) || (((y == 1 || (x == DUNGEON_MAX_SIZE_X - 2)) || (y == DUNGEON_MAX_SIZE_Y - 2)))) &&
 								((tile->object == NULL && (gDungeon->unk644.unk2C == 0)))) {
@@ -1194,7 +1194,7 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target) {
 								tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
 								tile->terrainType |= TERRAIN_TYPE_NORMAL;
 								tile->terrainType |= TERRAIN_TYPE_UNK_x400;
-							} 
+							}
 						}
 				}
 			}
@@ -1280,7 +1280,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
     uStack_2c = param_6;
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
         entity1 = gDungeon->activePokemon[index];
-        if ((EntityExists(entity1)) && (HasAbility(entity1, ABILITY_DAMP))) break;
+        if ((EntityExists(entity1)) && (AbilityIsActive(entity1, ABILITY_DAMP))) break;
     }
     if (index != DUNGEON_MAX_POKEMON) {
         sub_804218C(pokemon,target);
@@ -1304,7 +1304,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
                 pos.y = posPtr->y + param_3->y;
                 if ((0 <= pos.x) && (0 <= pos.y) && (pos.x < DUNGEON_MAX_SIZE_X) && (pos.y < DUNGEON_MAX_SIZE_Y)) {
                     tile = GetTileMut(pos.x,pos.y);
-                    if ((0 < pos.x) && (0 < pos.y && ((pos.x < (DUNGEON_MAX_SIZE_X - 1) && ((pos.y < (DUNGEON_MAX_SIZE_Y - 1) 
+                    if ((0 < pos.x) && (0 < pos.y && ((pos.x < (DUNGEON_MAX_SIZE_X - 1) && ((pos.y < (DUNGEON_MAX_SIZE_Y - 1)
                         && (tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0)))
                     )) && (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0) {
                         tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);

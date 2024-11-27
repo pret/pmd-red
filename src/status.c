@@ -183,7 +183,7 @@ extern void sub_80420A0(Entity *);
 
 u8 GetFlashFireStatus(Entity *pokemon)
 {
-    if (!EntityExists(pokemon) || !HasAbility(pokemon, ABILITY_FLASH_FIRE))
+    if (!EntityExists(pokemon) || !AbilityIsActive(pokemon, ABILITY_FLASH_FIRE))
     {
         return FLASH_FIRE_STATUS_NONE;
     }
@@ -248,7 +248,7 @@ void ChangeAttackMultiplierTarget(Entity *pokemon, Entity *target, u32 statStage
     return;
   }
 
-  if (HasAbility(target, ABILITY_HYPER_CUTTER) && (statStage == STAT_STAGE_ATK) && F248LessThanInt(param_4, 1)) {
+  if (AbilityIsActive(target, ABILITY_HYPER_CUTTER) && (statStage == STAT_STAGE_ATK) && F248LessThanInt(param_4, 1)) {
     if (displayMessage) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCA60);
@@ -376,7 +376,7 @@ void LowerAccuracyStageTarget(Entity * pokemon, Entity * target, s32 statStage, 
         strcpy(gFormatBuffer_Items[0],*gUnknown_80FC084);
     }
     if (!sub_8071728(pokemon,target,displayMessage)) {
-      if (HasAbility(target, ABILITY_KEEN_EYE) && (statStage == STAT_STAGE_ACCURACY)){
+      if (AbilityIsActive(target, ABILITY_KEEN_EYE) && (statStage == STAT_STAGE_ACCURACY)){
         if(displayMessage)
         {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
@@ -406,7 +406,7 @@ void CringeStatusTarget(Entity * pokemon,Entity * target, bool8 displayMessage)
 
   if (EntityExists(target)) {
     if (!HasSafeguardStatus(pokemon, target, displayMessage)) {
-      if (HasAbility(target, ABILITY_INNER_FOCUS)){
+      if (AbilityIsActive(target, ABILITY_INNER_FOCUS)){
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             if(displayMessage)
                 TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCC18);
@@ -441,7 +441,7 @@ void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
   bool8 bVar7;
 
   if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage))) {
-    if (HasAbility(target, ABILITY_LIMBER)) {
+    if (AbilityIsActive(target, ABILITY_LIMBER)) {
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       if (displayMessage) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCBF8);
@@ -465,7 +465,7 @@ void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
       else {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB2CC);
       }
-      if ((HasAbility(target, ABILITY_SYNCHRONIZE)) && (!bVar6)) {
+      if ((AbilityIsActive(target, ABILITY_SYNCHRONIZE)) && (!bVar6)) {
         bVar7 = FALSE;
 
         for(index = 0; index < NUM_DIRECTIONS; index++)
@@ -598,7 +598,7 @@ void ConfuseStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage
   }
   else
   {
-    if (HasAbility(target, ABILITY_OWN_TEMPO)) {
+    if (AbilityIsActive(target, ABILITY_OWN_TEMPO)) {
         if (displayMessage)
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCDB4);
     }

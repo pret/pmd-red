@@ -565,7 +565,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
             }
 
             if (moveHits) {
-                if (HasAbility(currTarget, ABILITY_SOUNDPROOF) && IsSoundMove(move)) {
+                if (AbilityIsActive(currTarget, ABILITY_SOUNDPROOF) && IsSoundMove(move)) {
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], currTarget, 0);
                     TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_8100524); // Soundproof suppressed the sound move!
                     moveHits = FALSE;
@@ -646,7 +646,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     targetInfo->unk165 = GetDirectionTowardsPosition(&currTarget->pos, &attacker->pos);
                 }
 
-                if (HasAbility(currTarget, ABILITY_PRESSURE)
+                if (AbilityIsActive(currTarget, ABILITY_PRESSURE)
                     && GetTreatmentBetweenMonsters(attacker, currTarget, TRUE, FALSE) == 1
                     && move->id != MOVE_REGULAR_ATTACK
                     && move->id != MOVE_STRUGGLE
@@ -1690,7 +1690,7 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
     if (AccuracyCalc(attacker, target, move, ACCURACY_2, TRUE)) { // Move hits
         bool32 isFalseSwipe = (move->id == MOVE_FALSE_SWIPE);
 
-        if (HasAbility(target, ABILITY_ILLUMINATE)) {
+        if (AbilityIsActive(target, ABILITY_ILLUMINATE)) {
             gDungeon->unk644.unk1E = 999;
             gDungeon->unk17B34 = target;
             gDungeon->unk17B40 = target->spawnGenID;
@@ -2730,7 +2730,7 @@ static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accu
     }
 
     statStageAccuracy = attackerInfo->hitChanceStages[0];
-    if (HasAbility(attacker, ABILITY_COMPOUNDEYES)) {
+    if (AbilityIsActive(attacker, ABILITY_COMPOUNDEYES)) {
         statStageAccuracy += 2;
     }
     if (move->id == MOVE_THUNDER) {
@@ -2757,10 +2757,10 @@ static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accu
     if (targetInfo->exposed) {
         statStageEvasion = 10;
     }
-    if (GetApparentWeather(target) == WEATHER_SANDSTORM && HasAbility(target, ABILITY_SAND_VEIL)) {
+    if (GetApparentWeather(target) == WEATHER_SANDSTORM && AbilityIsActive(target, ABILITY_SAND_VEIL)) {
         statStageEvasion += 2;
     }
-    if (HasAbility(attacker, ABILITY_HUSTLE)) {
+    if (AbilityIsActive(attacker, ABILITY_HUSTLE)) {
         bool32 specialMove = (IsTypePhysical(GetMoveType(move)) == FALSE);
         if (!specialMove) {
             statStageEvasion += 2;
@@ -3154,7 +3154,7 @@ bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
         return FALSE;
 
     if (chance != 0) {
-        if (HasAbility(pokemon, ABILITY_SERENE_GRACE)) {
+        if (AbilityIsActive(pokemon, ABILITY_SERENE_GRACE)) {
             uVar2 = DungeonRandOutcome_2(chance * 2);
         }
         else
@@ -3167,7 +3167,7 @@ bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
         uVar2 = TRUE;
     }
 
-    if (uVar2 && (pokemon != target) && HasAbility(target, ABILITY_SHIELD_DUST))
+    if (uVar2 && (pokemon != target) && AbilityIsActive(target, ABILITY_SHIELD_DUST))
     {
         sub_80429C8(target);
         return FALSE;
@@ -3182,7 +3182,7 @@ bool8 RollSecondaryEffect(Entity *pokemon, s32 chance)
         return FALSE;
     if(chance == 0)
         return TRUE;
-    if(HasAbility(pokemon, ABILITY_SERENE_GRACE))
+    if(AbilityIsActive(pokemon, ABILITY_SERENE_GRACE))
         return DungeonRandOutcome_2(chance * 2);
     else
         return DungeonRandOutcome_2(chance);

@@ -46,7 +46,7 @@ bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
     return TRUE;
   }
   else {
-    if (HasAbility(target, ABILITY_CLEAR_BODY) || HasAbility(target, ABILITY_WHITE_SMOKE)) {
+    if (AbilityIsActive(target, ABILITY_CLEAR_BODY) || AbilityIsActive(target, ABILITY_WHITE_SMOKE)) {
         if (displayMessage) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
             TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FCEFC);
@@ -88,7 +88,7 @@ bool8 sub_80717A4(Entity *pokemon, u16 moveID)
   }
 }
 
-bool8 HasAbility(Entity *pokemon, u8 ability)
+bool8 AbilityIsActive(Entity *pokemon, u8 ability)
 {
     if (!EntityExists(pokemon))
     {
@@ -137,7 +137,7 @@ bool8 CanSeeInvisibleMonsters(Entity *pokemon)
         return TRUE;
 }
 
-bool8 HasTactic(Entity *pokemon, u8 tactic)
+bool8 IsTacticSet(Entity *pokemon, u8 tactic)
 {
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     if (pokemonInfo->isTeamLeader)

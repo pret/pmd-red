@@ -395,7 +395,7 @@ bool8 IsAtJunction(Entity *pokemon)
 
 bool8 ShouldAvoidFirstHit(Entity *pokemon, bool8 forceAvoid)
 {
-    if (!HasTactic(pokemon, TACTIC_AVOID_THE_FIRST_HIT))
+    if (!IsTacticSet(pokemon, TACTIC_AVOID_THE_FIRST_HIT))
         return FALSE;
     if (!forceAvoid)
         return FALSE;
@@ -419,7 +419,7 @@ bool8 ShouldMonsterRunAway(Entity *pokemon)
         {
             return FALSE;
         }
-        if (HasAbility(pokemon, ABILITY_RUN_AWAY))
+        if (AbilityIsActive(pokemon, ABILITY_RUN_AWAY))
         {
             bool8 runAwayActive = pokemonInfo->HP < pokemonInfo->maxHPStat / 2;
             if (runAwayActive)
@@ -427,8 +427,8 @@ bool8 ShouldMonsterRunAway(Entity *pokemon)
                 return TRUE;
             }
         }
-        if (HasTactic(pokemon, TACTIC_GET_AWAY) ||
-            (HasTactic(pokemon, TACTIC_AVOID_TROUBLE) && pokemonInfo->HP <= pokemonInfo->maxHPStat / 2))
+        if (IsTacticSet(pokemon, TACTIC_GET_AWAY) ||
+            (IsTacticSet(pokemon, TACTIC_AVOID_TROUBLE) && pokemonInfo->HP <= pokemonInfo->maxHPStat / 2))
         {
             return TRUE;
         }
@@ -452,7 +452,7 @@ void CheckRunAwayVisualFlag(Entity *pokemon, bool8 showRunAwayEffect)
   EntityInfo *iVar2;
   iVar2 = GetEntInfo(pokemon);
 
-  if (((!iVar2->isTeamLeader) && HasAbility(pokemon,ABILITY_RUN_AWAY) &&
+  if (((!iVar2->isTeamLeader) && AbilityIsActive(pokemon,ABILITY_RUN_AWAY) &&
       (cVar1 = SetVisualFlags(iVar2,4,iVar2->HP <= iVar2->maxHPStat / 2), showRunAwayEffect)) &&
      (cVar1)) {
     ShowVisualFlags(pokemon);
@@ -534,9 +534,9 @@ u8 sub_807167C(Entity * pokemon, Entity * target)
   pokemonEntityData = GetEntInfo(pokemon);
   targetEntityInfo = GetEntInfo(target);
   if (pokemonEntityData->monsterBehavior != BEHAVIOR_RESCUE_TARGET) {
-    cannotUseItems = IsClientOrTeamBase(pokemonEntityData->joinedAt.id);
+    cannotUseItems = IsExperienceLocked(pokemonEntityData->joinedAt.id);
     if (!cannotUseItems && (pokemonEntityData->shopkeeper == SHOPKEEPER_MODE_NORMAL) && (targetEntityInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET)) {
-      cannotUseItems = IsClientOrTeamBase(targetEntityInfo->joinedAt.id);
+      cannotUseItems = IsExperienceLocked(targetEntityInfo->joinedAt.id);
       if (cannotUseItems || (targetEntityInfo->shopkeeper != SHOPKEEPER_MODE_NORMAL)) {
 error:
           return TREATMENT_IGNORE;

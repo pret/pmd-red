@@ -177,7 +177,7 @@ u8 sub_8075BF4(Entity * pokemon, s32 sleepClassStatusTurns)
     if(entityInfo->sleepClassStatus.status != STATUS_NIGHTMARE && entityInfo->sleepClassStatus.status != STATUS_SLEEP)
     {
         entityInfo->sleepClassStatus.status = STATUS_SLEEP;
-        if ((sleepClassStatusTurns != 0x7f) && HasAbility(pokemon, ABILITY_EARLY_BIRD) &&
+        if ((sleepClassStatusTurns != 0x7f) && AbilityIsActive(pokemon, ABILITY_EARLY_BIRD) &&
             (sleepClassStatusTurns = sleepClassStatusTurns / 2, sleepClassStatusTurns < 1)) {
             sleepClassStatusTurns = 1;
         }
@@ -236,13 +236,13 @@ bool8 CannotSleep(Entity * pokemon, Entity * target, u8 param_3, bool8 displayMe
         }
         return TRUE;
     }
-    else if (HasAbility(target, ABILITY_INSOMNIA)) {
+    else if (AbilityIsActive(target, ABILITY_INSOMNIA)) {
         if (displayMessage) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCD58);
         }
         return TRUE;
     }
-    else if (HasAbility(target, ABILITY_VITAL_SPIRIT)) {
+    else if (AbilityIsActive(target, ABILITY_VITAL_SPIRIT)) {
         if (displayMessage) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCD88);
         }
@@ -269,7 +269,7 @@ void NightmareStatusTarget(Entity * pokemon, Entity * target, s32 turns)
       sub_8041EC8(target);
       if (entityInfo->sleepClassStatus.status != STATUS_NIGHTMARE) {
         entityInfo->sleepClassStatus.turns = turns;
-        if ((HasAbility(target, ABILITY_EARLY_BIRD)) && (entityInfo->sleepClassStatus.turns >>= 1, entityInfo->sleepClassStatus.turns == 0)) {
+        if ((AbilityIsActive(target, ABILITY_EARLY_BIRD)) && (entityInfo->sleepClassStatus.turns >>= 1, entityInfo->sleepClassStatus.turns == 0)) {
           entityInfo->sleepClassStatus.turns = 1;
         }
       }
@@ -306,7 +306,7 @@ void NappingStatusTarget(Entity * pokemon, Entity * target, s32 turns)
       sub_8041ED8(target);
       if (entityInfo->sleepClassStatus.status == STATUS_NONE || entityInfo->sleepClassStatus.status == STATUS_YAWNING) {
         entityInfo->sleepClassStatus.turns = turns;
-        if ((HasAbility(target, ABILITY_EARLY_BIRD)) && (entityInfo->sleepClassStatus.turns >>= 1, entityInfo->sleepClassStatus.turns == 0)) {
+        if ((AbilityIsActive(target, ABILITY_EARLY_BIRD)) && (entityInfo->sleepClassStatus.turns >>= 1, entityInfo->sleepClassStatus.turns == 0)) {
           entityInfo->sleepClassStatus.turns = 1;
         }
       }
@@ -439,7 +439,7 @@ void InfatuateStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessa
   if (EntityExists(target)) {
     entityInfo = GetEntInfo(target);
     if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
-      if (HasAbility(target,ABILITY_OBLIVIOUS)) {
+      if (AbilityIsActive(target,ABILITY_OBLIVIOUS)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         if (displayMessage) {
           TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCC4C);
@@ -480,7 +480,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
   if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
     entityInfo = GetEntInfo(target);
     SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
-    if (HasAbility(target, ABILITY_WATER_VEIL)) {
+    if (AbilityIsActive(target, ABILITY_WATER_VEIL)) {
       if (displayMessage)
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCE5C);
     }
@@ -517,7 +517,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
             }
             EntityUpdateStatusSprites(target);
 
-            if (!HasAbility(target, ABILITY_SYNCHRONIZE)) {
+            if (!AbilityIsActive(target, ABILITY_SYNCHRONIZE)) {
                 return;
             }
 
@@ -573,7 +573,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
     }
     else
     {
-      if (HasAbility(target, ABILITY_IMMUNITY)) {
+      if (AbilityIsActive(target, ABILITY_IMMUNITY)) {
         if (displayMessage)
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCEB0);
       }
@@ -610,7 +610,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
                 TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB5F8);
             }
 
-            if ((HasAbility(target, ABILITY_SYNCHRONIZE)) && !isNotPoisoned)
+            if ((AbilityIsActive(target, ABILITY_SYNCHRONIZE)) && !isNotPoisoned)
             {
                 hasSynchronized = FALSE;
 
@@ -662,7 +662,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
     }
     else
     {
-      if (HasAbility(target, ABILITY_IMMUNITY)) {
+      if (AbilityIsActive(target, ABILITY_IMMUNITY)) {
         if (displayMessage)
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCEB0);
       }
@@ -692,7 +692,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
                 TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB5F8);
             }
 
-            if ((HasAbility(target, ABILITY_SYNCHRONIZE)) && !isNotBadlyPoisoned)
+            if ((AbilityIsActive(target, ABILITY_SYNCHRONIZE)) && !isNotBadlyPoisoned)
             {
                 hasSynchronized = FALSE;
 
@@ -735,7 +735,7 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
   entityInfo = GetEntInfo(target);
 
   if ((entityInfo->frozenClassStatus.status != STATUS_FROZEN) && !HasSafeguardStatus(pokemon,target,displayMessage)) {
-    if (HasAbility(target, ABILITY_MAGMA_ARMOR)) {
+    if (AbilityIsActive(target, ABILITY_MAGMA_ARMOR)) {
       if (displayMessage)
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCDE0);
     }
@@ -1007,7 +1007,7 @@ void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 de
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD550);
     }
     else {
-      if ((!HasAbility(target, ABILITY_HYPER_CUTTER)) || (index != STAT_STAGE_ATK)) goto _08076EE4;
+      if ((!AbilityIsActive(target, ABILITY_HYPER_CUTTER)) || (index != STAT_STAGE_ATK)) goto _08076EE4;
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCA60);
     }

@@ -1063,7 +1063,7 @@ bool8 GigaDrainMoveAction(Entity * pokemon, Entity * target, Move * move, u32 pa
   bool8 flag;
   EntityInfo *entityInfo;
 
-  hasLiquidOoze = HasAbility(target, ABILITY_LIQUID_OOZE);
+  hasLiquidOoze = AbilityIsActive(target, ABILITY_LIQUID_OOZE);
   uVar3 = HandleDamagingMove(pokemon,target,move,0x100,param_4);
   flag = uVar3 != 0 ? TRUE : FALSE;
   if (flag && RollSecondaryEffect(pokemon, 0)) {
@@ -1433,7 +1433,7 @@ bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
       iVar3 = 1;
     }
     flag = TRUE;
-    if ((!HasAbility(pokemon, ABILITY_ROCK_HEAD)) && RollSecondaryEffect(pokemon, 0)) {
+    if ((!AbilityIsActive(pokemon, ABILITY_ROCK_HEAD)) && RollSecondaryEffect(pokemon, 0)) {
       sub_806F370(pokemon,pokemon,iVar3,0,0,0,0x1fd,0x14,1,0);
     }
   }
@@ -1549,7 +1549,7 @@ bool8 FissureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
 
   uVar5 = sub_806F4A4(target, moveType) != 0 ? TRUE : FALSE;
 
-  if (HasAbility(target, ABILITY_LEVITATE)) {
+  if (AbilityIsActive(target, ABILITY_LEVITATE)) {
     uVar5 = FALSE;
   }
   if (!uVar5) {
@@ -1591,7 +1591,7 @@ bool8 AbsorbMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   bool8 flag;
 
   flag = FALSE;
-  hasLiquidOoze = HasAbility(target, ABILITY_LIQUID_OOZE);
+  hasLiquidOoze = AbilityIsActive(target, ABILITY_LIQUID_OOZE);
   iVar3 = HandleDamagingMove(pokemon,target,move,0x100,param_4);
   if (iVar3 != 0) {
     iVar4 = iVar3 / 2;
@@ -1621,7 +1621,7 @@ bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
 
   EntityInfo *pokeEntityData = GetEntInfo(pokemon);
   EntityInfo *targetEntityInfo = GetEntInfo(target);
-  if ((HasAbility(target, ABILITY_WONDER_GUARD)) || (HasAbility(pokemon, ABILITY_WONDER_GUARD))) {
+  if ((AbilityIsActive(target, ABILITY_WONDER_GUARD)) || (AbilityIsActive(pokemon, ABILITY_WONDER_GUARD))) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC8C0);
     flag = FALSE;
   }
@@ -1708,7 +1708,7 @@ bool8 DoubleEdgeMoveAction(Entity * pokemon,Entity * target,Move * move,u32 para
   flag = FALSE;
   if (HandleDamagingMove(pokemon, target, move, 0x100, param_4) != 0) {
     flag = TRUE;
-    if ((!HasAbility(pokemon, ABILITY_ROCK_HEAD)) && (RollSecondaryEffect(pokemon,0) != 0)) {
+    if ((!AbilityIsActive(pokemon, ABILITY_ROCK_HEAD)) && (RollSecondaryEffect(pokemon,0) != 0)) {
       HP = GetEntInfo(pokemon)->maxHPStat;
       if (HP < 0) {
         HP = HP + 7;
@@ -2005,7 +2005,7 @@ bool8 ConversionMoveAction(Entity * pokemon,Entity * target,Move * move,u32 para
 
   counter = 0;
   info = GetEntInfo(target);
-  if (HasAbility(target, ABILITY_FORECAST)) {
+  if (AbilityIsActive(target, ABILITY_FORECAST)) {
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gPtrForecastPreventsTypeSwitchMessage);
       return FALSE;
   }
@@ -2281,7 +2281,7 @@ bool8 TrickMoveAction(Entity * pokemon,Entity * target, Move *move, u32 param_4)
 
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
-    if (HasAbility(target, ABILITY_STICKY_HOLD)) {
+    if (AbilityIsActive(target, ABILITY_STICKY_HOLD)) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCE4);
         return FALSE;
     }
@@ -2398,7 +2398,7 @@ bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
 
   entityInfo = GetEntInfo(pokemon);
   targetEntityInfo = GetEntInfo(target);
-  if (HasAbility(target, ABILITY_WONDER_GUARD)) {
+  if (AbilityIsActive(target, ABILITY_WONDER_GUARD)) {
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC854);
     return FALSE;
   }
@@ -2599,7 +2599,7 @@ bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
     targetEntityInfo = GetEntInfo(target);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
-    if (HasAbility(target, ABILITY_STICKY_HOLD))
+    if (AbilityIsActive(target, ABILITY_STICKY_HOLD))
     {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCE8);
         return FALSE;
@@ -2889,7 +2889,7 @@ bool32 BeatUpMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param
              && GetTreatmentBetweenMonsters(pokemon,targetEntity,FALSE,FALSE) == TREATMENT_TREAT_AS_ALLY)
         {
             EntityInfo *targetInfo = GetEntInfo(targetEntity);
-            if (targetInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET && !IsClientOrTeamBase(targetInfo->joinedAt.id)) {
+            if (targetInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET && !IsExperienceLocked(targetInfo->joinedAt.id)) {
                 WarpTarget(pokemon,targetEntity,2,&target->pos);
                 flag = TRUE;
                 SetExpMultplier(info);

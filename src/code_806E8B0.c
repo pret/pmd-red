@@ -63,7 +63,7 @@ static void ApplyAtkDefStatBoosts(Entity *attacker, Entity *target, u8 moveType,
     s32 defDivisor = 1;
     s32 splitIndex = (!IsTypePhysical(moveType)) ? 1 : 0;
 
-    if (HasAbility(attacker, ABILITY_GUTS)) {
+    if (AbilityIsActive(attacker, ABILITY_GUTS)) {
         EntityInfo *entInfo = GetEntInfo(attacker);
         bool8 gutsBoost = HasNegativeStatus(attacker);
         bool8 visFlags_attacker_1 = SetVisualFlags(entInfo,1,gutsBoost);
@@ -77,7 +77,7 @@ static void ApplyAtkDefStatBoosts(Entity *attacker, Entity *target, u8 moveType,
         }
     }
 
-    if ((HasAbility(attacker, ABILITY_HUGE_POWER)) || (HasAbility(attacker, ABILITY_PURE_POWER))) {
+    if ((AbilityIsActive(attacker, ABILITY_HUGE_POWER)) || (AbilityIsActive(attacker, ABILITY_PURE_POWER))) {
         EntityInfo *entInfo = GetEntInfo(attacker);
         bool32 hugePowerBoost = (rand < 33 && splitIndex == 0);
         bool8 visFlags_attacker_2 = SetVisualFlags(entInfo,0x100,hugePowerBoost);
@@ -92,7 +92,7 @@ static void ApplyAtkDefStatBoosts(Entity *attacker, Entity *target, u8 moveType,
         }
     }
 
-    if ((HasAbility(attacker, ABILITY_HUSTLE)) && (splitIndex == 0)) {
+    if ((AbilityIsActive(attacker, ABILITY_HUSTLE)) && (splitIndex == 0)) {
         atkMultiplier *= 3;
         atkDivisor *= 2;
     }
@@ -104,21 +104,21 @@ static void ApplyAtkDefStatBoosts(Entity *attacker, Entity *target, u8 moveType,
         isNotEnemy = TRUE;
     }
 
-    if ((HasAbility(attacker, ABILITY_PLUS)) && (splitIndex == 1) && gDungeon->minusIsActive[isNotEnemy]) {
+    if ((AbilityIsActive(attacker, ABILITY_PLUS)) && (splitIndex == 1) && gDungeon->minusIsActive[isNotEnemy]) {
         atkMultiplier *= 15;
         atkDivisor *= 10;
     }
-    if ((HasAbility(attacker, ABILITY_MINUS)) && (splitIndex == 1) && gDungeon->plusIsActive[isNotEnemy]) {
+    if ((AbilityIsActive(attacker, ABILITY_MINUS)) && (splitIndex == 1) && gDungeon->plusIsActive[isNotEnemy]) {
         atkMultiplier *= 15;
         atkDivisor *= 10;
     }
 
-    if (HasAbility(target, ABILITY_INTIMIDATE) && (splitIndex == 0)) {
+    if (AbilityIsActive(target, ABILITY_INTIMIDATE) && (splitIndex == 0)) {
         atkMultiplier *= 4;
         atkDivisor *= 5;
     }
 
-    if ((HasAbility(target, ABILITY_MARVEL_SCALE)) && (splitIndex == 0)) {
+    if ((AbilityIsActive(target, ABILITY_MARVEL_SCALE)) && (splitIndex == 0)) {
         EntityInfo *targetInfo = GetEntInfo(target);
         bool8 hasNegStatus_target = HasNegativeStatus(target);
         bool8 visFlags_target = SetVisualFlags(targetInfo, 8, hasNegStatus_target);
@@ -164,7 +164,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
     if (!attackerInfo->isTeamLeader && FixedPointToInt(attackerInfo->belly) == 0) {
         SetDamageOne(dmgStruct, moveType);
     }
-    else if (moveId == MOVE_REGULAR_ATTACK && HasAbility(target, ABILITY_WONDER_GUARD)) {
+    else if (moveId == MOVE_REGULAR_ATTACK && AbilityIsActive(target, ABILITY_WONDER_GUARD)) {
         SetDamageOne(dmgStruct, moveType);
     }
     else {
@@ -346,7 +346,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
         }
 
         // Check crit
-        if (!HasAbility(target, ABILITY_BATTLE_ARMOR) && !HasAbility(target, ABILITY_SHELL_ARMOR)) {
+        if (!AbilityIsActive(target, ABILITY_BATTLE_ARMOR) && !AbilityIsActive(target, ABILITY_SHELL_ARMOR)) {
             s32 critOdds;
 
             if (attackerInfo->isNotTeamMember) {
@@ -471,7 +471,7 @@ void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 giveExp, bool8 *t
             s32 effectiv = gTypeEffectivenessChart[moveType][targetInfo->types[i]];
             typeEffectiveness[i] = effectiv;
         }
-        if (HasAbility(target, ABILITY_WONDER_GUARD)) {
+        if (AbilityIsActive(target, ABILITY_WONDER_GUARD)) {
             if (gUnknown_80F54B4[typeEffectiveness[0]][typeEffectiveness[1]] != EFFECTIVENESS_SUPER) {
                 dmgNew = 0;
             }

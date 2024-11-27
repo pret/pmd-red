@@ -1541,7 +1541,7 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
     tileMonsterInfo = GetEntInfo(tileMonster);
     if (tileMonsterInfo->isNotTeamMember
         && (tileMonsterInfo->shopkeeper != 1 && tileMonsterInfo->shopkeeper != 2)
-        && !IsClientOrTeamBase(tileMonsterInfo->joinedAt.id)
+        && !IsExperienceLocked(tileMonsterInfo->joinedAt.id)
         && tileMonsterInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET) {
         return FALSE;
     }
@@ -3468,7 +3468,7 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
         }
     }
 
-    if (IsClientOrTeamBase(monInfo->joinedAt.id)) {
+    if (IsExperienceLocked(monInfo->joinedAt.id)) {
         sub_8044FF0(0x19);
         sub_8044FF0(0x3B);
         sub_8044FF0(0x1A);

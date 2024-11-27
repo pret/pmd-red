@@ -73,11 +73,11 @@ void HandleSwitcherOrb(Entity *pokemon,Entity *target)
   DungeonPos targetPos;
 
 
-  if (HasAbility(pokemon, ABILITY_SUCTION_CUPS)) {
+  if (AbilityIsActive(pokemon, ABILITY_SUCTION_CUPS)) {
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places
   }
-  else if(HasAbility(target, ABILITY_SUCTION_CUPS))
+  else if(AbilityIsActive(target, ABILITY_SUCTION_CUPS))
   {
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAC0); // $m0 is anchored! It won't switch places

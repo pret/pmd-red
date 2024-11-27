@@ -103,7 +103,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
     if ((type == TYPE_NORMAL) || (type == TYPE_FIGHTING)) {
       normalOrFightingType = TRUE;
     }
-    if ((HasAbility(target, ABILITY_WONDER_GUARD)) && (type != TYPE_NONE)) {
+    if ((AbilityIsActive(target, ABILITY_WONDER_GUARD)) && (type != TYPE_NONE)) {
       hasWonderGuard = TRUE;
     }
     param_5->effectiveness = EFFECTIVENESS_NEUTRAL;
@@ -132,7 +132,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
       param_1->lo = temp;
     }
 
-    if (((type == TYPE_FIRE) || (type == TYPE_ICE)) && (HasAbility(target,ABILITY_THICK_FAT))) {
+    if (((type == TYPE_FIRE) || (type == TYPE_ICE)) && (AbilityIsActive(target,ABILITY_THICK_FAT))) {
       gDungeon->unk134.unk16D = TRUE;
       F48_16_SMul(param_1,param_1, &gUnknown_8106F1C);
     }
@@ -144,7 +144,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
       param_5->unkE = 1;
       bVar4 = FALSE;
     }
-    if ((type == TYPE_GROUND) && (HasAbility(target, ABILITY_LEVITATE))) {
+    if ((type == TYPE_GROUND) && (AbilityIsActive(target, ABILITY_LEVITATE))) {
       gDungeon->unk134.fill16E[1] = TRUE;
       FP48_16_FromS32(param_1,0);
       param_5->effectiveness = EFFECTIVENESS_IMMUNE;
@@ -152,7 +152,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
       param_5->unkE = 1;
       bVar4 = FALSE;
     }
-    if ((type == TYPE_WATER) && (HasAbility(pokemon, ABILITY_TORRENT))) {
+    if ((type == TYPE_WATER) && (AbilityIsActive(pokemon, ABILITY_TORRENT))) {
       torrentFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       torrentVisualFlag = SetVisualFlags(pokemonInfo,0x80,torrentFlag);
       if (torrentFlag) {
@@ -164,7 +164,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEDA8);
       }
     }
-    if ((type == TYPE_GRASS) && (HasAbility(pokemon, ABILITY_OVERGROW))) {
+    if ((type == TYPE_GRASS) && (AbilityIsActive(pokemon, ABILITY_OVERGROW))) {
       overgrowFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       overgrowVisualFlag = SetVisualFlags(pokemonInfo,2,overgrowFlag);
       if (overgrowFlag) {
@@ -176,7 +176,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FED88);
       }
     }
-    if ((type == TYPE_BUG) && (HasAbility(pokemon, ABILITY_SWARM))) {
+    if ((type == TYPE_BUG) && (AbilityIsActive(pokemon, ABILITY_SWARM))) {
       swarmFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       swarmVisualFlag = SetVisualFlags(pokemonInfo,0x10,swarmFlag);
       if (swarmFlag) {
@@ -188,7 +188,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEDC8);
       }
     }
-    if ((type == TYPE_FIRE) && (HasAbility(pokemon, ABILITY_BLAZE))) {
+    if ((type == TYPE_FIRE) && (AbilityIsActive(pokemon, ABILITY_BLAZE))) {
       blazeFlag = pokemonInfo->maxHPStat / 4 >= pokemonInfo->HP;
       blazeVisualFlag = SetVisualFlags(pokemonInfo,0x20,blazeFlag);
       if (blazeFlag) {
@@ -268,15 +268,15 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
     {
         return 0;
     }
-    if (moveType == TYPE_ELECTRIC && HasAbility(target, ABILITY_VOLT_ABSORB))
+    if (moveType == TYPE_ELECTRIC && AbilityIsActive(target, ABILITY_VOLT_ABSORB))
     {
         return 0;
     }
-    if (moveType == TYPE_WATER && HasAbility(target, ABILITY_WATER_ABSORB))
+    if (moveType == TYPE_WATER && AbilityIsActive(target, ABILITY_WATER_ABSORB))
     {
         return 0;
     }
-    if (moveType == TYPE_GROUND && HasAbility(target, ABILITY_LEVITATE))
+    if (moveType == TYPE_GROUND && AbilityIsActive(target, ABILITY_LEVITATE))
     {
         return 1;
     }
@@ -314,11 +314,11 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
         }
     } while ((s32)(++targetType) <= (s32)(targetTypes + 1));
     breakLoop:
-    if ((moveType == TYPE_FIRE || moveType == TYPE_ICE) && HasAbility(target, ABILITY_THICK_FAT))
+    if ((moveType == TYPE_FIRE || moveType == TYPE_ICE) && AbilityIsActive(target, ABILITY_THICK_FAT))
     {
         return 2;
     }
-    if (moveType == TYPE_WATER && HasAbility(user, ABILITY_TORRENT))
+    if (moveType == TYPE_WATER && AbilityIsActive(user, ABILITY_TORRENT))
     {
         s32 maxHPStat = userData->maxHPStat;
         if (maxHPStat < 0)
@@ -330,7 +330,7 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
             weight *= 2;
         }
     }
-    if (moveType == TYPE_GRASS && HasAbility(user, ABILITY_OVERGROW))
+    if (moveType == TYPE_GRASS && AbilityIsActive(user, ABILITY_OVERGROW))
     {
         s32 maxHPStat = userData->maxHPStat;
         if (maxHPStat < 0)
@@ -342,7 +342,7 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
             weight *= 2;
         }
     }
-    if (moveType == TYPE_BUG && HasAbility(user, ABILITY_SWARM))
+    if (moveType == TYPE_BUG && AbilityIsActive(user, ABILITY_SWARM))
     {
         s32 maxHPStat = userData->maxHPStat;
         if (maxHPStat < 0)
@@ -354,7 +354,7 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
             weight *= 2;
         }
     }
-    if (moveType == TYPE_FIRE && HasAbility(user, ABILITY_BLAZE))
+    if (moveType == TYPE_FIRE && AbilityIsActive(user, ABILITY_BLAZE))
     {
         s32 maxHPStat = userData->maxHPStat;
         if (maxHPStat < 0)

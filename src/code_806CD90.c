@@ -379,7 +379,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             returnDmg += 4;
         }
 
-        if (HasAbility(target, ABILITY_ROUGH_SKIN))
+        if (AbilityIsActive(target, ABILITY_ROUGH_SKIN))
             returnDmg += 2;
 
         if (returnDmg) {
@@ -407,37 +407,37 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         bool32 isPhysical = IsTypePhysical(dmgStruct->type);
         EntityInfo *attackerInfo = GetEntInfo(attacker);
 
-        if (HasAbility(target, ABILITY_ARENA_TRAP)
+        if (AbilityIsActive(target, ABILITY_ARENA_TRAP)
             && !MonsterIsType(attacker, TYPE_FLYING)
-            && !HasAbility(attacker, ABILITY_LEVITATE)
+            && !AbilityIsActive(attacker, ABILITY_LEVITATE)
             && DungeonRandInt(100) < gUnknown_80F4E10)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_ARENA_TRAP;
         }
-        if (HasAbility(target, ABILITY_SHADOW_TAG)
+        if (AbilityIsActive(target, ABILITY_SHADOW_TAG)
             && DungeonRandInt(100) < gUnknown_80F4E12)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_SHADOW_TAG;
         }
-        if (HasAbility(target, ABILITY_MAGNET_PULL)
+        if (AbilityIsActive(target, ABILITY_MAGNET_PULL)
             && MonsterIsType(attacker, TYPE_STEEL)
             && DungeonRandInt(100) < gUnknown_80F4E14)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_MAGNET_PULL;
         }
 
-        if (HasAbility(target, ABILITY_STATIC)
+        if (AbilityIsActive(target, ABILITY_STATIC)
             && isPhysical
             && DungeonRandInt(100) < gUnknown_80F4E16)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_STATIC;
         }
-        if (HasAbility(target, ABILITY_POISON_POINT)
+        if (AbilityIsActive(target, ABILITY_POISON_POINT)
             && DungeonRandInt(100) < gUnknown_80F4E18)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_POISON_POINT;
         }
-        if (HasAbility(target, ABILITY_EFFECT_SPORE)
+        if (AbilityIsActive(target, ABILITY_EFFECT_SPORE)
             && isPhysical
             && DungeonRandInt(100) < gUnknown_80F4E1A)
         {
@@ -449,18 +449,18 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             else
                 attackerInfo->abilityEffectFlags |= ABILITY_FLAG_EFFECT_SPORE_SLP;
         }
-        if (HasAbility(target, ABILITY_FLAME_BODY)
+        if (AbilityIsActive(target, ABILITY_FLAME_BODY)
             && DungeonRandInt(100) < gUnknown_80F4E1C)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_FLAME_BODY;
         }
-        if (HasAbility(target, ABILITY_CUTE_CHARM)
+        if (AbilityIsActive(target, ABILITY_CUTE_CHARM)
             && isPhysical
             && DungeonRandInt(100) < gUnknown_80F4E1E)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_CUTE_CHARM;
         }
-        if (HasAbility(target, ABILITY_STENCH)
+        if (AbilityIsActive(target, ABILITY_STENCH)
             && DungeonRandInt(100) < gUnknown_80F4E20)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_STENCH;
@@ -519,7 +519,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         dmgStruct->dmg = gUnknown_80F4F8C;
     }
 
-    if (arg4 != 0x20E && HasAbility(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
+    if (arg4 != 0x20E && AbilityIsActive(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
         TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCA90);
         sub_8042238(attacker, target);
@@ -540,12 +540,12 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         WakeUpPokemon(target);
     }
 
-    if ((HasAbility(target, ABILITY_VOLT_ABSORB) && dmgStruct->type == TYPE_ELECTRIC)) {
+    if ((AbilityIsActive(target, ABILITY_VOLT_ABSORB) && dmgStruct->type == TYPE_ELECTRIC)) {
         HealTargetHP(attacker, target, dmgStruct->dmg, 0, 0);
         dmgStruct->tookNoDamage = TRUE;
         return FALSE;
     }
-    else if (HasAbility(target, ABILITY_WATER_ABSORB) && dmgStruct->type == TYPE_WATER) {
+    else if (AbilityIsActive(target, ABILITY_WATER_ABSORB) && dmgStruct->type == TYPE_WATER) {
         HealTargetHP(attacker, target, dmgStruct->dmg, 0, 0);
         dmgStruct->tookNoDamage = TRUE;
         return FALSE;
@@ -739,7 +739,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         if (targetData->isTeamLeader || (targetData->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk644.unk18 == 0)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9CEC[r8]);
         }
-        else if (IsClientOrTeamBase(targetData->joinedAt.id)) {
+        else if (IsExperienceLocked(targetData->joinedAt.id)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DAC[r8]);
         }
         else if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {

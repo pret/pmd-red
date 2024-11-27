@@ -6,10 +6,10 @@
 bool8 HasSafeguardStatus(Entity * param_1, Entity * param_2, bool8 displayMessage);
 bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage);
 bool8 sub_80717A4(Entity *pokemon, u16 moveID);
-bool8 HasAbility(Entity *pokemon, u8 ability);
+bool8 AbilityIsActive(Entity *pokemon, u8 ability);
 bool8 MonsterIsType(Entity *pokemon, u8 type);
 bool8 CanSeeInvisibleMonsters(Entity *pokemon);
-bool8 HasTactic(Entity *pokemon, u8 tactic);
+bool8 IsTacticSet(Entity *pokemon, u8 tactic);
 bool8 IQSkillIsEnabled(Entity *pokemon, u8 IQSkill);
 void LoadIQSkills(Entity *pokemon);
 bool8 CanSeeTeammate(Entity * pokemon);
