@@ -13,6 +13,7 @@
 #include "text1.h"
 #include "text2.h"
 #include "util.h"
+#include "structs/struct_sub80095e4.h"
 
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
@@ -61,9 +62,6 @@ const s32 gUnknown_80D4830[9] = {
         10000000,
         100000000
 };
-
-// text.s
-extern s16 sub_8009614(u32, u32);
 
 static void sub_8013134(MenuInputStruct *, u32, u32);
 static void sub_801332C(DungeonPos *a0);
@@ -267,59 +265,33 @@ void sub_8012CAC(UnkTextStruct2 *a0, const MenuItem *a1)
     sub_8012D08(a0, r7);
 }
 
-NAKED // sub_80095E4 memes
-void sub_8012D08(UnkTextStruct2 *a0, s32 a1)
+void sub_8012D08(UnkTextStruct2 *param_1, s32 param_2)
 {
-    asm_unified(
-	"\tpush {r4,lr}\n"
-	"\tadds r4, r0, 0\n"
-	"\tadds r0, r1, 0\n"
-	"\tmovs r1, 0xC\n"
-	"\tbl sub_80095E4\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r1, r0, 16\n"
-	"\tldr r0, [r4, 0x4]\n"
-	"\tcmp r0, 0x6\n"
-	"\tbne _08012D24\n"
-	"\tadds r0, r1, 0x2\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r1, r0, 16\n"
-"_08012D24:\n"
-	"\tlsls r0, r1, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tstrh r0, [r4, 0xE]\n"
-	"\tstrh r0, [r4, 0x10]\n"
-	"\tpop {r4}\n"
-	"\tpop {r0}\n"
-	"\tbx r0");
+    s32 sVar2;
+    s16 sVar3;
+
+    sVar2 = (s16) sub_80095E4(param_2, 12);
+    if (param_1->unk4 == 6)
+        sVar2 = (s16)(sVar2 + 2);
+
+    sVar3 = sVar2;
+    param_1->unkE = sVar3;
+    param_1->unk10 = sVar3;
 }
 
-// https://decomp.me/scratch/QadfW  (200 - 90% matched)  - Seth
-NAKED
-void sub_8012D34(UnkTextStruct2 *a0, s32 a1)
+void sub_8012D34(struct UnkTextStruct2 *param_1, s32 param_2)
 {
-    asm_unified(
-	"\tpush {r4,lr}\n"
-	"\tadds r4, r0, 0\n"
-	"\tadds r0, r1, 0\n"
-	"\tmovs r1, 0x18\n"
-	"\tbl sub_8009614\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r1, r0, 16\n"
-	"\tldr r0, [r4, 0x4]\n"
-	"\tcmp r0, 0x6\n"
-	"\tbne _08012D50\n"
-	"\tadds r0, r1, 0x2\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r1, r0, 16\n"
-"_08012D50:\n"
-	"\tlsls r0, r1, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tstrh r0, [r4, 0xE]\n"
-	"\tstrh r0, [r4, 0x10]\n"
-	"\tpop {r4}\n"
-	"\tpop {r0}\n"
-	"\tbx r0");
+    s32 sVar2;
+    s16 sVar3;
+
+    sVar2 = (s16) sub_8009614(param_2, 24);
+    if (param_1->unk4 == 6)
+        sVar2 = (s16)(sVar2 + 2);
+
+    sVar3 = sVar2;
+    param_1->unkE = sVar3;
+    param_1->unk10 = sVar3;
+
 }
 
 void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
