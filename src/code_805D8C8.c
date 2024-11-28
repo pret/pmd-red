@@ -34,10 +34,10 @@ void sub_80687AC(void)
     gDungeon->unk37F4 = 10;
 }
 
-OpenedFile *GetSpriteData(s16 species)
+OpenedFile *GetSpriteData(s32 _species)
 {
-    s32 species32 = SpeciesId(species);
-    return gDungeon->sprites[species32];
+    s32 species = (s16)(_species);
+    return gDungeon->sprites[species];
 }
 
 static void EnsureSpriteLoaded(s32 _id) // TODO: Should this param be s16? If so, the castform part of LoadPokemonSprite is preventing us

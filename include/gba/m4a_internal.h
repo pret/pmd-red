@@ -67,6 +67,23 @@ struct ToneData
     u8 release;
 };
 
+#define SOUND_CHANNEL_SF_START       0x80
+#define SOUND_CHANNEL_SF_STOP        0x40
+#define SOUND_CHANNEL_SF_LOOP        0x10
+#define SOUND_CHANNEL_SF_IEC         0x04
+#define SOUND_CHANNEL_SF_ENV         0x03
+#define SOUND_CHANNEL_SF_ENV_ATTACK  0x03
+#define SOUND_CHANNEL_SF_ENV_DECAY   0x02
+#define SOUND_CHANNEL_SF_ENV_SUSTAIN 0x01
+#define SOUND_CHANNEL_SF_ENV_RELEASE 0x00
+#define SOUND_CHANNEL_SF_ON (SOUND_CHANNEL_SF_START | SOUND_CHANNEL_SF_STOP | SOUND_CHANNEL_SF_IEC | SOUND_CHANNEL_SF_ENV)
+
+#define CGB_CHANNEL_MO_PIT  0x02
+#define CGB_CHANNEL_MO_VOL  0x01
+
+#define CGB_NRx2_ENV_DIR_DEC 0x00
+#define CGB_NRx2_ENV_DIR_INC 0x08
+
 struct CgbChannel
 {
     u8 statusFlags;
@@ -81,8 +98,8 @@ struct CgbChannel
     u8 envelopeVolume;
     u8 envelopeGoal;
     u8 envelopeCounter;
-    u8 echoVolume;
-    u8 echoLength;
+    u8 pseudoEchoVolume;
+    u8 pseudoEchoLength;
     u8 dummy1;
     u8 dummy2;
     u8 gateTime;
@@ -93,7 +110,7 @@ struct CgbChannel
     u8 dummy3[3];
     u8 dummy5;
     u8 sustainGoal;
-    u8 n4;                    // NR[1-4]4 register (initial, length bit)
+    u8 n4;                  // NR[1-4]4 register (initial, length bit)
     u8 pan;
     u8 panMask;
     u8 modify;
@@ -330,7 +347,7 @@ struct MusicPlayer
 {
     struct MusicPlayerInfo *info;
     struct MusicPlayerTrack *track;
-    u8 unk_8;
+    u8 numTracks;
     u16 unk_A;
 };
 
