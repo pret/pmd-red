@@ -1,10 +1,9 @@
-#include "gba/defines.h"
+#include <string.h>
 #include "gba/m4a_internal.h"
-#include "global.h"
 
 extern const u8 gCgb3Vol[];
 
-IWRAM_DATA char SoundMainRAM_Buffer[0x400] = {0};
+IWRAM_DATA ALIGNED(4) char SoundMainRAM_Buffer[0x400] = {0};
 
 EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE4 = {0};
 EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE5 = {0};
@@ -17,7 +16,7 @@ EWRAM_DATA u8 gMPlayMemAccArea[0x10] = {0};
 EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE2 = {0};
 
 EWRAM_DATA_2 struct SoundInfo gSoundInfo = {0};
-EWRAM_DATA_2 MPlayFunc gMPlayJumpTable[0x22] = {0};
+EWRAM_DATA_2 MPlayFunc gMPlayJumpTable[34] = {0};
 EWRAM_DATA_2 u32 gUnknown_203AF08 = {0};
 EWRAM_DATA_2 u32 gUnknown_203AF0C = {0};
 EWRAM_DATA_2 struct CgbChannel gCgbChans[4] = {0};
@@ -43,7 +42,7 @@ u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
     return umul3232H32(wav->freq, val1 + umul3232H32(val2 - val1, fineAdjustShifted));
 }
 
-void UnusedDummyFunc()
+void UnusedDummyFunc(void)
 {
 }
 
@@ -85,7 +84,7 @@ void m4aSoundInit(void)
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++)
     {
         struct MusicPlayerInfo *mplayInfo = gMPlayTable[i].info;
-        MPlayOpen(mplayInfo, gMPlayTable[i].track, gMPlayTable[i].unk_8);
+        MPlayOpen(mplayInfo, gMPlayTable[i].track, gMPlayTable[i].numTracks);
         mplayInfo->unk_B = gMPlayTable[i].unk_A;
         mplayInfo->memAccArea = gMPlayMemAccArea;
     }
@@ -279,7 +278,7 @@ void MPlayExtender(struct CgbChannel *cgbChans)
     gMPlayJumpTable[32] = FadeOutBody;
     gMPlayJumpTable[33] = TrkVolPitSet;
 
-    soundInfo->cgbChans = (struct CgbChannel *)cgbChans;
+    soundInfo->cgbChans = cgbChans;
     soundInfo->CgbSound = CgbSound;
     soundInfo->CgbOscOff = CgbOscOff;
     soundInfo->MidiKeyToCgbFreq = MidiKeyToCgbFreq;
@@ -560,7 +559,7 @@ void MPlayOpen(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 
     // append music player and MPlayMain to linked list
 
-    if (soundInfo->MPlayMainHead != 0)
+    if (soundInfo->MPlayMainHead != NULL)
     {
         mplayInfo->MPlayMainNext = soundInfo->MPlayMainHead;
         mplayInfo->musicPlayerNext = soundInfo->musicPlayerHead;
@@ -625,7 +624,7 @@ void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader
             track++;
         }
 
-        if (songHeader->reverb & 0x80)
+        if (songHeader->reverb & SOUND_MODE_REVERB_SET)
             m4aSoundMode(songHeader->reverb);
 
         mplayInfo->ident = ID_NUMBER;
@@ -681,7 +680,10 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
     {
         if ((s16)(mplayInfo->fadeOV -= (4 << FADE_VOL_SHIFT)) <= 0)
         {
-            for (i = mplayInfo->trackCount, track = mplayInfo->tracks; i > 0; i--, track++)
+            i = mplayInfo->trackCount;
+            track = mplayInfo->tracks;
+
+            while (i > 0)
             {
                 u32 val;
 
@@ -693,6 +695,9 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
 
                 if (!val)
                     track->flags = 0;
+
+                i--;
+                track++;
             }
 
             if (mplayInfo->fadeOV & TEMPORARY_FADE)
@@ -705,7 +710,10 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
         }
     }
 
-    for (i = mplayInfo->trackCount, track = mplayInfo->tracks; i > 0; i--, track++)
+    i = mplayInfo->trackCount;
+    track = mplayInfo->tracks;
+
+    while (i > 0)
     {
         if (track->flags & MPT_FLG_EXIST)
         {
@@ -714,13 +722,17 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
             track->volX = (fadeOV >> FADE_VOL_SHIFT);
             track->flags |= MPT_FLG_VOLCHG;
         }
+
+        i--;
+        track++;
     }
 }
+
 void TrkVolPitSet(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
     if (track->flags & MPT_FLG_VOLSET)
     {
-        u32 x;
+        s32 x;
         s32 y;
 
         x = (u32)(track->vol * track->volX) >> 5;
@@ -878,7 +890,6 @@ void CgbSound(void)
 {
     s32 ch;
     struct CgbChannel *channels;
-    s32 evAdd;
     s32 prevC15;
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
     vu8 *nrx0ptr;
@@ -886,6 +897,7 @@ void CgbSound(void)
     vu8 *nrx2ptr;
     vu8 *nrx3ptr;
     vu8 *nrx4ptr;
+    s32 envelopeStepTimeAndDir;
 
     // Most comparision operations that cast to s8 perform 'and' by 0xFF.
     int mask = 0xff;
@@ -897,9 +909,10 @@ void CgbSound(void)
 
     for (ch = 1, channels = soundInfo->cgbChans; ch <= 4; ch++, channels++)
     {
-        if (!(channels->statusFlags & 0xc7))
+        if (!(channels->statusFlags & SOUND_CHANNEL_SF_ON))
             continue;
 
+        /* 1. determine hardware channel registers */
         switch (ch)
         {
         case 1:
@@ -933,14 +946,15 @@ void CgbSound(void)
         }
 
         prevC15 = soundInfo->c15;
-        evAdd = *nrx2ptr;
+        envelopeStepTimeAndDir = *nrx2ptr;
 
-        if (channels->statusFlags & 0x80)
+        /* 2. calculate envelope volume */
+        if (channels->statusFlags & SOUND_CHANNEL_SF_START)
         {
-            if (!(channels->statusFlags & 0x40))
+            if (!(channels->statusFlags & SOUND_CHANNEL_SF_STOP))
             {
-                channels->statusFlags = 3;
-                channels->modify = 3;
+                channels->statusFlags = SOUND_CHANNEL_SF_ENV_ATTACK;
+                channels->modify = CGB_CHANNEL_MO_PIT | CGB_CHANNEL_MO_VOL;
                 CgbModVol(channels);
                 switch (ch)
                 {
@@ -949,7 +963,7 @@ void CgbSound(void)
                     // fallthrough
                 case 2:
                     *nrx1ptr = ((u32)channels->wavePointer << 6) + channels->length;
-                    goto loc_82E0E30;
+                    goto init_env_step_time_dir;
                 case 3:
                     if (channels->wavePointer != channels->currentPointer)
                     {
@@ -963,97 +977,93 @@ void CgbSound(void)
                     *nrx0ptr = 0;
                     *nrx1ptr = channels->length;
                     if (channels->length)
-                        channels->n4 = -64;
+                        channels->n4 = 0xC0;
                     else
-                        channels->n4 = -128;
+                        channels->n4 = 0x80;
                     break;
                 default:
                     *nrx1ptr = channels->length;
                     *nrx3ptr = (u32)channels->wavePointer << 3;
-                loc_82E0E30:
-                    evAdd = channels->attack + 8;
+                init_env_step_time_dir:
+                    envelopeStepTimeAndDir = channels->attack + CGB_NRx2_ENV_DIR_INC;
                     if (channels->length)
-                        channels->n4 = 64;
+                        channels->n4 = 0x40;
                     else
-                        channels->n4 = 0;
+                        channels->n4 = 0x00;
                     break;
                 }
                 channels->envelopeCounter = channels->attack;
                 if ((s8)(channels->attack & mask))
                 {
                     channels->envelopeVolume = 0;
-                    goto EC_MINUS;
+                    goto envelope_step_complete;
                 }
                 else
                 {
-                    goto loc_82E0F96;
+                    // skip attack phase if attack is instantaneous (=0)
+                    goto envelope_decay_start;
                 }
             }
             else
             {
-                goto loc_82E0E82;
+                goto oscillator_off;
             }
         }
-        else if (channels->statusFlags & 0x04)
+        else if (channels->statusFlags & SOUND_CHANNEL_SF_IEC)
         {
-            channels->echoLength--;
-            if ((s8)(channels->echoLength & mask) <= 0)
+            channels->pseudoEchoLength--;
+            if ((s8)(channels->pseudoEchoLength & mask) <= 0)
             {
-            loc_82E0E82:
+            oscillator_off:
                 CgbOscOff(ch);
                 channels->statusFlags = 0;
-                goto LAST_LABEL;
+                goto channel_complete;
             }
-            goto loc_82E0FD6;
+            goto envelope_complete;
         }
-        else if ((channels->statusFlags & 0x40) && (channels->statusFlags & 0x03))
+        else if ((channels->statusFlags & SOUND_CHANNEL_SF_STOP) && (channels->statusFlags & SOUND_CHANNEL_SF_ENV))
         {
-            channels->statusFlags &= 0xfc;
+            channels->statusFlags &= ~SOUND_CHANNEL_SF_ENV;
             channels->envelopeCounter = channels->release;
             if ((s8)(channels->release & mask))
             {
-                channels->modify |= 1;
+                channels->modify |= CGB_CHANNEL_MO_VOL;
                 if (ch != 3)
-                {
-                    evAdd = channels->release;
-                }
-                goto EC_MINUS;
+                    envelopeStepTimeAndDir = channels->release | CGB_NRx2_ENV_DIR_DEC;
+                goto envelope_step_complete;
             }
             else
             {
-                goto loc_82E0F02;
+                goto envelope_pseudoecho_start;
             }
         }
         else
         {
-        loc_82E0ED0:
+        envelope_step_repeat:
             if (channels->envelopeCounter == 0)
             {
                 if (ch == 3)
-                {
-                    channels->modify |= 1;
-                }
+                    channels->modify |= CGB_CHANNEL_MO_VOL;
+
                 CgbModVol(channels);
-                if ((channels->statusFlags & 0x3) == 0)
+                if ((channels->statusFlags & SOUND_CHANNEL_SF_ENV) == SOUND_CHANNEL_SF_ENV_RELEASE)
                 {
                     channels->envelopeVolume--;
                     if ((s8)(channels->envelopeVolume & mask) <= 0)
                     {
-                    loc_82E0F02:
-                        channels->envelopeVolume = ((channels->envelopeGoal * channels->echoVolume) + 0xFF) >> 8;
+                    envelope_pseudoecho_start:
+                        channels->envelopeVolume = ((channels->envelopeGoal * channels->pseudoEchoVolume) + 0xFF) >> 8;
                         if (channels->envelopeVolume)
                         {
-                            channels->statusFlags |= 0x4;
-                            channels->modify |= 1;
+                            channels->statusFlags |= SOUND_CHANNEL_SF_IEC;
+                            channels->modify |= CGB_CHANNEL_MO_VOL;
                             if (ch != 3)
-                            {
-                                evAdd = 8;
-                            }
-                            goto loc_82E0FD6;
+                                envelopeStepTimeAndDir = 0 | CGB_NRx2_ENV_DIR_INC;
+                            goto envelope_complete;
                         }
                         else
                         {
-                            goto loc_82E0E82;
+                            goto oscillator_off;
                         }
                     }
                     else
@@ -1061,36 +1071,34 @@ void CgbSound(void)
                         channels->envelopeCounter = channels->release;
                     }
                 }
-                else if ((channels->statusFlags & 0x3) == 1)
+                else if ((channels->statusFlags & SOUND_CHANNEL_SF_ENV) == SOUND_CHANNEL_SF_ENV_SUSTAIN)
                 {
-                loc_82E0F3A:
+                envelope_sustain:
                     channels->envelopeVolume = channels->sustainGoal;
                     channels->envelopeCounter = 7;
                 }
-                else if ((channels->statusFlags & 0x3) == 2)
+                else if ((channels->statusFlags & SOUND_CHANNEL_SF_ENV) == SOUND_CHANNEL_SF_ENV_DECAY)
                 {
-                    int ev, sg;
+                    int envelopeVolume, sustainGoal;
 
                     channels->envelopeVolume--;
-                    ev = (s8)(channels->envelopeVolume & mask);
-                    sg = (s8)(channels->sustainGoal);
-                    if (ev <= sg)
+                    envelopeVolume = (s8)(channels->envelopeVolume & mask);
+                    sustainGoal = (s8)(channels->sustainGoal);
+                    if (envelopeVolume <= sustainGoal)
                     {
-                    loc_82E0F5A:
+                    envelope_sustain_start:
                         if (channels->sustain == 0)
                         {
-                            channels->statusFlags &= 0xfc;
-                            goto loc_82E0F02;
+                            channels->statusFlags &= ~SOUND_CHANNEL_SF_ENV;
+                            goto envelope_pseudoecho_start;
                         }
                         else
                         {
                             channels->statusFlags--;
-                            channels->modify |= 1;
+                            channels->modify |= CGB_CHANNEL_MO_VOL;
                             if (ch != 3)
-                            {
-                                evAdd = 8;
-                            }
-                            goto loc_82E0F3A;
+                                envelopeStepTimeAndDir = 0 | CGB_NRx2_ENV_DIR_INC;
+                            goto envelope_sustain;
                         }
                     }
                     else
@@ -1103,21 +1111,19 @@ void CgbSound(void)
                     channels->envelopeVolume++;
                     if ((u8)(channels->envelopeVolume & mask) >= channels->envelopeGoal)
                     {
-                    loc_82E0F96:
+                    envelope_decay_start:
                         channels->statusFlags--;
                         channels->envelopeCounter = channels->decay;
                         if ((u8)(channels->envelopeCounter & mask))
                         {
-                            channels->modify |= 1;
+                            channels->modify |= CGB_CHANNEL_MO_VOL;
                             channels->envelopeVolume = channels->envelopeGoal;
                             if (ch != 3)
-                            {
-                                evAdd = channels->decay;
-                            }
+                                envelopeStepTimeAndDir = channels->decay | CGB_NRx2_ENV_DIR_DEC;
                         }
                         else
                         {
-                            goto loc_82E0F5A;
+                            goto envelope_sustain_start;
                         }
                     }
                     else
@@ -1128,43 +1134,40 @@ void CgbSound(void)
             }
         }
 
-    EC_MINUS:
+    envelope_step_complete:
+        // every 15 frames, envelope calculation has to be done twice
+        // to keep up with the hardware envelope rate (1/64 s)
         channels->envelopeCounter--;
         if (prevC15 == 0)
         {
             prevC15--;
-            goto loc_82E0ED0;
+            goto envelope_step_repeat;
         }
 
-    loc_82E0FD6:
-        if (channels->modify & 0x2)
+    envelope_complete:
+        /* 3. apply pitch to HW registers */
+        if (channels->modify & CGB_CHANNEL_MO_PIT)
         {
-            if (ch < 4 && (channels->type & 0x08))
+            if (ch < 4 && (channels->type & TONEDATA_TYPE_FIX))
             {
-                int biasH = REG_SOUNDBIAS_H;
+                int dac_pwm_rate = REG_SOUNDBIAS_H;
 
-                if (biasH < 64)
-                {
+                if (dac_pwm_rate < 0x40)        // if PWM rate = 32768 Hz
                     channels->frequency = (channels->frequency + 2) & 0x7fc;
-                }
-                else if (biasH < 128)
-                {
+                else if (dac_pwm_rate < 0x80)   // if PWM rate = 65536 Hz
                     channels->frequency = (channels->frequency + 1) & 0x7fe;
-                }
             }
+
             if (ch != 4)
-            {
                 *nrx3ptr = channels->frequency;
-            }
             else
-            {
                 *nrx3ptr = (*nrx3ptr & 0x08) | channels->frequency;
-            }
-            channels->n4 = (channels->n4 & 0xC0) + (*((u8*)(&channels->frequency) + 1));
+            channels->n4 = (channels->n4 & 0xC0) + (*((u8 *)(&channels->frequency) + 1));
             *nrx4ptr = (s8)(channels->n4 & mask);
         }
 
-        if (channels->modify & 1)
+        /* 4. apply envelope & volume to HW registers */
+        if (channels->modify & CGB_CHANNEL_MO_VOL)
         {
             REG_NR51 = (REG_NR51 & ~channels->panMask) | channels->pan;
             if (ch == 3)
@@ -1179,17 +1182,15 @@ void CgbSound(void)
             }
             else
             {
-                evAdd &= 0xf;
-                *nrx2ptr = (channels->envelopeVolume << 4) + evAdd;
+                u32 envMask = 0xF;
+                *nrx2ptr = (envelopeStepTimeAndDir & envMask) + (channels->envelopeVolume << 4);
                 *nrx4ptr = channels->n4 | 0x80;
                 if (ch == 1 && !(*nrx0ptr & 0x08))
-                {
                     *nrx4ptr = channels->n4 | 0x80;
-                }
             }
         }
 
-    LAST_LABEL:
+    channel_complete:
         channels->modify = 0;
     }
 }
@@ -1508,6 +1509,10 @@ void ply_xxx(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 void ply_xwave(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
     u32 wav;
+
+#ifdef UBFIX
+    wav = 0;
+#endif
 
     READ_XCMD_BYTE(wav, 0) // UB: uninitialized variable
     READ_XCMD_BYTE(wav, 1)
