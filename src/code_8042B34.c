@@ -1010,7 +1010,7 @@ void sub_8043D60(void)
 
             if (monInfo->shopkeeper == TRUE)
                 unk = FALSE;
-            if (IsClientOrTeamBase(monInfo->joinedAt.id))
+            if (IsExperienceLocked(monInfo->joinedAt.id))
                 unk = FALSE;
             if (monInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
                 unk = FALSE;

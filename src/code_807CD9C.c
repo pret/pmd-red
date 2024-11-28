@@ -102,7 +102,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
             return;
         }
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-        if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
+        if (AbilityIsActive(target,ABILITY_SUCTION_CUPS)) {
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCBCC); // {POKEMON_0} is anchored! It can't be knocked flying!
             return;
         }
@@ -253,7 +253,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
     flag = FALSE;
 
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-    if (HasAbility(target,ABILITY_SUCTION_CUPS)) {
+    if (AbilityIsActive(target,ABILITY_SUCTION_CUPS)) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCAE8);
         return;
     }
@@ -555,7 +555,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
     DungeonPos pos;
     u32 direction = r2;
     info = GetEntInfo(target);
-    if(HasAbility(target, ABILITY_SUCTION_CUPS))
+    if(AbilityIsActive(target, ABILITY_SUCTION_CUPS))
     {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FCB98);
@@ -795,7 +795,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
     uStack_2c = param_6;
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
         entity1 = gDungeon->activePokemon[index];
-        if ((EntityExists(entity1)) && (HasAbility(entity1, ABILITY_DAMP))) break;
+        if ((EntityExists(entity1)) && (AbilityIsActive(entity1, ABILITY_DAMP))) break;
     }
     if (index != DUNGEON_MAX_POKEMON) {
         sub_804218C(pokemon,target);

@@ -964,7 +964,7 @@ void Conversion2StatusTarget(Entity * pokemon, Entity * target)
   if (EntityExists(target)) {
     entityInfo = GetEntInfo(target);
 
-    if(HasAbility(target, ABILITY_FORECAST))
+    if(AbilityIsActive(target, ABILITY_FORECAST))
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gPtrForecastPreventsConversion2Message);
     else
     {

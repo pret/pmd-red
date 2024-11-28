@@ -9,13 +9,13 @@
 s32 CalculateStatusTurns(Entity *target, s16 *turnRange, bool8 factorCurerSkills)
 {
   s32 numTurns;
-  
+
   numTurns = DungeonRandRange(turnRange[0],turnRange[1]);
   if (EntityExists(target) && (GetEntityType(target) == ENTITY_MONSTER) && (factorCurerSkills)) {
     if (IQSkillIsEnabled(target, IQ_SELF_CURER) && (numTurns != 0x7f)) {
       numTurns /= 2;
     }
-    if (HasAbility(target, ABILITY_NATURAL_CURE) && (numTurns != 0x7f) && (4 < numTurns)) {
+    if (AbilityIsActive(target, ABILITY_NATURAL_CURE) && (numTurns != 0x7f) && (4 < numTurns)) {
       numTurns = 5;
     }
   }

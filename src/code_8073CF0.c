@@ -143,7 +143,7 @@ void sub_8073D14(Entity *entity)
         return;
     if (entityInfo->shopkeeper == 1)
         return;
-    if (IsClientOrTeamBase(entityInfo->joinedAt.id))
+    if (IsExperienceLocked(entityInfo->joinedAt.id))
         return;
     if (entityInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
         return;
@@ -407,13 +407,13 @@ void sub_8074094(Entity *entity)
 
 // Abilities check
     rand = DungeonRandInt(100);
-    if (HasAbility(entity, ABILITY_SHED_SKIN) && rand < gUnknown_80F4E0C && HasNegativeStatus(entity)) {
+    if (AbilityIsActive(entity, ABILITY_SHED_SKIN) && rand < gUnknown_80F4E0C && HasNegativeStatus(entity)) {
         UseAttack(NULL);
         if (!EntityExists(entity) || sub_8044B28())
             return;
         sub_8079F20(entity, entity, 1, 0);
     }
-    if (HasAbility(entity, ABILITY_SPEED_BOOST)) {
+    if (AbilityIsActive(entity, ABILITY_SPEED_BOOST)) {
         entityInfo->unk113++;
         if (entityInfo->unk113 >= gUnknown_80F4F30) {
             entityInfo->unk113 = 0;
@@ -541,7 +541,7 @@ void sub_8074094(Entity *entity)
                     entityInfo->leechSeedClassStatus.status = 0;
                 }
                 else {
-                    bool8 dmgUser = HasAbility(entity, ABILITY_LIQUID_OOZE);
+                    bool8 dmgUser = AbilityIsActive(entity, ABILITY_LIQUID_OOZE);
                     sub_80444F4(entity);
                     UseAttack(NULL);
                     if (!EntityExists(entity) || !EntityExists(target) || sub_8044B28())
@@ -646,7 +646,7 @@ void TickStatusHeal(Entity *entity)
                 r4 += gUnknown_80F4FC4;
             if (entityInfo->reflectClassStatus.status == STATUS_WISH)
                 r4 += gUnknown_80F4FC0;
-            if (HasAbility(entity, ABILITY_RAIN_DISH) && GetApparentWeather(entity) == WEATHER_RAIN)
+            if (AbilityIsActive(entity, ABILITY_RAIN_DISH) && GetApparentWeather(entity) == WEATHER_RAIN)
                 r4 += gUnknown_80F4FC2;
 
             if (r4 > 500)

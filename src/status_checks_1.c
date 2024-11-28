@@ -36,10 +36,10 @@ s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
         return 0;
     }
     else {
-        if ((HasAbility(pokemon, ABILITY_SWIFT_SWIM)) && (GetApparentWeather(pokemon) == WEATHER_RAIN)) {
+        if ((AbilityIsActive(pokemon, ABILITY_SWIFT_SWIM)) && (GetApparentWeather(pokemon) == WEATHER_RAIN)) {
             flag = TRUE;
         }
-        if ((HasAbility(pokemon, ABILITY_CHLOROPHYLL)) && (GetApparentWeather(pokemon) == WEATHER_SUNNY)) {
+        if ((AbilityIsActive(pokemon, ABILITY_CHLOROPHYLL)) && (GetApparentWeather(pokemon) == WEATHER_SUNNY)) {
             flag = TRUE;
         }
         if (displayMessage && SetVisualFlags(GetEntInfo(pokemon), 0x40, flag)) {

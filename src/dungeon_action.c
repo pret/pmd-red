@@ -131,14 +131,14 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
                 isNotEnemy = TRUE;
             }
 
-            if (HasAbility(entity, ABILITY_LIGHTNINGROD)) {
+            if (AbilityIsActive(entity, ABILITY_LIGHTNINGROD)) {
                 gDungeon->lightningRodPokemon = entity;
                 gDungeon->unk17B38 = entityInfo->unk98;
             }
-            if (HasAbility(entity, ABILITY_MINUS)) {
+            if (AbilityIsActive(entity, ABILITY_MINUS)) {
                 gDungeon->minusIsActive[isNotEnemy] = TRUE;
             }
-            if (HasAbility(entity, ABILITY_PLUS)) {
+            if (AbilityIsActive(entity, ABILITY_PLUS)) {
                 gDungeon->plusIsActive[isNotEnemy] = TRUE;
             }
         }

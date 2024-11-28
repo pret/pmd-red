@@ -108,7 +108,7 @@ void sub_8069E0C(Entity *pokemon)
   EntityInfo *entityInfo;
 
   entityInfo = GetEntInfo(pokemon);
-  if (HasAbility(pokemon, ABILITY_FORECAST)) {
+  if (AbilityIsActive(pokemon, ABILITY_FORECAST)) {
     entityInfo->types[0] = gUnknown_80F520C[GetApparentWeather(pokemon)].unk0;
     entityInfo->types[1] = TYPE_NONE;
   }
@@ -134,16 +134,16 @@ void TriggerWeatherAbilities(void)
     {
       entity = gDungeon->activePokemon[index];
       if (EntityExists(entity)) {
-        if (HasAbility(entity, ABILITY_DRIZZLE)) {
+        if (AbilityIsActive(entity, ABILITY_DRIZZLE)) {
             gDungeon->weather.naturalWeather[WEATHER_RAIN] = 1;
         }
-        else if (HasAbility(entity, ABILITY_SAND_STREAM)) {
+        else if (AbilityIsActive(entity, ABILITY_SAND_STREAM)) {
             gDungeon->weather.naturalWeather[WEATHER_SANDSTORM] = 1;
         }
-        else if (HasAbility(entity, ABILITY_DROUGHT)) {
+        else if (AbilityIsActive(entity, ABILITY_DROUGHT)) {
             gDungeon->weather.naturalWeather[WEATHER_SUNNY] = 1;
         }
-        if ((HasAbility(entity, ABILITY_AIR_LOCK)) || (HasAbility(entity, ABILITY_CLOUD_NINE))) {
+        if ((AbilityIsActive(entity, ABILITY_AIR_LOCK)) || (AbilityIsActive(entity, ABILITY_CLOUD_NINE))) {
             gDungeon->weather.nullifyWeather = TRUE;
         }
       }
@@ -155,7 +155,7 @@ s32 GetMonsterApparentID(Entity *pokemon, s32 _id)
 {
     s16 id = (s16)(_id);
     if (id == MONSTER_CASTFORM || IS_CASTFORM_FORM_MONSTER(id)) {
-        if (HasAbility(pokemon, ABILITY_FORECAST))
+        if (AbilityIsActive(pokemon, ABILITY_FORECAST))
             return gUnknown_80F520C[GetApparentWeather(pokemon)].unk2;
         return MONSTER_CASTFORM;
     }
@@ -220,7 +220,7 @@ void sub_8069F9C(Entity *pokemon, Entity *target, Move *move)
 
     if (targetInfo->unk15A != 0) {
         targetInfo->unk15A = 0;
-        if (HasAbility(target, ABILITY_COLOR_CHANGE)) {
+        if (AbilityIsActive(target, ABILITY_COLOR_CHANGE)) {
             u8 type = GetMoveTypeForMonster(pokemon,move);
             if (move->id == MOVE_WEATHER_BALL) {
                 u32 weather = GetApparentWeather(pokemon);
@@ -267,7 +267,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
 
 void sub_806A1B0(Entity *pokemon)
 {
-  if ((EntityExists(pokemon)) && (HasAbility(pokemon, ABILITY_TRUANT))) {
+  if ((EntityExists(pokemon)) && (AbilityIsActive(pokemon, ABILITY_TRUANT))) {
     PausedStatusTarget(pokemon,pokemon,0,1,0);
   }
 }
@@ -833,37 +833,37 @@ void EndAbilityImmuneStatus(Entity *attacker, Entity *target)
 {
     EntityInfo *targetInfo = GetEntInfo(target);
 
-    if (HasAbility(target, ABILITY_LIMBER) && targetInfo->burnClassStatus.status == STATUS_PARALYSIS) {
+    if (AbilityIsActive(target, ABILITY_LIMBER) && targetInfo->burnClassStatus.status == STATUS_PARALYSIS) {
         EndBurnClassStatus(attacker, target);
     }
 
-    if (HasAbility(target, ABILITY_OWN_TEMPO) && targetInfo->cringeClassStatus.status == STATUS_CONFUSED) {
+    if (AbilityIsActive(target, ABILITY_OWN_TEMPO) && targetInfo->cringeClassStatus.status == STATUS_CONFUSED) {
         EndCringeClassStatus(attacker, target);
     }
 
-    if (HasAbility(target, ABILITY_WATER_VEIL) && targetInfo->burnClassStatus.status == STATUS_BURN) {
+    if (AbilityIsActive(target, ABILITY_WATER_VEIL) && targetInfo->burnClassStatus.status == STATUS_BURN) {
         EndBurnClassStatus(attacker, target);
     }
 
-    if (HasAbility(target, ABILITY_OBLIVIOUS) && targetInfo->cringeClassStatus.status == STATUS_INFATUATED) {
+    if (AbilityIsActive(target, ABILITY_OBLIVIOUS) && targetInfo->cringeClassStatus.status == STATUS_INFATUATED) {
         EndCringeClassStatus(attacker, target);
     }
 
-    if ((HasAbility(target, ABILITY_INSOMNIA) || HasAbility(target, ABILITY_VITAL_SPIRIT))
+    if ((AbilityIsActive(target, ABILITY_INSOMNIA) || AbilityIsActive(target, ABILITY_VITAL_SPIRIT))
         && (IsSleeping(target) || targetInfo->sleepClassStatus.status == STATUS_YAWNING))
     {
         EndSleepClassStatus(attacker, target, FALSE, TRUE);
     }
 
-    if (HasAbility(target, ABILITY_MAGMA_ARMOR) && targetInfo->frozenClassStatus.status == STATUS_FROZEN) {
+    if (AbilityIsActive(target, ABILITY_MAGMA_ARMOR) && targetInfo->frozenClassStatus.status == STATUS_FROZEN) {
         EndFrozenClassStatus(attacker, target);
     }
 
-    if (HasAbility(target, ABILITY_IMMUNITY) && ENTITY_POISONED(targetInfo)) {
+    if (AbilityIsActive(target, ABILITY_IMMUNITY) && ENTITY_POISONED(targetInfo)) {
         EndBurnClassStatus(attacker, target);
     }
 
-    if (HasAbility(target, ABILITY_FORECAST)) {
+    if (AbilityIsActive(target, ABILITY_FORECAST)) {
         targetInfo->isColorChanged = FALSE;
         if (targetInfo->reflectClassStatus.status == STATUS_CONVERSION2) {
             EndReflectClassStatus(attacker, target);
@@ -2266,7 +2266,7 @@ void sub_806C51C(Entity *entity)
     if (!entInfo->isNotTeamMember || entInfo->curseClassStatus.status == STATUS_DECOY) {
         var_34 = 1;
     }
-    if (IsClientOrTeamBase(entInfo->joinedAt.id) || entInfo->monsterBehavior == 1) {
+    if (IsExperienceLocked(entInfo->joinedAt.id) || entInfo->monsterBehavior == 1) {
         var_34 = 1;
     }
 

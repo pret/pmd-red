@@ -347,7 +347,7 @@ _0807E90E:
 	bl CalcSpeedStage
 	adds r0, r5, 0
 	movs r1, 0x25
-	bl HasAbility
+	bl AbilityIsActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E958
@@ -414,7 +414,7 @@ _0807E9A4:
 	bhi _0807E9FE
 	adds r0, r5, 0
 	movs r1, 0x25
-	bl HasAbility
+	bl AbilityIsActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E9D4
@@ -1034,7 +1034,7 @@ _0807EEA0:
 	adds r1, r5, 0
 	movs r2, 0x3
 	adds r3, r6, 0
-	bl WarpTarget 
+	bl WarpTarget
 	b _0807EE72
 _0807EEAE:
 	movs r6, 0
@@ -1741,7 +1741,7 @@ sub_807F43C:
 	mov r8, r1
 	mov r0, r8
 	movs r1, 0xE
-	bl HasAbility
+	bl AbilityIsActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807F470
@@ -2301,7 +2301,7 @@ _0807F8BE:
 	mov r1, r8
 	movs r2, 0
 	movs r3, 0
-	bl WarpTarget 
+	bl WarpTarget
 	b _0807F8FA
 	.align 2, 0
 _0807F8D0: .4byte gAdjacentTileOffsets

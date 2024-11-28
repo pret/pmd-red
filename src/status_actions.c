@@ -217,7 +217,7 @@ bool8 HandleColorChange(Entity * pokemon, Entity * target)
 
     entityInfo = GetEntInfo(target);
     newType = gDungeonCamouflageTypes[gDungeon->tileset];
-    if (HasAbility(target, ABILITY_FORECAST)) {
+    if (AbilityIsActive(target, ABILITY_FORECAST)) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gPtrForecastPreventsTypeSwitchMessage);
         return FALSE;
     }
@@ -507,7 +507,7 @@ bool8 DreamEaterMoveAction(Entity * pokemon, Entity * target, Move *move, s32 pa
   bool8 flag;
 
   flag = FALSE;
-  hasLiquidOoze = HasAbility(target, ABILITY_LIQUID_OOZE);
+  hasLiquidOoze = AbilityIsActive(target, ABILITY_LIQUID_OOZE);
   if (IsSleeping(target)) {
     iVar3 = HandleDamagingMove(pokemon,target,move,0x100,param_4);
     if (iVar3 != 0) {
@@ -698,7 +698,7 @@ bool8 ThiefAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
             targetInfo2 = GetEntInfo(target);
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
-            if (HasAbility(target, ABILITY_STICKY_HOLD)) {
+            if (AbilityIsActive(target, ABILITY_STICKY_HOLD)) {
                 return TRUE;
             }
             else if (HasHeldItem(target, ITEM_ALERT_SPECS)) {

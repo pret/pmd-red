@@ -83,7 +83,7 @@ void ChooseAIMove(Entity *pokemon)
     s32 maxWeight;
     if (CannotAttack(pokemon, FALSE) ||
         ShouldMonsterRunAwayAndShowEffect(pokemon, TRUE) ||
-        HasTactic(pokemon, TACTIC_KEEP_YOUR_DISTANCE) ||
+        IsTacticSet(pokemon, TACTIC_KEEP_YOUR_DISTANCE) ||
         (pokemonInfo->cringeClassStatus.status == STATUS_CONFUSED && DungeonRandOutcome(gConfusedAttackChance)))
     {
         return;

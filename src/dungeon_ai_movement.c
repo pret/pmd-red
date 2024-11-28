@@ -49,7 +49,7 @@ void AIMovement(Entity *pokemon, bool8 showRunAwayEffect)
     pokemonInfo->aiTarget.aiNotNextToTarget = FALSE;
     pokemonInfo->aiTarget.aiTargetingEnemy = FALSE;
     pokemonInfo->aiTarget.aiTurningAround = FALSE;
-    if (HasTactic(pokemon, TACTIC_BE_PATIENT))
+    if (IsTacticSet(pokemon, TACTIC_BE_PATIENT))
     {
         u32 maxHPStat = pokemonInfo->maxHPStat;
         maxHPStat += maxHPStat >> 0x1f;
@@ -59,7 +59,7 @@ void AIMovement(Entity *pokemon, bool8 showRunAwayEffect)
             return;
         }
     }
-    if (HasTactic(pokemon, TACTIC_WAIT_THERE))
+    if (IsTacticSet(pokemon, TACTIC_WAIT_THERE))
     {
         pokemonInfo->action.action = ACTION_NOTHING;
     }
@@ -235,7 +235,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
             pokemonInfo->aiTarget.aiTargetSpawnGenID = pokemonInfo->aiTarget.aiTarget->spawnGenID;
             pokemonInfo->aiTarget.aiTargetingEnemy = TRUE;
             pokemonInfo->moveRandomly = FALSE;
-            if (HasTactic(pokemon, TACTIC_KEEP_YOUR_DISTANCE) && !CanSeeTeammate(pokemon))
+            if (IsTacticSet(pokemon, TACTIC_KEEP_YOUR_DISTANCE) && !CanSeeTeammate(pokemon))
             {
                 s32 distanceX = pokemon->pos.x - possibleTargets[targetIndex]->pos.x;
                 if (distanceX < 0)
@@ -258,7 +258,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
             return TRUE;
         }
     }
-    if (!HasTactic(pokemon, TACTIC_GO_THE_OTHER_WAY))
+    if (!IsTacticSet(pokemon, TACTIC_GO_THE_OTHER_WAY))
     {
         do
         {
