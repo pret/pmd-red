@@ -74,6 +74,9 @@ void sub_807BB78(Entity *pokemon);
 extern void sub_803F580(u32);
 bool8 sub_808384C(DungeonPos *, DungeonPos *);
 u8 sub_8083660(DungeonPos *);
+void sub_80460F8(DungeonPos *, Item *, u32);
+void sub_80462AC(Entity * ,u32, u32, u8, u32);
+extern void sub_80402AC(s32, s32);
 
 void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
 {
@@ -135,7 +138,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
                     goto _0807CF26;
                 }
                 if (sub_80705F0(target,&pos)){
-                    flag = (tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0 ? FALSE : TRUE;
+                    flag = (GetTerrainType(tile) != TERRAIN_TYPE_WALL);
                     goto _0807CF20;
                 }
                 sub_80694C0(target,pos.x,pos.y,1);
@@ -406,629 +409,145 @@ bool8 ExposeTrap(s32 x,s32 y)
     }
 }
 
-// https://decomp.me/scratch/P5sBc
-NAKED
-void HandleTrawlOrbAction(Entity *pokemon, Entity *target)
-{
-asm_unified(
-"push {r4-r7,lr}\n"
-"mov r7, r10\n"
-"mov r6, r9\n"
-"mov r5, r8\n"
-"push {r5-r7}\n"
-"ldr r4, _0807D540\n"
-"add sp, r4\n"
-"ldr r1, _0807D544\n"
-"add r1, sp\n"
-"str r0, [r1]\n"
-"movs r2, 0\n"
-"movs r3, 0xD1\n"
-"lsls r3, 4\n"
-"add r3, sp\n"
-"str r2, [r3]\n"
-"ldr r4, _0807D548\n"
-"add r4, sp\n"
-"str r2, [r4]\n"
-"add r5, sp, 0x4\n"
-"mov r8, r5\n"
-"mov r10, r2\n"
-"mov r9, r2\n"
-"add r7, sp, 0x8\n"
-"b _0807D606\n"
-".align 2, 0\n"
-"_0807D540: .4byte 0xfffff2d4\n"
-"_0807D544: .4byte 0x00000d08\n"
-"_0807D548: .4byte 0x00000d0c\n"
-"_0807D54C:\n"
-"movs r0, 0x4\n"
-"ldrsh r1, [r5, r0]\n"
-"ldr r2, _0807D650\n"
-"add r2, sp\n"
-"ldr r2, [r2]\n"
-"movs r3, 0x4\n"
-"ldrsh r0, [r2, r3]\n"
-"subs r1, r0\n"
-"cmp r1, 0\n"
-"bge _0807D562\n"
-"negs r1, r1\n"
-"_0807D562:\n"
-"cmp r1, 0x2\n"
-"bgt _0807D580\n"
-"movs r3, 0x6\n"
-"ldrsh r1, [r5, r3]\n"
-"ldr r4, _0807D650\n"
-"add r4, sp\n"
-"ldr r4, [r4]\n"
-"movs r2, 0x6\n"
-"ldrsh r0, [r4, r2]\n"
-"subs r1, r0\n"
-"cmp r1, 0\n"
-"bge _0807D57C\n"
-"negs r1, r1\n"
-"_0807D57C:\n"
-"cmp r1, 0x2\n"
-"ble _0807D5FE\n"
-"_0807D580:\n"
-"movs r1, 0x4\n"
-"ldrsh r0, [r5, r1]\n"
-"movs r2, 0x6\n"
-"ldrsh r1, [r5, r2]\n"
-"bl GetTile\n"
-"ldrh r1, [r0]\n"
-"movs r2, 0x3\n"
-"adds r0, r2, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"beq _0807D5FE\n"
-"mov r3, r8\n"
-"str r2, [r3]\n"
-"ldr r4, _0807D654\n"
-"add r4, sp\n"
-"ldr r1, _0807D658\n"
-"add r1, sp\n"
-"ldr r1, [r1]\n"
-"lsls r0, r1, 2\n"
-"adds r4, r0\n"
-"str r4, [r7, 0x6C]\n"
-"ldr r0, [r5, 0x4]\n"
-"str r0, [r7]\n"
-"movs r2, 0x4\n"
-"ldrsh r0, [r5, r2]\n"
-"lsls r1, r0, 1\n"
-"adds r1, r0\n"
-"lsls r1, 3\n"
-"adds r1, 0x4\n"
-"lsls r1, 8\n"
-"movs r3, 0x6\n"
-"ldrsh r0, [r5, r3]\n"
-"lsls r2, r0, 1\n"
-"adds r2, r0\n"
-"lsls r2, 3\n"
-"adds r2, 0x4\n"
-"lsls r2, 8\n"
-"mov r0, r8\n"
-"bl SetEntityPixelPos\n"
-"movs r2, 0\n"
-"movs r1, 0\n"
-"strh r1, [r7, 0x22]\n"
-"movs r0, 0x1\n"
-"strb r0, [r7, 0x1C]\n"
-"strb r2, [r7, 0x1E]\n"
-"str r1, [r7, 0x18]\n"
-"ldr r0, _0807D65C\n"
-"ldr r0, [r0]\n"
-"ldr r5, _0807D660\n"
-"adds r0, r5\n"
-"add r0, r9\n"
-"ldr r0, [r0]\n"
-"str r0, [r4]\n"
-"adds r7, 0x74\n"
-"movs r0, 0x74\n"
-"add r8, r0\n"
-"ldr r2, _0807D658\n"
-"add r2, sp\n"
-"ldr r1, [r2]\n"
-"adds r1, 0x1\n"
-"str r1, [r2]\n"
-"_0807D5FE:\n"
-"movs r3, 0x4\n"
-"add r9, r3\n"
-"movs r4, 0x1\n"
-"add r10, r4\n"
-"_0807D606:\n"
-"ldr r0, _0807D65C\n"
-"ldr r1, [r0]\n"
-"ldr r5, _0807D664\n"
-"adds r0, r1, r5\n"
-"movs r2, 0\n"
-"ldrsh r0, [r0, r2]\n"
-"cmp r10, r0\n"
-"bge _0807D634\n"
-"ldr r3, _0807D668\n"
-"adds r0, r1, r3\n"
-"add r0, r9\n"
-"ldr r5, [r0]\n"
-"adds r0, r5, 0\n"
-"bl EntityExists\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807D5FE\n"
-"ldr r4, _0807D658\n"
-"add r4, sp\n"
-"ldr r4, [r4]\n"
-"cmp r4, 0x18\n"
-"ble _0807D54C\n"
-"_0807D634:\n"
-"ldr r5, _0807D658\n"
-"add r5, sp\n"
-"ldr r5, [r5]\n"
-"cmp r5, 0\n"
-"bne _0807D670\n"
-"ldr r0, _0807D66C\n"
-"ldr r1, [r0]\n"
-"ldr r2, _0807D650\n"
-"add r2, sp\n"
-"ldr r0, [r2]\n"
-"bl LogMessageByIdWithPopupCheckUser\n"
-"b _0807D9F4\n"
-".align 2, 0\n"
-"_0807D650: .4byte 0x00000d08\n"
-"_0807D654: .4byte 0x00000b58\n"
-"_0807D658: .4byte 0x00000d0c\n"
-"_0807D65C: .4byte gDungeon\n"
-"_0807D660: .4byte 0x00003804\n"
-"_0807D664: .4byte 0x00003904\n"
-"_0807D668: .4byte 0x0001361c\n"
-"_0807D66C: .4byte gUnknown_80FE034\n"
-"_0807D670:\n"
-"movs r1, 0\n"
-"movs r7, 0x1D\n"
-"ldr r0, _0807D754\n"
-"add r0, sp\n"
-"_0807D678:\n"
-"strb r1, [r0]\n"
-"subs r0, 0x1\n"
-"subs r7, 0x1\n"
-"cmp r7, 0\n"
-"bge _0807D678\n"
-"movs r7, 0\n"
-"ldr r3, _0807D758\n"
-"add r3, sp\n"
-"ldr r3, [r3]\n"
-"cmp r7, r3\n"
-"blt _0807D690\n"
-"b _0807D7CC\n"
-"_0807D690:\n"
-"ldr r4, _0807D75C\n"
-"mov r10, r4\n"
-"ldr r5, _0807D760\n"
-"movs r0, 0\n"
-"ldrsh r5, [r5, r0]\n"
-"ldr r0, _0807D764\n"
-"add r0, sp\n"
-"str r5, [r0]\n"
-"_0807D6A0:\n"
-"movs r1, 0\n"
-"mov r9, r1\n"
-"ldr r2, _0807D768\n"
-"add r2, sp\n"
-"ldr r2, [r2]\n"
-"ldrh r0, [r2, 0x4]\n"
-"ldr r1, _0807D76C\n"
-"ands r6, r1\n"
-"orrs r6, r0\n"
-"ldrh r0, [r2, 0x6]\n"
-"lsls r0, 16\n"
-"mov r4, r10\n"
-"ands r6, r4\n"
-"orrs r6, r0\n"
-"mov r4, r9\n"
-"adds r5, r7, 0x1\n"
-"movs r0, 0xD2\n"
-"lsls r0, 4\n"
-"add r0, sp\n"
-"str r5, [r0]\n"
-"ldr r1, _0807D760\n"
-"ldr r2, _0807D764\n"
-"add r2, sp\n"
-"ldr r2, [r2]\n"
-"cmp r2, 0x63\n"
-"beq _0807D790\n"
-"ldr r3, _0807D770\n"
-"add r3, sp\n"
-"mov r8, r3\n"
-"_0807D6DA:\n"
-"ldr r0, _0807D774\n"
-"add r0, sp\n"
-"adds r0, r4\n"
-"ldr r5, _0807D778\n"
-"add r5, sp\n"
-"str r0, [r5]\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"bne _0807D77C\n"
-"lsls r2, r4, 2\n"
-"adds r2, r1\n"
-"ldrh r0, [r2]\n"
-"ldr r1, _0807D768\n"
-"add r1, sp\n"
-"ldr r1, [r1]\n"
-"ldrh r1, [r1, 0x4]\n"
-"adds r0, r1\n"
-"lsls r0, 16\n"
-"lsrs r0, 16\n"
-"ldr r1, _0807D76C\n"
-"ands r6, r1\n"
-"orrs r6, r0\n"
-"ldrh r0, [r2, 0x2]\n"
-"ldr r2, _0807D768\n"
-"add r2, sp\n"
-"ldr r2, [r2]\n"
-"ldrh r2, [r2, 0x6]\n"
-"adds r0, r2\n"
-"lsls r0, 16\n"
-"mov r3, r10\n"
-"ands r6, r3\n"
-"orrs r6, r0\n"
-"lsls r0, r6, 16\n"
-"asrs r0, 16\n"
-"asrs r1, r6, 16\n"
-"bl GetTile\n"
-"adds r2, r0, 0\n"
-"ldrh r1, [r2]\n"
-"movs r3, 0x3\n"
-"ands r3, r1\n"
-"cmp r3, 0x1\n"
-"bne _0807D77C\n"
-"movs r5, 0x80\n"
-"lsls r5, 2\n"
-"adds r0, r5, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"bne _0807D77C\n"
-"ldr r0, [r2, 0x14]\n"
-"cmp r0, 0\n"
-"bne _0807D77C\n"
-"lsls r0, r7, 2\n"
-"add r0, r8\n"
-"str r6, [r0]\n"
-"ldr r0, _0807D778\n"
-"add r0, sp\n"
-"ldr r0, [r0]\n"
-"strb r3, [r0]\n"
-"b _0807D7B8\n"
-".align 2, 0\n"
-"_0807D754: .4byte 0x00000d05\n"
-"_0807D758: .4byte 0x00000d0c\n"
-"_0807D75C: .4byte 0x0000ffff\n"
-"_0807D760: .4byte gUnknown_80F4468\n"
-"_0807D764: .4byte 0x00000d18\n"
-"_0807D768: .4byte 0x00000d08\n"
-"_0807D76C: .4byte 0xffff0000\n"
-"_0807D770: .4byte 0x00000bbc\n"
-"_0807D774: .4byte 0x00000ce8\n"
-"_0807D778: .4byte 0x00000d28\n"
-"_0807D77C:\n"
-"adds r4, 0x1\n"
-"cmp r4, 0x1D\n"
-"bgt _0807D790\n"
-"lsls r0, r4, 2\n"
-"ldr r1, _0807D9B4\n"
-"adds r0, r1\n"
-"movs r2, 0\n"
-"ldrsh r0, [r0, r2]\n"
-"cmp r0, 0x63\n"
-"bne _0807D6DA\n"
-"_0807D790:\n"
-"mov r3, r9\n"
-"cmp r3, 0\n"
-"bne _0807D7B8\n"
-"movs r0, 0x74\n"
-"muls r0, r7\n"
-"add r0, sp\n"
-"adds r0, 0x4\n"
-"str r3, [r0]\n"
-"ldr r1, _0807D9B8\n"
-"add r1, sp\n"
-"lsls r0, r7, 2\n"
-"adds r1, r0\n"
-"ldrh r2, [r1]\n"
-"mov r0, r10\n"
-"orrs r0, r2\n"
-"strh r0, [r1]\n"
-"ldrh r2, [r1, 0x2]\n"
-"mov r0, r10\n"
-"orrs r0, r2\n"
-"strh r0, [r1, 0x2]\n"
-"_0807D7B8:\n"
-"movs r4, 0xD2\n"
-"lsls r4, 4\n"
-"add r4, sp\n"
-"ldr r7, [r4]\n"
-"ldr r5, _0807D9BC\n"
-"add r5, sp\n"
-"ldr r5, [r5]\n"
-"cmp r7, r5\n"
-"bge _0807D7CC\n"
-"b _0807D6A0\n"
-"_0807D7CC:\n"
-"movs r7, 0\n"
-"ldr r0, _0807D9BC\n"
-"add r0, sp\n"
-"ldr r0, [r0]\n"
-"cmp r7, r0\n"
-"bge _0807D866\n"
-"_0807D7D8:\n"
-"movs r0, 0x74\n"
-"adds r1, r7, 0\n"
-"muls r1, r0\n"
-"mov r8, r1\n"
-"mov r4, sp\n"
-"add r4, r8\n"
-"adds r4, 0x4\n"
-"adds r0, r4, 0\n"
-"bl EntityExists\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807D85A\n"
-"adds r0, r4, 0x4\n"
-"movs r1, 0x1\n"
-"bl sub_80461C8\n"
-"movs r2, 0x4\n"
-"ldrsh r0, [r4, r2]\n"
-"movs r3, 0x6\n"
-"ldrsh r1, [r4, r3]\n"
-"bl sub_80402AC\n"
-"movs r5, 0xC2\n"
-"lsls r5, 4\n"
-"add r5, sp\n"
-"lsls r6, r7, 3\n"
-"adds r5, r6\n"
-"ldr r4, _0807D9B8\n"
-"add r4, sp\n"
-"lsls r0, r7, 2\n"
-"adds r4, r0\n"
-"movs r0, 0\n"
-"ldrsh r1, [r4, r0]\n"
-"lsls r0, r1, 1\n"
-"adds r0, r1\n"
-"lsls r0, 3\n"
-"adds r0, 0x4\n"
-"lsls r0, 8\n"
-"add r1, sp, 0x10\n"
-"add r1, r8\n"
-"ldr r1, [r1]\n"
-"subs r0, r1\n"
-"movs r1, 0x3C\n"
-"bl __divsi3\n"
-"str r0, [r5]\n"
-"ldr r5, _0807D9C0\n"
-"add r5, sp\n"
-"adds r5, r6\n"
-"movs r2, 0x2\n"
-"ldrsh r1, [r4, r2]\n"
-"lsls r0, r1, 1\n"
-"adds r0, r1\n"
-"lsls r0, 3\n"
-"adds r0, 0x4\n"
-"lsls r0, 8\n"
-"add r1, sp, 0x14\n"
-"add r1, r8\n"
-"ldr r1, [r1]\n"
-"subs r0, r1\n"
-"movs r1, 0x3C\n"
-"bl __divsi3\n"
-"str r0, [r5]\n"
-"_0807D85A:\n"
-"adds r7, 0x1\n"
-"ldr r3, _0807D9BC\n"
-"add r3, sp\n"
-"ldr r3, [r3]\n"
-"cmp r7, r3\n"
-"blt _0807D7D8\n"
-"_0807D866:\n"
-"movs r1, 0xD1\n"
-"lsls r1, 1\n"
-"ldr r4, _0807D9C4\n"
-"add r4, sp\n"
-"ldr r0, [r4]\n"
-"bl sub_80421C0\n"
-"movs r5, 0\n"
-"mov r9, r5\n"
-"ldr r0, _0807D9C8\n"
-"ldr r0, [r0]\n"
-"ldr r1, _0807D9CC\n"
-"adds r0, r1\n"
-"ldrb r0, [r0]\n"
-"ldr r2, _0807D9D0\n"
-"add r2, sp\n"
-"str r0, [r2]\n"
-"mov r10, r5\n"
-"movs r6, 0\n"
-"_0807D88C:\n"
-"movs r7, 0\n"
-"mov r3, r10\n"
-"adds r3, 0x22\n"
-"ldr r4, _0807D9D4\n"
-"add r4, sp\n"
-"str r3, [r4]\n"
-"adds r5, r6, 0x1\n"
-"ldr r0, _0807D9D8\n"
-"add r0, sp\n"
-"str r5, [r0]\n"
-"ldr r1, _0807D9BC\n"
-"add r1, sp\n"
-"ldr r1, [r1]\n"
-"cmp r7, r1\n"
-"bge _0807D916\n"
-"mov r2, r9\n"
-"lsls r2, 24\n"
-"mov r8, r2\n"
-"_0807D8B0:\n"
-"movs r0, 0x74\n"
-"adds r5, r7, 0\n"
-"muls r5, r0\n"
-"mov r4, sp\n"
-"adds r4, r5\n"
-"adds r4, 0x4\n"
-"adds r0, r4, 0\n"
-"bl EntityExists\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0807D90A\n"
-"movs r0, 0xC2\n"
-"lsls r0, 4\n"
-"add r0, sp\n"
-"lsls r2, r7, 3\n"
-"adds r0, r2\n"
-"ldr r1, [r0]\n"
-"ldr r0, _0807D9C0\n"
-"add r0, sp\n"
-"adds r0, r2\n"
-"ldr r2, [r0]\n"
-"adds r0, r4, 0\n"
-"bl IncreaseEntityPixelPos\n"
-"mov r0, r10\n"
-"bl sin_4096\n"
-"add r2, sp, 0x20\n"
-"adds r2, r5\n"
-"lsls r1, r0, 1\n"
-"adds r1, r0\n"
-"lsls r1, 2\n"
-"str r1, [r2]\n"
-"movs r0, 0\n"
-"str r0, [sp]\n"
-"adds r0, r4, 0\n"
-"ldr r3, _0807D9D0\n"
-"add r3, sp\n"
-"ldr r1, [r3]\n"
-"movs r2, 0\n"
-"mov r4, r8\n"
-"lsrs r3, r4, 24\n"
-"bl sub_80462AC\n"
-"_0807D90A:\n"
-"adds r7, 0x1\n"
-"ldr r5, _0807D9BC\n"
-"add r5, sp\n"
-"ldr r5, [r5]\n"
-"cmp r7, r5\n"
-"blt _0807D8B0\n"
-"_0807D916:\n"
-"movs r0, 0x13\n"
-"bl sub_803E46C\n"
-"ldr r0, _0807D9D4\n"
-"add r0, sp\n"
-"ldr r0, [r0]\n"
-"mov r10, r0\n"
-"movs r0, 0x3\n"
-"ands r0, r6\n"
-"cmp r0, 0\n"
-"bne _0807D930\n"
-"movs r1, 0x1\n"
-"add r9, r1\n"
-"_0807D930:\n"
-"movs r0, 0x7\n"
-"mov r2, r9\n"
-"ands r2, r0\n"
-"mov r9, r2\n"
-"ldr r3, _0807D9D8\n"
-"add r3, sp\n"
-"ldr r6, [r3]\n"
-"cmp r6, 0x3B\n"
-"ble _0807D88C\n"
-"movs r7, 0\n"
-"ldr r4, _0807D9BC\n"
-"add r4, sp\n"
-"ldr r4, [r4]\n"
-"cmp r7, r4\n"
-"bge _0807D996\n"
-"_0807D94E:\n"
-"ldr r0, _0807D9B8\n"
-"add r0, sp\n"
-"lsls r1, r7, 2\n"
-"adds r4, r0, r1\n"
-"movs r5, 0\n"
-"ldrsh r0, [r4, r5]\n"
-"cmp r0, 0\n"
-"blt _0807D98A\n"
-"movs r0, 0x74\n"
-"muls r0, r7\n"
-"add r0, sp\n"
-"adds r0, 0x4\n"
-"bl GetItemData\n"
-"adds r1, r0, 0\n"
-"adds r0, r4, 0\n"
-"movs r2, 0x1\n"
-"bl sub_80460F8\n"
-"movs r1, 0\n"
-"ldrsh r0, [r4, r1]\n"
-"movs r2, 0x2\n"
-"ldrsh r1, [r4, r2]\n"
-"bl sub_80402AC\n"
-"movs r3, 0x1\n"
-"movs r4, 0xD1\n"
-"lsls r4, 4\n"
-"add r4, sp\n"
-"str r3, [r4]\n"
-"_0807D98A:\n"
-"adds r7, 0x1\n"
-"ldr r5, _0807D9BC\n"
-"add r5, sp\n"
-"ldr r5, [r5]\n"
-"cmp r7, r5\n"
-"blt _0807D94E\n"
-"_0807D996:\n"
-"movs r0, 0xD1\n"
-"lsls r0, 4\n"
-"add r0, sp\n"
-"ldr r0, [r0]\n"
-"cmp r0, 0\n"
-"beq _0807D9E0\n"
-"ldr r0, _0807D9DC\n"
-"ldr r1, [r0]\n"
-"ldr r2, _0807D9C4\n"
-"add r2, sp\n"
-"ldr r0, [r2]\n"
-"bl LogMessageByIdWithPopupCheckUser\n"
-"b _0807D9EE\n"
-".align 2, 0\n"
-"_0807D9B4: .4byte gUnknown_80F4468\n"
-"_0807D9B8: .4byte 0x00000bbc\n"
-"_0807D9BC: .4byte 0x00000d0c\n"
-"_0807D9C0: .4byte 0x00000c24\n"
-"_0807D9C4: .4byte 0x00000d08\n"
-"_0807D9C8: .4byte gDungeon\n"
-"_0807D9CC: .4byte 0x00018210\n"
-"_0807D9D0: .4byte 0x00000d14\n"
-"_0807D9D4: .4byte 0x00000d1c\n"
-"_0807D9D8: .4byte 0x00000d24\n"
-"_0807D9DC: .4byte gUnknown_80FE060\n"
-"_0807D9E0:\n"
-"ldr r0, _0807DA08\n"
-"ldr r1, [r0]\n"
-"ldr r3, _0807DA0C\n"
-"add r3, sp\n"
-"ldr r0, [r3]\n"
-"bl LogMessageByIdWithPopupCheckUser\n"
-"_0807D9EE:\n"
-"movs r0, 0x1\n"
-"bl sub_807EC28\n"
-"_0807D9F4:\n"
-"ldr r3, _0807DA10\n"
-"add sp, r3\n"
-"pop {r3-r5}\n"
-"mov r8, r3\n"
-"mov r9, r4\n"
-"mov r10, r5\n"
-"pop {r4-r7}\n"
-"pop {r0}\n"
-"bx r0\n"
-".align 2, 0\n"
-"_0807DA08: .4byte gUnknown_80FE034\n"
-"_0807DA0C: .4byte 0x00000d08\n"
-"_0807DA10: .4byte 0x00000d2c");
-}
+extern const u8 *const gUnknown_80FE034;
+extern const u8 *const gUnknown_80FE060;
+extern const DungeonPos gUnknown_80F4468[];
 
+void HandleTrawlOrbAction(Entity *user, Entity *target)
+{
+    Entity itemEntities[25];
+    Item itemInfo[25];
+    DungeonPos targetTilePos[25];
+    PixelPos itemVelocity[25];
+    bool8 targetTileUsed[30];
+    s32 i;
+    s32 itemsCount;
+    bool8 hasTrawled;
+    bool8 hallucinating;
+    Entity *currItemEntity;
+
+    hasTrawled = FALSE;
+    itemsCount = 0;
+    currItemEntity = &itemEntities[0];
+
+    for (i = 0; i < gDungeon->numItems; i++) {
+        Entity *dungeonItem = gDungeon->items[i];
+        if (EntityExists(dungeonItem)) {
+            if (itemsCount >= 25)
+                break;
+
+            if ((abs(dungeonItem->pos.x - user->pos.x) > 2 || abs(dungeonItem->pos.y - user->pos.y) > 2)
+                && GetTerrainType(GetTile(dungeonItem->pos.x, dungeonItem->pos.y)) != TERRAIN_TYPE_WALL)
+            {
+                currItemEntity->type = ENTITY_ITEM;
+                currItemEntity->axObj.info.item = &itemInfo[itemsCount];
+                currItemEntity->pos = dungeonItem->pos;
+                SetEntityPixelPos(currItemEntity, (dungeonItem->pos.x * 24 + 4) * 256, (dungeonItem->pos.y * 24 + 4) * 256);
+                currItemEntity->spawnGenID = 0;
+                currItemEntity->isVisible = TRUE;
+                currItemEntity->unk22 = 0;
+                currItemEntity->unk1C = 0;
+                itemInfo[itemsCount] = gDungeon->unk3804[i];
+                currItemEntity++;
+                itemsCount++;
+            }
+        }
+    }
+
+    if (itemsCount == 0) {
+        LogMessageByIdWithPopupCheckUser(user, gUnknown_80FE034);
+    }
+    else {
+        s32 var;
+        s32 i;
+        s32 unkAngle;
+        s32 animFrame;
+
+        for (i = 0; i < 30; i++) {
+            targetTileUsed[i] = FALSE;
+        }
+        for (i = 0; i < itemsCount; i++) {
+            s32 j = 0;
+            bool8 foundTile = FALSE;
+            DungeonPos pos;
+
+            pos.x = user->pos.x;
+            pos.y = user->pos.y;
+
+            for (j = 0; j < 30; j++) {
+                if (gUnknown_80F4468[j].x == 99)
+                    break;
+                if (!targetTileUsed[j]) {
+                    const Tile *tile;
+
+                    pos.x = user->pos.x + gUnknown_80F4468[j].x;
+                    pos.y = user->pos.y + gUnknown_80F4468[j].y;
+
+                    tile = GetTile(pos.x, pos.y);
+                    if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL && !(tile->terrainType & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
+                        targetTilePos[i] = pos;
+                        targetTileUsed[j] = TRUE;
+                        foundTile = TRUE;
+                        break;
+                    }
+                }
+            }
+
+            if (!foundTile) {
+                itemEntities[i].type = ENTITY_NOTHING;
+                targetTilePos[i].x = -1;
+                targetTilePos[i].y = -1;
+            }
+        }
+
+        for (i = 0; i < itemsCount; i++) {
+            if (EntityExists(&itemEntities[i])) {
+                sub_80461C8(&itemEntities[i].pos, 1);
+                sub_80402AC(itemEntities[i].pos.x, itemEntities[i].pos.y);
+                itemVelocity[i].x = (((targetTilePos[i].x * 24 + 4) * 256) - itemEntities[i].pixelPos.x) / 60;
+                itemVelocity[i].y = (((targetTilePos[i].y * 24 + 4) * 256) - itemEntities[i].pixelPos.y) / 60;
+            }
+        }
+
+        sub_80421C0(user, 0x1A2);
+
+        var = 0;
+        hallucinating = gDungeon->unk181e8.hallucinating;
+        unkAngle = 0;
+        for (animFrame = 0; animFrame < 60; animFrame++) {
+            for (i = 0; i < itemsCount; i++) {
+                if (EntityExists(&itemEntities[i])) {
+                    IncreaseEntityPixelPos(&itemEntities[i], itemVelocity[i].x, itemVelocity[i].y);
+                    itemEntities[i].unk1C = sin_4096(unkAngle) * 0xC;
+                    sub_80462AC(&itemEntities[i], hallucinating, 0, var, 0);
+                }
+            }
+
+            sub_803E46C(0x13);
+            unkAngle += 0x22;
+            if (!(animFrame & 3)) {
+                var++;
+            }
+            var &= 7;
+        }
+
+        for (i = 0; i < itemsCount; i++) {
+            if (targetTilePos[i].x >= 0) {
+                sub_80460F8(&targetTilePos[i], GetItemData(&itemEntities[i]), 1);
+                sub_80402AC(targetTilePos[i].x, targetTilePos[i].y);
+                hasTrawled = TRUE;
+            }
+        }
+
+        if (hasTrawled) {
+            LogMessageByIdWithPopupCheckUser(user, gUnknown_80FE060);
+        }
+        else {
+            LogMessageByIdWithPopupCheckUser(user, gUnknown_80FE034);
+        }
+        sub_807EC28(1);
+    }
+}
 
 void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
     EntityInfo *info;
@@ -1058,19 +577,19 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
         pos.y = target->pos.y + gAdjacentTileOffsets[direction].y;
 
         if(pos.x <= 0 || pos.y <= 0 || pos.x > DUNGEON_MAX_SIZE_X - 2 || pos.y > DUNGEON_MAX_SIZE_Y - 2) break;
-        
+
         tile = GetTile(pos.x, pos.y);
 
         if(tile->monster) break;
-        if(!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))) break;
-    
+        if(GetTerrainType(tile) == TERRAIN_TYPE_WALL) break;
+
         sub_80694C0(target, pos.x, pos.y, 0);
-    
+
         sub_804535C(target, 0);
         if(!sub_8045888(target)) continue;
         sub_803E46C(0x3A);
     }
-    
+
     sub_806A5B8(target);
     if(sub_80706A4(target, &target->pos))
         WarpTarget(target, target, 0, 0);
@@ -1083,7 +602,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
             sub_807EC28(0);
         }
         sub_806A5B8(target);
-        
+
         sub_8075900(target, gDungeon->forceMonsterHouse);
     }
 }
@@ -1111,10 +630,9 @@ void HandleDroughtOrbAction(Entity *pokemon, Entity *target) {
 		for(x = 0; x < DUNGEON_MAX_SIZE_X; x++)
 		{
 			tile = GetTileMut(x, y);
-			if((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY)
-			{   
-				tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-				tile->terrainType |= TERRAIN_TYPE_NORMAL;
+			if(GetTerrainType(tile) == TERRAIN_TYPE_SECONDARY)
+			{
+			    SetTerrainNormal(tile);
 				sub_80498A8(x, y);
 				flag = TRUE;
 			}
@@ -1179,22 +697,20 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target) {
 					if ((tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE)) {
 						isMonsterHouse = TRUE;
 					}
-					if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_SECONDARY) 
-						if(((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))) {
+					if (GetTerrainType(tile) != TERRAIN_TYPE_SECONDARY)
+						if((GetTerrainType(tile) != (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))) {
 							if (((x == 1) || (((y == 1 || (x == DUNGEON_MAX_SIZE_X - 2)) || (y == DUNGEON_MAX_SIZE_Y - 2)))) &&
 								((tile->object == NULL && (gDungeon->unk644.unk2C == 0)))) {
 								bVar1 = TRUE;
 							}
 							if (bVar1) {
-								tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-								tile->terrainType |= TERRAIN_TYPE_SECONDARY;
+                                SetTerrainSecondary(tile);
 							}
 							else {
-								if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL) continue;
-								tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-								tile->terrainType |= TERRAIN_TYPE_NORMAL;
+								if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL) continue;
+								SetTerrainNormal(tile);
 								tile->terrainType |= TERRAIN_TYPE_UNK_x400;
-							} 
+							}
 						}
 				}
 			}
@@ -1210,14 +726,13 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target) {
 				tile = GetTileMut(x,y);
 				if (!(tile->terrainType & TERRAIN_TYPE_UNBREAKABLE))
 					if(((tile->terrainType & (TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS| TERRAIN_TYPE_UNK_x400)) == (TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS| TERRAIN_TYPE_UNK_x400))) {
-						tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-						tile->terrainType |= TERRAIN_TYPE_SECONDARY;
+						SetTerrainSecondary(tile);
 					}
 			}
 		}
 	}
 	if (isMonsterHouse) {
-		gDungeon->monsterHouseRoom = 0;
+		gDungeon->monsterHouseRoom = FALSE;
 	}
 	for(x = 0; x < DUNGEON_MAX_SIZE_X; x++)
 	{
@@ -1304,11 +819,10 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
                 pos.y = posPtr->y + param_3->y;
                 if ((0 <= pos.x) && (0 <= pos.y) && (pos.x < DUNGEON_MAX_SIZE_X) && (pos.y < DUNGEON_MAX_SIZE_Y)) {
                     tile = GetTileMut(pos.x,pos.y);
-                    if ((0 < pos.x) && (0 < pos.y && ((pos.x < (DUNGEON_MAX_SIZE_X - 1) && ((pos.y < (DUNGEON_MAX_SIZE_Y - 1) 
-                        && (tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0)))
+                    if ((0 < pos.x) && (0 < pos.y && ((pos.x < (DUNGEON_MAX_SIZE_X - 1) && ((pos.y < (DUNGEON_MAX_SIZE_Y - 1)
+                        && GetTerrainType(tile) == TERRAIN_TYPE_WALL)))
                     )) && (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0) {
-                        tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-                        tile->terrainType |= TERRAIN_TYPE_NORMAL;
+                        SetTerrainNormal(tile);
                         for(y = -1; y < 2; y++)
                         {
                             for(x = -1; x < 2; x++)
