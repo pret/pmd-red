@@ -689,34 +689,28 @@ void sub_8086F00(void)
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[4], MONSTER_CATERPIE);
 }
 
-// From @jiangzhengwenjz:
-// Matches this way for -O2 but can match w/o this hack on -O1
-// https://decomp.me/scratch/BTqWo
 void sub_8086F54(u8 param_1, u8 param_2)
 {
-  Entity *entity;
-  s32 index;
-  u32 unk1 = 0;
+    s32 index;
 
+    if (param_2 == 4 || param_2 == 5)  {
+        bool8 found = FALSE;
+        for (index = 0; index < 0x10; index++) {
+            struct Entity *entity = gDungeon->wildPokemon[index];
+            if ((EntityExists(entity))) {
+                struct EntityInfo *entInfo = GetEntInfo(entity);
+                if (entInfo->monsterBehavior != param_1) {
+                    found = TRUE;
+                    return;
+                }
+            }
+        }
 
-  if (param_2 == 4 || param_2 == 5) {
-    void *labels[2];
-    labels[0] = labels[1] = &&label;
-
-    for(index = 0; index < 0x10; index++)
-    {
-      entity = gDungeon->wildPokemon[index];
-      if ((EntityExists(entity)) && (GetEntInfo(entity)->monsterBehavior != param_1)) {
-        return;
-      }
+        if (!found) {
+            sub_8097FA8(3);
+            gDungeon->unk2 = 1;
+        }
     }
-    if(!unk1)
-    {
-      sub_8097FA8(3);
-    label:
-      gDungeon->unk2 = 1;
-    }
-  }
 }
 
 void TeamMeaniesPreFightDialogue(void)
