@@ -131,7 +131,7 @@ static void WriteCurseClassStatus(DataSerializer *seri, CurseClassStatus *src);
 static void WriteWeather(DataSerializer *seri, Weather *src);
 
 static Entity* sub_80828E0(s16 id, s16 apparentID, s32 index);
-static Entity* sub_8082A08(s16 id, s16 apparentID, s32 index);
+static Entity* sub_8082A08(s32 id, s32 apparentID, s32 index);
 
 // These externs are from other files
 extern void sub_80460F8(DungeonPos *, Item *, u32);
@@ -1172,41 +1172,29 @@ static Entity* sub_80828E0(s16 id, s16 apparentID, s32 index)
 }
 
 // Related to sub_804550C
-// Fakematch with registers. See https://decomp.me/scratch/KpZyK
-static Entity* sub_8082A08(s16 id, s16 apparentID, s32 index)
+Entity* sub_8082A08(s32 _species, s32 _apparentSpecies, s32 index)
 {
-    s32 r1;
-    s32 r2;
-    s32 r3;
-    u8 apparentBodySize; // r6
-    Entity *entity; // r7
-    #ifdef NONMATCHING
-    s32 r8;
-    s32 appID; // r9
-    #else
-    register s32 r8 asm("r8");
-    register s32 appID asm("r9"); // r9
-    #endif
-    s32 id_; // sp
+    s32 i, j;
+    Entity *entity;
+    s32 species = (s16) _species;
+    s32 apparentSpecies = (s16) _apparentSpecies;
+    s32 validId = -1;
+    s32 apparentBodySize = GetBodySize((s16)apparentSpecies);
 
-    id_ = id; // SpeciesId() ?
-    appID = apparentID; // SpeciesId() ?
-    r8 = -1;
-    apparentBodySize = GetBodySize(appID);
-
-    for (r3 = 0; r3 <= DUNGEON_MAX_WILD_POKEMON_BODY_SIZE - apparentBodySize; r3++) {
-        for (r2 = 0; r2 < apparentBodySize; r2++) {
-            if (gUnknown_202EE76[r3 + r2] != 0)
+    for (i = 0; i <= DUNGEON_MAX_WILD_POKEMON_BODY_SIZE - apparentBodySize; i++) {
+        s32 j;
+        for (j = 0; j < apparentBodySize; j++) {
+            if (gUnknown_202EE76[i + j] != 0)
                 break;
         }
 
-        if (r2 == apparentBodySize) {
-            r8 = r3;
+        if (j == apparentBodySize) {
+            validId = i;
             break;
         }
     }
 
-    if (r8 == -1)
+    if (validId == -1)
         return NULL;
 
     entity = gDungeon->wildPokemon[index];
@@ -1214,12 +1202,12 @@ static Entity* sub_8082A08(s16 id, s16 apparentID, s32 index)
     entity->unk24 = index;
     entity->unk22 = 0;
     entity->axObj.info.monster = &gDungeon->unkEBC[index];
-    entity->axObj.info.monster->id = id_;
-    entity->axObj.info.monster->apparentID = appID;
+    entity->axObj.info.monster->id = species;
+    entity->axObj.info.monster->apparentID = apparentSpecies;
     entity->axObj.info.monster->isNotTeamMember = TRUE;
 
-    entity->axObj.spriteFile = GetSpriteData(appID);
-    entity->axObj.unk40_maybeAnimTimer = (r8 * 0x10) + 0xA0;
+    entity->axObj.spriteFile = GetSpriteData(apparentSpecies);
+    entity->axObj.unk40_maybeAnimTimer = ((validId + 6) * 16) + 0x40;
     entity->axObj.unk42_animId1 = 7;
     entity->axObj.unk44_direction1 = 0;
     entity->axObj.unk43_animId2 = 0xFF;
@@ -1227,12 +1215,12 @@ static Entity* sub_8082A08(s16 id, s16 apparentID, s32 index)
     entity->axObj.unk47 = 1;
 
     entity->unk1C = 0;
-    entity->axObj.info.monster->unk167 = r8;
+    entity->axObj.info.monster->unk167 = validId;
     entity->axObj.info.monster->unk168 = apparentBodySize;
 
-    for (r1 = 0; r1 < apparentBodySize; r1++) {
-        gUnknown_202EE76[r8] = 1;
-        r8++;
+    for (j = 0; j < apparentBodySize; j++) {
+        gUnknown_202EE76[validId] = 1;
+        validId++;
     }
 
     sub_8045ACC();

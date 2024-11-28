@@ -151,8 +151,9 @@ void TriggerWeatherAbilities(void)
   }
 }
 
-s32 GetMonsterApparentID(Entity *pokemon, s16 id)
+s32 GetMonsterApparentID(Entity *pokemon, s32 _id)
 {
+    s16 id = (s16)(_id);
     if (id == MONSTER_CASTFORM || IS_CASTFORM_FORM_MONSTER(id)) {
         if (HasAbility(pokemon, ABILITY_FORECAST))
             return gUnknown_80F520C[GetApparentWeather(pokemon)].unk2;
