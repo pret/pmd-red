@@ -26,6 +26,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
+#include "structs/str_806B7F8.h"
 
 extern u8 *gUnknown_80FA8BC[];
 extern u8 *gUnknown_80FA824[];
@@ -1657,3 +1658,116 @@ _WakeUp:
     }
   }
 }
+
+extern s16 sub_803D970(u32);
+extern void sub_804178C(u32);
+extern const s16 gUnknown_80F4DA2;
+extern const s16 gUnknown_80F4DA4;
+
+void sub_807AB38(Entity *entity, bool8 forcedMonsterHouse)
+{
+    u8 monsterHouseRoomId;
+    DungeonPos positions[100];
+    RoomData *monsterHouseRoomData;
+    s32 x, y, count;
+    s32 randMonstersCount;
+
+    if (GetEntInfo(entity)->isNotTeamMember)
+        return;
+    if (!(GetTileAtEntitySafe(entity)->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
+        return;
+
+    if (gDungeon->unk644.monsterHouseTriggered)
+        return;
+    gDungeon->unk644.monsterHouseTriggered = TRUE;
+
+    monsterHouseRoomId = gDungeon->monsterHouseRoom;
+    if (monsterHouseRoomId == CORRIDOR_ROOM)
+        return;
+
+    monsterHouseRoomData = &gDungeon->roomData[monsterHouseRoomId];
+    count = 0;
+    if (forcedMonsterHouse) {
+        for (y = entity->pos.y - 4; y <= entity->pos.y + 4; y++) {
+            for (x = entity->pos.x - 4; x <= entity->pos.x + 4; x++) {
+                Tile *tile = GetTileMut(x, y);
+                if (tile->monster == NULL && GetTerrainType(tile) == TERRAIN_TYPE_NORMAL && count < 100) {
+                    positions[count].x = x;
+                    positions[count].y = y;
+                    count++;
+                }
+            }
+        }
+    }
+    else {
+        s32 xStart, xEnd;
+        s32 yStart, yEnd;
+
+        xStart = max(entity->pos.x - 4, monsterHouseRoomData->bottomRightCornerX);
+        xEnd = min(entity->pos.x + 5, monsterHouseRoomData->topLeftCornerX);
+
+        yStart = max(entity->pos.y - 4, monsterHouseRoomData->bottomRightCornerY);
+        yEnd = min(entity->pos.y + 5, monsterHouseRoomData->topLeftCornerY);
+        for (y = yStart; y < yEnd; y++) {
+            for (x = xStart; x < xEnd; x++) {
+                Tile *tile = GetTileMut(x, y);
+                if (tile->monster == NULL && GetTerrainType(tile) == TERRAIN_TYPE_NORMAL && tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE && count < 100) {
+                    positions[count].x = x;
+                    positions[count].y = y;
+                    count++;
+                }
+            }
+        }
+    }
+
+    randMonstersCount = DungeonRandRange(gUnknown_80F4DA2, gUnknown_80F4DA4);
+    if (randMonstersCount >= count)
+        randMonstersCount = count;
+
+    for (y = 0; y < randMonstersCount; y++) {
+        s32 i, j;
+        s32 rndId = DungeonRandInt(count);
+        for (i = 0; i < count; i++) {
+            if (positions[rndId].x != 0)
+                break;
+
+            rndId++;
+            if (rndId >= count)
+                rndId = 0;
+        }
+
+        if (positions[rndId].x == 0) {
+            break;
+        }
+        else
+        {
+            struct unkStruct_806B7F8 spawnStruct;
+
+            spawnStruct.species = sub_803D970(1);
+            spawnStruct.level = 0;
+            spawnStruct.unk2 = 0;
+            spawnStruct.unk4 = 0;
+            spawnStruct.unk10 = 1;
+            spawnStruct.pos.x = positions[rndId].x;
+            spawnStruct.pos.y = positions[rndId].y;
+            if (sub_806AA0C(spawnStruct.species, 1)) {
+                Entity *newMonster = sub_806B7F8(&spawnStruct, FALSE);
+                if (EntityExists(newMonster)) {
+                    newMonster->unk1C = IntToF248_2(200);
+                    for (j = 0; j < 100; j++) {
+                        newMonster->unk1C = s24_8_mul(newMonster->unk1C, IntToF248_2(0.665));
+                        if (newMonster->unk1C.raw < IntToF248_2(1).raw) {
+                            break;
+                        }
+                        sub_803E46C(0x57);
+                    }
+                    newMonster->unk1C = IntToF248_2(0);
+                }
+            }
+        }
+
+    }
+
+    sub_804178C(1);
+}
+

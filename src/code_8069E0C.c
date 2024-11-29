@@ -2192,7 +2192,7 @@ void sub_806C51C(Entity *entity)
     entity->prevPixelPos.y = entity->pixelPos.y;
 
     x = (entity->pixelPos.x / 256) - gDungeon->unk181e8.cameraPixelPos.x;
-    y = (((entity->pixelPos.y - entity->unk1C) - entInfo->unk174.raw) / 256) - gDungeon->unk181e8.cameraPixelPos.y;
+    y = (((entity->pixelPos.y - entity->unk1C.raw) - entInfo->unk174.raw) / 256) - gDungeon->unk181e8.cameraPixelPos.y;
     y2 = (entity->pixelPos.y / 256) - gDungeon->unk181e8.cameraPixelPos.y;
     y2 /= 2;
     if (entInfo->unk156 == 0) {
@@ -2215,7 +2215,7 @@ void sub_806C51C(Entity *entity)
     }
 
     pos1.x = entity->pixelPos.x / 256;
-    pos1.y = ((entity->pixelPos.y - entity->unk1C) - entInfo->unk174.raw) / 256;
+    pos1.y = ((entity->pixelPos.y - entity->unk1C.raw) - entInfo->unk174.raw) / 256;
 
     sub_8005700(posArray, &entity->axObj);
     sub_800F958(entInfo->unk98, &pos1, posArray, gDungeon->unk181e8.unk18208);
