@@ -54,8 +54,6 @@ SECTIONS {
         src/memory.o(.text);
         asm/memory.o(.text);
         src/memory_mid.o(.text);
-        asm/memory_1.o(.text);
-        src/memory1.o(.text);
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
         src/util.o(.text);
