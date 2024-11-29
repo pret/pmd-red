@@ -149,101 +149,75 @@ void nullsub_123(void)
 
 void sub_80A60D8(void)
 {
-    s32 r0;
-#ifndef NONMATCHING
-    register s32 r1 asm("r1");
-#else
-    s32 r1;
-#endif
-    s32 r3;
-    s32 r4;
-
-    s32 local_00[2]; // sp 0x0
-    s32 local_08[2]; // sp 0x8
-    s32 local_10[2]; // sp 0x10
-    s32 local_18[2]; // sp 0x18
-    s32 local_20[2]; // sp 0x20
-    const s16 *puVar1;
-
     if (gUnknown_3001B74->unk2 == 0)
         return;
 
     switch ((s16)(gUnknown_3001B74->unk0 + 1)) {
-        case 10:
-            r1 = gUnknown_3001B74->unk4;
-            r0 = r1 + 2;
-            gUnknown_3001B74->unk4 = r0;
+        case 10: {
+            s32 localArray[2];
 
-            r4 = gUnknown_3001B74->unk8;
-            r3 = r4 + 1;
-            gUnknown_3001B74->unk8 = r3;
-
-            if (r0 < 0)
-                r0 = r1 + 5;
-
-            gUnknown_3001B74->unkC += (r0 >> 2);
-            r1 = r3;
-            if (r1 < 0)
-                r1 = r4 + 4;
-
-            gUnknown_3001B74->unk10 += (r1 >> 2);
+            gUnknown_3001B74->unk4 += 2;
+            gUnknown_3001B74->unk8 += 1;
+            gUnknown_3001B74->unkC += gUnknown_3001B74->unk4 / 4;
+            gUnknown_3001B74->unk10 += gUnknown_3001B74->unk8 / 4;
             sub_80A4580(gUnknown_3001B78, 0, &gUnknown_3001B74->unkC);
             gUnknown_3001B74->unk4 &= 3;
             gUnknown_3001B74->unk8 &= 3;
-            sub_80A56C0(local_00);
-            local_00[0] -= gUnknown_3001B74->unkC;
-            local_00[1] += gUnknown_3001B74->unk10;
-            sub_80A4580(gUnknown_3001B78, 0, local_00);
-            sub_80A456C(gUnknown_3001B78, 0, local_00);
+            sub_80A56C0(localArray);
+            localArray[0] -= gUnknown_3001B74->unkC;
+            localArray[1] += gUnknown_3001B74->unk10;
+            sub_80A4580(gUnknown_3001B78, 0, localArray);
+            sub_80A456C(gUnknown_3001B78, 0, localArray);
             break;
+        }
         case 11:
         case 12:
         case 13:
-        case 14:
-            sub_80A56C0(local_08);
-            sub_80A456C(gUnknown_3001B78,0,local_08);
+        case 14: {
+            s32 localArray[2];
+
+            sub_80A56C0(localArray);
+            sub_80A456C(gUnknown_3001B78,0,localArray);
             break;
-        case 15:
-            r1 = gUnknown_3001B74->unk4 ;
-            r0 = r1 + 1;
-            gUnknown_3001B74->unk4  = r0;
+        }
+        case 15: {
+            s32 localArray[2];
 
-            if (r0 < 0)
-                r0 = r1 + 4;
-
-            gUnknown_3001B74->unkC += (r0 >> 2);
+            gUnknown_3001B74->unk4++;
+            gUnknown_3001B74->unkC += gUnknown_3001B74->unk4 / 4;
             sub_80A4580(gUnknown_3001B78, 0, &gUnknown_3001B74->unkC);
             gUnknown_3001B74->unk4 &= 3;
-            sub_80A56C0(local_10);
-            local_10[0] -= gUnknown_3001B74->unkC;
-            local_10[1] = 0;
-            sub_80A4580(gUnknown_3001B78, 0, local_10);
-            sub_80A456C(gUnknown_3001B78, 0, local_10);
+            sub_80A56C0(localArray);
+            localArray[0] -= gUnknown_3001B74->unkC;
+            localArray[1] = 0;
+            sub_80A4580(gUnknown_3001B78, 0, localArray);
+            sub_80A456C(gUnknown_3001B78, 0, localArray);
             break;
-        case 16:
-            r1 = gUnknown_3001B74->unk4;
-            r0 = r1 + 2;
-            gUnknown_3001B74->unk4 = r0;
-            if (r0 < 0)
-                r0 = r1 + 5;
+        }
+        case 16: {
+            s32 localArray[2];
 
-            gUnknown_3001B74->unkC += (r0 >> 2);
+            gUnknown_3001B74->unk4 += 2;
+            gUnknown_3001B74->unkC += gUnknown_3001B74->unk4 / 4;
             sub_80A4580(gUnknown_3001B78, 0, &gUnknown_3001B74->unkC);
             gUnknown_3001B74->unk4 &= 3;
-            sub_80A56C0(local_18);
-            local_18[0] -= gUnknown_3001B74->unkC;
-            local_18[1] = 0;
-            sub_80A4580(gUnknown_3001B78, 0, local_18);
-            sub_80A456C(gUnknown_3001B78, 0, local_18);
+            sub_80A56C0(localArray);
+            localArray[0] -= gUnknown_3001B74->unkC;
+            localArray[1] = 0;
+            sub_80A4580(gUnknown_3001B78, 0, localArray);
+            sub_80A456C(gUnknown_3001B78, 0, localArray);
             break;
-        default:
-            puVar1 = gUnknown_811E5F4[gUnknown_3001B74->unk0];
+        }
+        default: {
+            s32 localArray[2];
+            const s16 *puVar1 = gUnknown_811E5F4[gUnknown_3001B74->unk0];
             if (puVar1[0] == 0) {
-                sub_80A56C0(local_20);
-                sub_80A456C(gUnknown_3001B78,0,local_20);
+                sub_80A56C0(localArray);
+                sub_80A456C(gUnknown_3001B78,0,localArray);
                 break;
             }
-            // NOTE: Fallthrough needed here..
+        }
+        // NOTE: Fallthrough needed here.
         case 0:
             sub_80A456C(gUnknown_3001B78, 0, gUnknown_81177BC);
             break;
