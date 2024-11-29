@@ -20,7 +20,10 @@ static EWRAM_DATA UnkSpriteLink sUnknown_2025EA8[128] = {0};
 static EWRAM_DATA SpriteOAM sUnknown_20262A8[128] = {0};
 static EWRAM_DATA s32 sSpriteCount = {0}; // 20266A8
 UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // 20266AC
-static EWRAM_DATA unkStruct_20266B0 sUnknown_20266B0[160] = {0};
+
+#define UNK_20266B0_ARR_COUNT 160
+static EWRAM_DATA unkStruct_20266B0 sUnknown_20266B0[UNK_20266B0_ARR_COUNT] = {0};
+
 static EWRAM_DATA void *sCharMemCursor = {0}; // 2026E30
 UNUSED static EWRAM_DATA u32 sUnused3 = {0}; // 2026E34
 
@@ -807,71 +810,19 @@ void BlinkSavingIcon(void)
     }
 }
 
-#ifdef NONMATCHING // https://decomp.me/scratch/taTIU
-extern u32 RegisterSpriteParts_80052BC_end[0] asm("sCharMemCursor");
-static void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
+void RegisterSpriteParts_80052BC(struct UnkSpriteMem *a0)
 {
-    if (a0->byteCount) {
-        unkStruct_20266B0 **r5 = &sUnknown_203B074;
-        void *r6 = RegisterSpriteParts_80052BC_end;
-        void **r4 = &sCharMemCursor;
-        do {
-            unkStruct_20266B0 *r2 = *r5;
-            if ((uintptr_t)r2 >= (uintptr_t)r6)
-                return;
-            r2->byteCount = a0->byteCount;
-            r2->src = a0->src;
-            r2->dest = *r4;
-            *r4 = r2->dest + a0->byteCount;
-            *r5 = r2 + 1;
-            a0++;
-        } while (a0->byteCount);
+    while (a0->byteCount != 0) {
+        if ((uintptr_t)sUnknown_203B074 >= (uintptr_t)&sUnknown_20266B0[UNK_20266B0_ARR_COUNT])
+            return;
+        sUnknown_203B074->byteCount = a0->byteCount;
+        sUnknown_203B074->src = a0->src;
+        sUnknown_203B074->dest = sCharMemCursor;
+        sCharMemCursor += a0->byteCount;
+        sUnknown_203B074++;
+        a0++;
     }
 }
-#else
-UNUSED // TODO: Remove the "UNUSED" attribute after AddAxSprite is done
-NAKED
-static void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
-{
-    asm_unified(
-    "push {r4-r6,lr}\n"
-    "\tadds r3, r0, 0\n"
-    "\tldr r0, [r3, 0x4]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _080052F2\n"
-    "\tldr r5, _080052F8\n"
-    "\tldr r6, _080052FC\n"
-    "\tldr r4, _08005300\n"
-"_080052CC:\n"
-    "\tldr r2, [r5]\n"
-    "\tcmp r2, r6\n"
-    "\tbcs _080052F2\n"
-    "\tldr r0, [r3, 0x4]\n"
-    "\tstr r0, [r2]\n"
-    "\tldr r0, [r3]\n"
-    "\tstr r0, [r2, 0x4]\n"
-    "\tldr r1, [r4]\n"
-    "\tstr r1, [r2, 0x8]\n"
-    "\tldr r0, [r3, 0x4]\n"
-    "\tadds r1, r0\n"
-    "\tstr r1, [r4]\n"
-    "\tadds r0, r2, 0\n"
-    "\tadds r0, 0xC\n"
-    "\tstr r0, [r5]\n"
-    "\tadds r3, 0x8\n"
-    "\tldr r0, [r3, 0x4]\n"
-    "\tcmp r0, 0\n"
-    "\tbne _080052CC\n"
-"_080052F2:\n"
-    "\tpop {r4-r6}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_080052F8: .4byte sUnknown_203B074\n"
-"_080052FC: .4byte sCharMemCursor\n"
-"_08005300: .4byte sCharMemCursor");
-}
-#endif // NONMATCHING
 
 void sub_8005304(void)
 {
