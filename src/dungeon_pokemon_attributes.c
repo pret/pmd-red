@@ -59,33 +59,28 @@ bool8 sub_8071728(Entity * pokemon, Entity * target, bool8 displayMessage)
 
 bool8 sub_80717A4(Entity *pokemon, u16 moveID)
 {
-  EntityInfo * entityInfo;
-  s32 index;
+    EntityInfo * entityInfo;
+    s32 i;
 
-  entityInfo = GetEntInfo(pokemon);
-  if ((entityInfo->sleepClassStatus.status != STATUS_SLEEP) && (entityInfo->sleepClassStatus.status != STATUS_NAPPING) && (entityInfo->sleepClassStatus.status != STATUS_NIGHTMARE)) {
-      return FALSE;
-  }
-  else
-  {
-    // Pin this register to match
-#ifndef NONMATCHING
-    register Move *pokeMove asm("r4");
-#else
-    Move *pokeMove;
-#endif
-
-    Move *pokeMove2; // some reason uses another pointer to same struct
-
-    for(index = 0, pokeMove = entityInfo->moves.moves, pokeMove2 = pokeMove; index < MAX_MON_MOVES; pokeMove++, pokeMove2++, index++)
-    {
-      if (((pokeMove->moveFlags & MOVE_FLAG_EXISTS)) && (entityInfo->isTeamLeader || ((pokeMove->moveFlags & MOVE_FLAG_ENABLED_FOR_AI))))
-            if((sub_805744C(pokemon, pokeMove2, TRUE) != 0) && (pokeMove->PP != 0))
-                    if(pokeMove->id == moveID)
-                        return TRUE;
+    entityInfo = GetEntInfo(pokemon);
+    if ((entityInfo->sleepClassStatus.status != STATUS_SLEEP) && (entityInfo->sleepClassStatus.status != STATUS_NAPPING) && (entityInfo->sleepClassStatus.status != STATUS_NIGHTMARE)) {
+        return FALSE;
     }
+    else {
+        for (i = 0; i < MAX_MON_MOVES; i++) {
+            Move *move = &entityInfo->moves.moves[i];
+            if (MoveFlagExists(move)
+                && (entityInfo->isTeamLeader || (move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI))
+                && sub_805744C(pokemon, move, TRUE)
+                && move->PP != 0
+                && move->id == moveID)
+            {
+                return TRUE;
+            }
+        }
+    }
+
     return FALSE;
-  }
 }
 
 bool8 AbilityIsActive(Entity *pokemon, u8 ability)

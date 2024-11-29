@@ -129,42 +129,31 @@ static void sub_803A3A0(void)
 
 static void sub_803A3BC(void)
 {
-    s32 speciesIndex;
-    PokemonStruct1 pokemon;
-    u16 moves [MAX_MON_MOVES]; // r7
-    u8 buffer[20]; // r6
-    u32 loc;
+    s32 item;
     s32 sp_0x80;
+    s32 i;
 
-    #ifndef NONMATCHING
-    register s32 index asm("r5");
-    register u32 r9 asm("r9");
-    #else
-    s32 index;
-    u32 r9;
-    #endif
+    for (i = 1; i < NUM_FRIEND_AREAS; i++) {
+        UnlockFriendArea(i);
+    }
 
-    index = 1;
-    do {
-        UnlockFriendArea(index);
-        index++;
-    } while (index < NUM_FRIEND_AREAS);
+    item = ITEM_CHERI_BERRY;
+    for (i = 0; i < 300; i++) {
+        PokemonStruct1 pokemon;
+        u16 moves[MAX_MON_MOVES];
+        u8 buffer[20];
+        DungeonLocation dungeonLoc = {.id = DUNGEON_MT_THUNDER_PEAK, .floor = 16};
+        s32 speciesIndex = (s16) (i + 1);
 
-    index = 0;
-    do {
-        r9 = 0;
-        loc = 0x1006;
-        index++;
-        speciesIndex = index * 0x10000 >> 0x10; // TODO: dumb way to force s16. Temp var may fix the regswap
         memset(moves, 0, sizeof(moves));
         moves[0] = MOVE_DOUBLESLAP;
         CopyMonsterNameToBuffer(buffer, speciesIndex);
         CopyStringtoBuffer(buffer, buffer);
-        buffer[0] = 0x40;
-        sub_808CFD0(&pokemon, speciesIndex, buffer, ITEM_CHERI_BERRY, (DungeonLocation *)&loc, moves);
+        buffer[0] = '@';
+        sub_808CFD0(&pokemon, speciesIndex, buffer, item, &dungeonLoc, moves);
         sub_808D1DC(&pokemon);
-    } while (index < 300);
+    }
 
-    sp_0x80 = r9;
+    sp_0x80 = 0;
     WriteSavetoPak(&sp_0x80, 1);
 }
