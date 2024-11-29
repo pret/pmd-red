@@ -227,7 +227,7 @@ void sub_807D068(Entity *pokemon, DungeonPos *pos)
         pixelY += incrementY;
         local_34.x = pixelX;
         local_34.y = pixelY;
-        pokemon->unk1C = sin_4096(iVar8) * 0xc;
+        pokemon->unk1C.raw = sin_4096(iVar8) * 0xc;
         sub_804535C(pokemon, &local_34);
         if (sub_8045888(pokemon)) {
             sub_803E46C(0x1a);
@@ -237,7 +237,7 @@ void sub_807D068(Entity *pokemon, DungeonPos *pos)
 _0807D11E:
     local_34.x = posX;
     local_34.y = posY;
-    pokemon->unk1C = 0;
+    pokemon->unk1C = IntToF248(0);
     sub_804535C(pokemon,&local_34);
     sub_803E46C(0x1a);
 }
@@ -276,15 +276,15 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
     sub_80421AC(pokemon,target);
     if (sub_8045888(target)) {
         direction = (info->action).direction;
-        target->unk1C += + 0x800;
-        while ( target->unk1C < 0xa000) {
+        target->unk1C.raw += + 0x800;
+        while ( target->unk1C.raw < 0xa000) {
             if ((gUnknown_202EDCC & 3) == 0) {
                 direction = (direction + 1) & DIRECTION_MASK;
                 info->action.direction = direction & DIRECTION_MASK;
                 sub_806CE68(target,direction);
             }
             sub_803E46C(0x22);
-            target->unk1C += 0x800;
+            target->unk1C.raw += 0x800;
         }
     }
 
@@ -322,7 +322,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
     sub_803F580(1);
     if (sub_8045888(target)) {
         direction = (info->action).direction;
-        target->unk1C = 0x9c00;
+        target->unk1C.raw = 0x9c00;
         do {
             if ((gUnknown_202EDCC & 3) == 0) {
                 direction = (direction + 1) & DIRECTION_MASK;
@@ -330,10 +330,10 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
                 sub_806CE68(target,direction);
             }
             sub_803E46C(0x22);
-            target->unk1C -= 0x400;
-        } while (0 < target->unk1C);
+            target->unk1C.raw -= 0x400;
+        } while (0 < target->unk1C.raw);
     }
-    target->unk1C = 0;
+    target->unk1C = IntToF248_2(0);
     sub_803E46C(0x22);
     if (flag) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCB14); // But it dropped back at the same spot!
@@ -446,7 +446,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
                 currItemEntity->spawnGenID = 0;
                 currItemEntity->isVisible = TRUE;
                 currItemEntity->unk22 = 0;
-                currItemEntity->unk1C = 0;
+                currItemEntity->unk1C = IntToF248_2(0);
                 itemInfo[itemsCount] = gDungeon->unk3804[i];
                 currItemEntity++;
                 itemsCount++;
@@ -518,7 +518,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
             for (i = 0; i < itemsCount; i++) {
                 if (EntityExists(&itemEntities[i])) {
                     IncreaseEntityPixelPos(&itemEntities[i], itemVelocity[i].x, itemVelocity[i].y);
-                    itemEntities[i].unk1C = sin_4096(unkAngle) * 0xC;
+                    itemEntities[i].unk1C.raw = sin_4096(unkAngle) * 0xC;
                     sub_80462AC(&itemEntities[i], hallucinating, 0, var, 0);
                 }
             }

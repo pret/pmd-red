@@ -57,7 +57,7 @@ Entity *sub_80453AC(s32 _species)
                 entity->axObj.unk45_orientation = 1;
                 entity->axObj.unk47 = 1;
 
-                entity->unk1C = 0;
+                entity->unk1C = IntToF248(0);
                 sub_8045ACC();
                 entity->axObj.info.monster->unk167 = validId;
                 entity->axObj.info.monster->unk168 = bodySize;
@@ -118,7 +118,7 @@ Entity *sub_804550C(s32 _species)
                 entity->axObj.unk45_orientation = 1;
                 entity->axObj.unk47 = 1;
 
-                entity->unk1C = 0;
+                entity->unk1C = IntToF248(0);
 
                 entity->axObj.info.monster->unk167 = validId;
                 entity->axObj.info.monster->unk168 = bodySize;
@@ -152,7 +152,7 @@ Entity *SpawnTrap(u8 trapID, DungeonPos *pos, u8 c)
             entity->axObj.info.trap->id = trapID;
             entity->axObj.info.trap->unk1 = c;
 
-            entity->unk1C = 0;
+            entity->unk1C = IntToF248(0);
             entity->unk22 = 0;
             entity->pos = *pos;
             entity->spawnGenID = 0;
@@ -183,7 +183,7 @@ Entity *sub_8045708(DungeonPos *pos)
             SetEntityPixelPos(ent, ((pos->x * 24) + 4) * 0x100, ((pos->y * 24) + 4) * 0x100);
             ent->spawnGenID = 0;
             ent->unk22 = 0;
-            ent->unk1C = 0;
+            ent->unk1C = IntToF248(0);
             return ent;
         }
     }

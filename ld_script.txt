@@ -265,7 +265,6 @@ SECTIONS {
         src/move_effects_target.o(.text);
         src/status.o(.text);
         src/code_8077274_1.o(.text);
-        asm/code_8077274_1.o(.text);
         src/dungeon_ai_movement.o(.text);
         src/dungeon_ai_attack.o(.text);
         src/targeting_flags.o(.text);

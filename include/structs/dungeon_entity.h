@@ -356,7 +356,7 @@ typedef struct Entity
     // X = (posWorld * 24 + 16) * 256, while Y = (posWorld * 24 + 12) * 256.
     /* 0xC */ PixelPos pixelPos;
     /* 0x14 */ PixelPos prevPixelPos;
-    s32 unk1C;
+    /* 0x1C */ s24_8 unk1C;
     /* 0x20 */ bool8 isVisible; // Turned off when a Pokémon faints.
     u8 unk21;
     u8 unk22;

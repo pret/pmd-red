@@ -1158,7 +1158,7 @@ static Entity* sub_80828E0(s16 id, s16 apparentID, s32 index)
     entity->axObj.unk45_orientation = 1;
     entity->axObj.unk47 = 1;
 
-    entity->unk1C = 0;
+    entity->unk1C = IntToF248(0);
     sub_8045ACC();
     entity->axObj.info.monster->unk167 = r4;
     entity->axObj.info.monster->unk168 = apparentBodySize;
@@ -1214,7 +1214,7 @@ Entity* sub_8082A08(s32 _species, s32 _apparentSpecies, s32 index)
     entity->axObj.unk45_orientation = 1;
     entity->axObj.unk47 = 1;
 
-    entity->unk1C = 0;
+    entity->unk1C = IntToF248(0);
     entity->axObj.info.monster->unk167 = validId;
     entity->axObj.info.monster->unk168 = apparentBodySize;
 

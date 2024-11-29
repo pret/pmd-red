@@ -279,28 +279,23 @@ void sub_8042A74(Entity *r0)
 
 void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
 {
-  s32 iVar2;
   s32 iVar3;
   s32 r6;
   s32 param_1_s16;
 
   param_1_s16 = param_1;
 
-  r6 = 0x200;
+  r6 = IntToF248_2(2).raw;
   if (sub_8042768(entity)) {
     sub_804151C(entity,param_1_s16,0);
     sub_803E708(param_3,0x42);
     do {
-      if (0xc7ff < entity->unk1C) break;
+      if (entity->unk1C.raw > IntToF248_2(199.999).raw) break;
       sub_803E46C(0x42);
-      iVar2 = entity->unk1C + r6;
-      entity->unk1C = iVar2;
-      r6 += 0x100;
-      iVar3 = entity->pixelPos.y - iVar2;
-      if (iVar3 < 0) {
-        iVar3 += 0xff;
-      }
-    } while (-8 <= (iVar3 >> 8) - gDungeon->unk181e8.cameraPixelPos.y);
+      entity->unk1C.raw += + r6;
+      r6 += IntToF248_2(1).raw;
+      iVar3 = (entity->pixelPos.y - entity->unk1C.raw) / 256;
+    } while (-8 <= iVar3 - gDungeon->unk181e8.cameraPixelPos.y);
     entity->isVisible = 0;
     sub_804178C(0);
   }
