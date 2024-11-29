@@ -138,3 +138,64 @@ void *DoAlloc(struct HeapDescriptor *heap, s32 size, u32 a2)
 {
     return _LocateSet(heap, size, a2 | 0x100);
 }
+
+void DoFree(struct HeapDescriptor *heapDescriptior, void *ptrToFree)
+{
+    struct HeapFreeListElement *curr;
+    struct HeapFreeListElement *next;
+    struct HeapFreeListElement *prev;
+    s32 i;
+
+    if (heapDescriptior == NULL)
+        heapDescriptior = &gMainHeapDescriptor;
+
+    if (ptrToFree == NULL)
+        return;
+
+    i = 0;
+    curr = &heapDescriptior->freeList[0];
+    for (; i < heapDescriptior->freeCount; i++, curr++) {
+        if (curr->block.start == (u8 *)ptrToFree) {
+            curr->unk_atb = 0;
+            curr->atb = 0;
+            curr->block.allocatedSize = 0;
+            curr->grp = 0;
+
+            if (i < heapDescriptior->freeCount - 1) {
+                s32 j;
+
+                next = curr + 1;
+                if (next->atb == 0) {
+                    curr->block.size += next->block.size;
+                    heapDescriptior->freeCount--;
+                    for (j = i + 1; j < heapDescriptior->freeCount; j++, next++)
+                        next[0] = next[1];
+                }
+            }
+
+            if (i >= 1) {
+                s32 j;
+                prev = curr - 1;
+                if (prev->atb == 0) {
+                    prev->block.size += curr->block.size;
+                    heapDescriptior->freeCount--;
+                    prev = curr;
+                    for (j = i; j < heapDescriptior->freeCount; j++, prev++)
+                        prev[0] = prev[1];
+                }
+            }
+
+            break;
+        }
+    }
+}
+
+void nullsub_141(void)
+{
+
+}
+
+void nullsub_142(void)
+{
+
+}
