@@ -23,12 +23,7 @@ void sub_80A2558(s32, s16 *);
 void sub_80A2584(s16, s16);
 void sub_80A2598(s16, s16);
 u32 sub_80A25AC(u16);
-#if !defined(NONMATCHING) && defined(GROUND_SCRIPT_INCOMPLETE_DECLARATIONS)
-// Workaround for ExecuteScriptCommand relying on s32 behavior of arguments
 const DungeonInfo *GetDungeonInfo_80A2608(s32 index);
-#else
-const DungeonInfo *GetDungeonInfo_80A2608(s16 index);
-#endif
 const DungeonInfo *sub_80A2620(s16 index);
 s16 sub_80A2654(s16 index);
 s16 sub_80A2668(u32);

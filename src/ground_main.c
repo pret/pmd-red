@@ -139,10 +139,9 @@ void sub_8098CC8(void)
     ClearAllItems_8091FB4();
 }
 
-bool8 GroundMainGroundRequest(s16 r0, u32 r1, s32 r2)
+bool8 GroundMainGroundRequest(s32 r0, s32 r1, s32 r2)
 {
-    s32 temp;
-    temp = r0; // force a asr shift
+    s32 temp = (s16) r0; // force a asr shift
     if(gUnknown_20398A8 == 0)
     {
         Log(0, sFmtGroundRequest, temp, r2);
@@ -191,9 +190,10 @@ bool8 sub_8098DCC(u32 speed)
     return FALSE;
 }
 
-bool8 GroundMainRescueRequest(s16 r0, u32 r1)
+bool8 GroundMainRescueRequest(s32 r0, s32 r1)
 {
-    s32 r2 = r0, r5 = r2;
+    s32 r2 = (s16) r0;
+    s32 r5 = r2;
     if(gUnknown_20398A8 == 0)
     {
         Log(0, sFmtRescueRequest, r2, r1);

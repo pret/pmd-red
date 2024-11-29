@@ -78,8 +78,9 @@ u32 sub_80A25AC(u16 param_1)
     return 1;
 }
 
-const DungeonInfo *GetDungeonInfo_80A2608(s16 index)
+const DungeonInfo *GetDungeonInfo_80A2608(s32 _index)
 {
+    s32 index = (s16) _index;
     return &gUnknown_81168A8[index];
 }
 
@@ -186,7 +187,7 @@ u8 sub_80A2740(s32 index)
 {
     const DungeonInfo *temp;
 
-    temp = GetDungeonInfo_80A2608(index);
+    temp = GetDungeonInfo_80A2608((s16) index);
     return temp->dungeonIndex;
 }
 

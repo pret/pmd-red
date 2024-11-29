@@ -13,11 +13,6 @@
 #include "exclusive_pokemon.h"
 #include "items.h"
 #include "math.h"
-
-#ifndef NONMATCHING
-#define GROUND_SCRIPT_INCOMPLETE_DECLARATIONS
-#endif
-
 #include "ground_main.h"
 #include "code_80A26CC.h"
 
@@ -1838,10 +1833,10 @@ s32 ExecuteScriptCommand(Action *action) {
 
 UNUSED u32 sub_80A1440(u32 r0, u32 r1, u32 r2)
 {
-   return sub_80A14E8(0, r0, r1, r2); 
+   return sub_80A14E8(0, r0, r1, r2);
 }
 
-UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0) 
+UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0)
 {
     s32 ret;
     ScriptInfoSmall scriptInfo;
