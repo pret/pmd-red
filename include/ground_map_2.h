@@ -6,10 +6,10 @@ typedef struct unkStruct_3001B74
 {
     s16 unk0;
     u8 unk2;
-    u32 unk4;
-    u32 unk8;
+    s32 unk4;
+    s32 unk8;
     s32 unkC;
-    u32 unk10;
+    s32 unk10;
     u32 unk14;
     u32 unk18;
     u32 unk1C;
