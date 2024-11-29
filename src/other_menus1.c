@@ -236,8 +236,6 @@ static void sub_8037400(void)
     void *r5;
     void *r6;
     s32 species;
-    unkStruct_8035D94 *puVar5;
-    unkStruct_8035D94 *puVar6;
 
     r6 = NULL;
     r5 = NULL;
@@ -255,18 +253,7 @@ static void sub_8037400(void)
                 r5 = &sUnknown_203B35C->unk450;
                 break;
             case 0:
-                {
-    #ifndef NONMATCHING
-                    register u32 temp1 asm("r1");
-    #else
-                    u32 temp1;
-    #endif
-                    puVar5 = sub_8035D94();
-                    puVar6 = &sUnknown_203B35C->unk1BC[0];
-                    temp1 = puVar5->numItems;
-                    puVar6->itemIndex.itemIndex_u32 = puVar5->itemIndex.itemIndex_u32;
-                    puVar6->numItems = temp1;
-                }
+                sUnknown_203B35C->unk1BC[0] = *sub_8035D94();
                 r6 = &sUnknown_203B35C->unk1BC[0];
                 r5 = &sUnknown_203B35C->unk1BC[1];
                 break;
