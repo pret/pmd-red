@@ -1750,7 +1750,7 @@ static void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 co
         return;
     }
     else {
-        u32 unkBits[] = {0, 0xF, 0xFF, 0xFFF, 0xFFFF, 0xFFFFF, 0xFFFFFF, 0xFFFFFFF, 0xFFFFFFFF};
+        const u32 unkBits[] = {0, 0xF, 0xFF, 0xFFF, 0xFFFF, 0xFFFFF, 0xFFFFFF, 0xFFFFFFF, 0xFFFFFFFF};
 
         for (; a4 > 0; a4 -= 8) {
             lol = a4;
@@ -1801,7 +1801,7 @@ static void sub_8007AA4(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4,
 {
     struct UnkTextStruct1 *r4 = &a0[a1];
     u32 ip = gUnknown_80B853C[color & 0xF] + 0x11111111;
-    u32 unkBits[] = {0xF, 0xF0, 0xF00, 0xF000, 0xF0000, 0xF00000, 0xF000000, 0xF0000000};
+    const u32 unkBits[] = {0xF, 0xF0, 0xF00, 0xF000, 0xF0000, 0xF00000, 0xF000000, 0xF0000000};
     s32 r3 = y / 8;
     u32 *dest = r4->unk18 + ((r4->unk4 * r3 + x / 8) * 8);
     s32 r2 = x / 8;
