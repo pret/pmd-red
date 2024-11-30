@@ -7,8 +7,6 @@
 #include "structs/str_text.h"
 #include "file_system.h"
 
-extern const u32 gUnknown_80B853C[16];
-
 struct CharMapStruct
 {
     s32 unk0;
@@ -16,27 +14,13 @@ struct CharMapStruct
 };
 
 // data.s
-extern const UnkTextStruct2 gUnknown_80B857C[4];
-extern const u8 gKanjiA_file_string[]; // 80B87B4
-extern const u8 gKanjiB_file_string[]; // 80B87BC
-extern const u32 gFadeInNone[8];
-extern const u32 gFadeInDungeon[8];
-extern const u32 gUnknown_80B8804[4];
-extern const u32 gUnknown_80B86B4[][32];
-extern const u32 gUnknown_80B8814[];
-extern const u32 gUnknown_80B853C[16];
-extern const struct unkShiftData gCharMasksOffsets[8];
-extern const u32 gUnknown_80B8814[];
-extern const struct unkStruct_80B8824 gUnknown_80B8824;
-extern const struct unkStruct_80B8848 gUnknown_80B8848;
+
+
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
 
 // Todo fix gUnknown_3000E94 being accessed as s16/u8
 extern s16 gUnknown_3000E94[];
-
-extern const struct unkChar gUnknown_80B86A4;
-extern const u32 gUnknown_80B8868[];
 
 EWRAM_DATA UnkTextStruct1 gUnknown_2027370[4] = {0};
 EWRAM_DATA static struct CharMapStruct *sCharmaps[2] = {NULL};
@@ -84,6 +68,84 @@ static void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str,
 static const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp);
 static void sub_8009388(void);
 static s32 InterpretColorChar(u8 a0);
+
+UNUSED static const char sPksDir0[] = "pksdir0";
+UNUSED static const char sPksDir1[] = "pksdir0";
+
+static const u32 gUnknown_80B853C[16] =
+{
+    0x66666666,
+    0x00000000,
+    0x11111111,
+    0x22222222,
+    0x33333333,
+    0x44444444,
+    0x55555555,
+    0x66666666,
+    0x77777777,
+    0x88888888,
+    0x99999999,
+    0xAAAAAAAA,
+    0xBBBBBBBB,
+    0xCCCCCCCC,
+    0xDDDDDDDD,
+    0xEEEEEEEE,
+};
+
+static const UnkTextStruct2 gUnknown_80B857C[4] =
+{
+    [0] = {.unk4 = 3},
+    [1] = {.unk4 = 3},
+    [2] = {.unk4 = 3},
+    [3] = {.unk4 = 3},
+};
+
+static const struct unkShiftData gCharMasksOffsets[8] =
+{
+    [0] = {.bytesA = 0xFFFFFFFF, .bytesB = 0x00000000, .shift_left = 0x00, .shift_right = 0x20},
+    [1] = {.bytesA = 0x0FFFFFFF, .bytesB = 0xF0000000, .shift_left = 0x04, .shift_right = 0x1C},
+    [2] = {.bytesA = 0x00FFFFFF, .bytesB = 0xFF000000, .shift_left = 0x08, .shift_right = 0x18},
+    [3] = {.bytesA = 0x000FFFFF, .bytesB = 0xFFF00000, .shift_left = 0x0C, .shift_right = 0x14},
+    [4] = {.bytesA = 0x0000FFFF, .bytesB = 0xFFFF0000, .shift_left = 0x10, .shift_right = 0x10},
+    [5] = {.bytesA = 0x00000FFF, .bytesB = 0xFFFFF000, .shift_left = 0x14, .shift_right = 0x0C},
+    [6] = {.bytesA = 0x000000FF, .bytesB = 0xFFFFFF00, .shift_left = 0x18, .shift_right = 0x08},
+    [7] = {.bytesA = 0x0000000F, .bytesB = 0xFFFFFFF0, .shift_left = 0x1C, .shift_right = 0x04},
+};
+
+static const u16 gUnknown_80B865C[] =
+{
+    0xFFFF, 0xFFFF, 0xFF, 0xFFFF, 0xFFFF, 0xFF, 0xFFFF,
+    0xFFFF, 0xFF, 0xFFFF, 0xFFFF, 0xFF, 0xFFFF, 0xFFFF,
+    0xFF, 0xFFFF, 0xFFFF, 0xFF, 0xFFFF, 0xFFFF, 0xFF, 0xFFFF,
+    0xFFFF, 0xFF, 0xFFFF, 0xFFFF, 0xFF, 0xFFFF, 0xFFFF,
+    0xFF, 0, 0, 0, 0, 0, 0
+};
+
+// Fallback character with bitmap?
+static const struct unkChar gUnknown_80B86A4 =
+{
+    .unk0 = gUnknown_80B865C,
+    .unk4 = 0x81A1,
+    .unk6 = 7,
+    .unk8 = 10,
+    .fill9 = 0,
+    .unkA = 0,
+    .fillB = 0,
+};
+
+// Very weird...
+UNUSED static const u8 sByte8 = 8;
+
+static const u32 gUnknown_80B86B4[][32] = INCBIN_U32("graphics/warning.4bpp");
+
+static const u8 gKanjiA_file_string[] = "kanji_a";
+static const u8 gKanjiB_file_string[] = "kanji_b";
+
+static const u32 gFadeInNone[8] = {0};
+static const u32 gFadeInDungeon[8] = {0x88888888, 0x88888888, 0x88888888, 0x88888888, 0x88888888, 0x88888888, 0x88888888, 0x88888888};
+
+static const u32 gUnknown_80B8804[4] = {0, 1, 2, 3};
+static const u32 gUnknown_80B8814[4] = {1, 2, 3, 0};
 
 void LoadCharmaps(void)
 {
@@ -1457,9 +1519,9 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
     u32 *r3;
     const struct unkShiftData *shiftData;
     const struct unkChar *sp0;
-    u16 *local_44;
-    u16 *sp8;
-    u16 *local_3c;
+    const u16 *local_44;
+    const u16 *sp8;
+    const u16 *local_3c;
     s32 i;
     s32 xDiv8, yDiv8;
     struct UnkTextStruct1 *r5 = &a0[a5];
@@ -1673,7 +1735,6 @@ static void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 co
     UnkTextStruct1 *r5;
     s32 r6;
     u32 r9;
-    struct unkStruct_80B8824 dataLOL;
     s32 lol;
 
     r5 = &a0[a1];
@@ -1685,43 +1746,45 @@ static void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 co
     dest += (r4 * -8) + y;
     r6 = x / 8;
 
-    if (y / 8 >= r5->unk8)
+    if (y / 8 >= r5->unk8) {
         return;
+    }
+    else {
+        u32 unkBits[] = {0, 0xF, 0xFF, 0xFFF, 0xFFFF, 0xFFFFF, 0xFFFFFF, 0xFFFFFFF, 0xFFFFFFFF};
 
-    dataLOL = gUnknown_80B8824;
+        for (; a4 > 0; a4 -= 8) {
+            lol = a4;
+            if (lol > 7)
+                lol = 8;
 
-    for (; a4 > 0; a4 -= 8) {
-        lol = a4;
-        if (lol > 7)
-            lol = 8;
+            shiftData = &gCharMasksOffsets[x + (x / 8 * -8)];
 
-        shiftData = &gCharMasksOffsets[x + (x / 8 * -8)];
+            uVar4 = unkBits[lol];
+            uVar4 = (uVar4 & 0x11111111) + (uVar4 & r9);
 
-        uVar4 = dataLOL.arr[lol];
-        uVar4 = (uVar4 & 0x11111111) + (uVar4 & r9);
+            if (uVar4 != 0) {
+                if (r6 < r5->unk4) {
+                    dest[0] |= (shiftData->bytesA & uVar4) << shiftData->shift_left;
 
-        if (uVar4 != 0) {
-            if (r6 < r5->unk4) {
-                dest[0] |= (shiftData->bytesA & uVar4) << shiftData->shift_left;
+                    if (r5->unk3C > dest)
+                        r5->unk3C = dest;
+                    if (r5->unk40 < dest)
+                        r5->unk40 = dest;
+                }
 
-                if (r5->unk3C > dest)
-                    r5->unk3C = dest;
-                if (r5->unk40 < dest)
-                    r5->unk40 = dest;
+                if (r6 < r5->unk4 - 1) {
+                    dest += 8;
+                    dest[0] |= (uVar4 & shiftData->bytesB) >> shiftData->shift_right;
+
+                    if (r5->unk40 < dest)
+                        r5->unk40 = dest;
+                    dest -= 8;
+                }
             }
 
-            if (r6 < r5->unk4 - 1) {
-                dest += 8;
-                dest[0] |= (uVar4 & shiftData->bytesB) >> shiftData->shift_right;
-
-                if (r5->unk40 < dest)
-                    r5->unk40 = dest;
-                dest -= 8;
-            }
+            r6++;
+            dest += 8;
         }
-
-        r6++;
-        dest += 8;
     }
 }
 
@@ -1738,13 +1801,13 @@ static void sub_8007AA4(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4,
 {
     struct UnkTextStruct1 *r4 = &a0[a1];
     u32 ip = gUnknown_80B853C[color & 0xF] + 0x11111111;
-    struct unkStruct_80B8848 dataLOL = gUnknown_80B8848;
+    u32 unkBits[] = {0xF, 0xF0, 0xF00, 0xF000, 0xF0000, 0xF00000, 0xF000000, 0xF0000000};
     s32 r3 = y / 8;
     u32 *dest = r4->unk18 + ((r4->unk4 * r3 + x / 8) * 8);
     s32 r2 = x / 8;
 
     dest += r3 * -8 + y;
-    ip &= dataLOL.arr[x & 7];
+    ip &= unkBits[x & 7];
 
     if (r2 < r4->unk4) {
         // This goto looks like a fakematch, but I couldn't get it to work otherwise.
@@ -2595,6 +2658,13 @@ UNUSED static void nullsub_167(void)
 UNUSED static void nullsub_168(void)
 {
 }
+
+static const u32 gUnknown_80B8868[] =
+{
+    0, 0xF, 0xFF, 0xFFF, 0xFFFF, 0xFFFFF, 0xFFFFFF, 0xFFFFFFF,
+    0xFFFFFFFF, 0xFFFFFFF0, 0xFFFFFF00, 0xFFFFF000, 0xFFFF0000,
+    0xFFF00000, 0xFF000000, 0xF0000000
+};
 
 UNUSED static void sub_80086C8(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
 {

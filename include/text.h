@@ -15,21 +15,13 @@ struct unkShiftData
 // size: 0xC
 struct unkChar
 {
-    u16 *unk0;
+    const u16 *unk0;
     u16 unk4;
     s16 unk6;
-    u8 fill8;
+    u8 unk8;
     u8 fill9;
     u8 unkA;
-};
-
-struct unkStruct_80B8824
-{
-    u32 arr[9];
-};
-struct unkStruct_80B8848
-{
-    u32 arr[8];
+    u8 fillB;
 };
 
 struct UnkDrawStringStruct;
@@ -98,4 +90,4 @@ void sub_80095CC(s32 a0, s32 a1);
 s32 sub_80095E4(s32 a0, s32 a1);
 s32 sub_8009614(s32 a0, s32 a1);
 
-#endif // GUARD_TEXT2_H
+#endif // GUARD_TEXT_H
