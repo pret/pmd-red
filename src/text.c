@@ -17,16 +17,11 @@ struct CharMapStruct
     struct unkChar *unk4;
 };
 
-extern s32 gCurrentCharmap;
-extern s16 gCharacterSpacing;
 extern s32 gCharHeight[2];
 extern u8 gDrawTextShadow;
 extern s32 gUnknown_202B020;
 extern s32 gUnknown_202B024;
-extern u8 gUnknown_202749A[];
-extern u8 gUnknown_20274A6[];
 
-extern u8 gUnknown_20274A5;
 extern vu32 gUnknown_20274B0;
 extern u32 gUnknown_20274B4[0xEC0];
 extern OpenedFile *gCharmapFiles[2]; // 202AFB4
@@ -65,7 +60,11 @@ extern const u32 gUnknown_80B8868[];
 
 EWRAM_DATA UnkTextStruct1 gUnknown_2027370[4] = {0};
 EWRAM_DATA static struct CharMapStruct *sCharmaps[2] = {NULL};
-
+EWRAM_DATA static s16 sCharacterSpacing = 0;
+EWRAM_DATA u8 gUnknown_202749A[11] = {0};
+EWRAM_DATA bool8 gUnknown_20274A5 = FALSE;
+EWRAM_DATA static u8 sUnknown_20274A6[6] = {0};
+EWRAM_DATA static s32 sCurrentCharmap = 0;
 
 static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3);
 static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, UnkTextStruct2_sub *a8, u8 a9);
@@ -102,7 +101,7 @@ void LoadCharmaps(void)
     int j;
     int k;
 
-    gCurrentCharmap = 0;
+    sCurrentCharmap = 0;
     gCharmapFiles[0] = OpenFileAndGetFileDataPtr(gKanjiA_file_string, &gSystemFileArchive);
     gCharmapFiles[1] = OpenFileAndGetFileDataPtr(gKanjiB_file_string, &gSystemFileArchive);
     sCharmaps[0] = (void *) gCharmapFiles[0]->data;
@@ -116,7 +115,7 @@ void LoadCharmaps(void)
         gUnknown_2027370[k].unk46 = 0;
     }
 
-    gCharacterSpacing = 0;
+    sCharacterSpacing = 0;
 
     for (i = 0; i < 20; i++) {
         gUnknown_202B038[0][i][0] = 0xf279;
@@ -131,7 +130,7 @@ void LoadCharmaps(void)
     gDrawTextShadow = 1;
     gTextShadowMask = 0x88888888;
     gUnknown_203B078 = NULL;
-    gUnknown_20274A5 = 0;
+    gUnknown_20274A5 = FALSE;
     gUnknown_202B020 = 1;
     gUnknown_202B024 = 20;
     UpdateFadeInTile(0);
@@ -179,7 +178,7 @@ UNUSED static u8 UnusedSetTextShadow(u8 a0)
 
 void SelectCharmap(u32 a0)
 {
-    gCurrentCharmap = a0;
+    sCurrentCharmap = a0;
 }
 
 void SetCharacterMask(int a0)
@@ -238,7 +237,7 @@ static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, 
     ASM_MATCH_TRICK(gUnknown_20274A5);
 
     gUnknown_203B078 = gUnknown_3000E94;
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
 UNUSED static void nullsub_152(void)
@@ -1479,7 +1478,7 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
     u32 r4;
     u32 r2;
 
-    if (gCurrentCharmap == 1) {
+    if (sCurrentCharmap == 1) {
         if (a3 == 0x70 || a3 == 0x6A || a3 == 0x71 || a3 == 0x79 || a3 == 0x67)
             y += 2;
         else if (a3 == 0x8199)
@@ -1507,7 +1506,7 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
         yDiv8 = y / 8;
 
         if (yDiv8 < r5->unk8) {
-            for (i = 0; i < gCharHeight[gCurrentCharmap]; i++) {
+            for (i = 0; i < gCharHeight[sCurrentCharmap]; i++) {
                 r2 = (local_44[1] << 0x10) | (local_44[0]);
                 if (r2 != 0) {
                     if (xDiv8 < r5->unk4) {
@@ -1568,7 +1567,7 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
         yDiv8 = y / 8;
 
         if (yDiv8 < r5->unk8) {
-            for (i = 0; i < gCharHeight[gCurrentCharmap]; i++) {
+            for (i = 0; i < gCharHeight[sCurrentCharmap]; i++) {
                 r4 = (local_44[1] << 0x10) | (local_44[0]);
                 r2 = (0x11111111 & r4) + (sp18 & r4);
 
@@ -1651,7 +1650,7 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
         }
     }
 
-    return sp0->unk6 + gCharacterSpacing;
+    return sp0->unk6 + sCharacterSpacing;
 }
 
 void sub_80078A4(u32 a0, s32 x, s32 y, s32 a3, u32 color)
@@ -2518,7 +2517,7 @@ const struct unkChar *GetCharacter(s32 chr)
 {
     s32 r2, r4;
     const struct unkChar *ret;
-    const struct unkChar *strPtr = sCharmaps[gCurrentCharmap]->unk4;
+    const struct unkChar *strPtr = sCharmaps[sCurrentCharmap]->unk4;
     // TODO: create labels for these
     if (chr > 63487 && chr < 65535)
     {
@@ -2531,7 +2530,7 @@ const struct unkChar *GetCharacter(s32 chr)
     else
     {
         r4 = 0;
-        r2 = sCharmaps[gCurrentCharmap]->unk0 - 1;
+        r2 = sCharmaps[sCurrentCharmap]->unk0 - 1;
         while (r4 < r2) {
             s32 r1 = (r4 + r2) / 2;
             if (strPtr[r1].unk4 == chr) {
@@ -2718,7 +2717,7 @@ bool8 xxx_call_update_bg_vram(void)
 {
     bool8 ret = FALSE;
     if (gUnknown_20274A5 != 0) {
-        gUnknown_20274A5 = 0;
+        gUnknown_20274A5 = FALSE;
         sub_80099C0();
     }
     ret = xxx_update_bg_vram(gUnknown_2027370);
@@ -3005,14 +3004,14 @@ UNUSED static bool8 sub_8008DA8(void)
 UNUSED static void sub_8008DAC(s32 a0, s32 a1, s32 a2)
 {
     gUnknown_202B038[0][a1][a0] = a2;
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
 void sub_8008DC8(s32 a0, s32 a1, u16 a2, s32 a3)
 {
     gUnknown_202B038[0][a1][a0] = a2;
     gUnknown_202B038[1][a1][a0] = a3;
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
 UNUSED static void sub_8008DF4(s32 a0, s32 a1, u8 *a2)
@@ -3031,7 +3030,7 @@ UNUSED static void sub_8008DF4(s32 a0, s32 a1, u8 *a2)
         a2++;
         a0++;
     }
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
 UNUSED static void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
@@ -3054,7 +3053,7 @@ UNUSED static void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
         a0++;
         a3--;
     }
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
 s32 sub_8008ED0(const u8 *str)
@@ -3104,7 +3103,7 @@ s32 sub_8008ED0(const u8 *str)
         else {
             const struct unkChar *ptr = GetCharacter(chr);
             if (ptr != NULL) {
-                ret += ptr->unk6 + gCharacterSpacing;
+                ret += ptr->unk6 + sCharacterSpacing;
             }
         }
     }
@@ -3152,10 +3151,10 @@ static void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str,
             break;
 
         if (currChr == 0x82A0) {
-            gCurrentCharmap = 0;
+            sCurrentCharmap = 0;
         }
         else if (currChr == 0x82A2) {
-            gCurrentCharmap = 1;
+            sCurrentCharmap = 1;
         }
         else if (currChr == '\e') {
             break;
@@ -3178,7 +3177,7 @@ static void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str,
             const struct unkChar *chrPtr = GetCharacter(currChr);
             if (chrPtr != NULL) {
                 s32 x = sp.unk0;
-                s32 x2 = gCharacterSpacing + 10;
+                s32 x2 = sCharacterSpacing + 10;
                 x +=((x2 - chrPtr->unk6) / 2);
                 xxx_draw_char(strArr, x, sp.unk2, currChr, sp.unk10, windowId);
                 sp.unk0 += characterSpacing;
@@ -3308,7 +3307,7 @@ static const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct 
                 str += 2;
             }
             else if (str[1] == 'S') {
-                gUnknown_20274A6[str[2] & 0x7F] = str[3] & 0x7F;
+                sUnknown_20274A6[str[2] & 0x7F] = str[3] & 0x7F;
                 str += 4;
             }
             else if (str[1] == 'W') {
@@ -3379,7 +3378,7 @@ void sub_8009408(s32 from, s32 to)
             gUnknown_202B038[1][i][j] = 0xF27A;
         }
     }
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
 UNUSED static void sub_8009488(s32 strArrId)

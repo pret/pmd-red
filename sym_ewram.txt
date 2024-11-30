@@ -44,16 +44,6 @@ gUnknown_20270E8: /* 20270E8 (sub_8005838) */
 
     .include "src/text.o"
 
-gCharacterSpacing: /* 2027498 (LoadCharmaps - xxx_draw_string) */
-	.space 0x2
-gUnknown_202749A: /* 202749A (HandleTextFormat - DrawFieldMenu) */
-	.space 0xB
-gUnknown_20274A5: /* 20274A5 (LoadCharmaps - sub_803F9CC) */
-	.space 0x1
-gUnknown_20274A6: /* 20274A6 (HandleTextFormat) */
-	.space 0x6
-gCurrentCharmap: /* 20274AC (LoadCharmaps - xxx_draw_string) */
-	.space 0x4
 gUnknown_20274B0: /* 20274B0 (UpdateFadeInTile - SetCharacterMask) */
 	.space 0x4
 gUnknown_20274B4: /* 20274B4 (SaveUnkTextStructAndXXX_8006438) */

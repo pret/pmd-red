@@ -1179,7 +1179,7 @@ void sub_803F9CC(void)
         sub_803FB74();
     }
 
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
 void sub_803FA4C(s32 a0, s32 a1, bool8 a2)

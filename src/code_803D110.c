@@ -590,7 +590,7 @@ void ShowDungeonNameBanner(void)
         }
 
         sub_803DC14(text, (224 - CalcStringWidth(text)) / 2, var + 32);
-        gUnknown_20274A5 = 1;
+        gUnknown_20274A5 = TRUE;
     }
 
     CloseFile(gDungeonNameBannerFontFile);

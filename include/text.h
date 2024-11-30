@@ -6,6 +6,8 @@
 struct UnkDrawStringStruct;
 
 extern UnkTextStruct1 gUnknown_2027370[4];
+extern u8 gUnknown_202749A[11];
+extern bool8 gUnknown_20274A5;
 
 void LoadCharmaps(void);
 u32 UpdateFadeInTile(u32 a0);
