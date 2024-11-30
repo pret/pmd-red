@@ -42,12 +42,8 @@ gUnknown_2026E60: /* 2026E60 (sub_8005838) */
 gUnknown_20270E8: /* 20270E8 (sub_8005838) */
 	.space 0x288
 
-gUnknown_2027370: /* 2027370 (LoadCharmaps - sub_8272A78) */
-	.space 0x48
-gUnknown_20273B8: /* 20273B8 (sub_80157D8) */
-	.space 0xD8
-gCharmaps: /* 2027490 (LoadCharmaps - GetCharacter) */
-	.space 0x8
+    .include "src/text.o"
+
 gCharacterSpacing: /* 2027498 (LoadCharmaps - xxx_draw_string) */
 	.space 0x2
 gUnknown_202749A: /* 202749A (HandleTextFormat - DrawFieldMenu) */

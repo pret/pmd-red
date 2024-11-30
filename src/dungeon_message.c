@@ -20,6 +20,7 @@
 #include "exclusive_pokemon.h"
 #include "dungeon_leader.h"
 #include "text1.h"
+#include "text.h"
 
 void sub_80526D0(s32 r0);
 static void PutStringsOnMessageLog(void);
@@ -35,7 +36,6 @@ extern void sub_805E804(void);
 extern void sub_803EAF0(s32, s32);
 extern void sub_8040238(void);
 extern void sub_8083E28(void);
-extern bool8 sub_8008D8C(u32 strId);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern void sub_8083D30(void);
 extern void sub_8083D08(void);

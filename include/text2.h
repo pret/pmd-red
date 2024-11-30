@@ -61,7 +61,6 @@ struct UnkDrawStringStruct
 
 
 void RestoreUnkTextStruct_8006518(UnkTextStruct2 *);
-void sub_8006554(UnkTextStruct1 *, u32 *, u32 *, u16 *, u32, const UnkTextStruct2 *, u8, u32, UnkTextStruct2_sub *, u8);
 void sub_80073B8(s32);
 void sub_80073E0(s32);
 void sub_80078A4(u32, s32, s32, s32, u32);
@@ -76,11 +75,8 @@ const u8 *xxx_handle_format_global(const u8 *str, struct UnkDrawStringStruct *un
 extern const struct unkChar *GetCharacter(s32);
 extern void InitGraphics(void);
 void DisplayMonPortraitSpriteFlipped(s32 a0, const u8 *compressedData, s32 a1);
-extern void sub_800898C(void);
-extern void sub_80089AC(const UnkTextStruct2 *, UnkTextStruct2_sub *);
 extern void CallPrepareTextbox_8008C54(u32);
 extern s32 sub_8008ED0(const u8 *);
-extern void sub_8009388(void);
 void PrintStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing);
 void PrintStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr);
 

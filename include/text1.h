@@ -3,7 +3,7 @@
 
 #include "structs/str_text.h"
 
-extern UnkTextStruct1 gUnknown_2027370[4];
+
 extern UnkTextStruct2 gUnknown_202AFC0[4];
 extern u32 gTextShadowMask;
 extern u16 gUnknown_202B038[4][32][32]; // dimensions unknown... but usage points to these dimensions

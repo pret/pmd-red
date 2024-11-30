@@ -787,7 +787,7 @@ sub_80157D8:
 	ldr r3, _080157F4
 	b _080157FE
 	.align 2, 0
-_080157EC: .4byte gUnknown_20273B8
+_080157EC: .4byte gUnknown_2027370 + 0x48 @ gUnknown_2027370[1]
 _080157F0: .4byte gUnknown_203B1FC
 _080157F4: .4byte gUnknown_80DAFC0
 _080157F8:

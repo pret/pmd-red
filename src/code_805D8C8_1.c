@@ -38,6 +38,7 @@
 #include "pokemon_3.h"
 #include "text2.h"
 #include "text1.h"
+#include "text.h"
 #include "code_806CD90.h"
 #include "code_8044CC8.h"
 #include "code_801B3C0.h"

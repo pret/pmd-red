@@ -3,6 +3,7 @@
 #include "constants/input.h"
 #include "input.h"
 #include "items.h"
+#include "text.h"
 #include "text1.h"
 #include "text2.h"
 #include "memory.h"
@@ -45,7 +46,6 @@ const UnkTextStruct2 gUnknown_80DC274 = {
 ALIGNED(4) const u8 gUnknown_80DC28C[] = _("Moves: {COLOR YELLOW}{POKEMON_0}{RESET} ");
 ALIGNED(4) const u8 gUnknown_80DC2A0[] = _("{MOVE_ITEM_0}");
 
-u32 sub_8006544(u32 index);
 s32 sub_801F3F8(void);
 
 u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *text, u32 param_6)
