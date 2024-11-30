@@ -7,8 +7,8 @@
 #include "menu_input.h"
 #include "moves.h"
 #include "pokemon.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
+#include "text.h"
 #include "structs/struct_sub80095e4.h"
 
 struct unkStruct_203B274

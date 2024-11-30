@@ -6,8 +6,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_mail.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B300 *sUnknown_203B300 = {0};
 

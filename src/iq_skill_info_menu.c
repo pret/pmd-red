@@ -9,8 +9,7 @@
 #include "menu_input.h"
 #include "pokemon_3.h"
 #include "sprite.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 struct IQSkillInfoMenu *sIQSkillInfoMenu = {0};
 

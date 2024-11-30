@@ -1,7 +1,5 @@
 #include "global.h"
 #include "text.h"
-#include "text1.h"
-#include "text2.h"
 #include "decompress.h"
 #include "code_8009804.h"
 #include "code_800558C.h"
@@ -17,22 +15,6 @@ struct CharMapStruct
     struct unkChar *unk4;
 };
 
-extern s32 gCharHeight[2];
-extern u8 gDrawTextShadow;
-extern s32 gUnknown_202B020;
-extern s32 gUnknown_202B024;
-
-extern vu32 gUnknown_20274B0;
-extern u32 gUnknown_20274B4[0xEC0];
-extern OpenedFile *gCharmapFiles[2]; // 202AFB4
-// u32 unused // 202AFBC
-extern UnkTextStruct2 gUnknown_202AFC0[4];
-extern u32 gTextShadowMask; // Some text color info is stored; retrieve via "& 0xF"
-extern u16 gUnknown_202B038[4][32][32];
-
-// ?
-extern s16 gUnknown_3000E94[];
-
 // data.s
 extern const UnkTextStruct2 gUnknown_80B857C[4];
 extern const u8 gKanjiA_file_string[]; // 80B87B4
@@ -42,19 +24,17 @@ extern const u32 gFadeInDungeon[8];
 extern const u32 gUnknown_80B8804[4];
 extern const u32 gUnknown_80B86B4[][32];
 extern const u32 gUnknown_80B8814[];
-// system_sbin.s
-extern const struct FileArchive gSystemFileArchive;
-
-// data.s
 extern const u32 gUnknown_80B853C[16];
 extern const struct unkShiftData gCharMasksOffsets[8];
 extern const u32 gUnknown_80B8814[];
 extern const struct unkStruct_80B8824 gUnknown_80B8824;
 extern const struct unkStruct_80B8848 gUnknown_80B8848;
+// system_sbin.s
+extern const struct FileArchive gSystemFileArchive;
 
 // Todo fix gUnknown_3000E94 being accessed as s16/u8
 extern s16 gUnknown_3000E94[];
-extern u8 gUnknown_20274A5;
+
 extern const struct unkChar gUnknown_80B86A4;
 extern const u32 gUnknown_80B8868[];
 
@@ -65,6 +45,16 @@ EWRAM_DATA u8 gUnknown_202749A[11] = {0};
 EWRAM_DATA bool8 gUnknown_20274A5 = FALSE;
 EWRAM_DATA static u8 sUnknown_20274A6[6] = {0};
 EWRAM_DATA static s32 sCurrentCharmap = 0;
+EWRAM_DATA static vu32 sUnknown_20274B0 = 0;
+EWRAM_DATA static u32 sUnknown_20274B4[0xEC0] = {0};
+EWRAM_DATA static OpenedFile *sCharmapFiles[3] = {NULL};
+EWRAM_DATA static UnkTextStruct2 sUnknown_202AFC0[4] = {0};
+EWRAM_DATA static s32 sUnknown_202B020 = 0;
+EWRAM_DATA static s32 sUnknown_202B024 = 0;
+EWRAM_DATA static s32 sCharHeight[2] = {0};
+EWRAM_DATA static u32 sTextShadowMask = 0; // Some text color info is stored; retrieve via "& 0xF"
+EWRAM_DATA static u8 sDrawTextShadow = 0;
+EWRAM_DATA ALIGNED(4) u16 gUnknown_202B038[4][32][32] = {0};
 
 static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3);
 static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, UnkTextStruct2_sub *a8, u8 a9);
@@ -102,12 +92,12 @@ void LoadCharmaps(void)
     int k;
 
     sCurrentCharmap = 0;
-    gCharmapFiles[0] = OpenFileAndGetFileDataPtr(gKanjiA_file_string, &gSystemFileArchive);
-    gCharmapFiles[1] = OpenFileAndGetFileDataPtr(gKanjiB_file_string, &gSystemFileArchive);
-    sCharmaps[0] = (void *) gCharmapFiles[0]->data;
-    sCharmaps[1] = (void *) gCharmapFiles[1]->data;
-    gCharHeight[0] = 11;
-    gCharHeight[1] = 12;
+    sCharmapFiles[0] = OpenFileAndGetFileDataPtr(gKanjiA_file_string, &gSystemFileArchive);
+    sCharmapFiles[1] = OpenFileAndGetFileDataPtr(gKanjiB_file_string, &gSystemFileArchive);
+    sCharmaps[0] = (void *) sCharmapFiles[0]->data;
+    sCharmaps[1] = (void *) sCharmapFiles[1]->data;
+    sCharHeight[0] = 11;
+    sCharHeight[1] = 12;
 
     for (k = 0; k < 4; k++) {
         gUnknown_2027370[k].unk4 = 0;
@@ -127,21 +117,21 @@ void LoadCharmaps(void)
         }
     }
 
-    gDrawTextShadow = 1;
-    gTextShadowMask = 0x88888888;
+    sDrawTextShadow = 1;
+    sTextShadowMask = 0x88888888;
     gUnknown_203B078 = NULL;
     gUnknown_20274A5 = FALSE;
-    gUnknown_202B020 = 1;
-    gUnknown_202B024 = 20;
+    sUnknown_202B020 = 1;
+    sUnknown_202B024 = 20;
     UpdateFadeInTile(0);
 }
 
 u32 UpdateFadeInTile(u32 a0)
 {
-    u32 r5 = gUnknown_20274B0;
+    u32 r5 = sUnknown_20274B0;
     u32 *r4 = (u32 *)(VRAM + 0x4F40);
     const u32 *r2;
-    gUnknown_20274B0 = a0;
+    sUnknown_20274B0 = a0;
 
     if (a0 == 0 || a0 == 2) {
         sub_800CDA8(2);
@@ -152,7 +142,7 @@ u32 UpdateFadeInTile(u32 a0)
         r2 = gFadeInDungeon;
     }
 
-    gTextShadowMask = 0x88888888;
+    sTextShadowMask = 0x88888888;
     *r4++ = *r2++;
     *r4++ = *r2++;
     *r4++ = *r2++;
@@ -166,13 +156,13 @@ u32 UpdateFadeInTile(u32 a0)
 
 u32 sub_80063B0(void)
 {
-    return gUnknown_20274B0;
+    return sUnknown_20274B0;
 }
 
 UNUSED static u8 UnusedSetTextShadow(u8 a0)
 {
-    u8 retval = gDrawTextShadow;
-    gDrawTextShadow = a0;
+    u8 retval = sDrawTextShadow;
+    sDrawTextShadow = a0;
     return retval;
 }
 
@@ -185,7 +175,7 @@ void SetCharacterMask(int a0)
 {
     u32 retval;
     if (a0 == 0) {
-        gUnknown_20274B0;
+        UNUSED u32 unusedVal = sUnknown_20274B0;
         retval = 0x88888888;
     }
     else {
@@ -197,7 +187,7 @@ void SetCharacterMask(int a0)
         retval |= ((a0 & 0xF) << 24);
         retval |= ((a0 & 0xF) << 28);
     }
-    gTextShadowMask = retval;
+    sTextShadowMask = retval;
 }
 
 void xxx_call_save_unk_text_struct_800641C(const UnkTextStruct2 *a0, bool8 a1, bool8 a2)
@@ -222,10 +212,10 @@ static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, 
     sub_800898C();
 
     for (i = 0; i < 4; i++) {
-        gUnknown_202AFC0[i] = a0[i];
+        sUnknown_202AFC0[i] = a0[i];
 
         if (a0[i].unkC) {
-            sub_8006554(gUnknown_2027370, (u32 *)VRAM, gUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], a0 + i, a1, r9, a3, 0);
+            sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], a0 + i, a1, r9, a3, 0);
             sub_80089AC(a0 + i, a3);
             r9 += a0[i].unkC * a0[i].unk10;
         }
@@ -248,7 +238,7 @@ void RestoreUnkTextStruct_8006518(UnkTextStruct2 *unkData)
 {
     s32 iVar2;
     for (iVar2 = 0; iVar2 < 4; iVar2++)
-        unkData[iVar2] = gUnknown_202AFC0[iVar2];
+        unkData[iVar2] = sUnknown_202AFC0[iVar2];
 }
 
 UNUSED static void nullsub_153(void)
@@ -1491,7 +1481,7 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
     local_3c = sp0->unk0;
     sp8 = sp0->unk0 - 3;
 
-    if (gDrawTextShadow != 0) {
+    if (sDrawTextShadow != 0) {
         var_2C = (sp0->unkA >> 1) & 1;
     }
     else {
@@ -1506,7 +1496,7 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
         yDiv8 = y / 8;
 
         if (yDiv8 < r5->unk8) {
-            for (i = 0; i < gCharHeight[sCurrentCharmap]; i++) {
+            for (i = 0; i < sCharHeight[sCurrentCharmap]; i++) {
                 r2 = (local_44[1] << 0x10) | (local_44[0]);
                 if (r2 != 0) {
                     if (xDiv8 < r5->unk4) {
@@ -1567,7 +1557,7 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
         yDiv8 = y / 8;
 
         if (yDiv8 < r5->unk8) {
-            for (i = 0; i < gCharHeight[sCurrentCharmap]; i++) {
+            for (i = 0; i < sCharHeight[sCurrentCharmap]; i++) {
                 r4 = (local_44[1] << 0x10) | (local_44[0]);
                 r2 = (0x11111111 & r4) + (sp18 & r4);
 
@@ -1575,12 +1565,12 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
                     r1 = ((local_3c[1] << 0x10) | local_3c[0]) << 4;
                     r1 |= r4; // This doesn't really do anything since r4 bits are cleared, but it's needed to match.
                     r1 &= ~(r4);
-                    r1 &= gTextShadowMask;
+                    r1 &= sTextShadowMask;
                     r2 |= (r1);
                     if (notFirstIteration) {
                         r1 = (((sp8[1] << 0x10) | sp8[0]) << 4) ^ r4;
                         r1 &= ~(r4);
-                        r2 |= (r1 & gTextShadowMask);
+                        r2 |= (r1 & sTextShadowMask);
                     }
                 }
 
@@ -1607,12 +1597,12 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
                     r1 = (local_3c[2] << 4) | ((local_3c[1] >> 0xC) & 0xF);
                     r1 |= r4; // This doesn't really do anything since r4 bits are cleared, but it's needed to match.
                     r1 &= ~(r4);
-                    r1 &= gTextShadowMask;
+                    r1 &= sTextShadowMask;
                     r2 |= r1;
                     if (notFirstIteration) {
                         r1 = ((sp8[2] << 4) | ((sp8[1] >> 0xC) & 0xF)) ^ r4;
                         r1 &= ~(r4);
-                        r1 &= gTextShadowMask;
+                        r1 &= sTextShadowMask;
                         r2 |= (r1);
                     }
                 }
@@ -1656,13 +1646,13 @@ static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 co
 void sub_80078A4(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
     sub_800792C(a0, x, y, a3, color);
-    sub_800792C(a0, x, y + 1, a3, gTextShadowMask & 0xF);
+    sub_800792C(a0, x, y + 1, a3, sTextShadowMask & 0xF);
 }
 
 UNUSED static void sub_80078E8(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
     nullsub_129(a0, x, y, a3, color);
-    nullsub_129(a0, x, y + 1, a3, gTextShadowMask & 0xF);
+    nullsub_129(a0, x, y + 1, a3, sTextShadowMask & 0xF);
 }
 
 void sub_800792C(u32 a0, s32 x, s32 y, s32 a3, u32 color)
@@ -3354,7 +3344,7 @@ static void sub_8009388(void)
 
     gUnknown_202B038[0][0][0] = 0xF279;
     gUnknown_202B038[1][0][0] = 0xF27A;
-    for (i = gUnknown_202B020; i < gUnknown_202B024; i++) {
+    for (i = sUnknown_202B020; i < sUnknown_202B024; i++) {
         gUnknown_202B038[0][i][0] = 0xF279;
         gUnknown_202B038[1][i][0] = 0xF27A;
         for (j = 1; j < 32; j++) {
@@ -3426,8 +3416,8 @@ UNUSED static void nullsub_173(void)
 
 void sub_80095CC(s32 a0, s32 a1)
 {
-    gUnknown_202B020 = a0;
-    gUnknown_202B024 = a1;
+    sUnknown_202B020 = a0;
+    sUnknown_202B024 = a1;
 }
 
 UNUSED static void nullsub_174(void)

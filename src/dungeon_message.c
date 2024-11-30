@@ -10,7 +10,6 @@
 #include "code_803E668.h"
 #include "bg_palette_buffer.h"
 #include "input.h"
-#include "text2.h"
 #include "pokemon.h"
 #include "file_system.h"
 #include "dungeon_util_1.h"
@@ -19,7 +18,6 @@
 #include "code_8045A00.h"
 #include "exclusive_pokemon.h"
 #include "dungeon_leader.h"
-#include "text1.h"
 #include "text.h"
 
 void sub_80526D0(s32 r0);

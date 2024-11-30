@@ -19,8 +19,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "text_util.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 enum
 {

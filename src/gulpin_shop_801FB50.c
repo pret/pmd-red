@@ -17,12 +17,9 @@
 #include "moves.h"
 #include "pokemon_3.h"
 #include "pokemon_mid.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 EWRAM_DATA_2 unkStruct_203B27C *gUnknown_203B27C = {0};
-
-extern u8 gSpeakerNameBuffer[];
 
 #include "data/gulpin_shop_801FB50.h"
 

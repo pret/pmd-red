@@ -4,8 +4,8 @@
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
+#include "text.h"
 
 struct  unkStruct_203B1F8
 {

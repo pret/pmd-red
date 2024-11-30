@@ -44,34 +44,6 @@ gUnknown_20270E8: /* 20270E8 (sub_8005838) */
 
     .include "src/text.o"
 
-gUnknown_20274B0: /* 20274B0 (UpdateFadeInTile - SetCharacterMask) */
-	.space 0x4
-gUnknown_20274B4: /* 20274B4 (SaveUnkTextStructAndXXX_8006438) */
-	.space 0x3B00
-gCharmapFiles: /* 202AFB4 (LoadCharmaps) */
-	.space 0xC
-gUnknown_202AFC0: /* 202AFC0 (SaveUnkTextStructAndXXX_8006438 - RestoreUnkTextStruct_8006518) */
-	.space 0x60
-gUnknown_202B020: /* 202B020 (LoadCharmaps - sub_80095CC) */
-	.space 0x4
-gUnknown_202B024: /* 202B024 (LoadCharmaps - sub_80095CC) */
-	.space 0x4
-gCharHeight: /* 202B028 (LoadCharmaps - xxx_draw_char) */
-	.space 0x8
-gTextShadowMask: /* 202B030 (LoadCharmaps - sub_80078E8) */
-	.space 0x4
-gDrawTextShadow: /* 202B034 (LoadCharmaps - xxx_draw_char) */
-	.space 0x4
-gUnknown_202B038: /* 202B038 (LoadTitleScreen - sub_80A2B40) */
-	.space 0x1000
-
-gFontTiles_202C038: /* 202C038 (sub_8010858 - sub_804A728) */
-	.space 0x800
-gFontTilesExtra_202C838: /* 202C838 (sub_8010858 - sub_804A49C) */
-	.space 0x720
-
-gUnknown_202CF58: /* 202CF58 (xxx_format_string) */
-	.space 0xE0
 
 gFontPalette: /* 202D038 (sub_80097B0 - sub_8052FB8) */
 	.space 0x4

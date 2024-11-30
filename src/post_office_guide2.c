@@ -15,10 +15,8 @@
 #include "menu_input.h"
 #include "pokemon_mail.h"
 #include "post_office_guide2.h"
-#include "text1.h"
-#include "text2.h"
-
-extern u8 gFormatBuffer_Items[];
+#include "text.h"
+#include "string_format.h"
 
 static EWRAM_DATA_2 unkStruct_203B330 *sUnknown_203B330 = {0};
 
@@ -146,13 +144,13 @@ static void DisplayMissionObjectives(void)
 
                         switch (jobInfo->missionType) {
                             case WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM:
-                                BufferItemName(gFormatBuffer_Items, jobInfo->targetItem, NULL);
-                                sprintfStatic(buffer1, sFmtBring, gFormatBuffer_Items);
+                                BufferItemName(gFormatBuffer_Items[0], jobInfo->targetItem, NULL);
+                                sprintfStatic(buffer1, sFmtBring, gFormatBuffer_Items[0]);
                                 PrintStringOnWindow(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
                                 break;
                             case WONDER_MAIL_MISSION_TYPE_FIND_ITEM:
-                                BufferItemName(gFormatBuffer_Items, jobInfo->targetItem, NULL);
-                                sprintfStatic(buffer1, sFmtFind, gFormatBuffer_Items);
+                                BufferItemName(gFormatBuffer_Items[0], jobInfo->targetItem, NULL);
+                                sprintfStatic(buffer1, sFmtFind, gFormatBuffer_Items[0]);
                                 PrintStringOnWindow(40, yCoord, buffer1, sUnknown_203B330->unk10, 0);
                                 break;
                             case WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT:

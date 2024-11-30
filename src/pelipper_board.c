@@ -5,8 +5,7 @@
 #include "pokemon.h"
 #include "items.h"
 #include "memory.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "structs/menu.h"
 #include "input.h"
 #include "menu_input.h"
@@ -230,7 +229,7 @@ void CreatePelipperBoardMenu(void)
   {
       gPelipperBoard->unkFC[loopMax] = 1;
   }
-    
+
   loopMax += 1;
   gPelipperBoard->menuItems[loopMax].text = NULL;
   gPelipperBoard->menuItems[loopMax].menuAction = PELIPPER_BOARD_NULL;
@@ -255,7 +254,7 @@ void CreatePelipperBoardMenu(void)
 void sub_802EC10(void) {
 
     s32 index;
-    s32 loopMax = 0; 
+    s32 loopMax = 0;
     gPelipperBoard->menuItems[loopMax].text = gCommonAccept[0];
     gPelipperBoard->menuItems[loopMax].menuAction = PELIPPER_BOARD_ACCEPT;
 

@@ -11,8 +11,7 @@
 #include "makuhita_dojo2.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 MakuhitaDojoWork2 *sMakuhitaDojoWork2 = {0};
 

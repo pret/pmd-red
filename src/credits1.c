@@ -4,8 +4,7 @@
 #include "event_flag.h"
 #include "input.h"
 #include "memory.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 Credits1Work *sCredits1Work = {0};
 

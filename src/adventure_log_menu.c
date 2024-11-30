@@ -3,7 +3,7 @@
 #include "adventure_log_menu.h"
 #include "constants/main_menu.h"
 #include "input.h"
-#include "text1.h"
+#include "text.h"
 
 void CreateAdventureLogMenu(void)
 {

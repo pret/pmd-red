@@ -11,8 +11,7 @@
 #include "menu_input.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B2F0 *sUnknown_203B2F0 = {0};
 

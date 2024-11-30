@@ -9,7 +9,7 @@
 #include "random.h"
 #include "code_800D090.h"
 #include "text_util.h"
-#include "text2.h"
+#include "text.h"
 #include "string_format.h"
 #include <stddef.h>
 

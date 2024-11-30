@@ -3,7 +3,7 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "input.h"
-#include "text1.h"
+#include "text.h"
 #include "code_801602C.h"
 #include "menu_input.h"
 #include "code_8009804.h"

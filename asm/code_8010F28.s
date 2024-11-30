@@ -278,9 +278,9 @@ _080110F2:
 _08011150: .4byte gUnknown_203B0E4
 _08011154: .4byte 0x00004dd6
 _08011158: .4byte 0x00004dd4
-_0801115C: .4byte gFontTiles_202C038
+_0801115C: .4byte gUnknown_202B038 + 0x1000
 _08011160: .4byte 0x00002014
-_08011164: .4byte gFontTilesExtra_202C838
+_08011164: .4byte gUnknown_202B038 + 0x1800
 	thumb_func_end sub_80110B0
 
 	thumb_func_start sub_8011168

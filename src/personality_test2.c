@@ -10,8 +10,7 @@
 #include "menu_input.h"
 #include "personality_test2.h"
 #include "pokemon.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "string_format.h"
 
 EWRAM_DATA_2 struct PersonalityStruct_203B404 *gUnknown_203B404 = {0};

@@ -13,8 +13,7 @@
 #include "pokemon.h"
 #include "rescue_password_menu.h"
 #include "save.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 #define RESCUE_PASSWORD_SIZE 0x36
 

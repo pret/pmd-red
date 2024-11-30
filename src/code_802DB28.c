@@ -10,10 +10,7 @@
 #include "items.h"
 #include "memory.h"
 #include "pokemon.h"
-#include "text1.h"
-#include "text2.h"
-
-extern u8 gSpeakerNameBuffer[];
+#include "text.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B2FC *sUnknown_203B2FC = {0};
 

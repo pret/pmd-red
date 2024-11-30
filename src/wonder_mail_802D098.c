@@ -13,8 +13,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "save.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802D098.h"
 
@@ -521,7 +520,7 @@ static void sub_802D9F0(void)
         case NO_ACTION:
             sub_802D1A0(DRAW_JOB_LIST_1);
             break;
-       
+
         case YES_ACTION:
             sub_802C688();
             ResetJobSlot(sUnknown_203B2F8->jobSlotIndex);

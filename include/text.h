@@ -3,11 +3,64 @@
 
 #include "structs/str_text.h"
 
+// size: 0x10
+struct unkShiftData
+{
+    u32 bytesA;
+    u32 bytesB;
+    u32 shift_left;
+    u32 shift_right;
+};
+
+// size: 0xC
+struct unkChar
+{
+    u16 *unk0;
+    u16 unk4;
+    s16 unk6;
+    u8 fill8;
+    u8 fill9;
+    u8 unkA;
+};
+
+struct unkStruct_80B8824
+{
+    u32 arr[9];
+};
+struct unkStruct_80B8848
+{
+    u32 arr[8];
+};
+
 struct UnkDrawStringStruct;
+
+struct UnkDrawStringStruct
+{
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    s16 unk8;
+    s16 unkA;
+    s32 unkC;
+    u32 unk10;
+    u32 unk14;
+    u32 unk18;
+    u32 unk1C;
+    u8 unk20;
+    u8 unk21;
+    u8 fill22;
+    u8 fill23;
+    const u8* (*unk24)(const u8 *, const u8 *, struct UnkDrawStringStruct*);
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
+};
 
 extern UnkTextStruct1 gUnknown_2027370[4];
 extern u8 gUnknown_202749A[11];
 extern bool8 gUnknown_20274A5;
+extern u16 gUnknown_202B038[4][32][32]; // Usage points to these dimensions
 
 void LoadCharmaps(void);
 u32 UpdateFadeInTile(u32 a0);

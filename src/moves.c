@@ -8,7 +8,7 @@
 #include "memory.h"
 #include "moves.h"
 #include "text_util.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA OpenedFile *sWazaParametersFile = {0};
 static EWRAM_DATA MoveDataEntry *sMovesData = {0};

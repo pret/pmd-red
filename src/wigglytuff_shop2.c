@@ -10,8 +10,7 @@
 #include "menu_input.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "wigglytuff_shop2.h"
 
 static EWRAM_DATA_2 WigglytuffShop2Work *sWigglytuffShop2Work = {0};
@@ -114,10 +113,10 @@ static void PopulateWigglytuffShopFriendAreaInfoScreen(void)
         sub_808D930(buffer2, sWigglytuffShop2Work->friendAreaSpecies[i]);
 
         switch (sWigglytuffShop2Work->pokemonStatus[i]) {
-            case POKEMON_UNKNOWN: 
+            case POKEMON_UNKNOWN:
                 PrintStringOnWindow(x, y, gCommonTripleQuestionMark[0], sWigglytuffShop2Work->unk74, 0);
                 break;
-            case POKEMON_SEEN: 
+            case POKEMON_SEEN:
                 PrintStringOnWindow(x, y, buffer2, sWigglytuffShop2Work->unk74, 0);
                 break;
             case POKEMON_RECRUITED:
@@ -174,7 +173,7 @@ static void sub_8021A60(void)
     }
 }
 
-/* Return index of pokemon if in the friend area, else return -1 */ 
+/* Return index of pokemon if in the friend area, else return -1 */
 static s32 CheckSpeciesinWigglytuffFriendArea(s16 species)
 {
     s32 baseSpecies;

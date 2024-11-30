@@ -11,8 +11,7 @@
 #include "pokemon.h"
 #include "pokemon_mail.h"
 #include "structs/str_802C39C.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "structs/struct_sub80095e4.h"
 #include "wonder_mail_4.h"
 

@@ -8,8 +8,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_3.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 struct IQSkillListMenu *sIQSkillListMenu = {0};
 

@@ -7,7 +7,7 @@
 #include "input.h"
 #include "memory.h"
 #include "text_util.h"
-#include "text1.h"
+#include "text.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B200 *sUnknown_203B200 = {0};
 

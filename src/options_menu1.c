@@ -10,8 +10,7 @@
 #include "menu_input.h"
 #include "options_menu1.h"
 #include "options_menu2.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 enum
 {

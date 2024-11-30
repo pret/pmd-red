@@ -13,7 +13,7 @@
 #include "pokemon.h"
 #include "save.h"
 #include "text_util.h"
-#include "text1.h"
+#include "text.h"
 
 enum DebugMenuOptions
 {
