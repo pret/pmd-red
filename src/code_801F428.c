@@ -8,7 +8,6 @@
 #include "moves.h"
 #include "pokemon.h"
 #include "text.h"
-#include "text.h"
 #include "structs/struct_sub80095e4.h"
 
 struct unkStruct_203B274

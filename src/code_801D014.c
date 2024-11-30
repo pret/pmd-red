@@ -25,7 +25,6 @@
 #include "party_list_menu.h"
 #include "rescue_team_info.h"
 #include "text.h"
-#include "text.h"
 #include "wigglytuff_shop2.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"

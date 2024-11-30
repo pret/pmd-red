@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "random.h"
 
 EWRAM_DATA_2 s32 gPRNGSequenceNum = {0};

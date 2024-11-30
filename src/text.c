@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "text.h"
 #include "decompress.h"
 #include "code_8009804.h"
@@ -68,9 +69,6 @@ static void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str,
 static const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp);
 static void sub_8009388(void);
 static s32 InterpretColorChar(u8 a0);
-
-UNUSED static const char sPksDir0[] = "pksdir0";
-UNUSED static const char sPksDir1[] = "pksdir0";
 
 static const u32 gUnknown_80B853C[16] =
 {

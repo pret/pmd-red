@@ -15,7 +15,6 @@
 #include "menu_input.h"
 #include "pokemon_3.h"
 #include "text.h"
-#include "text.h"
 
 static EWRAM_DATA_2 unkStruct_203B294 *sUnknown_203B294 = {0};
 

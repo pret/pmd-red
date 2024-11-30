@@ -12,7 +12,6 @@
 #include "menu_input.h"
 #include "pokemon_3.h"
 #include "text.h"
-#include "text.h"
 
 static EWRAM_DATA_2 u32 gUnknown_203B298 = {0};
 static EWRAM_DATA_2 u16 gUnknown_203B29C = {0};

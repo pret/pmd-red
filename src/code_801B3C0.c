@@ -9,7 +9,6 @@
 #include "menu_input.h"
 #include "sprite.h"
 #include "text.h"
-#include "text.h"
 
 static EWRAM_DATA_2 unkStruct_203B230 *sUnknown_203B230 = {0};
 

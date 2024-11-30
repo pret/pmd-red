@@ -1,6 +1,5 @@
 #include "global.h"
 #include "text.h"
-#include "text.h"
 
 extern void sub_8272774(UnkTextStruct1 *r0, u32 r1);
 extern void sub_8272884(UnkTextStruct1 *r0, u32 r1);
