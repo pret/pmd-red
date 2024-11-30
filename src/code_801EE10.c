@@ -4,8 +4,6 @@
 #include "input.h"
 #include "items.h"
 #include "text.h"
-#include "text.h"
-#include "text.h"
 #include "memory.h"
 #include "moves.h"
 #include "code_801EE10.h"
