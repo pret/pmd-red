@@ -253,7 +253,7 @@ _080992CC: .4byte gUnknown_203B49C
 _080992D0: .4byte gUnknown_203B49D
 _080992D4: .4byte gUnknown_20398C4
 _080992D8: .4byte gUnknown_2039950
-_080992DC: .4byte gUnknown_20398D8
+_080992DC: .4byte gUnknown_20398C8 + 0x10
 	thumb_func_end sub_809927C
 
 	thumb_func_start sub_80992E0

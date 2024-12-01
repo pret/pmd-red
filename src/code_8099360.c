@@ -62,7 +62,7 @@ void sub_80993E4(void) {
 */
 void sub_8099648(void);
 
-NAKED void sub_80993F0(void)
+UNUSED static NAKED void sub_80993F0(void)
 {
     asm_unified("	.text\n"
 "	push {r4-r7,lr}\n"

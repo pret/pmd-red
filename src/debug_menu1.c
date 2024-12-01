@@ -43,7 +43,7 @@ void CreateDebugMenu(void)
 
     if (sDebugMenu == NULL) {
         sDebugMenu = MemoryAlloc(sizeof(struct DebugMenu), 8);
-        MemoryFill8((u8 *)sDebugMenu, 0, sizeof(struct DebugMenu));
+        MemoryFill8(sDebugMenu, 0, sizeof(struct DebugMenu));
     }
 
     for (i = 0; i < 4; i++)

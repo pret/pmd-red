@@ -81,7 +81,7 @@ s32 sub_802B2D4(void)
   ResetUnusedInputStruct();
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   sUnknown_203B2C8 = MemoryAlloc(sizeof(struct unkStruct_203B2C8),8);
-  MemoryFill8((u8 *)sUnknown_203B2C8,0,sizeof(struct unkStruct_203B2C8));
+  MemoryFill8(sUnknown_203B2C8,0,sizeof(struct unkStruct_203B2C8));
   sUnknown_203B2C8->unk1 = -1;
   CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);

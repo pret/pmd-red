@@ -37,7 +37,7 @@ void sub_800ED38(s32 r0)
     if(gUnknown_203B0D0 == 0) 
     {
         gUnknown_203B0D0 = MemoryAlloc(sizeof(struct unkStruct_203B0D0), 0xB);
-        MemoryClear8((u8 *)gUnknown_203B0D0, sizeof(struct unkStruct_203B0D0));
+        MemoryClear8(gUnknown_203B0D0, sizeof(struct unkStruct_203B0D0));
     }
     gUnknown_203B0D0->unk0 = r0;
 }

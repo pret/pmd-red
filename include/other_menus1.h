@@ -28,8 +28,8 @@ typedef struct unkStruct_203B35C
     PokemonStruct1 unk2BC;
     unkStruct_203B480 unk314;
     PokemonStruct1 unk344;
-    u8 unk39C[180];
-    u8 unk450[180];
+    u8 unk39C[0xB4]; // unkStruct_803B344?
+    u8 unk450[0xB4]; // unkStruct_803B344?
 } unkStruct_203B35C;
 
 void sub_8036FDC(s32);

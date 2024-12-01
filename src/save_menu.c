@@ -127,7 +127,7 @@ void CreateSaveMenu(s32 currMenu)
 
   if (sUnknown_203B364 == NULL) {
     sUnknown_203B364 = MemoryAlloc(sizeof(SaveMenuWork),8);
-    MemoryFill8((u8 *)sUnknown_203B364,0,sizeof(SaveMenuWork));
+    MemoryFill8(sUnknown_203B364,0,sizeof(SaveMenuWork));
   }
   for(index = 0; index < 4; index++){
     sUnknown_203B364->unk148[index] = gUnknown_80E6F20;

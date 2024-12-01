@@ -1012,7 +1012,14 @@ gUnknown_80B7DF8:
 
 	.global gVectorDirections
 gVectorDirections: @ 80B7E3C
-    .4byte 0, 1, 1, 1, 1, 0, 1, -1, 0, -1, -1, -1, -1, 0, -1, 1
+    .4byte 0, 1   @N
+    .4byte 1, 1   @NE
+    .4byte 1, 0   @E
+    .4byte 1, -1  @SE
+    .4byte 0, -1  @S
+    .4byte -1, -1 @SW
+    .4byte -1, 0  @W
+    .4byte -1, 1  @NW
 
 @ ???
 .string "pksdir0\0"

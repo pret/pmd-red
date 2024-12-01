@@ -191,15 +191,15 @@ static void sub_8037E38(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
     r4 = sub_800D588() == 0 ? param_2 : param_1;
     r3 = sub_800D588() == 0 ? param_1 : param_2;
 
-    if ((r4->itemIndex).itemIndex_u8 == (r3->itemIndex).itemIndex_u8) {
-         load = gTeamInventoryRef->teamStorage[r4->itemIndex.itemIndex_u8];
+    if (r4->itemIndex == r3->itemIndex) {
+         load = gTeamInventoryRef->teamStorage[r4->itemIndex];
          load += r3->numItems;
-         gTeamInventoryRef->teamStorage[r4->itemIndex.itemIndex_u8] = load;
+         gTeamInventoryRef->teamStorage[r4->itemIndex] = load;
     }
     else {
-        load = gTeamInventoryRef->teamStorage[r3->itemIndex.itemIndex_u8];
+        load = gTeamInventoryRef->teamStorage[r3->itemIndex];
         load += r3->numItems;
-        gTeamInventoryRef->teamStorage[r3->itemIndex.itemIndex_u8] = load;
+        gTeamInventoryRef->teamStorage[r3->itemIndex] = load;
     }
 }
 
@@ -246,7 +246,7 @@ static void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct
     }
     else
     {
-        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(unkStruct_203B484));
+        MemoryFill8(gUnknown_203B484, 0, sizeof(unkStruct_203B484));
         gUnknown_203B484->unk4.speciesNum = MONSTER_NONE;
     }
 }
@@ -303,8 +303,8 @@ static s32 sub_8038014(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
     r4 = sub_800D588() == 0 ? param_2 : param_1;
     r3 = sub_800D588() == 0 ? param_1 : param_2;
 
-    if ((r4->itemIndex).itemIndex_u8 == (r3->itemIndex).itemIndex_u8) {
-        r2 = gTeamInventoryRef->teamStorage[r4->itemIndex.itemIndex_u8];
+    if (r4->itemIndex == r3->itemIndex) {
+        r2 = gTeamInventoryRef->teamStorage[r4->itemIndex];
         r2 += r3->numItems;
         if (r2 > 999) {
             linkStatus = COMMS_NO_ROOM_STORAGE;
@@ -313,7 +313,7 @@ static s32 sub_8038014(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
             linkStatus = COMMS_GOOD;
     }
     else {
-        r2 = gTeamInventoryRef->teamStorage[r3->itemIndex.itemIndex_u8];
+        r2 = gTeamInventoryRef->teamStorage[r3->itemIndex];
         r2 += r3->numItems;
         if (r2 > 999) {
             linkStatus = COMMS_NO_ROOM_STORAGE;

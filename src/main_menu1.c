@@ -46,7 +46,7 @@ void InitMainMenu(void)
 {
     if (sMainMenu == NULL) {
         sMainMenu = MemoryAlloc(sizeof(MainMenu1Work), 8);
-        MemoryFill8((u8 *)sMainMenu, 0, sizeof(MainMenu1Work));
+        MemoryFill8(sMainMenu, 0, sizeof(MainMenu1Work));
     }
 
     sMainMenu->currMenu = MENU_NO_SCREEN_CHANGE;
@@ -369,7 +369,7 @@ unkStruct_8035D94 *sub_8035D94(void)
 
 void sub_8035DA0(void)
 {
-    sMainMenu->unk30.itemIndex.itemIndex_u8 = ITEM_NOTHING;
+    sMainMenu->unk30.itemIndex = ITEM_NOTHING;
     sMainMenu->unk30.numItems = 0;
 }
 

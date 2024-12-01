@@ -64,7 +64,7 @@ void sub_80382E4(s32 currMenu)
 
   if (sUnknown_203B360 == NULL) {
     sUnknown_203B360 = MemoryAlloc(sizeof(unkStruct_203B360), 8);
-    MemoryFill8((u8 *)sUnknown_203B360, 0, sizeof(unkStruct_203B360));
+    MemoryFill8(sUnknown_203B360, 0, sizeof(unkStruct_203B360));
   }
   for(index = 0; index < 4; index++){
     sUnknown_203B360->unk148[index] = gUnknown_80E6E7C;

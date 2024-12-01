@@ -241,7 +241,7 @@ u32 CreateThankYouMailPelipper(void)
   ResetUnusedInputStruct();
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   sUnknown_203B2C4 = MemoryAlloc(sizeof(WonderMailStruct_203B2C4), 8);
-  MemoryFill8((u8 *)sUnknown_203B2C4, 0, sizeof(WonderMailStruct_203B2C4));
+  MemoryFill8(sUnknown_203B2C4, 0, sizeof(WonderMailStruct_203B2C4));
 
   CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
   monName = GetMonSpecies(MONSTER_PELIPPER);
@@ -483,7 +483,7 @@ void DisplayThankYouMailCommsOutcome(void)
   if (sub_80144A4(&auStack20) != 0) {
     return;
   }
-  MemoryFill8((u8 *)&sUnknown_203B2C4->unk41C, 0, sizeof(Item));
+  MemoryFill8(&sUnknown_203B2C4->unk41C, 0, sizeof(Item));
   sUnknown_203B2C4->unk41C.id = ITEM_NOTHING;
   sUnknown_203B2C4->unk41C.quantity = 1;
   sUnknown_203B2C4->unk41C.flags = 0;
@@ -799,7 +799,7 @@ void HandleThankYouMailPasswordMenu(void)
   unkStruct_203B480 mail1;
 
   return_var = sub_80154F0();
-  MemoryFill8((u8 *)&mail1, 0, sizeof(unkStruct_203B480));
+  MemoryFill8(&mail1, 0, sizeof(unkStruct_203B480));
   switch(return_var)
   {
     case 3:
@@ -1306,13 +1306,13 @@ void UpdateThankYouMailText(void)
             switch(sUnknown_203B2C4->unk40)
             {
                 case 6:
-                    MemoryFill8((u8 *)&sUnknown_203B2C4->unk1B8,0, sizeof(unkStruct_203B480));
+                    MemoryFill8(&sUnknown_203B2C4->unk1B8,0, sizeof(unkStruct_203B480));
                     sUnknown_203B2C4->unk1B8 = *GetMailatIndex(sUnknown_203B2C4->mailIndex);
                     sUnknown_203B2C4->linkError = sub_8037D64(sUnknown_203B2C4->unk40,&sUnknown_203B2C4->unk1B8,&sUnknown_203B2C4->unk1E8);
                     break;
                 case 7:
-                    MemoryFill8((u8 *)&sUnknown_203B2C4->unk1B8,0, sizeof(unkStruct_203B480));
-                    MemoryFill8((u8 *)&sUnknown_203B2C4->unk1E8,0, sizeof(unkStruct_203B480));
+                    MemoryFill8(&sUnknown_203B2C4->unk1B8,0, sizeof(unkStruct_203B480));
+                    MemoryFill8(&sUnknown_203B2C4->unk1E8,0, sizeof(unkStruct_203B480));
                     sUnknown_203B2C4->linkError = sub_8037D64(sUnknown_203B2C4->unk40,&sUnknown_203B2C4->unk1B8,&sUnknown_203B2C4->unk1E8);
                     break;
             }

@@ -7,10 +7,7 @@
 // size: 0x8
 typedef struct unkStruct_8035D94
 {
-    union {
-        u8 itemIndex_u8;
-        u32 itemIndex_u32;
-    } itemIndex;
+    u8 itemIndex;
     s32 numItems;
 } unkStruct_8035D94;
 

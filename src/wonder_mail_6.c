@@ -105,7 +105,7 @@ bool8 sub_8030F58(u32 wonderMailType)
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   if (gUnknown_203B328 == NULL) {
     gUnknown_203B328 = MemoryAlloc(sizeof(struct unkStruct_203B328),8);
-    MemoryFill8((u8 *)gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
+    MemoryFill8(gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
   }
   gUnknown_203B328->wonderMailType = wonderMailType;
   file = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);

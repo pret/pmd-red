@@ -52,7 +52,7 @@ s32 CreateTradeItemsMenu(void)
   ResetUnusedInputStruct();
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   sTradeItemsMenu = MemoryAlloc(sizeof(struct TradeItemsMenu), 8);
-  MemoryFill8((u8 *)sTradeItemsMenu, 0, sizeof(struct TradeItemsMenu));
+  MemoryFill8(sTradeItemsMenu, 0, sizeof(struct TradeItemsMenu));
   sub_8035C1C();
   sub_8035DA0();
   sTradeItemsMenu->fallbackState = 0x13;

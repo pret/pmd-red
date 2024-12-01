@@ -100,7 +100,7 @@ bool8 CreateWonderMailMenu(void)
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
 
   gUnknown_203B3E8 = MemoryAlloc(sizeof(struct unkStruct_203B3E8), 8);
-  MemoryFill8((u8 *)gUnknown_203B3E8, 0, sizeof(struct unkStruct_203B3E8));
+  MemoryFill8(gUnknown_203B3E8, 0, sizeof(struct unkStruct_203B3E8));
 
   for(index = 0; index < PASSWORD_BUFFER_SIZE; index++){
     gUnknown_203B3E8->PasswordEntryBuffer[index] = 0;
@@ -522,18 +522,18 @@ void WonderMailMainMenuCallback(void)
             switch(gUnknown_203B3E8->unk24C)
             {
                 case 9:
-                    MemoryFill8((u8 *)&gUnknown_203B3E8->unk254,0,0xb4);
+                    MemoryFill8(&gUnknown_203B3E8->unk254,0,0xb4);
                     temp = sub_803B344(gUnknown_203B3E8->unk3BC);
                     if(temp->unk14 != NULL){
-                        MemoryCopy8((u8 *)&gUnknown_203B3E8->unk254.unk14,temp->unk14,0x28);
-                        MemoryCopy8((u8 *)&gUnknown_203B3E8->unk254.unk3C,temp->unk18,0x78);
+                        MemoryCopy8(&gUnknown_203B3E8->unk254.unk14,temp->unk14,0x28);
+                        MemoryCopy8(&gUnknown_203B3E8->unk254.unk3C,temp->unk18,0x78);
                     }
                     gUnknown_203B3E8->unk254.mail = temp->mail;
                     gUnknown_203B3E8->wonderMailStatus = sub_8037D64(gUnknown_203B3E8->unk24C,&gUnknown_203B3E8->unk254,&gUnknown_203B3E8->unk308);
                     break;
                 case 10:
-                    MemoryFill8((u8 *)&gUnknown_203B3E8->unk254,0,0xb4);
-                    MemoryFill8((u8 *)&gUnknown_203B3E8->unk308,0,0xb4);
+                    MemoryFill8(&gUnknown_203B3E8->unk254,0,0xb4);
+                    MemoryFill8(&gUnknown_203B3E8->unk308,0,0xb4);
                     gUnknown_203B3E8->wonderMailStatus = sub_8037D64(gUnknown_203B3E8->unk24C,&gUnknown_203B3E8->unk254,&gUnknown_203B3E8->unk308);
                     break;
             }

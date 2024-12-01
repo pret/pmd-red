@@ -319,7 +319,7 @@ u32 CreateFriendRescueMenu(void)
   ResetUnusedInputStruct();
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   gUnknown_203B33C = MemoryAlloc(sizeof(WonderMailStruct_203B33C), 8);
-  MemoryFill8((u8 *) gUnknown_203B33C, 0, sizeof(WonderMailStruct_203B33C));
+  MemoryFill8(gUnknown_203B33C, 0, sizeof(WonderMailStruct_203B33C));
   gUnknown_203B33C->unk530 = 0;
   gUnknown_203B33C->unk218 = -1;
   gUnknown_203B33C->speciesNum = -1;
@@ -954,13 +954,13 @@ void sub_8032828(void)
                 #endif //NONMATCHING
                 switch (gUnknown_203B33C->unk40) {
                     case 0x3:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk48, 0, sizeof(unkStruct_203B480));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk78, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8(&gUnknown_203B33C->unk48, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8(&gUnknown_203B33C->unk78, 0, sizeof(unkStruct_203B480));
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk48, &gUnknown_203B33C->unk78);
                         break;
                     case 0x2:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk48, 0, sizeof(unkStruct_203B480));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk78, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8(&gUnknown_203B33C->unk48, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8(&gUnknown_203B33C->unk78, 0, sizeof(unkStruct_203B480));
                         #ifdef NONMATCHING
                         // Regswaps
                         gUnknown_203B33C->unk48 = *GetMailatIndex(gUnknown_203B33C->unk218);
@@ -973,13 +973,13 @@ void sub_8032828(void)
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk48, &gUnknown_203B33C->unk78);
                         break;
                     case 0x5:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8(&gUnknown_203B33C->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8(&gUnknown_203B33C->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unkA8, &gUnknown_203B33C->unk130);
                         break;
                     case 0x4:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8(&gUnknown_203B33C->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8(&gUnknown_203B33C->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
                         gUnknown_203B33C->unkA8.pokemon.speciesNum = 0;
                         gUnknown_203B33C->unk130.pokemon.speciesNum = 0;
                         gUnknown_203B33C->unkA8.mail = *GetMailatIndex(gUnknown_203B33C->unk218);
@@ -1093,13 +1093,13 @@ void sub_8032828(void)
             if (gUnknown_203B33C->status == 0) {
                 switch (gUnknown_203B33C->unk40) {
                     case 0x6:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk1B8, 0, 0x30);
+                        MemoryFill8(&gUnknown_203B33C->unk1B8, 0, 0x30);
                         gUnknown_203B33C->unk1B8 = *GetMailatIndex(gUnknown_203B33C->unk218);
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk1B8, &gUnknown_203B33C->unk1E8);
                         break;
                     case 0x7:
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk1B8, 0, 0x30);
-                        MemoryFill8((u8*)&gUnknown_203B33C->unk1E8, 0, 0x30);
+                        MemoryFill8(&gUnknown_203B33C->unk1B8, 0, 0x30);
+                        MemoryFill8(&gUnknown_203B33C->unk1E8, 0, 0x30);
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk1B8, &gUnknown_203B33C->unk1E8);
                         break;
                 }
@@ -1654,7 +1654,7 @@ void sub_8033DBC(void)
     unkStruct_203B480 *mail2;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&mail, 0, sizeof(unkStruct_203B480));
+    MemoryFill8(&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
         case 3:
@@ -1704,7 +1704,7 @@ void sub_8033DBC(void)
                         sub_80951FC(&mail);
                         mail2 = GetMailatIndex(GetMailIndex(1, mail.unk10.unk10));
                         mail2->mailType = 7;
-                        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(unkStruct_203B484));
+                        MemoryFill8(gUnknown_203B484, 0, sizeof(unkStruct_203B484));
                         SetFriendRescueMenuState(0x40);
                         break;
                     case 24:
@@ -2269,7 +2269,7 @@ void sub_8034848(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        MemoryFill8((u8 *)&gUnknown_203B33C->item, 0 , sizeof(Item));
+        MemoryFill8(&gUnknown_203B33C->item, 0 , sizeof(Item));
         gUnknown_203B33C->item.id = ITEM_NOTHING;
         gUnknown_203B33C->item.quantity = 1;
         gUnknown_203B33C->item.flags = 0;
@@ -2299,7 +2299,7 @@ void sub_80348C4(void)
     s32 temp;
     if(sub_80144A4(&temp) == 0)
     {
-        MemoryFill8((u8 *)&gUnknown_203B33C->item, 0 , sizeof(Item));
+        MemoryFill8(&gUnknown_203B33C->item, 0 , sizeof(Item));
         gUnknown_203B33C->item.id = ITEM_NOTHING;
         gUnknown_203B33C->item.quantity = 1;
         gUnknown_203B33C->item.flags = 0;
@@ -2550,7 +2550,7 @@ void sub_8034D74(void)
     unkStruct_203B480 *mail2;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&mail, 0, sizeof(unkStruct_203B480));
+    MemoryFill8(&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
         case 3:
