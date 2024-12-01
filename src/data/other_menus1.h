@@ -6,7 +6,7 @@ static const UnkTextStruct2 sUnknown_80E653C = {
     0, 0,
     NULL
 };
-const UnkTextStruct2 sUnknown_80E6554 = { // TODO: MAKE STATIC WHEN other_menus1.s IS DED
+static const UnkTextStruct2 sUnknown_80E6554 = {
     0, 0, 0, 0,
     3,
     3, 8,
@@ -15,35 +15,35 @@ const UnkTextStruct2 sUnknown_80E6554 = { // TODO: MAKE STATIC WHEN other_menus1
     NULL
 };
 
-const MenuItem sUnknown_80E656C[] = { // TODO: MAKE STATIC WHEN other_menus1.s IS DED
+static const MenuItem sUnknown_80E656C[] = {
     {_("{CENTER_ALIGN}{COLOR RED}Caution!{RESET} "), 5},
     {_("{CENTER_ALIGN}Item transmitting!"), 5},
     {_("{CENTER_ALIGN}Don't turn the power off!"), 5},
     {NULL, 3},
 };
 
-const MenuItem sUnknown_80E65D8[] = { // TODO: MAKE STATIC WHEN other_menus1.s IS DED
+static const MenuItem sUnknown_80E65D8[] = {
     {_("{CENTER_ALIGN}{COLOR RED}Caution!{RESET} "), 5},
     {_("{CENTER_ALIGN}Thank-You Mail in transmission!"), 5},
     {_("{CENTER_ALIGN}Don't turn the power off!"), 5},
     {NULL, 3},
 };
 
-const MenuItem sUnknown_80E661C[] = { // TODO: MAKE STATIC WHEN other_menus1.s IS DED
+static const MenuItem sUnknown_80E661C[] = {
     {_("{CENTER_ALIGN}{COLOR RED}Caution!{RESET} "), 5},
     {_("{CENTER_ALIGN}A-OK Mail in transmission!"), 5},
     {_("{CENTER_ALIGN}Don't turn the power off!"), 5},
     {NULL, 3},
 };
 
-const MenuItem sUnknown_80E665C[] = { // TODO: MAKE STATIC WHEN other_menus1.s IS DED
+static const MenuItem sUnknown_80E665C[] = {
     {_("{CENTER_ALIGN}{COLOR RED}Caution!{RESET} "), 5},
     {_("{CENTER_ALIGN}Thank-You Mail in transmission!"), 5},
     {_("{CENTER_ALIGN}Don't turn the power off!"), 5},
     {NULL, 3},
 };
 
-const MenuItem sUnknown_80E667C[] = { // TODO: MAKE STATIC WHEN other_menus1.s IS DED
+static const MenuItem sUnknown_80E667C[] = {
     {_("{CENTER_ALIGN}{COLOR RED}Caution!{RESET} "), 5},
     {_("{CENTER_ALIGN}Wonder Mail in transmission!"), 5},
     {_("{CENTER_ALIGN}Don't turn the power off!"), 5},

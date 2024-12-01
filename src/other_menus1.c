@@ -456,3 +456,47 @@ static void sub_8037810(void)
     sUnknown_203B35C->unk2BC.speciesNum = 0;
     sUnknown_203B35C->unk344.speciesNum = 0;
 }
+
+void sub_8037900(void)
+{
+    sub_8035CC0(sUnknown_203B35C->unk15C, 0);
+
+    switch (sUnknown_203B35C->unk0) {
+        case 0:
+        case 1: {
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E656C, FALSE, 6, FALSE);
+            break;
+        }
+        case 2:
+        case 3: {
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E65D8, FALSE, 6, FALSE);
+            break;
+        }
+        case 4:
+        case 5: {
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E661C, FALSE, 6, FALSE);
+            break;
+        }
+        case 6:
+        case 7: {
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E665C, FALSE, 6, FALSE);
+            break;
+        }
+        case 8: {
+            break;
+        }
+        case 9:
+        case 10: {
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E667C, FALSE, 6, FALSE);
+            break;
+        }
+    }
+
+    sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
+    sub_80373C4();
+    sub_80130A8(sUnknown_203B35C->unk1C);
+}
+
+UNUSED static void nullsub_202(void)
+{
+}

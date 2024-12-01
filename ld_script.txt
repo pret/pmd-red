@@ -180,7 +180,6 @@ SECTIONS {
         src/main_menu2.o(.text);
         src/trade_items_menu.o(.text);
         src/other_menus1.o(.text);
-        asm/other_menus1.o(.text);
         asm/other_menus2.o(.text);
         src/other_menus2.o(.text);
         src/adventure_log_menu.o(.text);
