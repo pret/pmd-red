@@ -7,9 +7,10 @@ EWRAM_DATA BGControlStruct gBG2Control = {0};
 EWRAM_DATA BGControlStruct gBG3Control = {0};
 static EWRAM_DATA u8 sBldAlpha_CoeffA = {0};
 static EWRAM_DATA u8 sBldAlpha_CoeffB = {0};
-EWRAM_DATA u16 gBldAlpha;
-EWRAM_DATA u16 gBldCnt;
-EWRAM_DATA bool8 gUnknown_202D7FE;
+UNUSED static EWRAM_DATA u8 sUnknownUnusedEwram[0x140] = {0};
+EWRAM_DATA u16 gBldAlpha = 0;
+EWRAM_DATA u16 gBldCnt = 0;
+EWRAM_DATA bool8 gUnknown_202D7FE = 0;
 
 void SetBldAlphaReg(s32 lowAlpha, s32 highAlpha)
 {

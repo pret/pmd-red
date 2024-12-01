@@ -127,15 +127,6 @@ gUnknown_202D2A0: /* 202D2A0 (sub_8009A1C - sub_8009BE4) */
     .space 0x3
 
     .include "src/bg_control.o"
-	.space 0x140
-
-gBldAlpha: /* 202D7FA (SetBldAlphaReg - VBlank_CB) */
-	.space 0x2
-gBldCnt: /* 202D7FC (AgbMain - VBlank_CB) */
-	.space 0x2
-gUnknown_202D7FE: /* 202D7FE (AgbMain - sub_800CD64) */
-	.space 0x2
-
     .include "src/cpu.o"
 	.space 0x4
 
