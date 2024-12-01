@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/main_menu.h"
 #include "input.h"
 #include "main_menu1.h"

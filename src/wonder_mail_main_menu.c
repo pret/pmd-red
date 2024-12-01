@@ -74,7 +74,6 @@ extern void SetWonderMailMainMenuState(u8);
 extern void sub_8031E10(void);
 extern u8 sub_800D588(void);
 extern void sub_802EF48(void);
-extern s32 sub_8037B28(u32);
 
 void PrintWonderMailMainMenuError(u32);
 void HandleWonderMailMainScreen(void);

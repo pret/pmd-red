@@ -21,8 +21,6 @@ static EWRAM_DATA_2 struct TradeItemsMenu *sTradeItemsMenu = {0};
 
 #include "data/trade_items_menu.h"
 
-extern s32 sub_8037B28(u32);
-
 void sub_8036F74(void);
 void sub_8036F30();
 void TradeItem_AddItem();

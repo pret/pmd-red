@@ -18,17 +18,12 @@
 #include "sprite.h"
 #include "text1.h"
 
-// TODO: MAKE STATIC WHEN other_menus1.s IS DED
-/*static*/ EWRAM_DATA_2 unkStruct_203B35C *sUnknown_203B35C = {0};
+static EWRAM_DATA_2 unkStruct_203B35C *sUnknown_203B35C = {0};
 
 #include "data/other_menus1.h"
 
-// other_menus1.s
-extern void sub_8037900(void);
 // text.s
-extern void xxx_call_update_bg_vram();
-// other_menus2.s
-extern s32 sub_8037B28(u32);
+extern void xxx_call_update_bg_vram(); // egg's PR should remove this
 
 static void sub_80371B8(void);
 static void sub_8037400(void);
@@ -36,6 +31,7 @@ static void sub_80376CC(void);
 static void sub_8037748(void);
 static u32 sub_8037798(void);
 static void sub_8037810(void);
+static void sub_8037900(void);
 
 void sub_8036FDC(s32 param_1)
 {
@@ -104,7 +100,7 @@ UNUSED static u32 sub_80370F0(void)
             sub_80371B8();
             break;
         case 2:
-            if (sUnknown_203B35C->unk0 < 2 && sUnknown_203B35C->linkStatus == COMMS_GOOD && !sub_8037C10(FALSE))
+            if (sUnknown_203B35C->unk0 < 2 && sUnknown_203B35C->linkStatus == COMMS_GOOD && sub_8037C10(FALSE) == 0)
                 return 41; // TODO: what screen is this?
 
             if (!sub_80130A8(&sUnknown_203B35C->unk1C[0]))
@@ -133,7 +129,7 @@ static void sub_80371B8(void)
     sub_8037400();
 
     if (sUnknown_203B35C->unk0 < 2 && sUnknown_203B35C->linkStatus == COMMS_GOOD) {
-        if (sub_8037C10(FALSE)) {
+        if (sub_8037C10(FALSE) != 0) {
             sub_80376CC();
             sub_8035CC0(sUnknown_203B35C->unk15C, 0);
             // Success!

@@ -306,7 +306,6 @@ extern void sub_8031E10(void);
 extern u8 sub_800D588(void);
 extern u32 sub_8023CE8(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
-extern s32 sub_8037B28(u32);
 
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 extern void sprintfStatic(char *buffer, const char *text, ...);

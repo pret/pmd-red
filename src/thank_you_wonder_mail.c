@@ -221,7 +221,6 @@ extern void sub_802A828();
 extern void sub_802A850();
 extern void sub_8031E10();
 extern void SetThankYouMailMenuState(u32);
-extern s32 sub_8037B28(u32);
 extern u8 sub_800D588(void);
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
 extern void sub_8031D70(u8, u32);
