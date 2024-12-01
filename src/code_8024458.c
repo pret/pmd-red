@@ -10,7 +10,6 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "text.h"
-#include "text.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B2AC *sUnknown_203B2AC = {0};
 
