@@ -1,37 +1,296 @@
 #include "global.h"
-#include "text1.h"
-#include "text2.h"
+#include "globaldata.h"
+#include "text.h"
 #include "decompress.h"
 #include "code_8009804.h"
+#include "code_800558C.h"
 #include "cpu.h"
 #include "structs/str_text.h"
+#include "file_system.h"
+
+struct CharMapStruct
+{
+    s32 unk0;
+    struct unkChar *unk4;
+};
 
 // data.s
-extern const u32 gUnknown_80B853C[16];
-extern const struct unkShiftData gCharMasksOffsets[8];
-extern const u32 gUnknown_80B8814[];
-extern const struct unkStruct_80B8824 gUnknown_80B8824;
-extern const struct unkStruct_80B8848 gUnknown_80B8848;
 
-// text.s
-void sub_8007E64(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8);
-extern void PrepareTextbox_8008C6C(UnkTextStruct1 *, u32);
 
-void nullsub_129(u32, s32, s32, s32, u32);
-u32 xxx_draw_char(UnkTextStruct1 *, s32, s32, u32, u32, u32);
+// system_sbin.s
+extern const struct FileArchive gSystemFileArchive;
 
-void sub_800677C(UnkTextStruct1 *, s32, u16 *, u8);
-void sub_80069CC(UnkTextStruct1 *, s32, s32, s32, u16 *);
-void sub_8006AC4(UnkTextStruct1 *, s32, s32, s32, u16 *);
-void sub_8006B70(UnkTextStruct1 *, s32, s32, s32, u16 *);
-void sub_8006C44(UnkTextStruct1 *, s32, u16 *, u8);
-void sub_8006E94(UnkTextStruct1 *, s32, u32, const UnkTextStruct2_sub2 *, u16 *);
-void sub_8007958(UnkTextStruct1 *, u32, s32, s32, s32, u32);
-void sub_8007AA4(UnkTextStruct1 *, u32, s32, s32, s32, u32);
-void sub_8007BA8(UnkTextStruct1 *, u32, s32, s32, s32, s32);
-void sub_8007D00(UnkTextStruct1 *, u32, s32, s32, s32, s32);
+// Todo fix gUnknown_3000E94 being accessed as s16/u8
+extern s16 gUnknown_3000E94[];
 
-void nullsub_152(void)
+EWRAM_DATA UnkTextStruct1 gUnknown_2027370[4] = {0};
+EWRAM_DATA static struct CharMapStruct *sCharmaps[2] = {NULL};
+EWRAM_DATA static s16 sCharacterSpacing = 0;
+EWRAM_DATA u8 gUnknown_202749A[11] = {0};
+EWRAM_DATA bool8 gUnknown_20274A5 = FALSE;
+EWRAM_DATA static u8 sUnknown_20274A6[6] = {0};
+EWRAM_DATA static s32 sCurrentCharmap = 0;
+EWRAM_DATA static vu32 sUnknown_20274B0 = 0;
+EWRAM_DATA static u32 sUnknown_20274B4[0xEC0] = {0};
+EWRAM_DATA static OpenedFile *sCharmapFiles[3] = {NULL};
+EWRAM_DATA static UnkTextStruct2 sUnknown_202AFC0[4] = {0};
+EWRAM_DATA static s32 sUnknown_202B020 = 0;
+EWRAM_DATA static s32 sUnknown_202B024 = 0;
+EWRAM_DATA static s32 sCharHeight[2] = {0};
+EWRAM_DATA static u32 sTextShadowMask = 0; // Some text color info is stored; retrieve via "& 0xF"
+EWRAM_DATA static u8 sDrawTextShadow = 0;
+EWRAM_DATA ALIGNED(4) u16 gUnknown_202B038[4][32][32] = {0};
+
+static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3);
+static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, UnkTextStruct2_sub *a8, u8 a9);
+static void sub_800677C(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3);
+static void sub_80069CC(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4);
+static void sub_8006AC4(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4);
+static void sub_8006B70(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4);
+static void sub_8006C44(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3);
+static void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *a3, u16 *a4);
+static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5);
+static void nullsub_129(u32 a0, s32 x, s32 y, s32 a3, u32 color);
+static void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color);
+static void sub_8007AA4(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color);
+static void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color);
+static void sub_8007D00(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color);
+static void sub_8007E64(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8);
+static void sub_8008030(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8);
+static void DisplayMonPortrait(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4);
+static void DisplayMonPortraitFlipped(UnkTextStruct1 *a0, s32 a1, const u8 *compressedData, s32 a3);
+static void sub_80084A4(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 a8);
+static void sub_8008818(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5);
+static bool8 xxx_update_bg_vram(UnkTextStruct1 *a0);
+static void sub_800898C(void);
+static void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str);
+static void PrepareTextbox_8008C6C(UnkTextStruct1 *strArr, u32 strId);
+static void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing);
+static const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp);
+static void sub_8009388(void);
+static s32 InterpretColorChar(u8 a0);
+
+static const u32 gUnknown_80B853C[16] =
+{
+    0x66666666,
+    0x00000000,
+    0x11111111,
+    0x22222222,
+    0x33333333,
+    0x44444444,
+    0x55555555,
+    0x66666666,
+    0x77777777,
+    0x88888888,
+    0x99999999,
+    0xAAAAAAAA,
+    0xBBBBBBBB,
+    0xCCCCCCCC,
+    0xDDDDDDDD,
+    0xEEEEEEEE,
+};
+
+static const UnkTextStruct2 gUnknown_80B857C[4] =
+{
+    [0] = {.unk4 = 3},
+    [1] = {.unk4 = 3},
+    [2] = {.unk4 = 3},
+    [3] = {.unk4 = 3},
+};
+
+static const struct unkShiftData gCharMasksOffsets[8] =
+{
+    [0] = {.bytesA = 0xFFFFFFFF, .bytesB = 0x00000000, .shift_left = 0x00, .shift_right = 0x20},
+    [1] = {.bytesA = 0x0FFFFFFF, .bytesB = 0xF0000000, .shift_left = 0x04, .shift_right = 0x1C},
+    [2] = {.bytesA = 0x00FFFFFF, .bytesB = 0xFF000000, .shift_left = 0x08, .shift_right = 0x18},
+    [3] = {.bytesA = 0x000FFFFF, .bytesB = 0xFFF00000, .shift_left = 0x0C, .shift_right = 0x14},
+    [4] = {.bytesA = 0x0000FFFF, .bytesB = 0xFFFF0000, .shift_left = 0x10, .shift_right = 0x10},
+    [5] = {.bytesA = 0x00000FFF, .bytesB = 0xFFFFF000, .shift_left = 0x14, .shift_right = 0x0C},
+    [6] = {.bytesA = 0x000000FF, .bytesB = 0xFFFFFF00, .shift_left = 0x18, .shift_right = 0x08},
+    [7] = {.bytesA = 0x0000000F, .bytesB = 0xFFFFFFF0, .shift_left = 0x1C, .shift_right = 0x04},
+};
+
+static const u16 gUnknown_80B865C[] =
+{
+    0xFFFF, 0xFFFF, 0xFF, 0xFFFF, 0xFFFF, 0xFF, 0xFFFF,
+    0xFFFF, 0xFF, 0xFFFF, 0xFFFF, 0xFF, 0xFFFF, 0xFFFF,
+    0xFF, 0xFFFF, 0xFFFF, 0xFF, 0xFFFF, 0xFFFF, 0xFF, 0xFFFF,
+    0xFFFF, 0xFF, 0xFFFF, 0xFFFF, 0xFF, 0xFFFF, 0xFFFF,
+    0xFF, 0, 0, 0, 0, 0, 0
+};
+
+// Fallback character with bitmap?
+static const struct unkChar gUnknown_80B86A4 =
+{
+    .unk0 = gUnknown_80B865C,
+    .unk4 = 0x81A1,
+    .unk6 = 7,
+    .unk8 = 10,
+    .fill9 = 0,
+    .unkA = 0,
+    .fillB = 0,
+};
+
+// Very weird...
+UNUSED static const u8 sByte8 = 8;
+
+static const u32 gUnknown_80B86B4[][32] = INCBIN_U32("graphics/warning.4bpp");
+
+static const u8 gKanjiA_file_string[] = "kanji_a";
+static const u8 gKanjiB_file_string[] = "kanji_b";
+
+static const u32 gFadeInNone[8] = {0};
+static const u32 gFadeInDungeon[8] = {0x88888888, 0x88888888, 0x88888888, 0x88888888, 0x88888888, 0x88888888, 0x88888888, 0x88888888};
+
+static const u32 gUnknown_80B8804[4] = {0, 1, 2, 3};
+static const u32 gUnknown_80B8814[4] = {1, 2, 3, 0};
+
+void LoadCharmaps(void)
+{
+    int i;
+    int j;
+    int k;
+
+    sCurrentCharmap = 0;
+    sCharmapFiles[0] = OpenFileAndGetFileDataPtr(gKanjiA_file_string, &gSystemFileArchive);
+    sCharmapFiles[1] = OpenFileAndGetFileDataPtr(gKanjiB_file_string, &gSystemFileArchive);
+    sCharmaps[0] = (void *) sCharmapFiles[0]->data;
+    sCharmaps[1] = (void *) sCharmapFiles[1]->data;
+    sCharHeight[0] = 11;
+    sCharHeight[1] = 12;
+
+    for (k = 0; k < 4; k++) {
+        gUnknown_2027370[k].unk4 = 0;
+        gUnknown_2027370[k].unk8 = 0;
+        gUnknown_2027370[k].unk46 = 0;
+    }
+
+    sCharacterSpacing = 0;
+
+    for (i = 0; i < 20; i++) {
+        gUnknown_202B038[0][i][0] = 0xf279;
+        gUnknown_202B038[1][i][0] = 0xf27a;
+
+        for (j = 1; j < 32; j++) {
+            gUnknown_202B038[0][i][j] = 0;
+            gUnknown_202B038[1][i][j] = 0xf27a;
+        }
+    }
+
+    sDrawTextShadow = 1;
+    sTextShadowMask = 0x88888888;
+    gUnknown_203B078 = NULL;
+    gUnknown_20274A5 = FALSE;
+    sUnknown_202B020 = 1;
+    sUnknown_202B024 = 20;
+    UpdateFadeInTile(0);
+}
+
+u32 UpdateFadeInTile(u32 a0)
+{
+    u32 r5 = sUnknown_20274B0;
+    u32 *r4 = (u32 *)(VRAM + 0x4F40);
+    const u32 *r2;
+    sUnknown_20274B0 = a0;
+
+    if (a0 == 0 || a0 == 2) {
+        sub_800CDA8(2);
+        r2 = gFadeInNone;
+    }
+    else {
+        sub_800CDA8(1);
+        r2 = gFadeInDungeon;
+    }
+
+    sTextShadowMask = 0x88888888;
+    *r4++ = *r2++;
+    *r4++ = *r2++;
+    *r4++ = *r2++;
+    *r4++ = *r2++;
+    *r4++ = *r2++;
+    *r4++ = *r2++;
+    *r4++ = *r2++;
+    *r4++ = *r2++;
+    return r5;
+}
+
+u32 sub_80063B0(void)
+{
+    return sUnknown_20274B0;
+}
+
+UNUSED static u8 UnusedSetTextShadow(u8 a0)
+{
+    u8 retval = sDrawTextShadow;
+    sDrawTextShadow = a0;
+    return retval;
+}
+
+void SelectCharmap(u32 a0)
+{
+    sCurrentCharmap = a0;
+}
+
+void SetCharacterMask(int a0)
+{
+    u32 retval;
+    if (a0 == 0) {
+        UNUSED u32 unusedVal = sUnknown_20274B0;
+        retval = 0x88888888;
+    }
+    else {
+        retval = (a0 & 0xF) | ((a0 & 0xF) << 4); // Must be one line for matching
+        retval |= ((a0 & 0xF) << 8);
+        retval |= ((a0 & 0xF) << 12);
+        retval |= ((a0 & 0xF) << 16);
+        retval |= ((a0 & 0xF) << 20);
+        retval |= ((a0 & 0xF) << 24);
+        retval |= ((a0 & 0xF) << 28);
+    }
+    sTextShadowMask = retval;
+}
+
+void xxx_call_save_unk_text_struct_800641C(const UnkTextStruct2 *a0, bool8 a1, bool8 a2)
+{
+    UnkTextStruct2_sub r3 = {0, 0};
+    SaveUnkTextStructAndXXX_8006438(a0, a1, a2, &r3);
+}
+
+// https://decomp.me/scratch/xF5Y1
+static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3)
+{
+    s32 i;
+    u32 r9;
+
+    r9 = 2;
+
+    if (a0 == NULL)
+        a0 = gUnknown_80B857C;
+    if (a2)
+        sub_8009388();
+
+    sub_800898C();
+
+    for (i = 0; i < 4; i++) {
+        sUnknown_202AFC0[i] = a0[i];
+
+        if (a0[i].unkC) {
+            sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], a0 + i, a1, r9, a3, 0);
+            sub_80089AC(a0 + i, a3);
+            r9 += a0[i].unkC * a0[i].unk10;
+        }
+    }
+
+    // Needed to account for weird compiler LDRs
+    ASM_MATCH_TRICK(gUnknown_203B078);
+    ASM_MATCH_TRICK(gUnknown_3000E94[0]);
+    ASM_MATCH_TRICK(gUnknown_20274A5);
+
+    gUnknown_203B078 = gUnknown_3000E94;
+    gUnknown_20274A5 = TRUE;
+}
+
+UNUSED static void nullsub_152(void)
 {
 }
 
@@ -39,10 +298,10 @@ void RestoreUnkTextStruct_8006518(UnkTextStruct2 *unkData)
 {
     s32 iVar2;
     for (iVar2 = 0; iVar2 < 4; iVar2++)
-        unkData[iVar2] = gUnknown_202AFC0[iVar2];
+        unkData[iVar2] = sUnknown_202AFC0[iVar2];
 }
 
-void nullsub_153(void)
+UNUSED static void nullsub_153(void)
 {
 }
 
@@ -52,7 +311,7 @@ u32 sub_8006544(u32 index)
 }
 
 // a1 is a VRAM pointer
-void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, UnkTextStruct2_sub *a8, u8 a9)
+static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, UnkTextStruct2_sub *a8, u8 a9)
 {
     UnkTextStruct1 *t1;
     s32 iVar3;
@@ -145,7 +404,7 @@ void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const Un
     t1->unk46 = 0;
 }
 
-void sub_800677C(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
+static void sub_800677C(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
 {
     s32 iVar5;
     s32 i;
@@ -218,7 +477,7 @@ void sub_800677C(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
     }
 }
 
-void sub_80069CC(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
+static void sub_80069CC(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
 {
     if (a2 > 28)
         return;
@@ -259,7 +518,7 @@ void sub_80069CC(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
     }
 }
 
-void sub_8006AC4(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
+static void sub_8006AC4(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
 {
     if (a2 > 28)
         return;
@@ -286,7 +545,7 @@ void sub_8006AC4(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
     }
 }
 
-void sub_8006B70(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
+static void sub_8006B70(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
 {
     if (a2 > 28)
         return;
@@ -327,7 +586,7 @@ void sub_8006B70(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4)
     }
 }
 
-void sub_8006C44(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
+static void sub_8006C44(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
 {
     s32 iVar5;
     s32 i;
@@ -586,7 +845,7 @@ void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *
 }
 */
 NAKED
-void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *a3, u16 *a4)
+static void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *a3, u16 *a4)
 {
     asm_unified(
     "\tpush {r4-r7,lr}\n"
@@ -1248,33 +1507,19 @@ u32 xxx_call_draw_char(s32 x, s32 y, u32 a2, u32 color, u32 a4)
     return xxx_draw_char(gUnknown_2027370, x, y, a2, color, a4);
 }
 
-// Unused
-bool8 sub_8007464(void)
+UNUSED static bool8 sub_8007464(void)
 {
     return FALSE;
 }
 
-extern const u32 gUnknown_80B853C[16];
-
-struct CharMapStruct
-{
-    s32 unk0;
-    struct unkChar *unk4;
-};
-extern struct CharMapStruct *gCharmaps[];
-extern s32 gCurrentCharmap;
-extern s16 gCharacterSpacing;
-extern s32 gCharHeight[];
-extern u8 gDrawTextShadow;
-
-u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5)
+static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5)
 {
     u32 *r3;
     const struct unkShiftData *shiftData;
     const struct unkChar *sp0;
-    u16 *local_44;
-    u16 *sp8;
-    u16 *local_3c;
+    const u16 *local_44;
+    const u16 *sp8;
+    const u16 *local_3c;
     s32 i;
     s32 xDiv8, yDiv8;
     struct UnkTextStruct1 *r5 = &a0[a5];
@@ -1283,7 +1528,7 @@ u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u3
     u32 r4;
     u32 r2;
 
-    if (gCurrentCharmap == 1) {
+    if (sCurrentCharmap == 1) {
         if (a3 == 0x70 || a3 == 0x6A || a3 == 0x71 || a3 == 0x79 || a3 == 0x67)
             y += 2;
         else if (a3 == 0x8199)
@@ -1296,7 +1541,7 @@ u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u3
     local_3c = sp0->unk0;
     sp8 = sp0->unk0 - 3;
 
-    if (gDrawTextShadow != 0) {
+    if (sDrawTextShadow != 0) {
         var_2C = (sp0->unkA >> 1) & 1;
     }
     else {
@@ -1311,7 +1556,7 @@ u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u3
         yDiv8 = y / 8;
 
         if (yDiv8 < r5->unk8) {
-            for (i = 0; i < gCharHeight[gCurrentCharmap]; i++) {
+            for (i = 0; i < sCharHeight[sCurrentCharmap]; i++) {
                 r2 = (local_44[1] << 0x10) | (local_44[0]);
                 if (r2 != 0) {
                     if (xDiv8 < r5->unk4) {
@@ -1372,7 +1617,7 @@ u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u3
         yDiv8 = y / 8;
 
         if (yDiv8 < r5->unk8) {
-            for (i = 0; i < gCharHeight[gCurrentCharmap]; i++) {
+            for (i = 0; i < sCharHeight[sCurrentCharmap]; i++) {
                 r4 = (local_44[1] << 0x10) | (local_44[0]);
                 r2 = (0x11111111 & r4) + (sp18 & r4);
 
@@ -1380,12 +1625,12 @@ u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u3
                     r1 = ((local_3c[1] << 0x10) | local_3c[0]) << 4;
                     r1 |= r4; // This doesn't really do anything since r4 bits are cleared, but it's needed to match.
                     r1 &= ~(r4);
-                    r1 &= gTextShadowMask;
+                    r1 &= sTextShadowMask;
                     r2 |= (r1);
                     if (notFirstIteration) {
                         r1 = (((sp8[1] << 0x10) | sp8[0]) << 4) ^ r4;
                         r1 &= ~(r4);
-                        r2 |= (r1 & gTextShadowMask);
+                        r2 |= (r1 & sTextShadowMask);
                     }
                 }
 
@@ -1412,12 +1657,12 @@ u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u3
                     r1 = (local_3c[2] << 4) | ((local_3c[1] >> 0xC) & 0xF);
                     r1 |= r4; // This doesn't really do anything since r4 bits are cleared, but it's needed to match.
                     r1 &= ~(r4);
-                    r1 &= gTextShadowMask;
+                    r1 &= sTextShadowMask;
                     r2 |= r1;
                     if (notFirstIteration) {
                         r1 = ((sp8[2] << 4) | ((sp8[1] >> 0xC) & 0xF)) ^ r4;
                         r1 &= ~(r4);
-                        r1 &= gTextShadowMask;
+                        r1 &= sTextShadowMask;
                         r2 |= (r1);
                     }
                 }
@@ -1455,19 +1700,19 @@ u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u3
         }
     }
 
-    return sp0->unk6 + gCharacterSpacing;
+    return sp0->unk6 + sCharacterSpacing;
 }
 
 void sub_80078A4(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
     sub_800792C(a0, x, y, a3, color);
-    sub_800792C(a0, x, y + 1, a3, gTextShadowMask & 0xF);
+    sub_800792C(a0, x, y + 1, a3, sTextShadowMask & 0xF);
 }
 
 UNUSED static void sub_80078E8(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
     nullsub_129(a0, x, y, a3, color);
-    nullsub_129(a0, x, y + 1, a3, gTextShadowMask & 0xF);
+    nullsub_129(a0, x, y + 1, a3, sTextShadowMask & 0xF);
 }
 
 void sub_800792C(u32 a0, s32 x, s32 y, s32 a3, u32 color)
@@ -1475,11 +1720,11 @@ void sub_800792C(u32 a0, s32 x, s32 y, s32 a3, u32 color)
     sub_8007958(gUnknown_2027370, a0, x, y, a3, color);
 }
 
-void nullsub_129(u32 a0, s32 x, s32 y, s32 a3, u32 color)
+static void nullsub_129(u32 a0, s32 x, s32 y, s32 a3, u32 color)
 {
 }
 
-void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
+static void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
 {
     u32 uVar4;
     u32 *dest;
@@ -1488,7 +1733,6 @@ void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
     UnkTextStruct1 *r5;
     s32 r6;
     u32 r9;
-    struct unkStruct_80B8824 dataLOL;
     s32 lol;
 
     r5 = &a0[a1];
@@ -1500,43 +1744,45 @@ void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
     dest += (r4 * -8) + y;
     r6 = x / 8;
 
-    if (y / 8 >= r5->unk8)
+    if (y / 8 >= r5->unk8) {
         return;
+    }
+    else {
+        const u32 unkBits[] = {0, 0xF, 0xFF, 0xFFF, 0xFFFF, 0xFFFFF, 0xFFFFFF, 0xFFFFFFF, 0xFFFFFFFF};
 
-    dataLOL = gUnknown_80B8824;
+        for (; a4 > 0; a4 -= 8) {
+            lol = a4;
+            if (lol > 7)
+                lol = 8;
 
-    for (; a4 > 0; a4 -= 8) {
-        lol = a4;
-        if (lol > 7)
-            lol = 8;
+            shiftData = &gCharMasksOffsets[x + (x / 8 * -8)];
 
-        shiftData = &gCharMasksOffsets[x + (x / 8 * -8)];
+            uVar4 = unkBits[lol];
+            uVar4 = (uVar4 & 0x11111111) + (uVar4 & r9);
 
-        uVar4 = dataLOL.arr[lol];
-        uVar4 = (uVar4 & 0x11111111) + (uVar4 & r9);
+            if (uVar4 != 0) {
+                if (r6 < r5->unk4) {
+                    dest[0] |= (shiftData->bytesA & uVar4) << shiftData->shift_left;
 
-        if (uVar4 != 0) {
-            if (r6 < r5->unk4) {
-                dest[0] |= (shiftData->bytesA & uVar4) << shiftData->shift_left;
+                    if (r5->unk3C > dest)
+                        r5->unk3C = dest;
+                    if (r5->unk40 < dest)
+                        r5->unk40 = dest;
+                }
 
-                if (r5->unk3C > dest)
-                    r5->unk3C = dest;
-                if (r5->unk40 < dest)
-                    r5->unk40 = dest;
+                if (r6 < r5->unk4 - 1) {
+                    dest += 8;
+                    dest[0] |= (uVar4 & shiftData->bytesB) >> shiftData->shift_right;
+
+                    if (r5->unk40 < dest)
+                        r5->unk40 = dest;
+                    dest -= 8;
+                }
             }
 
-            if (r6 < r5->unk4 - 1) {
-                dest += 8;
-                dest[0] |= (uVar4 & shiftData->bytesB) >> shiftData->shift_right;
-
-                if (r5->unk40 < dest)
-                    r5->unk40 = dest;
-                dest -= 8;
-            }
+            r6++;
+            dest += 8;
         }
-
-        r6++;
-        dest += 8;
     }
 }
 
@@ -1549,17 +1795,17 @@ UNUSED static void nullsub_157(void)
 {
 }
 
-void sub_8007AA4(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
+static void sub_8007AA4(struct UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
 {
     struct UnkTextStruct1 *r4 = &a0[a1];
     u32 ip = gUnknown_80B853C[color & 0xF] + 0x11111111;
-    struct unkStruct_80B8848 dataLOL = gUnknown_80B8848;
+    const u32 unkBits[] = {0xF, 0xF0, 0xF00, 0xF000, 0xF0000, 0xF00000, 0xF000000, 0xF0000000};
     s32 r3 = y / 8;
     u32 *dest = r4->unk18 + ((r4->unk4 * r3 + x / 8) * 8);
     s32 r2 = x / 8;
 
     dest += r3 * -8 + y;
-    ip &= dataLOL.arr[x & 7];
+    ip &= unkBits[x & 7];
 
     if (r2 < r4->unk4) {
         // This goto looks like a fakematch, but I couldn't get it to work otherwise.
@@ -1597,7 +1843,7 @@ UNUSED static void nullsub_158(void)
 }
 
 #ifdef NONMATCHING // https://decomp.me/scratch/AU1bH
-void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
+static void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
 {
     s32 iVar1; // r1
     s32 iVar3;
@@ -1669,7 +1915,7 @@ void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
 }
 #else
 NAKED
-void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
+static void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
@@ -1847,7 +2093,7 @@ UNUSED static void nullsub_159(void)
 }
 
 NAKED // Very similar to sub_8007BA8
-void sub_8007D00(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
+static void sub_8007D00(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
@@ -2017,7 +2263,7 @@ UNUSED static void nullsub_160(void)
 {
 }
 
-void sub_8007E64(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8)
+static void sub_8007E64(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8)
 {
     s32 i, j;
     UnkTextStruct1 *strPtr = &a0[a2];
@@ -2069,7 +2315,7 @@ void sub_8007E64(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32
     }
 }
 
-u32 FlipPixelsHorizontally(u32 a0)
+static u32 FlipPixelsHorizontally(u32 a0)
 {
     u32 r0;
 
@@ -2085,17 +2331,17 @@ u32 FlipPixelsHorizontally(u32 a0)
     return r0;
 }
 
-void sub_8008030(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8);
-
-UNUSED void sub_8007FEC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6)
+UNUSED static void sub_8007FEC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6)
 {
     sub_8008030(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a5, a6);
 }
 
-void nullsub_161(void) {}
+UNUSED static void nullsub_161(void)
+{
+}
 
 // Similar to sub_8007E64
-void sub_8008030(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8)
+static void sub_8008030(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 *a7, u32 a8)
 {
     s32 i, j;
     UnkTextStruct1 *strPtr = &a0[a2];
@@ -2144,10 +2390,8 @@ void sub_8008030(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32
     }
 }
 
-extern const u32 gUnknown_80B86B4[][32];
-
 // Similar to sub_8007E64
-UNUSED void sub_80081A4(s32 a0, s32 a3, s32 a4, s32 a7Id)
+UNUSED static void sub_80081A4(s32 a0, s32 a3, s32 a4, s32 a7Id)
 {
     s32 i, j, a5, a6;
     UnkTextStruct1 *strPtr = &gUnknown_2027370[a0];
@@ -2191,14 +2435,14 @@ UNUSED void sub_80081A4(s32 a0, s32 a3, s32 a4, s32 a7Id)
     }
 }
 
-static void DisplayMonPortrait(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4);
-
 void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2)
 {
     DisplayMonPortrait(gUnknown_2027370, gUnknown_202B038[0], a0, compressedData, a2);
 }
 
-UNUSED void nullsub_162() {}
+UNUSED static void nullsub_162(void)
+{
+}
 
 static void DisplayMonPortrait(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4)
 {
@@ -2219,7 +2463,7 @@ static void DisplayMonPortrait(UnkTextStruct1 *a0, u16 a1[32][32], s32 a2, const
     strPtr->unk44 = 1;
 }
 
-void sub_8008334(u32 *r7, u32 *r12)
+static void sub_8008334(u32 *r7, u32 *r12)
 {
     s32 i;
     u32 r2, r3;
@@ -2243,14 +2487,14 @@ void sub_8008334(u32 *r7, u32 *r12)
     *r12 = r2;
 }
 
-static void DisplayMonPortraitFlipped(UnkTextStruct1 *a0, s32 a1, const u8 *compressedData, s32 a3);
-
 void DisplayMonPortraitSpriteFlipped(s32 a0, const u8 *compressedData, s32 a1)
 {
     DisplayMonPortraitFlipped(gUnknown_2027370, a0, compressedData, a1);
 }
 
-UNUSED void nullsub_163(void) {}
+UNUSED static void nullsub_163(void)
+{
+}
 
 static void DisplayMonPortraitFlipped(UnkTextStruct1 *a0, s32 a1, const u8 *compressedData, s32 a3)
 {
@@ -2282,17 +2526,17 @@ static void DisplayMonPortraitFlipped(UnkTextStruct1 *a0, s32 a1, const u8 *comp
     }
 }
 
-void sub_80084A4(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 a8);
-
-UNUSED void sub_8008468(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a6)
+UNUSED static void sub_8008468(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a6)
 {
     sub_80084A4(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a6);
 }
 
-UNUSED void nullsub_164(void) {}
+UNUSED static void nullsub_164(void)
+{
+}
 
 // Effectively unused
-void sub_80084A4(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 a8)
+static void sub_80084A4(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 a5, s32 a6, u32 a8)
 {
     s32 i, j;
     UnkTextStruct1 *strPtr = &a0[a2];
@@ -2319,14 +2563,12 @@ void sub_80084A4(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32
     }
 }
 
-extern const struct unkChar gUnknown_80B86A4;
-
 // Oddly similar to sub_803DEC8
 const struct unkChar *GetCharacter(s32 chr)
 {
     s32 r2, r4;
     const struct unkChar *ret;
-    const struct unkChar *strPtr = gCharmaps[gCurrentCharmap]->unk4;
+    const struct unkChar *strPtr = sCharmaps[sCurrentCharmap]->unk4;
     // TODO: create labels for these
     if (chr > 63487 && chr < 65535)
     {
@@ -2339,7 +2581,7 @@ const struct unkChar *GetCharacter(s32 chr)
     else
     {
         r4 = 0;
-        r2 = gCharmaps[gCurrentCharmap]->unk0 - 1;
+        r2 = sCharmaps[sCurrentCharmap]->unk0 - 1;
         while (r4 < r2) {
             s32 r1 = (r4 + r2) / 2;
             if (strPtr[r1].unk4 == chr) {
@@ -2362,7 +2604,7 @@ const struct unkChar *GetCharacter(s32 chr)
     return ret;
 }
 
-s32 HexDigitValue(u8 chr)
+static s32 HexDigitValue(u8 chr)
 {
     if (chr >= '0' && chr <= '9')
         return chr - '0';
@@ -2399,14 +2641,30 @@ const u8 *xxx_get_next_char_from_string(const u8 *a1, u32 *a0)
     }
 }
 
-UNUSED void nullsub_165(void) {}
-UNUSED void nullsub_166(void) {}
-UNUSED void nullsub_167(void) {}
-UNUSED void nullsub_168(void) {}
+UNUSED static void nullsub_165(void)
+{
+}
 
-extern const u32 gUnknown_80B8868[];
+UNUSED static void nullsub_166(void)
+{
+}
 
-UNUSED void sub_80086C8(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
+UNUSED static void nullsub_167(void)
+{
+}
+
+UNUSED static void nullsub_168(void)
+{
+}
+
+static const u32 gUnknown_80B8868[] =
+{
+    0, 0xF, 0xFF, 0xFFF, 0xFFFF, 0xFFFFF, 0xFFFFFF, 0xFFFFFFF,
+    0xFFFFFFFF, 0xFFFFFFF0, 0xFFFFFF00, 0xFFFFF000, 0xFFFF0000,
+    0xFFF00000, 0xFF000000, 0xF0000000
+};
+
+UNUSED static void sub_80086C8(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
 {
     u32 *r5;
     s32 r2, r0, r1;
@@ -2474,16 +2732,16 @@ UNUSED void sub_80086C8(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 
     }
 }
 
-void sub_8008818(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5);
-
 void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
 {
     sub_8008818(gUnknown_2027370, a0, a1, a2, a3, a4);
 }
 
-UNUSED void nullsub_176(void) {}
+UNUSED static void nullsub_176(void)
+{
+}
 
-void sub_8008818(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
+static void sub_8008818(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
 {
     s32 i, j;
     UnkTextStruct1 *strPtr = &a0[a1];
@@ -2513,21 +2771,18 @@ void sub_8008818(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
     }
 }
 
-extern u8 gUnknown_20274A5;
-bool8 xxx_update_bg_vram(UnkTextStruct1 *a0);
-
 bool8 xxx_call_update_bg_vram(void)
 {
     bool8 ret = FALSE;
     if (gUnknown_20274A5 != 0) {
-        gUnknown_20274A5 = 0;
+        gUnknown_20274A5 = FALSE;
         sub_80099C0();
     }
     ret = xxx_update_bg_vram(gUnknown_2027370);
     return ret;
 }
 
-bool8 xxx_update_bg_vram(UnkTextStruct1 *a0)
+static bool8 xxx_update_bg_vram(UnkTextStruct1 *a0)
 {
     s32 i, j;
     u32 r5;
@@ -2577,10 +2832,7 @@ bool8 xxx_update_bg_vram(UnkTextStruct1 *a0)
     return ret;
 }
 
-// Todo fix gUnknown_3000E94 being accessed as s16/u8
-extern s16 gUnknown_3000E94[];
-
-void sub_800898C(void)
+static void sub_800898C(void)
 {
     s32 i;
 
@@ -2589,7 +2841,7 @@ void sub_800898C(void)
     }
 }
 
-void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str)
+static void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str)
 {
     u8 *r6;
 
@@ -2744,16 +2996,16 @@ void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str)
     }
 }
 
-void PrepareTextbox_8008C6C(UnkTextStruct1 *strArr, u32 strId);
-
 void CallPrepareTextbox_8008C54(u32 strId)
 {
     PrepareTextbox_8008C6C(gUnknown_2027370, strId);
 }
 
-UNUSED void nullsub_169(void) {}
+UNUSED static void nullsub_169(void)
+{
+}
 
-void PrepareTextbox_8008C6C(UnkTextStruct1 *strArr, u32 strId)
+static void PrepareTextbox_8008C6C(UnkTextStruct1 *strArr, u32 strId)
 {
     s32 i;
     UnkTextStruct1 *strPtr = &strArr[strId];
@@ -2802,25 +3054,25 @@ bool8 sub_8008D8C(u32 strId)
     return (strPtr->unk38 != 0);
 }
 
-UNUSED bool8 sub_8008DA8(void)
+UNUSED static bool8 sub_8008DA8(void)
 {
     return FALSE;
 }
 
-UNUSED void sub_8008DAC(s32 a0, s32 a1, s32 a2)
+UNUSED static void sub_8008DAC(s32 a0, s32 a1, s32 a2)
 {
     gUnknown_202B038[0][a1][a0] = a2;
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
-void sub_8008DC8(s32 a0, s32 a1, s32 a2, s32 a3)
+void sub_8008DC8(s32 a0, s32 a1, u16 a2, s32 a3)
 {
     gUnknown_202B038[0][a1][a0] = a2;
     gUnknown_202B038[1][a1][a0] = a3;
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
-UNUSED void sub_8008DF4(s32 a0, s32 a1, u8 *a2)
+UNUSED static void sub_8008DF4(s32 a0, s32 a1, u8 *a2)
 {
     u8 r1;
 
@@ -2836,10 +3088,10 @@ UNUSED void sub_8008DF4(s32 a0, s32 a1, u8 *a2)
         a2++;
         a0++;
     }
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
-UNUSED void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
+UNUSED static void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
 {
     u8 r1;
 
@@ -2859,7 +3111,7 @@ UNUSED void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
         a0++;
         a3--;
     }
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
 s32 sub_8008ED0(const u8 *str)
@@ -2909,15 +3161,13 @@ s32 sub_8008ED0(const u8 *str)
         else {
             const struct unkChar *ptr = GetCharacter(chr);
             if (ptr != NULL) {
-                ret += ptr->unk6 + gCharacterSpacing;
+                ret += ptr->unk6 + sCharacterSpacing;
             }
         }
     }
 
     return ret;
 }
-
-void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing);
 
 void PrintStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
 {
@@ -2929,19 +3179,21 @@ void PrintStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminat
     xxx_draw_string(gUnknown_2027370, x, y, str, windowId, terminatingChr, 0, 13);
 }
 
-UNUSED void nullsub_170(void) {}
+UNUSED static void nullsub_170(void)
+{
+}
 
 // Identical to PrintStringOnWindow
-UNUSED void sub_8008FF0(s32 x, u32 y, const u8 *str, u32 windowId, u32 terminatingChr)
+UNUSED static void UnusedPrintStringOnWindow(s32 x, u32 y, const u8 *str, u32 windowId, u32 terminatingChr)
 {
     xxx_draw_string(gUnknown_2027370, x, y, str, windowId, terminatingChr, 0, 13);
 }
 
-UNUSED void nullsub_171(void) {}
+UNUSED static void nullsub_171(void)
+{
+}
 
-const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp);
-
-void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing)
+static void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing)
 {
     struct UnkDrawStringStruct sp;
     u32 currChr;
@@ -2957,10 +3209,10 @@ void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 wi
             break;
 
         if (currChr == 0x82A0) {
-            gCurrentCharmap = 0;
+            sCurrentCharmap = 0;
         }
         else if (currChr == 0x82A2) {
-            gCurrentCharmap = 1;
+            sCurrentCharmap = 1;
         }
         else if (currChr == '\e') {
             break;
@@ -2983,7 +3235,7 @@ void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 wi
             const struct unkChar *chrPtr = GetCharacter(currChr);
             if (chrPtr != NULL) {
                 s32 x = sp.unk0;
-                s32 x2 = gCharacterSpacing + 10;
+                s32 x2 = sCharacterSpacing + 10;
                 x +=((x2 - chrPtr->unk6) / 2);
                 xxx_draw_char(strArr, x, sp.unk2, currChr, sp.unk10, windowId);
                 sp.unk0 += characterSpacing;
@@ -2992,7 +3244,7 @@ void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 wi
     }
 }
 
-const u8 *sub_800915C(s16 *a0, const u8 *str)
+static const u8 *sub_800915C(s16 *a0, const u8 *str)
 {
     s32 a = 0;
 
@@ -3021,17 +3273,12 @@ const u8 *xxx_handle_format_global(const u8 *str, struct UnkDrawStringStruct *un
     return HandleTextFormat(gUnknown_2027370, str, unkStrPtr);
 }
 
-UNUSED s32 sub_80091A8(s32 a0)
+UNUSED static s32 sub_80091A8(s32 a0)
 {
     return a0 + 1;
 }
 
-extern u8 gUnknown_202749A[];
-extern u8 gUnknown_20274A6[];
-
-s32 InterpretColorChar(u8 a0);
-
-const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp)
+static const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp)
 {
     while (1) {
         if (str[0] == '#') {
@@ -3118,7 +3365,7 @@ const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDraw
                 str += 2;
             }
             else if (str[1] == 'S') {
-                gUnknown_20274A6[str[2] & 0x7F] = str[3] & 0x7F;
+                sUnknown_20274A6[str[2] & 0x7F] = str[3] & 0x7F;
                 str += 4;
             }
             else if (str[1] == 'W') {
@@ -3159,16 +3406,13 @@ const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDraw
     return str;
 }
 
-extern s32 gUnknown_202B020;
-extern s32 gUnknown_202B024;
-
-void sub_8009388(void)
+static void sub_8009388(void)
 {
     s32 i, j;
 
     gUnknown_202B038[0][0][0] = 0xF279;
     gUnknown_202B038[1][0][0] = 0xF27A;
-    for (i = gUnknown_202B020; i < gUnknown_202B024; i++) {
+    for (i = sUnknown_202B020; i < sUnknown_202B024; i++) {
         gUnknown_202B038[0][i][0] = 0xF279;
         gUnknown_202B038[1][i][0] = 0xF27A;
         for (j = 1; j < 32; j++) {
@@ -3192,10 +3436,10 @@ void sub_8009408(s32 from, s32 to)
             gUnknown_202B038[1][i][j] = 0xF27A;
         }
     }
-    gUnknown_20274A5 = 1;
+    gUnknown_20274A5 = TRUE;
 }
 
-UNUSED void sub_8009488(s32 strArrId)
+UNUSED static void sub_8009488(s32 strArrId)
 {
     s32 i, j;
     s32 id0, id1;
@@ -3213,7 +3457,9 @@ UNUSED void sub_8009488(s32 strArrId)
     }
 }
 
-UNUSED void nullsub_172(void) {}
+UNUSED static void nullsub_172(void)
+{
+}
 
 void sub_8009524(s32 strArrId)
 {
@@ -3232,15 +3478,19 @@ void sub_8009524(s32 strArrId)
     }
 }
 
-UNUSED void nullsub_173(void) {}
+UNUSED static void nullsub_173(void)
+{
+}
 
 void sub_80095CC(s32 a0, s32 a1)
 {
-    gUnknown_202B020 = a0;
-    gUnknown_202B024 = a1;
+    sUnknown_202B020 = a0;
+    sUnknown_202B024 = a1;
 }
 
-UNUSED void nullsub_174(void) {}
+UNUSED static void nullsub_174(void)
+{
+}
 
 s32 sub_80095E4(s32 a0, s32 a1)
 {
@@ -3269,7 +3519,7 @@ s32 sub_8009614(s32 a0, s32 a1)
         return r1 / 8;
 }
 
-s32 InterpretColorChar(u8 a0)
+static s32 InterpretColorChar(u8 a0)
 {
     if (a0 < 16)
         return a0;

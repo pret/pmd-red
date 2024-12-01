@@ -16,7 +16,7 @@
 #include "other_menus1.h"
 #include "other_menus2.h"
 #include "sprite.h"
-#include "text1.h"
+#include "text.h"
 
 // TODO: MAKE STATIC WHEN other_menus1.s IS DED
 EWRAM_DATA_2 unkStruct_203B35C *sUnknown_203B35C = {0};
@@ -26,8 +26,6 @@ EWRAM_DATA_2 unkStruct_203B35C *sUnknown_203B35C = {0};
 // other_menus1.s
 extern void sub_8037810(void);
 extern void sub_8037900(void);
-// text.s
-extern void xxx_call_update_bg_vram();
 // other_menus2.s
 extern s32 sub_8037B28(u32);
 

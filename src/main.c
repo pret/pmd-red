@@ -14,8 +14,7 @@
 #include "random.h"
 #include "reg_control.h"
 #include "sprite.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 EWRAM_DATA u8 IntrMain_Buffer[0x120] = {0};
 EWRAM_DATA IntrCallback gIntrTable[6] = {0};
@@ -41,6 +40,7 @@ extern const IntrCallback gInitialIntrTable[6];
 
 // code_2.c
 extern void GameLoop(void);
+extern void InitGraphics(void);
 // code_800D090.c
 extern void Hang(void);
 extern void sub_800D6AC(void);
@@ -128,11 +128,11 @@ void sub_800B540(void)
 
     REG_IE ^= INTR_FLAG_TIMER3 | INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT; // 0x45
 
-    *(u8*)&REG_DISPCNT |= DISPCNT_FORCED_BLANK; 
+    *(u8*)&REG_DISPCNT |= DISPCNT_FORCED_BLANK;
 
     InitIntrTable(gInitialIntrTable); // set up intrrupt vector/table
 
-    REG_TM3CNT = (TIMER_64CLK | TIMER_INTR_ENABLE | TIMER_ENABLE) << 16; 
+    REG_TM3CNT = (TIMER_64CLK | TIMER_INTR_ENABLE | TIMER_ENABLE) << 16;
 
     REG_IE |= INTR_FLAG_GAMEPAK | INTR_FLAG_TIMER3 | INTR_FLAG_VCOUNT | INTR_FLAG_VBLANK; // 0x2045
     REG_DISPSTAT = DISPSTAT_VCOUNT_INTR | DISPSTAT_VBLANK_INTR;

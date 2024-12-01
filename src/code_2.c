@@ -28,19 +28,15 @@
 #include "save_read.h"
 #include "save.h"
 #include "sprite.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 extern void NDS_LoadOverlay_GroundMain(void);
 extern void sub_8014144(void);
 extern void sub_800DAAC(void);
 extern void xxx_script_related_8001334(u32);
 extern void LoadTitleScreen(void);
-extern void sub_80095CC(u32, u32);
 extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
-
-extern void xxx_call_update_bg_vram(void);
 
 extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;

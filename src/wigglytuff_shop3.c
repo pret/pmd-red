@@ -12,14 +12,10 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "wigglytuff_shop1.h"
 #include "wigglytuff_shop2.h"
 #include "wigglytuff_shop3.h"
-
-extern u8 gSpeakerNameBuffer[];
-extern u8 gFormatBuffer_FriendArea[];
 
 static EWRAM_DATA_2 WigglytuffShop3Work *sWigglytuffShop3Work = {0};
 

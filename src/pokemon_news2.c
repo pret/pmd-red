@@ -9,8 +9,7 @@
 #include "pokemon_news2.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B2D4 *sUnknown_203B2D4 = {0};
 

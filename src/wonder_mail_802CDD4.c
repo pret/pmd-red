@@ -10,8 +10,7 @@
 #include "structs/str_802C39C.h"
 #include "structs/struct_sub80095e4.h"
 #include "structs/str_wonder_mail.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "wonder_mail_802CDD4.h"
 
 static EWRAM_DATA_2 struct_Sub80095E4_2 *sUnknown_203B2F4 = {0};

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "text1.h"
+#include "text.h"
 #include "memory.h"
 #include "string_format.h"
 #include "structs/str_3001B64.h"
@@ -13,8 +13,6 @@ extern u8 gInvalidityText[];
 extern u8 ScriptPrintText_809B2B8(u32 *, u32, u32, u32);
 extern u32 IsTextboxOpen_809B40C(u32 *);
 extern void sub_801416C(s32, s32);
-extern void sub_80095CC(u32, u32);
-extern void sub_8009408(u32, u32);
 extern void ResetTextbox_809B294(void);
 extern void sub_8014144(void);
 

@@ -7,7 +7,7 @@
 #include "structs/str_dungeon.h"
 #include "tile_types.h"
 #include "random.h"
-#include "text1.h"
+#include "text.h"
 #include "dungeon_engine.h"
 #include "dungeon_movement.h"
 #include "dungeon_leader.h"

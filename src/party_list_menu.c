@@ -23,8 +23,7 @@
 #include "party_list_menu.h"
 #include "pokemon.h"
 #include "text_util.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 unkStruct_203B2B8 *sUnknown_203B2B8 = {0};
 

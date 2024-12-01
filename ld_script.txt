@@ -63,8 +63,7 @@ SECTIONS {
         src/sprite.o(.text);
         src/code_800558C.o(.text);
         src/random.o(.text);
-        src/text1.o(.text);
-        src/text2.o(.text);
+        src/text.o(.text);
         asm/text.o(.text);
         src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
@@ -423,6 +422,9 @@ SECTIONS {
     {
         data/data_code_2.o(.rodata);
         data/data.o(.rodata);
+        src/random.o(.rodata);
+        src/text.o(.rodata);
+        data/data2.o(.rodata);
         src/math.o(.rodata);
         src/file_system.o(.rodata);
         src/decompress.o(.rodata);

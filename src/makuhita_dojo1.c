@@ -12,10 +12,7 @@
 #include "makuhita_dojo2.h"
 #include "memory.h"
 #include "pokemon.h"
-#include "text1.h"
-#include "text2.h"
-
-extern u8 gSpeakerNameBuffer[];
+#include "text.h"
 
 static EWRAM_DATA_2 MakuhitaDojoWork1 *sMakuhitaDojoWork1 = {0};
 

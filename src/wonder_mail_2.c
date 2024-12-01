@@ -17,7 +17,7 @@
 #include "pokemon_mail.h"
 #include "save.h"
 #include "save_write.h"
-#include "text1.h"
+#include "text.h"
 
 struct unkStruct_203B2C8
 {

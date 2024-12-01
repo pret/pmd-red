@@ -7,7 +7,7 @@
 #include "items.h"
 #include "moves.h"
 #include "text_util.h"
-#include "text2.h"
+#include "text.h"
 
 struct unkStruct_8113080
 {

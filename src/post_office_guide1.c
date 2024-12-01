@@ -6,7 +6,7 @@
 #include "structs/menu.h"
 #include "pokemon.h"
 #include "post_office_guide1.h"
-#include "text1.h"
+#include "text.h"
 
 enum PostOfficeStates
 {

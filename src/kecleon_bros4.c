@@ -10,8 +10,7 @@
 #include "kecleon_bros4.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 unkStruct_203B224 *gUnknown_203B224 = {0};
 static EWRAM_DATA_2 u16 gUnknown_203B228 = {0};

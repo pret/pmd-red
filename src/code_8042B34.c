@@ -21,7 +21,7 @@
 #include "dungeon_random.h"
 #include "code_8009804.h"
 #include "tile_types.h"
-#include "text1.h"
+#include "text.h"
 #include "code_805D8C8.h"
 #include "code_803E668.h"
 #include "dungeon_engine.h"
@@ -330,7 +330,6 @@ extern void nullsub_16(void);
 extern void sub_80521D0(void);
 extern void sub_803F27C(u8);
 extern void sub_807E7FC(u8);
-extern void sub_80095CC(u32, u32);
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern void sub_8068A84(PokemonStruct1 *pokemon);
 extern void sub_807EAA0(u32, u32);

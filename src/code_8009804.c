@@ -3,7 +3,7 @@
 #include "code_8009804.h"
 #include "cpu.h"
 #include "file_system.h"
-#include "text1.h"
+#include "text.h"
 
 extern const u8 gUnknown_80B88CC[];
 extern const struct FileArchive gSystemFileArchive; // 8300500

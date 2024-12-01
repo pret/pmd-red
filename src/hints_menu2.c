@@ -6,8 +6,7 @@
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "structs/struct_sub80095e4.h"
 
 static EWRAM_DATA_2 struct_Sub80095E4_2 *sUnknown_203B268 = {0};

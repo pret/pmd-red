@@ -21,8 +21,7 @@
 #include "moves.h"
 #include "pokemon.h"
 #include "sprite.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B2BC *sUnknown_203B2BC = {0};
 
