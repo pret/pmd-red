@@ -8,11 +8,6 @@ gScriptVarBuffer: /* 2000A88 (ThoroughlyResetScriptVars - RestoreGlobalScriptVar
 	.space 0x400
 
     .include "src/memory.o"
-gMainHeapFreeList: /* 2000ED0 (InitHeapInternal) */
-	.space 0x300
-gMainHeap: /* 20011D0 (InitHeapInternal) */
-	.space 0x24000
-
     .include "src/bg_palette_buffer.o"
     .include "src/input.o"
     .include "src/sprite.o"

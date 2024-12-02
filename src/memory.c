@@ -56,13 +56,13 @@ struct unkMemoryStruct
     u32 end;
 };
 
-static EWRAM_DATA struct HeapDescriptor *sHeapDescriptorList[8] = {0}; // 2000E88
-static EWRAM_DATA s32 sHeapCount = {0}; // 2000EA8
-UNUSED static EWRAM_DATA u32 sUnused1 = {0}; // 2000EAC
-static EWRAM_DATA struct HeapDescriptor sMainHeapDescriptor = {0}; // 2000EB0
-UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // 2000ECC
-extern struct HeapFreeListElement gMainHeapFreeList[32]; // 2000ED0 (CAPACITY OR STRUCT SIZE IS WRONG)
-extern u8 gMainHeap[HEAP_SIZE]; // 20011D0
+static EWRAM_DATA struct HeapDescriptor *sHeapDescriptorList[8] = {0};
+static EWRAM_DATA s32 sHeapCount = {0};
+UNUSED static EWRAM_DATA u32 sUnused1 = 0;
+static EWRAM_DATA struct HeapDescriptor sMainHeapDescriptor = {0};
+UNUSED static EWRAM_DATA u32 sUnused2 = 0;
+static EWRAM_DATA struct HeapFreeListElement sMainHeapFreeList[32] = {0};
+static EWRAM_DATA u8 sMainHeap[HEAP_SIZE] = {0};
 
 static void DoFree(struct HeapDescriptor *, void *);
 static void *DoAlloc(struct HeapDescriptor *, s32, u32);
@@ -160,10 +160,10 @@ static void InitHeapInternal(void)
 {
     struct HeapSettings settings;
 
-    settings.start = gMainHeap;
+    settings.start = sMainHeap;
     settings.size = HEAP_SIZE;
     sHeapCount = 0;
-    DoInitHeap(&sMainHeapDescriptor, &settings, gMainHeapFreeList, sizeof(gMainHeapFreeList) / sizeof(struct HeapFreeListElement));
+    DoInitHeap(&sMainHeapDescriptor, &settings, sMainHeapFreeList, sizeof(sMainHeapFreeList) / sizeof(struct HeapFreeListElement));
 }
 
 static void DoInitHeap(struct HeapDescriptor *descriptor, struct HeapSettings *settings, struct HeapFreeListElement *freeList, u32 freeListLength)
@@ -494,7 +494,6 @@ UNUSED static struct HeapDescriptor *MemoryLocate_LocalCreate(struct HeapDescrip
     };
     FatalError(&debugInfo,"Memroy LocalCreate buffer %08x size can't locate",size); // Spelling error is intentional
   }
-
 
   foundSet = _LocateSetBack(parentHeap,index,9,size,group);
   local_1c.unk0 = (void *) foundSet->block.start;
