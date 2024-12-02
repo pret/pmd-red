@@ -1,6 +1,7 @@
 #include "global.h"
 #include "memory.h"
 #include "cpu.h"
+#include "debug.h"
 
 #define HEAP_SIZE 0x24000
 
@@ -62,13 +63,11 @@ UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // 2000ECC
 extern struct HeapFreeListElement gMainHeapFreeList[32]; // 2000ED0 (CAPACITY OR STRUCT SIZE IS WRONG)
 extern u8 gMainHeap[HEAP_SIZE]; // 20011D0
 
-// Todo: fix fatal error
-void FatalError(const void *, const char *, ...) __attribute__((noreturn));
-extern const char *const gUnknown_80B7EB8;
-extern const char *const gUnknown_80B7EFC;
 extern const char gUnknown_80B7EC4[];
-extern u32 gUnknown_80B7F14;
-extern u32 gUnknown_80B7F88;
+extern const DebugLocation gUnknown_80B7EB8;
+extern const DebugLocation gUnknown_80B7EFC;
+extern const DebugLocation gUnknown_80B7F14;
+extern const DebugLocation gUnknown_80B7F88;
 extern const char gLocateSetErrorMessage[];
 extern const char gLocalCreateErrorMessage[];
 
@@ -490,12 +489,10 @@ static struct HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b)
 {
     struct HeapMemoryBlock2 s2;
     struct HeapDescriptor *a1;
-    u32 end;
 
     a1 = a->unk0;
     s2.start = (struct HeapFreeListElement *)((u8*)a1 + sizeof(struct HeapDescriptor));
-    end = a->end;
-    s2.size = end - sizeof(struct HeapDescriptor);
+    s2.size = a->end - sizeof(struct HeapDescriptor);
     InitSubHeap(a1, &s2, b);
     return a1;
 }

@@ -79,12 +79,12 @@ UNUSED static void PrintFuncFileLineOrNotEntry(u8 *buf, DebugLocation *debug)
         sprintf(buf, gNotEntryText);
 }
 
-void PrintFuncFileLine(u8 *buf, DebugLocation *loc, const u8* prefix)
+void PrintFuncFileLine(u8 *buf, const DebugLocation *loc, const u8* prefix)
 {
     sprintf(buf, gFuncFileLineStringWPrefix, prefix, loc->func, loc->file, loc->line);
 }
 
-void PrintMessageWithFuncFileLine(u8 *buffer, DebugLocation *debug, const u8 *text, ...)
+void PrintMessageWithFuncFileLine(u8 *buffer, const DebugLocation *debug, const u8 *text, ...)
 {
     va_list vArgv;
     u32 length;
@@ -135,7 +135,7 @@ void nullsub_137(void)
 
 }
 
-static void FatalErrorPrintFuncFileLine(const char *prefix, DebugLocation *debug)
+static void FatalErrorPrintFuncFileLine(const char *prefix, const DebugLocation *debug)
 {
     char buf[0x100];
     if(prefix != NULL){
@@ -229,7 +229,7 @@ static void FatalErrorHang()
     Hang();
 }
 
-void FatalError(DebugLocation *debug, const char *text, ...) 
+void FatalError(const DebugLocation *debug, const char *text, ...)
 {
     char buf[0x100];
     va_list vArgv;
