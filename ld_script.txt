@@ -420,6 +420,8 @@ SECTIONS {
     {
         data/data_code_2.o(.rodata);
         data/data.o(.rodata);
+        src/memory.o(.rodata);
+        data/data1.o(.rodata);
         src/random.o(.rodata);
         src/text.o(.rodata);
         data/data2.o(.rodata);

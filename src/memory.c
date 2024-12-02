@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "memory.h"
 #include "cpu.h"
 #include "debug.h"
@@ -63,14 +64,6 @@ UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // 2000ECC
 extern struct HeapFreeListElement gMainHeapFreeList[32]; // 2000ED0 (CAPACITY OR STRUCT SIZE IS WRONG)
 extern u8 gMainHeap[HEAP_SIZE]; // 20011D0
 
-extern const char gUnknown_80B7EC4[];
-extern const DebugLocation gUnknown_80B7EB8;
-extern const DebugLocation gUnknown_80B7EFC;
-extern const DebugLocation gUnknown_80B7F14;
-extern const DebugLocation gUnknown_80B7F88;
-extern const char gLocateSetErrorMessage[];
-extern const char gLocalCreateErrorMessage[];
-
 static void DoFree(struct HeapDescriptor *, void *);
 static void *DoAlloc(struct HeapDescriptor *, s32, u32);
 static void DoInitHeap(struct HeapDescriptor *, struct HeapSettings *, struct HeapFreeListElement *, u32);
@@ -78,6 +71,8 @@ static void InitSubHeap(struct HeapDescriptor *, struct HeapMemoryBlock2 *, u32)
 static struct HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b);
 static void *DoAlloc(struct HeapDescriptor *heap, s32 size, u32 a2);
 static void InitHeapInternal(void);
+
+ALIGNED(4) static const char sFileNameText[] = "../system/memory_locate.c";
 
 void InitHeap(void)
 {
@@ -334,6 +329,14 @@ static s32 MemorySearchFromBack(struct HeapDescriptor *heap, s32 atb, s32 size)
     return -1;
 }
 
+ALIGNED(4) static const char sText_LocateSetFront[] = "_LocateSetFront";
+static const DebugLocation sLocateSetFrontDebugLocation =
+{
+    .file = sFileNameText,
+    .line = 581,
+    .func = sText_LocateSetFront
+};
+
 static struct HeapFreeListElement * _LocateSetFront(struct HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
 {
     s32 i;
@@ -353,9 +356,7 @@ static struct HeapFreeListElement * _LocateSetFront(struct HeapDescriptor *heap,
 
         heap->freeCount++;
         if (heap->freeCount > heap->freeListLength) {
-            // ../system/memory_locate.c
-            // Memory Locate sprit max over [%3d/%3d]
-            FatalError(&gUnknown_80B7EB8, gUnknown_80B7EC4, heap->freeCount, heap->freeListLength);
+            FatalError(&sLocateSetFrontDebugLocation, "Memory Locate sprit max over [%3d/%3d]", heap->freeCount, heap->freeListLength);
         }
 
         block = &heap->freeList[index + 1];
@@ -371,6 +372,14 @@ static struct HeapFreeListElement * _LocateSetFront(struct HeapDescriptor *heap,
     curr->grp = group;
     return curr;
 }
+
+ALIGNED(4) static const char sText_LocateSetBack[] = "_LocateSetBack";
+static const DebugLocation sLocateSetBackDebugLocation =
+{
+    .file = sFileNameText,
+    .line = 673,
+    .func = sText_LocateSetBack
+};
 
 static struct HeapFreeListElement * _LocateSetBack(struct HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
 {
@@ -392,11 +401,8 @@ static struct HeapFreeListElement * _LocateSetBack(struct HeapDescriptor *heap, 
 
         heap->freeCount++;
         if (heap->freeCount > heap->freeListLength) {
-            // ../system/memory_locate.c
-            // Memory Locate sprit max over [%3d/%3d]
-            FatalError(&gUnknown_80B7EFC, gUnknown_80B7EC4, heap->freeCount, heap->freeListLength);
+            FatalError(&sLocateSetBackDebugLocation, "Memory Locate sprit max over [%3d/%3d]", heap->freeCount, heap->freeListLength);
         }
-
 
         curr->block.size -= sizeAligned;
         newBlockStart = curr->block.size + curr->block.start;
@@ -412,6 +418,14 @@ static struct HeapFreeListElement * _LocateSetBack(struct HeapDescriptor *heap, 
     curr->grp = group;
     return curr;
 }
+
+ALIGNED(4) static const char sText_LocateSet[] = "_LocateSet";
+static const DebugLocation sLocateSetDebugLocation =
+{
+    .file = sFileNameText,
+    .line = 812,
+    .func = sText_LocateSet
+};
 
 static void * _LocateSet(struct HeapDescriptor *heap, s32 size, s32 group)
 {
@@ -443,10 +457,8 @@ static void * _LocateSet(struct HeapDescriptor *heap, s32 size, s32 group)
   }
 
 error:
-    // LocateSet [%p] buffer %8x size can't locate
-        // atb %02x grp %3d
-   FatalError(&gUnknown_80B7F14,
-                 gLocateSetErrorMessage,
+   FatalError(&sLocateSetDebugLocation,
+                 "Memroy LocateSet [%p] buffer %8x size can't locate\n    atb %02x grp %3d ", // Spelling error is intentional
                  heap,size,atb,group);
 }
 
@@ -460,6 +472,8 @@ void MemoryFree(void *a)
     DoFree(&sMainHeapDescriptor, a);
 }
 
+ALIGNED(4) static const char sText_MemoryLocate_LocalCreate[] = "MemoryLocate_LocalCreate";
+
 UNUSED static struct HeapDescriptor *MemoryLocate_LocalCreate(struct HeapDescriptor *parentHeap,u32 size,u32 param_3,u32 group)
 {
   int index;
@@ -472,9 +486,15 @@ UNUSED static struct HeapDescriptor *MemoryLocate_LocalCreate(struct HeapDescrip
   }
 
   index = MemorySearchFromBack(parentHeap,9,size);
-  if (index < 0)
-    // Memroy LocalCreate buffer %08x size can't locate
-    FatalError(&gUnknown_80B7F88,gLocalCreateErrorMessage,size);
+  if (index < 0) {
+    static const DebugLocation debugInfo = {
+        .file = sFileNameText,
+        .line = 1109,
+        .func = sText_MemoryLocate_LocalCreate
+    };
+    FatalError(&debugInfo,"Memroy LocalCreate buffer %08x size can't locate",size); // Spelling error is intentional
+  }
+
 
   foundSet = _LocateSetBack(parentHeap,index,9,size,group);
   local_1c.unk0 = (void *) foundSet->block.start;

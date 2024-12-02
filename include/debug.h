@@ -6,9 +6,9 @@
 // size: 0xC
 typedef struct DebugLocation
 {
-    /* 0x0 */ u8 *file;
+    /* 0x0 */ const u8 *file;
     /* 0x4 */ u32 line;
-    /* 0x8 */ u8 *func;
+    /* 0x8 */ const u8 *func;
 } DebugLocation;
 
 void Log(u8 num, const u8 *text, ...);
