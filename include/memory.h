@@ -41,7 +41,7 @@ struct HeapDescriptor
     /* 0x4 */ struct HeapDescriptor *parentHeap;
     /* 0x8 */ struct HeapFreeListElement *freeList;
     /* 0xC */ s32 freeCount;
-    /* 0x10 */ u32 freeListLength;
+    /* 0x10 */ s32 freeListLength;
     /* 0x14 */ u8 *start;
     /* 0x18 */ u32 size;
 };
