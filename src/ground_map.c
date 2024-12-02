@@ -1,6 +1,7 @@
 #include "global.h"
 #include "debug.h"
 #include "event_flag.h"
+#include "ground_main.h"
 #include "ground_map.h"
 #include "ground_map_2.h"
 #include "ground_script.h"
@@ -8,6 +9,24 @@
 
 IWRAM_DATA GroundMapAction *gGroundMapAction = {0};
 IWRAM_DATA unkStruct_3001B70 *gGroundMapDungeon_3001B70 = {0};
+
+extern GroundMapAction *gGroundMapAction;
+
+extern const u8 gUnknown_8117594[];
+extern const u8 gUnknown_81175EC[];
+extern const DebugLocation gUnknown_81175E0;
+extern const DebugLocation gUnknown_8117644;
+extern const u8 gUnknown_8117650[];
+extern const DebugLocation gUnknown_8117698;
+
+bool8 ChangeScriptFile(s32 a0);
+const struct GroundScriptHeader *GetGroundScript(s32 a0, DebugLocation *);
+
+extern DebugLocation gUnknown_8117560;
+extern const u8 gUnknown_811756C[];
+
+extern u8 sub_809D678(void *);
+extern bool8 GroundScriptNotify(void *, s32);
 
 extern const CallbackData gGroundScriptNullCallbacks;
 extern const DebugLocation gUnknown_8117538[];
@@ -66,12 +85,6 @@ void sub_80A4B54(void)
     nullsub_122();
 }
 
-bool8 ChangeScriptFile(s32 a0);
-const struct GroundScriptHeader *GetGroundScript(s32 a0, DebugLocation *);
-
-extern DebugLocation gUnknown_8117560;
-extern const u8 gUnknown_811756C[];
-
 void GroundMap_GetStationScript(ScriptInfoSmall *r0, s32 _groundScriptId, s32 _groupId, s32 _sectorId)
 {
     const struct GroundScriptHeader *scriptHeader;
@@ -91,4 +104,105 @@ void GroundMap_GetStationScript(ScriptInfoSmall *r0, s32 _groundScriptId, s32 _g
     r0->state = 2;
     r0->group = groupId;
     r0->sector = sectorId;
+}
+
+static void GroundMap_GetFirstStationScript(ScriptInfoSmall *script, s16 r1)
+{
+    GroundMap_GetStationScript(script, r1, 0, 0);
+}
+
+void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
+{
+    ScriptInfoSmall script;
+    s32 index_s32;
+    u8 iVar2;
+
+    index_s32 = scriptIndex;
+    iVar2 = param_2;
+
+    Log(0,gUnknown_8117594, index_s32, iVar2); // "GroundMap ExecuteEvent %3d %d
+    GetFunctionScript(NULL, &script, index_s32);
+    if (iVar2 != 0)
+        script.state = 5;
+
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_81175E0);
+}
+
+void GroundMap_ExecuteStation(s16 param_1, s16 param_2, s8 param_3, u32 param_4)
+{
+    ScriptInfoSmall script;
+    s32 iVar1;
+    s32 iVar2;
+    s32 iVar3;
+    u8 iVar4;
+
+    iVar1 = param_1;
+    iVar2 = param_2;
+    iVar3 = param_3;
+    iVar4 = param_4;
+
+    Log(0, gUnknown_81175EC, iVar1, iVar2, iVar3, iVar4); // GroundMap ExecuteStation %3d %3d %3d %d
+    GroundMap_GetStationScript(&script, iVar1, iVar2, iVar3);
+    if (iVar4 != 0)
+        script.state = 5;
+
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_8117644);
+}
+
+void GroundMap_ExecuteEnter(s16 param_1)
+{
+    ScriptInfoSmall script;
+    s32 iVar1;
+
+    iVar1 = param_1;
+
+    Log(0, gUnknown_8117650, iVar1); // GroundMap ExecuteEnter %3d
+    GroundMap_GetFirstStationScript(&script, iVar1);
+    script.state = 2;
+    script.group = 0;
+    script.sector = 0;
+    GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_8117698);
+}
+
+UNUSED static u8 sub_80A4D14(void)
+{
+    return sub_809D678(&gGroundMapAction->action);
+}
+
+bool8 GroundMapNotifyAll(s16 param_1)
+{
+    s32 iVar1 = param_1;
+    return GroundScriptNotify(&gGroundMapAction->action, iVar1);
+}
+
+bool8 sub_80A4D48(s16 index)
+{
+    if (index == -1) return TRUE;
+    if (gGroundConversion_811BAF4[index].unk0 == 5) return FALSE;
+    if (gGroundConversion_811BAF4[index].unk0 != 8) return TRUE;
+    return FALSE;
+}
+
+s32 GetAdjustedGroundMap(s16 param_1)
+{
+    s32 iVar5;
+
+    iVar5 = param_1;
+
+    switch(iVar5)
+    {
+        case 9:
+        case 0xC:
+            iVar5 = (s16)(iVar5 + ((GetScriptVarValue(NULL, BASE_KIND) * 6) + GetScriptVarValue(NULL, BASE_LEVEL)));
+            break;
+        case 2:
+            if (sub_80023E4(6)) {
+                iVar5 = 3;
+            }
+            break;
+        default:
+            break;
+    }
+
+    return iVar5;
 }
