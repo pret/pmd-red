@@ -53,14 +53,6 @@ struct unkMemoryStruct
     u32 end;
 };
 
-// size: 0x1C
-struct unkMemoryStruct2
-{
-    u8 fill[0xC];
-    /* 0xC */ struct HeapDescriptor *unkC;
-    /* 0x10 */ u32 end;
-};
-
 extern struct HeapDescriptor *gHeapDescriptorList[8];
 extern s32 gHeapCount;
 
@@ -82,7 +74,6 @@ void MemoryCopy32(u32 *dest, u32 *src, s32 size);
 void InitHeapInternal(void);
 void DoInitHeap(struct HeapDescriptor *, struct HeapSettings *, struct HeapFreeListElement *, u32);
 void InitSubHeap(struct HeapDescriptor *, struct HeapMemoryBlock2 *, u32);
-struct HeapDescriptor * _LocateSet(struct HeapDescriptor *heap, s32 size, s32 param_3);
 void *MemoryAlloc(s32 size, s32 group);
 void MemoryFree(void *a);
 struct HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b);

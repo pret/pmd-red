@@ -108,7 +108,7 @@ void DoInitHeap(struct HeapDescriptor *descriptor, struct HeapSettings *settings
 {
     u32 aligned_size;
 
-    aligned_size = settings->size & 0xFFFFFFFC;
+    aligned_size = settings->size & ~(3);
 
     gHeapDescriptorList[gHeapCount++] = descriptor;
 
@@ -267,13 +267,24 @@ s32 MemorySearchFromBack(struct HeapDescriptor *heap, s32 atb, s32 size)
     return -1;
 }
 
-// Todo: fix fatal error and struct unkMemoryStruct2 *
+// Todo: fix fatal error
 void FatalError(const void *, const char *, ...) __attribute__((noreturn));
 extern const char *const gUnknown_80B7EB8;
 extern const char *const gUnknown_80B7EFC;
 extern const char gUnknown_80B7EC4[];
+extern u32 gUnknown_80B7F14;
+extern u32 gUnknown_80B7F88;
+extern const char gLocateSetErrorMessage[];
+extern struct HeapDescriptor gMainHeapDescriptor;
+extern const char gLocalCreateErrorMessage[];
 
-struct unkMemoryStruct2 * _LocateSetFront(struct HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
+extern s32 MemorySearchFromBack(struct HeapDescriptor *heap, s32, s32);
+extern s32 MemorySearchFromFront(struct HeapDescriptor *heap, s32, s32);
+
+void DoFree(struct HeapDescriptor *, void *);
+void *DoAlloc(struct HeapDescriptor *, s32, u32);
+
+struct HeapFreeListElement * _LocateSetFront(struct HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
 {
     s32 i;
     struct HeapFreeListElement *curr;
@@ -308,10 +319,10 @@ struct unkMemoryStruct2 * _LocateSetFront(struct HeapDescriptor *heap, s32 index
     curr->unk_atb = xxx_memory_attr_related(atb);
     curr->atb = atb;
     curr->grp = group;
-    return (void*) curr;
+    return curr;
 }
 
-struct unkMemoryStruct2 * _LocateSetBack(struct HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
+struct HeapFreeListElement * _LocateSetBack(struct HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
 {
     s32 i;
     struct HeapFreeListElement *curr;
@@ -349,28 +360,13 @@ struct unkMemoryStruct2 * _LocateSetBack(struct HeapDescriptor *heap, s32 index,
     curr->unk_atb = xxx_memory_attr_related(atb);
     curr->atb = atb;
     curr->grp = group;
-    return (void*) curr;
+    return curr;
 }
 
-extern u32 gUnknown_80B7F14;
-extern u32 gUnknown_80B7F88;
-extern const char gLocateSetErrorMessage[];
-extern struct HeapDescriptor gMainHeapDescriptor;
-extern const char gLocalCreateErrorMessage[];
-
-extern s32 MemorySearchFromBack(struct HeapDescriptor *heap, s32, s32);
-extern s32 MemorySearchFromFront(struct HeapDescriptor *heap, s32, s32);
-
-void DoFree(struct HeapDescriptor *, void *);
-void *DoAlloc(struct HeapDescriptor *, s32, u32);
-
-
-
-
-struct HeapDescriptor* _LocateSet(struct HeapDescriptor *heap, s32 size, s32 group)
+void * _LocateSet(struct HeapDescriptor *heap, s32 size, s32 group)
 {
   s32 index;
-  struct unkMemoryStruct2 * uVar2;
+  struct HeapFreeListElement * foundSet;
   s32 atb;
 
   if (heap == NULL) {
@@ -386,14 +382,14 @@ struct HeapDescriptor* _LocateSet(struct HeapDescriptor *heap, s32 size, s32 gro
   if ((atb & 2) != 0) {
     index = MemorySearchFromFront(heap,atb,size);
     if (index < 0) goto error;
-    uVar2 = _LocateSetFront(heap,index,atb,size,group);
-    return uVar2->unkC;
+    foundSet = _LocateSetFront(heap,index,atb,size,group);
+    return foundSet->block.start;
   }
   else {
     index = MemorySearchFromBack(heap,atb,size);
     if (index < 0) goto error;
-    uVar2 = _LocateSetBack(heap,index,atb,size,group);
-    return uVar2->unkC;
+    foundSet = _LocateSetBack(heap,index,atb,size,group);
+    return foundSet->block.start;
   }
 
 error:
@@ -417,7 +413,7 @@ void MemoryFree(void *a)
 struct HeapDescriptor *MemoryLocate_LocalCreate(struct HeapDescriptor *parentHeap,u32 size,u32 param_3,u32 group)
 {
   int index;
-  struct unkMemoryStruct2 *iVar2;
+  struct HeapFreeListElement *foundSet;
   struct HeapDescriptor *iVar3;
   struct unkMemoryStruct local_1c;
 
@@ -430,9 +426,9 @@ struct HeapDescriptor *MemoryLocate_LocalCreate(struct HeapDescriptor *parentHea
     // Memroy LocalCreate buffer %08x size can't locate
     FatalError(&gUnknown_80B7F88,gLocalCreateErrorMessage,size);
 
-  iVar2 = _LocateSetBack(parentHeap,index,9,size,group);
-  local_1c.unk0 = iVar2->unkC;
-  local_1c.end = iVar2->end;
+  foundSet = _LocateSetBack(parentHeap,index,9,size,group);
+  local_1c.unk0 = (void *) foundSet->block.start;
+  local_1c.end = foundSet->block.size;
 
   iVar3 = DoCreateSubHeap(&local_1c,param_3);
   iVar3->parentHeap = parentHeap;
