@@ -65,3 +65,30 @@ void sub_80A4B54(void)
 
     nullsub_122();
 }
+
+bool8 ChangeScriptFile(s32 a0);
+const struct GroundScriptHeader *GetGroundScript(s32 a0, DebugLocation *);
+
+extern DebugLocation gUnknown_8117560;
+extern const u8 gUnknown_811756C[];
+
+void GroundMap_GetStationScript(ScriptInfoSmall *r0, s32 _groundScriptId, s32 _groupId, s32 _sectorId)
+{
+    const struct GroundScriptHeader *scriptHeader;
+    s32 groundScriptId = (s16) _groundScriptId;
+    s32 groupId = (s16) _groupId;
+    s32 sectorId = (s8) _sectorId;
+
+    ChangeScriptFile(groundScriptId);
+    scriptHeader = GetGroundScript(groundScriptId, &gUnknown_8117560);
+    Log(0, gUnknown_811756C, groundScriptId, groupId, sectorId);
+    {
+        const struct GroundScriptGroup *groups = &scriptHeader->groups[groupId];
+        const struct GroundScriptSector *sectors = &groups->sectors[sectorId];
+        r0->ptr = sectors->station[0]->script;
+    }
+
+    r0->state = 2;
+    r0->group = groupId;
+    r0->sector = sectorId;
+}
