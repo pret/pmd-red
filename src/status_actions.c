@@ -1,6 +1,5 @@
 #include "global.h"
 #include "status_actions.h"
-
 #include "charge_move.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
@@ -34,6 +33,7 @@
 #include "trap.h"
 #include "weather.h"
 #include "called_move_data.h"
+#include "dungeon_battle_data.h"
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void HandleOneRoomOrb(Entity *, Entity *);
@@ -98,7 +98,6 @@ extern u8 *gPtrSleepingTargetOnlyMessage[];
 extern u8 *gUnknown_80FAFF0[];
 extern u32 gUnknown_80F4F58;
 extern u32 gUnknown_8106A4C;
-extern s16 gUnknown_80F4E74[];
 extern u8 *gUnknown_80FD450[];
 extern u8 *gUnknown_80FD434[];
 extern s16 gUnknown_80F4F80;
@@ -789,7 +788,7 @@ bool8 CleanseOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_
 
 bool8 SlumberOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    SleepStatusTarget(pokemon,target,CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
+    SleepStatusTarget(pokemon,target,CalculateStatusTurns(target, gSleepTurnRange, TRUE), TRUE);
     return TRUE;
 }
 

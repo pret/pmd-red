@@ -33,6 +33,7 @@
 #include "tile_types.h"
 #include "weather.h"
 #include "called_move_data.h"
+#include "dungeon_battle_data.h"
 
 extern const u8 *const gUnknown_80FD350;
 extern const u8 *const gUnknown_80FD370;
@@ -54,7 +55,6 @@ extern s16 gUnknown_80F4DBC;
 extern u8 *gUnknown_80FACC4[];
 extern s16 gUnknown_80F4DF4;
 extern u32 gUnknown_80F4F4C;
-extern s16 gUnknown_80F4EB8[];
 extern u8 gUnknown_202F21A;
 extern s16 gUnknown_80F500A[];
 extern s16 gUnknown_80F4DD6;
@@ -81,7 +81,6 @@ extern u8 *gUnknown_80FADD8[];
 extern s16 gUnknown_80F4E02;
 extern s16 gUnknown_80F4E04;
 extern s16 gUnknown_80F4DB6;
-extern s16 gUnknown_80F4EDC[];
 extern u16 gUnknown_80F4F42;
 extern u8 *gUnknown_80FAC88;
 extern u8 *gUnknown_80FD018[];
@@ -102,8 +101,6 @@ extern u8 *gUnknown_80FD14C[];
 extern u8 *gUnknown_80FAD4C[];
 extern u32 gUnknown_80F4F68;
 extern s16 gUnknown_80F502A[];
-extern s16 gUnknown_80F4E74[];
-extern s16 gUnknown_80F4E78[];
 extern s16 gUnknown_80F4F28[];
 extern u32 gUnknown_8106A54[];
 extern s16 gUnknown_80F4DF0;
@@ -127,7 +124,6 @@ extern u8 *gUnknown_80FAD2C[];
 extern u32 gUnknown_80F4F64;
 extern u8 gSecretPowerTable[];
 extern s16 gUnknown_80F4E06;
-extern s16 gUnknown_80F4E94[];
 extern u8 *gUnknown_80FC74C[];
 extern u8 *gUnknown_80FC790[];
 extern u8 *gUnknown_80FC7AC[];
@@ -151,7 +147,6 @@ extern s16 gUnknown_80F4F82;
 extern u8 *gUnknown_80FEBDC[];
 extern u8 *gUnknown_80FC5CC[];
 extern s16 gUnknown_80F4DFA;
-extern s16 gUnknown_80F4EE0;
 extern u8 *gUnknown_81004EC[];
 extern s16 gUnknown_80F4DDA;
 extern s16 gUnknown_80F4DFE;
@@ -309,13 +304,13 @@ bool8 YawnMoveAction(Entity * pokemon, Entity *target, Move *move, s32 param_4)
 // NOTE: Is there a better name for this?
 bool8 BasicSleepMoveAction(Entity * pokemon, Entity *target, Move *move, s32 param_4)
 {
-    SleepStatusTarget(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
+    SleepStatusTarget(pokemon, target, CalculateStatusTurns(target, gSleepTurnRange, TRUE), TRUE);
     return TRUE;
 }
 
 bool8 NightmareMoveAction(Entity * pokemon, Entity *target, Move *move, s32 param_4)
 {
-    NightmareStatusTarget(pokemon, target, CalculateStatusTurns(target,gUnknown_80F4E78,TRUE));
+    NightmareStatusTarget(pokemon, target, CalculateStatusTurns(target,gNightmareTurnRange,TRUE));
     return TRUE;
 }
 
@@ -644,7 +639,7 @@ bool8 FocusEnergyMoveAction(Entity * pokemon, Entity * target, Move *move, s32 p
 
 bool8 SmokescreenMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    WhifferStatusTarget(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4EDC, TRUE));
+    WhifferStatusTarget(pokemon, target, CalculateStatusTurns(target, gWhifferTurnRange, TRUE));
     return TRUE;
 }
 
@@ -1224,7 +1219,7 @@ bool8 RapidSpinMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param
 
 bool8 SureShotMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-    SureShotStatusTarget(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4EB8, FALSE));
+    SureShotStatusTarget(pokemon, target, CalculateStatusTurns(target, gSureShotTurnRange, FALSE));
     return TRUE;
 }
 
@@ -2485,7 +2480,7 @@ bool8 AssistMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
 bool8 RestMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-    NappingStatusTarget(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E94, FALSE));
+    NappingStatusTarget(pokemon, target, CalculateStatusTurns(target, gNappingTurnRange, FALSE));
     return TRUE;
 }
 
@@ -2801,7 +2796,7 @@ bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, Move *move, u32 p
                 PoisonedStatusTarget(pokemon,target,FALSE);
                 break;
             case 1:
-                SleepStatusTarget(pokemon,target,CalculateStatusTurns(target,gUnknown_80F4E74,TRUE),FALSE);
+                SleepStatusTarget(pokemon,target,CalculateStatusTurns(target,gSleepTurnRange,TRUE),FALSE);
                 break;
             case 2:
                 LowerMovementSpeedTarget(pokemon,target,1,FALSE);
@@ -2855,7 +2850,7 @@ bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
 bool8 ObserverOrbAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-    PausedStatusTarget(pokemon, target, 1, CalculateStatusTurns(target, &gUnknown_80F4EE0, TRUE), TRUE);
+    PausedStatusTarget(pokemon, target, 1, CalculateStatusTurns(target, gObserverOrbPausedTurnRange, TRUE), TRUE);
     return TRUE;
 }
 

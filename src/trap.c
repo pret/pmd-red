@@ -1,6 +1,5 @@
 #include "global.h"
 #include "trap.h"
-
 #include "code_803E668.h"
 #include "code_803E724.h"
 #include "code_80450F8.h"
@@ -25,6 +24,7 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_806B7F8.h"
+#include "dungeon_battle_data.h"
 
 extern u8 *gTrapNames[];
 extern u8 *gUnknown_80FC5FC[];
@@ -33,7 +33,6 @@ extern u8 *gUnknown_80FDB5C[];
 extern u8 *gUnknown_80FDB7C[];
 extern u8 *gUnknown_80FD7F4[];
 extern u8 *gUnknown_80FD7F8[];
-extern s16 gUnknown_80F4E74[];
 extern u8 *gUnknown_80FDC18[];
 extern u8 *gUnknown_80FDC40[];
 extern u8 *gUnknown_80FDC7C[];
@@ -444,7 +443,7 @@ void HandleSlumberTrap(Entity *pokemon, Entity *target)
 
     if(target != NULL)
     {
-        turns  = CalculateStatusTurns(target, gUnknown_80F4E74, TRUE);
+        turns  = CalculateStatusTurns(target, gSleepTurnRange, TRUE);
         SleepStatusTarget(pokemon, target, turns, TRUE);
     }
 }

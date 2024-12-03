@@ -26,6 +26,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_position.h"
+#include "dungeon_battle_data.h"
 
 extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
 
@@ -55,7 +56,6 @@ extern s16 gUnknown_80F5046;
 extern s16 gUnknown_80F5048;
 extern s16 gUnknown_80F4FAE;
 extern s16 gUnknown_80F4FAC;
-extern s16 gUnknown_80F4E74[];
 
 extern u8 *gUnknown_80FDBB8[];
 extern u8 *gUnknown_80FE458[];
@@ -473,7 +473,7 @@ UNUSED void nullsub_205(void) { }
 
 void SleepSeedItemAction(Entity *pokemon, Entity *target)
 {
-    SleepStatusTarget(pokemon, target, CalculateStatusTurns(target, gUnknown_80F4E74, TRUE), TRUE);
+    SleepStatusTarget(pokemon, target, CalculateStatusTurns(target, gSleepTurnRange, TRUE), TRUE);
 }
 
 void sub_80482FC(Entity *pokemon, Entity *target, u32 pp, u8 param_4)

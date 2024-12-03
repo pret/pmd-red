@@ -40,6 +40,7 @@
 #include "code_803E46C.h"
 #include "code_8041AD0.h"
 #include "code_800E9E4.h"
+#include "dungeon_battle_data.h"
 
 extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);
@@ -321,8 +322,6 @@ extern const s16 gUnknown_80F5006;
 extern const s32 gUnknown_80F519C;
 extern const s32 gUnknown_80F51A0;
 extern const s32 gUnknown_80F50F4[2][21];
-extern const s16 gUnknown_80F4E70[];
-extern const s16 gUnknown_80F4E74[];
 extern const u16 gUnknown_80F5004;
 extern const u8 *const gUnknown_80FEEA4;
 extern const u8 *const gUnknown_80FEEC8;
@@ -1951,7 +1950,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
             gUnknown_202F222 = 0;
             if (EntityExists(attacker)) {
                 EntityInfo *attackerInfo = GetEntInfo(attacker);
-                s32 statusTurns = CalculateStatusTurns(attacker, gUnknown_80F4E70, TRUE);
+                s32 statusTurns = CalculateStatusTurns(attacker, gPauseTurnRange, TRUE);
                 PausedStatusTarget(attacker, attacker, 1, statusTurns, FALSE);
                 SetExpMultplier(attackerInfo);
             }
@@ -1996,7 +1995,7 @@ static void TriggerTargetAbilityEffect(Entity *attacker)
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_SLP) {
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF54); // Effect Spore scattered spores!
-            SleepStatusTarget(attacker, attacker, CalculateStatusTurns(attacker, gUnknown_80F4E74, TRUE), TRUE);
+            SleepStatusTarget(attacker, attacker, CalculateStatusTurns(attacker, gSleepTurnRange, TRUE), TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_FLAME_BODY) {
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF74); // Flame Body caused a burn!

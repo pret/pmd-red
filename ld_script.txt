@@ -541,6 +541,7 @@ SECTIONS {
         src/status_checks.o(.rodata);
         data/data_80F4DB4.o(.rodata);
         src/dungeon_ai_attack.o(.rodata);
+		src/dungeon_battle_data.o(.rodata);
         data/data_80F4E2C.o(.rodata);
         src/type_chart.o(.rodata);
         data/data_80F54B4.o(.rodata);

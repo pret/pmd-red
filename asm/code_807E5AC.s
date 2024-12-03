@@ -192,7 +192,7 @@ MudWaterSportEffect:
 	bl LogMessageByIdWithPopupCheckUser
 	b _0807EA8C
 	.align 2, 0
-_0807EA5C: .4byte gUnknown_80F4EAC
+_0807EA5C: .4byte gMudWaterSportTurnRange
 _0807EA60: .4byte gDungeon
 _0807EA64: .4byte 0x0000e277
 _0807EA68: .4byte gUnknown_80FAD8C
@@ -214,7 +214,7 @@ _0807EA8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807EA90: .4byte gUnknown_80F4EAC
+_0807EA90: .4byte gMudWaterSportTurnRange
 _0807EA94: .4byte gDungeon
 _0807EA98: .4byte 0x0000e278
 _0807EA9C: .4byte gUnknown_80FADB0
