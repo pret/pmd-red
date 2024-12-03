@@ -38,7 +38,7 @@ s32 GroundLink_GetPos(s32 _arg0, PixelPos *pos)
     if (!(ptr->pos.xFlags & 4)) {
         s32 xAdd = IntToF248(4).raw;
 
-        pos->x = ptr->pos.xTiles << 0xB;
+        pos->x = IntToF248(ptr->pos.xTiles * 8).raw;
         if (ptr->pos.xFlags & 2) {
             pos->x += xAdd;
         }
@@ -47,7 +47,7 @@ s32 GroundLink_GetPos(s32 _arg0, PixelPos *pos)
     if (!(ptr->pos.yFlags & 4)) {
         s32 yAdd = IntToF248(4).raw;
 
-        pos->y = ptr->pos.yTiles << 0xB;
+        pos->y = IntToF248(ptr->pos.yTiles * 8).raw;
         if (ptr->pos.yFlags & 2) {
             pos->y += yAdd;
         }
@@ -66,7 +66,7 @@ s32 GroundLink_GetArea(s32 _arg0, PixelPos *arg1, PixelPos *arg2, PixelPos *arg3
     {
         s32 xAdd = IntToF248(4).raw;
 
-        arg1->x = ptr->pos.xTiles  << 0xB;
+        arg1->x = IntToF248(ptr->pos.xTiles * 8).raw;
         if (ptr->pos.xFlags & 2)
             arg1->x += xAdd;
     }
@@ -75,13 +75,13 @@ s32 GroundLink_GetArea(s32 _arg0, PixelPos *arg1, PixelPos *arg2, PixelPos *arg3
     {
         s32 yAdd = IntToF248(4).raw;
 
-        arg1->y = ptr->pos.yTiles  << 0xB;
+        arg1->y = IntToF248(ptr->pos.yTiles * 8).raw;
         if (ptr->pos.yFlags & 2) {
             arg1->y += yAdd;
         }
     }
 
-    arg2->x = arg1->x + (ptr->width << 0xB);
-    arg2->y = arg1->y + (ptr->height << 0xB);
+    arg2->x = arg1->x + IntToF248(ptr->width * 8).raw;
+    arg2->y = arg1->y + IntToF248(ptr->height * 8).raw;
     return ptr->ret;
 }
