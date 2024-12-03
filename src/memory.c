@@ -65,7 +65,6 @@ static EWRAM_DATA struct HeapFreeListElement sMainHeapFreeList[32] = {0};
 static EWRAM_DATA u8 sMainHeap[HEAP_SIZE] = {0};
 
 static void DoFree(struct HeapDescriptor *, void *);
-static void *DoAlloc(struct HeapDescriptor *, s32, u32);
 static void DoInitHeap(struct HeapDescriptor *, struct HeapSettings *, struct HeapFreeListElement *, u32);
 static void InitSubHeap(struct HeapDescriptor *, struct HeapMemoryBlock2 *, u32);
 static struct HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b);
@@ -464,7 +463,7 @@ error:
 
 void *MemoryAlloc(s32 size, s32 group)
 {
-    DoAlloc(&sMainHeapDescriptor, size, group);
+    return DoAlloc(&sMainHeapDescriptor, size, group);
 }
 
 void MemoryFree(void *a)
