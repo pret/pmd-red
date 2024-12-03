@@ -41,15 +41,13 @@
 #include "structs/str_806B7F8.h"
 #include "structs/str_202ED28.h"
 
-struct unkStruct_80F520C
+struct CastformWeatherData
 {
-    u8 unk0; // types0
-    u8 unk1; // Most likely just padding and should be removed
-    s16 unk2; // monsterID
+    u8 type;
+    s16 monsterId;
 };
 
-// Castform Forecast ability data
-extern const struct unkStruct_80F520C gUnknown_80F520C[WEATHER_RANDOM];
+extern const struct CastformWeatherData gCastformByWeather[WEATHER_COUNT];
 
 extern u8 gUnknown_80F51E4[];
 extern u8 *gUnknown_80FCC7C[];
@@ -109,7 +107,7 @@ void sub_8069E0C(Entity *pokemon)
 
   entityInfo = GetEntInfo(pokemon);
   if (AbilityIsActive(pokemon, ABILITY_FORECAST)) {
-    entityInfo->types[0] = gUnknown_80F520C[GetApparentWeather(pokemon)].unk0;
+    entityInfo->types[0] = gCastformByWeather[GetApparentWeather(pokemon)].type;
     entityInfo->types[1] = TYPE_NONE;
   }
   else {
@@ -156,7 +154,7 @@ s32 GetMonsterApparentID(Entity *pokemon, s32 _id)
     s16 id = (s16)(_id);
     if (id == MONSTER_CASTFORM || IS_CASTFORM_FORM_MONSTER(id)) {
         if (AbilityIsActive(pokemon, ABILITY_FORECAST))
-            return gUnknown_80F520C[GetApparentWeather(pokemon)].unk2;
+            return gCastformByWeather[GetApparentWeather(pokemon)].monsterId;
         return MONSTER_CASTFORM;
     }
 
@@ -1863,7 +1861,7 @@ void ResetMonEntityData(EntityInfo *entInfo, bool8 setStatsToOne)
     }
 
     if (hasForecast) {
-        entInfo->types[0] = gUnknown_80F520C[GetApparentWeather(NULL)].unk0;
+        entInfo->types[0] = gCastformByWeather[GetApparentWeather(NULL)].type;
         entInfo->types[1] = TYPE_NONE;
     }
     else {

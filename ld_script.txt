@@ -266,6 +266,7 @@ SECTIONS {
         src/code_807CD9C.o(.text);
         src/code_807E1A0.o(.text);
         src/weather.o(.text);
+        src/code_807E5AC.o(.text);
         asm/code_807E5AC.o(.text);
         src/trap.o(.text);
         asm/code_807FCD4.o(.text);

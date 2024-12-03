@@ -328,6 +328,8 @@ typedef struct unkDungeon57C
     s32 unk40;
 } unkDungeon57C;
 
+#define COLOR_RAMP_COUNT 256
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -357,7 +359,7 @@ typedef struct Dungeon
     Entity *unkBC;
     u8 fillC0[0x134 - 0xC0];
     struct unkStruct_Dungeon134_sub unk134;
-    /* 0x47C */ RGB colorRamp[0x100];
+    /* 0x17C */ RGB colorRamp[COLOR_RAMP_COUNT];
     /* 0x57C */ unkDungeon57C unk57C;
     /* 0x5C0 */ s32 unk5C0;
     /* 0x5C4 */ struct unkStruct_Dungeon5C4_sub unk5C4[3];

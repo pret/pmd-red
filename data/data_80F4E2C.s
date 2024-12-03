@@ -809,8 +809,8 @@ gUnknown_80F51EC: @ 80F51EC
 .4byte 512
 .4byte 512
 
-	.global gUnknown_80F520C
-gUnknown_80F520C: @ 80F520C
+	.global gCastformByWeather
+gCastformByWeather: @ 80F520C
 @ replacing .incbin "baserom.gba", 0x000f520c, 0x20
 .byte 0x01, 0x00, 0x78, 0x01
 .byte  0x02, 0x00, 0x7a, 0x01
