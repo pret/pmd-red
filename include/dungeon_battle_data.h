@@ -79,5 +79,27 @@ extern const s16 gMoveWeatherDuration;
 extern const s16 gGinsengPlus3BoostChance;
 extern const s24_8 gSolarBeamModifier;
 extern const s24_8 gSkyAttackModifier;
+extern const s24_8 gRazorWindModifier;
+extern const s24_8 gFocusPunchModifier;
+extern const s24_8 gSkullBashModifier;
+extern const s24_8 gFlyModifier;
+extern const s24_8 gBounceModifier;
+extern const s24_8 gDiveModifier;
+extern const s24_8 gDigModifier;
+extern const s24_8 gFacadeModifier;
+
+extern const s16 gBurnDmgValue;
+extern const s16 gPoisonDmgValue;
+extern const s16 gConstrictionDmgValue;
+extern const s16 gWrapDmgValue;
+extern const s16 gNightmareDmgValue;
+extern const s16 gNappingHpHealValue;
+extern const s16 gSonicboomDmgValue;
+extern const s16 gDragonRageDmgValue;
+extern const s16 gVacuumCutDmgValue;
+extern const s16 gSplashDmgValue;
+extern const s16 gSpikeTrapDmgValue;
+extern const s16 gChestnutTrapDmgValue;
+extern const s16 gPitfallTrapDmgValue;
 
 #endif

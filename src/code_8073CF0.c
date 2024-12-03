@@ -88,15 +88,11 @@ extern const s16 gWarpScarfActivationChances[];
 extern const s16 gUnknown_80F4FC8[];
 extern const s16 gUnknown_80F4F8E;
 extern const s16 gUnknown_80F4E0C;
-extern const s16 gUnknown_80F4F70;
-extern const s16 gUnknown_80F4F72;
 extern const s16 gUnknown_80F4FC4;
 extern const s16 gUnknown_80F4FC0;
 extern const s16 gUnknown_80F4FB2;
 extern const s16 gUnknown_80F4FB4;
-extern const s16 gUnknown_80F4F74;
 extern const s16 gUnknown_80F4FC2;
-extern const s16 gUnknown_80F4F76;
 extern s48_16 gUnknown_80F54F4[8];
 extern const s32 gUnknown_80F60DC[];
 
@@ -428,7 +424,7 @@ void sub_8074094(Entity *entity)
                 return;
             entityInfo->burnClassStatus.damageCountdown = gBurnDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gUnknown_80F4F70, 1, 0x208);
+            DealDamageToEntity(entity, gBurnDmgValue, 1, 0x208);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
@@ -441,7 +437,7 @@ void sub_8074094(Entity *entity)
                 return;
             entityInfo->burnClassStatus.damageCountdown = gPoisonDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gUnknown_80F4F72, 3, 0x20A);
+            DealDamageToEntity(entity, gPoisonDmgValue, 3, 0x20A);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
@@ -474,7 +470,7 @@ void sub_8074094(Entity *entity)
             entityInfo->frozenClassStatus.damageCountdown = gConstrictionDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             sub_8041C4C(entity, entityInfo->frozenClassStatus.unk4);
-            DealDamageToEntity(entity, gUnknown_80F4F74, 2, 0x209);
+            DealDamageToEntity(entity, gConstrictionDmgValue, 2, 0x209);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;
@@ -486,7 +482,7 @@ void sub_8074094(Entity *entity)
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gWrapDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
-            DealDamageToEntity(entity, gUnknown_80F4F76, 5, 0x20B);
+            DealDamageToEntity(entity, gWrapDmgValue, 5, 0x20B);
         }
         if (!EntityExists(entity) || sub_8044B28())
             return;

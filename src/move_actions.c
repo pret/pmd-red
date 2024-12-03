@@ -60,10 +60,8 @@ extern s16 gUnknown_80F4DD6;
 extern u8 gUnknown_202F219;
 extern s24_8 gUnknown_80F51A4[];
 extern u8 *gUnknown_80FACA4[];
-extern s24_8 gUnknown_80F4F54;
 extern u8 *gUnknown_80FD104[];
 extern s16 gUnknown_80F4DD4;
-extern s24_8 gUnknown_80F4F6C;
 extern u32 gUnknown_80F4DE6;
 extern u32 gUnknown_80F4DEE;
 extern u32 gUnknown_80F4DC2;
@@ -71,7 +69,6 @@ extern u8 *gUnknown_80FD294[];
 extern u8 *gUnknown_80FD2B4[];
 extern u8 *gUnknown_80FAC74[];
 extern u8 *gUnknown_80FAC54[];
-extern s24_8 gUnknown_80F4F50;
 extern s16 gUnknown_80F4DB8;
 extern s16 gUnknown_80F4DBA;
 extern s16 gUnknown_80F55BC[];
@@ -97,7 +94,6 @@ extern u32 gUnknown_8106A50;
 extern s16 gUnknown_80F4E08;
 extern u8 *gUnknown_80FD14C[];
 extern u8 *gUnknown_80FAD4C[];
-extern s24_8 gUnknown_80F4F68;
 extern s16 gUnknown_80F502A[];
 extern s24_8 gUnknown_8106A54[];
 extern s16 gUnknown_80F4DF0;
@@ -105,9 +101,7 @@ extern s16 gUnknown_80F4DE0;
 extern s16 gUnknown_80F4DC4;
 extern u8 *gUnknown_80FCF78[];
 extern s16 gUnknown_80F4DF0;
-extern s24_8 gUnknown_80F4F5C;
 extern u8 *gUnknown_80FACFC[];
-extern s16 gUnknown_80F4F7C;
 extern u8 *gUnknown_80FACE4[];
 extern u8 *gUnknown_80FEB8C[];
 extern u32 gUnknown_8106A4C;
@@ -117,7 +111,6 @@ extern s16 gUnknown_80F4DEC;
 extern s16 gUnknown_80F4E00;
 extern u8 *gUnknown_80FD128[];
 extern u8 *gUnknown_80FAD2C[];
-extern s24_8 gUnknown_80F4F64;
 extern u8 gSecretPowerTable[];
 extern s16 gUnknown_80F4E06;
 extern u8 *gUnknown_80FC74C[];
@@ -138,7 +131,6 @@ extern u8 *gUnknown_80FD170[];
 extern u8 *gUnknown_80FCCE8[];
 extern u8 *gUnknown_80FD18C[];
 extern u8 *gUnknown_80FD57C[];
-extern s16 gUnknown_80F4F82;
 extern u8 *gUnknown_80FEBDC[];
 extern u8 *gUnknown_80FC5CC[];
 extern s16 gUnknown_80F4DFA;
@@ -148,7 +140,6 @@ extern s16 gUnknown_80F4DFE;
 extern u8 *gUnknown_81004EC[];
 extern s16 gUnknown_80F4DFC;
 extern u8 *gUnknown_80FC7C8[];
-extern s24_8 gUnknown_80F4F60;
 extern u8 *gUnknown_80FAD10[];
 extern s16 gUnknown_80F4DCC;
 extern s16 gUnknown_80F4DBE;
@@ -333,7 +324,7 @@ bool8 DigMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     }
     else {
         if (MoveMatchesBideClassStatus(pokemon,move)) {
-            HandleDamagingMove(pokemon,target,move,gUnknown_80F4F68,param_4);
+            HandleDamagingMove(pokemon,target,move,gDigModifier,param_4);
             sub_8079764(pokemon);
         }
         else {
@@ -875,7 +866,7 @@ bool8 RazorWindMoveAction(Entity * pokemon, Entity * target, Move * move, u32 pa
   bool8 flag;
 
   if (MoveMatchesBideClassStatus(pokemon,move)) {
-    flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F4F50,param_4) ? TRUE : FALSE;
+    flag = HandleDamagingMove(pokemon,target,move,gRazorWindModifier,param_4) ? TRUE : FALSE;
     sub_8079764(pokemon);
   }
   else {
@@ -980,7 +971,7 @@ bool8 FacadeMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
   modifier = IntToF248_2(1);
   if((GetEntInfo(pokemon)->burnClassStatus.status) != STATUS_NONE)
-    modifier = gUnknown_80F4F6C;
+    modifier = gFacadeModifier;
   flag =  HandleDamagingMove(pokemon,target,move,modifier,param_4) ? TRUE : FALSE;
   return flag;
 }
@@ -1035,7 +1026,7 @@ bool8 FocusPunchMoveAction(Entity * pokemon, Entity * target, Move * move, u32 p
   bool8 flag;
 
   if (MoveMatchesBideClassStatus(pokemon,move)) {
-    flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F4F54,param_4) ? TRUE : FALSE;
+    flag = HandleDamagingMove(pokemon,target,move,gFocusPunchModifier,param_4) ? TRUE : FALSE;
     sub_8079764(pokemon);
   }
   else {
@@ -1812,7 +1803,7 @@ bool8 SonicboomMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param
     u8 local_20;
 
     local_20 = 0;
-    sub_806F370(pokemon,target,gUnknown_80F4F7C,1,&local_20,GetMoveType(move),sub_8057600(move,param_4),0,1,0);
+    sub_806F370(pokemon,target,gSonicboomDmgValue,1,&local_20,GetMoveType(move),sub_8057600(move,param_4),0,1,0);
     local_20 = local_20 == 0;
     return local_20;
 }
@@ -1823,7 +1814,7 @@ bool8 FlyMoveAction(Entity * pokemon, Entity * target, Move * move, u32 param_4)
 
   flag = FALSE;
   if (MoveMatchesBideClassStatus(pokemon,move)) {
-      flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F4F5C,param_4) != 0 ? TRUE : FALSE;
+      flag = HandleDamagingMove(pokemon,target,move,gFlyModifier,param_4) != 0 ? TRUE : FALSE;
       sub_8079764(pokemon);
   }
   else {
@@ -1848,7 +1839,7 @@ bool8 DiveMoveAction(Entity * pokemon, Entity * target, Move * move, u32 param_4
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD128);
   }
   else if (MoveMatchesBideClassStatus(pokemon,move)) {
-      flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F4F64,param_4) != 0 ? TRUE : FALSE;
+      flag = HandleDamagingMove(pokemon,target,move,gDiveModifier,param_4) != 0 ? TRUE : FALSE;
       sub_8079764(pokemon);
   }
   else {
@@ -2180,7 +2171,7 @@ bool8 BounceMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param_4)
 
   flag = FALSE;
   if (MoveMatchesBideClassStatus(pokemon, move)) {
-    if (HandleDamagingMove(pokemon, target, move, gUnknown_80F4F60, param_4) != 0) {
+    if (HandleDamagingMove(pokemon, target, move, gBounceModifier, param_4) != 0) {
       flag = TRUE;
       if (sub_805727C(pokemon, target, gUnknown_80F4DCC) != 0) {
         ParalyzeStatusTarget(pokemon, target, FALSE);
@@ -2701,10 +2692,10 @@ _0805A8C2:
     if (GetEntityType(entity) == ENTITY_MONSTER) {
       InitPokemonMove(&stackMove,MOVE_REGULAR_ATTACK);
       if (sub_80571F0(entity,&stackMove) == 0) {
-        sub_806F370(pokemon,entity,gUnknown_80F4F82,0,0,TYPE_NONE,sub_8057600(move, param_4),0,1,0);
+        sub_806F370(pokemon,entity,gSplashDmgValue,0,0,TYPE_NONE,sub_8057600(move, param_4),0,1,0);
       }
       if ((sub_8044B28() == 0) && (EntityExists(pokemon))) {
-        sub_806F370(pokemon,pokemon,gUnknown_80F4F82,0,0,0,0x1fe,0,0,0);
+        sub_806F370(pokemon,pokemon,gSplashDmgValue,0,0,0,0x1fe,0,0,0);
         if ((sub_8044B28() == 0) && (EntityExists(pokemon))) goto _0805A9FE;
       }
     }

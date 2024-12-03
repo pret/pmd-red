@@ -300,7 +300,6 @@ extern const s16 gUnknown_80F4E1A;
 extern const s16 gUnknown_80F4E1C;
 extern const s16 gUnknown_80F4E1E;
 extern const s16 gUnknown_80F4E20;
-extern const s16 gUnknown_80F4F8C;
 extern const u8 *const gUnknown_80FCFA4;
 extern const u8 *const gUnknown_80FCA90;
 extern const u8 *const gUnknown_80F9600;

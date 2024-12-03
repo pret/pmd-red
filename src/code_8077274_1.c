@@ -73,8 +73,6 @@ extern u8 *gUnknown_80FABC0[];
 extern u8 *gUnknown_80FA888[];
 extern u8 *gUnknown_80FA8A8[];
 extern u8 *gUnknown_80FA868[];
-extern s16 gUnknown_80F4F78;
-extern s32 gUnknown_80F4F7A;
 extern u8 *gUnknown_80FA6E8[];
 extern u8 *gUnknown_80FA708[];
 extern u8 *gUnknown_80FA70C[];
@@ -1155,13 +1153,13 @@ void EndSleepClassStatus(Entity * pokemon, Entity * target, bool8 param_3, bool8
             isAsleep = TRUE;
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FA70C);
             if (param_4) {
-                DealDamageToEntity(target,gUnknown_80F4F78,8,0x20f);
+                DealDamageToEntity(target,gNightmareDmgValue,8,0x20f);
             }
             break;
         case STATUS_NAPPING:
             isAsleep = TRUE;
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FA710);
-            HealTargetHP(pokemon,target,gUnknown_80F4F7A, 0, FALSE);
+            HealTargetHP(pokemon,target,gNappingHpHealValue, 0, FALSE);
             entityInfo->sleepClassStatus.status = 0;
             sub_8079F20(pokemon,target,1,1);
             break;
