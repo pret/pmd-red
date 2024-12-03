@@ -238,3 +238,206 @@ void sub_808D144(PokemonStruct1 *pokemon, struct unkStruct_808D144 *r1)
     }
 }
 
+
+PokemonStruct1 *sub_808D1DC(PokemonStruct1 *pokemon)
+{
+    u32 friendArea;
+    s32 i;
+
+    s32 species  = pokemon->speciesNum;
+    friendArea = gMonsterParameters[species].friendArea;
+
+    if(!gFriendAreas[friendArea]) return NULL;
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        if (!PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])) {
+            u8 speciesFriendArea = sub_80923D4(i);
+            if (speciesFriendArea == friendArea) {
+                gRecruitedPokemonRef->pokemon[i] = *pokemon;
+                gRecruitedPokemonRef->pokemon[i].unk0 &= 0xbfff;
+                sub_80980B4(pokemon->speciesNum);
+                return &gRecruitedPokemonRef->pokemon[i];
+            }
+        }
+    }
+    return NULL;
+}
+
+PokemonStruct1 *sub_808D278(s16 species, PokemonStruct1 *pokemon)
+{
+    u32 friendArea;
+    s32 i;
+
+    friendArea = gMonsterParameters[species].friendArea;
+
+    if(!gFriendAreas[friendArea]) return NULL;
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        if (!PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])) {
+            u8 speciesFriendArea = sub_80923D4(i);
+            if (speciesFriendArea == friendArea) {
+                return &gRecruitedPokemonRef->pokemon[i];
+            }
+        }
+    }
+    return NULL;
+}
+
+PokemonStruct1 *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation *location, u16 *moveID)
+{
+    PokemonStruct1 pokemon;
+
+    sub_808CFD0(&pokemon, species, name, (u8)_itemID, location, moveID);
+    return sub_808D1DC(&pokemon);
+}
+
+void sub_808D31C(PokemonStruct1 *param_1)
+{
+    bool8 flag;
+#ifndef NONMATCHING
+    register bool32 flag_32 asm("r0");
+#else
+    bool32 flag_32;
+#endif
+
+    if ((!param_1->isTeamLeader)){
+        flag = ((param_1->dungeonLocation).id == 0x41);
+        flag_32 = flag;
+        if(!flag_32) param_1->unk0 = flag_32;    
+    }
+}
+
+PokemonStruct1 * GetPlayerPokemonStruct(void)
+{
+    s32 index;
+
+    for(index = 0; index < NUM_MONSTERS; index++)
+    {
+        if(((PokemonFlag1(&gRecruitedPokemonRef->pokemon[index])))){
+            if(IsMonTeamLeader(&gRecruitedPokemonRef->pokemon[index])) {
+                return &gRecruitedPokemonRef->pokemon[index];
+            }
+        }
+    }
+    return NULL;
+}
+
+PokemonStruct1 * sub_808D378(void)
+{
+    s32 index;
+
+    for(index = 0; index < NUM_MONSTERS; index++)
+    {
+        if(((PokemonFlag1(&gRecruitedPokemonRef->pokemon[index])))){
+            if(IsMonPartner(&gRecruitedPokemonRef->pokemon[index])) {
+                return &gRecruitedPokemonRef->pokemon[index];
+            }
+        }
+    }
+    return NULL;
+}
+
+// NOTE: couldn't match with macros..
+// https://decomp.me/scratch/Qorg0 
+PokemonStruct1 * sub_808D3BC(void)
+{
+  PokemonStruct1 *pokeStruct;
+  s32 index;
+  
+  for(index = 0; index < NUM_MONSTERS; index++)
+  {
+       pokeStruct = &gRecruitedPokemonRef->pokemon[index];
+       if(((*(u8 *)&pokeStruct->unk0 & FLAG_UNK_1) && (pokeStruct->dungeonLocation.id == DUNGEON_JOIN_LOCATION_LEADER))) {
+            return pokeStruct;
+       }
+  }
+  return NULL;
+}
+
+// NOTE: couldn't match with macros..
+// https://decomp.me/scratch/jCa3V 
+PokemonStruct1 * sub_808D3F8(void)
+{
+  PokemonStruct1 *pokeStruct;
+  s32 index;
+  
+  for(index = 0; index < NUM_MONSTERS; index++)
+  {
+       pokeStruct = &gRecruitedPokemonRef->pokemon[index];
+       if(((*(u8 *)&pokeStruct->unk0 & FLAG_UNK_1) && (pokeStruct->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER))) {
+            return &gRecruitedPokemonRef->pokemon[index];
+       }
+  }
+  return NULL;
+}
+
+PokemonStruct1 * sub_808D434(s16 species, s32 param_2)
+{
+    PokemonStruct1 *pokeStruct;
+    s32 index;
+    s32 counter;
+    s32 species_s32 = species;
+
+    pokeStruct = gRecruitedPokemonRef->pokemon;
+    counter = 0;
+    for(index = 0; index < NUM_MONSTERS; index++, pokeStruct++)
+    {
+        if(((PokemonFlag1(pokeStruct)) && (pokeStruct->speciesNum == species_s32))) {
+            if (counter == param_2)
+                return pokeStruct;
+            counter++;
+        }
+    }
+    return NULL;
+}
+
+s32 GetFriendSum_808D480(void)
+{
+    s32 index;
+    s32 count;
+    PokemonStruct1 *pokeStruct;
+
+    pokeStruct = gRecruitedPokemonRef->pokemon;
+    count = 0;
+    for(index = 0; index < NUM_MONSTERS; index++, pokeStruct++)
+    {
+        if(PokemonFlag1(pokeStruct)){
+            count++;
+        }
+    }
+    return count;
+}
+
+bool8 sub_808D4B0(void)
+{
+    s32 index;
+    PokemonStruct1 *pokeStruct;
+    bool8 flag;
+
+    pokeStruct = gRecruitedPokemonRef->pokemon;
+    flag = FALSE;
+    for(index = 0; index < NUM_MONSTERS; index++, pokeStruct++)
+    {
+        if(PokemonFlag2(pokeStruct) && !IsMonTeamLeader(pokeStruct) && !IsMonPartner(pokeStruct)){
+            flag = TRUE;
+            pokeStruct->unk0 &= 0xFFFD;
+        }
+    }
+    return flag;
+}
+
+bool8 sub_808D500(void)
+{
+    s32 index;
+    PokemonStruct1 *pokeStruct;
+    bool8 flag;
+
+    pokeStruct = gRecruitedPokemonRef->pokemon;
+    flag = FALSE;
+    for(index = 0; index < NUM_MONSTERS; index++, pokeStruct++)
+    {
+        if(PokemonFlag2(pokeStruct) && !IsMonTeamLeader(pokeStruct)){
+            flag = TRUE;
+            pokeStruct->unk0 &= 0xFFFD;
+        }
+    }
+    return flag;
+}

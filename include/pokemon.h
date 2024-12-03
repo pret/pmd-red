@@ -87,13 +87,17 @@ void ReadPoke1Bits(DataSerializer *, PokemonStruct1 *);
 s32 sub_808E218(unkStruct_808E218_arg *, PokemonStruct1 *pokemon);
 void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID);
 void sub_808D0D8(PokemonStruct1 *pokemon);
+PokemonStruct1 *GetPlayerPokemonStruct(void);
+PokemonStruct1 *sub_808D1DC(PokemonStruct1*);
+PokemonStruct1 *sub_808D378(void);
+PokemonStruct1 *sub_808D3BC(void);
+PokemonStruct1 *sub_808D3F8(void);
+PokemonStruct1 * sub_808D434(s16 species, s32 param_2);
+s32 GetFriendSum_808D480(void);
+bool8 sub_808D4B0(void);
+bool8 sub_808D500(void);
 
 // pokemon.s
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
-extern u32 sub_808D1DC(PokemonStruct1*);
-extern PokemonStruct1 *sub_808D378(void);
-extern PokemonStruct1 *sub_808D3BC(void);
-extern PokemonStruct1 *sub_808D3F8(void);
 extern s32 GetUnitSum_808D544(u32);
 extern s32 sub_808D580(s32 *);
 
