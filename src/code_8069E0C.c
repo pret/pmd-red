@@ -1874,7 +1874,7 @@ void ResetMonEntityData(EntityInfo *entInfo, bool8 setStatsToOne)
     entInfo->flashFireBoost = 0;
     entInfo->stockpileStage = 0;
     entInfo->perishSongTurns = 0;
-    entInfo->unk113 = 0;
+    entInfo->speedBoostFrames = 0;
     entInfo->grudge = 0;
     entInfo->expMultiplier = EXP_HALVED;
     entInfo->exposed = FALSE;

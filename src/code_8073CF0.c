@@ -33,6 +33,7 @@
 #include "code_8077274_1.h"
 #include "dungeon_pokemon_attributes.h"
 #include "math.h"
+#include "dungeon_battle_data.h"
 
 extern bool8 sub_8044B28(void);
 extern void sub_8075708(Entity *entity);
@@ -87,24 +88,15 @@ extern const s16 gWarpScarfActivationChances[];
 extern const s16 gUnknown_80F4FC8[];
 extern const s16 gUnknown_80F4F8E;
 extern const s16 gUnknown_80F4E0C;
-extern const s16 gUnknown_80F4F32;
-extern const s16 gUnknown_80F4F34;
 extern const s16 gUnknown_80F4F70;
 extern const s16 gUnknown_80F4F72;
-extern const s16 gUnknown_80F4F30;
-extern const s16 gUnknown_80F4F38;
 extern const s16 gUnknown_80F4FC4;
 extern const s16 gUnknown_80F4FC0;
-extern const s16 gUnknown_80F4F3A;
-extern const s16 gUnknown_80F4F3C;
 extern const s16 gUnknown_80F4FB2;
-extern const s16 gUnknown_80F4F3E;
 extern const s16 gUnknown_80F4FB4;
-extern const s16 gUnknown_80F4F40;
 extern const s16 gUnknown_80F4F74;
 extern const s16 gUnknown_80F4FC2;
 extern const s16 gUnknown_80F4F76;
-extern const s16 gUnknown_80F4F36;
 extern s48_16 gUnknown_80F54F4[8];
 extern const s32 gUnknown_80F60DC[];
 
@@ -414,9 +406,9 @@ void sub_8074094(Entity *entity)
         sub_8079F20(entity, entity, 1, 0);
     }
     if (AbilityIsActive(entity, ABILITY_SPEED_BOOST)) {
-        entityInfo->unk113++;
-        if (entityInfo->unk113 >= gUnknown_80F4F30) {
-            entityInfo->unk113 = 0;
+        entityInfo->speedBoostFrames++;
+        if (entityInfo->speedBoostFrames >= gSpeedBoostActivationFrame) {
+            entityInfo->speedBoostFrames = 0;
             RaiseMovementSpeedTarget(entity, entity, 0x7F, FALSE);
         }
     }
@@ -434,7 +426,7 @@ void sub_8074094(Entity *entity)
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            entityInfo->burnClassStatus.damageCountdown = gUnknown_80F4F32;
+            entityInfo->burnClassStatus.damageCountdown = gBurnDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gUnknown_80F4F70, 1, 0x208);
         }
@@ -447,7 +439,7 @@ void sub_8074094(Entity *entity)
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            entityInfo->burnClassStatus.damageCountdown = gUnknown_80F4F34;
+            entityInfo->burnClassStatus.damageCountdown = gPoisonDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gUnknown_80F4F72, 3, 0x20A);
         }
@@ -459,7 +451,7 @@ void sub_8074094(Entity *entity)
             s32 turns = entityInfo->burnClassStatus.unk4;
             if (entityInfo->burnClassStatus.unk4 < 29)
                 entityInfo->burnClassStatus.unk4++;
-            entityInfo->burnClassStatus.damageCountdown = gUnknown_80F4F36;
+            entityInfo->burnClassStatus.damageCountdown = gBadPoisonDmgCountdown;
             if (turns >= 29)
                 turns = 29;
 
@@ -479,7 +471,7 @@ void sub_8074094(Entity *entity)
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            entityInfo->frozenClassStatus.damageCountdown = gUnknown_80F4F38;
+            entityInfo->frozenClassStatus.damageCountdown = gConstrictionDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             sub_8041C4C(entity, entityInfo->frozenClassStatus.unk4);
             DealDamageToEntity(entity, gUnknown_80F4F74, 2, 0x209);
@@ -492,7 +484,7 @@ void sub_8074094(Entity *entity)
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            entityInfo->frozenClassStatus.damageCountdown = gUnknown_80F4F3A;
+            entityInfo->frozenClassStatus.damageCountdown = gWrapDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gUnknown_80F4F76, 5, 0x20B);
         }
@@ -504,7 +496,7 @@ void sub_8074094(Entity *entity)
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
-            entityInfo->frozenClassStatus.damageCountdown = gUnknown_80F4F3C;
+            entityInfo->frozenClassStatus.damageCountdown = gIngrainHealCountdown;
             HealTargetHP(entity, entity, gUnknown_80F4FB2, 0, TRUE);
         }
     }
@@ -514,7 +506,7 @@ void sub_8074094(Entity *entity)
             s32 dmg = entityInfo->maxHPStat / 4;
             if (dmg == 0)
                 dmg = 1;
-            entityInfo->curseClassStatus.damageCountdown = gUnknown_80F4F3E;
+            entityInfo->curseClassStatus.damageCountdown = gCurseDmgCountdown;
             UseAttack(NULL);
             if (!EntityExists(entity) || sub_8044B28())
                 return;
@@ -531,7 +523,7 @@ void sub_8074094(Entity *entity)
             s32 hp = gUnknown_80F4FB4;
             Entity *target = gDungeon->activePokemon[entityInfo->leechSeedClassStatus.unk8];
 
-            entityInfo->leechSeedClassStatus.damageCountdown = gUnknown_80F4F40;
+            entityInfo->leechSeedClassStatus.damageCountdown = gLeechSeedDmgCountdown;
             if (target == NULL) {
                 entityInfo->leechSeedClassStatus.status = 0;
             }

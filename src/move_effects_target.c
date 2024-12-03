@@ -58,7 +58,6 @@ extern u8 *gUnknown_80FB414[];
 extern u8 *gUnknown_80FB43C[];
 extern u8 *gUnknown_80FB41C[];
 extern u8 *gUnknown_80FB458[];
-extern s16 gUnknown_80F4F00[];
 extern u8 *gUnknown_80FB52C[];
 extern u8 *gUnknown_80FCC4C[];
 extern u8 *gUnknown_80FB50C[];
@@ -439,7 +438,7 @@ void InfatuateStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessa
         SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
         if (entityInfo->cringeClassStatus.status != STATUS_INFATUATED) {
           entityInfo->cringeClassStatus.status = STATUS_INFATUATED;
-          entityInfo->cringeClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4F00,TRUE) + 1;
+          entityInfo->cringeClassStatus.turns = CalculateStatusTurns(target,gInfatuatedTurnRange,TRUE) + 1;
           sub_8041EF8(target);
           TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB50C);
         }

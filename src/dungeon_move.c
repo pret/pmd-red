@@ -45,7 +45,7 @@
 extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
-extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);
+extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, s24_8, u16, u32);
 extern s16 sub_8057600(Move *move, s32 itemID);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8042238(Entity *pokemon, Entity *target);
@@ -302,7 +302,7 @@ extern bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move *move, s32 pa
 extern bool8 MetronomeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 Conversion2MoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
-s32 HandleDamagingMove(Entity *, Entity *, Move *, s32, s32);
+s32 HandleDamagingMove(Entity *, Entity *, Move *, s24_8, s32);
 static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
 static void TriggerTargetAbilityEffect(Entity *attacker);
 static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits);
@@ -716,13 +716,13 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_WIDE_SLASH:
                     case MOVE_SPIN_SLASH:
                     case MOVE_BLOOP_SLASH:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x100, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(1), itemId) != 0);
                         break;
                     case MOVE_REGULAR_ATTACK:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x80, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(0.5), itemId) != 0);
                         break;
                     case MOVE_NOTHING:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(0), itemId) != 0);
                         break;
                     case MOVE_EARTHQUAKE:
                         moveHadEffect = EarthquakeMoveAction(attacker, currTarget, move, itemId);
@@ -764,7 +764,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_CROSS_CHOP:
                     case MOVE_RAZOR_LEAF:
                     case MOVE_LEAF_BLADE:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x100, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(1), itemId) != 0);
                         break;
                     case MOVE_FISSURE:
                         moveHadEffect = FissureMoveAction(attacker, currTarget, move, itemId);
@@ -1655,10 +1655,10 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
 
 bool32 HandleRegularDamagingMove(Entity *attacker, Entity *target, Move *move, s32 itemId)
 {
-    return (HandleDamagingMove(attacker, target, move, 0x100, itemId) != 0);
+    return (HandleDamagingMove(attacker, target, move, IntToF248_2(1), itemId) != 0);
 }
 
-s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s32 r9, s32 itemId)
+s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s24_8 modifier, s32 itemId)
 {
     struct DamageStruct dmgStruct;
     s16 unk;
@@ -1666,19 +1666,19 @@ s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s32 r9, s32
     s32 movePower = GetMovePower(attacker, move);
     s32 critChance = GetMoveCritChance(move);
 
-    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
+    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, modifier, move->id, 1);
     unk = sub_8057600(move, itemId);
     return TryHitTarget(attacker, target, move, &dmgStruct, unk);
 }
 
-s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s32 r9, s32 itemId)
+s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s24_8 modifier, s32 itemId)
 {
     struct DamageStruct dmgStruct;
     s16 unk;
     s32 movePower = GetMovePower(attacker, move);
     s32 critChance = GetMoveCritChance(move);
 
-    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
+    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, modifier, move->id, 1);
     unk = sub_8057600(move, itemId);
     return TryHitTarget(attacker, target, move, &dmgStruct, unk);
 }

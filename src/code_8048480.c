@@ -37,7 +37,6 @@ extern s16 gUnknown_80F4FB8;
 extern s16 gUnknown_80F4FBA;
 extern s16 gUnknown_80F4FBC;
 extern s16 gUnknown_80F4FBE;
-extern s16 gUnknown_80F4F46; // 0xC
 extern s16 gUnknown_80F4FA2;
 extern s16 gUnknown_80F4FA4; // 0x14
 extern s16 gUnknown_80F4FA6; // 0x2D
@@ -631,7 +630,7 @@ void GinsengItemAction(Entity *pokemon, Entity * target)
     s32 moveBoost = 1;
     EntityInfo *entityInfo = GetEntInfo(target);
 
-    if (DungeonRandInt(100) < gUnknown_80F4F46) {
+    if (DungeonRandInt(100) < gGinsengPlus3BoostChance) {
         moveBoost = 3;
     }
 

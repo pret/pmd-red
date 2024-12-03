@@ -110,7 +110,6 @@ extern u8 *gUnknown_80FBB28[];
 extern u8 *gUnknown_80FBBD4[];
 extern u8 *gUnknown_80FBBB8[];
 extern u8 *gUnknown_80FBB94[];
-extern s16 gUnknown_80F4EF4[];
 extern u8 *gUnknown_80FBE84[];
 extern u8 *gUnknown_80FBEA0[];
 extern u8 *gUnknown_80FBE64[];
@@ -849,22 +848,19 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
   EntityInfo *entityInfo;
   EntityInfo *entityInfo2;
   s32 index;
-  u8 *status;
-  s32 zero;
 
   if (((EntityExists(target)) && (GetEntityType(pokemon) == ENTITY_MONSTER)) &&
      (GetEntityType(target) == ENTITY_MONSTER)) {
         entityInfo = GetEntInfo(pokemon);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-        status = &entityInfo->leechSeedClassStatus.status;
         if (entityInfo->leechSeedClassStatus.status != STATUS_DESTINY_BOND)
         {
             if (entityInfo->leechSeedClassStatus.status == STATUS_LEECH_SEED)
                 TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FA79C);
-            zero = 0;
-            *status = STATUS_DESTINY_BOND;
-            entityInfo->leechSeedClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4EF0,TRUE) + 1;
-            entityInfo->leechSeedClassStatus.damageCountdown = zero;
+
+            entityInfo->leechSeedClassStatus.status = STATUS_DESTINY_BOND;
+            entityInfo->leechSeedClassStatus.turns = CalculateStatusTurns(target,gDestinyBondTurnRange,TRUE) + 1;
+            entityInfo->leechSeedClassStatus.damageCountdown = 0;
             nullsub_74(target);
             entityInfo->leechSeedClassStatus.unk8 = 0xff;
         }
@@ -1202,7 +1198,7 @@ void EncoreStatusTarget(Entity *pokemon,Entity *target)
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       if (EntityInfo->cringeClassStatus.status != STATUS_ENCORE) {
         EntityInfo->cringeClassStatus.status = STATUS_ENCORE;
-        EntityInfo->cringeClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4EF4,TRUE) + 1;
+        EntityInfo->cringeClassStatus.turns = CalculateStatusTurns(target,gEncoreTurnRange,TRUE) + 1;
         nullsub_83(target);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FBB94);
       }

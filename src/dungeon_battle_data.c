@@ -1,5 +1,6 @@
 #include "global.h"
 #include "dungeon_battle_data.h"
+#include "math.h"
 
 const s16 gFreezeTurnRange[2] = {3, 5};
 const s16 gBurnTurnRange[2] = {0x7F, 0x7F};
@@ -50,3 +51,38 @@ const s16 gObserverOrbPausedTurnRange[2] = {10, 12};
 const s16 gInvisibleTurnRange[2] = {10, 20};
 const s16 gMirrorCoatTurnRange[2] = {10, 12};
 const s16 gPerishSongTurnRange[2] = {3, 3};
+const s16 gDestinyBondTurnRange[2] = {10, 10};
+const s16 gEncoreTurnRange[2] = {10, 10};
+const s16 gEnduringTurnRange[2] = {3, 5};
+const s16 gTransformedTurnRange[2] = {0x7F, 0x7F};
+const s16 gInfatuatedTurnRange[2] = {4, 6};
+const s16 gMobileTurnRange[2] = {0x7F, 0x7F};
+const s16 gBlinkerTurnRange[2] = {10, 10};
+const s16 gCrossEyedTurnRange[2] = {10, 10};
+const s16 gEyedropsTurnRange[2] = {0x7F, 0x7F};
+UNUSED static const s16 sUnusedTurnRange5[2] = {10, 10};
+const s16 gMirrorMoveTurnRange[2] = {2, 5};
+const s16 gMuzzledTurnRange[2] = {10, 10};
+const s16 gConversion2TurnRange[2] = {10, 10};
+const s16 gVitalThrowTurnRange[2] = {15, 20};
+const s16 gYawnTurnRange[2] = {2, 2};
+const s16 gSleepFromYawnTurnRange[2] = {4, 8};
+
+const s16 gSpeedBoostActivationFrame = 250;
+
+const s16 gBurnDmgCountdown = 20;
+const s16 gPoisonDmgCountdown = 10;
+const s16 gBadPoisonDmgCountdown = 2;
+const s16 gConstrictionDmgCountdown = 2;
+const s16 gWrapDmgCountdown = 2;
+const s16 gIngrainHealCountdown = 5;
+const s16 gCurseDmgCountdown = 10;
+const s16 gLeechSeedDmgCountdown = 2;
+
+const s16 gMoveWeatherDuration = 20;
+
+UNUSED static const s16 sUnusedConfig1 = 95;
+
+const s16 gGinsengPlus3BoostChance = 12;
+const s24_8 gSolarBeamModifier = IntToF248_2(2.0);
+const s24_8 gSkyAttackModifier = IntToF248_2(2.0);

@@ -289,7 +289,7 @@ typedef struct EntityInfo
     /* 0x108 */ u8 speedUpCounters[NUM_SPEED_COUNTERS];
     /* 0x10D */ u8 speedDownCounters[NUM_SPEED_COUNTERS];
     /* 0x112 */ u8 stockpileStage;
-    /* 0x113 */ u8 unk113;
+    /* 0x113 */ u8 speedBoostFrames; // Frames counter, when it reaches the value in gSpeedBoostActivationFrame(250 by default), it resets to 0 and pokemon gets a speed boost.
     // When non-zero, an AI Pokémon will move in a random direction every turn when it is a room.
     // There is a chance of this flag being set when a wild Pokémon spawns. The chance depends on the dungeon's randomMovementChance.
     /* 0x114 */ u32 moveRandomly;
