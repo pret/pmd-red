@@ -348,7 +348,6 @@ SECTIONS {
         asm/ground_object.o(.text);
         asm/ground_effect.o(.text);
         src/ground_link.o(.text);
-        asm/ground_link.o(.text);
         asm/ground_event.o(.text);
         asm/m4a_1.o(.text);
         src/m4a.o(.text);

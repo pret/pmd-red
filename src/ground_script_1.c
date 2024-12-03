@@ -113,8 +113,6 @@ s16 sub_80AC448(s16, PixelPos*);
 s32 sub_80AC49C(s16, PixelPos*);
 s16 sub_80AD360(s16, PixelPos*);
 s16 sub_80AD3B4(s16, PixelPos*);
-u32 GroundLink_GetPos();
-u32 GroundLink_GetArea();
 void DeleteGroundEvents(void);
 void DeleteGroundLives(void);
 void DeleteGroundObjects(void);
@@ -942,7 +940,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 PixelPos unk;
                 action->callbacks->getHitboxCenter(action->parentObject, &unk);
                 GroundLink_GetPos((s16)curCmd.arg1, &unk);
-                action->callbacks->moveReal(action->parentObject, &unk); // landing end of unwanted tailmerge
+                action->callbacks->moveReal(action->parentObject, &unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -979,10 +977,6 @@ s32 ExecuteScriptCommand(Action *action) {
                 action->callbacks->setPosHeight(action->parentObject, height);
                 action->scriptData.unk26 = dir;
                 action->callbacks->setDirection(action->parentObject, dir);
-                // NONMATCHING: unwanted tailmerge
-#ifndef NONNMATCHING
-                asm("");
-#endif
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
