@@ -39,8 +39,6 @@ extern const s16 gUnknown_810AC64;
 extern const s16 gUnknown_810AC66;
 extern const s16 gUnknown_810AC68;
 extern const s16 gUnknown_810AC62;
-extern const s16 gUnknown_80F4DAE;
-extern const s16 gUnknown_80F4DB0;
 extern s48_16 gUnknown_8106F24;
 extern s48_16 gUnknown_8106F04;
 extern s48_16 gUnknown_8106F1C;
@@ -359,15 +357,15 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
             }
             else {
                 if (HasHeldItem(attacker, ITEM_SCOPE_LENS)) {
-                    critOdds += gUnknown_80F4DAE;
+                    critOdds += gCritOddsScopeLensPatsyBand;
                     gDungeon->unk134.unk164 = 1;
                 }
                 if (HasHeldItem(target, ITEM_PATSY_BAND)) {
-                    critOdds += gUnknown_80F4DAE;
+                    critOdds += gCritOddsScopeLensPatsyBand;
                     gDungeon->unk134.unk165 = 1;
                 }
                 if (r5 && IQSkillIsEnabled(attacker, IQ_TYPE_ADVANTAGE_MASTER)) {
-                    critOdds = gUnknown_80F4DB0;
+                    critOdds = gCritOddsIqAdvantageMaster;
                     gDungeon->unk134.unk169 = 1;
                 }
             }

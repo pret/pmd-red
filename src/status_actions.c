@@ -84,7 +84,6 @@ extern void sub_80783C4(Entity *, Entity *, bool8);
 // TODO The parameters don't match the function definition in pokemon_mid.h (u8*, s16).
 extern void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index);
 
-extern s16 gUnknown_80F4DCE;
 extern u8 *gUnknown_80FDD00[];
 extern u8 *gUnknown_80FDCE4[];
 extern u32 gUnknown_8106A50;
@@ -113,10 +112,8 @@ extern u8 *gUnknown_80FD430[];
 extern u8 *gUnknown_80FD40C[];
 extern u8 *gUnknown_80FD3F0[];
 extern u32 gUnknown_8106A50;
-extern s16 gUnknown_80F4DDC;
 extern u8 *gUnknown_80FDCA0[];
 extern u8 *gUnknown_80FDC9C[];
-extern s16 gUnknown_80F4DD8;
 extern u32 gUnknown_202F224;
 extern u32 gUnknown_8106A8C[];
 extern u8 *gUnknown_80FC5A8[];
@@ -124,7 +121,6 @@ extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
 extern u8 *gUnknown_80FEB08[];
 extern u32 gMetronomeCalledArrayId;
 
-extern s16 gUnknown_80F4DC6;
 extern u8 *gUnknown_80FEFF4[];
 
 bool8 EruptionMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_4)
@@ -180,7 +176,7 @@ bool8 PoisonTailMoveAction(Entity * pokemon, Entity * target, Move *move, s32 pa
     flag = FALSE;
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
         flag = TRUE;
-        if (sub_805727C(pokemon,target,gUnknown_80F4DC6) != 0) {
+        if (sub_805727C(pokemon,target,gPoisonTailSecondaryChance) != 0) {
             PoisonedStatusTarget(pokemon,target,FALSE);
         }
     }
@@ -336,7 +332,7 @@ bool8 MistBallMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_
     flag = FALSE;
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
         flag = TRUE;
-        if (sub_805727C(pokemon,target,gUnknown_80F4DD8) != 0) {
+        if (sub_805727C(pokemon,target,gMistBallSecondaryChance) != 0) {
             LowerAttackStageTarget(pokemon,target,gUnknown_8106A50,1,1,0);
         }
     }
@@ -382,7 +378,7 @@ bool8 MetalClawMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param
     flag = FALSE;
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_5) != 0) {
         flag = TRUE;
-        if (sub_805727C(pokemon,pokemon,gUnknown_80F4DCE) != 0) {
+        if (sub_805727C(pokemon,pokemon,gMetalClawSecondaryChance) != 0) {
             entityInfo = GetEntInfo(pokemon);
             RaiseAttackStageTarget(pokemon,pokemon,param_4,1);
             SetExpMultplier(entityInfo);
@@ -593,7 +589,7 @@ bool8 LusterPurgeMoveAction(Entity * pokemon, Entity * target, Move * move, s32 
     flag = FALSE;
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
         flag = TRUE;
-        if(sub_805727C(pokemon, target, gUnknown_80F4DDC))
+        if(sub_805727C(pokemon, target, gLusterPurgeSecondaryChance))
         {
             LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50, 1, 1, 0);
         }

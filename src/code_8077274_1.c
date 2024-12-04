@@ -1638,8 +1638,6 @@ _WakeUp:
 
 extern s16 sub_803D970(u32);
 extern void sub_804178C(u32);
-extern const s16 gUnknown_80F4DA2;
-extern const s16 gUnknown_80F4DA4;
 
 void sub_807AB38(Entity *entity, bool8 forcedMonsterHouse)
 {
@@ -1697,7 +1695,7 @@ void sub_807AB38(Entity *entity, bool8 forcedMonsterHouse)
         }
     }
 
-    randMonstersCount = DungeonRandRange(gUnknown_80F4DA2, gUnknown_80F4DA4);
+    randMonstersCount = DungeonRandRange(gMonsterHouseMinMons, gMonsterHouseMaxMons);
     if (randMonstersCount >= count)
         randMonstersCount = count;
 

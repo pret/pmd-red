@@ -40,42 +40,26 @@ extern u8 *gUnknown_80FE3BC[];
 extern u8 *gUnknown_80FE38C[];
 extern u8 *gUnknown_80FC888[];
 extern u8 *gUnknown_80FC8C0[];
-extern s16 gUnknown_80F4DEA;
 extern u8 *gUnknown_80FEB88[];
-extern s16 gUnknown_80F4DE8;
 extern u8 *gUnknown_80FAD6C[];
-extern s16 gUnknown_80F4DE4;
 extern u8 *gUnknown_80FBD58[];
-extern s16 gUnknown_80F4DC0;
-extern s16 gUnknown_80F4DF8;
-extern s16 gUnknown_80F4DD0;
-extern s16 gUnknown_80F4DBC;
 extern u8 *gUnknown_80FACC4[];
-extern s16 gUnknown_80F4DF4;
 extern u8 gUnknown_202F21A;
-extern s16 gUnknown_80F4DD6;
 extern u8 gUnknown_202F219;
 extern u8 *gUnknown_80FACA4[];
 extern u8 *gUnknown_80FD104[];
-extern s16 gUnknown_80F4DD4;
-extern u32 gUnknown_80F4DE6;
-extern u32 gUnknown_80F4DEE;
-extern u32 gUnknown_80F4DC2;
 extern u8 *gUnknown_80FD294[];
 extern u8 *gUnknown_80FD2B4[];
 extern u8 *gUnknown_80FAC74[];
 extern u8 *gUnknown_80FAC54[];
-extern s16 gUnknown_80F4DB8;
-extern s16 gUnknown_80F4DBA;
 extern u8 *gUnknown_80FAE00[];
 extern u8 *gUnknown_80FADD8[];
-extern s16 gUnknown_80F4DB6;
 extern u8 *gUnknown_80FAC88;
 extern u8 *gUnknown_80FD018[];
 extern u8 *gUnknown_80FCFBC[];
 extern u8 *gUnknown_80FCFE4[];
 extern u32 gUnknown_8106A4C;
-extern s16 gUnknown_80F4DF6;
+extern s16 gRockSlideSecondaryChance;
 extern u8 *gUnknown_80FC734[];
 extern u8 *gUnknown_80FC7EC[];
 extern u8 *gUnknown_80FCF74[];
@@ -84,18 +68,13 @@ extern u32 gUnknown_8106A50;
 extern u8 *gUnknown_80FD14C[];
 extern u8 *gUnknown_80FAD4C[];
 extern s24_8 gUnknown_8106A54[];
-extern s16 gUnknown_80F4DF0;
-extern s16 gUnknown_80F4DE0;
-extern s16 gUnknown_80F4DC4;
 extern u8 *gUnknown_80FCF78[];
-extern s16 gUnknown_80F4DF0;
 extern u8 *gUnknown_80FACFC[];
 extern u8 *gUnknown_80FACE4[];
 extern u8 *gUnknown_80FEB8C[];
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
-extern s16 gUnknown_80F4DC8;
-extern s16 gUnknown_80F4DEC;
+
 extern s16 gUnknown_80F4E00;
 extern u8 *gUnknown_80FD128[];
 extern u8 *gUnknown_80FAD2C[];
@@ -108,9 +87,7 @@ extern u8 *gUnknown_80FC81C[];
 extern u8 *gUnknown_80FC854[];
 extern u8 *gUnknown_80FCF7C[];
 extern u8 *gUnknown_80FC730[];
-extern s16 gUnknown_80F4DF2;
 extern u8 *gUnknown_80FC770[];
-extern s16 gUnknown_80F4DD2;
 extern u8 *gUnknown_80FCA3C[];
 extern u8 *gUnknown_80FD170[];
 extern u8 *gUnknown_80FCCE8[];
@@ -118,18 +95,10 @@ extern u8 *gUnknown_80FD18C[];
 extern u8 *gUnknown_80FD57C[];
 extern u8 *gUnknown_80FEBDC[];
 extern u8 *gUnknown_80FC5CC[];
-extern s16 gUnknown_80F4DFA;
 extern u8 *gUnknown_81004EC[];
-extern s16 gUnknown_80F4DDA;
-extern s16 gUnknown_80F4DFE;
 extern u8 *gUnknown_81004EC[];
-extern s16 gUnknown_80F4DFC;
 extern u8 *gUnknown_80FC7C8[];
 extern u8 *gUnknown_80FAD10[];
-extern s16 gUnknown_80F4DCC;
-extern s16 gUnknown_80F4DBE;
-extern s16 gUnknown_80F4DCA;
-extern s16 gUnknown_80F4DE2;
 extern u8 *gUnknown_80FEB90[];
 extern u8 *gUnknown_80FEB60[];
 extern u8 *gUnknown_80FE330[];
@@ -175,7 +144,6 @@ u8 ToItemID(u32 param_1);
 extern s16 sub_8094828(u16, u8);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 
-extern s16 gUnknown_80F4DB4;
 extern u32 gUnknown_8106A4C;
 
 bool8 MoveRequiresCharging(Entity* pokemon, u16 moveID)
@@ -244,7 +212,7 @@ bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_
     flag = FALSE;
     if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
         flag = TRUE;
-        if (sub_805727C(pokemon, target, gUnknown_80F4DB4)) {
+        if (sub_805727C(pokemon, target, gIronTailSecondaryChance)) {
             LowerDefenseStageTarget(pokemon, target, gUnknown_8106A4C, 1, 1, FALSE);
         }
     }
@@ -364,7 +332,7 @@ bool32 BubbleMoveAction(Entity *pokemon, Entity *target, Move * move, u32 param_
   flag = FALSE;
   if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
     flag = TRUE;
-    if (sub_805727C(pokemon,target, gUnknown_80F4DB6)) {
+    if (sub_805727C(pokemon,target, gBubbleSecondaryChance)) {
       LowerMovementSpeedTarget(pokemon, target, 1, FALSE);
     }
   }
@@ -504,7 +472,7 @@ bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, u32 param_4)
   if (IsSleeping(pokemon)) {
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
       flag = TRUE;
-      if (sub_805727C(pokemon,target,gSnoreFlinchChance)) {
+      if (sub_805727C(pokemon,target,gSnoreSecondaryChance)) {
         CringeStatusTarget(pokemon,target,FALSE);
       }
     }
@@ -528,7 +496,7 @@ bool8 RockSlideMoveAction(Entity *pokemon, Entity *target, Move * move, u32 para
   flag = FALSE;
   if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
     flag = TRUE;
-    if (sub_805727C(pokemon,target,gUnknown_80F4DF6)) {
+    if (sub_805727C(pokemon,target,gRockSlideSecondaryChance)) {
       CringeStatusTarget(pokemon,target,FALSE);
     }
   }
@@ -761,7 +729,7 @@ bool8 FlameWheelMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   SendThawedMessage(pokemon, target);
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DB8))
+    if(sub_805727C(pokemon, target, gFlameWheelSecondaryChance))
     {
         BurnedStatusTarget(pokemon, target, 0, FALSE);
     }
@@ -778,7 +746,7 @@ bool8 BasicFireMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param
   SendThawedMessage(pokemon, target);
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DBA))
+    if(sub_805727C(pokemon, target, gFireMoveBurnSecondaryChance))
     {
         BurnedStatusTarget(pokemon, target, 0, FALSE);
     }
@@ -878,7 +846,7 @@ bool8 ShadowBallMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DC2))
+    if(sub_805727C(pokemon, target, gShadowBallSecondaryChance))
     {
         LowerDefenseStageTarget(pokemon, target, gUnknown_8106A50, 1, 1, FALSE);
     }
@@ -893,7 +861,7 @@ bool8 BiteMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DEE))
+    if(sub_805727C(pokemon, target, gBiteSecondaryChance))
     {
         CringeStatusTarget(pokemon, target, FALSE);
     }
@@ -908,7 +876,7 @@ bool8 ThunderMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DE6))
+    if(sub_805727C(pokemon, target, gThunderSecondaryChance))
     {
         ParalyzeStatusTarget(pokemon, target, FALSE);
     }
@@ -956,7 +924,7 @@ bool8 sub_8058580(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DD4))
+    if(sub_805727C(pokemon, target, gConstrictBubblebeamSecondaryChance))
     {
         LowerMovementSpeedTarget(pokemon, target, 1, FALSE);
     }
@@ -1135,7 +1103,7 @@ bool8 AncientPowerMoveAction(Entity *pokemon, Entity *target, Move *move, u32 pa
     if(HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0)
     {
         flag = TRUE;
-        if(RollSecondaryEffect(pokemon, gUnknown_80F4DD6))
+        if(RollSecondaryEffect(pokemon, gAncientPowerSecondaryChance))
         {
             entityInfo = GetEntInfo(pokemon);
             RaiseMovementSpeedTarget(pokemon, pokemon, 0, TRUE);
@@ -1198,7 +1166,7 @@ bool8 SkyAttackMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param
     {
         if (HandleDamagingMove(pokemon, target, move, gSkyAttackModifier, param_4) != 0) {
            flag = TRUE;
-            if(sub_805727C(pokemon, target, gUnknown_80F4DF4))
+            if(sub_805727C(pokemon, target, gSkyAttackSecondaryChance))
                 CringeStatusTarget(pokemon, target, FALSE);
         }
         sub_8079764(pokemon);
@@ -1218,7 +1186,7 @@ bool8 BasicIceMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DBC))
+    if(sub_805727C(pokemon, target, gIceMoveFreezeSecondaryChance))
     {
         FrozenStatusTarget(pokemon, target, FALSE);
     }
@@ -1234,7 +1202,7 @@ bool8 MeteorMashMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, pokemon, gUnknown_80F4DD0))
+    if(sub_805727C(pokemon, pokemon, gMeteorMashSecondaryChance))
     {
         entityInfo = GetEntInfo(pokemon);
         RaiseAttackStageTarget(pokemon, pokemon, gUnknown_8106A4C, 1);
@@ -1263,7 +1231,7 @@ bool8 sub_8058C00(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DF8))
+    if(sub_805727C(pokemon, target, gMovesConfusionSecondaryChance))
     {
         ConfuseStatusTarget(pokemon, target, FALSE);
     }
@@ -1295,7 +1263,7 @@ bool8 sub_8058C98(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_5) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DC0))
+    if(sub_805727C(pokemon, target, gPsychicSecondaryChance))
     {
         LowerDefenseStageTarget(pokemon, target,  param_4, 1, 1, FALSE);
     }
@@ -1446,7 +1414,7 @@ bool8 LickMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DE4))
+    if(sub_805727C(pokemon, target, gLickSecondaryChance))
     {
         ParalyzeStatusTarget(pokemon, target, FALSE);
     }
@@ -1479,7 +1447,7 @@ bool8 ThunderboltMoveAction(Entity *pokemon, Entity *target, Move *move, u32 par
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DE8))
+    if(sub_805727C(pokemon, target, gThunderboltSecondaryChance))
     {
         ParalyzeStatusTarget(pokemon, target, FALSE);
     }
@@ -1524,7 +1492,7 @@ bool8 ExtrasensoryMoveAction(Entity *pokemon, Entity *target, Move *move, u32 pa
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DEA))
+    if(sub_805727C(pokemon, target, gExtrasensorySecondaryChance))
     {
         CringeStatusTarget(pokemon, target, FALSE);
     }
@@ -1647,7 +1615,7 @@ bool8 HeadbuttMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DF0))
+    if(sub_805727C(pokemon, target, gHeadbuttSecondaryChance))
     {
         CringeStatusTarget(pokemon, target, FALSE);
     }
@@ -1702,7 +1670,7 @@ bool8 SmogMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DC4))
+    if(sub_805727C(pokemon, target, gSmogSecondaryChance))
     {
         PoisonedStatusTarget(pokemon, target, FALSE);
     }
@@ -1723,7 +1691,7 @@ bool8 SacredFireMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DE0))
+    if(sub_805727C(pokemon, target, gSacredFireSecondaryChance))
     {
         BurnedStatusTarget(pokemon, target, 0, FALSE);
     }
@@ -1855,7 +1823,7 @@ bool8 TwisterMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param_4
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(modifierInt),param_4) != 0)
   {
     flag = TRUE;
-    if(sub_805727C(pokemon,target,gUnknown_80F4DEC) != 0) {
+    if(sub_805727C(pokemon,target,gTwisterSecondaryChance) != 0) {
         CringeStatusTarget(pokemon,target,FALSE);
     }
   }
@@ -1872,7 +1840,7 @@ bool8 TwineedleMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param
     gUnknown_202F218 = 1;
   }
   if (((gUnknown_202F218 != 0) && (gUnknown_202F214 == 2)) &&
-     (sub_805727C(pokemon,target,gUnknown_80F4DC8) != 0)) {
+     (sub_805727C(pokemon,target,gTwineedleSecondaryChance) != 0)) {
     PoisonedStatusTarget(pokemon,target,FALSE);
   }
   return flag;
@@ -2032,7 +2000,7 @@ bool8 ThundershockMoveAction(Entity *pokemon, Entity *target, Move *move, u32 pa
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DE2))
+    if(sub_805727C(pokemon, target, gThundershockSecondaryChance))
     {
         ParalyzeStatusTarget(pokemon, target, FALSE);
     }
@@ -2086,7 +2054,7 @@ bool8 PoisonFangMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DCA))
+    if(sub_805727C(pokemon, target, gPoisonFangSecondaryChance))
     {
         BadlyPoisonedStatusTarget(pokemon, target, FALSE);
     }
@@ -2101,7 +2069,7 @@ bool8 PoisonStingMoveAction(Entity *pokemon, Entity *target, Move *move, u32 par
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DBE))
+    if(sub_805727C(pokemon, target, gPoisonStingSecondaryChance))
     {
         PoisonedStatusTarget(pokemon, target, FALSE);
     }
@@ -2146,7 +2114,7 @@ bool8 BounceMoveAction(Entity * pokemon,Entity * target,Move * move,u32 param_4)
   if (MoveMatchesBideClassStatus(pokemon, move)) {
     if (HandleDamagingMove(pokemon, target, move, gBounceModifier, param_4) != 0) {
       flag = TRUE;
-      if (sub_805727C(pokemon, target, gUnknown_80F4DCC) != 0) {
+      if (sub_805727C(pokemon, target, gBounceSecondaryChance) != 0) {
         ParalyzeStatusTarget(pokemon, target, FALSE);
       }
     }
@@ -2196,7 +2164,7 @@ bool8 TriAttackMoveAction(Entity * pokemon, Entity * target, Move *move, u32 par
     if(HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4))
     {
         flag = TRUE;
-        if(sub_805727C(pokemon, target, gUnknown_80F4DFC))
+        if(sub_805727C(pokemon, target, gTriAttackSecondaryChance))
         {
             switch(DungeonRandInt(3))
             {
@@ -2397,7 +2365,7 @@ bool8 FakeOutMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4DF2))
+    if(sub_805727C(pokemon, target, gFakeOutSecondaryChance))
     {
         CringeStatusTarget(pokemon, target, FALSE);
     }
@@ -2504,7 +2472,7 @@ bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, u32 stat,
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_5) != 0) {
     flag = TRUE;
-    if (sub_805727C(pokemon,pokemon,gUnknown_80F4DD2) != 0) {
+    if (sub_805727C(pokemon,pokemon,gSteelWingSecondaryChance) != 0) {
       entityInfo = GetEntInfo(pokemon);
       RaiseDefenseStageTarget(pokemon,pokemon,stat,1);
       SetExpMultplier(entityInfo);
@@ -2793,7 +2761,7 @@ bool8 sub_805AC90(Entity * pokemon, Entity * target, Move *move, u32 param_4)
   flag = FALSE;
     if ( HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
         flag = TRUE;
-        if (sub_805727C(pokemon,target,gUnknown_80F4DFA) != 0) {
+        if (sub_805727C(pokemon,target,gDizzyPunchSecondaryChance) != 0) {
             ConfuseStatusTarget(pokemon, target, FALSE);
         }
     }
@@ -2874,7 +2842,7 @@ bool8 CrushClawMoveAction(Entity * pokemon, Entity * target, Move *move, u32 par
     flag = FALSE;
     if ( HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
         flag = TRUE;
-        if (sub_805727C(pokemon,target,gUnknown_80F4DDA) != 0) {
+        if (sub_805727C(pokemon,target,gCrushClawSecondaryChance) != 0) {
             LowerDefenseStageTarget(pokemon, target, gUnknown_8106A4C, 1, 1, FALSE);
         }
     }
@@ -2889,7 +2857,7 @@ bool8 BlazeKickMoveAction(Entity * pokemon, Entity * target, Move *move, u32 par
     SendThawedMessage(pokemon, target);
     if ( HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
         flag = TRUE;
-        if (sub_805727C(pokemon,target,gUnknown_80F4DFE) != 0) {
+        if (sub_805727C(pokemon,target,gBlazeKickSecondaryChance) != 0) {
             BurnedStatusTarget(pokemon, target, 0, FALSE);
         }
     }

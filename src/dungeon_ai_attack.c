@@ -82,7 +82,7 @@ void ChooseAIMove(Entity *pokemon)
     if (CannotAttack(pokemon, FALSE) ||
         ShouldMonsterRunAwayAndShowEffect(pokemon, TRUE) ||
         IsTacticSet(pokemon, TACTIC_KEEP_YOUR_DISTANCE) ||
-        (pokemonInfo->cringeClassStatus.status == STATUS_CONFUSED && DungeonRandOutcome(gConfusedAttackChance)))
+        (pokemonInfo->cringeClassStatus.status == STATUS_CONFUSED && DungeonRandOutcome(gAIConfusedAttackChance)))
     {
         return;
     }

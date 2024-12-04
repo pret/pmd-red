@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_config.h"
 #include "math.h"
 #include "constants/weather.h"
@@ -116,14 +117,66 @@ extern bool8 FakeOutMoveAction(Entity *pokemon, Entity *target, Move *move, s32 
 extern bool8 HandleRegularDamagingMove(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 StunSporeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
-// Huge list of various config variables for dungeon moves/music/abilities/items/etc. All in one file, because these are scattered all around the codebase.
+// Huge list of various config variables for dungeon moves/music/abilities/items/etc. All in one file, because these are scattered all around the codebase with only one pksdir present.
 
+// Monster House config
+const s16 gMonsterHouseMaxItemsTraps = 7; // Items and traps are included together
+const s16 gMonsterHouseMinMons = 8;
+const s16 gMonsterHouseMaxMons = 12;
+// ? See sub_8071B48
+const s16 gUnknown_80F4DA6 = 10;
+const s16 gUnknown_80F4DA8 = 4;
+const s16 gUnknown_80F4DAA = 36;
+const s16 gUnknown_80F4DAC = 5;
+const s16 gCritOddsScopeLensPatsyBand = 40;
+const s16 gCritOddsIqAdvantageMaster = 40;
+
+const s16 gAIConfusedAttackChance = 70;
+// Various moves' secondary effect percent chance
+const s16 gIronTailSecondaryChance = 30;
+const s16 gBubbleSecondaryChance = 10;
+const s16 gFlameWheelSecondaryChance = 10;
+const s16 gFireMoveBurnSecondaryChance = 10;
+const s16 gIceMoveFreezeSecondaryChance = 10;
+const s16 gPoisonStingSecondaryChance = 18;
+const s16 gPsychicSecondaryChance = 10;
+const s16 gShadowBallSecondaryChance = 20;
+const s16 gSmogSecondaryChance = 40;
+const s16 gPoisonTailSecondaryChance = 10;
+const s16 gTwineedleSecondaryChance = 20;
+const s16 gPoisonFangSecondaryChance = 30;
+const s16 gBounceSecondaryChance = 30;
+const s16 gMetalClawSecondaryChance = 10;
+const s16 gMeteorMashSecondaryChance = 20;
+const s16 gSteelWingSecondaryChance = 10;
+const s16 gConstrictBubblebeamSecondaryChance = 10;
+const s16 gAncientPowerSecondaryChance = 10;
+const s16 gMistBallSecondaryChance = 50;
+const s16 gCrushClawSecondaryChance = 50;
+const s16 gLusterPurgeSecondaryChance = 50;
+UNUSED static const s16 sUnusedConfig5 = 50;
+const s16 gSacredFireSecondaryChance = 50;
+const s16 gThundershockSecondaryChance = 10;
+const s16 gLickSecondaryChance = 15;
+const s16 gThunderSecondaryChance = 20;
+const s16 gThunderboltSecondaryChance = 10;
+const s16 gExtrasensorySecondaryChance = 10;
+const s16 gTwisterSecondaryChance = 15;
+const s16 gBiteSecondaryChance = 20;
+const s16 gHeadbuttSecondaryChance = 25;
+const s16 gFakeOutSecondaryChance = 35;
+const s16 gSkyAttackSecondaryChance = 25;
+const s16 gRockSlideSecondaryChance = 30;
+const s16 gMovesConfusionSecondaryChance = 10;
+const s16 gDizzyPunchSecondaryChance = 30;
+const s16 gTriAttackSecondaryChance = 20;
+const s16 gBlazeKickSecondaryChance = 10;
 const s16 gMuddyWaterAccLowerChance = 40;
 const s16 gOctazookaAccLowerChance = 60;
 const s16 gAuroraBeamAtkLowerChance = 60;
 const s16 gSecretPowerSecondaryEffectChance = 30;
 const s16 gMovesConstrictionChance = 10; // Fire Spin, Whirlpool, Clamp, Bind, Sand Tomb
-const s16 gSnoreFlinchChance = 30;
+const s16 gSnoreSecondaryChance = 30;
 // Activation chance of abilities/traps
 const s16 gShedSkinActivateChance = 50;
 const s16 gGrimyTrapActivateChance = 30;

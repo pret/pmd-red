@@ -13,8 +13,6 @@
 #include "dungeon_capabilities.h"
 #include "dungeon_random.h"
 
-const s16 gConfusedAttackChance = 70;
-
 extern const char *gPtrFrozenMessage[];
 extern const char *gPtrWrappedAroundMessage[];
 extern const char *gPtrWrappedByMessage[];
