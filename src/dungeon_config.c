@@ -1130,4 +1130,3 @@ const struct CalledMove gNaturePowerCalledMoves[] =
     {MOVE_SURF, HandleRegularDamagingMove},
     {MOVE_ROCK_SLIDE, HandleRegularDamagingMove},
 };
-

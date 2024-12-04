@@ -20,7 +20,7 @@
 #define DUNGEON_MAX_ITEMS 64
 
 // size: 0x18
-typedef struct Weather
+typedef struct Weather // 0xE264
 {
     /* 0x0 */ u8 weather; // Uses the weather constants in weather.h.
     /* 0x1 */ u8 unkE265; // Uses the weather constants in weather.h

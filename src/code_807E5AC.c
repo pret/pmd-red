@@ -26,11 +26,14 @@ extern s32 GetMonsterApparentID(Entity *pokemon, s32 id);
 void sub_803E874(bool8 r10, s32 r9);
 void GetWeatherName(u8 *dst, u8 weatherId);
 extern s32 CalculateStatusTurns(Entity *target, const s16 *turnRange, bool8 factorCurerSkills);
+extern void sub_80838EC(u8 *a);
 
 void sub_807E7FC(bool8 arg0);
 void sub_807E8F0(Entity *pokemon);
 
 extern const u8 *const gUnknown_80FC5E0;
+extern const u8 *const gUnknown_80FA778;
+extern const u8 *const gUnknown_80FA758;
 
 // Note: gUnknown_202ECA0 file's 2d array is read as 1d array in functions below, be careful!
 void sub_807E698(bool8 arg0)
@@ -201,4 +204,65 @@ void MudWaterSportEffect(u8 which)
         gDungeon->weather.waterSportTurns =CalculateStatusTurns(0, gMudWaterSportTurnRange, FALSE);
         LogMessageByIdWithPopupCheckUser(GetLeader(), gUnknown_80FADB0);
     }
+}
+
+bool8 sub_807EAA0(bool8 arg0, bool8 arg1)
+{
+    s32 i;
+    s32 var = 0;
+    s32 index = -1;
+    bool8 ret = FALSE;
+    s32 weatherBefore = GetApparentWeather(NULL);
+
+    for (i = 0; i < 8; i++) {
+        if (gDungeon->weather.unkE267[i] < gDungeon->weather.naturalWeather[i]) {
+            gDungeon->weather.unkE267[i] = gDungeon->weather.naturalWeather[i];
+        }
+        else if (gDungeon->weather.unkE267[i] > gDungeon->weather.naturalWeather[i]) {
+            sub_80838EC(&gDungeon->weather.unkE267[i]);
+        }
+
+        if (var < gDungeon->weather.unkE267[i]) {
+            var = gDungeon->weather.unkE267[i];
+            index = i;
+        }
+    }
+
+    if (index < 0) {
+        gDungeon->weather.weather = gDungeon->weather.unkE265;
+    }
+    else {
+        gDungeon->weather.weather = index;
+    }
+
+    if (gDungeon->weather.nullifyWeather) {
+        gDungeon->weather.weather = 0;
+    }
+
+    if (weatherBefore != GetApparentWeather(NULL) || arg1) {
+        ret = TRUE;
+        sub_807E698(arg0);
+    }
+
+    if (gDungeon->weather.weatherDamageCounter != 0) {
+        gDungeon->weather.weatherDamageCounter--;
+    }
+    else {
+        gDungeon->weather.weatherDamageCounter = 9;
+    }
+
+    if (gDungeon->weather.mudSportTurns != 0) {
+        sub_80838EC(&gDungeon->weather.mudSportTurns);
+        if (gDungeon->weather.mudSportTurns == 0) {
+            LogMessageByIdWithPopupCheckUser(GetLeader(), gUnknown_80FA778);
+        }
+    }
+    if (gDungeon->weather.waterSportTurns != 0) {
+        sub_80838EC(&gDungeon->weather.waterSportTurns);
+        if (gDungeon->weather.waterSportTurns == 0) {
+            LogMessageByIdWithPopupCheckUser(GetLeader(), gUnknown_80FA758);
+        }
+    }
+
+    return ret;
 }
