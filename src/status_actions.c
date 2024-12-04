@@ -32,8 +32,7 @@
 #include "tile_types.h"
 #include "trap.h"
 #include "weather.h"
-#include "called_move_data.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void HandleOneRoomOrb(Entity *, Entity *);
@@ -82,14 +81,9 @@ extern bool8 MoveRequiresCharging(Entity* pokemon,u16 moveID);
 extern void sub_80783C4(Entity *, Entity *, bool8);
 
 
-// NOTE: Override pokemon.c types for these two funcs
-// GetSize is ok
-extern u8 GetBodySize(s32 index);
 // TODO The parameters don't match the function definition in pokemon_mid.h (u8*, s16).
 extern void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index);
-extern u32 GetSize(s16 index);
 
-extern s16 gUnknown_80F55EC[];
 extern s16 gUnknown_80F4DCE;
 extern u8 *gUnknown_80FDD00[];
 extern u8 *gUnknown_80FDCE4[];
@@ -129,7 +123,6 @@ extern u8 *gUnknown_80FC5A8[];
 extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
 extern u8 *gUnknown_80FEB08[];
 extern s16 gUnknown_80F4E08;
-extern u8 gDungeonCamouflageTypes[76];
 extern u32 gMetronomeCalledArrayId;
 
 extern s16 gUnknown_80F4DC6;
@@ -444,30 +437,20 @@ bool8 MimicMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4
 
 bool8 FrustrationMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
-    s16 *r1;
-    s32 index;
-    s32 r5;
-    s32 IQ;
-    u8 local_24;
-    EntityInfo *entityInfo;
+    s32 i;
+    bool8 local_24 = FALSE;
+    EntityInfo *entityInfo = GetEntInfo(pokemon);
+    s32 dmg = 1;
 
-    local_24 = 0;
-    entityInfo = GetEntInfo(pokemon);
-    r5 = 1;
-    index = 0;
-    if (0 <= gUnknown_80F55EC[0]) {
-        IQ = entityInfo->IQ;
-        for(r1 = &gUnknown_80F55EC[index]; (999 > index) && (*r1 >= 0); r1 = r1 + 2, index++)
-            {
-                if ((IQ < *r1)){
-                    r5 = r1[1];
-                    goto _0805B598;
-                }
-            }
+    for (i = 0; i < 999 && gFrustrationDmgData[i].minIq >= 0; i++) {
+        if (entityInfo->IQ < gFrustrationDmgData[i].minIq) {
+            dmg = gFrustrationDmgData[i].dmgVal;
+            break;
+        }
     }
-_0805B598:
-    sub_806F370(pokemon,target,r5,1,&local_24, GetMoveType(move),sub_8057600(move,param_4),0,1,0);
-    local_24 = local_24 == 0;
+
+    sub_806F370(pokemon,target,dmg,1,&local_24,GetMoveType(move),sub_8057600(move,param_4),0,1,0);
+    local_24 = (local_24 == 0);
     return local_24;
 }
 

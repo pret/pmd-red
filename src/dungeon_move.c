@@ -24,7 +24,6 @@
 #include "dungeon_random.h"
 #include "targeting_flags.h"
 #include "targeting.h"
-#include "called_move_data.h"
 #include "dungeon_map_access.h"
 #include "math.h"
 #include "code_800DAC0.h"
@@ -39,7 +38,7 @@
 #include "code_803E46C.h"
 #include "code_8041AD0.h"
 #include "code_800E9E4.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);

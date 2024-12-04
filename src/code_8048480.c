@@ -26,7 +26,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_position.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
 

@@ -40,7 +40,7 @@
 #include "constants/iq_skill.h"
 #include "structs/str_806B7F8.h"
 #include "structs/str_202ED28.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];

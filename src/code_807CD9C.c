@@ -23,7 +23,7 @@
 #include "tile_types.h"
 #include "code_803E668.h"
 #include "weather.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 extern u32 gUnknown_202EDCC;
 extern u32 gUnknown_203B444[];

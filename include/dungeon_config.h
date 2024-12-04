@@ -1,9 +1,12 @@
-#ifndef GUARD_DUNGEON_BATTLE_DATA_H
-#define GUARD_DUNGEON_BATTLE_DATA_H
+#ifndef GUARD_DUNGEON_CONFIG_H
+#define GUARD_DUNGEON_CONFIG_H
 
 #include "math.h"
 #include "constants/weather.h"
 #include "constants/type.h"
+#include "constants/dungeon_action.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_moves.h"
 
 extern const s16 gFreezeTurnRange[2];
 extern const s16 gBurnTurnRange[2];
@@ -178,5 +181,43 @@ extern const s48_16 gBellyGoDownValues[BELLY_GO_DOWN_VALUES_COUNT];
 
 #define WARP_SCARF_ACTIVATION_CHANCES_COUNT 20
 extern const s16 gWarpScarfActivationChances[WARP_SCARF_ACTIVATION_CHANCES_COUNT];
+
+struct ReturnDmgData
+{
+    s16 minIq;
+    s16 dmgVal;
+};
+
+extern const struct ReturnDmgData gReturnDmgData[];
+extern const struct ReturnDmgData gFrustrationDmgData[];
+
+extern const u8 gDungeonCamouflageTypes[76];
+
+extern const s16 gDungeonMusic[76];
+extern const s16 gRecruitRateByLevel[101];
+
+extern const s16 gRayquazaConfigLevel;
+extern const s16 gZapdosConfigLevel;
+extern const s16 gMoltresConfigLevel;
+extern const s16 gArticunoConfigLevel;
+extern const s16 gGroudonConfigLevel;
+
+extern const s16 sKecleonShopItemSpawnChances[16][3][3];
+
+extern const bool8 gUnknown_80F58F4[NUM_DUNGEON_ACTIONS][2];
+
+extern const u8 gSecretPowerTable[76];
+extern const s16 gIqItemMasterMinWildLevel;
+
+typedef bool8 (*MoveCallback)(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+struct CalledMove
+{
+    u16 moveID;
+    MoveCallback callback;
+};
+
+#define METRONOME_AVAILABLE_CALLED_MOVES 105
+extern const struct CalledMove gMetronomeCalledMoves[METRONOME_AVAILABLE_CALLED_MOVES];
+extern const struct CalledMove gNaturePowerCalledMoves[];
 
 #endif

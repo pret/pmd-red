@@ -32,8 +32,7 @@
 #include "structs/str_dungeon.h"
 #include "tile_types.h"
 #include "weather.h"
-#include "called_move_data.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 extern const u8 *const gUnknown_80FD350;
 extern const u8 *const gUnknown_80FD370;
@@ -104,7 +103,6 @@ extern s16 gUnknown_80F4DEC;
 extern s16 gUnknown_80F4E00;
 extern u8 *gUnknown_80FD128[];
 extern u8 *gUnknown_80FAD2C[];
-extern u8 gSecretPowerTable[];
 extern s16 gUnknown_80F4E06;
 extern u8 *gUnknown_80FC74C[];
 extern u8 *gUnknown_80FC790[];
@@ -716,14 +714,6 @@ bool8 WillOWispMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
   return TRUE;
 }
 
-struct TestStruct
-{
-    s16 a;
-    s16 b;
-};
-
-extern const struct TestStruct gUnknown_80F55BC[];
-
 bool8 ReturnMoveAction(Entity * pokemon,Entity * target,Move * move,s32 param_4)
 {
     s32 i;
@@ -731,9 +721,9 @@ bool8 ReturnMoveAction(Entity * pokemon,Entity * target,Move * move,s32 param_4)
     EntityInfo *entityInfo = GetEntInfo(pokemon);
     s32 dmg = 1;
 
-    for (i = 0; i < 999 && gUnknown_80F55BC[i].a >= 0; i++) {
-        if (entityInfo->IQ < gUnknown_80F55BC[i].a) {
-            dmg = gUnknown_80F55BC[i].b;
+    for (i = 0; i < 999 && gReturnDmgData[i].minIq >= 0; i++) {
+        if (entityInfo->IQ < gReturnDmgData[i].minIq) {
+            dmg = gReturnDmgData[i].dmgVal;
             break;
         }
     }

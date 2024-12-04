@@ -34,7 +34,7 @@
 #include "structs/str_dungeon.h"
 #include "targeting.h"
 #include "tile_types.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 extern u8 *gUnknown_80FB380[];
 extern u8 *gUnknown_80FB384[];

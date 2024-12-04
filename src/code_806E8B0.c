@@ -21,7 +21,7 @@
 #include "dungeon_items.h"
 #include "structs/str_damage.h"
 #include "dungeon_util.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 void sub_8042940(Entity *r0);
 void sub_80428B0(Entity *r0);

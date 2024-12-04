@@ -22,7 +22,7 @@
 #include "status_checks_1.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 extern u8 *gUnknown_80FBD78[];
 extern u8 *gUnknown_80FBD9C[];

@@ -33,7 +33,7 @@
 #include "code_8077274_1.h"
 #include "dungeon_pokemon_attributes.h"
 #include "math.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 extern bool8 sub_8044B28(void);
 extern void sub_8075708(Entity *entity);

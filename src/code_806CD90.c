@@ -35,7 +35,7 @@
 #include "code_8041AD0.h"
 #include "dungeon_message.h"
 #include "dungeon_map_access.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 
 extern u8 gUnknown_202F221;
 

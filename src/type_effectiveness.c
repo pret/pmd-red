@@ -9,7 +9,7 @@
 #include "dungeon_util.h"
 #include "math.h"
 #include "status.h"
-#include "dungeon_battle_data.h"
+#include "dungeon_config.h"
 #include "weather.h"
 
 

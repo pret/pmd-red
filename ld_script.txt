@@ -541,12 +541,7 @@ SECTIONS {
         src/status_checks.o(.rodata);
         data/data_80F4DB4.o(.rodata);
         src/dungeon_ai_attack.o(.rodata);
-		src/dungeon_battle_data.o(.rodata);
-        data/data_80F54B4.o(.rodata);
-        src/move_checks.o(.rodata);
-        data/data_80F5668.o(.rodata);
-        src/dungeon_pokemon_attributes.o(.rodata);
-        src/called_move_data.o(.rodata);
+		src/dungeon_config.o(.rodata);
         data/data_80F59C8.o(.rodata);
         src/dungeon_message.o(.rodata);
         src/dungeon_move.o(.rodata);

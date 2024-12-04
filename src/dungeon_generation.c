@@ -16,6 +16,7 @@
 #include "structs/str_dungeon.h"
 #include "structs/map.h"
 #include "structs/str_806B7F8.h"
+#include "dungeon_config.h"
 
 extern const u8 gUnknown_80F6DCC[];
 extern struct FileArchive gDungeonFileArchive;
@@ -5962,8 +5963,6 @@ static void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber)
     }
 }
 
-extern const s16 gUnknown_80F57D4[][3][3];
-
 static void sub_8051654(FloorProperties *floorProps)
 {
     s32 i, n;
@@ -6058,7 +6057,7 @@ static void sub_8051654(FloorProperties *floorProps)
             if ((tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION))
                 continue;
 
-            if (gUnknown_80F57D4[floorProps->unk18][yIndex][xIndex] > DungeonRandInt(100)) {
+            if (sKecleonShopItemSpawnChances[floorProps->unk18][yIndex][xIndex] > DungeonRandInt(100)) {
                 tile->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
             }
         }

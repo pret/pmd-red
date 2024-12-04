@@ -16,92 +16,11 @@
 #include "status.h"
 #include "status_actions.h"
 #include "status_checks_1.h"
-
 #include "text_util.h"
 #include "tile_types.h"
 #include "trap.h"
 #include "weather.h"
-
-// Array indices correspond to the current dungeon tileset.
-const u8 gDungeonCamouflageTypes[76] = {
-    TYPE_WATER,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_GROUND,
-    TYPE_NORMAL,
-    TYPE_NORMAL,
-    TYPE_GRASS,
-    TYPE_ICE,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_ICE,
-    TYPE_ICE,
-    TYPE_GRASS,
-    TYPE_GROUND,
-    TYPE_ROCK,
-    TYPE_NORMAL,
-    TYPE_ICE,
-    TYPE_GRASS,
-    TYPE_GRASS,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_NORMAL,
-    TYPE_ICE,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_GROUND,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_ICE,
-    TYPE_ROCK,
-    TYPE_WATER,
-    TYPE_GRASS,
-    TYPE_GRASS,
-    TYPE_GROUND,
-    TYPE_WATER,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_NORMAL,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_GRASS,
-    TYPE_ROCK,
-    TYPE_ROCK,
-    TYPE_NORMAL,
-    TYPE_NORMAL,
-    TYPE_ROCK,
-    TYPE_NORMAL,
-    TYPE_ICE,
-    TYPE_WATER,
-    TYPE_WATER,
-    TYPE_ROCK
-};
-
+#include "dungeon_config.h"
 
 bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
 {
