@@ -19,7 +19,7 @@ bool8 sub_8083568(s32 inX, s32 inY, u8 index)
         finalYSprite = y + gUnknown_202ED28[0][index].y;
         finalYSprite &= SPRITEOAM_MAX_UNK6_4;
         finalYSprite <<= SPRITEOAM_SHIFT_UNK6_4;
-        gUnknown_202ED28[0][index].sprite.unk6 &= 0xF;
+        gUnknown_202ED28[0][index].sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
         gUnknown_202ED28[0][index].sprite.unk6 |= finalYSprite;
 
         AddSprite(&gUnknown_202ED28[0][index].sprite, 0, NULL, NULL);

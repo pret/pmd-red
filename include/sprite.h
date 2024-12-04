@@ -2,9 +2,8 @@
 #define GUARD_SPRITE_H
 
 #include "structs/axdata.h"
-#include "ground_sprite.h"
+#include "structs/sprite_oam.h"
 #include "structs/str_position.h"
-#include "sprite_oam.h"
 
 // size: 0x8
 typedef struct UnkSpriteLink

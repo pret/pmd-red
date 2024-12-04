@@ -1,12 +1,12 @@
 #ifndef GUARD_OTHER_MENUS1_H
 #define GUARD_OTHER_MENUS1_H
 
+#include "structs/menu.h"
+#include "structs/sprite_oam.h"
+#include "structs/str_text.h"
 #include "code_8094F88.h"
 #include "main_menu1.h"
-#include "structs/menu.h"
 #include "pokemon.h"
-#include "sprite_oam.h"
-#include "structs/str_text.h"
 
 // size: 0x504
 typedef struct unkStruct_203B35C

@@ -1,7 +1,7 @@
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
-#include "sprite_oam.h"
+#include "structs/sprite_oam.h"
 #include "structs/str_text.h"
 #include "structs/str_position.h"
 

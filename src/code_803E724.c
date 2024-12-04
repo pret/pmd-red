@@ -410,9 +410,9 @@ void sub_803EDF0(void)
         gUnknown_202EDDC.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
         gUnknown_202EDDC.attrib3 |= palNum;
 
-        gUnknown_202EDDC.unk6 &= 0xFFFE;
-        gUnknown_202EDDC.unk6 &= 0xFFFD;
-        gUnknown_202EDDC.unk6 &= 0xFFFB;
+        gUnknown_202EDDC.unk6 &= ~SPRITEOAM_MASK_UNK6_0;
+        gUnknown_202EDDC.unk6 &= ~SPRITEOAM_MASK_UNK6_1;
+        gUnknown_202EDDC.unk6 &= ~SPRITEOAM_MASK_UNK6_2;
 
         AddSprite(&gUnknown_202EDDC, 0x100, NULL, NULL);
     }

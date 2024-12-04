@@ -1,6 +1,18 @@
 #ifndef GUARD_SPRITE_OAM_H
 #define GUARD_SPRITE_OAM_H
 
+// size: 0xC
+// This is probably used for blue/gold rescue team to convert from GBA OAM to their platform's OAM in AddSprite()
+typedef struct unkStruct_2039DB0
+{
+    u16 unk0; // SpriteOAM attrib1 mask
+    s16 unk2; // SpriteOAM attrib2 mask
+    u16 unk4; // SpriteOAM attrib3 mask
+    u16 unk6; // SpriteOAM attrib1 value
+    u16 unk8; // SpriteOAM attrib2 value
+    u16 unkA; // SpriteOAM attrib3 value
+} unkStruct_2039DB0;
+
 // size: 0x8. Similar to struct OamData but unk6 is not copied to OAM
 typedef struct SpriteOAM
 {
@@ -10,7 +22,7 @@ typedef struct SpriteOAM
     /* 0x2 */ u16 attrib2;
     // tileNum:10  priority:2  paletteNum:4
     /* 0x4 */ u16 attrib3;
-    // unk6_0:1  unk6_1:1  unk6_2:2?  unk6_4:12
+    // unk6_0:1  unk6_1:1  unk6_2:1  unk6_3:1  unk6_4:12
     u16 unk6;
 } SpriteOAM;
 
@@ -86,6 +98,18 @@ typedef struct SpriteOAM
 #define SPRITEOAM_SHIFT_UNK6_1 1
 #define SPRITEOAM_MASK_UNK6_1 (SPRITEOAM_MAX_UNK6_1 << SPRITEOAM_SHIFT_UNK6_1) // ~ 0xFFFD
 
+#define SPRITEOAM_MAX_UNK6_2 1
+#define SPRITEOAM_SHIFT_UNK6_2 2
+#define SPRITEOAM_MASK_UNK6_2 (SPRITEOAM_MAX_UNK6_2 << SPRITEOAM_SHIFT_UNK6_2) // ~ 0xFFFB
+
+/* Not seen yet
+#define SPRITEOAM_MAX_UNK6_3 1
+#define SPRITEOAM_SHIFT_UNK6_3 3
+#define SPRITEOAM_MASK_UNK6_3 (SPRITEOAM_MAX_UNK6_3 << SPRITEOAM_SHIFT_UNK6_3) // ~ 0xFFF7
+*/
+
+// Seems to be the "working" Y coord. Gets copied to attrib1's Y coord in `AddSprite()`.
+// kermalis is too lazy to rename it atm since we're still figuring things out
 #define SPRITEOAM_MAX_UNK6_4 0xFFF
 #define SPRITEOAM_SHIFT_UNK6_4 4
 #define SPRITEOAM_MASK_UNK6_4 (SPRITEOAM_MAX_UNK6_4 << SPRITEOAM_SHIFT_UNK6_4) // ~ 0xF

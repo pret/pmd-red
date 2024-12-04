@@ -616,7 +616,7 @@ void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
         UpdateMenuCursorSpriteCoords(a0);
 
         if (!(a0->unk24 & 8)) {
-            #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/T9aXl TODO: Match like sub_8039174 with multiple vars and while(0)
+            #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/T9aXl
             u32 tmp, tmp2;
             #else
             register u32 tmp asm("r0"), tmp2 asm("r1");
@@ -688,12 +688,11 @@ void nullsub_34(MenuInputStructSub *a0, s32 a1)
 {
 }
 
-// Maybe DungeonPos
 static void sub_801332C(DungeonPos *a0)
 {
     SpriteOAM sp = {};
     SpriteOAM* ptr;
-    #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/zeLxS TODO: Match like sub_8039174 with multiple vars and while(0)
+    #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/zeLxS
     u32 r0, r1, r2;
     #else
     register u32 r0 asm("r0");
@@ -762,7 +761,7 @@ static void sub_801332C(DungeonPos *a0)
 static void sub_8013470(MenuInputStruct *a0)
 {
     SpriteOAM sp = {};
-    #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/70Ieb TODO: Match like sub_8039174 with multiple vars and while(0)
+    #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/70Ieb
     SpriteOAM *ptr;
     u32 r0, r1, r5;
     #else

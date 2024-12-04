@@ -149,7 +149,7 @@ void ResetSprites(bool8 a0)
 void sub_8004E8C(unkStruct_2039DB0 *a0)
 {
     a0->unk0 = 0xFFFF;
-    a0->unk2 = -1;
+    a0->unk2 = 0xFFFF;
     a0->unk4 = 0xFFFF;
     a0->unk6 = 0;
     a0->unk8 = 0;
@@ -557,7 +557,7 @@ void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
         spr->unk6 = a0->unk6;
     }
 
-    yPos = spr->unk6 / 16;
+    yPos = spr->unk6 >> SPRITEOAM_SHIFT_UNK6_4;
     nullsub_3(yPos, 0);
     yPos &= SPRITEOAM_MAX_Y;
     spr->attrib1 &= ~SPRITEOAM_MASK_Y;

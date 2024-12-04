@@ -333,7 +333,7 @@ static void sub_8037400(void)
 
 static void sub_80376CC(void)
 {
-#ifdef NONMATCHING // SpriteOAM memes. TODO: Match like sub_8039174 with multiple vars and while(0)
+#ifdef NONMATCHING // SpriteOAM memes
     u32 r0;
     u32 r2;
 #else

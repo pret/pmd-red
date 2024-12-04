@@ -5,6 +5,7 @@
 
 	.text
 
+@ SpriteOAM memes. Same as sub_8013F84 except instead of a 0x60 it's a 0x80
 	thumb_func_start sub_8013E54
 sub_8013E54:
 	push {r4-r6,lr}
@@ -152,6 +153,7 @@ _08013F7C: .4byte 0x00003fff
 _08013F80: .4byte 0x00000fff
 	thumb_func_end sub_8013E54
 
+@ SpriteOAM memes https://decomp.me/scratch/GROyH
 	thumb_func_start sub_8013F84
 sub_8013F84:
 	push {r4-r6,lr}
