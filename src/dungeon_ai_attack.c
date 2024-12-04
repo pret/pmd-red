@@ -1,6 +1,5 @@
 #include "global.h"
 #include "dungeon_ai_attack.h"
-
 #include "charge_move.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
@@ -17,6 +16,7 @@
 #include "dungeon_ai_targeting.h"
 #include "dungeon_ai.h"
 #include "dungeon_capabilities.h"
+#include "dungeon_config.h"
 #include "dungeon_engine.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
@@ -36,8 +36,6 @@
 #include "type_effectiveness.h"
 
 #define REGULAR_ATTACK_INDEX 4
-
-const s16 gRegularAttackWeights[] = {100, 20, 30, 40, 50};
 
 extern const u8 *const gItemStickyDoesntWorkText[];
 extern const u8 *const gPtrMysteriousPowerPreventedUseMessage[];
@@ -249,7 +247,7 @@ void ChooseAIMove(Entity *pokemon)
         }
         else
         {
-            aiPossibleMove[REGULAR_ATTACK_INDEX].weight = gRegularAttackWeights[numUsableMoves];
+            aiPossibleMove[REGULAR_ATTACK_INDEX].weight = gAiRegularAttackWeights[numUsableMoves];
         }
         total += aiPossibleMove[REGULAR_ATTACK_INDEX].weight;
     }

@@ -540,7 +540,6 @@ SECTIONS {
         data/data_80F4D44.o(.rodata);
         src/status_checks.o(.rodata);
         data/data_80F4DB4.o(.rodata);
-        src/dungeon_ai_attack.o(.rodata);
 		src/dungeon_config.o(.rodata);
         data/data_80F59C8.o(.rodata);
         src/dungeon_message.o(.rodata);

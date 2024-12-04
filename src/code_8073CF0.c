@@ -84,7 +84,6 @@ extern const u8 *gPtrProtectSavedItMessage;
 extern const u8 *gPtrStenchWavedOffMessage;
 extern const u8 *gUnknown_80FA124[];
 
-extern const s16 gUnknown_80F4E0C;
 extern const s32 gUnknown_80F60DC[];
 
 extern const DungeonPos gUnknown_80F4D44[];
@@ -386,7 +385,7 @@ void sub_8074094(Entity *entity)
 
 // Abilities check
     rand = DungeonRandInt(100);
-    if (AbilityIsActive(entity, ABILITY_SHED_SKIN) && rand < gUnknown_80F4E0C && HasNegativeStatus(entity)) {
+    if (AbilityIsActive(entity, ABILITY_SHED_SKIN) && rand < gShedSkinActivateChance && HasNegativeStatus(entity)) {
         UseAttack(NULL);
         if (!EntityExists(entity) || sub_8044B28())
             return;

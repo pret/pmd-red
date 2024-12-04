@@ -8,6 +8,27 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_moves.h"
 
+extern const s16 gMuddyWaterAccLowerChance;
+extern const s16 gOctazookaAccLowerChance;
+extern const s16 gAuroraBeamAtkLowerChance;
+extern const s16 gSecretPowerSecondaryEffectChance;
+extern const s16 gMovesConstrictionChance;
+extern const s16 gSnoreFlinchChance;
+
+extern const s16 gShedSkinActivateChance;
+extern const s16 gGrimyTrapActivateChance;
+extern const s16 gArenaTrapActivateChance;
+extern const s16 gShadowTagActivateChance;
+extern const s16 gMagnetPullActivateChance;
+extern const s16 gStaticActivateChance;
+extern const s16 gPoisonPointActivateChance;
+extern const s16 gEffectSproreActivateChance;
+extern const s16 gFlameBodyActivateChance;
+extern const s16 gCuteCharmActivateChance;
+extern const s16 gStenchActivateChance;
+
+extern const s16 gAiRegularAttackWeights[5];
+
 extern const s16 gFreezeTurnRange[2];
 extern const s16 gBurnTurnRange[2];
 extern const s16 gPoisonTurnRange[2];

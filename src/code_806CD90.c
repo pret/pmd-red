@@ -291,15 +291,6 @@ extern void EntityUpdateStatusSprites(Entity *);
 extern bool8 sub_8045888(Entity *r0);
 
 extern const s32 gUnknown_8106A4C;
-extern const s16 gUnknown_80F4E10;
-extern const s16 gUnknown_80F4E12;
-extern const s16 gUnknown_80F4E14;
-extern const s16 gUnknown_80F4E16;
-extern const s16 gUnknown_80F4E18;
-extern const s16 gUnknown_80F4E1A;
-extern const s16 gUnknown_80F4E1C;
-extern const s16 gUnknown_80F4E1E;
-extern const s16 gUnknown_80F4E20;
 extern const u8 *const gUnknown_80FCFA4;
 extern const u8 *const gUnknown_80FCA90;
 extern const u8 *const gUnknown_80F9600;
@@ -409,36 +400,36 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         if (AbilityIsActive(target, ABILITY_ARENA_TRAP)
             && !MonsterIsType(attacker, TYPE_FLYING)
             && !AbilityIsActive(attacker, ABILITY_LEVITATE)
-            && DungeonRandInt(100) < gUnknown_80F4E10)
+            && DungeonRandInt(100) < gArenaTrapActivateChance)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_ARENA_TRAP;
         }
         if (AbilityIsActive(target, ABILITY_SHADOW_TAG)
-            && DungeonRandInt(100) < gUnknown_80F4E12)
+            && DungeonRandInt(100) < gShadowTagActivateChance)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_SHADOW_TAG;
         }
         if (AbilityIsActive(target, ABILITY_MAGNET_PULL)
             && MonsterIsType(attacker, TYPE_STEEL)
-            && DungeonRandInt(100) < gUnknown_80F4E14)
+            && DungeonRandInt(100) < gMagnetPullActivateChance)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_MAGNET_PULL;
         }
 
         if (AbilityIsActive(target, ABILITY_STATIC)
             && isPhysical
-            && DungeonRandInt(100) < gUnknown_80F4E16)
+            && DungeonRandInt(100) < gStaticActivateChance)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_STATIC;
         }
         if (AbilityIsActive(target, ABILITY_POISON_POINT)
-            && DungeonRandInt(100) < gUnknown_80F4E18)
+            && DungeonRandInt(100) < gPoisonPointActivateChance)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_POISON_POINT;
         }
         if (AbilityIsActive(target, ABILITY_EFFECT_SPORE)
             && isPhysical
-            && DungeonRandInt(100) < gUnknown_80F4E1A)
+            && DungeonRandInt(100) < gEffectSproreActivateChance)
         {
             s32 rnd = DungeonRandInt(3);
             if (rnd < 1)
@@ -449,18 +440,18 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
                 attackerInfo->abilityEffectFlags |= ABILITY_FLAG_EFFECT_SPORE_SLP;
         }
         if (AbilityIsActive(target, ABILITY_FLAME_BODY)
-            && DungeonRandInt(100) < gUnknown_80F4E1C)
+            && DungeonRandInt(100) < gFlameBodyActivateChance)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_FLAME_BODY;
         }
         if (AbilityIsActive(target, ABILITY_CUTE_CHARM)
             && isPhysical
-            && DungeonRandInt(100) < gUnknown_80F4E1E)
+            && DungeonRandInt(100) < gCuteCharmActivateChance)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_CUTE_CHARM;
         }
         if (AbilityIsActive(target, ABILITY_STENCH)
-            && DungeonRandInt(100) < gUnknown_80F4E20)
+            && DungeonRandInt(100) < gStenchActivateChance)
         {
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_STENCH;
         }

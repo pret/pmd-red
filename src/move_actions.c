@@ -69,8 +69,6 @@ extern s16 gUnknown_80F4DB8;
 extern s16 gUnknown_80F4DBA;
 extern u8 *gUnknown_80FAE00[];
 extern u8 *gUnknown_80FADD8[];
-extern s16 gUnknown_80F4E02;
-extern s16 gUnknown_80F4E04;
 extern s16 gUnknown_80F4DB6;
 extern u8 *gUnknown_80FAC88;
 extern u8 *gUnknown_80FD018[];
@@ -78,13 +76,11 @@ extern u8 *gUnknown_80FCFBC[];
 extern u8 *gUnknown_80FCFE4[];
 extern u32 gUnknown_8106A4C;
 extern s16 gUnknown_80F4DF6;
-extern s16 gUnknown_80F4E0A;
 extern u8 *gUnknown_80FC734[];
 extern u8 *gUnknown_80FC7EC[];
 extern u8 *gUnknown_80FCF74[];
 extern u8 *gUnknown_80FCF80[];
 extern u32 gUnknown_8106A50;
-extern s16 gUnknown_80F4E08;
 extern u8 *gUnknown_80FD14C[];
 extern u8 *gUnknown_80FAD4C[];
 extern s24_8 gUnknown_8106A54[];
@@ -103,7 +99,6 @@ extern s16 gUnknown_80F4DEC;
 extern s16 gUnknown_80F4E00;
 extern u8 *gUnknown_80FD128[];
 extern u8 *gUnknown_80FAD2C[];
-extern s16 gUnknown_80F4E06;
 extern u8 *gUnknown_80FC74C[];
 extern u8 *gUnknown_80FC790[];
 extern u8 *gUnknown_80FC7AC[];
@@ -509,7 +504,7 @@ bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move * move, u32 param_4)
   if (IsSleeping(pokemon)) {
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
       flag = TRUE;
-      if (sub_805727C(pokemon,target,gUnknown_80F4E0A)) {
+      if (sub_805727C(pokemon,target,gSnoreFlinchChance)) {
         CringeStatusTarget(pokemon,target,FALSE);
       }
     }
@@ -568,7 +563,7 @@ bool8 WhirlpoolMoveAction(Entity * pokemon, Entity * target, Move * move, u32 pa
   }
   if (HandleDamagingMove(pokemon,target,move,modifier,param_4) != 0) {
     flag = TRUE;
-    if (sub_805727C(pokemon,target,gUnknown_80F4E08)) {
+    if (sub_805727C(pokemon,target,gMovesConstrictionChance)) {
       SqueezedStatusTarget(pokemon,target,0x3b,FALSE);
     }
   }
@@ -649,7 +644,7 @@ bool8 AuroraBeamMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4E04))
+    if(sub_805727C(pokemon, target, gAuroraBeamAtkLowerChance))
     {
         ChangeAttackMultiplierTarget(pokemon, target, gUnknown_8106A4C, FloatToF248(0.5), FALSE);
     }
@@ -676,7 +671,7 @@ bool8 OctazookaMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4E02))
+    if(sub_805727C(pokemon, target, gOctazookaAccLowerChance))
     {
         LowerAccuracyStageTarget(pokemon, target, gUnknown_8106A4C, FALSE);
     }
@@ -1834,7 +1829,7 @@ bool8 MuddyWaterMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   flag = FALSE;
   if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
     flag = TRUE;
-    if(sub_805727C(pokemon, target, gUnknown_80F4E00))
+    if(sub_805727C(pokemon, target, gMuddyWaterAccLowerChance))
     {
         LowerAccuracyStageTarget(pokemon, target, gUnknown_8106A4C, FALSE);
     }
@@ -2755,7 +2750,7 @@ bool8 SecretPowerMoveAction(Entity * pokemon, Entity * target, Move *move, u32 p
   flag = FALSE;
   if ( HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
     flag = TRUE;
-    if (sub_805727C(pokemon,target,gUnknown_80F4E06) != 0) {
+    if (sub_805727C(pokemon,target,gSecretPowerSecondaryEffectChance) != 0) {
         switch(gSecretPowerTable[gDungeon->tileset]) {
             case 0:
                 PoisonedStatusTarget(pokemon,target,FALSE);

@@ -50,7 +50,6 @@ extern u8 *gUnknown_80FDB04[];
 extern u8 *gUnknown_80FDB2C[];
 
 
-extern s16 gUnknown_80F4E0E;
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 
@@ -498,7 +497,7 @@ void HandleGrimyTrap(Entity *pokemon, Entity *target)
         }
         for (index = 0; index < counter; index++) {
             if (((GetItemCategory(itemStack[index]->id) == CATEGORY_FOOD_GUMMIES) && (itemStack[index]->id != ITEM_GRIMY_FOOD)) &&
-                (DungeonRandInt(100) < gUnknown_80F4E0E)) {
+                (DungeonRandInt(100) < gGrimyTrapActivateChance)) {
                 badFoodCount++;
                 sub_8045C28(itemStack[index], ITEM_GRIMY_FOOD, 2);
             }

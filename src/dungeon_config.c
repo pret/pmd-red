@@ -118,6 +118,28 @@ extern bool8 StunSporeMoveAction(Entity *pokemon, Entity *target, Move *move, s3
 
 // Huge list of various config variables for dungeon moves/music/abilities/items/etc. All in one file, because these are scattered all around the codebase.
 
+const s16 gMuddyWaterAccLowerChance = 40;
+const s16 gOctazookaAccLowerChance = 60;
+const s16 gAuroraBeamAtkLowerChance = 60;
+const s16 gSecretPowerSecondaryEffectChance = 30;
+const s16 gMovesConstrictionChance = 10; // Fire Spin, Whirlpool, Clamp, Bind, Sand Tomb
+const s16 gSnoreFlinchChance = 30;
+// Activation chance of abilities/traps
+const s16 gShedSkinActivateChance = 50;
+const s16 gGrimyTrapActivateChance = 30;
+// Target ability - activation chance
+const s16 gArenaTrapActivateChance = 12;
+const s16 gShadowTagActivateChance = 12;
+const s16 gMagnetPullActivateChance = 12;
+const s16 gStaticActivateChance = 12;
+const s16 gPoisonPointActivateChance = 12;
+const s16 gEffectSproreActivateChance = 12;
+const s16 gFlameBodyActivateChance = 12;
+const s16 gCuteCharmActivateChance = 12;
+const s16 gStenchActivateChance = 12;
+
+const s16 gAiRegularAttackWeights[5] = {100, 20, 30, 40, 50};
+
 // Status turn ranges
 const s16 gFreezeTurnRange[2] = {3, 5};
 const s16 gBurnTurnRange[2] = {0x7F, 0x7F};

@@ -122,7 +122,6 @@ extern u32 gUnknown_8106A8C[];
 extern u8 *gUnknown_80FC5A8[];
 extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
 extern u8 *gUnknown_80FEB08[];
-extern s16 gUnknown_80F4E08;
 extern u32 gMetronomeCalledArrayId;
 
 extern s16 gUnknown_80F4DC6;
@@ -242,7 +241,7 @@ bool8 sub_805B17C(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     }
     if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
         flag = TRUE;
-        if (sub_805727C(pokemon,target,gUnknown_80F4E08) != 0) {
+        if (sub_805727C(pokemon,target,gMovesConstrictionChance) != 0) {
             SqueezedStatusTarget(pokemon,target,uVar4,0);
         }
     }
