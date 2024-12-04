@@ -7,7 +7,7 @@
 #include "code_806CD90.h"
 #include "code_8041AD0.h"
 #include "code_800DAC0.h"
-#include "type_chart.h"
+#include "dungeon_battle_data.h"
 #include "constants/direction.h"
 #include "constants/status.h"
 #include "constants/type.h"

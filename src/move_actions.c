@@ -47,7 +47,6 @@ extern s16 gUnknown_80F4DE8;
 extern u8 *gUnknown_80FAD6C[];
 extern s16 gUnknown_80F4DE4;
 extern u8 *gUnknown_80FBD58[];
-extern s24_8 gUnknown_80F51B4[];
 extern s16 gUnknown_80F4DC0;
 extern s16 gUnknown_80F4DF8;
 extern s16 gUnknown_80F4DD0;
@@ -57,7 +56,6 @@ extern s16 gUnknown_80F4DF4;
 extern u8 gUnknown_202F21A;
 extern s16 gUnknown_80F4DD6;
 extern u8 gUnknown_202F219;
-extern s24_8 gUnknown_80F51A4[];
 extern u8 *gUnknown_80FACA4[];
 extern u8 *gUnknown_80FD104[];
 extern s16 gUnknown_80F4DD4;
@@ -83,8 +81,6 @@ extern u8 *gUnknown_80FCFE4[];
 extern u32 gUnknown_8106A4C;
 extern s16 gUnknown_80F4DF6;
 extern s16 gUnknown_80F4E0A;
-extern u8 gUnknown_80F51E4[];
-extern u32 gUnknown_80F51EC[];
 extern u8 *gUnknown_80FC734[];
 extern u8 *gUnknown_80FC7EC[];
 extern u8 *gUnknown_80FCF74[];
@@ -122,7 +118,6 @@ extern u8 *gUnknown_80FCF7C[];
 extern u8 *gUnknown_80FC730[];
 extern s16 gUnknown_80F4DF2;
 extern u8 *gUnknown_80FC770[];
-extern s32 gUnknown_80F51D4[];
 extern s16 gUnknown_80F4DD2;
 extern u8 *gUnknown_80FCA3C[];
 extern u8 *gUnknown_80FD170[];
@@ -175,7 +170,7 @@ extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u3
 extern void nullsub_92(Entity *);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern u8 sub_807EAA0(u32, u32);
-extern s32 sub_80556BC(Entity *, Entity *, u8, Move *, u32, u32);
+extern s32 sub_80556BC(Entity *, Entity *, u8, Move *, s24_8, u32);
 
 // move_util.h
 extern bool8 sub_805727C(Entity *, Entity *, s16);
@@ -554,8 +549,8 @@ bool32 WeatherBallMoveAction(Entity * pokemon, Entity * target, Move * move, u32
   s32 flag;
 
   weather = GetApparentWeather(pokemon);
-  flag = sub_80556BC(pokemon,target,gUnknown_80F51E4[weather],move,
-                      gUnknown_80F51EC[weather],param_4);
+  flag = sub_80556BC(pokemon,target,gWeatherBallTypes[weather],move,
+                      gWeatherBallModifiers[weather],param_4);
   if (flag) {
     flag = TRUE;
   }
@@ -1081,7 +1076,7 @@ bool8 ReversalMoveAction(Entity * pokemon, Entity * target, Move * move, u32 par
         index = 3;
     }
 
-    flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F51A4[index],param_4) ? TRUE : FALSE;
+    flag = HandleDamagingMove(pokemon,target,move,gReversalModifiers[index],param_4) ? TRUE : FALSE;
     return flag;
 }
 
@@ -1366,7 +1361,7 @@ bool8 WaterSpoutMoveAction(Entity * pokemon, Entity * target, Move * move, u32 p
         index = 3;
     }
 
-    flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F51B4[index],param_4) ? TRUE : FALSE;
+    flag = HandleDamagingMove(pokemon,target,move,gWaterSpoutModifiers[index],param_4) ? TRUE : FALSE;
     return flag;
 }
 
@@ -2480,7 +2475,7 @@ bool8 SwallowMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4
 
   stockpileStage = &GetEntInfo(target)->stockpileStage;
   if (*stockpileStage != 0) {
-    HealTargetHP(pokemon,target,gUnknown_80F51D4[*stockpileStage],0,TRUE);
+    HealTargetHP(pokemon,target,gStockpileHealHpValues[*stockpileStage],0,TRUE);
     *stockpileStage = 0;
   }
   else {

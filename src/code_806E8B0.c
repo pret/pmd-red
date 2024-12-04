@@ -15,7 +15,6 @@
 #include "math.h"
 #include "number_util.h"
 #include "status.h"
-#include "type_chart.h"
 #include "dungeon_random.h"
 #include "code_80450F8.h"
 #include "code_8045A00.h"

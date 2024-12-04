@@ -10,7 +10,6 @@
 #include "constants/status.h"
 #include "constants/weather.h"
 #include "constants/iq_skill.h"
-#include "type_chart.h"
 #include "position_util.h"
 #include "dungeon_items.h"
 #include "code_806CD90.h"
@@ -318,8 +317,6 @@ static void SortTargets(Entity **targetsArray, Entity *attacker);
 
 extern const s32 gUnknown_8106A50;
 extern const s32 gUnknown_8106A4C;
-extern const s32 gUnknown_80F519C;
-extern const s32 gUnknown_80F51A0;
 extern const u8 *const gUnknown_80FEEA4;
 extern const u8 *const gUnknown_80FEEC8;
 extern const u8 *const gUnknown_80FEEEC;
@@ -2719,10 +2716,10 @@ static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accu
         return TRUE;
 
     if (HasHeldItem(target, ITEM_DETECT_BAND)) {
-        accuracy -= gUnknown_80F519C;
+        accuracy -= gDetectBandAccuracyDebuffValue;
     }
     if (IQSkillIsEnabled(target, IQ_QUICK_DODGER)) {
-        accuracy -= gUnknown_80F51A0;
+        accuracy -= gIqQuickDodgerAccuracyDebuffValue;
     }
 
     statStageAccuracy = attackerInfo->hitChanceStages[0];

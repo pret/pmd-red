@@ -33,7 +33,6 @@
 #include "move_effects_target.h"
 #include "dungeon_pokemon_attributes.h"
 #include "code_8041AD0.h"
-#include "type_chart.h"
 #include "dungeon_message.h"
 #include "dungeon_map_access.h"
 #include "dungeon_battle_data.h"

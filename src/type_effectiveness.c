@@ -1,6 +1,5 @@
 #include "global.h"
 #include "type_effectiveness.h"
-
 #include "constants/ability.h"
 #include "constants/status.h"
 #include "constants/weather.h"
@@ -10,7 +9,7 @@
 #include "dungeon_util.h"
 #include "math.h"
 #include "status.h"
-#include "type_chart.h"
+#include "dungeon_battle_data.h"
 #include "weather.h"
 
 

@@ -22,7 +22,6 @@
 #include "position_util.h"
 #include "text_util.h"
 #include "dungeon_util_1.h"
-#include "type_chart.h"
 #include "math.h"
 #include "dungeon_battle_data.h"
 #include "string_format.h"

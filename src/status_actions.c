@@ -135,8 +135,6 @@ extern u32 gMetronomeCalledArrayId;
 extern s16 gUnknown_80F4DC6;
 extern u8 *gUnknown_80FEFF4[];
 
-extern s24_8 gUnknown_80F51C4[];
-
 bool8 EruptionMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_4)
 {
     EntityInfo *entityInfo;
@@ -160,7 +158,7 @@ bool8 EruptionMoveAction(Entity * pokemon, Entity * target, Move *move, u32 para
         index = 3;
     }
 
-    flag = HandleDamagingMove(pokemon,target,move,gUnknown_80F51C4[index],param_4) ? TRUE : FALSE;
+    flag = HandleDamagingMove(pokemon,target,move,gEruptionModifiers[index],param_4) ? TRUE : FALSE;
     return flag;
 }
 

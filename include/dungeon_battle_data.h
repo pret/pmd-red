@@ -3,6 +3,7 @@
 
 #include "math.h"
 #include "constants/weather.h"
+#include "constants/type.h"
 
 extern const s16 gFreezeTurnRange[2];
 extern const s16 gBurnTurnRange[2];
@@ -144,5 +145,31 @@ extern const s16 gGeoPebbleThrownDmgValue;
 extern const s24_8 gAtkStatStageMultipliers[21];
 extern const s24_8 gDefStatStageMultipliers[21];
 extern const s24_8 gAccEvsStatStageMultipliers[2][21];
+extern const s32 gDetectBandAccuracyDebuffValue;
+extern const s32 gIqQuickDodgerAccuracyDebuffValue;
+extern const s24_8 gReversalModifiers[4];
+extern const s24_8 gWaterSpoutModifiers[4];
+extern const s24_8 gEruptionModifiers[4];
+extern const s32 gStockpileHealHpValues[4];
+
+extern const u8 gWeatherBallTypes[WEATHER_COUNT];
+extern const s24_8 gWeatherBallModifiers[WEATHER_COUNT];
+
+struct CastformWeatherData
+{
+    u8 type;
+    s16 monsterId;
+};
+
+extern const struct CastformWeatherData gCastformByWeather[WEATHER_COUNT];
+
+#define NUM_EFFECTIVENESS 4
+
+#define EFFECTIVENESS_IMMUNE 0
+#define EFFECTIVENESS_RESIST 1
+#define EFFECTIVENESS_NEUTRAL 2
+#define EFFECTIVENESS_SUPER 3
+
+extern const s16 gTypeEffectivenessChart[NUM_TYPES][NUM_TYPES];
 
 #endif

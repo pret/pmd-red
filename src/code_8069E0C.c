@@ -40,16 +40,8 @@
 #include "constants/iq_skill.h"
 #include "structs/str_806B7F8.h"
 #include "structs/str_202ED28.h"
+#include "dungeon_battle_data.h"
 
-struct CastformWeatherData
-{
-    u8 type;
-    s16 monsterId;
-};
-
-extern const struct CastformWeatherData gCastformByWeather[WEATHER_COUNT];
-
-extern u8 gUnknown_80F51E4[];
 extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];
 extern u8 *gUnknown_80FDCC8[];
@@ -222,7 +214,7 @@ void sub_8069F9C(Entity *pokemon, Entity *target, Move *move)
             u8 type = GetMoveTypeForMonster(pokemon,move);
             if (move->id == MOVE_WEATHER_BALL) {
                 u32 weather = GetApparentWeather(pokemon);
-                type = gUnknown_80F51E4[weather];
+                type = gWeatherBallTypes[weather];
             }
             if (type != TYPE_NONE && !MonsterIsType(target,type)) {
                 const u8 *str;
