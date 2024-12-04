@@ -84,9 +84,7 @@ extern const u8 *gPtrProtectSavedItMessage;
 extern const u8 *gPtrStenchWavedOffMessage;
 extern const u8 *gUnknown_80FA124[];
 
-extern const s16 gWarpScarfActivationChances[];
 extern const s16 gUnknown_80F4E0C;
-extern s48_16 gUnknown_80F54F4[8];
 extern const s32 gUnknown_80F60DC[];
 
 extern const DungeonPos gUnknown_80F4D44[];
@@ -273,8 +271,8 @@ void sub_8074094(Entity *entity)
     sub_805229C();
     sub_807E8F0(entity);
     if (HasHeldItem(entity, ITEM_WARP_SCARF)) {
-        if (++entityInfo->turnsSinceWarpScarfActivation > 19)
-            entityInfo->turnsSinceWarpScarfActivation = 19;
+        if (++entityInfo->turnsSinceWarpScarfActivation >= WARP_SCARF_ACTIVATION_CHANCES_COUNT)
+            entityInfo->turnsSinceWarpScarfActivation = WARP_SCARF_ACTIVATION_CHANCES_COUNT - 1;
         if (DungeonRandInt(100) < gWarpScarfActivationChances[entityInfo->turnsSinceWarpScarfActivation]) {
             entityInfo->turnsSinceWarpScarfActivation = 0;
             sub_80444F4(entity);
@@ -296,28 +294,28 @@ void sub_8074094(Entity *entity)
         bool8 sound;
 
         const u8 *str = NULL;
-        s32 r4 = 10;
+        s32 arrIndex = 10;
         if (HasHeldItem(entity, ITEM_TIGHT_BELT))
-            r4 = 0;
+            arrIndex = 0;
         if (HasHeldItem(entity, ITEM_STAMINA_BAND))
-            r4--;
+            arrIndex--;
         if (IQSkillIsEnabled(entity, IQ_ENERGY_SAVER))
-            r4--;
+            arrIndex--;
         if (HasHeldItem(entity, ITEM_DIET_RIBBON))
-            r4++;
+            arrIndex++;
         if (HasHeldItem(entity, ITEM_HEAL_RIBBON))
-            r4++;
+            arrIndex++;
         if (HasHeldItem(entity, ITEM_MUNCH_BELT))
-            r4++;
+            arrIndex++;
 
-        if (r4 < 0)
-            r4 = 0;
-        if (r4 > 19)
-            r4 = 19;
+        if (arrIndex < 0)
+            arrIndex = 0;
+        if (arrIndex >= BELLY_GO_DOWN_VALUES_COUNT)
+            arrIndex = BELLY_GO_DOWN_VALUES_COUNT - 1;
 
         sp8.hi = 0;
         sp8.lo = 6554;
-        F48_16_SMul(&sp10, &sp8, &gUnknown_80F54F4[r4]);
+        F48_16_SMul(&sp10, &sp8, &gBellyGoDownValues[arrIndex]);
         if (entityInfo->unk153 > 1)
             sp10.lo += (gUnknown_80F60DC[entityInfo->unk153] << 0x10);
         entityInfo->unk153 = 0;

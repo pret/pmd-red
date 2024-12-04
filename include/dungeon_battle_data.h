@@ -171,5 +171,12 @@ extern const struct CastformWeatherData gCastformByWeather[WEATHER_COUNT];
 #define EFFECTIVENESS_SUPER 3
 
 extern const s16 gTypeEffectivenessChart[NUM_TYPES][NUM_TYPES];
+extern const s32 gEffectivenessChart[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
+
+#define BELLY_GO_DOWN_VALUES_COUNT 20
+extern const s48_16 gBellyGoDownValues[BELLY_GO_DOWN_VALUES_COUNT];
+
+#define WARP_SCARF_ACTIVATION_CHANCES_COUNT 20
+extern const s16 gWarpScarfActivationChances[WARP_SCARF_ACTIVATION_CHANCES_COUNT];
 
 #endif

@@ -68,7 +68,6 @@ extern u8 *gUnknown_80FAC74[];
 extern u8 *gUnknown_80FAC54[];
 extern s16 gUnknown_80F4DB8;
 extern s16 gUnknown_80F4DBA;
-extern s16 gUnknown_80F55BC[];
 extern u8 *gUnknown_80FAE00[];
 extern u8 *gUnknown_80FADD8[];
 extern s16 gUnknown_80F4E02;
@@ -717,34 +716,31 @@ bool8 WillOWispMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param
   return TRUE;
 }
 
+struct TestStruct
+{
+    s16 a;
+    s16 b;
+};
+
+extern const struct TestStruct gUnknown_80F55BC[];
+
 bool8 ReturnMoveAction(Entity * pokemon,Entity * target,Move * move,s32 param_4)
 {
-  s16 *psVar3;
-  s32 index;
-  s32 r6;
-  bool8 local_24;
-  EntityInfo *entityInfo;
-  s32 IQ;
+    s32 i;
+    bool8 local_24;
+    EntityInfo *entityInfo = GetEntInfo(pokemon);
+    s32 dmg = 1;
 
-  entityInfo = GetEntInfo(pokemon);
-
-
-  r6 = 1;
-  index = 0;
-  if (0 <= gUnknown_80F55BC[0]) {
-    IQ = entityInfo->IQ;
-    for(psVar3 = &gUnknown_80F55BC[index]; (999 > index) && (*psVar3 >= 0); psVar3 = psVar3 + 2, index++)
-        {
-            if ((IQ < *psVar3)){
-                r6 = psVar3[1];
-                goto _080580B0;
-            }
+    for (i = 0; i < 999 && gUnknown_80F55BC[i].a >= 0; i++) {
+        if (entityInfo->IQ < gUnknown_80F55BC[i].a) {
+            dmg = gUnknown_80F55BC[i].b;
+            break;
         }
- }
-_080580B0:
-  sub_806F370(pokemon,target,r6,1,&local_24,GetMoveType(move),sub_8057600(move,param_4),0,1,0);
-  local_24 = local_24 == 0;
-  return local_24;
+    }
+
+    sub_806F370(pokemon,target,dmg,1,&local_24,GetMoveType(move),sub_8057600(move,param_4),0,1,0);
+    local_24 = (local_24 == 0);
+    return local_24;
 }
 
 bool8 GrudgeMoveAction(Entity *pokemon, Entity * target, Move *move, s32 param_4)

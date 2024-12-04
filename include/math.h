@@ -38,7 +38,7 @@ s24_8 s24_8_mul(s24_8 x, s24_8 y);
 
 bool8 F48_16_IsZero(s48_16 *a);
 void F48_16_SDiv(s48_16 *dst, s48_16 *a, s48_16 *b);
-void F48_16_SMul(s48_16 *dst, s48_16 *a, s48_16 *b);
+void F48_16_SMul(s48_16 *dst, const s48_16 *a, const s48_16 *b);
 
 s24_8 FP24_8_Hypot(s24_8 x, s24_8 y);
 void FP48_16_FromS32(s48_16 *dst, s32 src);

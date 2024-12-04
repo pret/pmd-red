@@ -305,3 +305,57 @@ const s16 gTypeEffectivenessChart[NUM_TYPES][NUM_TYPES] = {
     [TYPE_DARK] =       {NEUTRAL, NEUTRAL, NEUTRAL, NEUTRAL, NEUTRAL, NEUTRAL, NEUTRAL, RESIST,  NEUTRAL, NEUTRAL, NEUTRAL, SUPER,   NEUTRAL, NEUTRAL, SUPER,   NEUTRAL, RESIST,  RESIST},
     [TYPE_STEEL] =      {NEUTRAL, NEUTRAL, RESIST,  RESIST,  NEUTRAL, RESIST,  SUPER,   NEUTRAL, NEUTRAL, NEUTRAL, NEUTRAL, NEUTRAL, NEUTRAL, SUPER,   NEUTRAL, NEUTRAL, NEUTRAL, RESIST}
 };
+
+const s32 gEffectivenessChart[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS] = {
+    [IMMUNE] = {
+        [IMMUNE] = IMMUNE,
+        [RESIST] = IMMUNE,
+        [NEUTRAL] = IMMUNE,
+        [SUPER] = RESIST,
+    },
+    [RESIST] = {
+        [IMMUNE] = IMMUNE,
+        [RESIST] = RESIST,
+        [NEUTRAL] = RESIST,
+        [SUPER] = NEUTRAL,
+    },
+    [NEUTRAL] = {
+        [IMMUNE] = IMMUNE,
+        [RESIST] = RESIST,
+        [NEUTRAL] = NEUTRAL,
+        [SUPER] = SUPER,
+    },
+    [SUPER] = {
+        [IMMUNE] = RESIST,
+        [RESIST] = NEUTRAL,
+        [NEUTRAL] = SUPER,
+        [SUPER] = SUPER,
+    },
+};
+
+// Todo: change to readable format
+const s48_16 gBellyGoDownValues[BELLY_GO_DOWN_VALUES_COUNT] =
+{
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0},
+    {0, 0x199A},
+    {0, 0x4000},
+    {0, 0x8000},
+    {0, 0xC000},
+    {0, 0x10000},
+    {0, 0x20000},
+    {0, 0x40000},
+    {0, 0x80000},
+    {0, 0x100000},
+    {0, 0x200000},
+    {0, 0x400000},
+    {0, 0x800000},
+    {0, 0x800000},
+    {0, 0x800000},
+};
+
+const s16 gWarpScarfActivationChances[WARP_SCARF_ACTIVATION_CHANCES_COUNT] = {0, 6, 12, 30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 999, 0};

@@ -33,7 +33,6 @@ extern void sub_8041B74(Entity *pokemon);
 extern void sub_8041B5C(Entity *pokemon);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
 
-extern const s32 gUnknown_80F54B4[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
 extern const s16 gUnknown_810AC60;
 extern const s16 gUnknown_810AC68;
 extern const s16 gUnknown_810AC64;
@@ -470,7 +469,7 @@ void sub_806F370(Entity *pokemon, Entity *target, s32 dmg, s32 giveExp, bool8 *t
             typeEffectiveness[i] = effectiv;
         }
         if (AbilityIsActive(target, ABILITY_WONDER_GUARD)) {
-            if (gUnknown_80F54B4[typeEffectiveness[0]][typeEffectiveness[1]] != EFFECTIVENESS_SUPER) {
+            if (gEffectivenessChart[typeEffectiveness[0]][typeEffectiveness[1]] != EFFECTIVENESS_SUPER) {
                 dmgNew = 0;
             }
         }
