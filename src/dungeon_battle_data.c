@@ -1,6 +1,7 @@
 #include "global.h"
 #include "dungeon_battle_data.h"
 #include "math.h"
+#include "constants/weather.h"
 
 const s16 gFreezeTurnRange[2] = {3, 5};
 const s16 gBurnTurnRange[2] = {0x7F, 0x7F};
@@ -109,3 +110,104 @@ const s16 gSpikeTrapDmgValue = 20;
 const s16 gChestnutTrapDmgValue = 10;
 UNUSED static const s16 sMaybeUnusedTrapDmgValue = 15;
 const s16 gPitfallTrapDmgValue = 5;
+const s16 gSetDamageDmgValue = 35;
+const s16 gHailSandstormDmgValue = 5;
+const s16 gBlowAwayDmgValue = 5;
+const s16 gHurlOrbDmgValue = 10;
+const s16 gMagnitudeDmgValues[7] = {5, 10, 15, 25, 30, 35, 40};
+const s16 gUnknownDungeonChance = 90; // See sub_8047930
+const s16 gBlastSeedThrownDmgValue = 20;
+const s16 gBlastSeedEatenDmgValue = 45;
+const s16 gBlastSeedThrownBossDmgValue = 15;
+const s16 gBlastSeedEatenBossDmgValue = 30;
+const s16 gUnknown_80F4FAC = 1;
+const s16 gUnknown_80F4FAE = 2;
+UNUSED static const s16 sUnusedConfig2 = 25;
+const s16 gIngrainHealValue = 10;
+const s16 gLeechSeedHealValue = 10;
+const s16 gOranBerryHealValue = 100;
+const s16 gOranBerryMaxHpRiseValue = 0;
+const s16 gSitrusBerryHealValue = 100;
+const s16 gSitrusBerryMaxHpRiseValue = 2;
+const s16 gLifeSeedMaxHpRiseValue = 3;
+const s16 gWishRegenValue = -220;
+const s16 gRainDishRegenValue = -150;
+const s16 gHealRibbonRegenValue = -100;
+const s16 gFamishBellyDownValue = 10;
+const s16 gBadPoisonDmgValuesByTurn[BAD_POISON_DMG_TURN_VALUES_COUNT] = { 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 }; // Always damages the player by 6 hp, but given this exists it's possible they planned the damage to become worse each turn, but later decided to go against it.
+const s16 gStenchTerrifiedTurnsNo = 3;
+const s16 gPassScarfBellyDownValue = 2;
+const s16 gFriendBowRecruitRateUpValue = 100;
+const s16 gSynthesisHealValueByWeather[WEATHER_COUNT] =
+{
+    [WEATHER_CLEAR] = 50,
+    [WEATHER_SUNNY] = 80,
+    [WEATHER_SANDSTORM] = 30,
+    [WEATHER_CLOUDY] = 40,
+    [WEATHER_RAIN] = 10,
+    [WEATHER_HAIL] = 10,
+    [WEATHER_FOG] = 1,
+    [WEATHER_SNOW] = 1,
+};
+const s16 gMoonlightHealValueByWeather[WEATHER_COUNT] = // Identical to Synthesis
+{
+    [WEATHER_CLEAR] = 50,
+    [WEATHER_SUNNY] = 80,
+    [WEATHER_SANDSTORM] = 30,
+    [WEATHER_CLOUDY] = 40,
+    [WEATHER_RAIN] = 10,
+    [WEATHER_HAIL] = 10,
+    [WEATHER_FOG] = 1,
+    [WEATHER_SNOW] = 1,
+};
+const s16 gMorningSunHealValueByWeather[WEATHER_COUNT] = // Identical to Synthesis
+{
+    [WEATHER_CLEAR] = 50,
+    [WEATHER_SUNNY] = 80,
+    [WEATHER_SANDSTORM] = 30,
+    [WEATHER_CLOUDY] = 40,
+    [WEATHER_RAIN] = 10,
+    [WEATHER_HAIL] = 10,
+    [WEATHER_FOG] = 1,
+    [WEATHER_SNOW] = 1,
+};
+const s16 gStickPPValue = 1;
+const s16 gIronThornPPValue = 5;
+const s16 gSilverSpikePPValue = 6;
+const s16 gGoldFangPPValue = 7;
+const s16 gCacneaSpikePPValue = 8;
+const s16 gCorsolaTwigPPValue = 9;
+const s16 gGravelerockThrownDmgValue = 20;
+const s16 gGeoPebbleThrownDmgValue = 15;
+UNUSED static const s16 sUnusedConfig3 = 0;
+const s24_8 gAtkStatStageMultipliers[21] =
+{
+    IntToF248_2(0.2500), IntToF248_2(0.2696), IntToF248_2(0.2892), IntToF248_2(0.3087), IntToF248_2(0.3282), IntToF248_2(0.3478),
+    IntToF248_2(0.3985), IntToF248_2(0.4493), IntToF248_2(0.5000), IntToF248_2(0.6993), IntToF248_2(1.0000), IntToF248_2(1.2969),
+    IntToF248_2(1.5000), IntToF248_2(1.5978), IntToF248_2(1.6485), IntToF248_2(1.6993), IntToF248_2(1.7500), IntToF248_2(1.7969),
+    IntToF248_2(1.8478), IntToF248_2(1.8985), IntToF248_2(2.0000)
+};
+const s24_8 gDefStatStageMultipliers[21] =
+{
+    IntToF248_2(0.2500), IntToF248_2(0.2696), IntToF248_2(0.2892), IntToF248_2(0.3087), IntToF248_2(0.3282), IntToF248_2(0.3478),
+    IntToF248_2(0.3985), IntToF248_2(0.5469), IntToF248_2(0.6993), IntToF248_2(0.8672), IntToF248_2(1.0000), IntToF248_2(1.2969),
+    IntToF248_2(1.5000), IntToF248_2(1.5978), IntToF248_2(1.6485), IntToF248_2(1.6993), IntToF248_2(1.7500), IntToF248_2(1.7969),
+    IntToF248_2(1.8478), IntToF248_2(1.8985), IntToF248_2(2.0000)
+};
+const s24_8 gAccEvsStatStageMultipliers[2][21] =
+{
+    // Accuracy
+    {
+        IntToF248_2(0.3282), IntToF248_2(0.3478), IntToF248_2(0.3672), IntToF248_2(0.3985), IntToF248_2(0.4297), IntToF248_2(0.4493),
+        IntToF248_2(0.5469), IntToF248_2(0.5977), IntToF248_2(0.6993), IntToF248_2(0.7969), IntToF248_2(1.0000), IntToF248_2(1.2500),
+        IntToF248_2(1.5000), IntToF248_2(1.5978), IntToF248_2(1.6485), IntToF248_2(1.6993), IntToF248_2(1.7500), IntToF248_2(1.7969),
+        IntToF248_2(1.8478), IntToF248_2(1.8985), IntToF248_2(2.0000)
+    },
+    // Evasion
+    {
+        IntToF248_2(2.0000), IntToF248_2(1.8985), IntToF248_2(1.8478), IntToF248_2(1.7969), IntToF248_2(1.7500), IntToF248_2(1.6993),
+        IntToF248_2(1.6485), IntToF248_2(1.5978), IntToF248_2(1.5000), IntToF248_2(1.3515), IntToF248_2(1.0000), IntToF248_2(0.7969),
+        IntToF248_2(0.6993), IntToF248_2(0.5977), IntToF248_2(0.5000), IntToF248_2(0.3985), IntToF248_2(0.3477), IntToF248_2(0.2969),
+        IntToF248_2(0.2500), IntToF248_2(0.1993), IntToF248_2(0.1485)
+    },
+};

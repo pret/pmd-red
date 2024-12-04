@@ -2,6 +2,7 @@
 #define GUARD_DUNGEON_BATTLE_DATA_H
 
 #include "math.h"
+#include "constants/weather.h"
 
 extern const s16 gFreezeTurnRange[2];
 extern const s16 gBurnTurnRange[2];
@@ -101,5 +102,47 @@ extern const s16 gSplashDmgValue;
 extern const s16 gSpikeTrapDmgValue;
 extern const s16 gChestnutTrapDmgValue;
 extern const s16 gPitfallTrapDmgValue;
+extern const s16 gSetDamageDmgValue;
+extern const s16 gHailSandstormDmgValue;
+extern const s16 gBlowAwayDmgValue;
+extern const s16 gHurlOrbDmgValue;
+extern const s16 gMagnitudeDmgValues[7];
+extern const s16 gUnknownDungeonChance;
+extern const s16 gBlastSeedThrownDmgValue;
+extern const s16 gBlastSeedEatenDmgValue;
+extern const s16 gBlastSeedThrownBossDmgValue;
+extern const s16 gBlastSeedEatenBossDmgValue;
+extern const s16 gUnknown_80F4FAC;
+extern const s16 gUnknown_80F4FAE;
+extern const s16 gIngrainHealValue;
+extern const s16 gLeechSeedHealValue;
+extern const s16 gOranBerryHealValue;
+extern const s16 gOranBerryMaxHpRiseValue;
+extern const s16 gSitrusBerryHealValue;
+extern const s16 gSitrusBerryMaxHpRiseValue;
+extern const s16 gLifeSeedMaxHpRiseValue;
+extern const s16 gWishRegenValue;
+extern const s16 gRainDishRegenValue;
+extern const s16 gHealRibbonRegenValue;
+extern const s16 gFamishBellyDownValue;
+#define BAD_POISON_DMG_TURN_VALUES_COUNT 30
+extern const s16 gBadPoisonDmgValuesByTurn[BAD_POISON_DMG_TURN_VALUES_COUNT];
+extern const s16 gStenchTerrifiedTurnsNo;
+extern const s16 gPassScarfBellyDownValue;
+extern const s16 gFriendBowRecruitRateUpValue;
+extern const s16 gSynthesisHealValueByWeather[WEATHER_COUNT];
+extern const s16 gMoonlightHealValueByWeather[WEATHER_COUNT];
+extern const s16 gMorningSunHealValueByWeather[WEATHER_COUNT];
+extern const s16 gStickPPValue;
+extern const s16 gIronThornPPValue;
+extern const s16 gSilverSpikePPValue;
+extern const s16 gGoldFangPPValue;
+extern const s16 gCacneaSpikePPValue;
+extern const s16 gCorsolaTwigPPValue;
+extern const s16 gGravelerockThrownDmgValue;
+extern const s16 gGeoPebbleThrownDmgValue;
+extern const s24_8 gAtkStatStageMultipliers[21];
+extern const s24_8 gDefStatStageMultipliers[21];
+extern const s24_8 gAccEvsStatStageMultipliers[2][21];
 
 #endif

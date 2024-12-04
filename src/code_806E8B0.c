@@ -22,6 +22,7 @@
 #include "dungeon_items.h"
 #include "structs/str_damage.h"
 #include "dungeon_util.h"
+#include "dungeon_battle_data.h"
 
 void sub_8042940(Entity *r0);
 void sub_80428B0(Entity *r0);
@@ -34,8 +35,6 @@ extern void sub_8041B5C(Entity *pokemon);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
 
 extern const s32 gUnknown_80F54B4[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
-extern const s24_8 gUnknown_80F504C[];
-extern const s24_8 gUnknown_80F50A0[];
 extern const s16 gUnknown_810AC60;
 extern const s16 gUnknown_810AC68;
 extern const s16 gUnknown_810AC64;
@@ -210,7 +209,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
 
         gDungeon->unk134.unk13E[0] = atkStatStage;
         gDungeon->unk134.unk140[0] = attackerInfo->atk[splitIndex] + movePower;
-        statCalc = s24_8_mul(IntToF248(attackerInfo->atk[splitIndex] + movePower), gUnknown_80F504C[atkStatStage]);
+        statCalc = s24_8_mul(IntToF248(attackerInfo->atk[splitIndex] + movePower), gAtkStatStageMultipliers[atkStatStage]);
         statCalc = s24_8_mul(statCalc, attackerInfo->offensiveMultipliers[splitIndex]);
         atkStat = F248ToInt(statCalc);
 
@@ -234,7 +233,7 @@ void CalcDamage(Entity *attacker, Entity *target, u8 moveType, s32 movePower, s3
 
         gDungeon->unk134.unk13E[1] = defStatStage;
         gDungeon->unk134.unk140[1] = targetInfo->def[splitIndex];
-        statCalc = s24_8_mul(IntToF248(targetInfo->def[splitIndex]), gUnknown_80F50A0[defStatStage]);
+        statCalc = s24_8_mul(IntToF248(targetInfo->def[splitIndex]), gDefStatStageMultipliers[defStatStage]);
         statCalc = s24_8_mul(statCalc, targetInfo->defensiveMultipliers[splitIndex]);
         defStat = F248ToInt(statCalc);
 

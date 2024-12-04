@@ -24,10 +24,10 @@
 #include "dungeon_util_1.h"
 #include "type_chart.h"
 #include "math.h"
+#include "dungeon_battle_data.h"
+#include "string_format.h"
 
-extern u8 gFormatBuffer_FriendArea[];
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
-extern s16 gUnknown_80F5008;
 extern s16 gUnknown_80F5700[];
 extern s32 gUnknown_8106F7C[];
 
@@ -245,7 +245,7 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
         return FALSE;
 
     if (HasHeldItem(pokemon, ITEM_FRIEND_BOW)) {
-        recruitRate += gUnknown_80F5008;
+        recruitRate += gFriendBowRecruitRateUpValue;
     }
     recruitRate += gUnknown_80F5700[pokemonInfo->level];
     if (rand >= recruitRate)

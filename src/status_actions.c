@@ -103,7 +103,6 @@ extern u8 *gUnknown_80FF678[];
 extern u8 *gUnknown_80FD0B8[];
 extern u8 *gUnknown_80FD0B4[];
 extern u8 *gUnknown_80FD454[];
-extern s16 gUnknown_80F4FC6;
 extern u8 *gUnknown_81004F0[];
 extern u8 *gUnknown_80FD1CC[];
 extern u8 *gUnknown_80FD1B0[];
@@ -126,7 +125,6 @@ extern u8 *gUnknown_80FDC9C[];
 extern s16 gUnknown_80F4DD8;
 extern u32 gUnknown_202F224;
 extern u32 gUnknown_8106A8C[];
-extern s16 gUnknown_80F4F94[];
 extern u8 *gUnknown_80FC5A8[];
 extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
 extern u8 *gUnknown_80FEB08[];
@@ -300,7 +298,7 @@ bool8 MagnitudeMoveAction(Entity * pokemon, Entity * target, Move *move, s32 par
 {
     s32 r3;
     bool8 r6;
-    s32 iVar5;
+    s32 magnitudeDmgVal;
     EntityInfo *entityInfo;
 
     entityInfo = GetEntInfo(target);
@@ -309,11 +307,11 @@ bool8 MagnitudeMoveAction(Entity * pokemon, Entity * target, Move *move, s32 par
 
     gDungeon->unk181e8.unk18200 = gUnknown_8106A8C[r3];
     gDungeon->unk181e8.unk18204 = 0;
-    iVar5 = gUnknown_80F4F94[r3];
+    magnitudeDmgVal = gMagnitudeDmgValues[r3];
     if (entityInfo->bideClassStatus.status == STATUS_DIGGING) {
-        iVar5 *= 2;
+        magnitudeDmgVal *= 2;
     }
-    r6 = sub_8055864(pokemon,target,move,iVar5,param_4) ? TRUE : FALSE;
+    r6 = sub_8055864(pokemon,target,move,magnitudeDmgVal,param_4) ? TRUE : FALSE;
     return r6;
 }
 
@@ -1078,7 +1076,7 @@ bool8 sub_805C208(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
 bool8 sub_805C288(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
-    sub_8078A58(pokemon, target, gUnknown_80F4FC6, 0);
+    sub_8078A58(pokemon, target, gFamishBellyDownValue, 0);
     return TRUE;
 }
 

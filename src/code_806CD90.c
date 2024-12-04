@@ -36,6 +36,7 @@
 #include "type_chart.h"
 #include "dungeon_message.h"
 #include "dungeon_map_access.h"
+#include "dungeon_battle_data.h"
 
 extern u8 gUnknown_202F221;
 
@@ -515,7 +516,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         && GetEntInfo(attacker)->sureShotClassStatus.status == STATUS_SET_DAMAGE
         && dmgStruct->unkE == 0)
     {
-        dmgStruct->dmg = gUnknown_80F4F8C;
+        dmgStruct->dmg = gSetDamageDmgValue;
     }
 
     if (arg4 != 0x20E && AbilityIsActive(target, ABILITY_STURDY) && dmgStruct->dmg == 9999) {

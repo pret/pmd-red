@@ -2101,7 +2101,7 @@ _0807F99C:
 	bx r0
 	.align 2, 0
 _0807F9AC: .4byte 0x00000163
-_0807F9B0: .4byte gUnknown_80F4F92
+_0807F9B0: .4byte gHurlOrbDmgValue
 _0807F9B4: .4byte 0x0000021a
 _0807F9B8: .4byte 0x00000219
 	thumb_func_end sub_807F43C

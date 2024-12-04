@@ -318,11 +318,8 @@ static void SortTargets(Entity **targetsArray, Entity *attacker);
 
 extern const s32 gUnknown_8106A50;
 extern const s32 gUnknown_8106A4C;
-extern const s16 gUnknown_80F5006;
 extern const s32 gUnknown_80F519C;
 extern const s32 gUnknown_80F51A0;
-extern const s32 gUnknown_80F50F4[2][21];
-extern const u16 gUnknown_80F5004;
 extern const u8 *const gUnknown_80FEEA4;
 extern const u8 *const gUnknown_80FEEC8;
 extern const u8 *const gUnknown_80FEEEC;
@@ -445,7 +442,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
             else if (HasHeldItem(currTarget, ITEM_PASS_SCARF)) {
                 if (!CannotAttack(currTarget, FALSE)
                     && (GetMoveTargetAndRangeForPokemon(attacker, move, FALSE) & 0xF0) == 0
-                    && FixedPointToInt(targetInfo->belly) >= gUnknown_80F5006
+                    && FixedPointToInt(targetInfo->belly) >= gPassScarfBellyDownValue
                     && targetInfo->unkFF == 0)
                 {
                     s32 direction1 = targetInfo->action.direction;
@@ -479,7 +476,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                                     sub_806CE68(currTarget, direction1);
                                     sub_803E708(2, 0x43);
                                 }
-                                targetInfo->belly = FixedPoint_Subtract(targetInfo->belly, IntToFixedPoint(gUnknown_80F5006));
+                                targetInfo->belly = FixedPoint_Subtract(targetInfo->belly, IntToFixedPoint(gPassScarfBellyDownValue));
                                 if (move->id == MOVE_REGULAR_ATTACK) {
                                     TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDDA8); // Attack was passed off
                                 }
@@ -2009,7 +2006,7 @@ static void TriggerTargetAbilityEffect(Entity *attacker)
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEFD0); // A horrid stench billowed out
             sub_80428A0(attacker);
-            entInfo->terrifiedTurns = gUnknown_80F5004;
+            entInfo->terrifiedTurns = gStenchTerrifiedTurnsNo;
         }
 
         entInfo->abilityEffectFlags = 0;
@@ -2704,7 +2701,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
 static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits)
 {
     s32 statStageAccuracy, statStageEvasion;
-    s32 statStageMul;
+    s24_8 statStageMul;
     s32 accuracy = GetMoveAccuracyOrAIChance(move, accuracyType);
     s32 rand = DungeonRandInt(100);
     EntityInfo *attackerInfo = GetEntInfo(attacker);
@@ -2745,11 +2742,11 @@ static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accu
     if (statStageAccuracy < 0) statStageAccuracy = 0;
     if (statStageAccuracy > 20) statStageAccuracy = 20;
 
-    statStageMul = gUnknown_80F50F4[0][statStageAccuracy];
-    if (statStageMul < 0) statStageMul = 0;
-    if (statStageMul > (256 * 100)) statStageMul = (256 * 100);
+    statStageMul = gAccEvsStatStageMultipliers[0][statStageAccuracy];
+    if (statStageMul.raw < 0) statStageMul.raw = 0;
+    if (statStageMul.raw > IntToF248_2(100).raw) statStageMul = IntToF248_2(100);
 
-    accuracy *= statStageMul;
+    accuracy *= statStageMul.raw;
     accuracy /= 256;
 
     statStageEvasion = targetInfo->hitChanceStages[1];
@@ -2769,11 +2766,11 @@ static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accu
     if (statStageEvasion < 0) statStageEvasion = 0;
     if (statStageEvasion > 20) statStageEvasion = 20;
 
-    statStageMul = gUnknown_80F50F4[1][statStageEvasion];
-    if (statStageMul < 0) statStageMul = 0;
-    if (statStageMul > (256 * 100)) statStageMul = (256 * 100);
+    statStageMul = gAccEvsStatStageMultipliers[1][statStageEvasion];
+    if (statStageMul.raw < 0) statStageMul.raw = 0;
+    if (statStageMul.raw > IntToF248_2(100).raw) statStageMul = IntToF248_2(100);
 
-    accuracy *= statStageMul;
+    accuracy *= statStageMul.raw;
     accuracy /= 256;
     if (rand < accuracy)
         return TRUE;

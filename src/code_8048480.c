@@ -32,29 +32,8 @@ extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
 
 extern u8 *gUnknown_80F89F4[];
 extern u8 *gUnknown_80FB580[];
-extern s16 gUnknown_80F4FB6;
-extern s16 gUnknown_80F4FB8;
-extern s16 gUnknown_80F4FBA;
-extern s16 gUnknown_80F4FBC;
-extern s16 gUnknown_80F4FBE;
-extern s16 gUnknown_80F4FA2;
-extern s16 gUnknown_80F4FA4; // 0x14
-extern s16 gUnknown_80F4FA6; // 0x2D
-extern s16 gUnknown_80F4FA8; // 0xF
-extern s16 gUnknown_80F4FAA; // 0x1E
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
-extern s16 gUnknown_80F4FAC;
-extern s16 gUnknown_80F503A;
-extern s16 gUnknown_80F503C;
-extern s16 gUnknown_80F503E;
-extern s16 gUnknown_80F5040;
-extern s16 gUnknown_80F5042;
-extern s16 gUnknown_80F5044;
-extern s16 gUnknown_80F5046;
-extern s16 gUnknown_80F5048;
-extern s16 gUnknown_80F4FAE;
-extern s16 gUnknown_80F4FAC;
 
 extern u8 *gUnknown_80FDBB8[];
 extern u8 *gUnknown_80FE458[];
@@ -166,7 +145,7 @@ bool8 sub_8047930(Entity *pokemon, Entity *target)
     return FALSE;
   }
   else {
-    if(DungeonRandInt(100) < gUnknown_80F4FA2)
+    if(DungeonRandInt(100) < gUnknownDungeonChance)
         flag = TRUE;
     else
         flag = FALSE;
@@ -262,28 +241,28 @@ _jump:
   }
   switch(item->id) {
       case ITEM_STICK:
-        sub_80482FC(pokemon,target,gUnknown_80F503A,1);
+        sub_80482FC(pokemon,target,gStickPPValue,ITEM_STICK);
         break;
       case ITEM_IRON_THORN:
-        sub_80482FC(pokemon,target,gUnknown_80F503C,2);
+        sub_80482FC(pokemon,target,gIronThornPPValue,ITEM_IRON_THORN);
         break;
       case ITEM_SILVER_SPIKE:
-        sub_80482FC(pokemon,target,gUnknown_80F503E,3);
+        sub_80482FC(pokemon,target,gSilverSpikePPValue,ITEM_SILVER_SPIKE);
         break;
       case ITEM_GOLD_FANG:
-        sub_80482FC(pokemon,target,gUnknown_80F5040,4);
+        sub_80482FC(pokemon,target,gGoldFangPPValue,ITEM_GOLD_FANG);
         break;
       case ITEM_CACNEA_SPIKE:
-        sub_80482FC(pokemon,target,gUnknown_80F5042,5);
+        sub_80482FC(pokemon,target,gCacneaSpikePPValue,ITEM_CACNEA_SPIKE);
         break;
       case ITEM_CORSOLA_TWIG:
-        sub_80482FC(pokemon,target,gUnknown_80F5044,6);
+        sub_80482FC(pokemon,target,gCorsolaTwigPPValue,ITEM_CORSOLA_TWIG);
         break;
       case ITEM_GEO_PEBBLE:
-        sub_8048340(pokemon,target,gUnknown_80F5048);
+        sub_8048340(pokemon,target,gGeoPebbleThrownDmgValue);
         break;
       case ITEM_GRAVELEROCK:
-        sub_8048340(pokemon,target,gUnknown_80F5046);
+        sub_8048340(pokemon,target,gGravelerockThrownDmgValue);
         break;
       case ITEM_HEAL_SEED:
         HealSeedItemAction(pokemon,target,param_3);
@@ -496,12 +475,12 @@ void HealSeedItemAction(Entity *pokemon, Entity *target, u8 r2)
 
 void OranBerryItemAction(Entity *pokemon, Entity *target)
 {
-    HealTargetHP(pokemon, target, gUnknown_80F4FB6, gUnknown_80F4FB8, TRUE);
+    HealTargetHP(pokemon, target, gOranBerryHealValue, gOranBerryMaxHpRiseValue, TRUE);
 }
 
 void SitrusBerryItemAction(Entity *pokemon, Entity *target)
 {
-    HealTargetHP(pokemon, target, gUnknown_80F4FBA, gUnknown_80F4FBC, TRUE);
+    HealTargetHP(pokemon, target, gSitrusBerryHealValue, gSitrusBerryMaxHpRiseValue, TRUE);
 }
 
 void MaxElixirAction(Entity *pokemon, Entity *target)
@@ -511,7 +490,7 @@ void MaxElixirAction(Entity *pokemon, Entity *target)
 
 void LifeSeedItemAction(Entity *pokemon, Entity *target)
 {
-    HealTargetHP(pokemon, target, 0, gUnknown_80F4FBE, TRUE);
+    HealTargetHP(pokemon, target, 0, gLifeSeedMaxHpRiseValue, TRUE);
 }
 
 void BlinkerSeedItemAction(Entity *pokemon, Entity *target)
@@ -671,7 +650,7 @@ void GinsengItemAction(Entity *pokemon, Entity * target)
 
 void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
 {
-  s32 uVar1;
+  s32 dmg;
   EntityInfo *entityInfo;
   EntityInfo *entityInfo_1;
   Entity *entity;
@@ -681,16 +660,16 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     entityInfo = GetEntInfo(target);
     entityInfo_1 = entityInfo;
     if (gDungeon->unk644.unk31 != 0) {
-        uVar1 = gUnknown_80F4FA8;
-        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FEAE8);
+        dmg = gBlastSeedThrownBossDmgValue;
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FEAE8); // It appears to be weak here...
     }
     else {
-        uVar1 = gUnknown_80F4FA4;
+        dmg = gBlastSeedThrownDmgValue;
     }
     if (entityInfo_1->frozenClassStatus.status == STATUS_FROZEN) {
       EndFrozenClassStatus(pokemon, target);
     }
-    sub_806F370(pokemon, target, uVar1, 1, auStack28, 0, 0x216, 0, 0, 0);
+    sub_806F370(pokemon, target, dmg, 1, auStack28, 0, 0x216, 0, 0, 0);
   }
   else
   {
@@ -704,16 +683,16 @@ void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
     {
       entityInfo = GetEntInfo(entity);
       if (gDungeon->unk644.unk31 != 0) {
-        uVar1 = gUnknown_80F4FAA;
-        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FEAE8);
+        dmg = gBlastSeedEatenBossDmgValue;
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FEAE8); // It appears to be weak here...
       }
       else {
-        uVar1 = gUnknown_80F4FA6;
+        dmg = gBlastSeedEatenDmgValue;
       }
       if (entityInfo->frozenClassStatus.status == STATUS_FROZEN) {
         EndFrozenClassStatus(pokemon, entity);
       }
-      sub_806F370(pokemon, entity, uVar1, 1, auStack28, 0, 0x216, 0, 0, 0);
+      sub_806F370(pokemon, entity, dmg, 1, auStack28, 0, 0x216, 0, 0, 0);
     }
   }
 }

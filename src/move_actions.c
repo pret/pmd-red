@@ -55,7 +55,6 @@ extern s16 gUnknown_80F4DBC;
 extern u8 *gUnknown_80FACC4[];
 extern s16 gUnknown_80F4DF4;
 extern u8 gUnknown_202F21A;
-extern s16 gUnknown_80F500A[];
 extern s16 gUnknown_80F4DD6;
 extern u8 gUnknown_202F219;
 extern s24_8 gUnknown_80F51A4[];
@@ -94,7 +93,6 @@ extern u32 gUnknown_8106A50;
 extern s16 gUnknown_80F4E08;
 extern u8 *gUnknown_80FD14C[];
 extern u8 *gUnknown_80FAD4C[];
-extern s16 gUnknown_80F502A[];
 extern s24_8 gUnknown_8106A54[];
 extern s16 gUnknown_80F4DF0;
 extern s16 gUnknown_80F4DE0;
@@ -146,7 +144,6 @@ extern s16 gUnknown_80F4DBE;
 extern s16 gUnknown_80F4DCA;
 extern s16 gUnknown_80F4DE2;
 extern u8 *gUnknown_80FEB90[];
-extern s16 gUnknown_80F501A[];
 extern u8 *gUnknown_80FEB60[];
 extern u8 *gUnknown_80FE330[];
 extern u8 *gUnknown_80FE36C[];
@@ -302,7 +299,7 @@ bool8 NightmareMoveAction(Entity * pokemon, Entity *target, Move *move, s32 para
 
 bool8 MorningSunMoveAction(Entity * pokemon,Entity * target, Move *move, s32 param_4)
 {
-    HealTargetHP(pokemon, target, gUnknown_80F502A[GetApparentWeather(pokemon)], 0, TRUE);
+    HealTargetHP(pokemon, target, gMorningSunHealValueByWeather[GetApparentWeather(pokemon)], 0, TRUE);
     return TRUE;
 }
 
@@ -1180,7 +1177,7 @@ bool8 AncientPowerMoveAction(Entity *pokemon, Entity *target, Move *move, u32 pa
 
 bool8 SynthesisMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-    HealTargetHP(pokemon, target, gUnknown_80F500A[GetApparentWeather(pokemon)], 0, TRUE);
+    HealTargetHP(pokemon, target, gSynthesisHealValueByWeather[GetApparentWeather(pokemon)], 0, TRUE);
     return TRUE;
 }
 
@@ -1948,7 +1945,7 @@ bool8 TauntMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 
 bool8 MoonlightMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
-    HealTargetHP(pokemon, target, gUnknown_80F501A[GetApparentWeather(pokemon)], 0, TRUE);
+    HealTargetHP(pokemon, target, gMoonlightHealValueByWeather[GetApparentWeather(pokemon)], 0, TRUE);
     return TRUE;
 }
 
