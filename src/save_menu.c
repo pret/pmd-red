@@ -8,7 +8,7 @@
 #include "save.h"
 #include "save_menu.h"
 #include "sprite.h"
-#include "text1.h"
+#include "text.h"
 
 static EWRAM_DATA_2 SaveMenuWork *sUnknown_203B364 = {0};
 

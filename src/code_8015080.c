@@ -4,8 +4,7 @@
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 struct  unkStruct_203B1F8
 {
@@ -49,7 +48,7 @@ bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems)
 {
 
     s32 index;
-   
+
     gUnknown_203B1F8 = MemoryAlloc(sizeof(struct unkStruct_203B1F8), 8);
     gUnknown_203B1F8->menuAction = 0;
 
@@ -78,7 +77,7 @@ u32 sub_801516C(void)
         sub_8013114(&gUnknown_203B1F8->unk4, &gUnknown_203B1F8->menuAction);
         return 3;
     }
-    else 
+    else
     {
         return 0;
     }

@@ -9,7 +9,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "save.h"
-#include "text1.h"
+#include "text.h"
 
 static EWRAM_DATA_2 MainMenu2Work *sUnknown_203B34C = {0};
 static EWRAM_DATA_2 u32 sUnknown_203B350 = {0};

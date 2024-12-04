@@ -1942,9 +1942,9 @@ _0801089A:
 _080108FC: .4byte gUnknown_203B0E8
 _08010900: .4byte 0x000052da
 _08010904: .4byte 0x000052d8
-_08010908: .4byte gFontTiles_202C038
+_08010908: .4byte gUnknown_202B038 + 0x1000
 _0801090C: .4byte 0x00003114
-_08010910: .4byte gFontTilesExtra_202C838
+_08010910: .4byte gUnknown_202B038 + 0x1800
 _08010914: .4byte 0x00001114
 	thumb_func_end sub_8010858
 

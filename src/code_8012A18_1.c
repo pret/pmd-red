@@ -2,7 +2,7 @@
 #include "code_8012A18_1.h"
 #include "structs/sprite_oam.h"
 #include "text_util.h"
-#include "text2.h"
+#include "text.h"
 
 struct unkStruct_203B1FC
 {

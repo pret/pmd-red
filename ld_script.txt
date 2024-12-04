@@ -52,8 +52,6 @@ SECTIONS {
         src/code_8002774.o(.text);
         asm/code_8002774_2.o(.text);
         src/memory.o(.text);
-        asm/memory.o(.text);
-        src/memory_mid.o(.text);
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
         src/util.o(.text);
@@ -63,8 +61,7 @@ SECTIONS {
         src/sprite.o(.text);
         src/code_800558C.o(.text);
         src/random.o(.text);
-        src/text1.o(.text);
-        src/text2.o(.text);
+        src/text.o(.text);
         asm/text.o(.text);
         src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
@@ -340,8 +337,6 @@ SECTIONS {
         src/code_80A26CC.o(.text);
         asm/code_80A26CC_1.o(.text);
         src/ground_map.o(.text);
-        asm/ground_map.o(.text);
-        src/ground_map_1.o(.text);
         asm/ground_map_1.o(.text);
         src/ground_map_2.o(.text);
         src/ground_sprite.o(.text);
@@ -351,7 +346,6 @@ SECTIONS {
         asm/ground_object.o(.text);
         asm/ground_effect.o(.text);
         src/ground_link.o(.text);
-        asm/ground_link.o(.text);
         asm/ground_event.o(.text);
         asm/m4a_1.o(.text);
         src/m4a.o(.text);
@@ -421,6 +415,11 @@ SECTIONS {
     {
         data/data_code_2.o(.rodata);
         data/data.o(.rodata);
+        src/memory.o(.rodata);
+        data/data1.o(.rodata);
+        src/random.o(.rodata);
+        src/text.o(.rodata);
+        data/data2.o(.rodata);
         src/math.o(.rodata);
         src/file_system.o(.rodata);
         src/decompress.o(.rodata);

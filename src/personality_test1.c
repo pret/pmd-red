@@ -16,8 +16,7 @@
 #include "random.h"
 #include "save.h"
 #include "text_util.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "string_format.h"
 
 enum

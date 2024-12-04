@@ -626,53 +626,48 @@ void HungerSeedItemAction(Entity *pokemon, Entity * target)
 
 void GinsengItemAction(Entity *pokemon, Entity * target)
 {
-  bool8 isMoveBoosted;
-  s32 moveIndex;
-  EntityInfo *entityInfo;
-#ifndef NONMATCHING
-  register Move *movePtr1 asm("r4"); // r4
-  register Move *movePtr2 asm("r5"); // r5
-#else
-  Move *movePtr1; // r4
-  Move *movePtr2; // r5
-#endif
-  u8 moveBoost;
-  s32 movePowerBoost;
-  s32 maxPowerBoost;
+    s32 i;
+    bool8 isMoveBoosted = FALSE;
+    s32 moveBoost = 1;
+    EntityInfo *entityInfo = GetEntInfo(target);
 
-  isMoveBoosted = FALSE;
-  moveBoost = 1;
-  entityInfo = GetEntInfo(target);
-  if (DungeonRandInt(100) < gUnknown_80F4F46)
-    moveBoost = 3;
-  if (entityInfo->isTeamLeader) {
-    for(moveIndex = 0, movePtr1 = &entityInfo->moves.moves[0], movePtr2 = movePtr1; moveIndex < MAX_MON_MOVES; movePtr1++, movePtr2++, moveIndex++)
-    {
-        if((movePtr1->moveFlags & MOVE_FLAG_EXISTS) && (movePtr1->moveFlags & MOVE_FLAG_SET))
-        {
-            if(GetMoveBasePower(movePtr2) == 0) continue;
-            movePowerBoost = movePtr1->ginseng;
-            maxPowerBoost = GetMoveMaxUpgradeLevel(movePtr2);
-            movePtr1->ginseng += moveBoost;
-            if(movePtr1->ginseng >= maxPowerBoost)
-                movePtr1->ginseng = maxPowerBoost;
-            if(movePowerBoost != movePtr1->ginseng)
-                isMoveBoosted = TRUE;
+    if (DungeonRandInt(100) < gUnknown_80F4F46) {
+        moveBoost = 3;
+    }
+
+    if (entityInfo->isTeamLeader) {
+        for (i = 0; i < MAX_MON_MOVES; i++) {
+            Move *move = &entityInfo->moves.moves[i];
+            if(MoveFlagExists(move) && (move->moveFlags & MOVE_FLAG_SET)) {
+                if (GetMoveBasePower(move) != 0) {
+                    s32 movePowerBoost = move->ginseng;
+                    s32 maxPowerBoost = GetMoveMaxUpgradeLevel(move);
+
+                    move->ginseng += moveBoost;
+                    if (move->ginseng >= maxPowerBoost) {
+                        move->ginseng = maxPowerBoost;
+                    }
+                    if (movePowerBoost != move->ginseng) {
+                        isMoveBoosted = TRUE;
+                    }
+                }
+            }
+        }
+
+        if (isMoveBoosted) {
+            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE454);
+            if (moveBoost != 1) {
+                sub_803E708(10,0x40);
+                TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE434);
+            }
+        }
+        else {
+            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE40C);
         }
     }
-
-    if (isMoveBoosted) {
-      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE454);
-      if (moveBoost != 1) {
-        sub_803E708(10,0x40);
-        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE434);
-     }
+    else {
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE40C);
     }
-    else
-      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE40C);
-  }
-  else
-     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE40C);
 }
 
 void BlastSeedItemAction(Entity *pokemon, Entity * target, u8 param_3)
@@ -918,111 +913,92 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
   return FALSE;
 }
 
-// TODO: should be bool8
-bool32 sub_8048B9C(Entity *entity,Item *param_2)
+bool8 sub_8048B9C(Entity *entity, Item *item)
 {
-#ifndef NONMATCHING
-  register bool32 bVar2 asm("r8");
-#else
-  bool32 bVar2;
-#endif
-  bool8 flag;
-  EntityInfo *entityInfo;
-  Entity * entity2;
-  int index;
-  Entity *entity1;
-  EntityInfo *entity1Info;
-  ActionContainer *actionPointer;
-  ActionContainer actionContainer;
-  u16 action;
+    bool8 ret = FALSE;
+    ActionContainer *entityActionPtr = &GetEntInfo(entity)->action;
+    ActionContainer originalAction;
 
-  bVar2 = FALSE;
-  entityInfo = GetEntInfo(entity);
-  actionPointer = &(entityInfo->action);
-  if ((param_2->flags & ITEM_FLAG_STICKY)) {
-      DisplayDungeonMessage(0,*gItemStickyDoesntWorkText,1);
-      return FALSE;
-  }
-  else
-  {
-    for(index = 0; index < MAX_TEAM_MEMBERS; index++)
-    {
-      entity1 = gDungeon->teamPokemon[index];
-      if (EntityExists(entity1)) {
-        entity1Info = GetEntInfo(entity1);
-        flag = TRUE;
-        if(CheckVariousStatuses2(entity1, FALSE))
-        {
-            flag = FALSE;
-        }
-        if(entity1Info->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
-        {
-            flag = FALSE;
-        }
-        if(IsExperienceLocked(entity1Info->joinedAt.id))
-        {
-            flag = FALSE;
-        }
-        entity1Info->unk157 = flag;
-      }
-    }
-    entity2 = DrawFieldGiveItemMenu(0,1);
-    if (!EntityExists(entity2)) {
+    if (ItemSticky(item)) {
+        DisplayDungeonMessage(0,*gItemStickyDoesntWorkText,1);
         return FALSE;
     }
     else
     {
-      while( TRUE ) {
-        entityInfo = GetEntInfo(entity2);
-        actionContainer = *actionPointer;
-        goto _clear;
-_load:
-        action = actionPointer->action;
-        if (action == ACTION_UNK1D) {
-          sub_80637E8(actionPointer);
+        s32 i;
+        Entity *entity2;
+
+        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+            Entity *teamMon = gDungeon->teamPokemon[i];
+            if (EntityExists(teamMon)) {
+                EntityInfo *teamMonInfo = GetEntInfo(teamMon);
+                bool8 flag = TRUE;
+                if (CheckVariousStatuses2(teamMon, FALSE)){
+                    flag = FALSE;
+                }
+                if (teamMonInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
+                    flag = FALSE;
+                }
+                if (IsExperienceLocked(teamMonInfo->joinedAt.id)) {
+                    flag = FALSE;
+                }
+                teamMonInfo->unk157 = flag;
+            }
         }
-        else if (action == ACTION_UNK20) {
-          sub_803EAF0(0,0);
-          sub_8063BB4(actionPointer);
-          sub_8044C10(TRUE);
-          bVar2 = TRUE;
+
+        entity2 = DrawFieldGiveItemMenu(0,1);
+        if (!EntityExists(entity2)) {
+            return FALSE;
         }
-        else if (action == ACTION_UNK21) {
-          sub_803EAF0(0,0);
-          sub_8063CF0(actionPointer,0);
-          sub_8044C10(TRUE);
+
+        originalAction = *entityActionPtr;
+        goto LOOP_MIDDLE; // Needed to match
+        while (1) {
+            if (entityActionPtr->action == ACTION_UNK1D) {
+                sub_80637E8(entityActionPtr);
+            }
+            else if (entityActionPtr->action == ACTION_UNK20) {
+                sub_803EAF0(0,0);
+                sub_8063BB4(entityActionPtr);
+                sub_8044C10(TRUE);
+                ret = TRUE;
+            }
+            else if (entityActionPtr->action == ACTION_UNK21) {
+                sub_803EAF0(0,0);
+                sub_8063CF0(entityActionPtr,0);
+                sub_8044C10(TRUE);
+            }
+            else if ((entityActionPtr->action == ACTION_SET_MOVE) || (entityActionPtr->action == ACTION_UNSET_MOVE)) {
+                sub_803EAF0(0,0);
+                sub_8063A70(entityActionPtr,0);
+            }
+            else if (entityActionPtr->action == ACTION_UNK1F) {
+                sub_803EAF0(0,0);
+                sub_8063B54(entityActionPtr);
+            }
+
+        LOOP_MIDDLE:
+            ClearMonsterActionFields(entityActionPtr);
+            if (sub_8062F90(entity2,1,0,0,1) != 0) {
+                if (ret) {
+                    ASM_MATCH_TRICK(ret);
+                    if (DisplayDungeonYesNoMessage(0,*gUnknown_80FECA0,1) == 1) {
+                        *entityActionPtr = originalAction;
+                        sub_8044DF0(entity,0,0x6e);
+                        SetMonsterActionFields(entityActionPtr,0x2c);
+                        break;
+                    }
+                }
+                else
+                {
+                    sub_8044C10(TRUE);
+                    break;
+                }
+            }
         }
-        else if ((action == ACTION_SET_MOVE) || (action == ACTION_UNSET_MOVE)) {
-          sub_803EAF0(0,0);
-          sub_8063A70(actionPointer,0);
-        }
-        else if (action == ACTION_UNK1F) {
-          sub_803EAF0(0,0);
-          sub_8063B54(actionPointer);
-        }
-_clear:
-        ClearMonsterActionFields(actionPointer);
-        if (sub_8062F90(entity2,1,0,0,1) != 0) {
-          if (bVar2)
-          {
-              if (DisplayDungeonYesNoMessage(0,*gUnknown_80FECA0,1) == 1) {
-                *actionPointer = actionContainer;
-                sub_8044DF0(entity,0,0x6e);
-                SetMonsterActionFields(actionPointer,0x2c);
-                break;
-              }
-          }
-          else
-          {
-               sub_8044C10(TRUE);
-               break;
-          }
-        }
-        goto _load;
-      }
     }
-  }
-  return bVar2;
+
+    return ret;
 }
 
 bool8 sub_8048D50(Entity * pokemon, Item *item)

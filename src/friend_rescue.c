@@ -23,8 +23,7 @@
 #include "save_write.h"
 #include "rescue_password_menu.h"
 #include "text_util.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 

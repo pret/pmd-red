@@ -8,11 +8,6 @@ gScriptVarBuffer: /* 2000A88 (ThoroughlyResetScriptVars - RestoreGlobalScriptVar
 	.space 0x400
 
     .include "src/memory.o"
-gMainHeapFreeList: /* 2000ED0 (InitHeapInternal) */
-	.space 0x300
-gMainHeap: /* 20011D0 (InitHeapInternal) */
-	.space 0x24000
-
     .include "src/bg_palette_buffer.o"
     .include "src/input.o"
     .include "src/sprite.o"
@@ -42,50 +37,8 @@ gUnknown_2026E60: /* 2026E60 (sub_8005838) */
 gUnknown_20270E8: /* 20270E8 (sub_8005838) */
 	.space 0x288
 
-gUnknown_2027370: /* 2027370 (LoadCharmaps - sub_8272A78) */
-	.space 0x48
-gUnknown_20273B8: /* 20273B8 (sub_80157D8) */
-	.space 0xD8
-gCharmaps: /* 2027490 (LoadCharmaps - GetCharacter) */
-	.space 0x8
-gCharacterSpacing: /* 2027498 (LoadCharmaps - xxx_draw_string) */
-	.space 0x2
-gUnknown_202749A: /* 202749A (HandleTextFormat - DrawFieldMenu) */
-	.space 0xB
-gUnknown_20274A5: /* 20274A5 (LoadCharmaps - sub_803F9CC) */
-	.space 0x1
-gUnknown_20274A6: /* 20274A6 (HandleTextFormat) */
-	.space 0x6
-gCurrentCharmap: /* 20274AC (LoadCharmaps - xxx_draw_string) */
-	.space 0x4
-gUnknown_20274B0: /* 20274B0 (UpdateFadeInTile - SetCharacterMask) */
-	.space 0x4
-gUnknown_20274B4: /* 20274B4 (SaveUnkTextStructAndXXX_8006438) */
-	.space 0x3B00
-gCharmapFiles: /* 202AFB4 (LoadCharmaps) */
-	.space 0xC
-gUnknown_202AFC0: /* 202AFC0 (SaveUnkTextStructAndXXX_8006438 - RestoreUnkTextStruct_8006518) */
-	.space 0x60
-gUnknown_202B020: /* 202B020 (LoadCharmaps - sub_80095CC) */
-	.space 0x4
-gUnknown_202B024: /* 202B024 (LoadCharmaps - sub_80095CC) */
-	.space 0x4
-gCharHeight: /* 202B028 (LoadCharmaps - xxx_draw_char) */
-	.space 0x8
-gTextShadowMask: /* 202B030 (LoadCharmaps - sub_80078E8) */
-	.space 0x4
-gDrawTextShadow: /* 202B034 (LoadCharmaps - xxx_draw_char) */
-	.space 0x4
-gUnknown_202B038: /* 202B038 (LoadTitleScreen - sub_80A2B40) */
-	.space 0x1000
+    .include "src/text.o"
 
-gFontTiles_202C038: /* 202C038 (sub_8010858 - sub_804A728) */
-	.space 0x800
-gFontTilesExtra_202C838: /* 202C838 (sub_8010858 - sub_804A49C) */
-	.space 0x720
-
-gUnknown_202CF58: /* 202CF58 (xxx_format_string) */
-	.space 0xE0
 
 gFontPalette: /* 202D038 (sub_80097B0 - sub_8052FB8) */
 	.space 0x4
@@ -127,15 +80,6 @@ gUnknown_202D2A0: /* 202D2A0 (sub_8009A1C - sub_8009BE4) */
     .space 0x3
 
     .include "src/bg_control.o"
-	.space 0x140
-
-gBldAlpha: /* 202D7FA (SetBldAlphaReg - VBlank_CB) */
-	.space 0x2
-gBldCnt: /* 202D7FC (AgbMain - VBlank_CB) */
-	.space 0x2
-gUnknown_202D7FE: /* 202D7FE (AgbMain - sub_800CD64) */
-	.space 0x2
-
     .include "src/cpu.o"
 	.space 0x4
 

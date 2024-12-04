@@ -47,7 +47,6 @@ void GroundWeather_Select(s16);
 u32 GroundLives_ExecutePlayerScriptActionLives();
 s16 GroundObject_Add(s16 id, GroundObjectData*, s16 group, s8 sector);
 s16 GroundEffect_Add(s16 id, GroundEffectData*, s16 group, s8 sector);
-void FatalError(void* loc, char* fmt, ...) __attribute__((noreturn));
 
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
@@ -121,8 +120,6 @@ s16 sub_80AC448(s16, PixelPos*);
 s32 sub_80AC49C(s16, PixelPos*);
 s16 sub_80AD360(s16, PixelPos*);
 s16 sub_80AD3B4(s16, PixelPos*);
-u32 GroundLink_GetPos(s32, PixelPos *);
-u32 GroundLink_GetArea(s32, PixelPos *, PixelPos *, PixelPos *);
 void DeleteGroundEvents(void);
 void DeleteGroundLives(void);
 void DeleteGroundObjects(void);
@@ -950,7 +947,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 PixelPos unk;
                 action->callbacks->getHitboxCenter(action->parentObject, &unk);
                 GroundLink_GetPos((s16)curCmd.arg1, &unk);
-                action->callbacks->moveReal(action->parentObject, &unk); // landing end of unwanted tailmerge
+                action->callbacks->moveReal(action->parentObject, &unk);
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }
@@ -987,10 +984,6 @@ s32 ExecuteScriptCommand(Action *action) {
                 action->callbacks->setPosHeight(action->parentObject, height);
                 action->scriptData.unk26 = dir;
                 action->callbacks->setDirection(action->parentObject, dir);
-                // NONMATCHING: unwanted tailmerge
-#ifndef NONNMATCHING
-                asm("");
-#endif
                 scriptData->unk2A = (u8)curCmd.argByte;
                 return 2;
             }

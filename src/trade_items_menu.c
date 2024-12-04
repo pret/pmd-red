@@ -13,8 +13,7 @@
 #include "menu_input.h"
 #include "other_menus2.h"
 #include "save_write.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "trade_items_menu.h"
 
 static EWRAM_DATA_2 struct TradeItemsMenu *sTradeItemsMenu = {0};

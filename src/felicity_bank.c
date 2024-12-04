@@ -8,12 +8,9 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 FelicityBankWork *sFelicityBankWork = {0};
-
-extern u8 gSpeakerNameBuffer[];
 
 #include "data/felicity_bank.h"
 

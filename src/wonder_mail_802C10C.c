@@ -8,8 +8,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_mail.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "wonder_mail_802C10C.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B2E0 *gUnknown_203B2E0 = {0};

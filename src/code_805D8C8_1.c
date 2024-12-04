@@ -36,8 +36,7 @@
 #include "items.h"
 #include "play_time.h"
 #include "pokemon_3.h"
-#include "text2.h"
-#include "text1.h"
+#include "text.h"
 #include "code_806CD90.h"
 #include "code_8044CC8.h"
 #include "code_801B3C0.h"
@@ -1699,7 +1698,6 @@ extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
 extern void sub_8083CE0(u8 param_1);
 
-extern u8 gUnknown_202749A[];
 extern MenuInputStruct gUnknown_202EE10;
 
 void sub_805F02C(void)

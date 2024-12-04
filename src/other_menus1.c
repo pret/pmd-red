@@ -16,14 +16,11 @@
 #include "other_menus1.h"
 #include "other_menus2.h"
 #include "sprite.h"
-#include "text1.h"
+#include "text.h"
 
 static EWRAM_DATA_2 unkStruct_203B35C *sUnknown_203B35C = {0};
 
 #include "data/other_menus1.h"
-
-// text.s
-extern void xxx_call_update_bg_vram(); // egg's PR should remove this
 
 static void sub_80371B8(void);
 static void sub_8037400(void);

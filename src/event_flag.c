@@ -43,7 +43,6 @@ extern u8 gUnknown_80B735C[];
 extern u8 gUnknown_80B7378[];
 extern u8 gUnknown_80B7388[];
 
-void FatalError(DebugLocation *, const char *, ...) __attribute__((noreturn));
 extern bool8 HasCompletedAllMazes(void);
 extern u8 sub_8002658(s16);
 extern void sub_809733C(u32, u32);
@@ -93,7 +92,7 @@ UNUSED void GetScriptVarString(s16 varId, u8 *buf, s32 maxLen)
   s32 r2;
   u8 r0;
   struct ScriptVarPtr local_10;
-  
+
   GetScriptVarRef(&local_10,0,varId);
   for (r1 = local_10.ptr, r2 = 0; r2 < maxLen; r2++) {
     r0 = *r1;
@@ -110,7 +109,7 @@ UNUSED void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
   s32 r2;
   u8 r0;
   struct ScriptVarPtr local_10;
-  
+
   GetScriptVarRef(&local_10,0,varId);
   for (r1 = local_10.ptr, r2 = 0; r2 < maxLen; r1++, r2++) {
     r0 = *r1;
@@ -136,10 +135,10 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
   s32 param_1_s32;
   u32 local_18;
   u32 local_14;
-  
+
   param_1_s32 = param_1;
   GetScriptVarScenario(param_1_s32,&local_18,&local_14);
-  Log(6,gUnknown_80B72CC,param_1_s32,local_18,local_14,param_2,param_3); // SCENARIO CALC [%3d] %4d %4d -> %4d %4d 
+  Log(6,gUnknown_80B72CC,param_1_s32,local_18,local_14,param_2,param_3); // SCENARIO CALC [%3d] %4d %4d -> %4d %4d
   if ((param_1_s32 == 3) && ((param_2 != local_18 || (param_3 != local_14)))) {
     SetScriptVarValue(NULL,CLEAR_COUNT,0);
   }
@@ -233,7 +232,7 @@ void sub_8001D88(void)
 {
   u32 local_c;
   u32 auStack8;
-  
+
   GetScriptVarScenario(3, &auStack8, &local_c);
   if (auStack8 - 1 < 0x1b) {
     if (ScriptVarScenarioBefore(SCENARIO_SUB1,0x1f,0) != 0) {
@@ -323,7 +322,7 @@ void sub_8001D88(void)
 }
 
 s32 _FlagCalc(s32 param_1, s32 param_2, enum FlagCalcOperation operation)
-{ 
+{
   switch(operation) {
     case CALC_SET:
         return param_2;
@@ -408,7 +407,7 @@ void UpdateScriptVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagCalc
   s32 param_2_s32 = param_2;
   s32 param_3_s32 = param_3;
 
-  
+
   uVar1 = GetScriptVarValue(param_1,param_2_s32);
   uVar2 = GetScriptVarValue(param_1,param_3_s32);
   uVar3 = _FlagCalc(uVar1,uVar2,operation);
@@ -423,7 +422,7 @@ bool8 FlagJudge(s32 r0, s32 r1, enum FlagJudgeOperation operation)
 bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum FlagJudgeOperation operation)
 {
   s32 uVar1;
-  
+
   uVar1 = GetScriptVarValue(param_1, param_2);
   return _FlagJudge(uVar1,param_3,operation);
 }
@@ -435,7 +434,7 @@ bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOpera
 
   s32 param_2_s32 = param_2;
   s32 param_3_s32 = param_3;
-  
+
   uVar1 = GetScriptVarValue(param_1,param_2_s32);
   uVar2 = GetScriptVarValue(param_1,param_3_s32);
   return _FlagJudge(uVar1,uVar2,operation);
@@ -561,7 +560,7 @@ u8 sub_8002658(s16 param_1)
   struct GroundEventTableEntry *ptr;
 
   param_1_s32 = param_1;
-  
+
   ptr = gGroundEnterLookupTable;
   sVar1 = gGroundEnterLookupTable[0].groundEnterId;
   if (sVar1 != -1) {

@@ -8,8 +8,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "wigglytuff_shop1.h"
 #include "wigglytuff_shop2.h"
 
@@ -217,7 +216,7 @@ static bool8 sub_803ABC8(void)
     PokemonStruct1 *mon;
     s32 i;
     s32 mask;
-    
+
     for (i = 0, mask = 1; i < NUM_MONSTERS; i++) {
         // Some check was optimized out. Needed for matching. Thanks kaz
         if (i) {

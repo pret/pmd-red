@@ -10,6 +10,7 @@
 #include "code_800D090.h"
 #include "pokemon_3.h"
 #include "game_options.h"
+#include "text.h"
 #include "constants/dungeon.h"
 
 extern void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
@@ -18,7 +19,6 @@ extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
 extern bool8 sub_80848EC(void);
 extern u8 GetFloorType(void);
 extern const u8 *GetDungeonName2(u8 dungeon);
-extern void sub_8008DC8(s32 r0, s32 r1, u16 r2, u16 r3);
 
 extern const char gUnknown_80F4D8C[]; // "mapparam"
 extern const char gUnknown_80F60F8[]; // "banrpal"
@@ -590,7 +590,7 @@ void ShowDungeonNameBanner(void)
         }
 
         sub_803DC14(text, (224 - CalcStringWidth(text)) / 2, var + 32);
-        gUnknown_20274A5 = 1;
+        gUnknown_20274A5 = TRUE;
     }
 
     CloseFile(gDungeonNameBannerFontFile);

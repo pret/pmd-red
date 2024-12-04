@@ -11,8 +11,7 @@
 #include "string_format.h"
 #include "code_80118A4.h"
 #include "code_801B60C.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 struct unkStruct_203B310
 {

@@ -6,7 +6,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "sprite.h"
-#include "text1.h"
+#include "text.h"
 #include "unk_menu_203B360.h"
 
 // Size: 0x1B4. Similar to SaveMenuWork

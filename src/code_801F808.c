@@ -9,8 +9,7 @@
 #include "sprite.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 // TODO: UNIFY WITH struct_Sub80095E4
 struct unkStruct_203B278

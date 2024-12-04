@@ -11,8 +11,7 @@
 #include "wonder_mail_802C10C.h"
 #include "structs/str_802C39C.h"
 #include "structs/str_wonder_mail.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 #include "wonder_mail_802C4C8.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B2E0* gUnknown_203B2E8 = {0};

@@ -7,9 +7,9 @@ extern u8 gScriptLocks[];
 extern s32 gUnlockBranchLabels[];
 extern u8 gScriptLockConds[];
 
-extern u32 gUnknown_8116588;
-extern u32 gUnknown_8116538;
-extern u32 gUnknown_8116560;
+extern const DebugLocation gUnknown_8116588;
+extern const DebugLocation gUnknown_8116538;
+extern const DebugLocation gUnknown_8116560;
 extern u8 gUnknown_8116594[];
 extern u8 gUnknown_8116544[];
 extern u8 gUnknown_811656C[];
@@ -24,7 +24,6 @@ extern u8 IsTextboxOpen_809A750(void);
 extern s32 sub_80A882C(s16);
 extern s32 sub_80AC240(s16);
 extern s32 sub_80AD158(s16);
-void FatalError(u32 *, const char *, ...) __attribute__((noreturn));
 
 // -1 didn't match
 void sub_809D520(void *a0)
@@ -321,7 +320,7 @@ bool8 GroundScriptNotify(Action *param_1, s16 param_2)
   bool8 ret;
 
   s32 param_2_s16 = param_2;
-  
+
   ret = FALSE;
   sVar1 = param_1->scriptData.unk22;
   if ((sVar1 != -1) && (sVar1 == param_2_s16)) {
@@ -355,7 +354,7 @@ void GroundScriptLock(s16 index, s32 r1)
 bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3)
 {
   s32 index_s32;
-  
+
   index_s32 = index;
   gUnlockBranchLabels[index_s32] = param_3;
   if (index_s32 == 0) {

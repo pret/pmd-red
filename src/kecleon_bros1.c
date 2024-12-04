@@ -15,10 +15,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "text1.h"
-#include "text2.h"
-
-extern u8 gSpeakerNameBuffer[];
+#include "text.h"
 
 static EWRAM_DATA_2 KecleonBrosWork1 *sKecleonBrosWork1 = {0};
 

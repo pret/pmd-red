@@ -7,8 +7,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "options_menu2.h"
-#include "text1.h"
-#include "text2.h"
+#include "text.h"
 
 static EWRAM_DATA_2 struct unkStruct_203B260 *sUnknown_203B260 = {0};
 
