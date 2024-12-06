@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/main_menu.h"
 #include "input.h"
 #include "main_menu1.h"
@@ -64,7 +65,7 @@ void sub_80382E4(s32 currMenu)
 
   if (sUnknown_203B360 == NULL) {
     sUnknown_203B360 = MemoryAlloc(sizeof(unkStruct_203B360), 8);
-    MemoryFill8((u8 *)sUnknown_203B360, 0, sizeof(unkStruct_203B360));
+    MemoryFill8(sUnknown_203B360, 0, sizeof(unkStruct_203B360));
   }
   for(index = 0; index < 4; index++){
     sUnknown_203B360->unk148[index] = gUnknown_80E6E7C;
@@ -126,7 +127,7 @@ u32 sub_80383D4(void)
 
 void sub_8038440(void)
 {
-#ifdef NONMATCHING // SpriteOAM memes. TODO: Match like sub_8039174 with multiple vars and while(0)
+#ifdef NONMATCHING // SpriteOAM memes
     u32 r0;
     u32 r2;
 #else

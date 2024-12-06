@@ -78,69 +78,69 @@ void InitHeap(void)
     InitHeapInternal();
 }
 
-void MemoryClear8(u8 *dest, s32 size)
+void MemoryClear8(void *dest, s32 size)
 {
-    while (size > 0)
-    {
+    u8 *cur = dest;
+
+    while (size > 0) {
         size -= 1;
-        *dest++ = 0;
+        *cur++ = 0;
     }
 }
 
 void MemoryClear16(u16 *dest, s32 size)
 {
-    while (size > 0)
-    {
+    while (size > 0) {
         size -= 2;
         *dest++ = 0;
     }
 }
 
-void MemoryClear32(u32 *dest, s32 size)
+UNUSED static void MemoryClear32(u32 *dest, s32 size)
 {
     CpuClear(dest, size);
 }
 
-void MemoryFill8(u8 *dest, u8 value, s32 size)
+void MemoryFill8(void *dest, u8 value, s32 size)
 {
-    while (size > 0)
-    {
+    u8 *cur = dest;
+
+    while (size > 0) {
         size -= 1;
-        *dest++ = value;
+        *cur++ = value;
     }
 }
 
 void MemoryFill16(u16 *dest, u16 value, s32 size)
 {
-    while (size > 0)
-    {
+    while (size > 0) {
         size -= 2;
         *dest++ = value;
     }
 }
 
-void MemoryFill32(u32 *dest, u32 value, s32 size)
+UNUSED static void MemoryFill32(u32 *dest, u32 value, s32 size)
 {
-    while (size > 0)
-    {
+    while (size > 0) {
         size -= 4;
         *dest++ = value;
     }
 }
 
-void MemoryCopy8(u8 *dest, u8 *src, s32 size)
+void MemoryCopy8(void *dest, void *src, s32 size)
 {
-    while (size > 0)
-    {
+    u8 *dCur = dest;
+    u8 *sCur = src;
+
+    while (size > 0) {
         size -= 1;
-        *dest++ = *src++;
+        *dCur++ = *sCur++;
     }
 }
 
-void MemoryCopy16(u16 *dest, u16 *src, s32 size)
+UNUSED static void MemoryCopy16(u16 *dest, u16 *src, s32 size)
 {
-    while (size > 0)
-    {
+    while (size > 0) {
         size -= 2;
         *dest++ = *src++;
     }
@@ -148,8 +148,7 @@ void MemoryCopy16(u16 *dest, u16 *src, s32 size)
 
 void MemoryCopy32(u32 *dest, u32 *src, s32 size)
 {
-    while (size > 0)
-    {
+    while (size > 0) {
         size -= 4;
         *dest++ = *src++;
     }
@@ -211,32 +210,23 @@ static u32 xxx_memory_attr_related(u32 r0)
 {
     u32 temp;
     u32 return_var;
-    if(r0 == 0)
-    {
-        return 0;
-    }
-    if((r0 & 8) != 0)
-    {
-        return 4;
-    }
 
-    temp = r0 & 7;
-    if(temp == 7)
-    {
-        return_var = 1;;
-    }
-    else if(temp == 1)
-    {
+    if (r0 == 0)
+        return 0;
+
+    if (r0 & 8)
+        return 4;
+
+    temp = r0 & 7; // Doesn't match with switch statement
+    if (temp == 7)
+        return_var = 1;
+    else if (temp == 1)
         return_var = 2;
-    }
-    else if(temp == 3)
-    {
+    else if (temp == 3)
         return_var = 3;
-    }
     else
-    {
         return_var = 5;
-    }
+
     return return_var;
 }
 

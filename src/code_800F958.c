@@ -46,14 +46,14 @@ void DeletePokemonDungeonSprite(s32 id)
 {
     DungeonPokemonSprite *dSprite;
 
-    if(gDungeonPokemonSprites == NULL)
+    if (gDungeonPokemonSprites == NULL)
         return;
 
     dSprite = GetDungeonPokemonSprite(id);
-    if(dSprite == NULL)
+    if (dSprite == NULL)
         return;
 
-    MemoryClear8((u8 *)dSprite, sizeof(DungeonPokemonSprite));
+    MemoryClear8(dSprite, sizeof(DungeonPokemonSprite));
 }
 
 void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos,

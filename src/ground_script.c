@@ -4,7 +4,7 @@
 
 extern u8 gAnyScriptLocked;
 extern u8 gScriptLocks[];
-extern u32 gUnlockBranchLabels[];
+extern s32 gUnlockBranchLabels[];
 extern u8 gScriptLockConds[];
 
 extern const DebugLocation gUnknown_8116588;
@@ -351,7 +351,7 @@ void GroundScriptLock(s16 index, s32 r1)
   gAnyScriptLocked = 1;
 }
 
-bool8 GroundScriptLockCond(Action *param_1, s16 index, u32 param_3)
+bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3)
 {
   s32 index_s32;
 

@@ -279,7 +279,7 @@ _0800177A:
 	bx r1
 	thumb_func_end GetScriptVarValue
 
-@ https://decomp.me/scratch/xF3HH
+@ https://decomp.me/scratch/5F0gW [100% - DizzyEggg]
 	thumb_func_start GetScriptVarArrayValue
 GetScriptVarArrayValue:
 	push {r4,r5,lr}

@@ -44,7 +44,6 @@ typedef struct UnkTextStruct2_sub
     } unk0;
 } UnkTextStruct2_sub;
 
-
 typedef struct UnkTextStruct2_sub2
 {
     u8 f0;

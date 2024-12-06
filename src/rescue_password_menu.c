@@ -261,7 +261,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
     if(gRescuePasswordMenu == NULL)
     {
         gRescuePasswordMenu = MemoryAlloc(sizeof(struct RescuePasswordMenu), 8);
-        MemoryFill8((u8 *)gRescuePasswordMenu, 0, sizeof(struct RescuePasswordMenu));
+        MemoryFill8(gRescuePasswordMenu, 0, sizeof(struct RescuePasswordMenu));
     }
 
     for(counter = 0; counter < 4; counter++)
@@ -295,7 +295,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
             break;
         case MENU_DISPLAY_RESCUE_PASSWORD:
             temp = GetMailatIndex(0x1F);
-            MemoryFill8((u8 *)temp, 0, sizeof(unkStruct_203B480));
+            MemoryFill8(temp, 0, sizeof(unkStruct_203B480));
             temp->mailType = 2;
             temp->item.id = ITEM_NOTHING;
             sub_8031D70(0x1F, 0);
@@ -358,7 +358,7 @@ s32 UpdateRescuePasswordMenu(void)
     case 3:
     case 5:
         iVar7 = sub_80154F0();
-        MemoryFill8((u8 *)&mail, 0, sizeof(unkStruct_203B480));
+        MemoryFill8(&mail, 0, sizeof(unkStruct_203B480));
         switch(iVar7)
         {
             case 1:
@@ -425,7 +425,7 @@ s32 UpdateRescuePasswordMenu(void)
                         sub_80951FC(&mail);
                         mailPtr1 = GetMailatIndex(GetMailIndex(1, mail.unk10.unk10));
                         mailPtr1->mailType = WONDER_MAIL_TYPE_OKD;
-                        MemoryFill8((u8 *)&gUnknown_203B484, 0, sizeof(unkStruct_203B484));
+                        MemoryFill8(&gUnknown_203B484, 0, sizeof(unkStruct_203B484));
                         break;
                     case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
                         nextMenu = PASSWORD_ENTRY_NOT_THANK_YOU_MAIL;

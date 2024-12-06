@@ -28,7 +28,7 @@ void DrawMainMenu(void)
 
     if (sUnknown_203B34C == NULL) {
         sUnknown_203B34C = MemoryAlloc(sizeof(MainMenu2Work), 8);
-        MemoryFill8((u8 *)sUnknown_203B34C, 0, sizeof(MainMenu2Work));
+        MemoryFill8(sUnknown_203B34C, 0, sizeof(MainMenu2Work));
     }
 
     for (i = 0; i < 4; i++)

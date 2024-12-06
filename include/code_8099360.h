@@ -8,10 +8,6 @@ void sub_80993C0(bool8);
 void sub_80993D8(void);
 void sub_80993E4(void);
 
-// UNUSED
-void sub_80993F0(void);
-// ------
-
 void sub_8099648(void);
 void nullsub_103(void);
 void sub_809965C(void);

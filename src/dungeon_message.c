@@ -794,7 +794,7 @@ void sub_8052FB8(const u8 *str)
                 sUnknown_202F1F0.attrib3 |= palNum;
 
                 unk6 = 0x78 << SPRITEOAM_SHIFT_UNK6_4;
-                sUnknown_202F1F0.unk6 &= mask;
+                sUnknown_202F1F0.unk6 &= mask; // ~SPRITEOAM_MASK_UNK6_4
                 sUnknown_202F1F0.unk6 |= unk6;
 
                 sUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_X;
@@ -1101,13 +1101,13 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
         sMessageLogArrowSpriteOAM.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
         sMessageLogArrowSpriteOAM.attrib2 |= matrixNum;
 
-        mask = 0xF;
-        yMask = 0xFFF;
+        mask = 0xF; // ~SPRITEOAM_MASK_UNK6_4
+        yMask = SPRITEOAM_MAX_UNK6_4;
         ySprite = (yMask & (unkStr->unk2 * 8 + y)) << 4;
         sMessageLogArrowSpriteOAM.unk6 &= mask;
         sMessageLogArrowSpriteOAM.unk6 |= ySprite;
 
-        xSprite = 0x1FF & ((unkStr->unk0 * 8) + 92);
+        xSprite = SPRITEOAM_MAX_X & ((unkStr->unk0 * 8) + 92);
         sMessageLogArrowSpriteOAM.attrib2 &= ~SPRITEOAM_MASK_X;
         sMessageLogArrowSpriteOAM.attrib2 |= xSprite;
 

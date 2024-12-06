@@ -6,7 +6,6 @@
 
 extern u8 gAnyScriptLocked;
 extern u8 gScriptLocks[];
-extern u32 gUnlockBranchLabels[];
 extern u8 gScriptLockConds[];
 extern u8 gUnknown_8116848[];
 

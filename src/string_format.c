@@ -516,21 +516,21 @@ void DrawDialogueBoxString(void)
                         sDialogueBoxArrowSprite.attrib3 |= palNum;
 
                         if (sUnknownTextFlags & 0x10) {
-                            u32 var = 0x780;
-                            sDialogueBoxArrowSprite.unk6 &= 0xF;
+                            u32 var = (0x78 & SPRITEOAM_MAX_UNK6_4) << SPRITEOAM_SHIFT_UNK6_4;
+                            sDialogueBoxArrowSprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
                             sDialogueBoxArrowSprite.unk6 |= var;
                             sDialogueBoxArrowSprite.attrib2 &= ~SPRITEOAM_MASK_X;
-                            sDialogueBoxArrowSprite.attrib2 |= 0x70;
+                            sDialogueBoxArrowSprite.attrib2 |= (0x70 & SPRITEOAM_MAX_X) << SPRITEOAM_SHIFT_X;
                         }
                         else {
                             s16 x;
 
-                            u32 var = ((gUnknown_202E748.unkA + 1) & 0xFFF) << 4;
-                            sDialogueBoxArrowSprite.unk6 &= 0xF;
+                            u32 var = ((gUnknown_202E748.unkA + 1) & SPRITEOAM_MAX_UNK6_4) << SPRITEOAM_SHIFT_UNK6_4;
+                            sDialogueBoxArrowSprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
                             sDialogueBoxArrowSprite.unk6 |= var;
                             x = gUnknown_202E748.unk8;
                             sDialogueBoxArrowSprite.attrib2 &= ~SPRITEOAM_MASK_X;
-                            sDialogueBoxArrowSprite.attrib2 |= x & 0x1FF;
+                            sDialogueBoxArrowSprite.attrib2 |= (x & SPRITEOAM_MAX_X) << SPRITEOAM_SHIFT_X;
                         }
 
                         AddSprite(&sDialogueBoxArrowSprite, 0x100, NULL, NULL);

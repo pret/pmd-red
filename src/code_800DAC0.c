@@ -46,7 +46,7 @@ void sub_800DAC0(u32 fileSelection)
     sub_800DB7C();
   }
   gUnknown_203B0CC = MemoryAlloc(sizeof(struct unkStruct_203B0CC), 0xb);
-  MemoryClear8((u8 *)gUnknown_203B0CC, sizeof(struct unkStruct_203B0CC));
+  MemoryClear8(gUnknown_203B0CC, sizeof(struct unkStruct_203B0CC));
   gUnknown_203B0CC->fileSelection = fileSelection;
   for(index = 0, preload = &gUnknown_203B0CC->unk0[index]; index < 0x20; index++, preload++)
   {

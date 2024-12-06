@@ -38,7 +38,6 @@ extern u32 sub_8031DCC();
 extern void sub_8031E10();
 extern void sub_8031E00();
 extern void sub_8031E10(void);
-extern s32 sub_8037B28(u32);
 extern void sub_8031D70(u8, u32);
 extern u32 sub_8023CE8(void);
 extern void sub_8030F58(u32);
@@ -190,7 +189,7 @@ u32 sub_8027F88(void)
   ResetUnusedInputStruct();
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   sUnknown_203B2C0 = MemoryAlloc(sizeof(WonderMailStruct_203B2C0), 8);
-  MemoryFill8((u8 *)sUnknown_203B2C0, 0, sizeof(WonderMailStruct_203B2C0));
+  MemoryFill8(sUnknown_203B2C0, 0, sizeof(WonderMailStruct_203B2C0));
   sUnknown_203B2C0->unk53C = 0;
   sUnknown_203B2C0->mailIndex = -1;
   sUnknown_203B2C0->speciesNum = -1;
@@ -517,13 +516,13 @@ void sub_8028348(void)
                 switch(sUnknown_203B2C0->unk40)
                 {
                     case 3:
-                        MemoryFill8((u8 *)&sUnknown_203B2C0->unk48, 0, sizeof(unkStruct_203B480));
-                        MemoryFill8((u8 *)&sUnknown_203B2C0->unk78, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8(&sUnknown_203B2C0->unk48, 0, sizeof(unkStruct_203B480));
+                        MemoryFill8(&sUnknown_203B2C0->unk78, 0, sizeof(unkStruct_203B480));
                         sUnknown_203B2C0->linkError = sub_8037D64(sUnknown_203B2C0->unk40, &sUnknown_203B2C0->unk48, &sUnknown_203B2C0->unk78);
                         break;
                     case 4:
-                        MemoryFill8((u8 *)&sUnknown_203B2C0->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
-                        MemoryFill8((u8 *)&sUnknown_203B2C0->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8(&sUnknown_203B2C0->unkA8, 0, sizeof(WonderMailStruct_203B2C0_sub));
+                        MemoryFill8(&sUnknown_203B2C0->unk130, 0, sizeof(WonderMailStruct_203B2C0_sub));
                         sUnknown_203B2C0->unkA8.pokemon.speciesNum = 0;
                         sUnknown_203B2C0->unk130.pokemon.speciesNum = 0;
                         sUnknown_203B2C0->unkA8.mail = *GetMailatIndex(sUnknown_203B2C0->mailIndex);
@@ -1358,7 +1357,7 @@ void sub_80293F4(void)
     unkStruct_203B480 mail;
 
     return_var = sub_80154F0();
-    MemoryFill8((u8 *)&mail, 0, sizeof(unkStruct_203B480));
+    MemoryFill8(&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
         case 3:

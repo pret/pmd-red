@@ -625,9 +625,9 @@ struct UnkStruct_8106AE8
 extern const struct UnkStruct_8106AE8 gUnknown_8106AE8[];
 
 #ifdef NONMATCHING
-// Not even close in terms of matching, but functionally equivalent. Sprite OAM memes break the stack here.
+// Sprite OAM memes. https://decomp.me/scratch/Jm4oC
 // Creates arrow sprites which are used when in rotate or diagonal modes.
-static void TryCreateModeArrows(Entity *leader) // https://decomp.me/scratch/gFX1S
+static void TryCreateModeArrows(Entity *leader)
 {
     UnkDungeonGlobal_unk181E8_sub *unkPtr = &gDungeon->unk181e8;
 

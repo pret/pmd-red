@@ -60,8 +60,8 @@ void sub_8095118(void)
   s32 index;
   unkStruct_203B480 *unused;
 
-  MemoryFill8((u8*)gUnknown_203B480,0, 0x20 * sizeof(unkStruct_203B480));
-  MemoryFill8((u8*)gUnknown_203B484,0, sizeof(unkStruct_203B484));
+  MemoryFill8(gUnknown_203B480, 0, 0x20 * sizeof(unkStruct_203B480));
+  MemoryFill8(gUnknown_203B484, 0, sizeof(unkStruct_203B484));
   for(index = 0; index < 0x20; index++){
 
     // NOTE: we use a temp variable here to force the match
@@ -138,7 +138,7 @@ void DeleteMailAtIndex(u8 index)
 {
   unkStruct_203B480 *unused;
 
-  MemoryFill8((u8*)&gUnknown_203B480[index],0,sizeof(unkStruct_203B480));
+  MemoryFill8(&gUnknown_203B480[index], 0, sizeof(unkStruct_203B480));
   unused = &gUnknown_203B480[index];
   gUnknown_203B480[index].mailType = 0;
   unused = &gUnknown_203B480[index];

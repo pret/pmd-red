@@ -405,7 +405,7 @@ u32 sub_8012240(void)
 {
     s32 status;
     struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), 5);
-    MemoryFill8((u8 *)r5, 0xFF, 0x4);
+    MemoryFill8(r5, 0xFF, 0x4);
     sub_8011830();
     status = WriteFlashData(0x1F, (u8 *)r5, sizeof(struct unk_struct));
     xxx_call_start_bg_music();

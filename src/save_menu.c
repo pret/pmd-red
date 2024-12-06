@@ -127,7 +127,7 @@ void CreateSaveMenu(s32 currMenu)
 
   if (sUnknown_203B364 == NULL) {
     sUnknown_203B364 = MemoryAlloc(sizeof(SaveMenuWork),8);
-    MemoryFill8((u8 *)sUnknown_203B364,0,sizeof(SaveMenuWork));
+    MemoryFill8(sUnknown_203B364,0,sizeof(SaveMenuWork));
   }
   for(index = 0; index < 4; index++){
     sUnknown_203B364->unk148[index] = gUnknown_80E6F20;
@@ -266,7 +266,7 @@ s32 UpdateSaveMenu(void)
 
 void sub_8038830(void)
 {
-#ifdef NONMATCHING // SpriteOAM memes. TODO: Match like sub_8039174 with multiple vars and while(0)
+#ifdef NONMATCHING // SpriteOAM memes
     u32 r0;
     u32 r2;
 #else

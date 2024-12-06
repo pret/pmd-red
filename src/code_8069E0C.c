@@ -2310,7 +2310,7 @@ void sub_806C51C(Entity *entity)
             finalYSprite = ySprite + spriteStructPtr->y;
             finalYSprite &= SPRITEOAM_MAX_UNK6_4;
             finalYSprite <<= SPRITEOAM_SHIFT_UNK6_4;
-            spriteStructPtr->sprite.unk6 &= 0xF;
+            spriteStructPtr->sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
             spriteStructPtr->sprite.unk6 |= finalYSprite;
 
             AddSprite(&spriteStructPtr->sprite, 0, NULL, NULL);

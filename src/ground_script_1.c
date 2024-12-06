@@ -16,6 +16,13 @@
 #include "ground_main.h"
 #include "code_80A26CC.h"
 
+// Size: unknown
+typedef struct UnkAction3D
+{
+    u8 fill0[0x4C];
+    u8 unk4C[10];
+} UnkAction3D;
+
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s16, DungeonLocation*, u8);
 void GroundMap_ExecuteEnter(s16);
@@ -44,9 +51,9 @@ s16 GroundEffect_Add(s16 id, GroundEffectData*, s16 group, s8 sector);
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
 char sub_8002984(s32, u8);
-u32 VecDirection8Radial();
-u32 SizedDeltaDirection4();
-u8 SizedDeltaDirection8(PixelPos*, PixelPos*, PixelPos*, PixelPos*);
+s8 VecDirection8Radial(PixelPos*);
+s8 SizedDeltaDirection4(PixelPos*, PixelPos*, PixelPos*, PixelPos*);
+s8 SizedDeltaDirection8(PixelPos*, PixelPos*, PixelPos*, PixelPos*);
 
 bool8 sub_8021700(s32);
 bool8 sub_802FCF0(void);
@@ -59,7 +66,7 @@ void sub_80975A8(s16, bool8);
 void sub_8098D1C(s32, u32, s32);
 void sub_8098E18(s32, s32);
 u32 sub_80999E8();
-u32 sub_80999FC();
+void sub_80999FC(s32);
 u32 sub_8099A10();
 u32 sub_8099A34();
 u32 sub_8099A48();
@@ -104,7 +111,7 @@ void sub_80A87AC(s32, s32);
 void sub_80A8BD8(s16, s32*);
 u32 sub_80A8C2C();
 u32 sub_80A8C98();
-char *sub_80A8D54(s16);
+UnkAction3D *sub_80A8D54(s16);
 s16 sub_80A8FD8(s32, PixelPos*);
 s16 sub_80A8F9C(s32, PixelPos*);
 u32 sub_80A9050();
@@ -118,7 +125,7 @@ void DeleteGroundLives(void);
 void DeleteGroundObjects(void);
 void DeleteGroundEffects(void);
 
-u32 sub_80A14E8(u32, u8, u32, u32);
+s32 sub_80A14E8(Action *, u8, s32, s32);
 s16 HandleAction(void *, DebugLocation *);
 
 extern int gFormatArgs[10];
@@ -128,7 +135,7 @@ extern s16 gUnknown_2039A32;
 extern s16 gUnknown_2039A34;
 
 extern struct { const char *unk0; s32 unk4; } gChoices[9];
-extern char gUnknown_2039D98[12];
+extern u8 gUnknown_2039D98[12];
 extern int gNumChoices;
 
 extern PixelPos gUnknown_81164DC;
@@ -546,8 +553,8 @@ s32 ExecuteScriptCommand(Action *action) {
                         action->callbacks->getSize(action->parentObject, &pos2);
                         sub_80A8FD8(ret, &pos3);
                         sub_80A8F9C(ret, &pos4);
-                        if ((tmp = (s8)SizedDeltaDirection8(&pos3, &pos4, &pos1, &pos2)) != -1 ||
-                            (tmp = (s8)SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC)) != -1) {
+                        if ((tmp = SizedDeltaDirection8(&pos3, &pos4, &pos1, &pos2)) != -1 ||
+                            (tmp = SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC)) != -1) {
                             sub_80A9090(ret, tmp);
                         }
                     }
@@ -758,11 +765,11 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x3d: {
-                struct { u8 pad[0x4c]; u8 unk4C[10]; } *unk; // unknown struct
+                UnkAction3D *unk;
                 int i;
                 if ((s16)curCmd.arg1 != -1) {
-                    unk = (void*)sub_80A8D54(curCmd.arg1);
-                    if (unk) {
+                    unk = sub_80A8D54(curCmd.arg1);
+                    if (unk != NULL) {
                         for (i = 0; i < 10; i++) {
                             gUnknown_2039D98[i] = unk->unk4C[i];
                         }
@@ -1608,7 +1615,7 @@ s32 ExecuteScriptCommand(Action *action) {
                         GroundLink_GetPos((s16)curCmd.arg1, &pos2);
                         pos3.x = pos2.x - pos.x;
                         pos3.y = pos2.y - pos.y;
-                        val = (s8)VecDirection8Radial(&pos3);
+                        val = VecDirection8Radial(&pos3);
                         break;
                     }
                     case 0xc8: {
@@ -1619,9 +1626,9 @@ s32 ExecuteScriptCommand(Action *action) {
                             action->callbacks->getSize(action->parentObject, &pos2);
                             sub_80A8FD8(tmp, &pos3);
                             sub_80A8F9C(tmp, &pos4);
-                            val = (s8)SizedDeltaDirection8(&pos1, &pos2, &pos3, &pos4);
+                            val = SizedDeltaDirection8(&pos1, &pos2, &pos3, &pos4);
                             if (val == -1) {
-                                val = (s8)SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC);
+                                val = SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC);
                             }
                         } else {
                             val = -1;
@@ -1635,9 +1642,9 @@ s32 ExecuteScriptCommand(Action *action) {
                             action->callbacks->getHitboxCenter(action->parentObject, &pos1);
                             action->callbacks->getSize(action->parentObject, &pos2);
                             sub_80A8FD8(tmp, &pos3);
-                            val = (s8)SizedDeltaDirection8(&pos1, &pos2, &pos3, &gUnknown_81164DC);
+                            val = SizedDeltaDirection8(&pos1, &pos2, &pos3, &gUnknown_81164DC);
                             if (val == -1) {
-                                val = (s8)SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC);
+                                val = SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC);
                             }
                         } else {
                             val = -1;
@@ -1824,9 +1831,9 @@ s32 ExecuteScriptCommand(Action *action) {
     }
 }
 
-UNUSED u32 sub_80A1440(u32 r0, u32 r1, u32 r2)
+UNUSED u32 sub_80A1440(s32 r0, s32 r1, s32 r2)
 {
-   return sub_80A14E8(0, r0, r1, r2);
+   return sub_80A14E8(NULL, r0, r1, r2);
 }
 
 UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0)

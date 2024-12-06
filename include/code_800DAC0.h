@@ -1,7 +1,7 @@
 #ifndef GUARD_CODE_800DAC0_H
 #define GUARD_CODE_800DAC0_H
 
-#include "ground_sprite.h"
+#include "structs/sprite_oam.h"
 #include "structs/str_position.h"
 
 typedef struct unkStruct_80416E0

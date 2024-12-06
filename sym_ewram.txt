@@ -308,11 +308,8 @@ gLevelCurrentData: /* 20384F0 (GetPokemonLevelData) */
     .include "src/ground_main.o"
     .space 0x2
 
-gUnknown_20398C8: /* 20398C8 (sub_80991E0 - sub_8099220) */
-	.space 0x10
-
-gUnknown_20398D8: /* 20398D8 (sub_809927C) */
-	.space 0x78
+gUnknown_20398C8: /* 20398C8 (sub_80991E0 - sub_809927C) */
+	.space 0x88 /* This should be a "struct WonderMailStruct_203B2C0_sub", at least I think so due to its size. Kermalis */
 gUnknown_2039950: /* 2039950 (xxx_script_related_8098468 - sub_809927C) */
 	.space 0x8
 

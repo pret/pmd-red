@@ -1,6 +1,6 @@
 #include "global.h"
 #include "code_8012A18_1.h"
-#include "sprite_oam.h"
+#include "structs/sprite_oam.h"
 #include "text_util.h"
 #include "text.h"
 

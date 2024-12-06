@@ -708,21 +708,21 @@ bool8 IsMoveEnabled(s32 index, Move *moves)
 bool8 sub_8093318(s32 param_1, Move *moves)
 {
     Move dest_struct[MAX_MON_MOVES * 2];
-    MemoryCopy8((void *)dest_struct, (void *)moves, sizeof(Move) * MAX_MON_MOVES * 2);
+    MemoryCopy8(dest_struct, moves, sizeof(dest_struct));
     return TryLinkMovesAfter(param_1, dest_struct);
 }
 
 bool8 sub_809333C(s32 param_1, Move *moves)
 {
     Move dest_struct[MAX_MON_MOVES * 2];
-    MemoryCopy8((void *)dest_struct, (void *)moves, sizeof(Move) * MAX_MON_MOVES * 2);
+    MemoryCopy8(dest_struct, moves, sizeof(dest_struct));
     return UnlinkMovesAfter(param_1, dest_struct);
 }
 
 UNUSED static bool8 sub_8093360(s32 param_1, Move *moves)
 {
     Move dest_struct[MAX_MON_MOVES * 2];
-    MemoryCopy8((void *)dest_struct, (void *)moves, sizeof(Move) * MAX_MON_MOVES * 2);
+    MemoryCopy8(dest_struct, moves, sizeof(dest_struct));
     return sub_80933D8(param_1, dest_struct);
 }
 

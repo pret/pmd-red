@@ -11,10 +11,16 @@
 #include "save.h"
 #include "structs/str_dungeon.h"
 
+typedef struct unkStruct_800D670
+{
+    u8 buffer[16];
+    u32 unk10;
+} unkStruct_800D670;
+
 // rescue_password_menu.c
 extern s32 gCommsTimeout; // Counts to 100 and then errors if other player hasn't connected
 
-extern u32 gUnknown_202EC40[2];
+extern s32 gUnknown_202EC40[2];
 extern s32 gUnknown_202EC48;
 
 extern struct UnkStruct_203B184 *gUnknown_203B184;
@@ -30,44 +36,199 @@ extern void sub_800D570(void);
 extern u8 sub_800D588(void);
 extern void sub_800D59C(s32 *, u32);
 extern u8 sub_800D600(void);
-extern void sub_800D670(u32, s32 *, u32);
+extern void sub_800D670(s32 idx, void *dst, s32 size);
 extern void sub_800D68C(u32);
 
-u32 sub_8037C10(bool8 a0)
+// Inline needed for 8-bit return cast
+static inline bool8 IsNotChunsoft(unkStruct_800D670 *unk)
 {
-    u32 ret;
+    return strcmp(unk->buffer, sChunsoft) != 0;
+}
 
-    if (a0)
-    {
+bool8 sub_8037A48(void)
+{
+    bool8 found;
+    unkStruct_800D670 stack;
+    unkStruct_800D670 stack_1;
+    s32 i;
+
+    found = TRUE;
+    sub_800D670(0, &stack, sizeof(unkStruct_800D670));
+    sub_800D670(1, &stack_1, sizeof(unkStruct_800D670));
+
+    for (i = 0; i < 2; i++)
+        gUnknown_202EC40[i] = 8;
+
+     gUnknown_202EC40[0] = stack.unk10;
+     gUnknown_202EC40[1] = stack_1.unk10;
+    
+    if (IsNotChunsoft(&stack) || IsNotChunsoft(&stack_1))
+        return FALSE;
+
+    if ((stack.unk10 == 0 && stack_1.unk10 == 1)
+        || (stack.unk10 == 1 && stack_1.unk10 == 0)) {
+        //found = TRUE;
+        }
+    else if ((stack.unk10 == 2 && stack_1.unk10 == 3)
+        || (stack.unk10 == 3 && stack_1.unk10 == 2)) {
+        //found = TRUE;
+        }
+    else if ((stack.unk10 == 9 && stack_1.unk10 == 10)
+        || (stack.unk10 == 10 && stack_1.unk10 == 9)) {
+        //found = TRUE;
+        }
+    else if ((stack.unk10 == 4 && stack_1.unk10 == 5)
+        || (stack.unk10 == 5 && stack_1.unk10 == 4)) {
+        //found = TRUE;
+        }
+    else if ((stack.unk10 == 6 && stack_1.unk10 == 7)
+        || (stack.unk10 == 7 && stack_1.unk10 == 6)) {
+        //found = TRUE;
+        }
+    else {
+        found = FALSE;
+    }
+
+    return found;
+}
+
+// https://decomp.me/scratch/IJ9zV (inverted loop, try to match without gotos...)
+NAKED s32 sub_8037B28(s32 mode)
+{
+    asm_unified("push {r4,r5,lr}\n"
+"	sub sp, 0x14\n"
+"	adds r4, r0, 0\n"
+"	movs r5, 0\n"
+"	bl sub_800D414\n"
+"	ldr r0, _08037B58\n"
+"	str r5, [r0]\n"
+"	ldr r5, _08037B5C\n"
+"	mov r0, sp\n"
+"	movs r1, 0\n"
+"	movs r2, 0x14\n"
+"	bl MemoryFill8\n"
+"	mov r0, sp\n"
+"	adds r1, r5, 0\n"
+"	bl strcpy\n"
+"	str r4, [sp, 0x10]\n"
+"	mov r0, sp\n"
+"	movs r1, 0x14\n"
+"	bl sub_800D59C\n"
+"	b _08037B7A\n"
+"	.align 2, 0\n"
+"_08037B58: .4byte gUnknown_202EC38\n"
+"_08037B5C: .4byte sChunsoft\n"
+"_08037B60:\n"
+"	cmp r5, 0x3\n"
+"	beq _08037BCC\n"
+"	cmp r5, 0x4\n"
+"	beq _08037BD8\n"
+"	cmp r5, 0x5\n"
+"	beq _08037BF0\n"
+"	ldr r2, _08037BC0\n"
+"	ldr r1, [r2]\n"
+"	ldr r0, _08037BC4\n"
+"	cmp r1, r0\n"
+"	bgt _08037BE4\n"
+"	adds r0, r1, 0x1\n"
+"	str r0, [r2]\n"
+"_08037B7A:\n"
+"	movs r4, 0\n"
+"_08037B7C:\n"
+"	bl sub_80373C4\n"
+"	bl sub_8012AE8\n"
+"	cmp r0, 0x3\n"
+"	bgt _08037B8C\n"
+"	cmp r0, 0x2\n"
+"	bge _08037BF0\n"
+"_08037B8C:\n"
+"	adds r4, 0x1\n"
+"	cmp r4, 0\n"
+"	ble _08037B7C\n"
+"	bl sub_800D33C\n"
+"	adds r5, r0, 0\n"
+"	bl sub_800D570\n"
+"	cmp r5, 0x2\n"
+"	bne _08037B60\n"
+"	bl sub_800D600\n"
+"	lsls r0, 24\n"
+"	cmp r0, 0\n"
+"	beq _08037BFC\n"
+"	bl sub_8037A48\n"
+"	lsls r0, 24\n"
+"	cmp r0, 0\n"
+"	bne _08037BC8\n"
+"	movs r4, 0x4\n"
+"	bl sub_800D520\n"
+"	bl sub_800D510\n"
+"	b _08037C06\n"
+"	.align 2, 0\n"
+"_08037BC0: .4byte gUnknown_202EC38\n"
+"_08037BC4: .4byte 0x00000707\n"
+"_08037BC8:\n"
+"	movs r4, 0\n"
+"	b _08037C06\n"
+"_08037BCC:\n"
+"	bl sub_800D520\n"
+"	bl sub_800D510\n"
+"	movs r0, 0x2\n"
+"	b _08037C08\n"
+"_08037BD8:\n"
+"	bl sub_800D520\n"
+"	bl sub_800D510\n"
+"	movs r0, 0x3\n"
+"	b _08037C08\n"
+"_08037BE4:\n"
+"	bl sub_800D520\n"
+"	bl sub_800D510\n"
+"	movs r0, 0xF\n"
+"	b _08037C08\n"
+"_08037BF0:\n"
+"	bl sub_800D520\n"
+"	bl sub_800D510\n"
+"	movs r0, 0x1\n"
+"	b _08037C08\n"
+"_08037BFC:\n"
+"	movs r4, 0x5\n"
+"	bl sub_800D520\n"
+"	bl sub_800D510\n"
+"_08037C06:\n"
+"	adds r0, r4, 0\n"
+"_08037C08:\n"
+"	add sp, 0x14\n"
+"	pop {r4,r5}\n"
+"	pop {r1}\n"
+"	bx r1");
+}
+
+s32 sub_8037C10(bool8 a0)
+{
+    s32 ret;
+
+    if (a0) {
         if (sub_800D588())
-        {
             ret = gUnknown_202EC40[0];
-        }
         else
-        {
             ret = gUnknown_202EC40[1];
-        }
     }
-    else if (sub_800D588())
-    {
-        ret = gUnknown_202EC40[1];
+    else {
+        if (sub_800D588())
+            ret = gUnknown_202EC40[1];
+        else
+            ret =  gUnknown_202EC40[0];
     }
-    else
-    {
-        ret =  gUnknown_202EC40[0];
-    }
+
     return ret;
 }
 
 static void sub_8037C44(s32 mode, void *data)
 {
-    s32 index;
+    s32 i;
 
-    for(index = 0; index < 2; index++)
-    {
-        sub_800D68C(index);
-    }
-    switch(mode) {
+    for (i = 0; i < 2; i++)
+        sub_800D68C(i);
+
+    switch (mode) {
         case 0:
         case 1:
             sub_800D59C(data, sizeof(unkStruct_8035D94));
@@ -84,15 +245,14 @@ static void sub_8037C44(s32 mode, void *data)
             break;
         case 9:
         case 10:
-            sub_800D59C(data, 0xb4);
+            sub_800D59C(data, 0xB4);
             break;
     }
 }
 
 static void sub_8037CC4(s32 mode, void *param_2, void *param_3)
 {
-    switch(mode)
-    {
+    switch (mode) {
         case 0:
         case 1:
             sub_800D670(0, param_2, sizeof(unkStruct_8035D94));
@@ -112,13 +272,13 @@ static void sub_8037CC4(s32 mode, void *param_2, void *param_3)
             break;
         case 9:
         case 10:
-            sub_800D670(0, param_2, 180);
-            sub_800D670(1, param_3, 180);
+            sub_800D670(0, param_2, 0xB4);
+            sub_800D670(1, param_3, 0xB4);
             break;
     }
 }
 
-// TODO: same as sub_80381F4
+// TODO: same as sub_80381F4. Try to fix this fakematch https://decomp.me/scratch/vkGqo
 s32 sub_8037D64(u32 mode, void *param_2, void *param_3)
 {
     u32 iVar2;
@@ -171,8 +331,8 @@ static s32 sub_8037DF0(void)
     s32 iStack_c;
 
     linkStatus = COMMS_GOOD;
-    sub_800D670(0,&iStack_10,4);
-    sub_800D670(1,&iStack_c,4);
+    sub_800D670(0, &iStack_10, 4);
+    sub_800D670(1, &iStack_c, 4);
     if ((iStack_10 != 0) || (iStack_c != 0)) {
         linkStatus = (!sub_800D588()) ? iStack_c : iStack_10;
         if (linkStatus == COMMS_GOOD) {
@@ -191,15 +351,15 @@ static void sub_8037E38(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
     r4 = sub_800D588() == 0 ? param_2 : param_1;
     r3 = sub_800D588() == 0 ? param_1 : param_2;
 
-    if ((r4->itemIndex).itemIndex_u8 == (r3->itemIndex).itemIndex_u8) {
-         load = gTeamInventoryRef->teamStorage[r4->itemIndex.itemIndex_u8];
+    if (r4->itemIndex == r3->itemIndex) {
+         load = gTeamInventoryRef->teamStorage[r4->itemIndex];
          load += r3->numItems;
-         gTeamInventoryRef->teamStorage[r4->itemIndex.itemIndex_u8] = load;
+         gTeamInventoryRef->teamStorage[r4->itemIndex] = load;
     }
     else {
-        load = gTeamInventoryRef->teamStorage[r3->itemIndex.itemIndex_u8];
+        load = gTeamInventoryRef->teamStorage[r3->itemIndex];
         load += r3->numItems;
-        gTeamInventoryRef->teamStorage[r3->itemIndex.itemIndex_u8] = load;
+        gTeamInventoryRef->teamStorage[r3->itemIndex] = load;
     }
 }
 
@@ -246,7 +406,7 @@ static void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct
     }
     else
     {
-        MemoryFill8((u8 *)gUnknown_203B484, 0, sizeof(unkStruct_203B484));
+        MemoryFill8(gUnknown_203B484, 0, sizeof(unkStruct_203B484));
         gUnknown_203B484->unk4.speciesNum = MONSTER_NONE;
     }
 }
@@ -303,8 +463,8 @@ static s32 sub_8038014(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
     r4 = sub_800D588() == 0 ? param_2 : param_1;
     r3 = sub_800D588() == 0 ? param_1 : param_2;
 
-    if ((r4->itemIndex).itemIndex_u8 == (r3->itemIndex).itemIndex_u8) {
-        r2 = gTeamInventoryRef->teamStorage[r4->itemIndex.itemIndex_u8];
+    if (r4->itemIndex == r3->itemIndex) {
+        r2 = gTeamInventoryRef->teamStorage[r4->itemIndex];
         r2 += r3->numItems;
         if (r2 > 999) {
             linkStatus = COMMS_NO_ROOM_STORAGE;
@@ -313,7 +473,7 @@ static s32 sub_8038014(unkStruct_8035D94 *param_1,unkStruct_8035D94 *param_2)
             linkStatus = COMMS_GOOD;
     }
     else {
-        r2 = gTeamInventoryRef->teamStorage[r3->itemIndex.itemIndex_u8];
+        r2 = gTeamInventoryRef->teamStorage[r3->itemIndex];
         r2 += r3->numItems;
         if (r2 > 999) {
             linkStatus = COMMS_NO_ROOM_STORAGE;
@@ -432,7 +592,7 @@ UNUSED static s32 sub_80381E8(u32 mode, void * param_2, void * param_3)
     return sub_803815C(mode, param_2, param_3);
 }
 
-// TODO: clean this up
+// TODO: clean this up... fix fakematch without gotos. see above funcs https://decomp.me/scratch/JGv2m
 s32 sub_80381F4(u32 mode, void *param_2, void *param_3)
 {
     u32 iVar2;

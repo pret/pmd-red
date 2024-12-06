@@ -194,13 +194,8 @@ typedef struct Moves
 // size: 0x208
 typedef struct EntityInfo
 {
-    // This has different purposes for Pokémon, items, and traps.
-    // Pokemon: MovementFlag
-    // Items: ItemFlag
-    // Traps: TrapType
-    /* 0x0 */ u16 flags;
-    /* 0x2 */ s16 id; // Pokémon species or item ID.
-    // Everything from here on only applies to Pokémon.
+    /* 0x0 */ u16 flags; // MovementFlag
+    /* 0x2 */ s16 id; // Pokémon species.
     /* 0x4 */ s16 apparentID; // Shows a different Pokémon when using Transform.
     /* 0x6 */ bool8 isNotTeamMember;
     /* 0x7 */ bool8 isTeamLeader;

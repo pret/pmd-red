@@ -245,7 +245,7 @@ void sub_809D220(s32 r0, s32 r1, s32 r2)
     gUnknown_20399E8.unk4 = r1;
 }
 
-bool32 sub_809D234(void)
+bool8 sub_809D234(void)
 {
     return gUnknown_20399E8.unk8 != 0;
 }
@@ -392,7 +392,7 @@ extern s16 gUnknown_2039A34;
 extern u8 gAnyScriptLocked;
 extern u8 gScriptLocks[];
 extern u8 gScriptLockConds[];
-extern u32 gUnlockBranchLabels[];
+extern s32 gUnlockBranchLabels[];
 
 void sub_809D4B0(void)
 {

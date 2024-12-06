@@ -18,22 +18,17 @@
 #include "sprite.h"
 #include "text.h"
 
-// TODO: MAKE STATIC WHEN other_menus1.s IS DED
-EWRAM_DATA_2 unkStruct_203B35C *sUnknown_203B35C = {0};
+static EWRAM_DATA_2 unkStruct_203B35C *sUnknown_203B35C = {0};
 
 #include "data/other_menus1.h"
-
-// other_menus1.s
-extern void sub_8037810(void);
-extern void sub_8037900(void);
-// other_menus2.s
-extern s32 sub_8037B28(u32);
 
 static void sub_80371B8(void);
 static void sub_8037400(void);
 static void sub_80376CC(void);
 static void sub_8037748(void);
 static u32 sub_8037798(void);
+static void sub_8037810(void);
+static void sub_8037900(void);
 
 void sub_8036FDC(s32 param_1)
 {
@@ -46,7 +41,7 @@ void sub_8036FDC(s32 param_1)
 
     if (sUnknown_203B35C == NULL) {
         sUnknown_203B35C = MemoryAlloc(sizeof(unkStruct_203B35C), 8);
-        MemoryFill8((u8 *)sUnknown_203B35C, 0, sizeof(unkStruct_203B35C));
+        MemoryFill8(sUnknown_203B35C, 0, sizeof(unkStruct_203B35C));
     }
 
     sUnknown_203B35C->unk0 = param_1;
@@ -55,7 +50,7 @@ void sub_8036FDC(s32 param_1)
 
     for (index1 = 0; index1 < 2; index1++) {
         sUnknown_203B35C->unk1BC[index1].numItems = 0;
-        sUnknown_203B35C->unk1BC[index1].itemIndex.itemIndex_u8 = ITEM_NOTHING;
+        sUnknown_203B35C->unk1BC[index1].itemIndex = ITEM_NOTHING;
     }
 
     for (index2 = 0; index2 < 4; index2++)
@@ -102,7 +97,7 @@ UNUSED static u32 sub_80370F0(void)
             sub_80371B8();
             break;
         case 2:
-            if (sUnknown_203B35C->unk0 < 2 && sUnknown_203B35C->linkStatus == COMMS_GOOD && !sub_8037C10(FALSE))
+            if (sUnknown_203B35C->unk0 < 2 && sUnknown_203B35C->linkStatus == COMMS_GOOD && sub_8037C10(FALSE) == 0)
                 return 41; // TODO: what screen is this?
 
             if (!sub_80130A8(&sUnknown_203B35C->unk1C[0]))
@@ -131,7 +126,7 @@ static void sub_80371B8(void)
     sub_8037400();
 
     if (sUnknown_203B35C->unk0 < 2 && sUnknown_203B35C->linkStatus == COMMS_GOOD) {
-        if (sub_8037C10(FALSE)) {
+        if (sub_8037C10(FALSE) != 0) {
             sub_80376CC();
             sub_8035CC0(sUnknown_203B35C->unk15C, 0);
             // Success!
@@ -204,8 +199,8 @@ static void sub_80371B8(void)
 
         if (sUnknown_203B35C->linkStatus != COMMS_GOOD && sUnknown_203B35C->unk0 == 0) {
             item = sub_8035D94();
-            if (item->itemIndex.itemIndex_u8 != ITEM_NOTHING && item->numItems != 0)
-                gTeamInventoryRef->teamStorage[item->itemIndex.itemIndex_u8] += item->numItems;
+            if (item->itemIndex != ITEM_NOTHING && item->numItems != 0)
+                gTeamInventoryRef->teamStorage[item->itemIndex] += item->numItems;
         }
     }
 }
@@ -335,7 +330,7 @@ static void sub_8037400(void)
 
 static void sub_80376CC(void)
 {
-#ifdef NONMATCHING // SpriteOAM memes. TODO: Match like sub_8039174 with multiple vars and while(0)
+#ifdef NONMATCHING // SpriteOAM memes
     u32 r0;
     u32 r2;
 #else
@@ -429,4 +424,72 @@ static u32 sub_8037798(void)
             break;
     }
     return nextMenu;
+}
+
+static void sub_8037810(void)
+{
+    unkStruct_8035D94 blank = {0, 0};
+
+    MemoryFill8(&sUnknown_203B35C->unk1BC[0], 0, sizeof(unkStruct_8035D94));
+    MemoryFill8(&sUnknown_203B35C->unk1BC[1], 0, sizeof(unkStruct_8035D94));
+    sUnknown_203B35C->unk1BC[0] = blank;
+    sUnknown_203B35C->unk1BC[1] = blank;
+
+    MemoryFill8(&sUnknown_203B35C->unk1CC, 0, sizeof(unkStruct_203B480));
+    MemoryFill8(&sUnknown_203B35C->unk1FC, 0, sizeof(unkStruct_203B480));
+    MemoryFill8(&sUnknown_203B35C->unk22C, 0, sizeof(unkStruct_203B480));
+    MemoryFill8(&sUnknown_203B35C->unk25C, 0, sizeof(unkStruct_203B480));
+    MemoryFill8(&sUnknown_203B35C->unk28C, 0, sizeof(unkStruct_203B480));
+    MemoryFill8(&sUnknown_203B35C->unk314, 0, sizeof(unkStruct_203B480));
+    MemoryFill8(&sUnknown_203B35C->unk2BC, 0, sizeof(PokemonStruct1));
+    MemoryFill8(&sUnknown_203B35C->unk344, 0, sizeof(PokemonStruct1));
+    MemoryFill8(sUnknown_203B35C->unk39C, 0, 0xb4); // unkStruct_803B344?
+    MemoryFill8(sUnknown_203B35C->unk450, 0, 0xb4); // unkStruct_803B344?
+
+    sUnknown_203B35C->unk2BC.speciesNum = 0;
+    sUnknown_203B35C->unk344.speciesNum = 0;
+}
+
+void sub_8037900(void)
+{
+    sub_8035CC0(sUnknown_203B35C->unk15C, 0);
+
+    switch (sUnknown_203B35C->unk0) {
+        case 0:
+        case 1: {
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E656C, FALSE, 6, FALSE);
+            break;
+        }
+        case 2:
+        case 3: {
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E65D8, FALSE, 6, FALSE);
+            break;
+        }
+        case 4:
+        case 5: {
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E661C, FALSE, 6, FALSE);
+            break;
+        }
+        case 6:
+        case 7: {
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E665C, FALSE, 6, FALSE);
+            break;
+        }
+        case 8: {
+            break;
+        }
+        case 9:
+        case 10: {
+            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E667C, FALSE, 6, FALSE);
+            break;
+        }
+    }
+
+    sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
+    sub_80373C4();
+    sub_80130A8(sUnknown_203B35C->unk1C);
+}
+
+UNUSED static void nullsub_202(void)
+{
 }

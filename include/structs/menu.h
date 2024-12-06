@@ -1,7 +1,7 @@
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
-#include "sprite_oam.h"
+#include "structs/sprite_oam.h"
 #include "structs/str_text.h"
 #include "structs/str_position.h"
 
@@ -25,11 +25,11 @@ typedef struct MenuInputStruct
     s32 unk0;
     u16 unk4;
     s16 unk6;
-    DungeonPos unk8; // Maybe DungeonPos
+    DungeonPos unk8;
     s16 unkC; // Maybe DungeonPos
     s16 unkE;
     u32 unk10;
-    DungeonPos unk14; // Maybe DungeonPos
+    DungeonPos unk14;
     /* 0x18 */ s16 menuIndex;
     s16 unk1A;
     s16 unk1C;

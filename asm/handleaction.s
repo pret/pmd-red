@@ -5,6 +5,8 @@
 
 	.text
 
+@ https://decomp.me/scratch/QRjxB - more up to date but incomplete
+@ https://decomp.me/scratch/aOcQq - more complete but using outdated definitions
 	thumb_func_start HandleAction
 HandleAction:
 	push {r4-r7,lr}

@@ -20,8 +20,6 @@ static EWRAM_DATA_2 struct TradeItemsMenu *sTradeItemsMenu = {0};
 
 #include "data/trade_items_menu.h"
 
-extern s32 sub_8037B28(u32);
-
 void sub_8036F74(void);
 void sub_8036F30();
 void TradeItem_AddItem();
@@ -51,7 +49,7 @@ s32 CreateTradeItemsMenu(void)
   ResetUnusedInputStruct();
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   sTradeItemsMenu = MemoryAlloc(sizeof(struct TradeItemsMenu), 8);
-  MemoryFill8((u8 *)sTradeItemsMenu, 0, sizeof(struct TradeItemsMenu));
+  MemoryFill8(sTradeItemsMenu, 0, sizeof(struct TradeItemsMenu));
   sub_8035C1C();
   sub_8035DA0();
   sTradeItemsMenu->fallbackState = 0x13;
