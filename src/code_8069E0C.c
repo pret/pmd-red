@@ -88,7 +88,7 @@ extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
 u32 EntityGetStatusSprites(Entity *entity);
 void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
 extern void sub_8042EC8(Entity *a0, s32 a1);
-void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks);
+void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, unkStruct_2039DB0 *spriteMasks);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
 extern void sub_803F580(s32);
@@ -2059,7 +2059,7 @@ void sub_806C51C(Entity *entity)
     u32 statusSprites;
     bool8 r4;
     u8 r7;
-    u16 spriteMasks[6];
+    unkStruct_2039DB0 spriteMasks;
     s32 xSprite, ySprite;
 
     EntityInfo *entInfo = GetEntInfo(entity);
@@ -2246,12 +2246,14 @@ void sub_806C51C(Entity *entity)
 
     r4 = FALSE;
     r7 = sub_806CF54(entity);
-    spriteMasks[0] = 0xF3FF;
-    spriteMasks[1] = 0xFFFF;
-    spriteMasks[2] = 0xF3FF;
-    spriteMasks[3] = 0;
-    spriteMasks[4] = 0;
-    spriteMasks[5] = gDungeon->unk181e8.unk18208 << 10;
+
+    spriteMasks.unk0 = 0xF3FF;
+    spriteMasks.unk2 = 0xFFFF;
+    spriteMasks.unk4 = 0xF3FF;
+    spriteMasks.unk6 = 0;
+    spriteMasks.unk8 = 0;
+    spriteMasks.unkA = gDungeon->unk181e8.unk18208 << 10;
+
     if (entInfo->isNotTeamMember && (entInfo->apparentID == MONSTER_DEOXYS_ATTACK || entInfo->apparentID == MONSTER_DEOXYS_DEFENSE || entInfo->apparentID == MONSTER_DEOXYS_SPEED)) {
         r4 = TRUE;
     }
@@ -2259,7 +2261,7 @@ void sub_806C51C(Entity *entity)
         r4 = TRUE;
     }
     if (r4) {
-        spriteMasks[3] |= 0x400;
+        spriteMasks.unk6 |= 0x400;
     }
 
     var_34 = 0;
@@ -2285,10 +2287,10 @@ void sub_806C51C(Entity *entity)
         }
 
         if (entity->unk22 == 0) {
-            DoAxFrame_800558C(&entity->axObj, x, y, y2, overworldPal, spriteMasks);
+            DoAxFrame_800558C(&entity->axObj, x, y, y2, overworldPal, &spriteMasks);
         }
         else if (entity->unk22 == 1 && (gUnknown_202EDCC & 1)) {
-            DoAxFrame_800558C(&entity->axObj, x, y, y2, overworldPal, spriteMasks);
+            DoAxFrame_800558C(&entity->axObj, x, y, y2, overworldPal, &spriteMasks);
         }
     }
 

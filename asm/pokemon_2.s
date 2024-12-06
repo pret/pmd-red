@@ -5,6 +5,7 @@
 
  	.text
 
+@ https://decomp.me/scratch/aIvCa - SpriteOAM memes
 	thumb_func_start InitShadowSprites
 InitShadowSprites:
 	push {r4-r7,lr}

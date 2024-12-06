@@ -6,7 +6,7 @@
 typedef struct unkStruct_2039DB0
 {
     u16 unk0; // SpriteOAM attrib1 mask
-    s16 unk2; // SpriteOAM attrib2 mask
+    u16 unk2; // SpriteOAM attrib2 mask
     u16 unk4; // SpriteOAM attrib3 mask
     u16 unk6; // SpriteOAM attrib1 value
     u16 unk8; // SpriteOAM attrib2 value

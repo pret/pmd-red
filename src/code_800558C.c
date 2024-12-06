@@ -31,7 +31,7 @@ extern const s16 gUnknown_80B83EA[16 * 10];
 static void sub_800561C(struct axMapSprite *, s32, s32, const RGB *);
 const RGB *sub_8005674(struct axMapSprite *, s32);
 
-void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, u16 *spriteMasks)
+void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, unkStruct_2039DB0 *spriteMasks)
 {
     if (!(a0->axdata.flags >> 15))
         return;
