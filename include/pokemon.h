@@ -98,7 +98,7 @@ bool8 sub_808D4B0(void);
 bool8 sub_808D500(void);
 
 // pokemon.s
-extern s32 GetUnitSum_808D544(u32);
+extern s32 GetUnitSum_808D544(s32 *);
 extern s32 sub_808D580(s32 *);
 
 static inline bool8 PokemonFlag1(PokemonStruct1 *mon)

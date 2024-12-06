@@ -286,8 +286,6 @@ SECTIONS {
         src/code_80869E4.o(.text);
         src/dungeon_cutscenes.o(.text);
         src/pokemon.o(.text);
-        asm/pokemon.o(.text);
-        src/pokemon_mid.o(.text);
         asm/pokemon_2.o(.text);
         src/pokemon_3.o(.text);
         asm/pokemon_3.o(.text);
@@ -549,6 +547,8 @@ SECTIONS {
         data/data_8107010.o(.rodata);
         src/dungeon_serializer.o(.rodata);
         data/data_8107224.o(.rodata);
+        src/pokemon.o(.rodata);
+        data/data_81076E4.o(.rodata);
         src/game_options.o(.rodata);
         data/data_8109964.o(.rodata);
         src/code_80972F4.o(.rodata);
