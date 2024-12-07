@@ -5,7 +5,7 @@
 #include "dungeon.h"
 #include "memory.h"
 #include "moves.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "random.h"
 #include "save.h"
 #include "text_util.h"

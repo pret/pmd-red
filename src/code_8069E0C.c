@@ -21,7 +21,6 @@
 #include "move_effects_target.h"
 #include "moves.h"
 #include "pokemon.h"
-#include "pokemon_mid.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "text_util.h"

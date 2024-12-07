@@ -54,8 +54,6 @@ extern bool8 sub_806AA0C(s32, u32);
 extern bool8 sub_8083660(DungeonPos *param_1);
 extern bool8 sub_803D930(u32);
 extern void sub_8072B78(Entity *pokemon, Entity *target, s16 id);
-extern s32 sub_808E400(s32 _species, s16* _a2, bool32 bodySizeCheck, bool32 shedinjaCheck);
-void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level); // TODO: change to s32
 
 void sub_8071B48(void)
 {

@@ -18,7 +18,6 @@
 #include "game_options.h"
 #include "dungeon_items.h"
 #include "status.h"
-#include "pokemon_mid.h"
 #include "pokemon.h"
 #include "random.h"
 #include "targeting.h"

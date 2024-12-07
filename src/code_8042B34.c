@@ -26,7 +26,7 @@
 #include "code_803E668.h"
 #include "dungeon_engine.h"
 #include "dungeon_map_access.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "weather.h"
 #include "moves.h"
 #include "code_8094F88.h"

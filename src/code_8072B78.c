@@ -8,7 +8,6 @@
 #include "dungeon_util.h"
 #include "moves.h"
 #include "pokemon_mid.h"
-#include "pokemon_mid.h"
 #include "status_checks_1.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"

@@ -7,7 +7,7 @@
 #include "gulpin_shop.h"
 #include "memory.h"
 #include "moves.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 
 static EWRAM_DATA_2 unkStruct_203B22C *sUnknown_203B22C = {0};
 

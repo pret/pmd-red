@@ -276,19 +276,8 @@ gUnknown_202F3D0: /* 202F3D0 (sub_80867F4 - sub_8086854) */
 gUnknown_202F3D8: /* 202F3D8 (sub_8085B4C - sub_8085B80) */
 	.space 0x8
 
-gMonsterParameters: /* 202F3E0 (LoadMonsterParameters - IsPokemonDialogueSpriteAvail) */
-	.space 0x4
-gMonsterParametersFile: /* 202F3E4 (LoadMonsterParameters) */
-	.space 0x4
-gShadowSprites: /* 202F3E8 (InitShadowSprites - AddShadowSprite) */
-	.space 0x18
-gRecruitedPokemon: /* 202F400 [used everywhere tbh] */
-	.space 0x90E8
-gLevelCurrentPokeId: /* 20384E8 (LoadMonsterParameters - GetPokemonLevelData) */
-	.space 0x8
-gLevelCurrentData: /* 20384F0 (GetPokemonLevelData) */
-	.space 0x4B0
 
+    .include "src/pokemon.o"
     .include "src/items.o"
     .include "src/rescue_team_info.o"
 	.space 0x4

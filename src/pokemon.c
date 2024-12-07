@@ -15,15 +15,15 @@
 extern struct FileArchive gSystemFileArchive;
 extern struct FileArchive gMonsterFileArchive;
 
-EWRAM_DATA MonsterDataEntry *gMonsterParameters;
-EWRAM_DATA OpenedFile *gMonsterParametersFile;
-EWRAM_DATA SpriteOAM gShadowSprites[3]; // Shadow sprites of some kind
-EWRAM_DATA unkStruct_203B45C gRecruitedPokemon;
-EWRAM_DATA u16 gLevelCurrentPokeId;
-EWRAM_DATA LevelData gLevelCurrentData[0x64];
+static EWRAM_DATA MonsterDataEntry *gMonsterParameters = {0};
+static EWRAM_DATA OpenedFile *gMonsterParametersFile = {0};
+EWRAM_DATA SpriteOAM gShadowSprites[3] = {0}; // TODO: make static once pokemon_2.s is ded
+static EWRAM_DATA unkStruct_203B45C gRecruitedPokemon = {0};
+static EWRAM_DATA u16 gLevelCurrentPokeId = {0};
+UNUSED static EWRAM_DATA u16 unused_data[3] = {0};
+static EWRAM_DATA LevelData gLevelCurrentData[0x64] = {0};
 
 EWRAM_DATA_2 unkStruct_203B45C *gRecruitedPokemonRef = {0};
-extern void sub_808E490(Move* a1, s32 species);
 
 struct unkStruct_8107654 {
   s16 unk0;
