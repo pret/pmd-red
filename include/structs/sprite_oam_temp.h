@@ -4,7 +4,7 @@
 #include "sprite_oam.h"
 
 // This file is here for temporary decomp notes about SpriteOAM. It can be deleted later when we figure it out.
-// SpriteOAM initialization is handled by inlines. Potentially has inlines for other scenarios [for example: AddSprite()]
+// SpriteOAM initialization is handled by inlines. Potentially has inlines for other scenarios [for example: AddSprite() and AddAxSprite()]
 
 // There is lots of testing done and evidence that it most likely is not handled by macros.
 // Some funcs (such as sub_8039174) can be fakematched with "{} while(0);" contexts and a temp var. Note that it's not a "do {} while(0)" but just a "{} while(0)".
@@ -14,7 +14,7 @@
 // Most of the special work seems to be done on the first two u16 of SpriteOAM.
 // They are usually loaded/stored separately from the second half of the struct.
 // There doesn't seem to be a logical reason for SpriteOAM to be split into two substructs, but the evidence points to it.
-// AddSprite() still hasn't been matched (I'm writing this Dec 4 2024), because it suggests SpriteOAM is actually two separate substructs.
+// AddSprite() and AddAxSprite() still haven't been matched (I'm writing this Dec 4 2024), because they suggest SpriteOAM is actually two separate substructs.
 // "volatile u32/u16" was the first thing we tried, but it produces horrible asm and doesn't make sense for Chunsoft to have used it in this context.
 // The main breakthrough came from producing 99% similar asm through attrib1/attrib2 being a substruct.
 
@@ -211,7 +211,7 @@ static inline void SetSize(SpriteOAM2 *s, u32 size)
 
 // attrib3 inline:
 // For some reason this one is all combined. Also matches pretty much every time.
-// It's possible the attrib1 ones are also combined like this, but not the attrib2 ones since they're called out of order or not at all.
+// It's possible the attrib1 ones are also combined like this, but not the attrib2 ones since they're called out of order or omitted.
 // And just like the attrib2 inlines, attempting to macro or inline further results in removed preloading.
 
 static inline void SetAttrib3(SpriteOAM2 *s, u32 tileNum, u32 prio, u32 palNum)

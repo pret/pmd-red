@@ -156,112 +156,8 @@ void sub_8004E8C(unkStruct_2039DB0 *a0)
     a0->unkA = 0;
 }
 
-// https://decomp.me/scratch/VYqKb
-// spriteMasks is a u16[6]
-#ifdef NONMATCHING
-static void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
-{
-    // size: 0xC
-    struct UnkStackFor8004EA8
-    {
-        u16 unk0;
-        u8 unk2;
-        s8 unk3;
-        u16 flags1;
-        u16 flags2;
-        u16 flags3;
-        u16 unkA;
-    } sp;
-    SpriteOAM *sprite;
-    u32 uVar9;
-    s32 r7;
-
-    s32 x;
-    s32 y;
-    s32 tileNum;
-    s32 earlyMask;
-
-    if (a2 != NULL)
-        RegisterSpriteParts_80052BC(a2);
-
-    if (sSpriteCount >= 128)
-        return;
-
-    sp.unk0 = a0->sprite;
-    *((u16 *)&sp.unk2) = a0->unk2; // ?????????
-    sp.flags1 = a0->flags1 & ~(0x100 | 0x200);
-    sp.flags2 = a0->flags2 & ~(0x200 | 0x400 | 0x800);
-    sp.flags3 = a0->flags3;
-    sp.unkA = ((a0->flags2 & (0x200 | 0x400 | 0x800)) >> 9) | ((a0->flags1 & (0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20 | 0x40 | 0x80 | 0x100 | 0x200)) << 4);
-    sprite = sUnknown_20262A8 + sSpriteCount;
-    r7 = a1->unk16 + sp.unk3;
-
-    if (r7 < 0)
-        r7 = 0;
-    if (r7 > 255)
-        r7 = 255;
-
-    if (spriteMasks == NULL) {
-        sprite->attrib1 = sp.flags1;
-        sprite->attrib2 = sp.flags2;
-        sprite->attrib3 = sp.flags3;
-        sprite->unk6 = sp.unkA;
-    }
-    else {
-        sprite->attrib1 = (spriteMasks[0] & sp.flags1) | spriteMasks[3];
-        sprite->attrib2 = (spriteMasks[1] & sp.flags2) | spriteMasks[4];
-        sprite->attrib3 = (spriteMasks[2] & sp.flags3) | spriteMasks[5];
-        sprite->unk6 = sp.unkA;
-    }
-
-    if (sp.unk2 != 0 && sUnknown_2025672[sp.unk2] != 0) {
-        tileNum = sUnknown_2025672[sp.unk2] & 0x3FF;
-    }
-    else {
-        tileNum = (sprite->attrib3 & 0x3FF) + a1->vramTileOrMaybeAnimTimer;
-        tileNum &= 0x3FF;
-    }
-
-    // Set tileNum, maintain priority/paletteNum
-    sprite->attrib3 = tileNum | (sprite->attrib3 & 0xFC00);
-
-    x = (sprite->attrib2 & 0x1FF) - 256;
-    x += a1->pos.x;
-    if (x < -64)
-        return;
-    if (x >= DISPLAY_WIDTH)
-        return;
-
-    // Set x, maintain matrixNum/size
-    sprite->attrib2 = (x & 0x1FF) | (sprite->attrib2 & 0xFE00);
-
-    uVar9 = sprite->unk6 << 16;
-    earlyMask = 0xFFF;
-
-    y = (uVar9 >> 20) - 512;
-    y += a1->pos.y;
-    if (y < -64)
-        return;
-    if (y >= DISPLAY_HEIGHT)
-        return;
-
-    // Set y, maintain affineMode/objMode/mosaic/bpp/shape
-    sprite->attrib1 = (y & 0xFF) | (sprite->attrib1 & 0xFF00);
-
-    // Set paletteNum, maintain tileNum/priority
-    if (((uVar9 >> 17) & 1) == 0)
-        sprite->attrib3 = ((a1->paletteNum & 0xF) << 12) | (sprite->attrib3 & earlyMask);
-
-    if (sp.unk2 != 0)
-        sprite->attrib3 = ((sUnknown_2025682[sp.unk2] & 0xF) << 12) | (sprite->attrib3 & earlyMask);
-
-    sUnknown_2025EA8[sSpriteCount].unk0 = sUnknown_20256A0.sprites[r7].unk0;
-    sUnknown_20256A0.sprites[r7].unk0 = sUnknown_2025EA8 + sSpriteCount;
-    sSpriteCount++;
-}
-#else
-NAKED
-static void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteMasks)
+// https://decomp.me/scratch/VYqKb - Same issue as AddSprite()
+NAKED static void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *spriteMasks)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
@@ -523,11 +419,10 @@ static void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, u16 *spriteM
 "_080050A8: .4byte sUnknown_2025EA8\n"
 "_080050AC: .4byte sUnknown_20256A0");
 }
-#endif // NONMATCHING
 
 // a2 and a3 are always called with NULL lol
 #ifdef NONMATCHING // https://decomp.me/scratch/YCfKG
-void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
+void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *spriteMasks)
 {
     s32 yPos;
     SpriteOAM *spr;
@@ -544,16 +439,16 @@ void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
     if (a1 > 255)
         a1 = 255;
 
-    if (a3 == NULL) {
+    if (spriteMasks == NULL) {
         spr->attrib1 = a0->attrib1;
         spr->attrib2 = a0->attrib2;
         spr->attrib3 = a0->attrib3;
         spr->unk6 = a0->unk6;
     }
     else {
-        spr->attrib1 = (a0->attrib1 & a3->unk0) | a3->unk6;
-        spr->attrib2 = (a0->attrib2 & a3->unk2) | a3->unk8;
-        spr->attrib3 = (a0->attrib3 & a3->unk4) | a3->unkA;
+        spr->attrib1 = (a0->attrib1 & spriteMasks->unk0) | spriteMasks->unk6;
+        spr->attrib2 = (a0->attrib2 & spriteMasks->unk2) | spriteMasks->unk8;
+        spr->attrib3 = (a0->attrib3 & spriteMasks->unk4) | spriteMasks->unkA;
         spr->unk6 = a0->unk6;
     }
 
@@ -577,7 +472,7 @@ void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
 }
 #else
 NAKED
-void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
+void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *spriteMasks)
 {
     asm_unified(
     "push {r4-r7,lr}\n"
@@ -836,15 +731,14 @@ void sub_8005304(void)
     }
 }
 
-// spriteMasks is a u16[6]
-void sub_800533C(ax_pose **a0, UnkSpriteMem **a1, axdata1 *a2, u16 *spriteMasks, bool8 a4)
+void sub_800533C(ax_pose **a0, UnkSpriteMem **a1, axdata1 *a2, unkStruct_2039DB0 *spriteMasks, bool8 a4)
 {
     UnkSpriteMem *mem;
     ax_pose *r4;
 
     r4 = a0[a2->poseId];
     sCharMemCursor = OBJ_VRAM0 + (a2->vramTileOrMaybeAnimTimer * 0x20);
-    for (mem = NULL; (u16)r4->sprite != 0xFFFF || r4->unk2 != 0xFFFF; r4++, mem = NULL) {
+    for (mem = NULL; (u16)r4->sprite != 0xFFFF || *((u16*)&r4->unk2) != 0xFFFF; r4++, mem = NULL) {
         if (a4 != 0 && r4->sprite > -1)
             mem = a1[r4->sprite];
 
