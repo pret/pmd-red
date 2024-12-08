@@ -8,6 +8,7 @@
 #include "constants/iq_skill.h"
 #include "constants/tactic.h"
 #include "constants/type.h"
+#include "structs/str_pokemon.h"
 #include "sprite.h"
 #include "text_util.h"
 #include "friend_area.h"
@@ -56,8 +57,6 @@ extern void WriteHiddenPowerBits(DataSerializer*, HiddenPower*);
 extern void ReadBellyBits(DataSerializer*, FixedPoint *dst);
 extern void ReadHiddenPowerBits(DataSerializer*, HiddenPower*);
 s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1);
-
-u32 sub_808F798(PokemonStruct1 *, s16);
 
 bool8 AddShadowSprite(s16 species, s16* a2, s16* a3)
 {
@@ -1093,14 +1092,14 @@ s32 sub_808F700(PokemonStruct1 *pokemon)
     }
 }
 
-u32 sub_808F734(PokemonStruct1 *pokemon, s16 _species)
+PokemonStruct1 *sub_808F734(PokemonStruct1 *pokemon, s16 _species)
 {
-    u32 uVar1;
-    int iVar3;
+    PokemonStruct1 *uVar1;
+    PokemonStruct1 *iVar3;
     PokemonStruct1 pokeStruct;
     s32 species = _species;
 
-    iVar3 = 0;
+    iVar3 = NULL;
     pokeStruct = *pokemon;
     uVar1 = sub_808F798(pokemon, species);
     if (species == MONSTER_NINJASK) {
@@ -1109,8 +1108,55 @@ u32 sub_808F734(PokemonStruct1 *pokemon, s16 _species)
         BoundedCopyStringtoBuffer(pokeStruct.name, GetMonSpecies(MONSTER_SHEDINJA),POKEMON_NAME_LENGTH);
         iVar3 = sub_808F798(&pokeStruct,MONSTER_SHEDINJA);
     }
-    if (iVar3 != 0) {
+    if (iVar3 != NULL) {
         IncrementAdventureNumJoined();
     }
     return uVar1;
+}
+
+PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, short _species)
+{
+      s32 r6;
+      s32 index;
+      PokemonStruct1 pokeStruct;
+      LevelData levelData;
+      u8 buffer [64];
+      s32 species = _species;
+      bool32 flag = TRUE;
+      
+      pokeStruct = *pokemon;
+      r6 = pokeStruct.speciesNum;
+      GetPokemonLevelData(&levelData,species,pokeStruct.level);
+      pokeStruct.currExp = levelData.expRequired;
+      pokemon->unk0 = 0;
+      pokeStruct.speciesNum = species;
+      if (pokeStruct.unkC[0].level == 0) {
+        pokeStruct.unkC[0].level = pokeStruct.level;
+      }
+      else if (pokeStruct.unkC[1].level == 0) {
+        pokeStruct.unkC[1].level = pokeStruct.level;
+      }
+    
+      CopyStringtoBuffer(buffer, GetMonSpecies(r6));
+
+      index = 0;
+      goto _start;
+      do
+      {
+          index++;
+_start:
+          if(index >= POKEMON_NAME_LENGTH) break;
+          if(buffer[index] != pokeStruct.name[index]) goto _end;
+          if(buffer[index] == 0) break;
+
+      } while(TRUE);
+      if(flag)
+          BoundedCopyStringtoBuffer(pokeStruct.name, GetMonSpecies(species), POKEMON_NAME_LENGTH);
+_end:
+      return sub_808D1DC(&pokeStruct);
+}
+
+UNUSED void sub_808F83C(PokemonStruct1 *pokemon, s16 species, u8 *r2)
+{
+    *r2 = 0;
 }
