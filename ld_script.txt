@@ -550,7 +550,10 @@ SECTIONS {
         src/pokemon.o(.rodata);
         data/data_81076E4.o(.rodata);
         src/game_options.o(.rodata);
-        data/data_8109964.o(.rodata);
+        src/code_8094D28.o(.rodata);
+        src/play_time.o(.rodata);
+        src/code_8094F88.o(.rodata);
+        src/code_80958E8.o(.rodata);
         src/code_80972F4.o(.rodata);
         src/code_8097504.o(.rodata);
         data/data_8109D10.o(.rodata);

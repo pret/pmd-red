@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_8094D28.h"
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
