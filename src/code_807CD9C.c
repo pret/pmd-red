@@ -1,5 +1,4 @@
 #include "global.h"
-
 #include "constants/ability.h"
 #include "constants/weather.h"
 #include "code_803E46C.h"
@@ -24,11 +23,11 @@
 #include "tile_types.h"
 #include "code_803E668.h"
 #include "weather.h"
+#include "dungeon_config.h"
 
 extern u32 gUnknown_202EDCC;
 extern u32 gUnknown_203B444[];
 
-extern s16 gUnknown_80F4F90;
 extern u8 *gUnknown_80FCA10[];
 extern u8 *gUnknown_80F8A0C[];
 extern u8 *gUnknown_80FCBCC[];
@@ -151,7 +150,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
             _0807CF26:
 
                 sub_807D068(target,&target->pos);
-                sub_806F370(pokemon,target,gUnknown_80F4F90,0,0,0,0x219,0,0,0);
+                sub_806F370(pokemon,target,gBlowAwayDmgValue,0,0,0,0x219,0,0,0);
             }
             if (sub_8044B28()) {
                 return;
@@ -160,7 +159,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
                 InitPokemonMove(&move,0x163);
                 if (!sub_80571F0(entity,&move)) {
                     TrySendImmobilizeSleepEndMsg(pokemon,entity);
-                    sub_806F370(pokemon,entity,gUnknown_80F4F90,0,0,0,0x21a,0,0,0);
+                    sub_806F370(pokemon,entity,gBlowAwayDmgValue,0,0,0,0x21a,0,0,0);
                 }
             }
             if (sub_8044B28()) {

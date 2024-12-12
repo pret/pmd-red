@@ -1,6 +1,5 @@
 #include "global.h"
 #include "move_effects_target.h"
-
 #include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
@@ -35,6 +34,7 @@
 #include "structs/str_dungeon.h"
 #include "targeting.h"
 #include "tile_types.h"
+#include "dungeon_config.h"
 
 extern u8 *gUnknown_80FB380[];
 extern u8 *gUnknown_80FB384[];
@@ -58,12 +58,9 @@ extern u8 *gUnknown_80FB414[];
 extern u8 *gUnknown_80FB43C[];
 extern u8 *gUnknown_80FB41C[];
 extern u8 *gUnknown_80FB458[];
-extern s16 gUnknown_80F4E7C[];
-extern s16 gUnknown_80F4F00[];
 extern u8 *gUnknown_80FB52C[];
 extern u8 *gUnknown_80FCC4C[];
 extern u8 *gUnknown_80FB50C[];
-extern s16 gUnknown_80F4E30[];
 extern u8 *gUnknown_80FF01C[];
 extern u8 *gUnknown_80FEBBC[];
 extern u8 *gUnknown_80FB564[];
@@ -71,39 +68,30 @@ extern u8 *gUnknown_80FB548[];
 extern u8 *gUnknown_80FCE84[];
 extern u8 *gUnknown_80FCE5C[];
 extern u8 *gUnknown_80FD524[];
-extern s16 gUnknown_80F4E34[];
 extern u8 *gUnknown_80FCEDC[];
 extern u8 *gUnknown_80FCEB0[];
 extern u8 *gUnknown_80FB5D4[];
 extern u8 *gUnknown_80FB598[];
 extern u8 *gUnknown_80FB5F8[];
 extern u8 *gUnknown_80FB5B4[];
-extern s16 gUnknown_80F4E38[];
 extern u8 *gUnknown_80FCE34[];
-extern s16 gUnknown_80F4E2C[];
 extern u8 *gUnknown_80FB610[];
 extern u8 *gUnknown_80FCDE0[];
 extern u8 *gUnknown_80FCE00[];
 extern u8 *gUnknown_80FA844[];
 extern u8 *gUnknown_80FB64C[];
-extern s16 gUnknown_80F4E58[];
 extern u8 *gUnknown_80FB628[];
 extern u8 *gUnknown_80FB4F0[];
 extern u8 *gUnknown_80FB4B0[];
 extern u8 *gUnknown_80FB480[];
 extern u8 *gUnknown_80FB4D4[];
-extern s16 gUnknown_80F4E54[];
 extern u8 *gUnknown_80FB668[];
 extern u8 *gUnknown_80FB688[];
-extern s16 gUnknown_80F4E60[];
 extern u8 *gUnknown_80FB6A4[];
 extern u8 *gUnknown_80FB6C0[];
-extern s16 gUnknown_80F4E5C[];
 extern u8 *gUnknown_80FB6D8[];
 extern u8 *gUnknown_80FB6FC[];
 extern u8 *gUnknown_80FB718[];
-extern s16 gUnknown_80F4EC0[];
-extern s16 gUnknown_80F4EBC[];
 extern u8 *gUnknown_80FB7DC[];
 extern u8 *gUnknown_80FB7BC[];
 extern u8 *gUnknown_80FC0B8[];
@@ -380,7 +368,7 @@ void SleeplessStatusTarget(Entity * pokemon, Entity * target)
   if (entityInfo->sleepClassStatus.status != STATUS_SLEEPLESS)
   {
     entityInfo->sleepClassStatus.status = STATUS_SLEEPLESS;
-    entityInfo->sleepClassStatus.turns = CalculateStatusTurns(target, gUnknown_80F4E7C, FALSE) + 1;
+    entityInfo->sleepClassStatus.turns = CalculateStatusTurns(target, gSleeplessTurnRange, FALSE) + 1;
     entityInfo->unk165 = 0xFF;
     entityInfo->unk164 = 0xFF;
     sub_8041EE8(target);
@@ -450,7 +438,7 @@ void InfatuateStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessa
         SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
         if (entityInfo->cringeClassStatus.status != STATUS_INFATUATED) {
           entityInfo->cringeClassStatus.status = STATUS_INFATUATED;
-          entityInfo->cringeClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4F00,TRUE) + 1;
+          entityInfo->cringeClassStatus.turns = CalculateStatusTurns(target,gInfatuatedTurnRange,TRUE) + 1;
           sub_8041EF8(target);
           TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB50C);
         }
@@ -503,7 +491,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
             isNotBurned = TRUE;
             if (entityInfo->burnClassStatus.status != STATUS_BURN) {
                 entityInfo->burnClassStatus.status = STATUS_BURN;
-                entityInfo->burnClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4E30,TRUE) + 1;
+                entityInfo->burnClassStatus.turns = CalculateStatusTurns(target,gBurnTurnRange,TRUE) + 1;
                 entityInfo->burnClassStatus.damageCountdown = 0;
                 entityInfo->burnClassStatus.unk4 = 0;
                 isNotBurned = FALSE;
@@ -592,7 +580,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
                 if(entityInfo->burnClassStatus.status != STATUS_POISONED)
                 {
                     entityInfo->burnClassStatus.status = STATUS_POISONED;
-                    entityInfo->burnClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4E34,TRUE) + 1;
+                    entityInfo->burnClassStatus.turns = CalculateStatusTurns(target,gPoisonTurnRange,TRUE) + 1;
                     entityInfo->burnClassStatus.damageCountdown = 0;
                     entityInfo->burnClassStatus.unk4 = 0;
                     isNotPoisoned = FALSE;
@@ -679,7 +667,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
             if(entityInfo->burnClassStatus.status != STATUS_BADLY_POISONED)
             {
                     entityInfo->burnClassStatus.status = STATUS_BADLY_POISONED;
-                    entityInfo->burnClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4E38,TRUE) + 1;
+                    entityInfo->burnClassStatus.turns = CalculateStatusTurns(target,gBadPoisonTurnRange,TRUE) + 1;
                     entityInfo->burnClassStatus.damageCountdown = 0;
                     entityInfo->burnClassStatus.unk4 = 0;
                     isNotBadlyPoisoned = FALSE;
@@ -760,7 +748,7 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
             }
             sub_8041F08(target);
             entityInfo->frozenClassStatus.status = STATUS_FROZEN;
-            entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4E2C,TRUE) + 1;
+            entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gFreezeTurnRange,TRUE) + 1;
             entityInfo->frozenClassStatus.damageCountdown = 0;
             TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB610);
             EntityUpdateStatusSprites(target);
@@ -788,7 +776,7 @@ void SqueezedStatusTarget(Entity * pokemon, Entity * target, s16 param_3, bool32
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->frozenClassStatus.status != STATUS_CONSTRICTION) {
       entityInfo->frozenClassStatus.status = STATUS_CONSTRICTION;
-      entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4E58,TRUE) + 1;
+      entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gConstrictionTurnRange,TRUE) + 1;
       entityInfo->frozenClassStatus.damageCountdown = 0;
       entityInfo->frozenClassStatus.unk4 = param_3_s32;
       nullsub_71(target);
@@ -818,7 +806,7 @@ void ImmobilizedStatusTarget(Entity * pokemon, Entity * target)
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->frozenClassStatus.status != STATUS_SHADOW_HOLD) {
       entityInfo->frozenClassStatus.status = STATUS_SHADOW_HOLD;
-      entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4E54,TRUE) + 1;
+      entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gShadowHoldTurnRange,TRUE) + 1;
       entityInfo->frozenClassStatus.damageCountdown = 0;
       nullsub_70(target);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB668);
@@ -843,7 +831,7 @@ void IngrainedStatusTarget(Entity * pokemon, Entity * target)
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     if (entityInfo->frozenClassStatus.status != STATUS_INGRAIN) {
       entityInfo->frozenClassStatus.status = STATUS_INGRAIN;
-      entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4E60,TRUE) + 1;
+      entityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gIngrainTurnRange,TRUE) + 1;
       entityInfo->frozenClassStatus.damageCountdown = 0;
       nullsub_90(target);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB6A4);
@@ -871,7 +859,7 @@ void WrapTarget(Entity * pokemon, Entity * target)
   }
   pokemonEntityData = GetEntInfo(pokemon);
   targetEntityInfo = GetEntInfo(target);
-  if ((u8)(pokemonEntityData->frozenClassStatus.status - 3U) > 1) {
+  if (pokemonEntityData->frozenClassStatus.status != STATUS_WRAP && pokemonEntityData->frozenClassStatus.status != STATUS_WRAPPED) {
     if ((targetEntityInfo->frozenClassStatus.status != STATUS_WRAP))
     {
         if(targetEntityInfo->frozenClassStatus.status != STATUS_WRAPPED) {
@@ -879,7 +867,7 @@ void WrapTarget(Entity * pokemon, Entity * target)
             pokemonEntityData->frozenClassStatus.turns = 0x7f;
             pokemonEntityData->frozenClassStatus.damageCountdown = 0;
             targetEntityInfo->frozenClassStatus.status = STATUS_WRAPPED;
-            targetEntityInfo->frozenClassStatus.turns = CalculateStatusTurns(target, gUnknown_80F4E5C, TRUE) + 1;
+            targetEntityInfo->frozenClassStatus.turns = CalculateStatusTurns(target, gWrapTurnRange, TRUE) + 1;
             targetEntityInfo->frozenClassStatus.damageCountdown = 0;
             iVar5 = &pokemonEntityData->unk9C;
             piVar3 = &gDungeon->unk37F4;
@@ -953,10 +941,10 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
     if (targetEntityInfo->frozenClassStatus.status != STATUS_PETRIFIED) {
       targetEntityInfo->frozenClassStatus.status = STATUS_PETRIFIED;
       if (targetEntityInfo->isTeamLeader) {
-        targetEntityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4EBC,TRUE) + 1;
+        targetEntityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gPetrifiedLeaderTurnRange,TRUE) + 1;
       }
       else {
-        targetEntityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gUnknown_80F4EC0,TRUE) + 1;
+        targetEntityInfo->frozenClassStatus.turns = CalculateStatusTurns(target,gPetrifiedTurnRange,TRUE) + 1;
       }
       targetEntityInfo->frozenClassStatus.damageCountdown = 0;
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB7BC);

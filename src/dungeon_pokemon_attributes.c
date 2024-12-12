@@ -15,9 +15,8 @@
 #include "moves.h"
 #include "pokemon_3.h"
 #include "pokemon.h"
+#include "dungeon_config.h"
 #include "structs/str_dungeon.h"
-
-const s16 gItemMasterMinWildLevel[] = {16};
 
 extern const u8 *gUnknown_80FC31C;
 extern const u8 * gUnknown_80FCEFC;
@@ -166,7 +165,7 @@ void LoadIQSkills(Entity *pokemon)
     SetIQSkill(iqSkills, IQ_ITEM_CATCHER);
     if (pokemonInfo->bossFlag)
       SetIQSkill(iqSkills, IQ_SELF_CURER);
-    if (pokemonInfo->level >= *gItemMasterMinWildLevel)
+    if (pokemonInfo->level >= gIqItemMasterMinWildLevel)
       SetIQSkill(iqSkills, IQ_ITEM_MASTER);
     pokemonInfo->tactic = TACTIC_GO_AFTER_FOES;
   }

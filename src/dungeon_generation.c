@@ -16,6 +16,7 @@
 #include "structs/str_dungeon.h"
 #include "structs/map.h"
 #include "structs/str_806B7F8.h"
+#include "dungeon_config.h"
 
 extern const u8 gUnknown_80F6DCC[];
 extern struct FileArchive gDungeonFileArchive;
@@ -4032,8 +4033,6 @@ static void ShuffleSpawnPositions(struct PositionU8 *spawns, s32 count)
  *
  * See below for specific conditions on each type of spawn.
  */
-extern const s16 gUnknown_80F4DA0;
-extern const s16 gUnknown_80F4DA4;
 static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 {
     struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
@@ -4230,20 +4229,20 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
 
     if (count != 0) {
         // Choose a subset of the available tiles to spawn stuff on
-        s32 numItems = DungeonRandRange((count / 2), (count * 8) / 10);
+        s32 numItemsTraps = DungeonRandRange((count / 2), (count * 8) / 10);
 
-        if (numItems < 6) {
-            numItems = 6;
+        if (numItemsTraps < 6) {
+            numItemsTraps = 6;
         }
         // Cap item spawns at 7 (normally)
-        if (numItems >= gUnknown_80F4DA0) {
-            numItems = gUnknown_80F4DA0;
+        if (numItemsTraps >= gMonsterHouseMaxItemsTraps) {
+            numItemsTraps = gMonsterHouseMaxItemsTraps;
         }
 
         // Randomly select among the valid item spawn spots
         ShuffleSpawnPositions(validSpawns, count);
         randIndex = DungeonRandInt(count);
-        for (i = 0; i < numItems; i++) {
+        for (i = 0; i < numItemsTraps; i++) {
             Tile *tile = GetTileMut(validSpawns[randIndex].x, validSpawns[randIndex].y);
 
             // 50/50 chance of spawning an item or a trap
@@ -4459,7 +4458,7 @@ static void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 	// This floor was marked to force a monster house
 	// Place extra enemy spawns in the Monster House room
 
-	numMonsterHouseEnemies = gUnknown_80F4DA4;
+	numMonsterHouseEnemies = gMonsterHouseMaxMons;
     count = 0;
 	if (isEmptyMonsterHouse) {
 		// An "empty" monster house only spawns 3 enemies
@@ -5962,8 +5961,6 @@ static void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber)
     }
 }
 
-extern const s16 gUnknown_80F57D4[][3][3];
-
 static void sub_8051654(FloorProperties *floorProps)
 {
     s32 i, n;
@@ -6058,7 +6055,7 @@ static void sub_8051654(FloorProperties *floorProps)
             if ((tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION))
                 continue;
 
-            if (gUnknown_80F57D4[floorProps->unk18][yIndex][xIndex] > DungeonRandInt(100)) {
+            if (sKecleonShopItemSpawnChances[floorProps->unk18][yIndex][xIndex] > DungeonRandInt(100)) {
                 tile->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
             }
         }

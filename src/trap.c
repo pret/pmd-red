@@ -1,6 +1,5 @@
 #include "global.h"
 #include "trap.h"
-
 #include "code_803E668.h"
 #include "code_803E724.h"
 #include "code_80450F8.h"
@@ -25,6 +24,7 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_806B7F8.h"
+#include "dungeon_config.h"
 
 extern u8 *gTrapNames[];
 extern u8 *gUnknown_80FC5FC[];
@@ -33,7 +33,6 @@ extern u8 *gUnknown_80FDB5C[];
 extern u8 *gUnknown_80FDB7C[];
 extern u8 *gUnknown_80FD7F4[];
 extern u8 *gUnknown_80FD7F8[];
-extern s16 gUnknown_80F4E74[];
 extern u8 *gUnknown_80FDC18[];
 extern u8 *gUnknown_80FDC40[];
 extern u8 *gUnknown_80FDC7C[];
@@ -51,12 +50,8 @@ extern u8 *gUnknown_80FDB04[];
 extern u8 *gUnknown_80FDB2C[];
 
 
-extern s16 gUnknown_80F4E0E;
-extern s16 gUnknown_80F4F84;
-extern s16 gUnknown_80F4F86;
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
-extern s16 gUnknown_80F4F8A;
 
 void sub_806A9B4(Entity *, u32);
 
@@ -336,7 +331,7 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
             break;
         case TRAP_CHESTNUT_TRAP:
             if (target != NULL) {
-                DealDamageToEntity(target,gUnknown_80F4F86,0xf,0x213);
+                DealDamageToEntity(target,gChestnutTrapDmgValue,0xf,0x213);
             }
             break;
         case TRAP_WONDER_TILE:
@@ -348,7 +343,7 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
             break;
         case TRAP_SPIKE_TRAP:
             if (target != NULL) {
-                DealDamageToEntity(target,gUnknown_80F4F84,10,0x206);
+                DealDamageToEntity(target,gSpikeTrapDmgValue,10,0x206);
             }
     }
     if (EntityExists(target)) {
@@ -444,7 +439,7 @@ void HandleSlumberTrap(Entity *pokemon, Entity *target)
 
     if(target != NULL)
     {
-        turns  = CalculateStatusTurns(target, gUnknown_80F4E74, TRUE);
+        turns  = CalculateStatusTurns(target, gSleepTurnRange, TRUE);
         SleepStatusTarget(pokemon, target, turns, TRUE);
     }
 }
@@ -502,7 +497,7 @@ void HandleGrimyTrap(Entity *pokemon, Entity *target)
         }
         for (index = 0; index < counter; index++) {
             if (((GetItemCategory(itemStack[index]->id) == CATEGORY_FOOD_GUMMIES) && (itemStack[index]->id != ITEM_GRIMY_FOOD)) &&
-                (DungeonRandInt(100) < gUnknown_80F4E0E)) {
+                (DungeonRandInt(100) < gGrimyTrapActivateChance)) {
                 badFoodCount++;
                 sub_8045C28(itemStack[index], ITEM_GRIMY_FOOD, 2);
             }
@@ -544,7 +539,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                     info->unk15C = 1;
                     info->unk15E = 1;
                     sub_803E708(0x28,0x4b);
-                    DealDamageToEntity(target,gUnknown_80F4F8A,0x11,0x215);
+                    DealDamageToEntity(target,gPitfallTrapDmgValue,0x11,0x215);
                     gDungeon->unk2 = 2;
                     return;
                 }

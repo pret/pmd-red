@@ -581,7 +581,7 @@ bool8 FP48_16_SLessThan(s48_16 *a, s48_16 *b)
     }
 }
 
-void F48_16_SMul(s48_16 *dst, s48_16 *a, s48_16 *b)
+void F48_16_SMul(s48_16 *dst, const s48_16 *a, const s48_16 *b)
 {
     bool8 aIsNegative;
     bool8 bIsNegative;
@@ -694,7 +694,7 @@ static void F48_16_UMul(s48_16 *dst, s48_16 *a, s48_16 *b)
     #endif
     u32 r6;
     s32 i;
-    
+
     if (F48_16_IsZero(a)) {
         dst->hi = 0;
         dst->lo = 0;

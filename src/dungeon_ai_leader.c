@@ -1,6 +1,5 @@
 #include "global.h"
 #include "dungeon_ai_leader.h"
-
 #include "charge_move.h"
 #include "code_803E46C.h"
 #include "code_804267C.h"
@@ -26,6 +25,7 @@
 #include "pokemon_3.h"
 #include "pokemon.h"
 #include "trap.h"
+#include "dungeon_config.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F222;
@@ -36,7 +36,6 @@ extern u8 gUnknown_203B434;
 extern u8 *gUnknown_80FA5B4[];
 extern u8 *gUnknown_80FE478[];
 extern u8 *gUnknown_80FD2CC[];
-extern u8 gUnknown_80F58F4[NUM_DUNGEON_ACTIONS][2];
 extern u8 *gUnknown_80FE6D4[];
 
 void sub_8075BA4(Entity *param_1, u8 param_2);

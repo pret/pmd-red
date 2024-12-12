@@ -264,7 +264,7 @@ SECTIONS {
         src/code_807CD9C.o(.text);
         src/code_807E1A0.o(.text);
         src/weather.o(.text);
-        asm/code_807E5AC.o(.text);
+        src/code_807E5AC.o(.text);
         src/trap.o(.text);
         asm/code_807FCD4.o(.text);
         src/trap_1.o(.text);
@@ -534,16 +534,7 @@ SECTIONS {
         data/data_80F4468.o(.rodata);
         src/dungeon_ai_movement.o(.rodata);
         data/data_80F4D44.o(.rodata);
-        src/status_checks.o(.rodata);
-        data/data_80F4DB4.o(.rodata);
-        src/dungeon_ai_attack.o(.rodata);
-        data/data_80F4E2C.o(.rodata);
-        src/type_chart.o(.rodata);
-        data/data_80F54B4.o(.rodata);
-        src/move_checks.o(.rodata);
-        data/data_80F5668.o(.rodata);
-        src/dungeon_pokemon_attributes.o(.rodata);
-        src/called_move_data.o(.rodata);
+        src/dungeon_config.o(.rodata);
         data/data_80F59C8.o(.rodata);
         src/dungeon_message.o(.rodata);
         src/dungeon_move.o(.rodata);

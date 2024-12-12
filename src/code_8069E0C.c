@@ -40,18 +40,8 @@
 #include "constants/iq_skill.h"
 #include "structs/str_806B7F8.h"
 #include "structs/str_202ED28.h"
+#include "dungeon_config.h"
 
-struct unkStruct_80F520C
-{
-    u8 unk0; // types0
-    u8 unk1; // Most likely just padding and should be removed
-    s16 unk2; // monsterID
-};
-
-// Castform Forecast ability data
-extern const struct unkStruct_80F520C gUnknown_80F520C[WEATHER_RANDOM];
-
-extern u8 gUnknown_80F51E4[];
 extern u8 *gUnknown_80FCC7C[];
 extern u8 *gUnknown_80FCCAC[];
 extern u8 *gUnknown_80FDCC8[];
@@ -109,7 +99,7 @@ void sub_8069E0C(Entity *pokemon)
 
   entityInfo = GetEntInfo(pokemon);
   if (AbilityIsActive(pokemon, ABILITY_FORECAST)) {
-    entityInfo->types[0] = gUnknown_80F520C[GetApparentWeather(pokemon)].unk0;
+    entityInfo->types[0] = gCastformByWeather[GetApparentWeather(pokemon)].type;
     entityInfo->types[1] = TYPE_NONE;
   }
   else {
@@ -156,7 +146,7 @@ s32 GetMonsterApparentID(Entity *pokemon, s32 _id)
     s16 id = (s16)(_id);
     if (id == MONSTER_CASTFORM || IS_CASTFORM_FORM_MONSTER(id)) {
         if (AbilityIsActive(pokemon, ABILITY_FORECAST))
-            return gUnknown_80F520C[GetApparentWeather(pokemon)].unk2;
+            return gCastformByWeather[GetApparentWeather(pokemon)].monsterId;
         return MONSTER_CASTFORM;
     }
 
@@ -224,7 +214,7 @@ void sub_8069F9C(Entity *pokemon, Entity *target, Move *move)
             u8 type = GetMoveTypeForMonster(pokemon,move);
             if (move->id == MOVE_WEATHER_BALL) {
                 u32 weather = GetApparentWeather(pokemon);
-                type = gUnknown_80F51E4[weather];
+                type = gWeatherBallTypes[weather];
             }
             if (type != TYPE_NONE && !MonsterIsType(target,type)) {
                 const u8 *str;
@@ -1863,7 +1853,7 @@ void ResetMonEntityData(EntityInfo *entInfo, bool8 setStatsToOne)
     }
 
     if (hasForecast) {
-        entInfo->types[0] = gUnknown_80F520C[GetApparentWeather(NULL)].unk0;
+        entInfo->types[0] = gCastformByWeather[GetApparentWeather(NULL)].type;
         entInfo->types[1] = TYPE_NONE;
     }
     else {
@@ -1876,7 +1866,7 @@ void ResetMonEntityData(EntityInfo *entInfo, bool8 setStatsToOne)
     entInfo->flashFireBoost = 0;
     entInfo->stockpileStage = 0;
     entInfo->perishSongTurns = 0;
-    entInfo->unk113 = 0;
+    entInfo->speedBoostFrames = 0;
     entInfo->grudge = 0;
     entInfo->expMultiplier = EXP_HALVED;
     entInfo->exposed = FALSE;

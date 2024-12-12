@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/tactic.h"
 #include "dungeon_capabilities.h"
+#include "dungeon_config.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
@@ -20,11 +21,6 @@
 
 EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
 EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};
-
-extern s16 gUnknown_80F4DA6;
-extern s16 gUnknown_80F4DA8;
-extern s16 gUnknown_80F4DAA;
-extern s16 gUnknown_80F4DAC;
 
 extern u8 *gUnknown_80F9ACC[];
 extern u8 *gUnknown_80F9AEC[];

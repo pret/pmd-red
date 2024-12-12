@@ -362,7 +362,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteSpeedCounters(seri, info->speedUpCounters, NUM_SPEED_COUNTERS);
     WriteSpeedCounters(seri, info->speedDownCounters, NUM_SPEED_COUNTERS);
     WriteU8(seri, info->stockpileStage);
-    WriteU8(seri, info->unk113);
+    WriteU8(seri, info->speedBoostFrames);
     WriteU8(seri, info->moveRandomly);
     WriteMoves(seri, &info->moves);
     WriteBelly(seri, &info->belly);
@@ -1046,7 +1046,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     ReadSpeedCounters(seri, entInfo.speedUpCounters, NUM_SPEED_COUNTERS);
     ReadSpeedCounters(seri, entInfo.speedDownCounters, NUM_SPEED_COUNTERS);
     entInfo.stockpileStage = ReadU8(seri);
-    entInfo.unk113 = ReadU8(seri);
+    entInfo.speedBoostFrames = ReadU8(seri);
     entInfo.moveRandomly = ReadU8(seri);
     ReadMoves(seri, &entInfo.moves);
     ReadBelly(seri, &entInfo.belly);

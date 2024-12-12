@@ -25,8 +25,8 @@ void sub_807E5AC(void)
 {
     u8 weather;
     weather = gDungeon->unk1C574.unk4;
-    if(weather == WEATHER_RANDOM)
-        weather = DungeonRandInt(WEATHER_RANDOM);
+    if(weather == WEATHER_COUNT)
+        weather = DungeonRandInt(WEATHER_COUNT);
     sub_807E5E4(weather);
     TriggerWeatherAbilities();
     sub_807EAA0(0, 1);

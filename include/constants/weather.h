@@ -9,6 +9,6 @@
 #define WEATHER_HAIL                    5
 #define WEATHER_FOG                     6
 #define WEATHER_SNOW                    7
-#define WEATHER_RANDOM                  8
+#define WEATHER_COUNT                   8
 
 #endif // GUARD_CONSTANTS_WEATHER_H

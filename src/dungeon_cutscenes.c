@@ -31,14 +31,10 @@
 #include "exclusive_pokemon.h"
 #include "trap.h"
 #include "math.h"
+#include "dungeon_config.h"
 
 extern u32 gDungeonBrightness;
 
-extern const s16 gUnknown_80F57CA;
-extern const s16 gUnknown_80F57CC;
-extern const s16 gUnknown_80F57CE;
-extern const s16 gUnknown_80F57D0;
-extern const s16 gUnknown_80F57D2;
 extern const struct DungeonDialogueStruct GroudonPreFightDialogue_10;
 extern const struct DungeonDialogueStruct GroudonPreFightDialogue_11;
 extern const struct DungeonDialogueStruct GroudonPreFightDialogue_12;
@@ -849,7 +845,7 @@ void sub_808729C(void)
     sub_8068FE0(zapdosEntity,0x21c,0);
   }
   else {
-    sub_8072008(zapdosEntity,zapdosEntity,gUnknown_80F57CC,0,0);
+    sub_8072008(zapdosEntity,zapdosEntity,gZapdosConfigLevel,0,0);
     SetFacingDirection(zapdosEntity,DIRECTION_SOUTH);
     sub_8086A3C(zapdosEntity);
   }
@@ -1083,7 +1079,7 @@ void sub_8087848(void)
     sub_8068FE0(moltresEntity,0x21c,0);
   }
   else {
-    sub_8072008(moltresEntity,moltresEntity,gUnknown_80F57CE,0,0);
+    sub_8072008(moltresEntity,moltresEntity,gMoltresConfigLevel,0,0);
     SetFacingDirection(moltresEntity, DIRECTION_SOUTH);
     sub_8086A3C(moltresEntity);
   }
@@ -1503,7 +1499,7 @@ void sub_8087FF8(void)
     sub_8068FE0(articunoEntity,0x21c,0);
   }
   else {
-    sub_8072008(articunoEntity,articunoEntity,gUnknown_80F57D0,0,0);
+    sub_8072008(articunoEntity,articunoEntity,gArticunoConfigLevel,0,0);
     SetFacingDirection(articunoEntity, DIRECTION_SOUTH);
     sub_8086A3C(articunoEntity);
   }
@@ -1814,7 +1810,7 @@ void sub_808875C(void)
     sub_8068FE0(groudonEntity,0x21c,0);
   }
   else {
-    sub_8072008(groudonEntity,groudonEntity,gUnknown_80F57D2,0,0);
+    sub_8072008(groudonEntity,groudonEntity,gGroudonConfigLevel,0,0);
     SetFacingDirection(groudonEntity, DIRECTION_SOUTH);
     sub_80861D4(groudonEntity,0xf,DIRECTION_SOUTH);
   }
@@ -2365,7 +2361,7 @@ void sub_8089328(void)
     sub_8068FE0(rayquazaEntity,0x21c,0);
   }
   else {
-    sub_8072008(rayquazaEntity,rayquazaEntity,gUnknown_80F57CA,0,0);
+    sub_8072008(rayquazaEntity,rayquazaEntity,gRayquazaConfigLevel,0,0);
     sub_8086A3C(rayquazaEntity);
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);

@@ -1,6 +1,5 @@
 #include "global.h"
 #include "type_effectiveness.h"
-
 #include "constants/ability.h"
 #include "constants/status.h"
 #include "constants/weather.h"
@@ -10,7 +9,7 @@
 #include "dungeon_util.h"
 #include "math.h"
 #include "status.h"
-#include "type_chart.h"
+#include "dungeon_config.h"
 #include "weather.h"
 
 
@@ -58,8 +57,6 @@ extern u8 *gUnknown_80FEDE8[];
 extern u8 *gUnknown_80FEDC8[];
 extern u8 *gUnknown_80FEDA8[];
 extern u8 *gUnknown_80FED88[];
-
-extern const s32 gUnknown_80F54B4[NUM_EFFECTIVENESS][NUM_EFFECTIVENESS];
 
 void sub_80428D8(Entity *);
 void sub_8042978(Entity *);
@@ -124,7 +121,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
       gDungeon->unk134.unk13C[index] = effectiveness;
     }
 
-    param_5->effectiveness = gUnknown_80F54B4[local_38[0]][local_38[1]];
+    param_5->effectiveness = gEffectivenessChart[local_38[0]][local_38[1]];
     bVar4 = TRUE;
     if ((param_5->effectiveness != EFFECTIVENESS_SUPER) && (bVar4 = FALSE, hasWonderGuard)) {
       temp = gUnknown_8106EFC[1];

@@ -37,6 +37,7 @@
 #include "constants/monster.h"
 #include "constants/trap.h"
 #include "dungeon_serializer.h"
+#include "dungeon_config.h"
 
 extern void sub_800EE5C(s32);
 extern void sub_800EF64(void);
@@ -390,7 +391,6 @@ extern const u8 *const gUnknown_80F89D4;
 extern const u8 *const gUnknown_80F89D8;
 
 extern const s16 gUnknown_80F6850[4];
-extern const s16 gDungeonMusic[];
 
 extern OpenedFile *gDungeonNameBannerPalette;
 

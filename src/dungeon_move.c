@@ -10,7 +10,6 @@
 #include "constants/status.h"
 #include "constants/weather.h"
 #include "constants/iq_skill.h"
-#include "type_chart.h"
 #include "position_util.h"
 #include "dungeon_items.h"
 #include "code_806CD90.h"
@@ -25,7 +24,6 @@
 #include "dungeon_random.h"
 #include "targeting_flags.h"
 #include "targeting.h"
-#include "called_move_data.h"
 #include "dungeon_map_access.h"
 #include "math.h"
 #include "code_800DAC0.h"
@@ -40,11 +38,12 @@
 #include "code_803E46C.h"
 #include "code_8041AD0.h"
 #include "code_800E9E4.h"
+#include "dungeon_config.h"
 
 extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
-extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, u32, u16, u32);
+extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, s24_8, u16, u32);
 extern s16 sub_8057600(Move *move, s32 itemID);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8042238(Entity *pokemon, Entity *target);
@@ -301,7 +300,7 @@ extern bool8 SnoreMoveAction(Entity *pokemon, Entity *target, Move *move, s32 pa
 extern bool8 MetronomeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 extern bool8 Conversion2MoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
-s32 HandleDamagingMove(Entity *, Entity *, Move *, s32, s32);
+s32 HandleDamagingMove(Entity *, Entity *, Move *, s24_8, s32);
 static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
 static void TriggerTargetAbilityEffect(Entity *attacker);
 static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits);
@@ -317,13 +316,6 @@ static void SortTargets(Entity **targetsArray, Entity *attacker);
 
 extern const s32 gUnknown_8106A50;
 extern const s32 gUnknown_8106A4C;
-extern const s16 gUnknown_80F5006;
-extern const s32 gUnknown_80F519C;
-extern const s32 gUnknown_80F51A0;
-extern const s32 gUnknown_80F50F4[2][21];
-extern const s16 gUnknown_80F4E70[];
-extern const s16 gUnknown_80F4E74[];
-extern const u16 gUnknown_80F5004;
 extern const u8 *const gUnknown_80FEEA4;
 extern const u8 *const gUnknown_80FEEC8;
 extern const u8 *const gUnknown_80FEEEC;
@@ -446,7 +438,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
             else if (HasHeldItem(currTarget, ITEM_PASS_SCARF)) {
                 if (!CannotAttack(currTarget, FALSE)
                     && (GetMoveTargetAndRangeForPokemon(attacker, move, FALSE) & 0xF0) == 0
-                    && FixedPointToInt(targetInfo->belly) >= gUnknown_80F5006
+                    && FixedPointToInt(targetInfo->belly) >= gPassScarfBellyDownValue
                     && targetInfo->unkFF == 0)
                 {
                     s32 direction1 = targetInfo->action.direction;
@@ -480,7 +472,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                                     sub_806CE68(currTarget, direction1);
                                     sub_803E708(2, 0x43);
                                 }
-                                targetInfo->belly = FixedPoint_Subtract(targetInfo->belly, IntToFixedPoint(gUnknown_80F5006));
+                                targetInfo->belly = FixedPoint_Subtract(targetInfo->belly, IntToFixedPoint(gPassScarfBellyDownValue));
                                 if (move->id == MOVE_REGULAR_ATTACK) {
                                     TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FDDA8); // Attack was passed off
                                 }
@@ -717,13 +709,13 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_WIDE_SLASH:
                     case MOVE_SPIN_SLASH:
                     case MOVE_BLOOP_SLASH:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x100, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(1), itemId) != 0);
                         break;
                     case MOVE_REGULAR_ATTACK:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x80, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(0.5), itemId) != 0);
                         break;
                     case MOVE_NOTHING:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(0), itemId) != 0);
                         break;
                     case MOVE_EARTHQUAKE:
                         moveHadEffect = EarthquakeMoveAction(attacker, currTarget, move, itemId);
@@ -765,7 +757,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     case MOVE_CROSS_CHOP:
                     case MOVE_RAZOR_LEAF:
                     case MOVE_LEAF_BLADE:
-                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, 0x100, itemId) != 0);
+                        moveHadEffect = (HandleDamagingMove(attacker, currTarget, move, IntToF248_2(1), itemId) != 0);
                         break;
                     case MOVE_FISSURE:
                         moveHadEffect = FissureMoveAction(attacker, currTarget, move, itemId);
@@ -1656,10 +1648,10 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
 
 bool32 HandleRegularDamagingMove(Entity *attacker, Entity *target, Move *move, s32 itemId)
 {
-    return (HandleDamagingMove(attacker, target, move, 0x100, itemId) != 0);
+    return (HandleDamagingMove(attacker, target, move, IntToF248_2(1), itemId) != 0);
 }
 
-s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s32 r9, s32 itemId)
+s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s24_8 modifier, s32 itemId)
 {
     struct DamageStruct dmgStruct;
     s16 unk;
@@ -1667,19 +1659,19 @@ s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s32 r9, s32
     s32 movePower = GetMovePower(attacker, move);
     s32 critChance = GetMoveCritChance(move);
 
-    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
+    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, modifier, move->id, 1);
     unk = sub_8057600(move, itemId);
     return TryHitTarget(attacker, target, move, &dmgStruct, unk);
 }
 
-s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s32 r9, s32 itemId)
+s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s24_8 modifier, s32 itemId)
 {
     struct DamageStruct dmgStruct;
     s16 unk;
     s32 movePower = GetMovePower(attacker, move);
     s32 critChance = GetMoveCritChance(move);
 
-    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, r9, move->id, 1);
+    CalcDamage(attacker, target, moveType, movePower, critChance, &dmgStruct, modifier, move->id, 1);
     unk = sub_8057600(move, itemId);
     return TryHitTarget(attacker, target, move, &dmgStruct, unk);
 }
@@ -1951,7 +1943,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
             gUnknown_202F222 = 0;
             if (EntityExists(attacker)) {
                 EntityInfo *attackerInfo = GetEntInfo(attacker);
-                s32 statusTurns = CalculateStatusTurns(attacker, gUnknown_80F4E70, TRUE);
+                s32 statusTurns = CalculateStatusTurns(attacker, gPauseTurnRange, TRUE);
                 PausedStatusTarget(attacker, attacker, 1, statusTurns, FALSE);
                 SetExpMultplier(attackerInfo);
             }
@@ -1996,7 +1988,7 @@ static void TriggerTargetAbilityEffect(Entity *attacker)
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_EFFECT_SPORE_SLP) {
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF54); // Effect Spore scattered spores!
-            SleepStatusTarget(attacker, attacker, CalculateStatusTurns(attacker, gUnknown_80F4E74, TRUE), TRUE);
+            SleepStatusTarget(attacker, attacker, CalculateStatusTurns(attacker, gSleepTurnRange, TRUE), TRUE);
         }
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_FLAME_BODY) {
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEF74); // Flame Body caused a burn!
@@ -2010,7 +2002,7 @@ static void TriggerTargetAbilityEffect(Entity *attacker)
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FEFD0); // A horrid stench billowed out
             sub_80428A0(attacker);
-            entInfo->terrifiedTurns = gUnknown_80F5004;
+            entInfo->terrifiedTurns = gStenchTerrifiedTurnsNo;
         }
 
         entInfo->abilityEffectFlags = 0;
@@ -2705,7 +2697,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
 static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits)
 {
     s32 statStageAccuracy, statStageEvasion;
-    s32 statStageMul;
+    s24_8 statStageMul;
     s32 accuracy = GetMoveAccuracyOrAIChance(move, accuracyType);
     s32 rand = DungeonRandInt(100);
     EntityInfo *attackerInfo = GetEntInfo(attacker);
@@ -2723,10 +2715,10 @@ static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accu
         return TRUE;
 
     if (HasHeldItem(target, ITEM_DETECT_BAND)) {
-        accuracy -= gUnknown_80F519C;
+        accuracy -= gDetectBandAccuracyDebuffValue;
     }
     if (IQSkillIsEnabled(target, IQ_QUICK_DODGER)) {
-        accuracy -= gUnknown_80F51A0;
+        accuracy -= gIqQuickDodgerAccuracyDebuffValue;
     }
 
     statStageAccuracy = attackerInfo->hitChanceStages[0];
@@ -2746,11 +2738,11 @@ static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accu
     if (statStageAccuracy < 0) statStageAccuracy = 0;
     if (statStageAccuracy > 20) statStageAccuracy = 20;
 
-    statStageMul = gUnknown_80F50F4[0][statStageAccuracy];
-    if (statStageMul < 0) statStageMul = 0;
-    if (statStageMul > (256 * 100)) statStageMul = (256 * 100);
+    statStageMul = gAccEvsStatStageMultipliers[0][statStageAccuracy];
+    if (statStageMul.raw < 0) statStageMul.raw = 0;
+    if (statStageMul.raw > IntToF248_2(100).raw) statStageMul = IntToF248_2(100);
 
-    accuracy *= statStageMul;
+    accuracy *= statStageMul.raw;
     accuracy /= 256;
 
     statStageEvasion = targetInfo->hitChanceStages[1];
@@ -2770,11 +2762,11 @@ static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accu
     if (statStageEvasion < 0) statStageEvasion = 0;
     if (statStageEvasion > 20) statStageEvasion = 20;
 
-    statStageMul = gUnknown_80F50F4[1][statStageEvasion];
-    if (statStageMul < 0) statStageMul = 0;
-    if (statStageMul > (256 * 100)) statStageMul = (256 * 100);
+    statStageMul = gAccEvsStatStageMultipliers[1][statStageEvasion];
+    if (statStageMul.raw < 0) statStageMul.raw = 0;
+    if (statStageMul.raw > IntToF248_2(100).raw) statStageMul = IntToF248_2(100);
 
-    accuracy *= statStageMul;
+    accuracy *= statStageMul.raw;
     accuracy /= 256;
     if (rand < accuracy)
         return TRUE;
