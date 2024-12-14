@@ -569,11 +569,11 @@ string read_json_binary(Json data, int num_bytes) {
     return read_json(data, num_bytes, get_json_binary_value);
 }
 
-string read_json_array(Json data, int num_bytes, int expected_count, string(*json_reader)(Json)) {
+string read_json_array(Json data, int num_bytes, unsigned int expected_count, string(*json_reader)(Json)) {
     ostringstream data_string;
     bool first = true;
     vector<Json> data_items = data.array_items();
-    for (int i = 0; i < expected_count; i++) {
+    for (unsigned int i = 0; i < expected_count; i++) {
         string item = i < data_items.size() ? json_reader(data_items[i]) : "0";
 
         data_string << (first ? "" : ", ") << item;
@@ -582,15 +582,15 @@ string read_json_array(Json data, int num_bytes, int expected_count, string(*jso
     return get_start_bytes(num_bytes) + data_string.str();
 }
 
-string read_json_bool_array(Json data, int num_bytes, int expected_count) {
+string read_json_bool_array(Json data, int num_bytes, unsigned int expected_count) {
     return read_json_array(data, num_bytes, expected_count, get_json_bool_value);
 }
 
-string read_json_int_array(Json data, int num_bytes, int expected_count) {
+string read_json_int_array(Json data, int num_bytes, unsigned int expected_count) {
     return read_json_array(data, num_bytes, expected_count, get_json_int_value);
 }
 
-string read_json_string_array(Json data, int num_bytes, int expected_count) {
+string read_json_string_array(Json data, int num_bytes, unsigned int expected_count) {
     return read_json_array(data, num_bytes, expected_count, get_json_string_value);
 }
 
