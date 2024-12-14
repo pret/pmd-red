@@ -65,14 +65,14 @@ UNUSED static void StopAllMusic(void)
 
 void StartNewBGM(u16 songIndex)
 {
-    bool8 interrupt_flag;
+    bool8 interruptFlag;
 
     if (!IsBGSong(songIndex))
         return;
     if (songIndex == STOP_BGM)
         return;
     if (songIndex == sCurrentBGSong) {
-        if ((u16)(sBGMusicPlayerstate - 1) <= 1)
+        if (sBGMusicPlayerstate == 1 || sBGMusicPlayerstate == 2)
             return;
     }
     if (GetMusicPlayerIndex(songIndex) != INDEX_BGM) {
@@ -80,7 +80,7 @@ void StartNewBGM(u16 songIndex)
         return;
     }
 
-    interrupt_flag = DisableInterrupts();
+    interruptFlag = DisableInterrupts();
     sCurrentBGSong = songIndex;
     sRestartBGM = TRUE;
 
@@ -88,20 +88,20 @@ void StartNewBGM(u16 songIndex)
         sBGMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
         m4aSongNumStart(songIndex);
     }
-    if (interrupt_flag)
+    if (interruptFlag)
         EnableInterrupts();
 }
 
 void FadeInNewBGM(u16 songIndex, u16 speed)
 {
-    bool8 interrupt_flag;
+    bool8 interruptFlag;
 
     if (!IsBGSong(songIndex))
         return;
     if (songIndex == STOP_BGM)
         return;
     if (songIndex == sCurrentBGSong) {
-        if ((u16)(sBGMusicPlayerstate - 1) <= 1)
+        if (sBGMusicPlayerstate == 1 || sBGMusicPlayerstate == 2)
             return;
     }
 
@@ -113,7 +113,7 @@ void FadeInNewBGM(u16 songIndex, u16 speed)
             speed = 1;
     }
 
-    interrupt_flag = DisableInterrupts();
+    interruptFlag = DisableInterrupts();
     sCurrentBGSong = songIndex;
     sRestartBGM = TRUE;
 
@@ -126,7 +126,7 @@ void FadeInNewBGM(u16 songIndex, u16 speed)
         m4aMPlayFadeIn(&gMPlayInfo_BGM, speed);
     }
 
-    if (interrupt_flag)
+    if (interruptFlag)
         EnableInterrupts();
 }
 
@@ -142,7 +142,7 @@ void QueueBGM(u16 songIndex)
 
 void StopBGM(void)
 {
-    bool8 interrupt_flag = DisableInterrupts();
+    bool8 interruptFlag = DisableInterrupts();
 
     if (sFanfareMusicPlayerState == 0) {
         if (sCurrentBGSong != STOP_BGM)
@@ -152,24 +152,24 @@ void StopBGM(void)
     sCurrentBGSong = STOP_BGM;
     sQueuedBGSong = STOP_BGM;
 
-    if (interrupt_flag)
+    if (interruptFlag)
         EnableInterrupts();
 }
 
 void FadeOutBGM(u16 speed)
 {
-    bool8 interrupt_flag;
+    bool8 interruptFlag;
 
-// TODO: int16 memes
-    if (speed > (0x80 << 17) / 65536)
+    if (speed > 256) {
         speed = 16;
+    }
     else {
         speed >>= 4;
         if (speed == 0)
             speed = 1;
     }
 
-    interrupt_flag = DisableInterrupts();
+    interruptFlag = DisableInterrupts();
 
     if (sFanfareMusicPlayerState == 0) {
         if (sCurrentBGSong != STOP_BGM) {
@@ -188,7 +188,7 @@ void FadeOutBGM(u16 speed)
 
     sQueuedBGSong = STOP_BGM;
 
-    if (interrupt_flag)
+    if (interruptFlag)
         EnableInterrupts();
 }
 
@@ -199,8 +199,6 @@ u16 GetCurrentBGSong(void)
 
 void PlayFanfareSE(u16 songIndex, u16 volume)
 {
-    bool8 interrupt_flag;
-    bool8 interrupt_flag2;
     u16 playerIndex;
     PMDMusicPlayer *musicPlayer;
 
@@ -211,11 +209,11 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
 
     if (IsFanfare(songIndex)) {
         if (GetMusicPlayerIndex(songIndex) == INDEX_FANFARE) {
-            interrupt_flag = DisableInterrupts();
+            bool8 interruptFlag = DisableInterrupts();
             sCurrentFanfareSong = songIndex;
             if (sFanfareMusicPlayerState == 0) {
                 if (sCurrentBGSong != STOP_BGM) {
-                    if ((u16)(sBGMusicPlayerstate - 1) < 2) {
+                    if (sBGMusicPlayerstate == 1 || sBGMusicPlayerstate == 2) {
                         sFanfareMusicPlayerState = 1;
                         sMusicTransitionCounter = 16;
                         sRestartBGM = FALSE;
@@ -236,7 +234,7 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
                 }
             }
             else {
-                if (1 < (u16)(sFanfareMusicPlayerState - 1)) {
+                if (sFanfareMusicPlayerState != 1 && sFanfareMusicPlayerState != 2) {
                     m4aMPlayStop(&gMPlayInfo_BGM);
                     m4aSongNumStart(sCurrentFanfareSong);
                     sFanfareMusicPlayerState = FANFARE_PLAYER_STATE_PLAYING;
@@ -265,7 +263,7 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
                     break;
             }
 
-            if (interrupt_flag)
+            if (interruptFlag)
                 EnableInterrupts();
         }
         else
@@ -282,7 +280,7 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
             nullsub_20(songIndex);
         else
         {
-            interrupt_flag2 = DisableInterrupts();
+            bool8 interruptFlag = DisableInterrupts();
             m4aSongNumStart(songIndex);
             musicPlayer->unk0 = 1;
             musicPlayer->songIndex = songIndex;
@@ -293,7 +291,7 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
                 musicPlayer->isNotMaxVolume = TRUE;
 
             musicPlayer->volume = volume;
-            if (interrupt_flag2)
+            if (interruptFlag)
                 EnableInterrupts();
         }
     }
@@ -301,7 +299,7 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
 
 UNUSED static void SetSoundEffectVolume(u16 songIndex, u16 volume)
 {
-    bool8 interrupt_flag;
+    bool8 interruptFlag;
     u16 playerIndex;
     struct MusicPlayerInfo *info;
     PMDMusicPlayer *musicPlayer;
@@ -314,11 +312,11 @@ UNUSED static void SetSoundEffectVolume(u16 songIndex, u16 volume)
         info = gMPlayTable[playerIndex].info;
         musicPlayer = &sBGMusicPlayers[playerIndex];
         if (playerIndex >= INDEX_SE1) {
-            interrupt_flag = DisableInterrupts();
+            interruptFlag = DisableInterrupts();
             if (musicPlayer->songIndex == songIndex)
                 m4aMPlayVolumeControl(info, 0xf, volume);
 
-            if (interrupt_flag)
+            if (interruptFlag)
                 EnableInterrupts();
         }
     }
@@ -326,41 +324,31 @@ UNUSED static void SetSoundEffectVolume(u16 songIndex, u16 volume)
 
 void StopFanfareSE(u16 songIndex)
 {
-    // Each section needs a var for interrupts..
-    bool8 cVar1;
-    bool8 cVar2;
-    bool8 cVar3;
-    bool8 cVar4;
-
-    u32 playerIndex;
-    s32 playerIndex2;
-    struct MusicPlayerInfo *info;
-    PMDMusicPlayer *musicPlayer;
-    PMDMusicPlayer *musicPlayer1;
-
     if (songIndex == STOP_SOUND_EFFECT) {
-        cVar1 = DisableInterrupts();
+        s32 playerIndex;
+        PMDMusicPlayer *musicPlayer;
+        bool8 interruptFlag = DisableInterrupts();
 
-        for (playerIndex2 = INDEX_SE1, musicPlayer1 = &sSEMusicPlayers[0]; playerIndex2 < INDEX_SE6; playerIndex2++, musicPlayer1++) {
-            m4aMPlayStop(gMPlayTable[playerIndex2].info);
-            musicPlayer1->unk0 = 0;
-            musicPlayer1->songIndex = STOP_SOUND_EFFECT;
-            musicPlayer1->volume = 0;
-            musicPlayer1->isNotMaxVolume = FALSE;
+        for (playerIndex = INDEX_SE1, musicPlayer = &sSEMusicPlayers[0]; playerIndex < INDEX_SE6; playerIndex++, musicPlayer++) {
+            m4aMPlayStop(gMPlayTable[playerIndex].info);
+            musicPlayer->unk0 = 0;
+            musicPlayer->songIndex = STOP_SOUND_EFFECT;
+            musicPlayer->volume = 0;
+            musicPlayer->isNotMaxVolume = FALSE;
         }
 
-        if (cVar1)
+        if (interruptFlag)
             EnableInterrupts();
     }
     else if (IsSoundEffect(songIndex)) {
-        playerIndex = GetMusicPlayerIndex(songIndex);
-        info = gMPlayTable[playerIndex].info;
-        musicPlayer = &sBGMusicPlayers[playerIndex];
+        u32 playerIndex = GetMusicPlayerIndex(songIndex);
+        struct MusicPlayerInfo *info = gMPlayTable[playerIndex].info;
+        PMDMusicPlayer *musicPlayer = &sBGMusicPlayers[playerIndex];
 
         if (playerIndex < INDEX_SE1)
             nullsub_21(songIndex);
         else {
-            cVar2 = DisableInterrupts();
+            bool8 interruptFlag = DisableInterrupts();
 
             if (musicPlayer->songIndex == songIndex) {
                 m4aMPlayStop(info);
@@ -370,12 +358,12 @@ void StopFanfareSE(u16 songIndex)
                 musicPlayer->isNotMaxVolume = FALSE;
             }
 
-            if (cVar2)
+            if (interruptFlag)
                 EnableInterrupts();
         }
     }
     else if (songIndex == STOP_FANFARE) {
-        cVar3 = DisableInterrupts();
+        bool8 interruptFlag = DisableInterrupts();
 
         if (sFanfareMusicPlayerState != 0) {
             if (sCurrentFanfareSong != STOP_SOUND_EFFECT) {
@@ -384,11 +372,11 @@ void StopFanfareSE(u16 songIndex)
             }
         }
 
-        if (cVar3)
+        if (interruptFlag)
             EnableInterrupts();
     }
     else if (IsFanfare(songIndex)) {
-        cVar4 = DisableInterrupts();
+        bool8 interruptFlag = DisableInterrupts();
 
         if (sFanfareMusicPlayerState != 0) {
             if (sCurrentFanfareSong == songIndex) {
@@ -397,28 +385,16 @@ void StopFanfareSE(u16 songIndex)
             }
         }
 
-        if (cVar4)
+        if (interruptFlag)
             EnableInterrupts();
     }
 }
 
 void FadeOutFanfareSE(u16 songIndex, u16 speed)
 {
-    bool8 cVar1;
-    bool8 cVar2;
-    bool8 cVar3;
-    bool8 cVar4;
-    u32 comparison;
-    s32 playerIndex2;
-    u32 playerIndex;
-    PMDMusicPlayer *musicPlayer;
-    PMDMusicPlayer *musicPlayer1;
-    struct MusicPlayerInfo *playerInfo;
-
-// TODO: int16 memes
-    comparison = 0x80 << 17; // 16777216
-    if (speed * 65536 > comparison)
+    if (speed > 256) {
         speed = 16;
+    }
     else {
         speed >>= 4;
         if (speed == 0)
@@ -426,30 +402,32 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
     }
 
     if (songIndex == STOP_SOUND_EFFECT) {
-        cVar1 = DisableInterrupts();
+        s32 playerIndex;
+        PMDMusicPlayer *musicPlayer;
+        bool8 interruptFlag = DisableInterrupts();
 
-        for(playerIndex2 = INDEX_SE1, musicPlayer1 = &sSEMusicPlayers[0]; playerIndex2 < INDEX_SE6; playerIndex2++, musicPlayer1++) {
-            if (musicPlayer1->songIndex != STOP_SOUND_EFFECT) {
-                if (IsMusicPlayerPlaying(playerIndex2))
-                    m4aMPlayFadeOut(gMPlayTable[playerIndex2].info, speed);
+        for (playerIndex = INDEX_SE1, musicPlayer = &sSEMusicPlayers[0]; playerIndex < INDEX_SE6; playerIndex++, musicPlayer++) {
+            if (musicPlayer->songIndex != STOP_SOUND_EFFECT) {
+                if (IsMusicPlayerPlaying(playerIndex))
+                    m4aMPlayFadeOut(gMPlayTable[playerIndex].info, speed);
                 else {
-                    m4aMPlayStop(gMPlayTable[playerIndex2].info);
-                    musicPlayer1->unk0 = 0;
-                    musicPlayer1->songIndex = STOP_SOUND_EFFECT;
-                    musicPlayer1->volume = 0;
-                    musicPlayer1->isNotMaxVolume = FALSE;
+                    m4aMPlayStop(gMPlayTable[playerIndex].info);
+                    musicPlayer->unk0 = 0;
+                    musicPlayer->songIndex = STOP_SOUND_EFFECT;
+                    musicPlayer->volume = 0;
+                    musicPlayer->isNotMaxVolume = FALSE;
                 }
             }
         }
 
-        if (cVar1)
+        if (interruptFlag)
             EnableInterrupts();
     }
     else if (IsSoundEffect(songIndex)) {
-        playerIndex = GetMusicPlayerIndex(songIndex);
-        musicPlayer = &sBGMusicPlayers[playerIndex];
-        playerInfo = gMPlayTable[playerIndex].info;
-        cVar2 = DisableInterrupts();
+        s32 playerIndex = GetMusicPlayerIndex(songIndex);
+        PMDMusicPlayer *musicPlayer = &sBGMusicPlayers[playerIndex];
+        struct MusicPlayerInfo *playerInfo = gMPlayTable[playerIndex].info;
+        bool8 interruptFlag = DisableInterrupts();
 
         if (musicPlayer->songIndex != STOP_SOUND_EFFECT) {
             if (IsMusicPlayerPlaying(playerIndex))
@@ -463,11 +441,11 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
             }
         }
 
-        if (cVar2)
+        if (interruptFlag)
             EnableInterrupts();
     }
     else if (songIndex == STOP_FANFARE) {
-        cVar3 = DisableInterrupts();
+        bool8 interruptFlag = DisableInterrupts();
 
         if (sFanfareMusicPlayerState != 0 && sCurrentFanfareSong != STOP_SOUND_EFFECT) {
             if (IsMusicPlayerPlaying(INDEX_FANFARE))
@@ -478,11 +456,11 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
             }
         }
 
-        if (cVar3)
+        if (interruptFlag)
             EnableInterrupts();
     }
     else if (IsFanfare(songIndex)) {
-        cVar4 = DisableInterrupts();
+        bool8 interruptFlag = DisableInterrupts();
 
         if (sFanfareMusicPlayerState != 0 && sCurrentFanfareSong == songIndex) {
             if (IsMusicPlayerPlaying(INDEX_FANFARE))
@@ -493,7 +471,7 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
             }
         }
 
-        if (cVar4)
+        if (interruptFlag)
             EnableInterrupts();
     }
 }
@@ -521,13 +499,11 @@ bool8 IsFanfareSEPlaying(u16 songIndex)
 
 void SoundVSync(void)
 {
-    bool8 cVar1;
-
-    cVar1 = DisableInterrupts();
+    bool8 interruptFlag = DisableInterrupts();
 
     m4aSoundVSync();
 
-    if (cVar1)
+    if (interruptFlag)
         EnableInterrupts();
 }
 
@@ -537,8 +513,8 @@ void nullsub_18(void)
 
 void UpdateSound(void)
 {
-    PMDMusicPlayer *musicPlayer; // r4
-    s32 musicPlayerIndex; // r5
+    PMDMusicPlayer *musicPlayer;
+    s32 musicPlayerIndex;
 
     m4aSoundMain();
 
@@ -677,18 +653,16 @@ void UpdateSound(void)
 
 void StopBGMusicVSync(void)
 {
-    bool8 interrupt_flag;
-    u16 temp;
+    bool8 interruptFlag;
 
     FadeOutFanfareSE(STOP_SOUND_EFFECT, 0x10);
     FadeOutFanfareSE(STOP_FANFARE, 0x10);
 
-    interrupt_flag = DisableInterrupts();
+    interruptFlag = DisableInterrupts();
 
     if (sFanfareMusicPlayerState == 0) {
         if (sCurrentBGSong != STOP_BGM) {
-            temp = sBGMusicPlayerstate - 1;
-            if (temp <= 1) {
+            if (sBGMusicPlayerstate == 1 || sBGMusicPlayerstate == 2) {
                 if (sBGMusicPlayerstate == 2)
                     sRestartBGM = FALSE;
                 else if (sBGMusicPlayerstate == BG_PLAYER_STATE_PLAYING)
@@ -702,13 +676,13 @@ void StopBGMusicVSync(void)
     m4aMPlayStop(&gMPlayInfo_BGM);
     m4aSoundVSyncOff();
 
-    if (interrupt_flag)
+    if (interruptFlag)
         EnableInterrupts();
 }
 
 void StartBGMusicVSync(void)
 {
-    bool8 interrupt_flag = DisableInterrupts();
+    bool8 interruptFlag = DisableInterrupts();
 
     m4aSoundVSyncOn();
 
@@ -725,7 +699,7 @@ void StartBGMusicVSync(void)
         }
     }
 
-    if (interrupt_flag)
+    if (interruptFlag)
         EnableInterrupts();
 }
 
