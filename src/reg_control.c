@@ -1,14 +1,22 @@
 #include "global.h"
+#include "globaldata.h"
 #include "bg_control.h"
 #include "debug.h"
 #include "input.h"
 #include "music.h"
 #include "reg_control.h"
 #include "sprite.h"
+#include "crt0.h"
 
+extern void (gUnknown_202DBB8)(void);
+
+EWRAM_DATA u8 IntrMain_Buffer[0x120] = {0};
+EWRAM_DATA IntrCallback gIntrTable[6] = {0};
+EWRAM_DATA IntrCallback gIntrCallbacks[6] = {0};
 EWRAM_DATA unkStruct_202D648 gUnknown_202D608[8] = {0};
 EWRAM_DATA unkStruct_202D648 gUnknown_202D648[8] = {0};
 
+EWRAM_DATA_2 u8 gInterruptsEnabled = {0};
 EWRAM_DATA_2 bool8 gUnknown_203B099 = {0};
 EWRAM_DATA_2 bool8 gUnknown_203B09A = {0};
 EWRAM_DATA_2 bool8 gUnknown_203B09B = {0};
@@ -22,7 +30,227 @@ EWRAM_DATA_2 s16 gUnknown_203B0AE = {0};
 EWRAM_DATA_2 s16 gUnknown_203B0B0 = {0}; // Written to but never read
 EWRAM_DATA_2 s16 gUnknown_203B0B2 = {0}; // Written to but never read
 
+// code_800D090.c
+extern void sub_800D6AC(void);
+extern void sub_800D7D0(void);
+
 static void UpdateBGControlRegisters(void);
+void VBlankIntr(void);
+void VCountIntr(void);
+void UnusedIntrFunc(void);
+void Timer3Intr(void);
+
+static const IntrCallback sInitialIntrTable[6] =
+{
+    &gUnknown_202DBB8,
+    VBlankIntr,
+    VCountIntr,
+    UnusedIntrFunc,
+    Timer3Intr,
+    UnusedIntrFunc,
+};
+
+void sub_800B540(void)
+{
+    s32 i;
+
+    for (i = 0; i < 6; i++)
+        gIntrCallbacks[i] = NULL;
+
+    nullsub_17();
+    InitMusic(); // initialize music and stop DMAs
+
+    while (REG_VCOUNT < 160){}
+
+    REG_IE ^= INTR_FLAG_TIMER3 | INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT; // 0x45
+
+    *(u8*)&REG_DISPCNT |= DISPCNT_FORCED_BLANK;
+
+    InitIntrTable(sInitialIntrTable); // set up intrrupt vector/table
+
+    REG_TM3CNT = (TIMER_64CLK | TIMER_INTR_ENABLE | TIMER_ENABLE) << 16;
+
+    REG_IE |= INTR_FLAG_GAMEPAK | INTR_FLAG_TIMER3 | INTR_FLAG_VCOUNT | INTR_FLAG_VBLANK; // 0x2045
+    REG_DISPSTAT = DISPSTAT_VCOUNT_INTR | DISPSTAT_VBLANK_INTR;
+    gUnknown_203B0AE = -1;
+    gUnknown_203B0AC = 0;
+    sub_800D6AC(); // Some other IO REG update func
+    sub_800D7D0(); // Some other IO REG update func
+    gInterruptsEnabled = 1;
+    EnableInterrupts();
+
+    while(REG_VCOUNT < 160){}
+}
+
+bool8 EnableInterrupts(void)
+{
+    if (!gInterruptsEnabled)
+        return FALSE;
+
+    if (REG_IME & 1)
+        return FALSE;
+
+    REG_IME = 1;
+    return TRUE;
+}
+
+bool8 DisableInterrupts(void)
+{
+    if (!gInterruptsEnabled)
+        return FALSE;
+
+    if (!(REG_IME & 1))
+        return FALSE;
+
+    REG_IME = 0;
+    return TRUE;
+}
+
+bool8 sub_800B650(void)
+{
+    if (!gInterruptsEnabled)
+        return FALSE;
+
+    if (REG_IME & 1)
+        return FALSE;
+
+    return TRUE;
+}
+
+void AckInterrupt(u16 flag)
+{
+    if (!gInterruptsEnabled)
+        return;
+
+    REG_IME = 0;
+    INTR_CHECK |= flag;
+    REG_IME = 1;
+}
+
+void InitIntrTable(const IntrCallback *interrupt_table)
+{
+    CpuCopy32(interrupt_table, gIntrTable, sizeof(gIntrTable)); // 0x18 = 0x6 * 4 (0x4F00 is 32 bits)
+    CpuCopy32(IntrMain, IntrMain_Buffer, sizeof(IntrMain_Buffer)); // 0x120 = 0x48 * 4 (0x4F00 is 32 bits)
+    INTR_VECTOR = IntrMain_Buffer;
+}
+
+IntrCallback *GetInterruptHandler(u32 index)
+{
+    return &gIntrTable[index];
+}
+
+IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback)
+{
+    IntrCallback old_callback;
+    u32 interrupt_var;
+
+    interrupt_var = DisableInterrupts();
+    old_callback = gIntrCallbacks[index];
+    gIntrCallbacks[index] = new_callback;
+
+    if (interrupt_var)
+        EnableInterrupts();
+
+    return old_callback;
+}
+
+// Unused?
+s32 sub_800B720(s16 a0, IntrCallback a1)
+{
+    s32 r2;
+    unkStruct_202D648 *r3;
+    s32 r4;
+    bool8 sp4;
+    s32 spC;
+    bool32 sp10;
+
+    spC = a0;
+    sp4 = DisableInterrupts();
+
+    do {
+        sp10 = FALSE;
+        r4 = 0;
+        r3 = gUnknown_202D608;
+        if (r4 >= gUnknown_203B0AA)
+            continue;
+        if (r3->unk0 == gUnknown_203B0A8) {
+            gUnknown_203B0A8 = (gUnknown_203B0A8 + 1) & 0x7fff;
+            sp10 = TRUE;
+            continue;
+        }
+    label:
+        do {
+            r4++;
+            r3++;
+            if (r4 >= gUnknown_203B0AA)
+                continue;
+            if (r3->unk0 == gUnknown_203B0A8) {
+                gUnknown_203B0A8 = (gUnknown_203B0A8 + 1) & 0x7fff;
+                sp10 = TRUE;
+            }
+            else
+                goto label;
+        } while (0);
+    } while (sp10);
+
+    for (r4 = 0, r3 = gUnknown_202D608; r4 < gUnknown_203B0AA; r4++, r3++) {
+        if (r3->unk2 > spC)
+            break;
+    }
+
+    for (r2 = gUnknown_203B0AA - 1, r3 = &gUnknown_202D608[r2]; r2 >= r4; r2--, r3--)
+        r3[1] = r3[0];
+
+    gUnknown_203B0AA++;
+    gUnknown_202D608[r4].unk0 = gUnknown_203B0A8;
+#ifdef NONMATCHING
+    gUnknown_202D608[r4].unk2 = spC;
+#else
+    gUnknown_202D608[r4].unk2 = ((u32)spC << 0x10 >> 0x10); // fake and may overflow. Unspecified behavior
+#endif
+    gUnknown_202D608[r4].unk4 = a1;
+
+    if (sp4)
+        EnableInterrupts();
+
+    return gUnknown_203B0A8;
+}
+
+// Unused?
+void sub_800B850(s16 a0)
+{
+    s32 r2;
+    unkStruct_202D648 *r4;
+    bool8 r5;
+    s32 r6;
+
+    r6 = a0;
+    r5 = DisableInterrupts();
+
+    r2 = 0;
+    r4 = &gUnknown_202D608[r2];
+    r4++; r4--;
+    for (; r2 < gUnknown_203B0AA; r2++, r4++) {
+        if (r4->unk0 != r6)
+            continue;
+
+        gUnknown_203B0AA--;
+        for (; r2 < gUnknown_203B0AA; r2++, r4++)
+            r4[0] = r4[1];
+
+        if (!r5)
+            return;
+        EnableInterrupts();
+        return;
+    }
+
+    if (r5)
+        EnableInterrupts();
+}
+
+void UnusedIntrFunc(void)
+{
+}
 
 void VBlankIntr(void)
 {
@@ -52,7 +280,7 @@ void VBlankIntr(void)
 
 void VCountIntr(void)
 {
-    s32 sVar2 = (s16) REG_VCOUNT;
+    s32 sVar2 = (vs16) REG_VCOUNT;
 
     if (gUnknown_203B0AE < 0) {
         if (gIntrCallbacks[2] != 0) {

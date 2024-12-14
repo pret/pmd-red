@@ -42,33 +42,7 @@ gUnknown_203B090: /* 203B090 (InitGraphics) */
 
 .include "src/file_system.o"
 .include "src/main.o"
-
-/* reg_control */
-gUnknown_203B099: /* 203B099 (VBlankIntr - xxx_update_bg_sound_input) */
-	.space 0x1
-gUnknown_203B09A: /* 203B09A (sub_800BA5C - xxx_update_bg_sound_input) */
-	.space 0x1
-gUnknown_203B09B: /* 203B09B */
-	.space 0x1
-gUnknown_203B09C: /* 203B09C */
-	.space 0x4
-gUnknown_203B0A0: /* 203B0A0 */
-	.space 0x4
-gUnknown_203B0A4: /* 203B0A4 */
-	.space 0x4
-gUnknown_203B0A8: /* 203B0A8 */
-	.space 0x2
-gUnknown_203B0AA: /* 203B0AA */
-	.space 0x2
-gUnknown_203B0AC: /* 203B0AC */
-	.space 0x2
-gUnknown_203B0AE: /* 203B0AE */
-	.space 0x2
-gUnknown_203B0B0: /* 203B0B0 */
-	.space 0x2
-gUnknown_203B0B2: /* 203B0B2 */
-	.space 0x2
-
+.include "src/reg_control.o"
 .include "src/flash.o"
     .space 0x3
 

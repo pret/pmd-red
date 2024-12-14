@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
@@ -16,10 +17,6 @@
 #include "sprite.h"
 #include "text.h"
 
-EWRAM_DATA u8 IntrMain_Buffer[0x120] = {0};
-EWRAM_DATA IntrCallback gIntrTable[6] = {0};
-EWRAM_DATA IntrCallback gIntrCallbacks[6] = {0};
-
 extern u8 ewram_start[];
 extern u8 ewramClearEnd[];
 extern u8 ewramClearEnd2[]; // Force a second storage in the asm
@@ -30,31 +27,20 @@ extern u8 unk_code[];
 extern u8 unk_code_ram[];
 extern u8 unk_code_ram_end[];
 
-EWRAM_DATA_2 u8 gInterruptsEnabled = {0};
-
 // data_8270000.s
 extern const u8 gUnknown_8270000[];
-// data_80B9BB8.s
-extern const u8 gUnknown_80B9BF1[];
-extern const IntrCallback gInitialIntrTable[6];
+
+UNUSED static const char sStringRomUserData[] = "PKD ROM USER DATA 000000";
 
 // code_2.c
 extern void GameLoop(void);
 extern void InitGraphics(void);
-// code_800D090.c
+
 extern void Hang(void);
-extern void sub_800D6AC(void);
-extern void sub_800D7D0(void);
-
-void InitIntrTable(const IntrCallback *interrupt_table);
-IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback);
-
-void sub_800B540(void);
 
 void AgbMain(void)
 {
     u8 value[4];
-    u8 seed[6];
 
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
 
@@ -96,8 +82,12 @@ void AgbMain(void)
     sub_800CDA8(1);
     sub_800B540();
     InitFlash();
-    memcpy(seed, gUnknown_80B9BF1, 6);
+
+{
+    u8 seed[] = {0x36, 0x27, 0x46, 0x01, 0xB9, 0x48};
     SeedRng(seed);
+}
+
     InitSprites();
     nullsub_9();
     nullsub_6();
@@ -112,108 +102,4 @@ void AgbMain(void)
     REG_DISPCNT = DISPCNT_WIN1_ON | DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP; // 32576
     GameLoop();
     Hang();
-}
-
-void sub_800B540(void)
-{
-    s32 i;
-
-    for (i = 0; i < 6; i++)
-        gIntrCallbacks[i] = NULL;
-
-    nullsub_17();
-    InitMusic(); // initialize music and stop DMAs
-
-    while (REG_VCOUNT < 160){}
-
-    REG_IE ^= INTR_FLAG_TIMER3 | INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT; // 0x45
-
-    *(u8*)&REG_DISPCNT |= DISPCNT_FORCED_BLANK;
-
-    InitIntrTable(gInitialIntrTable); // set up intrrupt vector/table
-
-    REG_TM3CNT = (TIMER_64CLK | TIMER_INTR_ENABLE | TIMER_ENABLE) << 16;
-
-    REG_IE |= INTR_FLAG_GAMEPAK | INTR_FLAG_TIMER3 | INTR_FLAG_VCOUNT | INTR_FLAG_VBLANK; // 0x2045
-    REG_DISPSTAT = DISPSTAT_VCOUNT_INTR | DISPSTAT_VBLANK_INTR;
-    gUnknown_203B0AE = -1;
-    gUnknown_203B0AC = 0;
-    sub_800D6AC(); // Some other IO REG update func
-    sub_800D7D0(); // Some other IO REG update func
-    gInterruptsEnabled = 1;
-    EnableInterrupts();
-
-    while(REG_VCOUNT < 160){}
-}
-
-bool8 EnableInterrupts(void)
-{
-    if (!gInterruptsEnabled)
-        return FALSE;
-
-    if (REG_IME & 1)
-        return FALSE;
-
-    REG_IME = 1;
-    return TRUE;
-}
-
-bool8 DisableInterrupts(void)
-{
-    if (!gInterruptsEnabled)
-        return FALSE;
-
-    if (!(REG_IME & 1))
-        return FALSE;
-
-    REG_IME = 0;
-    return TRUE;
-}
-
-bool8 sub_800B650(void)
-{
-    if (!gInterruptsEnabled)
-        return FALSE;
-
-    if (REG_IME & 1)
-        return FALSE;
-
-    return TRUE;
-}
-
-void AckInterrupt(u16 flag)
-{
-    if (!gInterruptsEnabled)
-        return;
-
-    REG_IME = 0;
-    INTR_CHECK |= flag;
-    REG_IME = 1;
-}
-
-void InitIntrTable(const IntrCallback *interrupt_table)
-{
-    CpuCopy32(interrupt_table, gIntrTable, sizeof(gIntrTable)); // 0x18 = 0x6 * 4 (0x4F00 is 32 bits)
-    CpuCopy32(IntrMain, IntrMain_Buffer, sizeof(IntrMain_Buffer)); // 0x120 = 0x48 * 4 (0x4F00 is 32 bits)
-    INTR_VECTOR = IntrMain_Buffer;
-}
-
-IntrCallback *GetInterruptHandler(u32 index)
-{
-    return &gIntrTable[index];
-}
-
-IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback)
-{
-    IntrCallback old_callback;
-    u32 interrupt_var;
-
-    interrupt_var = DisableInterrupts();
-    old_callback = gIntrCallbacks[index];
-    gIntrCallbacks[index] = new_callback;
-
-    if (interrupt_var)
-        EnableInterrupts();
-
-    return old_callback;
 }
