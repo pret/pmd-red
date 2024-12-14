@@ -106,10 +106,12 @@ MID_BUILDDIR = $(BUILD_DIR)/$(MID_SUBDIR)
 
 C_SOURCES   := $(wildcard src/*.c)
 ASM_SOURCES := $(wildcard asm/*.s data/*.s)
+C_ASM_SOURCES := $(wildcard src/*.s)
 
 C_OBJECTS    := $(addprefix $(BUILD_DIR)/, $(C_SOURCES:%.c=%.o))
 ASM_OBJECTS  := $(addprefix $(BUILD_DIR)/, $(ASM_SOURCES:%.s=%.o))
-ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS)
+C_ASM_OBJECTS := $(addprefix $(BUILD_DIR)/, $(C_ASM_SOURCES:%.s=%.o))
+ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS) $(C_ASM_OBJECTS)
 
 SUBDIRS := $(sort $(dir $(ALL_OBJECTS)))
 
@@ -232,6 +234,13 @@ $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -o $@ $(ASM_BUILDDIR)/$*.s
 
 $(ASM_BUILDDIR)/%.d: $(ASM_SUBDIR)/%.s
+	@$(call scaninc,$(INCLUDE_PATHS))
+	
+$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s
+	@$(CPP) -x assembler-with-cpp $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.s
+	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
+	
+$(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.s
 	@$(call scaninc,$(INCLUDE_PATHS))
 
 libagbsyscall:
