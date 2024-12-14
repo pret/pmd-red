@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/bg_music.h"
 #include "m4a.h"
-#include "main.h"
+#include "reg_control.h"
 #include "music.h"
 
 static EWRAM_DATA u16 sBGMusicPlayerstate = {0};
