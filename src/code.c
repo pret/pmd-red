@@ -229,12 +229,10 @@ void sub_80011E8(u8 *param_1)
 void sub_8001248(void)
 {
     s32 index;
-    s32 counter;
 
     for(index = 0; index < INVENTORY_SIZE; index++)
     {
-        counter = RandInt(100);
-        if(counter < 50)
+        if(RandInt(100) < 50)
             ZeroOutItem(&gTeamInventoryRef->teamItems[index]);
     }
     FillInventoryGaps();
