@@ -15,7 +15,6 @@
 *.fwjpnfont
 *.bat
 sound/**/*.bin
-src/*.s
 tools/agbcc
 *.map
 *.id0
