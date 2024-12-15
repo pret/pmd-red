@@ -11,8 +11,8 @@
 #include "text.h"
 #include "structs/struct_sub80095e4.h"
 
-static EWRAM_DATA_2 struct_Sub80095E4_2 *gUnknown_203B214 = {0};
-static EWRAM_DATA_2 u16 gUnknown_203B218 = {0};
+static EWRAM_INIT struct_Sub80095E4_2 *gUnknown_203B214 = {NULL};
+static EWRAM_INIT u16 gUnknown_203B218 = {0};
 
 #include "data/kecleon_bros2.h"
 

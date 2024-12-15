@@ -19,7 +19,7 @@
 #include "pokemon_mid.h"
 #include "text.h"
 
-EWRAM_DATA_2 unkStruct_203B27C *gUnknown_203B27C = {0};
+EWRAM_INIT unkStruct_203B27C *gUnknown_203B27C = {NULL};
 
 #include "data/gulpin_shop_801FB50.h"
 

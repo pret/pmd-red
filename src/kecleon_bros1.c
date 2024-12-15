@@ -17,7 +17,7 @@
 #include "pokemon.h"
 #include "text.h"
 
-static EWRAM_DATA_2 KecleonBrosWork1 *sKecleonBrosWork1 = {0};
+static EWRAM_INIT KecleonBrosWork1 *sKecleonBrosWork1 = {NULL};
 
 #include "data/kecleon_bros1.h"
 

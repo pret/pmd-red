@@ -12,7 +12,7 @@
 #include "menu_input.h"
 #include "text.h"
 
-static EWRAM_DATA_2 unkStruct_203B20C *sUnknown_203B20C = {0};
+static EWRAM_INIT unkStruct_203B20C *sUnknown_203B20C = {NULL};
 
 #include "data/kangaskhan_storage2.h"
 

@@ -9,7 +9,7 @@
 #include "moves.h"
 #include "pokemon_mid.h"
 
-static EWRAM_DATA_2 unkStruct_203B22C *sUnknown_203B22C = {0};
+static EWRAM_INIT unkStruct_203B22C *sUnknown_203B22C = {NULL};
 
 #include "data/code_801AFA4.h"
 

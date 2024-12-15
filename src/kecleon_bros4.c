@@ -12,9 +12,9 @@
 #include "menu_input.h"
 #include "text.h"
 
-static EWRAM_DATA_2 unkStruct_203B224 *gUnknown_203B224 = {0};
-static EWRAM_DATA_2 u16 gUnknown_203B228 = {0};
-static EWRAM_DATA_2 u16 gUnknown_203B22A = {0};
+static EWRAM_INIT unkStruct_203B224 *gUnknown_203B224 = {NULL};
+static EWRAM_INIT u16 gUnknown_203B228 = {0};
+static EWRAM_INIT u16 gUnknown_203B22A = {0};
 
 #include "data/kecleon_bros4.h"
 

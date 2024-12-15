@@ -16,7 +16,7 @@
 #include "pokemon.h"
 #include "text.h"
 
-static EWRAM_DATA_2 unkStruct_203B234 *sUnknown_203B234 = {0};
+static EWRAM_INIT unkStruct_203B234 *sUnknown_203B234 = {NULL};
 
 #include "data/code_801B60C.h" // 80DBA58
 

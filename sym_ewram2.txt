@@ -1,50 +1,5 @@
 	.align 2
 
-
-
-
-
-
-gUnknown_203B198: /* 203B198 (sub_8014248 - sub_8014A88) */
-	.space 0x60
-
-.include "src/code_8015080.o"
-
-gUnknown_203B1FC: /* 203B1FC (sub_80151C0 - sub_8015F84) */
-	.space 0x4
-
-.include "src/code_801602C.o"
-.include "src/felicity_bank.o"
-.include "src/kangaskhan_storage1.o"
-.include "src/kangaskhan_storage2.o"
-.include "src/kecleon_bros1.o"
-.include "src/kecleon_bros2.o"
-.include "src/kecleon_bros3.o"
-.include "src/kecleon_bros4.o"
-.include "src/code_801AFA4.o"
-.include "src/code_801B3C0.o"
-.include "src/code_801B60C.o"
-.include "src/iq_skill_menu.o"
-.include "src/iq_skill_list_menu.o"
-.include "src/iq_skill_info_menu.o"
-.include "src/code_801C8C4.o"
-.include "src/code_801D014.o"
-.include "src/code_801D9E4.o"
-.include "src/options_menu1.o"
-.include "src/options_menu2.o"
-.include "src/hints_menu1.o"
-.include "src/hints_menu2.o"
-.include "src/gulpin_shop.o"
-.include "src/code_801EE10.o"
-.include "src/code_801F428.o"
-.include "src/code_801F808.o"
-.include "src/gulpin_shop_801FB50.o"
-.include "src/wigglytuff_shop1.o"
-.include "src/wigglytuff_shop2.o"
-.include "src/wigglytuff_shop3.o"
-.include "src/code_80227B8.o"
-.include "src/code_8023144.o"
-
 gUnknown_203B2A0: /* 203B2A0 (sub_8023868 - sub_8023C60) */
 	.space 0x4
 

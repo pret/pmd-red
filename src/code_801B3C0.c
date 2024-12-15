@@ -10,7 +10,7 @@
 #include "sprite.h"
 #include "text.h"
 
-static EWRAM_DATA_2 unkStruct_203B230 *sUnknown_203B230 = {0};
+static EWRAM_INIT unkStruct_203B230 *sUnknown_203B230 = {NULL};
 
 #include "data/code_801B3C0.h" // 80DBA4C
 

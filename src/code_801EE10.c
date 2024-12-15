@@ -10,7 +10,7 @@
 #include "code_80118A4.h"
 #include "menu_input.h"
 
-EWRAM_DATA_2 unkStruct_203B270 *gUnknown_203B270 = {0};
+EWRAM_INIT unkStruct_203B270 *gUnknown_203B270 = {NULL};
 
 const UnkTextStruct2 gUnknown_80DC240 = {
     0x00, 0x00, 0x00, 0x00,

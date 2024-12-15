@@ -13,7 +13,7 @@
 #include "moves.h"
 #include "text.h"
 
-static EWRAM_DATA_2 GulpinShopWork *sGulpinShopWork = {0};
+static EWRAM_INIT GulpinShopWork *sGulpinShopWork = {NULL};
 
 #include "data/gulpin_shop.h"
 

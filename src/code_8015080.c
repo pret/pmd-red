@@ -15,7 +15,7 @@ struct  unkStruct_203B1F8
     u8 buffer[0x400];
 };
 
-EWRAM_DATA_2 struct unkStruct_203B1F8 *gUnknown_203B1F8 = {0};
+EWRAM_INIT struct unkStruct_203B1F8 *gUnknown_203B1F8 = {NULL};
 
 const UnkTextStruct2 gUnknown_80DAF70 = {
    0x00, 0x00, 0x00, 0x00,

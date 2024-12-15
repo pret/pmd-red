@@ -10,7 +10,7 @@
 #include "pokemon_3.h"
 #include "text.h"
 
-static EWRAM_DATA_2 struct IQSkillListMenu *sIQSkillListMenu = {0};
+static EWRAM_INIT struct IQSkillListMenu *sIQSkillListMenu = {NULL};
 
 #include "data/iq_skill_list_menu.h"
 
