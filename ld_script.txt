@@ -24,8 +24,8 @@ SECTIONS {
         *libgcc.a:dp-bit.o(.bss);
         *libc.a:syscalls.o(.bss);
         . = ALIGN(16);
-		src/m4a.o(ewram_data_2);
-		src/agb_flash.o(ewram_data_2);
+		src/m4a.o(ewram_lib);
+		src/agb_flash.o(ewram_lib);
 		*libc.a:sbrkr.o(COMMON);
     } > EWRAM
 

@@ -50,6 +50,12 @@ void nullsub_114();
 void nullsub_115();
 void nullsub_116();
 
+extern const char gUnknown_8116390[];
+extern const char gUnknown_811636C[];
+extern const char gUnknown_811633C[];
+
+EWRAM_INIT const char *gUnknown_203B4A0[3] = {gUnknown_8116390, gUnknown_811636C, gUnknown_811633C};
+
 void sub_809C5C4(void)
 {
     gUnknown_3001B68 = MemoryAlloc(sizeof(struct unkStruct_3001B68), 6);

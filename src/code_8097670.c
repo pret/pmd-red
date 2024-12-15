@@ -8,7 +8,7 @@
 
 static EWRAM_DATA struct unkStruct_203B494 sUnknown_2039778 = {0};
 
-EWRAM_DATA_2 struct unkStruct_203B494 *gUnknown_203B494 = {0};
+EWRAM_INIT struct unkStruct_203B494 *gUnknown_203B494 = {0};
 
 // data_810AE24.s
 extern const u8 *gAdventureLogText[];
