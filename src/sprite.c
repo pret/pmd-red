@@ -27,7 +27,7 @@ static EWRAM_DATA unkStruct_20266B0 sUnknown_20266B0[UNK_20266B0_ARR_COUNT] = {0
 static EWRAM_DATA void *sCharMemCursor = {0}; // 2026E30
 UNUSED static EWRAM_DATA u32 sUnused3 = {0}; // 2026E34
 
-static EWRAM_DATA_2 unkStruct_20266B0 *sUnknown_203B074 = {0};
+static EWRAM_INIT unkStruct_20266B0 *sUnknown_203B074 = {0};
 
 // code.c
 extern void nullsub_3(s32, s32);

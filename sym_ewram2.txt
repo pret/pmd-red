@@ -1,14 +1,5 @@
 	.align 2
 
-gPersonalityRelated_203B040: /* 203B040 */
-	.space 0x30
-
-.include "src/other_random.o"
-.include "src/sprite.o"
-
-gUnknown_203B078: /* 203B078 (sub_80057E8 - SaveUnkTextStructAndXXX_8006438) */
-	.space 0x4
-
 .include "src/random.o"
 
 gUnknown_203B080: /* 203B080 (sub_8053540 - sub_806806C) */

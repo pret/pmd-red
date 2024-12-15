@@ -728,7 +728,7 @@ SECTIONS {
         ewramClearEnd = .;
 		ewramClearEnd2 = .;
 
-		src/code_2.o(ewram_init);
+		INCLUDE "sym_ewram_init.ld"
     } > EWRAM AT>ROM
 	
 	EWRAM_INIT_ROM_START = LOADADDR(ewram_init);

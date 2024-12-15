@@ -1,7 +1,7 @@
 #include "global.h"
 #include "other_random.h"
 
-EWRAM_DATA_2 u16 gOtherRngState = {0};
+EWRAM_INIT u16 gOtherRngState = {0x348C};
 
 static s32 OtherRandom16(void)
 {

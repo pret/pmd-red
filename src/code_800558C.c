@@ -19,7 +19,7 @@ extern u32 *gUnknown_2026E58;
 extern s16 gUnknown_2026E60[];
 extern s16 gUnknown_20270E8[];
 
-extern s16 *gUnknown_203B078;
+EWRAM_INIT s16 *gUnknown_203B078 = NULL;
 
 // data.s
 extern const s16 gUnknown_80B8008[17];
