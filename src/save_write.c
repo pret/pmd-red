@@ -6,7 +6,7 @@
 #include "save.h"
 #include "save_write.h"
 
-static EWRAM_DATA_2 SavePakWrite *sSavePakWrite = {0};
+static EWRAM_INIT SavePakWrite *sSavePakWrite = {NULL};
 
 #include "data/save_write.h"
 

@@ -5,7 +5,7 @@
 #include "save.h"
 #include "save_read.h"
 
-EWRAM_DATA_2 SavePakRead *gSavePakRead = {0};
+EWRAM_INIT SavePakRead *gSavePakRead = {NULL};
 
 #include "data/save_read.h"
 

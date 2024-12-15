@@ -1,13 +1,9 @@
 	.align 2
 
-.include "src/debug.o"
-	.space 0x2B
 
-.include "src/save.o"
-.include "src/save_read.o"
-.include "src/save_write.o"
-.include "src/quick_save_read.o"
-.include "src/quick_save_write.o"
+
+
+
 
 gUnknown_203B198: /* 203B198 (sub_8014248 - sub_8014A88) */
 	.space 0x60
