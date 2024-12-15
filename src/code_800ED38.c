@@ -2,6 +2,8 @@
 #include "file_system.h"
 #include "memory.h"
 #include "code_800E9E4.h"
+#include "dungeon_pokemon_sprites.h"
+#include "sprite.h"
 
 struct unkStruct_203B0D0_sub
 {
@@ -23,7 +25,10 @@ struct unkStruct_203B0D0 {
     struct unkStruct_203B0D0_sub unk4[2];
 };
 
-struct unkStruct_203B0D0 *gUnknown_203B0D0;
+EWRAM_INIT struct unkStruct_203B0D0 *gUnknown_203B0D0 = NULL;
+EWRAM_INIT void *gUnknown_203B0D4 = NULL; // TODO: figure out the actual struct
+EWRAM_INIT DungeonPokemonSprites *gDungeonPokemonSprites = NULL; // Todo: move to a different file, or merge files in this rom region
+EWRAM_INIT SpriteOAM gUnknown_203B0DC = {0};
 
 extern s32 sub_8000728();
 OpenedFile *sub_800F1C0(s32, s32);
@@ -34,7 +39,7 @@ void sub_800F15C(s32);
 
 void sub_800ED38(s32 r0)
 {
-    if(gUnknown_203B0D0 == 0) 
+    if(gUnknown_203B0D0 == 0)
     {
         gUnknown_203B0D0 = MemoryAlloc(sizeof(struct unkStruct_203B0D0), 0xB);
         MemoryClear8(gUnknown_203B0D0, sizeof(struct unkStruct_203B0D0));

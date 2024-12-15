@@ -12,3 +12,6 @@
 .include "src/flash.o"
 .include "src/code_800C9CC.o"
 .include "src/cpu.o"
+.include "src/code_800DAC0.o"
+.include "src/code_800ED38.o"
+.include "src/code_8010EF0.o"

@@ -1,33 +1,5 @@
 	.align 2
 
-
-
-
-
-gUnknown_203B0CC: /* 203B0CC (sub_800DE8C - sub_800DC14) */
-	.space 0x4
-
-gUnknown_203B0D0: /* 203B0D0 (sub_800ED38 - sub_800EF64) */
-	.space 0x4
-
-gUnknown_203B0D4: /* 203B0D4 (sub_800F034 - sub_800F19C) */
-	.space 0x4
-
-gDungeonPokemonSprites: /* 203B0D8 (GetDungeonPokemonSprite - sub_800F958) */
-	.space 0x4
-
-gUnknown_203B0DC: /* 203B0DC (DrawStatusSprite) */
-	.space 0x8
-
-gUnknown_203B0E4: /* 203B0E4 (sub_800F990 - sub_801169C) */
-	.space 0x4
-
-gUnknown_203B0E8: /* 203B0E8 (sub_8010268 - sub_8010B74) */
-	.space 0x4
-
-gUnknown_203B0EC: /* 203B0EC (sub_8010C58) */
-	.space 0x60
-
 .include "src/debug.o"
 	.space 0x2B
 

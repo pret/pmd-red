@@ -7,7 +7,7 @@
 #include "file_system.h"
 #include "memory.h"
 
-struct unkStruct_203B0CC *gUnknown_203B0CC;
+EWRAM_INIT struct unkStruct_203B0CC *gUnknown_203B0CC = NULL;
 
 struct unkStruct_800F18C
 {
