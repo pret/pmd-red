@@ -18,9 +18,9 @@
 #include "text.h"
 
 extern u8 ewram_start[];
-extern u8 ewramClearEnd[];
-extern u8 ewramClearEnd2[]; // Force a second storage in the asm
-extern u8 ewram2_end[];
+extern u8 ewram_end[]; // Force a second storage in the asm
+extern u8 ewram_init_start[];
+extern u8 ewram_init_end[];
 extern u8 iwram_start[];
 extern u8 iwramClearEnd[];
 extern u8 unk_code[];
@@ -49,12 +49,12 @@ void AgbMain(void)
     DmaStop(2);
     DmaStop(3);
 
-    if (ewram2_end - ewramClearEnd > 0)
-        CpuCopy32(EWRAM_INIT_ROM_START, ewramClearEnd, ewram2_end - ewramClearEnd);
+    if (ewram_init_end - ewram_init_start > 0)
+        CpuCopy32(EWRAM_INIT_ROM_START, ewram_init_start, ewram_init_end - ewram_init_start);
 
-    if (ewramClearEnd2 - ewram_start > 0) {
+    if (ewram_end - ewram_start > 0) {
         memset(value, 0, 4);
-        CpuSet(&value, ewram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((ewramClearEnd2 - ewram_start) / 4) & 0x1FFFFF));
+        CpuSet(&value, ewram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((ewram_end - ewram_start) / 4) & 0x1FFFFF));
     }
 
     if (unk_code_ram_end - unk_code_ram > 0)
