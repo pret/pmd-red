@@ -7,6 +7,7 @@
 #include "event_flag.h"
 #include "items.h"
 #include "memory.h"
+#include "personality_test1.h"
 #include "pokemon.h"
 #include "quick_save_read.h"
 #include "quick_save_write.h"
@@ -42,17 +43,8 @@ struct unkTalkTable
 extern struct unkTalkTable gTalkKindTable[];
 extern struct unkTalkTable gBaseKindTable[];
 
-// size: 0x30
-struct PersonalityRelated
-{
-    u8 fill0[4];
-    s16 speciesID1;
-    s16 speciesID2;
-    u8 speciesName1[0x14];
-    u8 speciesName2[0x14];
-};
-struct PersonalityRelated gPersonalityRelated_203B040;
-extern u32 gUnknown_203B03C;
+EWRAM_DATA_2 u32 gUnknown_203B03C = {0};
+EWRAM_DATA_2 struct PersonalityRelated gPersonalityRelated_203B040 = {0};
 
 void SaveLoadRelated_8000EDC(struct UnkStruct_xxx_dungeon_8042F6C *param_1)
 {
@@ -145,35 +137,35 @@ void sub_8001064(void)
     u8 buffer1 [20];
 
     if (GetPlayerPokemonStruct() == NULL) {
-        if (gPersonalityRelated_203B040.speciesName1[0] == '\0') {
-            CopyMonsterNameToBuffer(buffer1,gPersonalityRelated_203B040.speciesID1);
+        if (gPersonalityRelated_203B040.StarterName[0] == '\0') {
+            CopyMonsterNameToBuffer(buffer1,gPersonalityRelated_203B040.StarterID);
             CopyStringtoBuffer(buffer2,buffer1);
-            sub_808CE74(gPersonalityRelated_203B040.speciesID1,TRUE,buffer2);
+            sub_808CE74(gPersonalityRelated_203B040.StarterID,TRUE,buffer2);
         }
         else {
-            sub_808CE74(gPersonalityRelated_203B040.speciesID1,TRUE,gPersonalityRelated_203B040.speciesName1);
+            sub_808CE74(gPersonalityRelated_203B040.StarterID,TRUE,gPersonalityRelated_203B040.StarterName);
         }
     }
     if (sub_808D378() == NULL) {
-        if (gPersonalityRelated_203B040.speciesName2[0] == '\0') {
-            CopyMonsterNameToBuffer(buffer1,gPersonalityRelated_203B040.speciesID2);
+        if (gPersonalityRelated_203B040.PartnerNick[0] == '\0') {
+            CopyMonsterNameToBuffer(buffer1,gPersonalityRelated_203B040.PartnerID);
             CopyStringtoBuffer(buffer2,buffer1);
-            sub_808CE74(gPersonalityRelated_203B040.speciesID2,FALSE,buffer2);
+            sub_808CE74(gPersonalityRelated_203B040.PartnerID,FALSE,buffer2);
         }
         else {
-            sub_808CE74(gPersonalityRelated_203B040.speciesID2,FALSE,gPersonalityRelated_203B040.speciesName2);
+            sub_808CE74(gPersonalityRelated_203B040.PartnerID,FALSE,gPersonalityRelated_203B040.PartnerNick);
         }
     }
-    if (gPersonalityRelated_203B040.speciesID1 != MONSTER_NONE) {
+    if (gPersonalityRelated_203B040.StarterID != MONSTER_NONE) {
         psVar2 = &gBaseKindTable[0];
-        while ((psVar2->species != MONSTER_NONE && (gPersonalityRelated_203B040.speciesID1 != psVar2->species))) {
+        while ((psVar2->species != MONSTER_NONE && (gPersonalityRelated_203B040.StarterID != psVar2->species))) {
             psVar2++;
         }
         SetScriptVarValue(NULL,BASE_KIND,psVar2->unk0);
     }
-    if (gPersonalityRelated_203B040.speciesID2 != MONSTER_NONE) {
+    if (gPersonalityRelated_203B040.PartnerID != MONSTER_NONE) {
         psVar2 = &gTalkKindTable[0];
-        while ((psVar2->species != MONSTER_NONE && (gPersonalityRelated_203B040.speciesID2 != psVar2->species))) {
+        while ((psVar2->species != MONSTER_NONE && (gPersonalityRelated_203B040.PartnerID != psVar2->species))) {
             psVar2++;
         }
         SetScriptVarValue(NULL,PARTNER_TALK_KIND,psVar2->unk0);

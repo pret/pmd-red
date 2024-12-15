@@ -14,14 +14,19 @@ typedef struct PersonalityQuestion
     /* 0x8 */ const PersonalityEffects *effects;
 } PersonalityQuestion;
 
+struct PersonalityRelated
+{
+    u32 unk4;
+    s16 StarterID;
+    s16 PartnerID;
+    u8 StarterName[0x14];
+    u8 PartnerNick[0x14];
+};
+
 struct PersonalityTestTracker
 {
     /* 0x0 */ s32 FrameCounter;
-    u32 unk4;
-    /* 0x8 */ s16 StarterID;
-    /* 0xA */ s16 PartnerID;
-    u8 fillC[0x20 - 0xC];
-    /* 0x20 */ u8 PartnerNick[20];
+    struct PersonalityRelated unk4;
     /* 0x34 */ u32 TestState;
     /* 0x38 */ s32 QuestionCounter;
     /* 0x3C */ u32 currQuestionIndex;
