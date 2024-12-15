@@ -14,7 +14,7 @@ EWRAM_DATA OpenedFile *gMonsterParametersFile;
 EWRAM_DATA unkStruct_203B45C gRecruitedPokemon;
 EWRAM_DATA u16 gLevelCurrentPokeId;
 
-EWRAM_DATA_2 unkStruct_203B45C *gRecruitedPokemonRef = {0};
+EWRAM_INIT unkStruct_203B45C *gRecruitedPokemonRef = {NULL};
 extern void sub_808E490(Move* a1, s32 species);
 
 

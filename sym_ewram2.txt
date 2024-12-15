@@ -1,80 +1,13 @@
 	.align 2
 
 
-.include "src/wonder_mail_main_menu.o"
-.include "src/debug_menu1.o"
-.include "src/debug_menu2.o"
-.include "src/debug_menu3.o"
-.include "src/debug_menu4.o"
 
-gUnknown_203B3FC: /* 203B3FC (sub_803B050 - sub_803B284) */
-	.space 0x4
-
-.include "src/personality_test1.o"
-.include "src/personality_test2.o"
-.include "src/code_803D0D8.o"
-	.space 0x3
-
-gUnknown_203B40C: /* 203B40C (sub_803E46C - PrintFieldMessage) */
-	.space 0x1
-
-gUnknown_203B40D: /* 203B40D (sub_803E250 - sub_807E698) */
-	.space 0x3
-
-gUnknown_203B410: /* 203B410 (sub_8040150 - ReadMonster) */
-	.space 0x4
-
-.include "src/code_8042B34.o"
-
-gDungeon: /* 203B418 */
-	.space 0x4
-
-gSerializedData_203B41C: /* 203B41C (xxx_dungeon_8042F6C) */
-	.space 0x4
-
-gUnknown_203B420: /* 203B420 (sub_80462AC) */
-	.space 0x8
-
-gUnknown_203B428: /* 203B428 (sub_80462AC) */
-	.space 0x8
-
-    .include "src/dungeon_map_access.o"
-
-gUnknown_203B434: /* 203B434 (sub_80521D0 - sub_8072CF4) */
-	.space 0x4
-
-gUnknown_203B438: /* 203B438 (sub_8055FA0 - sub_8056F80) */
-	.space 0x4
-
-gUnknown_203B43C: /* 203B43C (sub_8065FB4) */
-	.space 0x4
-
-    .include "src/dungeon_ai_items.o"
-
-gUnknown_203B444: /* 203B444 (HandleExplosion) */
-	.space 0xC
-
-gLeaderPointer: /* 203B450 (xxx_dungeon_8042F6C - ReadMonster) */
-	.space 0x4
-
-    .include "src/dungeon_random.o"
-    .include "src/dungeon_music.o"
-    .include "src/pokemon.o"
-    .include "src/items.o"
-    .include "src/rescue_team_info.o"
-    .include "src/friend_area.o"
-    .include "src/game_options.o"
-    .include "src/code_8094D28.o"
-
-	.space 0x4
-
-    .include "src/play_time.o"
-    .include "src/code_8094F88.o"
-    .include "src/code_80958E8.o"
-    .include "src/code_8097670.o"
-    .include "src/exclusive_pokemon.o"
-    .include "src/ground_main.o"
-	.space 0x2
+.include "src/code_8094F88.o"
+.include "src/code_80958E8.o"
+.include "src/code_8097670.o"
+.include "src/exclusive_pokemon.o"
+.include "src/ground_main.o"
+.space 0x2
 
 gUnknown_203B4A0: /* 203B4A0 (sub_809CCDC) */
 	.space 0xC

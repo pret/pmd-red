@@ -44,7 +44,6 @@ extern void sub_8083CE0(u8 param_1);
 extern u32 gUnknown_202EDD0;
 extern u8 gUnknown_203B40C;
 extern u8 gUnknown_202EE01;
-extern u8 gUnknown_203B434;
 extern void (*gUnknown_203B08C)(s32);
 extern void (*gUnknown_203B084)(s32 a0);
 extern void (*gUnknown_203B080)(s32 a0);
@@ -65,6 +64,7 @@ static EWRAM_DATA SpriteOAM sUnknown_202F1F0 = {0};
 static EWRAM_DATA s32 sMessageLogCursor = 0;
 static EWRAM_DATA u8 sMessageLogFlags = 0;
 static EWRAM_DATA SpriteOAM sMessageLogArrowSpriteOAM = {0};
+EWRAM_INIT u8 gUnknown_203B434 = 1;
 
 // Used for sMessageLogFlags
 #define FLAG_CAN_SCROLL_UP      0x1

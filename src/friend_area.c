@@ -9,7 +9,7 @@
 
 EWRAM_DATA static bool8 sBoughtFriendAreas[NUM_FRIEND_AREAS] = {0};
 
-EWRAM_DATA_2 bool8 *gFriendAreas = {0};
+EWRAM_INIT bool8 *gFriendAreas = {NULL};
 
 // data_8107010.s
 extern const u8 sUnknown_81098A4[];

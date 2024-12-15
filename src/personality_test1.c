@@ -39,7 +39,7 @@ enum
     PERSONALITY_TEST_END,
 };
 
-static EWRAM_DATA_2 struct PersonalityTestTracker *sPersonalityTestTracker = {0};
+static EWRAM_INIT struct PersonalityTestTracker *sPersonalityTestTracker = {NULL};
 
 #include "data/personality_test1.h"
 

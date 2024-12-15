@@ -13,7 +13,7 @@
 #include "text.h"
 #include "string_format.h"
 
-EWRAM_DATA_2 struct PersonalityStruct_203B404 *gUnknown_203B404 = {0};
+EWRAM_INIT struct PersonalityStruct_203B404 *gUnknown_203B404 = {NULL};
 
 #include "data/personality_test2.h"
 
