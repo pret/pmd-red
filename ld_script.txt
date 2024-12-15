@@ -729,26 +729,15 @@ SECTIONS {
 		ewramClearEnd2 = .;
 
 		INCLUDE "sym_ewram_init.ld"
+		*libc.a:impure.o(.data);
+		*libc.a:locale.o(.data);
+		*libc.a:mallocr.o(.data);
+		ewram2_end = .;
+		. = 0x2724;
     } > EWRAM AT>ROM
 	
 	EWRAM_INIT_ROM_START = LOADADDR(ewram_init);
 	
-	ewram_init_temp :
-	ALIGN(4)
-	{
-		data/data_8270000.o(.rodata);
-	} > ROM =0
-	
-	ewram_temp (NOLOAD) :
-	ALIGN(4)
-    {
-        INCLUDE "sym_ewram2.ld"
-        *libc.a:impure.o(.data);
-        *libc.a:locale.o(.data);
-        *libc.a:mallocr.o(.data);
-        ewram2_end = .;
-    } > EWRAM
-
     unk_code_section :
     ALIGN(4)
     {
