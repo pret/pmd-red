@@ -28,7 +28,7 @@ extern u8 unk_code_ram[];
 extern u8 unk_code_ram_end[];
 
 // data_8270000.s
-extern const u8 gUnknown_8270000[];
+extern const u8 EWRAM_INIT_ROM_START[];
 
 UNUSED static const char sStringRomUserData[] = "PKD ROM USER DATA 000000";
 
@@ -50,7 +50,7 @@ void AgbMain(void)
     DmaStop(3);
 
     if (ewram2_end - ewramClearEnd > 0)
-        CpuCopy32(gUnknown_8270000, ewramClearEnd, ewram2_end - ewramClearEnd);
+        CpuCopy32(EWRAM_INIT_ROM_START, ewramClearEnd, ewram2_end - ewramClearEnd);
 
     if (ewramClearEnd2 - ewram_start > 0) {
         memset(value, 0, 4);

@@ -38,10 +38,11 @@ extern void LoadTitleScreen(void);
 extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 
-extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;
 extern s32 gTitleBrightness;
-extern OpenedFile *gTitlePaletteFile;
+
+EWRAM_INIT OpenedFile *gTitlePaletteFile = NULL;
+EWRAM_INIT u32 gUnknown_203B03C = 0;
 
 extern char gPMDBuildVersion[];
 

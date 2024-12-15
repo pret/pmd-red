@@ -1,23 +1,9 @@
 	.align 2
 
-.include "src/m4a.o"
-.include "src/agb_flash.o"
-
-errno: /* 203B034 */
-	.space 0x4
-
-ewramClearEnd:
-ewramClearEnd2:
-gTitlePaletteFile: /* 203B038 (GameLoop) */
-	.space 0x4
-gUnknown_203B03C: /* 203B03C */
-	.space 0x4
 gPersonalityRelated_203B040: /* 203B040 */
 	.space 0x30
 
 .include "src/other_random.o"
-    .space 0x2
-
 .include "src/sprite.o"
 
 gUnknown_203B078: /* 203B078 (sub_80057E8 - SaveUnkTextStructAndXXX_8006438) */
@@ -44,8 +30,6 @@ gUnknown_203B090: /* 203B090 (InitGraphics) */
 .include "src/main.o"
 .include "src/reg_control.o"
 .include "src/flash.o"
-    .space 0x3
-
 .include "src/code_800C9CC.o"
 
 gUnknown_203B0BE: /* 203B0BE (sub_800CDA8) */

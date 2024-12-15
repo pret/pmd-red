@@ -9,6 +9,7 @@
 #define IWRAM_DATA __attribute__((section("iwram_data")))
 #define EWRAM_DATA __attribute__((section("ewram_data")))
 #define EWRAM_DATA_2 __attribute__((section("ewram_data_2")))
+#define EWRAM_INIT __attribute__((section("ewram_init")))
 #define UNUSED __attribute__((unused))
 #define NAKED __attribute__((naked))
 
