@@ -24,7 +24,7 @@ struct unkStruct_203B324
     UnkTextStruct2 unk18[4];
 };
 
-static EWRAM_DATA_2 struct unkStruct_203B324 *gUnknown_203B324 = {0};
+static EWRAM_INIT struct unkStruct_203B324 *gUnknown_203B324 = {NULL};
 
 extern unkStruct_203B480 *gUnknown_203B480;
 

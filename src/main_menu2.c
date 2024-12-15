@@ -11,9 +11,9 @@
 #include "save.h"
 #include "text.h"
 
-static EWRAM_DATA_2 MainMenu2Work *sUnknown_203B34C = {0};
-static EWRAM_DATA_2 u32 sUnknown_203B350 = {0};
-static EWRAM_DATA_2 u32 sUnknown_203B354 = {0};
+static EWRAM_INIT MainMenu2Work *sUnknown_203B34C = {NULL};
+static EWRAM_INIT u32 sUnknown_203B350 = {MENU_DEBUG};
+static EWRAM_INIT u32 sUnknown_203B354 = {MENU_SEND_ITEMS};
 
 #include "data/main_menu2.h"
 

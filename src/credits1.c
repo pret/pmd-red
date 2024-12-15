@@ -6,7 +6,7 @@
 #include "memory.h"
 #include "text.h"
 
-static EWRAM_DATA_2 Credits1Work *sCredits1Work = {0};
+static EWRAM_INIT Credits1Work *sCredits1Work = {NULL};
 
 extern const UnkTextStruct2 gUnknown_80E4A10;
 extern const UnkTextStruct2 gUnknown_80E4A28;

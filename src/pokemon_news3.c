@@ -17,8 +17,8 @@
 #include "text.h"
 #include "string_format.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B2D8 *sUnknown_203B2D8 = {0};
-static EWRAM_DATA_2 u16 sUnknown_203B2DC = {0};
+static EWRAM_INIT struct unkStruct_203B2D8 *sUnknown_203B2D8 = {NULL};
+static EWRAM_INIT u16 sUnknown_203B2DC = {0};
 
 #include "data/pokemon_news3.h"
 

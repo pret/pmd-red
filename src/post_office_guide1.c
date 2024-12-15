@@ -24,7 +24,7 @@ enum PostOfficeStates
 
 extern u8 gSpeakerNameBuffer[];
 
-static EWRAM_DATA_2 PostOfficeWork *sPostOfficeHelper = {0};
+static EWRAM_INIT PostOfficeWork *sPostOfficeHelper = {NULL};
 
 #include "data/post_office_guide1.h"
 

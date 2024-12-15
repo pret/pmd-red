@@ -27,7 +27,7 @@ struct unkStruct_203B314
     struct struct_Sub80095E4_2 sBC;
 };
 
-EWRAM_DATA_2 struct unkStruct_203B314 *gUnknown_203B314 = {0};
+EWRAM_INIT struct unkStruct_203B314 *gUnknown_203B314 = {NULL};
 
 const UnkTextStruct2 gUnknown_80E06FC = {
     0x00, 0x00, 0x00, 0x00,

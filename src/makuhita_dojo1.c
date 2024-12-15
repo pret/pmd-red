@@ -14,7 +14,7 @@
 #include "pokemon.h"
 #include "text.h"
 
-static EWRAM_DATA_2 MakuhitaDojoWork1 *sMakuhitaDojoWork1 = {0};
+static EWRAM_INIT MakuhitaDojoWork1 *sMakuhitaDojoWork1 = {NULL};
 
 #include "data/makuhita_dojo1.h"
 

@@ -13,7 +13,7 @@
 #include "wonder_mail_802C860.h"
 #include "text.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B2F0 *sUnknown_203B2F0 = {0};
+static EWRAM_INIT struct unkStruct_203B2F0 *sUnknown_203B2F0 = {NULL};
 
 #include "data/wonder_mail_802C860.h"
 

@@ -38,10 +38,7 @@ struct LoadScreen
     /* 0x258 */ u8 formattedHelperInfo[0x24];
 };
 
-EWRAM_DATA_2 struct LoadScreen *gLoadScreen = {0};
-EWRAM_DATA_2 MenuItem gUnknown_203B378[2] = {0};
-EWRAM_DATA_2 u32 gUnknown_203B388[12] = {0};
-EWRAM_DATA_2 u32 gUnknown_203B3B8[12] = {0};
+EWRAM_INIT struct LoadScreen *gLoadScreen = {NULL};
 
 extern unkStruct_203B484 *gUnknown_203B484;
 
@@ -69,7 +66,19 @@ const UnkTextStruct2 gUnknown_80E7610 = {
    NULL
 };
 
-const u8 gUnkData_80E7628[] = {0x20, 0x00, 0x00, 0x00};
+EWRAM_INIT MenuItem gUnknown_203B378[2] = {
+    [0] = {
+        .text = " ",
+        .menuAction = 5,
+    },
+    [1] = {
+        .text = NULL,
+        .menuAction = 3,
+    }
+};
+
+EWRAM_INIT u32 gUnknown_203B388[12] = {0xC, 0xC, 0xE, 0xE, 0xD, 0xE, 0xC, 0xD, 0xD, 0xB, 0xB, 0xB};
+EWRAM_INIT u32 gUnknown_203B3B8[12] = {0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x1A, 0x18, 0x1B, 0x16, 0x19, 0x17};
 
 const UnkTextStruct2 gUnknown_80E762C = {
    0x00, 0x00, 0x00, 0x00,

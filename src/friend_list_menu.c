@@ -25,7 +25,7 @@
 #include "pokemon.h"
 #include "text.h"
 
-EWRAM_DATA_2 unkStruct_203B2B4 *gUnknown_203B2B4 = {0};
+EWRAM_INIT unkStruct_203B2B4 *gUnknown_203B2B4 = {NULL};
 
 #include "data/friend_list_menu.h"
 

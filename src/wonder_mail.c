@@ -23,7 +23,7 @@
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 
-static EWRAM_DATA_2 WonderMailStruct_203B2C0 *sUnknown_203B2C0 = {0};
+static EWRAM_INIT WonderMailStruct_203B2C0 *sUnknown_203B2C0 = {NULL};
 
 extern void sub_8011C28(u32);
 
