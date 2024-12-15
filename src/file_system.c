@@ -5,7 +5,7 @@
 EWRAM_DATA u32 gUnknown_202D2A4 = {0};
 EWRAM_DATA OpenedFile gFileCache[64] = {0};
 
-static EWRAM_DATA_2 u32 sFileCacheCursorPosition = {0};
+static EWRAM_INIT u32 sFileCacheCursorPosition = {0};
 
 #include "data/file_system.h"
 

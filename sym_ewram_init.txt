@@ -4,4 +4,11 @@
 .include "src/other_random.o"
 .include "src/sprite.o"
 .include "src/code_800558C.o"
-	
+.include "src/random.o"
+.include "src/text.o"
+.include "src/file_system.o"
+.include "src/main.o"
+.include "src/reg_control.o"
+.include "src/flash.o"
+.include "src/code_800C9CC.o"
+.include "src/cpu.o"
