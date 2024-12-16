@@ -4345,8 +4345,5 @@ gUnknown_9F510EC:
 .global gUnknown_9F51590
 gUnknown_9F51590:
 .incbin "baserom.gba", 0x1F51590, 0x2CC
-.global seq_000
-seq_000:
-.incbin "baserom.gba", 0x1F5185C, 0x8
 
 

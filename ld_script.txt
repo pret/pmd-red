@@ -794,7 +794,8 @@ SECTIONS {
     ALIGN(4)
     {
         data/sound_data.o(.rodata);
-		sound/songs/seq_001.o(.rodata);
+sound/songs/seq_000.o(.rodata);
+sound/songs/seq_001.o(.rodata);
 sound/songs/seq_002.o(.rodata);
 sound/songs/seq_003.o(.rodata);
 sound/songs/seq_004.o(.rodata);
