@@ -125,8 +125,6 @@ SECTIONS {
         src/hints_menu2.o(.text);
         src/gulpin_shop.o(.text);
         src/code_801EE10.o(.text);
-        asm/code_801EE10.o(.text);
-        src/code_801EE10_mid.o(.text);
         src/code_801F428.o(.text);
         src/code_801F808.o(.text);
         src/gulpin_shop_801FB50.o(.text);

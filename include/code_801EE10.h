@@ -31,8 +31,6 @@ s32 sub_801F194(void);
 bool8 sub_801F1A4(void);
 void sub_801F1B0(bool8, bool8);
 void sub_801F214(void);
-
-// code_801EE10.s
-extern void sub_801F280(u32); // Probably bool
+void sub_801F280(bool8);
 
 #endif // CODE_801EE10_H
