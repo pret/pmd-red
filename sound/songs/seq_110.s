@@ -162,10 +162,12 @@ seq_110_0:
 	.byte	W24
 	.byte	GOTO
 	 .word	seq_110_0 + 0x14
+	.byte W96, W96
 	.byte	FINE
 
 @*********************** Track 02 ***********************@
 
+.global seq_110_1
 seq_110_1:
 	.byte	KEYSH , seq_110_key+0
 	.byte		VOICE , 12
@@ -394,10 +396,12 @@ seq_110_1:
 	.byte	W03
 	.byte	GOTO
 	 .word	seq_110_1 + 0x15
+	.byte W96, W96
 	.byte	FINE
 
 @*********************** Track 03 ***********************@
 
+.global seq_110_2
 seq_110_2:
 	.byte	KEYSH , seq_110_key+0
 	.byte		VOICE , 12
@@ -666,6 +670,7 @@ seq_110_2:
 	.byte	W02
 	.byte	GOTO
 	 .word	seq_110_2 + 0x15
+	.byte W96, W96
 	.byte	FINE
 
 @*********************** Track 04 ***********************@
@@ -951,6 +956,7 @@ seq_110_3:
 	 .word	seq_110_3 + 0x15
 	.byte	GOTO
 	 .word	seq_110_3 + 0x88
+	.byte W96, W96
 	.byte	FINE
 
 @*********************** Track 05 ***********************@
@@ -1109,6 +1115,7 @@ seq_110_4:
 	.byte	W04
 	.byte	GOTO
 	 .word	seq_110_4 + 0x16
+	.byte W96, W96
 	.byte	FINE
 
 @*********************** Track 06 ***********************@
@@ -1511,6 +1518,7 @@ seq_110_5:
 	.byte	W01
 	.byte	GOTO
 	 .word	seq_110_5 + 0x16
+	.byte W96, W96
 	.byte	FINE
 
 @*********************** Track 07 ***********************@
@@ -1827,6 +1835,7 @@ seq_110_6:
 	 .word	seq_110_6 + 0x18
 	.byte	GOTO
 	 .word	seq_110_6 + 0x98
+	.byte W96, W96
 	.byte	FINE
 
 @*********************** Track 08 ***********************@
@@ -2074,6 +2083,7 @@ seq_110_7:
 	.byte	W96
 	.byte	GOTO
 	 .word	seq_110_7 + 0x16
+	.byte W96, W96
 	.byte	FINE
 
 @*********************** Track 09 ***********************@
@@ -2349,6 +2359,7 @@ seq_110_8:
 	.byte	W01
 	.byte	GOTO
 	 .word	seq_110_8 + 0x53
+	.byte W96, W96
 	.byte	FINE
 
 @*********************** Track 10 ***********************@
@@ -2622,6 +2633,7 @@ seq_110_9:
 	.byte	W01
 	.byte	GOTO
 	 .word	seq_110_9 + 0x53
+	.byte W96, W96
 	.byte	FINE
 
 @*********************** Track 11 ***********************@
@@ -2771,6 +2783,7 @@ seq_110_10:
 	.byte	W06
 	.byte	GOTO
 	 .word	seq_110_10 + 0xD
+	.byte W96, W96
 	.byte	FINE
 
 @******************************************************@

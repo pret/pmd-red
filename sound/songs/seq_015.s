@@ -638,6 +638,7 @@ seq_015_0:
 	.byte	W01
 	.byte	GOTO
 	 .word	seq_015_0 + 0x13
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 02 ***********************@
@@ -1151,6 +1152,7 @@ seq_015_1:
 	.byte	W12
 	.byte	GOTO
 	 .word	seq_015_1 + 0xE
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 03 ***********************@
@@ -1284,6 +1286,7 @@ seq_015_2:
 	.byte	W72
 	.byte	GOTO
 	 .word	seq_015_2 + 0xB
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 04 ***********************@
@@ -1538,6 +1541,7 @@ seq_015_3:
 	.byte	W12
 	.byte	GOTO
 	 .word	seq_015_3 + 0xC
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 05 ***********************@
@@ -1795,6 +1799,7 @@ seq_015_4:
 	.byte	W12
 	.byte	GOTO
 	 .word	seq_015_4 + 0xC
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 06 ***********************@
@@ -2039,6 +2044,7 @@ seq_015_5:
 	.byte	W36
 	.byte	GOTO
 	 .word	seq_015_5 + 0xC
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 07 ***********************@
@@ -2285,6 +2291,7 @@ seq_015_6:
 	.byte	W36
 	.byte	GOTO
 	 .word	seq_015_6 + 0xC
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 08 ***********************@
@@ -2621,6 +2628,7 @@ seq_015_7:
 	.byte	W01
 	.byte	GOTO
 	 .word	seq_015_7 + 0xC
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 09 ***********************@
@@ -2725,6 +2733,7 @@ seq_015_8:
 	 .word	seq_015_8 + 0x78
 	.byte	GOTO
 	 .word	seq_015_8 + 0xC
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 10 ***********************@
@@ -3509,6 +3518,7 @@ seq_015_9:
 	.byte	W12
 	.byte	GOTO
 	 .word	seq_015_9 + 0x13
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 11 ***********************@
@@ -4124,6 +4134,7 @@ seq_015_10:
 	.byte	W12
 	.byte	GOTO
 	 .word	seq_015_10 + 0x13
+	.byte W72, W72, W72
 	.byte	FINE
 
 @*********************** Track 12 ***********************@
@@ -4492,6 +4503,7 @@ seq_015_11:
 	.byte	W12
 	.byte	GOTO
 	 .word	seq_015_11 + 0xC
+	.byte W72, W72, W72
 	.byte	FINE
 
 @******************************************************@
