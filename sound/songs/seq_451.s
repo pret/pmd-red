@@ -32,6 +32,35 @@ seq_451_0:
 	.byte	W03
 	.byte	GOTO
 	 .word	seq_451_0 + 0xD
+	.byte W09
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
+	.byte W12
 	.byte	FINE
 
 @******************************************************@
