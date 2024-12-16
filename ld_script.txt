@@ -794,6 +794,17 @@ SECTIONS {
     ALIGN(4)
     {
         data/sound_data.o(.rodata);
+		sound/songs/seq_001.o(.rodata);
+sound/songs/seq_002.o(.rodata);
+sound/songs/seq_003.o(.rodata);
+sound/songs/seq_004.o(.rodata);
+sound/songs/seq_005.o(.rodata);
+sound/songs/seq_006.o(.rodata);
+sound/songs/seq_007.o(.rodata);
+sound/songs/seq_008.o(.rodata);
+sound/songs/seq_009.o(.rodata);
+        data/sound_data2.o(.rodata);
+        data/sound_data3.o(.rodata);
     }
 
     /* DWARF 2 sections */

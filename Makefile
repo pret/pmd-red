@@ -107,11 +107,14 @@ MID_BUILDDIR = $(BUILD_DIR)/$(MID_SUBDIR)
 C_SOURCES   := $(wildcard src/*.c)
 ASM_SOURCES := $(wildcard asm/*.s data/*.s)
 C_ASM_SOURCES := $(wildcard src/*.s)
+SONG_SRCS := $(wildcard sound/songs/*.s)
 
 C_OBJECTS    := $(addprefix $(BUILD_DIR)/, $(C_SOURCES:%.c=%.o))
 ASM_OBJECTS  := $(addprefix $(BUILD_DIR)/, $(ASM_SOURCES:%.s=%.o))
 C_ASM_OBJECTS := $(addprefix $(BUILD_DIR)/, $(C_ASM_SOURCES:%.s=%.o))
-ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS) $(C_ASM_OBJECTS)
+SONG_OBJS := $(addprefix $(BUILD_DIR)/, $(SONG_SRCS:%.s=%.o))
+
+ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS) $(C_ASM_OBJECTS) $(SONG_OBJS)
 
 SUBDIRS := $(sort $(dir $(ALL_OBJECTS)))
 
@@ -234,6 +237,13 @@ $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -o $@ $(ASM_BUILDDIR)/$*.s
 
 $(ASM_BUILDDIR)/%.d: $(ASM_SUBDIR)/%.s
+	@$(call scaninc,$(INCLUDE_PATHS))
+	
+$(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
+	@$(CPP) -x assembler-with-cpp $(CPPFLAGS) $< -o $(SONG_BUILDDIR)/$*.s
+	$(AS) $(ASFLAGS) -o $@ $(SONG_BUILDDIR)/$*.s
+
+$(SONG_BUILDDIR)/%.d: $(SONG_SUBDIR)/%.s
 	@$(call scaninc,$(INCLUDE_PATHS))
 	
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s

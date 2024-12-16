@@ -1,942 +1,942 @@
 	.align 2
 gSongTable:: @ 9E866BC
-	song gUnknown_9F5185C, 0, 0
-	song gUnknown_9F5218C, 0, 0
-	song gUnknown_9F52D24, 0, 0
-	song gUnknown_9F53728, 0, 0
-	song gUnknown_9F53B10, 0, 0
-	song gUnknown_9F54734, 0, 0
-	song gUnknown_9F5506C, 0, 0
-	song gUnknown_9F56720, 0, 0
-	song gUnknown_9F56B8C, 0, 0
-	song gUnknown_9F57254, 0, 0
-	song gUnknown_9F57C58, 0, 0
-	song gUnknown_9F588BC, 0, 0
-	song gUnknown_9F59210, 0, 0
-	song gUnknown_9F59F68, 0, 0
-	song gUnknown_9F5B598, 0, 0
-	song gUnknown_9F5CF8C, 0, 0
-	song gUnknown_9F5DE00, 0, 0
-	song gUnknown_9F5E8E0, 0, 0
-	song gUnknown_9F5F9C8, 0, 0
-	song gUnknown_9F60510, 0, 0
-	song gUnknown_9F61EA8, 0, 0
-	song gUnknown_9F63224, 0, 0
-	song gUnknown_9F666B8, 0, 0
-	song gUnknown_9F678E8, 0, 0
-	song gUnknown_9F698F0, 0, 0
-	song gUnknown_9F6AED8, 0, 0
-	song gUnknown_9F6CDDC, 0, 0
-	song gUnknown_9F6FBF8, 0, 0
-	song gUnknown_9F71EC8, 0, 0
-	song gUnknown_9F73E7C, 0, 0
-	song gUnknown_9F75DD0, 0, 0
-	song gUnknown_9F77848, 0, 0
-	song gUnknown_9F79C08, 0, 0
-	song gUnknown_9F7A6EC, 0, 0
-	song gUnknown_9F7B9BC, 0, 0
-	song gUnknown_9F7D470, 0, 0
-	song gUnknown_9F7DD20, 0, 0
-	song gUnknown_9F7FA74, 0, 0
-	song gUnknown_9F7FC3C, 0, 0
-	song gUnknown_9F81164, 0, 0
-	song gUnknown_9F8192C, 0, 0
-	song gUnknown_9F82150, 0, 0
-	song gUnknown_9F832D4, 0, 0
-	song gUnknown_9F83A88, 0, 0
-	song gUnknown_9F86808, 0, 0
-	song gUnknown_9F871BC, 0, 0
-	song gUnknown_9F87678, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9F876AC, 0, 0
-	song gUnknown_9F877DC, 0, 0
-	song gUnknown_9F878FC, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9F88B90, 0, 0
-	song gUnknown_9F89B38, 0, 0
-	song gUnknown_9F8AE6C, 0, 0
-	song gUnknown_9F8C1A0, 0, 0
-	song gUnknown_9F8DCFC, 0, 0
-	song gUnknown_9F8F384, 0, 0
-	song gUnknown_9F8FD4C, 0, 0
-	song gUnknown_9F90F70, 0, 0
-	song gUnknown_9F93C60, 0, 0
-	song gUnknown_9F94FBC, 0, 0
-	song gUnknown_9F96190, 0, 0
-	song gUnknown_9F976A0, 0, 0
-	song gUnknown_9F97C6C, 0, 0
-	song gUnknown_9F992BC, 0, 0
-	song gUnknown_9F9961C, 0, 0
-	song gUnknown_9F9B188, 0, 0
-	song gUnknown_9F9BA2C, 0, 0
-	song gUnknown_9F9CC24, 0, 0
-	song gUnknown_9F9DDA0, 0, 0
-	song gUnknown_9F9ECF4, 0, 0
-	song gUnknown_9FA06B0, 0, 0
-	song gUnknown_9FA0F50, 0, 0
-	song gUnknown_9FA3AA0, 0, 0
-	song gUnknown_9FA5254, 0, 0
-	song gUnknown_9FA79C8, 0, 0
-	song gUnknown_9FA8760, 0, 0
-	song gUnknown_9FA9C7C, 0, 0
-	song gUnknown_9FAB3D0, 0, 0
-	song gUnknown_9FAC714, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FAC838, 1, 1
-	song gUnknown_9FAC944, 1, 1
-	song gUnknown_9FAC9C4, 1, 1
-	song gUnknown_9FACA5C, 1, 1
-	song gUnknown_9FACB10, 1, 1
-	song gUnknown_9FACC04, 1, 1
-	song gUnknown_9FACCBC, 1, 1
-	song gUnknown_9FACD28, 1, 1
-	song gUnknown_9FACE3C, 1, 1
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FACF88, 1, 1
-	song gUnknown_9FAD054, 1, 1
-	song gUnknown_9FAD140, 1, 1
-	song gUnknown_9FAD1DC, 1, 1
-	song gUnknown_9FAD270, 1, 1
-	song gUnknown_9FAD394, 1, 1
-	song gUnknown_9FAD494, 1, 1
-	song gUnknown_9FAD694, 1, 1
-	song gUnknown_9FAD784, 1, 1
-	song gUnknown_9FAD91C, 1, 1
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FAD938, 2, 2
-	song gUnknown_9FAD95C, 2, 2
-	song gUnknown_9FAD984, 2, 2
-	song gUnknown_9FAD9A0, 2, 2
-	song gUnknown_9FAD9C0, 4, 4
-	song gUnknown_9FAD9E4, 2, 2
-	song gUnknown_9FADA08, 2, 2
-	song gUnknown_9FADA3C, 2, 2
-	song gUnknown_9FADA6C, 2, 2
-	song gUnknown_9FADA9C, 2, 2
-	song gUnknown_9FADAC0, 2, 2
-	song gUnknown_9FADB14, 6, 6
-	song gUnknown_9FADB20, 6, 6
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FADB58, 2, 2
-	song gUnknown_9FADB94, 2, 2
-	song gUnknown_9FADBB4, 5, 5
-	song gUnknown_9FADBDC, 3, 3
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FADBE8, 3, 3
-	song gUnknown_9FADC30, 3, 3
-	song gUnknown_9FADCB8, 2, 2
-	song gUnknown_9FADD38, 2, 2
-	song gUnknown_9FADD8C, 2, 2
-	song gUnknown_9FADDB4, 5, 5
-	song gUnknown_9FADDDC, 5, 5
-	song gUnknown_9FADE20, 2, 2
-	song gUnknown_9FADE64, 2, 2
-	song gUnknown_9FADE88, 5, 5
-	song gUnknown_9FADF14, 3, 3
-	song gUnknown_9FADF34, 3, 3
-	song gUnknown_9FADF60, 3, 3
-	song gUnknown_9FADF80, 3, 3
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FADFD8, 2, 2
-	song gUnknown_9FAE038, 4, 4
-	song gUnknown_9FAE184, 3, 3
-	song gUnknown_9FAE1C4, 2, 2
-	song gUnknown_9FAE250, 3, 3
-	song gUnknown_9FAE2A4, 2, 2
-	song gUnknown_9FAE2C8, 3, 3
-	song gUnknown_9FAE2FC, 2, 2
-	song gUnknown_9FAE328, 3, 3
-	song gUnknown_9FAE358, 3, 3
-	song gUnknown_9FAE380, 3, 3
-	song gUnknown_9FAE3A8, 2, 2
-	song gUnknown_9FAE3D4, 3, 3
-	song gUnknown_9FAE3E0, 2, 2
-	song gUnknown_9FAE408, 3, 3
-	song gUnknown_9FAE43C, 3, 3
-	song gUnknown_9FAE468, 3, 3
-	song gUnknown_9FAE49C, 2, 2
-	song gUnknown_9FAE4C4, 3, 3
-	song gUnknown_9FAE4EC, 4, 4
-	song gUnknown_9FAE968, 5, 5
-	song gUnknown_9FAEA48, 5, 5
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FAEA78, 5, 5
-	song gUnknown_9FAEB64, 5, 5
-	song gUnknown_9FAEB8C, 5, 5
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FAEBB8, 3, 3
-	song gUnknown_9FAEBEC, 6, 6
-	song gUnknown_9FAEC40, 5, 5
-	song gUnknown_9FAECCC, 5, 5
-	song gUnknown_9FAED10, 2, 2
-	song gUnknown_9FAEDBC, 2, 2
-	song gUnknown_9FAEDF8, 6, 6
-	song gUnknown_9FAEE64, 6, 6
-	song gUnknown_9FAEE84, 6, 6
-	song gUnknown_9FAEEAC, 3, 3
-	song gUnknown_9FAEED4, 3, 3
-	song gUnknown_9FAEEE0, 6, 6
-	song gUnknown_9FAEF34, 6, 6
-	song gUnknown_9FAEF58, 6, 6
-	song gUnknown_9FAEF90, 6, 6
-	song gUnknown_9FAF004, 6, 6
-	song gUnknown_9FAF044, 6, 6
-	song gUnknown_9FAF0E0, 6, 6
-	song gUnknown_9FAF16C, 6, 6
-	song gUnknown_9FAF1F4, 2, 2
-	song gUnknown_9FAF224, 3, 3
-	song gUnknown_9FAF308, 5, 5
-	song gUnknown_9FAF33C, 5, 5
-	song gUnknown_9FAF3F0, 5, 5
-	song gUnknown_9FAF3FC, 5, 5
-	song gUnknown_9FAF4C4, 5, 5
-	song gUnknown_9FAF654, 5, 5
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FAF6A0, 3, 3
-	song gUnknown_9FAF6E8, 3, 3
-	song gUnknown_9FAF750, 3, 3
-	song gUnknown_9FAF784, 3, 3
-	song gUnknown_9FAF844, 4, 4
-	song gUnknown_9FAF88C, 2, 2
-	song gUnknown_9FAF904, 5, 5
-	song gUnknown_9FAF95C, 2, 2
-	song gUnknown_9FAF998, 2, 2
-	song gUnknown_9FAF9F8, 5, 5
-	song gUnknown_9FAFAD4, 3, 3
-	song gUnknown_9FAFB08, 5, 5
-	song gUnknown_9FAFB3C, 5, 5
-	song gUnknown_9FAFB70, 2, 2
-	song gUnknown_9FAFBAC, 5, 5
-	song gUnknown_9FAFBE4, 2, 2
-	song gUnknown_9FAFC20, 5, 5
-	song gUnknown_9FAFC7C, 5, 5
-	song gUnknown_9FAFCB0, 2, 2
-	song gUnknown_9FAFD08, 2, 2
-	song gUnknown_9FAFD74, 2, 2
-	song gUnknown_9FAFDE8, 2, 2
-	song gUnknown_9FAFE38, 2, 2
-	song gUnknown_9FAFE84, 5, 5
-	song gUnknown_9FAFF88, 5, 5
-	song gUnknown_9FAFFB4, 5, 5
-	song gUnknown_9FAFFE0, 5, 5
-	song gUnknown_9FB006C, 5, 5
-	song gUnknown_9FB0148, 5, 5
-	song gUnknown_9FB019C, 5, 5
-	song gUnknown_9FB0200, 5, 5
-	song gUnknown_9FB0254, 5, 5
-	song gUnknown_9FB02CC, 5, 5
-	song gUnknown_9FB035C, 5, 5
-	song gUnknown_9FB043C, 5, 5
-	song gUnknown_9FB04D8, 5, 5
-	song gUnknown_9FB05A8, 4, 4
-	song gUnknown_9FB062C, 5, 5
-	song gUnknown_9FB06C0, 5, 5
-	song gUnknown_9FB08C4, 5, 5
-	song gUnknown_9FB097C, 5, 5
-	song gUnknown_9FB09E0, 5, 5
-	song gUnknown_9FB0B9C, 5, 5
-	song gUnknown_9FB0C20, 5, 5
-	song gUnknown_9FB0CD0, 5, 5
-	song gUnknown_9FB0D40, 5, 5
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FB0D9C, 3, 3
-	song gUnknown_9FB0DC8, 3, 3
-	song gUnknown_9FB0F4C, 5, 5
-	song gUnknown_9FB11EC, 5, 5
-	song gUnknown_9FB120C, 5, 5
-	song gUnknown_9FB1254, 5, 5
-	song gUnknown_9FB12CC, 5, 5
-	song gUnknown_9FB1358, 5, 5
-	song gUnknown_9FB13E0, 5, 5
-	song gUnknown_9FB14F0, 5, 5
-	song gUnknown_9FB1718, 5, 5
-	song gUnknown_9FB17E4, 5, 5
-	song gUnknown_9FB1874, 5, 5
-	song gUnknown_9FB18A4, 2, 2
-	song gUnknown_9FB1960, 5, 5
-	song gUnknown_9FB198C, 3, 3
-	song gUnknown_9FB1FC4, 5, 5
-	song gUnknown_9FB2020, 5, 5
-	song gUnknown_9FB2090, 3, 3
-	song gUnknown_9FB20D8, 5, 5
-	song gUnknown_9FB2284, 5, 5
-	song gUnknown_9FB23C0, 5, 5
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FB2438, 5, 5
-	song gUnknown_9FB24F0, 5, 5
-	song gUnknown_9FB254C, 5, 5
-	song gUnknown_9FB257C, 5, 5
-	song gUnknown_9FB25D0, 5, 5
-	song gUnknown_9FB2644, 5, 5
-	song gUnknown_9FB2690, 5, 5
-	song gUnknown_9FB26D0, 3, 3
-	song gUnknown_9FB2708, 3, 3
-	song gUnknown_9FB2748, 3, 3
-	song gUnknown_9FB279C, 3, 3
-	song gUnknown_9FB2808, 5, 5
-	song gUnknown_9FB286C, 2, 2
-	song gUnknown_9FB28D0, 2, 2
-	song gUnknown_9FB291C, 5, 5
-	song gUnknown_9FB29A4, 5, 5
-	song gUnknown_9FB29E0, 5, 5
-	song gUnknown_9FB2A30, 5, 5
-	song gUnknown_9FB2A80, 5, 5
-	song gUnknown_9FB2AC8, 5, 5
-	song gUnknown_9FB2AF8, 5, 5
-	song gUnknown_9FB2B1C, 5, 5
-	song gUnknown_9FB2BB0, 5, 5
-	song gUnknown_9FB2C04, 5, 5
-	song gUnknown_9FB2C8C, 5, 5
-	song gUnknown_9FB2CDC, 5, 5
-	song gUnknown_9FB2D08, 5, 5
-	song gUnknown_9FB2D54, 5, 5
-	song gUnknown_9FB2D7C, 5, 5
-	song gUnknown_9FB2E28, 5, 5
-	song gUnknown_9FB2E80, 5, 5
-	song gUnknown_9FB2EB4, 5, 5
-	song gUnknown_9FB2F20, 5, 5
-	song gUnknown_9FB2F2C, 5, 5
-	song gUnknown_9FB2F34, 5, 5
-	song gUnknown_9FB2F3C, 5, 5
-	song gUnknown_9FB2F68, 5, 5
-	song gUnknown_9FB2F74, 5, 5
-	song gUnknown_9FB2FE4, 5, 5
-	song gUnknown_9FB3008, 5, 5
-	song gUnknown_9FB3074, 5, 5
-	song gUnknown_9FB30F0, 5, 5
-	song gUnknown_9FB314C, 5, 5
-	song gUnknown_9FB31B0, 5, 5
-	song gUnknown_9FB3228, 5, 5
-	song gUnknown_9FB327C, 5, 5
-	song gUnknown_9FB32EC, 5, 5
-	song gUnknown_9FB3334, 5, 5
-	song gUnknown_9FB3378, 5, 5
-	song gUnknown_9FB33F8, 5, 5
-	song gUnknown_9FB3474, 5, 5
-	song gUnknown_9FB34EC, 5, 5
-	song gUnknown_9FB3530, 5, 5
-	song gUnknown_9FB35A4, 5, 5
-	song gUnknown_9FB3618, 5, 5
-	song gUnknown_9FB3698, 5, 5
-	song gUnknown_9FB371C, 5, 5
-	song gUnknown_9FB37D0, 5, 5
-	song gUnknown_9FB37FC, 5, 5
-	song gUnknown_9FB384C, 5, 5
-	song gUnknown_9FB39C0, 5, 5
-	song gUnknown_9FB3A3C, 5, 5
-	song gUnknown_9FB3A9C, 5, 5
-	song gUnknown_9FB3AF4, 5, 5
-	song gUnknown_9FB3C08, 5, 5
-	song gUnknown_9FB3CB0, 5, 5
-	song gUnknown_9FB3D0C, 5, 5
-	song gUnknown_9FB3D5C, 5, 5
-	song gUnknown_9FB3DB0, 5, 5
-	song gUnknown_9FB3E24, 5, 5
-	song gUnknown_9FB3F60, 5, 5
-	song gUnknown_9FB400C, 5, 5
-	song gUnknown_9FB4094, 5, 5
-	song gUnknown_9FB411C, 5, 5
-	song gUnknown_9FB4230, 5, 5
-	song gUnknown_9FB4324, 5, 5
-	song gUnknown_9FB4350, 5, 5
-	song gUnknown_9FB43D0, 5, 5
-	song gUnknown_9FB44E0, 5, 5
-	song gUnknown_9FB4554, 5, 5
-	song gUnknown_9FB45B0, 5, 5
-	song gUnknown_9FB4658, 5, 5
-	song gUnknown_9FB46D4, 5, 5
-	song gUnknown_9FB4750, 5, 5
-	song gUnknown_9FB47C4, 5, 5
-	song gUnknown_9FB4820, 5, 5
-	song gUnknown_9FB4874, 5, 5
-	song gUnknown_9FB48B8, 5, 5
-	song gUnknown_9FB4910, 5, 5
-	song gUnknown_9FB497C, 5, 5
-	song gUnknown_9FB49E4, 5, 5
-	song gUnknown_9FB4A4C, 5, 5
-	song gUnknown_9FB4AF0, 5, 5
-	song gUnknown_9FB4B84, 5, 5
-	song gUnknown_9FB4BE8, 5, 5
-	song gUnknown_9FB4C58, 5, 5
-	song gUnknown_9FB4D44, 5, 5
-	song gUnknown_9FB4E88, 5, 5
-	song gUnknown_9FB4EDC, 5, 5
-	song gUnknown_9FB4F94, 5, 5
-	song gUnknown_9FB508C, 5, 5
-	song gUnknown_9FB5140, 5, 5
-	song gUnknown_9FB51A8, 5, 5
-	song gUnknown_9FB5208, 5, 5
-	song gUnknown_9FB5294, 5, 5
-	song gUnknown_9FB534C, 5, 5
-	song gUnknown_9FB53B0, 5, 5
-	song gUnknown_9FB54DC, 5, 5
-	song gUnknown_9FB55B0, 5, 5
-	song gUnknown_9FB5688, 5, 5
-	song gUnknown_9FB56DC, 5, 5
-	song gUnknown_9FB5730, 5, 5
-	song gUnknown_9FB57B8, 5, 5
-	song gUnknown_9FB57EC, 5, 5
-	song gUnknown_9FB5864, 5, 5
-	song gUnknown_9FB5898, 5, 5
-	song gUnknown_9FB58FC, 5, 5
-	song gUnknown_9FB59DC, 5, 5
-	song gUnknown_9FB5A64, 5, 5
-	song gUnknown_9FB5AB0, 5, 5
-	song gUnknown_9FB5B10, 5, 5
-	song gUnknown_9FB5B98, 5, 5
-	song gUnknown_9FB5CBC, 5, 5
-	song gUnknown_9FB5D24, 5, 5
-	song gUnknown_9FB5DD0, 5, 5
-	song gUnknown_9FB5E88, 5, 5
-	song gUnknown_9FB5ED4, 5, 5
-	song gUnknown_9FB5EFC, 5, 5
-	song gUnknown_9FB5F6C, 2, 2
-	song gUnknown_9FB5FD4, 5, 5
-	song gUnknown_9FB60A8, 5, 5
-	song gUnknown_9FB617C, 5, 5
-	song gUnknown_9FB6210, 5, 5
-	song gUnknown_9FB62A4, 5, 5
-	song gUnknown_9FB62EC, 5, 5
-	song gUnknown_9FB63C4, 5, 5
-	song gUnknown_9FB6440, 5, 5
-	song gUnknown_9FB6484, 5, 5
-	song gUnknown_9FB663C, 5, 5
-	song gUnknown_9FB6740, 5, 5
-	song gUnknown_9FB67C0, 5, 5
-	song gUnknown_9FB6830, 5, 5
-	song gUnknown_9FB68D8, 5, 5
-	song gUnknown_9FB696C, 5, 5
-	song gUnknown_9FB69D4, 5, 5
-	song gUnknown_9FB6A58, 5, 5
-	song gUnknown_9FB6AF8, 5, 5
-	song gUnknown_9FB6B28, 5, 5
-	song gUnknown_9FB6B70, 5, 5
-	song gUnknown_9FB6C30, 5, 5
-	song gUnknown_9FB6C94, 5, 5
-	song gUnknown_9FB6D40, 5, 5
-	song gUnknown_9FB6DB0, 5, 5
-	song gUnknown_9FB6E88, 5, 5
-	song gUnknown_9FB703C, 5, 5
-	song gUnknown_9FB71F0, 5, 5
-	song gUnknown_9FB73A8, 5, 5
-	song gUnknown_9FB7464, 5, 5
-	song gUnknown_9FB74D8, 5, 5
-	song gUnknown_9FB7534, 5, 5
-	song gUnknown_9FB7658, 5, 5
-	song gUnknown_9FB7688, 5, 5
-	song gUnknown_9FB7708, 5, 5
-	song gUnknown_9FB7798, 5, 5
-	song gUnknown_9FB77D8, 5, 5
-	song gUnknown_9FB78F0, 5, 5
-	song gUnknown_9FB792C, 5, 5
-	song gUnknown_9FB79F0, 5, 5
-	song gUnknown_9FB7AA8, 5, 5
-	song gUnknown_9FB7B88, 2, 2
-	song gUnknown_9FB7CDC, 5, 5
-	song gUnknown_9FB7DA0, 5, 5
-	song gUnknown_9FB7E28, 5, 5
-	song gUnknown_9FB7EC4, 5, 5
-	song gUnknown_9FB7F5C, 5, 5
-	song gUnknown_9FB8074, 5, 5
-	song gUnknown_9FB8150, 5, 5
-	song gUnknown_9FB82B8, 5, 5
-	song gUnknown_9FB834C, 5, 5
-	song gUnknown_9FB85C0, 5, 5
-	song gUnknown_9FB8670, 5, 5
-	song gUnknown_9FB86C8, 5, 5
-	song gUnknown_9FB87C4, 5, 5
-	song gUnknown_9FB880C, 5, 5
-	song gUnknown_9FB8884, 5, 5
-	song gUnknown_9FB893C, 5, 5
-	song gUnknown_9FB8B48, 5, 5
-	song gUnknown_9FB8C5C, 5, 5
-	song gUnknown_9FB8D14, 5, 5
-	song gUnknown_9FB8D54, 5, 5
-	song gUnknown_9FB8DF0, 5, 5
-	song gUnknown_9FB8E40, 5, 5
-	song gUnknown_9FB8F18, 5, 5
-	song gUnknown_9FB8F68, 5, 5
-	song gUnknown_9FB9000, 5, 5
-	song gUnknown_9FB9070, 5, 5
-	song gUnknown_9FB90E0, 5, 5
-	song gUnknown_9FB9150, 5, 5
-	song gUnknown_9FB9244, 5, 5
-	song gUnknown_9FB9388, 5, 5
-	song gUnknown_9FB93B4, 5, 5
-	song gUnknown_9FB943C, 5, 5
-	song gUnknown_9FB9528, 5, 5
-	song gUnknown_9FB955C, 5, 5
-	song gUnknown_9FB9568, 5, 5
-	song gUnknown_9FB961C, 5, 5
-	song gUnknown_9E8841C, 0, 0
-	song gUnknown_9FB965C, 5, 5
-	song gUnknown_9FB96B4, 5, 5
-	song gUnknown_9FB9764, 5, 5
-	song gUnknown_9FB97B8, 5, 5
-	song gUnknown_9FB97F8, 5, 5
-	song gUnknown_9FB9854, 5, 5
-	song gUnknown_9FB988C, 5, 5
-	song gUnknown_9FB9984, 5, 5
-	song gUnknown_9FB9A68, 5, 5
-	song gUnknown_9FB9AB0, 5, 5
-	song gUnknown_9FB9AF8, 5, 5
-	song gUnknown_9FB9BD0, 5, 5
-	song gUnknown_9FB9C54, 5, 5
-	song gUnknown_9FB9D58, 5, 5
-	song gUnknown_9FB9D9C, 5, 5
-	song gUnknown_9FB9DFC, 5, 5
-	song gUnknown_9FB9E60, 5, 5
-	song gUnknown_9FB9EBC, 5, 5
-	song gUnknown_9FB9F34, 5, 5
-	song gUnknown_9FBA014, 5, 5
-	song gUnknown_9FBA07C, 5, 5
-	song gUnknown_9FBA110, 5, 5
-	song gUnknown_9FBA178, 5, 5
-	song gUnknown_9FBA270, 5, 5
-	song gUnknown_9FBA31C, 5, 5
-	song gUnknown_9FBA3C8, 5, 5
-	song gUnknown_9FBA4B0, 5, 5
-	song gUnknown_9FBA508, 5, 5
-	song gUnknown_9FBA54C, 5, 5
-	song gUnknown_9FBA5C0, 5, 5
-	song gUnknown_9FBA638, 5, 5
-	song gUnknown_9FBA728, 5, 5
-	song gUnknown_9FBA7A4, 5, 5
-	song gUnknown_9FBA868, 5, 5
-	song gUnknown_9FBA928, 5, 5
-	song gUnknown_9FBA9A0, 5, 5
-	song gUnknown_9FBAA34, 5, 5
-	song gUnknown_9FBAA78, 5, 5
-	song gUnknown_9FBAAD4, 5, 5
-	song gUnknown_9FBAB48, 5, 5
-	song gUnknown_9FBAC60, 5, 5
-	song gUnknown_9FBACB0, 5, 5
-	song gUnknown_9FBAD68, 5, 5
-	song gUnknown_9FBADDC, 5, 5
-	song gUnknown_9FBAE50, 5, 5
-	song gUnknown_9FBAEC8, 5, 5
-	song gUnknown_9FBAF40, 5, 5
-	song gUnknown_9FBAF80, 5, 5
-	song gUnknown_9FBAFDC, 5, 5
-	song gUnknown_9FBB0B4, 5, 5
-	song gUnknown_9FBB110, 5, 5
-	song gUnknown_9FBB364, 5, 5
-	song gUnknown_9FBB454, 5, 5
-	song gUnknown_9FBB56C, 5, 5
-	song gUnknown_9FBB660, 5, 5
-	song gUnknown_9FBB754, 5, 5
-	song gUnknown_9FBB7FC, 5, 5
-	song gUnknown_9FBB848, 5, 5
-	song gUnknown_9FBB894, 5, 5
-	song gUnknown_9FBB90C, 5, 5
-	song gUnknown_9FBB9DC, 5, 5
-	song gUnknown_9FBBA20, 5, 5
-	song gUnknown_9FBBA58, 5, 5
-	song gUnknown_9FBBAC8, 5, 5
-	song gUnknown_9FBBB38, 5, 5
-	song gUnknown_9FBBB74, 5, 5
-	song gUnknown_9FBBC20, 5, 5
-	song gUnknown_9FBBC58, 5, 5
-	song gUnknown_9FBBD08, 5, 5
-	song gUnknown_9FBBD54, 5, 5
-	song gUnknown_9FBBEB4, 5, 5
-	song gUnknown_9FBBF44, 5, 5
-	song gUnknown_9FBBF80, 5, 5
-	song gUnknown_9FBBFC8, 5, 5
-	song gUnknown_9FBC080, 5, 5
-	song gUnknown_9FBC0C8, 5, 5
-	song gUnknown_9FBC0F4, 5, 5
-	song gUnknown_9FBC140, 2, 2
-	song gUnknown_9FBC178, 5, 5
-	song gUnknown_9FBC1B0, 5, 5
-	song gUnknown_9FBC1EC, 5, 5
-	song gUnknown_9FBC25C, 5, 5
-	song gUnknown_9FBC340, 5, 5
-	song gUnknown_9FBC37C, 5, 5
-	song gUnknown_9FBC3AC, 5, 5
-	song gUnknown_9FBC464, 5, 5
-	song gUnknown_9FBC538, 5, 5
-	song gUnknown_9FBC59C, 5, 5
-	song gUnknown_9FBC674, 5, 5
-	song gUnknown_9FBC6D8, 5, 5
-	song gUnknown_9FBC890, 5, 5
-	song gUnknown_9FBC8F4, 5, 5
-	song gUnknown_9FBC990, 5, 5
-	song gUnknown_9FBC9E0, 5, 5
-	song gUnknown_9FBCA38, 2, 2
-	song gUnknown_9FBCA94, 2, 2
-	song gUnknown_9FBCAD4, 2, 2
-	song gUnknown_9FBCB10, 2, 2
-	song gUnknown_9FBCB50, 2, 2
-	song gUnknown_9FBCB8C, 2, 2
-	song gUnknown_9FBCBC4, 3, 3
-	song gUnknown_9FBCBF4, 3, 3
-	song gUnknown_9FBCC30, 2, 2
-	song gUnknown_9FBCC6C, 2, 2
-	song gUnknown_9FBCCB4, 2, 2
-	song gUnknown_9FBCD0C, 5, 5
-	song gUnknown_9FBCD68, 5, 5
-	song gUnknown_9FBCDDC, 5, 5
-	song gUnknown_9FBCE38, 5, 5
-	song gUnknown_9FBCE44, 5, 5
-	song gUnknown_9FBCE4C, 5, 5
-	song gUnknown_9FBCE7C, 5, 5
-	song gUnknown_9FBCEB0, 5, 5
-	song gUnknown_9FBCEDC, 3, 3
-	song gUnknown_9FBCF18, 3, 3
-	song gUnknown_9FBCFA8, 5, 5
-	song gUnknown_9FBCFB4, 3, 3
-	song gUnknown_9FBCFD8, 3, 3
-	song gUnknown_9FBD0E0, 5, 5
-	song gUnknown_9FBD174, 5, 5
-	song gUnknown_9FBD1E4, 6, 6
-	song gUnknown_9FBD218, 6, 6
-	song gUnknown_9FBD268, 2, 2
-	song gUnknown_9FBD2D0, 2, 2
-	song gUnknown_9FBD310, 2, 2
-	song gUnknown_9FBD380, 5, 5
-	song gUnknown_9FBD3B8, 6, 6
-	song gUnknown_9FBD404, 2, 2
-	song gUnknown_9FBD430, 3, 3
-	song gUnknown_9FBD488, 2, 2
-	song gUnknown_9FBD4B4, 2, 2
-	song gUnknown_9FBD4EC, 6, 6
-	song gUnknown_9FBD5C4, 6, 6
+song seq_000,  0,  0
+song seq_001,  0,  0
+song seq_002,  0,  0
+song seq_003,  0,  0
+song seq_004,  0,  0
+song seq_005,  0,  0
+song seq_006,  0,  0
+song seq_007,  0,  0
+song seq_008,  0,  0
+song seq_009,  0,  0
+song seq_010,  0,  0
+song seq_011,  0,  0
+song seq_012,  0,  0
+song seq_013,  0,  0
+song seq_014,  0,  0
+song seq_015,  0,  0
+song seq_016,  0,  0
+song seq_017,  0,  0
+song seq_018,  0,  0
+song seq_019,  0,  0
+song seq_020,  0,  0
+song seq_021,  0,  0
+song seq_022,  0,  0
+song seq_023,  0,  0
+song seq_024,  0,  0
+song seq_025,  0,  0
+song seq_026,  0,  0
+song seq_027,  0,  0
+song seq_028,  0,  0
+song seq_029,  0,  0
+song seq_030,  0,  0
+song seq_031,  0,  0
+song seq_032,  0,  0
+song seq_033,  0,  0
+song seq_034,  0,  0
+song seq_035,  0,  0
+song seq_036,  0,  0
+song seq_037,  0,  0
+song seq_038,  0,  0
+song seq_039,  0,  0
+song seq_040,  0,  0
+song seq_041,  0,  0
+song seq_042,  0,  0
+song seq_043,  0,  0
+song seq_044,  0,  0
+song seq_045,  0,  0
+song seq_046,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_050,  0,  0
+song seq_051,  0,  0
+song seq_052,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_100,  0,  0
+song seq_101,  0,  0
+song seq_102,  0,  0
+song seq_103,  0,  0
+song seq_104,  0,  0
+song seq_105,  0,  0
+song seq_106,  0,  0
+song seq_107,  0,  0
+song seq_108,  0,  0
+song seq_109,  0,  0
+song seq_110,  0,  0
+song seq_111,  0,  0
+song seq_112,  0,  0
+song seq_113,  0,  0
+song seq_114,  0,  0
+song seq_115,  0,  0
+song seq_116,  0,  0
+song seq_117,  0,  0
+song seq_118,  0,  0
+song seq_119,  0,  0
+song seq_120,  0,  0
+song seq_121,  0,  0
+song seq_122,  0,  0
+song seq_123,  0,  0
+song seq_124,  0,  0
+song seq_125,  0,  0
+song seq_126,  0,  0
+song seq_127,  0,  0
+song seq_128,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_200,  1,  1
+song seq_201,  1,  1
+song seq_202,  1,  1
+song seq_203,  1,  1
+song seq_204,  1,  1
+song seq_205,  1,  1
+song seq_206,  1,  1
+song seq_207,  1,  1
+song seq_208,  1,  1
+song seq_047,  0,  0
+song seq_210,  1,  1
+song seq_211,  1,  1
+song seq_212,  1,  1
+song seq_213,  1,  1
+song seq_214,  1,  1
+song seq_215,  1,  1
+song seq_216,  1,  1
+song seq_217,  1,  1
+song seq_218,  1,  1
+song seq_219,  1,  1
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_301,  2,  2
+song seq_302,  2,  2
+song seq_303,  2,  2
+song seq_304,  2,  2
+song seq_305,  4,  4
+song seq_306,  2,  2
+song seq_307,  2,  2
+song seq_308,  2,  2
+song seq_309,  2,  2
+song seq_310,  2,  2
+song seq_311,  2,  2
+song seq_312,  6,  6
+song seq_313,  6,  6
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_330,  2,  2
+song seq_331,  2,  2
+song seq_332,  5,  5
+song seq_333,  3,  3
+song seq_047,  0,  0
+song seq_335,  3,  3
+song seq_336,  3,  3
+song seq_337,  2,  2
+song seq_338,  2,  2
+song seq_339,  2,  2
+song seq_340,  5,  5
+song seq_341,  5,  5
+song seq_342,  2,  2
+song seq_343,  2,  2
+song seq_344,  5,  5
+song seq_345,  3,  3
+song seq_346,  3,  3
+song seq_347,  3,  3
+song seq_348,  3,  3
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_351,  2,  2
+song seq_352,  4,  4
+song seq_353,  3,  3
+song seq_354,  2,  2
+song seq_355,  3,  3
+song seq_356,  2,  2
+song seq_357,  3,  3
+song seq_358,  2,  2
+song seq_359,  3,  3
+song seq_360,  3,  3
+song seq_361,  3,  3
+song seq_362,  2,  2
+song seq_363,  3,  3
+song seq_364,  2,  2
+song seq_365,  3,  3
+song seq_366,  3,  3
+song seq_367,  3,  3
+song seq_368,  2,  2
+song seq_369,  3,  3
+song seq_370,  4,  4
+song seq_371,  5,  5
+song seq_372,  5,  5
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_390,  5,  5
+song seq_391,  5,  5
+song seq_392,  5,  5
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_400,  3,  3
+song seq_401,  6,  6
+song seq_402,  5,  5
+song seq_403,  5,  5
+song seq_404,  2,  2
+song seq_405,  2,  2
+song seq_406,  6,  6
+song seq_407,  6,  6
+song seq_408,  6,  6
+song seq_409,  3,  3
+song seq_410,  3,  3
+song seq_411,  6,  6
+song seq_412,  6,  6
+song seq_413,  6,  6
+song seq_414,  6,  6
+song seq_415,  6,  6
+song seq_416,  6,  6
+song seq_417,  6,  6
+song seq_418,  6,  6
+song seq_419,  2,  2
+song seq_420,  3,  3
+song seq_421,  5,  5
+song seq_422,  5,  5
+song seq_423,  5,  5
+song seq_424,  5,  5
+song seq_425,  5,  5
+song seq_426,  5,  5
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_450,  3,  3
+song seq_451,  3,  3
+song seq_452,  3,  3
+song seq_453,  3,  3
+song seq_454,  4,  4
+song seq_455,  2,  2
+song seq_456,  5,  5
+song seq_457,  2,  2
+song seq_458,  2,  2
+song seq_459,  5,  5
+song seq_460,  3,  3
+song seq_461,  5,  5
+song seq_462,  5,  5
+song seq_463,  2,  2
+song seq_464,  5,  5
+song seq_465,  2,  2
+song seq_466,  5,  5
+song seq_467,  5,  5
+song seq_468,  2,  2
+song seq_469,  2,  2
+song seq_470,  2,  2
+song seq_471,  2,  2
+song seq_472,  2,  2
+song seq_473,  5,  5
+song seq_474,  5,  5
+song seq_475,  5,  5
+song seq_476,  5,  5
+song seq_477,  5,  5
+song seq_478,  5,  5
+song seq_479,  5,  5
+song seq_480,  5,  5
+song seq_481,  5,  5
+song seq_482,  5,  5
+song seq_483,  5,  5
+song seq_484,  5,  5
+song seq_485,  5,  5
+song seq_486,  4,  4
+song seq_487,  5,  5
+song seq_488,  5,  5
+song seq_489,  5,  5
+song seq_490,  5,  5
+song seq_491,  5,  5
+song seq_492,  5,  5
+song seq_493,  5,  5
+song seq_494,  5,  5
+song seq_495,  5,  5
+song seq_047,  0,  0
+song seq_497,  3,  3
+song seq_498,  3,  3
+song seq_499,  5,  5
+song seq_500,  5,  5
+song seq_501,  5,  5
+song seq_502,  5,  5
+song seq_503,  5,  5
+song seq_504,  5,  5
+song seq_505,  5,  5
+song seq_506,  5,  5
+song seq_507,  5,  5
+song seq_508,  5,  5
+song seq_509,  5,  5
+song seq_510,  2,  2
+song seq_511,  5,  5
+song seq_512,  3,  3
+song seq_513,  5,  5
+song seq_514,  5,  5
+song seq_515,  3,  3
+song seq_516,  5,  5
+song seq_517,  5,  5
+song seq_518,  5,  5
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_047,  0,  0
+song seq_600,  5,  5
+song seq_601,  5,  5
+song seq_602,  5,  5
+song seq_603,  5,  5
+song seq_604,  5,  5
+song seq_605,  5,  5
+song seq_606,  5,  5
+song seq_607,  3,  3
+song seq_608,  3,  3
+song seq_609,  3,  3
+song seq_610,  3,  3
+song seq_611,  5,  5
+song seq_612,  2,  2
+song seq_613,  2,  2
+song seq_614,  5,  5
+song seq_615,  5,  5
+song seq_616,  5,  5
+song seq_617,  5,  5
+song seq_618,  5,  5
+song seq_619,  5,  5
+song seq_620,  5,  5
+song seq_621,  5,  5
+song seq_622,  5,  5
+song seq_623,  5,  5
+song seq_624,  5,  5
+song seq_625,  5,  5
+song seq_626,  5,  5
+song seq_627,  5,  5
+song seq_628,  5,  5
+song seq_629,  5,  5
+song seq_630,  5,  5
+song seq_631,  5,  5
+song seq_632,  5,  5
+song seq_633,  5,  5
+song seq_634,  5,  5
+song seq_635,  5,  5
+song seq_636,  5,  5
+song seq_637,  5,  5
+song seq_638,  5,  5
+song seq_639,  5,  5
+song seq_640,  5,  5
+song seq_641,  5,  5
+song seq_642,  5,  5
+song seq_643,  5,  5
+song seq_644,  5,  5
+song seq_645,  5,  5
+song seq_646,  5,  5
+song seq_647,  5,  5
+song seq_648,  5,  5
+song seq_649,  5,  5
+song seq_650,  5,  5
+song seq_651,  5,  5
+song seq_652,  5,  5
+song seq_653,  5,  5
+song seq_654,  5,  5
+song seq_655,  5,  5
+song seq_656,  5,  5
+song seq_657,  5,  5
+song seq_658,  5,  5
+song seq_659,  5,  5
+song seq_660,  5,  5
+song seq_661,  5,  5
+song seq_662,  5,  5
+song seq_663,  5,  5
+song seq_664,  5,  5
+song seq_665,  5,  5
+song seq_666,  5,  5
+song seq_667,  5,  5
+song seq_668,  5,  5
+song seq_669,  5,  5
+song seq_670,  5,  5
+song seq_671,  5,  5
+song seq_672,  5,  5
+song seq_673,  5,  5
+song seq_674,  5,  5
+song seq_675,  5,  5
+song seq_676,  5,  5
+song seq_677,  5,  5
+song seq_678,  5,  5
+song seq_679,  5,  5
+song seq_680,  5,  5
+song seq_681,  5,  5
+song seq_682,  5,  5
+song seq_683,  5,  5
+song seq_684,  5,  5
+song seq_685,  5,  5
+song seq_686,  5,  5
+song seq_687,  5,  5
+song seq_688,  5,  5
+song seq_689,  5,  5
+song seq_690,  5,  5
+song seq_691,  5,  5
+song seq_692,  5,  5
+song seq_693,  5,  5
+song seq_694,  5,  5
+song seq_695,  5,  5
+song seq_696,  5,  5
+song seq_697,  5,  5
+song seq_698,  5,  5
+song seq_699,  5,  5
+song seq_700,  5,  5
+song seq_701,  5,  5
+song seq_702,  5,  5
+song seq_703,  5,  5
+song seq_704,  5,  5
+song seq_705,  5,  5
+song seq_706,  5,  5
+song seq_707,  5,  5
+song seq_708,  5,  5
+song seq_709,  5,  5
+song seq_710,  5,  5
+song seq_711,  5,  5
+song seq_712,  5,  5
+song seq_713,  5,  5
+song seq_714,  5,  5
+song seq_715,  5,  5
+song seq_716,  5,  5
+song seq_717,  5,  5
+song seq_718,  5,  5
+song seq_719,  5,  5
+song seq_720,  5,  5
+song seq_721,  5,  5
+song seq_722,  5,  5
+song seq_723,  5,  5
+song seq_724,  5,  5
+song seq_725,  5,  5
+song seq_726,  5,  5
+song seq_727,  5,  5
+song seq_728,  2,  2
+song seq_729,  5,  5
+song seq_730,  5,  5
+song seq_731,  5,  5
+song seq_732,  5,  5
+song seq_733,  5,  5
+song seq_734,  5,  5
+song seq_735,  5,  5
+song seq_736,  5,  5
+song seq_737,  5,  5
+song seq_738,  5,  5
+song seq_739,  5,  5
+song seq_740,  5,  5
+song seq_741,  5,  5
+song seq_742,  5,  5
+song seq_743,  5,  5
+song seq_744,  5,  5
+song seq_745,  5,  5
+song seq_746,  5,  5
+song seq_747,  5,  5
+song seq_748,  5,  5
+song seq_749,  5,  5
+song seq_750,  5,  5
+song seq_751,  5,  5
+song seq_752,  5,  5
+song seq_753,  5,  5
+song seq_754,  5,  5
+song seq_755,  5,  5
+song seq_756,  5,  5
+song seq_757,  5,  5
+song seq_758,  5,  5
+song seq_759,  5,  5
+song seq_760,  5,  5
+song seq_761,  5,  5
+song seq_762,  5,  5
+song seq_763,  5,  5
+song seq_764,  5,  5
+song seq_765,  5,  5
+song seq_766,  5,  5
+song seq_767,  5,  5
+song seq_768,  5,  5
+song seq_769,  2,  2
+song seq_770,  5,  5
+song seq_771,  5,  5
+song seq_772,  5,  5
+song seq_773,  5,  5
+song seq_774,  5,  5
+song seq_775,  5,  5
+song seq_776,  5,  5
+song seq_777,  5,  5
+song seq_778,  5,  5
+song seq_779,  5,  5
+song seq_780,  5,  5
+song seq_781,  5,  5
+song seq_782,  5,  5
+song seq_783,  5,  5
+song seq_784,  5,  5
+song seq_785,  5,  5
+song seq_786,  5,  5
+song seq_787,  5,  5
+song seq_788,  5,  5
+song seq_789,  5,  5
+song seq_790,  5,  5
+song seq_791,  5,  5
+song seq_792,  5,  5
+song seq_793,  5,  5
+song seq_794,  5,  5
+song seq_795,  5,  5
+song seq_796,  5,  5
+song seq_797,  5,  5
+song seq_798,  5,  5
+song seq_799,  5,  5
+song seq_800,  5,  5
+song seq_801,  5,  5
+song seq_802,  5,  5
+song seq_803,  5,  5
+song seq_804,  5,  5
+song seq_805,  5,  5
+song seq_047,  0,  0
+song seq_807,  5,  5
+song seq_808,  5,  5
+song seq_809,  5,  5
+song seq_810,  5,  5
+song seq_811,  5,  5
+song seq_812,  5,  5
+song seq_813,  5,  5
+song seq_814,  5,  5
+song seq_815,  5,  5
+song seq_816,  5,  5
+song seq_817,  5,  5
+song seq_818,  5,  5
+song seq_819,  5,  5
+song seq_820,  5,  5
+song seq_821,  5,  5
+song seq_822,  5,  5
+song seq_823,  5,  5
+song seq_824,  5,  5
+song seq_825,  5,  5
+song seq_826,  5,  5
+song seq_827,  5,  5
+song seq_828,  5,  5
+song seq_829,  5,  5
+song seq_830,  5,  5
+song seq_831,  5,  5
+song seq_832,  5,  5
+song seq_833,  5,  5
+song seq_834,  5,  5
+song seq_835,  5,  5
+song seq_836,  5,  5
+song seq_837,  5,  5
+song seq_838,  5,  5
+song seq_839,  5,  5
+song seq_840,  5,  5
+song seq_841,  5,  5
+song seq_842,  5,  5
+song seq_843,  5,  5
+song seq_844,  5,  5
+song seq_845,  5,  5
+song seq_846,  5,  5
+song seq_847,  5,  5
+song seq_848,  5,  5
+song seq_849,  5,  5
+song seq_850,  5,  5
+song seq_851,  5,  5
+song seq_852,  5,  5
+song seq_853,  5,  5
+song seq_854,  5,  5
+song seq_855,  5,  5
+song seq_856,  5,  5
+song seq_857,  5,  5
+song seq_858,  5,  5
+song seq_859,  5,  5
+song seq_860,  5,  5
+song seq_861,  5,  5
+song seq_862,  5,  5
+song seq_863,  5,  5
+song seq_864,  5,  5
+song seq_865,  5,  5
+song seq_866,  5,  5
+song seq_867,  5,  5
+song seq_868,  5,  5
+song seq_869,  5,  5
+song seq_870,  5,  5
+song seq_871,  5,  5
+song seq_872,  5,  5
+song seq_873,  5,  5
+song seq_874,  5,  5
+song seq_875,  5,  5
+song seq_876,  5,  5
+song seq_877,  5,  5
+song seq_878,  5,  5
+song seq_879,  5,  5
+song seq_880,  5,  5
+song seq_881,  5,  5
+song seq_882,  5,  5
+song seq_883,  5,  5
+song seq_884,  2,  2
+song seq_885,  5,  5
+song seq_886,  5,  5
+song seq_887,  5,  5
+song seq_888,  5,  5
+song seq_889,  5,  5
+song seq_890,  5,  5
+song seq_891,  5,  5
+song seq_892,  5,  5
+song seq_893,  5,  5
+song seq_894,  5,  5
+song seq_895,  5,  5
+song seq_896,  5,  5
+song seq_897,  5,  5
+song seq_898,  5,  5
+song seq_899,  5,  5
+song seq_900,  5,  5
+song seq_901,  2,  2
+song seq_902,  2,  2
+song seq_903,  2,  2
+song seq_904,  2,  2
+song seq_905,  2,  2
+song seq_906,  2,  2
+song seq_907,  3,  3
+song seq_908,  3,  3
+song seq_909,  2,  2
+song seq_910,  2,  2
+song seq_911,  2,  2
+song seq_912,  5,  5
+song seq_913,  5,  5
+song seq_914,  5,  5
+song seq_915,  5,  5
+song seq_916,  5,  5
+song seq_917,  5,  5
+song seq_918,  5,  5
+song seq_919,  5,  5
+song seq_920,  3,  3
+song seq_921,  3,  3
+song seq_922,  5,  5
+song seq_923,  3,  3
+song seq_924,  3,  3
+song seq_925,  5,  5
+song seq_926,  5,  5
+song seq_927,  6,  6
+song seq_928,  6,  6
+song seq_929,  2,  2
+song seq_930,  2,  2
+song seq_931,  2,  2
+song seq_932,  5,  5
+song seq_933,  6,  6
+song seq_934,  2,  2
+song seq_935,  3,  3
+song seq_936,  2,  2
+song seq_937,  2,  2
+song seq_938,  6,  6
+song seq_939,  6,  6
