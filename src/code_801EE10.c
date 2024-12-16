@@ -284,7 +284,7 @@ void sub_801F280(bool8 param_1)
 
     CallPrepareTextbox_8008C54(gUnknown_203B270->unk50);
     sub_80073B8(gUnknown_203B270->unk50);
-    sub_80922B4(buffer,gUnknown_203B270->pokeStruct->name,10);
+    sub_80922B4(buffer,gUnknown_203B270->pokeStruct->name,POKEMON_NAME_LENGTH);
     strcpy(gFormatBuffer_Monsters[0],buffer);
     PrintFormattedStringOnWindow(0xc,0,gUnknown_80DC28C,gUnknown_203B270->unk50,0); // Move: {COLOR_1 YELLOW}{ARG_POKEMON_0){END_COLOR_TEXT_1}
 
