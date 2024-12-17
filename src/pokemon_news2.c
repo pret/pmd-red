@@ -5,7 +5,7 @@
 #include "game_options.h"
 #include "input.h"
 #include "pokemon_mail.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "pokemon_news2.h"
 #include "memory.h"
 #include "menu_input.h"

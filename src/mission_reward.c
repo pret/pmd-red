@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "code_802F204.h"
 #include "pokemon.h"
-#include "pokemon_mid.h"
 #include "rescue_team_info.h"
 #include "friend_area.h"
 #include "input.h"

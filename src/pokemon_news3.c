@@ -11,7 +11,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_mail.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "pokemon_news3.h"
 #include "structs/str_802C39C.h"
 #include "text.h"

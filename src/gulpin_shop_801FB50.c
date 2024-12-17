@@ -16,7 +16,7 @@
 #include "menu_input.h"
 #include "moves.h"
 #include "pokemon_3.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "text.h"
 
 EWRAM_INIT unkStruct_203B27C *gUnknown_203B27C = {NULL};

@@ -131,8 +131,6 @@ SECTIONS {
         src/hints_menu2.o(.text);
         src/gulpin_shop.o(.text);
         src/code_801EE10.o(.text);
-        asm/code_801EE10.o(.text);
-        src/code_801EE10_mid.o(.text);
         src/code_801F428.o(.text);
         src/code_801F808.o(.text);
         src/gulpin_shop_801FB50.o(.text);
@@ -292,11 +290,8 @@ SECTIONS {
         src/code_80869E4.o(.text);
         src/dungeon_cutscenes.o(.text);
         src/pokemon.o(.text);
-        asm/pokemon.o(.text);
-        src/pokemon_mid.o(.text);
         asm/pokemon_2.o(.text);
         src/pokemon_3.o(.text);
-        asm/pokemon_3.o(.text);
         src/dungeon.o(.text);
         asm/dungeon_2.o(.text);
         src/dungeon_2_1.o(.text);
@@ -555,8 +550,13 @@ SECTIONS {
         data/data_8107010.o(.rodata);
         src/dungeon_serializer.o(.rodata);
         data/data_8107224.o(.rodata);
+        src/pokemon.o(.rodata);
+        data/data_81076E4.o(.rodata);
         src/game_options.o(.rodata);
-        data/data_8109964.o(.rodata);
+        src/code_8094D28.o(.rodata);
+        src/play_time.o(.rodata);
+        src/code_8094F88.o(.rodata);
+        src/code_80958E8.o(.rodata);
         src/code_80972F4.o(.rodata);
         src/code_8097504.o(.rodata);
         data/data_8109D10.o(.rodata);

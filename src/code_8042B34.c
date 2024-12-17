@@ -2,6 +2,7 @@
 #include "dungeon_util_1.h"
 #include "memory.h"
 #include "structs/rgb.h"
+#include "structs/str_dungeon_8042F6C.h"
 #include "code_803E46C.h"
 #include "code_800E9E4.h"
 #include "code_800DAC0.h"
@@ -26,7 +27,7 @@
 #include "code_803E668.h"
 #include "dungeon_engine.h"
 #include "dungeon_map_access.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "weather.h"
 #include "moves.h"
 #include "code_8094F88.h"
@@ -253,35 +254,6 @@ void sub_8042EC8(Entity *a0, s32 a1)
 
 extern u8 gUnknown_203B40C;
 
-struct Substruct_xxx_dungeon_8042F6C
-{
-    DungeonLocation a0;
-    u32 a4;
-};
-
-struct UnkStruct_xxx_dungeon_8042F6C
-{
-    u8 unk0;
-    DungeonLocation unk4;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
-    u8 unkF;
-    u8 unk10;
-    u8 unk11;
-    unkStruct_Dungeon64C unk14;
-    PokemonStruct1 unk1C;
-    u8 *unk74;
-    Dungeon *unk78;
-    s16 unk7C;
-    u8 unk7E;
-    DungeonLocation unk80;
-    struct Substruct_xxx_dungeon_8042F6C unk84;
-};
 
 extern void sub_8040094(u8 r0);
 extern void sub_8068BDC(u8 r0);
@@ -918,8 +890,8 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
                 r8->unk7C = -2;
                 memset(&r8->unk84, 0, sizeof(r8->unk84));
                 r8->unk80 = gDungeon->unk644.dungeonLocation;
-                r8->unk84.a0 = gDungeon->unk644.dungeonLocation;
-                r8->unk84.a4 = gDungeon->unk644.unk38;
+                r8->unk84.dungeon = gDungeon->unk644.dungeonLocation;
+                r8->unk84.seed = gDungeon->unk644.unk38;
 
             }
             else {

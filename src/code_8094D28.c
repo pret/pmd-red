@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 
 IWRAM_DATA u32 gUnknown_3001198[0x270] = {0};
 EWRAM_INIT s32 gUnknown_203B470 = 0x271;

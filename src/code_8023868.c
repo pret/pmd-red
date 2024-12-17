@@ -3,7 +3,6 @@
 #include "code_800D090.h"
 #include "code_8023868.h"
 #include "pokemon.h"
-#include "pokemon_mid.h"
 #include "structs/str_text.h"
 #include "text_util.h"
 
