@@ -4,6 +4,8 @@
 	.section .rodata
 	.global	drums_001
 	.align	2
+	
+	.equ	_c_v_,	0xC0 @ c_v from MPlayDef.s does not match
 
 drums_001:
 
@@ -120,7 +122,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_058
 	.byte	255, 0, 255, 216
 
@@ -129,7 +131,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_059
 	.byte	255, 0, 255, 216
 
@@ -138,7 +140,7 @@ drums_001:
 	.byte	DirectSound
 	.byte	Fs3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_060
 	.byte	255, 0, 255, 216
 
@@ -147,7 +149,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_061
 	.byte	255, 0, 255, 216
 
@@ -156,7 +158,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_062
 	.byte	255, 0, 255, 216
 
@@ -165,7 +167,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_063
 	.byte	255, 0, 255, 216
 
@@ -183,7 +185,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_064
 	.byte	255, 0, 255, 127
 
@@ -201,7 +203,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_065
 	.byte	255, 0, 255, 165
 
@@ -282,7 +284,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_066
 	.byte	255, 0, 255, 216
 
@@ -345,7 +347,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v-20
+	.byte	_c_v_-20
 	.word	wave_067
 	.byte	255, 0, 255, 204
 
@@ -354,7 +356,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+20
+	.byte	_c_v_+20
 	.word	wave_068
 	.byte	255, 0, 255, 204
 
@@ -363,7 +365,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v-20
+	.byte	_c_v_-20
 	.word	wave_069
 	.byte	255, 0, 255, 204
 
@@ -372,7 +374,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+20
+	.byte	_c_v_+20
 	.word	wave_070
 	.byte	255, 0, 255, 204
 
@@ -381,7 +383,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+20
+	.byte	_c_v_+20
 	.word	wave_071
 	.byte	255, 0, 255, 216
 
@@ -390,7 +392,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_055
 	.byte	255, 0, 255, 216
 
@@ -399,7 +401,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+20
+	.byte	_c_v_+20
 	.word	wave_072
 	.byte	255, 0, 255, 216
 
@@ -408,7 +410,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v-20
+	.byte	_c_v_-20
 	.word	wave_073
 	.byte	255, 0, 255, 216
 
@@ -426,7 +428,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_074
 	.byte	255, 0, 255, 216
 
@@ -435,7 +437,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v-20
+	.byte	_c_v_-20
 	.word	wave_075
 	.byte	255, 0, 255, 216
 
@@ -516,7 +518,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_076
 	.byte	255, 249, 0, 216
 
@@ -525,7 +527,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_077
 	.byte	255, 226, 0, 216
 
@@ -660,7 +662,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_058
 	.byte	255, 0, 255, 216
 
@@ -669,7 +671,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_059
 	.byte	255, 0, 255, 216
 
@@ -678,7 +680,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_078
 	.byte	255, 0, 255, 216
 
@@ -687,7 +689,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_064
 	.byte	255, 0, 255, 127
 
@@ -696,7 +698,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_079
 	.byte	255, 0, 255, 216
 
@@ -705,7 +707,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_080
 	.byte	255, 0, 255, 216
 
@@ -723,7 +725,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Gs3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_081
 	.byte	255, 0, 255, 216
 
@@ -750,7 +752,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Gs3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_061
 	.byte	255, 0, 255, 216
 
@@ -768,7 +770,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Gs3 
 	.byte	0x00
-	.byte	c_v-30
+	.byte	_c_v_-30
 	.word	wave_082
 	.byte	64, 226, 0, 0
 
@@ -777,7 +779,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Gs3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_082
 	.byte	255, 226, 0, 0
 
@@ -786,7 +788,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Gs3 
 	.byte	0x00
-	.byte	c_v+30
+	.byte	_c_v_+30
 	.word	wave_082
 	.byte	64, 226, 0, 0
 
@@ -822,7 +824,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_066
 	.byte	255, 0, 255, 216
 
@@ -840,7 +842,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_083
 	.byte	255, 0, 255, 216
 
@@ -858,7 +860,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_071
 	.byte	255, 0, 255, 216
 
@@ -885,7 +887,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v-20
+	.byte	_c_v_-20
 	.word	wave_067
 	.byte	255, 0, 255, 204
 
@@ -894,7 +896,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+20
+	.byte	_c_v_+20
 	.word	wave_068
 	.byte	255, 0, 255, 204
 
@@ -903,7 +905,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v-20
+	.byte	_c_v_-20
 	.word	wave_069
 	.byte	255, 0, 255, 204
 
@@ -912,7 +914,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+20
+	.byte	_c_v_+20
 	.word	wave_070
 	.byte	255, 0, 255, 204
 
@@ -921,7 +923,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_056
 	.byte	255, 0, 255, 216
 
@@ -930,7 +932,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_057
 	.byte	255, 0, 255, 127
 
@@ -939,7 +941,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_084
 	.byte	255, 0, 255, 0
 
@@ -975,7 +977,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_055
 	.byte	255, 0, 255, 216
 
@@ -984,7 +986,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v-20
+	.byte	_c_v_-20
 	.word	wave_072
 	.byte	255, 0, 255, 216
 
@@ -1011,7 +1013,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+20
+	.byte	_c_v_+20
 	.word	wave_073
 	.byte	255, 0, 255, 216
 
@@ -1029,7 +1031,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_074
 	.byte	255, 0, 255, 216
 
@@ -1056,7 +1058,7 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_076
 	.byte	255, 249, 0, 165
 
@@ -1065,99 +1067,6 @@ drums_001:
 	.byte	DirectSoundFix
 	.byte	Cn3 
 	.byte	0x00
-	.byte	c_v+0
+	.byte	_c_v_+0
 	.word	wave_077
 	.byte	255, 226, 0, 165
-
-@**************** Voice 118 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_016
-	.byte	51, 0, 103, 127
-
-@**************** Voice 119 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_017
-	.byte	51, 0, 103, 127
-
-@**************** Voice 120 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_016
-	.byte	51, 0, 255, 127
-
-@**************** Voice 121 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_017
-	.byte	51, 0, 255, 127
-
-@**************** Voice 122 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_021
-	.byte	64, 0, 255, 149
-
-@**************** Voice 123 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_022
-	.byte	64, 0, 255, 149
-
-@**************** Voice 124 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_023
-	.byte	64, 0, 255, 149
-
-@**************** Voice 125 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_045
-	.byte	255, 249, 128, 216
-
-@**************** Voice 126 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_046
-	.byte	85, 235, 77, 216
-
-@**************** Voice 127 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_047
-	.byte	85, 216, 25, 216
-
-
-

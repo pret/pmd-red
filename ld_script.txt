@@ -793,6 +793,7 @@ SECTIONS {
     sound_data :
     ALIGN(4)
     {
+        src/sound_names.o(.rodata);
         data/sound_data.o(.rodata);
 sound/songs/seq_000.o(.rodata);
 sound/songs/seq_001.o(.rodata);
@@ -1382,9 +1383,13 @@ sound/songs/seq_936.o(.rodata);
 sound/songs/seq_937.o(.rodata);
 sound/songs/seq_938.o(.rodata);
 sound/songs/seq_939.o(.rodata);
-
-        data/sound_data3.o(.rodata);
     }
+	
+	unk_data_9FBD5D0 :
+    ALIGN(4)
+	{
+		data/unk_9fbd5d0.o(.rodata);
+	}
 
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }
