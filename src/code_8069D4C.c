@@ -1,5 +1,5 @@
 #include "global.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "dungeon_util.h"
 #include "code_8069D4C.h"
 

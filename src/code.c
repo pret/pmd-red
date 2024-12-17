@@ -1,16 +1,266 @@
 #include "global.h"
+#include "structs/str_dungeon_8042F6C.h"
+#include "structs/str_wonder_mail.h"
+#include "code_80118A4.h"
+#include "code_80A26CC.h"
+#include "code_8099360.h"
 #include "event_flag.h"
+#include "items.h"
+#include "memory.h"
+#include "personality_test1.h"
+#include "pokemon.h"
+#include "quick_save_read.h"
+#include "quick_save_write.h"
+#include "random.h"
+#include "save.h"
+#include "string_format.h"
+#include "text_util.h"
 
-extern void xxx_dungeon_8042F6C(u32 r0);
 extern void NDS_LoadOverlay_GroundMain();
 extern u32 xxx_script_related_8098468(u32);
+extern u8 sub_80992E0(s16 *, s16 *);
+extern bool8 sub_8099328(u8 *dungeonId);
+extern bool8 sub_8099360(u8 *);
+extern u8 sub_8099394(u8 *);
+extern void GeneratePelipperJobs();
+extern void sub_8043D50(s32 *a0, s32 *a1);
+extern void xxx_update_stuff(u32);
+extern void sub_80961B4();
+extern void sub_808ED00();
+extern void SetDungeonLocationInfo(DungeonLocation *dl);
+extern void sub_808CE74(s16, bool32, u8*);
+
+void xxx_dungeon_8001340(struct UnkStruct_xxx_dungeon_8042F6C *r0);
+void sub_80011E8(u8 *param_1);
+void sub_809542C(WonderMailSub *param_1);
+
+struct unkTalkTable
+{
+    u32 unk0;
+    s16 species;
+};
+
+extern struct unkTalkTable gTalkKindTable[];
+extern struct unkTalkTable gBaseKindTable[];
+
+EWRAM_DATA_2 u32 gUnknown_203B03C = {0};
+EWRAM_DATA_2 struct PersonalityRelated gPersonalityRelated_203B040 = {0};
+
+void SaveLoadRelated_8000EDC(struct UnkStruct_xxx_dungeon_8042F6C *param_1)
+{
+    u8 quickSaveValid;
+    s32 quickSaveStatus;
+    s32 local_1c; // 0x4800
+    s32 local_18; // sizeof(Dungeon)
+
+    quickSaveValid = TRUE;
+    gUnknown_203B03C = 1;
+    sub_800A8F8(3);
+    sub_8014144();
+    sub_8043D50(&local_1c,&local_18);
+    param_1->unk74 =  MemoryAlloc(local_1c,7); // size: 0x4800
+    param_1->unk78 = MemoryAlloc(local_18,7); // size: sizeof(Dungeon)
+    if (param_1->unk8) {
+        PrepareQuickSaveRead(param_1->unk74,local_1c);
+        while( TRUE ) {
+            if (!ReadQuickSave()) break;
+            xxx_update_stuff(0);
+        }
+        quickSaveValid = IsQuickSaveValid();
+        FinishQuickSaveRead();
+        sub_8011830();
+        if (quickSaveValid) {
+            sub_80121E0(0xf1208);
+        }
+        else {
+            sub_80121E0(0xf1209);
+        }
+        xxx_call_start_bg_music();
+    }
+    else {
+        GeneratePelipperJobs();
+        sub_80961B4();
+        sub_808ED00();
+    }
+    if (quickSaveValid) {
+        xxx_dungeon_8001340(param_1);
+        sub_8099648();
+        SetWindowBGColor();
+        sub_8099690(0);
+    }
+    else {
+        param_1->unk7C = 5;
+    }
+    if (param_1->unk7C == -2) {
+        sub_809542C(&param_1->unk84);
+    }
+    if ((param_1->unk7C == 3) || (param_1->unk7C == -2)) {
+        SetDungeonLocationInfo(&param_1->unk80);
+        xxx_call_stop_bgm();
+        if (param_1->unk7C == -2) {
+            PrepareQuickSaveWrite(param_1->unk74,local_1c,1);
+        }
+        else {
+            PrepareQuickSaveWrite(param_1->unk74,local_1c,0);
+        }
+        while ((quickSaveStatus = WriteQuickSave(), (quickSaveStatus != 2))) {
+            if (quickSaveStatus == 3) break;
+            if (quickSaveStatus == 1) {
+                MemoryFree(param_1->unk78);
+                MemoryFree(param_1->unk74);
+            }
+            xxx_update_stuff(0);
+        }
+        FinishQuickSaveWrite();
+    }
+    else {
+        sub_808ED00();
+        MemoryFree(param_1->unk78);
+        MemoryFree(param_1->unk74);
+    }
+}
+
+void sub_8001024(struct PersonalityRelated *r0)
+{
+    *r0 = gPersonalityRelated_203B040;
+}
+
+void sub_8001044(struct PersonalityRelated *r0)
+{
+    gPersonalityRelated_203B040 = *r0;
+}
+
+void sub_8001064(void)
+{
+    struct unkTalkTable *psVar2;
+    u8 buffer2 [20];
+    u8 buffer1 [20];
+
+    if (GetPlayerPokemonStruct() == NULL) {
+        if (gPersonalityRelated_203B040.StarterName[0] == '\0') {
+            CopyMonsterNameToBuffer(buffer1,gPersonalityRelated_203B040.StarterID);
+            CopyStringtoBuffer(buffer2,buffer1);
+            sub_808CE74(gPersonalityRelated_203B040.StarterID,TRUE,buffer2);
+        }
+        else {
+            sub_808CE74(gPersonalityRelated_203B040.StarterID,TRUE,gPersonalityRelated_203B040.StarterName);
+        }
+    }
+    if (sub_808D378() == NULL) {
+        if (gPersonalityRelated_203B040.PartnerNick[0] == '\0') {
+            CopyMonsterNameToBuffer(buffer1,gPersonalityRelated_203B040.PartnerID);
+            CopyStringtoBuffer(buffer2,buffer1);
+            sub_808CE74(gPersonalityRelated_203B040.PartnerID,FALSE,buffer2);
+        }
+        else {
+            sub_808CE74(gPersonalityRelated_203B040.PartnerID,FALSE,gPersonalityRelated_203B040.PartnerNick);
+        }
+    }
+    if (gPersonalityRelated_203B040.StarterID != MONSTER_NONE) {
+        psVar2 = &gBaseKindTable[0];
+        while ((psVar2->species != MONSTER_NONE && (gPersonalityRelated_203B040.StarterID != psVar2->species))) {
+            psVar2++;
+        }
+        SetScriptVarValue(NULL,BASE_KIND,psVar2->unk0);
+    }
+    if (gPersonalityRelated_203B040.PartnerID != MONSTER_NONE) {
+        psVar2 = &gTalkKindTable[0];
+        while ((psVar2->species != MONSTER_NONE && (gPersonalityRelated_203B040.PartnerID != psVar2->species))) {
+            psVar2++;
+        }
+        SetScriptVarValue(NULL,PARTNER_TALK_KIND,psVar2->unk0);
+    }
+}
+
+u8 sub_8001170(void)
+{
+    s16 local_10;
+    s16 auStack_e;
+    u8 dungeonID;
+    u8 auStack_b;
+
+    dungeonID = 0x63;
+    if (sub_80992E0(&local_10,&auStack_e) != 0) {
+        dungeonID = sub_80A2740(local_10);
+    }
+    else {
+        if (!sub_8099328(&dungeonID) && (!sub_8099360(&dungeonID) && sub_8099394(&auStack_b) != 0)) {
+            dungeonID = 0x3F;
+        }
+    }
+    return dungeonID;
+}
+
+void sub_80011CC(u8 *param_1,u8 param_2)
+{
+    u32 zero = 0;
+    param_1[0] = param_2;
+    param_1[1] = zero;
+    sub_80011E8(param_1);
+    param_1[0xb] = 0;
+    param_1[4] = 0;
+    param_1[0xc] = 0;
+    param_1[0xd] = 0;
+}
+
+void sub_80011E8(u8 *param_1)
+{
+    param_1[5] = sub_80023E4(8);
+    param_1[6] = sub_80023E4(3);
+    param_1[8] = sub_80023E4(7);
+    param_1[9] = sub_80023E4(0);
+    param_1[10] = sub_80023E4(5);
+    if (sub_80023E4(0x18) && sub_80023E4(0x19) && sub_80023E4(0x1a)) {
+        param_1[7] = 1;
+    }
+    else {
+        param_1[7] = 0;
+    }
+}
+
+void sub_8001248(void)
+{
+    s32 index;
+
+    for(index = 0; index < INVENTORY_SIZE; index++)
+    {
+        if(RandInt(100) < 50)
+            ZeroOutItem(&gTeamInventoryRef->teamItems[index]);
+    }
+    FillInventoryGaps();
+    for(index = 0; index < NUM_MONSTERS; index++)
+    {
+        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[index];
+        if(PokemonFlag1(mon) && PokemonFlag2(mon))
+            mon->heldItem.id = ITEM_NOTHING;
+    }
+    gTeamInventoryRef->teamMoney = 0;
+}
+
+void sub_80012C0(void)
+{
+    s32 index;
+
+    for(index = 0; index < INVENTORY_SIZE; index++)
+    {
+        ZeroOutItem(&gTeamInventoryRef->teamItems[index]);
+    }
+    FillInventoryGaps();
+    for(index = 0; index < NUM_MONSTERS; index++)
+    {
+        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[index];
+        if(PokemonFlag1(mon) && PokemonFlag2(mon))
+            mon->heldItem.id = ITEM_NOTHING;
+    }
+    gTeamInventoryRef->teamMoney = 0;
+}
 
 void NDS_LoadOverlay_GroundMain()
 {
 
 }
 
-void nullsub_2(u32 r0)
+void nullsub_2(struct UnkStruct_xxx_dungeon_8042F6C *r0)
 {
 
 }
@@ -20,7 +270,7 @@ u32 xxx_script_related_8001334(u32 r0)
     return xxx_script_related_8098468(r0);
 }
 
-void xxx_dungeon_8001340(u32 r0)
+void xxx_dungeon_8001340(struct UnkStruct_xxx_dungeon_8042F6C *r0)
 {
     nullsub_2(r0);
     xxx_dungeon_8042F6C(r0);

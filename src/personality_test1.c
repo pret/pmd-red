@@ -273,7 +273,7 @@ static void RevealPersonality(void)
             sPersonalityTestTracker->playerNature = currentNature;
     }
 
-    sPersonalityTestTracker->StarterID = gStarters[sPersonalityTestTracker->playerNature][sPersonalityTestTracker->playerGender];
+    sPersonalityTestTracker->unk4.StarterID = gStarters[sPersonalityTestTracker->playerNature][sPersonalityTestTracker->playerGender];
     PrintPersonalityTypeDescription();
     sPersonalityTestTracker->TestState = PERSONALITY_STARTER_REVEAL;
 }
@@ -313,7 +313,7 @@ static void AdvanceToPartnerSelection(void)
 
 static void CallCreatePartnerSelectionMenu(void)
 {
-    CreatePartnerSelectionMenu(sPersonalityTestTracker->StarterID);
+    CreatePartnerSelectionMenu(sPersonalityTestTracker->unk4.StarterID);
     sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_1;
 }
 
@@ -326,7 +326,7 @@ static void PromptForPartnerNickname(void)
     if (selectedPartner != 0xFFFF) {
         if (selectedPartner != 0xFFFE) {
             sub_803CE6C();
-            sPersonalityTestTracker->PartnerID = selectedPartner;
+            sPersonalityTestTracker->unk4.PartnerID = selectedPartner;
             CreateDialogueBoxAndPortrait(gPartnerNickPrompt, 0, 0, 0x301);
             sPersonalityTestTracker->TestState = PERSONALITY_ADVANCE_TO_PARTNER_NICKNAME_2;
         }
@@ -343,8 +343,8 @@ static void AdvanceToPartnerNicknameScreen(void)
 
 static void NicknamePartner(void)
 {
-    CopyStringtoBuffer(sPersonalityTestTracker->PartnerNick, GetMonSpecies(sPersonalityTestTracker->PartnerID));
-    CreateConfirmNameMenu(3, sPersonalityTestTracker->PartnerNick);
+    CopyStringtoBuffer(sPersonalityTestTracker->unk4.PartnerNick, GetMonSpecies(sPersonalityTestTracker->unk4.PartnerID));
+    CreateConfirmNameMenu(3, sPersonalityTestTracker->unk4.PartnerNick);
     sPersonalityTestTracker->TestState = PERSONALITY_END_INTRO;
 }
 
@@ -375,7 +375,7 @@ static void PromptNewQuestion(void)
 
 static void PrintPersonalityTypeDescription(void)
 {
-    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[0], sPersonalityTestTracker->StarterID);
+    CopyMonsterNameToBuffer(gFormatBuffer_Monsters[0], sPersonalityTestTracker->unk4.StarterID);
     CreateDialogueBoxAndPortrait(sPersonalityTypeDescriptionTable[sPersonalityTestTracker->playerNature], 0, 0, 0x101);
 }
 
@@ -388,7 +388,7 @@ static void PersonalityTest_DisplayStarterSprite(void)
     const u8 *gfx;
     UnkTextStruct2 stackArray[4];
 
-    starterID = sPersonalityTestTracker->StarterID;
+    starterID = sPersonalityTestTracker->unk4.StarterID;
     RestoreUnkTextStruct_8006518(stackArray);
     stackArray[1] = sUnknown_80F4244;
     ResetUnusedInputStruct();

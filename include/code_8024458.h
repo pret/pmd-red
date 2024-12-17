@@ -4,6 +4,7 @@
 #include "structs/menu.h"
 
 #include "structs/str_text.h"
+#include "pokemon_3.h"
 
 struct unkStruct_203B2AC
 {
@@ -11,8 +12,7 @@ struct unkStruct_203B2AC
     u32 unk34[3];
     u8 unk40[0x48 - 0x40];
     s16 speciesNum;
-    u32 unk4C;
-    u8 unk50[0xB0 - 0x50];
+    struct unkStruct_808FF20 unk4C;
     u32 unkB0;
     u8 fillB4[0xE0 - 0xB4];
     u32 unkE0;

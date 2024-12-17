@@ -10,6 +10,7 @@
 #include "constants/status.h"
 #include "constants/type.h"
 #include "constants/weather.h"
+#include "dungeon_engine.h"
 #include "dungeon_leader.h"
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"
@@ -21,7 +22,6 @@
 #include "move_effects_target.h"
 #include "moves.h"
 #include "pokemon.h"
-#include "pokemon_mid.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "text_util.h"
@@ -66,7 +66,6 @@ extern void sub_803F4A0(Entity *a0);
 extern bool8 sub_80860A8(u8 id);
 extern u8 gUnknown_202F32C;
 extern u8 sub_803D73C(s32 a0);
-extern bool8 IsBossFight(void);
 extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_80429E8(Entity *r0);
 extern s32 sub_803DA20(s32 param_1);
@@ -85,7 +84,6 @@ extern void sub_803F580(s32);
 extern void sub_8040A84(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
-extern s32 sub_808F700(PokemonStruct1 *pokemon);
 extern Entity *sub_80696A8(Entity *a0);
 extern int sprintf(char *, const char *, ...);
 extern const u8 gUnknown_8106EA8[]; // talkp%d

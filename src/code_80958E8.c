@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_803C1D0.h"
 #include "code_80958E8.h"
 #include "code_80A26CC.h"
@@ -38,7 +39,7 @@ extern void sub_803C45C(WonderMail *);
 extern void sub_803C610(WonderMail *);
 extern void sub_803C580(WonderMail *);
 
-extern u8 gUnknown_8109984[];
+static const u8 sPossibleMissionTypes[] = {MISSION_TYPE_FRIEND_RESCUE, MISSION_TYPE_FIND_ITEM, MISSION_TYPE_DELIVER_ITEM, MISSION_TYPE_RESCUE_CLIENT, MISSION_TYPE_RESCUE_TARGET, MISSION_TYPE_DELIVER_ITEM, MISSION_TYPE_FIND_ITEM, MISSION_TYPE_FRIEND_RESCUE};
 
 static EWRAM_DATA unkStruct_203B490 sUnknown_2039448 = {0};
 
@@ -187,7 +188,7 @@ bool8 GenerateMailJobInfo(struct WonderMail *mail)
     }
     mail->mailType = MAIL_TYPE_SUSPENDED_JOB;
     rand = RandInt(8);
-    missionType = gUnknown_8109984[rand];
+    missionType = sPossibleMissionTypes[rand];
     mail->missionType = missionType;
     if (missionType == MISSION_TYPE_DELIVER_ITEM && GetRescueTeamRank() == 0) {
         mail->missionType = MISSION_TYPE_FRIEND_RESCUE;

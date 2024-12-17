@@ -81,21 +81,30 @@ OpenedFile *GetDialogueSpriteDataPtr(s32 index);
 s32 GetUnownIndex(s16 index);
 void GenerateHiddenPower(HiddenPower *);
 s32 GetEvolutionSequence(PokemonStruct1 *pokemon, EvolveStage *);
+s32 sub_808E400(s32 _species, s16* _a2, bool32 _bodySizeCheck, bool32 _shedinjaCheck);
+void sub_808E490(Move* a1, s32 species);
 void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 *, PokemonStruct1 *, s32);
 void WritePoke1Bits(DataSerializer *, PokemonStruct1 *pokemon);
 void ReadPoke1Bits(DataSerializer *, PokemonStruct1 *);
 s32 sub_808E218(unkStruct_808E218_arg *, PokemonStruct1 *pokemon);
 void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID);
 void sub_808D0D8(PokemonStruct1 *pokemon);
-
-// pokemon.s
-extern PokemonStruct1 *GetPlayerPokemonStruct(void);
-extern u32 sub_808D1DC(PokemonStruct1*);
-extern PokemonStruct1 *sub_808D378(void);
-extern PokemonStruct1 *sub_808D3BC(void);
-extern PokemonStruct1 *sub_808D3F8(void);
-extern s32 GetUnitSum_808D544(u32);
-extern s32 sub_808D580(s32 *);
+PokemonStruct1 *GetPlayerPokemonStruct(void);
+PokemonStruct1 *sub_808D1DC(PokemonStruct1*);
+PokemonStruct1 *sub_808D378(void);
+PokemonStruct1 *sub_808D3BC(void);
+PokemonStruct1 *sub_808D3F8(void);
+PokemonStruct1 * sub_808D434(s16 species, s32 param_2);
+s32 GetFriendSum_808D480(void);
+bool8 sub_808D4B0(void);
+bool8 sub_808D500(void);
+s32 GetUnitSum_808D544(s32 *);
+s32 sub_808D580(s32 *);
+bool8 ComparePokemonNames(s16, s16);
+void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
+void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level);
+const u8* DecompressMoveID(const u8* a1, u16* moveID);
+bool8 sub_808DA44(s32, u32);
 
 static inline bool8 PokemonFlag1(PokemonStruct1 *mon)
 {
