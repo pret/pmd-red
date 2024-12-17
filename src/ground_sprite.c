@@ -20,7 +20,7 @@ EWRAM_DATA u8 gUnknown_2039DD0 = {0};
 EWRAM_DATA u8 gUnknown_2039DD1[3] = {0, 0, 0}; // Unused, for alignment
 EWRAM_DATA u32 gUnknown_2039DD4 = {0};
 
-EWRAM_DATA_2 OpenedFile *gUnknown_203B4B4 = {0};
+EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 
 // dungeon_sbin.s
 extern const struct FileArchive gDungeonFileArchive;

@@ -78,7 +78,7 @@ u32 sub_8011C1C(void);
 void sub_8011C28(u32 in);
 s32 sub_8011C34(void);
 void sub_8011C40(s32 in);
-char *GetGameInternalName(void);
+const char *GetGameInternalName(void);
 void sub_8011CA8(u32 *out, s32 size);
 u32 ReadSaveFromPak(u32 *a);
 u32 WriteSavetoPak(s32 *param_1, u32 param_2);

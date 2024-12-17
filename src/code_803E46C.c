@@ -16,8 +16,9 @@
 #include "play_time.h"
 #include "sprite.h"
 
-extern u8 gUnknown_203B40C;
-extern u8 gUnknown_203B40D;
+EWRAM_INIT u8 gUnknown_203B40C = 0;
+EWRAM_INIT u8 gUnknown_203B40D = 0;
+
 extern s32 gDungeonBrightness;
 extern s32 gUnknown_202EDCC;
 extern u32 gUnknown_202EDD0;

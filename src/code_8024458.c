@@ -11,7 +11,7 @@
 #include "pokemon_3.h"
 #include "text.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B2AC *sUnknown_203B2AC = {0};
+static EWRAM_INIT struct unkStruct_203B2AC *sUnknown_203B2AC = {NULL};
 
 #include "data/code_8024458.h"
 
@@ -83,13 +83,13 @@ static void sub_8024588(void)
 
 static void sub_80245D0(void)
 {
-    CreatePokemonInfoTabScreen(sUnknown_203B2AC->unk34[sUnknown_203B2AC->input.unk1E], sUnknown_203B2AC->input.unk1E, &sUnknown_203B2AC->unk4C, &sUnknown_203B2AC->unkB0, sUnknown_203B2AC->unkE0);
+    CreatePokemonInfoTabScreen(sUnknown_203B2AC->unk34[sUnknown_203B2AC->input.unk1E], sUnknown_203B2AC->input.unk1E, &sUnknown_203B2AC->unk4C, (u8 *)&sUnknown_203B2AC->unkB0, sUnknown_203B2AC->unkE0);
 }
 
 static void sub_8024604(void)
 {
     PokemonStruct1 *pokeStruct;
-    u32 *iVar3;
+    struct unkStruct_808FF20 *iVar3;
 
     sUnknown_203B2AC->unk34[0] = 2;
     sUnknown_203B2AC->unk34[1] = 3;

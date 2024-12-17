@@ -3,7 +3,7 @@
 #include "dungeon_leader.h"
 #include "dungeon_util.h"
 
-extern Entity *gLeaderPointer;
+EWRAM_INIT Entity *gLeaderPointer = NULL;
 
 Entity* GetLeader(void)
 {

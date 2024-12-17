@@ -25,7 +25,7 @@
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 
-static EWRAM_DATA_2 WonderMailStruct_203B2C4 *sUnknown_203B2C4 = {0};
+static EWRAM_INIT WonderMailStruct_203B2C4 *sUnknown_203B2C4 = {NULL};
 
 #define THANK_YOU_MAIL_MAIN_MENU 0
 #define ANYTHING_ELSE_THANK_YOU_MAIN_MENU 1

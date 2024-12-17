@@ -83,7 +83,7 @@ struct SubStruct_203B198
     u16 unkC; // x3C
     u16 unkE; // x3E
     u16 unk10; // x40
-    u8 fill12[0x48-0x42]; // x42
+    u8 fill12[6]; // x42
 };
 
 struct UnkStruct_203B198
@@ -100,20 +100,45 @@ struct UnkStruct_203B198
     struct SubStruct_203B198 unk48;
 };
 
-extern struct UnkStruct_203B198 gUnknown_203B198;
 extern UnkTextStruct1 gUnknown_2027370[4];
 extern void (*gUnknown_203B088)(s32 a0);
 
-extern const struct SubStruct_203B198 gUnknown_80D48AC;
-extern const struct UnkTextStruct2 gUnknown_80D48DC;
-extern const struct UnkTextStruct2 gUnknown_80D48C4;
-extern const u32 gUnknown_80D48A0[];
-extern const u8 gUnknown_80D48F8[];
-extern const u8 gUnknown_80D4900[];
-extern const u8 gUnknown_80D4904[];
+static const u32 gUnknown_80D48A0[] = {0x7, 0x2, 0x2};
+static const struct SubStruct_203B198 gUnknown_80D48AC = {
+        0x00,
+        0x03,
+        0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00
+
+};
+
+static const UnkTextStruct2 gUnknown_80D48C4 = {
+    0x00, 0x00, 0x00, 0x00,
+    0x00,
+    0x02, 0x0F,
+    0x1A, 0x05,
+    0x07, 0x00,
+    NULL
+};
+
+static const UnkTextStruct2 gUnknown_80D48DC = {
+    0x00, 0x00, 0x00, 0x00,
+    0x02,
+    0x02, 0x08,
+    0x1A, 0x05,
+    0x07, 0x00,
+    NULL
+};
+
+
+ALIGNED(4) static const u8 sSpeakerNameSeparator[] = ": ";
+ALIGNED(4) static const u8 sUnknownTeamName[] = "????";
+ALIGNED(4) static const u8 gUnknown_80D4900[] = "%d";
+ALIGNED(4) static const u8 gUnknown_80D4904[] = "%*d" ;
 extern const u8 gUnknown_80D4908[];
 extern const u8 gUnknown_80D4910[];
-extern const u8 gSpeakerNameSeparator[];
 
 extern void SetCharacterMask(int a0);
 extern void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2);
@@ -177,6 +202,23 @@ static UNUSED EWRAM_DATA u8 sUnusedEwram1[4] = {0};
 
 static EWRAM_DATA MenuInputStructSub gUnknown_202EC28 = {0};
 
+static EWRAM_INIT struct UnkStruct_203B198 sUnknown_203B198 = {
+    .unk0 = {
+        .unk8 = {2, 15},
+        .unkC = 26,
+        .unkE = 5,
+        .unk10 = 7,
+    },
+    .unk18 = 0x40,
+    .unk1C = 7,
+    .unk30 = {
+        .unk4 = 3,
+    },
+    .unk48 = {
+        .unk4 = 3,
+    }
+};
+
 void sub_8014144(void)
 {
     gUnknown_202E744 = 0;
@@ -226,41 +268,41 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     gUnknown_202EC1C = r9;
     sub_801317C(&gUnknown_202EC28);
     if (flags & 0x10) {
-        gUnknown_203B198.unk0 = gUnknown_80D48DC;
+        sUnknown_203B198.unk0 = gUnknown_80D48DC;
     }
     else {
-        gUnknown_203B198.unk0 = gUnknown_80D48C4;
+        sUnknown_203B198.unk0 = gUnknown_80D48C4;
     }
 
-    gUnknown_203B198.unk24 = 0;
-    gUnknown_203B198.unk26 = 0;
-    gUnknown_203B198.unk28 = 0;
-    gUnknown_203B198.unk18 = 0x40;
+    sUnknown_203B198.unk24 = 0;
+    sUnknown_203B198.unk26 = 0;
+    sUnknown_203B198.unk28 = 0;
+    sUnknown_203B198.unk18 = 0x40;
 
     if (monPortraitPtr != NULL && monPortraitPtr->faceData != NULL && monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].gfx != 0) {
         s32 i;
 
-        gUnknown_203B198.unk20.x = monPortraitPtr->pos.x;
-        gUnknown_203B198.unk20.y = monPortraitPtr->pos.y;
-        gUnknown_203B198.unk24 = 5;
-        gUnknown_203B198.unk26 = 5;
-        gUnknown_203B198.unk28 = 5;
+        sUnknown_203B198.unk20.x = monPortraitPtr->pos.x;
+        sUnknown_203B198.unk20.y = monPortraitPtr->pos.y;
+        sUnknown_203B198.unk24 = 5;
+        sUnknown_203B198.unk26 = 5;
+        sUnknown_203B198.unk28 = 5;
         for (i = 0; i < 16; i++) {
             SetBGPaletteBufferColorArray(224 + i, &monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].pal[i]);
         }
         portraitOn = TRUE;
         if (monPortraitPtr->unkE) {
-            gUnknown_203B198.unk1C = 7;
+            sUnknown_203B198.unk1C = 7;
         }
         else {
-            gUnknown_203B198.unk1C = 5;
+            sUnknown_203B198.unk1C = 5;
         }
     }
 
-    gUnknown_203B198.unk30 = gUnknown_80D48AC;
-    gUnknown_203B198.unk48 = gUnknown_80D48AC;
+    sUnknown_203B198.unk30 = gUnknown_80D48AC;
+    sUnknown_203B198.unk48 = gUnknown_80D48AC;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B198.unk0, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B198.unk0, TRUE, TRUE);
     gUnknown_202E748.unk0 = 4;
     gUnknown_202E748.unk2 = 4;
     gUnknown_202E748.unk8 = 0x70;
@@ -632,7 +674,7 @@ static void sub_8014A88(void)
         if (menuItem->text == NULL)
             break;
 
-        r5 += 12;;
+        r5 += 12;
         FormatString(menuItem->text, text, text + sizeof(text), 0);
         val = sub_8008ED0(text);
         if (r7 < val) {
@@ -644,21 +686,21 @@ static void sub_8014A88(void)
     if (r5 % 8)
         r2++;
 
-    gUnknown_203B198.unk30.unk4 = gUnknown_202EC10;
+    sUnknown_203B198.unk30.unk4 = gUnknown_202EC10;
     r1 = r7 / 8;
     r1 += 2;
-    gUnknown_203B198.unk30.unkC = r1;
-    gUnknown_203B198.unk30.unk10 = r2;
-    gUnknown_203B198.unk30.unkE = r2;
-    gUnknown_203B198.unk30.unk8 = 28 - r1;
-    gUnknown_203B198.unk30.unkA = 14 - r2;
-    gUnknown_203B198.unk0.unk0 = 0x80;
-    gUnknown_203B198.unk18 = 0xC0;
+    sUnknown_203B198.unk30.unkC = r1;
+    sUnknown_203B198.unk30.unk10 = r2;
+    sUnknown_203B198.unk30.unkE = r2;
+    sUnknown_203B198.unk30.unk8 = 28 - r1;
+    sUnknown_203B198.unk30.unkA = 14 - r2;
+    sUnknown_203B198.unk0.unk0 = 0x80;
+    sUnknown_203B198.unk18 = 0xC0;
     if (sNeverWrittenToUnknownStructPtr != NULL) {
-        gUnknown_203B198.unk48 = sNeverWrittenToUnknownStructPtr->unk0;
+        sUnknown_203B198.unk48 = sNeverWrittenToUnknownStructPtr->unk0;
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B198.unk0, TRUE, FALSE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B198.unk0, TRUE, FALSE);
     sub_8012D60(&gUnknown_202EBC0, sDialogueMenuItems, gUnknown_80D48A0, gUnknown_202EC18, gUnknown_202EC1C, 2);
     if (sNeverWrittenToUnknownStructPtr != NULL) {
         sub_80073B8(3);
@@ -705,7 +747,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                 r9 = FALSE;
                 if (flags & 8) {
                     AppendString(gSpeakerNameBuffer, &dst, dstMax, flags);
-                    AppendString(gSpeakerNameSeparator, &dst, dstMax, flags);
+                    AppendString(sSpeakerNameSeparator, &dst, dstMax, flags);
                 }
             }
             else if (r9) {
@@ -759,7 +801,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                         sub_80920D8(sFormatBuffer_TeamName);
                     }
                     else {
-                        strcpy(sFormatBuffer_TeamName, gUnknown_80D48F8); // ????
+                        strcpy(sFormatBuffer_TeamName, sUnknownTeamName); // ????
                     }
                     txtPtr = sFormatBuffer_TeamName;
                     break;

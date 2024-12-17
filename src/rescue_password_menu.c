@@ -22,9 +22,9 @@ EWRAM_DATA u8 gRescuePasswordBuffer[RESCUE_PASSWORD_SIZE] = {0};
 
 extern unkStruct_203B484 *gUnknown_203B484;
 
-EWRAM_DATA_2 u8 gUnknown_203B368 = {0};
-EWRAM_DATA_2 u32 gUnknown_203B36C = {0};
-EWRAM_DATA_2 struct RescuePasswordMenu *gRescuePasswordMenu = {0};
+EWRAM_INIT u8 gUnknown_203B368 = {1};
+EWRAM_INIT u32 gUnknown_203B36C = {65502};
+EWRAM_INIT struct RescuePasswordMenu *gRescuePasswordMenu = {NULL};
 
 const UnkTextStruct2 gUnknown_80E71E4 = {
     0x00, 0x00, 0x00, 0x00,

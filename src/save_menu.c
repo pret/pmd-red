@@ -10,7 +10,7 @@
 #include "sprite.h"
 #include "text.h"
 
-static EWRAM_DATA_2 SaveMenuWork *sUnknown_203B364 = {0};
+static EWRAM_INIT SaveMenuWork *sUnknown_203B364 = {NULL};
 
 const UnkTextStruct2 gUnknown_80E6F20 =
 {

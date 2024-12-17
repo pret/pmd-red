@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_80118A4.h"
 #include "string_format.h"
 #include "code_8097670.h"
@@ -12,12 +13,6 @@
 #include "random.h"
 #include "save.h"
 
-EWRAM_DATA s32 gUnknown_202DE28 = {0};
-
-EWRAM_DATA_2 u32 gUnknown_203B17C = {0};
-EWRAM_DATA_2 char *gUnknown_203B180 = {0};
-EWRAM_DATA_2 struct UnkStruct_203B184 *gUnknown_203B184 = {0};
-
 // size: 0x800
 struct unk_struct
 {
@@ -30,8 +25,11 @@ struct unk_struct
     u32 padding[503];
 };
 
-ALIGNED(4) static const char debug_fill8[] = "pksdir0";
-ALIGNED(4) const char sGameInternalVersion[] = _("POKE_DUNGEON__05");
+EWRAM_DATA s32 gUnknown_202DE28 = {0};
+
+EWRAM_INIT u32 gUnknown_203B17C = {0};
+EWRAM_INIT const char *gUnknown_203B180 = {"POKE_DUNGEON__05"};
+EWRAM_INIT struct UnkStruct_203B184 *gUnknown_203B184 = {0};
 
 ALIGNED(4) static const char fill_save0[] = _("pksdir0");
 ALIGNED(4) static const char fill_save1[] = _("pksdir0");
@@ -72,7 +70,7 @@ void sub_8011C40(s32 x)
     gUnknown_202DE28 = x;
 }
 
-char *GetGameInternalName(void)
+const char *GetGameInternalName(void)
 {
     return gUnknown_203B180; // returns POKE_DUNGEON__05
 }
@@ -321,7 +319,7 @@ bool8 IsSaveCorrupted(void)
 u32 WriteSavetoPak(s32 *param_1, u32 param_2)
 {
   struct UnkStruct_sub_8011DAC *playerSave;
-  char *gameName;
+  const char *gameName;
   int saveStatus1;
   int saveStatus2;
   u8 *array_ptr;
@@ -384,7 +382,7 @@ s32 sub_80121D4(s32 *a, u8 *src, s32 size)
 u32 sub_80121E0(u32 r0)
 {
     u32 temp;
-    char *gameName;
+    const char *gameName;
     u32 saveStatus;
     struct unk_struct *r4 = MemoryAlloc(sizeof(struct unk_struct), 5);
     temp = 0x1F;

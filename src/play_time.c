@@ -1,8 +1,9 @@
 #include "global.h"
+#include "globaldata.h"
 #include "play_time.h"
 #include "code_8092334.h"
 
-EWRAM_DATA_2 struct PlayTimeStruct *gPlayTimeRef = {0};
+EWRAM_INIT struct PlayTimeStruct *gPlayTimeRef = {NULL};
 EWRAM_DATA struct PlayTimeStruct gPlayTime = {0};
 
 

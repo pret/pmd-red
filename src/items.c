@@ -31,7 +31,7 @@ extern u8 gInvalidItemIDs[0x10];
 EWRAM_DATA OpenedFile *gItemParametersFile = {0};
 EWRAM_DATA ItemDataEntry *gItemParametersData = {0};
 EWRAM_DATA TeamInventory gTeamInventory = {0};
-EWRAM_DATA_2 TeamInventory *gTeamInventoryRef = {0};
+EWRAM_INIT TeamInventory *gTeamInventoryRef = {NULL};
 
 extern s32 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void SortKecleonShopInventory();

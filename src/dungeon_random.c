@@ -1,8 +1,8 @@
 #include "global.h"
 #include "dungeon_random.h"
 
-EWRAM_DATA_2 u32 gDungeonRngState = {0};
-EWRAM_DATA_2 u32 gUnknown_203B458 = {0};
+EWRAM_INIT u32 gDungeonRngState = {1};
+EWRAM_INIT u32 gUnknown_203B458 = {1};
 
 void sub_808408C(u32 param_1)
 {

@@ -7,8 +7,8 @@
 extern void Hang();
 static void FatalErrorHang(void) __attribute__((noreturn));
 
-EWRAM_DATA_2 bool32 gNDS_DebugEnabled = {0};
-EWRAM_DATA_2 u8 gUnknown_203B150 = {0};
+EWRAM_INIT bool32 gNDS_DebugEnabled = {0};
+EWRAM_INIT u8 gUnknown_203B150 = {0};
 
 ALIGNED(4) const char gFuncFileLineString[] = "func = '%s'\nfile = '%s'  line = %5d";
 
@@ -21,17 +21,19 @@ ALIGNED(4) const char debug_fill14[] = "pksdir0";
 ALIGNED(4) const char gDebugPrintPrefix[] = "  Print  ";
 ALIGNED(4) static const char debug_fill13[] = "pksdir0";
 
-ALIGNED(4) const char Performance_Text[] = "Performance";
-ALIGNED(4) const char MemoryCard_Text[] = "Memory Card";
-ALIGNED(4) const char Memory_Text[] = "Memory";
-ALIGNED(4) const char Flag_Text[] = "Flag";
-ALIGNED(4) const char Se_Text[] = "Se";
-ALIGNED(4) const char Bgm_Text[] = "Bgm";
-ALIGNED(4) const char Sound_Text[] = "Sound";
-ALIGNED(4) const char Dungeon_Text[] = "Dungeon";
-ALIGNED(4) const char GroundScript_Text[] = "GroundScript";
-ALIGNED(4) const char Ground_Text[] = "Ground";
-
+static UNUSED EWRAM_INIT const char *sUnusedEwramDebugStrings[] =
+{
+    "Ground",
+    "GroundScript",
+    "Dungeon",
+    "Sound",
+    "Bgm",
+    "Se",
+    "Flag",
+    "Memory",
+    "Memory Card",
+    "Performance",
+};
 
 ALIGNED(4) const char gNotMountText[] = "not mount log system";
 ALIGNED(4) static const char debug_fill9[] = "pksdir0";

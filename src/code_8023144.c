@@ -13,11 +13,15 @@
 #include "pokemon_3.h"
 #include "text.h"
 
-static EWRAM_DATA_2 u32 gUnknown_203B298 = {0};
-static EWRAM_DATA_2 u16 gUnknown_203B29C = {0};
-static EWRAM_DATA_2 u16 gUnknown_203B29E = {0};
+static EWRAM_INIT u32 gUnknown_203B298 = {1};
+static EWRAM_INIT u16 gUnknown_203B29C = {0};
+static EWRAM_INIT u16 gUnknown_203B29E = {0};
+EWRAM_INIT s32 gUnknown_203B2A0 = 2;
+EWRAM_INIT s32 gUnknown_203B2A4 = 1;
+EWRAM_INIT u16 gUnknown_203B2A8 = 0;
+EWRAM_INIT u16 gUnknown_203B2AA = 0;
 
-static IWRAM_DATA unkStruct_3001B5C *gUnknown_3001B5C = {0};
+static IWRAM_DATA unkStruct_3001B5C *gUnknown_3001B5C = {NULL};
 
 #include "data/code_8023144.h"
 

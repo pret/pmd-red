@@ -13,7 +13,7 @@
 #include "text.h"
 #include "wonder_mail_802CDD4.h"
 
-static EWRAM_DATA_2 struct_Sub80095E4_2 *sUnknown_203B2F4 = {0};
+static EWRAM_INIT struct_Sub80095E4_2 *sUnknown_203B2F4 = {NULL};
 
 #include "data/wonder_mail_802CDD4.h"
 

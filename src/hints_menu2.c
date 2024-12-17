@@ -9,7 +9,7 @@
 #include "text.h"
 #include "structs/struct_sub80095e4.h"
 
-static EWRAM_DATA_2 struct_Sub80095E4_2 *sUnknown_203B268 = {0};
+static EWRAM_INIT struct_Sub80095E4_2 *sUnknown_203B268 = {NULL};
 
 #include "data/hints_menu2.h"
 

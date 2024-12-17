@@ -9,7 +9,7 @@
 #include "text_util.h"
 #include "text.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B200 *sUnknown_203B200 = {0};
+static EWRAM_INIT struct unkStruct_203B200 *sUnknown_203B200 = {NULL};
 
 #include "data/code_801602C.h"
 

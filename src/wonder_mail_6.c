@@ -21,7 +21,7 @@ struct unkStruct_203B328
     /* 0x108 */ struct MonPortraitMsg monPortrait;
     u32 wonderMailType;
 };
-static EWRAM_DATA_2 struct unkStruct_203B328 *gUnknown_203B328 = {0};
+static EWRAM_INIT struct unkStruct_203B328 *gUnknown_203B328 = {NULL};
 
 extern unkStruct_203B480 *gUnknown_203B480;
 

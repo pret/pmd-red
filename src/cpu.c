@@ -3,14 +3,26 @@
 #include "cpu.h"
 
 EWRAM_DATA u32 gUnknown_202D800 = {0};
-extern u16 gUnknown_203B0BE[];
+
+EWRAM_INIT u16 gRawKeyInput = {0}; // Not used here, but has to be declare along with sBldCntTable for alignment. Perhaps this file should be merged with bg_control and code_800C9CC.
+// Despite being in EWRAM, these never change.
+static EWRAM_INIT u16 sBldCntTable[] = {
+    (BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD),
+    (BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD),
+    (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD),
+    (BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD),
+    (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD),
+    (BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD),
+    (0),
+};
+
 extern u16 *gUnknown_2026E3C;
 extern u8 gUnknown_2026E38;
 
 void sub_800CDA8(u32 r0)
 {
     gUnknown_202D800 = r0;
-    gBldCnt = gUnknown_203B0BE[r0];
+    gBldCnt = sBldCntTable[r0];
 }
 
 u32 sub_800CDC8(void)

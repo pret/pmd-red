@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon.h"
 #include "exclusive_pokemon.h"
 #include "event_flag.h"

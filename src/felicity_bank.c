@@ -10,7 +10,7 @@
 #include "pokemon.h"
 #include "text.h"
 
-static EWRAM_DATA_2 FelicityBankWork *sFelicityBankWork = {0};
+static EWRAM_INIT FelicityBankWork *sFelicityBankWork = {NULL};
 
 #include "data/felicity_bank.h"
 

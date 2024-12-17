@@ -22,7 +22,7 @@ struct unkStruct_203B320
     u32 wonderMailType;
     struct_Sub80095E4_2 s28;
 };
-static EWRAM_DATA_2 struct unkStruct_203B320 *gUnknown_203B320 = {0};
+static EWRAM_INIT struct unkStruct_203B320 *gUnknown_203B320 = {NULL};
 
 extern unkStruct_203B480 *gUnknown_203B480;
 

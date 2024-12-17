@@ -16,7 +16,7 @@
 #include "text.h"
 #include "trade_items_menu.h"
 
-static EWRAM_DATA_2 struct TradeItemsMenu *sTradeItemsMenu = {0};
+static EWRAM_INIT struct TradeItemsMenu *sTradeItemsMenu = {NULL};
 
 #include "data/trade_items_menu.h"
 

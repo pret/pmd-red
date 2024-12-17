@@ -14,8 +14,8 @@
 #include "text.h"
 #include "wonder_mail_802C4C8.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B2E0* gUnknown_203B2E8 = {0};
-static EWRAM_DATA_2 u16 gUnknown_203B2EC = {0};
+static EWRAM_INIT struct unkStruct_203B2E0* gUnknown_203B2E8 = {NULL};
+static EWRAM_INIT u16 gUnknown_203B2EC = {0};
 
 #include "data/wonder_mail_802C4C8.h"
 

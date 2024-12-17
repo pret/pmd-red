@@ -29,8 +29,8 @@
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"
 
-static EWRAM_DATA_2 struct unk_203B250 *sUnknown_203B250 = {0};
-static EWRAM_DATA_2 u32 sUnknown_203B254 = {0};
+static EWRAM_INIT struct unk_203B250 *sUnknown_203B250 = {NULL};
+static EWRAM_INIT u32 sUnknown_203B254 = {0};
 
 extern const struct FileArchive gTitleMenuFileArchive;
 

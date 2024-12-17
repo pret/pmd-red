@@ -16,10 +16,10 @@
 #include "menu_input.h"
 #include "moves.h"
 #include "pokemon_3.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "text.h"
 
-EWRAM_DATA_2 unkStruct_203B27C *gUnknown_203B27C = {0};
+EWRAM_INIT unkStruct_203B27C *gUnknown_203B27C = {NULL};
 
 #include "data/gulpin_shop_801FB50.h"
 

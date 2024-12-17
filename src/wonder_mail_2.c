@@ -36,7 +36,7 @@ enum States {
     EXIT_STATE = 5
 };
 
-static EWRAM_DATA_2 struct unkStruct_203B2C8 *sUnknown_203B2C8 = {0};
+static EWRAM_INIT struct unkStruct_203B2C8 *sUnknown_203B2C8 = {NULL};
 
 extern void sub_80920D8(u8 *buffer);
 extern void sub_802B548(u32);

@@ -23,7 +23,7 @@
 #include "sprite.h"
 #include "text.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B2BC *sUnknown_203B2BC = {0};
+static EWRAM_INIT struct unkStruct_203B2BC *sUnknown_203B2BC = {NULL};
 
 void sub_8027D40(u32, BulkItem *heldItem);
 void sub_8027794(void);

@@ -9,7 +9,7 @@
 #include "options_menu2.h"
 #include "text.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B260 *sUnknown_203B260 = {0};
+static EWRAM_INIT struct unkStruct_203B260 *sUnknown_203B260 = {NULL};
 
 #include "data/options_menu2.h"
 

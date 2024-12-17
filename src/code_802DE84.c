@@ -8,7 +8,7 @@
 #include "pokemon_mail.h"
 #include "text.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B300 *sUnknown_203B300 = {0};
+static EWRAM_INIT struct unkStruct_203B300 *sUnknown_203B300 = {NULL};
 
 #include "data/code_802DE84.h"
 

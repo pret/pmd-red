@@ -18,9 +18,7 @@ struct unkStruct_203B274
     unkStruct_808E218_arg unk8;
     struct_Sub80095E4_2 s348;
 };
-EWRAM_DATA_2 struct unkStruct_203B274 *gUnknown_203B274 = {0};
-
-extern u8 gFormatBuffer_Monsters[];
+EWRAM_INIT struct unkStruct_203B274 *gUnknown_203B274 = {NULL};
 
 static const UnkTextStruct2 sUnknown_80DC2AC = {
     0, 0, 0, 0,

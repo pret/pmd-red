@@ -4,7 +4,7 @@
 #include "text_util.h"
 #include "event_flag.h"
 
-EWRAM_DATA_2 struct RescueTeamData *gRescueTeamInfoRef = {0};
+EWRAM_INIT struct RescueTeamData *gRescueTeamInfoRef = {NULL};
 EWRAM_DATA struct RescueTeamData gRescueTeamInfo = {0};
 
 extern void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);

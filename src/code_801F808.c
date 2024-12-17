@@ -29,7 +29,7 @@ struct unkStruct_203B278
     MenuInputStructSub unkC8;
 };
 
-EWRAM_DATA_2 struct unkStruct_203B278 *gUnknown_203B278 = {0};
+EWRAM_INIT struct unkStruct_203B278 *gUnknown_203B278 = {NULL};
 
 static const UnkTextStruct2 sUnknown_80DC2F8 = {
     0, 0, 0, 0,

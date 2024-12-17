@@ -34,7 +34,7 @@ enum ItemTargetFlag
     ITEM_TARGET_ALLY = 1 << 1
 };
 
-EWRAM_DATA_2 s32 gAIThrowItemActionChoiceCount = {0};
+EWRAM_INIT s32 gAIThrowItemActionChoiceCount = {0};
 
 EWRAM_DATA u32 gAIThrownItemDirections[NUM_DIRECTIONS] = {0};
 EWRAM_DATA bool8 gAIThrownItemDirectionIsUsed[NUM_DIRECTIONS] = {0};

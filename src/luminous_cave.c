@@ -59,7 +59,7 @@ enum LuminousCaveMenuActions
 
 };
 
-static EWRAM_DATA_2 LuminousCaveWork *sLuminousCaveWork = {0};
+static EWRAM_INIT LuminousCaveWork *sLuminousCaveWork = {NULL};
 
 #include "data/luminous_cave.h"
 

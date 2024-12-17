@@ -18,7 +18,7 @@
 #include "sprite.h"
 #include "text.h"
 
-static EWRAM_DATA_2 unkStruct_203B35C *sUnknown_203B35C = {0};
+static EWRAM_INIT unkStruct_203B35C *sUnknown_203B35C = {NULL};
 
 #include "data/other_menus1.h"
 

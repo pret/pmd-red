@@ -2,6 +2,7 @@
 #include "dungeon_util_1.h"
 #include "memory.h"
 #include "structs/rgb.h"
+#include "structs/str_dungeon_8042F6C.h"
 #include "code_803E46C.h"
 #include "code_800E9E4.h"
 #include "code_800DAC0.h"
@@ -26,7 +27,7 @@
 #include "code_803E668.h"
 #include "dungeon_engine.h"
 #include "dungeon_map_access.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "weather.h"
 #include "moves.h"
 #include "code_8094F88.h"
@@ -59,7 +60,12 @@ struct UnkStruct_203B414
     struct Sub_UnkStruct_203B414 unk8C[16];
 };
 
-static EWRAM_DATA_2 struct UnkStruct_203B414 *sUnknown_203B414 = NULL;
+EWRAM_INIT DungeonPos gUnknown_203B410 = {100, 100};
+static EWRAM_INIT struct UnkStruct_203B414 *sUnknown_203B414 = NULL;
+EWRAM_INIT Dungeon *gDungeon = NULL;
+EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
+EWRAM_INIT u8 gUnknown_203B420[8] = {0x15, 0x00, 0x16, 0x00, 0x15, 0x00, 0x16, 0x00}; // Could be a different file?
+EWRAM_INIT u8 gUnknown_203B428[8] = {0x02, 0x03, 0x01, 0x01, 0x00, 0x00, 0x00, 0x02}; // Could be a different file?
 
 struct UnkStruct_80F6624
 {
@@ -247,38 +253,7 @@ void sub_8042EC8(Entity *a0, s32 a1)
 }
 
 extern u8 gUnknown_203B40C;
-extern DungeonPos gUnknown_203B410;
-extern u8 *gSerializedData_203B41C;
 
-struct Substruct_xxx_dungeon_8042F6C
-{
-    DungeonLocation a0;
-    u32 a4;
-};
-
-struct UnkStruct_xxx_dungeon_8042F6C
-{
-    u8 unk0;
-    DungeonLocation unk4;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
-    u8 unkF;
-    u8 unk10;
-    u8 unk11;
-    unkStruct_Dungeon64C unk14;
-    PokemonStruct1 unk1C;
-    u8 *unk74;
-    Dungeon *unk78;
-    s16 unk7C;
-    u8 unk7E;
-    DungeonLocation unk80;
-    struct Substruct_xxx_dungeon_8042F6C unk84;
-};
 
 extern void sub_8040094(u8 r0);
 extern void sub_8068BDC(u8 r0);
@@ -915,8 +890,8 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
                 r8->unk7C = -2;
                 memset(&r8->unk84, 0, sizeof(r8->unk84));
                 r8->unk80 = gDungeon->unk644.dungeonLocation;
-                r8->unk84.a0 = gDungeon->unk644.dungeonLocation;
-                r8->unk84.a4 = gDungeon->unk644.unk38;
+                r8->unk84.dungeon = gDungeon->unk644.dungeonLocation;
+                r8->unk84.seed = gDungeon->unk644.unk38;
 
             }
             else {

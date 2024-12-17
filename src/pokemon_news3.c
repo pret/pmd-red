@@ -11,14 +11,14 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_mail.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "pokemon_news3.h"
 #include "structs/str_802C39C.h"
 #include "text.h"
 #include "string_format.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B2D8 *sUnknown_203B2D8 = {0};
-static EWRAM_DATA_2 u16 sUnknown_203B2DC = {0};
+static EWRAM_INIT struct unkStruct_203B2D8 *sUnknown_203B2D8 = {NULL};
+static EWRAM_INIT u16 sUnknown_203B2DC = {0};
 
 #include "data/pokemon_news3.h"
 

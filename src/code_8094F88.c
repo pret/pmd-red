@@ -1,19 +1,20 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_8094D28.h"
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
 #include "dungeon.h"
 #include "memory.h"
 #include "moves.h"
-#include "pokemon_mid.h"
+#include "pokemon.h"
 #include "random.h"
 #include "save.h"
 #include "text_util.h"
 
-EWRAM_DATA_2 unkStruct_203B480 *gUnknown_203B480 = {0};
-EWRAM_DATA_2 unkStruct_203B484 *gUnknown_203B484 = {0};
-EWRAM_DATA_2 u32 *gUnknown_203B488 = {0};
-EWRAM_DATA_2 unkStruct_203B48C *gUnknown_203B48C = {0};
+EWRAM_INIT unkStruct_203B480 *gUnknown_203B480 = {NULL};
+EWRAM_INIT unkStruct_203B484 *gUnknown_203B484 = {NULL};
+EWRAM_INIT u32 *gUnknown_203B488 = {NULL};
+EWRAM_INIT unkStruct_203B48C *gUnknown_203B48C = {NULL};
 
 EWRAM_DATA unkStruct_203B480 gUnknown_2038C88[0x20] = {0};
 EWRAM_DATA unkStruct_203B484 gUnknown_2039288 = {0};
@@ -410,7 +411,7 @@ u32 sub_8095624(u8 *buffer, u32 b)
     for (i = 0; i < 32; i++) {
         WriteBits(&backup, &gUnknown_203B48C->unk4[i], 32);
     }
-  
+
     FinishBitSerializer(&backup);
     return backup.count;
 }

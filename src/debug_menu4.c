@@ -9,7 +9,7 @@
 #include "menu_input.h"
 #include "text.h"
 
-static EWRAM_DATA_2 unkStruct_203B3F8 *sUnknown_203B3F8 = {0};
+static EWRAM_INIT unkStruct_203B3F8 *sUnknown_203B3F8 = {NULL};
 
 #include "data/debug_menu4.h"
 

@@ -361,8 +361,6 @@ extern const u8 *const gUnknown_80F93A4;
 extern const u8 *const gUnknown_80F9384;
 extern const u8 *const gUnknown_80F9380;
 
-extern Entity *gUnknown_203B438;
-
 EWRAM_DATA s32 gUnknown_202F208 = 0;
 EWRAM_DATA s32 gUnknown_202F20C = 0;
 EWRAM_DATA s32 gUnknown_202F210 = 0;
@@ -376,6 +374,7 @@ EWRAM_DATA u8 gUnknown_202F221 = 0;
 EWRAM_DATA u8 gUnknown_202F222 = 0;
 EWRAM_DATA s32 gUnknown_202F224 = 0;
 EWRAM_DATA s32 gMetronomeCalledArrayId = 0;
+static EWRAM_INIT Entity *gUnknown_203B438 = NULL;
 
 #define MAX_MOVE_TARGETS 64
 

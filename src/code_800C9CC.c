@@ -3,8 +3,9 @@
 #include "random.h"
 #include "reg_control.h"
 
-EWRAM_DATA_2 u32 gUnknown_203B0B8 = {0};
-EWRAM_DATA_2 u16 gRawKeyInput = {0};
+// Todo: Figure out if this file could be merged with bg_control and cpu?
+EWRAM_INIT u32 gUnknown_203B0B8 = {0};
+extern u16 gRawKeyInput;
 
 void sub_800CB20(void)
 {

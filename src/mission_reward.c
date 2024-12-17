@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "code_802F204.h"
 #include "pokemon.h"
-#include "pokemon_mid.h"
 #include "rescue_team_info.h"
 #include "friend_area.h"
 #include "input.h"
@@ -26,10 +25,7 @@ struct unkStruct_203B310
     UnkTextStruct2 unk24[4];
 };
 
-EWRAM_DATA_2 struct unkStruct_203B310 *gUnknown_203B310 = {0};
-
-extern u8 gFormatBuffer_FriendArea[];
-extern u8 gSpeakerNameBuffer[];
+EWRAM_INIT struct unkStruct_203B310 *gUnknown_203B310 = {NULL};
 
 enum FriendRewardStates
 {

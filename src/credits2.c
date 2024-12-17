@@ -5,7 +5,7 @@
 #include "input.h"
 #include "memory.h"
 
-static EWRAM_DATA_2 Credits2Work *sCredits2Work = {0};
+static EWRAM_INIT Credits2Work *sCredits2Work = {NULL};
 
 #include "data/credits2.h"
 

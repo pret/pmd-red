@@ -16,7 +16,7 @@
 #include "pokemon_3.h"
 #include "text.h"
 
-static EWRAM_DATA_2 unkStruct_203B294 *sUnknown_203B294 = {0};
+static EWRAM_INIT unkStruct_203B294 *sUnknown_203B294 = {NULL};
 
 #include "data/code_80227B8.h"
 
