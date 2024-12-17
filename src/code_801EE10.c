@@ -11,7 +11,7 @@
 #include "menu_input.h"
 #include "string_format.h"
 
-EWRAM_DATA_2 unkStruct_203B270 *gUnknown_203B270 = {0};
+EWRAM_INIT unkStruct_203B270 *gUnknown_203B270 = {NULL};
 
 const UnkTextStruct2 gUnknown_80DC240 = {
     0x00, 0x00, 0x00, 0x00,

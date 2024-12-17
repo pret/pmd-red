@@ -41,6 +41,19 @@ EWRAM_DATA static u32 sTextShadowMask = 0; // Some text color info is stored; re
 EWRAM_DATA static u8 sDrawTextShadow = 0;
 EWRAM_DATA ALIGNED(4) u16 gUnknown_202B038[4][32][32] = {0};
 
+extern ALIGNED(4) u8 gUnkIwramFunc1Buffer[];
+extern ALIGNED(4) u8 gUnkIwramFunc2Buffer[];
+extern ALIGNED(4) u8 gUnkIwramFunc3Buffer[];
+extern ALIGNED(4) u8 gUnkIwramFunc4Buffer[];
+// Despite these not being used anywhere in this file, file order and usage point to these variables being declared here
+EWRAM_INIT void (*gUnknown_203B080)(s32 a0) = (void *) &gUnkIwramFunc1Buffer[1]; // + 1 because the function is in thumb!
+EWRAM_INIT void (*gUnknown_203B084)(s32 a0) = (void *) &gUnkIwramFunc2Buffer[1]; // + 1 because the function is in thumb!
+EWRAM_INIT void (*gUnknown_203B088)(s32 a0) = (void *) &gUnkIwramFunc3Buffer[1]; // + 1 because the function is in thumb!
+EWRAM_INIT void (*gUnknown_203B08C)(s32 a0) = (void *) &gUnkIwramFunc4Buffer[1]; // + 1 because the function is in thumb!
+
+// This variable is only used in InitGraphics function, which could or could not belong to text.c
+EWRAM_INIT u8 gUnknown_203B090 = 0;
+
 static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3);
 static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, UnkTextStruct2_sub *a8, u8 a9);
 static void sub_800677C(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3);

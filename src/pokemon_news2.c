@@ -11,7 +11,7 @@
 #include "menu_input.h"
 #include "text.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B2D4 *sUnknown_203B2D4 = {0};
+static EWRAM_INIT struct unkStruct_203B2D4 *sUnknown_203B2D4 = {NULL};
 
 #include "data/pokemon_news2.h"
 

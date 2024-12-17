@@ -38,10 +38,17 @@ extern void LoadTitleScreen(void);
 extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 
-extern u32 gUnknown_203B03C;
 extern u16 gUnknown_2026E4E;
 extern s32 gTitleBrightness;
-extern OpenedFile *gTitlePaletteFile;
+
+// TODO: figure out the struct
+struct UnkStruct203B040
+{
+    u8 unk0[48];
+};
+
+EWRAM_INIT OpenedFile *gTitlePaletteFile = NULL;
+extern u32 gUnknown_203B03C;
 
 extern char gPMDBuildVersion[];
 

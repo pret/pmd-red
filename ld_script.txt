@@ -3,13 +3,21 @@ ENTRY(Start)
 gNumMusicPlayers = 8;
 gMaxLines = 0;
 
-SECTIONS {
-    . = 0x2000000;
+MEMORY
+{
+    EWRAM (rwx) : ORIGIN = 0x2000000, LENGTH = 256K
+    IWRAM (rwx) : ORIGIN = 0x3000000, LENGTH = 32K
+    ROM    (rx) : ORIGIN = 0x8000000, LENGTH = 32M
+}
 
-    ewram (NOLOAD) :
+SECTIONS {
+    
+	ewram 0x2000000 (NOLOAD) :
+	
     ALIGN(4)
     {
         ewram_start = .;
+		
         data/sound_data.o(.bss);
         INCLUDE "sym_ewram.ld"
         src/agb_flash.o(.bss);
@@ -17,24 +25,22 @@ SECTIONS {
         *libgcc.a:dp-bit.o(.bss);
         *libc.a:syscalls.o(.bss);
         . = ALIGN(16);
-        INCLUDE "sym_ewram2.ld"
-        *libc.a:impure.o(.data);
-        *libc.a:locale.o(.data);
-        *libc.a:mallocr.o(.data);
-        ewram2_end = .;
-        . = 0x40000;
-    }
+		src/m4a.o(ewram_lib);
+		src/agb_flash.o(ewram_lib);
+		*libc.a:sbrkr.o(COMMON);
+		
+		ewram_end = .;
+    } > EWRAM
 
-    . = 0x3000000;
-
-    iwram (NOLOAD) :
+    iwram 0x3000000 (NOLOAD) :
     ALIGN(4)
     {
         iwram_start = .;
         INCLUDE "sym_iwram.ld"
         . = 0x8000;
-    }
+    } > IWRAM
 
+    /* BEGIN ROM DATA */
     . = 0x8000000;
 
     .text :
@@ -402,7 +408,7 @@ SECTIONS {
         *libc.a:lseekr.o(.text);
         *libc.a:readr.o(.text);
         *libgcc.a:_udivsi3.o(.text);
-    } =0
+    }  > ROM =0
 
     .rodata :
     ALIGN(4)
@@ -716,10 +722,25 @@ SECTIONS {
         *libc.a:locale.o(.rodata);
         *libc.a:mprec.o(.rodata);
         *libc.a:syscalls.o(.rodata);
-        . = ALIGN(4);
-        data/data_8270000.o(.rodata);
-    } =0
+		. = ALIGN(4);
+    } > ROM =0
+	
+	ewram_init :
+    ALIGN(4)
+    {
+        ewram_init_start = .;
 
+		INCLUDE "sym_ewram_init.ld"
+		*libc.a:impure.o(.data);
+		*libc.a:locale.o(.data);
+		*libc.a:mallocr.o(.data);
+		
+		ewram_init_end = .;
+		. = 0x2724; /* This doesn't really do anything other than setting following 0x2724 bytes to 0 in rom */
+    } > EWRAM AT>ROM
+	
+	EWRAM_INIT_ROM_START = LOADADDR(ewram_init);
+	
     unk_code_section :
     ALIGN(4)
     {
@@ -728,73 +749,65 @@ SECTIONS {
         src/code_8272724.o(.text);
         asm/code_8272724.o(.text);
         unk_code_end = .;
-    }
+    } > ROM =0
 
     unk_code_section_size = (unk_code_end - unk_code);
     unk_code_ram_end = unk_code_ram + unk_code_section_size;
     end = unk_code_ram_end;
 
-    . = 0x8300000;
-    unk_data :
+    unk_data 0x8300000 :
     ALIGN(4)
     {
         data/unk_data.o(.rodata);
-    }
+    } > ROM =0
 
-    . = 0x8300500;
-    system_sbin_section :
+    system_sbin_section 0x8300500 :
     ALIGN(4)
     {
         data/system_sbin.o(.rodata);
-    }
+    } > ROM =0
 
-    . = 0x8380000;
-    titlemenu_sbin_section :
+    titlemenu_sbin_section 0x8380000 :
     ALIGN(4)
     {
         data/titlemenu_sbin.o(.rodata);
-    }
+    } > ROM =0
 
-    . = 0x83B0000;
-    dungeon_sbin_section :
+    dungeon_sbin_section 0x83B0000 :
     ALIGN(4)
     {
         data/dungeon_sbin.o(.rodata);
-    }
+    } > ROM =0
 
-    . = 0x8510000;
-    monster_sbin_section :
+    monster_sbin_section 0x8510000 :
     ALIGN(4)
     {
         data/monster_sbin.o(.rodata);
-    }
+    } > ROM =0
 
-    . = 0x9740000;
-    effect_sbin_section :
+    effect_sbin_section 0x9740000 :
     ALIGN(4)
     {
         data/effect_sbin.o(.rodata);
-    }
+    } > ROM =0
 
-    . = 0x9890000;
-    ground_sbin_section :
+    ground_sbin_section 0x9890000 :
     ALIGN(4)
     {
         data/ground_sbin.o(.rodata);
-    }
+    } > ROM =0
 
-    . = 0x9E60000;
-    ornament_sbin_section :
+    ornament_sbin_section 0x9E60000 :
     ALIGN(4)
     {
         data/ornament_sbin.o(.rodata);
-    }
+    } > ROM =0
 
     sound_data :
     ALIGN(4)
     {
         data/sound_data.o(.rodata);
-    }
+    } > ROM =0
 
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }

@@ -65,7 +65,7 @@ struct unkStruct_203B3E8
     /* 0x498 */ bool8 wonderMailAccepted;
 };
 
-EWRAM_DATA_2 struct unkStruct_203B3E8 *gUnknown_203B3E8 = {0};
+EWRAM_INIT struct unkStruct_203B3E8 *gUnknown_203B3E8 = {NULL};
 
 #include "data/wonder_mail_main_menu.h"
 

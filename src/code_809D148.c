@@ -377,7 +377,7 @@ void nullsub_120(void)
 
 // Different file below?
 
-extern void *gUnknown_203B4B0;
+EWRAM_INIT void *gUnknown_203B4B0 = NULL;
 
 void sub_809D490(void)
 {

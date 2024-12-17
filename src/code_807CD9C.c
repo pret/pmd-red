@@ -26,7 +26,6 @@
 #include "dungeon_config.h"
 
 extern u32 gUnknown_202EDCC;
-extern u32 gUnknown_203B444[];
 
 extern u8 *gUnknown_80FCA10[];
 extern u8 *gUnknown_80F8A0C[];
@@ -56,6 +55,8 @@ extern void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 param_4,s
 extern void sub_804216C(Entity *pokemon, Entity *target, u32 r2);
 extern void sub_80461C8(DungeonPos *, u32);
 extern void sub_804218C(Entity *pokemon, Entity *target);
+
+EWRAM_INIT u32 gUnknown_203B444[3] = {0x28, 0x28, 0x50};
 
 void sub_804EB30();
 bool8 ExposeTrap(s32 x, s32 y);

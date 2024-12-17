@@ -12,7 +12,7 @@
 #include "pokemon.h"
 #include "text.h"
 
-static EWRAM_DATA_2 struct unkStruct_203B2FC *sUnknown_203B2FC = {0};
+static EWRAM_INIT struct unkStruct_203B2FC *sUnknown_203B2FC = {NULL};
 
 #include "data/code_802DB28.h"
 

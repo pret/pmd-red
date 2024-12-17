@@ -24,7 +24,7 @@ struct unkStruct_203B1FC
     u8 unkFC[54];
 };
 
-extern struct unkStruct_203B1FC *gUnknown_203B1FC;
+EWRAM_INIT struct unkStruct_203B1FC *gUnknown_203B1FC = NULL;
 
 s32 sub_8015F44(void)
 {

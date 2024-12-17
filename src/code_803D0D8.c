@@ -7,7 +7,7 @@
 #include "code_80958E8.h"
 #include "memory.h"
 
-static EWRAM_DATA_2 u8 sUnknown_203B408 = {0};
+static EWRAM_INIT u8 sUnknown_203B408 = {1};
 
 #include "data/code_803D0D8.h"
 

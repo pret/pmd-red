@@ -12,10 +12,10 @@
 #include "text.h"
 #include "wigglytuff_shop1.h"
 
-static EWRAM_DATA_2 WigglytuffShop1Work *sWigglytuffShop1Work = {0};
-static EWRAM_DATA_2 u32 sUnknown_203B284 = {0};
-static EWRAM_DATA_2 u16 sUnknown_203B288 = {0};
-static EWRAM_DATA_2 u16 sUnknown_203B28A = {0};
+static EWRAM_INIT WigglytuffShop1Work *sWigglytuffShop1Work = {NULL};
+static EWRAM_INIT u32 sUnknown_203B284 = {0};
+static EWRAM_INIT u16 sUnknown_203B288 = {0};
+static EWRAM_INIT u16 sUnknown_203B28A = {0};
 
 #include "data/wigglytuff_shop1.h"
 

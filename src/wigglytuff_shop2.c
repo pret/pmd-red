@@ -13,7 +13,7 @@
 #include "text.h"
 #include "wigglytuff_shop2.h"
 
-static EWRAM_DATA_2 WigglytuffShop2Work *sWigglytuffShop2Work = {0};
+static EWRAM_INIT WigglytuffShop2Work *sWigglytuffShop2Work = {NULL};
 
 #include "data/wigglytuff_shop2.h"
 

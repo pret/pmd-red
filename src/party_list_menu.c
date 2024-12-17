@@ -25,7 +25,7 @@
 #include "text_util.h"
 #include "text.h"
 
-static EWRAM_DATA_2 unkStruct_203B2B8 *sUnknown_203B2B8 = {0};
+static EWRAM_INIT unkStruct_203B2B8 *sUnknown_203B2B8 = {NULL};
 
 #include "data/party_list_menu.h"
 

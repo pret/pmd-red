@@ -13,7 +13,7 @@
 #include "menu_input.h"
 #include "text.h"
 
-static EWRAM_DATA_2 MakuhitaDojoWork2 *sMakuhitaDojoWork2 = {0};
+static EWRAM_INIT MakuhitaDojoWork2 *sMakuhitaDojoWork2 = {NULL};
 
 #include "data/makuhita_dojo2.h" // 80E07EC
 

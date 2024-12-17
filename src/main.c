@@ -18,17 +18,16 @@
 #include "text.h"
 
 extern u8 ewram_start[];
-extern u8 ewramClearEnd[];
-extern u8 ewramClearEnd2[]; // Force a second storage in the asm
-extern u8 ewram2_end[];
+extern u8 ewram_end[]; // Force a second storage in the asm
+extern u8 ewram_init_start[];
+extern u8 ewram_init_end[];
 extern u8 iwram_start[];
 extern u8 iwramClearEnd[];
 extern u8 unk_code[];
 extern u8 unk_code_ram[];
 extern u8 unk_code_ram_end[];
 
-// data_8270000.s
-extern const u8 gUnknown_8270000[];
+extern const u8 EWRAM_INIT_ROM_START[];
 
 UNUSED static const char sStringRomUserData[] = "PKD ROM USER DATA 000000";
 
@@ -40,7 +39,7 @@ extern void Hang(void);
 
 void AgbMain(void)
 {
-    u8 value[4];
+    ALIGNED(4) u8 value[4];
 
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
 
@@ -49,19 +48,19 @@ void AgbMain(void)
     DmaStop(2);
     DmaStop(3);
 
-    if (ewram2_end - ewramClearEnd > 0)
-        CpuCopy32(gUnknown_8270000, ewramClearEnd, ewram2_end - ewramClearEnd);
+    if (ewram_init_end - ewram_init_start > 0)
+        CpuCopy32(EWRAM_INIT_ROM_START, ewram_init_start, ewram_init_end - ewram_init_start);
 
-    if (ewramClearEnd2 - ewram_start > 0) {
-        memset(value, 0, 4);
-        CpuSet(&value, ewram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((ewramClearEnd2 - ewram_start) / 4) & 0x1FFFFF));
+    if (ewram_end - ewram_start > 0) {
+        memset(value, 0, sizeof(value));
+        CpuSet(&value, ewram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((ewram_end - ewram_start) / 4) & 0x1FFFFF));
     }
 
     if (unk_code_ram_end - unk_code_ram > 0)
         CpuCopy32(unk_code, unk_code_ram, unk_code_ram_end - unk_code_ram);
 
     if (iwramClearEnd - iwram_start > 0) {
-        memset(value, 0, 4);
+        memset(value, 0, sizeof(value));
         CpuSet(&value, iwram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((iwramClearEnd - iwram_start) / 4) & 0x1FFFFF));
     }
 

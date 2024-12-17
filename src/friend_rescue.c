@@ -212,7 +212,7 @@ extern u8 gUnknown_80E4964[];
 extern u8 gUnknown_80E499C[];
 extern u8 gUnknown_80E49C4[];
 
-EWRAM_DATA_2 WonderMailStruct_203B33C *gUnknown_203B33C = {0};
+EWRAM_INIT WonderMailStruct_203B33C *gUnknown_203B33C = {NULL};
 
 extern u8 sub_8039880(void);
 

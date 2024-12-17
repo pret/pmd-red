@@ -23,7 +23,7 @@ static EWRAM_DATA u16 gLevelCurrentPokeId = {0};
 UNUSED static EWRAM_DATA u16 unused_data[3] = {0};
 static EWRAM_DATA LevelData gLevelCurrentData[0x64] = {0};
 
-EWRAM_DATA_2 unkStruct_203B45C *gRecruitedPokemonRef = {0};
+EWRAM_INIT unkStruct_203B45C *gRecruitedPokemonRef = {NULL};
 
 struct unkStruct_8107654 {
   s16 unk0;
@@ -52,7 +52,7 @@ extern struct unkStruct_8107654 gUnknown_8107654[6];
 extern const char gUnknown_8107684[];
 extern const char gUnknown_810768C[];  // lvmp%03d
 extern const u8 gShadowSpriteSizeFlags_8107698[];
-extern const char gUnknown_81076BC[]; 
+extern const char gUnknown_81076BC[];
 extern const s32 gUnknown_81076C4[6];
 
 extern s16 gFrenzyPlantIQReq;  // 0x14d
@@ -337,9 +337,9 @@ PokemonStruct1 *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation 
 }
 
 void sub_808D31C(PokemonStruct1 *param_1)
-{ 
+{
   if ((!IsMonTeamLeader(param_1)) && !IsMonPartner(param_1))
-      param_1->unk0 = 0;    
+      param_1->unk0 = 0;
 }
 
 PokemonStruct1 * GetPlayerPokemonStruct(void)
@@ -373,12 +373,12 @@ PokemonStruct1 * sub_808D378(void)
 }
 
 // NOTE: couldn't match with macros..
-// https://decomp.me/scratch/Qorg0 
+// https://decomp.me/scratch/Qorg0
 PokemonStruct1 * sub_808D3BC(void)
 {
   PokemonStruct1 *pokeStruct;
   s32 index;
-  
+
   for(index = 0; index < NUM_MONSTERS; index++)
   {
        pokeStruct = &gRecruitedPokemonRef->pokemon[index];
@@ -390,12 +390,12 @@ PokemonStruct1 * sub_808D3BC(void)
 }
 
 // NOTE: couldn't match with macros..
-// https://decomp.me/scratch/jCa3V 
+// https://decomp.me/scratch/jCa3V
 PokemonStruct1 * sub_808D3F8(void)
 {
   PokemonStruct1 *pokeStruct;
   s32 index;
-  
+
   for(index = 0; index < NUM_MONSTERS; index++)
   {
        pokeStruct = &gRecruitedPokemonRef->pokemon[index];
@@ -492,7 +492,7 @@ s32 GetUnitSum_808D544(s32 *team)
   for(index = 0, ptr = team; index < NUM_MONSTERS; index++, pokemon++)
   {
     if ((PokemonFlag2(pokemon))) {
-      if (team != 0) *ptr = index; 
+      if (team != 0) *ptr = index;
       ptr++;
       count++;
     }
@@ -556,7 +556,7 @@ s32 sub_808D580(s32 *team)
             counter++;
             break;
         }
-    }  
+    }
 
     for(mon = gRecruitedPokemonRef->pokemon, index = 0; index < NUM_MONSTERS; index++, mon++)
     {

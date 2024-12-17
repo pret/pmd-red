@@ -20,7 +20,7 @@ typedef struct unkStruct_203B360
     u32 unk1B0; // sprite count?
 } unkStruct_203B360;
 
-static EWRAM_DATA_2 unkStruct_203B360 *sUnknown_203B360 = {0};
+static EWRAM_INIT unkStruct_203B360 *sUnknown_203B360 = {NULL};
 
 const UnkTextStruct2 gUnknown_80E6E7C = {
    0x00, 0x00, 0x00, 0x00,

@@ -13,7 +13,7 @@
 #include "pokemon.h"
 #include "text.h"
 
-EWRAM_DATA_2 struct KangaskhanStorageWork *gKangaskhanStorageWork = {0};
+EWRAM_INIT struct KangaskhanStorageWork *gKangaskhanStorageWork = {NULL};
 
 #include "data/kangaskhan_storage1.h" // 80DB748
 

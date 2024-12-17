@@ -4,7 +4,7 @@
 #include "ground_script.h"
 #include "number_util.h"
 
-EWRAM_DATA_2 const struct GroundLink *gCurrentGroundLink = NULL;
+EWRAM_INIT const struct GroundLink *gCurrentGroundLink = NULL;
 extern DebugLocation gUnknown_8118798;
 extern const struct GroundScriptHeader *GetGroundScript(s16 r0, DebugLocation *r1);
 

@@ -5,7 +5,7 @@
 #include "quick_save_write.h"
 #include "save.h"
 
-static EWRAM_DATA_2 QuickSaveWrite *sQuickSaveWrite = {0};
+static EWRAM_INIT QuickSaveWrite *sQuickSaveWrite = {NULL};
 
 #include "data/quick_save_write.h"
 

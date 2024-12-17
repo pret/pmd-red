@@ -11,7 +11,7 @@
 #include "sprite.h"
 #include "text.h"
 
-static EWRAM_DATA_2 struct IQSkillInfoMenu *sIQSkillInfoMenu = {0};
+static EWRAM_INIT struct IQSkillInfoMenu *sIQSkillInfoMenu = {NULL};
 
 #include "data/iq_skill_info_menu.h"
 

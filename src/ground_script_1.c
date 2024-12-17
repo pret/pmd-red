@@ -136,7 +136,6 @@ extern s16 gUnknown_2039A34;
 
 extern struct { const char *unk0; s32 unk4; } gChoices[9];
 extern u8 gUnknown_2039D98[12];
-extern int gNumChoices;
 
 extern PixelPos gUnknown_81164DC;
 extern char gUnknown_81165D4[];
@@ -154,6 +153,8 @@ extern DebugLocation gUnknown_81166B4;
 extern DebugLocation gUnknown_81166F8;
 extern DebugLocation gUnknown_8116704;
 extern ScriptCommand gUnknown_81164E4;
+
+EWRAM_INIT static int sNumChoices = 0;
 
 // Return values:
 // This function returns what's likely an enum, which controls the state of the script engine state machine, and possibly provides information to code calling the engine.
@@ -1680,7 +1681,7 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0xd2 ... 0xd8: {
                 // DS: Assert(TRUE, "Script command call error SWITCH MENY") [sic]
                 const char *out = curCmd.argPtr;
-                gNumChoices = 0;
+                sNumChoices = 0;
                 scriptData->branchDiscriminant = 0;
                 switch(curCmd.op) {
                     case 0xd6: case 0xd7: case 0xd8: {
@@ -1696,13 +1697,13 @@ s32 ExecuteScriptCommand(Action *action) {
                 }
                 if (!out) out = gUnknown_81166D8; // ""
                 for (; scriptData->script.ptr->op == 0xd9; scriptData->script.ptr++) {
-                    gChoices[gNumChoices].unk0 = scriptData->script.ptr->argPtr;
-                    gChoices[gNumChoices].unk4 = gNumChoices + 1;
-                    gNumChoices++;
+                    gChoices[sNumChoices].unk0 = scriptData->script.ptr->argPtr;
+                    gChoices[sNumChoices].unk4 = sNumChoices + 1;
+                    sNumChoices++;
                 }
-                if (gNumChoices <= 0) break;
-                gChoices[gNumChoices].unk0 = NULL;
-                gChoices[gNumChoices].unk4 = curCmd.argShort;
+                if (sNumChoices <= 0) break;
+                gChoices[sNumChoices].unk0 = NULL;
+                gChoices[sNumChoices].unk4 = curCmd.argShort;
                 switch (curCmd.op) {
                     case 0xd2: case 0xd3: case 0xd6: {
                         sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, 0, (s16)curCmd.arg1, out);

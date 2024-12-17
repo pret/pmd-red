@@ -22,8 +22,8 @@ EWRAM_DATA u16 gUnknown_20398BE = {0};
 EWRAM_DATA u32 gUnknown_20398C0 = {0};
 EWRAM_DATA s16 gUnknown_20398C4 = {0};
 
-EWRAM_DATA_2 u8 gUnknown_203B49C = {0};
-EWRAM_DATA_2 u8 gUnknown_203B49D = {0};
+EWRAM_INIT u8 gUnknown_203B49C = {0};
+EWRAM_INIT u8 gUnknown_203B49D = {0};
 
 #include "data/ground_main.h"
 

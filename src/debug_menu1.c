@@ -28,7 +28,7 @@ enum DebugMenuOptions
     MENU_DEBUG_MENU_H_OPEN = 9,
 };
 
-static EWRAM_DATA_2 struct DebugMenu *sDebugMenu = {0};
+static EWRAM_INIT struct DebugMenu *sDebugMenu = {NULL};
 
 #include "data/debug_menu1.h"
 

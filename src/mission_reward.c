@@ -25,10 +25,7 @@ struct unkStruct_203B310
     UnkTextStruct2 unk24[4];
 };
 
-EWRAM_DATA_2 struct unkStruct_203B310 *gUnknown_203B310 = {0};
-
-extern u8 gFormatBuffer_FriendArea[];
-extern u8 gSpeakerNameBuffer[];
+EWRAM_INIT struct unkStruct_203B310 *gUnknown_203B310 = {NULL};
 
 enum FriendRewardStates
 {

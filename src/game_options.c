@@ -10,7 +10,7 @@ struct unkStruct_8094CB0
     s16 unk2;
 };
 
-EWRAM_DATA_2 GameOptions *gGameOptionsRef = {0};
+EWRAM_INIT GameOptions *gGameOptionsRef = {NULL};
 EWRAM_DATA GameOptions gGameOptions = {0};
 
 void LoadGameOptions(void)

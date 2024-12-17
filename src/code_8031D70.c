@@ -23,7 +23,7 @@ struct unkStruct_203B334
     u8 unk78[4];
 };
 
-EWRAM_DATA_2 struct unkStruct_203B334 *gUnknown_203B334 = {0};
+EWRAM_INIT struct unkStruct_203B334 *gUnknown_203B334 = {NULL};
 extern unkStruct_203B480 *gUnknown_203B480;
 
 const UnkTextStruct2 gUnknown_80E1FA8 = {

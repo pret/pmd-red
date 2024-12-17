@@ -34,7 +34,7 @@ EWRAM_DATA unkStruct_202EE8C gUnknown_202EE8C[32] = {0};
 EWRAM_DATA OpenedFile *gUnknown_202F18C = {0};
 EWRAM_DATA Tile gOutOfBoundsTileData = {0};
 
-EWRAM_DATA_2 const Tile *gCurTilesetOobTile = {0};
+EWRAM_INIT const Tile *gCurTilesetOobTile = {NULL};
 
 extern u8 sub_8043CE4(u32);
 extern void sub_80402AC(s32, s32);

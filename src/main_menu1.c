@@ -35,7 +35,7 @@
 // NOTE: 0x2E
 // Deletes the Save
 
-static EWRAM_DATA_2 MainMenu1Work *sMainMenu = {0};
+static EWRAM_INIT MainMenu1Work *sMainMenu = {NULL};
 
 #include "data/main_menu1.h"
 

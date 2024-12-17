@@ -15,6 +15,7 @@
 #include "save.h"
 #include "string_format.h"
 #include "text_util.h"
+#include "constants/monster.h"
 
 extern void NDS_LoadOverlay_GroundMain();
 extern u32 xxx_script_related_8098468(u32);
@@ -43,8 +44,14 @@ struct unkTalkTable
 extern struct unkTalkTable gTalkKindTable[];
 extern struct unkTalkTable gBaseKindTable[];
 
-EWRAM_DATA_2 u32 gUnknown_203B03C = {0};
-EWRAM_DATA_2 struct PersonalityRelated gPersonalityRelated_203B040 = {0};
+EWRAM_INIT u32 gUnknown_203B03C = 0;
+EWRAM_INIT struct PersonalityRelated gPersonalityRelated_203B040 = {
+    .unk4 = 0,
+    .StarterID = MONSTER_CHARMANDER,
+    .PartnerID = MONSTER_SQUIRTLE,
+    .StarterName = {""},
+    .PartnerNick = {""},
+};
 
 void SaveLoadRelated_8000EDC(struct UnkStruct_xxx_dungeon_8042F6C *param_1)
 {
@@ -295,7 +302,7 @@ void ThoroughlyResetScriptVars(void)
   s32 iVar3;
   u16 uVar2;
   struct ScriptVarInfo *puVar1;
-  
+
   for(iVar3 = 0; iVar3 < 0x400; iVar3++)
   {
     gScriptVarBuffer[iVar3] = 0;

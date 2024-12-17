@@ -18,7 +18,7 @@
 #include "text.h"
 #include "string_format.h"
 
-static EWRAM_DATA_2 unkStruct_203B330 *sUnknown_203B330 = {0};
+static EWRAM_INIT unkStruct_203B330 *sUnknown_203B330 = {NULL};
 
 #include "data/post_office_guide2.h"
 

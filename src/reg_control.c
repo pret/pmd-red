@@ -16,19 +16,19 @@ EWRAM_DATA IntrCallback gIntrCallbacks[6] = {0};
 EWRAM_DATA unkStruct_202D648 gUnknown_202D608[8] = {0};
 EWRAM_DATA unkStruct_202D648 gUnknown_202D648[8] = {0};
 
-EWRAM_DATA_2 u8 gInterruptsEnabled = {0};
-EWRAM_DATA_2 bool8 gUnknown_203B099 = {0};
-EWRAM_DATA_2 bool8 gUnknown_203B09A = {0};
-EWRAM_DATA_2 bool8 gUnknown_203B09B = {0};
-EWRAM_DATA_2 u32 gUnknown_203B09C = {0};
-EWRAM_DATA_2 u32 gUnknown_203B0A0 = {0};
-EWRAM_DATA_2 u32 gUnknown_203B0A4 = {0}; // Written to but never read
-EWRAM_DATA_2 s16 gUnknown_203B0A8 = {0};
-EWRAM_DATA_2 s16 gUnknown_203B0AA = {0};
-EWRAM_DATA_2 s16 gUnknown_203B0AC = {0};
-EWRAM_DATA_2 s16 gUnknown_203B0AE = {0};
-EWRAM_DATA_2 s16 gUnknown_203B0B0 = {0}; // Written to but never read
-EWRAM_DATA_2 s16 gUnknown_203B0B2 = {0}; // Written to but never read
+EWRAM_INIT u8 gInterruptsEnabled = {0};
+EWRAM_INIT bool8 gUnknown_203B099 = {0};
+EWRAM_INIT bool8 gUnknown_203B09A = {0};
+EWRAM_INIT bool8 gUnknown_203B09B = {0};
+EWRAM_INIT u32 gUnknown_203B09C = {0};
+EWRAM_INIT u32 gUnknown_203B0A0 = {0};
+EWRAM_INIT u32 gUnknown_203B0A4 = {0}; // Written to but never read
+EWRAM_INIT s16 gUnknown_203B0A8 = {0};
+EWRAM_INIT s16 gUnknown_203B0AA = {0};
+EWRAM_INIT s16 gUnknown_203B0AC = {0};
+EWRAM_INIT s16 gUnknown_203B0AE = {-1};
+EWRAM_INIT s16 gUnknown_203B0B0 = {-1}; // Written to but never read
+EWRAM_INIT s16 gUnknown_203B0B2 = {-1}; // Written to but never read
 
 // code_800D090.c
 extern void sub_800D6AC(void);

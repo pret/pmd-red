@@ -21,7 +21,7 @@ struct unkStruct_203B30C
     MenuItem unkB0[8];
     UnkTextStruct2 unkF0[4];
 };
-static EWRAM_DATA_2 struct unkStruct_203B30C *gUnknown_203B30C = {0};
+static EWRAM_INIT struct unkStruct_203B30C *gUnknown_203B30C = {NULL};
 
 extern void sub_802EFEC(u32);
 extern void sub_802F148(void);

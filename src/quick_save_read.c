@@ -5,7 +5,7 @@
 #include "quick_save_read.h"
 #include "save.h"
 
-static EWRAM_DATA_2 QuickSaveRead *sQuickSaveRead = {0};
+static EWRAM_INIT QuickSaveRead *sQuickSaveRead = {NULL};
 
 #include "data/quick_save_read.h"
 

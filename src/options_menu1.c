@@ -33,7 +33,7 @@ enum OptionsMenuStates
     OPTIONS_MENU_CONFIRM_NEW_OPTIONS,
 };
 
-static EWRAM_DATA_2 struct unkStruct_203B25C *sUnknown_203B25C = {0};
+static EWRAM_INIT struct unkStruct_203B25C *sUnknown_203B25C = {NULL};
 
 #include "data/options_menu1.h"
 
