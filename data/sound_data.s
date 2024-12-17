@@ -3106,7 +3106,7 @@ bank_000:
 .4byte gbwave_001
 .incbin "baserom.gba", 0x1E844F8, 0x20
 .4byte gUnknown_9E84CF4
-.4byte gUnknown_9E863B0
+.4byte map_007
 .incbin "baserom.gba", 0x1E84520, 0x64
 .4byte gUnknown_9E8653C
 .incbin "baserom.gba", 0x1E84588, 0x44
@@ -3147,8 +3147,8 @@ gUnknown_9E845D4:
 .incbin "baserom.gba", 0x1E846E4, 0x8
 .4byte wave_043
 .incbin "baserom.gba", 0x1E846F0, 0x4
-.global gUnknown_9E846F4
-gUnknown_9E846F4:
+.global drums_001
+drums_001:
 .incbin "baserom.gba", 0x1E846F4, 0x4
 .4byte gbwave_017
 .incbin "baserom.gba", 0x1E846FC, 0x14
@@ -3161,11 +3161,11 @@ gUnknown_9E846F4:
 .incbin "baserom.gba", 0x1E8472C, 0x8
 .4byte wave_054
 .incbin "baserom.gba", 0x1E84738, 0x14
-.4byte gUnknown_9EACEDC
+.4byte wave_055
 .incbin "baserom.gba", 0x1E84750, 0x8
-.4byte gUnknown_9EADC80
+.4byte wave_056
 .incbin "baserom.gba", 0x1E8475C, 0x8
-.4byte gUnknown_9EB0490
+.4byte wave_057
 .incbin "baserom.gba", 0x1E84768, 0x14
 .4byte gUnknown_9E845D4
 .incbin "baserom.gba", 0x1E84780, 0x8
@@ -3181,11 +3181,11 @@ gUnknown_9E846F4:
 .incbin "baserom.gba", 0x1E847BC, 0x8
 .4byte gUnknown_9EB7E90
 .incbin "baserom.gba", 0x1E847C8, 0x14
-.4byte gUnknown_9EB94B8
+.4byte wave_064
 .incbin "baserom.gba", 0x1E847E0, 0x14
 .4byte gUnknown_9EBA298
 .incbin "baserom.gba", 0x1E847F8, 0x68
-.4byte gUnknown_9EBA840
+.4byte wave_066
 .incbin "baserom.gba", 0x1E84864, 0x50
 .4byte gUnknown_9EBB32C
 .incbin "baserom.gba", 0x1E848B8, 0x8
@@ -3197,7 +3197,7 @@ gUnknown_9E846F4:
 .incbin "baserom.gba", 0x1E848DC, 0x8
 .4byte gUnknown_9EBE6E0
 .incbin "baserom.gba", 0x1E848E8, 0x8
-.4byte gUnknown_9EACEDC
+.4byte wave_055
 .incbin "baserom.gba", 0x1E848F4, 0x8
 .4byte gUnknown_9EBF45C
 .incbin "baserom.gba", 0x1E84900, 0x8
@@ -3217,7 +3217,7 @@ gUnknown_9E846F4:
 .incbin "baserom.gba", 0x1E84A68, 0x8
 .4byte gUnknown_9EC5934
 .incbin "baserom.gba", 0x1E84A74, 0x8
-.4byte gUnknown_9EB94B8
+.4byte wave_064
 .incbin "baserom.gba", 0x1E84A80, 0x8
 .4byte gUnknown_9EC6C50
 .incbin "baserom.gba", 0x1E84A8C, 0x8
@@ -3227,15 +3227,15 @@ gUnknown_9E846F4:
 .incbin "baserom.gba", 0x1E84AB0, 0x20
 .4byte gUnknown_9EB5878
 .incbin "baserom.gba", 0x1E84AD4, 0x14
-.4byte gUnknown_9ECAAD4
+.4byte wave_082
 .incbin "baserom.gba", 0x1E84AEC, 0x8
-.4byte gUnknown_9ECAAD4
+.4byte wave_082
 .incbin "baserom.gba", 0x1E84AF8, 0x8
-.4byte gUnknown_9ECAAD4
+.4byte wave_082
 .incbin "baserom.gba", 0x1E84B04, 0x2C
-.4byte gUnknown_9EBA840
+.4byte wave_066
 .incbin "baserom.gba", 0x1E84B34, 0x14
-.4byte gUnknown_9ECBB2C
+.4byte wave_083
 .incbin "baserom.gba", 0x1E84B4C, 0x14
 .4byte gUnknown_9EBE6E0
 .incbin "baserom.gba", 0x1E84B64, 0x20
@@ -3247,13 +3247,13 @@ gUnknown_9E846F4:
 .incbin "baserom.gba", 0x1E84BA0, 0x8
 .4byte gUnknown_9EBD1D4
 .incbin "baserom.gba", 0x1E84BAC, 0x8
-.4byte gUnknown_9EADC80
+.4byte wave_056
 .incbin "baserom.gba", 0x1E84BB8, 0x8
-.4byte gUnknown_9EB0490
+.4byte wave_057
 .incbin "baserom.gba", 0x1E84BC4, 0x8
-.4byte gUnknown_9ECC450
+.4byte wave_084
 .incbin "baserom.gba", 0x1E84BD0, 0x2C
-.4byte gUnknown_9EACEDC
+.4byte wave_055
 .incbin "baserom.gba", 0x1E84C00, 0x8
 .4byte gUnknown_9EBF45C
 .incbin "baserom.gba", 0x1E84C0C, 0x20
@@ -3270,23 +3270,23 @@ bank_004:
 .incbin "baserom.gba", 0x1E84C7C, 0x4
 .4byte gUnknown_9ECCC08
 .incbin "baserom.gba", 0x1E84C84, 0x8
-.4byte gUnknown_9ECD2B4
+.4byte wave_017
 .incbin "baserom.gba", 0x1E84C90, 0x4
 .global bank_006
 bank_006:
 .incbin "baserom.gba", 0x1E84C94, 0x4
 .4byte gUnknown_9ECCC08
 .incbin "baserom.gba", 0x1E84C9C, 0x8
-.4byte gUnknown_9ECD2B4
+.4byte wave_017
 .incbin "baserom.gba", 0x1E84CA8, 0x4
 .global bank_008
 bank_008:
 .incbin "baserom.gba", 0x1E84CAC, 0x4
-.4byte gUnknown_9ECD4E8
+.4byte wave_021
 .incbin "baserom.gba", 0x1E84CB4, 0x8
-.4byte gUnknown_9ECF9BC
+.4byte wave_022
 .incbin "baserom.gba", 0x1E84CC0, 0x8
-.4byte gUnknown_9ED2850
+.4byte wave_023
 .incbin "baserom.gba", 0x1E84CCC, 0x4
 .global bank_009
 bank_009:
@@ -3309,66 +3309,66 @@ gUnknown_9E84CF4:
 .global bank_002
 bank_002:
 .incbin "baserom.gba", 0x1E84D18, 0x4
-.4byte gUnknown_9EDB81C
+.4byte wave_010
 .incbin "baserom.gba", 0x1E84D20, 0x8
-.4byte gUnknown_9EDC4D8
+.4byte wave_011
 .incbin "baserom.gba", 0x1E84D2C, 0x4
 .global bank_001
 bank_001:
 .incbin "baserom.gba", 0x1E84D30, 0x4
-.4byte gUnknown_9EDCCB0
+.4byte wave_007
 .incbin "baserom.gba", 0x1E84D38, 0x8
-.4byte gUnknown_9EDD60C
+.4byte wave_008
 .incbin "baserom.gba", 0x1E84D44, 0x4
 .global bank_005
 bank_005:
 .incbin "baserom.gba", 0x1E84D48, 0x4
-.4byte gUnknown_9EDDF88
+.4byte wave_018
 .incbin "baserom.gba", 0x1E84D50, 0x8
-.4byte gUnknown_9EDF1A4
+.4byte wave_019
 .incbin "baserom.gba", 0x1E84D5C, 0x8
-.4byte gUnknown_9EE0BB8
+.4byte wave_020
 .incbin "baserom.gba", 0x1E84D68, 0x4
 .global bank_010
 bank_010:
 .incbin "baserom.gba", 0x1E84D6C, 0x4
-.4byte gUnknown_9EDB81C
+.4byte wave_010
 .incbin "baserom.gba", 0x1E84D74, 0x8
-.4byte gUnknown_9EDC4D8
+.4byte wave_011
 .incbin "baserom.gba", 0x1E84D80, 0x4
 .global bank_003
 bank_003:
 .incbin "baserom.gba", 0x1E84D84, 0x4
-.4byte gUnknown_9EDCCB0
+.4byte wave_007
 .incbin "baserom.gba", 0x1E84D8C, 0x8
-.4byte gUnknown_9EDD60C
+.4byte wave_008
 .incbin "baserom.gba", 0x1E84D98, 0x4
 .global bank_013
 bank_013:
 .incbin "baserom.gba", 0x1E84D9C, 0x4
-.4byte gUnknown_9ECD4E8
+.4byte wave_021
 .incbin "baserom.gba", 0x1E84DA4, 0x8
-.4byte gUnknown_9ECF9BC
+.4byte wave_022
 .incbin "baserom.gba", 0x1E84DB0, 0x8
-.4byte gUnknown_9ED2850
+.4byte wave_023
 .incbin "baserom.gba", 0x1E84DBC, 0x4
 .global bank_007
 bank_007:
 .incbin "baserom.gba", 0x1E84DC0, 0x4
-.4byte gUnknown_9EE1ED4
+.4byte wave_024
 .incbin "baserom.gba", 0x1E84DC8, 0x8
-.4byte gUnknown_9EE42C0
+.4byte wave_025
 .incbin "baserom.gba", 0x1E84DD4, 0x8
-.4byte gUnknown_9EE5674
+.4byte wave_026
 .incbin "baserom.gba", 0x1E84DE0, 0x4
 .global bank_011
 bank_011:
 .incbin "baserom.gba", 0x1E84DE4, 0x4
-.4byte gUnknown_9ECD4E8
+.4byte wave_021
 .incbin "baserom.gba", 0x1E84DEC, 0x8
-.4byte gUnknown_9ECF9BC
+.4byte wave_022
 .incbin "baserom.gba", 0x1E84DF8, 0x8
-.4byte gUnknown_9ED2850
+.4byte wave_023
 .incbin "baserom.gba", 0x1E84E04, 0x4
 .global bank_014
 bank_014:
@@ -3377,18 +3377,18 @@ bank_014:
 .incbin "baserom.gba", 0x1E84E10, 0x8
 .4byte wave_009
 .incbin "baserom.gba", 0x1E84E1C, 0x8
-.4byte gUnknown_9E85408
+.4byte bank_015
 .4byte map_000
 .incbin "baserom.gba", 0x1E84E2C, 0x4
-.4byte gUnknown_9E85420
+.4byte bank_016
 .4byte map_001
 .incbin "baserom.gba", 0x1E84E38, 0x4
 .4byte wave_027
 .incbin "baserom.gba", 0x1E84E40, 0x8
-.4byte gUnknown_9E85438
-.4byte gUnknown_9E863B0
+.4byte bank_017
+.4byte map_007
 .incbin "baserom.gba", 0x1E84E50, 0x4
-.4byte gUnknown_9E8545C
+.4byte bank_018
 .4byte map_006
 .incbin "baserom.gba", 0x1E84E5C, 0x4
 .4byte wave_005
@@ -3399,38 +3399,38 @@ bank_014:
 .incbin "baserom.gba", 0x1E84E7C, 0x8
 .4byte wave_028
 .incbin "baserom.gba", 0x1E84E88, 0x8
-.4byte gUnknown_9E85480
+.4byte bank_019
 .4byte map_001
 .incbin "baserom.gba", 0x1E84E98, 0x4
 .4byte wave_027
 .incbin "baserom.gba", 0x1E84EA0, 0x8
-.4byte gUnknown_9EE6B60
+.4byte wave_029
 .incbin "baserom.gba", 0x1E84EAC, 0x8
 .4byte wave_006
 .incbin "baserom.gba", 0x1E84EB8, 0x8
 .4byte wave_030
 .incbin "baserom.gba", 0x1E84EC4, 0x8
-.4byte gUnknown_9E85498
-.4byte gUnknown_9E864A0
+.4byte bank_020
+.4byte map_008
 .incbin "baserom.gba", 0x1E84ED4, 0x4
 .4byte wave_004
 .incbin "baserom.gba", 0x1E84EDC, 0x8
 .4byte wave_015
 .incbin "baserom.gba", 0x1E84EE8, 0x8
-.4byte gUnknown_9E854BC
+.4byte bank_021
 .4byte map_002
 .incbin "baserom.gba", 0x1E84EF8, 0x4
-.4byte gUnknown_9E854D4
+.4byte bank_022
 .4byte map_002
 .incbin "baserom.gba", 0x1E84F04, 0x4
 .4byte wave_031
 .incbin "baserom.gba", 0x1E84F0C, 0x8
 .4byte wave_032
 .incbin "baserom.gba", 0x1E84F18, 0x8
-.4byte gUnknown_9E854EC
+.4byte bank_023
 .4byte map_003
 .incbin "baserom.gba", 0x1E84F28, 0x4
-.4byte gUnknown_9E85510
+.4byte bank_024
 .4byte map_004
 .incbin "baserom.gba", 0x1E84F34, 0x4
 .4byte wave_033
@@ -3447,34 +3447,34 @@ bank_014:
 .incbin "baserom.gba", 0x1E84F78, 0x8
 .4byte wave_012
 .incbin "baserom.gba", 0x1E84F84, 0x8
-.4byte gUnknown_9EE6CB8
+.4byte wave_036
 .incbin "baserom.gba", 0x1E84F90, 0x8
 .4byte wave_037
 .incbin "baserom.gba", 0x1E84F9C, 0x8
 .4byte wave_006
 .incbin "baserom.gba", 0x1E84FA8, 0x8
-.4byte gUnknown_9E85498
-.4byte gUnknown_9E864F4
+.4byte bank_020
+.4byte map_009
 .incbin "baserom.gba", 0x1E84FB8, 0x34
-.4byte gUnknown_9EE714C
+.4byte wave_038
 .incbin "baserom.gba", 0x1E84FF0, 0x8
-.4byte gUnknown_9EE8C98
+.4byte wave_039
 .incbin "baserom.gba", 0x1E84FFC, 0x8
-.4byte gUnknown_9EEB4C4
+.4byte wave_040
 .incbin "baserom.gba", 0x1E85008, 0x8
-.4byte gUnknown_9EED93C
+.4byte wave_041
 .incbin "baserom.gba", 0x1E85014, 0x8
-.4byte gUnknown_9EEFFCC
+.4byte wave_042
 .incbin "baserom.gba", 0x1E85020, 0x8
-.4byte gUnknown_9EF14D8
+.4byte wave_085
 .incbin "baserom.gba", 0x1E8502C, 0x8
 .4byte wave_086
 .incbin "baserom.gba", 0x1E85038, 0x8
 .4byte wave_013
 .incbin "baserom.gba", 0x1E85044, 0x8
-.4byte gUnknown_9EF4248
+.4byte wave_087
 .incbin "baserom.gba", 0x1E85050, 0x8
-.4byte gUnknown_9EF5698
+.4byte wave_088
 .incbin "baserom.gba", 0x1E8505C, 0x8
 .4byte wave_002
 .incbin "baserom.gba", 0x1E85068, 0x8
@@ -3510,48 +3510,48 @@ bank_014:
 .incbin "baserom.gba", 0x1E852F0, 0x8
 .4byte gbwave_010
 .incbin "baserom.gba", 0x1E852FC, 0x74
-.4byte gUnknown_9ECAAD4
+.4byte wave_082
 .incbin "baserom.gba", 0x1E85374, 0x8
-.4byte gUnknown_9EADC80
+.4byte wave_056
 .incbin "baserom.gba", 0x1E85380, 0x8
-.4byte gUnknown_9ECBB2C
+.4byte wave_083
 .incbin "baserom.gba", 0x1E8538C, 0x8
-.4byte gUnknown_9ECAAD4
+.4byte wave_082
 .incbin "baserom.gba", 0x1E85398, 0x8
-.4byte gUnknown_9EACEDC
+.4byte wave_055
 .incbin "baserom.gba", 0x1E853A4, 0x8
-.4byte gUnknown_9EBA840
+.4byte wave_066
 .incbin "baserom.gba", 0x1E853B0, 0x8
 .4byte wave_054
 .incbin "baserom.gba", 0x1E853BC, 0x8
 .4byte wave_054
 .incbin "baserom.gba", 0x1E853C8, 0x8
-.4byte gUnknown_9ECAAD4
+.4byte wave_082
 .incbin "baserom.gba", 0x1E853D4, 0x8
-.4byte gUnknown_9EB94B8
+.4byte wave_064
 .incbin "baserom.gba", 0x1E853E0, 0x8
-.4byte gUnknown_9ECC450
+.4byte wave_084
 .incbin "baserom.gba", 0x1E853EC, 0x8
-.4byte gUnknown_9ECAAD4
+.4byte wave_082
 .incbin "baserom.gba", 0x1E853F8, 0x8
-.4byte gUnknown_9E846F4
+.4byte drums_001
 .incbin "baserom.gba", 0x1E85404, 0x4
-.global gUnknown_9E85408
-gUnknown_9E85408:
+.global bank_015
+bank_015:
 .incbin "baserom.gba", 0x1E85408, 0x4
-.4byte gUnknown_9EDCCB0
+.4byte wave_007
 .incbin "baserom.gba", 0x1E85410, 0x8
-.4byte gUnknown_9EDD60C
+.4byte wave_008
 .incbin "baserom.gba", 0x1E8541C, 0x4
-.global gUnknown_9E85420
-gUnknown_9E85420:
+.global bank_016
+bank_016:
 .incbin "baserom.gba", 0x1E85420, 0x4
-.4byte gUnknown_9EDB81C
+.4byte wave_010
 .incbin "baserom.gba", 0x1E85428, 0x8
-.4byte gUnknown_9EDB81C
+.4byte wave_010
 .incbin "baserom.gba", 0x1E85434, 0x4
-.global gUnknown_9E85438
-gUnknown_9E85438:
+.global bank_017
+bank_017:
 .incbin "baserom.gba", 0x1E85438, 0x4
 .4byte gUnknown_9ED7318
 .incbin "baserom.gba", 0x1E85440, 0x8
@@ -3559,8 +3559,8 @@ gUnknown_9E85438:
 .incbin "baserom.gba", 0x1E8544C, 0x8
 .4byte gUnknown_9EDA304
 .incbin "baserom.gba", 0x1E85458, 0x4
-.global gUnknown_9E8545C
-gUnknown_9E8545C:
+.global bank_018
+bank_018:
 .incbin "baserom.gba", 0x1E8545C, 0x4
 .4byte gUnknown_9ED48CC
 .incbin "baserom.gba", 0x1E85464, 0x8
@@ -3568,55 +3568,55 @@ gUnknown_9E8545C:
 .incbin "baserom.gba", 0x1E85470, 0x8
 .4byte gUnknown_9ED68F0
 .incbin "baserom.gba", 0x1E8547C, 0x4
-.global gUnknown_9E85480
-gUnknown_9E85480:
+.global bank_019
+bank_019:
 .incbin "baserom.gba", 0x1E85480, 0x4
-.4byte gUnknown_9EDB81C
+.4byte wave_010
 .incbin "baserom.gba", 0x1E85488, 0x8
-.4byte gUnknown_9EDC4D8
+.4byte wave_011
 .incbin "baserom.gba", 0x1E85494, 0x4
-.global gUnknown_9E85498
-gUnknown_9E85498:
+.global bank_020
+bank_020:
 .incbin "baserom.gba", 0x1E85498, 0x4
-.4byte gUnknown_9ECD4E8
+.4byte wave_021
 .incbin "baserom.gba", 0x1E854A0, 0x8
-.4byte gUnknown_9ECF9BC
+.4byte wave_022
 .incbin "baserom.gba", 0x1E854AC, 0x8
-.4byte gUnknown_9ED2850
+.4byte wave_023
 .incbin "baserom.gba", 0x1E854B8, 0x4
-.global gUnknown_9E854BC
-gUnknown_9E854BC:
+.global bank_021
+bank_021:
 .incbin "baserom.gba", 0x1E854BC, 0x4
 .4byte gUnknown_9ECCC08
 .incbin "baserom.gba", 0x1E854C4, 0x8
-.4byte gUnknown_9ECD2B4
+.4byte wave_017
 .incbin "baserom.gba", 0x1E854D0, 0x4
-.global gUnknown_9E854D4
-gUnknown_9E854D4:
+.global bank_022
+bank_022:
 .incbin "baserom.gba", 0x1E854D4, 0x4
 .4byte gUnknown_9ECCC08
 .incbin "baserom.gba", 0x1E854DC, 0x8
-.4byte gUnknown_9ECD2B4
+.4byte wave_017
 .incbin "baserom.gba", 0x1E854E8, 0x4
-.global gUnknown_9E854EC
-gUnknown_9E854EC:
+.global bank_023
+bank_023:
 .incbin "baserom.gba", 0x1E854EC, 0x4
-.4byte gUnknown_9EDDF88
+.4byte wave_018
 .global gUnknown_9E854F4
 gUnknown_9E854F4:
 .incbin "baserom.gba", 0x1E854F4, 0x8
-.4byte gUnknown_9EDF1A4
+.4byte wave_019
 .incbin "baserom.gba", 0x1E85500, 0x8
-.4byte gUnknown_9EE0BB8
+.4byte wave_020
 .incbin "baserom.gba", 0x1E8550C, 0x4
-.global gUnknown_9E85510
-gUnknown_9E85510:
+.global bank_024
+bank_024:
 .incbin "baserom.gba", 0x1E85510, 0x4
-.4byte gUnknown_9EE1ED4
+.4byte wave_024
 .incbin "baserom.gba", 0x1E85518, 0x8
-.4byte gUnknown_9EE42C0
+.4byte wave_025
 .incbin "baserom.gba", 0x1E85524, 0x8
-.4byte gUnknown_9EE5674
+.4byte wave_026
 .incbin "baserom.gba", 0x1E85530, 0x4
 .global bank_025
 bank_025:
@@ -3641,26 +3641,26 @@ bank_025:
 .incbin "baserom.gba", 0x1E85794, 0x200
 .4byte gbwave_005
 .incbin "baserom.gba", 0x1E85998, 0x140
-.4byte gUnknown_9EF94E0
+.4byte wave_089
 .incbin "baserom.gba", 0x1E85ADC, 0x4
 .global bank_028
 bank_028:
 .incbin "baserom.gba", 0x1E85AE0, 0x4
 .4byte wave_086
 .incbin "baserom.gba", 0x1E85AE8, 0x8
-.4byte gUnknown_9EFAEA8
+.4byte wave_090
 .incbin "baserom.gba", 0x1E85AF4, 0x8
-.4byte gUnknown_9EFB008
+.4byte wave_091
 .incbin "baserom.gba", 0x1E85B00, 0x8
 .4byte wave_092
 .incbin "baserom.gba", 0x1E85B0C, 0x8
-.4byte gUnknown_9EFE268
+.4byte wave_093
 .incbin "baserom.gba", 0x1E85B18, 0x8
 .4byte wave_094
 .incbin "baserom.gba", 0x1E85B24, 0x8
 .4byte wave_044
 .incbin "baserom.gba", 0x1E85B30, 0x8
-.4byte gUnknown_9EDB81C
+.4byte wave_010
 .incbin "baserom.gba", 0x1E85B3C, 0x8
 .4byte wave_000
 .incbin "baserom.gba", 0x1E85B48, 0x8
@@ -3668,7 +3668,7 @@ bank_028:
 .incbin "baserom.gba", 0x1E85B54, 0x8
 .4byte wave_052
 .incbin "baserom.gba", 0x1E85B60, 0x8
-.4byte gUnknown_9F02F88
+.4byte wave_139
 .incbin "baserom.gba", 0x1E85B6C, 0x8
 .4byte wave_117
 .incbin "baserom.gba", 0x1E85B78, 0x8
@@ -3676,9 +3676,9 @@ bank_028:
 .incbin "baserom.gba", 0x1E85B84, 0x8
 .4byte wave_118
 .incbin "baserom.gba", 0x1E85B90, 0x8
-.4byte gUnknown_9F09560
+.4byte wave_140
 .incbin "baserom.gba", 0x1E85B9C, 0x8
-.4byte gUnknown_9ECD2B4
+.4byte wave_017
 .incbin "baserom.gba", 0x1E85BA8, 0x8
 .4byte wave_032
 .incbin "baserom.gba", 0x1E85BB4, 0x8
@@ -3688,7 +3688,7 @@ bank_028:
 .incbin "baserom.gba", 0x1E85BCC, 0x8
 .4byte wave_012
 .incbin "baserom.gba", 0x1E85BD8, 0x8
-.4byte gUnknown_9F0B31C
+.4byte wave_141
 .incbin "baserom.gba", 0x1E85BE4, 0x8
 .4byte wave_053
 .incbin "baserom.gba", 0x1E85BF0, 0x8
@@ -3696,13 +3696,13 @@ bank_028:
 .incbin "baserom.gba", 0x1E85BFC, 0x8
 .4byte wave_111
 .incbin "baserom.gba", 0x1E85C08, 0x8
-.4byte gUnknown_9F09560
+.4byte wave_140
 .incbin "baserom.gba", 0x1E85C14, 0x8
-.4byte gUnknown_9F0F474
+.4byte wave_142
 .incbin "baserom.gba", 0x1E85C20, 0x8
-.4byte gUnknown_9F10FB0
+.4byte wave_143
 .incbin "baserom.gba", 0x1E85C2C, 0x8
-.4byte gUnknown_9F0B31C
+.4byte wave_141
 .incbin "baserom.gba", 0x1E85C38, 0x8
 .4byte wave_095
 .incbin "baserom.gba", 0x1E85C44, 0x8
@@ -3834,8 +3834,8 @@ map_005:
 .global map_006
 map_006:
 .incbin "baserom.gba", 0x1E8635C, 0x54
-.global gUnknown_9E863B0
-gUnknown_9E863B0:
+.global map_007
+map_007:
 .incbin "baserom.gba", 0x1E863B0, 0x30
 .global map_001
 map_001:
@@ -3846,11 +3846,11 @@ map_000:
 .global map_004
 map_004:
 .incbin "baserom.gba", 0x1E86470, 0x30
-.global gUnknown_9E864A0
-gUnknown_9E864A0:
+.global map_008
+map_008:
 .incbin "baserom.gba", 0x1E864A0, 0x54
-.global gUnknown_9E864F4
-gUnknown_9E864F4:
+.global map_009
+map_009:
 .incbin "baserom.gba", 0x1E864F4, 0x48
 .global gUnknown_9E8653C
 gUnknown_9E8653C:
@@ -3908,20 +3908,17 @@ seq_047:
 	.include "sound/wave/wave_034.s"
 	.include "sound/wave/wave_044.s"
 	.include "sound/wave/wave_054.s"
+	.include "sound/wave/wave_055.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_056.s"
+	.include "sound/wave/wave_057.s"
+	.word 0x0 @ padding?
 
 .align 2
 
 
 
-.global gUnknown_9EACEDC
-gUnknown_9EACEDC:
-.incbin "baserom.gba", 0x1EACEDC, 0xDA4
-.global gUnknown_9EADC80
-gUnknown_9EADC80:
-.incbin "baserom.gba", 0x1EADC80, 0x2810
-.global gUnknown_9EB0490
-gUnknown_9EB0490:
-.incbin "baserom.gba", 0x1EB0490, 0x1E88
+
 .global gUnknown_9EB2318
 gUnknown_9EB2318:
 .incbin "baserom.gba", 0x1EB2318, 0xA48
@@ -3940,14 +3937,14 @@ gUnknown_9EB691C:
 .global gUnknown_9EB7E90
 gUnknown_9EB7E90:
 .incbin "baserom.gba", 0x1EB7E90, 0x1628
-.global gUnknown_9EB94B8
-gUnknown_9EB94B8:
+.global wave_064
+wave_064:
 .incbin "baserom.gba", 0x1EB94B8, 0xDE0
 .global gUnknown_9EBA298
 gUnknown_9EBA298:
 .incbin "baserom.gba", 0x1EBA298, 0x5A8
-.global gUnknown_9EBA840
-gUnknown_9EBA840:
+.global wave_066
+wave_066:
 .incbin "baserom.gba", 0x1EBA840, 0xAEC
 .global gUnknown_9EBB32C
 gUnknown_9EBB32C:
@@ -3994,29 +3991,29 @@ gUnknown_9EC7C70:
 .global gUnknown_9EC93A4
 gUnknown_9EC93A4:
 .incbin "baserom.gba", 0x1EC93A4, 0x1730
-.global gUnknown_9ECAAD4
-gUnknown_9ECAAD4:
+.global wave_082
+wave_082:
 .incbin "baserom.gba", 0x1ECAAD4, 0x1058
-.global gUnknown_9ECBB2C
-gUnknown_9ECBB2C:
+.global wave_083
+wave_083:
 .incbin "baserom.gba", 0x1ECBB2C, 0x924
-.global gUnknown_9ECC450
-gUnknown_9ECC450:
+.global wave_084
+wave_084:
 .incbin "baserom.gba", 0x1ECC450, 0x7B8
 .global gUnknown_9ECCC08
 gUnknown_9ECCC08:
 .incbin "baserom.gba", 0x1ECCC08, 0x6AC
-.global gUnknown_9ECD2B4
-gUnknown_9ECD2B4:
+.global wave_017
+wave_017:
 .incbin "baserom.gba", 0x1ECD2B4, 0x234
-.global gUnknown_9ECD4E8
-gUnknown_9ECD4E8:
+.global wave_021
+wave_021:
 .incbin "baserom.gba", 0x1ECD4E8, 0x24D4
-.global gUnknown_9ECF9BC
-gUnknown_9ECF9BC:
+.global wave_022
+wave_022:
 .incbin "baserom.gba", 0x1ECF9BC, 0x2E94
-.global gUnknown_9ED2850
-gUnknown_9ED2850:
+.global wave_023
+wave_023:
 .incbin "baserom.gba", 0x1ED2850, 0x207C
 .global gUnknown_9ED48CC
 gUnknown_9ED48CC:
@@ -4036,166 +4033,95 @@ gUnknown_9ED8AE8:
 .global gUnknown_9EDA304
 gUnknown_9EDA304:
 .incbin "baserom.gba", 0x1EDA304, 0x1518
-.global gUnknown_9EDB81C
-gUnknown_9EDB81C:
-.incbin "baserom.gba", 0x1EDB81C, 0xCBC
-.global gUnknown_9EDC4D8
-gUnknown_9EDC4D8:
-.incbin "baserom.gba", 0x1EDC4D8, 0x7D8
-.global gUnknown_9EDCCB0
-gUnknown_9EDCCB0:
-.incbin "baserom.gba", 0x1EDCCB0, 0x95C
-.global gUnknown_9EDD60C
-gUnknown_9EDD60C:
-.incbin "baserom.gba", 0x1EDD60C, 0x97C
-.global gUnknown_9EDDF88
-gUnknown_9EDDF88:
-.incbin "baserom.gba", 0x1EDDF88, 0x121C
-.global gUnknown_9EDF1A4
-gUnknown_9EDF1A4:
-.incbin "baserom.gba", 0x1EDF1A4, 0x1A14
-.global gUnknown_9EE0BB8
-gUnknown_9EE0BB8:
-.incbin "baserom.gba", 0x1EE0BB8, 0x131C
-.global gUnknown_9EE1ED4
-gUnknown_9EE1ED4:
-.incbin "baserom.gba", 0x1EE1ED4, 0x23EC
-.global gUnknown_9EE42C0
-gUnknown_9EE42C0:
-.incbin "baserom.gba", 0x1EE42C0, 0x13B4
-.global gUnknown_9EE5674
-gUnknown_9EE5674:
-.incbin "baserom.gba", 0x1EE5674, 0x14EC
-.global gUnknown_9EE6B60
-gUnknown_9EE6B60:
-.incbin "baserom.gba", 0x1EE6B60, 0x158
-.global gUnknown_9EE6CB8
-gUnknown_9EE6CB8:
-.incbin "baserom.gba", 0x1EE6CB8, 0x494
-.global gUnknown_9EE714C
-gUnknown_9EE714C:
-.incbin "baserom.gba", 0x1EE714C, 0x1B4C
-.global gUnknown_9EE8C98
-gUnknown_9EE8C98:
-.incbin "baserom.gba", 0x1EE8C98, 0x282C
-.global gUnknown_9EEB4C4
-gUnknown_9EEB4C4:
-.incbin "baserom.gba", 0x1EEB4C4, 0x2478
-.global gUnknown_9EED93C
-gUnknown_9EED93C:
-.incbin "baserom.gba", 0x1EED93C, 0x2690
-.global gUnknown_9EEFFCC
-gUnknown_9EEFFCC:
-.incbin "baserom.gba", 0x1EEFFCC, 0x150C
-.global gUnknown_9EF14D8
-gUnknown_9EF14D8:
-.incbin "baserom.gba", 0x1EF14D8, 0x2D70
-.global gUnknown_9EF4248
-gUnknown_9EF4248:
-.incbin "baserom.gba", 0x1EF4248, 0x1450
-.global gUnknown_9EF5698
-gUnknown_9EF5698:
-.incbin "baserom.gba", 0x1EF5698, 0x3E48
-.global gUnknown_9EF94E0
-gUnknown_9EF94E0:
-.incbin "baserom.gba", 0x1EF94E0, 0x102C
-.global wave_086
-wave_086:
-.incbin "baserom.gba", 0x1EFA50C, 0x99C
-.global gUnknown_9EFAEA8
-gUnknown_9EFAEA8:
-.incbin "baserom.gba", 0x1EFAEA8, 0x160
-.global gUnknown_9EFB008
-gUnknown_9EFB008:
-.incbin "baserom.gba", 0x1EFB008, 0x18C0
-.global wave_092
-wave_092:
-.incbin "baserom.gba", 0x1EFC8C8, 0x19A0
-.global gUnknown_9EFE268
-gUnknown_9EFE268:
-.incbin "baserom.gba", 0x1EFE268, 0x2434
-.global wave_094
-wave_094:
-.incbin "baserom.gba", 0x1F0069C, 0x1884
-.global wave_095
-wave_095:
-.incbin "baserom.gba", 0x1F01F20, 0x1068
-.global gUnknown_9F02F88
-gUnknown_9F02F88:
-.incbin "baserom.gba", 0x1F02F88, 0x22D4
-.global wave_117
-wave_117:
-.incbin "baserom.gba", 0x1F0525C, 0x1A14
-.global wave_099
-wave_099:
-.incbin "baserom.gba", 0x1F06C70, 0x1CA4
-.global wave_118
-wave_118:
-.incbin "baserom.gba", 0x1F08914, 0xC4C
-.global gUnknown_9F09560
-gUnknown_9F09560:
-.incbin "baserom.gba", 0x1F09560, 0x1DBC
-.global gUnknown_9F0B31C
-gUnknown_9F0B31C:
-.incbin "baserom.gba", 0x1F0B31C, 0x2AB0
-.global wave_111
-wave_111:
-.incbin "baserom.gba", 0x1F0DDCC, 0x16A8
-.global gUnknown_9F0F474
-gUnknown_9F0F474:
-.incbin "baserom.gba", 0x1F0F474, 0x1B3C
-.global gUnknown_9F10FB0
-gUnknown_9F10FB0:
-.incbin "baserom.gba", 0x1F10FB0, 0x3C14
 
-.include "sound/wave/wave_101.s"
-.include "sound/wave/wave_107.s"
-.include "sound/wave/wave_100.s"
-.include "sound/wave/wave_096.s"
-.include "sound/wave/wave_097.s"
-.include "sound/wave/wave_098.s"
-.include "sound/wave/wave_102.s"
-.include "sound/wave/wave_103.s"
-.include "sound/wave/wave_104.s"
-.include "sound/wave/wave_105.s"
-.include "sound/wave/wave_106.s"
-.include "sound/wave/wave_108.s"
-.include "sound/wave/wave_109.s"
-.include "sound/wave/wave_110.s"
-.include "sound/wave/wave_112.s"
-.include "sound/wave/wave_113.s"
-.include "sound/wave/wave_114.s"
-.include "sound/wave/wave_115.s"
-.include "sound/wave/wave_116.s"
-.include "sound/wave/wave_119.s"
-.include "sound/wave/wave_120.s"
-.include "sound/wave/wave_121.s"
-.include "sound/wave/wave_122.s"
-.word 0x0 @ padding?
-.include "sound/wave/wave_123.s"
-.word 0x0 @ padding?
-.include "sound/wave/wave_124.s"
-.include "sound/wave/wave_125.s"
-.word 0x0 @ padding?
-.include "sound/wave/wave_126.s"
-.include "sound/wave/wave_127.s"
-.word 0x0 @ padding?
-.include "sound/wave/wave_128.s"
-.word 0x0 @ padding?
-.include "sound/wave/wave_129.s"
-.word 0x0 @ padding?
-.include "sound/wave/wave_130.s"
-.include "sound/wave/wave_131.s"
-.include "sound/wave/wave_132.s"
-.word 0x0 @ padding?
-.include "sound/wave/wave_133.s"
-.include "sound/wave/wave_134.s"
-.include "sound/wave/wave_135.s"
-.word 0x0 @ padding?
-.include "sound/wave/wave_136.s"
-.word 0x0 @ padding?
-.include "sound/wave/wave_137.s"
-.include "sound/wave/wave_138.s"
+	.include "sound/wave/wave_010.s"
+	.include "sound/wave/wave_011.s"
+	.include "sound/wave/wave_007.s"
+	.include "sound/wave/wave_008.s"
+	.include "sound/wave/wave_018.s"
+	.include "sound/wave/wave_019.s"
+	.include "sound/wave/wave_020.s"
+	.include "sound/wave/wave_024.s"
+	.include "sound/wave/wave_025.s"
+	.include "sound/wave/wave_026.s"
+	.include "sound/wave/wave_029.s"
+	.include "sound/wave/wave_036.s"
+	.include "sound/wave/wave_038.s"
+	.include "sound/wave/wave_039.s"
+	.include "sound/wave/wave_040.s"
+	.include "sound/wave/wave_041.s"
+	.include "sound/wave/wave_042.s"
+	.include "sound/wave/wave_085.s"
+	.include "sound/wave/wave_087.s"
+	.include "sound/wave/wave_088.s"
+	.include "sound/wave/wave_089.s"
+	.include "sound/wave/wave_086.s"
+	.include "sound/wave/wave_090.s"
+	.include "sound/wave/wave_091.s"
+	.include "sound/wave/wave_092.s"
+	.include "sound/wave/wave_093.s"
+	.include "sound/wave/wave_094.s"
+	.include "sound/wave/wave_095.s"
+	.include "sound/wave/wave_139.s"
+	.include "sound/wave/wave_117.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_099.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_118.s"
+	.include "sound/wave/wave_140.s"
+	.include "sound/wave/wave_141.s"
+	.include "sound/wave/wave_111.s"
+	.include "sound/wave/wave_142.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_143.s"
+	.include "sound/wave/wave_101.s"
+	.include "sound/wave/wave_107.s"
+	.include "sound/wave/wave_100.s"
+	.include "sound/wave/wave_096.s"
+	.include "sound/wave/wave_097.s"
+	.include "sound/wave/wave_098.s"
+	.include "sound/wave/wave_102.s"
+	.include "sound/wave/wave_103.s"
+	.include "sound/wave/wave_104.s"
+	.include "sound/wave/wave_105.s"
+	.include "sound/wave/wave_106.s"
+	.include "sound/wave/wave_108.s"
+	.include "sound/wave/wave_109.s"
+	.include "sound/wave/wave_110.s"
+	.include "sound/wave/wave_112.s"
+	.include "sound/wave/wave_113.s"
+	.include "sound/wave/wave_114.s"
+	.include "sound/wave/wave_115.s"
+	.include "sound/wave/wave_116.s"
+	.include "sound/wave/wave_119.s"
+	.include "sound/wave/wave_120.s"
+	.include "sound/wave/wave_121.s"
+	.include "sound/wave/wave_122.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_123.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_124.s"
+	.include "sound/wave/wave_125.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_126.s"
+	.include "sound/wave/wave_127.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_128.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_129.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_130.s"
+	.include "sound/wave/wave_131.s"
+	.include "sound/wave/wave_132.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_133.s"
+	.include "sound/wave/wave_134.s"
+	.include "sound/wave/wave_135.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_136.s"
+	.word 0x0 @ padding?
+	.include "sound/wave/wave_137.s"
+	.include "sound/wave/wave_138.s"
 
 
 
