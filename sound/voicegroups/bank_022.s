@@ -25,14 +25,3 @@ bank_022:
 	.word	wave_017
 	.byte	51, 0, 255, 127
 
-@**************** Voice 002 ****************@
-
-	.byte	DirectSound
-	.byte	Cn3 
-	.byte	0x00
-	.byte	0x00
-	.word	wave_018
-	.byte	64, 0, 255, 0
-
-
-
