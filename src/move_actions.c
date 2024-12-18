@@ -59,7 +59,6 @@ extern u8 *gUnknown_80FD018[];
 extern u8 *gUnknown_80FCFBC[];
 extern u8 *gUnknown_80FCFE4[];
 extern u32 gUnknown_8106A4C;
-extern s16 gRockSlideSecondaryChance;
 extern u8 *gUnknown_80FC734[];
 extern u8 *gUnknown_80FC7EC[];
 extern u8 *gUnknown_80FCF74[];
