@@ -3,9 +3,6 @@
 
 	.syntax unified
 
-	.section .rodata
-
-	.space 0x3C
 
 	.text
 
@@ -145,6 +142,7 @@ _08272860:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8272774
+	
 
 	thumb_func_start sub_8272870
 sub_8272870:
@@ -314,6 +312,7 @@ _08272994:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8272884
+	
 
 	thumb_func_start sub_82729A4
 sub_82729A4:
@@ -429,7 +428,7 @@ _08272A5A:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_82729B8
-
+	
 	thumb_func_start sub_8272A78
 sub_8272A78:
 	push {lr}

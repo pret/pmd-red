@@ -7,8 +7,8 @@
 
 extern u16 gUnknown_2026E4E;
 
-IWRAM_DATA unkStruct_3001B74 *gUnknown_3001B74 = {0};
-IWRAM_DATA unkStruct_3001B70 *gUnknown_3001B78 = {0};
+IWRAM_INIT unkStruct_3001B74 *gUnknown_3001B74 = {NULL};
+IWRAM_INIT unkStruct_3001B70 *gUnknown_3001B78 = {NULL};
 
 extern const u8 gUnknown_8117784[];
 extern const s16 gUnknown_811E5F4[][2];

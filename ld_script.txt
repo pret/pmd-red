@@ -37,7 +37,7 @@ SECTIONS {
     {
         iwram_start = .;
         INCLUDE "sym_iwram.ld"
-        . = 0x8000;
+		iwram_end = .;
     } > IWRAM
 
     /* BEGIN ROM DATA */
@@ -342,10 +342,14 @@ SECTIONS {
         src/ground_sprite.o(.text);
         asm/ground_sprite.o(.text);
         src/code_80A7714.o(.text);
+        src/ground_lives.o(.text);
         asm/ground_lives.o(.text);
+        src/ground_object.o(.text);
         asm/ground_object.o(.text);
+        src/ground_effect.o(.text);
         asm/ground_effect.o(.text);
         src/ground_link.o(.text);
+        src/ground_event.o(.text);
         asm/ground_event.o(.text);
         src/m4a_1.o(.text);
         src/m4a.o(.text);
@@ -741,19 +745,27 @@ SECTIONS {
 	
 	EWRAM_INIT_ROM_START = LOADADDR(ewram_init);
 	
-    unk_code_section :
+	iwram_init :
+	ALIGN(4)
+	{
+		iwram_init_start = .;
+	
+        INCLUDE "sym_iwram_init.ld"
+		src/code_8272724.o(iwram_init);
+        asm/code_8272724.o(.text);
+		
+		iwram_init_end = .;
+    } > IWRAM AT>ROM
+	
+	IWRAM_INIT_ROM_START = LOADADDR(iwram_init);
+	
+	iwram_lib (NOLOAD) :
     ALIGN(4)
     {
-        unk_code = .;
-        asm/code_8272724.o(.rodata);
-        src/code_8272724.o(.text);
-        asm/code_8272724.o(.text);
-        unk_code_end = .;
-    } > ROM =0
-
-    unk_code_section_size = (unk_code_end - unk_code);
-    unk_code_ram_end = unk_code_ram + unk_code_section_size;
-    end = unk_code_ram_end;
+		end = .; /* This is needed for the libc.a function _sbrk */ 
+		. = 0x2090;
+        gUnknown_3004000 = .; /* Used by sub_80001E0 */
+    } > IWRAM
 
     unk_data 0x8300000 :
     ALIGN(4)

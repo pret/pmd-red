@@ -21,7 +21,7 @@ EWRAM_INIT s32 gUnknown_203B2A4 = 1;
 EWRAM_INIT u16 gUnknown_203B2A8 = 0;
 EWRAM_INIT u16 gUnknown_203B2AA = 0;
 
-static IWRAM_DATA unkStruct_3001B5C *gUnknown_3001B5C = {NULL};
+static IWRAM_INIT unkStruct_3001B5C *gUnknown_3001B5C = {NULL};
 
 #include "data/code_8023144.h"
 
