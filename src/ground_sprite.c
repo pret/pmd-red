@@ -9,7 +9,7 @@
 #include "memory.h"
 #include "sprite.h"
 
-IWRAM_DATA unkStruct_3001B7C *gUnknown_3001B7C = {0};
+IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
 
 EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DB0 = {0};
 EWRAM_DATA u32 sUnknown_2039DBC = {0}; // Unused, for alignment

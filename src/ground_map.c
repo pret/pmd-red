@@ -7,8 +7,8 @@
 #include "ground_script.h"
 #include "memory.h"
 
-IWRAM_DATA GroundMapAction *gGroundMapAction = {0};
-IWRAM_DATA unkStruct_3001B70 *gGroundMapDungeon_3001B70 = {0};
+IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
+IWRAM_INIT unkStruct_3001B70 *gGroundMapDungeon_3001B70 = {NULL};
 
 extern GroundMapAction *gGroundMapAction;
 

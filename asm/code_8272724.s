@@ -3,9 +3,6 @@
 
 	.syntax unified
 
-	.section .rodata
-
-	.space 0x3C
 
 	.text
 

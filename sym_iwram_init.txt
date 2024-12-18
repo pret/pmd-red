@@ -1,0 +1,16 @@
+	.align 2
+	
+unk_code_ram: /* 3001B58 */
+
+.include "src/code_80035F0.o"
+.include "src/code_8023144.o"
+.include "src/code_8023868.o"
+.include "src/code_809A560.o"
+.include "src/code_809C5C4.o"
+.include "src/ground_map.o"
+.include "src/ground_map_2.o"
+.include "src/ground_sprite.o"
+.include "src/ground_lives.o"
+.include "src/ground_object.o"
+.include "src/ground_effect.o"
+.include "src/ground_event.o"

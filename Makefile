@@ -261,11 +261,17 @@ $(BUILD_DIR)/sym_ewram.ld: sym_ewram.txt
 
 $(BUILD_DIR)/sym_iwram.ld: sym_iwram.txt
 	$(RAMSCRGEN) iwram_data $< ENGLISH > $@
+	
+$(BUILD_DIR)/sym_iwram_2.ld: sym_iwram_2.txt
+	$(RAMSCRGEN) iwram_data_2 $< ENGLISH > $@
 
 $(BUILD_DIR)/sym_ewram_init.ld: sym_ewram_init.txt
 	$(RAMSCRGEN) ewram_init $< ENGLISH > $@
+	
+$(BUILD_DIR)/sym_iwram_init.ld: sym_iwram_init.txt
+	$(RAMSCRGEN) iwram_init $< ENGLISH > $@
 
-$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram_init.ld $(BUILD_DIR)/sym_iwram.ld
+$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram_init.ld $(BUILD_DIR)/sym_iwram.ld $(BUILD_DIR)/sym_iwram_2.ld $(BUILD_DIR)/sym_iwram_init.ld
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
 
 $(ELF): $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall tools

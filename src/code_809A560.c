@@ -4,7 +4,7 @@
 #include "string_format.h"
 #include "structs/str_3001B64.h"
 
-IWRAM_DATA struct unkStruct_3001B64 *gUnknown_3001B64 = {0};
+IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = {NULL};
 
 extern u16 gUnknown_20399DC;
 extern u16 gUnknown_20399DE;

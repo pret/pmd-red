@@ -37,7 +37,6 @@ SECTIONS {
     {
         iwram_start = .;
         INCLUDE "sym_iwram.ld"
-        . = 0x8000;
     } > IWRAM
 
     /* BEGIN ROM DATA */
@@ -342,10 +341,14 @@ SECTIONS {
         src/ground_sprite.o(.text);
         asm/ground_sprite.o(.text);
         src/code_80A7714.o(.text);
+        src/ground_lives.o(.text);
         asm/ground_lives.o(.text);
+        src/ground_object.o(.text);
         asm/ground_object.o(.text);
+        src/ground_effect.o(.text);
         asm/ground_effect.o(.text);
         src/ground_link.o(.text);
+        src/ground_event.o(.text);
         asm/ground_event.o(.text);
         src/m4a_1.o(.text);
         src/m4a.o(.text);
@@ -741,15 +744,26 @@ SECTIONS {
 	
 	EWRAM_INIT_ROM_START = LOADADDR(ewram_init);
 	
+	iwram_init :
+	ALIGN(4)
+	{
+        INCLUDE "sym_iwram_init.ld"
+    } > IWRAM AT>ROM
+	
+	unk_code = LOADADDR(iwram_init);
     unk_code_section :
     ALIGN(4)
     {
-        unk_code = .;
-        asm/code_8272724.o(.rodata);
         src/code_8272724.o(.text);
         asm/code_8272724.o(.text);
         unk_code_end = .;
     } > ROM =0
+	
+	iwram_data_2 (NOLOAD) :
+    ALIGN(4)
+    {
+        INCLUDE "sym_iwram_2.ld"
+    } > IWRAM
 
     unk_code_section_size = (unk_code_end - unk_code);
     unk_code_ram_end = unk_code_ram + unk_code_section_size;

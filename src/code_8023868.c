@@ -7,7 +7,7 @@
 #include "text_util.h"
 
 //static // MAKE STATIC WHEN code_8023868.s IS DONE
-IWRAM_DATA struct unkStruct_3001B60 *gUnknown_3001B60 = {0};
+IWRAM_INIT struct unkStruct_3001B60 *gUnknown_3001B60 = {NULL};
 
 #include "data/code_8023868.h"
 
