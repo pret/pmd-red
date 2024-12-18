@@ -1,7 +1,5 @@
 	.align 2
 	
-unk_code_ram: /* 3001B58 */
-
 .include "src/code_80035F0.o"
 .include "src/code_8023144.o"
 .include "src/code_8023868.o"

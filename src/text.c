@@ -41,15 +41,16 @@ EWRAM_DATA static u32 sTextShadowMask = 0; // Some text color info is stored; re
 EWRAM_DATA static u8 sDrawTextShadow = 0;
 EWRAM_DATA ALIGNED(4) u16 gUnknown_202B038[4][32][32] = {0};
 
-extern ALIGNED(4) u8 gUnkIwramFunc1Buffer[];
-extern ALIGNED(4) u8 gUnkIwramFunc2Buffer[];
-extern ALIGNED(4) u8 gUnkIwramFunc3Buffer[];
-extern ALIGNED(4) u8 gUnkIwramFunc4Buffer[];
+extern void sub_8272760(s32 a0);
+extern void sub_8272870(s32 a0);
+extern void sub_82729A4(s32 a0);
+extern void sub_8272A78(s32 a0);
+
 // Despite these not being used anywhere in this file, file order and usage point to these variables being declared here
-EWRAM_INIT void (*gUnknown_203B080)(s32 a0) = (void *) &gUnkIwramFunc1Buffer[1]; // + 1 because the function is in thumb!
-EWRAM_INIT void (*gUnknown_203B084)(s32 a0) = (void *) &gUnkIwramFunc2Buffer[1]; // + 1 because the function is in thumb!
-EWRAM_INIT void (*gUnknown_203B088)(s32 a0) = (void *) &gUnkIwramFunc3Buffer[1]; // + 1 because the function is in thumb!
-EWRAM_INIT void (*gUnknown_203B08C)(s32 a0) = (void *) &gUnkIwramFunc4Buffer[1]; // + 1 because the function is in thumb!
+EWRAM_INIT void (*gUnknown_203B080)(s32 a0) = sub_8272760;
+EWRAM_INIT void (*gUnknown_203B084)(s32 a0) = sub_8272870;
+EWRAM_INIT void (*gUnknown_203B088)(s32 a0) = sub_82729A4;
+EWRAM_INIT void (*gUnknown_203B08C)(s32 a0) = sub_8272A78;
 
 // This variable is only used in InitGraphics function, which could or could not belong to text.c
 EWRAM_INIT u8 gUnknown_203B090 = 0;

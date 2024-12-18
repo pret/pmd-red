@@ -37,6 +37,7 @@ SECTIONS {
     {
         iwram_start = .;
         INCLUDE "sym_iwram.ld"
+		iwram_end = .;
     } > IWRAM
 
     /* BEGIN ROM DATA */
@@ -747,27 +748,24 @@ SECTIONS {
 	iwram_init :
 	ALIGN(4)
 	{
+		iwram_init_start = .;
+	
         INCLUDE "sym_iwram_init.ld"
+		src/code_8272724.o(.text);
+        asm/code_8272724.o(.text);
+		
+		iwram_init_end = .;
     } > IWRAM AT>ROM
 	
-	unk_code = LOADADDR(iwram_init);
-    unk_code_section :
-    ALIGN(4)
-    {
-        src/code_8272724.o(.text);
-        asm/code_8272724.o(.text);
-        unk_code_end = .;
-    } > ROM =0
+	IWRAM_INIT_ROM_START = LOADADDR(iwram_init);
 	
-	iwram_data_2 (NOLOAD) :
+	iwram_lib (NOLOAD) :
     ALIGN(4)
     {
-        INCLUDE "sym_iwram_2.ld"
+		end = .; /* This is needed for the libc.a function _sbrk */ 
+		. = 0x2090;
+        gUnknown_3004000 = .; /* Used by sub_80001E0 */
     } > IWRAM
-
-    unk_code_section_size = (unk_code_end - unk_code);
-    unk_code_ram_end = unk_code_ram + unk_code_section_size;
-    end = unk_code_ram_end;
 
     unk_data 0x8300000 :
     ALIGN(4)

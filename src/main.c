@@ -22,12 +22,12 @@ extern u8 ewram_end[]; // Force a second storage in the asm
 extern u8 ewram_init_start[];
 extern u8 ewram_init_end[];
 extern u8 iwram_start[];
-extern u8 iwramClearEnd[];
-extern u8 unk_code[];
-extern u8 unk_code_ram[];
-extern u8 unk_code_ram_end[];
+extern u8 iwram_end[];
+extern u8 iwram_init_start[];
+extern u8 iwram_init_end[];
 
 extern const u8 EWRAM_INIT_ROM_START[];
+extern const u8 IWRAM_INIT_ROM_START[];
 
 UNUSED static const char sStringRomUserData[] = "PKD ROM USER DATA 000000";
 
@@ -56,12 +56,12 @@ void AgbMain(void)
         CpuSet(&value, ewram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((ewram_end - ewram_start) / 4) & 0x1FFFFF));
     }
 
-    if (unk_code_ram_end - unk_code_ram > 0)
-        CpuCopy32(unk_code, unk_code_ram, unk_code_ram_end - unk_code_ram);
+    if (iwram_init_end - iwram_init_start > 0)
+        CpuCopy32(IWRAM_INIT_ROM_START, iwram_init_start, iwram_init_end - iwram_init_start);
 
-    if (iwramClearEnd - iwram_start > 0) {
+    if (iwram_end - iwram_start > 0) {
         memset(value, 0, sizeof(value));
-        CpuSet(&value, iwram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((iwramClearEnd - iwram_start) / 4) & 0x1FFFFF));
+        CpuSet(&value, iwram_start, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (((iwram_end - iwram_start) / 4) & 0x1FFFFF));
     }
 
     REG_WIN0H = 0;

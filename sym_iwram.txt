@@ -16,7 +16,3 @@ gUnknown_3001018: /* 3001018 */
 
 .include "src/code_8094D28.o"
 
-iwramClearEnd:
-
-
-
