@@ -479,66 +479,23 @@ bool8 sub_808D500(void)
     return flag;
 }
 
-#ifdef NONMATCHING
 s32 GetUnitSum_808D544(s32 *team)
 {
-  int *ptr;
-  int index;
-  s32 count;
-  PokemonStruct1 *pokemon;
+    s32 count, i;
+    PokemonStruct1 *mon = gRecruitedPokemonRef->pokemon;
 
-  pokemon = gRecruitedPokemonRef->pokemon;
-  count = 0;
-  for(index = 0, ptr = team; index < NUM_MONSTERS; index++, pokemon++)
-  {
-    if ((PokemonFlag2(pokemon))) {
-      if (team != 0) *ptr = index;
-      ptr++;
-      count++;
+    count = 0;
+    for (i = 0; i < NUM_MONSTERS; i++, mon++) {
+        if (PokemonFlag2(mon)) {
+            if (team != NULL) {
+                team[count] = i;
+            }
+            count++;
+        }
     }
-  }
-  return count;
+
+    return count;
 }
-#else
-NAKED
-s32 GetUnitSum_808D544(s32 *team)
-{
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tadds r4, r0, 0\n"
-	"\tldr r0, _0808D57C\n"
-	"\tldr r3, [r0]\n"
-	"\tmovs r5, 0\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r7, 0x1\n"
-	"\tmovs r6, 0xCE\n"
-	"\tlsls r6, 1\n"
-	"\tadds r1, r4, 0\n"
-"_0808D558:\n"
-	"\tldrh r0, [r3]\n"
-	"\tlsrs r0, 1\n"
-	"\tands r0, r7\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0808D56C\n"
-	"\tcmp r4, 0\n"
-	"\tbeq _0808D568\n"
-	"\tstr r2, [r1]\n"
-"_0808D568:\n"
-	"\tadds r1, 0x4\n"
-	"\tadds r5, 0x1\n"
-"_0808D56C:\n"
-	"\tadds r2, 0x1\n"
-	"\tadds r3, 0x58\n"
-	"\tcmp r2, r6\n"
-	"\tble _0808D558\n"
-	"\tadds r0, r5, 0\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r1}\n"
-	"\tbx r1\n"
-	"\t.align 2, 0\n"
-"_0808D57C: .4byte gRecruitedPokemonRef");
-}
-#endif
 
 s32 sub_808D580(s32 *team)
 {
@@ -974,9 +931,10 @@ u8 GetUnk12(s16 index)
     return gMonsterParameters[index].unk12;
 }
 
-s16 GetPokemonEvolveFrom(s16 index)
+s32 GetPokemonEvolveFrom(s32 index)
 {
-    return gMonsterParameters[index].preEvolution.evolveFrom;
+    s16 index_s16 = index;
+    return gMonsterParameters[index_s16].preEvolution.evolveFrom;
 }
 
 s32 GetBaseOffensiveStat(s32 index, u32 r1)
@@ -1388,7 +1346,7 @@ s32 GetEvolutionSequence(PokemonStruct1* pokemon, struct EvolveStage* a2)
       if (!pokemon->unkC[i].level) {
           break;
       }
-      species = GetPokemonEvolveFrom(species);
+      species = (s16) GetPokemonEvolveFrom(species);
       if (!species) {
           break;
       }
@@ -1418,7 +1376,7 @@ s32 GetEvolutionSequence(PokemonStruct1* pokemon, struct EvolveStage* a2)
       if (!has_next_stage->level) {
           break;
       }
-      species = GetPokemonEvolveFrom(species);
+      species = (s16) GetPokemonEvolveFrom(species);
       if (!species) {
           break;
       }
@@ -1435,7 +1393,7 @@ s32 GetEvolutionSequence(PokemonStruct1* pokemon, struct EvolveStage* a2)
 s32 sub_808E400(s32 _species, s16* _a2, bool32 _bodySizeCheck, bool32 _shedinjaCheck)
 {
     // This is horrible
-    s32 species = SpeciesId(_species);
+    s32 species = (s16) (_species);
     bool8 bodySizeCheck = _bodySizeCheck;
     bool8 shedinjaCheck = _shedinjaCheck;
     s32 count = 0;
@@ -1443,14 +1401,10 @@ s32 sub_808E400(s32 _species, s16* _a2, bool32 _bodySizeCheck, bool32 _shedinjaC
     s16 *a2 = _a2;
 
     for (i = 1; i < MONSTER_MAX; i++) {
-        s32 loopSpeciesId = SpeciesId(i);
-        #ifdef NONMATCHING
-        s32 loopSpeciesId2 = SpeciesId(i);
-        #else
-        register s32 loopSpeciesId2 asm("r8") = SpeciesId(i);
-        #endif // NONMATCHING
+        s32 loopSpeciesId = (s16) i;
+        s32 loopSpeciesId2 = (s16) loopSpeciesId; // Needed to match
 
-        if (species != GetPokemonEvolveFrom(loopSpeciesId)) {
+        if (species != (s16) GetPokemonEvolveFrom(loopSpeciesId)) {
             continue;
         }
         if (!bodySizeCheck && GetBodySize(species) != GetBodySize(loopSpeciesId)) {

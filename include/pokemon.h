@@ -63,7 +63,7 @@ u8 GetFriendArea(s32 index);
 s32 GetBaseHP(s32 index);
 bool8 MonsterIDCanThrowItems(s16 index);
 u8 GetUnk12(s16 index);
-s16 GetPokemonEvolveFrom(s16 index);
+s32 GetPokemonEvolveFrom(s32 index);
 s32 GetBaseOffensiveStat(s32 index, u32 r1);
 s32 GetBaseDefensiveStat(s32 index, u32 r1);
 u8 GetPokemonType(s32 index, u32 typeIndex);

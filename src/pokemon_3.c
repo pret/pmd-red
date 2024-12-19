@@ -1166,7 +1166,7 @@ PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, short _species)
       u8 buffer [64];
       s32 species = _species;
       bool32 flag = TRUE;
-      
+
       pokeStruct = *pokemon;
       r6 = pokeStruct.speciesNum;
       GetPokemonLevelData(&levelData,species,pokeStruct.level);
@@ -1179,7 +1179,7 @@ PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, short _species)
       else if (pokeStruct.unkC[1].level == 0) {
         pokeStruct.unkC[1].level = pokeStruct.level;
       }
-    
+
       CopyStringtoBuffer(buffer, GetMonSpecies(r6));
 
       index = 0;
