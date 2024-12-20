@@ -4,6 +4,7 @@
 #include "code_800D090.h"
 #include "code_8097DD0.h"
 #include "constants/colors.h"
+#include "constants/monster.h"
 #include "decompress.h"
 #include "file_system.h"
 #include "pokemon_3.h"
@@ -11,6 +12,7 @@
 #include "moves.h"
 #include "friend_area.h"
 #include "exclusive_pokemon.h"
+#include "cpu.h"
 
 extern struct FileArchive gSystemFileArchive;
 extern struct FileArchive gMonsterFileArchive;
@@ -26,19 +28,9 @@ static EWRAM_DATA LevelData gLevelCurrentData[0x64] = {0};
 EWRAM_INIT unkStruct_203B45C *gRecruitedPokemonRef = {NULL};
 
 struct unkStruct_8107654 {
-  s16 unk0;
-  s16 fill2;
-  s32 unk4;
+    s16 species;
+    s32 unk4;
 };
-
-//const char gUnknown_810763C[] = "{color}%c%s{reset}" ;
-//const u8 gUnknown_8107645[12] = {0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-//struct unkStruct_8107654 gUnknown_8107654[6];
-//ALIGNED(4) const char gUnknown_8107684[] = "kao%03d";
-//ALIGNED(4) const char gUnknown_810768C[] = "lvmp%03d";  // lvmp%03d\0
-//const u8 gShadowSpriteSizeFlags_8107698[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00 };
-//ALIGNED(4) const char gUnknown_81076BC[] = "etcfont";
-//const s32 gUnknown_81076C4[6] = {-4, -8, -16, -4, -8, -16}; // x-coord positioning for shadow sprites
 
 ALIGNED(4) static const char sMonsterParameterFileName[] = "monspara";
 ALIGNED(4) static const char gUnknown_8107600[] = _("{color YELLOW_RAW}%s{reset}");
@@ -46,14 +38,8 @@ ALIGNED(4) static const char gUnknown_8107608[] = _("{color CYAN_RAW}%s{reset}")
 ALIGNED(4) static const char gUnownLetters[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?";
 ALIGNED(4) static const char gUnknown_8107630[] = "%s%c";
 ALIGNED(4) static const char gUnknown_8107638[] = "%s";
-extern const char gUnknown_810763C[];
-extern const u8 gUnknown_8107645[12];
-extern struct unkStruct_8107654 gUnknown_8107654[6];
-extern const char gUnknown_8107684[];
-extern const char gUnknown_810768C[];  // lvmp%03d
-extern const u8 gShadowSpriteSizeFlags_8107698[];
-extern const char gUnknown_81076BC[];
-extern const s32 gUnknown_81076C4[6];
+ALIGNED(4) static const char gUnknown_810763C[] = _("{color}%c%s{reset}");
+static const u8 gUnknown_8107645[12] = {0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 extern s16 gFrenzyPlantIQReq;  // 0x14d
 extern s16 gHydroCannonIQReq;  // 0x14d
@@ -835,19 +821,25 @@ void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon)
   sub_80922B4(buffer, pokemon->name, POKEMON_NAME_LENGTH);
 }
 
-bool8 sub_808DA44(s32 a1_, u32 a2_)
+bool8 sub_808DA44(s32 _species, u32 a2_)
 {
   // this is the dumbest thing ever, but just making a1 a s16 and
   // a2 a u8 did weird stuff with shifting...
-  s32 a1 = (s16)a1_;
+  s32 species = (s16) _species;
   u32 a2 = (u8)a2_;
   if (a2 > 0xc) {
     s32 i;
-    struct unkStruct_8107654 data[6];
-    memcpy(data, gUnknown_8107654, 6 * sizeof(struct unkStruct_8107654));
+    struct unkStruct_8107654 data[6] = {
+    {MONSTER_JIRACHI, 0xD},
+    {MONSTER_RAIKOU, 0xD},
+    {MONSTER_ALAKAZAM, 0xE},
+    {MONSTER_DUGTRIO, 0xD},
+    {MONSTER_DUGTRIO, 0xE},
+    {MONSTER_NONE, 0},
+  };
 
-    for (i = 0; i < 10 && data[i].unk0; i++) {
-      if (data[i].unk0 == a1 && data[i].unk4 == a2) {
+    for (i = 0; i < 10 && data[i].species != MONSTER_NONE; i++) {
+      if (data[i].species == species && data[i].unk4 == a2) {
         return 1;
       }
     }
@@ -1022,7 +1014,7 @@ OpenedFile *OpenPokemonDialogueSpriteFile(s16 index)
     {
         return NULL;
     }
-    sprintf(buffer, gUnknown_8107684, index); // "kao%03d"
+    sprintf(buffer, "kao%03d", index);
     return OpenFile(buffer, &gMonsterFileArchive);
 }
 
@@ -1036,7 +1028,7 @@ OpenedFile *GetDialogueSpriteDataPtr(s32 index)
     {
         return NULL;
     }
-    sprintf(buffer, gUnknown_8107684, id); // "kao%03d"
+    sprintf(buffer, "kao%03d", id);
     return OpenFileAndGetFileDataPtr(buffer, &gMonsterFileArchive);
 }
 
@@ -1160,8 +1152,7 @@ void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level)
     OpenedFile *file;
 
     gLevelCurrentPokeId = id;
-    // lvmp%03d\0
-    sprintf(buffer, gUnknown_810768C, id);
+    sprintf(buffer, "lvmp%03d", id);
     file = OpenFileAndGetFileDataPtr(buffer, &gSystemFileArchive);
     DecompressATFile((char*)gLevelCurrentData, 0, file);
     CloseFile(file);
@@ -1459,3 +1450,130 @@ char* sub_808E51C(s32 a1)
     return result[0]->unk4;
 }
 
+extern const struct FileArchive gDungeonFileArchive;
+
+struct ShadowSpriteFlags {
+    u32 shape;
+    u32 size;
+    u32 tileNum;
+};
+
+static const struct ShadowSpriteFlags gShadowSpriteSizeFlags_8107698[] = {
+    [0] = {
+        .shape = 0,
+        .size = 0,
+        .tileNum = 0,
+    },
+    [1] = {
+        .shape = 1,
+        .size = 0,
+        .tileNum = 1,
+    },
+    [2] = {
+        .shape = 1,
+        .size = 1,
+        .tileNum = 3,
+    },
+};
+
+void InitShadowSprites(s32 param_1, s32 param_2)
+{
+    u8 *vram;
+    s32 i, spriteIndex;
+
+    OpenedFile *file = OpenFileAndGetFileDataPtr("etcfont", &gDungeonFileArchive);
+    const u8 *src = file->data;
+    i = 7;
+    src += 4;
+    vram = OBJ_VRAM0 + param_1 * 0x20;
+
+    // This loop could be a fakematch, but I couldn't get it work with a regular 'for(i = 0; i < 7; i)' loop.
+    while (i != 0)
+    {
+        CpuCopy(vram, src, 0x20);
+        vram += 0x20;
+        src += 0x20;
+        i--;
+    }
+
+    CloseFile(file);
+
+    for (spriteIndex = 0; spriteIndex < 3; spriteIndex++) {
+        u32 objMode, shape, size, tileNum, priority;
+
+        SpriteOAM *sprite = &gShadowSprites[spriteIndex];
+
+        sprite->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
+        sprite->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+
+        objMode = 0;
+        objMode &= SPRITEOAM_MAX_OBJMODE;
+        objMode <<= SPRITEOAM_SHIFT_OBJMODE;
+        sprite->attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
+        sprite->attrib1 |= objMode;
+
+        sprite->attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
+        sprite->attrib1 &= ~SPRITEOAM_MASK_BPP;
+
+        shape = gShadowSpriteSizeFlags_8107698[spriteIndex].shape;
+        shape &= SPRITEOAM_MAX_SHAPE;
+        shape <<= SPRITEOAM_SHIFT_SHAPE;
+        sprite->attrib1 &= ~SPRITEOAM_MASK_SHAPE;
+        sprite->attrib1 |= shape;
+
+        sprite->attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
+
+        size = gShadowSpriteSizeFlags_8107698[spriteIndex].size;
+        size &= SPRITEOAM_MAX_SIZE;
+        size <<= SPRITEOAM_SHIFT_SIZE;
+        sprite->attrib2 &= ~SPRITEOAM_MASK_SIZE;
+        sprite->attrib2 |= size;
+
+        tileNum = gShadowSpriteSizeFlags_8107698[spriteIndex].tileNum + param_1;
+        tileNum &= SPRITEOAM_MAX_TILENUM;
+        tileNum <<= SPRITEOAM_SHIFT_TILENUM;
+        sprite->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
+        sprite->attrib3 |= tileNum;
+
+        priority = param_2;
+        priority &= SPRITEOAM_MAX_PRIORITY;
+        priority <<= SPRITEOAM_SHIFT_PRIORITY;
+        sprite->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
+        sprite->attrib3 |= priority;
+
+        sprite->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
+
+        sprite->unk6 &= ~SPRITEOAM_MASK_UNK6_0;
+        sprite->unk6 &= ~SPRITEOAM_MASK_UNK6_1;
+    }
+}
+
+static const s32 gUnknown_81076C4[6] = {-4, -8, -16, -4, -8, -16}; // x-coord positioning for shadow sprites
+
+bool8 AddShadowSprite(s16 species, s16* a2, s16* a3)
+{
+    if (species != MONSTER_DIGLETT && species != MONSTER_DUGTRIO) {
+        s32 shadowSize = GetShadowSize(species);
+        s32 x, y;
+        SpriteOAM* spr;
+
+        x = a2[0] + a3[8];
+        y = a2[1] + a3[9];
+        x += gUnknown_81076C4[shadowSize];
+        y -= 4;
+
+        x &= SPRITEOAM_MAX_X;
+        x <<= SPRITEOAM_SHIFT_X;
+        spr = &gShadowSprites[shadowSize];
+        spr->attrib2 &= ~SPRITEOAM_MASK_X;
+        spr->attrib2 |= x;
+
+        y &= SPRITEOAM_MAX_UNK6_4;
+        y <<= SPRITEOAM_SHIFT_UNK6_4;
+        spr->unk6 &= ~SPRITEOAM_MASK_UNK6_4;
+        spr->unk6 |= y;
+        AddSprite(spr, 0, NULL, NULL);
+    }
+
+    return TRUE;
+}

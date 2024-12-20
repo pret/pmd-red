@@ -290,7 +290,6 @@ SECTIONS {
         src/code_80869E4.o(.text);
         src/dungeon_cutscenes.o(.text);
         src/pokemon.o(.text);
-        asm/pokemon_2.o(.text);
         src/pokemon_3.o(.text);
         src/dungeon.o(.text);
         asm/dungeon_2.o(.text);
