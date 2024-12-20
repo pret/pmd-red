@@ -1678,7 +1678,7 @@ _08067B98: .4byte gUnknown_202F308
 _08067B9C: .4byte gUnknown_202F30C
 _08067BA0: .4byte gUnknown_202EE10
 _08067BA4: .4byte gUnknown_8106DA4
-_08067BA8: .4byte gUnknown_203B080
+_08067BA8: .4byte gIwramTextFunc1
 _08067BAC:
 	ldr r0, _08067BF8
 	ldrh r1, [r0, 0x4]
@@ -1721,7 +1721,7 @@ _08067BF0:
 	.align 2, 0
 _08067BF8: .4byte gRealInputs
 _08067BFC: .4byte gUnknown_202EE10
-_08067C00: .4byte gUnknown_203B080
+_08067C00: .4byte gIwramTextFunc1
 _08067C04:
 	adds r0, r1, 0
 	movs r1, 0
@@ -1754,7 +1754,7 @@ _08067C38:
 	mov r10, r1
 	b _08067CF6
 	.align 2, 0
-_08067C40: .4byte gUnknown_203B084
+_08067C40: .4byte gIwramTextFunc2
 _08067C44:
 	ldr r0, _08067C8C
 	ldrh r1, [r0, 0x4]
@@ -1794,7 +1794,7 @@ _08067C84:
 	.align 2, 0
 _08067C8C: .4byte gRealInputs
 _08067C90: .4byte gUnknown_202EE10
-_08067C94: .4byte gUnknown_203B084
+_08067C94: .4byte gIwramTextFunc2
 _08067C98:
 	adds r0, r1, 0
 	movs r1, 0
@@ -2493,7 +2493,7 @@ _08068224:
 	strh r0, [r4]
 	b _080682E8
 	.align 2, 0
-_08068244: .4byte gUnknown_203B080
+_08068244: .4byte gIwramTextFunc1
 _08068248:
 	ldr r0, _0806828C
 	ldrh r1, [r0, 0x4]
@@ -2529,7 +2529,7 @@ _0806826C:
 	b _080682E8
 	.align 2, 0
 _0806828C: .4byte gRealInputs
-_08068290: .4byte gUnknown_203B084
+_08068290: .4byte gIwramTextFunc2
 _08068294:
 	bl sub_80048C8
 	lsls r0, 24

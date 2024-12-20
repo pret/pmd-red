@@ -443,7 +443,7 @@ _08061D8E:
 	mov r8, r2
 	b _080621E6
 	.align 2, 0
-_08061D94: .4byte gUnknown_203B080
+_08061D94: .4byte gIwramTextFunc1
 _08061D98:
 	ldr r0, _08061DDC
 	ldrh r1, [r0, 0x4]
@@ -481,7 +481,7 @@ _08061DC2:
 	.align 2, 0
 _08061DDC: .4byte gRealInputs
 _08061DE0: .4byte gUnknown_202EE10
-_08061DE4: .4byte gUnknown_203B080
+_08061DE4: .4byte gIwramTextFunc1
 _08061DE8:
 	adds r0, r1, 0
 	movs r1, 0
@@ -514,7 +514,7 @@ _08061E0A:
 	add r1, sp
 	b _08061F90
 	.align 2, 0
-_08061E24: .4byte gUnknown_203B084
+_08061E24: .4byte gIwramTextFunc2
 _08061E28:
 	ldr r0, _08061E74
 	ldrh r1, [r0, 0x4]
@@ -556,7 +556,7 @@ _08061E58:
 	.align 2, 0
 _08061E74: .4byte gRealInputs
 _08061E78: .4byte gUnknown_202EE10
-_08061E7C: .4byte gUnknown_203B084
+_08061E7C: .4byte gIwramTextFunc2
 _08061E80:
 	adds r0, r1, 0
 	movs r1, 0
@@ -589,7 +589,7 @@ _08061EA6:
 	bge _08061EA6
 	b _08061EFC
 	.align 2, 0
-_08061EBC: .4byte gUnknown_203B080
+_08061EBC: .4byte gIwramTextFunc1
 _08061EC0:
 	ldr r0, _08061F0C
 	ldrh r1, [r0, 0x4]
@@ -632,7 +632,7 @@ _08061F04:
 	.align 2, 0
 _08061F0C: .4byte gRealInputs
 _08061F10: .4byte gUnknown_202EE10
-_08061F14: .4byte gUnknown_203B080
+_08061F14: .4byte gIwramTextFunc1
 _08061F18:
 	adds r0, r1, 0
 	movs r1, 0
@@ -660,7 +660,7 @@ _08061F36:
 	bge _08061F36
 	b _08061F8E
 	.align 2, 0
-_08061F4C: .4byte gUnknown_203B084
+_08061F4C: .4byte gIwramTextFunc2
 _08061F50:
 	ldr r0, _08061F9C
 	ldrh r1, [r0, 0x4]
@@ -704,7 +704,7 @@ _08061F96:
 	.align 2, 0
 _08061F9C: .4byte gRealInputs
 _08061FA0: .4byte gUnknown_202EE10
-_08061FA4: .4byte gUnknown_203B084
+_08061FA4: .4byte gIwramTextFunc2
 _08061FA8:
 	adds r0, r1, 0
 	movs r1, 0
@@ -9131,7 +9131,7 @@ _0806633E:
 	.align 2, 0
 _08066348: .4byte gUnknown_8106D8C
 _0806634C: .4byte gFormatBuffer_Monsters
-_08066350: .4byte gUnknown_203B084
+_08066350: .4byte gIwramTextFunc2
 _08066354: .4byte gUnknown_202F2F8
 	thumb_func_end sub_8066288
 
@@ -9233,7 +9233,7 @@ _0806641A:
 	.align 2, 0
 _08066424: .4byte gUnknown_8106D8C
 _08066428: .4byte gFormatBuffer_Monsters
-_0806642C: .4byte gUnknown_203B080
+_0806642C: .4byte gIwramTextFunc1
 _08066430: .4byte gUnknown_202F2F8
 	thumb_func_end sub_8066358
 

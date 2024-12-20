@@ -44,11 +44,6 @@ extern void sub_8083CE0(u8 param_1);
 extern u32 gUnknown_202EDD0;
 extern u8 gUnknown_203B40C;
 extern u8 gUnknown_202EE01;
-extern void (*gUnknown_203B08C)(s32);
-extern void (*gUnknown_203B084)(s32 a0);
-extern void (*gUnknown_203B080)(s32 a0);
-extern u8 gSpeakerNameBuffer[];
-extern UnkTextStruct1 gUnknown_2027370[4];
 extern s32 gUnknown_202EDCC;
 extern Palette32 gFontPalette[];
 
@@ -303,7 +298,7 @@ void xxx_draw_string_80524F0(void)
         }
     case 3:
         strPtr->unk1C068++;
-        gUnknown_203B08C(0);
+        gIwramTextFunc4(0);
         if (strPtr->unk1C068 > 10) {
             strPtr->unk1C06C = 2;
         }
@@ -1024,7 +1019,7 @@ static bool8 TryScrollLogUp(s32 a0)
     sub_803E46C(0xD);
 
     for (i = 0; i < 7; i++) {
-        gUnknown_203B084(0);
+        gIwramTextFunc2(0);
         sub_803E46C(0xD);
     }
 
@@ -1074,7 +1069,7 @@ static bool8 TryScrollLogDown(s32 a0)
     sub_803E46C(0xD);
 
     for (i = 0; i < 7; i++) {
-        gUnknown_203B080(0);
+        gIwramTextFunc1(0);
         sub_803E46C(0xD);
     }
 

@@ -53,6 +53,10 @@ extern UnkTextStruct1 gUnknown_2027370[4];
 extern u8 gUnknown_202749A[11];
 extern bool8 gUnknown_20274A5;
 extern u16 gUnknown_202B038[4][32][32]; // Usage points to these dimensions
+extern void (*gIwramTextFunc1)(s32 a0);
+extern void (*gIwramTextFunc2)(s32 a0);
+extern void (*gIwramTextFunc3)(s32 a0);
+extern void (*gIwramTextFunc4)(s32 a0);
 
 void LoadCharmaps(void);
 u32 UpdateFadeInTile(u32 a0);
