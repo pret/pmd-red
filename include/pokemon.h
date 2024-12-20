@@ -12,8 +12,8 @@
 enum PokemonUnk0Flags
 {
     FLAG_NONE = 0,
-    FLAG_UNK_1 = 1,
-    FLAG_ON_TEAM = 2, // Mon is not on "standby"
+    FLAG_UNK_1 = 1 << 0,
+    FLAG_ON_TEAM = 1 << 1, // Mon is not on "standby"
 };
 
 // size: 0x1A4
@@ -108,22 +108,22 @@ bool8 sub_808DA44(s32, u32);
 
 static inline bool8 PokemonFlag1(PokemonStruct1 *mon)
 {
-    return (mon->unk0 >> (FLAG_UNK_1 - 1)) & 1;
+    return (mon->unk0 & FLAG_UNK_1) != 0;
 }
 
 static inline bool8 PokemonFlag1Struct2(PokemonStruct2 *mon)
 {
-    return (mon->unk0 >> (FLAG_UNK_1 - 1)) & 1;
+    return (mon->unk0 & FLAG_UNK_1) != 0;
 }
 
 static inline bool8 PokemonFlag2(PokemonStruct1 *mon)
 {
-    return (mon->unk0 >> (FLAG_ON_TEAM - 1)) & 1;
+    return (mon->unk0 & FLAG_ON_TEAM) != 0;
 }
 
 static inline bool8 PokemonFlag2Struct2(PokemonStruct2 *mon)
 {
-    return (mon->unk0 >> (FLAG_ON_TEAM - 1)) & 1;
+    return (mon->unk0 & FLAG_ON_TEAM) != 0;
 }
 
 static inline void SetPokemonFlag2(PokemonStruct1 *mon)
