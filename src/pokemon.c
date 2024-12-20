@@ -372,38 +372,30 @@ PokemonStruct1 * sub_808D378(void)
     return NULL;
 }
 
-// NOTE: couldn't match with macros..
-// https://decomp.me/scratch/Qorg0
 PokemonStruct1 * sub_808D3BC(void)
 {
-  PokemonStruct1 *pokeStruct;
-  s32 index;
-
-  for(index = 0; index < NUM_MONSTERS; index++)
-  {
-       pokeStruct = &gRecruitedPokemonRef->pokemon[index];
-       if(((*(u8 *)&pokeStruct->unk0 & FLAG_UNK_1) && (pokeStruct->dungeonLocation.id == DUNGEON_JOIN_LOCATION_LEADER))) {
-            return pokeStruct;
-       }
-  }
-  return NULL;
+    s32 index;
+    for (index = 0; index < NUM_MONSTERS; index++) {
+        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[index])
+            && (gRecruitedPokemonRef->pokemon[index].dungeonLocation.id == DUNGEON_JOIN_LOCATION_LEADER))
+        {
+            return &gRecruitedPokemonRef->pokemon[index];
+        }
+    }
+    return NULL;
 }
 
-// NOTE: couldn't match with macros..
-// https://decomp.me/scratch/jCa3V
 PokemonStruct1 * sub_808D3F8(void)
 {
-  PokemonStruct1 *pokeStruct;
-  s32 index;
-
-  for(index = 0; index < NUM_MONSTERS; index++)
-  {
-       pokeStruct = &gRecruitedPokemonRef->pokemon[index];
-       if(((*(u8 *)&pokeStruct->unk0 & FLAG_UNK_1) && (pokeStruct->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER))) {
+    s32 index;
+    for (index = 0; index < NUM_MONSTERS; index++) {
+        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[index])
+            && (gRecruitedPokemonRef->pokemon[index].dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER))
+        {
             return &gRecruitedPokemonRef->pokemon[index];
-       }
-  }
-  return NULL;
+        }
+    }
+    return NULL;
 }
 
 PokemonStruct1 * sub_808D434(s16 species, s32 param_2)
@@ -598,113 +590,32 @@ bool8 sub_808D6E8()
     return 0;
 }
 
-// this one is surprisingly frustrating
-// https://decomp.me/scratch/OIMII - (99.24% matching - Seth)
-NAKED
-bool8 sub_808D750(s16 index_) {
-  asm_unified(
-"\tpush {r4-r7,lr}\n"
-"\tmov r7, r9\n"
-"\tmov r6, r8\n"
-"\tpush {r6,r7}\n"
-"\tlsls r0, 16\n"
-"\tasrs r0, 16\n"
-"\tmov r8, r0\n"
-"\tmovs r6, 0\n"
-"\tmovs r5, 0\n"
-"\tmovs r4, 0\n"
-"\tldr r0, _0808D7C8\n"
-"\tmov r9, r0\n"
-"\tmovs r7, 0x1\n"
-"_0808D76A:\n"
-"\tmovs r0, 0x58\n"
-"\tadds r1, r4, 0\n"
-"\tmuls r1, r0\n"
-"\tmov r2, r9\n"
-"\tldr r0, [r2]\n"
-"\tadds r1, r0, r1\n"
-"\tldrh r2, [r1]\n"
-"\tadds r0, r7, 0\n"
-"\tands r0, r2\n"
-"\tcmp r0, 0\n"
-"\tbeq _0808D798\n"
-"\tlsrs r0, r2, 1\n"
-"\tands r0, r7\n"
-"\tcmp r0, 0\n"
-"\tbeq _0808D798\n"
-"\tmovs r2, 0x8\n"
-"\tldrsh r0, [r1, r2]\n"
-"\tbl GetBodySize\n"
-"\tlsls r0, 24\n"
-"\tlsrs r0, 24\n"
-"\tadds r5, r0\n"
-"\tadds r6, 0x1\n"
-"_0808D798:\n"
-"\tadds r4, 0x1\n"
-"\tmovs r0, 0xCE\n"
-"\tlsls r0, 1\n"
-"\tcmp r4, r0\n"
-"\tble _0808D76A\n"
-"\tcmp r6, 0x3\n"
-"\tbgt _0808D7CC\n"
-"\tldr r2, _0808D7C8\n"
-"\tmovs r0, 0x58\n"
-"\tmov r1, r8\n"
-"\tmuls r1, r0\n"
-"\tldr r0, [r2]\n"
-"\tadds r1, r0, r1\n"
-"\tmovs r2, 0x8\n"
-"\tldrsh r0, [r1, r2]\n"
-"\tbl GetBodySize\n"
-"\tlsls r0, 24\n"
-"\tlsrs r0, 24\n"
-"\tadds r5, r0\n"
-"\tcmp r5, 0x6\n"
-"\tbgt _0808D7CC\n"
-"\tmovs r0, 0x1\n"
-"\tb _0808D7CE\n"
-"\t.align 2, 0\n"
-"_0808D7C8: .4byte gRecruitedPokemonRef\n"
-"_0808D7CC:\n"
-"\tmovs r0, 0\n"
-"_0808D7CE:\n"
-"\tpop {r3,r4}\n"
-"\tmov r8, r3\n"
-"\tmov r9, r4\n"
-"\tpop {r4-r7}\n"
-"\tpop {r1}\n"
-"\tbx r1\n"
-  );
-}
+ bool8 sub_808D750(s32 index_)
+ {
+     PokemonStruct1* pokemon;
+     s32 i;
+     s32 index = (s16) index_;
+     s32 count = 0;
+     s32 size_count = 0;
 
-// bool8 sub_808D750(s16 index_) {
-//     s32 i;
-//     register s32 index asm("r8") = index_;
-//     s32 count = 0;
-//     s32 size_count = 0;
+     for (i = 0; i < 413; i++) {
+         pokemon = &gRecruitedPokemonRef->pokemon[i];
+         if (PokemonFlag1(pokemon) && PokemonFlag2(pokemon)) {
+             size_count += GetBodySize(pokemon->speciesNum);
+             count++;
+         }
+     }
 
-//     for (i = 0; i < 413; i++) {
-//         register PokemonStruct1* pokemon = &i[gRecruitedPokemonRef->pokemon];
-//         register u16 unk0 = pokemon->unk0;
-//         if ((unk0 & 1) && ((pokemon->unk0 >> 1) & 1)) {
-//             size_count += GetBodySize(pokemon->speciesNum);
-//             count++;
-//         }
-//     }
+     if (count < 4) {
+         pokemon = &gRecruitedPokemonRef->pokemon[index];
+         size_count += GetBodySize(pokemon->speciesNum);
+         if (size_count < 7) {
+             return TRUE;
+         }
+     }
 
-//     if (count < 4) {
-//         PokemonStruct1* pokemon;
-
-//         pokemon = &gRecruitedPokemonRef->pokemon[index];
-
-//         size_count += GetBodySize(pokemon->speciesNum);
-//         if (size_count < 7) {
-//             return TRUE;
-//         }
-//     }
-//     return FALSE;
-// }
-
+     return FALSE;
+ }
 
 void PeekPokemonItem(s16 index_, BulkItem* item) {
     s32 index = index_;
