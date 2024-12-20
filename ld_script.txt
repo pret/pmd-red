@@ -751,8 +751,6 @@ SECTIONS {
 		iwram_init_start = .;
 	
         INCLUDE "sym_iwram_init.ld"
-		src/code_8272724.o(iwram_init);
-        asm/code_8272724.o(.text);
 		
 		iwram_init_end = .;
     } > IWRAM AT>ROM

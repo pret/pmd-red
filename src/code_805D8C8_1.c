@@ -3489,9 +3489,6 @@ void sub_8062D68(void);
 void sub_8062230(void);
 void sub_8062748(u8 a0);
 
-extern void (*gUnknown_203B080)(s32 a0);
-extern void (*gUnknown_203B084)(s32 a0);
-
 static inline void SetTxtStruct(UnkTextStruct3 *sp)
 {
     memset(sp, 0, sizeof(*sp));
@@ -3566,7 +3563,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                 if (gUnknown_202EE10.menuIndex == 7) {
                     if (tacticIds[8] != TACTIC_UNUSED) {
                         for (i = 0; i < 6; i++) {
-                            gUnknown_203B080(0);
+                            gIwramTextFunc1(0);
                             sub_803E46C(0x3D);
                         }
                         scrollFirstId++;
@@ -3581,7 +3578,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                 if (gUnknown_202EE10.menuIndex == 0) {
                     if (scrollFirstId != 0) {
                         for (i = 0; i < 6; i++) {
-                            gUnknown_203B084(0);
+                            gIwramTextFunc2(0);
                             sub_803E46C(0x3D);
                         }
                         scrollFirstId--;

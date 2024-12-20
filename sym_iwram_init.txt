@@ -12,3 +12,4 @@
 .include "src/ground_object.o"
 .include "src/ground_effect.o"
 .include "src/ground_event.o"
+.include "src/text.o"

@@ -100,9 +100,6 @@ struct UnkStruct_203B198
     struct SubStruct_203B198 unk48;
 };
 
-extern UnkTextStruct1 gUnknown_2027370[4];
-extern void (*gUnknown_203B088)(s32 a0);
-
 static const u32 gUnknown_80D48A0[] = {0x7, 0x2, 0x2};
 static const struct SubStruct_203B198 gUnknown_80D48AC = {
         0x00,
@@ -618,7 +615,7 @@ void DrawDialogueBoxString(void)
             break;
             case 10: {
                 gUnknown_202E748.unk28++;
-                gUnknown_203B088(0);
+                gIwramTextFunc3(0);
                 if (gUnknown_202E748.unk28 > 17) {
                     gUnknown_202E744 = 1;
                 }

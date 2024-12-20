@@ -41,18 +41,22 @@ EWRAM_DATA static u32 sTextShadowMask = 0; // Some text color info is stored; re
 EWRAM_DATA static u8 sDrawTextShadow = 0;
 EWRAM_DATA ALIGNED(4) u16 gUnknown_202B038[4][32][32] = {0};
 
-extern void sub_8272760(s32 a0);
-extern void sub_8272870(s32 a0);
-extern void sub_82729A4(s32 a0);
-extern void sub_8272A78(s32 a0);
+// These text-related functions were deemed important as they're copied and run from IWRAM for improved performance.
+static void sub_8272774(UnkTextStruct1 *txtStructs, s32 id);
+static void sub_8272884(UnkTextStruct1 *txtStructs, s32 id);
+static void sub_82729B8(UnkTextStruct1 *txtStructs, s32 id);
+static void sub_8272A8C(UnkTextStruct1 *txtStructs, s32 id);
+void sub_8272760(s32 id);
+void sub_8272870(s32 id);
+void sub_82729A4(s32 id);
+void sub_8272A78(s32 id);
 
-// Despite these not being used anywhere in this file, file order and usage point to these variables being declared here
-EWRAM_INIT void (*gUnknown_203B080)(s32 a0) = sub_8272760;
-EWRAM_INIT void (*gUnknown_203B084)(s32 a0) = sub_8272870;
-EWRAM_INIT void (*gUnknown_203B088)(s32 a0) = sub_82729A4;
-EWRAM_INIT void (*gUnknown_203B08C)(s32 a0) = sub_8272A78;
+EWRAM_INIT void (*gIwramTextFunc1)(s32 a0) = sub_8272760;
+EWRAM_INIT void (*gIwramTextFunc2)(s32 a0) = sub_8272870;
+EWRAM_INIT void (*gIwramTextFunc3)(s32 a0) = sub_82729A4;
+EWRAM_INIT void (*gIwramTextFunc4)(s32 a0) = sub_8272A78;
 
-// This variable is only used in InitGraphics function, which could or could not belong to text.c
+// This variable is only used in InitGraphics function, which may or may not belong to text.c
 EWRAM_INIT u8 gUnknown_203B090 = 0;
 
 static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3);
@@ -3561,3 +3565,256 @@ static s32 InterpretColorChar(u8 a0)
     }
     return 7;
 }
+
+// These functions run from IWRAM for improved performance.
+IWRAM_INIT void sub_8272760(s32 id)
+{
+    sub_8272774(gUnknown_2027370, id);
+}
+
+IWRAM_INIT static void sub_8272774(UnkTextStruct1 *txtStructs, s32 id)
+{
+    UnkTextStruct1 *txtStructPtr = &txtStructs[id];
+
+    if (txtStructPtr->unk8 > 0) {
+        s32 i, j;
+        u32 *dstPtr;
+        s32 n;
+        s32 id8, id9;
+
+        if (txtStructPtr->unkC == 6) {
+            s32 unk4 = txtStructPtr->unk4;
+            s32 dstAdd = ((txtStructPtr->unk24 + 2) * 8);
+            dstAdd *= unk4;
+            dstPtr = txtStructPtr->unk18 + dstAdd;
+            n = txtStructPtr->unk8 - 2;
+        }
+        else {
+            dstPtr = txtStructPtr->unk18;
+            n = txtStructPtr->unk8;
+        }
+
+        id8 = txtStructPtr->unk20 + 8;
+        id9 = txtStructPtr->unk20 + 9;
+        for (i = 0; i < txtStructPtr->unk4; i++) {
+            s32 to = n - 1;
+            u32 *loopPtr = dstPtr;
+            for (j = 0; j < to; j++) {
+                loopPtr[0] = loopPtr[2];
+                loopPtr[1] = loopPtr[3];
+                loopPtr[2] = loopPtr[4];
+                loopPtr[3] = loopPtr[5];
+                loopPtr[4] = loopPtr[6];
+                loopPtr[5] = loopPtr[7];
+                loopPtr[6] = loopPtr[id8];
+                loopPtr[7] = loopPtr[id9];
+
+                loopPtr += id8;
+            }
+
+            loopPtr[0] = loopPtr[2];
+            loopPtr[1] = loopPtr[3];
+            loopPtr[2] = loopPtr[4];
+            loopPtr[3] = loopPtr[5];
+            loopPtr[4] = loopPtr[6];
+            loopPtr[5] = loopPtr[7];
+            loopPtr[6] = 0;
+            loopPtr[7] = 0;
+            dstPtr += 8;
+        }
+
+        txtStructPtr->unk30 = txtStructPtr->unk28;
+        txtStructPtr->unk34 = txtStructPtr->unk1C;
+        txtStructPtr->unk38 = txtStructPtr->unk2C;
+        txtStructPtr->unk44 = 1;
+    }
+}
+
+IWRAM_INIT void sub_8272870(s32 id)
+{
+    sub_8272884(gUnknown_2027370, id);
+}
+
+IWRAM_INIT static void sub_8272884(UnkTextStruct1 *txtStructs, s32 id)
+{
+    UnkTextStruct1 *txtStructPtr = &txtStructs[id];
+
+    if (txtStructPtr->unk8 > 0) {
+        s32 i, j;
+        u32 *dstPtr;
+        s32 n;
+        s32 id8;
+        s32 unk4, unk8, dstAdd;
+
+        if (txtStructPtr->unkC == 6) {
+            n = txtStructPtr->unk8 - 2;
+        }
+        else {
+            n = txtStructPtr->unk8;
+        }
+
+        unk8 = txtStructPtr->unk8 - 1;
+        unk4 =txtStructPtr->unk4;
+        dstAdd = (unk8 * unk4) * 8;
+        dstPtr = txtStructPtr->unk18 + dstAdd;
+
+        id8 = txtStructPtr->unk20 + 8;
+        for (i = 0; i < txtStructPtr->unk4; i++) {
+            u32 lastTwo = 0;
+            s32 to = n - 1;
+            u32 *loopPtr = dstPtr;
+
+            if (n < 2) {
+                loopPtr[7] = loopPtr[5];
+                loopPtr[6] = loopPtr[4];
+                loopPtr[5] = loopPtr[3];
+                loopPtr[4] = loopPtr[2];
+                loopPtr[3] = loopPtr[1];
+                loopPtr[2] = loopPtr[0];
+                loopPtr[1] = lastTwo;
+                loopPtr[0] = lastTwo;
+            }
+            else {
+                u32 *ptr8 = dstPtr - id8;
+                for (j = 0; j < to; j++) {
+                    loopPtr[7] = loopPtr[5];
+                    loopPtr[6] = loopPtr[4];
+                    loopPtr[5] = loopPtr[3];
+                    loopPtr[4] = loopPtr[2];
+                    loopPtr[3] = loopPtr[1];
+                    loopPtr[2] = loopPtr[0];
+                    loopPtr[1] = ptr8[7];
+                    loopPtr[0] = ptr8[6];
+
+                    loopPtr -= id8;
+                    ptr8 -= id8;
+                }
+
+                loopPtr[7] = loopPtr[5];
+                loopPtr[6] = loopPtr[4];
+                loopPtr[5] = loopPtr[3];
+                loopPtr[4] = loopPtr[2];
+                loopPtr[3] = loopPtr[1];
+                loopPtr[2] = loopPtr[0];
+                loopPtr[1] = 0;
+                loopPtr[0] = 0;
+            }
+            dstPtr += 8;
+        }
+
+        txtStructPtr->unk30 = txtStructPtr->unk28;
+        txtStructPtr->unk34 = txtStructPtr->unk1C;
+        txtStructPtr->unk38 = txtStructPtr->unk2C;
+        txtStructPtr->unk44 = 1;
+    }
+}
+
+IWRAM_INIT void sub_82729A4(s32 id)
+{
+    sub_82729B8(gUnknown_2027370, id);
+}
+
+IWRAM_INIT static void sub_82729B8(UnkTextStruct1 *txtStructs, s32 id)
+{
+    s32 i, j;
+    UnkTextStruct1 *txtStructPtr = &txtStructs[id];
+    u32 *dstPtr = txtStructPtr->unk18;
+    s32 id8 = txtStructPtr->unk20 + 8;
+    s32 id9 = txtStructPtr->unk20 + 9;
+
+    for (i = 0; i < txtStructPtr->unk4; i++) {
+        u32 *loopPtr;
+
+        dstPtr[3] = dstPtr[5];
+        dstPtr[4] = dstPtr[6];
+        dstPtr[5] = dstPtr[7];
+        dstPtr[6] = dstPtr[id8];
+        dstPtr[7] = dstPtr[id9];
+
+        loopPtr = dstPtr + id8;
+        for (j = 0; j < 5; j++) {
+            loopPtr[0] = loopPtr[2];
+            loopPtr[1] = loopPtr[3];
+            loopPtr[2] = loopPtr[4];
+            loopPtr[3] = loopPtr[5];
+            loopPtr[4] = loopPtr[6];
+            loopPtr[5] = loopPtr[7];
+            loopPtr[6] = loopPtr[id8];
+            loopPtr[7] = loopPtr[id9];
+
+            loopPtr += id8;
+        }
+
+        loopPtr[0] = loopPtr[2];
+        loopPtr[1] = loopPtr[3];
+        loopPtr[2] = loopPtr[4];
+        loopPtr[3] = loopPtr[5];
+        loopPtr[4] = 0;
+        loopPtr[5] = 0;
+        loopPtr[6] = 0;
+        loopPtr[7] = 0;
+
+        dstPtr += 8;
+    }
+
+    txtStructPtr->unk30 = txtStructPtr->unk28;
+    txtStructPtr->unk34 = txtStructPtr->unk1C;
+    txtStructPtr->unk38 = txtStructPtr->unk2C;
+    txtStructPtr->unk44 = 1;
+}
+
+IWRAM_INIT void sub_8272A78(s32 id)
+{
+    sub_8272A8C(gUnknown_2027370, id);
+}
+
+IWRAM_INIT static void sub_8272A8C(UnkTextStruct1 *txtStructs, s32 id)
+{
+    s32 i, j;
+    UnkTextStruct1 *txtStructPtr = &txtStructs[id];
+    u32 *dstPtr = txtStructPtr->unk18;
+    s32 id8 = txtStructPtr->unk20 + 8;
+
+    for (i = 0; i < txtStructPtr->unk4; i++) {
+        u32 *loopPtr;
+
+        dstPtr[3] = 0;
+        dstPtr[4] = dstPtr[5];
+        dstPtr[5] = dstPtr[6];
+        dstPtr[6] = dstPtr[7];
+        dstPtr[7] = dstPtr[id8];
+
+        loopPtr = dstPtr + id8;
+        for (j = 0; j < 5; j++) {
+            loopPtr[0] = loopPtr[1];
+            loopPtr[1] = loopPtr[2];
+            loopPtr[2] = loopPtr[3];
+            loopPtr[3] = loopPtr[4];
+            loopPtr[4] = loopPtr[5];
+            loopPtr[5] = loopPtr[6];
+            loopPtr[6] = loopPtr[7];
+            loopPtr[7] = loopPtr[id8];
+
+            loopPtr += id8;
+        }
+
+        loopPtr[0] = loopPtr[1];
+        loopPtr[1] = loopPtr[2];
+        loopPtr[2] = loopPtr[3];
+        loopPtr[3] = loopPtr[4];
+        loopPtr[4] = loopPtr[5];
+        loopPtr[5] = loopPtr[6];
+        loopPtr[6] = loopPtr[7];
+        loopPtr[7] = 0;
+
+        dstPtr += 8;
+    }
+
+    txtStructPtr->unk30 = txtStructPtr->unk28;
+    txtStructPtr->unk34 = txtStructPtr->unk1C;
+    txtStructPtr->unk38 = txtStructPtr->unk2C;
+    txtStructPtr->unk44 = 1;
+}
+
+// Needed to match, because without it the alignment is different.
+IWRAM_INIT static UNUSED u8 sMatchAlignment = 0;
