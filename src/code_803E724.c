@@ -367,52 +367,23 @@ void sub_803EDF0(void)
 
     // sprite oam memes strike again
     if (x >= -32 && y >= -8 && x < 240 && y < 160) {
-        u32 r9;
-        u32 unk6;
-        u32 shape, spriteX, palNum, prio, tileNum;
+        SpriteSetY(&gUnknown_202EDDC, y);
+        SpriteSetAffine1(&gUnknown_202EDDC, 0);
+        SpriteSetAffine2(&gUnknown_202EDDC, 0);
+        SpriteSetObjMode(&gUnknown_202EDDC, 0);
+        SpriteSetMosaic(&gUnknown_202EDDC, 0);
+        SpriteSetBpp(&gUnknown_202EDDC, 0);
+        SpriteSetShape(&gUnknown_202EDDC, 1);
+        SpriteSetX(&gUnknown_202EDDC, x);
+        SpriteSetMatrixNum(&gUnknown_202EDDC, 0);
+        SpriteSetSize(&gUnknown_202EDDC, 1);
+        SpriteSetTileNum(&gUnknown_202EDDC, 0x216);
+        SpriteSetPriority(&gUnknown_202EDDC, gDungeon->unk181e8.unk18208);
+        SpriteSetPalNum(&gUnknown_202EDDC, gUnknown_202EDE8.unk2);
 
-        unk6 = y & SPRITEOAM_MAX_UNK6_4;
-        unk6 <<= SPRITEOAM_SHIFT_UNK6_4;
-        gUnknown_202EDDC.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-        gUnknown_202EDDC.unk6 |= unk6;
-
-        gUnknown_202EDDC.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-        gUnknown_202EDDC.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-        r9 = 3;
-        gUnknown_202EDDC.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-        gUnknown_202EDDC.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-        gUnknown_202EDDC.attrib1 &= ~SPRITEOAM_MASK_BPP;
-
-        shape = 1 << SPRITEOAM_SHIFT_SHAPE;
-        gUnknown_202EDDC.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-        gUnknown_202EDDC.attrib1 |= shape;
-
-        spriteX = x & SPRITEOAM_MAX_X;
-        gUnknown_202EDDC.attrib2 &= ~SPRITEOAM_MASK_X;
-        gUnknown_202EDDC.attrib2 |= spriteX;
-
-        gUnknown_202EDDC.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-        gUnknown_202EDDC.attrib2 &= ~SPRITEOAM_MASK_SIZE;
-        gUnknown_202EDDC.attrib2 |= 1 << SPRITEOAM_SHIFT_SIZE;
-
-        tileNum = 0x216 << SPRITEOAM_SHIFT_TILENUM;
-        gUnknown_202EDDC.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-        gUnknown_202EDDC.attrib3 |= tileNum;
-
-        prio = gDungeon->unk181e8.unk18208 & r9;
-        prio <<= SPRITEOAM_SHIFT_PRIORITY;
-        gUnknown_202EDDC.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-        gUnknown_202EDDC.attrib3 |= prio;
-
-        palNum = gUnknown_202EDE8.unk2;
-        palNum &= 0xF;
-        palNum <<= SPRITEOAM_SHIFT_PALETTENUM;
-        gUnknown_202EDDC.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-        gUnknown_202EDDC.attrib3 |= palNum;
-
-        gUnknown_202EDDC.unk6 &= ~SPRITEOAM_MASK_UNK6_0;
-        gUnknown_202EDDC.unk6 &= ~SPRITEOAM_MASK_UNK6_1;
-        gUnknown_202EDDC.unk6 &= ~SPRITEOAM_MASK_UNK6_2;
+        SpriteSetUnk6_0(&gUnknown_202EDDC, 0);
+        SpriteSetUnk6_1(&gUnknown_202EDDC, 0);
+        SpriteSetUnk6_2(&gUnknown_202EDDC, 0);
 
         AddSprite(&gUnknown_202EDDC, 0x100, NULL, NULL);
     }

@@ -127,65 +127,25 @@ u32 sub_80383D4(void)
 
 void sub_8038440(void)
 {
-#ifdef NONMATCHING // SpriteOAM memes
-    u32 r0;
-    u32 r2;
-#else
-    register u32 r0 asm("r0");
-    register u32 r2 asm("r2");
-#endif
-    u32 r1;
-    u32 r4;
-    u32 r5;
-    SpriteOAM *sprite;
+    SpriteSetAffine1(&sUnknown_203B360->unk1A8, 0);
+    SpriteSetAffine2(&sUnknown_203B360->unk1A8, 0);
+    SpriteSetObjMode(&sUnknown_203B360->unk1A8, 0);
+    SpriteSetMosaic(&sUnknown_203B360->unk1A8, 0);
+    SpriteSetBpp(&sUnknown_203B360->unk1A8, 0);
+    SpriteSetShape(&sUnknown_203B360->unk1A8, 1);
 
-    r5 = 0;
-    sprite = &sUnknown_203B360->unk1A8;
+    SpriteSetTileNum(&sUnknown_203B360->unk1A8, 0x3F0);
+    SpriteSetPriority(&sUnknown_203B360->unk1A8, 0);
+    SpriteSetPalNum(&sUnknown_203B360->unk1A8, 15);
 
-    r1 = sprite->attrib1;
-    r0 = (u16)~SPRITEOAM_MASK_AFFINEMODE1;
-    r0 &= r1;
+    SpriteSetMatrixNum(&sUnknown_203B360->unk1A8, 0);
+    SpriteSetSize(&sUnknown_203B360->unk1A8, 0);
 
-    r0 &= (u16)~SPRITEOAM_MASK_AFFINEMODE2;
+    SpriteSetX(&sUnknown_203B360->unk1A8, 112);
+    SpriteSetY(&sUnknown_203B360->unk1A8, 112);
 
-    r0 &= (u16)~SPRITEOAM_MASK_OBJMODE;
-
-    r0 &= (u16)~SPRITEOAM_MASK_MOSAIC;
-
-    r0 &= (u16)~SPRITEOAM_MASK_BPP;
-
-    r2 = 1 << SPRITEOAM_SHIFT_SHAPE;
-    r0 &= (u16)~SPRITEOAM_MASK_SHAPE;
-    r0 |= r2;
-
-    sprite->attrib1 = r0;
-
-    r2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-    r1 = sprite->attrib3;
-    r0 = (u16)~SPRITEOAM_MASK_TILENUM;
-    r0 &= r1;
-    r0 |= r2;
-
-    r0 &= (u16)~SPRITEOAM_MASK_PRIORITY;
-
-    r2 = (u16)~SPRITEOAM_MASK_UNK6_4;
-
-    r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-    r0 &= (u16)~SPRITEOAM_MASK_PALETTENUM;
-    r0 |= r4;
-
-    sprite->attrib3 = r0;
-
-    sprite->attrib2 = 112; // Set x to 112. Set matrixNum/size to 0
-
-    r1 = 112 << SPRITEOAM_SHIFT_UNK6_4;
-    r2 &= sprite->unk6;
-    r2 |= r1;
-    sprite->unk6 = r2;
-
-    sUnknown_203B360->unk1B0 = r5;
+    sUnknown_203B360->unk1B0 = 0;
 }
-
 
 void sub_80384D0(void)
 {

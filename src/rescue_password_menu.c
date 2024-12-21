@@ -679,67 +679,29 @@ u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, unkStruct_203B480 *param_3)
 
 void sub_8039174(void)
 {
-    struct SpriteOAM* spr;
-    s16 earlyF;
+    SpriteSetAffine1(&gRescuePasswordMenu->unk208, 0);
+    SpriteSetAffine2(&gRescuePasswordMenu->unk208, 0);
+    SpriteSetObjMode(&gRescuePasswordMenu->unk208, 0);
+    SpriteSetMosaic(&gRescuePasswordMenu->unk208, 0);
+    SpriteSetBpp(&gRescuePasswordMenu->unk208, 0);
+    SpriteSetShape(&gRescuePasswordMenu->unk208, 1);
+    SpriteSetTileNum(&gRescuePasswordMenu->unk208, 0x3F0);
+    SpriteSetPriority(&gRescuePasswordMenu->unk208, 0);
+    SpriteSetPalNum(&gRescuePasswordMenu->unk208, 15);
+    SpriteSetMatrixNum(&gRescuePasswordMenu->unk208, 0);
+    SpriteSetSize(&gRescuePasswordMenu->unk208, 0);
 
-    spr = &gRescuePasswordMenu->unk208;
-
-    spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-    spr->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-    spr->attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-    spr->attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-    spr->attrib1 &= ~SPRITEOAM_MASK_BPP;
-
-    {
-        s32 temp = 1 << SPRITEOAM_SHIFT_SHAPE;
-        spr->attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-        spr->attrib1 |= temp;
-    } while(0);
-
-    {
-        s32 temp = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-        spr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-        spr->attrib3 |= temp;
-    } while(0);
-
-    spr->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-
-    earlyF = (s16)~SPRITEOAM_MASK_UNK6_4;
-
-    {
-        s32 temp = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-        spr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-        spr->attrib3 |= temp;
-    } while(0);
-
-    {
-        s32 temp = 0;
-        spr->attrib2 = temp;
-    } while(0);
-
-    {
-        s32 temp = 192 << SPRITEOAM_SHIFT_UNK6_4;
-        spr->unk6 &= earlyF;
-        spr->unk6 |= temp;
-    } while(0);
+    SpriteSetX(&gRescuePasswordMenu->unk208, 0);
+    SpriteSetY(&gRescuePasswordMenu->unk208, 192);
 }
 
 void sub_80391F8(void)
 {
-    SpriteOAM *spr;
-    u32 val;
-
-    spr = &gRescuePasswordMenu->unk208;
-
-    spr->attrib2 &= ~SPRITEOAM_MASK_X;
-    spr->attrib2 |= 112;
-
-    val = 112 << SPRITEOAM_SHIFT_UNK6_4;
-    spr->unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-    spr->unk6 |= val;
+    SpriteSetX(&gRescuePasswordMenu->unk208, 112);
+    SpriteSetY(&gRescuePasswordMenu->unk208, 112);
 
     if (gRescuePasswordMenu->unk210 & 8)
-        AddSprite(spr, 0x100, NULL, NULL);
+        AddSprite(&gRescuePasswordMenu->unk208, 0x100, NULL, NULL);
 
     DrawDialogueBoxString();
     gRescuePasswordMenu->unk210++;

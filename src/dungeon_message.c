@@ -763,41 +763,19 @@ void sub_8052FB8(const u8 *str)
         else {
             r9++;
             if (r9 & 8) {
-                u32 shape, tileNum, unk6, spriteX, mask, palNum;
-
-                sUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-                sUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-                sUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-                sUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-                sUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_BPP;
-
-                sUnknown_202F1F0.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-                shape = 1;
-                shape <<= SPRITEOAM_SHIFT_SHAPE;
-                ASM_MATCH_TRICK(shape);
-                sUnknown_202F1F0.attrib1 |= shape;
-
-                tileNum = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-                sUnknown_202F1F0.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-                sUnknown_202F1F0.attrib3 |= tileNum;
-
-                sUnknown_202F1F0.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-
-                mask = 0xF;
-                palNum = (15 & SPRITEOAM_MAX_PALETTENUM) << SPRITEOAM_SHIFT_PALETTENUM;
-                sUnknown_202F1F0.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-                sUnknown_202F1F0.attrib3 |= palNum;
-
-                unk6 = 0x78 << SPRITEOAM_SHIFT_UNK6_4;
-                sUnknown_202F1F0.unk6 &= mask; // ~SPRITEOAM_MASK_UNK6_4
-                sUnknown_202F1F0.unk6 |= unk6;
-
-                sUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_X;
-                sUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-
-                spriteX = 0x70 & SPRITEOAM_MAX_X;
-                sUnknown_202F1F0.attrib2 &= ~SPRITEOAM_MASK_SIZE;
-                sUnknown_202F1F0.attrib2 |= spriteX;
+                SpriteSetAffine1(&sUnknown_202F1F0, 0);
+                SpriteSetAffine2(&sUnknown_202F1F0, 0);
+                SpriteSetObjMode(&sUnknown_202F1F0, 0);
+                SpriteSetMosaic(&sUnknown_202F1F0, 0);
+                SpriteSetBpp(&sUnknown_202F1F0, 0);
+                SpriteSetShape(&sUnknown_202F1F0, 1);
+                SpriteSetTileNum(&sUnknown_202F1F0, 0x3F0);
+                SpriteSetPriority(&sUnknown_202F1F0, 0);
+                SpriteSetPalNum(&sUnknown_202F1F0, 15);
+                SpriteSetY(&sUnknown_202F1F0, 120);
+                SpriteSetMatrixNum(&sUnknown_202F1F0, 0);
+                SpriteSetSize(&sUnknown_202F1F0, 0);
+                SpriteSetX(&sUnknown_202F1F0, 112);
 
                 AddSprite(&sUnknown_202F1F0, 0x100, NULL, NULL);
             }
@@ -1081,39 +1059,20 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 {
     struct UnkTextStruct1 *unkStr = &gUnknown_2027370[0];
     if (!(gUnknown_202EDCC & 8)) {
-        u32 matrixNum, xSprite, mask, ySprite, shape, yMask;
-
-        sMessageLogArrowSpriteOAM.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-        sMessageLogArrowSpriteOAM.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-        sMessageLogArrowSpriteOAM.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-        sMessageLogArrowSpriteOAM.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-        sMessageLogArrowSpriteOAM.attrib1 &= ~SPRITEOAM_MASK_BPP;
-
-        matrixNum = (upArrow != FALSE) ? (16) : 0;
-        // You may be thinking what is this empty loop doing here, but the better question is: Why do these unholy sprite macros exist?
-        do {} while (0);
-        matrixNum <<= 9;
-        sMessageLogArrowSpriteOAM.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-        sMessageLogArrowSpriteOAM.attrib2 |= matrixNum;
-
-        mask = 0xF; // ~SPRITEOAM_MASK_UNK6_4
-        yMask = SPRITEOAM_MAX_UNK6_4;
-        ySprite = (yMask & (unkStr->unk2 * 8 + y)) << 4;
-        sMessageLogArrowSpriteOAM.unk6 &= mask;
-        sMessageLogArrowSpriteOAM.unk6 |= ySprite;
-
-        xSprite = SPRITEOAM_MAX_X & ((unkStr->unk0 * 8) + 92);
-        sMessageLogArrowSpriteOAM.attrib2 &= ~SPRITEOAM_MASK_X;
-        sMessageLogArrowSpriteOAM.attrib2 |= xSprite;
-
-        shape = 1;
-        shape <<= SPRITEOAM_SHIFT_SHAPE;
-        sMessageLogArrowSpriteOAM.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-        sMessageLogArrowSpriteOAM.attrib1 |= shape;
-
-        sMessageLogArrowSpriteOAM.attrib2 &= ~SPRITEOAM_MASK_SIZE;
-
-        sMessageLogArrowSpriteOAM.attrib3 = 0xF3F0;
+        SpriteSetAffine1(&sMessageLogArrowSpriteOAM, 0);
+        SpriteSetAffine2(&sMessageLogArrowSpriteOAM, 0);
+        SpriteSetObjMode(&sMessageLogArrowSpriteOAM, 0);
+        SpriteSetMosaic(&sMessageLogArrowSpriteOAM, 0);
+        SpriteSetBpp(&sMessageLogArrowSpriteOAM, 0);
+        SpriteSetMatrixNum(&sMessageLogArrowSpriteOAM, (upArrow != FALSE) ? (16) : 0);
+        SpriteSetPalNum(&sMessageLogArrowSpriteOAM, 15);
+        SpriteSetY(&sMessageLogArrowSpriteOAM, (unkStr->unk2 * 8) + y);
+        SpriteSetX(&sMessageLogArrowSpriteOAM, (unkStr->unk0 * 8) + 92);
+        SpriteSetShape(&sMessageLogArrowSpriteOAM, 1);
+        SpriteSetSize(&sMessageLogArrowSpriteOAM, 0);
+        SpriteSetPriority(&sMessageLogArrowSpriteOAM, 0);
+        SpriteSetPalNum(&sMessageLogArrowSpriteOAM, 15);
+        SpriteSetTileNum(&sMessageLogArrowSpriteOAM, 0x3f0);
 
         AddSprite(&sMessageLogArrowSpriteOAM, 127, NULL, NULL);
     }
