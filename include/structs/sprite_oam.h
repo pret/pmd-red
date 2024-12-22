@@ -119,120 +119,129 @@ typedef struct SpriteOAM
 
 #define SpriteSetAffine1(spritePtr, _affine1) \
 { \
-    u32 affine1 = _affine1; \
-    affine1 &= SPRITEOAM_MAX_AFFINEMODE1; \
-    affine1 <<= SPRITEOAM_SHIFT_AFFINEMODE1; \
+    u32 _affine1Val = _affine1; \
+    _affine1Val &= SPRITEOAM_MAX_AFFINEMODE1; \
+    _affine1Val <<= SPRITEOAM_SHIFT_AFFINEMODE1; \
     (spritePtr)->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1; \
-    (spritePtr)->attrib1 |= affine1; \
+    (spritePtr)->attrib1 |= _affine1Val; \
 }
 
 #define SpriteSetAffine2(spritePtr, _affine2) \
 { \
-    u32 affine2 = _affine2; \
-    affine2 &= SPRITEOAM_MAX_AFFINEMODE2; \
-    affine2 <<= SPRITEOAM_SHIFT_AFFINEMODE2; \
+    u32 _affine2Val = _affine2; \
+    _affine2Val &= SPRITEOAM_MAX_AFFINEMODE2; \
+    _affine2Val <<= SPRITEOAM_SHIFT_AFFINEMODE2; \
     (spritePtr)->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2; \
-    (spritePtr)->attrib1 |= affine2; \
+    (spritePtr)->attrib1 |= _affine2Val; \
 }
 
 #define SpriteSetObjMode(spritePtr, _objMode) \
 { \
-    u32 objMode = _objMode; \
-    objMode &= SPRITEOAM_MAX_OBJMODE; \
-    objMode <<= SPRITEOAM_SHIFT_OBJMODE; \
+    u32 _objModeVal = _objMode; \
+    _objModeVal &= SPRITEOAM_MAX_OBJMODE; \
+    _objModeVal <<= SPRITEOAM_SHIFT_OBJMODE; \
     (spritePtr)->attrib1 &= ~SPRITEOAM_MASK_OBJMODE; \
-    (spritePtr)->attrib1 |= objMode; \
+    (spritePtr)->attrib1 |= _objModeVal; \
 }
 
 #define SpriteSetMosaic(spritePtr, _mosaic) \
 { \
-    u32 mosaic = _mosaic; \
-    mosaic &= SPRITEOAM_MAX_MOSAIC; \
-    mosaic <<= SPRITEOAM_SHIFT_MOSAIC; \
+    u32 _mosaicVal = _mosaic; \
+    _mosaicVal &= SPRITEOAM_MAX_MOSAIC; \
+    _mosaicVal <<= SPRITEOAM_SHIFT_MOSAIC; \
     (spritePtr)->attrib1 &= ~SPRITEOAM_MASK_MOSAIC; \
-    (spritePtr)->attrib1 |= mosaic; \
+    (spritePtr)->attrib1 |= _mosaicVal; \
 }
 
 #define SpriteSetBpp(spritePtr, _bpp) \
 { \
-    u32 bpp = _bpp; \
-    bpp &= SPRITEOAM_MAX_BPP; \
-    bpp <<= SPRITEOAM_SHIFT_BPP; \
+    u32 _bppVal = _bpp; \
+    _bppVal &= SPRITEOAM_MAX_BPP; \
+    _bppVal <<= SPRITEOAM_SHIFT_BPP; \
     (spritePtr)->attrib1 &= ~SPRITEOAM_MASK_BPP; \
-    (spritePtr)->attrib1 |= bpp; \
+    (spritePtr)->attrib1 |= _bppVal; \
 }
 
 #define SpriteSetShape(spritePtr, _shape) \
 { \
-    u32 shape = _shape; \
-    shape &= SPRITEOAM_MAX_SHAPE; \
-    shape <<= SPRITEOAM_SHIFT_SHAPE; \
+    u32 _shapeVal = _shape; \
+    _shapeVal &= SPRITEOAM_MAX_SHAPE; \
+    _shapeVal <<= SPRITEOAM_SHIFT_SHAPE; \
     (spritePtr)->attrib1 &= ~SPRITEOAM_MASK_SHAPE; \
-    (spritePtr)->attrib1 |= shape; \
+    (spritePtr)->attrib1 |= _shapeVal; \
 }
 
 #define SpriteSetTileNum(spritePtr, _tileNum) \
 { \
-    u32 tileNum = _tileNum; \
-    tileNum &= SPRITEOAM_MAX_TILENUM; \
-    tileNum <<= SPRITEOAM_SHIFT_TILENUM; \
+    u32 _tileNumVal = _tileNum; \
+    _tileNumVal &= SPRITEOAM_MAX_TILENUM; \
+    _tileNumVal <<= SPRITEOAM_SHIFT_TILENUM; \
     (spritePtr)->attrib3 &= ~SPRITEOAM_MASK_TILENUM; \
-    (spritePtr)->attrib3 |= tileNum; \
+    (spritePtr)->attrib3 |= _tileNumVal; \
 }
 
 #define SpriteSetPriority(spritePtr, _priority) \
 { \
-    u32 priority = _priority; \
-    priority &= SPRITEOAM_MAX_PRIORITY; \
-    priority <<= SPRITEOAM_SHIFT_PRIORITY; \
+    u32 _priorityVal = _priority; \
+    _priorityVal &= SPRITEOAM_MAX_PRIORITY; \
+    _priorityVal <<= SPRITEOAM_SHIFT_PRIORITY; \
     (spritePtr)->attrib3 &= ~SPRITEOAM_MASK_PRIORITY; \
-    (spritePtr)->attrib3 |= priority; \
+    (spritePtr)->attrib3 |= _priorityVal; \
 }
 
 #define SpriteSetPalNum(spritePtr, _palNum)                \
 {                                                       \
-    u32 palNum = _palNum;                               \
-    palNum &= SPRITEOAM_MAX_PALETTENUM;                \
-    palNum <<= SPRITEOAM_SHIFT_PALETTENUM;                \
+    u32 _palNumVal = _palNum;                               \
+    _palNumVal &= SPRITEOAM_MAX_PALETTENUM;                \
+    _palNumVal <<= SPRITEOAM_SHIFT_PALETTENUM;                \
     (spritePtr)->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;            \
-    (spritePtr)->attrib3 |= palNum;                        \
+    (spritePtr)->attrib3 |= _palNumVal;                        \
 }
 
 #define SpriteSetMatrixNum(spritePtr, _matrixNum)                \
 {                                                       \
-    u32 matrixNum = _matrixNum;                               \
-    matrixNum &= SPRITEOAM_MAX_MATRIXNUM;                \
-    matrixNum <<= SPRITEOAM_SHIFT_MATRIXNUM;                \
+    u32 _matrixNumVal = _matrixNum;                               \
+    _matrixNumVal &= SPRITEOAM_MAX_MATRIXNUM;                \
+    _matrixNumVal <<= SPRITEOAM_SHIFT_MATRIXNUM;                \
     (spritePtr)->attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;            \
-    (spritePtr)->attrib2 |= matrixNum;                        \
+    (spritePtr)->attrib2 |= _matrixNumVal;                        \
+}
+
+// Needed for TryCreateModeArrows. No difference to SpriteSetMatrixNum other than not creating one additional local variable.
+#define SpriteSetMatrixNum_UseLocalVar(spritePtr, _matrixNum)                \
+{                                                       \
+    _matrixNum &= SPRITEOAM_MAX_MATRIXNUM;                \
+    _matrixNum <<= SPRITEOAM_SHIFT_MATRIXNUM;                \
+    (spritePtr)->attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;            \
+    (spritePtr)->attrib2 |= _matrixNum;                        \
 }
 
 #define SpriteSetSize(spritePtr, _size)                \
 {                                                       \
-    u32 size = _size;                               \
-    size &= SPRITEOAM_MAX_SIZE;                \
-    size <<= SPRITEOAM_SHIFT_SIZE;                \
+    u32 _sizeVal = _size;                               \
+    _sizeVal &= SPRITEOAM_MAX_SIZE;                \
+    _sizeVal <<= SPRITEOAM_SHIFT_SIZE;                \
     (spritePtr)->attrib2 &= ~SPRITEOAM_MASK_SIZE;            \
-    (spritePtr)->attrib2 |= size;                        \
+    (spritePtr)->attrib2 |= _sizeVal;                        \
 }
 
 #define SpriteSetX(spritePtr, _x)                \
 {               \
-    u32 xSpriteVal = _x;               \
-    xSpriteVal &= SPRITEOAM_MAX_X;               \
-    xSpriteVal <<= SPRITEOAM_SHIFT_X;               \
+    u32 _xSpriteVal = _x;               \
+    _xSpriteVal &= SPRITEOAM_MAX_X;               \
+    _xSpriteVal <<= SPRITEOAM_SHIFT_X;               \
     (spritePtr)->attrib2 &= ~SPRITEOAM_MASK_X;               \
-    (spritePtr)->attrib2 |= xSpriteVal;               \
+    (spritePtr)->attrib2 |= _xSpriteVal;               \
 }
 
 // Hacky way of matching functions in menu_input.c AddMenuCursorSprite_, sub_801332C sub_8013470
 #define SpriteSetX_MatrixNumSize0(spritePtr, _x)                \
 {               \
-    u32 xSpriteVal = _x;               \
-    xSpriteVal &= SPRITEOAM_MAX_X;               \
-    xSpriteVal <<= SPRITEOAM_SHIFT_X;               \
+    u32 _xSpriteVal = _x;               \
+    _xSpriteVal &= SPRITEOAM_MAX_X;               \
+    _xSpriteVal <<= SPRITEOAM_SHIFT_X;               \
     (spritePtr)->attrib2 &= ~SPRITEOAM_MASK_X;               \
-    (spritePtr)->attrib2 = xSpriteVal;               \
+    (spritePtr)->attrib2 = _xSpriteVal;               \
 }
 
 #define SpriteGetY(spritePtr, _y)             \
@@ -244,11 +253,11 @@ typedef struct SpriteOAM
 
 #define SpriteSetY(spritePtr, _y) \
 { \
-    u32 ySpriteVal = _y; \
-    ySpriteVal &= SPRITEOAM_MAX_UNK6_4; \
-    ySpriteVal <<= SPRITEOAM_SHIFT_UNK6_4; \
+    u32 _ySpriteVal = _y; \
+    _ySpriteVal &= SPRITEOAM_MAX_UNK6_4; \
+    _ySpriteVal <<= SPRITEOAM_SHIFT_UNK6_4; \
     (spritePtr)->unk6 &= ~SPRITEOAM_MASK_UNK6_4; \
-    (spritePtr)->unk6 |= ySpriteVal; \
+    (spritePtr)->unk6 |= _ySpriteVal; \
 }
 
 #define SpriteAddY(spritePtr, addVal)         \
@@ -261,29 +270,29 @@ typedef struct SpriteOAM
 
 #define SpriteSetUnk6_0(spritePtr, _unk6_0) \
 { \
-    u32 unk6_0 = _unk6_0; \
-    unk6_0 &= SPRITEOAM_MAX_UNK6_0; \
-    unk6_0 <<= SPRITEOAM_SHIFT_UNK6_0; \
+    u32 _unk6_0Val = _unk6_0; \
+    _unk6_0Val &= SPRITEOAM_MAX_UNK6_0; \
+    _unk6_0Val <<= SPRITEOAM_SHIFT_UNK6_0; \
     (spritePtr)->unk6 &= ~SPRITEOAM_MASK_UNK6_0; \
-    (spritePtr)->unk6 |= unk6_0; \
+    (spritePtr)->unk6 |= _unk6_0Val; \
 }
 
 #define SpriteSetUnk6_1(spritePtr, _unk6_1) \
 { \
-    u32 unk6_1 = _unk6_1; \
-    unk6_1 &= SPRITEOAM_MAX_UNK6_1; \
-    unk6_1 <<= SPRITEOAM_SHIFT_UNK6_1; \
+    u32 _unk6_1Val = _unk6_1; \
+    _unk6_1Val &= SPRITEOAM_MAX_UNK6_1; \
+    _unk6_1Val <<= SPRITEOAM_SHIFT_UNK6_1; \
     (spritePtr)->unk6 &= ~SPRITEOAM_MASK_UNK6_1; \
-    (spritePtr)->unk6 |= unk6_1; \
+    (spritePtr)->unk6 |= _unk6_1Val; \
 }
 
 #define SpriteSetUnk6_2(spritePtr, _unk6_2) \
 { \
-    u32 unk6_2 = _unk6_2; \
-    unk6_2 &= SPRITEOAM_MAX_UNK6_2; \
-    unk6_2 <<= SPRITEOAM_SHIFT_UNK6_2; \
+    u32 _unk6_2Val = _unk6_2; \
+    _unk6_2Val &= SPRITEOAM_MAX_UNK6_2; \
+    _unk6_2Val <<= SPRITEOAM_SHIFT_UNK6_2; \
     (spritePtr)->unk6 &= ~SPRITEOAM_MASK_UNK6_2; \
-    (spritePtr)->unk6 |= unk6_2; \
+    (spritePtr)->unk6 |= _unk6_2Val; \
 }
 
 #endif // GUARD_SPRITE_OAM_H
