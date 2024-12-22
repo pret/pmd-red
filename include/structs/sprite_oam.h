@@ -108,14 +108,22 @@ typedef struct SpriteOAM
 #define SPRITEOAM_MASK_UNK6_3 (SPRITEOAM_MAX_UNK6_3 << SPRITEOAM_SHIFT_UNK6_3) // ~ 0xFFF7
 */
 
-// Seems to be the "working" Y coord. Gets copied to attrib1's Y coord in `AddSprite()`.
-// kermalis is too lazy to rename it atm since we're still figuring things out
-#define SPRITEOAM_MAX_UNK6_4 0xFFF
-#define SPRITEOAM_SHIFT_UNK6_4 4
-#define SPRITEOAM_MASK_UNK6_4 (SPRITEOAM_MAX_UNK6_4 << SPRITEOAM_SHIFT_UNK6_4) // ~ 0xF
+// It's the "working" Y coord. Gets copied to attrib1's Y coord in `AddSprite()`.
+#define SPRITEOAM_MAX_WORKING_Y 0xFFF
+#define SPRITEOAM_SHIFT_WORKING_Y 4
+#define SPRITEOAM_MASK_WORKING_Y (SPRITEOAM_MAX_WORKING_Y << SPRITEOAM_SHIFT_WORKING_Y) // ~ 0xF
 
-// These seems to work most of the time when dealing with sprite pointers. However, these DO NOT match when dealing with local variables, for example a Sprite struct on the stack.
+// These seem to work most(all?) of the time.
 // These have to be macros, because static inlines WON'T match.
+
+#define SpriteSetOamY(spritePtr, _oamY) \
+{ \
+    u32 _oamYSpriteVal = _oamY; \
+    _oamYSpriteVal &= SPRITEOAM_MAX_Y; \
+    _oamYSpriteVal <<= SPRITEOAM_SHIFT_Y; \
+    (spritePtr)->attrib1 &= ~SPRITEOAM_MASK_Y; \
+    (spritePtr)->attrib1 |= _oamYSpriteVal; \
+}
 
 #define SpriteSetAffine1(spritePtr, _affine1) \
 { \
@@ -247,16 +255,16 @@ typedef struct SpriteOAM
 #define SpriteGetY(spritePtr, _y)             \
 {                                            \
     _y = (spritePtr)->unk6;                \
-    _y >>= SPRITEOAM_SHIFT_UNK6_4;            \
-    _y &= SPRITEOAM_MAX_UNK6_4;            \
+    _y >>= SPRITEOAM_SHIFT_WORKING_Y;            \
+    _y &= SPRITEOAM_MAX_WORKING_Y;            \
 }
 
 #define SpriteSetY(spritePtr, _y) \
 { \
     u32 _ySpriteVal = _y; \
-    _ySpriteVal &= SPRITEOAM_MAX_UNK6_4; \
-    _ySpriteVal <<= SPRITEOAM_SHIFT_UNK6_4; \
-    (spritePtr)->unk6 &= ~SPRITEOAM_MASK_UNK6_4; \
+    _ySpriteVal &= SPRITEOAM_MAX_WORKING_Y; \
+    _ySpriteVal <<= SPRITEOAM_SHIFT_WORKING_Y; \
+    (spritePtr)->unk6 &= ~SPRITEOAM_MASK_WORKING_Y; \
     (spritePtr)->unk6 |= _ySpriteVal; \
 }
 

@@ -4,13 +4,7 @@
 #include "sprite.h"
 
 static EWRAM_DATA u16 sOAMSpriteCount = {0}; // 2025670 Written to but never read
-#ifndef NONMATCHING
-UNUSED // TODO: Remove the "UNUSED" attribute after AddAxSprite is done
-#endif
 static EWRAM_DATA s16 sUnknown_2025672[8] = {0};
-#ifndef NONMATCHING
-UNUSED // TODO: Remove the "UNUSED" attribute after AddAxSprite is done
-#endif
 static EWRAM_DATA s16 sUnknown_2025682[9] = {0};
 static EWRAM_DATA DungeonPos sUnknown_2025694 = {0};
 static EWRAM_DATA u32 sUnknown_2025698 = {0};
@@ -152,43 +146,42 @@ void sub_8004E8C(unkStruct_2039DB0 *a0)
     a0->unkA = 0;
 }
 
-// This makes it seem that SpriteOAM is actually a struct of an array of 4. To verify later
-static inline void CopySprite(SpriteOAM *_dst, SpriteOAM *_src) {
-    u16 *dst = (void *) _dst;
-    u16 *src = (void *) _src;
-
-    *(dst++) = *(src++);
-    *(dst++) = *(src++);
-    *(dst++) = *(src++);
-    *(dst++) = *(src++);
+// Needed to match AddAxSprite and AddAxSprite. These macros assume SpriteOAM struct has size of 8
+#define SpriteCopy(_dst, _src)          \
+{                                       \
+    u16 *_dstVar = (void *) _dst;       \
+    u16 *_srcVar = (void *) _src;       \
+                                        \
+    *(_dstVar++) = *(_srcVar++);        \
+    *(_dstVar++) = *(_srcVar++);        \
+    *(_dstVar++) = *(_srcVar++);        \
+    *(_dstVar++) = *(_srcVar++);        \
 }
 
-static inline void CopySpriteWithMasks(SpriteOAM *_dst, SpriteOAM *_src, struct unkStruct_2039DB0 *spriteMasks) {
-    u16 *dst = (void *) _dst;
-    u16 *src = (void *) _src;
-
-    *(dst++) = (*(src++) & spriteMasks->unk0) | spriteMasks->unk6;
-    *(dst++) = (*(src++) & spriteMasks->unk2) | spriteMasks->unk8;
-    *(dst++) = (*(src++) & spriteMasks->unk4) | spriteMasks->unkA;
-    *(dst++) = *(src++);
+#define SpriteCopyWithMasks(_dst, _src, _spriteMasks)                           \
+{                                                                               \
+    u16 *_dstVar = (void *) _dst;                                               \
+    u16 *_srcVar = (void *) _src;                                               \
+                                                                                \
+    *(_dstVar++) = (*(_srcVar++) & _spriteMasks->unk0) | _spriteMasks->unk6;    \
+    *(_dstVar++) = (*(_srcVar++) & _spriteMasks->unk2) | _spriteMasks->unk8;    \
+    *(_dstVar++) = (*(_srcVar++) & _spriteMasks->unk4) | _spriteMasks->unkA;    \
+    *(_dstVar++) = *(_srcVar++);                                                \
 }
 
-// https://decomp.me/scratch/VYqKb / https://decomp.me/scratch/33KIb - Same issue as AddSprite()
-// Should be functionally equivalent.
-#ifdef NONMATCHING
 void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *spriteMasks)
 {
     // size: 0xC
     struct UnkStackFor8004EA8
     {
-        u16 unk0;
+        s16 unk0;
         ax_pose_unk2 unk2;
         SpriteOAM oam;
     } sp;
     SpriteOAM *sprite;
-    s32 r7;
-    s32 x;
-    s32 y;
+    s32 spriteId;
+    s32 pos; // Has to be used for both x and pos to match
+    struct UnkStackFor8004EA8 *spPtr;
 
     if (a2 != NULL)
         RegisterSpriteParts_80052BC(a2);
@@ -196,362 +189,75 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
     if (sSpriteCount >= 128)
         return;
 
-    sp.unk0 = a0->sprite;
-    sp.unk2 = a0->unk2;
-    sp.oam.attrib1 = a0->flags1 & ~(0x100 | 0x200);
-    sp.oam.attrib2 = a0->flags2 & ~(0x200 | 0x400 | 0x800);
-    sp.oam.attrib3 = a0->flags3;
-    sp.oam.unk6 = ((a0->flags2 & (0x200 | 0x400 | 0x800)) >> 9) | ((a0->flags1 & (0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20 | 0x40 | 0x80 | 0x100 | 0x200)) << 4);
-    sprite = sUnknown_20262A8 + sSpriteCount;
-    r7 = a1->unk16 + sp.unk2.unk1;
+    spPtr = &sp;
+    spPtr->unk0 = a0->sprite;
+    spPtr->unk2 = a0->unk2;
 
-    if (r7 < 0)
-        r7 = 0;
-    if (r7 > 255)
-        r7 = 255;
+    spPtr->oam.attrib1 = a0->flags1 & ~(0x100 | 0x200);
+    spPtr->oam.attrib2 = a0->flags2 & ~(0x200 | 0x400 | 0x800);
+    spPtr->oam.attrib3 = a0->flags3;
+    spPtr->oam.unk6 = ((a0->flags2 & (0x200 | 0x400 | 0x800)) >> 9) | ((a0->flags1 & (0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20 | 0x40 | 0x80 | 0x100 | 0x200)) << 4);
+    sprite = &sUnknown_20262A8[sSpriteCount];
+    spriteId = a1->unk16 + sp.unk2.unk1;
+
+    if (spriteId < 0)
+        spriteId = 0;
+    if (spriteId > 255)
+        spriteId = 255;
 
     if (spriteMasks == NULL) {
-        CopySprite(sprite, &sp.oam);
+        SpriteCopy(sprite, &spPtr->oam);
     }
     else {
-        CopySpriteWithMasks(sprite, &sp.oam, spriteMasks);
+        SpriteCopyWithMasks(sprite, &spPtr->oam, spriteMasks);
     }
 
     // Set tileNum
     if (sp.unk2.unk0 != 0 && sUnknown_2025672[sp.unk2.unk0] != 0) {
-        s32 tileNum = sUnknown_2025672[sp.unk2.unk0];
-        tileNum &= SPRITEOAM_MAX_TILENUM;
-        tileNum <<= SPRITEOAM_SHIFT_TILENUM;
-        sprite->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-        sprite->attrib3 |= tileNum;
+        SpriteSetTileNum(sprite, sUnknown_2025672[sp.unk2.unk0]);
     }
     else {
         // Animations add to existing tileNum
-        s32 newTileNum;
         s32 tileNum = sprite->attrib3;
         tileNum &= SPRITEOAM_MAX_TILENUM;
         tileNum >>= SPRITEOAM_SHIFT_TILENUM;
 
-        newTileNum = (tileNum + a1->vramTileOrMaybeAnimTimer) & SPRITEOAM_MAX_TILENUM;
-        newTileNum <<= SPRITEOAM_SHIFT_TILENUM;
-        sprite->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-        sprite->attrib3 |= newTileNum;
+        SpriteSetTileNum(sprite, tileNum + a1->vramTileOrMaybeAnimTimer);
     }
 
-    x = ((sprite->attrib2 >> SPRITEOAM_SHIFT_X) & SPRITEOAM_MAX_X);
-    x += a1->pos.x - 0x100;
-    if (x < -64)
-        return;
-    if (x >= DISPLAY_WIDTH)
-        return;
+    pos = ((sprite->attrib2 >> SPRITEOAM_SHIFT_X) & SPRITEOAM_MAX_X) ;
+    pos += a1->pos.x - 0x100;
 
-    // Set x, maintain matrixNum/size
-    x &= SPRITEOAM_MAX_X;
-    x <<= SPRITEOAM_SHIFT_X;
-    sprite->attrib2 &= ~SPRITEOAM_MASK_X;
-    sprite->attrib2 |= x;
-
-    y = ((sprite->unk6 >> 4) & 0xFFF);
-    y += a1->pos.y - 0x200;
-    if (y < -64)
+    if (pos < -64)
         return;
-    if (y >= DISPLAY_HEIGHT)
+    if (pos >= DISPLAY_WIDTH)
         return;
 
-    // Set y, maintain affineMode/objMode/mosaic/bpp/shape
-    y &= SPRITEOAM_MAX_Y;
-    y <<= SPRITEOAM_SHIFT_Y;
-    sprite->attrib1 &= ~SPRITEOAM_MASK_Y;
-    sprite->attrib1 |= y;
+    SpriteSetX(sprite, pos);
 
-    // Set paletteNum, maintain tileNum/priority
+    pos = ((sprite->unk6 >> SPRITEOAM_SHIFT_WORKING_Y) & SPRITEOAM_MAX_WORKING_Y);
+    pos += a1->pos.y - 0x200;
+    if (pos < -64)
+        return;
+    if (pos >= DISPLAY_HEIGHT)
+        return;
 
-    if (((sprite->unk6 >> 1) & SPRITEOAM_MAX_UNK6_1) == 0) {
-        s32 newPalNum = a1->paletteNum;
-        newPalNum &= SPRITEOAM_MAX_PALETTENUM;
-        newPalNum <<= SPRITEOAM_SHIFT_PALETTENUM;
-        sprite->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-        sprite->attrib3 |= newPalNum;
+    SpriteSetOamY(sprite, pos);
+
+    // Set paletteNum
+    if (!((sprite->unk6 >> SPRITEOAM_SHIFT_UNK6_1) & SPRITEOAM_MAX_UNK6_1)) {
+        SpriteSetPalNum(sprite, a1->paletteNum);
     }
 
     if (sp.unk2.unk0 != 0) {
-        s32 newPalNum = sUnknown_2025682[sp.unk2.unk0];
-        newPalNum &= SPRITEOAM_MAX_PALETTENUM;
-        newPalNum <<= SPRITEOAM_SHIFT_PALETTENUM;
-        sprite->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-        sprite->attrib3 |= newPalNum;
+        SpriteSetPalNum(sprite, sUnknown_2025682[sp.unk2.unk0]);
     }
 
-    sUnknown_2025EA8[sSpriteCount].unk0 = sUnknown_20256A0.sprites[r7].unk0;
-    sUnknown_20256A0.sprites[r7].unk0 = sUnknown_2025EA8 + sSpriteCount;
+    sUnknown_2025EA8[sSpriteCount].unk0 = sUnknown_20256A0.sprites[spriteId].unk0;
+    sUnknown_20256A0.sprites[spriteId].unk0 = sUnknown_2025EA8 + sSpriteCount;
     sSpriteCount++;
 }
 
-#else
-NAKED static void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *spriteMasks)
-{
-    asm_unified(
-    "push {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tsub sp, 0xC\n"
-    "\tadds r5, r0, 0\n"
-    "\tmov r8, r1\n"
-    "\tadds r0, r2, 0\n"
-    "\tadds r6, r3, 0\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _08004EC2\n"
-    "\tbl RegisterSpriteParts_80052BC\n"
-"_08004EC2:\n"
-    "\tldr r0, _08004F40\n"
-    "\tldr r7, [r0]\n"
-    "\tmov r12, r0\n"
-    "\tcmp r7, 0x7F\n"
-    "\tble _08004ECE\n"
-    "\tb _08005082\n"
-"_08004ECE:\n"
-    "\tmov r2, sp\n"
-    "\tldrh r0, [r5]\n"
-    "\tstrh r0, [r2]\n"
-    "\tldrh r0, [r5, 0x2]\n"
-    "\tstrh r0, [r2, 0x2]\n"
-    "\tldrh r4, [r5, 0x4]\n"
-    "\tldr r0, _08004F44\n"
-    "\tands r0, r4\n"
-    "\tstrh r0, [r2, 0x4]\n"
-    "\tldrh r3, [r5, 0x6]\n"
-    "\tldr r0, _08004F48\n"
-    "\tands r0, r3\n"
-    "\tstrh r0, [r2, 0x6]\n"
-    "\tldrh r0, [r5, 0x8]\n"
-    "\tstrh r0, [r2, 0x8]\n"
-    "\tmovs r1, 0xE0\n"
-    "\tlsls r1, 4\n"
-    "\tands r1, r3\n"
-    "\tlsrs r1, 9\n"
-    "\tldr r0, _08004F4C\n"
-    "\tands r0, r4\n"
-    "\tlsls r0, 4\n"
-    "\torrs r1, r0\n"
-    "\tstrh r1, [r2, 0xA]\n"
-    "\tlsls r1, r7, 3\n"
-    "\tldr r0, _08004F50\n"
-    "\tadds r3, r1, r0\n"
-    "\tmov r0, r8\n"
-    "\tmovs r2, 0x16\n"
-    "\tldrsh r1, [r0, r2]\n"
-    "\tmov r0, sp\n"
-    "\tldrb r0, [r0, 0x3]\n"
-    "\tlsls r0, 24\n"
-    "\tasrs r0, 24\n"
-    "\tadds r7, r1, r0\n"
-    "\tcmp r7, 0\n"
-    "\tbge _08004F1A\n"
-    "\tmovs r7, 0\n"
-"_08004F1A:\n"
-    "\tcmp r7, 0xFF\n"
-    "\tble _08004F20\n"
-    "\tmovs r7, 0xFF\n"
-"_08004F20:\n"
-    "\tcmp r6, 0\n"
-    "\tbne _08004F54\n"
-    "\tadd r2, sp, 0x4\n"
-    "\tldrh r0, [r2]\n"
-    "\tstrh r0, [r3]\n"
-    "\tadds r2, 0x2\n"
-    "\tldrh r0, [r2]\n"
-    "\tstrh r0, [r3, 0x2]\n"
-    "\tadds r2, 0x2\n"
-    "\tadds r1, r3, 0x4\n"
-    "\tldrh r0, [r2]\n"
-    "\tstrh r0, [r1]\n"
-    "\tadds r2, 0x2\n"
-    "\tldrh r0, [r2]\n"
-    "\tstrh r0, [r1, 0x2]\n"
-    "\tb _08004F86\n"
-    "\t.align 2, 0\n"
-"_08004F40: .4byte sSpriteCount\n"
-"_08004F44: .4byte 0x0000fcff\n"
-"_08004F48: .4byte 0x0000f1ff\n"
-"_08004F4C: .4byte 0x000003ff\n"
-"_08004F50: .4byte sUnknown_20262A8\n"
-"_08004F54:\n"
-    "\tadd r4, sp, 0x4\n"
-    "\tldrh r1, [r4]\n"
-    "\tldrh r0, [r6]\n"
-    "\tands r0, r1\n"
-    "\tldrh r1, [r6, 0x6]\n"
-    "\torrs r0, r1\n"
-    "\tstrh r0, [r3]\n"
-    "\tadds r4, 0x2\n"
-    "\tldrh r1, [r4]\n"
-    "\tldrh r0, [r6, 0x2]\n"
-    "\tands r0, r1\n"
-    "\tldrh r1, [r6, 0x8]\n"
-    "\torrs r0, r1\n"
-    "\tstrh r0, [r3, 0x2]\n"
-    "\tadds r4, 0x2\n"
-    "\tadds r2, r3, 0x4\n"
-    "\tldrh r1, [r4]\n"
-    "\tldrh r0, [r6, 0x4]\n"
-    "\tands r0, r1\n"
-    "\tldrh r1, [r6, 0xA]\n"
-    "\torrs r0, r1\n"
-    "\tstrh r0, [r2]\n"
-    "\tadds r4, 0x2\n"
-    "\tldrh r0, [r4]\n"
-    "\tstrh r0, [r2, 0x2]\n"
-"_08004F86:\n"
-    "\tmov r0, sp\n"
-    "\tldrb r0, [r0, 0x2]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _08004FB0\n"
-    "\tldr r1, _08004FA8\n"
-    "\tmov r0, sp\n"
-    "\tldrb r0, [r0, 0x2]\n"
-    "\tlsls r0, 1\n"
-    "\tadds r1, r0, r1\n"
-    "\tmovs r4, 0\n"
-    "\tldrsh r0, [r1, r4]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _08004FB0\n"
-    "\tadds r1, r0, 0\n"
-    "\tldr r0, _08004FAC\n"
-    "\tands r1, r0\n"
-    "\tb _08004FC0\n"
-    "\t.align 2, 0\n"
-"_08004FA8: .4byte sUnknown_2025672\n"
-"_08004FAC: .4byte 0x000003ff\n"
-"_08004FB0:\n"
-    "\tldrh r1, [r3, 0x4]\n"
-    "\tldr r2, _08005090\n"
-    "\tands r1, r2\n"
-    "\tmov r6, r8\n"
-    "\tmovs r4, 0x14\n"
-    "\tldrsh r0, [r6, r4]\n"
-    "\tadds r1, r0\n"
-    "\tands r1, r2\n"
-"_08004FC0:\n"
-    "\tldrh r2, [r3, 0x4]\n"
-    "\tmovs r0, 0xFC\n"
-    "\tlsls r0, 8\n"
-    "\tands r0, r2\n"
-    "\torrs r0, r1\n"
-    "\tstrh r0, [r3, 0x4]\n"
-    "\tldrh r4, [r3, 0x2]\n"
-    "\tldr r5, _08005094\n"
-    "\tadds r2, r5, 0\n"
-    "\tands r2, r4\n"
-    "\tldr r6, _08005098\n"
-    "\tadds r1, r2, r6\n"
-    "\tmov r2, r8\n"
-    "\tmovs r6, 0\n"
-    "\tldrsh r0, [r2, r6]\n"
-    "\tadds r2, r1, r0\n"
-    "\tmovs r0, 0x40\n"
-    "\tnegs r0, r0\n"
-    "\tmov r9, r0\n"
-    "\tcmp r2, r9\n"
-    "\tblt _08005082\n"
-    "\tcmp r2, 0xEF\n"
-    "\tbgt _08005082\n"
-    "\tands r2, r5\n"
-    "\tmovs r0, 0xFE\n"
-    "\tlsls r0, 8\n"
-    "\tands r0, r4\n"
-    "\torrs r0, r2\n"
-    "\tstrh r0, [r3, 0x2]\n"
-    "\tldrh r0, [r3, 0x6]\n"
-    "\tlsls r4, r0, 16\n"
-    "\tldr r1, _0800509C\n"
-    "\tadds r5, r1, 0\n"
-    "\tlsrs r2, r4, 20\n"
-    "\tldr r6, _080050A0\n"
-    "\tadds r1, r2, r6\n"
-    "\tmov r2, r8\n"
-    "\tmovs r6, 0x2\n"
-    "\tldrsh r0, [r2, r6]\n"
-    "\tadds r2, r1, r0\n"
-    "\tcmp r2, r9\n"
-    "\tblt _08005082\n"
-    "\tcmp r2, 0x9F\n"
-    "\tbgt _08005082\n"
-    "\tmovs r0, 0xFF\n"
-    "\tands r2, r0\n"
-    "\tldrh r1, [r3]\n"
-    "\tmovs r0, 0xFF\n"
-    "\tlsls r0, 8\n"
-    "\tands r0, r1\n"
-    "\torrs r0, r2\n"
-    "\tstrh r0, [r3]\n"
-    "\tlsrs r0, r4, 17\n"
-    "\tmovs r1, 0x1\n"
-    "\tands r0, r1\n"
-    "\tcmp r0, 0\n"
-    "\tbne _08005044\n"
-    "\tmov r0, r8\n"
-    "\tldrb r1, [r0, 0x1E]\n"
-    "\tmovs r0, 0xF\n"
-    "\tands r1, r0\n"
-    "\tlsls r1, 12\n"
-    "\tldrh r0, [r3, 0x4]\n"
-    "\tands r0, r5\n"
-    "\torrs r0, r1\n"
-    "\tstrh r0, [r3, 0x4]\n"
-"_08005044:\n"
-    "\tmov r0, sp\n"
-    "\tldrb r0, [r0, 0x2]\n"
-    "\tcmp r0, 0\n"
-    "\tbeq _08005068\n"
-    "\tldr r1, _080050A4\n"
-    "\tmov r0, sp\n"
-    "\tldrb r0, [r0, 0x2]\n"
-    "\tlsls r0, 1\n"
-    "\tadds r0, r1\n"
-    "\tmovs r2, 0\n"
-    "\tldrsh r1, [r0, r2]\n"
-    "\tmovs r0, 0xF\n"
-    "\tands r1, r0\n"
-    "\tlsls r1, 12\n"
-    "\tldrh r0, [r3, 0x4]\n"
-    "\tands r0, r5\n"
-    "\torrs r0, r1\n"
-    "\tstrh r0, [r3, 0x4]\n"
-"_08005068:\n"
-    "\tldr r0, _080050A8\n"
-    "\tmov r4, r12\n"
-    "\tldr r3, [r4]\n"
-    "\tlsls r2, r3, 3\n"
-    "\tadds r2, r0\n"
-    "\tldr r1, _080050AC\n"
-    "\tlsls r0, r7, 3\n"
-    "\tadds r0, r1\n"
-    "\tldr r1, [r0]\n"
-    "\tstr r1, [r2]\n"
-    "\tstr r2, [r0]\n"
-    "\tadds r3, 0x1\n"
-    "\tstr r3, [r4]\n"
-"_08005082:\n"
-    "\tadd sp, 0xC\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_08005090: .4byte 0x000003ff\n"
-"_08005094: .4byte 0x000001ff\n"
-"_08005098: .4byte 0xffffff00\n"
-"_0800509C: .4byte 0x00000fff\n"
-"_080050A0: .4byte 0xfffffe00\n"
-"_080050A4: .4byte sUnknown_2025682\n"
-"_080050A8: .4byte sUnknown_2025EA8\n"
-"_080050AC: .4byte sUnknown_20256A0");
-}
-
-#endif // NONMATCHING
 // a2 and spriteMasks are always called with NULL lol
 void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unkStruct_2039DB0 *spriteMasks)
 {
@@ -569,13 +275,13 @@ void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unk
         a1 = 255;
 
     if (spriteMasks == NULL) {
-        CopySprite(spr, a0);
+        SpriteCopy(spr, a0);
     }
     else {
-        CopySpriteWithMasks(spr, a0, spriteMasks);
+        SpriteCopyWithMasks(spr, a0, spriteMasks);
     }
 
-    yPos = spr->unk6 >> SPRITEOAM_SHIFT_UNK6_4;
+    yPos = spr->unk6 >> SPRITEOAM_SHIFT_WORKING_Y;
     nullsub_3(yPos, 0);
     yPos &= SPRITEOAM_MAX_Y;
     spr->attrib1 &= ~SPRITEOAM_MASK_Y;
