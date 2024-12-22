@@ -2290,18 +2290,8 @@ void sub_806C51C(Entity *entity)
     if (xSprite >= -32 && ySprite >= -32 && xSprite <= 271 && ySprite <= 191 && r7 != 6 && entity->unk22 == 0) {
         struct unkStruct_202ED28 *spriteStructPtr = &gUnknown_202ED28[var_34][r7];
         if (entInfo->unk156 != 0) {
-            u32 finalXSprite, finalYSprite;
-
-            finalXSprite = xSprite + spriteStructPtr->x;
-            finalXSprite &= SPRITEOAM_MASK_X;
-            spriteStructPtr->sprite.attrib2 &= ~SPRITEOAM_MASK_X;
-            spriteStructPtr->sprite.attrib2 |= finalXSprite;
-
-            finalYSprite = ySprite + spriteStructPtr->y;
-            finalYSprite &= SPRITEOAM_MAX_UNK6_4;
-            finalYSprite <<= SPRITEOAM_SHIFT_UNK6_4;
-            spriteStructPtr->sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-            spriteStructPtr->sprite.unk6 |= finalYSprite;
+            SpriteSetX(&spriteStructPtr->sprite, xSprite + spriteStructPtr->x);
+            SpriteSetY(&spriteStructPtr->sprite, ySprite + spriteStructPtr->y);
 
             AddSprite(&spriteStructPtr->sprite, 0, NULL, NULL);
         }

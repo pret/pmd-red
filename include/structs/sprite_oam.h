@@ -225,6 +225,23 @@ typedef struct SpriteOAM
     (spritePtr)->attrib2 |= xSpriteVal;               \
 }
 
+// Hacky way of matching functions in menu_input.c AddMenuCursorSprite_, sub_801332C sub_8013470
+#define SpriteSetX_MatrixNumSize0(spritePtr, _x)                \
+{               \
+    u32 xSpriteVal = _x;               \
+    xSpriteVal &= SPRITEOAM_MAX_X;               \
+    xSpriteVal <<= SPRITEOAM_SHIFT_X;               \
+    (spritePtr)->attrib2 &= ~SPRITEOAM_MASK_X;               \
+    (spritePtr)->attrib2 = xSpriteVal;               \
+}
+
+#define SpriteGetY(spritePtr, _y)             \
+{                                            \
+    _y = (spritePtr)->unk6;                \
+    _y >>= SPRITEOAM_SHIFT_UNK6_4;            \
+    _y &= SPRITEOAM_MAX_UNK6_4;            \
+}
+
 #define SpriteSetY(spritePtr, _y) \
 { \
     u32 ySpriteVal = _y; \
@@ -232,6 +249,14 @@ typedef struct SpriteOAM
     ySpriteVal <<= SPRITEOAM_SHIFT_UNK6_4; \
     (spritePtr)->unk6 &= ~SPRITEOAM_MASK_UNK6_4; \
     (spritePtr)->unk6 |= ySpriteVal; \
+}
+
+#define SpriteAddY(spritePtr, addVal)         \
+{                                                \
+    u32 _yVal;                                \
+    SpriteGetY(spritePtr, _yVal);            \
+    _yVal += (addVal);                        \
+    SpriteSetY(spritePtr, _yVal);              \
 }
 
 #define SpriteSetUnk6_0(spritePtr, _unk6_0) \

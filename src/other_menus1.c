@@ -330,70 +330,25 @@ static void sub_8037400(void)
 
 static void sub_80376CC(void)
 {
-#ifdef NONMATCHING // SpriteOAM memes
-    u32 r0;
-    u32 r2;
-#else
-    register u32 r0 asm("r0");
-    register u32 r2 asm("r2");
-#endif
-    u32 r1;
-    u32 r4;
-
-    r1 = sUnknown_203B35C->unkC.attrib1;
-    r0 = (u16)~SPRITEOAM_MASK_AFFINEMODE1;
-    r0 &= r1;
-
-    r0 &= (u16)~SPRITEOAM_MASK_AFFINEMODE2;
-
-    r0 &= (u16)~SPRITEOAM_MASK_OBJMODE;
-
-    r0 &= (u16)~SPRITEOAM_MASK_MOSAIC;
-
-    r0 &= (u16)~SPRITEOAM_MASK_BPP;
-
-    r2 = 1 << SPRITEOAM_SHIFT_SHAPE;
-    r0 &= (u16)~SPRITEOAM_MASK_SHAPE;
-    r0 |= r2;
-
-    sUnknown_203B35C->unkC.attrib1 = r0;
-
-    r2 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-    r1 = sUnknown_203B35C->unkC.attrib3;
-    r0 = (u16)~SPRITEOAM_MASK_TILENUM;
-    r0 &= r1;
-    r0 |= r2;
-
-    r0 &= (u16)~SPRITEOAM_MASK_PRIORITY;
-
-    r2 = (u16)~SPRITEOAM_MASK_UNK6_4;
-
-    r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-    r0 &= (u16)~SPRITEOAM_MASK_PALETTENUM;
-    r0 |= r4;
-
-    sUnknown_203B35C->unkC.attrib3 = r0;
-
-    r0 = 0; // Set x/matrixNum/size to 0
-    sUnknown_203B35C->unkC.attrib2 = r0;
-
-    r1 = 192 << SPRITEOAM_SHIFT_UNK6_4;
-    r0 = sUnknown_203B35C->unkC.unk6;
-    r2 &= r0;
-    r2 |= r1;
-    sUnknown_203B35C->unkC.unk6 = r2;
+    SpriteSetAffine1(&sUnknown_203B35C->unkC, 0);
+    SpriteSetAffine2(&sUnknown_203B35C->unkC, 0);
+    SpriteSetObjMode(&sUnknown_203B35C->unkC, 0);
+    SpriteSetMosaic(&sUnknown_203B35C->unkC, 0);
+    SpriteSetBpp(&sUnknown_203B35C->unkC, 0);
+    SpriteSetShape(&sUnknown_203B35C->unkC, 1);
+    SpriteSetTileNum(&sUnknown_203B35C->unkC, 0x3F0);
+    SpriteSetPriority(&sUnknown_203B35C->unkC, 0);
+    SpriteSetPalNum(&sUnknown_203B35C->unkC, 15);
+    SpriteSetX(&sUnknown_203B35C->unkC, 0);
+    SpriteSetMatrixNum(&sUnknown_203B35C->unkC, 0);
+    SpriteSetSize(&sUnknown_203B35C->unkC, 0);
+    SpriteSetY(&sUnknown_203B35C->unkC, 192);
 }
 
 static void sub_8037748(void)
 {
-    u16 temp2;
-
-    sUnknown_203B35C->unkC.attrib2 &= ~SPRITEOAM_MASK_X; // Clear x
-    sUnknown_203B35C->unkC.attrib2 |= 112; // Set x to 112
-
-    temp2 = 104 << SPRITEOAM_SHIFT_UNK6_4;
-    sUnknown_203B35C->unkC.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-    sUnknown_203B35C->unkC.unk6 |= temp2;
+    SpriteSetX(&sUnknown_203B35C->unkC, 112);
+    SpriteSetY(&sUnknown_203B35C->unkC, 104);
 
     if ((sUnknown_203B35C->unk14 & 8) != 0)
       AddSprite(&sUnknown_203B35C->unkC, 0x100, NULL, NULL);

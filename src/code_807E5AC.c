@@ -1455,38 +1455,12 @@ void sub_807FA9C(void)
                 s32 spriteX = (x * 24) - gDungeon->unk181e8.cameraPixelPos.x;
                 s32 spriteY = (y * 24) - gDungeon->unk181e8.cameraPixelPos.y;
                 if (spriteX >= -32 && spriteY >= -32 && spriteX <= 272 && spriteY <= 192)  {
-                    u32 spriteXMasked, spriteYMasked, priority, palNum, tileNum, objMode;
-
-                    objMode = 0;
-                    objMode &= SPRITEOAM_MAX_OBJMODE;
-                    objMode <<= SPRITEOAM_SHIFT_OBJMODE;
-                    gUnknown_202EDC0.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-                    gUnknown_202EDC0.attrib1 |= objMode;
-
-                    spriteYMasked = (spriteY & SPRITEOAM_MAX_UNK6_4);
-                    spriteYMasked <<= SPRITEOAM_SHIFT_UNK6_4;
-                    gUnknown_202EDC0.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-                    gUnknown_202EDC0.unk6 |= spriteYMasked;
-
-                    spriteXMasked = (spriteX & SPRITEOAM_MAX_X);
-                    spriteXMasked <<= SPRITEOAM_SHIFT_X;
-                    gUnknown_202EDC0.attrib2 &= ~SPRITEOAM_MASK_X;
-                    gUnknown_202EDC0.attrib2 |= spriteXMasked;
-
-                    priority = 3 & SPRITEOAM_MAX_PRIORITY;
-                    priority <<= SPRITEOAM_SHIFT_PRIORITY;
-                    gUnknown_202EDC0.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-                    gUnknown_202EDC0.attrib3 |= priority;
-
-                    palNum = 10 & SPRITEOAM_MAX_PALETTENUM;
-                    palNum <<= SPRITEOAM_SHIFT_PALETTENUM;
-                    gUnknown_202EDC0.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-                    gUnknown_202EDC0.attrib3 |= palNum;
-
-                    tileNum = 0x1FC & SPRITEOAM_MAX_TILENUM;
-                    tileNum <<= SPRITEOAM_SHIFT_TILENUM;
-                    gUnknown_202EDC0.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-                    gUnknown_202EDC0.attrib3 |= tileNum;
+                    SpriteSetObjMode(&gUnknown_202EDC0, 0);
+                    SpriteSetY(&gUnknown_202EDC0, spriteY);
+                    SpriteSetX(&gUnknown_202EDC0, spriteX);
+                    SpriteSetPriority(&gUnknown_202EDC0, 3);
+                    SpriteSetPalNum(&gUnknown_202EDC0, 10);
+                    SpriteSetTileNum(&gUnknown_202EDC0, 0x1FC);
 
                     AddSprite(&gUnknown_202EDC0, 0, NULL, NULL);
                 }
