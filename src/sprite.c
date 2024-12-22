@@ -180,7 +180,7 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
     } sp;
     SpriteOAM *sprite;
     s32 spriteId;
-    s32 pos; // Has to be used for both x and pos to match
+    s32 pos; // Has to be used for both x and y to match
     struct UnkStackFor8004EA8 *spPtr;
 
     if (a2 != NULL)
