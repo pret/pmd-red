@@ -179,6 +179,13 @@ typedef struct SpriteOAM
     (spritePtr)->attrib1 |= _shapeVal; \
 }
 
+#define SpriteGetTileNum_LocalVar(spritePtr, _tileNum)             \
+{                                            \
+    _tileNum = (spritePtr)->attrib3;                \
+    _tileNum >>= SPRITEOAM_SHIFT_TILENUM;            \
+    _tileNum &= SPRITEOAM_MAX_TILENUM;            \
+}
+
 #define SpriteSetTileNum(spritePtr, _tileNum) \
 { \
     u32 _tileNumVal = _tileNum; \
@@ -186,6 +193,14 @@ typedef struct SpriteOAM
     _tileNumVal <<= SPRITEOAM_SHIFT_TILENUM; \
     (spritePtr)->attrib3 &= ~SPRITEOAM_MASK_TILENUM; \
     (spritePtr)->attrib3 |= _tileNumVal; \
+}
+
+#define SpriteAddTileNum(spritePtr, addVal)         \
+{                                                \
+    u32 _tileNumValAdd;                                \
+    SpriteGetTileNum_LocalVar(spritePtr, _tileNumValAdd);            \
+    _tileNumValAdd += (addVal);                        \
+    SpriteSetTileNum(spritePtr, _tileNumValAdd);              \
 }
 
 #define SpriteSetPriority(spritePtr, _priority) \
@@ -233,6 +248,8 @@ typedef struct SpriteOAM
     (spritePtr)->attrib2 |= _sizeVal;                        \
 }
 
+#define SpriteGetX(spritePtr)(((spritePtr)->attrib2 >> SPRITEOAM_SHIFT_X) & SPRITEOAM_MAX_X)
+
 #define SpriteSetX(spritePtr, _x)                \
 {               \
     u32 _xSpriteVal = _x;               \
@@ -252,7 +269,9 @@ typedef struct SpriteOAM
     (spritePtr)->attrib2 = _xSpriteVal;               \
 }
 
-#define SpriteGetY(spritePtr, _y)             \
+#define SpriteGetY(spritePtr)(((spritePtr)->unk6 >> SPRITEOAM_SHIFT_WORKING_Y) & SPRITEOAM_MAX_WORKING_Y)
+
+#define SpriteGetY_LocalVar(spritePtr, _y)             \
 {                                            \
     _y = (spritePtr)->unk6;                \
     _y >>= SPRITEOAM_SHIFT_WORKING_Y;            \
@@ -271,7 +290,7 @@ typedef struct SpriteOAM
 #define SpriteAddY(spritePtr, addVal)         \
 {                                                \
     u32 _yVal;                                \
-    SpriteGetY(spritePtr, _yVal);            \
+    SpriteGetY_LocalVar(spritePtr, _yVal);            \
     _yVal += (addVal);                        \
     SpriteSetY(spritePtr, _yVal);              \
 }
@@ -284,6 +303,8 @@ typedef struct SpriteOAM
     (spritePtr)->unk6 &= ~SPRITEOAM_MASK_UNK6_0; \
     (spritePtr)->unk6 |= _unk6_0Val; \
 }
+
+#define SpriteGetUnk6_1(spritePtr)(((spritePtr)->unk6 >> SPRITEOAM_SHIFT_UNK6_1) & SPRITEOAM_MAX_UNK6_1)
 
 #define SpriteSetUnk6_1(spritePtr, _unk6_1) \
 { \

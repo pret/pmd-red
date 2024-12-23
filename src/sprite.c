@@ -218,14 +218,10 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
     }
     else {
         // Animations add to existing tileNum
-        s32 tileNum = sprite->attrib3;
-        tileNum &= SPRITEOAM_MAX_TILENUM;
-        tileNum >>= SPRITEOAM_SHIFT_TILENUM;
-
-        SpriteSetTileNum(sprite, tileNum + a1->vramTileOrMaybeAnimTimer);
+        SpriteAddTileNum(sprite, a1->vramTileOrMaybeAnimTimer);
     }
 
-    pos = ((sprite->attrib2 >> SPRITEOAM_SHIFT_X) & SPRITEOAM_MAX_X) ;
+    pos = SpriteGetX(sprite);
     pos += a1->pos.x - 0x100;
 
     if (pos < -64)
@@ -235,7 +231,7 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
 
     SpriteSetX(sprite, pos);
 
-    pos = ((sprite->unk6 >> SPRITEOAM_SHIFT_WORKING_Y) & SPRITEOAM_MAX_WORKING_Y);
+    pos = SpriteGetY(sprite);
     pos += a1->pos.y - 0x200;
     if (pos < -64)
         return;
@@ -245,7 +241,7 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
     SpriteSetOamY(sprite, pos);
 
     // Set paletteNum
-    if (!((sprite->unk6 >> SPRITEOAM_SHIFT_UNK6_1) & SPRITEOAM_MAX_UNK6_1)) {
+    if (!SpriteGetUnk6_1(sprite)) {
         SpriteSetPalNum(sprite, a1->paletteNum);
     }
 
