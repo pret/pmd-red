@@ -527,49 +527,25 @@ void DrawDialogueBoxString(void)
                 if (!buttonPress) {
                     sArrowFrames++;
                     if (!(sUnknownTextFlags & 0x2) && sArrowFrames & 8) {
-                        u32 shape, tileNum, palNum, pal;
-
-                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_BPP;
-
-                        shape = 1;
-                        shape <<= SPRITEOAM_SHIFT_SHAPE;
-                        sDialogueBoxArrowSprite.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-                        sDialogueBoxArrowSprite.attrib1 |= shape;
-
-                        sDialogueBoxArrowSprite.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-                        sDialogueBoxArrowSprite.attrib2 &= ~SPRITEOAM_MASK_SIZE;
-
-                        tileNum = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-                        sDialogueBoxArrowSprite.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-                        sDialogueBoxArrowSprite.attrib3 |= tileNum;
-
-                        sDialogueBoxArrowSprite.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-
-                        pal = 15;
-                        palNum = (pal & SPRITEOAM_MAX_PALETTENUM) << SPRITEOAM_SHIFT_PALETTENUM;
-                        sDialogueBoxArrowSprite.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-                        sDialogueBoxArrowSprite.attrib3 |= palNum;
+                        SpriteSetAffine1(&sDialogueBoxArrowSprite, 0);
+                        SpriteSetAffine2(&sDialogueBoxArrowSprite, 0);
+                        SpriteSetObjMode(&sDialogueBoxArrowSprite, 0);
+                        SpriteSetMosaic(&sDialogueBoxArrowSprite, 0);
+                        SpriteSetBpp(&sDialogueBoxArrowSprite, 0);
+                        SpriteSetShape(&sDialogueBoxArrowSprite, 1);
+                        SpriteSetMatrixNum(&sDialogueBoxArrowSprite, 0);
+                        SpriteSetSize(&sDialogueBoxArrowSprite, 0);
+                        SpriteSetTileNum(&sDialogueBoxArrowSprite, 0x3F0);
+                        SpriteSetPriority(&sDialogueBoxArrowSprite, 0);
+                        SpriteSetPalNum(&sDialogueBoxArrowSprite, 15);
 
                         if (sUnknownTextFlags & 0x10) {
-                            u32 var = (0x78 & SPRITEOAM_MAX_UNK6_4) << SPRITEOAM_SHIFT_UNK6_4;
-                            sDialogueBoxArrowSprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-                            sDialogueBoxArrowSprite.unk6 |= var;
-                            sDialogueBoxArrowSprite.attrib2 &= ~SPRITEOAM_MASK_X;
-                            sDialogueBoxArrowSprite.attrib2 |= (0x70 & SPRITEOAM_MAX_X) << SPRITEOAM_SHIFT_X;
+                            SpriteSetY(&sDialogueBoxArrowSprite, 120);
+                            SpriteSetX(&sDialogueBoxArrowSprite, 112);
                         }
                         else {
-                            s16 x;
-
-                            u32 var = ((gUnknown_202E748.unkA + 1) & SPRITEOAM_MAX_UNK6_4) << SPRITEOAM_SHIFT_UNK6_4;
-                            sDialogueBoxArrowSprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-                            sDialogueBoxArrowSprite.unk6 |= var;
-                            x = gUnknown_202E748.unk8;
-                            sDialogueBoxArrowSprite.attrib2 &= ~SPRITEOAM_MASK_X;
-                            sDialogueBoxArrowSprite.attrib2 |= (x & SPRITEOAM_MAX_X) << SPRITEOAM_SHIFT_X;
+                            SpriteSetY(&sDialogueBoxArrowSprite, gUnknown_202E748.unkA + 1);
+                            SpriteSetX(&sDialogueBoxArrowSprite, gUnknown_202E748.unk8);
                         }
 
                         AddSprite(&sDialogueBoxArrowSprite, 0x100, NULL, NULL);

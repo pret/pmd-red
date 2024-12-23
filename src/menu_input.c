@@ -603,74 +603,26 @@ void AddMenuCursorSprite(MenuInputStruct *param_1)
 
 void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
 {
-    SpriteOAM sp = {};
-    SpriteOAM* ptr;
-    s32 value;
-    s32 r0;
-    s32 r1;
-    s32 r2;
-    s32 r5;
+    struct SpriteOAM sp = {0};
 
     if (a0->unk1A > 0) {
         UpdateMenuCursorSpriteCoords(a0);
 
         if (!(a0->unk24 & 8)) {
-            #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/T9aXl
-            u32 tmp, tmp2;
-            #else
-            register u32 tmp asm("r0"), tmp2 asm("r1");
-            #endif
-
-            tmp = sp.attrib1;
-            sp.attrib1 = tmp & ~SPRITEOAM_MASK_AFFINEMODE1;
-            sp.attrib1 = sp.attrib1;
-
-            tmp2 = sp.attrib1;
-            sp.attrib1 = tmp2 & ~SPRITEOAM_MASK_AFFINEMODE2;
-            sp.attrib1 = sp.attrib1;
-
-            tmp2 = sp.attrib1;
-            sp.attrib1 = tmp2 & ~SPRITEOAM_MASK_OBJMODE;
-            sp.attrib1 = sp.attrib1;
-
-            tmp2 = sp.attrib1;
-            sp.attrib1 = tmp2 & ~SPRITEOAM_MASK_MOSAIC;
-            sp.attrib1 = sp.attrib1;
-
-            tmp2 = sp.attrib1;
-            sp.attrib1 = tmp2 & ~SPRITEOAM_MASK_BPP;
-            sp.attrib1 = sp.attrib1;
-
-            tmp2 = sp.attrib1;
-            sp.attrib1 = tmp2 & ~SPRITEOAM_MASK_SHAPE;
-            sp.attrib1 = sp.attrib1;
-
-            ptr = &sp;
-
-            r2 = 0x3F4 << SPRITEOAM_SHIFT_TILENUM;
-            ptr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-            ptr->attrib3 |= r2;
-
-            ptr->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-
-            r5 = (u16)~SPRITEOAM_MASK_UNK6_4;
-
-            r1 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-            ptr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-            ptr->attrib3 |= r1;
-
-            ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_0;
-            ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_1;
-
-            r0 = a0->unk8.x;
-            r0 &= SPRITEOAM_MAX_X;
-            ptr->attrib2 = r0;
-
-            value = a0->unk8.y + 1;
-            value &= SPRITEOAM_MAX_UNK6_4;
-            value <<= SPRITEOAM_SHIFT_UNK6_4;
-            ptr->unk6 &= r5;
-            ptr->unk6 |= value;
+            SpriteSetAffine1(&sp, 0);
+            SpriteSetAffine2(&sp, 0);
+            SpriteSetObjMode(&sp, 0);
+            SpriteSetMosaic(&sp, 0);
+            SpriteSetBpp(&sp, 0);
+            SpriteSetShape(&sp, 0);
+            SpriteSetSize(&sp, 0);
+            SpriteSetTileNum(&sp, 0x3F4);
+            SpriteSetPriority(&sp, 0);
+            SpriteSetPalNum(&sp, 15);
+            SpriteSetUnk6_0(&sp, 0);
+            SpriteSetUnk6_1(&sp, 0);
+            SpriteSetX_MatrixNumSize0(&sp, a0->unk8.x);
+            SpriteSetY(&sp, a0->unk8.y + 1);
 
             AddSprite(&sp, 0xFF, 0, 0);
         }
@@ -689,197 +641,64 @@ void nullsub_34(MenuInputStructSub *a0, s32 a1)
 
 static void sub_801332C(DungeonPos *a0)
 {
-    SpriteOAM sp = {};
-    SpriteOAM* ptr;
-    #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/zeLxS
-    u32 r0, r1, r2;
-    #else
-    register u32 r0 asm("r0");
-    register u32 r1 asm("r1");
-    register u32 r2 asm("r2");
-    #endif
-    u32 r3;
-    u32 r5;
-    u32 r6;
+    struct SpriteOAM sp = {0};
 
-    r1 = sp.attrib1;
-    sp.attrib1 = r1 & ~SPRITEOAM_MASK_AFFINEMODE1;
-    sp.attrib1 = sp.attrib1;
-
-    r2 = sp.attrib1;
-    sp.attrib1 = r2 & ~SPRITEOAM_MASK_AFFINEMODE2;
-    sp.attrib1 = sp.attrib1;
-
-    r5 = 1 << SPRITEOAM_SHIFT_OBJMODE;
-    r2 = sp.attrib1;
-    sp.attrib1 = r2 & ~SPRITEOAM_MASK_OBJMODE;
-    sp.attrib1 = sp.attrib1 | r5;
-
-    r2 = sp.attrib1;
-    sp.attrib1 = r2 & ~SPRITEOAM_MASK_MOSAIC;
-    sp.attrib1 = sp.attrib1;
-
-    r2 = sp.attrib1;
-    sp.attrib1 = r2 & ~SPRITEOAM_MASK_BPP;
-    sp.attrib1 = sp.attrib1;
-
-    r2 = sp.attrib1;
-    sp.attrib1 = r2 & ~SPRITEOAM_MASK_SHAPE;
-    sp.attrib1 = sp.attrib1;
-
-    ptr = &sp;
-
-    r3 = 0x3F5 << SPRITEOAM_SHIFT_TILENUM;
-    ptr->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-    ptr->attrib3 |= r3;
-
-    ptr->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-
-    r6 = (u16)~SPRITEOAM_MASK_UNK6_4;
-
-    r2 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-    ptr->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-    ptr->attrib3 |= r2;
-
-    ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_0;
-    ptr->unk6 &= ~SPRITEOAM_MASK_UNK6_1;
-
-    r1 = a0->x;
-    r1 &= SPRITEOAM_MAX_X;
-    ptr->attrib2 = r1;
-
-    r0 = a0->y + 1;
-    r0 &= SPRITEOAM_MAX_UNK6_4;
-    r0 <<= SPRITEOAM_SHIFT_UNK6_4;
-    ptr->unk6 &= r6;
-    ptr->unk6 |= r0;
+    SpriteSetAffine1(&sp, 0);
+    SpriteSetAffine2(&sp, 0);
+    SpriteSetObjMode(&sp, 1);
+    SpriteSetMosaic(&sp, 0);
+    SpriteSetBpp(&sp, 0);
+    SpriteSetShape(&sp, 0);
+    SpriteSetSize(&sp, 0);
+    SpriteSetTileNum(&sp, 0x3F5);
+    SpriteSetPriority(&sp, 0);
+    SpriteSetPalNum(&sp, 15);
+    SpriteSetUnk6_0(&sp, 0);
+    SpriteSetUnk6_1(&sp, 0);
+    SpriteSetX_MatrixNumSize0(&sp, a0->x);
+    SpriteSetY(&sp, a0->y + 1);
 
     AddSprite(&sp, 0xFF, NULL, NULL);
 }
 
 static void sub_8013470(MenuInputStruct *a0)
 {
-    SpriteOAM sp = {};
-    #ifdef NONMATCHING // SpriteOAM memes https://decomp.me/scratch/70Ieb
-    SpriteOAM *ptr;
-    u32 r0, r1, r5;
-    #else
-    register SpriteOAM *ptr asm("r3");
-    register u32 r0 asm("r0");
-    register u32 r1 asm("r1");
-    register u32 r5 asm("r5");
-    #endif
-    u32 r2;
+    struct SpriteOAM sp = {0};
 
     if (a0->unkC != 0) {
         if (a0->unk1E != 0) {
-            r0 = sp.attrib1;
-            sp.attrib1 = r0 & ~SPRITEOAM_MASK_AFFINEMODE1;
-            sp.attrib1 = sp.attrib1;
-
-            r1 = sp.attrib1;
-            sp.attrib1 = r1 & ~SPRITEOAM_MASK_AFFINEMODE2;
-            sp.attrib1 = sp.attrib1;
-
-            r1 = sp.attrib1;
-            sp.attrib1 = r1 & (u16)~SPRITEOAM_MASK_OBJMODE;
-            sp.attrib1 = sp.attrib1;
-
-            r1 = sp.attrib1;
-            sp.attrib1 = r1 & ~SPRITEOAM_MASK_MOSAIC;
-            sp.attrib1 = sp.attrib1;
-
-            r1 = sp.attrib1;
-            sp.attrib1 = r1 & ~SPRITEOAM_MASK_BPP;
-            sp.attrib1 = sp.attrib1;
-
-            r1 = sp.attrib1;
-            sp.attrib1 = r1 & ~SPRITEOAM_MASK_SHAPE;
-            sp.attrib1 = sp.attrib1;
-
-            ptr = &sp;
-
-            r2 = 0x3F2 << SPRITEOAM_SHIFT_TILENUM;
-            r1 = ptr->attrib3;
-            r0 = r1 & (u16)~SPRITEOAM_MASK_TILENUM;
-            r0 |= r2;
-
-            r0 &= (u16)~SPRITEOAM_MASK_PRIORITY;
-
-            r5 = (u16)~SPRITEOAM_MASK_UNK6_4;
-
-            r1 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-            r0 &= (u16)~SPRITEOAM_MASK_PALETTENUM;
-            r0 |= r1;
-            ptr->attrib3 = r0;
-
-            r0 = ptr->unk6;
-            r1 = r0 & (u16)~SPRITEOAM_MASK_UNK6_0;
-            r1 &= (u16)~SPRITEOAM_MASK_UNK6_1;
-
-            r0 = a0->unkC;
-            r0 &= SPRITEOAM_MAX_X;
-            ptr->attrib2 = r0;
-
-            r0 = a0->unkE;
-            r0 &= SPRITEOAM_MAX_UNK6_4;
-            r0 <<= SPRITEOAM_SHIFT_UNK6_4;
-            r1 &= r5;
-            r1 |= r0;
-            ptr->unk6 = r1;
+            SpriteSetAffine1(&sp, 0);
+            SpriteSetAffine2(&sp, 0);
+            SpriteSetObjMode(&sp, 0);
+            SpriteSetMosaic(&sp, 0);
+            SpriteSetBpp(&sp, 0);
+            SpriteSetShape(&sp, 0);
+            SpriteSetSize(&sp, 0);
+            SpriteSetTileNum(&sp, 0x3F2);
+            SpriteSetPriority(&sp, 0);
+            SpriteSetPalNum(&sp, 15);
+            SpriteSetUnk6_0(&sp, 0);
+            SpriteSetUnk6_1(&sp, 0);
+            SpriteSetX_MatrixNumSize0(&sp, a0->unkC);
+            SpriteSetY(&sp, a0->unkE);
 
             AddSprite(&sp, 0xFF, NULL, NULL);
         }
         if (a0->unk20 != 0 && a0->unk20 != a0->unk1E + 1) {
-            r0 = sp.attrib1;
-            sp.attrib1 = r0 & ~SPRITEOAM_MASK_AFFINEMODE1;
-            sp.attrib1 = sp.attrib1;
-
-            sp.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-            sp.attrib1 = sp.attrib1;
-
-            sp.attrib1 &= (u16)~SPRITEOAM_MASK_OBJMODE;
-            sp.attrib1 = sp.attrib1;
-
-            sp.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-            sp.attrib1 = sp.attrib1;
-
-            sp.attrib1 &= ~SPRITEOAM_MASK_BPP;
-            sp.attrib1 = sp.attrib1;
-
-            sp.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-            sp.attrib1 = sp.attrib1;
-
-            ptr = &sp;
-
-            r2 = 0x3F3 << SPRITEOAM_SHIFT_TILENUM;
-            r1 = ptr->attrib3;
-            r0 = r1 & (u16)~SPRITEOAM_MASK_TILENUM;
-            r0 |= r2;
-
-            r0 &= (u16)~SPRITEOAM_MASK_PRIORITY;
-
-            r5 = (u16)~SPRITEOAM_MASK_UNK6_4;
-
-            r1 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-            r0 &= (u16)~SPRITEOAM_MASK_PALETTENUM;
-            r0 |= r1;
-            ptr->attrib3 = r0;
-
-            r0 = ptr->unk6;
-            r1 = r0 & (u16)~SPRITEOAM_MASK_UNK6_0;
-            r1 &= (u16)~SPRITEOAM_MASK_UNK6_1;
-
-            r0 = a0->unkC + 10;
-            r0 &= SPRITEOAM_MAX_X;
-            ptr->attrib2 = r0;
-
-            r0 = a0->unkE;
-            r0 &= SPRITEOAM_MAX_UNK6_4;
-            r0 <<= SPRITEOAM_SHIFT_UNK6_4;
-            r1 &= r5;
-            r1 |= r0;
-            ptr->unk6 = r1;
+            SpriteSetAffine1(&sp, 0);
+            SpriteSetAffine2(&sp, 0);
+            SpriteSetObjMode(&sp, 0);
+            SpriteSetMosaic(&sp, 0);
+            SpriteSetBpp(&sp, 0);
+            SpriteSetShape(&sp, 0);
+            SpriteSetSize(&sp, 0);
+            SpriteSetTileNum(&sp, 0x3F3);
+            SpriteSetPriority(&sp, 0);
+            SpriteSetPalNum(&sp, 15);
+            SpriteSetUnk6_0(&sp, 0);
+            SpriteSetUnk6_1(&sp, 0);
+            SpriteSetX_MatrixNumSize0(&sp, a0->unkC + 10);
+            SpriteSetY(&sp, a0->unkE);
 
             AddSprite(&sp, 0xFF, NULL, NULL);
         }
@@ -1196,48 +1015,21 @@ void sub_8013A7C(MenuInputStruct *param_1)
 
 void sub_8013AA0(unkStructFor8013AA0 *a0)
 {
-    s32 r1;
-    s32 test;
-    s32 r3;
-    s32 r4;
-    s32 test2;
-    s16 earlyF;
     s32 sp[10];
 
-    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_BPP;
-
-    r1 = 1 << SPRITEOAM_SHIFT_SHAPE;
-    a0->unk28.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-    a0->unk28.attrib1 |= r1;
-
-    test = 16 << SPRITEOAM_SHIFT_MATRIXNUM;
-    a0->unk28.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-    a0->unk28.attrib2 |= test;
-
-    a0->unk28.attrib2 &= ~SPRITEOAM_MASK_SIZE;
-
-    r3 = 0x3F0 << SPRITEOAM_SHIFT_TILENUM;
-    a0->unk28.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-    a0->unk28.attrib3 |= r3;
-
-    a0->unk28.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-
-    earlyF = (s16)~SPRITEOAM_MASK_UNK6_4;
-
-    r4 = 15 << SPRITEOAM_SHIFT_PALETTENUM;
-    a0->unk28.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-    a0->unk28.attrib3 |= r4;
-
-    a0->unk28.attrib2 &= ~SPRITEOAM_MASK_X;
-    a0->unk28.attrib2 |= DISPLAY_WIDTH;
-
-    test2 = DISPLAY_WIDTH << SPRITEOAM_SHIFT_UNK6_4;
-    a0->unk28.unk6 &= earlyF;
-    a0->unk28.unk6 |= test2;
+    SpriteSetAffine1(&a0->unk28, 0);
+    SpriteSetAffine2(&a0->unk28, 0);
+    SpriteSetObjMode(&a0->unk28, 0);
+    SpriteSetMosaic(&a0->unk28, 0);
+    SpriteSetBpp(&a0->unk28, 0);
+    SpriteSetShape(&a0->unk28, 1);
+    SpriteSetMatrixNum(&a0->unk28, 16);
+    SpriteSetSize(&a0->unk28, 0);
+    SpriteSetTileNum(&a0->unk28, 0x3F0);
+    SpriteSetPriority(&a0->unk28, 0);
+    SpriteSetPalNum(&a0->unk28, 15);
+    SpriteSetX(&a0->unk28, DISPLAY_WIDTH);
+    SpriteSetY(&a0->unk28, DISPLAY_WIDTH);
 
     a0->unk26 = 0;
 
@@ -1265,24 +1057,12 @@ u32 sub_8013BBC(unkStructFor8013AA0 *a0)
     sub_8013D10(a0);
 
     if (a0->unk26 & 8) {
-        {
-            s32 temp = 16 << SPRITEOAM_SHIFT_MATRIXNUM;
-            a0->unk28.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-            a0->unk28.attrib2 |= temp;
-        }
+        SpriteSetMatrixNum(&a0->unk28, 16);
         AddSprite(&a0->unk28, 0x100, NULL, NULL);
 
-        a0->unk28.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-        {
-            u32 temp = a0->unk28.unk6;
-            s32 max = SPRITEOAM_MAX_UNK6_4;
-            temp >>= SPRITEOAM_SHIFT_UNK6_4;
-            temp += 16;
-            temp &= max;
-            temp <<= SPRITEOAM_SHIFT_UNK6_4;
-            a0->unk28.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-            a0->unk28.unk6 |= temp;
-        }
+        SpriteSetMatrixNum(&a0->unk28, 0);
+        SpriteAddY(&a0->unk28, 16);
+
         AddSprite(&a0->unk28, 0x100, NULL, NULL);
     }
 
@@ -1326,6 +1106,7 @@ void sub_8013C68(unkStructFor8013AA0 *a0)
 
 void sub_8013D10(unkStructFor8013AA0 *a0)
 {
+    s32 x, y;
     u8 uVar4;
     UnkTextStruct1 *ptr;
 
@@ -1347,21 +1128,11 @@ void sub_8013D10(unkStructFor8013AA0 *a0)
         a0->unk26 = 8;
     }
 
-    {
-        s32 temp = (a0->unk1C - ((a0->unk24 + 1) * 12) + (ptr->unk0 * 8)) - 3;
-        temp &= SPRITEOAM_MAX_X;
-        temp <<= SPRITEOAM_SHIFT_X;
-        a0->unk28.attrib2 &= ~SPRITEOAM_MASK_X;
-        a0->unk28.attrib2 |= temp;
-    } while (0);
+    x = (a0->unk1C - ((a0->unk24 + 1) * 12) + (ptr->unk0 * 8)) - 3;
+    SpriteSetX(&a0->unk28, x);
 
-    {
-        s32 temp = a0->unk20 + (ptr->unk2 * 8) - 7;
-        temp &= SPRITEOAM_MAX_UNK6_4;
-        temp <<= SPRITEOAM_SHIFT_UNK6_4;
-        a0->unk28.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-        a0->unk28.unk6 |= temp;
-    } while (0);
+    y = a0->unk20 + (ptr->unk2 * 8) - 7;
+    SpriteSetY(&a0->unk28, y);
 }
 
 static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)

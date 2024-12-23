@@ -1410,52 +1410,21 @@ void InitShadowSprites(s32 param_1, s32 param_2)
     CloseFile(file);
 
     for (spriteIndex = 0; spriteIndex < 3; spriteIndex++) {
-        u32 objMode, shape, size, tileNum, priority;
-
         SpriteOAM *sprite = &gShadowSprites[spriteIndex];
 
-        sprite->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-        sprite->attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
-
-        objMode = 0;
-        objMode &= SPRITEOAM_MAX_OBJMODE;
-        objMode <<= SPRITEOAM_SHIFT_OBJMODE;
-        sprite->attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-        sprite->attrib1 |= objMode;
-
-        sprite->attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-        sprite->attrib1 &= ~SPRITEOAM_MASK_BPP;
-
-        shape = gShadowSpriteSizeFlags_8107698[spriteIndex].shape;
-        shape &= SPRITEOAM_MAX_SHAPE;
-        shape <<= SPRITEOAM_SHIFT_SHAPE;
-        sprite->attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-        sprite->attrib1 |= shape;
-
-        sprite->attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-
-        size = gShadowSpriteSizeFlags_8107698[spriteIndex].size;
-        size &= SPRITEOAM_MAX_SIZE;
-        size <<= SPRITEOAM_SHIFT_SIZE;
-        sprite->attrib2 &= ~SPRITEOAM_MASK_SIZE;
-        sprite->attrib2 |= size;
-
-        tileNum = gShadowSpriteSizeFlags_8107698[spriteIndex].tileNum + param_1;
-        tileNum &= SPRITEOAM_MAX_TILENUM;
-        tileNum <<= SPRITEOAM_SHIFT_TILENUM;
-        sprite->attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-        sprite->attrib3 |= tileNum;
-
-        priority = param_2;
-        priority &= SPRITEOAM_MAX_PRIORITY;
-        priority <<= SPRITEOAM_SHIFT_PRIORITY;
-        sprite->attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-        sprite->attrib3 |= priority;
-
-        sprite->attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-
-        sprite->unk6 &= ~SPRITEOAM_MASK_UNK6_0;
-        sprite->unk6 &= ~SPRITEOAM_MASK_UNK6_1;
+        SpriteSetAffine1(sprite, 0);
+        SpriteSetAffine2(sprite, 0);
+        SpriteSetObjMode(sprite, 0);
+        SpriteSetMosaic(sprite, 0);
+        SpriteSetBpp(sprite, 0);
+        SpriteSetShape(sprite, gShadowSpriteSizeFlags_8107698[spriteIndex].shape);
+        SpriteSetMatrixNum(sprite, 0);
+        SpriteSetSize(sprite, gShadowSpriteSizeFlags_8107698[spriteIndex].size);
+        SpriteSetTileNum(sprite, gShadowSpriteSizeFlags_8107698[spriteIndex].tileNum + param_1);
+        SpriteSetPriority(sprite, param_2);
+        SpriteSetPalNum(sprite, 0);
+        SpriteSetUnk6_0(sprite, 0);
+        SpriteSetUnk6_1(sprite, 0);
     }
 }
 
@@ -1466,24 +1435,16 @@ bool8 AddShadowSprite(s16 species, s16* a2, s16* a3)
     if (species != MONSTER_DIGLETT && species != MONSTER_DUGTRIO) {
         s32 shadowSize = GetShadowSize(species);
         s32 x, y;
-        SpriteOAM* spr;
 
         x = a2[0] + a3[8];
         y = a2[1] + a3[9];
         x += gUnknown_81076C4[shadowSize];
         y -= 4;
 
-        x &= SPRITEOAM_MAX_X;
-        x <<= SPRITEOAM_SHIFT_X;
-        spr = &gShadowSprites[shadowSize];
-        spr->attrib2 &= ~SPRITEOAM_MASK_X;
-        spr->attrib2 |= x;
+        SpriteSetX(&gShadowSprites[shadowSize], x);
+        SpriteSetY(&gShadowSprites[shadowSize], y);
 
-        y &= SPRITEOAM_MAX_UNK6_4;
-        y <<= SPRITEOAM_SHIFT_UNK6_4;
-        spr->unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-        spr->unk6 |= y;
-        AddSprite(spr, 0, NULL, NULL);
+        AddSprite(&gShadowSprites[shadowSize], 0, NULL, NULL);
     }
 
     return TRUE;

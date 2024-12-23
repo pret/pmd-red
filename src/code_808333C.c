@@ -9,18 +9,8 @@ bool8 sub_8083568(s32 inX, s32 inY, u8 index)
 
     if (x >= -16 && y >= -16 && x <= 255 && y <= 175)
     {
-        u32 finalXSprite, finalYSprite;
-
-        finalXSprite = x + gUnknown_202ED28[0][index].x;
-        finalXSprite &= SPRITEOAM_MASK_X;
-        gUnknown_202ED28[0][index].sprite.attrib2 &= ~SPRITEOAM_MASK_X;
-        gUnknown_202ED28[0][index].sprite.attrib2 |= finalXSprite;
-
-        finalYSprite = y + gUnknown_202ED28[0][index].y;
-        finalYSprite &= SPRITEOAM_MAX_UNK6_4;
-        finalYSprite <<= SPRITEOAM_SHIFT_UNK6_4;
-        gUnknown_202ED28[0][index].sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-        gUnknown_202ED28[0][index].sprite.unk6 |= finalYSprite;
+        SpriteSetX(&gUnknown_202ED28[0][index].sprite, x + gUnknown_202ED28[0][index].x);
+        SpriteSetY(&gUnknown_202ED28[0][index].sprite, y + gUnknown_202ED28[0][index].y);
 
         AddSprite(&gUnknown_202ED28[0][index].sprite, 0, NULL, NULL);
         return TRUE;

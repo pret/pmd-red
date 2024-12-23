@@ -624,8 +624,6 @@ struct UnkStruct_8106AE8
 
 extern const struct UnkStruct_8106AE8 gUnknown_8106AE8[];
 
-#ifdef NONMATCHING
-// Sprite OAM memes. https://decomp.me/scratch/Jm4oC
 // Creates arrow sprites which are used when in rotate or diagonal modes.
 static void TryCreateModeArrows(Entity *leader)
 {
@@ -636,145 +634,90 @@ static void TryCreateModeArrows(Entity *leader)
         SpriteOAM sprite;
 
         for (i = 0; i < 4; i++) {
-            u32 objMode, matrixNum, tileNum, prio, xSprite, unk6;
+            u32 matrixNum;
             s32 x, xMul, x2;
-            s32 unk1, unk1Mul, unk2;
+            s32 y, yMul, y2;
 
-            sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-            sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+            SpriteSetAffine1(&sprite, 0);
+            SpriteSetAffine2(&sprite, 0);
+            SpriteSetObjMode(&sprite, 1);
+            SpriteSetMosaic(&sprite, 0);
+            SpriteSetBpp(&sprite, 0);
+            SpriteSetShape(&sprite, 0);
 
-            objMode = 1 << SPRITEOAM_SHIFT_OBJMODE;
-            sprite.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-            sprite.attrib1 |= objMode;
-
-            sprite.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-            sprite.attrib1 &= ~SPRITEOAM_MASK_BPP;
-
-            sprite.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-
-            if (gUnknown_8106AC8[i].unk4 != 0)
-                matrixNum = 8;
-            else
-                matrixNum = 0;
+            matrixNum = (gUnknown_8106AC8[i].unk4 != 0) ? 8 : 0;
 
             if (gUnknown_8106AC8[i].unk5)
                 matrixNum += 16;
 
-            matrixNum &= SPRITEOAM_MAX_MATRIXNUM;
-            matrixNum <<= SPRITEOAM_SHIFT_MATRIXNUM;
-            sprite.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-            sprite.attrib2 |= matrixNum;
+            SpriteSetMatrixNum_UseLocalVar(&sprite, matrixNum);
+            SpriteSetSize(&sprite, 0);
 
-            sprite.attrib2 &= ~SPRITEOAM_MASK_SHAPE;
+            SpriteSetTileNum(&sprite, 0x213);
+            SpriteSetPriority(&sprite, 2);
+            SpriteSetPalNum(&sprite, 0);
 
-            tileNum = 0x213 << SPRITEOAM_SHIFT_TILENUM;
-            sprite.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-            sprite.attrib3 |= tileNum;
+            SpriteSetUnk6_0(&sprite, 0);
+            SpriteSetUnk6_1(&sprite, 0);
 
-            prio = 2 << SPRITEOAM_SHIFT_PRIORITY;
-            sprite.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-            sprite.attrib3 |= prio;
-
-            sprite.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-
-            sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_0;
-            sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_1;
-
-            x = gUnknown_8106AC8[i].unk0;
-            xMul = x * 10;
+            xMul = gUnknown_8106AC8[i].unk0 * 10;
             x2 = (sArrowsFrames / 2) & 7;
-            xSprite = xMul + 116 + (x2 * x);
-            xSprite &= SPRITEOAM_MAX_X;
-            xSprite <<= SPRITEOAM_SHIFT_X;
-            sprite.attrib2 &= ~SPRITEOAM_MASK_X;
-            sprite.attrib2 |= xSprite;
+            x = (x2 * gUnknown_8106AC8[i].unk0) + xMul + 116;
+            SpriteSetX(&sprite, x);
 
-            unk1 = gUnknown_8106AC8[i].unk2;
-            unk1Mul = unk1 * 10;
-            unk2 = (sArrowsFrames / 2) & 7;
-            unk6 = 82 + unk1Mul + (unk2 * unk1);
-            unk6 &= SPRITEOAM_MAX_UNK6_4;
-            unk6 <<= SPRITEOAM_SHIFT_UNK6_4;
-            sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-            sprite.unk6 |= unk6;
+            yMul = gUnknown_8106AC8[i].unk2 * 10;
+            y2 = (sArrowsFrames / 2) & 7;
+            y = (y2 * gUnknown_8106AC8[i].unk2) + yMul + 82;
+            SpriteSetY(&sprite, y);
 
             AddSprite(&sprite, 0x100, NULL, NULL);
         }
     }
+
     else if (unkPtr->unk1821A) {
-        s32 i, to;
+        s32 i;
         SpriteOAM sprite;
         s32 var_2C = unkPtr->unk1821B;
-        s32 x, y;
-        s32 x1, x2, xMul;
-        s32 y1, y2, yMul;
 
-        if (var_2C < 8u) {
-            to = (sShowThreeArrows2 != 0 && sShowThreeArrows1 != 0) ? 3 : 1;
+        if (unkPtr->unk1821B < 8) {
+            s32 x, xMul, x2;
+            s32 y, yMul, y2;
+            s32 to = (sShowThreeArrows2 != FALSE && sShowThreeArrows1 != FALSE) ? 3 : 1;
 
-            x1 = gUnknown_8106AE8[var_2C].unk0;
-            xMul = x1 * 10;
+            xMul = gUnknown_8106AE8[var_2C].unk0 * 10;
             x2 = (sArrowsFrames / 2) & 7;
-            x =  xMul + 116 + (x1 * x2);
+            x = (gUnknown_8106AE8[var_2C].unk0 * x2) + xMul + 116;
 
-            y1 = gUnknown_8106AE8[var_2C].unk2;
-            yMul = y1 * 10;
+            yMul = gUnknown_8106AE8[var_2C].unk2 * 10;
             y2 = (sArrowsFrames / 2) & 7;
-            y = 82 + yMul + (y2 * y1);
+            y = (y2 * gUnknown_8106AE8[var_2C].unk2) + yMul + 82;
             for (i = 0; i < to; i++) {
-                u32 objMode, tileNum, prio, matrixNum, xSprite, ySprite;
+                u32 matrixNum;
 
-                sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE1;
-                sprite.attrib1 &= ~SPRITEOAM_MASK_AFFINEMODE2;
+                SpriteSetAffine1(&sprite, 0);
+                SpriteSetAffine2(&sprite, 0);
+                SpriteSetObjMode(&sprite, 1);
+                SpriteSetMosaic(&sprite, 0);
+                SpriteSetBpp(&sprite, 0);
+                SpriteSetShape(&sprite, 0);
 
-                objMode = 1 << SPRITEOAM_SHIFT_OBJMODE;
-                sprite.attrib1 &= ~SPRITEOAM_MASK_OBJMODE;
-                sprite.attrib1 |= objMode;
-
-                sprite.attrib1 &= ~SPRITEOAM_MASK_MOSAIC;
-                sprite.attrib1 &= ~SPRITEOAM_MASK_BPP;
-
-                sprite.attrib1 &= ~SPRITEOAM_MASK_SHAPE;
-
-                if (gUnknown_8106AE8[var_2C].unk8 != 0)
-                    matrixNum = 8;
-                else
-                    matrixNum = 0;
+                matrixNum = (gUnknown_8106AE8[var_2C].unk8 != 0) ? 8 : 0;
 
                 if (gUnknown_8106AE8[var_2C].unk9)
                     matrixNum += 16;
 
-                matrixNum &= SPRITEOAM_MAX_MATRIXNUM;
-                matrixNum <<= SPRITEOAM_SHIFT_MATRIXNUM;
-                sprite.attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;
-                sprite.attrib2 |= matrixNum;
+                SpriteSetMatrixNum_UseLocalVar(&sprite, matrixNum);
+                SpriteSetSize(&sprite, 0);
 
-                sprite.attrib2 &= ~SPRITEOAM_MASK_SIZE;
+                SpriteSetTileNum(&sprite, gUnknown_8106AE8[var_2C].unk4);
+                SpriteSetPriority(&sprite, 2);
+                SpriteSetPalNum(&sprite, 0);
 
-                tileNum = gUnknown_8106AE8[var_2C].unk4;
-                sprite.attrib3 &= ~SPRITEOAM_MASK_TILENUM;
-                sprite.attrib3 |= tileNum;
+                SpriteSetUnk6_0(&sprite, 0);
+                SpriteSetUnk6_1(&sprite, 0);
 
-                prio = 2 << SPRITEOAM_SHIFT_PRIORITY;
-                sprite.attrib3 &= ~SPRITEOAM_MASK_PRIORITY;
-                sprite.attrib3 |= prio;
-
-                sprite.attrib3 &= ~SPRITEOAM_MASK_PALETTENUM;
-
-                sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_0;
-                sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_1;
-
-                xSprite = x;
-                xSprite &= SPRITEOAM_MAX_X;
-                xSprite <<= SPRITEOAM_SHIFT_X;
-                sprite.attrib2 &= ~SPRITEOAM_MASK_X;
-                sprite.attrib2 |= xSprite;
-
-                ySprite = y;
-                ySprite &= SPRITEOAM_MAX_UNK6_4;
-                ySprite <<= SPRITEOAM_SHIFT_UNK6_4;
-                sprite.unk6 &= ~SPRITEOAM_MASK_UNK6_4;
-                sprite.unk6 |= ySprite;
+                SpriteSetX(&sprite, x);
+                SpriteSetY(&sprite, y);
 
                 AddSprite(&sprite, 0x100, NULL, NULL);
                 x += gUnknown_8106AE8[var_2C].unk0 * 4;
@@ -788,558 +731,6 @@ static void TryCreateModeArrows(Entity *leader)
         sub_804A728(&leader->pos, unkPtr->unk1821B, 0, sInRotateMode);
     }
 }
-
-#else
-NAKED static void TryCreateModeArrows(Entity *leader)
-{
-    asm_unified(	"\n"
-"	push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	sub sp, 0x28\n"
-"	str r0, [sp, 0x10]\n"
-"	ldr r0, _0805E47C\n"
-"	ldr r1, [r0]\n"
-"	ldr r0, _0805E480\n"
-"	adds r0, r1, r0\n"
-"	str r0, [sp, 0x14]\n"
-"	ldr r0, _0805E484\n"
-"	ldrb r0, [r0]\n"
-"	cmp r0, 0\n"
-"	bne _0805E2E6\n"
-"	b _0805E4C4\n"
-"_0805E2E6:\n"
-"	movs r1, 0\n"
-"	str r1, [sp, 0x18]\n"
-"	mov r7, sp\n"
-"	ldr r2, _0805E488\n"
-"	mov r10, r2\n"
-"_0805E2F0:\n"
-"	ldrh r0, [r7]\n"
-"	ldr r3, _0805E48C\n"
-"	adds r1, r3, 0\n"
-"	ands r1, r0\n"
-"	ldr r0, [sp]\n"
-"	mov r4, r10\n"
-"	ands r0, r4\n"
-"	orrs r0, r1\n"
-"	str r0, [sp]\n"
-"	ldrh r1, [r7]\n"
-"	mov r2, r10\n"
-"	ands r2, r0\n"
-"	orrs r2, r1\n"
-"	str r2, [sp]\n"
-"	ldrh r0, [r7]\n"
-"	ldr r5, _0805E490\n"
-"	adds r1, r5, 0\n"
-"	ands r1, r0\n"
-"	mov r0, r10\n"
-"	ands r0, r2\n"
-"	orrs r0, r1\n"
-"	str r0, [sp]\n"
-"	ldrh r2, [r7]\n"
-"	mov r1, r10\n"
-"	ands r1, r0\n"
-"	orrs r1, r2\n"
-"	str r1, [sp]\n"
-"	ldrh r2, [r7]\n"
-"	ldr r0, _0805E494\n"
-"	ands r0, r2\n"
-"	mov r3, r10\n"
-"	ands r3, r1\n"
-"	orrs r3, r0\n"
-"	str r3, [sp]\n"
-"	ldrh r1, [r7]\n"
-"	movs r0, 0x80\n"
-"	lsls r0, 3\n"
-"	orrs r0, r1\n"
-"	movs r6, 0\n"
-"	orrs r0, r6\n"
-"	mov r2, r10\n"
-"	ands r2, r3\n"
-"	orrs r2, r0\n"
-"	str r2, [sp]\n"
-"	ldrh r0, [r7]\n"
-"	ldr r3, _0805E498\n"
-"	adds r1, r3, 0\n"
-"	ands r1, r0\n"
-"	mov r0, r10\n"
-"	ands r0, r2\n"
-"	orrs r0, r1\n"
-"	str r0, [sp]\n"
-"	ldrh r1, [r7]\n"
-"	mov r2, r10\n"
-"	ands r2, r0\n"
-"	orrs r2, r1\n"
-"	str r2, [sp]\n"
-"	ldrh r0, [r7]\n"
-"	ldr r4, _0805E49C\n"
-"	adds r1, r4, 0\n"
-"	ands r1, r0\n"
-"	mov r0, r10\n"
-"	ands r0, r2\n"
-"	orrs r0, r1\n"
-"	str r0, [sp]\n"
-"	ldrh r1, [r7]\n"
-"	mov r2, r10\n"
-"	ands r2, r0\n"
-"	orrs r2, r1\n"
-"	str r2, [sp]\n"
-"	ldrh r1, [r7]\n"
-"	ldr r0, _0805E4A0\n"
-"	ands r0, r1\n"
-"	mov r1, r10\n"
-"	ands r1, r2\n"
-"	orrs r1, r0\n"
-"	str r1, [sp]\n"
-"	ldrh r2, [r7]\n"
-"	mov r0, r10\n"
-"	ands r0, r1\n"
-"	orrs r0, r2\n"
-"	str r0, [sp]\n"
-"	ldr r1, _0805E4A4\n"
-"	ldr r5, [sp, 0x18]\n"
-"	lsls r0, r5, 3\n"
-"	adds r0, r1\n"
-"	mov r12, r0\n"
-"	ldrb r1, [r0, 0x4]\n"
-"	negs r0, r1\n"
-"	orrs r0, r1\n"
-"	asrs r1, r0, 31\n"
-"	movs r0, 0x8\n"
-"	ands r1, r0\n"
-"	mov r6, r12\n"
-"	ldrb r0, [r6, 0x5]\n"
-"	cmp r0, 0\n"
-"	beq _0805E3B4\n"
-"	adds r1, 0x10\n"
-"_0805E3B4:\n"
-"	movs r0, 0x1F\n"
-"	ands r1, r0\n"
-"	lsls r1, 9\n"
-"	ldrh r3, [r7, 0x2]\n"
-"	ldr r2, _0805E4A8\n"
-"	adds r0, r2, 0\n"
-"	ands r3, r0\n"
-"	orrs r3, r1\n"
-"	ldr r4, _0805E4A0\n"
-"	ands r3, r4\n"
-"	strh r3, [r7, 0x2]\n"
-"	ldr r2, _0805E4AC\n"
-"	ldrh r0, [r7, 0x4]\n"
-"	movs r5, 0xFC\n"
-"	lsls r5, 8\n"
-"	adds r1, r5, 0\n"
-"	ands r0, r1\n"
-"	orrs r0, r2\n"
-"	movs r6, 0\n"
-"	orrs r0, r6\n"
-"	movs r1, 0x80\n"
-"	lsls r1, 4\n"
-"	ldr r2, _0805E494\n"
-"	ands r0, r2\n"
-"	orrs r0, r1\n"
-"	orrs r0, r6\n"
-"	ldr r4, _0805E4B0\n"
-"	mov r9, r4\n"
-"	ands r0, r4\n"
-"	strh r0, [r7, 0x4]\n"
-"	ldrh r4, [r7, 0x6]\n"
-"	ldr r5, _0805E4B4\n"
-"	adds r0, r5, 0\n"
-"	ands r4, r0\n"
-"	ldr r6, _0805E4B8\n"
-"	adds r0, r6, 0\n"
-"	ands r4, r0\n"
-"	strh r4, [r7, 0x6]\n"
-"	mov r0, r12\n"
-"	movs r1, 0\n"
-"	ldrsh r5, [r0, r1]\n"
-"	lsls r2, r5, 2\n"
-"	adds r2, r5\n"
-"	lsls r2, 1\n"
-"	ldr r6, _0805E4BC\n"
-"	mov r8, r6\n"
-"	movs r1, 0\n"
-"	ldrsh r0, [r6, r1]\n"
-"	lsrs r1, r0, 31\n"
-"	adds r0, r1\n"
-"	asrs r0, 1\n"
-"	movs r6, 0x7\n"
-"	ands r0, r6\n"
-"	muls r0, r5\n"
-"	adds r0, r2\n"
-"	adds r0, 0x74\n"
-"	ldr r1, _0805E4C0\n"
-"	ands r0, r1\n"
-"	movs r2, 0xFE\n"
-"	lsls r2, 8\n"
-"	adds r1, r2, 0\n"
-"	ands r3, r1\n"
-"	orrs r3, r0\n"
-"	strh r3, [r7, 0x2]\n"
-"	mov r5, r12\n"
-"	movs r0, 0x2\n"
-"	ldrsh r3, [r5, r0]\n"
-"	lsls r2, r3, 2\n"
-"	adds r2, r3\n"
-"	lsls r2, 1\n"
-"	mov r1, r8\n"
-"	movs r5, 0\n"
-"	ldrsh r0, [r1, r5]\n"
-"	lsrs r1, r0, 31\n"
-"	adds r0, r1\n"
-"	asrs r0, 1\n"
-"	ands r0, r6\n"
-"	muls r0, r3\n"
-"	adds r0, r2\n"
-"	adds r0, 0x52\n"
-"	mov r6, r9\n"
-"	ands r0, r6\n"
-"	lsls r0, 4\n"
-"	movs r1, 0xF\n"
-"	ands r4, r1\n"
-"	orrs r4, r0\n"
-"	strh r4, [r7, 0x6]\n"
-"	mov r0, sp\n"
-"	adds r1, 0xF1\n"
-"	movs r2, 0\n"
-"	movs r3, 0\n"
-"	bl AddSprite\n"
-"	ldr r2, [sp, 0x18]\n"
-"	adds r2, 0x1\n"
-"	str r2, [sp, 0x18]\n"
-"	cmp r2, 0x3\n"
-"	bgt _0805E47A\n"
-"	b _0805E2F0\n"
-"_0805E47A:\n"
-"	b _0805E6AC\n"
-"	.align 2, 0\n"
-"_0805E47C: .4byte gDungeon\n"
-"_0805E480: .4byte 0x000181e8\n"
-"_0805E484: .4byte sInDiagonalMode\n"
-"_0805E488: .4byte 0xffff0000\n"
-"_0805E48C: .4byte 0x0000feff\n"
-"_0805E490: .4byte 0x0000fdff\n"
-"_0805E494: .4byte 0x0000f3ff\n"
-"_0805E498: .4byte 0x0000efff\n"
-"_0805E49C: .4byte 0x0000dfff\n"
-"_0805E4A0: .4byte 0x00003fff\n"
-"_0805E4A4: .4byte gUnknown_8106AC8\n"
-"_0805E4A8: .4byte 0x0000c1ff\n"
-"_0805E4AC: .4byte 0x00000213\n"
-"_0805E4B0: .4byte 0x00000fff\n"
-"_0805E4B4: .4byte 0x0000fffe\n"
-"_0805E4B8: .4byte 0x0000fffd\n"
-"_0805E4BC: .4byte sArrowsFrames\n"
-"_0805E4C0: .4byte 0x000001ff\n"
-"_0805E4C4:\n"
-"	ldr r3, _0805E6E4\n"
-"	adds r0, r1, r3\n"
-"	ldrb r0, [r0]\n"
-"	cmp r0, 0\n"
-"	bne _0805E4D0\n"
-"	b _0805E6AC\n"
-"_0805E4D0:\n"
-"	ldr r4, _0805E6E8\n"
-"	adds r0, r1, r4\n"
-"	ldrb r0, [r0]\n"
-"	str r0, [sp, 0x1C]\n"
-"	cmp r0, 0x7\n"
-"	bls _0805E4DE\n"
-"	b _0805E6AC\n"
-"_0805E4DE:\n"
-"	ldr r0, _0805E6EC\n"
-"	ldrb r0, [r0]\n"
-"	movs r7, 0x1\n"
-"	cmp r0, 0\n"
-"	beq _0805E4F2\n"
-"	ldr r0, _0805E6F0\n"
-"	ldrb r0, [r0]\n"
-"	cmp r0, 0\n"
-"	beq _0805E4F2\n"
-"	movs r7, 0x3\n"
-"_0805E4F2:\n"
-"	ldr r5, _0805E6F4\n"
-"	mov r12, r5\n"
-"	ldr r6, [sp, 0x1C]\n"
-"	lsls r5, r6, 1\n"
-"	adds r3, r5, r6\n"
-"	lsls r3, 2\n"
-"	add r3, r12\n"
-"	movs r0, 0\n"
-"	ldrsh r4, [r3, r0]\n"
-"	lsls r1, r4, 2\n"
-"	adds r1, r4\n"
-"	lsls r1, 1\n"
-"	ldr r0, _0805E6F8\n"
-"	movs r6, 0\n"
-"	ldrsh r2, [r0, r6]\n"
-"	lsrs r0, r2, 31\n"
-"	adds r2, r0\n"
-"	asrs r2, 1\n"
-"	movs r0, 0x7\n"
-"	ands r2, r0\n"
-"	adds r0, r4, 0\n"
-"	muls r0, r2\n"
-"	adds r0, r1\n"
-"	adds r0, 0x74\n"
-"	str r0, [sp, 0x20]\n"
-"	movs r1, 0x2\n"
-"	ldrsh r0, [r3, r1]\n"
-"	lsls r1, r0, 2\n"
-"	adds r1, r0\n"
-"	lsls r1, 1\n"
-"	muls r0, r2\n"
-"	adds r0, r1\n"
-"	adds r0, 0x52\n"
-"	mov r10, r0\n"
-"	str r5, [sp, 0x24]\n"
-"	cmp r7, 0\n"
-"	bne _0805E53E\n"
-"	b _0805E6AC\n"
-"_0805E53E:\n"
-"	add r6, sp, 0x8\n"
-"	ldr r2, _0805E6FC\n"
-"	mov r8, r2\n"
-"	mov r9, r7\n"
-"_0805E546:\n"
-"	ldrh r0, [r6]\n"
-"	ldr r3, _0805E700\n"
-"	adds r1, r3, 0\n"
-"	ands r1, r0\n"
-"	ldr r0, [sp, 0x8]\n"
-"	mov r4, r8\n"
-"	ands r0, r4\n"
-"	orrs r0, r1\n"
-"	str r0, [sp, 0x8]\n"
-"	ldrh r1, [r6]\n"
-"	mov r2, r8\n"
-"	ands r2, r0\n"
-"	orrs r2, r1\n"
-"	str r2, [sp, 0x8]\n"
-"	ldrh r0, [r6]\n"
-"	ldr r5, _0805E704\n"
-"	adds r1, r5, 0\n"
-"	ands r1, r0\n"
-"	mov r0, r8\n"
-"	ands r0, r2\n"
-"	orrs r0, r1\n"
-"	str r0, [sp, 0x8]\n"
-"	ldrh r2, [r6]\n"
-"	mov r1, r8\n"
-"	ands r1, r0\n"
-"	orrs r1, r2\n"
-"	str r1, [sp, 0x8]\n"
-"	ldrh r2, [r6]\n"
-"	ldr r0, _0805E708\n"
-"	ands r0, r2\n"
-"	mov r3, r8\n"
-"	ands r3, r1\n"
-"	orrs r3, r0\n"
-"	str r3, [sp, 0x8]\n"
-"	ldrh r1, [r6]\n"
-"	movs r0, 0x80\n"
-"	lsls r0, 3\n"
-"	orrs r0, r1\n"
-"	movs r1, 0\n"
-"	orrs r0, r1\n"
-"	mov r2, r8\n"
-"	ands r2, r3\n"
-"	orrs r2, r0\n"
-"	str r2, [sp, 0x8]\n"
-"	ldrh r0, [r6]\n"
-"	ldr r3, _0805E70C\n"
-"	adds r1, r3, 0\n"
-"	ands r1, r0\n"
-"	mov r0, r8\n"
-"	ands r0, r2\n"
-"	orrs r0, r1\n"
-"	str r0, [sp, 0x8]\n"
-"	ldrh r1, [r6]\n"
-"	mov r2, r8\n"
-"	ands r2, r0\n"
-"	orrs r2, r1\n"
-"	str r2, [sp, 0x8]\n"
-"	ldrh r0, [r6]\n"
-"	ldr r4, _0805E710\n"
-"	adds r1, r4, 0\n"
-"	ands r1, r0\n"
-"	mov r0, r8\n"
-"	ands r0, r2\n"
-"	orrs r0, r1\n"
-"	str r0, [sp, 0x8]\n"
-"	ldrh r1, [r6]\n"
-"	mov r2, r8\n"
-"	ands r2, r0\n"
-"	orrs r2, r1\n"
-"	str r2, [sp, 0x8]\n"
-"	ldrh r1, [r6]\n"
-"	ldr r0, _0805E714\n"
-"	ands r0, r1\n"
-"	mov r1, r8\n"
-"	ands r1, r2\n"
-"	orrs r1, r0\n"
-"	str r1, [sp, 0x8]\n"
-"	ldrh r2, [r6]\n"
-"	mov r0, r8\n"
-"	ands r0, r1\n"
-"	orrs r0, r2\n"
-"	str r0, [sp, 0x8]\n"
-"	ldr r5, [sp, 0x24]\n"
-"	ldr r1, [sp, 0x1C]\n"
-"	adds r0, r5, r1\n"
-"	lsls r2, r0, 2\n"
-"	ldr r3, _0805E6F4\n"
-"	adds r7, r2, r3\n"
-"	ldrb r1, [r7, 0x8]\n"
-"	negs r0, r1\n"
-"	orrs r0, r1\n"
-"	asrs r1, r0, 31\n"
-"	movs r0, 0x8\n"
-"	ands r1, r0\n"
-"	ldrb r0, [r7, 0x9]\n"
-"	cmp r0, 0\n"
-"	beq _0805E60A\n"
-"	adds r1, 0x10\n"
-"_0805E60A:\n"
-"	movs r0, 0x1F\n"
-"	ands r1, r0\n"
-"	lsls r1, 9\n"
-"	ldrh r3, [r6, 0x2]\n"
-"	ldr r4, _0805E718\n"
-"	adds r0, r4, 0\n"
-"	ands r3, r0\n"
-"	orrs r3, r1\n"
-"	ldr r5, _0805E714\n"
-"	ands r3, r5\n"
-"	strh r3, [r6, 0x2]\n"
-"	ldr r1, _0805E71C\n"
-"	adds r0, r2, r1\n"
-"	ldr r2, [r0]\n"
-"	ldr r0, _0805E720\n"
-"	ands r2, r0\n"
-"	ldrh r0, [r6, 0x4]\n"
-"	movs r4, 0xFC\n"
-"	lsls r4, 8\n"
-"	adds r1, r4, 0\n"
-"	ands r0, r1\n"
-"	orrs r0, r2\n"
-"	movs r1, 0x80\n"
-"	lsls r1, 4\n"
-"	ldr r5, _0805E708\n"
-"	ands r0, r5\n"
-"	orrs r0, r1\n"
-"	movs r1, 0\n"
-"	orrs r0, r1\n"
-"	movs r2, 0xF\n"
-"	mov r12, r2\n"
-"	ldr r4, _0805E724\n"
-"	ands r0, r4\n"
-"	strh r0, [r6, 0x4]\n"
-"	ldrh r1, [r6, 0x6]\n"
-"	ldr r5, _0805E728\n"
-"	adds r0, r5, 0\n"
-"	ands r1, r0\n"
-"	ldr r2, _0805E72C\n"
-"	adds r0, r2, 0\n"
-"	ands r1, r0\n"
-"	ldr r0, _0805E730\n"
-"	ldr r5, [sp, 0x20]\n"
-"	ands r0, r5\n"
-"	movs r5, 0xFE\n"
-"	lsls r5, 8\n"
-"	adds r2, r5, 0\n"
-"	ands r3, r2\n"
-"	orrs r3, r0\n"
-"	strh r3, [r6, 0x2]\n"
-"	mov r0, r10\n"
-"	ands r0, r4\n"
-"	lsls r0, 4\n"
-"	mov r2, r12\n"
-"	ands r1, r2\n"
-"	orrs r1, r0\n"
-"	strh r1, [r6, 0x6]\n"
-"	adds r0, r6, 0\n"
-"	movs r1, 0x80\n"
-"	lsls r1, 1\n"
-"	movs r2, 0\n"
-"	movs r3, 0\n"
-"	bl AddSprite\n"
-"	movs r3, 0\n"
-"	ldrsh r0, [r7, r3]\n"
-"	lsls r0, 2\n"
-"	ldr r4, [sp, 0x20]\n"
-"	adds r4, r0\n"
-"	str r4, [sp, 0x20]\n"
-"	movs r5, 0x2\n"
-"	ldrsh r0, [r7, r5]\n"
-"	lsls r0, 2\n"
-"	add r10, r0\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	add r9, r0\n"
-"	mov r1, r9\n"
-"	cmp r1, 0\n"
-"	beq _0805E6AC\n"
-"	b _0805E546\n"
-"_0805E6AC:\n"
-"	ldr r4, _0805E734\n"
-"	ldrb r0, [r4]\n"
-"	cmp r0, 0\n"
-"	beq _0805E6D4\n"
-"	ldr r2, [sp, 0x14]\n"
-"	adds r2, 0x34\n"
-"	ldr r3, [sp, 0x14]\n"
-"	adds r3, 0x33\n"
-"	ldrb r1, [r3]\n"
-"	ldrb r0, [r2]\n"
-"	cmp r0, r1\n"
-"	beq _0805E6D4\n"
-"	strb r1, [r2]\n"
-"	ldr r0, [sp, 0x10]\n"
-"	adds r0, 0x4\n"
-"	ldrb r1, [r3]\n"
-"	ldrb r3, [r4]\n"
-"	movs r2, 0\n"
-"	bl sub_804A728\n"
-"_0805E6D4:\n"
-"	add sp, 0x28\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_0805E6E4: .4byte 0x0001821a\n"
-"_0805E6E8: .4byte 0x0001821b\n"
-"_0805E6EC: .4byte sShowThreeArrows2\n"
-"_0805E6F0: .4byte sShowThreeArrows1\n"
-"_0805E6F4: .4byte gUnknown_8106AE8\n"
-"_0805E6F8: .4byte sArrowsFrames\n"
-"_0805E6FC: .4byte 0xffff0000\n"
-"_0805E700: .4byte 0x0000feff\n"
-"_0805E704: .4byte 0x0000fdff\n"
-"_0805E708: .4byte 0x0000f3ff\n"
-"_0805E70C: .4byte 0x0000efff\n"
-"_0805E710: .4byte 0x0000dfff\n"
-"_0805E714: .4byte 0x00003fff\n"
-"_0805E718: .4byte 0x0000c1ff\n"
-"_0805E71C: .4byte gUnknown_8106AE8 + 4\n"
-"_0805E720: .4byte 0x000003ff\n"
-"_0805E724: .4byte 0x00000fff\n"
-"_0805E728: .4byte 0x0000fffe\n"
-"_0805E72C: .4byte 0x0000fffd\n"
-"_0805E730: .4byte 0x000001ff\n"
-"_0805E734: .4byte sInRotateMode"
-);
-}
-
-#endif // NONMATCHING
 
 void sub_805E738(Entity *a0)
 {
