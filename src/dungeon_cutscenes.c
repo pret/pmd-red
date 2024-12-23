@@ -3982,20 +3982,10 @@ void sub_808B50C(void)
 
 void JirachiWish(void)
 {
-  u8 friendArea;
   Entity *jirachiEntity;
   DungeonPos *LeaderPos;
   Entity *leaderEntity;
   s32 wishChoice;
-  s32 counter;
-  u32 direction;
-  s32 index;
-  Item auStack152 [9];
-  Item itemStack [9];
-  Item strengthItems [9];
-  DungeonPos pos1;
-  DungeonPos pos2;
-  DungeonPos pos3;
 
   jirachiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_JIRACHI);
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_JIRACHI);
@@ -4026,41 +4016,39 @@ void JirachiWish(void)
   sub_803E708(10,0x46);
   while( 1 ) {
     while (1) {
-#ifndef NONMATCHING
-        register void* r0 asm("r0");
-        asm("mov\t%0, #0":"=r"(r0));
-#else
-        void* r0 = 0;
-#endif
-        wishChoice = DisplayDungeonMenuMessage(r0,gUnknown_8105798,gUnknown_810579C,0x705);
+        wishChoice = DisplayDungeonMenuMessage(NULL,gUnknown_8105798,gUnknown_810579C,0x705);
         if (wishChoice >= 1) break;
     }
     sub_803E708(10,0x46);
     if (wishChoice == 1) {
-      s32 r8;
+      s32 counter, index;
+      DungeonPos pos;
+      Item moneyItems [9];
       // Lots of Money
       DisplayDungeonDialogue(&gUnknown_810581C);
       sub_803E708(10,0x46);
       JirachiWishGrantDialogue(jirachiEntity);
 
-      for(counter = 0; counter < 6; counter = r8)
+      for(counter = 0; counter < 6; counter++)
       {
-        r8 = counter + 1;
         for(index = 0; index < 9; index++)
         {
-          sub_8045C28(&auStack152[index], ITEM_POKE, 0);
+          sub_8045C28(&moneyItems[index], ITEM_POKE, 0);
         }
-        pos1.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
-        pos1.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
-        if ((GetTileMut(pos1.x, pos1.y)->terrainType & 3) != 0) {
+        pos.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
+        pos.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
+        if ((GetTileMut(pos.x, pos.y)->terrainType & 3) != 0) {
           PlaySoundEffect(0x14c);
-          sub_808BB3C(&pos1);
-          sub_8046860(jirachiEntity,&pos1,auStack152,9);
+          sub_808BB3C(&pos);
+          sub_8046860(jirachiEntity,&pos,moneyItems,9);
         }
       }
       GetEntInfo(jirachiEntity)->unk15D  = 0;
     }
     if (wishChoice == 2) {
+      s32 counter, index;
+      DungeonPos pos;
+      Item items [9];
       // Lots of Items
       DisplayDungeonDialogue(&gUnknown_8105974);
       sub_803E708(10,0x46);
@@ -4068,20 +4056,17 @@ void JirachiWish(void)
 
       for(counter = 0; counter < 6; counter++)
       {
-#ifndef NONMATCHING
-        asm("" : : : "sl");
-#endif
         for(index = 0; index < 9; index++)
         {
-          sub_8045C28(&itemStack[index], sub_803D73C(0),0);
+          sub_8045C28(&items[index], sub_803D73C(0),0);
         }
-        pos2.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
-        pos2.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
+        pos.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
+        pos.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
 
-        if ((GetTileMut(pos2.x, pos2.y)->terrainType & 3) != 0) {
+        if ((GetTileMut(pos.x, pos.y)->terrainType & 3) != 0) {
           PlaySoundEffect(400);
-          sub_808BB3C(&pos2);
-          sub_8046860(jirachiEntity,&pos2,itemStack,9);
+          sub_808BB3C(&pos);
+          sub_8046860(jirachiEntity,&pos,items,9);
         }
       }
       GetEntInfo(jirachiEntity)->unk15D = 0;
@@ -4090,7 +4075,7 @@ void JirachiWish(void)
     if (wishChoice == 3)
     {
         // A Friend Area
-        friendArea = JirachiFriendAreaSearch();
+        s32 friendArea = JirachiFriendAreaSearch();
         if (friendArea == NUM_FRIEND_AREAS)
         {
             // You want a friend area? But you already have many friend areas...
@@ -4116,6 +4101,9 @@ void JirachiWish(void)
         }
     }
     if (wishChoice == 4) {
+        s32 counter, index;
+        DungeonPos pos;
+        Item strengthItems [9];
         // More Strength..
         DisplayDungeonDialogue(&gUnknown_8105BA8);
         sub_803E708(10,0x46);
@@ -4129,13 +4117,13 @@ void JirachiWish(void)
             sub_8045C28(&strengthItems[index],gUnknown_81074FC[DungeonRandInt(8)],0);
           }
 
-          pos3.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
-          pos3.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
+          pos.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
+          pos.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
 
-          if ((GetTileMut(pos3.x, pos3.y)->terrainType & 3) != 0) {
+          if ((GetTileMut(pos.x, pos.y)->terrainType & 3) != 0) {
             PlaySoundEffect(400);
-            sub_808BB3C(&pos3);
-            sub_8046860(jirachiEntity,&pos3,strengthItems,4);
+            sub_808BB3C(&pos);
+            sub_8046860(jirachiEntity,&pos,strengthItems,4);
           }
         }
         GetEntInfo(jirachiEntity)->unk15D  = 0;
@@ -4143,6 +4131,7 @@ void JirachiWish(void)
         sub_803E708(10,0x46);
     }
     if (wishChoice == 5) {
+        s32 direction;
         // Something Good...
         DisplayDungeonDialogue(&gUnknown_8105D2C);
         sub_803E708(10,0x46);

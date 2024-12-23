@@ -270,22 +270,14 @@ void StopDungeonBGM(void)
 
 void UpdateDungeonMusic(void)
 {
-#ifndef NONMATCHING
-  register s32 currSongIndex asm("r1");
-  register u16 *bossSongIndex asm("r3");
-#else
-  s32 currSongIndex;
-  u16 *bossSongIndex;
-#endif
   s32 newSongIndex;
-  DungeonMusicPlayer *musPlayer;
+  DungeonMusicPlayer *musPlayer = &gDungeon->musPlayer;
 
-  musPlayer = &gDungeon->musPlayer;
-
-  bossSongIndex = &gDungeon->unk644.bossSongIndex;
-  newSongIndex = *bossSongIndex;
-  if (newSongIndex == STOP_BGM) {
-    if (gDungeon->unk644.unk2B != 0) {
+  if (gDungeon->unk644.bossSongIndex != STOP_BGM) {
+      newSongIndex = gDungeon->unk644.bossSongIndex;
+  }
+  else {
+      if (gDungeon->unk644.unk2B != 0) {
         newSongIndex = MUS_STOP_THIEF;
     }
     else if (gDungeon->unk644.monsterHouseTriggeredEvent) {
@@ -298,6 +290,7 @@ void UpdateDungeonMusic(void)
         newSongIndex = musPlayer->queuedSongIndex;
     }
   }
+
   if (musPlayer->state == 4) {
     if (newSongIndex != musPlayer->pastSongIndex) {
       musPlayer->state = 2;
@@ -308,22 +301,22 @@ void UpdateDungeonMusic(void)
       musPlayer->state = 1;
       musPlayer->songIndex = newSongIndex;
   }
+
   switch(musPlayer->state) {
     case 0:
     case 4:
     default:
         break;
     case 1:
-        currSongIndex = musPlayer->songIndex;
-        if (currSongIndex == STOP_BGM) {
+        if (musPlayer->songIndex == STOP_BGM) {
             musPlayer->state = 0;
         }
         else {
-            if ((currSongIndex & DUNGEON_MUSIC_FADE_IN)) {
-                StartNewBGM(currSongIndex & ~(DUNGEON_MUSIC_FADE_IN));
+            if ((musPlayer->songIndex & DUNGEON_MUSIC_FADE_IN)) {
+                StartNewBGM(musPlayer->songIndex & ~(DUNGEON_MUSIC_FADE_IN));
             }
             else {
-                FadeInNewBGM(currSongIndex & ~(DUNGEON_MUSIC_FADE_IN), musPlayer->fadeInSpeed);
+                FadeInNewBGM(musPlayer->songIndex & ~(DUNGEON_MUSIC_FADE_IN), musPlayer->fadeInSpeed);
             }
             musPlayer->pastSongIndex = musPlayer->songIndex;
             musPlayer->state = 4;
@@ -339,6 +332,7 @@ void UpdateDungeonMusic(void)
         if ((musPlayer->fadeOutSpeed != 0) && (musPlayer->fadeOutSpeed--, musPlayer->fadeOutSpeed != 0)) {
             break;
         }
+
         if (musPlayer->songIndex == STOP_BGM) {
             StopBGM();
             musPlayer->state = 0;
