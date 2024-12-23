@@ -2,6 +2,93 @@
 #include "code_8002774.h"
 #include "constants/direction.h"
 #include "structs/str_position.h"
+#include "other_random.h"
+
+
+void sub_800290C(PixelPos *param_1, s32 param_2)
+{
+    if (param_1->x > param_2)
+        param_1->x = param_2;
+    else if (param_1->x < -param_2)
+        param_1->x = -param_2;
+    if (param_1->y > param_2)
+        param_1->y = param_2;
+    else if(param_1->y < -param_2)
+        param_1->y = -param_2;
+}
+
+void sub_8002934(PixelPos *param_1, PixelPos *param_2, PixelPos *param_3, s32 param_4, s32 param_5)
+{
+    s32 r9 = (param_4 + param_5);
+    param_1->x = (param_4 * param_2->x + param_5 * param_3->x) / r9;
+    param_1->y = (param_4 * param_2->y + param_5 * param_3->y) / r9;
+}
+
+static inline s8 sub_8002984_sub(s32 direction1, s32 rand, s32 add, s32 multi)
+{
+    return (s8)(((direction1 + add) + OtherRandInt(rand) * multi) % NUM_DIRECTIONS);
+}
+
+s32 sub_8002984(s32 _direction1, u32 caseID)
+{
+  s32 direction1;
+  
+  direction1 = (s8)_direction1;
+  switch((u8)caseID) {
+      case 1:
+        if (direction1 >= 0) {
+            direction1 += 7;
+            direction1 &= DIRECTION_MASK;
+        }
+        break;
+      case 2:
+        if (direction1 >= 0) {
+            direction1 += 1;
+            direction1 &= DIRECTION_MASK;
+        }
+        break;
+      case 3:
+        if (direction1 >= 0) {
+            direction1 += 6;
+            direction1 &= DIRECTION_MASK;
+        }
+        break;
+      case 4:
+        if (direction1 >= 0) {
+            direction1 += 2;
+            direction1 &= DIRECTION_MASK;
+        }
+        break;
+      case 5:
+        if (direction1 >= 0) {
+            direction1 += 4;
+            direction1 &= DIRECTION_MASK;
+        }
+        break;
+      case 6:
+        if ((direction1 & 1) != 0) {
+            direction1 = sub_8002984_sub(direction1, 2, 7, 2);
+        }
+        else
+        {
+             direction1 = sub_8002984_sub(direction1, 3, 6, 2);
+        }
+        break;
+      case 7:
+        direction1 = sub_8002984_sub(direction1, 3, 7, 1);
+        break;
+      case 8:
+        direction1 =  (s8)(OtherRandInt(NUM_DIRECTIONS) & 0xfe);
+        break;
+      case 9:
+        direction1 =  (s8)OtherRandInt(NUM_DIRECTIONS);
+        break;
+      default:
+        break;
+  }
+  return direction1;
+}
+
 
 s32 sub_8002A70(s32 _direction1, s32 _direction2, s32 _caseId)
 {
@@ -68,43 +155,29 @@ s32 sub_8002B04(s32 _direction1, s32 _direction2)
     return direction1;
 }
 
-s32 sub_8002B5C(int _direction1, int _direction2)
+UNUSED s32 sub_8002B5C(s32 _direction1, s32 _direction2)
 {
-  int newDirection;
-  int iVar2;
-  int direction1;
-  int direction2;
-  
-  direction1 = (s8)_direction1;
-  direction2 = (s8)_direction2;
-    
-  if (direction2 != -1) {
-    iVar2 = (direction2 + NUM_DIRECTIONS) - direction1;
-    newDirection = iVar2;
-    if (iVar2 < 0) {
-      newDirection = iVar2 + 7;
-    }
-    newDirection = iVar2 + ((newDirection >> 3) * -8);
-      
-    if (newDirection != 0) {
-      if (newDirection < 4) {
-        iVar2 = direction1 + 2;
-        newDirection = iVar2;
-        if (iVar2 < 0) {
-          newDirection = direction1 + 9;
+    int newDirection;
+    int direction1;
+    int direction2;
+
+    direction1 = (s8)_direction1;
+    direction2 = (s8)_direction2;
+
+    if (direction2 != -1) {
+        newDirection = ((direction2 + NUM_DIRECTIONS) - direction1) % NUM_DIRECTIONS;
+
+        if (newDirection != 0) {
+            if (newDirection < 4) {
+                newDirection = (direction1 + 2) % NUM_DIRECTIONS;
+            }
+            else {
+                newDirection = (direction1 + 6) % NUM_DIRECTIONS;
+            }
+            direction1 = (s8)(newDirection);
         }
-      }
-      else {
-        iVar2 = direction1 + 6;
-        newDirection = iVar2;
-        if (iVar2 < 0) {
-          newDirection = direction1 + 0xd;
-        }
-      }
-      direction1 = (s8)(iVar2 + (newDirection >> 3) * -8);
     }
-  }
-  return direction1 & 6;
+    return direction1 & DIRECTION_MASK_CARDINAL;
 }
 
 NAKED void SetVecFromDirectionSpeed(void)
@@ -132,69 +205,76 @@ NAKED void SetVecFromDirectionSpeed(void)
 
 s32 VecDirection8Sign(PixelPos *param_1)
 {  
-  if (param_1->x < 0) {
-    if (param_1->y < 0) {
-      return 5;
+    if (param_1->x < 0) {
+        if (param_1->y < 0) {
+            return DIRECTION_NORTHWEST;
+        }
+        else if (param_1->y > 0) {
+            return DIRECTION_SOUTHWEST;
+        }
+        else {
+            return DIRECTION_WEST;
+        }
     }
-    else if (param_1->y >= 1) {
-      return 7;
+    else if (param_1->x > 0) {
+        if (param_1->y < 0) {
+            return DIRECTION_NORTHEAST;
+        }
+        else if (param_1->y > 0) {
+            return DIRECTION_SOUTHEAST;
+        }
+        else {
+            return DIRECTION_EAST;
+        }
     }
-    else {
-      return 6;
-    }
-  }
-  else if (param_1->x >= 1) {
-    if (param_1->y < 0) {
-      return 3;
+    else if (param_1->y < 0) {
+        return DIRECTION_NORTH;
     }
     else if (param_1->y > 0) {
-      return 1;
+        return DIRECTION_SOUTH;
     }
     else {
-      return 2;
+        return -1;
     }
-  }
-  else if (param_1->y < 0) {
-    return 4;
-  }
-  else if (param_1->y > 0) {
-    return 0;
-  }
-  else {
-    return -1;
-  }
 }
 
 s32 VecDirection4SignYX(PixelPos *param_1)
 {
-  if (param_1->y < 0) {
-    return 4;
-  }
-  else if (param_1->y > 0) {
-    return 0;
-  }
-  else {
-    if (param_1->x < 0) {
-      return 6;
+    if (param_1->y < 0) {
+        return DIRECTION_NORTH;
+    }
+    else if (param_1->y > 0) {
+        return DIRECTION_SOUTH;
+    }
+    else  if (param_1->x < 0) {
+        return DIRECTION_WEST;
     }
     else if (param_1->x > 0) {
-      return 2;
+        return DIRECTION_EAST;
     }
     else {
-      return -1;
+        return -1;
     }
-  }
 }
 
 // https://decomp.me/scratch/bD5wO 
 s8 VecDirection8Radial(PixelPos *param_1)
 {
+#ifdef NONMATCHING
+    s32 r0;
+    s32 r1;
+    s32 r2;
+    s32 r3;
+    s32 r4;
+    s32 r5;
+#else
     register s32 r0;
     register s32 r1 asm("r1");
     register s32 r2 asm("r2");
     register s32 r3 asm("r3");
     register s32 r4 asm("r4");
     register s32 r5;
+#endif
 
 
     r0 = param_1->x;
@@ -212,61 +292,70 @@ s8 VecDirection8Radial(PixelPos *param_1)
     if (r4 < 0) {
         if (r3 < 0) {
             if (r2 > r0 * 2) {
-                return 4;
+                return DIRECTION_NORTH;
             }
             if (r1 <= r5 * 2) {
-                return 5;
+                return DIRECTION_NORTHWEST;
             }
-            return 6;
+            return DIRECTION_WEST;
         }
         if (r2 <= r0 * 2) {
             if (r1 > r5 * 2) {
-                return 6;
+                return DIRECTION_WEST;
             }
-            return 7;
+            return DIRECTION_SOUTHWEST;
         }
     }
     else {
         if (0 < r4) {
             if (r3 < 0) {
                 if (r2 > r0 * 2) {
-                    return 4;
+                    return DIRECTION_NORTH;
                 }
                 if (r1 <= r5 * 2) {
-                    return 3;
+                    return DIRECTION_NORTHEAST;
                 }
-                return 2;
+                return DIRECTION_EAST;
             }
             else {
                 if (r2 > r0 * 2) {
-                    return 0;
+                    return DIRECTION_SOUTH;
                 }
                 if (r1 > r5 * 2) {
-                    return 2;
+                    return DIRECTION_EAST;
                 }
-                return 1;
+                return DIRECTION_SOUTHEAST;
             }
 
         }
-        if (0 > r3) {
-            return 4;
+        if (r3 < 0) {
+            return DIRECTION_NORTH;
         }
         if (r3 < 1) {
             return -1;
         }  
     }
-    return 0;
+    return DIRECTION_SOUTH;
 }
 
 // https://decomp.me/scratch/Bgbxc
 s8 VecDirection4Radial(PixelPos *param_1)
 {
+#ifdef NONMATCHING    
+    s32 r0;
+    s32 r1;
+    s32 r2;
+    s32 r3;
+    s32 r4;
+    s32 r5;
+#else
     register s32 r0 asm("r3");
     register s32 r1 asm("r1");
     register s32 r2 asm("r2");
     register s32 r3;
     register s32 r4;
     register s32 r5 asm("r0");
+#endif
 
     r0 = param_1->x;
     if (r0 < 0) {
@@ -283,40 +372,40 @@ s8 VecDirection4Radial(PixelPos *param_1)
     if (r4 < 0) {
         if (r3 < 0) {
             if (r2 > r1) {
-                return 4;
+                return DIRECTION_NORTH;
             }
             else
-                return 6;
+                return DIRECTION_WEST;
         }
         if (r2 <= r1) {
-            return 6;
+            return DIRECTION_WEST;
         }
     }
     else {
         if (0 < r4) {
             if (r3 < 0) {
                 if (r2 > r1) {
-                    return 4;
+                    return DIRECTION_NORTH;
                 }
                 else 
-                    return 2;
+                    return DIRECTION_EAST;
             }
             else {
                 if (r2 > r1) {
-                    return 0;
+                    return DIRECTION_SOUTH;
                 }
-                return 2;
+                return DIRECTION_EAST;
             }
 
         }
-        if (0 > r3) {
-            return 4;
+        if (r3 < 0) {
+            return DIRECTION_NORTH;
         }
         if (r3 < 1) {
             return -1;
         }  
     }
-    return 0;
+    return DIRECTION_SOUTH;
 }
 
 s8 SizedDeltaDirection4(PixelPos *r0, PixelPos *r1, PixelPos *r2, PixelPos *r3) {
