@@ -260,7 +260,7 @@ void sub_8036788(void)
     case 3:
         // Confirm # of item
         sTradeItemsMenu->itemToSend.quantity = sTradeItemsMenu->unk14.unk0;
-        sTradeItemsMenu->sentItem.itemIdx.id = sTradeItemsMenu->itemToSend.id;
+        sTradeItemsMenu->sentItem.itemId = sTradeItemsMenu->itemToSend.id;
         sTradeItemsMenu->sentItem.quantity = sTradeItemsMenu->unk14.unk0;
         sub_801CBB8();
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_CONFIRM);
@@ -323,7 +323,7 @@ void sub_80368D4(void)
             break;
         case 7:
         case 0:
-            if ((sTradeItemsMenu->sentItem.itemIdx.id != ITEM_NOTHING) && (sTradeItemsMenu->sentItem.quantity != 0))
+            if ((sTradeItemsMenu->sentItem.itemId != ITEM_NOTHING) && (sTradeItemsMenu->sentItem.quantity != 0))
             {
                 TradeItem_AddItem();
                 SetTradeItemMenu(TRADE_ITEMS_PRE_EXIT);
@@ -360,7 +360,7 @@ void sub_8036950(void)
           break;
       }
     }
-    else if (((sTradeItemsMenu->itemMode == TRADE_ITEMS_SEND_ITEM_MODE) && (sTradeItemsMenu->sentItem.itemIdx.id != ITEM_NOTHING)) && (sTradeItemsMenu->sentItem.quantity != 0)) {
+    else if (((sTradeItemsMenu->itemMode == TRADE_ITEMS_SEND_ITEM_MODE) && (sTradeItemsMenu->sentItem.itemId != ITEM_NOTHING)) && (sTradeItemsMenu->sentItem.quantity != 0)) {
           // Link Failure
         TradeItem_AddItem(); // Add back the item
         SetTradeItemMenu(0xb);
@@ -377,9 +377,9 @@ void TradeItem_AddItem(void)
 {
     // Use temp var to get correct statements
     u16 load;
-    load = gTeamInventoryRef->teamStorage[sTradeItemsMenu->sentItem.itemIdx.id];
+    load = gTeamInventoryRef->teamStorage[sTradeItemsMenu->sentItem.itemId];
     load += sTradeItemsMenu->sentItem.quantity;
-    gTeamInventoryRef->teamStorage[sTradeItemsMenu->sentItem.itemIdx.id] = load;
+    gTeamInventoryRef->teamStorage[sTradeItemsMenu->sentItem.itemId] = load;
 }
 
 void sub_80369FC(void)
@@ -478,17 +478,9 @@ void nullsub_52(void)
 {
 }
 
-
 void sub_8036B28(void)
 {
   int linkStatus;
-  u32 load_2;
-  struct TradeSubStruct *temp;
-  struct TradeSubStruct *temp2;
-  struct TradeSubStruct *temp3;
-  struct TradeSubStruct *temp4;
-  s32 r2;
-  s32 r3;
 
   switch(sTradeItemsMenu->currMenu) {
     case TRADE_ITEMS_MAIN_MENU:
@@ -540,21 +532,11 @@ void sub_8036B28(void)
     case 10:
         sTradeItemsMenu->linkStatus = COMMS_GOOD;
 
-#ifndef NONMATCHING
-        asm("mov\t%0, #0":"=r"(r2));
-        asm("mov\t%0, #0":"=r"(r3));
-#else
-        r2 = 0;
-        r3 = 0;
-#endif
-
-        temp4 = &sTradeItemsMenu->unk244;
-        temp4->itemIdx.id_u32 = r2;
-        temp4->quantity = r3;
-
-        temp3 = &sTradeItemsMenu->unk24C;
-        temp3->itemIdx.id_u32 = r2;
-        temp3->quantity = r3;
+      {
+        struct TradeItem tradeItemZeroed = {0};
+        sTradeItemsMenu->unk244 = tradeItemZeroed;
+        sTradeItemsMenu->unk24C = tradeItemZeroed;
+      }
 
         sub_8011830();
         linkStatus = sub_8037B28(sTradeItemsMenu->itemMode);
@@ -563,11 +545,7 @@ void sub_8036B28(void)
             switch(sTradeItemsMenu->itemMode){
                 // Fallthrough needed on each case
                 case TRADE_ITEMS_SEND_ITEM_MODE:
-                    temp = &sTradeItemsMenu->unk244;
-                    temp2 = &sTradeItemsMenu->sentItem;
-                    load_2 = temp2->quantity;
-                    temp->itemIdx.id_u32 = temp2->itemIdx.id_u32;
-                    temp->quantity = load_2;
+                    sTradeItemsMenu->unk244 = sTradeItemsMenu->sentItem;
                 case TRADE_ITEMS_RECEIVE_ITEM_MODE:
                     sTradeItemsMenu->linkStatus = sub_8037D64(sTradeItemsMenu->itemMode,&sTradeItemsMenu->unk244,&sTradeItemsMenu->unk24C);
                 default:
@@ -583,11 +561,11 @@ void sub_8036B28(void)
     case 0xe:
         if (sTradeItemsMenu->unk24C.quantity == 0) {
             gFormatArgs[0] = sTradeItemsMenu->unk244.quantity;
-            BufferItemName(gFormatBuffer_Items[0],sTradeItemsMenu->unk244.itemIdx.id,NULL);
+            BufferItemName(gFormatBuffer_Items[0],sTradeItemsMenu->unk244.itemId,NULL);
         }
         else {
             gFormatArgs[0] = sTradeItemsMenu->unk24C.quantity;
-            BufferItemName(gFormatBuffer_Items[0],sTradeItemsMenu->unk24C.itemIdx.id,NULL);
+            BufferItemName(gFormatBuffer_Items[0],sTradeItemsMenu->unk24C.itemId,NULL);
         }
         CreateDialogueBoxAndPortrait(sFmtYouReceived,0,0,0x101);
         break;

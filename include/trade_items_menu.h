@@ -31,12 +31,9 @@ enum TradeItemsModes
     TRADE_ITEMS_RECEIVE_ITEM_MODE
 };
 
-struct TradeSubStruct
+struct TradeItem
 {
-    union ItemIdx {
-        u8 id; // item id?
-        u32 id_u32;
-    } itemIdx;
+    u8 itemId;
     u32 quantity; // number of items?
 };
 
@@ -54,11 +51,11 @@ struct TradeItemsMenu
     UnkTextStruct2 unk1E4[4];
 
     // TODO These might be structs...
-    struct TradeSubStruct unk244;
+    struct TradeItem unk244;
 
-    struct TradeSubStruct unk24C;
+    struct TradeItem unk24C;
 
-    /* 0x254 */ struct TradeSubStruct sentItem;
+    /* 0x254 */ struct TradeItem sentItem;
 
     /* 0x25C */ Item itemToSend;
 
