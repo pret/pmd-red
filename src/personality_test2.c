@@ -115,8 +115,6 @@ static void sub_803CECC(void)
     }
 }
 
-#ifdef NONMATCHING // sub_80095E4 memes
-// Unfortunately `SUB_80095E4_CALL` doesn't work in this case, because of a `mov r4, #0` instruction put 2 instructions too late...
 static void RedrawPartnerSelectionMenu(void)
 {
     u32 yCoord;
@@ -139,106 +137,6 @@ static void RedrawPartnerSelectionMenu(void)
     sub_80073E0(gUnknown_203B404->s18.s0.unk34);
     gUnknown_203B404->unk16 = 1;
 }
-#else
-NAKED
-static void RedrawPartnerSelectionMenu(void)
-{
-    asm_unified("\tpush {r4-r6,lr}\n"
-    "\tsub sp, 0x4\n"
-    "\tldr r6, _0803CF60\n"
-    "\tldr r0, [r6]\n"
-    "\tmovs r1, 0x32\n"
-    "\tldrsh r0, [r0, r1]\n"
-    "\tmovs r1, 0xC\n"
-    "\tbl sub_80095E4\n"
-    "\tadds r0, 0x2\n"
-    "\tlsls r0, 16\n"
-    "\tldr r2, [r6]\n"
-    "\tldr r3, [r2, 0x4C]\n"
-    "\tlsls r1, r3, 1\n"
-    "\tadds r1, r3\n"
-    "\tlsls r1, 3\n"
-    "\tadds r1, r2, r1\n"
-    "\tadds r1, 0x62\n"
-    "\tmovs r4, 0\n"
-    "\tasrs r3, r0, 16\n"
-    "\tlsrs r0, 16\n"
-    "\tstrh r0, [r1]\n"
-    "\tldr r1, [r2, 0x4C]\n"
-    "\tlsls r0, r1, 1\n"
-    "\tadds r0, r1\n"
-    "\tlsls r0, 3\n"
-    "\tadds r2, r0\n"
-    "\tadds r3, 0x2\n"
-    "\tadds r2, 0x64\n"
-    "\tstrh r3, [r2]\n"
-    "\tbl ResetUnusedInputStruct\n"
-    "\tldr r0, [r6]\n"
-    "\tadds r0, 0x54\n"
-    "\tmovs r1, 0x1\n"
-    "\tmovs r2, 0x1\n"
-    "\tbl xxx_call_save_unk_text_struct_800641C\n"
-    "\tldr r0, [r6]\n"
-    "\tldr r0, [r0, 0x4C]\n"
-    "\tbl CallPrepareTextbox_8008C54\n"
-    "\tldr r0, [r6]\n"
-    "\tldr r0, [r0, 0x4C]\n"
-    "\tbl sub_80073B8\n"
-    "\tldr r2, _0803CF64\n"
-    "\tldr r0, [r6]\n"
-    "\tldr r3, [r0, 0x4C]\n"
-    "\tstr r4, [sp]\n"
-    "\tmovs r0, 0xC\n"
-    "\tmovs r1, 0\n"
-    "\tbl PrintStringOnWindow\n"
-    "\tmovs r5, 0\n"
-    "\tb _0803CF98\n"
-    "\t.align 2, 0\n"
-"_0803CF60: .4byte gUnknown_203B404\n"
-"_0803CF64: .4byte gPartnerSelectionHeaderText\n"
-"_0803CF68:\n"
-    "\tldr r0, [r6]\n"
-    "\tadds r0, 0x18\n"
-    "\tadds r1, r5, 0\n"
-    "\tbl sub_8013800\n"
-    "\tadds r4, r0, 0\n"
-    "\tldr r0, [r6]\n"
-    "\tlsls r1, r5, 1\n"
-    "\tadds r0, 0x2\n"
-    "\tadds r0, r1\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r0, r1]\n"
-    "\tbl GetMonSpecies\n"
-    "\tadds r2, r0, 0\n"
-    "\tldr r0, [r6]\n"
-    "\tldr r3, [r0, 0x4C]\n"
-    "\tmovs r0, 0\n"
-    "\tstr r0, [sp]\n"
-    "\tmovs r0, 0x8\n"
-    "\tadds r1, r4, 0\n"
-    "\tbl PrintStringOnWindow\n"
-    "\tadds r5, 0x1\n"
-"_0803CF98:\n"
-    "\tldr r0, [r6]\n"
-    "\tmovs r1, 0x32\n"
-    "\tldrsh r0, [r0, r1]\n"
-    "\tcmp r5, r0\n"
-    "\tblt _0803CF68\n"
-    "\tldr r4, _0803CFBC\n"
-    "\tldr r0, [r4]\n"
-    "\tldr r0, [r0, 0x4C]\n"
-    "\tbl sub_80073E0\n"
-    "\tldr r1, [r4]\n"
-    "\tmovs r0, 0x1\n"
-    "\tstrb r0, [r1, 0x16]\n"
-    "\tadd sp, 0x4\n"
-    "\tpop {r4-r6}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_0803CFBC: .4byte gUnknown_203B404");
-}
-#endif
 
 static void PersonalityTest_DisplayPartnerSprite(void)
 {
