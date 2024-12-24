@@ -29,11 +29,14 @@ typedef struct struct_Sub80095E4_2
 // It's probable the code below is not exactly how it was originally written, but it generates the same asm.
 #define SUB_8009_MATCH(ptr, _a0)                                                        \
 {                                                                                       \
+    UNUSED s32 new10;                                                                   \
+    s16 newE;                                                                           \
     s16 a0 = (_a0);                                                                     \
     UNUSED s32 a0_ = a0;                                                                \
     UNUSED s16 oldE = (ptr).unk3C[(ptr).unk34].unkE;                                    \
-    UNUSED s32 new10 = a0 + 2;                                                          \
-    s16 newE = a0;                                                                      \
+    a0_ = 0;                                                                            \
+    new10 = a0 + 2;                                                                     \
+    newE = a0;                                                                          \
                                                                                         \
     (ptr).unk3C[(ptr).unk34].unkE = newE;                                               \
     (ptr).unk3C[(ptr).unk34].unk10 = a0 + 2;                                            \
