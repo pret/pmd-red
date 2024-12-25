@@ -1148,3 +1148,58 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
             return FALSE;
     }
 }
+
+void sub_8013E54(void)
+{
+    UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+    SpriteOAM SStack_18 = {0};    
+
+    SpriteSetAffine1(&SStack_18, 0);
+    SpriteSetAffine2(&SStack_18, 0);
+    SpriteSetObjMode(&SStack_18, 0);
+    SpriteSetMosaic(&SStack_18, 0);
+    SpriteSetBpp(&SStack_18, 0);
+    SpriteSetShape(&SStack_18, 1);
+    SpriteSetMatrixNum(&SStack_18, 0);
+    SpriteSetSize(&SStack_18, 0);
+    SpriteSetTileNum(&SStack_18, 0x3F0);
+    SpriteSetPriority(&SStack_18, 0);
+    SpriteSetPalNum(&SStack_18, 15);
+    SpriteSetY(&SStack_18, (ptr->unk2 * 8) + 0x80);
+    SpriteSetX(&SStack_18, 112);
+
+    AddSprite(&SStack_18,0x100,0,0x0);
+}
+
+void sub_8013F84(void)
+{
+    UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+    SpriteOAM SStack_18 = {0};    
+
+    SpriteSetAffine1(&SStack_18, 0);
+    SpriteSetAffine2(&SStack_18, 0);
+    SpriteSetObjMode(&SStack_18, 0);
+    SpriteSetMosaic(&SStack_18, 0);
+    SpriteSetBpp(&SStack_18, 0);
+    SpriteSetShape(&SStack_18, 1);
+    SpriteSetMatrixNum(&SStack_18, 0);
+    SpriteSetSize(&SStack_18, 0);
+    SpriteSetTileNum(&SStack_18, 0x3F0);
+    SpriteSetPriority(&SStack_18, 0);
+    SpriteSetPalNum(&SStack_18, 15);
+    SpriteSetY(&SStack_18, (ptr->unk2 * 8) + 0x60);
+    SpriteSetX(&SStack_18, 112);
+
+    AddSprite(&SStack_18,0x100,0,0x0);
+}
+
+void sub_80140B4(UnkTextStruct2 *a0)
+{
+    s32 i;
+
+    for(i = 0; i < 4; i++)
+    {
+        a0[i] = gUnknown_80D47C8[i];
+    }
+}
+
