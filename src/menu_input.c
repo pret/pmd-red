@@ -225,43 +225,23 @@ void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
 
 void sub_8012CAC(UnkTextStruct2 *a0, const MenuItem *a1)
 {
-    s16 length;
-    int r5;
-    int r6;
-    int r7;
-    s32 iVar4;
-    #ifndef NONMATCHING
-    register s32 r0 asm("r0");
-    #else
-    s32 r0;
-    #endif
+    s32 length;
+    s32 maxLength;
+    s32 count;
 
-    r7 = 0;
-    r6 = 0;
+    count = 0;
+    maxLength = 0;
 
-    if (a1->text != NULL) {
-        r5 = 0x10000; // s16 memes?
-        r0 = r5;
-        do {
-            r0 = r5;
-            r5 = r5 + 0x10000;
-            r7 = r0 >> 0x10;
-            length = sub_8008ED0(a1->text);
+    for (; a1->text != NULL; a1++) {
+        count = (s16)(count + 1); // Because a simple `count++;` wasn't enough.
+        length = (s16) sub_8008ED0(a1->text);
+        if (length > maxLength) {
+            maxLength = length;
+        }
+  }
 
-            if (length > r6)
-                r6 = length;
-
-            a1++;
-        } while (a1->text != NULL);
-    }
-
-    if (r6 < 0)
-        iVar4 = r6 + 7;
-    else
-        iVar4 = r6;
-
-    a0->unkC = (iVar4 >> 3) + 2;
-    sub_8012D08(a0, r7);
+    a0->unkC = (maxLength / 8) + 2;
+    sub_8012D08(a0, count);
 }
 
 void sub_8012D08(UnkTextStruct2 *param_1, s32 param_2)
@@ -808,22 +788,18 @@ s32 sub_80137A8(MenuInputStruct *param_1)
 void sub_80137B0(MenuInputStruct *param_1, s32 param_2)
 {
     s32 iVar1;
-#ifndef NONMATCHING
-    register s32 iVar2 asm("r0");
-#else
     s32 iVar2;
-#endif
 
-    if (param_2 >= 1)
+    if (param_2 >= 1) {
         iVar2 = param_2 << 8;
+    }
     else {
         if (gUnknown_2027370[param_1->unk0].unkC == 6)
             iVar1 = 16;
         else
             iVar1 = 0;
 
-        iVar2 = gUnknown_2027370[param_1->unk0].unk6 * 8 - iVar1;
-        iVar2 <<= 8;
+        iVar2 = (gUnknown_2027370[param_1->unk0].unk6 * 8 - iVar1) << 8;
     }
 
     param_1->unk10 = iVar2 / param_1->unk1C;
