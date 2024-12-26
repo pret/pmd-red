@@ -2,6 +2,23 @@
 #include "code_80A26CC.h"
 #include "event_flag.h"
 
+u8 sub_80992E0(s16 *param_1, s16 *param_2)
+{
+    s32 sVar2;
+
+    sVar2 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
+    if ((((sVar2 != -1) && (sVar2 != 0x50)) && (sVar2 != 0x51)) && (sVar2 != 0x52)) {
+        *param_1 = sVar2;
+        *param_2 = GetScriptVarValue(NULL,DUNGEON_ENTER_INDEX);
+        return TRUE;
+    }
+    else {
+        *param_1 = -1;
+        *param_2 = -1;
+        return FALSE;
+    }
+}
+
 bool8 sub_8099328(u8 *dungeonId) {
     s16 script_disc;
     DungeonInfo* dungeonInfo;
