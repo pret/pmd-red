@@ -4,6 +4,13 @@
 #include "structs/str_position.h"
 #include "other_random.h"
 
+typedef struct Vector
+{
+    s32 x;
+    s32 y;
+} Vector;
+
+extern Vector gVectorDirections[8];
 
 void sub_800290C(PixelPos *param_1, s32 param_2)
 {
@@ -180,27 +187,11 @@ UNUSED s32 sub_8002B5C(s32 _direction1, s32 _direction2)
     return direction1 & DIRECTION_MASK_CARDINAL;
 }
 
-NAKED void SetVecFromDirectionSpeed(void)
+Vector SetVecFromDirectionSpeed(s8 r1, u32 r2)
 {
-    asm_unified(
-	"\tpush {r4,r5,lr}\n"
-	"\tlsls r1, 24\n"
-	"\tasrs r1, 21\n"
-	"\tldr r3, _08002BD8\n"
-	"\tadds r1, r3\n"
-	"\tldr r5, [r1]\n"
-	"\tadds r3, r5, 0\n"
-	"\tmuls r3, r2\n"
-	"\tldr r1, [r1, 0x4]\n"
-	"\tadds r4, r1, 0\n"
-	"\tmuls r4, r2\n"
-	"\tstr r3, [r0]\n"
-	"\tstr r4, [r0, 0x4]\n"
-	"\tpop {r4,r5}\n"
-	"\tpop {r2}\n"
-	"\tbx r2\n"
-	"\t.align 2, 0\n"
-"_08002BD8: .4byte gVectorDirections");
+    Vector *vec = &gVectorDirections[r1];
+
+    return (Vector){ .x = vec->x * r2, .y = vec->y * r2 };
 }
 
 s32 VecDirection8Sign(PixelPos *param_1)
