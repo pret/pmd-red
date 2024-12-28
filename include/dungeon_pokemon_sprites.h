@@ -33,7 +33,7 @@ typedef struct DungeonPokemonSprite
 // size: 0x584
 typedef struct DungeonPokemonSprites
 {
-    /* 0x0 */ u32 frame;
+    /* 0x0 */ s32 frame;
     /* 0x4 */ DungeonPokemonSprite sprites[22];
 } DungeonPokemonSprites;
 
