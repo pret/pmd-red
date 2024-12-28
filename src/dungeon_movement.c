@@ -79,34 +79,38 @@ u8 sub_80703A0(Entity *pokemon, DungeonPos *pos)
         return TRUE;
     if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
         return TRUE;
-    if (tile->monster == NULL && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) {
-        if ((IsCurrentFixedRoomBossFight()) || ((entityInfo->invisibleClassStatus.status != STATUS_MOBILE && (!HasHeldItem(pokemon, ITEM_MOBILE_SCARF))))) {
-            crossableTerrain = GetCrossableTerrain(entityInfo->id);
-            tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-            if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
-                crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
-            }
-            if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
-                crossableTerrain = CROSSABLE_TERRAIN_WALL;
-            }
-            switch(crossableTerrain)
-            {
-                case CROSSABLE_TERRAIN_LIQUID:
-                    if(tileFlags == TERRAIN_TYPE_SECONDARY) return FALSE;
-                case CROSSABLE_TERRAIN_REGULAR:
-                    if(tileFlags == TERRAIN_TYPE_NORMAL) return FALSE;
-                    break;
-                case CROSSABLE_TERRAIN_WALL:
-                default:
-                    return FALSE;
-                case CROSSABLE_TERRAIN_CREVICE:
-                    if(tileFlags != 0) return FALSE;
-            }
+    if (tile->monster != NULL)
+        return TRUE;
+    if (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
+        return TRUE;
+
+    if ((IsCurrentFixedRoomBossFight()) || ((entityInfo->invisibleClassStatus.status != STATUS_MOBILE && (!HasHeldItem(pokemon, ITEM_MOBILE_SCARF))))) {
+        crossableTerrain = GetCrossableTerrain(entityInfo->id);
+        tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+        if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
+            crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
         }
-        else {
-            return FALSE;
+        if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
+            crossableTerrain = CROSSABLE_TERRAIN_WALL;
+        }
+        switch(crossableTerrain)
+        {
+            case CROSSABLE_TERRAIN_LIQUID:
+                if(tileFlags == TERRAIN_TYPE_SECONDARY) return FALSE;
+            case CROSSABLE_TERRAIN_REGULAR:
+                if(tileFlags == TERRAIN_TYPE_NORMAL) return FALSE;
+                break;
+            case CROSSABLE_TERRAIN_WALL:
+            default:
+                return FALSE;
+            case CROSSABLE_TERRAIN_CREVICE:
+                if(tileFlags != 0) return FALSE;
         }
     }
+    else {
+        return FALSE;
+    }
+
     return TRUE;
 }
 
@@ -141,78 +145,78 @@ bool8 sub_807049C(Entity *pokemon, DungeonPos *pos)
         return TRUE;
     if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
         return TRUE;
-    if (((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0) && (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
-        if (IsCurrentFixedRoomBossFight() || (entityInfo->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
-            crossableTerrain = GetCrossableTerrain(entityInfo->id);
-            tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-            if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
-                crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
-            }
-            if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
-                crossableTerrain = CROSSABLE_TERRAIN_WALL;
-            }
-            switch(crossableTerrain)
-            {
-                case CROSSABLE_TERRAIN_LIQUID:
-                    if(tileFlags == TERRAIN_TYPE_SECONDARY) return FALSE;
-                case CROSSABLE_TERRAIN_REGULAR:
-                    if(tileFlags == TERRAIN_TYPE_NORMAL) return FALSE;
-                    break;
-                case CROSSABLE_TERRAIN_WALL:
-                default:
-                    return FALSE;
-                case CROSSABLE_TERRAIN_CREVICE:
-                    if(tileFlags != 0) return FALSE;
-            }
+    if (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
+        return TRUE;
+    if (tile->monster != NULL && GetEntityType(tile->monster) != ENTITY_MONSTER)
+        return TRUE;
+
+    if (IsCurrentFixedRoomBossFight() || (entityInfo->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
+        crossableTerrain = GetCrossableTerrain(entityInfo->id);
+        tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+        if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
+            crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
         }
-        else return FALSE;
+        if (IQSkillIsEnabled(pokemon, IQ_SUPER_MOBILE)) {
+            crossableTerrain = CROSSABLE_TERRAIN_WALL;
+        }
+        switch(crossableTerrain)
+        {
+            case CROSSABLE_TERRAIN_LIQUID:
+                if(tileFlags == TERRAIN_TYPE_SECONDARY) return FALSE;
+            case CROSSABLE_TERRAIN_REGULAR:
+                if(tileFlags == TERRAIN_TYPE_NORMAL) return FALSE;
+                break;
+            case CROSSABLE_TERRAIN_WALL:
+            default:
+                return FALSE;
+            case CROSSABLE_TERRAIN_CREVICE:
+                if(tileFlags != 0) return FALSE;
+        }
     }
+    else {
+        return FALSE;
+    }
+
     return TRUE;
 }
 
 bool8 sub_8070564(Entity *pokemon, DungeonPos *pos)
 {
-    u8 crossableTerrain;
-    const Tile *tile;
-    u16 tileFlags;
-    EntityInfo *entityInfo;
-#ifndef NONMATCHING
-    register s32 tileFlags_0 asm("r0");
-    register s32 crossableTerrain2 asm("r3");
-#else
-    s32 tileFlags_0;
-    s32 crossableTerrain2;
-#endif
+    u16 crossableTerrain;
+    u32 tileFlags;
 
-    entityInfo = GetEntInfo(pokemon);
-    tile = GetTile(pos->x,pos->y);
+    EntityInfo *entityInfo = GetEntInfo(pokemon);
+    const Tile *tile = GetTile(pos->x,pos->y);
+
     if (pos->x < 0 || pos->y < 0)
         return TRUE;
     if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
         return TRUE;
-    if ((((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) && (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
-        crossableTerrain2 = crossableTerrain = GetCrossableTerrain(entityInfo->id);
-        tileFlags_0 = tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-        switch(crossableTerrain)
-        {
-            case CROSSABLE_TERRAIN_WALL: // 3
-            case CROSSABLE_TERRAIN_CREVICE: // 2
-            case 4 ... INT_MAX:
-                if (crossableTerrain2 > CROSSABLE_TERRAIN_WALL) return FALSE;
-                if(tileFlags != 0)
-                    return FALSE;
-                break;
-            case CROSSABLE_TERRAIN_REGULAR: // 0
-                if(tileFlags == TERRAIN_TYPE_NORMAL)
-                default:
-                    return FALSE;
-                    break;
-            case CROSSABLE_TERRAIN_LIQUID: // 1
-                if(tileFlags == TERRAIN_TYPE_SECONDARY) return FALSE;
-                if (tileFlags_0 == TERRAIN_TYPE_NORMAL) return FALSE;
-                return TRUE;
-        }
+    if (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
+        return TRUE;
+    if (tile->monster != NULL && GetEntityType(tile->monster) != ENTITY_MONSTER)
+        return TRUE;
+
+    crossableTerrain = GetCrossableTerrain(entityInfo->id);
+    tileFlags = GetTerrainType(tile);
+
+    switch (crossableTerrain)
+    {
+        default:
+            return FALSE;
+        case CROSSABLE_TERRAIN_WALL:
+        case CROSSABLE_TERRAIN_CREVICE:
+            if (tileFlags != TERRAIN_TYPE_WALL) return FALSE;
+            break;
+        case CROSSABLE_TERRAIN_REGULAR:
+            if (tileFlags == TERRAIN_TYPE_NORMAL) return FALSE;
+            break;
+        case CROSSABLE_TERRAIN_LIQUID:
+            if (tileFlags == TERRAIN_TYPE_SECONDARY) return FALSE;
+            if (tileFlags == TERRAIN_TYPE_NORMAL) return FALSE;
+            break;
     }
+
     return TRUE;
 }
 
