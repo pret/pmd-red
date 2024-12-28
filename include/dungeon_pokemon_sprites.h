@@ -26,6 +26,7 @@ typedef struct DungeonPokemonSprite
     /* 0x24 */ u32 unk24;
     /* 0x28 */ DungeonPokemonStatusSprite statusSprites[2];
     /* 0x38 */ u8 unk38;
+    u16 fill3A;
     /* 0x3C */ u16 unk3C;
     /* 0x3E */ u16 unk3E;
 } DungeonPokemonSprite;
