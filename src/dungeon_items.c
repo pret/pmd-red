@@ -306,3 +306,16 @@ void sub_8047104(void)
   }
   FillInventoryGaps();
 }
+
+void sub_8047158(void)
+{
+    s32 index;
+
+    index = 0;
+    for(index = 0; index < INVENTORY_SIZE; index++) {
+        Item *item = &gTeamInventoryRef->teamItems[index];
+        if (ItemExists(item) && item->flags & ITEM_FLAG_UNPAID) {
+            item->flags &= ~(ITEM_FLAG_UNPAID);
+        }
+    }
+}
