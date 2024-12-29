@@ -32,7 +32,7 @@ s32 sub_8070828(Entity *pokemon, bool8 displayMessage)
     bool8 flag;
 
     flag = FALSE;
-    if (!EntityExists(pokemon)) {
+    if (!EntityIsValid(pokemon)) {
         return 0;
     }
     else {

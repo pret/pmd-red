@@ -155,7 +155,7 @@ u8 sub_8075BF4(Entity * pokemon, s32 sleepClassStatusTurns)
   u32 uVar4;
 
   uVar4 = 0;
-  if (!EntityExists(pokemon)){
+  if (!EntityIsValid(pokemon)){
     return uVar4;
   }
   else
@@ -213,7 +213,7 @@ void SleepStatusTarget(Entity * pokemon, Entity * target, s32 turns, u8 displayM
 
 bool8 CannotSleep(Entity * pokemon, Entity * target, u8 param_3, bool8 displayMessage)
 {
-    if ((!EntityExists(target)) ||
+    if ((!EntityIsValid(target)) ||
         ((SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0), param_3 != 0 &&
         (HasSafeguardStatus(pokemon,target,displayMessage))))) {
         return TRUE;
@@ -355,7 +355,7 @@ void SleeplessStatusTarget(Entity * pokemon, Entity * target)
   bool8 isAsleep;
 
   isAsleep = FALSE;
-  if (!EntityExists(target)) {
+  if (!EntityIsValid(target)) {
     return;
   }
 
@@ -388,7 +388,7 @@ void PausedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, s32 turns
 {
   EntityInfo *entityInfo;
 
-  if (!EntityExists(target)) {
+  if (!EntityIsValid(target)) {
     return;
   }
   entityInfo = GetEntInfo(target);
@@ -424,7 +424,7 @@ void InfatuateStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessa
   EntityInfo *entityInfo;
 
 
-  if (EntityExists(target)) {
+  if (EntityIsValid(target)) {
     entityInfo = GetEntInfo(target);
     if (!HasSafeguardStatus(pokemon,target,displayMessage)) {
       if (AbilityIsActive(target,ABILITY_OBLIVIOUS)) {
@@ -461,7 +461,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
   Entity *entity;
   s32 index;
 
-  if (!EntityExists(target)) {
+  if (!EntityIsValid(target)) {
     return;
   }
 
@@ -521,7 +521,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
                                     gAdjacentTileOffsets[index].x,
                                     target->pos.y + gAdjacentTileOffsets[index].y);
                 entity = tile_2->monster;
-                if ((EntityExists(entity)) && (GetEntityType(entity) == ENTITY_MONSTER)) {
+                if ((EntityIsValid(entity)) && (GetEntityType(entity) == ENTITY_MONSTER)) {
                     if (!hasSynchronized) {
                         hasSynchronized = TRUE;
                         SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
@@ -548,7 +548,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
   Entity *entity;
   s32 index;
 
-  if (!EntityExists(target)) {
+  if (!EntityIsValid(target)) {
     return;
   }
 
@@ -608,7 +608,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
                                         gAdjacentTileOffsets[index].x,
                                         target->pos.y + gAdjacentTileOffsets[index].y);
                     entity = tile->monster;
-                    if ((EntityExists(entity)) && (GetEntityType(entity) == ENTITY_MONSTER)) {
+                    if ((EntityIsValid(entity)) && (GetEntityType(entity) == ENTITY_MONSTER)) {
                         if (!hasSynchronized) {
                             hasSynchronized = TRUE;
                             SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
@@ -637,7 +637,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
   Entity *entity;
   s32 index;
 
-  if (!EntityExists(target)) {
+  if (!EntityIsValid(target)) {
     return;
   }
 
@@ -690,7 +690,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
                                         gAdjacentTileOffsets[index].x,
                                         target->pos.y + gAdjacentTileOffsets[index].y);
                     entity = tile->monster;
-                    if ((EntityExists(entity)) && (GetEntityType(entity) == ENTITY_MONSTER)) {
+                    if ((EntityIsValid(entity)) && (GetEntityType(entity) == ENTITY_MONSTER)) {
                         if (!hasSynchronized) {
                             hasSynchronized = TRUE;
                             SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
@@ -715,7 +715,7 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
   EntityInfo *entityInfo;
   const Tile *tile;
 
-  if (!EntityExists(target)) {
+  if (!EntityIsValid(target)) {
     return;
   }
 
@@ -764,7 +764,7 @@ void SqueezedStatusTarget(Entity * pokemon, Entity * target, s16 param_3, bool32
   s32 param_3_s32 = param_3;
   bool8 displayMessage_u8 = displayMessage;
 
-  if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage_u8))) {
+  if ((EntityIsValid(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage_u8))) {
     entityInfo = GetEntInfo(target);
     if (entityInfo->frozenClassStatus.status == STATUS_WRAP || entityInfo->frozenClassStatus.status == STATUS_WRAPPED) {
       sub_8076CB4(entityInfo->unk9C);
@@ -794,7 +794,7 @@ void ImmobilizedStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
 
-  if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
+  if ((EntityIsValid(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     entityInfo = GetEntInfo(target);
     if (entityInfo->frozenClassStatus.status == STATUS_WRAP || entityInfo->frozenClassStatus.status == STATUS_WRAPPED) {
       sub_8076CB4(entityInfo->unk9C);
@@ -823,7 +823,7 @@ void IngrainedStatusTarget(Entity * pokemon, Entity * target)
 {
   EntityInfo *entityInfo;
 
-  if (EntityExists(target)) {
+  if (EntityIsValid(target)) {
     entityInfo = GetEntInfo(target);
     if (entityInfo->frozenClassStatus.status == STATUS_WRAP || entityInfo->frozenClassStatus.status == STATUS_WRAPPED) {
       sub_8076CB4(entityInfo->unk9C);
@@ -850,7 +850,7 @@ void WrapTarget(Entity * pokemon, Entity * target)
   s32 *iVar5;
   EntityInfo * pokemonEntityData;
 
-  if (!EntityExists(target)) {
+  if (!EntityIsValid(target)) {
     return;
   }
 
@@ -911,7 +911,7 @@ void sub_8076CB4(s32 param_1)
   for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
   {
     entity = gDungeon->activePokemon[index];
-    if (EntityExists(entity)) {
+    if (EntityIsValid(entity)) {
       entityInfo = GetEntInfo(entity);
       if (entityInfo->unk9C == param_1) {
         if ((u8)(entityInfo->frozenClassStatus.status - 3U) < 2) {
@@ -931,7 +931,7 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
   Entity * entity;
   s32 index;
 
-  if ((EntityExists(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
+  if ((EntityIsValid(target)) && (!HasSafeguardStatus(pokemon,target,TRUE))) {
     sub_8041C08(target);
     targetEntityInfo = GetEntInfo(target);
     if ((u8)(targetEntityInfo->frozenClassStatus.status - 3U) < 2) {
@@ -957,7 +957,7 @@ void PetrifiedStatusTarget(Entity * pokemon, Entity * target)
       for(index = 0; index < MAX_TEAM_MEMBERS; index++)
       {
         entity = gDungeon->teamPokemon[index];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
           entityInfo = GetEntInfo(entity);
           if ((entityInfo->aiTarget.aiObjective == AI_CHASE_TARGET) && (entityInfo->aiTarget.aiTarget == target)) {
             entityInfo->aiTarget.aiObjective = AI_STAND_STILL;
@@ -977,7 +977,7 @@ void LowerAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 de
   EntityInfo *entityInfo;
   s32 attackStage = decrement;
 
-  if (!EntityExists(target)) {
+  if (!EntityIsValid(target)) {
     return;
   }
   if (index != STAT_STAGE_ATK) {
@@ -1032,7 +1032,7 @@ void LowerDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 d
     EntityInfo *entityInfo;
     s32 defenseStage = decrement;
 
-    if (!EntityExists(target)) {
+    if (!EntityIsValid(target)) {
         return;
     }
     if (index != STAT_STAGE_DEF) {
@@ -1072,7 +1072,7 @@ void RaiseAttackStageTarget(Entity * pokemon, Entity * target, s32 index, s32 in
     EntityInfo *entityInfo;
     s32 attackStage = increment;
 
-    if (!EntityExists(target)) {
+    if (!EntityIsValid(target)) {
         return;
     }
     entityInfo = GetEntInfo(target);
@@ -1112,7 +1112,7 @@ void RaiseDefenseStageTarget(Entity * pokemon, Entity * target, s32 index, s32 i
     EntityInfo *entityInfo;
     s32 defenseStage = increment;
 
-    if (!EntityExists(target)) {
+    if (!EntityIsValid(target)) {
         return;
     }
     entityInfo = GetEntInfo(target);

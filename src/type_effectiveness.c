@@ -93,7 +93,7 @@ bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, str
   param_5->unkD = 0;
   param_5->unkE = 0;
   hasWonderGuard = FALSE;
-  if (!EntityExists(target)) {
+  if (!EntityIsValid(target)) {
     return TRUE;
   }
   else {
@@ -251,7 +251,7 @@ s32 WeightWeakTypePicker(Entity *user, Entity *target, u8 moveType)
     u8 *targetTypes;
     u8 *targetType;
     u32 moveTypeOffset;
-    if (!EntityExists(target))
+    if (!EntityIsValid(target))
     {
         return 1;
     }

@@ -821,7 +821,7 @@ _080674BC:
 	bl sub_8047190
 _080674D0:
 	adds r0, r6, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _080674F8
@@ -1332,7 +1332,7 @@ _080678C6:
 	cmp r0, 0
 	bne _080678F6
 	adds r0, r5, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _080678F0
@@ -1443,7 +1443,7 @@ _0806798E:
 	movs r3, 0
 	bl TryUseChosenMove
 	adds r0, r5, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _080679DE
@@ -1462,7 +1462,7 @@ _080679D2:
 	blt _0806798E
 _080679DE:
 	adds r0, r5, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067A56

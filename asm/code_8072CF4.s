@@ -24,7 +24,7 @@ _080732FE:
 	adds r0, r1
 	ldr r0, [r0]
 	mov r8, r0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	adds r4, 0x1
 	str r4, [sp, 0x10]
@@ -236,7 +236,7 @@ _0807349E:
 	adds r0, r1
 	ldr r7, [r0]
 	adds r0, r7, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	adds r4, 0x1
 	str r4, [sp, 0x10]

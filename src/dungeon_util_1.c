@@ -38,7 +38,7 @@ Entity *GetPartnerEntity(void)
     for(counter = 0; counter < MAX_TEAM_MEMBERS; counter++)
     {
         entity = gDungeon->teamPokemon[counter];
-        if(EntityExists(entity) && GetEntInfo(entity)->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER)
+        if(EntityIsValid(entity) && GetEntInfo(entity)->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER)
         {
             return entity;
         }
@@ -61,7 +61,7 @@ void sub_80854D4(void)
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
         entity = gDungeon->teamPokemon[index];
-        if(EntityExists(entity))
+        if(EntityIsValid(entity))
         {
             stack1[counter] = entity;
             counter++;
@@ -125,7 +125,7 @@ void sub_80855E4(DungeonCallback func)
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
         entity = gDungeon->teamPokemon[index];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             if (GetEntInfo(entity)->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER) {
                 flag = TRUE;
             }
@@ -145,7 +145,7 @@ void sub_808563C(DungeonCallback func)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
-        if ((EntityExists(entity)) && (GetEntInfo(entity)->joinedAt.id != 0x41)) {
+        if ((EntityIsValid(entity)) && (GetEntInfo(entity)->joinedAt.id != 0x41)) {
             func(entity);
         }
     }
@@ -159,7 +159,7 @@ Entity *GetEntityFromMonsterBehavior(u8 entityType)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
         entity = gDungeon->activePokemon[index];
-        if ((EntityExists(entity)) && (GetEntInfo(entity)->monsterBehavior == entityType)) return entity;
+        if ((EntityIsValid(entity)) && (GetEntInfo(entity)->monsterBehavior == entityType)) return entity;
     }
     return NULL;
 }
@@ -205,7 +205,7 @@ void sub_8085764(void)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
-        if ((EntityExists(entity)) && (GetEntInfo(entity)->monsterBehavior == BEHAVIOR_ALLY)) {
+        if ((EntityIsValid(entity)) && (GetEntInfo(entity)->monsterBehavior == BEHAVIOR_ALLY)) {
             sub_8068FE0(entity,0x207,&stackEntity);
         }
     }
@@ -221,7 +221,7 @@ void sub_80857B8(void)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
         entity = gDungeon->activePokemon[index];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             entityInfo = GetEntInfo(entity);
             if ((gDungeon->unk4 == 0) && (gDungeon->unk2 == 0)) {
                 sub_804535C(entity, 0);
@@ -286,7 +286,7 @@ void sub_8085930(s32 direction)
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
         entity = gDungeon->teamPokemon[index];
-        if(EntityExists(entity))
+        if(EntityIsValid(entity))
         {
             if(direction >= NUM_DIRECTIONS)
             {
@@ -302,7 +302,7 @@ void sub_8085930(s32 direction)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
-        if(EntityExists(entity))
+        if(EntityIsValid(entity))
         {
             if(GetEntInfo(entity)->monsterBehavior == BEHAVIOR_ALLY)
             {
@@ -327,7 +327,7 @@ void sub_80859F0(s32 direction)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
         entity = gDungeon->wildPokemon[index];
-        if(EntityExists(entity))
+        if(EntityIsValid(entity))
         {
             if(direction >= NUM_DIRECTIONS)
             {

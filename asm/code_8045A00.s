@@ -493,7 +493,7 @@ _0804618A:
 	adds r0, r2
 	adds r0, r1
 	ldr r0, [r0]
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	adds r1, r4, 0x1
 	cmp r0, 0
@@ -597,7 +597,7 @@ _08046258:
 	adds r0, r2
 	adds r0, r1
 	ldr r0, [r0]
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	adds r1, r4, 0x1
 	cmp r0, 0
@@ -659,7 +659,7 @@ sub_80462AC:
 	movs r0, 0
 	str r0, [sp, 0x4]
 	adds r0, r4, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	bne _080462E4
@@ -1792,7 +1792,7 @@ _08046BAA:
 	adds r4, r5
 	adds r4, 0x4
 	adds r0, r4, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _08046C06

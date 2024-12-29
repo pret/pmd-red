@@ -399,9 +399,9 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
         moveRedirected = FALSE;
         if (currTarget == NULL)
             break;
-        if (!EntityExists(attacker))
+        if (!EntityIsValid(attacker))
             break;
-        if (EntityExists(currTarget)) {
+        if (EntityIsValid(currTarget)) {
             bool32 r4;
             bool8 moveHadEffect;
 
@@ -453,7 +453,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                             direction2++;
                             direction2 &= DIRECTION_MASK;
                             tileEntity = GetTile(currTarget->pos.x + gAdjacentTileOffsets[direction2].x, currTarget->pos.y + gAdjacentTileOffsets[direction2].y)->monster;
-                            if (EntityExists(tileEntity) && GetEntityType(tileEntity) == ENTITY_MONSTER) {
+                            if (EntityIsValid(tileEntity) && GetEntityType(tileEntity) == ENTITY_MONSTER) {
                                 if (sub_8045888(currTarget)) {
                                     s32 k;
                                     for (k = 0; k < 24; k++) {
@@ -1603,12 +1603,12 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     break;
                 }
 
-                if (EntityExists(currTargetSaved)) {
+                if (EntityIsValid(currTargetSaved)) {
                     sub_806CE68(currTargetSaved, GetEntInfo(currTargetSaved)->action.direction);
                 }
 
                 if (!moveHadEffect) {
-                    if (EntityExists(attacker) && EntityExists(currTarget) && targetInfo->isNotTeamMember) {
+                    if (EntityIsValid(attacker) && EntityIsValid(currTarget) && targetInfo->isNotTeamMember) {
                         targetInfo->expMultiplier = expMultiplierBeforeMove;
                     }
                 }
@@ -1618,7 +1618,7 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
                     }
                 }
 
-                if (EntityExists(currTarget)) {
+                if (EntityIsValid(currTarget)) {
                     targetInfo->unk158 = 1;
                 }
 
@@ -1634,11 +1634,11 @@ static void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move 
     }
 
     if (!sub_8044B28()) {
-        if (EntityExists(attacker) && GetEntInfo(attacker)->unk154 != 0) {
+        if (EntityIsValid(attacker) && GetEntInfo(attacker)->unk154 != 0) {
             GetEntInfo(attacker)->unk154 = 0;
             WarpTarget(attacker, attacker, 0, NULL);
         }
-        if (EntityExists(attacker) && GetEntInfo(attacker)->unk155 != 0) {
+        if (EntityIsValid(attacker) && GetEntInfo(attacker)->unk155 != 0) {
             GetEntInfo(attacker)->unk155 = 0;
             LowerAttackStageTarget(attacker, attacker, gUnknown_8106A50, 2, 0, FALSE);
         }
@@ -1706,7 +1706,7 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
         return 0;
     }
 
-    if (EntityExists(target)) {
+    if (EntityIsValid(target)) {
         GetEntInfo(target)->unk15A = 1;
     }
 
@@ -1724,7 +1724,7 @@ s32 sub_8055864(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 i
         return 0;
     }
 
-    if (EntityExists(target)) {
+    if (EntityIsValid(target)) {
         GetEntInfo(target)->unk15A = 1;
     }
     return dmgStruct.dmg;
@@ -1832,7 +1832,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
 
     while (1) {
         Move *currMove = &attackerInfo->moves.moves[moveId];
-        if (!EntityExists(attacker) || sub_8044B28())
+        if (!EntityIsValid(attacker) || sub_8044B28())
             break;
 
         if (currMove->id == MOVE_SNORE || currMove->id == MOVE_SLEEP_TALK) {
@@ -1905,7 +1905,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
         }
 
         sub_804178C(1);
-        if (!EntityExists(attacker) || sub_8044B28())
+        if (!EntityIsValid(attacker) || sub_8044B28())
             break;
         if (++moveId >= MAX_MON_MOVES)
             break;
@@ -1913,7 +1913,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
             break;
     }
 
-    if (EntityExists(attacker)) {
+    if (EntityIsValid(attacker)) {
         for (i = 0; i < MAX_MON_MOVES; i++) {
             if (attackerInfo->mimicMoveIDs[i] != 0) {
                 Move mimicMove, assistMove;
@@ -1936,11 +1936,11 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
         }
     }
 
-    if (EntityExists(attacker)) {
+    if (EntityIsValid(attacker)) {
         sub_8071DA4(attacker);
-        if (EntityExists(attacker) && gUnknown_202F222 != 0) {
+        if (EntityIsValid(attacker) && gUnknown_202F222 != 0) {
             gUnknown_202F222 = 0;
-            if (EntityExists(attacker)) {
+            if (EntityIsValid(attacker)) {
                 EntityInfo *attackerInfo = GetEntInfo(attacker);
                 s32 statusTurns = CalculateStatusTurns(attacker, gPauseTurnRange, TRUE);
                 PausedStatusTarget(attacker, attacker, 1, statusTurns, FALSE);
@@ -1954,7 +1954,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
 
 static void TriggerTargetAbilityEffect(Entity *attacker)
 {
-    if (EntityExists(attacker)) {
+    if (EntityIsValid(attacker)) {
         EntityInfo *entInfo = GetEntInfo(attacker);
 
         if (entInfo->abilityEffectFlags & ABILITY_FLAG_ARENA_TRAP) {
@@ -2131,7 +2131,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
         var_24 = 1;
         if (gUnknown_202F220 != 0 || gUnknown_202F221 != 0)
             break;
-        if (!EntityExists(attacker) || sub_8044B28())
+        if (!EntityIsValid(attacker) || sub_8044B28())
             return TRUE;
 
         entInfo = GetEntInfo(attacker);
@@ -2177,7 +2177,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
             UseMoveAgainstTargets(targetsArray, attacker, move, itemId, isLinkedMove);
         }
 
-        if (!EntityExists(attacker))
+        if (!EntityIsValid(attacker))
             break;
 
         sub_806CF18(attacker);
@@ -2193,7 +2193,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
         EndLeechSeedClassStatus(attacker, attacker);
     }
 
-    if (gUnknown_202F219 != 0 && EntityExists(attacker)) {
+    if (gUnknown_202F219 != 0 && EntityIsValid(attacker)) {
         EntityInfo *entInfo = GetEntInfo(attacker);
 
         ConfuseStatusTarget(attacker, attacker, FALSE);
@@ -2835,7 +2835,7 @@ static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *mov
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
             Entity *dungeonMon = gDungeon->activePokemon[i];
-            if (EntityExists(dungeonMon) && sub_8045A70(attacker, dungeonMon)) {
+            if (EntityIsValid(dungeonMon) && sub_8045A70(attacker, dungeonMon)) {
                 if (dungeonMon == attacker) {
                     arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, attacker, move, canHitSelf);
                 }
@@ -2873,7 +2873,7 @@ static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *mov
         s32 i;
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
             Entity *dungeonMon = gDungeon->activePokemon[i];
-            if (EntityExists(dungeonMon)) {
+            if (EntityIsValid(dungeonMon)) {
                 arrId = SetNewTarget(arrId, targetsArray, targetFlags, attacker, dungeonMon, move, canHitPartner);
             }
         }
@@ -3004,7 +3004,7 @@ bool8 MoveCausesPaused(Move *move)
 
 bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move)
 {
-    if (!EntityExists(pokemon))
+    if (!EntityIsValid(pokemon))
     {
         return FALSE;
     }
@@ -3030,7 +3030,7 @@ bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move)
 
 bool8 IsChargingAnyTwoTurnMove(Entity *pokemon, bool8 checkCharge)
 {
-    if (!EntityExists(pokemon))
+    if (!EntityIsValid(pokemon))
     {
         return FALSE;
     }
@@ -3074,7 +3074,7 @@ u32 sub_8057144(Entity * pokemon)
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
         Entity *dungeonMon = gDungeon->activePokemon[i];
-        if (EntityExists(dungeonMon)) {
+        if (EntityIsValid(dungeonMon)) {
             Move *moves = GetEntInfo(dungeonMon)->moves.moves;
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
@@ -3139,7 +3139,7 @@ bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
     bool8 uVar2;
     if (sub_8044B28())
         return FALSE;
-    if (!EntityExists(pokemon) || !EntityExists(target))
+    if (!EntityIsValid(pokemon) || !EntityIsValid(target))
         return FALSE;
     if (GetEntInfo(target)->unk158 == 0 || GetEntInfo(target)->HP == 0)
         return FALSE;
@@ -3169,7 +3169,7 @@ bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
 
 bool8 RollSecondaryEffect(Entity *pokemon, s32 chance)
 {
-    if(!EntityExists(pokemon))
+    if(!EntityIsValid(pokemon))
         return FALSE;
     if(chance == 0)
         return TRUE;

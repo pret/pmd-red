@@ -40,7 +40,7 @@ Entity *sub_80453AC(s32 _species)
             s32 j;
             Entity *entity = gDungeon->teamPokemon[i];
 
-            if (!EntityExists(entity)) {
+            if (!EntityIsValid(entity)) {
                 entity->type = ENTITY_MONSTER;
                 entity->unk24 = i;
                 entity->axObj.info.monster = &gDungeon->unk69C[i];
@@ -101,7 +101,7 @@ Entity *sub_804550C(s32 _species)
             s32 j;
             Entity *entity = gDungeon->wildPokemon[i];
 
-            if (!EntityExists(entity)) {
+            if (!EntityIsValid(entity)) {
                 entity->type = ENTITY_MONSTER;
                 entity->unk24 = i;
                 entity->unk22 = 0;
@@ -146,7 +146,7 @@ Entity *SpawnTrap(u8 trapID, DungeonPos *pos, u8 c)
 
     for (i = 0; i < DUNGEON_MAX_TRAPS; i++) {
         entity = gDungeon->traps[i];
-        if (!EntityExists(entity)) {
+        if (!EntityIsValid(entity)) {
             entity->type = ENTITY_TRAP;
             entity->axObj.info.trap = &gDungeon->unk3908[i];
             entity->axObj.info.trap->id = trapID;
@@ -175,7 +175,7 @@ Entity *sub_8045708(DungeonPos *pos)
 
     for (i = 0; i < DUNGEON_MAX_ITEMS; i++) {
         ent = gDungeon->items[i];
-        if (!EntityExists(ent)) {
+        if (!EntityIsValid(ent)) {
             ent->type = ENTITY_ITEM;
             ent->axObj.info.item = &gDungeon->unk3804[i];
 

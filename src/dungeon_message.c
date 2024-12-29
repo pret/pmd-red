@@ -617,7 +617,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
 
 void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
 {
-    if (EntityExists(leader)) {
+    if (EntityIsValid(leader)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], leader, 0);
         ids[0] = GetEntInfo(leader)->apparentID;
     }
@@ -626,7 +626,7 @@ void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
         ids[0] = 0;
     }
 
-    if (EntityExists(partner)) {
+    if (EntityIsValid(partner)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], partner, 0);
         ids[1] = GetEntInfo(partner)->apparentID;
     }

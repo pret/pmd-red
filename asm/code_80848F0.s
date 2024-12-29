@@ -161,7 +161,7 @@ _0808538E:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _080853BE

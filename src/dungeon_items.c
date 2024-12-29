@@ -175,7 +175,7 @@ bool8 sub_8046F00(Item *item)
       for(index = 0; index < MAX_TEAM_MEMBERS; index++)
       {
         entity = gDungeon->teamPokemon[index];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
           canLearnMove = CanMonLearnMove(moveID, GetEntInfo(entity)->id);
           cannotMove = CheckVariousStatuses2(entity, FALSE);
           if (cannotMove) {
@@ -212,7 +212,7 @@ void sub_8046F84(s32 itemFlag)
   for(index = 0; index < 4; index++)
   {
     entity = gDungeon->teamPokemon[index];
-    if (EntityExists(entity)) {
+    if (EntityIsValid(entity)) {
       entityInfo = GetEntInfo(entity);
       item = &entityInfo->heldItem;
       if ((item->flags & ITEM_FLAG_EXISTS) && (item->flags & itemFlag)) {
@@ -243,7 +243,7 @@ void sub_804700C(void)
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
   {
     entity = gDungeon->teamPokemon[index];
-    if (EntityExists(entity)) {
+    if (EntityIsValid(entity)) {
       entityInfo = GetEntInfo(entity);
       item = &entityInfo->heldItem;
       if ((item->flags & ITEM_FLAG_EXISTS)) {
@@ -268,7 +268,7 @@ bool8 sub_8047084(s32 itemFlag)
     for (i = 0; i < MAX_TEAM_MEMBERS; i++)
     {
         Entity *entity = gDungeon->teamPokemon[i];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             EntityInfo *entityInfo = GetEntInfo(entity);
             Item *item = &entityInfo->heldItem;
             if ((ItemExists(item) & ITEM_FLAG_EXISTS) && (item->flags & itemFlag)) {

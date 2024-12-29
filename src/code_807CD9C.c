@@ -166,14 +166,14 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
             if (sub_8044B28()) {
                 return;
             }
-            if (!EntityExists(target)) {
+            if (!EntityIsValid(target)) {
                 return;
             }
             sub_806A5B8(target);
             if (sub_80706A4(target,&target->pos)) {
                 WarpTarget(target,target,0,0);
             }
-            if (!EntityExists(target)) {
+            if (!EntityIsValid(target)) {
                 return;
             }
             sub_806CE68(target,8);
@@ -432,7 +432,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
 
     for (i = 0; i < gDungeon->numItems; i++) {
         Entity *dungeonItem = gDungeon->items[i];
-        if (EntityExists(dungeonItem)) {
+        if (EntityIsValid(dungeonItem)) {
             if (itemsCount >= 25)
                 break;
 
@@ -501,7 +501,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
         }
 
         for (i = 0; i < itemsCount; i++) {
-            if (EntityExists(&itemEntities[i])) {
+            if (EntityIsValid(&itemEntities[i])) {
                 sub_80461C8(&itemEntities[i].pos, 1);
                 sub_80402AC(itemEntities[i].pos.x, itemEntities[i].pos.y);
                 itemVelocity[i].x = (((targetTilePos[i].x * 24 + 4) * 256) - itemEntities[i].pixelPos.x) / 60;
@@ -516,7 +516,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
         unkAngle = 0;
         for (animFrame = 0; animFrame < 60; animFrame++) {
             for (i = 0; i < itemsCount; i++) {
-                if (EntityExists(&itemEntities[i])) {
+                if (EntityIsValid(&itemEntities[i])) {
                     IncreaseEntityPixelPos(&itemEntities[i], itemVelocity[i].x, itemVelocity[i].y);
                     itemEntities[i].unk1C.raw = sin_4096(unkAngle) * 0xC;
                     sub_80462AC(&itemEntities[i], hallucinating, 0, var, 0);
@@ -593,7 +593,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
     sub_806A5B8(target);
     if(sub_80706A4(target, &target->pos))
         WarpTarget(target, target, 0, 0);
-    if(EntityExists(target))
+    if(EntityIsValid(target))
     {
         sub_806CE68(target, 8);
         if(info->isTeamLeader)
@@ -749,7 +749,7 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target) {
 	for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
 	{
 		entity = gDungeon->activePokemon[index];
-		if (EntityExists(entity)) {
+		if (EntityIsValid(entity)) {
 			entity->room = GetTile(entity->pos.x,entity->pos.y)->room;
 		}
 	}
@@ -765,9 +765,9 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target) {
 	for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
 	{
 		entity = gDungeon->activePokemon[index];
-		if (EntityExists(entity)) {
+		if (EntityIsValid(entity)) {
 			sub_806A5B8(entity);
-			if ((EntityExists(entity)) && (sub_80706A4(entity,&entity->pos))) {
+			if ((EntityIsValid(entity)) && (sub_80706A4(entity,&entity->pos))) {
 				WarpTarget(entity,entity,0,0);
 			}
 		}
@@ -795,7 +795,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
     uStack_2c = param_6;
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
         entity1 = gDungeon->activePokemon[index];
-        if ((EntityExists(entity1)) && (AbilityIsActive(entity1, ABILITY_DAMP))) break;
+        if ((EntityIsValid(entity1)) && (AbilityIsActive(entity1, ABILITY_DAMP))) break;
     }
     if (index != DUNGEON_MAX_POKEMON) {
         sub_804218C(pokemon,target);

@@ -156,7 +156,7 @@ void sub_8041888(u8 param_1)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
         entity = gDungeon->activePokemon[index];
-        if(EntityExists(entity))
+        if(EntityIsValid(entity))
         {
             entityInfo = GetEntInfo(entity);
             if(param_1)
@@ -176,7 +176,7 @@ void EntityUpdateStatusSprites(Entity *entity)
   u32 spriteStatus;
   u8 temp;
 
-  if (EntityExists(entity)) {
+  if (EntityIsValid(entity)) {
     entityInfo = GetEntInfo(entity);
     spriteStatus = 0;
     flag = TRUE;

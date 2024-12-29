@@ -1321,7 +1321,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                 count = 0;
                 for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                     Entity *teamMon = gDungeon->teamPokemon[i];
-                    if (EntityExists(teamMon)) {
+                    if (EntityIsValid(teamMon)) {
                         if (i == GetLeaderActionContainer()->actionParameters[0].actionUseIndex) {
                             sTeamMenuChosenId = count;
                             if (GetLeaderActionId() != 0) {
@@ -1345,7 +1345,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
             sub_8044C10(1);
             for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                 Entity *teamMon = gDungeon->teamPokemon[i];
-                if (EntityExists(teamMon)) {
+                if (EntityIsValid(teamMon)) {
                     if (GetEntInfo(teamMon)->isTeamLeader) {
                         r7 = i;
                         break;
@@ -1636,7 +1636,7 @@ void DrawFieldMenu(u8 a0)
         PrintFormattedStringOnWindow(0x73, 36, gUnknown_80F91C8, 2, 0);
         for (yLoop = 0, i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
-            if (EntityExists(teamMon)) {
+            if (EntityIsValid(teamMon)) {
                 EntityInfo *monInfo = GetEntInfo(teamMon);
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], teamMon, 0);
                 gFormatArgs[0] = monInfo->HP;
@@ -1836,7 +1836,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         }
         for (i_r6 = 0; i_r6 < MAX_TEAM_MEMBERS; i_r6++) {
             Entity *teamMon = gDungeon->teamPokemon[i_r6];
-            if (EntityExists(teamMon)) {
+            if (EntityIsValid(teamMon)) {
                 EntityInfo *monInfo = GetEntInfo(teamMon);
                 if (monInfo->heldItem.flags & ITEM_FLAG_EXISTS && monInfo->heldItem.flags & ITEM_FLAG_UNPAID) {
                     monInfo->heldItem.flags &= ~(ITEM_FLAG_UNPAID);
@@ -2171,7 +2171,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextS
         break;
     default: {
             Entity *chosenTeamMember = gDungeon->teamPokemon[sUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
-            if (EntityExists(chosenTeamMember)) {
+            if (EntityIsValid(chosenTeamMember)) {
                 EntityInfo *monInfo = GetEntInfo(chosenTeamMember);
                 Item *item = &monInfo->heldItem;
                 SetMessageArgument_2(gFormatBuffer_Monsters[0], monInfo, 0);
@@ -2338,7 +2338,7 @@ void sub_8060900(Entity *a0)
                 sub_8044F5C(0x36, item->id);
                 for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                     Entity *teamMon = gDungeon->teamPokemon[i];
-                    if (EntityExists(teamMon)) {
+                    if (EntityIsValid(teamMon)) {
                         EntityInfo *teamMonInfo = GetEntInfo(teamMon);
                         teamMonInfo->unk157 = FALSE;
                         if (!CheckVariousConditions(teamMon)) {
@@ -2395,7 +2395,7 @@ void sub_8060900(Entity *a0)
     else {
         s32 index = sUnknownActionUnk4.actionUseIndex - 144;
         Entity *teamMon = gDungeon->teamPokemon[index];
-        if (EntityExists(teamMon)) {
+        if (EntityIsValid(teamMon)) {
             bool32 r5, r6, r4;
             EntityInfo *teamMonInfo = GetEntInfo(teamMon);
 
@@ -2498,7 +2498,7 @@ s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
     if (!a1 && !a3) {
         for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
-            if (EntityExists(teamMon) && GetEntInfo(teamMon)->heldItem.flags & ITEM_FLAG_EXISTS) {
+            if (EntityIsValid(teamMon) && GetEntInfo(teamMon)->heldItem.flags & ITEM_FLAG_EXISTS) {
                 a0[count++] = i + MAX_TEAM_MEMBERS;
             }
         }
@@ -2543,7 +2543,7 @@ bool8 sub_8060E38(Entity *a0)
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         Entity *teamMon = gDungeon->teamPokemon[i];
-        if (EntityExists(teamMon)) {
+        if (EntityIsValid(teamMon)) {
             GetEntInfo(teamMon)->unk157 = TRUE;
         }
     }
@@ -2699,7 +2699,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         EntityInfo *monInfo;
         Entity *teamMon = gDungeon->teamPokemon[i];
-        if (EntityExists(teamMon)) {
+        if (EntityIsValid(teamMon)) {
             a0->unk4[count] = i;
             monInfo = GetEntInfo(teamMon);
             a0->unk14[count] = monInfo->unk157;
@@ -2761,7 +2761,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
         s32 id = a0->unk4[i];
         if (id >= 0) {
             Entity *teamMon = gDungeon->teamPokemon[id];
-            if (EntityExists(teamMon))
+            if (EntityIsValid(teamMon))
             {
                 EntityInfo *monInfo = GetEntInfo(teamMon);
                 s32 color = (a0->unk14[i] != 0) ? 6 : 2;

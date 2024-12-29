@@ -491,7 +491,7 @@ _080839DA:
 _08083A00:
 	ldr r4, [r5]
 	adds r0, r4, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _08083A32

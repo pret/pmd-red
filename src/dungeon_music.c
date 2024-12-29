@@ -40,7 +40,7 @@ void sub_8083AB0(s16 param_0, Entity * target, Entity * entity)
 
   temp = &gDungeon->unk1CE98;
   targetEntityInfo = NULL;
-  if ((EntityExists(target)) && (GetEntityType(target) == ENTITY_MONSTER)) {
+  if ((EntityIsValid(target)) && (GetEntityType(target) == ENTITY_MONSTER)) {
     targetEntityInfo = GetEntInfo(target);
   }
   entityInfo = GetEntInfo(entity);

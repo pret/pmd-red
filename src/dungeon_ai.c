@@ -45,7 +45,7 @@ extern void sub_8041888(u32);
 
 void sub_8075900(Entity *pokemon, u8 r1)
 {
-    if(EntityExists(pokemon))
+    if(EntityIsValid(pokemon))
     {
         if(!GetEntInfo(pokemon)->isNotTeamMember)
         {
@@ -108,7 +108,7 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
                     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
                     {
                         target = gDungeon->activePokemon[i];
-                        if (EntityExists(target) &&
+                        if (EntityIsValid(target) &&
                             GetEntInfo(target)->curseClassStatus.status == STATUS_DECOY &&
                             CanSeeTarget(pokemon, target))
                         {

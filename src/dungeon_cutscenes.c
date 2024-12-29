@@ -693,7 +693,7 @@ void sub_8086F54(u8 param_1, u8 param_2)
         bool8 found = FALSE;
         for (index = 0; index < 0x10; index++) {
             struct Entity *entity = gDungeon->wildPokemon[index];
-            if ((EntityExists(entity))) {
+            if ((EntityIsValid(entity))) {
                 struct EntityInfo *entInfo = GetEntInfo(entity);
                 if (entInfo->monsterBehavior != param_1) {
                     found = TRUE;
@@ -2554,7 +2554,7 @@ void sub_8089788(Entity *entity, u8 param_2, u8 param_3)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
       monEntity = gDungeon->wildPokemon[index];
-      if ((EntityExists(monEntity)) && (monEntity != entity) && (GetEntInfo(monEntity)->monsterBehavior == param_2)) {
+      if ((EntityIsValid(monEntity)) && (monEntity != entity) && (GetEntInfo(monEntity)->monsterBehavior == param_2)) {
         return;
       }
     }
@@ -4887,7 +4887,7 @@ void sub_808C948(Entity *entity, u8 param_2)
     flag = FALSE;
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++){
       pokeEntity = gDungeon->wildPokemon[index];
-      if ((pokeEntity != entity) && (EntityExists(pokeEntity))) {
+      if ((pokeEntity != entity) && (EntityIsValid(pokeEntity))) {
         flag = TRUE;
         break;
       }

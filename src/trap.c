@@ -346,7 +346,7 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
                 DealDamageToEntity(target,gSpikeTrapDmgValue,10,0x206);
             }
     }
-    if (EntityExists(target)) {
+    if (EntityIsValid(target)) {
         sub_8071DA4(target);
     }
     if (flag1) {

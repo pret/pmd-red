@@ -183,10 +183,10 @@ static void sub_8044454(void)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->activePokemon[index];
-      if ((EntityExists(entity)) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
+      if ((EntityIsValid(entity)) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (sub_8044B28()) break;
         TickStatusHeal(entity);
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
           sub_8071DA4(entity);
           RunMonsterAI(entity, 0);
           sub_8072CF4(entity);
@@ -211,7 +211,7 @@ void sub_80444F4(Entity *pokemon)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->activePokemon[index];
-      if ((EntityExists(entity)) && (pokemon != entity) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
+      if ((EntityIsValid(entity)) && (pokemon != entity) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (sub_8044B28()) break;
         RunMonsterAI(entity, 0);
         sub_8072CF4(entity);

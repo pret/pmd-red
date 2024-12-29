@@ -50,7 +50,7 @@ void sub_807360C(void)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
         entity = gDungeon->activePokemon[index];
-        if(EntityExists(entity))
+        if(EntityIsValid(entity))
         {
             if(GetEntInfo(entity)->unk152 != 0)
             {
@@ -282,7 +282,7 @@ void GetPossibleAIThrownItemDirections(Entity *pokemon, s32 thrownAIFlag, Item *
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
         Entity *targetPokemon = gDungeon->activePokemon[i];
-        if (EntityExists(targetPokemon) && pokemon != targetPokemon)
+        if (EntityIsValid(targetPokemon) && pokemon != targetPokemon)
         {
             s32 targetingFlags;
             if (thrownAIFlag == ITEM_AI_FLAG_TARGET_ALLY)
@@ -321,7 +321,7 @@ void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item,
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
         Entity *targetPokemon = gDungeon->activePokemon[i];
-        if (EntityExists(targetPokemon) && pokemon != targetPokemon &&
+        if (EntityIsValid(targetPokemon) && pokemon != targetPokemon &&
             CanSeeTarget(pokemon, targetPokemon) && GetTreatmentBetweenMonsters(pokemon, targetPokemon, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)
         {
             s32 distanceX;

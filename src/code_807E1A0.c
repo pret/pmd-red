@@ -42,7 +42,7 @@ void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s16 param_4,s32 para
 
   param_4_s32 = param_4;
 
-  if (EntityExists(target)) {
+  if (EntityIsValid(target)) {
     targetInfo = GetEntInfo(target);
     InitPokemonMove(&move, MOVE_REGULAR_ATTACK);
     if (!sub_80571F0(target,&move)) {
@@ -95,7 +95,7 @@ void HandleSwitcherOrb(Entity *pokemon,Entity *target)
     sub_804535C(pokemon,NULL);
     sub_804535C(target,NULL);
 
-    if (EntityExists(pokemon)) {
+    if (EntityIsValid(pokemon)) {
       if (GetEntInfo(pokemon)->isTeamLeader) {
         sub_804AC20(&pokemon->pos);
         sub_807EC28(FALSE);
@@ -104,7 +104,7 @@ void HandleSwitcherOrb(Entity *pokemon,Entity *target)
       sub_8075900(pokemon,gDungeon->forceMonsterHouse);
     }
 
-    if (EntityExists(target)) {
+    if (EntityIsValid(target)) {
       if (GetEntInfo(target)->isTeamLeader) {
         sub_804AC20(&target->pos);
         sub_807EC28(FALSE);
@@ -121,7 +121,7 @@ void sub_807E378(void)
   Entity *leader;
 
   leader = GetLeader();
-  if (EntityExists(leader)) {
+  if (EntityIsValid(leader)) {
 
     uVar2 = gDungeon->unk644.windTurns;
     if ((gDungeon->unk644.windTurns < 1) ||

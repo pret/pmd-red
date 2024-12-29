@@ -8,7 +8,7 @@
 
 bool8 CanSeeTarget(Entity *entity, Entity *targetEntity)
 {
-    if (!EntityExists(entity) || !EntityExists(targetEntity) || !targetEntity->isVisible)
+    if (!EntityIsValid(entity) || !EntityIsValid(targetEntity) || !targetEntity->isVisible)
     {
         return FALSE;
     }
@@ -35,7 +35,7 @@ bool8 CanSeeTarget(Entity *entity, Entity *targetEntity)
 
 bool8 CanTargetEntity(Entity *entity, Entity *targetEntity)
 {
-    if (!EntityExists(entity) || !EntityExists(targetEntity) || !targetEntity->isVisible)
+    if (!EntityIsValid(entity) || !EntityIsValid(targetEntity) || !targetEntity->isVisible)
     {
         return FALSE;
     }
@@ -62,7 +62,7 @@ bool8 CanTargetEntity(Entity *entity, Entity *targetEntity)
 
 bool8 sub_8045A70(Entity *entity, Entity *targetEntity)
 {
-    if (EntityExists(entity) && EntityExists(targetEntity) && targetEntity->isVisible)
+    if (EntityIsValid(entity) && EntityIsValid(targetEntity) && targetEntity->isVisible)
     {
          return IsPositionActuallyInSight(&entity->pos, &targetEntity->pos);
     }

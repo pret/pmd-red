@@ -421,7 +421,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
             Entity *target = gDungeon->activePokemon[i];
-            if (EntityExists(target) && CanSeeTarget(pokemon, target))
+            if (EntityIsValid(target) && CanSeeTarget(pokemon, target))
             {
                 numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
             }
@@ -466,7 +466,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
             Entity *target = gDungeon->activePokemon[i];
-            if (EntityExists(target) && pokemon != target)
+            if (EntityIsValid(target) && pokemon != target)
             {
                 s32 direction = GetDirectionTowardsPosition(&pokemon->pos, &target->pos);
                 if (!gCanAttackInDirection[direction] &&
@@ -490,7 +490,7 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
         {
             Entity *target = gDungeon->activePokemon[i];
-            if (EntityExists(target))
+            if (EntityIsValid(target))
             {
                 numPotentialTargets = TryAddTargetToAITargetList(numPotentialTargets, targetingFlags, pokemon, target, move, hasStatusChecker);
             }
@@ -953,7 +953,7 @@ void HandleUseMoveAIAction(Entity *target)
             break;
         entityInfo = GetEntInfo(target);
         sub_8055A00(target, entityInfo->action.actionParameters[0].actionUseIndex, 1, 0, 0);
-        if (!EntityExists(target))
+        if (!EntityIsValid(target))
             break;
         if (sub_8044B28())
             break;
@@ -963,7 +963,7 @@ void HandleUseMoveAIAction(Entity *target)
     }
 
     sub_8057588(target, 1);
-    if (EntityExists(target))
+    if (EntityIsValid(target))
         sub_806A9B4(target, GetEntInfo(target)->action.actionParameters[0].actionUseIndex);
 
     sub_806A1B0(target);
@@ -1050,7 +1050,7 @@ void HandleUseOrbAction(Entity *pokemon)
 
     }
 
-    if (EntityExists(pokemon)) {
+    if (EntityIsValid(pokemon)) {
         if (r4)
             sub_8044DF0(pokemon, 0, 122);
 
