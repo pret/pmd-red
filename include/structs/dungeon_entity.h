@@ -33,7 +33,7 @@
 typedef struct ActionParameter
 {
     /* 0x0 */ u8 actionUseIndex;
-    /* 0x4 */ DungeonPos lastItemThrowPosition;
+    /* 0x4 */ DungeonPos itemPos;
 } ActionParameter;
 
 // size: 0x18

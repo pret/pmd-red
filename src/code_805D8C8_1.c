@@ -413,8 +413,8 @@ void DungeonHandlePlayerInput(void)
                     if (ItemExists(&gTeamInventoryRef->teamItems[i]) && ItemSet(&gTeamInventoryRef->teamItems[i])) {
                         sub_8044C50(ACTION_THROW_ITEM_PLAYER);
                         leaderInfo->action.actionParameters[0].actionUseIndex = i +1;
-                        leaderInfo->action.actionParameters[0].lastItemThrowPosition.x = 0;
-                        leaderInfo->action.actionParameters[0].lastItemThrowPosition.y = 0;
+                        leaderInfo->action.actionParameters[0].itemPos.x = 0;
+                        leaderInfo->action.actionParameters[0].itemPos.y = 0;
                         break;
                     }
                 }
@@ -1803,8 +1803,8 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
     };
 
     sUnknownActionUnk4.actionUseIndex = 0;
-    sUnknownActionUnk4.lastItemThrowPosition.x = 0;
-    sUnknownActionUnk4.lastItemThrowPosition.y = 0;
+    sUnknownActionUnk4.itemPos.x = 0;
+    sUnknownActionUnk4.itemPos.y = 0;
     if (a1 != NULL) {
         var_2C = (a1->a0_8 != 0);
         var_34 = (a1->a0_16 != 0);
@@ -2255,8 +2255,8 @@ void sub_8060890(DungeonPos *a0)
         break;
     }
 
-    sUnknownActionUnk4.lastItemThrowPosition.x = a0->x;
-    sUnknownActionUnk4.lastItemThrowPosition.y = a0->y;
+    sUnknownActionUnk4.itemPos.x = a0->x;
+    sUnknownActionUnk4.itemPos.y = a0->y;
 }
 
 extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
@@ -2457,8 +2457,8 @@ void sub_8060CE8(ActionContainer *a0)
     SetMonsterActionFields(a0, gUnknown_202EE44[gUnknown_202EE10.menuIndex].unk0);
     a0->actionParameters[0] = sUnknownActionUnk4;
     a0->actionParameters[1].actionUseIndex = 0;
-    a0->actionParameters[1].lastItemThrowPosition.x = 0;
-    a0->actionParameters[1].lastItemThrowPosition.y = 0;
+    a0->actionParameters[1].itemPos.x = 0;
+    a0->actionParameters[1].itemPos.y = 0;
 }
 
 void sub_8060D24(UNUSED ActionContainer *a0)

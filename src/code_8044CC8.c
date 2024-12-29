@@ -46,7 +46,7 @@ Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2)
     item = &gTeamInventoryRef->teamItems[param_2->actionUseIndex - 1];
   }
   else if (param_2->actionUseIndex == 0x80) {
-    tile = GetTile((param_2->lastItemThrowPosition).x,(param_2->lastItemThrowPosition).y);
+    tile = GetTile((param_2->itemPos).x,(param_2->itemPos).y);
     item = GetItemData(tile->object);
   }
   else {
@@ -81,7 +81,7 @@ bool8 sub_8044D40(ActionContainer *param_1,s32 index)
     if (puVar1->actionUseIndex != 0x80) {
       return FALSE;
     }
-    sub_80461C8(&puVar1->lastItemThrowPosition,1);
+    sub_80461C8(&puVar1->itemPos,1);
   }
   return TRUE;
 }
@@ -120,7 +120,7 @@ void sub_8044DF0(Entity *entity, s32 index, u32 unused)
   info = GetEntInfo(entity);
   item = sub_8044D90(entity,index,unused);
   if ((info->action).actionParameters[0].actionUseIndex == 0x80) {
-    sub_80461C8(&(info->action).actionParameters[0].lastItemThrowPosition,1);
+    sub_80461C8(&(info->action).actionParameters[0].itemPos,1);
   }
   else {
     item->id = ITEM_NOTHING;
@@ -144,7 +144,7 @@ void sub_8044E24(Entity *entity,int index,u32 unused)
     if (GetItemCategory(itemPtr->id) == CATEGORY_TMS_HMS) {
       if (info->action.actionParameters[index].actionUseIndex == 0x80) {
         item = *itemPtr;
-        pos = &info->action.actionParameters[index].lastItemThrowPosition;
+        pos = &info->action.actionParameters[index].itemPos;
         sub_80461C8(pos,1);
         item.quantity = itemPtr->id - 125;
         item.id = ITEM_TM_USED_TM;
