@@ -189,7 +189,7 @@ void AIDecideUseItem(Entity *pokemon)
             {
                 if ((item->flags & ITEM_FLAG_STICKY) == 0)
                 {
-                    if (GetItemAIFlag(item->id, ITEM_AI_FLAG_TARGET_SELF))
+                    if (TestItemAIFlag(item->id, ITEM_AI_FLAG_TARGET_SELF))
                     {
                         u32 itemWeight = GetAIUseItemProbability(pokemon, item, ITEM_TARGET_ALLY);
                         if (itemWeight != 0)
@@ -228,7 +228,7 @@ void AIDecideUseItem(Entity *pokemon)
                 for (thrownAIFlag = ITEM_AI_FLAG_TARGET_ALLY; thrownAIFlag <= ITEM_AI_FLAG_TARGET_ENEMY; thrownAIFlag++)
                 {
                     potentialTargetWeights = gAIThrownItemProbabilities;
-                    if (GetItemAIFlag(item->id, thrownAIFlag))
+                    if (TestItemAIFlag(item->id, thrownAIFlag))
                     {
                         u8 itemType = GetItemCategory(item->id);
                         if (itemType == CATEGORY_THROWN_ARC)

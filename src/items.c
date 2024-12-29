@@ -285,7 +285,7 @@ u8 *GetItemDescription(u8 id)
     return gItemParametersData[id].description;
 }
 
-bool8 GetItemAIFlag(u8 id, u32 aiFlag)
+bool8 TestItemAIFlag(u8 id, u32 aiFlag)
 {
     return gItemParametersData[id].aiFlags[aiFlag];
 }
