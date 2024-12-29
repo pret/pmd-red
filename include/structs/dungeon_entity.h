@@ -30,11 +30,11 @@
 #define STAT_STAGE_EVASION 1
 
 // size: 0x8
-typedef struct unkStruct_8044CC8
+typedef struct ActionParameter
 {
     /* 0x0 */ u8 actionUseIndex;
     /* 0x4 */ DungeonPos lastItemThrowPosition;
-} unkStruct_8044CC8;
+} ActionParameter;
 
 // size: 0x18
 typedef struct ActionContainer
@@ -43,7 +43,7 @@ typedef struct ActionContainer
     /* 0x2 */ u8 direction;
     u8 unk3;
     // Additional parameter alongside actionIndex. Used for things like indicating which move a Pokémon should use from its moveset.
-    /* 0x4 */ unkStruct_8044CC8 unk4[2];
+    /* 0x4 */ ActionParameter actionParameters[2];
     // Position of the target that the Pokémon wants throw an item at.
     /* 0x14 */ DungeonPos itemTargetPosition;
 } ActionContainer;

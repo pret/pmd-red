@@ -262,7 +262,7 @@ bool8 sub_8072CF4(Entity *entity)
             HandleUnsetItemAction(entity, TRUE);
             break;
         case 0x3b:
-            gDungeon->unkBC = gDungeon->teamPokemon[(info->action).unk4[0].actionUseIndex];
+            gDungeon->unkBC = gDungeon->teamPokemon[(info->action).actionParameters[0].actionUseIndex];
             break;
         case ACTION_PLACE_ITEM:
             HandlePlaceItemAction(entity);

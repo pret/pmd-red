@@ -225,8 +225,8 @@ void sub_8044C10(u8 param_1)
 
     if(param_1)
     {
-        entityInfo->action.unk4[0].actionUseIndex = 0;
-        entityInfo->action.unk4[1].actionUseIndex = 0;
+        entityInfo->action.actionParameters[0].actionUseIndex = 0;
+        entityInfo->action.actionParameters[1].actionUseIndex = 0;
         entityInfo->action.itemTargetPosition.x = -1;
         entityInfo->action.itemTargetPosition.y = -1;
     }
@@ -237,8 +237,8 @@ void sub_8044C50(u16 action)
     EntityInfo * entityInfo = GetLeaderInfo();
 
     entityInfo->action.action = action;
-    entityInfo->action.unk4[0].actionUseIndex = 0;
-    entityInfo->action.unk4[1].actionUseIndex = 0;
+    entityInfo->action.actionParameters[0].actionUseIndex = 0;
+    entityInfo->action.actionParameters[1].actionUseIndex = 0;
 
     entityInfo->action.itemTargetPosition.x = -1;
     entityInfo->action.itemTargetPosition.y = -1;
@@ -247,15 +247,15 @@ void sub_8044C50(u16 action)
 void ClearMonsterActionFields(ActionContainer *actionPointer)
 {
     actionPointer->action = ACTION_NOTHING;
-    actionPointer->unk4[0].actionUseIndex = 0;
-    actionPointer->unk4[1].actionUseIndex = 0;
+    actionPointer->actionParameters[0].actionUseIndex = 0;
+    actionPointer->actionParameters[1].actionUseIndex = 0;
 }
 
 void SetMonsterActionFields(ActionContainer *actionPointer, u16 action)
 {
     actionPointer->action = action;
-    actionPointer->unk4[0].actionUseIndex = 0;
-    actionPointer->unk4[1].actionUseIndex = 0;
+    actionPointer->actionParameters[0].actionUseIndex = 0;
+    actionPointer->actionParameters[1].actionUseIndex = 0;
 }
 
 void SetActionPassTurnOrWalk(ActionContainer *actionPointer, s16 species)
@@ -268,6 +268,6 @@ void SetActionPassTurnOrWalk(ActionContainer *actionPointer, s16 species)
     {
         actionPointer->action = ACTION_PASS_TURN;
     }
-    actionPointer->unk4[0].actionUseIndex = 0;
-    actionPointer->unk4[1].actionUseIndex = 0;
+    actionPointer->actionParameters[0].actionUseIndex = 0;
+    actionPointer->actionParameters[1].actionUseIndex = 0;
 }

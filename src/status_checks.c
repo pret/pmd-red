@@ -171,7 +171,7 @@ bool8 sub_80701A4(Entity *pokemon)
                     (pokemonInfo->bideClassStatus.moveSlot == index)) {
                         SetMonsterActionFields(&pokemonInfo->action, ACTION_USE_MOVE_PLAYER);
                         index_1 = index;
-                        r7 = &pokemonInfo->action.unk4[1].actionUseIndex;
+                        r7 = &pokemonInfo->action.actionParameters[1].actionUseIndex;
                         if((index > 0) && (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
                         {
                             do {
