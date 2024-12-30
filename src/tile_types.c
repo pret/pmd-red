@@ -144,7 +144,7 @@ bool8 sub_804AD34(DungeonPos *pos)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->activePokemon[index];
-      if (EntityExists(entity)) {
+      if (EntityIsValid(entity)) {
         sub_806CF98(entity);
       }
     }
@@ -205,7 +205,7 @@ void sub_804AE84(DungeonPos *pos)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->activePokemon[index];
-      if (EntityExists(entity)) {
+      if (EntityIsValid(entity)) {
         sub_806CF98(entity);
       }
     }

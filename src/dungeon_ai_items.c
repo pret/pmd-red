@@ -50,7 +50,7 @@ void sub_807360C(void)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
         entity = gDungeon->activePokemon[index];
-        if(EntityExists(entity))
+        if(EntityIsValid(entity))
         {
             if(GetEntInfo(entity)->unk152 != 0)
             {
@@ -96,9 +96,9 @@ void AIDecideUseItem(Entity *pokemon)
                     if (DungeonRandOutcome(gAIThrownItemProbabilities[targetIndex]))
                     {
                         SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
-                        pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
-                        pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
-                        pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
+                        pokemonInfo->action.actionParameters[0].actionUseIndex = selectedToolboxIndex;
+                        pokemonInfo->action.actionParameters[0].itemPos.x = pokemon->pos.x;
+                        pokemonInfo->action.actionParameters[0].itemPos.y = pokemon->pos.y;
                         pokemonInfo->action.direction = gAIThrownItemDirections[targetIndex] & DIRECTION_MASK;
                         break;
                     }
@@ -120,9 +120,9 @@ void AIDecideUseItem(Entity *pokemon)
                 {
                     u32 chosenTargetIndex = DungeonRandInt(gAIThrowItemActionChoiceCount);
                     SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
-                    pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
-                    pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
-                    pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
+                    pokemonInfo->action.actionParameters[0].actionUseIndex = selectedToolboxIndex;
+                    pokemonInfo->action.actionParameters[0].itemPos.x = pokemon->pos.x;
+                    pokemonInfo->action.actionParameters[0].itemPos.y = pokemon->pos.y;
                     pokemonInfo->action.direction = GetDirectionTowardsPosition(&pokemon->pos, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
                     pokemonInfo->action.itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
                 }
@@ -133,9 +133,9 @@ void AIDecideUseItem(Entity *pokemon)
                 if (itemTypeCompare < CATEGORY_HELD_ITEMS - 2)
                 {
                     SetMonsterActionFields(&pokemonInfo->action, ACTION_EAT_AI);
-                    pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
-                    pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
-                    pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
+                    pokemonInfo->action.actionParameters[0].actionUseIndex = selectedToolboxIndex;
+                    pokemonInfo->action.actionParameters[0].itemPos.x = pokemon->pos.x;
+                    pokemonInfo->action.actionParameters[0].itemPos.y = pokemon->pos.y;
                 }
                 else
                 {
@@ -189,7 +189,7 @@ void AIDecideUseItem(Entity *pokemon)
             {
                 if ((item->flags & ITEM_FLAG_STICKY) == 0)
                 {
-                    if (GetItemAIFlag(item->id, ITEM_AI_FLAG_TARGET_SELF))
+                    if (TestItemAIFlag(item->id, ITEM_AI_FLAG_TARGET_SELF))
                     {
                         u32 itemWeight = GetAIUseItemProbability(pokemon, item, ITEM_TARGET_ALLY);
                         if (itemWeight != 0)
@@ -205,9 +205,9 @@ void AIDecideUseItem(Entity *pokemon)
                                 {
                                     SetMonsterActionFields(&pokemonInfo->action, ACTION_EAT_AI);
                                 }
-                                pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
-                                pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
-                                pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
+                                pokemonInfo->action.actionParameters[0].actionUseIndex = selectedToolboxIndex;
+                                pokemonInfo->action.actionParameters[0].itemPos.x = pokemon->pos.x;
+                                pokemonInfo->action.actionParameters[0].itemPos.y = pokemon->pos.y;
                                 return;
                             }
                         }
@@ -228,7 +228,7 @@ void AIDecideUseItem(Entity *pokemon)
                 for (thrownAIFlag = ITEM_AI_FLAG_TARGET_ALLY; thrownAIFlag <= ITEM_AI_FLAG_TARGET_ENEMY; thrownAIFlag++)
                 {
                     potentialTargetWeights = gAIThrownItemProbabilities;
-                    if (GetItemAIFlag(item->id, thrownAIFlag))
+                    if (TestItemAIFlag(item->id, thrownAIFlag))
                     {
                         u8 itemType = GetItemCategory(item->id);
                         if (itemType == CATEGORY_THROWN_ARC)
@@ -239,9 +239,9 @@ void AIDecideUseItem(Entity *pokemon)
                             {
                                 u32 chosenTargetIndex = DungeonRandInt(gAIThrowItemActionChoiceCount);
                                 SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
-                                pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
-                                pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
-                                pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
+                                pokemonInfo->action.actionParameters[0].actionUseIndex = selectedToolboxIndex;
+                                pokemonInfo->action.actionParameters[0].itemPos.x = pokemon->pos.x;
+                                pokemonInfo->action.actionParameters[0].itemPos.y = pokemon->pos.y;
                                 pokemonInfo->action.direction = GetDirectionTowardsPosition(&pokemon->pos, &potentialTargetPositions[chosenTargetIndex]) & DIRECTION_MASK;
                                 pokemonInfo->action.itemTargetPosition = potentialTargetPositions[chosenTargetIndex];
                                 return;
@@ -256,9 +256,9 @@ void AIDecideUseItem(Entity *pokemon)
                                 if (DungeonRandOutcome(potentialTargetWeights[targetIndex]))
                                 {
                                     SetMonsterActionFields(&pokemonInfo->action, ACTION_THROW_ITEM_AI);
-                                    pokemonInfo->action.unk4[0].actionUseIndex = selectedToolboxIndex;
-                                    pokemonInfo->action.unk4[0].lastItemThrowPosition.x = pokemon->pos.x;
-                                    pokemonInfo->action.unk4[0].lastItemThrowPosition.y = pokemon->pos.y;
+                                    pokemonInfo->action.actionParameters[0].actionUseIndex = selectedToolboxIndex;
+                                    pokemonInfo->action.actionParameters[0].itemPos.x = pokemon->pos.x;
+                                    pokemonInfo->action.actionParameters[0].itemPos.y = pokemon->pos.y;
                                     pokemonInfo->action.direction = gAIThrownItemDirections[targetIndex] & DIRECTION_MASK;
                                     return;
                                 }
@@ -282,7 +282,7 @@ void GetPossibleAIThrownItemDirections(Entity *pokemon, s32 thrownAIFlag, Item *
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
         Entity *targetPokemon = gDungeon->activePokemon[i];
-        if (EntityExists(targetPokemon) && pokemon != targetPokemon)
+        if (EntityIsValid(targetPokemon) && pokemon != targetPokemon)
         {
             s32 targetingFlags;
             if (thrownAIFlag == ITEM_AI_FLAG_TARGET_ALLY)
@@ -321,7 +321,7 @@ void GetPossibleAIArcItemTargets(Entity *pokemon, Item *item,
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++)
     {
         Entity *targetPokemon = gDungeon->activePokemon[i];
-        if (EntityExists(targetPokemon) && pokemon != targetPokemon &&
+        if (EntityIsValid(targetPokemon) && pokemon != targetPokemon &&
             CanSeeTarget(pokemon, targetPokemon) && GetTreatmentBetweenMonsters(pokemon, targetPokemon, FALSE, TRUE) == TREATMENT_TREAT_AS_ENEMY)
         {
             s32 distanceX;

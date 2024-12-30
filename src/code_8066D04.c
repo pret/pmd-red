@@ -37,7 +37,7 @@ extern void sub_8045DB4(DungeonPos *, u32);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {
-  GetEntInfo(entity)->action.unk4[0].actionUseIndex = 1;
+  GetEntInfo(entity)->action.actionParameters[0].actionUseIndex = 1;
   sub_8045DB4(&entity->pos,0);
 }
 
@@ -125,7 +125,7 @@ void HandleGiveItemAction(Entity *param_1)
   info2 = GetEntInfo(entity);
   item = sub_8044D90(param_1,0,2);
 
-  if((info1->action).unk4[0].actionUseIndex == 0x80)
+  if((info1->action).actionParameters[0].actionUseIndex == 0x80)
       bVar3 = TRUE;
   else
       bVar3 = FALSE;
@@ -285,13 +285,13 @@ void HandlePlaceItemAction(Entity *entity)
     Item *item = sub_8044D90(entity,0,4);
 
     sub_8045BF8(gFormatBuffer_Items[0],item);
-    if (info->action.unk4[0].actionUseIndex == 0x80) {
+    if (info->action.actionParameters[0].actionUseIndex == 0x80) {
         LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8DE0);
     }
-    else if (info->action.unk4[0].actionUseIndex < 0x15 && (item->flags & (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) == (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) {
+    else if (info->action.actionParameters[0].actionUseIndex < 0x15 && (item->flags & (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) == (ITEM_FLAG_STICKY | ITEM_FLAG_SET)) {
         LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8BE0);
     }
-    else if (info->action.unk4[0].actionUseIndex == 0x81 && (item->flags & ITEM_FLAG_STICKY)) {
+    else if (info->action.actionParameters[0].actionUseIndex == 0x81 && (item->flags & ITEM_FLAG_STICKY)) {
         LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8BE0);
     }
     else {

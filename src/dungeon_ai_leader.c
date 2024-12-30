@@ -146,7 +146,7 @@ bool8 sub_8072CF4(Entity *entity)
             if (sub_8044B28()) {
                 return FALSE;
             }
-            if (!EntityExists(entity)) {
+            if (!EntityIsValid(entity)) {
                 return FALSE;
             }
             if (gUnknown_202F32D != 0) {
@@ -262,7 +262,7 @@ bool8 sub_8072CF4(Entity *entity)
             HandleUnsetItemAction(entity, TRUE);
             break;
         case 0x3b:
-            gDungeon->unkBC = gDungeon->teamPokemon[(info->action).unk4[0].actionUseIndex];
+            gDungeon->unkBC = gDungeon->teamPokemon[(info->action).actionParameters[0].actionUseIndex];
             break;
         case ACTION_PLACE_ITEM:
             HandlePlaceItemAction(entity);
@@ -317,13 +317,13 @@ bool8 sub_8072CF4(Entity *entity)
             break;
     }
     sub_807FD84(entity);
-    if (EntityExists(entity)) {
+    if (EntityIsValid(entity)) {
         if (GetEntInfo(entity)->unk14A == 0) {
             GetEntInfo(entity)->unk14A = 0;
             sub_8079764(entity);
         }
         sub_8041888(0);
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             sub_8085140();
             if (info->unk14B != 0) {
                 bVar4 = FALSE;
@@ -345,19 +345,19 @@ bool8 sub_8072CF4(Entity *entity)
             if (!sub_8044B84()) {
                 sub_807348C();
                 sub_80732F0();
-                if (!EntityExists(entity)) {
+                if (!EntityIsValid(entity)) {
                     return FALSE;
                 }
             }
             if (bVar14) {
                 sub_8075818(entity);
             }
-            if (EntityExists(entity)) {
+            if (EntityIsValid(entity)) {
                 if (!sub_8044B84()) {
                     sub_8046D20();
                 }
                 sub_8041888(0);
-                if (((EntityExists(entity)) && (!info->aiAllySkip)) && (!bVar14)) {
+                if (((EntityIsValid(entity)) && (!info->aiAllySkip)) && (!bVar14)) {
                     if (sub_80706A4(entity,&entity->pos) != '\0') {
                         WarpTarget(entity,entity,0,0);
                     }

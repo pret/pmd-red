@@ -121,7 +121,7 @@ void TriggerWeatherAbilities(void)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
       entity = gDungeon->activePokemon[index];
-      if (EntityExists(entity)) {
+      if (EntityIsValid(entity)) {
         if (AbilityIsActive(entity, ABILITY_DRIZZLE)) {
             gDungeon->weather.naturalWeather[WEATHER_RAIN] = 1;
         }
@@ -158,9 +158,9 @@ void sub_8069F9C(Entity *pokemon, Entity *target, Move *move)
     EntityInfo *pokemonInfo;
     u8 abilities[4];
 
-    if (!EntityExists(pokemon))
+    if (!EntityIsValid(pokemon))
         return;
-    if (!EntityExists(target))
+    if (!EntityIsValid(target))
         return;
     if (pokemon == target)
         return;
@@ -237,7 +237,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
   const char *typeString;
   EntityInfo *entityInfo;
 
-  if ((((EntityExists(pokemon)) && (EntityExists(target))) && (pokemon != target))
+  if ((((EntityIsValid(pokemon)) && (EntityIsValid(target))) && (pokemon != target))
      && (entityInfo = GetEntInfo(target), entityInfo->reflectClassStatus.status == STATUS_CONVERSION2)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
     uVar2_u32 = sub_8092364(moveType);
@@ -255,7 +255,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
 
 void sub_806A1B0(Entity *pokemon)
 {
-  if ((EntityExists(pokemon)) && (AbilityIsActive(pokemon, ABILITY_TRUANT))) {
+  if ((EntityIsValid(pokemon)) && (AbilityIsActive(pokemon, ABILITY_TRUANT))) {
     PausedStatusTarget(pokemon,pokemon,0,1,0);
   }
 }
@@ -266,7 +266,7 @@ void sub_806A1E8(Entity *pokemon)
   EntityInfo *entityInfo;
 
   bVar3 = FALSE;
-  if (EntityExists(pokemon)) {
+  if (EntityIsValid(pokemon)) {
     if (GetEntityType(pokemon) == ENTITY_MONSTER) {
       entityInfo = GetEntInfo(pokemon);
       bVar3 = (!entityInfo->isNotTeamMember);
@@ -286,7 +286,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
   EntityInfo *entityInfo;
 
   isNotTeamMember = FALSE;
-  if (EntityExists(pokemon)){
+  if (EntityIsValid(pokemon)){
     if (GetEntityType(pokemon) == ENTITY_MONSTER) {
         entityInfo = GetEntInfo(pokemon);
         isNotTeamMember = (!entityInfo->isNotTeamMember);
@@ -307,7 +307,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
 
 void sub_806A2BC(Entity *pokemon, u8 param_2)
 {
-  if ((EntityExists(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->unk181e8.cameraTarget != pokemon)) {
+  if ((EntityIsValid(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->unk181e8.cameraTarget != pokemon)) {
     if (param_2 != '\0') {
       sub_804178C(1);
       while (gDungeon->unk12 < 0x3c) {
@@ -330,7 +330,7 @@ void sub_806A338(void)
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *entity = gDungeon->activePokemon[i];
-        if (EntityExists(entity) && (GetEntInfo(entity)->curseClassStatus.status == STATUS_SNATCH)) {
+        if (EntityIsValid(entity) && (GetEntInfo(entity)->curseClassStatus.status == STATUS_SNATCH)) {
             gDungeon->snatchPokemon = entity;
             gDungeon->unk17B3C = GetEntInfo(entity)->unk98;
             return;
@@ -537,7 +537,7 @@ void sub_806A5B8(Entity *entity)
 {
     s32 terrainType;
 
-    if (!EntityExists(entity))
+    if (!EntityIsValid(entity))
         return;
 
     terrainType = GetTerrainType(GetTileAtEntitySafe(entity));
@@ -628,7 +628,7 @@ UNUSED static void DisplayMsgIfTeamMonsLearnedNewIqSkill(void)
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         Entity *entity = gDungeon->teamPokemon[i];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             EntityInfo *info = GetEntInfo(entity);
             if (info->IQ > 1) {
                 DisplayMsgIfNewIqSkillLearned(info, info->IQ - 1);
@@ -699,7 +699,7 @@ void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect)
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *entity = gDungeon->activePokemon[i];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             EntityInfo *info = GetEntInfo(entity);
             if (!a1 || info->monsterBehavior == 1) {
                 sub_806A898(entity, a0, showRunAwayEffect);
@@ -714,7 +714,7 @@ void sub_806A974(void)
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *entity = gDungeon->activePokemon[i];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             EntityInfo *info = GetEntInfo(entity);
             sub_806CE68(entity, info->action.direction);
         }
@@ -723,7 +723,7 @@ void sub_806A974(void)
 
 void sub_806A9B4(Entity *entity, s32 moveIndex)
 {
-    if (EntityExists(entity)) {
+    if (EntityIsValid(entity)) {
         EntityInfo *info = GetEntInfo(entity);
         s32 ret = sub_80935B8(info->moves.moves, moveIndex);
 
@@ -764,7 +764,7 @@ void sub_806AA70(void)
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         Entity *entity = gDungeon->teamPokemon[i];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             EntityInfo *info = GetEntInfo(entity);
             s32 teamIndex = info->teamIndex;
 
@@ -805,11 +805,11 @@ void sub_806AB2C(void)
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *entity1 = gDungeon->activePokemon[i];
-        if (EntityExists(entity1)) {
+        if (EntityIsValid(entity1)) {
             EntityInfo *info1 = GetEntInfo(entity1);
             for (j = 0; j < DUNGEON_MAX_POKEMON; j++) {
                 Entity *entity2 = gDungeon->activePokemon[j];
-                if (EntityExists(entity2) && entity1 != entity2 && info1->aiTarget.aiTargetSpawnGenID == entity2->spawnGenID) {
+                if (EntityIsValid(entity2) && entity1 != entity2 && info1->aiTarget.aiTargetSpawnGenID == entity2->spawnGenID) {
                     info1->aiTarget.aiTarget = entity2;
                 }
             }
@@ -1192,7 +1192,7 @@ void sub_806B404(void)
 
     gLeaderPointer = NULL;
     leader = GetLeader();
-    if (EntityExists(leader)) {
+    if (EntityIsValid(leader)) {
         pos.x = leader->pos.x;
         pos.y = leader->pos.y;
     }
@@ -1268,7 +1268,7 @@ void sub_806B678(void)
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         Entity *mon = gDungeon->teamPokemon[i];
-        if (EntityExists(mon)) {
+        if (EntityIsValid(mon)) {
             EntityInfo *monInfo = GetEntInfo(mon);
             if (monInfo->isTeamLeader) {
                 sub_803F4A0(mon);
@@ -1879,7 +1879,7 @@ void sub_806C1D8(void)
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         Entity *entity = gDungeon->teamPokemon[i];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             EntityInfo *entInfo = GetEntInfo(entity);
             s32 teamIndex = entInfo->teamIndex;
             if (teamIndex >= 0) {

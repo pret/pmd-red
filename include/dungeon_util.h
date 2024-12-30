@@ -9,7 +9,7 @@
 
 extern const DungeonPos gAdjacentTileOffsets[NUM_DIRECTIONS];
 
-bool8 EntityExists(Entity *pokemon);
+bool8 EntityIsValid(Entity *pokemon);
 u32 GetEntityType(Entity *entity);
 u8 GetEntityRoom(Entity *entity);
 Tile *GetTileAtEntitySafe(Entity *entity);

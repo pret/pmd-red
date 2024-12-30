@@ -348,7 +348,7 @@ void sub_803EDF0(void)
 
     if (gUnknown_202EDE8.unk0 == 0)
         return;
-    if (!EntityExists(gUnknown_202EDE8.unk4)) {
+    if (!EntityIsValid(gUnknown_202EDE8.unk4)) {
         gUnknown_202EDE8.unk0 = 0;
         return;
     }
@@ -935,7 +935,7 @@ void sub_803F580(u8 a0)
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
     Entity *cameraTarget = strPtr->cameraTarget;
 
-    if (cameraTarget != NULL && EntityExists(cameraTarget)) {
+    if (cameraTarget != NULL && EntityIsValid(cameraTarget)) {
         s32 i;
         u32 before, unk18214;
         EntityInfo *info = GetEntInfo(cameraTarget);
@@ -1036,7 +1036,7 @@ void sub_803F580(u8 a0)
         if (strPtr->cameraPos.x != strPtr->cameraPosMirror.x || strPtr->cameraPos.y != strPtr->cameraPosMirror.y) {
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
                 Entity *mon = gDungeon->activePokemon[i];
-                if (EntityExists(mon)) {
+                if (EntityIsValid(mon)) {
                     sub_80402AC(mon->pos.x, mon->pos.y);
                 }
             }

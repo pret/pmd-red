@@ -29,7 +29,7 @@ u8 GetItemPalette(u8 id);
 u32 GetItemActionType(u8 id);
 u32 GetSpawnAmountRange(u8 id, u32 r1);
 u8 *GetItemDescription(u8 id);
-bool8 GetItemAIFlag(u8 id, u32 r1);
+bool8 TestItemAIFlag(u8 id, u32 aiFlag);
 void BufferItemName(u8 *, u8 id, unkStruct_8090F58 *);
 void sub_8090E14(u8 *ext_buffer, Item *slot, const unkStruct_8090F58 *);
 bool8 AddItemToInventory(const Item* slot);

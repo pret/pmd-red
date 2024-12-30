@@ -51,7 +51,7 @@ void sub_8044820(void)
 
   for (index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++) {
     entity = gDungeon->wildPokemon[index];
-    if (EntityExists(entity)) {
+    if (EntityIsValid(entity)) {
       if (sub_8044B28()) break;
       entityInfo = GetEntInfo(entity);
       gDungeon->unkB8 = entity;
@@ -69,7 +69,7 @@ void sub_8044820(void)
               entityInfo->flags &= ~(MOVEMENT_FLAG_UNK_14 | MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY);
               entityInfo->recalculateFollow = FALSE;
               TickStatusHeal(entity);
-              if (EntityExists(entity)) {
+              if (EntityIsValid(entity)) {
                 sub_8071DA4(entity);
                 RunMonsterAI(entity, 0);
                 if (sub_8044B28()) break;
@@ -88,10 +88,10 @@ void sub_8044820(void)
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
       entity2 = gDungeon->wildPokemon[index];
-      if ((EntityExists(entity2)) && (entityInfo2 = GetEntInfo(entity2), entityInfo2->aiAllySkip))
+      if ((EntityIsValid(entity2)) && (entityInfo2 = GetEntInfo(entity2), entityInfo2->aiAllySkip))
       {
         sub_8074094(entity2);
-        if (EntityExists(entity2)) {
+        if (EntityIsValid(entity2)) {
           sub_8071DA4(entity2);
           entityInfo2->aiAllySkip = FALSE;
         }
@@ -119,7 +119,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
         entity = gDungeon->activePokemon[index];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             entityInfo = GetEntInfo(entity);
             entityInfo->attacking = FALSE;
 
@@ -153,7 +153,7 @@ void sub_8044AB4(void)
 
   if (gSpeedTurns[1][gDungeon->unk644.fractionalTurn + 1] != 0) {
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
-      if (EntityExists(gDungeon->activePokemon[index])) {
+      if (EntityIsValid(gDungeon->activePokemon[index])) {
         UseAttack(0);
         break;
       }
@@ -225,8 +225,8 @@ void sub_8044C10(u8 param_1)
 
     if(param_1)
     {
-        entityInfo->action.unk4[0].actionUseIndex = 0;
-        entityInfo->action.unk4[1].actionUseIndex = 0;
+        entityInfo->action.actionParameters[0].actionUseIndex = 0;
+        entityInfo->action.actionParameters[1].actionUseIndex = 0;
         entityInfo->action.itemTargetPosition.x = -1;
         entityInfo->action.itemTargetPosition.y = -1;
     }
@@ -237,8 +237,8 @@ void sub_8044C50(u16 action)
     EntityInfo * entityInfo = GetLeaderInfo();
 
     entityInfo->action.action = action;
-    entityInfo->action.unk4[0].actionUseIndex = 0;
-    entityInfo->action.unk4[1].actionUseIndex = 0;
+    entityInfo->action.actionParameters[0].actionUseIndex = 0;
+    entityInfo->action.actionParameters[1].actionUseIndex = 0;
 
     entityInfo->action.itemTargetPosition.x = -1;
     entityInfo->action.itemTargetPosition.y = -1;
@@ -247,15 +247,15 @@ void sub_8044C50(u16 action)
 void ClearMonsterActionFields(ActionContainer *actionPointer)
 {
     actionPointer->action = ACTION_NOTHING;
-    actionPointer->unk4[0].actionUseIndex = 0;
-    actionPointer->unk4[1].actionUseIndex = 0;
+    actionPointer->actionParameters[0].actionUseIndex = 0;
+    actionPointer->actionParameters[1].actionUseIndex = 0;
 }
 
 void SetMonsterActionFields(ActionContainer *actionPointer, u16 action)
 {
     actionPointer->action = action;
-    actionPointer->unk4[0].actionUseIndex = 0;
-    actionPointer->unk4[1].actionUseIndex = 0;
+    actionPointer->actionParameters[0].actionUseIndex = 0;
+    actionPointer->actionParameters[1].actionUseIndex = 0;
 }
 
 void SetActionPassTurnOrWalk(ActionContainer *actionPointer, s16 species)
@@ -268,6 +268,6 @@ void SetActionPassTurnOrWalk(ActionContainer *actionPointer, s16 species)
     {
         actionPointer->action = ACTION_PASS_TURN;
     }
-    actionPointer->unk4[0].actionUseIndex = 0;
-    actionPointer->unk4[1].actionUseIndex = 0;
+    actionPointer->actionParameters[0].actionUseIndex = 0;
+    actionPointer->actionParameters[1].actionUseIndex = 0;
 }

@@ -51,7 +51,7 @@ void sub_806CC10(void)
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         entity = gDungeon->activePokemon[i];
 
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             entityInfo = GetEntInfo(entity);
 
             if (entityInfo->unk166 != 0) {
@@ -71,7 +71,7 @@ void sub_806CC70(void)
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         entity = gDungeon->activePokemon[i];
 
-        if (EntityExists(entity))
+        if (EntityIsValid(entity))
             sub_806CCB4(entity, sub_806CEBC(entity));
     }
 }
@@ -118,7 +118,7 @@ void sub_806CD90(void)
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         entity = gDungeon->activePokemon[i];
 
-        if (EntityExists(entity))
+        if (EntityIsValid(entity))
             sub_806CCB4(entity, sub_806CEBC(entity));
     }
 }
@@ -204,7 +204,7 @@ void sub_806CF18(Entity *entity)
     s32 i;
     EntityInfo *entityInfo;
 
-    if (!EntityExists(entity))
+    if (!EntityIsValid(entity))
         return;
 
     entityInfo = GetEntInfo(entity);
@@ -229,7 +229,7 @@ void sub_806CF60(void)
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         entity = gDungeon->activePokemon[i];
 
-        if (EntityExists(entity))
+        if (EntityIsValid(entity))
             sub_806CF98(entity);
     }
 }
@@ -325,7 +325,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         return;
     if (dmgStruct->tookNoDamage)
         return;
-    if (!EntityExists(attacker) || !EntityExists(target))
+    if (!EntityIsValid(attacker) || !EntityIsValid(target))
         return;
     if (GetEntityType(attacker) != ENTITY_MONSTER || GetEntityType(target) != ENTITY_MONSTER)
         return;
@@ -347,7 +347,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         RaiseAttackStageTarget(attacker, target, gUnknown_8106A4C, 1);
     }
 
-    if (!EntityExists(attacker) || !EntityExists(target))
+    if (!EntityIsValid(attacker) || !EntityIsValid(target))
         return;
 
     if (r9
@@ -385,7 +385,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             HandleDealingDamageInternal(target, attacker, &sp, FALSE, giveExp, r10, argC);
         }
     }
-    if (!EntityExists(attacker) || !EntityExists(target))
+    if (!EntityIsValid(attacker) || !EntityIsValid(target))
         return;
 
     // Check trapping / contact abilities
@@ -455,7 +455,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             attackerInfo->abilityEffectFlags |= ABILITY_FLAG_STENCH;
         }
     }
-    if (!EntityExists(attacker) || !EntityExists(target))
+    if (!EntityIsValid(attacker) || !EntityIsValid(target))
         return;
 
     // Destiny Bond
@@ -700,7 +700,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
 
     r8 = 1;
-    if (EntityExists(attacker) && GetEntityType(attacker) == ENTITY_MONSTER && attacker != target)
+    if (EntityIsValid(attacker) && GetEntityType(attacker) == ENTITY_MONSTER && attacker != target)
         r8 = 0;
 
     targetData->unk14C = 0;
@@ -797,7 +797,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
             for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                 teamMember = gDungeon->teamPokemon[i];
-                if (EntityExists(teamMember)
+                if (EntityIsValid(teamMember)
                     && teamMember != target
                     && CanSeeTarget(target, teamMember)
                     && abs(teamMember->pos.x - target->pos.x) <= 1 && abs(teamMember->pos.y - target->pos.y) <= 1)
@@ -937,7 +937,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                     sub_8071D4C(attacker, attacker, exp);
                     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                         Entity *teamMember = gDungeon->teamPokemon[i];
-                        if (EntityExists(teamMember) && teamMember != attacker) {
+                        if (EntityIsValid(teamMember) && teamMember != attacker) {
                             sub_8071D4C(attacker, teamMember, exp);
                         }
                     }
@@ -953,7 +953,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         }
     }
 
-    if (EntityExists(attacker) && GetEntityType(attacker) == ENTITY_MONSTER && !GetEntInfo(attacker)->isTeamLeader)
+    if (EntityIsValid(attacker) && GetEntityType(attacker) == ENTITY_MONSTER && !GetEntInfo(attacker)->isTeamLeader)
         r10 = FALSE;
 
     if (r10) {

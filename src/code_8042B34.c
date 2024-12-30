@@ -731,7 +731,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
 
         leader = GetLeader();
-        if (EntityExists(leader)) {
+        if (EntityIsValid(leader)) {
             sub_8071DA4(leader);
         }
 
@@ -746,7 +746,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             }
         }
 
-        if (EntityExists(GetLeader())) {
+        if (EntityIsValid(GetLeader())) {
             sub_80526D0(0x4F);
             sub_8052740(0x4F);
         }
@@ -978,7 +978,7 @@ void sub_8043D60(void)
 
     for (monId = 0; monId < DUNGEON_MAX_WILD_POKEMON; monId++) {
         Entity *mon = gDungeon->wildPokemon[monId];
-        if (EntityExists(mon)) {
+        if (EntityIsValid(mon)) {
             EntityInfo *monInfo = GetEntInfo(mon);
             bool32 unk = TRUE;
 
@@ -997,7 +997,7 @@ void sub_8043D60(void)
 
     for (monId = 0; monId < MAX_TEAM_MEMBERS; monId++) {
         Entity *mon = gDungeon->teamPokemon[monId];
-        if (EntityExists(mon)) {
+        if (EntityIsValid(mon)) {
             s32 i;
             EntityInfo *monInfo;
 
@@ -1022,7 +1022,7 @@ void sub_8043D60(void)
     for (y = 0; y < 32; y++) {
         for (x = 0; x < 56; x++) {
             Entity *object = GetTileMut(x, y)->object;
-            if (EntityExists(object) && GetEntityType(object) == ENTITY_TRAP) {
+            if (EntityIsValid(object) && GetEntityType(object) == ENTITY_TRAP) {
                 Trap *trapData = GetTrapData(object);
                 if (trapData->id == 27) {
                     trapData->id = TRAP_PITFALL_TRAP;
@@ -1043,7 +1043,7 @@ bool8 sub_8043ED0(bool8 a0)
 
     if (gDungeon->unk10 == 1) {
         Entity *leader = GetLeader();
-        if (EntityExists(leader)) {
+        if (EntityIsValid(leader)) {
             if (!a0) {
                 strcpy(gFormatBuffer_Monsters[0], gDungeon->faintStringBuffer);
                 DisplayDungeonMessage(0, gUnknown_80F89B4, 1);
@@ -1055,7 +1055,7 @@ bool8 sub_8043ED0(bool8 a0)
     }
     else if (gDungeon->unk10 == 2) {
         Entity *leader = GetLeader();
-        if (EntityExists(leader)) {
+        if (EntityIsValid(leader)) {
             if (!a0) {
                 strcpy(gFormatBuffer_Monsters[0], gDungeon->faintStringBuffer);
                 DisplayDungeonMessage(0, gUnknown_80F89D4, 1);
@@ -1067,7 +1067,7 @@ bool8 sub_8043ED0(bool8 a0)
     }
     else if (gDungeon->unk10 == 3) {
         Entity *leader = GetLeader();
-        if (EntityExists(leader)) {
+        if (EntityIsValid(leader)) {
             if (!a0) {
                 strcpy(gFormatBuffer_Monsters[0], gDungeon->faintStringBuffer);
                 DisplayDungeonMessage(0, gUnknown_80F89D8, 1);

@@ -192,7 +192,7 @@ void DungeonHandlePlayerInput(void)
         if (gDungeon->unk644.unk28 != 0) {
             if (sub_805E874() != 0) {
                 leaderInfo->action.action = 2;
-                leaderInfo->action.unk4[0].actionUseIndex = 0;
+                leaderInfo->action.actionParameters[0].actionUseIndex = 0;
                 break;
             }
             sub_805E804();
@@ -305,8 +305,8 @@ void DungeonHandlePlayerInput(void)
                     }
                     else {
                         SetMonsterActionFields(&leaderInfo->action, ACTION_USE_MOVE_PLAYER);
-                        leaderInfo->action.unk4[0].actionUseIndex = GetTeamMemberEntityIndex(leader);
-                        leaderInfo->action.unk4[1].actionUseIndex = i;
+                        leaderInfo->action.actionParameters[0].actionUseIndex = GetTeamMemberEntityIndex(leader);
+                        leaderInfo->action.actionParameters[1].actionUseIndex = i;
                     }
                     break;
                 }
@@ -412,9 +412,9 @@ void DungeonHandlePlayerInput(void)
                 for (i = 0; i < INVENTORY_SIZE; i++) {
                     if (ItemExists(&gTeamInventoryRef->teamItems[i]) && ItemSet(&gTeamInventoryRef->teamItems[i])) {
                         sub_8044C50(ACTION_THROW_ITEM_PLAYER);
-                        leaderInfo->action.unk4[0].actionUseIndex = i +1;
-                        leaderInfo->action.unk4[0].lastItemThrowPosition.x = 0;
-                        leaderInfo->action.unk4[0].lastItemThrowPosition.y = 0;
+                        leaderInfo->action.actionParameters[0].actionUseIndex = i +1;
+                        leaderInfo->action.actionParameters[0].itemPos.x = 0;
+                        leaderInfo->action.actionParameters[0].itemPos.y = 0;
                         break;
                     }
                 }
@@ -536,10 +536,10 @@ void DungeonHandlePlayerInput(void)
                                 if (GetEntInfo(leader)->cringeClassStatus.status != STATUS_CONFUSED) {
                                     gDungeon->unk644.unk28 = 1;
                                 }
-                                leaderInfo->action.unk4[0].actionUseIndex = 0;
+                                leaderInfo->action.actionParameters[0].actionUseIndex = 0;
                             }
                             else {
-                                leaderInfo->action.unk4[0].actionUseIndex = 1;
+                                leaderInfo->action.actionParameters[0].actionUseIndex = 1;
                             }
                         }
                         break;
@@ -963,15 +963,15 @@ bool8 sub_805EC4C(Entity *a0, u8 a1)
 
     SetMonsterActionFields(&entityInfo->action, ACTION_WALK);
     if (gRealInputs.held & B_BUTTON) {
-        entityInfo->action.unk4[0].actionUseIndex = 0;
+        entityInfo->action.actionParameters[0].actionUseIndex = 0;
     }
     else {
-        entityInfo->action.unk4[0].actionUseIndex = 1;
+        entityInfo->action.actionParameters[0].actionUseIndex = 1;
     }
     entityInfo->flags |= 0x8000;
 
     SetMonsterActionFields(&tileMonsterInfo->action, ACTION_WALK);
-    tileMonsterInfo->action.unk4[0].actionUseIndex = 0;
+    tileMonsterInfo->action.actionParameters[0].actionUseIndex = 0;
     tileMonsterInfo->action.direction = (entityInfo->action.direction + 4) & 7;
     tileMonsterInfo->flags |= 0x8000;
     tileMonsterInfo->targetPos.x = tileMonster->pos.x;
@@ -1161,7 +1161,7 @@ u16 GetLeaderActionId(void)
 
 // Could this be a start of a new file?
 static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
-static EWRAM_DATA unkStruct_8044CC8 sUnknownActionUnk4 = {0};
+static EWRAM_DATA ActionParameter sUnknownActionUnk4 = {0};
 static EWRAM_DATA s32 sUnknown_202F240 = 0;
 static UNUSED EWRAM_DATA u8 sUnused2[4] = {0};
 static EWRAM_DATA s16 sUnknown_202F248[8] = {0};
@@ -1321,8 +1321,8 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                 count = 0;
                 for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                     Entity *teamMon = gDungeon->teamPokemon[i];
-                    if (EntityExists(teamMon)) {
-                        if (i == GetLeaderActionContainer()->unk4[0].actionUseIndex) {
+                    if (EntityIsValid(teamMon)) {
+                        if (i == GetLeaderActionContainer()->actionParameters[0].actionUseIndex) {
                             sTeamMenuChosenId = count;
                             if (GetLeaderActionId() != 0) {
                                 sub_806A2BC(teamMon, 0);
@@ -1345,7 +1345,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
             sub_8044C10(1);
             for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                 Entity *teamMon = gDungeon->teamPokemon[i];
-                if (EntityExists(teamMon)) {
+                if (EntityIsValid(teamMon)) {
                     if (GetEntInfo(teamMon)->isTeamLeader) {
                         r7 = i;
                         break;
@@ -1376,7 +1376,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
 
                 sub_806A2BC(r6, 0);
                 sub_804A728(&r6->pos, 0, 1, 1);
-                GetLeaderInfo()->action.unk4[0].actionUseIndex = r7;
+                GetLeaderInfo()->action.actionParameters[0].actionUseIndex = r7;
                 sub_8044C10(0);
                 if (sub_8062F90(r6, 0, 1, r9, r8)) {
                     r10 = -1;
@@ -1392,7 +1392,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                         if (sub_8071A8C(r6))
                             break;
                     }
-                    GetLeaderInfo()->action.unk4[0].actionUseIndex = r7;
+                    GetLeaderInfo()->action.actionParameters[0].actionUseIndex = r7;
                     if (r4 != r7) {
                         sub_8083CE0(0);
                     }
@@ -1408,7 +1408,7 @@ void ShowFieldMenu(u8 a0_, bool8 a1)
                         if (sub_8071A8C(r6))
                             break;
                     }
-                    GetLeaderInfo()->action.unk4[0].actionUseIndex = r7;
+                    GetLeaderInfo()->action.actionParameters[0].actionUseIndex = r7;
                     if (r4 != r7) {
                         sub_8083CE0(0);
                     }
@@ -1636,7 +1636,7 @@ void DrawFieldMenu(u8 a0)
         PrintFormattedStringOnWindow(0x73, 36, gUnknown_80F91C8, 2, 0);
         for (yLoop = 0, i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
-            if (EntityExists(teamMon)) {
+            if (EntityIsValid(teamMon)) {
                 EntityInfo *monInfo = GetEntInfo(teamMon);
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], teamMon, 0);
                 gFormatArgs[0] = monInfo->HP;
@@ -1803,8 +1803,8 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
     };
 
     sUnknownActionUnk4.actionUseIndex = 0;
-    sUnknownActionUnk4.lastItemThrowPosition.x = 0;
-    sUnknownActionUnk4.lastItemThrowPosition.y = 0;
+    sUnknownActionUnk4.itemPos.x = 0;
+    sUnknownActionUnk4.itemPos.y = 0;
     if (a1 != NULL) {
         var_2C = (a1->a0_8 != 0);
         var_34 = (a1->a0_16 != 0);
@@ -1836,7 +1836,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         }
         for (i_r6 = 0; i_r6 < MAX_TEAM_MEMBERS; i_r6++) {
             Entity *teamMon = gDungeon->teamPokemon[i_r6];
-            if (EntityExists(teamMon)) {
+            if (EntityIsValid(teamMon)) {
                 EntityInfo *monInfo = GetEntInfo(teamMon);
                 if (monInfo->heldItem.flags & ITEM_FLAG_EXISTS && monInfo->heldItem.flags & ITEM_FLAG_UNPAID) {
                     monInfo->heldItem.flags &= ~(ITEM_FLAG_UNPAID);
@@ -1962,7 +1962,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         }
         else if (r9 == 3) {
             SetMonsterActionFields(&a0Info->action, 0xC);
-            a0Info->action.unk4[0] = sUnknownActionUnk4;
+            a0Info->action.actionParameters[0] = sUnknownActionUnk4;
             sub_803EAF0(0, NULL);
             r9 = 0;
             break;
@@ -1970,7 +1970,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
         else {
             sUnknown_202F240 = gUnknown_202EE10.menuIndex;
             if (var_2C != 0) {
-                a0Info->action.unk4[1] = sUnknownActionUnk4;
+                a0Info->action.actionParameters[1] = sUnknownActionUnk4;
                 sub_803EAF0(0, NULL);
                 r9 = 0;
                 break;
@@ -2012,7 +2012,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                 if (a0Info->action.action == 0x37 || a0Info->action.action == 0x38 || a0Info->action.action == 0x3E) {
                     // Hm...
                     int newAction = sUnknownActionUnk4.actionUseIndex - 0x90;
-                    a0Info->action.unk4[0].actionUseIndex = newAction;
+                    a0Info->action.actionParameters[0].actionUseIndex = newAction;
                     sub_803EAF0(0, 0);
                     r9 = 0;
                     break;
@@ -2020,7 +2020,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                 else if (a0Info->action.action == 0x36) {
                     u32 var_38;
                     if (DrawFieldGiveItemMenu((void*)&var_38, 2) != NULL) {
-                        a0Info->action.unk4[1].actionUseIndex = var_38;
+                        a0Info->action.actionParameters[1].actionUseIndex = var_38;
                         sub_803EAF0(0, 0);
                         r9 = 0;
                         break;
@@ -2171,7 +2171,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextS
         break;
     default: {
             Entity *chosenTeamMember = gDungeon->teamPokemon[sUnknown_202F248[a0] - MAX_TEAM_MEMBERS];
-            if (EntityExists(chosenTeamMember)) {
+            if (EntityIsValid(chosenTeamMember)) {
                 EntityInfo *monInfo = GetEntInfo(chosenTeamMember);
                 Item *item = &monInfo->heldItem;
                 SetMessageArgument_2(gFormatBuffer_Monsters[0], monInfo, 0);
@@ -2255,11 +2255,11 @@ void sub_8060890(DungeonPos *a0)
         break;
     }
 
-    sUnknownActionUnk4.lastItemThrowPosition.x = a0->x;
-    sUnknownActionUnk4.lastItemThrowPosition.y = a0->y;
+    sUnknownActionUnk4.itemPos.x = a0->x;
+    sUnknownActionUnk4.itemPos.y = a0->y;
 }
 
-extern Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2, UNUSED s32 a3);
+extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
 extern void sub_8044F5C(u16 param_1, u8 param_2);
 extern void sub_8044FF0(u16 param_1);
 extern u16 sub_8044DC8(Item *param_1);
@@ -2338,7 +2338,7 @@ void sub_8060900(Entity *a0)
                 sub_8044F5C(0x36, item->id);
                 for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                     Entity *teamMon = gDungeon->teamPokemon[i];
-                    if (EntityExists(teamMon)) {
+                    if (EntityIsValid(teamMon)) {
                         EntityInfo *teamMonInfo = GetEntInfo(teamMon);
                         teamMonInfo->unk157 = FALSE;
                         if (!CheckVariousConditions(teamMon)) {
@@ -2395,7 +2395,7 @@ void sub_8060900(Entity *a0)
     else {
         s32 index = sUnknownActionUnk4.actionUseIndex - 144;
         Entity *teamMon = gDungeon->teamPokemon[index];
-        if (EntityExists(teamMon)) {
+        if (EntityIsValid(teamMon)) {
             bool32 r5, r6, r4;
             EntityInfo *teamMonInfo = GetEntInfo(teamMon);
 
@@ -2455,10 +2455,10 @@ void sub_8060900(Entity *a0)
 void sub_8060CE8(ActionContainer *a0)
 {
     SetMonsterActionFields(a0, gUnknown_202EE44[gUnknown_202EE10.menuIndex].unk0);
-    a0->unk4[0] = sUnknownActionUnk4;
-    a0->unk4[1].actionUseIndex = 0;
-    a0->unk4[1].lastItemThrowPosition.x = 0;
-    a0->unk4[1].lastItemThrowPosition.y = 0;
+    a0->actionParameters[0] = sUnknownActionUnk4;
+    a0->actionParameters[1].actionUseIndex = 0;
+    a0->actionParameters[1].itemPos.x = 0;
+    a0->actionParameters[1].itemPos.y = 0;
 }
 
 void sub_8060D24(UNUSED ActionContainer *a0)
@@ -2498,7 +2498,7 @@ s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
     if (!a1 && !a3) {
         for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
-            if (EntityExists(teamMon) && GetEntInfo(teamMon)->heldItem.flags & ITEM_FLAG_EXISTS) {
+            if (EntityIsValid(teamMon) && GetEntInfo(teamMon)->heldItem.flags & ITEM_FLAG_EXISTS) {
                 a0[count++] = i + MAX_TEAM_MEMBERS;
             }
         }
@@ -2543,7 +2543,7 @@ bool8 sub_8060E38(Entity *a0)
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         Entity *teamMon = gDungeon->teamPokemon[i];
-        if (EntityExists(teamMon)) {
+        if (EntityIsValid(teamMon)) {
             GetEntInfo(teamMon)->unk157 = TRUE;
         }
     }
@@ -2621,7 +2621,7 @@ bool8 sub_8060E38(Entity *a0)
         if (r10) {
             EntityInfo *info = GetEntInfo(a0);
             SetMonsterActionFields(&info->action, 0x1B);
-            info->action.unk4[0].actionUseIndex = sp.unk4[sp.unk0];
+            info->action.actionParameters[0].actionUseIndex = sp.unk4[sp.unk0];
             ret = FALSE;
             break;
         }
@@ -2699,7 +2699,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         EntityInfo *monInfo;
         Entity *teamMon = gDungeon->teamPokemon[i];
-        if (EntityExists(teamMon)) {
+        if (EntityIsValid(teamMon)) {
             a0->unk4[count] = i;
             monInfo = GetEntInfo(teamMon);
             a0->unk14[count] = monInfo->unk157;
@@ -2761,7 +2761,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
         s32 id = a0->unk4[i];
         if (id >= 0) {
             Entity *teamMon = gDungeon->teamPokemon[id];
-            if (EntityExists(teamMon))
+            if (EntityIsValid(teamMon))
             {
                 EntityInfo *monInfo = GetEntInfo(teamMon);
                 s32 color = (a0->unk14[i] != 0) ? 6 : 2;
@@ -2871,7 +2871,7 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
 void sub_80615B4(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1)
 {
     SetMonsterActionFields(a0, gUnknown_202EE44[gUnknown_202EE10.menuIndex].unk0);
-    a0->unk4[0].actionUseIndex = a1->unk4[a1->unk0];
+    a0->actionParameters[0].actionUseIndex = a1->unk4[a1->unk0];
 }
 
 void PrintMonTactics(s32 a0, u8 *tacticIds, EntityInfo *mon, s32 windowId);
@@ -2906,7 +2906,7 @@ void ShowTacticsMenu(ActionContainer *a0)
     Entity *teamMon;
 
     SetTxtStruct(&sp);
-    teamMon = gDungeon->teamPokemon[a0->unk4[0].actionUseIndex];
+    teamMon = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
     monInfo = GetEntInfo(teamMon);
     menuIndex = 0;
     scrollFirstId = 0;

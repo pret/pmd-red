@@ -738,7 +738,7 @@ bool8 CleanseOrbAction(Entity * pokemon, Entity * target, Move *move, s32 param_
         for(i = 0; i < MAX_TEAM_MEMBERS; i++)
         {
             Entity *entity = gDungeon->teamPokemon[i];
-            if (EntityExists(entity)) {
+            if (EntityIsValid(entity)) {
                 Item *item = &GetEntInfo(entity)->heldItem;
                 if (ItemExists(item) && ItemSticky(item)) {
                     item->flags &= ~(ITEM_FLAG_STICKY);
@@ -983,7 +983,7 @@ bool8 RollcallOrbAction(Entity * pokemon, Entity *target, Move *move, s32 param_
     }
     for(index = 0; index < numPossibleTargets; index++){
         targetEntity = possibleTargets[index];
-        if (((EntityExists(targetEntity)) && (pokemon != targetEntity)) &&
+        if (((EntityIsValid(targetEntity)) && (pokemon != targetEntity)) &&
             (GetTreatmentBetweenMonsters(pokemon,targetEntity,TRUE,FALSE) == TREATMENT_TREAT_AS_ALLY)) {
             WarpTarget(pokemon,targetEntity,2,&pokemon->pos);
             foundTarget = TRUE;

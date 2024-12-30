@@ -11,7 +11,7 @@ s32 CalculateStatusTurns(Entity *target, s16 *turnRange, bool8 factorCurerSkills
   s32 numTurns;
 
   numTurns = DungeonRandRange(turnRange[0],turnRange[1]);
-  if (EntityExists(target) && (GetEntityType(target) == ENTITY_MONSTER) && (factorCurerSkills)) {
+  if (EntityIsValid(target) && (GetEntityType(target) == ENTITY_MONSTER) && (factorCurerSkills)) {
     if (IQSkillIsEnabled(target, IQ_SELF_CURER) && (numTurns != 0x7f)) {
       numTurns /= 2;
     }

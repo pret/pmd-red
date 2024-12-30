@@ -30,7 +30,7 @@ void sub_8075680(void)
     for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
     {
         entity = gDungeon->activePokemon[index];
-        if ((EntityExists(entity)) && (info = GetEntInfo(entity), !info->isTeamLeader)) {
+        if ((EntityIsValid(entity)) && (info = GetEntInfo(entity), !info->isTeamLeader)) {
             targetPos = &(info->targetPos);
 
             if (targetPos->x == 0 && targetPos->y == 0)
@@ -62,7 +62,7 @@ void sub_8075708(Entity *entity)
     EntityInfo *info;
 
     info = GetEntInfo(entity);
-    if (!EntityExists(entity)) {
+    if (!EntityIsValid(entity)) {
         return;
     }
     tile = GetTileAtEntitySafe(entity);
@@ -129,7 +129,7 @@ u32 sub_8075818(Entity *entity)
     u8 r1;
 
     entityInfo = GetEntInfo(entity);
-    if(EntityExists(entity))
+    if(EntityIsValid(entity))
     {
         tile = GetTileAtEntitySafe(entity);
         if(IQSkillIsEnabled(entity, IQ_SUPER_MOBILE))

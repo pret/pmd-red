@@ -47,7 +47,7 @@
 #define STATUS_CHARGING 11
 #define STATUS_ENRAGED 12
 
-// ReflectClassStatus statuses
+// Reflect class statuses
 #define STATUS_REFLECT 1
 #define STATUS_SAFEGUARD 2
 #define STATUS_LIGHT_SCREEN 3

@@ -262,7 +262,7 @@ void sub_8074094(Entity *entity)
 
     if (entity == NULL)
         return;
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     entityInfo = GetEntInfo(entity);
@@ -276,7 +276,7 @@ void sub_8074094(Entity *entity)
             entityInfo->turnsSinceWarpScarfActivation = 0;
             sub_80444F4(entity);
             UseAttack(NULL);
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
             WarpTarget(entity, entity, 0, NULL);
             if (entityInfo->isTeamLeader) {
@@ -337,7 +337,7 @@ void sub_8074094(Entity *entity)
             sub_805E804();
             sub_80444F4(entity);
             UseAttack(NULL);
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
             if (gDungeon->unk644.unk35 < 10)
                 gDungeon->unk644.unk35++;
@@ -366,7 +366,7 @@ void sub_8074094(Entity *entity)
         }
     }
 
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
     if (gDungeon->weather.weatherDamageCounter == 0) {
         if (GetApparentWeather(entity) == WEATHER_HAIL) {
@@ -379,7 +379,7 @@ void sub_8074094(Entity *entity)
                 DealDamageToEntity(entity, gHailSandstormDmgValue, 0x12, 0x220);
             }
         }
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || sub_8044B28())
             return;
     }
 
@@ -387,7 +387,7 @@ void sub_8074094(Entity *entity)
     rand = DungeonRandInt(100);
     if (AbilityIsActive(entity, ABILITY_SHED_SKIN) && rand < gShedSkinActivateChance && HasNegativeStatus(entity)) {
         UseAttack(NULL);
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || sub_8044B28())
             return;
         sub_8079F20(entity, entity, 1, 0);
     }
@@ -402,7 +402,7 @@ void sub_8074094(Entity *entity)
 // Statuses
     if (entityInfo->sleepClassStatus.status == STATUS_YAWNING) {
         UseAttack(NULL);
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || sub_8044B28())
             return;
         sub_80420B8(entity);
     }
@@ -410,26 +410,26 @@ void sub_8074094(Entity *entity)
     if (entityInfo->burnClassStatus.status == STATUS_BURN) {
         if (entityInfo->burnClassStatus.damageCountdown == 0 || --entityInfo->burnClassStatus.damageCountdown == 0) {
             UseAttack(NULL);
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
             entityInfo->burnClassStatus.damageCountdown = gBurnDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gBurnDmgValue, 1, 0x208);
         }
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || sub_8044B28())
             return;
     }
 
     if (entityInfo->burnClassStatus.status == STATUS_POISONED) {
         if (entityInfo->burnClassStatus.damageCountdown == 0 || --entityInfo->burnClassStatus.damageCountdown == 0) {
             UseAttack(NULL);
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
             entityInfo->burnClassStatus.damageCountdown = gPoisonDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gPoisonDmgValue, 3, 0x20A);
         }
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || sub_8044B28())
             return;
     }
     else if (entityInfo->burnClassStatus.status == STATUS_BADLY_POISONED) {
@@ -442,45 +442,45 @@ void sub_8074094(Entity *entity)
                 turns = BAD_POISON_DMG_TURN_VALUES_COUNT - 1;
 
             UseAttack(NULL);
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gBadPoisonDmgValuesByTurn[turns], 3, 0x20A);
         }
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || sub_8044B28())
             return;
     }
 
     if (entityInfo->frozenClassStatus.status == STATUS_CONSTRICTION) {
         if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
             UseAttack(NULL);
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gConstrictionDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             sub_8041C4C(entity, entityInfo->frozenClassStatus.unk4);
             DealDamageToEntity(entity, gConstrictionDmgValue, 2, 0x209);
         }
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || sub_8044B28())
             return;
     }
     else if (entityInfo->frozenClassStatus.status == STATUS_WRAPPED) {
         if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
             UseAttack(NULL);
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gWrapDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gWrapDmgValue, 5, 0x20B);
         }
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || sub_8044B28())
             return;
     }
     else if (entityInfo->frozenClassStatus.status == STATUS_INGRAIN) {
         if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
             UseAttack(NULL);
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gIngrainHealCountdown;
             HealTargetHP(entity, entity, gIngrainHealValue, 0, TRUE);
@@ -494,13 +494,13 @@ void sub_8074094(Entity *entity)
                 dmg = 1;
             entityInfo->curseClassStatus.damageCountdown = gCurseDmgCountdown;
             UseAttack(NULL);
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, dmg, 7, 0x20C);
         }
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || sub_8044B28())
             return;
     }
 
@@ -522,7 +522,7 @@ void sub_8074094(Entity *entity)
                     bool8 dmgUser = AbilityIsActive(entity, ABILITY_LIQUID_OOZE);
                     sub_80444F4(entity);
                     UseAttack(NULL);
-                    if (!EntityExists(entity) || !EntityExists(target) || sub_8044B28())
+                    if (!EntityIsValid(entity) || !EntityIsValid(target) || sub_8044B28())
                         return;
 
                     if (entityInfo->frozenClassStatus.status != STATUS_FROZEN) {
@@ -539,7 +539,7 @@ void sub_8074094(Entity *entity)
                 }
             }
         }
-        if (!EntityExists(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || sub_8044B28())
             return;
     }
 
@@ -547,7 +547,7 @@ void sub_8074094(Entity *entity)
         sub_80838EC(&entityInfo->perishSongTurns);
         if (entityInfo->perishSongTurns == 0) {
             UseAttack(NULL);
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], entity, 0);
             LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FEB30);
@@ -558,7 +558,7 @@ void sub_8074094(Entity *entity)
             else {
                 DealDamageToEntity(entity, 0x270F, 0xB, 0x20E);
             }
-            if (!EntityExists(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || sub_8044B28())
                 return;
         }
     }
@@ -574,14 +574,14 @@ void sub_8074094(Entity *entity)
                 InitPokemonMove(&bideMove, MOVE_BIDE_2);
                 bideMove.moveFlags |= MOVE_FLAG_LAST_USED;
                 TryUseChosenMove(entity, 0, 0, 0, 0, &bideMove);
-                if (!EntityExists(entity) || sub_8044B28())
+                if (!EntityIsValid(entity) || sub_8044B28())
                     return;
                 entityInfo->unkA0 = 0;
             }
         }
     }
 
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->bideClassStatus.status == STATUS_ENRAGED) {
@@ -594,7 +594,7 @@ void sub_8074094(Entity *entity)
         }
     }
 
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 }
 
@@ -606,7 +606,7 @@ void TickStatusHeal(Entity *entity)
 
     if (entity == NULL)
         return;
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     sub_805229C();
@@ -649,7 +649,7 @@ void TickStatusHeal(Entity *entity)
             EndSleepClassStatus(entity, entity, TRUE, TRUE);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->burnClassStatus.status != 0) {
@@ -658,7 +658,7 @@ void TickStatusHeal(Entity *entity)
             EndBurnClassStatus(entity, entity);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->frozenClassStatus.status != 0) {
@@ -667,7 +667,7 @@ void TickStatusHeal(Entity *entity)
             EndFrozenClassStatus(entity, entity);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->cringeClassStatus.status != 0) {
@@ -676,7 +676,7 @@ void TickStatusHeal(Entity *entity)
             EndCringeClassStatus(entity, entity);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->reflectClassStatus.status != 0) {
@@ -685,7 +685,7 @@ void TickStatusHeal(Entity *entity)
             EndReflectClassStatus(entity, entity);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->curseClassStatus.status != 0) {
@@ -694,7 +694,7 @@ void TickStatusHeal(Entity *entity)
             EndCurseClassStatus(entity, entity, 0);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->leechSeedClassStatus.status != 0) {
@@ -703,7 +703,7 @@ void TickStatusHeal(Entity *entity)
             EndLeechSeedClassStatus(entity, entity);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->sureShotClassStatus.status != 0) {
@@ -712,7 +712,7 @@ void TickStatusHeal(Entity *entity)
             SendMoveEndMessage(entity, entity);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->invisibleClassStatus.status != 0) {
@@ -721,7 +721,7 @@ void TickStatusHeal(Entity *entity)
             SendTransformEndMessage(entity, entity);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->blinkerClassStatus.status != 0) {
@@ -730,7 +730,7 @@ void TickStatusHeal(Entity *entity)
             SendEyesightEndMessage(entity, entity);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->muzzled.muzzled != 0) {
@@ -739,7 +739,7 @@ void TickStatusHeal(Entity *entity)
             SendMuzzledEndMessage(entity, entity);
         }
     }
-    if (!EntityExists(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || sub_8044B28())
         return;
 
     if (entityInfo->terrifiedTurns != 0) {
@@ -872,7 +872,7 @@ bool8 UseAttack(Entity *a0)
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *mon = gDungeon->activePokemon[i];
-        if (EntityExists(mon)) {
+        if (EntityIsValid(mon)) {
             EntityInfo *monInfo = GetEntInfo(mon);
             if (monInfo->numMoveTiles == 0) {
                 if (monInfo->waiting) {
@@ -914,7 +914,7 @@ bool8 UseAttack(Entity *a0)
             sub_803E46C(7);
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
                 Entity *mon = gDungeon->activePokemon[i];
-                if (EntityExists(mon)) {
+                if (EntityIsValid(mon)) {
                     EntityInfo *monInfo = GetEntInfo(mon);
                     Unk_Entity_x184 *strPtr = &monInfo->unk184[monInfo->notMoving];
 
@@ -942,7 +942,7 @@ bool8 UseAttack(Entity *a0)
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *mon = gDungeon->activePokemon[i];
-        if (EntityExists(mon)) {
+        if (EntityIsValid(mon)) {
             EntityInfo *monInfo = GetEntInfo(mon);
             monInfo->numMoveTiles = 0;
             nullsub_97(mon);
@@ -959,7 +959,7 @@ bool8 UseAttack(Entity *a0)
             EntityInfo *monInfo;
             Entity *mon = gDungeon->activePokemon[loop];
 
-            if (!EntityExists(mon))
+            if (!EntityIsValid(mon))
                 continue;
             if (sub_8044B28())
                 break;
@@ -983,14 +983,14 @@ bool8 UseAttack(Entity *a0)
                 else {
                     sub_8075708(mon);
                 }
-                if (!EntityExists(mon))
+                if (!EntityIsValid(mon))
                     continue;
                 if (sub_8044B28())
                     break;
 
                 sub_8043ED0(0);
                 sub_8074094(mon);
-                if (!EntityExists(mon))
+                if (!EntityIsValid(mon))
                     continue;
                 if (sub_8044B28())
                     break;
@@ -999,7 +999,7 @@ bool8 UseAttack(Entity *a0)
                 sub_8046D20();
                 sub_8075900(mon, gDungeon->forceMonsterHouse);
             }
-            if (!EntityExists(mon))
+            if (!EntityIsValid(mon))
                 continue;
             if (sub_8044B28())
                 break;

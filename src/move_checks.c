@@ -415,7 +415,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
                 for (i = 0; i < DUNGEON_MAX_WILD_POKEMON; i++)
                 {
                     Entity *target = gDungeon->wildPokemon[i];
-                    if (EntityExists(target) && target != pokemon && CanSeeTarget(pokemon, target))
+                    if (EntityIsValid(target) && target != pokemon && CanSeeTarget(pokemon, target))
                     {
                         if (GetEntInfo(target)->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
                         {
@@ -439,7 +439,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
                 for (i = 0; i < MAX_TEAM_MEMBERS; i++)
                 {
                     Entity *target = gDungeon->teamPokemon[i];
-                    if (EntityExists(target) && target != pokemon && CanSeeTarget(pokemon, target))
+                    if (EntityIsValid(target) && target != pokemon && CanSeeTarget(pokemon, target))
                     {
                         if (GetEntInfo(target)->offensiveStages[STAT_STAGE_ATK] >= MAX_STAT_STAGE)
                         {

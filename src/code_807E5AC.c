@@ -155,7 +155,7 @@ void sub_807E7FC(bool8 r0)
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *pokemon = gDungeon->activePokemon[i];
-        if (EntityExists(pokemon)) {
+        if (EntityIsValid(pokemon)) {
             sub_807E8F0(pokemon);
         }
     }
@@ -181,7 +181,7 @@ void sub_807E8F0(Entity *pokemon)
     u8 oldTypes[2];
     bool8 flag = FALSE;
 
-    if (EntityExists(pokemon)) {
+    if (EntityIsValid(pokemon)) {
         EntityInfo *info = GetEntInfo(pokemon);
         s32 previousApparentId = info->apparentID;
         oldTypes[0] = info->types[0];
@@ -329,7 +329,7 @@ void sub_807EC28(bool8 arg0)
 
         for (i = 0; i < DUNGEON_MAX_WILD_POKEMON; i++) {
             Entity *wildMon = gDungeon->wildPokemon[i];
-            if (EntityExists(wildMon)) {
+            if (EntityIsValid(wildMon)) {
                 EntityInfo *wildMonInfo = GetEntInfo(wildMon);
                 if (wildMonInfo->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER && sub_8070BC0(wildMon) && GetEntityRoom(leader) == GetEntityRoom(wildMon)) {
                     sameRoom = TRUE;
@@ -363,7 +363,7 @@ void sub_807EC28(bool8 arg0)
             var_28 = TRUE;
             for (i = 0; i < DUNGEON_MAX_WILD_POKEMON; i++) {
                 Entity *wildMon = gDungeon->wildPokemon[i];
-                if (EntityExists(wildMon)
+                if (EntityIsValid(wildMon)
                     && GetEntInfo(wildMon)->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER
                     && sub_8070BC0(wildMon)
                     && GetEntityRoom(leader) == GetEntityRoom(wildMon))
@@ -554,7 +554,7 @@ s32 sub_807F19C(bool8 arg0)
 
         for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
             Entity *mon = gDungeon->activePokemon[i];
-            if (EntityExists(mon)) {
+            if (EntityIsValid(mon)) {
                 EntityInfo *monInfo = GetEntInfo(mon);
                 Item *item = &monInfo->heldItem;
                 if (ItemExists(item) && CanSellItem(item->id)) {
@@ -595,7 +595,7 @@ void sub_807F33C(void)
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *entity = gDungeon->activePokemon[i];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             Item *item;
             EntityInfo *info = GetEntInfo(entity);
 
@@ -640,7 +640,7 @@ void sub_807F43C(Entity *target, Entity *attacker)
             s32 positionsCounter = 0;
             for (monId = 0; monId < DUNGEON_MAX_POKEMON; monId++) {
                 Entity *mon = gDungeon->activePokemon[monId];
-                if (EntityExists(mon) && target != mon && attacker != mon && CanSeeTarget(target, mon)) {
+                if (EntityIsValid(mon) && target != mon && attacker != mon && CanSeeTarget(target, mon)) {
                     if (var_3C == 0) {
                         if (GetTreatmentBetweenMonsters(target, mon, FALSE, TRUE) != 1)
                             continue;
@@ -758,7 +758,7 @@ NAKED void sub_807F43C(Entity *target, Entity *attacker)
 "	adds r0, r1\n"
 "	ldr r4, [r0]\n"
 "	adds r0, r4, 0\n"
-"	bl EntityExists\n"
+"	bl EntityIsValid\n"
 "	lsls r0, 24\n"
 "	adds r3, r7, 0x1\n"
 "	str r3, [sp, 0x104]\n"
@@ -1199,7 +1199,7 @@ NAKED void sub_807F43C(Entity *target, Entity *attacker)
 "	bl GetTile\n"
 "	ldr r6, [r0, 0x10]\n"
 "	adds r0, r6, 0\n"
-"	bl EntityExists\n"
+"	bl EntityIsValid\n"
 "	lsls r0, 24\n"
 "	cmp r0, 0\n"
 "	bne _0807F876\n"
@@ -1319,7 +1319,7 @@ NAKED void sub_807F43C(Entity *target, Entity *attacker)
 "	bl sub_806F370\n"
 "_0807F93C:\n"
 "	adds r0, r6, 0\n"
-"	bl EntityExists\n"
+"	bl EntityIsValid\n"
 "	lsls r0, 24\n"
 "	cmp r0, 0\n"
 "	beq _0807F954\n"
@@ -1345,7 +1345,7 @@ NAKED void sub_807F43C(Entity *target, Entity *attacker)
 "	movs r3, 0\n"
 "	bl sub_806F370\n"
 "	mov r0, r8\n"
-"	bl EntityExists\n"
+"	bl EntityIsValid\n"
 "	lsls r0, 24\n"
 "	cmp r0, 0\n"
 "	beq _0807F98E\n"
@@ -1379,7 +1379,7 @@ NAKED void sub_807F43C(Entity *target, Entity *attacker)
 
 void sub_807F9BC(Entity *entity)
 {
-    if (EntityExists(entity)) {
+    if (EntityIsValid(entity)) {
         EntityInfo *entInfo = GetEntInfo(entity);
         if (entInfo->isTeamLeader) {
             gDungeon->unk1 = 0;

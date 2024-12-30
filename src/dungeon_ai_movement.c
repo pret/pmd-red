@@ -106,7 +106,7 @@ bool8 CanTakeItem(Entity *pokemon)
     EntityInfo *pokemonInfo = GetEntInfo(pokemon);
     const Tile *mapTile;
     Entity *object;
-    if (!EntityExists(pokemon) || CheckVariousConditions(pokemon))
+    if (!EntityIsValid(pokemon) || CheckVariousConditions(pokemon))
     {
         return FALSE;
     }
@@ -169,7 +169,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
         for (i = 0; i < maxPossibleTargets; i++)
         {
             Entity *target = possibleTargets[i];
-            if (EntityExists(target) && GetEntInfo(target)->monsterBehavior == BEHAVIOR_FIXED_ENEMY)
+            if (EntityIsValid(target) && GetEntInfo(target)->monsterBehavior == BEHAVIOR_FIXED_ENEMY)
             {
                 if (gDungeon->decoyIsActive)
                 {
@@ -265,7 +265,7 @@ bool8 ChooseTargetPosition(Entity *pokemon)
             if (!pokemonInfo->isNotTeamMember)
             {
                 Entity *leader = GetLeaderIfVisible(pokemon);
-                if (EntityExists(leader))
+                if (EntityIsValid(leader))
                 {
                     pokemonInfo->aiTarget.aiObjective = AI_CHASE_TARGET;
                     pokemonInfo->aiTarget.aiTargetPos = leader->pos;
@@ -531,7 +531,7 @@ bool8 AvoidEnemies(Entity *pokemon)
     for (i = 0; i < numPossibleTargets; i++)
     {
         Entity *target = possibleTargets[i];
-        if (EntityExists(target) && CanSeeTarget(pokemon, target))
+        if (EntityIsValid(target) && CanSeeTarget(pokemon, target))
         {
             s32 distance;
             if (gDungeon->decoyIsActive && GetTreatmentBetweenMonsters(pokemon, target, FALSE, TRUE) != TREATMENT_TREAT_AS_ENEMY)

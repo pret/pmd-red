@@ -31,7 +31,7 @@ void sub_8045ACC(void)
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
   {
     entity = gDungeon->teamPokemon[index];
-    if (EntityExists(entity)) {
+    if (EntityIsValid(entity)) {
       gDungeon->activePokemon[pokeCount] = entity;
       pokeCount++;
     }
@@ -40,7 +40,7 @@ void sub_8045ACC(void)
   for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
   {
     entity = gDungeon->wildPokemon[index];
-    if (EntityExists(entity)) {
+    if (EntityIsValid(entity)) {
       gDungeon->activePokemon[pokeCount] = entity;
       pokeCount++;
     }

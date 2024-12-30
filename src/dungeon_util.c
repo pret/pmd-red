@@ -26,7 +26,7 @@ const DungeonPos gAdjacentTileOffsets[] = {
     {-1, 1}
 };
 
-bool8 EntityExists(Entity *entity)
+bool8 EntityIsValid(Entity *entity)
 {
     if (!entity)
     {
@@ -133,7 +133,7 @@ void sub_804522C(void) {
         for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
         {
             entity = gDungeon->activePokemon[index];
-            if(EntityExists(entity))
+            if(EntityIsValid(entity))
             {
                 if(entity == gDungeon->unk181e8.cameraTarget)
                 {
@@ -153,7 +153,7 @@ void sub_804522C(void) {
         for(index = 0; index < MAX_TEAM_MEMBERS; index++)
         {
             entity2 = gDungeon->teamPokemon[index];
-            if(EntityExists(entity2))
+            if(EntityIsValid(entity2))
             {
                 sub_806C51C(entity2);
             }
@@ -161,7 +161,7 @@ void sub_804522C(void) {
         for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
         {
             entity2 = gDungeon->wildPokemon[index];
-            if(EntityExists(entity2))
+            if(EntityIsValid(entity2))
             {
                 sub_806C51C(entity2);
             }

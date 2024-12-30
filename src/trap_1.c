@@ -41,7 +41,7 @@ void SetTrap(Tile *tile, u8 id)
     Entity *entity;
 
     entity = tile->object;
-    if (EntityExists(entity)) {
+    if (EntityIsValid(entity)) {
         if (GetEntityType(entity) == ENTITY_TRAP) {
             trapData = GetTrapData(entity);
             trapData->id = id;

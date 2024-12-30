@@ -163,7 +163,7 @@ void sub_8057588(Entity * pokemon, u8 param_2)
     s32 PPCounter;
     EntityInfo *entityInfo;
 
-    if (EntityExists(pokemon)) {
+    if (EntityIsValid(pokemon)) {
         entityInfo = GetEntInfo(pokemon);
         for(index = 0; index < MAX_MON_MOVES; index++)
         {
@@ -1345,7 +1345,7 @@ bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 param_4)
   bool8 flag;
 
   flag = FALSE;
-  if ((HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) && (EntityExists(pokemon))) {
+  if ((HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) && (EntityIsValid(pokemon))) {
     iVar2 = GetEntInfo(pokemon)->maxHPStat;
     if (iVar2 < 0) {
       iVar2 = iVar2 + 7;
@@ -1520,7 +1520,7 @@ bool8 AbsorbMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
     if (iVar4 < 1) {
       iVar4 = 1;
     }
-    if (EntityExists(pokemon)) {
+    if (EntityIsValid(pokemon)) {
       EntityInfo *entityInfo = GetEntInfo(pokemon);
       flag = TRUE;
       SetExpMultplier(entityInfo);
@@ -2388,7 +2388,7 @@ bool8 PayDayMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
   if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
     flag = TRUE;
     if (RollSecondaryEffect(pokemon, 0) != 0) {
-      if (!EntityExists(target)) {
+      if (!EntityIsValid(target)) {
         pos.x = 0;
         pos.y = 0;
         sub_8045C28(&item,ITEM_POKE,2);
@@ -2634,14 +2634,14 @@ _0805A8C2:
       if (sub_80571F0(entity,&stackMove) == 0) {
         sub_806F370(pokemon,entity,gSplashDmgValue,0,0,TYPE_NONE,sub_8057600(move, param_4),0,1,0);
       }
-      if ((sub_8044B28() == 0) && (EntityExists(pokemon))) {
+      if ((sub_8044B28() == 0) && (EntityIsValid(pokemon))) {
         sub_806F370(pokemon,pokemon,gSplashDmgValue,0,0,0,0x1fe,0,0,0);
-        if ((sub_8044B28() == 0) && (EntityExists(pokemon))) goto _0805A9FE;
+        if ((sub_8044B28() == 0) && (EntityIsValid(pokemon))) goto _0805A9FE;
       }
     }
     else {
 _0805A9FE:
-      if (EntityExists(target)) {
+      if (EntityIsValid(target)) {
         if ((sub_803F428(r9)) || (sub_803F428(&pos1))) {
           for(counter = 0; counter < 0xC; counter++)
           {
@@ -2657,7 +2657,7 @@ _0805A9FE:
   {
     sub_80694C0(target,pos1.x,pos1.y,0);
 _0805AA5E:
-    if (EntityExists(target)) {
+    if (EntityIsValid(target)) {
 #ifndef NOMATCHING
       register DungeonPos *pos asm("r1");
 #else
@@ -2806,7 +2806,7 @@ bool32 BeatUpMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param
 
     for (i = 0; i < numPossibleTargets; i++) {
         Entity *targetEntity = possibleTargets[i];
-        if (EntityExists(targetEntity)
+        if (EntityIsValid(targetEntity)
              && pokemon != targetEntity
              && GetTreatmentBetweenMonsters(pokemon,targetEntity,FALSE,FALSE) == TREATMENT_TREAT_AS_ALLY)
         {

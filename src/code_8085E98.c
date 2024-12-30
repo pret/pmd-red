@@ -116,7 +116,7 @@ bool8 sub_80860A8(u8 id)
     for(index = 0; index < MAX_TEAM_MEMBERS; index++)
     {
         entity = gDungeon->teamPokemon[index];
-        if (((EntityExists(entity)) && (info = GetEntInfo(entity), ((info->heldItem).flags & 1))) && ((info->heldItem).id == id)) return TRUE;
+        if (((EntityIsValid(entity)) && (info = GetEntInfo(entity), ((info->heldItem).flags & 1))) && ((info->heldItem).id == id)) return TRUE;
     }
     return FALSE;
 }

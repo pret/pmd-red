@@ -276,7 +276,7 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
     }
 
     for (i = 0; i < 4; i++) {
-        if (!EntityExists(gDungeon->teamPokemon[i]))
+        if (!EntityIsValid(gDungeon->teamPokemon[i]))
             break;
     }
     if (i == 4) {
@@ -305,7 +305,7 @@ void sub_806F910(void)
     for(index = 0, sVar6 = 0x40; index < MAX_TEAM_MEMBERS; index++)
     {
         entity = gDungeon->teamPokemon[index];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             size = GetBodySize(GetEntInfo(entity)->apparentID);
             entity->axObj.unk40_maybeAnimTimer = sVar6;
             GetEntInfo(entity)->unk167 = index;
@@ -507,7 +507,7 @@ bool8 sub_806FD18(Entity *param_1)
         return FALSE;
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-        if(!EntityExists(gDungeon->teamPokemon[i]))
+        if(!EntityIsValid(gDungeon->teamPokemon[i]))
             break;
     }
     if (i == MAX_TEAM_MEMBERS)

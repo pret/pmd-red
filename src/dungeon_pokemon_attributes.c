@@ -84,7 +84,7 @@ bool8 sub_80717A4(Entity *pokemon, u16 moveID)
 
 bool8 AbilityIsActive(Entity *pokemon, u8 ability)
 {
-    if (!EntityExists(pokemon))
+    if (!EntityIsValid(pokemon))
     {
         return FALSE;
     }
@@ -197,7 +197,7 @@ bool8 CanSeeTeammate(Entity * pokemon)
     for(memberIdx = 0; memberIdx < MAX_TEAM_MEMBERS; memberIdx++)
     {
       teamMember = gDungeon->teamPokemon[memberIdx];
-      if (EntityExists(pokemon) && (pokemon != teamMember) && (CanSeeTarget(pokemon,teamMember)))
+      if (EntityIsValid(pokemon) && (pokemon != teamMember) && (CanSeeTarget(pokemon,teamMember)))
       {
         return TRUE;
       }
@@ -241,7 +241,7 @@ static inline bool8 sub_8071A8C_sub(EntityInfo *pokemonInfo)
 bool8 sub_8071A8C(Entity *pokemon)
 {
     EntityInfo *pokemonInfo;
-    if(EntityExists(pokemon))
+    if(EntityIsValid(pokemon))
     {
         pokemonInfo = GetEntInfo(pokemon);
         if(pokemonInfo->monsterBehavior != BEHAVIOR_RESCUE_TARGET)

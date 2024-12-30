@@ -798,7 +798,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
         for(index = 0; index < MAX_TEAM_MEMBERS; index++)
         {
             entity = gDungeon->teamPokemon[index];
-            if (EntityExists(entity)) {
+            if (EntityIsValid(entity)) {
                 entityInfo = GetEntInfo(entity);
                 flag = CanMonLearnMove(moveID, entityInfo->id);
                 if (CheckVariousStatuses2(entity, FALSE)) {
@@ -814,7 +814,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
             }
         }
         entity2 = DrawFieldGiveItemMenu(0,1);
-        if (!EntityExists(entity2)) {
+        if (!EntityIsValid(entity2)) {
             return FALSE;
         }
         sub_804245C(param_1,item);
@@ -851,7 +851,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
       for(index = 0; index < MAX_TEAM_MEMBERS; index++)
       {
         entity = gDungeon->teamPokemon[index];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
           pEVar6 = GetEntInfo(entity);
           flag = TRUE;
           if(((MAX_TEAM_MEMBERS - 1) < pEVar6->teamIndex))
@@ -879,7 +879,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
         }
       }
       entity2 = DrawFieldGiveItemMenu(0,1);
-      if (!EntityExists(entity2)) {
+      if (!EntityIsValid(entity2)) {
         return FALSE;
       }
       sub_804245C(param_1,item);
@@ -908,7 +908,7 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
 
         for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
-            if (EntityExists(teamMon)) {
+            if (EntityIsValid(teamMon)) {
                 EntityInfo *teamMonInfo = GetEntInfo(teamMon);
                 bool8 flag = TRUE;
                 if (CheckVariousStatuses2(teamMon, FALSE)){
@@ -925,7 +925,7 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
         }
 
         entity2 = DrawFieldGiveItemMenu(0,1);
-        if (!EntityExists(entity2)) {
+        if (!EntityIsValid(entity2)) {
             return FALSE;
         }
 

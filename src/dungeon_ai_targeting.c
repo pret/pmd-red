@@ -404,7 +404,7 @@ bool8 ShouldAvoidFirstHit(Entity *pokemon, bool8 forceAvoid)
 
 bool8 ShouldMonsterRunAway(Entity *pokemon)
 {
-    if (!EntityExists(pokemon))
+    if (!EntityIsValid(pokemon))
     {
         return FALSE;
     }

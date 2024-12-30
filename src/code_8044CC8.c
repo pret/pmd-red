@@ -36,7 +36,7 @@ extern u8 GetFloorType(void);
 void sub_80460F8(DungeonPos *, Item *, u32);
 bool8 sub_80461C8(DungeonPos *, u32);
 
-Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2)
+Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2)
 {
   const Tile *tile;
   Item *item;
@@ -46,7 +46,7 @@ Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2)
     item = &gTeamInventoryRef->teamItems[param_2->actionUseIndex - 1];
   }
   else if (param_2->actionUseIndex == 0x80) {
-    tile = GetTile((param_2->lastItemThrowPosition).x,(param_2->lastItemThrowPosition).y);
+    tile = GetTile((param_2->itemPos).x,(param_2->itemPos).y);
     item = GetItemData(tile->object);
   }
   else {
@@ -67,9 +67,9 @@ Item * sub_8044CC8(Entity *param_1, unkStruct_8044CC8 *param_2)
 bool8 sub_8044D40(ActionContainer *param_1,s32 index)
 {
   Item *item;
-  unkStruct_8044CC8 *puVar1;
+  ActionParameter *puVar1;
 
-  puVar1 = &param_1->unk4[index];
+  puVar1 = &param_1->actionParameters[index];
   if ((u8)(puVar1->actionUseIndex - 1) < INVENTORY_SIZE) {
     item = &gTeamInventoryRef->teamItems[puVar1->actionUseIndex - 1];
     item->id = ITEM_NOTHING;
@@ -81,21 +81,25 @@ bool8 sub_8044D40(ActionContainer *param_1,s32 index)
     if (puVar1->actionUseIndex != 0x80) {
       return FALSE;
     }
-    sub_80461C8(&puVar1->lastItemThrowPosition,1);
+    sub_80461C8(&puVar1->itemPos,1);
   }
   return TRUE;
 }
 
 Item *sub_8044D90(Entity *entity, s32 index, s32 unused) {
     EntityInfo *info = GetEntInfo(entity);
-    register unkStruct_8044CC8 *puVar1 asm("r3") = &info->action.unk4[index];
+#ifdef NONMATCHING
+    ActionParameter *puVar1 = &info->action.actionParameters[index];
+#else
+    register ActionParameter *puVar1 asm("r3") = &info->action.actionParameters[index];
+#endif
     return sub_8044CC8(entity, puVar1);
 }
 
 Entity *sub_8044DA4(Entity *entity, s32 index)
 {
     EntityInfo *info = GetEntInfo(entity);
-    return gDungeon->teamPokemon[info->action.unk4[index].actionUseIndex];
+    return gDungeon->teamPokemon[info->action.actionParameters[index].actionUseIndex];
 }
 
 u16 sub_8044DC8(Item *param_1)
@@ -115,8 +119,8 @@ void sub_8044DF0(Entity *entity, s32 index, u32 unused)
 
   info = GetEntInfo(entity);
   item = sub_8044D90(entity,index,unused);
-  if ((info->action).unk4[0].actionUseIndex == 0x80) {
-    sub_80461C8(&(info->action).unk4[0].lastItemThrowPosition,1);
+  if ((info->action).actionParameters[0].actionUseIndex == 0x80) {
+    sub_80461C8(&(info->action).actionParameters[0].itemPos,1);
   }
   else {
     item->id = ITEM_NOTHING;
@@ -138,9 +142,9 @@ void sub_8044E24(Entity *entity,int index,u32 unused)
   info = GetEntInfo(entity);
   if (!IsHMItem(itemPtr->id)) {
     if (GetItemCategory(itemPtr->id) == CATEGORY_TMS_HMS) {
-      if (info->action.unk4[index].actionUseIndex == 0x80) {
+      if (info->action.actionParameters[index].actionUseIndex == 0x80) {
         item = *itemPtr;
-        pos = &info->action.unk4[index].lastItemThrowPosition;
+        pos = &info->action.actionParameters[index].itemPos;
         sub_80461C8(pos,1);
         item.quantity = itemPtr->id - 125;
         item.id = ITEM_TM_USED_TM;

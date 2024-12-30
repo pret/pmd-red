@@ -86,7 +86,7 @@ void sub_8071B48(void)
 
     if (dungeon->unk644.unk1E > 900) {
       entity2 = dungeon->unk17B34;
-      if ((EntityExists(entity2)) && (entity2->spawnGenID == dungeon->unk17B40)) {
+      if ((EntityIsValid(entity2)) && (entity2->spawnGenID == dungeon->unk17B40)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity2,0);
         entityPtr = entity2;
       }
@@ -99,7 +99,7 @@ void sub_8071B48(void)
       for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
       {
         entity = dungeon->wildPokemon[index];
-        if ((EntityExists(entity)) &&
+        if ((EntityIsValid(entity)) &&
            (tile = GetTile((entity->pos).x, (entity->pos).y),
            (tile->terrainType & 0x100) == 0)) {
           counter++;
@@ -187,7 +187,7 @@ void sub_8071DA4(Entity *entity)
 
   entityPtr = entity;
   if ((gDungeon->unkD != 0) && (gDungeon->unkD = 0, gDungeon->unk10 == 0)) {
-    if (!EntityExists(entityPtr)) {
+    if (!EntityIsValid(entityPtr)) {
       sub_80457DC(&EStack_f4);
       entityPtr = &EStack_f4;
     }
@@ -202,7 +202,7 @@ void sub_8071DA4(Entity *entity)
 
       if (target == NULL)
         continue;
-      if (!EntityExists(target))
+      if (!EntityIsValid(target))
         continue;
 
       info = GetEntInfo(target);
@@ -292,7 +292,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
     u32 atk[2];
     u32 def[2];
 
-    if (EntityExists(target)) {
+    if (EntityIsValid(target)) {
         flag = 0;
         info = GetEntInfo(target);
         if (info->isTeamLeader) {
@@ -431,7 +431,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
     s32 newLevel;
     LevelData leveldata;
 
-    if(EntityExists(target))
+    if(EntityIsValid(target))
     {
         flag = FALSE;
         info = GetEntInfo(target);
@@ -468,7 +468,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
     s32 level;
     s32 exp;
 
-    if(!EntityExists(target)) return FALSE;
+    if(!EntityIsValid(target)) return FALSE;
     info = GetEntInfo(target);
     id = info->id;
     exp = info->exp;
@@ -564,7 +564,7 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
     s32 oldLevel;
 
 
-    if(!EntityExists(target)) return FALSE;
+    if(!EntityIsValid(target)) return FALSE;
     info = GetEntInfo(target);
     id = info->id;
     exp = info->exp;

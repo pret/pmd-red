@@ -263,7 +263,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteU8(seri, 0xAA);
     WriteU8(seri, 0x55);
 
-    if (EntityExists(src)) {
+    if (EntityIsValid(src)) {
         info = GetEntInfo(src);
         WriteBytes(seri, &one, 1);
         WriteBytes(seri, &src->pos.x, 1);
@@ -1237,7 +1237,7 @@ void sub_8082B40(void)
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         entity = gDungeon->activePokemon[i];
-        if (EntityExists(entity)) {
+        if (EntityIsValid(entity)) {
             info = GetEntInfo(entity);
             entity->axObj.spriteFile = GetSpriteData(info->apparentID);
             sub_806CCB4(entity, sub_806CEBC(entity));

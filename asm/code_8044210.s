@@ -30,7 +30,7 @@ _08044592:
 	adds r0, r1
 	ldr r5, [r0]
 	adds r0, r5, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _080446A4
@@ -110,7 +110,7 @@ _08044644:
 	adds r0, r5, 0
 	bl TickStatusHeal
 	adds r0, r5, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _080446A4
@@ -181,7 +181,7 @@ _080446D4:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _08044760
@@ -273,7 +273,7 @@ _0804476A:
 	movs r0, 0
 	bl sub_8043ED0
 	adds r0, r4, 0
-	bl EntityExists
+	bl EntityIsValid
 _080447A0:
 	ldr r5, [r5, 0x4]
 	cmp r5, 0
@@ -295,7 +295,7 @@ _080447B8:
 	adds r0, r1
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _080447FC
@@ -309,7 +309,7 @@ _080447B8:
 	adds r0, r4, 0
 	bl sub_8074094
 	adds r0, r4, 0
-	bl EntityExists
+	bl EntityIsValid
 	lsls r0, 24
 	cmp r0, 0
 	beq _080447FC
