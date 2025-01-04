@@ -20,7 +20,7 @@ struct unkStruct_203B0CC_sub
     s32 unk24;
     u8 fill28[0x32 - 0x28];
     u32 unk34;
-    u32 unk38;
+    u32 effectID;
     u8 fill3C[0x4C - 0x3C];
     u32 unk4C;
     s32 unk50;

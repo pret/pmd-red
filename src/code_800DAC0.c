@@ -11,8 +11,8 @@ EWRAM_INIT struct unkStruct_203B0CC *gUnknown_203B0CC = NULL;
 
 struct unkStruct_800F18C
 {
-    u32 unk0;
-    u32 unk4;
+    s32 effectID;
+    u32 counter;
 };
 
 extern s32 sub_800E2C0(u32);
@@ -144,16 +144,16 @@ void sub_800DC14(s32 param_1)
     if (preload->unk34 == 3) {
       for (index2 = 0; index2 < 2; index2 = index2 + 1) {
         piVar3 = sub_800F18C(index2);
-        if (piVar3->unk0 == preload->unk38) {
-          piVar3->unk4--;
+        if (piVar3->effectID == preload->effectID) {
+          piVar3->counter--;
           break;
         }
       }
     }
     else {
       puVar4 = sub_800F18C(1);
-      puVar4->unk4  = 0;
-      puVar4->unk0  = 0xffffffff;
+      puVar4->counter  = 0;
+      puVar4->effectID  = -1;
     }
     sub_800DCA8(preload);
   }
