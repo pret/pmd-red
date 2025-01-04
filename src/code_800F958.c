@@ -1,9 +1,7 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_800F958.h"
-#include "code_8004AA0.h"
 #include "code_8009804.h"
-#include "code_800E9E4.h"
-#include "code_801EE10.h"
 #include "cpu.h"
 #include "dungeon_pokemon_sprites.h"
 #include "memory.h"
@@ -20,7 +18,51 @@ struct StatusGraphicsInfo
      /* 0x10 */ s32 graphicsCount;
      /* 0x14 */ s32 offsetIntoGraphic;
 };
-extern struct StatusGraphicsInfo gStatusGraphics[]; // 0x80CE79C
+
+#define TILE_SIZE_2BPP 32
+
+const struct StatusGraphicsInfo gStatusGraphics[] = {
+    {0, 0, 0,  0,  0,  0},
+    {1, 1, 0,  0,  14, TILE_SIZE_2BPP * 0  },  // sleepless
+    {2, 2, 1,  0,  7,  TILE_SIZE_2BPP * 14 },  // burned
+    {2, 2, 5,  0,  16, TILE_SIZE_2BPP * 42 },  // poisoned
+    {4, 4, 9,  0,  6,  TILE_SIZE_2BPP * 106},  // frozen
+    {4, 2, 25, 0,  4,  TILE_SIZE_2BPP * 202},  // confused
+    {2, 2, 33, 0,  9,  TILE_SIZE_2BPP * 234},  // whiffer
+    {2, 2, 37, 0,  8,  TILE_SIZE_2BPP * 270},  // taunted
+    {1, 2, 41, 0,  8,  TILE_SIZE_2BPP * 302},  // lowhp
+    {2, 2, 43, 0,  13, TILE_SIZE_2BPP * 318},  // shield
+    {2, 2, 47, 10, 10, TILE_SIZE_2BPP * 370},  // statdown
+    {2, 2, 51, 0,  13, TILE_SIZE_2BPP * 410},  // sword
+    {1, 1, 55, 0,  14, TILE_SIZE_2BPP * 462},  // blinker
+    {2, 2, 56, 0,  10, TILE_SIZE_2BPP * 476},  // cross-eyed
+    {1, 1, 60, 0,  14, TILE_SIZE_2BPP * 516},  // eyedrops
+    {2, 2, 61, 0,  8,  TILE_SIZE_2BPP * 530},  // muzzled
+    {2, 2, 65, 4,  10, TILE_SIZE_2BPP * 562},  // sleep
+};
+
+extern const u8 gStatusGraphics4bpp[16][3072];
+
+
+// static const u8 *gStatusGraphics4bpp[16][3072] = {
+//     INCBIN_U8("graphics/status/sleepless.4bpp"),
+//     INCBIN_U8("graphics/status/burned.4bpp"),
+//     INCBIN_U8("graphics/status/poisoned.4bpp"),
+//     INCBIN_U8("graphics/status/frozen.4bpp"),
+//     INCBIN_U8("graphics/status/confused.4bpp"),
+//     INCBIN_U8("graphics/status/whiffer.4bpp"),
+//     INCBIN_U8("graphics/status/taunted.4bpp"),
+//     INCBIN_U8("graphics/status/lowhp.4bpp"),
+//     INCBIN_U8("graphics/status/shield.4bpp"),
+//     INCBIN_U8("graphics/status/statdown.4bpp"),
+//     INCBIN_U8("graphics/status/sword.4bpp"),
+//     INCBIN_U8("graphics/status/blinker.4bpp"),
+//     INCBIN_U8("graphics/status/cross_eyed.4bpp"),
+//     INCBIN_U8("graphics/status/eyedrops.4bpp"),
+//     INCBIN_U8("graphics/status/muzzled.4bpp"),
+//     INCBIN_U8("graphics/status/sleep.4bpp")
+// };
+
 
 struct StatusSprite
 {
@@ -29,145 +71,12 @@ struct StatusSprite
 };
 extern struct StatusSprite gStatusSprites[8];
 
-struct unkStruct_800F18C
-{
-    s32 effectID;
-    u32 counter;
-};
-
-struct unkStruct_203B0D4
-{
-    struct unkStruct_800F18C unk0[2];
-};
-
-struct unkStruct_203B0D4 *gUnknown_203B0D4;
 extern SpriteOAM gUnknown_203B0DC;
 
-extern u8 *gStatusGraphics4bpp[]; // TODO use INCBIN_U8
 extern DungeonPos gUnknown_80D3564;
 
 void DrawStatusSprite(s16 param_1,s32 status,DungeonPos *pos,DungeonPos *posOffset,
                       DungeonPos *posScreen,u32 priority, u32 unused);
-
-extern u8 gUnknown_80CE77C[];
-extern u8 gUnknown_80CE788[];
-
-extern struct FileArchive gEffectFileArchive;
-
-void sub_800F034(void) {
-    s32 index;
-    if(gUnknown_203B0D4 == NULL)
-    {
-        gUnknown_203B0D4 = MemoryAlloc(sizeof(struct unkStruct_203B0D4), 0xB);
-        MemoryClear8(gUnknown_203B0D4, sizeof(struct unkStruct_203B0D4));
-    }
-    for(index = 0; index < 2; index++)
-    {
-        gUnknown_203B0D4->unk0[index].effectID = -1;
-        gUnknown_203B0D4->unk0[index].counter = 0;
-    }
-}
-
-void sub_800F078(void)
-{
-    if(gUnknown_203B0D4)
-    {
-        MemoryFree(gUnknown_203B0D4);
-        gUnknown_203B0D4 = NULL;
-    }
-}
-
-void sub_800F094(void)
-{
-    s32 index;
-    for(index = 0; index < 2; index++)
-    {
-        gUnknown_203B0D4->unk0[index].effectID = -1;
-        gUnknown_203B0D4->unk0[index].counter = 0;
-    }     
-}
-
-s32 sub_800F0C0(s32 animType, s32 effectID)
-{
-    if (animType == 3) {
-        if (gUnknown_203B0D4->unk0[0].effectID == effectID) return 0;
-    }
-    else {
-        if (gUnknown_203B0D4->unk0[1].effectID == effectID) return 1;
-    }
-    return -3;
-}
-
-
-s32 sub_800F0F4(s32 animType, s32 effectID)
-{
-    if (animType == 3) {
-        if (gUnknown_203B0D4->unk0[0].effectID == effectID) return -2;
-        if (gUnknown_203B0D4->unk0[0].counter == 0) return 0;
-    }
-    else {
-        if (gUnknown_203B0D4->unk0[1].effectID == effectID) return -2;
-        if (gUnknown_203B0D4->unk0[1].counter == 0) return 1;
-    }
-    return -1;
-}
-
-void sub_800F13C(s32 index, OpenedFile *file, unkStruct_80B9CC4 * r2) 
-{
-    if(gUnknown_203B0D4->unk0[index].counter == 0)
-        gUnknown_203B0D4->unk0[index].effectID = r2->effectId;
-}
-
-void sub_800F15C(s32 effectID)
-{
-    s32 index;
-
-    for(index = 0; index < 2; index++)
-    {
-        if(gUnknown_203B0D4->unk0[index].effectID == effectID)
-        {
-            gUnknown_203B0D4->unk0[index].counter++;
-            break;
-        }
-    }
-}
-
-struct unkStruct_800F18C *sub_800F18C(s32 index) 
-{
-   return &gUnknown_203B0D4->unk0[index]; 
-}
-
-s32 sub_800F19C(s32 index)
-{
-    if(gUnknown_203B0D4->unk0[index].counter == 0)
-        return 0;
-    else
-        return 1;
-}
-
-OpenedFile * sub_800F1C0(u32 animType, s32 effectID)
-{
-    u8 fileName [8];
-
-    switch(animType)
-    {
-        case 1:
-        case 2:
-        case 3:
-            sprintf(fileName,gUnknown_80CE77C,effectID); // efob
-            break;
-        case 4:
-            sprintf(fileName,gUnknown_80CE788,effectID); // efbg
-            break;
-
-    }
-    return Call_OpenFileAndGetFileDataPtr(fileName,&gEffectFileArchive);
-}
-
-void sub_800F204(OpenedFile *file)
-{
-    CloseFile(file); 
-}
 
 DungeonPokemonSprite *GetDungeonPokemonSprite(s32 id)
 {
@@ -299,7 +208,7 @@ void DrawStatusSprite(s16 param_1, s32 status, DungeonPos *pos, DungeonPos *posO
     s32 posX;
     u32 uVar7;
     s32 vramIndex;
-    struct StatusGraphicsInfo *ptr;
+    const struct StatusGraphicsInfo *ptr;
 
     sprite = gStatusSprites[status];
 
@@ -375,7 +284,7 @@ void LoadStatusGraphics(s32 graphicIndex, bool8 param_2)
     s32 graphicsCount;
 
 
-    struct StatusGraphicsInfo *graphic = &gStatusGraphics[graphicIndex];
+    const struct StatusGraphicsInfo *graphic = &gStatusGraphics[graphicIndex];
 
 
     offset = graphic->offsetIntoGraphic;
