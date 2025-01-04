@@ -378,7 +378,7 @@ void sub_803EDF0(void)
         SpriteSetMatrixNum(&gUnknown_202EDDC, 0);
         SpriteSetSize(&gUnknown_202EDDC, 1);
         SpriteSetTileNum(&gUnknown_202EDDC, 0x216);
-        SpriteSetPriority(&gUnknown_202EDDC, gDungeon->unk181e8.unk18208);
+        SpriteSetPriority(&gUnknown_202EDDC, gDungeon->unk181e8.priority);
         SpriteSetPalNum(&gUnknown_202EDDC, gUnknown_202EDE8.unk2);
 
         SpriteSetUnk6_0(&gUnknown_202EDDC, 0);
@@ -827,7 +827,7 @@ void sub_803F27C(bool8 a0)
     }
 
     strPtr->cameraTarget = NULL;
-    strPtr->unk18208 = 3;
+    strPtr->priority = 3;
     strPtr->unk1821A = 0;
     strPtr->unk18212 = 0;
     strPtr->unk1821B = 0;

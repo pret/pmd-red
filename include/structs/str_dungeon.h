@@ -79,7 +79,7 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     u32 unk181FC; // x14
     u32 unk18200; // x18
     u32 unk18204; // x1C
-    u8 unk18208; // x20
+    u8 priority; // x20
     /* 0x18209 */ u8 visibilityRange; // x21 Dungeon light level.
     /* 0x1820A */ bool8 blinded; // x22 Blacks out the screen when the player has the Blinker status.
     bool8 unk1820B; // x23

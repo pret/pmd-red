@@ -6,6 +6,7 @@
 #include "memory.h"
 #include "sprite.h"
 #include "structs/sprite_oam.h"
+#include <stdio.h>
 
 struct StatusGraphicsInfo
 {
@@ -29,10 +30,53 @@ extern u8 *gStatusGraphics4bpp[]; // TODO use INCBIN_U8
 extern DungeonPos gUnknown_80D3564;
 extern SpriteOAM gUnknown_203B0DC;
 
-extern DungeonPokemonSprite* GetDungeonPokemonSprite(s32 id);
-
 void DrawStatusSprite(s16 param_1,s32 status,DungeonPos *pos,DungeonPos *posOffset,
-                      DungeonPos *posScreen,u32 param_6, u32 unused);
+                      DungeonPos *posScreen,u32 priority, u32 unused);
+
+extern u8 gUnknown_80CE77C[];
+extern u8 gUnknown_80CE788[];
+
+extern struct FileArchive gEffectFileArchive;
+
+OpenedFile * sub_800F1C0(u32 animType, s32 effectID)
+{
+    u8 fileName [8];
+
+    switch(animType)
+    {
+        case 1:
+        case 2:
+        case 3:
+            sprintf(fileName,gUnknown_80CE77C,effectID); // efob
+            break;
+        case 4:
+            sprintf(fileName,gUnknown_80CE788,effectID); // efbg
+            break;
+
+    }
+    return Call_OpenFileAndGetFileDataPtr(fileName,&gEffectFileArchive);
+}
+
+void sub_800F204(OpenedFile *file)
+{
+    CloseFile(file); 
+}
+
+DungeonPokemonSprite *GetDungeonPokemonSprite(s32 id)
+{
+    s32 index;
+
+    for(index = 0; index < 22; index++)
+    {
+
+        if(gDungeonPokemonSprites->sprites[index].exists && gDungeonPokemonSprites->sprites[index].id == id)
+        {
+            return &gDungeonPokemonSprites->sprites[index];
+        }
+    }
+    
+    return NULL;
+}
 
 DungeonPokemonSprite *NewDungeonPokemonSprite(void){
     s32 index;
@@ -101,11 +145,9 @@ u32 StatusSymbolBitToIndex(u32 statusBit)
   u32 index;
   
   index = 0;
-  if (statusBit != 0) {
-    do {
-      statusBit = statusBit >> 1;
+  while (statusBit != 0) {
+      statusBit >>= 1;
       index++;
-    } while (statusBit != 0);
   }
   return index;
 }
@@ -135,15 +177,15 @@ void sub_800F2EC(DungeonPokemonSprite *sprite, s32 index, DungeonPos *screenPos)
             newFrame = statusSprite->frame - 1;
         }
         statusSprite->frame = newFrame;
-        if ((sprite->visible != '\0') && (statusSprite->status != 0)) {
+        if ((sprite->visible != 0) && (statusSprite->status != 0)) {
             DrawStatusSprite(sprite->species,StatusSymbolBitToIndex(statusSprite->status),&(sprite->pos),
-                             &sprite->statusOffsets[index],screenPos,sprite->unk11, sprite->id);
+                             &sprite->statusOffsets[index],screenPos,sprite->priority, sprite->id);
         }
     }
 }
 
 void DrawStatusSprite(s16 param_1, s32 status, DungeonPos *pos, DungeonPos *posOffset,
-                      DungeonPos *posScreen, u32 param_6, u32 unused)
+                      DungeonPos *posScreen, u32 priority, u32 unused)
 {
     struct StatusSprite sprite;
     s32 posY;
@@ -156,7 +198,7 @@ void DrawStatusSprite(s16 param_1, s32 status, DungeonPos *pos, DungeonPos *posO
 
     ptr = &gStatusGraphics[sprite.image];
     vramIndex = (ptr->vramIndex + 0x32b);
-    SpriteSetPriority(&gUnknown_203B0DC, param_6);
+    SpriteSetPriority(&gUnknown_203B0DC, priority);
 
     posX = (pos->x - ptr->width  * 4 - posScreen->x) + posOffset->x;
     posY = (pos->y - ptr->height * 4 - posScreen->y) + posOffset->y;
@@ -357,7 +399,7 @@ void sub_800F7D0(DungeonPos *r0)
     gDungeonPokemonSprites->frame++;
 }
 
-void AddPokemonDungeonSprite(s32 id, s16 species, DungeonPos *pos, u32 r3) {
+void AddPokemonDungeonSprite(s32 id, s16 species, DungeonPos *pos, u32 priority) {
     DungeonPokemonSprite *dSprite;
     DungeonPokemonSprite *newSprite;
     DungeonPos newPos;
@@ -381,7 +423,7 @@ void AddPokemonDungeonSprite(s32 id, s16 species, DungeonPos *pos, u32 r3) {
     newSprite->species = species_s32;
     newSprite->status = 0;
     newSprite->pos = *pos;
-    newSprite->unk11 = r3;
+    newSprite->priority = priority;
     newPos = gUnknown_80D3564;
     newSprite->statusOffsets[1] = newPos;
     newSprite->statusOffsets[0] = newPos;
@@ -406,7 +448,7 @@ void DeletePokemonDungeonSprite(s32 id)
 }
 
 void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos,
-                 DungeonPos *statusOffsets, u32 a3)
+                 DungeonPos *statusOffsets, u32 priority)
 {
     DungeonPokemonSprite *dSprite;
 
@@ -418,7 +460,7 @@ void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos,
         return;
 
     dSprite->pos = *pos;
-    dSprite->unk11 = a3;
+    dSprite->priority = priority;
     dSprite->statusOffsets[0] = statusOffsets[0];
     dSprite->statusOffsets[1] = statusOffsets[3];
 }
