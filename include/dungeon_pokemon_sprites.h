@@ -7,7 +7,7 @@
 typedef struct DungeonPokemonStatusSprite
 {
     /* 0x0 */ u32 status;
-    /* 0x4 */ u32 frame;
+    /* 0x4 */ s32 frame;
 } DungeonPokemonStatusSprite;
 
 // size: 0x40
