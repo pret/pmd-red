@@ -2,12 +2,9 @@
 
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
-#include "constants/global.h"
 #include "constants/iq_skill.h"
-#include "constants/move.h"
 #include "constants/status.h"
 #include "constants/targeting.h"
-#include "code_8045A00.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_attack.h"
 #include "dungeon_ai_item_weight.h"
@@ -17,20 +14,13 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "dungeon_message.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "items.h"
 #include "structs/str_position.h"
-#include "move_util.h"
-#include "moves.h"
 #include "position_util.h"
-#include "status.h"
-#include "status_checks_1.h"
-#include "string_format.h"
-
 
 #define NUM_POTENTIAL_ROCK_TARGETS 20
 #define GROUND_ITEM_TOOLBOX_INDEX 0x80
@@ -49,83 +39,6 @@ EWRAM_DATA bool8 gAIThrownItemDirectionIsUsed[NUM_DIRECTIONS] = {0};
 EWRAM_DATA u32 gAIThrownItemProbabilities[NUM_DIRECTIONS] = {0};
 
 extern TeamInventory *gTeamInventoryRef;
-
-bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move);
-extern void sub_80838EC(u8 *a);
-extern void MarkLastUsedMonMove(Entity *entity, Move *move);
-extern u8 *gUnknown_80FCF50[];
-
-void sub_807348C(void)
-{
-    int index;
-    s32 moveIndex;
-    Move *move;
-    EntityInfo *info;
-    Entity *pokemon;
-    Move chosenMove;
-    u8 r8;
-
-    for(index = 0; index < DUNGEON_MAX_POKEMON; index++) {
-        pokemon = gDungeon->activePokemon[index];
-        if (EntityIsValid(pokemon)) {
-            info = GetEntInfo(pokemon);
-            if (info->unk165 != 0xff) {
-                r8 = info->unk165;
-                if (CannotAttack(pokemon,TRUE)) {
-                    info->unk165 |= 0xff;
-                    info->unk164 |= 0xff;
-                }
-                else if (!IsSleeping(pokemon)) {
-                    info->unk165 |= 0xff;
-                    info->unk164 |= 0xff;
-                }
-                else if (info->muzzled.muzzled == TRUE) {
-                    info->unk165 |= 0xff;
-                    info->unk164 |= 0xff;
-                }
-                else {
-                    for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
-                    {
-                        move = &info->moves.moves[moveIndex];
-                        if (((MoveFlagExists(move)) &&
-                            ((info->isTeamLeader || (move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI)) && move->id == MOVE_SNORE)) &&
-                            (CanMonsterUseMove(pokemon,move,TRUE))) {
-                            chosenMove = *move;
-                            sub_80838EC(&move->PP);
-                            MarkLastUsedMonMove(pokemon,move);
-                            break;
-                        }
-                    }
-                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-                    LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FCF50);
-                    info->action.direction = r8 & DIRECTION_MASK;
-                    TryUseChosenMove(pokemon,0,ITEM_NOTHING,1,FALSE,&chosenMove);
-                    info->unk165 |= 0xff;
-                    info->unk164 |= 0xff;
-                }
-            }
-        }
-    }
-}
-
-void sub_807360C(void)
-{
-    s32 index;
-    Entity *entity;
-
-    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
-    {
-        entity = gDungeon->activePokemon[index];
-        if(EntityIsValid(entity))
-        {
-            if(GetEntInfo(entity)->unk152 != 0)
-            {
-               GetEntInfo(entity)->unk152 = 0;
-               UpdateFlashFireBoost(entity, entity);
-            }
-        }
-    }
-}
 
 void AIDecideUseItem(Entity *pokemon)
 {
