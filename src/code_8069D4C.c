@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/status.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "dungeon_ai_targeting.h"
@@ -31,10 +32,10 @@ void sub_80694C0(Entity *target,s32 x,int y,char param_4)
     tile = GetTileMut(x,y);
     info = GetEntInfo(target);
 
-    if ((u8)((info->frozenClassStatus).status - 3) < 2) {
+    if (info->frozenClassStatus.status == STATUS_WRAP || info->frozenClassStatus.status == STATUS_WRAPPED) {
         sub_8076CB4(info->unk9C);
     }
-    if ((((info->frozenClassStatus).status == 7) || ((info->frozenClassStatus).status == 5)) || ((info->frozenClassStatus).status == 2)) {
+    if (info->frozenClassStatus.status == STATUS_CONSTRICTION || info->frozenClassStatus.status == STATUS_INGRAIN || info->frozenClassStatus.status == STATUS_SHADOW_HOLD) {
         EndFrozenClassStatus(target,target);
     }
     if ((x != (target->pos).x) || (y != (target->pos).y)) {
@@ -89,7 +90,7 @@ void sub_80695EC(Entity *param_1,int x,int y)
     EntityInfo *info;
 
     info = GetEntInfo(param_1);
-    if ((u8)((info->frozenClassStatus).status - 3) < 2) {
+    if (info->frozenClassStatus.status == STATUS_WRAP || info->frozenClassStatus.status == STATUS_WRAPPED) {
         sub_8076CB4(info->unk9C);
     }
     if ((x != (param_1->pos).x) || (y != (param_1->pos).y)) {
