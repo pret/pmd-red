@@ -17,7 +17,7 @@ const u8 *GetCurrentMissionText(s16 index);
 bool8 IsMazeCompleted(s16 mazeIndex);
 
 bool8 sub_8096F50(WonderMail *mail);
-void sub_8097418(s16 index, bool32);
+void sub_8097418(s32 index, bool32);
 bool8 sub_8097504(s16 mazeIndex);
 const u8 *sub_80975DC(s16);
 

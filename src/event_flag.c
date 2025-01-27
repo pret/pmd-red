@@ -52,6 +52,124 @@ extern void sub_80973A8(u32, u32);
 // code_80972F4.h (read comment)
 extern bool8 RescueScenarioConquered(s16);
 
+void SetScriptVarValue(u8 *localVarBuf, s32 varId_, s32 val)
+{
+    s32 varID;
+    struct ScriptVarPtr sp;
+
+    varID = (s16)varId_;
+    GetScriptVarRef(&sp, localVarBuf, varID);
+
+    switch (sp.info->type) {
+        case 1: {
+            u8 bVar1 = 1 << sp.info->bitOffset;
+
+            if (val != 0)
+                *sp.ptr |= bVar1;
+            else
+                *sp.ptr = (bVar1 | *sp.ptr) ^ bVar1;
+            break;
+        }
+        case 2: {
+            *((s8 *)sp.ptr) = val;
+            break;
+        }
+        case 3: {
+            *((u8 *)sp.ptr) = val;
+            break;
+        }
+        case 7: {
+            *((bool8 *)sp.ptr) = val;
+            break;
+        }
+        case 4: {
+            *((s16 *)sp.ptr) = val;
+            break;
+        }
+        case 5: {
+            *((u16 *)sp.ptr) = val;
+            break;
+        }
+        case 6: {
+            *((s32 *)sp.ptr) = val;
+            break;
+        }
+        case 8: {
+            switch (varID) {
+                case 0x22: {
+                    gTeamInventoryRef->teamMoney = val;
+                    break;
+                }
+                case 0x23: {
+                    gTeamInventoryRef->teamSavings = val;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId_, s32 idx_, s32 val)
+{
+    s32 varID;
+    struct ScriptVarPtr sp;
+    s32 idx;
+
+    varID = (s16)varId_;
+    idx = (u16)idx_;
+    GetScriptVarRef(&sp, localVarBuf, varID);
+
+    switch (sp.info->type) {
+        case 1: {
+            s32 bitOffset = (u16)sp.info->bitOffset;
+            u16 flagNum = idx + bitOffset;
+            u8 *a = &sp.ptr[flagNum / 8];
+            u8 bVar1 = 1 << (flagNum % 8);
+            if (val != 0)
+                *a |= bVar1;
+            else
+                *a = (bVar1 | *a) ^ bVar1;
+            break;
+        }
+        case 2: {
+            ((s8 *)sp.ptr)[idx] = val;
+            break;
+        }
+        case 3: {
+            ((u8 *)sp.ptr)[idx] = val;
+            break;
+        }
+        case 7: {
+            ((bool8 *)sp.ptr)[idx] = val;
+            break;
+        }
+        case 4: {
+            ((s16 *)sp.ptr)[idx] = val;
+            break;
+        }
+        case 5: {
+            ((u16 *)sp.ptr)[idx] = val;
+            break;
+        }
+        case 6: {
+            ((s32 *)sp.ptr)[idx] = val;
+            break;
+        }
+        case 8: {
+            switch (varID) {
+                case 0x22: {
+                    gTeamInventoryRef->teamMoney = val;
+                    break;
+                }
+                case 0x23: {
+                    gTeamInventoryRef->teamSavings = val;
+                    break;
+                }
+            }
+        }
+    }
+}
+
 UNUSED u8 *GetScriptVarPointer(s16 varId)
 {
     struct ScriptVarPtr local_1c;
