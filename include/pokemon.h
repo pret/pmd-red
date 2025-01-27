@@ -105,6 +105,7 @@ void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level);
 const u8* DecompressMoveID(const u8* a1, u16* moveID);
 bool8 sub_808DA44(s32, u32);
+void sub_808D144(PokemonStruct1 *pokemon, struct unkStruct_808D144 *r1);
 
 static inline bool8 PokemonFlag1(PokemonStruct1 *mon)
 {

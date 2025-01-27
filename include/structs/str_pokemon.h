@@ -161,4 +161,19 @@ struct FaceData
     u8 *unk0[5];
 };
 
+struct unkStruct_808D144
+{
+    /* 0x0 */ u8 *name;
+    /* 0x4 */ s16 speciesNum;
+    /* 0x6 */ u8 itemID;
+    /* 0x8 */ struct DungeonLocation dungeonLocation;
+    /* 0xC */ u16 moveID[MAX_MON_MOVES];
+    /* 0x14 */ s16 pokeHP;
+    /* 0x16 */ u16 level;
+    /* 0x18 */ u16 IQ;
+    s16 offenseAtk[2]; // atk, spatt, def, spdef (not sure why s16/u16 and not u8)
+    s16 offenseDef[2]; 
+    /* 0x24 */ u32 currExp;
+};
+
 #endif // GUARD_STR_POKEMON_H

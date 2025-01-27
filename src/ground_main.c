@@ -1,4 +1,6 @@
 #include "global.h"
+#include "constants/dungeon.h"
+#include "constants/move_id.h"
 #include "structs/str_wonder_mail.h"
 #include "code_8009804.h"
 #include "code_800C9CC.h"
@@ -9,6 +11,8 @@
 #include "ground_main.h"
 #include "ground_map_2.h"
 #include "play_time.h"
+#include "pokemon.h"
+#include "text_util.h"
 
 // size: 0x88
 struct unkStruct_20398C8
@@ -74,7 +78,6 @@ extern void sub_8098CC8();
 extern void GeneratePelipperJobs();
 extern void sub_80961B4();
 extern void ClearAllItems_8091FB4();
-extern void ChooseKecleonShopInventory(u32);
 extern u8 sub_809C730();
 extern void sub_8095494(WonderMailSub *param_1, u8 index);
 
@@ -355,134 +358,72 @@ const char *sub_80990B8(void)
     }
 }
 
-// https://decomp.me/scratch/1QxJZ
+static inline bool8 sub_80990EC_sub(struct unkStruct_20398C8 *iVar1, u32 iVar2)
+{
+    bool8 flag = FALSE;
+    iVar1->unkB = 0;
 
-NAKED
+    if ((u16)(iVar2 - 0x25) < 3)
+        flag = TRUE;
+    else
+        flag = FALSE;
+    return flag;
+}
+
+extern void sub_80A8EC0(u8 *, u32);
+
 u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s16 param_2)
 {
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r7, r8\n"
-	"\tpush {r7}\n"
-	"\tsub sp, 0x80\n"
-	"\tadds r7, r0, 0\n"
-	"\tlsls r1, 16\n"
-	"\tasrs r4, r1, 16\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl GetDungeonInfo_80A2608\n"
-	"\tmov r8, r0\n"
-	"\tldrb r0, [r0, 0xC]\n"
-	"\tmovs r5, 0\n"
-	"\tstrb r0, [r7]\n"
-	"\tmovs r0, 0x1\n"
-	"\tstrb r0, [r7, 0x1]\n"
-	"\tstrb r5, [r7, 0xC]\n"
-	"\tadds r0, r4, 0\n"
-	"\tbl sub_80A2750\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r6, r0, 16\n"
-	"\tcmp r6, 0x2\n"
-	"\tbeq _080991C8\n"
-	"\tcmp r6, 0x2\n"
-	"\tbgt _08099126\n"
-	"\tcmp r6, 0x1\n"
-	"\tbeq _0809912C\n"
-	"\tb _080991CA\n"
-"_08099126:\n"
-	"\tcmp r6, 0x4\n"
-	"\tbeq _080991C4\n"
-	"\tb _080991CA\n"
-"_0809912C:\n"
-	"\tmovs r1, 0\n"
-	"\tstrb r5, [r7, 0xB]\n"
-	"\tadds r0, r4, 0\n"
-	"\tsubs r0, 0x25\n"
-	"\tlsls r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tcmp r0, 0x2\n"
-	"\tbhi _0809913E\n"
-	"\tmovs r1, 0x1\n"
-"_0809913E:\n"
-	"\tcmp r1, 0\n"
-	"\tbeq _080991CA\n"
-	"\tstrb r6, [r7, 0xC]\n"
-	"\tmov r0, sp\n"
-	"\tmovs r1, 0x5B\n"
-	"\tbl sub_80A8EC0\n"
-	"\tadd r4, sp, 0x18\n"
-	"\tadds r0, r4, 0\n"
-	"\tmov r1, sp\n"
-	"\tmovs r2, 0xA\n"
-	"\tbl BoundedCopyStringtoBuffer\n"
-	"\tadd r5, sp, 0x30\n"
-	"\tstr r4, [sp, 0x58]\n"
-	"\tadd r1, sp, 0x5C\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r0, 0x5E\n"
-	"\tstrh r0, [r1]\n"
-	"\tmov r0, sp\n"
-	"\tadds r0, 0x5E\n"
-	"\tstrb r2, [r0]\n"
-	"\tadd r0, sp, 0x60\n"
-	"\tmovs r1, 0x47\n"
-	"\tstrb r1, [r0]\n"
-	"\tstrb r2, [r0, 0x1]\n"
-	"\tadd r1, sp, 0x64\n"
-	"\tmovs r0, 0x82\n"
-	"\tlsls r0, 1\n"
-	"\tstrh r0, [r1]\n"
-	"\tmovs r0, 0xE0\n"
-	"\tstrh r0, [r1, 0x2]\n"
-	"\tmovs r0, 0xAC\n"
-	"\tstrh r0, [r1, 0x4]\n"
-	"\tmovs r0, 0xBE\n"
-	"\tstrh r0, [r1, 0x6]\n"
-	"\tadd r1, sp, 0x6C\n"
-	"\tmovs r0, 0x50\n"
-	"\tstrh r0, [r1]\n"
-	"\tmov r0, sp\n"
-	"\tadds r0, 0x6E\n"
-	"\tmovs r2, 0xF\n"
-	"\tstrh r2, [r0]\n"
-	"\tadd r0, sp, 0x70\n"
-	"\tstrh r6, [r0]\n"
-	"\tadds r0, 0x2\n"
-	"\tmovs r1, 0x19\n"
-	"\tstrh r1, [r0]\n"
-	"\tstrh r1, [r0, 0x2]\n"
-	"\tadds r0, 0x4\n"
-	"\tstrh r2, [r0]\n"
-	"\tstrh r2, [r0, 0x2]\n"
-	"\tldr r0, _080991C0\n"
-	"\tstr r0, [sp, 0x7C]\n"
-	"\tadd r1, sp, 0x58\n"
-	"\tadds r0, r5, 0\n"
-	"\tmovs r2, 0x28\n"
-	"\tbl memcpy\n"
-	"\tadds r0, r7, 0\n"
-	"\tadds r0, 0x18\n"
-	"\tadds r1, r5, 0\n"
-	"\tbl sub_808D144\n"
-	"\tb _080991CA\n"
-	"\t.align 2, 0\n"
-"_080991C0: .4byte 0x000061a8\n"
-"_080991C4:\n"
-	"\tstrb r5, [r7, 0xB]\n"
-	"\tb _080991CA\n"
-"_080991C8:\n"
-	"\tstrb r6, [r7, 0xB]\n"
-"_080991CA:\n"
-	"\tmovs r0, 0\n"
-	"\tstrb r0, [r7, 0x4]\n"
-	"\tstrb r0, [r7, 0xD]\n"
-	"\tmov r1, r8\n"
-	"\tldrb r0, [r1, 0x11]\n"
-	"\tadd sp, 0x80\n"
-	"\tpop {r3}\n"
-	"\tmov r8, r3\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
+    const DungeonInfo *iVar1;
+    u8 auStack_98 [24];
+    u8 nameBuffer [24];
+    u8 r5;
+    u8 dungeonIndex;
+
+    iVar1 = GetDungeonInfo_80A2608(param_2);
+    dungeonIndex = iVar1->dungeonIndex;
+    r5 = 0;
+    param_1->unk0 = dungeonIndex;
+    param_1->unk1 = 1;
+    param_1->unkC = r5;
+
+    switch(sub_80A2750(param_2))
+    {
+        case 1:
+            if (sub_80990EC_sub(param_1, param_2)) {
+                param_1->unkC = 1;
+                sub_80A8EC0(auStack_98, 0x5b);
+                BoundedCopyStringtoBuffer(nameBuffer, auStack_98, POKEMON_NAME_LENGTH);
+                {
+                    struct unkStruct_808D144 stack = 
+                        {
+                            .name = nameBuffer,
+                            .speciesNum = MONSTER_GENGAR,
+                            .itemID = ITEM_NOTHING,
+                            .dungeonLocation= {DUNGEON_RESCUE_TEAM_BASE, 0}, // DUNGEON_RESCUE_TEAM_BASE
+                            .moveID = {MOVE_SCRATCH, MOVE_LEER, MOVE_TAUNT, MOVE_QUICK_ATTACK},
+                            .pokeHP = 80,
+                            .level = 15,
+                            .IQ = 1,
+                            .offenseAtk = {25, 25},
+                            .offenseDef = {15, 15},
+                            .currExp = 25000,
+                        };
+
+                    sub_808D144(&param_1->unk18, &stack);
+                }
+            }
+            break; 
+        case 4:
+            param_1->unkB = 0;
+            break;
+        case 2:
+            param_1->unkB = 2;
+            break;
+    }
+    param_1->unk4 = 0;
+    param_1->unkD = 0;
+    return iVar1->unk11;
 }
 
 u8 sub_80991E0(struct unkStruct_20398C8 *param_1,short *param_2)
