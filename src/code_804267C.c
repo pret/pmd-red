@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800DAC0.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_803E46C.h"
@@ -30,6 +31,57 @@ extern bool8 sub_8042CC0(void);
 extern void sub_8042D7C(void);
 extern u8 GetFloorType(void);
 extern bool8 sub_8045888(Entity *);
+extern s32 sub_80416E0(PixelPos*, u32, bool8);
+u32 sub_8041764(unkStruct_80416E0 *, bool8);
+
+s32 sub_8042520(Entity *a0)
+{
+    s32 i;
+    s32 uVar4;
+    DungeonPos pos;
+    u32 dir;
+    s32 iVar8;
+    unkStruct_80416E0 local_58;
+    unkStruct_2039DB0 u203; // Unused
+    PixelPos local_2c;
+
+    if (sub_8045888(a0)) {
+        dir = GetEntInfo(a0)->action.direction;
+        pos.x = a0->pixelPos.x / 0x100;
+        pos.y = a0->pixelPos.y / 0x100;
+
+        iVar8 = (pos.y - gDungeon->unk181e8.cameraPixelPos.y) / 2;
+        local_58.unk0 = 357;
+        local_58.unk4 = 0;
+        local_58.dir = dir;
+        local_58.x = pos.x;
+        local_58.y = pos.y;
+        local_58.unk10 = 0;
+        local_58.unk12 = 0;
+        local_58.unk14 = -1;
+        local_58.unk18 = iVar8;
+        sub_8004E8C(&u203);
+        uVar4 = sub_8041764(&local_58, 0);
+
+        for (i = 0; i < 6; i++) {
+            sub_800E8AC(uVar4, &pos, 0, iVar8, 0);
+            sub_803E46C(66);
+            pos.x += gAdjacentTileOffsets[dir].x * 4;
+            pos.y += gAdjacentTileOffsets[dir].y * 4;
+            iVar8 = (pos.y - gDungeon->unk181e8.cameraPixelPos.y) / 2;
+        }
+
+        sub_800DBBC();
+        local_2c.x = pos.x * 0x100;
+        local_2c.y = pos.y * 0x100;
+        uVar4 = sub_80416E0(&local_2c, 416, TRUE);
+    }
+    else
+    {
+        uVar4 = -1;
+    }
+    return uVar4;
+}
 
 // This func plays the appropriate ascend/descend SFX for stairs depending on the direction
 void PlayStairsSound(void)

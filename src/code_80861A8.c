@@ -6,6 +6,7 @@
 #include "code_806CD90.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
+#include "structs/sprite_oam.h"
 
 extern const unkStruct_2039DB0 gUnknown_8107380;
 
@@ -80,6 +81,7 @@ s32 sub_80861F8(s16 param_1,Entity *param_2,bool32 param_3)
   s32 uStack_38;
   DungeonPos pos;
   unkStruct_80416E0 stack;
+  unkStruct_2039DB0 stack1C;
 
 #ifdef NONMATCHING
   s32 param_1_s32 = param_1;
@@ -102,7 +104,7 @@ s32 sub_80861F8(s16 param_1,Entity *param_2,bool32 param_3)
   }
   stack.unk0 = param_1_s32;
   stack.unk4 = 0;
-  stack.unk8 = (u32)(info->action).direction;
+  stack.dir = (u32)(info->action).direction;
   stack.x = (param_2->pixelPos).x / 256;
   stack.y = (param_2->pixelPos).y / 256;
 
@@ -110,7 +112,7 @@ s32 sub_80861F8(s16 param_1,Entity *param_2,bool32 param_3)
   stack.unk12 = pos.y;
   stack.unk14 = uStack_38;
   stack.unk18 = 0xffff;
-  stack.unk1C = gUnknown_8107380;
+  stack1C = gUnknown_8107380;
 
   uVar2 = sub_800E890(&stack);
   if (param_3_bool32 != '\0') {

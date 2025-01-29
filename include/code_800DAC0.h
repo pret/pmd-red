@@ -8,14 +8,13 @@ typedef struct unkStruct_80416E0
 {
     s32 unk0;
     s32 unk4;
-    s32 unk8;
+    s32 dir;
     u16 x;
     u16 y;
     u16 unk10;
     u16 unk12;
     s32 unk14;
     u32 unk18;
-    unkStruct_2039DB0 unk1C;
 } unkStruct_80416E0;
 
 u32 sub_800E890(unkStruct_80416E0 *);

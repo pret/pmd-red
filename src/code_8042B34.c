@@ -2,6 +2,7 @@
 #include "dungeon_util_1.h"
 #include "memory.h"
 #include "structs/rgb.h"
+#include "structs/sprite_oam.h"
 #include "structs/str_dungeon_8042F6C.h"
 #include "code_803E46C.h"
 #include "code_800E9E4.h"
@@ -80,6 +81,7 @@ extern const unkStruct_2039DB0 gUnknown_80F683C;
 void sub_8042B34(s32 a0, s32 a1, s32 a2)
 {
     unkStruct_80416E0 spStruct;
+    unkStruct_2039DB0 stack1C;
     s32 i;
     s32 r8 = 0;
     Entity *leader = xxx_call_GetLeader();
@@ -96,7 +98,7 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
 
         spStruct.unk0 = gUnknown_80F6624[sUnknown_203B414->unk0][r8].unk0;
         spStruct.unk4 = i;
-        spStruct.unk8 = 0;
+        spStruct.dir = 0;
         spStruct.x = leader->pixelPos.x / 256;
         spStruct.y = leader->pixelPos.y / 256;
 
@@ -109,7 +111,7 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
         spStruct.unk12 = sUnknown_203B414->unk8C[i].a2;
         spStruct.unk14 = 4;
         spStruct.unk18 = 0xFFFF;
-        spStruct.unk1C = gUnknown_80F683C;
+        stack1C = gUnknown_80F683C;
         sUnknown_203B414->unkC[i] = sub_800E890(&spStruct);
 
         r8++;
