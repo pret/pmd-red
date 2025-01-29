@@ -12,6 +12,7 @@
 #include "dungeon_message.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
+#include "items.h"
 #include "structs/str_dungeon.h"
 
 extern const u16 gUnknown_80F67DC[4];
@@ -32,7 +33,69 @@ extern void sub_8042D7C(void);
 extern u8 GetFloorType(void);
 extern bool8 sub_8045888(Entity *);
 extern s32 sub_80416E0(PixelPos*, u32, bool8);
-u32 sub_8041764(unkStruct_80416E0 *, bool8);
+extern u32 sub_8041764(unkStruct_80416E0 *, bool8);
+extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
+extern u32 sub_800E49C();
+extern void sub_800EF40(u8 r0, u8 r1);
+extern void sub_800EF64(void);
+
+void sub_8042390(Entity *entity, Item *item)
+{
+    s32 sVar1;
+    s32 counter;
+    u8 id;
+    u32 uVar6;
+    DungeonPos asStack_24[4];
+    DungeonPos local_14;
+
+    if (sub_8042768(entity)) {
+        id = !ItemSticky(item) ? item->id : ITEM_NOTHING;
+        sub_800EF40(id, 0);
+        sub_800EF64();
+        sub_803E708(4,0x42);
+        local_14.x = (entity->pixelPos).x / 256;
+        local_14.y = (entity->pixelPos).y / 256;
+
+        sVar1 = (local_14.y - gDungeon->unk181e8.cameraPixelPos.y) / 2 + 1;
+        sub_8005700(asStack_24,&entity->axObj);
+        uVar6 = sub_800E49C(id,&local_14,asStack_24,0,sVar1);
+        for (counter = 0; counter < 1000; counter++) {
+            sub_803E46C(0x42);
+            if (!sub_800E9A8(uVar6)) {
+                break;
+            }
+        }
+    }
+}
+
+void sub_804245C(Entity *entity, Item *item)
+{
+    s32 sVar1;
+    s32 counter;
+    u8 id;
+    u32 uVar6;
+    DungeonPos asStack_24[4];
+    DungeonPos local_14;
+
+    if (sub_8042768(entity)) {
+        id = !ItemSticky(item) ? item->id : ITEM_NOTHING;
+        sub_800EF64();
+        sub_803E708(4,0x42);
+        local_14.x = (entity->pixelPos).x / 256;
+        local_14.y = (entity->pixelPos).y / 256;
+
+        sVar1 = (local_14.y - gDungeon->unk181e8.cameraPixelPos.y) / 2 + 1;
+        sub_8005700(asStack_24,&entity->axObj);
+        uVar6 = sub_800E49C(id,&local_14,asStack_24,1,sVar1);
+        for (counter = 0; counter < 1000; counter++) {
+            sub_803E46C(0x42);
+            if (!sub_800E9A8(uVar6)) {
+                break;
+            }
+        }
+    }
+}
+
 
 s32 sub_8042520(Entity *a0)
 {
