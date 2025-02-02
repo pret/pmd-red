@@ -15,7 +15,7 @@ struct unkStruct_8113080
     u8 *text;
 };
 
-extern const u8 *gUnknown_811383C[];
+extern const u8 *gPtrDeathToMoveText[];
 extern const u8 *gUnknown_8113850[];
 extern const u8 *gUnknown_8113868[];
 extern const u8 *gUnknown_8113898[];
@@ -33,7 +33,7 @@ extern const u8 *gUnknown_81139B8[];
 extern const u8 *gUnknown_81139CC[];
 extern const u8 *gUnknown_8113870[];
 
-extern struct unkStruct_8113080 gUnknown_8113080[];
+extern struct unkStruct_8113080 gSpecialDeathText[];
 
 void ReadBellyBits(DataSerializer *r0, FixedPoint *dst)
 {
@@ -47,7 +47,7 @@ void WriteBellyBits(DataSerializer *r0, FixedPoint *src)
     WriteBits(r0, &src->unk2, 16);
 }
 
-static void sub_80944BC(s16 moveID, u8 *buffer)
+static void WriteDeathText(s16 moveID, u8 *buffer)
 {
     u16 moveID_u16;
     s32 moveID_s32 = moveID;
@@ -56,11 +56,11 @@ static void sub_80944BC(s16 moveID, u8 *buffer)
     if (moveID_s32 < 0x1F4) {
         // Needed this cast/variable to match
         moveID_u16 = moveID_s32;
-        sub_8092AA8(&move, moveID_u16);
-        sub_80928C0(gFormatBuffer_Items[0], &move, NULL);
-        FormatString(*gUnknown_811383C, buffer, buffer + 200, 0); // $m0's $i0
+        InitPokemonMoveOrNullObject(&move, moveID_u16);
+        GetMoveName(gFormatBuffer_Items[0], &move, NULL);
+        FormatString(*gPtrDeathToMoveText, buffer, buffer + 200, 0); // $m0's $i0
     } else {
-        strncpy(buffer, gUnknown_8113080[moveID - 0x1F4].text, 200);
+        strncpy(buffer, gSpecialDeathText[moveID - 0x1F4].text, 200);
     }
 }
 
@@ -72,7 +72,7 @@ static u8 sub_8094528(s16 moveID)
     }
     else
     {
-        return gUnknown_8113080[moveID  - 0x1F4].unk0;
+        return gSpecialDeathText[moveID  - 0x1F4].unk0;
     }
 }
 
@@ -102,7 +102,7 @@ void sub_8094558(u32 param_1,u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3)
     PrintFormattedStringOnWindow(x,y,buffer,param_1,0);
 
     y += 0xA;
-    sub_80944BC(param_3->moveID, buffer);
+    WriteDeathText(param_3->moveID, buffer);
 
     x = (0xb0 - sub_8008ED0(buffer)) / 2;
     PrintFormattedStringOnWindow(x,y,buffer,param_1,0);

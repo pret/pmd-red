@@ -967,7 +967,7 @@ void sub_806AED8(Moves *moves, s16 *maxHPStat, u8 *atk, u8 *def, s16 _species, s
             s32 moveIndex;
 
             for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++) {
-                sub_8092AA8(&moves->moves[moveIndex], structPtr->moves[moveIndex]);
+                InitPokemonMoveOrNullObject(&moves->moves[moveIndex], structPtr->moves[moveIndex]);
             }
             *maxHPStat = structPtr->unkC;
             for (moveCategory = 0; moveCategory < 2; moveCategory++) {
@@ -986,7 +986,7 @@ void sub_806AED8(Moves *moves, s16 *maxHPStat, u8 *atk, u8 *def, s16 _species, s
 
         sub_8072AC8(spMoves, species, level);
         for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++) {
-            sub_8092AA8(&moves->moves[moveIndex], spMoves[moveIndex]);
+            InitPokemonMoveOrNullObject(&moves->moves[moveIndex], spMoves[moveIndex]);
         }
         *maxHPStat = sub_806C444(species, level);
         for (moveCategory = 0; moveCategory < 2; moveCategory++) {
@@ -1008,7 +1008,7 @@ void sub_806AED8(Moves *moves, s16 *maxHPStat, u8 *atk, u8 *def, s16 _species, s
             structPtr->unk10[moveCategory] = sub_806C4D4(structPtr->species, structPtr->level, moveCategory);
         }
         for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++) {
-            sub_8092AA8(&moves->moves[moveIndex], structPtr->moves[moveIndex]);
+            InitPokemonMoveOrNullObject(&moves->moves[moveIndex], structPtr->moves[moveIndex]);
         }
 
         *maxHPStat = structPtr->unkC;

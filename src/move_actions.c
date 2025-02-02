@@ -410,7 +410,7 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
     if ((movePtr->moveFlags & MOVE_FLAG_EXISTS) != 0) {
       if ((movePtr->moveFlags & MOVE_FLAG_DISABLED) == 0) {
         if ((movePtr->moveFlags & MOVE_FLAG_LAST_USED) != 0) {
-          sub_80928C0(gFormatBuffer_Items[0],movePtr,0);
+          GetMoveName(gFormatBuffer_Items[0],movePtr,0);
           // $i0 was tormented
           TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCFBC);
           movePtr->moveFlags |= MOVE_FLAG_DISABLED;
@@ -428,7 +428,7 @@ bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
       InitPokemonMove(&struggleMove, MOVE_STRUGGLE);
       entityInfo->moves.struggleMoveFlags |= MOVE_FLAG_DISABLED;
       isTormented = TRUE;
-      sub_80928C0(gFormatBuffer_Items[0],&struggleMove,0);
+      GetMoveName(gFormatBuffer_Items[0],&struggleMove,0);
       // $i0 was tormented
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCFBC);
     }
@@ -1595,7 +1595,7 @@ bool32 SketchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4
     }
     else {
         InitPokemonMove(move, moveId);
-        sub_80928C0(gFormatBuffer_Items[0], move, 0);
+        GetMoveName(gFormatBuffer_Items[0], move, 0);
         move->moveFlags2 |= MOVE_FLAG2_UNK4;
         move->moveFlags2 |= MOVE_FLAG_REPLACE;
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FE38C);
@@ -1951,7 +1951,7 @@ bool8 ConversionMoveAction(Entity * pokemon,Entity * target,Move * move,u32 para
       info->types[0] = moveType;
       info->types[1] = TYPE_NONE;
       info->isColorChanged = TRUE;
-      sub_80928C0(gFormatBuffer_Items[0], moveStack[newIndex], NULL);
+      GetMoveName(gFormatBuffer_Items[0], moveStack[newIndex], NULL);
       TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE330);
       return TRUE;
     }
