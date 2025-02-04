@@ -77,7 +77,7 @@ void UnSetMove(s32 index, Move *moves);
 
 u8 sub_809287C(Move *move);
 void sub_80928A0(u8 *buffer, Move *move, const unkStruct_80928C0 *);
-void GetMoveName(u8 *buffer, Move *move, const unkStruct_80928C0 *);
+void BufferMoveName(u8 *buffer, Move *move, const unkStruct_80928C0 *);
 void InitPokemonMoveOrNullObject(Move *move, u16 moveID);
 void sub_8092C84(u8 *buffer, u16 moveID);
 s32 sub_8092DB8(Move *moves, s32 index);

@@ -57,7 +57,7 @@ static void WriteDeathText(s16 moveID, u8 *buffer)
         // Needed this cast/variable to match
         moveID_u16 = moveID_s32;
         InitPokemonMoveOrNullObject(&move, moveID_u16);
-        GetMoveName(gFormatBuffer_Items[0], &move, NULL);
+        BufferMoveName(gFormatBuffer_Items[0], &move, NULL);
         FormatString(*gPtrDeathToMoveText, buffer, buffer + 200, 0); // $m0's $i0
     } else {
         strncpy(buffer, gSpecialDeathText[moveID - 0x1F4].text, 200);

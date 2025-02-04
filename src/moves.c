@@ -70,10 +70,10 @@ void sub_80928A0(u8 *buffer, Move *move, const unkStruct_80928C0 *a2)
 {
     Move stack;
     CopyAndResetMove(&stack, move);
-    GetMoveName(buffer, &stack, a2);
+    BufferMoveName(buffer, &stack, a2);
 }
 
-void GetMoveName(u8 *buffer, Move *move, const unkStruct_80928C0 *param_3)
+void BufferMoveName(u8 *buffer, Move *move, const unkStruct_80928C0 *param_3)
 {
     u32 uVar2;
     u32 basePP;
@@ -241,7 +241,7 @@ void sub_8092C84(u8 *buffer, u16 moveID)
 {
     Move stack;
     InitPokemonMove(&stack, moveID);
-    GetMoveName(buffer, &stack, NULL);
+    BufferMoveName(buffer, &stack, NULL);
 }
 
 u8 *GetMoveUseText(u16 moveID)
@@ -1380,7 +1380,7 @@ s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, struct subStruct_203B240
     u8 buffer[800];
 
     sub_80073B8(a3);
-    GetMoveName(gFormatBuffer_Monsters[0], move, 0);
+    BufferMoveName(gFormatBuffer_Monsters[0], move, 0);
     PrintFormattedStringOnWindow(8 * x + 16, 0, gUnknown_8109930, a3, 0);
     y = 19;
     moveDescription = sMovesData[move->id].description;
