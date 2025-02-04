@@ -312,7 +312,7 @@ _080905A6:
 	ldr r0, _080905E0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_80928C0
+	bl BufferMoveName
 	mov r0, r8
 	cmp r0, 0
 	bne _080905E8

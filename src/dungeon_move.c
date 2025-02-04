@@ -1861,7 +1861,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
             }
             else {
                 if (!statusMoveMatch) {
-                    sub_80928C0(gFormatBuffer_Items[0],  currMove, NULL);
+                    BufferMoveName(gFormatBuffer_Items[0],  currMove, NULL);
                     LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80F93C8); // The move can't be used!
                     moveUsable = FALSE;
                 }
@@ -1876,7 +1876,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
                     Move assistMove = *currMove;
 
                     assistMove.id = sub_8057144(attacker);
-                    sub_80928C0(gFormatBuffer_Items[0], &assistMove, NULL);
+                    BufferMoveName(gFormatBuffer_Items[0], &assistMove, NULL);
                     LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FD2DC); // Assist:
                     moveWasUsed = TryUseChosenMove(attacker, var_34, itemId, arg_0, isLinkedMove, &assistMove);
                 }
@@ -1920,13 +1920,13 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
                 Move *movePtr;
 
                 movePtr = &mimicMove;
-                sub_8092AA8(&mimicMove, attackerInfo->mimicMoveIDs[i]);
+                InitPokemonMoveOrNullObject(&mimicMove, attackerInfo->mimicMoveIDs[i]);
                 if (MoveFlagExists(&mimicMove)) {
                     if (mimicMove.id == MOVE_ASSIST) {
                         assistMove = mimicMove;
                         assistMove.id = sub_8057144(attacker);
                         movePtr = &assistMove;
-                        sub_80928C0(gFormatBuffer_Items[0], &assistMove, NULL);
+                        BufferMoveName(gFormatBuffer_Items[0], &assistMove, NULL);
                         LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FD2DC); // Assist:
                     }
                     TryUseChosenMove(attacker, 0, itemId, arg_0, isLinkedMove, movePtr);
@@ -2067,7 +2067,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     }
 
     SetMessageArgument_2(gFormatBuffer_Monsters[0], GetEntInfo(attacker), 0);
-    sub_80928C0(gFormatBuffer_Items[0], move, NULL);
+    BufferMoveName(gFormatBuffer_Items[0], move, NULL);
     if (MoveMatchesBideClassStatus(attacker, move)) {
         msg = gUnknown_80FC72C; // mon loosed move
         GetEntInfo(attacker)->unkFF = 0;
@@ -2097,7 +2097,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
     else if (!moveUsable) {
         SetMessageArgument_2(gFormatBuffer_Monsters[0], GetEntInfo(attacker), 0);
         if (itemId == 0) {
-            sub_80928C0(gFormatBuffer_Items[0], move, NULL);
+            BufferMoveName(gFormatBuffer_Items[0], move, NULL);
             LogMessageByIdWithPopupCheckUser(attacker, msg);
             sub_803E708(0xA, 0x3F);
             LogMessageByIdWithPopupCheckUser(attacker, gUnknown_80FC6D0); // But the move couldn't be used!
@@ -2222,7 +2222,7 @@ bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, 
         if (r7) {
             SetMessageArgument_2(gFormatBuffer_Monsters[0], GetEntInfo(entity), 0);
             if (itemId == 0) {
-                sub_80928C0(gFormatBuffer_Items[0], move, NULL);
+                BufferMoveName(gFormatBuffer_Items[0], move, NULL);
             }
             else {
                 BufferItemName(gFormatBuffer_Items[0], itemId, NULL);

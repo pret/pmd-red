@@ -4587,8 +4587,8 @@ gUnknown_8113050: @ 8113050
 .string "the leader.\0"
 .align 2, 0
 
-.global gUnknown_8113080
-gUnknown_8113080: @ 8113080
+.global gSpecialDeathText
+gSpecialDeathText: @ 8113080
 @ replacing .incbin "baserom.gba", 0x113080, 0x7BC
 .byte 0x00, 0x00, 0x00, 0x00
 .4byte gUnknown_811380C
@@ -4936,14 +4936,14 @@ gUnknown_811380C: @ 811380C
 .string "was transformed into a friend.\0"
 .align 2, 0
 
-.global gUnknown_811382C
-gUnknown_811382C: @ 811382C
+.global DeathToMoveText
+DeathToMoveText: @ 811382C
 .string "{POKEMON_0}'s {MOVE_ITEM_0}.\0"
 .align 2, 0
 
-.global gUnknown_811383C
-gUnknown_811383C: @ 811383C
-.4byte gUnknown_811382C
+.global gPtrDeathToMoveText
+gPtrDeathToMoveText: @ 811383C
+.4byte DeathToMoveText
 
 .global PlaceText
 PlaceText:

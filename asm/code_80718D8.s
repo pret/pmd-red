@@ -133,7 +133,7 @@ _08072844:
 	add r0, sp, 0x60
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_80928C0
+	bl BufferMoveName
 	movs r3, 0x1
 _08072872:
 	adds r4, 0x8
@@ -325,7 +325,7 @@ _080729BA:
 	add r0, sp, 0x40
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_80928C0
+	bl BufferMoveName
 	movs r0, 0x1
 	mov r10, r0
 _080729EA:

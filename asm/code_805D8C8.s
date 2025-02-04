@@ -2259,7 +2259,7 @@ _08062C3C:
 	ldr r0, _08062CA0
 	adds r1, r5, 0
 	add r2, sp, 0x4
-	bl sub_80928C0
+	bl BufferMoveName
 	ldrb r1, [r4]
 	movs r0, 0x2
 	ands r0, r1
@@ -3493,7 +3493,7 @@ _0806361E:
 	ldr r0, _0806368C
 	adds r1, r5, 0
 	add r2, sp, 0x4
-	bl sub_80928C0
+	bl BufferMoveName
 	ldr r0, _08063690
 	mov r1, r9
 	bl sub_8013800
@@ -4094,7 +4094,7 @@ _08063ACC:
 	mov r0, r9
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_80928C0
+	bl BufferMoveName
 	mov r3, r8
 	cmp r3, 0
 	bne _08063AEC
@@ -4172,7 +4172,7 @@ sub_8063B54:
 	ldr r0, _08063BAC
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_80928C0
+	bl BufferMoveName
 	ldrb r0, [r4]
 	movs r1, 0x4
 	eors r0, r1
@@ -4216,7 +4216,7 @@ sub_8063BB4:
 	adds r1, r4, r7
 	adds r1, r6, r1
 	movs r2, 0
-	bl sub_80928C0
+	bl BufferMoveName
 	adds r4, r6, r4
 	ldr r0, _08063C7C
 	adds r2, r4, r0
@@ -4282,7 +4282,7 @@ _08063C42:
 	strb r0, [r1]
 	ldr r0, _08063C80
 	movs r2, 0
-	bl sub_80928C0
+	bl BufferMoveName
 _08063C5C:
 	adds r0, r6, r4
 	bl unk_FixLinkedMovesSetEnabled4
@@ -4390,7 +4390,7 @@ sub_8063CF0:
 	adds r1, r4, r1
 	adds r1, r6, r1
 	movs r2, 0
-	bl sub_80928C0
+	bl BufferMoveName
 	adds r4, r6, r4
 	ldr r3, _08063DA4
 	adds r2, r4, r3
@@ -4899,7 +4899,7 @@ _08064104:
 _08064130:
 	ldr r0, _08064144
 	movs r2, 0
-	bl sub_80928C0
+	bl BufferMoveName
 	cmp r4, 0
 	beq _0806414C
 	ldr r0, _08064148
