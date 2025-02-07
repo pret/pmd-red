@@ -15,7 +15,7 @@ extern const unkStruct_2039DB0 gUnknown_8107374;
 void sub_800EF64(void);
 void sub_800EE5C(s32);
 void sub_8085F44(s32);
-void sub_800E90C(DungeonPos *);
+bool8 sub_800E90C(DungeonPos *);
 void sub_8088EE8(void);
 void sub_8088848(void);
 void sub_808A718(void);

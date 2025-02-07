@@ -13,7 +13,9 @@ struct unkStruct_203B0CC_sub
     u32 unk0;
     s32 unk4;
     s32 unk8;
-    u8 fillc[0x18 - 0x0c];
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
     s32 unk18;
     unkStruct_800EAE4 unk1c;
     s32 unk20;
