@@ -1,11 +1,7 @@
 #ifndef GUARD_CODE_800E9A8_H
 #define GUARD_CODE_800E9A8_H
 
-typedef struct unkStruct_800EAE4
-{
-    s16 unk0;
-    s16 unk2;
-} unkStruct_800EAE4;
+#include "structs/str_position.h"
 
 struct unkStruct_203B0CC_sub
 {
@@ -17,7 +13,7 @@ struct unkStruct_203B0CC_sub
     s32 unk10;
     s32 unk14;
     s32 unk18;
-    unkStruct_800EAE4 unk1c;
+    DungeonPos unk1c;
     s32 unk20;
     s32 unk24;
     u8 fill28[0x32 - 0x28];
