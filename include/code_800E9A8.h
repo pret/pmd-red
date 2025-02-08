@@ -3,6 +3,13 @@
 
 #include "structs/str_position.h"
 
+struct unkStruct_203B0CC_sub_2
+{
+    u32 unk0;
+    u32 unk4;
+    u32 unk8;
+};
+
 struct unkStruct_203B0CC_sub
 {
     // size: 0xD0
@@ -12,11 +19,11 @@ struct unkStruct_203B0CC_sub
     s32 unkC;
     s32 unk10;
     s32 unk14;
-    s32 unk18;
+    DungeonPos unk18;
     DungeonPos unk1c;
     s32 unk20;
     s32 unk24;
-    u8 fill28[0x32 - 0x28];
+    struct unkStruct_203B0CC_sub_2 unk28;
     u32 unk34;
     u32 effectID;
     u8 fill3C[0x4C - 0x3C];

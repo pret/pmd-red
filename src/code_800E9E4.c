@@ -1,4 +1,5 @@
 #include "global.h"
+#include "structs/code_800E9E4.h"
 #include "code_800E9E4.h"
 #include "code_800E9A8.h"
 
@@ -9,44 +10,20 @@ s32 sub_800EC68(s32);
 
 struct unkStruct_203B0CC *gUnknown_203B0CC;
 
-typedef struct unkStruct_80B9C60
-{
-    s32 unk0;
-    s32 unk1;
-    s32 unk2;
-} unkStruct_80B9C60;
-
 extern unkStruct_80B9C60 gUnknown_80B9C60;
 
 extern s32 gUnknown_80B9C9C[8];
 extern s16 gUnknown_80CE73C[20];
 
-typedef struct unkStruct_80CE37C
-{
-    s16 unk0;
-    s16 unk2;
-} unkStruct_80CE37C;
 unkStruct_80CE37C gUnknown_80CE37C[1];
 
 extern unkStruct_80BDBC4 gUnknown_80BDBC4[430];
 extern unkStruct_80B9CC4 gUnknown_80B9CC4[448];
 
-typedef struct unkStruct_80C183C
-{
-    // size: 0xc
-    s16 unk0;
-    s16 unk2;
-    u8 fill4[0xc - 0x4];
-} unkStruct_80C183C;
 
 extern unkStruct_80C183C gUnknown_80C183C[4336];
 unkStruct_80C183C *sub_800ECD0(s32 param_1);
 
-typedef struct unkStruct_800EA44
-{
-    s16 unk0;
-    s16 unk2;
-} unkStruct_800EA44;
 
 u8 sub_800EA44(unkStruct_800EA44 param_1, s32 param_2)
 {
@@ -70,11 +47,6 @@ u8 sub_800EA44(unkStruct_800EA44 param_1, s32 param_2)
     return ret->unk10;
 }
 
-typedef struct unkStruct_800E208
-{
-    s32 unk00[7];
-    unkStruct_80B9C60 unk1c;
-} unkStruct_800E208;
 
 s32 sub_800E208(s32, unkStruct_800E208*);
 
@@ -101,14 +73,14 @@ s32 sub_800EA84(s32 *param_1)
     return sub_800E208(5, &stack[0]);
 }
 
-void sub_800EAE4(s32 param_1, s32 *param_2, DungeonPos *param_3)
+void sub_800EAE4(s32 param_1, DungeonPos *param_2, DungeonPos *param_3)
 {
     s32 idx = sub_800E2C0(param_1);
     if (idx != -1)
     {
         struct unkStruct_203B0CC_sub *a;
         a = &gUnknown_203B0CC->unk0[idx];
-        a->unk18 = param_2[0];
+        a->unk18 = *param_2;
         if (a->unk20 != -1)
         {
             a->unk1c = *param_3;
@@ -121,14 +93,14 @@ void sub_800EAE4(s32 param_1, s32 *param_2, DungeonPos *param_3)
     }
 }
 
-void sub_800EB24(s32 param_1, s32 *param_2, DungeonPos *param_3, s32 r5, s32 r4)
+void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 r5, s32 r4)
 {
     s32 idx = sub_800E2C0(param_1);
     if (idx != -1) {
         struct unkStruct_203B0CC_sub *curStruct;
         curStruct = &gUnknown_203B0CC->unk0[idx];
         if (curStruct->unkCC == 0) {
-            curStruct->unk18 = param_2[0];
+            curStruct->unk18 = *param_2;
         }
 
         if (curStruct->unk0 == 6) {
@@ -182,7 +154,7 @@ s32 sub_800EBC8(s32 *param_1)
     return sub_800E208(6, &stack[0]);
 }
 
-void sub_800EC28(u32 param_1, s32 *param_2, DungeonPos *param_3)
+void sub_800EC28(u32 param_1, DungeonPos *param_2, DungeonPos *param_3)
 {
     s32 idx;
     idx = sub_800E2C0(param_1);
@@ -190,7 +162,7 @@ void sub_800EC28(u32 param_1, s32 *param_2, DungeonPos *param_3)
     {
         struct unkStruct_203B0CC_sub *struct203B0CC;
         struct203B0CC = &gUnknown_203B0CC->unk0[idx];
-        struct203B0CC->unk18 = param_2[0];
+        struct203B0CC->unk18 = *param_2;
         if (struct203B0CC->unk20 != -1)
         {
             struct203B0CC->unk1c = *param_3;

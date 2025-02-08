@@ -45,12 +45,6 @@ extern void sub_800EE5C(s32);
 extern void sub_800EF64(void);
 extern void sub_800F15C(s32);
 
-struct Sub_UnkStruct_203B414 // Maybe DungeonPos?
-{
-    s16 a0;
-    s16 a2;
-};
-
 struct UnkStruct_203B414
 {
     s32 unk0;
@@ -58,7 +52,7 @@ struct UnkStruct_203B414
     s32 unk8;
     s32 unkC[16];
     s32 unk4C[16];
-    struct Sub_UnkStruct_203B414 unk8C[16];
+    struct DungeonPos unk8C[16];
 };
 
 EWRAM_INIT DungeonPos gUnknown_203B410 = {100, 100};
@@ -104,11 +98,11 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
 
         rnd = RandInt(2);
         sUnknown_203B414->unk4C[i] = (gUnknown_80F6624[sUnknown_203B414->unk0][r8].unk4 * 2) + rnd;
-        sUnknown_203B414->unk8C[i].a0 = RandInt(240) + 152;
-        sUnknown_203B414->unk8C[i].a2 = RandInt(8 + (i * 2)) - (((i - (i / 4 * 4)) * 40) - 24);
+        sUnknown_203B414->unk8C[i].x = RandInt(240) + 152;
+        sUnknown_203B414->unk8C[i].y = RandInt(8 + (i * 2)) - (((i - (i / 4 * 4)) * 40) - 24);
 
-        spStruct.unk10 = sUnknown_203B414->unk8C[i].a0;
-        spStruct.unk12 = sUnknown_203B414->unk8C[i].a2;
+        spStruct.unk10 = sUnknown_203B414->unk8C[i].x;
+        spStruct.unk12 = sUnknown_203B414->unk8C[i].y;
         spStruct.unk14 = 4;
         spStruct.unk18 = 0xFFFF;
         stack1C = gUnknown_80F683C;
@@ -134,13 +128,13 @@ bool8 sub_8042CC0(void)
     }
 
     for (i = 0; i < sUnknown_203B414->unk8; i++) {
-       sUnknown_203B414->unk8C[i].a0 -= sUnknown_203B414->unk4C[i];
-       if (sUnknown_203B414->unk8C[i].a0 <= -152) {
+       sUnknown_203B414->unk8C[i].x -= sUnknown_203B414->unk4C[i];
+       if (sUnknown_203B414->unk8C[i].x <= -152) {
             if (sUnknown_203B414->unk4 > 0) {
-                sUnknown_203B414->unk8C[i].a0 = 152;
+                sUnknown_203B414->unk8C[i].x = 152;
             }
             else {
-                sUnknown_203B414->unk8C[i].a0 = -152;
+                sUnknown_203B414->unk8C[i].x = -152;
             }
        }
        else {

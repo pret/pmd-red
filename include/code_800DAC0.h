@@ -3,6 +3,7 @@
 
 #include "structs/sprite_oam.h"
 #include "structs/str_position.h"
+#include "code_800E9A8.h"
 
 typedef struct unkStruct_80416E0
 {
@@ -25,6 +26,6 @@ void sub_800DAC0(u32);
 void sub_800DB7C(void);
 void sub_800DBBC(void);
 bool8 sub_800E90C(DungeonPos *);
-void sub_800E8AC(s32 a0, void *a1, void *a2, s32 a3, void *a4); // a2 could be DungeonPos
+void sub_800E8AC(s32 a0, DungeonPos *a1, DungeonPos *a2, s32 a3, struct unkStruct_203B0CC_sub_2 *a4);
 
 #endif // GUARD_CODE_800DAC0_H
