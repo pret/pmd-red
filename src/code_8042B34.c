@@ -575,7 +575,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             sub_80687AC();
         }
         else {
-            sub_8068768();
+            LoadDungeonActivePokemonSprites();
             sub_8082B40();
         }
         sub_806C42C();
