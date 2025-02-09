@@ -26,6 +26,7 @@ void sub_800DAC0(u32);
 void sub_800DB7C(void);
 void sub_800DBBC(void);
 bool8 sub_800E90C(DungeonPos *);
-void sub_800E8AC(s32 a0, DungeonPos *a1, DungeonPos *a2, s32 a3, struct unkStruct_203B0CC_sub_2 *a4);
+void sub_800E8AC(s32 a0, DungeonPos *a1, DungeonPos *a2, s32 a3, unkStruct_2039DB0 *a4);
+
 
 #endif // GUARD_CODE_800DAC0_H

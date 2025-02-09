@@ -55,7 +55,7 @@ u32 sub_800E890(unkStruct_80416E0 *param_1)
     return sub_800E208(7, (void*)&param_1->unk0);
 }
 
-void sub_800E8AC(s32 a0, DungeonPos *a1, DungeonPos *a2, s32 a3, struct unkStruct_203B0CC_sub_2 *a4)
+void sub_800E8AC(s32 a0, DungeonPos *a1, DungeonPos *a2, s32 a3, unkStruct_2039DB0 *a4)
 {
     s32 index;
     struct unkStruct_203B0CC_sub *ptr;
@@ -68,7 +68,7 @@ void sub_800E8AC(s32 a0, DungeonPos *a1, DungeonPos *a2, s32 a3, struct unkStruc
         if(a1 != NULL) ptr->unk18 = *a1;
         if(a2 != NULL) ptr->unk1c = *a2;
         if(a3 != 0xFFFF) ptr->unk24 = a3;
-        if(a4 != NULL) ptr->unk28 = *a4;
+        if(a4 != NULL) ptr->spriteMasks = *a4;
     }
 }
 

@@ -5,6 +5,9 @@
 
 void CloseAllSpriteFiles(void);
 
+void OpenDungeonPaletteFile(void);
+void CloseDungeonPaletteFile(void);
+void LoadDungeonPokemonSprites(void);
 void sub_8068768(void);
 void sub_80687AC(void);
 OpenedFile *GetSpriteData(s32 _species);

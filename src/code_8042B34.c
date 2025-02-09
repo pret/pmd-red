@@ -265,7 +265,6 @@ extern void sub_8040124(void);
 extern void sub_803E830(void);
 extern void sub_803E214(void);
 extern void nullsub_56(void);
-extern void sub_806863C(void);
 extern void sub_8040218(void);
 extern void sub_8047104(void);
 extern void sub_8068F28(void);
@@ -282,7 +281,6 @@ extern void sub_803E02C(void);
 extern void sub_80847D4(void);
 extern void sub_8043D60(void);
 extern void sub_806890C(void);
-extern void sub_8068614(void);
 extern void sub_80840A4(void);
 extern void sub_803E178(void);
 extern void sub_80848F0(void);
@@ -327,7 +325,6 @@ extern bool8 sub_8044B28(void);
 extern bool8 sub_8083C24(void);
 extern bool8 sub_8083C88(u8 param_1);
 extern bool8 sub_8043ED0(bool8);
-extern void LoadDungeonPokemonSprites(void);
 extern void ShowDungeonNameBanner(void);
 extern void sub_803EAF0(u32, u32);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
@@ -487,7 +484,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
     }
 
-    sub_8068614();
+    OpenDungeonPaletteFile();
     if (!r6 && gDungeon->unk644.unk34 == 1) {
         if (sub_8099394(&sp)) {
             unkStruct_203B480 *mailStr = GetMailatIndex(sp);
@@ -914,7 +911,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
     }
 
-    sub_806863C();
+    CloseDungeonPaletteFile();
     sub_803E214();
     nullsub_56();
     sub_8040218();

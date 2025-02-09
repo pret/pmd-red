@@ -99,7 +99,7 @@ void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 r5, 
     if (idx != -1) {
         struct unkStruct_203B0CC_sub *curStruct;
         curStruct = &gUnknown_203B0CC->unk0[idx];
-        if (curStruct->unkCC == 0) {
+        if (curStruct->unkCC[0] == 0 && curStruct->unkCC[1] == 0) {
             curStruct->unk18 = *param_2;
         }
 
