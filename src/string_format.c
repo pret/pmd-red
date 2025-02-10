@@ -16,21 +16,6 @@
 
 #include "data/code_80140DC.h"
 
-// TODO: move to menu_input
-extern UnkTextStruct2 gUnknown_80D47C8[4];
-
-void sub_80140B4(UnkTextStruct2 *a0)
-{
-    s32 i;
-
-    for(i = 0; i < 4; i++)
-    {
-        a0[i] = gUnknown_80D47C8[i];
-    }
-}
-
-// End of menu_input.c
-
 void sub_80140DC(void)
 {
     DungeonPos pos;

@@ -56,7 +56,6 @@ SECTIONS {
         src/event_flag.o(.text);
         asm/code_8002774.o(.text);
         src/code_8002774.o(.text);
-        asm/code_8002774_2.o(.text);
         src/memory.o(.text);
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
@@ -89,6 +88,7 @@ SECTIONS {
         src/code_800E9E4.o(.text);
         src/code_800ED38.o(.text);
         asm/code_800ED38.o(.text);
+        src/code_800F034.o(.text);
         src/code_800F958.o(.text);
         asm/code_800F990.o(.text);
         src/code_8010EF0.o(.text);
@@ -102,7 +102,6 @@ SECTIONS {
         src/quick_save_write.o(.text);
         src/code_8012A18.o(.text);
         src/menu_input.o(.text);
-        asm/code_80130A8.o(.text);
         src/string_format.o(.text);
         src/code_8015080.o(.text);
         asm/code_8015080.o(.text);
@@ -252,7 +251,6 @@ SECTIONS {
         asm/code_80718D8.o(.text);
         src/code_8072B78.o(.text);
         src/dungeon_ai_leader.o(.text);
-        asm/code_8072CF4.o(.text);
         src/dungeon_ai_items.o(.text);
         src/code_8073CF0.o(.text);
         src/code_8075708.o(.text);
@@ -317,7 +315,6 @@ SECTIONS {
         src/position_util.o(.text);
         asm/code_8098468.o(.text);
         src/ground_main.o(.text);
-        asm/code_8098BDC.o(.text);
         src/code_8099328.o(.text);
         src/code_8099360.o(.text);
         asm/code_8099360.o(.text);
@@ -429,6 +426,9 @@ SECTIONS {
         src/main.o(.rodata);
         src/reg_control.o(.rodata);
         data/data_80B9BB8_2.o(.rodata);
+        src/code_800F034.o(.rodata);
+        src/code_800F958.o(.rodata);
+        data/data_80CE77C.o(.rodata);
         src/debug.o(.rodata);
         src/save.o(.rodata);
         src/save_read.o(.rodata);

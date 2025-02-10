@@ -5,40 +5,6 @@
 
   	.text
 
-	thumb_func_start sub_8047158
-sub_8047158:
-	push {r4-r6,lr}
-	movs r3, 0
-	ldr r5, _0804718C
-	movs r6, 0x1
-	movs r4, 0x4
-_08047162:
-	lsls r1, r3, 2
-	ldr r0, [r5]
-	adds r2, r0, r1
-	ldrb r1, [r2]
-	adds r0, r6, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08047180
-	adds r0, r4, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08047180
-	movs r0, 0xFB
-	ands r0, r1
-	strb r0, [r2]
-_08047180:
-	adds r3, 0x1
-	cmp r3, 0x13
-	ble _08047162
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804718C: .4byte gTeamInventoryRef
-	thumb_func_end sub_8047158
-
 	thumb_func_start sub_8047190
 sub_8047190:
 	push {r4-r7,lr}

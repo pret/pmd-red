@@ -6,6 +6,7 @@
 #include "items.h"
 #include "code_800DAC0.h"
 
+#include "structs/sprite_oam.h"
 #include "structs/str_dungeon.h"
 
 extern const unkStruct_2039DB0 gUnknown_8107374;
@@ -14,7 +15,7 @@ extern const unkStruct_2039DB0 gUnknown_8107374;
 void sub_800EF64(void);
 void sub_800EE5C(s32);
 void sub_8085F44(s32);
-void sub_800E90C(DungeonPos *);
+bool8 sub_800E90C(DungeonPos *);
 void sub_8088EE8(void);
 void sub_8088848(void);
 void sub_808A718(void);
@@ -35,6 +36,7 @@ u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4,
 {
     u32 uVar1;
     unkStruct_80416E0 local_40;
+    unkStruct_2039DB0 stack1C;
 
     bool8 param_5_bool8;
     s32 param_1_s32 = param_1;
@@ -47,13 +49,13 @@ u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4,
     sub_803E46C(0x46);
     local_40.unk0 = param_1;
     local_40.unk4 = param_2;
-    local_40.unk8 = param_3;
+    local_40.dir = param_3;
     local_40.x = param_4->x;
     local_40.y = param_4->y;
     local_40.unk10 = 0;
     local_40.unk12 = 0;
     local_40.unk18 = 0xffff;
-    local_40.unk1C = gUnknown_8107374;
+    stack1C = gUnknown_8107374;
 
     uVar1 = sub_800E890(&local_40);
     if (param_5_bool8) {

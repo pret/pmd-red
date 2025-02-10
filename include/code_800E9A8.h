@@ -1,11 +1,9 @@
 #ifndef GUARD_CODE_800E9A8_H
 #define GUARD_CODE_800E9A8_H
 
-typedef struct unkStruct_800EAE4
-{
-    s16 unk0;
-    s16 unk2;
-} unkStruct_800EAE4;
+#include "structs/axdata.h"
+#include "structs/sprite_oam.h"
+#include "structs/str_position.h"
 
 struct unkStruct_203B0CC_sub
 {
@@ -13,22 +11,27 @@ struct unkStruct_203B0CC_sub
     u32 unk0;
     s32 unk4;
     s32 unk8;
-    u8 fillc[0x18 - 0x0c];
-    s32 unk18;
-    unkStruct_800EAE4 unk1c;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    DungeonPos unk18;
+    DungeonPos unk1c;
     s32 unk20;
     s32 unk24;
-    u8 fill28[0x32 - 0x28];
+    unkStruct_2039DB0 spriteMasks;
     u32 unk34;
-    u32 unk38;
-    u8 fill3C[0x4C - 0x3C];
+    u32 effectID;
+    s32 paletteNum;
+    u8 fill40[0x4C - 0x40];
     u32 unk4C;
     s32 unk50;
     u8 unk54;
-    u8 fill55[0xB8 - 0x55];
+    u8 fill55[0x58 - 0x55];
+    struct axObject unk58;
+    u8 fillA4[0xB8 - 0xA4];
     u32 unkB8;
     u8 fillBC[0xCC - 0xBC];
-    u32 unkCC;
+    s16 unkCC[2]; // NOTE: might be DungeonPos
 };
 
 struct unkStruct_203B0CC

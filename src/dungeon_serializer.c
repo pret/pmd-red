@@ -447,7 +447,7 @@ static void WriteDungeonVisibility(DataSerializer *seri)
 {
     WriteBlame(seri, sMisakiSan);
 
-    WriteU8(seri, gDungeon->unk181e8.unk18208);
+    WriteU8(seri, gDungeon->unk181e8.priority);
     WriteU8(seri, gDungeon->unk181e8.visibilityRange);
     WriteBool8(seri, gDungeon->unk181e8.blinded);
     WriteBool8(seri, gDungeon->unk181e8.unk1820B);
@@ -844,7 +844,7 @@ static void ReadDungeonVisibility(DataSerializer *seri)
     ReadBlame(seri, sMisakiSan);
 
     gDungeon->unk181e8.cameraTarget = NULL;
-    gDungeon->unk181e8.unk18208 = ReadU8(seri);
+    gDungeon->unk181e8.priority = ReadU8(seri);
     gDungeon->unk181e8.visibilityRange = ReadU8(seri);
     gDungeon->unk181e8.blinded = ReadBool8(seri);
     gDungeon->unk181e8.unk1820B = ReadBool8(seri);

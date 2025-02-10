@@ -2,6 +2,7 @@
 #include "dungeon_ai_leader.h"
 #include "charge_move.h"
 #include "code_803E46C.h"
+#include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
@@ -20,10 +21,15 @@
 #include "dungeon_leader.h"
 #include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
+#include "move_util.h"
+#include "moves.h"
 #include "pokemon_3.h"
 #include "pokemon.h"
+#include "status.h"
+#include "status_checks_1.h"
 #include "trap.h"
 #include "dungeon_config.h"
 
@@ -34,8 +40,10 @@ extern u8 gUnknown_202F32D;
 extern u8 gUnknown_203B434;
 
 extern u8 *gUnknown_80FA5B4[];
-extern u8 *gUnknown_80FE478[];
+extern u8 *gUnknown_80FCF50[];
+extern u8 *gUnknown_80FCF38[];
 extern u8 *gUnknown_80FD2CC[];
+extern u8 *gUnknown_80FE478[];
 extern u8 *gUnknown_80FE6D4[];
 
 void sub_8075BA4(Entity *param_1, u8 param_2);
@@ -79,6 +87,10 @@ bool8 sub_8044B84(void);
 extern void sub_8074094(Entity *);
 extern void sub_8071DA4(Entity *);
 u32 sub_8075818(Entity *entity);
+extern void MarkLastUsedMonMove(Entity *entity, Move *move);
+bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move);
+extern void sub_80838EC(u8 *a);
+
 
 bool8 TargetLeader(Entity *pokemon)
 {
@@ -369,3 +381,157 @@ bool8 sub_8072CF4(Entity *entity)
     }
     return FALSE;
 }
+
+
+void sub_80732F0(void)
+{
+    s32 index;
+    Entity *entity;
+    EntityInfo *info;
+    s32 moveIndex;
+    s32 counter;
+    s32 otherIndex;
+    u8 flag;
+    Move *move;
+    Move *move2;
+    Move moveStack;
+    u8 sl;
+
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++){
+        flag = FALSE;
+        entity = gDungeon->activePokemon[index];
+        if(EntityIsValid(entity)){
+            info = GetEntInfo(entity);
+            if(info->unk164 != 0xFF){
+                sl = info->unk164;
+                if(CannotAttack(entity, TRUE)){
+                    info->unk164 |= 0xFF;
+                }
+                else if(!IsSleeping(entity)){
+                    info->unk164 |= 0xFF;  
+                }
+                else if(info->muzzled.muzzled == TRUE){
+                    info->unk164 |= 0xFF;
+                }
+                else{
+                    moveIndex = DungeonRandInt(MAX_MON_MOVES);
+                    for(counter = 0; counter < MAX_MON_MOVES; counter++){
+                        move = &info->moves.moves[moveIndex];
+                        if(MoveFlagExists(move)){
+                            moveStack = *move;
+                            if(moveStack.id == MOVE_SKETCH)
+                                goto _increase;
+                            if(moveStack.id == MOVE_MIMIC)
+                                goto _increase;
+                            for(otherIndex = 0; otherIndex < MAX_MON_MOVES; otherIndex++){
+                                move2 = &info->moves.moves[otherIndex];
+                                if(MoveFlagExists(move2)){
+                                    if(!info->isTeamLeader){
+                                        if(!(move2->moveFlags & MOVE_FLAG_ENABLED_FOR_AI)) continue;
+                                    }
+                                    if(move2->id == MOVE_SLEEP_TALK){
+                                        if(CanMonsterUseMove(entity, move2, TRUE))
+                                        {
+                                             sub_80838EC(&move2->PP);
+                                             break;
+                                        }
+                                    }
+                                }
+                            }
+                            SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+                            LogMessageByIdWithPopupCheckUser(entity, *gUnknown_80FCF38); // {ARG_POKEMON_0} uttered its sleep talk!
+                            info->action.direction = sl & DIRECTION_MASK;
+                            TryUseChosenMove(entity, 0, ITEM_NOTHING, 1, FALSE, &moveStack);
+                            flag = TRUE;
+                            break;
+                           
+                        }
+                        else
+                        {
+_increase:
+                            moveIndex++;
+                            if(moveIndex == MAX_MON_MOVES)
+                                moveIndex = 0;
+                        }
+                    }
+                    info->unk164 |= 0xFF;
+                    if(flag)
+                        sub_80421C0(entity, 0x2E0);
+                }
+            }
+        }
+    }
+}
+
+void sub_807348C(void)
+{
+    int index;
+    s32 moveIndex;
+    Move *move;
+    EntityInfo *info;
+    Entity *pokemon;
+    Move chosenMove;
+    u8 r8;
+
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++) {
+        pokemon = gDungeon->activePokemon[index];
+        if (EntityIsValid(pokemon)) {
+            info = GetEntInfo(pokemon);
+            if (info->unk165 != 0xff) {
+                r8 = info->unk165;
+                if (CannotAttack(pokemon,TRUE)) {
+                    info->unk165 |= 0xff;
+                    info->unk164 |= 0xff;
+                }
+                else if (!IsSleeping(pokemon)) {
+                    info->unk165 |= 0xff;
+                    info->unk164 |= 0xff;
+                }
+                else if (info->muzzled.muzzled == TRUE) {
+                    info->unk165 |= 0xff;
+                    info->unk164 |= 0xff;
+                }
+                else {
+                    for(moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+                    {
+                        move = &info->moves.moves[moveIndex];
+                        if (((MoveFlagExists(move)) &&
+                            ((info->isTeamLeader || (move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI)) && move->id == MOVE_SNORE)) &&
+                            (CanMonsterUseMove(pokemon,move,TRUE))) {
+                            chosenMove = *move;
+                            sub_80838EC(&move->PP);
+                            MarkLastUsedMonMove(pokemon,move);
+                            break;
+                        }
+                    }
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
+                    LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FCF50);
+                    info->action.direction = r8 & DIRECTION_MASK;
+                    TryUseChosenMove(pokemon,0,ITEM_NOTHING,1,FALSE,&chosenMove);
+                    info->unk165 |= 0xff;
+                    info->unk164 |= 0xff;
+                }
+            }
+        }
+    }
+}
+
+void sub_807360C(void)
+{
+    s32 index;
+    Entity *entity;
+
+    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
+    {
+        entity = gDungeon->activePokemon[index];
+        if(EntityIsValid(entity))
+        {
+            if(GetEntInfo(entity)->unk152 != 0)
+            {
+               GetEntInfo(entity)->unk152 = 0;
+               UpdateFlashFireBoost(entity, entity);
+            }
+        }
+    }
+}
+

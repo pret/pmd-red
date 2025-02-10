@@ -1,8 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon.h"
-#include "exclusive_pokemon.h"
 #include "event_flag.h"
+#include "exclusive_pokemon.h"
 #include "code_80A26CC.h"
 #include "code_80972F4.h"
 
@@ -85,21 +85,21 @@ bool32 sub_8097384(s16 param_1)
     return val;
 }
 
-void sub_80973A8(s16 param_1,u32 param_2)
+void sub_80973A8(s32 param_1,u32 param_2)
 {
   s32 sVar1;
-  s32 param_1_s32 = param_1;
+  s32 param_1_s32 = (s16)param_1;
   u8 param_2_u32 = param_2;
   
   if (param_1_s32 != 0xd) {
     if (param_2_u32 != 0) {
       sVar1 = sub_80A26B8(param_1);
-      SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_ORDER_LIST,param_1_s32,0);
+      SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_ORDER_LIST,(u16)param_1_s32,0);
       if (sVar1 != -1) {
         SetScriptVarValue(NULL,DUNGEON_SELECT,sVar1);
       }
     }
-    SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_JOB_LIST,param_1_s32,param_2_u32);
+    SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_JOB_LIST,(u16)param_1_s32,param_2_u32);
   }
 }
 
@@ -120,12 +120,12 @@ bool32 RescueScenarioConquered(s16 param_1)
     return val;
 }
 
-void sub_8097418(s16 index,bool32 param_2)
+void sub_8097418(s32 index,bool32 param_2)
 {
-  int index_s32 = index;
+  int index_s32 = (s16)index;
   bool8 param_2_u8 = param_2;
   if (index_s32 != 0xd) {
-    if ((param_2_u8) && (SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_JOB_LIST,index_s32,0), index_s32 < 0x1f)) {
+    if ((param_2_u8) && (SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_JOB_LIST,(u16)index_s32,0), index_s32 < 0x1f)) {
       const MissionText *mt = &sStoryMissionText[index_s32];
       if (mt->unk4 != 0xFF) {
         sub_8097FA8(mt->unk4);
@@ -138,7 +138,7 @@ void sub_8097418(s16 index,bool32 param_2)
       }
       sub_8097FF8();
     }
-    SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_CONQUEST_LIST,index_s32,param_2_u8);
+    SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_CONQUEST_LIST,(u16)index_s32,param_2_u8);
   }
 }
 

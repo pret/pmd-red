@@ -1,4 +1,7 @@
 #include "global.h"
+#include "constants/dungeon.h"
+#include "constants/move_id.h"
+#include "structs/str_wonder_mail.h"
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
@@ -8,6 +11,26 @@
 #include "ground_main.h"
 #include "ground_map_2.h"
 #include "play_time.h"
+#include "pokemon.h"
+#include "text_util.h"
+
+// size: 0x88
+struct unkStruct_20398C8
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 fill5[0xB - 0x5];
+    u8 unkB;
+    u8 unkC;
+    u8 unkD;
+    WonderMailSub unk10;
+    PokemonStruct1 unk18;
+    u8 fill70[0x88 - 0x70];
+};
+
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA u32 gUnknown_20398AC = {0};
@@ -21,8 +44,10 @@ EWRAM_DATA u16 gUnknown_20398BC = {0};
 EWRAM_DATA u16 gUnknown_20398BE = {0};
 EWRAM_DATA u32 gUnknown_20398C0 = {0};
 EWRAM_DATA s16 gUnknown_20398C4 = {0};
+struct unkStruct_20398C8 gUnknown_20398C8;
+extern u8 gUnknown_2039950;
 
-EWRAM_INIT u8 gUnknown_203B49C = {0};
+EWRAM_INIT bool8 gUnknown_203B49C = {0};
 EWRAM_INIT u8 gUnknown_203B49D = {0};
 
 #include "data/ground_main.h"
@@ -53,8 +78,8 @@ extern void sub_8098CC8();
 extern void GeneratePelipperJobs();
 extern void sub_80961B4();
 extern void ClearAllItems_8091FB4();
-extern void ChooseKecleonShopInventory(u32);
 extern u8 sub_809C730();
+extern void sub_8095494(WonderMailSub *param_1, u8 index);
 
 void sub_8098BDC(void)
 {
@@ -203,7 +228,7 @@ bool8 GroundMainRescueRequest(s32 r0, s32 r1)
         }
         else
         {
-            if(gUnknown_203B49C == 0)
+            if(!gUnknown_203B49C)
             {
                 gUnknown_20398C4 = r5;
             }
@@ -331,4 +356,116 @@ const char *sub_80990B8(void)
     {
         return sub_8098FB4();
     }
+}
+
+static inline bool8 sub_80990EC_sub(struct unkStruct_20398C8 *iVar1, u32 iVar2)
+{
+    bool8 flag = FALSE;
+    iVar1->unkB = 0;
+
+    if ((u16)(iVar2 - 0x25) < 3)
+        flag = TRUE;
+    else
+        flag = FALSE;
+    return flag;
+}
+
+extern void sub_80A8EC0(u8 *, u32);
+
+u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s16 param_2)
+{
+    const DungeonInfo *iVar1;
+    u8 auStack_98 [24];
+    u8 nameBuffer [24];
+    u8 r5;
+    u8 dungeonIndex;
+
+    iVar1 = GetDungeonInfo_80A2608(param_2);
+    dungeonIndex = iVar1->dungeonIndex;
+    r5 = 0;
+    param_1->unk0 = dungeonIndex;
+    param_1->unk1 = 1;
+    param_1->unkC = r5;
+
+    switch(sub_80A2750(param_2))
+    {
+        case 1:
+            if (sub_80990EC_sub(param_1, param_2)) {
+                param_1->unkC = 1;
+                sub_80A8EC0(auStack_98, 0x5b);
+                BoundedCopyStringtoBuffer(nameBuffer, auStack_98, POKEMON_NAME_LENGTH);
+                {
+                    struct unkStruct_808D144 stack = 
+                        {
+                            .name = nameBuffer,
+                            .speciesNum = MONSTER_GENGAR,
+                            .itemID = ITEM_NOTHING,
+                            .dungeonLocation= {DUNGEON_RESCUE_TEAM_BASE, 0}, // DUNGEON_RESCUE_TEAM_BASE
+                            .moveID = {MOVE_SCRATCH, MOVE_LEER, MOVE_TAUNT, MOVE_QUICK_ATTACK},
+                            .pokeHP = 80,
+                            .level = 15,
+                            .IQ = 1,
+                            .offenseAtk = {25, 25},
+                            .offenseDef = {15, 15},
+                            .currExp = 25000,
+                        };
+
+                    sub_808D144(&param_1->unk18, &stack);
+                }
+            }
+            break; 
+        case 4:
+            param_1->unkB = 0;
+            break;
+        case 2:
+            param_1->unkB = 2;
+            break;
+    }
+    param_1->unk4 = 0;
+    param_1->unkD = 0;
+    return iVar1->unk11;
+}
+
+u8 sub_80991E0(struct unkStruct_20398C8 *param_1,short *param_2)
+{
+    *param_2 = gUnknown_20398C4;
+    if (gUnknown_203B49C) {
+        memcpy(param_1, &gUnknown_20398C8, sizeof(struct unkStruct_20398C8));
+        return TRUE;   
+    }
+    else {
+        return sub_80990EC(param_1,gUnknown_20398C4);
+    }
+}
+
+void sub_8099220(struct unkStruct_20398C8 *param_1, s16 param_2)
+{
+    s32 param_2_s32 = (s16)param_2;
+    if (param_1 != NULL) 
+    {
+        gUnknown_203B49C = TRUE;
+        gUnknown_203B49D = 0;
+        gUnknown_20398C4 = param_2_s32;
+        memcpy(&gUnknown_20398C8, param_1, sizeof(struct unkStruct_20398C8));
+    }
+    else {
+        gUnknown_203B49C = FALSE;
+        gUnknown_203B49D = 0;
+        gUnknown_20398C4 = -1;
+    }
+}
+
+void sub_809927C(u8 param_1)
+{
+    gUnknown_203B49C = 1;
+    gUnknown_203B49D = 1;
+    gUnknown_20398C4 = 0x50;
+    gUnknown_2039950 = param_1;
+    SetScriptVarValue(0x0,DUNGEON_ENTER,0x50);
+    SetScriptVarValue(0x0,DUNGEON_ENTER_INDEX,gUnknown_2039950);
+    sub_8095494(&gUnknown_20398C8.unk10,param_1);
+    gUnknown_20398C8.unkB = 1;
+    gUnknown_20398C8.unkC = 0;
+    gUnknown_20398C8.unk4 = 0;
+    gUnknown_20398C8.unkD = 0;
 }

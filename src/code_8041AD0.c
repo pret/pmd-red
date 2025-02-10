@@ -15,6 +15,7 @@
 #include "dungeon_util.h"
 #include "items.h"
 #include "structs/dungeon_entity.h"
+#include "structs/sprite_oam.h"
 #include "structs/str_dungeon.h"
 
 extern u32 gStatusSpriteMasks_SleepClassStatus[];
@@ -67,10 +68,11 @@ s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
   int counter;
   s32 ret;
   unkStruct_80416E0 auStack_10;
+  unkStruct_2039DB0 stack1C;
 
   auStack_10.unk0 = param_2;
   auStack_10.unk4 = 0;
-  auStack_10.unk8 = -1;
+  auStack_10.dir = -1;
 
   auStack_10.x = pos->x / 256;
   auStack_10.y = pos->y / 256;
@@ -79,7 +81,7 @@ s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
   auStack_10.unk10 = 0;
   auStack_10.unk12 = 0;
   auStack_10.unk18 = 0xffff;
-  sub_8004E8C(&auStack_10.unk1C);
+  sub_8004E8C(&stack1C);
   ret = sub_8041764(&auStack_10, FALSE);
   if (param_3) {
     counter = 0;

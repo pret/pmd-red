@@ -21,8 +21,6 @@
 #include "items.h"
 #include "structs/str_position.h"
 #include "position_util.h"
-#include "status.h"
-
 
 #define NUM_POTENTIAL_ROCK_TARGETS 20
 #define GROUND_ITEM_TOOLBOX_INDEX 0x80
@@ -41,25 +39,6 @@ EWRAM_DATA bool8 gAIThrownItemDirectionIsUsed[NUM_DIRECTIONS] = {0};
 EWRAM_DATA u32 gAIThrownItemProbabilities[NUM_DIRECTIONS] = {0};
 
 extern TeamInventory *gTeamInventoryRef;
-
-void sub_807360C(void)
-{
-    s32 index;
-    Entity *entity;
-
-    for(index = 0; index < DUNGEON_MAX_POKEMON; index++)
-    {
-        entity = gDungeon->activePokemon[index];
-        if(EntityIsValid(entity))
-        {
-            if(GetEntInfo(entity)->unk152 != 0)
-            {
-               GetEntInfo(entity)->unk152 = 0;
-               UpdateFlashFireBoost(entity, entity);
-            }
-        }
-    }
-}
 
 void AIDecideUseItem(Entity *pokemon)
 {

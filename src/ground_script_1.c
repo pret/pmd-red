@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_8002774.h"
 #include "debug.h"
 #include "event_flag.h"
 #include "ground_link.h"
@@ -15,6 +16,7 @@
 #include "math.h"
 #include "ground_main.h"
 #include "code_80A26CC.h"
+#include "wigglytuff_shop1.h"
 
 // Size: unknown
 typedef struct UnkAction3D
@@ -51,11 +53,6 @@ s16 GroundEffect_Add(s16 id, GroundEffectData*, s16 group, s8 sector);
 // Beware of the declarations without specified arguments, returning u32 or s32, these were quickly hacked in to get the code to compile and link
 // The return values are almost certainly NOT correct and will need to be rechecked when moving to header files
 char sub_8002984(s32, u8);
-s8 VecDirection8Radial(PixelPos*);
-s8 SizedDeltaDirection4(PixelPos*, PixelPos*, PixelPos*, PixelPos*);
-s8 SizedDeltaDirection8(PixelPos*, PixelPos*, PixelPos*, PixelPos*);
-
-bool8 sub_8021700(s32);
 bool8 sub_802FCF0(void);
 
 
@@ -204,7 +201,7 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0x03: {
-                if ((s8)sub_8021700(curCmd.arg1)) {
+                if (sub_8021700(curCmd.arg1)) {
                     action->scriptData.script.ptr = ResolveJump(action, -1);
                 } else {
                     sub_8098D80(curCmd.argShort);
@@ -628,7 +625,7 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0x2c: {
                 if (!(s8)sub_809A768()) break;
                 sub_80A87AC(0, 10);
-                if ((s8)GroundScriptCheckLockCondition(action, 0)) return 2;
+                if (GroundScriptCheckLockCondition(action, 0)) return 2;
                 break;
             }
             case 0x30: {
@@ -737,20 +734,20 @@ s32 ExecuteScriptCommand(Action *action) {
                 }
                 if (ret) {
                     sub_80A87AC(0, 10);
-                    if ((s8)GroundScriptCheckLockCondition(action, 0)) return 2;
+                    if (GroundScriptCheckLockCondition(action, 0)) return 2;
                 }
                 break;
             }
             case 0x39: {
                 if ((s8)sub_809AF6C(curCmd.argShort, curCmd.argPtr) && curCmd.argShort >= 0) {
                     sub_80A87AC(0, 10);
-                    if ((s8)GroundScriptCheckLockCondition(action, 0)) return 2;
+                    if (GroundScriptCheckLockCondition(action, 0)) return 2;
                 }
                 break;
             }
             case 0x3a: {
                 sub_809AFC8((u8)curCmd.argByte > 0, curCmd.arg1, (s16)curCmd.arg2, curCmd.argPtr);
-                if ((s8)GroundScriptCheckLockCondition(action, 1)) {
+                if (GroundScriptCheckLockCondition(action, 1)) {
                     sub_80A87AC(0, 11);
                     return 2;
                 }
@@ -1481,19 +1478,19 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xb3: {
-                if ((u8)JudgeVarWithImmediate(NULL, curCmd.argShort, curCmd.arg1, JUDGE_EQ)) {
+                if (JudgeVarWithImmediate(NULL, curCmd.argShort, curCmd.arg1, JUDGE_EQ)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xb4: {
-                if ((s8)JudgeVarWithImmediate(scriptData->localVars.buf, (s16)curCmd.arg1, curCmd.arg2, (u8)curCmd.argByte)) {
+                if (JudgeVarWithImmediate(scriptData->localVars.buf, (s16)curCmd.arg1, curCmd.arg2, (u8)curCmd.argByte)) {
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 }
                 break;
             }
             case 0xb5: {
-                if ((s8)JudgeVarWithVar(scriptData->localVars.buf, (s16)curCmd.arg1, (s16)curCmd.arg2, (u8)curCmd.argByte)) {
+                if (JudgeVarWithVar(scriptData->localVars.buf, (s16)curCmd.arg1, (s16)curCmd.arg2, (u8)curCmd.argByte)) {
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 }
                 break;
@@ -1505,43 +1502,43 @@ s32 ExecuteScriptCommand(Action *action) {
                 break;
             }
             case 0xb7: {
-                if ((s8)FlagJudge(GetScriptVarArraySum(scriptData->localVars.buf, (s16)curCmd.arg1), curCmd.arg2, (u8)curCmd.argByte)) {
+                if (FlagJudge(GetScriptVarArraySum(scriptData->localVars.buf, (s16)curCmd.arg1), curCmd.arg2, (u8)curCmd.argByte)) {
                     scriptData->script.ptr = FindLabel(action, curCmd.argShort);
                 }
                 break;
             }
             case 0xb8: {
-                if ((s8)ScriptVarScenarioBefore(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
+                if (ScriptVarScenarioBefore(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xb9: {
-                if ((s8)ScriptVarScenarioEqual(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
+                if (ScriptVarScenarioEqual(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xba: {
-                if ((s8)ScriptVarScenarioAfter(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
+                if (ScriptVarScenarioAfter(curCmd.argShort, curCmd.arg1, curCmd.arg2)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xbb: {
-                if ((s8)sub_80023E4(curCmd.argShort)) {
+                if (sub_80023E4(curCmd.argShort)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xbc: {
-                if ((s8)sub_8098100((u8)curCmd.argShort)) {
+                if (sub_8098100(curCmd.argShort)) {
                     scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
             }
             case 0xbd: {
-                if ((s8)sub_80026CC((s16)curCmd.arg1)) {
+                if (sub_80026CC(curCmd.arg1)) {
                         scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                 }
                 break;
@@ -1718,7 +1715,7 @@ s32 ExecuteScriptCommand(Action *action) {
                         break;
                     }
                 }
-                if ((s8)GroundScriptCheckLockCondition(action, 1)) {
+                if (GroundScriptCheckLockCondition(action, 1)) {
                     sub_80A87AC(0, 11);
                     return 2;
                 }
@@ -1754,7 +1751,7 @@ s32 ExecuteScriptCommand(Action *action) {
             }
             case 0xe5: {
                 scriptData->branchDiscriminant = curCmd.argShort;
-                if ((s8)GroundScriptLockCond(action, curCmd.argShort, curCmd.argByte)) {
+                if (GroundScriptLockCond(action, curCmd.argShort, curCmd.argByte)) {
                     return 2;
                 }
                 break;

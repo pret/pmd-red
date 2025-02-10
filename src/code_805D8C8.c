@@ -2,20 +2,132 @@
 #include "code_805D8C8.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_util.h"
+#include "dungeon_util_1.h"
+#include "file_system.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
+#include "text.h"
 
 // monster_sbin.s
 extern const struct FileArchive gMonsterFileArchive;
 // data_8106A4C.s
 extern const u8 gUnknown_8106EA0[]; // ax%03d
-
+extern const u8 gUnknown_8106E98[]; // palet
 // ???
 extern s32 sprintf(char *, const char *, ...);
+
+extern u32 gUnknown_202EDCC;
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
-void sub_8068768(void)
+extern s32 gUnknown_202F310;
+
+void sub_8068310(s32 size, u16 **param_2)
+{
+    s32 counter;
+    s32 index;
+    counter = 0;
+
+    for(index = 0; index < size; index++) {
+        if ((*param_2[index] & 0x8000) != 0) {
+            counter++;
+        }
+    }
+    gUnknown_202F310 = counter;
+}
+
+void sub_8068344(void)
+{   
+    if ((gUnknown_202EDCC & 8) != 0) {
+        UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+        SpriteOAM sprite = {0};
+
+        SpriteSetAffine1(&sprite, 0);
+        SpriteSetAffine2(&sprite, 0);
+        SpriteSetObjMode(&sprite, 0);
+        SpriteSetMosaic(&sprite, 0);
+        SpriteSetBpp(&sprite, 0);
+        SpriteSetShape(&sprite, 1);
+        SpriteSetMatrixNum(&sprite, 16);
+        SpriteSetSize(&sprite, 0);   
+        SpriteSetTileNum(&sprite, 0x3F0);
+        SpriteSetPriority(&sprite, 0);
+        SpriteSetPalNum(&sprite, 15);
+        SpriteSetY(&sprite, (ptr->unk2  * 8) + 0x8);
+        SpriteSetX(&sprite, (ptr->unk0  * 8) + 0x40);
+        AddSprite(&sprite,0x100,NULL,NULL);
+    }
+}
+
+void sub_80684C4(void)
+{   
+    if ((gUnknown_202EDCC & 8) != 0) {
+        UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+        SpriteOAM sprite = {0};
+
+        SpriteSetAffine1(&sprite, 0);
+        SpriteSetAffine2(&sprite, 0);
+        SpriteSetObjMode(&sprite, 0);
+        SpriteSetMosaic(&sprite, 0);
+        SpriteSetBpp(&sprite, 0);
+        SpriteSetShape(&sprite, 1);
+        SpriteSetSize(&sprite, 0);
+        SpriteSetTileNum(&sprite, 0x3F0);
+        SpriteSetPriority(&sprite, 0);
+        SpriteSetPalNum(&sprite, 15);
+        SpriteSetY(&sprite, (ptr->unk2  * 8) + 0x70);
+        SpriteSetX_MatrixNumSize0(&sprite, (ptr->unk0  * 8) + 0x40);
+        AddSprite(&sprite,0x100,NULL,NULL);
+    }
+}
+
+void OpenDungeonPaletteFile(void)
+{
+    gDungeon->paletFile = OpenFileAndGetFileDataPtr(gUnknown_8106E98, &gMonsterFileArchive);
+}
+
+void CloseDungeonPaletteFile(void)
+{
+    CloseFile(gDungeon->paletFile);
+}
+
+void LoadDungeonPokemonSprites(void)
+{
+    s32 index;
+
+    for(index = 0; index < 0x1A8; index++)
+    {
+        gDungeon->sprites[index] = NULL;
+    }
+    LoadPokemonSprite(MONSTER_DECOY, TRUE);
+    for(index = 0; index < gDungeon->unk37E4; index++)
+    {
+        LoadPokemonSprite(ExtractSpeciesIndex(&gDungeon->unk343C[index]), TRUE);
+    }
+    if(gDungeon->unk644.unk44)
+    {
+        LoadPokemonSprite(gDungeon->unk644.unk44, TRUE);
+    }
+    for(index = 0; index < 4; index++)
+    {
+        PokemonStruct2 *ptr = &gRecruitedPokemonRef->pokemon2[index];
+        if(PokemonFlag1Struct2(ptr))
+            if(PokemonFlag2Struct2(ptr))
+                LoadPokemonSprite(ptr->speciesNum, FALSE);
+    }
+    if(gDungeon->fixedRoomNumber == 0x31)
+    {
+        for(index = 0; index < MAX_TEAM_MEMBERS; index++)
+        {
+            PokemonStruct1 *ptr = &gRecruitedPokemonRef->team[index];
+            if(PokemonFlag1(ptr))
+                LoadPokemonSprite(ptr->speciesNum, TRUE);
+        }
+    }
+}
+
+void LoadDungeonActivePokemonSprites(void)
 {
     Entity *entity;
     s32 i;

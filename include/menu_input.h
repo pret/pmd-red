@@ -47,5 +47,9 @@ void sub_8013AA0(unkStructFor8013AA0 *);
 u32 sub_8013BBC(unkStructFor8013AA0 *);
 void sub_8013C68(unkStructFor8013AA0 *);
 void sub_8013D10(unkStructFor8013AA0 *);
+void sub_8013E54(void);
+void sub_8013F84(void);
+void sub_80140B4(UnkTextStruct2 *);
+
 
 #endif // GUARD_MENU_INPUT_H

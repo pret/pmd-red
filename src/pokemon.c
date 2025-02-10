@@ -5,6 +5,7 @@
 #include "code_8097DD0.h"
 #include "constants/colors.h"
 #include "constants/monster.h"
+#include "constants/tactic.h"
 #include "decompress.h"
 #include "file_system.h"
 #include "pokemon_3.h"
@@ -19,7 +20,7 @@ extern struct FileArchive gMonsterFileArchive;
 
 static EWRAM_DATA MonsterDataEntry *gMonsterParameters = {0};
 static EWRAM_DATA OpenedFile *gMonsterParametersFile = {0};
-EWRAM_DATA SpriteOAM gShadowSprites[3] = {0}; // TODO: make static once pokemon_2.s is ded
+static EWRAM_DATA SpriteOAM gShadowSprites[3] = {0};
 static EWRAM_DATA unkStruct_203B45C gRecruitedPokemon = {0};
 static EWRAM_DATA u16 gLevelCurrentPokeId = {0};
 UNUSED static EWRAM_DATA u16 unused_data[3] = {0};
@@ -117,7 +118,7 @@ void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
      pokemon.heldItem.id = ITEM_NOTHING;
      pokemon.heldItem.quantity = 0;
      pokemon.currExp = 0;
-     pokemon.tacticIndex = 0; // TACTIC_LETS_GO_TOGETHER
+     pokemon.tacticIndex = TACTIC_LETS_GO_TOGETHER;
      pokemon.dungeonLocation.floor = 0;
      sub_808E490(pokemon.moves, species);
 
@@ -164,7 +165,7 @@ void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, D
     pokemon->speciesNum = species;
     xxx_init_helditem_8090B08(&pokemon->heldItem, itemID);
     pokemon->currExp = 0;
-    pokemon->tacticIndex = 0;
+    pokemon->tacticIndex = TACTIC_LETS_GO_TOGETHER;
     pokemon->IQ = 1;
     pokemon->dungeonLocation = *location;
     pokemon->unkC[0].level = 0;
@@ -211,25 +212,11 @@ void sub_808D0D8(PokemonStruct1 *pokemon)
      pokemon->offense.def[0] = GetBaseDefensiveStat(pokemon->speciesNum, 0);
      pokemon->offense.def[1] = GetBaseDefensiveStat(pokemon->speciesNum, 1);
      pokemon->currExp = 0;
-     pokemon->tacticIndex = 0;
+     pokemon->tacticIndex = TACTIC_LETS_GO_TOGETHER;
      pokemon->IQ = 1;
      SetDefaultIQSkills(&pokemon->IQSkills, FALSE);
      sub_808E490(pokemon->moves, pokemon->speciesNum);
 }
-
-struct unkStruct_808D144
-{
-    /* 0x0 */ u8 *name;
-    /* 0x4 */ s16 speciesNum;
-    /* 0x6 */ u8 itemID;
-    /* 0x8 */ struct DungeonLocation dungeonLocation;
-    /* 0xC */ u16 moveID[MAX_MON_MOVES];
-    /* 0x14 */ s16 pokeHP;
-    /* 0x16 */ u16 level;
-    /* 0x18 */ u16 IQ;
-    s16 offense[4]; // atk, spatt, def, spdef (not sure why s16/u16 and not u8)
-    /* 0x24 */ u32 currExp;
-};
 
 void sub_808D144(PokemonStruct1 *pokemon, struct unkStruct_808D144 *r1)
 {
@@ -239,14 +226,14 @@ void sub_808D144(PokemonStruct1 *pokemon, struct unkStruct_808D144 *r1)
     pokemon->isTeamLeader = FALSE;
     pokemon->level = r1->level;
     pokemon->pokeHP = r1->pokeHP;
-    pokemon->offense.att[0] = r1->offense[0];
-    pokemon->offense.att[1] = r1->offense[1];
-    pokemon->offense.def[0] = r1->offense[2];
-    pokemon->offense.def[1] = r1->offense[3];
+    pokemon->offense.att[0] = r1->offenseAtk[0];
+    pokemon->offense.att[1] = r1->offenseAtk[1];
+    pokemon->offense.def[0] = r1->offenseDef[0];
+    pokemon->offense.def[1] = r1->offenseDef[1];
     pokemon->speciesNum = r1->speciesNum;
     xxx_init_helditem_8090B08(&pokemon->heldItem, r1->itemID);
     pokemon->currExp = r1->currExp;
-    pokemon->tacticIndex = 0;
+    pokemon->tacticIndex = TACTIC_LETS_GO_TOGETHER;
     pokemon->IQ = r1->IQ;
     pokemon->dungeonLocation = r1->dungeonLocation;
     pokemon->unkC[0].level = 0;

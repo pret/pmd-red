@@ -1,13 +1,8 @@
 #include "global.h"
+#include "structs/str_position.h"
 #include "other_random.h"
 #include "math.h"
 #include "memory.h"
-
-struct unkStruct_809D158
-{
-    s32 a0;
-    s32 a4;
-};
 
 struct unkStruct_20399E8
 {
@@ -16,15 +11,15 @@ struct unkStruct_20399E8
     u32 unk8;
     s32 unkC;
     s32 unk10;
-    struct unkStruct_809D158 unk14;
-    struct unkStruct_809D158 unk1C;
+    PixelPos unk14;
+    PixelPos unk1C;
     s32 unk24;
     s32 unk28;
     s32 unk2C;
     s32 unk30;
     s32 unk34;
     s32 unk38;
-    struct unkStruct_809D158 unk3C;
+    PixelPos unk3C;
     u8 unk44;
 };
 
@@ -32,7 +27,7 @@ extern struct unkStruct_20399E8 gUnknown_20399E8;
 
 void sub_809D0BC(void);
 void sub_809D4B0(void);
-void sub_809D158(s32 r0, const struct unkStruct_809D158 *r1);
+void sub_809D158(s32 r0, const PixelPos *r1);
 
 s32 sub_809CFE8(u16 param_1)
 {
@@ -105,7 +100,7 @@ void nullsub_119(void)
 {
 }
 
-extern const struct unkStruct_809D158 gZeroPos_8116478;
+extern const PixelPos gZeroPos_8116478;
 
 void sub_809D0BC(void)
 {
@@ -162,7 +157,7 @@ struct Test1
     u64 ukn0;
 };
 
-void sub_809D158(s32 r0, const struct unkStruct_809D158 *r1)
+void sub_809D158(s32 r0, const PixelPos *r1)
 {
     gUnknown_20399E8.unk0 = r0;
     gUnknown_20399E8.unk8 = 0;
@@ -183,7 +178,7 @@ void sub_809D180(s32 r0, s32 r1)
     gUnknown_20399E8.unkC = r1;
 }
 
-void sub_809D190(s32 r0, struct unkStruct_809D158 *r1, s32 r2)
+void sub_809D190(s32 r0, PixelPos *r1, s32 r2)
 {
     gUnknown_20399E8.unk0 = r0;
     gUnknown_20399E8.unk8 = 1;
@@ -206,7 +201,7 @@ void sub_809D1BC(s32 r0, s32 r1)
     gUnknown_20399E8.unk10 = r1;
 }
 
-void sub_809D1CC(s32 r0, struct unkStruct_809D158 *r1, s32 r2)
+void sub_809D1CC(s32 r0, PixelPos *r1, s32 r2)
 {
     gUnknown_20399E8.unk0 = r0;
     gUnknown_20399E8.unk8 = 2;
@@ -229,7 +224,7 @@ void sub_809D1F8(s32 r0, s32 r1)
     gUnknown_20399E8.unkC = r1;
 }
 
-void sub_809D208(s32 r0, struct unkStruct_809D158 *r1, s32 r2)
+void sub_809D208(s32 r0, PixelPos *r1, s32 r2)
 {
     gUnknown_20399E8.unk0 = r0;
     gUnknown_20399E8.unk8 = 3;
@@ -250,27 +245,27 @@ bool8 sub_809D234(void)
     return gUnknown_20399E8.unk8 != 0;
 }
 
-u8 sub_809D248(struct unkStruct_809D158 *r0)
+u8 sub_809D248(PixelPos *r0)
 {
     *r0 = gUnknown_20399E8.unk3C;
     return gUnknown_20399E8.unk44;
 }
 
 // Todo: move these to appropriate header files
-extern s32 sub_80A8FD8(s16 a0, struct unkStruct_809D158 *a1);
-extern s32 sub_80AC448(s16 a0, struct unkStruct_809D158 *a1);
-extern s32 sub_80AD360(s16 a0, struct unkStruct_809D158 *a1);
-extern void sub_800290C(struct unkStruct_809D158 *a0, s32 a1);
-extern void sub_8002934(struct unkStruct_809D158 *a0, struct unkStruct_809D158 *a1, struct unkStruct_809D158 *a2, u32 a3, u32 a4);
-extern bool8 sub_80A579C(struct unkStruct_809D158 *a0, struct unkStruct_809D158 *a1);
+extern s32 sub_80A8FD8(s16 a0, PixelPos *a1);
+extern s32 sub_80AC448(s16 a0, PixelPos *a1);
+extern s32 sub_80AD360(s16 a0, PixelPos *a1);
+extern void sub_800290C(PixelPos *a0, s32 a1);
+extern void sub_8002934(PixelPos *a0, PixelPos *a1, PixelPos *a2, u32 a3, u32 a4);
+extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
 void sub_809D25C(void)
 {
     s32 r2, r1, r3;
-    struct unkStruct_809D158 sp4;
-    struct unkStruct_809D158 spC;
-    struct unkStruct_809D158 sp14;
-    struct unkStruct_809D158 sp1C;
+    PixelPos sp4;
+    PixelPos spC;
+    PixelPos sp14;
+    PixelPos sp1C;
     u16 val;
     // For some reason I have to compare with 0xFFFF instead of -1. Maybe it has to do with return value of the functions?
     switch (gUnknown_20399E8.unk0)
@@ -295,22 +290,22 @@ void sub_809D25C(void)
     switch (gUnknown_20399E8.unk8)
     {
     case 1:
-        sp4.a0 = gUnknown_20399E8.unk1C.a0 - gUnknown_20399E8.unk14.a0;
-        sp4.a4 = gUnknown_20399E8.unk1C.a4 - gUnknown_20399E8.unk14.a4;
+        sp4.x = gUnknown_20399E8.unk1C.x - gUnknown_20399E8.unk14.x;
+        sp4.y = gUnknown_20399E8.unk1C.y - gUnknown_20399E8.unk14.y;
         sub_800290C(&sp4, gUnknown_20399E8.unkC);
-        if (sp4.a0 == 0 && sp4.a4 == 0)
+        if (sp4.x == 0 && sp4.y == 0)
         {
             gUnknown_20399E8.unk8 = 0;
         }
         else
         {
-            gUnknown_20399E8.unk14.a0 += sp4.a0;
-            gUnknown_20399E8.unk14.a4 += sp4.a4;
+            gUnknown_20399E8.unk14.x += sp4.x;
+            gUnknown_20399E8.unk14.y += sp4.y;
         }
         break;
     case 3:
-        r2 = (gUnknown_20399E8.unk1C.a0 - gUnknown_20399E8.unk14.a0) / 256;
-        r1 = (gUnknown_20399E8.unk1C.a4 - gUnknown_20399E8.unk14.a4) / 256;
+        r2 = (gUnknown_20399E8.unk1C.x - gUnknown_20399E8.unk14.x) / 256;
+        r1 = (gUnknown_20399E8.unk1C.y - gUnknown_20399E8.unk14.y) / 256;
         gUnknown_20399E8.unk10 = (F248ToInt(FP24_8_Hypot(IntToF248(r2), IntToF248(r1))) << 8) / gUnknown_20399E8.unkC;
         if (gUnknown_20399E8.unk10 <= 0)
             gUnknown_20399E8.unk10 = 1;
@@ -353,21 +348,21 @@ void sub_809D25C(void)
 
     if (sub_80A579C(&sp14, &sp1C))
     {
-        r2 = gUnknown_20399E8.unk14.a0 + gUnknown_20399E8.unk34 - 0x80;
-        r3 = gUnknown_20399E8.unk14.a4 + gUnknown_20399E8.unk38 - 2944;
+        r2 = gUnknown_20399E8.unk14.x + gUnknown_20399E8.unk34 - 0x80;
+        r3 = gUnknown_20399E8.unk14.y + gUnknown_20399E8.unk38 - 2944;
 
-        if (r2 < sp14.a0)
-            r2 = sp14.a0;
-        if (r2 >= sp1C.a0)
-            r2 = sp1C.a0 - 1;
+        if (r2 < sp14.x)
+            r2 = sp14.x;
+        if (r2 >= sp1C.x)
+            r2 = sp1C.x - 1;
 
-        if (r3 < sp14.a4)
-            r3 = sp14.a4;
-        if (r3 >= sp1C.a4)
-            r3 = sp1C.a4 - 1;
+        if (r3 < sp14.y)
+            r3 = sp14.y;
+        if (r3 >= sp1C.y)
+            r3 = sp1C.y - 1;
 
-        gUnknown_20399E8.unk3C.a0 = (r2 - 30976) / 256;
-        gUnknown_20399E8.unk3C.a4 = (r3 - 20480) / 256;
+        gUnknown_20399E8.unk3C.x = (r2 - 30976) / 256;
+        gUnknown_20399E8.unk3C.y = (r3 - 20480) / 256;
         gUnknown_20399E8.unk44 = 1;
     }
 }

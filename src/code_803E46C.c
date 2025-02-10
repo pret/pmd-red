@@ -60,12 +60,12 @@ void sub_803E490(u32 unused)
 
     if(gDungeon->unk181e8.unk1821A)
     {
-        gDungeon->unk181e8.unk18208 = 2;
+        gDungeon->unk181e8.priority = 2;
         SetBG2RegOffsets(gDungeon->unk181e8.cameraPixelPos.x, gDungeon->unk181e8.cameraPixelPos.y);
     }
     else
     {
-        gDungeon->unk181e8.unk18208 = 3;
+        gDungeon->unk181e8.priority = 3;
         SetBG2RegOffsets(0, 0);
     }
     SetBG3RegOffsets(gDungeon->unk181e8.cameraPixelPos.x, gDungeon->unk181e8.cameraPixelPos.y - gDungeon->unk181e8.unk181FC);

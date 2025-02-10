@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800F958.h"
 #include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"
@@ -70,7 +71,6 @@ extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_80429E8(Entity *r0);
 extern s32 sub_803DA20(s32 param_1);
 extern void sub_80694C0(Entity *, s32, s32, u32);
-extern void AddPokemonDungeonSprite(s32 id, s16 species, DungeonPos *pos, u32);
 extern s32 gUnknown_202EDCC;
 extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
 extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
@@ -1780,7 +1780,7 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
 
     entityPos.x = entity->pos.x;
     entityPos.y = entity->pos.y;
-    AddPokemonDungeonSprite(entInfo->unk98, entInfo->apparentID, &entityPos, gDungeon->unk181e8.unk18208);
+    AddPokemonDungeonSprite(entInfo->unk98, entInfo->apparentID, &entityPos, gDungeon->unk181e8.priority);
     LoadIQSkills(entity);
     sub_806A898(entity, FALSE, FALSE);
 }
@@ -2206,7 +2206,7 @@ void sub_806C51C(Entity *entity)
     pos1.y = ((entity->pixelPos.y - entity->unk1C.raw) - entInfo->unk174.raw) / 256;
 
     sub_8005700(posArray, &entity->axObj);
-    sub_800F958(entInfo->unk98, &pos1, posArray, gDungeon->unk181e8.unk18208);
+    sub_800F958(entInfo->unk98, &pos1, posArray, gDungeon->unk181e8.priority);
 
     statusSprites = EntityGetStatusSprites(entity);
     UpdateDungeonPokemonSprite(entInfo->unk98, entInfo->apparentID, statusSprites, (var_3C && entInfo->unk14C));
@@ -2240,7 +2240,7 @@ void sub_806C51C(Entity *entity)
     spriteMasks.unk4 = 0xF3FF;
     spriteMasks.unk6 = 0;
     spriteMasks.unk8 = 0;
-    spriteMasks.unkA = gDungeon->unk181e8.unk18208 << 10;
+    spriteMasks.unkA = gDungeon->unk181e8.priority << 10;
 
     if (entInfo->isNotTeamMember && (entInfo->apparentID == MONSTER_DEOXYS_ATTACK || entInfo->apparentID == MONSTER_DEOXYS_DEFENSE || entInfo->apparentID == MONSTER_DEOXYS_SPEED)) {
         r4 = TRUE;

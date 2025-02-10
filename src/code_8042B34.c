@@ -2,6 +2,7 @@
 #include "dungeon_util_1.h"
 #include "memory.h"
 #include "structs/rgb.h"
+#include "structs/sprite_oam.h"
 #include "structs/str_dungeon_8042F6C.h"
 #include "code_803E46C.h"
 #include "code_800E9E4.h"
@@ -44,12 +45,6 @@ extern void sub_800EE5C(s32);
 extern void sub_800EF64(void);
 extern void sub_800F15C(s32);
 
-struct Sub_UnkStruct_203B414 // Maybe DungeonPos?
-{
-    s16 a0;
-    s16 a2;
-};
-
 struct UnkStruct_203B414
 {
     s32 unk0;
@@ -57,7 +52,7 @@ struct UnkStruct_203B414
     s32 unk8;
     s32 unkC[16];
     s32 unk4C[16];
-    struct Sub_UnkStruct_203B414 unk8C[16];
+    struct DungeonPos unk8C[16];
 };
 
 EWRAM_INIT DungeonPos gUnknown_203B410 = {100, 100};
@@ -80,6 +75,7 @@ extern const unkStruct_2039DB0 gUnknown_80F683C;
 void sub_8042B34(s32 a0, s32 a1, s32 a2)
 {
     unkStruct_80416E0 spStruct;
+    unkStruct_2039DB0 stack1C;
     s32 i;
     s32 r8 = 0;
     Entity *leader = xxx_call_GetLeader();
@@ -96,20 +92,20 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
 
         spStruct.unk0 = gUnknown_80F6624[sUnknown_203B414->unk0][r8].unk0;
         spStruct.unk4 = i;
-        spStruct.unk8 = 0;
+        spStruct.dir = 0;
         spStruct.x = leader->pixelPos.x / 256;
         spStruct.y = leader->pixelPos.y / 256;
 
         rnd = RandInt(2);
         sUnknown_203B414->unk4C[i] = (gUnknown_80F6624[sUnknown_203B414->unk0][r8].unk4 * 2) + rnd;
-        sUnknown_203B414->unk8C[i].a0 = RandInt(240) + 152;
-        sUnknown_203B414->unk8C[i].a2 = RandInt(8 + (i * 2)) - (((i - (i / 4 * 4)) * 40) - 24);
+        sUnknown_203B414->unk8C[i].x = RandInt(240) + 152;
+        sUnknown_203B414->unk8C[i].y = RandInt(8 + (i * 2)) - (((i - (i / 4 * 4)) * 40) - 24);
 
-        spStruct.unk10 = sUnknown_203B414->unk8C[i].a0;
-        spStruct.unk12 = sUnknown_203B414->unk8C[i].a2;
+        spStruct.unk10 = sUnknown_203B414->unk8C[i].x;
+        spStruct.unk12 = sUnknown_203B414->unk8C[i].y;
         spStruct.unk14 = 4;
         spStruct.unk18 = 0xFFFF;
-        spStruct.unk1C = gUnknown_80F683C;
+        stack1C = gUnknown_80F683C;
         sUnknown_203B414->unkC[i] = sub_800E890(&spStruct);
 
         r8++;
@@ -132,13 +128,13 @@ bool8 sub_8042CC0(void)
     }
 
     for (i = 0; i < sUnknown_203B414->unk8; i++) {
-       sUnknown_203B414->unk8C[i].a0 -= sUnknown_203B414->unk4C[i];
-       if (sUnknown_203B414->unk8C[i].a0 <= -152) {
+       sUnknown_203B414->unk8C[i].x -= sUnknown_203B414->unk4C[i];
+       if (sUnknown_203B414->unk8C[i].x <= -152) {
             if (sUnknown_203B414->unk4 > 0) {
-                sUnknown_203B414->unk8C[i].a0 = 152;
+                sUnknown_203B414->unk8C[i].x = 152;
             }
             else {
-                sUnknown_203B414->unk8C[i].a0 = -152;
+                sUnknown_203B414->unk8C[i].x = -152;
             }
        }
        else {
@@ -269,7 +265,6 @@ extern void sub_8040124(void);
 extern void sub_803E830(void);
 extern void sub_803E214(void);
 extern void nullsub_56(void);
-extern void sub_806863C(void);
 extern void sub_8040218(void);
 extern void sub_8047104(void);
 extern void sub_8068F28(void);
@@ -286,7 +281,6 @@ extern void sub_803E02C(void);
 extern void sub_80847D4(void);
 extern void sub_8043D60(void);
 extern void sub_806890C(void);
-extern void sub_8068614(void);
 extern void sub_80840A4(void);
 extern void sub_803E178(void);
 extern void sub_80848F0(void);
@@ -331,7 +325,6 @@ extern bool8 sub_8044B28(void);
 extern bool8 sub_8083C24(void);
 extern bool8 sub_8083C88(u8 param_1);
 extern bool8 sub_8043ED0(bool8);
-extern void LoadDungeonPokemonSprites(void);
 extern void ShowDungeonNameBanner(void);
 extern void sub_803EAF0(u32, u32);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
@@ -491,7 +484,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
     }
 
-    sub_8068614();
+    OpenDungeonPaletteFile();
     if (!r6 && gDungeon->unk644.unk34 == 1) {
         if (sub_8099394(&sp)) {
             unkStruct_203B480 *mailStr = GetMailatIndex(sp);
@@ -582,7 +575,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
             sub_80687AC();
         }
         else {
-            sub_8068768();
+            LoadDungeonActivePokemonSprites();
             sub_8082B40();
         }
         sub_806C42C();
@@ -918,7 +911,7 @@ void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
         }
     }
 
-    sub_806863C();
+    CloseDungeonPaletteFile();
     sub_803E214();
     nullsub_56();
     sub_8040218();
