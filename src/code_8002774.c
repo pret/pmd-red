@@ -4,13 +4,7 @@
 #include "structs/str_position.h"
 #include "other_random.h"
 
-typedef struct Vector
-{
-    s32 x;
-    s32 y;
-} Vector;
-
-extern Vector gVectorDirections[8];
+extern PixelPos gVectorDirections[8];
 
 void sub_800290C(PixelPos *param_1, s32 param_2)
 {
@@ -187,11 +181,11 @@ UNUSED s32 sub_8002B5C(s32 _direction1, s32 _direction2)
     return direction1 & DIRECTION_MASK_CARDINAL;
 }
 
-Vector SetVecFromDirectionSpeed(s8 r1, u32 r2)
+PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2)
 {
-    Vector *vec = &gVectorDirections[r1];
+    PixelPos *vec = &gVectorDirections[r1];
 
-    return (Vector){ .x = vec->x * r2, .y = vec->y * r2 };
+    return (PixelPos){ .x = vec->x * r2, .y = vec->y * r2 };
 }
 
 s32 VecDirection8Sign(PixelPos *param_1)

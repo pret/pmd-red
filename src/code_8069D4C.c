@@ -212,13 +212,13 @@ void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target) {
     }
     param_1->isTeamLeader = info->isTeamLeader;
     atkPtr = &param_1->atkBoost;
-    *atkPtr = '\0';
+    *atkPtr = 0;
     spAtkPtr = &param_1->spAtkBoost;
-    *spAtkPtr = '\0';
+    *spAtkPtr = 0;
     defPtr = &param_1->defBoost;
-    *defPtr = '\0';
+    *defPtr = 0;
     spDefBoost = &param_1->spDefBoost;
-    *spDefBoost = '\0';
+    *spDefBoost = 0;
     if ((info->heldItem.flags & ITEM_FLAG_EXISTS) && ((info->heldItem.flags & ITEM_FLAG_STICKY) == 0)) {
         if (info->heldItem.id == ITEM_POWER_BAND) {
             *atkPtr += gUnknown_810AC60;
@@ -260,25 +260,25 @@ void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target) {
     }
 
     if (gDungeon->unk644.itemHoldersIdentified) {
-        param_1->unk58[uVar15] = '\v';
+        param_1->unk58[uVar15] = 11;
         uVar15++;
     }
     if (FixedPointToInt(info->belly) == 0) {
         if (info->isTeamLeader) {
-            param_1->unk58[uVar15] = '\x13';   
+            param_1->unk58[uVar15] = 19;   
         }
         else {
-            param_1->unk58[uVar15] = ';';
+            param_1->unk58[uVar15] = 59;
         }
 
         uVar15++;
     }
-    if (1 < GetEntInfo(target)->speedStage) {
-        param_1->unk58[uVar15] = '\x1b';
+    if (GetEntInfo(target)->speedStage > 1) {
+        param_1->unk58[uVar15] = 27;
         uVar15++;
     }
     if (GetEntInfo(target)->speedStage < 1) {
-        param_1->unk58[uVar15] = '(';
+        param_1->unk58[uVar15] = 40;
         uVar15++;
     }
     if ((((((info->offensiveMultipliers[0].raw < 0x100) || (info->offensiveMultipliers[1].raw < 0x100)
@@ -287,98 +287,98 @@ void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target) {
         ((info->offensiveStages[1] < 10 ||
         ((info->defensiveStages[0] < 10 || (info->defensiveStages[1] < 10)))))) ||
         ((info->hitChanceStages[0] < 10 || (info->hitChanceStages[1] < 10)))) {
-        param_1->unk58[uVar15] = '7';
+        param_1->unk58[uVar15] = 55;
         uVar15++;
     }
-    if (((info->sleepClassStatus).status != 0) && (uVar15 < 0xc)) {
+    if (((info->sleepClassStatus).status != STATUS_NONE) && (uVar15 < 0xc)) {
         param_1->unk58[uVar15] = (info->sleepClassStatus).status;
         uVar15++;
     }
-    if (((info->burnClassStatus).status != 0) && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = (info->burnClassStatus).status + '\x06';
+    if (((info->burnClassStatus).status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = (info->burnClassStatus).status + 6;
         uVar15++;
     }
-    if (((info->frozenClassStatus).status != '\0') && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = (info->frozenClassStatus).status + '\v';
+    if (((info->frozenClassStatus).status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = (info->frozenClassStatus).status + 11;
         uVar15++;
     }
-    if (((info->cringeClassStatus).status != '\0') && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = (info->cringeClassStatus).status + '\x13';
+    if (((info->cringeClassStatus).status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = (info->cringeClassStatus).status + 19;
         uVar15++;
     }
-    if (((info->bideClassStatus).status != '\0') && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = (info->bideClassStatus).status + '\x1b';
+    if (((info->bideClassStatus).status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = (info->bideClassStatus).status + 27;
         uVar15++;
     }
-    if (((info->reflectClassStatus).status != '\0') && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = (info->reflectClassStatus).status + '(';
+    if (((info->reflectClassStatus).status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = (info->reflectClassStatus).status + 40;
         uVar15++;
     }
-    if (((info->curseClassStatus).status != '\0') && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = (info->curseClassStatus).status + '7';
+    if (((info->curseClassStatus).status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = (info->curseClassStatus).status + 55;
         uVar15++;
     }
-    if (((info->leechSeedClassStatus).status != '\0') && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = (info->leechSeedClassStatus).status + ';';
+    if (((info->leechSeedClassStatus).status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = (info->leechSeedClassStatus).status + 59;
         uVar15++;
     }
-    if (((info->sureShotClassStatus).status != '\0') && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = info->sureShotClassStatus.status + '>';
+    if (((info->sureShotClassStatus).status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = info->sureShotClassStatus.status + 62;
         uVar15++;
     }
-    if (((info->longTossClassStatus).status != '\0') && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = info->longTossClassStatus.status + 0x43;
+    if (((info->longTossClassStatus).status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = info->longTossClassStatus.status + 67;
         uVar15++;
     }
-    if ((info->invisibleClassStatus.status != '\0') && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = info->invisibleClassStatus.status + 'F';
+    if ((info->invisibleClassStatus.status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = info->invisibleClassStatus.status + 70;
         uVar15++;
     }
-    if ((info->blinkerClassStatus.status != '\0') && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = info->blinkerClassStatus.status + 'J';
+    if ((info->blinkerClassStatus.status != STATUS_NONE) && (uVar15 < 0xc)) {
+        param_1->unk58[uVar15] = info->blinkerClassStatus.status + 74;
         uVar15++;
     }
     if ((info->muzzled.muzzled) && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = info->muzzled.muzzled + 'N';
+        param_1->unk58[uVar15] = info->muzzled.muzzled + 78;
         uVar15++;
     }
     if ((info->stockpileStage != 0) && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = 'P';
+        param_1->unk58[uVar15] = 80;
         uVar15++;
     }
     if ((info->powerEars) && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = 'Q';
+        param_1->unk58[uVar15] = 81;
         uVar15++;
     }
     if ((info->scanning) && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = 'R';
+        param_1->unk58[uVar15] = 82;
         uVar15++;
     }
     if ((info->grudge) && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = 'S';
+        param_1->unk58[uVar15] = 83;
         uVar15++;
     }
     if ((info->exposed) && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = 'T';
+        param_1->unk58[uVar15] = 84;
         uVar15++;
     }
     if ((ShouldMonsterRunAway(target)) && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = 'U';
+        param_1->unk58[uVar15] = 85;
         uVar15++;
     }
     if ((info->perishSongTurns != 0) && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = 'V';
+        param_1->unk58[uVar15] = 86;
         uVar15++;
     }
     if ((1 < sub_8070828(target,FALSE)) && (uVar15 < 0xc)) {
-        param_1->unk58[uVar15] = 'W';
+        param_1->unk58[uVar15] = 87;
         uVar15++;
     }
     if (info->stairSpotter) {
         if (0xb < uVar15) {
             return;
         }
-        param_1->unk58[uVar15] = 'X';
+        param_1->unk58[uVar15] = 88;
         uVar15++;
     }
 
