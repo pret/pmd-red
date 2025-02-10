@@ -68,7 +68,6 @@ SECTIONS {
         src/code_800558C.o(.text);
         src/random.o(.text);
         src/text.o(.text);
-        asm/text.o(.text);
         src/code_8009804.o(.text);
         asm/code_8009804.o(.text);
         src/math.o(.text);

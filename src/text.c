@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "bg_palette_buffer.h"
 #include "text.h"
 #include "decompress.h"
 #include "code_8009804.h"
@@ -16,6 +17,10 @@ struct CharMapStruct
 
 // data.s
 
+// data2.s
+extern const char gUnknown_80B88B0[]; // "font"
+extern const char gUnknown_80B88B8[]; // "fontsp"
+extern const char gUnknown_80B88C0[]; // "fontsppa"
 
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
@@ -3564,6 +3569,78 @@ static s32 InterpretColorChar(u8 a0)
 
     }
     return 7;
+}
+
+struct FontData {
+    u32 size;
+    u8 dataArray[136 * 32];
+};
+
+struct FontSpData {
+    u32 size;
+    u8 dataArray[16 * 32];
+};
+
+void InitGraphics(void)
+{
+    u32 count;
+    OpenedFile *file;
+    u32 *dest;
+    struct FontData *font;
+    struct FontSpData *fontSp;
+#ifdef NONMATCHING
+    RGB *data;
+    u32 size;
+    const struct FileArchive *arc;
+#else
+    register RGB *data asm("r4");
+    register u32 size asm("r5");
+    register const struct FileArchive *arc asm("r4");
+#endif
+
+    gUnknown_203B090 = 1;
+    dest = (u32 *)VRAM;
+    for(count = 0; count < 0x6000; count++)
+    {
+        *dest++ = 0;
+    }
+
+    dest = (u32 *)PLTT;
+    for(count = 0; count < 0x100; count++)
+    {
+        *dest++ = 0;
+    }
+
+    dest = (u32 *)OAM;
+    for(count = 0; count < 0x100; count++)
+    {
+         *dest++ = 0x00a000a0;
+    }
+
+    arc = &gSystemFileArchive;
+
+    file = OpenFileAndGetFileDataPtr(gUnknown_80B88B0, arc);
+    font = (struct FontData *)(file->data);
+    size = font->size;
+    CpuCopy((u32 *)0x06004f00, font->dataArray, size * 32);
+    CloseFile(file);
+
+    file = OpenFileAndGetFileDataPtr(gUnknown_80B88B8, arc);
+    fontSp = (struct FontSpData *)(file->data);
+    size = fontSp->size;
+    CpuCopy((u32 *)0x06017e00, fontSp->dataArray, size * 32);
+    CloseFile(file);
+
+    InitFontPalette();
+    file = OpenFileAndGetFileDataPtr(gUnknown_80B88C0, arc);
+    data = (RGB *)file->data;
+
+    for(count = 0; (s32)count < 0x10; data++, count++)
+    {
+        SetBGPaletteBufferColorArray(0x1F0 + count, data);
+    }
+    CloseFile(file);
+    TransferBGPaletteBuffer();
 }
 
 // These functions run from IWRAM for improved performance.
