@@ -2,6 +2,7 @@
 #include "text.h"
 #include "memory.h"
 #include "pokemon.h"
+#include "code_800D090.h"
 #include "pokemon_mid.h"
 #include "string_format.h"
 #include "structs/str_3001B64.h"
@@ -191,9 +192,9 @@ void sub_809A7EC(void)
         temp->unk7 = 0;
         temp->unk8.a0 = 0;
         temp->unk8.a4 = 0;
-        temp->unk10 = 0;
-        temp->faceData = 0;
-        temp->unk1C = 0;
+        temp->monPortrait.faceFile = NULL;
+        temp->monPortrait.faceData = NULL;
+        temp->monPortrait.spriteId = 0;
         temp->faceFile = NULL;
     }
 }
@@ -211,9 +212,9 @@ void sub_809A83C(s16 param_1)
     temp->unk7 = 0;
     temp->unk8.a0 = 0;
     temp->unk8.a4 = 0;
-    temp->unk10 = 0;
-    temp->faceData = NULL;
-    temp->unk1C = 0;
+    temp->monPortrait.faceFile = NULL;
+    temp->monPortrait.faceData = NULL;
+    temp->monPortrait.spriteId = 0;
     strcpy(gFormatBuffer_Monsters[param_1], gInvalidityText);
     strcpy(gFormatBuffer_Names[param_1], gInvalidityText);
     if(temp->faceFile)
@@ -237,13 +238,13 @@ bool8 sub_809A8B8(s32 param_1, s32 param_2)
     s16 local_26;
     s32 iVar5 = (s16) param_1;
     s16 local_28 = (s16) param_2;
-    struct unkStruct_3001B64_sub *puVar8 = &gUnknown_3001B64->unk43C[iVar5];
+    struct unkStruct_3001B64_sub *unkPtr = &gUnknown_3001B64->unk43C[iVar5];
     u8 uVar9 = 1;
     u8 byte1 = 0;
 
-    if (puVar8->faceFile != NULL) {
-        CloseFile(puVar8->faceFile);
-        puVar8->faceFile = NULL;
+    if (unkPtr->faceFile != NULL) {
+        CloseFile(unkPtr->faceFile);
+        unkPtr->faceFile = NULL;
     }
 
     sub_80A7DDC(&local_28,&local_26);
@@ -319,35 +320,35 @@ bool8 sub_809A8B8(s32 param_1, s32 param_2)
     if (local_28 != -1) {
         s32 sVar3 = sub_80A7AE8(local_28);
         if (sVar3 >= 0) {
-            puVar8->unk0 = local_28;
-            puVar8->speciesID = sub_80A8BFC(sVar3);
+            unkPtr->unk0 = local_28;
+            unkPtr->speciesID = sub_80A8BFC(sVar3);
             strcpy(gFormatBuffer_Monsters[iVar5], gUndefineText);
             strcpy(gFormatBuffer_Names[iVar5], gUndefineText);
-            puVar8->unk4 = uVar9;
-            puVar8->unk5 = byte1;
-            puVar8->unk6 = 0xff;
-            puVar8->unk7 = 0;
-            puVar8->unk8.a0 = 0;
-            puVar8->unk8.a4 = 0;
-            puVar8->unk10 = 0;
-            puVar8->faceData = NULL;
-            puVar8->unk1C = 0;
+            unkPtr->unk4 = uVar9;
+            unkPtr->unk5 = byte1;
+            unkPtr->unk6 = 0xff;
+            unkPtr->unk7 = 0;
+            unkPtr->unk8.a0 = 0;
+            unkPtr->unk8.a4 = 0;
+            unkPtr->monPortrait.faceFile = NULL;
+            unkPtr->monPortrait.faceData = NULL;
+            unkPtr->monPortrait.spriteId = 0;
             ret = TRUE;
         }
         else if (local_26 != 0) {
-            puVar8->unk0 = local_28;
-            puVar8->speciesID = local_26;
+            unkPtr->unk0 = local_28;
+            unkPtr->speciesID = local_26;
             strcpy(gFormatBuffer_Monsters[iVar5], gUndefineText);
             strcpy(gFormatBuffer_Names[iVar5], gUndefineText);
-            puVar8->unk4 = uVar9;
-            puVar8->unk5 = byte1;
-            puVar8->unk6 = 0xff;
-            puVar8->unk7 = 0;
-            puVar8->unk8.a0 = 0;
-            puVar8->unk8.a4 = 0;
-            puVar8->unk10 = 0;
-            puVar8->faceData = NULL;
-            puVar8->unk1C = 0;
+            unkPtr->unk4 = uVar9;
+            unkPtr->unk5 = byte1;
+            unkPtr->unk6 = 0xff;
+            unkPtr->unk7 = 0;
+            unkPtr->unk8.a0 = 0;
+            unkPtr->unk8.a4 = 0;
+            unkPtr->monPortrait.faceFile = NULL;
+            unkPtr->monPortrait.faceData = NULL;
+            unkPtr->monPortrait.spriteId = 0;
             ret = TRUE;
         }
         else {
@@ -415,9 +416,9 @@ bool8 sub_809AC18(s32 a0_, s32 a1_)
 
 struct Unk8116040Struct
 {
-    u16 unk0;
-    u16 unk2;
-    u8 unk4;
+    u16 x;
+    u16 y;
+    bool8 flip;
 };
 
 extern const struct Unk8116040Struct gUnknown_8116040[];
@@ -440,15 +441,15 @@ bool8 sub_809AC7C(s32 a0_, s32 a1_, s32 a2_)
             unkPtr->unk8.a0 = 0;
             unkPtr->unk8.a4 = 0;
         }
-        unkPtr->unk18 = gUnknown_8116040[unkPtr->unk7].unk0 + unkPtr->unk8.a0;
-        unkPtr->unk1A = gUnknown_8116040[unkPtr->unk7].unk2 + unkPtr->unk8.a4;
-        unkPtr->unk1D = gUnknown_8116040[unkPtr->unk7].unk4;
-        unkPtr->unk1E = 0;
+        unkPtr->monPortrait.pos.x = gUnknown_8116040[unkPtr->unk7].x + unkPtr->unk8.a0;
+        unkPtr->monPortrait.pos.y = gUnknown_8116040[unkPtr->unk7].y + unkPtr->unk8.a4;
+        unkPtr->monPortrait.flip = gUnknown_8116040[unkPtr->unk7].flip;
+        unkPtr->monPortrait.unkE = 0;
         if (r5 == -2) {
             unkPtr->unk6 = r5;
-            unkPtr->unk10 = 0;
-            unkPtr->faceData = NULL;
-            unkPtr->unk1C = 0;
+            unkPtr->monPortrait.faceFile = NULL;
+            unkPtr->monPortrait.faceData = NULL;
+            unkPtr->monPortrait.spriteId = 0;
             return FALSE;
         }
 
@@ -456,7 +457,7 @@ bool8 sub_809AC7C(s32 a0_, s32 a1_, s32 a2_)
             unkPtr->faceFile = OpenPokemonDialogueSpriteFile(unkPtr->speciesID);
             if (unkPtr->faceFile != NULL) {
                 unkPtr->unk6 = r5;
-                unkPtr->unk10 = unkPtr->faceFile;
+                unkPtr->monPortrait.faceFile = unkPtr->faceFile;
                 GetFileDataPtr(unkPtr->faceFile, 0);
                 switch (unkPtr->unk0) {
                     case 0x47:
@@ -466,35 +467,35 @@ bool8 sub_809AC7C(s32 a0_, s32 a1_, s32 a2_)
                         }
                         break;
                     case 0x4D:
-                        if (unkPtr->unk1D != 0 && (r5 & 0xF) < 4) {
-                            unkPtr->unk1D = 0;
+                        if (unkPtr->monPortrait.flip && (r5 & 0xF) < 4) {
+                            unkPtr->monPortrait.flip = FALSE;
                             r5 = (s8) (r5 + 4);
                             r5 = (s8) (r5 | 0x40);
                         }
                         break;
                     case 0x53:
-                        if (unkPtr->unk1D != 0 && (r5 & 0xF) < 1) {
-                            unkPtr->unk1D = 0;
+                        if (unkPtr->monPortrait.flip && (r5 & 0xF) < 1) {
+                            unkPtr->monPortrait.flip = FALSE;
                             r5 = (s8) (r5 + 1);
                             r5 = (s8) (r5 | 0x40);
                         }
                         break;
                     case 0x73:
-                        if (unkPtr->unk1D != 0 && (r5 & 0xF) < 2) {
-                            unkPtr->unk1D = 0;
+                        if (unkPtr->monPortrait.flip && (r5 & 0xF) < 2) {
+                            unkPtr->monPortrait.flip = FALSE;
                             r5 = (s8) (r5 + 2);
                             r5 = (s8) (r5 | 0x40);
                         }
                         break;
                 }
 
-                unkPtr->faceData = unkPtr->faceFile->data;
-                unkPtr->unk1C = r5 & 0xF;
+                unkPtr->monPortrait.faceData = (void *) unkPtr->faceFile->data;
+                unkPtr->monPortrait.spriteId = r5 & 0xF;
             }
             else {
-                unkPtr->unk10 = 0;
-                unkPtr->faceData = NULL;
-                unkPtr->unk1C = 0;
+                unkPtr->monPortrait.faceFile = NULL;
+                unkPtr->monPortrait.faceData = NULL;
+                unkPtr->monPortrait.spriteId = 0;
             }
             return TRUE;
         }
@@ -504,9 +505,9 @@ bool8 sub_809AC7C(s32 a0_, s32 a1_, s32 a2_)
     unkPtr->unk7 = 0;
     unkPtr->unk8.a0 = 0;
     unkPtr->unk8.a4 = 0;
-    unkPtr->unk10 = 0;
-    unkPtr->faceData = NULL;
-    unkPtr->unk1C = 0;
+    unkPtr->monPortrait.faceFile = NULL;
+    unkPtr->monPortrait.faceData = NULL;
+    unkPtr->monPortrait.spriteId = 0;
     return FALSE;
 }
 
@@ -521,12 +522,12 @@ bool8 sub_809ADD8(s32 a0_, struct unkStruct_3001B64_sub_sub *a1)
         return FALSE;
 
     unkPtr->unk8 = *a1;
-    unkPtr->unk18 = gUnknown_8116040[unkPtr->unk7].unk0 + unkPtr->unk8.a0;
-    unkPtr->unk1A = gUnknown_8116040[unkPtr->unk7].unk2 + unkPtr->unk8.a4;
+    unkPtr->monPortrait.pos.x = gUnknown_8116040[unkPtr->unk7].x + unkPtr->unk8.a0;
+    unkPtr->monPortrait.pos.y = gUnknown_8116040[unkPtr->unk7].y + unkPtr->unk8.a4;
     return TRUE;
 }
 
-OpenedFile **sub_809AE3C(s32 a0_)
+struct MonPortraitMsg *sub_809AE3C(s32 a0_)
 {
     s32 a0 = (s16) a0_;
 
@@ -535,8 +536,8 @@ OpenedFile **sub_809AE3C(s32 a0_)
         if (unkPtr->speciesID != MONSTER_NONE && unkPtr->unk6 == -1) {
             sub_809AC7C(a0, 0, 0);
         }
-        if (unkPtr->unk10 != NULL) {
-            return &unkPtr->unk10;
+        if (unkPtr->monPortrait.faceFile != NULL) {
+            return &unkPtr->monPortrait;
         }
     }
 
@@ -630,4 +631,38 @@ u8 sub_809AFFC(u8 *a0)
         *a0 = (sp == 1);
     }
     return ret;
+}
+
+extern const char gUnknown_8116188[];
+extern const char gFormattedSpeechBubble[];
+
+bool8 sub_809B428(u8 *a0, s32 a1, u8 *a2);
+
+void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text)
+{
+    s32 a1 = (u8) a1_;
+    s32 a4 = (s16) a4_;
+
+    xxx_script_textboxes_809A680(gUnknown_8116134[a3], 0);
+    gUnknown_3001B64->unk414 = 1;
+    gUnknown_3001B64->unk418 = 0;
+    gUnknown_3001B64->unk41C = menuItems;
+    gUnknown_3001B64->unk420 = 2;
+    gUnknown_3001B64->unk424 = (a1 != 0) ? 2 : 0;
+    gUnknown_3001B64->unk428 = 0;
+    gUnknown_3001B64->unk430 = a2;
+    if (gUnknown_8116148[a3] & 0x100) {
+        if (a4 < 0) {
+            strcpy(gSpeakerNameBuffer, gFormattedSpeechBubble);
+        }
+        else {
+            sprintfStatic(gSpeakerNameBuffer, gUnknown_8116188, gFormatBuffer_Names[a4]);
+        }
+    }
+
+    CreateMenuDialogueBoxAndPortrait(text, sub_809B428, a2, menuItems, 0, 4, 0, sub_809AE3C(a4),
+         ((gUnknown_8116148[a3] & 0x100) ? 0xC : 0) | ((gUnknown_8116148[a3] & 0x200) ? 0x4 : 0) | ((gUnknown_8116148[a3] & 0x20) ? 0x21 : 1)); // What an ugly way to get flags lol
+    if (gUnknown_3001B64->unk424 & 2) {
+        sub_809A6E4(1);
+    }
 }

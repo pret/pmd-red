@@ -2,6 +2,8 @@
 #define GUARD_STR_3001B64_H
 
 #include "file_system.h"
+#include "structs/menu.h"
+#include "string_format.h"
 
 // Maybe Position32?
 struct unkStruct_3001B64_sub_sub
@@ -20,13 +22,7 @@ struct unkStruct_3001B64_sub
     s8 unk6;
     u8 unk7;
     struct unkStruct_3001B64_sub_sub unk8;
-    OpenedFile *unk10;
-    /* 0x14 */ u8 *faceData;
-    u16 unk18;
-    u16 unk1A;
-    u8 unk1C;
-    u8 unk1D;
-    u8 unk1E;
+    struct MonPortraitMsg monPortrait;
     /* 0x20 */ OpenedFile *faceFile;
 };
 
@@ -40,7 +36,7 @@ struct unkStruct_3001B64
     u8 fill10[0x414 - 0x10];
     u32 unk414;
     u32 unk418;
-    u32 unk41C;
+    const MenuItem *unk41C;
     u32 unk420;
     u32 unk424;
     u32 unk428;
