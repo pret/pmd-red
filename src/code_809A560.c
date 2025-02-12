@@ -1,14 +1,17 @@
 #include "global.h"
 #include "text.h"
 #include "memory.h"
+#include "pokemon.h"
 #include "string_format.h"
 #include "structs/str_3001B64.h"
+#include "constants/dungeon.h"
 
 IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = {NULL};
 
 extern u16 gUnknown_20399DC;
 extern u16 gUnknown_20399DE;
 extern u8 gInvalidityText[];
+extern u8 gUndefineText[];
 
 extern u8 ScriptPrintText_809B2B8(u32 *, u32, u32, u32);
 extern u32 IsTextboxOpen_809B40C(u32 *);
@@ -221,4 +224,144 @@ void sub_809A83C(s16 param_1)
         CloseFile(temp->faceFile);
         temp->faceFile = NULL;
     }
+}
+
+PokemonStruct1 *sub_808D3BC(void);
+PokemonStruct1 *sub_808D3F8(void);
+PokemonStruct1 *sub_80A8D54(s16);
+void sub_80A7DDC(s16 *, s16*);
+u8 sub_80A8CF0(s16);
+s16 sub_80A7AE8(s16);
+s16 sub_80A8BFC(s32);
+
+bool8 sub_809A8B8(short param_1,u16 param_2)
+{
+    bool8 ret;
+    s16 local_26;
+    int iVar5 = param_1;
+    s16 local_28 = param_2;
+    struct unkStruct_3001B64_sub *puVar8 = &gUnknown_3001B64->unk43C[iVar5];
+    u8 uVar9 = 1;
+    u8 byte1 = 0;
+
+    if (puVar8->faceFile != NULL) {
+        CloseFile(puVar8->faceFile);
+        puVar8->faceFile = NULL;
+    }
+
+    sub_80A7DDC(&local_28,&local_26);
+    if (local_28 >= 10 && local_28 <= 29) {
+        PokemonStruct1 *pPVar6 = sub_80A8D54(local_28);
+        if (pPVar6 == NULL) {
+            uVar9 = '\0';
+        }
+        else if (pPVar6 == sub_808D3BC()) {
+            local_28 = 0x21;
+        }
+        else if (pPVar6 == sub_808D3F8()) {
+            local_28 = 0x22;
+        }
+        else if (pPVar6->dungeonLocation.id == DUNGEON_FROSTY_GROTTO_2
+                 || pPVar6->dungeonLocation.id == DUNGEON_HOWLING_FOREST_2
+                 || pPVar6->dungeonLocation.id == DUNGEON_POKEMON_SQUARE
+                 || pPVar6->dungeonLocation.id == DUNGEON_POKEMON_SQUARE_2)
+        {
+            switch (local_26) {
+                case 0x104:
+                case 0x133:
+                case 0x183:
+                case 0x198:
+                case 0x199:
+                    break;
+                default:
+                    uVar9 = 0;
+                    break;
+            }
+        }
+        else {
+            switch (local_26) {
+                case 0x90:
+                case 0x91:
+                case 0x92:
+                case 0x96:
+                case 0x10C:
+                case 0x10D:
+                case 0x10E:
+                case 0x112:
+                case 0x113:
+                case 0x19A:
+                case 0x19B:
+                case 0x19C:
+                case 0x19D:
+                case 0x19E:
+                case 0x1A7:
+                    break;
+                default:
+                    uVar9 = 0;
+                    break;
+            }
+        }
+    }
+
+    switch(local_28) {
+        case 1:
+        case 2:
+        case 6:
+        case 7:
+        case 0x21:
+        case 0x22:
+        if (sub_80A8CF0(local_26) != 0) {
+            byte1 = 0x1;
+        }
+        else {
+            uVar9 = 0;
+        }
+        break;
+    }
+
+    if (local_28 != -1) {
+        s32 sVar3 = sub_80A7AE8(local_28);
+        if (sVar3 >= 0) {
+            puVar8->unk0 = local_28;
+            puVar8->speciesID = sub_80A8BFC(sVar3);
+            strcpy(gFormatBuffer_Monsters[iVar5], gUndefineText);
+            strcpy(gFormatBuffer_Names[iVar5], gUndefineText);
+            puVar8->unk4 = uVar9;
+            puVar8->unk5 = byte1;
+            puVar8->unk6 = 0xff;
+            puVar8->unk7 = 0;
+            puVar8->unk8 = 0;
+            puVar8->unkC = 0;
+            puVar8->unk10 = 0;
+            puVar8->faceData = NULL;
+            puVar8->unk1C = 0;
+            ret = TRUE;
+        }
+        else if (local_26 != 0) {
+            puVar8->unk0 = local_28;
+            puVar8->speciesID = local_26;
+            strcpy(gFormatBuffer_Monsters[iVar5], gUndefineText);
+            strcpy(gFormatBuffer_Names[iVar5], gUndefineText);
+            puVar8->unk4 = uVar9;
+            puVar8->unk5 = byte1;
+            puVar8->unk6 = 0xff;
+            puVar8->unk7 = 0;
+            puVar8->unk8 = 0;
+            puVar8->unkC = 0;
+            puVar8->unk10 = 0;
+            puVar8->faceData = NULL;
+            puVar8->unk1C = 0;
+            ret = TRUE;
+        }
+        else {
+            sub_809A83C(iVar5);
+            ret = FALSE;
+        }
+    }
+    else {
+        sub_809A83C(iVar5);
+        ret = FALSE;
+    }
+
+    return ret;
 }
