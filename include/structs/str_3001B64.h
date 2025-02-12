@@ -17,10 +17,10 @@ struct unkStruct_3001B64_sub
     /* 0x2 */ s16 speciesID;
     u8 unk4;
     u8 unk5;
-    u8 unk6;
+    s8 unk6;
     u8 unk7;
     struct unkStruct_3001B64_sub_sub unk8;
-    u32 unk10;
+    OpenedFile *unk10;
     /* 0x14 */ u8 *faceData;
     u16 unk18;
     u16 unk1A;

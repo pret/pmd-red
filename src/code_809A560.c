@@ -15,7 +15,7 @@ extern u8 gInvalidityText[];
 extern u8 gUndefineText[];
 extern const u8 gSpeechBubbleChar[];
 
-extern u8 ScriptPrintText_809B2B8(u32 *, u32, u32, u32);
+extern u8 ScriptPrintText_809B2B8(u32 *, u32, u32, const u8 *);
 extern u32 IsTextboxOpen_809B40C(u32 *);
 extern void sub_801416C(s32, s32);
 extern void ResetTextbox_809B294(void);
@@ -456,7 +456,7 @@ bool8 sub_809AC7C(s32 a0_, s32 a1_, s32 a2_)
             unkPtr->faceFile = OpenPokemonDialogueSpriteFile(unkPtr->speciesID);
             if (unkPtr->faceFile != NULL) {
                 unkPtr->unk6 = r5;
-                unkPtr->unk10 = (u32) unkPtr->faceFile;
+                unkPtr->unk10 = unkPtr->faceFile;
                 GetFileDataPtr(unkPtr->faceFile, 0);
                 switch (unkPtr->unk0) {
                     case 0x47:
@@ -524,4 +524,110 @@ bool8 sub_809ADD8(s32 a0_, struct unkStruct_3001B64_sub_sub *a1)
     unkPtr->unk18 = gUnknown_8116040[unkPtr->unk7].unk0 + unkPtr->unk8.a0;
     unkPtr->unk1A = gUnknown_8116040[unkPtr->unk7].unk2 + unkPtr->unk8.a4;
     return TRUE;
+}
+
+OpenedFile **sub_809AE3C(s32 a0_)
+{
+    s32 a0 = (s16) a0_;
+
+    if (a0 >= 0) {
+        struct unkStruct_3001B64_sub *unkPtr = &gUnknown_3001B64->unk43C[a0];
+        if (unkPtr->speciesID != MONSTER_NONE && unkPtr->unk6 == -1) {
+            sub_809AC7C(a0, 0, 0);
+        }
+        if (unkPtr->unk10 != NULL) {
+            return &unkPtr->unk10;
+        }
+    }
+
+    return NULL;
+}
+
+extern const u32 gUnknown_8116134[];
+extern const u16 gUnknown_8116148[];
+
+bool8 ScriptPrintText(s32 a0, s32 a1_, const char *text)
+{
+    s32 a1 = (s16) a1_;
+
+    if (text == NULL) {
+        return ScriptPrintNullTextbox();
+    }
+    else if (text[0] == '\0') {
+        return ScriptPrintEmptyTextbox();
+    }
+    else {
+        xxx_script_textboxes_809A680(gUnknown_8116134[a0], 0);
+        return ScriptPrintText_809B2B8(&gUnknown_3001B64->unkC, gUnknown_8116148[a0], a1, text);
+    }
+}
+
+bool8 sub_809AEEC(const char *text)
+{
+    if (text == NULL) {
+        return ScriptPrintNullTextbox();
+    }
+    else if (text[0] == '\0') {
+        return ScriptPrintNullTextbox();
+    }
+    else {
+        xxx_script_textboxes_809A680(2, 1);
+        return ScriptPrintText_809B2B8(&gUnknown_3001B64->unkC, 0xC2, -1, text);
+    }
+}
+
+bool8 sub_809AF2C(const char *text)
+{
+    if (text == NULL) {
+        return ScriptPrintNullTextbox();
+    }
+    else if (text[0] == '\0') {
+        return ScriptPrintNullTextbox();
+    }
+    else {
+        xxx_script_textboxes_809A680(2, 1);
+        return ScriptPrintText_809B2B8(&gUnknown_3001B64->unkC, 0xC2, -1, text);
+    }
+}
+
+bool8 sub_809AF6C(s32 unused, const char *text)
+{
+    if (text == NULL) {
+        return ScriptPrintNullTextbox();
+    }
+    else if (text[0] == '\0') {
+        return ScriptPrintNullTextbox();
+    }
+    else {
+        xxx_script_textboxes_809A680(3, 1);
+        return ScriptPrintText_809B2B8(&gUnknown_3001B64->unkC, 0x65, -1, text);
+    }
+}
+
+bool8 sub_809AFAC(void)
+{
+    return (gUnknown_3001B64->unk0 == 4);
+}
+
+extern const MenuItem gUnknown_81160E8[];
+void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
+u8 sub_809B18C(s32 *sp);
+
+void sub_809AFC8(s32 a0_, s32 a1, s32 a2_, const char *text)
+{
+    s32 a0 = (u8) a0_;
+    s32 a2 = (s16) a2_;
+
+    sub_809B028(gUnknown_81160E8, 0, (a0 != 0), a1, a2, text);
+}
+
+u8 sub_809AFFC(u8 *a0)
+{
+    s32 sp;
+    u8 ret = sub_809B18C(&sp);
+
+    if (a0 != NULL) {
+        *a0 = (sp == 1);
+    }
+    return ret;
 }
