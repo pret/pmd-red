@@ -2,6 +2,7 @@
 #include "text.h"
 #include "memory.h"
 #include "pokemon.h"
+#include "pokemon_mid.h"
 #include "string_format.h"
 #include "structs/str_3001B64.h"
 #include "constants/dungeon.h"
@@ -12,6 +13,7 @@ extern u16 gUnknown_20399DC;
 extern u16 gUnknown_20399DE;
 extern u8 gInvalidityText[];
 extern u8 gUndefineText[];
+extern const u8 gSpeechBubbleChar[];
 
 extern u8 ScriptPrintText_809B2B8(u32 *, u32, u32, u32);
 extern u32 IsTextboxOpen_809B40C(u32 *);
@@ -187,8 +189,8 @@ void sub_809A7EC(void)
         temp->unk5 = 0;
         temp->unk6 |= -1;
         temp->unk7 = 0;
-        temp->unk8 = 0;
-        temp->unkC = 0;
+        temp->unk8.a0 = 0;
+        temp->unk8.a4 = 0;
         temp->unk10 = 0;
         temp->faceData = 0;
         temp->unk1C = 0;
@@ -196,15 +198,10 @@ void sub_809A7EC(void)
     }
 }
 
-static inline struct unkStruct_3001B64_sub *sub_809A83C_inline(s16 p, struct unkStruct_3001B64 **thing) {
-    return &thing[0]->unk43C[p];
-}
-
 void sub_809A83C(s16 param_1)
 {
-    struct unkStruct_3001B64_sub *temp;
-
-    temp = sub_809A83C_inline(param_1, &gUnknown_3001B64);
+    s32 param1 = param_1;
+    struct unkStruct_3001B64_sub *temp = &gUnknown_3001B64->unk43C[param1];
 
     temp->unk0 = -1;
     temp->speciesID = 0;
@@ -212,8 +209,8 @@ void sub_809A83C(s16 param_1)
     temp->unk5 = 0;
     temp->unk6 = -1;
     temp->unk7 = 0;
-    temp->unk8 = 0;
-    temp->unkC = 0;
+    temp->unk8.a0 = 0;
+    temp->unk8.a4 = 0;
     temp->unk10 = 0;
     temp->faceData = NULL;
     temp->unk1C = 0;
@@ -234,12 +231,12 @@ u8 sub_80A8CF0(s16);
 s16 sub_80A7AE8(s16);
 s16 sub_80A8BFC(s32);
 
-bool8 sub_809A8B8(short param_1,u16 param_2)
+bool8 sub_809A8B8(s32 param_1, s32 param_2)
 {
     bool8 ret;
     s16 local_26;
-    int iVar5 = param_1;
-    s16 local_28 = param_2;
+    s32 iVar5 = (s16) param_1;
+    s16 local_28 = (s16) param_2;
     struct unkStruct_3001B64_sub *puVar8 = &gUnknown_3001B64->unk43C[iVar5];
     u8 uVar9 = 1;
     u8 byte1 = 0;
@@ -330,8 +327,8 @@ bool8 sub_809A8B8(short param_1,u16 param_2)
             puVar8->unk5 = byte1;
             puVar8->unk6 = 0xff;
             puVar8->unk7 = 0;
-            puVar8->unk8 = 0;
-            puVar8->unkC = 0;
+            puVar8->unk8.a0 = 0;
+            puVar8->unk8.a4 = 0;
             puVar8->unk10 = 0;
             puVar8->faceData = NULL;
             puVar8->unk1C = 0;
@@ -346,8 +343,8 @@ bool8 sub_809A8B8(short param_1,u16 param_2)
             puVar8->unk5 = byte1;
             puVar8->unk6 = 0xff;
             puVar8->unk7 = 0;
-            puVar8->unk8 = 0;
-            puVar8->unkC = 0;
+            puVar8->unk8.a0 = 0;
+            puVar8->unk8.a4 = 0;
             puVar8->unk10 = 0;
             puVar8->faceData = NULL;
             puVar8->unk1C = 0;
@@ -364,4 +361,167 @@ bool8 sub_809A8B8(short param_1,u16 param_2)
     }
 
     return ret;
+}
+
+bool8 sub_809AB4C(s32 a0_, s32 a1_)
+{
+    s32 a0 = (s16) a0_;
+    s32 a1 = (s16) a1_;
+    struct unkStruct_3001B64_sub *unkPtr = &gUnknown_3001B64->unk43C[a0];
+
+    if (sub_809A8B8(a0, a1)) {
+        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], unkPtr->speciesID);
+        strcpy(gFormatBuffer_Names[a0], gSpeechBubbleChar);
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
+}
+
+bool8 sub_809ABB4(s32 a0_, s32 a1_)
+{
+    s32 a0 = (s16) a0_;
+    s32 a1 = (s16) a1_;
+    struct unkStruct_3001B64_sub *unkPtr = &gUnknown_3001B64->unk43C[a0];
+
+    if (sub_809A8B8(a0, a1)) {
+        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], unkPtr->speciesID);
+        strcpy(gFormatBuffer_Names[a0], gFormatBuffer_Monsters[a0]);
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
+}
+
+extern void sub_80A8EC0(u8 *, u32);
+
+bool8 sub_809AC18(s32 a0_, s32 a1_)
+{
+    s32 a0 = (s16) a0_;
+    s32 a1 = (s16) a1_;
+    struct unkStruct_3001B64_sub *unkPtr = &gUnknown_3001B64->unk43C[a0];
+
+    if (sub_809A8B8(a0, a1)) {
+        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], unkPtr->speciesID);
+        sub_80A8EC0(gFormatBuffer_Names[a0], unkPtr->unk0);
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
+}
+
+struct Unk8116040Struct
+{
+    u16 unk0;
+    u16 unk2;
+    u8 unk4;
+};
+
+extern const struct Unk8116040Struct gUnknown_8116040[];
+
+bool8 sub_809AC7C(s32 a0_, s32 a1_, s32 a2_)
+{
+    s32 a0 = (s16) a0_;
+    s32 r5 = (s8) a1_;
+    u8 a2 = (u8) a2_;
+    struct unkStruct_3001B64_sub *unkPtr = &gUnknown_3001B64->unk43C[a0];
+
+    if (unkPtr->faceFile != NULL) {
+        CloseFile(unkPtr->faceFile);
+        unkPtr->faceFile = NULL;
+    }
+
+    if (unkPtr->speciesID >= 0 && r5 != -1 && unkPtr->speciesID != 0) {
+        if (a2 != 0x15) {
+            unkPtr->unk7 = a2;
+            unkPtr->unk8.a0 = 0;
+            unkPtr->unk8.a4 = 0;
+        }
+        unkPtr->unk18 = gUnknown_8116040[unkPtr->unk7].unk0 + unkPtr->unk8.a0;
+        unkPtr->unk1A = gUnknown_8116040[unkPtr->unk7].unk2 + unkPtr->unk8.a4;
+        unkPtr->unk1D = gUnknown_8116040[unkPtr->unk7].unk4;
+        unkPtr->unk1E = 0;
+        if (r5 == -2) {
+            unkPtr->unk6 = r5;
+            unkPtr->unk10 = 0;
+            unkPtr->faceData = NULL;
+            unkPtr->unk1C = 0;
+            return FALSE;
+        }
+
+        if (unkPtr->unk4) {
+            unkPtr->faceFile = OpenPokemonDialogueSpriteFile(unkPtr->speciesID);
+            if (unkPtr->faceFile != NULL) {
+                unkPtr->unk6 = r5;
+                unkPtr->unk10 = (u32) unkPtr->faceFile;
+                GetFileDataPtr(unkPtr->faceFile, 0);
+                switch (unkPtr->unk0) {
+                    case 0x47:
+                        if ((r5 & 0xF) < 6) {
+                            r5 = (s8) (r5 + 6);
+                            r5 = (s8) (r5 | 0x40);
+                        }
+                        break;
+                    case 0x4D:
+                        if (unkPtr->unk1D != 0 && (r5 & 0xF) < 4) {
+                            unkPtr->unk1D = 0;
+                            r5 = (s8) (r5 + 4);
+                            r5 = (s8) (r5 | 0x40);
+                        }
+                        break;
+                    case 0x53:
+                        if (unkPtr->unk1D != 0 && (r5 & 0xF) < 1) {
+                            unkPtr->unk1D = 0;
+                            r5 = (s8) (r5 + 1);
+                            r5 = (s8) (r5 | 0x40);
+                        }
+                        break;
+                    case 0x73:
+                        if (unkPtr->unk1D != 0 && (r5 & 0xF) < 2) {
+                            unkPtr->unk1D = 0;
+                            r5 = (s8) (r5 + 2);
+                            r5 = (s8) (r5 | 0x40);
+                        }
+                        break;
+                }
+
+                unkPtr->faceData = unkPtr->faceFile->data;
+                unkPtr->unk1C = r5 & 0xF;
+            }
+            else {
+                unkPtr->unk10 = 0;
+                unkPtr->faceData = NULL;
+                unkPtr->unk1C = 0;
+            }
+            return TRUE;
+        }
+    }
+
+    unkPtr->unk6 = 0xFF;
+    unkPtr->unk7 = 0;
+    unkPtr->unk8.a0 = 0;
+    unkPtr->unk8.a4 = 0;
+    unkPtr->unk10 = 0;
+    unkPtr->faceData = NULL;
+    unkPtr->unk1C = 0;
+    return FALSE;
+}
+
+bool8 sub_809ADD8(s32 a0_, struct unkStruct_3001B64_sub_sub *a1)
+{
+    s32 a0 = (s16) a0_;
+    struct unkStruct_3001B64_sub *unkPtr = &gUnknown_3001B64->unk43C[a0];
+
+    if (unkPtr->speciesID < 0)
+        return FALSE;
+    if (unkPtr->speciesID == MONSTER_NONE)
+        return FALSE;
+
+    unkPtr->unk8 = *a1;
+    unkPtr->unk18 = gUnknown_8116040[unkPtr->unk7].unk0 + unkPtr->unk8.a0;
+    unkPtr->unk1A = gUnknown_8116040[unkPtr->unk7].unk2 + unkPtr->unk8.a4;
+    return TRUE;
 }

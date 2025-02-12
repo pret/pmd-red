@@ -3,22 +3,30 @@
 
 #include "file_system.h"
 
+// Maybe Position32?
+struct unkStruct_3001B64_sub_sub
+{
+    s32 a0;
+    s32 a4;
+};
+
 struct unkStruct_3001B64_sub
 {
     // size: 0x24
-    u16 unk0;
+    s16 unk0;
     /* 0x2 */ s16 speciesID;
     u8 unk4;
     u8 unk5;
     u8 unk6;
     u8 unk7;
-    u32 unk8;
-    u32 unkC;
+    struct unkStruct_3001B64_sub_sub unk8;
     u32 unk10;
     /* 0x14 */ u8 *faceData;
-    u32 fill18;
+    u16 unk18;
+    u16 unk1A;
     u8 unk1C;
-    u8 fill1D[0x20 - 0x1D];
+    u8 unk1D;
+    u8 unk1E;
     /* 0x20 */ OpenedFile *faceFile;
 };
 
