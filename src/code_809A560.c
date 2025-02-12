@@ -7,6 +7,8 @@
 #include "string_format.h"
 #include "structs/str_3001B64.h"
 #include "constants/dungeon.h"
+#include "wigglytuff_shop1.h"
+#include "event_flag.h"
 
 IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = {NULL};
 
@@ -16,8 +18,9 @@ extern u8 gInvalidityText[];
 extern u8 gUndefineText[];
 extern const u8 gSpeechBubbleChar[];
 
-extern u8 ScriptPrintText_809B2B8(u32 *, u32, u32, const u8 *);
-extern u32 IsTextboxOpen_809B40C(u32 *);
+extern bool8 sub_802FCF0(void);
+u8 ScriptPrintText_809B2B8(struct unkStruct_3001B64_unkC *, s32, s32, const char *);
+bool8 IsTextboxOpen_809B40C(struct unkStruct_3001B64_unkC *);
 extern void sub_801416C(s32, s32);
 extern void ResetTextbox_809B294(void);
 extern void sub_8014144(void);
@@ -612,7 +615,7 @@ bool8 sub_809AFAC(void)
 
 extern const MenuItem gUnknown_81160E8[];
 void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
-u8 sub_809B18C(s32 *sp);
+bool8 sub_809B18C(s32 *sp);
 
 void sub_809AFC8(s32 a0_, s32 a1, s32 a2_, const char *text)
 {
@@ -622,10 +625,10 @@ void sub_809AFC8(s32 a0_, s32 a1, s32 a2_, const char *text)
     sub_809B028(gUnknown_81160E8, 0, (a0 != 0), a1, a2, text);
 }
 
-u8 sub_809AFFC(u8 *a0)
+bool8 sub_809AFFC(u8 *a0)
 {
     s32 sp;
-    u8 ret = sub_809B18C(&sp);
+    bool8 ret = sub_809B18C(&sp);
 
     if (a0 != NULL) {
         *a0 = (sp == 1);
@@ -634,6 +637,7 @@ u8 sub_809AFFC(u8 *a0)
 }
 
 extern const char gUnknown_8116188[];
+extern const char gUnknown_8116190[];
 extern const char gFormattedSpeechBubble[];
 
 bool8 sub_809B428(u8 *a0, s32 a1, u8 *a2);
@@ -665,4 +669,124 @@ void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, c
     if (gUnknown_3001B64->unk424 & 2) {
         sub_809A6E4(1);
     }
+}
+
+bool8 sub_809B18C(s32 *sp)
+{
+    if (sp != NULL) {
+        *sp = gUnknown_3001B64->unk430;
+    }
+
+    return (gUnknown_3001B64->unk420 == 3);
+}
+
+bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, s32 r3);
+
+bool8 sub_809B1C0(s32 a0, u32 kind, s32 a2)
+{
+    return sub_809B1D4(a0, kind, 0, a2);
+}
+
+bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, s32 a3)
+{
+    switch (a0) {
+        case 0xB:
+            if (sub_8021700(kind)) {
+                return FALSE;
+            }
+            break;
+        case 0xC:
+            sub_8001D88();
+            if (sub_802FCF0()) {
+                return FALSE;
+            }
+            break;
+    }
+
+    xxx_script_textboxes_809A680(4, 0);
+    gUnknown_3001B64->unk414 = a0;
+    gUnknown_3001B64->unk418 = 0;
+    gUnknown_3001B64->unk41C = NULL;
+    gUnknown_3001B64->unk420 = 1;
+    gUnknown_3001B64->unk424 = kind;
+    gUnknown_3001B64->unk428 = a2;
+    gUnknown_3001B64->unk42C = a3;
+    gUnknown_3001B64->unk430 = -1;
+    return TRUE;
+}
+
+// The same as sub_809B18C
+bool8 sub_809B260(s32 *a0)
+{
+    if (a0 != NULL) {
+        *a0 = gUnknown_3001B64->unk430;
+    }
+
+    return (gUnknown_3001B64->unk420 == 3);
+}
+
+void ResetTextbox_809B294(void)
+{
+    SetCharacterMask(3);
+    ScriptPrintText_809B2B8(&gUnknown_3001B64->unkC, 0, -1, NULL);
+}
+
+u8 ScriptPrintText_809B2B8(struct unkStruct_3001B64_unkC *ptr, s32 a1_, s32 a2_, const char *text)
+{
+    u16 a1 = (u16) a1_;
+    s32 a2 = (s16) a2_;
+
+    ptr->unk0 = a1;
+    if (text == NULL) {
+        if (a1 == 0) {
+            ptr->unk4 = 0;
+            return FALSE;
+        }
+
+        if (a1 & 4) {
+            sub_8014490();
+            xxx_script_textboxes_809A680(0, 1);
+        }
+        return TRUE;
+    }
+
+    ptr->unk4 = 1;
+    if (a1 & 0x100) {
+        if (a2 < 0) {
+            strcpy(gSpeakerNameBuffer, gFormattedSpeechBubble);
+        }
+        else {
+            sprintfStatic(gSpeakerNameBuffer, gUnknown_8116188, gFormatBuffer_Names[a2]);
+        }
+    }
+
+    if (gUnknown_3001B64->unk0 == 3) {
+        sprintfStatic(ptr->buffer, gUnknown_8116190, text);
+        text = ptr->buffer;
+    }
+
+    CreateMenuDialogueBoxAndPortrait(text, sub_809B428, -1, NULL, 0, 3, 0, sub_809AE3C(a2),
+         ((a1 & 0x100) ? 0xC : 0)
+         | ((a1 & 0x200) ? 0x4 : 0)
+         | ((gUnknown_3001B64->unk0 == 3) ? 0x10 : 0)
+         | ((gUnknown_3001B64->unk0 == 2) ? 0x10 : 0)
+         | ((a1 & 0x20) ? 0x20 : 0)
+         | ((a1 & 0x40) ? 0x1 : 0)
+         | ((a1 & 0x80) ? 0x100 : 0)
+         | ((a1 & 0x4) ? 0x200 : 0)
+         | ((gUnknown_3001B64->unk4 != -1) ? 0x2 : 0)
+                                     );
+
+    return TRUE;
+}
+
+bool8 IsTextboxOpen_809B40C(struct unkStruct_3001B64_unkC *a0)
+{
+    switch (a0->unk4) {
+        case 0:
+        case 2:
+        case 3:
+            return FALSE;
+    }
+    return TRUE;
 }

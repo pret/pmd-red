@@ -26,14 +26,20 @@ struct unkStruct_3001B64_sub
     /* 0x20 */ OpenedFile *faceFile;
 };
 
+struct unkStruct_3001B64_unkC
+{
+    u16 unk0;
+    u32 unk4;
+    u8 buffer[0x400];
+};
+
 struct unkStruct_3001B64
 {
     // size: 0x5A8
     u32 unk0;
     u32 unk4;
     u32 unk8;
-    u32 unkC;
-    u8 fill10[0x414 - 0x10];
+    struct unkStruct_3001B64_unkC unkC;
     u32 unk414;
     u32 unk418;
     const MenuItem *unk41C;
