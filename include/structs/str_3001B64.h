@@ -33,6 +33,14 @@ struct unkStruct_3001B64_unkC
     u8 buffer[0x400];
 };
 
+struct unkStruct_3001B64_unk418
+{
+    u16 unk0;
+    u8 (*unk4)(void);
+    u8 (*unk8)(void);
+    s32 (*unkC)(void);
+};
+
 struct unkStruct_3001B64
 {
     // size: 0x5A8
@@ -41,13 +49,13 @@ struct unkStruct_3001B64
     u32 unk8;
     struct unkStruct_3001B64_unkC unkC;
     u32 unk414;
-    u32 unk418;
+    struct unkStruct_3001B64_unk418 *unk418;
     const MenuItem *unk41C;
     u32 unk420;
     u32 unk424;
     u32 unk428;
     u32 unk42C;
-    u32 unk430;
+    s32 unk430;
     u32 unk434;
     u32 fill438;
     struct unkStruct_3001B64_sub unk43C[10];

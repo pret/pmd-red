@@ -2,6 +2,7 @@
 #include "text.h"
 #include "memory.h"
 #include "pokemon.h"
+#include "code_8099360.h"
 #include "code_800D090.h"
 #include "pokemon_mid.h"
 #include "string_format.h"
@@ -45,7 +46,7 @@ void sub_809A560(void)
     sub_8009408(0,0x14);
     ResetTextbox_809B294();
     gUnknown_3001B64->unk414 = 0;
-    gUnknown_3001B64->unk418 = 0;
+    gUnknown_3001B64->unk418 = NULL;
     gUnknown_3001B64->unk41C = 0;
     gUnknown_3001B64->unk420 = 0;
     gUnknown_3001B64->unk424 = 0;
@@ -640,7 +641,7 @@ extern const char gUnknown_8116188[];
 extern const char gUnknown_8116190[];
 extern const char gFormattedSpeechBubble[];
 
-bool8 sub_809B428(u8 *a0, s32 a1, u8 *a2);
+u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
 
 void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text)
 {
@@ -649,7 +650,7 @@ void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, c
 
     xxx_script_textboxes_809A680(gUnknown_8116134[a3], 0);
     gUnknown_3001B64->unk414 = 1;
-    gUnknown_3001B64->unk418 = 0;
+    gUnknown_3001B64->unk418 = NULL;
     gUnknown_3001B64->unk41C = menuItems;
     gUnknown_3001B64->unk420 = 2;
     gUnknown_3001B64->unk424 = (a1 != 0) ? 2 : 0;
@@ -705,7 +706,7 @@ bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, s32 a3)
 
     xxx_script_textboxes_809A680(4, 0);
     gUnknown_3001B64->unk414 = a0;
-    gUnknown_3001B64->unk418 = 0;
+    gUnknown_3001B64->unk418 = NULL;
     gUnknown_3001B64->unk41C = NULL;
     gUnknown_3001B64->unk420 = 1;
     gUnknown_3001B64->unk424 = kind;
@@ -789,4 +790,92 @@ bool8 IsTextboxOpen_809B40C(struct unkStruct_3001B64_unkC *a0)
             return FALSE;
     }
     return TRUE;
+}
+
+extern void sub_8099A34(s32 a0);
+extern void sub_8099A48(s32 a0);
+
+// It seems this function is effectively unused. It could be different in Blue however. The u8 * arguments most likely are pointers to some text drawing structures.
+u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2)
+{
+    switch (a0[2]) {
+        case 0x49:
+            sub_8099A34(0x1E);
+            a2[0x21] = 1;
+            return NULL;
+        case 0x4F:
+            sub_8099A48(0x1E);
+            a2[0x21] = 1;
+            return NULL;
+        case 0x57:
+            if (sub_8099B94()) {
+                return a0;
+            }
+            a2[0x21] = 1;
+            return NULL;
+        default:
+            return NULL;
+    }
+}
+
+bool8 sub_809B648(void);
+void sub_809B57C(void);
+
+void sub_809B474(void)
+{
+    struct unkStruct_3001B64_unk418 *unkStructPtr;
+
+    switch (gUnknown_3001B64->unk0) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        default:
+            break;
+        case 4:
+            switch (gUnknown_3001B64->unk420) {
+                case 1:
+                    if (!sub_809B648()) {
+                        gUnknown_3001B64->unk420 = 3;
+                        xxx_script_textboxes_809A680(0, 1);
+                        break;
+                    }
+
+                    unkStructPtr = gUnknown_3001B64->unk418;
+                    if (unkStructPtr != NULL) {
+                        if (unkStructPtr->unk4 != NULL) {
+                            ResetTextbox_809B294();
+                            if (!unkStructPtr->unk4()) {
+                                gUnknown_3001B64->unk430 = -1;
+                                gUnknown_3001B64->unk420 = 3;
+                                xxx_script_textboxes_809A680(0, 1);
+                                break;
+                            }
+                        }
+                        sub_809A6E4(unkStructPtr->unk0);
+                    }
+                    gUnknown_3001B64->unk420 = 2;
+                    // Fallthrough
+                case 2:
+                    unkStructPtr = gUnknown_3001B64->unk418;
+                    if (unkStructPtr != NULL) {
+                        s32 retVal = unkStructPtr->unkC();
+                        if (retVal == 0 || retVal == 1)
+                            break;
+                        gUnknown_3001B64->unk430 = (retVal == 2) ? -1 : 0;
+                        if (unkStructPtr->unk8 != NULL) {
+                            unkStructPtr->unk8();
+                        }
+                        sub_809A6F8(unkStructPtr->unk0);
+                    }
+                    else if (sub_809B648()) {
+                        break;
+                    }
+                    gUnknown_3001B64->unk420 = 3;
+                    xxx_script_textboxes_809A680(0, 1);
+                    break;
+            }
+            break;
+    }
+    sub_809B57C();
 }
