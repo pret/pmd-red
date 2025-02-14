@@ -60,7 +60,7 @@ typedef struct WigglytuffShop3Work
 } WigglytuffShop3Work;
 
 bool8 CreateWigglytuffShop(u32 mode);
-s32 sub_8021C5C(void);
+u32 sub_8021C5C(void);
 void CleanWigglytuffShop(void);
 
 #endif // GUARD_WIGGLYTUFF_SHOP3_H

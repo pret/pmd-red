@@ -28,6 +28,6 @@ typedef struct FelicityBankWork
 bool8 CreateFelicityBank(s32 mode);
 void DestroyFelicityBank(void);
 void DrawTeamMoneyBox(u32);
-s32 FelicityBankCallback(void);
+u32 FelicityBankCallback(void);
 
 #endif // GUARD_FELICITY_BANK_H

@@ -696,12 +696,15 @@ extern void sub_8099A34(s32 a0);
 extern void sub_8099A48(s32 a0);
 extern void GroundScriptLock(s16 index, s32 r1);
 extern void GroundScriptLockJumpZero(s16 index);
+extern u8 sub_802B2D4(void);
+extern void sub_802B3B8(void);
+extern u32 sub_802B358(void);
 void sub_8096AF8(struct unkStruct_8096AF8 *, u8 slotIndex, u8 dungeon);
 u8 sub_802DB28(u8, u8);
 void sub_8096BD0();
 void ScenarioCalc(s16 varId, s32 main, s32 sub);
 void MakuhitaDojo_Delete();
-s32 HandleMakuhitaDojoState();
+u32 HandleMakuhitaDojoState();
 s16 sub_802FED0();
 u8 sub_801FB50();
 void sub_80151C0();
@@ -768,6 +771,22 @@ u32 sub_80282DC(u8 *r0);
 void sub_809927C(u8);
 void sub_80282FC(void);
 void sub_8001064(void);
+extern u8 CreateThankYouMailPelipper(void);
+extern u8 sub_802E864(void);
+extern u8 sub_802DFB0(void);
+extern void CleanThankYouMailPelipper(void);
+extern void CleanHelperPelipper(void);
+extern void sub_802E06C(void);
+extern void sub_802DC00(void);
+extern void sub_801B72C(void);
+extern u32 ThankYouMailPelipperCallback(void);
+extern u32 HelperPelipperCallback(void);
+extern u32 sub_802E890(void);
+extern u32 sub_802DFD8(void);
+extern u32 sub_802DBD4(void);
+extern u32 sub_803B120(void);
+extern u32 sub_809CD48(void);
+extern u32 sub_801B6AC(void);
 
 void sub_809AFC8(s32 a0_, s32 a1, s32 a2_, const char *text)
 {
@@ -789,6 +808,17 @@ bool8 sub_809AFFC(u8 *a0)
 }
 
 u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
+bool8 sub_809B648(void);
+void sub_809B57C(void);
+bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, u8 *a3);
+void sub_809C39C(void);
+void sub_809C3D8(void);
+void sub_809C504(void);
+void sub_809C464(void);
+void sub_809C478(void);
+void sub_809C414(void);
+void sub_809C4B0(void);
+void sub_809C550(void);
 
 void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text)
 {
@@ -827,8 +857,6 @@ bool8 sub_809B18C(s32 *sp)
 
     return (gUnknown_3001B64->unk420 == 3);
 }
-
-bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, u8 *a3);
 
 bool8 sub_809B1C0(s32 a0, u32 kind, u8 *a2)
 {
@@ -962,9 +990,6 @@ u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2)
     }
 }
 
-bool8 sub_809B648(void);
-void sub_809B57C(void);
-
 void sub_809B474(void)
 {
     const struct unkStruct_3001B64_unk418 *unkStructPtr;
@@ -1079,10 +1104,6 @@ void nullsub_210(void)
 
 }
 
-void sub_809C39C(void);
-void sub_809C3D8(void);
-void sub_809C504(void);
-
 static const struct unkStruct_3001B64_unk418 gUnknown_81161A8 =
 {
     .unk0 = 1,
@@ -1155,21 +1176,126 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116228 =
     .unkC = sub_8028078,
 };
 
-extern const struct unkStruct_3001B64_unk418 gUnknown_81162F8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116298;
-extern const struct unkStruct_3001B64_unk418 gUnknown_81162A8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_81162B8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_81162C8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_81162D8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_81162E8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116308;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116318;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116238;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116248;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116258;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116268;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116278;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116288;
+static const struct unkStruct_3001B64_unk418 gUnknown_8116238 =
+{
+    .unk0 = 1,
+    .unk4 = sub_802B2D4,
+    .unk8 = sub_802B3B8,
+    .unkC = sub_802B358,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_8116248 =
+{
+    .unk0 = 1,
+    .unk4 = CreateThankYouMailPelipper,
+    .unk8 = CleanThankYouMailPelipper,
+    .unkC = ThankYouMailPelipperCallback,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_8116258 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = CleanHelperPelipper,
+    .unkC = HelperPelipperCallback,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_8116268 =
+{
+    .unk0 = 1,
+    .unk4 = sub_802E864,
+    .unk8 = sub_809C550,
+    .unkC = sub_802E890,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_8116278 =
+{
+    .unk0 = 1,
+    .unk4 = sub_802DFB0,
+    .unk8 = sub_802E06C,
+    .unkC = sub_802DFD8,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_8116288 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = sub_802DC00,
+    .unkC = sub_802DBD4,
+};
+
+// These 3 are identical
+static const struct unkStruct_3001B64_unk418 gUnknown_8116298 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = MakuhitaDojo_Delete,
+    .unkC = HandleMakuhitaDojoState,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81162A8 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = MakuhitaDojo_Delete,
+    .unkC = HandleMakuhitaDojoState,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81162B8 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = MakuhitaDojo_Delete,
+    .unkC = HandleMakuhitaDojoState,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81162C8 =
+{
+    .unk0 = 0,
+    .unk4 = CreateTestTracker,
+    .unk8 = sub_809C464,
+    .unkC = HandleTestTrackerState,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81162D8 =
+{
+    .unk0 = 0,
+    .unk4 = sub_8035678,
+    .unk8 = sub_809C478,
+    .unkC = sub_80356A0,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81162E8 =
+{
+    .unk0 = 0,
+    .unk4 = NULL,
+    .unk8 = sub_809C4B0,
+    .unkC = sub_803B120,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81162F8 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = sub_809C414,
+    .unkC = sub_8025354,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_8116308 =
+{
+    .unk0 = 0,
+    .unk4 = NULL,
+    .unk8 = NULL,
+    .unkC = sub_809CD48,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_8116318 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = sub_801B72C,
+    .unkC = sub_801B6AC,
+};
 
 bool8 sub_809B648(void)
 {

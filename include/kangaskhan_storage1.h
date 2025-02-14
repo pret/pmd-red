@@ -52,6 +52,6 @@ struct KangaskhanStorageWork
 
 bool8 CreateKangaskhanStorage(u32 mode);
 void DeleteKangaskhanStorage(void);
-s32 KangaskhanStorageCallback(void);
+u32 KangaskhanStorageCallback(void);
 
 #endif // GUARD_KANGASKHAN_STORAGE1_H

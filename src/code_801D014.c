@@ -95,7 +95,7 @@ bool8 sub_801D014(PokemonStruct1 *a0)
     return TRUE;
 }
 
-s32 sub_801D0DC(void)
+u32 sub_801D0DC(void)
 {
     switch (sUnknown_203B250->state) {
         case 0:

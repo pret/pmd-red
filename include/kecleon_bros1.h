@@ -71,6 +71,6 @@ typedef struct KecleonBrosWork1
 // mode corresponds to the enum: KecleonBrosMode
 bool8 CreateKecleonBros(u32 mode);
 void DeleteKecleonBros(void);
-s32 KecleonBrosCallback(void);
+u32 KecleonBrosCallback(void);
 
 #endif // GUARD_KECLEON_BROS1_H

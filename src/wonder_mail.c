@@ -212,7 +212,7 @@ u8 sub_8027F88(void)
   return 1;
 }
 
-s32 sub_8028078(void)
+u32 sub_8028078(void)
 {
 
   switch(sUnknown_203B2C0->state) {

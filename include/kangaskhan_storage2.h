@@ -31,7 +31,7 @@ typedef struct unkStruct_203B20C
 } unkStruct_203B20C;
 
 bool8 sub_8017E1C(void);
-s32 sub_8017E54(void);
+u32 sub_8017E54(void);
 void sub_8017EF4(void);
 
 #endif // GUARD_KANGASKHAN_STORAGE2_H

@@ -108,7 +108,7 @@ bool8 sub_801FB50(u32 mode)
     return TRUE;
 }
 
-s32 sub_801FC40(void)
+u32 sub_801FC40(void)
 {
     switch (gUnknown_203B27C->state) {
         case 0:

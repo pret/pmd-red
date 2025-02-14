@@ -51,7 +51,7 @@ bool8 sub_8017E1C(void)
     return TRUE;
 }
 
-s32 sub_8017E54(void)
+u32 sub_8017E54(void)
 {
     switch (sUnknown_203B20C->state) {
         case KANGASKHAN_STORAGE_2_INIT:

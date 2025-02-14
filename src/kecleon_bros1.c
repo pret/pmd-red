@@ -114,7 +114,7 @@ bool8 CreateKecleonBros(u32 mode)
     return TRUE;
 }
 
-s32 KecleonBrosCallback(void)
+u32 KecleonBrosCallback(void)
 {
     switch (sKecleonBrosWork1->currState) {
         case KECLEON_STORE_INIT:
