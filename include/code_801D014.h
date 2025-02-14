@@ -32,7 +32,7 @@ struct TeamBadgeData
 };
 
 bool8 sub_801D014(PokemonStruct1 *);
-u32 sub_801D0DC(void);
+s32 sub_801D0DC(void);
 u32 sub_801D178(void);
 u8 sub_801D1D4(void);
 void sub_801D1E0(void);

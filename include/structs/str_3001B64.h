@@ -37,7 +37,7 @@ struct unkStruct_3001B64_unk418
 {
     u16 unk0;
     u8 (*unk4)(void);
-    u8 (*unk8)(void);
+    void (*unk8)(void);
     s32 (*unkC)(void);
 };
 

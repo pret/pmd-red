@@ -81,7 +81,7 @@ bool8 CreateWigglytuffShop(u32 mode)
     return TRUE;
 }
 
-u32 sub_8021C5C(void)
+s32 sub_8021C5C(void)
 {
     switch (sWigglytuffShop3Work->state) {
         case WIGGLYTUFF_INIT:

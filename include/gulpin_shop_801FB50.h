@@ -39,7 +39,7 @@ typedef struct unkStruct_203B27C
 } unkStruct_203B27C;
 
 bool8 sub_801FB50(u32 mode);
-u32 sub_801FC40(void);
+s32 sub_801FC40(void);
 void sub_801FD7C(void);
 
 #endif // GUARD_GULPIN_SHOP_801FB50_H

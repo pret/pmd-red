@@ -74,7 +74,7 @@ bool8 CreateKangaskhanStorage(u32 mode)
     return TRUE;
 }
 
-u32 KangaskhanStorageCallback(void)
+s32 KangaskhanStorageCallback(void)
 {
     switch (gKangaskhanStorageWork->currState) {
         case KANGASKHAN_STORAGE_INIT:

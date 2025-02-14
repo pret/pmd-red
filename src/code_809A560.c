@@ -14,14 +14,25 @@
 #include "wigglytuff_shop1.h"
 #include "event_flag.h"
 #include "input.h"
+#include "ground_main.h"
+#include "code_801D014.h"
+#include "kangaskhan_storage1.h"
+#include "kangaskhan_storage2.h"
+#include "felicity_bank.h"
+#include "kecleon_bros1.h"
+#include "gulpin_shop_801FB50.h"
+#include "wigglytuff_shop3.h"
+#include "wonder_mail.h"
+#include "flash.h"
+#include "code_80118A4.h"
+#include "friend_list_menu.h"
+#include "personality_test1.h"
+#include "credits2.h"
 
 IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = {NULL};
 
 extern u16 gUnknown_20399DC;
 extern u16 gUnknown_20399DE;
-extern u8 gInvalidityText[];
-extern u8 gUndefineText[];
-extern const u8 gSpeechBubbleChar[];
 
 extern bool8 sub_802FCF0(void);
 u8 ScriptPrintText_809B2B8(struct unkStruct_3001B64_unkC *, s32, s32, const char *);
@@ -93,6 +104,24 @@ static const MenuItem gUnknown_811612C[] =
 {
     {NULL, 0},
 };
+
+static const u32 gUnknown_8116134[] =
+{
+    1, 1, 1, 1, 1
+};
+
+static const u16 gUnknown_8116148[] =
+{
+    226, 194, 450, 706, 1, 289, 257, 269, 261, 0
+};
+
+ALIGNED(4) static const u8 sInvalidText[] = _("{COLOR RED_W}invalidity{RESET}");
+ALIGNED(4) static const u8 sUndefineText[] = _("{COLOR RED_W}undefine{RESET}");
+ALIGNED(4) static const u8 sSpeechBubbleText[] = _("{SPEECH_BUBBLE}");
+ALIGNED(4) static const u8 sYellowSpeechBubbleText[] = _("{COLOR YELLOW_N}{SPEECH_BUBBLE}{RESET}");
+ALIGNED(4) static const u8 sYellowStringText[] = _("{COLOR YELLOW_N}%s{RESET}");
+// TODO: Convert to actual string
+ALIGNED(4) static const u8 gUnknown_8116190[] = {0x25, 0x73, 0x23, 0x5b, 0x49, 0x5d, 0x23, 0x7e, 0x20, 0x81, 0x40, 0x23, 0x57, 0x0a, 0x23, 0x5b, 0x4f, 0x5d, 0x23, 0x7e, 0x20, 0x81, 0x40, 0x00};
 
 void sub_809A560(void)
 {
@@ -281,8 +310,8 @@ void sub_809A83C(s16 param_1)
     temp->monPortrait.faceFile = NULL;
     temp->monPortrait.faceData = NULL;
     temp->monPortrait.spriteId = 0;
-    strcpy(gFormatBuffer_Monsters[param_1], gInvalidityText);
-    strcpy(gFormatBuffer_Names[param_1], gInvalidityText);
+    strcpy(gFormatBuffer_Monsters[param_1], sInvalidText);
+    strcpy(gFormatBuffer_Names[param_1], sInvalidText);
     if(temp->faceFile)
     {
         CloseFile(temp->faceFile);
@@ -380,8 +409,8 @@ bool8 sub_809A8B8(s32 param_1, s32 param_2)
         if (sVar3 >= 0) {
             unkPtr->unk0 = local_28;
             unkPtr->speciesID = sub_80A8BFC(sVar3);
-            strcpy(gFormatBuffer_Monsters[iVar5], gUndefineText);
-            strcpy(gFormatBuffer_Names[iVar5], gUndefineText);
+            strcpy(gFormatBuffer_Monsters[iVar5], sUndefineText);
+            strcpy(gFormatBuffer_Names[iVar5], sUndefineText);
             unkPtr->unk4 = uVar9;
             unkPtr->unk5 = byte1;
             unkPtr->unk6 = 0xff;
@@ -396,8 +425,8 @@ bool8 sub_809A8B8(s32 param_1, s32 param_2)
         else if (local_26 != 0) {
             unkPtr->unk0 = local_28;
             unkPtr->speciesID = local_26;
-            strcpy(gFormatBuffer_Monsters[iVar5], gUndefineText);
-            strcpy(gFormatBuffer_Names[iVar5], gUndefineText);
+            strcpy(gFormatBuffer_Monsters[iVar5], sUndefineText);
+            strcpy(gFormatBuffer_Names[iVar5], sUndefineText);
             unkPtr->unk4 = uVar9;
             unkPtr->unk5 = byte1;
             unkPtr->unk6 = 0xff;
@@ -430,7 +459,7 @@ bool8 sub_809AB4C(s32 a0_, s32 a1_)
 
     if (sub_809A8B8(a0, a1)) {
         CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], unkPtr->speciesID);
-        strcpy(gFormatBuffer_Names[a0], gSpeechBubbleChar);
+        strcpy(gFormatBuffer_Names[a0], sSpeechBubbleText);
         return TRUE;
     }
     else {
@@ -591,9 +620,6 @@ struct MonPortraitMsg *sub_809AE3C(s32 a0_)
     return NULL;
 }
 
-extern const u32 gUnknown_8116134[];
-extern const u16 gUnknown_8116148[];
-
 bool8 ScriptPrintText(s32 a0, s32 a1_, const char *text)
 {
     s32 a1 = (s16) a1_;
@@ -664,9 +690,6 @@ struct unkStruct_8096AF8
     /* 0x4 */ s16 targetSpecies;
 };
 
-extern const char gUnknown_8116188[];
-extern const char gUnknown_8116190[];
-extern const char gFormattedSpeechBubble[];
 void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
 bool8 sub_809B18C(s32 *sp);
 extern void sub_8099A34(s32 a0);
@@ -703,11 +726,9 @@ bool8 HasEvolutionCompleted();
 void GroundMap_ExecuteEvent();
 void SetScriptVarValue(u8 *localVarBuf, s32 varId, s32 val);
 void CleanLuminousCave();
-u8 CreateFelicityBank(u8);
 u8 sub_80023E4();
 u8 CreateFriendListMenu();
 void PlayMenuSoundEffect();
-void sub_801D014();
 bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems);
 s32 sub_801516C();
 void sub_80151A4();
@@ -741,6 +762,12 @@ u8 CreateHelperPelipperMenu();
 u8 CreateWigglytuffShop();
 u8 sub_8099328();
 void GetScriptVarScenario(s32 varId,u32 *outMain,u32 *outSub);
+u32 sub_802E90C();
+void sub_802E918();
+u32 sub_80282DC(u8 *r0);
+void sub_809927C(u8);
+void sub_80282FC(void);
+void sub_8001064(void);
 
 void sub_809AFC8(s32 a0_, s32 a1, s32 a2_, const char *text)
 {
@@ -778,10 +805,10 @@ void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, c
     gUnknown_3001B64->unk430 = a2;
     if (gUnknown_8116148[a3] & 0x100) {
         if (a4 < 0) {
-            strcpy(gSpeakerNameBuffer, gFormattedSpeechBubble);
+            strcpy(gSpeakerNameBuffer, sYellowSpeechBubbleText);
         }
         else {
-            sprintfStatic(gSpeakerNameBuffer, gUnknown_8116188, gFormatBuffer_Names[a4]);
+            sprintfStatic(gSpeakerNameBuffer, sYellowStringText, gFormatBuffer_Names[a4]);
         }
     }
 
@@ -874,10 +901,10 @@ u8 ScriptPrintText_809B2B8(struct unkStruct_3001B64_unkC *ptr, s32 a1_, s32 a2_,
     ptr->unk4 = 1;
     if (a1 & 0x100) {
         if (a2 < 0) {
-            strcpy(gSpeakerNameBuffer, gFormattedSpeechBubble);
+            strcpy(gSpeakerNameBuffer, sYellowSpeechBubbleText);
         }
         else {
-            sprintfStatic(gSpeakerNameBuffer, gUnknown_8116188, gFormatBuffer_Names[a2]);
+            sprintfStatic(gSpeakerNameBuffer, sYellowStringText, gFormatBuffer_Names[a2]);
         }
     }
 
@@ -1052,10 +1079,83 @@ void nullsub_210(void)
 
 }
 
-extern const struct unkStruct_3001B64_unk418 gUnknown_81161E8;
+void sub_809C39C(void);
+void sub_809C3D8(void);
+void sub_809C504(void);
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81161A8 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = sub_809C39C,
+    .unkC = sub_801D0DC,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81161B8 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = sub_809C3D8,
+    .unkC = sub_801D0DC,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81161C8 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = DeleteKangaskhanStorage,
+    .unkC = KangaskhanStorageCallback,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81161D8 =
+{
+    .unk0 = 1,
+    .unk4 = sub_8017E1C,
+    .unk8 = sub_8017EF4,
+    .unkC = sub_8017E54,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81161E8 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = DestroyFelicityBank,
+    .unkC = FelicityBankCallback,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_81161F8 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = DeleteKecleonBros,
+    .unkC = KecleonBrosCallback,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_8116208 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = sub_801FD7C,
+    .unkC = sub_801FC40,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_8116218 =
+{
+    .unk0 = 1,
+    .unk4 = NULL,
+    .unk8 = CleanWigglytuffShop,
+    .unkC = sub_8021C5C,
+};
+
+static const struct unkStruct_3001B64_unk418 gUnknown_8116228 =
+{
+    .unk0 = 1,
+    .unk4 = sub_8027F88,
+    .unk8 = sub_809C504,
+    .unkC = sub_8028078,
+};
+
 extern const struct unkStruct_3001B64_unk418 gUnknown_81162F8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_81161A8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_81161B8;
 extern const struct unkStruct_3001B64_unk418 gUnknown_8116298;
 extern const struct unkStruct_3001B64_unk418 gUnknown_81162A8;
 extern const struct unkStruct_3001B64_unk418 gUnknown_81162B8;
@@ -1064,18 +1164,12 @@ extern const struct unkStruct_3001B64_unk418 gUnknown_81162D8;
 extern const struct unkStruct_3001B64_unk418 gUnknown_81162E8;
 extern const struct unkStruct_3001B64_unk418 gUnknown_8116308;
 extern const struct unkStruct_3001B64_unk418 gUnknown_8116318;
-extern const struct unkStruct_3001B64_unk418 gUnknown_81161F8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_81161C8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_81161D8;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116218;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116228;
 extern const struct unkStruct_3001B64_unk418 gUnknown_8116238;
 extern const struct unkStruct_3001B64_unk418 gUnknown_8116248;
 extern const struct unkStruct_3001B64_unk418 gUnknown_8116258;
 extern const struct unkStruct_3001B64_unk418 gUnknown_8116268;
 extern const struct unkStruct_3001B64_unk418 gUnknown_8116278;
 extern const struct unkStruct_3001B64_unk418 gUnknown_8116288;
-extern const struct unkStruct_3001B64_unk418 gUnknown_8116208;
 
 bool8 sub_809B648(void)
 {
@@ -1189,12 +1283,12 @@ bool8 sub_809B648(void)
             }
             return 1;
           case 7:
-            sub_801D014(gUnknown_3001B64->unk42C);
+            sub_801D014((void *) gUnknown_3001B64->unk42C);
             gUnknown_3001B64->unk418 = &gUnknown_81161A8;
             PlayMenuSoundEffect(4);
             return 1;
           case 8:
-            sub_801D014(gUnknown_3001B64->unk42C);
+            sub_801D014((void *) gUnknown_3001B64->unk42C);
             gUnknown_3001B64->unk418 = &gUnknown_81161B8;
             PlayMenuSoundEffect(4);
             return 1;
@@ -1699,4 +1793,154 @@ bool8 sub_809B648(void)
     }
 
     return 0;
+}
+
+void sub_809C39C(void)
+{
+    gUnknown_3001B64->unk430 = sub_801D178();
+    if(gUnknown_3001B64->unk430 == 3)
+        GroundMainGroundRequest(sub_8002694(sub_801D1D4()), 0, -1);
+    sub_801D1E0();
+}
+
+void sub_809C3D8(void)
+{
+    gUnknown_3001B64->unk430 = sub_801D178();
+    if(gUnknown_3001B64->unk430 == 3)
+        GroundMainGroundRequest(sub_8002694(sub_801D1D4()), 0, -1);
+    sub_801D1E0();
+}
+
+void sub_809C414(void)
+{
+    u8 val;
+
+    val = sub_802540C();
+
+    if(val != 0)
+    {
+        gUnknown_3001B64->unk430 = val;
+        GroundMainGroundRequest(sub_8002694(val), 0, -1);
+    }
+    else
+{
+        gUnknown_3001B64->unk430 = -1;
+    }
+    CleanFriendListMenu();
+
+}
+
+void sub_809C464(void)
+{
+	DeleteTestTracker();
+	sub_8001064();
+	sub_809965C();
+}
+
+void sub_809C478(void)
+{
+    s32 temp;
+    s32 temp1;
+
+    if(sub_80356A0() == 0x3)
+    {
+        PlaySound(0x313);
+        InitFlash();
+        ClearFlashData();
+    }
+
+    sub_8035758();
+
+    GetScriptVarScenario(SCENARIO_MAIN, &temp, &temp1);
+    sub_80993C0(0);
+}
+
+// https://decomp.me/scratch/WyHAL  - (84.32% matching - Seth)
+NAKED
+void sub_809C4B0(void)
+{
+    asm_unified(
+	"\tpush {r4,r5,lr}\n"
+	"\tmovs r4, 0x1\n"
+	"\tnegs r4, r4\n"
+	"\tldr r5, _0809C4FC\n"
+	"\tldr r0, [r5]\n"
+	"\tmovs r2, 0x86\n"
+	"\tlsls r2, 3\n"
+	"\tadds r1, r0, r2\n"
+	"\tldr r0, [r1]\n"
+	"\tcmp r0, 0\n"
+	"\tbne _0809C4DE\n"
+	"\tbl sub_803B168\n"
+	"\tlsls r0, 16\n"
+	"\tldr r1, [r5]\n"
+	"\tldr r3, _0809C500\n"
+	"\tadds r2, r1, r3\n"
+	"\tasrs r4, r0, 16\n"
+	"\tlsrs r0, 16\n"
+	"\tstrh r0, [r2]\n"
+	"\tmovs r0, 0x86\n"
+	"\tlsls r0, 3\n"
+	"\tadds r1, r0\n"
+"_0809C4DE:\n"
+	"\tstr r4, [r1]\n"
+	"\tbl sub_803B1BC\n"
+	"\tmovs r0, 0x1\n"
+	"\tnegs r0, r0\n"
+	"\tcmp r4, r0\n"
+	"\tbeq _0809C4F4\n"
+	"\tadds r0, r4, 0\n"
+	"\tmovs r1, 0\n"
+	"\tbl GroundMap_ExecuteEvent\n"
+"_0809C4F4:\n"
+	"\tpop {r4,r5}\n"
+	"\tpop {r0}\n"
+	"\tbx r0\n"
+	"\t.align 2, 0\n"
+"_0809C4FC: .4byte gUnknown_3001B64\n"
+"_0809C500: .4byte 0x000005a4");
+}
+
+
+void sub_809C504(void)
+{
+    u8 temp;
+
+    if(sub_80282DC(&temp) == 1)
+    {
+        sub_809927C(temp);
+        gUnknown_3001B64->unk430 = 1;
+    }
+    else
+    {
+        gUnknown_3001B64->unk430 = -1;
+    }
+    sub_80282FC();
+}
+
+void sub_809C550(void)
+{
+    u32 ret;
+    s32 val;
+
+    ret = sub_802E90C();
+    val = 0;
+    sub_802E918();
+
+    switch(ret)
+    {
+        case 1:
+            if(ScriptVarScenarioBefore(SCENARIO_SUB1, 0x1D, 0x3))
+               val = 1;
+            break;
+        case 2:
+            if(ScriptVarScenarioBefore(SCENARIO_SUB1, 0x1F, 0x2))
+                val = 2;
+            break;
+        case 3:
+            if(ScriptVarScenarioBefore(SCENARIO_SUB8, 0x33, 0x8))
+               val = 3;
+            break;
+    }
+    gUnknown_3001B64->unk430 = val;
 }

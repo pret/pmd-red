@@ -78,7 +78,7 @@ bool8 CreateFelicityBank(s32 mode)
     return TRUE;
 }
 
-u32 FelicityBankCallback(void)
+s32 FelicityBankCallback(void)
 {
     switch (sFelicityBankWork->currState) {
         case 1:
