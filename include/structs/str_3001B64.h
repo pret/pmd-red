@@ -49,17 +49,17 @@ struct unkStruct_3001B64
     u32 unk8;
     struct unkStruct_3001B64_unkC unkC;
     u32 unk414;
-    struct unkStruct_3001B64_unk418 *unk418;
+    const struct unkStruct_3001B64_unk418 *unk418;
     const MenuItem *unk41C;
     u32 unk420;
     u32 unk424;
     u32 unk428;
-    u32 unk42C;
+    u8 *unk42C;
     s32 unk430;
-    u32 unk434;
+    s32 unk434;
     u32 fill438;
     struct unkStruct_3001B64_sub unk43C[10];
-    u16 unk5A4;
+    s16 unk5A4;
 };
 
 #endif // GUARD_STR_3001B61_H
