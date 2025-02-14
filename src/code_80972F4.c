@@ -29,12 +29,12 @@ s32 sub_8097318(s16 param_1)
   s32 param_1_s32;
 
   param_1_s32 = param_1;
-  
+
   if (param_1_s32 == 0xd) {
     iVar1 = 0;
   }
   else {
-    iVar1 = GetScriptVarArrayValue(NULL,RESCUE_SCENARIO_ORDER_LIST,param_1_s32);
+    iVar1 = GetScriptVarArrayValue(NULL,RESCUE_SCENARIO_ORDER_LIST, (u16) param_1_s32);
     if (iVar1 != 0) {
       iVar1 = 1;
     }
@@ -53,7 +53,7 @@ void sub_809733C(s16 param_1,u32 param_2)
 
   if (uVar2 != 0xd) {
     uVar2_u16 = uVar2;
-    if (GetScriptVarArrayValue(NULL,RESCUE_SCENARIO_JOB_LIST,uVar2_u16) == 0) {
+    if (GetScriptVarArrayValue(NULL,RESCUE_SCENARIO_JOB_LIST, (u16) uVar2_u16) == 0) {
       SetScriptVarArrayValue(NULL,RESCUE_SCENARIO_ORDER_LIST,uVar2_u16,param_2_u8);
       if (param_2_u8) {
         switch(uVar2)
@@ -69,20 +69,16 @@ void sub_809733C(s16 param_1,u32 param_2)
   }
 }
 
-bool32 sub_8097384(s16 param_1)
+bool8 sub_8097384(s32 param_1)
 {
-    bool32 val;
+    s32 param1 = (s16) param_1;
 
-    if (param_1 == 13)
-        val = FALSE;
-    else {
-        // May not need the & 0xFFFF if the 3rd param is s16
-        val = GetScriptVarArrayValue(NULL, RESCUE_SCENARIO_JOB_LIST, param_1 & 0xFFFF);
-        if (val != 0)
-            val = TRUE;
+    if (param1 == 13) {
+        return FALSE;
     }
-
-    return val;
+    else {
+        return (GetScriptVarArrayValue(NULL, RESCUE_SCENARIO_JOB_LIST, (u16) param1) != FALSE);
+    }
 }
 
 void sub_80973A8(s32 param_1,u32 param_2)
@@ -90,7 +86,7 @@ void sub_80973A8(s32 param_1,u32 param_2)
   s32 sVar1;
   s32 param_1_s32 = (s16)param_1;
   u8 param_2_u32 = param_2;
-  
+
   if (param_1_s32 != 0xd) {
     if (param_2_u32 != 0) {
       sVar1 = sub_80A26B8(param_1);
@@ -103,21 +99,16 @@ void sub_80973A8(s32 param_1,u32 param_2)
   }
 }
 
-bool32 RescueScenarioConquered(s16 param_1)
+bool8 RescueScenarioConquered(s32 param_1)
 {
-    bool32 val;
+    s32 param1 = (s16) param_1;
 
-    if (param_1 == 13)
-        val = FALSE;
-    else {
-        // May not need the & 0xFFFF if the 3rd param is s16
-        // But it doesn't work
-        val = GetScriptVarArrayValue(NULL, RESCUE_SCENARIO_CONQUEST_LIST, param_1 & 0xFFFF);
-        if (val != 0)
-            val = TRUE;
+    if (param1 == 13) {
+        return FALSE;
     }
-
-    return val;
+    else {
+        return (GetScriptVarArrayValue(NULL, RESCUE_SCENARIO_CONQUEST_LIST, (u16) param1) != FALSE);
+    }
 }
 
 void sub_8097418(s32 index,bool32 param_2)

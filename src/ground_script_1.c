@@ -490,7 +490,7 @@ s32 ExecuteScriptCommand(Action *action) {
             case 0x1f: {
                 s32 a = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
                 const DungeonInfo *ret1 = GetDungeonInfo_80A2608(a);
-                s32 thing = GetScriptVarArrayValue(NULL, DUNGEON_ENTER_LIST, a) == 0 ? ret1->unk6 : ret1->unk8;
+                s32 thing = GetScriptVarArrayValue(NULL, DUNGEON_ENTER_LIST, (u16) a) == 0 ? ret1->unk6 : ret1->unk8;
                 // fakematch: this is almost certainly a range check of the form 0x37 <= a && a < 0x48
                 // but that loses the s32 -> u16 cast. Inlines, macros, or other schenanigans are likely involved
                 if (!((u16)(a - 0x37) < 0x11) && (s16)sub_80A2750(a) == 1) {

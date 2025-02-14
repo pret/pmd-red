@@ -59,7 +59,7 @@ bool8 sub_8097504(s16 mazeIndex)
 
 bool8 IsMazeCompleted(s16 mazeIndex)
 {
-    return (GetScriptVarArrayValue(NULL, TRAINING_CONQUEST_LIST, mazeIndex) != 0);
+    return (GetScriptVarArrayValue(NULL, TRAINING_CONQUEST_LIST, (u16) mazeIndex) != 0);
 }
 
 void sub_80975A8(s16 param_1,u8 param_2)

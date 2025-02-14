@@ -20,9 +20,7 @@ bool8 sub_8096F50(WonderMail *mail);
 void sub_8097418(s32 index, bool32);
 bool8 sub_8097504(s16 mazeIndex);
 const u8 *sub_80975DC(s16);
-
-// These two are definitely bool8 but can't get them to match with it yet
-//bool8 sub_8097384(s16);
-//bool8 RescueScenarioConquered(s16);
+bool8 sub_8097384(s32 param_1);
+bool8 RescueScenarioConquered(s32 param_1);
 
 #endif // GUARD_CODE_80972F4_H

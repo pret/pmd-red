@@ -10,10 +10,6 @@ extern const s16 gUnknown_8116F24[];
 extern const s16 gUnknown_8116F9A[];
 extern const u8 *gUnknown_8117000[];
 
-// code_80972F4.h (read comment)
-extern bool8 sub_8097384(s16);
-extern bool8 RescueScenarioConquered(s16);
-
 // code_8098BDC.s
 extern void sub_809AB4C(s32, s32);
 extern void sub_809ABB4(s32, s32);
@@ -217,7 +213,7 @@ s16 sub_80A2750(s16 r0)
         return 1;
     if (sub_80023E4(5))
         return 1;
-    if (!RescueScenarioConquered(temp->unkE))
+    if (!RescueScenarioConquered((s16) temp->unkE))
         return 1;
     if (!sub_80023E4(1))
         return 1;
@@ -243,7 +239,7 @@ bool8 sub_80A27CC(s16 r0)
         return TRUE;
     if (!sub_80023E4(1))
         return FALSE;
-    if (!RescueScenarioConquered(temp))
+    if (!RescueScenarioConquered((s16) temp))
         return FALSE;
     return TRUE;
 }
@@ -262,9 +258,9 @@ bool8 sub_80A2824(u8 index)
 
             if (temp->unk11 != 0) {
                 if (temp->dungeonIndex == index) {
-                    if (sub_8097384(i))
+                    if (sub_8097384((s16) i))
                         return TRUE;
-                    if (RescueScenarioConquered(i))
+                    if (RescueScenarioConquered((s16) i))
                         return TRUE;
                 }
             }
@@ -276,7 +272,7 @@ bool8 sub_80A2824(u8 index)
 
             if (temp->unk11 != 0)
                 if (temp->dungeonIndex == index)
-                    if (sub_8097384(i))
+                    if (sub_8097384((s16) i))
                         return TRUE;
         }
     }
@@ -310,9 +306,9 @@ bool8 sub_80A28F0(u8 index)
 
         if (temp->unk11 != 0) {
             if (temp->dungeonIndex == index) {
-                if (sub_8097384(counter))
+                if (sub_8097384((s16) counter))
                     return TRUE;
-                if (RescueScenarioConquered(counter))
+                if (RescueScenarioConquered((s16) counter))
                     return TRUE;
             }
         }
@@ -342,7 +338,7 @@ UNUSED static s32 sub_80A293C(u8 *param_1)
 
     for (index = 0; index < 46; index++) {
         iVar3 = sub_80A2620(index);
-        if (iVar3->unk11 != 0 && sub_8097384(index))
+        if (iVar3->unk11 != 0 && sub_8097384((s16) index))
             local_68[iVar3->dungeonIndex] = 1;
     }
 
@@ -387,7 +383,7 @@ s32 sub_80A29B0(u8 *param_1)
         for (index = 0; index < 46; index++) {
             iVar3 = sub_80A2620(index);
 
-            if (iVar3->unk11 != 0 && RescueScenarioConquered(index))
+            if (iVar3->unk11 != 0 && RescueScenarioConquered((s16) index))
                 local_68[iVar3->dungeonIndex] = 1;
         }
     }
@@ -429,7 +425,7 @@ UNUSED static s32 sub_80A2A5C(u8 *param_1)
         for (index = 0; index < 46; index++) {
             iVar3 = sub_80A2620(index);
 
-            if (iVar3->unk11 != 0 && (sub_8097384(index) || RescueScenarioConquered(index)))
+            if (iVar3->unk11 != 0 && (sub_8097384((s16) index) || RescueScenarioConquered((s16) index)))
                 local_58[iVar3->dungeonIndex] = 1;
         }
     }
@@ -437,7 +433,7 @@ UNUSED static s32 sub_80A2A5C(u8 *param_1)
         for (index = 0; index < 46; index++) {
             iVar3 = sub_80A2620(index);
 
-            if (iVar3->unk11 != 0 && sub_8097384(index))
+            if (iVar3->unk11 != 0 && sub_8097384((s16) index))
                 local_58[iVar3->dungeonIndex] = 1;
         }
     }
