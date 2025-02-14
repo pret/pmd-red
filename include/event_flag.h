@@ -144,7 +144,7 @@ void ResetScriptVarArray(u8 *localVarBuf, s16 varId);
 void ClearScriptVarArray(u8 *localVarBuf, s16 varId);
 void GetScriptVarRef(struct ScriptVarPtr *out, u8 *localVarBuf, s32 varId);
 s32 GetScriptVarValue(u8 *localVarBuf, s32 varId);
-s32 GetScriptVarArrayValue(u8 *localVarBuf, s32 varId, u16 idx);
+s32 GetScriptVarArrayValue(u8 *localVarBuf, s32 varId, s32 idx);
 void SetScriptVarValue(u8 *localVarBuf, s32 varId, s32 val);
 void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId, s32 idx, s32 val);
 s32 GetScriptVarArraySum(u8 *localVarBuf, s16 varId);

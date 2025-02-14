@@ -43,14 +43,154 @@ extern u8 gUnknown_80B735C[];
 extern u8 gUnknown_80B7378[];
 extern u8 gUnknown_80B7388[];
 
+extern bool8 GetScriptMode(void);
 extern bool8 HasCompletedAllMazes(void);
 extern u8 sub_8002658(s16);
 extern void sub_809733C(u32, u32);
 extern void sub_80973A8(u32, u32);
 
+// A fakematch? Debugging leftover? A bug? No clue.
+#define GET_PTR_x400VAR(varId)(((void*) (&gScriptVarInfo[varId - 0x466])) - 4)
 
-// code_80972F4.h (read comment)
-extern bool8 RescueScenarioConquered(s16);
+void ResetScriptVarArray(u8 *localVarBuf, s16 varId_)
+{
+    struct ScriptVarInfo *infoPtr;
+    u16 i;
+    s32 varId = varId_;
+
+    if (varId < 0x400) {
+        infoPtr = &(gScriptVarInfo)[varId];
+    }
+    else {
+        infoPtr = GET_PTR_x400VAR(varId);
+    }
+
+    for (i = 0; i < infoPtr->arrayLen; i++) {
+        SetScriptVarArrayValue(localVarBuf,varId,i,infoPtr->defaultValue);
+    }
+}
+
+void ClearScriptVarArray(u8 *localVarBuf, s16 varId_)
+{
+    struct ScriptVarInfo *infoPtr;
+    u16 i;
+    s32 varId = varId_;
+
+    if (varId < 0x400) {
+        infoPtr = &(gScriptVarInfo)[varId];
+    }
+    else {
+        infoPtr = GET_PTR_x400VAR(varId);
+    }
+
+    for (i = 0; i < infoPtr->arrayLen; i++) {
+        SetScriptVarArrayValue(localVarBuf,varId,i,0);
+    }
+}
+
+void GetScriptVarRef(struct ScriptVarPtr *out, u8 *localVarBuf, s32 varId_)
+{
+    struct ScriptVarInfo *infoPtr;
+    s32 varId = (s16) varId_;
+
+    if (varId < 0x400) {
+        infoPtr = &gScriptVarInfo[varId];
+        out->info = infoPtr;
+        out->ptr = &gScriptVarBuffer[infoPtr->bufOffset];
+    }
+    else {
+        infoPtr = GET_PTR_x400VAR(varId);
+        out->info = infoPtr;
+        out->ptr = &localVarBuf[infoPtr->bufOffset * 4];
+    }
+}
+
+s32 GetScriptVarValue(u8 *localVarBuf, s32 varId_)
+{
+    struct ScriptVarPtr sp;
+    s32 varId = (s16) varId_;
+
+    GetScriptVarRef(&sp, localVarBuf, varId);
+
+    switch (sp.info->type) {
+        case 1: {
+            s32 bitOffset = sp.info->bitOffset;
+            u8 a = 1 << bitOffset;
+            return (*sp.ptr & a) != FALSE; // Read bit-packed bool flag
+        }
+        case 2:
+        case 7:
+            return *((u8 *)sp.ptr);
+        case 3:
+            return *((s8 *)sp.ptr);
+        case 4:
+            return *((u16 *)sp.ptr);
+        case 5:
+            return *((s16 *)sp.ptr);
+        case 6:
+            return *((u32 *)sp.ptr);
+        case 8:
+            switch ((s16)varId) {
+                case 23:
+                    return GetScriptMode() != FALSE;
+                case 32:
+                    return GetFriendSum_808D480();
+                case 33:
+                    return GetUnitSum_808D544(0);
+                case 34:
+                    return gTeamInventoryRef->teamMoney;
+                case 35:
+                    return gTeamInventoryRef->teamSavings;
+            }
+        default:
+            return 0;
+    }
+}
+
+s32 GetScriptVarArrayValue(u8 *localVarBuf, s32 varId_, s32 idx_)
+{
+    struct ScriptVarPtr sp;
+    s32 varId = (s16) varId_;
+    s32 idx = (u16) (idx_);
+
+    GetScriptVarRef(&sp, localVarBuf, varId);
+
+    switch (sp.info->type) {
+        case 1: {
+            s32 bitOffset = (u16) sp.info->bitOffset;
+            u16 flagNum = idx + bitOffset;
+            u8 *a = &sp.ptr[flagNum / 8];
+            u8 b = 1 << (flagNum % 8);
+            return (*a & b) != FALSE; // Read bit-packed bool flag
+        }
+        case 2:
+        case 7:
+            return ((u8 *)sp.ptr)[idx];
+        case 3:
+            return ((s8 *)sp.ptr)[idx];
+        case 4:
+            return ((u16 *)sp.ptr)[idx];
+        case 5:
+            return ((s16 *)sp.ptr)[idx];
+        case 6:
+            return ((u32 *)sp.ptr)[idx];
+        case 8:
+            switch ((s16)varId) {
+                case 23:
+                    return GetScriptMode() != FALSE;
+                case 32:
+                    return GetFriendSum_808D480();
+                case 33:
+                    return GetUnitSum_808D544(0);
+                case 34:
+                    return gTeamInventoryRef->teamMoney;
+                case 35:
+                    return gTeamInventoryRef->teamSavings;
+            }
+        default:
+            return 0;
+    }
+}
 
 void SetScriptVarValue(u8 *localVarBuf, s32 varId_, s32 val)
 {
@@ -199,7 +339,7 @@ s32 GetScriptVarArraySum(u8 *localVarBuf, s16 varId)
     GetScriptVarRef(&local_1c, 0, varId_s32);
     for(counter = 0; counter < local_1c.info->arrayLen; counter++)
     {
-        total += GetScriptVarArrayValue(localVarBuf, varId_s32, counter);
+        total += GetScriptVarArrayValue(localVarBuf, varId_s32, (u16) counter);
     }
     return total;
 }
