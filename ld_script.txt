@@ -575,6 +575,8 @@ SECTIONS {
         data/data_8115EB8.o(.rodata);
         src/ground_main.o(.rodata);
         data/data_8115F5C.o(.rodata);
+        src/code_809A560.o(.rodata);
+        data/data_8115F5C_2.o(.rodata);
         src/ground_event_data.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
         src/ground_data_t00p01_station.o(.rodata);
