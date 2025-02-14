@@ -102,7 +102,7 @@ u8 sub_802B2D4(void)
   }
 }
 
-s32 sub_802B358(void)
+u32 sub_802B358(void)
 {
   switch(sUnknown_203B2C8->currState) {
     case INIT_STATE:
