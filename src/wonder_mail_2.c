@@ -74,7 +74,7 @@ ALIGNED(4) const char gUnknown_80DFB14[] = _(
 	" Please give me a shout if\n"
 	"you would like to send {COLOR CYAN_G}A-OK Mail{RESET}.");
 
-s32 sub_802B2D4(void)
+u8 sub_802B2D4(void)
 {
   OpenedFile *faceFile;
 
