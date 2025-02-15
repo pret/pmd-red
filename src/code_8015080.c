@@ -7,6 +7,8 @@
 #include "text.h"
 #include "sprite.h"
 #include "code_80118A4.h"
+#include "code_803D0D8.h"
+#include "text.h"
 
 struct  unkStruct_203B1F8
 {
@@ -110,7 +112,7 @@ struct unkStruct_203B1FC
     u8 unk1A;
     u8 unk1B;
     u8 unk1C;
-    u8 fill1D[0x8A - 0x1D];
+    u16 unk1E[(0x8A - 0x1E) / 2];
     s16 unk8A[2];
     u8 fill8E[0xF8 - 0x8E];
     u8 *unkF8;
@@ -308,3 +310,146 @@ void sub_80155F0(void)
         gUnknown_203B1FC = NULL;
     }
 }
+
+struct Struct80DB0F8
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    s32 unk8;
+};
+
+extern const struct Struct80DB0F8 gUnknown_80DB0F8[][85];
+
+u32 sub_801560C(void)
+{
+    s32 var = gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].unk8;
+
+    switch (var) {
+        case 0x107:
+            gUnknown_203B1FC->unk18 = (gUnknown_203B1FC->unk18 == 0);
+            PlayMenuSoundEffect(4);
+            sub_8015A08(0);
+            break;
+        case 0x105:
+            if (sub_8015748()) {
+                return 2;
+            }
+            break;
+        case 0x106:
+            if (sub_8015F44() == 0 || (gUnknown_203B1FC->unk4 != 0 && sub_8015F44() != gUnknown_203B1FC->unk1B)) {
+                PlayMenuSoundEffect(2);
+            }
+            else {
+                PlayMenuSoundEffect(0);
+                MemoryCopy8(gUnknown_203B1FC->unk134, gUnknown_203B1FC->unkF8, gUnknown_203B1FC->unk1B);
+                return 3;
+            }
+            break;
+        default:
+            if (gUnknown_203B1FC->unk4 != 0 && sub_803D0F0(var) == 0xFF) {
+                PlayMenuSoundEffect(2);
+            }
+            else {
+                if (gUnknown_203B1FC->unk18 == 1) {
+                    s32 i;
+                    for (i = gUnknown_203B1FC->unk1B - 2; i >= gUnknown_203B1FC->unk1C; i--) {
+                        u8 *ptr = &gUnknown_203B1FC->unkF8[i];
+                        ptr[1] = ptr[0];
+                    }
+                }
+
+                gUnknown_203B1FC->unkF8[gUnknown_203B1FC->unk1C] = var;
+                if (gUnknown_203B1FC->unk1C < gUnknown_203B1FC->unk1B - 1) {
+                    gUnknown_203B1FC->unk1C++;
+                }
+                else {
+                    gUnknown_203B1FC->unk1A = 5;
+                }
+
+                PlayMenuSoundEffect(0);
+                sub_8015C1C();
+                sub_8015F84();
+            }
+            break;
+    }
+
+    return 0;
+}
+
+bool8 sub_8015748(void)
+{
+    u32 val = gUnknown_203B1FC->unkF8[gUnknown_203B1FC->unk1C];
+
+    if (val == 0) {
+        if (gUnknown_203B1FC->unk1C == 0) {
+            PlayMenuSoundEffect(2);
+            return TRUE;
+        }
+        else {
+            gUnknown_203B1FC->unk1C--;
+            gUnknown_203B1FC->unkF8[gUnknown_203B1FC->unk1C] = val;
+            PlayMenuSoundEffect(1);
+            sub_8015C1C();
+            sub_8015F84();
+        }
+    }
+    else {
+        s32 i, n;
+
+        n = sub_8015F44() - 1;
+        for (i = gUnknown_203B1FC->unk1C; i < n; i++) {
+            u8 *ptr = &gUnknown_203B1FC->unkF8[i];
+            ptr[0] = ptr[1];
+        }
+        gUnknown_203B1FC->unkF8[n] = 0;
+        PlayMenuSoundEffect(1);
+        sub_8015C1C();
+        sub_8015F84();
+    }
+
+    return FALSE;
+}
+
+extern const DungeonPos gUnknown_80DB098[];
+extern const DungeonPos gUnknown_80DAFC0[];
+
+void sub_80157D8(void)
+{
+    UnkTextStruct1 *txtPtr = &gUnknown_2027370[1];
+
+    // Note: for cases 4 and 5, the code is identical except for different position structs.
+    if (gUnknown_203B1FC->unk0 == 4) {
+        s32 x, y;
+
+        x = gUnknown_80DAFC0[gUnknown_203B1FC->unk1C].x + (txtPtr->unk0 * 8);
+        SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, x);
+
+        y = gUnknown_80DAFC0[gUnknown_203B1FC->unk1C].y + (txtPtr->unk2 * 8) + 5;
+        SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, y);
+    }
+    else if (gUnknown_203B1FC->unk0 == 5) {
+        s32 x, y;
+
+        x = gUnknown_80DB098[gUnknown_203B1FC->unk1C].x + (txtPtr->unk0 * 8);
+        SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, x);
+
+        y = gUnknown_80DB098[gUnknown_203B1FC->unk1C].y + (txtPtr->unk2 * 8) + 5;
+        SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, y);
+    }
+    else {
+        s32 x, y;
+
+        x = gUnknown_203B1FC->unk1E[gUnknown_203B1FC->unk1C] + (gUnknown_203B1FC->unk8A[gUnknown_203B1FC->unk1C] / 2) + 30 + (txtPtr->unk0 * 8);
+        SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, (u16) x);
+
+        y = (txtPtr->unk2 * 8) + 34;
+        SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, y);
+    }
+}
+
