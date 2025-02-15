@@ -40,6 +40,8 @@ bool8 IsTextboxOpen_809B40C(struct unkStruct_3001B64_unkC *);
 extern void sub_801416C(s32, s32);
 extern void ResetTextbox_809B294(void);
 extern void sub_8014144(void);
+extern s32 sub_803B168(void);
+extern void sub_803B1BC(void);
 
 u32 xxx_script_textboxes_809A680(u32 param_1, u32 param_2);
 void sub_809A62C(void);
@@ -1981,52 +1983,29 @@ void sub_809C478(void)
     sub_80993C0(0);
 }
 
-// https://decomp.me/scratch/WyHAL  - (84.32% matching - Seth)
-NAKED
 void sub_809C4B0(void)
 {
-    asm_unified(
-	"\tpush {r4,r5,lr}\n"
-	"\tmovs r4, 0x1\n"
-	"\tnegs r4, r4\n"
-	"\tldr r5, _0809C4FC\n"
-	"\tldr r0, [r5]\n"
-	"\tmovs r2, 0x86\n"
-	"\tlsls r2, 3\n"
-	"\tadds r1, r0, r2\n"
-	"\tldr r0, [r1]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _0809C4DE\n"
-	"\tbl sub_803B168\n"
-	"\tlsls r0, 16\n"
-	"\tldr r1, [r5]\n"
-	"\tldr r3, _0809C500\n"
-	"\tadds r2, r1, r3\n"
-	"\tasrs r4, r0, 16\n"
-	"\tlsrs r0, 16\n"
-	"\tstrh r0, [r2]\n"
-	"\tmovs r0, 0x86\n"
-	"\tlsls r0, 3\n"
-	"\tadds r1, r0\n"
-"_0809C4DE:\n"
-	"\tstr r4, [r1]\n"
-	"\tbl sub_803B1BC\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tcmp r4, r0\n"
-	"\tbeq _0809C4F4\n"
-	"\tadds r0, r4, 0\n"
-	"\tmovs r1, 0\n"
-	"\tbl GroundMap_ExecuteEvent\n"
-"_0809C4F4:\n"
-	"\tpop {r4,r5}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0809C4FC: .4byte gUnknown_3001B64\n"
-"_0809C500: .4byte 0x000005a4");
-}
+    s16 scriptIndex_s16;
+    s32 scriptIndex = -1;
 
+    if (gUnknown_3001B64->unk430 == 0) {
+        scriptIndex = (s16) sub_803B168();
+
+        ASM_MATCH_TRICK(gUnknown_3001B64->unk5A4);
+        scriptIndex_s16 = scriptIndex;
+
+        gUnknown_3001B64->unk5A4 = scriptIndex_s16;
+        gUnknown_3001B64->unk430 = scriptIndex;
+    }
+    else {
+        gUnknown_3001B64->unk430 = -1;
+    }
+
+    sub_803B1BC();
+
+    if (scriptIndex != -1)
+        GroundMap_ExecuteEvent(scriptIndex, 0);
+}
 
 void sub_809C504(void)
 {
