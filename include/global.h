@@ -46,6 +46,7 @@ static inline s16 Self_s16(s16 a)
 #define NAKED __attribute__((naked))
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
+#define ARRAY_COUNT_INT(array) ((s32)(sizeof(array) / sizeof((array)[0]))) // When an int is needed to match.
 
 #define SWAP(a, b, temp)    \
 {                           \

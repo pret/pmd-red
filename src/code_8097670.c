@@ -56,7 +56,7 @@ void ResetAdventureInfo(void)
     for (index = 0; index < 14; index++)
         gUnknown_203B494->unk1C[index] = 0;
 
-    for (index = 0; index < (s32)ARRAY_COUNT(gUnknown_203B494->learnedMoves); index++)
+    for (index = 0; index < ARRAY_COUNT_INT(gUnknown_203B494->learnedMoves); index++)
         gUnknown_203B494->learnedMoves[index] = 0;
 }
 
@@ -344,7 +344,7 @@ static void WriteAdventureBits(DataSerializer *r0)
     WriteBits(r0, &gUnknown_203B494->numFloorsExplored, 17);
     WriteBits(r0, gUnknown_203B494->unk1C, 14 * 32);
     WriteBits(r0, gUnknown_203B494->unk54, 14 * 32);
-    WriteBits(r0, gUnknown_203B494->learnedMoves, (s32)ARRAY_COUNT(gUnknown_203B494->learnedMoves) * 32);
+    WriteBits(r0, gUnknown_203B494->learnedMoves, ARRAY_COUNT_INT(gUnknown_203B494->learnedMoves) * 32);
     WriteDungeonLocationBits(r0, &gUnknown_203B494->dungeonLocation);
 }
 
@@ -360,7 +360,7 @@ static void ReadAdventureBits(DataSerializer *r0)
     ReadBits(r0, &gUnknown_203B494->numFloorsExplored, 17);
     ReadBits(r0, gUnknown_203B494->unk1C, 14 * 32);
     ReadBits(r0, gUnknown_203B494->unk54, 14 * 32);
-    ReadBits(r0, gUnknown_203B494->learnedMoves, (s32)ARRAY_COUNT(gUnknown_203B494->learnedMoves) * 32);
+    ReadBits(r0, gUnknown_203B494->learnedMoves, ARRAY_COUNT_INT(gUnknown_203B494->learnedMoves) * 32);
     ReadDungeonLocationBits(r0, &gUnknown_203B494->dungeonLocation);
 }
 

@@ -11,7 +11,7 @@
 #include "code_803D0D8.h"
 #include "text.h"
 
-struct  unkStruct_203B1F8
+struct unkStruct_203B1F8
 {
     // size: 0x4B4
     u32 menuAction;
@@ -46,6 +46,244 @@ const UnkTextStruct2 gUnknown_80DAFA0 = {
    0x16, 0x0F,
    0x06, 0x03,
    0x03, 0x00,
+   NULL
+};
+
+struct Struct80DB0F8
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    s32 unk8;
+};
+
+UNUSED static const char sPksDir[] = "pksdir0";
+static const DungeonPos gUnknown_80DAFC0[] =
+{
+    {3, 0xD},
+    {0xF, 0xD},
+    {0x1B, 0xD},
+    {0x27, 0xD},
+    {0x33, 0xD},
+    {0x40, 0xF},
+    {0x4C, 0xF},
+    {0x58, 0xF},
+    {0x64, 0xF},
+    {0x70, 0xF},
+    {0x7C, 0xF},
+    {0x88, 0xF},
+    {0x94, 0xF},
+    {0xA1, 0xD},
+    {0xAD, 0xD},
+    {0xB9, 0xD},
+    {0xC5, 0xD},
+    {0xD1, 0xD},
+    {3, 0x1A},
+    {0xF, 0x1A},
+    {0x1B, 0x1A},
+    {0x27, 0x1A},
+    {0x33, 0x1A},
+    {0x40, 0x1C},
+    {0x4C, 0x1C},
+    {0x58, 0x1C},
+    {0x64, 0x1C},
+    {0x70, 0x1C},
+    {0x7C, 0x1C},
+    {0x88, 0x1C},
+    {0x94, 0x1C},
+    {0xA1, 0x1A},
+    {0xAD, 0x1A},
+    {0xB9, 0x1A},
+    {0xC5, 0x1A},
+    {0xD1, 0x1A},
+    {3, 0x28},
+    {0xF, 0x28},
+    {0x1B, 0x28},
+    {0x27, 0x28},
+    {0x33, 0x28},
+    {0x40, 0x2A},
+    {0x4C, 0x2A},
+    {0x58, 0x2A},
+    {0x64, 0x2A},
+    {0x70, 0x2A},
+    {0x7C, 0x2A},
+    {0x88, 0x2A},
+    {0x94, 0x2A},
+    {0xA1, 0x28},
+    {0xAD, 0x28},
+    {0xB9, 0x28},
+    {0xC5, 0x28},
+    {0xD1, 0x28},
+};
+
+static const DungeonPos gUnknown_80DB098[] =
+{
+    {0x20, 0x12},
+    {0x2E, 0x12},
+    {0x3C, 0x12},
+    {0x4A, 0x12},
+    {0x58, 0x14},
+    {0x66, 0x14},
+    {0x74, 0x14},
+    {0x82, 0x14},
+    {0x90, 0x12},
+    {0x9E, 0x12},
+    {0xAC, 0x12},
+    {0xBA, 0x12},
+    {0x20, 0x24},
+    {0x2E, 0x24},
+    {0x3C, 0x24},
+    {0x4A, 0x24},
+    {0x58, 0x26},
+    {0x66, 0x26},
+    {0x74, 0x26},
+    {0x82, 0x26},
+    {0x90, 0x24},
+    {0x9E, 0x24},
+    {0xAC, 0x24},
+    {0xBA, 0x24},
+};
+
+// It was programmed as a 2d array, however it's effectively a 1d array(since there's only one entry for [0][x]). Could be different in Blue?
+static const struct Struct80DB0F8 gUnknown_80DB0F8[][85] =
+{
+    [0] = {
+        {0,  0,  0,  0,  8,   3,  0, 264},
+        {0,  0,  0,  0,  8,   14, 0, 264},
+        {0,  0,  0,  0,  8,   25, 0, 264},
+        {5,  4,  81, 9,  8,   36, 3, 263},
+        {3,  5,  82, 10, 8,   47, 3, 261},
+        {4,  3,  83, 11, 8,   58, 3, 262},
+        {11, 7,  78, 12, 36,  3,  0, 97},
+        {6,  8,  79, 13, 36,  14, 0, 110},
+        {7,  9,  80, 14, 36,  25, 0, 65},
+        {8,  10, 3,  15, 36,  36, 0, 78},
+        {9,  11, 4,  16, 36,  47, 0, 233},
+        {10, 6,  5,  17, 36,  58, 0, 43},
+        {17, 13, 6,  18, 50,  3,  0, 98},
+        {12, 14, 7,  19, 50,  14, 0, 111},
+        {13, 15, 8,  20, 50,  25, 0, 66},
+        {14, 16, 9,  21, 50,  36, 0, 79},
+        {15, 17, 10, 22, 50,  47, 0, 49},
+        {16, 12, 11, 23, 50,  58, 0, 45},
+        {23, 19, 12, 24, 64,  3,  0, 99},
+        {18, 20, 13, 25, 64,  14, 0, 112},
+        {19, 21, 14, 26, 64,  25, 0, 67},
+        {20, 22, 15, 27, 64,  36, 0, 80},
+        {21, 23, 16, 28, 64,  47, 0, 50},
+        {22, 18, 17, 29, 64,  58, 0, 44},
+        {29, 25, 18, 30, 78,  3,  0, 100},
+        {24, 26, 19, 31, 78,  14, 0, 113},
+        {25, 27, 20, 32, 78,  25, 0, 68},
+        {26, 28, 21, 33, 78,  36, 0, 81},
+        {27, 29, 22, 34, 78,  47, 0, 51},
+        {28, 24, 23, 35, 78,  58, 0, 46},
+        {35, 31, 24, 36, 92,  3,  0, 101},
+        {30, 32, 25, 37, 92,  14, 0, 114},
+        {31, 33, 26, 38, 92,  25, 0, 69},
+        {32, 34, 27, 39, 92,  36, 0, 82},
+        {33, 35, 28, 40, 92,  47, 0, 52},
+        {34, 30, 29, 41, 92,  58, 0, 33},
+        {41, 37, 30, 42, 106, 3,  0, 102},
+        {36, 38, 31, 43, 106, 14, 0, 115},
+        {37, 39, 32, 44, 106, 25, 0, 70},
+        {38, 40, 33, 45, 106, 36, 0, 83},
+        {39, 41, 34, 46, 106, 47, 0, 53},
+        {40, 36, 35, 47, 106, 58, 0, 63},
+        {47, 43, 36, 48, 120, 3,  0, 103},
+        {42, 44, 37, 49, 120, 14, 0, 116},
+        {43, 45, 38, 50, 120, 25, 0, 71},
+        {44, 46, 39, 51, 120, 36, 0, 84},
+        {45, 47, 40, 52, 120, 47, 0, 54},
+        {46, 42, 41, 53, 120, 58, 0, 145},
+        {53, 49, 42, 54, 134, 3,  0, 104},
+        {48, 50, 43, 55, 134, 14, 0, 117},
+        {49, 51, 44, 56, 134, 25, 0, 72},
+        {50, 52, 45, 57, 134, 36, 0, 85},
+        {51, 53, 46, 58, 134, 47, 0, 55},
+        {52, 48, 47, 59, 134, 58, 0, 146},
+        {59, 55, 48, 60, 148, 3,  0, 105},
+        {54, 56, 49, 61, 148, 14, 0, 118},
+        {55, 57, 50, 62, 148, 25, 0, 73},
+        {56, 58, 51, 63, 148, 36, 0, 86},
+        {57, 59, 52, 64, 148, 47, 0, 56},
+        {58, 54, 53, 65, 148, 58, 0, 147},
+        {65, 61, 54, 66, 162, 3,  0, 106},
+        {60, 62, 55, 67, 162, 14, 0, 119},
+        {61, 63, 56, 68, 162, 25, 0, 74},
+        {62, 64, 57, 69, 162, 36, 0, 87},
+        {63, 65, 58, 70, 162, 47, 0, 57},
+        {64, 60, 59, 71, 162, 58, 0, 148},
+        {71, 67, 60, 72, 176, 3,  0, 107},
+        {66, 68, 61, 73, 176, 14, 0, 120},
+        {67, 69, 62, 74, 176, 25, 0, 75},
+        {68, 70, 63, 75, 176, 36, 0, 88},
+        {69, 71, 64, 76, 176, 47, 0, 48},
+        {70, 66, 65, 77, 176, 58, 0, 189},
+        {77, 73, 66, 78, 190, 3,  0, 108},
+        {72, 74, 67, 79, 190, 14, 0, 121},
+        {73, 75, 68, 80, 190, 25, 0, 76},
+        {74, 76, 69, 81, 190, 36, 0, 89},
+        {75, 77, 70, 82, 190, 47, 0, 58},
+        {76, 72, 71, 83, 190, 58, 0, 190},
+        {83, 79, 72, 6,  204, 3,  0, 109},
+        {78, 80, 73, 7,  204, 14, 0, 122},
+        {79, 81, 74, 8,  204, 25, 0, 77},
+        {80, 82, 75, 3,  204, 36, 0, 90},
+        {81, 83, 76, 4,  204, 47, 0, 133},
+        {82, 78, 77, 5,  204, 58, 0, 32},
+        {0,  0,  0,  0,  8,   3,  2, 265},
+    }
+};
+
+static const u8 *const gUnknown_80DB4F4[] =
+{
+    _("゛"),
+    _("゜"),
+    _("かな"),
+    _("カナ"),
+    _("ＡＢＣ"),
+    _("DEL"),
+    _("END"),
+};
+
+static const UnkTextStruct2 gUnknown_80DB538 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x03,
+   0x00, 0x00,
+   0x00, 0x00,
+   0x00, 0x00,
+   NULL
+};
+
+static const UnkTextStruct2 gUnknown_80DB550 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x01,
+   0x01, 0x0A,
+   0x1C, 0x09,
+   0x09, 0x00,
+   NULL
+};
+
+static const UnkTextStruct2 gUnknown_80DB568 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x01,
+   0x04, 0x03,
+   0x16, 0x05,
+   0x05, 0x00,
+   NULL
+};
+
+static const UnkTextStruct2 gUnknown_80DB580 = {
+   0x00, 0x00, 0x00, 0x00,
+   0x01,
+   0x01, 0x02,
+   0x1C, 0x07,
+   0x07, 0x00,
    NULL
 };
 
@@ -113,9 +351,8 @@ struct unkStruct_203B1FC
     u8 unk1A;
     u8 unk1B;
     u8 unk1C;
-    u16 unk1E[(0x8A - 0x1E) / 2];
-    s16 unk8A[2];
-    u8 fill8E[0xF8 - 0x8E];
+    u16 unk1E[54];
+    s16 unk8A[54];
     u8 *unkF8;
     u8 unkFC[56];
     u8 *unk134;
@@ -123,10 +360,6 @@ struct unkStruct_203B1FC
 };
 extern struct unkStruct_203B1FC *gUnknown_203B1FC;
 
-extern UnkTextStruct2 gUnknown_80DB550;
-extern UnkTextStruct2 gUnknown_80DB568;
-extern UnkTextStruct2 gUnknown_80DB580;
-extern UnkTextStruct2 gUnknown_80DB538;
 s32 sub_8015F44(void);
 void sub_8015A08(u32);
 void sub_8015C1C(void);
@@ -173,7 +406,7 @@ u32 sub_80151C0(u32 r0, u8 *buffer)
     }
 
     gUnknown_203B1FC->unk134 = buffer;
-    gUnknown_203B1FC->unkF8 =  gUnknown_203B1FC->unkFC;
+    gUnknown_203B1FC->unkF8 = gUnknown_203B1FC->unkFC;
 
     for (i = 0; i < 0x36; i++) {
         gUnknown_203B1FC->unkF8[i] = 0;
@@ -314,36 +547,6 @@ void sub_80155F0(void)
         gUnknown_203B1FC = NULL;
     }
 }
-
-struct Struct80DB0F8
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    s32 unk8;
-};
-
-extern const struct Struct80DB0F8 gUnknown_80DB0F8[][85];
-extern const DungeonPos gUnknown_80DB098[];
-extern const DungeonPos gUnknown_80DAFC0[];
-extern const u8 gUnknown_80DB598[];
-extern const u8 gUnknown_80DB5A4[];
-extern const u8 gUnknown_80DB5B0[];
-extern const u8 gUnknown_80DB5B8[];
-extern const u8 gUnknown_80DB5C0[];
-extern const u8 gUnknown_80DB5D4[];
-extern const u8 gUnknown_80DB5F8[];
-extern const u8 gUnknown_80DB61C[];
-extern const u8 gUnknown_80DB638[];
-extern const u8 gUnknown_80DB654[];
-extern const u8 gUnknown_80DB65C[];
-extern const u8 gUnknown_80DB664[];
-extern const u8 *const gUnknown_80DB4F4[];
 
 u32 sub_801560C(void)
 {
@@ -546,18 +749,18 @@ void sub_8015A08(u32 unused)
         if (r4 != 0x108) {
             if (r4 == 0x107) {
                 if (gUnknown_203B1FC->unk18 == 0) {
-                    PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4 + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, gUnknown_80DB598, 0, '\0');
+                    PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4 + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, _("{COLOR GREEN}OVR{RESET}"), 0, '\0');
                 }
                 else {
-                    PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4 + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, gUnknown_80DB5A4, 0, '\0');
+                    PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4 + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, _("{COLOR YELLOW}INS{RESET}"), 0, '\0');
                 }
             }
             else if (r4 == 0x20) {
-                sprintfStatic(text1, gUnknown_80DB5B0, r5);
+                sprintfStatic(text1, _("{COLOR}%c{0x81}{0x59}"), r5);
                 PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4 + 1, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, text1, 0, '\0');
             }
             else if (r4 > 0xFF) {
-                sprintfStatic(text2, gUnknown_80DB5B8, r5, gUnknown_80DB4F4[r4 & 0xFF]);
+                sprintfStatic(text2, _("{COLOR}%c%s"), r5, gUnknown_80DB4F4[r4 & 0xFF]);
                 PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4 + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, text2, 0, '\0');
             }
             else {
@@ -594,22 +797,22 @@ void sub_8015C1C(void)
 
     switch (gUnknown_203B1FC->unk0) {
         case 0:
-            PrintStringOnWindow(8, 5, gUnknown_80DB5C0, 1, '\0');
+            PrintStringOnWindow(8, 5, _("What is your name?"), 1, '\0');
             break;
         case 2:
-            PrintStringOnWindow(8, 5, gUnknown_80DB5D4, 1, '\0');
+            PrintStringOnWindow(8, 5, _("What is this Pokémon's nickname?"), 1, '\0');
             break;
         case 3:
-            PrintStringOnWindow(8, 5, gUnknown_80DB5F8, 1, '\0');
+            PrintStringOnWindow(8, 5, _("What is your partner's nickname?"), 1, '\0');
             break;
         case 1:
-            PrintStringOnWindow(8, 5, gUnknown_80DB61C, 1, '\0');
+            PrintStringOnWindow(8, 5, _("What is your team's name?"), 1, '\0');
             break;
         case 4:
-            PrintStringOnWindow(54, 2, gUnknown_80DB638, 1, '\0');
+            PrintStringOnWindow(54, 2, _("Please enter the password."), 1, '\0');
             break;
         case 5:
-            PrintStringOnWindow(48, 4, gUnknown_80DB638, 1, '\0');
+            PrintStringOnWindow(48, 4, _("Please enter the password."), 1, '\0');
             break;
     }
 
@@ -626,13 +829,13 @@ void sub_8015C1C(void)
         case 3:
             sub_80078A4(1, 38, 33, sub_8016028(), 4);
             if (sub_8015FEC(gUnknown_203B1FC->unkF8, gUnknown_203B1FC->unk1B) > sub_8016028()) {
-                sprintfStatic(text, gUnknown_80DB654, gUnknown_203B1FC->unkF8);
+                sprintfStatic(text, _("{COLOR RED}%s{RESET}"), gUnknown_203B1FC->unkF8);
             }
             else if (sub_8015F44() == gUnknown_203B1FC->unk1B) {
-                sprintfStatic(text, gUnknown_80DB65C, gUnknown_203B1FC->unkF8);
+                sprintfStatic(text, _("{COLOR CYAN}%s{RESET}"), gUnknown_203B1FC->unkF8);
             }
             else {
-                sprintfStatic(text, gUnknown_80DB664, gUnknown_203B1FC->unkF8);
+                sprintfStatic(text, _("%s"), gUnknown_203B1FC->unkF8);
             }
             PrintStringOnWindow(38, 22, text, 1, '\0');
             break;
@@ -646,11 +849,11 @@ void sub_8015E10(u8 *a0, s32 a1, s32 _a2)
     s32 i;
     s32 a2 = (s16) _a2;
 
-    for (i = 0; i < 54; i++) {
+    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DAFC0); i++) {
         sub_80078A4(a1, gUnknown_80DAFC0[i].x, gUnknown_80DAFC0[i].y + 11 + a2, 11, 5);
     }
 
-    for (i = 0; i < 54 && a0[i] != 0; i++) {
+    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DAFC0) && a0[i] != 0; i++) {
         s32 arg3;
 
         if (i <= 4) arg3 = 7;
@@ -672,11 +875,11 @@ void sub_8015EB4(u8 *a0, s32 a1, s32 _a2)
     s32 i;
     s32 a2 = (s16) _a2;
 
-    for (i = 0; i < 24; i++) {
+    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DB098); i++) {
         sub_80078A4(a1, gUnknown_80DB098[i].x, gUnknown_80DB098[i].y + 11 + a2, 12, 5);
     }
 
-    for (i = 0; i < 24 && a0[i] != 0; i++) {
+    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DB098) && a0[i] != 0; i++) {
         s32 arg3;
 
         if (i <= 3) arg3 = 7;
