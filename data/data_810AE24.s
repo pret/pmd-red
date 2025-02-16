@@ -6230,6 +6230,4 @@ DungeonMoneyLostEnter_Text: @ Text
 .global gUnknown_8115E80
 gUnknown_8115E80: @ 8115E80
 .4byte DungeonMoneyLostEnter_Text
-.string "pksdir0\0"
-.string "pksdir0\0"
 .align 2,0

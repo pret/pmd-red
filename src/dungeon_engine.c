@@ -52,7 +52,7 @@ bool8 IsCurrentFixedRoomBossFight()
 
 bool8 IsMakuhitaTrainingMaze(void)
 {
-    if( (u8)(gDungeon->unk644.dungeonLocation.id - DUNGEON_NORMAL_MAZE_2) < NUM_DUNGEON_MAZE)
+    if (DUNGEON_IS_MAZE(gDungeon->unk644.dungeonLocation.id))
         return TRUE;
     else
         return FALSE;

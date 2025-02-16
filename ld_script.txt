@@ -285,8 +285,6 @@ SECTIONS {
         src/pokemon.o(.text);
         src/pokemon_3.o(.text);
         src/dungeon.o(.text);
-        asm/dungeon_2.o(.text);
-        src/dungeon_2_1.o(.text);
         src/items.o(.text);
         src/rescue_team_info.o(.text);
         src/text_util.o(.text);
@@ -565,6 +563,7 @@ SECTIONS {
         src/rescue_team_info.o(.rodata);
         src/text_util.o(.rodata);
         data/data_810AE24.o(.rodata);
+        data/data_810AE24_2.o(.rodata);
         src/position_util.o(.rodata);
         data/data_8115EB8.o(.rodata);
         src/ground_main.o(.rodata);

@@ -33,8 +33,8 @@ typedef struct DungeonDataEntry
     /* 0xE */ s16 randomMovementChance;
 } DungeonDataEntry;
 
-extern DungeonDataEntry gDungeons[];
-extern DungeonName gDungeonNames[];
+extern const DungeonDataEntry gDungeons[];
+extern const DungeonName gDungeonNames[];
 
 s32 GetDungeonFloorCount(u8 dungeon);
 const u8 *GetDungeonName1(u8 dungeon);
