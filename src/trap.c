@@ -9,6 +9,7 @@
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
 #include "code_808417C.h"
+#include "code_806CD90.h"
 #include "constants/trap.h"
 #include "constants/type.h"
 #include "dungeon_engine.h"
@@ -48,17 +49,20 @@ extern u8 *gUnknown_80FDAA0[];
 extern u8 *gUnknown_80FDA80[];
 extern u8 *gUnknown_80FDB04[];
 extern u8 *gUnknown_80FDB2C[];
-
+extern u8 *gUnknown_80FDAE4[];
+extern u8 *gUnknown_80FDACC[];
+extern u8 *gUnknown_80FED08[];
 
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 
 void sub_806A9B4(Entity *, u32);
-
+void sub_80461C8(DungeonPos *, u32);
+void sub_80402AC(s32, s32);
 s16 sub_803D970(u32);
 bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
-
+extern void sub_804687C(Entity *, DungeonPos *, DungeonPos *, Item *, u32);
 bool8 sub_8045888(Entity *);
 u8 GetFloorType(void);
 void sub_8068FE0(Entity *, u32, Entity *);
@@ -696,5 +700,126 @@ void HandleWhirlwindTrap(Entity *pokemon, Entity *target)
     if(target)
     {
         BlowAwayTarget(pokemon, target, DungeonRandInt(NUM_DIRECTIONS));
+    }
+}
+
+void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
+{
+    s32 x, y, roomId;
+    s32 maxX;
+    struct unkStruct_806B7F8 local_50;
+    s32 bottomX;
+    s32 maxY;
+    s32 bottomY;
+    s32 counter = 0;
+    s32 range = gDungeon->unk181e8.visibilityRange;
+
+    if (IsBossFight()) {
+        LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80FED08);
+        return;
+    }
+
+    if (range == 0) {
+        range = 2;
+    }
+
+    roomId = GetTile(pos->x,pos->y)->room;
+    if (roomId == CORRIDOR_ROOM) {
+        bottomX = pos->x - range;
+        bottomY = pos->y - range;
+        maxX = pos->x + range;
+        maxY = pos->y + range;
+    }
+    else {
+        RoomData *room = &gDungeon->roomData[roomId];
+        bottomX = room->bottomRightCornerX + -1;
+        bottomY = room->bottomRightCornerY + -1;
+        maxX = room->topLeftCornerX + 1;
+        maxY = room->topLeftCornerY + 1;
+    }
+
+    for (y = bottomY; y <= maxY; y++) {
+        for (x = bottomX; x <= maxX; x++) {
+            const Tile *tile = GetTile(x,y);
+            if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_ITEM && !(GetItemData(tile->object)->flags & ITEM_FLAG_IN_SHOP)) {
+                s32 i, species;
+
+                local_50.species = MONSTER_KECLEON;
+                for (i = 0; i < 100; i++) {
+                    if (gDungeon->unk644.unk2A != 0) {
+                        species = MONSTER_KECLEON;
+                    }
+                    else {
+                        species = (s16) sub_803D970(0);
+                        ASM_MATCH_TRICK(species);
+                    }
+
+                    local_50.species = species;
+                    if (sub_806AA0C(local_50.species, 0) != 0)
+                        break;
+                }
+
+                if (sub_806AA0C(local_50.species, 0)) {
+                    local_50.level = 0;
+                    local_50.unk2 = 0;
+                    local_50.pos.x = x;
+                    local_50.pos.y = y;
+                    local_50.unk4 = 0;
+                    local_50.unk10 = 0;
+                    if (sub_806B7F8(&local_50, TRUE) != 0) {
+                        sub_80461C8(&local_50.pos,0);
+                        counter++;
+                    }
+                }
+                sub_80402AC(x,y);
+            }
+        }
+    }
+
+    if (counter != 0) {
+        LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80FDACC);
+    }
+    else {
+        LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80FDAE4);
+    }
+}
+
+void HandleTripTrap(Entity *pokemon, Entity *target)
+{
+    u32 direction;
+    EntityInfo *info;
+    DungeonPos pos;
+    Item item;
+
+    if (target != NULL) {
+        sub_806CDD4(target, 6, NUM_DIRECTIONS);
+        sub_803E708(0x10, 0x55);
+        sub_806CE68(target, NUM_DIRECTIONS);
+        info = GetEntInfo(target);
+        if ((info->heldItem).flags & ITEM_FLAG_EXISTS) {
+            item =  (info->heldItem);
+            (info->heldItem).flags = 0;
+            FillInventoryGaps();
+            sub_80421C0(target, 400);
+            direction = (info->action).direction & DIRECTION_MASK;
+            pos.x = (target->pos).x + gAdjacentTileOffsets[direction].x;
+            pos.y =  (target->pos).y + gAdjacentTileOffsets[direction].y;
+            sub_804687C(pokemon, &target->pos, &pos, &item, 1);
+        }
+    }
+}
+
+void SetTrap(Tile *tile, u8 id)
+{
+    Trap *trapData;
+    Entity *entity;
+
+    entity = tile->object;
+    if (EntityIsValid(entity)) {
+        if (GetEntityType(entity) == ENTITY_TRAP) {
+            trapData = GetTrapData(entity);
+            trapData->id = id;
+        }
+        sub_8049ED4();
     }
 }
