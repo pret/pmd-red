@@ -1,12 +1,19 @@
 #include "global.h"
 #include "constants/weather.h"
+#include "constants/dungeon.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_cutscenes.h"
 #include "dungeon_music.h"
+#include "dungeon_movement.h"
 #include "dungeon_util_1.h"
 #include "exclusive_pokemon.h"
 #include "weather.h"
+#include "pokemon.h"
+#include "dungeon_util.h"
+#include "dungeon_map_access.h"
+#include "structs/str_806B7F8.h"
 
+extern const DungeonPos gUnknown_80F4598[];
 extern void sub_8040A84(void);
 
 struct unkData_8107234
@@ -567,4 +574,123 @@ void sub_8085140(void)
             sub_808B0B0(gDungeon->unk3A0D);
             break;
   }
+}
+
+u8 sub_808529C(s32 speciesId_)
+{
+    s32 r3;
+    s32 speciesId = 0;
+
+    // This line serves no purpose other than generating the right asm. Feel free to remove it.
+    speciesId += (s16) speciesId_;
+
+    speciesId = (s16) speciesId_;
+    r3 = 0x40;
+
+    switch (speciesId) {
+        case MONSTER_SKARMORY:
+            r3 = 1;
+            break;
+        case MONSTER_EKANS:
+            r3 = 3;
+            break;
+        case MONSTER_GENGAR:
+            r3 = 3;
+            break;
+        case MONSTER_MEDICHAM:
+            r3 = 3;
+            break;
+        case MONSTER_ZAPDOS:
+            r3 = 5;
+            break;
+        case MONSTER_MOLTRES:
+            r3 = 7;
+            break;
+        case MONSTER_ARTICUNO:
+            r3 = 9;
+            break;
+        case MONSTER_GROUDON:
+            r3 = 0xC;
+            break;
+        case MONSTER_RAYQUAZA:
+            r3 = 0xF;
+            break;
+        case MONSTER_MEWTWO:
+            r3 = 0x13;
+            break;
+        case MONSTER_ENTEI:
+            r3 = 0x15;
+            break;
+        case MONSTER_RAIKOU:
+            r3 = 0x17;
+            break;
+        case MONSTER_SUICUNE:
+            r3 = 0x19;
+            break;
+        case MONSTER_HO_OH:
+            r3 = 0x1A;
+            break;
+        case MONSTER_MANKEY:
+            r3 = 0x11;
+            break;
+        case MONSTER_REGIROCK:
+            r3 = 0x1D;
+            break;
+        case MONSTER_REGICE:
+            r3 = 0x1D;
+            break;
+        case MONSTER_REGISTEEL:
+            r3 = 0x1D;
+            break;
+    }
+
+    if (r3 != 0x40 && !sub_8098100(r3))
+        return FALSE;
+    return TRUE;
+}
+
+void sub_8085374(void)
+{
+    const Tile *tile;
+    Entity *entity;
+    DungeonPos pos;
+    s32 i, j;
+    s32 temp;
+    Entity *leaderEntity = NULL;
+    Entity *partnerEntity = NULL;
+    s32 species = sub_808D3F8()->speciesNum;
+
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        entity = gDungeon->teamPokemon[i];
+        if (EntityIsValid(entity)) {
+            if (GetEntInfo(entity)->isTeamLeader)
+                leaderEntity = entity;
+            if (GetEntInfo(entity)->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER)
+                partnerEntity = entity;
+        }
+    }
+
+    if (leaderEntity == NULL || partnerEntity != NULL || gDungeon->unk644.unk18 != 0)
+        return;
+
+    j = 0;
+    while ((pos = gUnknown_80F4598[j]).x != 99) {
+        pos.x += leaderEntity->pos.x;
+        pos.y += leaderEntity->pos.y;
+        tile = GetTile(pos.x, pos.y);
+        temp = sub_807034C(species, tile);
+        if (temp == 0) {
+            struct unkStruct_806B7F8 local_30;
+
+            local_30.species = species;
+            local_30.level = 1;
+            local_30.unk2 = 2;
+            local_30.pos = pos;
+            local_30.unk4 = temp;
+            local_30.unk10 = 0;
+            sub_806B7F8(&local_30, 1);
+            break;
+        }
+        j++;
+    }
 }
