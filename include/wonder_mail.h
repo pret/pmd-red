@@ -34,4 +34,7 @@ typedef struct WonderMailStruct_203B2C0
     /* 0x544 */ s16 speciesNum;
 } WonderMailStruct_203B2C0;
 
+u8 sub_8027F88(void);
+u32 sub_8028078(void);
+
 #endif // GUARD_WONDER_MAIL_H

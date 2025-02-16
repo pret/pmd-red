@@ -93,7 +93,7 @@ static void InitializeTestStats(void)
     sPersonalityTestTracker->playerGender = 0;
 }
 
-u8 HandleTestTrackerState(void)
+u32 HandleTestTrackerState(void)
 {
     s32 counter;
     s32 iVar1;

@@ -39,6 +39,6 @@ struct PersonalityTestTracker
 
 bool8 CreateTestTracker(void);
 void DeleteTestTracker(void);
-u8 HandleTestTrackerState(void);
+u32 HandleTestTrackerState(void);
 
 #endif // GUARD_PERSONALITY_TEST1_H

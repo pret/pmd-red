@@ -317,8 +317,6 @@ SECTIONS {
         src/code_8099360.o(.text);
         asm/code_8099360.o(.text);
         src/code_809A560.o(.text);
-        asm/code_809A560.o(.text);
-        src/code_809A560_1.o(.text);
         src/code_809C5C4.o(.text);
         asm/code_809C5C4.o(.text);
         src/code_809D148.o(.text);
@@ -573,6 +571,8 @@ SECTIONS {
         data/data_8115EB8.o(.rodata);
         src/ground_main.o(.rodata);
         data/data_8115F5C.o(.rodata);
+        src/code_809A560.o(.rodata);
+        data/data_8115F5C_2.o(.rodata);
         src/ground_event_data.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
         src/ground_data_t00p01_station.o(.rodata);

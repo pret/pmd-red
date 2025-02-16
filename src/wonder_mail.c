@@ -180,7 +180,7 @@ enum MenuActions {
 
 void SetFriendRescueCounterState(u32 r0);
 
-u32 sub_8027F88(void)
+u8 sub_8027F88(void)
 {
   char *monName;
   OpenedFile *faceFile;
