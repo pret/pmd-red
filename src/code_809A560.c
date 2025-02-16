@@ -709,7 +709,6 @@ void MakuhitaDojo_Delete();
 u32 HandleMakuhitaDojoState();
 s16 sub_802FED0();
 u8 sub_801FB50();
-void sub_80151C0();
 void sub_80155F0();
 s32 sub_80160D8();
 void ResetTextbox_809B294();
