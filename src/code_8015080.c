@@ -55,8 +55,8 @@ struct Struct80DB0F8
     u8 unk1;
     u8 unk2;
     u8 unk3;
-    u8 unk4;
-    u8 unk5;
+    u8 x;
+    u8 y;
     u8 unk6;
     s32 unk8;
 };
@@ -702,8 +702,8 @@ void sub_80158BC(void)
         gUnknown_203B1FC->unk17 = 8;
     }
 
-    x =  gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].unk4 + (txtPtr->unk0 * 8) - 5;
-    y =  gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].unk5 + (txtPtr->unk2 * 8) + 1;
+    x =  gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].x + (txtPtr->unk0 * 8) - 5;
+    y =  gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].y + (txtPtr->unk2 * 8) + 1;
     SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite2Attribs, x);
     SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite2Attribs, y);
 }
@@ -749,22 +749,22 @@ void sub_8015A08(u32 unused)
         if (r4 != 0x108) {
             if (r4 == 0x107) {
                 if (gUnknown_203B1FC->unk18 == 0) {
-                    PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4 + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, _("{COLOR GREEN}OVR{RESET}"), 0, '\0');
+                    PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].x + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].y, _("{COLOR GREEN}OVR{RESET}"), 0, '\0');
                 }
                 else {
-                    PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4 + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, _("{COLOR YELLOW}INS{RESET}"), 0, '\0');
+                    PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].x + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].y, _("{COLOR YELLOW}INS{RESET}"), 0, '\0');
                 }
             }
             else if (r4 == 0x20) {
                 sprintfStatic(text1, _("{COLOR}%c{0x81}{0x59}"), r5);
-                PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4 + 1, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, text1, 0, '\0');
+                PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].x + 1, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].y, text1, 0, '\0');
             }
             else if (r4 > 0xFF) {
                 sprintfStatic(text2, _("{COLOR}%c%s"), r5, gUnknown_80DB4F4[r4 & 0xFF]);
-                PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4 + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, text2, 0, '\0');
+                PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].x + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].y, text2, 0, '\0');
             }
             else {
-                sub_8012C60(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk4, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk5, (u8) r4, r5, 0);
+                sub_8012C60(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].x, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].y, (u8) r4, r5, 0);
             }
         }
     }
