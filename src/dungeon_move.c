@@ -2263,44 +2263,38 @@ struct UnkStruct_sub_800E308_1
     s32 unk10;
 };
 
-// Maybe DungeonPos? Maybe not, sub_800E308 is called only by sub_8056564, so :shrug:
-struct UnkStruct_sub_800E308_2
-{
-    s16 u0;
-    s16 u2;
-};
+extern s32 sub_800E308(struct UnkStruct_sub_800E308_1 *, DungeonPos *);
+extern void sub_800EF64(void);
 
-extern s32 sub_800E308(struct UnkStruct_sub_800E308_1 *, struct UnkStruct_sub_800E308_2 *);
-
-#ifdef NONMATCHING // https://decomp.me/scratch/fTUsI
 s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
 {
     struct UnkStruct_sub_800E308_1 unkSp1;
-    struct UnkStruct_sub_800E308_2 unkSp2;
+    DungeonPos unkSp2;
     EntityInfo *entInfo = GetEntInfo(entity);
 
-    if (!gDungeon->unk181e8.blinded && (GetBodySize(entInfo->apparentID) < 4 || r4 == 1)) {
-        unkStruct_80BDBC4 *unkStruct = sub_800ECB8(sub_80412E0(move->id, GetApparentWeather(entity), 1));
-        s32 unk6 = unkStruct->unk6;
-        // This part with unkPos doesn't match
-        PixelPos unkPos = {pos->x * 0x1800, pos->y * 0x1800};
+    if (!gDungeon->unk181e8.blinded && (GetBodySize(entInfo->apparentID) < 4 || r4 != 1)) {
+        s32 unk6 = sub_800ECB8(sub_80412E0(move->id, GetApparentWeather(entity), 1))->unk6;
+        s32 x = (pos->x * 3 << 11);
+        s32 y = (pos->y * 3 << 11);
+        // This is needed for matching purposes.
+        s32 y2;
 
-        unkPos.x += 0x1000;
-        unkPos.y += 0xC00;
+        x += 0xC00;
+        y += 0x1000;
+        y2 = y;
 
-        unkSp2.u0 = unkPos.x / 256;
-        unkSp2.u2 = unkPos.y / 256;
+        unkSp2.x = x / 256;
+        unkSp2.y = y2 / 256;
 
         if (unk6 != 0) {
             s32 someRetVal;
 
             sub_800EF10(sub_80412E0(move->id, GetApparentWeather(entity), 1));
+            sub_800EF64();
             sub_803E46C(0x5E);
             someRetVal = sub_800E710(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), 1));
             if (someRetVal != -1) {
-                sub_800569C(&unkSp1.unk8,
-                            &entity->axObj.axdata,
-                            someRetVal);
+                sub_800569C(&unkSp1.unk8, &entity->axObj.axdata, someRetVal);
             }
             else {
                 unkSp1.unk8 = (DungeonPos) {0};
@@ -2318,202 +2312,6 @@ s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
 
     return -1;
 }
-#else
-NAKED s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
-{
-    asm_unified("push {r4-r7,lr}\n"
-	"	mov r7, r9\n"
-	"	mov r6, r8\n"
-	"	push {r6,r7}\n"
-	"	sub sp, 0x18\n"
-	"	adds r6, r0, 0\n"
-	"	adds r5, r1, 0\n"
-	"	adds r7, r2, 0\n"
-	"	adds r4, r3, 0\n"
-	"	ldr r0, [r6, 0x70]\n"
-	"	mov r8, r0\n"
-	"	ldr r0, _08056680\n"
-	"	ldr r0, [r0]\n"
-	"	ldr r1, _08056684\n"
-	"	adds r0, r1\n"
-	"	ldrb r0, [r0]\n"
-	"	mov r9, r0\n"
-	"	cmp r0, 0\n"
-	"	beq _0805658C\n"
-	"	b _080566E4\n"
-	"_0805658C:\n"
-	"	mov r2, r8\n"
-	"	movs r1, 0x4\n"
-	"	ldrsh r0, [r2, r1]\n"
-	"	bl GetBodySize\n"
-	"	lsls r0, 24\n"
-	"	lsrs r0, 24\n"
-	"	cmp r0, 0x3\n"
-	"	bls _080565A4\n"
-	"	cmp r4, 0x1\n"
-	"	bne _080565A4\n"
-	"	b _080566E4\n"
-	"_080565A4:\n"
-	"	ldrh r4, [r7, 0x2]\n"
-	"	adds r0, r6, 0\n"
-	"	bl GetApparentWeather\n"
-	"	adds r1, r0, 0\n"
-	"	lsls r1, 24\n"
-	"	lsrs r1, 24\n"
-	"	adds r0, r4, 0\n"
-	"	movs r2, 0x1\n"
-	"	bl sub_80412E0\n"
-	"	lsls r0, 16\n"
-	"	lsrs r0, 16\n"
-	"	bl sub_800ECB8\n"
-	"	movs r2, 0x6\n"
-	"	ldrsh r4, [r0, r2]\n"
-	"	movs r1, 0\n"
-	"	ldrsh r0, [r5, r1]\n"
-	"	lsls r1, r0, 1\n"
-	"	adds r1, r0\n"
-	"	lsls r1, 11\n"
-	"	movs r0, 0x2\n"
-	"	ldrsh r2, [r5, r0]\n"
-	"	lsls r0, r2, 1\n"
-	"	adds r0, r2\n"
-	"	lsls r0, 11\n"
-	"	movs r2, 0x80\n"
-	"	lsls r2, 5\n"
-	"	adds r3, r0, r2\n"
-	"	movs r2, 0xC0\n"
-	"	lsls r2, 4\n"
-	"	adds r0, r1, r2\n"
-	"	cmp r0, 0\n"
-	"	bge _080565EC\n"
-	"	adds r0, 0xFF\n"
-	"_080565EC:\n"
-	"	lsls r0, 8\n"
-	"	lsrs r0, 16\n"
-	"	ldr r1, _08056688\n"
-	"	ldr r2, [sp, 0x14]\n"
-	"	ands r2, r1\n"
-	"	orrs r2, r0\n"
-	"	str r2, [sp, 0x14]\n"
-	"	adds r0, r3, 0\n"
-	"	cmp r0, 0\n"
-	"	bge _08056602\n"
-	"	adds r0, 0xFF\n"
-	"_08056602:\n"
-	"	lsls r0, 8\n"
-	"	lsrs r0, 16\n"
-	"	lsls r0, 16\n"
-	"	ldr r1, _0805668C\n"
-	"	ands r2, r1\n"
-	"	orrs r2, r0\n"
-	"	str r2, [sp, 0x14]\n"
-	"	cmp r4, 0\n"
-	"	beq _080566E4\n"
-	"	ldrh r4, [r7, 0x2]\n"
-	"	adds r0, r6, 0\n"
-	"	bl GetApparentWeather\n"
-	"	adds r1, r0, 0\n"
-	"	lsls r1, 24\n"
-	"	lsrs r1, 24\n"
-	"	adds r0, r4, 0\n"
-	"	movs r2, 0x1\n"
-	"	bl sub_80412E0\n"
-	"	lsls r0, 16\n"
-	"	lsrs r0, 16\n"
-	"	bl sub_800EF10\n"
-	"	bl sub_800EF64\n"
-	"	movs r0, 0x5E\n"
-	"	bl sub_803E46C\n"
-	"	mov r0, r8\n"
-	"	movs r1, 0x4\n"
-	"	ldrsh r5, [r0, r1]\n"
-	"	ldrh r4, [r7, 0x2]\n"
-	"	adds r0, r6, 0\n"
-	"	bl GetApparentWeather\n"
-	"	adds r1, r0, 0\n"
-	"	lsls r1, 24\n"
-	"	lsrs r1, 24\n"
-	"	adds r0, r4, 0\n"
-	"	movs r2, 0x1\n"
-	"	bl sub_80412E0\n"
-	"	adds r1, r0, 0\n"
-	"	lsls r1, 16\n"
-	"	lsrs r1, 16\n"
-	"	adds r0, r5, 0\n"
-	"	bl sub_800E710\n"
-	"	adds r2, r0, 0\n"
-	"	movs r0, 0x1\n"
-	"	negs r0, r0\n"
-	"	cmp r2, r0\n"
-	"	beq _08056690\n"
-	"	add r0, sp, 0x8\n"
-	"	adds r1, r6, 0\n"
-	"	adds r1, 0x28\n"
-	"	lsls r2, 24\n"
-	"	lsrs r2, 24\n"
-	"	bl sub_800569C\n"
-	"	b _08056694\n"
-	"	.align 2, 0\n"
-	"_08056680: .4byte gDungeon\n"
-	"_08056684: .4byte 0x0001820a\n"
-	"_08056688: .4byte 0xffff0000\n"
-	"_0805668C: .4byte 0x0000ffff\n"
-	"_08056690:\n"
-	"	mov r2, r9\n"
-	"	str r2, [sp, 0x8]\n"
-	"_08056694:\n"
-	"	ldrh r4, [r7, 0x2]\n"
-	"	adds r0, r6, 0\n"
-	"	bl GetApparentWeather\n"
-	"	adds r1, r0, 0\n"
-	"	lsls r1, 24\n"
-	"	lsrs r1, 24\n"
-	"	adds r0, r4, 0\n"
-	"	movs r2, 0x1\n"
-	"	bl sub_80412E0\n"
-	"	mov r1, sp\n"
-	"	strh r0, [r1]\n"
-	"	mov r2, r8\n"
-	"	ldrh r0, [r2, 0x4]\n"
-	"	strh r0, [r1, 0x2]\n"
-	"	ldr r0, [r6, 0xC]\n"
-	"	cmp r0, 0\n"
-	"	bge _080566BC\n"
-	"	adds r0, 0xFF\n"
-	"_080566BC:\n"
-	"	asrs r0, 8\n"
-	"	strh r0, [r1, 0x4]\n"
-	"	mov r1, sp\n"
-	"	ldr r0, [r6, 0x10]\n"
-	"	cmp r0, 0\n"
-	"	bge _080566CA\n"
-	"	adds r0, 0xFF\n"
-	"_080566CA:\n"
-	"	asrs r0, 8\n"
-	"	strh r0, [r1, 0x6]\n"
-	"	mov r0, r8\n"
-	"	adds r0, 0x46\n"
-	"	ldrb r0, [r0]\n"
-	"	str r0, [sp, 0xC]\n"
-	"	movs r0, 0\n"
-	"	str r0, [sp, 0x10]\n"
-	"	add r1, sp, 0x14\n"
-	"	mov r0, sp\n"
-	"	bl sub_800E308\n"
-	"	b _080566E8\n"
-	"_080566E4:\n"
-	"	movs r0, 0x1\n"
-	"	negs r0, r0\n"
-	"_080566E8:\n"
-	"	add sp, 0x18\n"
-	"	pop {r3,r4}\n"
-	"	mov r8, r3\n"
-	"	mov r9, r4\n"
-	"	pop {r4-r7}\n"
-	"	pop {r1}\n"
-	"	bx r1");
-}
-#endif // NONMATCHING
 
 // This would signify a new file starts here, but it makes little sense tbh.
 UNUSED static const char sPksDirMeme[] = "pksdir0";
