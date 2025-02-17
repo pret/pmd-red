@@ -5,59 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8009A1C
-sub_8009A1C:
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	ldr r0, _08009A30
-	str r3, [r0]
-	ldr r3, [r6, 0xC]
-	movs r0, 0xC0
-	lsls r0, 19
-	adds r2, r0
-	movs r5, 0
-	b _08009A56
-	.align 2, 0
-_08009A30: .4byte gUnknown_202D2A0
-_08009A34:
-	ldm r3!, {r0}
-	stm r2!, {r0}
-	ldm r3!, {r0}
-	stm r2!, {r0}
-	ldm r3!, {r0}
-	stm r2!, {r0}
-	ldm r3!, {r0}
-	stm r2!, {r0}
-	ldm r3!, {r0}
-	stm r2!, {r0}
-	ldm r3!, {r0}
-	stm r2!, {r0}
-	ldm r3!, {r0}
-	stm r2!, {r0}
-	ldm r3!, {r0}
-	stm r2!, {r0}
-	adds r5, 0x1
-_08009A56:
-	ldr r0, [r6, 0x8]
-	cmp r5, r0
-	ble _08009A34
-	movs r5, 0
-	lsls r4, r1, 6
-_08009A60:
-	adds r0, r5, 0
-	adds r0, 0xE0
-	ldr r1, [r6, 0x10]
-	adds r1, r4
-	bl SetBGPaletteBufferColorArray
-	adds r4, 0x4
-	adds r5, 0x1
-	cmp r5, 0xF
-	ble _08009A60
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8009A1C
-
 	thumb_func_start sub_8009A7C
 sub_8009A7C:
 	push {r4-r7,lr}

@@ -11,10 +11,29 @@ extern const struct FileArchive gSystemFileArchive; // 8300500
 extern Palette32 gFontPalette[8];
 extern u8 gUnknown_202D238[4];
 extern s32 gUnknown_202D23C;
+extern u32 gUnknown_202D2A0;
 extern struct unkStruct_202D240 gUnknown_202D240[8];
 
-// code_8009804.s
-extern void sub_8009A1C(u32);
+typedef struct Palette256
+{
+    RGB pal[256];
+} Palette256;
+
+struct unkStruct_8009A1C
+{
+    u8 fill0[0x8];
+    s32 unk8;
+    u32 *unkC;
+    Palette256 *unk10;
+};
+
+struct unkStruct_8009A1C_ptr
+{
+    u8 fill0;
+    struct unkStruct_8009A1C *ptr;
+};
+
+void sub_8009A1C(struct unkStruct_8009A1C *r0, u32 palId, u32 vramDstOffset, u32 r3);
 
 void InitFontPalette(void)
 {
@@ -134,7 +153,32 @@ void SetFontsBaseColor(RGB a0)
         gFontPalette[i].pal[1] = a0;
 }
 
-UNUSED static void sub_8009A10(u32 *a0)
+UNUSED static void sub_8009A10(struct unkStruct_8009A1C_ptr *a0, u32 palId, u32 vramDstOffset, u32 r3)
 {
-    sub_8009A1C(a0[1]);
+    sub_8009A1C(a0->ptr, palId, vramDstOffset, r3);
+}
+
+void sub_8009A1C(struct unkStruct_8009A1C *r0, u32 palId, u32 vramDstOffset, u32 r3)
+{
+    s32 i;
+    u32 *dst, *src;
+
+    gUnknown_202D2A0 = r3;
+    src = r0->unkC;
+    dst = (void *)(VRAM) + vramDstOffset;
+
+    for (i = 0; i <= r0->unk8; i++) {
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+    }
+
+    for (i = 0; i < 16; i++) {
+        SetBGPaletteBufferColorArray(i + 0xE0, &r0->unk10->pal[i + palId * 16]);
+    }
 }
