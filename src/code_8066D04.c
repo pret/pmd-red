@@ -7,14 +7,20 @@
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"
 #include "dungeon_music.h"
+#include "position_util.h"
 #include "dungeon_util.h"
 #include "items.h"
 #include "string_format.h"
+#include "dungeon_leader.h"
 #include "status_checks_1.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_items.h"
 #include "dungeon_random.h"
+#include "code_8077274_1.h"
+#include "code_8084778.h"
+#include "dungeon_capabilities.h"
 #include "constants/item.h"
+#include "constants/dungeon.h"
 
 extern u8 *gUnknown_80F8BE0[];
 extern u8 *gUnknown_80FF76C[];
@@ -40,6 +46,9 @@ extern u8 *gNoExchangesHere[];
 extern u8 *gSwappedGroundItem[];
 extern const u8 *const gMonThrewItem2;
 extern const u8 *const gMonThrewItem1;
+extern const u8 *const gCannotTalk;
+extern const u8 *const gUnknown_80FE008;
+extern const u8 *const gUnknown_80FF674;
 
 extern void sub_8045C08(u8 *buffer, Item *item);
 extern bool8 sub_8045888(Entity *);
@@ -606,4 +615,123 @@ void sub_80671A0(Entity *entity)
             sub_807AB38(entity,gDungeon->forceMonsterHouse);
         }
     }
+}
+
+Entity *sub_806773C(Entity *entity);
+void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
+void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);
+extern void sub_807EF84(void);
+extern void sub_80845E0(Entity *entity);
+extern void sub_8084448(Entity *entity);
+extern void sub_806A3D4(u8 *dst, s32 _a1, s32 id, bool32 _a3);
+extern Entity * sub_80696A8(Entity *target);
+
+void HandleTalkFieldAction(Entity *entity)
+{
+    sub_8067558(entity, sub_806773C(entity), -1);
+}
+
+void sub_806752C(ActionContainer *a0)
+{
+    Entity *targetEntity = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
+    sub_8067558(GetLeader(), targetEntity, 0);
+}
+
+void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2)
+{
+    EntityInfo *info1 = GetEntInfo(entity);
+
+    if (targetEntity == NULL) {
+        DisplayDungeonMessage(NULL, gCannotTalk, TRUE);
+    }
+    else if (!sub_8070BC0(entity)) {
+        DisplayDungeonMessage(NULL, gCannotTalk, TRUE);
+    }
+    else if (GetTreatmentBetweenMonsters(entity, targetEntity, TRUE, FALSE) != 1
+             && GetTreatmentBetweenMonsters(targetEntity, entity, TRUE, FALSE) != 1)
+    {
+        EntityInfo *info2 = GetEntInfo(targetEntity);
+
+        SetMessageArgument_2(gFormatBuffer_Monsters[0], info2, 0);
+        SetMessageArgument_2(gFormatBuffer_Monsters[1], info1, 7);
+        sub_8084778();
+        TrySendImmobilizeSleepEndMsg(entity, targetEntity);
+        if (!sub_8070BC0(targetEntity) || CheckVariousStatuses2(targetEntity, TRUE)) {
+            DisplayDungeonMessage(NULL, gUnknown_80FE008, TRUE);
+            return;
+        }
+
+        sub_806CEFC(entity, GetDirectionTowardsPosition(&entity->pos, &targetEntity->pos));
+        if (a2 >= 0) {
+            sub_806CEFC(targetEntity, a2);
+        }
+        else {
+            sub_806CEFC(targetEntity, info1->action.direction + 4);
+        }
+
+        if (info2->shopkeeper == SHOPKEEPER_MODE_SHOPKEEPER) {
+            sub_807EF84();
+            return;
+        }
+
+        if (info2->monsterBehavior == 1) {
+            if (gDungeon->unk644.unk2A != 0) {
+                DisplayDungeonMessage(NULL, gUnknown_80FF674, TRUE);
+            }
+            else if (gDungeon->unk644.unk33) {
+                sub_80845E0(targetEntity);
+            }
+            else {
+                sub_8084448(targetEntity);
+            }
+        }
+        else {
+            u8 txt[300];
+            s32 r2;
+            s32 speciesId = info2->apparentID;
+            bool8 r6 = FALSE;
+
+            if (info2->joinedAt.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON) {
+                speciesId = MONSTER_MUNCHLAX;
+            }
+            else if (info2->joinedAt.id == DUNGEON_RESCUE_TEAM_BASE) {
+                speciesId = MONSTER_DECOY;
+            }
+            else if (info2->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && !gDungeon->unk644.unk18) {
+                r6 = TRUE;
+            }
+
+            if (info2->HP <= info2->maxHPStat / 4) {
+                r2 = 2;
+            }
+            else if (info2->HP <= (info2->maxHPStat * 6) / 10) {
+                r2 = 1;
+            }
+            else {
+                r2 = 0;
+            }
+
+            sub_806A3D4(txt, speciesId,  r2, r6);
+            DisplayDungeonMessage(NULL, txt, TRUE);
+        }
+    }
+    else {
+        DisplayDungeonMessage(NULL, gCannotTalk, TRUE);
+    }
+}
+
+Entity *sub_806773C(Entity *entity)
+{
+    Entity *ret = sub_80696A8(entity);
+    if (ret == NULL) return NULL;
+    if (GetEntityType(ret) != ENTITY_MONSTER) return NULL;
+    if (GetEntInfo(entity)->isNotTeamMember) return NULL;
+
+    return ret;
+}
+
+void sub_8067768(ActionContainer *a0)
+{
+    Entity *targetEntity = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
+    sub_8067794(GetLeader(), targetEntity, 0);
 }

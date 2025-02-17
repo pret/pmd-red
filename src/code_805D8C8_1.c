@@ -111,7 +111,7 @@ void sub_806752C(ActionContainer *a0);
 bool8 sub_8061A38(ActionContainer *a0, bool8 a1);
 void sub_8063A70(ActionContainer *a0, bool8 a1);
 void sub_8063CF0(ActionContainer *a0, bool8 a1);
-void sub_8067768(UNUSED ActionContainer *a0);
+void sub_8067768(ActionContainer *a0);
 void ShowTacticsMenu(ActionContainer *a0);
 void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
