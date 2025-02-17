@@ -2,14 +2,22 @@
 #include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_807CD9C.h"
+#include "code_8041AD0.h"
+#include "code_806CD90.h"
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "items.h"
 #include "string_format.h"
+#include "status_checks_1.h"
+#include "dungeon_ai_targeting.h"
+#include "dungeon_items.h"
+#include "dungeon_random.h"
+#include "constants/item.h"
 
 extern u8 *gUnknown_80F8BE0[];
+extern u8 *gUnknown_80FF76C[];
 extern u8 *gItemStickyCannotMove1[];
 extern u8 *gItemStickyCannotMove2[];
 extern u8 *gItemStickyCannotEquip[];
@@ -25,15 +33,24 @@ extern u8 *gUnknown_80F8DB4[];
 extern u8 *gUnknown_80F8DE0[];
 extern u8 *gUnknown_80F8E04[];
 extern u8 *gUnknown_80F8E28[];
-extern u8 *gUnknown_80F8BE0[];
 extern u8 *gItemStickyCannotMove3[];
 extern u8 *gNothingCanBePutDownHere[];
 extern u8 *gUnknown_80F8E2C[];
 extern u8 *gNoExchangesHere[];
 extern u8 *gSwappedGroundItem[];
+extern const u8 *const gMonThrewItem2;
+extern const u8 *const gMonThrewItem1;
 
+extern void sub_8045C08(u8 *buffer, Item *item);
+extern bool8 sub_8045888(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8045BF8(u8 *, Item *);
+u8 sub_8048D50();
+u8 * sub_80464AC();
+void sub_8044DF0();
+void sub_8042208(Entity *pokemon, u8 r1);
+void sub_803E708();
+void sub_80479B8();
 u8 sub_80460F8(DungeonPos *, Item *, u32);
 extern void sub_807AB38(Entity *, u32);
 extern Entity * sub_8044DA4(Entity *param_1,int param_2);
@@ -344,13 +361,13 @@ void sub_8066E14(Entity *entity)
         sub_8045BF8(gFormatBuffer_Items[0],item[1]);
         LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8BE0);
     }
-    else if ((info->action.actionParameters[1].actionUseIndex == 0x81) && ItemSticky(item[1])) {
+    else if (info->action.actionParameters[1].actionUseIndex == 0x81 && ItemSticky(item[1])) {
         sub_8045BF8(gFormatBuffer_Items[1],item[1]);
         LogMessageByIdWithPopupCheckUser(entity,*gItemStickyCannotMove3);
     }
     else {
         const Tile *tile = GetTile((entity->pos).x,(entity->pos).y);
-        if ((tile->object != NULL) && (GetEntityType(tile->object) != 3)) {
+        if (tile->object != NULL && GetEntityType(tile->object) != ENTITY_ITEM) {
             LogMessageByIdWithPopupCheckUser(entity,*gNoExchangesHere);
         }
         else {
@@ -381,6 +398,212 @@ void sub_8066E14(Entity *entity)
                 LogMessageByIdWithPopupCheckUser(entity,*gSwappedGroundItem);
                 sub_807AB38(entity,gDungeon->forceMonsterHouse);
             }
+        }
+    }
+}
+
+void sub_8066FA4(Entity *entity)
+{
+    Item *item[2];
+    EntityInfo *info = GetEntInfo(entity);
+    const Tile *tile = GetTile((entity->pos).x,(entity->pos).y);
+
+    item[0] = sub_8044D90(entity,0,7);
+    sub_8045BF8(gFormatBuffer_Items[0],item[0]);
+    if (info->action.actionParameters[0].actionUseIndex < 0x15 && (item[0]->flags & ITEM_FLAG_SET) && (item[0]->flags & ITEM_FLAG_STICKY)) {
+        sub_8045BF8(gFormatBuffer_Items[1],item[0]);
+        LogMessageByIdWithPopupCheckUser(entity,*gItemStickyCannotMove3);
+    }
+    else if (info->action.actionParameters[0].actionUseIndex == 0x81 && ItemSticky(item[0])) {
+        LogMessageByIdWithPopupCheckUser(entity,*gItemStickyCannotMove2);
+    }
+    else if (tile->object != NULL && GetEntityType(tile->object) != ENTITY_ITEM) {
+        LogMessageByIdWithPopupCheckUser(entity,*gNoExchangesHere);
+    }
+    else {
+        Item newItems[2];
+
+        item[1] = GetItemData(tile->object);
+        sub_8045BF8(gFormatBuffer_Items[1],item[1]);
+        newItems[0] = *item[0];
+        newItems[1] = *item[1];
+        newItems[0].flags &= ~(ITEM_FLAG_SET);
+        newItems[1].flags &= ~(ITEM_FLAG_SET);
+
+        sub_80461C8(&entity->pos,1);
+        ZeroOutItem(item[0]);
+        if (!sub_80460F8(&entity->pos, &newItems[0],1)) {
+            LogMessageByIdWithPopupCheckUser(entity,*gNothingCanBePutDownHere);
+        }
+        else {
+            if (info->action.actionParameters[0].actionUseIndex  == 0x81) {
+                info->heldItem = newItems[1];
+            }
+            else {
+                AddItemToInventory(&newItems[1]);
+            }
+            FillInventoryGaps();
+            PlaySoundEffect(0x14d);
+            LogMessageByIdWithPopupCheckUser(entity,*gSwappedGroundItem);
+            sub_807AB38(entity,gDungeon->forceMonsterHouse);
+        }
+    }
+}
+
+void sub_8067110(Entity *entity)
+{
+    EntityInfo *info = GetEntInfo(entity);
+    Item *item = sub_8044D90(entity,0,8);
+
+    sub_8045BF8(gFormatBuffer_Items[0],item);
+    SetMessageArgument_2(gFormatBuffer_Monsters[0],info,0);
+    if (sub_8048D50(entity,item)) {
+        Item item2;
+
+        LogMessageByIdWithPopupCheckUser(entity,sub_80464AC(item));
+        item2 = *item;
+        sub_8044DF0(entity,0,0x66);
+        sub_803E708(0x1e,0x11);
+        sub_80479B8(0,0,0,entity,entity,&item2);
+        sub_807AB38(entity,gDungeon->forceMonsterHouse);
+    }
+}
+
+struct UnkStruct_8067110
+{
+    u8 unk0;
+    u8 unk1;
+    s16 unk2;
+};
+
+extern void sub_8083904(DungeonPos *pos, Entity *entity);
+extern void sub_80475C4(Entity *entity, Item *item, DungeonPos *pos1, DungeonPos *pos2, struct UnkStruct_8067110 *);
+extern void sub_8047190(Entity *entity, Item *item, DungeonPos *pos1, s32 dir, struct UnkStruct_8067110 *);
+
+void sub_80671A0(Entity *entity)
+{
+    EntityInfo *info = GetEntInfo(entity);
+    Item *item = sub_8044D90(entity, 0, 9);
+
+    if (info->action.actionParameters[0].actionUseIndex == 0x81 && ItemSticky(item)) {
+        sub_8045BF8(gFormatBuffer_Items[0], item);
+        LogMessageByIdWithPopupCheckUser(entity, *gUnknown_80F8BE0);
+        sub_803E708(0x14, 0x4C);
+    }
+    else if ((GetItemCategory(item->id) == CATEGORY_THROWN_LINE || GetItemCategory(item->id) == CATEGORY_THROWN_ARC) && ItemSticky(item)) {
+        sub_8045BF8(gFormatBuffer_Items[0], item);
+        LogMessageByIdWithPopupCheckUser(entity, *gUnknown_80F8BE0);
+        sub_803E708(0x14, 0x4C);
+    }
+    else if (ShouldMonsterRunAwayAndShowEffect(entity, TRUE)) {
+        LogMessageByIdWithPopupCheckUser(entity, *gUnknown_80FF76C);
+        sub_803E708(0x14, 0x4C);
+    }
+    else {
+        bool8 r7;
+        Item newItem;
+        DungeonPos pos;
+        struct UnkStruct_8067110 unkStruct;
+
+        newItem = *item;
+        newItem.flags &= ~(ITEM_FLAG_SET);
+
+        if (info->action.actionParameters[0].actionUseIndex == 0x80) {
+            item = NULL;
+            sub_80461C8(&info->action.actionParameters[0].itemPos, 1);
+        }
+
+        r7 = TRUE;
+        if ((GetItemCategory(newItem.id) == CATEGORY_THROWN_LINE || GetItemCategory(newItem.id) == CATEGORY_THROWN_ARC) && (newItem.quantity > 1)) {
+            r7 = FALSE;
+        }
+
+        if (r7) {
+            if (info->action.actionParameters[0].actionUseIndex != 0x80) {
+                ZeroOutItem(item);
+                FillInventoryGaps();
+            }
+        }
+        else {
+            if (info->action.actionParameters[0].actionUseIndex == 0x80) {
+                newItem.quantity--;
+                sub_80460F8(&info->action.actionParameters[0].itemPos, &newItem, 1);
+            }
+            else {
+                item->quantity--;
+            }
+        }
+
+        if (HasHeldItem(entity, ITEM_NO_AIM_SCOPE)) {
+            info->action.direction = DungeonRandInt(NUM_DIRECTIONS);
+        }
+
+        if (sub_8045888(entity)) {
+            s32 i;
+            s32 dir = info->action.direction;
+            sub_80421C0(entity, 0x164);
+
+            for (i = 0; i < NUM_DIRECTIONS; i++) {
+                dir--;
+                dir &= DIRECTION_MASK;
+                sub_806CDD4(entity, 0, dir);
+                sub_803E708(2, 21);
+            }
+            info->unk166 = 4;
+        }
+
+        if ((GetItemCategory(newItem.id) == CATEGORY_THROWN_LINE || GetItemCategory(newItem.id) == CATEGORY_THROWN_ARC)) {
+            newItem.quantity = 1;
+        }
+
+        sub_8045C08(gFormatBuffer_Items[0], &newItem);
+        SetMessageArgument_2(gFormatBuffer_Monsters[0], info, 0);
+        if (GetItemCategory(newItem.id) == CATEGORY_THROWN_LINE) {
+            LogMessageByIdWithPopupCheckUser(entity, gMonThrewItem2);
+        }
+        else {
+            LogMessageByIdWithPopupCheckUser(entity, gMonThrewItem1);
+        }
+
+        sub_8042208(entity, GetItemCategory(newItem.id));
+        if (HasHeldItem(entity, ITEM_CURVE_BAND)) {
+            unkStruct.unk1 = 1;
+        }
+        else {
+            unkStruct.unk1 = 0;
+        }
+
+        switch (info->longTossClassStatus.status) {
+            case 0:
+                unkStruct.unk0 = 0;
+                unkStruct.unk2 = 10;
+                break;
+            case STATUS_LONG_TOSS:
+                unkStruct.unk0 = 0;
+                unkStruct.unk2 = 99;
+                break;
+            case STATUS_PIERCE:
+                unkStruct.unk0 = 1;
+                unkStruct.unk2 = 99;
+                break;
+        }
+
+        if (HasHeldItem(entity, ITEM_PIERCE_BAND)) {
+            unkStruct.unk0 = 1;
+            unkStruct.unk2 = 99;
+        }
+
+        if (GetItemCategory(newItem.id) == CATEGORY_THROWN_ARC) {
+            sub_8083904(&pos, entity);
+            sub_80475C4(entity, &newItem, &entity->pos, &pos, &unkStruct);
+        }
+        else {
+            sub_8047190(entity, &newItem, &entity->pos, info->action.direction, &unkStruct);
+        }
+
+        if (EntityIsValid(entity)) {
+            sub_806CE68(entity, info->action.direction);
+            sub_807AB38(entity,gDungeon->forceMonsterHouse);
         }
     }
 }
