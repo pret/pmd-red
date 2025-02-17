@@ -25,6 +25,12 @@ extern u8 *gUnknown_80F8DB4[];
 extern u8 *gUnknown_80F8DE0[];
 extern u8 *gUnknown_80F8E04[];
 extern u8 *gUnknown_80F8E28[];
+extern u8 *gUnknown_80F8BE0[];
+extern u8 *gItemStickyCannotMove3[];
+extern u8 *gNothingCanBePutDownHere[];
+extern u8 *gUnknown_80F8E2C[];
+extern u8 *gNoExchangesHere[];
+extern u8 *gSwappedGroundItem[];
 
 extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8045BF8(u8 *, Item *);
@@ -34,6 +40,7 @@ extern Entity * sub_8044DA4(Entity *param_1,int param_2);
 extern void sub_806A6E8(Entity *);
 extern void sub_8044DF0(Entity *, u32, u32);
 extern void sub_8045DB4(DungeonPos *, u32);
+extern bool8 sub_80461C8(DungeonPos *, u32);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {
@@ -317,6 +324,61 @@ void HandlePlaceItemAction(Entity *entity)
                 PlaySoundEffect(0x14d);
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
                 LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E28);
+                sub_807AB38(entity,gDungeon->forceMonsterHouse);
+            }
+        }
+    }
+}
+
+void sub_8066E14(Entity *entity)
+{
+    Item *item[2];
+    EntityInfo *info = GetEntInfo(entity);
+    item[0] = sub_8044D90(entity,0,5);
+    item[1] = sub_8044D90(entity,1,6);
+
+    if (info->action.actionParameters[0].actionUseIndex != 0x80) {
+        LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E2C);
+    }
+    else if (info->action.actionParameters[1].actionUseIndex < 0x15 && (item[1]->flags & ITEM_FLAG_SET) && (item[1]->flags & ITEM_FLAG_STICKY)) {
+        sub_8045BF8(gFormatBuffer_Items[0],item[1]);
+        LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8BE0);
+    }
+    else if ((info->action.actionParameters[1].actionUseIndex == 0x81) && ItemSticky(item[1])) {
+        sub_8045BF8(gFormatBuffer_Items[1],item[1]);
+        LogMessageByIdWithPopupCheckUser(entity,*gItemStickyCannotMove3);
+    }
+    else {
+        const Tile *tile = GetTile((entity->pos).x,(entity->pos).y);
+        if ((tile->object != NULL) && (GetEntityType(tile->object) != 3)) {
+            LogMessageByIdWithPopupCheckUser(entity,*gNoExchangesHere);
+        }
+        else {
+            Item newItems[2];
+
+            newItems[0] = *item[0];
+            newItems[1] = *item[1];
+            newItems[0].flags &= ~(ITEM_FLAG_SET);
+            newItems[1].flags &= ~(ITEM_FLAG_SET);
+
+            sub_80461C8(&info->action.actionParameters[0].itemPos,1);
+            ZeroOutItem(item[1]);
+            if (!sub_80460F8(&info->action.actionParameters[0].itemPos,&newItems[1],1)) {
+                LogMessageByIdWithPopupCheckUser(entity,*gNothingCanBePutDownHere);
+            }
+            else {
+                if (info->action.actionParameters[1].actionUseIndex == 0x81) {
+                    info->heldItem = newItems[0];
+                }
+                else {
+                    AddItemToInventory(&newItems[0]);
+                }
+
+                FillInventoryGaps();
+                sub_8045BF8(gFormatBuffer_Items[0],&newItems[1]);
+                sub_8045BF8(gFormatBuffer_Items[1],&newItems[0]);
+                PlaySoundEffect(0x14d);
+                LogMessageByIdWithPopupCheckUser(entity,*gSwappedGroundItem);
                 sub_807AB38(entity,gDungeon->forceMonsterHouse);
             }
         }
