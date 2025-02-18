@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_807CD9C.h"
@@ -70,19 +71,13 @@ extern const u8 *const gUnknown_80F9114;
 extern const u8 *const gMonDisappointedAndLeft;
 extern const u8 *const gSendMonBackQ;
 extern const u8 *const gSendMonBackWithItemQ;
-extern const u8 gUnknown_8106E28[];
-extern const u8 gUnknown_8106E5C[];
-extern const u8 gUnknown_8106E30[];
-extern const u8 gUnknown_8106E6C[];
-extern const u8 gUnknown_8106E48[];
-extern const u8 gUnknown_8106E2C[];
-extern const u8 gUnknown_8106E34[];
 extern const u8 *const gMonWentBack;
 extern const u8 *const gMonCringing;
 extern const u8 *const gMonParalyzed;
 extern const u8 *const gUnknown_80FC690;
 
 extern s32 gUnknown_202EE6C;
+extern u32 gUnknown_202F208;
 
 extern void sub_8071DA4(Entity *);
 extern void sub_806A1B0(Entity *);
@@ -112,6 +107,14 @@ extern void sub_8045DB4(DungeonPos *, u32);
 extern bool8 sub_80461C8(DungeonPos *, u32);
 extern bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0);
 extern bool8 sub_8044B28(void);
+Entity *sub_806773C(Entity *entity);
+void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
+void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);
+extern void sub_807EF84(void);
+extern void sub_80845E0(Entity *entity);
+extern void sub_8084448(Entity *entity);
+extern void sub_806A3D4(u8 *dst, s32 _a1, s32 id, bool32 _a3);
+extern Entity * sub_80696A8(Entity *target);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {
@@ -161,7 +164,6 @@ void HandleSetItemAction(Entity *param_1, bool8 param_2)
   }
 }
 
-
 void HandleUnsetItemAction(Entity *entity,bool8 enableMessage)
 {
   Item *item;
@@ -185,7 +187,6 @@ void HandleUnsetItemAction(Entity *entity,bool8 enableMessage)
     }
   }
 }
-
 
 void HandleGiveItemAction(Entity *param_1)
 {
@@ -263,7 +264,6 @@ void HandleGiveItemAction(Entity *param_1)
     sub_807AB38(param_1,gDungeon->forceMonsterHouse);
   }
 }
-
 
 void HandleTakeItemAction(Entity *param_1)
 {
@@ -662,15 +662,6 @@ void sub_80671A0(Entity *entity)
     }
 }
 
-Entity *sub_806773C(Entity *entity);
-void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
-void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);
-extern void sub_807EF84(void);
-extern void sub_80845E0(Entity *entity);
-extern void sub_8084448(Entity *entity);
-extern void sub_806A3D4(u8 *dst, s32 _a1, s32 id, bool32 _a3);
-extern Entity * sub_80696A8(Entity *target);
-
 void HandleTalkFieldAction(Entity *entity)
 {
     sub_8067558(entity, sub_806773C(entity), -1);
@@ -850,8 +841,6 @@ void HandleUseMovePlayerAction(Entity *entity)
     }
 }
 
-extern u32 gUnknown_202F208;
-
 void sub_8067904(Entity *entity, u16 moveId)
 {
     Move move;
@@ -928,12 +917,52 @@ void sub_806806C(PokemonStruct1 *a0);
 void sub_805FC30(UnkTextStruct3 *a0, s32 a1);
 extern void sub_803EAF0(u32, u8 *);
 
-extern const u8 gUnknown_8106DA4[];
+extern const s32 gUnknown_8106E80[];
 extern MenuInputStruct gUnknown_202EE10;
-extern const UnkTextStruct3 gUnknown_8106DC8;
-extern s32 gUnknown_202F30C;
-extern s32 gUnknown_202F310;
-extern UnkTextStruct2_sub2 gUnknown_202F308;
+
+static EWRAM_DATA UnkTextStruct2_sub2 gUnknown_202F308 = {0};
+static EWRAM_DATA s32 gUnknown_202F30C = 0;
+EWRAM_DATA s32 gUnknown_202F310 = 0;
+
+// It's likely a struct only used in Blue version. Touchpad maybe?
+static const u8 gUnknown_8106DA4[] = {
+    0x01, 0, 0x38, 0, 0, 0, 0x18, 0, 0x18, 0, 0, 0, 0x02, 0, 0x38, 0, 0x68, 0, 0x18, 0, 0x18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+};
+
+static const UnkTextStruct3 gUnknown_8106DC8 = {
+    .a0 = {
+        [0] =
+        {
+            .unk0 = 0,
+            .unk4 = 0x06,
+            .unk8 = {0x02, 0x02},
+            .unkC = 0x11,
+            .unkE = 0x0E,
+            .unk10 = 0x12,
+            .unk12 = 0x02,
+            .unk14 = &gUnknown_202F308
+        },
+        [1] =
+        {
+            .unk0 = 0,
+            .unk4 = 0x03,
+            .unk8 = {0x15, 0x04},
+            .unkC = 0x07,
+            .unkE = 0x04,
+            .unk10 = 0x04,
+            .unk12 = 0,
+            .unk14 = NULL
+        },
+        [2] =
+        {
+            .unk4 = 0x03,
+        },
+        [3] =
+        {
+            .unk4 = 0x03,
+        }
+    }
+};
 
 void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
 {
@@ -1184,7 +1213,7 @@ void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2_, s32 a3, s32 a4)
 
     sub_80073B8(0);
     WriteFriendAreaName(gFormatBuffer_Monsters[0], a0, FALSE);
-    PrintFormattedStringOnWindow(12, 0, gUnknown_8106E28, 0, '\0');
+    PrintFormattedStringOnWindow(12, 0, _("{POKEMON_0}"), 0, '\0');
     i = 0;
     while (i < 10) {
         if (a2 >= 0) {
@@ -1196,17 +1225,17 @@ void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2_, s32 a3, s32 a4)
             sub_808D930(gFormatBuffer_Monsters[1], a1[a2]->speciesNum);
             gFormatArgs[0] = a2 + 1;
             if (a1[a2]->unk0 & 0x8000) {
-                strcpy(gFormatBuffer_Items[0], gUnknown_8106E2C);
+                InlineStrcpy(gFormatBuffer_Items[0], _("{STAR_BULLET}"));
             }
             else {
-                strcpy(gFormatBuffer_Items[0], gUnknown_8106E30);
+                InlineStrcpy(gFormatBuffer_Items[0], _("{ICON_BLANK}"));
             }
 
             if (a1[a2]->unk0 & 0x4000) {
-                PrintFormattedStringOnWindow(7, y, gUnknown_8106E34, 0, '\0');
+                PrintFormattedStringOnWindow(7, y, _("{MOVE_ITEM_0}{color CYAN}$v02:{POKEMON_0}{reset}"), 0, '\0');
             }
             else {
-                PrintFormattedStringOnWindow(7, y, gUnknown_8106E48, 0, '\0');
+                PrintFormattedStringOnWindow(7, y, _("{MOVE_ITEM_0}{color YELLOW}$v02:{POKEMON_0}{reset}"), 0, '\0');
             }
         }
 
@@ -1218,25 +1247,22 @@ void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2_, s32 a3, s32 a4)
     sub_80073E0(0);
     sub_80073B8(1);
     if (gUnknown_202F310 >= a4) {
-        PrintFormattedStringOnWindow(8, 2, gUnknown_8106E5C, 1, '\0');
+        PrintFormattedStringOnWindow(8, 2, _("Press {B_BUTTON}\nif OK."), 1, '\0');
     }
     else {
         gFormatArgs[0] = a4 - gUnknown_202F310;
-        PrintFormattedStringOnWindow(8, 2, gUnknown_8106E6C, 1, '\0');
+        PrintFormattedStringOnWindow(8, 2, _("Say bye to\n{VALUE_0} more"), 1, '\0');
     }
 
     sub_80073E0(1);
 }
-
-extern const s32 gUnknown_8106E80[];
 
 void sub_806806C(PokemonStruct1 *a0)
 {
     struct unkStruct_808FF20 unkStruct;
     u8 var_C8[48];
     UnkTextStruct3 spTxtStruct = {0};
-    s32 spF8[4];
-    s32 r7, r8;
+    s32 r7;
 
     spTxtStruct.a0[0].unk4 = 6;
     spTxtStruct.a0[0].unk8.unk0.separate.unk0 = 2;
@@ -1256,8 +1282,8 @@ void sub_806806C(PokemonStruct1 *a0)
     gUnknown_202EE10.menuIndex = 0;
 
     while (1) {
-        r8 = 0;
-        memcpy(spF8, gUnknown_8106E80, sizeof(spF8));
+        bool32 loopBreak = FALSE;
+        s32 spF8[4] = {2, 3, 4, 5};
 
         gUnknown_202F308.f0 = 4;
         gUnknown_202F308.f1 = r7;
@@ -1343,18 +1369,18 @@ void sub_806806C(PokemonStruct1 *a0)
 
             if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
                 sub_8083D08();
-                r8 = 1;
+                loopBreak = TRUE;
                 break;
             }
             if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
                 sub_8083D30();
-                r8 = 1;
+                loopBreak = TRUE;
                 break;
             }
         }
 
         sub_803E46C(0x37);
-        if (r8 != 0) {
+        if (loopBreak) {
             break;
         }
     }
