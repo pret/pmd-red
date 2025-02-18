@@ -14,6 +14,7 @@
 #include "text.h"
 #include "code_803E46C.h"
 #include "string_format.h"
+#include "friend_area.h"
 #include "dungeon_leader.h"
 #include "status_checks_1.h"
 #include "dungeon_ai_targeting.h"
@@ -26,6 +27,7 @@
 #include "pokemon.h"
 #include "trap.h"
 #include "moves.h"
+#include "pokemon_3.h"
 #include "menu_input.h"
 #include "dungeon_capabilities.h"
 #include "constants/item.h"
@@ -68,6 +70,13 @@ extern const u8 *const gUnknown_80F9114;
 extern const u8 *const gMonDisappointedAndLeft;
 extern const u8 *const gSendMonBackQ;
 extern const u8 *const gSendMonBackWithItemQ;
+extern const u8 gUnknown_8106E28[];
+extern const u8 gUnknown_8106E5C[];
+extern const u8 gUnknown_8106E30[];
+extern const u8 gUnknown_8106E6C[];
+extern const u8 gUnknown_8106E48[];
+extern const u8 gUnknown_8106E2C[];
+extern const u8 gUnknown_8106E34[];
 extern const u8 *const gMonWentBack;
 extern const u8 *const gMonCringing;
 extern const u8 *const gMonParalyzed;
@@ -909,7 +918,7 @@ extern void sub_8083CE0(u8 param_1);
 extern void sub_8068344(void);
 bool8 sub_8044F3C(s32 param_1);
 void sub_8068310(s32 a0, PokemonStruct1 **a1);
-void sub_8067F00(s32 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
+void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
 extern void sub_803ECB4(UnkTextStruct3 *a0, u8 a1);
 u32 sub_8014140(s32 a0, const void *a1);
 void sub_8083D1C(void);
@@ -917,13 +926,14 @@ void sub_8083D08(void);
 void sub_8083D30(void);
 void sub_806806C(PokemonStruct1 *a0);
 void sub_805FC30(UnkTextStruct3 *a0, s32 a1);
+extern void sub_803EAF0(u32, u8 *);
 
 extern const u8 gUnknown_8106DA4[];
 extern MenuInputStruct gUnknown_202EE10;
 extern const UnkTextStruct3 gUnknown_8106DC8;
 extern s32 gUnknown_202F30C;
 extern s32 gUnknown_202F310;
-extern u8 gUnknown_202F308[];
+extern UnkTextStruct2_sub2 gUnknown_202F308;
 
 void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
 {
@@ -944,10 +954,10 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
         while (1) {
             s32 r7 = 0, r5 = 0;
 
-            gUnknown_202F308[0] = 1;
-            gUnknown_202F308[1] = 0;
-            gUnknown_202F308[2] = 0xE;
-            gUnknown_202F308[3] = 0;
+            gUnknown_202F308.f0 = 1;
+            gUnknown_202F308.f1 = 0;
+            gUnknown_202F308.f2 = 0xE;
+            gUnknown_202F308.f3 = 0;
 
             ASM_MATCH_TRICK(r7);
 
@@ -1163,3 +1173,192 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
         }
     }
 }
+
+void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2_, s32 a3, s32 a4)
+{
+    s32 i, y;
+    s32 a2;
+
+    a2 = a2_ - 1;
+    y = 0x16;
+
+    sub_80073B8(0);
+    WriteFriendAreaName(gFormatBuffer_Monsters[0], a0, FALSE);
+    PrintFormattedStringOnWindow(12, 0, gUnknown_8106E28, 0, '\0');
+    i = 0;
+    while (i < 10) {
+        if (a2 >= 0) {
+            if (a2 >= a3) {
+                break;
+            }
+
+            PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0], a1[a2], 0);
+            sub_808D930(gFormatBuffer_Monsters[1], a1[a2]->speciesNum);
+            gFormatArgs[0] = a2 + 1;
+            if (a1[a2]->unk0 & 0x8000) {
+                strcpy(gFormatBuffer_Items[0], gUnknown_8106E2C);
+            }
+            else {
+                strcpy(gFormatBuffer_Items[0], gUnknown_8106E30);
+            }
+
+            if (a1[a2]->unk0 & 0x4000) {
+                PrintFormattedStringOnWindow(7, y, gUnknown_8106E34, 0, '\0');
+            }
+            else {
+                PrintFormattedStringOnWindow(7, y, gUnknown_8106E48, 0, '\0');
+            }
+        }
+
+        i++;
+        y += 12;
+        a2++;
+    }
+
+    sub_80073E0(0);
+    sub_80073B8(1);
+    if (gUnknown_202F310 >= a4) {
+        PrintFormattedStringOnWindow(8, 2, gUnknown_8106E5C, 1, '\0');
+    }
+    else {
+        gFormatArgs[0] = a4 - gUnknown_202F310;
+        PrintFormattedStringOnWindow(8, 2, gUnknown_8106E6C, 1, '\0');
+    }
+
+    sub_80073E0(1);
+}
+
+extern const s32 gUnknown_8106E80[];
+
+void sub_806806C(PokemonStruct1 *a0)
+{
+    struct unkStruct_808FF20 unkStruct;
+    u8 var_C8[48];
+    UnkTextStruct3 spTxtStruct = {0};
+    s32 spF8[4];
+    s32 r7, r8;
+
+    spTxtStruct.a0[0].unk4 = 6;
+    spTxtStruct.a0[0].unk8.unk0.separate.unk0 = 2;
+    spTxtStruct.a0[0].unk8.unk0.separate.unk2 = 2;
+    spTxtStruct.a0[0].unkC = 0x12;
+    spTxtStruct.a0[0].unkE = 0xE;
+    spTxtStruct.a0[0].unk10 = 0x12;
+    spTxtStruct.a0[0].unk12 = 2;
+    spTxtStruct.a0[0].unk14 = &gUnknown_202F308;
+    spTxtStruct.a0[1].unk4 = 3;
+    spTxtStruct.a0[2].unk4 = 3;
+    spTxtStruct.a0[3].unk4 = 3;
+
+    r7 = 0;
+    unkStruct.unk40 = 0;
+    unkStruct.unk56 = 0;
+    gUnknown_202EE10.menuIndex = 0;
+
+    while (1) {
+        r8 = 0;
+        memcpy(spF8, gUnknown_8106E80, sizeof(spF8));
+
+        gUnknown_202F308.f0 = 4;
+        gUnknown_202F308.f1 = r7;
+        gUnknown_202F308.f2 = 10;
+        gUnknown_202F308.f3 = 0;
+
+        gUnknown_202EE10.unk1E = r7;
+        gUnknown_202EE10.unk20 = 4;
+        gUnknown_202EE10.unk1A = 0;
+        gUnknown_202EE10.menuIndex = 0;
+        gUnknown_202EE10.unk1C = 0;
+        gUnknown_202EE10.unk4 = 0;
+        gUnknown_202EE10.unk6 = 16;
+        gUnknown_202EE10.unk14.x = 0;
+        gUnknown_202EE10.unk0 = 0;
+
+        sub_801317C(&gUnknown_202EE10.unk28);
+        sub_803ECB4(&spTxtStruct, 1);
+        sub_808FF20(&unkStruct, a0, gDungeon->unk644.unk16);
+        CreatePokemonInfoTabScreen(spF8[r7], r7, &unkStruct, var_C8, 0);
+
+        gUnknown_202EE10.unkC = (gUnknown_2027370[0].unk0 + 15) * 8;
+        gUnknown_202EE10.unkE = ((gUnknown_2027370[0].unk2 + 1) * 8) - 2;
+
+        while (1) {
+            s32 r5;
+
+            AddMenuCursorSprite(&gUnknown_202EE10);
+            if (spF8[r7] == 4) {
+                if (var_C8[8] != 0) {
+                    sub_80684C4();
+                }
+                if (unkStruct.unk40 != 0) {
+                    sub_8068344();
+                }
+            }
+
+            r5 = sub_8014140(0, gUnknown_8106DA4);
+            sub_803E46C(0x1C);
+            if ((gRealInputs.pressed & DPAD_RIGHT) || gUnknown_202EE10.unk28.dpad_right) {
+                sub_8083CE0(0);
+                if (++r7 == 4) {
+                    r7 = 0;
+                }
+                break;
+            }
+            if ((gRealInputs.pressed & DPAD_LEFT) || gUnknown_202EE10.unk28.dpad_left) {
+                sub_8083CE0(0);
+                if (--r7 == -1) {
+                    r7 = 3;
+                }
+                break;
+            }
+
+            if (spF8[r7] == 4) {
+                if (((gRealInputs.repeated & DPAD_DOWN) || r5 == 2) && var_C8[8] != 0) {
+                    s32 i;
+
+                    sub_8083CE0(0);
+                    for (i = 0; i < 6; i++) {
+                        gIwramTextFunc1(0);
+                        sub_803E46C(0x1C);
+                    }
+                    unkStruct.unk40++;
+                    break;
+                }
+                if (((gRealInputs.repeated & DPAD_UP) || r5 == 1) && unkStruct.unk40 != 0) {
+                    s32 i;
+
+                    sub_8083CE0(0);
+                    for (i = 0; i < 6; i++) {
+                        gIwramTextFunc2(0);
+                        sub_803E46C(0x1C);
+                    }
+                    unkStruct.unk40--;
+                    break;
+                }
+            }
+
+            if (sub_80048C8()) {
+                continue;
+            }
+
+            if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                sub_8083D08();
+                r8 = 1;
+                break;
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                sub_8083D30();
+                r8 = 1;
+                break;
+            }
+        }
+
+        sub_803E46C(0x37);
+        if (r8 != 0) {
+            break;
+        }
+    }
+
+    sub_803EAF0(0, NULL);
+}
+
