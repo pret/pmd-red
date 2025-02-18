@@ -10,17 +10,27 @@
 #include "position_util.h"
 #include "dungeon_util.h"
 #include "items.h"
+#include "input.h"
+#include "text.h"
+#include "code_803E46C.h"
 #include "string_format.h"
 #include "dungeon_leader.h"
 #include "status_checks_1.h"
 #include "dungeon_ai_targeting.h"
+#include "dungeon_engine.h"
+#include "dungeon_move.h"
 #include "dungeon_items.h"
 #include "dungeon_random.h"
 #include "code_8077274_1.h"
 #include "code_8084778.h"
+#include "pokemon.h"
+#include "trap.h"
+#include "moves.h"
+#include "menu_input.h"
 #include "dungeon_capabilities.h"
 #include "constants/item.h"
 #include "constants/dungeon.h"
+#include "constants/move_id.h"
 
 extern u8 *gUnknown_80F8BE0[];
 extern u8 *gUnknown_80FF76C[];
@@ -46,16 +56,40 @@ extern u8 *gNoExchangesHere[];
 extern u8 *gSwappedGroundItem[];
 extern const u8 *const gMonThrewItem2;
 extern const u8 *const gMonThrewItem1;
+extern const u8 *const gCannotFarewell;
+extern const u8 *const gSayFarewellQ;
+extern const u8 *const gUnknown_80FDFB8;
+extern const u8 *const gUnknown_80F913C;
 extern const u8 *const gCannotTalk;
 extern const u8 *const gUnknown_80FE008;
+extern const u8 *const gUnknown_80FDF74;
 extern const u8 *const gUnknown_80FF674;
+extern const u8 *const gUnknown_80F9114;
+extern const u8 *const gMonDisappointedAndLeft;
+extern const u8 *const gSendMonBackQ;
+extern const u8 *const gSendMonBackWithItemQ;
+extern const u8 *const gMonWentBack;
+extern const u8 *const gMonCringing;
+extern const u8 *const gMonParalyzed;
+extern const u8 *const gUnknown_80FC690;
 
+extern s32 gUnknown_202EE6C;
+
+extern void sub_8071DA4(Entity *);
+extern void sub_806A1B0(Entity *);
+extern void sub_806A9B4(Entity *, u32);
+extern void sub_8057588(Entity * pokemon, u8 param_2);
+extern void sub_8068FE0(Entity *, u32, Entity *r2);
+extern bool8 sub_806A58C(s16 a0);
+extern bool8 sub_806A564(s16 r0);
 extern void sub_8045C08(u8 *buffer, Item *item);
 extern bool8 sub_8045888(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8045BF8(u8 *, Item *);
 u8 sub_8048D50();
+void sub_8044FF0(u16 param_1);
 u8 * sub_80464AC();
+void sub_8044F5C(u16 param_1, u8 param_2);
 void sub_8044DF0();
 void sub_8042208(Entity *pokemon, u8 r1);
 void sub_803E708();
@@ -67,6 +101,8 @@ extern void sub_806A6E8(Entity *);
 extern void sub_8044DF0(Entity *, u32, u32);
 extern void sub_8045DB4(DungeonPos *, u32);
 extern bool8 sub_80461C8(DungeonPos *, u32);
+extern bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0);
+extern bool8 sub_8044B28(void);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {
@@ -734,4 +770,396 @@ void sub_8067768(ActionContainer *a0)
 {
     Entity *targetEntity = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
     sub_8067794(GetLeader(), targetEntity, 0);
+}
+
+void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2)
+{
+    const u8 *stringPtr1;
+    const u8 *stringPtr2;
+    s32 teamIndex;
+    EntityInfo *info2 = GetEntInfo(targetEntity);
+
+    if (targetEntity == NULL) {
+        DisplayDungeonMessage(NULL, gCannotFarewell, TRUE);
+        return;
+    }
+
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], targetEntity, 0);
+    stringPtr1 = gSayFarewellQ;
+    stringPtr2 = gUnknown_80F913C;
+    teamIndex = info2->teamIndex;
+    if (teamIndex >= 0) {
+        PokemonStruct2 *pokeStruct = &gRecruitedPokemonRef->pokemon2[teamIndex];
+        if (sub_806A564(pokeStruct->unkA)) {
+            stringPtr1 = gUnknown_80F9114;
+            stringPtr2 = gMonDisappointedAndLeft;
+        }
+        else if (sub_806A58C(pokeStruct->unkA)) {
+            if (IsMakuhitaTrainingMaze()) {
+                stringPtr1 = gSendMonBackQ;
+            }
+            else {
+                stringPtr1 = gSendMonBackWithItemQ;
+            }
+            stringPtr2 = gMonWentBack;
+        }
+    }
+
+    if (DisplayDungeonYesNoMessage(NULL, stringPtr1, FALSE) == 1) {
+        u8 tempText[64];
+
+        strncpy(tempText, gFormatBuffer_Monsters[0], sizeof(tempText));
+        sub_8068FE0(targetEntity, 0x21D, 0);
+        strncpy(gFormatBuffer_Monsters[0], tempText, sizeof(tempText));
+        DisplayDungeonMessage(NULL, stringPtr2, TRUE);
+    }
+}
+
+void HandleUseMovePlayerAction(Entity *entity)
+{
+    s32 i = 0;
+
+    while (i < sub_8070828(entity, TRUE)) {
+        EntityInfo *info = GetEntInfo(entity);
+
+        sub_8055A00(entity, info->action.actionParameters[1].actionUseIndex, 1, 0, 0);
+        if (sub_8044B28()) {
+            break;
+        }
+        if (info->unk159 != 0) {
+            break;
+        }
+        i++;
+    }
+
+    sub_8057588(entity, 1);
+    if (!sub_8044B28()) {
+        if (EntityIsValid(entity)) {
+            sub_806A9B4(entity, GetEntInfo(entity)->action.actionParameters[1].actionUseIndex);
+        }
+        sub_806A1B0(entity);
+    }
+}
+
+extern u32 gUnknown_202F208;
+
+void sub_8067904(Entity *entity, u16 moveId)
+{
+    Move move;
+    EntityInfo *info = GetEntInfo(entity);
+
+    gUnknown_202F208 = 0;
+    InitPokemonMove(&move, moveId);
+    if (info->cringeClassStatus.status == STATUS_CRINGE) {
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+        LogMessageByIdWithPopupCheckUser(entity, gMonCringing);
+    }
+    else if (info->burnClassStatus.status == STATUS_PARALYSIS) {
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+        LogMessageByIdWithPopupCheckUser(entity, gMonParalyzed);
+    }
+    else {
+        s32 i;
+        bool32 isStrugle;
+
+        if (moveId == MOVE_STRUGGLE) {
+            isStrugle = TRUE;
+        }
+        else {
+            isStrugle = FALSE;
+        }
+
+        i = 0;
+        while (i < sub_8070828(entity, TRUE)) {
+            info->abilityEffectFlags = 0;
+            move.moveFlags |= 8;
+            move.moveFlags |= 4;
+            move.PP = 10;
+            TryUseChosenMove(entity, isStrugle, 0, 0, FALSE, &move);
+
+            if (!EntityIsValid(entity) || info->unk159 != 0) {
+                break;
+            }
+            i++;
+        }
+
+        if (EntityIsValid(entity)) {
+            if (moveId == MOVE_STRUGGLE && gUnknown_202F208 == 0) {
+                LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FC690);
+            }
+            if (info->isTeamLeader && moveId != MOVE_STRUGGLE) {
+                DungeonPos pos;
+
+                pos.x = entity->pos.x + gAdjacentTileOffsets[info->action.direction].x;
+                pos.y = entity->pos.y + gAdjacentTileOffsets[info->action.direction].y;
+                sub_807FE44(&pos, 1);
+            }
+            sub_8071DA4(entity);
+        }
+    }
+}
+
+typedef struct UnkTextStruct3 {
+    UnkTextStruct2 a0[4];
+} UnkTextStruct3;
+
+extern void sub_80684C4(void);
+void sub_8045064(void);
+extern void sub_8083CE0(u8 param_1);
+extern void sub_8068344(void);
+bool8 sub_8044F3C(s32 param_1);
+void sub_8068310(s32 a0, PokemonStruct1 **a1);
+void sub_8067F00(s32 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
+extern void sub_803ECB4(UnkTextStruct3 *a0, u8 a1);
+u32 sub_8014140(s32 a0, const void *a1);
+void sub_8083D1C(void);
+void sub_8083D08(void);
+void sub_8083D30(void);
+void sub_806806C(PokemonStruct1 *a0);
+void sub_805FC30(UnkTextStruct3 *a0, s32 a1);
+
+extern const u8 gUnknown_8106DA4[];
+extern MenuInputStruct gUnknown_202EE10;
+extern const UnkTextStruct3 gUnknown_8106DC8;
+extern s32 gUnknown_202F30C;
+extern s32 gUnknown_202F310;
+extern u8 gUnknown_202F308[];
+
+void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
+{
+    s32 i;
+    s32 r10;
+    UnkTextStruct3 spTxtStruct = gUnknown_8106DC8;
+
+    gUnknown_202F30C = 0;
+    r10 = 0;
+    for (i = 0; i < a2; i++) {
+        a3[i]->unk0 &= ~(0x8000);
+    }
+
+    while (1) {
+        sub_8068310(a2, a3);
+        if (gUnknown_202F310 >= a1)
+            break;
+        while (1) {
+            s32 r7 = 0, r5 = 0;
+
+            gUnknown_202F308[0] = 1;
+            gUnknown_202F308[1] = 0;
+            gUnknown_202F308[2] = 0xE;
+            gUnknown_202F308[3] = 0;
+
+            ASM_MATCH_TRICK(r7);
+
+            sub_803ECB4(&spTxtStruct, 1);
+            sub_8067F00(a0, a3, gUnknown_202F30C, a2, a1);
+            gUnknown_202EE10.unk1A = min(a2, 8);
+            gUnknown_202EE10.menuIndex = r10;
+            gUnknown_202EE10.unk1C = 8;
+            gUnknown_202EE10.unk1E = 0;
+            gUnknown_202EE10.unk20 = 0;
+            gUnknown_202EE10.unk4 = 0;
+            gUnknown_202EE10.unk6 = 18;
+            gUnknown_202EE10.unkC = 0;
+            gUnknown_202EE10.unkE = 0;
+            gUnknown_202EE10.unk14.x = 0;
+            gUnknown_202EE10.unk0 = 0;
+            sub_801317C(&gUnknown_202EE10.unk28);
+            sub_80137B0(&gUnknown_202EE10, 0);
+            while (1) {
+                s32 r4;
+
+                AddMenuCursorSprite(&gUnknown_202EE10);
+                r5 = 0;
+                r7 = 0;
+                if (a2 - gUnknown_202F30C > 8) {
+                    r5 = 1;
+                    sub_80684C4();
+                }
+                if (gUnknown_202F30C != 0) {
+                    r7 = 1;
+                    sub_8068344();
+                }
+
+                r4 = sub_8014140(0, gUnknown_8106DA4);
+                sub_803E46C(0x37);
+                if (r4 == 2 && r5) {
+                    if (a2 - gUnknown_202F30C > 8) {
+                        s32 i;
+                        for (i = 0; i < 6; i++) {
+                            gIwramTextFunc1(0);
+                            sub_803E46C(0x37);
+                        }
+                        gUnknown_202F30C++;
+                    }
+                    r7 = 0;
+                    r10 = 7;
+                    break;
+                }
+                if (gRealInputs.repeated & DPAD_DOWN) {
+                    sub_8083CE0(1);
+                    if (gUnknown_202EE10.menuIndex == 7) {
+                        if (a2 - gUnknown_202F30C > 8) {
+                            s32 i;
+                            for (i = 0; i < 6; i++) {
+                                gIwramTextFunc1(0);
+                                sub_803E46C(0x37);
+                            }
+                            gUnknown_202F30C++;
+                        }
+                        r7 = 0;
+                        r10 = 7;
+                        break;
+                    }
+                    sub_80136E0(&gUnknown_202EE10, 0);
+                }
+
+                if (r4 == 1 && r7 != 0) {
+                    if (gUnknown_202F30C != 0) {
+                        s32 i;
+                        for (i = 0; i < 6; i++) {
+                            gIwramTextFunc2(0);
+                            sub_803E46C(0x37);
+                        }
+                        gUnknown_202F30C--;
+                    }
+                    r7 = 0;
+                    r10 = 0;
+                    break;
+                }
+                if (gRealInputs.repeated & DPAD_UP) {
+                    sub_8083CE0(1);
+                    if (gUnknown_202EE10.menuIndex == 0) {
+                        if (gUnknown_202F30C != 0) {
+                            s32 i;
+                            for (i = 0; i < 6; i++) {
+                                gIwramTextFunc2(0);
+                                sub_803E46C(0x37);
+                            }
+                            gUnknown_202F30C--;
+                        }
+                        r7 = 0;
+                        r10 = 0;
+                        break;
+                    }
+                    sub_8013744(&gUnknown_202EE10, 0);
+                }
+
+                if (sub_80048C8()) {
+                    continue;
+                }
+
+                if (gRealInputs.pressed & START_BUTTON) {
+                    sub_8083D1C();
+                    r7 = 3;
+                    break;
+                }
+                if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                    sub_8083D08();
+                    r7 = 1;
+                    break;
+                }
+                if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                    sub_8083D30();
+                    r7 = 2;
+                    break;
+                }
+            }
+
+            AddMenuCursorSprite(&gUnknown_202EE10);
+            sub_803E46C(0x37);
+            if (r7 == 0) {
+                continue;
+            }
+            else if (r7 == 2) {
+                r10 = gUnknown_202EE10.menuIndex;
+                if (gUnknown_202F310 < a1) {
+                    continue;
+                }
+
+                if (DisplayDungeonYesNoMessage(NULL, gUnknown_80FDFB8, TRUE) == 1) {
+                    break;
+                }
+                else {
+                    continue;
+                }
+            }
+            else if (r7 == 3) {
+                r10 = gUnknown_202EE10.menuIndex;
+                sub_806806C(a3[gUnknown_202F30C + r10]);
+                continue;
+            }
+            else {
+                s32 arrId;
+                u8 locIdIsPartner;
+
+                r10 = gUnknown_202EE10.menuIndex;
+                arrId = gUnknown_202F30C + r10;
+                gUnknown_202EE6C = 0;
+                sub_8044F5C(0x29, 0);
+                sub_8044F5C(0x2A, 0);
+                sub_8044F5C(0x40, 0);
+                if (a3[arrId]->unk0 & 0x8000) {
+                    sub_8044FF0(0x29);
+                }
+                else {
+                    sub_8044FF0(0x2A);
+                }
+
+                // This unnecessary variable is required to match.
+                locIdIsPartner = DUNGEON_JOIN_LOCATION_PARTNER;
+                if (a3[arrId]->isTeamLeader || (a3[arrId]->dungeonLocation.id == DUNGEON_JOIN_LOCATION_LEADER || a3[arrId]->dungeonLocation.id == locIdIsPartner)) {
+                    sub_8044FF0(0x29);
+                }
+
+                sub_8045064();
+                sub_805FC30(&spTxtStruct, 0x15);
+
+                while (1) {
+                    AddMenuCursorSprite(&gUnknown_202EE10);
+                    sub_803E46C(0x37);
+
+                    if (gRealInputs.repeated & DPAD_DOWN) {
+                        sub_8083CE0(1);
+                        sub_80136E0(&gUnknown_202EE10, 1);
+                    }
+                    if (gRealInputs.repeated & DPAD_UP) {
+                        sub_8083CE0(1);
+                        sub_8013744(&gUnknown_202EE10, 1);
+                    }
+
+                    if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                        if (sub_8044F3C(gUnknown_202EE10.menuIndex)) {
+                            sub_8083D08();
+                            r7 = 1;
+                            break;
+                        }
+                        sub_8083D30();
+                    }
+                    if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                        sub_8083D30();
+                        r7 = 0;
+                        break;
+                    }
+                }
+
+                AddMenuCursorSprite(&gUnknown_202EE10);
+                sub_803E46C(0x37);
+                if (r7 != 0) {
+                    if (gUnknown_202EE10.menuIndex == 0) {
+                        a3[arrId]->unk0 |= 0x8000;
+                        sub_8068310(a2, a3);
+                    }
+                    else if (gUnknown_202EE10.menuIndex == 1) {
+                        a3[arrId]->unk0 &= ~(0x8000);
+                        sub_8068310(a2, a3);
+                    }
+                    else {
+                        sub_806806C(a3[arrId]);
+                    }
+                }
+                continue;
+            }
+        }
+    }
 }
