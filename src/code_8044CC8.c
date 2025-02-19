@@ -36,7 +36,7 @@ extern u8 GetFloorType(void);
 void sub_80460F8(DungeonPos *, Item *, u32);
 bool8 sub_80461C8(DungeonPos *, u32);
 
-Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2)
+Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3)
 {
   const Tile *tile;
   Item *item;
@@ -54,7 +54,8 @@ Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2)
       info = GetEntInfo(param_1);
     }
     else {
-      if (3 < (u8)(param_2->actionUseIndex + 0x70)) {
+      u8 id = param_2->actionUseIndex - 0x90;
+      if (3 < id) {
         return NULL;
       }
       info = GetEntInfo(gDungeon->teamPokemon[param_2->actionUseIndex - 0x90]);
@@ -86,14 +87,10 @@ bool8 sub_8044D40(ActionContainer *param_1,s32 index)
   return TRUE;
 }
 
-Item *sub_8044D90(Entity *entity, s32 index, s32 unused) {
+Item *sub_8044D90(Entity *entity, s32 index, s32 unused)
+{
     EntityInfo *info = GetEntInfo(entity);
-#ifdef NONMATCHING
-    ActionParameter *puVar1 = &info->action.actionParameters[index];
-#else
-    register ActionParameter *puVar1 asm("r3") = &info->action.actionParameters[index];
-#endif
-    return sub_8044CC8(entity, puVar1);
+    return sub_8044CC8(entity, &info->action.actionParameters[index], unused);
 }
 
 Entity *sub_8044DA4(Entity *entity, s32 index)
