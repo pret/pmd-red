@@ -4203,20 +4203,18 @@ void JirachiWishGrantFlash(void)
 
 void sub_808BB3C(DungeonPos *pos1)
 {
-#ifndef NONMATCHING
-  register s32 iVar1 asm("r0");
-#else
-  s32 iVar1;
-#endif
-  DungeonPos newPos;
+    s32 x, y;
+    DungeonPos newPos;
 
-  iVar1 = pos1->x * 0x1800 + 0xc00;
-  newPos.x = iVar1 / 256;
+    x = (pos1->x * 3) << 11;
+    x += 0xC00;
+    newPos.x = x / 256;
 
-  iVar1 = pos1->y * 0x1800 + 0x1000;
+    y = (pos1->y * 3) << 11;
+    y += 0x1000;
+    newPos.y = y / 256;
 
-  newPos.y = iVar1 / 256;
-  sub_8085EC8(100,0,0,&newPos,0);
+    sub_8085EC8(100,0,0,&newPos,0);
 }
 
 void sub_808BBA8(Entity *jirachiEntity)
