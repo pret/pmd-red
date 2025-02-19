@@ -9,7 +9,7 @@ extern u8 gUnknown_20398B8;
 
 extern void sub_8003600(void);
 
-extern s32 sub_800388C(u16, u8 *, u8);
+extern s32 sub_800388C(u16, const u8 *, u8);
 
 extern void sub_80A4B38(void);
 extern void sub_80A4B54(void);

@@ -27,7 +27,7 @@ typedef struct LuminousCaveWork
     MenuStruct unk84;
     u8 fillD4[0x104 - 0xD4];
     OpenedFile *unk104;
-    u8 *unk108;
+    const u8 *unk108;
     u16 unk10C;
     u16 unk10E;
     u8 unk110;

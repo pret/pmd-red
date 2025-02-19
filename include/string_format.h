@@ -23,7 +23,8 @@ struct PortraitGfxSub
 
 struct PortraitGfx
 {
-    struct PortraitGfxSub sprites[10];
+    // NOTE: The actual number of sprites is different depending on pokemon. For example, starters have 12 sprites, while most legendaries only 1. [0] means that any number of sprites is valid.
+    struct PortraitGfxSub sprites[0];
 };
 
 struct MonPortraitMsg

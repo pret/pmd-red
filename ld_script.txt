@@ -783,6 +783,7 @@ SECTIONS {
     monster_sbin_section 0x8510000 :
     ALIGN(4)
     {
+        src/monster_sbin.o(.rodata);
         data/monster_sbin.o(.rodata);
     } > ROM =0
 

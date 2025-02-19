@@ -61,7 +61,7 @@ bool8 sub_8037A48(void)
 
      gUnknown_202EC40[0] = stack.unk10;
      gUnknown_202EC40[1] = stack_1.unk10;
-    
+
     if (IsNotChunsoft(&stack) || IsNotChunsoft(&stack_1))
         return FALSE;
 
@@ -382,7 +382,7 @@ static void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct
 {
     unkStruct_203B480 *mail;
     WonderMailStruct_203B2C0_sub *puVar2;
-    
+
     if(sub_800D588() == 0)
     {
         puVar2 = param_1;

@@ -35,7 +35,7 @@ extern const u8 gUnknown_81177EC[];
 extern const u8 *gUnknown_81178F4[];
 
 // code_8098BDC.s
-extern void sub_809971C(u16, u8 *, s16);
+extern void sub_809971C(u16, const u8 *, s16);
 extern void sub_80997F4(u16, u16);
 // pokemon_2.s
 extern void InitShadowSprites(u32, u32);
@@ -119,7 +119,7 @@ void sub_80A6460(void)
 {
     OpenedFile *file;
     s32 i;
-    u8 *data;
+    const u8 *data;
     u16 something;
 
     file = OpenFileAndGetFileDataPtr(gUnknown_81177EC, &gMonsterFileArchive);
@@ -138,7 +138,7 @@ void sub_80A6460(void)
 
 void sub_80A64A4(void)
 {
-    u8 *r2;
+    const u8 *r2;
     u16 r4;
     u32 r5;
     OpenedFile *file;
