@@ -26,7 +26,7 @@ static s32 CountEmptyMailSlots(void);
 
 static void sub_802BF30(void);
 
-bool8 sub_802BD14(s32 a0, UnkTextStruct2_sub *a1, u32 a2)
+bool8 sub_802BD14(s32 a0, DungeonPos *a1, u32 a2)
 {
     if (HasNoMailinMailbox())
         return FALSE;
@@ -41,7 +41,7 @@ bool8 sub_802BD14(s32 a0, UnkTextStruct2_sub *a1, u32 a2)
     sUnknown_203B2D8->unk4.s0.unk38->unk14 = &sUnknown_203B2D8->unk4.unk9C;
 
     if (a1 != NULL)
-        sUnknown_203B2D8->unk4.s0.unk3C.a0[sUnknown_203B2D8->unk4.s0.unk34].unk8 = *a1;
+        sUnknown_203B2D8->unk4.s0.unk3C.a0[sUnknown_203B2D8->unk4.s0.unk34].pos = *a1;
 
     sub_8012D34(sUnknown_203B2D8->unk4.s0.unk38, a2);
     ResetUnusedInputStruct();

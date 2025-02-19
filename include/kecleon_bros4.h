@@ -13,7 +13,7 @@ typedef struct unkStruct_203B224
     /* 0x54 */ struct_Sub80095E4_2 unk54;
 } unkStruct_203B224;
 
-bool8 sub_801A5D8(u32, s32, UnkTextStruct2_sub *, u32);
+bool8 sub_801A5D8(u32, s32, DungeonPos *, u32);
 u32 sub_801A6E8(bool8);
 s32 sub_801A8AC(void);
 void sub_801A8D0(bool8);

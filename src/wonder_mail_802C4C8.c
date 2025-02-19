@@ -23,7 +23,7 @@ static s32 CountAcceptedJobs(void);
 
 static void sub_802C6DC(void);
 
-bool8 sub_802C4C8(s32 a0, UnkTextStruct2_sub *a1, u32 a2)
+bool8 sub_802C4C8(s32 a0, DungeonPos *a1, u32 a2)
 {
     if (HasNoAcceptedJobs())
         return FALSE;
@@ -37,7 +37,7 @@ bool8 sub_802C4C8(s32 a0, UnkTextStruct2_sub *a1, u32 a2)
     gUnknown_203B2E8->unk8.s0.unk38->unk14 = &gUnknown_203B2E8->unk8.unk9C;
 
     if (a1 != NULL)
-        gUnknown_203B2E8->unk8.s0.unk3C.a0[gUnknown_203B2E8->unk8.s0.unk34].unk8 = *a1;
+        gUnknown_203B2E8->unk8.s0.unk3C.a0[gUnknown_203B2E8->unk8.s0.unk34].pos = *a1;
 
     sub_8012D34(gUnknown_203B2E8->unk8.s0.unk38, a2);
     ResetUnusedInputStruct();

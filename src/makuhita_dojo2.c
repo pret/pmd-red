@@ -22,7 +22,7 @@ static void MakuhitaDojo_DrawCourseList(void);
 static void sub_80304C8(void);
 static s32 sub_8030668(void);
 
-bool8 sub_80302E8(s32 param_1, UnkTextStruct2_sub *param_2, u32 param_3)
+bool8 sub_80302E8(s32 param_1, DungeonPos *param_2, u32 param_3)
 {
     if (MakuhitaDojo_ReturnFalse())
         return FALSE;
@@ -37,7 +37,7 @@ bool8 sub_80302E8(s32 param_1, UnkTextStruct2_sub *param_2, u32 param_3)
     sMakuhitaDojoWork2->s30.s0.unk38->unk14 = &sMakuhitaDojoWork2->s30.unk9C;
 
     if (param_2 != NULL)
-        sMakuhitaDojoWork2->s30.s0.unk3C.a0[sMakuhitaDojoWork2->s30.s0.unk34].unk8 = *param_2;
+        sMakuhitaDojoWork2->s30.s0.unk3C.a0[sMakuhitaDojoWork2->s30.s0.unk34].pos = *param_2;
 
     sub_8012D08(sMakuhitaDojoWork2->s30.s0.unk38, param_3);
     ResetUnusedInputStruct();

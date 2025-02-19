@@ -33,7 +33,7 @@ static void sub_8023730(void);
 static void sub_8023758(void);
 static void sub_80237E0(void);
 
-bool8 sub_8023144(s32 a0, s32 index, UnkTextStruct2_sub *sub, u32 a3)
+bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
 {
     u8 param_1_u8 = a0;
 
@@ -54,7 +54,7 @@ bool8 sub_8023144(s32 a0, s32 index, UnkTextStruct2_sub *sub, u32 a3)
     gUnknown_3001B5C->s35C.s0.unk38->unk14 = &gUnknown_3001B5C->s35C.unk9C;
 
     if (sub != NULL)
-        gUnknown_3001B5C->s35C.s0.unk3C.a0[gUnknown_3001B5C->s35C.s0.unk34].unk8 = *sub;
+        gUnknown_3001B5C->s35C.s0.unk3C.a0[gUnknown_3001B5C->s35C.s0.unk34].pos = *sub;
 
     sub_8012D08(gUnknown_3001B5C->s35C.s0.unk38, a3);
     ResetUnusedInputStruct();

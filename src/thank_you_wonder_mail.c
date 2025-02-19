@@ -1284,7 +1284,7 @@ void UpdateThankYouMailText(void)
         ResetUnusedInputStruct();
         xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         {
-        UnkTextStruct2_sub local_x = {3, 2};
+        DungeonPos local_x = {3, 2};
         sub_801C8C4(0, 1, &local_x, 9);
         }
         break;

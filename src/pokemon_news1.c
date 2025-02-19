@@ -23,7 +23,7 @@ static s32 GetNumPKMNNews(void);
 
 static void sub_802B880(void);
 
-bool8 sub_802B640(u32 a0, UnkTextStruct2_sub *a1, u32 a2)
+bool8 sub_802B640(u32 a0, DungeonPos *a1, u32 a2)
 {
     if (HasNoPKMNNews())
         return FALSE;
@@ -39,7 +39,7 @@ bool8 sub_802B640(u32 a0, UnkTextStruct2_sub *a1, u32 a2)
     sUnknown_203B2CC->s38.unk3C.a0[sUnknown_203B2CC->s38.unk34] = sUnknown_80DFBEC;
 
     if (a1 != NULL)
-        sUnknown_203B2CC->s38.unk3C.a0[sUnknown_203B2CC->s38.unk34].unk8 = *a1;
+        sUnknown_203B2CC->s38.unk3C.a0[sUnknown_203B2CC->s38.unk34].pos = *a1;
 
     sub_8012D08(sUnknown_203B2CC->s38.unk38, a2);
     ResetUnusedInputStruct();

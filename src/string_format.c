@@ -160,7 +160,7 @@ static EWRAM_DATA MenuInputStructSub gUnknown_202EC28 = {0};
 static EWRAM_INIT UnkTextStruct3 sUnknown_203B198 = {
     .a0 = {
         [0] = {
-            .unk8 = {2, 15},
+            .pos = {2, 15},
             .unkC = 26,
             .unkE = 5,
             .unk10 = 7,
@@ -241,8 +241,8 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     if (monPortraitPtr != NULL && monPortraitPtr->faceData != NULL && monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].gfx != 0) {
         s32 i;
 
-        sUnknown_203B198.a0[1].unk8.unk0.arr[0] = monPortraitPtr->pos.x;
-        sUnknown_203B198.a0[1].unk8.unk0.arr[1] = monPortraitPtr->pos.y;
+        sUnknown_203B198.a0[1].pos.x = monPortraitPtr->pos.x;
+        sUnknown_203B198.a0[1].pos.y = monPortraitPtr->pos.y;
         sUnknown_203B198.a0[1].unkC = 5;
         sUnknown_203B198.a0[1].unkE = 5;
         sUnknown_203B198.a0[1].unk10 = 5;
@@ -627,8 +627,8 @@ static void sub_8014A88(void)
     sUnknown_203B198.a0[2].unkC = r1;
     sUnknown_203B198.a0[2].unk10 = r2;
     sUnknown_203B198.a0[2].unkE = r2;
-    sUnknown_203B198.a0[2].unk8.unk0.arr[0] = 28 - r1;
-    sUnknown_203B198.a0[2].unk8.unk0.arr[1] = 14 - r2;
+    sUnknown_203B198.a0[2].pos.x = 28 - r1;
+    sUnknown_203B198.a0[2].pos.y = 14 - r2;
     sUnknown_203B198.a0[0].unk0 = 0x80;
     sUnknown_203B198.a0[1].unk0 = 0xC0;
     if (sNeverWrittenToUnknownStructPtr != NULL) {

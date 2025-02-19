@@ -499,7 +499,7 @@ void sub_8036B28(void)
             ResetUnusedInputStruct();
             xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             {
-            UnkTextStruct2_sub local_10 = {3, 2};
+            DungeonPos local_10 = {3, 2};
             sub_801C8C4(0,1,&local_10,9);
             }
         }

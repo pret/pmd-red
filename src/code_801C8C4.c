@@ -18,7 +18,7 @@ static EWRAM_INIT u16 sUnknown_203B24E = {0};
 static void sub_801CC38(void);
 static u32 sub_801CE58(void);
 
-bool8 sub_801C8C4(s32 a0, s32 a1, UnkTextStruct2_sub *a2, u32 a3)
+bool8 sub_801C8C4(s32 a0, s32 a1, DungeonPos *a2, u32 a3)
 {
     if (sub_801CF14(a0))
         return FALSE;
@@ -35,7 +35,7 @@ bool8 sub_801C8C4(s32 a0, s32 a1, UnkTextStruct2_sub *a2, u32 a3)
     sUnknown_203B244->unk4B4.s0.unk38->unk14 = &sUnknown_203B244->unk4B4.unk9C;
 
     if (a2 != NULL)
-        sUnknown_203B244->unk4B4.s0.unk3C.a0[sUnknown_203B244->unk4B4.s0.unk34].unk8 = *a2;
+        sUnknown_203B244->unk4B4.s0.unk3C.a0[sUnknown_203B244->unk4B4.s0.unk34].pos = *a2;
 
     sub_8012D08(sUnknown_203B244->unk4B4.s0.unk38, a3);
     ResetUnusedInputStruct();

@@ -931,7 +931,7 @@ static const UnkTextStruct3 gUnknown_8106DC8 = {
         {
             .unk0 = 0,
             .unk4 = 0x06,
-            .unk8 = {0x02, 0x02},
+            .pos = {0x02, 0x02},
             .unkC = 0x11,
             .unkE = 0x0E,
             .unk10 = 0x12,
@@ -942,7 +942,7 @@ static const UnkTextStruct3 gUnknown_8106DC8 = {
         {
             .unk0 = 0,
             .unk4 = 0x03,
-            .unk8 = {0x15, 0x04},
+            .pos = {0x15, 0x04},
             .unkC = 0x07,
             .unkE = 0x04,
             .unk10 = 0x04,
@@ -1261,8 +1261,8 @@ void sub_806806C(PokemonStruct1 *a0)
     s32 r7;
 
     spTxtStruct.a0[0].unk4 = 6;
-    spTxtStruct.a0[0].unk8.unk0.separate.unk0 = 2;
-    spTxtStruct.a0[0].unk8.unk0.separate.unk2 = 2;
+    spTxtStruct.a0[0].pos.x = 2;
+    spTxtStruct.a0[0].pos.y = 2;
     spTxtStruct.a0[0].unkC = 0x12;
     spTxtStruct.a0[0].unkE = 0xE;
     spTxtStruct.a0[0].unk10 = 0x12;

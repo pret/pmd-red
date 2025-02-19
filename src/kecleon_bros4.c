@@ -23,7 +23,7 @@ static void SortInventoryItems(void);
 static void sub_801A998(void);
 static s32 sub_801AE24(u32);
 
-bool8 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 param_4)
+bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
 {
     if (GetNumberOfFilledInventorySlots() == 0)
         return FALSE;
@@ -41,7 +41,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 par
     gUnknown_203B224->unk54.s0.unk38->unk14 = &gUnknown_203B224->unk54.unk9C;
 
     if (param_3 != NULL)
-        gUnknown_203B224->unk54.s0.unk3C.a0[gUnknown_203B224->unk54.s0.unk34].unk8 = *param_3;
+        gUnknown_203B224->unk54.s0.unk3C.a0[gUnknown_203B224->unk54.s0.unk34].pos = *param_3;
 
     sub_8012D08(gUnknown_203B224->unk54.s0.unk38, param_4);
     sub_8099690(1);
