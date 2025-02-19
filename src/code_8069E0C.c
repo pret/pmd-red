@@ -356,94 +356,32 @@ void sub_806A390(Entity *pokemon)
 
 struct UnkTalkFileStruct
 {
-    const u8 *strings[10][4];
+    const u8 *strings[4];
 };
 
-// https://decomp.me/scratch/beUzw s16 memes again
-#ifdef NONMATCHING
-void sub_806A3D4(u8 *dst, s16 a1, s32 id, bool8 a3)
+void sub_806A3D4(u8 *dst, s32 _a1, s32 id, bool32 _a3)
 {
     u8 fileName[12];
     OpenedFile *file;
-    s32 strId;
+    s32 a1 = (s16) (_a1);
+    bool8 a3 = _a3;
+    s32 mod;
+    struct UnkTalkFileStruct *strPtr;
 
     if (a3) {
-        sprintf(fileName, gUnknown_8106EA8, a1 / 10);
+        sprintf(fileName, gUnknown_8106EA8, (s16) (a1 / 10));
     }
     else {
-        sprintf(fileName, gUnknown_8106EB0, a1 / 10);
+        sprintf(fileName, gUnknown_8106EB0, (s16) (a1 / 10));
     }
 
     file = OpenFileAndGetFileDataPtr(fileName, &gDungeonFileArchive);
 
-    strId = a1 % 10;
-    strcpy(dst, ((struct UnkTalkFileStruct *)(file->data))->strings[strId][id]);
+    mod = (s16)(a1 % 10);
+    strPtr = ((struct UnkTalkFileStruct *)(file->data));
+    strcpy(dst, strPtr[mod].strings[id]);
     CloseFile(file);
 }
-#else
-NAKED void sub_806A3D4(u8 *dst, s16 a1, s32 id, bool8 a3)
-{
-    asm_unified("push {r4-r7,lr}\n"
-"	sub sp, 0xC\n"
-"	adds r7, r0, 0\n"
-"	adds r6, r2, 0\n"
-"	lsls r1, 16\n"
-"	asrs r5, r1, 16\n"
-"	lsls r3, 24\n"
-"	cmp r3, 0\n"
-"	beq _0806A404\n"
-"	ldr r4, _0806A400\n"
-"	adds r0, r5, 0\n"
-"	movs r1, 0xA\n"
-"	bl __divsi3\n"
-"	adds r2, r0, 0\n"
-"	lsls r2, 16\n"
-"	asrs r2, 16\n"
-"	mov r0, sp\n"
-"	adds r1, r4, 0\n"
-"	bl sprintf\n"
-"	b _0806A41C\n"
-"	.align 2, 0\n"
-"_0806A400: .4byte gUnknown_8106EA8\n"
-"_0806A404:\n"
-"	ldr r4, _0806A450\n"
-"	adds r0, r5, 0\n"
-"	movs r1, 0xA\n"
-"	bl __divsi3\n"
-"	adds r2, r0, 0\n"
-"	lsls r2, 16\n"
-"	asrs r2, 16\n"
-"	mov r0, sp\n"
-"	adds r1, r4, 0\n"
-"	bl sprintf\n"
-"_0806A41C:\n"
-"	ldr r1, _0806A454\n"
-"	mov r0, sp\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	adds r4, r0, 0\n"
-"	adds r0, r5, 0\n"
-"	movs r1, 0xA\n"
-"	bl __modsi3\n"
-"	lsls r0, 16\n"
-"	ldr r1, [r4, 0x4]\n"
-"	asrs r0, 12\n"
-"	adds r0, r1\n"
-"	lsls r1, r6, 2\n"
-"	adds r0, r1\n"
-"	ldr r1, [r0]\n"
-"	adds r0, r7, 0\n"
-"	bl strcpy\n"
-"	adds r0, r4, 0\n"
-"	bl CloseFile\n"
-"	add sp, 0xC\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_0806A450: .4byte gUnknown_8106EB0\n"
-"_0806A454: .4byte gDungeonFileArchive");
-}
-#endif // NONMATCHING
 
 bool8 sub_806A458(Entity *pokemon)
 {
