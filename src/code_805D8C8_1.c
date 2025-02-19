@@ -1675,14 +1675,6 @@ extern bool8 sub_8044F3C(s32 param_1);
 extern s32 gUnknown_202EE6C;
 extern const u8 gUnknown_8106B50[];
 
-typedef struct UnkTextStruct3 {
-    UnkTextStruct2 a0[4];
-    // Something ugly, so that sub_805FD74 could match weird compiler memcpy/stack initialization
-    #ifndef NONMATCHING
-    u8 fakeMatch[0];
-    #endif // NONMATCHING
-} UnkTextStruct3;
-
 extern void sub_803ECB4(UnkTextStruct3 *a0, u8 a1);
 static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, UnkTextStruct2_sub2 *a5);
 

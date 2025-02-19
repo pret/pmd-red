@@ -897,10 +897,6 @@ void sub_8067904(Entity *entity, u16 moveId)
     }
 }
 
-typedef struct UnkTextStruct3 {
-    UnkTextStruct2 a0[4];
-} UnkTextStruct3;
-
 extern void sub_80684C4(void);
 void sub_8045064(void);
 extern void sub_8083CE0(u8 param_1);

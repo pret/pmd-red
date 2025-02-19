@@ -34,9 +34,9 @@ bool8 CreateIQSkillInfoMenu(u8 iqSkill)
     sIQSkillInfoMenu->chosenIQSkill = iqSkill;
     sub_801317C(&sIQSkillInfoMenu->unk88);
     sIQSkillInfoMenu->unk24 = 0;
-    sub_80140B4(sIQSkillInfoMenu->unk28);
+    sub_80140B4(&sIQSkillInfoMenu->unk28);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sIQSkillInfoMenu->unk28, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sIQSkillInfoMenu->unk28, TRUE, TRUE);
     SetIQSkillInfoMenuState(IQ_SKILL_INFO_MENU_INIT);
     return TRUE;
 }

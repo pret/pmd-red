@@ -66,4 +66,12 @@ typedef struct UnkTextStruct2
     const UnkTextStruct2_sub2 *unk14; // Pointer to 4 bytes which may be x-coord related. Could be window's header?
 } UnkTextStruct2;
 
+typedef struct UnkTextStruct3 {
+    UnkTextStruct2 a0[4];
+    // Something ugly, so that sub_805FD74 could match weird compiler memcpy/stack initialization
+    #ifndef NONMATCHING
+    u8 fakeMatch[0];
+    #endif // NONMATCHING
+} UnkTextStruct3;
+
 #endif // GUARD_STR_TEXT_H

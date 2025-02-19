@@ -31,17 +31,17 @@ bool8 sub_80302E8(s32 param_1, UnkTextStruct2_sub *param_2, u32 param_3)
         sMakuhitaDojoWork2 = MemoryAlloc(sizeof(MakuhitaDojoWork2), 8);
 
     sMakuhitaDojoWork2->s30.s0.unk34 = param_1;
-    sMakuhitaDojoWork2->s30.s0.unk38 = &sMakuhitaDojoWork2->s30.s0.unk3C[param_1];
-    RestoreUnkTextStruct_8006518(sMakuhitaDojoWork2->s30.s0.unk3C);
-    sMakuhitaDojoWork2->s30.s0.unk3C[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E0804;
+    sMakuhitaDojoWork2->s30.s0.unk38 = &sMakuhitaDojoWork2->s30.s0.unk3C.a0[param_1];
+    RestoreUnkTextStruct_8006518(&sMakuhitaDojoWork2->s30.s0.unk3C);
+    sMakuhitaDojoWork2->s30.s0.unk3C.a0[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E0804;
     sMakuhitaDojoWork2->s30.s0.unk38->unk14 = &sMakuhitaDojoWork2->s30.unk9C;
 
     if (param_2 != NULL)
-        sMakuhitaDojoWork2->s30.s0.unk3C[sMakuhitaDojoWork2->s30.s0.unk34].unk8 = *param_2;
+        sMakuhitaDojoWork2->s30.s0.unk3C.a0[sMakuhitaDojoWork2->s30.s0.unk34].unk8 = *param_2;
 
     sub_8012D08(sMakuhitaDojoWork2->s30.s0.unk38, param_3);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sMakuhitaDojoWork2->s30.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sMakuhitaDojoWork2->s30.s0.unk3C, TRUE, TRUE);
     sub_8013818(&sMakuhitaDojoWork2->s30.s0.input, sub_8030668(), param_3, param_1);
     sub_80304C8();
     MakuhitaDojo_DrawCourseList();
@@ -91,9 +91,9 @@ UNUSED static void sub_8030444(bool8 a0)
 void sub_8030480(void)
 {
     if (sMakuhitaDojoWork2 != NULL) {
-        sMakuhitaDojoWork2->s30.s0.unk3C[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E07EC;
+        sMakuhitaDojoWork2->s30.s0.unk3C.a0[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E07EC;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sMakuhitaDojoWork2->s30.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(&sMakuhitaDojoWork2->s30.s0.unk3C, TRUE, TRUE);
         MemoryFree(sMakuhitaDojoWork2);
         sMakuhitaDojoWork2 = NULL;
     }

@@ -12,7 +12,7 @@ struct unkStruct_203B260
     /* 0x10 */ MenuInputStruct input;
     u32 unk44;
     UnkTextStruct2 *unk48;
-    UnkTextStruct2 unk4C[4];
+    UnkTextStruct3 unk4C;
 };
 
 bool8 sub_801E198(GameOptions *optionsMenu);

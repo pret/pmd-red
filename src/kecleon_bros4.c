@@ -35,18 +35,18 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, UnkTextStruct2_sub *param_3, u32 par
     FillInventoryGaps();
     sub_801AE84();
     gUnknown_203B224->unk54.s0.unk34 = param_2;
-    gUnknown_203B224->unk54.s0.unk38 = &gUnknown_203B224->unk54.s0.unk3C[param_2];
-    RestoreUnkTextStruct_8006518(gUnknown_203B224->unk54.s0.unk3C);
-    gUnknown_203B224->unk54.s0.unk3C[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB95C;
+    gUnknown_203B224->unk54.s0.unk38 = &gUnknown_203B224->unk54.s0.unk3C.a0[param_2];
+    RestoreUnkTextStruct_8006518(&gUnknown_203B224->unk54.s0.unk3C);
+    gUnknown_203B224->unk54.s0.unk3C.a0[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB95C;
     gUnknown_203B224->unk54.s0.unk38->unk14 = &gUnknown_203B224->unk54.unk9C;
 
     if (param_3 != NULL)
-        gUnknown_203B224->unk54.s0.unk3C[gUnknown_203B224->unk54.s0.unk34].unk8 = *param_3;
+        gUnknown_203B224->unk54.s0.unk3C.a0[gUnknown_203B224->unk54.s0.unk34].unk8 = *param_3;
 
     sub_8012D08(gUnknown_203B224->unk54.s0.unk38, param_4);
     sub_8099690(1);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B224->unk54.s0.input, GetNumberOfFilledInventorySlots(), param_4, param_2);
     gUnknown_203B224->unk54.s0.input.menuIndex = gUnknown_203B228;
     gUnknown_203B224->unk54.s0.input.unk1E = gUnknown_203B22A;
@@ -147,7 +147,7 @@ void sub_801A8D0(bool8 r0)
 {
     sub_8099690(1);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B224->unk54.s0.unk3C, FALSE, FALSE);
+    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B224->unk54.s0.unk3C, FALSE, FALSE);
     FillInventoryGaps();
     gUnknown_203B224->unk54.s0.input.unk22 = GetNumberOfFilledInventorySlots();
     sub_8013984(&gUnknown_203B224->unk54.s0.input);
@@ -162,10 +162,10 @@ void sub_801A928(void)
     if (gUnknown_203B224 != NULL) {
         gUnknown_203B228 = gUnknown_203B224->unk54.s0.input.menuIndex;
         gUnknown_203B22A = gUnknown_203B224->unk54.s0.input.unk1E;
-        gUnknown_203B224->unk54.s0.unk3C[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB944;
+        gUnknown_203B224->unk54.s0.unk3C.a0[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB944;
         sub_8099690(0);
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(&gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B224);
         gUnknown_203B224 = NULL;
     }
@@ -178,7 +178,7 @@ static void sub_801A998(void)
     gUnknown_203B224->unk54.unk9C.f2 = 11;
     gUnknown_203B224->unk54.unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
 }
 
 void sub_801A9E0(void)

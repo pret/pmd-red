@@ -188,7 +188,7 @@ static void sub_801D220(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B250->unkB8);
+    RestoreUnkTextStruct_8006518(&sUnknown_203B250->unkB8);
 
     switch (sUnknown_203B250->state) {
         case 0:
@@ -196,18 +196,18 @@ static void sub_801D220(void)
 
             if (sUnknown_203B250->pokeStruct != NULL) {
                 for (i = 0; i < 4; i++)
-                    sUnknown_203B250->unkB8[i] = sUnknown_80DBE7C;
+                    sUnknown_203B250->unkB8.a0[i] = sUnknown_80DBE7C;
 
-                sUnknown_203B250->unkB8[0] = sUnknown_80DBE98;
-                sub_8012CAC(sUnknown_203B250->unkB8, sUnknown_203B250->unk68);
-                sUnknown_203B250->unkB8[0].unkC = 9;
+                sUnknown_203B250->unkB8.a0[0] = sUnknown_80DBE98;
+                sub_8012CAC(&sUnknown_203B250->unkB8.a0[0], sUnknown_203B250->unk68);
+                sUnknown_203B250->unkB8.a0[0].unkC = 9;
             }
             else {
                 for (i = 0; i < 4; i++)
-                    sUnknown_203B250->unkB8[i] = sUnknown_80DBEB0[i];
+                    sUnknown_203B250->unkB8.a0[i] = sUnknown_80DBEB0[i];
 
-                sub_8012CAC(sUnknown_203B250->unkB8, sUnknown_203B250->unk68);
-                sUnknown_203B250->unkB8[0].unkC = 8;
+                sub_8012CAC(&sUnknown_203B250->unkB8.a0[0], sUnknown_203B250->unk68);
+                sUnknown_203B250->unkB8.a0[0].unkC = 8;
             }
             break;
         case 1:
@@ -215,28 +215,28 @@ static void sub_801D220(void)
 
             if (sUnknown_203B250->pokeStruct != NULL) {
                 for (i = 0; i < 4; i++)
-                    sUnknown_203B250->unkB8[i] = sUnknown_80DBE7C;
+                    sUnknown_203B250->unkB8.a0[i] = sUnknown_80DBE7C;
 
-                sUnknown_203B250->unkB8[0] = sUnknown_80DBE98;
-                sub_8012CAC(sUnknown_203B250->unkB8, sUnknown_203B250->unk68);
-                sUnknown_203B250->unkB8[0].unkC = 9;
+                sUnknown_203B250->unkB8.a0[0] = sUnknown_80DBE98;
+                sub_8012CAC(&sUnknown_203B250->unkB8.a0[0], sUnknown_203B250->unk68);
+                sUnknown_203B250->unkB8.a0[0].unkC = 9;
             }
             else {
                 for (i = 0; i < 4; i++)
-                    sUnknown_203B250->unkB8[i] = sUnknown_80DBEB0[i];
+                    sUnknown_203B250->unkB8.a0[i] = sUnknown_80DBEB0[i];
 
-                sub_8012CAC(sUnknown_203B250->unkB8, sUnknown_203B250->unk68);
-                sUnknown_203B250->unkB8[0].unkC = 8;
+                sub_8012CAC(&sUnknown_203B250->unkB8.a0[0], sUnknown_203B250->unk68);
+                sUnknown_203B250->unkB8.a0[0].unkC = 8;
             }
             break;
         default:
             for (i = 0; i < 4; i++)
-                sUnknown_203B250->unkB8[i] = sUnknown_80DBE7C;
+                sUnknown_203B250->unkB8.a0[i] = sUnknown_80DBE7C;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B250->unkB8, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B250->unkB8, TRUE, TRUE);
 }
 
 static void sub_801D3A8(void)

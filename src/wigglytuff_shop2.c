@@ -31,9 +31,9 @@ bool8 CreateWigglytuffShopFriendAreaMenu(u8 friendArea, bool8 a1, s32 a2)
     sub_801317C(&sWigglytuffShop2Work->unk0);
     sub_8021A60();
     sWigglytuffShop2Work->unk74 = a2;
-    sWigglytuffShop2Work->unk78 = &sWigglytuffShop2Work->unk7C[a2];
-    RestoreUnkTextStruct_8006518(sWigglytuffShop2Work->unk7C);
-    sWigglytuffShop2Work->unk7C[sWigglytuffShop2Work->unk74] = sUnknown_80DC4D8;
+    sWigglytuffShop2Work->unk78 = &sWigglytuffShop2Work->unk7C.a0[a2];
+    RestoreUnkTextStruct_8006518(&sWigglytuffShop2Work->unk7C);
+    sWigglytuffShop2Work->unk7C.a0[sWigglytuffShop2Work->unk74] = sUnknown_80DC4D8;
     sub_8021820();
     return TRUE;
 }
@@ -61,9 +61,9 @@ static void sub_8021820(void)
 void CleanWigglytuffShopFriendAreaInfoMenu(void)
 {
     if (sWigglytuffShop2Work) {
-        sWigglytuffShop2Work->unk7C[sWigglytuffShop2Work->unk74] = sUnknown_80DC4BC;
+        sWigglytuffShop2Work->unk7C.a0[sWigglytuffShop2Work->unk74] = sUnknown_80DC4BC;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sWigglytuffShop2Work->unk7C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(&sWigglytuffShop2Work->unk7C, TRUE, TRUE);
         MemoryFree(sWigglytuffShop2Work);
         sWigglytuffShop2Work = NULL;
     }
@@ -72,7 +72,7 @@ void CleanWigglytuffShopFriendAreaInfoMenu(void)
 static void sub_8021878(void)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sWigglytuffShop2Work->unk7C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sWigglytuffShop2Work->unk7C, TRUE, TRUE);
 }
 
 static void PopulateWigglytuffShopFriendAreaInfoScreen(void)

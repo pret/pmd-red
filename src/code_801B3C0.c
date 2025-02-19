@@ -26,9 +26,9 @@ bool8 sub_801B3C0(Item *item)
     sUnknown_203B230->item = *item;
     sub_801317C(&sUnknown_203B230->unk88);
     sUnknown_203B230->unk24 = 0;
-    sub_80140B4(sUnknown_203B230->unk28);
+    sub_80140B4(&sUnknown_203B230->unk28);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B230->unk28, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B230->unk28, TRUE, TRUE);
     sub_801B46C(0);
     return TRUE;
 }

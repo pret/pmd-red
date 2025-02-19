@@ -26,7 +26,7 @@ typedef struct unkStruct_203B294
     /* 0xF4 */ u32 menuAction;
     MenuItem unkF8[8];
     u16 unk138[8];
-    UnkTextStruct2 unk148[4];
+    UnkTextStruct3 unk148;
 } unkStruct_203B294;
 
 bool8 sub_80227B8(PokemonStruct1 *pkmn);

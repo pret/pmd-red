@@ -23,12 +23,12 @@ bool8 sub_801E3F0(u32 a0)
         sUnknown_203B264 = MemoryAlloc(sizeof(*sUnknown_203B264), 8);
 
     sUnknown_203B264->unk34 = a0;
-    sUnknown_203B264->unk38 = &sUnknown_203B264->unk3C[a0];
-    RestoreUnkTextStruct_8006518(sUnknown_203B264->unk3C);
-    sUnknown_203B264->unk3C[sUnknown_203B264->unk34] = sUnknown_80DC0BC;
+    sUnknown_203B264->unk38 = &sUnknown_203B264->unk3C.a0[a0];
+    RestoreUnkTextStruct_8006518(&sUnknown_203B264->unk3C);
+    sUnknown_203B264->unk3C.a0[sUnknown_203B264->unk34] = sUnknown_80DC0BC;
     sub_8012D08(sUnknown_203B264->unk38, 10);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B264->unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B264->unk3C, TRUE, TRUE);
     sub_8013818(&sUnknown_203B264->input, 5, 10, a0);
     sub_801E594();
     DrawHintSelectionMenu();
@@ -73,7 +73,7 @@ s32 GetChosenHintIndex(void)
 void CreateHintSelectionScreen(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B264->unk3C, FALSE, FALSE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B264->unk3C, FALSE, FALSE);
     sub_8013984(&sUnknown_203B264->input);
     sub_801E594();
     DrawHintSelectionMenu();
@@ -85,9 +85,9 @@ void CreateHintSelectionScreen(bool8 cursorSprite)
 void sub_801E54C(void)
 {
     if (sUnknown_203B264 != NULL) {
-        sUnknown_203B264->unk3C[sUnknown_203B264->unk34] = sUnknown_80DC0A0;
+        sUnknown_203B264->unk3C.a0[sUnknown_203B264->unk34] = sUnknown_80DC0A0;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sUnknown_203B264->unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(&sUnknown_203B264->unk3C, TRUE, TRUE);
         MemoryFree(sUnknown_203B264);
         sUnknown_203B264 = NULL;
     }

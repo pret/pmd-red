@@ -19,7 +19,7 @@ struct unkStruct_203B30C
     unkStruct_802C39C unk8;
     MenuStruct unk60;
     MenuItem unkB0[8];
-    UnkTextStruct2 unkF0[4];
+    UnkTextStruct3 unkF0;
 };
 static EWRAM_INIT struct unkStruct_203B30C *gUnknown_203B30C = {NULL};
 
@@ -119,22 +119,22 @@ void sub_802F004(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(gUnknown_203B30C->unkF0);
+    RestoreUnkTextStruct_8006518(&gUnknown_203B30C->unkF0);
     switch(gUnknown_203B30C->state)
     {
         case 2:
             sub_802F108();
-            gUnknown_203B30C->unkF0[2] = gUnknown_80E03F4;
-            sub_8012CAC(&gUnknown_203B30C->unkF0[2], gUnknown_203B30C->unkB0);
+            gUnknown_203B30C->unkF0.a0[2] = gUnknown_80E03F4;
+            sub_8012CAC(&gUnknown_203B30C->unkF0.a0[2], gUnknown_203B30C->unkB0);
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B30C->unkF0[index] = gUnknown_80E03C4;
+                gUnknown_203B30C->unkF0.a0[index] = gUnknown_80E03C4;
             }
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B30C->unkF0, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B30C->unkF0, TRUE, TRUE);
 }
 
 void sub_802F088(void)
