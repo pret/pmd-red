@@ -22,6 +22,7 @@ extern s32 gCommsTimeout; // Counts to 100 and then errors if other player hasn'
 
 extern s32 gUnknown_202EC40[2];
 extern s32 gUnknown_202EC48;
+extern s32 gUnknown_202EC38;
 
 extern struct UnkStruct_203B184 *gUnknown_203B184;
 
@@ -34,10 +35,12 @@ extern void sub_800D510(void);
 extern void sub_800D520(void);
 extern void sub_800D570(void);
 extern u8 sub_800D588(void);
-extern void sub_800D59C(s32 *, u32);
+extern void sub_800D59C(void *, u32);
 extern u8 sub_800D600(void);
 extern void sub_800D670(s32 idx, void *dst, s32 size);
 extern void sub_800D68C(u32);
+void sub_800D414(void);
+s32 sub_8012AE8(void);
 
 // Inline needed for 8-bit return cast
 static inline bool8 IsNotChunsoft(unkStruct_800D670 *unk)
@@ -61,7 +64,7 @@ bool8 sub_8037A48(void)
 
      gUnknown_202EC40[0] = stack.unk10;
      gUnknown_202EC40[1] = stack_1.unk10;
-    
+
     if (IsNotChunsoft(&stack) || IsNotChunsoft(&stack_1))
         return FALSE;
 
@@ -92,113 +95,85 @@ bool8 sub_8037A48(void)
     return found;
 }
 
-// https://decomp.me/scratch/IJ9zV (inverted loop, try to match without gotos...)
-NAKED s32 sub_8037B28(s32 mode)
+static inline void InitUnk(unkStruct_800D670 *dst, const u8 *chunsoft, s32 mode)
 {
-    asm_unified("push {r4,r5,lr}\n"
-"	sub sp, 0x14\n"
-"	adds r4, r0, 0\n"
-"	movs r5, 0\n"
-"	bl sub_800D414\n"
-"	ldr r0, _08037B58\n"
-"	str r5, [r0]\n"
-"	ldr r5, _08037B5C\n"
-"	mov r0, sp\n"
-"	movs r1, 0\n"
-"	movs r2, 0x14\n"
-"	bl MemoryFill8\n"
-"	mov r0, sp\n"
-"	adds r1, r5, 0\n"
-"	bl strcpy\n"
-"	str r4, [sp, 0x10]\n"
-"	mov r0, sp\n"
-"	movs r1, 0x14\n"
-"	bl sub_800D59C\n"
-"	b _08037B7A\n"
-"	.align 2, 0\n"
-"_08037B58: .4byte gUnknown_202EC38\n"
-"_08037B5C: .4byte sChunsoft\n"
-"_08037B60:\n"
-"	cmp r5, 0x3\n"
-"	beq _08037BCC\n"
-"	cmp r5, 0x4\n"
-"	beq _08037BD8\n"
-"	cmp r5, 0x5\n"
-"	beq _08037BF0\n"
-"	ldr r2, _08037BC0\n"
-"	ldr r1, [r2]\n"
-"	ldr r0, _08037BC4\n"
-"	cmp r1, r0\n"
-"	bgt _08037BE4\n"
-"	adds r0, r1, 0x1\n"
-"	str r0, [r2]\n"
-"_08037B7A:\n"
-"	movs r4, 0\n"
-"_08037B7C:\n"
-"	bl sub_80373C4\n"
-"	bl sub_8012AE8\n"
-"	cmp r0, 0x3\n"
-"	bgt _08037B8C\n"
-"	cmp r0, 0x2\n"
-"	bge _08037BF0\n"
-"_08037B8C:\n"
-"	adds r4, 0x1\n"
-"	cmp r4, 0\n"
-"	ble _08037B7C\n"
-"	bl sub_800D33C\n"
-"	adds r5, r0, 0\n"
-"	bl sub_800D570\n"
-"	cmp r5, 0x2\n"
-"	bne _08037B60\n"
-"	bl sub_800D600\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _08037BFC\n"
-"	bl sub_8037A48\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _08037BC8\n"
-"	movs r4, 0x4\n"
-"	bl sub_800D520\n"
-"	bl sub_800D510\n"
-"	b _08037C06\n"
-"	.align 2, 0\n"
-"_08037BC0: .4byte gUnknown_202EC38\n"
-"_08037BC4: .4byte 0x00000707\n"
-"_08037BC8:\n"
-"	movs r4, 0\n"
-"	b _08037C06\n"
-"_08037BCC:\n"
-"	bl sub_800D520\n"
-"	bl sub_800D510\n"
-"	movs r0, 0x2\n"
-"	b _08037C08\n"
-"_08037BD8:\n"
-"	bl sub_800D520\n"
-"	bl sub_800D510\n"
-"	movs r0, 0x3\n"
-"	b _08037C08\n"
-"_08037BE4:\n"
-"	bl sub_800D520\n"
-"	bl sub_800D510\n"
-"	movs r0, 0xF\n"
-"	b _08037C08\n"
-"_08037BF0:\n"
-"	bl sub_800D520\n"
-"	bl sub_800D510\n"
-"	movs r0, 0x1\n"
-"	b _08037C08\n"
-"_08037BFC:\n"
-"	movs r4, 0x5\n"
-"	bl sub_800D520\n"
-"	bl sub_800D510\n"
-"_08037C06:\n"
-"	adds r0, r4, 0\n"
-"_08037C08:\n"
-"	add sp, 0x14\n"
-"	pop {r4,r5}\n"
-"	pop {r1}\n"
-"	bx r1");
+    MemoryFill8(dst, 0, sizeof(unkStruct_800D670));
+    strcpy(dst->buffer, chunsoft);
+    dst->unk10 = mode;
+}
+
+s32 sub_8037B28(s32 mode)
+{
+    s32 i;
+    s32 ret;
+    unkStruct_800D670 stack;
+    s32 r5 = 0;
+
+    sub_800D414();
+    gUnknown_202EC38 = 0;
+    InitUnk(&stack, sChunsoft, mode);
+    sub_800D59C(&stack, sizeof(unkStruct_800D670));
+
+    while (TRUE) {
+        for (i = 0; i < 1; i++) {
+            sub_80373C4();
+            switch (sub_8012AE8()) {
+                case 2:
+                case 3:
+                    sub_800D520();
+                    sub_800D510();
+                    return 1;
+            }
+        }
+
+        r5 = sub_800D33C();
+        sub_800D570();
+
+        if (r5 == 2) {
+            break;
+        }
+        else if (r5 == 3) {
+            sub_800D520();
+            sub_800D510();
+            return 2;
+        }
+        else if (r5 == 4) {
+            sub_800D520();
+            sub_800D510();
+            return 3;
+        }
+        else if (r5 == 5) {
+            sub_800D520();
+            sub_800D510();
+            return 1;
+        }
+
+        if (gUnknown_202EC38 < 1800) {
+            gUnknown_202EC38++;
+        }
+        else {
+            sub_800D520();
+            sub_800D510();
+            return COMMS_NOT_READY;
+        }
+    }
+
+    if (sub_800D600() != 0) {
+        if (sub_8037A48() == 0) {
+            ret = 4;
+            sub_800D520();
+            sub_800D510();
+        }
+        else {
+            ret = 0;
+        }
+    }
+    else {
+        ret = 5;
+        sub_800D520();
+        sub_800D510();
+    }
+    return ret;
 }
 
 s32 sub_8037C10(bool8 a0)
@@ -278,48 +253,50 @@ static void sub_8037CC4(s32 mode, void *param_2, void *param_3)
     }
 }
 
-// TODO: same as sub_80381F4. Try to fix this fakematch https://decomp.me/scratch/vkGqo
-s32 sub_8037D64(u32 mode, void *param_2, void *param_3)
+s32 sub_8037D64(u32 mode, void * param_2, void *param_3)
 {
-    u32 iVar2;
-    s32 linkStatus;
+    s32 iVar2 = 0;
+    s32 linkStatus = 0;
 
-    iVar2 = 0;
-    linkStatus = COMMS_GOOD;
     gUnknown_202EC48 = 0;
     sub_800D494();
     sub_8037C44(mode, param_2);
-    goto _first;
-_start:
-    while (iVar2 - 3 > 2) {
-        if (99 < gUnknown_202EC48) {
-            sub_800D520();
-            sub_800D510();
-            return COMMS_NOT_READY;
-        }
-        gUnknown_202EC48++;
-    _first:
+
+    while (1) {
         sub_80373C4();
         iVar2 = sub_800D33C();
         sub_800D570();
+
         if (iVar2 == 2) {
-            if (sub_800D600() == 0) {
+            break;
+        }
+
+        if (iVar2 == 3 || iVar2 == 4 || iVar2 == 5) {
+            sub_800D520();
+            sub_800D510();
+            return 1;
+        }
+        else {
+
+            if (gUnknown_202EC48 < 100)
+                gUnknown_202EC48++;
+            else {
                 sub_800D520();
                 sub_800D510();
-                linkStatus = 5;
+                return COMMS_NOT_READY;
             }
-            else {
-                linkStatus = COMMS_GOOD;
-            }
-            goto _end;
         }
-        else
-            goto _start;
     }
-    sub_800D520();
-    sub_800D510();
-    return 1;
-_end:
+
+    if (sub_800D600() != 0) {
+        linkStatus = 0;
+    }
+    else {
+        sub_800D520();
+        sub_800D510();
+        linkStatus = 5;
+    }
+
     sub_8037CC4(mode, param_2, param_3);
     return linkStatus;
 }
@@ -382,7 +359,7 @@ static void sub_8037EBC(WonderMailStruct_203B2C0_sub  *param_1, WonderMailStruct
 {
     unkStruct_203B480 *mail;
     WonderMailStruct_203B2C0_sub *puVar2;
-    
+
     if(sub_800D588() == 0)
     {
         puVar2 = param_1;
@@ -592,55 +569,56 @@ UNUSED static s32 sub_80381E8(u32 mode, void * param_2, void * param_3)
     return sub_803815C(mode, param_2, param_3);
 }
 
-// TODO: clean this up... fix fakematch without gotos. see above funcs https://decomp.me/scratch/JGv2m
 s32 sub_80381F4(u32 mode, void *param_2, void *param_3)
 {
-    u32 iVar2;
-    s32 linkStatus;
-
-    iVar2 = 0;
-    linkStatus = sub_803815C(mode, param_2, param_3);
+    s32 iVar2 = 0;
+    s32 linkStatus = sub_803815C(mode, param_2, param_3);
     gCommsTimeout = 0;
     sub_800D494();
     sub_800D59C(&linkStatus, 4);
-    goto _first;
-_start:
-    while (iVar2 - 3 > 2) {
-        if (99 < gCommsTimeout) {
-            sub_800D520();
-            sub_800D510();
-            return COMMS_NOT_READY;
-        }
-        gCommsTimeout++;
-    _first:
+
+    while (1) {
         sub_80373C4();
         iVar2 = sub_800D33C();
         sub_800D570();
         if (iVar2 == 2) {
-            if (sub_800D600() != 0) {
-                linkStatus = sub_8037DF0();
-            }
-            else {
-                sub_800D520();
-                sub_800D510();
-                linkStatus = 5;
-            }
-            if (linkStatus != COMMS_GOOD) {
-                sub_800D520();
-                sub_800D510();
-            }
-            else {
-                sub_8037F9C(mode, param_2, param_3);
-            }
-            goto _end;
+            break;
+        }
+
+        if (iVar2 == 3 || iVar2 == 4 || iVar2 == 5) {
+            sub_800D520();
+            sub_800D510();
+            return 1;
+        }
+
+        if (gCommsTimeout < 100) {
+            gCommsTimeout++;
         }
         else
-            goto _start;
+        {
+            sub_800D520();
+            sub_800D510();
+            return COMMS_NOT_READY;
+        }
     }
-    sub_800D520();
-    sub_800D510();
-    return 1;
-_end:
+
+    if (sub_800D600() != 0) {
+        linkStatus = sub_8037DF0();
+    }
+    else {
+        sub_800D520();
+        sub_800D510();
+        linkStatus = 5;
+    }
+
+    if (linkStatus == COMMS_GOOD) {
+        sub_8037F9C(mode, param_2, param_3);
+    }
+    else {
+        sub_800D520();
+        sub_800D510();
+    }
+
     sub_800D520();
     return linkStatus;
 }
