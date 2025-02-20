@@ -6,7 +6,7 @@
 #include "structs/str_pokemon.h"
 #include "structs/str_wonder_mail.h"
 
-struct UnkStruct_xxx_dungeon_8042F6C
+struct UnkStruct_RunDungeon
 {
     u8 unk0;
     DungeonLocation unk4;
@@ -30,7 +30,7 @@ struct UnkStruct_xxx_dungeon_8042F6C
     WonderMailSub unk84;
 };
 
-void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8);
+void RunDungeon(struct UnkStruct_RunDungeon *r8);
 
 #endif // GUARD_STR_DUNGEON_8042F6C_H
 

@@ -31,7 +31,7 @@ extern void sub_808ED00();
 extern void SetDungeonLocationInfo(DungeonLocation *dl);
 extern void sub_808CE74(s16, bool32, u8*);
 
-void xxx_dungeon_8001340(struct UnkStruct_xxx_dungeon_8042F6C *r0);
+void xxx_dungeon_8001340(struct UnkStruct_RunDungeon *r0);
 void sub_80011E8(u8 *param_1);
 void sub_809542C(WonderMailSub *param_1);
 
@@ -53,7 +53,7 @@ EWRAM_INIT struct PersonalityRelated gPersonalityRelated_203B040 = {
     .PartnerNick = {""},
 };
 
-void SaveLoadRelated_8000EDC(struct UnkStruct_xxx_dungeon_8042F6C *param_1)
+void SaveLoadRelated_8000EDC(struct UnkStruct_RunDungeon *param_1)
 {
     u8 quickSaveValid;
     s32 quickSaveStatus;
@@ -267,7 +267,7 @@ void NDS_LoadOverlay_GroundMain()
 
 }
 
-void nullsub_2(struct UnkStruct_xxx_dungeon_8042F6C *r0)
+void nullsub_2(struct UnkStruct_RunDungeon *r0)
 {
 
 }
@@ -277,10 +277,10 @@ u32 xxx_script_related_8001334(u32 r0)
     return xxx_script_related_8098468(r0);
 }
 
-void xxx_dungeon_8001340(struct UnkStruct_xxx_dungeon_8042F6C *r0)
+void xxx_dungeon_8001340(struct UnkStruct_RunDungeon *r0)
 {
     nullsub_2(r0);
-    xxx_dungeon_8042F6C(r0);
+    RunDungeon(r0);
     NDS_LoadOverlay_GroundMain();
 }
 
