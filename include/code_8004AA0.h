@@ -35,7 +35,7 @@ struct UnkStruct_4014Ptr2
 struct UnkStruct_4018
 {
     u8 unk4018;
-    u8 padding[0x14 - 0x2];
+    s16 unk2[8];
     axdata unk14;
 };
 
@@ -43,18 +43,24 @@ struct UnkStruct_4018
 struct UnkBgStruct
 {
     OpenedFile *unk0[5];
-    u8 padding[0x4014 - 0x14];
+    u16 unk14[64][64];
+    u16 unk2014[64][64];
     struct UnkStruct_4014Ptr2 *unk4014;
     struct UnkStruct_4018 unk4018[32];
-    u8 pad4A18[0x4A30-0x4A18];
+    s32 unk4A18;
+    u8 pad4A1C[0x4A30-0x4A1C];
     axdata unk4A30[8];
     axdata unk4C10;
     unkStruct_202EE8C unk4C4C[16];
-    u32 unk4DCC;
+    s32 unk4DCC;
     u32 unk4DD0;
     DungeonPos unk4DD4;
     s16 unk4DD8;
     s16 unk4DDA;
+    s32 unk4DDC;
+    s32 unk4DE0;
+    s32 unk4DE4;
+    s32 unk4DE8;
 };
 
 extern struct UnkBgStruct *gUnknown_203B0E4;
