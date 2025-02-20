@@ -41,6 +41,7 @@ void sub_800533C(ax_pose **, UnkSpriteMem **, axdata1 *, unkStruct_2039DB0 *, bo
 void AxResInitFile(axdata *, OpenedFile *, u32, u32, u32, u32, bool8);
 void AxResInit(axdata *, axmain *, u32, u32, u32, u32, bool8);
 void AxResInitUnorientedFile(axdata *, OpenedFile *, u32, u32, u32, bool8);
-void RunAxAnimationFrame(struct axObject *);
+void RunAxAnimationFrame(struct axdata *);
+void DoAxFrame_800558C(struct axdata *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, unkStruct_2039DB0 *spriteMasks);
 
 #endif // GUARD_SPRITE_H

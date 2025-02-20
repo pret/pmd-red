@@ -91,6 +91,7 @@ SECTIONS {
         src/code_800F958.o(.text);
         asm/code_800F990.o(.text);
         src/code_8010EF0.o(.text);
+        src/code_8010F28.o(.text);
         asm/code_8010F28.o(.text);
         src/code_80118A4.o(.text);
         src/debug.o(.text);

@@ -519,50 +519,71 @@ static inline s16 check_flag_for_80054BC(u16 flags) {
         return flags >> 15;
 }
 
-
-void RunAxAnimationFrame(struct axObject *a0)
+void RunAxAnimationFrame(struct axdata *a0)
 {
     ax_anim *aData;
 
-    if (!check_flag_for_80054BC(a0->axdata.flags))
+    if (!check_flag_for_80054BC(a0->flags))
         return;
 
-    if (a0->axdata.sub1.poseId >= 0) {
-        if (a0->axdata.flags & 0x4000)
+    if (a0->sub1.poseId >= 0) {
+        if (a0->flags & 0x4000)
             return;
 
-        if (a0->axdata.totalFrames < 30000)
-            a0->axdata.totalFrames++;
+        if (a0->totalFrames < 30000)
+            a0->totalFrames++;
 
-        if (a0->axdata.animWaitFrames != 0) {
-            a0->axdata.animWaitFrames--;
-            return;
-        }
-
-        if (a0->axdata.animFrames != 0 && --a0->axdata.animFrames > 0)
-            return;
-    }
-
-    if (a0->axdata.activeAnimData->frames == 0) {
-        if (!(a0->axdata.flags & 0x1000)) {
-            a0->axdata.flags |= 0x2000;
+        if (a0->animWaitFrames != 0) {
+            a0->animWaitFrames--;
             return;
         }
 
-        a0->axdata.activeAnimData = a0->axdata.nextAnimData;
-        a0->axdata.animWaitFrames = Rand32Bit() & 1;
+        if (a0->animFrames != 0 && --a0->animFrames > 0)
+            return;
     }
 
-    a0->axdata.flags |= 0x800;
+    if (a0->activeAnimData->frames == 0) {
+        if (!(a0->flags & 0x1000)) {
+            a0->flags |= 0x2000;
+            return;
+        }
 
-    aData = a0->axdata.activeAnimData;
-    a0->axdata.animFrames = aData->frames;
-    a0->axdata.sub1.poseId = aData->poseId;
-    a0->axdata.sub1.offset.x = aData->offset.x;
-    a0->axdata.sub1.offset.y = aData->offset.y;
-    a0->axdata.sub1.shadow.x = aData->shadow.x;
-    a0->axdata.sub1.shadow.y = aData->shadow.y;
-    a0->axdata.sub1.unkC = aData->unkFlags;
-    a0->axdata.sub1.unk10 |= aData->unkFlags;
-    a0->axdata.activeAnimData = aData + 1;
+        a0->activeAnimData = a0->nextAnimData;
+        a0->animWaitFrames = Rand32Bit() & 1;
+    }
+
+    a0->flags |= 0x800;
+
+    aData = a0->activeAnimData;
+    a0->animFrames = aData->frames;
+    a0->sub1.poseId = aData->poseId;
+    a0->sub1.offset.x = aData->offset.x;
+    a0->sub1.offset.y = aData->offset.y;
+    a0->sub1.shadow.x = aData->shadow.x;
+    a0->sub1.shadow.y = aData->shadow.y;
+    a0->sub1.unkC = aData->unkFlags;
+    a0->sub1.unk10 |= aData->unkFlags;
+    a0->activeAnimData = aData + 1;
+}
+
+void DoAxFrame_800558C(struct axdata *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, unkStruct_2039DB0 *spriteMasks)
+{
+    if (!(a0->flags >> 15))
+        return;
+
+    if (a0->sub1.poseId < 0)
+        RunAxAnimationFrame(a0);
+
+    if (!(a0->flags >> 15))
+        return;
+
+    a0->sub1.pos.x = a0->sub1.offset.x + spriteX;
+    a0->sub1.pos.y = a0->sub1.offset.y + spriteY;
+    a0->sub1.paletteNum = paletteNum;
+    a0->sub1.unk16 = a3;
+    sub_800533C(a0->poseData, a0->spriteData, &a0->sub1, spriteMasks, !!(a0->sub1.lastPoseId ^ a0->sub1.poseId));
+    a0->sub1.lastPoseId = a0->sub1.poseId;
+
+    if (a0->flags & 0x800)
+        a0->flags &= 0xF7FF;
 }
