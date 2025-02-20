@@ -179,26 +179,26 @@ static void sub_8018D30(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sKecleonBrosWork1->unkE8);
+    RestoreUnkTextStruct_8006518(&sKecleonBrosWork1->unkE8);
 
     switch (sKecleonBrosWork1->currState) {
         case 18:
         case 19:
-            sKecleonBrosWork1->unkE8[0] = sUnknown_80DB840;
-            sKecleonBrosWork1->unkE8[2] = sUnknown_80DB840;
-            sKecleonBrosWork1->unkE8[0] = sUnknown_80DB870;
-            sKecleonBrosWork1->unkE8[1] = sUnknown_80DB888;
+            sKecleonBrosWork1->unkE8.a0[0] = sUnknown_80DB840;
+            sKecleonBrosWork1->unkE8.a0[2] = sUnknown_80DB840;
+            sKecleonBrosWork1->unkE8.a0[0] = sUnknown_80DB870;
+            sKecleonBrosWork1->unkE8.a0[1] = sUnknown_80DB888;
             break;
         case 26:
         case 27:
-            sKecleonBrosWork1->unkE8[0] = sUnknown_80DB840;
-            sKecleonBrosWork1->unkE8[1] = sUnknown_80DB840;
-            sKecleonBrosWork1->unkE8[2] = sUnknown_80DB840;
-            sKecleonBrosWork1->unkE8[1] = sUnknown_80DB888;
+            sKecleonBrosWork1->unkE8.a0[0] = sUnknown_80DB840;
+            sKecleonBrosWork1->unkE8.a0[1] = sUnknown_80DB840;
+            sKecleonBrosWork1->unkE8.a0[2] = sUnknown_80DB840;
+            sKecleonBrosWork1->unkE8.a0[1] = sUnknown_80DB888;
             break;
         case 20:
         case 28:
-            sKecleonBrosWork1->unkE8[2] = sUnknown_80DB858;
+            sKecleonBrosWork1->unkE8.a0[2] = sUnknown_80DB858;
             break;
         default:
         case KECLEON_STORE_BUY_ITEM_INFO:
@@ -207,12 +207,12 @@ static void sub_8018D30(void)
         case KECLEON_STORE_SELL_ITEM_MENU:
         case KECLEON_STORE_SELL_ITEM_RECEIPT:
             for (i = 0; i < 4; i++)
-                sKecleonBrosWork1->unkE8[i] = sUnknown_80DB840;
+                sKecleonBrosWork1->unkE8.a0[i] = sUnknown_80DB840;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sKecleonBrosWork1->unkE8, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sKecleonBrosWork1->unkE8, TRUE, TRUE);
 }
 
 static void UpdateKecleonStoreDialogue(void)

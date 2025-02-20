@@ -3,7 +3,7 @@
 
 #include "structs/str_text.h"
 
-u32 sub_80306A8(u32 wonderMailType, u32 r1, UnkTextStruct2_sub *r2, u32 r3);
+u32 sub_80306A8(u32 wonderMailType, u32 r1, DungeonPos *r2, u32 r3);
 u32 sub_8030768(u8 r0);
 u8 sub_80307EC(void);
 void sub_8030810(u8 r0);

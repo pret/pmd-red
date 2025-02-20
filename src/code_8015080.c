@@ -16,7 +16,7 @@ struct unkStruct_203B1F8
     // size: 0x4B4
     u32 menuAction;
     MenuStruct unk4;
-    UnkTextStruct2 unk54[4];
+    UnkTextStruct3 unk54;
     u8 buffer[0x400];
 };
 
@@ -296,14 +296,14 @@ bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems)
 
     for(index = 0; index < 4; index++)
     {
-        gUnknown_203B1F8->unk54[index] = gUnknown_80DAF70;
+        gUnknown_203B1F8->unk54.a0[index] = gUnknown_80DAF70;
     }
 
-    gUnknown_203B1F8->unk54[0] = gUnknown_80DAF88;
-    gUnknown_203B1F8->unk54[2] = gUnknown_80DAFA0;
-    sub_8012CAC(&gUnknown_203B1F8->unk54[2], menuItems);
+    gUnknown_203B1F8->unk54.a0[0] = gUnknown_80DAF88;
+    gUnknown_203B1F8->unk54.a0[2] = gUnknown_80DAFA0;
+    sub_8012CAC(&gUnknown_203B1F8->unk54.a0[2], menuItems);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B1F8->unk54, 1, 1);
+    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B1F8->unk54, 1, 1);
     sub_80073B8(0);
     FormatString(buffer, gUnknown_203B1F8->buffer, gUnknown_203B1F8->buffer + 0x400, 0);
     PrintStringOnWindow(4, 4, gUnknown_203B1F8->buffer, 0, 0);
@@ -356,7 +356,7 @@ struct unkStruct_203B1FC
     u8 *unkF8;
     u8 unkFC[56];
     u8 *unk134;
-    UnkTextStruct2 unk138[4];
+    UnkTextStruct3 unk138;
 };
 extern struct unkStruct_203B1FC *gUnknown_203B1FC;
 
@@ -471,19 +471,19 @@ u32 sub_80151C0(u32 r0, u8 *buffer)
     gUnknown_203B1FC->unk17 = 0;
 
     for (index = 0; index < 4; index++) {
-        gUnknown_203B1FC->unk138[index] = gUnknown_80DB538;
+        gUnknown_203B1FC->unk138.a0[index] = gUnknown_80DB538;
     }
 
     if(gUnknown_203B1FC->unk4 != 0) {
-        gUnknown_203B1FC->unk138[1] = gUnknown_80DB580;
+        gUnknown_203B1FC->unk138.a0[1] = gUnknown_80DB580;
     }
     else {
-        gUnknown_203B1FC->unk138[1] = gUnknown_80DB568;
+        gUnknown_203B1FC->unk138.a0[1] = gUnknown_80DB568;
     }
-    gUnknown_203B1FC->unk138[0] = gUnknown_80DB550;
+    gUnknown_203B1FC->unk138.a0[0] = gUnknown_80DB550;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B1FC->unk138, 1, 1);
+    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B1FC->unk138, 1, 1);
 
     sub_8015A08(1);
     sub_8015C1C();

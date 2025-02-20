@@ -38,7 +38,7 @@ EWRAM_DATA static s32 sCurrentCharmap = 0;
 EWRAM_DATA static vu32 sUnknown_20274B0 = 0;
 EWRAM_DATA static u32 sUnknown_20274B4[0xEC0] = {0};
 EWRAM_DATA static OpenedFile *sCharmapFiles[3] = {NULL};
-EWRAM_DATA static UnkTextStruct2 sUnknown_202AFC0[4] = {0};
+EWRAM_DATA static UnkTextStruct3 sUnknown_202AFC0 = {0};
 EWRAM_DATA static s32 sUnknown_202B020 = 0;
 EWRAM_DATA static s32 sUnknown_202B024 = 0;
 EWRAM_DATA static s32 sCharHeight[2] = {0};
@@ -64,8 +64,8 @@ EWRAM_INIT void (*gIwramTextFunc4)(s32 a0) = sub_8272A78;
 // This variable is only used in InitGraphics function, which may or may not belong to text.c
 EWRAM_INIT u8 gUnknown_203B090 = 0;
 
-static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3);
-static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, UnkTextStruct2_sub *a8, u8 a9);
+static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct3 *a0, bool8 a1, bool8 a2, DungeonPos *a3);
+static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, DungeonPos *a8, u8 a9);
 static void sub_800677C(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3);
 static void sub_80069CC(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4);
 static void sub_8006AC4(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4);
@@ -86,7 +86,7 @@ static void sub_80084A4(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 
 static void sub_8008818(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5);
 static bool8 xxx_update_bg_vram(UnkTextStruct1 *a0);
 static void sub_800898C(void);
-static void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str);
+static void sub_80089AC(const UnkTextStruct2 *r4, DungeonPos *r5_Str);
 static void PrepareTextbox_8008C6C(UnkTextStruct1 *strArr, u32 strId);
 static void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing);
 static const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp);
@@ -113,12 +113,14 @@ static const u32 gUnknown_80B853C[16] =
     0xEEEEEEEE,
 };
 
-static const UnkTextStruct2 gUnknown_80B857C[4] =
+static const UnkTextStruct3 gUnknown_80B857C =
 {
-    [0] = {.unk4 = 3},
-    [1] = {.unk4 = 3},
-    [2] = {.unk4 = 3},
-    [3] = {.unk4 = 3},
+    .a0 = {
+        [0] = {.unk4 = 3},
+        [1] = {.unk4 = 3},
+        [2] = {.unk4 = 3},
+        [3] = {.unk4 = 3},
+    }
 };
 
 static const struct unkShiftData gCharMasksOffsets[8] =
@@ -273,14 +275,14 @@ void SetCharacterMask(int a0)
     sTextShadowMask = retval;
 }
 
-void xxx_call_save_unk_text_struct_800641C(const UnkTextStruct2 *a0, bool8 a1, bool8 a2)
+void xxx_call_save_unk_text_struct_800641C(const UnkTextStruct3 *a0, bool8 a1, bool8 a2)
 {
-    UnkTextStruct2_sub r3 = {0, 0};
+    DungeonPos r3 = {0, 0};
     SaveUnkTextStructAndXXX_8006438(a0, a1, a2, &r3);
 }
 
 // https://decomp.me/scratch/xF5Y1
-static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, bool8 a2, UnkTextStruct2_sub *a3)
+static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct3 *a0, bool8 a1, bool8 a2, DungeonPos *a3)
 {
     s32 i;
     u32 r9;
@@ -288,19 +290,19 @@ static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct2 *a0, bool8 a1, 
     r9 = 2;
 
     if (a0 == NULL)
-        a0 = gUnknown_80B857C;
+        a0 = &gUnknown_80B857C;
     if (a2)
         sub_8009388();
 
     sub_800898C();
 
     for (i = 0; i < 4; i++) {
-        sUnknown_202AFC0[i] = a0[i];
+        sUnknown_202AFC0.a0[i] = a0->a0[i];
 
-        if (a0[i].unkC) {
-            sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], a0 + i, a1, r9, a3, 0);
-            sub_80089AC(a0 + i, a3);
-            r9 += a0[i].unkC * a0[i].unk10;
+        if (a0->a0[i].unkC) {
+            sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], &a0->a0[i], a1, r9, a3, 0);
+            sub_80089AC(&a0->a0[i], a3);
+            r9 += a0->a0[i].unkC * a0->a0[i].unk10;
         }
     }
 
@@ -317,11 +319,11 @@ UNUSED static void nullsub_152(void)
 {
 }
 
-void RestoreUnkTextStruct_8006518(UnkTextStruct2 *unkData)
+void RestoreUnkTextStruct_8006518(UnkTextStruct3 *unkData)
 {
-    s32 iVar2;
-    for (iVar2 = 0; iVar2 < 4; iVar2++)
-        unkData[iVar2] = sUnknown_202AFC0[iVar2];
+    s32 i;
+    for (i = 0; i < 4; i++)
+        unkData->a0[i] = sUnknown_202AFC0.a0[i];
 }
 
 UNUSED static void nullsub_153(void)
@@ -334,7 +336,7 @@ u32 sub_8006544(u32 index)
 }
 
 // a1 is a VRAM pointer
-static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, UnkTextStruct2_sub *a8, u8 a9)
+static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, DungeonPos *a8, u8 a9)
 {
     UnkTextStruct1 *t1;
     s32 iVar3;
@@ -348,8 +350,8 @@ static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, c
     s32 j;
 
     t1 = &a0[a4];
-    iVar3 = a5->unk8.unk0.arr[0] + a8->unk0.arr[0];
-    iVar5 =  a5->unk8.unk0.arr[1] + a8->unk0.arr[1];
+    iVar3 = a5->pos.x + a8->x;
+    iVar5 =  a5->pos.y + a8->y;
     t1->unk0 = iVar3;
     t1->unk2 = iVar5;
     t1->unk4 = a5->unkC;
@@ -2864,7 +2866,7 @@ static void sub_800898C(void)
     }
 }
 
-static void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str)
+static void sub_80089AC(const UnkTextStruct2 *r4, DungeonPos *r5_Str)
 {
     u8 *r6;
 
@@ -2873,10 +2875,10 @@ static void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str)
 
     r6 = (void*) &gUnknown_3000E94;
     if (r4->unk4 == 1) {
-        s32 r12 = (r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0) * 8;
-        s32 r5 = (r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2) * 8;
-        s32 r7 = (r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0 + r4->unkC) * 8;
-        s32 r2 = (r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2 + r4->unkE) * 8;
+        s32 r12 = (r4->pos.x + r5_Str->x) * 8;
+        s32 r5 = (r4->pos.y + r5_Str->y) * 8;
+        s32 r7 = (r4->pos.x + r5_Str->x + r4->unkC) * 8;
+        s32 r2 = (r4->pos.y + r5_Str->y + r4->unkE) * 8;
         if (r4->unkE != 0) {
             if (r5 < 0)
                 r5 = 0;
@@ -2907,11 +2909,11 @@ static void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str)
     }
     else if (r4->unk4 == 6) {
         s32 i;
-        s32 r9 = ((r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0) * 8) - 5;
-        s32 r5 = ((r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2) * 8) - 4;
-        s32 var_24 = ((r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0 + r4->unkC) * 8) + 5;
-        s32 r8 = ((r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2 + r4->unkE) * 8) + 5;
-        s32 r12 = ((r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0) * 8) + 3;
+        s32 r9 = ((r4->pos.x + r5_Str->x) * 8) - 5;
+        s32 r5 = ((r4->pos.y + r5_Str->y) * 8) - 4;
+        s32 var_24 = ((r4->pos.x + r5_Str->x + r4->unkC) * 8) + 5;
+        s32 r8 = ((r4->pos.y + r5_Str->y + r4->unkE) * 8) + 5;
+        s32 r12 = ((r4->pos.x + r5_Str->x) * 8) + 3;
         const UnkTextStruct2_sub2 *r2 = r4->unk14;
         s32 tmp = r2->f2 - 1;
         s32 r10 = (((tmp + r2->f0 + 2) * 8) + r12) - 4;
@@ -2981,14 +2983,14 @@ static void sub_80089AC(const UnkTextStruct2 *r4, UnkTextStruct2_sub *r5_Str)
         }
     }
     else {
-        s32 r8 = ((r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0) * 8) - 5;
-        s32 r3 = ((r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2) * 8) - 5;
-        s32 r12 = ((r4->unk8.unk0.separate.unk0 + r5_Str->unk0.separate.unk0 + r4->unkC) * 8) + 5;
-        s32 r5 = ((r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2 + r4->unkE) * 8) + 5;
+        s32 r8 = ((r4->pos.x + r5_Str->x) * 8) - 5;
+        s32 r3 = ((r4->pos.y + r5_Str->y) * 8) - 5;
+        s32 r12 = ((r4->pos.x + r5_Str->x + r4->unkC) * 8) + 5;
+        s32 r5 = ((r4->pos.y + r5_Str->y + r4->unkE) * 8) + 5;
         if (r4->unkE != 0) {
             if (r4->unk4 == 0) {
                 r3 += 8;
-                r5 = ((r4->unk8.unk0.separate.unk2 + r5_Str->unk0.separate.unk2 + r4->unkE) * 8) - 3;
+                r5 = ((r4->pos.y + r5_Str->y + r4->unkE) * 8) - 3;
             }
             if (r3 < 0)
                 r3 = 0;

@@ -9,7 +9,7 @@ typedef struct MainMenu2Work
 {
     u32 unk0;
     MenuStruct unk4[4];
-    UnkTextStruct2 unk144[4];
+    UnkTextStruct3 unk144;
     /* 0x1A4 */ u32 currMenuChoice;
 } MainMenu2Work;
 

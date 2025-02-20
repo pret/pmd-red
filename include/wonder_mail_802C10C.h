@@ -15,7 +15,7 @@ struct unkStruct_203B2E0
 void DrawPelipperBoardJobMenu(void);
 bool8 HasNoPelipperBoardJobs(void);
 
-bool8 sub_802C10C(s32, UnkTextStruct2_sub *, s32);
+bool8 sub_802C10C(s32, DungeonPos *, s32);
 u32 sub_802C1E4(bool8);
 u8 sub_802C26C(void);
 void sub_802C28C(bool8 cursorSprite);

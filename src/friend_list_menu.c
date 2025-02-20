@@ -145,31 +145,31 @@ void sub_802544C(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(gUnknown_203B2B4->unk118);
+    RestoreUnkTextStruct_8006518(&gUnknown_203B2B4->unk118);
 
     switch (gUnknown_203B2B4->state) {
         case 3:
             if (gUnknown_203B2B4->unk0 == 0)
-                gUnknown_203B2B4->unk118[3] = sUnknown_80DD190;
+                gUnknown_203B2B4->unk118.a0[3] = sUnknown_80DD190;
 
             sub_8025728();
-            gUnknown_203B2B4->unk118[2] = sUnknown_80DD160;
-            sub_8012CAC(&gUnknown_203B2B4->unk118[2], gUnknown_203B2B4->unkC8);
+            gUnknown_203B2B4->unk118.a0[2] = sUnknown_80DD160;
+            sub_8012CAC(&gUnknown_203B2B4->unk118.a0[2], gUnknown_203B2B4->unkC8);
             break;
         case 13:
             sub_802591C();
-            gUnknown_203B2B4->unk118[2] = sUnknown_80DD178;
-            sub_8012CAC(&gUnknown_203B2B4->unk118[2], gUnknown_203B2B4->unkC8);
+            gUnknown_203B2B4->unk118.a0[2] = sUnknown_80DD178;
+            sub_8012CAC(&gUnknown_203B2B4->unk118.a0[2], gUnknown_203B2B4->unkC8);
             break;
         default:
             for (i = 0; i < 4; i++)
-                gUnknown_203B2B4->unk118[i] = sUnknown_80DD148;
+                gUnknown_203B2B4->unk118.a0[i] = sUnknown_80DD148;
             break;
 
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B2B4->unk118, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B2B4->unk118, TRUE, TRUE);
 }
 
 void sub_8025518(void)

@@ -111,24 +111,24 @@ static void sub_801E980(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(sGulpinShopWork->unk12C);
+    RestoreUnkTextStruct_8006518(&sGulpinShopWork->unk12C);
 
     switch (sGulpinShopWork->state) {
         case 2:
             sub_801EBC4();
-            sGulpinShopWork->unk12C[1] = gUnknown_80DC11C;
-            sGulpinShopWork->unk12C[2] = gUnknown_80DC134;
-            sub_8012CAC(&sGulpinShopWork->unk12C[2], sGulpinShopWork->unk28);
+            sGulpinShopWork->unk12C.a0[1] = gUnknown_80DC11C;
+            sGulpinShopWork->unk12C.a0[2] = gUnknown_80DC134;
+            sub_8012CAC(&sGulpinShopWork->unk12C.a0[2], sGulpinShopWork->unk28);
             break;
         default:
             for(index = 0; index < 4; index++) {
-                sGulpinShopWork->unk12C[index] = gUnknown_80DC11C;
+                sGulpinShopWork->unk12C.a0[index] = gUnknown_80DC11C;
             }
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sGulpinShopWork->unk12C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sGulpinShopWork->unk12C, TRUE, TRUE);
 }
 
 static void sub_801EA28(void)

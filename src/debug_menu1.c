@@ -47,10 +47,10 @@ void CreateDebugMenu(void)
     }
 
     for (i = 0; i < 4; i++)
-        sDebugMenu->unk140[i] = sUnknown_80E7D40;
+        sDebugMenu->unk140.a0[i] = sUnknown_80E7D40;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sDebugMenu->unk140, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sDebugMenu->unk140, TRUE, TRUE);
     SetDebugMenuItems();
 }
 
@@ -118,13 +118,13 @@ u32 UpdateDebugMenu(void)
 
 static void SetDebugMenuItems(void)
 {
-    SetMenuItems(sDebugMenu->unk0, sDebugMenu->unk140, 0, &sUnknown_80E7D58, sDebugMenuItems, TRUE, 13, FALSE);
+    SetMenuItems(sDebugMenu->unk0, &sDebugMenu->unk140, 0, &sUnknown_80E7D58, sDebugMenuItems, TRUE, 13, FALSE);
     sub_8035CF4(sDebugMenu->unk0, 0, 1);
 }
 
 static void sub_803A3A0(void)
 {
-    sub_8035CC0(sDebugMenu->unk140, 0);
+    sub_8035CC0(&sDebugMenu->unk140, 0);
 }
 
 static void sub_803A3BC(void)

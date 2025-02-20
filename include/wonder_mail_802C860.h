@@ -19,7 +19,7 @@ struct unkStruct_203B2F0
     MenuItem unk10C[8];
     MenuItem unk14C[8];
     u8 fill18C[0x19C - 0x18C];
-    UnkTextStruct2 unk19C[4];
+    UnkTextStruct3 unk19C;
 };
 
 bool8 InitializeJobListMenu(u32);

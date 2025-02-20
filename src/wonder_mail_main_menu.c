@@ -49,7 +49,7 @@ struct unkStruct_203B3E8
         u8 unk38_u8[0x30]; // idk why it fills to 0x30 instead...
     } UNK38;
     u8 fill68[0x1EC - 0x68];
-    UnkTextStruct2 unk1EC[4];
+    UnkTextStruct3 unk1EC;
     u32 unk24C;
     /* 0x250 */ u32 wonderMailStatus;
     unkStruct_803B344 unk254;
@@ -331,7 +331,7 @@ void HandlePasswordEntryScreen(void)
     case 3:
       sub_80155F0();
       ResetUnusedInputStruct();
-      xxx_call_save_unk_text_struct_800641C(gUnknown_203B3E8->unk1EC, TRUE, TRUE);
+      xxx_call_save_unk_text_struct_800641C(&gUnknown_203B3E8->unk1EC, TRUE, TRUE);
       if ( !DecodeWonderMailPassword(gUnknown_203B3E8->PasswordEntryBuffer, &gUnknown_203B3E8->UNK38.decodedMail) || !IsValidWonderMail(&gUnknown_203B3E8->UNK38.decodedMail) )
       {
         // Invalid password
@@ -349,7 +349,7 @@ void HandlePasswordEntryScreen(void)
     case 2:
         sub_80155F0();
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(gUnknown_203B3E8->unk1EC, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(&gUnknown_203B3E8->unk1EC, TRUE, TRUE);
         SetWonderMailMainMenuState(EXIT_TO_MAIN_MENU);
         break;
   }
@@ -558,7 +558,7 @@ void WonderMailMainMenuCallback(void)
         CreateDialogueBoxAndPortrait(gUnknown_80E7C98,0,0,0x101);
         break;
     case PASSWORD_ENTRY_SCREEN:
-        RestoreUnkTextStruct_8006518(gUnknown_203B3E8->unk1EC);
+        RestoreUnkTextStruct_8006518(&gUnknown_203B3E8->unk1EC);
         ResetUnusedInputStruct();
         xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         sub_80151C0(5,gUnknown_203B3E8->PasswordEntryBuffer);

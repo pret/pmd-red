@@ -65,17 +65,6 @@ EWRAM_INIT u8 gUnknown_203B434 = 1;
 #define FLAG_CAN_SCROLL_UP      0x1
 #define FLAG_CAN_SCROLL_DOWN    0x2
 
-// Needed to match :shrug:
-static inline void InlineStrcpy(u8 *dst, const u8 *src)
-{
-    strcpy(dst, src);
-}
-
-static inline void InlineStrncpy(u8 *dst, const u8 *src, s32 n)
-{
-    strncpy(dst, src, n);
-}
-
 void sub_80521D0(void)
 {
     s32 i;

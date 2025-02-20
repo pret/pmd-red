@@ -31,6 +31,17 @@ static inline s16 Self_s16(s16 a)
     return a;
 }
 
+// Needed to match a couple of functions.
+static inline void InlineStrcpy(u8 *dst, const u8 *src)
+{
+    strcpy(dst, src);
+}
+
+static inline void InlineStrncpy(u8 *dst, const u8 *src, s32 n)
+{
+    strncpy(dst, src, n);
+}
+
 // Sometimes incrementing and decrementing a variable changes how registers are allocated, which helps with matching functions. Functionality-wise this doesn't do anything.
 #ifdef NONMATCHING
 #define ASM_MATCH_TRICK(a) {;}

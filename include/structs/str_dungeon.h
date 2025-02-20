@@ -273,7 +273,7 @@ typedef struct unkDungeon644
     /* 0x30 */ u8 unk30;
     /* 0x31 */ u8 unk31;
     /* 0x32 */ bool8 itemHoldersIdentified;
-    /* 0x33 */ u8 fill33;
+    /* 0x33 */ u8 unk33;
     /* 0x34 */ u8 unk34;
     /* 0x35 */ u8 unk35;
     /* 0x36 */ u8 unk36;

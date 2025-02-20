@@ -22,7 +22,7 @@ typedef struct FelicityBankWork
     unkStructFor8013AA0 unk64;
     /* 0x94 */ struct MonPortraitMsg monPortrait;
     struct MonPortraitMsg *monPortraitPtr;
-    UnkTextStruct2 unkA8[4];
+    UnkTextStruct3 unkA8;
 } FelicityBankWork;
 
 bool8 CreateFelicityBank(s32 mode);

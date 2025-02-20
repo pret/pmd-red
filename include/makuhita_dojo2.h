@@ -15,7 +15,7 @@ typedef struct MakuhitaDojoWork2
 
 bool8 MakuhitaDojo_ReturnFalse(void);
 
-bool8 sub_80302E8(s32, UnkTextStruct2_sub *, u32);
+bool8 sub_80302E8(s32, DungeonPos *, u32);
 u32 sub_80303AC(bool8);
 s16 sub_8030418(void);
 void sub_8030480(void);

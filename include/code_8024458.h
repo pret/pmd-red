@@ -17,7 +17,7 @@ struct unkStruct_203B2AC
     u8 fillB4[0xE0 - 0xB4];
     u32 unkE0;
     UnkTextStruct2 *unkE4;
-    UnkTextStruct2 unkE8[4];
+    UnkTextStruct3 unkE8;
     UnkTextStruct2_sub2 unk148;
 };
 

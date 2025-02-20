@@ -265,10 +265,10 @@ void CreateRescuePasswordMenu(u32 currMenu)
     }
 
     for(counter = 0; counter < 4; counter++)
-        gRescuePasswordMenu->unk148[counter] = gUnknown_80E71E4;
+        gRescuePasswordMenu->unk148.a0[counter] = gUnknown_80E71E4;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gRescuePasswordMenu->unk148, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&gRescuePasswordMenu->unk148, TRUE, TRUE);
 
     if ((gUnknown_203B368 != 0) || (gUnknown_203B36C != currMenu)) {
         for(counter = 0; counter < RESCUE_PASSWORD_SIZE; counter++)
@@ -543,37 +543,37 @@ s32 UpdateRescuePasswordMenu(void)
 
 void DisplayRescuePasswordError(u32 passwordError)
 {
-  RestoreUnkTextStruct_8006518(gRescuePasswordMenu->unk1A8);
+  RestoreUnkTextStruct_8006518(&gRescuePasswordMenu->unk1A8);
   ResetUnusedInputStruct();
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   sub_80155F0();
   switch(passwordError) {
     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E71FC,gUnknown_80E7214,FALSE,13,FALSE);
+        SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E71FC,gUnknown_80E7214,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_NOT_SOS_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E72EC,gUnknown_80E7304,FALSE,13,FALSE);
+        SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E72EC,gUnknown_80E7304,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_DUPLICATE_SOS_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7344,gUnknown_80E735C,FALSE,13,FALSE);
+        SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E7344,gUnknown_80E735C,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_NO_SPACE:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7588,gUnknown_80E75A0,FALSE,13,FALSE);
+        SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E7588,gUnknown_80E75A0,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_NOT_AOK_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E73AC,gUnknown_80E73C4,FALSE,13,FALSE);
+        SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E73AC,gUnknown_80E73C4,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_DUPLICATE_AOK_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7408,gUnknown_80E7420,FALSE,13,FALSE);
+        SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E7408,gUnknown_80E7420,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_NOT_THANK_YOU_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7468,gUnknown_80E7480,FALSE,13,FALSE);
+        SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E7468,gUnknown_80E7480,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_DUPLICATE_THANK_YOU_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E74C8,gUnknown_80E74E0,FALSE,13,FALSE);
+        SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E74C8,gUnknown_80E74E0,FALSE,13,FALSE);
         break;
     case PASSWORD_ENTRY_NOT_WONDER_MAIL:
-        SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E752C,gUnknown_80E7544,FALSE,13,FALSE);
+        SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E752C,gUnknown_80E7544,FALSE,13,FALSE);
         break;
     default:
         break;
@@ -583,11 +583,11 @@ void DisplayRescuePasswordError(u32 passwordError)
 
 void DisplayPasswordAcceptScreen(void)
 {
-  RestoreUnkTextStruct_8006518(gRescuePasswordMenu->unk1A8);
+  RestoreUnkTextStruct_8006518(&gRescuePasswordMenu->unk1A8);
   ResetUnusedInputStruct();
   xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
   sub_80155F0();
-  SetMenuItems(gRescuePasswordMenu->unk8,gRescuePasswordMenu->unk148,0,&gUnknown_80E7278,gUnknown_80E7290,FALSE,13,FALSE);
+  SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E7278,gUnknown_80E7290,FALSE,13,FALSE);
   sub_8035CF4(gRescuePasswordMenu->unk8,0,TRUE);
 }
 
