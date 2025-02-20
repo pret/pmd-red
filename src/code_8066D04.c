@@ -858,13 +858,13 @@ void sub_8067904(Entity *entity, u16 moveId)
     }
     else {
         s32 i;
-        bool32 isStrugle;
+        bool32 isStruggle;
 
         if (moveId == MOVE_STRUGGLE) {
-            isStrugle = TRUE;
+            isStruggle = TRUE;
         }
         else {
-            isStrugle = FALSE;
+            isStruggle = FALSE;
         }
 
         i = 0;
@@ -873,7 +873,7 @@ void sub_8067904(Entity *entity, u16 moveId)
             move.moveFlags |= 8;
             move.moveFlags |= 4;
             move.PP = 10;
-            TryUseChosenMove(entity, isStrugle, 0, 0, FALSE, &move);
+            TryUseChosenMove(entity, isStruggle, 0, 0, FALSE, &move);
 
             if (!EntityIsValid(entity) || info->unk159 != 0) {
                 break;
