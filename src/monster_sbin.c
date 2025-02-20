@@ -1,1012 +1,1012 @@
 #include "global.h"
 #include "file_system.h"
 
-extern const File gUnknown_8510018[];
+extern const File gMonsterFiles[];
 
 const FileArchive gMonsterFileArchive = {
     .magic = "pksdir0",
     .count = 497,
-    .entries = gUnknown_8510018,
+    .entries = gMonsterFiles,
 };
 
 UNUSED static const char sPksDir2[] = "pksdir0";
 
-extern const u8 gUnknown_8511F30[];
-extern const u8 gUnknown_85217B0[];
-extern const u8 gUnknown_852A934[];
-extern const u8 gUnknown_85344D8[];
-extern const u8 gUnknown_8544A3C[];
-extern const u8 gUnknown_854F30C[];
-extern const u8 gUnknown_855C74C[];
-extern const u8 gUnknown_856AFF8[];
-extern const u8 gUnknown_8575AA4[];
-extern const u8 gUnknown_8581760[];
-extern const u8 gUnknown_85897B8[];
-extern const u8 gUnknown_8593488[];
-extern const u8 gUnknown_859D574[];
-extern const u8 gUnknown_85A6644[];
-extern const u8 gUnknown_85AF060[];
-extern const u8 gUnknown_85BA080[];
-extern const u8 gUnknown_85C2D08[];
-extern const u8 gUnknown_85CC5E0[];
-extern const u8 gUnknown_85D64F8[];
-extern const u8 gUnknown_85DF660[];
-extern const u8 gUnknown_85E91A4[];
-extern const u8 gUnknown_85F2C48[];
-extern const u8 gUnknown_85FCB08[];
-extern const u8 gUnknown_8608C4C[];
-extern const u8 gUnknown_86158AC[];
-extern const u8 gUnknown_86274A8[];
-extern const u8 gUnknown_8634B00[];
-extern const u8 gUnknown_863D274[];
-extern const u8 gUnknown_8646CB0[];
-extern const u8 gUnknown_8650508[];
-extern const u8 gUnknown_865A218[];
-extern const u8 gUnknown_8665000[];
-extern const u8 gUnknown_866E508[];
-extern const u8 gUnknown_8678DC4[];
-extern const u8 gUnknown_86838E0[];
-extern const u8 gUnknown_868E768[];
-extern const u8 gUnknown_8698AD0[];
-extern const u8 gUnknown_86A287C[];
-extern const u8 gUnknown_86AE564[];
-extern const u8 gUnknown_86B7C14[];
-extern const u8 gUnknown_86C13BC[];
-extern const u8 gUnknown_86C9560[];
-extern const u8 gUnknown_86D1784[];
-extern const u8 gUnknown_86DA7A8[];
-extern const u8 gUnknown_86E52C0[];
-extern const u8 gUnknown_86EEB4C[];
-extern const u8 gUnknown_86F8CD8[];
-extern const u8 gUnknown_87046D4[];
-extern const u8 gUnknown_870CB24[];
-extern const u8 gUnknown_8715DD4[];
-extern const u8 gUnknown_8722404[];
-extern const u8 gUnknown_8734894[];
-extern const u8 gUnknown_8744B70[];
-extern const u8 gUnknown_8750850[];
-extern const u8 gUnknown_8761B38[];
-extern const u8 gUnknown_876DBF4[];
-extern const u8 gUnknown_87788CC[];
-extern const u8 gUnknown_87846A4[];
-extern const u8 gUnknown_878E358[];
-extern const u8 gUnknown_8798E44[];
-extern const u8 gUnknown_87A15D4[];
-extern const u8 gUnknown_87ACA3C[];
-extern const u8 gUnknown_87B7CE0[];
-extern const u8 gUnknown_87C17E0[];
-extern const u8 gUnknown_87CC400[];
-extern const u8 gUnknown_87D77D8[];
-extern const u8 gUnknown_87E79FC[];
-extern const u8 gUnknown_87F2950[];
-extern const u8 gUnknown_87FE844[];
-extern const u8 gUnknown_880765C[];
-extern const u8 gUnknown_88124D8[];
-extern const u8 gUnknown_881D924[];
-extern const u8 gUnknown_8827F4C[];
-extern const u8 gUnknown_8831FF8[];
-extern const u8 gUnknown_883BD58[];
-extern const u8 gUnknown_884698C[];
-extern const u8 gUnknown_88511F8[];
-extern const u8 gUnknown_885A36C[];
-extern const u8 gUnknown_88658E0[];
-extern const u8 gUnknown_886D7F0[];
-extern const u8 gUnknown_887891C[];
-extern const u8 gUnknown_8881ABC[];
-extern const u8 gUnknown_888A4E0[];
-extern const u8 gUnknown_8895F48[];
-extern const u8 gUnknown_88A0A14[];
-extern const u8 gUnknown_88ABF34[];
-extern const u8 gUnknown_88B5014[];
-extern const u8 gUnknown_88BE328[];
-extern const u8 gUnknown_88C8C2C[];
-extern const u8 gUnknown_88D3AA8[];
-extern const u8 gUnknown_88DC9E0[];
-extern const u8 gUnknown_88E6760[];
-extern const u8 gUnknown_88F0AEC[];
-extern const u8 gUnknown_88FBCC8[];
-extern const u8 gUnknown_8906DE0[];
-extern const u8 gUnknown_8912EB0[];
-extern const u8 gUnknown_891D1C0[];
-extern const u8 gUnknown_892B898[];
-extern const u8 gUnknown_8936790[];
-extern const u8 gUnknown_8944F68[];
-extern const u8 gUnknown_894B488[];
-extern const u8 gUnknown_8954BA0[];
-extern const u8 gUnknown_895FAE8[];
-extern const u8 gUnknown_896A990[];
-extern const u8 gUnknown_897DE74[];
-extern const u8 gUnknown_898A79C[];
-extern const u8 gUnknown_8997390[];
-extern const u8 gUnknown_89A3EAC[];
-extern const u8 gUnknown_89AEAB4[];
-extern const u8 gUnknown_89BB6CC[];
-extern const u8 gUnknown_89CABAC[];
-extern const u8 gUnknown_89D421C[];
-extern const u8 gUnknown_89DDF50[];
-extern const u8 gUnknown_89E8604[];
-extern const u8 gUnknown_89F1B84[];
-extern const u8 gUnknown_89FC870[];
-extern const u8 gUnknown_8A05480[];
-extern const u8 gUnknown_8A0F64C[];
-extern const u8 gUnknown_8A1A07C[];
-extern const u8 gUnknown_8A26A04[];
-extern const u8 gUnknown_8A2FA64[];
-extern const u8 gUnknown_8A38ABC[];
-extern const u8 gUnknown_8A446D0[];
-extern const u8 gUnknown_8A4ED0C[];
-extern const u8 gUnknown_8A5B974[];
-extern const u8 gUnknown_8A683CC[];
-extern const u8 gUnknown_8A71FA8[];
-extern const u8 gUnknown_8A7AA14[];
-extern const u8 gUnknown_8A8541C[];
-extern const u8 gUnknown_8A8EB94[];
-extern const u8 gUnknown_8AA1C20[];
-extern const u8 gUnknown_8AB3E28[];
-extern const u8 gUnknown_8ABC000[];
-extern const u8 gUnknown_8ACBA80[];
-extern const u8 gUnknown_8AD5B5C[];
-extern const u8 gUnknown_8AE02EC[];
-extern const u8 gUnknown_8AE92E4[];
-extern const u8 gUnknown_8AF3110[];
-extern const u8 gUnknown_8AFBEC8[];
-extern const u8 gUnknown_8B051D0[];
-extern const u8 gUnknown_8B0E4B0[];
-extern const u8 gUnknown_8B1A5EC[];
-extern const u8 gUnknown_8B250F4[];
-extern const u8 gUnknown_8B300F4[];
-extern const u8 gUnknown_8B400B8[];
-extern const u8 gUnknown_8B535DC[];
-extern const u8 gUnknown_8B67998[];
-extern const u8 gUnknown_8B72314[];
-extern const u8 gUnknown_8B7FD84[];
-extern const u8 gUnknown_8B8A718[];
-extern const u8 gUnknown_8B956B4[];
-extern const u8 gUnknown_8BA027C[];
-extern const u8 gUnknown_8BAEC04[];
-extern const u8 gUnknown_8BB7BF4[];
-extern const u8 gUnknown_8BC2248[];
-extern const u8 gUnknown_8BD1308[];
-extern const u8 gUnknown_8BDBBC0[];
-extern const u8 gUnknown_8BE83B0[];
-extern const u8 gUnknown_8BF8AA0[];
-extern const u8 gUnknown_8C05930[];
-extern const u8 gUnknown_8C113A8[];
-extern const u8 gUnknown_8C1CB68[];
-extern const u8 gUnknown_8C28DF4[];
-extern const u8 gUnknown_8C30418[];
-extern const u8 gUnknown_8C39FC0[];
-extern const u8 gUnknown_8C44510[];
-extern const u8 gUnknown_8C4FF50[];
-extern const u8 gUnknown_8C5997C[];
-extern const u8 gUnknown_8C633DC[];
-extern const u8 gUnknown_8C6C2B8[];
-extern const u8 gUnknown_8C767E8[];
-extern const u8 gUnknown_8C7F734[];
-extern const u8 gUnknown_8C8A8C0[];
-extern const u8 gUnknown_8C92FDC[];
-extern const u8 gUnknown_8C99E34[];
-extern const u8 gUnknown_8CA1984[];
-extern const u8 gUnknown_8CAA3F4[];
-extern const u8 gUnknown_8CB2F7C[];
-extern const u8 gUnknown_8CBE368[];
-extern const u8 gUnknown_8CC7D78[];
-extern const u8 gUnknown_8CD1A1C[];
-extern const u8 gUnknown_8CDC484[];
-extern const u8 gUnknown_8CE5EB8[];
-extern const u8 gUnknown_8CEECEC[];
-extern const u8 gUnknown_8CF8DF0[];
-extern const u8 gUnknown_8D04060[];
-extern const u8 gUnknown_8D0EF68[];
-extern const u8 gUnknown_8D18980[];
-extern const u8 gUnknown_8D21ECC[];
-extern const u8 gUnknown_8D2B658[];
-extern const u8 gUnknown_8D35E1C[];
-extern const u8 gUnknown_8D3D55C[];
-extern const u8 gUnknown_8D48C7C[];
-extern const u8 gUnknown_8D5093C[];
-extern const u8 gUnknown_8D5A724[];
-extern const u8 gUnknown_8D62F70[];
-extern const u8 gUnknown_8D6BCC0[];
-extern const u8 gUnknown_8D74C34[];
-extern const u8 gUnknown_8D7D110[];
-extern const u8 gUnknown_8D86DB0[];
-extern const u8 gUnknown_8D90330[];
-extern const u8 gUnknown_8D958C8[];
-extern const u8 gUnknown_8D9BAD8[];
-extern const u8 gUnknown_8DA1CE8[];
-extern const u8 gUnknown_8DA7EF8[];
-extern const u8 gUnknown_8DAE108[];
-extern const u8 gUnknown_8DB4318[];
-extern const u8 gUnknown_8DBA528[];
-extern const u8 gUnknown_8DC0738[];
-extern const u8 gUnknown_8DC5CD0[];
-extern const u8 gUnknown_8DCBEE8[];
-extern const u8 gUnknown_8DD20F8[];
-extern const u8 gUnknown_8DD8308[];
-extern const u8 gUnknown_8DDD8A0[];
-extern const u8 gUnknown_8DE3AB0[];
-extern const u8 gUnknown_8DE9048[];
-extern const u8 gUnknown_8DEF258[];
-extern const u8 gUnknown_8DF5468[];
-extern const u8 gUnknown_8DFB678[];
-extern const u8 gUnknown_8E01888[];
-extern const u8 gUnknown_8E06E28[];
-extern const u8 gUnknown_8E0C3C0[];
-extern const u8 gUnknown_8E125D0[];
-extern const u8 gUnknown_8E17B68[];
-extern const u8 gUnknown_8E1D100[];
-extern const u8 gUnknown_8E22698[];
-extern const u8 gUnknown_8E288A8[];
-extern const u8 gUnknown_8E321AC[];
-extern const u8 gUnknown_8E3CC70[];
-extern const u8 gUnknown_8E44E98[];
-extern const u8 gUnknown_8E4B738[];
-extern const u8 gUnknown_8E53FA8[];
-extern const u8 gUnknown_8E5F700[];
-extern const u8 gUnknown_8E6F704[];
-extern const u8 gUnknown_8E78EC0[];
-extern const u8 gUnknown_8E82EEC[];
-extern const u8 gUnknown_8E8C9C4[];
-extern const u8 gUnknown_8E97B08[];
-extern const u8 gUnknown_8EA19B4[];
-extern const u8 gUnknown_8EADC70[];
-extern const u8 gUnknown_8EBD7B0[];
-extern const u8 gUnknown_8EC93A8[];
-extern const u8 gUnknown_8ED561C[];
-extern const u8 gUnknown_8EDEE18[];
-extern const u8 gUnknown_8EEB5D4[];
-extern const u8 gUnknown_8EF3CF0[];
-extern const u8 gUnknown_8EFCA2C[];
-extern const u8 gUnknown_8F049DC[];
-extern const u8 gUnknown_8F0DEF4[];
-extern const u8 gUnknown_8F1837C[];
-extern const u8 gUnknown_8F23BB4[];
-extern const u8 gUnknown_8F324E4[];
-extern const u8 gUnknown_8F3D1B0[];
-extern const u8 gUnknown_8F46508[];
-extern const u8 gUnknown_8F51D94[];
-extern const u8 gUnknown_8F5BD00[];
-extern const u8 gUnknown_8F651B0[];
-extern const u8 gUnknown_8F6ED00[];
-extern const u8 gUnknown_8F78604[];
-extern const u8 gUnknown_8F82B04[];
-extern const u8 gUnknown_8F900F0[];
-extern const u8 gUnknown_8F99AA8[];
-extern const u8 gUnknown_8FA252C[];
-extern const u8 gUnknown_8FAB360[];
-extern const u8 gUnknown_8FB6F0C[];
-extern const u8 gUnknown_8FC1024[];
-extern const u8 gUnknown_8FCAFCC[];
-extern const u8 gUnknown_8FD5FB0[];
-extern const u8 gUnknown_8FE64A0[];
-extern const u8 gUnknown_8FF2148[];
-extern const u8 gUnknown_8FFEC14[];
-extern const u8 gUnknown_9007538[];
-extern const u8 gUnknown_900F674[];
-extern const u8 gUnknown_901A930[];
-extern const u8 gUnknown_902F8FC[];
-extern const u8 gUnknown_9043324[];
-extern const u8 gUnknown_904C064[];
-extern const u8 gUnknown_905BB80[];
-extern const u8 gUnknown_9065444[];
-extern const u8 gUnknown_90709D0[];
-extern const u8 gUnknown_907E03C[];
-extern const u8 gUnknown_9088724[];
-extern const u8 gUnknown_9095C84[];
-extern const u8 gUnknown_90A4680[];
-extern const u8 gUnknown_90AD950[];
-extern const u8 gUnknown_90B70FC[];
-extern const u8 gUnknown_90C0FEC[];
-extern const u8 gUnknown_90CA910[];
-extern const u8 gUnknown_90D45E4[];
-extern const u8 gUnknown_90DDCCC[];
-extern const u8 gUnknown_90E5C34[];
-extern const u8 gUnknown_90ECC24[];
-extern const u8 gUnknown_90F5E50[];
-extern const u8 gUnknown_90FCE18[];
-extern const u8 gUnknown_91067F4[];
-extern const u8 gUnknown_910F188[];
-extern const u8 gUnknown_911CD20[];
-extern const u8 gUnknown_9126CE8[];
-extern const u8 gUnknown_912ECF0[];
-extern const u8 gUnknown_9139214[];
-extern const u8 gUnknown_9145620[];
-extern const u8 gUnknown_914EAC0[];
-extern const u8 gUnknown_9159C18[];
-extern const u8 gUnknown_9162D28[];
-extern const u8 gUnknown_916EA58[];
-extern const u8 gUnknown_91754B0[];
-extern const u8 gUnknown_917D19C[];
-extern const u8 gUnknown_9189258[];
-extern const u8 gUnknown_919139C[];
-extern const u8 gUnknown_919A198[];
-extern const u8 gUnknown_91A2338[];
-extern const u8 gUnknown_91AC6E0[];
-extern const u8 gUnknown_91B5D78[];
-extern const u8 gUnknown_91C1198[];
-extern const u8 gUnknown_91CC77C[];
-extern const u8 gUnknown_91D5318[];
-extern const u8 gUnknown_91DFCCC[];
-extern const u8 gUnknown_91E9530[];
-extern const u8 gUnknown_91F26F0[];
-extern const u8 gUnknown_91FBD34[];
-extern const u8 gUnknown_9204644[];
-extern const u8 gUnknown_920DD5C[];
-extern const u8 gUnknown_9217820[];
-extern const u8 gUnknown_9220C54[];
-extern const u8 gUnknown_922A52C[];
-extern const u8 gUnknown_9239E6C[];
-extern const u8 gUnknown_9244F40[];
-extern const u8 gUnknown_92518D0[];
-extern const u8 gUnknown_925C020[];
-extern const u8 gUnknown_926534C[];
-extern const u8 gUnknown_926EA14[];
-extern const u8 gUnknown_9279AE4[];
-extern const u8 gUnknown_92830B0[];
-extern const u8 gUnknown_928D0D4[];
-extern const u8 gUnknown_9299F24[];
-extern const u8 gUnknown_92A6BDC[];
-extern const u8 gUnknown_92B05A0[];
-extern const u8 gUnknown_92B9F64[];
-extern const u8 gUnknown_92C605C[];
-extern const u8 gUnknown_92D07BC[];
-extern const u8 gUnknown_92DBE78[];
-extern const u8 gUnknown_92E65CC[];
-extern const u8 gUnknown_92F17E4[];
-extern const u8 gUnknown_92FABF0[];
-extern const u8 gUnknown_9304A68[];
-extern const u8 gUnknown_930E288[];
-extern const u8 gUnknown_9321CDC[];
-extern const u8 gUnknown_932AD00[];
-extern const u8 gUnknown_9335328[];
-extern const u8 gUnknown_933FD3C[];
-extern const u8 gUnknown_9349164[];
-extern const u8 gUnknown_93530CC[];
-extern const u8 gUnknown_93602B8[];
-extern const u8 gUnknown_9369E84[];
-extern const u8 gUnknown_9372AE4[];
-extern const u8 gUnknown_937DFF8[];
-extern const u8 gUnknown_93888FC[];
-extern const u8 gUnknown_9393E84[];
-extern const u8 gUnknown_939D5B8[];
-extern const u8 gUnknown_93A8BCC[];
-extern const u8 gUnknown_93B7670[];
-extern const u8 gUnknown_93C5464[];
-extern const u8 gUnknown_93CC2A8[];
-extern const u8 gUnknown_93D3630[];
-extern const u8 gUnknown_93DCAC0[];
-extern const u8 gUnknown_93E6AA8[];
-extern const u8 gUnknown_93F0D44[];
-extern const u8 gUnknown_93FC0A4[];
-extern const u8 gUnknown_9403160[];
-extern const u8 gUnknown_940B98C[];
-extern const u8 gUnknown_9418F04[];
-extern const u8 gUnknown_9424C1C[];
-extern const u8 gUnknown_942E704[];
-extern const u8 gUnknown_9439D3C[];
-extern const u8 gUnknown_94428C4[];
-extern const u8 gUnknown_945D794[];
-extern const u8 gUnknown_9465D50[];
-extern const u8 gUnknown_9470BA4[];
-extern const u8 gUnknown_947A348[];
-extern const u8 gUnknown_94827D4[];
-extern const u8 gUnknown_948E040[];
-extern const u8 gUnknown_9497744[];
-extern const u8 gUnknown_94A42E0[];
-extern const u8 gUnknown_94AEA88[];
-extern const u8 gUnknown_94BB980[];
-extern const u8 gUnknown_94C8570[];
-extern const u8 gUnknown_94D0E50[];
-extern const u8 gUnknown_94DE4D4[];
-extern const u8 gUnknown_94E7C3C[];
-extern const u8 gUnknown_94F0B3C[];
-extern const u8 gUnknown_94FA1BC[];
-extern const u8 gUnknown_95030EC[];
-extern const u8 gUnknown_950D0AC[];
-extern const u8 gUnknown_951781C[];
-extern const u8 gUnknown_951FEF8[];
-extern const u8 gUnknown_952B4D4[];
-extern const u8 gUnknown_9533E54[];
-extern const u8 gUnknown_953C240[];
-extern const u8 gUnknown_9543F98[];
-extern const u8 gUnknown_954DBBC[];
-extern const u8 gUnknown_9556F70[];
-extern const u8 gUnknown_95672FC[];
-extern const u8 gUnknown_956E9E0[];
-extern const u8 gUnknown_9579CD4[];
-extern const u8 gUnknown_95848E8[];
-extern const u8 gUnknown_9590850[];
-extern const u8 gUnknown_959ACD8[];
-extern const u8 gUnknown_95A49A8[];
-extern const u8 gUnknown_95B3820[];
-extern const u8 gUnknown_95C47CC[];
-extern const u8 gUnknown_95D40B4[];
-extern const u8 gUnknown_95E5A60[];
-extern const u8 gUnknown_9600978[];
-extern const u8 gUnknown_960CD74[];
-extern const u8 gUnknown_9616D6C[];
-extern const u8 gUnknown_961C304[];
-extern const u8 gUnknown_9622514[];
-extern const u8 gUnknown_9630BE4[];
-extern const u8 gUnknown_963A36C[];
-extern const u8 gUnknown_96481A8[];
-extern const u8 gUnknown_9652970[];
-extern const u8 gUnknown_9659AD0[];
-extern const u8 gUnknown_965A21C[];
-extern const u8 gUnknown_967FE78[];
-extern const u8 gUnknown_96825F0[];
-extern const u8 gUnknown_9684930[];
-extern const u8 gUnknown_96857E8[];
-extern const u8 gUnknown_9687E78[];
-extern const u8 gUnknown_9688AA8[];
-extern const u8 gUnknown_96893CC[];
-extern const u8 gUnknown_9689724[];
-extern const u8 gUnknown_9689AC8[];
-extern const u8 gUnknown_968A33C[];
-extern const u8 gUnknown_968C738[];
-extern const u8 gUnknown_968CAAC[];
-extern const u8 gUnknown_968CE08[];
-extern const u8 gUnknown_968D2FC[];
-extern const u8 gUnknown_968D624[];
-extern const u8 gUnknown_968FEB8[];
-extern const u8 gUnknown_9690224[];
-extern const u8 gUnknown_969270C[];
-extern const u8 gUnknown_9692DC0[];
-extern const u8 gUnknown_96937AC[];
-extern const u8 gUnknown_9695DB4[];
-extern const u8 gUnknown_9696364[];
-extern const u8 gUnknown_96966CC[];
-extern const u8 gUnknown_9696D38[];
-extern const u8 gUnknown_9698264[];
-extern const u8 gUnknown_969AAB0[];
-extern const u8 gUnknown_969B104[];
-extern const u8 gUnknown_969D738[];
-extern const u8 gUnknown_969DAB0[];
-extern const u8 gUnknown_969DE04[];
-extern const u8 gUnknown_969E1B8[];
-extern const u8 gUnknown_969E524[];
-extern const u8 gUnknown_96A0A98[];
-extern const u8 gUnknown_96A2F5C[];
-extern const u8 gUnknown_96A5654[];
-extern const u8 gUnknown_96A5988[];
-extern const u8 gUnknown_96A5F90[];
-extern const u8 gUnknown_96A6560[];
-extern const u8 gUnknown_96A6F08[];
-extern const u8 gUnknown_96A72BC[];
-extern const u8 gUnknown_96A7638[];
-extern const u8 gUnknown_96A7ACC[];
-extern const u8 gUnknown_96A7E4C[];
-extern const u8 gUnknown_96A81E0[];
-extern const u8 gUnknown_96A8554[];
-extern const u8 gUnknown_96A8908[];
-extern const u8 gUnknown_96A8F34[];
-extern const u8 gUnknown_96A9274[];
-extern const u8 gUnknown_96A9604[];
-extern const u8 gUnknown_96ABC14[];
-extern const u8 gUnknown_96AE1C4[];
-extern const u8 gUnknown_96B06B4[];
-extern const u8 gUnknown_96B1D54[];
-extern const u8 gUnknown_96B2A48[];
-extern const u8 gUnknown_96B2D24[];
-extern const u8 gUnknown_96B361C[];
-extern const u8 gUnknown_96B3970[];
-extern const u8 gUnknown_96B5FF0[];
-extern const u8 gUnknown_96B7464[];
-extern const u8 gUnknown_96B7734[];
-extern const u8 gUnknown_96B837C[];
-extern const u8 gUnknown_96B8950[];
-extern const u8 gUnknown_96B9658[];
-extern const u8 gUnknown_96B9C7C[];
-extern const u8 gUnknown_96B9FF0[];
-extern const u8 gUnknown_96BA57C[];
-extern const u8 gUnknown_96BABA0[];
-extern const u8 gUnknown_96BAEBC[];
-extern const u8 gUnknown_96BB264[];
-extern const u8 gUnknown_96BB5EC[];
-extern const u8 gUnknown_96BBBB4[];
-extern const u8 gUnknown_96BBEE8[];
-extern const u8 gUnknown_96BD0A4[];
-extern const u8 gUnknown_96BD42C[];
+extern const u8 gAxBulbasaur[];
+extern const u8 gAxIvysaur[];
+extern const u8 gAxVenusaur[];
+extern const u8 gAxCharmander[];
+extern const u8 gAxCharmeleon[];
+extern const u8 gAxCharizard[];
+extern const u8 gAxSquirtle[];
+extern const u8 gAxWartortle[];
+extern const u8 gAxBlastoise[];
+extern const u8 gAxCaterpie[];
+extern const u8 gAxMetapod[];
+extern const u8 gAxButterfree[];
+extern const u8 gAxWeedle[];
+extern const u8 gAxKakuna[];
+extern const u8 gAxBeedrill[];
+extern const u8 gAxPidgey[];
+extern const u8 gAxPidgeotto[];
+extern const u8 gAxPidgeot[];
+extern const u8 gAxRattata[];
+extern const u8 gAxRaticate[];
+extern const u8 gAxSpearow[];
+extern const u8 gAxFearow[];
+extern const u8 gAxEkans[];
+extern const u8 gAxArbok[];
+extern const u8 gAxPikachu[];
+extern const u8 gAxRaichu[];
+extern const u8 gAxSandshrew[];
+extern const u8 gAxSandslash[];
+extern const u8 gAxNidoranF[];
+extern const u8 gAxNidorina[];
+extern const u8 gAxNidoqueen[];
+extern const u8 gAxNidoranM[];
+extern const u8 gAxNidorino[];
+extern const u8 gAxNidoking[];
+extern const u8 gAxClefairy[];
+extern const u8 gAxClefable[];
+extern const u8 gAxVulpix[];
+extern const u8 gAxNinetales[];
+extern const u8 gAxJigglypuff[];
+extern const u8 gAxWigglytuff[];
+extern const u8 gAxZubat[];
+extern const u8 gAxGolbat[];
+extern const u8 gAxOddish[];
+extern const u8 gAxGloom[];
+extern const u8 gAxVileplume[];
+extern const u8 gAxParas[];
+extern const u8 gAxParasect[];
+extern const u8 gAxVenonat[];
+extern const u8 gAxVenomoth[];
+extern const u8 gAxDiglett[];
+extern const u8 gAxDugtrio[];
+extern const u8 gAxMeowth[];
+extern const u8 gAxPersian[];
+extern const u8 gAxPsyduck[];
+extern const u8 gAxGolduck[];
+extern const u8 gAxMankey[];
+extern const u8 gAxPrimeape[];
+extern const u8 gAxGrowlithe[];
+extern const u8 gAxArcanine[];
+extern const u8 gAxPoliwag[];
+extern const u8 gAxPoliwhirl[];
+extern const u8 gAxPoliwrath[];
+extern const u8 gAxAbra[];
+extern const u8 gAxKadabra[];
+extern const u8 gAxAlakazam[];
+extern const u8 gAxMachop[];
+extern const u8 gAxMachoke[];
+extern const u8 gAxMachamp[];
+extern const u8 gAxBellsprout[];
+extern const u8 gAxWeepinbell[];
+extern const u8 gAxVictreebel[];
+extern const u8 gAxTentacool[];
+extern const u8 gAxTentacruel[];
+extern const u8 gAxGeodude[];
+extern const u8 gAxGraveler[];
+extern const u8 gAxGolem[];
+extern const u8 gAxPonyta[];
+extern const u8 gAxRapidash[];
+extern const u8 gAxSlowpoke[];
+extern const u8 gAxSlowbro[];
+extern const u8 gAxMagnemite[];
+extern const u8 gAxMagneton[];
+extern const u8 gAxFarfetchd[];
+extern const u8 gAxDoduo[];
+extern const u8 gAxDodrio[];
+extern const u8 gAxSeel[];
+extern const u8 gAxDewgong[];
+extern const u8 gAxGrimer[];
+extern const u8 gAxMuk[];
+extern const u8 gAxShellder[];
+extern const u8 gAxCloyster[];
+extern const u8 gAxGastly[];
+extern const u8 gAxHaunter[];
+extern const u8 gAxGengar[];
+extern const u8 gAxOnix[];
+extern const u8 gAxDrowzee[];
+extern const u8 gAxHypno[];
+extern const u8 gAxKrabby[];
+extern const u8 gAxKingler[];
+extern const u8 gAxVoltorb[];
+extern const u8 gAxElectrode[];
+extern const u8 gAxExeggcute[];
+extern const u8 gAxExeggutor[];
+extern const u8 gAxCubone[];
+extern const u8 gAxMarowak[];
+extern const u8 gAxHitmonlee[];
+extern const u8 gAxHitmonchan[];
+extern const u8 gAxLickitung[];
+extern const u8 gAxKoffing[];
+extern const u8 gAxWeezing[];
+extern const u8 gAxRhyhorn[];
+extern const u8 gAxRhydon[];
+extern const u8 gAxChansey[];
+extern const u8 gAxTangela[];
+extern const u8 gAxKangaskhan[];
+extern const u8 gAxHorsea[];
+extern const u8 gAxSeadra[];
+extern const u8 gAxGoldeen[];
+extern const u8 gAxSeaking[];
+extern const u8 gAxStaryu[];
+extern const u8 gAxStarmie[];
+extern const u8 gAxMrMime[];
+extern const u8 gAxScyther[];
+extern const u8 gAxJynx[];
+extern const u8 gAxElectabuzz[];
+extern const u8 gAxMagmar[];
+extern const u8 gAxPinsir[];
+extern const u8 gAxTauros[];
+extern const u8 gAxMagikarp[];
+extern const u8 gAxGyarados[];
+extern const u8 gAxLapras[];
+extern const u8 gAxDitto[];
+extern const u8 gAxEevee[];
+extern const u8 gAxVaporeon[];
+extern const u8 gAxJolteon[];
+extern const u8 gAxFlareon[];
+extern const u8 gAxPorygon[];
+extern const u8 gAxOmanyte[];
+extern const u8 gAxOmastar[];
+extern const u8 gAxKabuto[];
+extern const u8 gAxKabutops[];
+extern const u8 gAxAerodactyl[];
+extern const u8 gAxSnorlax[];
+extern const u8 gAxArticuno[];
+extern const u8 gAxZapdos[];
+extern const u8 gAxMoltres[];
+extern const u8 gAxDratini[];
+extern const u8 gAxDragonair[];
+extern const u8 gAxDragonite[];
+extern const u8 gAxMewtwo[];
+extern const u8 gAxMew[];
+extern const u8 gAxChikorita[];
+extern const u8 gAxBayleef[];
+extern const u8 gAxMeganium[];
+extern const u8 gAxCyndaquil[];
+extern const u8 gAxQuilava[];
+extern const u8 gAxTyphlosion[];
+extern const u8 gAxTotodile[];
+extern const u8 gAxCroconaw[];
+extern const u8 gAxFeraligatr[];
+extern const u8 gAxSentret[];
+extern const u8 gAxFurret[];
+extern const u8 gAxHoothoot[];
+extern const u8 gAxNoctowl[];
+extern const u8 gAxLedyba[];
+extern const u8 gAxLedian[];
+extern const u8 gAxSpinarak[];
+extern const u8 gAxAriados[];
+extern const u8 gAxCrobat[];
+extern const u8 gAxChinchou[];
+extern const u8 gAxLanturn[];
+extern const u8 gAxPichu[];
+extern const u8 gAxCleffa[];
+extern const u8 gAxIgglybuff[];
+extern const u8 gAxTogepi[];
+extern const u8 gAxTogetic[];
+extern const u8 gAxNatu[];
+extern const u8 gAxXatu[];
+extern const u8 gAxMareep[];
+extern const u8 gAxFlaaffy[];
+extern const u8 gAxAmpharos[];
+extern const u8 gAxBellossom[];
+extern const u8 gAxMarill[];
+extern const u8 gAxAzumarill[];
+extern const u8 gAxSudowoodo[];
+extern const u8 gAxPolitoed[];
+extern const u8 gAxHoppip[];
+extern const u8 gAxSkiploom[];
+extern const u8 gAxJumpluff[];
+extern const u8 gAxAipom[];
+extern const u8 gAxSunkern[];
+extern const u8 gAxSunflora[];
+extern const u8 gAxYanma[];
+extern const u8 gAxWooper[];
+extern const u8 gAxQuagsire[];
+extern const u8 gAxEspeon[];
+extern const u8 gAxUmbreon[];
+extern const u8 gAxMurkrow[];
+extern const u8 gAxSlowking[];
+extern const u8 gAxMisdreavus[];
+extern const u8 gAxUnownA[];
+extern const u8 gAxUnownB[];
+extern const u8 gAxUnownC[];
+extern const u8 gAxUnownD[];
+extern const u8 gAxUnownE[];
+extern const u8 gAxUnownF[];
+extern const u8 gAxUnownG[];
+extern const u8 gAxUnownH[];
+extern const u8 gAxUnownI[];
+extern const u8 gAxUnownJ[];
+extern const u8 gAxUnownK[];
+extern const u8 gAxUnownL[];
+extern const u8 gAxUnownM[];
+extern const u8 gAxUnownN[];
+extern const u8 gAxUnownO[];
+extern const u8 gAxUnownP[];
+extern const u8 gAxUnownQ[];
+extern const u8 gAxUnownR[];
+extern const u8 gAxUnownS[];
+extern const u8 gAxUnownT[];
+extern const u8 gAxUnownU[];
+extern const u8 gAxUnownV[];
+extern const u8 gAxUnownW[];
+extern const u8 gAxUnownX[];
+extern const u8 gAxUnownY[];
+extern const u8 gAxUnownZ[];
+extern const u8 gAxWobbuffet[];
+extern const u8 gAxGirafarig[];
+extern const u8 gAxPineco[];
+extern const u8 gAxForretress[];
+extern const u8 gAxDunsparce[];
+extern const u8 gAxGligar[];
+extern const u8 gAxSteelix[];
+extern const u8 gAxSnubbull[];
+extern const u8 gAxGranbull[];
+extern const u8 gAxQwilfish[];
+extern const u8 gAxScizor[];
+extern const u8 gAxShuckle[];
+extern const u8 gAxHeracross[];
+extern const u8 gAxSneasel[];
+extern const u8 gAxTeddiursa[];
+extern const u8 gAxUrsaring[];
+extern const u8 gAxSlugma[];
+extern const u8 gAxMagcargo[];
+extern const u8 gAxSwinub[];
+extern const u8 gAxPiloswine[];
+extern const u8 gAxCorsola[];
+extern const u8 gAxRemoraid[];
+extern const u8 gAxOctillery[];
+extern const u8 gAxDelibird[];
+extern const u8 gAxMantine[];
+extern const u8 gAxSkarmory[];
+extern const u8 gAxHoundour[];
+extern const u8 gAxHoundoom[];
+extern const u8 gAxKingdra[];
+extern const u8 gAxPhanpy[];
+extern const u8 gAxDonphan[];
+extern const u8 gAxPorygon2[];
+extern const u8 gAxStantler[];
+extern const u8 gAxSmeargle[];
+extern const u8 gAxTyrogue[];
+extern const u8 gAxHitmontop[];
+extern const u8 gAxSmoochum[];
+extern const u8 gAxElekid[];
+extern const u8 gAxMagby[];
+extern const u8 gAxMiltank[];
+extern const u8 gAxBlissey[];
+extern const u8 gAxRaikou[];
+extern const u8 gAxEntei[];
+extern const u8 gAxSuicune[];
+extern const u8 gAxLarvitar[];
+extern const u8 gAxPupitar[];
+extern const u8 gAxTyranitar[];
+extern const u8 gAxLugia[];
+extern const u8 gAxHoOh[];
+extern const u8 gAxCelebi[];
+extern const u8 gAxTreecko[];
+extern const u8 gAxGrovyle[];
+extern const u8 gAxSceptile[];
+extern const u8 gAxTorchic[];
+extern const u8 gAxCombusken[];
+extern const u8 gAxBlaziken[];
+extern const u8 gAxMudkip[];
+extern const u8 gAxMarshtomp[];
+extern const u8 gAxSwampert[];
+extern const u8 gAxPoochyena[];
+extern const u8 gAxMightyena[];
+extern const u8 gAxZigzagoon[];
+extern const u8 gAxLinoone[];
+extern const u8 gAxWurmple[];
+extern const u8 gAxSilcoon[];
+extern const u8 gAxBeautifly[];
+extern const u8 gAxCascoon[];
+extern const u8 gAxDustox[];
+extern const u8 gAxLotad[];
+extern const u8 gAxLombre[];
+extern const u8 gAxLudicolo[];
+extern const u8 gAxSeedot[];
+extern const u8 gAxNuzleaf[];
+extern const u8 gAxShiftry[];
+extern const u8 gAxTaillow[];
+extern const u8 gAxSwellow[];
+extern const u8 gAxWingull[];
+extern const u8 gAxPelipper[];
+extern const u8 gAxRalts[];
+extern const u8 gAxKirlia[];
+extern const u8 gAxGardevoir[];
+extern const u8 gAxSurskit[];
+extern const u8 gAxMasquerain[];
+extern const u8 gAxShroomish[];
+extern const u8 gAxBreloom[];
+extern const u8 gAxSlakoth[];
+extern const u8 gAxVigoroth[];
+extern const u8 gAxSlaking[];
+extern const u8 gAxNincada[];
+extern const u8 gAxNinjask[];
+extern const u8 gAxShedinja[];
+extern const u8 gAxWhismur[];
+extern const u8 gAxLoudred[];
+extern const u8 gAxExploud[];
+extern const u8 gAxMakuhita[];
+extern const u8 gAxHariyama[];
+extern const u8 gAxAzurill[];
+extern const u8 gAxNosepass[];
+extern const u8 gAxSkitty[];
+extern const u8 gAxDelcatty[];
+extern const u8 gAxSableye[];
+extern const u8 gAxMawile[];
+extern const u8 gAxAron[];
+extern const u8 gAxLairon[];
+extern const u8 gAxAggron[];
+extern const u8 gAxMeditite[];
+extern const u8 gAxMedicham[];
+extern const u8 gAxElectrike[];
+extern const u8 gAxManectric[];
+extern const u8 gAxPlusle[];
+extern const u8 gAxMinun[];
+extern const u8 gAxVolbeat[];
+extern const u8 gAxIllumise[];
+extern const u8 gAxRoselia[];
+extern const u8 gAxGulpin[];
+extern const u8 gAxSwalot[];
+extern const u8 gAxCarvanha[];
+extern const u8 gAxSharpedo[];
+extern const u8 gAxWailmer[];
+extern const u8 gAxWailord[];
+extern const u8 gAxNumel[];
+extern const u8 gAxCamerupt[];
+extern const u8 gAxTorkoal[];
+extern const u8 gAxSpoink[];
+extern const u8 gAxGrumpig[];
+extern const u8 gAxSpinda[];
+extern const u8 gAxTrapinch[];
+extern const u8 gAxVibrava[];
+extern const u8 gAxFlygon[];
+extern const u8 gAxCacnea[];
+extern const u8 gAxCacturne[];
+extern const u8 gAxSwablu[];
+extern const u8 gAxAltaria[];
+extern const u8 gAxZangoose[];
+extern const u8 gAxSeviper[];
+extern const u8 gAxLunatone[];
+extern const u8 gAxSolrock[];
+extern const u8 gAxBarboach[];
+extern const u8 gAxWhiscash[];
+extern const u8 gAxCorphish[];
+extern const u8 gAxCrawdaunt[];
+extern const u8 gAxBaltoy[];
+extern const u8 gAxClaydol[];
+extern const u8 gAxLileep[];
+extern const u8 gAxCradily[];
+extern const u8 gAxAnorith[];
+extern const u8 gAxArmaldo[];
+extern const u8 gAxFeebas[];
+extern const u8 gAxMilotic[];
+extern const u8 gAxCastform[];
+extern const u8 gAxCastformSnowy[];
+extern const u8 gAxCastformSunny[];
+extern const u8 gAxCastformRainy[];
+extern const u8 gAxKecleon[];
+extern const u8 gAxShuppet[];
+extern const u8 gAxBanette[];
+extern const u8 gAxDuskull[];
+extern const u8 gAxDusclops[];
+extern const u8 gAxTropius[];
+extern const u8 gAxChimecho[];
+extern const u8 gAxAbsol[];
+extern const u8 gAxWynaut[];
+extern const u8 gAxSnorunt[];
+extern const u8 gAxGlalie[];
+extern const u8 gAxSpheal[];
+extern const u8 gAxSealeo[];
+extern const u8 gAxWalrein[];
+extern const u8 gAxClamperl[];
+extern const u8 gAxHuntail[];
+extern const u8 gAxGorebyss[];
+extern const u8 gAxRelicanth[];
+extern const u8 gAxLuvdisc[];
+extern const u8 gAxBagon[];
+extern const u8 gAxShelgon[];
+extern const u8 gAxSalamence[];
+extern const u8 gAxBeldum[];
+extern const u8 gAxMetang[];
+extern const u8 gAxMetagross[];
+extern const u8 gAxRegirock[];
+extern const u8 gAxRegice[];
+extern const u8 gAxRegisteel[];
+extern const u8 gAxLatias[];
+extern const u8 gAxLatios[];
+extern const u8 gAxKyogre[];
+extern const u8 gAxGroudon[];
+extern const u8 gAxRayquaza[];
+extern const u8 gAxJirachi[];
+extern const u8 gAxDeoxysNormal[];
+extern const u8 gAxUnownEmark[];
+extern const u8 gAxUnownQmark[];
+extern const u8 gAxDeoxysAttack[];
+extern const u8 gAxDeoxysDefense[];
+extern const u8 gAxDeoxysSpeed[];
+extern const u8 gAxMunchlax[];
+extern const u8 gAxDecoy[];
+extern const u8 gAxStatue[];
+extern const u8 gAxRayquazaCutscene[];
+extern const u8 gKaoBulbasaur[];
+extern const u8 gKaoCharmander[];
+extern const u8 gKaoCharizard[];
+extern const u8 gKaoSquirtle[];
+extern const u8 gKaoBlastoise[];
+extern const u8 gKaoCaterpie[];
+extern const u8 gKaoMetapod[];
+extern const u8 gKaoButterfree[];
+extern const u8 gKaoEkans[];
+extern const u8 gKaoPikachu[];
+extern const u8 gKaoNinetales[];
+extern const u8 gKaoWigglytuff[];
+extern const u8 gKaoDiglett[];
+extern const u8 gKaoDugtrio[];
+extern const u8 gKaoMeowth[];
+extern const u8 gKaoPersian[];
+extern const u8 gKaoPsyduck[];
+extern const u8 gKaoMankey[];
+extern const u8 gKaoAlakazam[];
+extern const u8 gKaoMachop[];
+extern const u8 gKaoBellsprout[];
+extern const u8 gKaoGolem[];
+extern const u8 gKaoMagnemite[];
+extern const u8 gKaoGengar[];
+extern const u8 gKaoCubone[];
+extern const u8 gKaoKangaskhan[];
+extern const u8 gKaoEevee[];
+extern const u8 gKaoArticuno[];
+extern const u8 gKaoZapdos[];
+extern const u8 gKaoMoltres[];
+extern const u8 gKaoMewtwo[];
+extern const u8 gKaoChikorita[];
+extern const u8 gKaoCyndaquil[];
+extern const u8 gKaoTotodile[];
+extern const u8 gKaoXatu[];
+extern const u8 gKaoJumpluff[];
+extern const u8 gKaoWobbuffet[];
+extern const u8 gKaoSnubbull[];
+extern const u8 gKaoGranbull[];
+extern const u8 gKaoOctillery[];
+extern const u8 gKaoSkarmory[];
+extern const u8 gKaoSmeargle[];
+extern const u8 gKaoRaikou[];
+extern const u8 gKaoEntei[];
+extern const u8 gKaoSuicune[];
+extern const u8 gKaoTyranitar[];
+extern const u8 gKaoLugia[];
+extern const u8 gKaoHoOh[];
+extern const u8 gKaoTreecko[];
+extern const u8 gKaoTorchic[];
+extern const u8 gKaoMudkip[];
+extern const u8 gKaoLombre[];
+extern const u8 gKaoShiftry[];
+extern const u8 gKaoPelipper[];
+extern const u8 gKaoGardevoir[];
+extern const u8 gKaoMakuhita[];
+extern const u8 gKaoSkitty[];
+extern const u8 gKaoMedicham[];
+extern const u8 gKaoGulpin[];
+extern const u8 gKaoSpinda[];
+extern const u8 gKaoWhiscash[];
+extern const u8 gKaoKecleon[];
+extern const u8 gKaoAbsol[];
+extern const u8 gKaoWynaut[];
+extern const u8 gKaoLatias[];
+extern const u8 gKaoLatios[];
+extern const u8 gKaoKyogre[];
+extern const u8 gKaoGroudon[];
+extern const u8 gKaoRayquaza[];
+extern const u8 gKaoJirachi[];
+extern const u8 gKaoDeoxysNormal[];
+extern const u8 gKaoMunchlax[];
+extern const u8 gKaoRayquazaCutscene[];
+extern const u8 gPaletFile[];
 
-const File gUnknown_8510018[] = {
-    [0] = { "ax001", gUnknown_8511F30,},
-    [1] = { "ax002", gUnknown_85217B0,},
-    [2] = { "ax003", gUnknown_852A934,},
-    [3] = { "ax004", gUnknown_85344D8,},
-    [4] = { "ax005", gUnknown_8544A3C,},
-    [5] = { "ax006", gUnknown_854F30C,},
-    [6] = { "ax007", gUnknown_855C74C,},
-    [7] = { "ax008", gUnknown_856AFF8,},
-    [8] = { "ax009", gUnknown_8575AA4,},
-    [9] = { "ax010", gUnknown_8581760,},
-    [10] = { "ax011", gUnknown_85897B8,},
-    [11] = { "ax012", gUnknown_8593488,},
-    [12] = { "ax013", gUnknown_859D574,},
-    [13] = { "ax014", gUnknown_85A6644,},
-    [14] = { "ax015", gUnknown_85AF060,},
-    [15] = { "ax016", gUnknown_85BA080,},
-    [16] = { "ax017", gUnknown_85C2D08,},
-    [17] = { "ax018", gUnknown_85CC5E0,},
-    [18] = { "ax019", gUnknown_85D64F8,},
-    [19] = { "ax020", gUnknown_85DF660,},
-    [20] = { "ax021", gUnknown_85E91A4,},
-    [21] = { "ax022", gUnknown_85F2C48,},
-    [22] = { "ax023", gUnknown_85FCB08,},
-    [23] = { "ax024", gUnknown_8608C4C,},
-    [24] = { "ax025", gUnknown_86158AC,},
-    [25] = { "ax026", gUnknown_86274A8,},
-    [26] = { "ax027", gUnknown_8634B00,},
-    [27] = { "ax028", gUnknown_863D274,},
-    [28] = { "ax029", gUnknown_8646CB0,},
-    [29] = { "ax030", gUnknown_8650508,},
-    [30] = { "ax031", gUnknown_865A218,},
-    [31] = { "ax032", gUnknown_8665000,},
-    [32] = { "ax033", gUnknown_866E508,},
-    [33] = { "ax034", gUnknown_8678DC4,},
-    [34] = { "ax035", gUnknown_86838E0,},
-    [35] = { "ax036", gUnknown_868E768,},
-    [36] = { "ax037", gUnknown_8698AD0,},
-    [37] = { "ax038", gUnknown_86A287C,},
-    [38] = { "ax039", gUnknown_86AE564,},
-    [39] = { "ax040", gUnknown_86B7C14,},
-    [40] = { "ax041", gUnknown_86C13BC,},
-    [41] = { "ax042", gUnknown_86C9560,},
-    [42] = { "ax043", gUnknown_86D1784,},
-    [43] = { "ax044", gUnknown_86DA7A8,},
-    [44] = { "ax045", gUnknown_86E52C0,},
-    [45] = { "ax046", gUnknown_86EEB4C,},
-    [46] = { "ax047", gUnknown_86F8CD8,},
-    [47] = { "ax048", gUnknown_87046D4,},
-    [48] = { "ax049", gUnknown_870CB24,},
-    [49] = { "ax050", gUnknown_8715DD4,},
-    [50] = { "ax051", gUnknown_8722404,},
-    [51] = { "ax052", gUnknown_8734894,},
-    [52] = { "ax053", gUnknown_8744B70,},
-    [53] = { "ax054", gUnknown_8750850,},
-    [54] = { "ax055", gUnknown_8761B38,},
-    [55] = { "ax056", gUnknown_876DBF4,},
-    [56] = { "ax057", gUnknown_87788CC,},
-    [57] = { "ax058", gUnknown_87846A4,},
-    [58] = { "ax059", gUnknown_878E358,},
-    [59] = { "ax060", gUnknown_8798E44,},
-    [60] = { "ax061", gUnknown_87A15D4,},
-    [61] = { "ax062", gUnknown_87ACA3C,},
-    [62] = { "ax063", gUnknown_87B7CE0,},
-    [63] = { "ax064", gUnknown_87C17E0,},
-    [64] = { "ax065", gUnknown_87CC400,},
-    [65] = { "ax066", gUnknown_87D77D8,},
-    [66] = { "ax067", gUnknown_87E79FC,},
-    [67] = { "ax068", gUnknown_87F2950,},
-    [68] = { "ax069", gUnknown_87FE844,},
-    [69] = { "ax070", gUnknown_880765C,},
-    [70] = { "ax071", gUnknown_88124D8,},
-    [71] = { "ax072", gUnknown_881D924,},
-    [72] = { "ax073", gUnknown_8827F4C,},
-    [73] = { "ax074", gUnknown_8831FF8,},
-    [74] = { "ax075", gUnknown_883BD58,},
-    [75] = { "ax076", gUnknown_884698C,},
-    [76] = { "ax077", gUnknown_88511F8,},
-    [77] = { "ax078", gUnknown_885A36C,},
-    [78] = { "ax079", gUnknown_88658E0,},
-    [79] = { "ax080", gUnknown_886D7F0,},
-    [80] = { "ax081", gUnknown_887891C,},
-    [81] = { "ax082", gUnknown_8881ABC,},
-    [82] = { "ax083", gUnknown_888A4E0,},
-    [83] = { "ax084", gUnknown_8895F48,},
-    [84] = { "ax085", gUnknown_88A0A14,},
-    [85] = { "ax086", gUnknown_88ABF34,},
-    [86] = { "ax087", gUnknown_88B5014,},
-    [87] = { "ax088", gUnknown_88BE328,},
-    [88] = { "ax089", gUnknown_88C8C2C,},
-    [89] = { "ax090", gUnknown_88D3AA8,},
-    [90] = { "ax091", gUnknown_88DC9E0,},
-    [91] = { "ax092", gUnknown_88E6760,},
-    [92] = { "ax093", gUnknown_88F0AEC,},
-    [93] = { "ax094", gUnknown_88FBCC8,},
-    [94] = { "ax095", gUnknown_8906DE0,},
-    [95] = { "ax096", gUnknown_8912EB0,},
-    [96] = { "ax097", gUnknown_891D1C0,},
-    [97] = { "ax098", gUnknown_892B898,},
-    [98] = { "ax099", gUnknown_8936790,},
-    [99] = { "ax100", gUnknown_8944F68,},
-    [100] = { "ax101", gUnknown_894B488,},
-    [101] = { "ax102", gUnknown_8954BA0,},
-    [102] = { "ax103", gUnknown_895FAE8,},
-    [103] = { "ax104", gUnknown_896A990,},
-    [104] = { "ax105", gUnknown_897DE74,},
-    [105] = { "ax106", gUnknown_898A79C,},
-    [106] = { "ax107", gUnknown_8997390,},
-    [107] = { "ax108", gUnknown_89A3EAC,},
-    [108] = { "ax109", gUnknown_89AEAB4,},
-    [109] = { "ax110", gUnknown_89BB6CC,},
-    [110] = { "ax111", gUnknown_89CABAC,},
-    [111] = { "ax112", gUnknown_89D421C,},
-    [112] = { "ax113", gUnknown_89DDF50,},
-    [113] = { "ax114", gUnknown_89E8604,},
-    [114] = { "ax115", gUnknown_89F1B84,},
-    [115] = { "ax116", gUnknown_89FC870,},
-    [116] = { "ax117", gUnknown_8A05480,},
-    [117] = { "ax118", gUnknown_8A0F64C,},
-    [118] = { "ax119", gUnknown_8A1A07C,},
-    [119] = { "ax120", gUnknown_8A26A04,},
-    [120] = { "ax121", gUnknown_8A2FA64,},
-    [121] = { "ax122", gUnknown_8A38ABC,},
-    [122] = { "ax123", gUnknown_8A446D0,},
-    [123] = { "ax124", gUnknown_8A4ED0C,},
-    [124] = { "ax125", gUnknown_8A5B974,},
-    [125] = { "ax126", gUnknown_8A683CC,},
-    [126] = { "ax127", gUnknown_8A71FA8,},
-    [127] = { "ax128", gUnknown_8A7AA14,},
-    [128] = { "ax129", gUnknown_8A8541C,},
-    [129] = { "ax130", gUnknown_8A8EB94,},
-    [130] = { "ax131", gUnknown_8AA1C20,},
-    [131] = { "ax132", gUnknown_8AB3E28,},
-    [132] = { "ax133", gUnknown_8ABC000,},
-    [133] = { "ax134", gUnknown_8ACBA80,},
-    [134] = { "ax135", gUnknown_8AD5B5C,},
-    [135] = { "ax136", gUnknown_8AE02EC,},
-    [136] = { "ax137", gUnknown_8AE92E4,},
-    [137] = { "ax138", gUnknown_8AF3110,},
-    [138] = { "ax139", gUnknown_8AFBEC8,},
-    [139] = { "ax140", gUnknown_8B051D0,},
-    [140] = { "ax141", gUnknown_8B0E4B0,},
-    [141] = { "ax142", gUnknown_8B1A5EC,},
-    [142] = { "ax143", gUnknown_8B250F4,},
-    [143] = { "ax144", gUnknown_8B300F4,},
-    [144] = { "ax145", gUnknown_8B400B8,},
-    [145] = { "ax146", gUnknown_8B535DC,},
-    [146] = { "ax147", gUnknown_8B67998,},
-    [147] = { "ax148", gUnknown_8B72314,},
-    [148] = { "ax149", gUnknown_8B7FD84,},
-    [149] = { "ax150", gUnknown_8B8A718,},
-    [150] = { "ax151", gUnknown_8B956B4,},
-    [151] = { "ax152", gUnknown_8BA027C,},
-    [152] = { "ax153", gUnknown_8BAEC04,},
-    [153] = { "ax154", gUnknown_8BB7BF4,},
-    [154] = { "ax155", gUnknown_8BC2248,},
-    [155] = { "ax156", gUnknown_8BD1308,},
-    [156] = { "ax157", gUnknown_8BDBBC0,},
-    [157] = { "ax158", gUnknown_8BE83B0,},
-    [158] = { "ax159", gUnknown_8BF8AA0,},
-    [159] = { "ax160", gUnknown_8C05930,},
-    [160] = { "ax161", gUnknown_8C113A8,},
-    [161] = { "ax162", gUnknown_8C1CB68,},
-    [162] = { "ax163", gUnknown_8C28DF4,},
-    [163] = { "ax164", gUnknown_8C30418,},
-    [164] = { "ax165", gUnknown_8C39FC0,},
-    [165] = { "ax166", gUnknown_8C44510,},
-    [166] = { "ax167", gUnknown_8C4FF50,},
-    [167] = { "ax168", gUnknown_8C5997C,},
-    [168] = { "ax169", gUnknown_8C633DC,},
-    [169] = { "ax170", gUnknown_8C6C2B8,},
-    [170] = { "ax171", gUnknown_8C767E8,},
-    [171] = { "ax172", gUnknown_8C7F734,},
-    [172] = { "ax173", gUnknown_8C8A8C0,},
-    [173] = { "ax174", gUnknown_8C92FDC,},
-    [174] = { "ax175", gUnknown_8C99E34,},
-    [175] = { "ax176", gUnknown_8CA1984,},
-    [176] = { "ax177", gUnknown_8CAA3F4,},
-    [177] = { "ax178", gUnknown_8CB2F7C,},
-    [178] = { "ax179", gUnknown_8CBE368,},
-    [179] = { "ax180", gUnknown_8CC7D78,},
-    [180] = { "ax181", gUnknown_8CD1A1C,},
-    [181] = { "ax182", gUnknown_8CDC484,},
-    [182] = { "ax183", gUnknown_8CE5EB8,},
-    [183] = { "ax184", gUnknown_8CEECEC,},
-    [184] = { "ax185", gUnknown_8CF8DF0,},
-    [185] = { "ax186", gUnknown_8D04060,},
-    [186] = { "ax187", gUnknown_8D0EF68,},
-    [187] = { "ax188", gUnknown_8D18980,},
-    [188] = { "ax189", gUnknown_8D21ECC,},
-    [189] = { "ax190", gUnknown_8D2B658,},
-    [190] = { "ax191", gUnknown_8D35E1C,},
-    [191] = { "ax192", gUnknown_8D3D55C,},
-    [192] = { "ax193", gUnknown_8D48C7C,},
-    [193] = { "ax194", gUnknown_8D5093C,},
-    [194] = { "ax195", gUnknown_8D5A724,},
-    [195] = { "ax196", gUnknown_8D62F70,},
-    [196] = { "ax197", gUnknown_8D6BCC0,},
-    [197] = { "ax198", gUnknown_8D74C34,},
-    [198] = { "ax199", gUnknown_8D7D110,},
-    [199] = { "ax200", gUnknown_8D86DB0,},
-    [200] = { "ax201", gUnknown_8D90330,},
-    [201] = { "ax202", gUnknown_8D958C8,},
-    [202] = { "ax203", gUnknown_8D9BAD8,},
-    [203] = { "ax204", gUnknown_8DA1CE8,},
-    [204] = { "ax205", gUnknown_8DA7EF8,},
-    [205] = { "ax206", gUnknown_8DAE108,},
-    [206] = { "ax207", gUnknown_8DB4318,},
-    [207] = { "ax208", gUnknown_8DBA528,},
-    [208] = { "ax209", gUnknown_8DC0738,},
-    [209] = { "ax210", gUnknown_8DC5CD0,},
-    [210] = { "ax211", gUnknown_8DCBEE8,},
-    [211] = { "ax212", gUnknown_8DD20F8,},
-    [212] = { "ax213", gUnknown_8DD8308,},
-    [213] = { "ax214", gUnknown_8DDD8A0,},
-    [214] = { "ax215", gUnknown_8DE3AB0,},
-    [215] = { "ax216", gUnknown_8DE9048,},
-    [216] = { "ax217", gUnknown_8DEF258,},
-    [217] = { "ax218", gUnknown_8DF5468,},
-    [218] = { "ax219", gUnknown_8DFB678,},
-    [219] = { "ax220", gUnknown_8E01888,},
-    [220] = { "ax221", gUnknown_8E06E28,},
-    [221] = { "ax222", gUnknown_8E0C3C0,},
-    [222] = { "ax223", gUnknown_8E125D0,},
-    [223] = { "ax224", gUnknown_8E17B68,},
-    [224] = { "ax225", gUnknown_8E1D100,},
-    [225] = { "ax226", gUnknown_8E22698,},
-    [226] = { "ax227", gUnknown_8E288A8,},
-    [227] = { "ax228", gUnknown_8E321AC,},
-    [228] = { "ax229", gUnknown_8E3CC70,},
-    [229] = { "ax230", gUnknown_8E44E98,},
-    [230] = { "ax231", gUnknown_8E4B738,},
-    [231] = { "ax232", gUnknown_8E53FA8,},
-    [232] = { "ax233", gUnknown_8E5F700,},
-    [233] = { "ax234", gUnknown_8E6F704,},
-    [234] = { "ax235", gUnknown_8E78EC0,},
-    [235] = { "ax236", gUnknown_8E82EEC,},
-    [236] = { "ax237", gUnknown_8E8C9C4,},
-    [237] = { "ax238", gUnknown_8E97B08,},
-    [238] = { "ax239", gUnknown_8EA19B4,},
-    [239] = { "ax240", gUnknown_8EADC70,},
-    [240] = { "ax241", gUnknown_8EBD7B0,},
-    [241] = { "ax242", gUnknown_8EC93A8,},
-    [242] = { "ax243", gUnknown_8ED561C,},
-    [243] = { "ax244", gUnknown_8EDEE18,},
-    [244] = { "ax245", gUnknown_8EEB5D4,},
-    [245] = { "ax246", gUnknown_8EF3CF0,},
-    [246] = { "ax247", gUnknown_8EFCA2C,},
-    [247] = { "ax248", gUnknown_8F049DC,},
-    [248] = { "ax249", gUnknown_8F0DEF4,},
-    [249] = { "ax250", gUnknown_8F1837C,},
-    [250] = { "ax251", gUnknown_8F23BB4,},
-    [251] = { "ax252", gUnknown_8F324E4,},
-    [252] = { "ax253", gUnknown_8F3D1B0,},
-    [253] = { "ax254", gUnknown_8F46508,},
-    [254] = { "ax255", gUnknown_8F51D94,},
-    [255] = { "ax256", gUnknown_8F5BD00,},
-    [256] = { "ax257", gUnknown_8F651B0,},
-    [257] = { "ax258", gUnknown_8F6ED00,},
-    [258] = { "ax259", gUnknown_8F78604,},
-    [259] = { "ax260", gUnknown_8F82B04,},
-    [260] = { "ax261", gUnknown_8F900F0,},
-    [261] = { "ax262", gUnknown_8F99AA8,},
-    [262] = { "ax263", gUnknown_8FA252C,},
-    [263] = { "ax264", gUnknown_8FAB360,},
-    [264] = { "ax265", gUnknown_8FB6F0C,},
-    [265] = { "ax266", gUnknown_8FC1024,},
-    [266] = { "ax267", gUnknown_8FCAFCC,},
-    [267] = { "ax268", gUnknown_8FD5FB0,},
-    [268] = { "ax269", gUnknown_8FE64A0,},
-    [269] = { "ax270", gUnknown_8FF2148,},
-    [270] = { "ax271", gUnknown_8FFEC14,},
-    [271] = { "ax272", gUnknown_9007538,},
-    [272] = { "ax273", gUnknown_900F674,},
-    [273] = { "ax274", gUnknown_901A930,},
-    [274] = { "ax275", gUnknown_902F8FC,},
-    [275] = { "ax276", gUnknown_9043324,},
-    [276] = { "ax277", gUnknown_904C064,},
-    [277] = { "ax278", gUnknown_905BB80,},
-    [278] = { "ax279", gUnknown_9065444,},
-    [279] = { "ax280", gUnknown_90709D0,},
-    [280] = { "ax281", gUnknown_907E03C,},
-    [281] = { "ax282", gUnknown_9088724,},
-    [282] = { "ax283", gUnknown_9095C84,},
-    [283] = { "ax284", gUnknown_90A4680,},
-    [284] = { "ax285", gUnknown_90AD950,},
-    [285] = { "ax286", gUnknown_90B70FC,},
-    [286] = { "ax287", gUnknown_90C0FEC,},
-    [287] = { "ax288", gUnknown_90CA910,},
-    [288] = { "ax289", gUnknown_90D45E4,},
-    [289] = { "ax290", gUnknown_90DDCCC,},
-    [290] = { "ax291", gUnknown_90E5C34,},
-    [291] = { "ax292", gUnknown_90ECC24,},
-    [292] = { "ax293", gUnknown_90F5E50,},
-    [293] = { "ax294", gUnknown_90FCE18,},
-    [294] = { "ax295", gUnknown_91067F4,},
-    [295] = { "ax296", gUnknown_910F188,},
-    [296] = { "ax297", gUnknown_911CD20,},
-    [297] = { "ax298", gUnknown_9126CE8,},
-    [298] = { "ax299", gUnknown_912ECF0,},
-    [299] = { "ax300", gUnknown_9139214,},
-    [300] = { "ax301", gUnknown_9145620,},
-    [301] = { "ax302", gUnknown_914EAC0,},
-    [302] = { "ax303", gUnknown_9159C18,},
-    [303] = { "ax304", gUnknown_9162D28,},
-    [304] = { "ax305", gUnknown_916EA58,},
-    [305] = { "ax306", gUnknown_91754B0,},
-    [306] = { "ax307", gUnknown_917D19C,},
-    [307] = { "ax308", gUnknown_9189258,},
-    [308] = { "ax309", gUnknown_919139C,},
-    [309] = { "ax310", gUnknown_919A198,},
-    [310] = { "ax311", gUnknown_91A2338,},
-    [311] = { "ax312", gUnknown_91AC6E0,},
-    [312] = { "ax313", gUnknown_91B5D78,},
-    [313] = { "ax314", gUnknown_91C1198,},
-    [314] = { "ax315", gUnknown_91CC77C,},
-    [315] = { "ax316", gUnknown_91D5318,},
-    [316] = { "ax317", gUnknown_91DFCCC,},
-    [317] = { "ax318", gUnknown_91E9530,},
-    [318] = { "ax319", gUnknown_91F26F0,},
-    [319] = { "ax320", gUnknown_91FBD34,},
-    [320] = { "ax321", gUnknown_9204644,},
-    [321] = { "ax322", gUnknown_920DD5C,},
-    [322] = { "ax323", gUnknown_9217820,},
-    [323] = { "ax324", gUnknown_9220C54,},
-    [324] = { "ax325", gUnknown_922A52C,},
-    [325] = { "ax326", gUnknown_9239E6C,},
-    [326] = { "ax327", gUnknown_9244F40,},
-    [327] = { "ax328", gUnknown_92518D0,},
-    [328] = { "ax329", gUnknown_925C020,},
-    [329] = { "ax330", gUnknown_926534C,},
-    [330] = { "ax331", gUnknown_926EA14,},
-    [331] = { "ax332", gUnknown_9279AE4,},
-    [332] = { "ax333", gUnknown_92830B0,},
-    [333] = { "ax334", gUnknown_928D0D4,},
-    [334] = { "ax335", gUnknown_9299F24,},
-    [335] = { "ax336", gUnknown_92A6BDC,},
-    [336] = { "ax337", gUnknown_92B05A0,},
-    [337] = { "ax338", gUnknown_92B9F64,},
-    [338] = { "ax339", gUnknown_92C605C,},
-    [339] = { "ax340", gUnknown_92D07BC,},
-    [340] = { "ax341", gUnknown_92DBE78,},
-    [341] = { "ax342", gUnknown_92E65CC,},
-    [342] = { "ax343", gUnknown_92F17E4,},
-    [343] = { "ax344", gUnknown_92FABF0,},
-    [344] = { "ax345", gUnknown_9304A68,},
-    [345] = { "ax346", gUnknown_930E288,},
-    [346] = { "ax347", gUnknown_9321CDC,},
-    [347] = { "ax348", gUnknown_932AD00,},
-    [348] = { "ax349", gUnknown_9335328,},
-    [349] = { "ax350", gUnknown_933FD3C,},
-    [350] = { "ax351", gUnknown_9349164,},
-    [351] = { "ax352", gUnknown_93530CC,},
-    [352] = { "ax353", gUnknown_93602B8,},
-    [353] = { "ax354", gUnknown_9369E84,},
-    [354] = { "ax355", gUnknown_9372AE4,},
-    [355] = { "ax356", gUnknown_937DFF8,},
-    [356] = { "ax357", gUnknown_93888FC,},
-    [357] = { "ax358", gUnknown_9393E84,},
-    [358] = { "ax359", gUnknown_939D5B8,},
-    [359] = { "ax360", gUnknown_93A8BCC,},
-    [360] = { "ax361", gUnknown_93B7670,},
-    [361] = { "ax362", gUnknown_93C5464,},
-    [362] = { "ax363", gUnknown_93CC2A8,},
-    [363] = { "ax364", gUnknown_93D3630,},
-    [364] = { "ax365", gUnknown_93DCAC0,},
-    [365] = { "ax366", gUnknown_93E6AA8,},
-    [366] = { "ax367", gUnknown_93F0D44,},
-    [367] = { "ax368", gUnknown_93FC0A4,},
-    [368] = { "ax369", gUnknown_9403160,},
-    [369] = { "ax370", gUnknown_940B98C,},
-    [370] = { "ax371", gUnknown_9418F04,},
-    [371] = { "ax372", gUnknown_9424C1C,},
-    [372] = { "ax373", gUnknown_942E704,},
-    [373] = { "ax374", gUnknown_9439D3C,},
-    [374] = { "ax375", gUnknown_94428C4,},
-    [375] = { "ax376", gUnknown_945D794,},
-    [376] = { "ax377", gUnknown_9465D50,},
-    [377] = { "ax378", gUnknown_9470BA4,},
-    [378] = { "ax379", gUnknown_947A348,},
-    [379] = { "ax380", gUnknown_94827D4,},
-    [380] = { "ax381", gUnknown_948E040,},
-    [381] = { "ax382", gUnknown_9497744,},
-    [382] = { "ax383", gUnknown_94A42E0,},
-    [383] = { "ax384", gUnknown_94AEA88,},
-    [384] = { "ax385", gUnknown_94BB980,},
-    [385] = { "ax386", gUnknown_94C8570,},
-    [386] = { "ax387", gUnknown_94D0E50,},
-    [387] = { "ax388", gUnknown_94DE4D4,},
-    [388] = { "ax389", gUnknown_94E7C3C,},
-    [389] = { "ax390", gUnknown_94F0B3C,},
-    [390] = { "ax391", gUnknown_94FA1BC,},
-    [391] = { "ax392", gUnknown_95030EC,},
-    [392] = { "ax393", gUnknown_950D0AC,},
-    [393] = { "ax394", gUnknown_951781C,},
-    [394] = { "ax395", gUnknown_951FEF8,},
-    [395] = { "ax396", gUnknown_952B4D4,},
-    [396] = { "ax397", gUnknown_9533E54,},
-    [397] = { "ax398", gUnknown_953C240,},
-    [398] = { "ax399", gUnknown_9543F98,},
-    [399] = { "ax400", gUnknown_954DBBC,},
-    [400] = { "ax401", gUnknown_9556F70,},
-    [401] = { "ax402", gUnknown_95672FC,},
-    [402] = { "ax403", gUnknown_956E9E0,},
-    [403] = { "ax404", gUnknown_9579CD4,},
-    [404] = { "ax405", gUnknown_95848E8,},
-    [405] = { "ax406", gUnknown_9590850,},
-    [406] = { "ax407", gUnknown_959ACD8,},
-    [407] = { "ax408", gUnknown_95A49A8,},
-    [408] = { "ax409", gUnknown_95B3820,},
-    [409] = { "ax410", gUnknown_95C47CC,},
-    [410] = { "ax411", gUnknown_95D40B4,},
-    [411] = { "ax412", gUnknown_95E5A60,},
-    [412] = { "ax413", gUnknown_9600978,},
-    [413] = { "ax414", gUnknown_960CD74,},
-    [414] = { "ax415", gUnknown_9616D6C,},
-    [415] = { "ax416", gUnknown_961C304,},
-    [416] = { "ax417", gUnknown_9622514,},
-    [417] = { "ax418", gUnknown_9630BE4,},
-    [418] = { "ax419", gUnknown_963A36C,},
-    [419] = { "ax420", gUnknown_96481A8,},
-    [420] = { "ax421", gUnknown_9652970,},
-    [421] = { "ax422", gUnknown_9659AD0,},
-    [422] = { "ax423", gUnknown_965A21C,},
-    [423] = { "kao001", gUnknown_967FE78,},
-    [424] = { "kao004", gUnknown_96825F0,},
-    [425] = { "kao006", gUnknown_9684930,},
-    [426] = { "kao007", gUnknown_96857E8,},
-    [427] = { "kao009", gUnknown_9687E78,},
-    [428] = { "kao010", gUnknown_9688AA8,},
-    [429] = { "kao011", gUnknown_96893CC,},
-    [430] = { "kao012", gUnknown_9689724,},
-    [431] = { "kao023", gUnknown_9689AC8,},
-    [432] = { "kao025", gUnknown_968A33C,},
-    [433] = { "kao038", gUnknown_968C738,},
-    [434] = { "kao040", gUnknown_968CAAC,},
-    [435] = { "kao050", gUnknown_968CE08,},
-    [436] = { "kao051", gUnknown_968D2FC,},
-    [437] = { "kao052", gUnknown_968D624,},
-    [438] = { "kao053", gUnknown_968FEB8,},
-    [439] = { "kao054", gUnknown_9690224,},
-    [440] = { "kao056", gUnknown_969270C,},
-    [441] = { "kao065", gUnknown_9692DC0,},
-    [442] = { "kao066", gUnknown_96937AC,},
-    [443] = { "kao069", gUnknown_9695DB4,},
-    [444] = { "kao076", gUnknown_9696364,},
-    [445] = { "kao081", gUnknown_96966CC,},
-    [446] = { "kao094", gUnknown_9696D38,},
-    [447] = { "kao104", gUnknown_9698264,},
-    [448] = { "kao115", gUnknown_969AAB0,},
-    [449] = { "kao133", gUnknown_969B104,},
-    [450] = { "kao144", gUnknown_969D738,},
-    [451] = { "kao145", gUnknown_969DAB0,},
-    [452] = { "kao146", gUnknown_969DE04,},
-    [453] = { "kao150", gUnknown_969E1B8,},
-    [454] = { "kao152", gUnknown_969E524,},
-    [455] = { "kao155", gUnknown_96A0A98,},
-    [456] = { "kao158", gUnknown_96A2F5C,},
-    [457] = { "kao178", gUnknown_96A5654,},
-    [458] = { "kao189", gUnknown_96A5988,},
-    [459] = { "kao227", gUnknown_96A5F90,},
-    [460] = { "kao234", gUnknown_96A6560,},
-    [461] = { "kao235", gUnknown_96A6F08,},
-    [462] = { "kao249", gUnknown_96A72BC,},
-    [463] = { "kao252", gUnknown_96A7638,},
-    [464] = { "kao260", gUnknown_96A7ACC,},
-    [465] = { "kao268", gUnknown_96A7E4C,},
-    [466] = { "kao269", gUnknown_96A81E0,},
-    [467] = { "kao270", gUnknown_96A8554,},
-    [468] = { "kao273", gUnknown_96A8908,},
-    [469] = { "kao274", gUnknown_96A8F34,},
-    [470] = { "kao275", gUnknown_96A9274,},
-    [471] = { "kao277", gUnknown_96A9604,},
-    [472] = { "kao280", gUnknown_96ABC14,},
-    [473] = { "kao283", gUnknown_96AE1C4,},
-    [474] = { "kao296", gUnknown_96B06B4,},
-    [475] = { "kao300", gUnknown_96B1D54,},
-    [476] = { "kao304", gUnknown_96B2A48,},
-    [477] = { "kao307", gUnknown_96B2D24,},
-    [478] = { "kao321", gUnknown_96B361C,},
-    [479] = { "kao325", gUnknown_96B3970,},
-    [480] = { "kao333", gUnknown_96B5FF0,},
-    [481] = { "kao341", gUnknown_96B7464,},
-    [482] = { "kao352", gUnknown_96B7734,},
-    [483] = { "kao365", gUnknown_96B837C,},
-    [484] = { "kao380", gUnknown_96B8950,},
-    [485] = { "kao387", gUnknown_96B9658,},
-    [486] = { "kao388", gUnknown_96B9C7C,},
-    [487] = { "kao408", gUnknown_96B9FF0,},
-    [488] = { "kao409", gUnknown_96BA57C,},
-    [489] = { "kao410", gUnknown_96BABA0,},
-    [490] = { "kao411", gUnknown_96BAEBC,},
-    [491] = { "kao412", gUnknown_96BB264,},
-    [492] = { "kao413", gUnknown_96BB5EC,},
-    [493] = { "kao414", gUnknown_96BBBB4,},
-    [494] = { "kao420", gUnknown_96BBEE8,},
-    [495] = { "kao423", gUnknown_96BD0A4,},
-    [496] = { "palet", gUnknown_96BD42C,},
+const File gMonsterFiles[] = {
+    [0] = { "ax001", gAxBulbasaur,},
+    [1] = { "ax002", gAxIvysaur,},
+    [2] = { "ax003", gAxVenusaur,},
+    [3] = { "ax004", gAxCharmander,},
+    [4] = { "ax005", gAxCharmeleon,},
+    [5] = { "ax006", gAxCharizard,},
+    [6] = { "ax007", gAxSquirtle,},
+    [7] = { "ax008", gAxWartortle,},
+    [8] = { "ax009", gAxBlastoise,},
+    [9] = { "ax010", gAxCaterpie,},
+    [10] = { "ax011", gAxMetapod,},
+    [11] = { "ax012", gAxButterfree,},
+    [12] = { "ax013", gAxWeedle,},
+    [13] = { "ax014", gAxKakuna,},
+    [14] = { "ax015", gAxBeedrill,},
+    [15] = { "ax016", gAxPidgey,},
+    [16] = { "ax017", gAxPidgeotto,},
+    [17] = { "ax018", gAxPidgeot,},
+    [18] = { "ax019", gAxRattata,},
+    [19] = { "ax020", gAxRaticate,},
+    [20] = { "ax021", gAxSpearow,},
+    [21] = { "ax022", gAxFearow,},
+    [22] = { "ax023", gAxEkans,},
+    [23] = { "ax024", gAxArbok,},
+    [24] = { "ax025", gAxPikachu,},
+    [25] = { "ax026", gAxRaichu,},
+    [26] = { "ax027", gAxSandshrew,},
+    [27] = { "ax028", gAxSandslash,},
+    [28] = { "ax029", gAxNidoranF,},
+    [29] = { "ax030", gAxNidorina,},
+    [30] = { "ax031", gAxNidoqueen,},
+    [31] = { "ax032", gAxNidoranM,},
+    [32] = { "ax033", gAxNidorino,},
+    [33] = { "ax034", gAxNidoking,},
+    [34] = { "ax035", gAxClefairy,},
+    [35] = { "ax036", gAxClefable,},
+    [36] = { "ax037", gAxVulpix,},
+    [37] = { "ax038", gAxNinetales,},
+    [38] = { "ax039", gAxJigglypuff,},
+    [39] = { "ax040", gAxWigglytuff,},
+    [40] = { "ax041", gAxZubat,},
+    [41] = { "ax042", gAxGolbat,},
+    [42] = { "ax043", gAxOddish,},
+    [43] = { "ax044", gAxGloom,},
+    [44] = { "ax045", gAxVileplume,},
+    [45] = { "ax046", gAxParas,},
+    [46] = { "ax047", gAxParasect,},
+    [47] = { "ax048", gAxVenonat,},
+    [48] = { "ax049", gAxVenomoth,},
+    [49] = { "ax050", gAxDiglett,},
+    [50] = { "ax051", gAxDugtrio,},
+    [51] = { "ax052", gAxMeowth,},
+    [52] = { "ax053", gAxPersian,},
+    [53] = { "ax054", gAxPsyduck,},
+    [54] = { "ax055", gAxGolduck,},
+    [55] = { "ax056", gAxMankey,},
+    [56] = { "ax057", gAxPrimeape,},
+    [57] = { "ax058", gAxGrowlithe,},
+    [58] = { "ax059", gAxArcanine,},
+    [59] = { "ax060", gAxPoliwag,},
+    [60] = { "ax061", gAxPoliwhirl,},
+    [61] = { "ax062", gAxPoliwrath,},
+    [62] = { "ax063", gAxAbra,},
+    [63] = { "ax064", gAxKadabra,},
+    [64] = { "ax065", gAxAlakazam,},
+    [65] = { "ax066", gAxMachop,},
+    [66] = { "ax067", gAxMachoke,},
+    [67] = { "ax068", gAxMachamp,},
+    [68] = { "ax069", gAxBellsprout,},
+    [69] = { "ax070", gAxWeepinbell,},
+    [70] = { "ax071", gAxVictreebel,},
+    [71] = { "ax072", gAxTentacool,},
+    [72] = { "ax073", gAxTentacruel,},
+    [73] = { "ax074", gAxGeodude,},
+    [74] = { "ax075", gAxGraveler,},
+    [75] = { "ax076", gAxGolem,},
+    [76] = { "ax077", gAxPonyta,},
+    [77] = { "ax078", gAxRapidash,},
+    [78] = { "ax079", gAxSlowpoke,},
+    [79] = { "ax080", gAxSlowbro,},
+    [80] = { "ax081", gAxMagnemite,},
+    [81] = { "ax082", gAxMagneton,},
+    [82] = { "ax083", gAxFarfetchd,},
+    [83] = { "ax084", gAxDoduo,},
+    [84] = { "ax085", gAxDodrio,},
+    [85] = { "ax086", gAxSeel,},
+    [86] = { "ax087", gAxDewgong,},
+    [87] = { "ax088", gAxGrimer,},
+    [88] = { "ax089", gAxMuk,},
+    [89] = { "ax090", gAxShellder,},
+    [90] = { "ax091", gAxCloyster,},
+    [91] = { "ax092", gAxGastly,},
+    [92] = { "ax093", gAxHaunter,},
+    [93] = { "ax094", gAxGengar,},
+    [94] = { "ax095", gAxOnix,},
+    [95] = { "ax096", gAxDrowzee,},
+    [96] = { "ax097", gAxHypno,},
+    [97] = { "ax098", gAxKrabby,},
+    [98] = { "ax099", gAxKingler,},
+    [99] = { "ax100", gAxVoltorb,},
+    [100] = { "ax101", gAxElectrode,},
+    [101] = { "ax102", gAxExeggcute,},
+    [102] = { "ax103", gAxExeggutor,},
+    [103] = { "ax104", gAxCubone,},
+    [104] = { "ax105", gAxMarowak,},
+    [105] = { "ax106", gAxHitmonlee,},
+    [106] = { "ax107", gAxHitmonchan,},
+    [107] = { "ax108", gAxLickitung,},
+    [108] = { "ax109", gAxKoffing,},
+    [109] = { "ax110", gAxWeezing,},
+    [110] = { "ax111", gAxRhyhorn,},
+    [111] = { "ax112", gAxRhydon,},
+    [112] = { "ax113", gAxChansey,},
+    [113] = { "ax114", gAxTangela,},
+    [114] = { "ax115", gAxKangaskhan,},
+    [115] = { "ax116", gAxHorsea,},
+    [116] = { "ax117", gAxSeadra,},
+    [117] = { "ax118", gAxGoldeen,},
+    [118] = { "ax119", gAxSeaking,},
+    [119] = { "ax120", gAxStaryu,},
+    [120] = { "ax121", gAxStarmie,},
+    [121] = { "ax122", gAxMrMime,},
+    [122] = { "ax123", gAxScyther,},
+    [123] = { "ax124", gAxJynx,},
+    [124] = { "ax125", gAxElectabuzz,},
+    [125] = { "ax126", gAxMagmar,},
+    [126] = { "ax127", gAxPinsir,},
+    [127] = { "ax128", gAxTauros,},
+    [128] = { "ax129", gAxMagikarp,},
+    [129] = { "ax130", gAxGyarados,},
+    [130] = { "ax131", gAxLapras,},
+    [131] = { "ax132", gAxDitto,},
+    [132] = { "ax133", gAxEevee,},
+    [133] = { "ax134", gAxVaporeon,},
+    [134] = { "ax135", gAxJolteon,},
+    [135] = { "ax136", gAxFlareon,},
+    [136] = { "ax137", gAxPorygon,},
+    [137] = { "ax138", gAxOmanyte,},
+    [138] = { "ax139", gAxOmastar,},
+    [139] = { "ax140", gAxKabuto,},
+    [140] = { "ax141", gAxKabutops,},
+    [141] = { "ax142", gAxAerodactyl,},
+    [142] = { "ax143", gAxSnorlax,},
+    [143] = { "ax144", gAxArticuno,},
+    [144] = { "ax145", gAxZapdos,},
+    [145] = { "ax146", gAxMoltres,},
+    [146] = { "ax147", gAxDratini,},
+    [147] = { "ax148", gAxDragonair,},
+    [148] = { "ax149", gAxDragonite,},
+    [149] = { "ax150", gAxMewtwo,},
+    [150] = { "ax151", gAxMew,},
+    [151] = { "ax152", gAxChikorita,},
+    [152] = { "ax153", gAxBayleef,},
+    [153] = { "ax154", gAxMeganium,},
+    [154] = { "ax155", gAxCyndaquil,},
+    [155] = { "ax156", gAxQuilava,},
+    [156] = { "ax157", gAxTyphlosion,},
+    [157] = { "ax158", gAxTotodile,},
+    [158] = { "ax159", gAxCroconaw,},
+    [159] = { "ax160", gAxFeraligatr,},
+    [160] = { "ax161", gAxSentret,},
+    [161] = { "ax162", gAxFurret,},
+    [162] = { "ax163", gAxHoothoot,},
+    [163] = { "ax164", gAxNoctowl,},
+    [164] = { "ax165", gAxLedyba,},
+    [165] = { "ax166", gAxLedian,},
+    [166] = { "ax167", gAxSpinarak,},
+    [167] = { "ax168", gAxAriados,},
+    [168] = { "ax169", gAxCrobat,},
+    [169] = { "ax170", gAxChinchou,},
+    [170] = { "ax171", gAxLanturn,},
+    [171] = { "ax172", gAxPichu,},
+    [172] = { "ax173", gAxCleffa,},
+    [173] = { "ax174", gAxIgglybuff,},
+    [174] = { "ax175", gAxTogepi,},
+    [175] = { "ax176", gAxTogetic,},
+    [176] = { "ax177", gAxNatu,},
+    [177] = { "ax178", gAxXatu,},
+    [178] = { "ax179", gAxMareep,},
+    [179] = { "ax180", gAxFlaaffy,},
+    [180] = { "ax181", gAxAmpharos,},
+    [181] = { "ax182", gAxBellossom,},
+    [182] = { "ax183", gAxMarill,},
+    [183] = { "ax184", gAxAzumarill,},
+    [184] = { "ax185", gAxSudowoodo,},
+    [185] = { "ax186", gAxPolitoed,},
+    [186] = { "ax187", gAxHoppip,},
+    [187] = { "ax188", gAxSkiploom,},
+    [188] = { "ax189", gAxJumpluff,},
+    [189] = { "ax190", gAxAipom,},
+    [190] = { "ax191", gAxSunkern,},
+    [191] = { "ax192", gAxSunflora,},
+    [192] = { "ax193", gAxYanma,},
+    [193] = { "ax194", gAxWooper,},
+    [194] = { "ax195", gAxQuagsire,},
+    [195] = { "ax196", gAxEspeon,},
+    [196] = { "ax197", gAxUmbreon,},
+    [197] = { "ax198", gAxMurkrow,},
+    [198] = { "ax199", gAxSlowking,},
+    [199] = { "ax200", gAxMisdreavus,},
+    [200] = { "ax201", gAxUnownA,},
+    [201] = { "ax202", gAxUnownB,},
+    [202] = { "ax203", gAxUnownC,},
+    [203] = { "ax204", gAxUnownD,},
+    [204] = { "ax205", gAxUnownE,},
+    [205] = { "ax206", gAxUnownF,},
+    [206] = { "ax207", gAxUnownG,},
+    [207] = { "ax208", gAxUnownH,},
+    [208] = { "ax209", gAxUnownI,},
+    [209] = { "ax210", gAxUnownJ,},
+    [210] = { "ax211", gAxUnownK,},
+    [211] = { "ax212", gAxUnownL,},
+    [212] = { "ax213", gAxUnownM,},
+    [213] = { "ax214", gAxUnownN,},
+    [214] = { "ax215", gAxUnownO,},
+    [215] = { "ax216", gAxUnownP,},
+    [216] = { "ax217", gAxUnownQ,},
+    [217] = { "ax218", gAxUnownR,},
+    [218] = { "ax219", gAxUnownS,},
+    [219] = { "ax220", gAxUnownT,},
+    [220] = { "ax221", gAxUnownU,},
+    [221] = { "ax222", gAxUnownV,},
+    [222] = { "ax223", gAxUnownW,},
+    [223] = { "ax224", gAxUnownX,},
+    [224] = { "ax225", gAxUnownY,},
+    [225] = { "ax226", gAxUnownZ,},
+    [226] = { "ax227", gAxWobbuffet,},
+    [227] = { "ax228", gAxGirafarig,},
+    [228] = { "ax229", gAxPineco,},
+    [229] = { "ax230", gAxForretress,},
+    [230] = { "ax231", gAxDunsparce,},
+    [231] = { "ax232", gAxGligar,},
+    [232] = { "ax233", gAxSteelix,},
+    [233] = { "ax234", gAxSnubbull,},
+    [234] = { "ax235", gAxGranbull,},
+    [235] = { "ax236", gAxQwilfish,},
+    [236] = { "ax237", gAxScizor,},
+    [237] = { "ax238", gAxShuckle,},
+    [238] = { "ax239", gAxHeracross,},
+    [239] = { "ax240", gAxSneasel,},
+    [240] = { "ax241", gAxTeddiursa,},
+    [241] = { "ax242", gAxUrsaring,},
+    [242] = { "ax243", gAxSlugma,},
+    [243] = { "ax244", gAxMagcargo,},
+    [244] = { "ax245", gAxSwinub,},
+    [245] = { "ax246", gAxPiloswine,},
+    [246] = { "ax247", gAxCorsola,},
+    [247] = { "ax248", gAxRemoraid,},
+    [248] = { "ax249", gAxOctillery,},
+    [249] = { "ax250", gAxDelibird,},
+    [250] = { "ax251", gAxMantine,},
+    [251] = { "ax252", gAxSkarmory,},
+    [252] = { "ax253", gAxHoundour,},
+    [253] = { "ax254", gAxHoundoom,},
+    [254] = { "ax255", gAxKingdra,},
+    [255] = { "ax256", gAxPhanpy,},
+    [256] = { "ax257", gAxDonphan,},
+    [257] = { "ax258", gAxPorygon2,},
+    [258] = { "ax259", gAxStantler,},
+    [259] = { "ax260", gAxSmeargle,},
+    [260] = { "ax261", gAxTyrogue,},
+    [261] = { "ax262", gAxHitmontop,},
+    [262] = { "ax263", gAxSmoochum,},
+    [263] = { "ax264", gAxElekid,},
+    [264] = { "ax265", gAxMagby,},
+    [265] = { "ax266", gAxMiltank,},
+    [266] = { "ax267", gAxBlissey,},
+    [267] = { "ax268", gAxRaikou,},
+    [268] = { "ax269", gAxEntei,},
+    [269] = { "ax270", gAxSuicune,},
+    [270] = { "ax271", gAxLarvitar,},
+    [271] = { "ax272", gAxPupitar,},
+    [272] = { "ax273", gAxTyranitar,},
+    [273] = { "ax274", gAxLugia,},
+    [274] = { "ax275", gAxHoOh,},
+    [275] = { "ax276", gAxCelebi,},
+    [276] = { "ax277", gAxTreecko,},
+    [277] = { "ax278", gAxGrovyle,},
+    [278] = { "ax279", gAxSceptile,},
+    [279] = { "ax280", gAxTorchic,},
+    [280] = { "ax281", gAxCombusken,},
+    [281] = { "ax282", gAxBlaziken,},
+    [282] = { "ax283", gAxMudkip,},
+    [283] = { "ax284", gAxMarshtomp,},
+    [284] = { "ax285", gAxSwampert,},
+    [285] = { "ax286", gAxPoochyena,},
+    [286] = { "ax287", gAxMightyena,},
+    [287] = { "ax288", gAxZigzagoon,},
+    [288] = { "ax289", gAxLinoone,},
+    [289] = { "ax290", gAxWurmple,},
+    [290] = { "ax291", gAxSilcoon,},
+    [291] = { "ax292", gAxBeautifly,},
+    [292] = { "ax293", gAxCascoon,},
+    [293] = { "ax294", gAxDustox,},
+    [294] = { "ax295", gAxLotad,},
+    [295] = { "ax296", gAxLombre,},
+    [296] = { "ax297", gAxLudicolo,},
+    [297] = { "ax298", gAxSeedot,},
+    [298] = { "ax299", gAxNuzleaf,},
+    [299] = { "ax300", gAxShiftry,},
+    [300] = { "ax301", gAxTaillow,},
+    [301] = { "ax302", gAxSwellow,},
+    [302] = { "ax303", gAxWingull,},
+    [303] = { "ax304", gAxPelipper,},
+    [304] = { "ax305", gAxRalts,},
+    [305] = { "ax306", gAxKirlia,},
+    [306] = { "ax307", gAxGardevoir,},
+    [307] = { "ax308", gAxSurskit,},
+    [308] = { "ax309", gAxMasquerain,},
+    [309] = { "ax310", gAxShroomish,},
+    [310] = { "ax311", gAxBreloom,},
+    [311] = { "ax312", gAxSlakoth,},
+    [312] = { "ax313", gAxVigoroth,},
+    [313] = { "ax314", gAxSlaking,},
+    [314] = { "ax315", gAxNincada,},
+    [315] = { "ax316", gAxNinjask,},
+    [316] = { "ax317", gAxShedinja,},
+    [317] = { "ax318", gAxWhismur,},
+    [318] = { "ax319", gAxLoudred,},
+    [319] = { "ax320", gAxExploud,},
+    [320] = { "ax321", gAxMakuhita,},
+    [321] = { "ax322", gAxHariyama,},
+    [322] = { "ax323", gAxAzurill,},
+    [323] = { "ax324", gAxNosepass,},
+    [324] = { "ax325", gAxSkitty,},
+    [325] = { "ax326", gAxDelcatty,},
+    [326] = { "ax327", gAxSableye,},
+    [327] = { "ax328", gAxMawile,},
+    [328] = { "ax329", gAxAron,},
+    [329] = { "ax330", gAxLairon,},
+    [330] = { "ax331", gAxAggron,},
+    [331] = { "ax332", gAxMeditite,},
+    [332] = { "ax333", gAxMedicham,},
+    [333] = { "ax334", gAxElectrike,},
+    [334] = { "ax335", gAxManectric,},
+    [335] = { "ax336", gAxPlusle,},
+    [336] = { "ax337", gAxMinun,},
+    [337] = { "ax338", gAxVolbeat,},
+    [338] = { "ax339", gAxIllumise,},
+    [339] = { "ax340", gAxRoselia,},
+    [340] = { "ax341", gAxGulpin,},
+    [341] = { "ax342", gAxSwalot,},
+    [342] = { "ax343", gAxCarvanha,},
+    [343] = { "ax344", gAxSharpedo,},
+    [344] = { "ax345", gAxWailmer,},
+    [345] = { "ax346", gAxWailord,},
+    [346] = { "ax347", gAxNumel,},
+    [347] = { "ax348", gAxCamerupt,},
+    [348] = { "ax349", gAxTorkoal,},
+    [349] = { "ax350", gAxSpoink,},
+    [350] = { "ax351", gAxGrumpig,},
+    [351] = { "ax352", gAxSpinda,},
+    [352] = { "ax353", gAxTrapinch,},
+    [353] = { "ax354", gAxVibrava,},
+    [354] = { "ax355", gAxFlygon,},
+    [355] = { "ax356", gAxCacnea,},
+    [356] = { "ax357", gAxCacturne,},
+    [357] = { "ax358", gAxSwablu,},
+    [358] = { "ax359", gAxAltaria,},
+    [359] = { "ax360", gAxZangoose,},
+    [360] = { "ax361", gAxSeviper,},
+    [361] = { "ax362", gAxLunatone,},
+    [362] = { "ax363", gAxSolrock,},
+    [363] = { "ax364", gAxBarboach,},
+    [364] = { "ax365", gAxWhiscash,},
+    [365] = { "ax366", gAxCorphish,},
+    [366] = { "ax367", gAxCrawdaunt,},
+    [367] = { "ax368", gAxBaltoy,},
+    [368] = { "ax369", gAxClaydol,},
+    [369] = { "ax370", gAxLileep,},
+    [370] = { "ax371", gAxCradily,},
+    [371] = { "ax372", gAxAnorith,},
+    [372] = { "ax373", gAxArmaldo,},
+    [373] = { "ax374", gAxFeebas,},
+    [374] = { "ax375", gAxMilotic,},
+    [375] = { "ax376", gAxCastform,},
+    [376] = { "ax377", gAxCastformSnowy,},
+    [377] = { "ax378", gAxCastformSunny,},
+    [378] = { "ax379", gAxCastformRainy,},
+    [379] = { "ax380", gAxKecleon,},
+    [380] = { "ax381", gAxShuppet,},
+    [381] = { "ax382", gAxBanette,},
+    [382] = { "ax383", gAxDuskull,},
+    [383] = { "ax384", gAxDusclops,},
+    [384] = { "ax385", gAxTropius,},
+    [385] = { "ax386", gAxChimecho,},
+    [386] = { "ax387", gAxAbsol,},
+    [387] = { "ax388", gAxWynaut,},
+    [388] = { "ax389", gAxSnorunt,},
+    [389] = { "ax390", gAxGlalie,},
+    [390] = { "ax391", gAxSpheal,},
+    [391] = { "ax392", gAxSealeo,},
+    [392] = { "ax393", gAxWalrein,},
+    [393] = { "ax394", gAxClamperl,},
+    [394] = { "ax395", gAxHuntail,},
+    [395] = { "ax396", gAxGorebyss,},
+    [396] = { "ax397", gAxRelicanth,},
+    [397] = { "ax398", gAxLuvdisc,},
+    [398] = { "ax399", gAxBagon,},
+    [399] = { "ax400", gAxShelgon,},
+    [400] = { "ax401", gAxSalamence,},
+    [401] = { "ax402", gAxBeldum,},
+    [402] = { "ax403", gAxMetang,},
+    [403] = { "ax404", gAxMetagross,},
+    [404] = { "ax405", gAxRegirock,},
+    [405] = { "ax406", gAxRegice,},
+    [406] = { "ax407", gAxRegisteel,},
+    [407] = { "ax408", gAxLatias,},
+    [408] = { "ax409", gAxLatios,},
+    [409] = { "ax410", gAxKyogre,},
+    [410] = { "ax411", gAxGroudon,},
+    [411] = { "ax412", gAxRayquaza,},
+    [412] = { "ax413", gAxJirachi,},
+    [413] = { "ax414", gAxDeoxysNormal,},
+    [414] = { "ax415", gAxUnownEmark,},
+    [415] = { "ax416", gAxUnownQmark,},
+    [416] = { "ax417", gAxDeoxysAttack,},
+    [417] = { "ax418", gAxDeoxysDefense,},
+    [418] = { "ax419", gAxDeoxysSpeed,},
+    [419] = { "ax420", gAxMunchlax,},
+    [420] = { "ax421", gAxDecoy,},
+    [421] = { "ax422", gAxStatue,},
+    [422] = { "ax423", gAxRayquazaCutscene,},
+    [423] = { "kao001", gKaoBulbasaur,},
+    [424] = { "kao004", gKaoCharmander,},
+    [425] = { "kao006", gKaoCharizard,},
+    [426] = { "kao007", gKaoSquirtle,},
+    [427] = { "kao009", gKaoBlastoise,},
+    [428] = { "kao010", gKaoCaterpie,},
+    [429] = { "kao011", gKaoMetapod,},
+    [430] = { "kao012", gKaoButterfree,},
+    [431] = { "kao023", gKaoEkans,},
+    [432] = { "kao025", gKaoPikachu,},
+    [433] = { "kao038", gKaoNinetales,},
+    [434] = { "kao040", gKaoWigglytuff,},
+    [435] = { "kao050", gKaoDiglett,},
+    [436] = { "kao051", gKaoDugtrio,},
+    [437] = { "kao052", gKaoMeowth,},
+    [438] = { "kao053", gKaoPersian,},
+    [439] = { "kao054", gKaoPsyduck,},
+    [440] = { "kao056", gKaoMankey,},
+    [441] = { "kao065", gKaoAlakazam,},
+    [442] = { "kao066", gKaoMachop,},
+    [443] = { "kao069", gKaoBellsprout,},
+    [444] = { "kao076", gKaoGolem,},
+    [445] = { "kao081", gKaoMagnemite,},
+    [446] = { "kao094", gKaoGengar,},
+    [447] = { "kao104", gKaoCubone,},
+    [448] = { "kao115", gKaoKangaskhan,},
+    [449] = { "kao133", gKaoEevee,},
+    [450] = { "kao144", gKaoArticuno,},
+    [451] = { "kao145", gKaoZapdos,},
+    [452] = { "kao146", gKaoMoltres,},
+    [453] = { "kao150", gKaoMewtwo,},
+    [454] = { "kao152", gKaoChikorita,},
+    [455] = { "kao155", gKaoCyndaquil,},
+    [456] = { "kao158", gKaoTotodile,},
+    [457] = { "kao178", gKaoXatu,},
+    [458] = { "kao189", gKaoJumpluff,},
+    [459] = { "kao227", gKaoWobbuffet,},
+    [460] = { "kao234", gKaoSnubbull,},
+    [461] = { "kao235", gKaoGranbull,},
+    [462] = { "kao249", gKaoOctillery,},
+    [463] = { "kao252", gKaoSkarmory,},
+    [464] = { "kao260", gKaoSmeargle,},
+    [465] = { "kao268", gKaoRaikou,},
+    [466] = { "kao269", gKaoEntei,},
+    [467] = { "kao270", gKaoSuicune,},
+    [468] = { "kao273", gKaoTyranitar,},
+    [469] = { "kao274", gKaoLugia,},
+    [470] = { "kao275", gKaoHoOh,},
+    [471] = { "kao277", gKaoTreecko,},
+    [472] = { "kao280", gKaoTorchic,},
+    [473] = { "kao283", gKaoMudkip,},
+    [474] = { "kao296", gKaoLombre,},
+    [475] = { "kao300", gKaoShiftry,},
+    [476] = { "kao304", gKaoPelipper,},
+    [477] = { "kao307", gKaoGardevoir,},
+    [478] = { "kao321", gKaoMakuhita,},
+    [479] = { "kao325", gKaoSkitty,},
+    [480] = { "kao333", gKaoMedicham,},
+    [481] = { "kao341", gKaoGulpin,},
+    [482] = { "kao352", gKaoSpinda,},
+    [483] = { "kao365", gKaoWhiscash,},
+    [484] = { "kao380", gKaoKecleon,},
+    [485] = { "kao387", gKaoAbsol,},
+    [486] = { "kao388", gKaoWynaut,},
+    [487] = { "kao408", gKaoLatias,},
+    [488] = { "kao409", gKaoLatios,},
+    [489] = { "kao410", gKaoKyogre,},
+    [490] = { "kao411", gKaoGroudon,},
+    [491] = { "kao412", gKaoRayquaza,},
+    [492] = { "kao413", gKaoJirachi,},
+    [493] = { "kao414", gKaoDeoxysNormal,},
+    [494] = { "kao420", gKaoMunchlax,},
+    [495] = { "kao423", gKaoRayquazaCutscene,},
+    [496] = { "palet", gPaletFile,},
 };
 
 UNUSED ALIGNED(4) static const char sPksDir3[] = "pksdir0";
