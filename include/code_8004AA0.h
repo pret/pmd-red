@@ -3,6 +3,8 @@
 
 #include "file_system.h"
 #include "structs/rgb.h"
+#include "structs/axdata.h"
+#include "structs/str_position.h"
 
 // size: 0x18
 typedef struct unkStruct_202EE8C
@@ -18,16 +20,41 @@ typedef struct unkStruct_202EE8C
 
 extern unkStruct_202EE8C gUnknown_202EE8C[32];
 
+struct UnkStruct_4014Ptr
+{
+    u8 fill0[4];
+    DungeonPos unk4;
+    u8 fill8[0x20-8];
+};
+
+struct UnkStruct_4014Ptr2
+{
+    struct UnkStruct_4014Ptr array[0];
+};
+
+struct UnkStruct_4018
+{
+    u8 unk4018;
+    u8 padding[0x14 - 0x2];
+    axdata unk14;
+};
+
 // size: 0x4DD8
 struct UnkBgStruct
 {
     OpenedFile *unk0[5];
-    u8 padding[0x4C4C - 0x14];
+    u8 padding[0x4014 - 0x14];
+    struct UnkStruct_4014Ptr2 *unk4014;
+    struct UnkStruct_4018 unk4018[32];
+    u8 pad4A18[0x4A30-0x4A18];
+    axdata unk4A30[8];
+    axdata unk4C10;
     unkStruct_202EE8C unk4C4C[16];
     u32 unk4DCC;
     u32 unk4DD0;
-    /* 0x4DD4 */ s16 xoffset;
-    /* 0x4DD6 */ s16 yoffset;
+    DungeonPos unk4DD4;
+    s16 unk4DD8;
+    s16 unk4DDA;
 };
 
 extern struct UnkBgStruct *gUnknown_203B0E4;

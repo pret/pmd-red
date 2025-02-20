@@ -30,8 +30,8 @@ extern void sub_8010F28();
 
 void sub_801169C(void)
 {
-    SetBG2RegOffsets(gUnknown_203B0E4->xoffset, gUnknown_203B0E4->yoffset);
-    SetBG3RegOffsets(gUnknown_203B0E4->xoffset, gUnknown_203B0E4->yoffset);
+    SetBG2RegOffsets(gUnknown_203B0E4->unk4DD4.x, gUnknown_203B0E4->unk4DD4.y);
+    SetBG3RegOffsets(gUnknown_203B0E4->unk4DD4.x, gUnknown_203B0E4->unk4DD4.y);
     sub_8010F28();
     sub_8004AF0(sub_80111C4(), gUnknown_203B0E4->unk4C4C, 0xB0, 16, gUnknown_203B0E4->unk4DCC, NULL);
     sub_8005838(NULL, 0);
