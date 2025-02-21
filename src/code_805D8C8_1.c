@@ -111,7 +111,7 @@ void sub_806752C(ActionContainer *a0);
 bool8 sub_8061A38(ActionContainer *a0, bool8 a1);
 void sub_8063A70(ActionContainer *a0, bool8 a1);
 void sub_8063CF0(ActionContainer *a0, bool8 a1);
-void sub_8067768(UNUSED ActionContainer *a0);
+void sub_8067768(ActionContainer *a0);
 void ShowTacticsMenu(ActionContainer *a0);
 void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
@@ -1675,14 +1675,6 @@ extern bool8 sub_8044F3C(s32 param_1);
 extern s32 gUnknown_202EE6C;
 extern const u8 gUnknown_8106B50[];
 
-typedef struct UnkTextStruct3 {
-    UnkTextStruct2 a0[4];
-    // Something ugly, so that sub_805FD74 could match weird compiler memcpy/stack initialization
-    #ifndef NONMATCHING
-    u8 fakeMatch[0];
-    #endif // NONMATCHING
-} UnkTextStruct3;
-
 extern void sub_803ECB4(UnkTextStruct3 *a0, u8 a1);
 static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, UnkTextStruct2_sub2 *a5);
 
@@ -1692,8 +1684,8 @@ static inline void sub_805FC30_SetUpTxtStruct(UnkTextStruct3 *src)
     memset(src, 0, sizeof(*src));
     src->a0[0].unk4 = 3;
     src->a0[1].unk4 = 3;
-    src->a0[1].unk8.unk0.separate.unk0 = 0x16;
-    src->a0[1].unk8.unk0.separate.unk2 = 4;
+    src->a0[1].pos.x = 0x16;
+    src->a0[1].pos.y = 4;
     src->a0[1].unkC = 6;
     src->a0[1].unkE = 4;
     src->a0[1].unk10 = 4;
@@ -1724,7 +1716,7 @@ void sub_805FC30(UnkTextStruct3 *a0, s32 a1)
 
     sub_801317C(&gUnknown_202EE10.unk28);
 
-    sp.a0[1].unk8.unk0.separate.unk0 = a1;
+    sp.a0[1].pos.x = a1;
     sp.a0[1].unkC = 28 - a1;
     sp.a0[1].unkE = sp.a0[1].unk10 = sub_80095E4(gUnknown_202EE10.unk1C, 0);
     sub_803ECB4(&sp, 0);
@@ -1792,7 +1784,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
             [0] =
             {
                 .unk4 = 6,
-                .unk8 = {2, 2},
+                .pos = {2, 2},
                 .unkC = 0x12,
                 .unkE = 0x10,
                 .unk10 = 0x10,
@@ -2097,11 +2089,11 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextS
 
     if (a2) {
         gUnknown_202EE10.unkC += 0x40;
-        a4->a0[0].unk8.unk0.separate.unk0 = 0xA;
+        a4->a0[0].pos.x = 0xA;
         a4->a0[1] = var_94;
     }
     else {
-        a4->a0[0].unk8.unk0.separate.unk0 = 2;
+        a4->a0[0].pos.x = 2;
         a4->a0[1] = a4->a0[3];
     }
 
@@ -2531,8 +2523,8 @@ bool8 sub_8060E38(Entity *a0)
     UnkTextStruct3 var_84 = {0};
 
     var_84.a0[0].unk4 = 6;
-    var_84.a0[0].unk8.unk0.separate.unk0 = 2;
-    var_84.a0[0].unk8.unk0.separate.unk2 = 2;
+    var_84.a0[0].pos.x = 2;
+    var_84.a0[0].pos.y = 2;
     var_84.a0[0].unkC = 0xE;
     var_84.a0[0].unkE = 0x10;
     var_84.a0[0].unk10 = 0x10;
@@ -2550,7 +2542,7 @@ bool8 sub_8060E38(Entity *a0)
 
     if (!gDungeon->unk644.unk17) {
         var_84.a0[0].unk4 = 3;
-        var_84.a0[0].unk8.unk0.arr[1]++;
+        var_84.a0[0].pos.y++;
     }
 
     while (1) {
@@ -2884,8 +2876,8 @@ static inline void SetTxtStruct(UnkTextStruct3 *sp)
 {
     memset(sp, 0, sizeof(*sp));
     sp->a0[0].unk4 = 6;
-    sp->a0[0].unk8.unk0.separate.unk0 = 2;
-    sp->a0[0].unk8.unk0.separate.unk2 = 2;
+    sp->a0[0].pos.x = 2;
+    sp->a0[0].pos.y = 2;
     sp->a0[0].unkC = 0x12;
     sp->a0[0].unkE = 0xE;
     sp->a0[0].unk10 = 0x12;

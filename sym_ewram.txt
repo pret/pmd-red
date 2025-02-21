@@ -248,13 +248,7 @@ gUnknown_202F2FC: /* 202F2FC (sub_8065FB4 - sub_8066358) */
 gUnknown_202F300: /* 202F300 (sub_8066434) */
 	.space 0x8
 
-gUnknown_202F308: /* 202F308 (sub_8067A80 - sub_806806C) */
-	.space 0x4
-gUnknown_202F30C: /* 202F30C (sub_8067A80 - sub_8067A80) */
-	.space 0x4
-gUnknown_202F310: /* 202F310 (sub_8067A80 - sub_8068310) */
-	.space 0x4
-
+    .include "src/code_8066D04.o"
     .include "src/dungeon_movement.o"
     .include "src/code_80718D8.o"
 

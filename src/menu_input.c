@@ -386,7 +386,7 @@ void sub_8012EBC(MenuStruct *param_1)
     const u32 *colorArray;
     s32 counter;
     s32 index;
-    UnkTextStruct2 textStack[4];
+    UnkTextStruct3 textStack;
     u8 buffer[256];
     UnkTextStruct1 *ptr_text;
     UnkTextStruct2 *ptr_text2;
@@ -397,8 +397,8 @@ void sub_8012EBC(MenuStruct *param_1)
         ptr_text = &gUnknown_2027370[index];
 
         if (ptr_text->unkC == 6) {
-            ptr_text2 = &textStack[index];
-            RestoreUnkTextStruct_8006518(textStack);
+            ptr_text2 = &textStack.a0[index];
+            RestoreUnkTextStruct_8006518(&textStack);
             x = sub_8008ED0(param_1->unk0);
             PrintFormattedStringOnWindow(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }
@@ -1152,7 +1152,7 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
 void sub_8013E54(void)
 {
     UnkTextStruct1 *ptr = &gUnknown_2027370[0];
-    SpriteOAM SStack_18 = {0};    
+    SpriteOAM SStack_18 = {0};
 
     SpriteSetAffine1(&SStack_18, 0);
     SpriteSetAffine2(&SStack_18, 0);
@@ -1174,7 +1174,7 @@ void sub_8013E54(void)
 void sub_8013F84(void)
 {
     UnkTextStruct1 *ptr = &gUnknown_2027370[0];
-    SpriteOAM SStack_18 = {0};    
+    SpriteOAM SStack_18 = {0};
 
     SpriteSetAffine1(&SStack_18, 0);
     SpriteSetAffine2(&SStack_18, 0);
@@ -1193,13 +1193,13 @@ void sub_8013F84(void)
     AddSprite(&SStack_18,0x100,0,0x0);
 }
 
-void sub_80140B4(UnkTextStruct2 *a0)
+void sub_80140B4(UnkTextStruct3 *a0)
 {
     s32 i;
 
     for(i = 0; i < 4; i++)
     {
-        a0[i] = gUnknown_80D47C8[i];
+        a0->a0[i] = gUnknown_80D47C8[i];
     }
 }
 

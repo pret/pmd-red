@@ -525,7 +525,7 @@ void sub_802A050(void)
         case 2:
             sub_8031E10();
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(sUnknown_203B2C4->unk3BC, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2C4->unk3BC, TRUE, TRUE);
             SetThankYouMailMenuState(0x1B);
             break;
         case 1:
@@ -571,7 +571,7 @@ void sub_802A0C8(void)
     case 4:
         sUnknown_203B2C4->fallbackState = 0x10;
         sUnknown_203B2C4->mailIndex = sub_80307EC();
-        RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk3BC);
+        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         sub_8030D40(sUnknown_203B2C4->mailIndex,0);
@@ -607,7 +607,7 @@ void sub_802A174(void)
         break;
       case INFO_ACTION:
         sUnknown_203B2C4->fallbackState = 0x2b;
-        RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk3BC);
+        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         sub_8030D40(sUnknown_203B2C4->mailIndex,0);
@@ -615,7 +615,7 @@ void sub_802A174(void)
         break;
       case CANCEL_ACTION:
       case 0xD:
-        sub_8035CC0(sUnknown_203B2C4->unk35C,2);
+        sub_8035CC0(&sUnknown_203B2C4->unk35C,2);
         sub_8030810(1);
         SetThankYouMailMenuState(0x10);
       default:
@@ -631,7 +631,7 @@ void sub_802A230(void)
       case 3:
         sub_8030DE4();
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sUnknown_203B2C4->unk3BC, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2C4->unk3BC, TRUE, TRUE);
         sub_803092C();
         if (sUnknown_203B2C4->fallbackState == 0x2b) {
             sub_8035CF4(sUnknown_203B2C4->unk21C, 3, TRUE);
@@ -666,7 +666,7 @@ void sub_802A28C(void)
     case 4:
         sUnknown_203B2C4->fallbackState = 0x13;
         sUnknown_203B2C4->unk41C.id = sub_801CB24();
-        RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk3BC);
+        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         sub_801B3C0(&sUnknown_203B2C4->unk41C);
@@ -683,7 +683,7 @@ void sub_802A33C(void)
      case 3:
         sub_801B450();
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sUnknown_203B2C4->unk3BC, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2C4->unk3BC, TRUE, TRUE);
         sub_801CB5C(TRUE);
         if (sUnknown_203B2C4->fallbackState == 0x2b) {
             sub_8035CF4(sUnknown_203B2C4->unk21C,3,TRUE);
@@ -717,7 +717,7 @@ void sub_802A39C(void)
             break;
       case INFO_ACTION:
             sUnknown_203B2C4->fallbackState = 0x2b;
-            RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk3BC);
+            RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
             ResetUnusedInputStruct();
             xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             sub_801B3C0(&sUnknown_203B2C4->unk41C);
@@ -725,7 +725,7 @@ void sub_802A39C(void)
             break;
       case CANCEL_ACTION:
       case 0xD:
-            sub_8035CC0(sUnknown_203B2C4->unk35C, 3);
+            sub_8035CC0(&sUnknown_203B2C4->unk35C, 3);
             sub_801CCD8();
             SetThankYouMailMenuState(0x13);
       default:
@@ -832,7 +832,7 @@ void HandleThankYouMailPasswordMenu(void)
   case 2:
     sub_80155F0();
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2C4->unk3BC, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2C4->unk3BC, TRUE, TRUE);
     SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
     break;
   }
@@ -1273,8 +1273,8 @@ void UpdateThankYouMailText(void)
         sub_80306A8(WONDER_MAIL_TYPE_THANK_YOU,0,0,6);
         break;
     case 0x11:
-        RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk35C);
-        SetMenuItems(sUnknown_203B2C4->unk21C,sUnknown_203B2C4->unk35C,3,&gUnknown_80DED60,gUnknown_80DED78,TRUE,0,FALSE);
+        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk35C);
+        SetMenuItems(sUnknown_203B2C4->unk21C,&sUnknown_203B2C4->unk35C,3,&gUnknown_80DED60,gUnknown_80DED78,TRUE,0,FALSE);
         sub_803092C();
         sub_8035CF4(sUnknown_203B2C4->unk21C,3,TRUE);
         break;
@@ -1284,13 +1284,13 @@ void UpdateThankYouMailText(void)
         ResetUnusedInputStruct();
         xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         {
-        UnkTextStruct2_sub local_x = {3, 2};
+        DungeonPos local_x = {3, 2};
         sub_801C8C4(0, 1, &local_x, 9);
         }
         break;
     case 0x14:
-        RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk35C);
-        SetMenuItems(sUnknown_203B2C4->unk21C,sUnknown_203B2C4->unk35C,3,&gUnknown_80DED48,gUnknown_80DED78,TRUE,0,FALSE);
+        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk35C);
+        SetMenuItems(sUnknown_203B2C4->unk21C,&sUnknown_203B2C4->unk35C,3,&gUnknown_80DED48,gUnknown_80DED78,TRUE,0,FALSE);
         sub_801CCD8();
         sub_8035CF4(sUnknown_203B2C4->unk21C,3,TRUE);
         break;
@@ -1336,13 +1336,13 @@ void UpdateThankYouMailText(void)
         CreateDialogueBoxAndPortrait(gUnknown_80DF380,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case PROCESS_THANK_YOU_PASSWORD:
-        RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk3BC);
+        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         sub_80151C0(4,sUnknown_203B2C4->passwordBuffer);
         break;
     case 0x1a:
-        RestoreUnkTextStruct_8006518(sUnknown_203B2C4->unk3BC);
+        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         sub_8031D70(sUnknown_203B2C4->mailIndex,0);

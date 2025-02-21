@@ -15,7 +15,7 @@ struct unkStruct_203B244
     /* 0x4B4 */ struct_Sub80095E4_2 unk4B4;
 };
 
-bool8 sub_801C8C4(s32, s32, UnkTextStruct2_sub *, u32);
+bool8 sub_801C8C4(s32, s32, DungeonPos *, u32);
 u32 sub_801CA08(bool8);
 u8 sub_801CB24(void);
 void sub_801CB5C(bool8);

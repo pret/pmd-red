@@ -176,7 +176,7 @@ void sub_80365AC(void)
         sTradeItemsMenu->fallbackState = TRADE_ITEMS_SEND_ITEM_SELECTION;
         sTradeItemsMenu->itemToSend.id = sub_801CB24();
         sTradeItemsMenu->itemToSend.quantity = 1;
-        RestoreUnkTextStruct_8006518(sTradeItemsMenu->unk1E4);
+        RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         sub_801B3C0(&sTradeItemsMenu->itemToSend);
@@ -200,7 +200,7 @@ void sub_8036674(void)
         break;
     case 4: // Info
         sTradeItemsMenu->fallbackState = 0x13;
-        RestoreUnkTextStruct_8006518(sTradeItemsMenu->unk1E4);
+        RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
         sub_801B3C0(&sTradeItemsMenu->itemToSend);
@@ -209,7 +209,7 @@ void sub_8036674(void)
     case 7:
     case 0:
         // Cancel
-        sub_8035CC0(sTradeItemsMenu->unk184, 3);
+        sub_8035CC0(&sTradeItemsMenu->unk184, 3);
         sub_801CCD8();
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_SELECTION);
         break;
@@ -224,7 +224,7 @@ void sub_8036728(void)
       case 3:
         sub_801B450();
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sTradeItemsMenu->unk1E4, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(&sTradeItemsMenu->unk1E4, TRUE, TRUE);
         sub_801CB5C(TRUE);
         if (sTradeItemsMenu->fallbackState == 0x13) {
             sub_8035CF4(sTradeItemsMenu->unk44, 3, TRUE);
@@ -252,7 +252,7 @@ void sub_8036788(void)
         break;
     case 2:
         // If you back out of the # selection
-        sub_8035CC0(sTradeItemsMenu->unk184, 2);
+        sub_8035CC0(&sTradeItemsMenu->unk184, 2);
         sub_801CCD8();
         sub_8035CF4(sTradeItemsMenu->unk44, 3, TRUE);
         SetTradeItemMenu(TRADE_ITEMS_SEND_ITEM_POPUP_MENU);
@@ -499,14 +499,14 @@ void sub_8036B28(void)
             ResetUnusedInputStruct();
             xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
             {
-            UnkTextStruct2_sub local_10 = {3, 2};
+            DungeonPos local_10 = {3, 2};
             sub_801C8C4(0,1,&local_10,9);
             }
         }
         break;
     case TRADE_ITEMS_SEND_ITEM_POPUP_MENU:
-        RestoreUnkTextStruct_8006518(sTradeItemsMenu->unk184);
-        SetMenuItems(sTradeItemsMenu->unk44,sTradeItemsMenu->unk184,3,&sUnknown_80E60EC,
+        RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk184);
+        SetMenuItems(sTradeItemsMenu->unk44,&sTradeItemsMenu->unk184,3,&sUnknown_80E60EC,
                     sUnknown_80E6104,TRUE,0,FALSE);
         sub_801CCD8();
         sub_8035CF4(sTradeItemsMenu->unk44,3,TRUE);
@@ -626,11 +626,11 @@ void sub_8036ECC(u32 index, u32 r1)
     sTradeItemsMenu->unk14.unk1C = 0x2c;
     sTradeItemsMenu->unk14.unk20 = 0x12;
     sTradeItemsMenu->unk14.unk14 = index;
-    sTradeItemsMenu->unk14.unk18 = &sTradeItemsMenu->unk184[index];
+    sTradeItemsMenu->unk14.unk18 = &sTradeItemsMenu->unk184.a0[index];
     sub_8013AA0(&sTradeItemsMenu->unk14);
-    sTradeItemsMenu->unk184[index] = sUnknown_80E6174;
+    sTradeItemsMenu->unk184.a0[index] = sUnknown_80E6174;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sTradeItemsMenu->unk184, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sTradeItemsMenu->unk184, TRUE, TRUE);
 }
 
 void sub_8036F30(void)
@@ -647,7 +647,7 @@ void sub_8036F30(void)
 
 void sub_8036F74(void)
 {
-  RestoreUnkTextStruct_8006518(sTradeItemsMenu->unk184);
+  RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk184);
   sub_8036ECC(2, gTeamInventoryRef->teamStorage[sTradeItemsMenu->itemToSend.id]);
   sub_801CCD8();
   sub_8035CF4(sTradeItemsMenu->unk44, 3, FALSE);

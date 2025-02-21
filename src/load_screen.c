@@ -29,7 +29,7 @@ struct LoadScreen
     // size: 0x27c
     u32 currMenu;
     MenuStruct unk4[4];
-    UnkTextStruct2 unk144[4];
+    UnkTextStruct3 unk144;
     /* 0x1A4 */ u8 formattedTeamName[0x24];
     /* 0x1C8 */ u8 formattedPlayerName[0x24];
     /* 0x1EC */ u8 formattedLocation[0x24];
@@ -168,29 +168,29 @@ void CreateLoadScreen(u32 currMenu)
   }
   gLoadScreen->currMenu = currMenu;
   for(index = 0; index < 4; index++){
-    gLoadScreen->unk144[index] = gUnknown_80E75F8;
+    gLoadScreen->unk144.a0[index] = gUnknown_80E75F8;
   }
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(gLoadScreen->unk144, TRUE, TRUE);
-  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,FALSE,6,FALSE);
+  xxx_call_save_unk_text_struct_800641C(&gLoadScreen->unk144, TRUE, TRUE);
+  SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,FALSE,6,FALSE);
   switch(gLoadScreen->currMenu){
     case MENU_CONTINUE:
         if (IsQuickSave())
-            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,FALSE,6,FALSE);
+            SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,FALSE,6,FALSE);
         else
-            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,FALSE,6,FALSE);
+            SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,FALSE,6,FALSE);
         break;
     case MENU_AWAITING_RESCUE:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,FALSE,6,FALSE);
+        SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,FALSE,6,FALSE);
         break;
     case MENU_DELETE_SAVE_PROMPT:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,FALSE,6,FALSE);
+        SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,FALSE,6,FALSE);
         break;
     case MENU_DELETE_SAVE_CONFIRM:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,FALSE,6,FALSE);
+        SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,FALSE,6,FALSE);
         break;
   }
-  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,TRUE,2,FALSE);
+  SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,TRUE,2,FALSE);
   sub_8035CF4(gLoadScreen->unk4,0,0);
   sub_8035CF4(gLoadScreen->unk4,1,0);
   sub_8035CF4(gLoadScreen->unk4,2,1);

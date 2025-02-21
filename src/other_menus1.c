@@ -54,11 +54,11 @@ void sub_8036FDC(s32 param_1)
     }
 
     for (index2 = 0; index2 < 4; index2++)
-        sUnknown_203B35C->unk15C[index2] = sUnknown_80E653C;
+        sUnknown_203B35C->unk15C.a0[index2] = sUnknown_80E653C;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B35C->unk15C, TRUE, TRUE);
-    SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6CD0, sUnknown_80E6CE8, FALSE, 6, FALSE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B35C->unk15C, TRUE, TRUE);
+    SetMenuItems(sUnknown_203B35C->unk1C, &sUnknown_203B35C->unk15C, 0, &sUnknown_80E6CD0, sUnknown_80E6CE8, FALSE, 6, FALSE);
     sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
     sub_80376CC();
 }
@@ -128,17 +128,17 @@ static void sub_80371B8(void)
     if (sUnknown_203B35C->unk0 < 2 && sUnknown_203B35C->linkStatus == COMMS_GOOD) {
         if (sub_8037C10(FALSE) != 0) {
             sub_80376CC();
-            sub_8035CC0(sUnknown_203B35C->unk15C, 0);
+            sub_8035CC0(&sUnknown_203B35C->unk15C, 0);
             // Success!
             // The item exchange with your friend
             // went through successfully
-            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6C50, sUnknown_80E6C68, FALSE, 6, FALSE);
+            SetMenuItems(sUnknown_203B35C->unk1C, &sUnknown_203B35C->unk15C, 0, &sUnknown_80E6C50, sUnknown_80E6C68, FALSE, 6, FALSE);
             sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
         }
     }
     else {
         sub_80376CC();
-        sub_8035CC0(sUnknown_203B35C->unk15C, 0);
+        sub_8035CC0(&sUnknown_203B35C->unk15C, 0);
 
         switch (sUnknown_203B35C->linkStatus) {
             case 0:
@@ -194,7 +194,7 @@ static void sub_80371B8(void)
                 break;
         }
 
-        SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, puVar5, MenuItems, FALSE, 6, FALSE);
+        SetMenuItems(sUnknown_203B35C->unk1C, &sUnknown_203B35C->unk15C, 0, puVar5, MenuItems, FALSE, 6, FALSE);
         sub_8035CF4(sUnknown_203B35C->unk1C, 0, TRUE);
 
         if (sUnknown_203B35C->linkStatus != COMMS_GOOD && sUnknown_203B35C->unk0 == 0) {
@@ -407,27 +407,27 @@ static void sub_8037810(void)
 
 void sub_8037900(void)
 {
-    sub_8035CC0(sUnknown_203B35C->unk15C, 0);
+    sub_8035CC0(&sUnknown_203B35C->unk15C, 0);
 
     switch (sUnknown_203B35C->unk0) {
         case 0:
         case 1: {
-            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E656C, FALSE, 6, FALSE);
+            SetMenuItems(sUnknown_203B35C->unk1C, &sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E656C, FALSE, 6, FALSE);
             break;
         }
         case 2:
         case 3: {
-            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E65D8, FALSE, 6, FALSE);
+            SetMenuItems(sUnknown_203B35C->unk1C, &sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E65D8, FALSE, 6, FALSE);
             break;
         }
         case 4:
         case 5: {
-            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E661C, FALSE, 6, FALSE);
+            SetMenuItems(sUnknown_203B35C->unk1C, &sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E661C, FALSE, 6, FALSE);
             break;
         }
         case 6:
         case 7: {
-            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E665C, FALSE, 6, FALSE);
+            SetMenuItems(sUnknown_203B35C->unk1C, &sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E665C, FALSE, 6, FALSE);
             break;
         }
         case 8: {
@@ -435,7 +435,7 @@ void sub_8037900(void)
         }
         case 9:
         case 10: {
-            SetMenuItems(sUnknown_203B35C->unk1C, sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E667C, FALSE, 6, FALSE);
+            SetMenuItems(sUnknown_203B35C->unk1C, &sUnknown_203B35C->unk15C, 0, &sUnknown_80E6554, sUnknown_80E667C, FALSE, 6, FALSE);
             break;
         }
     }

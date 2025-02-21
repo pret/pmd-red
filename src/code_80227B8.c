@@ -109,28 +109,28 @@ static void sub_802293C(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B294->unk148);
+    RestoreUnkTextStruct_8006518(&sUnknown_203B294->unk148);
 
     switch (sUnknown_203B294->state) {
         case 2:
             sub_8022D2C();
-            sUnknown_203B294->unk148[2] = sUnknown_80DC5BC;
-            sub_8012CAC(&sUnknown_203B294->unk148[2], sUnknown_203B294->unkF8);
-            sUnknown_203B294->unk148[2].unkC = 6;
+            sUnknown_203B294->unk148.a0[2] = sUnknown_80DC5BC;
+            sub_8012CAC(&sUnknown_203B294->unk148.a0[2], sUnknown_203B294->unkF8);
+            sUnknown_203B294->unk148.a0[2].unkC = 6;
             break;
         case 3:
-            sUnknown_203B294->unk148[1] = sUnknown_80DC5D4;
+            sUnknown_203B294->unk148.a0[1] = sUnknown_80DC5D4;
             break;
         default:
             for (i = 0; i < 4; i++)
-                sUnknown_203B294->unk148[i] = sUnknown_80DC5A4;
+                sUnknown_203B294->unk148.a0[i] = sUnknown_80DC5A4;
             break;
         case 10 ... 16:
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B294->unk148, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B294->unk148, TRUE, TRUE);
 }
 
 static void sub_8022A10(void)

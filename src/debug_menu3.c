@@ -79,17 +79,17 @@ static void sub_803A93C(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B3F4->unk9C);
+    RestoreUnkTextStruct_8006518(&sUnknown_203B3F4->unk9C);
 
     if (sUnknown_203B3F4->state == 2)
-        sUnknown_203B3F4->unk9C[2] = sUnknown_80E7EA4;
+        sUnknown_203B3F4->unk9C.a0[2] = sUnknown_80E7EA4;
     else {
         for(i = 0; i < 4; i++)
-            sUnknown_203B3F4->unk9C[i] = sUnknown_80E7E8C;
+            sUnknown_203B3F4->unk9C.a0[i] = sUnknown_80E7E8C;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B3F4->unk9C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B3F4->unk9C, TRUE, TRUE);
 }
 
 static void sub_803A9AC(void)

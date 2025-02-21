@@ -22,7 +22,7 @@ struct unkStruct_203B310
     /* 0xC */ s32 itemRewardIndex;
     unkStruct_802F204 *unk10;
     /* 0x14 */ struct MonPortraitMsg monPortrait;
-    UnkTextStruct2 unk24[4];
+    UnkTextStruct3 unk24;
 };
 
 EWRAM_INIT struct unkStruct_203B310 *gUnknown_203B310 = {NULL};
@@ -180,13 +180,13 @@ void sub_802F300(void)
     switch(gUnknown_203B310->state)
     {
         case PREP_MONEY_REWARD:
-            RestoreUnkTextStruct_8006518(gUnknown_203B310->unk24);
+            RestoreUnkTextStruct_8006518(&gUnknown_203B310->unk24);
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B310->unk24[index] = gUnknown_80E041C;
+                gUnknown_203B310->unk24.a0[index] = gUnknown_80E041C;
             }
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(gUnknown_203B310->unk24, TRUE, TRUE);
+            xxx_call_save_unk_text_struct_800641C(&gUnknown_203B310->unk24, TRUE, TRUE);
         default:
             break;
     }

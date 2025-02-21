@@ -19,7 +19,7 @@ typedef struct unkStruct_3001B5C
     /* 0x35C */ struct_Sub80095E4_2 s35C;
 } unkStruct_3001B5C;
 
-bool8 sub_8023144(s32, s32 index, UnkTextStruct2_sub *sub, u32);
+bool8 sub_8023144(s32, s32 index, DungeonPos *sub, u32);
 u32 sub_8023278(bool8);
 s16 sub_802331C(void);
 void sub_8023354(bool8 cursorSprite);

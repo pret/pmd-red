@@ -16,7 +16,7 @@ struct unkStruct_203B2CC
 u8 GetPokemonNewsIndex(void);
 bool8 HasNoPKMNNews(void);
 
-bool8 sub_802B640(u32, UnkTextStruct2_sub *, u32);
+bool8 sub_802B640(u32, DungeonPos *, u32);
 u32 sub_802B720(bool8);
 void sub_802B7D0(bool8 cursorSprite);
 void sub_802B81C(void);

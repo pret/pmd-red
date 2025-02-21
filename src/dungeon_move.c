@@ -1,4 +1,5 @@
 #include "global.h"
+#include "dungeon_move.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "dungeon_message.h"
@@ -304,7 +305,6 @@ s32 HandleDamagingMove(Entity *, Entity *, Move *, s24_8, s32);
 static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct DamageStruct *dmgStruct, s16 unk);
 static void TriggerTargetAbilityEffect(Entity *attacker);
 static bool8 AccuracyCalc(Entity *attacker, Entity *target, Move *move, s32 accuracyType, bool8 selfAlwaysHits);
-bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move);
 bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, bool32 itemId, bool8 arg_4, bool32 unused);
 bool8 sub_805744C(Entity * pokemon, Move *move, bool8 param_3);
 static void SetTargetsForMove(Entity **targetsArray, Entity *attacker, Move *move);
