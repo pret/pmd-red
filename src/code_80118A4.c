@@ -1,18 +1,10 @@
-#include <stdarg.h>
-#include <stdio.h>
 #include "global.h"
-#include "bg_palette_buffer.h"
-#include "code_8004AA0.h"
 #include "code_800558C.h"
 #include "code_8009804.h"
-#include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "music.h"
 #include "constants/bg_music.h"
-#include "play_time.h"
-#include "bg_control.h"
 #include "config.h"
-#include "game_options.h"
 #include "sprite.h"
 #include "event_flag.h"
 #include "file_system.h"
@@ -24,32 +16,8 @@ EWRAM_DATA s16 gUnknown_202DE20 = {0};
 EWRAM_DATA s16 gUnknown_202DE22 = {0};
 EWRAM_DATA s16 gUnknown_202DE24 = {0};
 
-extern void xxx_call_update_bg_vram(void);
 extern bool8 sub_80111C4();
 extern void sub_8010F28();
-
-void sub_801169C(void)
-{
-    SetBG2RegOffsets(gUnknown_203B0E4->unk4DD4.x, gUnknown_203B0E4->unk4DD4.y);
-    SetBG3RegOffsets(gUnknown_203B0E4->unk4DD4.x, gUnknown_203B0E4->unk4DD4.y);
-    sub_8010F28();
-    sub_8004AF0(sub_80111C4(), gUnknown_203B0E4->unk4C4C, 0xB0, 16, gUnknown_203B0E4->unk4DCC, NULL);
-    sub_8005838(NULL, 0);
-    nullsub_8(gGameOptionsRef->unkA);
-    sub_8005180();
-    sub_80060EC();
-    IncrementPlayTime(gPlayTimeRef);
-    sub_800CB20();
-    LoadBufferedInputs();
-    CopySpritesToOam();
-    sub_8005304();
-    TransferBGPaletteBuffer();
-    xxx_call_update_bg_vram();
-    sub_8009908();
-    xxx_call_update_bg_sound_input();
-    sub_8011860();
-    ResetSprites(FALSE);
-}
 
 void sub_8011760(void)
 {

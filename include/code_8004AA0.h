@@ -2,6 +2,7 @@
 #define GUARD_CODE_8004AA0_H
 
 #include "file_system.h"
+#include "menu_input.h"
 #include "structs/rgb.h"
 #include "structs/axdata.h"
 #include "structs/str_position.h"
@@ -22,9 +23,10 @@ extern unkStruct_202EE8C gUnknown_202EE8C[32];
 
 struct UnkStruct_4014Ptr
 {
-    u8 fill0[4];
+    s32 unk0;
     DungeonPos unk4;
-    u8 fill8[0x20-8];
+    u8 unk8[8];
+    u8 fill8[0x20-0x10];
 };
 
 struct UnkStruct_4014Ptr2
@@ -48,7 +50,8 @@ struct UnkBgStruct
     struct UnkStruct_4014Ptr2 *unk4014;
     struct UnkStruct_4018 unk4018[32];
     s32 unk4A18;
-    u8 pad4A1C[0x4A30-0x4A1C];
+    u8 pad4A1C[0x4A2c-0x4A1C];
+    u8 unk4A2C;
     axdata unk4A30[8];
     axdata unk4C10;
     unkStruct_202EE8C unk4C4C[16];
@@ -61,6 +64,9 @@ struct UnkBgStruct
     s32 unk4DE0;
     s32 unk4DE4;
     s32 unk4DE8;
+    u8 unk4DEC[12];
+    s32 unk4DF8;
+    MenuInputStruct unk4DFC;
 };
 
 extern struct UnkBgStruct *gUnknown_203B0E4;
