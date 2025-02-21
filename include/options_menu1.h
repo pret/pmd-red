@@ -14,7 +14,7 @@ struct unkStruct_203B25C
     /* 0x1C */ MenuStruct menu;
     /* 0x6C */ MenuItem menuItems[8];
     u16 unkAC[8];
-    UnkTextStruct2 unkBC[4];
+    UnkTextStruct3 unkBC;
 };
 
 bool8 sub_801DCC4(void);

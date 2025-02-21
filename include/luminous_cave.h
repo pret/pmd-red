@@ -33,7 +33,7 @@ typedef struct LuminousCaveWork
     u8 unk110;
     u8 unk111;
     u8 unk112;
-    UnkTextStruct2 unk114[4];
+    UnkTextStruct3 unk114;
 } LuminousCaveWork;
 
 void CleanLuminousCave(void);

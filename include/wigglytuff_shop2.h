@@ -14,7 +14,7 @@ typedef struct WigglytuffShop2Work
     /* 0x70 */ s32 numPokemoninFriendArea;
     s32 unk74;
     UnkTextStruct2 *unk78;
-    UnkTextStruct2 unk7C[4];
+    UnkTextStruct3 unk7C;
     u8 unkDC[4];
 } WigglytuffShop2Work;
 

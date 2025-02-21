@@ -66,7 +66,7 @@ extern bool8 sub_802FCF0(void);
 s32 sub_802FBF4(void);
 extern u8 sub_8097384(s16);
 
-u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
+u32 sub_802F73C(u32 r0, DungeonPos *r1, u32 r2, u8 r3)
 {
     if (sub_802FCF0())
         return 0;
@@ -76,22 +76,22 @@ u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 
     gUnknown_203B314->unkB8 = r3;
     gUnknown_203B314->sBC.s0.unk34 = r0;
-    gUnknown_203B314->sBC.s0.unk38 = &gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34];
-    RestoreUnkTextStruct_8006518(gUnknown_203B314->sBC.s0.unk3C);
+    gUnknown_203B314->sBC.s0.unk38 = &gUnknown_203B314->sBC.s0.unk3C.a0[gUnknown_203B314->sBC.s0.unk34];
+    RestoreUnkTextStruct_8006518(&gUnknown_203B314->sBC.s0.unk3C);
 
     if (r3 != 0)
-        gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E072C;
+        gUnknown_203B314->sBC.s0.unk3C.a0[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E072C;
     else
-        gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E0714;
+        gUnknown_203B314->sBC.s0.unk3C.a0[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E0714;
 
     gUnknown_203B314->sBC.s0.unk38->unk14 = &gUnknown_203B314->sBC.unk9C;
 
     if (r1 != 0)
-        gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34].unk8 = *r1;
+        gUnknown_203B314->sBC.s0.unk3C.a0[gUnknown_203B314->sBC.s0.unk34].pos = *r1;
 
     sub_8012D08(gUnknown_203B314->sBC.s0.unk38, r2);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B314->sBC.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B314->sBC.s0.unk3C, TRUE, TRUE);
     sub_8013818(&gUnknown_203B314->sBC.s0.input, sub_802FBF4(), r2, r0);
     sub_802F9C0();
     sub_802FA50();
@@ -169,9 +169,9 @@ void sub_802F974(void)
 {
     if(gUnknown_203B314 != NULL)
     {
-        gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E06FC;
+        gUnknown_203B314->sBC.s0.unk3C.a0[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E06FC;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(gUnknown_203B314->sBC.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(&gUnknown_203B314->sBC.s0.unk3C, TRUE, TRUE);
         MemoryFree(gUnknown_203B314);
         gUnknown_203B314 = NULL;
     }

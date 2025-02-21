@@ -12,7 +12,7 @@ struct unkStruct_203B300
     /* 0xC */ unkStruct_802C39C *mail;
     u32 unk10;
     UnkTextStruct2 *unk14;
-    UnkTextStruct2 unk18[4];
+    UnkTextStruct3 unk18;
     u8 unk78[4];
 };
 

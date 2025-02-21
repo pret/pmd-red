@@ -32,10 +32,10 @@ void DrawMainMenu(void)
     }
 
     for (i = 0; i < 4; i++)
-        sUnknown_203B34C->unk144[i] = sUnknown_80E59C8;
+        sUnknown_203B34C->unk144.a0[i] = sUnknown_80E59C8;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B34C->unk144, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B34C->unk144, TRUE, TRUE);
     SetMainMenuItems();
     sUnknown_203B34C->currMenuChoice = -1;
 
@@ -148,56 +148,56 @@ static bool8 SetMainMenuText(void)
         return FALSE;
 
     sUnknown_203B34C->currMenuChoice = menuChoice;
-    sub_8035CC0(sUnknown_203B34C->unk144, 2);
-    sub_8035CC0(sUnknown_203B34C->unk144, 3);
+    sub_8035CC0(&sUnknown_203B34C->unk144, 2);
+    sub_8035CC0(&sUnknown_203B34C->unk144, 3);
 
     switch (menuChoice) {
         case MENU_WIRELESS_COMMS:
             // Using wireless communications, you can go on an adventure to unknown worlds.
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E6030, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E6030, FALSE, 0, FALSE);
             break;
         case MENU_WONDER_MAIL:
             // Using passwords, you can receive Wonder Mail
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5F80, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5F80, FALSE, 0, FALSE);
             break;
         case MENU_AWAITING_RESCUE:
             // You are awaiting resuce by a friend
             // You can give up waiting for rescue
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5F1C, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5F1C, FALSE, 0, FALSE);
             break;
         case MENU_NEW_GAME:
             // Start an entirely new adventure
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5CCC, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5CCC, FALSE, 0, FALSE);
             break;
         case MENU_CONTINUE:
             // Resume your adventure from where you last saved
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5DA0, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5DA0, FALSE, 0, FALSE);
             break;
         case MENU_DELETE_SAVE_PROMPT:
             // This will delete your saved game data.
             // Beware! This will delete it forever
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5DF0, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5DF0, FALSE, 0, FALSE);
             break;
         case MENU_ADVENTURE_LOG:
             // Check your career as an adventurer
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5D0C, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5D0C, FALSE, 0, FALSE);
             break;
         case MENU_FRIEND_RESCUE:
             // Using a Game Link cable or passwords, friends may rescue each other
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5E5C, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5E5C, FALSE, 0, FALSE);
             break;
         case MENU_TRADE_ITEMS:
             // Using a Game Link cable you can trade stored items with a friend
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5EBC, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5EBC, FALSE, 0, FALSE);
             break;
         case MENU_DUAL_SLOT:
             // Using Dual Slot function, you can receive teams from your friends
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5FCC, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5FCC, FALSE, 0, FALSE);
             break;
         case MENU_DEBUG:
             // This is the Debug Mode.
             // It won't be in the release version
-            SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5D48, FALSE, 0, FALSE);
+            SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 2, &sUnknown_80E5CB4, sUnknown_80E5D48, FALSE, 0, FALSE);
             break;
         default:
             break;
@@ -208,7 +208,7 @@ static bool8 SetMainMenuText(void)
 
 static void sub_803623C(void)
 {
-    sub_8035CC0(sUnknown_203B34C->unk144, 1);
+    sub_8035CC0(&sUnknown_203B34C->unk144, 1);
     SetMainMenuItems();
     sUnknown_203B34C->currMenuChoice = -1;
 
@@ -230,7 +230,7 @@ static void SetMainMenuItems(void)
                     // Friend Rescue
                     // Trade Items
                     // Wonder Mail
-                    SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 0, &sUnknown_80E5A78, sUnknown_80E5C18, TRUE, sUnknown_203B350, TRUE);
+                    SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 0, &sUnknown_80E5A78, sUnknown_80E5C18, TRUE, sUnknown_203B350, TRUE);
                 }
                 else {
                     // Revive Team
@@ -238,7 +238,7 @@ static void SetMainMenuItems(void)
                     // Adventure Log
                     // Friend Rescue
                     // Trade Items
-                    SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 0, &sUnknown_80E5BC4, sUnknown_80E5BDC, TRUE, sUnknown_203B350, TRUE);
+                    SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 0, &sUnknown_80E5BC4, sUnknown_80E5BDC, TRUE, sUnknown_203B350, TRUE);
                 }
             }
             else {
@@ -249,7 +249,7 @@ static void SetMainMenuItems(void)
                     // Friend Rescue
                     // Trade Items
                     // Wonder Mail
-                    SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 0, &sUnknown_80E5A78, sUnknown_80E5AFC, TRUE, sUnknown_203B350, TRUE);
+                    SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 0, &sUnknown_80E5A78, sUnknown_80E5AFC, TRUE, sUnknown_203B350, TRUE);
                 }
                 else {
                     // Continue
@@ -257,7 +257,7 @@ static void SetMainMenuItems(void)
                     // Adventure Log
                     // Friend Rescue
                     // Trade Items
-                    SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 0, &sUnknown_80E5A60, sUnknown_80E5A90, TRUE, sUnknown_203B350, TRUE);
+                    SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 0, &sUnknown_80E5A60, sUnknown_80E5A90, TRUE, sUnknown_203B350, TRUE);
                 }
             }
         }
@@ -269,7 +269,7 @@ static void SetMainMenuItems(void)
                     // Friend Rescue
                     // Trade Items
                     // Wonder Mail
-                SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 0, &sUnknown_80E5A78, sUnknown_80E5B8C, TRUE, sUnknown_203B350, TRUE);
+                SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 0, &sUnknown_80E5A78, sUnknown_80E5B8C, TRUE, sUnknown_203B350, TRUE);
             }
             else {
                     // Awaiting Rescue
@@ -277,14 +277,14 @@ static void SetMainMenuItems(void)
                     // Adventure Log
                     // Friend Rescue
                     // Trade Items
-                SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 0, &sUnknown_80E5B34, sUnknown_80E5B4C, TRUE, sUnknown_203B350, TRUE);
+                SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 0, &sUnknown_80E5B34, sUnknown_80E5B4C, TRUE, sUnknown_203B350, TRUE);
             }
         }
     }
     else {
         // New Game
         // Adventure Log
-        SetMenuItems(sUnknown_203B34C->unk4, sUnknown_203B34C->unk144, 0, &sUnknown_80E59E0, sUnknown_80E59F8, TRUE, sUnknown_203B350, TRUE);
+        SetMenuItems(sUnknown_203B34C->unk4, &sUnknown_203B34C->unk144, 0, &sUnknown_80E59E0, sUnknown_80E59F8, TRUE, sUnknown_203B350, TRUE);
     }
 }
 

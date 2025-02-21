@@ -18,7 +18,7 @@ static EWRAM_INIT u16 sUnknown_203B24E = {0};
 static void sub_801CC38(void);
 static u32 sub_801CE58(void);
 
-bool8 sub_801C8C4(s32 a0, s32 a1, UnkTextStruct2_sub *a2, u32 a3)
+bool8 sub_801C8C4(s32 a0, s32 a1, DungeonPos *a2, u32 a3)
 {
     if (sub_801CF14(a0))
         return FALSE;
@@ -29,17 +29,17 @@ bool8 sub_801C8C4(s32 a0, s32 a1, UnkTextStruct2_sub *a2, u32 a3)
     sUnknown_203B244->unk0 = a0;
     sub_801CF94();
     sUnknown_203B244->unk4B4.s0.unk34 = a1;
-    sUnknown_203B244->unk4B4.s0.unk38 = &sUnknown_203B244->unk4B4.s0.unk3C[a1];
-    RestoreUnkTextStruct_8006518(sUnknown_203B244->unk4B4.s0.unk3C);
-    sUnknown_203B244->unk4B4.s0.unk3C[sUnknown_203B244->unk4B4.s0.unk34] = sUnknown_80DBE54;
+    sUnknown_203B244->unk4B4.s0.unk38 = &sUnknown_203B244->unk4B4.s0.unk3C.a0[a1];
+    RestoreUnkTextStruct_8006518(&sUnknown_203B244->unk4B4.s0.unk3C);
+    sUnknown_203B244->unk4B4.s0.unk3C.a0[sUnknown_203B244->unk4B4.s0.unk34] = sUnknown_80DBE54;
     sUnknown_203B244->unk4B4.s0.unk38->unk14 = &sUnknown_203B244->unk4B4.unk9C;
 
     if (a2 != NULL)
-        sUnknown_203B244->unk4B4.s0.unk3C[sUnknown_203B244->unk4B4.s0.unk34].unk8 = *a2;
+        sUnknown_203B244->unk4B4.s0.unk3C.a0[sUnknown_203B244->unk4B4.s0.unk34].pos = *a2;
 
     sub_8012D08(sUnknown_203B244->unk4B4.s0.unk38, a3);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B244->unk4B4.s0.unk3C, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B244->unk4B4.s0.unk3C, TRUE, TRUE);
     sub_8013818(&sUnknown_203B244->unk4B4.s0.input, sub_801CE58(), a3, a1);
 
     if (sUnknown_203B248 == sUnknown_203B244->unk0) {
@@ -111,7 +111,7 @@ u8 sub_801CB24(void)
 void sub_801CB5C(bool8 a0)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B244->unk4B4.s0.unk3C, FALSE, FALSE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B244->unk4B4.s0.unk3C, FALSE, FALSE);
     sUnknown_203B244->unk4B4.s0.input.unk22 = sub_801CE58();
     sub_8013984(&sUnknown_203B244->unk4B4.s0.input);
     sub_801CC38();
@@ -127,9 +127,9 @@ void sub_801CBB8(void)
         sUnknown_203B248 = sUnknown_203B244->unk0;
         sUnknown_203B24C = sUnknown_203B244->unk4B4.s0.input.menuIndex;
         sUnknown_203B24E = sUnknown_203B244->unk4B4.s0.input.unk1E;
-        sUnknown_203B244->unk4B4.s0.unk3C[sUnknown_203B244->unk4B4.s0.unk34] = sUnknown_80DBE3C;
+        sUnknown_203B244->unk4B4.s0.unk3C.a0[sUnknown_203B244->unk4B4.s0.unk34] = sUnknown_80DBE3C;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sUnknown_203B244->unk4B4.s0.unk3C, TRUE, TRUE);
+        xxx_call_save_unk_text_struct_800641C(&sUnknown_203B244->unk4B4.s0.unk3C, TRUE, TRUE);
         MemoryFree(sUnknown_203B244);
         sUnknown_203B244 = NULL;
     }

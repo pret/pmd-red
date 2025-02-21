@@ -7,14 +7,14 @@ EWRAM_INIT void *gUnknown_203B0E8 = NULL; // Pointer to some unknown struct
 EWRAM_INIT UnkTextStruct2 gUnknown_203B0EC[4] = { // Exact location of this variable is unknown. Find a better place for it once more code is decompiled.
     [0] = {
         .unk4 = 3,
-        .unk8 = {2, 10},
+        .pos = {2, 10},
         .unkC = 26,
         .unkE = 9,
         .unk10 = 9,
     },
     [1] = {
         .unk4 = 3,
-        .unk8 = {23, 6},
+        .pos = {23, 6},
         .unkC = 5,
         .unkE = 3,
         .unk10 = 3,

@@ -92,18 +92,18 @@ static void sub_802DC40(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B2FC->unk48);
+    RestoreUnkTextStruct_8006518(&sUnknown_203B2FC->unk48);
 
     switch (sUnknown_203B2FC->state) {
         case 0:
         case 7:
             for (i = 0; i < 4; i++)
-                sUnknown_203B2FC->unk48[i]  = sUnknown_80E016C;
+                sUnknown_203B2FC->unk48.a0[i]  = sUnknown_80E016C;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2FC->unk48, TRUE, TRUE);
+    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2FC->unk48, TRUE, TRUE);
 }
 
 static void sub_802DC9C(void)
