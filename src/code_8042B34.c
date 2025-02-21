@@ -345,7 +345,7 @@ extern s32 gDungeonBrightness;
 extern Entity *gLeaderPointer;
 
 void EnforceMaxItemsAndMoney(void);
-void sub_8043FD0(void);
+static void sub_8043FD0(void);
 void sub_806B404(void);
 u8 GetFloorType(void);
 
@@ -362,7 +362,8 @@ extern const s16 gUnknown_80F6850[4];
 
 extern OpenedFile *gDungeonNameBannerPalette;
 
-void xxx_dungeon_8042F6C(struct UnkStruct_xxx_dungeon_8042F6C *r8)
+// This functions is the main 'loop' when the player is in a Dungeon. It runs from the moment the player enters a dungeon, until they leave(by completing or by fainting).
+void RunDungeon(struct UnkStruct_RunDungeon *r8)
 {
     bool8 check;
     Entity *leader;
@@ -1074,10 +1075,10 @@ bool8 sub_8043ED0(bool8 a0)
     return ret;
 }
 
-void sub_8043FD0(void)
+static void sub_8043FD0(void)
 {
     s32 level;
-    for (level = 2; level < 6; level++) {
+    for (level = 2; level <= 5; level++) {
         s32 i, monId, movesCount;
         for (monId = 0; monId < NUM_MONSTERS; monId++) {
             PokemonStruct1 *monStruct = &gRecruitedPokemonRef->pokemon[monId];
