@@ -15,7 +15,7 @@ struct UnkStruct_Sub1
     axdata unk8;
 };
 
-struct UnkStruct_203B0E8
+struct WorldMap
 {
     struct UnkStruct_Sub1 unk0[64];
     OpenedFile *unk1100[5];
@@ -48,7 +48,7 @@ struct UnkStruct_sub_8010268
 {
     u8 fill0[4];
     struct UnkStruct_sub_8010494 unk4;
-    struct UnkStruct_203B0E8 *unkB0;
+    struct WorldMap *unkB0;
     u8 unkB4;
 };
 

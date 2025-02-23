@@ -514,7 +514,7 @@ _08000A42:
 	mov r1, sp
 	strb r0, [r1, 0x5]
 	mov r0, sp
-	bl sub_800F990
+	bl ShowFriendAreasMap
 	ldr r0, [sp, 0x8]
 	bl MemoryFree
 	mov r0, sp

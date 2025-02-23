@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "world_map.h"
 #include "sprite.h"
 #include "code_8004AA0.h"
@@ -18,23 +19,8 @@
 #include "pokemon.h"
 #include "decompress.h"
 
-extern const DungeonPos gDungeonCoordinates[];
-extern const struct FriendAreaLocation gFriendAreaLocations[];
 extern const FileArchive gTitleMenuFileArchive;
 extern const FileArchive gMonsterFileArchive;
-extern const u8 gUnknown_80D40E4[];
-extern const u8 gUnknown_80D40EC[];
-extern const u8 gUnknown_80D405C[];
-extern const u8 gUnknown_80D40FC[];
-extern const u8 gUnknown_80D4104[];
-extern const u8 gUnknown_80D4120[];
-extern const u8 gUnknown_80D3EFC[];
-extern const u8 gUnknown_80D40F4[];
-extern const u8 gUnknown_80D4064[];
-extern const u8 gUnknown_80D406C[];
-extern const u8 gUnknown_80D407C[];
-extern const u8 gUnknown_80D4080[];
-extern const u8 gUnknown_80D4074[];
 
 extern u16 gUnknown_2026E4E;
 
@@ -52,8 +38,8 @@ extern s32 Atan2_4096(PixelPos *a);
 extern void sub_80117AC(void);
 extern void sub_8011760(void);
 
-EWRAM_INIT struct UnkStruct_203B0E8 *gUnknown_203B0E8 = NULL;
-EWRAM_INIT Windows gUnknown_203B0EC = {
+static EWRAM_INIT struct WorldMap *sWorldMapPtr = NULL;
+static EWRAM_INIT Windows sWorldMapWindows = {
     .id = {
         [0] = {
             .type = WINDOW_TYPE_NORMAL,
@@ -97,7 +83,7 @@ void ShowWorldMap(struct UnkStruct_sub_8010268 *r5)
     s32 i, speciesId, var;
     u8 text[1000];
 
-    gUnknown_203B0E8 = r5->unkB0;
+    sWorldMapPtr = r5->unkB0;
     gUnknown_2026E4E = 2566;
     sub_80095CC(0, 0x14);
     UpdateFadeInTile(2);
@@ -143,6 +129,74 @@ void ShowWorldMap(struct UnkStruct_sub_8010268 *r5)
     nullsub_16();
 }
 
+static const DungeonPos gDungeonCoordinates[] =
+{
+    [DUNGEON_TINY_WOODS] = {172, 174},
+    [DUNGEON_THUNDERWAVE_CAVE] = {171, 111},
+    [DUNGEON_MT_STEEL] = {242, 126},
+    [DUNGEON_SINISTER_WOODS] = {232, 181},
+    [DUNGEON_SILENT_CHASM] = {263, 155},
+    [DUNGEON_MT_THUNDER] = {298, 159},
+    [DUNGEON_MT_THUNDER_PEAK] = {299, 142},
+    [DUNGEON_GREAT_CANYON] = {203, 255},
+    [DUNGEON_LAPIS_CAVE] = {385, 166},
+    [DUNGEON_MT_BLAZE] = {388, 126},
+    [DUNGEON_MT_BLAZE_PEAK] = {389, 109},
+    [DUNGEON_FROSTY_FOREST] = {417, 112},
+    [DUNGEON_FROSTY_GROTTO] = {422, 101},
+    [DUNGEON_MT_FREEZE] = {432, 85},
+    [DUNGEON_MT_FREEZE_PEAK] = {436, 69},
+    [DUNGEON_MAGMA_CAVERN] = {442, 150},
+    [DUNGEON_MAGMA_CAVERN_PIT] = {446, 163},
+    [DUNGEON_SKY_TOWER] = {365, 27},
+    [DUNGEON_SKY_TOWER_SUMMIT] = {352, 12},
+    [DUNGEON_STORMY_SEA] = {133, 238},
+    [DUNGEON_SILVER_TRENCH] = {129, 143},
+    [DUNGEON_METEOR_CAVE] = {344, 105},
+    [DUNGEON_MT_FREEZE_PEAK_2] = {427, 62},
+    [DUNGEON_WESTERN_CAVE] = {27, 211},
+    [DUNGEON_BOSS_3] = {246, 315},
+    [DUNGEON_BOSS_4] = {443, 6},
+    [DUNGEON_WISH_CAVE] = {32, 279},
+    [DUNGEON_BURIED_RELIC] = {404, 262},
+    [DUNGEON_PITFALL_VALLEY] = {194, 63},
+    [DUNGEON_NORTHERN_RANGE] = {159, 46},
+    [DUNGEON_BOSS_9] = {441, 310},
+    [DUNGEON_DESERT_REGION] = {231, 235},
+    [DUNGEON_SOUTHERN_CAVERN] = {169, 287},
+    [DUNGEON_WYVERN_HILL] = {441, 273},
+    [DUNGEON_FIERY_FIELD] = {64, 87},
+    [DUNGEON_NORTHWIND_FIELD] = {80, 54},
+    [DUNGEON_SOLAR_CAVE] = {431, 225},
+    [DUNGEON_LIGHTNING_FIELD] = {27, 94},
+    [DUNGEON_DARKNIGHT_RELIC] = {354, 298},
+    [DUNGEON_WONDROUS_SEA] = {336, 253},
+    [DUNGEON_MURKY_CAVE] = {287, 222},
+    [DUNGEON_GRAND_SEA] = {63, 163},
+    [DUNGEON_UPROAR_FOREST] = {275, 111},
+    [DUNGEON_ODDITY_CAVE] = {202, 232},
+    [DUNGEON_REMAINS_ISLAND] = {268, 302},
+    [DUNGEON_MARVELOUS_SEA] = {336, 260},
+    [DUNGEON_FANTASY_STRAIT] = {110, 79},
+    [DUNGEON_ROCK_PATH] = {225, 314},
+    [DUNGEON_SNOW_PATH] = {206, 314},
+    [DUNGEON_AUTOPILOT] = {11, 307},
+    [DUNGEON_D50] = {472, 25},
+    [DUNGEON_D51] = {250, 8},
+    [DUNGEON_NORMAL_MAZE] = {187, 190},
+    [DUNGEON_HOWLING_FOREST] = {205, 111},
+    [DUNGEON_D54] = {474, 6},
+    [DUNGEON_POISON_MAZE] = {183, 9},
+    [DUNGEON_WATERFALL_POND] = {367, 214},
+    [DUNGEON_UNKNOWN_RELIC] = {278, 273},
+    [DUNGEON_JOYOUS_TOWER] = {68, 305},
+    [DUNGEON_FAR_OFF_SEA] = {270, 33},
+    [DUNGEON_MT_FARAWAY] = {33, 39},
+    [DUNGEON_D61] = {217, 8},
+    [DUNGEON_PURITY_FOREST] = {69, 280},
+    [DUNGEON_OUT_ON_RESCUE] = {192, 183},
+};
+
 // Heavy math function.
 static void AnimateMonPath(u8 id1, u8 id2)
 {
@@ -162,11 +216,11 @@ static void AnimateMonPath(u8 id1, u8 id2)
     }
     r3 >>= 9;
     r3 &= 7;
-    AxResInitFile(&gUnknown_203B0E8->monAxSprite, gUnknown_203B0E8->unk1100[3], 0, r3, 0, 0, TRUE);
+    AxResInitFile(&sWorldMapPtr->monAxSprite, sWorldMapPtr->unk1100[3], 0, r3, 0, 0, TRUE);
 
     for (i = 0; i < valMax; i++) {
-        gUnknown_203B0E8->monSpritePos.x = ((((pos2.x - pos1.x) * (i << 8)) / valMax) / 256) + pos1.x;
-        gUnknown_203B0E8->monSpritePos.y = ((((pos2.y - pos1.y) * (i << 8)) / valMax) / 256) + pos1.y;
+        sWorldMapPtr->monSpritePos.x = ((((pos2.x - pos1.x) * (i << 8)) / valMax) / 256) + pos1.x;
+        sWorldMapPtr->monSpritePos.y = ((((pos2.y - pos1.y) * (i << 8)) / valMax) / 256) + pos1.y;
         UpdateMonSpritePosition();
         UpdateBg();
         RunFrameActions();
@@ -176,7 +230,7 @@ static void AnimateMonPath(u8 id1, u8 id2)
             break;
     }
 
-    gUnknown_203B0E8->monSpritePos = pos2;
+    sWorldMapPtr->monSpritePos = pos2;
     UpdateMonSpritePosition();
     UpdateBg();
     RunFrameActions();
@@ -186,7 +240,7 @@ static void sub_8010494(struct UnkStruct_sub_8010494 *r9)
 {
     s32 i;
     for (i = 0; i < 64; i++) {
-        struct UnkStruct_Sub1 *structPtr = &gUnknown_203B0E8->unk0[i];
+        struct UnkStruct_Sub1 *structPtr = &sWorldMapPtr->unk0[i];
         u8 r0;
 
         if (i < 63) {
@@ -198,7 +252,7 @@ static void sub_8010494(struct UnkStruct_sub_8010494 *r9)
 
         if (r0) {
             structPtr->unk0 = 1;
-            AxResInitFile(&structPtr->unk8, gUnknown_203B0E8->unk1100[2], (i == 63) ? 12 : 1, 0, 0x40, 0, 1);
+            AxResInitFile(&structPtr->unk8, sWorldMapPtr->unk1100[2], (i == 63) ? 12 : 1, 0, 0x40, 0, 1);
             structPtr->unk4 = gDungeonCoordinates[i];
         }
         else {
@@ -206,13 +260,22 @@ static void sub_8010494(struct UnkStruct_sub_8010494 *r9)
         }
     }
 
-    AxResInitFile(&gUnknown_203B0E8->monAxSprite, gUnknown_203B0E8->unk1100[3], 0, 0, 0, 0, TRUE);
-    gUnknown_203B0E8->monSpritePos = gDungeonCoordinates[r9->unk0.id];
-    gUnknown_203B0E8->bgPos.x = gUnknown_203B0E8->monSpritePos.x - 120;
-    gUnknown_203B0E8->bgPos.y = gUnknown_203B0E8->monSpritePos.y - 80;
+    AxResInitFile(&sWorldMapPtr->monAxSprite, sWorldMapPtr->unk1100[3], 0, 0, 0, 0, TRUE);
+    sWorldMapPtr->monSpritePos = gDungeonCoordinates[r9->unk0.id];
+    sWorldMapPtr->bgPos.x = sWorldMapPtr->monSpritePos.x - 120;
+    sWorldMapPtr->bgPos.y = sWorldMapPtr->monSpritePos.y - 80;
     UpdateMonSpritePosition();
     UpdateBg();
 }
+
+static char *const gUnknown_80D4014[] =
+{
+    "wmp2font",
+    "wmp2mcc",
+    "wmp2cani",
+    "wmp2pal",
+    "wmp2fon1",
+};
 
 static void sub_801059C(void)
 {
@@ -224,27 +287,27 @@ static void sub_801059C(void)
     OpenedFile *file2 = OpenFileAndGetFileDataPtr(gUnknown_80D4014[1], &gTitleMenuFileArchive);
 
     sprintf(filename, "ax%03d", pokeStruct->speciesNum);
-    gUnknown_203B0E8->unk1100[3] = OpenFileAndGetFileDataPtr(filename, &gMonsterFileArchive);
-    gUnknown_203B0E8->unk1100[2] = OpenFileAndGetFileDataPtr("wmapspr", &gTitleMenuFileArchive);
-    gUnknown_203B0E8->unk1100[4] = OpenFileAndGetFileDataPtr(gUnknown_80D4014[2], &gTitleMenuFileArchive);
-    gUnknown_203B0E8->unk1100[1] = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
-    gUnknown_203B0E8->unk1100[0] = OpenFileAndGetFileDataPtr(gUnknown_80D4014[3], &gTitleMenuFileArchive);
-    gUnknown_203B0E8->unk52D4 = GetPokemonOverworldPalette(pokeStruct->speciesNum, 0);
+    sWorldMapPtr->unk1100[3] = OpenFileAndGetFileDataPtr(filename, &gMonsterFileArchive);
+    sWorldMapPtr->unk1100[2] = OpenFileAndGetFileDataPtr("wmapspr", &gTitleMenuFileArchive);
+    sWorldMapPtr->unk1100[4] = OpenFileAndGetFileDataPtr(gUnknown_80D4014[2], &gTitleMenuFileArchive);
+    sWorldMapPtr->unk1100[1] = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
+    sWorldMapPtr->unk1100[0] = OpenFileAndGetFileDataPtr(gUnknown_80D4014[3], &gTitleMenuFileArchive);
+    sWorldMapPtr->unk52D4 = GetPokemonOverworldPalette(pokeStruct->speciesNum, 0);
 
-    sub_8005610(gUnknown_203B0E8->unk1100[2], 0x40, 0x1F, 0);
+    sub_8005610(sWorldMapPtr->unk1100[2], 0x40, 0x1F, 0);
 
     DecompressATGlobalFile((u32 *)(VRAM + 0x8000), 0x0, file);
-    sub_8004AA4(gUnknown_203B0E8->unk5150, gUnknown_203B0E8->unk1100[4], 0x10);
+    sub_8004AA4(sWorldMapPtr->unk5150, sWorldMapPtr->unk1100[4], 0x10);
     size = 0x4000;
-    DecompressATFile((u8 *) &gUnknown_203B0E8->unk1114, size, file2);
+    DecompressATFile((u8 *) &sWorldMapPtr->unk1114, size, file2);
 
-    gUnknown_203B0E8->brightness = 0;
-    gUnknown_203B0E8->bgPos.x = 0;
-    gUnknown_203B0E8->bgPos.y = 0;
+    sWorldMapPtr->brightness = 0;
+    sWorldMapPtr->bgPos.x = 0;
+    sWorldMapPtr->bgPos.y = 0;
 
     for (i = 0; i < 1500; i++) {
-        gUnknown_203B0E8->unk52E0[i] |= 0xFFFF;
-        gUnknown_203B0E8->unk5E98[i] = 0;
+        sWorldMapPtr->unk52E0[i] |= 0xFFFF;
+        sWorldMapPtr->unk5E98[i] = 0;
     }
 
     CloseFile(file);
@@ -254,59 +317,59 @@ static void sub_801059C(void)
 
 static void CloseFiles(void)
 {
-    CloseFile(gUnknown_203B0E8->unk1100[4]);
-    CloseFile(gUnknown_203B0E8->unk1100[3]);
-    CloseFile(gUnknown_203B0E8->unk1100[2]);
-    CloseFile(gUnknown_203B0E8->unk1100[0]);
-    CloseFile(gUnknown_203B0E8->unk1100[1]);
+    CloseFile(sWorldMapPtr->unk1100[4]);
+    CloseFile(sWorldMapPtr->unk1100[3]);
+    CloseFile(sWorldMapPtr->unk1100[2]);
+    CloseFile(sWorldMapPtr->unk1100[0]);
+    CloseFile(sWorldMapPtr->unk1100[1]);
 }
 
 static void UpdateMonSpritePosition(void)
 {
-    if (gUnknown_203B0E8->monSpritePos.x - gUnknown_203B0E8->bgPos.x < 48) {
-        gUnknown_203B0E8->bgPos.x = gUnknown_203B0E8->monSpritePos.x - 48;
+    if (sWorldMapPtr->monSpritePos.x - sWorldMapPtr->bgPos.x < 48) {
+        sWorldMapPtr->bgPos.x = sWorldMapPtr->monSpritePos.x - 48;
     }
-    else if (gUnknown_203B0E8->monSpritePos.x - gUnknown_203B0E8->bgPos.x > 192) {
-        gUnknown_203B0E8->bgPos.x = gUnknown_203B0E8->monSpritePos.x - 192;
-    }
-
-    if (gUnknown_203B0E8->monSpritePos.y - gUnknown_203B0E8->bgPos.y < 48) {
-        gUnknown_203B0E8->bgPos.y = gUnknown_203B0E8->monSpritePos.y - 48;
-    }
-    else if (gUnknown_203B0E8->monSpritePos.y - gUnknown_203B0E8->bgPos.y > 112) {
-        gUnknown_203B0E8->bgPos.y = gUnknown_203B0E8->monSpritePos.y - 112;
+    else if (sWorldMapPtr->monSpritePos.x - sWorldMapPtr->bgPos.x > 192) {
+        sWorldMapPtr->bgPos.x = sWorldMapPtr->monSpritePos.x - 192;
     }
 
-    if (gUnknown_203B0E8->bgPos.x < 0) {
-        gUnknown_203B0E8->bgPos.x = 0;
+    if (sWorldMapPtr->monSpritePos.y - sWorldMapPtr->bgPos.y < 48) {
+        sWorldMapPtr->bgPos.y = sWorldMapPtr->monSpritePos.y - 48;
     }
-    if (gUnknown_203B0E8->bgPos.y < 0) {
-        gUnknown_203B0E8->bgPos.y = 0;
+    else if (sWorldMapPtr->monSpritePos.y - sWorldMapPtr->bgPos.y > 112) {
+        sWorldMapPtr->bgPos.y = sWorldMapPtr->monSpritePos.y - 112;
     }
-    if (gUnknown_203B0E8->bgPos.x >= 240) {
-        gUnknown_203B0E8->bgPos.x = 240;
+
+    if (sWorldMapPtr->bgPos.x < 0) {
+        sWorldMapPtr->bgPos.x = 0;
     }
-    if (gUnknown_203B0E8->bgPos.y >= 160) {
-        gUnknown_203B0E8->bgPos.y = 160;
+    if (sWorldMapPtr->bgPos.y < 0) {
+        sWorldMapPtr->bgPos.y = 0;
+    }
+    if (sWorldMapPtr->bgPos.x >= 240) {
+        sWorldMapPtr->bgPos.x = 240;
+    }
+    if (sWorldMapPtr->bgPos.y >= 160) {
+        sWorldMapPtr->bgPos.y = 160;
     }
 }
 
 static void UpdateBg(void)
 {
     s32 i, j;
-    s32 y1 = gUnknown_203B0E8->bgPos.y >> 3;
+    s32 y1 = sWorldMapPtr->bgPos.y >> 3;
     s32 y2 = y1;
 
     for (i = 0; i < 21; i++) {
-        s32 x1 = gUnknown_203B0E8->bgPos.x >> 3;
+        s32 x1 = sWorldMapPtr->bgPos.x >> 3;
         s32 x2 = x1;
 
         for (j = 0; j < 31; j++) {
             x1 &= 0x1F;
             y1 &= 0x1F;
 
-            gUnknown_202B038[2][y1][x1] = gUnknown_203B0E8->unk3114[y2][x2];
-            gUnknown_202B038[3][y1][x1] = gUnknown_203B0E8->unk1114[y2][x2];
+            gUnknown_202B038[2][y1][x1] = sWorldMapPtr->unk3114[y2][x2];
+            gUnknown_202B038[3][y1][x1] = sWorldMapPtr->unk1114[y2][x2];
             x2++;
             x1++;
         }
@@ -330,7 +393,7 @@ static void FadeFromWorldMap(void)
     ClearWindows();
     sub_80117C4();
     for (i = 0; i < 60; i++) {
-        gUnknown_203B0E8->brightness -= 2;
+        sWorldMapPtr->brightness -= 2;
         RunFrameActions();
     }
 }
@@ -342,8 +405,8 @@ static void ClearWindows(void)
 
 static void RunFrameActions(void)
 {
-    SetBG2RegOffsets(gUnknown_203B0E8->bgPos.x, gUnknown_203B0E8->bgPos.y);
-    SetBG3RegOffsets(gUnknown_203B0E8->bgPos.x, gUnknown_203B0E8->bgPos.y);
+    SetBG2RegOffsets(sWorldMapPtr->bgPos.x, sWorldMapPtr->bgPos.y);
+    SetBG3RegOffsets(sWorldMapPtr->bgPos.x, sWorldMapPtr->bgPos.y);
     AnimateSprites(TRUE);
     FadeScreen();
     sub_8005838(NULL, 0);
@@ -368,21 +431,21 @@ static bool8 FadeScreen(void)
 {
     bool8 ret = FALSE;
 
-    if (gUnknown_203B0E8->brightness < 31) {
+    if (sWorldMapPtr->brightness < 31) {
         s32 i;
-        RGB *color = (void *) gUnknown_203B0E8->unk1100[0]->data;
+        RGB *color = (void *) sWorldMapPtr->unk1100[0]->data;
 
-        if (++gUnknown_203B0E8->brightness >= 31) {
-            gUnknown_203B0E8->brightness = 31;
+        if (++sWorldMapPtr->brightness >= 31) {
+            sWorldMapPtr->brightness = 31;
         }
 
         for (i = 0; i < 224; color++, i++) {
-            SetBGPaletteBufferColorRGB(i, color, gUnknown_203B0E8->brightness, NULL);
+            SetBGPaletteBufferColorRGB(i, color, sWorldMapPtr->brightness, NULL);
         }
 
-        color = (void *) gUnknown_203B0E8->unk1100[1]->data;
+        color = (void *) sWorldMapPtr->unk1100[1]->data;
         for (i = 0; i < 240; color++, i++) {
-            SetBGPaletteBufferColorRGB(i + 256, color, gUnknown_203B0E8->brightness, NULL);
+            SetBGPaletteBufferColorRGB(i + 256, color, sWorldMapPtr->brightness, NULL);
         }
 
         ret = TRUE;
@@ -400,14 +463,14 @@ static void AnimateSprites(bool8 a0)
     sub_8004E8C(&var_2C);
     var_2C.unk4 = 0xF3FF;
     var_2C.unkA = 0x800;
-    pos = gUnknown_203B0E8->bgPos;
-    RunAxAnimationFrame(&gUnknown_203B0E8->monAxSprite);
+    pos = sWorldMapPtr->bgPos;
+    RunAxAnimationFrame(&sWorldMapPtr->monAxSprite);
     if (a0) {
-        DoAxFrame_800558C(&gUnknown_203B0E8->monAxSprite, gUnknown_203B0E8->monSpritePos.x - pos.x, gUnknown_203B0E8->monSpritePos.y - pos.y, 3, gUnknown_203B0E8->unk52D4, &var_2C);
+        DoAxFrame_800558C(&sWorldMapPtr->monAxSprite, sWorldMapPtr->monSpritePos.x - pos.x, sWorldMapPtr->monSpritePos.y - pos.y, 3, sWorldMapPtr->unk52D4, &var_2C);
     }
 
     for (i = 0; i < 64; i++) {
-        struct UnkStruct_Sub1 *structPtr = &gUnknown_203B0E8->unk0[i];
+        struct UnkStruct_Sub1 *structPtr = &sWorldMapPtr->unk0[i];
         if (structPtr->unk0) {
             axdata *axPtr = &structPtr->unk8;
 
@@ -437,7 +500,7 @@ static void PrintDungeonName(DungeonLocation *dungLocation)
         }
     };
 
-    if (gUnknown_203B0E8->monSpritePos.y - gUnknown_203B0E8->bgPos.y <= 80) {
+    if (sWorldMapPtr->monSpritePos.y - sWorldMapPtr->bgPos.y <= 80) {
         windows.id[0].pos.y = 17;
     }
     else {
@@ -479,11 +542,11 @@ static bool8 ShowYesNoWindow(u8 *str)
     r2 += 11;
     r2 /= 8;
 
-    gUnknown_203B0EC.id[0].pos.y = 19 - r2;
-    gUnknown_203B0EC.id[0].unk10 = r2;
-    gUnknown_203B0EC.id[0].height = r2;
-    gUnknown_203B0EC.id[1].pos.y = 14 - r2;
-    ShowWindows(&gUnknown_203B0EC, TRUE, TRUE);
+    sWorldMapWindows.id[0].pos.y = 19 - r2;
+    sWorldMapWindows.id[0].unk10 = r2;
+    sWorldMapWindows.id[0].height = r2;
+    sWorldMapWindows.id[1].pos.y = 14 - r2;
+    ShowWindows(&sWorldMapWindows, TRUE, TRUE);
     sub_80073B8(0);
     PrintFormattedStringOnWindow(4, 0, str, 0, '\0');
     sub_80073E0(0);

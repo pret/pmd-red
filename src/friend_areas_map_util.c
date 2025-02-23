@@ -67,26 +67,26 @@ void sub_8010DA4(void)
     OpenedFile *file2 = OpenFileAndGetFileDataPtr(gUnknown_80D408C[1], &gTitleMenuFileArchive);
 
     sprintf(filename, "ax%03d", pokeStruct->speciesNum);
-    gUnknown_203B0E4->unk0[3] = OpenFileAndGetFileDataPtr(filename, &gMonsterFileArchive);
-    gUnknown_203B0E4->unk0[2] = OpenFileAndGetFileDataPtr("wmapspr", &gTitleMenuFileArchive);
-    gUnknown_203B0E4->unk0[4] = OpenFileAndGetFileDataPtr(gUnknown_80D408C[2], &gTitleMenuFileArchive);
-    gUnknown_203B0E4->unk0[1] = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
-    gUnknown_203B0E4->unk0[0] = OpenFileAndGetFileDataPtr(gUnknown_80D408C[3], &gTitleMenuFileArchive);
-    gUnknown_203B0E4->unk4DD0 = GetPokemonOverworldPalette(pokeStruct->speciesNum, 0);
+    gFriendAreasMapPtr->unk0[3] = OpenFileAndGetFileDataPtr(filename, &gMonsterFileArchive);
+    gFriendAreasMapPtr->unk0[2] = OpenFileAndGetFileDataPtr("wmapspr", &gTitleMenuFileArchive);
+    gFriendAreasMapPtr->unk0[4] = OpenFileAndGetFileDataPtr(gUnknown_80D408C[2], &gTitleMenuFileArchive);
+    gFriendAreasMapPtr->unk0[1] = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
+    gFriendAreasMapPtr->unk0[0] = OpenFileAndGetFileDataPtr(gUnknown_80D408C[3], &gTitleMenuFileArchive);
+    gFriendAreasMapPtr->unk4DD0 = GetPokemonOverworldPalette(pokeStruct->speciesNum, 0);
 
-    sub_8005610(gUnknown_203B0E4->unk0[2], 0x40, 0x1F, 0);
+    sub_8005610(gFriendAreasMapPtr->unk0[2], 0x40, 0x1F, 0);
 
     DecompressATGlobalFile((u32 *)(VRAM + 0x8000), 0x0, file);
-    sub_8004AA4(gUnknown_203B0E4->unk4C4C, gUnknown_203B0E4->unk0[4], 0x10);
+    sub_8004AA4(gFriendAreasMapPtr->unk4C4C, gFriendAreasMapPtr->unk0[4], 0x10);
     size = 0x4000;
-    DecompressATFile((u8 *) &gUnknown_203B0E4->unk14, size, file2);
+    DecompressATFile((u8 *) &gFriendAreasMapPtr->unk14, size, file2);
 
-    gUnknown_203B0E4->brightness = 0;
-    gUnknown_203B0E4->bgPos.x = 0;
-    gUnknown_203B0E4->bgPos.y = 0;
+    gFriendAreasMapPtr->brightness = 0;
+    gFriendAreasMapPtr->bgPos.x = 0;
+    gFriendAreasMapPtr->bgPos.y = 0;
 
     for (i = 0; i < NUM_DIRECTIONS; i++) {
-        ResetFlags(&gUnknown_203B0E4->arrowSprites[i]);
+        ResetFlags(&gFriendAreasMapPtr->arrowSprites[i]);
     }
 
     CloseFile(file);
@@ -94,13 +94,13 @@ void sub_8010DA4(void)
     ShowWindows(NULL, 1, 1);
 }
 
-void sub_8010EF0(void)
+void FriendAreasMap_CloseFiles(void)
 {
-    CloseFile(gUnknown_203B0E4->unk0[4]);
-    CloseFile(gUnknown_203B0E4->unk0[2]);
-    CloseFile(gUnknown_203B0E4->unk0[3]);
-    CloseFile(gUnknown_203B0E4->unk0[0]);
-    CloseFile(gUnknown_203B0E4->unk0[1]);
+    CloseFile(gFriendAreasMapPtr->unk0[4]);
+    CloseFile(gFriendAreasMapPtr->unk0[2]);
+    CloseFile(gFriendAreasMapPtr->unk0[3]);
+    CloseFile(gFriendAreasMapPtr->unk0[0]);
+    CloseFile(gFriendAreasMapPtr->unk0[1]);
 }
 
 static void AnimateSprites(void)
@@ -112,29 +112,29 @@ static void AnimateSprites(void)
     sub_8004E8C(&var_30);
     var_30.unk4 = 0xF3FF;
     var_30.unkA = 0x800;
-    bgPos = gUnknown_203B0E4->bgPos;
-    RunAxAnimationFrame(&gUnknown_203B0E4->monAxSprite);
-    DoAxFrame_800558C(&gUnknown_203B0E4->monAxSprite, gUnknown_203B0E4->monSpritePos.x - bgPos.x, gUnknown_203B0E4->monSpritePos.y - bgPos.y, 3, gUnknown_203B0E4->unk4DD0, &var_30);
+    bgPos = gFriendAreasMapPtr->bgPos;
+    RunAxAnimationFrame(&gFriendAreasMapPtr->monAxSprite);
+    DoAxFrame_800558C(&gFriendAreasMapPtr->monAxSprite, gFriendAreasMapPtr->monSpritePos.x - bgPos.x, gFriendAreasMapPtr->monSpritePos.y - bgPos.y, 3, gFriendAreasMapPtr->unk4DD0, &var_30);
 
     for (i = 0; i < 32; i++) {
-        struct UnkStruct_4018 *r0 = &gUnknown_203B0E4->unk4018[i];
-        const struct FriendAreaLocation *location = &gUnknown_203B0E4->locations[i];
-        if (r0->unk4018 != 0) {
+        struct MapLocation *r0 = &gFriendAreasMapPtr->mapLocations[i];
+        const struct FriendAreaLocation *location = &gFriendAreasMapPtr->locations[i];
+        if (r0->isShown) {
             RunAxAnimationFrame(&r0->unk14);
-            DoAxFrame_800558C(&r0->unk14, location->unk4.x - bgPos.x, location->unk4.y- bgPos.y, 1, 0, &var_30);
+            DoAxFrame_800558C(&r0->unk14, location->pos.x - bgPos.x, location->pos.y- bgPos.y, 1, 0, &var_30);
         }
     }
 
     for (dir = 0; dir < NUM_DIRECTIONS; dir++) {
-        if (CheckAxFlag8000(&gUnknown_203B0E4->arrowSprites[dir])) {
-            RunAxAnimationFrame(&gUnknown_203B0E4->arrowSprites[dir]);
+        if (CheckAxFlag8000(&gFriendAreasMapPtr->arrowSprites[dir])) {
+            RunAxAnimationFrame(&gFriendAreasMapPtr->arrowSprites[dir]);
             // Hide non-diagonal arrows when R button is pressed.
             if ((gRealInputs.held & R_BUTTON) && (dir % 2) == 0)
                 continue;
 
-            DoAxFrame_800558C(&gUnknown_203B0E4->arrowSprites[dir],
-                              (gUnknown_80D40C4[dir].x + gUnknown_203B0E4->monSpritePos.x) - bgPos.x,
-                              (gUnknown_80D40C4[dir].y + gUnknown_203B0E4->monSpritePos.y) - bgPos.y,
+            DoAxFrame_800558C(&gFriendAreasMapPtr->arrowSprites[dir],
+                              (gUnknown_80D40C4[dir].x + gFriendAreasMapPtr->monSpritePos.x) - bgPos.x,
+                              (gUnknown_80D40C4[dir].y + gFriendAreasMapPtr->monSpritePos.y) - bgPos.y,
                               2, 0, &var_30);
         }
     }
@@ -143,19 +143,19 @@ static void AnimateSprites(void)
 void FriendAreasMap_UpdateBg(void)
 {
     s32 i, j;
-    s32 y1 = gUnknown_203B0E4->bgPos.y >> 3;
+    s32 y1 = gFriendAreasMapPtr->bgPos.y >> 3;
     s32 y2 = y1;
 
     for (i = 0; i < 21; i++) {
-        s32 x1 = gUnknown_203B0E4->bgPos.x >> 3;
+        s32 x1 = gFriendAreasMapPtr->bgPos.x >> 3;
         s32 x2 = x1;
 
         for (j = 0; j < 31; j++) {
             x1 &= 0x1F;
             y1 &= 0x1F;
 
-            gUnknown_202B038[2][y1][x1] = gUnknown_203B0E4->unk2014[y2][x2];
-            gUnknown_202B038[3][y1][x1] = gUnknown_203B0E4->unk14[y2][x2];
+            gUnknown_202B038[2][y1][x1] = gFriendAreasMapPtr->unk2014[y2][x2];
+            gUnknown_202B038[3][y1][x1] = gFriendAreasMapPtr->unk14[y2][x2];
             x2++;
             x1++;
         }
@@ -172,12 +172,12 @@ void FriendAreasMap_HideTextWindowAndArrows(void)
     s32 i;
 
     ShowWindows(NULL, TRUE, TRUE);
-    gUnknown_203B0E4->unk4DDC = 0;
-    gUnknown_203B0E4->unk4DE0 = 0;
-    gUnknown_203B0E4->unk4DE4 = 0;
-    gUnknown_203B0E4->unk4DE8 = 0;
+    gFriendAreasMapPtr->unk4DDC = 0;
+    gFriendAreasMapPtr->unk4DE0 = 0;
+    gFriendAreasMapPtr->unk4DE4 = 0;
+    gFriendAreasMapPtr->unk4DE8 = 0;
     for (i = 0; i < NUM_DIRECTIONS; i++) {
-        ResetFlags(&gUnknown_203B0E4->arrowSprites[i]);
+        ResetFlags(&gFriendAreasMapPtr->arrowSprites[i]);
     }
 }
 
@@ -185,21 +185,21 @@ static bool8 FadeScreen(void)
 {
     bool8 ret = FALSE;
 
-    if (gUnknown_203B0E4->brightness < 31) {
+    if (gFriendAreasMapPtr->brightness < 31) {
         s32 i;
-        RGB *color = (void *) gUnknown_203B0E4->unk0[0]->data;
+        RGB *color = (void *) gFriendAreasMapPtr->unk0[0]->data;
 
-        if (++gUnknown_203B0E4->brightness >= 31) {
-            gUnknown_203B0E4->brightness = 31;
+        if (++gFriendAreasMapPtr->brightness >= 31) {
+            gFriendAreasMapPtr->brightness = 31;
         }
 
         for (i = 0; i < 224; color++, i++) {
-            SetBGPaletteBufferColorRGB(i, color, gUnknown_203B0E4->brightness, NULL);
+            SetBGPaletteBufferColorRGB(i, color, gFriendAreasMapPtr->brightness, NULL);
         }
 
-        color = (void *) gUnknown_203B0E4->unk0[1]->data;
+        color = (void *) gFriendAreasMapPtr->unk0[1]->data;
         for (i = 0; i < 240; color++, i++) {
-            SetBGPaletteBufferColorRGB(i + 256, color, gUnknown_203B0E4->brightness, NULL);
+            SetBGPaletteBufferColorRGB(i + 256, color, gFriendAreasMapPtr->brightness, NULL);
         }
 
         ret = TRUE;
@@ -210,45 +210,45 @@ static bool8 FadeScreen(void)
 
 void FriendAreasMap_UpdateMonSpritePosition(void)
 {
-    if (gUnknown_203B0E4->monSpritePos.x - gUnknown_203B0E4->bgPos.x < 48) {
-        gUnknown_203B0E4->bgPos.x = gUnknown_203B0E4->monSpritePos.x - 48;
+    if (gFriendAreasMapPtr->monSpritePos.x - gFriendAreasMapPtr->bgPos.x < 48) {
+        gFriendAreasMapPtr->bgPos.x = gFriendAreasMapPtr->monSpritePos.x - 48;
     }
-    else if (gUnknown_203B0E4->monSpritePos.x - gUnknown_203B0E4->bgPos.x > 192) {
-        gUnknown_203B0E4->bgPos.x = gUnknown_203B0E4->monSpritePos.x - 192;
-    }
-
-    if (gUnknown_203B0E4->monSpritePos.y - gUnknown_203B0E4->bgPos.y < 48) {
-        gUnknown_203B0E4->bgPos.y = gUnknown_203B0E4->monSpritePos.y - 48;
-    }
-    else if (gUnknown_203B0E4->monSpritePos.y - gUnknown_203B0E4->bgPos.y > 112) {
-        gUnknown_203B0E4->bgPos.y = gUnknown_203B0E4->monSpritePos.y - 112;
+    else if (gFriendAreasMapPtr->monSpritePos.x - gFriendAreasMapPtr->bgPos.x > 192) {
+        gFriendAreasMapPtr->bgPos.x = gFriendAreasMapPtr->monSpritePos.x - 192;
     }
 
-    if (gUnknown_203B0E4->bgPos.x < 0) {
-        gUnknown_203B0E4->bgPos.x = 0;
+    if (gFriendAreasMapPtr->monSpritePos.y - gFriendAreasMapPtr->bgPos.y < 48) {
+        gFriendAreasMapPtr->bgPos.y = gFriendAreasMapPtr->monSpritePos.y - 48;
     }
-    if (gUnknown_203B0E4->bgPos.y < 0) {
-        gUnknown_203B0E4->bgPos.y = 0;
+    else if (gFriendAreasMapPtr->monSpritePos.y - gFriendAreasMapPtr->bgPos.y > 112) {
+        gFriendAreasMapPtr->bgPos.y = gFriendAreasMapPtr->monSpritePos.y - 112;
     }
-    if (gUnknown_203B0E4->bgPos.x > 239) {
-        gUnknown_203B0E4->bgPos.x = 239;
+
+    if (gFriendAreasMapPtr->bgPos.x < 0) {
+        gFriendAreasMapPtr->bgPos.x = 0;
     }
-    if (gUnknown_203B0E4->bgPos.y > 151) {
-        gUnknown_203B0E4->bgPos.y = 151;
+    if (gFriendAreasMapPtr->bgPos.y < 0) {
+        gFriendAreasMapPtr->bgPos.y = 0;
+    }
+    if (gFriendAreasMapPtr->bgPos.x > 239) {
+        gFriendAreasMapPtr->bgPos.x = 239;
+    }
+    if (gFriendAreasMapPtr->bgPos.y > 151) {
+        gFriendAreasMapPtr->bgPos.y = 151;
     }
 }
 
 void FriendAreasMap_ShowDirectionArrows(void)
 {
     s32 i;
-    struct UnkStruct_4018 *r9 = &gUnknown_203B0E4->unk4018[gUnknown_203B0E4->unk4A18];
+    struct MapLocation *r9 = &gFriendAreasMapPtr->mapLocations[gFriendAreasMapPtr->unk4A18];
 
     for (i = 0; i < NUM_DIRECTIONS; i++) {
-        ResetFlags(&gUnknown_203B0E4->arrowSprites[i]);
+        ResetFlags(&gFriendAreasMapPtr->arrowSprites[i]);
         if (r9->unk2[i] >= 0) {
-            struct UnkStruct_4018 *ptr = &gUnknown_203B0E4->unk4018[r9->unk2[i]];
-            if (ptr->unk4018 != 0) {
-                AxResInitFile(&gUnknown_203B0E4->arrowSprites[i], gUnknown_203B0E4->unk0[2], i + 4, 0, 0x40, 0, TRUE);
+            struct MapLocation *ptr = &gFriendAreasMapPtr->mapLocations[r9->unk2[i]];
+            if (ptr->isShown != 0) {
+                AxResInitFile(&gFriendAreasMapPtr->arrowSprites[i], gFriendAreasMapPtr->unk0[2], i + 4, 0, 0x40, 0, TRUE);
             }
         }
     }
@@ -257,8 +257,8 @@ void FriendAreasMap_ShowDirectionArrows(void)
 void FriendAreasMap_PrintCurrAreaName(void)
 {
     u8 txt[200];
-    s32 id = gUnknown_203B0E4->unk4A18;
-    const struct FriendAreaLocation *location = &gUnknown_203B0E4->locations[id];
+    s32 id = gFriendAreasMapPtr->unk4A18;
+    const struct FriendAreaLocation *location = &gFriendAreasMapPtr->locations[id];
     Windows windows = {0};
 
     windows.id[0].type = WINDOW_TYPE_NORMAL;
@@ -271,7 +271,7 @@ void FriendAreasMap_PrintCurrAreaName(void)
     windows.id[2].type = WINDOW_TYPE_NORMAL;
     windows.id[3].type = WINDOW_TYPE_NORMAL;
 
-    if (gUnknown_203B0E4->monSpritePos.y - gUnknown_203B0E4->bgPos.y <= 80) {
+    if (gFriendAreasMapPtr->monSpritePos.y - gFriendAreasMapPtr->bgPos.y <= 80) {
         windows.id[0].pos.y = 17;
     }
     else {
@@ -283,18 +283,18 @@ void FriendAreasMap_PrintCurrAreaName(void)
     sprintfStatic(txt, _("{CENTER_ALIGN}%s"), location->name);
     PrintFormattedStringOnWindow(12, 2, txt, 0, '\0');
     sub_80073E0(0);
-    gUnknown_203B0E4->unk4DDC = (windows.id[0].pos.x * 8) - 5;
-    gUnknown_203B0E4->unk4DE0 = (windows.id[0].pos.y * 8) + 5;
-    gUnknown_203B0E4->unk4DE4 = (windows.id[0].width * 8) + 10;
-    gUnknown_203B0E4->unk4DE8 = (windows.id[0].height * 8) + 10;
+    gFriendAreasMapPtr->unk4DDC = (windows.id[0].pos.x * 8) - 5;
+    gFriendAreasMapPtr->unk4DE0 = (windows.id[0].pos.y * 8) + 5;
+    gFriendAreasMapPtr->unk4DE4 = (windows.id[0].width * 8) + 10;
+    gFriendAreasMapPtr->unk4DE8 = (windows.id[0].height * 8) + 10;
 }
 
 void FriendAreasMap_PrintAvailableSubAreas(void)
 {
     s32 i, count, var;
-    s32 id = gUnknown_203B0E4->unk4A18;
-    const struct FriendAreaLocation *location = &gUnknown_203B0E4->locations[id];
-    MenuInputStruct *menuInput = &gUnknown_203B0E4->menu;
+    s32 id = gFriendAreasMapPtr->unk4A18;
+    const struct FriendAreaLocation *location = &gFriendAreasMapPtr->locations[id];
+    MenuInputStruct *menuInput = &gFriendAreasMapPtr->menu;
     WindowHeader header;
     Windows windows = {
         .id = {
@@ -319,14 +319,14 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
     };
 
     count = 0;
-    for (i = 0; i < 8; i++) {
-        if (sub_800FFE8(location->unk8[i])) {
-            gUnknown_203B0E4->unk4DEC[count] = location->unk8[i];
+    for (i = 0; i < MAX_AREAS_PER_LOCATION; i++) {
+        if (IsFriendAreaShownOnMap(location->areasIds[i])) {
+            gFriendAreasMapPtr->displayedAreas[count] = location->areasIds[i];
             count++;
         }
     }
 
-    gUnknown_203B0E4->unk4DF8 = count;
+    gFriendAreasMapPtr->unk4DF8 = count;
     header.f0 = 1;
     header.f1 = 0;
     header.f2 = 18;
@@ -352,24 +352,24 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
 
     ShowWindows(&windows, TRUE, TRUE);
 
-    gUnknown_203B0E4->unk4DDC = 0;
-    gUnknown_203B0E4->unk4DE0 = 0;
-    gUnknown_203B0E4->unk4DE4 = 0;
-    gUnknown_203B0E4->unk4DE8 = 0;
+    gFriendAreasMapPtr->unk4DDC = 0;
+    gFriendAreasMapPtr->unk4DE0 = 0;
+    gFriendAreasMapPtr->unk4DE4 = 0;
+    gFriendAreasMapPtr->unk4DE8 = 0;
     sub_80073B8(0);
     PrintFormattedStringOnWindow(16, 0, _("Where would you like to go?"), 0, '\0');
 
     for (i = 0; i < count; i++) {
         unkStruct_8092638 unkFriendAreaStruct;
         s32 r4 = sub_8013800(menuInput, i);
-        u8 r5 = gUnknown_203B0E4->unk4DEC[i];
+        u8 areaId = gFriendAreasMapPtr->displayedAreas[i];
 
-        sub_80101F8(gFormatBuffer_Items[0], r5);
-        if (r5 == 0) {
+        PrintFriendAreaNameInMap(gFormatBuffer_Items[0], areaId);
+        if (areaId == 0) {
             PrintFormattedStringOnWindow(12, r4, _("{MOVE_ITEM_0}"), 0, '\0');
         }
         else {
-            sub_80926F8(r5, &unkFriendAreaStruct, gUnknown_203B0E4->unk4A2C);
+            sub_80926F8(areaId, &unkFriendAreaStruct, gFriendAreasMapPtr->unk4A2C);
             gFormatArgs[0] = unkFriendAreaStruct.unk2;
             gFormatArgs[1] = unkFriendAreaStruct.numPokemon;
             PrintFormattedStringOnWindow(12, r4, _("{MOVE_ITEM_0}($v02／$v12)"), 0, '\0');
@@ -381,10 +381,10 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
 
 void FriendAreasMap_RunFrameActions(void)
 {
-    SetBG2RegOffsets(gUnknown_203B0E4->bgPos.x, gUnknown_203B0E4->bgPos.y);
-    SetBG3RegOffsets(gUnknown_203B0E4->bgPos.x, gUnknown_203B0E4->bgPos.y);
+    SetBG2RegOffsets(gFriendAreasMapPtr->bgPos.x, gFriendAreasMapPtr->bgPos.y);
+    SetBG3RegOffsets(gFriendAreasMapPtr->bgPos.x, gFriendAreasMapPtr->bgPos.y);
     AnimateSprites();
-    sub_8004AF0(FadeScreen(), gUnknown_203B0E4->unk4C4C, 0xB0, 16, gUnknown_203B0E4->brightness, NULL);
+    sub_8004AF0(FadeScreen(), gFriendAreasMapPtr->unk4C4C, 0xB0, 16, gFriendAreasMapPtr->brightness, NULL);
     sub_8005838(NULL, 0);
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
