@@ -57,7 +57,7 @@ static const DungeonPos gUnknown_80D40C4[] =
     {-24, 24},
 };
 
-void sub_8010DA4(void)
+void FriendAreasMap_InitGfx(void)
 {
     u8 filename[0xC];
     s32 i, size;
@@ -116,12 +116,12 @@ static void AnimateSprites(void)
     RunAxAnimationFrame(&gFriendAreasMapPtr->monAxSprite);
     DoAxFrame_800558C(&gFriendAreasMapPtr->monAxSprite, gFriendAreasMapPtr->monSpritePos.x - bgPos.x, gFriendAreasMapPtr->monSpritePos.y - bgPos.y, 3, gFriendAreasMapPtr->unk4DD0, &var_30);
 
-    for (i = 0; i < 32; i++) {
-        struct MapLocation *r0 = &gFriendAreasMapPtr->mapLocations[i];
-        const struct FriendAreaLocation *location = &gFriendAreasMapPtr->locations[i];
-        if (r0->isShown) {
-            RunAxAnimationFrame(&r0->unk14);
-            DoAxFrame_800558C(&r0->unk14, location->pos.x - bgPos.x, location->pos.y- bgPos.y, 1, 0, &var_30);
+    for (i = 0; i < NUM_FRIEND_AREA_LOCATIONS; i++) {
+        struct MapLocation *mapLocation = &gFriendAreasMapPtr->mapLocations[i];
+        const struct FriendAreaLocationInfo *locationInfo = &gFriendAreasMapPtr->locationsInfo[i];
+        if (mapLocation->isShown) {
+            RunAxAnimationFrame(&mapLocation->sprite);
+            DoAxFrame_800558C(&mapLocation->sprite, locationInfo->pos.x - bgPos.x, locationInfo->pos.y- bgPos.y, 1, 0, &var_30);
         }
     }
 
@@ -241,13 +241,13 @@ void FriendAreasMap_UpdateMonSpritePosition(void)
 void FriendAreasMap_ShowDirectionArrows(void)
 {
     s32 i;
-    struct MapLocation *r9 = &gFriendAreasMapPtr->mapLocations[gFriendAreasMapPtr->unk4A18];
+    struct MapLocation *currLocation = &gFriendAreasMapPtr->mapLocations[gFriendAreasMapPtr->currLocationId];
 
     for (i = 0; i < NUM_DIRECTIONS; i++) {
         ResetFlags(&gFriendAreasMapPtr->arrowSprites[i]);
-        if (r9->unk2[i] >= 0) {
-            struct MapLocation *ptr = &gFriendAreasMapPtr->mapLocations[r9->unk2[i]];
-            if (ptr->isShown != 0) {
+        if (currLocation->locationsByDirection[i] >= 0) {
+            struct MapLocation *ptr = &gFriendAreasMapPtr->mapLocations[currLocation->locationsByDirection[i]];
+            if (ptr->isShown) {
                 AxResInitFile(&gFriendAreasMapPtr->arrowSprites[i], gFriendAreasMapPtr->unk0[2], i + 4, 0, 0x40, 0, TRUE);
             }
         }
@@ -257,8 +257,8 @@ void FriendAreasMap_ShowDirectionArrows(void)
 void FriendAreasMap_PrintCurrAreaName(void)
 {
     u8 txt[200];
-    s32 id = gFriendAreasMapPtr->unk4A18;
-    const struct FriendAreaLocation *location = &gFriendAreasMapPtr->locations[id];
+    s32 id = gFriendAreasMapPtr->currLocationId;
+    const struct FriendAreaLocationInfo *locationInfo = &gFriendAreasMapPtr->locationsInfo[id];
     Windows windows = {0};
 
     windows.id[0].type = WINDOW_TYPE_NORMAL;
@@ -280,7 +280,7 @@ void FriendAreasMap_PrintCurrAreaName(void)
 
     ShowWindows(&windows, TRUE, TRUE);
     sub_80073B8(0);
-    sprintfStatic(txt, _("{CENTER_ALIGN}%s"), location->name);
+    sprintfStatic(txt, _("{CENTER_ALIGN}%s"), locationInfo->name);
     PrintFormattedStringOnWindow(12, 2, txt, 0, '\0');
     sub_80073E0(0);
     gFriendAreasMapPtr->unk4DDC = (windows.id[0].pos.x * 8) - 5;
@@ -292,8 +292,8 @@ void FriendAreasMap_PrintCurrAreaName(void)
 void FriendAreasMap_PrintAvailableSubAreas(void)
 {
     s32 i, count, var;
-    s32 id = gFriendAreasMapPtr->unk4A18;
-    const struct FriendAreaLocation *location = &gFriendAreasMapPtr->locations[id];
+    s32 id = gFriendAreasMapPtr->currLocationId;
+    const struct FriendAreaLocationInfo *locationInfo = &gFriendAreasMapPtr->locationsInfo[id];
     MenuInputStruct *menuInput = &gFriendAreasMapPtr->menu;
     WindowHeader header;
     Windows windows = {
@@ -320,8 +320,8 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
 
     count = 0;
     for (i = 0; i < MAX_AREAS_PER_LOCATION; i++) {
-        if (IsFriendAreaShownOnMap(location->areasIds[i])) {
-            gFriendAreasMapPtr->displayedAreas[count] = location->areasIds[i];
+        if (IsFriendAreaShownOnMap(locationInfo->areasIds[i])) {
+            gFriendAreasMapPtr->displayedAreas[count] = locationInfo->areasIds[i];
             count++;
         }
     }
