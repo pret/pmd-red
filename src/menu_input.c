@@ -16,9 +16,9 @@
 
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
-const UnkTextStruct2_sub2 UnkData_80D47C4 = {0x01, 0x00, 0x10, 0x00};
+const WindowHeader UnkData_80D47C4 = {0x01, 0x00, 0x10, 0x00};
 
-const UnkTextStruct2 gUnknown_80D47C8[4] = {
+const Window gUnknown_80D47C8[4] = {
         0x00, 0x00, 0x00, 0x00,
         0x06,
         0x02, 0x02,
@@ -223,7 +223,7 @@ void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
     xxx_call_draw_char(x + add_x, y, uVar2, color, a4);
 }
 
-void sub_8012CAC(UnkTextStruct2 *a0, const MenuItem *a1)
+void sub_8012CAC(Window *a0, const MenuItem *a1)
 {
     s32 length;
     s32 maxLength;
@@ -240,35 +240,35 @@ void sub_8012CAC(UnkTextStruct2 *a0, const MenuItem *a1)
         }
   }
 
-    a0->unkC = (maxLength / 8) + 2;
+    a0->width = (maxLength / 8) + 2;
     sub_8012D08(a0, count);
 }
 
-void sub_8012D08(UnkTextStruct2 *param_1, s32 param_2)
+void sub_8012D08(Window *param_1, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
 
     sVar2 = (s16) sub_80095E4(param_2, 12);
-    if (param_1->unk4 == 6)
+    if (param_1->type == WINDOW_TYPE_WITH_HEADER)
         sVar2 = (s16)(sVar2 + 2);
 
     sVar3 = sVar2;
-    param_1->unkE = sVar3;
+    param_1->height = sVar3;
     param_1->unk10 = sVar3;
 }
 
-void sub_8012D34(struct UnkTextStruct2 *param_1, s32 param_2)
+void sub_8012D34(struct Window *param_1, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
 
     sVar2 = (s16) sub_8009614(param_2, 24);
-    if (param_1->unk4 == 6)
+    if (param_1->type == WINDOW_TYPE_WITH_HEADER)
         sVar2 = (s16)(sVar2 + 2);
 
     sVar3 = sVar2;
-    param_1->unkE = sVar3;
+    param_1->height = sVar3;
     param_1->unk10 = sVar3;
 
 }
@@ -386,10 +386,10 @@ void sub_8012EBC(MenuStruct *param_1)
     const u32 *colorArray;
     s32 counter;
     s32 index;
-    UnkTextStruct3 textStack;
+    Windows textStack;
     u8 buffer[256];
     UnkTextStruct1 *ptr_text;
-    UnkTextStruct2 *ptr_text2;
+    Window *ptr_text2;
 
     if (param_1->unk4D) {
         sub_80073B8(param_1->index);
@@ -1193,7 +1193,7 @@ void sub_8013F84(void)
     AddSprite(&SStack_18,0x100,0,0x0);
 }
 
-void sub_80140B4(UnkTextStruct3 *a0)
+void sub_80140B4(Windows *a0)
 {
     s32 i;
 

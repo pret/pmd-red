@@ -16,6 +16,7 @@
 #include "code_800C9CC.h"
 #include "pokemon.h"
 #include "decompress.h"
+#include "constants/direction.h"
 
 extern u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_);
 extern void sub_801178C(void);
@@ -54,26 +55,72 @@ struct UnkStruct_203B0E8
     u8 unk5E98[1500];
 };
 
+struct FiendArea
+{
+    const u8 *name;
+    DungeonPos unk4;
+    u8 unk8[8];
+    s16 unk10[8];
+};
+
+struct UnkStruct_4018
+{
+    u8 unk4018;
+    s16 unk2[8];
+    axdata unk14;
+};
+
+// size: 0x4DD8
+struct UnkBgStruct
+{
+    OpenedFile *unk0[5];
+    u16 unk14[64][64];
+    u16 unk2014[64][64];
+    const struct FiendArea *unk4014;
+    struct UnkStruct_4018 unk4018[32];
+    s32 unk4A18;
+    s32 unk4A1C;
+    s32 unk4A20;
+    s32 unk4A24;
+    s32 unk4A28;
+    u8 unk4A2C;
+    axdata arrowSprites[NUM_DIRECTIONS];
+    axdata unk4C10;
+    unkStruct_202EE8C unk4C4C[16];
+    s32 unk4DCC;
+    u32 unk4DD0;
+    DungeonPos bgPos;
+    DungeonPos monSpritePos;
+    s32 unk4DDC;
+    s32 unk4DE0;
+    s32 unk4DE4;
+    s32 unk4DE8;
+    u8 unk4DEC[8];
+    u8 unk4DF4;
+    s32 unk4DF8;
+    MenuInputStruct menu;
+};
+
 EWRAM_INIT struct UnkBgStruct *gUnknown_203B0E4 = NULL;
 EWRAM_INIT struct UnkStruct_203B0E8 *gUnknown_203B0E8 = NULL;
-EWRAM_INIT UnkTextStruct3 gUnknown_203B0EC = {
+EWRAM_INIT Windows gUnknown_203B0EC = {
     .a0 = {
         [0] = {
-            .unk4 = 3,
+            .type = WINDOW_TYPE_NORMAL,
             .pos = {2, 10},
-            .unkC = 26,
-            .unkE = 9,
+            .width = 26,
+            .height = 9,
             .unk10 = 9,
         },
         [1] = {
-            .unk4 = 3,
+            .type = WINDOW_TYPE_NORMAL,
             .pos = {23, 6},
-            .unkC = 5,
-            .unkE = 3,
+            .width = 5,
+            .height = 3,
             .unk10 = 3,
         },
-        [2] = { .unk4 = 3,},
-        [3] = { .unk4 = 3,},
+        [2] = { .type = WINDOW_TYPE_NORMAL,},
+        [3] = { .type = WINDOW_TYPE_NORMAL,},
     }
 };
 
@@ -87,18 +134,16 @@ static inline bool8 ResetFlags(axdata *ptr)
     return ptr->flags = 0;
 }
 
-extern u8 *const gUnknown_80D408C[];
+
 extern u8 *const gUnknown_80D4014[];
 extern const FileArchive gTitleMenuFileArchive;
 extern const FileArchive gMonsterFileArchive;
 extern const u8 gUnknown_80D40E4[];
 extern const u8 gUnknown_80D40EC[];
 extern const u8 gUnknown_80D405C[];
-extern const DungeonPos gUnknown_80D40C4[];
 extern const u8 gUnknown_80D40FC[];
 extern const u8 gUnknown_80D4104[];
 extern const u8 gUnknown_80D4120[];
-extern const u8 gUnknown_80D4124[];
 extern const u8 gUnknown_80D3EFC[];
 extern const u8 gUnknown_80D40F4[];
 extern const u8 gUnknown_80D4064[];
@@ -133,7 +178,7 @@ static void sub_8010950(void);
 static void sub_8010A88(bool8 a0);
 static bool8 sub_8010A00(void);
 static void nullsub_24(void);
-void sub_8011494(void);
+void PrintAvailableSubAreas(void);
 void sub_8010960(void);
 void sub_8010798(void);
 void sub_8010858(void);
@@ -143,20 +188,20 @@ void sub_801059C(void);
 bool8 sub_8010C58(u8 *str);
 void sub_8010C10(const u8 *text);
 void sub_801091C(void);
-void sub_8011398(void);
+void PrintCurrAreaName(void);
 void sub_801073C(void);
 void sub_8010B74(DungeonLocation *dungLocation);
-void sub_801169C(void);
-void sub_80110B0(void);
+void RunFrameActions(void);
+void UpdateBg(void);
 void sub_8010EF0(void);
-void sub_8011300(void);
-void sub_8011240(void);
+void ShowDirectionArrows(void);
+void UpdateMonSpritePosition(void);
 bool8 sub_800FFE8(u8 friendAreaId);
-void sub_8011168(void);
-void sub_80100C0(s32 a0, s32 a1, s32 count);
-u8 sub_8010014(void);
-s32 sub_800FAA8(s32 *a0, s32 *a1);
-bool8 sub_800FB6C(void);
+void HideTextWindowAndArrows(void);
+void MoveToNewArea(s32 a0, s32 a1, s32 count);
+u8 GetNewSelectedArea(void);
+s32 ChooseArea(s32 *a0, s32 *newAreaId);
+bool8 ChooseSubArea(void);
 void sub_800FC28(void);
 void sub_800FC5C(u8 a0);
 void sub_8010DA4(void);
@@ -205,14 +250,14 @@ void sub_800F990(struct struct_unk800F990 *param_1)
     sub_8011760();
     while (1) {
         s32 local_1c = 0;
-        s32 local_18 = 0;
-        s32 iVar2 = sub_800FAA8(&local_1c, &local_18);
+        s32 newAreaId = 0;
+        s32 iVar2 = ChooseArea(&local_1c, &newAreaId);
 
         if (iVar2 == 1) {
-            sub_80100C0(local_1c, local_18, 0x32);
+            MoveToNewArea(local_1c, newAreaId, 0x32);
         }
         else if (iVar2 == 2) {
-            if (!sub_800FB6C())
+            if (!ChooseSubArea())
                 continue;
             param_1->unkC = gUnknown_203B0E4->unk4DF4;
             break;
@@ -222,7 +267,7 @@ void sub_800F990(struct struct_unk800F990 *param_1)
                 param_1->unkC = 0;
                 break;
             }
-            sub_80100C0(gUnknown_203B0E4->unk4A20,0,10);
+            MoveToNewArea(gUnknown_203B0E4->unk4A20,0,10);
         }
     }
 
@@ -231,30 +276,30 @@ void sub_800F990(struct struct_unk800F990 *param_1)
     nullsub_16();
 }
 
-s32 sub_800FAA8(s32 *a0, s32 *a1)
+s32 ChooseArea(s32 *a0, s32 *newAreaId)
 {
     s32 ret = 0;
 
-    sub_8011300();
-    sub_8011398();
+    ShowDirectionArrows();
+    PrintCurrAreaName();
     while (ret == 0) {
-        s32 r3;
+        s32 areaId;
 
-        sub_801169C();
-        r3 = sub_8010014();
-        if (r3 != 0xFF) {
+        RunFrameActions();
+        areaId = GetNewSelectedArea();
+        if (areaId != 0xFF) {
             s32 r4 = gUnknown_203B0E4->unk4A18;
             struct UnkStruct_4018 *ptr = &gUnknown_203B0E4->unk4018[r4];
 
-            if (ptr->unk2[r3] >= 0) {
-                s32 id = ptr->unk2[r3];
+            if (ptr->unk2[areaId] >= 0) {
+                s32 id = ptr->unk2[areaId];
                 struct UnkStruct_4018 *ptr2 = &gUnknown_203B0E4->unk4018[id];
 
                 if (ptr2->unk4018 != 0) {
                     ret = 1;
                     *a0 = id;
-                    *a1 = r3;
-                    gUnknown_203B0E4->unk4A28 = r3;
+                    *newAreaId = areaId;
+                    gUnknown_203B0E4->unk4A28 = areaId;
                     gUnknown_203B0E4->unk4A1C = r4;
                 }
             }
@@ -272,16 +317,16 @@ s32 sub_800FAA8(s32 *a0, s32 *a1)
     return ret;
 }
 
-bool8 sub_800FB6C(void)
+bool8 ChooseSubArea(void)
 {
     bool8 ret = FALSE;
 
-    sub_8011494();
+    PrintAvailableSubAreas();
     while (1) {
-        MenuInputStruct *menuPtr = &gUnknown_203B0E4->unk4DFC;
+        MenuInputStruct *menuPtr = &gUnknown_203B0E4->menu;
 
         AddMenuCursorSprite(menuPtr);
-        sub_801169C();
+        RunFrameActions();
         if (gRealInputs.repeated & DPAD_DOWN) {
             MoveMenuCursorDown(menuPtr);
             PlayCursorUpDownSoundEffect();
@@ -310,11 +355,11 @@ void sub_800FC28(void)
 {
     s32 i;
 
-    sub_8011168();
+    HideTextWindowAndArrows();
     sub_80117AC();
     for (i = 0; i < 60; i++) {
         gUnknown_203B0E4->unk4DCC -= 2;
-        sub_801169C();
+        RunFrameActions();
     }
 }
 
@@ -452,11 +497,11 @@ void sub_800FC5C(u8 a0)
 
     AxResInitFile(&gUnknown_203B0E4->unk4C10, gUnknown_203B0E4->unk0[3], 0, 0, 0, 0, TRUE);
     gUnknown_203B0E4->unk4A18 = var_48;
-    gUnknown_203B0E4->unk4DD8 = gUnknown_203B0E4->unk4014[var_48].unk4;
-    gUnknown_203B0E4->unk4DD4.x = gUnknown_203B0E4->unk4DD8.x - 120;
-    gUnknown_203B0E4->unk4DD4.y = gUnknown_203B0E4->unk4DD8.y - 80;
-    sub_8011240();
-    sub_80110B0();
+    gUnknown_203B0E4->monSpritePos = gUnknown_203B0E4->unk4014[var_48].unk4;
+    gUnknown_203B0E4->bgPos.x = gUnknown_203B0E4->monSpritePos.x - 120;
+    gUnknown_203B0E4->bgPos.y = gUnknown_203B0E4->monSpritePos.y - 80;
+    UpdateMonSpritePosition();
+    UpdateBg();
 }
 
 bool8 sub_800FFE8(u8 friendAreaId)
@@ -468,7 +513,7 @@ bool8 sub_800FFE8(u8 friendAreaId)
     return FALSE;
 }
 
-u8 sub_8010014(void)
+u8 GetNewSelectedArea(void)
 {
     u8 sp1[16];
     u8 sp2[16];
@@ -505,13 +550,13 @@ u8 sub_8010014(void)
     return 0xFF;
 }
 
-void sub_80100C0(s32 a0, s32 a1, s32 count)
+void MoveToNewArea(s32 a0, s32 a1, s32 count)
 {
     s32 i, arrayId;
     DungeonPos pos1, pos2;
 
     AxResInitFile(&gUnknown_203B0E4->unk4C10, gUnknown_203B0E4->unk0[3], 0, a1 & 7, 0, 0, TRUE);
-    sub_8011168();
+    HideTextWindowAndArrows();
 
     arrayId = gUnknown_203B0E4->unk4A18;
     pos1 = gUnknown_203B0E4->unk4014[arrayId].unk4;
@@ -519,19 +564,19 @@ void sub_80100C0(s32 a0, s32 a1, s32 count)
 
     PlayCursorUpDownSoundEffect();
     for (i = 0; i < count; i++) {
-        gUnknown_203B0E4->unk4DD8.x = ((((pos2.x - pos1.x) * (i << 8)) / count) / 256) + pos1.x;
-        gUnknown_203B0E4->unk4DD8.y = ((((pos2.y - pos1.y) * (i << 8)) / count) / 256) + pos1.y;
+        gUnknown_203B0E4->monSpritePos.x = ((((pos2.x - pos1.x) * (i << 8)) / count) / 256) + pos1.x;
+        gUnknown_203B0E4->monSpritePos.y = ((((pos2.y - pos1.y) * (i << 8)) / count) / 256) + pos1.y;
 
-        sub_8011240();
-        sub_80110B0();
-        sub_801169C();
+        UpdateMonSpritePosition();
+        UpdateBg();
+        RunFrameActions();
     }
 
     gUnknown_203B0E4->unk4A18 = a0;
-    gUnknown_203B0E4->unk4DD8 = gUnknown_203B0E4->unk4014[a0].unk4;
-    sub_8011240();
-    sub_80110B0();
-    sub_801169C();
+    gUnknown_203B0E4->monSpritePos = gUnknown_203B0E4->unk4014[a0].unk4;
+    UpdateMonSpritePosition();
+    UpdateBg();
+    RunFrameActions();
     AxResInitFile(&gUnknown_203B0E4->unk4C10, gUnknown_203B0E4->unk0[3], 0, 0, 0, 0, TRUE);
 }
 
@@ -893,18 +938,18 @@ static void sub_8010A88(bool8 a0)
 void sub_8010B74(DungeonLocation *dungLocation)
 {
     const s32 x = 12;
-    UnkTextStruct3 spTxtStruct = {
+    Windows spTxtStruct = {
         .a0 = {
             [0] = {
-                .unk4 = 3,
+                .type = WINDOW_TYPE_NORMAL,
                 .pos = {x, 2},
-                .unkC = 16,
-                .unkE = 2,
+                .width = 16,
+                .height = 2,
                 .unk10 = 2,
             },
-            [1] = {.unk4 = 3},
-            [2] = {.unk4 = 3},
-            [3] = {.unk4 = 3},
+            [1] = {.type = WINDOW_TYPE_NORMAL},
+            [2] = {.type = WINDOW_TYPE_NORMAL},
+            [3] = {.type = WINDOW_TYPE_NORMAL},
         }
     };
 
@@ -918,7 +963,7 @@ void sub_8010B74(DungeonLocation *dungLocation)
     xxx_call_save_unk_text_struct_800641C(&spTxtStruct, TRUE, TRUE);
     sub_80073B8(0);
     CopyDungeonName1toBuffer(gFormatBuffer_Monsters[0], dungLocation);
-    PrintFormattedStringOnWindow(12, 2, gUnknown_80D4074, 0, '\0');
+    PrintFormattedStringOnWindow(12, 2, _("{CENTER_ALIGN}{POKEMON_0}"), 0, '\0');
     sub_80073E0(0);
 }
 
@@ -952,15 +997,15 @@ bool8 sub_8010C58(u8 *str)
 
     gUnknown_203B0EC.a0[0].pos.y = 19 - r2;
     gUnknown_203B0EC.a0[0].unk10 = r2;
-    gUnknown_203B0EC.a0[0].unkE = r2;
+    gUnknown_203B0EC.a0[0].height = r2;
     gUnknown_203B0EC.a0[1].pos.y = 14 - r2;
     xxx_call_save_unk_text_struct_800641C(&gUnknown_203B0EC, TRUE, TRUE);
     sub_80073B8(0);
     PrintFormattedStringOnWindow(4, 0, str, 0, '\0');
     sub_80073E0(0);
     sub_80073B8(1);
-    PrintFormattedStringOnWindow(10, 0, gUnknown_80D407C, 1, '\0');
-    PrintFormattedStringOnWindow(10, 12, gUnknown_80D4080, 1, '\0');
+    PrintFormattedStringOnWindow(10, 0, "Yes", 1, '\0');
+    PrintFormattedStringOnWindow(10, 12, "No", 1, '\0');
     sub_80073E0(1);
 
     menuInput.menuIndex = 1;
@@ -1010,6 +1055,28 @@ void sub_8010D8C(u8 id, DungeonPos *pos)
     pos->y = gDungeonCoordinates[id].y;
 }
 
+UNUSED static const char sPksDir2[] = "pksdir0";
+
+static char *const gUnknown_80D408C[] =
+{
+    "wmapfont",
+    "wmapmcc",
+    "wmapcani",
+    "wmappal",
+};
+
+static const DungeonPos gUnknown_80D40C4[] =
+{
+    {0, 24},
+    {24, 24},
+    {24, 0},
+    {24, -24},
+    {0, -24},
+    {-24, -24},
+    {-24, 0},
+    {-24, 24},
+};
+
 void sub_8010DA4(void)
 {
     u8 filename[0xC];
@@ -1019,11 +1086,11 @@ void sub_8010DA4(void)
     OpenedFile *file = OpenFileAndGetFileDataPtr(gUnknown_80D408C[0], &gTitleMenuFileArchive);
     OpenedFile *file2 = OpenFileAndGetFileDataPtr(gUnknown_80D408C[1], &gTitleMenuFileArchive);
 
-    sprintf(filename, gUnknown_80D40E4, pokeStruct->speciesNum);
+    sprintf(filename, "ax%03d", pokeStruct->speciesNum);
     gUnknown_203B0E4->unk0[3] = OpenFileAndGetFileDataPtr(filename, &gMonsterFileArchive);
-    gUnknown_203B0E4->unk0[2] = OpenFileAndGetFileDataPtr(gUnknown_80D40EC, &gTitleMenuFileArchive);
+    gUnknown_203B0E4->unk0[2] = OpenFileAndGetFileDataPtr("wmapspr", &gTitleMenuFileArchive);
     gUnknown_203B0E4->unk0[4] = OpenFileAndGetFileDataPtr(gUnknown_80D408C[2], &gTitleMenuFileArchive);
-    gUnknown_203B0E4->unk0[1] = OpenFileAndGetFileDataPtr(gUnknown_80D40F4, &gMonsterFileArchive);
+    gUnknown_203B0E4->unk0[1] = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
     gUnknown_203B0E4->unk0[0] = OpenFileAndGetFileDataPtr(gUnknown_80D408C[3], &gTitleMenuFileArchive);
     gUnknown_203B0E4->unk4DD0 = GetPokemonOverworldPalette(pokeStruct->speciesNum, 0);
 
@@ -1035,11 +1102,11 @@ void sub_8010DA4(void)
     DecompressATFile((u8 *) &gUnknown_203B0E4->unk14, size, file2);
 
     gUnknown_203B0E4->unk4DCC = 0;
-    gUnknown_203B0E4->unk4DD4.x = 0;
-    gUnknown_203B0E4->unk4DD4.y = 0;
+    gUnknown_203B0E4->bgPos.x = 0;
+    gUnknown_203B0E4->bgPos.y = 0;
 
-    for (i = 0; i < 8; i++) {
-        ResetFlags(&gUnknown_203B0E4->unk4A30[i]);
+    for (i = 0; i < NUM_DIRECTIONS; i++) {
+        ResetFlags(&gUnknown_203B0E4->arrowSprites[i]);
     }
 
     CloseFile(file);
@@ -1065,9 +1132,9 @@ void sub_8010F28(void)
     sub_8004E8C(&var_30);
     var_30.unk4 = 0xF3FF;
     var_30.unkA = 0x800;
-    pos = gUnknown_203B0E4->unk4DD4;
+    pos = gUnknown_203B0E4->bgPos;
     RunAxAnimationFrame(&gUnknown_203B0E4->unk4C10);
-    DoAxFrame_800558C(&gUnknown_203B0E4->unk4C10, gUnknown_203B0E4->unk4DD8.x - pos.x, gUnknown_203B0E4->unk4DD8.y - pos.y, 3, gUnknown_203B0E4->unk4DD0, &var_30);
+    DoAxFrame_800558C(&gUnknown_203B0E4->unk4C10, gUnknown_203B0E4->monSpritePos.x - pos.x, gUnknown_203B0E4->monSpritePos.y - pos.y, 3, gUnknown_203B0E4->unk4DD0, &var_30);
 
     for (i = 0; i < 32; i++) {
         struct UnkStruct_4018 *r0 = &gUnknown_203B0E4->unk4018[i];
@@ -1080,13 +1147,13 @@ void sub_8010F28(void)
 
 {
     s32 i;
-    for (i = 0; i < 8; i++) {
-        if (CheckAxFlag8000(&gUnknown_203B0E4->unk4A30[i])) {
-            RunAxAnimationFrame(&gUnknown_203B0E4->unk4A30[i]);
+    for (i = 0; i < NUM_DIRECTIONS; i++) {
+        if (CheckAxFlag8000(&gUnknown_203B0E4->arrowSprites[i])) {
+            RunAxAnimationFrame(&gUnknown_203B0E4->arrowSprites[i]);
             if (!(gRealInputs.held & R_BUTTON) || (i % 2) != 0) {
-                DoAxFrame_800558C(&gUnknown_203B0E4->unk4A30[i],
-                                  (gUnknown_80D40C4[i].x + gUnknown_203B0E4->unk4DD8.x) - pos.x,
-                                  (gUnknown_80D40C4[i].y + gUnknown_203B0E4->unk4DD8.y) - pos.y,
+                DoAxFrame_800558C(&gUnknown_203B0E4->arrowSprites[i],
+                                  (gUnknown_80D40C4[i].x + gUnknown_203B0E4->monSpritePos.x) - pos.x,
+                                  (gUnknown_80D40C4[i].y + gUnknown_203B0E4->monSpritePos.y) - pos.y,
                                   2, 0, &var_30);
             }
         }
@@ -1094,14 +1161,14 @@ void sub_8010F28(void)
 }
 }
 
-void sub_80110B0(void)
+void UpdateBg(void)
 {
     s32 i, j;
-    s32 y1 = gUnknown_203B0E4->unk4DD4.y >> 3;
+    s32 y1 = gUnknown_203B0E4->bgPos.y >> 3;
     s32 y2 = y1;
 
     for (i = 0; i < 21; i++) {
-        s32 x1 = gUnknown_203B0E4->unk4DD4.x >> 3;
+        s32 x1 = gUnknown_203B0E4->bgPos.x >> 3;
         s32 x2 = x1;
 
         for (j = 0; j < 31; j++) {
@@ -1121,7 +1188,7 @@ void sub_80110B0(void)
     sub_80098F8(3);
 }
 
-void sub_8011168(void)
+void HideTextWindowAndArrows(void)
 {
     s32 i;
 
@@ -1130,8 +1197,8 @@ void sub_8011168(void)
     gUnknown_203B0E4->unk4DE0 = 0;
     gUnknown_203B0E4->unk4DE4 = 0;
     gUnknown_203B0E4->unk4DE8 = 0;
-    for (i = 0; i < 8; i++) {
-        ResetFlags(&gUnknown_203B0E4->unk4A30[i]);
+    for (i = 0; i < NUM_DIRECTIONS; i++) {
+        ResetFlags(&gUnknown_203B0E4->arrowSprites[i]);
     }
 }
 
@@ -1162,70 +1229,70 @@ bool8 sub_80111C4(void)
     return ret;
 }
 
-void sub_8011240(void)
+void UpdateMonSpritePosition(void)
 {
-    if (gUnknown_203B0E4->unk4DD8.x - gUnknown_203B0E4->unk4DD4.x < 48) {
-        gUnknown_203B0E4->unk4DD4.x = gUnknown_203B0E4->unk4DD8.x - 48;
+    if (gUnknown_203B0E4->monSpritePos.x - gUnknown_203B0E4->bgPos.x < 48) {
+        gUnknown_203B0E4->bgPos.x = gUnknown_203B0E4->monSpritePos.x - 48;
     }
-    else if (gUnknown_203B0E4->unk4DD8.x - gUnknown_203B0E4->unk4DD4.x > 192) {
-        gUnknown_203B0E4->unk4DD4.x = gUnknown_203B0E4->unk4DD8.x - 192;
-    }
-
-    if (gUnknown_203B0E4->unk4DD8.y - gUnknown_203B0E4->unk4DD4.y < 48) {
-        gUnknown_203B0E4->unk4DD4.y = gUnknown_203B0E4->unk4DD8.y - 48;
-    }
-    else if (gUnknown_203B0E4->unk4DD8.y - gUnknown_203B0E4->unk4DD4.y > 112) {
-        gUnknown_203B0E4->unk4DD4.y = gUnknown_203B0E4->unk4DD8.y - 112;
+    else if (gUnknown_203B0E4->monSpritePos.x - gUnknown_203B0E4->bgPos.x > 192) {
+        gUnknown_203B0E4->bgPos.x = gUnknown_203B0E4->monSpritePos.x - 192;
     }
 
-    if (gUnknown_203B0E4->unk4DD4.x < 0) {
-        gUnknown_203B0E4->unk4DD4.x = 0;
+    if (gUnknown_203B0E4->monSpritePos.y - gUnknown_203B0E4->bgPos.y < 48) {
+        gUnknown_203B0E4->bgPos.y = gUnknown_203B0E4->monSpritePos.y - 48;
     }
-    if (gUnknown_203B0E4->unk4DD4.y < 0) {
-        gUnknown_203B0E4->unk4DD4.y = 0;
+    else if (gUnknown_203B0E4->monSpritePos.y - gUnknown_203B0E4->bgPos.y > 112) {
+        gUnknown_203B0E4->bgPos.y = gUnknown_203B0E4->monSpritePos.y - 112;
     }
-    if (gUnknown_203B0E4->unk4DD4.x > 239) {
-        gUnknown_203B0E4->unk4DD4.x = 239;
+
+    if (gUnknown_203B0E4->bgPos.x < 0) {
+        gUnknown_203B0E4->bgPos.x = 0;
     }
-    if (gUnknown_203B0E4->unk4DD4.y > 151) {
-        gUnknown_203B0E4->unk4DD4.y = 151;
+    if (gUnknown_203B0E4->bgPos.y < 0) {
+        gUnknown_203B0E4->bgPos.y = 0;
+    }
+    if (gUnknown_203B0E4->bgPos.x > 239) {
+        gUnknown_203B0E4->bgPos.x = 239;
+    }
+    if (gUnknown_203B0E4->bgPos.y > 151) {
+        gUnknown_203B0E4->bgPos.y = 151;
     }
 }
 
-void sub_8011300(void)
+void ShowDirectionArrows(void)
 {
     s32 i;
     struct UnkStruct_4018 *r9 = &gUnknown_203B0E4->unk4018[gUnknown_203B0E4->unk4A18];
 
-    for (i = 0; i < 8; i++) {
-        ResetFlags(&gUnknown_203B0E4->unk4A30[i]);
+    for (i = 0; i < NUM_DIRECTIONS; i++) {
+        ResetFlags(&gUnknown_203B0E4->arrowSprites[i]);
         if (r9->unk2[i] >= 0) {
             struct UnkStruct_4018 *ptr = &gUnknown_203B0E4->unk4018[r9->unk2[i]];
             if (ptr->unk4018 != 0) {
-                AxResInitFile(&gUnknown_203B0E4->unk4A30[i], gUnknown_203B0E4->unk0[2], i + 4, 0, 0x40, 0, TRUE);
+                AxResInitFile(&gUnknown_203B0E4->arrowSprites[i], gUnknown_203B0E4->unk0[2], i + 4, 0, 0x40, 0, TRUE);
             }
         }
     }
 }
 
-void sub_8011398(void)
+void PrintCurrAreaName(void)
 {
     u8 txt[200];
     s32 id = gUnknown_203B0E4->unk4A18;
     const struct FiendArea *r6 = &gUnknown_203B0E4->unk4014[id];
-    UnkTextStruct3 spTxtStruct = {0};
+    Windows spTxtStruct = {0};
 
-    spTxtStruct.a0[0].unk4 = 3;
+    spTxtStruct.a0[0].type = WINDOW_TYPE_NORMAL;
     spTxtStruct.a0[0].pos.x = 7;
     spTxtStruct.a0[0].pos.y = 2;
-    spTxtStruct.a0[0].unkC = 21;
-    spTxtStruct.a0[0].unkE = 2;
+    spTxtStruct.a0[0].width = 21;
+    spTxtStruct.a0[0].height = 2;
     spTxtStruct.a0[0].unk10 = 2;
-    spTxtStruct.a0[1].unk4 = 3;
-    spTxtStruct.a0[2].unk4 = 3;
-    spTxtStruct.a0[3].unk4 = 3;
+    spTxtStruct.a0[1].type = WINDOW_TYPE_NORMAL;
+    spTxtStruct.a0[2].type = WINDOW_TYPE_NORMAL;
+    spTxtStruct.a0[3].type = WINDOW_TYPE_NORMAL;
 
-    if (gUnknown_203B0E4->unk4DD8.y - gUnknown_203B0E4->unk4DD4.y <= 80) {
+    if (gUnknown_203B0E4->monSpritePos.y - gUnknown_203B0E4->bgPos.y <= 80) {
         spTxtStruct.a0[0].pos.y = 17;
     }
     else {
@@ -1234,40 +1301,40 @@ void sub_8011398(void)
 
     xxx_call_save_unk_text_struct_800641C(&spTxtStruct, TRUE, TRUE);
     sub_80073B8(0);
-    sprintfStatic(txt, gUnknown_80D40FC, r6->name);
+    sprintfStatic(txt, _("{CENTER_ALIGN}%s"), r6->name);
     PrintFormattedStringOnWindow(12, 2, txt, 0, '\0');
     sub_80073E0(0);
     gUnknown_203B0E4->unk4DDC = (spTxtStruct.a0[0].pos.x * 8) - 5;
     gUnknown_203B0E4->unk4DE0 = (spTxtStruct.a0[0].pos.y * 8) + 5;
-    gUnknown_203B0E4->unk4DE4 = (spTxtStruct.a0[0].unkC * 8) + 10;
-    gUnknown_203B0E4->unk4DE8 = (spTxtStruct.a0[0].unkE * 8) + 10;
+    gUnknown_203B0E4->unk4DE4 = (spTxtStruct.a0[0].width * 8) + 10;
+    gUnknown_203B0E4->unk4DE8 = (spTxtStruct.a0[0].height * 8) + 10;
 }
 
-void sub_8011494(void)
+void PrintAvailableSubAreas(void)
 {
     s32 i, count, var;
     s32 id = gUnknown_203B0E4->unk4A18;
     const struct FiendArea *r8 = &gUnknown_203B0E4->unk4014[id];
-    MenuInputStruct *menuInput = &gUnknown_203B0E4->unk4DFC;
-    UnkTextStruct2_sub2 subTxt;
-    UnkTextStruct3 spTxtStruct = {
+    MenuInputStruct *menuInput = &gUnknown_203B0E4->menu;
+    WindowHeader header;
+    Windows spTxtStruct = {
         .a0 = {
             [0] = {
-                .unk4 = 6,
+                .type = WINDOW_TYPE_WITH_HEADER,
                 .pos = {7, 2},
-                .unkC = 21,
-                .unkE = 2,
+                .width = 21,
+                .height = 2,
                 .unk10 = 2,
-                .unk14 = &subTxt,
+                .unk14 = &header,
             },
             [1] = {
-                .unk4 = 3,
+                .type = WINDOW_TYPE_NORMAL,
             },
             [2] = {
-                .unk4 = 3,
+                .type = WINDOW_TYPE_NORMAL,
             },
             [3] = {
-                .unk4 = 3,
+                .type = WINDOW_TYPE_NORMAL,
             },
         }
     };
@@ -1281,10 +1348,10 @@ void sub_8011494(void)
     }
 
     gUnknown_203B0E4->unk4DF8 = count;
-    subTxt.f0 = 1;
-    subTxt.f1 = 0;
-    subTxt.f2 = 18;
-    subTxt.f3 = 0;
+    header.f0 = 1;
+    header.f1 = 0;
+    header.f2 = 18;
+    header.f3 = 0;
     menuInput->menuIndex = 0;
     menuInput->unk1A = count;
     menuInput->unk1C = count;
@@ -1301,7 +1368,7 @@ void sub_8011494(void)
     menuInput->unk8.y = 8;
     sub_801317C(&menuInput->unk28);
     var = sub_80095E4(menuInput->unk1C, 0);
-    spTxtStruct.a0[0].unk10 = spTxtStruct.a0[0].unkE = var + 2;
+    spTxtStruct.a0[0].unk10 = spTxtStruct.a0[0].height = var + 2;
     sub_80137B0(menuInput, var * 8);
 
     xxx_call_save_unk_text_struct_800641C(&spTxtStruct, TRUE, TRUE);
@@ -1311,7 +1378,7 @@ void sub_8011494(void)
     gUnknown_203B0E4->unk4DE4 = 0;
     gUnknown_203B0E4->unk4DE8 = 0;
     sub_80073B8(0);
-    PrintFormattedStringOnWindow(16, 0, gUnknown_80D4104, 0, '\0');
+    PrintFormattedStringOnWindow(16, 0, _("Where would you like to go?"), 0, '\0');
 
     for (i = 0; i < count; i++) {
         unkStruct_8092638 unkFriendAreaStruct;
@@ -1320,23 +1387,23 @@ void sub_8011494(void)
 
         sub_80101F8(gFormatBuffer_Items[0], r5);
         if (r5 == 0) {
-            PrintFormattedStringOnWindow(12, r4, gUnknown_80D4120, 0, '\0');
+            PrintFormattedStringOnWindow(12, r4, _("{MOVE_ITEM_0}"), 0, '\0');
         }
         else {
             sub_80926F8(r5, &unkFriendAreaStruct, gUnknown_203B0E4->unk4A2C);
             gFormatArgs[0] = unkFriendAreaStruct.unk2;
             gFormatArgs[1] = unkFriendAreaStruct.numPokemon;
-            PrintFormattedStringOnWindow(12, r4, gUnknown_80D4124, 0, '\0');
+            PrintFormattedStringOnWindow(12, r4, _("{MOVE_ITEM_0}($v02／$v12)"), 0, '\0');
         }
     }
 
     sub_80073E0(0);
 }
 
-void sub_801169C(void)
+void RunFrameActions(void)
 {
-    SetBG2RegOffsets(gUnknown_203B0E4->unk4DD4.x, gUnknown_203B0E4->unk4DD4.y);
-    SetBG3RegOffsets(gUnknown_203B0E4->unk4DD4.x, gUnknown_203B0E4->unk4DD4.y);
+    SetBG2RegOffsets(gUnknown_203B0E4->bgPos.x, gUnknown_203B0E4->bgPos.y);
+    SetBG3RegOffsets(gUnknown_203B0E4->bgPos.x, gUnknown_203B0E4->bgPos.y);
     sub_8010F28();
     sub_8004AF0(sub_80111C4(), gUnknown_203B0E4->unk4C4C, 0xB0, 16, gUnknown_203B0E4->unk4DCC, NULL);
     sub_8005838(NULL, 0);

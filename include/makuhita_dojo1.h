@@ -30,7 +30,7 @@ typedef struct MakuhitaDojoWork1
     u8 fill38[0x58 - 0x38];
     /* 0x58 */ struct MonPortraitMsg monPortrait;
     struct MonPortraitMsg *monPortraitPtr;
-    UnkTextStruct3 unk6C;
+    Windows unk6C;
 } MakuhitaDojoWork1;
 
 void MakuhitaDojo_Delete(void);

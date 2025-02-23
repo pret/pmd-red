@@ -819,7 +819,7 @@ static const u8* const sPersonalityTypeDescriptionTable[NUM_PERSONALITIES] = {
     [QUIRKY] = DESC_QUIRKY
 };
 
-static const UnkTextStruct2 sUnknown_80F4244 = {
+static const Window sUnknown_80F4244 = {
     0, 0, 0, 0,
     5,
     12, 6,

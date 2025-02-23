@@ -20,7 +20,7 @@
 
 EWRAM_INIT struct unkStruct_203B304 *gUnknown_203B304 = {NULL};
 
-const UnkTextStruct2 gUnknown_80E0284 =
+const Window gUnknown_80E0284 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -30,7 +30,7 @@ const UnkTextStruct2 gUnknown_80E0284 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E029C =
+const Window gUnknown_80E029C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -40,7 +40,7 @@ const UnkTextStruct2 gUnknown_80E029C =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E02B4 =
+const Window gUnknown_80E02B4 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,
@@ -50,7 +50,7 @@ const UnkTextStruct2 gUnknown_80E02B4 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E02CC =
+const Window gUnknown_80E02CC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,
@@ -166,7 +166,7 @@ void sub_802E0A0(void)
             CreateMailActionMenu();
             gUnknown_203B304->unk10C.a0[2] = gUnknown_80E02B4;
             sub_8012CAC(&gUnknown_203B304->unk10C.a0[2], gUnknown_203B304->menuItems);
-            gUnknown_203B304->unk10C.a0[2].unkC = 6;
+            gUnknown_203B304->unk10C.a0[2].width = 6;
             gUnknown_203B304->unk10C.a0[3] = gUnknown_80E02CC;
             break;
         default:

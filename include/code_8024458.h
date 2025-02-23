@@ -16,9 +16,9 @@ struct unkStruct_203B2AC
     u32 unkB0;
     u8 fillB4[0xE0 - 0xB4];
     u32 unkE0;
-    UnkTextStruct2 *unkE4;
-    UnkTextStruct3 unkE8;
-    UnkTextStruct2_sub2 unk148;
+    Window *unkE4;
+    Windows unkE8;
+    WindowHeader unk148;
 };
 
 bool8 sub_8024458(s16 speciesNum, s32);

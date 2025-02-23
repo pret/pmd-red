@@ -171,7 +171,7 @@ static void sub_802608C(void)
             PartyListMenu_CreateMenu1();
             sUnknown_203B2B8->unk220.a0[2] = sUnknown_80DD328;
             sub_8012CAC(&sUnknown_203B2B8->unk220.a0[2], sUnknown_203B2B8->unk16C);
-            sUnknown_203B2B8->unk220.a0[2].unkC = 9;
+            sUnknown_203B2B8->unk220.a0[2].width = 9;
             break;
         case 0x14:
             PartyListMenu_CreateMenu2();
@@ -782,7 +782,7 @@ void sub_8026E08(u32 r0)
     sub_808D930(buffer, sUnknown_203B2B8->pokeStruct->speciesNum);
     sprintfStatic(buffer1, sUnknown_80DD6E0, gFormatBuffer_Monsters[0]);
     x = sub_8008ED0(buffer1);
-    PrintStringOnWindow(((sUnknown_80DD370.unkC << 3) - x) / 2, 3, buffer1, r0, 0);
+    PrintStringOnWindow(((sUnknown_80DD370.width << 3) - x) / 2, 3, buffer1, r0, 0);
     sub_80073E0(r0);
 }
 

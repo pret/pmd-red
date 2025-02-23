@@ -147,13 +147,13 @@ static void sub_802D1B8(void)
            sub_802D5A4();
            sUnknown_203B2F8->unk1A8.a0[2] = sUnknown_80DFE04;
            sub_8012CAC(&sUnknown_203B2F8->unk1A8.a0[2], sUnknown_203B2F8->unk118);
-           sUnknown_203B2F8->unk1A8.a0[2].unkC = 6;
+           sUnknown_203B2F8->unk1A8.a0[2].width = 6;
            break;
         case 14:
            sub_802D63C();
            sUnknown_203B2F8->unk1A8.a0[3] = sUnknown_80DFE1C;
            sub_8012CAC(&sUnknown_203B2F8->unk1A8.a0[3], sUnknown_203B2F8->unk158);
-           sUnknown_203B2F8->unk1A8.a0[3].unkC = 6;
+           sUnknown_203B2F8->unk1A8.a0[3].width = 6;
            break;
         default:
            for (i = 0; i < 4; i++)

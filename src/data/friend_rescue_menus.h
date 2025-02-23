@@ -102,7 +102,7 @@ const MenuItem gUnknown_80E22F0[] = {
     {NULL, 8},
 };
 
-const UnkTextStruct2 gUnknown_80E231C =
+const Window gUnknown_80E231C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -112,7 +112,7 @@ const UnkTextStruct2 gUnknown_80E231C =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E2334 =
+const Window gUnknown_80E2334 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -142,7 +142,7 @@ const MenuItem gUnknown_80E23A8[] = {
     {NULL, 8},
 };
 
-const UnkTextStruct2 gUnknown_80E23F0 =
+const Window gUnknown_80E23F0 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -159,7 +159,7 @@ const MenuItem gUnknown_80E2408[] = {
     {NULL, 8},
 };
 
-UNUSED static const UnkTextStruct2 sUnused =
+UNUSED static const Window sUnused =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,

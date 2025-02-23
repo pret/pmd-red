@@ -904,19 +904,19 @@ extern void sub_8068344(void);
 bool8 sub_8044F3C(s32 param_1);
 void sub_8068310(s32 a0, PokemonStruct1 **a1);
 void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
-extern void sub_803ECB4(UnkTextStruct3 *a0, u8 a1);
+extern void sub_803ECB4(Windows *a0, u8 a1);
 u32 sub_8014140(s32 a0, const void *a1);
 void sub_8083D1C(void);
 void sub_8083D08(void);
 void sub_8083D30(void);
 void sub_806806C(PokemonStruct1 *a0);
-void sub_805FC30(UnkTextStruct3 *a0, s32 a1);
+void sub_805FC30(Windows *a0, s32 a1);
 extern void sub_803EAF0(u32, u8 *);
 
 extern const s32 gUnknown_8106E80[];
 extern MenuInputStruct gUnknown_202EE10;
 
-static EWRAM_DATA UnkTextStruct2_sub2 gUnknown_202F308 = {0};
+static EWRAM_DATA WindowHeader gUnknown_202F308 = {0};
 static EWRAM_DATA s32 gUnknown_202F30C = 0;
 EWRAM_DATA s32 gUnknown_202F310 = 0;
 
@@ -925,15 +925,15 @@ static const u8 gUnknown_8106DA4[] = {
     0x01, 0, 0x38, 0, 0, 0, 0x18, 0, 0x18, 0, 0, 0, 0x02, 0, 0x38, 0, 0x68, 0, 0x18, 0, 0x18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-static const UnkTextStruct3 gUnknown_8106DC8 = {
+static const Windows gUnknown_8106DC8 = {
     .a0 = {
         [0] =
         {
             .unk0 = 0,
-            .unk4 = 0x06,
+            .type = WINDOW_TYPE_WITH_HEADER,
             .pos = {0x02, 0x02},
-            .unkC = 0x11,
-            .unkE = 0x0E,
+            .width = 0x11,
+            .height = 0x0E,
             .unk10 = 0x12,
             .unk12 = 0x02,
             .unk14 = &gUnknown_202F308
@@ -941,21 +941,21 @@ static const UnkTextStruct3 gUnknown_8106DC8 = {
         [1] =
         {
             .unk0 = 0,
-            .unk4 = 0x03,
+            .type = WINDOW_TYPE_NORMAL,
             .pos = {0x15, 0x04},
-            .unkC = 0x07,
-            .unkE = 0x04,
+            .width = 0x07,
+            .height = 0x04,
             .unk10 = 0x04,
             .unk12 = 0,
             .unk14 = NULL
         },
         [2] =
         {
-            .unk4 = 0x03,
+            .type = WINDOW_TYPE_NORMAL,
         },
         [3] =
         {
-            .unk4 = 0x03,
+            .type = WINDOW_TYPE_NORMAL,
         }
     }
 };
@@ -964,7 +964,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
 {
     s32 i;
     s32 r10;
-    UnkTextStruct3 spTxtStruct = gUnknown_8106DC8;
+    Windows spTxtStruct = gUnknown_8106DC8;
 
     gUnknown_202F30C = 0;
     r10 = 0;
@@ -1257,20 +1257,20 @@ void sub_806806C(PokemonStruct1 *a0)
 {
     struct unkStruct_808FF20 unkStruct;
     u8 var_C8[48];
-    UnkTextStruct3 spTxtStruct = {0};
+    Windows spTxtStruct = {0};
     s32 r7;
 
-    spTxtStruct.a0[0].unk4 = 6;
+    spTxtStruct.a0[0].type = WINDOW_TYPE_WITH_HEADER;
     spTxtStruct.a0[0].pos.x = 2;
     spTxtStruct.a0[0].pos.y = 2;
-    spTxtStruct.a0[0].unkC = 0x12;
-    spTxtStruct.a0[0].unkE = 0xE;
+    spTxtStruct.a0[0].width = 0x12;
+    spTxtStruct.a0[0].height = 0xE;
     spTxtStruct.a0[0].unk10 = 0x12;
     spTxtStruct.a0[0].unk12 = 2;
     spTxtStruct.a0[0].unk14 = &gUnknown_202F308;
-    spTxtStruct.a0[1].unk4 = 3;
-    spTxtStruct.a0[2].unk4 = 3;
-    spTxtStruct.a0[3].unk4 = 3;
+    spTxtStruct.a0[1].type = WINDOW_TYPE_NORMAL;
+    spTxtStruct.a0[2].type = WINDOW_TYPE_NORMAL;
+    spTxtStruct.a0[3].type = WINDOW_TYPE_NORMAL;
 
     r7 = 0;
     unkStruct.unk40 = 0;

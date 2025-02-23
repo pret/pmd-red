@@ -116,7 +116,7 @@ static void sub_802293C(void)
             sub_8022D2C();
             sUnknown_203B294->unk148.a0[2] = sUnknown_80DC5BC;
             sub_8012CAC(&sUnknown_203B294->unk148.a0[2], sUnknown_203B294->unkF8);
-            sUnknown_203B294->unk148.a0[2].unkC = 6;
+            sUnknown_203B294->unk148.a0[2].width = 6;
             break;
         case 3:
             sUnknown_203B294->unk148.a0[1] = sUnknown_80DC5D4;

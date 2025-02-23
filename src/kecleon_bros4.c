@@ -285,7 +285,7 @@ void sub_801A9E0(void)
         }
 
         if (sub_801AED0(teamItemIndex) & 1)
-            sub_8007B7C(gUnknown_203B224->unk54.s0.unk34, 8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), (gUnknown_203B224->unk54.s0.unk38->unkC - 2) * 8, 10);
+            sub_8007B7C(gUnknown_203B224->unk54.s0.unk34, 8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), (gUnknown_203B224->unk54.s0.unk38->width - 2) * 8, 10);
     }
 
     sub_80073E0(gUnknown_203B224->unk54.s0.unk34);

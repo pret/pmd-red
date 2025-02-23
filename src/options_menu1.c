@@ -122,7 +122,7 @@ static void sub_801DD84(void)
 
             sUnknown_203B25C->unkBC.a0[0] = sUnknown_80DBFCC;
             sub_8012CAC(&sUnknown_203B25C->unkBC.a0[0], sUnknown_203B25C->menuItems);
-            sUnknown_203B25C->unkBC.a0[0].unkC = 10;
+            sUnknown_203B25C->unkBC.a0[0].width = 10;
             break;
         case OPTIONS_MENU_MAIN:
             CreateOthersMenu();
@@ -132,7 +132,7 @@ static void sub_801DD84(void)
 
             sUnknown_203B25C->unkBC.a0[0] = sUnknown_80DBFCC;
             sub_8012CAC(&sUnknown_203B25C->unkBC.a0[0], sUnknown_203B25C->menuItems);
-            sUnknown_203B25C->unkBC.a0[0].unkC = 10;
+            sUnknown_203B25C->unkBC.a0[0].width = 10;
             break;
         default:
             for (i = 0; i < 4; i++)

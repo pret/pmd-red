@@ -19,7 +19,7 @@ struct unkStruct_203B30C
     unkStruct_802C39C unk8;
     MenuStruct unk60;
     MenuItem unkB0[8];
-    UnkTextStruct3 unkF0;
+    Windows unkF0;
 };
 static EWRAM_INIT struct unkStruct_203B30C *gUnknown_203B30C = {NULL};
 
@@ -31,7 +31,7 @@ extern void sub_802F004();
 extern void sub_802F088();
 extern void sub_802F108(void);
 
-const UnkTextStruct2 gUnknown_80E03C4 = {
+const Window gUnknown_80E03C4 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -39,7 +39,7 @@ const UnkTextStruct2 gUnknown_80E03C4 = {
     0x00, 0x00,
     NULL
 };
-const UnkTextStruct2 gUnknown_80E03DC = {
+const Window gUnknown_80E03DC = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x03, 0x03,
@@ -47,7 +47,7 @@ const UnkTextStruct2 gUnknown_80E03DC = {
     0x03, 0x00,
     NULL
 };
-const UnkTextStruct2 gUnknown_80E03F4 = {
+const Window gUnknown_80E03F4 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x15, 0x06,

@@ -20,7 +20,7 @@
 
 EWRAM_INIT struct unkStruct_203B308 *gPelipperBoard = {NULL};
 
-const UnkTextStruct2 gUnknown_80E0330 =
+const Window gUnknown_80E0330 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -30,7 +30,7 @@ const UnkTextStruct2 gUnknown_80E0330 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E0348 =
+const Window gUnknown_80E0348 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -40,7 +40,7 @@ const UnkTextStruct2 gUnknown_80E0348 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E0360 =
+const Window gUnknown_80E0360 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,
@@ -50,7 +50,7 @@ const UnkTextStruct2 gUnknown_80E0360 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E0378 =
+const Window gUnknown_80E0378 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x04,
@@ -161,7 +161,7 @@ void sub_802E94C(void)
             sub_802EC10();
             gPelipperBoard->unk10C.a0[2] = gUnknown_80E0360;
             sub_8012CAC(&gPelipperBoard->unk10C.a0[2], gPelipperBoard->menuItems);
-            gPelipperBoard->unk10C.a0[2].unkC = 6;
+            gPelipperBoard->unk10C.a0[2].width = 6;
             gPelipperBoard->unk10C.a0[3] = gUnknown_80E0378;
             break;
         default:

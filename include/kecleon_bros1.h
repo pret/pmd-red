@@ -65,7 +65,7 @@ typedef struct KecleonBrosWork1
     /* 0x84 */ MenuStruct menu;
     /* 0xD4 */ struct MonPortraitMsg monPortrait;
     struct MonPortraitMsg *monPortraitPtr;
-    UnkTextStruct3 unkE8;
+    Windows unkE8;
 } KecleonBrosWork1;
 
 // mode corresponds to the enum: KecleonBrosMode

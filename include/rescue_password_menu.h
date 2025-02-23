@@ -12,8 +12,8 @@ struct RescuePasswordMenu
     u32 currMenu;
     u32 state;
     MenuStruct unk8[4];
-    UnkTextStruct3 unk148;
-    UnkTextStruct3 unk1A8;
+    Windows unk148;
+    Windows unk1A8;
     SpriteOAM unk208;
     u32 unk210;
 };

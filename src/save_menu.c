@@ -12,7 +12,7 @@
 
 static EWRAM_INIT SaveMenuWork *sUnknown_203B364 = {NULL};
 
-const UnkTextStruct2 gUnknown_80E6F20 =
+const Window gUnknown_80E6F20 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -22,7 +22,7 @@ const UnkTextStruct2 gUnknown_80E6F20 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E6F38 =
+const Window gUnknown_80E6F38 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,

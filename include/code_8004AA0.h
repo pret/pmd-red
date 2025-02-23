@@ -21,54 +21,6 @@ typedef struct unkStruct_202EE8C
 
 extern unkStruct_202EE8C gUnknown_202EE8C[32];
 
-struct FiendArea
-{
-    const u8 *name;
-    DungeonPos unk4;
-    u8 unk8[8];
-    s16 unk10[8];
-};
-
-struct UnkStruct_4018
-{
-    u8 unk4018;
-    s16 unk2[8];
-    axdata unk14;
-};
-
-// size: 0x4DD8
-struct UnkBgStruct
-{
-    OpenedFile *unk0[5];
-    u16 unk14[64][64];
-    u16 unk2014[64][64];
-    const struct FiendArea *unk4014;
-    struct UnkStruct_4018 unk4018[32];
-    s32 unk4A18;
-    s32 unk4A1C;
-    s32 unk4A20;
-    s32 unk4A24;
-    s32 unk4A28;
-    u8 unk4A2C;
-    axdata unk4A30[8];
-    axdata unk4C10;
-    unkStruct_202EE8C unk4C4C[16];
-    s32 unk4DCC;
-    u32 unk4DD0;
-    DungeonPos unk4DD4;
-    DungeonPos unk4DD8;
-    s32 unk4DDC;
-    s32 unk4DE0;
-    s32 unk4DE4;
-    s32 unk4DE8;
-    u8 unk4DEC[8];
-    u8 unk4DF4;
-    s32 unk4DF8;
-    MenuInputStruct unk4DFC;
-};
-
-extern struct UnkBgStruct *gUnknown_203B0E4;
-
 // size: Variable
 typedef struct unkDataFor8004AA4
 {

@@ -1,4 +1,4 @@
-static const UnkTextStruct2 sUnknown_80DD6EC =
+static const Window sUnknown_80DD6EC =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -8,7 +8,7 @@ static const UnkTextStruct2 sUnknown_80DD6EC =
     NULL
 };
 
-static const UnkTextStruct2 sUnknown_80DD704 =
+static const Window sUnknown_80DD704 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -18,7 +18,7 @@ static const UnkTextStruct2 sUnknown_80DD704 =
     NULL
 };
 
-static const UnkTextStruct2 sUnknown_80DD71C =
+static const Window sUnknown_80DD71C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -28,7 +28,7 @@ static const UnkTextStruct2 sUnknown_80DD71C =
     NULL
 };
 
-static const UnkTextStruct2 sUnknown_80DD734 =
+static const Window sUnknown_80DD734 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -38,7 +38,7 @@ static const UnkTextStruct2 sUnknown_80DD734 =
     NULL
 };
 
-static const UnkTextStruct2 sUnknown_80DD74C =
+static const Window sUnknown_80DD74C =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,

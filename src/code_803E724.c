@@ -45,10 +45,10 @@ extern MenuInputStruct gUnknown_202EE10;
 extern SpriteOAM gUnknown_202EDDC;
 
 extern const RGB gUnknown_80F62AC;
-extern const struct UnkTextStruct3 gUnknown_80F62B0;
-extern const struct UnkTextStruct3 gUnknown_80F6310;
-extern const struct UnkTextStruct3 gUnknown_80F6370;
-extern const struct UnkTextStruct3 gUnknown_80F63D0;
+extern const struct Windows gUnknown_80F62B0;
+extern const struct Windows gUnknown_80F6310;
+extern const struct Windows gUnknown_80F6370;
+extern const struct Windows gUnknown_80F63D0;
 extern const u32 gUnknown_80F6490[];
 extern const s32 gUnknown_80F64B4[];
 extern const s32 gUnknown_80F64FC[];
@@ -272,7 +272,7 @@ void sub_803EC94(void)
     sub_801317C(&gUnknown_202EE10.unk28);
 }
 
-void sub_803ECB4(UnkTextStruct3 *a0, bool8 a1)
+void sub_803ECB4(Windows *a0, bool8 a1)
 {
     gUnknown_202EDD0 = 10;
     sub_8052210(0);

@@ -49,7 +49,7 @@ struct unkStruct_203B3E8
         u8 unk38_u8[0x30]; // idk why it fills to 0x30 instead...
     } UNK38;
     u8 fill68[0x1EC - 0x68];
-    UnkTextStruct3 unk1EC;
+    Windows unk1EC;
     u32 unk24C;
     /* 0x250 */ u32 wonderMailStatus;
     unkStruct_803B344 unk254;

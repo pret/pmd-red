@@ -1,4 +1,4 @@
-static const UnkTextStruct2 sUnknown_80E59C8 = {
+static const Window sUnknown_80E59C8 = {
     0, 0, 0, 0,
     3,
     0, 0,
@@ -7,7 +7,7 @@ static const UnkTextStruct2 sUnknown_80E59C8 = {
     NULL
 };
 
-static const UnkTextStruct2 sUnknown_80E59E0 = {
+static const Window sUnknown_80E59E0 = {
     0, 0, 0, 0,
     3,
     2, 2,
@@ -22,7 +22,7 @@ static const MenuItem sUnknown_80E59F8[] = {
     {NULL, 0xFFDD},
 };
 
-UNUSED static const UnkTextStruct2 sUnknown_80E5A29 = {
+UNUSED static const Window sUnknown_80E5A29 = {
     0, 0, 0, 0,
     3,
     2, 2,
@@ -36,7 +36,7 @@ UNUSED static const MenuItem sUnknown_80E5A44[] = {
     {NULL, 0xFFDD},
 };
 
-static const UnkTextStruct2 sUnknown_80E5A60 = {
+static const Window sUnknown_80E5A60 = {
     0, 0, 0, 0,
     3,
     2, 2,
@@ -45,7 +45,7 @@ static const UnkTextStruct2 sUnknown_80E5A60 = {
     NULL
 };
 
-static const UnkTextStruct2 sUnknown_80E5A78 = {
+static const Window sUnknown_80E5A78 = {
     0, 0, 0, 0,
     3,
     2, 2,
@@ -73,7 +73,7 @@ static const MenuItem sUnknown_80E5AFC[] = {
     {NULL, 0xFFDD},
 };
 
-static const UnkTextStruct2 sUnknown_80E5B34 = {
+static const Window sUnknown_80E5B34 = {
     0, 0, 0, 0,
     3,
     2, 2,
@@ -101,7 +101,7 @@ static const MenuItem sUnknown_80E5B8C[] = {
     {NULL, 0xFFDD},
 };
 
-static const UnkTextStruct2 sUnknown_80E5BC4 = {
+static const Window sUnknown_80E5BC4 = {
     0, 0, 0, 0,
     3,
     2, 2,
@@ -129,7 +129,7 @@ static const MenuItem sUnknown_80E5C18[] = {
     {NULL, 0xFFDD},
 };
 
-UNUSED static const UnkTextStruct2 sUnknown_80E5C50 = {
+UNUSED static const Window sUnknown_80E5C50 = {
     0, 0, 0, 0,
     3,
     2, 2,
@@ -150,7 +150,7 @@ UNUSED static const MenuItem sUnknown_80E5C9C[] = {
     {NULL, 0xFFDD},
 };
 
-static const UnkTextStruct2 sUnknown_80E5CB4 = {
+static const Window sUnknown_80E5CB4 = {
     0, 0, 0, 0,
     3,
     2, 15,

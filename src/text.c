@@ -38,7 +38,7 @@ EWRAM_DATA static s32 sCurrentCharmap = 0;
 EWRAM_DATA static vu32 sUnknown_20274B0 = 0;
 EWRAM_DATA static u32 sUnknown_20274B4[0xEC0] = {0};
 EWRAM_DATA static OpenedFile *sCharmapFiles[3] = {NULL};
-EWRAM_DATA static UnkTextStruct3 sUnknown_202AFC0 = {0};
+EWRAM_DATA static Windows sUnknown_202AFC0 = {0};
 EWRAM_DATA static s32 sUnknown_202B020 = 0;
 EWRAM_DATA static s32 sUnknown_202B024 = 0;
 EWRAM_DATA static s32 sCharHeight[2] = {0};
@@ -64,14 +64,14 @@ EWRAM_INIT void (*gIwramTextFunc4)(s32 a0) = sub_8272A78;
 // This variable is only used in InitGraphics function, which may or may not belong to text.c
 EWRAM_INIT u8 gUnknown_203B090 = 0;
 
-static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct3 *a0, bool8 a1, bool8 a2, DungeonPos *a3);
-static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, DungeonPos *a8, u8 a9);
+static void SaveUnkTextStructAndXXX_8006438(const Windows *a0, bool8 a1, bool8 a2, DungeonPos *a3);
+static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const Window *a5, bool8 a6, u32 a7, DungeonPos *a8, u8 a9);
 static void sub_800677C(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3);
 static void sub_80069CC(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4);
 static void sub_8006AC4(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4);
 static void sub_8006B70(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, u16 *a4);
 static void sub_8006C44(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3);
-static void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *a3, u16 *a4);
+static void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const WindowHeader *a3, u16 *a4);
 static u32 xxx_draw_char(struct UnkTextStruct1 *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5);
 static void nullsub_129(u32 a0, s32 x, s32 y, s32 a3, u32 color);
 static void sub_8007958(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color);
@@ -86,7 +86,7 @@ static void sub_80084A4(UnkTextStruct1 *a0, u16 a1[32][32], u32 a2, s32 a3, s32 
 static void sub_8008818(UnkTextStruct1 *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5);
 static bool8 xxx_update_bg_vram(UnkTextStruct1 *a0);
 static void sub_800898C(void);
-static void sub_80089AC(const UnkTextStruct2 *r4, DungeonPos *r5_Str);
+static void sub_80089AC(const Window *r4, DungeonPos *r5_Str);
 static void PrepareTextbox_8008C6C(UnkTextStruct1 *strArr, u32 strId);
 static void xxx_draw_string(UnkTextStruct1 *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing);
 static const u8 *HandleTextFormat(UnkTextStruct1 *strArr, const u8 *str, struct UnkDrawStringStruct *sp);
@@ -113,13 +113,13 @@ static const u32 gUnknown_80B853C[16] =
     0xEEEEEEEE,
 };
 
-static const UnkTextStruct3 gUnknown_80B857C =
+static const Windows gUnknown_80B857C =
 {
     .a0 = {
-        [0] = {.unk4 = 3},
-        [1] = {.unk4 = 3},
-        [2] = {.unk4 = 3},
-        [3] = {.unk4 = 3},
+        [0] = {.type = WINDOW_TYPE_NORMAL},
+        [1] = {.type = WINDOW_TYPE_NORMAL},
+        [2] = {.type = WINDOW_TYPE_NORMAL},
+        [3] = {.type = WINDOW_TYPE_NORMAL},
     }
 };
 
@@ -275,14 +275,14 @@ void SetCharacterMask(int a0)
     sTextShadowMask = retval;
 }
 
-void xxx_call_save_unk_text_struct_800641C(const UnkTextStruct3 *a0, bool8 a1, bool8 a2)
+void xxx_call_save_unk_text_struct_800641C(const Windows *a0, bool8 a1, bool8 a2)
 {
     DungeonPos r3 = {0, 0};
     SaveUnkTextStructAndXXX_8006438(a0, a1, a2, &r3);
 }
 
 // https://decomp.me/scratch/xF5Y1
-static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct3 *a0, bool8 a1, bool8 a2, DungeonPos *a3)
+static void SaveUnkTextStructAndXXX_8006438(const Windows *a0, bool8 a1, bool8 a2, DungeonPos *a3)
 {
     s32 i;
     u32 r9;
@@ -299,10 +299,10 @@ static void SaveUnkTextStructAndXXX_8006438(const UnkTextStruct3 *a0, bool8 a1, 
     for (i = 0; i < 4; i++) {
         sUnknown_202AFC0.a0[i] = a0->a0[i];
 
-        if (a0->a0[i].unkC) {
+        if (a0->a0[i].width) {
             sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], &a0->a0[i], a1, r9, a3, 0);
             sub_80089AC(&a0->a0[i], a3);
-            r9 += a0->a0[i].unkC * a0->a0[i].unk10;
+            r9 += a0->a0[i].width * a0->a0[i].unk10;
         }
     }
 
@@ -319,7 +319,7 @@ UNUSED static void nullsub_152(void)
 {
 }
 
-void RestoreUnkTextStruct_8006518(UnkTextStruct3 *unkData)
+void RestoreUnkTextStruct_8006518(Windows *unkData)
 {
     s32 i;
     for (i = 0; i < 4; i++)
@@ -336,7 +336,7 @@ u32 sub_8006544(u32 index)
 }
 
 // a1 is a VRAM pointer
-static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const UnkTextStruct2 *a5, bool8 a6, u32 a7, DungeonPos *a8, u8 a9)
+static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const Window *a5, bool8 a6, u32 a7, DungeonPos *a8, u8 a9)
 {
     UnkTextStruct1 *t1;
     s32 iVar3;
@@ -354,10 +354,10 @@ static void sub_8006554(UnkTextStruct1 *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, c
     iVar5 =  a5->pos.y + a8->y;
     t1->unk0 = iVar3;
     t1->unk2 = iVar5;
-    t1->unk4 = a5->unkC;
+    t1->unk4 = a5->width;
     t1->unk8 = a5->unk10;
-    t1->unk6 = a5->unkE;
-    t1->unkC = a5->unk4;
+    t1->unk6 = a5->height;
+    t1->unkC = a5->type;
     t1->unk10 = a7;
 
     if (t1->unkC == 6)
@@ -686,7 +686,7 @@ static void sub_8006C44(UnkTextStruct1 *a0, s32 a1, u16 *a2, u8 a3)
 
 // Not even close but I don't feel like continuing atm https://decomp.me/scratch/F58jg
 /*
-void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *a3, u16 *a4)
+void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const WindowHeader *a3, u16 *a4)
 {
     s32 bVar1;
     s32 iVar2;
@@ -870,7 +870,7 @@ void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *
 }
 */
 NAKED
-static void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const UnkTextStruct2_sub2 *a3, u16 *a4)
+static void sub_8006E94(UnkTextStruct1 *a0, s32 a1, u32 a2, const WindowHeader *a3, u16 *a4)
 {
     asm_unified(
     "\tpush {r4-r7,lr}\n"
@@ -2866,7 +2866,7 @@ static void sub_800898C(void)
     }
 }
 
-static void sub_80089AC(const UnkTextStruct2 *r4, DungeonPos *r5_Str)
+static void sub_80089AC(const Window *r4, DungeonPos *r5_Str)
 {
     u8 *r6;
 
@@ -2874,12 +2874,12 @@ static void sub_80089AC(const UnkTextStruct2 *r4, DungeonPos *r5_Str)
         return;
 
     r6 = (void*) &gUnknown_3000E94;
-    if (r4->unk4 == 1) {
+    if (r4->type == WINDOW_TYPE_WITHOUT_BORDER) {
         s32 r12 = (r4->pos.x + r5_Str->x) * 8;
         s32 r5 = (r4->pos.y + r5_Str->y) * 8;
-        s32 r7 = (r4->pos.x + r5_Str->x + r4->unkC) * 8;
-        s32 r2 = (r4->pos.y + r5_Str->y + r4->unkE) * 8;
-        if (r4->unkE != 0) {
+        s32 r7 = (r4->pos.x + r5_Str->x + r4->width) * 8;
+        s32 r2 = (r4->pos.y + r5_Str->y + r4->height) * 8;
+        if (r4->height != 0) {
             if (r5 < 0)
                 r5 = 0;
             if (r2 < 0)
@@ -2907,14 +2907,14 @@ static void sub_80089AC(const UnkTextStruct2 *r4, DungeonPos *r5_Str)
             }
         }
     }
-    else if (r4->unk4 == 6) {
+    else if (r4->type == WINDOW_TYPE_WITH_HEADER) {
         s32 i;
         s32 r9 = ((r4->pos.x + r5_Str->x) * 8) - 5;
         s32 r5 = ((r4->pos.y + r5_Str->y) * 8) - 4;
-        s32 var_24 = ((r4->pos.x + r5_Str->x + r4->unkC) * 8) + 5;
-        s32 r8 = ((r4->pos.y + r5_Str->y + r4->unkE) * 8) + 5;
+        s32 var_24 = ((r4->pos.x + r5_Str->x + r4->width) * 8) + 5;
+        s32 r8 = ((r4->pos.y + r5_Str->y + r4->height) * 8) + 5;
         s32 r12 = ((r4->pos.x + r5_Str->x) * 8) + 3;
-        const UnkTextStruct2_sub2 *r2 = r4->unk14;
+        const WindowHeader *r2 = r4->unk14;
         s32 tmp = r2->f2 - 1;
         s32 r10 = (((tmp + r2->f0 + 2) * 8) + r12) - 4;
         s32 r4 = r9 + ((r2->f1 + 1) * 8);
@@ -2985,12 +2985,12 @@ static void sub_80089AC(const UnkTextStruct2 *r4, DungeonPos *r5_Str)
     else {
         s32 r8 = ((r4->pos.x + r5_Str->x) * 8) - 5;
         s32 r3 = ((r4->pos.y + r5_Str->y) * 8) - 5;
-        s32 r12 = ((r4->pos.x + r5_Str->x + r4->unkC) * 8) + 5;
-        s32 r5 = ((r4->pos.y + r5_Str->y + r4->unkE) * 8) + 5;
-        if (r4->unkE != 0) {
-            if (r4->unk4 == 0) {
+        s32 r12 = ((r4->pos.x + r5_Str->x + r4->width) * 8) + 5;
+        s32 r5 = ((r4->pos.y + r5_Str->y + r4->height) * 8) + 5;
+        if (r4->height != 0) {
+            if (r4->type == 0) {
                 r3 += 8;
-                r5 = ((r4->pos.y + r5_Str->y + r4->unkE) * 8) - 3;
+                r5 = ((r4->pos.y + r5_Str->y + r4->height) * 8) - 3;
             }
             if (r3 < 0)
                 r3 = 0;

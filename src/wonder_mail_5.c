@@ -20,8 +20,8 @@ struct unkStruct_203B324
     MenuInputStructSub unk0;
     u8 mailIndex;
     u32 windowID;
-    UnkTextStruct2 *unk14;
-    UnkTextStruct3 unk18;
+    Window *unk14;
+    Windows unk18;
 };
 
 static EWRAM_INIT struct unkStruct_203B324 *gUnknown_203B324 = {NULL};
@@ -29,7 +29,7 @@ static EWRAM_INIT struct unkStruct_203B324 *gUnknown_203B324 = {NULL};
 extern unkStruct_203B480 *gUnknown_203B480;
 
 
-const UnkTextStruct2 gUnknown_80E0900 = {
+const Window gUnknown_80E0900 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -38,9 +38,9 @@ const UnkTextStruct2 gUnknown_80E0900 = {
     NULL
 };
 
-const UnkTextStruct2_sub2 gUnknown_80E0918 = {0x01, 0x00, 0x12, 0x00};
+const WindowHeader gUnknown_80E0918 = {0x01, 0x00, 0x12, 0x00};
 
-const UnkTextStruct2 gUnknown_80E091C = {
+const Window gUnknown_80E091C = {
     0x00, 0x00, 0x00, 0x00,
     0x06,
     0x02, 0x02,

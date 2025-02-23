@@ -22,7 +22,7 @@ struct unkStruct_203B310
     /* 0xC */ s32 itemRewardIndex;
     unkStruct_802F204 *unk10;
     /* 0x14 */ struct MonPortraitMsg monPortrait;
-    UnkTextStruct3 unk24;
+    Windows unk24;
 };
 
 EWRAM_INIT struct unkStruct_203B310 *gUnknown_203B310 = {NULL};
@@ -41,7 +41,7 @@ enum FriendRewardStates
     REWARD_EXIT,
 };
 
-const UnkTextStruct2 gUnknown_80E041C = {
+const Window gUnknown_80E041C = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,

@@ -28,36 +28,42 @@ typedef struct UnkTextStruct1
     u8 unk46;
 } UnkTextStruct1;
 
-typedef struct UnkTextStruct2_sub2
+typedef struct WindowHeader
 {
     u8 f0;
     u8 f1;
     u8 f2;
     u8 f3;
-} UnkTextStruct2_sub2;
+} WindowHeader;
 
 #include "structs/str_position.h"
 
 // size: 0x18
-typedef struct UnkTextStruct2
+typedef struct Window
 {
     u8 unk0;
     u8 fill1[0x4 - 0x1];
-    s32 unk4;
+    s32 type;
     DungeonPos pos;
-    s16 unkC;
-    s16 unkE;
-    s16 unk10;
+    s16 width;
+    s16 height;
+    s16 unk10; // In most cases it's the same as height. If it's smaller than height, the window may look glitchy. Maybe something with tile allocation/how the window is filled?
     s16 unk12;
-    const UnkTextStruct2_sub2 *unk14; // Pointer to 4 bytes which may be x-coord related. Could be window's header?
-} UnkTextStruct2;
+    const WindowHeader *unk14;
+} Window;
 
-typedef struct UnkTextStruct3 {
-    UnkTextStruct2 a0[4];
+#define WINDOW_TYPE_WITHOUT_BORDER      1
+#define WINDOW_TYPE_NORMAL              3
+#define WINDOW_TYPE_FILL_TRANSPARENT    5
+#define WINDOW_TYPE_WITH_HEADER         6
+#define WINDOW_TYPE_7                   7
+
+typedef struct Windows {
+    Window id[4];
     // Something ugly, so that sub_805FD74 could match weird compiler memcpy/stack initialization
     #ifndef NONMATCHING
     u8 fakeMatch[0];
     #endif // NONMATCHING
-} UnkTextStruct3;
+} Windows;
 
 #endif // GUARD_STR_TEXT_H

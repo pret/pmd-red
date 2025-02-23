@@ -32,7 +32,7 @@ extern void SetFriendRescueMenuState(u32);
 extern TeamInventory *gTeamInventoryRef;
 
 
-// NOTE: MenuItems and UnkTextStruct2 defined in here..
+// NOTE: MenuItems and Window defined in here..
 #include "data/friend_rescue_menus.h"
 
 const u8 gUnknown_80E25F4[] = "What would you like to do?";

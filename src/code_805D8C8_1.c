@@ -1675,28 +1675,28 @@ extern bool8 sub_8044F3C(s32 param_1);
 extern s32 gUnknown_202EE6C;
 extern const u8 gUnknown_8106B50[];
 
-extern void sub_803ECB4(UnkTextStruct3 *a0, u8 a1);
-static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, UnkTextStruct2_sub2 *a5);
+extern void sub_803ECB4(Windows *a0, u8 a1);
+static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows *a4, WindowHeader *a5);
 
 // Inline needed to (fake?)match.
-static inline void sub_805FC30_SetUpTxtStruct(UnkTextStruct3 *src)
+static inline void sub_805FC30_SetUpTxtStruct(Windows *src)
 {
     memset(src, 0, sizeof(*src));
-    src->a0[0].unk4 = 3;
-    src->a0[1].unk4 = 3;
+    src->a0[0].type = WINDOW_TYPE_NORMAL;
+    src->a0[1].type = WINDOW_TYPE_NORMAL;
     src->a0[1].pos.x = 0x16;
     src->a0[1].pos.y = 4;
-    src->a0[1].unkC = 6;
-    src->a0[1].unkE = 4;
+    src->a0[1].width = 6;
+    src->a0[1].height = 4;
     src->a0[1].unk10 = 4;
-    src->a0[2].unk4 = 3;
-    src->a0[3].unk4 = 3;
+    src->a0[2].type = WINDOW_TYPE_NORMAL;
+    src->a0[3].type = WINDOW_TYPE_NORMAL;
 }
 
-void sub_805FC30(UnkTextStruct3 *a0, s32 a1)
+void sub_805FC30(Windows *a0, s32 a1)
 {
     s32 i;
-    UnkTextStruct3 sp;
+    Windows sp;
 
     sub_805FC30_SetUpTxtStruct(&sp);
     sp.a0[0] = a0->a0[0];
@@ -1717,10 +1717,10 @@ void sub_805FC30(UnkTextStruct3 *a0, s32 a1)
     sub_801317C(&gUnknown_202EE10.unk28);
 
     sp.a0[1].pos.x = a1;
-    sp.a0[1].unkC = 28 - a1;
-    sp.a0[1].unkE = sp.a0[1].unk10 = sub_80095E4(gUnknown_202EE10.unk1C, 0);
+    sp.a0[1].width = 28 - a1;
+    sp.a0[1].height = sp.a0[1].unk10 = sub_80095E4(gUnknown_202EE10.unk1C, 0);
     sub_803ECB4(&sp, 0);
-    sub_80137B0(&gUnknown_202EE10, sp.a0[1].unkE * 8);
+    sub_80137B0(&gUnknown_202EE10, sp.a0[1].height * 8);
     sub_80073B8(1);
 
     for (i = 0; i < gUnknown_202EE6C; i++) {
@@ -1760,7 +1760,7 @@ s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
 void sub_8060890(DungeonPos *a0);
 bool8 sub_8060860(s32 a0);
 void sub_8060900(Entity *a0);
-s32 sub_8060800(UnkTextStruct2_sub2 *a0, s32 a1);
+s32 sub_8060800(WindowHeader *a0, s32 a1);
 void sub_8060CE8(ActionContainer *a0);
 extern Entity *DrawFieldGiveItemMenu(u8 *a0, s32 a1);
 
@@ -1775,22 +1775,22 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
     u8 var_2C = 0;
     u8 var_28 = 0;
     EntityInfo *a0Info = GetEntInfo(a0);
-    UnkTextStruct2_sub2 var_3C;
+    WindowHeader var_3C;
 
-    UnkTextStruct3 var_FC =
+    Windows var_FC =
     {
         .a0 =
         {
             [0] =
             {
-                .unk4 = 6,
+                .type = WINDOW_TYPE_WITH_HEADER,
                 .pos = {2, 2},
-                .unkC = 0x12,
-                .unkE = 0x10,
+                .width = 0x12,
+                .height = 0x10,
                 .unk10 = 0x10,
                 .unk14 = &var_3C,
             },
-            {.unk4 = 3}, {.unk4 = 3}, {.unk4 = 3},
+            {.type = WINDOW_TYPE_NORMAL}, {.type = WINDOW_TYPE_NORMAL}, {.type = WINDOW_TYPE_NORMAL},
         },
     };
 
@@ -2036,15 +2036,15 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
     return r9;
 }
 
-extern const struct UnkTextStruct2 gUnknown_8106B6C;
+extern const struct Window gUnknown_8106B6C;
 extern const struct unkStruct_8090F58 gUnknown_8106B60;
 
-static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextStruct3 *a4, UnkTextStruct2_sub2 *a5)
+static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows *a4, WindowHeader *a5)
 {
     s32 i, x, y;
     s32 r10;
     UnkTextStruct1 *txtStrPtr;
-    UnkTextStruct2 var_94;
+    Window var_94;
     u8 txtBuff[80];
     EntityInfo *a1Info;
 
@@ -2064,7 +2064,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextS
         case 0:
         case 1:
             a4->a0[0].unk10 = 0x10;
-            a4->a0[0].unkE = 0x10;
+            a4->a0[0].height = 0x10;
             a5->f2 = 0xC;
             gUnknown_202EE10.unk6 = 0x10;
             gUnknown_202EE10.unk1C = 0xA;
@@ -2072,7 +2072,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextS
             break;
         case 2:
             a4->a0[0].unk10 = 4;
-            a4->a0[0].unkE = 4;
+            a4->a0[0].height = 4;
             a5->f2 = 6;
             gUnknown_202EE10.unk6 = 0x12;
             gUnknown_202EE10.unk1C = 1;
@@ -2080,7 +2080,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextS
         case 3:
         default:
             a4->a0[0].unk10 = 4;
-            a4->a0[0].unkE = 4;
+            a4->a0[0].height = 4;
             a5->f2 = 0xC;
             gUnknown_202EE10.unk6 = 0x12;
             gUnknown_202EE10.unk1C = 1;
@@ -2190,7 +2190,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, UnkTextS
     }
 }
 
-s32 sub_8060800(UnkTextStruct2_sub2 *a0, s32 a1)
+s32 sub_8060800(WindowHeader *a0, s32 a1)
 {
     s32 i, r1, r2, r3;
 
@@ -2499,7 +2499,7 @@ s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
     return count;
 }
 
-extern UnkTextStruct2_sub2 gUnknown_202F270;
+extern WindowHeader gUnknown_202F270;
 
 struct UnkFieldTeamMenuStruct
 {
@@ -2508,7 +2508,7 @@ struct UnkFieldTeamMenuStruct
     u8 unk14[MAX_TEAM_MEMBERS];
 };
 
-void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bool8 a2);
+void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *a1, bool8 a2);
 void sub_806145C(struct UnkFieldTeamMenuStruct *a0);
 void sub_80615B4(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1);
 
@@ -2520,18 +2520,18 @@ bool8 sub_8060E38(Entity *a0)
     bool32 r10, ret;
 
     struct UnkFieldTeamMenuStruct sp;
-    UnkTextStruct3 var_84 = {0};
+    Windows var_84 = {0};
 
-    var_84.a0[0].unk4 = 6;
+    var_84.a0[0].type = WINDOW_TYPE_WITH_HEADER;
     var_84.a0[0].pos.x = 2;
     var_84.a0[0].pos.y = 2;
-    var_84.a0[0].unkC = 0xE;
-    var_84.a0[0].unkE = 0x10;
+    var_84.a0[0].width = 0xE;
+    var_84.a0[0].height = 0x10;
     var_84.a0[0].unk10 = 0x10;
     var_84.a0[0].unk14 = &gUnknown_202F270;
-    var_84.a0[1].unk4 = 3;
-    var_84.a0[2].unk4 = 3;
-    var_84.a0[3].unk4 = 3;
+    var_84.a0[1].type = WINDOW_TYPE_NORMAL;
+    var_84.a0[2].type = WINDOW_TYPE_NORMAL;
+    var_84.a0[3].type = WINDOW_TYPE_NORMAL;
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         Entity *teamMon = gDungeon->teamPokemon[i];
@@ -2541,7 +2541,7 @@ bool8 sub_8060E38(Entity *a0)
     }
 
     if (!gDungeon->unk644.unk17) {
-        var_84.a0[0].unk4 = 3;
+        var_84.a0[0].type = WINDOW_TYPE_NORMAL;
         var_84.a0[0].pos.y++;
     }
 
@@ -2678,14 +2678,14 @@ extern const u8 gUnknown_8106BF4[];
 
 extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
 
-void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bool8 a2)
+void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *a1, bool8 a2)
 {
     s32 r0;
     DungeonPos pos;
     s32 i;
 
     s32 count = 0;
-    bool8 r10 = (a1->a0[0].unk4 == 6);
+    bool8 r10 = (a1->a0[0].type == WINDOW_TYPE_WITH_HEADER);
 
     sub_8069D18(&pos, GetLeader());
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
@@ -2734,7 +2734,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, UnkTextStruct3 *a1, bo
         r0 += 2;
     }
     a1->a0[0].unk10 = r0;
-    a1->a0[0].unkE = r0;
+    a1->a0[0].height = r0;
     gUnknown_202F270.f2 = 8;
     if (a2) {
         a1->a0[1] = a1->a0[3];
@@ -2872,25 +2872,25 @@ void sub_8062D68(void);
 void sub_8062230(void);
 void sub_8062748(u8 a0);
 
-static inline void SetTxtStruct(UnkTextStruct3 *sp)
+static inline void SetTxtStruct(Windows *sp)
 {
     memset(sp, 0, sizeof(*sp));
-    sp->a0[0].unk4 = 6;
+    sp->a0[0].type = WINDOW_TYPE_WITH_HEADER;
     sp->a0[0].pos.x = 2;
     sp->a0[0].pos.y = 2;
-    sp->a0[0].unkC = 0x12;
-    sp->a0[0].unkE = 0xE;
+    sp->a0[0].width = 0x12;
+    sp->a0[0].height = 0xE;
     sp->a0[0].unk10 = 0x12;
     sp->a0[0].unk12 = 2;
     sp->a0[0].unk14 = &gUnknown_202F270;
-    sp->a0[1].unk4 = 3;
-    sp->a0[2].unk4 = 3;
-    sp->a0[3].unk4 = 3;
+    sp->a0[1].type = WINDOW_TYPE_NORMAL;
+    sp->a0[2].type = WINDOW_TYPE_NORMAL;
+    sp->a0[3].type = WINDOW_TYPE_NORMAL;
 }
 
 void ShowTacticsMenu(ActionContainer *a0)
 {
-    UnkTextStruct3 sp;
+    Windows sp;
     EntityInfo *monInfo;
     u8 tacticIds[NUM_TACTICS];
     s32 scrollFirstId;

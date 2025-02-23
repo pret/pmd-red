@@ -21,7 +21,7 @@ typedef struct unkStruct_203B270
     /* 0x1C */ MenuInputStruct input;
     u32 unk50;
     u32 unk54;
-    UnkTextStruct3 unk58;
+    Windows unk58;
     const u8 *text;
 } unkStruct_203B270;
 

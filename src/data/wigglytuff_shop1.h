@@ -1,4 +1,4 @@
-static const UnkTextStruct2 sUnknown_80DC464 = {
+static const Window sUnknown_80DC464 = {
     0, 0, 0, 0,
     3,
     0, 0,
@@ -7,7 +7,7 @@ static const UnkTextStruct2 sUnknown_80DC464 = {
     NULL
 };
 
-static const UnkTextStruct2 sUnknown_80DC47C = {
+static const Window sUnknown_80DC47C = {
     0, 0, 0, 0,
     6,
     2, 2,

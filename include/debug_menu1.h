@@ -8,7 +8,7 @@
 struct DebugMenu
 {
     MenuStruct unk0[4];
-    UnkTextStruct3 unk140;
+    Windows unk140;
     u32 fill1A0;
 };
 

@@ -417,6 +417,8 @@ SECTIONS {
         src/code_800F034.o(.rodata);
         src/code_800F958.o(.rodata);
         data/data_80CE77C.o(.rodata);
+        src/code_8010F28.o(.rodata);
+        data/data_80CE77C_2.o(.rodata);
         src/debug.o(.rodata);
         src/save.o(.rodata);
         src/save_read.o(.rodata);

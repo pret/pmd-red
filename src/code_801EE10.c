@@ -13,7 +13,7 @@
 
 EWRAM_INIT unkStruct_203B270 *gUnknown_203B270 = {NULL};
 
-const UnkTextStruct2 gUnknown_80DC240 = {
+const Window gUnknown_80DC240 = {
     0x00, 0x00, 0x00, 0x00,
     0x03,
     0x00, 0x00,
@@ -22,9 +22,9 @@ const UnkTextStruct2 gUnknown_80DC240 = {
     NULL
 };
 
-const UnkTextStruct2_sub2 gUnkData_80DC258 = {0x01, 0x00, 0x0F, 0x00};
+const WindowHeader gUnkData_80DC258 = {0x01, 0x00, 0x0F, 0x00};
 
-const UnkTextStruct2 gUnknown_80DC25C = {
+const Window gUnknown_80DC25C = {
     0, 0, 0, 0,
     6,
     0x2, 0x2,
@@ -33,7 +33,7 @@ const UnkTextStruct2 gUnknown_80DC25C = {
     &gUnkData_80DC258
 };
 
-const UnkTextStruct2 gUnknown_80DC274 = {
+const Window gUnknown_80DC274 = {
     0, 0, 0, 0,
     3,
     0x2, 0xF,

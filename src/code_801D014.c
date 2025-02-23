@@ -200,14 +200,14 @@ static void sub_801D220(void)
 
                 sUnknown_203B250->unkB8.a0[0] = sUnknown_80DBE98;
                 sub_8012CAC(&sUnknown_203B250->unkB8.a0[0], sUnknown_203B250->unk68);
-                sUnknown_203B250->unkB8.a0[0].unkC = 9;
+                sUnknown_203B250->unkB8.a0[0].width = 9;
             }
             else {
                 for (i = 0; i < 4; i++)
                     sUnknown_203B250->unkB8.a0[i] = sUnknown_80DBEB0[i];
 
                 sub_8012CAC(&sUnknown_203B250->unkB8.a0[0], sUnknown_203B250->unk68);
-                sUnknown_203B250->unkB8.a0[0].unkC = 8;
+                sUnknown_203B250->unkB8.a0[0].width = 8;
             }
             break;
         case 1:
@@ -219,14 +219,14 @@ static void sub_801D220(void)
 
                 sUnknown_203B250->unkB8.a0[0] = sUnknown_80DBE98;
                 sub_8012CAC(&sUnknown_203B250->unkB8.a0[0], sUnknown_203B250->unk68);
-                sUnknown_203B250->unkB8.a0[0].unkC = 9;
+                sUnknown_203B250->unkB8.a0[0].width = 9;
             }
             else {
                 for (i = 0; i < 4; i++)
                     sUnknown_203B250->unkB8.a0[i] = sUnknown_80DBEB0[i];
 
                 sub_8012CAC(&sUnknown_203B250->unkB8.a0[0], sUnknown_203B250->unk68);
-                sUnknown_203B250->unkB8.a0[0].unkC = 8;
+                sUnknown_203B250->unkB8.a0[0].width = 8;
             }
             break;
         default:

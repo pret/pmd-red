@@ -75,7 +75,7 @@ const Item gUnknown_80DED44 =
     ITEM_FLAG_EXISTS, 0, ITEM_NOTHING
 };
 
-const UnkTextStruct2 gUnknown_80DED48 =
+const Window gUnknown_80DED48 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -85,7 +85,7 @@ const UnkTextStruct2 gUnknown_80DED48 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80DED60 =
+const Window gUnknown_80DED60 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
@@ -106,7 +106,7 @@ const MenuItem gUnknown_80DED78[] =
 };
 
 // Unused
-const UnkTextStruct2 gUnknown_80DEDA0 =
+const Window gUnknown_80DEDA0 =
 {
     0x00, 0x00, 0x00, 0x00,
     0x03,
