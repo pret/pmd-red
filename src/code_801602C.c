@@ -27,7 +27,7 @@ static void sub_801629C(void);
 u32 CreateConfirmNameMenu(u32 mode, u8 *name)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
 
     sUnknown_203B200 = MemoryAlloc(sizeof(struct unkStruct_203B200), 8);
     sUnknown_203B200->unk0 = mode;

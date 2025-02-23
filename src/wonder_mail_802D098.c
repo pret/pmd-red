@@ -145,26 +145,26 @@ static void sub_802D1B8(void)
     switch (sUnknown_203B2F8->state) {
         case 13:
            sub_802D5A4();
-           sUnknown_203B2F8->unk1A8.a0[2] = sUnknown_80DFE04;
-           sub_8012CAC(&sUnknown_203B2F8->unk1A8.a0[2], sUnknown_203B2F8->unk118);
-           sUnknown_203B2F8->unk1A8.a0[2].width = 6;
+           sUnknown_203B2F8->unk1A8.id[2] = sUnknown_80DFE04;
+           sub_8012CAC(&sUnknown_203B2F8->unk1A8.id[2], sUnknown_203B2F8->unk118);
+           sUnknown_203B2F8->unk1A8.id[2].width = 6;
            break;
         case 14:
            sub_802D63C();
-           sUnknown_203B2F8->unk1A8.a0[3] = sUnknown_80DFE1C;
-           sub_8012CAC(&sUnknown_203B2F8->unk1A8.a0[3], sUnknown_203B2F8->unk158);
-           sUnknown_203B2F8->unk1A8.a0[3].width = 6;
+           sUnknown_203B2F8->unk1A8.id[3] = sUnknown_80DFE1C;
+           sub_8012CAC(&sUnknown_203B2F8->unk1A8.id[3], sUnknown_203B2F8->unk158);
+           sUnknown_203B2F8->unk1A8.id[3].width = 6;
            break;
         default:
            for (i = 0; i < 4; i++)
-               sUnknown_203B2F8->unk1A8.a0[i] = sUnknown_80DFDD4;
+               sUnknown_203B2F8->unk1A8.id[i] = sUnknown_80DFDD4;
            break;
         case WONDER_MAIL_EXIT:
            break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2F8->unk1A8, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B2F8->unk1A8, TRUE, TRUE);
 }
 
 static void sub_802D2A8(void)

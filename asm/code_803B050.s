@@ -42,7 +42,7 @@ sub_803B050:
 	adds r0, 0x3C
 	movs r1, 0x1
 	movs r2, 0x1
-	bl xxx_call_save_unk_text_struct_800641C
+	bl ShowWindows
 	movs r2, 0
 	movs r3, 0
 	movs r7, 0xCB
@@ -215,7 +215,7 @@ sub_803B1BC:
 	adds r0, 0x3C
 	movs r1, 0x1
 	movs r2, 0x1
-	bl xxx_call_save_unk_text_struct_800641C
+	bl ShowWindows
 	ldr r0, [r4]
 	bl MemoryFree
 	movs r0, 0
@@ -253,7 +253,7 @@ sub_803B204:
 	adds r0, 0x3C
 	movs r1, 0x1
 	movs r2, 0x1
-	bl xxx_call_save_unk_text_struct_800641C
+	bl ShowWindows
 	ldr r0, [r4]
 	movs r1, 0x1A
 	ldrsh r0, [r0, r1]
@@ -284,7 +284,7 @@ sub_803B204:
 	adds r0, 0x3C
 	movs r1, 0x1
 	movs r2, 0x1
-	bl xxx_call_save_unk_text_struct_800641C
+	bl ShowWindows
 	pop {r4}
 	pop {r0}
 	bx r0

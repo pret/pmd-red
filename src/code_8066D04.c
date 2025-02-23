@@ -926,7 +926,7 @@ static const u8 gUnknown_8106DA4[] = {
 };
 
 static const Windows gUnknown_8106DC8 = {
-    .a0 = {
+    .id = {
         [0] =
         {
             .unk0 = 0,
@@ -1260,17 +1260,17 @@ void sub_806806C(PokemonStruct1 *a0)
     Windows spTxtStruct = {0};
     s32 r7;
 
-    spTxtStruct.a0[0].type = WINDOW_TYPE_WITH_HEADER;
-    spTxtStruct.a0[0].pos.x = 2;
-    spTxtStruct.a0[0].pos.y = 2;
-    spTxtStruct.a0[0].width = 0x12;
-    spTxtStruct.a0[0].height = 0xE;
-    spTxtStruct.a0[0].unk10 = 0x12;
-    spTxtStruct.a0[0].unk12 = 2;
-    spTxtStruct.a0[0].unk14 = &gUnknown_202F308;
-    spTxtStruct.a0[1].type = WINDOW_TYPE_NORMAL;
-    spTxtStruct.a0[2].type = WINDOW_TYPE_NORMAL;
-    spTxtStruct.a0[3].type = WINDOW_TYPE_NORMAL;
+    spTxtStruct.id[0].type = WINDOW_TYPE_WITH_HEADER;
+    spTxtStruct.id[0].pos.x = 2;
+    spTxtStruct.id[0].pos.y = 2;
+    spTxtStruct.id[0].width = 0x12;
+    spTxtStruct.id[0].height = 0xE;
+    spTxtStruct.id[0].unk10 = 0x12;
+    spTxtStruct.id[0].unk12 = 2;
+    spTxtStruct.id[0].unk14 = &gUnknown_202F308;
+    spTxtStruct.id[1].type = WINDOW_TYPE_NORMAL;
+    spTxtStruct.id[2].type = WINDOW_TYPE_NORMAL;
+    spTxtStruct.id[3].type = WINDOW_TYPE_NORMAL;
 
     r7 = 0;
     unkStruct.unk40 = 0;

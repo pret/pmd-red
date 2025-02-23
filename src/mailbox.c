@@ -156,28 +156,28 @@ void sub_802E0A0(void)
         case MAIN_MAILBOX_MENU:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B304->unk10C.a0[index] = gUnknown_80E0284;
+                gUnknown_203B304->unk10C.id[index] = gUnknown_80E0284;
             }
             CreateMailboxMenu();
-            gUnknown_203B304->unk10C.a0[2] = gUnknown_80E029C;
-            sub_8012CAC(&gUnknown_203B304->unk10C.a0[2], gUnknown_203B304->menuItems);
+            gUnknown_203B304->unk10C.id[2] = gUnknown_80E029C;
+            sub_8012CAC(&gUnknown_203B304->unk10C.id[2], gUnknown_203B304->menuItems);
             break;
         case MAIL_ACTION_MENU:
             CreateMailActionMenu();
-            gUnknown_203B304->unk10C.a0[2] = gUnknown_80E02B4;
-            sub_8012CAC(&gUnknown_203B304->unk10C.a0[2], gUnknown_203B304->menuItems);
-            gUnknown_203B304->unk10C.a0[2].width = 6;
-            gUnknown_203B304->unk10C.a0[3] = gUnknown_80E02CC;
+            gUnknown_203B304->unk10C.id[2] = gUnknown_80E02B4;
+            sub_8012CAC(&gUnknown_203B304->unk10C.id[2], gUnknown_203B304->menuItems);
+            gUnknown_203B304->unk10C.id[2].width = 6;
+            gUnknown_203B304->unk10C.id[3] = gUnknown_80E02CC;
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B304->unk10C.a0[index] = gUnknown_80E0284;
+                gUnknown_203B304->unk10C.id[index] = gUnknown_80E0284;
             }
             break;
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B304->unk10C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B304->unk10C, TRUE, TRUE);
 }
 
 void sub_802E1AC(void)

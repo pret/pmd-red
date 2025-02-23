@@ -462,20 +462,5 @@ gUnknown_80D4014: @ 80D4014
         .string "wmp2font\0"
         .align 2,0
 
-	.global gUnknown_80D405C
-gUnknown_80D405C: @ 80D405C
-        .string "ax%03d\0"
-        .align 2,0
-
-	.global gUnknown_80D4064
-gUnknown_80D4064: @ 80D4064
-        .string "wmapspr\0"
-        .align 2,0
-
-	.global gUnknown_80D406C
-gUnknown_80D406C: @ 80D406C
-        .string "palet\0"
-        .align 2,0
-
 
 

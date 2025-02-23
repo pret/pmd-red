@@ -113,9 +113,9 @@ static const u32 gUnknown_80B853C[16] =
     0xEEEEEEEE,
 };
 
-static const Windows gUnknown_80B857C =
+static const Windows sDummyWindows =
 {
-    .a0 = {
+    .id = {
         [0] = {.type = WINDOW_TYPE_NORMAL},
         [1] = {.type = WINDOW_TYPE_NORMAL},
         [2] = {.type = WINDOW_TYPE_NORMAL},
@@ -275,10 +275,10 @@ void SetCharacterMask(int a0)
     sTextShadowMask = retval;
 }
 
-void xxx_call_save_unk_text_struct_800641C(const Windows *a0, bool8 a1, bool8 a2)
+void ShowWindows(const Windows *windows, bool8 a1, bool8 a2)
 {
-    DungeonPos r3 = {0, 0};
-    SaveUnkTextStructAndXXX_8006438(a0, a1, a2, &r3);
+    DungeonPos positionModifier = {0, 0};
+    SaveUnkTextStructAndXXX_8006438(windows, a1, a2, &positionModifier);
 }
 
 // https://decomp.me/scratch/xF5Y1
@@ -290,19 +290,19 @@ static void SaveUnkTextStructAndXXX_8006438(const Windows *a0, bool8 a1, bool8 a
     r9 = 2;
 
     if (a0 == NULL)
-        a0 = &gUnknown_80B857C;
+        a0 = &sDummyWindows;
     if (a2)
         sub_8009388();
 
     sub_800898C();
 
     for (i = 0; i < 4; i++) {
-        sUnknown_202AFC0.a0[i] = a0->a0[i];
+        sUnknown_202AFC0.id[i] = a0->id[i];
 
-        if (a0->a0[i].width) {
-            sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], &a0->a0[i], a1, r9, a3, 0);
-            sub_80089AC(&a0->a0[i], a3);
-            r9 += a0->a0[i].width * a0->a0[i].unk10;
+        if (a0->id[i].width) {
+            sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], &a0->id[i], a1, r9, a3, 0);
+            sub_80089AC(&a0->id[i], a3);
+            r9 += a0->id[i].width * a0->id[i].unk10;
         }
     }
 
@@ -323,7 +323,7 @@ void RestoreUnkTextStruct_8006518(Windows *unkData)
 {
     s32 i;
     for (i = 0; i < 4; i++)
-        unkData->a0[i] = sUnknown_202AFC0.a0[i];
+        unkData->id[i] = sUnknown_202AFC0.id[i];
 }
 
 UNUSED static void nullsub_153(void)

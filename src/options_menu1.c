@@ -118,30 +118,30 @@ static void sub_801DD84(void)
             }
 
             for(i = 0; i < 4; i++)
-                sUnknown_203B25C->unkBC.a0[i] = sUnknown_80DBFB0;
+                sUnknown_203B25C->unkBC.id[i] = sUnknown_80DBFB0;
 
-            sUnknown_203B25C->unkBC.a0[0] = sUnknown_80DBFCC;
-            sub_8012CAC(&sUnknown_203B25C->unkBC.a0[0], sUnknown_203B25C->menuItems);
-            sUnknown_203B25C->unkBC.a0[0].width = 10;
+            sUnknown_203B25C->unkBC.id[0] = sUnknown_80DBFCC;
+            sub_8012CAC(&sUnknown_203B25C->unkBC.id[0], sUnknown_203B25C->menuItems);
+            sUnknown_203B25C->unkBC.id[0].width = 10;
             break;
         case OPTIONS_MENU_MAIN:
             CreateOthersMenu();
 
             for (i = 0; i < 4; i++)
-                sUnknown_203B25C->unkBC.a0[i] = sUnknown_80DBFB0;
+                sUnknown_203B25C->unkBC.id[i] = sUnknown_80DBFB0;
 
-            sUnknown_203B25C->unkBC.a0[0] = sUnknown_80DBFCC;
-            sub_8012CAC(&sUnknown_203B25C->unkBC.a0[0], sUnknown_203B25C->menuItems);
-            sUnknown_203B25C->unkBC.a0[0].width = 10;
+            sUnknown_203B25C->unkBC.id[0] = sUnknown_80DBFCC;
+            sub_8012CAC(&sUnknown_203B25C->unkBC.id[0], sUnknown_203B25C->menuItems);
+            sUnknown_203B25C->unkBC.id[0].width = 10;
             break;
         default:
             for (i = 0; i < 4; i++)
-                sUnknown_203B25C->unkBC.a0[i] = sUnknown_80DBFB0;
+                sUnknown_203B25C->unkBC.id[i] = sUnknown_80DBFB0;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B25C->unkBC, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B25C->unkBC, TRUE, TRUE);
 }
 
 static void sub_801DED0(void)

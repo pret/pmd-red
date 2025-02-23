@@ -68,10 +68,10 @@ void sub_80382E4(s32 currMenu)
     MemoryFill8(sUnknown_203B360, 0, sizeof(unkStruct_203B360));
   }
   for(index = 0; index < 4; index++){
-    sUnknown_203B360->unk148.a0[index] = gUnknown_80E6E7C;
+    sUnknown_203B360->unk148.id[index] = gUnknown_80E6E7C;
   }
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(&sUnknown_203B360->unk148, TRUE, TRUE);
+  ShowWindows(&sUnknown_203B360->unk148, TRUE, TRUE);
   if (currMenu == 0x25) {
       // Caution!
       // The storage space is empty!
@@ -88,7 +88,7 @@ void sub_80382E4(s32 currMenu)
 void sub_80383A8(void)
 {
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+  ShowWindows(NULL, TRUE, TRUE);
   if (sUnknown_203B360 != 0) {
     MemoryFree(sUnknown_203B360);
     sUnknown_203B360 = 0;

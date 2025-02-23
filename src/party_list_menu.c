@@ -164,29 +164,29 @@ static void sub_802608C(void)
         case PARTY_LIST_STATE_MAIN_MENU_1:
             for(index = 0; index < 4; index++)
             {
-                sUnknown_203B2B8->unk220.a0[index] = sUnknown_80DD310;
+                sUnknown_203B2B8->unk220.id[index] = sUnknown_80DD310;
             }
-            sUnknown_203B2B8->unk220.a0[0] = sUnknown_80DD358;
-            sUnknown_203B2B8->unk220.a0[3] = sUnknown_80DD370;
+            sUnknown_203B2B8->unk220.id[0] = sUnknown_80DD358;
+            sUnknown_203B2B8->unk220.id[3] = sUnknown_80DD370;
             PartyListMenu_CreateMenu1();
-            sUnknown_203B2B8->unk220.a0[2] = sUnknown_80DD328;
-            sub_8012CAC(&sUnknown_203B2B8->unk220.a0[2], sUnknown_203B2B8->unk16C);
-            sUnknown_203B2B8->unk220.a0[2].width = 9;
+            sUnknown_203B2B8->unk220.id[2] = sUnknown_80DD328;
+            sub_8012CAC(&sUnknown_203B2B8->unk220.id[2], sUnknown_203B2B8->unk16C);
+            sUnknown_203B2B8->unk220.id[2].width = 9;
             break;
         case 0x14:
             PartyListMenu_CreateMenu2();
-            sUnknown_203B2B8->unk220.a0[2] = sUnknown_80DD340;
-            sub_8012CAC(&sUnknown_203B2B8->unk220.a0[2], sUnknown_203B2B8->unk16C);
+            sUnknown_203B2B8->unk220.id[2] = sUnknown_80DD340;
+            sub_8012CAC(&sUnknown_203B2B8->unk220.id[2], sUnknown_203B2B8->unk16C);
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                sUnknown_203B2B8->unk220.a0[index] = sUnknown_80DD310;
+                sUnknown_203B2B8->unk220.id[index] = sUnknown_80DD310;
             }
             break;
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2B8->unk220, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B2B8->unk220, TRUE, TRUE);
 }
 
 void HandlePartyListMenuCallback(void)

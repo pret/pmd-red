@@ -25,13 +25,13 @@ bool8 sub_802CDD4(u32 a0)
         sUnknown_203B2F4 = MemoryAlloc(sizeof(struct_Sub80095E4_2), 8);
 
     sUnknown_203B2F4->s0.unk34 = a0;
-    sUnknown_203B2F4->s0.unk38 = &sUnknown_203B2F4->s0.unk3C.a0[sUnknown_203B2F4->s0.unk34];
-    RestoreUnkTextStruct_8006518(&sUnknown_203B2F4->s0.unk3C);
-    sUnknown_203B2F4->s0.unk3C.a0[sUnknown_203B2F4->s0.unk34] = sUnknown_80DFDA4;
+    sUnknown_203B2F4->s0.unk38 = &sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.unk34];
+    RestoreUnkTextStruct_8006518(&sUnknown_203B2F4->s0.windows);
+    sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.unk34] = sUnknown_80DFDA4;
     sUnknown_203B2F4->s0.unk38->unk14 = &sUnknown_203B2F4->unk9C;
     sub_8012D34(sUnknown_203B2F4->s0.unk38, 4);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2F4->s0.unk3C, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B2F4->s0.windows, TRUE, TRUE);
     sub_8013848(&sUnknown_203B2F4->s0.input, 5, 4, a0);
     sub_802CF5C();
     sub_802CFD0();
@@ -69,7 +69,7 @@ u8 sub_802CEBC(void)
 void sub_802CED8(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2F4->s0.unk3C, FALSE, FALSE);
+    ShowWindows(&sUnknown_203B2F4->s0.windows, FALSE, FALSE);
     sub_8013984(&sUnknown_203B2F4->s0.input);
     sub_802CF5C();
     sub_802CFD0();
@@ -81,9 +81,9 @@ void sub_802CED8(bool8 cursorSprite)
 void sub_802CF14(void)
 {
     if (sUnknown_203B2F4 != NULL) {
-        sUnknown_203B2F4->s0.unk3C.a0[sUnknown_203B2F4->s0.unk34] = sUnknown_80DFD8C;
+        sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.unk34] = sUnknown_80DFD8C;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2F4->s0.unk3C, TRUE, TRUE);
+        ShowWindows(&sUnknown_203B2F4->s0.windows, TRUE, TRUE);
         MemoryFree(sUnknown_203B2F4);
         sUnknown_203B2F4 = NULL;
     }

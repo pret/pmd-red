@@ -2,10 +2,7 @@
 #define GUARD_CODE_8004AA0_H
 
 #include "file_system.h"
-#include "menu_input.h"
 #include "structs/rgb.h"
-#include "structs/axdata.h"
-#include "structs/str_position.h"
 
 // size: 0x18
 typedef struct unkStruct_202EE8C

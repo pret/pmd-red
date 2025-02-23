@@ -63,7 +63,7 @@ u32 UpdateFadeInTile(u32 a0);
 u32 sub_80063B0(void);
 void SelectCharmap(u32 a0);
 void SetCharacterMask(int a0);
-void xxx_call_save_unk_text_struct_800641C(const Windows *a0, bool8 a1, bool8 a2);
+void ShowWindows(const Windows *windows, bool8 a1, bool8 a2);
 void RestoreUnkTextStruct_8006518(Windows *unkData);
 u32 sub_8006544(u32 index);
 void sub_8007334(s32 a0);

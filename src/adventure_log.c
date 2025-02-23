@@ -23,13 +23,13 @@ bool8 CreateAdventureLogScreen(u32 kind)
 {
     sAdventureLog = MemoryAlloc(sizeof(*sAdventureLog), 8);
     sAdventureLog->s0.unk34 = kind;
-    sAdventureLog->s0.unk38 = &sAdventureLog->s0.unk3C.a0[kind];
-    RestoreUnkTextStruct_8006518(&sAdventureLog->s0.unk3C);
-    sAdventureLog->s0.unk3C.a0[sAdventureLog->s0.unk34] = sUnknown_80E2008;
+    sAdventureLog->s0.unk38 = &sAdventureLog->s0.windows.id[kind];
+    RestoreUnkTextStruct_8006518(&sAdventureLog->s0.windows);
+    sAdventureLog->s0.windows.id[sAdventureLog->s0.unk34] = sUnknown_80E2008;
     sAdventureLog->s0.unk38->unk14 = &sAdventureLog->unk9C;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sAdventureLog->s0.unk3C, TRUE, TRUE);
+    ShowWindows(&sAdventureLog->s0.windows, TRUE, TRUE);
     sub_8013818(&sAdventureLog->s0.input, 0x20, 8, kind);
     sub_8032084();
     DisplayAdventureLog();
@@ -63,9 +63,9 @@ u32 HandleAdventureLogInput(bool8 a0)
 void CleanAdventureLogScreen(void)
 {
     if (sAdventureLog != NULL) {
-        sAdventureLog->s0.unk3C.a0[sAdventureLog->s0.unk34] = sUnknown_80E1FF0;
+        sAdventureLog->s0.windows.id[sAdventureLog->s0.unk34] = sUnknown_80E1FF0;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&sAdventureLog->s0.unk3C, TRUE, TRUE);
+        ShowWindows(&sAdventureLog->s0.windows, TRUE, TRUE);
         MemoryFree(sAdventureLog);
         sAdventureLog = NULL;
     }

@@ -53,7 +53,7 @@ bool8 CreateWigglytuffShop(u32 mode)
     OpenedFile *file;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
 
     sWigglytuffShop3Work = MemoryAlloc(sizeof(WigglytuffShop3Work), 8);
     sWigglytuffShop3Work->menuAction1 = 0;
@@ -145,21 +145,21 @@ static void sub_8021D5C(void)
     switch (sWigglytuffShop3Work->state) {
         case WIGGLYTUFF_UNK9:
         case WIGGLYTUFF_UNKA:
-            sWigglytuffShop3Work->unkD0.a0[0] = sUnknown_80DC534;
-            sWigglytuffShop3Work->unkD0.a0[2] = sUnknown_80DC534;
-            sWigglytuffShop3Work->unkD0.a0[1] = sUnknown_80DC564;
+            sWigglytuffShop3Work->unkD0.id[0] = sUnknown_80DC534;
+            sWigglytuffShop3Work->unkD0.id[2] = sUnknown_80DC534;
+            sWigglytuffShop3Work->unkD0.id[1] = sUnknown_80DC564;
             break;
         case WIGGLYTUFF_UNKB:
-            sWigglytuffShop3Work->unkD0.a0[2] = sUnknown_80DC54C;
+            sWigglytuffShop3Work->unkD0.id[2] = sUnknown_80DC54C;
             break;
         default:
             for (i = 0; i < 4; i++)
-                sWigglytuffShop3Work->unkD0.a0[i] = sUnknown_80DC534;
+                sWigglytuffShop3Work->unkD0.id[i] = sUnknown_80DC534;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sWigglytuffShop3Work->unkD0, TRUE, TRUE);
+    ShowWindows(&sWigglytuffShop3Work->unkD0, TRUE, TRUE);
 }
 
 static void UpdateWigglytuffDialogue(void)

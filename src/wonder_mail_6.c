@@ -101,7 +101,7 @@ bool8 sub_8030F58(u32 wonderMailType)
   OpenedFile *file;
 
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+  ShowWindows(NULL, TRUE, TRUE);
   if (gUnknown_203B328 == NULL) {
     gUnknown_203B328 = MemoryAlloc(sizeof(struct unkStruct_203B328),8);
     MemoryFill8(gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
@@ -184,36 +184,36 @@ static void sub_80310FC(void)
     switch(gUnknown_203B328->state)
     {
         case INIT_STATE:
-            gUnknown_203B328->unkA8.a0[1] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[2] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[3] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[1] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[2] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[3] = gUnknown_80E0990;
             break;
         case MAIN_MENU:
-            gUnknown_203B328->unkA8.a0[1] = gUnknown_80E09A8;
-            gUnknown_203B328->unkA8.a0[2] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[3] = gUnknown_80E0990;
-            sub_8012CAC(&gUnknown_203B328->unkA8.a0[1], gUnknown_80E0968);
+            gUnknown_203B328->unkA8.id[1] = gUnknown_80E09A8;
+            gUnknown_203B328->unkA8.id[2] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[3] = gUnknown_80E0990;
+            sub_8012CAC(&gUnknown_203B328->unkA8.id[1], gUnknown_80E0968);
             break;
         case DELETE_SINGLE_MAIL_STATE:
         case DELETE_ALL_MAIL_STATE:
-            gUnknown_203B328->unkA8.a0[2] = gUnknown_80E09C0;
-            sub_8012CAC(&gUnknown_203B328->unkA8.a0[2], gUnknown_80E0948);
+            gUnknown_203B328->unkA8.id[2] = gUnknown_80E09C0;
+            sub_8012CAC(&gUnknown_203B328->unkA8.id[2], gUnknown_80E0948);
             break;
         case INFO_STATE:
-            gUnknown_203B328->unkA8.a0[0] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[1] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[2] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[3] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[0] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[1] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[2] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[3] = gUnknown_80E0990;
             break;
         case 5:
         case 6:
         default:
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             break;
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B328->unkA8, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B328->unkA8, TRUE, TRUE);
 }
 
 static void sub_8031258(void)

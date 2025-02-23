@@ -46,7 +46,7 @@ bool8 CreateKangaskhanStorage(u32 mode)
     OpenedFile *faceFile;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
     gKangaskhanStorageWork = MemoryAlloc(sizeof(struct KangaskhanStorageWork), 8);
     gKangaskhanStorageWork->menuAction1 = 0;
     gKangaskhanStorageWork->menuAction2 = 0;
@@ -150,33 +150,33 @@ static void sub_8016E80(void)
     switch (gKangaskhanStorageWork->currState) {
         case 13:
         case 14:
-            gKangaskhanStorageWork->unkEC.a0[0] = sUnknown_80DB748;
-            gKangaskhanStorageWork->unkEC.a0[1] = sUnknown_80DB748;
-            gKangaskhanStorageWork->unkEC.a0[2] = sUnknown_80DB748;
-            gKangaskhanStorageWork->unkEC.a0[0] = sUnknown_80DB748;
+            gKangaskhanStorageWork->unkEC.id[0] = sUnknown_80DB748;
+            gKangaskhanStorageWork->unkEC.id[1] = sUnknown_80DB748;
+            gKangaskhanStorageWork->unkEC.id[2] = sUnknown_80DB748;
+            gKangaskhanStorageWork->unkEC.id[0] = sUnknown_80DB748;
             break;
         case 22:
         case 23:
-            gKangaskhanStorageWork->unkEC.a0[0] = sUnknown_80DB748;
-            gKangaskhanStorageWork->unkEC.a0[1] = sUnknown_80DB748;
-            gKangaskhanStorageWork->unkEC.a0[2] = sUnknown_80DB748;
-            gKangaskhanStorageWork->unkEC.a0[0] = sUnknown_80DB778;
+            gKangaskhanStorageWork->unkEC.id[0] = sUnknown_80DB748;
+            gKangaskhanStorageWork->unkEC.id[1] = sUnknown_80DB748;
+            gKangaskhanStorageWork->unkEC.id[2] = sUnknown_80DB748;
+            gKangaskhanStorageWork->unkEC.id[0] = sUnknown_80DB778;
             break;
         case 24:
-            gKangaskhanStorageWork->unkEC.a0[1] = sUnknown_80DB790;
+            gKangaskhanStorageWork->unkEC.id[1] = sUnknown_80DB790;
             break;
         case 15:
         case 25:
-            gKangaskhanStorageWork->unkEC.a0[2] = sUnknown_80DB760;
+            gKangaskhanStorageWork->unkEC.id[2] = sUnknown_80DB760;
             break;
         default:
             for (index = 0; index < 4; index++)
-                gKangaskhanStorageWork->unkEC.a0[index] = sUnknown_80DB748;
+                gKangaskhanStorageWork->unkEC.id[index] = sUnknown_80DB748;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gKangaskhanStorageWork->unkEC, TRUE, TRUE);
+    ShowWindows(&gKangaskhanStorageWork->unkEC, TRUE, TRUE);
 }
 
 static void sub_8016FF8(void)
@@ -309,7 +309,7 @@ static void sub_8016FF8(void)
 
             gKangaskhanStorageWork->unkA8.unk4 = gKangaskhanStorageWork->unkA8.unkC;
             gKangaskhanStorageWork->unkA8.unk14 = 1;
-            gKangaskhanStorageWork->unkA8.unk18 = &gKangaskhanStorageWork->unkEC.a0[1];
+            gKangaskhanStorageWork->unkA8.unk18 = &gKangaskhanStorageWork->unkEC.id[1];
             gKangaskhanStorageWork->unkA8.unk1C = 40;
             gKangaskhanStorageWork->unkA8.unk20 = 18;
             sub_8013AA0(&gKangaskhanStorageWork->unkA8);

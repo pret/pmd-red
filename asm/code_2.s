@@ -144,7 +144,7 @@ QuickSave:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl xxx_call_save_unk_text_struct_800641C
+	bl ShowWindows
 	movs r0, 0
 	movs r1, 0x14
 	bl sub_8009408
@@ -297,7 +297,7 @@ _08000892:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl xxx_call_save_unk_text_struct_800641C
+	bl ShowWindows
 	movs r0, 0
 	bl xxx_update_stuff
 	add sp, 0xC
@@ -325,7 +325,7 @@ sub_80008C0:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl xxx_call_save_unk_text_struct_800641C
+	bl ShowWindows
 	movs r0, 0
 	movs r1, 0x14
 	bl sub_8009408
@@ -425,7 +425,7 @@ _080009A2:
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0x1
-	bl xxx_call_save_unk_text_struct_800641C
+	bl ShowWindows
 	movs r0, 0
 	bl xxx_update_stuff
 	add sp, 0x4
@@ -622,7 +622,7 @@ _08000B50:
 	add r4, sp, 0x168
 	str r0, [r4]
 	adds r0, r5, 0
-	bl sub_8010268
+	bl ShowWorldMap
 	ldr r0, [r4]
 	bl MemoryFree
 	add r0, sp, 0x16C

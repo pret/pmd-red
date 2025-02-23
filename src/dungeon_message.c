@@ -784,7 +784,7 @@ void sub_8052FB8(const u8 *str)
         r8--;
     }
 
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
     sub_803E46C(9);
     sub_8040238();
     for (j = 0; j < 8; j++) {

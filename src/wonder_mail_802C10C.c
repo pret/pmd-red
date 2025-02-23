@@ -29,18 +29,18 @@ bool8 sub_802C10C(s32 a0, DungeonPos *a1, s32 a2)
         gUnknown_203B2E0 = MemoryAlloc(sizeof(struct unkStruct_203B2E0), 8);
 
     gUnknown_203B2E0->unk8.s0.unk34 = a0;
-    gUnknown_203B2E0->unk8.s0.unk38 = &gUnknown_203B2E0->unk8.s0.unk3C.a0[a0];
-    RestoreUnkTextStruct_8006518(&gUnknown_203B2E0->unk8.s0.unk3C);
+    gUnknown_203B2E0->unk8.s0.unk38 = &gUnknown_203B2E0->unk8.s0.windows.id[a0];
+    RestoreUnkTextStruct_8006518(&gUnknown_203B2E0->unk8.s0.windows);
 
-    gUnknown_203B2E0->unk8.s0.unk3C.a0[gUnknown_203B2E0->unk8.s0.unk34] = sUnknown_80DFCB4;
+    gUnknown_203B2E0->unk8.s0.windows.id[gUnknown_203B2E0->unk8.s0.unk34] = sUnknown_80DFCB4;
     gUnknown_203B2E0->unk8.s0.unk38->unk14 = &gUnknown_203B2E0->unk8.unk9C;
 
     if (a1 != NULL)
-        gUnknown_203B2E0->unk8.s0.unk3C.a0[gUnknown_203B2E0->unk8.s0.unk34].pos = *a1;
+        gUnknown_203B2E0->unk8.s0.windows.id[gUnknown_203B2E0->unk8.s0.unk34].pos = *a1;
 
     sub_8012D34(gUnknown_203B2E0->unk8.s0.unk38, a2);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B2E0->unk8.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B2E0->unk8.s0.windows, TRUE, TRUE);
     sub_8013848(&gUnknown_203B2E0->unk8.s0.input, CountPelipperBoardSlots(), a2, a0);
     gUnknown_203B2E0->unk8.s0.input.menuIndex = gUnknown_203B2E4;
     sub_8013984(&gUnknown_203B2E0->unk8.s0.input);
@@ -84,7 +84,7 @@ u8 sub_802C26C(void)
 void sub_802C28C(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B2E0->unk8.s0.unk3C, FALSE, FALSE);
+    ShowWindows(&gUnknown_203B2E0->unk8.s0.windows, FALSE, FALSE);
     gUnknown_203B2E0->unk8.s0.input.unk22 = CountPelipperBoardSlots();
     sub_8013984(&gUnknown_203B2E0->unk8.s0.input);
     sub_802C328();
@@ -98,9 +98,9 @@ void sub_802C2D4(void)
 {
     if (gUnknown_203B2E0 != NULL) {
         gUnknown_203B2E4 = gUnknown_203B2E0->unk8.s0.input.menuIndex;
-        gUnknown_203B2E0->unk8.s0.unk3C.a0[gUnknown_203B2E0->unk8.s0.unk34] = sUnknown_80DFC9C;
+        gUnknown_203B2E0->unk8.s0.windows.id[gUnknown_203B2E0->unk8.s0.unk34] = sUnknown_80DFC9C;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&gUnknown_203B2E0->unk8.s0.unk3C, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B2E0->unk8.s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B2E0);
         gUnknown_203B2E0 = NULL;
     }

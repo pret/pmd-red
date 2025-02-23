@@ -24,7 +24,7 @@ struct unkStruct_203B278
     MenuInputStruct unk28;
     u32 unk5C;
     Window *unk60;
-    Windows unk64;
+    Windows windows;
     WindowHeader unkC4;
     MenuInputStructSub unkC8;
 };
@@ -55,10 +55,10 @@ bool8 sub_801F808(u16 *moveIDs)
     ResetSprites(TRUE);
     gUnknown_203B278 = MemoryAlloc(sizeof(struct unkStruct_203B278), 8);
     gUnknown_203B278->unk5C = 0;
-    gUnknown_203B278->unk60 = &gUnknown_203B278->unk64.a0[0];
-    sub_80140B4(&gUnknown_203B278->unk64);
+    gUnknown_203B278->unk60 = &gUnknown_203B278->windows.id[0];
+    sub_80140B4(&gUnknown_203B278->windows);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B278->unk64, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B278->windows, TRUE, TRUE);
     gUnknown_203B278->moveIDs = moveIDs;
 
     for(index = 4; index > 1; index--)
@@ -93,9 +93,9 @@ void sub_801F8D0(void)
 {
     if(gUnknown_203B278)
     {
-        gUnknown_203B278->unk64.a0[gUnknown_203B278->unk5C] = sUnknown_80DC2F8;
+        gUnknown_203B278->windows.id[gUnknown_203B278->unk5C] = sUnknown_80DC2F8;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&gUnknown_203B278->unk64, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B278->windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B278);
         gUnknown_203B278 = NULL;
     }
@@ -110,7 +110,7 @@ void sub_801F918(s32 newState)
 
 void sub_801F930(void)
 {
-    sub_80140B4(&gUnknown_203B278->unk64);
+    sub_80140B4(&gUnknown_203B278->windows);
     switch(gUnknown_203B278->state)
     {
         case 0:
@@ -120,11 +120,11 @@ void sub_801F930(void)
             gUnknown_203B278->unkC4.f2 = 0x10;
             gUnknown_203B278->unkC4.f3 = 0;
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_203B278->unk64, TRUE, TRUE);
+            ShowWindows(&gUnknown_203B278->windows, TRUE, TRUE);
             break;
         case 1:
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_203B278->unk64, TRUE, TRUE);
+            ShowWindows(&gUnknown_203B278->windows, TRUE, TRUE);
             break;
         default:
             break;

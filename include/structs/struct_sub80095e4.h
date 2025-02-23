@@ -13,7 +13,7 @@ typedef struct struct_Sub80095E4
     /* 0x0 */ MenuInputStruct input;
     u32 unk34;
     Window *unk38;
-    Windows unk3C;
+    Windows windows;
     // size: 0x9C
 } struct_Sub80095E4;
 
@@ -33,16 +33,16 @@ typedef struct struct_Sub80095E4_2
     s16 newE;                                                                           \
     s16 a0 = (_a0);                                                                     \
     UNUSED s32 a0_ = a0;                                                                \
-    UNUSED s16 oldE = (ptr).unk3C.a0[(ptr).unk34].height;                                    \
+    UNUSED s16 oldE = (ptr).windows.id[(ptr).unk34].height;                                    \
     a0_ = 0;                                                                            \
     new10 = a0 + 2;                                                                     \
     newE = a0;                                                                          \
                                                                                         \
-    (ptr).unk3C.a0[(ptr).unk34].height = newE;                                               \
-    (ptr).unk3C.a0[(ptr).unk34].unk10 = a0 + 2;                                            \
+    (ptr).windows.id[(ptr).unk34].height = newE;                                               \
+    (ptr).windows.id[(ptr).unk34].unk10 = a0 + 2;                                            \
                                                                                         \
     ResetUnusedInputStruct();                                                           \
-    xxx_call_save_unk_text_struct_800641C(&(ptr).unk3C, TRUE, TRUE);                                               \
+    ShowWindows(&(ptr).windows, TRUE, TRUE);                                               \
 }
 
 #define SUB_80095E4_CALL(ptr)                                                           \
@@ -54,14 +54,14 @@ typedef struct struct_Sub80095E4_2
 #define SUB_80095E4_CALL_2(ptr)                                                         \
 {                                                                                       \
     s32 a0 = sub_80095E4((ptr).input.unk1A, 12) + 2;                                    \
-    UNUSED s16 oldE = (ptr).unk3C.a0[(ptr).unk34].height;                                    \
+    UNUSED s16 oldE = (ptr).windows.id[(ptr).unk34].height;                                    \
     s16 newE = a0;                                                                      \
                                                                                         \
-    (ptr).unk3C.a0[(ptr).unk34].height = newE;                                               \
-    (ptr).unk3C.a0[(ptr).unk34].unk10 = newE;                                              \
+    (ptr).windows.id[(ptr).unk34].height = newE;                                               \
+    (ptr).windows.id[(ptr).unk34].unk10 = newE;                                              \
                                                                                         \
     ResetUnusedInputStruct();                                                           \
-    xxx_call_save_unk_text_struct_800641C(&(ptr).unk3C, TRUE, TRUE);                                               \
+    ShowWindows(&(ptr).windows, TRUE, TRUE);                                               \
 }
 
 // sub_802BF30 and sub_802C328 use a different function call, and 24 instead of 12

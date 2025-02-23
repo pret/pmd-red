@@ -25,12 +25,12 @@ bool8 sub_8019E40(u32 r0)
 
     gUnknown_203B214 = MemoryAlloc(sizeof(*gUnknown_203B214), 8);
     gUnknown_203B214->s0.unk34 = r0;
-    gUnknown_203B214->s0.unk38 = &gUnknown_203B214->s0.unk3C.a0[gUnknown_203B214->s0.unk34];
-    RestoreUnkTextStruct_8006518(&gUnknown_203B214->s0.unk3C);
-    gUnknown_203B214->s0.unk3C.a0[gUnknown_203B214->s0.unk34] = sUnknown_80DB8CC;
+    gUnknown_203B214->s0.unk38 = &gUnknown_203B214->s0.windows.id[gUnknown_203B214->s0.unk34];
+    RestoreUnkTextStruct_8006518(&gUnknown_203B214->s0.windows);
+    gUnknown_203B214->s0.windows.id[gUnknown_203B214->s0.unk34] = sUnknown_80DB8CC;
     gUnknown_203B214->s0.unk38->unk14 = &gUnknown_203B214->unk9C;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B214->s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B214->s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_203B214->s0.input, CountKecleonShopItems(), 10, r0);
     gUnknown_203B214->s0.input.menuIndex = gUnknown_203B218;
     sub_8013984(&gUnknown_203B214->s0.input);
@@ -84,7 +84,7 @@ u8 sub_8019FB0(void)
 void sub_8019FCC(bool8 r0)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B214->s0.unk3C, FALSE, FALSE);
+    ShowWindows(&gUnknown_203B214->s0.windows, FALSE, FALSE);
     gUnknown_203B214->s0.input.unk22 = CountKecleonShopItems();
     sub_8013984(&gUnknown_203B214->s0.input);
     sub_801A064();
@@ -97,9 +97,9 @@ void sub_801A010(void)
 {
     if (gUnknown_203B214 != NULL) {
         gUnknown_203B218 = gUnknown_203B214->s0.input.menuIndex;
-        gUnknown_203B214->s0.unk3C.a0[gUnknown_203B214->s0.unk34] = sUnknown_80DB8B4;
+        gUnknown_203B214->s0.windows.id[gUnknown_203B214->s0.unk34] = sUnknown_80DB8B4;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&gUnknown_203B214->s0.unk3C, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B214->s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B214);
         gUnknown_203B214 = NULL;
     }

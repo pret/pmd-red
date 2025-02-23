@@ -101,7 +101,7 @@ void GameLoop(void)
         UpdateFadeInTile(0);
         InitFontPalette();
         sub_800CDA8(2);
-        xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+        ShowWindows(NULL, TRUE, TRUE);
         gUnknown_2026E4E = 0x1000;
         LoadTitleScreen();
         SetBG2RegOffsets(0, 0);

@@ -390,9 +390,9 @@ static void PersonalityTest_DisplayStarterSprite(void)
 
     starterID = sPersonalityTestTracker->unk4.StarterID;
     RestoreUnkTextStruct_8006518(&stackArray);
-    stackArray.a0[1] = sUnknown_80F4244;
+    stackArray.id[1] = sUnknown_80F4244;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&stackArray, TRUE, FALSE);
+    ShowWindows(&stackArray, TRUE, FALSE);
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
 

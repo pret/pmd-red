@@ -151,28 +151,28 @@ void sub_802E94C(void)
         case MAIN_PELIPPER_BOARD_MENU:
             for(index = 0; index < 4; index++)
             {
-                gPelipperBoard->unk10C.a0[index] = gUnknown_80E0330;
+                gPelipperBoard->unk10C.id[index] = gUnknown_80E0330;
             }
             CreatePelipperBoardMenu();
-            gPelipperBoard->unk10C.a0[2] = gUnknown_80E0348;
-            sub_8012CAC(&gPelipperBoard->unk10C.a0[2], gPelipperBoard->menuItems);
+            gPelipperBoard->unk10C.id[2] = gUnknown_80E0348;
+            sub_8012CAC(&gPelipperBoard->unk10C.id[2], gPelipperBoard->menuItems);
             break;
         case 6:
             sub_802EC10();
-            gPelipperBoard->unk10C.a0[2] = gUnknown_80E0360;
-            sub_8012CAC(&gPelipperBoard->unk10C.a0[2], gPelipperBoard->menuItems);
-            gPelipperBoard->unk10C.a0[2].width = 6;
-            gPelipperBoard->unk10C.a0[3] = gUnknown_80E0378;
+            gPelipperBoard->unk10C.id[2] = gUnknown_80E0360;
+            sub_8012CAC(&gPelipperBoard->unk10C.id[2], gPelipperBoard->menuItems);
+            gPelipperBoard->unk10C.id[2].width = 6;
+            gPelipperBoard->unk10C.id[3] = gUnknown_80E0378;
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                gPelipperBoard->unk10C.a0[index] = gUnknown_80E0330;
+                gPelipperBoard->unk10C.id[index] = gUnknown_80E0330;
             }
             break;
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gPelipperBoard->unk10C, TRUE, TRUE);
+    ShowWindows(&gPelipperBoard->unk10C, TRUE, TRUE);
 }
 
 void sub_802EA58(void)

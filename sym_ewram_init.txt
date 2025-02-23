@@ -16,6 +16,7 @@
 .include "src/code_800DAC0.o"
 .include "src/code_800ED38.o"
 .include "src/code_8010F28.o"
+.include "src/world_map.o"
 .include "src/debug.o"
 .include "src/save.o"
 .include "src/save_read.o"

@@ -58,9 +58,9 @@ bool8 sub_8031D70(u32 mailIndex, s32 param_2)
   gUnknown_203B334->mailIndex = mailIndex;
   sub_801317C(&gUnknown_203B334->unk4);
   gUnknown_203B334->unk10 = param_2;
-  gUnknown_203B334->unk14 = &gUnknown_203B334->unk18.a0[param_2];
+  gUnknown_203B334->unk14 = &gUnknown_203B334->unk18.id[param_2];
   RestoreUnkTextStruct_8006518(&gUnknown_203B334->unk18);
-  gUnknown_203B334->unk18.a0[gUnknown_203B334->unk10] = gUnknown_80E1FC4;
+  gUnknown_203B334->unk18.id[gUnknown_203B334->unk10] = gUnknown_80E1FC4;
   sub_8031E00();
   return TRUE;
 }
@@ -90,9 +90,9 @@ void sub_8031E10(void)
 {
     if(gUnknown_203B334)
     {
-        gUnknown_203B334->unk18.a0[gUnknown_203B334->unk10]  = gUnknown_80E1FA8;
+        gUnknown_203B334->unk18.id[gUnknown_203B334->unk10]  = gUnknown_80E1FA8;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&gUnknown_203B334->unk18, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B334->unk18, TRUE, TRUE);
         MemoryFree(gUnknown_203B334);
         gUnknown_203B334 = NULL;
     }
@@ -101,7 +101,7 @@ void sub_8031E10(void)
 void sub_8031E58(void)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B334->unk18, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B334->unk18, TRUE, TRUE);
 }
 
 void DrawSOSPasswordScreen(void)
