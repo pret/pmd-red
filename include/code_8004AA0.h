@@ -21,17 +21,12 @@ typedef struct unkStruct_202EE8C
 
 extern unkStruct_202EE8C gUnknown_202EE8C[32];
 
-struct UnkStruct_4014Ptr
+struct FiendArea
 {
-    s32 unk0;
+    const u8 *name;
     DungeonPos unk4;
     u8 unk8[8];
-    u8 fill8[0x20-0x10];
-};
-
-struct UnkStruct_4014Ptr2
-{
-    struct UnkStruct_4014Ptr array[0];
+    s16 unk10[8];
 };
 
 struct UnkStruct_4018
@@ -47,10 +42,13 @@ struct UnkBgStruct
     OpenedFile *unk0[5];
     u16 unk14[64][64];
     u16 unk2014[64][64];
-    struct UnkStruct_4014Ptr2 *unk4014;
+    const struct FiendArea *unk4014;
     struct UnkStruct_4018 unk4018[32];
     s32 unk4A18;
-    u8 pad4A1C[0x4A2c-0x4A1C];
+    s32 unk4A1C;
+    s32 unk4A20;
+    s32 unk4A24;
+    s32 unk4A28;
     u8 unk4A2C;
     axdata unk4A30[8];
     axdata unk4C10;
@@ -58,13 +56,13 @@ struct UnkBgStruct
     s32 unk4DCC;
     u32 unk4DD0;
     DungeonPos unk4DD4;
-    s16 unk4DD8;
-    s16 unk4DDA;
+    DungeonPos unk4DD8;
     s32 unk4DDC;
     s32 unk4DE0;
     s32 unk4DE4;
     s32 unk4DE8;
-    u8 unk4DEC[12];
+    u8 unk4DEC[8];
+    u8 unk4DF4;
     s32 unk4DF8;
     MenuInputStruct unk4DFC;
 };
