@@ -23,24 +23,12 @@ extern u8 *gTacticsDescriptions[];
 extern u8 *gTactics[];
 extern u32 gIQSkillGroups[];
 
-struct unkStruct_808E9EC
-{
-    u32 unk0;
-    u32 unk4;
-    u32 unk8;
-    u32 unkC;
-    u8 unk10;
-    u8 unk11;
-    u8 unk12;
-    u8 unk13;
-};
-
 extern SpriteOAM gShadowSprites[3]; // Shadow sprites of some kind
-extern s16 gUnknown_810AC60; // 0xC
-extern s16 gUnknown_810AC62; // 0xC
-extern s16 gUnknown_810AC68; // 0x8
-extern s16 gUnknown_810AC64; // 0x8
-extern s16 gUnknown_810AC66; // 0x8
+extern const s16 gUnknown_810AC60; // 0xC
+extern const s16 gUnknown_810AC62; // 0xC
+extern const s16 gUnknown_810AC68; // 0x8
+extern const s16 gUnknown_810AC64; // 0x8
+extern const s16 gUnknown_810AC66; // 0x8
 extern u8 *gUnknown_810DD58[];
 extern u8 *gEvolutionStrings[];
 extern u8 *gExpPts810DD9C_Ptr[];
@@ -310,166 +298,52 @@ s32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0)
     return (r0->unk0 >> 9);
 }
 
-// Unused
-#ifdef NONMATCHING
-void sub_808E9EC(PokemonStruct1 *r0, struct unkStruct_808E9EC *r1)
+struct UnusedOffenseStruct
 {
-    u8 pokeAtt;
-    u8 r4;
-    u32 reg1_8;
-    s16 reg1;
+    s32 att[2];
+    s32 def[2];
+    u8 atkBoost;
+    u8 spAtkBoost;
+    u8 defBoost;
+    u8 spDefBoost;
+};
 
-    pokeAtt = r0->offense.att[0];
-
-    r1->unk0 = pokeAtt;
-    r1->unk4 = r0->offense.att[1];
-    r1->unk8 = r0->offense.def[0];
-    r1->unkC = r0->offense.def[1];
-    r1->unk10 = 0;
-    r1->unk11 = 0;
-    r1->unk12 = 0;
-    r1->unk13 = 0;
-    if(r0->heldItem.id != 0)
-    {
-        r4 = r0->heldItem.id;
-        if(r4 == 0x13)
-        {
-            r1->unk10 = gUnknown_810AC60;
-            r1->unk0 = pokeAtt + gUnknown_810AC60;
+UNUSED static void GetMonOffenseStats(PokemonStruct1 *mon, struct UnusedOffenseStruct *dst)
+{
+    dst->att[0] = mon->offense.att[0];
+    dst->att[1] = mon->offense.att[1];
+    dst->def[0] = mon->offense.def[0];
+    dst->def[1] = mon->offense.def[1];
+    dst->atkBoost = 0;
+    dst->spAtkBoost = 0;
+    dst->defBoost = 0;
+    dst->spDefBoost = 0;
+    if (mon->heldItem.id != ITEM_NOTHING) {
+        u16 itemId = mon->heldItem.id;
+        if (itemId == ITEM_POWER_BAND) {
+            dst->atkBoost += gUnknown_810AC60;
+            dst->att[0] += gUnknown_810AC60;
         }
-        if(r4 == 0x21)
-        {
-            r1->unk11 += gUnknown_810AC62;
-            r1->unk4 += gUnknown_810AC62;
+        if (itemId == ITEM_SPECIAL_BAND) {
+            dst->spAtkBoost += gUnknown_810AC62;
+            dst->att[1] += gUnknown_810AC62;
         }
-        if(r4 == 0x2B)
-        {
-            // TODO: regs get a little f**ked
-            reg1_8 = (u8)gUnknown_810AC68;
-            r1->unk10 += reg1_8;
-            r1->unk11 += reg1_8;
-
-            reg1 = gUnknown_810AC68;
-            r1->unk0 += reg1;
-            r1->unk4 += reg1;
+        if (itemId == ITEM_MUNCH_BELT) {
+            dst->atkBoost += gUnknown_810AC68;
+            dst->spAtkBoost += gUnknown_810AC68;
+            dst->att[0] += gUnknown_810AC68;
+            dst->att[1] += gUnknown_810AC68;
         }
-        if(r4 == 0x1E)
-        {
-            r1->unk12 += gUnknown_810AC64;
-            r1->unk8 += gUnknown_810AC64;
+        if (itemId == ITEM_DEF_SCARF) {
+            dst->defBoost += gUnknown_810AC64;
+            dst->def[0] += gUnknown_810AC64;
         }
-        if(r4 == 0x22)
-        {
-            r1->unk13 += gUnknown_810AC66;
-            r1->unkC += gUnknown_810AC66;
+        if (itemId == ITEM_ZINC_BAND) {
+            dst->spDefBoost += gUnknown_810AC66;
+            dst->def[1] += gUnknown_810AC66;
         }
     }
 }
-#else
-NAKED
-void sub_808E9EC(PokemonStruct1 *r0, struct unkStruct_808E9EC *r1)
-{
-	asm_unified("\tpush {r4-r6,lr}\n"
-	"\tadds r3, r1, 0\n"
-	"\tldrb r2, [r0, 0x18]\n"
-	"\tstr r2, [r3]\n"
-	"\tldrb r1, [r0, 0x19]\n"
-	"\tstr r1, [r3, 0x4]\n"
-	"\tldrb r1, [r0, 0x1A]\n"
-	"\tstr r1, [r3, 0x8]\n"
-	"\tldrb r1, [r0, 0x1B]\n"
-	"\tstr r1, [r3, 0xC]\n"
-	"\tmovs r1, 0\n"
-	"\tstrb r1, [r3, 0x10]\n"
-	"\tstrb r1, [r3, 0x11]\n"
-	"\tstrb r1, [r3, 0x12]\n"
-	"\tstrb r1, [r3, 0x13]\n"
-	"\tadds r1, r0, 0\n"
-	"\tadds r1, 0x28\n"
-	"\tldrb r0, [r1]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0808EA96\n"
-	"\tadds r4, r0, 0\n"
-	"\tadds r5, r4, 0\n"
-	"\tcmp r4, 0x13\n"
-	"\tbne _0808EA2A\n"
-	"\tldr r1, _0808EA9C\n"
-	"\tldrh r0, [r1]\n"
-	"\tstrb r0, [r3, 0x10]\n"
-	"\tmovs r6, 0\n"
-	"\tldrsh r0, [r1, r6]\n"
-	"\tadds r0, r2, r0\n"
-	"\tstr r0, [r3]\n"
-"_0808EA2A:\n"
-	"\tcmp r4, 0x21\n"
-	"\tbne _0808EA42\n"
-	"\tldr r1, _0808EAA0\n"
-	"\tldrb r0, [r1]\n"
-	"\tldrb r2, [r3, 0x11]\n"
-	"\tadds r0, r2\n"
-	"\tstrb r0, [r3, 0x11]\n"
-	"\tmovs r6, 0\n"
-	"\tldrsh r1, [r1, r6]\n"
-	"\tldr r0, [r3, 0x4]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r3, 0x4]\n"
-"_0808EA42:\n"
-	"\tcmp r4, 0x2B\n"
-	"\tbne _0808EA66\n"
-	"\tldr r2, _0808EAA4\n"
-	"\tldrb r0, [r2]\n"
-	"\tldrb r6, [r3, 0x10]\n"
-	"\tadds r1, r0, r6\n"
-	"\tstrb r1, [r3, 0x10]\n"
-	"\tldrb r1, [r3, 0x11]\n"
-	"\tadds r0, r1\n"
-	"\tstrb r0, [r3, 0x11]\n"
-	"\tmovs r6, 0\n"
-	"\tldrsh r1, [r2, r6]\n"
-	"\tldr r0, [r3]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r3]\n"
-	"\tldr r0, [r3, 0x4]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r3, 0x4]\n"
-"_0808EA66:\n"
-	"\tcmp r4, 0x1E\n"
-	"\tbne _0808EA7E\n"
-	"\tldr r1, _0808EAA8\n"
-	"\tldrb r0, [r1]\n"
-	"\tldrb r2, [r3, 0x12]\n"
-	"\tadds r0, r2\n"
-	"\tstrb r0, [r3, 0x12]\n"
-	"\tmovs r6, 0\n"
-	"\tldrsh r1, [r1, r6]\n"
-	"\tldr r0, [r3, 0x8]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r3, 0x8]\n"
-"_0808EA7E:\n"
-	"\tcmp r5, 0x22\n"
-	"\tbne _0808EA96\n"
-	"\tldr r1, _0808EAAC\n"
-	"\tldrb r0, [r1]\n"
-	"\tldrb r2, [r3, 0x13]\n"
-	"\tadds r0, r2\n"
-	"\tstrb r0, [r3, 0x13]\n"
-	"\tmovs r6, 0\n"
-	"\tldrsh r1, [r1, r6]\n"
-	"\tldr r0, [r3, 0xC]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r3, 0xC]\n"
-"_0808EA96:\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0808EA9C: .4byte gUnknown_810AC60\n"
-"_0808EAA0: .4byte gUnknown_810AC62\n"
-"_0808EAA4: .4byte gUnknown_810AC68\n"
-"_0808EAA8: .4byte gUnknown_810AC64\n"
-"_0808EAAC: .4byte gUnknown_810AC66");
-}
-#endif
 
 u8 *GetIQSkillName(u8 skill)
 {
