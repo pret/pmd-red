@@ -107,31 +107,31 @@ static void DisplayAdventureLog(void)
                 case AA_NUM_FLOORS_EXPLORED: {
                     s32 v1 = GetAdventureFloorsExplored();
                     gFormatArgs[0] = (s16)v1;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
                 case AA_NUM_MOVES_LEARNED: {
                     s32 v2 = GetAdventureMovesLearned();
                     gFormatArgs[0] = (s16)v2;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
                 case AA_NUM_THIEVING_SUCCESSES: {
                     s32 v3 = GetThievingSuccesses();
                     gFormatArgs[0] = (s16)v3;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
                 case AA_NUM_FRIEND_RESCUE_SUCCESSES: {
                     s32 v4 = GetFriendRescueSuccesses();
                     gFormatArgs[0] = v4;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
                 case AA_NUM_POKEMON_EVOLVED: {
                     s32 v5 = GetAdventureNumEvolved();
                     gFormatArgs[0] = v5;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
                 case AA_NUM_POKEMON_JOINED: {
@@ -140,13 +140,13 @@ static void DisplayAdventureLog(void)
                     // fallthrough
                 }
                 default: {
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
             }
         }
         else
-            PrintStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), sPlaceholder, sAdventureLog->s0.unk34, 0);
+            PrintStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), sPlaceholder, sAdventureLog->s0.unk34, 0);
     }
 
     sub_80073E0(sAdventureLog->s0.unk34);

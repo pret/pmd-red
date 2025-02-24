@@ -316,7 +316,7 @@ void sub_801F280(bool8 param_1)
             }
 
             sub_80928A0(gFormatBuffer_Items[0],move,&uStack_30);
-            y = sub_8013800(&gUnknown_203B270->input,i);
+            y = GetMenuEntryYCoord(&gUnknown_203B270->input,i);
             linkChain = MoveFlagLinkChain(move);
             x = !linkChain ? 0x8 : 0xD;
             if (!linkChain && i != 0) {

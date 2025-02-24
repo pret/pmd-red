@@ -994,7 +994,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
             gUnknown_202EE10.unk1E = 0;
             gUnknown_202EE10.unk20 = 0;
             gUnknown_202EE10.unk4 = 0;
-            gUnknown_202EE10.unk6 = 18;
+            gUnknown_202EE10.firstEntryY = 18;
             gUnknown_202EE10.unkC = 0;
             gUnknown_202EE10.unkE = 0;
             gUnknown_202EE10.unk14.x = 0;
@@ -1292,7 +1292,7 @@ void sub_806806C(PokemonStruct1 *a0)
         gUnknown_202EE10.menuIndex = 0;
         gUnknown_202EE10.unk1C = 0;
         gUnknown_202EE10.unk4 = 0;
-        gUnknown_202EE10.unk6 = 16;
+        gUnknown_202EE10.firstEntryY = 16;
         gUnknown_202EE10.unk14.x = 0;
         gUnknown_202EE10.unk0 = 0;
 

@@ -104,7 +104,7 @@ static void CreateOptionsMenu(void)
     sub_80073B8(sUnknown_203B260->unk44);
     PrintStringOnWindow(16, 0, sGameOptions,sUnknown_203B260->unk44, 0);
 
-    y = sub_8013800(&sUnknown_203B260->input, 0);
+    y = GetMenuEntryYCoord(&sUnknown_203B260->input, 0);
     PrintStringOnWindow(8, y, sUnknown_80DC064, sUnknown_203B260->unk44, 0);
 
     switch (sUnknown_203B260->optionsMenu->windowColor) {

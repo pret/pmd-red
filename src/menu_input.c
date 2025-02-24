@@ -424,7 +424,7 @@ void sub_8012EBC(MenuStruct *param_1)
                     color = colorArray[0]; // Use the default white
 
                 sprintfStatic(buffer,gUnknown_80D4828, color, textPtr);
-                y = sub_8013800(&param_1->input, counter);
+                y = GetMenuEntryYCoord(&param_1->input, counter);
                 PrintFormattedStringOnWindow(8, y, buffer, param_1->index, 0);
                 menuItemsPtr++;
                 counter++;
@@ -552,9 +552,9 @@ static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 index
     param_1->unk4 = 0;
 
     if (temp->unkC == 6)
-        param_1->unk6 = 16;
+        param_1->firstEntryY = 16;
     else
-        param_1->unk6 = 2;
+        param_1->firstEntryY = 2;
 
     param_1->unkC = 0;
     param_1->unkE = 0;
@@ -701,7 +701,7 @@ void UpdateMenuCursorSpriteCoords(MenuInputStruct *param_1)
     index = param_1->unk0;
     temp = &gUnknown_2027370[index];
     param_1->unk8.x = temp->unk0 * 8 + param_1->unk4;
-    param_1->unk8.y = temp->unk2 * 8 + sub_8013800(param_1, param_1->menuIndex);
+    param_1->unk8.y = temp->unk2 * 8 + GetMenuEntryYCoord(param_1, param_1->menuIndex);
 }
 
 void MoveMenuCursorDown(MenuInputStruct *param_1)
@@ -810,15 +810,12 @@ void sub_80137F8(MenuInputStruct *param_1, u32 param_2)
     param_1->unk10 = param_2 << 8;
 }
 
-s32 sub_8013800(MenuInputStruct *param_1, s32 param_2)
+s32 GetMenuEntryYCoord(MenuInputStruct *menu, s32 entryId)
 {
-    s32 iVar1;
-    s32 iVar2;
+    s32 firstY = menu->firstEntryY;
+    s32 iVar1 = entryId * menu->unk10;
 
-    iVar2 = param_1->unk6;
-    iVar1 = param_2 * param_1->unk10;
-
-    return iVar2 + (iVar1 / 256);
+    return firstY + (iVar1 / 256);
 }
 
 void sub_8013818(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
@@ -957,9 +954,9 @@ void sub_8013984(MenuInputStruct *param_1)
     param_1->unk4 = 0;
 
     if (ptr->unkC == 6)
-        param_1->unk6 = 16;
+        param_1->firstEntryY = 16;
     else
-        param_1->unk6 = 0;
+        param_1->firstEntryY = 0;
 
     if (param_1->unk20 < 2)
         param_1->unkC = 0;

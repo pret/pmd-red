@@ -1561,7 +1561,7 @@ void DrawFieldMenu(u8 a0)
     gUnknown_202EE10.unk1C = 5;
     gUnknown_202EE10.unk1E = 0;
     gUnknown_202EE10.unk4 = 0;
-    gUnknown_202EE10.unk6 = 2;
+    gUnknown_202EE10.firstEntryY = 2;
     gUnknown_202EE10.unkC = 0;
     gUnknown_202EE10.unkE = 0;
     gUnknown_202EE10.unk0 = 0;
@@ -1592,19 +1592,19 @@ void DrawFieldMenu(u8 a0)
         gUnknown_202749A[5] = 7;
     }
 
-    y = sub_8013800(&gUnknown_202EE10, 0);
+    y = GetMenuEntryYCoord(&gUnknown_202EE10, 0);
     PrintStringOnWindow(8, y, gFieldMenuMovesPtr, 0, 0);
 
-    y = sub_8013800(&gUnknown_202EE10, 1);
+    y = GetMenuEntryYCoord(&gUnknown_202EE10, 1);
     PrintStringOnWindow(8, y, gFieldMenuItemsPtr, 0, 0);
 
-    y = sub_8013800(&gUnknown_202EE10, 2);
+    y = GetMenuEntryYCoord(&gUnknown_202EE10, 2);
     PrintStringOnWindow(8, y, gFieldMenuTeamPtr, 0, 0);
 
-    y = sub_8013800(&gUnknown_202EE10, 3);
+    y = GetMenuEntryYCoord(&gUnknown_202EE10, 3);
     PrintStringOnWindow(8, y, gFieldMenuOthersPtr, 0, 0);
 
-    y = sub_8013800(&gUnknown_202EE10, 4);
+    y = GetMenuEntryYCoord(&gUnknown_202EE10, 4);
     PrintStringOnWindow(8, y, gFieldMenuGroundPtr, 0, 0);
 
     sub_80073E0(0);
@@ -1708,7 +1708,7 @@ void sub_805FC30(Windows *a0, s32 a1)
     gUnknown_202EE10.unk1E = 0;
     gUnknown_202EE10.unk20 = 0;
     gUnknown_202EE10.unk4 = 0;
-    gUnknown_202EE10.unk6 = 0;
+    gUnknown_202EE10.firstEntryY = 0;
     gUnknown_202EE10.unk0 = 1;
     gUnknown_202EE10.unkC = 0;
     gUnknown_202EE10.unkE = 0;
@@ -1729,7 +1729,7 @@ void sub_805FC30(Windows *a0, s32 a1)
 
         r4 = (sub_8044F3C(i) != 0) ? 7 : 2;
         sprintfStatic(text, gUnknown_8106B50, r4, sub_8044EC8(i));
-        y = sub_8013800(&gUnknown_202EE10, i);
+        y = GetMenuEntryYCoord(&gUnknown_202EE10, i);
         PrintStringOnWindow(8, y, text, 1, 0);
     }
     sub_80073E0(1);
@@ -2066,7 +2066,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows 
             windows->id[0].unk10 = 0x10;
             windows->id[0].height = 0x10;
             a5->f2 = 0xC;
-            gUnknown_202EE10.unk6 = 0x10;
+            gUnknown_202EE10.firstEntryY = 0x10;
             gUnknown_202EE10.unk1C = 0xA;
             gDungeon->unk181e8.unk18212 = 1;
             break;
@@ -2074,7 +2074,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows 
             windows->id[0].unk10 = 4;
             windows->id[0].height = 4;
             a5->f2 = 6;
-            gUnknown_202EE10.unk6 = 0x12;
+            gUnknown_202EE10.firstEntryY = 0x12;
             gUnknown_202EE10.unk1C = 1;
             break;
         case 3:
@@ -2082,7 +2082,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows 
             windows->id[0].unk10 = 4;
             windows->id[0].height = 4;
             a5->f2 = 0xC;
-            gUnknown_202EE10.unk6 = 0x12;
+            gUnknown_202EE10.firstEntryY = 0x12;
             gUnknown_202EE10.unk1C = 1;
             break;
     }
@@ -2112,7 +2112,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows 
             if (ItemExists(&gTeamInventoryRef->teamItems[i])) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i], &gUnknown_8106B60);
-                y = sub_8013800(&gUnknown_202EE10, i);
+                y = GetMenuEntryYCoord(&gUnknown_202EE10, i);
                 PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
             }
             else {
@@ -2126,7 +2126,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows 
             if (ItemExists(&gTeamInventoryRef->teamItems[i + 10])) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i + 10], &gUnknown_8106B60);
-                y = sub_8013800(&gUnknown_202EE10, i);
+                y = GetMenuEntryYCoord(&gUnknown_202EE10, i);
                 PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
             }
             else {
@@ -2141,7 +2141,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows 
             if (item->flags & ITEM_FLAG_EXISTS) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, item, &gUnknown_8106B60);
-                y = sub_8013800(&gUnknown_202EE10, 0);
+                y = GetMenuEntryYCoord(&gUnknown_202EE10, 0);
                 PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
             }
             if (a3) {
@@ -2156,7 +2156,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows 
             if (item->flags & ITEM_FLAG_EXISTS) {
                 gUnknown_202EE10.unk1A++;
                 sub_8090E14(txtBuff, item, &gUnknown_8106B60);
-                y = sub_8013800(&gUnknown_202EE10, 0);
+                y = GetMenuEntryYCoord(&gUnknown_202EE10, 0);
                 PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
             }
         }
@@ -2171,7 +2171,7 @@ static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows 
                 if (item->flags & ITEM_FLAG_EXISTS) {
                     gUnknown_202EE10.unk1A++;
                     sub_8090E14(txtBuff, item, &gUnknown_8106B60);
-                    y = sub_8013800(&gUnknown_202EE10, 0);
+                    y = GetMenuEntryYCoord(&gUnknown_202EE10, 0);
                     PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
                 }
             }
@@ -2723,7 +2723,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows, bool
     gUnknown_202EE10.unk1E = 0;
     gUnknown_202EE10.unk20 = 0;
     gUnknown_202EE10.unk4 = 0;
-    gUnknown_202EE10.unk6 = (r10 != FALSE) * 16;
+    gUnknown_202EE10.firstEntryY = (r10 != FALSE) * 16;
     gUnknown_202EE10.unkC = 0;
     gUnknown_202EE10.unkE = 0;
     gUnknown_202EE10.unk14.x = 0;
@@ -2790,7 +2790,7 @@ void DrawFieldTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows, bool
 
                 gFormatArgs[0] = monInfo->HP;
                 gFormatArgs[1] = monInfo->maxHPStat;
-                y = sub_8013800(&gUnknown_202EE10, i);
+                y = GetMenuEntryYCoord(&gUnknown_202EE10, i);
                 if (monInfo->isTeamLeader) {
                     PrintFormattedStringOnWindow(9, y, gUnknown_8106BD4, 0, 0);
                 }
@@ -2922,7 +2922,7 @@ void ShowTacticsMenu(ActionContainer *a0)
         gUnknown_202EE10.unk1E = 0;
         gUnknown_202EE10.unk20 = 0;
         gUnknown_202EE10.unk4 = 0;
-        gUnknown_202EE10.unk6 = 16;
+        gUnknown_202EE10.firstEntryY = 16;
         gUnknown_202EE10.unkC = 0;
         gUnknown_202EE10.unkE = 0;
         gUnknown_202EE10.unk14.x = 0;

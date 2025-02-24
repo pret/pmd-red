@@ -329,7 +329,7 @@ bool8 sub_806F9BC(s16 species)
 {
     u8 friendArea;
     s32 id;
-    unkStruct_8092638 auStack_18;
+    FriendAreaCapacity auStack_18;
 
     id = species;
     if (((gDungeon->unk644.unk14 == 0) || (sub_808529C(id) == 0)) ||
@@ -359,7 +359,7 @@ bool8 sub_806F9BC(s16 species)
     else {
         if (GetUnk12(id) == 0) {
             friendArea = GetFriendArea(id);
-            sub_8092638(friendArea, &auStack_18, FALSE, FALSE);
+            GetFriendAreaCapacity2(friendArea, &auStack_18, FALSE, FALSE);
             if (auStack_18.hasFriendArea == FALSE)
                 return FALSE;
         }

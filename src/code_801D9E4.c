@@ -125,10 +125,10 @@ static void sub_801DBD4(void)
         temp = &gGroundConversion_811BAF4[index];
         temp2 = &gUnknown_81188F0[temp->unk4];
 
-        y = sub_8013800(&sUnknown_203B258->s0.input, counter);
+        y = GetMenuEntryYCoord(&sUnknown_203B258->s0.input, counter);
         PrintStringOnWindow(8, y, temp2->text1, sUnknown_203B258->s0.unk34, 0);
 
-        y = sub_8013800(&sUnknown_203B258->s0.input, counter);
+        y = GetMenuEntryYCoord(&sUnknown_203B258->s0.input, counter);
         PrintStringOnWindow(62, y, temp->text, sUnknown_203B258->s0.unk34, 0);
     }
 

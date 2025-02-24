@@ -132,7 +132,7 @@ void BuildIQSkillList(void)
     for (counter = 0; counter < sIQSkillListMenu->s24.s0.input.unk1A; counter++) {
         skillIndex = sIQSkillListMenu->iqSkills[(sIQSkillListMenu->s24.s0.input.unk1E * sIQSkillListMenu->s24.s0.input.unk1C) + counter];
 
-        y = sub_8013800(&sIQSkillListMenu->s24.s0.input, counter);
+        y = GetMenuEntryYCoord(&sIQSkillListMenu->s24.s0.input, counter);
         strncpy(gFormatBuffer_Items[1], GetIQSkillName(skillIndex), 80);
 
         if (IsIQSkillSet(&sIQSkillListMenu->pokeStruct->IQSkills, 1 << skillIndex))

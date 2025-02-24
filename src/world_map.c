@@ -561,7 +561,7 @@ static bool8 ShowYesNoWindow(u8 *str)
     menuInput.unk1E = 0;
     menuInput.unk20 = 0;
     menuInput.unk4 = 0;
-    menuInput.unk6 = 0;
+    menuInput.firstEntryY = 0;
     menuInput.unk0 = 1;
     menuInput.unkC = 0;
     menuInput.unkE = 0;

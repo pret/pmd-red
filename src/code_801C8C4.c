@@ -161,13 +161,13 @@ void sub_801CCD8(void)
     for(index = 0; index < sUnknown_203B244->unk4B4.s0.input.unk1A; index++) {
         itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.unk1C) + index];
         BufferItemName(buffer, itemID, NULL);
-        y = sub_8013800(&sUnknown_203B244->unk4B4.s0.input, index);
+        y = GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index);
         PrintStringOnWindow(8, y, buffer, sUnknown_203B244->unk4B4.s0.unk34, 0);
-        y2 = sub_8013800(&sUnknown_203B244->unk4B4.s0.input, index);
+        y2 = GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index);
         sub_8012BC4((sUnknown_203B244->unk4B4.s0.unk38->width * 8) - 2, y2, gTeamInventoryRef->teamStorage[itemID], 3, 5, sUnknown_203B244->unk4B4.s0.unk34);
 
         if (sub_801CFE0(itemID) & 1)
-            sub_8007B7C(sUnknown_203B244->unk4B4.s0.unk34, 8, sub_8013800(&sUnknown_203B244->unk4B4.s0.input, index), (sUnknown_203B244->unk4B4.s0.unk38->width - 1) * '\b', 10); // TODO: Ghidra being crazy
+            sub_8007B7C(sUnknown_203B244->unk4B4.s0.unk34, 8, GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index), (sUnknown_203B244->unk4B4.s0.unk38->width - 1) * '\b', 10); // TODO: Ghidra being crazy
     }
 
     sub_80073E0(sUnknown_203B244->unk4B4.s0.unk34);

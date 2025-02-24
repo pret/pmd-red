@@ -165,7 +165,7 @@ static void sub_8021D5C(void)
 static void UpdateWigglytuffDialogue(void)
 {
     u8 *string;
-    unkStruct_8092638 uStack_14;
+    FriendAreaCapacity uStack_14;
 
     switch (sWigglytuffShop3Work->state) {
         case WIGGLYTUFF_INIT:
@@ -273,7 +273,7 @@ static void UpdateWigglytuffDialogue(void)
             sub_8023354(TRUE);
             break;
         case DISPLAY_POKEMON_FRIEND_AREA_INFO:
-            sub_8092638(sWigglytuffShop3Work->chosenFriendArea, &uStack_14, FALSE, FALSE);
+            GetFriendAreaCapacity2(sWigglytuffShop3Work->chosenFriendArea, &uStack_14, FALSE, FALSE);
 
             if (uStack_14.hasFriendArea)
                 sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_CHECK_HAS_FRIEND_AREA;

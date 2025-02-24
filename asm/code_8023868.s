@@ -866,7 +866,7 @@ _08023F02:
 	lsls r2, 2
 	adds r0, r2
 	adds r1, r7, 0
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	mov r4, r8
 	ldr r0, [r4]

@@ -146,12 +146,12 @@ void sub_801A4A4(void)
         buyPrice = GetStackBuyPrice(&item);
 
         if (buyPrice <= gTeamInventoryRef->teamMoney) {
-            y = sub_8013800(&gUnknown_203B21C->s0.input, index);
+            y = GetMenuEntryYCoord(&gUnknown_203B21C->s0.input, index);
             PrintStringOnWindow(8, y, buffer1, gUnknown_203B21C->s0.unk34, 0);
         }
         else {
             sprintfStatic(buffer2, sFmtRed, buffer1);
-            y = sub_8013800(&gUnknown_203B21C->s0.input, index);
+            y = GetMenuEntryYCoord(&gUnknown_203B21C->s0.input, index);
             PrintStringOnWindow(8, y, buffer2, gUnknown_203B21C->s0.unk34, 0);
         }
     }

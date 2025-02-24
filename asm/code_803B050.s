@@ -354,7 +354,7 @@ _0803B2DC:
 	ldr r1, _0803B340
 	adds r4, r1
 	adds r1, r5, 0
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	ldr r2, [r4, 0x4]
 	ldr r0, [r6]

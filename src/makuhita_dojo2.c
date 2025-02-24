@@ -130,7 +130,7 @@ static void MakuhitaDojo_DrawCourseList(void)
 
         mazeIndex = sub_80A2668(iVar6);
 
-        y = sub_8013800(&sMakuhitaDojoWork2->s30.s0.input, i);
+        y = GetMenuEntryYCoord(&sMakuhitaDojoWork2->s30.s0.input, i);
         color = COLOR_WHITE_2; // COLOR_WHITE again?
         if ((bool8)IsMazeCompleted(mazeIndex)) {
             PrintStringOnWindow(8, y, sStarBullet, sMakuhitaDojoWork2->s30.s0.unk34, 0);

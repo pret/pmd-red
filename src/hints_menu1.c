@@ -108,7 +108,7 @@ static void DrawHintSelectionMenu(void)
     PrintStringOnWindow(16, 0, sHints, sUnknown_203B264->unk34, 0);
 
     for (hintIndex = 0; hintIndex < HINT_MAX; hintIndex++) {
-        y = sub_8013800(&sUnknown_203B264->input, hintIndex);
+        y = GetMenuEntryYCoord(&sUnknown_203B264->input, hintIndex);
         PrintStringOnWindow(10, y, gCommonHints[hintIndex].heading, sUnknown_203B264->unk34, 0);
     }
 

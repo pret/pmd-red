@@ -136,10 +136,10 @@ void CreateMailMenu(void)
     for (i = 0; i < sUnknown_203B2D8->unk4.s0.input.unk1A; i++) {
         mail = GetMailboxSlotInfo(sUnknown_203B2D8->unk0[(sUnknown_203B2D8->unk4.s0.input.unk1E * sUnknown_203B2D8->unk4.s0.input.unk1C) + i]);
         local.unk0[0] = sUnknown_203B2D8->unk4.s0.unk34;
-        local.y = sub_8013800(&sUnknown_203B2D8->unk4.s0.input, i);
+        local.y = GetMenuEntryYCoord(&sUnknown_203B2D8->unk4.s0.input, i);
 
         if (mail->mailType == MAIL_TYPE_UNK1) {
-            y = sub_8013800(&sUnknown_203B2D8->unk4.s0.input, i);
+            y = GetMenuEntryYCoord(&sUnknown_203B2D8->unk4.s0.input, i);
             sub_803B6B0(10, y, 6, sUnknown_203B2D8->unk4.s0.unk34);
             PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], GetPlayerPokemonStruct());
             sprintfStatic(buffer, GetPokemonMailHeadline(mail->unk4.dungeon.floor), gFormatBuffer_Monsters[0]);

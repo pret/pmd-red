@@ -928,7 +928,7 @@ void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3
     u8 friendArea;
     u8 uVar2;
     s32 numPokemon;
-    unkStruct_8092638 local_40; // sp 0x0
+    FriendAreaCapacity local_40; // sp 0x0
     unkEvolve evolveConditions; // r7
     s32 index, index2;
 #ifndef NONMATCHING
@@ -961,17 +961,17 @@ void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3
             if ((evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_NONE) || (param_1->speciesNum != evolveConditions.preEvolution.evolveFrom)) continue;
             friendArea = ((u8 (*)(s32))GetFriendArea)(index2); // UB
             uVar2 = GetFriendArea(param_1->speciesNum);
-            sub_8092638(friendArea,&local_40,FALSE,FALSE);
+            GetFriendAreaCapacity2(friendArea,&local_40,FALSE,FALSE);
             if (!local_40.hasFriendArea) {
                 evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_FRIEND_AREA;
                 evolFlag = TRUE;
             }
             else {
-                numPokemon = local_40.unk2;
+                numPokemon = local_40.currNoPokemon;
                 if (friendArea == uVar2) {
                     numPokemon--;
                 }
-                if (local_40.numPokemon <= numPokemon) {
+                if (local_40.maxPokemon <= numPokemon) {
                     evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ROOM;
                     evolFlag = TRUE;
                 }

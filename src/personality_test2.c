@@ -129,7 +129,7 @@ static void RedrawPartnerSelectionMenu(void)
 
     monCounter = 0;
     while (monCounter < gUnknown_203B404->s18.s0.input.unk1A) {
-        yCoord = sub_8013800(&gUnknown_203B404->s18.s0.input, monCounter);
+        yCoord = GetMenuEntryYCoord(&gUnknown_203B404->s18.s0.input, monCounter);
         monName = GetMonSpecies(gUnknown_203B404->PartnerArray[monCounter]);
         PrintStringOnWindow(8, yCoord, monName, gUnknown_203B404->s18.s0.unk34, 0);
         monCounter++;

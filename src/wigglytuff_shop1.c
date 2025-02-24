@@ -143,22 +143,22 @@ void sub_8021494(void)
             WriteFriendAreaName(buffer1, friendAreaIndex, TRUE);
 
             if (GetFriendAreaPrice(friendAreaIndex) <= gTeamInventoryRef->teamMoney)
-                PrintStringOnWindow(8,sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer1, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8,GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), buffer1, sWigglytuffShop1Work->s40.s0.unk34, 0);
             else {
                 sprintfStatic(buffer2, sFmtRedString, buffer1);
-                PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
             }
         }
         else if (sWigglytuffShop1Work->mode == 0) {
             if (gFriendAreas[friendAreaIndex] == TRUE)
-                PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
             else {
                 sprintfStatic(buffer2, sFmtGreenString, GetFriendAreaName(friendAreaIndex));
-                PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
             }
         }
         else
-            PrintStringOnWindow(8, sub_8013800(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
+            PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
     }
 
     sub_80073E0(sWigglytuffShop1Work->s40.s0.unk34);

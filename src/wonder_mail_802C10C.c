@@ -140,7 +140,7 @@ void DrawPelipperBoardJobMenu(void)
         slotIndex = (gUnknown_203B2E0->pelipperBoardSlots[(gUnknown_203B2E0->unk8.s0.input.unk1E * gUnknown_203B2E0->unk8.s0.input.unk1C) + i]);
         mail = GetPelipperBoardSlotInfo(slotIndex);
         local.unk0[0] = gUnknown_203B2E0->unk8.s0.unk34;
-        local.y = sub_8013800(&gUnknown_203B2E0->unk8.s0.input, i);
+        local.y = GetMenuEntryYCoord(&gUnknown_203B2E0->unk8.s0.input, i);
         sub_803B35C(mail, &local);
 
         if (IsMailinJobSlot(GetPelipperBoardSlotInfo(slotIndex)))

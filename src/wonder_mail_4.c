@@ -200,7 +200,7 @@ void sub_803092C(void)
   for (index = 0; index < gUnknown_203B320->s28.s0.input.unk1A; index++) {
       mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.unk1E * gUnknown_203B320->s28.s0.input.unk1C) + index]);
       local.unk0[0] = gUnknown_203B320->s28.s0.unk34;
-      local.y = sub_8013800(&gUnknown_203B320->s28.s0.input,index);
+      local.y = GetMenuEntryYCoord(&gUnknown_203B320->s28.s0.input,index);
       local.mailTitleType = 7;
       local.mailMissionType = MISSION_TYPE_FRIEND_RESCUE;
       local.mailStatus = MAIL_STATUS_SUSPENDED;

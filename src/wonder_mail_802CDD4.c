@@ -120,7 +120,7 @@ void sub_802CFD0(void)
         iVar1 = sub_803B344((sUnknown_203B2F4->s0.input.unk1E * sUnknown_203B2F4->s0.input.unk1C) + r5);
 
         local.unk0[0] = sUnknown_203B2F4->s0.unk34;
-        local.y = sub_8013800(&sUnknown_203B2F4->s0.input, r5);
+        local.y = GetMenuEntryYCoord(&sUnknown_203B2F4->s0.input, r5);
         sub_803B35C(&iVar1->mail, &local);
 
         local.unk43 = 1;

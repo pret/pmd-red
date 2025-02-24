@@ -337,7 +337,7 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
     menuInput->unk1E = 0;
     menuInput->unk20 = 0;
     menuInput->unk4 = 0;
-    menuInput->unk6 = 16;
+    menuInput->firstEntryY = 16;
     menuInput->unk0 = 0;
     menuInput->unkC = 0;
     menuInput->unkE = 0;
@@ -360,19 +360,19 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
     PrintFormattedStringOnWindow(16, 0, _("Where would you like to go?"), 0, '\0');
 
     for (i = 0; i < count; i++) {
-        unkStruct_8092638 unkFriendAreaStruct;
-        s32 r4 = sub_8013800(menuInput, i);
+        FriendAreaCapacity friendAreaCapacity;
+        s32 y = GetMenuEntryYCoord(menuInput, i);
         u8 areaId = gFriendAreasMapPtr->displayedAreas[i];
 
         PrintFriendAreaNameInMap(gFormatBuffer_Items[0], areaId);
         if (areaId == 0) {
-            PrintFormattedStringOnWindow(12, r4, _("{MOVE_ITEM_0}"), 0, '\0');
+            PrintFormattedStringOnWindow(12, y, _("{MOVE_ITEM_0}"), 0, '\0');
         }
         else {
-            sub_80926F8(areaId, &unkFriendAreaStruct, gFriendAreasMapPtr->unk4A2C);
-            gFormatArgs[0] = unkFriendAreaStruct.unk2;
-            gFormatArgs[1] = unkFriendAreaStruct.numPokemon;
-            PrintFormattedStringOnWindow(12, r4, _("{MOVE_ITEM_0}($v02／$v12)"), 0, '\0');
+            GetFriendAreaCapacity(areaId, &friendAreaCapacity, gFriendAreasMapPtr->unk4A2C);
+            gFormatArgs[0] = friendAreaCapacity.currNoPokemon;
+            gFormatArgs[1] = friendAreaCapacity.maxPokemon;
+            PrintFormattedStringOnWindow(12, y, _("{MOVE_ITEM_0}($v02／$v12)"), 0, '\0');
         }
     }
 

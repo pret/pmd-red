@@ -203,7 +203,7 @@ void sub_802FA50(void)
   if (gUnknown_203B314->unkB8 != 0) {
     for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
     {
-        y = sub_8013800(&gUnknown_203B314->sBC.s0.input,counter);
+        y = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
         index = gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.unk1C + counter;
         sVar1 = gUnknown_203B314->unk0[index];
         if (gUnknown_203B314->unk5C[index] != 0) {
@@ -218,7 +218,7 @@ void sub_802FA50(void)
   else {
     for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
     {
-        y2 = sub_8013800(&gUnknown_203B314->sBC.s0.input,counter);
+        y2 = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
         text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.unk1C + counter]);
         PrintStringOnWindow(8,y2,text,gUnknown_203B314->sBC.s0.unk34,0);
     }

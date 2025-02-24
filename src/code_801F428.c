@@ -147,7 +147,7 @@ void sub_801F700(void)
     for(index = 0; index < gUnknown_203B274->s348.s0.input.unk1A; index++)
     {
         sub_8092C84(buffer2,gUnknown_203B274->unk4->unk0[gUnknown_203B274->s348.s0.input.unk1E * gUnknown_203B274->s348.s0.input.unk1C + index]);
-        y = sub_8013800(&gUnknown_203B274->s348.s0.input, index);
+        y = GetMenuEntryYCoord(&gUnknown_203B274->s348.s0.input, index);
         PrintStringOnWindow(8,y,buffer2,gUnknown_203B274->s348.s0.unk34,0);
     }
     sub_80073E0(gUnknown_203B274->s348.s0.unk34);

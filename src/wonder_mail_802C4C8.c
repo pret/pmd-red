@@ -139,7 +139,7 @@ void DrawJobListMenu(void)
     for (i = 0;  i < gUnknown_203B2E8->unk8.s0.input.unk1A; i++) {
         mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.unk1E * gUnknown_203B2E8->unk8.s0.input.unk1C) + i]);
         local.unk0[0] = gUnknown_203B2E8->unk8.s0.unk34;
-        local.y = sub_8013800(&gUnknown_203B2E8->unk8.s0.input, i);
+        local.y = GetMenuEntryYCoord(&gUnknown_203B2E8->unk8.s0.input, i);
         sub_803B35C(mail, &local);
         CreateRescueTitle(&local);
     }

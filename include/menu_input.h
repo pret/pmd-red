@@ -31,7 +31,7 @@ void sub_8013780(MenuInputStruct *param_1, s32 param_2);
 s32 sub_80137A8(MenuInputStruct *param_1);
 void sub_80137B0(MenuInputStruct *param_1, s32 param_2);
 void sub_80137F8(MenuInputStruct *param_1, u32 param_2);
-s32 sub_8013800(MenuInputStruct *param_1, s32 param_2);
+s32 GetMenuEntryYCoord(MenuInputStruct *menu, s32 entryId);
 void sub_8013818(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4);
 void sub_8013848(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4);
 void sub_8013878(MenuInputStruct *param_1, s32 param_2);

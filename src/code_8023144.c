@@ -156,7 +156,7 @@ static void sub_80234BC(void)
     s32 i;
     u8 buffer2[256];
     u8 buffer1[100];
-    unkStruct_8092638 auStack_2c;
+    FriendAreaCapacity auStack_2c;
 
     CallPrepareTextbox_8008C54(gUnknown_3001B5C->s35C.s0.unk34);
     sub_80073B8(gUnknown_3001B5C->s35C.s0.unk34);
@@ -165,9 +165,9 @@ static void sub_80234BC(void)
     sub_8012BC4((gUnknown_3001B5C->s35C.unk9C.f2 * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.unk1E + 1, 2, 7, gUnknown_3001B5C->s35C.s0.unk34);
 
     for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.unk1A; i++) {
-        y = sub_8013800(&gUnknown_3001B5C->s35C.s0.input, i);
+        y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.s0.input, i);
         species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.unk1C) + i];
-        sub_8092638(GetFriendArea(species), &auStack_2c, FALSE, FALSE);
+        GetFriendAreaCapacity2(GetFriendArea(species), &auStack_2c, FALSE, FALSE);
         color = COLOR_WHITE_2;
         if (auStack_2c.hasFriendArea)
             color = HasRecruitedMon(species) ? COLOR_CYAN : COLOR_GREEN;

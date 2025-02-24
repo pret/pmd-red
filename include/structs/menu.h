@@ -24,7 +24,7 @@ typedef struct MenuInputStruct
 {
     s32 unk0;
     u16 unk4;
-    s16 unk6;
+    s16 firstEntryY;
     DungeonPos unk8;
     s16 unkC; // Maybe DungeonPos
     s16 unkE;

@@ -720,7 +720,7 @@ _080A7D12:
 	mov r1, sp
 	movs r2, 0
 	movs r3, 0
-	bl sub_8092638
+	bl GetFriendAreaCapacity2
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -923,7 +923,7 @@ _080A7EB8:
 	mov r1, sp
 	movs r2, 0
 	movs r3, 0
-	bl sub_8092638
+	bl GetFriendAreaCapacity2
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -2965,7 +2965,7 @@ _080A8DF8:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8092638
+	bl GetFriendAreaCapacity2
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	cmp r5, r0
