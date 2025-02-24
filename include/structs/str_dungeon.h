@@ -148,8 +148,8 @@ typedef struct FloorProperties
 
 typedef struct UnkDungeonGlobal_unk1C590
 {
-    s16 unk0[NUM_ITEM_CATEGORIES];
-    s16 unk18[NUMBER_OF_ITEM_IDS];
+    s16 categoryValues[NUM_ITEM_CATEGORIES];
+    s16 itemValues[NUMBER_OF_ITEM_IDS];
 } UnkDungeonGlobal_unk1C590;
 
 typedef struct UnkDungeonGlobal_unk1CD98
