@@ -39,9 +39,9 @@ EWRAM_DATA static u8 sHeldDpadCounter = 0;
 extern const FileArchive gTitleMenuFileArchive;
 extern const FileArchive gMonsterFileArchive;
 
-static void MoveToNewLocation(s32 a0, s32 a1, s32 count);
+static void MoveToNewLocation(s32 destLocationId, s32 direction, s32 nFrames);
 static u8 GetChosenDirection(void);
-static s32 ChooseLocation(s32 *a0, s32 *newDirection);
+static s32 ChooseLocation(s32 *newLocationId, s32 *newDirection);
 static bool8 ChooseAreaInLocation(void);
 static void FadeFromFriendAreasMap(void);
 static void InitMapLocations(u8 startingFriendAreaId);
@@ -571,23 +571,23 @@ void ShowFriendAreasMap(struct struct_unk800F990 *param_1)
     while (1) {
         s32 newLocationId = 0;
         s32 newDirection = 0;
-        s32 iVar2 = ChooseLocation(&newLocationId, &newDirection);
+        s32 inputRet = ChooseLocation(&newLocationId, &newDirection);
 
-        if (iVar2 == 1) {
+        if (inputRet == 1) {
             MoveToNewLocation(newLocationId, newDirection, 50);
         }
-        else if (iVar2 == 2) {
+        else if (inputRet == 2) {
             if (!ChooseAreaInLocation())
                 continue;
             param_1->unkC = gFriendAreasMapPtr->chosenFriendAreaId;
             break;
         }
-        else if (iVar2 == 3) {
+        else if (inputRet == 3) {
             if (gFriendAreasMapPtr->currLocationId == gFriendAreasMapPtr->locationIdOnBPress) {
                 param_1->unkC = 0;
                 break;
             }
-            MoveToNewLocation(gFriendAreasMapPtr->locationIdOnBPress,0,10);
+            MoveToNewLocation(gFriendAreasMapPtr->locationIdOnBPress, DIRECTION_SOUTH, 10);
         }
     }
 
@@ -603,7 +603,7 @@ static s32 ChooseLocation(s32 *newLocationId, s32 *newDirection)
     FriendAreasMap_ShowDirectionArrows();
     FriendAreasMap_PrintCurrAreaName();
     while (ret == 0) {
-        s32 direction;
+        u8 direction;
 
         FriendAreasMap_RunFrameActions();
         direction = GetChosenDirection();
@@ -763,7 +763,7 @@ static void InitMapLocations(u8 startingFriendAreaId)
             struct MapLocation *ptr = &gFriendAreasMapPtr->mapLocations[var2];
             if (ptr->isShown) {
                 var1 += 4;
-                var1 &= 7;
+                var1 &= DIRECTION_MASK;
                 mapLocation->locationsByDirection[var1] = var2;
             }
         }
@@ -885,12 +885,12 @@ static u8 GetChosenDirection(void)
     return 0xFF;
 }
 
-static void MoveToNewLocation(s32 destLocationId, s32 a1, s32 nFrames)
+static void MoveToNewLocation(s32 destLocationId, s32 direction, s32 nFrames)
 {
     s32 i, currLocationId;
     DungeonPos startingPos, dstPos;
 
-    AxResInitFile(&gFriendAreasMapPtr->monAxSprite, gFriendAreasMapPtr->unk0[3], 0, a1 & 7, 0, 0, TRUE);
+    AxResInitFile(&gFriendAreasMapPtr->monAxSprite, gFriendAreasMapPtr->unk0[3], 0, direction & DIRECTION_MASK, 0, 0, TRUE);
     FriendAreasMap_HideTextWindowAndArrows();
 
     currLocationId = gFriendAreasMapPtr->currLocationId;

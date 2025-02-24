@@ -326,7 +326,7 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
         }
     }
 
-    gFriendAreasMapPtr->unk4DF8 = count;
+    gFriendAreasMapPtr->displayedAreasCount = count;
     header.f0 = 1;
     header.f1 = 0;
     header.f2 = 18;

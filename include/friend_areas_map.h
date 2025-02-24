@@ -89,7 +89,7 @@ struct FriendAreasMap
     s32 unk4DE8;
     u8 displayedAreas[MAX_AREAS_PER_LOCATION];
     u8 chosenFriendAreaId;
-    s32 unk4DF8;
+    s32 displayedAreasCount;
     MenuInputStruct menu;
 };
 
