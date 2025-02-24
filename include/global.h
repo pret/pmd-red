@@ -54,8 +54,6 @@ static inline void InlineStrncpy(u8 *dst, const u8 *src, s32 n)
 
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided\n")
 
-#define NAKED __attribute__((naked))
-
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 #define ARRAY_COUNT_INT(array) ((s32)(sizeof(array) / sizeof((array)[0]))) // When an int is needed to match.
 
