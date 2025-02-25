@@ -157,7 +157,7 @@ void sub_8049884(void)
   }
 }
 
-void sub_80498A8(int x,int y)
+void sub_80498A8(s32 x,s32 y)
 {
   volatile u32 sp_0x0;
   volatile u32 sp_0x4;

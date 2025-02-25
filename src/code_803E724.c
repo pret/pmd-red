@@ -61,7 +61,6 @@ extern u8 gUnknown_20274A5;
 extern Palette32 gFontPalette[8];
 
 extern s32 gUnknown_202EDCC;
-extern u32 gUnknown_3001018[];
 
 extern void sub_8040A84();
 extern void sub_8083D44(void);
@@ -1153,6 +1152,8 @@ void sub_803F9CC(void)
     gUnknown_20274A5 = TRUE;
 }
 
+IWRAM_DATA static u32 gUnknown_3001018[96] = {0};
+
 void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
 {
     s32 i;
@@ -1214,7 +1215,7 @@ void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
             r5 = 0;
         }
     }
-    sub_80098BC((void *) VRAM + 0x5980, gUnknown_3001018, 0x180);
+    sub_80098BC((void *) VRAM + 0x5980, gUnknown_3001018, sizeof(gUnknown_3001018));
 }
 
 void sub_803FB74(void)

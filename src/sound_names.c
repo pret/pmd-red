@@ -16,8 +16,6 @@ struct SoundNamesStruct
 };
 
 // Forward declarations
-static const char sText_Table[];
-static const char sText_Header[];
 static const char sText_PKDSoundData[];
 
 const struct SoundNamesStruct gSoundNamesStruct;
@@ -33,14 +31,12 @@ ALIGNED(4) UNUSED static const char sPksDir1[] = "pksdir0";
 
 const struct SoundNamesStruct gSoundNamesStruct =
 {
-    .headerText = sText_Header,
+    .headerText = "HEADER",
     .soundDataBankText = sText_PKDSoundData,
-    .tableText = sText_Table,
+    .tableText = "TABLE",
     .sfxNames = gSfxNames,
 };
 
-ALIGNED(4) static const char sText_Table[] = "TABLE";
-ALIGNED(4) static const char sText_Header[] = "HEADER";
 ALIGNED(4) UNUSED static const char sPksDir2[] = "pksdir0";
 ALIGNED(4) static const char sText_PKDSoundData[] = "PKD Sound Data Bank";
 

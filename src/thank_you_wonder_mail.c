@@ -95,9 +95,6 @@ const UnkTextStruct2 gUnknown_80DED60 =
     NULL
 };
 
-extern const u8 SendItem_Text[];
-extern const u8 DontSendItem_Text[];
-
 const MenuItem gUnknown_80DED78[] =
 {
     {"Confirm", CONFIRM_ACTION},
@@ -149,14 +146,11 @@ const MenuItem gUnknown_80DEE60[] =
 
 const MenuItem gUnknown_80DEE7C[] =
 {
-    {SendItem_Text, SEND_ITEM_ACTION},
-    {DontSendItem_Text, NO_SEND_ITEM_ACTION},
+    {"Send Item", SEND_ITEM_ACTION},
+    {_("Don't Send Item"), NO_SEND_ITEM_ACTION},
     {"Cancel", CANCEL_ACTION},
     {},
 };
-
-ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don't Send Item");
-ALIGNED(4) static const u8 SendItem_Text[] = "Send Item";
 
 const MenuItem gUnknown_80DEEBC[] =
 {
