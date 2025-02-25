@@ -469,16 +469,16 @@ void sub_8049ED4(void)
         r7 = r10 + (r8 * 3);
         tile = GetTile(var_48, var_44);
         if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
-            src = &dungeon->unk12BEC[r7];
+            src = &dungeon->unk12A18[26][r7];
         }
         else if (tile->terrainType & TERRAIN_TYPE_SHOP) {
-            src = &dungeon->unk12BDA[r7];
+            src = &dungeon->unk12A18[25][r7];
         }
         else if (hallucinating) {
             src = &dungeon->unk11884[tile->unk8][r7];
         }
         else if (tile->spawnOrVisibilityFlags & 4) {
-            src = &dungeon->unk12BFE[r7];
+            src = &dungeon->unk12A18[27][r7];
         }
         else
         {
@@ -514,16 +514,16 @@ void sub_8049ED4(void)
                 r7 = r10;
                 tile = GetTile(var_48, var_44);
                 if (tile->terrainType & TERRAIN_TYPE_SHOP) {
-                    src = &dungeon->unk12BDA[r7];
+                    src = &dungeon->unk12A18[25][r7];
                 }
                 else if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
-                    src = &dungeon->unk12BEC[r7];
+                    src = &dungeon->unk12A18[26][r7];
                 }
                 else if (hallucinating) {
                     src = &dungeon->unk11884[tile->unk8][r7];
                 }
                 else if (tile->spawnOrVisibilityFlags & 4) {
-                    src = &dungeon->unk12BFE[r7];
+                    src = &dungeon->unk12A18[27][r7];
                 }
                 else
                 {
@@ -587,10 +587,10 @@ void sub_804A1F0(s32 a0, s32 a1)
     r6 = var_28 + r8 * 3;
     tile = GetTile(var_2C, r10);
     if (tile->terrainType & TERRAIN_TYPE_SHOP) {
-        src = &dungeon->unk12BDA[r6];
+        src = &dungeon->unk12A18[25][r6];
     }
     else if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
-        src = &dungeon->unk12BEC[r6];
+        src = &dungeon->unk12A18[26][r6];
     }
     else if (hallucinating) {
         src = &dungeon->unk11884[tile->unk8][r6];
@@ -628,10 +628,10 @@ void sub_804A1F0(s32 a0, s32 a1)
             r6 = var_28;
             tile = GetTile(var_2C, r10);
             if (tile->terrainType & TERRAIN_TYPE_SHOP) {
-                src = &dungeon->unk12BDA[r6];
+                src = &dungeon->unk12A18[25][r6];
             }
             else if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
-                src = &dungeon->unk12BEC[r6];
+                src = &dungeon->unk12A18[26][r6];
             }
             else if (hallucinating) {
                 src = &dungeon->unk11884[tile->unk8][r6];
@@ -688,10 +688,10 @@ void sub_804A49C(s32 a0, s32 a1)
     r6 = r9 + var_28 * 3;
     tile = GetTile(r10, var_2C);
     if (tile->terrainType & TERRAIN_TYPE_SHOP) {
-        src = &dungeon->unk12BDA[r6];
+        src = &dungeon->unk12A18[25][r6];
     }
     else if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
-        src = &dungeon->unk12BEC[r6];
+        src = &dungeon->unk12A18[26][r6];
     }
     else if (hallucinating) {
         src = &dungeon->unk11884[tile->unk8][r6];
@@ -729,10 +729,10 @@ void sub_804A49C(s32 a0, s32 a1)
             r6 = var_28 * 3;
             tile = GetTile(r10, var_2C);
             if (tile->terrainType & TERRAIN_TYPE_SHOP) {
-                src = &dungeon->unk12BDA[r6];
+                src = &dungeon->unk12A18[25][r6];
             }
             else if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
-                src = &dungeon->unk12BEC[r6];
+                src = &dungeon->unk12A18[26][r6];
             }
             else if (hallucinating) {
                 src = &dungeon->unk11884[tile->unk8][r6];
@@ -803,7 +803,7 @@ void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3)
         var_48.y = r9;
         if (a2 != 0) {
             if (r10 == pos->x && r9 == pos->y) {
-                src = &dungeon->unk12B92[r5];
+                src = &dungeon->unk12A18[21][r5];
             }
             else {
                 src = &dungeon->unk13554[r5];
@@ -816,14 +816,14 @@ void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3)
             }
             if (k == 6) {
                 if (gGameOptionsRef->gridEnable) {
-                    src = &dungeon->unk12B80[r5];
+                    src = &dungeon->unk12A18[20][r5];
                 }
                 else {
                     src = &dungeon->unk13554[r5];
                 }
             }
             else {
-                src = &dungeon->unk12B92[r5];
+                src = &dungeon->unk12A18[21][r5];
             }
         }
         else {
@@ -845,7 +845,7 @@ void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3)
                 var_48.y = r9;
                 if (a2 != 0) {
                     if (r10 == pos->x && r9 == pos->y) {
-                        src = &dungeon->unk12B92[r5];
+                        src = &dungeon->unk12A18[21][r5];
                     }
                     else {
                         src = &dungeon->unk13554[r5];
@@ -858,14 +858,14 @@ void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3)
                     }
                     if (k == 6) {
                         if (gGameOptionsRef->gridEnable) {
-                            src = &dungeon->unk12B80[r5];
+                            src = &dungeon->unk12A18[20][r5];
                         }
                         else {
                             src = &dungeon->unk13554[r5];
                         }
                     }
                     else {
-                        src = &dungeon->unk12B92[r5];
+                        src = &dungeon->unk12A18[21][r5];
                     }
                 }
                 else {
