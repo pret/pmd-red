@@ -64,7 +64,6 @@ extern void sub_8075900(Entity *pokemon, u8 r1);
 extern void sub_806A5B8(Entity *);
 extern void sub_807EC28(bool8);
 
-extern s32 gUnknown_202F378;
 extern u8 gUnknown_202F32D;
 
 extern const u8 *gMonTerrifiedCouldntPickUpItem;
@@ -90,6 +89,8 @@ extern const DungeonPos gUnknown_80F4D44[];
 
 bool8 UseAttack(Entity *a0);
 void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
+
+static EWRAM_DATA s32 gUnknown_202F378 = 0;
 
 void HandleEatAIAction(Entity *pokemon)
 {

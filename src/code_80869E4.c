@@ -15,7 +15,7 @@
 // ???
 extern u32 gDungeonBrightness;
 
-EWRAM_DATA unkStruct_202F3D0 gUnknown_202F3D0 = {0};
+EWRAM_DATA static unkStruct_202F3D0 gUnknown_202F3D0 = {0};
 
 // data_8107010.s
 extern u32 gUnknown_8107314[];

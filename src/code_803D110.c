@@ -41,7 +41,6 @@ extern OpenedFile *gUnknown_202EC98;
 extern OpenedFile *gUnknown_202EC94;
 extern s32 gDungeonNameBannerFont;
 extern u8 gUnknown_20274A5;
-extern Palette32 gFontPalette[8];
 
 struct UnkDungeonFileData
 {
@@ -623,9 +622,9 @@ void sub_803E13C(void)
 
     SetWindowBGColor();
     if (gGameOptionsRef->playerGender != 0)
-        pal = gFontPalette[4].pal;
+        pal = &gFontPalette[16 * 4];
     else
-        pal = gFontPalette[0].pal;
+        pal = &gFontPalette[0];
 
     for (i = 0; i < 16; i++) {
         SetBGPaletteBufferColorArray(240 + i, pal);

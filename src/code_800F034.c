@@ -16,7 +16,7 @@ struct unkStruct_203B0D4
     struct unkStruct_800F18C unk0[2];
 };
 
-struct unkStruct_203B0D4 *gUnknown_203B0D4;
+extern struct unkStruct_203B0D4 *gUnknown_203B0D4;
 
 ALIGNED(4) static const u8 gUnknown_80CE77C[] = "efob%03d";
 ALIGNED(4) static const u8 gUnknown_80CE788[] = "efbg%03d";
@@ -53,7 +53,7 @@ void sub_800F094(void)
     {
         gUnknown_203B0D4->unk0[index].effectID = -1;
         gUnknown_203B0D4->unk0[index].counter = 0;
-    }     
+    }
 }
 
 s32 sub_800F0C0(s32 animType, s32 effectID)
@@ -81,7 +81,7 @@ s32 sub_800F0F4(s32 animType, s32 effectID)
     return -1;
 }
 
-void sub_800F13C(s32 index, OpenedFile *file, unkStruct_80B9CC4 * r2) 
+void sub_800F13C(s32 index, OpenedFile *file, unkStruct_80B9CC4 * r2)
 {
     if(gUnknown_203B0D4->unk0[index].counter == 0)
         gUnknown_203B0D4->unk0[index].effectID = r2->effectId;
@@ -101,9 +101,9 @@ void sub_800F15C(s32 effectID)
     }
 }
 
-struct unkStruct_800F18C *sub_800F18C(s32 index) 
+struct unkStruct_800F18C *sub_800F18C(s32 index)
 {
-   return &gUnknown_203B0D4->unk0[index]; 
+   return &gUnknown_203B0D4->unk0[index];
 }
 
 s32 sub_800F19C(s32 index)
@@ -135,6 +135,6 @@ OpenedFile * sub_800F1C0(u32 animType, s32 effectID)
 
 void sub_800F204(OpenedFile *file)
 {
-    CloseFile(file); 
+    CloseFile(file);
 }
 

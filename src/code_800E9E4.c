@@ -8,14 +8,14 @@ u32 sub_800F19C(s32);
 s32 sub_800EBBC(s32);
 s32 sub_800EC68(s32);
 
-struct unkStruct_203B0CC *gUnknown_203B0CC;
+extern struct unkStruct_203B0CC *gUnknown_203B0CC;
 
 extern unkStruct_80B9C60 gUnknown_80B9C60;
 
 extern s32 gUnknown_80B9C9C[8];
 extern s16 gUnknown_80CE73C[20];
 
-unkStruct_80CE37C gUnknown_80CE37C[1];
+extern unkStruct_80CE37C gUnknown_80CE37C[1];
 
 extern unkStruct_80BDBC4 gUnknown_80BDBC4[430];
 extern unkStruct_80B9CC4 gUnknown_80B9CC4[448];
@@ -56,13 +56,13 @@ s32 sub_800EA84(s32 *param_1)
     unkStruct_80BDBC4 *ret1;
     u32 size;
     ret1 = sub_800ECB8(param_1[0]);
-    
+
     stack[1].unk00[0] = ret1->unk0;
     stack[1].unk00[1] = param_1[4];
     stack[1].unk00[2] = param_1[3];
     stack[1].unk00[3] = param_1[1];
     stack[1].unk00[4] = param_1[2];
-    
+
     ret1 = sub_800ECB8(param_1[0]);
     stack[1].unk00[5] = sub_800EBBC(ret1->unk0);
     stack[1].unk00[6] = 0x0000ffff;
@@ -137,13 +137,13 @@ s32 sub_800EBC8(s32 *param_1)
     unkStruct_80BDBC4 *ret1;
     u32 size;
     ret1 = sub_800ECB8(param_1[0]);
-    
+
     stack[1].unk00[0] = ret1->unk4;
     stack[1].unk00[1] = param_1[4];
     stack[1].unk00[2] = param_1[3];
     stack[1].unk00[3] = param_1[1];
     stack[1].unk00[4] = param_1[2];
-    
+
     ret1 = sub_800ECB8(param_1[0]);
     stack[1].unk00[5] = sub_800EC68(ret1->unk4);
     stack[1].unk00[6] = 0x0000ffff;

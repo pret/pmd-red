@@ -8,11 +8,11 @@
 extern const u8 gUnknown_80B88CC[];
 extern const struct FileArchive gSystemFileArchive; // 8300500
 
-extern Palette32 gFontPalette[8];
-extern u8 gUnknown_202D238[4];
-extern s32 gUnknown_202D23C;
-extern u32 gUnknown_202D2A0;
-extern struct unkStruct_202D240 gUnknown_202D240[8];
+EWRAM_DATA RGB gFontPalette[128] = {0};
+EWRAM_DATA static u8 gUnknown_202D238[4] = {0};
+EWRAM_DATA static s32 gUnknown_202D23C = 0;
+EWRAM_DATA static struct unkStruct_202D240 gUnknown_202D240[8] = {0};
+EWRAM_DATA u32 gUnknown_202D2A0 = 0;
 
 typedef struct Palette256
 {
@@ -45,9 +45,9 @@ void InitFontPalette(void)
     CpuCopy(gFontPalette, fontpalFile->data, sizeof(gFontPalette));
 
     if (sub_80063B0() == 1)
-        ptr = gFontPalette[0].pal;
+        ptr = &gFontPalette[0];
     else
-        ptr = gFontPalette[1].pal;
+        ptr = &gFontPalette[16];
 
     for (i = 0; i < 16; ptr++, i++)
         SetBGPaletteBufferColorArray(i + 240, ptr);
@@ -64,11 +64,11 @@ void vram_related_8009804(void)
     for (i = 0; i < 0x13C0; i++)
         *dest++ = 0;
 
-    dest = (u32 *)0x06007000;
+    dest = (u32 *)(VRAM + 0x7000);
     for (i = 0; i < 0x400; i++)
         *dest++ = 0;
 
-    dest = (u32 *)0x06008000;
+    dest = (u32 *)(VRAM + 0x8000);
     for (i = 0; i < 0x2000; i++)
         *dest++ = 0;
 
@@ -85,7 +85,7 @@ void vram_related_8009804(void)
         *dest++ = 0;
 
     dest = (u32 *)OAM;
-    for (i = 0; i < 256; i++)
+    for (i = 0; i < OAM_SIZE / 4; i++)
         *dest++ = 0xA000A0; // TODO: Macro or explanation
 }
 
@@ -150,7 +150,7 @@ void SetFontsBaseColor(RGB a0)
     s32 i;
 
     for (i = 0; i < 8; i++)
-        gFontPalette[i].pal[1] = a0;
+        gFontPalette[16 * i + 1] = a0;
 }
 
 UNUSED static void sub_8009A10(struct unkStruct_8009A1C_ptr *a0, u32 palId, u32 vramDstOffset, u32 r3)

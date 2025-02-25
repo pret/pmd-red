@@ -14,7 +14,7 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 
-extern u8 gScriptVarBuffer[0x400];
+EWRAM_DATA u8 gScriptVarBuffer[0x400] = {0};
 
 struct GroundEventTableEntry
 {

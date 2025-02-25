@@ -4,6 +4,7 @@
 #include "structs/dungeon_entity.h"
 #include "code_803E46C.h"
 #include "code_803E724.h"
+#include "code_8009804.h"
 #include "string_format.h"
 #include "code_800E9E4.h"
 #include "menu_input.h"
@@ -45,7 +46,6 @@ extern u32 gUnknown_202EDD0;
 extern u8 gUnknown_203B40C;
 extern u8 gUnknown_202EE01;
 extern s32 gUnknown_202EDCC;
-extern Palette32 gFontPalette[];
 
 extern const u8 gUnknown_80F7AE8[];
 extern const u8 gUnknown_80F7AF8[];
@@ -746,7 +746,7 @@ void sub_8052FB8(const u8 *str)
         if (r8 < 62) {
             r8++;
             for (j = 0; j < 8; j++) {
-                SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[0].pal[j], r8 / 2, NULL);
+                SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[j], r8 / 2, NULL);
             }
         }
         else {
@@ -777,7 +777,7 @@ void sub_8052FB8(const u8 *str)
 
     while (r8 >= 0) {
         for (j = 0; j < 8; j++) {
-            SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[0].pal[j], r8 / 2, NULL);
+            SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[j], r8 / 2, NULL);
         }
         DrawDialogueBoxString();
         sub_803E46C(9);
@@ -788,7 +788,7 @@ void sub_8052FB8(const u8 *str)
     sub_803E46C(9);
     sub_8040238();
     for (j = 0; j < 8; j++) {
-        SetBGPaletteBufferColorArray(240 + j, &gFontPalette[0].pal[j]);
+        SetBGPaletteBufferColorArray(240 + j, &gFontPalette[j]);
     }
     sub_803E708(8, 9);
 }
