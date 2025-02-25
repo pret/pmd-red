@@ -49,6 +49,12 @@ struct unkStruct_808FF20
     u8 unk58[12];
 };
 
+struct UnkInfoTabStruct
+{
+    u8 unk0[0xC];
+    s32 unkC[9];
+};
+
 bool8 HasRecruitedMon(s16 species);
 s16 GetBaseSpecies(s16 index);
 s16 GetBaseSpeciesNoUnown(s16 index);
@@ -70,7 +76,7 @@ s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0);
 void SetSpeciesLevelToExtract(UnkDungeonGlobal_unk1CD98 *r0, s32 level, s32 species);
 s32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0);
 PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, short _species);
-void CreatePokemonInfoTabScreen(u32, s32, struct unkStruct_808FF20 *, u8 *, u32);
+void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF20 *mon, struct UnkInfoTabStruct *param_4, u32 windowId);
 void sub_808FF20(struct unkStruct_808FF20 *param_1, struct PokemonStruct1 *pokemon, bool8 param_3);
 
 #endif // GUARD_POKEMON_3_H
