@@ -10,40 +10,7 @@
     .include "src/sprite.o"
     .include "src/code_800558C.o"
     .include "src/text.o"
-
-
-gFontPalette: /* 202D038 (sub_80097B0 - sub_8052FB8) */
-	.space 0x4
-
-gUnknown_202D03C: /* 202D03C (sub_8040238) */
-	.space 0x1C
-gUnknown_202D058: /* 202D058 (sub_803E250 - sub_803EA10) */
-	.space 0x10
-gUnknown_202D068: /* 202D068 (sub_803FB74) */
-	.space 0x4
-gUnknown_202D06C: /* 202D06C (sub_803F38C) */
-	.space 0xC
-
-gFontPaletteAlt: /* 202D078 (sub_8099690) */
-	.space 0x20
-
-gUnknown_202D098: /* 202D098 (xxx_format_string) */
-	.space 0x120
-
-gUnknown_202D1B8: /* 202D1B8 (sub_8099690) */
-	.space 0x40
-gUnknown_202D1F8: /* 202D1F8 (sub_8099690) */
-	.space 0x40
-
-gUnknown_202D238: /* 202D238 (sub_80098A0 - sub_8009908) */
-	.space 0x4
-gUnknown_202D23C: /* 202D23C (sub_80098A0 - sub_8009908) */
-	.space 0x4
-gUnknown_202D240: /* 202D240 (sub_80098BC - sub_8009908) */
-	.space 0x60
-gUnknown_202D2A0: /* 202D2A0 (sub_8009A1C - sub_8009BE4) */
-	.space 0x4
-
+    .include "src/code_8009804.o"
     .include "src/file_system.o"
     .include "src/decompress.o"
     .include "src/main.o"

@@ -250,5 +250,5 @@ _0803E458: .4byte gDungeon
 _0803E45C: .4byte 0x00018217
 _0803E460: .4byte 0x00018218
 _0803E464: .4byte gDungeonBrightness
-_0803E468: .4byte gUnknown_202D058
+_0803E468: .4byte gFontPalette + 0x20
 	thumb_func_end sub_803E250
