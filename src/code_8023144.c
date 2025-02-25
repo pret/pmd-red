@@ -235,154 +235,38 @@ static void sub_8023730(void)
     }
 }
 
-// 41.34%. Similar to SortbyAlphabetNo: https://decomp.me/scratch/Wmgj6
-NAKED static void sub_8023758(void)
+void sub_8023758(void)
 {
-    asm_unified(
-    "\tpush {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tsub sp, 0x4\n"
-    "\tldr r3, _080237DC\n"
-    "\tldr r2, [r3]\n"
-    "\tldr r1, [r2, 0x8]\n"
-    "\tlsls r0, r1, 1\n"
-    "\tadds r0, 0xA\n"
-    "\tadds r2, r0\n"
-    "\tmov r9, r2\n"
-    "\tmovs r2, 0\n"
-    "\tsubs r1, 0x1\n"
-    "\tcmp r2, r1\n"
-    "\tbge _080237CC\n"
-"_08023778:\n"
-    "\tmov r5, r9\n"
-    "\tldr r0, [r3]\n"
-    "\tldr r0, [r0, 0x8]\n"
-    "\tsubs r7, r0, 0x1\n"
-    "\tadds r0, r2, 0x1\n"
-    "\tmov r8, r0\n"
-    "\tcmp r7, r2\n"
-    "\tble _080237BE\n"
-"_08023788:\n"
-    "\tsubs r6, r5, 0x2\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r6, r1]\n"
-    "\tmovs r1, 0x1\n"
-    "\tstr r2, [sp]\n"
-    "\tbl GetAlphabetParentNo\n"
-    "\tadds r4, r0, 0\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tmovs r1, 0x1\n"
-    "\tbl GetAlphabetParentNo\n"
-    "\tlsls r4, 16\n"
-    "\tlsls r0, 16\n"
-    "\tldr r2, [sp]\n"
-    "\tcmp r4, r0\n"
-    "\tble _080237B6\n"
-    "\tmovs r0, 0\n"
-    "\tldrsh r1, [r5, r0]\n"
-    "\tldrh r0, [r6]\n"
-    "\tstrh r0, [r5]\n"
-    "\tstrh r1, [r6]\n"
-"_080237B6:\n"
-    "\tadds r5, r6, 0\n"
-    "\tsubs r7, 0x1\n"
-    "\tcmp r7, r2\n"
-    "\tbgt _08023788\n"
-"_080237BE:\n"
-    "\tmov r2, r8\n"
-    "\tldr r3, _080237DC\n"
-    "\tldr r0, [r3]\n"
-    "\tldr r0, [r0, 0x8]\n"
-    "\tsubs r0, 0x1\n"
-    "\tcmp r2, r0\n"
-    "\tblt _08023778\n"
-"_080237CC:\n"
-    "\tadd sp, 0x4\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_080237DC: .4byte gUnknown_3001B5C");
+    s32 temp;
+    s32 i, j;
+    s16 *r9 = &gUnknown_3001B5C->unkC[gUnknown_3001B5C->unk8 - 1];
+
+    for (i = 0; i < gUnknown_3001B5C->unk8 - 1; i++) {
+        s16 *r5 = r9;
+        for (j = gUnknown_3001B5C->unk8 - 1; j > i; j--) {
+            s16 *r6 = r5 - 1;
+            if (GetAlphabetParentNo(*r6, 1) > GetAlphabetParentNo(*r5, 1)) {
+                SWAP(*r5, *r6, temp);
+            }
+            r5--;
+        }
+    }
 }
 
- // SIMILAR TO ABOVE: https://decomp.me/scratch/BG2JR
-NAKED static void sub_80237E0(void)
+void sub_80237E0(void)
 {
-    asm_unified(
-    "\tpush {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tsub sp, 0x4\n"
-    "\tldr r3, _08023864\n"
-    "\tldr r2, [r3]\n"
-    "\tldr r1, [r2, 0x8]\n"
-    "\tlsls r0, r1, 1\n"
-    "\tadds r0, 0xA\n"
-    "\tadds r2, r0\n"
-    "\tmov r9, r2\n"
-    "\tmovs r2, 0\n"
-    "\tsubs r1, 0x1\n"
-    "\tcmp r2, r1\n"
-    "\tbge _08023854\n"
-"_08023800:\n"
-    "\tmov r5, r9\n"
-    "\tldr r0, [r3]\n"
-    "\tldr r0, [r0, 0x8]\n"
-    "\tsubs r7, r0, 0x1\n"
-    "\tadds r0, r2, 0x1\n"
-    "\tmov r8, r0\n"
-    "\tcmp r7, r2\n"
-    "\tble _08023846\n"
-"_08023810:\n"
-    "\tsubs r6, r5, 0x2\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r6, r1]\n"
-    "\tmovs r1, 0\n"
-    "\tstr r2, [sp]\n"
-    "\tbl GetAlphabetParentNo\n"
-    "\tadds r4, r0, 0\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tmovs r1, 0\n"
-    "\tbl GetAlphabetParentNo\n"
-    "\tlsls r4, 16\n"
-    "\tlsls r0, 16\n"
-    "\tldr r2, [sp]\n"
-    "\tcmp r4, r0\n"
-    "\tble _0802383E\n"
-    "\tmovs r0, 0\n"
-    "\tldrsh r1, [r5, r0]\n"
-    "\tldrh r0, [r6]\n"
-    "\tstrh r0, [r5]\n"
-    "\tstrh r1, [r6]\n"
-"_0802383E:\n"
-    "\tadds r5, r6, 0\n"
-    "\tsubs r7, 0x1\n"
-    "\tcmp r7, r2\n"
-    "\tbgt _08023810\n"
-"_08023846:\n"
-    "\tmov r2, r8\n"
-    "\tldr r3, _08023864\n"
-    "\tldr r0, [r3]\n"
-    "\tldr r0, [r0, 0x8]\n"
-    "\tsubs r0, 0x1\n"
-    "\tcmp r2, r0\n"
-    "\tblt _08023800\n"
-"_08023854:\n"
-    "\tadd sp, 0x4\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_08023864: .4byte gUnknown_3001B5C");
+    s32 temp;
+    s32 i, j;
+    s16 *r9 = &gUnknown_3001B5C->unkC[gUnknown_3001B5C->unk8 - 1];
+
+    for (i = 0; i < gUnknown_3001B5C->unk8 - 1; i++) {
+        s16 *r5 = r9;
+        for (j = gUnknown_3001B5C->unk8 - 1; j > i; j--) {
+            s16 *r6 = r5 - 1;
+            if (GetAlphabetParentNo(*r6, 0) > GetAlphabetParentNo(*r5, 0)) {
+                SWAP(*r5, *r6, temp);
+            }
+            r5--;
+        }
+    }
 }
