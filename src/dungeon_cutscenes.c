@@ -395,6 +395,7 @@ extern void sub_80460F8(DungeonPos *, Item *, u8);
 extern u8 sub_8044B28(void);
 extern bool8 sub_8085B80(struct_8085B80 *);
 
+void sub_8085F44(s32);
 void sub_808BBA8(Entity * );
 void DeoxysScreenFlash(void);
 void sub_8086A54(Entity *);
@@ -1264,158 +1265,53 @@ void MoltresDropInEffect(Entity * moltresEntity)
   }
 }
 
-NAKED
-void MoltresScreenFlash1(s32 r0, s32 r1)
+void MoltresScreenFlash1(s32 xArg, s32 yArg)
 {
-	asm_unified("\tpush {lr}\n"
-	"\tsub sp, 0x8\n"
-	"\tadds r3, r1, 0\n"
-	"\tlsls r1, r0, 1\n"
-	"\tadds r1, r0\n"
-	"\tlsls r1, 11\n"
-	"\tmovs r2, 0xC0\n"
-	"\tlsls r2, 4\n"
-	"\tadds r0, r1, r2\n"
-	"\tcmp r0, 0\n"
-	"\tbge _08087D98\n"
-	"\tadds r0, 0xFF\n"
-"_08087D98:\n"
-	"\tlsls r0, 8\n"
-	"\tlsrs r0, 16\n"
-	"\tldr r1, _08087DE0\n"
-	"\tldr r2, [sp, 0x4]\n"
-	"\tands r2, r1\n"
-	"\torrs r2, r0\n"
-	"\tstr r2, [sp, 0x4]\n"
-	"\tlsls r0, r3, 1\n"
-	"\tadds r0, r3\n"
-	"\tlsls r0, 11\n"
-	"\tmovs r1, 0x80\n"
-	"\tlsls r1, 5\n"
-	"\tadds r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbge _08087DB8\n"
-	"\tadds r0, 0xFF\n"
-"_08087DB8:\n"
-	"\tlsls r0, 8\n"
-	"\tlsrs r0, 16\n"
-	"\tlsls r0, 16\n"
-	"\tldr r1, _08087DE4\n"
-	"\tands r2, r1\n"
-	"\torrs r2, r0\n"
-	"\tstr r2, [sp, 0x4]\n"
-	"\tmovs r0, 0xB9\n"
-	"\tlsls r0, 1\n"
-	"\tmovs r1, 0\n"
-	"\tstr r1, [sp]\n"
-	"\tmovs r1, 0x10\n"
-	"\tmovs r2, 0\n"
-	"\tadd r3, sp, 0x4\n"
-	"\tbl sub_8085EC8\n"
-	"\tadd sp, 0x8\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08087DE0: .4byte 0xffff0000\n"
-"_08087DE4: .4byte 0x0000ffff");
+    s32 x, y;
+    DungeonPos newPos;
+
+    x = (xArg * 3) << 11;
+    x += 0xC00;
+    newPos.x = x / 256;
+
+    y = (yArg * 3) << 11;
+    y += 0x1000;
+    newPos.y = y / 256;
+
+    sub_8085EC8(370,16,0,&newPos,0);
 }
 
-NAKED
-void MoltresScreenFlash2(s32 r0, s32 r1)
+void MoltresScreenFlash2(s32 xArg, s32 yArg)
 {
-	asm_unified("\tpush {r4-r6,lr}\n"
-	"\tsub sp, 0x8\n"
-	"\tadds r3, r1, 0\n"
-	"\tlsls r1, r0, 1\n"
-	"\tadds r1, r0\n"
-	"\tlsls r1, 11\n"
-	"\tmovs r2, 0xC0\n"
-	"\tlsls r2, 4\n"
-	"\tadds r0, r1, r2\n"
-	"\tcmp r0, 0\n"
-	"\tbge _08087E00\n"
-	"\tadds r0, 0xFF\n"
-"_08087E00:\n"
-	"\tlsls r0, 8\n"
-	"\tlsrs r0, 16\n"
-	"\tldr r1, _08087EA8\n"
-	"\tldr r2, [sp, 0x4]\n"
-	"\tands r2, r1\n"
-	"\torrs r2, r0\n"
-	"\tstr r2, [sp, 0x4]\n"
-	"\tlsls r0, r3, 1\n"
-	"\tadds r0, r3\n"
-	"\tlsls r0, 11\n"
-	"\tmovs r1, 0x80\n"
-	"\tlsls r1, 5\n"
-	"\tadds r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbge _08087E20\n"
-	"\tadds r0, 0xFF\n"
-"_08087E20:\n"
-	"\tlsls r0, 8\n"
-	"\tlsrs r0, 16\n"
-	"\tlsls r0, 16\n"
-	"\tldr r1, _08087EAC\n"
-	"\tands r2, r1\n"
-	"\torrs r2, r0\n"
-	"\tstr r2, [sp, 0x4]\n"
-	"\tmovs r0, 0xB9\n"
-	"\tlsls r0, 1\n"
-	"\tmovs r1, 0\n"
-	"\tstr r1, [sp]\n"
-	"\tmovs r1, 0x16\n"
-	"\tmovs r2, 0\n"
-	"\tadd r3, sp, 0x4\n"
-	"\tbl sub_8085EC8\n"
-	"\tadds r6, r0, 0\n"
-	"\tmovs r0, 0xF6\n"
-	"\tlsls r0, 1\n"
-	"\tbl PlaySoundEffect\n"
-	"\tmovs r4, 0xFA\n"
-	"\tmovs r5, 0x1\n"
-"_08087E4E:\n"
-	"\tstr r5, [sp]\n"
-	"\tadds r0, r4, 0\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0x1\n"
-	"\tbl SetDungeonBGColorRGB\n"
-	"\tmovs r0, 0x46\n"
-	"\tbl sub_803E46C\n"
-	"\tsubs r4, 0xA\n"
-	"\tcmp r4, 0x13\n"
-	"\tbgt _08087E4E\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tmovs r4, 0xFA\n"
-	"\tmovs r5, 0x1\n"
-"_08087E74:\n"
-	"\tstr r5, [sp]\n"
-	"\tadds r0, r4, 0\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0x1\n"
-	"\tbl SetDungeonBGColorRGB\n"
-	"\tmovs r0, 0x46\n"
-	"\tbl sub_803E46C\n"
-	"\tsubs r4, 0xA\n"
-	"\tcmp r4, 0\n"
-	"\tbge _08087E74\n"
-	"\tmovs r0, 0xA\n"
-	"\tmovs r1, 0x46\n"
-	"\tbl sub_803E708\n"
-	"\tbl sub_8085EB0\n"
-	"\tadds r0, r6, 0\n"
-	"\tbl sub_8085F44\n"
-	"\tadd sp, 0x8\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_08087EA8: .4byte 0xffff0000\n"
-"_08087EAC: .4byte 0x0000ffff");
+    s32 r6;
+    s32 i, x, y;
+    DungeonPos newPos;
+
+    x = (xArg * 3) << 11;
+    x += 0xC00;
+    newPos.x = x / 256;
+
+    y = (yArg * 3) << 11;
+    y += 0x1000;
+    newPos.y = y / 256;
+
+    r6 = sub_8085EC8(370,22,0,&newPos,0);
+    PlaySoundEffect(0x1EC);
+
+    for (i = 250; i >= 20; i -= 10) {
+        SetDungeonBGColorRGB(i, 0, 0, 1, 1);
+        sub_803E46C(0x46);
+    }
+    sub_803E708(0xA, 0x46);
+
+    for (i = 250; i >= 0; i -= 10) {
+        SetDungeonBGColorRGB(i, 0, 0, 1, 1);
+        sub_803E46C(0x46);
+    }
+    sub_803E708(0xA, 0x46);
+
+    sub_8085EB0();
+    sub_8085F44(r6);
 }
 
 void MoltresScreenFlash3(void)
