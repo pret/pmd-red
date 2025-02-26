@@ -742,8 +742,8 @@ void sub_807F43C(Entity *target, Entity *attacker)
 
     newDir = GetDirectionTowardsPosition(&attackerPos, &attacker->pos);
 
-    pixelPosX = (((attackerPos.x * 24) + 12) << 8) + ((gAdjacentTileOffsets[newDir].x << 8) / 3);
-    pixelPosY = (((attackerPos.y * 24) + 16) << 8) + ((gAdjacentTileOffsets[newDir].y << 8) / 3);
+    pixelPosX = X_POS_TO_PIXELPOS(attackerPos.x) + ((gAdjacentTileOffsets[newDir].x << 8) / 3);
+    pixelPosY = Y_POS_TO_PIXELPOS(attackerPos.y) + ((gAdjacentTileOffsets[newDir].y << 8) / 3);
 
     var_30 = (pixelPosX - attacker->pixelPos.x) / r6;
     r10 = (pixelPosY - attacker->pixelPos.y) / r6;

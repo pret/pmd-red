@@ -892,8 +892,8 @@ bool8 UseAttack(Entity *a0)
                 PixelPos pos;
 
                 monInfo->flags |= 0x2000;
-                pos.x = (monInfo->unk184[0].previousTargetMovePosition2.x * 0x1800) + 0xC00;
-                pos.y = (monInfo->unk184[0].previousTargetMovePosition2.y * 0x1800) + 0x1000;
+                pos.x = X_POS_TO_PIXELPOS(monInfo->unk184[0].previousTargetMovePosition2.x);
+                pos.y = Y_POS_TO_PIXELPOS(monInfo->unk184[0].previousTargetMovePosition2.y);
                 sub_804535C(mon, &pos);
                 sub_806CDFC(mon, 0, monInfo->unk184[0].lastMoveDirection);
                 monInfo->notMoving = 0;
@@ -929,8 +929,8 @@ bool8 UseAttack(Entity *a0)
                             else {
                                 PixelPos pos;
 
-                                pos.x = (monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.x * 0x1800) + 0xC00;
-                                pos.y = (monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.y * 0x1800) + 0x1000;
+                                pos.x = X_POS_TO_PIXELPOS(monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.x);
+                                pos.y = Y_POS_TO_PIXELPOS(monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.y);
                                 sub_804535C(mon, &pos);
                                 sub_806CDFC(mon, 0, monInfo->unk184[monInfo->notMoving].lastMoveDirection);
                             }

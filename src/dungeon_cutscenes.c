@@ -1270,12 +1270,10 @@ void MoltresScreenFlash1(s32 xArg, s32 yArg)
     s32 x, y;
     DungeonPos newPos;
 
-    x = (xArg * 3) << 11;
-    x += 0xC00;
+    x = X_POS_TO_PIXELPOS(xArg);
     newPos.x = x / 256;
 
-    y = (yArg * 3) << 11;
-    y += 0x1000;
+    y = Y_POS_TO_PIXELPOS(yArg);
     newPos.y = y / 256;
 
     sub_8085EC8(370,16,0,&newPos,0);
@@ -1287,12 +1285,10 @@ void MoltresScreenFlash2(s32 xArg, s32 yArg)
     s32 i, x, y;
     DungeonPos newPos;
 
-    x = (xArg * 3) << 11;
-    x += 0xC00;
+    x = X_POS_TO_PIXELPOS(xArg);
     newPos.x = x / 256;
 
-    y = (yArg * 3) << 11;
-    y += 0x1000;
+    y = Y_POS_TO_PIXELPOS(yArg);
     newPos.y = y / 256;
 
     r6 = sub_8085EC8(370,22,0,&newPos,0);
@@ -4102,12 +4098,10 @@ void sub_808BB3C(DungeonPos *pos1)
     s32 x, y;
     DungeonPos newPos;
 
-    x = (pos1->x * 3) << 11;
-    x += 0xC00;
+    x = X_POS_TO_PIXELPOS(pos1->x);
     newPos.x = x / 256;
 
-    y = (pos1->y * 3) << 11;
-    y += 0x1000;
+    y = Y_POS_TO_PIXELPOS(pos1->y);
     newPos.y = y / 256;
 
     sub_8085EC8(100,0,0,&newPos,0);
