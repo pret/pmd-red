@@ -15,9 +15,9 @@ struct unkStruct_203B2AC
     struct unkStruct_808FF20 unk4C;
     struct UnkInfoTabStruct unkB0;
     u32 unkE0;
-    UnkTextStruct2 *unkE4;
-    UnkTextStruct3 unkE8;
-    UnkTextStruct2_sub2 unk148;
+    Window *unkE4;
+    Windows unkE8;
+    WindowHeader unk148;
 };
 
 bool8 sub_8024458(s16 speciesNum, s32);

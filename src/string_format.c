@@ -60,17 +60,16 @@ u32 sub_8014140(void)
 
 // This kinda looks like the 'true' beginning of the file
 static const u32 gUnknown_80D48A0[] = {0x7, 0x2, 0x2};
-static const struct UnkTextStruct2 gUnknown_80D48AC = {
+static const struct Window gUnknown_80D48AC = {
     0x00,
-    0x00, 0x00,
-    0x00, 0x03,
+    0x03,
     0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00, 0x00
 };
 
-static const UnkTextStruct2 gUnknown_80D48C4 = {
-    0x00, 0x00, 0x00, 0x00,
+static const Window gUnknown_80D48C4 = {
+    0x00,
     0x00,
     0x02, 0x0F,
     0x1A, 0x05,
@@ -78,8 +77,8 @@ static const UnkTextStruct2 gUnknown_80D48C4 = {
     NULL
 };
 
-static const UnkTextStruct2 gUnknown_80D48DC = {
-    0x00, 0x00, 0x00, 0x00,
+static const Window gUnknown_80D48DC = {
+    0x00,
     0x02,
     0x02, 0x08,
     0x1A, 0x05,
@@ -149,7 +148,7 @@ static EWRAM_DATA s32 gUnknown_202EC1C = 0;
 // Only read, but never written to. Possibly used in Blue?
 struct NeverWrittenToStruct202EC20
 {
-    struct UnkTextStruct2 unk0;
+    struct Window unk0;
     const u8 *unk18;
 };
 static EWRAM_DATA struct NeverWrittenToStruct202EC20 *sNeverWrittenToUnknownStructPtr = NULL;
@@ -157,23 +156,23 @@ static UNUSED EWRAM_DATA u8 sUnusedEwram1[4] = {0};
 
 static EWRAM_DATA MenuInputStructSub gUnknown_202EC28 = {0};
 
-static EWRAM_INIT UnkTextStruct3 sUnknown_203B198 = {
-    .a0 = {
+static EWRAM_INIT Windows sUnknown_203B198 = {
+    .id = {
         [0] = {
             .pos = {2, 15},
-            .unkC = 26,
-            .unkE = 5,
+            .width = 26,
+            .height = 5,
             .unk10 = 7,
         },
         [1] = {
             .unk0 = 0x40,
-            .unk4 = 7
+            .type = WINDOW_TYPE_7,
         },
         [2] = {
-            .unk4 = 3,
+            .type = WINDOW_TYPE_NORMAL,
         },
         [3] = {
-            .unk4 = 3,
+            .type = WINDOW_TYPE_NORMAL,
         }
     }
 };
@@ -227,41 +226,41 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     gUnknown_202EC1C = r9;
     sub_801317C(&gUnknown_202EC28);
     if (flags & 0x10) {
-        sUnknown_203B198.a0[0] = gUnknown_80D48DC;
+        sUnknown_203B198.id[0] = gUnknown_80D48DC;
     }
     else {
-        sUnknown_203B198.a0[0] = gUnknown_80D48C4;
+        sUnknown_203B198.id[0] = gUnknown_80D48C4;
     }
 
-    sUnknown_203B198.a0[1].unkC = 0;
-    sUnknown_203B198.a0[1].unkE = 0;
-    sUnknown_203B198.a0[1].unk10 = 0;
-    sUnknown_203B198.a0[1].unk0 = 0x40;
+    sUnknown_203B198.id[1].width = 0;
+    sUnknown_203B198.id[1].height = 0;
+    sUnknown_203B198.id[1].unk10 = 0;
+    sUnknown_203B198.id[1].unk0 = 0x40;
 
     if (monPortraitPtr != NULL && monPortraitPtr->faceData != NULL && monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].gfx != 0) {
         s32 i;
 
-        sUnknown_203B198.a0[1].pos.x = monPortraitPtr->pos.x;
-        sUnknown_203B198.a0[1].pos.y = monPortraitPtr->pos.y;
-        sUnknown_203B198.a0[1].unkC = 5;
-        sUnknown_203B198.a0[1].unkE = 5;
-        sUnknown_203B198.a0[1].unk10 = 5;
+        sUnknown_203B198.id[1].pos.x = monPortraitPtr->pos.x;
+        sUnknown_203B198.id[1].pos.y = monPortraitPtr->pos.y;
+        sUnknown_203B198.id[1].width = 5;
+        sUnknown_203B198.id[1].height = 5;
+        sUnknown_203B198.id[1].unk10 = 5;
         for (i = 0; i < 16; i++) {
             SetBGPaletteBufferColorArray(224 + i, &monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].pal[i]);
         }
         portraitOn = TRUE;
         if (monPortraitPtr->unkE) {
-            sUnknown_203B198.a0[1].unk4 = 7;
+            sUnknown_203B198.id[1].type = WINDOW_TYPE_7;
         }
         else {
-            sUnknown_203B198.a0[1].unk4 = 5;
+            sUnknown_203B198.id[1].type = WINDOW_TYPE_FILL_TRANSPARENT;
         }
     }
 
-    sUnknown_203B198.a0[2] = gUnknown_80D48AC;
-    sUnknown_203B198.a0[3] = gUnknown_80D48AC;
+    sUnknown_203B198.id[2] = gUnknown_80D48AC;
+    sUnknown_203B198.id[3] = gUnknown_80D48AC;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B198, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B198, TRUE, TRUE);
     gUnknown_202E748.unk0 = 4;
     gUnknown_202E748.unk2 = 4;
     gUnknown_202E748.unk8 = 0x70;
@@ -563,7 +562,7 @@ void DrawDialogueBoxString(void)
             case 11: {
                 if (sUnknownTextFlags & 0x200) {
                     ResetUnusedInputStruct();
-                    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+                    ShowWindows(NULL, TRUE, TRUE);
                     gUnknown_202E744 = 0;
                 }
                 else {
@@ -621,21 +620,21 @@ static void sub_8014A88(void)
     if (r5 % 8)
         r2++;
 
-    sUnknown_203B198.a0[2].unk4 = gUnknown_202EC10;
+    sUnknown_203B198.id[2].type = gUnknown_202EC10;
     r1 = r7 / 8;
     r1 += 2;
-    sUnknown_203B198.a0[2].unkC = r1;
-    sUnknown_203B198.a0[2].unk10 = r2;
-    sUnknown_203B198.a0[2].unkE = r2;
-    sUnknown_203B198.a0[2].pos.x = 28 - r1;
-    sUnknown_203B198.a0[2].pos.y = 14 - r2;
-    sUnknown_203B198.a0[0].unk0 = 0x80;
-    sUnknown_203B198.a0[1].unk0 = 0xC0;
+    sUnknown_203B198.id[2].width = r1;
+    sUnknown_203B198.id[2].unk10 = r2;
+    sUnknown_203B198.id[2].height = r2;
+    sUnknown_203B198.id[2].pos.x = 28 - r1;
+    sUnknown_203B198.id[2].pos.y = 14 - r2;
+    sUnknown_203B198.id[0].unk0 = 0x80;
+    sUnknown_203B198.id[1].unk0 = 0xC0;
     if (sNeverWrittenToUnknownStructPtr != NULL) {
-        sUnknown_203B198.a0[3] = sNeverWrittenToUnknownStructPtr->unk0;
+        sUnknown_203B198.id[3] = sNeverWrittenToUnknownStructPtr->unk0;
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B198, TRUE, FALSE);
+    ShowWindows(&sUnknown_203B198, TRUE, FALSE);
     sub_8012D60(&gUnknown_202EBC0, sDialogueMenuItems, gUnknown_80D48A0, gUnknown_202EC18, gUnknown_202EC1C, 2);
     if (sNeverWrittenToUnknownStructPtr != NULL) {
         sub_80073B8(3);

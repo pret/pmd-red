@@ -24,7 +24,7 @@ typedef struct MenuInputStruct
 {
     s32 unk0;
     u16 unk4;
-    s16 unk6;
+    s16 firstEntryY;
     DungeonPos unk8;
     s16 unkC; // Maybe DungeonPos
     s16 unkE;
@@ -72,7 +72,7 @@ typedef struct unkStructFor8013AA0
     s32 unkC; // maxInclusive?
     s32 unk10;
     s32 unk14; // index of unk18? But read as chosenValue..?
-    UnkTextStruct2 *unk18;
+    Window *unk18;
     s32 unk1C; // width of prompt?
     s32 unk20; // height of prompt?
     u8 unk24; // related to unk10

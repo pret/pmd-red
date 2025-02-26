@@ -187,7 +187,7 @@ u8 sub_8027F88(void)
   s32 counter;
 
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+  ShowWindows(NULL, TRUE, TRUE);
   sUnknown_203B2C0 = MemoryAlloc(sizeof(WonderMailStruct_203B2C0), 8);
   MemoryFill8(sUnknown_203B2C0, 0, sizeof(WonderMailStruct_203B2C0));
   sUnknown_203B2C0->unk53C = 0;
@@ -422,7 +422,7 @@ void sub_8028348(void)
         case 0x3B:
             RestoreUnkTextStruct_8006518(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             sub_8031D70(sUnknown_203B2C0->mailIndex, 0);
             break;
         case 0x3C:
@@ -457,7 +457,7 @@ void sub_8028348(void)
             if(sub_8023CE8() == 0)
             {
                 ResetUnusedInputStruct();
-                xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+                ShowWindows(NULL, TRUE, TRUE);
                 sub_8023868(3, 0, 0, 9);
             }
             break;
@@ -483,7 +483,7 @@ void sub_8028348(void)
             if(sub_8030894() == 0)
             {
                 ResetUnusedInputStruct();
-                xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+                ShowWindows(NULL, TRUE, TRUE);
                 sub_80306A8(WONDER_MAIL_TYPE_AOK, 0, 0, 6);
             }
             break;
@@ -574,7 +574,7 @@ void sub_8028348(void)
         case 0x27:
             RestoreUnkTextStruct_8006518(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             sub_80151C0(4, sUnknown_203B2C0->passwordBuffer);
             break;
         case 8:
@@ -610,7 +610,7 @@ void sub_8028348(void)
             if(sub_8030894() == 0)
             {
                 ResetUnusedInputStruct();
-                xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+                ShowWindows(NULL, TRUE, TRUE);
                 // SOS Mail
                 sub_80306A8(WONDER_MAIL_TYPE_SOS_1, 0, 0, 6);
             }
@@ -1116,7 +1116,7 @@ void sub_8029044(void)
             sUnknown_203B2C0->mailIndex = sub_80307EC();
             RestoreUnkTextStruct_8006518(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             sub_8030D40(sUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x21);
             break;
@@ -1152,7 +1152,7 @@ void sub_80290F0(void)
             sUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             RestoreUnkTextStruct_8006518(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             sub_8030D40(sUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x21);
             break;
@@ -1175,7 +1175,7 @@ void sub_80291AC(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
+            ShowWindows(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(sUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
@@ -1392,7 +1392,7 @@ void sub_80293F4(void)
         case 2:
             sub_80155F0();
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
+            ShowWindows(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             break;
         default:
@@ -1465,7 +1465,7 @@ void sub_80295D8(void)
             sUnknown_203B2C0->mailIndex = sub_80307EC();
             RestoreUnkTextStruct_8006518(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             sub_8030D40(sUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x2C);
             break;
@@ -1501,7 +1501,7 @@ void sub_8029684(void)
             sUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             RestoreUnkTextStruct_8006518(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             sub_8030D40(sUnknown_203B2C0->mailIndex, 0);
             SetFriendRescueCounterState(0x2C);
             break;
@@ -1522,7 +1522,7 @@ void sub_8029740(void)
         case 3:
             sub_8030DE4();
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
+            ShowWindows(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
             sub_803092C();
             if(sUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
@@ -1575,7 +1575,7 @@ void sub_80297D4(void)
             sUnknown_203B2C0->speciesNum = sub_8023B44();
             RestoreUnkTextStruct_8006518(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             sub_8024458(sUnknown_203B2C0->speciesNum, 0);
             SetFriendRescueCounterState(0x35);
             break;
@@ -1601,7 +1601,7 @@ void sub_8029884(void)
             sUnknown_203B2C0->fallbackState = DEFAULT_FALLBACK_STATE;
             RestoreUnkTextStruct_8006518(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             sub_8024458(sUnknown_203B2C0->speciesNum, 0);
             SetFriendRescueCounterState(0x35);
             break;
@@ -1631,7 +1631,7 @@ void sub_8029944(void)
         case 3:
             sub_802453C();
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
+            ShowWindows(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
             sub_8023B7C(1);
             if(sUnknown_203B2C0->fallbackState == DEFAULT_FALLBACK_STATE)
             {
@@ -1771,7 +1771,7 @@ void sub_8029AF4(void)
         case 3:
             sub_8031E10();
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
+            ShowWindows(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
             SetFriendRescueCounterState(0x3C);
             break;
         case 1:

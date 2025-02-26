@@ -79,7 +79,7 @@ u8 sub_802B2D4(void)
   OpenedFile *faceFile;
 
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+  ShowWindows(NULL, TRUE, TRUE);
   sUnknown_203B2C8 = MemoryAlloc(sizeof(struct unkStruct_203B2C8),8);
   MemoryFill8(sUnknown_203B2C8,0,sizeof(struct unkStruct_203B2C8));
   sUnknown_203B2C8->unk1 = -1;

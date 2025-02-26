@@ -35,18 +35,18 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
     FillInventoryGaps();
     sub_801AE84();
     gUnknown_203B224->unk54.s0.unk34 = param_2;
-    gUnknown_203B224->unk54.s0.unk38 = &gUnknown_203B224->unk54.s0.unk3C.a0[param_2];
-    RestoreUnkTextStruct_8006518(&gUnknown_203B224->unk54.s0.unk3C);
-    gUnknown_203B224->unk54.s0.unk3C.a0[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB95C;
+    gUnknown_203B224->unk54.s0.unk38 = &gUnknown_203B224->unk54.s0.windows.id[param_2];
+    RestoreUnkTextStruct_8006518(&gUnknown_203B224->unk54.s0.windows);
+    gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB95C;
     gUnknown_203B224->unk54.s0.unk38->unk14 = &gUnknown_203B224->unk54.unk9C;
 
     if (param_3 != NULL)
-        gUnknown_203B224->unk54.s0.unk3C.a0[gUnknown_203B224->unk54.s0.unk34].pos = *param_3;
+        gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.unk34].pos = *param_3;
 
     sub_8012D08(gUnknown_203B224->unk54.s0.unk38, param_4);
     sub_8099690(1);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B224->unk54.s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_203B224->unk54.s0.input, GetNumberOfFilledInventorySlots(), param_4, param_2);
     gUnknown_203B224->unk54.s0.input.menuIndex = gUnknown_203B228;
     gUnknown_203B224->unk54.s0.input.unk1E = gUnknown_203B22A;
@@ -147,7 +147,7 @@ void sub_801A8D0(bool8 r0)
 {
     sub_8099690(1);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B224->unk54.s0.unk3C, FALSE, FALSE);
+    ShowWindows(&gUnknown_203B224->unk54.s0.windows, FALSE, FALSE);
     FillInventoryGaps();
     gUnknown_203B224->unk54.s0.input.unk22 = GetNumberOfFilledInventorySlots();
     sub_8013984(&gUnknown_203B224->unk54.s0.input);
@@ -162,10 +162,10 @@ void sub_801A928(void)
     if (gUnknown_203B224 != NULL) {
         gUnknown_203B228 = gUnknown_203B224->unk54.s0.input.menuIndex;
         gUnknown_203B22A = gUnknown_203B224->unk54.s0.input.unk1E;
-        gUnknown_203B224->unk54.s0.unk3C.a0[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB944;
+        gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB944;
         sub_8099690(0);
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B224->unk54.s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B224);
         gUnknown_203B224 = NULL;
     }
@@ -178,7 +178,7 @@ static void sub_801A998(void)
     gUnknown_203B224->unk54.unk9C.f2 = 11;
     gUnknown_203B224->unk54.unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B224->unk54.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B224->unk54.s0.windows, TRUE, TRUE);
 }
 
 void sub_801A9E0(void)
@@ -205,7 +205,7 @@ void sub_801A9E0(void)
         switch (gUnknown_203B224->unk0) {
             case 0: {
                 sub_8090E14(buf1, &item, 0);
-                PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
+                PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 break;
             }
             case 1:
@@ -218,7 +218,7 @@ void sub_801A9E0(void)
                 item.flags = 1;
                 sub_8090E14(buf1, &item, &thing);
 
-                PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
+                PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 break;
             }
             case 3: {
@@ -231,10 +231,10 @@ void sub_801A9E0(void)
                 sub_8090E14(buf1, &item, &thing);
 
                 if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex))
-                    PrintStringOnWindow(8,sub_8013800(&gUnknown_203B224->unk54.s0.input,r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
+                    PrintStringOnWindow(8,GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input,r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 else {
                     strncpy(gFormatBuffer_Items[0], buf1, 80);
-                    PrintFormattedStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
             }
@@ -252,15 +252,15 @@ void sub_801A9E0(void)
 
                     if (GetStackSellPrice(&item) + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY) {
                         sprintfStatic(buf2, sFmtRed, buf1);
-                        PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf2, gUnknown_203B224->unk54.s0.unk34, 0);
+                        PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf2, gUnknown_203B224->unk54.s0.unk34, 0);
                     }
                     else
-                        PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
+                        PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 else {
                     sub_8090E14(buf1, &item, 0);
                     strncpy(gFormatBuffer_Items[0], buf1, 80);
-                    PrintFormattedStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
             }
@@ -275,17 +275,17 @@ void sub_801A9E0(void)
                 sub_8090E14(buf1, &item, &thing);
 
                 if (IsGummiItem(item.id))
-                    PrintStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
+                    PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
                 else {
                     strncpy(gFormatBuffer_Items[0], buf1, 80);
-                    PrintFormattedStringOnWindow(8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
                 }
                 break;
             }
         }
 
         if (sub_801AED0(teamItemIndex) & 1)
-            sub_8007B7C(gUnknown_203B224->unk54.s0.unk34, 8, sub_8013800(&gUnknown_203B224->unk54.s0.input, r7), (gUnknown_203B224->unk54.s0.unk38->unkC - 2) * 8, 10);
+            sub_8007B7C(gUnknown_203B224->unk54.s0.unk34, 8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), (gUnknown_203B224->unk54.s0.unk38->width - 2) * 8, 10);
     }
 
     sub_80073E0(gUnknown_203B224->unk54.s0.unk34);

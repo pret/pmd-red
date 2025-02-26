@@ -17,7 +17,7 @@ struct unkStruct_203B328
     u8 mailIndex;
     MenuStruct unk8;
     MenuStruct unk58;
-    UnkTextStruct3 unkA8;
+    Windows unkA8;
     /* 0x108 */ struct MonPortraitMsg monPortrait;
     u32 wonderMailType;
 };
@@ -48,24 +48,24 @@ const MenuItem gUnknown_80E0968[] =
     {NULL, CANCEL_ACTION}
 };
 
-const UnkTextStruct2 gUnknown_80E0990 = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E0990 = {
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
 };
-const UnkTextStruct2 gUnknown_80E09A8 = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E09A8 = {
+    0,
     0x03,
     0x13, 0x0B,
     0x08, 0x03,
     0x03, 0x00,
     NULL
 };
-const UnkTextStruct2 gUnknown_80E09C0 = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E09C0 = {
+    0,
     0x03,
     0x11, 0x0F,
     0x07, 0x03,
@@ -101,7 +101,7 @@ bool8 sub_8030F58(u32 wonderMailType)
   OpenedFile *file;
 
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+  ShowWindows(NULL, TRUE, TRUE);
   if (gUnknown_203B328 == NULL) {
     gUnknown_203B328 = MemoryAlloc(sizeof(struct unkStruct_203B328),8);
     MemoryFill8(gUnknown_203B328,0,sizeof(struct unkStruct_203B328));
@@ -184,36 +184,36 @@ static void sub_80310FC(void)
     switch(gUnknown_203B328->state)
     {
         case INIT_STATE:
-            gUnknown_203B328->unkA8.a0[1] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[2] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[3] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[1] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[2] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[3] = gUnknown_80E0990;
             break;
         case MAIN_MENU:
-            gUnknown_203B328->unkA8.a0[1] = gUnknown_80E09A8;
-            gUnknown_203B328->unkA8.a0[2] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[3] = gUnknown_80E0990;
-            sub_8012CAC(&gUnknown_203B328->unkA8.a0[1], gUnknown_80E0968);
+            gUnknown_203B328->unkA8.id[1] = gUnknown_80E09A8;
+            gUnknown_203B328->unkA8.id[2] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[3] = gUnknown_80E0990;
+            sub_8012CAC(&gUnknown_203B328->unkA8.id[1], gUnknown_80E0968);
             break;
         case DELETE_SINGLE_MAIL_STATE:
         case DELETE_ALL_MAIL_STATE:
-            gUnknown_203B328->unkA8.a0[2] = gUnknown_80E09C0;
-            sub_8012CAC(&gUnknown_203B328->unkA8.a0[2], gUnknown_80E0948);
+            gUnknown_203B328->unkA8.id[2] = gUnknown_80E09C0;
+            sub_8012CAC(&gUnknown_203B328->unkA8.id[2], gUnknown_80E0948);
             break;
         case INFO_STATE:
-            gUnknown_203B328->unkA8.a0[0] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[1] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[2] = gUnknown_80E0990;
-            gUnknown_203B328->unkA8.a0[3] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[0] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[1] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[2] = gUnknown_80E0990;
+            gUnknown_203B328->unkA8.id[3] = gUnknown_80E0990;
             break;
         case 5:
         case 6:
         default:
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             break;
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B328->unkA8, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B328->unkA8, TRUE, TRUE);
 }
 
 static void sub_8031258(void)

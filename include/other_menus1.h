@@ -18,7 +18,7 @@ typedef struct unkStruct_203B35C
     u32 unk14;
     u8 fill18[0x1C - 0x18];
     MenuStruct unk1C[4];
-    UnkTextStruct3 unk15C;
+    Windows unk15C;
     unkStruct_8035D94 unk1BC[2];
     unkStruct_203B480 unk1CC;
     unkStruct_203B480 unk1FC;

@@ -11,8 +11,8 @@ typedef struct unkStruct_203B330
     u8 unkC;
     /* 0xD */ u8 dungeonIndex;
     u32 unk10;
-    UnkTextStruct2 *unk14;
-    UnkTextStruct3 unk18;
+    Window *unk14;
+    Windows unk18;
 } unkStruct_203B330;
 
 bool8 sub_80319A4(u8, u8 dungeon, s32);

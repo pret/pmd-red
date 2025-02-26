@@ -10,13 +10,13 @@ typedef struct FriendAreaSettings
 } FriendAreaSettings;
 
 // size: 0xC
-typedef struct unkStruct_8092638
-{ 
-    /* 0x0 */ s16 numPokemon;
-    s16 unk2;
+typedef struct FriendAreaCapacity
+{
+    /* 0x0 */ s16 maxPokemon;
+    /* 0x2 */ s16 currNoPokemon;
     /* 0x4 */ bool8 hasFriendArea;
     s32 unk8;
-} unkStruct_8092638;
+} FriendAreaCapacity;
 
 extern bool8 *gFriendAreas;
 
@@ -38,7 +38,7 @@ void sub_8092404(u8, u16 *, bool8, bool8);
 void sub_809249C(u8 friendArea, bool8 clear);
 void sub_8092558(u8 *buffer, u8 index);
 void WriteFriendAreaName(u8 *buffer, u8 index, bool8 printPrice);
-void sub_8092638(u8 friendArea, unkStruct_8092638 *, bool8 checkLeader, bool8 checkDungeon);
-void sub_80926F8(u8, unkStruct_8092638 *, u8);
+void GetFriendAreaCapacity2(u8 friendArea, FriendAreaCapacity *dst, bool8 checkLeader, bool8 checkPartner);
+void GetFriendAreaCapacity(u8 areaId, FriendAreaCapacity *dst, bool8 checkPartner);
 
 #endif // GUARD_FRIEND_AREA_H

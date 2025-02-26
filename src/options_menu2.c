@@ -22,12 +22,12 @@ bool8 sub_801E198(GameOptions *optionsMenu)
     sUnknown_203B260->optionsMenu = optionsMenu;
     sub_801317C(&sUnknown_203B260->unk4);
     sUnknown_203B260->unk44 = 0;
-    sUnknown_203B260->unk48 = &sUnknown_203B260->unk4C.a0[0];
+    sUnknown_203B260->unk48 = &sUnknown_203B260->unk4C.id[0];
     RestoreUnkTextStruct_8006518(&sUnknown_203B260->unk4C);
-    sUnknown_203B260->unk4C.a0[sUnknown_203B260->unk44] = sUnknown_80DC03C;
+    sUnknown_203B260->unk4C.id[sUnknown_203B260->unk44] = sUnknown_80DC03C;
     sub_8012D08(sUnknown_203B260->unk48, 1);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B260->unk4C, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B260->unk4C, TRUE, TRUE);
     sub_8013818(&sUnknown_203B260->input, 1, 1, sUnknown_203B260->unk44);
     nullsub_38();
     CreateOptionsMenu();
@@ -83,9 +83,9 @@ u32 sub_801E218(void)
 void sub_801E2C4(void)
 {
     if (sUnknown_203B260 != NULL) {
-        sUnknown_203B260->unk4C.a0[sUnknown_203B260->unk44] = sUnknown_80DC020;
+        sUnknown_203B260->unk4C.id[sUnknown_203B260->unk44] = sUnknown_80DC020;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&sUnknown_203B260->unk4C, TRUE, TRUE);
+        ShowWindows(&sUnknown_203B260->unk4C, TRUE, TRUE);
         MemoryFree(sUnknown_203B260);
         sUnknown_203B260 = NULL;
     }
@@ -104,7 +104,7 @@ static void CreateOptionsMenu(void)
     sub_80073B8(sUnknown_203B260->unk44);
     PrintStringOnWindow(16, 0, sGameOptions,sUnknown_203B260->unk44, 0);
 
-    y = sub_8013800(&sUnknown_203B260->input, 0);
+    y = GetMenuEntryYCoord(&sUnknown_203B260->input, 0);
     PrintStringOnWindow(8, y, sUnknown_80DC064, sUnknown_203B260->unk44, 0);
 
     switch (sUnknown_203B260->optionsMenu->windowColor) {

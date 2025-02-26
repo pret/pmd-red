@@ -47,7 +47,7 @@ void WriteandExitTradeItemsMenu();
 s32 CreateTradeItemsMenu(void)
 {
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+  ShowWindows(NULL, TRUE, TRUE);
   sTradeItemsMenu = MemoryAlloc(sizeof(struct TradeItemsMenu), 8);
   MemoryFill8(sTradeItemsMenu, 0, sizeof(struct TradeItemsMenu));
   sub_8035C1C();
@@ -178,7 +178,7 @@ void sub_80365AC(void)
         sTradeItemsMenu->itemToSend.quantity = 1;
         RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+        ShowWindows(NULL, TRUE, TRUE);
         sub_801B3C0(&sTradeItemsMenu->itemToSend);
         SetTradeItemMenu(TRADE_ITEMS_ITEM_INFO);
         break;
@@ -202,7 +202,7 @@ void sub_8036674(void)
         sTradeItemsMenu->fallbackState = 0x13;
         RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+        ShowWindows(NULL, TRUE, TRUE);
         sub_801B3C0(&sTradeItemsMenu->itemToSend);
         SetTradeItemMenu(TRADE_ITEMS_ITEM_INFO);
         break;
@@ -224,7 +224,7 @@ void sub_8036728(void)
       case 3:
         sub_801B450();
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&sTradeItemsMenu->unk1E4, TRUE, TRUE);
+        ShowWindows(&sTradeItemsMenu->unk1E4, TRUE, TRUE);
         sub_801CB5C(TRUE);
         if (sTradeItemsMenu->fallbackState == 0x13) {
             sub_8035CF4(sTradeItemsMenu->unk44, 3, TRUE);
@@ -497,7 +497,7 @@ void sub_8036B28(void)
     case TRADE_ITEMS_SEND_ITEM_SELECTION:
         if (sub_801D008() == NULL) {
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             {
             DungeonPos local_10 = {3, 2};
             sub_801C8C4(0,1,&local_10,9);
@@ -626,11 +626,11 @@ void sub_8036ECC(u32 index, u32 r1)
     sTradeItemsMenu->unk14.unk1C = 0x2c;
     sTradeItemsMenu->unk14.unk20 = 0x12;
     sTradeItemsMenu->unk14.unk14 = index;
-    sTradeItemsMenu->unk14.unk18 = &sTradeItemsMenu->unk184.a0[index];
+    sTradeItemsMenu->unk14.unk18 = &sTradeItemsMenu->unk184.id[index];
     sub_8013AA0(&sTradeItemsMenu->unk14);
-    sTradeItemsMenu->unk184.a0[index] = sUnknown_80E6174;
+    sTradeItemsMenu->unk184.id[index] = sUnknown_80E6174;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sTradeItemsMenu->unk184, TRUE, TRUE);
+    ShowWindows(&sTradeItemsMenu->unk184, TRUE, TRUE);
 }
 
 void sub_8036F30(void)

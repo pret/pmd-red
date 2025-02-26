@@ -22,7 +22,7 @@ struct unkStruct_203B310
     /* 0xC */ s32 itemRewardIndex;
     unkStruct_802F204 *unk10;
     /* 0x14 */ struct MonPortraitMsg monPortrait;
-    UnkTextStruct3 unk24;
+    Windows unk24;
 };
 
 EWRAM_INIT struct unkStruct_203B310 *gUnknown_203B310 = {NULL};
@@ -41,8 +41,8 @@ enum FriendRewardStates
     REWARD_EXIT,
 };
 
-const UnkTextStruct2 gUnknown_80E041C = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E041C = {
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -112,7 +112,7 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
     struct unkStruct_203B310 *preload;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
     gUnknown_203B310 = MemoryAlloc(sizeof(struct unkStruct_203B310), 8);
     gUnknown_203B310->unk10 = r0;
     gUnknown_203B310->itemRewardIndex = 0;
@@ -183,10 +183,10 @@ void sub_802F300(void)
             RestoreUnkTextStruct_8006518(&gUnknown_203B310->unk24);
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B310->unk24.a0[index] = gUnknown_80E041C;
+                gUnknown_203B310->unk24.id[index] = gUnknown_80E041C;
             }
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_203B310->unk24, TRUE, TRUE);
+            ShowWindows(&gUnknown_203B310->unk24, TRUE, TRUE);
         default:
             break;
     }

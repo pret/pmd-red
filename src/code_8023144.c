@@ -47,18 +47,18 @@ bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
     gUnknown_3001B5C->unk4 = gUnknown_203B298;
 
     gUnknown_3001B5C->s35C.s0.unk34 = index;
-    gUnknown_3001B5C->s35C.s0.unk38 = &gUnknown_3001B5C->s35C.s0.unk3C.a0[index];
-    RestoreUnkTextStruct_8006518(&gUnknown_3001B5C->s35C.s0.unk3C);
-    gUnknown_3001B5C->s35C.s0.unk3C.a0[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC91C;
+    gUnknown_3001B5C->s35C.s0.unk38 = &gUnknown_3001B5C->s35C.s0.windows.id[index];
+    RestoreUnkTextStruct_8006518(&gUnknown_3001B5C->s35C.s0.windows);
+    gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC91C;
 
     gUnknown_3001B5C->s35C.s0.unk38->unk14 = &gUnknown_3001B5C->s35C.unk9C;
 
     if (sub != NULL)
-        gUnknown_3001B5C->s35C.s0.unk3C.a0[gUnknown_3001B5C->s35C.s0.unk34].pos = *sub;
+        gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34].pos = *sub;
 
     sub_8012D08(gUnknown_3001B5C->s35C.s0.unk38, a3);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_3001B5C->s35C.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_3001B5C->s35C.s0.input, sub_80236A4(), a3, index);
     gUnknown_3001B5C->s35C.s0.input.menuIndex = gUnknown_203B29C;
     gUnknown_3001B5C->s35C.s0.input.unk1E = gUnknown_203B29E;
@@ -112,7 +112,7 @@ s16 sub_802331C(void)
 void sub_8023354(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_3001B5C->s35C.s0.unk3C, FALSE, FALSE);
+    ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, FALSE, FALSE);
     sub_8013984(&gUnknown_3001B5C->s35C.s0.input);
     sub_8023420();
     sub_80234BC();
@@ -127,9 +127,9 @@ void sub_80233A0(void)
         gUnknown_203B298 = gUnknown_3001B5C->unk4;
         gUnknown_203B29C = gUnknown_3001B5C->s35C.s0.input.menuIndex;
         gUnknown_203B29E = gUnknown_3001B5C->s35C.s0.input.unk1E;
-        gUnknown_3001B5C->s35C.s0.unk3C.a0[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC904;
+        gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC904;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&gUnknown_3001B5C->s35C.s0.unk3C, TRUE, TRUE);
+        ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_3001B5C);
         gUnknown_3001B5C = NULL;
     }
@@ -156,7 +156,7 @@ static void sub_80234BC(void)
     s32 i;
     u8 buffer2[256];
     u8 buffer1[100];
-    unkStruct_8092638 auStack_2c;
+    FriendAreaCapacity auStack_2c;
 
     CallPrepareTextbox_8008C54(gUnknown_3001B5C->s35C.s0.unk34);
     sub_80073B8(gUnknown_3001B5C->s35C.s0.unk34);
@@ -165,9 +165,9 @@ static void sub_80234BC(void)
     sub_8012BC4((gUnknown_3001B5C->s35C.unk9C.f2 * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.unk1E + 1, 2, 7, gUnknown_3001B5C->s35C.s0.unk34);
 
     for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.unk1A; i++) {
-        y = sub_8013800(&gUnknown_3001B5C->s35C.s0.input, i);
+        y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.s0.input, i);
         species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.unk1C) + i];
-        sub_8092638(GetFriendArea(species), &auStack_2c, FALSE, FALSE);
+        GetFriendAreaCapacity2(GetFriendArea(species), &auStack_2c, FALSE, FALSE);
         color = COLOR_WHITE_2;
         if (auStack_2c.hasFriendArea)
             color = HasRecruitedMon(species) ? COLOR_CYAN : COLOR_GREEN;

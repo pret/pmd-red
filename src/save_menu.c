@@ -12,9 +12,9 @@
 
 static EWRAM_INIT SaveMenuWork *sUnknown_203B364 = {NULL};
 
-const UnkTextStruct2 gUnknown_80E6F20 =
+const Window gUnknown_80E6F20 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -22,9 +22,9 @@ const UnkTextStruct2 gUnknown_80E6F20 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E6F38 =
+const Window gUnknown_80E6F38 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x05, 0x08,
     0x15, 0x05,
@@ -130,10 +130,10 @@ void CreateSaveMenu(s32 currMenu)
     MemoryFill8(sUnknown_203B364,0,sizeof(SaveMenuWork));
   }
   for(index = 0; index < 4; index++){
-    sUnknown_203B364->unk148.a0[index] = gUnknown_80E6F20;
+    sUnknown_203B364->unk148.id[index] = gUnknown_80E6F20;
   }
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(&sUnknown_203B364->unk148, TRUE, TRUE);
+  ShowWindows(&sUnknown_203B364->unk148, TRUE, TRUE);
 
   if (currMenu == MENU_DELETE_SAVE) {
       // Beware, Deleting your Adventure
@@ -154,7 +154,7 @@ void CreateSaveMenu(s32 currMenu)
 void CleanSaveMenu(void)
 {
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+  ShowWindows(NULL, TRUE, TRUE);
   if (sUnknown_203B364 != NULL) {
     MemoryFree(sUnknown_203B364);
     sUnknown_203B364 = NULL;

@@ -1,13 +1,13 @@
-static const UnkTextStruct2 sUnknown_80E653C = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E653C = {
+    0,
     3,
     0, 0,
     0, 0,
     0, 0,
     NULL
 };
-static const UnkTextStruct2 sUnknown_80E6554 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6554 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -50,8 +50,8 @@ static const MenuItem sUnknown_80E667C[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E66BC = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E66BC = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -66,8 +66,8 @@ static const MenuItem sUnknown_80E66D4[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6748 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6748 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -82,8 +82,8 @@ static const MenuItem sUnknown_80E6760[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E67D4 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E67D4 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -98,8 +98,8 @@ static const MenuItem sUnknown_80E67EC[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6830 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6830 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -114,8 +114,8 @@ static const MenuItem sUnknown_80E6848[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E689C = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E689C = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -130,8 +130,8 @@ static const MenuItem sUnknown_80E68B4[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6938 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6938 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -146,8 +146,8 @@ static const MenuItem sUnknown_80E6950[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E69B0 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E69B0 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -162,8 +162,8 @@ static const MenuItem sUnknown_80E69C8[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6A10 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6A10 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -178,8 +178,8 @@ static const MenuItem sUnknown_80E6A28[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6A74 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6A74 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -194,8 +194,8 @@ static const MenuItem sUnknown_80E6A8C[] = {
     {NULL, 3},
 };
 
-UNUSED static const UnkTextStruct2 sUnknown_80E6AEC = {
-    0, 0, 0, 0,
+UNUSED static const Window sUnknown_80E6AEC = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -210,8 +210,8 @@ UNUSED static const MenuItem sUnknown_80E6B04[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6B78 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6B78 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -226,8 +226,8 @@ static const MenuItem sUnknown_80E6B90[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6BF4 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6BF4 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -242,8 +242,8 @@ static const MenuItem sUnknown_80E6C0C[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6C50 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6C50 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -258,8 +258,8 @@ static const MenuItem sUnknown_80E6C68[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6CD0 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6CD0 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -274,8 +274,8 @@ static const MenuItem sUnknown_80E6CE8[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6D54 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6D54 = {
+    0,
     3,
     3, 8,
     24, 5,
@@ -290,8 +290,8 @@ static const MenuItem sUnknown_80E6D6C[] = {
     {NULL, 3},
 };
 
-static const UnkTextStruct2 sUnknown_80E6DDC = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E6DDC = {
+    0,
     3,
     3, 8,
     24, 5,

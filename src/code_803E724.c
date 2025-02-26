@@ -44,10 +44,10 @@ extern MenuInputStruct gUnknown_202EE10;
 extern SpriteOAM gUnknown_202EDDC;
 
 extern const RGB gUnknown_80F62AC;
-extern const struct UnkTextStruct3 gUnknown_80F62B0;
-extern const struct UnkTextStruct3 gUnknown_80F6310;
-extern const struct UnkTextStruct3 gUnknown_80F6370;
-extern const struct UnkTextStruct3 gUnknown_80F63D0;
+extern const struct Windows gUnknown_80F62B0;
+extern const struct Windows gUnknown_80F6310;
+extern const struct Windows gUnknown_80F6370;
+extern const struct Windows gUnknown_80F63D0;
 extern const u32 gUnknown_80F6490[];
 extern const s32 gUnknown_80F64B4[];
 extern const s32 gUnknown_80F64FC[];
@@ -188,18 +188,18 @@ void sub_803EAF0(u32 a0, u8 *a1)
             }
             ResetUnusedInputStruct();
             sub_803EC94();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             break;
         case 0:
             sub_803EC94();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             if (gUnknown_203B40C != 0) {
                 sub_8040A84();
                 sub_8040ABC(0);
             }
             break;
         case 3:
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_80F62B0, TRUE, TRUE);
+            ShowWindows(&gUnknown_80F62B0, TRUE, TRUE);
             if (gUnknown_203B40C != 0) {
                 sub_8040ABC(1);
             }
@@ -209,14 +209,14 @@ void sub_803EAF0(u32 a0, u8 *a1)
                 sub_8052210(0);
             }
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_80F6310, TRUE, TRUE);
+            ShowWindows(&gUnknown_80F6310, TRUE, TRUE);
             break;
         case 7:
             if (gUnknown_203B40C != 0) {
                 sub_8052210(0);
             }
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_80F6370, TRUE, TRUE);
+            ShowWindows(&gUnknown_80F6370, TRUE, TRUE);
             break;
         case 2:
         case 4:
@@ -225,13 +225,13 @@ void sub_803EAF0(u32 a0, u8 *a1)
             }
             ResetUnusedInputStruct();
             sub_803EC94();
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             break;
         case 5:
             if (gUnknown_203B40C != 0) {
                 sub_8052210(0);
             }
-            xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+            ShowWindows(NULL, TRUE, TRUE);
             break;
         case 8:
             if (gUnknown_203B40C != 0) {
@@ -246,7 +246,7 @@ void sub_803EAF0(u32 a0, u8 *a1)
                 sub_8083D44();
             }
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_80F63D0, FALSE, TRUE);
+            ShowWindows(&gUnknown_80F63D0, FALSE, TRUE);
             break;
         case 10:
             sub_8083D44();
@@ -268,12 +268,12 @@ void sub_803EC94(void)
     sub_801317C(&gUnknown_202EE10.unk28);
 }
 
-void sub_803ECB4(UnkTextStruct3 *a0, bool8 a1)
+void sub_803ECB4(Windows *a0, bool8 a1)
 {
     gUnknown_202EDD0 = 10;
     sub_8052210(0);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(a0, TRUE, a1);
+    ShowWindows(a0, TRUE, a1);
 }
 
 void sub_803ECE0(void)

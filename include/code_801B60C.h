@@ -20,7 +20,7 @@ typedef struct unkStruct_203B234
     MenuStruct unk78;
     /* 0xC8 */ u32 menuAction;
     MenuItem unkCC[5];
-    UnkTextStruct3 unkF4;
+    Windows windows;
 } unkStruct_203B234;
 
 bool8 sub_801B60C(u32, u8 id, u8 quantity);

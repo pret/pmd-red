@@ -13,8 +13,8 @@
 
 EWRAM_INIT unkStruct_203B270 *gUnknown_203B270 = {NULL};
 
-const UnkTextStruct2 gUnknown_80DC240 = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80DC240 = {
+    0x00,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -22,10 +22,10 @@ const UnkTextStruct2 gUnknown_80DC240 = {
     NULL
 };
 
-const UnkTextStruct2_sub2 gUnkData_80DC258 = {0x01, 0x00, 0x0F, 0x00};
+const WindowHeader gUnkData_80DC258 = {0x01, 0x00, 0x0F, 0x00};
 
-const UnkTextStruct2 gUnknown_80DC25C = {
-    0, 0, 0, 0,
+const Window gUnknown_80DC25C = {
+    0,
     6,
     0x2, 0x2,
     0x12, 0x8,
@@ -33,8 +33,8 @@ const UnkTextStruct2 gUnknown_80DC25C = {
     &gUnkData_80DC258
 };
 
-const UnkTextStruct2 gUnknown_80DC274 = {
-    0, 0, 0, 0,
+const Window gUnknown_80DC274 = {
+    0,
     3,
     0x2, 0xF,
     0x1A, 0x3,
@@ -84,16 +84,16 @@ u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *tex
     if (iVar8 < four) {
         iVar8 = 4;
     }
-    RestoreUnkTextStruct_8006518(&gUnknown_203B270->unk58);
+    RestoreUnkTextStruct_8006518(&gUnknown_203B270->windows);
     gUnknown_203B270->unk50 = param_6;
-    gUnknown_203B270->unk58.a0[param_6] = gUnknown_80DC25C;
+    gUnknown_203B270->windows.id[param_6] = gUnknown_80DC25C;
     if (gUnknown_203B270->text != NULL) {
         gUnknown_203B270->unk54 = sub_8006544(param_6);
-        gUnknown_203B270->unk58.a0[gUnknown_203B270->unk54] = gUnknown_80DC274;
+        gUnknown_203B270->windows.id[gUnknown_203B270->unk54] = gUnknown_80DC274;
     }
-    sub_8012D08(&gUnknown_203B270->unk58.a0[gUnknown_203B270->unk50],iVar8);
+    sub_8012D08(&gUnknown_203B270->windows.id[gUnknown_203B270->unk50],iVar8);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B270->unk58, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B270->windows, TRUE, TRUE);
     sub_8013818(&gUnknown_203B270->input,iVar5,iVar5,param_6);
     sub_8013780(&gUnknown_203B270->input,0);
     sub_801F280(TRUE);
@@ -250,7 +250,7 @@ void sub_801F1B0(bool8 param_1, bool8 param_2)
     if(!gUnknown_203B270->unk4)
         gUnknown_203B270->unk4 = param_2;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B270->unk58, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B270->windows, TRUE, TRUE);
     gUnknown_203B270->input.unk22 = sub_801F3F8();
     sub_8013984(&gUnknown_203B270->input);
     gUnknown_203B270->input.menuIndex = sub_8092F4C(gUnknown_203B270->moves, gUnknown_203B270->input.menuIndex);
@@ -263,13 +263,13 @@ void sub_801F214(void)
 {
     if(gUnknown_203B270)
     {
-        gUnknown_203B270->unk58.a0[gUnknown_203B270->unk50] = gUnknown_80DC240;
+        gUnknown_203B270->windows.id[gUnknown_203B270->unk50] = gUnknown_80DC240;
         if(gUnknown_203B270->text)
         {
-            gUnknown_203B270->unk58.a0[gUnknown_203B270->unk54] = gUnknown_80DC240;
+            gUnknown_203B270->windows.id[gUnknown_203B270->unk54] = gUnknown_80DC240;
         }
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&gUnknown_203B270->unk58, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B270->windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B270);
         gUnknown_203B270 = NULL;
     }
@@ -316,7 +316,7 @@ void sub_801F280(bool8 param_1)
             }
 
             sub_80928A0(gFormatBuffer_Items[0],move,&uStack_30);
-            y = sub_8013800(&gUnknown_203B270->input,i);
+            y = GetMenuEntryYCoord(&gUnknown_203B270->input,i);
             linkChain = MoveFlagLinkChain(move);
             x = !linkChain ? 0x8 : 0xD;
             if (!linkChain && i != 0) {

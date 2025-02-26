@@ -33,12 +33,12 @@ void CreatePartnerSelectionMenu(s16 starterID)
     sub_803CEAC();
     gUnknown_203B404->StarterID = starterID_s32;
     gUnknown_203B404->s18.s0.unk34 = 0;
-    gUnknown_203B404->s18.s0.unk38 = &gUnknown_203B404->s18.s0.unk3C.a0[0];
+    gUnknown_203B404->s18.s0.unk38 = &gUnknown_203B404->s18.s0.windows.id[0];
 
-    gUnknown_203B404->s18.s0.unk3C.a0[0] = gUnknown_80F4290;
-    gUnknown_203B404->s18.s0.unk3C.a0[1] = gUnknown_80F42A8;
-    gUnknown_203B404->s18.s0.unk3C.a0[2] = gUnknown_80F4278;
-    gUnknown_203B404->s18.s0.unk3C.a0[3] = gUnknown_80F4278;
+    gUnknown_203B404->s18.s0.windows.id[0] = gUnknown_80F4290;
+    gUnknown_203B404->s18.s0.windows.id[1] = gUnknown_80F42A8;
+    gUnknown_203B404->s18.s0.windows.id[2] = gUnknown_80F4278;
+    gUnknown_203B404->s18.s0.windows.id[3] = gUnknown_80F4278;
 
     gUnknown_203B404->s18.s0.unk38->unk14 = &gUnknown_203B404->s18.unk9C;
 
@@ -47,7 +47,7 @@ void CreatePartnerSelectionMenu(s16 starterID)
     gUnknown_203B404->s18.unk9C.f2 = 6;
     gUnknown_203B404->s18.unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B404->s18.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B404->s18.s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_203B404->s18.s0.input, GetValidPartners(), 10, gUnknown_203B404->s18.s0.unk34);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
@@ -90,9 +90,9 @@ UNUSED static void sub_803CE34(bool8 cursorSprite)
 
 void sub_803CE6C(void)
 {
-    gUnknown_203B404->s18.s0.unk3C.a0[gUnknown_203B404->s18.s0.unk34] = gUnknown_80F4278;
+    gUnknown_203B404->s18.s0.windows.id[gUnknown_203B404->s18.s0.unk34] = gUnknown_80F4278;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B404->s18.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B404->s18.s0.windows, TRUE, TRUE);
     sub_803CECC();
 }
 
@@ -129,7 +129,7 @@ static void RedrawPartnerSelectionMenu(void)
 
     monCounter = 0;
     while (monCounter < gUnknown_203B404->s18.s0.input.unk1A) {
-        yCoord = sub_8013800(&gUnknown_203B404->s18.s0.input, monCounter);
+        yCoord = GetMenuEntryYCoord(&gUnknown_203B404->s18.s0.input, monCounter);
         monName = GetMonSpecies(gUnknown_203B404->PartnerArray[monCounter]);
         PrintStringOnWindow(8, yCoord, monName, gUnknown_203B404->s18.s0.unk34, 0);
         monCounter++;

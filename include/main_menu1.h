@@ -38,12 +38,12 @@ void CleanUpMenu(void);
 void DeleteMainMenu(void);
 MainMenu1Work *GetMainMenu(void);
 void InitMainMenu(void);
-void SetMenuItems(MenuStruct *, UnkTextStruct3 *, s32 index, const UnkTextStruct2 *, const MenuItem *menuItems, bool8, u32 menuAction, bool8 unused);
+void SetMenuItems(MenuStruct *, Windows *, s32 index, const Window *, const MenuItem *menuItems, bool8, u32 menuAction, bool8 unused);
 void SetUpMenu(void);
 s32 UpdateMenu(void);
 
 void sub_8035C1C(void);
-void sub_8035CC0(UnkTextStruct3 *dataArray, u32 index);
+void sub_8035CC0(Windows *dataArray, u32 index);
 void sub_8035CF4(MenuStruct *menu, u32 index, bool8);
 void sub_8035D1C(void);
 s16 sub_8035D3C(void);

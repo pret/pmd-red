@@ -17,7 +17,7 @@ typedef struct unkStruct_203B230
     u8 fill18[0x20 - 0x18];
     u32 unk20;
     u32 unk24;
-    UnkTextStruct3 unk28;
+    Windows unk28;
     MenuInputStructSub unk88;
 } unkStruct_203B230;
 

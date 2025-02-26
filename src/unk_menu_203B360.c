@@ -15,15 +15,15 @@ typedef struct unkStruct_203B360
     /* 0x0 */ u32 currMenu;
     u32 unk4; // state
     MenuStruct unk8[4];
-    UnkTextStruct3 unk148;
+    Windows unk148;
     SpriteOAM unk1A8;
     u32 unk1B0; // sprite count?
 } unkStruct_203B360;
 
 static EWRAM_INIT unkStruct_203B360 *sUnknown_203B360 = {NULL};
 
-const UnkTextStruct2 gUnknown_80E6E7C = {
-   0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E6E7C = {
+   0,
    0x03,
    0x00, 0x00,
    0x00, 0x00,
@@ -31,8 +31,8 @@ const UnkTextStruct2 gUnknown_80E6E7C = {
    NULL
 };
 
-const UnkTextStruct2 gUnknown_80E6E94 = {
-   0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E6E94 = {
+   0,
    0x03,
    0x05, 0x09,
    0x13, 0x05,
@@ -68,10 +68,10 @@ void sub_80382E4(s32 currMenu)
     MemoryFill8(sUnknown_203B360, 0, sizeof(unkStruct_203B360));
   }
   for(index = 0; index < 4; index++){
-    sUnknown_203B360->unk148.a0[index] = gUnknown_80E6E7C;
+    sUnknown_203B360->unk148.id[index] = gUnknown_80E6E7C;
   }
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(&sUnknown_203B360->unk148, TRUE, TRUE);
+  ShowWindows(&sUnknown_203B360->unk148, TRUE, TRUE);
   if (currMenu == 0x25) {
       // Caution!
       // The storage space is empty!
@@ -88,7 +88,7 @@ void sub_80382E4(s32 currMenu)
 void sub_80383A8(void)
 {
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+  ShowWindows(NULL, TRUE, TRUE);
   if (sUnknown_203B360 != 0) {
     MemoryFree(sUnknown_203B360);
     sUnknown_203B360 = 0;

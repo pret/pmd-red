@@ -32,28 +32,6 @@ extern const s16 gUnknown_80B83EA[16 * 10];
 static void sub_800561C(struct axMapSprite *, s32, s32, const RGB *);
 const RGB *sub_8005674(struct axMapSprite *, s32);
 
-void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, unkStruct_2039DB0 *spriteMasks)
-{
-    if (!(a0->axdata.flags >> 15))
-        return;
-
-    if (a0->axdata.sub1.poseId < 0)
-        RunAxAnimationFrame(a0);
-
-    if (!(a0->axdata.flags >> 15))
-        return;
-
-    a0->axdata.sub1.pos.x = a0->axdata.sub1.offset.x + spriteX;
-    a0->axdata.sub1.pos.y = a0->axdata.sub1.offset.y + spriteY;
-    a0->axdata.sub1.paletteNum = paletteNum;
-    a0->axdata.sub1.unk16 = a3;
-    sub_800533C(a0->axdata.poseData, a0->axdata.spriteData, &a0->axdata.sub1, spriteMasks, !!(a0->axdata.sub1.lastPoseId ^ a0->axdata.sub1.poseId));
-    a0->axdata.sub1.lastPoseId = a0->axdata.sub1.poseId;
-
-    if (a0->axdata.flags & 0x800)
-        a0->axdata.flags &= 0xF7FF;
-}
-
 void sub_8005610(OpenedFile *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
 {
     sub_800561C((struct axMapSprite *)a0->data, vramIdx, brightness, ramp);

@@ -87,20 +87,20 @@ static void sub_803ACE8(void)
     switch (sUnknown_203B3F8->state) {
         case 3:
             sub_803AEB0();
-            sUnknown_203B3F8->unkE0.a0[2] = sUnknown_80E7EEC;
-            sub_8012CAC(&sUnknown_203B3F8->unkE0.a0[2], sUnknown_203B3F8->unk90);
+            sUnknown_203B3F8->unkE0.id[2] = sUnknown_80E7EEC;
+            sub_8012CAC(&sUnknown_203B3F8->unkE0.id[2], sUnknown_203B3F8->unk90);
             break;
         case 5:
-            sUnknown_203B3F8->unkE0.a0[3] = sUnknown_80E7F04;
+            sUnknown_203B3F8->unkE0.id[3] = sUnknown_80E7F04;
             break;
         default:
             for (i = 0; i < 4; i++)
-                sUnknown_203B3F8->unkE0.a0[i] = sUnknown_80E7ED4;
+                sUnknown_203B3F8->unkE0.id[i] = sUnknown_80E7ED4;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B3F8->unkE0, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B3F8->unkE0, TRUE, TRUE);
 }
 
 static void sub_803AD88(void)
@@ -122,7 +122,7 @@ static void sub_803AD88(void)
             sUnknown_203B3F8->unk60.unkC = 100;
             sUnknown_203B3F8->unk60.unk4 = sUnknown_203B3F8->pokemon->level;
             sUnknown_203B3F8->unk60.unk14 = 3;
-            sUnknown_203B3F8->unk60.unk18 = &sUnknown_203B3F8->unkE0.a0[3];
+            sUnknown_203B3F8->unk60.unk18 = &sUnknown_203B3F8->unkE0.id[3];
             sUnknown_203B3F8->unk60.unk1C = 44;
             sUnknown_203B3F8->unk60.unk20 = 18;
             sub_8013AA0(&sUnknown_203B3F8->unk60);

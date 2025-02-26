@@ -291,12 +291,12 @@ void sub_8035C1C(void)
     sMainMenu->sub.unk2D = 0;
 }
 
-void SetMenuItems(MenuStruct *a0, UnkTextStruct3 *a1, s32 index, const UnkTextStruct2 *a3, const MenuItem *menuItems, bool8 a5, u32 menuAction, bool8 unused)
+void SetMenuItems(MenuStruct *a0, Windows *a1, s32 index, const Window *a3, const MenuItem *menuItems, bool8 a5, u32 menuAction, bool8 unused)
 {
-    UnkTextStruct2 *txtPtrs = a1->a0;
-    txtPtrs[index] = *a3;
+    Window *winPtrs = a1->id;
+    winPtrs[index] = *a3;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(a1, TRUE, TRUE);
+    ShowWindows(a1, TRUE, TRUE);
 
     if (a5)
         sub_8012D60(&a0[index], menuItems, 0, 0, menuAction, index);
@@ -306,15 +306,15 @@ void SetMenuItems(MenuStruct *a0, UnkTextStruct3 *a1, s32 index, const UnkTextSt
     a0[index].unk4C = TRUE;
 }
 
-void sub_8035CC0(UnkTextStruct3 *dataArray, u32 index)
+void sub_8035CC0(Windows *dataArray, u32 index)
 {
-    UnkTextStruct2 *txtPtrs;
+    Window *winPtrs;
 
     RestoreUnkTextStruct_8006518(dataArray);
-    txtPtrs = dataArray->a0;
-    txtPtrs[index] = sUnknown_80E59A8;
+    winPtrs = dataArray->id;
+    winPtrs[index] = sUnknown_80E59A8;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(dataArray, TRUE, TRUE);
+    ShowWindows(dataArray, TRUE, TRUE);
 }
 
 void sub_8035CF4(MenuStruct *menu, u32 index, bool8 a2)

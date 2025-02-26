@@ -26,9 +26,9 @@ bool8 sub_8024458(s16 speciesNum, s32 a1)
     sUnknown_203B2AC = MemoryAlloc(sizeof(struct unkStruct_203B2AC), 8);
     sUnknown_203B2AC->speciesNum = speciesNum_s32;
     sUnknown_203B2AC->unkE0 = a1;
-    sUnknown_203B2AC->unkE4 = &sUnknown_203B2AC->unkE8.a0[a1];
+    sUnknown_203B2AC->unkE4 = &sUnknown_203B2AC->unkE8.id[a1];
     RestoreUnkTextStruct_8006518(&sUnknown_203B2AC->unkE8);
-    sUnknown_203B2AC->unkE8.a0[sUnknown_203B2AC->unkE0] = sUnknown_80DC9C8;
+    sUnknown_203B2AC->unkE8.id[sUnknown_203B2AC->unkE0] = sUnknown_80DC9C8;
     sUnknown_203B2AC->unkE4->unk14 = &sUnknown_203B2AC->unk148;
     sUnknown_203B2AC->unk148.f2 = 10;
     sub_8024604();
@@ -64,9 +64,9 @@ void sub_802452C(void)
 void sub_802453C(void)
 {
     if (sUnknown_203B2AC != NULL) {
-        sUnknown_203B2AC->unkE8.a0[sUnknown_203B2AC->unkE0] = sUnknown_80DC9B0;
+        sUnknown_203B2AC->unkE8.id[sUnknown_203B2AC->unkE0] = sUnknown_80DC9B0;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2AC->unkE8, TRUE, TRUE);
+        ShowWindows(&sUnknown_203B2AC->unkE8, TRUE, TRUE);
         MemoryFree(sUnknown_203B2AC);
         sUnknown_203B2AC = NULL;
     }
@@ -78,7 +78,7 @@ static void sub_8024588(void)
     sUnknown_203B2AC->unk148.f1 = sUnknown_203B2AC->input.unk1E;
     sUnknown_203B2AC->unk148.f3 = 0;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B2AC->unkE8, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B2AC->unkE8, TRUE, TRUE);
 }
 
 static void sub_80245D0(void)

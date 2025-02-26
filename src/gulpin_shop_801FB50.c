@@ -78,7 +78,7 @@ bool8 sub_801FB50(u32 mode)
     OpenedFile *faceFile;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
     gUnknown_203B27C = MemoryAlloc(sizeof(unkStruct_203B27C), 0x8);
     gUnknown_203B27C->menuAction2 = 0;
     gUnknown_203B27C->menuAction3 = 0;
@@ -198,41 +198,41 @@ static void sub_801FDC0(void)
 
     switch (gUnknown_203B27C->state) {
         case 0x2:
-            gUnknown_203B27C->unk180.a0[0].unk0 = 0x80;
-            gUnknown_203B27C->unk180.a0[1].unk0 = 0x80;
-            gUnknown_203B27C->unk180.a0[2].unk0 = 0x80;
-            gUnknown_203B27C->unk180.a0[3] = gUnknown_80DC37C;
+            gUnknown_203B27C->unk180.id[0].unk0 = 0x80;
+            gUnknown_203B27C->unk180.id[1].unk0 = 0x80;
+            gUnknown_203B27C->unk180.id[2].unk0 = 0x80;
+            gUnknown_203B27C->unk180.id[3] = gUnknown_80DC37C;
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_203B27C->unk180, TRUE, FALSE);
+            ShowWindows(&gUnknown_203B27C->unk180, TRUE, FALSE);
             break;
         case 0x11:
             sub_80205D0();
-            gUnknown_203B27C->unk180.a0[2] = gUnknown_80DC334;
-            sub_8012CAC(&gUnknown_203B27C->unk180.a0[2], gUnknown_203B27C->unk7C);
+            gUnknown_203B27C->unk180.id[2] = gUnknown_80DC334;
+            sub_8012CAC(&gUnknown_203B27C->unk180.id[2], gUnknown_203B27C->unk7C);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_203B27C->unk180, TRUE, TRUE);
+            ShowWindows(&gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
         case 0x17:
             sub_802069C();
-            gUnknown_203B27C->unk180.a0[2] = gUnknown_80DC334;
-            sub_8012CAC(&gUnknown_203B27C->unk180.a0[2], gUnknown_203B27C->unk7C);
+            gUnknown_203B27C->unk180.id[2] = gUnknown_80DC334;
+            sub_8012CAC(&gUnknown_203B27C->unk180.id[2], gUnknown_203B27C->unk7C);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_203B27C->unk180, TRUE, TRUE);
+            ShowWindows(&gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
         case 0x20:
             CreateGulpinLinkMenu();
-            gUnknown_203B27C->unk180.a0[1] = gUnknown_80DC31C;
-            gUnknown_203B27C->unk180.a0[2] = gUnknown_80DC34C;
-            sub_8012CAC(&gUnknown_203B27C->unk180.a0[2], gUnknown_203B27C->unk7C);
+            gUnknown_203B27C->unk180.id[1] = gUnknown_80DC31C;
+            gUnknown_203B27C->unk180.id[2] = gUnknown_80DC34C;
+            sub_8012CAC(&gUnknown_203B27C->unk180.id[2], gUnknown_203B27C->unk7C);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_203B27C->unk180, TRUE, TRUE);
+            ShowWindows(&gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
         default:
             for (index = 0; index < 4; index++)
-                gUnknown_203B27C->unk180.a0[index] = gUnknown_80DC31C;
+                gUnknown_203B27C->unk180.id[index] = gUnknown_80DC31C;
 
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(&gUnknown_203B27C->unk180, TRUE, TRUE);
+            ShowWindows(&gUnknown_203B27C->unk180, TRUE, TRUE);
             break;
     }
 }

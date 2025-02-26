@@ -16,14 +16,14 @@ struct unkStruct_203B1F8
     // size: 0x4B4
     u32 menuAction;
     MenuStruct unk4;
-    UnkTextStruct3 unk54;
+    Windows windows;
     u8 buffer[0x400];
 };
 
 EWRAM_INIT struct unkStruct_203B1F8 *gUnknown_203B1F8 = {NULL};
 
-const UnkTextStruct2 gUnknown_80DAF70 = {
-   0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80DAF70 = {
+   0x00,
    0x03,
    0x00, 0x00,
    0x00, 0x00,
@@ -31,8 +31,8 @@ const UnkTextStruct2 gUnknown_80DAF70 = {
    NULL
 };
 
-const UnkTextStruct2 gUnknown_80DAF88 = {
-   0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80DAF88 = {
+   0x00,
    0x03,
    0x02, 0x02,
    0x1A, 0x0c,
@@ -40,8 +40,8 @@ const UnkTextStruct2 gUnknown_80DAF88 = {
    NULL
 };
 
-const UnkTextStruct2 gUnknown_80DAFA0 = {
-   0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80DAFA0 = {
+   0x00,
    0x03,
    0x16, 0x0F,
    0x06, 0x03,
@@ -251,8 +251,8 @@ static const u8 *const gUnknown_80DB4F4[] =
     _("END"),
 };
 
-static const UnkTextStruct2 gUnknown_80DB538 = {
-   0x00, 0x00, 0x00, 0x00,
+static const Window gUnknown_80DB538 = {
+   0x00,
    0x03,
    0x00, 0x00,
    0x00, 0x00,
@@ -260,8 +260,8 @@ static const UnkTextStruct2 gUnknown_80DB538 = {
    NULL
 };
 
-static const UnkTextStruct2 gUnknown_80DB550 = {
-   0x00, 0x00, 0x00, 0x00,
+static const Window gUnknown_80DB550 = {
+   0x00,
    0x01,
    0x01, 0x0A,
    0x1C, 0x09,
@@ -269,8 +269,8 @@ static const UnkTextStruct2 gUnknown_80DB550 = {
    NULL
 };
 
-static const UnkTextStruct2 gUnknown_80DB568 = {
-   0x00, 0x00, 0x00, 0x00,
+static const Window gUnknown_80DB568 = {
+   0x00,
    0x01,
    0x04, 0x03,
    0x16, 0x05,
@@ -278,8 +278,8 @@ static const UnkTextStruct2 gUnknown_80DB568 = {
    NULL
 };
 
-static const UnkTextStruct2 gUnknown_80DB580 = {
-   0x00, 0x00, 0x00, 0x00,
+static const Window gUnknown_80DB580 = {
+   0x00,
    0x01,
    0x01, 0x02,
    0x1C, 0x07,
@@ -296,14 +296,14 @@ bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems)
 
     for(index = 0; index < 4; index++)
     {
-        gUnknown_203B1F8->unk54.a0[index] = gUnknown_80DAF70;
+        gUnknown_203B1F8->windows.id[index] = gUnknown_80DAF70;
     }
 
-    gUnknown_203B1F8->unk54.a0[0] = gUnknown_80DAF88;
-    gUnknown_203B1F8->unk54.a0[2] = gUnknown_80DAFA0;
-    sub_8012CAC(&gUnknown_203B1F8->unk54.a0[2], menuItems);
+    gUnknown_203B1F8->windows.id[0] = gUnknown_80DAF88;
+    gUnknown_203B1F8->windows.id[2] = gUnknown_80DAFA0;
+    sub_8012CAC(&gUnknown_203B1F8->windows.id[2], menuItems);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B1F8->unk54, 1, 1);
+    ShowWindows(&gUnknown_203B1F8->windows, 1, 1);
     sub_80073B8(0);
     FormatString(buffer, gUnknown_203B1F8->buffer, gUnknown_203B1F8->buffer + 0x400, 0);
     PrintStringOnWindow(4, 4, gUnknown_203B1F8->buffer, 0, 0);
@@ -356,7 +356,7 @@ struct unkStruct_203B1FC
     u8 *unkF8;
     u8 unkFC[56];
     u8 *unk134;
-    UnkTextStruct3 unk138;
+    Windows windows;
 };
 extern struct unkStruct_203B1FC *gUnknown_203B1FC;
 
@@ -471,19 +471,19 @@ u32 sub_80151C0(u32 r0, u8 *buffer)
     gUnknown_203B1FC->unk17 = 0;
 
     for (index = 0; index < 4; index++) {
-        gUnknown_203B1FC->unk138.a0[index] = gUnknown_80DB538;
+        gUnknown_203B1FC->windows.id[index] = gUnknown_80DB538;
     }
 
     if(gUnknown_203B1FC->unk4 != 0) {
-        gUnknown_203B1FC->unk138.a0[1] = gUnknown_80DB580;
+        gUnknown_203B1FC->windows.id[1] = gUnknown_80DB580;
     }
     else {
-        gUnknown_203B1FC->unk138.a0[1] = gUnknown_80DB568;
+        gUnknown_203B1FC->windows.id[1] = gUnknown_80DB568;
     }
-    gUnknown_203B1FC->unk138.a0[0] = gUnknown_80DB550;
+    gUnknown_203B1FC->windows.id[0] = gUnknown_80DB550;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&gUnknown_203B1FC->unk138, 1, 1);
+    ShowWindows(&gUnknown_203B1FC->windows, 1, 1);
 
     sub_8015A08(1);
     sub_8015C1C();

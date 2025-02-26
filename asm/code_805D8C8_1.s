@@ -526,7 +526,7 @@ _08068D1C:
 	add r1, sp, 0x214
 	movs r2, 0
 	movs r3, 0
-	bl sub_8092638
+	bl GetFriendAreaCapacity2
 	movs r7, 0
 	add r1, sp, 0x1F0
 	ldrh r0, [r1]

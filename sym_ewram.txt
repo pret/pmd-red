@@ -55,11 +55,7 @@ gUnknown_202DBB8: /* 202DBB8 (sub_800D6AC / data_80B9BB8) */
 gUnknown_202DCF8: /* 202DCF8 (sub_80001E8 - sub_800D9B8) */
 	.space 0x120
 
-gUnknown_202DE18: /* 202DE18 (sub_800F990 - sub_8010014) */
-	.space 0x1
-gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
-	.space 0x3
-
+    .include "src/friend_areas_map.o"
     .include "src/code_80118A4.o"
     .space 0x2
 

@@ -16,36 +16,36 @@
 
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
-const UnkTextStruct2_sub2 UnkData_80D47C4 = {0x01, 0x00, 0x10, 0x00};
+const WindowHeader UnkData_80D47C4 = {0x01, 0x00, 0x10, 0x00};
 
-const UnkTextStruct2 gUnknown_80D47C8[4] = {
-        0x00, 0x00, 0x00, 0x00,
-        0x06,
-        0x02, 0x02,
-        0x1a, 0x0c,
-        0x0c, 0x00,
-        &UnkData_80D47C4,
+const Window gUnknown_80D47C8[MAX_WINDOWS] = {
+    0,
+    0x06,
+    0x02, 0x02,
+    0x1a, 0x0c,
+    0x0c, 0x00,
+    &UnkData_80D47C4,
 
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x00, 0x00,
-        0x00, 0x00,
-        0x00, 0x00,
-        NULL,
+    0,
+    0x03,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL,
 
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x00, 0x00,
-        0x00, 0x00,
-        0x00, 0x00,
-        NULL,
+    0,
+    0x03,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL,
 
-        0x00, 0x00, 0x00, 0x00,
-        0x03,
-        0x00, 0x00,
-        0x00, 0x00,
-        0x00, 0x00,
-        NULL,
+    0,
+    0x03,
+    0x00, 0x00,
+    0x00, 0x00,
+    0x00, 0x00,
+    NULL,
 };
 
 ALIGNED(4) const u8 gUnknown_80D4828[] = _("{COLOR}%c%s");
@@ -223,7 +223,7 @@ void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
     xxx_call_draw_char(x + add_x, y, uVar2, color, a4);
 }
 
-void sub_8012CAC(UnkTextStruct2 *a0, const MenuItem *a1)
+void sub_8012CAC(Window *a0, const MenuItem *a1)
 {
     s32 length;
     s32 maxLength;
@@ -240,35 +240,35 @@ void sub_8012CAC(UnkTextStruct2 *a0, const MenuItem *a1)
         }
   }
 
-    a0->unkC = (maxLength / 8) + 2;
+    a0->width = (maxLength / 8) + 2;
     sub_8012D08(a0, count);
 }
 
-void sub_8012D08(UnkTextStruct2 *param_1, s32 param_2)
+void sub_8012D08(Window *param_1, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
 
     sVar2 = (s16) sub_80095E4(param_2, 12);
-    if (param_1->unk4 == 6)
+    if (param_1->type == WINDOW_TYPE_WITH_HEADER)
         sVar2 = (s16)(sVar2 + 2);
 
     sVar3 = sVar2;
-    param_1->unkE = sVar3;
+    param_1->height = sVar3;
     param_1->unk10 = sVar3;
 }
 
-void sub_8012D34(struct UnkTextStruct2 *param_1, s32 param_2)
+void sub_8012D34(struct Window *param_1, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
 
     sVar2 = (s16) sub_8009614(param_2, 24);
-    if (param_1->unk4 == 6)
+    if (param_1->type == WINDOW_TYPE_WITH_HEADER)
         sVar2 = (s16)(sVar2 + 2);
 
     sVar3 = sVar2;
-    param_1->unkE = sVar3;
+    param_1->height = sVar3;
     param_1->unk10 = sVar3;
 
 }
@@ -386,10 +386,10 @@ void sub_8012EBC(MenuStruct *param_1)
     const u32 *colorArray;
     s32 counter;
     s32 index;
-    UnkTextStruct3 textStack;
+    Windows textStack;
     u8 buffer[256];
     UnkTextStruct1 *ptr_text;
-    UnkTextStruct2 *ptr_text2;
+    Window *ptr_text2;
 
     if (param_1->unk4D) {
         sub_80073B8(param_1->index);
@@ -397,7 +397,7 @@ void sub_8012EBC(MenuStruct *param_1)
         ptr_text = &gUnknown_2027370[index];
 
         if (ptr_text->unkC == 6) {
-            ptr_text2 = &textStack.a0[index];
+            ptr_text2 = &textStack.id[index];
             RestoreUnkTextStruct_8006518(&textStack);
             x = sub_8008ED0(param_1->unk0);
             PrintFormattedStringOnWindow(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
@@ -424,7 +424,7 @@ void sub_8012EBC(MenuStruct *param_1)
                     color = colorArray[0]; // Use the default white
 
                 sprintfStatic(buffer,gUnknown_80D4828, color, textPtr);
-                y = sub_8013800(&param_1->input, counter);
+                y = GetMenuEntryYCoord(&param_1->input, counter);
                 PrintFormattedStringOnWindow(8, y, buffer, param_1->index, 0);
                 menuItemsPtr++;
                 counter++;
@@ -552,9 +552,9 @@ static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 index
     param_1->unk4 = 0;
 
     if (temp->unkC == 6)
-        param_1->unk6 = 16;
+        param_1->firstEntryY = 16;
     else
-        param_1->unk6 = 2;
+        param_1->firstEntryY = 2;
 
     param_1->unkC = 0;
     param_1->unkE = 0;
@@ -701,7 +701,7 @@ void UpdateMenuCursorSpriteCoords(MenuInputStruct *param_1)
     index = param_1->unk0;
     temp = &gUnknown_2027370[index];
     param_1->unk8.x = temp->unk0 * 8 + param_1->unk4;
-    param_1->unk8.y = temp->unk2 * 8 + sub_8013800(param_1, param_1->menuIndex);
+    param_1->unk8.y = temp->unk2 * 8 + GetMenuEntryYCoord(param_1, param_1->menuIndex);
 }
 
 void MoveMenuCursorDown(MenuInputStruct *param_1)
@@ -810,15 +810,12 @@ void sub_80137F8(MenuInputStruct *param_1, u32 param_2)
     param_1->unk10 = param_2 << 8;
 }
 
-s32 sub_8013800(MenuInputStruct *param_1, s32 param_2)
+s32 GetMenuEntryYCoord(MenuInputStruct *menu, s32 entryId)
 {
-    s32 iVar1;
-    s32 iVar2;
+    s32 firstY = menu->firstEntryY;
+    s32 iVar1 = entryId * menu->unk10;
 
-    iVar2 = param_1->unk6;
-    iVar1 = param_2 * param_1->unk10;
-
-    return iVar2 + (iVar1 / 256);
+    return firstY + (iVar1 / 256);
 }
 
 void sub_8013818(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
@@ -957,9 +954,9 @@ void sub_8013984(MenuInputStruct *param_1)
     param_1->unk4 = 0;
 
     if (ptr->unkC == 6)
-        param_1->unk6 = 16;
+        param_1->firstEntryY = 16;
     else
-        param_1->unk6 = 0;
+        param_1->firstEntryY = 0;
 
     if (param_1->unk20 < 2)
         param_1->unkC = 0;
@@ -1193,13 +1190,13 @@ void sub_8013F84(void)
     AddSprite(&SStack_18,0x100,0,0x0);
 }
 
-void sub_80140B4(UnkTextStruct3 *a0)
+void sub_80140B4(Windows *a0)
 {
     s32 i;
 
     for(i = 0; i < 4; i++)
     {
-        a0->a0[i] = gUnknown_80D47C8[i];
+        a0->id[i] = gUnknown_80D47C8[i];
     }
 }
 

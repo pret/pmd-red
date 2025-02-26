@@ -23,8 +23,8 @@ typedef struct WonderMailStruct_203B33C
     unkStruct_203B480 unk1E8;
     u8 unk218;
     MenuStruct unk21C[4];
-    UnkTextStruct3 unk35C;
-    UnkTextStruct3 unk3BC;
+    Windows unk35C;
+    Windows unk3BC;
     /* 0x41C */ Item item;
     u32 unk420; // Is this supposed to be a File like 203B2C4?
     u8 unk424[0x100];

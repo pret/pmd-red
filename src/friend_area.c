@@ -155,7 +155,7 @@ bool8 HasAllFriendAreas(void)
     return TRUE;
 }
 
-void sub_8092638(u8 friendArea, unkStruct_8092638 *param_2, bool8 checkLeader, bool8 checkDungeon)
+void GetFriendAreaCapacity2(u8 friendArea, FriendAreaCapacity *dst, bool8 checkLeader, bool8 checkPartner)
 {
     PokemonStruct1 *pokeStruct;
     s32 i;
@@ -166,30 +166,30 @@ void sub_8092638(u8 friendArea, unkStruct_8092638 *param_2, bool8 checkLeader, b
     for (i = 0; i < friendArea; i++)
         iVar4 += sFriendAreaSettings[i].num_pokemon;
 
-    param_2->unk8 = iVar4;
-    param_2->hasFriendArea = gFriendAreas[i];
+    dst->unk8 = iVar4;
+    dst->hasFriendArea = gFriendAreas[i];
 
-    if (param_2->hasFriendArea) {
-        param_2->unk2 = 0;
-        param_2->numPokemon = sFriendAreaSettings[i].num_pokemon;
+    if (dst->hasFriendArea) {
+        dst->currNoPokemon = 0;
+        dst->maxPokemon = sFriendAreaSettings[i].num_pokemon;
 
-        for (i = 0; i < param_2->numPokemon; i++, iVar4++) {
+        for (i = 0; i < dst->maxPokemon; i++, iVar4++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[iVar4];
 
             if (PokemonFlag1(pokeStruct) &&
                 (!checkLeader || !IsMonTeamLeader(pokeStruct)) &&
-                (!checkDungeon || pokeStruct->dungeonLocation.id != DUNGEON_JOIN_LOCATION_PARTNER)) {
-                param_2->unk2++;
+                (!checkPartner || pokeStruct->dungeonLocation.id != DUNGEON_JOIN_LOCATION_PARTNER)) {
+                dst->currNoPokemon++;
             }
         }
     }
     else {
-        param_2->unk2 = 0;
-        param_2->numPokemon = 0;
+        dst->currNoPokemon = 0;
+        dst->maxPokemon = 0;
     }
 }
 
-void sub_80926F8(u8 a0, unkStruct_8092638 *a1, u8 a2)
+void GetFriendAreaCapacity(u8 areaId, FriendAreaCapacity *dst, bool8 checkPartner)
 {
     PokemonStruct1 *mon;
     s32 r5;
@@ -198,30 +198,30 @@ void sub_80926F8(u8 a0, unkStruct_8092638 *a1, u8 a2)
 
     r5 = 0;
 
-    for (i = 0; i < a0; i++)
+    for (i = 0; i < areaId; i++)
         r5 += sFriendAreaSettings[i].num_pokemon;
 
-    a1->unk8 = r5;
-    a1->hasFriendArea = gFriendAreas[i];
+    dst->unk8 = r5;
+    dst->hasFriendArea = gFriendAreas[i];
 
-    if (a1->hasFriendArea) {
-        a1->unk2 = 0;
-        a1->numPokemon = sFriendAreaSettings[i].num_pokemon;
-        max = a1->numPokemon;
+    if (dst->hasFriendArea) {
+        dst->currNoPokemon = 0;
+        dst->maxPokemon = sFriendAreaSettings[i].num_pokemon;
+        max = dst->maxPokemon;
 
         for (i = 0; i < max; i++, r5++) {
             mon = &gRecruitedPokemonRef->pokemon[r5];
             if (PokemonFlag1(mon)) {
-                if (mon->isTeamLeader || (a2 == 0 && mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER))
-                    a1->numPokemon--;
+                if (mon->isTeamLeader || (!checkPartner && mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER))
+                    dst->maxPokemon--;
                 else
-                    a1->unk2++;
+                    dst->currNoPokemon++;
             }
         }
     }
     else {
-        a1->unk2 = 0;
-        a1->numPokemon = 0;
+        dst->currNoPokemon = 0;
+        dst->maxPokemon = 0;
     }
 }
 

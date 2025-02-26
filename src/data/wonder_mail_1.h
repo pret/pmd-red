@@ -40,9 +40,9 @@ const MenuItem gUnknown_80DDAA0[] = {
     {NULL, 10},
 };
 
-const UnkTextStruct2 gUnknown_80DDACC =
+const Window gUnknown_80DDACC =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x16, 0x07,
     0x06, 0x04,
@@ -50,9 +50,9 @@ const UnkTextStruct2 gUnknown_80DDACC =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80DDAE4 =
+const Window gUnknown_80DDAE4 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x16, 0x06,
     0x06, 0x04,

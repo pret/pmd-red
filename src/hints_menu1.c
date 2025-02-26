@@ -23,12 +23,12 @@ bool8 sub_801E3F0(u32 a0)
         sUnknown_203B264 = MemoryAlloc(sizeof(*sUnknown_203B264), 8);
 
     sUnknown_203B264->unk34 = a0;
-    sUnknown_203B264->unk38 = &sUnknown_203B264->unk3C.a0[a0];
-    RestoreUnkTextStruct_8006518(&sUnknown_203B264->unk3C);
-    sUnknown_203B264->unk3C.a0[sUnknown_203B264->unk34] = sUnknown_80DC0BC;
+    sUnknown_203B264->unk38 = &sUnknown_203B264->windows.id[a0];
+    RestoreUnkTextStruct_8006518(&sUnknown_203B264->windows);
+    sUnknown_203B264->windows.id[sUnknown_203B264->unk34] = sUnknown_80DC0BC;
     sub_8012D08(sUnknown_203B264->unk38, 10);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B264->unk3C, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B264->windows, TRUE, TRUE);
     sub_8013818(&sUnknown_203B264->input, 5, 10, a0);
     sub_801E594();
     DrawHintSelectionMenu();
@@ -73,7 +73,7 @@ s32 GetChosenHintIndex(void)
 void CreateHintSelectionScreen(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sUnknown_203B264->unk3C, FALSE, FALSE);
+    ShowWindows(&sUnknown_203B264->windows, FALSE, FALSE);
     sub_8013984(&sUnknown_203B264->input);
     sub_801E594();
     DrawHintSelectionMenu();
@@ -85,9 +85,9 @@ void CreateHintSelectionScreen(bool8 cursorSprite)
 void sub_801E54C(void)
 {
     if (sUnknown_203B264 != NULL) {
-        sUnknown_203B264->unk3C.a0[sUnknown_203B264->unk34] = sUnknown_80DC0A0;
+        sUnknown_203B264->windows.id[sUnknown_203B264->unk34] = sUnknown_80DC0A0;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&sUnknown_203B264->unk3C, TRUE, TRUE);
+        ShowWindows(&sUnknown_203B264->windows, TRUE, TRUE);
         MemoryFree(sUnknown_203B264);
         sUnknown_203B264 = NULL;
     }
@@ -108,7 +108,7 @@ static void DrawHintSelectionMenu(void)
     PrintStringOnWindow(16, 0, sHints, sUnknown_203B264->unk34, 0);
 
     for (hintIndex = 0; hintIndex < HINT_MAX; hintIndex++) {
-        y = sub_8013800(&sUnknown_203B264->input, hintIndex);
+        y = GetMenuEntryYCoord(&sUnknown_203B264->input, hintIndex);
         PrintStringOnWindow(10, y, gCommonHints[hintIndex].heading, sUnknown_203B264->unk34, 0);
     }
 

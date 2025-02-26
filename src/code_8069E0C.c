@@ -77,7 +77,6 @@ extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
 u32 EntityGetStatusSprites(Entity *entity);
 void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
 extern void sub_8042EC8(Entity *a0, s32 a1);
-void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, unkStruct_2039DB0 *spriteMasks);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
 extern void sub_803F580(s32);
@@ -1957,30 +1956,30 @@ void sub_806C51C(Entity *entity)
             if (entInfo->unk15C != 0) {
                 if (entInfo->unk160 == 0) {
                     if (entInfo->unk15F != 0) {
-                        RunAxAnimationFrame(&entity->axObj);
-                        RunAxAnimationFrame(&entity->axObj);
-                        RunAxAnimationFrame(&entity->axObj);
+                        RunAxAnimationFrame(&entity->axObj.axdata);
+                        RunAxAnimationFrame(&entity->axObj.axdata);
+                        RunAxAnimationFrame(&entity->axObj.axdata);
                     }
                     else {
-                        RunAxAnimationFrame(&entity->axObj);
+                        RunAxAnimationFrame(&entity->axObj.axdata);
                     }
                 }
             }
             else {
-                RunAxAnimationFrame(&entity->axObj);
+                RunAxAnimationFrame(&entity->axObj.axdata);
             }
         }
     }
     else {
         if (entInfo->frozenClassStatus.status != STATUS_FROZEN && entInfo->frozenClassStatus.status != STATUS_PETRIFIED) {
             if (gDungeon->unk644.unk28 != 0 && gDungeon->unk1BDD4.unk1C05F == 0) {
-                RunAxAnimationFrame(&entity->axObj);
-                RunAxAnimationFrame(&entity->axObj);
+                RunAxAnimationFrame(&entity->axObj.axdata);
+                RunAxAnimationFrame(&entity->axObj.axdata);
             }
             else if ((entity->axObj.unk43_animId2 == 0 || entity->axObj.unk43_animId2 == 7) && GetEntInfo(entity)->speedStage > 1) {
-                RunAxAnimationFrame(&entity->axObj);
+                RunAxAnimationFrame(&entity->axObj.axdata);
             }
-            RunAxAnimationFrame(&entity->axObj);
+            RunAxAnimationFrame(&entity->axObj.axdata);
         }
     }
 
@@ -2092,10 +2091,10 @@ void sub_806C51C(Entity *entity)
         }
 
         if (entity->unk22 == 0) {
-            DoAxFrame_800558C(&entity->axObj, x, y, y2, overworldPal, &spriteMasks);
+            DoAxFrame_800558C(&entity->axObj.axdata, x, y, y2, overworldPal, &spriteMasks);
         }
         else if (entity->unk22 == 1 && (gUnknown_202EDCC & 1)) {
-            DoAxFrame_800558C(&entity->axObj, x, y, y2, overworldPal, &spriteMasks);
+            DoAxFrame_800558C(&entity->axObj.axdata, x, y, y2, overworldPal, &spriteMasks);
         }
     }
 

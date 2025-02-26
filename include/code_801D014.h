@@ -21,7 +21,7 @@ struct unk_203B250
     MenuStruct unk18;
     MenuItem unk68[8];
     u16 unkA8[8];
-    UnkTextStruct3 unkB8;
+    Windows windows;
 };
 
 // size: 0x8

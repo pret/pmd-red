@@ -23,13 +23,13 @@ bool8 CreateAdventureLogScreen(u32 kind)
 {
     sAdventureLog = MemoryAlloc(sizeof(*sAdventureLog), 8);
     sAdventureLog->s0.unk34 = kind;
-    sAdventureLog->s0.unk38 = &sAdventureLog->s0.unk3C.a0[kind];
-    RestoreUnkTextStruct_8006518(&sAdventureLog->s0.unk3C);
-    sAdventureLog->s0.unk3C.a0[sAdventureLog->s0.unk34] = sUnknown_80E2008;
+    sAdventureLog->s0.unk38 = &sAdventureLog->s0.windows.id[kind];
+    RestoreUnkTextStruct_8006518(&sAdventureLog->s0.windows);
+    sAdventureLog->s0.windows.id[sAdventureLog->s0.unk34] = sUnknown_80E2008;
     sAdventureLog->s0.unk38->unk14 = &sAdventureLog->unk9C;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(&sAdventureLog->s0.unk3C, TRUE, TRUE);
+    ShowWindows(&sAdventureLog->s0.windows, TRUE, TRUE);
     sub_8013818(&sAdventureLog->s0.input, 0x20, 8, kind);
     sub_8032084();
     DisplayAdventureLog();
@@ -63,9 +63,9 @@ u32 HandleAdventureLogInput(bool8 a0)
 void CleanAdventureLogScreen(void)
 {
     if (sAdventureLog != NULL) {
-        sAdventureLog->s0.unk3C.a0[sAdventureLog->s0.unk34] = sUnknown_80E1FF0;
+        sAdventureLog->s0.windows.id[sAdventureLog->s0.unk34] = sUnknown_80E1FF0;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(&sAdventureLog->s0.unk3C, TRUE, TRUE);
+        ShowWindows(&sAdventureLog->s0.windows, TRUE, TRUE);
         MemoryFree(sAdventureLog);
         sAdventureLog = NULL;
     }
@@ -107,31 +107,31 @@ static void DisplayAdventureLog(void)
                 case AA_NUM_FLOORS_EXPLORED: {
                     s32 v1 = GetAdventureFloorsExplored();
                     gFormatArgs[0] = (s16)v1;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
                 case AA_NUM_MOVES_LEARNED: {
                     s32 v2 = GetAdventureMovesLearned();
                     gFormatArgs[0] = (s16)v2;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
                 case AA_NUM_THIEVING_SUCCESSES: {
                     s32 v3 = GetThievingSuccesses();
                     gFormatArgs[0] = (s16)v3;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
                 case AA_NUM_FRIEND_RESCUE_SUCCESSES: {
                     s32 v4 = GetFriendRescueSuccesses();
                     gFormatArgs[0] = v4;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
                 case AA_NUM_POKEMON_EVOLVED: {
                     s32 v5 = GetAdventureNumEvolved();
                     gFormatArgs[0] = v5;
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
                 case AA_NUM_POKEMON_JOINED: {
@@ -140,13 +140,13 @@ static void DisplayAdventureLog(void)
                     // fallthrough
                 }
                 default: {
-                    PrintFormattedStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
                     break;
                 }
             }
         }
         else
-            PrintStringOnWindow(8, sub_8013800(&sAdventureLog->s0.input, i), sPlaceholder, sAdventureLog->s0.unk34, 0);
+            PrintStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), sPlaceholder, sAdventureLog->s0.unk34, 0);
     }
 
     sub_80073E0(sAdventureLog->s0.unk34);

@@ -46,7 +46,7 @@ bool8 CreateHelperPelipperMenu(s16 speciesID)
 
     species_32 = SpeciesId(speciesID);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
 
     sPostOfficeHelper = MemoryAlloc(sizeof(PostOfficeWork), 8);
     CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, species_32);

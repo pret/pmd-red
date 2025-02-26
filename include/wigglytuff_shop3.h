@@ -54,7 +54,7 @@ typedef struct WigglytuffShop3Work
     MenuStruct unk6C;
     /* 0xBC */ struct MonPortraitMsg monPortrait;
     struct MonPortraitMsg *monPortraitPtr;
-    UnkTextStruct3 unkD0;
+    Windows unkD0;
     u32 unk130;
     u32 unk134;
 } WigglytuffShop3Work;
