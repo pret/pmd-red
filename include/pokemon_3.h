@@ -69,7 +69,7 @@ void ToggleIQSkill(IqSkillFlags *iq, u32 skillIndex);
 void SetIQSkill(IqSkillFlags *iq, u32 skillIndex);
 bool8 IsIQSkillSet(IqSkillFlags *iq, u32 IQSkillBit);
 void SetDefaultIQSkills(IqSkillFlags *iq, bool8 enableSelfCurer);
-void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, u8 param_3);
+void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, bool8 param_3);
 s32 sub_808F700(PokemonStruct1 *pokemon);
 PokemonStruct1 *sub_808F734(PokemonStruct1 *pokemon, s16 _species);
 s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0);
