@@ -155,60 +155,44 @@ IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback)
 }
 
 // Unused?
-s32 sub_800B720(s16 a0, IntrCallback a1)
+s32 sub_800B720(s32 a0, IntrCallback a1)
 {
     s32 r2;
-    unkStruct_202D648 *r3;
-    s32 r4;
+    s32 i;
+    struct unkStruct_202D648 *strPtr;
     bool8 sp4;
-    s32 spC;
-    bool32 sp10;
+    s32 asS16, asU16;
 
-    spC = a0;
+    asS16 = (s16) a0;
     sp4 = DisableInterrupts();
 
-    do {
-        sp10 = FALSE;
-        r4 = 0;
-        r3 = gUnknown_202D608;
-        if (r4 >= gUnknown_203B0AA)
-            continue;
-        if (r3->unk0 == gUnknown_203B0A8) {
-            gUnknown_203B0A8 = (gUnknown_203B0A8 + 1) & 0x7fff;
-            sp10 = TRUE;
-            continue;
-        }
-    label:
-        do {
-            r4++;
-            r3++;
-            if (r4 >= gUnknown_203B0AA)
-                continue;
-            if (r3->unk0 == gUnknown_203B0A8) {
+    while (1) {
+        bool8 sp10 = FALSE;
+        for (i = 0, strPtr = gUnknown_202D608; i < gUnknown_203B0AA; i++, strPtr++) {
+            if (strPtr->unk0 == gUnknown_203B0A8) {
                 gUnknown_203B0A8 = (gUnknown_203B0A8 + 1) & 0x7fff;
                 sp10 = TRUE;
+                break;
             }
-            else
-                goto label;
-        } while (0);
-    } while (sp10);
-
-    for (r4 = 0, r3 = gUnknown_202D608; r4 < gUnknown_203B0AA; r4++, r3++) {
-        if (r3->unk2 > spC)
+        }
+        if (!sp10)
             break;
     }
 
-    for (r2 = gUnknown_203B0AA - 1, r3 = &gUnknown_202D608[r2]; r2 >= r4; r2--, r3--)
-        r3[1] = r3[0];
+    for (i = 0, strPtr = gUnknown_202D608; i < gUnknown_203B0AA; i++, strPtr++) {
+        if (strPtr->unk2 > asS16)
+            break;
+    }
+
+    for (r2 = gUnknown_203B0AA - 1, strPtr = &gUnknown_202D608[r2]; r2 >= i; r2--, strPtr--) {
+        strPtr[1] = strPtr[0];
+    }
 
     gUnknown_203B0AA++;
-    gUnknown_202D608[r4].unk0 = gUnknown_203B0A8;
-#ifdef NONMATCHING
-    gUnknown_202D608[r4].unk2 = spC;
-#else
-    gUnknown_202D608[r4].unk2 = ((u32)spC << 0x10 >> 0x10); // fake and may overflow. Unspecified behavior
-#endif
-    gUnknown_202D608[r4].unk4 = a1;
+    gUnknown_202D608[i].unk0 = gUnknown_203B0A8;
+    asU16 = (u16) asS16;
+    gUnknown_202D608[i].unk2 = asU16;
+    gUnknown_202D608[i].unk4 = a1;
 
     if (sp4)
         EnableInterrupts();
