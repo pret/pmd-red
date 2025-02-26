@@ -2274,17 +2274,11 @@ s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
 
     if (!gDungeon->unk181e8.blinded && (GetBodySize(entInfo->apparentID) < 4 || r4 != 1)) {
         s32 unk6 = sub_800ECB8(sub_80412E0(move->id, GetApparentWeather(entity), 1))->unk6;
-        s32 x = (pos->x * 3 << 11);
-        s32 y = (pos->y * 3 << 11);
-        // This is needed for matching purposes.
-        s32 y2;
+        s32 pixelPosX = X_POS_TO_PIXELPOS(pos->x);
+        s32 pixelPosY = Y_POS_TO_PIXELPOS(pos->y);
 
-        x += 0xC00;
-        y += 0x1000;
-        y2 = y;
-
-        unkSp2.x = x / 256;
-        unkSp2.y = y2 / 256;
+        unkSp2.x = pixelPosX / 256;
+        unkSp2.y = pixelPosY / 256;
 
         if (unk6 != 0) {
             s32 someRetVal;
@@ -2422,8 +2416,8 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
         var_68.y += var_48;
         if (sub_803F428(&var_68) && !gDungeon->unk181e8.blinded) {
             PixelPos pos32;
-            pos32.x = (var_68Before.x * 0x1800) + 0xC00;
-            pos32.y = (var_68Before.y * 0x1800) + 0x1000;
+            pos32.x = X_POS_TO_PIXELPOS(var_68Before.x);
+            pos32.y = Y_POS_TO_PIXELPOS(var_68Before.y);
             var_28 = var_30 * (var_4C << 8);
             var_24 = var_30 * (var_48 << 8);
             for (j = 0; j < 24 / var_30; j++) {

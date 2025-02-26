@@ -179,14 +179,13 @@ void sub_804522C(void) {
 
 void sub_804535C(Entity *entity, PixelPos *pos)
 {
-
   if (pos != NULL) {
-    (entity->pixelPos).x = pos->x;
-    (entity->pixelPos).y = pos->y;
+    entity->pixelPos.x = pos->x;
+    entity->pixelPos.y = pos->y;
   }
   else {
-    (entity->pixelPos).x = (entity->pos).x * 0x1800 + 0xc00;
-    (entity->pixelPos).y = (entity->pos).y * 0x1800 + 0x1000;
+    entity->pixelPos.x = X_POS_TO_PIXELPOS(entity->pos.x);
+    entity->pixelPos.y = Y_POS_TO_PIXELPOS(entity->pos.y);
   }
 }
 

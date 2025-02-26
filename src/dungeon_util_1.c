@@ -239,7 +239,7 @@ void sub_80857B8(void)
 void sub_8085860(s32 x, s32 y)
 {
   sub_803F4A0(0);
-  sub_803F878(x * 0x1800 + 0xc00, y * 0x1800 + 0x1000);
+  sub_803F878(X_POS_TO_PIXELPOS(x), Y_POS_TO_PIXELPOS(y));
 }
 
 void sub_8085890(s32 x, s32 y)

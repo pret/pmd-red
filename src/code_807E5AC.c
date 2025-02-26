@@ -22,9 +22,14 @@
 #include "dungeon_ai.h"
 #include "code_806CD90.h"
 #include "code_807CD9C.h"
+#include "dungeon_random.h"
 #include "code_805D8C8.h"
+#include "code_803E668.h"
 #include "code_8045A00.h"
+#include "move_util.h"
+#include "moves.h"
 #include "code_80450F8.h"
+#include "math.h"
 #include "constants/ability.h"
 #include "constants/monster.h"
 #include "constants/type.h"
@@ -615,766 +620,201 @@ void sub_807F33C(void)
 
 extern void sub_80833E8(DungeonPos *param_1, s32 *param_2);
 extern void sub_806A5B8(Entity *);
+extern bool8 sub_8045888(Entity *ent);
+extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
+extern void sub_807D068(Entity *, DungeonPos *);
+extern void sub_80694C0(Entity *target,s32 x,int y,char param_4);
 
 void sub_807F9BC(Entity *entity);
 
-/*
+extern const u8 *const gUnknown_80FCB40;
+extern const u8 *const gUnknown_80FCB70;
+extern const u8 *const gUnknown_80FE6B4;
+extern const u8 *const gUnknown_80FE690;
+
 void sub_807F43C(Entity *target, Entity *attacker)
 {
+    s32 attackerDirection;
+    s32 var_3C;
+    DungeonPos attackerPos;
+    s32 pixelPosX, pixelPosY;
+    PixelPos var_54;
+    s32 var_30, r10;
+    s32 r6;
+    s32 newDir;
+    s32 i, directionId;
+    Entity *tileEntity;
+    s32 var_2C;
+    DungeonPos positions[40];
+    s32 var_74[4];
+    s32 positionsCounter;
+
     if (AbilityIsActive(attacker, ABILITY_SUCTION_CUPS)) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
-        TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80FCB40); // is anchored, cannot be moved
+        TryDisplayDungeonLoggableMessage3(target, attacker, gUnknown_80FCB40); // is anchored, cannot be moved
+        return;
     }
-    else if (attacker == target) {
+    if (target == attacker) {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
-        TryDisplayDungeonLoggableMessage3(attacker, attacker, gUnknown_80FCB70); // couldn't be thrown for some reason
+        TryDisplayDungeonLoggableMessage3(target, attacker, gUnknown_80FCB70); // couldn't be thrown for some reason
+        return;
     }
-    else {
-        s32 var_74[4];
-        DungeonPos positions[40];
-        DungeonPos attackerPos = attacker->pos;
-        s32 var_3C = 0;
-        s32 monId;
 
-        while (1) {
-            s32 positionsCounter = 0;
-            for (monId = 0; monId < DUNGEON_MAX_POKEMON; monId++) {
-                Entity *mon = gDungeon->activePokemon[monId];
-                if (EntityIsValid(mon) && target != mon && attacker != mon && CanSeeTarget(target, mon)) {
-                    if (var_3C == 0) {
-                        if (GetTreatmentBetweenMonsters(target, mon, FALSE, TRUE) != 1)
-                            continue;
-                    }
-                    else {
-                        if (GetTreatmentBetweenMonsters(target, mon, FALSE, TRUE) != 0)
-                            continue;
-                    }
+    attackerPos = attacker->pos;
+    for (var_3C = 0; var_3C < 2; var_3C++) {
+        positionsCounter = 0;
+        for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
+            Entity *mon = gDungeon->activePokemon[i];
+            if (EntityIsValid(mon) && target != mon && attacker != mon && CanSeeTarget(target, mon)) {
+                if (var_3C == 0) {
+                    if (GetTreatmentBetweenMonsters(target, mon, FALSE, TRUE) != 1)
+                        continue;
+                }
+                else {
+                    if (GetTreatmentBetweenMonsters(target, mon, FALSE, TRUE) != 0)
+                        continue;
+                }
 
-                    if (var_3C != 0) {
-                        s32 directionId;
-                        DungeonPos pos;
-                        for (directionId = 0; directionId < NUM_DIRECTIONS; directionId++) {
-                            pos.x = mon->pos.x + gAdjacentTileOffsets[directionId].x;
-                            pos.y = mon->pos.y + gAdjacentTileOffsets[directionId].y;
-                            if (!sub_80703A0(attacker, &pos))
-                                break;
-                        }
-
-                        if (directionId == NUM_DIRECTIONS)
+                if (var_3C == 0) {
+                    DungeonPos pos;
+                    for (directionId = 0; directionId < NUM_DIRECTIONS; directionId++) {
+                        pos.x = gAdjacentTileOffsets[directionId].x + mon->pos.x;
+                        pos.y = gAdjacentTileOffsets[directionId].y + mon->pos.y;
+                        if (!sub_80703A0(attacker, &pos))
                             break;
-                        if (positionsCounter > 39)
-                            break;
+                    }
+
+                    if (directionId != NUM_DIRECTIONS && positionsCounter < 40) {
                         positions[positionsCounter++] = mon->pos;
                     }
-                    else {
-                        s32 directionId;
-                        DungeonPos pos;
-                        for (directionId = 0; directionId < NUM_DIRECTIONS; directionId++) {
-                            pos.x = mon->pos.x + gAdjacentTileOffsets[directionId].x;
-                            pos.y = mon->pos.y + gAdjacentTileOffsets[directionId].y;
-                            if (!sub_80703A0(attacker, &pos) && positionsCounter < 40) {
-                                positions[positionsCounter++] = mon->pos;
-                            }
+                }
+                else {
+                    DungeonPos pos;
+                    for (directionId = 0; directionId < NUM_DIRECTIONS; directionId++) {
+                        pos.x = gAdjacentTileOffsets[directionId].x + mon->pos.x;
+                        pos.y = gAdjacentTileOffsets[directionId].y + mon->pos.y;
+                        if (!sub_80703A0(attacker, &pos) && positionsCounter < 40) {
+                            positions[positionsCounter++] = pos;
                         }
                     }
                 }
             }
-
-            if (positionsCounter == 0) {
-                if (++var_3C < 2)
-                    continue;
-                sub_80833E8(&target->pos, var_74);
-            }
-            else {
-
-            }
-            break;
         }
 
+        if (positionsCounter != 0)
+            break;
     }
-}
-*/
 
-NAKED void sub_807F43C(Entity *target, Entity *attacker)
-{
-    asm_unified("push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	sub sp, 0x10C\n"
-"	str r0, [sp, 0xEC]\n"
-"	mov r8, r1\n"
-"	mov r0, r8\n"
-"	movs r1, 0xE\n"
-"	bl AbilityIsActive\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0807F470\n"
-"	ldr r0, _0807F468\n"
-"	mov r1, r8\n"
-"	movs r2, 0\n"
-"	bl SubstitutePlaceholderStringTags\n"
-"	ldr r0, _0807F46C\n"
-"	b _0807F694\n"
-"	.align 2, 0\n"
-"_0807F468: .4byte gFormatBuffer_Monsters\n"
-"_0807F46C: .4byte gUnknown_80FCB40\n"
-"_0807F470:\n"
-"	ldr r0, [sp, 0xEC]\n"
-"	cmp r0, r8\n"
-"	bne _0807F490\n"
-"	ldr r0, _0807F488\n"
-"	mov r1, r8\n"
-"	movs r2, 0\n"
-"	bl SubstitutePlaceholderStringTags\n"
-"	ldr r0, _0807F48C\n"
-"	ldr r2, [r0]\n"
-"	mov r0, r8\n"
-"	b _0807F698\n"
-"	.align 2, 0\n"
-"_0807F488: .4byte gFormatBuffer_Monsters\n"
-"_0807F48C: .4byte gUnknown_80FCB70\n"
-"_0807F490:\n"
-"	mov r1, r8\n"
-"	ldr r0, [r1, 0x4]\n"
-"	add r1, sp, 0xD4\n"
-"	str r0, [r1]\n"
-"	movs r2, 0\n"
-"	str r2, [sp, 0xF0]\n"
-"_0807F49C:\n"
-"	movs r3, 0\n"
-"	mov r9, r3\n"
-"	movs r7, 0\n"
-"	mov r4, sp\n"
-"	adds r4, 0x18\n"
-"	str r4, [sp, 0x108]\n"
-"_0807F4A8:\n"
-"	ldr r0, _0807F504\n"
-"	ldr r0, [r0]\n"
-"	lsls r1, r7, 2\n"
-"	ldr r2, _0807F508\n"
-"	adds r0, r2\n"
-"	adds r0, r1\n"
-"	ldr r4, [r0]\n"
-"	adds r0, r4, 0\n"
-"	bl EntityIsValid\n"
-"	lsls r0, 24\n"
-"	adds r3, r7, 0x1\n"
-"	str r3, [sp, 0x104]\n"
-"	cmp r0, 0\n"
-"	bne _0807F4C8\n"
-"	b _0807F602\n"
-"_0807F4C8:\n"
-"	ldr r0, [sp, 0xEC]\n"
-"	cmp r0, r4\n"
-"	bne _0807F4D0\n"
-"	b _0807F602\n"
-"_0807F4D0:\n"
-"	cmp r8, r4\n"
-"	bne _0807F4D6\n"
-"	b _0807F602\n"
-"_0807F4D6:\n"
-"	adds r1, r4, 0\n"
-"	bl CanSeeTarget\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _0807F4E4\n"
-"	b _0807F602\n"
-"_0807F4E4:\n"
-"	ldr r1, [sp, 0xF0]\n"
-"	cmp r1, 0\n"
-"	bne _0807F50C\n"
-"	ldr r0, [sp, 0xEC]\n"
-"	adds r1, r4, 0\n"
-"	movs r2, 0\n"
-"	movs r3, 0x1\n"
-"	bl GetTreatmentBetweenMonsters\n"
-"	lsls r0, 24\n"
-"	lsrs r0, 24\n"
-"	cmp r0, 0x1\n"
-"	beq _0807F500\n"
-"	b _0807F602\n"
-"_0807F500:\n"
-"	b _0807F51E\n"
-"	.align 2, 0\n"
-"_0807F504: .4byte gDungeon\n"
-"_0807F508: .4byte 0x000135cc\n"
-"_0807F50C:\n"
-"	ldr r0, [sp, 0xEC]\n"
-"	adds r1, r4, 0\n"
-"	movs r2, 0\n"
-"	movs r3, 0x1\n"
-"	bl GetTreatmentBetweenMonsters\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _0807F602\n"
-"_0807F51E:\n"
-"	ldr r2, [sp, 0xF0]\n"
-"	cmp r2, 0\n"
-"	bne _0807F594\n"
-"	movs r5, 0\n"
-"	add r6, sp, 0xC8\n"
-"	adds r3, r7, 0x1\n"
-"	str r3, [sp, 0x104]\n"
-"	adds r7, r6, 0\n"
-"	ldr r0, _0807F588\n"
-"	mov r10, r0\n"
-"_0807F532:\n"
-"	ldr r0, _0807F58C\n"
-"	lsls r3, r5, 2\n"
-"	adds r3, r0\n"
-"	ldrh r0, [r4, 0x4]\n"
-"	ldrh r1, [r3]\n"
-"	adds r0, r1\n"
-"	lsls r0, 16\n"
-"	lsrs r0, 16\n"
-"	ldr r1, [r6]\n"
-"	mov r2, r10\n"
-"	ands r1, r2\n"
-"	orrs r1, r0\n"
-"	str r1, [r7]\n"
-"	ldrh r2, [r4, 0x6]\n"
-"	ldrh r3, [r3, 0x2]\n"
-"	adds r2, r3\n"
-"	lsls r2, 16\n"
-"	ldr r0, _0807F590\n"
-"	ands r1, r0\n"
-"	orrs r1, r2\n"
-"	str r1, [r7]\n"
-"	mov r0, r8\n"
-"	add r1, sp, 0xC8\n"
-"	bl sub_80703A0\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0807F570\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x7\n"
-"	ble _0807F532\n"
-"_0807F570:\n"
-"	cmp r5, 0x8\n"
-"	beq _0807F602\n"
-"	mov r3, r9\n"
-"	cmp r3, 0x27\n"
-"	bgt _0807F602\n"
-"	ldr r0, [r4, 0x4]\n"
-"	ldr r4, [sp, 0x108]\n"
-"	stm r4!, {r0}\n"
-"	str r4, [sp, 0x108]\n"
-"	movs r0, 0x1\n"
-"	add r9, r0\n"
-"	b _0807F602\n"
-"	.align 2, 0\n"
-"_0807F588: .4byte 0xffff0000\n"
-"_0807F58C: .4byte gAdjacentTileOffsets\n"
-"_0807F590: .4byte 0x0000ffff\n"
-"_0807F594:\n"
-"	movs r5, 0\n"
-"	add r6, sp, 0xCC\n"
-"	adds r1, r7, 0x1\n"
-"	str r1, [sp, 0x104]\n"
-"	adds r7, r6, 0\n"
-"	mov r2, r9\n"
-"	lsls r0, r2, 2\n"
-"	add r0, sp\n"
-"	adds r0, 0x18\n"
-"	mov r10, r0\n"
-"_0807F5A8:\n"
-"	ldr r0, _0807F630\n"
-"	lsls r3, r5, 2\n"
-"	adds r3, r0\n"
-"	ldrh r0, [r4, 0x4]\n"
-"	ldrh r1, [r3]\n"
-"	adds r0, r1\n"
-"	lsls r0, 16\n"
-"	lsrs r0, 16\n"
-"	ldr r2, _0807F634\n"
-"	ldr r1, [r6]\n"
-"	ands r1, r2\n"
-"	orrs r1, r0\n"
-"	str r1, [r7]\n"
-"	ldrh r2, [r4, 0x6]\n"
-"	ldrh r3, [r3, 0x2]\n"
-"	adds r2, r3\n"
-"	lsls r2, 16\n"
-"	ldr r0, _0807F638\n"
-"	ands r1, r0\n"
-"	orrs r1, r2\n"
-"	str r1, [r7]\n"
-"	mov r0, r8\n"
-"	add r1, sp, 0xCC\n"
-"	bl sub_80703A0\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _0807F5FC\n"
-"	mov r2, r9\n"
-"	cmp r2, 0x27\n"
-"	bgt _0807F5FC\n"
-"	ldr r0, [r6]\n"
-"	mov r3, r10\n"
-"	adds r3, 0x4\n"
-"	mov r10, r3\n"
-"	subs r3, 0x4\n"
-"	stm r3!, {r0}\n"
-"	ldr r0, [sp, 0x108]\n"
-"	adds r0, 0x4\n"
-"	str r0, [sp, 0x108]\n"
-"	movs r1, 0x1\n"
-"	add r9, r1\n"
-"_0807F5FC:\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x7\n"
-"	ble _0807F5A8\n"
-"_0807F602:\n"
-"	ldr r7, [sp, 0x104]\n"
-"	cmp r7, 0x13\n"
-"	bgt _0807F60A\n"
-"	b _0807F4A8\n"
-"_0807F60A:\n"
-"	mov r2, r9\n"
-"	cmp r2, 0\n"
-"	bne _0807F63C\n"
-"	ldr r3, [sp, 0xF0]\n"
-"	adds r3, 0x1\n"
-"	str r3, [sp, 0xF0]\n"
-"	cmp r3, 0x1\n"
-"	bgt _0807F61C\n"
-"	b _0807F49C\n"
-"_0807F61C:\n"
-"	ldr r0, [sp, 0xEC]\n"
-"	adds r0, 0x4\n"
-"	add r4, sp, 0xB8\n"
-"	adds r1, r4, 0\n"
-"	bl sub_80833E8\n"
-"	movs r7, 0\n"
-"	add r5, sp, 0xD0\n"
-"	adds r6, r5, 0\n"
-"	b _0807F654\n"
-"	.align 2, 0\n"
-"_0807F630: .4byte gAdjacentTileOffsets\n"
-"_0807F634: .4byte 0xffff0000\n"
-"_0807F638: .4byte 0x0000ffff\n"
-"_0807F63C:\n"
-"	mov r0, r9\n"
-"	bl DungeonRandInt\n"
-"	lsls r0, 2\n"
-"	add r0, sp\n"
-"	adds r0, 0x18\n"
-"	ldr r0, [r0]\n"
-"	str r0, [sp, 0xD4]\n"
-"	b _0807F6A8\n"
-"_0807F64E:\n"
-"	ldr r0, [r5]\n"
-"	str r0, [sp, 0xD4]\n"
-"	b _0807F68E\n"
-"_0807F654:\n"
-"	ldr r0, [r4]\n"
-"	ldr r1, [r4, 0x8]\n"
-"	bl DungeonRandRange\n"
-"	lsls r0, 16\n"
-"	lsrs r0, 16\n"
-"	ldr r2, _0807F6A0\n"
-"	ldr r1, [r5]\n"
-"	ands r1, r2\n"
-"	orrs r1, r0\n"
-"	str r1, [r6]\n"
-"	ldr r0, [r4, 0x4]\n"
-"	ldr r1, [r4, 0xC]\n"
-"	bl DungeonRandRange\n"
-"	lsls r0, 16\n"
-"	ldrh r1, [r6]\n"
-"	orrs r1, r0\n"
-"	str r1, [r6]\n"
-"	mov r0, r8\n"
-"	add r1, sp, 0xD0\n"
-"	bl sub_80703A0\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0807F64E\n"
-"	adds r7, 0x1\n"
-"	cmp r7, 0x63\n"
-"	ble _0807F654\n"
-"_0807F68E:\n"
-"	cmp r7, 0x64\n"
-"	bne _0807F6A8\n"
-"	ldr r0, _0807F6A4\n"
-"_0807F694:\n"
-"	ldr r2, [r0]\n"
-"	ldr r0, [sp, 0xEC]\n"
-"_0807F698:\n"
-"	mov r1, r8\n"
-"	bl TryDisplayDungeonLoggableMessage3\n"
-"	b _0807F99C\n"
-"	.align 2, 0\n"
-"_0807F6A0: .4byte 0xffff0000\n"
-"_0807F6A4: .4byte gUnknown_80FE6B4\n"
-"_0807F6A8:\n"
-"	ldr r0, _0807F860\n"
-"	mov r1, r8\n"
-"	movs r2, 0\n"
-"	bl SubstitutePlaceholderStringTags\n"
-"	ldr r0, _0807F864\n"
-"	ldr r2, [r0]\n"
-"	ldr r0, [sp, 0xEC]\n"
-"	mov r1, r8\n"
-"	bl TryDisplayDungeonLoggableMessage3\n"
-"	mov r0, r8\n"
-"	bl sub_8045888\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0807F6D0\n"
-"	ldr r0, _0807F868\n"
-"	bl PlaySoundEffect\n"
-"_0807F6D0:\n"
-"	movs r4, 0\n"
-"	str r4, [sp, 0x100]\n"
-"	mov r1, r8\n"
-"	ldr r0, [r1, 0x70]\n"
-"	adds r0, 0x46\n"
-"	ldrb r0, [r0]\n"
-"	mov r9, r0\n"
-"	add r2, sp, 0xD4\n"
-"	movs r3, 0\n"
-"	ldrsh r1, [r2, r3]\n"
-"	mov r4, r8\n"
-"	movs r3, 0x4\n"
-"	ldrsh r0, [r4, r3]\n"
-"	subs r3, r1, r0\n"
-"	movs r4, 0x2\n"
-"	ldrsh r1, [r2, r4]\n"
-"	mov r2, r8\n"
-"	movs r4, 0x6\n"
-"	ldrsh r0, [r2, r4]\n"
-"	subs r1, r0\n"
-"	cmp r1, r3\n"
-"	bge _0807F6FE\n"
-"	adds r1, r3, 0\n"
-"_0807F6FE:\n"
-"	lsls r6, r1, 4\n"
-"	cmp r6, 0x50\n"
-"	ble _0807F706\n"
-"	movs r6, 0x50\n"
-"_0807F706:\n"
-"	cmp r6, 0x9\n"
-"	bgt _0807F70C\n"
-"	movs r6, 0xA\n"
-"_0807F70C:\n"
-"	mov r1, r8\n"
-"	adds r1, 0x4\n"
-"	add r0, sp, 0xD4\n"
-"	bl GetDirectionTowardsPosition\n"
-"	adds r5, r0, 0\n"
-"	add r2, sp, 0xD4\n"
-"	movs r1, 0\n"
-"	ldrsh r0, [r2, r1]\n"
-"	lsls r4, r0, 1\n"
-"	adds r4, r0\n"
-"	lsls r4, 11\n"
-"	movs r3, 0xC0\n"
-"	lsls r3, 4\n"
-"	adds r4, r3\n"
-"	ldr r0, _0807F86C\n"
-"	lsls r5, 2\n"
-"	adds r5, r0\n"
-"	movs r1, 0\n"
-"	ldrsh r0, [r5, r1]\n"
-"	lsls r0, 8\n"
-"	movs r1, 0x3\n"
-"	bl __divsi3\n"
-"	adds r4, r0\n"
-"	str r4, [sp, 0xF4]\n"
-"	movs r3, 0xD6\n"
-"	add r3, sp\n"
-"	movs r2, 0\n"
-"	ldrsh r0, [r3, r2]\n"
-"	lsls r4, r0, 1\n"
-"	adds r4, r0\n"
-"	lsls r4, 11\n"
-"	movs r0, 0x80\n"
-"	lsls r0, 5\n"
-"	adds r4, r0\n"
-"	movs r1, 0x2\n"
-"	ldrsh r0, [r5, r1]\n"
-"	lsls r0, 8\n"
-"	movs r1, 0x3\n"
-"	bl __divsi3\n"
-"	adds r4, r0\n"
-"	str r4, [sp, 0xF8]\n"
-"	mov r2, r8\n"
-"	ldr r5, [r2, 0xC]\n"
-"	ldr r3, [sp, 0xF4]\n"
-"	subs r0, r3, r5\n"
-"	adds r1, r6, 0\n"
-"	bl __divsi3\n"
-"	str r0, [sp, 0xFC]\n"
-"	mov r0, r8\n"
-"	ldr r4, [r0, 0x10]\n"
-"	ldr r1, [sp, 0xF8]\n"
-"	subs r0, r1, r4\n"
-"	adds r1, r6, 0\n"
-"	bl __divsi3\n"
-"	mov r10, r0\n"
-"	add r0, sp, 0xD8\n"
-"	str r5, [r0]\n"
-"	str r4, [r0, 0x4]\n"
-"	movs r7, 0\n"
-"	adds r5, r0, 0\n"
-"	cmp r7, r6\n"
-"	bge _0807F7FC\n"
-"	adds r4, r5, 0\n"
-"_0807F794:\n"
-"	ldr r0, [r5]\n"
-"	ldr r2, [sp, 0xFC]\n"
-"	adds r0, r2, r0\n"
-"	str r0, [r4]\n"
-"	ldr r0, [r4, 0x4]\n"
-"	add r0, r10\n"
-"	str r0, [r4, 0x4]\n"
-"	mov r0, r8\n"
-"	adds r1, r4, 0\n"
-"	bl sub_804535C\n"
-"	mov r0, r8\n"
-"	bl sub_8045888\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0807F7E6\n"
-"	ldr r0, [sp, 0x100]\n"
-"	bl sin_4096\n"
-"	lsls r0, 5\n"
-"	mov r3, r8\n"
-"	str r0, [r3, 0x1C]\n"
-"	movs r0, 0x3B\n"
-"	bl sub_803E46C\n"
-"	movs r0, 0x3\n"
-"	ands r0, r7\n"
-"	cmp r0, 0\n"
-"	bne _0807F7E6\n"
-"	movs r0, 0x7\n"
-"	mov r1, r9\n"
-"	ands r1, r0\n"
-"	mov r9, r1\n"
-"	mov r0, r8\n"
-"	movs r1, 0x6\n"
-"	mov r2, r9\n"
-"	bl sub_806CDD4\n"
-"	movs r2, 0x1\n"
-"	add r9, r2\n"
-"_0807F7E6:\n"
-"	movs r0, 0x80\n"
-"	lsls r0, 4\n"
-"	adds r1, r6, 0\n"
-"	bl __divsi3\n"
-"	ldr r3, [sp, 0x100]\n"
-"	adds r3, r0\n"
-"	str r3, [sp, 0x100]\n"
-"	adds r7, 0x1\n"
-"	cmp r7, r6\n"
-"	blt _0807F794\n"
-"_0807F7FC:\n"
-"	ldr r4, [sp, 0xF4]\n"
-"	str r4, [r5]\n"
-"	add r1, sp, 0xD8\n"
-"	ldr r0, [sp, 0xF8]\n"
-"	str r0, [r1, 0x4]\n"
-"	movs r0, 0\n"
-"	mov r2, r8\n"
-"	str r0, [r2, 0x1C]\n"
-"	mov r0, r8\n"
-"	bl sub_804535C\n"
-"	movs r0, 0x3B\n"
-"	bl sub_803E46C\n"
-"	mov r3, r8\n"
-"	ldr r0, [r3, 0x70]\n"
-"	movs r1, 0x7\n"
-"	mov r4, r9\n"
-"	ands r4, r1\n"
-"	adds r0, 0x46\n"
-"	strb r4, [r0]\n"
-"	add r2, sp, 0xD4\n"
-"	movs r1, 0\n"
-"	ldrsh r0, [r2, r1]\n"
-"	adds r4, r2, 0\n"
-"	movs r3, 0x2\n"
-"	ldrsh r1, [r4, r3]\n"
-"	bl GetTile\n"
-"	ldr r6, [r0, 0x10]\n"
-"	adds r0, r6, 0\n"
-"	bl EntityIsValid\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _0807F876\n"
-"	add r2, sp, 0xD4\n"
-"	movs r0, 0\n"
-"	ldrsh r1, [r2, r0]\n"
-"	movs r3, 0x2\n"
-"	ldrsh r2, [r4, r3]\n"
-"	mov r0, r8\n"
-"	movs r3, 0x1\n"
-"	bl sub_80694C0\n"
-"	mov r0, r8\n"
-"	bl sub_807F9BC\n"
-"	b _0807F99C\n"
-"	.align 2, 0\n"
-"_0807F860: .4byte gFormatBuffer_Monsters\n"
-"_0807F864: .4byte gUnknown_80FE690\n"
-"_0807F868: .4byte 0x000001a3\n"
-"_0807F86C: .4byte gAdjacentTileOffsets\n"
-"_0807F870:\n"
-"	ldr r0, [r7]\n"
-"	str r0, [sp, 0xD4]\n"
-"	b _0807F8BE\n"
-"_0807F876:\n"
-"	movs r5, 0\n"
-"	add r4, sp, 0xE0\n"
-"	adds r7, r4, 0\n"
-"_0807F87C:\n"
-"	ldr r0, _0807F8D0\n"
-"	lsls r3, r5, 2\n"
-"	adds r3, r0\n"
-"	add r1, sp, 0xD4\n"
-"	ldrh r0, [r1]\n"
-"	ldrh r2, [r3]\n"
-"	adds r0, r2\n"
-"	lsls r0, 16\n"
-"	lsrs r0, 16\n"
-"	ldr r2, _0807F8D4\n"
-"	ldr r1, [r7]\n"
-"	ands r1, r2\n"
-"	orrs r1, r0\n"
-"	str r1, [r4]\n"
-"	add r0, sp, 0xD4\n"
-"	ldrh r2, [r0, 0x2]\n"
-"	ldrh r3, [r3, 0x2]\n"
-"	adds r2, r3\n"
-"	lsls r2, 16\n"
-"	ldr r0, _0807F8D8\n"
-"	ands r1, r0\n"
-"	orrs r1, r2\n"
-"	str r1, [r4]\n"
-"	mov r0, r8\n"
-"	add r1, sp, 0xE0\n"
-"	bl sub_80703A0\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0807F870\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x7\n"
-"	ble _0807F87C\n"
-"_0807F8BE:\n"
-"	cmp r5, 0x8\n"
-"	bne _0807F8DC\n"
-"	ldr r0, [sp, 0xEC]\n"
-"	mov r1, r8\n"
-"	movs r2, 0\n"
-"	movs r3, 0\n"
-"	bl WarpTarget\n"
-"	b _0807F8FA\n"
-"	.align 2, 0\n"
-"_0807F8D0: .4byte gAdjacentTileOffsets\n"
-"_0807F8D4: .4byte 0xffff0000\n"
-"_0807F8D8: .4byte 0x0000ffff\n"
-"_0807F8DC:\n"
-"	mov r0, r8\n"
-"	add r1, sp, 0xD4\n"
-"	bl sub_807D068\n"
-"	add r0, sp, 0xD4\n"
-"	movs r3, 0\n"
-"	ldrsh r1, [r0, r3]\n"
-"	movs r0, 0xD6\n"
-"	add r0, sp\n"
-"	movs r4, 0\n"
-"	ldrsh r2, [r0, r4]\n"
-"	mov r0, r8\n"
-"	movs r3, 0x1\n"
-"	bl sub_80694C0\n"
-"_0807F8FA:\n"
-"	adds r0, r6, 0\n"
-"	bl GetEntityType\n"
-"	cmp r0, 0x1\n"
-"	bne _0807F954\n"
-"	add r4, sp, 0xE4\n"
-"	ldr r1, _0807F9AC\n"
-"	adds r0, r4, 0\n"
-"	bl InitPokemonMove\n"
-"	adds r0, r6, 0\n"
-"	adds r1, r4, 0\n"
-"	bl sub_80571F0\n"
-"	lsls r0, 24\n"
-"	lsrs r1, r0, 24\n"
-"	cmp r1, 0\n"
-"	bne _0807F93C\n"
-"	ldr r0, _0807F9B0\n"
-"	movs r3, 0\n"
-"	ldrsh r2, [r0, r3]\n"
-"	str r1, [sp]\n"
-"	str r1, [sp, 0x4]\n"
-"	ldr r0, _0807F9B4\n"
-"	str r0, [sp, 0x8]\n"
-"	str r1, [sp, 0xC]\n"
-"	str r1, [sp, 0x10]\n"
-"	str r1, [sp, 0x14]\n"
-"	ldr r0, [sp, 0xEC]\n"
-"	adds r1, r6, 0\n"
-"	movs r3, 0\n"
-"	bl sub_806F370\n"
-"_0807F93C:\n"
-"	adds r0, r6, 0\n"
-"	bl EntityIsValid\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0807F954\n"
-"	ldr r0, [r6, 0x70]\n"
-"	adds r0, 0x46\n"
-"	ldrb r1, [r0]\n"
-"	adds r0, r6, 0\n"
-"	bl sub_806CE68\n"
-"_0807F954:\n"
-"	ldr r0, _0807F9B0\n"
-"	movs r4, 0\n"
-"	ldrsh r2, [r0, r4]\n"
-"	movs r1, 0\n"
-"	str r1, [sp]\n"
-"	str r1, [sp, 0x4]\n"
-"	ldr r0, _0807F9B8\n"
-"	str r0, [sp, 0x8]\n"
-"	str r1, [sp, 0xC]\n"
-"	str r1, [sp, 0x10]\n"
-"	str r1, [sp, 0x14]\n"
-"	ldr r0, [sp, 0xEC]\n"
-"	mov r1, r8\n"
-"	movs r3, 0\n"
-"	bl sub_806F370\n"
-"	mov r0, r8\n"
-"	bl EntityIsValid\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0807F98E\n"
-"	mov r1, r8\n"
-"	ldr r0, [r1, 0x70]\n"
-"	adds r0, 0x46\n"
-"	ldrb r1, [r0]\n"
-"	mov r0, r8\n"
-"	bl sub_806CE68\n"
-"_0807F98E:\n"
-"	movs r0, 0x1E\n"
-"	movs r1, 0x3B\n"
-"	bl sub_803E708\n"
-"	mov r0, r8\n"
-"	bl sub_807F9BC\n"
-"_0807F99C:\n"
-"	add sp, 0x10C\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_0807F9AC: .4byte 0x00000163\n"
-"_0807F9B0: .4byte gHurlOrbDmgValue\n"
-"_0807F9B4: .4byte 0x0000021a\n"
-"_0807F9B8: .4byte 0x00000219");
+    if (positionsCounter != 0) {
+        s32 rnd = DungeonRandInt(positionsCounter);
+        attackerPos = positions[rnd];
+    }
+    else {
+        sub_80833E8(&target->pos, var_74);
+        for (i = 0; i < 100; i++) {
+            DungeonPos pos;
+            pos.x = DungeonRandRange(var_74[0], var_74[2]);
+            pos.y = DungeonRandRange(var_74[1], var_74[3]);
+            if (!sub_80703A0(attacker, &pos)) {
+                attackerPos = pos;
+                break;
+            }
+        }
+        if (i == 100) {
+            TryDisplayDungeonLoggableMessage3(target, attacker, gUnknown_80FE6B4); // But it didn~27t go anywhere.
+            return;
+        }
+    }
+
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
+    TryDisplayDungeonLoggableMessage3(target, attacker, gUnknown_80FE690); // m0 was sent flying!
+    if (sub_8045888(attacker)) {
+        PlaySoundEffect(0x1A3);
+    }
+
+    var_2C = 0;
+    attackerDirection = GetEntInfo(attacker)->action.direction;
+    r6 = max(attackerPos.x - attacker->pos.x, attackerPos.y - attacker->pos.y) << 4;
+    if (r6 > 80)
+        r6 = 80;
+    if (r6 < 10)
+        r6 = 10;
+
+    newDir = GetDirectionTowardsPosition(&attackerPos, &attacker->pos);
+
+    pixelPosX = X_POS_TO_PIXELPOS(attackerPos.x) + ((gAdjacentTileOffsets[newDir].x << 8) / 3);
+    pixelPosY = Y_POS_TO_PIXELPOS(attackerPos.y) + ((gAdjacentTileOffsets[newDir].y << 8) / 3);
+
+    var_30 = (pixelPosX - attacker->pixelPos.x) / r6;
+    r10 = (pixelPosY - attacker->pixelPos.y) / r6;
+    var_54.x = attacker->pixelPos.x;
+    var_54.y = attacker->pixelPos.y;
+    for (i = 0; i < r6; i++) {
+        var_54.x += var_30;
+        var_54.y += r10;
+        sub_804535C(attacker, &var_54);
+        if (sub_8045888(attacker)) {
+            attacker->unk1C.raw = sin_4096(var_2C) << 5;
+            sub_803E46C(0x3B);
+            if (!(i & 3)) {
+                attackerDirection &= DIRECTION_MASK;
+                sub_806CDD4(attacker, 6, attackerDirection);
+                attackerDirection++;
+            }
+        }
+        var_2C += (0x800 / r6);
+    }
+
+    var_54.x = pixelPosX;
+    var_54.y = pixelPosY;
+    attacker->unk1C.raw = 0;
+    sub_804535C(attacker, &var_54);
+    sub_803E46C(0x3B);
+    GetEntInfo(attacker)->action.direction = attackerDirection & DIRECTION_MASK;
+
+    tileEntity = GetTile(attackerPos.x, attackerPos.y)->monster;
+    if (!EntityIsValid(tileEntity)) {
+        sub_80694C0(attacker, attackerPos.x, attackerPos.y, 1);
+        sub_807F9BC(attacker);
+    }
+    else {
+        for (directionId = 0; directionId < NUM_DIRECTIONS; directionId++) {
+            DungeonPos pos;
+
+            pos.x = gAdjacentTileOffsets[directionId].x + attackerPos.x;
+            pos.y = gAdjacentTileOffsets[directionId].y + attackerPos.y;
+            if (!sub_80703A0(attacker, &pos)) {
+                attackerPos = pos;
+                break;
+            }
+        }
+        if (directionId == NUM_DIRECTIONS) {
+            WarpTarget(target, attacker, 0, NULL);
+        }
+        else {
+            sub_807D068(attacker, &attackerPos);
+            sub_80694C0(attacker, attackerPos.x, attackerPos.y, 1);
+        }
+
+        if (GetEntityType(tileEntity) == ENTITY_MONSTER) {
+            Move move;
+
+            InitPokemonMove(&move, MOVE_REGULAR_ATTACK);
+            if (!sub_80571F0(tileEntity, &move)) {
+                sub_806F370(target, tileEntity, gHurlOrbDmgValue, FALSE, NULL, TYPE_NONE, 0x21A, 0, 0, 0);
+            }
+            if (EntityIsValid(tileEntity)) {
+                sub_806CE68(tileEntity, GetEntInfo(tileEntity)->action.direction);
+            }
+        }
+
+        sub_806F370(target, attacker, gHurlOrbDmgValue, FALSE, NULL, TYPE_NONE, 0x219, 0, 0, 0);
+        if (EntityIsValid(attacker)) {
+            sub_806CE68(attacker, GetEntInfo(attacker)->action.direction);
+        }
+        sub_803E708(0x1E, 0x3B);
+        sub_807F9BC(attacker);
+    }
 }
 
 void sub_807F9BC(Entity *entity)
