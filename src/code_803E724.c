@@ -39,7 +39,6 @@ extern struct DungeonPalFile *gDungeonPaletteFile;
 extern struct DungeonPalFile *gDungeonNameBannerPalette;
 extern struct DungeonPalFile *gUnknown_202EC94;
 extern RGB gUnknown_202ECA4[];
-extern RGB gUnknown_202D058;
 extern u8 gUnknown_203B40C;
 extern MenuInputStruct gUnknown_202EE10;
 extern SpriteOAM gUnknown_202EDDC;
@@ -58,10 +57,7 @@ extern const u16 gUnknown_80F6544[][9];
 
 extern u8 gUnknown_20274A5;
 
-extern Palette32 gFontPalette[8];
-
 extern s32 gUnknown_202EDCC;
-extern u32 gUnknown_3001018[];
 
 extern void sub_8040A84();
 extern void sub_8083D44(void);
@@ -120,7 +116,7 @@ void sub_803E874(bool8 r10, s32 r9)
         }
     }
 
-    SetBGPaletteBufferColorRGB(248, &gUnknown_202D058, gDungeonBrightness, NULL);
+    SetBGPaletteBufferColorRGB(248, &gFontPalette[8], gDungeonBrightness, NULL);
 
     color = ((struct DungeonPalFile*) gDungeon->paletFile)->unk4;
     index = 256;
@@ -177,7 +173,7 @@ void sub_803EA10(void)
         index++;
     }
 
-    SetBGPaletteBufferColorRGB(248, &gUnknown_202D058, gDungeonBrightness, NULL);
+    SetBGPaletteBufferColorRGB(248, &gFontPalette[8], gDungeonBrightness, NULL);
 }
 
 void sub_803EAF0(u32 a0, u8 *a1)
@@ -859,13 +855,13 @@ void sub_803F38C(void)
 
     palId = (gGameOptionsRef->playerGender != MALE) ? 4 : 0;
 
-    SetBGPaletteBufferColorArray(0xFD, &gFontPalette[palId].pal[13]);
-    SetBGPaletteBufferColorArray(0xFE, &gFontPalette[palId].pal[14]);
-    SetBGPaletteBufferColorArray(0xFF, &gFontPalette[palId].pal[15]);
+    SetBGPaletteBufferColorArray(0xFD, &gFontPalette[16 * palId + 13]);
+    SetBGPaletteBufferColorArray(0xFE, &gFontPalette[16 * palId + 14]);
+    SetBGPaletteBufferColorArray(0xFF, &gFontPalette[16 * palId + 15]);
 
-    nullsub_5(0xFD, &gFontPalette[palId].pal[13]);
-    nullsub_5(0xFE, &gFontPalette[palId].pal[14]);
-    nullsub_5(0xFF, &gFontPalette[palId].pal[15]);
+    nullsub_5(0xFD, &gFontPalette[16 * palId + 13]);
+    nullsub_5(0xFE, &gFontPalette[16 * palId + 14]);
+    nullsub_5(0xFF, &gFontPalette[16 * palId + 15]);
 }
 
 bool8 sub_803F428(DungeonPos *pos)
@@ -1153,6 +1149,8 @@ void sub_803F9CC(void)
     gUnknown_20274A5 = TRUE;
 }
 
+IWRAM_DATA static u32 gUnknown_3001018[96] = {0};
+
 void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
 {
     s32 i;
@@ -1214,7 +1212,7 @@ void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
             r5 = 0;
         }
     }
-    sub_80098BC((void *) VRAM + 0x5980, gUnknown_3001018, 0x180);
+    sub_80098BC((void *) VRAM + 0x5980, gUnknown_3001018, sizeof(gUnknown_3001018));
 }
 
 void sub_803FB74(void)
@@ -1267,18 +1265,18 @@ void sub_803FB74(void)
 
     if (strPtr->unk36 != r5) {
         strPtr->unk36 = r5;
-        SetBGPaletteBufferColorArray(0xFC, &gFontPalette[0].pal[12 + r5]);
-        SetBGPaletteBufferColorArray(0xFD, &gFontPalette[0].pal[13 + r5]);
-        SetBGPaletteBufferColorArray(0xFE, &gFontPalette[0].pal[14 + r5]);
-        SetBGPaletteBufferColorArray(0xFF, &gFontPalette[0].pal[15 + r5]);
+        SetBGPaletteBufferColorArray(0xFC, &gFontPalette[12 + r5]);
+        SetBGPaletteBufferColorArray(0xFD, &gFontPalette[13 + r5]);
+        SetBGPaletteBufferColorArray(0xFE, &gFontPalette[14 + r5]);
+        SetBGPaletteBufferColorArray(0xFF, &gFontPalette[15 + r5]);
     }
 
     if (strPtr->unk38 != r6) {
         strPtr->unk38 = r6;
-        nullsub_5(0xFC, &gFontPalette[0].pal[12 + r6]);
-        nullsub_5(0xFD, &gFontPalette[0].pal[13 + r6]);
-        nullsub_5(0xFE, &gFontPalette[0].pal[14 + r6]);
-        nullsub_5(0xFF, &gFontPalette[0].pal[15 + r6]);
+        nullsub_5(0xFC, &gFontPalette[12 + r6]);
+        nullsub_5(0xFD, &gFontPalette[13 + r6]);
+        nullsub_5(0xFE, &gFontPalette[14 + r6]);
+        nullsub_5(0xFF, &gFontPalette[15 + r6]);
     }
 
     arrPtr = gUnknown_202B038[0][0];

@@ -167,7 +167,7 @@ void sub_801CCD8(void)
         sub_8012BC4((sUnknown_203B244->unk4B4.s0.unk38->width * 8) - 2, y2, gTeamInventoryRef->teamStorage[itemID], 3, 5, sUnknown_203B244->unk4B4.s0.unk34);
 
         if (sub_801CFE0(itemID) & 1)
-            sub_8007B7C(sUnknown_203B244->unk4B4.s0.unk34, 8, GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index), (sUnknown_203B244->unk4B4.s0.unk38->width - 1) * '\b', 10); // TODO: Ghidra being crazy
+            sub_8007B7C(sUnknown_203B244->unk4B4.s0.unk34, 8, GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index), (sUnknown_203B244->unk4B4.s0.unk38->width - 1) * 8, 10);
     }
 
     sub_80073E0(sUnknown_203B244->unk4B4.s0.unk34);

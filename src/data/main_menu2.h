@@ -1,5 +1,5 @@
 static const Window sUnknown_80E59C8 = {
-    0, 0, 0, 0,
+    0,
     3,
     0, 0,
     0, 0,
@@ -8,7 +8,7 @@ static const Window sUnknown_80E59C8 = {
 };
 
 static const Window sUnknown_80E59E0 = {
-    0, 0, 0, 0,
+    0,
     3,
     2, 2,
     10, 3,
@@ -23,7 +23,7 @@ static const MenuItem sUnknown_80E59F8[] = {
 };
 
 UNUSED static const Window sUnknown_80E5A29 = {
-    0, 0, 0, 0,
+    0,
     3,
     2, 2,
     10, 2,
@@ -37,7 +37,7 @@ UNUSED static const MenuItem sUnknown_80E5A44[] = {
 };
 
 static const Window sUnknown_80E5A60 = {
-    0, 0, 0, 0,
+    0,
     3,
     2, 2,
     10, 8,
@@ -46,7 +46,7 @@ static const Window sUnknown_80E5A60 = {
 };
 
 static const Window sUnknown_80E5A78 = {
-    0, 0, 0, 0,
+    0,
     3,
     2, 2,
     11, 9,
@@ -74,7 +74,7 @@ static const MenuItem sUnknown_80E5AFC[] = {
 };
 
 static const Window sUnknown_80E5B34 = {
-    0, 0, 0, 0,
+    0,
     3,
     2, 2,
     10, 8,
@@ -102,7 +102,7 @@ static const MenuItem sUnknown_80E5B8C[] = {
 };
 
 static const Window sUnknown_80E5BC4 = {
-    0, 0, 0, 0,
+    0,
     3,
     2, 2,
     10, 8,
@@ -130,7 +130,7 @@ static const MenuItem sUnknown_80E5C18[] = {
 };
 
 UNUSED static const Window sUnknown_80E5C50 = {
-    0, 0, 0, 0,
+    0,
     3,
     2, 2,
     10, 3,
@@ -151,7 +151,7 @@ UNUSED static const MenuItem sUnknown_80E5C9C[] = {
 };
 
 static const Window sUnknown_80E5CB4 = {
-    0, 0, 0, 0,
+    0,
     3,
     2, 15,
     26, 3,

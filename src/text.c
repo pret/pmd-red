@@ -15,8 +15,6 @@ struct CharMapStruct
     struct unkChar *unk4;
 };
 
-// data.s
-
 // data2.s
 extern const char gUnknown_80B88B0[]; // "font"
 extern const char gUnknown_80B88B8[]; // "fontsp"
@@ -24,9 +22,6 @@ extern const char gUnknown_80B88C0[]; // "fontsppa"
 
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
-
-// Todo fix gUnknown_3000E94 being accessed as s16/u8
-extern s16 gUnknown_3000E94[];
 
 EWRAM_DATA UnkTextStruct1 gUnknown_2027370[4] = {0};
 EWRAM_DATA static struct CharMapStruct *sCharmaps[2] = {NULL};
@@ -45,6 +40,8 @@ EWRAM_DATA static s32 sCharHeight[2] = {0};
 EWRAM_DATA static u32 sTextShadowMask = 0; // Some text color info is stored; retrieve via "& 0xF"
 EWRAM_DATA static u8 sDrawTextShadow = 0;
 EWRAM_DATA ALIGNED(4) u16 gUnknown_202B038[4][32][32] = {0};
+
+IWRAM_DATA static s16 gUnknown_3000E94[161] = {0};
 
 // These text-related functions were deemed important as they're copied and run from IWRAM for improved performance.
 static void sub_8272774(UnkTextStruct1 *txtStructs, s32 id);
@@ -2861,7 +2858,7 @@ static void sub_800898C(void)
 {
     s32 i;
 
-    for (i = 0; i < 161; i++) {
+    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_3000E94); i++) {
         gUnknown_3000E94[i] = 0xF0F0;
     }
 }
@@ -2873,7 +2870,7 @@ static void sub_80089AC(const Window *r4, DungeonPos *r5_Str)
     if (r4->unk0 & 0x40)
         return;
 
-    r6 = (void*) &gUnknown_3000E94;
+    r6 = (u8*) gUnknown_3000E94;
     if (r4->type == WINDOW_TYPE_WITHOUT_BORDER) {
         s32 r12 = (r4->pos.x + r5_Str->x) * 8;
         s32 r5 = (r4->pos.y + r5_Str->y) * 8;

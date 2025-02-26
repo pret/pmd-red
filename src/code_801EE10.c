@@ -14,7 +14,7 @@
 EWRAM_INIT unkStruct_203B270 *gUnknown_203B270 = {NULL};
 
 const Window gUnknown_80DC240 = {
-    0x00, 0x00, 0x00, 0x00,
+    0x00,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -25,7 +25,7 @@ const Window gUnknown_80DC240 = {
 const WindowHeader gUnkData_80DC258 = {0x01, 0x00, 0x0F, 0x00};
 
 const Window gUnknown_80DC25C = {
-    0, 0, 0, 0,
+    0,
     6,
     0x2, 0x2,
     0x12, 0x8,
@@ -34,7 +34,7 @@ const Window gUnknown_80DC25C = {
 };
 
 const Window gUnknown_80DC274 = {
-    0, 0, 0, 0,
+    0,
     3,
     0x2, 0xF,
     0x1A, 0x3,

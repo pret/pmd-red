@@ -1256,7 +1256,7 @@ void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2_, s32 a3, s32 a4)
 void sub_806806C(PokemonStruct1 *a0)
 {
     struct unkStruct_808FF20 unkStruct;
-    u8 var_C8[48];
+    struct UnkInfoTabStruct var_C8;
     Windows spTxtStruct = {0};
     s32 r7;
 
@@ -1299,7 +1299,7 @@ void sub_806806C(PokemonStruct1 *a0)
         sub_801317C(&gUnknown_202EE10.unk28);
         sub_803ECB4(&spTxtStruct, 1);
         sub_808FF20(&unkStruct, a0, gDungeon->unk644.unk16);
-        CreatePokemonInfoTabScreen(spF8[r7], r7, &unkStruct, var_C8, 0);
+        CreatePokemonInfoTabScreen(spF8[r7], r7, &unkStruct, &var_C8, 0);
 
         gUnknown_202EE10.unkC = (gUnknown_2027370[0].unk0 + 15) * 8;
         gUnknown_202EE10.unkE = ((gUnknown_2027370[0].unk2 + 1) * 8) - 2;
@@ -1309,7 +1309,7 @@ void sub_806806C(PokemonStruct1 *a0)
 
             AddMenuCursorSprite(&gUnknown_202EE10);
             if (spF8[r7] == 4) {
-                if (var_C8[8] != 0) {
+                if (var_C8.unk0[8] != 0) {
                     sub_80684C4();
                 }
                 if (unkStruct.unk40 != 0) {
@@ -1335,7 +1335,7 @@ void sub_806806C(PokemonStruct1 *a0)
             }
 
             if (spF8[r7] == 4) {
-                if (((gRealInputs.repeated & DPAD_DOWN) || r5 == 2) && var_C8[8] != 0) {
+                if (((gRealInputs.repeated & DPAD_DOWN) || r5 == 2) && var_C8.unk0[8] != 0) {
                     s32 i;
 
                     sub_8083CE0(0);

@@ -21,7 +21,7 @@ struct unkStruct_203B274
 EWRAM_INIT struct unkStruct_203B274 *gUnknown_203B274 = {NULL};
 
 static const Window sUnknown_80DC2AC = {
-    0, 0, 0, 0,
+    0,
     3,
     0, 0,
     0, 0,
@@ -29,7 +29,7 @@ static const Window sUnknown_80DC2AC = {
     NULL
 };
 static const Window sUnknown_80DC2C4 = {
-    0, 0, 0, 0,
+    0,
     6,
     2, 2,
     0xF, 4,

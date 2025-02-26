@@ -27,7 +27,7 @@ static EWRAM_INIT struct unkStruct_203B320 *gUnknown_203B320 = {NULL};
 extern unkStruct_203B480 *gUnknown_203B480;
 
 const Window gUnknown_80E083C = {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -36,7 +36,7 @@ const Window gUnknown_80E083C = {
 };
 
 const Window gUnknown_80E0854 = {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x06,
     0x02, 0x02,
     0x18, 0x11,

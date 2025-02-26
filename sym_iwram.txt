@@ -6,13 +6,7 @@ gUnknown_3000400: /* 3000400 */
 gUnknown_3000C00: /* 3000C00 */
 	.space 0x294
 
-gUnknown_3000E94: /* 3000E94 */
-	.space 0x144
-
+.include "src/text.o"
 .include "src/music.o"
-
-gUnknown_3001018: /* 3001018 */
-	.space 0x180
-
+.include "src/code_803E724.o"
 .include "src/code_8094D28.o"
-

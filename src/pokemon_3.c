@@ -9,6 +9,7 @@
 #include "constants/iq_skill.h"
 #include "constants/tactic.h"
 #include "constants/type.h"
+#include "constants/ability.h"
 #include "structs/str_pokemon.h"
 #include "sprite.h"
 #include "text_util.h"
@@ -16,6 +17,9 @@
 #include "luminous_cave.h"
 #include "code_8097670.h"
 #include "moves.h"
+#include "string_format.h"
+#include "dungeon.h"
+#include "text.h"
 
 extern u8 *gIQSkillNames[];
 extern u8 *gIQSkillDescriptions[];
@@ -23,24 +27,12 @@ extern u8 *gTacticsDescriptions[];
 extern u8 *gTactics[];
 extern u32 gIQSkillGroups[];
 
-struct unkStruct_808E9EC
-{
-    u32 unk0;
-    u32 unk4;
-    u32 unk8;
-    u32 unkC;
-    u8 unk10;
-    u8 unk11;
-    u8 unk12;
-    u8 unk13;
-};
-
 extern SpriteOAM gShadowSprites[3]; // Shadow sprites of some kind
-extern s16 gUnknown_810AC60; // 0xC
-extern s16 gUnknown_810AC62; // 0xC
-extern s16 gUnknown_810AC68; // 0x8
-extern s16 gUnknown_810AC64; // 0x8
-extern s16 gUnknown_810AC66; // 0x8
+extern const s16 gUnknown_810AC60; // 0xC
+extern const s16 gUnknown_810AC62; // 0xC
+extern const s16 gUnknown_810AC68; // 0x8
+extern const s16 gUnknown_810AC64; // 0x8
+extern const s16 gUnknown_810AC66; // 0x8
 extern u8 *gUnknown_810DD58[];
 extern u8 *gEvolutionStrings[];
 extern u8 *gExpPts810DD9C_Ptr[];
@@ -310,166 +302,52 @@ s32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0)
     return (r0->unk0 >> 9);
 }
 
-// Unused
-#ifdef NONMATCHING
-void sub_808E9EC(PokemonStruct1 *r0, struct unkStruct_808E9EC *r1)
+struct UnusedOffenseStruct
 {
-    u8 pokeAtt;
-    u8 r4;
-    u32 reg1_8;
-    s16 reg1;
+    s32 att[2];
+    s32 def[2];
+    u8 atkBoost;
+    u8 spAtkBoost;
+    u8 defBoost;
+    u8 spDefBoost;
+};
 
-    pokeAtt = r0->offense.att[0];
-
-    r1->unk0 = pokeAtt;
-    r1->unk4 = r0->offense.att[1];
-    r1->unk8 = r0->offense.def[0];
-    r1->unkC = r0->offense.def[1];
-    r1->unk10 = 0;
-    r1->unk11 = 0;
-    r1->unk12 = 0;
-    r1->unk13 = 0;
-    if(r0->heldItem.id != 0)
-    {
-        r4 = r0->heldItem.id;
-        if(r4 == 0x13)
-        {
-            r1->unk10 = gUnknown_810AC60;
-            r1->unk0 = pokeAtt + gUnknown_810AC60;
+UNUSED static void GetMonOffenseStats(PokemonStruct1 *mon, struct UnusedOffenseStruct *dst)
+{
+    dst->att[0] = mon->offense.att[0];
+    dst->att[1] = mon->offense.att[1];
+    dst->def[0] = mon->offense.def[0];
+    dst->def[1] = mon->offense.def[1];
+    dst->atkBoost = 0;
+    dst->spAtkBoost = 0;
+    dst->defBoost = 0;
+    dst->spDefBoost = 0;
+    if (mon->heldItem.id != ITEM_NOTHING) {
+        u16 itemId = mon->heldItem.id;
+        if (itemId == ITEM_POWER_BAND) {
+            dst->atkBoost += gUnknown_810AC60;
+            dst->att[0] += gUnknown_810AC60;
         }
-        if(r4 == 0x21)
-        {
-            r1->unk11 += gUnknown_810AC62;
-            r1->unk4 += gUnknown_810AC62;
+        if (itemId == ITEM_SPECIAL_BAND) {
+            dst->spAtkBoost += gUnknown_810AC62;
+            dst->att[1] += gUnknown_810AC62;
         }
-        if(r4 == 0x2B)
-        {
-            // TODO: regs get a little f**ked
-            reg1_8 = (u8)gUnknown_810AC68;
-            r1->unk10 += reg1_8;
-            r1->unk11 += reg1_8;
-
-            reg1 = gUnknown_810AC68;
-            r1->unk0 += reg1;
-            r1->unk4 += reg1;
+        if (itemId == ITEM_MUNCH_BELT) {
+            dst->atkBoost += gUnknown_810AC68;
+            dst->spAtkBoost += gUnknown_810AC68;
+            dst->att[0] += gUnknown_810AC68;
+            dst->att[1] += gUnknown_810AC68;
         }
-        if(r4 == 0x1E)
-        {
-            r1->unk12 += gUnknown_810AC64;
-            r1->unk8 += gUnknown_810AC64;
+        if (itemId == ITEM_DEF_SCARF) {
+            dst->defBoost += gUnknown_810AC64;
+            dst->def[0] += gUnknown_810AC64;
         }
-        if(r4 == 0x22)
-        {
-            r1->unk13 += gUnknown_810AC66;
-            r1->unkC += gUnknown_810AC66;
+        if (itemId == ITEM_ZINC_BAND) {
+            dst->spDefBoost += gUnknown_810AC66;
+            dst->def[1] += gUnknown_810AC66;
         }
     }
 }
-#else
-NAKED
-void sub_808E9EC(PokemonStruct1 *r0, struct unkStruct_808E9EC *r1)
-{
-	asm_unified("\tpush {r4-r6,lr}\n"
-	"\tadds r3, r1, 0\n"
-	"\tldrb r2, [r0, 0x18]\n"
-	"\tstr r2, [r3]\n"
-	"\tldrb r1, [r0, 0x19]\n"
-	"\tstr r1, [r3, 0x4]\n"
-	"\tldrb r1, [r0, 0x1A]\n"
-	"\tstr r1, [r3, 0x8]\n"
-	"\tldrb r1, [r0, 0x1B]\n"
-	"\tstr r1, [r3, 0xC]\n"
-	"\tmovs r1, 0\n"
-	"\tstrb r1, [r3, 0x10]\n"
-	"\tstrb r1, [r3, 0x11]\n"
-	"\tstrb r1, [r3, 0x12]\n"
-	"\tstrb r1, [r3, 0x13]\n"
-	"\tadds r1, r0, 0\n"
-	"\tadds r1, 0x28\n"
-	"\tldrb r0, [r1]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _0808EA96\n"
-	"\tadds r4, r0, 0\n"
-	"\tadds r5, r4, 0\n"
-	"\tcmp r4, 0x13\n"
-	"\tbne _0808EA2A\n"
-	"\tldr r1, _0808EA9C\n"
-	"\tldrh r0, [r1]\n"
-	"\tstrb r0, [r3, 0x10]\n"
-	"\tmovs r6, 0\n"
-	"\tldrsh r0, [r1, r6]\n"
-	"\tadds r0, r2, r0\n"
-	"\tstr r0, [r3]\n"
-"_0808EA2A:\n"
-	"\tcmp r4, 0x21\n"
-	"\tbne _0808EA42\n"
-	"\tldr r1, _0808EAA0\n"
-	"\tldrb r0, [r1]\n"
-	"\tldrb r2, [r3, 0x11]\n"
-	"\tadds r0, r2\n"
-	"\tstrb r0, [r3, 0x11]\n"
-	"\tmovs r6, 0\n"
-	"\tldrsh r1, [r1, r6]\n"
-	"\tldr r0, [r3, 0x4]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r3, 0x4]\n"
-"_0808EA42:\n"
-	"\tcmp r4, 0x2B\n"
-	"\tbne _0808EA66\n"
-	"\tldr r2, _0808EAA4\n"
-	"\tldrb r0, [r2]\n"
-	"\tldrb r6, [r3, 0x10]\n"
-	"\tadds r1, r0, r6\n"
-	"\tstrb r1, [r3, 0x10]\n"
-	"\tldrb r1, [r3, 0x11]\n"
-	"\tadds r0, r1\n"
-	"\tstrb r0, [r3, 0x11]\n"
-	"\tmovs r6, 0\n"
-	"\tldrsh r1, [r2, r6]\n"
-	"\tldr r0, [r3]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r3]\n"
-	"\tldr r0, [r3, 0x4]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r3, 0x4]\n"
-"_0808EA66:\n"
-	"\tcmp r4, 0x1E\n"
-	"\tbne _0808EA7E\n"
-	"\tldr r1, _0808EAA8\n"
-	"\tldrb r0, [r1]\n"
-	"\tldrb r2, [r3, 0x12]\n"
-	"\tadds r0, r2\n"
-	"\tstrb r0, [r3, 0x12]\n"
-	"\tmovs r6, 0\n"
-	"\tldrsh r1, [r1, r6]\n"
-	"\tldr r0, [r3, 0x8]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r3, 0x8]\n"
-"_0808EA7E:\n"
-	"\tcmp r5, 0x22\n"
-	"\tbne _0808EA96\n"
-	"\tldr r1, _0808EAAC\n"
-	"\tldrb r0, [r1]\n"
-	"\tldrb r2, [r3, 0x13]\n"
-	"\tadds r0, r2\n"
-	"\tstrb r0, [r3, 0x13]\n"
-	"\tmovs r6, 0\n"
-	"\tldrsh r1, [r1, r6]\n"
-	"\tldr r0, [r3, 0xC]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r3, 0xC]\n"
-"_0808EA96:\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_0808EA9C: .4byte gUnknown_810AC60\n"
-"_0808EAA0: .4byte gUnknown_810AC62\n"
-"_0808EAA4: .4byte gUnknown_810AC68\n"
-"_0808EAA8: .4byte gUnknown_810AC64\n"
-"_0808EAAC: .4byte gUnknown_810AC66");
-}
-#endif
 
 u8 *GetIQSkillName(u8 skill)
 {
@@ -1176,809 +1054,224 @@ UNUSED void sub_808F83C(PokemonStruct1 *pokemon, s16 species, u8 *r2)
     *r2 = 0;
 }
 
-
-//  https://decomp.me/scratch/qONOW  - 91.59% matched (Seth)
-NAKED
-void CreatePokemonInfoTabScreen(u32 param_1, s32 param_2, struct unkStruct_808FF20 *param_3, u8 *param_4, u32 param_5)
+void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF20 *mon, struct UnkInfoTabStruct *param_4, u32 windowId)
 {
-    asm_unified(
-"	push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	sub sp, 0x30\n"
-"	adds r5, r0, 0\n"
-"	adds r4, r1, 0\n"
-"	mov r10, r2\n"
-"	str r3, [sp, 0x2C]\n"
-"	ldr r0, [sp, 0x50]\n"
-"	bl sub_80073B8\n"
-"	ldr r0, _0808F880\n"
-"	mov r1, r10\n"
-"	adds r1, 0x2\n"
-"	movs r2, 0x14\n"
-"	bl strncpy\n"
-"	movs r0, 0x20\n"
-"	mov r9, r0\n"
-"	cmp r5, 0x5\n"
-"	bls _0808F874\n"
-"	b _0808FED6\n"
-"_0808F874:\n"
-"	lsls r0, r5, 2\n"
-"	ldr r1, _0808F884\n"
-"	adds r0, r1\n"
-"	ldr r0, [r0]\n"
-"	mov pc, r0\n"
-"	.align 2, 0\n"
-"_0808F880: .4byte gFormatBuffer_Monsters\n"
-"_0808F884: .4byte _0808F888\n"
-"	.align 2, 0\n"
-"_0808F888:\n"
-"	.4byte _0808FED6\n"
-"	.4byte _0808FBF4\n"
-"	.4byte _0808F8A0\n"
-"	.4byte _0808FB44\n"
-"	.4byte _0808FCB0\n"
-"	.4byte _0808FDB0\n"
-"_0808F8A0:\n"
-"	lsls r0, r4, 3\n"
-"	adds r0, 0x10\n"
-"	ldr r2, _0808F998\n"
-"	movs r5, 0\n"
-"	str r5, [sp]\n"
-"	movs r1, 0\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	ldr r4, _0808F99C\n"
-"	mov r1, r10\n"
-"	ldr r0, [r1, 0x2C]\n"
-"	str r0, [r4]\n"
-"	ldr r0, [r1, 0x30]\n"
-"	str r0, [r4, 0x4]\n"
-"	ldr r0, _0808F9A0\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r2, 0xA\n"
-"	add r9, r2\n"
-"	ldr r0, _0808F9A4\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r3, 0xA\n"
-"	add r9, r3\n"
-"	mov r0, r10\n"
-"	ldr r2, [r0, 0x2C]\n"
-"	cmp r2, 0x63\n"
-"	bgt _0808F914\n"
-"	movs r3, 0\n"
-"	ldrsh r1, [r0, r3]\n"
-"	adds r2, 0x1\n"
-"	add r0, sp, 0x8\n"
-"	bl GetPokemonLevelData\n"
-"	ldr r0, [sp, 0x8]\n"
-"	mov r2, r10\n"
-"	ldr r1, [r2, 0x30]\n"
-"	subs r0, r1\n"
-"	str r0, [r4]\n"
-"	ldr r0, _0808F9A8\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"_0808F914:\n"
-"	movs r3, 0xC\n"
-"	add r9, r3\n"
-"	mov r1, r10\n"
-"	ldr r0, [r1, 0x24]\n"
-"	str r0, [r4]\n"
-"	ldr r0, [r1, 0x28]\n"
-"	str r0, [r4, 0x4]\n"
-"	ldr r0, _0808F9AC\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r2, 0xA\n"
-"	add r9, r2\n"
-"	ldr r0, _0808F9B0\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	ldr r0, _0808F9B4\n"
-"	ldr r2, [r0]\n"
-"	mov r0, r10\n"
-"	adds r0, 0x34\n"
-"	ldrb r3, [r0]\n"
-"	str r3, [r4]\n"
-"	mov r1, r10\n"
-"	adds r1, 0x39\n"
-"	ldrb r0, [r1]\n"
-"	cmp r0, 0\n"
-"	beq _0808F964\n"
-"	adds r0, r3, r0\n"
-"	str r0, [r4]\n"
-"	ldr r0, _0808F9B8\n"
-"	ldr r2, [r0]\n"
-"_0808F964:\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	mov r1, r10\n"
-"	adds r1, 0x3B\n"
-"	ldrb r3, [r1]\n"
-"	cmp r3, 0\n"
-"	beq _0808F9C0\n"
-"	mov r0, r10\n"
-"	adds r0, 0x36\n"
-"	ldrb r0, [r0]\n"
-"	adds r1, r3, 0\n"
-"	adds r0, r1\n"
-"	str r0, [r4]\n"
-"	ldr r0, _0808F9BC\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	b _0808F9D8\n"
-"	.align 2, 0\n"
-"_0808F998: .4byte gUnknown_8107754\n"
-"_0808F99C: .4byte gFormatArgs\n"
-"_0808F9A0: .4byte gLevel810DD6C_Ptr\n"
-"_0808F9A4: .4byte gExpPts810DD9C_Ptr\n"
-"_0808F9A8: .4byte gUnknown_810DDB8\n"
-"_0808F9AC: .4byte gUnknown_810DDD0\n"
-"_0808F9B0: .4byte gUnknown_810DDE4\n"
-"_0808F9B4: .4byte gUnknown_810DE0C\n"
-"_0808F9B8: .4byte gUnknown_810DE20\n"
-"_0808F9BC: .4byte gUnknown_810DE4C\n"
-"_0808F9C0:\n"
-"	mov r0, r10\n"
-"	adds r0, 0x36\n"
-"	ldrb r0, [r0]\n"
-"	str r0, [r4]\n"
-"	ldr r0, _0808FA44\n"
-"	ldr r2, [r0]\n"
-"	str r3, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"_0808F9D8:\n"
-"	movs r3, 0xA\n"
-"	add r9, r3\n"
-"	ldr r0, _0808FA48\n"
-"	ldr r2, [r0]\n"
-"	movs r5, 0\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	ldr r0, _0808FA4C\n"
-"	ldr r2, [r0]\n"
-"	ldr r4, _0808FA50\n"
-"	mov r0, r10\n"
-"	adds r0, 0x35\n"
-"	ldrb r3, [r0]\n"
-"	str r3, [r4]\n"
-"	mov r1, r10\n"
-"	adds r1, 0x3A\n"
-"	ldrb r0, [r1]\n"
-"	cmp r0, 0\n"
-"	beq _0808FA0E\n"
-"	adds r0, r3, r0\n"
-"	str r0, [r4]\n"
-"	ldr r0, _0808FA54\n"
-"	ldr r2, [r0]\n"
-"_0808FA0E:\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	mov r1, r10\n"
-"	adds r1, 0x3C\n"
-"	ldrb r3, [r1]\n"
-"	cmp r3, 0\n"
-"	beq _0808FA5C\n"
-"	mov r0, r10\n"
-"	adds r0, 0x37\n"
-"	ldrb r0, [r0]\n"
-"	adds r1, r3, 0\n"
-"	adds r0, r1\n"
-"	str r0, [r4]\n"
-"	ldr r0, _0808FA58\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	b _0808FA74\n"
-"	.align 2, 0\n"
-"_0808FA44: .4byte gUnknown_810DE38\n"
-"_0808FA48: .4byte gUnknown_810DDFC\n"
-"_0808FA4C: .4byte gUnknown_810DE24\n"
-"_0808FA50: .4byte gFormatArgs\n"
-"_0808FA54: .4byte gUnknown_810DE28\n"
-"_0808FA58: .4byte gUnknown_810DE54\n"
-"_0808FA5C:\n"
-"	mov r0, r10\n"
-"	adds r0, 0x37\n"
-"	ldrb r0, [r0]\n"
-"	str r0, [r4]\n"
-"	ldr r0, _0808FA94\n"
-"	ldr r2, [r0]\n"
-"	str r3, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"_0808FA74:\n"
-"	movs r0, 0xA\n"
-"	add r9, r0\n"
-"	mov r2, r10\n"
-"	adds r2, 0x20\n"
-"	ldrb r1, [r2]\n"
-"	movs r0, 0x1\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	beq _0808FA9C\n"
-"	ldr r0, _0808FA98\n"
-"	adds r1, r2, 0\n"
-"	movs r2, 0\n"
-"	bl sub_8090E14\n"
-"	b _0808FAA6\n"
-"	.align 2, 0\n"
-"_0808FA94: .4byte gUnknown_810DE50\n"
-"_0808FA98: .4byte gFormatBuffer_Items\n"
-"_0808FA9C:\n"
-"	ldr r0, _0808FB24\n"
-"	ldr r1, _0808FB28\n"
-"	ldr r1, [r1]\n"
-"	bl strcpy\n"
-"_0808FAA6:\n"
-"	ldr r0, _0808FB2C\n"
-"	ldr r2, [r0]\n"
-"	movs r4, 0\n"
-"	str r4, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r1, 0xC\n"
-"	add r9, r1\n"
-"	ldr r1, _0808FB30\n"
-"	mov r2, r10\n"
-"	movs r3, 0x3E\n"
-"	ldrsh r0, [r2, r3]\n"
-"	str r0, [r1]\n"
-"	movs r1, 0x3E\n"
-"	ldrsh r0, [r2, r1]\n"
-"	movs r1, 0xA\n"
-"	bl __divsi3\n"
-"	lsls r0, 16\n"
-"	asrs r0, 16\n"
-"	cmp r0, 0\n"
-"	bge _0808FADA\n"
-"	movs r0, 0\n"
-"_0808FADA:\n"
-"	cmp r0, 0x62\n"
-"	ble _0808FAE0\n"
-"	movs r0, 0x63\n"
-"_0808FAE0:\n"
-"	ldr r1, _0808FB34\n"
-"	lsls r0, 2\n"
-"	adds r0, r1\n"
-"	ldr r5, _0808FB38\n"
-"	ldr r1, [r0]\n"
-"	adds r0, r5, 0\n"
-"	bl strcpy\n"
-"	ldr r0, _0808FB3C\n"
-"	ldr r2, [r0]\n"
-"	str r4, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r2, 0xA\n"
-"	add r9, r2\n"
-"	mov r0, r10\n"
-"	adds r0, 0x38\n"
-"	ldrb r4, [r0]\n"
-"	cmp r4, 0\n"
-"	beq _0808FB10\n"
-"	b _0808FED6\n"
-"_0808FB10:\n"
-"	adds r0, 0x1C\n"
-"	ldrb r1, [r0]\n"
-"	adds r0, r5, 0\n"
-"	bl CopyTacticsNameToBuffer\n"
-"	ldr r0, _0808FB40\n"
-"	ldr r2, [r0]\n"
-"	str r4, [sp]\n"
-"	b _0808FECC\n"
-"	.align 2, 0\n"
-"_0808FB24: .4byte gFormatBuffer_Items\n"
-"_0808FB28: .4byte gUnknown_810DE58\n"
-"_0808FB2C: .4byte gUnknown_810DE6C\n"
-"_0808FB30: .4byte gFormatArgs\n"
-"_0808FB34: .4byte gUnknown_8115718\n"
-"_0808FB38: .4byte gFormatBuffer_Monsters\n"
-"_0808FB3C: .4byte gUnknown_810DE80\n"
-"_0808FB40: .4byte gUnknown_810DE98\n"
-"_0808FB44:\n"
-"	lsls r0, r4, 3\n"
-"	adds r0, 0x10\n"
-"	ldr r2, _0808FBE8\n"
-"	movs r4, 0\n"
-"	str r4, [sp]\n"
-"	movs r1, 0\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	ldr r2, _0808FBEC\n"
-"	str r4, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	mov r3, r10\n"
-"	ldrb r0, [r3, 0x16]\n"
-"	bl GetFormattedTypeString\n"
-"	adds r2, r0, 0\n"
-"	str r4, [sp]\n"
-"	movs r0, 0x38\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	mov r1, r10\n"
-"	ldrb r0, [r1, 0x17]\n"
-"	cmp r0, 0\n"
-"	beq _0808FB94\n"
-"	bl GetFormattedTypeString\n"
-"	adds r2, r0, 0\n"
-"	str r4, [sp]\n"
-"	movs r0, 0x60\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"_0808FB94:\n"
-"	movs r2, 0xC\n"
-"	add r9, r2\n"
-"	ldr r2, _0808FBF0\n"
-"	str r4, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r3, 0xC\n"
-"	add r9, r3\n"
-"	mov r1, r10\n"
-"	ldrb r0, [r1, 0x18]\n"
-"	bl GetAbilityDescription\n"
-"	adds r2, r0, 0\n"
-"	str r4, [sp]\n"
-"	movs r5, 0xB\n"
-"	str r5, [sp, 0x4]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow2\n"
-"	movs r2, 0x21\n"
-"	add r9, r2\n"
-"	mov r3, r10\n"
-"	ldrb r0, [r3, 0x19]\n"
-"	cmp r0, 0\n"
-"	bne _0808FBD2\n"
-"	b _0808FED6\n"
-"_0808FBD2:\n"
-"	bl GetAbilityDescription\n"
-"	adds r2, r0, 0\n"
-"	str r4, [sp]\n"
-"	str r5, [sp, 0x4]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow2\n"
-"	b _0808FED6\n"
-"	.align 2, 0\n"
-"_0808FBE8: .4byte gUnknown_810775C\n"
-"_0808FBEC: .4byte gUnknown_8107768\n"
-"_0808FBF0: .4byte gUnknown_8107770\n"
-"_0808FBF4:\n"
-"	lsls r0, r4, 3\n"
-"	adds r0, 0x10\n"
-"	ldr r1, _0808FC34\n"
-"	ldr r2, [r1]\n"
-"	movs r1, 0\n"
-"	str r1, [sp]\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	mov r0, r10\n"
-"	adds r0, 0x56\n"
-"	movs r1, 0\n"
-"	ldrsh r0, [r0, r1]\n"
-"	subs r5, r0, 0x1\n"
-"	movs r2, 0xC\n"
-"	negs r2, r2\n"
-"	add r9, r2\n"
-"	movs r7, 0\n"
-"	ldr r6, [sp, 0x2C]\n"
-"	adds r6, 0xC\n"
-"	adds r1, r6, 0\n"
-"	movs r2, 0\n"
-"	ldr r0, [sp, 0x2C]\n"
-"	adds r0, 0x2C\n"
-"_0808FC24:\n"
-"	str r2, [r0]\n"
-"	subs r0, 0x4\n"
-"	cmp r0, r1\n"
-"	bge _0808FC24\n"
-"	movs r3, 0\n"
-"	mov r8, r3\n"
-"	b _0808FC88\n"
-"	.align 2, 0\n"
-"_0808FC34: .4byte gUnknown_810DD58\n"
-"_0808FC38:\n"
-"	mov r0, r10\n"
-"	adds r0, 0x58\n"
-"	adds r4, r0, r5\n"
-"	ldrb r0, [r4]\n"
-"	cmp r0, 0\n"
-"	beq _0808FC78\n"
-"	movs r7, 0x1\n"
-"	ldr r0, _0808FCA0\n"
-"	ldrb r1, [r4]\n"
-"	lsls r1, 2\n"
-"	adds r1, r0\n"
-"	ldr r0, _0808FCA4\n"
-"	ldr r1, [r1]\n"
-"	movs r2, 0x50\n"
-"	bl strncpy\n"
-"	ldr r2, _0808FCA8\n"
-"	movs r0, 0\n"
-"	str r0, [sp]\n"
-"	movs r0, 0xC\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	mov r0, r8\n"
-"	cmp r0, 0\n"
-"	ble _0808FC78\n"
-"	subs r0, 0x1\n"
-"	lsls r0, 2\n"
-"	adds r0, r6, r0\n"
-"	ldrb r1, [r4]\n"
-"	str r1, [r0]\n"
-"_0808FC78:\n"
-"	movs r1, 0x1\n"
-"	add r8, r1\n"
-"	adds r5, 0x1\n"
-"	movs r2, 0xC\n"
-"	add r9, r2\n"
-"	mov r3, r8\n"
-"	cmp r3, 0x9\n"
-"	bgt _0808FC90\n"
-"_0808FC88:\n"
-"	cmp r5, 0\n"
-"	blt _0808FC78\n"
-"	cmp r5, 0xB\n"
-"	ble _0808FC38\n"
-"_0808FC90:\n"
-"	cmp r7, 0\n"
-"	beq _0808FC96\n"
-"	b _0808FED6\n"
-"_0808FC96:\n"
-"	ldr r0, _0808FCAC\n"
-"	ldr r2, [r0]\n"
-"	str r7, [sp]\n"
-"	b _0808FD98\n"
-"	.align 2, 0\n"
-"_0808FCA0: .4byte gStatusNames\n"
-"_0808FCA4: .4byte gFormatBuffer_Items + 0x50\n"
-"_0808FCA8: .4byte gUnknown_8107784\n"
-"_0808FCAC: .4byte gUnknown_810DF78\n"
-"_0808FCB0:\n"
-"	lsls r0, r4, 3\n"
-"	adds r0, 0x10\n"
-"	ldr r1, _0808FCF8\n"
-"	ldr r2, [r1]\n"
-"	movs r1, 0\n"
-"	str r1, [sp]\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	add r4, sp, 0x14\n"
-"	mov r0, r10\n"
-"	movs r2, 0x3E\n"
-"	ldrsh r1, [r0, r2]\n"
-"	adds r0, r4, 0\n"
-"	bl GetNumAvailableIQSkills\n"
-"	mov r0, r10\n"
-"	adds r0, 0x40\n"
-"	movs r3, 0\n"
-"	ldrsh r0, [r0, r3]\n"
-"	subs r7, r0, 0x1\n"
-"	mov r1, r9\n"
-"	subs r1, 0xC\n"
-"	movs r2, 0\n"
-"	ldr r0, [sp, 0x2C]\n"
-"	adds r0, 0x8\n"
-"_0808FCE4:\n"
-"	strb r2, [r0]\n"
-"	subs r0, 0x1\n"
-"	ldr r3, [sp, 0x2C]\n"
-"	cmp r0, r3\n"
-"	bge _0808FCE4\n"
-"	mov r9, r1\n"
-"	movs r4, 0\n"
-"	mov r8, r4\n"
-"	b _0808FD84\n"
-"	.align 2, 0\n"
-"_0808FCF8: .4byte gIQSkill810DD68_Ptr\n"
-"_0808FCFC:\n"
-"	mov r5, sp\n"
-"	adds r5, r7\n"
-"	adds r5, 0x14\n"
-"	ldrb r0, [r5]\n"
-"	cmp r0, 0\n"
-"	beq _0808FD74\n"
-"	movs r4, 0x1\n"
-"	bl GetIQSkillName\n"
-"	adds r1, r0, 0\n"
-"	ldr r6, _0808FD3C\n"
-"	adds r0, r6, 0\n"
-"	movs r2, 0x50\n"
-"	bl strncpy\n"
-"	mov r0, r10\n"
-"	adds r0, 0x50\n"
-"	adds r1, r4, 0\n"
-"	ldrb r5, [r5]\n"
-"	lsls r1, r5\n"
-"	bl IsIQSkillSet\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0808FD44\n"
-"	adds r0, r6, 0\n"
-"	subs r0, 0x50\n"
-"	ldr r1, _0808FD40\n"
-"	bl strcpy\n"
-"	b _0808FD4E\n"
-"	.align 2, 0\n"
-"_0808FD3C: .4byte gFormatBuffer_Items + 0x50\n"
-"_0808FD40: .4byte gUnknown_8107788\n"
-"_0808FD44:\n"
-"	adds r0, r6, 0\n"
-"	subs r0, 0x50\n"
-"	ldr r1, _0808FDA4\n"
-"	bl strcpy\n"
-"_0808FD4E:\n"
-"	mov r0, r8\n"
-"	cmp r0, 0\n"
-"	ble _0808FD64\n"
-"	subs r0, 0x1\n"
-"	ldr r1, [sp, 0x2C]\n"
-"	adds r0, r1, r0\n"
-"	mov r1, sp\n"
-"	adds r1, r7\n"
-"	adds r1, 0x14\n"
-"	ldrb r1, [r1]\n"
-"	strb r1, [r0]\n"
-"_0808FD64:\n"
-"	ldr r2, _0808FDA8\n"
-"	movs r0, 0\n"
-"	str r0, [sp]\n"
-"	movs r0, 0xC\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"_0808FD74:\n"
-"	movs r2, 0x1\n"
-"	add r8, r2\n"
-"	adds r7, 0x1\n"
-"	movs r3, 0xC\n"
-"	add r9, r3\n"
-"	mov r0, r8\n"
-"	cmp r0, 0x9\n"
-"	bgt _0808FD8C\n"
-"_0808FD84:\n"
-"	cmp r7, 0\n"
-"	blt _0808FD74\n"
-"	cmp r7, 0x17\n"
-"	ble _0808FCFC\n"
-"_0808FD8C:\n"
-"	cmp r4, 0\n"
-"	beq _0808FD92\n"
-"	b _0808FED6\n"
-"_0808FD92:\n"
-"	ldr r0, _0808FDAC\n"
-"	ldr r2, [r0]\n"
-"	str r4, [sp]\n"
-"_0808FD98:\n"
-"	movs r0, 0xC\n"
-"	movs r1, 0x20\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	b _0808FED6\n"
-"	.align 2, 0\n"
-"_0808FDA4: .4byte gUnknown_810778C\n"
-"_0808FDA8: .4byte gUnknown_8107790\n"
-"_0808FDAC: .4byte gUnknown_810DF84\n"
-"_0808FDB0:\n"
-"	lsls r0, r4, 3\n"
-"	adds r0, 0x10\n"
-"	ldr r2, _0808FEEC\n"
-"	movs r5, 0\n"
-"	str r5, [sp]\n"
-"	movs r1, 0\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	ldr r6, _0808FEF0\n"
-"	mov r2, r10\n"
-"	movs r3, 0\n"
-"	ldrsh r1, [r2, r3]\n"
-"	adds r0, r6, 0\n"
-"	bl CopyMonsterNameToBuffer\n"
-"	ldr r1, _0808FEF4\n"
-"	mov r2, r10\n"
-"	movs r3, 0\n"
-"	ldrsh r0, [r2, r3]\n"
-"	str r0, [r1]\n"
-"	ldr r0, _0808FEF8\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r0, 0xA\n"
-"	add r9, r0\n"
-"	mov r1, r10\n"
-"	movs r2, 0\n"
-"	ldrsh r0, [r1, r2]\n"
-"	bl GetFriendArea\n"
-"	lsls r0, 24\n"
-"	lsrs r0, 24\n"
-"	bl GetFriendAreaName\n"
-"	adds r1, r0, 0\n"
-"	ldr r4, _0808FEFC\n"
-"	adds r0, r4, 0\n"
-"	movs r2, 0x50\n"
-"	bl strncpy\n"
-"	ldr r0, _0808FF00\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r3, 0xA\n"
-"	add r9, r3\n"
-"	ldr r0, _0808FF04\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r0, 0xD\n"
-"	add r9, r0\n"
-"	ldr r0, _0808FF08\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r1, 0xA\n"
-"	add r9, r1\n"
-"	mov r1, r10\n"
-"	adds r1, 0x1C\n"
-"	adds r0, r4, 0\n"
-"	bl PrintYellowDungeonNametoBuffer\n"
-"	ldr r0, _0808FF0C\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r2, 0xD\n"
-"	add r9, r2\n"
-"	mov r3, r10\n"
-"	movs r1, 0\n"
-"	ldrsh r0, [r3, r1]\n"
-"	bl GetCategoryString\n"
-"	adds r1, r0, 0\n"
-"	adds r0, r6, 0\n"
-"	movs r2, 0x14\n"
-"	bl strncpy\n"
-"	ldr r0, _0808FF10\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r2, 0xD\n"
-"	add r9, r2\n"
-"	ldr r4, _0808FF14\n"
-"	mov r3, r10\n"
-"	movs r1, 0\n"
-"	ldrsh r0, [r3, r1]\n"
-"	bl GetBodySize\n"
-"	lsls r0, 24\n"
-"	lsrs r0, 22\n"
-"	adds r0, r4\n"
-"	ldr r1, [r0]\n"
-"	adds r0, r6, 0\n"
-"	bl strcpy\n"
-"	ldr r0, _0808FF18\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"	movs r2, 0xD\n"
-"	add r9, r2\n"
-"	ldr r1, _0808FF1C\n"
-"	mov r0, r10\n"
-"	adds r0, 0x4C\n"
-"	ldrb r0, [r0]\n"
-"	lsls r0, 2\n"
-"	adds r0, r1\n"
-"	ldr r2, [r0]\n"
-"	str r5, [sp]\n"
-"_0808FECC:\n"
-"	movs r0, 0x4\n"
-"	mov r1, r9\n"
-"	ldr r3, [sp, 0x50]\n"
-"	bl PrintFormattedStringOnWindow\n"
-"_0808FED6:\n"
-"	ldr r0, [sp, 0x50]\n"
-"	bl sub_80073E0\n"
-"	add sp, 0x30\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_0808FEEC: .4byte gUnknown_8107798\n"
-"_0808FEF0: .4byte gFormatBuffer_Monsters\n"
-"_0808FEF4: .4byte gFormatArgs\n"
-"_0808FEF8: .4byte gUnknown_810DEB4\n"
-"_0808FEFC: .4byte gFormatBuffer_Items\n"
-"_0808FF00: .4byte gUnknown_810DEC8\n"
-"_0808FF04: .4byte gUnknown_810DEDC\n"
-"_0808FF08: .4byte gUnknown_810DFB4\n"
-"_0808FF0C: .4byte gUnknown_810DFC8\n"
-"_0808FF10: .4byte gUnknown_810DEF4\n"
-"_0808FF14: .4byte gUnknown_810E02C\n"
-"_0808FF18: .4byte gUnknown_810DF98\n"
-"_0808FF1C: .4byte gEvolutionStrings");
+    s32 i, y;
+    s32 j;
+
+    sub_80073B8(windowId);
+    strncpy(gFormatBuffer_Monsters[0],mon->nameBuffer,0x14);
+    y = 0x20;
+    switch (param_1) {
+        case 0:
+            break;
+        case 2: {
+            const u8 *str;
+            s32 iVar8;
+            LevelData levelData;
+
+            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gUnknown_8107754,windowId,'\0');
+            gFormatArgs[0] = mon->level;
+            gFormatArgs[1] = mon->exp;
+            PrintFormattedStringOnWindow(4,y,*gLevel810DD6C_Ptr,windowId,'\0');
+            y += 0xA;
+            PrintFormattedStringOnWindow(4,y,*gExpPts810DD9C_Ptr,windowId,'\0');
+            y += 0xA;
+            if (mon->level < 100) {
+                GetPokemonLevelData(&levelData,mon->species,mon->level + 1);
+                gFormatArgs[0] = levelData.expRequired - mon->exp;
+                PrintFormattedStringOnWindow(4,y,*gUnknown_810DDB8,windowId,'\0');
+            }
+            y += 0xC;
+            gFormatArgs[0] = mon->HP1;
+            gFormatArgs[1] = mon->HP2;
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DDD0,windowId,'\0');
+            y += 0xA;
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DDE4,windowId,'\0');
+            str = *gUnknown_810DE0C;
+            gFormatArgs[0] = mon->offense.att[0];
+            if (mon->atkBoost != 0) {
+                gFormatArgs[0] = gFormatArgs[0] + mon->atkBoost;
+                str = *gUnknown_810DE20;
+            }
+            PrintFormattedStringOnWindow(4,y,str,windowId,'\0');
+            if (mon->defBoost != 0) {
+                gFormatArgs[0] = mon->offense.def[0] + mon->defBoost;
+                PrintFormattedStringOnWindow(4,y,*gUnknown_810DE4C,windowId,'\0');
+            }
+            else {
+                gFormatArgs[0] = mon->offense.def[0];
+                PrintFormattedStringOnWindow(4,y,*gUnknown_810DE38,windowId,'\0');
+            }
+            y += 0xA;
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DDFC,windowId,'\0');
+            str = *gUnknown_810DE24;
+            gFormatArgs[0] = mon->offense.att[1];
+            if (mon->spAtkBoost != 0) {
+                gFormatArgs[0] = gFormatArgs[0] + mon->spAtkBoost;
+                str = *gUnknown_810DE28;
+            }
+            PrintFormattedStringOnWindow(4,y,str,windowId,'\0');
+            if (mon->spDefBoost != 0) {
+                gFormatArgs[0] = mon->offense.def[1] + mon->spDefBoost;
+                PrintFormattedStringOnWindow(4,y,*gUnknown_810DE54,windowId,'\0');
+            }
+            else {
+                gFormatArgs[0] = mon->offense.def[1];
+                PrintFormattedStringOnWindow(4,y,*gUnknown_810DE50,windowId,'\0');
+            }
+            y += 0xA;
+            if (ItemExists(&mon->item)) {
+                 sub_8090E14(gFormatBuffer_Items[0],&mon->item,0);
+            }
+            else {
+                strcpy(gFormatBuffer_Items[0],*gUnknown_810DE58);
+            }
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DE6C,windowId,'\0');
+            y += 0xC;
+            gFormatArgs[0] = mon->IQ;
+            iVar8 = mon->IQ / 10;
+            if (iVar8 < 0) {
+                iVar8 = 0;
+            }
+            if (0x62 < iVar8) {
+                iVar8 = 99;
+            }
+
+            InlineStrcpy(gFormatBuffer_Monsters[0],gUnknown_8115718[iVar8]);
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DE80,windowId,'\0');
+            y += 0xA;
+            if (!mon->isTeamLeader)
+            {
+                CopyTacticsNameToBuffer(gFormatBuffer_Monsters[0],mon->tactic);
+                PrintFormattedStringOnWindow(4,y,*gUnknown_810DE98,windowId,'\0');
+            }
+            y += 0xA;
+            break;
+        }
+     case 3: {
+            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gUnknown_810775C,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_8107768,windowId,'\0');
+            PrintFormattedStringOnWindow(0x38,y,GetFormattedTypeString(mon->types[0]),windowId,'\0');
+            if (mon->types[1] != TYPE_NONE) {
+                PrintFormattedStringOnWindow(0x60,y,GetFormattedTypeString(mon->types[1]),windowId,'\0');
+            }
+            y += 0xC;
+            PrintFormattedStringOnWindow(4,y,gUnknown_8107770,windowId,'\0');
+            y += 0xC;
+            PrintFormattedStringOnWindow2(4,y,GetAbilityDescription(mon->abilities[0]),windowId,'\0',0xb);
+            y += 0x21;
+            if (mon->abilities[1] != ABILITY_UNKNOWN) {
+                PrintFormattedStringOnWindow2(4,y,GetAbilityDescription(mon->abilities[1]),windowId,'\0',0xb);
+            }
+            break;
+        }
+        case 1: {
+            s32 iVar11;
+            bool8 bVar10;
+
+            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,*gUnknown_810DD58,windowId,'\0');
+            iVar11 = mon->unk56 - 1;
+            y -= 0xC;
+            bVar10 = FALSE;
+
+            for (i = 0; i < 9; i++) {
+                param_4->unkC[i] = 0;
+            }
+
+            for (j = 0; j < 10; j++, iVar11++, y += 0xC) {
+                if (-1 < iVar11) {
+                    if (0xb < iVar11)
+                        break;
+                    if (mon->unk58[iVar11] != 0) {
+                        bVar10 = TRUE;
+                        InlineStrncpy(gFormatBuffer_Items[1],gStatusNames[mon->unk58[iVar11]],0x50);
+                        PrintFormattedStringOnWindow(0xc,y,gUnknown_8107784,windowId,'\0');
+                        if (0 < j) {
+                            param_4->unkC[j - 1] = mon->unk58[iVar11];
+                        }
+                    }
+                }
+            }
+
+            if (!bVar10) {
+                PrintFormattedStringOnWindow(0xc,0x20,*gUnknown_810DF78,windowId,'\0');
+            }
+            break;
+        }
+        case 4: {
+            s32 iVar13;
+            bool8 bVar11;
+            u8 iqSkillBuffer[24];
+
+            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,*gIQSkill810DD68_Ptr,windowId,'\0');
+            GetNumAvailableIQSkills(iqSkillBuffer,mon->IQ);
+            iVar13 = mon->unk40 - 1;
+
+            for (i = 0; i < 9; i++) {
+                param_4->unk0[i] = 0;
+            }
+            y -= 0xC;
+            bVar11 = FALSE;
+
+            for(j = 0; j < 10; j++, iVar13++, y += 0xC) {
+                if (-1 < iVar13) {
+                    if (0x17 < iVar13)
+                        break;
+                    if (iqSkillBuffer[iVar13] != 0) {
+                        u8 *iqSkillName;
+
+                        bVar11 = TRUE;
+                        iqSkillName = GetIQSkillName(iqSkillBuffer[iVar13]);
+                        strncpy(gFormatBuffer_Items[1],iqSkillName,0x50);
+                        if (IsIQSkillSet(&mon->IQSkills,1 << iqSkillBuffer[iVar13])) {
+                            strcpy(gFormatBuffer_Items[0],gUnknown_8107788);
+                        }
+                        else {
+                            strcpy(gFormatBuffer_Items[0],gUnknown_810778C);
+                        }
+                        if (j >= 1) {
+                            param_4->unk0[j - 1] = iqSkillBuffer[iVar13];
+                        }
+                        PrintFormattedStringOnWindow(0xc,y,gUnknown_8107790,windowId,'\0');
+                    }
+                }
+            }
+
+            if (!bVar11) {
+                PrintFormattedStringOnWindow(0xc,0x20,*gUnknown_810DF84,windowId,'\0');
+            }
+            break;
+        }
+        case 5: {
+            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gUnknown_8107798,windowId,'\0');
+            CopyMonsterNameToBuffer(gFormatBuffer_Monsters[0],mon->species);
+            gFormatArgs[0] = mon->species;
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DEB4,windowId,'\0');
+            y += 0xA;
+            InlineStrncpy(gFormatBuffer_Items[0],GetFriendAreaName(GetFriendArea(mon->species)),0x50);
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DEC8,windowId,'\0');
+            y += 0xA;
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DEDC,windowId,'\0');
+            y += 0xD;
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DFB4,windowId,'\0');
+            y += 0xA;
+            PrintYellowDungeonNametoBuffer(gFormatBuffer_Items[0],&mon->dungeonLocation);
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DFC8,windowId,'\0');
+            y += 0xD;
+            strncpy(gFormatBuffer_Monsters[0],GetCategoryString(mon->species),0x14);
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DEF4,windowId,'\0');
+            y += 0xD;
+            strcpy(gFormatBuffer_Monsters[0],gUnknown_810E02C[GetBodySize(mon->species)]);
+            PrintFormattedStringOnWindow(4,y,*gUnknown_810DF98,windowId,'\0');
+            y += 0xD;
+            PrintFormattedStringOnWindow(4,y,gEvolutionStrings[mon->unk4C],windowId,'\0');
+            break;
+        }
+    }
+    sub_80073E0(windowId);
 }
+
 
 void sub_808FF20(struct unkStruct_808FF20 *param_1, struct PokemonStruct1 *pokemon, bool8 param_3)
 {

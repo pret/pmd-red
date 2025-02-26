@@ -1,5 +1,5 @@
 static const Window sUnknown_80DB8B4 = {
-    0, 0, 0, 0,
+    0,
     3,
     0, 0,
     0, 0,
@@ -8,7 +8,7 @@ static const Window sUnknown_80DB8B4 = {
 };
 
 static const Window sUnknown_80DB8CC = {
-    0, 0, 0, 0,
+    0,
     6,
     2, 2,
     16, 4,

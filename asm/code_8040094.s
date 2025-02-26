@@ -150,7 +150,7 @@ _08040256:
 	.align 2, 0
 _0804026C: .4byte gUnknown_202EE04
 _08040270: .4byte gUnknown_202EE01
-_08040274: .4byte gUnknown_202D03C
+_08040274: .4byte gFontPalette + 0x4
 _08040278:
 	adds r5, r6, 0
 	adds r5, 0xE0

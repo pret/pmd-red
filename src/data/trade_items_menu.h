@@ -12,7 +12,7 @@ static const MenuItem sUnknown_80E60D4[] = {
 
 static const Window sUnknown_80E60EC =
 {
-    0, 0, 0, 0,
+    0,
     3,
     21, 4,
     6, 5,
@@ -29,7 +29,7 @@ static const MenuItem sUnknown_80E6104[] = {
 
 static const Window unused =
 {
-    0, 0, 0, 0,
+    0,
     3,
     22, 9,
     5, 3,
@@ -45,7 +45,7 @@ static const MenuItem sUnknown_80E6154[] = {
 
 static const Window sUnknown_80E6174 =
 {
-    0, 0, 0, 0,
+    0,
     3,
     21, 13,
     6, 4,

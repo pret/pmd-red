@@ -32,7 +32,7 @@ struct unkStruct_203B278
 EWRAM_INIT struct unkStruct_203B278 *gUnknown_203B278 = {NULL};
 
 static const Window sUnknown_80DC2F8 = {
-    0, 0, 0, 0,
+    0,
     3,
     0, 0,
     0, 0,

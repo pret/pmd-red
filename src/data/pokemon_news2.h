@@ -1,5 +1,5 @@
 static const Window sUnknown_80DFC18 = {
-    0, 0, 0, 0,
+    0,
     3,
     0, 0,
     0, 0,
@@ -9,7 +9,7 @@ static const Window sUnknown_80DFC18 = {
 
 static const WindowHeader sUnknown_80DFC30 = {1, 0, 22, 0};
 static const Window sUnknown_80DFC34 = {
-    0, 0, 0, 0,
+    0,
     6,
     2, 2,
     26, 16,

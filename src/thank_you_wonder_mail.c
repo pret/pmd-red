@@ -77,7 +77,7 @@ const Item gUnknown_80DED44 =
 
 const Window gUnknown_80DED48 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x15, 0x04,
     0x06, 0x05,
@@ -87,16 +87,13 @@ const Window gUnknown_80DED48 =
 
 const Window gUnknown_80DED60 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x16, 0x07,
     0x06, 0x05,
     0x05, 0x00,
     NULL
 };
-
-extern const u8 SendItem_Text[];
-extern const u8 DontSendItem_Text[];
 
 const MenuItem gUnknown_80DED78[] =
 {
@@ -108,7 +105,7 @@ const MenuItem gUnknown_80DED78[] =
 // Unused
 const Window gUnknown_80DEDA0 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -149,14 +146,11 @@ const MenuItem gUnknown_80DEE60[] =
 
 const MenuItem gUnknown_80DEE7C[] =
 {
-    {SendItem_Text, SEND_ITEM_ACTION},
-    {DontSendItem_Text, NO_SEND_ITEM_ACTION},
+    {"Send Item", SEND_ITEM_ACTION},
+    {_("Don't Send Item"), NO_SEND_ITEM_ACTION},
     {"Cancel", CANCEL_ACTION},
     {},
 };
-
-ALIGNED(4) static const u8 DontSendItem_Text[] =  _("Don't Send Item");
-ALIGNED(4) static const u8 SendItem_Text[] = "Send Item";
 
 const MenuItem gUnknown_80DEEBC[] =
 {

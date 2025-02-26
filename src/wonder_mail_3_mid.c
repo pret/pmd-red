@@ -32,7 +32,7 @@ extern void sub_802F088();
 extern void sub_802F108(void);
 
 const Window gUnknown_80E03C4 = {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -40,7 +40,7 @@ const Window gUnknown_80E03C4 = {
     NULL
 };
 const Window gUnknown_80E03DC = {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x03, 0x03,
     0x07, 0x03,
@@ -48,7 +48,7 @@ const Window gUnknown_80E03DC = {
     NULL
 };
 const Window gUnknown_80E03F4 = {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x15, 0x06,
     0x07, 0x03,

@@ -7,7 +7,7 @@ enum
 
 UNUSED static const Window sUnknown_80DB670 =
 {
-    0, 0, 0, 0,
+    0,
     3,
     0, 0,
     0, 0,

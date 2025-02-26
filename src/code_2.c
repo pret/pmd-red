@@ -39,7 +39,7 @@ extern void nullsub_33(void);
 extern u32 sub_80009D0(u32);
 
 extern u16 gUnknown_2026E4E;
-extern s32 gTitleBrightness;
+EWRAM_DATA s32 sTitleBrightness = 0;
 
 // TODO: figure out the struct
 struct UnkStruct203B040
@@ -106,12 +106,12 @@ void GameLoop(void)
         LoadTitleScreen();
         SetBG2RegOffsets(0, 0);
         SetBG3RegOffsets(0, 0);
-        gTitleBrightness = 0;
-        while (gTitleBrightness < 32) {
+        sTitleBrightness = 0;
+        while (sTitleBrightness < 32) {
             s32 i;
-            gTitleBrightness++;
+            sTitleBrightness++;
             for (i = 0; i < 240; i++)
-                SetBGPaletteBufferColorRGB(i, &((RGB*)gTitlePaletteFile->data)[i], gTitleBrightness, NULL);
+                SetBGPaletteBufferColorRGB(i, &((RGB*)gTitlePaletteFile->data)[i], sTitleBrightness, NULL);
             xxx_update_stuff(0);
         }
         if (tmp3) {
@@ -148,11 +148,11 @@ void GameLoop(void)
             if (nextMenu == MENU_NEW_GAME) break;
         }
         DeleteMainMenu();
-        while (gTitleBrightness > 0) {
+        while (sTitleBrightness > 0) {
             s32 i;
-            gTitleBrightness--;
+            sTitleBrightness--;
             for (i = 0; i < 240; i++)
-                SetBGPaletteBufferColorRGB(i, &((RGB*)gTitlePaletteFile->data)[i], gTitleBrightness, NULL);
+                SetBGPaletteBufferColorRGB(i, &((RGB*)gTitlePaletteFile->data)[i], sTitleBrightness, NULL);
             xxx_update_stuff(0);
         }
         CloseFile(gTitlePaletteFile);

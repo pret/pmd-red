@@ -1,6 +1,6 @@
 //static // MAKE STATIC WHEN code_8023868.s IS DONE
 const Window sUnknown_80DC950 = {
-    0, 0, 0, 0,
+    0,
     3,
     0, 0,
     0, 0,
@@ -9,7 +9,7 @@ const Window sUnknown_80DC950 = {
 };
 //static // MAKE STATIC WHEN code_8023868.s IS DONE
 const Window sUnknown_80DC968 = {
-    0, 0, 0, 0,
+    0,
     6,
     2, 2,
     15, 14,

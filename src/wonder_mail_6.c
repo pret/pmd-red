@@ -49,7 +49,7 @@ const MenuItem gUnknown_80E0968[] =
 };
 
 const Window gUnknown_80E0990 = {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -57,7 +57,7 @@ const Window gUnknown_80E0990 = {
     NULL
 };
 const Window gUnknown_80E09A8 = {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x13, 0x0B,
     0x08, 0x03,
@@ -65,7 +65,7 @@ const Window gUnknown_80E09A8 = {
     NULL
 };
 const Window gUnknown_80E09C0 = {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x11, 0x0F,
     0x07, 0x03,

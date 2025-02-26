@@ -42,7 +42,6 @@ typedef struct WindowHeader
 typedef struct Window
 {
     u8 unk0;
-    u8 fill1[0x4 - 0x1];
     s32 type;
     DungeonPos pos;
     s16 width;
@@ -58,8 +57,10 @@ typedef struct Window
 #define WINDOW_TYPE_WITH_HEADER         6
 #define WINDOW_TYPE_7                   7
 
+#define MAX_WINDOWS 4
+
 typedef struct Windows {
-    Window id[4];
+    Window id[MAX_WINDOWS];
     // Something ugly, so that sub_805FD74 could match weird compiler memcpy/stack initialization
     #ifndef NONMATCHING
     u8 fakeMatch[0];

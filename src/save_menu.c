@@ -14,7 +14,7 @@ static EWRAM_INIT SaveMenuWork *sUnknown_203B364 = {NULL};
 
 const Window gUnknown_80E6F20 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -24,7 +24,7 @@ const Window gUnknown_80E6F20 =
 
 const Window gUnknown_80E6F38 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x05, 0x08,
     0x15, 0x05,

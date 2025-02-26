@@ -6,18 +6,19 @@
 #include "math.h"
 #include "sprite.h"
 
-extern u8 gUnknown_2026E38;
-extern u32 *gUnknown_2026E3C;
-extern s32 gUnknown_2026E40;
-extern s32 gUnknown_2026E44;
-extern s32 gUnknown_2026E48;
-extern bool8 gUnknown_2026E4C;
-extern u16 gUnknown_2026E4E;
-extern bool32 gUnknown_2026E50;
-extern bool32 gUnknown_2026E54;
-extern u32 *gUnknown_2026E58;
-extern s16 gUnknown_2026E60[];
-extern s16 gUnknown_20270E8[];
+EWRAM_DATA u8 gUnknown_2026E38 = 0;
+EWRAM_DATA u32 *gUnknown_2026E3C = 0;
+EWRAM_DATA s32 gUnknown_2026E40 = 0;
+EWRAM_DATA s32 gUnknown_2026E44 = 0;
+EWRAM_DATA s32 gUnknown_2026E48 = 0;
+EWRAM_DATA bool8 gUnknown_2026E4C = 0;
+EWRAM_DATA u16 gUnknown_2026E4E = 0;
+EWRAM_DATA bool32 gUnknown_2026E50 = 0;
+EWRAM_DATA bool32 gUnknown_2026E54 = 0;
+EWRAM_DATA u32 *gUnknown_2026E58 = NULL;
+UNUSED EWRAM_DATA static u32 sUnused0 = 0;
+EWRAM_DATA static s16 gUnknown_2026E60[324] = {0};
+EWRAM_DATA static s16 gUnknown_20270E8[324] = {0};
 
 EWRAM_INIT s16 *gUnknown_203B078 = NULL;
 
@@ -217,7 +218,7 @@ void sub_8005838(s32 *a0, u8 kind)
     if (!gUnknown_2026E4C)
         kind = 0;
 
-    r3 = !gUnknown_2026E54 ? (s16 *) &gUnknown_2026E60 : (s16*) &gUnknown_20270E8;
+    r3 = !gUnknown_2026E54 ? gUnknown_2026E60 : gUnknown_20270E8;
 
     r2 = gUnknown_203B078;
     if (r2 == NULL)

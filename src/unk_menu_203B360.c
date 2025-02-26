@@ -23,7 +23,7 @@ typedef struct unkStruct_203B360
 static EWRAM_INIT unkStruct_203B360 *sUnknown_203B360 = {NULL};
 
 const Window gUnknown_80E6E7C = {
-   0x00, 0x00, 0x00, 0x00,
+   0,
    0x03,
    0x00, 0x00,
    0x00, 0x00,
@@ -32,7 +32,7 @@ const Window gUnknown_80E6E7C = {
 };
 
 const Window gUnknown_80E6E94 = {
-   0x00, 0x00, 0x00, 0x00,
+   0,
    0x03,
    0x05, 0x09,
    0x13, 0x05,

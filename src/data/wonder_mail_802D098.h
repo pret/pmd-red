@@ -1,5 +1,5 @@
 static const Window sUnknown_80DFDD4 = {
-    0, 0, 0, 0,
+    0,
     3,
     0, 0,
     0, 0,
@@ -8,7 +8,7 @@ static const Window sUnknown_80DFDD4 = {
 };
 
 UNUSED static const Window sUnknown_80DFDEC = {
-    0, 0, 0, 0,
+    0,
     3,
     3, 3,
     7, 3,
@@ -17,7 +17,7 @@ UNUSED static const Window sUnknown_80DFDEC = {
 };
 
 static const Window sUnknown_80DFE04 = {
-    0, 0, 0, 0,
+    0,
     3,
     21, 6,
     7, 3,
@@ -26,7 +26,7 @@ static const Window sUnknown_80DFE04 = {
 };
 
 static const Window sUnknown_80DFE1C = {
-    0, 0, 0, 0,
+    0,
     3,
     21, 15,
     7, 3,
@@ -35,7 +35,7 @@ static const Window sUnknown_80DFE1C = {
 };
 
 UNUSED static const Window sUnknown_80DFE34 = {
-    0, 0, 0, 0,
+    0,
     3,
     21, 15,
     6, 3,

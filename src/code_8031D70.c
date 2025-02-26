@@ -27,7 +27,7 @@ EWRAM_INIT struct unkStruct_203B334 *gUnknown_203B334 = {NULL};
 extern unkStruct_203B480 *gUnknown_203B480;
 
 const Window gUnknown_80E1FA8 = {
-    0, 0, 0, 0,
+    0,
     3,
     0x0, 0x0,
     0x0, 0x0,
@@ -38,7 +38,7 @@ const Window gUnknown_80E1FA8 = {
 const WindowHeader gUnkData_80E1FC0 = {0x01, 0x00, 0x0A, 0x00};
 
 const Window gUnknown_80E1FC4 = {
-    0, 0, 0, 0,
+    0,
     6,
     0x2, 0x2,
     0x1A, 0xA,

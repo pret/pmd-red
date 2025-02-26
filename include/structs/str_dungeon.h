@@ -148,8 +148,8 @@ typedef struct FloorProperties
 
 typedef struct UnkDungeonGlobal_unk1C590
 {
-    s16 unk0[NUM_ITEM_CATEGORIES];
-    s16 unk18[NUMBER_OF_ITEM_IDS];
+    s16 categoryValues[NUM_ITEM_CATEGORIES];
+    s16 itemValues[NUMBER_OF_ITEM_IDS];
 } UnkDungeonGlobal_unk1C590;
 
 typedef struct UnkDungeonGlobal_unk1CD98
@@ -329,6 +329,8 @@ typedef struct unkDungeon57C
 } unkDungeon57C;
 
 #define COLOR_RAMP_COUNT 256
+#define UNK12A18_ARR_COUNT 29
+#define UNK12A18_ARR_COUNT_2 9
 
 // size: 0x1CEDC
 typedef struct Dungeon
@@ -415,13 +417,8 @@ typedef struct Dungeon
     /* 0x10844 */ s16 naturalJunctionListCounts[MAX_ROOM_COUNT];
     /* 0x10884 */ DungeonPos naturalJunctionList[MAX_ROOM_COUNT][MAX_ROOM_COUNT]; // Arrays of room exits for each room.
     u16 unk11884[250][9];
-    u16 unk12A18[20][9];
-    u16 unk12B80[9];
-    u16 unk12B92[36];
-    u16 unk12BDA[9];
-    u16 unk12BEC[9];
-    u16 unk12BFE[19];
-    u8 unk12C24[0x930];
+    u16 unk12A18[UNK12A18_ARR_COUNT][UNK12A18_ARR_COUNT_2];
+    u8 ALIGNED(4) unk12C24[0x930];
     u16 unk13554[10];
     OpenedFile *unk13568;
     u8 unk1356C;

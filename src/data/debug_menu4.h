@@ -1,6 +1,6 @@
 static const Window sUnknown_80E7ED4 =
 {
-    0, 0, 0, 0,
+    0,
     3,
     0, 0,
     0, 0,
@@ -10,7 +10,7 @@ static const Window sUnknown_80E7ED4 =
 
 static const Window sUnknown_80E7EEC =
 {
-    0, 0, 0, 0,
+    0,
     3,
     19, 4,
     9, 3,
@@ -20,7 +20,7 @@ static const Window sUnknown_80E7EEC =
 
 static const Window sUnknown_80E7F04 =
 {
-    0, 0, 0, 0,
+    0,
     3,
     19, 14,
     6, 4,

@@ -20,9 +20,10 @@ typedef struct unkStruct_800D670
 // rescue_password_menu.c
 extern s32 gCommsTimeout; // Counts to 100 and then errors if other player hasn't connected
 
-extern s32 gUnknown_202EC40[2];
-extern s32 gUnknown_202EC48;
-extern s32 gUnknown_202EC38;
+EWRAM_DATA static s32 gUnknown_202EC38 = 0;
+UNUSED EWRAM_DATA static u8 sUnused = 0;
+EWRAM_DATA static s32 gUnknown_202EC40[2] = {0};
+EWRAM_DATA static s32 gUnknown_202EC48 = 0;
 
 extern struct UnkStruct_203B184 *gUnknown_203B184;
 
@@ -190,7 +191,7 @@ s32 sub_8037C10(bool8 a0)
         if (sub_800D588())
             ret = gUnknown_202EC40[1];
         else
-            ret =  gUnknown_202EC40[0];
+            ret = gUnknown_202EC40[0];
     }
 
     return ret;

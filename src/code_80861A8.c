@@ -23,7 +23,7 @@ void sub_800EF64();
 void sub_803E46C(s32);
 s32 sub_800E700(s32);
 void sub_800569C(DungeonPos *, axdata *, u8);
-void sub_8085F44(void);
+void sub_8085F44(s32);
 
 void sub_8052FB8(const u8 *);
 
@@ -74,50 +74,46 @@ void sub_80861EC(Entity *a0)
     GetEntInfo(a0)->unkFE = 0x63;
 }
 
-s32 sub_80861F8(s16 param_1,Entity *param_2,bool32 param_3)
+s32 sub_80861F8(s32 param_1,Entity *param_2,bool32 param_3)
 {
-  EntityInfo *info;
-  s32 uVar2;
-  s32 uStack_38;
-  DungeonPos pos;
-  unkStruct_80416E0 stack;
-  unkStruct_2039DB0 stack1C;
+    EntityInfo *info;
+    s32 uVar2;
+    s32 uStack_38;
+    DungeonPos pos;
+    unkStruct_80416E0 stack;
+    unkStruct_2039DB0 stack1C;
 
-#ifdef NONMATCHING
-  s32 param_1_s32 = param_1;
-#else
-  register s32 param_1_s32 asm("r5") = param_1;
-#endif
+    // Needed to match.
+    s32 param_1Copy2 = (s16) param_1;
+    s32 param_1Copy = param_1Copy2;
+    u8 param_3_bool32 = param_3;
 
-  u8 param_3_bool32 = param_3;
+    sub_800EE5C(param_1Copy2);
+    sub_800EF64();
+    sub_803E46C(0x46);
+    info = GetEntInfo(param_2);
+    pos.x = 0;
+    pos.y = 0;
+    uStack_38 = sub_800E700(param_1Copy);
+    if (uStack_38 != -1) {
+        sub_800569C(&pos,&param_2->axObj.axdata,uStack_38);
+    }
+    stack.unk0 = param_1Copy;
+    stack.unk4 = 0;
+    stack.dir = info->action.direction;
+    stack.x = (param_2->pixelPos).x / 256;
+    stack.y = (param_2->pixelPos).y / 256;
 
-  sub_800EE5C(param_1);
-  sub_800EF64();
-  sub_803E46C(0x46);
-  info = GetEntInfo(param_2);
-  pos.x = 0;
-  pos.y = 0;
-  uStack_38 = sub_800E700(param_1_s32);
-  if (uStack_38 != -1) {
-    sub_800569C(&pos,&param_2->axObj.axdata,
-                uStack_38);
-  }
-  stack.unk0 = param_1_s32;
-  stack.unk4 = 0;
-  stack.dir = (u32)(info->action).direction;
-  stack.x = (param_2->pixelPos).x / 256;
-  stack.y = (param_2->pixelPos).y / 256;
+    stack.unk10 = pos.x;
+    stack.unk12 = pos.y;
+    stack.unk14 = uStack_38;
+    stack.unk18 = 0xffff;
+    stack1C = gUnknown_8107380;
 
-  stack.unk10 = pos.x;
-  stack.unk12 = pos.y;
-  stack.unk14 = uStack_38;
-  stack.unk18 = 0xffff;
-  stack1C = gUnknown_8107380;
-
-  uVar2 = sub_800E890(&stack);
-  if (param_3_bool32 != '\0') {
-    sub_8085F44();
-    uVar2 = -1;
-  }
-  return uVar2;
+    uVar2 = sub_800E890(&stack);
+    if (param_3_bool32) {
+        sub_8085F44(uVar2);
+        uVar2 = -1;
+    }
+    return uVar2;
 }

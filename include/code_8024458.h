@@ -13,8 +13,7 @@ struct unkStruct_203B2AC
     u8 unk40[0x48 - 0x40];
     s16 speciesNum;
     struct unkStruct_808FF20 unk4C;
-    u32 unkB0;
-    u8 fillB4[0xE0 - 0xB4];
+    struct UnkInfoTabStruct unkB0;
     u32 unkE0;
     Window *unkE4;
     Windows unkE8;
