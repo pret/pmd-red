@@ -33,7 +33,7 @@ static inline s8 sub_8002984_sub(s32 direction1, s32 rand, s32 add, s32 multi)
 s32 sub_8002984(s32 _direction1, u32 caseID)
 {
   s32 direction1;
-  
+
   direction1 = (s8)_direction1;
   switch((u8)caseID) {
       case 1:
@@ -189,7 +189,7 @@ PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2)
 }
 
 s32 VecDirection8Sign(PixelPos *param_1)
-{  
+{
     if (param_1->x < 0) {
         if (param_1->y < 0) {
             return DIRECTION_NORTHWEST;
@@ -242,153 +242,94 @@ s32 VecDirection4SignYX(PixelPos *param_1)
     }
 }
 
-// https://decomp.me/scratch/bD5wO 
-s8 VecDirection8Radial(PixelPos *param_1)
+s8 VecDirection8Radial(PixelPos *pixelPos)
 {
-#ifdef NONMATCHING
-    s32 r0;
-    s32 r1;
-    s32 r2;
-    s32 r3;
-    s32 r4;
-    s32 r5;
-#else
-    register s32 r0;
-    register s32 r1 asm("r1");
-    register s32 r2 asm("r2");
-    register s32 r3 asm("r3");
-    register s32 r4 asm("r4");
-    register s32 r5;
-#endif
+    PixelPos absPos = {abs(pixelPos->x), abs(pixelPos->y)};
 
-
-    r0 = param_1->x;
-    if (r0 < 0) {
-        r0 = -r0;
-    }
-    r1 = r0;
-    r3 = param_1->y;
-    r5 = r3;
-    if (r3 < 0) {
-        r5 = -r3;
-    }
-    r2 = r5;
-    r4 = param_1->x;
-    if (r4 < 0) {
-        if (r3 < 0) {
-            if (r2 > r0 * 2) {
+    if (pixelPos->x < 0) {
+        if (pixelPos->y < 0) {
+            if (absPos.y > absPos.x * 2) {
                 return DIRECTION_NORTH;
             }
-            if (r1 <= r5 * 2) {
+            if (absPos.x <= absPos.y * 2) {
                 return DIRECTION_NORTHWEST;
             }
             return DIRECTION_WEST;
         }
-        if (r2 <= r0 * 2) {
-            if (r1 > r5 * 2) {
+        if (absPos.y <= absPos.x * 2) {
+            if (absPos.x > absPos.y * 2) {
                 return DIRECTION_WEST;
             }
             return DIRECTION_SOUTHWEST;
         }
     }
-    else {
-        if (0 < r4) {
-            if (r3 < 0) {
-                if (r2 > r0 * 2) {
-                    return DIRECTION_NORTH;
-                }
-                if (r1 <= r5 * 2) {
-                    return DIRECTION_NORTHEAST;
-                }
+    else if (pixelPos->x > 0) {
+        if (pixelPos->y < 0) {
+            if (absPos.y > absPos.x * 2) {
+                return DIRECTION_NORTH;
+            }
+            if (absPos.x <= absPos.y * 2) {
+                return DIRECTION_NORTHEAST;
+            }
+            return DIRECTION_EAST;
+        }
+        else {
+            if (absPos.y > absPos.x * 2) {
+                return DIRECTION_SOUTH;
+            }
+            if (absPos.x > absPos.y * 2) {
                 return DIRECTION_EAST;
             }
-            else {
-                if (r2 > r0 * 2) {
-                    return DIRECTION_SOUTH;
-                }
-                if (r1 > r5 * 2) {
-                    return DIRECTION_EAST;
-                }
-                return DIRECTION_SOUTHEAST;
-            }
-
+            return DIRECTION_SOUTHEAST;
         }
-        if (r3 < 0) {
+    }
+    else {
+        if (pixelPos->y < 0) {
             return DIRECTION_NORTH;
         }
-        if (r3 < 1) {
+        if (pixelPos->y < 1) {
             return -1;
-        }  
+        }
     }
     return DIRECTION_SOUTH;
 }
 
-// https://decomp.me/scratch/Bgbxc
-s8 VecDirection4Radial(PixelPos *param_1)
+s8 VecDirection4Radial(PixelPos *pixelPos)
 {
-#ifdef NONMATCHING    
-    s32 r0;
-    s32 r1;
-    s32 r2;
-    s32 r3;
-    s32 r4;
-    s32 r5;
-#else
-    register s32 r0 asm("r3");
-    register s32 r1 asm("r1");
-    register s32 r2 asm("r2");
-    register s32 r3;
-    register s32 r4;
-    register s32 r5 asm("r0");
-#endif
+    PixelPos absPos = {abs(pixelPos->x), abs(pixelPos->y)};
 
-    r0 = param_1->x;
-    if (r0 < 0) {
-        r0 = -r0;
-    }
-    r1 = r0;
-    r3 = param_1->y;
-    r5 = r3;
-    if (r3 < 0) {
-        r5 = -r3;
-    }
-    r2 = r5;
-    r4 = param_1->x;
-    if (r4 < 0) {
-        if (r3 < 0) {
-            if (r2 > r1) {
+    if (pixelPos->x < 0) {
+        if (pixelPos->y < 0) {
+            if (absPos.y > absPos.x) {
                 return DIRECTION_NORTH;
             }
-            else
-                return DIRECTION_WEST;
+            return DIRECTION_WEST;
         }
-        if (r2 <= r1) {
+        if (absPos.y <= absPos.x) {
             return DIRECTION_WEST;
         }
     }
-    else {
-        if (0 < r4) {
-            if (r3 < 0) {
-                if (r2 > r1) {
-                    return DIRECTION_NORTH;
-                }
-                else 
-                    return DIRECTION_EAST;
+    else if (pixelPos->x > 0) {
+        if (pixelPos->y < 0) {
+            if (absPos.y > absPos.x) {
+                return DIRECTION_NORTH;
             }
-            else {
-                if (r2 > r1) {
-                    return DIRECTION_SOUTH;
-                }
-                return DIRECTION_EAST;
-            }
-
+            return DIRECTION_EAST;
         }
-        if (r3 < 0) {
+        else {
+            if (absPos.y > absPos.x) {
+                return DIRECTION_SOUTH;
+            }
+            return DIRECTION_EAST;
+        }
+    }
+    else {
+        if (pixelPos->y < 0) {
             return DIRECTION_NORTH;
         }
-        if (r3 < 1) {
+        if (pixelPos->y < 1) {
             return -1;
-        }  
+        }
     }
     return DIRECTION_SOUTH;
 }
@@ -407,7 +348,7 @@ s8 SizedDeltaDirection4(PixelPos *r0, PixelPos *r1, PixelPos *r2, PixelPos *r3) 
         iVar3 = (stack.x + 1);
         iVar3 -= ((r1->x + r3->x) / 2);
         stack.x = iVar3;
-        if(stack.x < 0) stack.x = 0;   
+        if(stack.x < 0) stack.x = 0;
     }
     else
     {
@@ -429,10 +370,10 @@ s8 SizedDeltaDirection4(PixelPos *r0, PixelPos *r1, PixelPos *r2, PixelPos *r3) 
         iVar1 = (stack.y - 1);
         iVar1 += ((r1->y + r3->y) / 2);
         stack.y = iVar1;
-        if(stack.y > 0) stack.y = 0;     
+        if(stack.y > 0) stack.y = 0;
     }
-    
-    
+
+
     return VecDirection4Radial(&stack);
 }
 
@@ -450,7 +391,7 @@ s8 SizedDeltaDirection8(PixelPos *r0, PixelPos *r1, PixelPos *r2, PixelPos *r3) 
         iVar3 = (stack.x + 1);
         iVar3 -= ((r1->x + r3->x) / 2);
         stack.x = iVar3;
-        if(stack.x < 0) stack.x = 0;   
+        if(stack.x < 0) stack.x = 0;
     }
     else
     {
@@ -472,9 +413,9 @@ s8 SizedDeltaDirection8(PixelPos *r0, PixelPos *r1, PixelPos *r2, PixelPos *r3) 
         iVar1 = (stack.y - 1);
         iVar1 += ((r1->y + r3->y) / 2);
         stack.y = iVar1;
-        if(stack.y > 0) stack.y = 0;     
+        if(stack.y > 0) stack.y = 0;
     }
-    
-    
+
+
     return VecDirection8Radial(&stack);
 }
