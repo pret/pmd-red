@@ -113,10 +113,10 @@ static const u32 gUnknown_80B853C[16] =
 static const Windows sDummyWindows =
 {
     .id = {
-        [0] = {.type = WINDOW_TYPE_NORMAL},
-        [1] = {.type = WINDOW_TYPE_NORMAL},
-        [2] = {.type = WINDOW_TYPE_NORMAL},
-        [3] = {.type = WINDOW_TYPE_NORMAL},
+        [0] = WINDOW_DUMMY,
+        [1] = WINDOW_DUMMY,
+        [2] = WINDOW_DUMMY,
+        [3] = WINDOW_DUMMY,
     }
 };
 

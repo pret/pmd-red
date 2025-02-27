@@ -306,15 +306,9 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
                 .unk10 = 2,
                 .unk14 = &header,
             },
-            [1] = {
-                .type = WINDOW_TYPE_NORMAL,
-            },
-            [2] = {
-                .type = WINDOW_TYPE_NORMAL,
-            },
-            [3] = {
-                .type = WINDOW_TYPE_NORMAL,
-            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
         }
     };
 

@@ -949,14 +949,8 @@ static const Windows gUnknown_8106DC8 = {
             .unk12 = 0,
             .unk14 = NULL
         },
-        [2] =
-        {
-            .type = WINDOW_TYPE_NORMAL,
-        },
-        [3] =
-        {
-            .type = WINDOW_TYPE_NORMAL,
-        }
+        [2] = WINDOW_DUMMY,
+        [3] = WINDOW_DUMMY,
     }
 };
 
