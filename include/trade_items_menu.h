@@ -47,8 +47,8 @@ struct TradeItemsMenu
     u32 unk10;
     unkStructFor8013AA0 unk14;
     MenuStruct unk44[4];
-    UnkTextStruct2 unk184[4];
-    UnkTextStruct2 unk1E4[4];
+    Windows unk184;
+    Windows unk1E4;
 
     // TODO These might be structs...
     struct TradeItem unk244;

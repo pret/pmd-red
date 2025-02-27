@@ -7,7 +7,7 @@
 
 s32 sub_800E2C0(u32);
 
-struct unkStruct_203B0CC *gUnknown_203B0CC;
+extern struct unkStruct_203B0CC *gUnknown_203B0CC;
 
 void sub_800DE38(struct unkStruct_203B0CC_sub *);
 void sub_800DE8C(struct unkStruct_203B0CC_sub *, DungeonPos *);
@@ -48,7 +48,7 @@ bool8 sub_800E838(u16 *param_1, s32 param_2)
 }
 
 // TODO: look at this later
-// https://decomp.me/scratch/luz2f 
+// https://decomp.me/scratch/luz2f
 u32 sub_800E890(unkStruct_80416E0 *param_1)
 {
     param_1->unk14 = sub_800E900(param_1->unk0);
@@ -101,7 +101,7 @@ bool8 sub_800E90C(DungeonPos *param_1)
                 }
 
             }
-            if(ptr->unk10 > 0) 
+            if(ptr->unk10 > 0)
                 ptr->unk10--;
             sub_800DCD0(ptr);
             if(ptr->unk54 == 0)

@@ -19,6 +19,9 @@ typedef struct PixelPos
     /* 0x4 */ s32 y;
 } PixelPos;
 
+#define X_POS_TO_PIXELPOS(x)((((x) * 24) + 12) << 8)
+#define Y_POS_TO_PIXELPOS(y)((((y) * 24) + 16) << 8)
+
 /**
  * Currently only used in script data, for entities and GroundLink data.
  * DungeonPos expressed in terms of *graphics* tiles, 8 pixels per unit.

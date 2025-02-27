@@ -29,7 +29,7 @@ struct LoadScreen
     // size: 0x27c
     u32 currMenu;
     MenuStruct unk4[4];
-    UnkTextStruct2 unk144[4];
+    Windows unk144;
     /* 0x1A4 */ u8 formattedTeamName[0x24];
     /* 0x1C8 */ u8 formattedPlayerName[0x24];
     /* 0x1EC */ u8 formattedLocation[0x24];
@@ -48,8 +48,8 @@ void sub_80397B4(void);
 
 extern void sub_80920D8(u8 *);
 
-const UnkTextStruct2 gUnknown_80E75F8 = {
-   0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E75F8 = {
+   0,
    0x03,
    0x00, 0x00,
    0x00, 0x00,
@@ -57,8 +57,8 @@ const UnkTextStruct2 gUnknown_80E75F8 = {
    NULL
 };
 
-const UnkTextStruct2 gUnknown_80E7610 = {
-   0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E7610 = {
+   0,
    0x03,
    0x02, 0x02,
    0x1A, 0x0B,
@@ -80,8 +80,8 @@ EWRAM_INIT MenuItem gUnknown_203B378[2] = {
 EWRAM_INIT u32 gUnknown_203B388[12] = {0xC, 0xC, 0xE, 0xE, 0xD, 0xE, 0xC, 0xD, 0xD, 0xB, 0xB, 0xB};
 EWRAM_INIT u32 gUnknown_203B3B8[12] = {0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x1A, 0x18, 0x1B, 0x16, 0x19, 0x17};
 
-const UnkTextStruct2 gUnknown_80E762C = {
-   0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E762C = {
+   0,
    0x03,
    0x02, 0x0F,
    0x13, 0x03,
@@ -124,9 +124,9 @@ const MenuItem gDeleteSaveConfirmMenuItems[3] =
     {NULL, 3},
 };
 
-const UnkTextStruct2 gUnknown_80E7784 =
+const Window gUnknown_80E7784 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x17, 0x0F,
     0x05, 0x03,
@@ -168,29 +168,29 @@ void CreateLoadScreen(u32 currMenu)
   }
   gLoadScreen->currMenu = currMenu;
   for(index = 0; index < 4; index++){
-    gLoadScreen->unk144[index] = gUnknown_80E75F8;
+    gLoadScreen->unk144.id[index] = gUnknown_80E75F8;
   }
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(gLoadScreen->unk144, TRUE, TRUE);
-  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,FALSE,6,FALSE);
+  ShowWindows(&gLoadScreen->unk144, TRUE, TRUE);
+  SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,0,&gUnknown_80E7610,gUnknown_203B378,FALSE,6,FALSE);
   switch(gLoadScreen->currMenu){
     case MENU_CONTINUE:
         if (IsQuickSave())
-            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,FALSE,6,FALSE);
+            SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeQuicksaveMenuItems,FALSE,6,FALSE);
         else
-            SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,FALSE,6,FALSE);
+            SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,1,&gUnknown_80E762C,gResumeAdventureMenuItems,FALSE,6,FALSE);
         break;
     case MENU_AWAITING_RESCUE:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,FALSE,6,FALSE);
+        SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,1,&gUnknown_80E762C,gQuitWaitingRescueMenuItems,FALSE,6,FALSE);
         break;
     case MENU_DELETE_SAVE_PROMPT:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,FALSE,6,FALSE);
+        SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,1,&gUnknown_80E762C,gDeleteSavePromptMenuItems,FALSE,6,FALSE);
         break;
     case MENU_DELETE_SAVE_CONFIRM:
-        SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,FALSE,6,FALSE);
+        SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,1,&gUnknown_80E762C, gDeleteSaveConfirmMenuItems,FALSE,6,FALSE);
         break;
   }
-  SetMenuItems(gLoadScreen->unk4,gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,TRUE,2,FALSE);
+  SetMenuItems(gLoadScreen->unk4,&gLoadScreen->unk144,2,&gUnknown_80E7784,gLoadScreenYesNoMenu,TRUE,2,FALSE);
   sub_8035CF4(gLoadScreen->unk4,0,0);
   sub_8035CF4(gLoadScreen->unk4,1,0);
   sub_8035CF4(gLoadScreen->unk4,2,1);
@@ -200,7 +200,7 @@ void CreateLoadScreen(u32 currMenu)
 void CleanLoadScreen(void)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
     if(gLoadScreen != NULL)
     {
         MemoryFree(gLoadScreen);

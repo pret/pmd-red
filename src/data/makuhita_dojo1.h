@@ -1,5 +1,5 @@
-static const UnkTextStruct2 sUnknown_80E0760 = {
-    0, 0, 0, 0,
+static const Window sUnknown_80E0760 = {
+    0,
     3,
     0, 0,
     0, 0,

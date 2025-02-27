@@ -386,13 +386,13 @@ static void PersonalityTest_DisplayStarterSprite(void)
     s32 paletteIndex;
     s32 emotionId;
     const u8 *gfx;
-    UnkTextStruct2 stackArray[4];
+    Windows stackArray;
 
     starterID = sPersonalityTestTracker->unk4.StarterID;
-    RestoreUnkTextStruct_8006518(stackArray);
-    stackArray[1] = sUnknown_80F4244;
+    RestoreUnkTextStruct_8006518(&stackArray);
+    stackArray.id[1] = sUnknown_80F4244;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(stackArray, TRUE, FALSE);
+    ShowWindows(&stackArray, TRUE, FALSE);
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
 

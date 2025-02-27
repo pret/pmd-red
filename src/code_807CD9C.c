@@ -202,8 +202,8 @@ void sub_807D068(Entity *pokemon, DungeonPos *pos)
     int incrementX;
     int incrementY;
 
-    posX = pos->x * 0x1800 + 0xc00;
-    posY = pos->y * 0x1800 + 0x1000;
+    posX = X_POS_TO_PIXELPOS(pos->x);
+    posY = Y_POS_TO_PIXELPOS(pos->y);
     diff = (pokemon->pixelPos).x - posX;
     if (diff < 0) {
         diff = -diff;

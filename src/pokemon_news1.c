@@ -23,7 +23,7 @@ static s32 GetNumPKMNNews(void);
 
 static void sub_802B880(void);
 
-bool8 sub_802B640(u32 a0, UnkTextStruct2_sub *a1, u32 a2)
+bool8 sub_802B640(u32 a0, DungeonPos *a1, u32 a2)
 {
     if (HasNoPKMNNews())
         return FALSE;
@@ -32,18 +32,18 @@ bool8 sub_802B640(u32 a0, UnkTextStruct2_sub *a1, u32 a2)
         sUnknown_203B2CC = MemoryAlloc(sizeof(struct unkStruct_203B2CC), 8);
 
     sUnknown_203B2CC->s38.unk34 = a0;
-    sUnknown_203B2CC->s38.unk38 = &sUnknown_203B2CC->s38.unk3C[a0];
+    sUnknown_203B2CC->s38.unk38 = &sUnknown_203B2CC->s38.windows.id[a0];
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B2CC->s38.unk3C);
+    RestoreUnkTextStruct_8006518(&sUnknown_203B2CC->s38.windows);
 
-    sUnknown_203B2CC->s38.unk3C[sUnknown_203B2CC->s38.unk34] = sUnknown_80DFBEC;
+    sUnknown_203B2CC->s38.windows.id[sUnknown_203B2CC->s38.unk34] = sUnknown_80DFBEC;
 
     if (a1 != NULL)
-        sUnknown_203B2CC->s38.unk3C[sUnknown_203B2CC->s38.unk34].unk8 = *a1;
+        sUnknown_203B2CC->s38.windows.id[sUnknown_203B2CC->s38.unk34].pos = *a1;
 
     sub_8012D08(sUnknown_203B2CC->s38.unk38, a2);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2CC->s38.unk3C, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B2CC->s38.windows, TRUE, TRUE);
 
     sub_8013818(&sUnknown_203B2CC->s38.input, GetNumPKMNNews(), a2, a0);
 
@@ -92,7 +92,7 @@ u8 GetPokemonNewsIndex(void)
 void sub_802B7D0(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2CC->s38.unk3C, FALSE, FALSE);
+    ShowWindows(&sUnknown_203B2CC->s38.windows, FALSE, FALSE);
 
     sUnknown_203B2CC->s38.input.unk22 = GetNumPKMNNews();
     sub_8013984(&sUnknown_203B2CC->s38.input);
@@ -110,10 +110,10 @@ void sub_802B81C(void)
 
         sUnknown_203B2D2 = sUnknown_203B2CC->s38.input.unk1E;
 
-        sUnknown_203B2CC->s38.unk3C[sUnknown_203B2CC->s38.unk34] = sUnknown_80DFBD0;
+        sUnknown_203B2CC->s38.windows.id[sUnknown_203B2CC->s38.unk34] = sUnknown_80DFBD0;
 
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sUnknown_203B2CC->s38.unk3C, TRUE, TRUE);
+        ShowWindows(&sUnknown_203B2CC->s38.windows, TRUE, TRUE);
 
         MemoryFree(sUnknown_203B2CC);
         sUnknown_203B2CC = NULL;
@@ -139,7 +139,7 @@ static void CreatePKMNNewsMenu(void)
     sub_8012BC4((sUnknown_80DFBE8.f2 * 8) + 4, 0, sUnknown_203B2CC->s38.input.unk1E + 1, 2, 7, sUnknown_203B2CC->s38.unk34);
 
     for (index = 0; index < sUnknown_203B2CC->s38.input.unk1A; index++) {
-        y = sub_8013800(&sUnknown_203B2CC->s38.input, index);
+        y = GetMenuEntryYCoord(&sUnknown_203B2CC->s38.input, index);
         new_index = (sUnknown_203B2CC->s38.input.unk1E * sUnknown_203B2CC->s38.input.unk1C) + index;
         mailIndex = sUnknown_203B2CC->receivedNewsletters[new_index];
         sub_803B6B0(10, y, 6, sUnknown_203B2CC->s38.unk34);

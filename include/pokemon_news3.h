@@ -14,7 +14,7 @@ struct unkStruct_203B2D8
 void CreateMailMenu(void);
 bool8 HasNoMailinMailbox(void);
 
-bool8 sub_802BD14(s32, UnkTextStruct2_sub *, u32);
+bool8 sub_802BD14(s32, DungeonPos *, u32);
 u32 sub_802BDEC(bool8);
 u8 sub_802BE74(void);
 void sub_802BE94(bool8 cursorSprite);

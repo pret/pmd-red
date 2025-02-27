@@ -13,6 +13,7 @@
 #include "text.h"
 #include "constants/dungeon.h"
 
+extern void sub_803E13C(void);
 extern void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
 extern s32 sub_80902C8(u8 dungeon);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
@@ -27,9 +28,10 @@ extern const char gUnknown_80F6108[];
 extern const char gUnknown_80F610C[];
 extern const char gUnknown_80F6110[];
 extern const char gUnknown_80F6118[];
-extern const char gUnknown_80F61A8[];
 extern const u32 gUnknown_80F6120[];
+extern const u16 gUnknown_80F5F70[];
 
+extern RGB gUnknown_202ECA4[];
 extern struct FileArchive gDungeonFileArchive;
 extern OpenedFile *gDungeonNameBannerPalette;
 extern OpenedFile *gDungeonNameBannerFontFile;
@@ -39,7 +41,6 @@ extern OpenedFile *gUnknown_202EC98;
 extern OpenedFile *gUnknown_202EC94;
 extern s32 gDungeonNameBannerFont;
 extern u8 gUnknown_20274A5;
-extern Palette32 gFontPalette[8];
 
 struct UnkDungeonFileData
 {
@@ -72,11 +73,9 @@ s32 sub_803DC6C(u32 chr, s32 strWidth, s32 a2);
 struct UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr);
 void sub_803DD30(u8 *a0, u32 *a1);
 
-// TODO https://decomp.me/scratch/nXUH3
-/*
 void sub_803D4D0(void)
 {
-    u16 spArray[252];
+    s16 spArray[NUM_ITEM_CATEGORIES + NUMBER_OF_ITEM_IDS];
     s32 i, j, k;
     OpenedFile *file;
     struct UnkDungeonFileData *strPtr;
@@ -87,19 +86,18 @@ void sub_803D4D0(void)
 
     gDungeon->unk1C570 = gDungeon->unk644.dungeonLocation2;
     file = OpenFileAndGetFileDataPtr(gUnknown_80F4D8C, &gDungeonFileArchive);
-
-    strPtr = &file->data.dungData->unk0[gDungeon->unk1C570.id][gDungeon->unk1C570.floor];
+    strPtr = &((struct UnkDataFileStruct *)(file->data))->unk0[gDungeon->unk1C570.id][gDungeon->unk1C570.floor];
 
     gDungeon->unk1CEC8 = GetDungeonFloorCount(gDungeon->unk644.dungeonLocation.id);
     gDungeon->unk14 = sub_80902C8(gDungeon->unk644.dungeonLocation.id);
 
-    gDungeon->unk1C574 = file->data.dungData->unk4[strPtr->unk0];
+    gDungeon->unk1C574 = ((struct UnkDataFileStruct *)(file->data))->unk4[strPtr->unk0];
 
     for (i = 0; i < 20; i++) {
-        gDungeon->unk1CD70[i] = file->data.dungData->unk10[strPtr->unk4][i];
+        gDungeon->unk1CD70[i] = ((struct UnkDataFileStruct *)(file->data))->unk10[strPtr->unk4][i];
     }
     for (i = 0; i < 31; i++) {
-        gDungeon->unk1CD98[i] = file->data.dungData->unkC[strPtr->unk2][i];
+        gDungeon->unk1CD98[i] = ((struct UnkDataFileStruct *)(file->data))->unkC[strPtr->unk2][i];
         if (ExtractSpeciesIndex(&gDungeon->unk1CD98[i]) == 0)
             break;
     }
@@ -110,309 +108,34 @@ void sub_803D4D0(void)
 
     for (i = 0; i < 4; i++)
     {
-        u16 *src = file->data.dungData->unk8[strPtr->unk6[i]];
+        u16 *src = ((struct UnkDataFileStruct *)(file->data))->unk8[strPtr->unk6[i]];
+        s32 arrId = 0;
 
-        for (j = 0; j < 252; src++) {
-            if (*src > 29999) {
-                for (k = *src - 30000; k != 0; k--) {
+        for (j = 0; j < NUM_ITEM_CATEGORIES + NUMBER_OF_ITEM_IDS; ) {
+            if (src[arrId] >= 30000) {
+                for (k = src[arrId] - 30000; k != 0; k--) {
                     spArray[j++] = 0;
                 }
             }
             else {
-                spArray[j++] = *src;
+                spArray[j++] = src[arrId];
             }
+            arrId++;
         }
 
-        for (j = 0; j < 12; j++) {
-            gDungeon->unk1C590[i].unk0[j] = spArray[j];
+        arrId = 0;
+        for (j = 0; j < NUM_ITEM_CATEGORIES; j++) {
+            gDungeon->unk1C590[i].categoryValues[arrId] = spArray[arrId];
+            arrId++;
         }
 
-        for (j = 0; j < 240; j++) {
-            gDungeon->unk1C590[i].unk18[j] = spArray[12 + j];
+        for (j = 0; j < NUMBER_OF_ITEM_IDS; j++) {
+            gDungeon->unk1C590[i].itemValues[j] = spArray[arrId];
+            arrId++;
         }
     }
 
     CloseFile(file);
-}
-
-*/
-//
-
-NAKED void sub_803D4D0(void)
-{
-    asm_unified("	.text\n"
-"	push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	sub sp, 0x1FC\n"
-"	ldr r6, _0803D654\n"
-"	ldr r1, [r6]\n"
-"	movs r4, 0xC9\n"
-"	lsls r4, 3\n"
-"	adds r0, r1, r4\n"
-"	ldr r2, _0803D658\n"
-"	adds r1, r2\n"
-"	bl sub_80901D8\n"
-"	ldr r0, [r6]\n"
-"	ldr r3, _0803D65C\n"
-"	adds r2, r0, r3\n"
-"	adds r1, r0, r4\n"
-"	ldrh r0, [r2]\n"
-"	ldrh r4, [r1]\n"
-"	cmp r0, r4\n"
-"	bne _0803D500\n"
-"	b _0803D6E0\n"
-"_0803D500:\n"
-"	ldr r0, [r1]\n"
-"	str r0, [r2]\n"
-"	ldr r0, _0803D660\n"
-"	ldr r1, _0803D664\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	mov r9, r0\n"
-"	ldr r3, [r0, 0x4]\n"
-"	ldr r2, [r6]\n"
-"	ldr r7, _0803D65C\n"
-"	adds r0, r2, r7\n"
-"	ldrb r1, [r0]\n"
-"	ldr r0, [r3]\n"
-"	lsls r1, 2\n"
-"	adds r1, r0\n"
-"	ldr r3, _0803D668\n"
-"	adds r0, r2, r3\n"
-"	ldrb r0, [r0]\n"
-"	lsls r0, 4\n"
-"	ldr r1, [r1]\n"
-"	adds r1, r0\n"
-"	mov r8, r1\n"
-"	ldr r4, _0803D658\n"
-"	adds r2, r4\n"
-"	ldrb r0, [r2]\n"
-"	bl GetDungeonFloorCount\n"
-"	ldr r1, [r6]\n"
-"	ldr r7, _0803D66C\n"
-"	adds r1, r7\n"
-"	strb r0, [r1]\n"
-"	ldr r0, [r6]\n"
-"	adds r0, r4\n"
-"	ldrb r0, [r0]\n"
-"	bl sub_80902C8\n"
-"	ldr r1, [r6]\n"
-"	strh r0, [r1, 0x14]\n"
-"	mov r2, r9\n"
-"	ldr r0, [r2, 0x4]\n"
-"	mov r3, r8\n"
-"	movs r4, 0\n"
-"	ldrsh r2, [r3, r4]\n"
-"	ldr r3, [r0, 0x4]\n"
-"	lsls r0, r2, 3\n"
-"	subs r0, r2\n"
-"	lsls r0, 2\n"
-"	ldr r7, _0803D670\n"
-"	adds r1, r7\n"
-"	adds r0, r3\n"
-"	ldm r0!, {r2-r4}\n"
-"	stm r1!, {r2-r4}\n"
-"	ldm r0!, {r2,r3,r7}\n"
-"	stm r1!, {r2,r3,r7}\n"
-"	ldr r0, [r0]\n"
-"	str r0, [r1]\n"
-"	movs r5, 0\n"
-"	mov r10, r6\n"
-"	ldr r4, _0803D674\n"
-"_0803D576:\n"
-"	mov r6, r10\n"
-"	ldr r2, [r6]\n"
-"	lsls r3, r5, 1\n"
-"	adds r2, r4\n"
-"	adds r2, r3\n"
-"	mov r7, r9\n"
-"	ldr r1, [r7, 0x4]\n"
-"	mov r6, r8\n"
-"	movs r7, 0x4\n"
-"	ldrsh r0, [r6, r7]\n"
-"	ldr r1, [r1, 0x10]\n"
-"	lsls r0, 2\n"
-"	adds r0, r1\n"
-"	ldr r0, [r0]\n"
-"	adds r3, r0\n"
-"	ldrh r0, [r3]\n"
-"	strh r0, [r2]\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x13\n"
-"	ble _0803D576\n"
-"	movs r5, 0\n"
-"	adds r6, 0x6\n"
-"	str r6, [sp, 0x1F8]\n"
-"	ldr r6, _0803D678\n"
-"	mov r10, r6\n"
-"_0803D5A8:\n"
-"	ldr r1, _0803D654\n"
-"	ldr r0, [r1]\n"
-"	lsls r3, r5, 3\n"
-"	mov r2, r10\n"
-"	adds r4, r0, r2\n"
-"	adds r4, r3\n"
-"	mov r12, r4\n"
-"	mov r4, r9\n"
-"	ldr r2, [r4, 0x4]\n"
-"	mov r7, r8\n"
-"	movs r4, 0x2\n"
-"	ldrsh r1, [r7, r4]\n"
-"	ldr r2, [r2, 0xC]\n"
-"	lsls r1, 2\n"
-"	adds r1, r2\n"
-"	ldr r1, [r1]\n"
-"	adds r3, r1\n"
-"	ldr r1, [r3]\n"
-"	ldr r2, [r3, 0x4]\n"
-"	mov r7, r12\n"
-"	str r1, [r7]\n"
-"	str r2, [r7, 0x4]\n"
-"	adds r0, r6\n"
-"	bl ExtractSpeciesIndex\n"
-"	lsls r0, 16\n"
-"	cmp r0, 0\n"
-"	beq _0803D5E8\n"
-"	adds r6, 0x8\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x1E\n"
-"	ble _0803D5A8\n"
-"_0803D5E8:\n"
-"	cmp r5, 0x1F\n"
-"	bgt _0803D606\n"
-"	ldr r6, _0803D654\n"
-"	lsls r0, r5, 3\n"
-"	ldr r1, _0803D678\n"
-"	adds r4, r0, r1\n"
-"_0803D5F4:\n"
-"	ldr r0, [r6]\n"
-"	adds r0, r4\n"
-"	movs r1, 0\n"
-"	bl sub_808E9C4\n"
-"	adds r4, 0x8\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x1F\n"
-"	ble _0803D5F4\n"
-"_0803D606:\n"
-"	movs r5, 0\n"
-"	ldr r2, _0803D67C\n"
-"	mov r10, r2\n"
-"_0803D60C:\n"
-"	mov r3, r9\n"
-"	ldr r1, [r3, 0x4]\n"
-"	lsls r0, r5, 1\n"
-"	ldr r4, [sp, 0x1F8]\n"
-"	adds r0, r4, r0\n"
-"	movs r6, 0\n"
-"	ldrsh r0, [r0, r6]\n"
-"	ldr r1, [r1, 0x8]\n"
-"	lsls r0, 2\n"
-"	adds r0, r1\n"
-"	movs r4, 0\n"
-"	adds r7, r5, 0x1\n"
-"	mov r8, r7\n"
-"	lsls r1, r5, 6\n"
-"	mov r12, r1\n"
-"	ldr r3, [r0]\n"
-"	mov r2, sp\n"
-"_0803D62E:\n"
-"	ldrh r0, [r3]\n"
-"	cmp r0, r10\n"
-"	bls _0803D684\n"
-"	ldrh r0, [r3]\n"
-"	ldr r6, _0803D680\n"
-"	adds r1, r0, r6\n"
-"	cmp r1, 0\n"
-"	beq _0803D68A\n"
-"	movs r6, 0\n"
-"	lsls r0, r4, 1\n"
-"	add r0, sp\n"
-"_0803D644:\n"
-"	strh r6, [r0]\n"
-"	adds r0, 0x2\n"
-"	adds r2, 0x2\n"
-"	adds r4, 0x1\n"
-"	subs r1, 0x1\n"
-"	cmp r1, 0\n"
-"	bne _0803D644\n"
-"	b _0803D68A\n"
-"	.align 2, 0\n"
-"_0803D654: .4byte gDungeon\n"
-"_0803D658: .4byte 0x00000644\n"
-"_0803D65C: .4byte 0x0001c570\n"
-"_0803D660: .4byte gUnknown_80F4D8C\n"
-"_0803D664: .4byte gDungeonFileArchive\n"
-"_0803D668: .4byte 0x0001c571\n"
-"_0803D66C: .4byte 0x0001cec8\n"
-"_0803D670: .4byte 0x0001c574\n"
-"_0803D674: .4byte 0x0001cd70\n"
-"_0803D678: .4byte 0x0001cd98\n"
-"_0803D67C: .4byte 0x0000752f\n"
-"_0803D680: .4byte 0xffff8ad0\n"
-"_0803D684:\n"
-"	strh r0, [r2]\n"
-"	adds r2, 0x2\n"
-"	adds r4, 0x1\n"
-"_0803D68A:\n"
-"	adds r3, 0x2\n"
-"	cmp r4, 0xFB\n"
-"	ble _0803D62E\n"
-"	ldr r7, _0803D6F0\n"
-"	mov r1, r12\n"
-"	subs r0, r1, r5\n"
-"	movs r4, 0xB\n"
-"	mov r3, sp\n"
-"	lsls r2, r0, 3\n"
-"	ldr r6, _0803D6F4\n"
-"_0803D69E:\n"
-"	ldr r0, [r7]\n"
-"	adds r0, r6\n"
-"	adds r0, r2\n"
-"	ldrh r1, [r3]\n"
-"	strh r1, [r0]\n"
-"	adds r3, 0x2\n"
-"	adds r2, 0x2\n"
-"	subs r4, 0x1\n"
-"	cmp r4, 0\n"
-"	bge _0803D69E\n"
-"	ldr r6, _0803D6F0\n"
-"	mov r2, r12\n"
-"	subs r0, r2, r5\n"
-"	lsls r3, r0, 3\n"
-"	add r2, sp, 0x18\n"
-"	ldr r5, _0803D6F8\n"
-"	movs r4, 0xEF\n"
-"_0803D6C0:\n"
-"	ldr r0, [r6]\n"
-"	adds r0, r5\n"
-"	adds r0, r3\n"
-"	ldrh r1, [r2]\n"
-"	strh r1, [r0]\n"
-"	adds r2, 0x2\n"
-"	adds r3, 0x2\n"
-"	subs r4, 0x1\n"
-"	cmp r4, 0\n"
-"	bge _0803D6C0\n"
-"	mov r5, r8\n"
-"	cmp r5, 0x3\n"
-"	ble _0803D60C\n"
-"	mov r0, r9\n"
-"	bl CloseFile\n"
-"_0803D6E0:\n"
-"	add sp, 0x1FC\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_0803D6F0: .4byte gDungeon\n"
-"_0803D6F4: .4byte 0x0001c590\n"
-"_0803D6F8: .4byte 0x0001c5a8\n");
 }
 
 u8 sub_803D6FC(void)
@@ -433,7 +156,7 @@ u8 sub_803D73C(s32 a0)
     s32 rand = DungeonRandInt(10000);
     u8 category = NUM_ITEM_CATEGORIES;
     for (i = 0; i < NUM_ITEM_CATEGORIES; i++) {
-        if (gDungeon->unk1C590[a0].unk0[i] != 0 && gDungeon->unk1C590[a0].unk0[i] >= rand) {
+        if (gDungeon->unk1C590[a0].categoryValues[i] != 0 && gDungeon->unk1C590[a0].categoryValues[i] >= rand) {
             category = i;
             break;
         }
@@ -443,7 +166,7 @@ u8 sub_803D73C(s32 a0)
 
     rand = DungeonRandInt(10000);
     for (i = 0; i < NUMBER_OF_ITEM_IDS; i++) {
-        if (gDungeon->unk1C590[a0].unk18[i] != 0 && GetItemCategory(i) == category && gDungeon->unk1C590[a0].unk18[i] >= rand) {
+        if (gDungeon->unk1C590[a0].itemValues[i] != 0 && GetItemCategory(i) == category && gDungeon->unk1C590[a0].itemValues[i] >= rand) {
             return i;
         }
     }
@@ -796,253 +519,100 @@ struct UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr)
     return ret;
 };
 
-/*
-I'm leaving this as it is, because I'm not sure how to generate the ldmia asm instruction. Maybe once the file's data format is better understood.
-struct FileSub_803DF60Struct
+struct FileStruct2
 {
     s32 count;
-    void *unkPtr;
+    u8 array[0];
 };
 
-struct OpenedFile_sub_803DF60
+struct FileStruct
 {
-    File *file;
-    struct FileSub_803DF60Struct **strPtr;
+    struct FileStruct2 *ptr;
+    struct u8 *ptr2;
 };
 
 void sub_803DF60(void)
 {
+    u8 *vram;
     s32 i;
-    struct OpenedFile_sub_803DF60 *file = (void*) OpenFileAndGetFileDataPtr(gUnknown_80F61A8, &gDungeonFileArchive);
-    struct FileSub_803DF60Struct r5 = **file->strPtr;
+    const void *src;
+    OpenedFile *file;
 
-    for (i = 0; i < r5.count; i++) {
-        CpuCopy((void *)VRAM + 0x13400 + i * 0x20, r5.unkPtr + i * 0x20, 0x20);
+    file = OpenFileAndGetFileDataPtr("itempat", &gDungeonFileArchive);
+    src = ((struct FileStruct *)(file->data))->ptr;
+    i = ((struct FileStruct2 *)(src))->count;
+    src = ((struct FileStruct2 *)(src))->array;
+    vram = OBJ_VRAM0 + 0x3400;
+    while (i != 0)
+    {
+        CpuCopy(vram, src, 0x20);
+        vram += 0x20;
+        src += 0x20;
+        i--;
     }
-
     CloseFile(file);
+
+    file = OpenFileAndGetFileDataPtr("etcfont", &gDungeonFileArchive);
+    src = ((struct FileStruct2 *)(file->data));
+    i = ((struct FileStruct2 *)(src))->count;
+    src = ((struct FileStruct2 *)(src))->array;
+    vram = OBJ_VRAM0 + 0x4000;
+    while (i != 0)
+    {
+        CpuCopy(vram, src, 0x20);
+        vram += 0x20;
+        src += 0x20;
+        i--;
+    }
+    CloseFile(file);
+
+    gUnknown_202EC94 = OpenFileAndGetFileDataPtr("etcfonta", &gDungeonFileArchive);
+    gUnknown_202EC98 = OpenFileAndGetFileDataPtr("levfont", &gDungeonFileArchive);
+    gUnknown_202EC9C = OpenFileAndGetFileDataPtr("hp5font", &gDungeonFileArchive);
+    gUnknown_202ECA0 = OpenFileAndGetFileDataPtr("colvec", &gDungeonFileArchive);
 }
 
-*/
-
-NAKED void sub_803DF60(void)
+void sub_803E02C(void)
 {
-    asm_unified("	push {r4-r7,lr}\n"
-"	ldr r0, _0803DFF8\n"
-"	ldr r1, _0803DFFC\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	adds r7, r0, 0\n"
-"	ldr r0, [r7, 0x4]\n"
-"	ldr r5, [r0]\n"
-"	ldm r5!, {r4}\n"
-"	ldr r6, _0803E000\n"
-"	cmp r4, 0\n"
-"	beq _0803DF8C\n"
-"_0803DF78:\n"
-"	adds r0, r6, 0\n"
-"	adds r1, r5, 0\n"
-"	movs r2, 0x20\n"
-"	bl CpuCopy\n"
-"	adds r6, 0x20\n"
-"	adds r5, 0x20\n"
-"	subs r4, 0x1\n"
-"	cmp r4, 0\n"
-"	bne _0803DF78\n"
-"_0803DF8C:\n"
-"	adds r0, r7, 0\n"
-"	bl CloseFile\n"
-"	ldr r0, _0803E004\n"
-"	ldr r1, _0803DFFC\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	adds r7, r0, 0\n"
-"	ldr r5, [r7, 0x4]\n"
-"	ldm r5!, {r4}\n"
-"	ldr r6, _0803E008\n"
-"	cmp r4, 0\n"
-"	beq _0803DFBA\n"
-"_0803DFA6:\n"
-"	adds r0, r6, 0\n"
-"	adds r1, r5, 0\n"
-"	movs r2, 0x20\n"
-"	bl CpuCopy\n"
-"	adds r6, 0x20\n"
-"	adds r5, 0x20\n"
-"	subs r4, 0x1\n"
-"	cmp r4, 0\n"
-"	bne _0803DFA6\n"
-"_0803DFBA:\n"
-"	adds r0, r7, 0\n"
-"	bl CloseFile\n"
-"	ldr r0, _0803E00C\n"
-"	ldr r4, _0803DFFC\n"
-"	adds r1, r4, 0\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	ldr r1, _0803E010\n"
-"	str r0, [r1]\n"
-"	ldr r0, _0803E014\n"
-"	adds r1, r4, 0\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	ldr r1, _0803E018\n"
-"	str r0, [r1]\n"
-"	ldr r0, _0803E01C\n"
-"	adds r1, r4, 0\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	ldr r1, _0803E020\n"
-"	str r0, [r1]\n"
-"	ldr r0, _0803E024\n"
-"	adds r1, r4, 0\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	ldr r1, _0803E028\n"
-"	str r0, [r1]\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_0803DFF8: .4byte gUnknown_80F61A8\n"
-"_0803DFFC: .4byte gDungeonFileArchive\n"
-"_0803E000: .4byte 0x06013400\n"
-"_0803E004: .4byte gUnknown_80F61B0\n"
-"_0803E008: .4byte 0x06014000\n"
-"_0803E00C: .4byte gUnknown_80F61B8\n"
-"_0803E010: .4byte gUnknown_202EC94\n"
-"_0803E014: .4byte gUnknown_80F61C4\n"
-"_0803E018: .4byte gUnknown_202EC98\n"
-"_0803E01C: .4byte gUnknown_80F61CC\n"
-"_0803E020: .4byte gUnknown_202EC9C\n"
-"_0803E024: .4byte gUnknown_80F61D4\n"
-"_0803E028: .4byte gUnknown_202ECA0\n");
-}
+    u8 *vram;
+    s32 i, j, r6;
+    const void *src;
+    OpenedFile *file;
+    u8 fileName[12];
 
-NAKED void sub_803E02C(void)
-{
-    asm_unified(	"push {r4-r7,lr}\n"
-"	mov r7, r9\n"
-"	mov r6, r8\n"
-"	push {r6,r7}\n"
-"	sub sp, 0xC\n"
-"	bl sub_803E13C\n"
-"	mov r1, sp\n"
-"	ldr r0, _0803E118\n"
-"	ldm r0!, {r2,r3}\n"
-"	stm r1!, {r2,r3}\n"
-"	ldr r1, _0803E11C\n"
-"	mov r0, sp\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	adds r7, r0, 0\n"
-"	ldr r0, [r7, 0x4]\n"
-"	ldr r5, [r0]\n"
-"	ldm r5!, {r4}\n"
-"	ldr r6, _0803E120\n"
-"	cmp r4, 0\n"
-"	beq _0803E06C\n"
-"_0803E058:\n"
-"	adds r0, r6, 0\n"
-"	adds r1, r5, 0\n"
-"	movs r2, 0x20\n"
-"	bl CpuCopy\n"
-"	adds r6, 0x20\n"
-"	adds r5, 0x20\n"
-"	subs r4, 0x1\n"
-"	cmp r4, 0\n"
-"	bne _0803E058\n"
-"_0803E06C:\n"
-"	ldr r0, _0803E124\n"
-"	ldr r1, [r7, 0x4]\n"
-"	ldr r1, [r1, 0x4]\n"
-"	movs r2, 0x80\n"
-"	bl CpuCopy\n"
-"	adds r0, r7, 0\n"
-"	bl CloseFile\n"
-"	movs r6, 0x80\n"
-"	lsls r6, 2\n"
-"	movs r4, 0\n"
-"	ldr r0, _0803E128\n"
-"	mov r9, r0\n"
-"	ldr r1, _0803E12C\n"
-"	mov r12, r1\n"
-"	movs r7, 0\n"
-"	ldr r2, _0803E130\n"
-"	mov r8, r2\n"
-"_0803E092:\n"
-"	mov r3, r12\n"
-"	ldrh r0, [r3]\n"
-"	lsls r5, r0, 12\n"
-"	adds r2, r7, 0\n"
-"	movs r3, 0x8\n"
-"_0803E09C:\n"
-"	mov r0, r9\n"
-"	ldr r1, [r0]\n"
-"	add r1, r8\n"
-"	adds r1, r2\n"
-"	adds r0, r5, 0\n"
-"	orrs r0, r6\n"
-"	strh r0, [r1]\n"
-"	adds r6, 0x1\n"
-"	adds r2, 0x2\n"
-"	subs r3, 0x1\n"
-"	cmp r3, 0\n"
-"	bge _0803E09C\n"
-"	movs r1, 0x2\n"
-"	add r12, r1\n"
-"	adds r7, 0x12\n"
-"	adds r4, 0x1\n"
-"	cmp r4, 0x1C\n"
-"	ble _0803E092\n"
-"	movs r4, 0\n"
-"	ldr r5, _0803E128\n"
-"	ldr r3, _0803E134\n"
-"	movs r2, 0xC0\n"
-"	lsls r2, 8\n"
-"_0803E0CA:\n"
-"	ldr r0, [r5]\n"
-"	lsls r1, r4, 1\n"
-"	adds r0, r3\n"
-"	adds r0, r1\n"
-"	strh r2, [r0]\n"
-"	adds r4, 0x1\n"
-"	cmp r4, 0x8\n"
-"	ble _0803E0CA\n"
-"	movs r4, 0\n"
-"	ldr r2, _0803E128\n"
-"	movs r6, 0xBE\n"
-"	lsls r6, 1\n"
-"	ldr r5, _0803E138\n"
-"	movs r3, 0xBF\n"
-"	lsls r3, 1\n"
-"_0803E0E8:\n"
-"	ldr r0, [r2]\n"
-"	lsls r1, r4, 2\n"
-"	adds r0, r1\n"
-"	adds r0, r6\n"
-"	strb r4, [r0]\n"
-"	ldr r0, [r2]\n"
-"	adds r0, r1\n"
-"	adds r0, r5\n"
-"	strb r4, [r0]\n"
-"	ldr r0, [r2]\n"
-"	adds r0, r1\n"
-"	adds r0, r3\n"
-"	strb r4, [r0]\n"
-"	adds r4, 0x1\n"
-"	cmp r4, 0xFF\n"
-"	ble _0803E0E8\n"
-"	add sp, 0xC\n"
-"	pop {r3,r4}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_0803E118: .4byte gUnknown_80F61DC\n"
-"_0803E11C: .4byte gDungeonFileArchive\n"
-"_0803E120: .4byte 0x0600c000\n"
-"_0803E124: .4byte gUnknown_202ECA4\n"
-"_0803E128: .4byte gDungeon\n"
-"_0803E12C: .4byte gUnknown_80F5F70\n"
-"_0803E130: .4byte 0x00012a18\n"
-"_0803E134: .4byte 0x00013554\n"
-"_0803E138: .4byte 0x0000017d\n");
+    sub_803E13C();
+    strcpy(fileName, "trappat");
+    file = OpenFileAndGetFileDataPtr(fileName, &gDungeonFileArchive);
+
+    src = ((struct FileStruct *)(file->data))->ptr;
+    i = ((struct FileStruct2 *)(src))->count;
+    src = ((struct FileStruct2 *)(src))->array;
+    vram = (void *) VRAM + 0xC000;
+    while (i != 0)
+    {
+        CpuCopy(vram, src, 0x20);
+        vram += 0x20;
+        src += 0x20;
+        i--;
+    }
+    CpuCopy(gUnknown_202ECA4, ((struct FileStruct *)(file->data))->ptr2, 0x80);
+    CloseFile(file);
+
+    r6 = 0x200;
+    for (i = 0; i < UNK12A18_ARR_COUNT; i++) {
+        for (j = 0; j < UNK12A18_ARR_COUNT_2; j++) {
+            gDungeon->unk12A18[i][j] = (gUnknown_80F5F70[i] << 0xC) | r6;
+            r6++;
+        }
+    }
+    for (i = 0; i < 9; i++) {
+        gDungeon->unk13554[i] = 0xC000;
+    }
+    for (i = 0; i < COLOR_RAMP_COUNT; i++) {
+        gDungeon->colorRamp[i].r = i;
+        gDungeon->colorRamp[i].g = i;
+        gDungeon->colorRamp[i].b = i;
+    }
 }
 
 void sub_803E13C(void)
@@ -1052,9 +622,9 @@ void sub_803E13C(void)
 
     SetWindowBGColor();
     if (gGameOptionsRef->playerGender != 0)
-        pal = gFontPalette[4].pal;
+        pal = &gFontPalette[16 * 4];
     else
-        pal = gFontPalette[0].pal;
+        pal = &gFontPalette[0];
 
     for (i = 0; i < 16; i++) {
         SetBGPaletteBufferColorArray(240 + i, pal);

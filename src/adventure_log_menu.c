@@ -13,7 +13,7 @@ void CreateAdventureLogMenu(void)
 void CleanAdventureLogMenu(void)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
 }
 
 u32 UpdateAdventureLogMenu(void)

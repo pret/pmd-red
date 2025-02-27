@@ -31,7 +31,7 @@ typedef struct unkStruct_203B2B4
     MenuStruct unk78;
     MenuItem unkC8[8];
     u16 unk108[8];
-    UnkTextStruct2 unk118[4];
+    Windows unk118;
 } unkStruct_203B2B4;
 
 bool8 CreateFriendListMenu(s32 param_1);

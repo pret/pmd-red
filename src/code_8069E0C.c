@@ -77,7 +77,6 @@ extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
 u32 EntityGetStatusSprites(Entity *entity);
 void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
 extern void sub_8042EC8(Entity *a0, s32 a1);
-void DoAxFrame_800558C(struct axObject *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, unkStruct_2039DB0 *spriteMasks);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
 extern void sub_803F580(s32);
@@ -356,94 +355,32 @@ void sub_806A390(Entity *pokemon)
 
 struct UnkTalkFileStruct
 {
-    const u8 *strings[10][4];
+    const u8 *strings[4];
 };
 
-// https://decomp.me/scratch/beUzw s16 memes again
-#ifdef NONMATCHING
-void sub_806A3D4(u8 *dst, s16 a1, s32 id, bool8 a3)
+void sub_806A3D4(u8 *dst, s32 _a1, s32 id, bool32 _a3)
 {
     u8 fileName[12];
     OpenedFile *file;
-    s32 strId;
+    s32 a1 = (s16) (_a1);
+    bool8 a3 = _a3;
+    s32 mod;
+    struct UnkTalkFileStruct *strPtr;
 
     if (a3) {
-        sprintf(fileName, gUnknown_8106EA8, a1 / 10);
+        sprintf(fileName, gUnknown_8106EA8, (s16) (a1 / 10));
     }
     else {
-        sprintf(fileName, gUnknown_8106EB0, a1 / 10);
+        sprintf(fileName, gUnknown_8106EB0, (s16) (a1 / 10));
     }
 
     file = OpenFileAndGetFileDataPtr(fileName, &gDungeonFileArchive);
 
-    strId = a1 % 10;
-    strcpy(dst, ((struct UnkTalkFileStruct *)(file->data))->strings[strId][id]);
+    mod = (s16)(a1 % 10);
+    strPtr = ((struct UnkTalkFileStruct *)(file->data));
+    strcpy(dst, strPtr[mod].strings[id]);
     CloseFile(file);
 }
-#else
-NAKED void sub_806A3D4(u8 *dst, s16 a1, s32 id, bool8 a3)
-{
-    asm_unified("push {r4-r7,lr}\n"
-"	sub sp, 0xC\n"
-"	adds r7, r0, 0\n"
-"	adds r6, r2, 0\n"
-"	lsls r1, 16\n"
-"	asrs r5, r1, 16\n"
-"	lsls r3, 24\n"
-"	cmp r3, 0\n"
-"	beq _0806A404\n"
-"	ldr r4, _0806A400\n"
-"	adds r0, r5, 0\n"
-"	movs r1, 0xA\n"
-"	bl __divsi3\n"
-"	adds r2, r0, 0\n"
-"	lsls r2, 16\n"
-"	asrs r2, 16\n"
-"	mov r0, sp\n"
-"	adds r1, r4, 0\n"
-"	bl sprintf\n"
-"	b _0806A41C\n"
-"	.align 2, 0\n"
-"_0806A400: .4byte gUnknown_8106EA8\n"
-"_0806A404:\n"
-"	ldr r4, _0806A450\n"
-"	adds r0, r5, 0\n"
-"	movs r1, 0xA\n"
-"	bl __divsi3\n"
-"	adds r2, r0, 0\n"
-"	lsls r2, 16\n"
-"	asrs r2, 16\n"
-"	mov r0, sp\n"
-"	adds r1, r4, 0\n"
-"	bl sprintf\n"
-"_0806A41C:\n"
-"	ldr r1, _0806A454\n"
-"	mov r0, sp\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	adds r4, r0, 0\n"
-"	adds r0, r5, 0\n"
-"	movs r1, 0xA\n"
-"	bl __modsi3\n"
-"	lsls r0, 16\n"
-"	ldr r1, [r4, 0x4]\n"
-"	asrs r0, 12\n"
-"	adds r0, r1\n"
-"	lsls r1, r6, 2\n"
-"	adds r0, r1\n"
-"	ldr r1, [r0]\n"
-"	adds r0, r7, 0\n"
-"	bl strcpy\n"
-"	adds r0, r4, 0\n"
-"	bl CloseFile\n"
-"	add sp, 0xC\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_0806A450: .4byte gUnknown_8106EB0\n"
-"_0806A454: .4byte gDungeonFileArchive");
-}
-#endif // NONMATCHING
 
 bool8 sub_806A458(Entity *pokemon)
 {
@@ -1486,31 +1423,35 @@ bool8 sub_806B8CC(s16 _species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a
     return TRUE;
 }
 
-// s16 species memes ughh https://decomp.me/scratch/jcfzb
-#ifdef NONMATCHING
-void sub_806BB6C(Entity *entity, s16 _species)
+void sub_806BB6C(Entity *entity, s32 _species)
 {
-    s32 species = _species;
+    s32 species = (s16) _species;
     s16 speciesMatch;
     struct unkStruct_806B7F8 spStruct;
     EntityInfo *entInfo = GetEntInfo(entity);
 
     DeletePokemonDungeonSprite(entInfo->unk98);
+    // s16 memes...
+    spStruct.species = 0;
     speciesMatch = species;
+    ASM_MATCH_TRICK(species);
     spStruct.species = speciesMatch;
+
     spStruct.level = 0;
     spStruct.unk2 = 0;
     spStruct.pos = entity->pos;
     spStruct.unk4 = 0;
 {
     s16 apparentSpeciesMatch;
-    s32 apparentSpecies = (GetMonsterApparentID(NULL, _species));
+    s32 apparentSpecies = (s16) (GetMonsterApparentID(NULL, species));
+    EntityInfo *entInfo;
 
     entity->unk22 = 0;
+    entInfo = GetEntInfo(entity);
     apparentSpeciesMatch = apparentSpecies;
-    GetEntInfo(entity)->apparentID = (apparentSpecies);
-    GetEntInfo(entity)->id = speciesMatch;
-    entity->axObj.spriteFile = GetSpriteData(apparentSpeciesMatch);
+    GetEntInfo(entity)->apparentID = (s16) (apparentSpeciesMatch);
+    GetEntInfo(entity)->id =  speciesMatch;
+    entity->axObj.spriteFile = GetSpriteData(apparentSpecies);
 }
 
     entity->axObj.unk42_animId1 = 7;
@@ -1518,7 +1459,7 @@ void sub_806BB6C(Entity *entity, s16 _species)
     entity->axObj.unk43_animId2 = 0xFF;
     entity->axObj.unk45_orientation = 1;
     entity->axObj.unk47 = 1;
-    entity->unk1C = 0;
+    entity->unk1C = IntToF248_2(0);
 
     if (entInfo->frozenClassStatus.status == STATUS_WRAP || entInfo->frozenClassStatus.status == STATUS_WRAPPED) {
         sub_8076CB4(entInfo->unk9C);
@@ -1531,131 +1472,6 @@ void sub_806BB6C(Entity *entity, s16 _species)
     sub_80429E8(entity);
     EntityUpdateStatusSprites(entity);
 }
-#else
-NAKED void sub_806BB6C(Entity *entity, s16 _species)
-{
-    asm_unified("\n"
-"	push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	sub sp, 0x1C\n"
-"	adds r7, r0, 0\n"
-"	lsls r4, r1, 16\n"
-"	asrs r4, 16\n"
-"	ldr r0, [r7, 0x70]\n"
-"	mov r9, r0\n"
-"	mov r8, r9\n"
-"	adds r0, 0x98\n"
-"	ldr r0, [r0]\n"
-"	bl DeletePokemonDungeonSprite\n"
-"	add r0, sp, 0x8\n"
-"	movs r1, 0\n"
-"	mov r10, r1\n"
-"	movs r6, 0\n"
-"	lsls r5, r4, 16\n"
-"	lsrs r5, 16\n"
-"	strh r5, [r0]\n"
-"	strh r6, [r0, 0x8]\n"
-"	mov r2, r10\n"
-"	strb r2, [r0, 0x2]\n"
-"	ldr r0, [r7, 0x4]\n"
-"	str r0, [sp, 0x14]\n"
-"	str r6, [sp, 0xC]\n"
-"	movs r0, 0\n"
-"	adds r1, r4, 0\n"
-"	bl GetMonsterApparentID\n"
-"	lsls r0, 16\n"
-"	adds r1, r7, 0\n"
-"	adds r1, 0x22\n"
-"	mov r2, r10\n"
-"	strb r2, [r1]\n"
-"	ldr r1, [r7, 0x70]\n"
-"	asrs r2, r0, 16\n"
-"	lsrs r0, 16\n"
-"	strh r0, [r1, 0x4]\n"
-"	ldr r0, [r7, 0x70]\n"
-"	strh r5, [r0, 0x2]\n"
-"	adds r0, r2, 0\n"
-"	bl GetSpriteData\n"
-"	str r0, [r7, 0x64]\n"
-"	adds r1, r7, 0\n"
-"	adds r1, 0x6A\n"
-"	movs r0, 0x7\n"
-"	strb r0, [r1]\n"
-"	adds r0, r7, 0\n"
-"	adds r0, 0x6C\n"
-"	mov r5, r10\n"
-"	strb r5, [r0]\n"
-"	adds r1, 0x1\n"
-"	movs r0, 0xFF\n"
-"	strb r0, [r1]\n"
-"	adds r1, 0x2\n"
-"	movs r0, 0x1\n"
-"	strb r0, [r1]\n"
-"	adds r1, 0x2\n"
-"	strb r0, [r1]\n"
-"	str r6, [r7, 0x1C]\n"
-"	mov r0, r9\n"
-"	adds r0, 0xB0\n"
-"	ldrb r0, [r0]\n"
-"	subs r0, 0x3\n"
-"	lsls r0, 24\n"
-"	lsrs r0, 24\n"
-"	cmp r0, 0x1\n"
-"	bhi _0806BC08\n"
-"	mov r0, r9\n"
-"	adds r0, 0x9C\n"
-"	ldr r0, [r0]\n"
-"	bl sub_8076CB4\n"
-"_0806BC08:\n"
-"	movs r1, 0\n"
-"	mov r6, r9\n"
-"	ldrb r0, [r6, 0x6]\n"
-"	cmp r0, 0\n"
-"	bne _0806BC14\n"
-"	movs r1, 0x1\n"
-"_0806BC14:\n"
-"	adds r0, r1, 0\n"
-"	adds r1, r7, 0\n"
-"	add r2, sp, 0x8\n"
-"	movs r3, 0\n"
-"	bl sub_806BC68\n"
-"	movs r0, 0x8C\n"
-"	lsls r0, 1\n"
-"	add r0, r8\n"
-"	mov r1, r8\n"
-"	adds r1, 0x10\n"
-"	mov r2, r8\n"
-"	adds r2, 0x14\n"
-"	mov r3, r8\n"
-"	adds r3, 0x16\n"
-"	mov r5, r8\n"
-"	movs r6, 0x2\n"
-"	ldrsh r4, [r5, r6]\n"
-"	str r4, [sp]\n"
-"	ldrb r4, [r5, 0x9]\n"
-"	str r4, [sp, 0x4]\n"
-"	bl sub_806AED8\n"
-"	ldrh r0, [r5, 0x10]\n"
-"	strh r0, [r5, 0xE]\n"
-"	mov r0, r10\n"
-"	strb r0, [r5, 0x8]\n"
-"	adds r0, r7, 0\n"
-"	bl sub_80429E8\n"
-"	adds r0, r7, 0\n"
-"	bl EntityUpdateStatusSprites\n"
-"	add sp, 0x1C\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0");
-}
-#endif // NONMATCHING
 
 void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos)
 {
@@ -2140,30 +1956,30 @@ void sub_806C51C(Entity *entity)
             if (entInfo->unk15C != 0) {
                 if (entInfo->unk160 == 0) {
                     if (entInfo->unk15F != 0) {
-                        RunAxAnimationFrame(&entity->axObj);
-                        RunAxAnimationFrame(&entity->axObj);
-                        RunAxAnimationFrame(&entity->axObj);
+                        RunAxAnimationFrame(&entity->axObj.axdata);
+                        RunAxAnimationFrame(&entity->axObj.axdata);
+                        RunAxAnimationFrame(&entity->axObj.axdata);
                     }
                     else {
-                        RunAxAnimationFrame(&entity->axObj);
+                        RunAxAnimationFrame(&entity->axObj.axdata);
                     }
                 }
             }
             else {
-                RunAxAnimationFrame(&entity->axObj);
+                RunAxAnimationFrame(&entity->axObj.axdata);
             }
         }
     }
     else {
         if (entInfo->frozenClassStatus.status != STATUS_FROZEN && entInfo->frozenClassStatus.status != STATUS_PETRIFIED) {
             if (gDungeon->unk644.unk28 != 0 && gDungeon->unk1BDD4.unk1C05F == 0) {
-                RunAxAnimationFrame(&entity->axObj);
-                RunAxAnimationFrame(&entity->axObj);
+                RunAxAnimationFrame(&entity->axObj.axdata);
+                RunAxAnimationFrame(&entity->axObj.axdata);
             }
             else if ((entity->axObj.unk43_animId2 == 0 || entity->axObj.unk43_animId2 == 7) && GetEntInfo(entity)->speedStage > 1) {
-                RunAxAnimationFrame(&entity->axObj);
+                RunAxAnimationFrame(&entity->axObj.axdata);
             }
-            RunAxAnimationFrame(&entity->axObj);
+            RunAxAnimationFrame(&entity->axObj.axdata);
         }
     }
 
@@ -2275,10 +2091,10 @@ void sub_806C51C(Entity *entity)
         }
 
         if (entity->unk22 == 0) {
-            DoAxFrame_800558C(&entity->axObj, x, y, y2, overworldPal, &spriteMasks);
+            DoAxFrame_800558C(&entity->axObj.axdata, x, y, y2, overworldPal, &spriteMasks);
         }
         else if (entity->unk22 == 1 && (gUnknown_202EDCC & 1)) {
-            DoAxFrame_800558C(&entity->axObj, x, y, y2, overworldPal, &spriteMasks);
+            DoAxFrame_800558C(&entity->axObj.axdata, x, y, y2, overworldPal, &spriteMasks);
         }
     }
 

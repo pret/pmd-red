@@ -124,26 +124,26 @@ static void sub_801B760(void)
        case 13:
        case 14:
        case 15:
-            RestoreUnkTextStruct_8006518(sUnknown_203B234->unkF4);
+            RestoreUnkTextStruct_8006518(&sUnknown_203B234->windows);
             for (i = 0; i < 4; i++)
-                sUnknown_203B234->unkF4[i] = sUnknown_80DBA58;
+                sUnknown_203B234->windows.id[i] = sUnknown_80DBA58;
 
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(sUnknown_203B234->unkF4, TRUE, TRUE);
+            ShowWindows(&sUnknown_203B234->windows, TRUE, TRUE);
             break;
         case 10:
-            RestoreUnkTextStruct_8006518(sUnknown_203B234->unkF4);
+            RestoreUnkTextStruct_8006518(&sUnknown_203B234->windows);
             sub_801BB5C();
-            sUnknown_203B234->unkF4[2] = sUnknown_80DBA70;
-            sub_8012CAC(&sUnknown_203B234->unkF4[2], sUnknown_203B234->unkCC);
+            sUnknown_203B234->windows.id[2] = sUnknown_80DBA70;
+            sub_8012CAC(&sUnknown_203B234->windows.id[2], sUnknown_203B234->unkCC);
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(sUnknown_203B234->unkF4, TRUE, TRUE);
+            ShowWindows(&sUnknown_203B234->windows, TRUE, TRUE);
             break;
         case 12:
-            RestoreUnkTextStruct_8006518(sUnknown_203B234->unkF4);
-            sUnknown_203B234->unkF4[1] = sUnknown_80DBA88;
+            RestoreUnkTextStruct_8006518(&sUnknown_203B234->windows);
+            sUnknown_203B234->windows.id[1] = sUnknown_80DBA88;
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(sUnknown_203B234->unkF4, TRUE, TRUE);
+            ShowWindows(&sUnknown_203B234->windows, TRUE, TRUE);
             break;
     }
 }

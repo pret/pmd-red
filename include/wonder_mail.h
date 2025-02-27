@@ -22,8 +22,8 @@ typedef struct WonderMailStruct_203B2C0
     u8 fill16A[0x218 - 0x1B8];
     /* 0x218 */ u8 mailIndex;
     MenuStruct unk21C[4];
-    UnkTextStruct2 unk35C[4];
-    UnkTextStruct2 unk3BC[4];
+    Windows unk35C;
+    Windows unk3BC;
     /* 0x41C */ u32 unkfill; // ItemSlot?
     /* 0x420 */ struct MonPortraitMsg monPortrait;
     /* 0x430 */ u8 padding3[0x534 - 0x430];

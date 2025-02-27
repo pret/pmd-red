@@ -65,7 +65,7 @@ struct unkStruct_203B2BC
     MenuItem menuItems[4];
     u8 fill120[0x16C - 0x13C];
     u16 unk16C[10];
-    UnkTextStruct2 unk180[4];
+    Windows unk180;
 };
 
 u32 sub_8027074(void);

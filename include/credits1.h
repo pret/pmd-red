@@ -6,7 +6,7 @@
 // size: 0x6C
 typedef struct Credits1Work
 {
-    UnkTextStruct2 unk0[4];
+    Windows unk0;
     s32 unk60;
     s32 unk64;
     /* 0x68 */ s32 creditsCategoryIndex;

@@ -31,6 +31,17 @@ static inline s16 Self_s16(s16 a)
     return a;
 }
 
+// Needed to match a couple of functions.
+static inline void InlineStrcpy(u8 *dst, const u8 *src)
+{
+    strcpy(dst, src);
+}
+
+static inline void InlineStrncpy(u8 *dst, const u8 *src, s32 n)
+{
+    strncpy(dst, src, n);
+}
+
 // Sometimes incrementing and decrementing a variable changes how registers are allocated, which helps with matching functions. Functionality-wise this doesn't do anything.
 #ifdef NONMATCHING
 #define ASM_MATCH_TRICK(a) {;}
@@ -42,8 +53,6 @@ static inline s16 Self_s16(s16 a)
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided\n")
-
-#define NAKED __attribute__((naked))
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 #define ARRAY_COUNT_INT(array) ((s32)(sizeof(array) / sizeof((array)[0]))) // When an int is needed to match.

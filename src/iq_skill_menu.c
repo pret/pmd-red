@@ -77,17 +77,17 @@ static void sub_801BFCC(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sIQSkillMenu->unkC4);
+    RestoreUnkTextStruct_8006518(&sIQSkillMenu->unkC4);
 
     if (sIQSkillMenu->state == 2)
-        sIQSkillMenu->unkC4[2] = sUnknown_80DBDB0;
+        sIQSkillMenu->unkC4.id[2] = sUnknown_80DBDB0;
     else {
         for (i = 0; i < 4; i++)
-            sIQSkillMenu->unkC4[i] = sUnknown_80DBD98;
+            sIQSkillMenu->unkC4.id[i] = sUnknown_80DBD98;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sIQSkillMenu->unkC4, TRUE, TRUE);
+    ShowWindows(&sIQSkillMenu->unkC4, TRUE, TRUE);
 }
 
 static void HandleIQSkillMenuState(void)

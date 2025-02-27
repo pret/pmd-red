@@ -142,29 +142,29 @@ void sub_802719C(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B2BC->unk180);
+    RestoreUnkTextStruct_8006518(&sUnknown_203B2BC->unk180);
     switch(sUnknown_203B2BC->state)
     {
         case 3:
-            sUnknown_203B2BC->unk180[3] = sUnknown_80DD74C;
+            sUnknown_203B2BC->unk180.id[3] = sUnknown_80DD74C;
             CreateFriendActionMenu();
-            sUnknown_203B2BC->unk180[2] = sUnknown_80DD704;
-            sub_8012CAC(&sUnknown_203B2BC->unk180[2], sUnknown_203B2BC->menuItems);
+            sUnknown_203B2BC->unk180.id[2] = sUnknown_80DD704;
+            sub_8012CAC(&sUnknown_203B2BC->unk180.id[2], sUnknown_203B2BC->menuItems);
             break;
         case 0xC:
             sub_80276A8();
-            sUnknown_203B2BC->unk180[2] = sUnknown_80DD71C;
-            sub_8012CAC(&sUnknown_203B2BC->unk180[2], sUnknown_203B2BC->menuItems);
+            sUnknown_203B2BC->unk180.id[2] = sUnknown_80DD71C;
+            sub_8012CAC(&sUnknown_203B2BC->unk180.id[2], sUnknown_203B2BC->menuItems);
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                sUnknown_203B2BC->unk180[index] = sUnknown_80DD6EC;
+                sUnknown_203B2BC->unk180.id[index] = sUnknown_80DD6EC;
             }
             break;
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2BC->unk180, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B2BC->unk180, TRUE, TRUE);
 }
 
 void sub_8027274(void)

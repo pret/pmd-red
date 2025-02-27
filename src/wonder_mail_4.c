@@ -26,8 +26,8 @@ static EWRAM_INIT struct unkStruct_203B320 *gUnknown_203B320 = {NULL};
 
 extern unkStruct_203B480 *gUnknown_203B480;
 
-const UnkTextStruct2 gUnknown_80E083C = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E083C = {
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -35,8 +35,8 @@ const UnkTextStruct2 gUnknown_80E083C = {
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E0854 = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E0854 = {
+    0,
     0x06,
     0x02, 0x02,
     0x18, 0x11,
@@ -77,7 +77,7 @@ ALIGNED(4) const u8 SOSList[] = "SOS List";
 s32 sub_8030A74(void);
 void sub_80308A0(void);
 
-u32 sub_80306A8(u32 wonderMailType, u32 r1, UnkTextStruct2_sub *r2, u32 r3)
+u32 sub_80306A8(u32 wonderMailType, u32 r1, DungeonPos *r2, u32 r3)
 {
     if (HasNoWonderMailType(wonderMailType))
         return 0;
@@ -86,18 +86,18 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, UnkTextStruct2_sub *r2, u32 r3)
     gUnknown_203B320->wonderMailType = wonderMailType;
     gUnknown_203B320->s28.s0.unk34 = r1;
 
-    gUnknown_203B320->s28.s0.unk38 = &gUnknown_203B320->s28.s0.unk3C[gUnknown_203B320->s28.s0.unk34];
-    RestoreUnkTextStruct_8006518(gUnknown_203B320->s28.s0.unk3C);
+    gUnknown_203B320->s28.s0.unk38 = &gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.unk34];
+    RestoreUnkTextStruct_8006518(&gUnknown_203B320->s28.s0.windows);
 
-    gUnknown_203B320->s28.s0.unk3C[gUnknown_203B320->s28.s0.unk34] = gUnknown_80E0854;
+    gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.unk34] = gUnknown_80E0854;
     gUnknown_203B320->s28.s0.unk38->unk14 = &gUnknown_203B320->s28.unk9C;
 
     if (r2 != 0)
-        gUnknown_203B320->s28.s0.unk3C[gUnknown_203B320->s28.s0.unk34].unk8 = *r2;
+        gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.unk34].pos = *r2;
 
     sub_8012D08(gUnknown_203B320->s28.s0.unk38, r3);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B320->s28.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B320->s28.s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_203B320->s28.s0.input, sub_8030A74(), r3, r1);
     sub_80308A0();
     sub_803092C();
@@ -154,9 +154,9 @@ void sub_803084C(void)
 {
     if(gUnknown_203B320 != NULL)
     {
-        gUnknown_203B320->s28.s0.unk3C[gUnknown_203B320->s28.s0.unk34] = gUnknown_80E083C;
+        gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.unk34] = gUnknown_80E083C;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(gUnknown_203B320->s28.s0.unk3C, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B320->s28.s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B320);
         gUnknown_203B320 = NULL;
     }
@@ -174,7 +174,7 @@ void sub_80308A0(void)
     gUnknown_203B320->s28.unk9C.f2 = 12;
     gUnknown_203B320->s28.unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B320->s28.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B320->s28.s0.windows, TRUE, TRUE);
 
     SUB_80095E4_CALL(gUnknown_203B320->s28.s0);
 }
@@ -200,7 +200,7 @@ void sub_803092C(void)
   for (index = 0; index < gUnknown_203B320->s28.s0.input.unk1A; index++) {
       mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.unk1E * gUnknown_203B320->s28.s0.input.unk1C) + index]);
       local.unk0[0] = gUnknown_203B320->s28.s0.unk34;
-      local.y = sub_8013800(&gUnknown_203B320->s28.s0.input,index);
+      local.y = GetMenuEntryYCoord(&gUnknown_203B320->s28.s0.input,index);
       local.mailTitleType = 7;
       local.mailMissionType = MISSION_TYPE_FRIEND_RESCUE;
       local.mailStatus = MAIL_STATUS_SUSPENDED;

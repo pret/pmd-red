@@ -90,7 +90,7 @@ u32 sub_802465C(void)
     OpenedFile *faceFile;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
     sLuminousCaveWork = MemoryAlloc(sizeof(LuminousCaveWork), 8);
     sLuminousCaveWork->menuAction1 = 0;
     sLuminousCaveWork->menuAction2 = 0;
@@ -180,12 +180,12 @@ static void sub_8024804(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sLuminousCaveWork->unk114);
+    RestoreUnkTextStruct_8006518(&sLuminousCaveWork->unk114);
 
     switch (sLuminousCaveWork->state) {
         case 8:
         case 13:
-            sLuminousCaveWork->unk114[2] = sUnknown_80DCA00;
+            sLuminousCaveWork->unk114.id[2] = sUnknown_80DCA00;
             break;
         case LUMINOUS_CAVE_LET_US_BEGIN:
         case LUMINOUS_CAVE_CHANGED_APPEARANCE:
@@ -200,12 +200,12 @@ static void sub_8024804(void)
             break;
         default:
             for (i = 0; i < 4; i++)
-                sLuminousCaveWork->unk114[i] = sUnknown_80DC9E8;
+                sLuminousCaveWork->unk114.id[i] = sUnknown_80DC9E8;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sLuminousCaveWork->unk114, TRUE, TRUE);
+    ShowWindows(&sLuminousCaveWork->unk114, TRUE, TRUE);
 }
 
 static void UpdateLuminousCaveDialogue(void)

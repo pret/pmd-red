@@ -53,7 +53,7 @@ bool8 CreateWigglytuffShop(u32 mode)
     OpenedFile *file;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
 
     sWigglytuffShop3Work = MemoryAlloc(sizeof(WigglytuffShop3Work), 8);
     sWigglytuffShop3Work->menuAction1 = 0;
@@ -140,32 +140,32 @@ static void sub_8021D5C(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sWigglytuffShop3Work->unkD0);
+    RestoreUnkTextStruct_8006518(&sWigglytuffShop3Work->unkD0);
 
     switch (sWigglytuffShop3Work->state) {
         case WIGGLYTUFF_UNK9:
         case WIGGLYTUFF_UNKA:
-            sWigglytuffShop3Work->unkD0[0] = sUnknown_80DC534;
-            sWigglytuffShop3Work->unkD0[2] = sUnknown_80DC534;
-            sWigglytuffShop3Work->unkD0[1] = sUnknown_80DC564;
+            sWigglytuffShop3Work->unkD0.id[0] = sUnknown_80DC534;
+            sWigglytuffShop3Work->unkD0.id[2] = sUnknown_80DC534;
+            sWigglytuffShop3Work->unkD0.id[1] = sUnknown_80DC564;
             break;
         case WIGGLYTUFF_UNKB:
-            sWigglytuffShop3Work->unkD0[2] = sUnknown_80DC54C;
+            sWigglytuffShop3Work->unkD0.id[2] = sUnknown_80DC54C;
             break;
         default:
             for (i = 0; i < 4; i++)
-                sWigglytuffShop3Work->unkD0[i] = sUnknown_80DC534;
+                sWigglytuffShop3Work->unkD0.id[i] = sUnknown_80DC534;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sWigglytuffShop3Work->unkD0, TRUE, TRUE);
+    ShowWindows(&sWigglytuffShop3Work->unkD0, TRUE, TRUE);
 }
 
 static void UpdateWigglytuffDialogue(void)
 {
     u8 *string;
-    unkStruct_8092638 uStack_14;
+    FriendAreaCapacity uStack_14;
 
     switch (sWigglytuffShop3Work->state) {
         case WIGGLYTUFF_INIT:
@@ -273,7 +273,7 @@ static void UpdateWigglytuffDialogue(void)
             sub_8023354(TRUE);
             break;
         case DISPLAY_POKEMON_FRIEND_AREA_INFO:
-            sub_8092638(sWigglytuffShop3Work->chosenFriendArea, &uStack_14, FALSE, FALSE);
+            GetFriendAreaCapacity2(sWigglytuffShop3Work->chosenFriendArea, &uStack_14, FALSE, FALSE);
 
             if (uStack_14.hasFriendArea)
                 sWigglytuffShop3Work->fallbackState = WIGGLYTUFF_CHECK_HAS_FRIEND_AREA;

@@ -41,7 +41,7 @@ bool8 MakuhitaDojo_New(u32 mode)
     u32 initialState;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
 
     sMakuhitaDojoWork1 = MemoryAlloc(sizeof(MakuhitaDojoWork1), 8);
     sMakuhitaDojoWork1->unk10 = -1;
@@ -152,21 +152,21 @@ static void sub_802FF1C(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(sMakuhitaDojoWork1->unk6C);
+    RestoreUnkTextStruct_8006518(&sMakuhitaDojoWork1->unk6C);
 
     switch (sMakuhitaDojoWork1->state) {
         case 0:
         case 4:
         case 13:
             for(index = 0; index < 4; index++)
-                sMakuhitaDojoWork1->unk6C[index] = sUnknown_80E0760;
+                sMakuhitaDojoWork1->unk6C.id[index] = sUnknown_80E0760;
             break;
         default:
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sMakuhitaDojoWork1->unk6C, TRUE, TRUE);
+    ShowWindows(&sMakuhitaDojoWork1->unk6C, TRUE, TRUE);
 }
 
 static void MakuhitaDojo_UpdateDialogue(void)

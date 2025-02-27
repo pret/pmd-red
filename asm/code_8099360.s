@@ -31,12 +31,12 @@ sub_8099690:
 _080996BC: .4byte gUnknown_8116028
 _080996C0: .4byte gSystemFileArchive
 _080996C4: .4byte gGameOptionsRef
-_080996C8: .4byte gFontPaletteAlt
+_080996C8: .4byte gFontPalette + 0x40
 _080996CC:
 	ldr r4, _080996D0
 	b _080996D6
 	.align 2, 0
-_080996D0: .4byte gUnknown_202D1B8
+_080996D0: .4byte gFontPalette + 0x180
 _080996D4:
 	ldr r4, _08099704
 _080996D6:
@@ -61,7 +61,7 @@ _080996E4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08099704: .4byte gUnknown_202D1F8
+_08099704: .4byte gFontPalette + 0x1C0
 	thumb_func_end sub_8099690
 
 	thumb_func_start sub_8099708

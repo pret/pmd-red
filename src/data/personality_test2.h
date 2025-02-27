@@ -12,9 +12,9 @@ const s16 gPartners[NUM_PARTNERS] =
     MONSTER_MUDKIP
 };
 
-const UnkTextStruct2 gUnknown_80F4278 =
+const Window gUnknown_80F4278 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -22,9 +22,9 @@ const UnkTextStruct2 gUnknown_80F4278 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80F4290 =
+const Window gUnknown_80F4290 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x06,
     0x02, 0x02,
     0x09, 0x0B,
@@ -32,9 +32,9 @@ const UnkTextStruct2 gUnknown_80F4290 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80F42A8 =
+const Window gUnknown_80F42A8 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x05,
     0x0E, 0x04,
     0x05, 0x05,

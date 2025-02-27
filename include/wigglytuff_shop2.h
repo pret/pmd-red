@@ -13,8 +13,8 @@ typedef struct WigglytuffShop2Work
     u32 pokemonStatus[0x10];
     /* 0x70 */ s32 numPokemoninFriendArea;
     s32 unk74;
-    UnkTextStruct2 *unk78;
-    UnkTextStruct2 unk7C[4];
+    Window *unk78;
+    Windows unk7C;
     u8 unkDC[4];
 } WigglytuffShop2Work;
 

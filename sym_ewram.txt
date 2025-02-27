@@ -1,77 +1,16 @@
 
     .include "src/m4a.o"
+    .include "src/code_2.o"
+	.space 0x4
 
-gTitleBrightness: /* 2000A80 (GameLoop) */
-	.space 0x8
-
-gScriptVarBuffer: /* 2000A88 (ThoroughlyResetScriptVars - RestoreGlobalScriptVars) */
-	.space 0x400
-
+    .include "src/event_flag.o"
     .include "src/memory.o"
     .include "src/bg_palette_buffer.o"
     .include "src/input.o"
     .include "src/sprite.o"
-
-gUnknown_2026E38: /* 2026E38 (sub_80057E8 - VBlank_CB) */
-	.space 0x4
-gUnknown_2026E3C: /* 2026E3C (sub_80057E8 - VBlank_CB) */
-	.space 0x4
-gUnknown_2026E40: /* 2026E40 (sub_8005838) */
-	.space 0x4
-gUnknown_2026E44: /* 2026E44 (sub_8005838) */
-	.space 0x4
-gUnknown_2026E48: /* 2026E48 (sub_8005838) */
-	.space 0x4
-gUnknown_2026E4C: /* 2026E4C (sub_80057E8 - sub_8005838) */
-	.space 0x2
-gUnknown_2026E4E: /* 2026E4E (GameLoop - GroundWeather_Select) */
-	.space 0x2
-gUnknown_2026E50: /* 2026E50 (sub_80057E8 - sub_80060EC) */
-	.space 0x4
-gUnknown_2026E54: /* 2026E54 (sub_80057E8 - sub_80060EC) */
-	.space 0x4
-gUnknown_2026E58: /* 2026E58 (sub_80057E8 - sub_80060EC) */
-	.space 0x8
-gUnknown_2026E60: /* 2026E60 (sub_8005838) */
-	.space 0x288
-gUnknown_20270E8: /* 20270E8 (sub_8005838) */
-	.space 0x288
-
+    .include "src/code_800558C.o"
     .include "src/text.o"
-
-
-gFontPalette: /* 202D038 (sub_80097B0 - sub_8052FB8) */
-	.space 0x4
-
-gUnknown_202D03C: /* 202D03C (sub_8040238) */
-	.space 0x1C
-gUnknown_202D058: /* 202D058 (sub_803E250 - sub_803EA10) */
-	.space 0x10
-gUnknown_202D068: /* 202D068 (sub_803FB74) */
-	.space 0x4
-gUnknown_202D06C: /* 202D06C (sub_803F38C) */
-	.space 0xC
-
-gFontPaletteAlt: /* 202D078 (sub_8099690) */
-	.space 0x20
-
-gUnknown_202D098: /* 202D098 (xxx_format_string) */
-	.space 0x120
-
-gUnknown_202D1B8: /* 202D1B8 (sub_8099690) */
-	.space 0x40
-gUnknown_202D1F8: /* 202D1F8 (sub_8099690) */
-	.space 0x40
-
-gUnknown_202D238: /* 202D238 (sub_80098A0 - sub_8009908) */
-	.space 0x4
-gUnknown_202D23C: /* 202D23C (sub_80098A0 - sub_8009908) */
-	.space 0x4
-gUnknown_202D240: /* 202D240 (sub_80098BC - sub_8009908) */
-	.space 0x60
-gUnknown_202D2A0: /* 202D2A0 (sub_8009A1C - sub_8009BE4) */
-	.space 0x4
-
+    .include "src/code_8009804.o"
     .include "src/file_system.o"
     .include "src/decompress.o"
     .include "src/main.o"
@@ -116,11 +55,7 @@ gUnknown_202DBB8: /* 202DBB8 (sub_800D6AC / data_80B9BB8) */
 gUnknown_202DCF8: /* 202DCF8 (sub_80001E8 - sub_800D9B8) */
 	.space 0x120
 
-gUnknown_202DE18: /* 202DE18 (sub_800F990 - sub_8010014) */
-	.space 0x1
-gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
-	.space 0x3
-
+    .include "src/friend_areas_map.o"
     .include "src/code_80118A4.o"
     .space 0x2
 
@@ -128,15 +63,7 @@ gUnknown_202DE19: /* 202DE19 (sub_800F990 - sub_8010014) */
 	.space 4
     .include "src/string_format.o"
 	.space 4
-
-
-gUnknown_202EC38: /* 202EC38 (sub_8037B28) */
-	.space 0x8
-gUnknown_202EC40: /* 202EC40 (sub_8037A48 - sub_8037C10) */
-	.space 0x8
-gUnknown_202EC48: /* 202EC48 (sub_8037D64) */
-	.space 0x4
-
+    .include "src/other_menus2.o"
     .include "src/rescue_password_menu.o"
 	.space 0x2
 
@@ -248,13 +175,7 @@ gUnknown_202F2FC: /* 202F2FC (sub_8065FB4 - sub_8066358) */
 gUnknown_202F300: /* 202F300 (sub_8066434) */
 	.space 0x8
 
-gUnknown_202F308: /* 202F308 (sub_8067A80 - sub_806806C) */
-	.space 0x4
-gUnknown_202F30C: /* 202F30C (sub_8067A80 - sub_8067A80) */
-	.space 0x4
-gUnknown_202F310: /* 202F310 (sub_8067A80 - sub_8068310) */
-	.space 0x4
-
+    .include "src/code_8066D04.o"
     .include "src/dungeon_movement.o"
     .include "src/code_80718D8.o"
 
@@ -264,14 +185,10 @@ gUnknown_202F32D: /* 202F32D (sub_8072CF4 - UseAttack) */
 	.space 0x3
 
     .include "src/dungeon_ai_items.o"
-
-gUnknown_202F378: /* 202F378 (sub_8074FB0 - UseAttack) */
-	.space 0x8
-
+    .include "src/code_8073CF0.o"
+	.space 0x4
     .include "src/dungeon_ai_attack.o"
-
-gUnknown_202F3D0: /* 202F3D0 (sub_80867F4 - sub_8086854) */
-	.space 0x8
+    .include "src/code_80869E4.o"
 
 gUnknown_202F3D8: /* 202F3D8 (sub_8085B4C - sub_8085B80) */
 	.space 0x8
@@ -295,12 +212,8 @@ gUnknown_202F3D8: /* 202F3D8 (sub_8085B4C - sub_8085B80) */
     .include "src/exclusive_pokemon.o"
     .space 0x4
     .include "src/ground_main.o"
-    .space 0x2
 
-gUnknown_20398C8: /* 20398C8 (sub_80991E0 - sub_809927C) */
-	.space 0x88 /* This should be a "struct WonderMailStruct_203B2C0_sub", at least I think so due to its size. Kermalis */
-gUnknown_2039950: /* 2039950 (xxx_script_related_8098468 - sub_809927C) */
-	.space 0x8
+	.space 0x7
 
 gUnknown_2039958: /* 2039958 (sub_809977C - sub_8099BE4) */
 	.space 0x10

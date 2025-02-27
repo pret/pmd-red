@@ -135,7 +135,7 @@ void sub_809A560(void)
     gUnknown_20399DC = 0;
     gUnknown_20399DE = 0;
     sub_80095CC(0,0x14);
-    xxx_call_save_unk_text_struct_800641C(0,1,1);
+    ShowWindows(0,1,1);
     sub_8009408(0,0x14);
     ResetTextbox_809B294();
     gUnknown_3001B64->unk414 = 0;
@@ -180,7 +180,7 @@ u32 xxx_script_textboxes_809A680(u32 param_1, u32 param_2)
     switch(param_1) {
         case 0:
             ResetTextbox_809B294();
-            xxx_call_save_unk_text_struct_800641C(0,1,1);
+            ShowWindows(0,1,1);
             break;
         case 1:
             ResetTextbox_809B294();
@@ -196,7 +196,7 @@ u32 xxx_script_textboxes_809A680(u32 param_1, u32 param_2)
             break;
         default:
             ResetTextbox_809B294();
-            xxx_call_save_unk_text_struct_800641C(0,1,1);
+            ShowWindows(0,1,1);
     }
     gUnknown_3001B64->unk0 = param_1;
     return 1;
@@ -1863,7 +1863,7 @@ bool8 sub_809B648(void)
         case 0x2d:
             if (gUnknown_3001B64->unk420 == 1) {
                 ResetTextbox_809B294();
-                xxx_call_save_unk_text_struct_800641C(NULL, 1, 1);
+                ShowWindows(NULL, 1, 1);
                 if (sub_801A5D8(0,0,0,10)) {
                     return 1;
                 }

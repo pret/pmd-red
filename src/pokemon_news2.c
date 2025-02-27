@@ -27,12 +27,12 @@ bool8 sub_802B9FC(u8 mailIndex)
     sUnknown_203B2D4->currMailIndex = mailIndex;
     sub_801317C(&sUnknown_203B2D4->unk88);
     sUnknown_203B2D4->unk24 = 0;
-    sUnknown_203B2D4->unk28[0] = sUnknown_80DFC34;
-    sUnknown_203B2D4->unk28[1] = sUnknown_80DFC18;
-    sUnknown_203B2D4->unk28[2] = sUnknown_80DFC18;
-    sUnknown_203B2D4->unk28[3] = sUnknown_80DFC18;
+    sUnknown_203B2D4->unk28.id[0] = sUnknown_80DFC34;
+    sUnknown_203B2D4->unk28.id[1] = sUnknown_80DFC18;
+    sUnknown_203B2D4->unk28.id[2] = sUnknown_80DFC18;
+    sUnknown_203B2D4->unk28.id[3] = sUnknown_80DFC18;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2D4->unk28, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B2D4->unk28, TRUE, TRUE);
     sUnknown_203B2D4->unk8 = 0;
     sub_802BCC4();
     sub_802BC7C();
@@ -62,9 +62,9 @@ u32 sub_802BA8C(void)
 void sub_802BACC(void)
 {
     if (sUnknown_203B2D4 != NULL) {
-        sUnknown_203B2D4->unk28[sUnknown_203B2D4->unk24] = sUnknown_80DFC18;
+        sUnknown_203B2D4->unk28.id[sUnknown_203B2D4->unk24] = sUnknown_80DFC18;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sUnknown_203B2D4->unk28, TRUE, TRUE);
+        ShowWindows(&sUnknown_203B2D4->unk28, TRUE, TRUE);
         MemoryFree(sUnknown_203B2D4);
         sUnknown_203B2D4 = NULL;
     }

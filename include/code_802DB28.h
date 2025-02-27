@@ -15,7 +15,7 @@ struct unkStruct_203B2FC
     /* 0x30 */ u8 jobSlotIndex;
     /* 0x34 */ WonderMail *jobInfo;
     /* 0x38 */ struct MonPortraitMsg monPortrait;
-    UnkTextStruct2 unk48[4];
+    Windows unk48;
 };
 
 bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon);

@@ -30,13 +30,13 @@ bool8 CreateIQSkillListMenu(s16 species, u32 index, u32 a2)
     sIQSkillListMenu->pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];
     sIQSkillListMenu->numIQSkills = GetNumAvailableIQSkills(sIQSkillListMenu->iqSkills, sIQSkillListMenu->pokeStruct->IQ);
     sIQSkillListMenu->s24.s0.unk34 = index;
-    sIQSkillListMenu->s24.s0.unk38 = &sIQSkillListMenu->s24.s0.unk3C[index];
-    RestoreUnkTextStruct_8006518(sIQSkillListMenu->s24.s0.unk3C);
-    sIQSkillListMenu->s24.s0.unk3C[sIQSkillListMenu->s24.s0.unk34] = sUnknown_80DBDF0;
+    sIQSkillListMenu->s24.s0.unk38 = &sIQSkillListMenu->s24.s0.windows.id[index];
+    RestoreUnkTextStruct_8006518(&sIQSkillListMenu->s24.s0.windows);
+    sIQSkillListMenu->s24.s0.windows.id[sIQSkillListMenu->s24.s0.unk34] = sUnknown_80DBDF0;
     sIQSkillListMenu->s24.s0.unk38->unk14 = &sIQSkillListMenu->s24.unk9C;
     sub_8012D08(sIQSkillListMenu->s24.s0.unk38, a2);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&sIQSkillListMenu->s24.s0.windows, TRUE, TRUE);
     sub_8013818(&sIQSkillListMenu->s24.s0.input, sIQSkillListMenu->numIQSkills, a2, index);
     sub_801C440();
     BuildIQSkillList();
@@ -78,7 +78,7 @@ s32 GetIQSkillSelection(void)
 void RedrawIQSkillListMenu(bool8 addCursor)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sIQSkillListMenu->s24.s0.unk3C, FALSE, FALSE);
+    ShowWindows(&sIQSkillListMenu->s24.s0.windows, FALSE, FALSE);
     sIQSkillListMenu->s24.s0.input.unk22 = sIQSkillListMenu->numIQSkills;
     sub_8013984(&sIQSkillListMenu->s24.s0.input);
     sub_801C440();
@@ -91,9 +91,9 @@ void RedrawIQSkillListMenu(bool8 addCursor)
 void CleanIQSkillListMenu(void)
 {
     if (sIQSkillListMenu != NULL) {
-        sIQSkillListMenu->s24.s0.unk3C[sIQSkillListMenu->s24.s0.unk34] = sUnknown_80DBDD8;
+        sIQSkillListMenu->s24.s0.windows.id[sIQSkillListMenu->s24.s0.unk34] = sUnknown_80DBDD8;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
+        ShowWindows(&sIQSkillListMenu->s24.s0.windows, TRUE, TRUE);
         MemoryFree(sIQSkillListMenu);
         sIQSkillListMenu = NULL;
     }
@@ -106,7 +106,7 @@ static void sub_801C440(void)
     sIQSkillListMenu->s24.unk9C.f2 = 10;
     sIQSkillListMenu->s24.unk9C.f3 = 0;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sIQSkillListMenu->s24.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&sIQSkillListMenu->s24.s0.windows, TRUE, TRUE);
     SUB_80095E4_CALL_2(sIQSkillListMenu->s24.s0);
 }
 
@@ -132,7 +132,7 @@ void BuildIQSkillList(void)
     for (counter = 0; counter < sIQSkillListMenu->s24.s0.input.unk1A; counter++) {
         skillIndex = sIQSkillListMenu->iqSkills[(sIQSkillListMenu->s24.s0.input.unk1E * sIQSkillListMenu->s24.s0.input.unk1C) + counter];
 
-        y = sub_8013800(&sIQSkillListMenu->s24.s0.input, counter);
+        y = GetMenuEntryYCoord(&sIQSkillListMenu->s24.s0.input, counter);
         strncpy(gFormatBuffer_Items[1], GetIQSkillName(skillIndex), 80);
 
         if (IsIQSkillSet(&sIQSkillListMenu->pokeStruct->IQSkills, 1 << skillIndex))

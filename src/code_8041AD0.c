@@ -58,8 +58,8 @@ s32 sub_80416A4(DungeonPos *pos_1, u32 param_2, bool8 param_3)
 {
   PixelPos pos;
 
-  pos.x = pos_1->x * 0x1800 + 0xc00;
-  pos.y = pos_1->y * 0x1800 + 0x1000;
+  pos.x = X_POS_TO_PIXELPOS(pos_1->x);
+  pos.y = Y_POS_TO_PIXELPOS(pos_1->y);
   return sub_80416E0(&pos, param_2, param_3);
 }
 

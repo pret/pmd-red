@@ -32,7 +32,7 @@ bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
         return FALSE;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
 
     sUnknown_203B2FC = MemoryAlloc(sizeof(struct unkStruct_203B2FC), 8);
     sUnknown_203B2FC->jobSlotIndex = jobSlotIndex;
@@ -92,18 +92,18 @@ static void sub_802DC40(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B2FC->unk48);
+    RestoreUnkTextStruct_8006518(&sUnknown_203B2FC->unk48);
 
     switch (sUnknown_203B2FC->state) {
         case 0:
         case 7:
             for (i = 0; i < 4; i++)
-                sUnknown_203B2FC->unk48[i]  = sUnknown_80E016C;
+                sUnknown_203B2FC->unk48.id[i]  = sUnknown_80E016C;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2FC->unk48, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B2FC->unk48, TRUE, TRUE);
 }
 
 static void sub_802DC9C(void)

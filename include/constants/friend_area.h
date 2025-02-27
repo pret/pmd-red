@@ -1,9 +1,6 @@
 #ifndef GUARD_CONSTANTS_FRIEND_AREA_H
 #define GUARD_CONSTANTS_FRIEND_AREA_H
 
-
-#define NUM_FRIEND_AREAS 58
-
 // Unlock Condition
 #define UNLOCK_SHOP_STORY 0
 #define UNLOCK_SHOP_POST_GAME 1
@@ -68,5 +65,6 @@
 #define SOUTHERN_ISLAND 55
 #define ENCLOSED_ISLAND 56
 #define FINAL_ISLAND 57
+#define NUM_FRIEND_AREAS 58
 
 #endif

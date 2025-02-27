@@ -37,7 +37,7 @@ bool8 sub_80319A4(u8 param_1, u8 dungeon, s32 param_3)
     sUnknown_203B330->dungeonIndex = dungeon;
     sub_801317C(&sUnknown_203B330->input);
     sUnknown_203B330->unk10 = param_3;
-    sUnknown_203B330->unk14 = &sUnknown_203B330->unk18[param_3];
+    sUnknown_203B330->unk14 = &sUnknown_203B330->unk18.id[param_3];
     sub_8031A2C();
     return TRUE;
 }
@@ -65,9 +65,9 @@ static void sub_8031A2C(void)
 void sub_8031A3C(void)
 {
     if (sUnknown_203B330 != NULL) {
-        sUnknown_203B330->unk18[sUnknown_203B330->unk10] = sUnknown_80E1EFC;
+        sUnknown_203B330->unk18.id[sUnknown_203B330->unk10] = sUnknown_80E1EFC;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sUnknown_203B330->unk18, TRUE, TRUE);
+        ShowWindows(&sUnknown_203B330->unk18, TRUE, TRUE);
         MemoryFree(sUnknown_203B330);
         sUnknown_203B330 = NULL;
     }
@@ -77,8 +77,8 @@ static void sub_8031A84(void)
 {
     s32 jobs;
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B330->unk18);
-    sUnknown_203B330->unk18[sUnknown_203B330->unk10] = sUnknown_80E1F18;
+    RestoreUnkTextStruct_8006518(&sUnknown_203B330->unk18);
+    sUnknown_203B330->unk18.id[sUnknown_203B330->unk10] = sUnknown_80E1F18;
 
     if (sUnknown_203B330->unkC == 2) {
         jobs = CountJobsinDungeon(sUnknown_203B330->dungeonIndex);
@@ -89,7 +89,7 @@ static void sub_8031A84(void)
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B330->unk18, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B330->unk18, TRUE, TRUE);
 }
 
 static void DisplayMissionObjectives(void)

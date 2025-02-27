@@ -23,12 +23,12 @@ bool8 sub_801D9E4(void)
 {
     sUnknown_203B258 = MemoryAlloc(sizeof(*sUnknown_203B258), 8);
     sUnknown_203B258->s0.unk34 = 3;
-    sUnknown_203B258->s0.unk38 = &sUnknown_203B258->s0.unk3C[3];
-    RestoreUnkTextStruct_8006518(sUnknown_203B258->s0.unk3C);
-    sUnknown_203B258->s0.unk3C[sUnknown_203B258->s0.unk34] = sUnknown_80DBF88;
+    sUnknown_203B258->s0.unk38 = &sUnknown_203B258->s0.windows.id[3];
+    RestoreUnkTextStruct_8006518(&sUnknown_203B258->s0.windows);
+    sUnknown_203B258->s0.windows.id[sUnknown_203B258->s0.unk34] = sUnknown_80DBF88;
     sUnknown_203B258->s0.unk38->unk14 = &sUnknown_203B258->unk9C;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B258->s0.unk3C, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B258->s0.windows, TRUE, TRUE);
     sub_8013818(&sUnknown_203B258->s0.input, 229, 10, sUnknown_203B258->s0.unk34);
     sub_801DB54();
     sub_801DBD4();
@@ -80,9 +80,9 @@ UNUSED static void sub_801DADC(bool8 a0)
 void sub_801DB0C(void)
 {
     if (sUnknown_203B258 != NULL) {
-        sUnknown_203B258->s0.unk3C[sUnknown_203B258->s0.unk34] = sUnknown_80DBF70;
+        sUnknown_203B258->s0.windows.id[sUnknown_203B258->s0.unk34] = sUnknown_80DBF70;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(sUnknown_203B258->s0.unk3C, TRUE, TRUE);
+        ShowWindows(&sUnknown_203B258->s0.windows, TRUE, TRUE);
         MemoryFree(sUnknown_203B258);
         sUnknown_203B258 = NULL;
     }
@@ -96,7 +96,7 @@ static void sub_801DB54(void)
     sUnknown_203B258->unk9C.f3 = 0;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B258->s0.unk3C, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B258->s0.windows, TRUE, TRUE);
 
     SUB_80095E4_CALL(sUnknown_203B258->s0);
 }
@@ -125,10 +125,10 @@ static void sub_801DBD4(void)
         temp = &gGroundConversion_811BAF4[index];
         temp2 = &gUnknown_81188F0[temp->unk4];
 
-        y = sub_8013800(&sUnknown_203B258->s0.input, counter);
+        y = GetMenuEntryYCoord(&sUnknown_203B258->s0.input, counter);
         PrintStringOnWindow(8, y, temp2->text1, sUnknown_203B258->s0.unk34, 0);
 
-        y = sub_8013800(&sUnknown_203B258->s0.input, counter);
+        y = GetMenuEntryYCoord(&sUnknown_203B258->s0.input, counter);
         PrintStringOnWindow(62, y, temp->text, sUnknown_203B258->s0.unk34, 0);
     }
 

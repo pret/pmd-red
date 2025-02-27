@@ -33,7 +33,7 @@ static void sub_8023730(void);
 static void sub_8023758(void);
 static void sub_80237E0(void);
 
-bool8 sub_8023144(s32 a0, s32 index, UnkTextStruct2_sub *sub, u32 a3)
+bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
 {
     u8 param_1_u8 = a0;
 
@@ -47,18 +47,18 @@ bool8 sub_8023144(s32 a0, s32 index, UnkTextStruct2_sub *sub, u32 a3)
     gUnknown_3001B5C->unk4 = gUnknown_203B298;
 
     gUnknown_3001B5C->s35C.s0.unk34 = index;
-    gUnknown_3001B5C->s35C.s0.unk38 = &gUnknown_3001B5C->s35C.s0.unk3C[index];
-    RestoreUnkTextStruct_8006518(gUnknown_3001B5C->s35C.s0.unk3C);
-    gUnknown_3001B5C->s35C.s0.unk3C[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC91C;
+    gUnknown_3001B5C->s35C.s0.unk38 = &gUnknown_3001B5C->s35C.s0.windows.id[index];
+    RestoreUnkTextStruct_8006518(&gUnknown_3001B5C->s35C.s0.windows);
+    gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC91C;
 
     gUnknown_3001B5C->s35C.s0.unk38->unk14 = &gUnknown_3001B5C->s35C.unk9C;
 
     if (sub != NULL)
-        gUnknown_3001B5C->s35C.s0.unk3C[gUnknown_3001B5C->s35C.s0.unk34].unk8 = *sub;
+        gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34].pos = *sub;
 
     sub_8012D08(gUnknown_3001B5C->s35C.s0.unk38, a3);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_3001B5C->s35C.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_3001B5C->s35C.s0.input, sub_80236A4(), a3, index);
     gUnknown_3001B5C->s35C.s0.input.menuIndex = gUnknown_203B29C;
     gUnknown_3001B5C->s35C.s0.input.unk1E = gUnknown_203B29E;
@@ -112,7 +112,7 @@ s16 sub_802331C(void)
 void sub_8023354(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_3001B5C->s35C.s0.unk3C, FALSE, FALSE);
+    ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, FALSE, FALSE);
     sub_8013984(&gUnknown_3001B5C->s35C.s0.input);
     sub_8023420();
     sub_80234BC();
@@ -127,9 +127,9 @@ void sub_80233A0(void)
         gUnknown_203B298 = gUnknown_3001B5C->unk4;
         gUnknown_203B29C = gUnknown_3001B5C->s35C.s0.input.menuIndex;
         gUnknown_203B29E = gUnknown_3001B5C->s35C.s0.input.unk1E;
-        gUnknown_3001B5C->s35C.s0.unk3C[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC904;
+        gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC904;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(gUnknown_3001B5C->s35C.s0.unk3C, TRUE, TRUE);
+        ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_3001B5C);
         gUnknown_3001B5C = NULL;
     }
@@ -156,7 +156,7 @@ static void sub_80234BC(void)
     s32 i;
     u8 buffer2[256];
     u8 buffer1[100];
-    unkStruct_8092638 auStack_2c;
+    FriendAreaCapacity auStack_2c;
 
     CallPrepareTextbox_8008C54(gUnknown_3001B5C->s35C.s0.unk34);
     sub_80073B8(gUnknown_3001B5C->s35C.s0.unk34);
@@ -165,9 +165,9 @@ static void sub_80234BC(void)
     sub_8012BC4((gUnknown_3001B5C->s35C.unk9C.f2 * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.unk1E + 1, 2, 7, gUnknown_3001B5C->s35C.s0.unk34);
 
     for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.unk1A; i++) {
-        y = sub_8013800(&gUnknown_3001B5C->s35C.s0.input, i);
+        y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.s0.input, i);
         species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.unk1C) + i];
-        sub_8092638(GetFriendArea(species), &auStack_2c, FALSE, FALSE);
+        GetFriendAreaCapacity2(GetFriendArea(species), &auStack_2c, FALSE, FALSE);
         color = COLOR_WHITE_2;
         if (auStack_2c.hasFriendArea)
             color = HasRecruitedMon(species) ? COLOR_CYAN : COLOR_GREEN;
@@ -235,154 +235,38 @@ static void sub_8023730(void)
     }
 }
 
-// 41.34%. Similar to SortbyAlphabetNo: https://decomp.me/scratch/Wmgj6
-NAKED static void sub_8023758(void)
+void sub_8023758(void)
 {
-    asm_unified(
-    "\tpush {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tsub sp, 0x4\n"
-    "\tldr r3, _080237DC\n"
-    "\tldr r2, [r3]\n"
-    "\tldr r1, [r2, 0x8]\n"
-    "\tlsls r0, r1, 1\n"
-    "\tadds r0, 0xA\n"
-    "\tadds r2, r0\n"
-    "\tmov r9, r2\n"
-    "\tmovs r2, 0\n"
-    "\tsubs r1, 0x1\n"
-    "\tcmp r2, r1\n"
-    "\tbge _080237CC\n"
-"_08023778:\n"
-    "\tmov r5, r9\n"
-    "\tldr r0, [r3]\n"
-    "\tldr r0, [r0, 0x8]\n"
-    "\tsubs r7, r0, 0x1\n"
-    "\tadds r0, r2, 0x1\n"
-    "\tmov r8, r0\n"
-    "\tcmp r7, r2\n"
-    "\tble _080237BE\n"
-"_08023788:\n"
-    "\tsubs r6, r5, 0x2\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r6, r1]\n"
-    "\tmovs r1, 0x1\n"
-    "\tstr r2, [sp]\n"
-    "\tbl GetAlphabetParentNo\n"
-    "\tadds r4, r0, 0\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tmovs r1, 0x1\n"
-    "\tbl GetAlphabetParentNo\n"
-    "\tlsls r4, 16\n"
-    "\tlsls r0, 16\n"
-    "\tldr r2, [sp]\n"
-    "\tcmp r4, r0\n"
-    "\tble _080237B6\n"
-    "\tmovs r0, 0\n"
-    "\tldrsh r1, [r5, r0]\n"
-    "\tldrh r0, [r6]\n"
-    "\tstrh r0, [r5]\n"
-    "\tstrh r1, [r6]\n"
-"_080237B6:\n"
-    "\tadds r5, r6, 0\n"
-    "\tsubs r7, 0x1\n"
-    "\tcmp r7, r2\n"
-    "\tbgt _08023788\n"
-"_080237BE:\n"
-    "\tmov r2, r8\n"
-    "\tldr r3, _080237DC\n"
-    "\tldr r0, [r3]\n"
-    "\tldr r0, [r0, 0x8]\n"
-    "\tsubs r0, 0x1\n"
-    "\tcmp r2, r0\n"
-    "\tblt _08023778\n"
-"_080237CC:\n"
-    "\tadd sp, 0x4\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_080237DC: .4byte gUnknown_3001B5C");
+    s32 temp;
+    s32 i, j;
+    s16 *r9 = &gUnknown_3001B5C->unkC[gUnknown_3001B5C->unk8 - 1];
+
+    for (i = 0; i < gUnknown_3001B5C->unk8 - 1; i++) {
+        s16 *r5 = r9;
+        for (j = gUnknown_3001B5C->unk8 - 1; j > i; j--) {
+            s16 *r6 = r5 - 1;
+            if (GetAlphabetParentNo(*r6, 1) > GetAlphabetParentNo(*r5, 1)) {
+                SWAP(*r5, *r6, temp);
+            }
+            r5--;
+        }
+    }
 }
 
- // SIMILAR TO ABOVE: https://decomp.me/scratch/BG2JR
-NAKED static void sub_80237E0(void)
+void sub_80237E0(void)
 {
-    asm_unified(
-    "\tpush {r4-r7,lr}\n"
-    "\tmov r7, r9\n"
-    "\tmov r6, r8\n"
-    "\tpush {r6,r7}\n"
-    "\tsub sp, 0x4\n"
-    "\tldr r3, _08023864\n"
-    "\tldr r2, [r3]\n"
-    "\tldr r1, [r2, 0x8]\n"
-    "\tlsls r0, r1, 1\n"
-    "\tadds r0, 0xA\n"
-    "\tadds r2, r0\n"
-    "\tmov r9, r2\n"
-    "\tmovs r2, 0\n"
-    "\tsubs r1, 0x1\n"
-    "\tcmp r2, r1\n"
-    "\tbge _08023854\n"
-"_08023800:\n"
-    "\tmov r5, r9\n"
-    "\tldr r0, [r3]\n"
-    "\tldr r0, [r0, 0x8]\n"
-    "\tsubs r7, r0, 0x1\n"
-    "\tadds r0, r2, 0x1\n"
-    "\tmov r8, r0\n"
-    "\tcmp r7, r2\n"
-    "\tble _08023846\n"
-"_08023810:\n"
-    "\tsubs r6, r5, 0x2\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r6, r1]\n"
-    "\tmovs r1, 0\n"
-    "\tstr r2, [sp]\n"
-    "\tbl GetAlphabetParentNo\n"
-    "\tadds r4, r0, 0\n"
-    "\tmovs r1, 0\n"
-    "\tldrsh r0, [r5, r1]\n"
-    "\tmovs r1, 0\n"
-    "\tbl GetAlphabetParentNo\n"
-    "\tlsls r4, 16\n"
-    "\tlsls r0, 16\n"
-    "\tldr r2, [sp]\n"
-    "\tcmp r4, r0\n"
-    "\tble _0802383E\n"
-    "\tmovs r0, 0\n"
-    "\tldrsh r1, [r5, r0]\n"
-    "\tldrh r0, [r6]\n"
-    "\tstrh r0, [r5]\n"
-    "\tstrh r1, [r6]\n"
-"_0802383E:\n"
-    "\tadds r5, r6, 0\n"
-    "\tsubs r7, 0x1\n"
-    "\tcmp r7, r2\n"
-    "\tbgt _08023810\n"
-"_08023846:\n"
-    "\tmov r2, r8\n"
-    "\tldr r3, _08023864\n"
-    "\tldr r0, [r3]\n"
-    "\tldr r0, [r0, 0x8]\n"
-    "\tsubs r0, 0x1\n"
-    "\tcmp r2, r0\n"
-    "\tblt _08023800\n"
-"_08023854:\n"
-    "\tadd sp, 0x4\n"
-    "\tpop {r3,r4}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0\n"
-    "\t.align 2, 0\n"
-"_08023864: .4byte gUnknown_3001B5C");
+    s32 temp;
+    s32 i, j;
+    s16 *r9 = &gUnknown_3001B5C->unkC[gUnknown_3001B5C->unk8 - 1];
+
+    for (i = 0; i < gUnknown_3001B5C->unk8 - 1; i++) {
+        s16 *r5 = r9;
+        for (j = gUnknown_3001B5C->unk8 - 1; j > i; j--) {
+            s16 *r6 = r5 - 1;
+            if (GetAlphabetParentNo(*r6, 0) > GetAlphabetParentNo(*r5, 0)) {
+                SWAP(*r5, *r6, temp);
+            }
+            r5--;
+        }
+    }
 }

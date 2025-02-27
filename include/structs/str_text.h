@@ -28,42 +28,43 @@ typedef struct UnkTextStruct1
     u8 unk46;
 } UnkTextStruct1;
 
-// size: 0x4
-typedef struct UnkTextStruct2_sub
-{
-    // I haven't found a func that reads these separately yet, but simply making an arr[2] will cause assignments to break.
-    // Some funcs only match with this union for some reason even though they don't access the variables separately...
-    // The first func to break is currently sub_801A5D8 in kecleon_bros4.c
-    // The first func I matched that uses the array is sub_8006554 in text2.c (using the separated fields doesn't match or get even close)
-    union {
-        struct {
-        s16 unk0;
-        s16 unk2;
-        } separate;
-        s16 arr[2];
-    } unk0;
-} UnkTextStruct2_sub;
-
-typedef struct UnkTextStruct2_sub2
+typedef struct WindowHeader
 {
     u8 f0;
     u8 f1;
     u8 f2;
     u8 f3;
-} UnkTextStruct2_sub2;
+} WindowHeader;
+
+#include "structs/str_position.h"
 
 // size: 0x18
-typedef struct UnkTextStruct2
+typedef struct Window
 {
     u8 unk0;
-    u8 fill1[0x4 - 0x1];
-    s32 unk4;
-    UnkTextStruct2_sub unk8;
-    s16 unkC;
-    s16 unkE;
-    s16 unk10;
+    s32 type;
+    DungeonPos pos;
+    s16 width;
+    s16 height;
+    s16 unk10; // In most cases it's the same as height. If it's smaller than height, the window may look glitchy. Maybe something with tile allocation/how the window is filled?
     s16 unk12;
-    const UnkTextStruct2_sub2 *unk14; // Pointer to 4 bytes which may be x-coord related. Could be window's header?
-} UnkTextStruct2;
+    const WindowHeader *unk14;
+} Window;
+
+#define WINDOW_TYPE_WITHOUT_BORDER      1
+#define WINDOW_TYPE_NORMAL              3
+#define WINDOW_TYPE_FILL_TRANSPARENT    5
+#define WINDOW_TYPE_WITH_HEADER         6
+#define WINDOW_TYPE_7                   7
+
+#define MAX_WINDOWS 4
+
+typedef struct Windows {
+    Window id[MAX_WINDOWS];
+    // Something ugly, so that sub_805FD74 could match weird compiler memcpy/stack initialization
+    #ifndef NONMATCHING
+    u8 fakeMatch[0];
+    #endif // NONMATCHING
+} Windows;
 
 #endif // GUARD_STR_TEXT_H

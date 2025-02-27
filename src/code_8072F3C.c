@@ -29,8 +29,8 @@ struct unkStruct_203B314
 
 EWRAM_INIT struct unkStruct_203B314 *gUnknown_203B314 = {NULL};
 
-const UnkTextStruct2 gUnknown_80E06FC = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E06FC = {
+    0x00,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -38,16 +38,16 @@ const UnkTextStruct2 gUnknown_80E06FC = {
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E0714 = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E0714 = {
+    0x00,
     0x06,
     0x02, 0x02,
     0x0E, 0x0E,
     0x0E, 0x00,
     NULL
 };
-const UnkTextStruct2 gUnknown_80E072C = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E072C = {
+    0x00,
     0x06,
     0x02, 0x02,
     0x10, 0x10,
@@ -66,7 +66,7 @@ extern bool8 sub_802FCF0(void);
 s32 sub_802FBF4(void);
 extern u8 sub_8097384(s16);
 
-u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
+u32 sub_802F73C(u32 r0, DungeonPos *r1, u32 r2, u8 r3)
 {
     if (sub_802FCF0())
         return 0;
@@ -76,22 +76,22 @@ u32 sub_802F73C(u32 r0, UnkTextStruct2_sub *r1, u32 r2, u8 r3)
 
     gUnknown_203B314->unkB8 = r3;
     gUnknown_203B314->sBC.s0.unk34 = r0;
-    gUnknown_203B314->sBC.s0.unk38 = &gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34];
-    RestoreUnkTextStruct_8006518(gUnknown_203B314->sBC.s0.unk3C);
+    gUnknown_203B314->sBC.s0.unk38 = &gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.unk34];
+    RestoreUnkTextStruct_8006518(&gUnknown_203B314->sBC.s0.windows);
 
     if (r3 != 0)
-        gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E072C;
+        gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E072C;
     else
-        gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E0714;
+        gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E0714;
 
     gUnknown_203B314->sBC.s0.unk38->unk14 = &gUnknown_203B314->sBC.unk9C;
 
     if (r1 != 0)
-        gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34].unk8 = *r1;
+        gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.unk34].pos = *r1;
 
     sub_8012D08(gUnknown_203B314->sBC.s0.unk38, r2);
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B314->sBC.s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B314->sBC.s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_203B314->sBC.s0.input, sub_802FBF4(), r2, r0);
     sub_802F9C0();
     sub_802FA50();
@@ -169,9 +169,9 @@ void sub_802F974(void)
 {
     if(gUnknown_203B314 != NULL)
     {
-        gUnknown_203B314->sBC.s0.unk3C[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E06FC;
+        gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E06FC;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(gUnknown_203B314->sBC.s0.unk3C, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B314->sBC.s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B314);
         gUnknown_203B314 = NULL;
     }
@@ -203,7 +203,7 @@ void sub_802FA50(void)
   if (gUnknown_203B314->unkB8 != 0) {
     for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
     {
-        y = sub_8013800(&gUnknown_203B314->sBC.s0.input,counter);
+        y = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
         index = gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.unk1C + counter;
         sVar1 = gUnknown_203B314->unk0[index];
         if (gUnknown_203B314->unk5C[index] != 0) {
@@ -218,7 +218,7 @@ void sub_802FA50(void)
   else {
     for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
     {
-        y2 = sub_8013800(&gUnknown_203B314->sBC.s0.input,counter);
+        y2 = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
         text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.unk1C + counter]);
         PrintStringOnWindow(8,y2,text,gUnknown_203B314->sBC.s0.unk34,0);
     }

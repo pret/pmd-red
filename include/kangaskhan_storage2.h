@@ -27,7 +27,7 @@ typedef struct unkStruct_203B20C
     u16 unk60[8];
     MenuStruct unk70;
     unkStructFor8013AA0 unkC0;
-    UnkTextStruct2 unkF0[4];
+    Windows unkF0;
 } unkStruct_203B20C;
 
 bool8 sub_8017E1C(void);

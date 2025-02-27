@@ -89,9 +89,9 @@ SECTIONS {
         asm/code_800ED38.o(.text);
         src/code_800F034.o(.text);
         src/code_800F958.o(.text);
-        asm/code_800F990.o(.text);
-        src/code_8010EF0.o(.text);
-        asm/code_8010F28.o(.text);
+        src/friend_areas_map.o(.text);
+        src/world_map.o(.text);
+        src/friend_areas_map_util.o(.text);
         src/code_80118A4.o(.text);
         src/debug.o(.text);
         src/save.o(.text);
@@ -229,7 +229,6 @@ SECTIONS {
         src/code_805D8C8_1.o(.text);
         asm/code_805D8C8.o(.text);
         src/code_8066D04.o(.text);
-        asm/code_8066D04.o(.text);
         src/code_805D8C8.o(.text);
         asm/code_805D8C8_1.o(.text);
         src/code_8069D4C.o(.text);
@@ -420,6 +419,10 @@ SECTIONS {
         src/code_800F034.o(.rodata);
         src/code_800F958.o(.rodata);
         data/data_80CE77C.o(.rodata);
+        src/friend_areas_map.o(.rodata);
+        src/world_map.o(.rodata);
+        src/friend_areas_map_util.o(.rodata);
+        data/data_80CE77C_2.o(.rodata);
         src/debug.o(.rodata);
         src/save.o(.rodata);
         src/save_read.o(.rodata);
@@ -530,10 +533,14 @@ SECTIONS {
         src/dungeon_ai_movement.o(.rodata);
         data/data_80F4D44.o(.rodata);
         src/dungeon_config.o(.rodata);
+        data/data_80F59C8_1.o(.rodata);
+        src/code_803D110.o(.rodata);
         data/data_80F59C8.o(.rodata);
         src/dungeon_message.o(.rodata);
         src/dungeon_move.o(.rodata);
         data/data_8106A4C.o(.rodata);
+        src/code_8066D04.o(.rodata);
+        data/data_8106A4C_2.o(.rodata);
         src/code_806CD90.o(.rodata);
         src/type_effectiveness.o(.data);
         data/data_8106F7C.o(.rodata);

@@ -12,9 +12,9 @@
 
 static EWRAM_INIT SaveMenuWork *sUnknown_203B364 = {NULL};
 
-const UnkTextStruct2 gUnknown_80E6F20 =
+const Window gUnknown_80E6F20 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -22,9 +22,9 @@ const UnkTextStruct2 gUnknown_80E6F20 =
     NULL
 };
 
-const UnkTextStruct2 gUnknown_80E6F38 =
+const Window gUnknown_80E6F38 =
 {
-    0x00, 0x00, 0x00, 0x00,
+    0,
     0x03,
     0x05, 0x08,
     0x15, 0x05,
@@ -130,19 +130,19 @@ void CreateSaveMenu(s32 currMenu)
     MemoryFill8(sUnknown_203B364,0,sizeof(SaveMenuWork));
   }
   for(index = 0; index < 4; index++){
-    sUnknown_203B364->unk148[index] = gUnknown_80E6F20;
+    sUnknown_203B364->unk148.id[index] = gUnknown_80E6F20;
   }
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(sUnknown_203B364->unk148, TRUE, TRUE);
+  ShowWindows(&sUnknown_203B364->unk148, TRUE, TRUE);
 
   if (currMenu == MENU_DELETE_SAVE) {
       // Beware, Deleting your Adventure
-    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,gDeletingYourAdventureMenuItems,
+    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,gDeletingYourAdventureMenuItems,
                  FALSE,6,FALSE);
   }
   else {
       // Saving your Adventure
-    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
+    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
                  FALSE,6,FALSE);
   }
   sub_8035CF4(sUnknown_203B364->unk8,0,TRUE);
@@ -154,7 +154,7 @@ void CreateSaveMenu(s32 currMenu)
 void CleanSaveMenu(void)
 {
   ResetUnusedInputStruct();
-  xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+  ShowWindows(NULL, TRUE, TRUE);
   if (sUnknown_203B364 != NULL) {
     MemoryFree(sUnknown_203B364);
     sUnknown_203B364 = NULL;
@@ -187,13 +187,13 @@ s32 UpdateSaveMenu(void)
         switch(saveStatus)
         {
             case SAVE_COMPLETED:
-                sub_8035CC0(sUnknown_203B364->unk148,0);
+                sub_8035CC0(&sUnknown_203B364->unk148,0);
                 if (sUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
-                    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
                                 gDeletedSaveMenuItems,FALSE,6,FALSE);
                 }
                 else {
-                    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
                                 gAdventureSavedMenuItems,FALSE,6,FALSE);
                 }
                 if (sUnknown_203B364->currMenu == 0x2d) {
@@ -208,13 +208,13 @@ s32 UpdateSaveMenu(void)
                 sUnknown_203B364->unk4 = 5;
                 break;
             default:
-                sub_8035CC0(sUnknown_203B364->unk148,0);
+                sub_8035CC0(&sUnknown_203B364->unk148,0);
                 if (sUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
-                    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
                                     gAdventureCouldNotBeDeletedMenuItems,FALSE,6,FALSE);
                 }
                 else {
-                    SetMenuItems(sUnknown_203B364->unk8,sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
                                     gAdventureCouldNotBeSavedMenuItems,FALSE,6,FALSE);
                 }
                 sub_8035CF4(sUnknown_203B364->unk8,0,TRUE);

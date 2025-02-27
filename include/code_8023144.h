@@ -11,15 +11,13 @@ typedef struct unkStruct_3001B5C
     u8 unk0;
     u32 unk4;
     s32 unk8;
-    s16 unkC[2];
-    u32 unk10;
-    u8 fill14[0x354 - 0x14];
+    s16 unkC[420];
     u8 unk354;
     u8 fill355[0x35C - 0x355];
     /* 0x35C */ struct_Sub80095E4_2 s35C;
 } unkStruct_3001B5C;
 
-bool8 sub_8023144(s32, s32 index, UnkTextStruct2_sub *sub, u32);
+bool8 sub_8023144(s32, s32 index, DungeonPos *sub, u32);
 u32 sub_8023278(bool8);
 s16 sub_802331C(void);
 void sub_8023354(bool8 cursorSprite);

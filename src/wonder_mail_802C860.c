@@ -82,25 +82,25 @@ static void sub_802C928(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B2F0->unk19C);
+    RestoreUnkTextStruct_8006518(&sUnknown_203B2F0->unk19C);
 
     switch (sUnknown_203B2F0->state) {
         case 2:
             sub_802CAA4();
-            sUnknown_203B2F0->unk19C[2] = sUnknown_80DFD40;
-            sub_8012CAC(&sUnknown_203B2F0->unk19C[2], sUnknown_203B2F0->unk10C);
+            sUnknown_203B2F0->unk19C.id[2] = sUnknown_80DFD40;
+            sub_8012CAC(&sUnknown_203B2F0->unk19C.id[2], sUnknown_203B2F0->unk10C);
             break;
         case 3:
-            sUnknown_203B2F0->unk19C[3] = sUnknown_80DFD58;
+            sUnknown_203B2F0->unk19C.id[3] = sUnknown_80DFD58;
             break;
         default:
             for (i = 0; i < 4; i++)
-                sUnknown_203B2F0->unk19C[i] = sUnknown_80DFD28;
+                sUnknown_203B2F0->unk19C.id[i] = sUnknown_80DFD28;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B2F0->unk19C, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B2F0->unk19C, TRUE, TRUE);
 }
 
 static void sub_802C9D8(void)

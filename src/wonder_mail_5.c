@@ -20,8 +20,8 @@ struct unkStruct_203B324
     MenuInputStructSub unk0;
     u8 mailIndex;
     u32 windowID;
-    UnkTextStruct2 *unk14;
-    UnkTextStruct2 unk18[4];
+    Window *unk14;
+    Windows unk18;
 };
 
 static EWRAM_INIT struct unkStruct_203B324 *gUnknown_203B324 = {NULL};
@@ -29,8 +29,8 @@ static EWRAM_INIT struct unkStruct_203B324 *gUnknown_203B324 = {NULL};
 extern unkStruct_203B480 *gUnknown_203B480;
 
 
-const UnkTextStruct2 gUnknown_80E0900 = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E0900 = {
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
@@ -38,10 +38,10 @@ const UnkTextStruct2 gUnknown_80E0900 = {
     NULL
 };
 
-const UnkTextStruct2_sub2 gUnknown_80E0918 = {0x01, 0x00, 0x12, 0x00};
+const WindowHeader gUnknown_80E0918 = {0x01, 0x00, 0x12, 0x00};
 
-const UnkTextStruct2 gUnknown_80E091C = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E091C = {
+    0,
     0x06,
     0x02, 0x02,
     0x1A, 0x10,
@@ -63,9 +63,9 @@ bool8 sub_8030D40(u8 mailIndex, s32 windowID)
   gUnknown_203B324->mailIndex = mailIndex;
   sub_801317C(&gUnknown_203B324->unk0);
   gUnknown_203B324->windowID = windowID;
-  gUnknown_203B324->unk14 = &gUnknown_203B324->unk18[windowID];
-  RestoreUnkTextStruct_8006518(gUnknown_203B324->unk18);
-  gUnknown_203B324->unk18[gUnknown_203B324->windowID] = gUnknown_80E091C;
+  gUnknown_203B324->unk14 = &gUnknown_203B324->unk18.id[windowID];
+  RestoreUnkTextStruct_8006518(&gUnknown_203B324->unk18);
+  gUnknown_203B324->unk18.id[gUnknown_203B324->windowID] = gUnknown_80E091C;
   sub_8030DD4();
   return TRUE;
 }
@@ -95,9 +95,9 @@ void sub_8030DE4(void)
 {
   if(gUnknown_203B324 != NULL)
   {
-      gUnknown_203B324->unk18[gUnknown_203B324->windowID] = gUnknown_80E0900;
+      gUnknown_203B324->unk18.id[gUnknown_203B324->windowID] = gUnknown_80E0900;
       ResetUnusedInputStruct();
-      xxx_call_save_unk_text_struct_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
+      ShowWindows(&gUnknown_203B324->unk18, TRUE, TRUE);
       MemoryFree(gUnknown_203B324);
       gUnknown_203B324 = NULL;
   }
@@ -106,7 +106,7 @@ void sub_8030DE4(void)
 void sub_8030E2C(void)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B324->unk18, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B324->unk18, TRUE, TRUE);
 }
 
 void sub_8030E48(void)

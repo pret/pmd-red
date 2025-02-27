@@ -33,7 +33,7 @@ static void sub_803A86C(void);
 UNUSED static bool8 sub_803A45C(void)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
     sUnknown_203B3F0 = MemoryAlloc(sizeof(unkStruct_203B3F0), 8);
     sub_803A504(0);
     return TRUE;
@@ -80,23 +80,23 @@ static void sub_803A51C(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B3F0->unkD8);
+    RestoreUnkTextStruct_8006518(&sUnknown_203B3F0->unkD8);
 
     switch (sUnknown_203B3F0->state) {
         case 3:
-            sUnknown_203B3F0->unkD8[1] = sUnknown_80E7E64;
+            sUnknown_203B3F0->unkD8.id[1] = sUnknown_80E7E64;
             break;
         case 2:
-            sUnknown_203B3F0->unkD8[2] = sUnknown_80E7E4C;
+            sUnknown_203B3F0->unkD8.id[2] = sUnknown_80E7E4C;
             break;
         default:
             for (i = 0; i < 4; i++)
-                sUnknown_203B3F0->unkD8[i] = sUnknown_80E7E34;
+                sUnknown_203B3F0->unkD8.id[i] = sUnknown_80E7E34;
             break;
     }
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B3F0->unkD8, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B3F0->unkD8, TRUE, TRUE);
 }
 
 static void sub_803A5A0(void)
@@ -121,7 +121,7 @@ static void sub_803A5A0(void)
             sUnknown_203B3F0->unk9C.unkC = 999;
             sUnknown_203B3F0->unk9C.unk4 = gTeamInventoryRef->teamStorage[sUnknown_203B3F0->id];
             sUnknown_203B3F0->unk9C.unk14 = 1;
-            sUnknown_203B3F0->unk9C.unk18 = &sUnknown_203B3F0->unkD8[1];
+            sUnknown_203B3F0->unk9C.unk18 = &sUnknown_203B3F0->unkD8.id[1];
             sUnknown_203B3F0->unk9C.unk1C = 44;
             sUnknown_203B3F0->unk9C.unk20 = 18;
             sub_8013AA0(&sUnknown_203B3F0->unk9C);

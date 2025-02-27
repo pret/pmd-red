@@ -44,8 +44,8 @@ EWRAM_DATA u16 gUnknown_20398BC = {0};
 EWRAM_DATA u16 gUnknown_20398BE = {0};
 EWRAM_DATA u32 gUnknown_20398C0 = {0};
 EWRAM_DATA s16 gUnknown_20398C4 = {0};
-struct unkStruct_20398C8 gUnknown_20398C8;
-extern u8 gUnknown_2039950;
+EWRAM_DATA struct unkStruct_20398C8 gUnknown_20398C8 = {0};
+EWRAM_DATA u8 gUnknown_2039950 = 0;
 
 EWRAM_INIT bool8 gUnknown_203B49C = {0};
 EWRAM_INIT u8 gUnknown_203B49D = {0};
@@ -395,7 +395,7 @@ u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s16 param_2)
                 sub_80A8EC0(auStack_98, 0x5b);
                 BoundedCopyStringtoBuffer(nameBuffer, auStack_98, POKEMON_NAME_LENGTH);
                 {
-                    struct unkStruct_808D144 stack = 
+                    struct unkStruct_808D144 stack =
                         {
                             .name = nameBuffer,
                             .speciesNum = MONSTER_GENGAR,
@@ -413,7 +413,7 @@ u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s16 param_2)
                     sub_808D144(&param_1->unk18, &stack);
                 }
             }
-            break; 
+            break;
         case 4:
             param_1->unkB = 0;
             break;
@@ -431,7 +431,7 @@ u8 sub_80991E0(struct unkStruct_20398C8 *param_1,short *param_2)
     *param_2 = gUnknown_20398C4;
     if (gUnknown_203B49C) {
         memcpy(param_1, &gUnknown_20398C8, sizeof(struct unkStruct_20398C8));
-        return TRUE;   
+        return TRUE;
     }
     else {
         return sub_80990EC(param_1,gUnknown_20398C4);
@@ -441,7 +441,7 @@ u8 sub_80991E0(struct unkStruct_20398C8 *param_1,short *param_2)
 void sub_8099220(struct unkStruct_20398C8 *param_1, s16 param_2)
 {
     s32 param_2_s32 = (s16)param_2;
-    if (param_1 != NULL) 
+    if (param_1 != NULL)
     {
         gUnknown_203B49C = TRUE;
         gUnknown_203B49D = 0;

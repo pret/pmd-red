@@ -42,7 +42,7 @@ enum MenuActions {
 bool8 sub_8017E1C(void)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
     sUnknown_203B20C = MemoryAlloc(sizeof(unkStruct_203B20C), 8);
     sUnknown_203B20C->menuAction1 = 0;
     sUnknown_203B20C->menuAction2 = 0;
@@ -108,46 +108,46 @@ static void sub_8017F28(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(sUnknown_203B20C->unkF0);
+    RestoreUnkTextStruct_8006518(&sUnknown_203B20C->unkF0);
 
     switch (sUnknown_203B20C->state) {
         case KANGASKHAN_STORAGE_2_MAIN:
-            sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
-            sUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
-            sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0.id[0] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0.id[1] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0.id[0] = sUnknown_80DB7B8;
             BuildKangaskhanStorage2MainMenu();
-            sUnknown_203B20C->unkF0[2] = sUnknown_80DB7D0;
-            sub_8012CAC(&sUnknown_203B20C->unkF0[2], sUnknown_203B20C->unk20);
+            sUnknown_203B20C->unkF0.id[2] = sUnknown_80DB7D0;
+            sub_8012CAC(&sUnknown_203B20C->unkF0.id[2], sUnknown_203B20C->unk20);
             break;
         case 4:
         case 5:
-            sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
-            sUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
-            sUnknown_203B20C->unkF0[2] = sUnknown_80DB7B8;
-            sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0.id[0] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0.id[1] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0.id[2] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0.id[0] = sUnknown_80DB7B8;
             break;
         case 10:
         case 11:
-            sUnknown_203B20C->unkF0[0] = sUnknown_80DB7B8;
-            sUnknown_203B20C->unkF0[1] = sUnknown_80DB7B8;
-            sUnknown_203B20C->unkF0[2] = sUnknown_80DB7B8;
-            sUnknown_203B20C->unkF0[0] = sUnknown_80DB800;
+            sUnknown_203B20C->unkF0.id[0] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0.id[1] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0.id[2] = sUnknown_80DB7B8;
+            sUnknown_203B20C->unkF0.id[0] = sUnknown_80DB800;
             break;
         case 12:
-            sUnknown_203B20C->unkF0[1] = sUnknown_80DB818;
+            sUnknown_203B20C->unkF0.id[1] = sUnknown_80DB818;
             break;
         case 6:
         case 13:
-            sUnknown_203B20C->unkF0[2] = sUnknown_80DB7E8;
+            sUnknown_203B20C->unkF0.id[2] = sUnknown_80DB7E8;
             break;
         default:
         case KANGASKHAN_STORAGE_2_INIT:
             for (index = 0; index < 4; index++)
-                sUnknown_203B20C->unkF0[index] = sUnknown_80DB7B8;
+                sUnknown_203B20C->unkF0.id[index] = sUnknown_80DB7B8;
             break;
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(sUnknown_203B20C->unkF0, TRUE, TRUE);
+    ShowWindows(&sUnknown_203B20C->unkF0, TRUE, TRUE);
 }
 
 static void sub_8018100(void)
@@ -189,7 +189,7 @@ static void sub_8018100(void)
 
             sUnknown_203B20C->unkC0.unk4 = sUnknown_203B20C->unkC0.unkC;
             sUnknown_203B20C->unkC0.unk14 = 1;
-            sUnknown_203B20C->unkC0.unk18 = &sUnknown_203B20C->unkF0[1];
+            sUnknown_203B20C->unkC0.unk18 = &sUnknown_203B20C->unkF0.id[1];
             sUnknown_203B20C->unkC0.unk1C = 40;
             sUnknown_203B20C->unkC0.unk20 = 18;
             sub_8013AA0(&sUnknown_203B20C->unkC0);

@@ -64,7 +64,6 @@ extern void sub_8075900(Entity *pokemon, u8 r1);
 extern void sub_806A5B8(Entity *);
 extern void sub_807EC28(bool8);
 
-extern s32 gUnknown_202F378;
 extern u8 gUnknown_202F32D;
 
 extern const u8 *gMonTerrifiedCouldntPickUpItem;
@@ -90,6 +89,8 @@ extern const DungeonPos gUnknown_80F4D44[];
 
 bool8 UseAttack(Entity *a0);
 void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
+
+static EWRAM_DATA s32 gUnknown_202F378 = 0;
 
 void HandleEatAIAction(Entity *pokemon)
 {
@@ -891,8 +892,8 @@ bool8 UseAttack(Entity *a0)
                 PixelPos pos;
 
                 monInfo->flags |= 0x2000;
-                pos.x = (monInfo->unk184[0].previousTargetMovePosition2.x * 0x1800) + 0xC00;
-                pos.y = (monInfo->unk184[0].previousTargetMovePosition2.y * 0x1800) + 0x1000;
+                pos.x = X_POS_TO_PIXELPOS(monInfo->unk184[0].previousTargetMovePosition2.x);
+                pos.y = Y_POS_TO_PIXELPOS(monInfo->unk184[0].previousTargetMovePosition2.y);
                 sub_804535C(mon, &pos);
                 sub_806CDFC(mon, 0, monInfo->unk184[0].lastMoveDirection);
                 monInfo->notMoving = 0;
@@ -928,8 +929,8 @@ bool8 UseAttack(Entity *a0)
                             else {
                                 PixelPos pos;
 
-                                pos.x = (monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.x * 0x1800) + 0xC00;
-                                pos.y = (monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.y * 0x1800) + 0x1000;
+                                pos.x = X_POS_TO_PIXELPOS(monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.x);
+                                pos.y = Y_POS_TO_PIXELPOS(monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.y);
                                 sub_804535C(mon, &pos);
                                 sub_806CDFC(mon, 0, monInfo->unk184[monInfo->notMoving].lastMoveDirection);
                             }

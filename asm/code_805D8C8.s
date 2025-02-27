@@ -3496,7 +3496,7 @@ _0806361E:
 	bl BufferMoveName
 	ldr r0, _08063690
 	mov r1, r9
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r4, r0, 0
 	ldrb r1, [r7]
 	movs r0, 0x2
@@ -7171,7 +7171,7 @@ _080652D2:
 	bl PrintFormattedStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	ldr r0, _080653E0
 	ldr r2, [r0]
@@ -7181,7 +7181,7 @@ _080652D2:
 	bl PrintFormattedStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	ldr r0, _080653E4
 	ldr r2, [r0]
@@ -7191,7 +7191,7 @@ _080652D2:
 	bl PrintFormattedStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	ldr r0, _080653E8
 	ldr r2, [r0]
@@ -7202,7 +7202,7 @@ _080652D2:
 	movs r5, 0x4
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	ldr r0, _080653EC
 	ldr r2, [r0]
@@ -7225,7 +7225,7 @@ _080652D2:
 	movs r5, 0x5
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	ldr r0, _080653F0
 	ldr r2, [r0]
@@ -7248,7 +7248,7 @@ _080653F4:
 	movs r5, 0x5
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	ldr r0, _08065440
 	ldr r2, [r0]
@@ -7259,7 +7259,7 @@ _080653F4:
 _0806540E:
 	ldr r0, _08065444
 	adds r1, r5, 0
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	ldr r0, _08065448
 	ldr r2, [r0]
@@ -7381,7 +7381,7 @@ sub_806544C:
 	bl PrintFormattedStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	ldr r6, _08065570
 	movs r2, 0xAC
@@ -7394,7 +7394,7 @@ sub_806544C:
 	bl PrintFormattedStringOnWindow
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	movs r2, 0xB8
 	lsls r2, 1
@@ -7512,15 +7512,15 @@ CreateFieldGameOptionsMenu:
 	bl sub_80137B0
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	str r0, [sp, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	str r0, [sp, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	str r0, [sp, 0xC]
 	movs r0, 0
 	bl sub_80073B8
@@ -7666,23 +7666,23 @@ CreateFieldDungeonMenu:
 	bl sub_80137B0
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	str r0, [sp, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	str r0, [sp, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	str r0, [sp, 0xC]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	str r0, [sp, 0x10]
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	str r0, [sp, 0x14]
 	movs r0, 0
 	bl sub_80073B8
@@ -7961,7 +7961,7 @@ CreateFieldOthersMenu:
 _08065A0A:
 	ldr r0, _08065A7C
 	adds r1, r4, 0
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	stm r5!, {r0}
 	adds r4, 0x1
 	cmp r4, 0
@@ -8418,7 +8418,7 @@ sub_8065CAC:
 _08065D7A:
 	ldr r0, _08065DB0
 	adds r1, r4, 0
-	bl sub_8013800
+	bl GetMenuEntryYCoord
 	adds r1, r0, 0
 	ldm r5!, {r2}
 	movs r0, 0

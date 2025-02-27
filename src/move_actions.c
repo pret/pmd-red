@@ -2585,8 +2585,6 @@ bool8 SplashMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_
   PixelPos pos2;
   Tile *tile;
   Entity *entity;
-  s32 temp;
-  s32 temp2;
   u8 check;
 
 
@@ -2610,14 +2608,9 @@ _0805A8C2:
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEBDC);
     return FALSE;
   }
-  temp = pos1.x * 0x1800;
-  temp += (0xC00);
-  pos2.x =  (temp - target->pixelPos.x) / 0xc;
 
-  temp2 = pos1.y * 0x1800;
-  temp2 += (0x80 << 5);
-  pos2.y = ((temp2 - target->pixelPos.y) / 0xc);
-
+  pos2.x = (X_POS_TO_PIXELPOS(pos1.x) - target->pixelPos.x) / 0xc;
+  pos2.y = (Y_POS_TO_PIXELPOS(pos1.y) - target->pixelPos.y) / 0xc;
 
   if (((check = sub_803F428(&target->pos), r9 = &target->pos, check)) || (sub_803F428(&pos1))) {
     for(counter = 0; counter < 0xC; counter++)

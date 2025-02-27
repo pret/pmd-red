@@ -52,7 +52,7 @@ bool8 CreateFelicityBank(s32 mode)
     OpenedFile *faceFile;
 
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(NULL, TRUE, TRUE);
+    ShowWindows(NULL, TRUE, TRUE);
     sFelicityBankWork = MemoryAlloc(sizeof(FelicityBankWork), 8);
     sFelicityBankWork->menuAction = 0;
     sFelicityBankWork->mode = mode;
@@ -130,32 +130,32 @@ static void sub_801645C(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(sFelicityBankWork->unkA8);
+    RestoreUnkTextStruct_8006518(&sFelicityBankWork->unkA8);
 
     switch (sFelicityBankWork->currState) {
         case 2:
-            sFelicityBankWork->unkA8[0].unk0 = 0x80;
-            sFelicityBankWork->unkA8[1].unk0 = 0x80;
-            sFelicityBankWork->unkA8[2].unk0 = 0x80;
-            sFelicityBankWork->unkA8[3] = sUnknown_80DB6F4;
+            sFelicityBankWork->unkA8.id[0].unk0 = 0x80;
+            sFelicityBankWork->unkA8.id[1].unk0 = 0x80;
+            sFelicityBankWork->unkA8.id[2].unk0 = 0x80;
+            sFelicityBankWork->unkA8.id[3] = sUnknown_80DB6F4;
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(sFelicityBankWork->unkA8, TRUE, FALSE);
+            ShowWindows(&sFelicityBankWork->unkA8, TRUE, FALSE);
             break;
         case FELICITY_BANK_STORE_HOW_MUCH:
         case FELICITY_BANK_TAKE_HOW_MUCH:
-            sFelicityBankWork->unkA8[0].unk0 = 0x80;
-            sFelicityBankWork->unkA8[1].unk0 = 0x80;
-            sFelicityBankWork->unkA8[3] = sUnknown_80DB6F4;
-            sFelicityBankWork->unkA8[2] = sUnknown_80DB70C;
+            sFelicityBankWork->unkA8.id[0].unk0 = 0x80;
+            sFelicityBankWork->unkA8.id[1].unk0 = 0x80;
+            sFelicityBankWork->unkA8.id[3] = sUnknown_80DB6F4;
+            sFelicityBankWork->unkA8.id[2] = sUnknown_80DB70C;
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(sFelicityBankWork->unkA8, TRUE, FALSE);
+            ShowWindows(&sFelicityBankWork->unkA8, TRUE, FALSE);
             break;
         default:
             for (i = 0; i < 4; i++)
-                sFelicityBankWork->unkA8[i] = sUnknown_80DB6DC;
+                sFelicityBankWork->unkA8.id[i] = sUnknown_80DB6DC;
 
             ResetUnusedInputStruct();
-            xxx_call_save_unk_text_struct_800641C(sFelicityBankWork->unkA8, TRUE, TRUE);
+            ShowWindows(&sFelicityBankWork->unkA8, TRUE, TRUE);
             break;
     }
 }
@@ -218,7 +218,7 @@ static void UpdateFelicityBankDialogue(void)
             sFelicityBankWork->unk64.unk8 = 1;
             sFelicityBankWork->unk64.unk10 = 5;
             sFelicityBankWork->unk64.unk14 = 2;
-            sFelicityBankWork->unk64.unk18 = &sFelicityBankWork->unkA8[2];
+            sFelicityBankWork->unk64.unk18 = &sFelicityBankWork->unkA8.id[2];
             sFelicityBankWork->unk64.unk1C = 0x50;
             sFelicityBankWork->unk64.unk20 = 0x12;
             sub_8013AA0(&sFelicityBankWork->unk64);
@@ -253,7 +253,7 @@ static void UpdateFelicityBankDialogue(void)
             sFelicityBankWork->unk64.unk8 = 1;
             sFelicityBankWork->unk64.unk10 = 5;
             sFelicityBankWork->unk64.unk14 = 2;
-            sFelicityBankWork->unk64.unk18 = &sFelicityBankWork->unkA8[2];
+            sFelicityBankWork->unk64.unk18 = &sFelicityBankWork->unkA8.id[2];
             sFelicityBankWork->unk64.unk1C = 0x50;
             sFelicityBankWork->unk64.unk20 = 0x12;
             sub_8013AA0(&sFelicityBankWork->unk64);

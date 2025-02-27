@@ -12,7 +12,7 @@ typedef struct unkStruct_203B3F4
     /* 0x8 */ u32 menuAction;
     /* 0xC */ MenuItem menuItems[8];
     MenuStruct unk4C;
-    UnkTextStruct2 unk9C[4];
+    Windows unk9C;
 } unkStruct_203B3F4;
 
 #endif // GUARD_DEBUG_MENU3_H

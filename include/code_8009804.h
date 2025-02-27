@@ -3,6 +3,8 @@
 
 #include "structs/rgb.h"
 
+extern RGB gFontPalette[128];
+
 // size: 0xC
 struct unkStruct_202D240
 {

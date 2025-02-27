@@ -19,7 +19,7 @@ struct unkStruct_203B30C
     unkStruct_802C39C unk8;
     MenuStruct unk60;
     MenuItem unkB0[8];
-    UnkTextStruct2 unkF0[4];
+    Windows unkF0;
 };
 static EWRAM_INIT struct unkStruct_203B30C *gUnknown_203B30C = {NULL};
 
@@ -31,24 +31,24 @@ extern void sub_802F004();
 extern void sub_802F088();
 extern void sub_802F108(void);
 
-const UnkTextStruct2 gUnknown_80E03C4 = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E03C4 = {
+    0,
     0x03,
     0x00, 0x00,
     0x00, 0x00,
     0x00, 0x00,
     NULL
 };
-const UnkTextStruct2 gUnknown_80E03DC = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E03DC = {
+    0,
     0x03,
     0x03, 0x03,
     0x07, 0x03,
     0x03, 0x00,
     NULL
 };
-const UnkTextStruct2 gUnknown_80E03F4 = {
-    0x00, 0x00, 0x00, 0x00,
+const Window gUnknown_80E03F4 = {
+    0,
     0x03,
     0x15, 0x06,
     0x07, 0x03,
@@ -119,22 +119,22 @@ void sub_802F004(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(gUnknown_203B30C->unkF0);
+    RestoreUnkTextStruct_8006518(&gUnknown_203B30C->unkF0);
     switch(gUnknown_203B30C->state)
     {
         case 2:
             sub_802F108();
-            gUnknown_203B30C->unkF0[2] = gUnknown_80E03F4;
-            sub_8012CAC(&gUnknown_203B30C->unkF0[2], gUnknown_203B30C->unkB0);
+            gUnknown_203B30C->unkF0.id[2] = gUnknown_80E03F4;
+            sub_8012CAC(&gUnknown_203B30C->unkF0.id[2], gUnknown_203B30C->unkB0);
             break;
         default:
             for(index = 0; index < 4; index++)
             {
-                gUnknown_203B30C->unkF0[index] = gUnknown_80E03C4;
+                gUnknown_203B30C->unkF0.id[index] = gUnknown_80E03C4;
             }
     }
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B30C->unkF0, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B30C->unkF0, TRUE, TRUE);
 }
 
 void sub_802F088(void)

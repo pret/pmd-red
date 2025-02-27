@@ -25,12 +25,12 @@ u8 sub_801A20C(u32 r0)
 
     gUnknown_203B21C = MemoryAlloc(sizeof(*gUnknown_203B21C), 8);
     gUnknown_203B21C->s0.unk34 = r0;
-    gUnknown_203B21C->s0.unk38 = &gUnknown_203B21C->s0.unk3C[gUnknown_203B21C->s0.unk34];
-    RestoreUnkTextStruct_8006518(gUnknown_203B21C->s0.unk3C);
-    gUnknown_203B21C->s0.unk3C[gUnknown_203B21C->s0.unk34] = sUnknown_80DB914;
+    gUnknown_203B21C->s0.unk38 = &gUnknown_203B21C->s0.windows.id[gUnknown_203B21C->s0.unk34];
+    RestoreUnkTextStruct_8006518(&gUnknown_203B21C->s0.windows);
+    gUnknown_203B21C->s0.windows.id[gUnknown_203B21C->s0.unk34] = sUnknown_80DB914;
     gUnknown_203B21C->s0.unk38->unk14 = &gUnknown_203B21C->unk9C;
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B21C->s0.unk3C, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B21C->s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_203B21C->s0.input, CountKecleonWareItems(), 10, r0);
     gUnknown_203B21C->s0.input.menuIndex = gUnknown_203B220;
     sub_8013984(&gUnknown_203B21C->s0.input);
@@ -85,7 +85,7 @@ u8 sub_801A37C(void)
 void sub_801A398(bool8 r0)
 {
     ResetUnusedInputStruct();
-    xxx_call_save_unk_text_struct_800641C(gUnknown_203B21C->s0.unk3C, FALSE, FALSE);
+    ShowWindows(&gUnknown_203B21C->s0.windows, FALSE, FALSE);
     gUnknown_203B21C->s0.input.unk22 = CountKecleonWareItems();
     sub_8013984(&gUnknown_203B21C->s0.input);
     sub_801A430();
@@ -98,9 +98,9 @@ void sub_801A3DC(void)
 {
     if (gUnknown_203B21C != NULL) {
         gUnknown_203B220 = gUnknown_203B21C->s0.input.menuIndex;
-        gUnknown_203B21C->s0.unk3C[gUnknown_203B21C->s0.unk34] = sUnknown_80DB8FC;
+        gUnknown_203B21C->s0.windows.id[gUnknown_203B21C->s0.unk34] = sUnknown_80DB8FC;
         ResetUnusedInputStruct();
-        xxx_call_save_unk_text_struct_800641C(gUnknown_203B21C->s0.unk3C, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B21C->s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B21C);
         gUnknown_203B21C = NULL;
     }
@@ -146,12 +146,12 @@ void sub_801A4A4(void)
         buyPrice = GetStackBuyPrice(&item);
 
         if (buyPrice <= gTeamInventoryRef->teamMoney) {
-            y = sub_8013800(&gUnknown_203B21C->s0.input, index);
+            y = GetMenuEntryYCoord(&gUnknown_203B21C->s0.input, index);
             PrintStringOnWindow(8, y, buffer1, gUnknown_203B21C->s0.unk34, 0);
         }
         else {
             sprintfStatic(buffer2, sFmtRed, buffer1);
-            y = sub_8013800(&gUnknown_203B21C->s0.input, index);
+            y = GetMenuEntryYCoord(&gUnknown_203B21C->s0.input, index);
             PrintStringOnWindow(8, y, buffer2, gUnknown_203B21C->s0.unk34, 0);
         }
     }
