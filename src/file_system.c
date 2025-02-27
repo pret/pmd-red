@@ -54,8 +54,8 @@ OpenedFile *OpenFile(const u8 *filename, const FileArchive *arc)
     s32 i;
     u32 magic = 0;
     bool32 magicFound;
-    File *entries;
-    File *file;
+    const File *entries;
+    const File *file;
 
     magic = strcmp(arc->magic, gUnknown_80B9B94) != 0;
 
@@ -109,13 +109,13 @@ OpenedFile *OpenFile(const u8 *filename, const FileArchive *arc)
     return NULL;
 }
 
-static u8 *_GetFileDataPtr(OpenedFile *openedFile)
+static const u8 *_GetFileDataPtr(OpenedFile *openedFile)
 {
     openedFile->data = openedFile->file->data;
     return openedFile->data;
 }
 
-u8 *GetFileDataPtr(OpenedFile *openedFile, s32 unused)
+const u8 *GetFileDataPtr(OpenedFile *openedFile, s32 unused)
 {
     _GetFileDataPtr(openedFile);
     return GetSiroPtr(openedFile);

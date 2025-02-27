@@ -17,9 +17,9 @@ static void DecompressAT_Finish(void);
 static char DecompressAT_GetByte(s32);
 static void DecompressAT_Init(u32 *);
 static u32 DecompressATGlobal(u32 *, s32, const char *);
-static void NDS_DecompressRLE(void *);
+static void NDS_DecompressRLE(const void *);
 
-u8 *GetSiroPtr(OpenedFile *openedFile)
+const u8 *GetSiroPtr(OpenedFile *openedFile)
 {
     struct SiroArchive *siro = (struct SiroArchive *)openedFile->data;
 
@@ -42,7 +42,7 @@ UNUSED static void *UnusedGetSir0Ptr(struct SiroArchive *siro)
     return siro->data;
 }
 
-static void NDS_DecompressRLE(void *unused)
+static void NDS_DecompressRLE(const void *unused)
 {
 }
 
