@@ -43,11 +43,6 @@ extern u8 gUnknown_203B40C;
 extern MenuInputStruct gUnknown_202EE10;
 extern SpriteOAM gUnknown_202EDDC;
 
-extern const RGB gUnknown_80F62AC;
-extern const struct Windows gUnknown_80F62B0;
-extern const struct Windows gUnknown_80F6310;
-extern const struct Windows gUnknown_80F6370;
-extern const struct Windows gUnknown_80F63D0;
 extern const u32 gUnknown_80F6490[];
 extern const s32 gUnknown_80F64B4[];
 extern const s32 gUnknown_80F64FC[];
@@ -76,13 +71,15 @@ void sub_803FB74(void);
 void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3);
 void sub_803FF18(s32 a0, u16 *a1, bool8 a2);
 
+static const RGB sBlackRgb = {0, 0, 0};
+
 void sub_803E874(bool8 r10, s32 r9)
 {
     s32 i, index, count;
     const RGB *color;
 
     color = gDungeonPaletteFile->unk4;
-    SetBGPaletteBufferColorRGB(0, &gUnknown_80F62AC, gDungeonBrightness, gDungeon->colorRamp);
+    SetBGPaletteBufferColorRGB(0, &sBlackRgb, gDungeonBrightness, gDungeon->colorRamp);
     color++;
     index = 1;
     count = 159;
@@ -150,7 +147,7 @@ void sub_803EA10(void)
     const RGB *color;
 
     color= gDungeonPaletteFile->unk4;
-    SetBGPaletteBufferColorRGB(0, &gUnknown_80F62AC, gDungeonBrightness, gDungeon->colorRamp);
+    SetBGPaletteBufferColorRGB(0, &sBlackRgb, gDungeonBrightness, gDungeon->colorRamp);
     color++;
     index = 1;
     count = 159;
@@ -175,6 +172,94 @@ void sub_803EA10(void)
 
     SetBGPaletteBufferColorRGB(248, &gFontPalette[8], gDungeonBrightness, NULL);
 }
+
+static const struct Windows gUnknown_80F62B0 =
+{
+    .id = {
+        [0] = {
+            .type = WINDOW_TYPE_0,
+            .pos = {2, 15},
+            .width = 26,
+            .height = 5,
+            .unk10 = 7,
+            .unk12 = 0,
+            .unk14 = NULL,
+        },
+        [1] = WINDOW_DUMMY,
+        [2] = WINDOW_DUMMY,
+        [3] = WINDOW_DUMMY,
+    }
+};
+
+static const struct Windows gUnknown_80F6310 =
+{
+    .id = {
+        [0] = {
+            .type = WINDOW_TYPE_NORMAL,
+            .pos = {2, 3},
+            .width = 6,
+            .height = 7,
+            .unk10 = 7,
+            .unk12 = 0,
+            .unk14 = NULL,
+        },
+        [1] = WINDOW_DUMMY,
+        [2] = WINDOW_DUMMY,
+        [3] = WINDOW_DUMMY,
+    }
+};
+
+static const struct Windows gUnknown_80F6370 =
+{
+    .id = {
+        [0] = {
+            .type = WINDOW_TYPE_NORMAL,
+            .pos = {2, 3},
+            .width = 6,
+            .height = 7,
+            .unk10 = 7,
+            .unk12 = 0,
+            .unk14 = NULL,
+        },
+        [1] = {
+            .type = WINDOW_TYPE_NORMAL,
+            .pos = {10, 4},
+            .width = 17,
+            .height = 2,
+            .unk10 = 2,
+            .unk12 = 0,
+            .unk14 = NULL,
+        },
+        [2] = {
+            .type = WINDOW_TYPE_NORMAL,
+            .pos = {2, 13},
+            .width = 26,
+            .height = 6,
+            .unk10 = 6,
+            .unk12 = 0,
+            .unk14 = NULL,
+        },
+        [3] = WINDOW_DUMMY,
+    }
+};
+
+static const struct Windows gUnknown_80F63D0 =
+{
+    .id = {
+        [0] = {
+            .type = WINDOW_TYPE_NORMAL,
+            .pos = {2, 3},
+            .width = 26,
+            .height = 14,
+            .unk10 = 18,
+            .unk12 = 2,
+            .unk14 = NULL,
+        },
+        [1] = WINDOW_DUMMY,
+        [2] = WINDOW_DUMMY,
+        [3] = WINDOW_DUMMY,
+    }
+};
 
 void sub_803EAF0(u32 a0, u8 *a1)
 {
@@ -385,409 +470,196 @@ void sub_803EDF0(void)
     }
 }
 
-/*
-Not even attempting this, opened file unknown structs weirdly put on stack, my head hurts just looking at this
+extern OpenedFile *gUnknown_202EC9C;
+
+static const s32 gUnknown_80F6430[][9] =
+{
+    [0] = {900, 800, 700, 600, 500, 400, 300, 200, 100},
+    [1] = {90, 80, 70, 60, 50, 40, 30, 20, 10},
+};
+
 s32 sub_803EF90(s32 a0, u8 a1)
 {
+    s32 i, id;
+    const u32 *r2;
+    s32 bitsNo;
+    s32 ret;
+    bool8 unkBool;
+    u32 *mainDst = gDungeon->unk18;
+    u32 *sp[] = {(u32 *)(gUnknown_202EC9C->data + 0x124),
+               (u32 *)(gUnknown_202EC9C->data + 0x104),
+               (u32 *)(gUnknown_202EC9C->data + 0xE4),
+               (u32 *)(gUnknown_202EC9C->data + 0xC4),
+               (u32 *)(gUnknown_202EC9C->data + 0xA4),
+               (u32 *)(gUnknown_202EC9C->data + 0x84),
+               (u32 *)(gUnknown_202EC9C->data + 0x64),
+               (u32 *)(gUnknown_202EC9C->data + 0x44),
+               (u32 *)(gUnknown_202EC9C->data + 0x24)};
+    s32 dstId = 0;
+    u32 *clearDst = mainDst;
+    for (i = 0; i < 4; i++) {
+        clearDst[dstId++] = 0;
+        clearDst[dstId++] = 0;
+        clearDst[dstId++] = 0;
+        clearDst[dstId++] = 0;
+        clearDst[dstId++] = 0;
+        clearDst[dstId++] = 0;
+        clearDst[dstId++] = 0;
+        clearDst[dstId++] = 0;
+    }
 
-}
-*/
+    if (a0 == 9999) {
+        u32 r12[] = {13, 14, 15, 15};
 
-NAKED s32 sub_803EF90(s32 a0, u8 a1)
-{
-    asm_unified("push {r4-r7,lr}\n"
-	"	mov r7, r10\n"
-	"	mov r6, r9\n"
-	"	mov r5, r8\n"
-	"	push {r5-r7}\n"
-	"	sub sp, 0x58\n"
-	"	str r0, [sp, 0x48]\n"
-	"	lsls r1, 24\n"
-	"	lsrs r5, r1, 24\n"
-	"	ldr r0, _0803F060\n"
-	"	ldr r0, [r0]\n"
-	"	adds r0, 0x18\n"
-	"	mov r8, r0\n"
-	"	ldr r0, _0803F064\n"
-	"	ldr r1, [r0]\n"
-	"	ldr r0, [r1, 0x4]\n"
-	"	movs r2, 0x92\n"
-	"	lsls r2, 1\n"
-	"	adds r0, r2\n"
-	"	str r0, [sp, 0x24]\n"
-	"	ldr r0, [r1, 0x4]\n"
-	"	movs r3, 0x82\n"
-	"	lsls r3, 1\n"
-	"	adds r0, r3\n"
-	"	str r0, [sp, 0x28]\n"
-	"	ldr r0, [r1, 0x4]\n"
-	"	adds r0, 0xE4\n"
-	"	str r0, [sp, 0x2C]\n"
-	"	ldr r0, [r1, 0x4]\n"
-	"	adds r0, 0xC4\n"
-	"	str r0, [sp, 0x30]\n"
-	"	ldr r0, [r1, 0x4]\n"
-	"	adds r0, 0xA4\n"
-	"	str r0, [sp, 0x34]\n"
-	"	ldr r0, [r1, 0x4]\n"
-	"	adds r0, 0x84\n"
-	"	str r0, [sp, 0x38]\n"
-	"	ldr r0, [r1, 0x4]\n"
-	"	adds r0, 0x64\n"
-	"	str r0, [sp, 0x3C]\n"
-	"	ldr r0, [r1, 0x4]\n"
-	"	adds r0, 0x44\n"
-	"	str r0, [sp, 0x40]\n"
-	"	ldr r0, [r1, 0x4]\n"
-	"	adds r0, 0x24\n"
-	"	str r0, [sp, 0x44]\n"
-	"	add r4, sp, 0x24\n"
-	"	mov r0, sp\n"
-	"	adds r1, r4, 0\n"
-	"	movs r2, 0x24\n"
-	"	bl memcpy\n"
-	"	movs r1, 0\n"
-	"	movs r6, 0x3\n"
-	"	mov r0, r8\n"
-	"_0803EFFE:\n"
-	"	stm r0!, {r1}\n"
-	"	stm r0!, {r1}\n"
-	"	stm r0!, {r1}\n"
-	"	stm r0!, {r1}\n"
-	"	stm r0!, {r1}\n"
-	"	stm r0!, {r1}\n"
-	"	stm r0!, {r1}\n"
-	"	stm r0!, {r1}\n"
-	"	subs r6, 0x1\n"
-	"	cmp r6, 0\n"
-	"	bge _0803EFFE\n"
-	"	ldr r0, _0803F068\n"
-	"	ldr r1, [sp, 0x48]\n"
-	"	cmp r1, r0\n"
-	"	bne _0803F0A6\n"
-	"	adds r0, r4, 0\n"
-	"	ldr r1, _0803F06C\n"
-	"	ldm r1!, {r2,r3,r5}\n"
-	"	stm r0!, {r2,r3,r5}\n"
-	"	ldr r1, [r1]\n"
-	"	str r1, [r0]\n"
-	"	movs r5, 0\n"
-	"	movs r2, 0\n"
-	"	mov r12, r4\n"
-	"	movs r0, 0x20\n"
-	"	mov r10, r0\n"
-	"_0803F032:\n"
-	"	mov r3, r8\n"
-	"	ldr r0, _0803F064\n"
-	"	ldr r1, [r0]\n"
-	"	lsls r0, r2, 2\n"
-	"	add r0, r12\n"
-	"	ldr r0, [r0]\n"
-	"	lsls r0, 5\n"
-	"	adds r0, 0x4\n"
-	"	ldr r1, [r1, 0x4]\n"
-	"	adds r4, r1, r0\n"
-	"	movs r1, 0x18\n"
-	"	adds r1, r5\n"
-	"	mov r9, r1\n"
-	"	adds r2, 0x1\n"
-	"	str r2, [sp, 0x54]\n"
-	"	mov r2, r10\n"
-	"	subs r7, r2, r5\n"
-	"	movs r6, 0x7\n"
-	"_0803F056:\n"
-	"	cmp r5, 0\n"
-	"	bne _0803F070\n"
-	"	movs r1, 0\n"
-	"	ldr r2, [r4]\n"
-	"	b _0803F07A\n"
-	"	.align 2, 0\n"
-	"_0803F060: .4byte gDungeon\n"
-	"_0803F064: .4byte gUnknown_202EC9C\n"
-	"_0803F068: .4byte 0x0000270f\n"
-	"_0803F06C: .4byte gUnknown_80F6478\n"
-	"_0803F070:\n"
-	"	ldr r0, [r4]\n"
-	"	adds r1, r0, 0\n"
-	"	lsrs r1, r7\n"
-	"	adds r2, r0, 0\n"
-	"	lsls r2, r5\n"
-	"_0803F07A:\n"
-	"	adds r4, 0x4\n"
-	"	ldr r0, [r3]\n"
-	"	orrs r0, r2\n"
-	"	str r0, [r3]\n"
-	"	ldr r0, [r3, 0x20]\n"
-	"	orrs r0, r1\n"
-	"	str r0, [r3, 0x20]\n"
-	"	adds r3, 0x4\n"
-	"	subs r6, 0x1\n"
-	"	cmp r6, 0\n"
-	"	bge _0803F056\n"
-	"	mov r5, r9\n"
-	"	cmp r5, 0x1F\n"
-	"	ble _0803F09C\n"
-	"	subs r5, 0x20\n"
-	"	movs r3, 0x20\n"
-	"	add r8, r3\n"
-	"_0803F09C:\n"
-	"	ldr r2, [sp, 0x54]\n"
-	"	cmp r2, 0x3\n"
-	"	ble _0803F032\n"
-	"	movs r0, 0x4\n"
-	"	b _0803F26A\n"
-	"_0803F0A6:\n"
-	"	ldr r0, _0803F0D8\n"
-	"	ldr r1, [sp, 0x48]\n"
-	"	cmp r1, r0\n"
-	"	ble _0803F0B0\n"
-	"	str r0, [sp, 0x48]\n"
-	"_0803F0B0:\n"
-	"	ldr r0, _0803F0DC\n"
-	"	ldr r2, [sp, 0x48]\n"
-	"	cmp r2, r0\n"
-	"	bge _0803F0BA\n"
-	"	str r0, [sp, 0x48]\n"
-	"_0803F0BA:\n"
-	"	ldr r1, _0803F0E0\n"
-	"	ldr r0, [r1]\n"
-	"	ldr r0, [r0, 0x4]\n"
-	"	movs r3, 0xC2\n"
-	"	lsls r3, 1\n"
-	"	adds r2, r0, r3\n"
-	"	cmp r5, 0\n"
-	"	beq _0803F0F4\n"
-	"	ldr r5, [sp, 0x48]\n"
-	"	cmp r5, 0\n"
-	"	ble _0803F0E4\n"
-	"	movs r1, 0xA2\n"
-	"	lsls r1, 1\n"
-	"	adds r2, r0, r1\n"
-	"	b _0803F0F4\n"
-	"	.align 2, 0\n"
-	"_0803F0D8: .4byte 0x000003e7\n"
-	"_0803F0DC: .4byte 0xfffffc19\n"
-	"_0803F0E0: .4byte gUnknown_202EC9C\n"
-	"_0803F0E4:\n"
-	"	ldr r3, [sp, 0x48]\n"
-	"	cmp r3, 0\n"
-	"	bge _0803F0F4\n"
-	"	movs r5, 0xB2\n"
-	"	lsls r5, 1\n"
-	"	adds r2, r0, r5\n"
-	"	negs r3, r3\n"
-	"	str r3, [sp, 0x48]\n"
-	"_0803F0F4:\n"
-	"	ldm r2!, {r0}\n"
-	"	mov r1, r8\n"
-	"	str r0, [r1]\n"
-	"	ldm r2!, {r0}\n"
-	"	str r0, [r1, 0x4]\n"
-	"	ldm r2!, {r0}\n"
-	"	str r0, [r1, 0x8]\n"
-	"	ldm r2!, {r0}\n"
-	"	str r0, [r1, 0xC]\n"
-	"	ldm r2!, {r0}\n"
-	"	str r0, [r1, 0x10]\n"
-	"	ldm r2!, {r0}\n"
-	"	str r0, [r1, 0x14]\n"
-	"	ldm r2!, {r0}\n"
-	"	str r0, [r1, 0x18]\n"
-	"	ldr r0, [r2]\n"
-	"	str r0, [r1, 0x1C]\n"
-	"	movs r5, 0x18\n"
-	"	movs r2, 0x1\n"
-	"	str r2, [sp, 0x4C]\n"
-	"	movs r3, 0\n"
-	"	str r3, [sp, 0x50]\n"
-	"	movs r2, 0\n"
-	"_0803F122:\n"
-	"	movs r0, 0\n"
-	"	mov r10, r0\n"
-	"	adds r1, r2, 0x1\n"
-	"	str r1, [sp, 0x54]\n"
-	"	lsls r0, r2, 3\n"
-	"	adds r0, r2\n"
-	"	lsls r0, 2\n"
-	"	mov r1, sp\n"
-	"	ldr r2, _0803F15C\n"
-	"	adds r7, r0, r2\n"
-	"_0803F136:\n"
-	"	ldr r0, [r7]\n"
-	"	ldr r3, [sp, 0x48]\n"
-	"	cmp r0, r3\n"
-	"	bgt _0803F1A2\n"
-	"	ldr r4, [r1]\n"
-	"	mov r2, r8\n"
-	"	movs r0, 0x18\n"
-	"	adds r0, r5\n"
-	"	mov r9, r0\n"
-	"	movs r1, 0x20\n"
-	"	subs r1, r5\n"
-	"	mov r12, r1\n"
-	"	movs r6, 0x7\n"
-	"_0803F150:\n"
-	"	cmp r5, 0\n"
-	"	bne _0803F160\n"
-	"	movs r3, 0\n"
-	"	ldr r1, [r4]\n"
-	"	b _0803F16C\n"
-	"	.align 2, 0\n"
-	"_0803F15C: .4byte gUnknown_80F6430\n"
-	"_0803F160:\n"
-	"	ldr r0, [r4]\n"
-	"	adds r3, r0, 0\n"
-	"	mov r1, r12\n"
-	"	lsrs r3, r1\n"
-	"	adds r1, r0, 0\n"
-	"	lsls r1, r5\n"
-	"_0803F16C:\n"
-	"	adds r4, 0x4\n"
-	"	ldr r0, [r2]\n"
-	"	orrs r0, r1\n"
-	"	str r0, [r2]\n"
-	"	ldr r0, [r2, 0x20]\n"
-	"	orrs r0, r3\n"
-	"	str r0, [r2, 0x20]\n"
-	"	adds r2, 0x4\n"
-	"	movs r3, 0x1\n"
-	"	str r3, [sp, 0x50]\n"
-	"	subs r6, 0x1\n"
-	"	cmp r6, 0\n"
-	"	bge _0803F150\n"
-	"	mov r5, r9\n"
-	"	cmp r5, 0x1F\n"
-	"	ble _0803F192\n"
-	"	subs r5, 0x20\n"
-	"	movs r0, 0x20\n"
-	"	add r8, r0\n"
-	"_0803F192:\n"
-	"	ldr r0, [r7]\n"
-	"	ldr r1, [sp, 0x48]\n"
-	"	subs r1, r0\n"
-	"	str r1, [sp, 0x48]\n"
-	"	ldr r2, [sp, 0x4C]\n"
-	"	adds r2, 0x1\n"
-	"	str r2, [sp, 0x4C]\n"
-	"	b _0803F1B0\n"
-	"_0803F1A2:\n"
-	"	adds r1, 0x4\n"
-	"	adds r7, 0x4\n"
-	"	movs r3, 0x1\n"
-	"	add r10, r3\n"
-	"	mov r0, r10\n"
-	"	cmp r0, 0x8\n"
-	"	ble _0803F136\n"
-	"_0803F1B0:\n"
-	"	mov r1, r10\n"
-	"	cmp r1, 0x9\n"
-	"	bne _0803F212\n"
-	"	ldr r2, [sp, 0x50]\n"
-	"	cmp r2, 0\n"
-	"	beq _0803F212\n"
-	"	ldr r3, _0803F1DC\n"
-	"	ldr r0, [r3]\n"
-	"	ldr r0, [r0, 0x4]\n"
-	"	adds r4, r0, 0x4\n"
-	"	mov r2, r8\n"
-	"	movs r0, 0x18\n"
-	"	adds r0, r5\n"
-	"	mov r9, r0\n"
-	"	movs r1, 0x20\n"
-	"	subs r7, r1, r5\n"
-	"	movs r6, 0x7\n"
-	"_0803F1D2:\n"
-	"	cmp r5, 0\n"
-	"	bne _0803F1E0\n"
-	"	movs r3, 0\n"
-	"	ldr r1, [r4]\n"
-	"	b _0803F1EA\n"
-	"	.align 2, 0\n"
-	"_0803F1DC: .4byte gUnknown_202EC9C\n"
-	"_0803F1E0:\n"
-	"	ldr r0, [r4]\n"
-	"	adds r3, r0, 0\n"
-	"	lsrs r3, r7\n"
-	"	adds r1, r0, 0\n"
-	"	lsls r1, r5\n"
-	"_0803F1EA:\n"
-	"	adds r4, 0x4\n"
-	"	ldr r0, [r2]\n"
-	"	orrs r0, r1\n"
-	"	str r0, [r2]\n"
-	"	ldr r0, [r2, 0x20]\n"
-	"	orrs r0, r3\n"
-	"	str r0, [r2, 0x20]\n"
-	"	adds r2, 0x4\n"
-	"	subs r6, 0x1\n"
-	"	cmp r6, 0\n"
-	"	bge _0803F1D2\n"
-	"	mov r5, r9\n"
-	"	cmp r5, 0x1F\n"
-	"	ble _0803F20C\n"
-	"	subs r5, 0x20\n"
-	"	movs r2, 0x20\n"
-	"	add r8, r2\n"
-	"_0803F20C:\n"
-	"	ldr r3, [sp, 0x4C]\n"
-	"	adds r3, 0x1\n"
-	"	str r3, [sp, 0x4C]\n"
-	"_0803F212:\n"
-	"	ldr r2, [sp, 0x54]\n"
-	"	cmp r2, 0x1\n"
-	"	ble _0803F122\n"
-	"	ldr r0, _0803F240\n"
-	"	ldr r1, [r0]\n"
-	"	ldr r2, [sp, 0x48]\n"
-	"	lsls r0, r2, 5\n"
-	"	adds r0, 0x4\n"
-	"	ldr r1, [r1, 0x4]\n"
-	"	adds r1, r0\n"
-	"	mov r3, r8\n"
-	"	ldr r0, [sp, 0x4C]\n"
-	"	adds r0, 0x1\n"
-	"	mov r8, r0\n"
-	"	movs r0, 0x20\n"
-	"	subs r7, r0, r5\n"
-	"	movs r6, 0x7\n"
-	"_0803F234:\n"
-	"	cmp r5, 0\n"
-	"	bne _0803F244\n"
-	"	movs r4, 0\n"
-	"	ldr r2, [r1]\n"
-	"	b _0803F24E\n"
-	"	.align 2, 0\n"
-	"_0803F240: .4byte gUnknown_202EC9C\n"
-	"_0803F244:\n"
-	"	ldr r0, [r1]\n"
-	"	adds r4, r0, 0\n"
-	"	lsrs r4, r7\n"
-	"	adds r2, r0, 0\n"
-	"	lsls r2, r5\n"
-	"_0803F24E:\n"
-	"	adds r1, 0x4\n"
-	"	ldr r0, [r3]\n"
-	"	orrs r0, r2\n"
-	"	str r0, [r3]\n"
-	"	ldr r0, [r3, 0x20]\n"
-	"	orrs r0, r4\n"
-	"	str r0, [r3, 0x20]\n"
-	"	adds r3, 0x4\n"
-	"	subs r6, 0x1\n"
-	"	cmp r6, 0\n"
-	"	bge _0803F234\n"
-	"	mov r1, r8\n"
-	"	str r1, [sp, 0x4C]\n"
-	"	adds r0, r1, 0\n"
-	"_0803F26A:\n"
-	"	add sp, 0x58\n"
-	"	pop {r3-r5}\n"
-	"	mov r8, r3\n"
-	"	mov r9, r4\n"
-	"	mov r10, r5\n"
-	"	pop {r4-r7}\n"
-	"	pop {r1}\n"
-	"	bx r1\n");
+        bitsNo = 0;
+        for (id = 0; id < 4; id++) {
+            u32 *dst = mainDst;
+            const u32 *src = (u32 *)((&gUnknown_202EC9C->data[4] + r12[id] * 32));
+
+            for (i = 0; i < 8; i++) {
+                u32 toOr1, toOr2;
+                if (bitsNo == 0) {
+                    toOr1 = 0;
+                    toOr2 = *src;
+                }
+                else {
+                    toOr1 = *src >> (32 - bitsNo);
+                    toOr2 = *src << bitsNo;
+                }
+
+                src++;
+                dst[0] |= toOr2;
+                dst[8] |= toOr1;
+                dst++;
+            }
+
+            bitsNo += 24;
+            if (bitsNo >= 32) {
+                bitsNo -= 32;
+                mainDst += 8;
+            }
+        }
+
+        return 4;
+    }
+
+    if (a0 > 999) a0 = 999;
+    if (a0 < -999) a0 = -999;
+
+    r2 = (u32 *)(gUnknown_202EC9C->data + 0x184);
+    if (a1) {
+        if (a0 > 0) {
+            r2 = (u32 *)(gUnknown_202EC9C->data + 0x144);
+        }
+        else if (a0 < 0) {
+            r2 = (u32 *)(gUnknown_202EC9C->data + 0x164);
+            a0 = -a0;
+        }
+    }
+
+    mainDst[0] = *r2++;
+    mainDst[1] = *r2++;
+    mainDst[2] = *r2++;
+    mainDst[3] = *r2++;
+    mainDst[4] = *r2++;
+    mainDst[5] = *r2++;
+    mainDst[6] = *r2++;
+    mainDst[7] = *r2++;
+
+    bitsNo = 24;
+    ret = 1;
+    unkBool = FALSE;
+    for (id = 0; id < 2; id++) {
+        s32 arrId;
+
+        for (arrId = 0; arrId < 9; arrId++) {
+            if (gUnknown_80F6430[id][arrId] <= a0) {
+                const u32 *src = sp[arrId];
+                u32 *dst = mainDst;
+
+                for (i = 0; i < 8; i++) {
+                    u32 toOr1, toOr2;
+                    if (bitsNo == 0) {
+                        toOr1 = 0;
+                        toOr2 = *src;
+                    }
+                    else {
+                        toOr1 = *src >> (32 - bitsNo);
+                        toOr2 = *src << bitsNo;
+                    }
+
+                    src++;
+                    dst[0] |= toOr2;
+                    dst[8] |= toOr1;
+                    dst++;
+                    unkBool = TRUE;
+                }
+
+                bitsNo += 24;
+                if (bitsNo >= 32) {
+                    bitsNo -= 32;
+                    mainDst += 8;
+                }
+
+                a0 -= gUnknown_80F6430[id][arrId];
+                ret++;
+                break;
+            }
+        }
+
+        if (arrId == 9 && unkBool) {
+            const u32 *src = (u32 *)(&gUnknown_202EC9C->data[4]);
+            u32 *dst = mainDst;
+            for (i = 0; i < 8; i++) {
+                u32 toOr1, toOr2;
+                if (bitsNo == 0) {
+                    toOr1 = 0;
+                    toOr2 = *src;
+                }
+                else {
+                    toOr1 = *src >> (32 - bitsNo);
+                    toOr2 = *src << bitsNo;
+                }
+
+                src++;
+                dst[0] |= toOr2;
+                dst[8] |= toOr1;
+                dst++;
+            }
+
+            bitsNo += 24;
+            if (bitsNo >= 32) {
+                bitsNo -= 32;
+                mainDst += 8;
+            }
+
+            ret++;
+        }
+    }
+
+    {
+        const u32 *src = (u32 *)(&gUnknown_202EC9C->data[4] + (a0 * 32));
+        u32 *dst = mainDst;
+        for (i = 0; i < 8; i++) {
+            u32 toOr1, toOr2;
+            if (bitsNo == 0) {
+                toOr1 = 0;
+                toOr2 = *src;
+            }
+            else {
+                toOr1 = *src >> (32 - bitsNo);
+                toOr2 = *src << bitsNo;
+            }
+
+            src++;
+            dst[0] |= toOr2;
+            dst[8] |= toOr1;
+            dst++;
+        }
+    }
+
+    ret++;
+    return ret;
 }
 
 void sub_803F27C(bool8 a0)

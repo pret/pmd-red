@@ -77,6 +77,12 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
                 return FALSE;
             }
             break;
+        case MOVE_AMNESIA:
+            if (pokemonInfo->defensiveStages[STAT_STAGE_SP_DEF] >= MAX_STAT_STAGE)
+            {
+                return FALSE;
+            }
+            break;
         case MOVE_BIDE:
         case MOVE_REVENGE:
             if (pokemonInfo->bideClassStatus.status == STATUS_BIDE)
@@ -85,20 +91,11 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_AGILITY:
-        {
-            u32 r1;
-#ifndef NONMATCHING
-            asm("":"=r"(r1));
-#else
-            r1 = 0;
-#endif
             if (GetEntInfo(pokemon)->speedStage >= MAX_SPEED_STAGE)
             {
-                r1 = !r1;
                 return FALSE;
             }
             break;
-        }
         case MOVE_LOCK_ON:
         case MOVE_MIND_READER:
             if (pokemonInfo->sureShotClassStatus.status == STATUS_SURE_SHOT)
@@ -370,12 +367,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
             }
             break;
         case MOVE_CALM_MIND:
-            if (pokemonInfo->offensiveStages[STAT_STAGE_SP_ATK] < MAX_STAT_STAGE)
-            {
-                break;
-            }
-        case MOVE_AMNESIA:
-            if (pokemonInfo->defensiveStages[STAT_STAGE_SP_DEF] >= MAX_STAT_STAGE)
+            if (pokemonInfo->offensiveStages[STAT_STAGE_SP_ATK] >= MAX_STAT_STAGE && pokemonInfo->defensiveStages[STAT_STAGE_SP_DEF] >= MAX_STAT_STAGE)
             {
                 return FALSE;
             }

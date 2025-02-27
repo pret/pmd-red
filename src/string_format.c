@@ -168,12 +168,8 @@ static EWRAM_INIT Windows sUnknown_203B198 = {
             .unk0 = 0x40,
             .type = WINDOW_TYPE_7,
         },
-        [2] = {
-            .type = WINDOW_TYPE_NORMAL,
-        },
-        [3] = {
-            .type = WINDOW_TYPE_NORMAL,
-        }
+        [2] = WINDOW_DUMMY,
+        [3] = WINDOW_DUMMY,
     }
 };
 

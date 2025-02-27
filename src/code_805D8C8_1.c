@@ -1790,7 +1790,7 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                 .unk10 = 0x10,
                 .unk14 = &var_3C,
             },
-            {.type = WINDOW_TYPE_NORMAL}, {.type = WINDOW_TYPE_NORMAL}, {.type = WINDOW_TYPE_NORMAL},
+            WINDOW_DUMMY, WINDOW_DUMMY, WINDOW_DUMMY
         },
     };
 
