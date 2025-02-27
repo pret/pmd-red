@@ -1,11 +1,13 @@
 #include "global.h"
 #include "file_system.h"
 
-extern const File gMonsterFiles[];
+#define MONSTER_FILES_COUNT 497
+
+extern const File gMonsterFiles[MONSTER_FILES_COUNT];
 
 const FileArchive gMonsterFileArchive = {
     .magic = "pksdir0",
-    .count = 497,
+    .count = MONSTER_FILES_COUNT,
     .entries = gMonsterFiles,
 };
 
@@ -510,7 +512,7 @@ extern const u8 gKaoMunchlax[];
 extern const u8 gKaoRayquazaCutscene[];
 extern const u8 gPaletFile[];
 
-const File gMonsterFiles[] = {
+const File gMonsterFiles[MONSTER_FILES_COUNT] = {
     [0] = { "ax001", gAxBulbasaur,},
     [1] = { "ax002", gAxIvysaur,},
     [2] = { "ax003", gAxVenusaur,},
