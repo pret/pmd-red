@@ -37,7 +37,6 @@ EWRAM_DATA static u8 sCurrDirection = 0;
 EWRAM_DATA static u8 sHeldDpadCounter = 0;
 
 extern const FileArchive gTitleMenuFileArchive;
-extern const FileArchive gMonsterFileArchive;
 
 static void MoveToNewLocation(s32 destLocationId, s32 direction, s32 nFrames);
 static u8 GetChosenDirection(void);

@@ -20,7 +20,6 @@
 #include "decompress.h"
 
 extern const FileArchive gTitleMenuFileArchive;
-extern const FileArchive gMonsterFileArchive;
 
 extern u16 gUnknown_2026E4E;
 

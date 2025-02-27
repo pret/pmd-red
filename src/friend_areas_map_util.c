@@ -25,7 +25,6 @@ extern void xxx_call_update_bg_sound_input(void);
 extern s32 sprintf(char *, const char *, ...);
 
 extern const FileArchive gTitleMenuFileArchive;
-extern const FileArchive gMonsterFileArchive;
 
 static inline bool8 CheckAxFlag8000(axdata *ptr)
 {

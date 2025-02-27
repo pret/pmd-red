@@ -25,7 +25,6 @@ EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 // dungeon_sbin.s
 extern const struct FileArchive gDungeonFileArchive;
 // monster_sbin.s
-extern const struct FileArchive gMonsterFileArchive;
 // ornament_sbin.s
 extern const struct FileArchive gOrnamentFileArchive;
 // data_8115F5C.s

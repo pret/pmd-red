@@ -46,4 +46,6 @@ OpenedFile *OpenFileAndGetFileDataPtr(const u8 *filename, const FileArchive *arc
 
 u32 sub_800A8F8(u32 value);
 
+extern const FileArchive gMonsterFileArchive; // monster_sbin.c
+
 #endif //GUARD_FILE_SYSTEM_H

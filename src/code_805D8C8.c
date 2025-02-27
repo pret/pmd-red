@@ -9,7 +9,6 @@
 #include "text.h"
 
 // monster_sbin.s
-extern const struct FileArchive gMonsterFileArchive;
 // data_8106A4C.s
 extern const u8 gUnknown_8106EA0[]; // ax%03d
 extern const u8 gUnknown_8106E98[]; // palet

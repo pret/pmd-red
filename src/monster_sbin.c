@@ -11,6 +11,7 @@ const FileArchive gMonsterFileArchive = {
 
 UNUSED static const char sPksDir2[] = "pksdir0";
 
+// Todo: create a directory/file for the mon sprites
 extern const u8 gAxBulbasaur[];
 extern const u8 gAxIvysaur[];
 extern const u8 gAxVenusaur[];
@@ -1010,5 +1011,3 @@ const File gMonsterFiles[] = {
 };
 
 UNUSED ALIGNED(4) static const char sPksDir3[] = "pksdir0";
-
-//
