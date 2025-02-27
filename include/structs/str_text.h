@@ -53,6 +53,7 @@ typedef struct Window
 
 #define WINDOW_DUMMY (Window) {.type = WINDOW_TYPE_NORMAL, .width = 0}
 
+#define WINDOW_TYPE_0                   0
 #define WINDOW_TYPE_WITHOUT_BORDER      1
 #define WINDOW_TYPE_NORMAL              3
 #define WINDOW_TYPE_FILL_TRANSPARENT    5

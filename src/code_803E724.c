@@ -43,9 +43,6 @@ extern u8 gUnknown_203B40C;
 extern MenuInputStruct gUnknown_202EE10;
 extern SpriteOAM gUnknown_202EDDC;
 
-extern const RGB gUnknown_80F62AC;
-extern const struct Windows gUnknown_80F62B0;
-extern const struct Windows gUnknown_80F6310;
 extern const u32 gUnknown_80F6490[];
 extern const s32 gUnknown_80F64B4[];
 extern const s32 gUnknown_80F64FC[];
@@ -74,13 +71,15 @@ void sub_803FB74(void);
 void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3);
 void sub_803FF18(s32 a0, u16 *a1, bool8 a2);
 
+static const RGB sBlackRgb = {0, 0, 0};
+
 void sub_803E874(bool8 r10, s32 r9)
 {
     s32 i, index, count;
     const RGB *color;
 
     color = gDungeonPaletteFile->unk4;
-    SetBGPaletteBufferColorRGB(0, &gUnknown_80F62AC, gDungeonBrightness, gDungeon->colorRamp);
+    SetBGPaletteBufferColorRGB(0, &sBlackRgb, gDungeonBrightness, gDungeon->colorRamp);
     color++;
     index = 1;
     count = 159;
@@ -148,7 +147,7 @@ void sub_803EA10(void)
     const RGB *color;
 
     color= gDungeonPaletteFile->unk4;
-    SetBGPaletteBufferColorRGB(0, &gUnknown_80F62AC, gDungeonBrightness, gDungeon->colorRamp);
+    SetBGPaletteBufferColorRGB(0, &sBlackRgb, gDungeonBrightness, gDungeon->colorRamp);
     color++;
     index = 1;
     count = 159;
@@ -173,6 +172,42 @@ void sub_803EA10(void)
 
     SetBGPaletteBufferColorRGB(248, &gFontPalette[8], gDungeonBrightness, NULL);
 }
+
+static const struct Windows gUnknown_80F62B0 =
+{
+    .id = {
+        [0] = {
+            .type = WINDOW_TYPE_0,
+            .pos = {2, 15},
+            .width = 26,
+            .height = 5,
+            .unk10 = 7,
+            .unk12 = 0,
+            .unk14 = NULL,
+        },
+        [1] = WINDOW_DUMMY,
+        [2] = WINDOW_DUMMY,
+        [3] = WINDOW_DUMMY,
+    }
+};
+
+static const struct Windows gUnknown_80F6310 =
+{
+    .id = {
+        [0] = {
+            .type = WINDOW_TYPE_NORMAL,
+            .pos = {2, 3},
+            .width = 6,
+            .height = 7,
+            .unk10 = 7,
+            .unk12 = 0,
+            .unk14 = NULL,
+        },
+        [1] = WINDOW_DUMMY,
+        [2] = WINDOW_DUMMY,
+        [3] = WINDOW_DUMMY,
+    }
+};
 
 static const struct Windows gUnknown_80F6370 =
 {
