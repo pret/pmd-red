@@ -1678,29 +1678,26 @@ extern const u8 gUnknown_8106B50[];
 extern void sub_803ECB4(Windows *a0, u8 a1);
 static void CreateFieldItemMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows *a4, WindowHeader *a5);
 
-// Inline needed to (fake?)match.
-static inline void sub_805FC30_SetUpTxtStruct(Windows *src)
-{
-    memset(src, 0, sizeof(*src));
-    src->id[0].type = WINDOW_TYPE_NORMAL;
-    src->id[1].type = WINDOW_TYPE_NORMAL;
-    src->id[1].pos.x = 0x16;
-    src->id[1].pos.y = 4;
-    src->id[1].width = 6;
-    src->id[1].height = 4;
-    src->id[1].unk10 = 4;
-    src->id[2].type = WINDOW_TYPE_NORMAL;
-    src->id[3].type = WINDOW_TYPE_NORMAL;
-}
-
 void sub_805FC30(Windows *a0, s32 a1)
 {
     s32 i;
-    Windows sp;
+    Windows windows = {
+        .id = {
+            [0] = WINDOW_DUMMY,
+            [1] = {
+                .type = WINDOW_TYPE_NORMAL,
+                .pos = {22, 4},
+                .width = 6,
+                .height = 4,
+                .unk10 = 4,
+            },
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
 
-    sub_805FC30_SetUpTxtStruct(&sp);
-    sp.id[0] = a0->id[0];
-    sp.id[0].unk0 = 0x80;
+    windows.id[0] = a0->id[0];
+    windows.id[0].unk0 = 0x80;
 
     gUnknown_202EE10.menuIndex = 0;
     gUnknown_202EE10.unk1C = gUnknown_202EE6C;
@@ -1716,11 +1713,11 @@ void sub_805FC30(Windows *a0, s32 a1)
 
     sub_801317C(&gUnknown_202EE10.unk28);
 
-    sp.id[1].pos.x = a1;
-    sp.id[1].width = 28 - a1;
-    sp.id[1].height = sp.id[1].unk10 = sub_80095E4(gUnknown_202EE10.unk1C, 0);
-    sub_803ECB4(&sp, 0);
-    sub_80137B0(&gUnknown_202EE10, sp.id[1].height * 8);
+    windows.id[1].pos.x = a1;
+    windows.id[1].width = 28 - a1;
+    windows.id[1].height = windows.id[1].unk10 = sub_80095E4(gUnknown_202EE10.unk1C, 0);
+    sub_803ECB4(&windows, 0);
+    sub_80137B0(&gUnknown_202EE10, windows.id[1].height * 8);
     sub_80073B8(1);
 
     for (i = 0; i < gUnknown_202EE6C; i++) {
@@ -1762,7 +1759,7 @@ bool8 sub_8060860(s32 a0);
 void sub_8060900(Entity *a0);
 s32 sub_8060800(WindowHeader *a0, s32 a1);
 void sub_8060CE8(ActionContainer *a0);
-extern Entity *DrawFieldGiveItemMenu(u8 *a0, s32 a1);
+Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1);
 
 bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
 {
@@ -2010,9 +2007,9 @@ bool8 sub_805FD74(Entity * a0, struct UnkMenuBitsStruct *a1)
                     break;
                 }
                 else if (a0Info->action.action == 0x36) {
-                    u32 var_38;
-                    if (DrawFieldGiveItemMenu((void*)&var_38, 2) != NULL) {
-                        a0Info->action.actionParameters[1].actionUseIndex = var_38;
+                    s32 teamId;
+                    if (DrawFieldGiveItemMenu(&teamId, 2) != NULL) {
+                        a0Info->action.actionParameters[1].actionUseIndex = teamId;
                         sub_803EAF0(0, 0);
                         r9 = 0;
                         break;
@@ -2872,32 +2869,30 @@ void sub_8062D68(void);
 void sub_8062230(void);
 void sub_8062748(u8 a0);
 
-static inline void SetTxtStruct(Windows *sp)
-{
-    memset(sp, 0, sizeof(*sp));
-    sp->id[0].type = WINDOW_TYPE_WITH_HEADER;
-    sp->id[0].pos.x = 2;
-    sp->id[0].pos.y = 2;
-    sp->id[0].width = 0x12;
-    sp->id[0].height = 0xE;
-    sp->id[0].unk10 = 0x12;
-    sp->id[0].unk12 = 2;
-    sp->id[0].unk14 = &gUnknown_202F270;
-    sp->id[1].type = WINDOW_TYPE_NORMAL;
-    sp->id[2].type = WINDOW_TYPE_NORMAL;
-    sp->id[3].type = WINDOW_TYPE_NORMAL;
-}
-
 void ShowTacticsMenu(ActionContainer *a0)
 {
-    Windows sp;
+    Windows windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_WITH_HEADER,
+                .pos = {2, 2},
+                .width = 18,
+                .height = 14,
+                .unk10 = 18,
+                .unk12 = 2,
+                .unk14 = &gUnknown_202F270,
+            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
     EntityInfo *monInfo;
     u8 tacticIds[NUM_TACTICS];
     s32 scrollFirstId;
     s32 menuIndex;
     Entity *teamMon;
 
-    SetTxtStruct(&sp);
     teamMon = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
     monInfo = GetEntInfo(teamMon);
     menuIndex = 0;
@@ -2911,7 +2906,7 @@ void ShowTacticsMenu(ActionContainer *a0)
         gUnknown_202F270.f1 = 0;
         gUnknown_202F270.f2 = 10;
         gUnknown_202F270.f3 = 0;
-        sub_803ECB4(&sp, 1);
+        sub_803ECB4(&windows, 1);
         PrintMonTactics(scrollFirstId, tacticIds, monInfo, 0);
         for (i = 0; i < 8; i++) {
             if (tacticIds[i] == TACTIC_UNUSED)
@@ -2992,7 +2987,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                 if (CheckVariousStatuses2(teamMon, TRUE)) {
                     sub_8044FF0(0x2F);
                 }
-                sub_805FC30(&sp, 0x16);
+                sub_805FC30(&windows, 0x16);
                 while (1) {
                     changed = FALSE;
                     AddMenuCursorSprite(&gUnknown_202EE10);
@@ -3101,7 +3096,7 @@ EWRAM_INIT u8 gUnknown_203B43C[4] = {2, 0, 0xD, 0}; // TODO: Move to a better fi
 
 extern void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
 extern u32 sub_8014140(s32 a0, const void *a1);
-extern void sub_806285C(s32 a0);
+void sub_806285C(s32 a0);
 void sub_806262C(u8 iqSkillId);
 
 extern const u8 gUnknown_8106B8C[];
@@ -3111,12 +3106,11 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
     s32 spArr[6];
     struct unkStruct_808FF20 unkMonStruct;
     struct UnkInfoTabStruct unkInfoTabStruct;
-    const s32 winX = 2;
     Windows windows = {
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
-                .pos = {winX, 2},
+                .pos = {2, 2},
                 .width = 18,
                 .height = 14,
                 .unk10 = 18,
@@ -3128,7 +3122,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
             [3] = WINDOW_DUMMY,
         }
     };
-    register s32 r8;
+    s32 r8;
     Entity *entity;
     s32 var_3C;
     s32 var_38;
@@ -3664,9 +3658,20 @@ void sub_80625A4(s32 count, struct subStruct_203B240 **strings)
 }
 
 #include "code_8097DD0.h"
+#include "move_util.h"
+#include "move_util.h"
 
 extern const u8 *const gUnknown_80FE95C;
 extern const u8 *const gUnknown_80FE960;
+extern const u8 *const gUnknown_80FE964;
+extern const u8 *const gUnknown_80FE978;
+extern const u8 gUnknown_8106C90[];
+extern const u8 gUnknown_8106C98[];
+extern const u8 *const gWhichTextPtr2;
+extern char* sub_808E4FC(s32 a1);
+extern char* sub_808E51C(s32 a1);
+extern void sub_8062B74(Entity *entity);
+extern void sub_8062CA8(Entity *entity);
 
 void sub_806262C(u8 iqSkillId)
 {
@@ -3774,5 +3779,197 @@ void sub_8062748(u8 tacticId)
     sub_803E708(4, 0x3E);
 }
 
+void sub_806285C(s32 a0)
+{
+    const u8 *str;
+    MenuInputStructSub menuSub;
+    WindowHeader header;
+    Windows windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_WITH_HEADER,
+                .pos = {2, 2},
+                .width = 26,
+                .height = 12,
+                .unk10 = 12,
+                .unk12 = 0,
+                .unk14 = &header,
+            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
+
+    sub_801317C(&menuSub);
+    header.f0 = 1;
+    header.f1 = 0;
+    header.f2 = 16;
+    header.f3 = 0;
+    sub_803ECB4(&windows, TRUE);
+    sub_80073B8(0);
+    str = sub_808E4FC(a0);
+    strcpy(gFormatBuffer_Items[0], str);
+    PrintFormattedStringOnWindow(16, 0, gUnknown_80FE964, 0, '\0');
+    PrintFormattedStringOnWindow(8, 16, sub_808E51C(a0), 0, '\0');
+    sub_80073E0(0);
+
+    while (1) {
+        nullsub_34(&menuSub, 0);
+        sub_803E46C(22);
+        if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
+            sub_8083D08();
+            break;
+        }
+        if ((gRealInputs.pressed & B_BUTTON) || menuSub.b_button) {
+            sub_8083D30();
+            break;
+        }
+    }
+
+    sub_803E708(4, 0x3E);
+}
+
+extern const Windows gUnknown_8106C30;
+extern const Window gUnknown_8106C00;
+extern const Window gUnknown_8106C18;
+
+Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1)
+{
+    struct UnkFieldTeamMenuStruct unkStruct;
+    Windows windows = gUnknown_8106C30;
+    bool8 bPress = FALSE;
+    s32 prevId, currId;
+
+    if (teamId != NULL) {
+        *teamId = -1;
+    }
+
+    if (a1 == 1) {
+        windows.id[2] = gUnknown_8106C00;
+    }
+    else if (a1 == 2) {
+        windows.id[2] = gUnknown_8106C18;
+    }
+
+    DrawFieldTeamMenu(&unkStruct, &windows, FALSE);
+    sub_80073B8(1);
+    PrintStringOnWindow(4, 3, gWhichTextPtr2, 1, '\0');
+    sub_80073E0(1);
+    prevId = -985; // Magic number or does it actually mean anything?
+
+    while (1) {
+        currId = unkStruct.unk4[gUnknown_202EE10.menuIndex];
+
+        if (currId >= 0) {
+            Entity *entity = gDungeon->teamPokemon[currId];
+
+            if (EntityIsValid(entity) && prevId != currId) {
+                if (a1 == 1) {
+                    sub_8062B74(entity);
+                }
+                else if (a1 == 2) {
+                    sub_8062CA8(entity);
+                }
+            }
+            prevId = currId;
+            sub_806A2BC(entity, 0);
+            sub_804A728(&entity->pos, 0, 1, 1);
+        }
+
+        AddMenuCursorSprite(&gUnknown_202EE10);
+        sub_803E46C(0x1B);
+        if (gRealInputs.repeated & DPAD_DOWN) {
+            sub_8083CE0(1);
+            sub_80136E0(&gUnknown_202EE10, 1);
+        }
+        if (gRealInputs.repeated & DPAD_UP) {
+            sub_8083CE0(1);
+            sub_8013744(&gUnknown_202EE10, 1);
+        }
+
+        if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+            if (unkStruct.unk14[gUnknown_202EE10.menuIndex] != 0) {
+                sub_8083D08();
+                break;
+            }
+            sub_8083D30();
+        }
+        if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+            sub_8083D30();
+            bPress = TRUE;
+            break;
+        }
+    }
+
+    AddMenuCursorSprite(&gUnknown_202EE10);
+    sub_803E46C(0x1B);
+    sub_804AA60();
+    sub_806A2BC(GetLeader(), 0);
+    sub_803EAF0(0, 0);
+    sub_803E708(4, 0x3E);
+    if (bPress) {
+        return NULL;
+    }
+    currId = unkStruct.unk4[gUnknown_202EE10.menuIndex];
+    if (teamId != NULL) {
+        *teamId = currId;
+    }
+    if (currId >= 0) {
+        return gDungeon->teamPokemon[currId];
+    }
+
+    return NULL;
+}
+
+void sub_8062B74(Entity *entity)
+{
+    s32 x, y;
+    EntityInfo *entInfo = GetEntInfo(entity);
+
+    CallPrepareTextbox_8008C54(2);
+    sub_80073B8(2);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+    PrintFormattedStringOnWindow(12, 0, gUnknown_80FE978, 2, '\0');
+    y = 16;
+
+    if (entInfo->monsterBehavior == 1 || IsExperienceLocked(entInfo->joinedAt.id)) {
+        PrintFormattedStringOnWindow(12, y, gUnknown_8106C90, 2, '\0');
+    }
+    else {
+        s32 i;
+
+        for (i = 0; i < MAX_MON_MOVES; i++) {
+            unkStruct_80928C0 movStruct = {0, 106, 0, 0};
+            Move *move = &entInfo->moves.moves[i];
+
+            if (MoveFlagExists(move)) {
+                if (entInfo->isTeamLeader) {
+                    movStruct.unk0 = 2;
+                }
+                else {
+                    movStruct.unk0 = 4;
+                }
+
+                movStruct.unk8 = (CanMonsterUseMove(entity, move, TRUE) == FALSE);
+                BufferMoveName(gFormatBuffer_Items[0], move, &movStruct);
+
+                if (MoveFlagLinkChain(move)) {
+                    x = 13;
+                }
+                else {
+                    x = 8;
+                    if (i != 0) {
+                        sub_80078A4(2, 12, y - 2, 120, 7);
+                    }
+                }
+                PrintFormattedStringOnWindow(x, y, gUnknown_8106C98, 2, '\0');
+                y += 12;
+            }
+        }
+    }
+
+    sub_80073E0(2);
+}
 
 //
