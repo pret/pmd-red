@@ -108,7 +108,7 @@ void sub_80637E8(ActionContainer *a0);
 void sub_8063B54(ActionContainer *a0);
 void sub_8063BB4(ActionContainer *a0);
 void sub_806752C(ActionContainer *a0);
-bool8 sub_8061A38(ActionContainer *a0, bool8 a1);
+void sub_8061A38(ActionContainer *a0, bool8 a1);
 void sub_8063A70(ActionContainer *a0, bool8 a1);
 void sub_8063CF0(ActionContainer *a0, bool8 a1);
 void sub_8067768(ActionContainer *a0);
@@ -3098,3 +3098,465 @@ void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
 }
 
 EWRAM_INIT u8 gUnknown_203B43C[4] = {2, 0, 0xD, 0}; // TODO: Move to a better file and figure out the array count. Apparently it's only written to.
+
+extern void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
+extern u32 sub_8014140(s32 a0, const void *a1);
+extern void sub_806285C(s32 a0);
+extern void sub_806262C(s32 a0);
+
+extern const u8 gUnknown_8106B8C[];
+
+void sub_8061A38(ActionContainer *a0, bool8 a1)
+{
+    s32 spArr[6];
+    struct unkStruct_808FF20 unkMonStruct;
+    struct UnkInfoTabStruct unkInfoTabStruct;
+    const s32 winX = 2;
+    Windows windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_WITH_HEADER,
+                .pos = {winX, 2},
+                .width = 18,
+                .height = 14,
+                .unk10 = 18,
+                .unk12 = 2,
+                .unk14 = &gUnknown_202F270,
+            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
+    register s32 r8;
+    Entity *entity;
+    s32 var_3C;
+    s32 var_38;
+    EntityInfo *entityInfo;
+
+    var_3C = 0;
+    r8 = 0;
+    entity = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
+    entityInfo = GetEntInfo(entity);
+
+    if (IsExperienceLocked(entityInfo->joinedAt.id)) {
+        spArr[0] = 1;
+        spArr[1] = 0;
+        spArr[2] = 0;
+        spArr[3] = 0;
+        spArr[4] = 0;
+        spArr[5] = 0;
+        var_38 = 1;
+    }
+    else if (a1) {
+        spArr[0] = 4;
+        spArr[1] = 0;
+        spArr[2] = 0;
+        spArr[3] = 0;
+        spArr[4] = 0;
+        spArr[5] = 0;
+        var_38 = 1;
+    }
+    else {
+        spArr[0] = 2;
+        spArr[1] = 1;
+        spArr[2] = 3;
+        spArr[3] = 5;
+        spArr[4] = 0;
+        spArr[5] = 0;
+        var_38 = 4;
+    }
+
+    unkMonStruct.unk40 = 0;
+    unkMonStruct.unk56 = 0;
+    gUnknown_202EE10.menuIndex = 0;
+
+    while (1) {
+        bool8 loopBreak = FALSE;
+        s32 var_30 = 0;
+        s32 var_2C = 0;
+        s32 var_28 = 1;
+        UnkTextStruct1 *unkTxtStr1Ptr = &gUnknown_2027370[0];
+
+        gUnknown_202F270.f0 = var_38;
+        gUnknown_202F270.f1 = var_3C;
+        gUnknown_202F270.f2 = 10;
+        gUnknown_202F270.f3 = 0;
+        sub_803ECB4(&windows, TRUE);
+        sub_8069844(&unkMonStruct, entity);
+        CreatePokemonInfoTabScreen(spArr[var_3C], var_3C, &unkMonStruct, &unkInfoTabStruct, 0);
+        gUnknown_202EE10.unk1E = var_3C;
+        gUnknown_202EE10.unk20 = var_38;
+        gUnknown_202EE10.unkC = (unkTxtStr1Ptr->unk0 + 15) * 8;
+        gUnknown_202EE10.unkE = ((unkTxtStr1Ptr->unk2 + 1) * 8) - 2;
+        gUnknown_202EE10.unk14.x = 0;
+        gUnknown_202EE10.unk4 = 0;
+        gUnknown_202EE10.firstEntryY = 16;
+        gUnknown_202EE10.unk0 = 0;
+        sub_801317C(&gUnknown_202EE10.unk28);
+        gUnknown_202EE10.menuIndex = 0;
+        gUnknown_202EE10.unk1A = 0;
+        gUnknown_202EE10.unk1C = 0;
+
+        if (spArr[var_3C] == 1) {
+            s32 i;
+
+            for (i = 0; i < 8; i++) {
+                if (unkInfoTabStruct.unkC[i] == 0) {
+                    break;
+                }
+            }
+
+            if (i != 0) {
+                var_2C = 1;
+                gUnknown_202EE10.unk1A = i;
+                gUnknown_202EE10.unk1C = 8;
+                sub_80137B0(&gUnknown_202EE10, 0);
+            }
+            gUnknown_202EE10.menuIndex = r8;
+        }
+        else if (spArr[var_3C] == 4) {
+            s32 i;
+
+            for (i = 0; i < 8; i++) {
+                if (unkInfoTabStruct.unk0[i] == 0) {
+                    break;
+                }
+            }
+
+            if (i != 0) {
+                var_30 = 1;
+                gUnknown_202EE10.unk1A = i;
+                gUnknown_202EE10.unk1C = 8;
+                sub_80137B0(&gUnknown_202EE10, 0);
+            }
+            gUnknown_202EE10.menuIndex = r8;
+        }
+
+        while (1) {
+            s32 unkVar;
+            bool8 r5, r6;
+
+            AddMenuCursorSprite(&gUnknown_202EE10);
+            unkVar = sub_8014140(0, gUnknown_8106B8C);
+            r5 = FALSE;
+            r6 = FALSE;
+            if (var_30) {
+                if (unkInfoTabStruct.unk0[8] != 0) {
+                    r5 = TRUE;
+                    sub_80623B0();
+                }
+                if (unkMonStruct.unk40 != 0) {
+                    r6 = TRUE;
+                    sub_8062230();
+                }
+            }
+            if (var_2C) {
+                if (unkInfoTabStruct.unkC[8] != 0) {
+                    r5 = TRUE;
+                    sub_80623B0();
+                }
+                if (unkMonStruct.unk56 != 0) {
+                    r6 = TRUE;
+                    sub_8062230();
+                }
+            }
+
+            sub_803E46C(0x1C);
+            if (gUnknown_202F270.f0 > 1 && !sub_80048C8()) {
+                if ((gRealInputs.pressed & DPAD_RIGHT) || gUnknown_202EE10.unk28.dpad_right) {
+                    sub_8083CE0(0);
+                    var_3C++;
+                    if (spArr[var_3C] == 0) {
+                        var_3C = 0;
+                    }
+                    break;
+                }
+                if ((gRealInputs.pressed & DPAD_LEFT) || gUnknown_202EE10.unk28.dpad_left) {
+                    sub_8083CE0(0);
+                    var_3C--;
+                    if (var_3C == -1) {
+                        var_3C = 5;
+                        while (spArr[var_3C] == 0) {
+                            var_3C--;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            if (var_2C) {
+                if (unkVar == 2 && r5) {
+                    sub_8083CE0(0);
+                    if (unkInfoTabStruct.unkC[8] != 0) {
+                        s32 i;
+                        for (i = 0; i < 6; i++) {
+                            gIwramTextFunc1(0);
+                            sub_803E46C(28);
+                        }
+                        unkMonStruct.unk56++;
+                    }
+                    r8 = 7;
+                    break;
+                }
+                if (gRealInputs.repeated & DPAD_DOWN) {
+                    sub_8083CE0(0);
+                    if (gUnknown_202EE10.menuIndex == 7) {
+                        if (unkInfoTabStruct.unkC[8] != 0) {
+                            s32 i;
+                            for (i = 0; i < 6; i++) {
+                                gIwramTextFunc1(0);
+                                sub_803E46C(28);
+                            }
+                            unkMonStruct.unk56++;
+                        }
+                        r8 = 7;
+                        break;
+                    }
+                    else {
+                        sub_80136E0(&gUnknown_202EE10, 0);
+                    }
+                }
+
+                if (unkVar == 1 && r6) {
+                    if (unkMonStruct.unk56 != 0) {
+                        s32 i;
+                        for (i = 0; i < 6; i++) {
+                            gIwramTextFunc2(0);
+                            sub_803E46C(28);
+                        }
+                        unkMonStruct.unk56--;
+                    }
+                    r8 = 0;
+                    break;
+                }
+                if (gRealInputs.repeated & DPAD_UP) {
+                    sub_8083CE0(1);
+                    if (gUnknown_202EE10.menuIndex == 0) {
+                        if (unkMonStruct.unk56 != 0) {
+                            s32 i;
+                            for (i = 0; i < 6; i++) {
+                                gIwramTextFunc2(0);
+                                sub_803E46C(28);
+                            }
+                            unkMonStruct.unk56--;
+                        }
+                        r8 = 0;
+                        break;
+                    }
+                    else {
+                        sub_8013744(&gUnknown_202EE10, 0);
+                    }
+                }
+            }
+            else if (var_30) {
+                if (unkVar == 2 && r5) {
+                    if (unkInfoTabStruct.unk0[8] != 0) {
+                        s32 i;
+                        for (i = 0; i < 6; i++) {
+                            gIwramTextFunc1(0);
+                            sub_803E46C(28);
+                        }
+                        unkMonStruct.unk40++;
+                    }
+                    r8 = 7;
+                    break;
+                }
+                if (gRealInputs.repeated & DPAD_DOWN) {
+                    sub_8083CE0(1);
+                    if (gUnknown_202EE10.menuIndex == 7) {
+                        if (unkInfoTabStruct.unk0[8] != 0) {
+                            s32 i;
+                            for (i = 0; i < 6; i++) {
+                                gIwramTextFunc1(0);
+                                sub_803E46C(28);
+                            }
+                            unkMonStruct.unk40++;
+                        }
+                        r8 = 7;
+                        break;
+                    }
+                    else {
+                        sub_80136E0(&gUnknown_202EE10, 0);
+                    }
+                }
+
+                if (unkVar == 1 && r6) {
+                    if (unkMonStruct.unk40 != 0) {
+                        s32 i;
+                        for (i = 0; i < 6; i++) {
+                            gIwramTextFunc2(0);
+                            sub_803E46C(28);
+                        }
+                        unkMonStruct.unk40--;
+                    }
+                    r8 = 0;
+                    break;
+                }
+                if (gRealInputs.repeated & DPAD_UP) {
+                    sub_8083CE0(1);
+                    if (gUnknown_202EE10.menuIndex == 0) {
+                        if (unkMonStruct.unk40 != 0) {
+                            s32 i;
+                            for (i = 0; i < 6; i++) {
+                                gIwramTextFunc2(0);
+                                sub_803E46C(28);
+                            }
+                            unkMonStruct.unk40--;
+                        }
+                        r8 = 0;
+                        break;
+                    }
+                    else {
+                        sub_8013744(&gUnknown_202EE10, 0);
+                    }
+                }
+            }
+
+            if (sub_80048C8())
+                continue;
+
+            if (gRealInputs.pressed & START_BUTTON) {
+                if (var_2C) {
+                    s32 var = unkInfoTabStruct.unkC[gUnknown_202EE10.menuIndex];
+
+                    r8 = gUnknown_202EE10.menuIndex;
+                    sub_8083D44();
+                    sub_806285C(var);
+                    var_28 = 0;
+                    loopBreak = FALSE;
+                    break;
+                }
+                else if (var_30) {
+                    s32 var = unkInfoTabStruct.unk0[gUnknown_202EE10.menuIndex];
+
+                    r8 = gUnknown_202EE10.menuIndex;
+                    sub_8083D44();
+                    sub_806262C(var);
+                    var_28 = 0;
+                    loopBreak = FALSE;
+                    break;
+                }
+            }
+
+            if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                if (var_2C) {
+                    s32 var = unkInfoTabStruct.unkC[gUnknown_202EE10.menuIndex];
+
+                    r8 = gUnknown_202EE10.menuIndex;
+                    sub_8062D68();
+                    gUnknown_202EE6C = 0;
+                    sub_8083D08();
+                    sub_8044F5C(0xC, 0);
+                    sub_805FC30(&windows, 0x16);
+                    while (1) {
+                        AddMenuCursorSprite(&gUnknown_202EE10);
+                        sub_803E46C(0x1C);
+                        if (gRealInputs.repeated & DPAD_DOWN) {
+                            sub_8083CE0(1);
+                            sub_80136E0(&gUnknown_202EE10, 1);
+                        }
+                        if (gRealInputs.repeated & DPAD_UP) {
+                            sub_8083CE0(1);
+                            sub_8013744(&gUnknown_202EE10, 1);
+                        }
+
+                        if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                            sub_8083D08();
+                            sub_806285C(var);
+                            var_28 = 0;
+                            loopBreak = FALSE;
+                            break;
+                        }
+                        if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                            sub_8083D30();
+                            loopBreak = FALSE;
+                            break;
+                        }
+                    }
+                }
+                else if (var_30) {
+                    bool8 aPress = FALSE;
+                    s32 var = unkInfoTabStruct.unk0[gUnknown_202EE10.menuIndex];
+
+                    r8 = gUnknown_202EE10.menuIndex;
+                    sub_8062D68();
+                    gUnknown_202EE6C = var_2C;
+                    sub_8083D08();
+                    sub_8044F5C(0x28, 0);
+                    sub_8044F5C(0xC, 0);
+                    if (CheckVariousStatuses2(entity, TRUE)) {
+                        sub_8044FF0(0x28);
+                    }
+                    sub_805FC30(&windows, 0x16);
+                    while (1) {
+                        AddMenuCursorSprite(&gUnknown_202EE10);
+                        sub_803E46C(0x1C);
+                        if (gRealInputs.repeated & DPAD_DOWN) {
+                            sub_8083CE0(1);
+                            sub_80136E0(&gUnknown_202EE10, 1);
+                        }
+                        if (gRealInputs.repeated & DPAD_UP) {
+                            sub_8083CE0(1);
+                            sub_8013744(&gUnknown_202EE10, 1);
+                        }
+
+                        if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
+                            if (sub_8044F3C(gUnknown_202EE10.menuIndex)) {
+                                sub_8083D08();
+                                aPress = TRUE;
+                                break;
+                            }
+                            sub_8083D30();
+                        }
+                        if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                            sub_8083D30();
+                            loopBreak = FALSE;
+                            aPress = FALSE;
+                            break;
+                        }
+                    }
+
+                    if (aPress) {
+                        if (gUnknown_202EE10.menuIndex == 0) {
+                            PlaySoundEffect(0x133);
+                            ToggleIQSkill(&entityInfo->IQSkillMenuFlags, var);
+                        }
+                        else {
+                            sub_806262C(var);
+                            var_28 = 0;
+                        }
+                        loopBreak = FALSE;
+                        break;
+                    }
+                }
+                else {
+                    sub_8083D08();
+                    loopBreak = TRUE;
+                }
+                break;
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                sub_8083D30();
+                loopBreak = TRUE;
+                break;
+            }
+        }
+
+        if (var_28) {
+            if (var_30 != 0 || var_2C != 0) {
+                AddMenuCursorSprite(&gUnknown_202EE10);
+            }
+            sub_803E46C(0x1C);
+        }
+
+        if (loopBreak) {
+            break;
+        }
+    }
+
+    sub_803EAF0(0, NULL);
+    LoadIQSkills(entity);
+}
+
+//
