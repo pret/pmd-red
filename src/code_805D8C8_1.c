@@ -3102,7 +3102,7 @@ EWRAM_INIT u8 gUnknown_203B43C[4] = {2, 0, 0xD, 0}; // TODO: Move to a better fi
 extern void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern void sub_806285C(s32 a0);
-extern void sub_806262C(s32 a0);
+void sub_806262C(u8 iqSkillId);
 
 extern const u8 gUnknown_8106B8C[];
 
@@ -3558,5 +3558,221 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
     sub_803EAF0(0, NULL);
     LoadIQSkills(entity);
 }
+
+extern s32 gUnknown_202EDCC;
+
+// The same as sub_8068344
+void sub_8062230(void)
+{
+    if ((gUnknown_202EDCC & 8) != 0) {
+        UnkTextStruct1 *txtStrPtr = &gUnknown_2027370[0];
+        SpriteOAM sprite = {0};
+
+        SpriteSetAffine1(&sprite, 0);
+        SpriteSetAffine2(&sprite, 0);
+        SpriteSetObjMode(&sprite, 0);
+        SpriteSetMosaic(&sprite, 0);
+        SpriteSetBpp(&sprite, 0);
+        SpriteSetShape(&sprite, 1);
+        SpriteSetMatrixNum(&sprite, 16);
+        SpriteSetSize(&sprite, 0);
+        SpriteSetTileNum(&sprite, 0x3F0);
+        SpriteSetPriority(&sprite, 0);
+        SpriteSetPalNum(&sprite, 15);
+        SpriteSetY(&sprite, (txtStrPtr->unk2  * 8) + 0x8);
+        SpriteSetX(&sprite, (txtStrPtr->unk0  * 8) + 0x40);
+
+        AddSprite(&sprite, 0x100, NULL, NULL);
+    }
+}
+
+// The same as sub_80684C4
+void sub_80623B0(void)
+{
+    if ((gUnknown_202EDCC & 8) != 0) {
+        UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+        SpriteOAM sprite = {0};
+
+        SpriteSetAffine1(&sprite, 0);
+        SpriteSetAffine2(&sprite, 0);
+        SpriteSetObjMode(&sprite, 0);
+        SpriteSetMosaic(&sprite, 0);
+        SpriteSetBpp(&sprite, 0);
+        SpriteSetShape(&sprite, 1);
+        SpriteSetMatrixNum(&sprite, 0);
+        SpriteSetSize(&sprite, 0);
+        SpriteSetTileNum(&sprite, 0x3F0);
+        SpriteSetPriority(&sprite, 0);
+        SpriteSetPalNum(&sprite, 15);
+        SpriteSetY(&sprite, (ptr->unk2  * 8) + 0x70);
+        SpriteSetX(&sprite, (ptr->unk0  * 8) + 0x40);
+        AddSprite(&sprite,0x100,NULL,NULL);
+    }
+}
+
+extern SpriteOAM gUnknown_202F268;
+
+void sub_8062500(void)
+{
+    if ((gUnknown_202EDCC & 8) != 0) {
+        UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+
+        SpriteSetAffine1(&gUnknown_202F268, 0);
+        SpriteSetAffine2(&gUnknown_202F268, 0);
+        SpriteSetObjMode(&gUnknown_202F268, 0);
+        SpriteSetMosaic(&gUnknown_202F268, 0);
+        SpriteSetBpp(&gUnknown_202F268, 0);
+        SpriteSetShape(&gUnknown_202F268, 1);
+        SpriteSetMatrixNum(&gUnknown_202F268, 0);
+        SpriteSetSize(&gUnknown_202F268, 0);
+        SpriteSetTileNum(&gUnknown_202F268, 0x3F0);
+        SpriteSetPriority(&gUnknown_202F268, 0);
+        SpriteSetPalNum(&gUnknown_202F268, 15);
+        SpriteSetY(&gUnknown_202F268, (ptr->unk2  * 8) + 0x60);
+        SpriteSetX(&gUnknown_202F268, 0x70);
+        AddSprite(&gUnknown_202F268,0x100,NULL,NULL);
+    }
+}
+
+void sub_80639E4(struct subStruct_203B240 *strings, MenuInputStructSub *menuSub);
+
+void sub_80625A4(s32 count, struct subStruct_203B240 **strings)
+{
+    s32 i;
+    MenuInputStructSub menuSub;
+
+    sub_801317C(&menuSub);
+    for (i = 0; i < count; i++) {
+        sub_80639E4(strings[i], &menuSub);
+        while (1) {
+            if (i < count - 1) {
+                sub_8062500();
+            }
+            nullsub_34(&menuSub, 0);
+            sub_803E46C(0x16);
+            if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
+                sub_8083D08();
+                break;
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || menuSub.b_button) {
+                sub_8083D30();
+                break;
+            }
+        }
+
+    }
+}
+
+#include "code_8097DD0.h"
+
+extern const u8 *const gUnknown_80FE95C;
+extern const u8 *const gUnknown_80FE960;
+
+void sub_806262C(u8 iqSkillId)
+{
+    MenuInputStructSub menuSub;
+    Windows windows;
+    WindowHeader header;
+    struct subStruct_203B240 *result[4];
+
+    while (1) {
+        s32 count;
+        bool8 bPress;
+
+        sub_801317C(&menuSub);
+        sub_80140B4(&windows);
+        windows.id[0].unk14 = &header;
+        header.f0 = 1;
+        header.f1 = 0;
+        header.f2 = 16;
+        header.f3 = 0;
+        sub_803ECB4(&windows, TRUE);
+        sub_80073B8(0);
+
+        strcpy(gFormatBuffer_Items[0], GetIQSkillName(iqSkillId));
+        PrintFormattedStringOnWindow(16, 0, gUnknown_80FE95C, 0, '\0');
+        PrintFormattedStringOnWindow(8, 16, GetIQSkillDescription(iqSkillId), 0, '\0');
+        sub_80073E0(0);
+        count = sub_8097DF0(GetIQSkillDescription(iqSkillId), result);
+        while (1) {
+            if (count != 0) {
+                sub_8062500();
+            }
+            nullsub_34(&menuSub, 0);
+            sub_803E46C(0x16);
+            if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
+                bPress = FALSE;
+                sub_8083D08();
+                break;
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || menuSub.b_button) {
+                bPress = TRUE;
+                sub_8083D30();
+                break;
+            }
+        }
+
+        if (bPress || count == 0)
+            break;
+
+        sub_80625A4(count, result);
+    }
+
+    sub_803E708(4, 0x3E);
+}
+
+void sub_8062748(u8 tacticId)
+{
+    MenuInputStructSub menuSub;
+    Windows windows;
+    WindowHeader header;
+    struct subStruct_203B240 *result[4];
+
+    while (1) {
+        s32 count;
+        bool8 bPress;
+
+        sub_801317C(&menuSub);
+        sub_80140B4(&windows);
+        windows.id[0].unk14 = &header;
+        header.f0 = 1;
+        header.f1 = 0;
+        header.f2 = 16;
+        header.f3 = 0;
+        sub_803ECB4(&windows, TRUE);
+        sub_80073B8(0);
+
+        CopyTacticsNameToBuffer(gFormatBuffer_Items[0], tacticId);
+        PrintFormattedStringOnWindow(16, 0, gUnknown_80FE960, 0, '\0');
+        PrintFormattedStringOnWindow(8, 16, GetTacticsDescription(tacticId), 0, '\0');
+        sub_80073E0(0);
+        count = sub_8097DF0(GetTacticsDescription(tacticId), result);
+        while (1) {
+            if (count != 0) {
+                sub_8062500();
+            }
+            nullsub_34(&menuSub, 0);
+            sub_803E46C(62);
+            if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
+                bPress = FALSE;
+                sub_8083D08();
+                break;
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || menuSub.b_button) {
+                bPress = TRUE;
+                sub_8083D30();
+                break;
+            }
+        }
+
+        if (bPress || count == 0)
+            break;
+
+        sub_80625A4(count, result);
+    }
+
+    sub_803E708(4, 0x3E);
+}
+
 
 //

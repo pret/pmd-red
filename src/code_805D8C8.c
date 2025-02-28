@@ -37,7 +37,7 @@ void sub_8068310(s32 size, u16 **param_2)
 }
 
 void sub_8068344(void)
-{   
+{
     if ((gUnknown_202EDCC & 8) != 0) {
         UnkTextStruct1 *ptr = &gUnknown_2027370[0];
         SpriteOAM sprite = {0};
@@ -49,7 +49,7 @@ void sub_8068344(void)
         SpriteSetBpp(&sprite, 0);
         SpriteSetShape(&sprite, 1);
         SpriteSetMatrixNum(&sprite, 16);
-        SpriteSetSize(&sprite, 0);   
+        SpriteSetSize(&sprite, 0);
         SpriteSetTileNum(&sprite, 0x3F0);
         SpriteSetPriority(&sprite, 0);
         SpriteSetPalNum(&sprite, 15);
@@ -59,8 +59,9 @@ void sub_8068344(void)
     }
 }
 
+// The same as sub_80623B0
 void sub_80684C4(void)
-{   
+{
     if ((gUnknown_202EDCC & 8) != 0) {
         UnkTextStruct1 *ptr = &gUnknown_2027370[0];
         SpriteOAM sprite = {0};
@@ -71,12 +72,13 @@ void sub_80684C4(void)
         SpriteSetMosaic(&sprite, 0);
         SpriteSetBpp(&sprite, 0);
         SpriteSetShape(&sprite, 1);
+        SpriteSetMatrixNum(&sprite, 0);
         SpriteSetSize(&sprite, 0);
         SpriteSetTileNum(&sprite, 0x3F0);
         SpriteSetPriority(&sprite, 0);
         SpriteSetPalNum(&sprite, 15);
         SpriteSetY(&sprite, (ptr->unk2  * 8) + 0x70);
-        SpriteSetX_MatrixNumSize0(&sprite, (ptr->unk0  * 8) + 0x40);
+        SpriteSetX(&sprite, (ptr->unk0  * 8) + 0x40);
         AddSprite(&sprite,0x100,NULL,NULL);
     }
 }

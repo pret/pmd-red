@@ -595,13 +595,14 @@ void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
             SpriteSetMosaic(&sp, 0);
             SpriteSetBpp(&sp, 0);
             SpriteSetShape(&sp, 0);
+            SpriteSetMatrixNum(&sp, 0);
             SpriteSetSize(&sp, 0);
             SpriteSetTileNum(&sp, 0x3F4);
             SpriteSetPriority(&sp, 0);
             SpriteSetPalNum(&sp, 15);
             SpriteSetUnk6_0(&sp, 0);
             SpriteSetUnk6_1(&sp, 0);
-            SpriteSetX_MatrixNumSize0(&sp, a0->unk8.x);
+            SpriteSetX(&sp, a0->unk8.x);
             SpriteSetY(&sp, a0->unk8.y + 1);
 
             AddSprite(&sp, 0xFF, 0, 0);
@@ -629,13 +630,14 @@ static void sub_801332C(DungeonPos *a0)
     SpriteSetMosaic(&sp, 0);
     SpriteSetBpp(&sp, 0);
     SpriteSetShape(&sp, 0);
+    SpriteSetMatrixNum(&sp, 0);
     SpriteSetSize(&sp, 0);
     SpriteSetTileNum(&sp, 0x3F5);
     SpriteSetPriority(&sp, 0);
     SpriteSetPalNum(&sp, 15);
     SpriteSetUnk6_0(&sp, 0);
     SpriteSetUnk6_1(&sp, 0);
-    SpriteSetX_MatrixNumSize0(&sp, a0->x);
+    SpriteSetX(&sp, a0->x);
     SpriteSetY(&sp, a0->y + 1);
 
     AddSprite(&sp, 0xFF, NULL, NULL);
@@ -653,13 +655,14 @@ static void sub_8013470(MenuInputStruct *a0)
             SpriteSetMosaic(&sp, 0);
             SpriteSetBpp(&sp, 0);
             SpriteSetShape(&sp, 0);
+            SpriteSetMatrixNum(&sp, 0);
             SpriteSetSize(&sp, 0);
             SpriteSetTileNum(&sp, 0x3F2);
             SpriteSetPriority(&sp, 0);
             SpriteSetPalNum(&sp, 15);
             SpriteSetUnk6_0(&sp, 0);
             SpriteSetUnk6_1(&sp, 0);
-            SpriteSetX_MatrixNumSize0(&sp, a0->unkC);
+            SpriteSetX(&sp, a0->unkC);
             SpriteSetY(&sp, a0->unkE);
 
             AddSprite(&sp, 0xFF, NULL, NULL);
@@ -671,13 +674,14 @@ static void sub_8013470(MenuInputStruct *a0)
             SpriteSetMosaic(&sp, 0);
             SpriteSetBpp(&sp, 0);
             SpriteSetShape(&sp, 0);
+            SpriteSetMatrixNum(&sp, 0);
             SpriteSetSize(&sp, 0);
             SpriteSetTileNum(&sp, 0x3F3);
             SpriteSetPriority(&sp, 0);
             SpriteSetPalNum(&sp, 15);
             SpriteSetUnk6_0(&sp, 0);
             SpriteSetUnk6_1(&sp, 0);
-            SpriteSetX_MatrixNumSize0(&sp, a0->unkC + 10);
+            SpriteSetX(&sp, a0->unkC + 10);
             SpriteSetY(&sp, a0->unkE);
 
             AddSprite(&sp, 0xFF, NULL, NULL);
