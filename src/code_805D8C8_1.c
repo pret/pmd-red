@@ -3667,11 +3667,13 @@ extern const u8 *const gUnknown_80FE964;
 extern const u8 *const gUnknown_80FE978;
 extern const u8 gUnknown_8106C90[];
 extern const u8 gUnknown_8106C98[];
+extern const u8 gUnknown_8106C9C[];
 extern const u8 *const gWhichTextPtr2;
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
 extern void sub_8062B74(Entity *entity);
 extern void sub_8062CA8(Entity *entity);
+extern void sub_8045C18(u8 *buffer, Item *item);
 
 void sub_806262C(u8 iqSkillId)
 {
@@ -3970,6 +3972,147 @@ void sub_8062B74(Entity *entity)
     }
 
     sub_80073E0(2);
+}
+
+void sub_8062CA8(Entity *entity)
+{
+    s32 x, y;
+    EntityInfo *entInfo = GetEntInfo(entity);
+
+    CallPrepareTextbox_8008C54(2);
+    sub_80073B8(2);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+    PrintFormattedStringOnWindow(12, 0, gUnknown_80FE940, 2, '\0');
+    x = 8;
+    y = 18;
+
+    if (entInfo->monsterBehavior == 1 || IsExperienceLocked(entInfo->joinedAt.id)) {
+        PrintFormattedStringOnWindow(8, y, gUnknown_8106C90, 2, '\0');
+    }
+    else {
+        Item *item = &entInfo->heldItem;
+        if (!ItemExists(item)) {
+            PrintFormattedStringOnWindow(x, y, gUnknown_8106C9C, 2, '\0');
+        }
+        else {
+            sub_8045C18(gFormatBuffer_Items[0], item);
+            PrintFormattedStringOnWindow(x, y, gUnknown_8106C98, 2, '\0');
+        }
+    }
+
+    sub_80073E0(2);
+}
+
+void sub_8062D68(void)
+{
+    gUnknown_202EE10.unk1E = 0;
+    gUnknown_202EE10.unk20 = 0;
+    gUnknown_202EE10.unkC = 0;
+    gUnknown_202EE10.unkE = 0;
+    gUnknown_202EE10.unk14.x = 0;
+    sub_801317C(&gUnknown_202EE10.unk28);
+}
+
+u32 sub_8062D88(void)
+{
+    return A_BUTTON;
+}
+
+void sub_8062D8C(ActionContainer *a0)
+{
+    s32 id = a0->actionParameters[0].actionUseIndex;
+    Entity *entityOrg = gDungeon->teamPokemon[id];
+    Entity *entityNew = entityOrg;
+
+    while (1) {
+        s32 i, count, countUntilId;
+
+        countUntilId = 0;
+        count = 0;
+        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+            if (sub_8071A8C(gDungeon->teamPokemon[i])) {
+                if (i == id) {
+                    countUntilId = count;
+                }
+                count++;
+            }
+        }
+
+        sub_806A2BC(entityNew, 0);
+        sub_804A728(&entityNew->pos, 0, 1, 1);
+        sub_8044C10(1);
+        if (sub_8062F90(entityNew, 0, 1, countUntilId, count)) {
+            return;
+        }
+
+        if (GetLeaderActionId() == 6) {
+            s32 idBefore = id;
+            for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                if (++id >= MAX_TEAM_MEMBERS) {
+                    id = 0;
+                }
+                entityNew = gDungeon->teamPokemon[id];
+                if (sub_8071A8C(entityNew)) {
+                    break;
+                }
+            }
+
+            a0->actionParameters[0].actionUseIndex = id;
+            if (idBefore != id) {
+                sub_8083CE0(0);
+            }
+            sub_8044C10(1);
+        }
+        // Everything is the same as in the above if except for add/sub difference.
+        else if (GetLeaderActionId() == 7) {
+            s32 idBefore = id;
+            for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                if (--id < 0) {
+                    id = MAX_TEAM_MEMBERS - 1;
+                }
+                entityNew = gDungeon->teamPokemon[id];
+                if (sub_8071A8C(entityNew)) {
+                    break;
+                }
+            }
+
+            a0->actionParameters[0].actionUseIndex = id;
+            if (idBefore != id) {
+                sub_8083CE0(0);
+            }
+            sub_8044C10(1);
+        }
+        else if (GetLeaderActionId() == 29) {
+            sub_80637E8(GetLeaderActionContainer());
+            sub_8044C10(1);
+        }
+        else if (GetLeaderActionId() == 30) {
+            sub_803EAF0(0, NULL);
+            sub_8063A70(GetLeaderActionContainer(), TRUE);
+            sub_8044C10(1);
+        }
+        else if (GetLeaderActionId() == 51) {
+            sub_803EAF0(0, NULL);
+            sub_8063A70(GetLeaderActionContainer(), FALSE);
+            sub_8044C10(1);
+        }
+        else if (GetLeaderActionId() == 31) {
+            sub_803EAF0(0, NULL);
+            sub_8063B54(GetLeaderActionContainer());
+            sub_8044C10(1);
+        }
+        else if (GetLeaderActionId() == 33) {
+            sub_803EAF0(0, NULL);
+            sub_8063CF0(GetLeaderActionContainer(), TRUE);
+            sub_8044C10(1);
+        }
+
+        if (GetLeaderActionId() != 0)
+            break;
+    }
+
+    sub_806A2BC(entityOrg, 0);
+    sub_804A728(&entityOrg->pos, 0, 1, 1);
 }
 
 //
