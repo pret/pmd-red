@@ -1,151 +1,41 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_menu_items.h"
 #include "structs/str_dungeon.h"
-#include "number_util.h"
 #include "input.h"
 #include "structs/map.h"
 #include "dungeon_main.h"
 #include "dungeon_message.h"
 #include "dungeon_action.h"
-#include "dungeon_ai_targeting.h"
 #include "dungeon_pokemon_attributes.h"
-#include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
-#include "moves.h"
 #include "items.h"
 #include "dungeon_music.h"
 #include "dungeon_ai_movement.h"
 #include "code_8045A00.h"
 #include "string_format.h"
 #include "code_803E46C.h"
-#include "code_801602C.h"
-#include "code_800D090.h"
 #include "trap.h"
-#include "charge_move.h"
 #include "dungeon_map_access.h"
 #include "status_checks_1.h"
-#include "game_options.h"
-#include "weather.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "tile_types.h"
-#include "dungeon_visibility.h"
-#include "dungeon_movement.h"
-#include "bg_control.h"
 #include "menu_input.h"
-#include "music.h"
-#include "items.h"
-#include "play_time.h"
-#include "pokemon_3.h"
 #include "text.h"
-#include "code_806CD90.h"
 #include "code_8044CC8.h"
 #include "code_801B3C0.h"
 #include "dungeon_capabilities.h"
-#include "constants/dungeon.h"
-#include "constants/status.h"
-#include "constants/tactic.h"
-#include "constants/iq_skill.h"
-#include "constants/dungeon_action.h"
-#include "structs/struct_sub80095e4.h"
-#include "structs/str_text.h"
 
-extern void HandleSetItemAction(Entity *,bool8);
-extern void HandleUnsetItemAction(Entity *,bool8);
-extern bool8 sub_8048A68(Entity *param_1,Item *item);
-extern bool8 sub_8048950(Entity *param_1,Item *item);
-extern bool8 sub_8048B9C(Entity *param_1,Item *item);
-extern Item *sub_8044D90(Entity *, s32, u32);
 extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
-extern void sub_806A6E8(Entity *);
-extern bool8 sub_8047084(s32 itemFlag);
-extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
-extern void sub_8045DB4(DungeonPos *, u32);
-bool8 sub_807EF48(void);
-void sub_806A2BC(Entity *a0, u8 a1);
-bool8 sub_805E874(void);
-bool8 sub_80701A4(Entity *a0);
-void ShowDungeonStairsMenu(Entity *a0);
-void sub_805E738(Entity *a0);
-void sub_803E708(s32 a0, s32 a1);
-void sub_8040A78(void);
-void sub_805E804(void);
-void ShowDungeonOthersMenu(void);
-void sub_8075680(u32);
-void sub_8094C88(void);
-void sub_8040A84(void);
-void sub_8047158(void);
-void sub_806A914(u8 a0, u8 a1, u8 a2);
-void SetLeaderActionToNothing(u8 a0);
-u16 GetLeaderActionId(void);
-void sub_80978C8(s16 a0);
-bool8 sub_8094C48(void);
-bool8 sub_805EC4C(Entity *a0, u8 a1);
-void sub_803E724(s32 a0);
-void HandleTalkFieldAction(Entity *);
-bool8 sub_8044B28(void);
-bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
-void ShowMainMenu(bool8 fromBPress, bool8 a1);
-bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
-s32 GetTeamMemberEntityIndex(Entity *pokemon);
-bool8 sub_8070F80(Entity * pokemon, s32 direction);
-void PrintOnMainMenu(bool8 printAll);
-bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1);
-void sub_8060D24(UNUSED ActionContainer *a0);
-bool8 ShowDungeonTeamMenu(Entity *a0);
-void sub_8062D8C(ActionContainer *a0);
-void sub_80637E8(ActionContainer *a0);
-void sub_8063B54(ActionContainer *a0);
-void sub_8063BB4(ActionContainer *a0);
-void sub_806752C(ActionContainer *a0);
-void sub_8061A38(ActionContainer *a0, bool8 a1);
-void sub_8063A70(ActionContainer *a0, bool8 a1);
-void sub_8063CF0(ActionContainer *a0, bool8 a1);
-void sub_8067768(ActionContainer *a0);
-void ShowTacticsMenu(ActionContainer *a0);
-void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
-extern bool8 sub_8071A8C(Entity *pokemon);
-extern void sub_80643AC(Entity *pokemon);
-extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4);
-
-extern u8 gUnknown_202EE00;
-extern Entity *gLeaderPointer;
-
-extern const u8 *gUnknown_80F8A84;
-extern const u8 *gUnknown_80F8A6C;
-extern const u8 *gUnknown_80F8ADC;
-extern const u8 *gUnknown_80F8AB0;
-extern const u8 *gUnknown_80F8B0C;
-extern const u8 *gUnknown_80FD4B0;
-extern const u8 *gUnknown_80F8A4C;
-extern const u8 *gUnknown_80F8A28;
-extern const u8 *gUnknown_8100208;
-extern const u8 *gUnknown_80F9BD8;
-extern const u8 *gUnknown_80F9C08;
-extern const u8 *gUnknown_80F9C2C;
-extern const u8 *gUnknown_80F9BB0;
-extern const u8 *gUnknown_80FDE18;
-extern const u8 *gUnknown_80F8B24;
-extern const u8 *gTeamToolboxAPtr;
-extern const u8 *gTeamToolboxBPtr;
-extern const u8 *gFieldItemMenuGroundTextPtr;
-extern const u8 *gUnknown_80FE940;
-extern const u8 *gWhichTextPtr1;
-extern const u8 *const gFieldMenuMovesPtr;
-extern const u8 *const gFieldMenuItemsPtr;
-extern const u8 *const gFieldMenuTeamPtr;
-extern const u8 *const gFieldMenuOthersPtr;
-extern const u8 *const gFieldMenuGroundPtr;
-extern const u8 *const gUnknown_80F9174;
-extern const u8 *const gUnknown_80F9190;
-extern const u8 *const gUnknown_80F91C8;
-extern const u8 *const gUnknown_80F91E0;
-extern const u8 *const gUnknown_80F91A8;
-extern const u8 *const gUnknown_80FE954;
-
+extern void sub_806A2BC(Entity *a0, u8 a1);
+extern void SetLeaderActionToNothing(u8 a0);
+extern void sub_803E708(s32 a0, s32 a1);
+extern void sub_8047158(void);
+extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
@@ -161,27 +51,40 @@ extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern s32 gDungeonSubMenuItemsCount;
 extern const u8 gUnknown_8106B50[];
 extern void DungeonShowWindows(Windows *a0, u8 a1);
+extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
+extern void sub_8044F5C(u16 param_1, u8 param_2);
+extern void sub_8044FF0(u16 param_1);
+extern u16 sub_8044DC8(Item *param_1);
+extern bool8 sub_8046F00(Item *item);
+extern void sub_8045064(void);
+extern bool8 PosHasItem(DungeonPos *pos);
+Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1);
+
+extern u8 gUnknown_202EE00;
+extern Entity *gLeaderPointer;
 
 extern MenuInputStruct gDungeonMenu;
 
-s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
+extern const u8 *gUnknown_80F8B24;
+extern const u8 *gTeamToolboxAPtr;
+extern const u8 *gTeamToolboxBPtr;
+extern const u8 *gFieldItemMenuGroundTextPtr;
+extern const u8 *gUnknown_80FE940;
+extern const u8 *gWhichTextPtr1;
 
-void sub_8060890(DungeonPos *a0);
-bool8 sub_8060860(s32 a0);
-void sub_8060900(Entity *a0);
-s32 sub_8060800(WindowHeader *a0, s32 a1);
-void ChosenSubMenuToAction(ActionContainer *a0);
-Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1);
-
-// Could this be a start of a new file?
-static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
 static EWRAM_DATA ActionParameter sUnknownActionUnk4 = {0};
 static EWRAM_DATA s32 sUnknown_202F240 = 0;
-static UNUSED EWRAM_DATA u8 sUnused2[4] = {0};
+static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
 static EWRAM_DATA s16 sUnknown_202F248[8] = {0};
 static EWRAM_DATA s32 sUnknown_202F258 = 0;
 
 static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows *a4, WindowHeader *a5);
+static s32 sub_8060800(WindowHeader *a0, s32 a1);
+static bool8 sub_8060860(s32 a0);
+static void sub_8060890(DungeonPos *a0);
+static void sub_8060900(Entity *a0);
+static void ChosenSubMenuToAction(ActionContainer *a0);
+static s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
 
 bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0)
 {
@@ -635,7 +538,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     }
 }
 
-s32 sub_8060800(WindowHeader *a0, s32 a1)
+static s32 sub_8060800(WindowHeader *a0, s32 a1)
 {
     s32 i, r1, r2, r3;
 
@@ -665,7 +568,7 @@ s32 sub_8060800(WindowHeader *a0, s32 a1)
     return r1;
 }
 
-bool8 sub_8060860(s32 a0)
+static bool8 sub_8060860(s32 a0)
 {
     if (gDungeonMenu.unk1A <= 1 || sUnknown_202F248[a0] > 1)
         return FALSE;
@@ -673,7 +576,7 @@ bool8 sub_8060860(s32 a0)
         return TRUE;
 }
 
-void sub_8060890(DungeonPos *a0)
+static void sub_8060890(DungeonPos *a0)
 {
     s32 var = sUnknown_202F248[gDungeonMenu.unk1E];
     switch (var)
@@ -696,14 +599,7 @@ void sub_8060890(DungeonPos *a0)
     sUnknownActionUnk4.itemPos.y = a0->y;
 }
 
-extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
-extern void sub_8044F5C(u16 param_1, u8 param_2);
-extern void sub_8044FF0(u16 param_1);
-extern u16 sub_8044DC8(Item *param_1);
-extern bool8 sub_8046F00(Item *item);
-extern void sub_8045064(void);
-
-void sub_8060900(Entity *a0)
+static void sub_8060900(Entity *a0)
 {
     u16 val_sub8044DC8;
     Item *item = sub_8044CC8(a0, &sUnknownActionUnk4, 0xA);
@@ -889,7 +785,7 @@ void sub_8060900(Entity *a0)
     sub_8045064();
 }
 
-void ChosenSubMenuToAction(ActionContainer *a0)
+static void ChosenSubMenuToAction(ActionContainer *a0)
 {
     SetMonsterActionFields(a0, gUnknown_202EE44[gDungeonMenu.menuIndex].unk0);
     a0->actionParameters[0] = sUnknownActionUnk4;
@@ -912,9 +808,7 @@ void sub_8060D24(UNUSED ActionContainer *a0)
     sub_803EAF0(0, NULL);
 }
 
-extern bool8 PosHasItem(DungeonPos *pos);
-
-s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
+static s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
 {
     s32 i;
     s32 count = 0;
@@ -943,6 +837,3 @@ s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
 
     return count;
 }
-
-
-

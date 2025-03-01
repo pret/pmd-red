@@ -149,7 +149,9 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
     .include "src/dungeon_message.o"
     .include "src/dungeon_move.o"
     .include "src/dungeon_main.o"
-    .include "src/code_805D8C8_2.o"
+	.space 0x4
+    .include "src/dungeon_menu_items.o"
+	.space 0x4
     .include "src/code_805D8C8_3.o"
 
 gUnknown_202F268: /* 202F268 (sub_8062500) */

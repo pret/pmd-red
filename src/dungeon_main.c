@@ -43,6 +43,7 @@
 #include "code_8044CC8.h"
 #include "code_801B3C0.h"
 #include "dungeon_capabilities.h"
+#include "dungeon_menu_items.h"
 #include "constants/dungeon.h"
 #include "constants/status.h"
 #include "constants/tactic.h"
@@ -84,12 +85,9 @@ bool8 sub_8094C48(void);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
 bool8 sub_8044B28(void);
-bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
-bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1);
-void sub_8060D24(UNUSED ActionContainer *a0);
 bool8 ShowDungeonTeamMenu(Entity *a0);
 void sub_8062D8C(ActionContainer *a0);
 void sub_80637E8(ActionContainer *a0);
@@ -105,6 +103,17 @@ void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_80643AC(Entity *pokemon);
 extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4);
+extern void GetWeatherName(u8 *dst, u8 weatherId);
+extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
+extern Entity *sub_80696A8(Entity *a0);
+extern u8 sub_806A538(s32);
+extern void sub_803EAF0(u32, u8 *);
+extern void sub_803F508(Entity *);
+extern void sub_8041AD0(Entity *pokemon);
+extern void sub_8041AE0(Entity *pokemon);
+extern void sub_807EC28(bool8);
+extern void PlayDungeonCursorSE(u8 param_1);
+extern const u8 *GetCurrentDungeonName(void);
 
 extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
@@ -129,7 +138,6 @@ extern const u8 *gTeamToolboxBPtr;
 extern const u8 *gFieldItemMenuGroundTextPtr;
 extern const u8 *gUnknown_80FE940;
 extern const u8 *gWhichTextPtr1;
-
 extern const u8 *const gFieldMenuMovesPtr;
 extern const u8 *const gFieldMenuItemsPtr;
 extern const u8 *const gFieldMenuTeamPtr;
@@ -141,19 +149,6 @@ extern const u8 *const gUnknown_80F91C8;
 extern const u8 *const gUnknown_80F91E0;
 extern const u8 *const gUnknown_80F91A8;
 extern const u8 *const gUnknown_80FE954;
-
-const u8 *GetCurrentDungeonName(void);
-void GetWeatherName(u8 *dst, u8 weatherId);
-
-extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
-extern Entity *sub_80696A8(Entity *a0);
-extern u8 sub_806A538(s32);
-extern void sub_803EAF0(u32, u8 *);
-extern void sub_803F508(Entity *);
-extern void sub_8041AD0(Entity *pokemon);
-extern void sub_8041AE0(Entity *pokemon);
-extern void sub_807EC28(bool8);
-extern void PlayDungeonCursorSE(u8 param_1);
 
 extern MenuInputStruct gDungeonMenu;
 extern s32 gTeamMenuChosenId;
@@ -1675,5 +1670,3 @@ bool8 DungeonGiveNameToRecruitedMon(u8 *a0)
 
     return FALSE;
 }
-
-
