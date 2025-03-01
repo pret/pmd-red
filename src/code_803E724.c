@@ -40,7 +40,7 @@ extern struct DungeonPalFile *gDungeonNameBannerPalette;
 extern struct DungeonPalFile *gUnknown_202EC94;
 extern RGB gUnknown_202ECA4[];
 extern u8 gUnknown_203B40C;
-extern MenuInputStruct gUnknown_202EE10;
+extern MenuInputStruct gDungeonMenu;
 extern SpriteOAM gUnknown_202EDDC;
 
 extern const u32 gUnknown_80F6490[];
@@ -345,15 +345,15 @@ void sub_803EAF0(u32 a0, u8 *a1)
 
 void sub_803EC94(void)
 {
-    gUnknown_202EE10.unk1E = 0;
-    gUnknown_202EE10.unk20 = 0;
-    gUnknown_202EE10.unkC = 0;
-    gUnknown_202EE10.unkE = 0;
-    gUnknown_202EE10.unk14.x = 0;
-    sub_801317C(&gUnknown_202EE10.unk28);
+    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.unkC = 0;
+    gDungeonMenu.unkE = 0;
+    gDungeonMenu.unk14.x = 0;
+    sub_801317C(&gDungeonMenu.unk28);
 }
 
-void sub_803ECB4(Windows *a0, bool8 a1)
+void DungeonShowWindows(Windows *a0, bool8 a1)
 {
     gUnknown_202EDD0 = 10;
     sub_8052210(0);

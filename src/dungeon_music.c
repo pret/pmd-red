@@ -10,7 +10,7 @@
 #include "text_util.h"
 
 
-extern MenuInputStruct gUnknown_202EE10;
+extern MenuInputStruct gDungeonMenu;
 
 extern u8 *gUnknown_80FE6F4[];
 extern u8 gUnknown_810AC60; // 0xC
@@ -140,7 +140,7 @@ bool8 sub_8083C88(u8 param_1)
 
 void PlayDungeonCursorSE(bool8 checkMenuEntriesCount)
 {
-  if ((!checkMenuEntriesCount) || (gUnknown_202EE10.unk1A > 1)) {
+  if ((!checkMenuEntriesCount) || (gDungeonMenu.unk1A > 1)) {
     PlayFanfareSE(0x12d,MAX_VOLUME);
   }
 }

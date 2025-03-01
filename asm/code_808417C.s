@@ -55,7 +55,7 @@ sub_80841EC:
 	strh r0, [r1, 0xA]
 	mov r0, sp
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	ldr r0, _0808426C
 	ldr r0, [r0]
 	ldr r1, _08084270
@@ -98,7 +98,7 @@ _08084290:
 	strb r0, [r4]
 	mov r0, sp
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	b _08084290
 	.align 2, 0
 _080842B8: .4byte gUnknown_80FE6E8

@@ -6,152 +6,6 @@
   	.text
 
 
-	thumb_func_start sub_8063698
-sub_8063698:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	mov r8, r0
-	lsls r1, 24
-	lsrs r6, r1, 24
-	lsls r2, 24
-	lsrs r7, r2, 24
-	ldr r4, [r0, 0x70]
-	ldr r0, _080636E8
-	ldr r0, [r0]
-	lsls r0, 3
-	movs r1, 0x8C
-	lsls r1, 1
-	adds r0, r1
-	adds r5, r4, r0
-	ldr r1, _080636EC
-	movs r0, 0
-	str r0, [r1]
-	ldrb r0, [r4, 0x7]
-	cmp r0, 0
-	beq _080636FA
-	cmp r7, 0
-	beq _080636D0
-	movs r0, 0x14
-	movs r1, 0
-	bl sub_8044F5C
-_080636D0:
-	ldrb r1, [r5]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08063702
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _080636F0
-	movs r0, 0x33
-	b _080636F2
-	.align 2, 0
-_080636E8: .4byte gUnknown_202F2D8
-_080636EC: .4byte gUnknown_202EE6C
-_080636F0:
-	movs r0, 0x1E
-_080636F2:
-	movs r1, 0
-	bl sub_8044F5C
-	b _08063702
-_080636FA:
-	movs r0, 0x1F
-	movs r1, 0
-	bl sub_8044F5C
-_08063702:
-	cmp r6, 0
-	beq _08063716
-	movs r0, 0x20
-	movs r1, 0
-	bl sub_8044F5C
-	movs r0, 0x21
-	movs r1, 0
-	bl sub_8044F5C
-_08063716:
-	movs r0, 0x1D
-	movs r1, 0
-	bl sub_8044F5C
-	cmp r6, 0
-	bne _0806372A
-	movs r0, 0x20
-	bl sub_8044FF0
-	b _08063754
-_0806372A:
-	ldr r5, _080637A0
-	ldr r1, [r5]
-	adds r0, r4, 0
-	bl sub_8063C88
-	lsls r0, 24
-	cmp r0, 0
-	bne _08063740
-	movs r0, 0x20
-	bl sub_8044FF0
-_08063740:
-	ldr r1, [r5]
-	adds r0, r4, 0
-	bl sub_8063DD4
-	lsls r0, 24
-	cmp r0, 0
-	bne _08063754
-	movs r0, 0x21
-	bl sub_8044FF0
-_08063754:
-	ldr r5, _080637A0
-	ldr r1, [r5]
-	adds r0, r4, 0
-	bl sub_8063DD4
-	lsls r0, 24
-	cmp r0, 0
-	bne _0806376A
-	movs r0, 0x21
-	bl sub_8044FF0
-_0806376A:
-	cmp r7, 0
-	beq _08063792
-	movs r0, 0
-	ldr r1, [r5]
-	cmp r1, 0x3
-	bgt _08063788
-	mov r0, r8
-	movs r2, 0x1
-	bl CanAIUseMove
-	lsls r0, 24
-	lsrs r0, 24
-	negs r1, r0
-	orrs r1, r0
-	lsrs r0, r1, 31
-_08063788:
-	cmp r0, 0
-	bne _08063792
-	movs r0, 0x14
-	bl sub_8044FF0
-_08063792:
-	bl sub_8045064
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080637A0: .4byte gUnknown_202F2D8
-	thumb_func_end sub_8063698
-
-	thumb_func_start sub_80637A4
-sub_80637A4:
-	push {lr}
-	adds r2, r1, 0
-	ldr r1, _080637B8
-	movs r3, 0x18
-	ldrsh r1, [r1, r3]
-	bl sub_80637BC
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080637B8: .4byte gUnknown_202EE10
-	thumb_func_end sub_80637A4
-
 	thumb_func_start sub_80637BC
 sub_80637BC:
 	push {r4,r5,lr}
@@ -304,7 +158,7 @@ _08063898:
 	strh r7, [r6, 0x1C]
 	mov r0, sp
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	ldr r0, [sp, 0x78]
 	adds r1, r0, r4
 	lsls r1, 3
@@ -345,7 +199,7 @@ _0806392C:
 	movs r7, 0x2
 	b _080639AE
 	.align 2, 0
-_0806393C: .4byte gUnknown_202EE10
+_0806393C: .4byte gDungeonMenu
 _08063940: .4byte gUnknown_2027370
 _08063944: .4byte gUnknown_202EE38
 _08063948: .4byte gRealInputs
@@ -447,7 +301,7 @@ sub_80639E4:
 	str r0, [r4, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	movs r0, 0
 	bl sub_80073B8
 	ldr r0, _08063A64
@@ -492,7 +346,7 @@ _08063A5C: .4byte gUnknown_202F278
 _08063A60: .4byte gUnknown_8106CC8
 _08063A64: .4byte gFormatBuffer_Monsters
 _08063A68: .4byte gUnknown_8106CCC
-_08063A6C: .4byte gUnknown_202EE10
+_08063A6C: .4byte gDungeonMenu
 	thumb_func_end sub_80639E4
 
 	thumb_func_start sub_8063A70
@@ -1151,7 +1005,7 @@ _08063F76:
 	b _08063FB2
 	.align 2, 0
 _08063F80: .4byte gUnknown_202F2D8
-_08063F84: .4byte gUnknown_202EE10
+_08063F84: .4byte gDungeonMenu
 _08063F88: .4byte gRealInputs
 _08063F8C:
 	movs r0, 0x8
@@ -1187,7 +1041,7 @@ _08063FB2:
 	str r0, [r1]
 	b _080640FA
 	.align 2, 0
-_08063FD0: .4byte gUnknown_202EE10
+_08063FD0: .4byte gDungeonMenu
 _08063FD4:
 	bl PlayDungeonStartButtonSE
 	movs r4, 0x2
@@ -1217,7 +1071,7 @@ _08064008:
 	bl sub_8064310
 	mov r0, sp
 	movs r1, 0x16
-	bl sub_805FC30
+	bl CreateDungeonMenuSubWindow
 	adds r4, r5, 0
 	ldr r6, _0806408C
 	adds r5, 0x2A
@@ -1315,7 +1169,7 @@ _080640CE:
 	bl sub_8063E30
 	b _08063EE0
 	.align 2, 0
-_080640E4: .4byte gUnknown_202EE10
+_080640E4: .4byte gDungeonMenu
 _080640E8:
 	cmp r0, 0x2
 	bne _080640FA
@@ -1574,7 +1428,7 @@ _08064262:
 	stm r1!, {r2,r3,r7}
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	adds r0, r6, 0
 	movs r1, 0
 	bl sub_80137B0
@@ -1599,7 +1453,7 @@ _08064262:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064304: .4byte gUnknown_202EE10
+_08064304: .4byte gDungeonMenu
 _08064308: .4byte gUnknown_202F2D8
 _0806430C: .4byte gFormatBuffer_Monsters
 	thumb_func_end sub_8064228
@@ -1771,7 +1625,7 @@ _080643F0:
 	strh r4, [r5, 0xA]
 	mov r0, sp
 	movs r1, 0x16
-	bl sub_805FC30
+	bl CreateDungeonMenuSubWindow
 _0806445C:
 	adds r0, r5, 0
 	bl AddMenuCursorSprite
@@ -1823,7 +1677,7 @@ _080644B2:
 	movs r4, 0x2
 	b _0806452A
 	.align 2, 0
-_080644C8: .4byte gUnknown_202EE10
+_080644C8: .4byte gDungeonMenu
 _080644CC: .4byte gRealInputs
 _080644D0:
 	movs r2, 0x18
@@ -1891,7 +1745,7 @@ _0806453C:
 	bx r0
 	.align 2, 0
 _08064554: .4byte gUnknown_202EE3A
-_08064558: .4byte gUnknown_202EE10
+_08064558: .4byte gDungeonMenu
 	thumb_func_end sub_80643AC
 
 	thumb_func_start sub_806455C
@@ -1908,7 +1762,7 @@ sub_806455C:
 	strb r1, [r2, 0x2]
 	strb r5, [r2, 0x3]
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	movs r0, 0
 	bl sub_80073B8
 	movs r1, 0
@@ -2073,7 +1927,7 @@ _080646B8:
 _080646C4:
 	ldr r0, [sp, 0xE8]
 	movs r1, 0
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	adds r0, r4, 0
 	bl GetTrapData
 	adds r4, r0, 0
@@ -2298,7 +2152,7 @@ _08064834:
 	strh r4, [r5, 0xA]
 	mov r0, sp
 	movs r1, 0x16
-	bl sub_805FC30
+	bl CreateDungeonMenuSubWindow
 _080648A0:
 	adds r0, r5, 0
 	bl AddMenuCursorSprite
@@ -2350,7 +2204,7 @@ _080648F6:
 	movs r4, 0x2
 	b _0806496E
 	.align 2, 0
-_0806490C: .4byte gUnknown_202EE10
+_0806490C: .4byte gDungeonMenu
 _08064910: .4byte gRealInputs
 _08064914:
 	movs r2, 0x18
@@ -2418,7 +2272,7 @@ _08064980:
 	bx r0
 	.align 2, 0
 _08064998: .4byte gUnknown_202EE3A
-_0806499C: .4byte gUnknown_202EE10
+_0806499C: .4byte gDungeonMenu
 	thumb_func_end ShowDungeonStairsMenu
 
 	thumb_func_start sub_80649A0
@@ -2434,7 +2288,7 @@ sub_80649A0:
 	strb r1, [r2, 0x2]
 	strb r3, [r2, 0x3]
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	movs r0, 0
 	bl sub_80073B8
 	bl GetFloorType
@@ -2566,7 +2420,7 @@ _08064A58:
 	strb r0, [r1, 0x3]
 	ldr r0, [sp, 0xE4]
 	movs r1, 0
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	bl GetFloorType
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2799,7 +2653,7 @@ _08064C8C:
 	.align 2, 0
 _08064C94: .4byte gDungeon
 _08064C98: .4byte gUnknown_202F2E0
-_08064C9C: .4byte gUnknown_202EE10
+_08064C9C: .4byte gDungeonMenu
 _08064CA0: .4byte gRealInputs
 _08064CA4:
 	bl PlayDungeonCancelSE
@@ -2896,7 +2750,7 @@ _08064D4C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064D68: .4byte gUnknown_202EE10
+_08064D68: .4byte gDungeonMenu
 _08064D6C: .4byte gUnknown_202F2E0
 _08064D70: .4byte gDungeon
 	thumb_func_end ShowDungeonOthersMenu
@@ -2955,7 +2809,7 @@ _08064DDA:
 	bl PlayDungeonConfirmationSE
 	b _08064DFE
 	.align 2, 0
-_08064DE0: .4byte gUnknown_202EE10
+_08064DE0: .4byte gDungeonMenu
 _08064DE4: .4byte gRealInputs
 _08064DE8:
 	movs r0, 0x2
@@ -2991,7 +2845,7 @@ _08064DFE:
 	bl sub_8064E68
 	b _08064E40
 	.align 2, 0
-_08064E2C: .4byte gUnknown_202EE10
+_08064E2C: .4byte gDungeonMenu
 _08064E30: .4byte gGameOptionsRef
 _08064E34: .4byte gUnknown_202F2E8
 _08064E38:
@@ -3076,7 +2930,7 @@ _08064EC2:
 	bl sub_8065A8C
 	b _08064F2E
 	.align 2, 0
-_08064EDC: .4byte gUnknown_202EE10
+_08064EDC: .4byte gDungeonMenu
 _08064EE0: .4byte gRealInputs
 _08064EE4:
 	movs r0, 0x10
@@ -3131,7 +2985,7 @@ _08064F30:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08064F4C: .4byte gUnknown_202EE10
+_08064F4C: .4byte gDungeonMenu
 	thumb_func_end sub_8064E68
 
 	thumb_func_start sub_8064F50
@@ -3191,7 +3045,7 @@ _08064FAA:
 	bl sub_8065A8C
 	b _0806501C
 	.align 2, 0
-_08064FC8: .4byte gUnknown_202EE10
+_08064FC8: .4byte gDungeonMenu
 _08064FCC: .4byte gRealInputs
 _08064FD0:
 	movs r0, 0x10
@@ -3247,7 +3101,7 @@ _0806501E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806503C: .4byte gUnknown_202EE10
+_0806503C: .4byte gDungeonMenu
 	thumb_func_end sub_8064F50
 
 	thumb_func_start sub_8065040
@@ -3374,7 +3228,7 @@ _0806512C:
 	bl PlayDungeonConfirmationSE
 	b _08065152
 	.align 2, 0
-_08065134: .4byte gUnknown_202EE10
+_08065134: .4byte gDungeonMenu
 _08065138: .4byte gRealInputs
 _0806513C:
 	movs r0, 0x2
@@ -3406,7 +3260,7 @@ _08065152:
 	bl sub_80651D0
 	b _08065184
 	.align 2, 0
-_08065178: .4byte gUnknown_202EE10
+_08065178: .4byte gDungeonMenu
 _0806517C:
 	cmp r0, 0x1
 	bne _08065184
@@ -3613,7 +3467,7 @@ _080652D2:
 	mov r1, r9
 	strh r1, [r0, 0x8]
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_80137B0
@@ -3693,7 +3547,7 @@ _080652D2:
 	bl PrintFormattedStringOnWindow
 	b _0806540E
 	.align 2, 0
-_080653D0: .4byte gUnknown_202EE10
+_080653D0: .4byte gDungeonMenu
 _080653D4: .4byte gUnknown_202F2E0
 _080653D8: .4byte gDungeon
 _080653DC: .4byte gUnknown_80FE8F8
@@ -3738,7 +3592,7 @@ _0806540E:
 	bx r0
 	.align 2, 0
 _08065440: .4byte gUnknown_80FEA44
-_08065444: .4byte gUnknown_202EE10
+_08065444: .4byte gDungeonMenu
 _08065448: .4byte gUnknown_80FEA50
 	thumb_func_end sub_8065250
 
@@ -3824,7 +3678,7 @@ sub_806544C:
 	mov r2, r9
 	strh r2, [r0, 0x8]
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_80137B0
@@ -3873,7 +3727,7 @@ sub_806544C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08065568: .4byte gUnknown_202EE10
+_08065568: .4byte gDungeonMenu
 _0806556C: .4byte gUnknown_80FE8F4
 _08065570: .4byte gUnknown_80F7C50
 	thumb_func_end sub_806544C
@@ -3964,7 +3818,7 @@ CreateFieldGameOptionsMenu:
 	mov r0, r10
 	strh r1, [r0, 0x8]
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_80137B0
@@ -4021,7 +3875,7 @@ CreateFieldGameOptionsMenu:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080656AC: .4byte gUnknown_202EE10
+_080656AC: .4byte gDungeonMenu
 _080656B0: .4byte gGameOptionsTextPtr
 _080656B4: .4byte gOptionsDungeonTextPtr
 _080656B8: .4byte gOptionsOthersTextPtr
@@ -4118,7 +3972,7 @@ CreateFieldDungeonMenu:
 	strh r0, [r3, 0x8]
 	mov r0, r9
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_80137B0
@@ -4202,7 +4056,7 @@ CreateFieldDungeonMenu:
 	b _08065872
 	.align 2, 0
 _0806583C: .4byte gUnknown_8106CE8
-_08065840: .4byte gUnknown_202EE10
+_08065840: .4byte gDungeonMenu
 _08065844: .4byte gOptionsDungeonTextPtr
 _08065848: .4byte gUnknown_80FE764
 _0806584C: .4byte gUnknown_80FE788
@@ -4408,7 +4262,7 @@ CreateFieldOthersMenu:
 	mov r1, r9
 	strh r1, [r0, 0x8]
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_80137B0
@@ -4468,7 +4322,7 @@ _08065A0A:
 	bx r0
 	.align 2, 0
 _08065A78: .4byte gUnknown_8106CF4
-_08065A7C: .4byte gUnknown_202EE10
+_08065A7C: .4byte gDungeonMenu
 _08065A80: .4byte gOptionsOthersTextPtr
 _08065A84: .4byte gOptionsWindowColorPtr
 _08065A88: .4byte gUnknown_202F2E8
@@ -4740,7 +4594,7 @@ _08065C5A:
 	bl PlayDungeonConfirmationSE
 	b _08065C7E
 	.align 2, 0
-_08065C60: .4byte gUnknown_202EE10
+_08065C60: .4byte gDungeonMenu
 _08065C64: .4byte gRealInputs
 _08065C68:
 	movs r0, 0x2
@@ -4767,7 +4621,7 @@ _08065C7E:
 	bl sub_8065DBC
 	b _08065C04
 	.align 2, 0
-_08065C9C: .4byte gUnknown_202EE10
+_08065C9C: .4byte gDungeonMenu
 _08065CA0:
 	pop {r3}
 	mov r8, r3
@@ -4858,7 +4712,7 @@ sub_8065CAC:
 	mov r1, r9
 	strh r1, [r0, 0x8]
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_80137B0
@@ -4898,7 +4752,7 @@ _08065D7A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08065DB0: .4byte gUnknown_202EE10
+_08065DB0: .4byte gDungeonMenu
 _08065DB4: .4byte gUnknown_80FF770
 _08065DB8: .4byte gUnknown_80FF774
 	thumb_func_end sub_8065CAC
@@ -5015,7 +4869,7 @@ _08065E0C:
 	strh r0, [r1, 0x8]
 	add r0, sp, 0x4
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	ldr r1, _08065F30
 	movs r2, 0
 	ldrsh r0, [r1, r2]
@@ -5079,7 +4933,7 @@ _08065F16:
 	b _08065F64
 	.align 2, 0
 _08065F28: .4byte gGameOptionsRef
-_08065F2C: .4byte gUnknown_202EE10
+_08065F2C: .4byte gDungeonMenu
 _08065F30: .4byte gUnknown_2027370
 _08065F34: .4byte gUnknown_80FF774
 _08065F38: .4byte gUnknown_80FF7EC
@@ -5212,7 +5066,7 @@ _0806601C:
 	strb r1, [r0, 0x1]
 	ldr r0, _08066138
 	movs r1, 0x1
-	bl sub_803ECB4
+	bl DungeonShowWindows
 	mov r2, r8
 	strh r2, [r6, 0x1A]
 	strh r2, [r6, 0x18]
@@ -5332,7 +5186,7 @@ _0806612A:
 	mov r10, r0
 	b _08066184
 	.align 2, 0
-_08066130: .4byte gUnknown_202EE10
+_08066130: .4byte gDungeonMenu
 _08066134: .4byte gUnknown_203B43C
 _08066138: .4byte gUnknown_8106D08
 _0806613C: .4byte gUnknown_202F2F8
