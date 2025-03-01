@@ -984,7 +984,7 @@ void sub_80783C4(Entity * pokemon, Entity * target, bool8 param_3)
         if ((((EntityIsValid(entity)) && (target != entity)) &&
            (u8)(GetEntInfo(entity)->curseClassStatus.status - 2U) < 2)) {
           EndCurseClassStatus(pokemon,entity,STATUS_NONE);
-          sub_803E46C(0x2a);
+          DungeonRunFrameActions(0x2a);
         }
       }
       sub_8041D38(target);

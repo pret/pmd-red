@@ -722,7 +722,7 @@ void MoveMenuCursorDown(MenuInputStruct *param_1)
     }
 }
 
-void sub_80136E0(MenuInputStruct *param_1, u8 param_2)
+void MoveMenuCursorDownWrapAround(MenuInputStruct *param_1, u8 param_2)
 {
     param_1->unk24 = 0;
 
@@ -754,7 +754,7 @@ void MoveMenuCursorUp(MenuInputStruct *param_1)
     }
 }
 
-void sub_8013744(MenuInputStruct *param_1, u8 param_2)
+void MoveMenuCursorUpWrapAround(MenuInputStruct *param_1, u8 param_2)
 {
     param_1->unk24 = 0;
 

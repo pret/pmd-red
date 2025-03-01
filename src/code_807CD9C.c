@@ -129,7 +129,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
                 {
                     IncreaseEntityPixelPos(target,pos32.x,pos32.y);
                     if (sub_8045888(target) != 0) {
-                        sub_803E46C(0x19);
+                        DungeonRunFrameActions(0x19);
                     }
                 }
                 tile = GetTile(pos.x, pos.y);
@@ -230,7 +230,7 @@ void sub_807D068(Entity *pokemon, DungeonPos *pos)
         pokemon->unk1C.raw = sin_4096(iVar8) * 0xc;
         sub_804535C(pokemon, &local_34);
         if (sub_8045888(pokemon)) {
-            sub_803E46C(0x1a);
+            DungeonRunFrameActions(0x1a);
         }
         iVar8 = iVar8 + 0xaa;
     }
@@ -239,7 +239,7 @@ _0807D11E:
     local_34.y = posY;
     pokemon->unk1C = IntToF248(0);
     sub_804535C(pokemon,&local_34);
-    sub_803E46C(0x1a);
+    DungeonRunFrameActions(0x1a);
 }
 
 void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
@@ -283,7 +283,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
                 info->action.direction = direction & DIRECTION_MASK;
                 sub_806CE68(target,direction);
             }
-            sub_803E46C(0x22);
+            DungeonRunFrameActions(0x22);
             target->unk1C.raw += 0x800;
         }
     }
@@ -329,12 +329,12 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
                 info->action.direction = direction & DIRECTION_MASK;
                 sub_806CE68(target,direction);
             }
-            sub_803E46C(0x22);
+            DungeonRunFrameActions(0x22);
             target->unk1C.raw -= 0x400;
         } while (0 < target->unk1C.raw);
     }
     target->unk1C = IntToF248_2(0);
-    sub_803E46C(0x22);
+    DungeonRunFrameActions(0x22);
     if (flag) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCB14); // But it dropped back at the same spot!
     }
@@ -523,7 +523,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
                 }
             }
 
-            sub_803E46C(0x13);
+            DungeonRunFrameActions(0x13);
             unkAngle += 0x22;
             if (!(animFrame & 3)) {
                 var++;
@@ -587,7 +587,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2) {
 
         sub_804535C(target, 0);
         if(!sub_8045888(target)) continue;
-        sub_803E46C(0x3A);
+        DungeonRunFrameActions(0x3A);
     }
 
     sub_806A5B8(target);

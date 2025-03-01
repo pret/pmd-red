@@ -116,7 +116,7 @@ _080842C4:
 	cmp r0, 0
 	beq _08084290
 _080842DA:
-	bl sub_8083D08
+	bl PlayDungeonConfirmationSE
 	add sp, 0xC4
 	pop {r3}
 	mov r8, r3

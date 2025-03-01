@@ -217,14 +217,13 @@ u8 *sub_8044BA8(u16 param_1, u8 id)
   }
 }
 
-void sub_8044C10(u8 param_1)
+void SetLeaderActionToNothing(bool8 clearActionFields)
 {
     EntityInfo * entityInfo = GetLeaderInfo();
 
     entityInfo->action.action = ACTION_NOTHING;
 
-    if(param_1)
-    {
+    if (clearActionFields) {
         entityInfo->action.actionParameters[0].actionUseIndex = 0;
         entityInfo->action.actionParameters[1].actionUseIndex = 0;
         entityInfo->action.itemTargetPosition.x = -1;

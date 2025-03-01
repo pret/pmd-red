@@ -209,7 +209,7 @@ void sub_806CF18(Entity *entity)
 
     entityInfo = GetEntInfo(entity);
     for (i = 0; i < 100; i++) {
-        sub_803E46C(33);
+        DungeonRunFrameActions(33);
 
         if (!sub_808DA44(entityInfo->apparentID, entity->axObj.unk43_animId2))
             break;

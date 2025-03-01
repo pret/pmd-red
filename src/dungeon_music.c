@@ -138,14 +138,14 @@ bool8 sub_8083C88(u8 param_1)
   }
 }
 
-void sub_8083CE0(u8 param_1)
+void PlayDungeonCursorSE(bool8 checkMenuEntriesCount)
 {
-  if ((param_1 == 0) || (1 < gUnknown_202EE10.unk1A)) {
+  if ((!checkMenuEntriesCount) || (gUnknown_202EE10.unk1A > 1)) {
     PlayFanfareSE(0x12d,MAX_VOLUME);
   }
 }
 
-void sub_8083D08(void)
+void PlayDungeonConfirmationSE(void)
 {
     PlayFanfareSE(0x12E, MAX_VOLUME);
 }
@@ -155,12 +155,12 @@ void sub_8083D1C(void)
     PlayFanfareSE(0x133, MAX_VOLUME);
 }
 
-void sub_8083D30(void)
+void PlayDungeonCancelSE(void)
 {
     PlayFanfareSE(0x12F, MAX_VOLUME);
 }
 
-void sub_8083D44(void)
+void PlayDungeonStartButtonSE(void)
 {
     PlayFanfareSE(0x130, MAX_VOLUME);
 }

@@ -125,7 +125,7 @@ static bool8 xxx_dungeon_80442D0(bool8 param_1)
             if ((UseAttack(0) == 0) &&
                 ((gDungeon->unk644.unk28 != 0 ||
                 (gDungeon->unk644.unk2F != 0)))) {
-                sub_803E46C(0xc);
+                DungeonRunFrameActions(0xc);
             }
             GetEntInfo(entity)->speedStageChanged = FALSE;
             if (sub_8044B28()) return FALSE;

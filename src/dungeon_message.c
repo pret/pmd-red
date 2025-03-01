@@ -36,11 +36,11 @@ extern void sub_803EAF0(s32, s32);
 extern void sub_8040238(void);
 extern void sub_8083E28(void);
 extern u32 sub_8014140(s32 a0, const void *a1);
-extern void sub_8083D30(void);
-extern void sub_8083D08(void);
+extern void PlayDungeonCancelSE(void);
+extern void PlayDungeonConfirmationSE(void);
 extern void sub_8007334(s32 a0);
 extern void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
-extern void sub_8083CE0(u8 param_1);
+extern void PlayDungeonCursorSE(u8 param_1);
 
 extern u32 gUnknown_202EDD0;
 extern u8 gUnknown_203B40C;
@@ -93,7 +93,7 @@ void sub_8052210(bool8 a0)
 
     if (a0 && gUnknown_202EDD0 == 3) {
         sub_803EAF0(0, 0);
-        sub_803E46C(11);
+        DungeonRunFrameActions(11);
     }
 }
 
@@ -196,7 +196,7 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2)
             if (val != gDungeon->unk1BDD4.unk1C062) {
                 break;
             }
-            sub_803E46C(0);
+            DungeonRunFrameActions(0);
         }
 
         if (*str == '\0')
@@ -305,7 +305,7 @@ void sub_80526D0(s32 r0)
 {
     struct UnkStructDungeon1BDD4 *strPtr = &gDungeon->unk1BDD4;
     while (strPtr->unk1C06C != 0 || gDungeon->unk1BDD4.unk1C060 != gDungeon->unk1BDD4.unk1C062) {
-        sub_803E46C(r0);
+        DungeonRunFrameActions(r0);
     }
 }
 
@@ -322,7 +322,7 @@ void sub_8052740(s32 a0)
             break;
         if (gRealInputs.pressed & JOY_EXCL_DPAD)
             break;
-        sub_803E46C(a0);
+        DungeonRunFrameActions(a0);
     }
 }
 
@@ -333,7 +333,7 @@ void sub_8052740(s32 a0)
                                             \
     do {                                    \
         DrawDialogueBoxString();            \
-        sub_803E46C(9);                     \
+        DungeonRunFrameActions(9);                     \
         unkPrintRet = sub_80144A4(chosenMenuIndex);\
     } while (unkPrintRet != 0);             \
 }
@@ -772,7 +772,7 @@ void sub_8052FB8(const u8 *str)
                 break;
         }
         DrawDialogueBoxString();
-        sub_803E46C(9);
+        DungeonRunFrameActions(9);
     }
 
     while (r8 >= 0) {
@@ -780,12 +780,12 @@ void sub_8052FB8(const u8 *str)
             SetBGPaletteBufferColorRGB(240 + j, &gFontPalette[j], r8 / 2, NULL);
         }
         DrawDialogueBoxString();
-        sub_803E46C(9);
+        DungeonRunFrameActions(9);
         r8--;
     }
 
     ShowWindows(NULL, TRUE, TRUE);
-    sub_803E46C(9);
+    DungeonRunFrameActions(9);
     sub_8040238();
     for (j = 0; j < 8; j++) {
         SetBGPaletteBufferColorArray(240 + j, &gFontPalette[j]);
@@ -866,7 +866,7 @@ bool32 DisplayMessageLog(void)
     sub_801317C(&menuInput);
     sub_803EAF0(9, 0);
     do {
-        sub_803E46C(13);
+        DungeonRunFrameActions(13);
         unkRet = sub_8008D8C(0);
     } while (unkRet);
 
@@ -888,7 +888,7 @@ bool32 DisplayMessageLog(void)
             scroll = TRUE;
 
         if (!scroll) {
-            sub_803E46C(0xD);
+            DungeonRunFrameActions(0xD);
         }
 
         if (sMessageLogFlags & FLAG_CAN_SCROLL_UP) {
@@ -900,11 +900,11 @@ bool32 DisplayMessageLog(void)
 
         if (!sub_80048C8()) {
             if (gRealInputs.pressed & B_BUTTON || menuInput.b_button) {
-                sub_8083D30();
+                PlayDungeonCancelSE();
                 break;
             }
             else if (gRealInputs.pressed & A_BUTTON) {
-                sub_8083D08();
+                PlayDungeonConfirmationSE();
                 break;
             }
         }
@@ -972,7 +972,7 @@ static bool8 TryScrollLogUp(s32 a0)
 
         return FALSE;
     }
-    sub_8083CE0(0);
+    PlayDungeonCursorSE(0);
     sub_80073B8(0);
     msgLogString = &gDungeon->messageLogStrings[arrId];
     if (msgLogString->unk0) {
@@ -983,11 +983,11 @@ static bool8 TryScrollLogUp(s32 a0)
         PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
     }
     sub_80073E0(0);
-    sub_803E46C(0xD);
+    DungeonRunFrameActions(0xD);
 
     for (i = 0; i < 7; i++) {
         gIwramTextFunc2(0);
-        sub_803E46C(0xD);
+        DungeonRunFrameActions(0xD);
     }
 
     sMessageLogCursor--;
@@ -1022,7 +1022,7 @@ static bool8 TryScrollLogDown(s32 a0)
 
         return FALSE;
     }
-    sub_8083CE0(0);
+    PlayDungeonCursorSE(0);
     sub_80073B8(0);
     msgLogString = &gDungeon->messageLogStrings[arrId];
     if (msgLogString->unk0) {
@@ -1033,11 +1033,11 @@ static bool8 TryScrollLogDown(s32 a0)
         PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
     }
     sub_80073E0(0);
-    sub_803E46C(0xD);
+    DungeonRunFrameActions(0xD);
 
     for (i = 0; i < 7; i++) {
         gIwramTextFunc1(0);
-        sub_803E46C(0xD);
+        DungeonRunFrameActions(0xD);
     }
 
     sMessageLogCursor++;

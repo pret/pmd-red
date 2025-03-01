@@ -310,7 +310,7 @@ void sub_806A2BC(Entity *pokemon, u8 param_2)
     if (param_2 != '\0') {
       sub_804178C(1);
       while (gDungeon->unk12 < 0x3c) {
-        sub_803E46C(0x34);
+        DungeonRunFrameActions(0x34);
       }
     }
     sub_803E708(4,0x44);

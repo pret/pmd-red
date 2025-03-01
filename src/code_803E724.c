@@ -55,7 +55,7 @@ extern u8 gUnknown_20274A5;
 extern s32 gUnknown_202EDCC;
 
 extern void sub_8040A84();
-extern void sub_8083D44(void);
+extern void PlayDungeonStartButtonSE(void);
 extern void sub_8040A84(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
@@ -320,7 +320,7 @@ void sub_803EAF0(u32 a0, u8 *a1)
             break;
         case 8:
             if (gUnknown_203B40C != 0) {
-                sub_8083D44();
+                PlayDungeonStartButtonSE();
                 sub_8052210(0);
             }
             CreateConfirmNameMenu(2, a1);
@@ -328,13 +328,13 @@ void sub_803EAF0(u32 a0, u8 *a1)
         case 9:
             if (gUnknown_203B40C != 0) {
                 sub_8052210(0);
-                sub_8083D44();
+                PlayDungeonStartButtonSE();
             }
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_80F63D0, FALSE, TRUE);
             break;
         case 10:
-            sub_8083D44();
+            PlayDungeonStartButtonSE();
             break;
         case 150: // Dummy case put here to match, any value >= 150 works
             break;
@@ -394,7 +394,7 @@ void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
     for (i = 0; i < 20; i++) {
         if (gUnknown_202EDE8.unk0 == 0)
             break;
-        sub_803E46C(0x29);
+        DungeonRunFrameActions(0x29);
     }
 
     var = sub_803EF90(a0, a2);

@@ -806,7 +806,7 @@ void sub_8087144(void)
     GetEntInfo(iVar4)->unk15F = 1;
     while( TRUE ) {
         if (!sub_8085B80(auStack_4c)) break;
-        sub_803E46C(0x46);
+        DungeonRunFrameActions(0x46);
     }
     GetEntInfo(iVar2)->unk15F = 0;
     GetEntInfo(iVar3)->unk15F = 0;
@@ -909,7 +909,7 @@ void ZapdosPreFightDialogue(void)
     sub_8085B4C(&auStack_78,puStack_34,pEStack_34,1);
     GetEntInfo(partnerEntity)->unk15F = 1;
     while(sub_8085B80(&auStack_78)) {
-        sub_803E46C(0x46);
+        DungeonRunFrameActions(0x46);
     }
 
     GetEntInfo(partnerEntity)->unk15F = 0;
@@ -927,7 +927,7 @@ void ZapdosPreFightDialogue(void)
     pEStack_2c[0] = partnerEntity;
     sub_8085B4C(&auStack_48,puStack_4c,pEStack_2c,1);
     while (sub_8085B80(&auStack_48)) {
-        sub_803E46C(0x46);
+        DungeonRunFrameActions(0x46);
     }
 
     sub_80869E4(partnerEntity,2,1,DIRECTION_NORTHEAST);
@@ -1012,7 +1012,7 @@ void ZapdosDropInEffect(Entity *zapdosEntity)
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
     GetEntInfo(zapdosEntity)->unk174 = IntToF248_2(iVar1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(0x1e,0x46);
 }
@@ -1026,20 +1026,20 @@ void ZapdosScreenFlash(s32 numFlashes)
     for(index = 250; index > 199; index -= 10)
     {
       SetDungeonBGColorRGB(index,index,index / 2,1,1);
-      sub_803E46C(0x46);
+      DungeonRunFrameActions(0x46);
     }
   }
   if (1 < numFlashes) {
     for(index = 250; index > 199; index -= 10)
     {
       SetDungeonBGColorRGB(index,index,index / 2,1,1);
-      sub_803E46C(0x46);
+      DungeonRunFrameActions(0x46);
     }
   }
   for(index = 250; index >= 0; index -= 10)
   {
     SetDungeonBGColorRGB(index,index,index / 4,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_8085EB0();
 }
@@ -1261,7 +1261,7 @@ void MoltresDropInEffect(Entity * moltresEntity)
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 5)
   {
     GetEntInfo(moltresEntity)->unk174 = IntToF248_2(iVar1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
 }
 
@@ -1296,13 +1296,13 @@ void MoltresScreenFlash2(s32 xArg, s32 yArg)
 
     for (i = 250; i >= 20; i -= 10) {
         SetDungeonBGColorRGB(i, 0, 0, 1, 1);
-        sub_803E46C(0x46);
+        DungeonRunFrameActions(0x46);
     }
     sub_803E708(0xA, 0x46);
 
     for (i = 250; i >= 0; i -= 10) {
         SetDungeonBGColorRGB(i, 0, 0, 1, 1);
-        sub_803E46C(0x46);
+        DungeonRunFrameActions(0x46);
     }
     sub_803E708(0xA, 0x46);
 
@@ -1319,14 +1319,14 @@ void MoltresScreenFlash3(void)
   for(iVar1 = 250; iVar1 > 9; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(0x1e,0x46);
   PlaySoundEffect(0x1ed);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(0x1e,0x46);
   sub_8085EB0();
@@ -1339,7 +1339,7 @@ void MoltresScreenDarken(void)
   for(iVar1 = 0; iVar1 >= -80; iVar1 -= 8)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,0,0);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
 }
 
@@ -1555,7 +1555,7 @@ void sub_8088484(Entity *param_1)
   {
     GetEntInfo(param_1)->unk174 = IntToF248_2(iVar1);
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1 / 2,1,0);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
 }
 
@@ -1567,19 +1567,19 @@ void ArticunoScreenFlash(void)
   for(iVar1 = 250; iVar1 > 0x95; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1 / 2,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(4,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(0,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(4,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1 / 2,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(4,0x46);
   sub_8085EB0();
@@ -1592,7 +1592,7 @@ void sub_8088574(void)
   for(iVar1 = 0; iVar1 <= 80; iVar1 += 8)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,0,0);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
 }
 
@@ -1884,7 +1884,7 @@ void SceneGroudonMovement(Entity * groudonEntity)
     if ((iVar1 - 10U < 0xc) || (iVar1 > 0x1f)) {
       IncreaseEntityPixelPos(groudonEntity,0,0x100);
     }
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_80856C8(groudonEntity,groudonEntity->pos.x,groudonEntity->pos.y + 1);
   sub_80861D4(groudonEntity,0xf,DIRECTION_SOUTH);
@@ -1901,21 +1901,21 @@ void GroudonScreenFlash(void)
   for(iVar1 = 250; iVar1 > 0x95; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
 
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,0,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
 
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   sub_8085EB0();
@@ -1928,21 +1928,21 @@ void GroudonScreenFlash2(void)
   for(iVar1 = 250; iVar1 > 0x95; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
 
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,0,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
 
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1 / 2,iVar1 / 2,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   sub_8085EB0();
@@ -2160,7 +2160,7 @@ void sub_80891F0(void)
   for(iVar1 = 0; iVar1 < 0x30; iVar1++)
   {
     sub_80855E4(sub_808919C);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_80855E4(sub_80891D0);
 }
@@ -2215,7 +2215,7 @@ void sub_8089294(void)
   for(iVar1 = 0; iVar1 <= 0x77; iVar1++)
   {
     sub_80855E4(sub_8089224);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_80855E4(sub_80891D0);
 }
@@ -2377,7 +2377,7 @@ void RayquazaDropInEffect(Entity *rayquazaEntity)
     }
     if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(rayquazaEntity)->unk174 = iVar2;
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   GetEntInfo(rayquazaEntity)->unk174 = IntToF248_2(0);
 }
@@ -2390,19 +2390,19 @@ void RayquazaScreenFlash(void)
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1 / 2, iVar1, iVar1 / 2, 1, 1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1 / 2, iVar1, 0, 1, 1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1 / 2, iVar1, iVar1 / 2, 1, 1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   sub_8085EB0();
@@ -2650,7 +2650,7 @@ void MewtwoDropInEffect(Entity *mewtwoEntity)
     }
     if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(mewtwoEntity)->unk174 = iVar2;
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   GetEntInfo(mewtwoEntity)->unk174 = IntToF248_2(0);
 }
@@ -2663,19 +2663,19 @@ void MewtwoScreenFlash(void)
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,0,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   sub_8085EB0();
@@ -2792,19 +2792,19 @@ void EnteiScreenFlash(void)
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1, iVar1 / 2, iVar1 / 2, 1, 1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1, 0, 0, 1, 1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1, iVar1 / 2, iVar1 / 2, 1, 1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   sub_8085EB0();
@@ -2947,19 +2947,19 @@ void RaikouScreenFlash(void)
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   sub_8085EB0();
@@ -3109,7 +3109,7 @@ void sub_808A528(Entity * param_1)
     }
     if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(param_1)->unk174 = iVar2;
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   GetEntInfo(param_1)->unk174 = IntToF248_2(0);
 }
@@ -3122,19 +3122,19 @@ void SuicuneScreenFlash(void)
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   sub_8085EB0();
@@ -3287,7 +3287,7 @@ void HoOhDropInEffect(Entity * param_1)
     }
     if (F248LessThanInt(iVar2, 0)) break;
     GetEntInfo(param_1)->unk174 = iVar2;
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   GetEntInfo(param_1)->unk174 = IntToF248_2(0);
 }
@@ -3300,19 +3300,19 @@ void HoOhScreenFlash(void)
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   sub_8085EB0();
@@ -3442,13 +3442,13 @@ void LatiosScreenFlash(void)
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
   }
   sub_803E708(10,70);
   sub_8085EB0();
@@ -4073,21 +4073,21 @@ void JirachiWishGrantFlash(void)
   for(iVar1 = 0xFA; iVar1 > 0x95; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
 
   for(iVar1 = 0xFA; iVar1 > 0xC7; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
 
   for(iVar1 = 0xFA; iVar1 >= 0; iVar1 -= 10)
   {
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   sub_8085EB0();
@@ -4130,7 +4130,7 @@ void JirachiDropInEffect(Entity *jirachiEntity)
     }
     if (F248LessThanInt(iVar1, 0)) break;
     GetEntInfo(jirachiEntity)->unk174 = iVar1;
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   GetEntInfo(jirachiEntity)->unk174 = IntToF248_2(0);
 }
@@ -4312,17 +4312,17 @@ void LugiaScreenFlash(void)
   PlaySoundEffect(0x1f6);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
     SetDungeonBGColorRGB(0,0,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
     SetDungeonBGColorRGB(0,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
     SetDungeonBGColorRGB(0,0,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   sub_8085EB0();
@@ -4336,24 +4336,24 @@ void LugiaScreenFlash2(void)
 
   for(iVar1 = 0; iVar1 < 200; iVar1 += 100){
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
 
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 100){
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
 
   sub_803E708(4,0x46);
 
   for(iVar1 = 0; iVar1 < 200; iVar1 += 100){
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
 
   for(iVar1 = 200; iVar1 >= 0; iVar1 -= 100){
     SetDungeonBGColorRGB(iVar1,iVar1,iVar1,1,0);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
 
   sub_803E708(10,0x46);
@@ -4365,7 +4365,7 @@ void sub_808C0CC(void)
   gDungeonBrightness = 0x1f;
   SetDungeonBGColorRGB(0,0,0,1,1);
   BgColorCallNullsub4();
-  sub_803E46C(0x46);
+  DungeonRunFrameActions(0x46);
   gDungeon->unk7 = 0;
   LugiaScreenFlash();
 }
@@ -4465,17 +4465,17 @@ void KyogreScreenFlash(void)
   PlaySoundEffect(0x1f8);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
     SetDungeonBGColorRGB(0,0,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
     SetDungeonBGColorRGB(0,iVar1,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
     SetDungeonBGColorRGB(0,0,iVar1,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   sub_8085EB0();
@@ -4486,7 +4486,7 @@ void sub_808C360(void)
   gDungeonBrightness = 0x1f;
   SetDungeonBGColorRGB(0,0,0,1,1);
   BgColorCallNullsub4();
-  sub_803E46C(0x46);
+  DungeonRunFrameActions(0x46);
   gDungeon->unk7 = 0;
   KyogreScreenFlash();
 }
@@ -4552,17 +4552,17 @@ void DeoxysScreenFlash(void)
   PlaySoundEffect(0x2c1);
   for(iVar1 = 250; iVar1 > 149; iVar1 -= 10){
     SetDungeonBGColorRGB(iVar1,0,0,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 > 199; iVar1 -= 10){
     SetDungeonBGColorRGB(iVar1,iVar1,0,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   for(iVar1 = 250; iVar1 >= 0; iVar1 -= 10){
     SetDungeonBGColorRGB(iVar1,0,0,1,1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_803E708(10,0x46);
   sub_8085EB0();
@@ -4573,7 +4573,7 @@ void sub_808C550(void)
   gDungeonBrightness = 0x1f;
   SetDungeonBGColorRGB(0,0,0,1,1);
   BgColorCallNullsub4();
-  sub_803E46C(0x46);
+  DungeonRunFrameActions(0x46);
   gDungeon->unk7 = 0;
   DeoxysScreenFlash();
 }
@@ -4678,7 +4678,7 @@ void CelebiJoinDialogue(void)
                     DungeonStopBGM();
                     PlaySoundEffect(0xcc);
                     while (IsFanfareSEPlaying_2(0xcc) != 0) {
-                        sub_803E46C(0x46);
+                        DungeonRunFrameActions(0x46);
                     }
                     DungeonStartNewBGM(MUS_FRIEND_AREA_HEALING_FOREST);
                     PlaySoundEffect(0x1c7);
@@ -4751,11 +4751,11 @@ void sub_808C8E0(Entity *entity)
   sub_806CDD4(entity, 0, DIRECTION_SOUTH);
   for(iVar1 = 0; iVar1 < 16; iVar1++){
     GetEntInfo(entity)->unk174 = IntToF248_2(iVar1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   for(iVar1 = 16; iVar1 < 200; iVar1 += 4){
     GetEntInfo(entity)->unk174 = IntToF248_2(iVar1);
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
   }
   sub_8086A3C(entity);
 }
@@ -4858,7 +4858,7 @@ void MedichamRescueDialogue(void)
     for(counter = 0x17; counter >= 0; counter--)
     {
         IncreaseEntityPixelPos(medichamEntity, 0, 0x100);
-        sub_803E46C(0x46);
+        DungeonRunFrameActions(0x46);
     }
     sub_806CE68(medichamEntity, DIRECTION_SOUTH);
     sub_803E708(0x20, 0x46);
@@ -4947,7 +4947,7 @@ void SmeargleRescueDialogue(void)
     for(counter = 0x17; counter >= 0; counter--)
     {
         IncreaseEntityPixelPos(smeargleEntity, 0, 0x100);
-        sub_803E46C(0x46);
+        DungeonRunFrameActions(0x46);
     }
     sub_806CE68(smeargleEntity, DIRECTION_SOUTH);
     sub_803E708(0x20, 0x46);

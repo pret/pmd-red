@@ -899,7 +899,7 @@ void sub_8067904(Entity *entity, u16 moveId)
 
 extern void sub_80684C4(void);
 void sub_8045064(void);
-extern void sub_8083CE0(u8 param_1);
+extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_8068344(void);
 bool8 sub_8044F3C(s32 param_1);
 void sub_8068310(s32 a0, PokemonStruct1 **a1);
@@ -907,8 +907,8 @@ void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
 extern void sub_803ECB4(Windows *a0, u8 a1);
 u32 sub_8014140(s32 a0, const void *a1);
 void sub_8083D1C(void);
-void sub_8083D08(void);
-void sub_8083D30(void);
+void PlayDungeonConfirmationSE(void);
+void PlayDungeonCancelSE(void);
 void sub_806806C(PokemonStruct1 *a0);
 void sub_805FC30(Windows *a0, s32 a1);
 extern void sub_803EAF0(u32, u8 *);
@@ -1011,13 +1011,13 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                 }
 
                 r4 = sub_8014140(0, gUnknown_8106DA4);
-                sub_803E46C(0x37);
+                DungeonRunFrameActions(0x37);
                 if (r4 == 2 && r5) {
                     if (a2 - gUnknown_202F30C > 8) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
                             gIwramTextFunc1(0);
-                            sub_803E46C(0x37);
+                            DungeonRunFrameActions(0x37);
                         }
                         gUnknown_202F30C++;
                     }
@@ -1026,13 +1026,13 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                     break;
                 }
                 if (gRealInputs.repeated & DPAD_DOWN) {
-                    sub_8083CE0(1);
+                    PlayDungeonCursorSE(1);
                     if (gUnknown_202EE10.menuIndex == 7) {
                         if (a2 - gUnknown_202F30C > 8) {
                             s32 i;
                             for (i = 0; i < 6; i++) {
                                 gIwramTextFunc1(0);
-                                sub_803E46C(0x37);
+                                DungeonRunFrameActions(0x37);
                             }
                             gUnknown_202F30C++;
                         }
@@ -1040,7 +1040,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                         r10 = 7;
                         break;
                     }
-                    sub_80136E0(&gUnknown_202EE10, 0);
+                    MoveMenuCursorDownWrapAround(&gUnknown_202EE10, 0);
                 }
 
                 if (r4 == 1 && r7 != 0) {
@@ -1048,7 +1048,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                         s32 i;
                         for (i = 0; i < 6; i++) {
                             gIwramTextFunc2(0);
-                            sub_803E46C(0x37);
+                            DungeonRunFrameActions(0x37);
                         }
                         gUnknown_202F30C--;
                     }
@@ -1057,13 +1057,13 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                     break;
                 }
                 if (gRealInputs.repeated & DPAD_UP) {
-                    sub_8083CE0(1);
+                    PlayDungeonCursorSE(1);
                     if (gUnknown_202EE10.menuIndex == 0) {
                         if (gUnknown_202F30C != 0) {
                             s32 i;
                             for (i = 0; i < 6; i++) {
                                 gIwramTextFunc2(0);
-                                sub_803E46C(0x37);
+                                DungeonRunFrameActions(0x37);
                             }
                             gUnknown_202F30C--;
                         }
@@ -1071,7 +1071,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                         r10 = 0;
                         break;
                     }
-                    sub_8013744(&gUnknown_202EE10, 0);
+                    MoveMenuCursorUpWrapAround(&gUnknown_202EE10, 0);
                 }
 
                 if (sub_80048C8()) {
@@ -1084,19 +1084,19 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                     break;
                 }
                 if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
-                    sub_8083D08();
+                    PlayDungeonConfirmationSE();
                     r7 = 1;
                     break;
                 }
                 if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
-                    sub_8083D30();
+                    PlayDungeonCancelSE();
                     r7 = 2;
                     break;
                 }
             }
 
             AddMenuCursorSprite(&gUnknown_202EE10);
-            sub_803E46C(0x37);
+            DungeonRunFrameActions(0x37);
             if (r7 == 0) {
                 continue;
             }
@@ -1146,34 +1146,34 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
 
                 while (1) {
                     AddMenuCursorSprite(&gUnknown_202EE10);
-                    sub_803E46C(0x37);
+                    DungeonRunFrameActions(0x37);
 
                     if (gRealInputs.repeated & DPAD_DOWN) {
-                        sub_8083CE0(1);
-                        sub_80136E0(&gUnknown_202EE10, 1);
+                        PlayDungeonCursorSE(1);
+                        MoveMenuCursorDownWrapAround(&gUnknown_202EE10, 1);
                     }
                     if (gRealInputs.repeated & DPAD_UP) {
-                        sub_8083CE0(1);
-                        sub_8013744(&gUnknown_202EE10, 1);
+                        PlayDungeonCursorSE(1);
+                        MoveMenuCursorUpWrapAround(&gUnknown_202EE10, 1);
                     }
 
                     if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
                         if (sub_8044F3C(gUnknown_202EE10.menuIndex)) {
-                            sub_8083D08();
+                            PlayDungeonConfirmationSE();
                             r7 = 1;
                             break;
                         }
-                        sub_8083D30();
+                        PlayDungeonCancelSE();
                     }
                     if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
-                        sub_8083D30();
+                        PlayDungeonCancelSE();
                         r7 = 0;
                         break;
                     }
                 }
 
                 AddMenuCursorSprite(&gUnknown_202EE10);
-                sub_803E46C(0x37);
+                DungeonRunFrameActions(0x37);
                 if (r7 != 0) {
                     if (gUnknown_202EE10.menuIndex == 0) {
                         a3[arrId]->unk0 |= 0x8000;
@@ -1312,16 +1312,16 @@ void sub_806806C(PokemonStruct1 *a0)
             }
 
             r5 = sub_8014140(0, gUnknown_8106DA4);
-            sub_803E46C(0x1C);
+            DungeonRunFrameActions(0x1C);
             if ((gRealInputs.pressed & DPAD_RIGHT) || gUnknown_202EE10.unk28.dpad_right) {
-                sub_8083CE0(0);
+                PlayDungeonCursorSE(0);
                 if (++r7 == 4) {
                     r7 = 0;
                 }
                 break;
             }
             if ((gRealInputs.pressed & DPAD_LEFT) || gUnknown_202EE10.unk28.dpad_left) {
-                sub_8083CE0(0);
+                PlayDungeonCursorSE(0);
                 if (--r7 == -1) {
                     r7 = 3;
                 }
@@ -1332,10 +1332,10 @@ void sub_806806C(PokemonStruct1 *a0)
                 if (((gRealInputs.repeated & DPAD_DOWN) || r5 == 2) && var_C8.unk0[8] != 0) {
                     s32 i;
 
-                    sub_8083CE0(0);
+                    PlayDungeonCursorSE(0);
                     for (i = 0; i < 6; i++) {
                         gIwramTextFunc1(0);
-                        sub_803E46C(0x1C);
+                        DungeonRunFrameActions(0x1C);
                     }
                     unkStruct.unk40++;
                     break;
@@ -1343,10 +1343,10 @@ void sub_806806C(PokemonStruct1 *a0)
                 if (((gRealInputs.repeated & DPAD_UP) || r5 == 1) && unkStruct.unk40 != 0) {
                     s32 i;
 
-                    sub_8083CE0(0);
+                    PlayDungeonCursorSE(0);
                     for (i = 0; i < 6; i++) {
                         gIwramTextFunc2(0);
-                        sub_803E46C(0x1C);
+                        DungeonRunFrameActions(0x1C);
                     }
                     unkStruct.unk40--;
                     break;
@@ -1358,18 +1358,18 @@ void sub_806806C(PokemonStruct1 *a0)
             }
 
             if ((gRealInputs.pressed & A_BUTTON) || gUnknown_202EE10.unk28.a_button) {
-                sub_8083D08();
+                PlayDungeonConfirmationSE();
                 loopBreak = TRUE;
                 break;
             }
             if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
-                sub_8083D30();
+                PlayDungeonCancelSE();
                 loopBreak = TRUE;
                 break;
             }
         }
 
-        sub_803E46C(0x37);
+        DungeonRunFrameActions(0x37);
         if (loopBreak) {
             break;
         }

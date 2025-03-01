@@ -73,10 +73,10 @@ extern void sub_80637E8(ActionContainer *);
 extern void sub_8063BB4(ActionContainer *);
 extern void sub_8063CF0(ActionContainer *, u32);
 extern void sub_8063A70(ActionContainer *, u32);
-extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
+extern u8 ShowDungeonMovesMenu(Entity *, u32, u32, u32, u32);
 extern void sub_8044DF0(Entity *, u32, u32);
 extern void sub_803EAF0(u32, u32);
-extern void sub_8044C10(bool8);
+extern void SetLeaderActionToNothing(bool8);
 Entity *DrawFieldGiveItemMenu(u32, u32);
 extern void sub_8044E24(Entity *, u32, u32);
 extern void sub_804245C(Entity *, Item *);
@@ -938,13 +938,13 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
             else if (entityActionPtr->action == ACTION_UNK20) {
                 sub_803EAF0(0,0);
                 sub_8063BB4(entityActionPtr);
-                sub_8044C10(TRUE);
+                SetLeaderActionToNothing(TRUE);
                 ret = TRUE;
             }
             else if (entityActionPtr->action == ACTION_UNK21) {
                 sub_803EAF0(0,0);
                 sub_8063CF0(entityActionPtr,0);
-                sub_8044C10(TRUE);
+                SetLeaderActionToNothing(TRUE);
             }
             else if ((entityActionPtr->action == ACTION_SET_MOVE) || (entityActionPtr->action == ACTION_UNSET_MOVE)) {
                 sub_803EAF0(0,0);
@@ -957,7 +957,7 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
 
         LOOP_MIDDLE:
             ClearMonsterActionFields(entityActionPtr);
-            if (sub_8062F90(entity2,1,0,0,1) != 0) {
+            if (ShowDungeonMovesMenu(entity2,1,0,0,1) != 0) {
                 if (ret) {
                     ASM_MATCH_TRICK(ret);
                     if (DisplayDungeonYesNoMessage(0,*gUnknown_80FECA0,1) == 1) {
@@ -969,7 +969,7 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
                 }
                 else
                 {
-                    sub_8044C10(TRUE);
+                    SetLeaderActionToNothing(TRUE);
                     break;
                 }
             }

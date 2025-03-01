@@ -144,7 +144,7 @@ _0804236E:
 	cmp r5, r4
 	bgt _08042384
 	movs r0, 0x42
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 	adds r0, r6, 0
 	bl sub_800E9A8
 	lsls r0, 24

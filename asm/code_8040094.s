@@ -1527,7 +1527,7 @@ _08040CEA:
 	bl sub_800EEC8
 	bl sub_800EF64
 	movs r0, 0x58
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 	mov r0, sp
 	bl sub_800EA84
 	adds r4, r0, 0
@@ -1574,7 +1574,7 @@ _08040D68:
 _08040D6E:
 	bl sub_803EA10
 	movs r0, 0x26
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 _08040D78:
 	adds r0, r4, 0
 	bl sub_800E9A8
@@ -1876,7 +1876,7 @@ _08040FE6:
 	cmp r5, 0x77
 	bgt _08041022
 	movs r0, 0x59
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 	ldr r4, [r7, 0x40]
 	ldr r1, [sp, 0x18]
 	cmp r1, 0x9
@@ -2055,7 +2055,7 @@ sub_8041108:
 	bl sub_800EEF8
 	bl sub_800EF64
 	movs r0, 0x5A
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 	adds r0, r6, 0
 	bl sub_800E52C
 	adds r1, r7, 0
@@ -2227,7 +2227,7 @@ _0804128C:
 	bl sub_800EBC8
 	adds r4, r0, 0
 	movs r0, 0x5B
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0x6
@@ -2235,7 +2235,7 @@ _0804128C:
 	b _080412C2
 _080412BC:
 	movs r0, 0x28
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 _080412C2:
 	adds r0, r4, 0
 	bl sub_800E9A8
@@ -2558,7 +2558,7 @@ sub_8041500:
 	cmp r0, 0
 	beq _08041518
 	movs r0, 0x5C
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 	movs r0, 0x5D
 	bl sub_8052740
 _08041518:
@@ -2745,7 +2745,7 @@ _0804166C: .4byte gDungeon
 _08041670: .4byte 0x000181f2
 _08041674:
 	movs r0, 0x42
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 	adds r5, 0x1
 _0804167C:
 	cmp r5, 0x63

@@ -60,7 +60,7 @@ void sub_8042390(Entity *entity, Item *item)
         sub_8005700(asStack_24,&entity->axObj);
         uVar6 = sub_800E49C(id,&local_14,asStack_24,0,sVar1);
         for (counter = 0; counter < 1000; counter++) {
-            sub_803E46C(0x42);
+            DungeonRunFrameActions(0x42);
             if (!sub_800E9A8(uVar6)) {
                 break;
             }
@@ -88,7 +88,7 @@ void sub_804245C(Entity *entity, Item *item)
         sub_8005700(asStack_24,&entity->axObj);
         uVar6 = sub_800E49C(id,&local_14,asStack_24,1,sVar1);
         for (counter = 0; counter < 1000; counter++) {
-            sub_803E46C(0x42);
+            DungeonRunFrameActions(0x42);
             if (!sub_800E9A8(uVar6)) {
                 break;
             }
@@ -128,7 +128,7 @@ s32 sub_8042520(Entity *a0)
 
         for (i = 0; i < 6; i++) {
             sub_800E8AC(uVar4, &pos, 0, iVar8, 0);
-            sub_803E46C(66);
+            DungeonRunFrameActions(66);
             pos.x += gAdjacentTileOffsets[dir].x * 4;
             pos.y += gAdjacentTileOffsets[dir].y * 4;
             iVar8 = (pos.y - gDungeon->unk181e8.cameraPixelPos.y) / 2;
@@ -179,7 +179,7 @@ void sub_80426C8(u32 a0, u32 a1)
     sub_8042B34(a0, a1, 0x80);
 
     while (sub_8042CC0())
-        sub_803E46C(0x46);
+        DungeonRunFrameActions(0x46);
 
     sub_8042D7C();
     sub_8040238();
@@ -192,7 +192,7 @@ void sub_8042730(Entity *a0, void *unused)
 
     sub_806CDD4(a0, 8, 8);
     for (i = 0; i < 100; i++) {
-        sub_803E46C(0x51);
+        DungeonRunFrameActions(0x51);
         if ((a0->axObj.axdata.sub1.unk10 & 3) != 0 || a0->axObj.unk43_animId2 != 8)
             break;
     }
@@ -406,7 +406,7 @@ void sub_8042A84(s16 param_1, Entity *entity, u32 param_3)
     sub_803E708(param_3,0x42);
     do {
       if (entity->unk1C.raw > IntToF248_2(199.999).raw) break;
-      sub_803E46C(0x42);
+      DungeonRunFrameActions(0x42);
       entity->unk1C.raw += + r6;
       r6 += IntToF248_2(1).raw;
       iVar3 = (entity->pixelPos.y - entity->unk1C.raw) / 256;

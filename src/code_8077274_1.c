@@ -370,7 +370,7 @@ void BlindTarget(Entity *pokemon, Entity *target)
         entityInfo->blinkerClassStatus.turns = CalculateStatusTurns(target,gBlinkerTurnRange, TRUE) + 1;
         sub_8041E0C(target);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB7F4);
-        sub_803E46C(0x31);
+        DungeonRunFrameActions(0x31);
         sub_8049ED4();
         sub_8040A84();
     }
@@ -423,7 +423,7 @@ void RestoreVisionTarget(Entity *pokemon, Entity *target)
         entityInfo->blinkerClassStatus.turns = CalculateStatusTurns(target,gEyedropsTurnRange, FALSE) + 1;
         sub_8041E3C(target);
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB880);
-        sub_803E46C(0x31);
+        DungeonRunFrameActions(0x31);
         sub_8049ED4();
         sub_8040A84();
     }
@@ -691,7 +691,7 @@ void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *
         if (bVar2) {
           break;
         }
-        sub_803E46C(0x53);
+        DungeonRunFrameActions(0x53);
       }
     }
   }
@@ -1506,7 +1506,7 @@ void SendEyesightEndMessage(Entity * pokemon,Entity * target)
   entityInfo->blinkerClassStatus.status = STATUS_NONE;
   EntityUpdateStatusSprites(target);
   if (entityInfo->isTeamLeader) {
-    sub_803E46C(0x31);
+    DungeonRunFrameActions(0x31);
     sub_8049ED4();
     sub_8040A84();
   }
@@ -1734,7 +1734,7 @@ void sub_807AB38(Entity *entity, bool8 forcedMonsterHouse)
                         if (newMonster->unk1C.raw < IntToF248_2(1).raw) {
                             break;
                         }
-                        sub_803E46C(0x57);
+                        DungeonRunFrameActions(0x57);
                     }
                     newMonster->unk1C = IntToF248_2(0);
                 }

@@ -317,7 +317,7 @@ void ShowDungeonNameBanner(void)
     }
 
     CloseFile(gDungeonNameBannerFontFile);
-    sub_803E46C(2);
+    DungeonRunFrameActions(2);
 }
 
 s32 sub_803DC14(const u8 *dungName, s32 strWidth, s32 a2)

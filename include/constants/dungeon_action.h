@@ -8,8 +8,8 @@ enum DungeonAction
     ACTION_WALK = 0x2,
     ACTION_UNK5 = 0x5,
     // Switching between Pokémon in the moves menu.
-    ACTION_NEXT = 0x6,
-    ACTION_PREVIOUS = 0x7,
+    ACTION_MOVES_MENU_NEXT_MON = 0x6,
+    ACTION_MOVES_MENU_PREV_MON = 0x7,
     ACTION_PLACE_ITEM = 0x8,
     // Some actions are different between the leader and AI-controlled Pokémon.
     ACTION_PICK_UP_PLAYER = 0x9, // Picking up an item underfoot.

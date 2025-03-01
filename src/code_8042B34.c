@@ -85,7 +85,7 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
     sUnknown_203B414->unk8 = (a1 + 1) * 4;
     sub_800EE5C(gUnknown_80F6624[a0][0].unk0);
     sub_800EF64();
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
     sUnknown_203B414->unk4 = a2;
     for (i = 0; i < sUnknown_203B414->unk8; i++) {
         s32 rnd;
