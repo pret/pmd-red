@@ -76,7 +76,7 @@ extern const u8 *const gMonCringing;
 extern const u8 *const gMonParalyzed;
 extern const u8 *const gUnknown_80FC690;
 
-extern s32 gUnknown_202EE6C;
+extern s32 gDungeonSubMenuItemsCount;
 extern u32 gUnknown_202F208;
 
 extern void sub_8071DA4(Entity *);
@@ -901,7 +901,7 @@ extern void sub_80684C4(void);
 void sub_8045064(void);
 extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_8068344(void);
-bool8 sub_8044F3C(s32 param_1);
+bool8 CanSubMenuItemBeChosen(s32 param_1);
 void sub_8068310(s32 a0, PokemonStruct1 **a1);
 void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
 extern void DungeonShowWindows(Windows *a0, u8 a1);
@@ -1124,7 +1124,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
 
                 r10 = gDungeonMenu.menuIndex;
                 arrId = gUnknown_202F30C + r10;
-                gUnknown_202EE6C = 0;
+                gDungeonSubMenuItemsCount = 0;
                 sub_8044F5C(0x29, 0);
                 sub_8044F5C(0x2A, 0);
                 sub_8044F5C(0x40, 0);
@@ -1158,7 +1158,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                     }
 
                     if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
-                        if (sub_8044F3C(gDungeonMenu.menuIndex)) {
+                        if (CanSubMenuItemBeChosen(gDungeonMenu.menuIndex)) {
                             PlayDungeonConfirmationSE();
                             r7 = 1;
                             break;

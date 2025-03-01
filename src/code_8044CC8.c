@@ -23,7 +23,7 @@ typedef struct unkStr_80F7C54
 
 EWRAM_DATA unkStruct_202EE44 gUnknown_202EE44[10] = {0};
 
-extern s32 gUnknown_202EE6C;
+extern s32 gDungeonSubMenuItemsCount;
 
 extern const ItemText gActions[];
 extern u16 gUnknown_80F6964[NUM_ITEM_CATEGORIES];
@@ -159,7 +159,7 @@ void sub_8044E24(Entity *entity,int index,u32 unused)
 }
 
 // Similar to sub_8044BA8
-u8 *sub_8044EC8(s32 param_1)
+u8 *GetDungeonSubMenuItemString(s32 param_1)
 {
     u16 uVar1;
     u32 uVar3;
@@ -185,7 +185,7 @@ u8 *sub_8044EC8(s32 param_1)
     }
 }
 
-bool8 sub_8044F3C(s32 param_1)
+bool8 CanSubMenuItemBeChosen(s32 param_1)
 {
     if(param_1 < 0)
         return FALSE;
@@ -197,17 +197,17 @@ void sub_8044F5C(u16 param_1, u8 param_2)
 {
   int index;
 
-  if (gUnknown_202EE6C < 10) {
-    for(index = 0; index < gUnknown_202EE6C; index++)
+  if (gDungeonSubMenuItemsCount < 10) {
+    for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {
         if (gUnknown_202EE44[index].unk0 == param_1) {
           return;
         }
     }
-    gUnknown_202EE44[gUnknown_202EE6C].unk0 = param_1;
-    gUnknown_202EE44[gUnknown_202EE6C].unk2 = param_2;
-    gUnknown_202EE44[gUnknown_202EE6C].unk3 = TRUE;
-    gUnknown_202EE6C++;
+    gUnknown_202EE44[gDungeonSubMenuItemsCount].unk0 = param_1;
+    gUnknown_202EE44[gDungeonSubMenuItemsCount].unk2 = param_2;
+    gUnknown_202EE44[gDungeonSubMenuItemsCount].unk3 = TRUE;
+    gDungeonSubMenuItemsCount++;
   }
 }
 
@@ -215,7 +215,7 @@ s32 sub_8044FB4(u16 param_1)
 {
     int index;
 
-    for(index = 0; index < gUnknown_202EE6C; index++)
+    for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {
         if (gUnknown_202EE44[index].unk0 == param_1) {
             return index;
@@ -228,7 +228,7 @@ void sub_8044FF0(u16 param_1)
 {
     int index;
 
-    for(index = 0; index < gUnknown_202EE6C; index++)
+    for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {
         if (gUnknown_202EE44[index].unk0 == param_1) {
            gUnknown_202EE44[index].unk3 = FALSE;
@@ -269,8 +269,8 @@ void sub_8045064(void)
     unkStruct_202EE44 *jPtr;
     unkStruct_202EE44 temp;
 
-    for (i = 0; i < gUnknown_202EE6C; i++) {
-        for (j = i + 1; j < gUnknown_202EE6C; j++) {
+    for (i = 0; i < gDungeonSubMenuItemsCount; i++) {
+        for (j = i + 1; j < gDungeonSubMenuItemsCount; j++) {
             iPtr = &gUnknown_202EE44[i];
             jPtr = &gUnknown_202EE44[j];
             if ((s32)gUnknown_80F7C54[iPtr->unk0].unk0 > (s32)gUnknown_80F7C54[jPtr->unk0].unk0) {

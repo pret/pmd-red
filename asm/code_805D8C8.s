@@ -6,66 +6,7 @@
   	.text
 
 
-	thumb_func_start sub_80637BC
-sub_80637BC:
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r2, 0
-	ldr r0, _080637E0
-	lsls r1, 2
-	adds r1, r0
-	ldrh r1, [r1]
-	adds r0, r4, 0
-	bl SetMonsterActionFields
-	strb r5, [r4, 0x4]
-	ldr r0, _080637E4
-	ldr r0, [r0]
-	strb r0, [r4, 0xC]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080637E0: .4byte gUnknown_202EE44
-_080637E4: .4byte gUnknown_202F2D8
-	thumb_func_end sub_80637BC
 
-	thumb_func_start sub_80637E8
-sub_80637E8:
-	push {lr}
-	adds r3, r0, 0
-	ldr r0, _08063828
-	ldr r1, [r0]
-	ldrb r0, [r3, 0x4]
-	lsls r0, 2
-	ldr r2, _0806382C
-	adds r1, r2
-	adds r1, r0
-	ldr r0, [r1]
-	ldr r0, [r0, 0x70]
-	ldrb r1, [r3, 0xC]
-	lsls r1, 3
-	adds r1, r0, r1
-	ldr r2, _08063830
-	adds r2, r1
-	mov r12, r2
-	ldrb r2, [r2]
-	movs r1, 0x2
-	orrs r1, r2
-	mov r2, r12
-	strb r1, [r2]
-	movs r1, 0x8C
-	lsls r1, 1
-	adds r0, r1
-	ldrb r1, [r3, 0xC]
-	movs r2, 0x4
-	bl sub_8063834
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08063828: .4byte gDungeon
-_0806382C: .4byte 0x0001357c
-_08063830: .4byte 0x00000119
-	thumb_func_end sub_80637E8
 
 	thumb_func_start sub_8063834
 sub_8063834:
@@ -1115,7 +1056,7 @@ _08064058:
 _0806406E:
 	movs r1, 0x18
 	ldrsh r0, [r4, r1]
-	bl sub_8044F3C
+	bl CanSubMenuItemBeChosen
 	lsls r0, 24
 	cmp r0, 0
 	beq _08064098
@@ -1488,7 +1429,7 @@ _08064340:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064350: .4byte gUnknown_202EE6C
+_08064350: .4byte gDungeonSubMenuItemsCount
 _08064354: .4byte gUnknown_202F2D8
 	thumb_func_end sub_8064310
 
@@ -1682,7 +1623,7 @@ _080644CC: .4byte gRealInputs
 _080644D0:
 	movs r2, 0x18
 	ldrsh r0, [r5, r2]
-	bl sub_8044F3C
+	bl CanSubMenuItemBeChosen
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806450C
@@ -1820,7 +1761,7 @@ sub_80645D4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080645F4: .4byte gUnknown_202EE6C
+_080645F4: .4byte gDungeonSubMenuItemsCount
 	thumb_func_end sub_80645D4
 
 	thumb_func_start sub_80645F8
@@ -2209,7 +2150,7 @@ _08064910: .4byte gRealInputs
 _08064914:
 	movs r2, 0x18
 	ldrsh r0, [r5, r2]
-	bl sub_8044F3C
+	bl CanSubMenuItemBeChosen
 	lsls r0, 24
 	cmp r0, 0
 	beq _08064950
@@ -2353,7 +2294,7 @@ sub_8064A18:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064A38: .4byte gUnknown_202EE6C
+_08064A38: .4byte gDungeonSubMenuItemsCount
 	thumb_func_end sub_8064A18
 
 	thumb_func_start sub_8064A3C

@@ -226,7 +226,8 @@ SECTIONS {
         src/move_actions.o(.text);
         src/status_actions.o(.text);
         src/move_checks.o(.text);
-        src/code_805D8C8_1.o(.text);
+        src/dungeon_main.o(.text);
+        src/code_805D8C8_2.o(.text);
         asm/code_805D8C8.o(.text);
         src/code_8066D04.o(.text);
         src/code_805D8C8.o(.text);

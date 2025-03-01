@@ -136,7 +136,7 @@ gUnknown_202EE3A: /* 202EE3A (sub_8060E38 - sub_8065DBC) */
 
 gUnknown_202EE44: /* 202EE44 (sub_8044EC8 - sub_80647F0) */
 	.space 0x28
-gUnknown_202EE6C: /* 202EE6C (sub_8044F5C - sub_8067A80) */
+gDungeonSubMenuItemsCount: /* 202EE6C (sub_8044F5C - sub_8067A80) */
 	.space 0x4
 
 gUnknown_202EE70: /* 202EE70 (sub_804513C - sub_80828E0) */
@@ -148,7 +148,8 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
     .include "src/dungeon_generation.o"
     .include "src/dungeon_message.o"
     .include "src/dungeon_move.o"
-    .include "src/code_805D8C8_1.o"
+    .include "src/dungeon_main.o"
+    .include "src/code_805D8C8_2.o"
 
 gUnknown_202F268: /* 202F268 (sub_8062500) */
 	.space 0x8
