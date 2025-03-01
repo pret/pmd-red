@@ -116,7 +116,7 @@ void ShowTacticsMenu(ActionContainer *a0);
 void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_80643AC(Entity *pokemon);
-extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
+extern bool8 sub_8062F90(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4);
 
 extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
@@ -4114,5 +4114,362 @@ void sub_8062D8C(ActionContainer *a0)
     sub_806A2BC(entityOrg, 0);
     sub_804A728(&entityOrg->pos, 0, 1, 1);
 }
+
+extern s32 gUnknown_202F2D8;
+extern s32 sub_8044FB4(u16 param_1);
+
+void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, Windows *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
+void sub_8063698(Entity *entity, u8 a1, u8 a2);
+void sub_80637BC(ActionContainer *a0, s32 a1, s32 a2);
+void sub_80637A4(ActionContainer *a0, s32 a1);
+
+bool8 sub_8062F90(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
+{
+    s32 i;
+    bool8 ret;
+    EntityInfo *entInfo = GetEntInfo(entity);
+    bool8 unkBool = TRUE;
+    EntityInfo *leaderInfo = GetEntInfo(GetLeader());
+    WindowHeader header;
+    Windows windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_WITH_HEADER,
+                .pos = {2, 2},
+                .width = 18,
+                .height = 16,
+                .unk10 = 16,
+                .unk12 = 0,
+                .unk14 = &header,
+            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
+    u8 unk[0x60];
+    bool8 r10;
+    s32 r5;
+    bool8 bPress;
+
+    gUnknown_202F2D8 = 0;
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        Move *move = &entInfo->moves.moves[i];
+
+        if (MoveFlagExists(move) && move->moveFlags2 & 2) {
+            move->moveFlags2 &= ~(2);
+            gUnknown_202F2D8 = i;
+        }
+    }
+
+    while (1) {
+        r5 = 0;
+        ret = FALSE;
+        r10 = FALSE;
+        sub_80633E4(entity, entInfo, a1, &windows, &header, unk, a3, a4);
+        while (1) {
+            AddMenuCursorSprite_(&gUnknown_202EE10, unk);
+            sub_803E46C(0x1E);
+            if (gRealInputs.repeated & DPAD_DOWN) {
+                bool8 rHeld = (gRealInputs.held & R_BUTTON) != 0;
+                s32 id = gUnknown_202EE10.menuIndex;
+
+                if (rHeld) {
+                    gUnknown_202F2D8 = unk_SetMoveToLastInLinkedSequence4(entInfo->moves.moves, id);
+                    if (id != gUnknown_202F2D8) {
+                        sub_8083CE0(0);
+                    }
+                    else {
+                        sub_8083D30();
+                    }
+                    r10 = TRUE;
+                    break;
+                }
+                else {
+                    sub_8013780(&gUnknown_202EE10, unk_FindMoveEnabledForAIAfter4(entInfo->moves.moves, id));
+                    if (id != gUnknown_202EE10.menuIndex) {
+                        sub_8083CE0(0);
+                    }
+                }
+            }
+            if (gRealInputs.repeated & DPAD_UP) {
+                bool8 rHeld = (gRealInputs.held & R_BUTTON) != 0;
+                s32 id = gUnknown_202EE10.menuIndex;
+
+                if (rHeld) {
+                    gUnknown_202F2D8 = unk_SetMoveToFirstInLinkedSequence4(entInfo->moves.moves, id);
+                    if (id != gUnknown_202F2D8) {
+                        sub_8083CE0(0);
+                    }
+                    else {
+                        sub_8083D30();
+                    }
+                    r10 = TRUE;
+                    break;
+                }
+                else {
+                    sub_8013780(&gUnknown_202EE10, sub_8092DB8(entInfo->moves.moves, id));
+                    if (id != gUnknown_202EE10.menuIndex) {
+                        sub_8083CE0(0);
+                    }
+                }
+            }
+
+            if ((gRealInputs.repeated & DPAD_RIGHT) || gUnknown_202EE10.unk28.dpad_right) {
+                SetMonsterActionFields(&leaderInfo->action, 6);
+                break;
+            }
+            if ((gRealInputs.repeated & DPAD_LEFT) || gUnknown_202EE10.unk28.dpad_left) {
+                SetMonsterActionFields(&leaderInfo->action, 7);
+                break;
+            }
+
+            if ((gRealInputs.pressed & sub_8062D88()) || gUnknown_202EE10.unk28.a_button) {
+                if (a1) {
+                    bool8 rHeld = (gRealInputs.held & R_BUTTON) != 0;
+                    if (rHeld) {
+                        r5 = 3;
+                    }
+                }
+                sub_8083D08();
+                break;
+            }
+
+            if (gRealInputs.pressed & START_BUTTON) {
+                r5 = 1;
+                sub_8083D44();
+                break;
+            }
+            if (gRealInputs.pressed & SELECT_BUTTON) {
+                r5 = 2;
+                sub_8083D44();
+                break;
+            }
+            // Fixme: r0/r1 regswap...
+            {
+                u32 pressed = B_BUTTON;
+                pressed &= gRealInputs.pressed;
+                if ((pressed) || gUnknown_202EE10.unk28.b_button) {
+                    sub_8083D30();
+                    ret = TRUE;
+                    break;
+                }
+            }
+        }
+
+        AddMenuCursorSprite(&gUnknown_202EE10);
+        sub_803E46C(0x1E);
+        if (leaderInfo->action.action == 6 || leaderInfo->action.action == 7) {
+            unkBool = FALSE;
+            break;
+        }
+
+        if (r10)
+            continue;
+        if (ret)
+            break;
+
+        gUnknown_202F2D8 = gUnknown_202EE10.menuIndex;
+        if (r5 == 1) {
+            SetMonsterActionFields(&leaderInfo->action, 0x1D);
+            leaderInfo->action.actionParameters[0].actionUseIndex = entity->unk24;
+            leaderInfo->action.actionParameters[1].actionUseIndex = gUnknown_202F2D8;
+            sub_803EAF0(0, NULL);
+            sub_803E708(8, 0x1B);
+            ret = FALSE;
+            break;
+        }
+
+        sub_8063698(entity, a1, a2);
+        if (r5 == 3) {
+            s32 r6 = sub_8044FB4(0x20);
+            if (!sub_8044F3C(r6)) {
+                r6 = sub_8044FB4(0x21);
+                if (sub_8044F3C(r6)) {
+                    sub_80637BC(&leaderInfo->action, r6, GetTeamMemberEntityIndex(entity));
+                    break;
+                }
+            }
+            else {
+                sub_80637BC(&leaderInfo->action, r6, GetTeamMemberEntityIndex(entity));
+                break;
+            }
+        }
+        else if (r5 == 2) {
+            if (entInfo->isTeamLeader) {
+                s32 r6 = sub_8044FB4(0x1E);
+                if (!sub_8044F3C(r6)) {
+                    r6 = sub_8044FB4(0x33);
+                    if (sub_8044F3C(r6)) {
+                        sub_80637BC(&leaderInfo->action, r6, GetTeamMemberEntityIndex(entity));
+                        break;
+                    }
+                }
+                else {
+                    sub_80637BC(&leaderInfo->action, r6, GetTeamMemberEntityIndex(entity));
+                    break;
+                }
+            }
+            else {
+                s32 r6 = sub_8044FB4(0x1F);
+                if (sub_8044F3C(r6)) {
+                    sub_80637BC(&leaderInfo->action, r6, GetTeamMemberEntityIndex(entity));
+                    break;
+                }
+            }
+        }
+
+        sub_8009524(2);
+        sub_805FC30(&windows, 0x16);
+        while (1) {
+            AddMenuCursorSprite(&gUnknown_202EE10);
+            sub_803E46C(0x1B);
+            if (gRealInputs.repeated & DPAD_DOWN) {
+                sub_8083CE0(1);
+                sub_80136E0(&gUnknown_202EE10, 1);
+            }
+            if (gRealInputs.repeated & DPAD_UP) {
+                sub_8083CE0(1);
+                sub_8013744(&gUnknown_202EE10, 1);
+            }
+
+            if ((gRealInputs.pressed & sub_8062D88()) || gUnknown_202EE10.unk28.a_button) {
+                if (sub_8044F3C(gUnknown_202EE10.menuIndex)) {
+                    sub_80637A4(&leaderInfo->action, GetTeamMemberEntityIndex(entity));
+                    if (leaderInfo->action.action != 20 && leaderInfo->action.action != 21) {
+                        sub_8083D08();
+                    }
+                    bPress = FALSE;
+                    break;
+                }
+                sub_8083D30();
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || gUnknown_202EE10.unk28.b_button) {
+                sub_8083D30();
+                bPress = TRUE;
+                break;
+            }
+        }
+
+        AddMenuCursorSprite(&gUnknown_202EE10);
+        sub_803E46C(0x1B);
+        if (bPress != TRUE) {
+            ret = 0;
+            break;
+        }
+    }
+
+    if (unkBool) {
+        sub_803EAF0(0, NULL);
+        sub_803E708(8, 0x1E);
+    }
+
+    return ret;
+}
+
+extern const Window gUnknown_8106CAC;
+void sub_8063578(s32 a0, Entity *entity, Moves *moves, s32 a3, u8 a4, s32 a5);
+extern const u8 *const gUnknown_80FDFE8;
+
+void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, Windows *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7)
+{
+    s32 i, movesCount;
+    Window windowNew = gUnknown_8106CAC;
+
+    header->f0 = arg7;
+    header->f1 = arg6;
+    header->f3 = 0;
+
+    movesCount = 0;
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        Move *move = &entInfo->moves.moves[i];
+        if (MoveFlagExists(move)) {
+            movesCount++;
+        }
+    }
+
+    gUnknown_202EE10.menuIndex = gUnknown_202F2D8;
+    gUnknown_202EE10.unk1A = movesCount;
+    gUnknown_202EE10.unk1C = 4;
+    gUnknown_202EE10.unk1E = arg6;
+    gUnknown_202EE10.unk20 = arg7;
+    gUnknown_202EE10.unk4 = 0;
+    gUnknown_202EE10.firstEntryY = 16;
+    gUnknown_202EE10.unk14.x = 0;
+    gUnknown_202EE10.unk0 = 0;
+    sub_801317C(&gUnknown_202EE10.unk28);
+
+    windows->id[0].height = windows->id[0].unk10 = sub_80095E4(4, 0xC) + 2;
+    header->f2 = 13;
+    windows->id[0].pos.x = 2;
+    windows->id[1] = windows->id[3];
+    windows->id[2] = windowNew;
+    sub_803ECB4(windows, TRUE);
+    sub_80137B0(&gUnknown_202EE10, 0);
+    gUnknown_202EE10.unkC = (gUnknown_2027370[0].unk0 + 16) * 8;
+    gUnknown_202EE10.unkE = ((gUnknown_2027370[0].unk2 + 1) * 8) - 2;
+    SetMessageArgument_2(gFormatBuffer_Monsters[0], entInfo, 0);
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        Move *move = &entInfo->moves.moves[i];
+
+        arg5[i] = 0;
+        if (!MoveFlagExists(move)) {
+            if (gUnknown_202EE10.menuIndex == i) {
+                gUnknown_202EE10.menuIndex = 0;
+            }
+        }
+        else if (MoveFlagLinkChain(move)) {
+            arg5[i] = 1;
+        }
+    }
+
+    sub_8063578(4, entity, &entInfo->moves, 0, a2, arg6);
+    sub_80073B8(2);
+    PrintFormattedStringOnWindow(4, 0, gUnknown_80FDFE8, 2, '\0');
+    sub_80073E0(2);
+}
+
+extern const u8 gUnknown_8106CC4[];
+
+void sub_8063578(s32 count, Entity *entity, Moves *moves, s32 windowId, u8 a4, s32 a5)
+{
+    s32 i;
+    EntityInfo *entInfo = GetEntInfo(entity);
+
+    sub_80073B8(windowId);
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+    PrintFormattedStringOnWindow((a5 * 8) + 10, 0, gUnknown_80FE978, windowId, '\0');
+    for (i = 0; i < count; i++) {
+        s32 x, y;
+        unkStruct_80928C0 movStruct = {0, 106, 0, a4};
+        Move *move = &moves->moves[i];
+
+        if (MoveFlagExists(move)) {
+            if (entInfo->isTeamLeader) {
+                movStruct.unk0 = 2;
+            }
+            else {
+                movStruct.unk0 = 4;
+            }
+
+            movStruct.unk8 = (CanMonsterUseMove(entity, move, TRUE) == FALSE);
+            BufferMoveName(gFormatBuffer_Items[0], move, &movStruct);
+            y = GetMenuEntryYCoord(&gUnknown_202EE10, i);
+            if (MoveFlagLinkChain(move)) {
+                x = 13;
+            }
+            else {
+                x = 8;
+                if (i != 0) {
+                    sub_80078A4(windowId, 12, y - 2, 120, 7);
+                }
+            }
+            PrintFormattedStringOnWindow(x, y, gUnknown_8106CC4, windowId, '\0');
+        }
+    }
+
+    sub_80073E0(windowId);
+}
+
 
 //
