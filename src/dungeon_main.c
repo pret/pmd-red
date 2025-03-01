@@ -1,9 +1,10 @@
 #include "global.h"
+#include "globaldata.h"
+#include "dungeon_main.h"
 #include "structs/str_dungeon.h"
 #include "number_util.h"
 #include "input.h"
 #include "structs/map.h"
-#include "dungeon_main.h"
 #include "dungeon_message.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_targeting.h"
@@ -50,13 +51,6 @@
 #include "structs/struct_sub80095e4.h"
 #include "structs/str_text.h"
 
-struct UnkMenuBitsStruct {
-    u8 a0_8;
-    u8 a0_16;
-    u8 a0_24;
-    u8 a0_32;
-};
-
 extern void HandleSetItemAction(Entity *,bool8);
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern bool8 sub_8048A68(Entity *param_1,Item *item);
@@ -90,6 +84,7 @@ bool8 sub_8094C48(void);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
 bool8 sub_8044B28(void);
+bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
@@ -149,12 +144,6 @@ extern const u8 *const gUnknown_80FE954;
 
 const u8 *GetCurrentDungeonName(void);
 void GetWeatherName(u8 *dst, u8 weatherId);
-extern u8 *GetDungeonSubMenuItemString(s32 param_1);
-extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern s32 gDungeonSubMenuItemsCount;
-extern const u8 gUnknown_8106B50[];
-
-extern void DungeonShowWindows(Windows *a0, u8 a1);
 
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 extern Entity *sub_80696A8(Entity *a0);
@@ -184,12 +173,11 @@ static bool8 sub_805EC4C(Entity *a0, u8 a1);
 static bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
 static void ShowMainMenu(bool8 fromBPress, bool8 a1);
 static void PrintOnMainMenu(bool8 printAll);
-static bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0);
 
 void DungeonHandlePlayerInput(void)
 {
     struct UnkMenuBitsStruct r6;
-    bool8 triggers[5]; // Always FALSE, if one of these is TRUE - they can open various menus or cause an item throw. Most likely used for debugging/testing.
+    bool8 triggers[5]; // Always FALSE, if one of these is TRUE - they can open various menus or cause an item throw. Used in Blue's touch screen.
     s32 frames;
     s32 var_38;
     UnkDungeonGlobal_unk181E8_sub *unkPtr;
@@ -254,7 +242,7 @@ void DungeonHandlePlayerInput(void)
         while (r6.a0_8 == 0) {
             u32 dpadDiagonal, dpadSimple;
             bool32 highlightTiles, tryItemThrow;
-            bool32 bPress, rPress, unkBool; // Always FALSE, might've been used as debug variables.
+            bool32 bPress, rPress, unkBool; // Always FALSE, might've been used in Blue.
             s32 directionNew;
 
             sArrowsFrames++;
@@ -432,8 +420,8 @@ void DungeonHandlePlayerInput(void)
             if (highlightTiles) {
                 sub_805E738(leader);
                 sInRotateMode = TRUE;
-                unkPtr->unk1821B = leaderInfo->action.direction;
-                unkPtr->unk1821C = 0xFF;
+                unkPtr->rotateModeDirection = leaderInfo->action.direction;
+                unkPtr->prevRotateModeDirection = 0xFF;
                 ResetRepeatTimers();
             }
 
@@ -525,7 +513,7 @@ void DungeonHandlePlayerInput(void)
                 bool32 directionChanged = (leaderInfo->action.direction != directionNew);
                 leaderInfo->action.direction = directionNew & DIRECTION_MASK;
                 if (sInRotateMode) {
-                    unkPtr->unk1821B = directionNew;
+                    unkPtr->rotateModeDirection = directionNew;
                     sub_806CDD4(leader, sub_806CEBC(leader), directionNew);
                 }
                 else {
@@ -638,27 +626,42 @@ void DungeonHandlePlayerInput(void)
     }
 }
 
-struct UnkStruct_8106AC8
+struct DiagonalArrowInfo
 {
-    s16 unk0;
-    s16 unk2;
-    u8 unk4;
-    u8 unk5;
+    s16 x;
+    s16 y;
+    bool8 unk4;
+    bool8 unk5;
 };
 
-extern const struct UnkStruct_8106AC8 gUnknown_8106AC8[];
-
-struct UnkStruct_8106AE8
+static const struct DiagonalArrowInfo sDiagonalArrowsInfo[] =
 {
-    s16 unk0;
-    s16 unk2;
-    u32 unk4;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
+    {-1, -1, TRUE, FALSE},
+    {-1, 1, TRUE, TRUE},
+    {1, 1, FALSE, TRUE},
+    {1, -1, FALSE, FALSE},
 };
 
-extern const struct UnkStruct_8106AE8 gUnknown_8106AE8[];
+struct RotateArrowInfo
+{
+    s16 x;
+    s16 y;
+    u32 tilemapNum;
+    bool8 unk8;
+    bool8 unk9;
+};
+
+static const struct RotateArrowInfo sRotateArrowsInfo[] =
+{
+    {0, 1,   0x212, FALSE, TRUE},
+    {1, 1,   0x213, FALSE, TRUE},
+    {1, 0,   0x214, FALSE, FALSE},
+    {1, -1,  0x213, FALSE, FALSE},
+    {0, -1,  0x212, TRUE, FALSE},
+    {-1, -1, 0x213, TRUE, FALSE},
+    {-1, 0,  0x214, TRUE, TRUE},
+    {-1, 1,  0x213, TRUE, TRUE},
+};
 
 // Creates arrow sprites which are used when in rotate or diagonal modes.
 static void TryCreateModeArrows(Entity *leader)
@@ -681,9 +684,9 @@ static void TryCreateModeArrows(Entity *leader)
             SpriteSetBpp(&sprite, 0);
             SpriteSetShape(&sprite, 0);
 
-            matrixNum = (gUnknown_8106AC8[i].unk4 != 0) ? 8 : 0;
+            matrixNum = (sDiagonalArrowsInfo[i].unk4) ? 8 : 0;
 
-            if (gUnknown_8106AC8[i].unk5)
+            if (sDiagonalArrowsInfo[i].unk5)
                 matrixNum += 16;
 
             SpriteSetMatrixNum_UseLocalVar(&sprite, matrixNum);
@@ -696,14 +699,14 @@ static void TryCreateModeArrows(Entity *leader)
             SpriteSetUnk6_0(&sprite, 0);
             SpriteSetUnk6_1(&sprite, 0);
 
-            xMul = gUnknown_8106AC8[i].unk0 * 10;
+            xMul = sDiagonalArrowsInfo[i].x * 10;
             x2 = (sArrowsFrames / 2) & 7;
-            x = (x2 * gUnknown_8106AC8[i].unk0) + xMul + 116;
+            x = (x2 * sDiagonalArrowsInfo[i].x) + xMul + 116;
             SpriteSetX(&sprite, x);
 
-            yMul = gUnknown_8106AC8[i].unk2 * 10;
+            yMul = sDiagonalArrowsInfo[i].y * 10;
             y2 = (sArrowsFrames / 2) & 7;
-            y = (y2 * gUnknown_8106AC8[i].unk2) + yMul + 82;
+            y = (y2 * sDiagonalArrowsInfo[i].y) + yMul + 82;
             SpriteSetY(&sprite, y);
 
             AddSprite(&sprite, 0x100, NULL, NULL);
@@ -713,20 +716,20 @@ static void TryCreateModeArrows(Entity *leader)
     else if (unkPtr->unk1821A) {
         s32 i;
         SpriteOAM sprite;
-        s32 var_2C = unkPtr->unk1821B;
+        s32 direction = unkPtr->rotateModeDirection;
 
-        if (unkPtr->unk1821B < 8) {
+        if (unkPtr->rotateModeDirection < NUM_DIRECTIONS) {
             s32 x, xMul, x2;
             s32 y, yMul, y2;
             s32 to = (sShowThreeArrows2 != FALSE && sShowThreeArrows1 != FALSE) ? 3 : 1;
 
-            xMul = gUnknown_8106AE8[var_2C].unk0 * 10;
+            xMul = sRotateArrowsInfo[direction].x * 10;
             x2 = (sArrowsFrames / 2) & 7;
-            x = (gUnknown_8106AE8[var_2C].unk0 * x2) + xMul + 116;
+            x = (sRotateArrowsInfo[direction].x * x2) + xMul + 116;
 
-            yMul = gUnknown_8106AE8[var_2C].unk2 * 10;
+            yMul = sRotateArrowsInfo[direction].y * 10;
             y2 = (sArrowsFrames / 2) & 7;
-            y = (y2 * gUnknown_8106AE8[var_2C].unk2) + yMul + 82;
+            y = (y2 * sRotateArrowsInfo[direction].y) + yMul + 82;
             for (i = 0; i < to; i++) {
                 u32 matrixNum;
 
@@ -737,15 +740,15 @@ static void TryCreateModeArrows(Entity *leader)
                 SpriteSetBpp(&sprite, 0);
                 SpriteSetShape(&sprite, 0);
 
-                matrixNum = (gUnknown_8106AE8[var_2C].unk8 != 0) ? 8 : 0;
+                matrixNum = (sRotateArrowsInfo[direction].unk8 != 0) ? 8 : 0;
 
-                if (gUnknown_8106AE8[var_2C].unk9)
+                if (sRotateArrowsInfo[direction].unk9)
                     matrixNum += 16;
 
                 SpriteSetMatrixNum_UseLocalVar(&sprite, matrixNum);
                 SpriteSetSize(&sprite, 0);
 
-                SpriteSetTileNum(&sprite, gUnknown_8106AE8[var_2C].unk4);
+                SpriteSetTileNum(&sprite, sRotateArrowsInfo[direction].tilemapNum);
                 SpriteSetPriority(&sprite, 2);
                 SpriteSetPalNum(&sprite, 0);
 
@@ -756,15 +759,15 @@ static void TryCreateModeArrows(Entity *leader)
                 SpriteSetY(&sprite, y);
 
                 AddSprite(&sprite, 0x100, NULL, NULL);
-                x += gUnknown_8106AE8[var_2C].unk0 * 4;
-                y += gUnknown_8106AE8[var_2C].unk2 * 4;
+                x += sRotateArrowsInfo[direction].x * 4;
+                y += sRotateArrowsInfo[direction].y * 4;
             }
         }
     }
 
-    if (sInRotateMode && unkPtr->unk1821C != unkPtr->unk1821B) {
-        unkPtr->unk1821C = unkPtr->unk1821B;
-        ChangeDungeonCameraPos(&leader->pos, unkPtr->unk1821B, 0, sInRotateMode);
+    if (sInRotateMode && unkPtr->prevRotateModeDirection != unkPtr->rotateModeDirection) {
+        unkPtr->prevRotateModeDirection = unkPtr->rotateModeDirection;
+        ChangeDungeonCameraPos(&leader->pos, unkPtr->rotateModeDirection, 0, sInRotateMode);
     }
 }
 
@@ -1654,7 +1657,7 @@ static void PrintOnMainMenu(bool8 printAll)
     }
 }
 
-bool8 sub_805FBE8(u8 *a0)
+bool8 DungeonGiveNameToRecruitedMon(u8 *a0)
 {
     s32 r4;
     sub_803EAF0(8, a0);
@@ -1673,76 +1676,4 @@ bool8 sub_805FBE8(u8 *a0)
     return FALSE;
 }
 
-void CreateDungeonMenuSubWindow(Window *mainWindow, s32 subWindowX)
-{
-    s32 i;
-    Windows windows = {
-        .id = {
-            [0] = WINDOW_DUMMY,
-            [1] = {
-                .type = WINDOW_TYPE_NORMAL,
-                .pos = {22, 4},
-                .width = 6,
-                .height = 4,
-                .unk10 = 4,
-            },
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
-        }
-    };
 
-    windows.id[0] = *mainWindow;
-    windows.id[0].unk0 = 0x80;
-
-    gDungeonMenu.menuIndex = 0;
-    gDungeonMenu.unk1C = gDungeonSubMenuItemsCount;
-    gDungeonMenu.unk1A = gDungeonSubMenuItemsCount;
-    gDungeonMenu.unk1E = 0;
-    gDungeonMenu.unk20 = 0;
-    gDungeonMenu.unk4 = 0;
-    gDungeonMenu.firstEntryY = 0;
-    gDungeonMenu.unk0 = 1;
-    gDungeonMenu.unkC = 0;
-    gDungeonMenu.unkE = 0;
-    gDungeonMenu.unk14 = gDungeonMenu.unk8;
-
-    sub_801317C(&gDungeonMenu.unk28);
-
-    windows.id[1].pos.x = subWindowX;
-    windows.id[1].width = 28 - subWindowX;
-    windows.id[1].height = windows.id[1].unk10 = sub_80095E4(gDungeonMenu.unk1C, 0);
-    DungeonShowWindows(&windows, FALSE);
-    sub_80137B0(&gDungeonMenu, windows.id[1].height * 8);
-    sub_80073B8(1);
-
-    for (i = 0; i < gDungeonSubMenuItemsCount; i++) {
-        s32 colorId, y;
-        u8 text[20];
-
-        colorId = (CanSubMenuItemBeChosen(i) != FALSE) ? 7 : 2;
-        sprintfStatic(text, gUnknown_8106B50, colorId, GetDungeonSubMenuItemString(i));
-        y = GetMenuEntryYCoord(&gDungeonMenu, i);
-        PrintStringOnWindow(8, y, text, 1, 0);
-    }
-    sub_80073E0(1);
-}
-
-static bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0)
-{
-    u16 action = GetLeaderActionId();
-
-    a0->a0_8 = 0;
-    a0->a0_16 = 0;
-    a0->a0_24 = 0;
-    a0->a0_32 = 0;
-    if (action == 0xA) {
-        a0->a0_8 = 1;
-        a0->a0_32 = 1;
-    }
-    if (action == 0x3E) {
-        a0->a0_8 = 1;
-        a0->a0_16 = 0;
-        a0->a0_32 = 1;
-    }
-    return a0->a0_8;
-}

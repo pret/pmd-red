@@ -698,8 +698,8 @@ void sub_803F27C(bool8 a0)
     strPtr->priority = 3;
     strPtr->unk1821A = 0;
     strPtr->unk18212 = 0;
-    strPtr->unk1821B = 0;
-    strPtr->unk1821C = 0;
+    strPtr->rotateModeDirection = 0;
+    strPtr->prevRotateModeDirection = 0;
     strPtr->unk18214 = 0;
     strPtr->unk18215 = 1;
     sub_803F38C();

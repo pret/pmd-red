@@ -115,7 +115,7 @@
 .include "src/dungeon_message.o"
 .include "src/dungeon_move.o"
 .include "src/dungeon_main.o"
-.include "src/code_805D8C8_2.o"
+.include "src/code_805D8C8_3.o"
 .include "src/dungeon_ai_items.o"
 .include "src/code_807CD9C.o"
 .include "src/dungeon_leader.o"

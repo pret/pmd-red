@@ -40,7 +40,7 @@ extern u8 *gUnknown_80FA090[];
 
 void sub_8068FE0(Entity *, u32, Entity *);
 u8 sub_806B8CC();
-bool8 sub_805FBE8(u8 *a0);
+bool8 DungeonGiveNameToRecruitedMon(u8 *a0);
 void sub_8083D88();
 u8 sub_808529C(s32);
 void nullsub_96(Entity *pokemon,Entity *target);
@@ -450,7 +450,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                 sub_8083D88();
                 sub_803E708(0xa0,0x46);
                 if (DisplayDungeonYesNoMessage(0,*gUnknown_80FA090,1) == 1) {
-                    while (sub_805FBE8(pokeStruct2->name) == 0) {
+                    while (DungeonGiveNameToRecruitedMon(pokeStruct2->name) == 0) {
                         DisplayDungeonMessage(0,*gUnknown_80FA0C8,1);
                     }
                 }
@@ -583,7 +583,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
     }
     else {
       if (DisplayDungeonYesNoMessage(0,*gUnknown_80FA090,1) == 1) {
-        while (!sub_805FBE8(buffer)) {
+        while (!DungeonGiveNameToRecruitedMon(buffer)) {
           DisplayDungeonMessage(0,*gUnknown_80FA0C8,1);
         }
       }

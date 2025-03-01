@@ -98,8 +98,8 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     u8 unk18218; // x30
     u8 unk18219; // x31
     u8 unk1821A; // x32
-    u8 unk1821B; // x33
-    u8 unk1821C; // x34
+    u8 rotateModeDirection; // x33
+    u8 prevRotateModeDirection; // x34
     u8 fill1821D; // x35
     s16 unk36; // x36
     s16 unk38; // x38
