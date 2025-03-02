@@ -125,12 +125,12 @@ extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
 extern void sub_8045C18(u8 *buffer, Item *item);
 extern bool32 sub_8069D18(DungeonPos *a0, Entity *a1);
-extern void sub_80639E4(struct subStruct_203B240 *strings, MenuInputStructSub *menuSub);
+extern void ShowStatusDescriptionMenu(struct subStruct_203B240 *strings, MenuInputStructSub *menuSub);
 
 extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
 extern MenuInputStruct gDungeonMenu;
-extern s32 gUnknown_202EDCC;
+extern s32 gDungeonFramesCounter;
 extern u8 gUnknown_202EE39;
 
 extern const u8 *gUnknown_80FE940;
@@ -161,11 +161,11 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *w
 static void sub_806145C(struct UnkFieldTeamMenuStruct *a0);
 static void ChosenSubMenuToAction(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1);
 static void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId);
-static void sub_8062230(void);
-static void sub_80623B0(void);
+static void ShowUpArrowSprite(void);
+static void ShowDownArrowSprite(void);
 static void ShowIqDescriptionWindow(u8 iqSkillId);
 static void ShowTacticDescriptionWindow(u8 tacticId);
-static void sub_806285C(s32 a0);
+static void ShowStatusInfoWindow(s32 a0);
 static void PrintMoveNamesOnBottomWindow(Entity *entity);
 static void PrintItemNameOnBottomWindow(Entity *entity);
 static void ResetDungeonMenu(void);
@@ -569,10 +569,10 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
 
             AddMenuCursorSprite(&gDungeonMenu);
             if (tacticIds[8] != TACTIC_UNUSED) {
-                sub_80623B0();
+                ShowDownArrowSprite();
             }
             if (scrollFirstId != 0) {
-                sub_8062230();
+                ShowUpArrowSprite();
             }
             DungeonRunFrameActions(0x3D);
             if (gRealInputs.repeated & DPAD_DOWN) {
@@ -588,7 +588,7 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
                     menuIndex = 7;
                     break;
                 }
-                MoveMenuCursorDownWrapAround(&gDungeonMenu, 0);
+                MoveMenuCursorDownWrapAround(&gDungeonMenu, FALSE);
             }
             if (gRealInputs.repeated & DPAD_UP) {
                 PlayDungeonCursorSE(1);
@@ -603,7 +603,7 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
                     menuIndex = 0;
                     break;
                 }
-                MoveMenuCursorUpWrapAround(&gDungeonMenu, 0);
+                MoveMenuCursorUpWrapAround(&gDungeonMenu, FALSE);
             }
             if (gRealInputs.pressed & START_BUTTON) {
                 u32 tacticId = tacticIds[gDungeonMenu.menuIndex];
@@ -729,9 +729,20 @@ static void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 win
     sub_80073E0(windowId);
 }
 
+enum
+{
+    SUB_WINDOW_NONE,
+    SUB_WINDOW_STATUS,
+    SUB_WINDOW_STATS,
+    SUB_WINDOW_FEATUERS,
+    SUB_WINDOW_IQ,
+    SUB_WINDOW_INFO,
+};
+
+// The way this function was written, it seems that they planned to put IQ skills in the Summary Menu first, but later decided to create a separate menu for it.
 void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
 {
-    s32 spArr[6];
+    s32 subWindowIds[6];
     struct unkStruct_808FF20 unkMonStruct;
     struct UnkInfoTabStruct unkInfoTabStruct;
     Windows windows = {
@@ -752,41 +763,41 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
     };
     s32 r8;
     Entity *entity;
-    s32 var_3C;
-    s32 totalWindows;
+    s32 currSubWindowId;
+    s32 totalSubWindows;
     EntityInfo *entityInfo;
 
-    var_3C = 0;
+    currSubWindowId = 0;
     r8 = 0;
     entity = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
     entityInfo = GetEntInfo(entity);
 
     if (IsExperienceLocked(entityInfo->joinedAt.id)) {
-        spArr[0] = 1;
-        spArr[1] = 0;
-        spArr[2] = 0;
-        spArr[3] = 0;
-        spArr[4] = 0;
-        spArr[5] = 0;
-        totalWindows = 1;
+        subWindowIds[0] = SUB_WINDOW_STATUS;
+        subWindowIds[1] = SUB_WINDOW_NONE;
+        subWindowIds[2] = SUB_WINDOW_NONE;
+        subWindowIds[3] = SUB_WINDOW_NONE;
+        subWindowIds[4] = SUB_WINDOW_NONE;
+        subWindowIds[5] = SUB_WINDOW_NONE;
+        totalSubWindows = 1;
     }
     else if (showIq) {
-        spArr[0] = 4;
-        spArr[1] = 0;
-        spArr[2] = 0;
-        spArr[3] = 0;
-        spArr[4] = 0;
-        spArr[5] = 0;
-        totalWindows = 1;
+        subWindowIds[0] = SUB_WINDOW_IQ;
+        subWindowIds[1] = SUB_WINDOW_NONE;
+        subWindowIds[2] = SUB_WINDOW_NONE;
+        subWindowIds[3] = SUB_WINDOW_NONE;
+        subWindowIds[4] = SUB_WINDOW_NONE;
+        subWindowIds[5] = SUB_WINDOW_NONE;
+        totalSubWindows = 1;
     }
     else {
-        spArr[0] = 2;
-        spArr[1] = 1;
-        spArr[2] = 3;
-        spArr[3] = 5;
-        spArr[4] = 0;
-        spArr[5] = 0;
-        totalWindows = 4;
+        subWindowIds[0] = SUB_WINDOW_STATS;
+        subWindowIds[1] = SUB_WINDOW_STATUS;
+        subWindowIds[2] = SUB_WINDOW_FEATUERS;
+        subWindowIds[3] = SUB_WINDOW_INFO;
+        subWindowIds[4] = SUB_WINDOW_NONE;
+        subWindowIds[5] = SUB_WINDOW_NONE;
+        totalSubWindows = 4;
     }
 
     unkMonStruct.unk40 = 0;
@@ -795,20 +806,20 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
 
     while (1) {
         bool8 loopBreak = FALSE;
-        s32 var_30 = 0;
-        s32 var_2C = 0;
-        s32 var_28 = 1;
+        bool8 hasIqSkills = FALSE;
+        bool8 hasStatusProblems = FALSE;
+        bool8 addCursorSprite = TRUE;
         UnkTextStruct1 *unkTxtStr1Ptr = &gUnknown_2027370[0];
 
-        sTeamWindowHeader.f0 = totalWindows;
-        sTeamWindowHeader.f1 = var_3C;
+        sTeamWindowHeader.f0 = totalSubWindows;
+        sTeamWindowHeader.f1 = currSubWindowId;
         sTeamWindowHeader.f2 = 10;
         sTeamWindowHeader.f3 = 0;
         DungeonShowWindows(&windows, TRUE);
         sub_8069844(&unkMonStruct, entity);
-        CreatePokemonInfoTabScreen(spArr[var_3C], var_3C, &unkMonStruct, &unkInfoTabStruct, 0);
-        gDungeonMenu.unk1E = var_3C;
-        gDungeonMenu.unk20 = totalWindows;
+        CreatePokemonInfoTabScreen(subWindowIds[currSubWindowId], currSubWindowId, &unkMonStruct, &unkInfoTabStruct, 0);
+        gDungeonMenu.unk1E = currSubWindowId;
+        gDungeonMenu.unk20 = totalSubWindows;
         gDungeonMenu.unkC = (unkTxtStr1Ptr->unk0 + 15) * 8;
         gDungeonMenu.unkE = ((unkTxtStr1Ptr->unk2 + 1) * 8) - 2;
         gDungeonMenu.unk14.x = 0;
@@ -820,7 +831,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         gDungeonMenu.unk1A = 0;
         gDungeonMenu.unk1C = 0;
 
-        if (spArr[var_3C] == 1) {
+        if (subWindowIds[currSubWindowId] == SUB_WINDOW_STATUS) {
             s32 i;
 
             for (i = 0; i < 8; i++) {
@@ -830,14 +841,14 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
             }
 
             if (i != 0) {
-                var_2C = 1;
+                hasStatusProblems = TRUE;
                 gDungeonMenu.unk1A = i;
                 gDungeonMenu.unk1C = 8;
                 sub_80137B0(&gDungeonMenu, 0);
             }
             gDungeonMenu.menuIndex = r8;
         }
-        else if (spArr[var_3C] == 4) {
+        else if (subWindowIds[currSubWindowId] == SUB_WINDOW_IQ) {
             s32 i;
 
             for (i = 0; i < 8; i++) {
@@ -847,7 +858,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
             }
 
             if (i != 0) {
-                var_30 = 1;
+                hasIqSkills = TRUE;
                 gDungeonMenu.unk1A = i;
                 gDungeonMenu.unk1C = 8;
                 sub_80137B0(&gDungeonMenu, 0);
@@ -863,24 +874,24 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
             unkVar = sub_8014140(0, gUnknown_8106B8C);
             r5 = FALSE;
             r6 = FALSE;
-            if (var_30) {
+            if (hasIqSkills) {
                 if (unkInfoTabStruct.unk0[8] != 0) {
                     r5 = TRUE;
-                    sub_80623B0();
+                    ShowDownArrowSprite();
                 }
                 if (unkMonStruct.unk40 != 0) {
                     r6 = TRUE;
-                    sub_8062230();
+                    ShowUpArrowSprite();
                 }
             }
-            if (var_2C) {
+            if (hasStatusProblems) {
                 if (unkInfoTabStruct.unkC[8] != 0) {
                     r5 = TRUE;
-                    sub_80623B0();
+                    ShowDownArrowSprite();
                 }
                 if (unkMonStruct.unk56 != 0) {
                     r6 = TRUE;
-                    sub_8062230();
+                    ShowUpArrowSprite();
                 }
             }
 
@@ -888,26 +899,26 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
             if (sTeamWindowHeader.f0 > 1 && !sub_80048C8()) {
                 if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.unk28.dpad_right) {
                     PlayDungeonCursorSE(0);
-                    var_3C++;
-                    if (spArr[var_3C] == 0) {
-                        var_3C = 0;
+                    currSubWindowId++;
+                    if (subWindowIds[currSubWindowId] == SUB_WINDOW_NONE) {
+                        currSubWindowId = 0;
                     }
                     break;
                 }
                 if ((gRealInputs.pressed & DPAD_LEFT) || gDungeonMenu.unk28.dpad_left) {
                     PlayDungeonCursorSE(0);
-                    var_3C--;
-                    if (var_3C == -1) {
-                        var_3C = 5;
-                        while (spArr[var_3C] == 0) {
-                            var_3C--;
+                    currSubWindowId--;
+                    if (currSubWindowId == -1) {
+                        currSubWindowId = 5;
+                        while (subWindowIds[currSubWindowId] == SUB_WINDOW_NONE) {
+                            currSubWindowId--;
                         }
                     }
                     break;
                 }
             }
 
-            if (var_2C) {
+            if (hasStatusProblems) {
                 if (unkVar == 2 && r5) {
                     PlayDungeonCursorSE(0);
                     if (unkInfoTabStruct.unkC[8] != 0) {
@@ -936,7 +947,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                         break;
                     }
                     else {
-                        MoveMenuCursorDownWrapAround(&gDungeonMenu, 0);
+                        MoveMenuCursorDownWrapAround(&gDungeonMenu, FALSE);
                     }
                 }
 
@@ -967,11 +978,11 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                         break;
                     }
                     else {
-                        MoveMenuCursorUpWrapAround(&gDungeonMenu, 0);
+                        MoveMenuCursorUpWrapAround(&gDungeonMenu, FALSE);
                     }
                 }
             }
-            else if (var_30) {
+            else if (hasIqSkills) {
                 if (unkVar == 2 && r5) {
                     if (unkInfoTabStruct.unk0[8] != 0) {
                         s32 i;
@@ -999,7 +1010,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                         break;
                     }
                     else {
-                        MoveMenuCursorDownWrapAround(&gDungeonMenu, 0);
+                        MoveMenuCursorDownWrapAround(&gDungeonMenu, FALSE);
                     }
                 }
 
@@ -1030,7 +1041,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                         break;
                     }
                     else {
-                        MoveMenuCursorUpWrapAround(&gDungeonMenu, 0);
+                        MoveMenuCursorUpWrapAround(&gDungeonMenu, FALSE);
                     }
                 }
             }
@@ -1039,30 +1050,30 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                 continue;
 
             if (gRealInputs.pressed & START_BUTTON) {
-                if (var_2C) {
+                if (hasStatusProblems) {
                     s32 var = unkInfoTabStruct.unkC[gDungeonMenu.menuIndex];
 
                     r8 = gDungeonMenu.menuIndex;
                     PlayDungeonStartButtonSE();
-                    sub_806285C(var);
-                    var_28 = 0;
+                    ShowStatusInfoWindow(var);
+                    addCursorSprite = FALSE;
                     loopBreak = FALSE;
                     break;
                 }
-                else if (var_30) {
+                else if (hasIqSkills) {
                     s32 iqSkillId = unkInfoTabStruct.unk0[gDungeonMenu.menuIndex];
 
                     r8 = gDungeonMenu.menuIndex;
                     PlayDungeonStartButtonSE();
                     ShowIqDescriptionWindow(iqSkillId);
-                    var_28 = 0;
+                    addCursorSprite = FALSE;
                     loopBreak = FALSE;
                     break;
                 }
             }
 
             if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
-                if (var_2C) {
+                if (hasStatusProblems) {
                     s32 var = unkInfoTabStruct.unkC[gDungeonMenu.menuIndex];
 
                     r8 = gDungeonMenu.menuIndex;
@@ -1085,8 +1096,8 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
 
                         if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
                             PlayDungeonConfirmationSE();
-                            sub_806285C(var);
-                            var_28 = 0;
+                            ShowStatusInfoWindow(var);
+                            addCursorSprite = FALSE;
                             loopBreak = FALSE;
                             break;
                         }
@@ -1097,13 +1108,13 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                         }
                     }
                 }
-                else if (var_30) {
+                else if (hasIqSkills) {
                     bool8 aPress = FALSE;
                     s32 var = unkInfoTabStruct.unk0[gDungeonMenu.menuIndex];
 
                     r8 = gDungeonMenu.menuIndex;
                     ResetDungeonMenu();
-                    gDungeonSubMenuItemsCount = var_2C;
+                    gDungeonSubMenuItemsCount = 0;
                     PlayDungeonConfirmationSE();
                     sub_8044F5C(0x28, 0);
                     sub_8044F5C(0xC, 0);
@@ -1146,7 +1157,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                         }
                         else {
                             ShowIqDescriptionWindow(var);
-                            var_28 = 0;
+                            addCursorSprite = FALSE;
                         }
                         loopBreak = FALSE;
                         break;
@@ -1165,8 +1176,8 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
             }
         }
 
-        if (var_28) {
-            if (var_30 != 0 || var_2C != 0) {
+        if (addCursorSprite) {
+            if (hasIqSkills || hasStatusProblems) {
                 AddMenuCursorSprite(&gDungeonMenu);
             }
             DungeonRunFrameActions(0x1C);
@@ -1182,9 +1193,9 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
 }
 
 // The same as sub_8068344
-static void sub_8062230(void)
+static void ShowUpArrowSprite(void)
 {
-    if ((gUnknown_202EDCC & 8) != 0) {
+    if ((gDungeonFramesCounter & 8) != 0) {
         UnkTextStruct1 *txtStrPtr = &gUnknown_2027370[0];
         SpriteOAM sprite = {0};
 
@@ -1207,9 +1218,9 @@ static void sub_8062230(void)
 }
 
 // The same as sub_80684C4
-static void sub_80623B0(void)
+static void ShowDownArrowSprite(void)
 {
-    if ((gUnknown_202EDCC & 8) != 0) {
+    if ((gDungeonFramesCounter & 8) != 0) {
         UnkTextStruct1 *ptr = &gUnknown_2027370[0];
         SpriteOAM sprite = {0};
 
@@ -1230,9 +1241,9 @@ static void sub_80623B0(void)
     }
 }
 
-void sub_8062500(void)
+void ShowStatusDescriptionMenuArrow(void)
 {
-    if ((gUnknown_202EDCC & 8) != 0) {
+    if ((gDungeonFramesCounter & 8) != 0) {
         UnkTextStruct1 *ptr = &gUnknown_2027370[0];
 
         SpriteSetAffine1(&gUnknown_202F268, 0);
@@ -1252,17 +1263,17 @@ void sub_8062500(void)
     }
 }
 
-void sub_80625A4(s32 count, struct subStruct_203B240 **strings)
+void ShowStatusesDescriptionMenu(s32 count, struct subStruct_203B240 **strings)
 {
     s32 i;
     MenuInputStructSub menuSub;
 
     sub_801317C(&menuSub);
     for (i = 0; i < count; i++) {
-        sub_80639E4(strings[i], &menuSub);
+        ShowStatusDescriptionMenu(strings[i], &menuSub);
         while (1) {
             if (i < count - 1) {
-                sub_8062500();
+                ShowStatusDescriptionMenuArrow();
             }
             nullsub_34(&menuSub, 0);
             DungeonRunFrameActions(0x16);
@@ -1306,7 +1317,7 @@ static void ShowIqDescriptionWindow(u8 iqSkillId)
         count = sub_8097DF0(GetIQSkillDescription(iqSkillId), result);
         while (1) {
             if (count != 0) {
-                sub_8062500();
+                ShowStatusDescriptionMenuArrow();
             }
             nullsub_34(&menuSub, 0);
             DungeonRunFrameActions(0x16);
@@ -1325,7 +1336,7 @@ static void ShowIqDescriptionWindow(u8 iqSkillId)
         if (bPress || count == 0)
             break;
 
-        sub_80625A4(count, result);
+        ShowStatusesDescriptionMenu(count, result);
     }
 
     sub_803E708(4, 0x3E);
@@ -1359,7 +1370,7 @@ static void ShowTacticDescriptionWindow(u8 tacticId)
         count = sub_8097DF0(GetTacticsDescription(tacticId), result);
         while (1) {
             if (count != 0) {
-                sub_8062500();
+                ShowStatusDescriptionMenuArrow();
             }
             nullsub_34(&menuSub, 0);
             DungeonRunFrameActions(62);
@@ -1378,13 +1389,13 @@ static void ShowTacticDescriptionWindow(u8 tacticId)
         if (bPress || count == 0)
             break;
 
-        sub_80625A4(count, result);
+        ShowStatusesDescriptionMenu(count, result);
     }
 
     sub_803E708(4, 0x3E);
 }
 
-static void sub_806285C(s32 a0)
+static void ShowStatusInfoWindow(s32 statusId)
 {
     const u8 *str;
     MenuInputStructSub menuSub;
@@ -1413,10 +1424,10 @@ static void sub_806285C(s32 a0)
     header.f3 = 0;
     DungeonShowWindows(&windows, TRUE);
     sub_80073B8(0);
-    str = sub_808E4FC(a0);
+    str = sub_808E4FC(statusId);
     strcpy(gFormatBuffer_Items[0], str);
     PrintFormattedStringOnWindow(16, 0, gUnknown_80FE964, 0, '\0');
-    PrintFormattedStringOnWindow(8, 16, sub_808E51C(a0), 0, '\0');
+    PrintFormattedStringOnWindow(8, 16, sub_808E51C(statusId), 0, '\0');
     sub_80073E0(0);
 
     while (1) {

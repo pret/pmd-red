@@ -25,7 +25,7 @@
 #include "weather.h"
 #include "dungeon_config.h"
 
-extern u32 gUnknown_202EDCC;
+extern u32 gDungeonFramesCounter;
 
 extern u8 *gUnknown_80FCA10[];
 extern u8 *gUnknown_80F8A0C[];
@@ -278,7 +278,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
         direction = (info->action).direction;
         target->unk1C.raw += + 0x800;
         while ( target->unk1C.raw < 0xa000) {
-            if ((gUnknown_202EDCC & 3) == 0) {
+            if ((gDungeonFramesCounter & 3) == 0) {
                 direction = (direction + 1) & DIRECTION_MASK;
                 info->action.direction = direction & DIRECTION_MASK;
                 sub_806CE68(target,direction);
@@ -324,7 +324,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
         direction = (info->action).direction;
         target->unk1C.raw = 0x9c00;
         do {
-            if ((gUnknown_202EDCC & 3) == 0) {
+            if ((gDungeonFramesCounter & 3) == 0) {
                 direction = (direction + 1) & DIRECTION_MASK;
                 info->action.direction = direction & DIRECTION_MASK;
                 sub_806CE68(target,direction);

@@ -45,7 +45,7 @@ extern void PlayDungeonCursorSE(u8 param_1);
 extern u32 gUnknown_202EDD0;
 extern u8 gUnknown_203B40C;
 extern u8 gUnknown_202EE01;
-extern s32 gUnknown_202EDCC;
+extern s32 gDungeonFramesCounter;
 
 extern const u8 gUnknown_80F7AE8[];
 extern const u8 gUnknown_80F7AF8[];
@@ -1047,7 +1047,7 @@ static bool8 TryScrollLogDown(s32 a0)
 static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 {
     struct UnkTextStruct1 *unkStr = &gUnknown_2027370[0];
-    if (!(gUnknown_202EDCC & 8)) {
+    if (!(gDungeonFramesCounter & 8)) {
         SpriteSetAffine1(&sMessageLogArrowSpriteOAM, 0);
         SpriteSetAffine2(&sMessageLogArrowSpriteOAM, 0);
         SpriteSetObjMode(&sMessageLogArrowSpriteOAM, 0);

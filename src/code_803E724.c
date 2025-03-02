@@ -52,7 +52,7 @@ extern const u16 gUnknown_80F6544[][9];
 
 extern u8 gUnknown_20274A5;
 
-extern s32 gUnknown_202EDCC;
+extern s32 gDungeonFramesCounter;
 
 extern void sub_8040A84();
 extern void PlayDungeonStartButtonSE(void);
@@ -1109,14 +1109,14 @@ void sub_803FB74(void)
         hungry = TRUE;
     }
 
-    if (lowHp && (gUnknown_202EDCC & 16) != 0) {
+    if (lowHp && (gDungeonFramesCounter & 16) != 0) {
         r5 = 32, r6 = 32;
     }
     else {
         r5 = 0, r6 = 0;
     }
 
-    if (hungry && (gUnknown_202EDCC & 16) != 0) {
+    if (hungry && (gDungeonFramesCounter & 16) != 0) {
         r5 = 48, r6 = 48;
     }
 

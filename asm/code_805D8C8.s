@@ -114,7 +114,7 @@ _080638FE:
 	mov r0, r8
 	cmp r0, 0
 	beq _08063908
-	bl sub_8062500
+	bl ShowStatusDescriptionMenuArrow
 _08063908:
 	ldr r5, _08063944
 	adds r0, r5, 0
@@ -213,7 +213,7 @@ _080639B8:
 _080639C0:
 	mov r0, r8
 	mov r1, r10
-	bl sub_80625A4
+	bl ShowStatusesDescriptionMenu
 	b _08063898
 _080639CA:
 	movs r0, 0
@@ -229,8 +229,8 @@ _080639CA:
 	bx r0
 	thumb_func_end sub_8063834
 
-	thumb_func_start sub_80639E4
-sub_80639E4:
+	thumb_func_start ShowStatusDescriptionMenu
+ShowStatusDescriptionMenu:
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -288,7 +288,7 @@ _08063A60: .4byte gUnknown_8106CC8
 _08063A64: .4byte gFormatBuffer_Monsters
 _08063A68: .4byte gUnknown_8106CCC
 _08063A6C: .4byte gDungeonMenu
-	thumb_func_end sub_80639E4
+	thumb_func_end ShowStatusDescriptionMenu
 
 	thumb_func_start sub_8063A70
 sub_8063A70:
@@ -1919,7 +1919,7 @@ _08064732:
 _08064738:
 	cmp r5, 0
 	beq _08064740
-	bl sub_8062500
+	bl ShowStatusDescriptionMenuArrow
 _08064740:
 	adds r0, r6, 0
 	movs r1, 0
@@ -1952,7 +1952,7 @@ _08064774:
 	adds r0, 0x4
 	ldr r0, [r0]
 	adds r1, r6, 0
-	bl sub_80639E4
+	bl ShowStatusDescriptionMenu
 	adds r7, r4, 0x1
 	b _080647A0
 	.align 2, 0
@@ -1971,7 +1971,7 @@ _0806479A:
 _080647A0:
 	cmp r4, r8
 	bge _080647A8
-	bl sub_8062500
+	bl ShowStatusDescriptionMenuArrow
 _080647A8:
 	adds r0, r6, 0
 	movs r1, 0
@@ -2411,7 +2411,7 @@ _08064B22:
 _08064B28:
 	cmp r6, 0
 	beq _08064B30
-	bl sub_8062500
+	bl ShowStatusDescriptionMenuArrow
 _08064B30:
 	adds r0, r5, 0
 	movs r1, 0
@@ -2444,7 +2444,7 @@ _08064B64:
 	adds r0, 0x4
 	ldr r0, [r0]
 	adds r1, r5, 0
-	bl sub_80639E4
+	bl ShowStatusDescriptionMenu
 	adds r7, r4, 0x1
 	b _08064B90
 	.align 2, 0
@@ -2463,7 +2463,7 @@ _08064B8A:
 _08064B90:
 	cmp r4, r8
 	bge _08064B98
-	bl sub_8062500
+	bl ShowStatusDescriptionMenuArrow
 _08064B98:
 	adds r0, r5, 0
 	movs r1, 0
@@ -5567,7 +5567,7 @@ _080664C0:
 	bx r0
 	.align 2, 0
 _080664C8: .4byte gUnknown_2027370
-_080664CC: .4byte gUnknown_202EDCC
+_080664CC: .4byte gDungeonFramesCounter
 _080664D0: .4byte gUnknown_202F300
 _080664D4: .4byte 0x0000feff
 _080664D8: .4byte 0x0000fdff

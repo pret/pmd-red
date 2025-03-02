@@ -15,7 +15,7 @@ extern const u8 gUnknown_8106E98[]; // palet
 // ???
 extern s32 sprintf(char *, const char *, ...);
 
-extern u32 gUnknown_202EDCC;
+extern u32 gDungeonFramesCounter;
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
@@ -38,7 +38,7 @@ void sub_8068310(s32 size, u16 **param_2)
 
 void sub_8068344(void)
 {
-    if ((gUnknown_202EDCC & 8) != 0) {
+    if ((gDungeonFramesCounter & 8) != 0) {
         UnkTextStruct1 *ptr = &gUnknown_2027370[0];
         SpriteOAM sprite = {0};
 
@@ -62,7 +62,7 @@ void sub_8068344(void)
 // The same as sub_80623B0
 void sub_80684C4(void)
 {
-    if ((gUnknown_202EDCC & 8) != 0) {
+    if ((gDungeonFramesCounter & 8) != 0) {
         UnkTextStruct1 *ptr = &gUnknown_2027370[0];
         SpriteOAM sprite = {0};
 

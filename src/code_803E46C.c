@@ -20,7 +20,7 @@ EWRAM_INIT u8 gUnknown_203B40C = 0;
 EWRAM_INIT u8 gUnknown_203B40D = 0;
 
 extern s32 gDungeonBrightness;
-extern s32 gUnknown_202EDCC;
+extern s32 gDungeonFramesCounter;
 extern u32 gUnknown_202EDD0;
 extern s32 gUnknown_202EDD4;
 
@@ -95,7 +95,7 @@ void sub_803E490(u32 unused)
     nullsub_12();
     sub_80060EC();
 
-    gUnknown_202EDCC++;
+    gDungeonFramesCounter++;
 
     IncrementPlayTime(gPlayTimeRef);
     sub_800CB20();
@@ -128,7 +128,7 @@ void sub_803E668(u32 unused)
     nullsub_12();
     sub_8005838(NULL, 0);
     sub_80060EC();
-    gUnknown_202EDCC++;
+    gDungeonFramesCounter++;
     IncrementPlayTime(gPlayTimeRef);
     sub_800CB20();
     LoadBufferedInputs();
