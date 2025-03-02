@@ -52,7 +52,7 @@ extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern s32 gDungeonSubMenuItemsCount;
 extern const u8 gUnknown_8106B50[];
-extern void DungeonShowWindows(Windows *a0, u8 a1);
+extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
 extern void sub_8044F5C(u16 param_1, u8 param_2);
 extern void sub_8044FF0(u16 param_1);
@@ -79,7 +79,7 @@ static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
 static EWRAM_DATA s16 sUnknown_202F248[8] = {0};
 static EWRAM_DATA s32 sUnknown_202F258 = 0;
 
-static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Windows *a4, WindowHeader *a5);
+static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, WindowTemplates *a4, WindowHeader *a5);
 static s32 sub_8060800(WindowHeader *a0, s32 a1);
 static bool8 sub_8060860(s32 a0);
 static void sub_8060890(DungeonPos *a0);
@@ -120,7 +120,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
     EntityInfo *a0Info = GetEntInfo(a0);
     WindowHeader header;
 
-    Windows windows =
+    WindowTemplates windows =
     {
         .id =
         {
@@ -381,12 +381,12 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
 
 static const struct unkStruct_8090F58 gUnknown_8106B60 = {1, 1, 0, 80, 1};
 
-static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, bool8 a3, Windows *windows, WindowHeader *a5)
+static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, bool8 a3, WindowTemplates *windows, WindowHeader *a5)
 {
     s32 i, x, y;
     s32 r10;
-    UnkTextStruct1 *txtStrPtr;
-    Window whichWindow = {
+    Window *txtStrPtr;
+    WindowTemplate whichWindow = {
         .type = WINDOW_TYPE_NORMAL,
         .pos = {2, 4},
         .width = 6,
@@ -447,7 +447,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     }
 
     DungeonShowWindows(windows, 1);
-    txtStrPtr = &gUnknown_2027370[0];
+    txtStrPtr = &gWindows[0];
     gDungeonMenu.unkC = (txtStrPtr->unk0 + 0x10) * 8;
     gDungeonMenu.unkE = ((txtStrPtr->unk2 + 1) * 8) - 2;
     sub_80137B0(&gDungeonMenu, 0x70);

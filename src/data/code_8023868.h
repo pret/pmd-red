@@ -1,5 +1,5 @@
 //static // MAKE STATIC WHEN code_8023868.s IS DONE
-const Window sUnknown_80DC950 = {
+const WindowTemplate sUnknown_80DC950 = {
     0,
     3,
     0, 0,
@@ -8,7 +8,7 @@ const Window sUnknown_80DC950 = {
     NULL
 };
 //static // MAKE STATIC WHEN code_8023868.s IS DONE
-const Window sUnknown_80DC968 = {
+const WindowTemplate sUnknown_80DC968 = {
     0,
     6,
     2, 2,

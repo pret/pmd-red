@@ -4653,7 +4653,7 @@ _08065F16:
 	.align 2, 0
 _08065F28: .4byte gGameOptionsRef
 _08065F2C: .4byte gDungeonMenu
-_08065F30: .4byte gUnknown_2027370
+_08065F30: .4byte gWindows
 _08065F34: .4byte gUnknown_80FF774
 _08065F38: .4byte gUnknown_80FF7EC
 _08065F3C: .4byte gRealInputs
@@ -4910,7 +4910,7 @@ _08066134: .4byte gUnknown_203B43C
 _08066138: .4byte gUnknown_8106D08
 _0806613C: .4byte gUnknown_202F2F8
 _08066140: .4byte gUnknown_202F2FC
-_08066144: .4byte gUnknown_2027370
+_08066144: .4byte gWindows
 _08066148: .4byte gUnknown_8106D68
 _0806614C: .4byte gRealInputs
 _08066150:
@@ -5344,7 +5344,7 @@ _080664C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080664C8: .4byte gUnknown_2027370
+_080664C8: .4byte gWindows
 _080664CC: .4byte gDungeonFramesCounter
 _080664D0: .4byte gUnknown_202F300
 _080664D4: .4byte 0x0000feff

@@ -16,13 +16,13 @@ struct unkStruct_203B1F8
     // size: 0x4B4
     u32 menuAction;
     MenuStruct unk4;
-    Windows windows;
+    WindowTemplates windows;
     u8 buffer[0x400];
 };
 
 EWRAM_INIT struct unkStruct_203B1F8 *gUnknown_203B1F8 = {NULL};
 
-const Window gUnknown_80DAF70 = {
+const WindowTemplate gUnknown_80DAF70 = {
    0x00,
    0x03,
    0x00, 0x00,
@@ -31,7 +31,7 @@ const Window gUnknown_80DAF70 = {
    NULL
 };
 
-const Window gUnknown_80DAF88 = {
+const WindowTemplate gUnknown_80DAF88 = {
    0x00,
    0x03,
    0x02, 0x02,
@@ -40,7 +40,7 @@ const Window gUnknown_80DAF88 = {
    NULL
 };
 
-const Window gUnknown_80DAFA0 = {
+const WindowTemplate gUnknown_80DAFA0 = {
    0x00,
    0x03,
    0x16, 0x0F,
@@ -251,7 +251,7 @@ static const u8 *const gUnknown_80DB4F4[] =
     _("END"),
 };
 
-static const Window gUnknown_80DB538 = {
+static const WindowTemplate gUnknown_80DB538 = {
    0x00,
    0x03,
    0x00, 0x00,
@@ -260,7 +260,7 @@ static const Window gUnknown_80DB538 = {
    NULL
 };
 
-static const Window gUnknown_80DB550 = {
+static const WindowTemplate gUnknown_80DB550 = {
    0x00,
    0x01,
    0x01, 0x0A,
@@ -269,7 +269,7 @@ static const Window gUnknown_80DB550 = {
    NULL
 };
 
-static const Window gUnknown_80DB568 = {
+static const WindowTemplate gUnknown_80DB568 = {
    0x00,
    0x01,
    0x04, 0x03,
@@ -278,7 +278,7 @@ static const Window gUnknown_80DB568 = {
    NULL
 };
 
-static const Window gUnknown_80DB580 = {
+static const WindowTemplate gUnknown_80DB580 = {
    0x00,
    0x01,
    0x01, 0x02,
@@ -356,7 +356,7 @@ struct unkStruct_203B1FC
     u8 *unkF8;
     u8 unkFC[56];
     u8 *unk134;
-    Windows windows;
+    WindowTemplates windows;
 };
 extern struct unkStruct_203B1FC *gUnknown_203B1FC;
 
@@ -640,7 +640,7 @@ bool8 sub_8015748(void)
 
 void sub_80157D8(void)
 {
-    UnkTextStruct1 *txtPtr = &gUnknown_2027370[1];
+    Window *txtPtr = &gWindows[1];
 
     // Note: for cases 4 and 5, the code is identical except for different position structs.
     if (gUnknown_203B1FC->unk0 == 4) {
@@ -675,7 +675,7 @@ void sub_80157D8(void)
 void sub_80158BC(void)
 {
     s32 x, y;
-    UnkTextStruct1 *txtPtr = &gUnknown_2027370[0];
+    Window *txtPtr = &gWindows[0];
     u32 var;
 
     switch (sub_8012AE8()) {

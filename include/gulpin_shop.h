@@ -27,7 +27,7 @@ typedef struct GulpinShopWork
     u8 fillC8[0x118 - 0xC8];
     /* 0x118 */ struct MonPortraitMsg monPortrait;
     struct MonPortraitMsg *monPortraitPtr;
-    Windows unk12C;
+    WindowTemplates unk12C;
 } GulpinShopWork;
 
 bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves);

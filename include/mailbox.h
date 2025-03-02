@@ -19,7 +19,7 @@ struct unkStruct_203B304
     MenuStruct unk6C;
     MenuItem menuItems[8];
     u16 unkFC[8];
-    Windows unk10C;
+    WindowTemplates unk10C;
 };
 
 extern void SetMailboxState(u32);

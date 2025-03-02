@@ -16,7 +16,7 @@ struct IQSkillInfoMenu
     u8 fill14[0x20 - 0x18];
     u32 unk20;
     u32 unk24;
-    Windows unk28;
+    WindowTemplates unk28;
     MenuInputStructSub unk88;
 };
 

@@ -32,7 +32,7 @@ typedef struct unkStruct_203B2B8
     MenuItem unk16C[10];
     MenuItem unk1BC[10];
     u16 unk20C[10];
-    Windows unk220;
+    WindowTemplates unk220;
 } unkStruct_203B2B8;
 
 bool8 CreatePartyListMenu(PokemonStruct1 *pokeStruct);

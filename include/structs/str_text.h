@@ -2,7 +2,7 @@
 #define GUARD_STR_TEXT_H
 
 // size: 0x48
-typedef struct UnkTextStruct1
+typedef struct Window
 {
     s16 unk0;
     s16 unk2;
@@ -26,7 +26,7 @@ typedef struct UnkTextStruct1
     u8 unk44;
     bool8 unk45;
     u8 unk46;
-} UnkTextStruct1;
+} Window;
 
 typedef struct WindowHeader
 {
@@ -39,7 +39,7 @@ typedef struct WindowHeader
 #include "structs/str_position.h"
 
 // size: 0x18
-typedef struct Window
+typedef struct WindowTemplate
 {
     u8 unk0;
     s32 type;
@@ -49,10 +49,10 @@ typedef struct Window
     s16 unk10; // In most cases it's the same as height. If it's smaller than height, the window may look glitchy. Maybe something with tile allocation/how the window is filled?
     s16 unk12;
     const WindowHeader *unk14;
-} Window;
+} WindowTemplate;
 
 // All fields are zeroed out except for type which is set to WINDOW_TYPE_NORMAL.
-#define WINDOW_DUMMY (Window) {.unk0 = 0, .type = WINDOW_TYPE_NORMAL, .width = 0, .pos = {0, 0}, .height = 0, .unk10 = 0, .unk12 = 0, .unk14 = NULL}
+#define WINDOW_DUMMY (WindowTemplate) {.unk0 = 0, .type = WINDOW_TYPE_NORMAL, .width = 0, .pos = {0, 0}, .height = 0, .unk10 = 0, .unk12 = 0, .unk14 = NULL}
 
 #define WINDOW_TYPE_0                   0
 #define WINDOW_TYPE_WITHOUT_BORDER      1
@@ -63,8 +63,8 @@ typedef struct Window
 
 #define MAX_WINDOWS 4
 
-typedef struct Windows {
-    Window id[MAX_WINDOWS];
-} Windows;
+typedef struct WindowTemplates {
+    WindowTemplate id[MAX_WINDOWS];
+} WindowTemplates;
 
 #endif // GUARD_STR_TEXT_H

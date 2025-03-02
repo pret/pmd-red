@@ -17,7 +17,7 @@ struct unkStruct_203B328
     u8 mailIndex;
     MenuStruct unk8;
     MenuStruct unk58;
-    Windows unkA8;
+    WindowTemplates unkA8;
     /* 0x108 */ struct MonPortraitMsg monPortrait;
     u32 wonderMailType;
 };
@@ -48,7 +48,7 @@ const MenuItem gUnknown_80E0968[] =
     {NULL, CANCEL_ACTION}
 };
 
-const Window gUnknown_80E0990 = {
+const WindowTemplate gUnknown_80E0990 = {
     0,
     0x03,
     0x00, 0x00,
@@ -56,7 +56,7 @@ const Window gUnknown_80E0990 = {
     0x00, 0x00,
     NULL
 };
-const Window gUnknown_80E09A8 = {
+const WindowTemplate gUnknown_80E09A8 = {
     0,
     0x03,
     0x13, 0x0B,
@@ -64,7 +64,7 @@ const Window gUnknown_80E09A8 = {
     0x03, 0x00,
     NULL
 };
-const Window gUnknown_80E09C0 = {
+const WindowTemplate gUnknown_80E09C0 = {
     0,
     0x03,
     0x11, 0x0F,

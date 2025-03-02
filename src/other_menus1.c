@@ -119,7 +119,7 @@ static void sub_80371B8(void)
 {
     unkStruct_8035D94 *item;
     const MenuItem *MenuItems;
-    const Window *puVar5;
+    const WindowTemplate *puVar5;
 
     puVar5 = NULL;
     MenuItems = NULL;

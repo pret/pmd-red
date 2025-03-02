@@ -258,7 +258,7 @@ void FriendAreasMap_PrintCurrAreaName(void)
     u8 txt[200];
     s32 id = gFriendAreasMapPtr->currLocationId;
     const struct FriendAreaLocationInfo *locationInfo = &gFriendAreasMapPtr->locationsInfo[id];
-    Windows windows = {0};
+    WindowTemplates windows = {0};
 
     windows.id[0].type = WINDOW_TYPE_NORMAL;
     windows.id[0].pos.x = 7;
@@ -295,7 +295,7 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
     const struct FriendAreaLocationInfo *locationInfo = &gFriendAreasMapPtr->locationsInfo[id];
     MenuInputStruct *menuInput = &gFriendAreasMapPtr->menu;
     WindowHeader header;
-    Windows windows = {
+    WindowTemplates windows = {
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,

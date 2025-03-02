@@ -34,7 +34,7 @@ typedef struct unkStruct_203B2F8
     MenuItem unk118[8];
     MenuItem unk158[8];
     u16 unk198[8];
-    Windows unk1A8;
+    WindowTemplates unk1A8;
 } unkStruct_203B2F8;
 
 bool8 GetWonderMailAccepted(void);

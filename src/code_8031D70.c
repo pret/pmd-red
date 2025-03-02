@@ -18,15 +18,15 @@ struct unkStruct_203B334
     u32 mailIndex;
     MenuInputStructSub unk4;
     u32 unk10;
-    Window *unk14;
-    Windows unk18;
+    WindowTemplate *unk14;
+    WindowTemplates unk18;
     u8 unk78[4];
 };
 
 EWRAM_INIT struct unkStruct_203B334 *gUnknown_203B334 = {NULL};
 extern unkStruct_203B480 *gUnknown_203B480;
 
-const Window gUnknown_80E1FA8 = {
+const WindowTemplate gUnknown_80E1FA8 = {
     0,
     3,
     0x0, 0x0,
@@ -37,7 +37,7 @@ const Window gUnknown_80E1FA8 = {
 
 const WindowHeader gUnkData_80E1FC0 = {0x01, 0x00, 0x0A, 0x00};
 
-const Window gUnknown_80E1FC4 = {
+const WindowTemplate gUnknown_80E1FC4 = {
     0,
     6,
     0x2, 0x2,

@@ -75,7 +75,7 @@ const Item gUnknown_80DED44 =
     ITEM_FLAG_EXISTS, 0, ITEM_NOTHING
 };
 
-const Window gUnknown_80DED48 =
+const WindowTemplate gUnknown_80DED48 =
 {
     0,
     0x03,
@@ -85,7 +85,7 @@ const Window gUnknown_80DED48 =
     NULL
 };
 
-const Window gUnknown_80DED60 =
+const WindowTemplate gUnknown_80DED60 =
 {
     0,
     0x03,
@@ -103,7 +103,7 @@ const MenuItem gUnknown_80DED78[] =
 };
 
 // Unused
-const Window gUnknown_80DEDA0 =
+const WindowTemplate gUnknown_80DEDA0 =
 {
     0,
     0x03,

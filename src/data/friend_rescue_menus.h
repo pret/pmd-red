@@ -102,7 +102,7 @@ const MenuItem gUnknown_80E22F0[] = {
     {NULL, 8},
 };
 
-const Window gUnknown_80E231C =
+const WindowTemplate gUnknown_80E231C =
 {
     0,
     0x03,
@@ -112,7 +112,7 @@ const Window gUnknown_80E231C =
     NULL
 };
 
-const Window gUnknown_80E2334 =
+const WindowTemplate gUnknown_80E2334 =
 {
     0,
     0x03,
@@ -142,7 +142,7 @@ const MenuItem gUnknown_80E23A8[] = {
     {NULL, 8},
 };
 
-const Window gUnknown_80E23F0 =
+const WindowTemplate gUnknown_80E23F0 =
 {
     0,
     0x03,
@@ -159,7 +159,7 @@ const MenuItem gUnknown_80E2408[] = {
     {NULL, 8},
 };
 
-UNUSED static const Window sUnused =
+UNUSED static const WindowTemplate sUnused =
 {
     0,
     0x03,

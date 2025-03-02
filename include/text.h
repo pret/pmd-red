@@ -49,7 +49,7 @@ struct UnkDrawStringStruct
     s32 unk30;
 };
 
-extern UnkTextStruct1 gUnknown_2027370[4];
+extern Window gWindows[MAX_WINDOWS];
 extern u8 gUnknown_202749A[11];
 extern bool8 gUnknown_20274A5;
 extern u16 gUnknown_202B038[4][32][32]; // Usage points to these dimensions
@@ -63,8 +63,8 @@ u32 UpdateFadeInTile(u32 a0);
 u32 sub_80063B0(void);
 void SelectCharmap(u32 a0);
 void SetCharacterMask(int a0);
-void ShowWindows(const Windows *windows, bool8 a1, bool8 a2);
-void RestoreUnkTextStruct_8006518(Windows *unkData);
+void ShowWindows(const WindowTemplates *windows, bool8 a1, bool8 a2);
+void RestoreUnkTextStruct_8006518(WindowTemplates *unkData);
 u32 sub_8006544(u32 index);
 void sub_8007334(s32 a0);
 void sub_80073B8(s32 a0);

@@ -1,4 +1,4 @@
-static const Window sUnknown_80E59A8 = {
+static const WindowTemplate sUnknown_80E59A8 = {
    0,
    3,
    0, 0,

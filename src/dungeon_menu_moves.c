@@ -40,7 +40,7 @@ extern void sub_803EAF0(u32, u8 *);
 extern void sub_803E708(s32 a0, s32 a1);
 extern void sub_8044F5C(u16 param_1, u8 param_2);
 extern void sub_8044FF0(u16 param_1);
-extern void DungeonShowWindows(Windows *a0, u8 a1);
+extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 extern s32 GetTeamMemberEntityIndex(Entity *pokemon);
 extern u32 sub_8062D88(void);
 extern void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
@@ -62,11 +62,11 @@ extern s32 gUnknown_202F2D8;
 extern s32 sub_8044FB4(u16 param_1);
 
 extern const u8 *const gUnknown_80FE978;
-extern const Window gUnknown_8106CAC;
+extern const WindowTemplate gUnknown_8106CAC;
 extern const u8 *const gUnknown_80FDFE8;
 extern const u8 gUnknown_8106CC4[];
 
-void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, Windows *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
+void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
 void sub_8063698(Entity *entity, u8 a1, u8 a2);
 void sub_80637BC(ActionContainer *a0, s32 a1, s32 a2);
 void sub_80637A4(ActionContainer *a0, s32 a1);
@@ -193,7 +193,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
     bool8 unkBool = TRUE;
     EntityInfo *leaderInfo = GetEntInfo(GetLeader());
     WindowHeader header;
-    Windows windows = {
+    WindowTemplates windows = {
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
@@ -425,10 +425,10 @@ bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
     return ret;
 }
 
-void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, Windows *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7)
+void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7)
 {
     s32 i, movesCount;
-    Window windowNew = gUnknown_8106CAC;
+    WindowTemplate windowNew = gUnknown_8106CAC;
 
     header->f0 = arg7;
     header->f1 = arg6;
@@ -460,8 +460,8 @@ void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, Windows *windows, W
     windows->id[2] = windowNew;
     DungeonShowWindows(windows, TRUE);
     sub_80137B0(&gDungeonMenu, 0);
-    gDungeonMenu.unkC = (gUnknown_2027370[0].unk0 + 16) * 8;
-    gDungeonMenu.unkE = ((gUnknown_2027370[0].unk2 + 1) * 8) - 2;
+    gDungeonMenu.unkC = (gWindows[0].unk0 + 16) * 8;
+    gDungeonMenu.unkE = ((gWindows[0].unk2 + 1) * 8) - 2;
     SetMessageArgument_2(gFormatBuffer_Monsters[0], entInfo, 0);
     for (i = 0; i < MAX_MON_MOVES; i++) {
         Move *move = &entInfo->moves.moves[i];
@@ -603,7 +603,7 @@ void sub_80637E8(ActionContainer *a0)
 
 void sub_8063834(Move *moves, s32 a1, s32 a2)
 {
-    Windows windows;
+    WindowTemplates windows;
     WindowHeader header;
     struct subStruct_203B240 *statuses[4];
     s32 i, count, currId;
@@ -632,8 +632,8 @@ void sub_8063834(Move *moves, s32 a1, s32 a2)
 
         gDungeonMenu.unk1E = currId;
         gDungeonMenu.unk20 = count;
-        gDungeonMenu.unkC = (gUnknown_2027370[0].unk0 + 23) * 8;
-        gDungeonMenu.unkE = ((gUnknown_2027370[0].unk2 + 1) * 8) - 2;
+        gDungeonMenu.unkC = (gWindows[0].unk0 + 23) * 8;
+        gDungeonMenu.unkE = ((gWindows[0].unk2 + 1) * 8) - 2;
         gDungeonMenu.unk14.x = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;

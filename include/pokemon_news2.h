@@ -14,7 +14,7 @@ struct unkStruct_203B2D4
     const u8 *unk10[4];
     u32 unk20;
     u32 unk24;
-    Windows unk28;
+    WindowTemplates unk28;
     MenuInputStructSub unk88;
 };
 

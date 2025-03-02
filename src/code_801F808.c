@@ -23,15 +23,15 @@ struct unkStruct_203B278
     u32 unk24;
     MenuInputStruct unk28;
     u32 unk5C;
-    Window *unk60;
-    Windows windows;
+    WindowTemplate *unk60;
+    WindowTemplates windows;
     WindowHeader unkC4;
     MenuInputStructSub unkC8;
 };
 
 EWRAM_INIT struct unkStruct_203B278 *gUnknown_203B278 = {NULL};
 
-static const Window sUnknown_80DC2F8 = {
+static const WindowTemplate sUnknown_80DC2F8 = {
     0,
     3,
     0, 0,

@@ -18,7 +18,7 @@ const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
 const WindowHeader UnkData_80D47C4 = {0x01, 0x00, 0x10, 0x00};
 
-const Window gUnknown_80D47C8[MAX_WINDOWS] = {
+const WindowTemplate gUnknown_80D47C8[MAX_WINDOWS] = {
     0,
     0x06,
     0x02, 0x02,
@@ -223,7 +223,7 @@ void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
     xxx_call_draw_char(x + add_x, y, uVar2, color, a4);
 }
 
-void sub_8012CAC(Window *a0, const MenuItem *a1)
+void sub_8012CAC(WindowTemplate *a0, const MenuItem *a1)
 {
     s32 length;
     s32 maxLength;
@@ -244,7 +244,7 @@ void sub_8012CAC(Window *a0, const MenuItem *a1)
     sub_8012D08(a0, count);
 }
 
-void sub_8012D08(Window *param_1, s32 param_2)
+void sub_8012D08(WindowTemplate *param_1, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
@@ -258,7 +258,7 @@ void sub_8012D08(Window *param_1, s32 param_2)
     param_1->unk10 = sVar3;
 }
 
-void sub_8012D34(struct Window *param_1, s32 param_2)
+void sub_8012D34(struct WindowTemplate *param_1, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
@@ -386,15 +386,15 @@ void sub_8012EBC(MenuStruct *param_1)
     const u32 *colorArray;
     s32 counter;
     s32 index;
-    Windows textStack;
+    WindowTemplates textStack;
     u8 buffer[256];
-    UnkTextStruct1 *ptr_text;
-    Window *ptr_text2;
+    Window *ptr_text;
+    WindowTemplate *ptr_text2;
 
     if (param_1->unk4D) {
         sub_80073B8(param_1->index);
         index = param_1->index;
-        ptr_text = &gUnknown_2027370[index];
+        ptr_text = &gWindows[index];
 
         if (ptr_text->unkC == 6) {
             ptr_text2 = &textStack.id[index];
@@ -540,9 +540,9 @@ bool8 sub_8013114(MenuStruct *param_1, s32 *menuAction)
 
 static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 index)
 {
-    UnkTextStruct1 *temp;
+    Window *temp;
 
-    temp = &gUnknown_2027370[index];
+    temp = &gWindows[index];
 
     param_1->unk0 = index;
     param_1->menuIndex = 0;
@@ -700,10 +700,10 @@ void sub_8013660(MenuInputStruct *param_1)
 void UpdateMenuCursorSpriteCoords(MenuInputStruct *param_1)
 {
     s32 index;
-    UnkTextStruct1 *temp;
+    Window *temp;
 
     index = param_1->unk0;
-    temp = &gUnknown_2027370[index];
+    temp = &gWindows[index];
     param_1->unk8.x = temp->unk0 * 8 + param_1->unk4;
     param_1->unk8.y = temp->unk2 * 8 + GetMenuEntryYCoord(param_1, param_1->menuIndex);
 }
@@ -798,12 +798,12 @@ void sub_80137B0(MenuInputStruct *param_1, s32 param_2)
         iVar2 = param_2 << 8;
     }
     else {
-        if (gUnknown_2027370[param_1->unk0].unkC == 6)
+        if (gWindows[param_1->unk0].unkC == 6)
             iVar1 = 16;
         else
             iVar1 = 0;
 
-        iVar2 = (gUnknown_2027370[param_1->unk0].unk6 * 8 - iVar1) << 8;
+        iVar2 = (gWindows[param_1->unk0].unk6 * 8 - iVar1) << 8;
     }
 
     param_1->unk10 = iVar2 / param_1->unk1C;
@@ -931,10 +931,10 @@ void sub_8013984(MenuInputStruct *param_1)
 {
     s32 iVar2;
     s32 iVar4;
-    UnkTextStruct1 *ptr;
+    Window *ptr;
 
     iVar4 = param_1->unk0;
-    ptr = &gUnknown_2027370[iVar4];
+    ptr = &gWindows[iVar4];
 
     if (param_1->unk1C == 0)
         param_1->unk1C++;
@@ -1085,9 +1085,9 @@ void sub_8013D10(unkStructFor8013AA0 *a0)
 {
     s32 x, y;
     u8 uVar4;
-    UnkTextStruct1 *ptr;
+    Window *ptr;
 
-    ptr = &gUnknown_2027370[a0->unk14];
+    ptr = &gWindows[a0->unk14];
     uVar4 = a0->unk24;
 
     switch (sub_8012AE8()) {
@@ -1152,7 +1152,7 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
 
 void sub_8013E54(void)
 {
-    UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+    Window *ptr = &gWindows[0];
     SpriteOAM SStack_18 = {0};
 
     SpriteSetAffine1(&SStack_18, 0);
@@ -1174,7 +1174,7 @@ void sub_8013E54(void)
 
 void sub_8013F84(void)
 {
-    UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+    Window *ptr = &gWindows[0];
     SpriteOAM SStack_18 = {0};
 
     SpriteSetAffine1(&SStack_18, 0);
@@ -1194,7 +1194,7 @@ void sub_8013F84(void)
     AddSprite(&SStack_18,0x100,0,0x0);
 }
 
-void sub_80140B4(Windows *a0)
+void sub_80140B4(WindowTemplates *a0)
 {
     s32 i;
 

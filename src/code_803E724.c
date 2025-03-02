@@ -173,7 +173,7 @@ void sub_803EA10(void)
     SetBGPaletteBufferColorRGB(248, &gFontPalette[8], gDungeonBrightness, NULL);
 }
 
-static const struct Windows gUnknown_80F62B0 =
+static const struct WindowTemplates gUnknown_80F62B0 =
 {
     .id = {
         [0] = {
@@ -191,7 +191,7 @@ static const struct Windows gUnknown_80F62B0 =
     }
 };
 
-static const struct Windows gUnknown_80F6310 =
+static const struct WindowTemplates gUnknown_80F6310 =
 {
     .id = {
         [0] = {
@@ -209,7 +209,7 @@ static const struct Windows gUnknown_80F6310 =
     }
 };
 
-static const struct Windows gUnknown_80F6370 =
+static const struct WindowTemplates gUnknown_80F6370 =
 {
     .id = {
         [0] = {
@@ -243,7 +243,7 @@ static const struct Windows gUnknown_80F6370 =
     }
 };
 
-static const struct Windows gUnknown_80F63D0 =
+static const struct WindowTemplates gUnknown_80F63D0 =
 {
     .id = {
         [0] = {
@@ -353,7 +353,7 @@ void sub_803EC94(void)
     sub_801317C(&gDungeonMenu.unk28);
 }
 
-void DungeonShowWindows(Windows *a0, bool8 a1)
+void DungeonShowWindows(WindowTemplates *a0, bool8 a1)
 {
     gUnknown_202EDD0 = 10;
     sub_8052210(0);

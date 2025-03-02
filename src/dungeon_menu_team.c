@@ -110,7 +110,7 @@ extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern s32 gDungeonSubMenuItemsCount;
 extern const u8 gUnknown_8106B50[];
-extern void DungeonShowWindows(Windows *a0, u8 a1);
+extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
 extern void sub_8044F5C(u16 param_1, u8 param_2);
 extern void sub_8044FF0(u16 param_1);
@@ -158,7 +158,7 @@ struct UnkFieldTeamMenuStruct
     u8 unk14[MAX_TEAM_MEMBERS];
 };
 
-static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows, bool8 a2);
+static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemplates *windows, bool8 a2);
 static void sub_806145C(struct UnkFieldTeamMenuStruct *a0);
 static void ChosenSubMenuToAction(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1);
 static void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId);
@@ -179,7 +179,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
     s32 i;
     bool32 r10, ret;
     struct UnkFieldTeamMenuStruct sp;
-    Windows windows = {
+    WindowTemplates windows = {
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
@@ -323,7 +323,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
     return ret;
 }
 
-static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows, bool8 a2)
+static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemplates *windows, bool8 a2)
 {
     s32 r0;
     DungeonPos pos;
@@ -511,7 +511,7 @@ static void ChosenSubMenuToAction(ActionContainer *a0, struct UnkFieldTeamMenuSt
 
 void ShowDungeonTacticsMenu(ActionContainer *a0)
 {
-    Windows windows = {
+    WindowTemplates windows = {
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
@@ -746,7 +746,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
     s32 subWindowIds[6];
     struct unkStruct_808FF20 unkMonStruct;
     struct UnkInfoTabStruct unkInfoTabStruct;
-    Windows windows = {
+    WindowTemplates windows = {
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
@@ -810,7 +810,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         bool8 hasIqSkills = FALSE;
         bool8 hasStatusProblems = FALSE;
         bool8 addCursorSprite = TRUE;
-        UnkTextStruct1 *unkTxtStr1Ptr = &gUnknown_2027370[0];
+        Window *unkTxtStr1Ptr = &gWindows[0];
 
         sTeamWindowHeader.f0 = totalSubWindows;
         sTeamWindowHeader.f1 = currSubWindowId;
@@ -1197,7 +1197,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
 static void ShowUpArrowSprite(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
-        UnkTextStruct1 *txtStrPtr = &gUnknown_2027370[0];
+        Window *txtStrPtr = &gWindows[0];
         SpriteOAM sprite = {0};
 
         SpriteSetAffine1(&sprite, 0);
@@ -1222,7 +1222,7 @@ static void ShowUpArrowSprite(void)
 static void ShowDownArrowSprite(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
-        UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+        Window *ptr = &gWindows[0];
         SpriteOAM sprite = {0};
 
         SpriteSetAffine1(&sprite, 0);
@@ -1245,7 +1245,7 @@ static void ShowDownArrowSprite(void)
 void ShowStatusDescriptionMenuArrow(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
-        UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+        Window *ptr = &gWindows[0];
 
         SpriteSetAffine1(&gUnknown_202F268, 0);
         SpriteSetAffine2(&gUnknown_202F268, 0);
@@ -1293,7 +1293,7 @@ void ShowStatusesDescriptionMenu(s32 count, struct subStruct_203B240 **strings)
 static void ShowIqDescriptionWindow(u8 iqSkillId)
 {
     MenuInputStructSub menuSub;
-    Windows windows;
+    WindowTemplates windows;
     WindowHeader header;
     struct subStruct_203B240 *result[4];
 
@@ -1346,7 +1346,7 @@ static void ShowIqDescriptionWindow(u8 iqSkillId)
 static void ShowTacticDescriptionWindow(u8 tacticId)
 {
     MenuInputStructSub menuSub;
-    Windows windows;
+    WindowTemplates windows;
     WindowHeader header;
     struct subStruct_203B240 *result[4];
 
@@ -1401,7 +1401,7 @@ static void ShowStatusInfoWindow(s32 statusId)
     const u8 *str;
     MenuInputStructSub menuSub;
     WindowHeader header;
-    Windows windows = {
+    WindowTemplates windows = {
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_WITH_HEADER,
@@ -1448,7 +1448,7 @@ static void ShowStatusInfoWindow(s32 statusId)
 }
 
 static const WindowHeader sBottomWindowHeader = {1, 0, 15, 0};
-static const Window sMovesSubMenu = {
+static const WindowTemplate sMovesSubMenu = {
     .type = WINDOW_TYPE_WITH_HEADER,
     .pos = {2, 10},
     .width = 18,
@@ -1457,7 +1457,7 @@ static const Window sMovesSubMenu = {
     .unk12 = 0,
     .unk14 = &sBottomWindowHeader,
 };
-static const Window sItemSubMenu = {
+static const WindowTemplate sItemSubMenu = {
     .type = WINDOW_TYPE_WITH_HEADER,
     .pos = {2, 10},
     .width = 18,
@@ -1470,7 +1470,7 @@ static const Window sItemSubMenu = {
 Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
 {
     struct UnkFieldTeamMenuStruct unkStruct;
-    Windows windows = {
+    WindowTemplates windows = {
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_NORMAL, // Since the window has a header, it should probably be WINDOW_TYPE_WTIH_HEADER.

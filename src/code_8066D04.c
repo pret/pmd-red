@@ -904,13 +904,13 @@ extern void sub_8068344(void);
 bool8 CanSubMenuItemBeChosen(s32 param_1);
 void sub_8068310(s32 a0, PokemonStruct1 **a1);
 void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
-extern void DungeonShowWindows(Windows *a0, u8 a1);
+extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 u32 sub_8014140(s32 a0, const void *a1);
 void sub_8083D1C(void);
 void PlayDungeonConfirmationSE(void);
 void PlayDungeonCancelSE(void);
 void sub_806806C(PokemonStruct1 *a0);
-void CreateDungeonMenuSubWindow(Windows *a0, s32 a1);
+void CreateDungeonMenuSubWindow(WindowTemplates *a0, s32 a1);
 extern void sub_803EAF0(u32, u8 *);
 
 extern const s32 gUnknown_8106E80[];
@@ -925,7 +925,7 @@ static const u8 gUnknown_8106DA4[] = {
     0x01, 0, 0x38, 0, 0, 0, 0x18, 0, 0x18, 0, 0, 0, 0x02, 0, 0x38, 0, 0x68, 0, 0x18, 0, 0x18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-static const Windows gUnknown_8106DC8 = {
+static const WindowTemplates gUnknown_8106DC8 = {
     .id = {
         [0] =
         {
@@ -958,7 +958,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
 {
     s32 i;
     s32 r10;
-    Windows spTxtStruct = gUnknown_8106DC8;
+    WindowTemplates spTxtStruct = gUnknown_8106DC8;
 
     gUnknown_202F30C = 0;
     r10 = 0;
@@ -1251,7 +1251,7 @@ void sub_806806C(PokemonStruct1 *a0)
 {
     struct unkStruct_808FF20 unkStruct;
     struct UnkInfoTabStruct var_C8;
-    Windows spTxtStruct = {0};
+    WindowTemplates spTxtStruct = {0};
     s32 r7;
 
     spTxtStruct.id[0].type = WINDOW_TYPE_WITH_HEADER;
@@ -1295,8 +1295,8 @@ void sub_806806C(PokemonStruct1 *a0)
         sub_808FF20(&unkStruct, a0, gDungeon->unk644.unk16);
         CreatePokemonInfoTabScreen(spF8[r7], r7, &unkStruct, &var_C8, 0);
 
-        gDungeonMenu.unkC = (gUnknown_2027370[0].unk0 + 15) * 8;
-        gDungeonMenu.unkE = ((gUnknown_2027370[0].unk2 + 1) * 8) - 2;
+        gDungeonMenu.unkC = (gWindows[0].unk0 + 15) * 8;
+        gDungeonMenu.unkE = ((gWindows[0].unk2 + 1) * 8) - 2;
 
         while (1) {
             s32 r5;

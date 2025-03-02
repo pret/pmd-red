@@ -1046,7 +1046,7 @@ static bool8 TryScrollLogDown(s32 a0)
 
 static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 {
-    struct UnkTextStruct1 *unkStr = &gUnknown_2027370[0];
+    struct Window *unkStr = &gWindows[0];
     if (!(gDungeonFramesCounter & 8)) {
         SpriteSetAffine1(&sMessageLogArrowSpriteOAM, 0);
         SpriteSetAffine2(&sMessageLogArrowSpriteOAM, 0);

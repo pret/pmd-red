@@ -39,7 +39,7 @@ void sub_8068310(s32 size, u16 **param_2)
 void sub_8068344(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
-        UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+        Window *ptr = &gWindows[0];
         SpriteOAM sprite = {0};
 
         SpriteSetAffine1(&sprite, 0);
@@ -63,7 +63,7 @@ void sub_8068344(void)
 void sub_80684C4(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
-        UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+        Window *ptr = &gWindows[0];
         SpriteOAM sprite = {0};
 
         SpriteSetAffine1(&sprite, 0);

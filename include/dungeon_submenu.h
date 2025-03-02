@@ -3,6 +3,6 @@
 
 #include "structs/str_text.h"
 
-void CreateDungeonMenuSubWindow(Window *mainWindow, s32 subWindowX);
+void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX);
 
 #endif

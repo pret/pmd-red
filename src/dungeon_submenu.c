@@ -12,12 +12,12 @@ extern s32 gDungeonSubMenuItemsCount;
 
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void DungeonShowWindows(Windows *a0, u8 a1);
+extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 
-void CreateDungeonMenuSubWindow(Window *mainWindow, s32 subWindowX)
+void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
 {
     s32 i;
-    Windows windows = {
+    WindowTemplates windows = {
         .id = {
             [0] = WINDOW_DUMMY,
             [1] = {

@@ -9,7 +9,7 @@ typedef struct SaveMenuWork
     /* 0x0 */ u32 currMenu;
     u32 unk4;
     MenuStruct unk8[4];
-    Windows unk148;
+    WindowTemplates unk148;
     SpriteOAM unk1A8;
     u32 unk1B0; // Sprite count?
 } SaveMenuWork;
