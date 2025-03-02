@@ -44,17 +44,17 @@ EWRAM_DATA ALIGNED(4) u16 gUnknown_202B038[4][32][32] = {0};
 IWRAM_DATA static s16 gUnknown_3000E94[161] = {0};
 
 // These text-related functions were deemed important as they're copied and run from IWRAM for improved performance.
-static void sub_8272774(UnkTextStruct1 *txtStructs, s32 id);
-static void sub_8272884(UnkTextStruct1 *txtStructs, s32 id);
+static void ScrollDownWindowInternal(UnkTextStruct1 *txtStructs, s32 id);
+static void ScrollUpWindowInternal(UnkTextStruct1 *txtStructs, s32 id);
 static void sub_82729B8(UnkTextStruct1 *txtStructs, s32 id);
 static void sub_8272A8C(UnkTextStruct1 *txtStructs, s32 id);
-void sub_8272760(s32 id);
-void sub_8272870(s32 id);
+void ScrollDownWindow(s32 windowId);
+void ScrollUpWindow(s32 windowId);
 void sub_82729A4(s32 id);
 void sub_8272A78(s32 id);
 
-EWRAM_INIT void (*gIwramTextFunc1)(s32 a0) = sub_8272760;
-EWRAM_INIT void (*gIwramTextFunc2)(s32 a0) = sub_8272870;
+EWRAM_INIT void (*ScrollDownWindowFunc)(s32 windowId) = ScrollDownWindow;
+EWRAM_INIT void (*ScrollUpWindowFunc)(s32 windowId) = ScrollUpWindow;
 EWRAM_INIT void (*gIwramTextFunc3)(s32 a0) = sub_82729A4;
 EWRAM_INIT void (*gIwramTextFunc4)(s32 a0) = sub_8272A78;
 
@@ -3643,14 +3643,14 @@ void InitGraphics(void)
 }
 
 // These functions run from IWRAM for improved performance.
-IWRAM_INIT void sub_8272760(s32 id)
+IWRAM_INIT void ScrollDownWindow(s32 windowId)
 {
-    sub_8272774(gUnknown_2027370, id);
+    ScrollDownWindowInternal(gUnknown_2027370, windowId);
 }
 
-IWRAM_INIT static void sub_8272774(UnkTextStruct1 *txtStructs, s32 id)
+IWRAM_INIT static void ScrollDownWindowInternal(UnkTextStruct1 *txtStructs, s32 windowId)
 {
-    UnkTextStruct1 *txtStructPtr = &txtStructs[id];
+    UnkTextStruct1 *txtStructPtr = &txtStructs[windowId];
 
     if (txtStructPtr->unk8 > 0) {
         s32 i, j;
@@ -3706,14 +3706,14 @@ IWRAM_INIT static void sub_8272774(UnkTextStruct1 *txtStructs, s32 id)
     }
 }
 
-IWRAM_INIT void sub_8272870(s32 id)
+IWRAM_INIT void ScrollUpWindow(s32 windowId)
 {
-    sub_8272884(gUnknown_2027370, id);
+    ScrollUpWindowInternal(gUnknown_2027370, windowId);
 }
 
-IWRAM_INIT static void sub_8272884(UnkTextStruct1 *txtStructs, s32 id)
+IWRAM_INIT static void ScrollUpWindowInternal(UnkTextStruct1 *txtStructs, s32 windowId)
 {
-    UnkTextStruct1 *txtStructPtr = &txtStructs[id];
+    UnkTextStruct1 *txtStructPtr = &txtStructs[windowId];
 
     if (txtStructPtr->unk8 > 0) {
         s32 i, j;

@@ -787,7 +787,7 @@ static void sub_8060900(Entity *a0)
 
 static void ChosenSubMenuToAction(ActionContainer *a0)
 {
-    SetMonsterActionFields(a0, gUnknown_202EE44[gDungeonMenu.menuIndex].unk0);
+    SetMonsterActionFields(a0, gDungeonSubMenu[gDungeonMenu.menuIndex].actionId);
     a0->actionParameters[0] = sUnknownActionUnk4;
     a0->actionParameters[1].actionUseIndex = 0;
     a0->actionParameters[1].itemPos.x = 0;

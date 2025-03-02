@@ -1647,7 +1647,7 @@ _080644D0:
 	movs r4, 0
 	b _0806452A
 	.align 2, 0
-_08064508: .4byte gUnknown_202EE44
+_08064508: .4byte gDungeonSubMenu
 _0806450C:
 	bl PlayDungeonCancelSE
 _08064510:
@@ -2174,7 +2174,7 @@ _08064914:
 	movs r4, 0
 	b _0806496E
 	.align 2, 0
-_0806494C: .4byte gUnknown_202EE44
+_0806494C: .4byte gDungeonSubMenu
 _08064950:
 	bl PlayDungeonCancelSE
 _08064954:
@@ -5384,7 +5384,7 @@ _0806633E:
 	.align 2, 0
 _08066348: .4byte gUnknown_8106D8C
 _0806634C: .4byte gFormatBuffer_Monsters
-_08066350: .4byte gIwramTextFunc2
+_08066350: .4byte ScrollUpWindowFunc
 _08066354: .4byte gUnknown_202F2F8
 	thumb_func_end sub_8066288
 
@@ -5486,7 +5486,7 @@ _0806641A:
 	.align 2, 0
 _08066424: .4byte gUnknown_8106D8C
 _08066428: .4byte gFormatBuffer_Monsters
-_0806642C: .4byte gIwramTextFunc1
+_0806642C: .4byte ScrollDownWindowFunc
 _08066430: .4byte gUnknown_202F2F8
 	thumb_func_end sub_8066358
 

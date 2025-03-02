@@ -986,7 +986,7 @@ static bool8 TryScrollLogUp(s32 a0)
     DungeonRunFrameActions(0xD);
 
     for (i = 0; i < 7; i++) {
-        gIwramTextFunc2(0);
+        ScrollUpWindowFunc(0);
         DungeonRunFrameActions(0xD);
     }
 
@@ -1036,7 +1036,7 @@ static bool8 TryScrollLogDown(s32 a0)
     DungeonRunFrameActions(0xD);
 
     for (i = 0; i < 7; i++) {
-        gIwramTextFunc1(0);
+        ScrollDownWindowFunc(0);
         DungeonRunFrameActions(0xD);
     }
 

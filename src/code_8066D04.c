@@ -1016,7 +1016,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                     if (a2 - gUnknown_202F30C > 8) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
-                            gIwramTextFunc1(0);
+                            ScrollDownWindowFunc(0);
                             DungeonRunFrameActions(0x37);
                         }
                         gUnknown_202F30C++;
@@ -1031,7 +1031,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                         if (a2 - gUnknown_202F30C > 8) {
                             s32 i;
                             for (i = 0; i < 6; i++) {
-                                gIwramTextFunc1(0);
+                                ScrollDownWindowFunc(0);
                                 DungeonRunFrameActions(0x37);
                             }
                             gUnknown_202F30C++;
@@ -1047,7 +1047,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                     if (gUnknown_202F30C != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
-                            gIwramTextFunc2(0);
+                            ScrollUpWindowFunc(0);
                             DungeonRunFrameActions(0x37);
                         }
                         gUnknown_202F30C--;
@@ -1062,7 +1062,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                         if (gUnknown_202F30C != 0) {
                             s32 i;
                             for (i = 0; i < 6; i++) {
-                                gIwramTextFunc2(0);
+                                ScrollUpWindowFunc(0);
                                 DungeonRunFrameActions(0x37);
                             }
                             gUnknown_202F30C--;
@@ -1334,7 +1334,7 @@ void sub_806806C(PokemonStruct1 *a0)
 
                     PlayDungeonCursorSE(0);
                     for (i = 0; i < 6; i++) {
-                        gIwramTextFunc1(0);
+                        ScrollDownWindowFunc(0);
                         DungeonRunFrameActions(0x1C);
                     }
                     unkStruct.unk40++;
@@ -1345,7 +1345,7 @@ void sub_806806C(PokemonStruct1 *a0)
 
                     PlayDungeonCursorSE(0);
                     for (i = 0; i < 6; i++) {
-                        gIwramTextFunc2(0);
+                        ScrollUpWindowFunc(0);
                         DungeonRunFrameActions(0x1C);
                     }
                     unkStruct.unk40--;

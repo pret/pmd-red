@@ -134,7 +134,7 @@ gUnknown_202EE39: /* 202EE39 (sub_8060E38) */
 gUnknown_202EE3A: /* 202EE3A (sub_8060E38 - sub_8065DBC) */
 	.space 0xA
 
-gUnknown_202EE44: /* 202EE44 (sub_8044EC8 - sub_80647F0) */
+gDungeonSubMenu: /* 202EE44 (sub_8044EC8 - sub_80647F0) */
 	.space 0x28
 gDungeonSubMenuItemsCount: /* 202EE6C (sub_8044F5C - sub_8067A80) */
 	.space 0x4

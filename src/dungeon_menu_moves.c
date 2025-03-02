@@ -46,7 +46,7 @@ extern void sub_80637E8(ActionContainer *a0);
 extern void sub_8063B54(ActionContainer *a0);
 extern void sub_8063BB4(ActionContainer *a0);
 extern void sub_806752C(ActionContainer *a0);
-extern void sub_8061A38(ActionContainer *a0, bool8 a1);
+extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
 extern void sub_8063A70(ActionContainer *a0, bool8 a1);
 extern void sub_8063CF0(ActionContainer *a0, bool8 a1);
 extern void sub_8067768(ActionContainer *a0);
@@ -580,7 +580,7 @@ void sub_80637A4(ActionContainer *a0, s32 a1)
 
 void sub_80637BC(ActionContainer *a0, s32 a1, s32 a2)
 {
-    SetMonsterActionFields(a0, gUnknown_202EE44[a1].unk0);
+    SetMonsterActionFields(a0, gDungeonSubMenu[a1].actionId);
     a0->actionParameters[0].actionUseIndex = a2;
     a0->actionParameters[1].actionUseIndex = gUnknown_202F2D8;
 }

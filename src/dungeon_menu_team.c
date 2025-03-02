@@ -89,11 +89,9 @@ void sub_80637E8(ActionContainer *a0);
 void sub_8063B54(ActionContainer *a0);
 void sub_8063BB4(ActionContainer *a0);
 void sub_806752C(ActionContainer *a0);
-void sub_8061A38(ActionContainer *a0, bool8 a1);
 void sub_8063A70(ActionContainer *a0, bool8 a1);
 void sub_8063CF0(ActionContainer *a0, bool8 a1);
 void sub_8067768(ActionContainer *a0);
-void ShowTacticsMenu(ActionContainer *a0);
 void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern void sub_80643AC(Entity *pokemon);
 extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4);
@@ -126,6 +124,8 @@ extern u32 sub_8014140(s32 a0, const void *a1);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
 extern void sub_8045C18(u8 *buffer, Item *item);
+extern bool32 sub_8069D18(DungeonPos *a0, Entity *a1);
+extern void sub_80639E4(struct subStruct_203B240 *strings, MenuInputStructSub *menuSub);
 
 extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
@@ -157,17 +157,15 @@ struct UnkFieldTeamMenuStruct
     u8 unk14[MAX_TEAM_MEMBERS];
 };
 
-void PrintMonTactics(s32 a0, u8 *tacticIds, EntityInfo *mon, s32 windowId);
-void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *a1, bool8 a2);
-void sub_806145C(struct UnkFieldTeamMenuStruct *a0);
-void sub_80615B4(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1);
-void sub_80623B0(void);
-void sub_8062230(void);
-void sub_8062748(u8 a0);
-bool32 sub_8069D18(DungeonPos *a0, Entity *a1);
-void sub_806285C(s32 a0);
-void sub_806262C(u8 iqSkillId);
-void sub_80639E4(struct subStruct_203B240 *strings, MenuInputStructSub *menuSub);
+static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows, bool8 a2);
+static void sub_806145C(struct UnkFieldTeamMenuStruct *a0);
+static void ChosenSubMenuToAction(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1);
+static void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId);
+static void sub_8062230(void);
+static void sub_80623B0(void);
+static void ShowIqDescriptionWindow(u8 iqSkillId);
+static void ShowTacticDescriptionWindow(u8 tacticId);
+static void sub_806285C(s32 a0);
 static void PrintMoveNamesOnBottomWindow(Entity *entity);
 static void PrintItemNameOnBottomWindow(Entity *entity);
 static void ResetDungeonMenu(void);
@@ -296,7 +294,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
             }
             if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
                 if (CanSubMenuItemBeChosen(gDungeonMenu.menuIndex)) {
-                    sub_80615B4(&GetEntInfo(a0)->action, &sp);
+                    ChosenSubMenuToAction(&GetEntInfo(a0)->action, &sp);
                     PlayDungeonConfirmationSE();
                     r4 = FALSE;
                     break;
@@ -324,7 +322,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
     return ret;
 }
 
-void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows, bool8 a2)
+static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows, bool8 a2)
 {
     s32 r0;
     DungeonPos pos;
@@ -450,7 +448,7 @@ void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows,
     sub_80073E0(0);
 }
 
-void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
+static void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
 {
     Entity *teamMon;
     EntityInfo *monInfo;
@@ -504,13 +502,13 @@ void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
     sub_8045064();
 }
 
-void sub_80615B4(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1)
+static void ChosenSubMenuToAction(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1)
 {
-    SetMonsterActionFields(a0, gUnknown_202EE44[gDungeonMenu.menuIndex].unk0);
+    SetMonsterActionFields(a0, gDungeonSubMenu[gDungeonMenu.menuIndex].actionId);
     a0->actionParameters[0].actionUseIndex = a1->unk4[a1->unk0];
 }
 
-void ShowTacticsMenu(ActionContainer *a0)
+void ShowDungeonTacticsMenu(ActionContainer *a0)
 {
     Windows windows = {
         .id = {
@@ -582,7 +580,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                 if (gDungeonMenu.menuIndex == 7) {
                     if (tacticIds[8] != TACTIC_UNUSED) {
                         for (i = 0; i < 6; i++) {
-                            gIwramTextFunc1(0);
+                            ScrollDownWindowFunc(0);
                             DungeonRunFrameActions(0x3D);
                         }
                         scrollFirstId++;
@@ -597,7 +595,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                 if (gDungeonMenu.menuIndex == 0) {
                     if (scrollFirstId != 0) {
                         for (i = 0; i < 6; i++) {
-                            gIwramTextFunc2(0);
+                            ScrollUpWindowFunc(0);
                             DungeonRunFrameActions(0x3D);
                         }
                         scrollFirstId--;
@@ -611,7 +609,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                 u32 tacticId = tacticIds[gDungeonMenu.menuIndex];
                 menuIndex = gDungeonMenu.menuIndex;
                 PlayDungeonStartButtonSE();
-                sub_8062748(tacticId);
+                ShowTacticDescriptionWindow(tacticId);
                 loopBreak = FALSE;
                 break;
             }
@@ -668,7 +666,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                         }
                     }
                     else {
-                        sub_8062748(tacticId);
+                        ShowTacticDescriptionWindow(tacticId);
                         addCursor = FALSE;
                     }
                 }
@@ -692,7 +690,7 @@ void ShowTacticsMenu(ActionContainer *a0)
     sub_803EAF0(0, NULL);
 }
 
-void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
+static void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
 {
     u8 tacticsBuffer[NUM_TACTICS];
     u32 tactic;
@@ -731,7 +729,7 @@ void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
     sub_80073E0(windowId);
 }
 
-void sub_8061A38(ActionContainer *a0, bool8 a1)
+void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
 {
     s32 spArr[6];
     struct unkStruct_808FF20 unkMonStruct;
@@ -755,7 +753,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
     s32 r8;
     Entity *entity;
     s32 var_3C;
-    s32 var_38;
+    s32 totalWindows;
     EntityInfo *entityInfo;
 
     var_3C = 0;
@@ -770,16 +768,16 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
         spArr[3] = 0;
         spArr[4] = 0;
         spArr[5] = 0;
-        var_38 = 1;
+        totalWindows = 1;
     }
-    else if (a1) {
+    else if (showIq) {
         spArr[0] = 4;
         spArr[1] = 0;
         spArr[2] = 0;
         spArr[3] = 0;
         spArr[4] = 0;
         spArr[5] = 0;
-        var_38 = 1;
+        totalWindows = 1;
     }
     else {
         spArr[0] = 2;
@@ -788,7 +786,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
         spArr[3] = 5;
         spArr[4] = 0;
         spArr[5] = 0;
-        var_38 = 4;
+        totalWindows = 4;
     }
 
     unkMonStruct.unk40 = 0;
@@ -802,7 +800,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
         s32 var_28 = 1;
         UnkTextStruct1 *unkTxtStr1Ptr = &gUnknown_2027370[0];
 
-        sTeamWindowHeader.f0 = var_38;
+        sTeamWindowHeader.f0 = totalWindows;
         sTeamWindowHeader.f1 = var_3C;
         sTeamWindowHeader.f2 = 10;
         sTeamWindowHeader.f3 = 0;
@@ -810,7 +808,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
         sub_8069844(&unkMonStruct, entity);
         CreatePokemonInfoTabScreen(spArr[var_3C], var_3C, &unkMonStruct, &unkInfoTabStruct, 0);
         gDungeonMenu.unk1E = var_3C;
-        gDungeonMenu.unk20 = var_38;
+        gDungeonMenu.unk20 = totalWindows;
         gDungeonMenu.unkC = (unkTxtStr1Ptr->unk0 + 15) * 8;
         gDungeonMenu.unkE = ((unkTxtStr1Ptr->unk2 + 1) * 8) - 2;
         gDungeonMenu.unk14.x = 0;
@@ -915,7 +913,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                     if (unkInfoTabStruct.unkC[8] != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
-                            gIwramTextFunc1(0);
+                            ScrollDownWindowFunc(0);
                             DungeonRunFrameActions(28);
                         }
                         unkMonStruct.unk56++;
@@ -929,7 +927,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                         if (unkInfoTabStruct.unkC[8] != 0) {
                             s32 i;
                             for (i = 0; i < 6; i++) {
-                                gIwramTextFunc1(0);
+                                ScrollDownWindowFunc(0);
                                 DungeonRunFrameActions(28);
                             }
                             unkMonStruct.unk56++;
@@ -946,7 +944,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                     if (unkMonStruct.unk56 != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
-                            gIwramTextFunc2(0);
+                            ScrollUpWindowFunc(0);
                             DungeonRunFrameActions(28);
                         }
                         unkMonStruct.unk56--;
@@ -960,7 +958,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                         if (unkMonStruct.unk56 != 0) {
                             s32 i;
                             for (i = 0; i < 6; i++) {
-                                gIwramTextFunc2(0);
+                                ScrollUpWindowFunc(0);
                                 DungeonRunFrameActions(28);
                             }
                             unkMonStruct.unk56--;
@@ -978,7 +976,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                     if (unkInfoTabStruct.unk0[8] != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
-                            gIwramTextFunc1(0);
+                            ScrollDownWindowFunc(0);
                             DungeonRunFrameActions(28);
                         }
                         unkMonStruct.unk40++;
@@ -992,7 +990,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                         if (unkInfoTabStruct.unk0[8] != 0) {
                             s32 i;
                             for (i = 0; i < 6; i++) {
-                                gIwramTextFunc1(0);
+                                ScrollDownWindowFunc(0);
                                 DungeonRunFrameActions(28);
                             }
                             unkMonStruct.unk40++;
@@ -1009,7 +1007,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                     if (unkMonStruct.unk40 != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
-                            gIwramTextFunc2(0);
+                            ScrollUpWindowFunc(0);
                             DungeonRunFrameActions(28);
                         }
                         unkMonStruct.unk40--;
@@ -1023,7 +1021,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                         if (unkMonStruct.unk40 != 0) {
                             s32 i;
                             for (i = 0; i < 6; i++) {
-                                gIwramTextFunc2(0);
+                                ScrollUpWindowFunc(0);
                                 DungeonRunFrameActions(28);
                             }
                             unkMonStruct.unk40--;
@@ -1052,11 +1050,11 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                     break;
                 }
                 else if (var_30) {
-                    s32 var = unkInfoTabStruct.unk0[gDungeonMenu.menuIndex];
+                    s32 iqSkillId = unkInfoTabStruct.unk0[gDungeonMenu.menuIndex];
 
                     r8 = gDungeonMenu.menuIndex;
                     PlayDungeonStartButtonSE();
-                    sub_806262C(var);
+                    ShowIqDescriptionWindow(iqSkillId);
                     var_28 = 0;
                     loopBreak = FALSE;
                     break;
@@ -1147,7 +1145,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                             ToggleIQSkill(&entityInfo->IQSkillMenuFlags, var);
                         }
                         else {
-                            sub_806262C(var);
+                            ShowIqDescriptionWindow(var);
                             var_28 = 0;
                         }
                         loopBreak = FALSE;
@@ -1184,7 +1182,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
 }
 
 // The same as sub_8068344
-void sub_8062230(void)
+static void sub_8062230(void)
 {
     if ((gUnknown_202EDCC & 8) != 0) {
         UnkTextStruct1 *txtStrPtr = &gUnknown_2027370[0];
@@ -1209,7 +1207,7 @@ void sub_8062230(void)
 }
 
 // The same as sub_80684C4
-void sub_80623B0(void)
+static void sub_80623B0(void)
 {
     if ((gUnknown_202EDCC & 8) != 0) {
         UnkTextStruct1 *ptr = &gUnknown_2027370[0];
@@ -1280,7 +1278,7 @@ void sub_80625A4(s32 count, struct subStruct_203B240 **strings)
     }
 }
 
-void sub_806262C(u8 iqSkillId)
+static void ShowIqDescriptionWindow(u8 iqSkillId)
 {
     MenuInputStructSub menuSub;
     Windows windows;
@@ -1333,7 +1331,7 @@ void sub_806262C(u8 iqSkillId)
     sub_803E708(4, 0x3E);
 }
 
-void sub_8062748(u8 tacticId)
+static void ShowTacticDescriptionWindow(u8 tacticId)
 {
     MenuInputStructSub menuSub;
     Windows windows;
@@ -1386,7 +1384,7 @@ void sub_8062748(u8 tacticId)
     sub_803E708(4, 0x3E);
 }
 
-void sub_806285C(s32 a0)
+static void sub_806285C(s32 a0)
 {
     const u8 *str;
     MenuInputStructSub menuSub;

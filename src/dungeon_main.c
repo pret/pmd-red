@@ -90,16 +90,13 @@ bool8 sub_8044B28(void);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
-bool8 ShowDungeonTeamMenu(Entity *a0);
 void sub_80637E8(ActionContainer *a0);
 void sub_8063B54(ActionContainer *a0);
 void sub_8063BB4(ActionContainer *a0);
 void sub_806752C(ActionContainer *a0);
-void sub_8061A38(ActionContainer *a0, bool8 a1);
 void sub_8063A70(ActionContainer *a0, bool8 a1);
 void sub_8063CF0(ActionContainer *a0, bool8 a1);
 void sub_8067768(ActionContainer *a0);
-void ShowTacticsMenu(ActionContainer *a0);
 void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_80643AC(Entity *pokemon);
@@ -1313,7 +1310,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             }
 
             if (GetLeaderActionId() == ACTION_CHECK_SUMMARY) {
-                sub_8061A38(GetLeaderActionContainer(), FALSE);
+                ShowDungeonSummaryOrIQMenu(GetLeaderActionContainer(), FALSE);
                 SetLeaderActionToNothing(1);
             }
             else if (GetLeaderActionId() == ACTION_TALK_MENU) {
@@ -1325,11 +1322,11 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 SetLeaderActionToNothing(1);
             }
             else if (GetLeaderActionId() == ACTION_CHANGE_TACTICS) {
-                ShowTacticsMenu(GetLeaderActionContainer());
+                ShowDungeonTacticsMenu(GetLeaderActionContainer());
                 SetLeaderActionToNothing(1);
             }
             else if (GetLeaderActionId() == ACTION_VIEW_IQ) {
-                sub_8061A38(GetLeaderActionContainer(), TRUE);
+                ShowDungeonSummaryOrIQMenu(GetLeaderActionContainer(), TRUE);
                 SetLeaderActionToNothing(1);
             }
             else if (GetLeaderActionId() == ACTION_CHECK_MOVES) {
