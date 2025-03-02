@@ -38,7 +38,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
     gUnknown_203B224->unk54.s0.unk38 = &gUnknown_203B224->unk54.s0.windows.id[param_2];
     RestoreUnkTextStruct_8006518(&gUnknown_203B224->unk54.s0.windows);
     gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB95C;
-    gUnknown_203B224->unk54.s0.unk38->unk14 = &gUnknown_203B224->unk54.unk9C;
+    gUnknown_203B224->unk54.s0.unk38->header = &gUnknown_203B224->unk54.unk9C;
 
     if (param_3 != NULL)
         gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.unk34].pos = *param_3;
@@ -173,9 +173,9 @@ void sub_801A928(void)
 
 static void sub_801A998(void)
 {
-    gUnknown_203B224->unk54.unk9C.f0 = gUnknown_203B224->unk54.s0.input.unk20;
-    gUnknown_203B224->unk54.unk9C.f1 = gUnknown_203B224->unk54.s0.input.unk1E;
-    gUnknown_203B224->unk54.unk9C.f2 = 11;
+    gUnknown_203B224->unk54.unk9C.count = gUnknown_203B224->unk54.s0.input.unk20;
+    gUnknown_203B224->unk54.unk9C.currId = gUnknown_203B224->unk54.s0.input.unk1E;
+    gUnknown_203B224->unk54.unk9C.width = 11;
     gUnknown_203B224->unk54.unk9C.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B224->unk54.s0.windows, TRUE, TRUE);

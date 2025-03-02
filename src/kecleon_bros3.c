@@ -28,7 +28,7 @@ u8 sub_801A20C(u32 r0)
     gUnknown_203B21C->s0.unk38 = &gUnknown_203B21C->s0.windows.id[gUnknown_203B21C->s0.unk34];
     RestoreUnkTextStruct_8006518(&gUnknown_203B21C->s0.windows);
     gUnknown_203B21C->s0.windows.id[gUnknown_203B21C->s0.unk34] = sUnknown_80DB914;
-    gUnknown_203B21C->s0.unk38->unk14 = &gUnknown_203B21C->unk9C;
+    gUnknown_203B21C->s0.unk38->header = &gUnknown_203B21C->unk9C;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B21C->s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_203B21C->s0.input, CountKecleonWareItems(), 10, r0);
@@ -108,9 +108,9 @@ void sub_801A3DC(void)
 
 static void sub_801A430(void)
 {
-    gUnknown_203B21C->unk9C.f0 = gUnknown_203B21C->s0.input.unk20;
-    gUnknown_203B21C->unk9C.f1 = gUnknown_203B21C->s0.input.unk1E;
-    gUnknown_203B21C->unk9C.f2 = 10;
+    gUnknown_203B21C->unk9C.count = gUnknown_203B21C->s0.input.unk20;
+    gUnknown_203B21C->unk9C.currId = gUnknown_203B21C->s0.input.unk1E;
+    gUnknown_203B21C->unk9C.width = 10;
     gUnknown_203B21C->unk9C.f3 = 0;
 
     SUB_80095E4_CALL(gUnknown_203B21C->s0);

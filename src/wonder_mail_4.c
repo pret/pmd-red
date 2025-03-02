@@ -90,7 +90,7 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, DungeonPos *r2, u32 r3)
     RestoreUnkTextStruct_8006518(&gUnknown_203B320->s28.s0.windows);
 
     gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.unk34] = gUnknown_80E0854;
-    gUnknown_203B320->s28.s0.unk38->unk14 = &gUnknown_203B320->s28.unk9C;
+    gUnknown_203B320->s28.s0.unk38->header = &gUnknown_203B320->s28.unk9C;
 
     if (r2 != 0)
         gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.unk34].pos = *r2;
@@ -169,9 +169,9 @@ u8 *sub_8030894(void)
 
 void sub_80308A0(void)
 {
-    gUnknown_203B320->s28.unk9C.f0 = gUnknown_203B320->s28.s0.input.unk20;
-    gUnknown_203B320->s28.unk9C.f1 = gUnknown_203B320->s28.s0.input.unk1E;
-    gUnknown_203B320->s28.unk9C.f2 = 12;
+    gUnknown_203B320->s28.unk9C.count = gUnknown_203B320->s28.s0.input.unk20;
+    gUnknown_203B320->s28.unk9C.currId = gUnknown_203B320->s28.s0.input.unk1E;
+    gUnknown_203B320->s28.unk9C.width = 12;
     gUnknown_203B320->s28.unk9C.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B320->s28.s0.windows, TRUE, TRUE);
@@ -194,7 +194,7 @@ void sub_803092C(void)
   r5 += 10;
   PrintStringOnWindow(r5,0,gUnknown_80E086C[gUnknown_203B320->wonderMailType],gUnknown_203B320->s28.s0.unk34,0);
   r4 += 4;
-  r5 = r4 + gUnknown_203B320->s28.unk9C.f2 * 8;
+  r5 = r4 + gUnknown_203B320->s28.unk9C.width * 8;
   sub_8012BC4(r5,0,gUnknown_203B320->s28.s0.input.unk1E + 1,1,7,gUnknown_203B320->s28.s0.unk34);
 
   for (index = 0; index < gUnknown_203B320->s28.s0.input.unk1A; index++) {

@@ -936,7 +936,7 @@ static const WindowTemplates gUnknown_8106DC8 = {
             .height = 0x0E,
             .unk10 = 0x12,
             .unk12 = 0x02,
-            .unk14 = &gUnknown_202F308
+            .header = &gUnknown_202F308
         },
         [1] =
         {
@@ -947,7 +947,7 @@ static const WindowTemplates gUnknown_8106DC8 = {
             .height = 0x04,
             .unk10 = 0x04,
             .unk12 = 0,
-            .unk14 = NULL
+            .header = NULL
         },
         [2] = WINDOW_DUMMY,
         [3] = WINDOW_DUMMY,
@@ -973,9 +973,9 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
         while (1) {
             s32 r7 = 0, r5 = 0;
 
-            gUnknown_202F308.f0 = 1;
-            gUnknown_202F308.f1 = 0;
-            gUnknown_202F308.f2 = 0xE;
+            gUnknown_202F308.count = 1;
+            gUnknown_202F308.currId = 0;
+            gUnknown_202F308.width = 0xE;
             gUnknown_202F308.f3 = 0;
 
             ASM_MATCH_TRICK(r7);
@@ -1261,7 +1261,7 @@ void sub_806806C(PokemonStruct1 *a0)
     spTxtStruct.id[0].height = 0xE;
     spTxtStruct.id[0].unk10 = 0x12;
     spTxtStruct.id[0].unk12 = 2;
-    spTxtStruct.id[0].unk14 = &gUnknown_202F308;
+    spTxtStruct.id[0].header = &gUnknown_202F308;
     spTxtStruct.id[1].type = WINDOW_TYPE_NORMAL;
     spTxtStruct.id[2].type = WINDOW_TYPE_NORMAL;
     spTxtStruct.id[3].type = WINDOW_TYPE_NORMAL;
@@ -1275,9 +1275,9 @@ void sub_806806C(PokemonStruct1 *a0)
         bool32 loopBreak = FALSE;
         s32 spF8[4] = {2, 3, 4, 5};
 
-        gUnknown_202F308.f0 = 4;
-        gUnknown_202F308.f1 = r7;
-        gUnknown_202F308.f2 = 10;
+        gUnknown_202F308.count = 4;
+        gUnknown_202F308.currId = r7;
+        gUnknown_202F308.width = 10;
         gUnknown_202F308.f3 = 0;
 
         gDungeonMenu.unk1E = r7;

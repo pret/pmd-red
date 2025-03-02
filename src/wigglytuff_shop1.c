@@ -33,7 +33,7 @@ bool8 sub_80211AC(u32 mode, u32 a1)
     sWigglytuffShop1Work->s40.s0.unk38 = &sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.unk34];
     RestoreUnkTextStruct_8006518(&sWigglytuffShop1Work->s40.s0.windows);
     sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.unk34] = sUnknown_80DC47C;
-    sWigglytuffShop1Work->s40.s0.unk38->unk14 = &sWigglytuffShop1Work->s40.unk9C;
+    sWigglytuffShop1Work->s40.s0.unk38->header = &sWigglytuffShop1Work->s40.unk9C;
     ResetUnusedInputStruct();
     ShowWindows(&sWigglytuffShop1Work->s40.s0.windows, TRUE, TRUE);
     sub_8013818(&sWigglytuffShop1Work->s40.s0.input, sub_8021664(), 10, a1);
@@ -113,9 +113,9 @@ void sub_80213A0(void)
 
 static void sub_8021410(void)
 {
-    sWigglytuffShop1Work->s40.unk9C.f0 = 1;
-    sWigglytuffShop1Work->s40.unk9C.f1 = 0;
-    sWigglytuffShop1Work->s40.unk9C.f2 = 12;
+    sWigglytuffShop1Work->s40.unk9C.count = 1;
+    sWigglytuffShop1Work->s40.unk9C.currId = 0;
+    sWigglytuffShop1Work->s40.unk9C.width = 12;
     sWigglytuffShop1Work->s40.unk9C.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&sWigglytuffShop1Work->s40.s0.windows, TRUE, TRUE);
@@ -134,7 +134,7 @@ void sub_8021494(void)
     sub_80073B8(sWigglytuffShop1Work->s40.s0.unk34);
     PrintStringOnWindow(10, 0, sFriendAreas, sWigglytuffShop1Work->s40.s0.unk34, 0);
 
-    sub_8012BC4((sWigglytuffShop1Work->s40.unk9C.f2 * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.unk1E + 1, 1, 7, sWigglytuffShop1Work->s40.s0.unk34);
+    sub_8012BC4((sWigglytuffShop1Work->s40.unk9C.width * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.unk1E + 1, 1, 7, sWigglytuffShop1Work->s40.s0.unk34);
 
     for (i = 0; i < sWigglytuffShop1Work->s40.s0.input.unk1A; i++) {
         friendAreaIndex = sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.unk1E * sWigglytuffShop1Work->s40.s0.input.unk1C) + i];

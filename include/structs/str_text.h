@@ -30,9 +30,9 @@ typedef struct Window
 
 typedef struct WindowHeader
 {
-    u8 f0;
-    u8 f1;
-    u8 f2;
+    u8 count; // How many headers there are, it's used for windows which can be scrolled left/right
+    u8 currId; // Id of the current header
+    u8 width;
     u8 f3;
 } WindowHeader;
 
@@ -48,11 +48,11 @@ typedef struct WindowTemplate
     s16 height;
     s16 unk10; // In most cases it's the same as height. If it's smaller than height, the window may look glitchy. Maybe something with tile allocation/how the window is filled?
     s16 unk12;
-    const WindowHeader *unk14;
+    const WindowHeader *header;
 } WindowTemplate;
 
 // All fields are zeroed out except for type which is set to WINDOW_TYPE_NORMAL.
-#define WINDOW_DUMMY (WindowTemplate) {.unk0 = 0, .type = WINDOW_TYPE_NORMAL, .width = 0, .pos = {0, 0}, .height = 0, .unk10 = 0, .unk12 = 0, .unk14 = NULL}
+#define WINDOW_DUMMY (WindowTemplate) {.unk0 = 0, .type = WINDOW_TYPE_NORMAL, .width = 0, .pos = {0, 0}, .height = 0, .unk10 = 0, .unk12 = 0, .header = NULL}
 
 #define WINDOW_TYPE_0                   0
 #define WINDOW_TYPE_WITHOUT_BORDER      1

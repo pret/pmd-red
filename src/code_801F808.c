@@ -114,10 +114,10 @@ void sub_801F930(void)
     switch(gUnknown_203B278->state)
     {
         case 0:
-            gUnknown_203B278->unk60->unk14 = &gUnknown_203B278->unkC4;
-            gUnknown_203B278->unkC4.f0 = gUnknown_203B278->unk28.unk20;
-            gUnknown_203B278->unkC4.f1 = gUnknown_203B278->unk28.unk1E;
-            gUnknown_203B278->unkC4.f2 = 0x10;
+            gUnknown_203B278->unk60->header = &gUnknown_203B278->unkC4;
+            gUnknown_203B278->unkC4.count = gUnknown_203B278->unk28.unk20;
+            gUnknown_203B278->unkC4.currId = gUnknown_203B278->unk28.unk1E;
+            gUnknown_203B278->unkC4.width = 0x10;
             gUnknown_203B278->unkC4.f3 = 0;
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_203B278->windows, TRUE, TRUE);

@@ -34,7 +34,7 @@ bool8 sub_802C4C8(s32 a0, DungeonPos *a1, u32 a2)
     RestoreUnkTextStruct_8006518(&gUnknown_203B2E8->unk8.s0.windows);
 
     gUnknown_203B2E8->unk8.s0.windows.id[gUnknown_203B2E8->unk8.s0.unk34] = sUnknown_80DFCFC;
-    gUnknown_203B2E8->unk8.s0.unk38->unk14 = &gUnknown_203B2E8->unk8.unk9C;
+    gUnknown_203B2E8->unk8.s0.unk38->header = &gUnknown_203B2E8->unk8.unk9C;
 
     if (a1 != NULL)
         gUnknown_203B2E8->unk8.s0.windows.id[gUnknown_203B2E8->unk8.s0.unk34].pos = *a1;
@@ -109,9 +109,9 @@ void sub_802C688(void)
 
 static void sub_802C6DC(void)
 {
-    gUnknown_203B2E8->unk8.unk9C.f0 = gUnknown_203B2E8->unk8.s0.input.unk20;
-    gUnknown_203B2E8->unk8.unk9C.f1 = gUnknown_203B2E8->unk8.s0.input.unk1E;
-    gUnknown_203B2E8->unk8.unk9C.f2 = 12;
+    gUnknown_203B2E8->unk8.unk9C.count = gUnknown_203B2E8->unk8.s0.input.unk20;
+    gUnknown_203B2E8->unk8.unk9C.currId = gUnknown_203B2E8->unk8.s0.input.unk1E;
+    gUnknown_203B2E8->unk8.unk9C.width = 12;
     gUnknown_203B2E8->unk8.unk9C.f3 = 0;
 
     SUB_8009614_CALL(gUnknown_203B2E8->unk8.s0);
@@ -133,7 +133,7 @@ void DrawJobListMenu(void)
     PrintStringOnWindow(x, 0, sJobList, gUnknown_203B2E8->unk8.s0.unk34, 0);
 
     r4 += 4;
-    x = r4 + (gUnknown_203B2E8->unk8.unk9C.f2 * 8);
+    x = r4 + (gUnknown_203B2E8->unk8.unk9C.width * 8);
     sub_8012BC4(x, 0, gUnknown_203B2E8->unk8.s0.input.unk1E + 1, 2, 7, gUnknown_203B2E8->unk8.s0.unk34);
 
     for (i = 0;  i < gUnknown_203B2E8->unk8.s0.input.unk1A; i++) {

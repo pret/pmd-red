@@ -319,7 +319,7 @@ UNUSED static void nullsub_152(void)
 void RestoreUnkTextStruct_8006518(WindowTemplates *unkData)
 {
     s32 i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_WINDOWS; i++)
         unkData->id[i] = sSavedWindows.id[i];
 }
 
@@ -387,7 +387,7 @@ static void AddWindow(Window *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const Windo
         if (t1->unkC == 6) {
             uVar1 = a6 ? t1->unk14 : 0;
 
-            sub_8006E94(t1, temp, uVar1, winTemplate->unk14, a3);
+            sub_8006E94(t1, temp, uVar1, winTemplate->header, a3);
 
             temp = iVar5 + 2;
             uVar1 = a6 ? t1->unk14 + t1->unk4 * (winTemplate->unk12 + 2) : 0;
@@ -2911,11 +2911,11 @@ static void sub_80089AC(const WindowTemplate *r4, DungeonPos *r5_Str)
         s32 var_24 = ((r4->pos.x + r5_Str->x + r4->width) * 8) + 5;
         s32 r8 = ((r4->pos.y + r5_Str->y + r4->height) * 8) + 5;
         s32 r12 = ((r4->pos.x + r5_Str->x) * 8) + 3;
-        const WindowHeader *r2 = r4->unk14;
-        s32 tmp = r2->f2 - 1;
-        s32 r10 = (((tmp + r2->f0 + 2) * 8) + r12) - 4;
-        s32 r4 = r9 + ((r2->f1 + 1) * 8);
-        s32 r7 = (r4 + ((r2->f2 + 2) * 8)) - 4;
+        const WindowHeader *r2 = r4->header;
+        s32 tmp = r2->width - 1;
+        s32 r10 = (((tmp + r2->count + 2) * 8) + r12) - 4;
+        s32 r4 = r9 + ((r2->currId + 1) * 8);
+        s32 r7 = (r4 + ((r2->width + 2) * 8)) - 4;
 
         if (r5 < 0)
             r5 = 0;

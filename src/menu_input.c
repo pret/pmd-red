@@ -400,7 +400,7 @@ void sub_8012EBC(MenuStruct *param_1)
             ptr_text2 = &textStack.id[index];
             RestoreUnkTextStruct_8006518(&textStack);
             x = sub_8008ED0(param_1->unk0);
-            PrintFormattedStringOnWindow(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
+            PrintFormattedStringOnWindow(((ptr_text2->header->width * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }
 
         colorArray = param_1->menuTextColorArray;

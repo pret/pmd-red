@@ -131,7 +131,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                 .width = 0x12,
                 .height = 0x10,
                 .unk10 = 0x10,
-                .unk14 = &header,
+                .header = &header,
             },
             WINDOW_DUMMY, WINDOW_DUMMY, WINDOW_DUMMY
         },
@@ -393,7 +393,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         .height = 2,
         .unk10 = 2,
         .unk12 = 0,
-        .unk14 = NULL,
+        .header = NULL,
     };
     u8 txtBuff[80];
     EntityInfo *a1Info;
@@ -414,7 +414,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         case 1:
             windows->id[0].unk10 = 0x10;
             windows->id[0].height = 0x10;
-            a5->f2 = 0xC;
+            a5->width = 0xC;
             gDungeonMenu.firstEntryY = 0x10;
             gDungeonMenu.unk1C = 0xA;
             gDungeon->unk181e8.unk18212 = 1;
@@ -422,7 +422,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         case 2:
             windows->id[0].unk10 = 4;
             windows->id[0].height = 4;
-            a5->f2 = 6;
+            a5->width = 6;
             gDungeonMenu.firstEntryY = 0x12;
             gDungeonMenu.unk1C = 1;
             break;
@@ -430,7 +430,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         default:
             windows->id[0].unk10 = 4;
             windows->id[0].height = 4;
-            a5->f2 = 0xC;
+            a5->width = 0xC;
             gDungeonMenu.firstEntryY = 0x12;
             gDungeonMenu.unk1C = 1;
             break;
@@ -561,8 +561,8 @@ static s32 sub_8060800(WindowHeader *a0, s32 a1)
     }
 
     if (a0 != NULL) {
-        a0->f0 = r2;
-        a0->f1 = r3;
+        a0->count = r2;
+        a0->currId = r3;
         a0->f3 = 0;
     }
 

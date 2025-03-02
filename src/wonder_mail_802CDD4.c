@@ -28,7 +28,7 @@ bool8 sub_802CDD4(u32 a0)
     sUnknown_203B2F4->s0.unk38 = &sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.unk34];
     RestoreUnkTextStruct_8006518(&sUnknown_203B2F4->s0.windows);
     sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.unk34] = sUnknown_80DFDA4;
-    sUnknown_203B2F4->s0.unk38->unk14 = &sUnknown_203B2F4->unk9C;
+    sUnknown_203B2F4->s0.unk38->header = &sUnknown_203B2F4->unk9C;
     sub_8012D34(sUnknown_203B2F4->s0.unk38, 4);
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2F4->s0.windows, TRUE, TRUE);
@@ -91,9 +91,9 @@ void sub_802CF14(void)
 
 static void sub_802CF5C(void)
 {
-    sUnknown_203B2F4->unk9C.f0 = sUnknown_203B2F4->s0.input.unk20;
-    sUnknown_203B2F4->unk9C.f1 = sUnknown_203B2F4->s0.input.unk1E;
-    sUnknown_203B2F4->unk9C.f2 = 12;
+    sUnknown_203B2F4->unk9C.count = sUnknown_203B2F4->s0.input.unk20;
+    sUnknown_203B2F4->unk9C.currId = sUnknown_203B2F4->s0.input.unk1E;
+    sUnknown_203B2F4->unk9C.width = 12;
     sUnknown_203B2F4->unk9C.f3 = 0;
 
     SUB_8009614_CALL(sUnknown_203B2F4->s0);
@@ -113,7 +113,7 @@ void sub_802CFD0(void)
     PrintStringOnWindow(r5, 0, sRescueEvent, sUnknown_203B2F4->s0.unk34, 0);
 
     r4 -= 6;
-    r5 = r4 + (sUnknown_203B2F4->unk9C.f2 * 8);
+    r5 = r4 + (sUnknown_203B2F4->unk9C.width * 8);
     sub_8012BC4(r5, 0, sUnknown_203B2F4->s0.input.unk1E + 1, 2, 7, sUnknown_203B2F4->s0.unk34);
 
     for (r5 = 0; r5 < sUnknown_203B2F4->s0.input.unk1A; r5++) {

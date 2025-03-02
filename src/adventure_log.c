@@ -26,7 +26,7 @@ bool8 CreateAdventureLogScreen(u32 kind)
     sAdventureLog->s0.unk38 = &sAdventureLog->s0.windows.id[kind];
     RestoreUnkTextStruct_8006518(&sAdventureLog->s0.windows);
     sAdventureLog->s0.windows.id[sAdventureLog->s0.unk34] = sUnknown_80E2008;
-    sAdventureLog->s0.unk38->unk14 = &sAdventureLog->unk9C;
+    sAdventureLog->s0.unk38->header = &sAdventureLog->unk9C;
 
     ResetUnusedInputStruct();
     ShowWindows(&sAdventureLog->s0.windows, TRUE, TRUE);
@@ -73,9 +73,9 @@ void CleanAdventureLogScreen(void)
 
 static void sub_8032084(void)
 {
-    sAdventureLog->unk9C.f0 = sAdventureLog->s0.input.unk20;
-    sAdventureLog->unk9C.f1 = sAdventureLog->s0.input.unk1E;
-    sAdventureLog->unk9C.f2 = 11;
+    sAdventureLog->unk9C.count = sAdventureLog->s0.input.unk20;
+    sAdventureLog->unk9C.currId = sAdventureLog->s0.input.unk1E;
+    sAdventureLog->unk9C.width = 11;
     sAdventureLog->unk9C.f3 = 0;
 
     SUB_80095E4_CALL(sAdventureLog->s0);
@@ -96,7 +96,7 @@ static void DisplayAdventureLog(void)
     PrintStringOnWindow(r6, 0, sAdventureLogText, sAdventureLog->s0.unk34, 0);
 
     r4 += 4;
-    r6 = r4 + (sAdventureLog->unk9C.f2 * 8);
+    r6 = r4 + (sAdventureLog->unk9C.width * 8);
     sub_8012BC4(r6, 0, sAdventureLog->s0.input.unk1E + 1, 1, 7, sAdventureLog->s0.unk34);
 
     for (i = 0; i < sAdventureLog->s0.input.unk1A; i++) {

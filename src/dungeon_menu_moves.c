@@ -202,7 +202,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
                 .height = 16,
                 .unk10 = 16,
                 .unk12 = 0,
-                .unk14 = &header,
+                .header = &header,
             },
             [1] = WINDOW_DUMMY,
             [2] = WINDOW_DUMMY,
@@ -430,8 +430,8 @@ void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *wi
     s32 i, movesCount;
     WindowTemplate windowNew = gUnknown_8106CAC;
 
-    header->f0 = arg7;
-    header->f1 = arg6;
+    header->count = arg7;
+    header->currId = arg6;
     header->f3 = 0;
 
     movesCount = 0;
@@ -454,7 +454,7 @@ void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *wi
     sub_801317C(&gDungeonMenu.unk28);
 
     windows->id[0].height = windows->id[0].unk10 = sub_80095E4(4, 0xC) + 2;
-    header->f2 = 13;
+    header->width = 13;
     windows->id[0].pos.x = 2;
     windows->id[1] = windows->id[3];
     windows->id[2] = windowNew;
@@ -609,7 +609,7 @@ void sub_8063834(Move *moves, s32 a1, s32 a2)
     s32 i, count, currId;
 
     sub_80140B4(&windows);
-    windows.id[0].unk14 = &header;
+    windows.id[0].header = &header;
 
     count = 1;
     for (i = a1 + 1; i < a2; i++) {
@@ -625,9 +625,9 @@ void sub_8063834(Move *moves, s32 a1, s32 a2)
         s32 statusesCount;
         s32 inputAction = 0;
 
-        header.f0 = count;
-        header.f1 = currId;
-        header.f2 = 12;
+        header.count = count;
+        header.currId = currId;
+        header.width = 12;
         header.f3 = 0;
 
         gDungeonMenu.unk1E = currId;

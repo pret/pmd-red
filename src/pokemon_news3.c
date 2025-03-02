@@ -38,7 +38,7 @@ bool8 sub_802BD14(s32 a0, DungeonPos *a1, u32 a2)
     sUnknown_203B2D8->unk4.s0.unk38 = &sUnknown_203B2D8->unk4.s0.windows.id[a0];
     RestoreUnkTextStruct_8006518(&sUnknown_203B2D8->unk4.s0.windows);
     sUnknown_203B2D8->unk4.s0.windows.id[sUnknown_203B2D8->unk4.s0.unk34] = sUnknown_80DFC74;
-    sUnknown_203B2D8->unk4.s0.unk38->unk14 = &sUnknown_203B2D8->unk4.unk9C;
+    sUnknown_203B2D8->unk4.s0.unk38->header = &sUnknown_203B2D8->unk4.unk9C;
 
     if (a1 != NULL)
         sUnknown_203B2D8->unk4.s0.windows.id[sUnknown_203B2D8->unk4.s0.unk34].pos = *a1;
@@ -114,9 +114,9 @@ void sub_802BEDC(void)
 
 static void sub_802BF30(void)
 {
-    sUnknown_203B2D8->unk4.unk9C.f0 = 1;
-    sUnknown_203B2D8->unk4.unk9C.f1 = 0;
-    sUnknown_203B2D8->unk4.unk9C.f2 = 12;
+    sUnknown_203B2D8->unk4.unk9C.count = 1;
+    sUnknown_203B2D8->unk4.unk9C.currId = 0;
+    sUnknown_203B2D8->unk4.unk9C.width = 12;
     sUnknown_203B2D8->unk4.unk9C.f3 = 0;
     SUB_8009614_CALL(sUnknown_203B2D8->unk4.s0);
 }

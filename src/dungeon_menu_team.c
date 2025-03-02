@@ -188,7 +188,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
                 .height = 16,
                 .unk10 = 16,
                 .unk12 = 0,
-                .unk14 = &sTeamWindowHeader,
+                .header = &sTeamWindowHeader,
             },
             [1] = WINDOW_DUMMY,
             [2] = WINDOW_DUMMY,
@@ -359,8 +359,8 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
         a0->unk14[i] = 0;
     }
 
-    sTeamWindowHeader.f0 = 1;
-    sTeamWindowHeader.f1 = 0;
+    sTeamWindowHeader.count = 1;
+    sTeamWindowHeader.currId = 0;
     sTeamWindowHeader.f3 = 0;
     gDungeonMenu.menuIndex = gTeamMenuChosenId;
     gDungeonMenu.unk1A = count;
@@ -380,7 +380,7 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
     }
     windows->id[0].unk10 = r0;
     windows->id[0].height = r0;
-    sTeamWindowHeader.f2 = 8;
+    sTeamWindowHeader.width = 8;
     if (a2) {
         windows->id[1] = windows->id[3];
     }
@@ -520,7 +520,7 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
                 .height = 14,
                 .unk10 = 18,
                 .unk12 = 2,
-                .unk14 = &sTeamWindowHeader,
+                .header = &sTeamWindowHeader,
             },
             [1] = WINDOW_DUMMY,
             [2] = WINDOW_DUMMY,
@@ -542,9 +542,9 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
         bool32 addCursor = TRUE;
         bool32 loopBreak = FALSE;
 
-        sTeamWindowHeader.f0 = 1;
-        sTeamWindowHeader.f1 = 0;
-        sTeamWindowHeader.f2 = 10;
+        sTeamWindowHeader.count = 1;
+        sTeamWindowHeader.currId = 0;
+        sTeamWindowHeader.width = 10;
         sTeamWindowHeader.f3 = 0;
         DungeonShowWindows(&windows, 1);
         PrintMonTactics(scrollFirstId, tacticIds, monInfo, 0);
@@ -755,7 +755,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                 .height = 14,
                 .unk10 = 18,
                 .unk12 = 2,
-                .unk14 = &sTeamWindowHeader,
+                .header = &sTeamWindowHeader,
             },
             [1] = WINDOW_DUMMY,
             [2] = WINDOW_DUMMY,
@@ -812,9 +812,9 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         bool8 addCursorSprite = TRUE;
         Window *unkTxtStr1Ptr = &gWindows[0];
 
-        sTeamWindowHeader.f0 = totalSubWindows;
-        sTeamWindowHeader.f1 = currSubWindowId;
-        sTeamWindowHeader.f2 = 10;
+        sTeamWindowHeader.count = totalSubWindows;
+        sTeamWindowHeader.currId = currSubWindowId;
+        sTeamWindowHeader.width = 10;
         sTeamWindowHeader.f3 = 0;
         DungeonShowWindows(&windows, TRUE);
         sub_8069844(&unkMonStruct, entity);
@@ -897,7 +897,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
             }
 
             DungeonRunFrameActions(0x1C);
-            if (sTeamWindowHeader.f0 > 1 && !sub_80048C8()) {
+            if (sTeamWindowHeader.count > 1 && !sub_80048C8()) {
                 if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.unk28.dpad_right) {
                     PlayDungeonCursorSE(0);
                     currSubWindowId++;
@@ -1303,10 +1303,10 @@ static void ShowIqDescriptionWindow(u8 iqSkillId)
 
         sub_801317C(&menuSub);
         sub_80140B4(&windows);
-        windows.id[0].unk14 = &header;
-        header.f0 = 1;
-        header.f1 = 0;
-        header.f2 = 16;
+        windows.id[0].header = &header;
+        header.count = 1;
+        header.currId = 0;
+        header.width = 16;
         header.f3 = 0;
         DungeonShowWindows(&windows, TRUE);
         sub_80073B8(0);
@@ -1356,10 +1356,10 @@ static void ShowTacticDescriptionWindow(u8 tacticId)
 
         sub_801317C(&menuSub);
         sub_80140B4(&windows);
-        windows.id[0].unk14 = &header;
-        header.f0 = 1;
-        header.f1 = 0;
-        header.f2 = 16;
+        windows.id[0].header = &header;
+        header.count = 1;
+        header.currId = 0;
+        header.width = 16;
         header.f3 = 0;
         DungeonShowWindows(&windows, TRUE);
         sub_80073B8(0);
@@ -1410,7 +1410,7 @@ static void ShowStatusInfoWindow(s32 statusId)
                 .height = 12,
                 .unk10 = 12,
                 .unk12 = 0,
-                .unk14 = &header,
+                .header = &header,
             },
             [1] = WINDOW_DUMMY,
             [2] = WINDOW_DUMMY,
@@ -1419,9 +1419,9 @@ static void ShowStatusInfoWindow(s32 statusId)
     };
 
     sub_801317C(&menuSub);
-    header.f0 = 1;
-    header.f1 = 0;
-    header.f2 = 16;
+    header.count = 1;
+    header.currId = 0;
+    header.width = 16;
     header.f3 = 0;
     DungeonShowWindows(&windows, TRUE);
     sub_80073B8(0);
@@ -1455,7 +1455,7 @@ static const WindowTemplate sMovesSubMenu = {
     .height = 8,
     .unk10 = 8,
     .unk12 = 0,
-    .unk14 = &sBottomWindowHeader,
+    .header = &sBottomWindowHeader,
 };
 static const WindowTemplate sItemSubMenu = {
     .type = WINDOW_TYPE_WITH_HEADER,
@@ -1464,7 +1464,7 @@ static const WindowTemplate sItemSubMenu = {
     .height = 4,
     .unk10 = 4,
     .unk12 = 0,
-    .unk14 = &sBottomWindowHeader,
+    .header = &sBottomWindowHeader,
 };
 
 Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
@@ -1479,7 +1479,7 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
                 .height = 16,
                 .unk10 = 16,
                 .unk12 = 0,
-                .unk14 = &sTeamWindowHeader,
+                .header = &sTeamWindowHeader,
             },
             [1] = {
                 .type = WINDOW_TYPE_NORMAL,
@@ -1488,7 +1488,7 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
                 .height = 2,
                 .unk10 = 2,
                 .unk12 = 0,
-                .unk14 = NULL,
+                .header = NULL,
             },
             [2] = WINDOW_DUMMY,
             [3] = WINDOW_DUMMY,
