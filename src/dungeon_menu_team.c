@@ -125,8 +125,6 @@ extern void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
-extern void sub_8062B74(Entity *entity);
-extern void sub_8062CA8(Entity *entity);
 extern void sub_8045C18(u8 *buffer, Item *item);
 
 extern u8 gUnknown_202EE00;
@@ -137,21 +135,13 @@ extern u8 gUnknown_202EE39;
 
 extern const u8 *gUnknown_80FE940;
 extern const u8 *const gUnknown_80FE954;
-extern const u8 gUnknown_8106BD4[];
-extern const u8 gUnknown_8106BE0[];
 extern const u8 gUnknown_8106BEC[];
 extern const u8 gUnknown_8106BF4[];
 extern const u8 *const gUnknown_80FE95C;
 extern const u8 *const gUnknown_80FE960;
 extern const u8 *const gUnknown_80FE964;
 extern const u8 *const gUnknown_80FE978;
-extern const u8 gUnknown_8106C90[];
-extern const u8 gUnknown_8106C98[];
-extern const u8 gUnknown_8106C9C[];
 extern const u8 *const gWhichTextPtr2;
-extern const Windows gUnknown_8106C30;
-extern const Window gUnknown_8106C00;
-extern const Window gUnknown_8106C18;
 
 EWRAM_DATA s32 gTeamMenuChosenId = 0;
 static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
@@ -172,13 +162,15 @@ void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *a1, bool
 void sub_806145C(struct UnkFieldTeamMenuStruct *a0);
 void sub_80615B4(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1);
 void sub_80623B0(void);
-void sub_8062D68(void);
 void sub_8062230(void);
 void sub_8062748(u8 a0);
 bool32 sub_8069D18(DungeonPos *a0, Entity *a1);
 void sub_806285C(s32 a0);
 void sub_806262C(u8 iqSkillId);
 void sub_80639E4(struct subStruct_203B240 *strings, MenuInputStructSub *menuSub);
+static void PrintMoveNamesOnBottomWindow(Entity *entity);
+static void PrintItemNameOnBottomWindow(Entity *entity);
+static void ResetDungeonMenu(void);
 
 // Struct only used in Blue maybe?
 static const u8 gUnknown_8106B8C[] = {1, 0, 56, 0, 0, 0, 24, 0, 24, 0, 0, 0, 2, 0, 56, 0, 104, 0, 24, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -446,10 +438,10 @@ void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows,
                 gFormatArgs[1] = monInfo->maxHPStat;
                 y = GetMenuEntryYCoord(&gDungeonMenu, i);
                 if (monInfo->isTeamLeader) {
-                    PrintFormattedStringOnWindow(9, y, gUnknown_8106BD4, 0, 0);
+                    PrintFormattedStringOnWindow(9, y, _("{STAR_BULLET}{POKEMON_0}{UNK_MACRO_3D}{0x59}{POKEMON_1}"), 0, 0);
                 }
                 else {
-                    PrintFormattedStringOnWindow(9, y, gUnknown_8106BE0, 0, 0);
+                    PrintFormattedStringOnWindow(9, y, _("{ICON_BLANK}{POKEMON_0}{UNK_MACRO_3D}{0x59}{POKEMON_1}"), 0, 0);
                 }
             }
         }
@@ -628,7 +620,7 @@ void ShowTacticsMenu(ActionContainer *a0)
 
                 u32 tacticId = tacticIds[gDungeonMenu.menuIndex];
                 menuIndex = gDungeonMenu.menuIndex;
-                sub_8062D68();
+                ResetDungeonMenu();
                 PlayDungeonConfirmationSE();
                 gDungeonSubMenuItemsCount = 0;
                 sub_8044F5C(0x2F, 0);
@@ -729,10 +721,10 @@ void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
 
         CopyTacticsNameToBuffer(gFormatBuffer_Monsters[0], tactic);
         if (mon->tactic == tactic) {
-            PrintFormattedStringOnWindow(0x10, y, gUnknown_8106BEC, windowId, 0);
+            PrintFormattedStringOnWindow(0x10, y, _("{STAR_BULLET}{POKEMON_0}"), windowId, 0);
         }
         else {
-            PrintFormattedStringOnWindow(0x10, y, gUnknown_8106BF4, windowId, 0);
+            PrintFormattedStringOnWindow(0x10, y, _("{ICON_BLANK}{POKEMON_0}"), windowId, 0);
         }
     }
 
@@ -1076,7 +1068,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                     s32 var = unkInfoTabStruct.unkC[gDungeonMenu.menuIndex];
 
                     r8 = gDungeonMenu.menuIndex;
-                    sub_8062D68();
+                    ResetDungeonMenu();
                     gDungeonSubMenuItemsCount = 0;
                     PlayDungeonConfirmationSE();
                     sub_8044F5C(0xC, 0);
@@ -1112,7 +1104,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                     s32 var = unkInfoTabStruct.unk0[gDungeonMenu.menuIndex];
 
                     r8 = gDungeonMenu.menuIndex;
-                    sub_8062D68();
+                    ResetDungeonMenu();
                     gDungeonSubMenuItemsCount = var_2C;
                     PlayDungeonConfirmationSE();
                     sub_8044F5C(0x28, 0);
@@ -1445,10 +1437,53 @@ void sub_806285C(s32 a0)
     sub_803E708(4, 0x3E);
 }
 
-Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1)
+static const WindowHeader sBottomWindowHeader = {1, 0, 15, 0};
+static const Window sMovesSubMenu = {
+    .type = WINDOW_TYPE_WITH_HEADER,
+    .pos = {2, 10},
+    .width = 18,
+    .height = 8,
+    .unk10 = 8,
+    .unk12 = 0,
+    .unk14 = &sBottomWindowHeader,
+};
+static const Window sItemSubMenu = {
+    .type = WINDOW_TYPE_WITH_HEADER,
+    .pos = {2, 10},
+    .width = 18,
+    .height = 4,
+    .unk10 = 4,
+    .unk12 = 0,
+    .unk14 = &sBottomWindowHeader,
+};
+
+Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
 {
     struct UnkFieldTeamMenuStruct unkStruct;
-    Windows windows = gUnknown_8106C30;
+    Windows windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_NORMAL, // Since the window has a header, it should probably be WINDOW_TYPE_WTIH_HEADER.
+                .pos = {14, 2},
+                .width = 14,
+                .height = 16,
+                .unk10 = 16,
+                .unk12 = 0,
+                .unk14 = &sTeamWindowHeader,
+            },
+            [1] = {
+                .type = WINDOW_TYPE_NORMAL,
+                .pos = {2, 2},
+                .width = 10,
+                .height = 2,
+                .unk10 = 2,
+                .unk12 = 0,
+                .unk14 = NULL,
+            },
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
     bool8 bPress = FALSE;
     s32 prevId, currId;
 
@@ -1456,11 +1491,11 @@ Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1)
         *teamId = -1;
     }
 
-    if (a1 == 1) {
-        windows.id[2] = gUnknown_8106C00;
+    if (caseId == WHICH_MENU_MOVES) {
+        windows.id[2] = sMovesSubMenu;
     }
-    else if (a1 == 2) {
-        windows.id[2] = gUnknown_8106C18;
+    else if (caseId == WHICH_MENU_ITEMS) {
+        windows.id[2] = sItemSubMenu;
     }
 
     PrintOnDungeonTeamMenu(&unkStruct, &windows, FALSE);
@@ -1476,11 +1511,11 @@ Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1)
             Entity *entity = gDungeon->teamPokemon[currId];
 
             if (EntityIsValid(entity) && prevId != currId) {
-                if (a1 == 1) {
-                    sub_8062B74(entity);
+                if (caseId == WHICH_MENU_MOVES) {
+                    PrintMoveNamesOnBottomWindow(entity);
                 }
-                else if (a1 == 2) {
-                    sub_8062CA8(entity);
+                else if (caseId == WHICH_MENU_ITEMS) {
+                    PrintItemNameOnBottomWindow(entity);
                 }
             }
             prevId = currId;
@@ -1533,7 +1568,7 @@ Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1)
     return NULL;
 }
 
-void sub_8062B74(Entity *entity)
+static void PrintMoveNamesOnBottomWindow(Entity *entity)
 {
     s32 x, y;
     EntityInfo *entInfo = GetEntInfo(entity);
@@ -1545,7 +1580,7 @@ void sub_8062B74(Entity *entity)
     y = 16;
 
     if (entInfo->monsterBehavior == 1 || IsExperienceLocked(entInfo->joinedAt.id)) {
-        PrintFormattedStringOnWindow(12, y, gUnknown_8106C90, 2, '\0');
+        PrintFormattedStringOnWindow(12, y, _("????"), 2, '\0');
     }
     else {
         s32 i;
@@ -1574,7 +1609,7 @@ void sub_8062B74(Entity *entity)
                         sub_80078A4(2, 12, y - 2, 120, 7);
                     }
                 }
-                PrintFormattedStringOnWindow(x, y, gUnknown_8106C98, 2, '\0');
+                PrintFormattedStringOnWindow(x, y, _("{MOVE_ITEM_0}"), 2, '\0');
                 y += 12;
             }
         }
@@ -1583,7 +1618,7 @@ void sub_8062B74(Entity *entity)
     sub_80073E0(2);
 }
 
-void sub_8062CA8(Entity *entity)
+static void PrintItemNameOnBottomWindow(Entity *entity)
 {
     s32 x, y;
     EntityInfo *entInfo = GetEntInfo(entity);
@@ -1596,23 +1631,23 @@ void sub_8062CA8(Entity *entity)
     y = 18;
 
     if (entInfo->monsterBehavior == 1 || IsExperienceLocked(entInfo->joinedAt.id)) {
-        PrintFormattedStringOnWindow(8, y, gUnknown_8106C90, 2, '\0');
+        PrintFormattedStringOnWindow(8, y, _("????"), 2, '\0');
     }
     else {
         Item *item = &entInfo->heldItem;
         if (!ItemExists(item)) {
-            PrintFormattedStringOnWindow(x, y, gUnknown_8106C9C, 2, '\0');
+            PrintFormattedStringOnWindow(x, y, _("None"), 2, '\0');
         }
         else {
             sub_8045C18(gFormatBuffer_Items[0], item);
-            PrintFormattedStringOnWindow(x, y, gUnknown_8106C98, 2, '\0');
+            PrintFormattedStringOnWindow(x, y, _("{MOVE_ITEM_0}"), 2, '\0');
         }
     }
 
     sub_80073E0(2);
 }
 
-void sub_8062D68(void)
+static void ResetDungeonMenu(void)
 {
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk20 = 0;

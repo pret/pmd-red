@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_menu_items.h"
+#include "dungeon_menu_team.h"
 #include "structs/str_dungeon.h"
 #include "input.h"
 #include "structs/map.h"
@@ -58,7 +59,6 @@ extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
 extern void sub_8045064(void);
 extern bool8 PosHasItem(DungeonPos *pos);
-Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1);
 
 extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
@@ -351,9 +351,9 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     r9 = 0;
                     break;
                 }
-                else if (a0Info->action.action == 0x36) {
+                else if (a0Info->action.action == ACTION_GIVE_ITEM) {
                     s32 teamId;
-                    if (DrawFieldGiveItemMenu(&teamId, 2) != NULL) {
+                    if (ShowDungeonToWhichMonMenu(&teamId, WHICH_MENU_ITEMS) != NULL) {
                         a0Info->action.actionParameters[1].actionUseIndex = teamId;
                         sub_803EAF0(0, 0);
                         r9 = 0;

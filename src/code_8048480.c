@@ -27,6 +27,7 @@
 #include "structs/str_dungeon.h"
 #include "structs/str_position.h"
 #include "dungeon_config.h"
+#include "dungeon_menu_team.h"
 
 extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
 
@@ -77,7 +78,6 @@ extern u8 ShowDungeonMovesMenu(Entity *, u32, u32, u32, u32);
 extern void sub_8044DF0(Entity *, u32, u32);
 extern void sub_803EAF0(u32, u32);
 extern void SetLeaderActionToNothing(bool8);
-Entity *DrawFieldGiveItemMenu(u32, u32);
 extern void sub_8044E24(Entity *, u32, u32);
 extern void sub_804245C(Entity *, Item *);
 extern u8 sub_8072938(Entity *, u16);
@@ -813,7 +813,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
                 entityInfo->unk157 = flag;
             }
         }
-        entity2 = DrawFieldGiveItemMenu(0,1);
+        entity2 = ShowDungeonToWhichMonMenu(NULL,WHICH_MENU_MOVES);
         if (!EntityIsValid(entity2)) {
             return FALSE;
         }
@@ -878,7 +878,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
           pEVar6->unk157 = flag;
         }
       }
-      entity2 = DrawFieldGiveItemMenu(0,1);
+      entity2 = ShowDungeonToWhichMonMenu(NULL,WHICH_MENU_MOVES);
       if (!EntityIsValid(entity2)) {
         return FALSE;
       }
@@ -924,7 +924,7 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
             }
         }
 
-        entity2 = DrawFieldGiveItemMenu(0,1);
+        entity2 = ShowDungeonToWhichMonMenu(NULL,WHICH_MENU_MOVES);
         if (!EntityIsValid(entity2)) {
             return FALSE;
         }

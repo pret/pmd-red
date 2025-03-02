@@ -549,6 +549,7 @@ SECTIONS {
         src/dungeon_submenu.o(.rodata);
         src/dungeon_menu_items.o(.rodata);
         src/dungeon_menu_team.o(.rodata);
+        src/dungeon_menu_moves.o(.rodata);
         data/data_8106A4C.o(.rodata);
         src/code_8066D04.o(.rodata);
         data/data_8106A4C_2.o(.rodata);
