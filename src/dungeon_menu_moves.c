@@ -733,6 +733,8 @@ void ShowStatusDescriptionMenu(struct subStruct_203B240 *status, MenuInputStruct
 
 extern const u8 *const gUnknown_80F8B40;
 extern const u8 *const gUnknown_80F8B64;
+extern const u8 *const gUnknown_80F8BB4;
+extern const u8 *const gUnknown_80F8B88;
 
 void sub_8063A70(ActionContainer *a0, bool8 flagToSet)
 {
@@ -837,6 +839,82 @@ bool8 sub_8063C88(EntityInfo *entInfo, s32 a1)
     }
 
     return ret;
+}
+
+void sub_8063CF0(ActionContainer *a0, bool8 a1)
+{
+    s32 linkedCount;
+    Entity *entity = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
+    EntityInfo *entInfo = GetEntInfo(entity);
+    s32 id = a0->actionParameters[1].actionUseIndex;
+    bool8 unlInked = FALSE;
+
+    BufferMoveName(gFormatBuffer_Items[0], &entInfo->moves.moves[id], NULL);
+    entInfo->moves.moves[id].moveFlags2 |= 2;
+
+    id++;
+    for (linkedCount = 0; linkedCount < MAX_MON_MOVES && id < MAX_MON_MOVES; id++, linkedCount++) {
+        Move *move = &entInfo->moves.moves[id];
+        if (MoveFlagLinkChain(move)) {
+            move->moveFlags &= ~(MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN);
+            unlInked = TRUE;
+        }
+        else {
+            break;
+        }
+    }
+
+    unk_FixLinkedMovesSetEnabled4(entInfo->moves.moves);
+    PlaySoundEffect(0x133);
+    if (a1) {
+        if (unlInked) {
+            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8B88);
+        }
+        else {
+            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8BB4);
+        }
+        sub_803E708(0x78, 0x1F);
+    }
+}
+
+bool8 sub_8063DD4(EntityInfo *entInfo, s32 id)
+{
+    bool8 linkFound = FALSE;
+    s32 linkedCount;
+
+    id++;
+    for (linkedCount = 0; linkedCount < MAX_MON_MOVES && id < MAX_MON_MOVES; linkedCount++) {
+        Move *move = &entInfo->moves.moves[id];
+
+        if (MoveFlagLinkChain(move)) {
+            linkFound = TRUE;
+            id++;
+        }
+        else {
+            break;
+        }
+    }
+
+    if (linkFound)
+        return TRUE;
+    return FALSE;
+}
+
+void sub_8063E30(Move *moves, s32 id)
+{
+    s32 i;
+
+    id++;
+    for (i = 0; i < 8 && id < 8; id++, i++) {
+        if (MoveFlagLinkChain(&moves[id])) {
+            moves[id].moveFlags &= ~(MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN);
+        }
+        else {
+            break;
+        }
+    }
+
+    unk_FixLinkedMovesSetEnabled8(moves);
 }
 
 //
