@@ -1,5 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_menu_moves.h"
+#include "dungeon_menu_team.h"
+#include "dungeon_submenu.h"
 #include "structs/str_dungeon.h"
 #include "input.h"
 #include "structs/map.h"
@@ -71,6 +74,14 @@ void sub_8063578(s32 a0, Entity *entity, Moves *moves, s32 a3, u8 a4, s32 a5);
 bool8 sub_8063C88(EntityInfo *entInfo, s32 a1);
 bool8 sub_8063DD4(EntityInfo *entInfo, s32 a1);
 void sub_8063834(Move *moves, s32 a1, s32 a2);
+
+// Needed to match some functions.
+static inline u32 CheckPressed(u32 button)
+{
+    u32 check = button;
+    check &= gRealInputs.pressed;
+    return check;
+}
 
 u32 sub_8062D88(void)
 {
@@ -296,15 +307,11 @@ bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
                 PlayDungeonStartButtonSE();
                 break;
             }
-            // Fixme: r0/r1 regswap...
-            {
-                u32 bPressed = B_BUTTON;
-                bPressed &= gRealInputs.pressed;
-                if ((bPressed) || gDungeonMenu.unk28.b_button) {
-                    PlayDungeonCancelSE();
-                    ret = TRUE;
-                    break;
-                }
+
+            if (CheckPressed(B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                PlayDungeonCancelSE();
+                ret = TRUE;
+                break;
             }
         }
 
@@ -592,6 +599,108 @@ void sub_80637E8(ActionContainer *a0)
 
     monInfo->moves.moves[a0->actionParameters[1].actionUseIndex].moveFlags2 |= 2;
     sub_8063834(monInfo->moves.moves, a0->actionParameters[1].actionUseIndex, 4);
+}
+
+void sub_8063834(Move *moves, s32 a1, s32 a2)
+{
+    Windows windows;
+    WindowHeader header;
+    struct subStruct_203B240 *statuses[4];
+    s32 i, count, currId;
+
+    sub_80140B4(&windows);
+    windows.id[0].unk14 = &header;
+
+    count = 1;
+    for (i = a1 + 1; i < a2; i++) {
+        if (!MoveFlagExists(&moves[i]))
+            break;
+        if (!MoveFlagLinkChain(&moves[i]))
+            break;
+        count++;
+    }
+
+    currId = 0;
+    while (1) {
+        s32 statusesCount;
+        s32 inputAction = 0;
+
+        header.f0 = count;
+        header.f1 = currId;
+        header.f2 = 12;
+        header.f3 = 0;
+
+        gDungeonMenu.unk1E = currId;
+        gDungeonMenu.unk20 = count;
+        gDungeonMenu.unkC = (gUnknown_2027370[0].unk0 + 23) * 8;
+        gDungeonMenu.unkE = ((gUnknown_2027370[0].unk2 + 1) * 8) - 2;
+        gDungeonMenu.unk14.x = 0;
+        gDungeonMenu.unk4 = 0;
+        gDungeonMenu.firstEntryY = 16;
+        gDungeonMenu.unk0 = 0;
+        sub_801317C(&gDungeonMenu.unk28);
+        gDungeonMenu.menuIndex = 0;
+        gDungeonMenu.unk1A = 0;
+        gDungeonMenu.unk1C = 0;
+        DungeonShowWindows(&windows, TRUE);
+        statusesCount = unk_PrintMoveDescription(currId, &moves[a1 + currId], 0, statuses);
+        while (1) {
+            if (statusesCount != 0) {
+                ShowStatusDescriptionMenuArrow();
+            }
+
+            nullsub_34(&gDungeonMenu.unk28, 0);
+            DungeonRunFrameActions(0x1C);
+
+            if ((gRealInputs.pressed & sub_8062D88()) || gDungeonMenu.unk28.a_button) {
+                PlayDungeonConfirmationSE();
+                inputAction = 1;
+                if (statusesCount != 0) {
+                    inputAction = 2;
+                }
+            }
+            else if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                PlayDungeonCancelSE();
+                inputAction = 1;
+            }
+            else if ((gRealInputs.pressed & DPAD_LEFT) || gDungeonMenu.unk28.dpad_left) {
+                s32 prevId = currId;
+                if (currId == 0) {
+                    currId = count;
+                }
+                currId--;
+                if (prevId != currId) {
+                    PlayDungeonCursorSE(FALSE);
+                }
+            }
+            else if ((CheckPressed(DPAD_RIGHT)) || gDungeonMenu.unk28.dpad_right) {
+                s32 prevId = currId;
+                if (currId == count - 1) {
+                    currId = 0;
+                }
+                else {
+                    currId++;
+                }
+                if (prevId != currId) {
+                    PlayDungeonCursorSE(FALSE);
+                }
+            }
+            else {
+                continue;
+            }
+
+            break;
+        }
+
+        if (inputAction == 1)
+            break;
+
+        if (inputAction != 0 && statusesCount != 0) {
+            ShowStatusesDescriptionMenu(statusesCount, statuses);
+        }
+    }
+
+    sub_803EAF0(0, 0);
 }
 
 //

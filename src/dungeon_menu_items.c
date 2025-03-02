@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "dungeon_menu_items.h"
 #include "dungeon_menu_team.h"
+#include "dungeon_submenu.h"
 #include "structs/str_dungeon.h"
 #include "input.h"
 #include "structs/map.h"

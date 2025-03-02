@@ -1,7 +1,6 @@
 #ifndef GUARD_DUNGEON_MAIN_H
 #define GUARD_DUNGEON_MAIN_H
 
-#include "structs/str_text.h"
 #include "structs/dungeon_entity.h"
 
 struct UnkMenuBitsStruct {
@@ -19,6 +18,5 @@ void sub_805F02C(void);
 ActionContainer *GetLeaderActionContainer(void);
 u16 GetLeaderActionId(void);
 bool8 DungeonGiveNameToRecruitedMon(u8 *a0);
-void CreateDungeonMenuSubWindow(Window *mainWindow, s32 subWindowX);
 
 #endif
