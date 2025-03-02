@@ -47,7 +47,6 @@ extern void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern void SetLeaderActionToNothing(u8 a0);
 extern void sub_80637E8(ActionContainer *a0);
 extern void sub_8063B54(ActionContainer *a0);
-extern void sub_8063BB4(ActionContainer *a0);
 extern void sub_806752C(ActionContainer *a0);
 extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
 extern void sub_8063A70(ActionContainer *a0, bool8 a1);
@@ -701,6 +700,143 @@ void sub_8063834(Move *moves, s32 a1, s32 a2)
     }
 
     sub_803EAF0(0, 0);
+}
+
+extern WindowTemplates gUnknown_202F278;
+extern const WindowHeader gUnknown_8106CC8;
+extern const u8 gUnknown_8106CCC[];
+
+void ShowStatusDescriptionMenu(struct subStruct_203B240 *status, MenuInputStructSub *menuSub)
+{
+    sub_80140B4(&gUnknown_202F278);
+    gUnknown_202F278.id[0].header = &gUnknown_8106CC8;
+    DungeonShowWindows(&gUnknown_202F278, TRUE);
+    sub_80073B8(0);
+
+    strcpy(gFormatBuffer_Monsters[0], status->pokeName);
+    PrintFormattedStringOnWindow(16, 0, gUnknown_8106CCC, 0, '\0');
+    PrintFormattedStringOnWindow(4, 16, status->unk4, 0, '\0');
+    sub_80073E0(0);
+    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.unkC = 0;
+    gDungeonMenu.unkE = 0;
+    gDungeonMenu.unk14.x = 0;
+    gDungeonMenu.unk4 = 0;
+    gDungeonMenu.firstEntryY = 16;
+    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.menuIndex = 0;
+    gDungeonMenu.unk1A = 0;
+    gDungeonMenu.unk1C = 0;
+    sub_801317C(menuSub);
+}
+
+extern const u8 *const gUnknown_80F8B40;
+extern const u8 *const gUnknown_80F8B64;
+
+void sub_8063A70(ActionContainer *a0, bool8 flagToSet)
+{
+    s32 i;
+    Entity *entity = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
+    EntityInfo *entInfo = GetEntInfo(entity);
+    Move *move = &entInfo->moves.moves[a0->actionParameters[1].actionUseIndex];
+    bool8 wasSet = MoveFlagSet(move) != 0;
+
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        if (MoveFlagExists(&entInfo->moves.moves[i])) {
+            entInfo->moves.moves[i].moveFlags &= ~(MOVE_FLAG_SET);
+        }
+    }
+
+    BufferMoveName(gFormatBuffer_Items[0], move, NULL);
+    if (!wasSet) {
+        move->moveFlags |= MOVE_FLAG_SET;
+    }
+    unk_FixLinkedMovesSetEnabled4(entInfo->moves.moves);
+    move->moveFlags2 |= 2;
+    PlaySoundEffect(0x133);
+    if (flagToSet) {
+        if (!wasSet) {
+            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8B40);
+        }
+        else {
+            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80F8B64);
+        }
+        sub_803E708(0x78, 0x1F);
+    }
+}
+
+void sub_8063B54(ActionContainer *a0)
+{
+    Entity *entity = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
+    EntityInfo *entInfo = GetEntInfo(entity);
+    Move *move = &entInfo->moves.moves[a0->actionParameters[1].actionUseIndex];
+
+    BufferMoveName(gFormatBuffer_Items[0], move, NULL);
+    move->moveFlags ^= MOVE_FLAG_ENABLED_FOR_AI;
+    unk_FixLinkedMovesSetEnabled4(entInfo->moves.moves);
+    move->moveFlags2 |= 2;
+    PlaySoundEffect(0x133);
+}
+
+void sub_8063BB4(ActionContainer *a0)
+{
+    s32 linkedCount;
+    Entity *entity = gDungeon->teamPokemon[a0->actionParameters[0].actionUseIndex];
+    EntityInfo *entInfo = GetEntInfo(entity);
+    s32 id = a0->actionParameters[1].actionUseIndex;
+
+    BufferMoveName(gFormatBuffer_Items[0], &entInfo->moves.moves[id], NULL);
+    entInfo->moves.moves[id].moveFlags2 |= 2;
+    linkedCount = 0;
+    for (id++; id < MAX_MON_MOVES; id++) {
+        if (!MoveFlagExists(&entInfo->moves.moves[id]))
+            break;
+        if (!MoveFlagLinkChain(&entInfo->moves.moves[id]))
+            break;
+        if (++linkedCount >= MAX_MON_MOVES)
+            break;
+    }
+
+    if (!MoveFlagExists(&entInfo->moves.moves[id]))
+        id = MAX_MON_MOVES;
+
+    if (id < MAX_MON_MOVES) {
+        Move *move = &entInfo->moves.moves[id];
+        move->moveFlags |= MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN;
+        BufferMoveName(gFormatBuffer_Items[1], move, NULL);
+    }
+    unk_FixLinkedMovesSetEnabled4(entInfo->moves.moves);
+    PlaySoundEffect(0x133);
+}
+
+bool8 sub_8063C88(EntityInfo *entInfo, s32 a1)
+{
+    s32 i;
+    bool8 ret = FALSE;
+    s32 moveId = a1;
+
+    if (DoesMoveCharge(entInfo->moves.moves[moveId].id))
+        return FALSE;
+
+    moveId++;
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+        Move *move = &entInfo->moves.moves[moveId];
+
+        if (DoesMoveCharge(move->id))
+            return FALSE;
+
+        if (!MoveFlagExists(move))
+            break;
+        if (!MoveFlagLinkChain(move)) {
+            ret = TRUE;
+            break;
+        }
+        if (++moveId >= MAX_MON_MOVES)
+            break;
+    }
+
+    return ret;
 }
 
 //

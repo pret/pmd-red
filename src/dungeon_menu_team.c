@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_menu_team.h"
+#include "dungeon_menu_moves.h"
 #include "dungeon_submenu.h"
 #include "structs/str_dungeon.h"
 #include "number_util.h"
@@ -126,7 +127,6 @@ extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
 extern void sub_8045C18(u8 *buffer, Item *item);
 extern bool32 sub_8069D18(DungeonPos *a0, Entity *a1);
-extern void ShowStatusDescriptionMenu(struct subStruct_203B240 *strings, MenuInputStructSub *menuSub);
 
 extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
