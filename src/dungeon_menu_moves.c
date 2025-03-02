@@ -1,56 +1,29 @@
 #include "global.h"
 #include "globaldata.h"
 #include "structs/str_dungeon.h"
-#include "number_util.h"
 #include "input.h"
 #include "structs/map.h"
 #include "dungeon_main.h"
 #include "dungeon_message.h"
 #include "dungeon_action.h"
-#include "dungeon_ai_targeting.h"
-#include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "moves.h"
-#include "items.h"
 #include "dungeon_music.h"
-#include "dungeon_ai_movement.h"
 #include "code_8045A00.h"
 #include "string_format.h"
 #include "code_803E46C.h"
-#include "code_801602C.h"
-#include "code_800D090.h"
-#include "trap.h"
-#include "charge_move.h"
-#include "dungeon_map_access.h"
 #include "status_checks_1.h"
-#include "game_options.h"
-#include "weather.h"
-#include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "tile_types.h"
 #include "dungeon_visibility.h"
 #include "dungeon_movement.h"
-#include "bg_control.h"
 #include "menu_input.h"
 #include "music.h"
-#include "items.h"
-#include "play_time.h"
-#include "pokemon_3.h"
 #include "text.h"
-#include "code_806CD90.h"
 #include "code_8044CC8.h"
-#include "code_801B3C0.h"
 #include "move_util.h"
-#include "dungeon_capabilities.h"
-#include "constants/dungeon.h"
-#include "constants/status.h"
-#include "constants/tactic.h"
-#include "constants/iq_skill.h"
-#include "constants/dungeon_action.h"
-#include "structs/struct_sub80095e4.h"
-#include "structs/str_text.h"
 
 extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4);
 extern void PlayDungeonStartButtonSE(void);
@@ -67,19 +40,139 @@ extern void sub_8044FF0(u16 param_1);
 extern void DungeonShowWindows(Windows *a0, u8 a1);
 extern s32 GetTeamMemberEntityIndex(Entity *pokemon);
 extern u32 sub_8062D88(void);
+extern void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
+extern void SetLeaderActionToNothing(u8 a0);
+extern void sub_80637E8(ActionContainer *a0);
+extern void sub_8063B54(ActionContainer *a0);
+extern void sub_8063BB4(ActionContainer *a0);
+extern void sub_806752C(ActionContainer *a0);
+extern void sub_8061A38(ActionContainer *a0, bool8 a1);
+extern void sub_8063A70(ActionContainer *a0, bool8 a1);
+extern void sub_8063CF0(ActionContainer *a0, bool8 a1);
+extern void sub_8067768(ActionContainer *a0);
+extern void sub_806A2BC(Entity *a0, u8 a1);
+extern bool8 sub_8071A8C(Entity *pokemon);
 
 extern s32 gDungeonSubMenuItemsCount;
 extern MenuInputStruct gDungeonMenu;
-extern WindowHeader gUnknown_202F270;
 extern s32 gUnknown_202F2D8;
 extern s32 sub_8044FB4(u16 param_1);
 
 extern const u8 *const gUnknown_80FE978;
+extern const Window gUnknown_8106CAC;
+extern const u8 *const gUnknown_80FDFE8;
+extern const u8 gUnknown_8106CC4[];
 
 void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, Windows *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
 void sub_8063698(Entity *entity, u8 a1, u8 a2);
 void sub_80637BC(ActionContainer *a0, s32 a1, s32 a2);
 void sub_80637A4(ActionContainer *a0, s32 a1);
+void sub_8063578(s32 a0, Entity *entity, Moves *moves, s32 a3, u8 a4, s32 a5);
+bool8 sub_8063C88(EntityInfo *entInfo, s32 a1);
+bool8 sub_8063DD4(EntityInfo *entInfo, s32 a1);
+void sub_8063834(Move *moves, s32 a1, s32 a2);
+
+u32 sub_8062D88(void)
+{
+    return A_BUTTON;
+}
+
+void ShowMovesFromTeamMenu(ActionContainer *a0)
+{
+    s32 id = a0->actionParameters[0].actionUseIndex;
+    Entity *entityOrg = gDungeon->teamPokemon[id];
+    Entity *entityNew = entityOrg;
+
+    while (1) {
+        s32 i, count, countUntilId;
+
+        countUntilId = 0;
+        count = 0;
+        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+            if (sub_8071A8C(gDungeon->teamPokemon[i])) {
+                if (i == id) {
+                    countUntilId = count;
+                }
+                count++;
+            }
+        }
+
+        sub_806A2BC(entityNew, 0);
+        ChangeDungeonCameraPos(&entityNew->pos, 0, 1, 1);
+        SetLeaderActionToNothing(1);
+        if (ShowDungeonMovesMenu(entityNew, 0, 1, countUntilId, count)) {
+            return;
+        }
+
+        if (GetLeaderActionId() == ACTION_MOVES_MENU_NEXT_MON) {
+            s32 idBefore = id;
+            for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                if (++id >= MAX_TEAM_MEMBERS) {
+                    id = 0;
+                }
+                entityNew = gDungeon->teamPokemon[id];
+                if (sub_8071A8C(entityNew)) {
+                    break;
+                }
+            }
+
+            a0->actionParameters[0].actionUseIndex = id;
+            if (idBefore != id) {
+                PlayDungeonCursorSE(0);
+            }
+            SetLeaderActionToNothing(TRUE);
+        }
+        // Everything is the same as in the above if except for add/sub difference.
+        else if (GetLeaderActionId() == ACTION_MOVES_MENU_PREV_MON) {
+            s32 idBefore = id;
+            for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+                if (--id < 0) {
+                    id = MAX_TEAM_MEMBERS - 1;
+                }
+                entityNew = gDungeon->teamPokemon[id];
+                if (sub_8071A8C(entityNew)) {
+                    break;
+                }
+            }
+
+            a0->actionParameters[0].actionUseIndex = id;
+            if (idBefore != id) {
+                PlayDungeonCursorSE(0);
+            }
+            SetLeaderActionToNothing(TRUE);
+        }
+        else if (GetLeaderActionId() == ACTION_UNK1D) {
+            sub_80637E8(GetLeaderActionContainer());
+            SetLeaderActionToNothing(TRUE);
+        }
+        else if (GetLeaderActionId() == ACTION_SET_MOVE) {
+            sub_803EAF0(0, NULL);
+            sub_8063A70(GetLeaderActionContainer(), TRUE);
+            SetLeaderActionToNothing(TRUE);
+        }
+        else if (GetLeaderActionId() == ACTION_UNSET_MOVE) {
+            sub_803EAF0(0, NULL);
+            sub_8063A70(GetLeaderActionContainer(), FALSE);
+            SetLeaderActionToNothing(TRUE);
+        }
+        else if (GetLeaderActionId() == ACTION_UNK1F) {
+            sub_803EAF0(0, NULL);
+            sub_8063B54(GetLeaderActionContainer());
+            SetLeaderActionToNothing(TRUE);
+        }
+        else if (GetLeaderActionId() == ACTION_UNK21) {
+            sub_803EAF0(0, NULL);
+            sub_8063CF0(GetLeaderActionContainer(), TRUE);
+            SetLeaderActionToNothing(TRUE);
+        }
+
+        if (GetLeaderActionId() != ACTION_NOTHING)
+            break;
+    }
+
+    sub_806A2BC(entityOrg, 0);
+    ChangeDungeonCameraPos(&entityOrg->pos, 0, 1, 1);
+}
 
 bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
 {
@@ -325,10 +418,6 @@ bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
     return ret;
 }
 
-extern const Window gUnknown_8106CAC;
-void sub_8063578(s32 a0, Entity *entity, Moves *moves, s32 a3, u8 a4, s32 a5);
-extern const u8 *const gUnknown_80FDFE8;
-
 void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, Windows *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7)
 {
     s32 i, movesCount;
@@ -387,8 +476,6 @@ void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, Windows *windows, W
     sub_80073E0(2);
 }
 
-extern const u8 gUnknown_8106CC4[];
-
 void sub_8063578(s32 count, Entity *entity, Moves *moves, s32 windowId, u8 a4, s32 a5)
 {
     s32 i;
@@ -428,9 +515,6 @@ void sub_8063578(s32 count, Entity *entity, Moves *moves, s32 windowId, u8 a4, s
 
     sub_80073E0(windowId);
 }
-
-bool8 sub_8063C88(EntityInfo *entInfo, s32 a1);
-bool8 sub_8063DD4(EntityInfo *entInfo, s32 a1);
 
 void sub_8063698(Entity *entity, u8 a1, u8 a2)
 {
@@ -500,8 +584,6 @@ void sub_80637BC(ActionContainer *a0, s32 a1, s32 a2)
     a0->actionParameters[0].actionUseIndex = a2;
     a0->actionParameters[1].actionUseIndex = gUnknown_202F2D8;
 }
-
-void sub_8063834(Move *moves, s32 a1, s32 a2);
 
 void sub_80637E8(ActionContainer *a0)
 {

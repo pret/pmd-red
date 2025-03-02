@@ -44,6 +44,8 @@
 #include "code_801B3C0.h"
 #include "dungeon_capabilities.h"
 #include "dungeon_menu_items.h"
+#include "dungeon_menu_team.h"
+#include "dungeon_menu_moves.h"
 #include "constants/dungeon.h"
 #include "constants/status.h"
 #include "constants/tactic.h"
@@ -89,7 +91,6 @@ bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
 bool8 ShowDungeonTeamMenu(Entity *a0);
-void sub_8062D8C(ActionContainer *a0);
 void sub_80637E8(ActionContainer *a0);
 void sub_8063B54(ActionContainer *a0);
 void sub_8063BB4(ActionContainer *a0);
@@ -1334,7 +1335,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             else if (GetLeaderActionId() == ACTION_CHECK_MOVES) {
                 s32 i, count;
 
-                sub_8062D8C(GetLeaderActionContainer());
+                ShowMovesFromTeamMenu(GetLeaderActionContainer());
                 count = 0;
                 for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                     Entity *teamMon = gDungeon->teamPokemon[i];

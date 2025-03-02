@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_menu_team.h"
 #include "structs/str_dungeon.h"
 #include "number_util.h"
 #include "input.h"
@@ -7,7 +8,6 @@
 #include "dungeon_main.h"
 #include "dungeon_message.h"
 #include "dungeon_action.h"
-#include "dungeon_ai_targeting.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -21,38 +21,29 @@
 #include "code_803E46C.h"
 #include "code_801602C.h"
 #include "code_800D090.h"
-#include "trap.h"
-#include "charge_move.h"
 #include "dungeon_map_access.h"
 #include "status_checks_1.h"
-#include "game_options.h"
 #include "weather.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "tile_types.h"
 #include "dungeon_visibility.h"
 #include "dungeon_movement.h"
-#include "bg_control.h"
 #include "menu_input.h"
 #include "music.h"
 #include "items.h"
-#include "play_time.h"
 #include "pokemon_3.h"
 #include "text.h"
 #include "code_806CD90.h"
 #include "code_8044CC8.h"
 #include "code_801B3C0.h"
 #include "dungeon_capabilities.h"
-#include "constants/dungeon.h"
-#include "constants/status.h"
 #include "constants/tactic.h"
-#include "constants/iq_skill.h"
-#include "constants/dungeon_action.h"
 #include "structs/struct_sub80095e4.h"
 #include "structs/str_text.h"
+#include "code_8097DD0.h"
+#include "move_util.h"
 
-extern void HandleSetItemAction(Entity *,bool8);
-extern void HandleUnsetItemAction(Entity *,bool8);
 extern bool8 sub_8048A68(Entity *param_1,Item *item);
 extern bool8 sub_8048950(Entity *param_1,Item *item);
 extern bool8 sub_8048B9C(Entity *param_1,Item *item);
@@ -68,7 +59,6 @@ bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
 bool8 sub_80701A4(Entity *a0);
-void ShowDungeonStairsMenu(Entity *a0);
 void sub_805E738(Entity *a0);
 void sub_803E708(s32 a0, s32 a1);
 void sub_8040A78(void);
@@ -95,7 +85,6 @@ void PrintOnMainMenu(bool8 printAll);
 bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1);
 void sub_8060D24(UNUSED ActionContainer *a0);
 bool8 ShowDungeonTeamMenu(Entity *a0);
-void sub_8062D8C(ActionContainer *a0);
 void sub_80637E8(ActionContainer *a0);
 void sub_8063B54(ActionContainer *a0);
 void sub_8063BB4(ActionContainer *a0);
@@ -106,45 +95,8 @@ void sub_8063CF0(ActionContainer *a0, bool8 a1);
 void sub_8067768(ActionContainer *a0);
 void ShowTacticsMenu(ActionContainer *a0);
 void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
-extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_80643AC(Entity *pokemon);
 extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4);
-
-extern u8 gUnknown_202EE00;
-extern Entity *gLeaderPointer;
-
-extern const u8 *gUnknown_80F8A84;
-extern const u8 *gUnknown_80F8A6C;
-extern const u8 *gUnknown_80F8ADC;
-extern const u8 *gUnknown_80F8AB0;
-extern const u8 *gUnknown_80F8B0C;
-extern const u8 *gUnknown_80FD4B0;
-extern const u8 *gUnknown_80F8A4C;
-extern const u8 *gUnknown_80F8A28;
-extern const u8 *gUnknown_8100208;
-extern const u8 *gUnknown_80F9BD8;
-extern const u8 *gUnknown_80F9C08;
-extern const u8 *gUnknown_80F9C2C;
-extern const u8 *gUnknown_80F9BB0;
-extern const u8 *gUnknown_80FDE18;
-extern const u8 *gUnknown_80F8B24;
-extern const u8 *gTeamToolboxAPtr;
-extern const u8 *gTeamToolboxBPtr;
-extern const u8 *gFieldItemMenuGroundTextPtr;
-extern const u8 *gUnknown_80FE940;
-extern const u8 *gWhichTextPtr1;
-extern const u8 *const gFieldMenuMovesPtr;
-extern const u8 *const gFieldMenuItemsPtr;
-extern const u8 *const gFieldMenuTeamPtr;
-extern const u8 *const gFieldMenuOthersPtr;
-extern const u8 *const gFieldMenuGroundPtr;
-extern const u8 *const gUnknown_80F9174;
-extern const u8 *const gUnknown_80F9190;
-extern const u8 *const gUnknown_80F91C8;
-extern const u8 *const gUnknown_80F91E0;
-extern const u8 *const gUnknown_80F91A8;
-extern const u8 *const gUnknown_80FE954;
-
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
@@ -166,36 +118,47 @@ extern void sub_8044FF0(u16 param_1);
 extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
 extern void sub_8045064(void);
+extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
+extern bool8 CanLeaderSwitch(u8 dungeon);
+extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
+extern void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
+extern u32 sub_8014140(s32 a0, const void *a1);
+extern char* sub_808E4FC(s32 a1);
+extern char* sub_808E51C(s32 a1);
+extern void sub_8062B74(Entity *entity);
+extern void sub_8062CA8(Entity *entity);
+extern void sub_8045C18(u8 *buffer, Item *item);
 
-void PrintMonTactics(s32 a0, u8 *tacticIds, EntityInfo *mon, s32 windowId);
-void sub_80623B0(void);
-void sub_8062D68(void);
-void sub_8062230(void);
-void sub_8062748(u8 a0);
-
+extern u8 gUnknown_202EE00;
+extern Entity *gLeaderPointer;
 extern MenuInputStruct gDungeonMenu;
-extern WindowHeader gUnknown_202F270;
+extern s32 gUnknown_202EDCC;
+extern u8 gUnknown_202EE39;
 
-s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
-
-void sub_8060900(Entity *a0);
-s32 sub_8060800(WindowHeader *a0, s32 a1);
-void ChosenSubMenuToAction(ActionContainer *a0);
-Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1);
+extern const u8 *gUnknown_80FE940;
+extern const u8 *const gUnknown_80FE954;
+extern const u8 gUnknown_8106BD4[];
+extern const u8 gUnknown_8106BE0[];
+extern const u8 gUnknown_8106BEC[];
+extern const u8 gUnknown_8106BF4[];
+extern const u8 *const gUnknown_80FE95C;
+extern const u8 *const gUnknown_80FE960;
+extern const u8 *const gUnknown_80FE964;
+extern const u8 *const gUnknown_80FE978;
+extern const u8 gUnknown_8106C90[];
+extern const u8 gUnknown_8106C98[];
+extern const u8 gUnknown_8106C9C[];
+extern const u8 *const gWhichTextPtr2;
+extern const Windows gUnknown_8106C30;
+extern const Window gUnknown_8106C00;
+extern const Window gUnknown_8106C18;
 
 EWRAM_DATA s32 gTeamMenuChosenId = 0;
 static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
+EWRAM_DATA static SpriteOAM gUnknown_202F268 = {0};
+EWRAM_DATA static WindowHeader sTeamWindowHeader = {0};
 
 EWRAM_INIT u8 gUnknown_203B43C[4] = {2, 0, 0xD, 0}; // TODO: Move to a better file and figure out the array count. Apparently it's only written to.
-
-extern void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
-extern u32 sub_8014140(s32 a0, const void *a1);
-void sub_806285C(s32 a0);
-void sub_806262C(u8 iqSkillId);
-
-extern const u8 gUnknown_8106B8C[];
-
-extern WindowHeader gUnknown_202F270;
 
 struct UnkFieldTeamMenuStruct
 {
@@ -204,11 +167,21 @@ struct UnkFieldTeamMenuStruct
     u8 unk14[MAX_TEAM_MEMBERS];
 };
 
+void PrintMonTactics(s32 a0, u8 *tacticIds, EntityInfo *mon, s32 windowId);
 void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *a1, bool8 a2);
 void sub_806145C(struct UnkFieldTeamMenuStruct *a0);
 void sub_80615B4(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1);
+void sub_80623B0(void);
+void sub_8062D68(void);
+void sub_8062230(void);
+void sub_8062748(u8 a0);
+bool32 sub_8069D18(DungeonPos *a0, Entity *a1);
+void sub_806285C(s32 a0);
+void sub_806262C(u8 iqSkillId);
+void sub_80639E4(struct subStruct_203B240 *strings, MenuInputStructSub *menuSub);
 
-extern u8 gUnknown_202EE39;
+// Struct only used in Blue maybe?
+static const u8 gUnknown_8106B8C[] = {1, 0, 56, 0, 0, 0, 24, 0, 24, 0, 0, 0, 2, 0, 56, 0, 104, 0, 24, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 bool8 ShowDungeonTeamMenu(Entity *a0)
 {
@@ -224,7 +197,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
                 .height = 16,
                 .unk10 = 16,
                 .unk12 = 0,
-                .unk14 = &gUnknown_202F270,
+                .unk14 = &sTeamWindowHeader,
             },
             [1] = WINDOW_DUMMY,
             [2] = WINDOW_DUMMY,
@@ -359,24 +332,6 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
     return ret;
 }
 
-bool32 sub_8069D18(DungeonPos *a0, Entity *a1);
-
-extern const u8 gTeamFormat[];
-extern const u8 gHeartRedTiny[];
-extern const u8 gHeartRedSmall[];
-extern const u8 gHeartRedMedium[];
-extern const u8 gHeartRedLarge[];
-extern const u8 gHeartYellowTiny[];
-extern const u8 gHeartYellowSmall[];
-extern const u8 gHeartYellowMedium[];
-extern const u8 gHeartYellowLarge[];
-extern const u8 gUnknown_8106BD4[];
-extern const u8 gUnknown_8106BE0[];
-extern const u8 gUnknown_8106BEC[];
-extern const u8 gUnknown_8106BF4[];
-
-extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
-
 void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows, bool8 a2)
 {
     s32 r0;
@@ -413,9 +368,9 @@ void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows,
         a0->unk14[i] = 0;
     }
 
-    gUnknown_202F270.f0 = 1;
-    gUnknown_202F270.f1 = 0;
-    gUnknown_202F270.f3 = 0;
+    sTeamWindowHeader.f0 = 1;
+    sTeamWindowHeader.f1 = 0;
+    sTeamWindowHeader.f3 = 0;
     gDungeonMenu.menuIndex = gTeamMenuChosenId;
     gDungeonMenu.unk1A = count;
     gDungeonMenu.unk1C = count;
@@ -434,7 +389,7 @@ void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows,
     }
     windows->id[0].unk10 = r0;
     windows->id[0].height = r0;
-    gUnknown_202F270.f2 = 8;
+    sTeamWindowHeader.f2 = 8;
     if (a2) {
         windows->id[1] = windows->id[3];
     }
@@ -443,7 +398,7 @@ void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows,
     sub_80137B0(&gDungeonMenu, 0);
     sub_80073B8(0);
     if (r10) {
-        PrintFormattedStringOnWindow(0xC, 0, gTeamFormat, 0, 0);
+        PrintFormattedStringOnWindow(0xC, 0, _("$t"), 0, 0);
     }
 
     // Print hp/max hp
@@ -460,30 +415,30 @@ void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows,
                 sub_8070968(gFormatBuffer_Monsters[0], monInfo, color);
                 if (sub_806A538(gRecruitedPokemonRef->pokemon2[monInfo->teamIndex].unkA)) {
                     if (monInfo->HP <= monInfo->maxHPStat / 4) {
-                        strcpy(gFormatBuffer_Monsters[1], gHeartRedTiny);
+                        InlineStrcpy(gFormatBuffer_Monsters[1], _("{HEART_RED_TINY}"));
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 2) {
-                        strcpy(gFormatBuffer_Monsters[1], gHeartRedSmall);
+                        InlineStrcpy(gFormatBuffer_Monsters[1], _("{HEART_RED_SMALL}"));
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 3) {
-                        strcpy(gFormatBuffer_Monsters[1], gHeartRedMedium);
+                        InlineStrcpy(gFormatBuffer_Monsters[1], _("{HEART_RED_MEDIUM}"));
                     }
                     else {
-                        strcpy(gFormatBuffer_Monsters[1], gHeartRedLarge);
+                        InlineStrcpy(gFormatBuffer_Monsters[1], _("{HEART_RED_LARGE}"));
                     }
                 }
                 else {
                     if (monInfo->HP <= monInfo->maxHPStat / 4) {
-                        strcpy(gFormatBuffer_Monsters[1], gHeartYellowTiny);
+                        InlineStrcpy(gFormatBuffer_Monsters[1], _("{HEART_YELLOW_TINY}"));
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 2) {
-                        strcpy(gFormatBuffer_Monsters[1], gHeartYellowSmall);
+                        InlineStrcpy(gFormatBuffer_Monsters[1], _("{HEART_YELLOW_SMALL}"));
                     }
                     else if (monInfo->HP <= (monInfo->maxHPStat / 4) * 3) {
-                        strcpy(gFormatBuffer_Monsters[1], gHeartYellowMedium);
+                        InlineStrcpy(gFormatBuffer_Monsters[1], _("{HEART_YELLOW_MEDIUM}"));
                     }
                     else {
-                        strcpy(gFormatBuffer_Monsters[1], gHeartYellowLarge);
+                        InlineStrcpy(gFormatBuffer_Monsters[1], _("{HEART_YELLOW_LARGE}"));
                     }
                 }
 
@@ -502,8 +457,6 @@ void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, Windows *windows,
 
     sub_80073E0(0);
 }
-
-extern bool8 CanLeaderSwitch(u8 dungeon);
 
 void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
 {
@@ -565,12 +518,6 @@ void sub_80615B4(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1)
     a0->actionParameters[0].actionUseIndex = a1->unk4[a1->unk0];
 }
 
-void PrintMonTactics(s32 a0, u8 *tacticIds, EntityInfo *mon, s32 windowId);
-void sub_80623B0(void);
-void sub_8062D68(void);
-void sub_8062230(void);
-void sub_8062748(u8 a0);
-
 void ShowTacticsMenu(ActionContainer *a0)
 {
     Windows windows = {
@@ -582,7 +529,7 @@ void ShowTacticsMenu(ActionContainer *a0)
                 .height = 14,
                 .unk10 = 18,
                 .unk12 = 2,
-                .unk14 = &gUnknown_202F270,
+                .unk14 = &sTeamWindowHeader,
             },
             [1] = WINDOW_DUMMY,
             [2] = WINDOW_DUMMY,
@@ -604,10 +551,10 @@ void ShowTacticsMenu(ActionContainer *a0)
         bool32 addCursor = TRUE;
         bool32 loopBreak = FALSE;
 
-        gUnknown_202F270.f0 = 1;
-        gUnknown_202F270.f1 = 0;
-        gUnknown_202F270.f2 = 10;
-        gUnknown_202F270.f3 = 0;
+        sTeamWindowHeader.f0 = 1;
+        sTeamWindowHeader.f1 = 0;
+        sTeamWindowHeader.f2 = 10;
+        sTeamWindowHeader.f3 = 0;
         DungeonShowWindows(&windows, 1);
         PrintMonTactics(scrollFirstId, tacticIds, monInfo, 0);
         for (i = 0; i < 8; i++) {
@@ -753,8 +700,6 @@ void ShowTacticsMenu(ActionContainer *a0)
     sub_803EAF0(0, NULL);
 }
 
-extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
-
 void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId)
 {
     u8 tacticsBuffer[NUM_TACTICS];
@@ -808,7 +753,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
                 .height = 14,
                 .unk10 = 18,
                 .unk12 = 2,
-                .unk14 = &gUnknown_202F270,
+                .unk14 = &sTeamWindowHeader,
             },
             [1] = WINDOW_DUMMY,
             [2] = WINDOW_DUMMY,
@@ -865,10 +810,10 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
         s32 var_28 = 1;
         UnkTextStruct1 *unkTxtStr1Ptr = &gUnknown_2027370[0];
 
-        gUnknown_202F270.f0 = var_38;
-        gUnknown_202F270.f1 = var_3C;
-        gUnknown_202F270.f2 = 10;
-        gUnknown_202F270.f3 = 0;
+        sTeamWindowHeader.f0 = var_38;
+        sTeamWindowHeader.f1 = var_3C;
+        sTeamWindowHeader.f2 = 10;
+        sTeamWindowHeader.f3 = 0;
         DungeonShowWindows(&windows, TRUE);
         sub_8069844(&unkMonStruct, entity);
         CreatePokemonInfoTabScreen(spArr[var_3C], var_3C, &unkMonStruct, &unkInfoTabStruct, 0);
@@ -950,7 +895,7 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
             }
 
             DungeonRunFrameActions(0x1C);
-            if (gUnknown_202F270.f0 > 1 && !sub_80048C8()) {
+            if (sTeamWindowHeader.f0 > 1 && !sub_80048C8()) {
                 if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.unk28.dpad_right) {
                     PlayDungeonCursorSE(0);
                     var_3C++;
@@ -1246,8 +1191,6 @@ void sub_8061A38(ActionContainer *a0, bool8 a1)
     LoadIQSkills(entity);
 }
 
-extern s32 gUnknown_202EDCC;
-
 // The same as sub_8068344
 void sub_8062230(void)
 {
@@ -1297,8 +1240,6 @@ void sub_80623B0(void)
     }
 }
 
-extern SpriteOAM gUnknown_202F268;
-
 void sub_8062500(void)
 {
     if ((gUnknown_202EDCC & 8) != 0) {
@@ -1320,8 +1261,6 @@ void sub_8062500(void)
         AddSprite(&gUnknown_202F268,0x100,NULL,NULL);
     }
 }
-
-void sub_80639E4(struct subStruct_203B240 *strings, MenuInputStructSub *menuSub);
 
 void sub_80625A4(s32 count, struct subStruct_203B240 **strings)
 {
@@ -1348,23 +1287,6 @@ void sub_80625A4(s32 count, struct subStruct_203B240 **strings)
         }
     }
 }
-
-#include "code_8097DD0.h"
-#include "move_util.h"
-
-extern const u8 *const gUnknown_80FE95C;
-extern const u8 *const gUnknown_80FE960;
-extern const u8 *const gUnknown_80FE964;
-extern const u8 *const gUnknown_80FE978;
-extern const u8 gUnknown_8106C90[];
-extern const u8 gUnknown_8106C98[];
-extern const u8 gUnknown_8106C9C[];
-extern const u8 *const gWhichTextPtr2;
-extern char* sub_808E4FC(s32 a1);
-extern char* sub_808E51C(s32 a1);
-extern void sub_8062B74(Entity *entity);
-extern void sub_8062CA8(Entity *entity);
-extern void sub_8045C18(u8 *buffer, Item *item);
 
 void sub_806262C(u8 iqSkillId)
 {
@@ -1522,10 +1444,6 @@ void sub_806285C(s32 a0)
 
     sub_803E708(4, 0x3E);
 }
-
-extern const Windows gUnknown_8106C30;
-extern const Window gUnknown_8106C00;
-extern const Window gUnknown_8106C18;
 
 Entity *DrawFieldGiveItemMenu(s32 *teamId, s32 a1)
 {
@@ -1702,106 +1620,4 @@ void sub_8062D68(void)
     gDungeonMenu.unkE = 0;
     gDungeonMenu.unk14.x = 0;
     sub_801317C(&gDungeonMenu.unk28);
-}
-
-u32 sub_8062D88(void)
-{
-    return A_BUTTON;
-}
-
-void sub_8062D8C(ActionContainer *a0)
-{
-    s32 id = a0->actionParameters[0].actionUseIndex;
-    Entity *entityOrg = gDungeon->teamPokemon[id];
-    Entity *entityNew = entityOrg;
-
-    while (1) {
-        s32 i, count, countUntilId;
-
-        countUntilId = 0;
-        count = 0;
-        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-            if (sub_8071A8C(gDungeon->teamPokemon[i])) {
-                if (i == id) {
-                    countUntilId = count;
-                }
-                count++;
-            }
-        }
-
-        sub_806A2BC(entityNew, 0);
-        ChangeDungeonCameraPos(&entityNew->pos, 0, 1, 1);
-        SetLeaderActionToNothing(1);
-        if (ShowDungeonMovesMenu(entityNew, 0, 1, countUntilId, count)) {
-            return;
-        }
-
-        if (GetLeaderActionId() == 6) {
-            s32 idBefore = id;
-            for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-                if (++id >= MAX_TEAM_MEMBERS) {
-                    id = 0;
-                }
-                entityNew = gDungeon->teamPokemon[id];
-                if (sub_8071A8C(entityNew)) {
-                    break;
-                }
-            }
-
-            a0->actionParameters[0].actionUseIndex = id;
-            if (idBefore != id) {
-                PlayDungeonCursorSE(0);
-            }
-            SetLeaderActionToNothing(1);
-        }
-        // Everything is the same as in the above if except for add/sub difference.
-        else if (GetLeaderActionId() == 7) {
-            s32 idBefore = id;
-            for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-                if (--id < 0) {
-                    id = MAX_TEAM_MEMBERS - 1;
-                }
-                entityNew = gDungeon->teamPokemon[id];
-                if (sub_8071A8C(entityNew)) {
-                    break;
-                }
-            }
-
-            a0->actionParameters[0].actionUseIndex = id;
-            if (idBefore != id) {
-                PlayDungeonCursorSE(0);
-            }
-            SetLeaderActionToNothing(1);
-        }
-        else if (GetLeaderActionId() == 29) {
-            sub_80637E8(GetLeaderActionContainer());
-            SetLeaderActionToNothing(1);
-        }
-        else if (GetLeaderActionId() == 30) {
-            sub_803EAF0(0, NULL);
-            sub_8063A70(GetLeaderActionContainer(), TRUE);
-            SetLeaderActionToNothing(1);
-        }
-        else if (GetLeaderActionId() == 51) {
-            sub_803EAF0(0, NULL);
-            sub_8063A70(GetLeaderActionContainer(), FALSE);
-            SetLeaderActionToNothing(1);
-        }
-        else if (GetLeaderActionId() == 31) {
-            sub_803EAF0(0, NULL);
-            sub_8063B54(GetLeaderActionContainer());
-            SetLeaderActionToNothing(1);
-        }
-        else if (GetLeaderActionId() == 33) {
-            sub_803EAF0(0, NULL);
-            sub_8063CF0(GetLeaderActionContainer(), TRUE);
-            SetLeaderActionToNothing(1);
-        }
-
-        if (GetLeaderActionId() != 0)
-            break;
-    }
-
-    sub_806A2BC(entityOrg, 0);
-    ChangeDungeonCameraPos(&entityOrg->pos, 0, 1, 1);
 }
