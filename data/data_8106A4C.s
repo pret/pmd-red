@@ -1,14 +1,5 @@
         .section .rodata
 
-
-@ CreateFieldItemMenu - sub_8062CA8
-
-
-
-@ CreateFieldDungeonMenu - CreateFieldOthersMenu
-        .align 2,0
-        .string "pksdir0\0"
-
         .align 2,0
 
 	.global gUnknown_8106CE8

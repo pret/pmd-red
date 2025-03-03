@@ -233,6 +233,7 @@ SECTIONS {
         src/dungeon_menu_moves.o(.text);
         src/dungeon_menu_tile.o(.text);
         src/dungeon_menu_stairs.o(.text);
+        src/dungeon_menu_others.o(.text);
         asm/code_805D8C8.o(.text);
         src/code_8066D04.o(.text);
         src/code_805D8C8.o(.text);
@@ -554,6 +555,7 @@ SECTIONS {
         src/dungeon_menu_moves.o(.rodata);
         src/dungeon_menu_tile.o(.rodata);
         src/dungeon_menu_stairs.o(.rodata);
+        src/dungeon_menu_others.o(.rodata);
         data/data_8106A4C.o(.rodata);
         src/code_8066D04.o(.rodata);
         data/data_8106A4C_2.o(.rodata);
