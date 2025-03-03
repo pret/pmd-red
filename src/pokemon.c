@@ -890,10 +890,10 @@ s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1)
     return index;
 }
 
-u8 GetPokemonOverworldPalette(s16 index, u32 r1)
+u8 GetPokemonOverworldPalette(s16 index, bool32 recolorShopKecleon)
 {
     s32 id = SpeciesId(index);
-    if (r1 != 0)
+    if (recolorShopKecleon)
     {
         return 10;
     }
