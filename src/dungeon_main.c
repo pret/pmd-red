@@ -90,17 +90,11 @@ bool8 sub_8044B28(void);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
-void sub_80637E8(ActionContainer *a0);
-void sub_8063B54(ActionContainer *a0);
-void sub_8063BB4(ActionContainer *a0);
 void sub_806752C(ActionContainer *a0);
-void sub_8063A70(ActionContainer *a0, bool8 a1);
-void sub_8063CF0(ActionContainer *a0, bool8 a1);
 void sub_8067768(ActionContainer *a0);
 void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_80643AC(Entity *pokemon);
-extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4);
 extern void GetWeatherName(u8 *dst, u8 weatherId);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 extern Entity *sub_80696A8(Entity *a0);
@@ -1368,7 +1362,6 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 }
             }
 
-
             while (1) {
                 SetLeaderActionToNothing(0);
             LOOP_START_NO_CALL: // Actions 6 and 7 don't call SetLeaderActionToNothing
@@ -1429,20 +1422,20 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                     }
                     goto LOOP_START_NO_CALL;
                 }
-                else if (GetLeaderActionId() == ACTION_UNK1D) {
-                    sub_80637E8(GetLeaderActionContainer());
+                else if (GetLeaderActionId() == ACTION_MOVE_INFO) {
+                    ActionShowMoveInfo(GetLeaderActionContainer());
                 }
                 else if (GetLeaderActionId() == ACTION_SET_MOVE || GetLeaderActionId() == ACTION_UNSET_MOVE) {
-                    sub_8063A70(GetLeaderActionContainer(), FALSE);
+                    ActionSetOrUnsetMove(GetLeaderActionContainer(), FALSE);
                 }
-                else if (GetLeaderActionId() == ACTION_UNK1F) {
-                    sub_8063B54(GetLeaderActionContainer());
+                else if (GetLeaderActionId() == ACTION_SWITCH_AI_MOVE) {
+                    ActionToggleMoveUsableForAi(GetLeaderActionContainer());
                 }
-                else if (GetLeaderActionId() == ACTION_UNK20) {
-                    sub_8063BB4(GetLeaderActionContainer());
+                else if (GetLeaderActionId() == ACTION_LINK_MOVES) {
+                    ActionLinkMoves(GetLeaderActionContainer());
                 }
-                else if (GetLeaderActionId() == ACTION_UNK21) {
-                    sub_8063CF0(GetLeaderActionContainer(), FALSE);
+                else if (GetLeaderActionId() == ACTION_DELINK_MOVES) {
+                    ActionDelinkMoves(GetLeaderActionContainer(), FALSE);
                 }
                 else {
                     break;

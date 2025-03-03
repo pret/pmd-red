@@ -7,89 +7,6 @@
 
 
 
-	thumb_func_start sub_8064310
-sub_8064310:
-	push {r4,lr}
-	adds r4, r0, 0
-	ldr r1, _08064350
-	movs r0, 0
-	str r0, [r1]
-	movs r0, 0x22
-	movs r1, 0
-	bl sub_8044F5C
-	movs r0, 0x21
-	movs r1, 0
-	bl sub_8044F5C
-	ldr r0, _08064354
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl sub_8064358
-	lsls r0, 24
-	cmp r0, 0
-	bne _08064340
-	movs r0, 0x21
-	bl sub_8044FF0
-_08064340:
-	movs r0, 0x1D
-	movs r1, 0
-	bl sub_8044F5C
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08064350: .4byte gDungeonSubMenuItemsCount
-_08064354: .4byte gUnknown_202F2D8
-	thumb_func_end sub_8064310
-
-	thumb_func_start sub_8064358
-sub_8064358:
-	push {r4-r6,lr}
-	adds r3, r0, 0
-	adds r2, r1, 0
-	movs r5, 0
-	adds r2, 0x1
-	movs r4, 0
-	cmp r2, 0x7
-	bgt _0806439C
-	lsls r0, r2, 3
-	adds r0, r3, r0
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0806439C
-	movs r5, 0x1
-	adds r2, 0x1
-	movs r6, 0x2
-	lsls r0, r2, 3
-	adds r3, r0, r3
-_08064380:
-	adds r4, 0x1
-	cmp r4, 0x7
-	bgt _0806439C
-	cmp r2, 0x7
-	bgt _0806439C
-	ldrb r1, [r3]
-	adds r0, r6, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0806439C
-	movs r5, 0x1
-	adds r3, 0x8
-	adds r2, 0x1
-	b _08064380
-_0806439C:
-	cmp r5, 0
-	bne _080643A4
-	movs r0, 0
-	b _080643A6
-_080643A4:
-	movs r0, 0x1
-_080643A6:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8064358
 
 	thumb_func_start sub_80643AC
 sub_80643AC:
@@ -361,10 +278,10 @@ sub_80645D4:
 	str r0, [r1]
 	movs r0, 0x25
 	movs r1, 0
-	bl sub_8044F5C
+	bl AddActionToDungeonSubMenu
 	movs r0, 0xC
 	movs r1, 0
-	bl sub_8044F5C
+	bl AddActionToDungeonSubMenu
 	bl sub_8045064
 	pop {r0}
 	bx r0
@@ -894,10 +811,10 @@ sub_8064A18:
 	str r0, [r1]
 	movs r0, 0x26
 	movs r1, 0
-	bl sub_8044F5C
+	bl AddActionToDungeonSubMenu
 	movs r0, 0xC
 	movs r1, 0
-	bl sub_8044F5C
+	bl AddActionToDungeonSubMenu
 	bl sub_8045064
 	pop {r0}
 	bx r0

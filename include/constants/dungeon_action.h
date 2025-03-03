@@ -24,11 +24,12 @@ enum DungeonAction
     ACTION_CHANGE_TACTICS = 0x1A,
     ACTION_CHECK_SUMMARY = 0x1B,
     ACTION_TALK_MENU = 0x1C, // Talking to another Pokémon via the menu.
-    ACTION_UNK1D = 0x1D,
+    ACTION_MOVE_INFO = 0x1D,
     ACTION_SET_MOVE = 0x1E, // Registering a move.
-    ACTION_UNK1F = 0x1F,
-    ACTION_UNK20 = 0x20,
-    ACTION_UNK21 = 0x21,
+    ACTION_SWITCH_AI_MOVE = 0x1F,
+    ACTION_LINK_MOVES = 0x20,
+    ACTION_DELINK_MOVES = 0x21,
+    ACTION_UNK22 = 0x22,
     ACTION_EAT_AI = 0x23,
     ACTION_THROW_ITEM_AI = 0x24,
     ACTION_STEPPED_ON_TRAP = 0x25,

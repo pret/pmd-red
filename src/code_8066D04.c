@@ -91,9 +91,9 @@ extern bool8 sub_8045888(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8045BF8(u8 *, Item *);
 u8 sub_8048D50();
-void sub_8044FF0(u16 param_1);
+void SetActionUnusableInDungeonSubMenu(u16 param_1);
 u8 * sub_80464AC();
-void sub_8044F5C(u16 param_1, u8 param_2);
+void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
 void sub_8044DF0();
 void sub_8042208(Entity *pokemon, u8 r1);
 void sub_803E708();
@@ -1125,20 +1125,20 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                 r10 = gDungeonMenu.menuIndex;
                 arrId = gUnknown_202F30C + r10;
                 gDungeonSubMenuItemsCount = 0;
-                sub_8044F5C(0x29, 0);
-                sub_8044F5C(0x2A, 0);
-                sub_8044F5C(0x40, 0);
+                AddActionToDungeonSubMenu(0x29, 0);
+                AddActionToDungeonSubMenu(0x2A, 0);
+                AddActionToDungeonSubMenu(0x40, 0);
                 if (a3[arrId]->unk0 & 0x8000) {
-                    sub_8044FF0(0x29);
+                    SetActionUnusableInDungeonSubMenu(0x29);
                 }
                 else {
-                    sub_8044FF0(0x2A);
+                    SetActionUnusableInDungeonSubMenu(0x2A);
                 }
 
                 // This unnecessary variable is required to match.
                 locIdIsPartner = DUNGEON_JOIN_LOCATION_PARTNER;
                 if (a3[arrId]->isTeamLeader || (a3[arrId]->dungeonLocation.id == DUNGEON_JOIN_LOCATION_LEADER || a3[arrId]->dungeonLocation.id == locIdIsPartner)) {
-                    sub_8044FF0(0x29);
+                    SetActionUnusableInDungeonSubMenu(0x29);
                 }
 
                 sub_8045064();

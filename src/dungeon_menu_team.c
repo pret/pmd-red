@@ -87,12 +87,12 @@ void PrintOnMainMenu(bool8 printAll);
 bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1);
 void sub_8060D24(UNUSED ActionContainer *a0);
 bool8 ShowDungeonTeamMenu(Entity *a0);
-void sub_80637E8(ActionContainer *a0);
-void sub_8063B54(ActionContainer *a0);
-void sub_8063BB4(ActionContainer *a0);
+void ActionShowMoveInfo(ActionContainer *a0);
+void ActionToggleMoveUsableForAi(ActionContainer *a0);
+void ActionLinkMoves(ActionContainer *a0);
 void sub_806752C(ActionContainer *a0);
-void sub_8063A70(ActionContainer *a0, bool8 a1);
-void sub_8063CF0(ActionContainer *a0, bool8 a1);
+void ActionSetOrUnsetMove(ActionContainer *a0, bool8 a1);
+void ActionDelinkMoves(ActionContainer *a0, bool8 a1);
 void sub_8067768(ActionContainer *a0);
 void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern void sub_80643AC(Entity *pokemon);
@@ -113,8 +113,8 @@ extern s32 gDungeonSubMenuItemsCount;
 extern const u8 gUnknown_8106B50[];
 extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
-extern void sub_8044F5C(u16 param_1, u8 param_2);
-extern void sub_8044FF0(u16 param_1);
+extern void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
+extern void SetActionUnusableInDungeonSubMenu(u16 param_1);
 extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
 extern void sub_8045064(void);
@@ -457,22 +457,22 @@ static void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
     gDungeonSubMenuItemsCount = 0;
     teamMon = gDungeon->teamPokemon[a0->unk4[gDungeonMenu.menuIndex]];
     monInfo = GetEntInfo(teamMon);
-    sub_8044F5C(0x1B, 0);
-    sub_8044F5C(0x19, 0);
+    AddActionToDungeonSubMenu(0x1B, 0);
+    AddActionToDungeonSubMenu(0x19, 0);
     if (!monInfo->isTeamLeader) {
         if (!gDungeon->unk644.unk19 && (monInfo->joinedAt.id != DUNGEON_JOIN_LOCATION_PARTNER || gDungeon->unk644.unk18)) {
-            sub_8044F5C(0x34, 0);
+            AddActionToDungeonSubMenu(0x34, 0);
         }
-        sub_8044F5C(0x1C, 0);
+        AddActionToDungeonSubMenu(0x1C, 0);
     }
-    sub_8044F5C(0x30, 0);
+    AddActionToDungeonSubMenu(0x30, 0);
     if (!monInfo->isTeamLeader) {
-        sub_8044F5C(0x1A, 0);
+        AddActionToDungeonSubMenu(0x1A, 0);
     }
     if (!monInfo->isTeamLeader && gDungeon->unk644.unk18 && CanLeaderSwitch(gDungeon->unk644.dungeonLocation.id)) {
         bool32 r5;
 
-        sub_8044F5C(0x3B, 0);
+        AddActionToDungeonSubMenu(0x3B, 0);
         r5 = TRUE;
         if (monInfo->teamIndex >= MAX_TEAM_MEMBERS) {
             r5 = FALSE;
@@ -488,16 +488,16 @@ static void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
             r5 = FALSE;
         }
         if (!r5) {
-            sub_8044FF0(0x3B);
+            SetActionUnusableInDungeonSubMenu(0x3B);
         }
     }
 
     if (IsExperienceLocked(monInfo->joinedAt.id)) {
-        sub_8044FF0(0x19);
-        sub_8044FF0(0x3B);
-        sub_8044FF0(0x1A);
-        sub_8044FF0(0x30);
-        sub_8044FF0(0x34);
+        SetActionUnusableInDungeonSubMenu(0x19);
+        SetActionUnusableInDungeonSubMenu(0x3B);
+        SetActionUnusableInDungeonSubMenu(0x1A);
+        SetActionUnusableInDungeonSubMenu(0x30);
+        SetActionUnusableInDungeonSubMenu(0x34);
     }
 
     sub_8045064();
@@ -622,10 +622,10 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
                 ResetDungeonMenu();
                 PlayDungeonConfirmationSE();
                 gDungeonSubMenuItemsCount = 0;
-                sub_8044F5C(0x2F, 0);
-                sub_8044F5C(0xC, 0);
+                AddActionToDungeonSubMenu(0x2F, 0);
+                AddActionToDungeonSubMenu(0xC, 0);
                 if (CheckVariousStatuses2(teamMon, TRUE)) {
-                    sub_8044FF0(0x2F);
+                    SetActionUnusableInDungeonSubMenu(0x2F);
                 }
                 CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
                 while (1) {
@@ -1081,7 +1081,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                     ResetDungeonMenu();
                     gDungeonSubMenuItemsCount = 0;
                     PlayDungeonConfirmationSE();
-                    sub_8044F5C(0xC, 0);
+                    AddActionToDungeonSubMenu(0xC, 0);
                     CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
                     while (1) {
                         AddMenuCursorSprite(&gDungeonMenu);
@@ -1117,10 +1117,10 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                     ResetDungeonMenu();
                     gDungeonSubMenuItemsCount = 0;
                     PlayDungeonConfirmationSE();
-                    sub_8044F5C(0x28, 0);
-                    sub_8044F5C(0xC, 0);
+                    AddActionToDungeonSubMenu(0x28, 0);
+                    AddActionToDungeonSubMenu(0xC, 0);
                     if (CheckVariousStatuses2(entity, TRUE)) {
-                        sub_8044FF0(0x28);
+                        SetActionUnusableInDungeonSubMenu(0x28);
                     }
                     CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
                     while (1) {

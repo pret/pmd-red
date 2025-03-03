@@ -154,12 +154,8 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
 	.space 0x4
     .include "src/dungeon_menu_team.o"
 	.space 0x4
-
-gUnknown_202F278: /* 202F278 (sub_80639E4) */
-	.space 0x60
-
-gUnknown_202F2D8: /* 202F2D8 (sub_8062F90 - sub_8064310) */
-	.space 0x8
+    .include "src/dungeon_menu_moves.o"
+	.space 0x4
 
 gUnknown_202F2E0: /* 202F2E0 (sub_8064BE0 - sub_8065250) */
 	.space 0x8

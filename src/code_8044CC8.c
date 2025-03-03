@@ -185,44 +185,44 @@ bool8 CanSubMenuItemBeChosen(s32 itemId)
         return gDungeonSubMenu[itemId].canBeChosen;
 }
 
-void sub_8044F5C(u16 param_1, u8 param_2)
+void AddActionToDungeonSubMenu(u16 actionId, u8 param_2)
 {
   int index;
 
   if (gDungeonSubMenuItemsCount < 10) {
     for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {
-        if (gDungeonSubMenu[index].actionId == param_1) {
+        if (gDungeonSubMenu[index].actionId == actionId) {
           return;
         }
     }
-    gDungeonSubMenu[gDungeonSubMenuItemsCount].actionId = param_1;
+    gDungeonSubMenu[gDungeonSubMenuItemsCount].actionId = actionId;
     gDungeonSubMenu[gDungeonSubMenuItemsCount].unk2 = param_2;
     gDungeonSubMenu[gDungeonSubMenuItemsCount].canBeChosen = TRUE;
     gDungeonSubMenuItemsCount++;
   }
 }
 
-s32 sub_8044FB4(u16 param_1)
+s32 ActionToDungeonSubMenuId(u16 actionId)
 {
     int index;
 
     for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {
-        if (gDungeonSubMenu[index].actionId == param_1) {
+        if (gDungeonSubMenu[index].actionId == actionId) {
             return index;
         }
     }
     return -1;
 }
 
-void sub_8044FF0(u16 param_1)
+void SetActionUnusableInDungeonSubMenu(u16 actionId)
 {
     int index;
 
     for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {
-        if (gDungeonSubMenu[index].actionId == param_1) {
+        if (gDungeonSubMenu[index].actionId == actionId) {
            gDungeonSubMenu[index].canBeChosen = FALSE;
            return;
         }
