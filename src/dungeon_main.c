@@ -47,6 +47,7 @@
 #include "dungeon_menu_team.h"
 #include "dungeon_menu_moves.h"
 #include "dungeon_menu_tile.h"
+#include "dungeon_menu_stairs.h"
 #include "constants/dungeon.h"
 #include "constants/status.h"
 #include "constants/tactic.h"
@@ -71,7 +72,6 @@ extern void sub_8045DB4(DungeonPos *, u32);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
-void ShowDungeonStairsMenu(Entity *a0);
 void sub_803E708(s32 a0, s32 a1);
 void sub_8040A78(void);
 void ShowDungeonOthersMenu(void);

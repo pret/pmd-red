@@ -4,9 +4,6 @@
 @ CreateFieldItemMenu - sub_8062CA8
 
 
-@ ???
-        .align 2,0
-        .string "pksdir0\0"
 
 @ CreateFieldDungeonMenu - CreateFieldOthersMenu
         .align 2,0

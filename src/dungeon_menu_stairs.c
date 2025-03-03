@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "dungeon_menu_tile.h"
+#include "dungeon_menu_stairs.h"
 #include "dungeon_menu_team.h"
 #include "dungeon_menu_moves.h"
 #include "dungeon_submenu.h"
@@ -13,8 +13,8 @@
 #include "dungeon_util.h"
 #include "dungeon_map_access.h"
 #include "code_8045A00.h"
-#include "trap.h"
 #include "code_8097DD0.h"
+#include "dungeon_generation.h"
 
 extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
@@ -26,18 +26,23 @@ extern void DungeonRunFrameActions(u32 a0);
 extern void DungeonShowWindows(WindowTemplates *a0, bool8 a1);
 extern void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
 extern void sub_8045064(void);
+extern u8 GetFloorType(void);
 
 extern MenuInputStruct gDungeonMenu;
 extern s32 gDungeonSubMenuItemsCount;
 
-extern const u8 *const gUnknown_80FE708;
-extern const u8 *const gTrapDescriptions[];
+extern const u8 *const gUnknown_80FE70C;
+extern const u8 *const gUnknown_80FE720;
+extern const u8 *const gUnknown_80FE724;
+extern const u8 *const gUnknown_80F8104[];
+extern const u8 *const gUnknown_80F7F70[];
 
-static void ShowAndPrintOnTileMenu(DungeonPos *pos, WindowTemplates *windows, WindowHeader *header);
-static void AddTileSubMenuOptions(Entity *mon);
-static void ShowTileDescription(DungeonPos *pos);
+static void ShowAndPrintOnStairsMenu(DungeonPos *pos, WindowTemplates *windows, WindowHeader *header);
+static void AddStairsSubMenuOptions(Entity *mon);
+static void ShowStairsDescription(DungeonPos *pos);
 
-void ShowDungeonTileMenu(Entity *mon)
+// Pretty much a copy of ShowDungeonTileMenu
+void ShowDungeonStairsMenu(Entity *mon)
 {
     while (1) {
         s32 inputAction = 0;
@@ -60,16 +65,16 @@ void ShowDungeonTileMenu(Entity *mon)
         };
 
         PlayDungeonStartButtonSE();
-        ShowAndPrintOnTileMenu(&mon->pos, &windows, &header);
-        DungeonRunFrameActions(0x2D);
-        AddTileSubMenuOptions(mon);
+        ShowAndPrintOnStairsMenu(&mon->pos, &windows, &header);
+        DungeonRunFrameActions(0x2E);
+        AddStairsSubMenuOptions(mon);
         gDungeonMenu.unk8.x = 0;
         gDungeonMenu.unk8.y = 0;
         CreateDungeonMenuSubWindow(&windows.id[0], 22);
 
         while (1) {
             AddMenuCursorSprite(&gDungeonMenu);
-            DungeonRunFrameActions(0x2D);
+            DungeonRunFrameActions(0x2E);
             if (gRealInputs.repeated & DPAD_DOWN) {
                 PlayDungeonCursorSE(TRUE);
                 MoveMenuCursorDownWrapAround(&gDungeonMenu, TRUE);
@@ -82,7 +87,7 @@ void ShowDungeonTileMenu(Entity *mon)
             if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
                 if (gDungeonMenu.menuIndex == 1) {
                     PlayDungeonConfirmationSE();
-                    ShowTileDescription(&mon->pos);
+                    ShowStairsDescription(&mon->pos);
                     inputAction = 2;
                     break;
                 }
@@ -110,7 +115,7 @@ void ShowDungeonTileMenu(Entity *mon)
         }
 
         AddMenuCursorSprite(&gDungeonMenu);
-        DungeonRunFrameActions(0x2D);
+        DungeonRunFrameActions(0x2E);
         if (inputAction != 2)
             break;
     }
@@ -118,42 +123,47 @@ void ShowDungeonTileMenu(Entity *mon)
     sub_803EAF0(0, 0);
 }
 
-static void ShowAndPrintOnTileMenu(DungeonPos *pos, WindowTemplates *windows, WindowHeader *header)
+static void ShowAndPrintOnStairsMenu(DungeonPos *pos, WindowTemplates *windows, WindowHeader *header)
 {
-    u8 text[80];
-    const Tile *tile;
+    const u8 *str;
 
     header->count = 1;
     header->currId = 0;
-    header->width = 12;
+    header->width = 11;
     header->f3 = 0;
     DungeonShowWindows(windows, TRUE);
     sub_80073B8(0);
-    tile = GetTile(pos->x, pos->y);
-
-    PrintStringOnWindow(12, 0, gUnknown_80FE708, 0, '\0');
-    if (EntityIsValid(tile->object)) {
-        SubstitutePlaceholderStringTags(text, tile->object, 0);
-        PrintStringOnWindow(8, 18, text, 0, '\0');
+    switch (GetFloorType()) {
+        default:
+        case FLOOR_TYPE_NORMAL:
+            str = gUnknown_80FE70C;
+            break;
+        case FLOOR_TYPE_RESCUE:
+            str = gUnknown_80FE720;
+            break;
+        case FLOOR_TYPE_FIXED:
+            str = gUnknown_80FE724;
+            break;
     }
+    PrintStringOnWindow(12, 0, str, 0, '\0');
+    PrintStringOnWindow(8, 18, str, 0, '\0');
     sub_80073E0(0);
 }
 
-static void AddTileSubMenuOptions(Entity *mon)
+static void AddStairsSubMenuOptions(Entity *mon)
 {
     gDungeonSubMenuItemsCount = 0;
-    AddActionToDungeonSubMenu(ACTION_STEPPED_ON_TRAP, 0);
+    AddActionToDungeonSubMenu(ACTION_STAIRS, 0);
     AddActionToDungeonSubMenu(ACTION_SHOW_INFO, 0);
     sub_8045064();
 }
 
-static void ShowTileDescription(DungeonPos *pos)
+// Again, almost identical to its Tile counterpart.
+static void ShowStairsDescription(DungeonPos *pos)
 {
     while (1) {
-        const Tile *tile;
-        Entity *object;
-        Trap *trap;
-        bool8 bPress = FALSE;
+        u8 floorType;
+        bool8 bPress;
         struct subStruct_203B240 *statuses[4];
         MenuInputStructSub menuSub;
         WindowHeader header;
@@ -173,7 +183,6 @@ static void ShowTileDescription(DungeonPos *pos)
                 [3] = WINDOW_DUMMY,
             }
         };
-        u8 trapName[0x60];
         s32 i, statusesCount;
 
         sub_801317C(&menuSub);
@@ -182,21 +191,13 @@ static void ShowTileDescription(DungeonPos *pos)
         header.width = 16;
         header.f3 = 0;
 
-        tile = GetTile(pos->x, pos->y);
-        object = tile->object;
-        if (object == NULL)
-            break;
-        if (GetEntityType(object) != ENTITY_TRAP)
-            break;
-
         DungeonShowWindows(&windows, FALSE);
-        trap = GetTrapData(object);
-        GetTrapName(trapName, trap->id);
+        floorType = GetFloorType();
         sub_80073B8(0);
-        PrintStringOnWindow(16, 0, trapName, 0, '\0');
-        PrintStringOnWindow(8, 24, gTrapDescriptions[trap->id], 0, '\0');
+        PrintStringOnWindow(16, 0, gUnknown_80F8104[floorType], 0, '\0');
+        PrintStringOnWindow(8, 24, gUnknown_80F7F70[floorType], 0, '\0');
         sub_80073E0(0);
-        statusesCount = sub_8097DF0(gTrapDescriptions[trap->id], statuses);
+        statusesCount = sub_8097DF0(gUnknown_80F7F70[floorType], statuses);
         while (1) {
             if (statusesCount != 0) {
                 ShowStatusDescriptionMenuArrow();
@@ -239,3 +240,4 @@ static void ShowTileDescription(DungeonPos *pos)
 
     sub_803EAF0(0, 0);
 }
+
