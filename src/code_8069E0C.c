@@ -2084,10 +2084,10 @@ void sub_806C51C(Entity *entity)
         }
 
         if (decoySprite) {
-            overworldPal = GetPokemonOverworldPalette(MONSTER_DECOY, 0);
+            overworldPal = GetPokemonOverworldPalette(MONSTER_DECOY, FALSE);
         }
         else {
-            overworldPal = GetPokemonOverworldPalette(entInfo->apparentID, 0);
+            overworldPal = GetPokemonOverworldPalette(entInfo->apparentID, FALSE);
         }
 
         if (entity->unk22 == 0) {
