@@ -28,7 +28,6 @@
 #include "code_8044CC8.h"
 #include "move_util.h"
 
-extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4);
 extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
@@ -50,10 +49,10 @@ extern void sub_8067768(ActionContainer *a0);
 extern void sub_806A2BC(Entity *a0, u8 a1);
 extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_8083D1C(void);
+extern s32 ActionToDungeonSubMenuId(u16 param_1);
 
 extern s32 gDungeonSubMenuItemsCount;
 extern MenuInputStruct gDungeonMenu;
-extern s32 ActionToDungeonSubMenuId(u16 param_1);
 
 extern const u8 *const gUnknown_80FE978;
 extern const u8 *const gUnknown_80FDFE8;
@@ -65,7 +64,7 @@ extern const u8 *const gUnknown_80FDF70;
 extern const u8 *const gUnknown_80FDF00;
 
 static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
-static void AddSubMenuOptions(Entity *entity, bool8 addLinkOptions, bool8 addUseMove);
+static void AddMovesSubMenuOptions(Entity *entity, bool8 addLinkOptions, bool8 addUseMove);
 static void SetSubMenuOptionAction(ActionContainer *a0, s32 a1, s32 a2);
 static void MenuChosenOptionToAction(ActionContainer *a0, s32 a1);
 static void PrintMoveNamesOnWindow(s32 count, Entity *entity, Move *moves, s32 windowId, u8 a4, s32 a5);
@@ -343,7 +342,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
             break;
         }
 
-        AddSubMenuOptions(entity, addLinkOptions, addUseMove);
+        AddMovesSubMenuOptions(entity, addLinkOptions, addUseMove);
         if (r5 == 3) {
             s32 subMenuId = ActionToDungeonSubMenuId(ACTION_LINK_MOVES);
             if (!CanSubMenuItemBeChosen(subMenuId)) {
@@ -536,7 +535,7 @@ static void PrintMoveNamesOnWindow(s32 count, Entity *entity, Move *moves, s32 w
     sub_80073E0(windowId);
 }
 
-static void AddSubMenuOptions(Entity *entity, bool8 addLinkOptions, bool8 addUseMove)
+static void AddMovesSubMenuOptions(Entity *entity, bool8 addLinkOptions, bool8 addUseMove)
 {
     EntityInfo *entInfo = GetEntInfo(entity);
     Move *move = &entInfo->moves.moves[sChosenMoveSlotId];

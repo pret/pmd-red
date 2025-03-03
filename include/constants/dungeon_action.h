@@ -14,6 +14,7 @@ enum DungeonAction
     // Some actions are different between the leader and AI-controlled Pokémon.
     ACTION_PICK_UP_PLAYER = 0x9, // Picking up an item underfoot.
     ACTION_THROW_ITEM_PLAYER = 0xB,
+    ACTION_SHOW_TRAP_INFO = 0xC,
     ACTION_EAT_BERRY_SEED_DRINK = 0xD,
     ACTION_USE_TM = 0x12,
     ACTION_TALK_FIELD = 0x13, // Talking to another Pokémon by facing them and interacting.

@@ -3,6 +3,6 @@
 
 #include "structs/subStruct_203B240.h"
 
-extern u32 sub_8097DF0(u8 *, struct subStruct_203B240 **);
+extern u32 sub_8097DF0(const u8 *, struct subStruct_203B240 **);
 
 #endif // GUARD_CODE_8097DD0_H

@@ -46,6 +46,7 @@
 #include "dungeon_menu_items.h"
 #include "dungeon_menu_team.h"
 #include "dungeon_menu_moves.h"
+#include "dungeon_menu_tile.h"
 #include "constants/dungeon.h"
 #include "constants/status.h"
 #include "constants/tactic.h"
@@ -94,7 +95,6 @@ void sub_806752C(ActionContainer *a0);
 void sub_8067768(ActionContainer *a0);
 void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
-extern void sub_80643AC(Entity *pokemon);
 extern void GetWeatherName(u8 *dst, u8 weatherId);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 extern Entity *sub_80696A8(Entity *a0);
@@ -1496,24 +1496,22 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 }
                 else if (GetEntityType(tileObject) == ENTITY_TRAP) {
                     SetLeaderActionToNothing(1);
-                    sub_80643AC(GetLeader());
+                    ShowDungeonTileMenu(GetLeader());
                     if (GetLeaderActionId() != 0)
                         break;
                 }
             }
-            else
-            {
-                if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
-                    SetLeaderActionToNothing(1);
-                    ShowDungeonStairsMenu(GetLeader());
-                    if (GetLeaderActionId() != 0)
-                        break;
-                }
-                else {
-                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], GetLeader(), 0);
-                    DisplayDungeonMessage(0, gUnknown_80FDE18, 1);
-                }
+            else if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+                SetLeaderActionToNothing(1);
+                ShowDungeonStairsMenu(GetLeader());
+                if (GetLeaderActionId() != 0)
+                    break;
             }
+            else {
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], GetLeader(), 0);
+                DisplayDungeonMessage(0, gUnknown_80FDE18, 1);
+            }
+
             r10 = -1;
         }
         else if (chosenOption == MAIN_MENU_OTHERS) {

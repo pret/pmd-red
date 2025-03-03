@@ -53,6 +53,7 @@ extern Item *sub_8044D90(Entity *, s32, u32);
 extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
+extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_806A6E8(Entity *);
 extern bool8 sub_8047084(s32 itemFlag);
 extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
@@ -106,14 +107,13 @@ extern void sub_803F508(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern s32 gDungeonSubMenuItemsCount;
 extern const u8 gUnknown_8106B50[];
 extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
-extern void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
+extern void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
 extern void SetActionUnusableInDungeonSubMenu(u16 param_1);
 extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
@@ -159,7 +159,7 @@ struct UnkFieldTeamMenuStruct
 };
 
 static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemplates *windows, bool8 a2);
-static void sub_806145C(struct UnkFieldTeamMenuStruct *a0);
+static void AddTeamSubMenuOptions(struct UnkFieldTeamMenuStruct *a0);
 static void ChosenSubMenuToAction(ActionContainer *a0, struct UnkFieldTeamMenuStruct *a1);
 static void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 windowId);
 static void ShowUpArrowSprite(void);
@@ -272,7 +272,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
 
         sp.unk0 = gDungeonMenu.menuIndex;
         gTeamMenuChosenId = gDungeonMenu.menuIndex;
-        sub_806145C(&sp);
+        AddTeamSubMenuOptions(&sp);
         if (r10) {
             EntityInfo *info = GetEntInfo(a0);
             SetMonsterActionFields(&info->action, 0x1B);
@@ -449,7 +449,7 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
     sub_80073E0(0);
 }
 
-static void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
+static void AddTeamSubMenuOptions(struct UnkFieldTeamMenuStruct *a0)
 {
     Entity *teamMon;
     EntityInfo *monInfo;
@@ -457,17 +457,17 @@ static void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
     gDungeonSubMenuItemsCount = 0;
     teamMon = gDungeon->teamPokemon[a0->unk4[gDungeonMenu.menuIndex]];
     monInfo = GetEntInfo(teamMon);
-    AddActionToDungeonSubMenu(0x1B, 0);
-    AddActionToDungeonSubMenu(0x19, 0);
+    AddActionToDungeonSubMenu(ACTION_CHECK_SUMMARY, 0);
+    AddActionToDungeonSubMenu(ACTION_CHECK_MOVES, 0);
     if (!monInfo->isTeamLeader) {
         if (!gDungeon->unk644.unk19 && (monInfo->joinedAt.id != DUNGEON_JOIN_LOCATION_PARTNER || gDungeon->unk644.unk18)) {
             AddActionToDungeonSubMenu(0x34, 0);
         }
-        AddActionToDungeonSubMenu(0x1C, 0);
+        AddActionToDungeonSubMenu(ACTION_TALK_MENU, 0);
     }
     AddActionToDungeonSubMenu(0x30, 0);
     if (!monInfo->isTeamLeader) {
-        AddActionToDungeonSubMenu(0x1A, 0);
+        AddActionToDungeonSubMenu(ACTION_CHANGE_TACTICS, 0);
     }
     if (!monInfo->isTeamLeader && gDungeon->unk644.unk18 && CanLeaderSwitch(gDungeon->unk644.dungeonLocation.id)) {
         bool32 r5;
@@ -493,10 +493,10 @@ static void sub_806145C(struct UnkFieldTeamMenuStruct *a0)
     }
 
     if (IsExperienceLocked(monInfo->joinedAt.id)) {
-        SetActionUnusableInDungeonSubMenu(0x19);
+        SetActionUnusableInDungeonSubMenu(ACTION_CHECK_MOVES);
         SetActionUnusableInDungeonSubMenu(0x3B);
-        SetActionUnusableInDungeonSubMenu(0x1A);
-        SetActionUnusableInDungeonSubMenu(0x30);
+        SetActionUnusableInDungeonSubMenu(ACTION_CHANGE_TACTICS);
+        SetActionUnusableInDungeonSubMenu(ACTION_VIEW_IQ);
         SetActionUnusableInDungeonSubMenu(0x34);
     }
 
