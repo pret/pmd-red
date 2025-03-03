@@ -4,28 +4,6 @@
 @ CreateFieldItemMenu - sub_8062CA8
 
 
-	.global gUnknown_8106CAC
-gUnknown_8106CAC: @ 8106CAC
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x0E, 0x00
-        .byte 0x1A, 0x00, 0x03, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-	.global gUnknown_8106CC4
-gUnknown_8106CC4: @ 8106CC4
-        .string "{MOVE_ITEM_0}\0"
-        .align 2,0
-
-	.global gUnknown_8106CC8
-gUnknown_8106CC8: @ 8106CC8
-        .byte 0x01, 0x00, 0x10, 0x00
-
-	.global gUnknown_8106CCC
-gUnknown_8106CCC: @ 8106CCC
-        .string "{POKEMON_0}\0"
-
 @ ???
         .align 2,0
         .string "pksdir0\0"

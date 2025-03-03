@@ -61,15 +61,13 @@ extern s32 gUnknown_202F2D8;
 extern s32 sub_8044FB4(u16 param_1);
 
 extern const u8 *const gUnknown_80FE978;
-extern const WindowTemplate gUnknown_8106CAC;
 extern const u8 *const gUnknown_80FDFE8;
-extern const u8 gUnknown_8106CC4[];
 
 void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
 void sub_8063698(Entity *entity, u8 a1, u8 a2);
 void sub_80637BC(ActionContainer *a0, s32 a1, s32 a2);
 void sub_80637A4(ActionContainer *a0, s32 a1);
-void sub_8063578(s32 a0, Entity *entity, Moves *moves, s32 a3, u8 a4, s32 a5);
+void sub_8063578(s32 count, Entity *entity, Move *moves, s32 windowId, u8 a4, s32 a5);
 bool8 sub_8063C88(EntityInfo *entInfo, s32 a1);
 bool8 sub_8063DD4(EntityInfo *entInfo, s32 a1);
 void sub_8063834(Move *moves, s32 a1, s32 a2);
@@ -427,7 +425,15 @@ bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
 void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7)
 {
     s32 i, movesCount;
-    WindowTemplate windowNew = gUnknown_8106CAC;
+    WindowTemplate windowNew = {
+        .type = WINDOW_TYPE_NORMAL,
+        .pos = {2, 14},
+        .width = 26,
+        .height = 3,
+        .unk10 = 3,
+        .unk12 = 0,
+        .header = NULL,
+    };
 
     header->count = arg7;
     header->currId = arg6;
@@ -476,13 +482,13 @@ void sub_80633E4(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *wi
         }
     }
 
-    sub_8063578(4, entity, &entInfo->moves, 0, a2, arg6);
+    sub_8063578(4, entity, entInfo->moves.moves, 0, a2, arg6);
     sub_80073B8(2);
     PrintFormattedStringOnWindow(4, 0, gUnknown_80FDFE8, 2, '\0');
     sub_80073E0(2);
 }
 
-void sub_8063578(s32 count, Entity *entity, Moves *moves, s32 windowId, u8 a4, s32 a5)
+void sub_8063578(s32 count, Entity *entity, Move *moves, s32 windowId, u8 a4, s32 a5)
 {
     s32 i;
     EntityInfo *entInfo = GetEntInfo(entity);
@@ -493,7 +499,7 @@ void sub_8063578(s32 count, Entity *entity, Moves *moves, s32 windowId, u8 a4, s
     for (i = 0; i < count; i++) {
         s32 x, y;
         unkStruct_80928C0 movStruct = {0, 106, 0, a4};
-        Move *move = &moves->moves[i];
+        Move *move = &moves[i];
 
         if (MoveFlagExists(move)) {
             if (entInfo->isTeamLeader) {
@@ -515,7 +521,7 @@ void sub_8063578(s32 count, Entity *entity, Moves *moves, s32 windowId, u8 a4, s
                     sub_80078A4(windowId, 12, y - 2, 120, 7);
                 }
             }
-            PrintFormattedStringOnWindow(x, y, gUnknown_8106CC4, windowId, '\0');
+            PrintFormattedStringOnWindow(x, y, _("{MOVE_ITEM_0}"), windowId, '\0');
         }
     }
 
@@ -703,18 +709,21 @@ void sub_8063834(Move *moves, s32 a1, s32 a2)
 }
 
 extern WindowTemplates gUnknown_202F278;
-extern const WindowHeader gUnknown_8106CC8;
-extern const u8 gUnknown_8106CCC[];
+
+static const WindowHeader sStatusDescriptionHeader = {
+    .count = 1,
+    .width = 16,
+};
 
 void ShowStatusDescriptionMenu(struct subStruct_203B240 *status, MenuInputStructSub *menuSub)
 {
     sub_80140B4(&gUnknown_202F278);
-    gUnknown_202F278.id[0].header = &gUnknown_8106CC8;
+    gUnknown_202F278.id[0].header = &sStatusDescriptionHeader;
     DungeonShowWindows(&gUnknown_202F278, TRUE);
     sub_80073B8(0);
 
     strcpy(gFormatBuffer_Monsters[0], status->pokeName);
-    PrintFormattedStringOnWindow(16, 0, gUnknown_8106CCC, 0, '\0');
+    PrintFormattedStringOnWindow(16, 0, _("{POKEMON_0}"), 0, '\0');
     PrintFormattedStringOnWindow(4, 16, status->unk4, 0, '\0');
     sub_80073E0(0);
     gDungeonMenu.unk1E = 0;
@@ -916,5 +925,245 @@ void sub_8063E30(Move *moves, s32 id)
 
     unk_FixLinkedMovesSetEnabled8(moves);
 }
+
+extern void sub_8083D1C(void);
+
+void sub_8064228(Entity *entity, Move *moves, WindowTemplates *windows, WindowHeader *header);
+void sub_8064310(Move *moves);
+
+extern const u8 *const gUnknown_80FDF70;
+extern const u8 *const gUnknown_80FDF00;
+
+static inline void ResetMoveFlags(Move *move)
+{
+    move->moveFlags = 0;
+}
+
+bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBPress)
+{
+    s32 i, count;
+    WindowHeader header;
+    WindowTemplates windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_WITH_HEADER,
+                .pos = {2, 2},
+                .width = 18,
+                .height = 16,
+                .unk10 = 16,
+                .unk12 = 0,
+                .header = &header,
+            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
+    Move movesLocal[8];
+
+    gUnknown_202F2D8 = 0;
+    while (1) {
+        s32 inputAction;
+        s32 yesNoAnswer;
+
+        sub_8064228(entity, moves, &windows, &header);
+        while (1) {
+            AddMenuCursorSprite(&gDungeonMenu);
+            DungeonRunFrameActions(0x1E);
+            if (gRealInputs.repeated & DPAD_DOWN) {
+                s32 prev = gDungeonMenu.menuIndex;
+
+                sub_8013780(&gDungeonMenu, unk_FindMoveEnabledForAIAfter8(moves, prev));
+                if (prev != gDungeonMenu.menuIndex) {
+                    PlayDungeonCursorSE(FALSE);
+                }
+            }
+            if (gRealInputs.repeated & DPAD_UP) {
+                s32 prev = gDungeonMenu.menuIndex;
+
+                sub_8013780(&gDungeonMenu, unk_FindMoveEnabledForAIBefore8(moves, prev));
+                if (prev != gDungeonMenu.menuIndex) {
+                    PlayDungeonCursorSE(FALSE);
+                }
+            }
+            ASM_MATCH_TRICK(gUnknown_202F2D8);
+            if ((gRealInputs.pressed & sub_8062D88()) || gDungeonMenu.unk28.a_button) {
+                PlayDungeonConfirmationSE();
+                inputAction = 0;
+                break;
+            }
+            if (gRealInputs.pressed & START_BUTTON) {
+                PlayDungeonStartButtonSE();
+                inputAction = 2;
+                break;
+            }
+            if (allowBPress && (CheckPressed(B_BUTTON) || gDungeonMenu.unk28.b_button)) {
+                PlayDungeonCancelSE();
+                inputAction = 1;
+                break;
+            }
+        }
+
+        AddMenuCursorSprite(&gDungeonMenu);
+        DungeonRunFrameActions(0x1E);
+        if (inputAction == 1) {
+            gUnknown_202F2D8 = -1;
+        }
+        else {
+            gUnknown_202F2D8 = gDungeonMenu.menuIndex;
+
+            if (inputAction == 2) {
+                sub_803EAF0(0, 0);
+                sub_803E708(8, 0x1B);
+                ASM_MATCH_TRICK(gUnknown_202F2D8);
+                sub_8063834(moves, gUnknown_202F2D8, 4);
+                continue;
+            }
+
+            sub_8064310(moves);
+            CreateDungeonMenuSubWindow(&windows.id[0], 22);
+
+            while (1) {
+                AddMenuCursorSprite(&gDungeonMenu);
+                DungeonRunFrameActions(0x1B);
+
+                if (gRealInputs.repeated & DPAD_DOWN) {
+                    PlayDungeonCursorSE(TRUE);
+                    MoveMenuCursorDownWrapAround(&gDungeonMenu, TRUE);
+                }
+                if (gRealInputs.repeated & DPAD_UP) {
+                    PlayDungeonCursorSE(TRUE);
+                    MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
+                }
+
+                if ((gRealInputs.pressed & sub_8062D88()) || gDungeonMenu.unk28.a_button) {
+                    if (CanSubMenuItemBeChosen(gDungeonMenu.menuIndex)) {
+                        if (gDungeonMenu.menuIndex == 2) {
+                            PlayDungeonConfirmationSE();
+                        }
+                        else {
+                            sub_8083D1C();
+                        }
+                        inputAction = 0;
+                        break;
+                    }
+                    PlayDungeonCancelSE();
+                }
+                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                    PlayDungeonCancelSE();
+                    inputAction = 1;
+                    break;
+                }
+            }
+
+            AddMenuCursorSprite(&gDungeonMenu);
+            DungeonRunFrameActions(0x1b);
+            sub_803EAF0(0, 0);
+            if (inputAction == 1)
+                continue;
+            if (gDungeonMenu.menuIndex == 1) {
+                sub_8063E30(moves, gUnknown_202F2D8);
+                continue;
+            }
+            if (gDungeonMenu.menuIndex == 2) {
+                sub_8063834(moves, gUnknown_202F2D8, 8);
+                continue;
+            }
+        }
+
+        if (gUnknown_202F2D8 < 0)
+            break;
+
+        if (showYesNoBox) {
+            bool8 linked = FALSE;
+            Move *move = &moves[gUnknown_202F2D8];
+            s32 nextMoveId = gUnknown_202F2D8 + 1;
+
+            if (nextMoveId < 8 && MoveFlagExists(&moves[nextMoveId])) {
+                linked = MoveFlagLinkChain(&moves[nextMoveId]) != 0;
+            }
+            BufferMoveName(gFormatBuffer_Items[0], move, NULL);
+            yesNoAnswer = DisplayDungeonYesNoMessage(NULL, (!linked) ? gUnknown_80FDF70 : gUnknown_80FDF00, FALSE);
+        }
+        else {
+            yesNoAnswer = 1;
+        }
+
+        if (yesNoAnswer == 1) {
+            moves[gUnknown_202F2D8].moveFlags = 0;
+            for (i = gUnknown_202F2D8 + 1; i < 8; i++) {
+                Move *move = &moves[i];
+                if (!MoveFlagExists(move))
+                    break;
+                if (!(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+                    break;
+
+                ResetMoveFlags(move);
+            }
+
+            count = 0;
+            for (i = 0; i < 8; i++) {
+                Move *move = &moves[i];
+                if (MoveFlagExists(move)) {
+                    movesLocal[count++] = *move;
+                }
+            }
+
+            for (; count < 8; count++) {
+                ResetMoveFlags(&movesLocal[count]);
+            }
+
+            for (i = 0; i < 8; i++) {
+                moves[i] = movesLocal[i];
+            }
+
+            break;
+        }
+    }
+
+    if (gUnknown_202F2D8 < 0)
+        return FALSE;
+
+    return TRUE;
+}
+
+void sub_8064228(Entity *entity, Move *moves, WindowTemplates *windows, WindowHeader *header)
+{
+    s32 i, count;
+
+    header->count = 1;
+    header->currId = 0;
+    header->f3 = 0;
+
+    count = 0;
+    for (i = 0; i < 8; i++) {
+        if (MoveFlagExists(&moves[i])) {
+            count++;
+        }
+    }
+
+    gDungeonMenu.menuIndex = gUnknown_202F2D8;
+    gDungeonMenu.unk1A = count;
+    gDungeonMenu.unk1C = count;
+    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.unk4 = 0;
+    gDungeonMenu.firstEntryY = 16;
+    gDungeonMenu.unkC = 0;
+    gDungeonMenu.unkE = 0;
+    gDungeonMenu.unk14.x = 0;
+    gDungeonMenu.unk0 = 0;
+    sub_801317C(&gDungeonMenu.unk28);
+    windows->id[0].height = windows->id[0].unk10 = sub_80095E4(count, 12) + 2;
+    header->width = 14;
+    windows->id[0].pos.x = 2;
+    windows->id[1] = windows->id[3];
+    windows->id[2] = windows->id[3];
+    DungeonShowWindows(windows, TRUE);
+    sub_80137B0(&gDungeonMenu, 0);
+    SetMessageArgument_2(gFormatBuffer_Monsters[0], GetEntInfo(entity), 0);
+    sub_8063578(count, entity, moves, 0, 0, 0);
+}
+
 
 //
