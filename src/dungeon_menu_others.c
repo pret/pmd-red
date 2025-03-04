@@ -52,6 +52,7 @@ extern const u8 *const gUnknown_80FE9F8;
 extern const u8 *const gUnknown_80FE9E8;
 extern const u8 *const gUnknown_80FE9CC;
 extern const u8 *const gUnknown_80FE8F8;
+extern const u8 *const gUnknown_80FF770;
 extern const u8 *const gUnknown_80FE8F4;
 extern const u8 *const gGameOptionsTextPtr;
 extern const u8 *const gOptionsDungeonTextPtr;
@@ -78,13 +79,15 @@ void AskToResetToDefault(void);
 void PrintGameOptions(void);
 void PrintDungeonOptions(void);
 void PrintOthersOptions(void);
-void sub_8065A8C(s32 optionId);
-void sub_8065B3C(s32 optionId);
-bool8 sub_8065BEC(void);
-bool8 sub_8065BF0(void);
+void ChangeGameOptionLeft(s32 optionId);
+void ChangeGameOptionRight(s32 optionId);
+bool8 UnknownDungeonOption(void);
+bool8 UnknownOthersOption(void);
 bool8 AskToQuickSave(void);
 bool8 AskToGiveUp(void);
 void PrintQuickSaveMenuOptions(void);
+void PrintHintsMenu(void);
+void ShowChosenHintWindow(s32 hintId);
 
 enum {
     OTHERS_GAME_OPTIONS,
@@ -267,13 +270,13 @@ bool8 ShowDungeonOptions(void)
 
             if (gRealInputs.repeated & DPAD_LEFT) {
                 PlayDungeonCursorSE(FALSE);
-                sub_8065A8C(gDungeonMenu.menuIndex);
+                ChangeGameOptionLeft(gDungeonMenu.menuIndex);
                 dpadMoved = TRUE;
                 break;
             }
             if (gRealInputs.repeated & DPAD_RIGHT) {
                 PlayDungeonCursorSE(FALSE);
-                sub_8065B3C(gDungeonMenu.menuIndex);
+                ChangeGameOptionRight(gDungeonMenu.menuIndex);
                 dpadMoved = TRUE;
                 break;
             }
@@ -288,7 +291,7 @@ bool8 ShowDungeonOptions(void)
                 break;
             }
 
-            if (sub_8065BEC()) {
+            if (UnknownDungeonOption()) {
                 dpadMoved = TRUE;
                 break;
             }
@@ -328,13 +331,13 @@ bool8 ShowOthersOptions(void)
 
             if (gRealInputs.repeated & DPAD_LEFT) {
                 PlayDungeonCursorSE(FALSE);
-                sub_8065A8C(gDungeonMenu.menuIndex + DUNGEON_OPTIONS_COUNT);
+                ChangeGameOptionLeft(gDungeonMenu.menuIndex + DUNGEON_OPTIONS_COUNT);
                 dpadMoved = TRUE;
                 break;
             }
             if (gRealInputs.repeated & DPAD_RIGHT) {
                 PlayDungeonCursorSE(FALSE);
-                sub_8065B3C(gDungeonMenu.menuIndex + DUNGEON_OPTIONS_COUNT);
+                ChangeGameOptionRight(gDungeonMenu.menuIndex + DUNGEON_OPTIONS_COUNT);
                 dpadMoved = TRUE;
                 break;
             }
@@ -349,7 +352,7 @@ bool8 ShowOthersOptions(void)
                 break;
             }
 
-            if (sub_8065BF0()) {
+            if (UnknownOthersOption()) {
                 dpadMoved = TRUE;
                 break;
             }
@@ -798,6 +801,277 @@ void PrintOthersOptions(void)
     AddDoubleUnderScoreHighlight(0, 80 + (gUnknown_202F2E8.windowColor * 40), y[0] + 10, underscoreWidths[gUnknown_202F2E8.windowColor], 7);
 
     sub_80073E0(0);
+}
+
+void ChangeGameOptionLeft(s32 optionId)
+{
+    switch (optionId) {
+        case OPTION_SPEED:
+            gUnknown_202F2E8.dungeonSpeed = (gUnknown_202F2E8.dungeonSpeed == DUNGEON_SPEED_SLOW) ? DUNGEON_SPEED_FAST : DUNGEON_SPEED_SLOW;
+            break;
+        case OPTION_FAR_OFF_PALS:
+            gUnknown_202F2E8.FarOffPals = (gUnknown_202F2E8.FarOffPals == 0) ? 1 : 0;
+            break;
+        case OPTION_DAMAGE_TURN:
+            gUnknown_202F2E8.damageTurn = (gUnknown_202F2E8.damageTurn == 0) ? 1 : 0;
+            break;
+        case OPTION_GRIDS:
+            gUnknown_202F2E8.gridEnable = (gUnknown_202F2E8.gridEnable == 0) ? 1 : 0;
+            break;
+        case OPTION_MAP:
+            if (gUnknown_202F2E8.mapOption == 0) {
+                gUnknown_202F2E8.mapOption = MAP_OPTION_SHADE;
+            }
+            else {
+                gUnknown_202F2E8.mapOption--;
+            }
+            break;
+        case OPTION_WINDOWS:
+            if (gUnknown_202F2E8.windowColor == 0) {
+                gUnknown_202F2E8.windowColor = WINDOW_COLOR_GREEN;
+            }
+            else {
+                gUnknown_202F2E8.windowColor--;
+            }
+            break;
+    }
+}
+
+void ChangeGameOptionRight(s32 optionId)
+{
+    switch (optionId) {
+        case OPTION_SPEED:
+            gUnknown_202F2E8.dungeonSpeed = (gUnknown_202F2E8.dungeonSpeed == DUNGEON_SPEED_SLOW) ? DUNGEON_SPEED_FAST : DUNGEON_SPEED_SLOW;
+            break;
+        case OPTION_FAR_OFF_PALS:
+            gUnknown_202F2E8.FarOffPals = (gUnknown_202F2E8.FarOffPals == 0) ? 1 : 0;
+            break;
+        case OPTION_DAMAGE_TURN:
+            gUnknown_202F2E8.damageTurn = (gUnknown_202F2E8.damageTurn == 0) ? 1 : 0;
+            break;
+        case OPTION_GRIDS:
+            gUnknown_202F2E8.gridEnable = (gUnknown_202F2E8.gridEnable == 0) ? 1 : 0;
+            break;
+        case OPTION_MAP:
+            if (gUnknown_202F2E8.mapOption == MAP_OPTION_SHADE) {
+                gUnknown_202F2E8.mapOption = 0;
+            }
+            else {
+                gUnknown_202F2E8.mapOption++;
+            }
+            break;
+        case OPTION_WINDOWS:
+            if (gUnknown_202F2E8.windowColor == WINDOW_COLOR_GREEN) {
+                gUnknown_202F2E8.windowColor = 0;
+            }
+            else {
+                gUnknown_202F2E8.windowColor++;
+            }
+            break;
+    }
+}
+
+// Different in Blue maybe?
+bool8 UnknownDungeonOption(void)
+{
+    return FALSE;
+}
+
+bool8 UnknownOthersOption(void)
+{
+    return FALSE;
+}
+
+enum
+{
+    HINTS_CONTROLS,
+    HINTS_ORIENTATION,
+    HINTS_SEEDS,
+    HINTS_MOVES,
+    HINTS_RANGE,
+    HINTS_LINKING_MOVES,
+    HINTS_POKEMON_TYPES,
+    HINTS_TOUCH_SCREEN,
+    HINTS_COUNT,
+};
+
+#define HINTS_COUNT_RED_VERSION HINTS_COUNT - 1 // No Touch Screen Hints in Red
+
+void ShowHintsMenu(void)
+{
+    while (1) {
+        bool8 bPress = FALSE;
+
+        PrintHintsMenu();
+        while (1) {
+            AddMenuCursorSprite(&gDungeonMenu);
+            DungeonRunFrameActions(0x24);
+            if (gRealInputs.repeated & DPAD_DOWN) {
+                PlayDungeonCursorSE(TRUE);
+                MoveMenuCursorDownWrapAround(&gDungeonMenu, TRUE);
+            }
+            if (gRealInputs.repeated & DPAD_UP) {
+                PlayDungeonCursorSE(TRUE);
+                MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
+            }
+
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+                PlayDungeonConfirmationSE();
+                break;
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                PlayDungeonCancelSE();
+                bPress = TRUE;
+                break;
+            }
+        }
+
+        AddMenuCursorSprite(&gDungeonMenu);
+        DungeonRunFrameActions(0x24);
+        if (bPress)
+            break;
+
+        ShowChosenHintWindow(gDungeonMenu.menuIndex);
+    }
+}
+
+extern const u8 *const gUnknown_80FF774[];
+
+void PrintHintsMenu(void)
+{
+    s32 i;
+    WindowHeader header;
+    WindowTemplates windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_WITH_HEADER,
+                .pos = {2, 2},
+                .width = 12,
+                .height = 16,
+                .unk10 = 16,
+                .unk12 = 0,
+                .header = &header,
+            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
+
+    header.count = 1;
+    header.currId = 0;
+    header.f3 = 0;
+    gDungeonMenu.menuIndex = 0;
+    gDungeonMenu.unk1A = HINTS_COUNT_RED_VERSION;
+    gDungeonMenu.unk1C = HINTS_COUNT_RED_VERSION;
+    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.unk4 = 0;
+    gDungeonMenu.firstEntryY = 16;
+    gDungeonMenu.unkC = 0;
+    gDungeonMenu.unkE = 0;
+    gDungeonMenu.unk14.x = 0;
+    gDungeonMenu.unk0 = 0;
+    sub_801317C(&gDungeonMenu.unk28);
+    windows.id[0].width = 12;
+    windows.id[0].height = windows.id[0].unk10 = sub_80095E4(HINTS_COUNT_RED_VERSION, 12) + 2;
+    header.width = 10;
+    windows.id[0].pos.x = 2;
+    DungeonShowWindows(&windows, TRUE);
+    sub_80137B0(&gDungeonMenu, 0);
+    sub_80073B8(0);
+    PrintFormattedStringOnWindow(16, 0, gUnknown_80FF770, 0, '\0');
+    for (i = 0; i < HINTS_COUNT_RED_VERSION; i++) {
+        PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, i), gUnknown_80FF774[i], 0, '\0');
+    }
+    sub_80073E0(0);
+}
+
+extern const u8 *const gUnknown_80FF7EC[2][HINTS_COUNT];
+
+void ShowChosenHintWindow(s32 hintId)
+{
+    bool8 unk9 = (gGameOptionsRef->unk9 != 0);
+
+    while (1) {
+        bool8 dpadPressed = FALSE;
+        WindowHeader header;
+        WindowTemplates windows = {
+            .id = {
+                [0] = {
+                    .type = WINDOW_TYPE_WITH_HEADER,
+                    .pos = {2, 2},
+                    .width = 12,
+                    .height = 16,
+                    .unk10 = 16,
+                    .unk12 = 0,
+                    .header = &header,
+                },
+                [1] = WINDOW_DUMMY,
+                [2] = WINDOW_DUMMY,
+                [3] = WINDOW_DUMMY,
+            }
+        };
+
+        header.count = HINTS_COUNT_RED_VERSION;
+        header.currId = hintId;
+        header.f3 = 0;
+        gDungeonMenu.unk1E = hintId;
+        gDungeonMenu.unk20 = HINTS_COUNT_RED_VERSION;
+        gDungeonMenu.unk1A = 0;
+        gDungeonMenu.menuIndex = 0;
+        gDungeonMenu.unk1C = 0;
+        gDungeonMenu.unk4 = 0;
+        gDungeonMenu.firstEntryY = 16;
+        gDungeonMenu.unk14.x = 0;
+        gDungeonMenu.unk0 = 0;
+        sub_801317C(&gDungeonMenu.unk28);
+        windows.id[0].width = 24;
+        windows.id[0].height = windows.id[0].unk10 = sub_80095E4(HINTS_COUNT, 12) + 2;
+        header.width = 10;
+        windows.id[0].pos.x = 2;
+        DungeonShowWindows(&windows, TRUE);
+        gDungeonMenu.unkC = (gWindows[0].x + 19) * 8;
+        gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
+        sub_80073B8(0);
+        PrintFormattedStringOnWindow(16 + hintId * 8, 0, gUnknown_80FF774[hintId], 0, '\0');
+        PrintFormattedStringOnWindow(8, 16, gUnknown_80FF7EC[unk9][hintId], 0, '\0');
+        sub_80073E0(0);
+
+        while (1) {
+            AddMenuCursorSprite(&gDungeonMenu);
+            DungeonRunFrameActions(0x24);
+            if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.unk28.dpad_right) {
+                PlayDungeonCursorSE(FALSE);
+                if (++hintId == HINTS_COUNT_RED_VERSION) {
+                    hintId = 0;
+                }
+                dpadPressed = TRUE;
+                break;
+            }
+            if ((gRealInputs.pressed & DPAD_LEFT) || gDungeonMenu.unk28.dpad_left) {
+                PlayDungeonCursorSE(FALSE);
+                if (--hintId == -1) {
+                    hintId = HINTS_COUNT_RED_VERSION - 1;
+                }
+                dpadPressed = TRUE;
+                break;
+            }
+
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+                PlayDungeonConfirmationSE();
+                break;
+            }
+            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                PlayDungeonCancelSE();
+                break;
+            }
+        }
+
+        DungeonRunFrameActions(0x24);
+        if (!dpadPressed)
+            break;
+    }
 }
 
 //
