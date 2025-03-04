@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_menu_others.h"
+#include "dungeon_menu_recruitment.h"
 #include "dungeon_submenu.h"
 #include "dungeon.h"
 #include "text.h"
@@ -37,8 +38,6 @@ extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 
 extern MenuInputStruct gDungeonMenu;
 extern s32 gDungeonSubMenuItemsCount;
-extern s32 gUnknown_202F2E0;
-extern GameOptions gUnknown_202F2E8;
 
 extern const u8 *const gUnknown_80FEBF8;
 extern const u8 *const gUnknown_80FEC28;
@@ -63,31 +62,37 @@ extern const u8 *const gUnknown_80FE7C0;
 extern const u8 *const gUnknown_80FE788;
 extern const u8 *const gUnknown_80FE7A8;
 extern const u8 *const gUnknown_80FE7E4;
+extern const u8 *const gUnknown_80FA61C;
+extern const u8 *const gUnknown_80FA5F4;
 extern const u8 *const gOptionsOthersTextPtr;
 extern const u8 *const gOptionsWindowColorPtr;
+extern const u8 *const gUnknown_80FF774[];
 
-void PrintOthersMenuOptions(void);
-void ShowGameOptionsMenu(void);
-void ShowQuickSaveGiveUpMenu(void);
-void ShowMissionObjectivesMenu(void);
-void ShowRecruitmentSearchMenu(void);
-void ShowHintsMenu(void);
-bool8 ShowDungeonOptions(void);
-bool8 ShowOthersOptions(void);
-void TrySetNewGameOptions(bool8 bPressed);
-void AskToResetToDefault(void);
-void PrintGameOptions(void);
-void PrintDungeonOptions(void);
-void PrintOthersOptions(void);
-void ChangeGameOptionLeft(s32 optionId);
-void ChangeGameOptionRight(s32 optionId);
-bool8 UnknownDungeonOption(void);
-bool8 UnknownOthersOption(void);
-bool8 AskToQuickSave(void);
-bool8 AskToGiveUp(void);
-void PrintQuickSaveMenuOptions(void);
-void PrintHintsMenu(void);
-void ShowChosenHintWindow(s32 hintId);
+static void PrintOthersMenuOptions(void);
+static void ShowGameOptionsMenu(void);
+static void ShowQuickSaveGiveUpMenu(void);
+static void ShowMissionObjectivesMenu(void);
+static void ShowHintsMenu(void);
+static bool8 ShowDungeonOptions(void);
+static bool8 ShowOthersOptions(void);
+static void TrySetNewGameOptions(bool8 bPressed);
+static void AskToResetToDefault(void);
+static void PrintGameOptions(void);
+static void PrintDungeonOptions(void);
+static void PrintOthersOptions(void);
+static void ChangeGameOptionLeft(s32 optionId);
+static void ChangeGameOptionRight(s32 optionId);
+static bool8 UnknownDungeonOption(void);
+static bool8 UnknownOthersOption(void);
+static bool8 AskToQuickSave(void);
+static bool8 AskToGiveUp(void);
+static void PrintQuickSaveMenuOptions(void);
+static void PrintHintsMenu(void);
+static void ShowChosenHintWindow(s32 hintId);
+
+EWRAM_DATA static s32 sOthersCursorId = 0;
+UNUSED EWRAM_DATA static u8 sUnused[4] = {0};
+EWRAM_DATA static GameOptions sChangedGameOptions = {0};
 
 enum {
     OTHERS_GAME_OPTIONS,
@@ -104,7 +109,7 @@ void ShowDungeonOthersMenu(void)
     bool8 unkAlwaysFalse;
     s32 hintsMenuId = (gDungeon->unk644.canRecruit) ? OTHERS_HINTS : OTHERS_HINTS - 1;
 
-    gUnknown_202F2E0 = 0;
+    sOthersCursorId = 0;
     unkAlwaysFalse = FALSE;
     while (1) {
         bool8 bPress = FALSE;
@@ -145,23 +150,23 @@ void ShowDungeonOthersMenu(void)
         if (bPress)
             break;
 
-        gUnknown_202F2E0 = gDungeonMenu.menuIndex;
-        if (gUnknown_202F2E0 == OTHERS_GAME_OPTIONS) {
+        sOthersCursorId = gDungeonMenu.menuIndex;
+        if (sOthersCursorId == OTHERS_GAME_OPTIONS) {
             ShowGameOptionsMenu();
         }
-        if (gUnknown_202F2E0 == OTHERS_QUICKSAVE_GIVEUP) {
+        if (sOthersCursorId == OTHERS_QUICKSAVE_GIVEUP) {
             ShowQuickSaveGiveUpMenu();
         }
-        if (gUnknown_202F2E0 == OTHERS_MESSAGE_LOG) {
+        if (sOthersCursorId == OTHERS_MESSAGE_LOG) {
             DisplayMessageLog();
         }
-        if (gUnknown_202F2E0 == OTHERS_MISSION_OBJECTIVES) {
+        if (sOthersCursorId == OTHERS_MISSION_OBJECTIVES) {
             ShowMissionObjectivesMenu();
         }
-        if (gDungeon->unk644.canRecruit && !IsBossFight() && gUnknown_202F2E0 == OTHERS_RECRUITMENT_SEARCH) {
+        if (gDungeon->unk644.canRecruit && !IsBossFight() && sOthersCursorId == OTHERS_RECRUITMENT_SEARCH) {
             ShowRecruitmentSearchMenu();
         }
-        if (gUnknown_202F2E0 == hintsMenuId) {
+        if (sOthersCursorId == hintsMenuId) {
             ShowHintsMenu();
         }
 
@@ -181,7 +186,7 @@ enum {
     GAME_OPTION_DEFAULT,
 };
 
-void ShowGameOptionsMenu(void)
+static void ShowGameOptionsMenu(void)
 {
     while (1) {
         bool8 bPress = FALSE;
@@ -215,7 +220,7 @@ void ShowGameOptionsMenu(void)
         if (bPress)
             break;
 
-        gUnknown_202F2E8 = *gGameOptionsRef;
+        sChangedGameOptions = *gGameOptionsRef;
         if (gDungeonMenu.menuIndex == GAME_OPTION_DUNGEON) {
             bPress = ShowDungeonOptions();
             TrySetNewGameOptions(bPress);
@@ -245,7 +250,7 @@ enum {
 #define DUNGEON_OPTIONS_COUNT OPTION_WINDOWS
 #define OTHERS_OPTIONS_COUNT (OPTION_COUNT - DUNGEON_OPTIONS_COUNT)
 
-bool8 ShowDungeonOptions(void)
+static bool8 ShowDungeonOptions(void)
 {
     bool8 dpadMoved;
     bool8 bPress = FALSE;
@@ -306,7 +311,7 @@ bool8 ShowDungeonOptions(void)
     return bPress;
 }
 
-bool8 ShowOthersOptions(void)
+static bool8 ShowOthersOptions(void)
 {
     bool8 dpadMoved;
     bool8 bPress = FALSE;
@@ -367,12 +372,12 @@ bool8 ShowOthersOptions(void)
     return bPress;
 }
 
-void TrySetNewGameOptions(bool8 bPressed)
+static void TrySetNewGameOptions(bool8 bPressed)
 {
     bool8 optionsChanged = FALSE;
 
     if (bPressed) {
-        if (!GameOptionsNotChange(&gUnknown_202F2E8))
+        if (!GameOptionsNotChange(&sChangedGameOptions))
             optionsChanged = TRUE;
     }
     else {
@@ -381,14 +386,14 @@ void TrySetNewGameOptions(bool8 bPressed)
 
     if (optionsChanged) {
         if (DisplayDungeonYesNoMessage(0, gUnknown_80FEBF8, TRUE) == 1) {
-            *gGameOptionsRef = gUnknown_202F2E8;
+            *gGameOptionsRef = sChangedGameOptions;
             sub_803E13C();
             sub_8040238();
         }
     }
 }
 
-void AskToResetToDefault(void)
+static void AskToResetToDefault(void)
 {
     if (DisplayDungeonYesNoMessage(0, gUnknown_80FEC28, FALSE) == 1) {
         InitializeGameOptions(FALSE);
@@ -396,7 +401,7 @@ void AskToResetToDefault(void)
     }
 }
 
-void ShowQuickSaveGiveUpMenu(void)
+static void ShowQuickSaveGiveUpMenu(void)
 {
     bool8 unkAlwaysFalse = FALSE;
     while (1) {
@@ -446,7 +451,7 @@ void ShowQuickSaveGiveUpMenu(void)
     }
 }
 
-void ShowMissionObjectivesMenu(void)
+static void ShowMissionObjectivesMenu(void)
 {
     sub_80319A4(gDungeon->unk644.unk34, gDungeon->unk644.dungeonLocation.id, 0);
     do {
@@ -455,7 +460,7 @@ void ShowMissionObjectivesMenu(void)
     sub_8031A3C();
 }
 
-bool8 AskToQuickSave(void)
+static bool8 AskToQuickSave(void)
 {
     if (DisplayDungeonYesNoMessage(NULL, gUnknown_80FDE6C, FALSE) != 1) {
         return TRUE;
@@ -464,7 +469,7 @@ bool8 AskToQuickSave(void)
     return FALSE;
 }
 
-bool8 AskToGiveUp(void)
+static bool8 AskToGiveUp(void)
 {
     if (DisplayDungeonYesNoMessage(NULL, gUnknown_80FDEB8, FALSE) != 1) {
         return TRUE;
@@ -475,7 +480,7 @@ bool8 AskToGiveUp(void)
     return FALSE;
 }
 
-void PrintOthersMenuOptions(void)
+static void PrintOthersMenuOptions(void)
 {
     s32 optionsCount, currOptionId;
     WindowHeader header;
@@ -499,7 +504,7 @@ void PrintOthersMenuOptions(void)
     header.count = 1;
     header.currId = 0;
     header.f3 = 0;
-    gDungeonMenu.menuIndex = gUnknown_202F2E0;
+    gDungeonMenu.menuIndex = sOthersCursorId;
     optionsCount = (gDungeon->unk644.canRecruit) ? OTHERS_COUNT : OTHERS_COUNT - 1;
     gDungeonMenu.unk1A = optionsCount;
     gDungeonMenu.unk1C = optionsCount;
@@ -548,7 +553,7 @@ struct Struct_80F7C50
 
 extern const struct Struct_80F7C50 gUnknown_80F7C50[];
 
-void PrintQuickSaveMenuOptions(void)
+static void PrintQuickSaveMenuOptions(void)
 {
     s32 optionsCount, currOptionId;
     WindowHeader header;
@@ -600,7 +605,7 @@ void PrintQuickSaveMenuOptions(void)
     sub_80073E0(0);
 }
 
-void PrintGameOptions(void)
+static void PrintGameOptions(void)
 {
     s32 optionsCount;
     s32 y[3];
@@ -656,7 +661,7 @@ void PrintGameOptions(void)
     sub_80073E0(0);
 }
 
-void PrintDungeonOptions(void)
+static void PrintDungeonOptions(void)
 {
     s32 y[DUNGEON_OPTIONS_COUNT];
     WindowHeader header;
@@ -713,40 +718,40 @@ void PrintDungeonOptions(void)
     PrintFormattedStringOnWindow(8, y[3], gUnknown_80FE7C0, 0, '\0');
     PrintFormattedStringOnWindow(8, y[4], gUnknown_80FE7E4, 0, '\0');
 
-    if (gUnknown_202F2E8.dungeonSpeed != DUNGEON_SPEED_SLOW) {
+    if (sChangedGameOptions.dungeonSpeed != DUNGEON_SPEED_SLOW) {
         AddDoubleUnderScoreHighlight(0, 136, y[0] + 10, 21, 7);
     }
     else {
         AddDoubleUnderScoreHighlight(0, 80, y[0] + 10, 22, 7);
     }
 
-    if (gUnknown_202F2E8.FarOffPals != FAROFFPALS_SELF) {
+    if (sChangedGameOptions.FarOffPals != FAROFFPALS_SELF) {
         AddDoubleUnderScoreHighlight(0, 136, y[1] + 10, 22, 7);
     }
     else {
         AddDoubleUnderScoreHighlight(0, 80, y[1] + 10, 18, 7);
     }
 
-    if (gUnknown_202F2E8.damageTurn) {
+    if (sChangedGameOptions.damageTurn) {
         AddDoubleUnderScoreHighlight(0, 136, y[2] + 10, 16, 7);
     }
     else {
         AddDoubleUnderScoreHighlight(0, 80, y[2] + 10, 12, 7);
     }
 
-    if (gUnknown_202F2E8.gridEnable) {
+    if (sChangedGameOptions.gridEnable) {
         AddDoubleUnderScoreHighlight(0, 136, y[3] + 10, 12, 7);
     }
     else {
         AddDoubleUnderScoreHighlight(0, 80, y[3] + 10, 16, 7);
     }
 
-    AddDoubleUnderScoreHighlight(0, 80 + (gUnknown_202F2E8.mapOption * 40), y[4] + 10, mapOptionUnderscoreWidths[gUnknown_202F2E8.mapOption], 7);
+    AddDoubleUnderScoreHighlight(0, 80 + (sChangedGameOptions.mapOption * 40), y[4] + 10, mapOptionUnderscoreWidths[sChangedGameOptions.mapOption], 7);
 
     sub_80073E0(0);
 }
 
-void PrintOthersOptions(void)
+static void PrintOthersOptions(void)
 {
     s32 i;
     s32 y[OTHERS_OPTIONS_COUNT];
@@ -798,86 +803,86 @@ void PrintOthersOptions(void)
 
     PrintFormattedStringOnWindow(16, 0, gOptionsOthersTextPtr, 0, '\0');
     PrintFormattedStringOnWindow(8, y[0], gOptionsWindowColorPtr, 0, '\0');
-    AddDoubleUnderScoreHighlight(0, 80 + (gUnknown_202F2E8.windowColor * 40), y[0] + 10, underscoreWidths[gUnknown_202F2E8.windowColor], 7);
+    AddDoubleUnderScoreHighlight(0, 80 + (sChangedGameOptions.windowColor * 40), y[0] + 10, underscoreWidths[sChangedGameOptions.windowColor], 7);
 
     sub_80073E0(0);
 }
 
-void ChangeGameOptionLeft(s32 optionId)
+static void ChangeGameOptionLeft(s32 optionId)
 {
     switch (optionId) {
         case OPTION_SPEED:
-            gUnknown_202F2E8.dungeonSpeed = (gUnknown_202F2E8.dungeonSpeed == DUNGEON_SPEED_SLOW) ? DUNGEON_SPEED_FAST : DUNGEON_SPEED_SLOW;
+            sChangedGameOptions.dungeonSpeed = (sChangedGameOptions.dungeonSpeed == DUNGEON_SPEED_SLOW) ? DUNGEON_SPEED_FAST : DUNGEON_SPEED_SLOW;
             break;
         case OPTION_FAR_OFF_PALS:
-            gUnknown_202F2E8.FarOffPals = (gUnknown_202F2E8.FarOffPals == 0) ? 1 : 0;
+            sChangedGameOptions.FarOffPals = (sChangedGameOptions.FarOffPals == 0) ? 1 : 0;
             break;
         case OPTION_DAMAGE_TURN:
-            gUnknown_202F2E8.damageTurn = (gUnknown_202F2E8.damageTurn == 0) ? 1 : 0;
+            sChangedGameOptions.damageTurn = (sChangedGameOptions.damageTurn == 0) ? 1 : 0;
             break;
         case OPTION_GRIDS:
-            gUnknown_202F2E8.gridEnable = (gUnknown_202F2E8.gridEnable == 0) ? 1 : 0;
+            sChangedGameOptions.gridEnable = (sChangedGameOptions.gridEnable == 0) ? 1 : 0;
             break;
         case OPTION_MAP:
-            if (gUnknown_202F2E8.mapOption == 0) {
-                gUnknown_202F2E8.mapOption = MAP_OPTION_SHADE;
+            if (sChangedGameOptions.mapOption == 0) {
+                sChangedGameOptions.mapOption = MAP_OPTION_SHADE;
             }
             else {
-                gUnknown_202F2E8.mapOption--;
+                sChangedGameOptions.mapOption--;
             }
             break;
         case OPTION_WINDOWS:
-            if (gUnknown_202F2E8.windowColor == 0) {
-                gUnknown_202F2E8.windowColor = WINDOW_COLOR_GREEN;
+            if (sChangedGameOptions.windowColor == 0) {
+                sChangedGameOptions.windowColor = WINDOW_COLOR_GREEN;
             }
             else {
-                gUnknown_202F2E8.windowColor--;
+                sChangedGameOptions.windowColor--;
             }
             break;
     }
 }
 
-void ChangeGameOptionRight(s32 optionId)
+static void ChangeGameOptionRight(s32 optionId)
 {
     switch (optionId) {
         case OPTION_SPEED:
-            gUnknown_202F2E8.dungeonSpeed = (gUnknown_202F2E8.dungeonSpeed == DUNGEON_SPEED_SLOW) ? DUNGEON_SPEED_FAST : DUNGEON_SPEED_SLOW;
+            sChangedGameOptions.dungeonSpeed = (sChangedGameOptions.dungeonSpeed == DUNGEON_SPEED_SLOW) ? DUNGEON_SPEED_FAST : DUNGEON_SPEED_SLOW;
             break;
         case OPTION_FAR_OFF_PALS:
-            gUnknown_202F2E8.FarOffPals = (gUnknown_202F2E8.FarOffPals == 0) ? 1 : 0;
+            sChangedGameOptions.FarOffPals = (sChangedGameOptions.FarOffPals == 0) ? 1 : 0;
             break;
         case OPTION_DAMAGE_TURN:
-            gUnknown_202F2E8.damageTurn = (gUnknown_202F2E8.damageTurn == 0) ? 1 : 0;
+            sChangedGameOptions.damageTurn = (sChangedGameOptions.damageTurn == 0) ? 1 : 0;
             break;
         case OPTION_GRIDS:
-            gUnknown_202F2E8.gridEnable = (gUnknown_202F2E8.gridEnable == 0) ? 1 : 0;
+            sChangedGameOptions.gridEnable = (sChangedGameOptions.gridEnable == 0) ? 1 : 0;
             break;
         case OPTION_MAP:
-            if (gUnknown_202F2E8.mapOption == MAP_OPTION_SHADE) {
-                gUnknown_202F2E8.mapOption = 0;
+            if (sChangedGameOptions.mapOption == MAP_OPTION_SHADE) {
+                sChangedGameOptions.mapOption = 0;
             }
             else {
-                gUnknown_202F2E8.mapOption++;
+                sChangedGameOptions.mapOption++;
             }
             break;
         case OPTION_WINDOWS:
-            if (gUnknown_202F2E8.windowColor == WINDOW_COLOR_GREEN) {
-                gUnknown_202F2E8.windowColor = 0;
+            if (sChangedGameOptions.windowColor == WINDOW_COLOR_GREEN) {
+                sChangedGameOptions.windowColor = 0;
             }
             else {
-                gUnknown_202F2E8.windowColor++;
+                sChangedGameOptions.windowColor++;
             }
             break;
     }
 }
 
 // Different in Blue maybe?
-bool8 UnknownDungeonOption(void)
+static bool8 UnknownDungeonOption(void)
 {
     return FALSE;
 }
 
-bool8 UnknownOthersOption(void)
+static bool8 UnknownOthersOption(void)
 {
     return FALSE;
 }
@@ -897,7 +902,7 @@ enum
 
 #define HINTS_COUNT_RED_VERSION HINTS_COUNT - 1 // No Touch Screen Hints in Red
 
-void ShowHintsMenu(void)
+static void ShowHintsMenu(void)
 {
     while (1) {
         bool8 bPress = FALSE;
@@ -935,9 +940,7 @@ void ShowHintsMenu(void)
     }
 }
 
-extern const u8 *const gUnknown_80FF774[];
-
-void PrintHintsMenu(void)
+static void PrintHintsMenu(void)
 {
     s32 i;
     WindowHeader header;
@@ -989,7 +992,7 @@ void PrintHintsMenu(void)
 
 extern const u8 *const gUnknown_80FF7EC[2][HINTS_COUNT];
 
-void ShowChosenHintWindow(s32 hintId)
+static void ShowChosenHintWindow(s32 hintId)
 {
     bool8 unk9 = (gGameOptionsRef->unk9 != 0);
 
@@ -1073,5 +1076,3 @@ void ShowChosenHintWindow(s32 hintId)
             break;
     }
 }
-
-//
