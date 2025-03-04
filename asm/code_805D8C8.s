@@ -5,620 +5,8 @@
 
   	.text
 
-	thumb_func_start sub_8064D74
-sub_8064D74:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	ldr r6, _08064DE0
-	ldr r7, _08064DE4
-	movs r0, 0x2A
-	adds r0, r6
-	mov r8, r0
-_08064D84:
-	movs r5, 0
-	bl CreateFieldGameOptionsMenu
-_08064D8A:
-	adds r0, r6, 0
-	bl AddMenuCursorSprite
-	movs r0, 0x24
-	bl DungeonRunFrameActions
-	ldrh r1, [r7, 0x4]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08064DAE
-	movs r0, 0x1
-	bl PlayDungeonCursorSE
-	adds r0, r6, 0
-	movs r1, 0x1
-	bl MoveMenuCursorDownWrapAround
-_08064DAE:
-	ldrh r1, [r7, 0x4]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _08064DC6
-	movs r0, 0x1
-	bl PlayDungeonCursorSE
-	adds r0, r6, 0
-	movs r1, 0x1
-	bl MoveMenuCursorUpWrapAround
-_08064DC6:
-	ldrh r1, [r7, 0x2]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _08064DDA
-	adds r0, r6, 0
-	adds r0, 0x29
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _08064DE8
-_08064DDA:
-	bl PlayDungeonConfirmationSE
-	b _08064DFE
-	.align 2, 0
-_08064DE0: .4byte gDungeonMenu
-_08064DE4: .4byte gRealInputs
-_08064DE8:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	bne _08064DF8
-	mov r1, r8
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _08064D8A
-_08064DF8:
-	bl PlayDungeonCancelSE
-	movs r5, 0x1
-_08064DFE:
-	ldr r4, _08064E2C
-	adds r0, r4, 0
-	bl AddMenuCursorSprite
-	movs r0, 0x24
-	bl DungeonRunFrameActions
-	cmp r5, 0
-	bne _08064E56
-	ldr r0, _08064E30
-	ldr r1, _08064E34
-	ldr r0, [r0]
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	ldr r0, [r0]
-	str r0, [r1]
-	movs r1, 0x18
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _08064E38
-	bl sub_8064E68
-	b _08064E40
-	.align 2, 0
-_08064E2C: .4byte gDungeonMenu
-_08064E30: .4byte gGameOptionsRef
-_08064E34: .4byte gUnknown_202F2E8
-_08064E38:
-	cmp r0, 0x1
-	bne _08064E4C
-	bl sub_8064F50
-_08064E40:
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r0, r5, 0
-	bl sub_8065040
-	b _08064D84
-_08064E4C:
-	cmp r0, 0x2
-	bne _08064D84
-	bl sub_806509C
-	b _08064D84
-_08064E56:
-	movs r0, 0
-	movs r1, 0
-	bl sub_803EAF0
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8064D74
 
-	thumb_func_start sub_8064E68
-sub_8064E68:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	movs r7, 0
-	ldr r0, _08064EDC
-	strh r7, [r0, 0x18]
-	adds r4, r0, 0
-	ldr r6, _08064EE0
-	movs r0, 0x2A
-	adds r0, r4
-	mov r8, r0
-_08064E7E:
-	movs r7, 0
-	movs r5, 0
-	bl CreateFieldDungeonMenu
-_08064E86:
-	adds r0, r4, 0
-	bl AddMenuCursorSprite
-	movs r0, 0x24
-	bl DungeonRunFrameActions
-	ldrh r1, [r6, 0x4]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08064EAA
-	movs r0, 0x1
-	bl PlayDungeonCursorSE
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl MoveMenuCursorDownWrapAround
-_08064EAA:
-	ldrh r1, [r6, 0x4]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _08064EC2
-	movs r0, 0x1
-	bl PlayDungeonCursorSE
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl MoveMenuCursorUpWrapAround
-_08064EC2:
-	ldrh r1, [r6, 0x4]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _08064EE4
-	movs r0, 0
-	bl PlayDungeonCursorSE
-	movs r1, 0x18
-	ldrsh r0, [r4, r1]
-	bl sub_8065A8C
-	b _08064F2E
-	.align 2, 0
-_08064EDC: .4byte gDungeonMenu
-_08064EE0: .4byte gRealInputs
-_08064EE4:
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _08064EFC
-	movs r0, 0
-	bl PlayDungeonCursorSE
-	movs r2, 0x18
-	ldrsh r0, [r4, r2]
-	bl sub_8065B3C
-	b _08064F2E
-_08064EFC:
-	ldrh r1, [r6, 0x2]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _08064F0E
-	mov r2, r8
-	ldrb r0, [r2]
-	cmp r0, 0
-	beq _08064F14
-_08064F0E:
-	bl PlayDungeonConfirmationSE
-	b _08064F30
-_08064F14:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08064F24
-	bl PlayDungeonCancelSE
-	movs r7, 0x1
-	b _08064F30
-_08064F24:
-	bl sub_8065BEC
-	lsls r0, 24
-	cmp r0, 0
-	beq _08064E86
-_08064F2E:
-	movs r5, 0x1
-_08064F30:
-	ldr r0, _08064F4C
-	bl AddMenuCursorSprite
-	movs r0, 0x24
-	bl DungeonRunFrameActions
-	cmp r5, 0
-	bne _08064E7E
-	adds r0, r7, 0
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08064F4C: .4byte gDungeonMenu
-	thumb_func_end sub_8064E68
 
-	thumb_func_start sub_8064F50
-sub_8064F50:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	movs r7, 0
-	ldr r0, _08064FC8
-	strh r7, [r0, 0x18]
-	adds r4, r0, 0
-	ldr r6, _08064FCC
-	movs r0, 0x2A
-	adds r0, r4
-	mov r8, r0
-_08064F66:
-	movs r7, 0
-	movs r5, 0
-	bl CreateFieldOthersMenu
-_08064F6E:
-	adds r0, r4, 0
-	bl AddMenuCursorSprite
-	movs r0, 0x24
-	bl DungeonRunFrameActions
-	ldrh r1, [r6, 0x4]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08064F92
-	movs r0, 0x1
-	bl PlayDungeonCursorSE
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl MoveMenuCursorDownWrapAround
-_08064F92:
-	ldrh r1, [r6, 0x4]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _08064FAA
-	movs r0, 0x1
-	bl PlayDungeonCursorSE
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl MoveMenuCursorUpWrapAround
-_08064FAA:
-	ldrh r1, [r6, 0x4]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _08064FD0
-	movs r0, 0
-	bl PlayDungeonCursorSE
-	movs r1, 0x18
-	ldrsh r0, [r4, r1]
-	adds r0, 0x5
-	bl sub_8065A8C
-	b _0806501C
-	.align 2, 0
-_08064FC8: .4byte gDungeonMenu
-_08064FCC: .4byte gRealInputs
-_08064FD0:
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _08064FEA
-	movs r0, 0
-	bl PlayDungeonCursorSE
-	movs r2, 0x18
-	ldrsh r0, [r4, r2]
-	adds r0, 0x5
-	bl sub_8065B3C
-	b _0806501C
-_08064FEA:
-	ldrh r1, [r6, 0x2]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _08064FFC
-	mov r2, r8
-	ldrb r0, [r2]
-	cmp r0, 0
-	beq _08065002
-_08064FFC:
-	bl PlayDungeonConfirmationSE
-	b _0806501E
-_08065002:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08065012
-	bl PlayDungeonCancelSE
-	movs r7, 0x1
-	b _0806501E
-_08065012:
-	bl sub_8065BF0
-	lsls r0, 24
-	cmp r0, 0
-	beq _08064F6E
-_0806501C:
-	movs r5, 0x1
-_0806501E:
-	ldr r0, _0806503C
-	bl AddMenuCursorSprite
-	movs r0, 0x24
-	bl DungeonRunFrameActions
-	cmp r5, 0
-	bne _08064F66
-	adds r0, r7, 0
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0806503C: .4byte gDungeonMenu
-	thumb_func_end sub_8064F50
-
-	thumb_func_start sub_8065040
-sub_8065040:
-	push {r4,lr}
-	lsls r0, 24
-	movs r4, 0
-	cmp r0, 0
-	beq _0806505C
-	ldr r0, _08065058
-	bl GameOptionsNotChange
-	lsls r0, 24
-	cmp r0, 0
-	bne _0806505E
-	b _08065062
-	.align 2, 0
-_08065058: .4byte gUnknown_202F2E8
-_0806505C:
-	movs r4, 0x1
-_0806505E:
-	cmp r4, 0
-	beq _08065088
-_08065062:
-	ldr r0, _08065090
-	ldr r1, [r0]
-	movs r0, 0
-	movs r2, 0x1
-	bl DisplayDungeonYesNoMessage
-	cmp r0, 0x1
-	bne _08065088
-	ldr r0, _08065094
-	ldr r1, [r0]
-	ldr r0, _08065098
-	ldm r0!, {r2-r4}
-	stm r1!, {r2-r4}
-	ldr r0, [r0]
-	str r0, [r1]
-	bl sub_803E13C
-	bl sub_8040238
-_08065088:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08065090: .4byte gUnknown_80FEBF8
-_08065094: .4byte gGameOptionsRef
-_08065098: .4byte gUnknown_202F2E8
-	thumb_func_end sub_8065040
-
-	thumb_func_start sub_806509C
-sub_806509C:
-	push {lr}
-	ldr r0, _080650BC
-	ldr r1, [r0]
-	movs r0, 0
-	movs r2, 0
-	bl DisplayDungeonYesNoMessage
-	cmp r0, 0x1
-	bne _080650B8
-	movs r0, 0
-	bl InitializeGameOptions
-	bl sub_803E13C
-_080650B8:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080650BC: .4byte gUnknown_80FEC28
-	thumb_func_end sub_806509C
-
-	thumb_func_start sub_80650C0
-sub_80650C0:
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	movs r0, 0
-	mov r9, r0
-	ldr r5, _08065134
-	ldr r6, _08065138
-	movs r1, 0x2A
-	adds r1, r5
-	mov r8, r1
-_080650D6:
-	movs r7, 0
-	bl sub_806544C
-_080650DC:
-	adds r0, r5, 0
-	bl AddMenuCursorSprite
-	movs r0, 0x24
-	bl DungeonRunFrameActions
-	ldrh r1, [r6, 0x4]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08065100
-	movs r0, 0x1
-	bl PlayDungeonCursorSE
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl MoveMenuCursorDownWrapAround
-_08065100:
-	ldrh r1, [r6, 0x4]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _08065118
-	movs r0, 0x1
-	bl PlayDungeonCursorSE
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl MoveMenuCursorUpWrapAround
-_08065118:
-	ldrh r1, [r6, 0x2]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _0806512C
-	adds r0, r5, 0
-	adds r0, 0x29
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0806513C
-_0806512C:
-	bl PlayDungeonConfirmationSE
-	b _08065152
-	.align 2, 0
-_08065134: .4byte gDungeonMenu
-_08065138: .4byte gRealInputs
-_0806513C:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	bne _0806514C
-	mov r1, r8
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _080650DC
-_0806514C:
-	bl PlayDungeonCancelSE
-	movs r7, 0x1
-_08065152:
-	ldr r4, _08065178
-	adds r0, r4, 0
-	bl AddMenuCursorSprite
-	movs r0, 0x24
-	bl DungeonRunFrameActions
-	mov r0, r9
-	cmp r0, 0
-	bne _080650D6
-	cmp r7, 0
-	bne _0806518E
-	movs r1, 0x18
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _0806517C
-	bl sub_80651D0
-	b _08065184
-	.align 2, 0
-_08065178: .4byte gDungeonMenu
-_0806517C:
-	cmp r0, 0x1
-	bne _08065184
-	bl sub_80651FC
-_08065184:
-	bl GetLeaderActionId
-	lsls r0, 16
-	cmp r0, 0
-	beq _080650D6
-_0806518E:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80650C0
-
-	thumb_func_start sub_806519C
-sub_806519C:
-	push {lr}
-	ldr r0, _080651CC
-	ldr r1, [r0]
-	movs r2, 0xCF
-	lsls r2, 3
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	subs r2, 0x34
-	adds r1, r2
-	ldrb r1, [r1]
-	movs r2, 0
-	bl sub_80319A4
-_080651B6:
-	movs r0, 0x47
-	bl DungeonRunFrameActions
-	bl sub_80319F8
-	cmp r0, 0
-	beq _080651B6
-	bl sub_8031A3C
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080651CC: .4byte gDungeon
-	thumb_func_end sub_806519C
-
-	thumb_func_start sub_80651D0
-sub_80651D0:
-	push {lr}
-	ldr r0, _080651F0
-	ldr r1, [r0]
-	movs r0, 0
-	movs r2, 0
-	bl DisplayDungeonYesNoMessage
-	cmp r0, 0x1
-	bne _080651F4
-	bl GetLeaderActionContainer
-	movs r1, 0x2B
-	bl SetMonsterActionFields
-	movs r0, 0
-	b _080651F6
-	.align 2, 0
-_080651F0: .4byte gUnknown_80FDE6C
-_080651F4:
-	movs r0, 0x1
-_080651F6:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80651D0
-
-	thumb_func_start sub_80651FC
-sub_80651FC:
-	push {r4,r5,lr}
-	ldr r0, _08065238
-	ldr r1, [r0]
-	movs r0, 0
-	movs r2, 0
-	bl DisplayDungeonYesNoMessage
-	adds r5, r0, 0
-	cmp r5, 0x1
-	bne _08065248
-	bl GetLeaderActionContainer
-	movs r1, 0x2E
-	bl SetMonsterActionFields
-	ldr r4, _0806523C
-	bl GetLeader
-	adds r2, r0, 0
-	adds r0, r4, 0
-	movs r1, 0
-	bl sub_8083AB0
-	ldr r0, _08065240
-	ldr r0, [r0]
-	ldr r1, _08065244
-	adds r0, r1
-	strb r5, [r0]
-	movs r0, 0
-	b _0806524A
-	.align 2, 0
-_08065238: .4byte gUnknown_80FDEB8
-_0806523C: .4byte 0x0000021b
-_08065240: .4byte gDungeon
-_08065244: .4byte 0x00000654
-_08065248:
-	movs r0, 0x1
-_0806524A:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80651FC
 
 	thumb_func_start sub_8065250
 sub_8065250:
@@ -982,8 +370,8 @@ _0806556C: .4byte gUnknown_80FE8F4
 _08065570: .4byte gUnknown_80F7C50
 	thumb_func_end sub_806544C
 
-	thumb_func_start CreateFieldGameOptionsMenu
-CreateFieldGameOptionsMenu:
+	thumb_func_start sub_8065574
+sub_8065574:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1130,10 +518,10 @@ _080656B0: .4byte gGameOptionsTextPtr
 _080656B4: .4byte gOptionsDungeonTextPtr
 _080656B8: .4byte gOptionsOthersTextPtr
 _080656BC: .4byte gUnknown_80FE748
-	thumb_func_end CreateFieldGameOptionsMenu
+	thumb_func_end sub_8065574
 
-	thumb_func_start CreateFieldDungeonMenu
-CreateFieldDungeonMenu:
+	thumb_func_start sub_80656C0
+sub_80656C0:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1425,10 +813,10 @@ _0806590E:
 	bx r0
 	.align 2, 0
 _08065944: .4byte gUnknown_202F2E8
-	thumb_func_end CreateFieldDungeonMenu
+	thumb_func_end sub_80656C0
 
-	thumb_func_start CreateFieldOthersMenu
-CreateFieldOthersMenu:
+	thumb_func_start sub_8065948
+sub_8065948:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1576,7 +964,7 @@ _08065A7C: .4byte gDungeonMenu
 _08065A80: .4byte gOptionsOthersTextPtr
 _08065A84: .4byte gOptionsWindowColorPtr
 _08065A88: .4byte gUnknown_202F2E8
-	thumb_func_end CreateFieldOthersMenu
+	thumb_func_end sub_8065948
 
 	thumb_func_start sub_8065A8C
 sub_8065A8C:
@@ -1790,8 +1178,8 @@ sub_8065BF0:
 	bx lr
 	thumb_func_end sub_8065BF0
 
-	thumb_func_start sub_8065BF4
-sub_8065BF4:
+	thumb_func_start ShowHintsMenu
+ShowHintsMenu:
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1878,7 +1266,7 @@ _08065CA0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8065BF4
+	thumb_func_end ShowHintsMenu
 
 	thumb_func_start sub_8065CAC
 sub_8065CAC:
@@ -2253,8 +1641,8 @@ _08065FA0:
 _08065FB0: .4byte gUnknown_202EE3A
 	thumb_func_end sub_8065DBC
 
-	thumb_func_start sub_8065FB4
-sub_8065FB4:
+	thumb_func_start ShowRecruitmentSearchMenu
+ShowRecruitmentSearchMenu:
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2491,7 +1879,7 @@ _08066194:
 	bx r0
 	.align 2, 0
 _080661A8: .4byte 0x000009f8
-	thumb_func_end sub_8065FB4
+	thumb_func_end ShowRecruitmentSearchMenu
 
 	thumb_func_start sub_80661AC
 sub_80661AC:

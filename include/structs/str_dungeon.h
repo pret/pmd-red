@@ -249,7 +249,7 @@ typedef struct unkDungeon644
     /* 0x8 */ unkStruct_Dungeon64C unk8;
     /* 0x10 */ u8 unk10;
     /* 0x11 */ u8 fill11[3];
-    /* 0x14 */ u8 unk14;
+    /* 0x14 */ bool8 canRecruit;
     /* 0x15 */ u8 unk15;
     /* 0x16 */ u8 unk16;
     /* 0x17 */ u8 unk17;

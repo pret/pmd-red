@@ -405,7 +405,7 @@ void RunDungeon(struct UnkStruct_RunDungeon *r8)
     gDungeon->unk644.unk55 = 0;
     gDungeon->unk644.unk18 = r8->unk9;
     gDungeon->unk644.unk16 = r8->unkC;
-    gDungeon->unk644.unk14 = r8->unkA;
+    gDungeon->unk644.canRecruit = r8->unkA;
     gDungeon->unk644.unk15 = r8->unkB;
     gDungeon->unk644.unk17 = r8->unkD;
     gDungeon->unk644.unk19 = r8->unkE;

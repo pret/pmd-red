@@ -332,8 +332,13 @@ bool8 sub_806F9BC(s16 species)
     FriendAreaCapacity auStack_18;
 
     id = species;
-    if (((gDungeon->unk644.unk14 == 0) || (sub_808529C(id) == 0)) ||
-        ((id == MONSTER_MEW && (gDungeon->unk644.unk34 == 1)))) {
+    if (!gDungeon->unk644.canRecruit) {
+        return FALSE;
+    }
+    else if (sub_808529C(id) == 0) {
+        return FALSE;
+    }
+    else if (id == MONSTER_MEW && gDungeon->unk644.unk34 == 1) {
         return FALSE;
     }
     else if (id == MONSTER_LATIAS)
