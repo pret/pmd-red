@@ -2,12 +2,6 @@
 
         .align 2,0
 
-	.global gUnknown_8106CF4
-gUnknown_8106CF4: @ 8106CF4
-        .byte 0x13, 0x00, 0x00, 0x00
-        .byte 0x11, 0x00, 0x00, 0x00
-        .byte 0x19, 0x00, 0x00, 0x00
-
 @ sub_8065FB4 - sub_8066358
         .string "pksdir0\0"
         .align 2,0

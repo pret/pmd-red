@@ -6,10 +6,10 @@ typedef struct Window
 {
     s16 x;
     s16 y;
-    s16 unk4;
-    s16 unk6;
+    s16 width;
+    s16 height;
     s16 unk8;
-    u32 unkC;
+    s32 type;
     u32 unk10;
     u32 unk14;
     u32 *unk18;
@@ -56,7 +56,9 @@ typedef struct WindowTemplate
 
 #define WINDOW_TYPE_0                   0
 #define WINDOW_TYPE_WITHOUT_BORDER      1
+#define WINDOW_TYPE_2                   2
 #define WINDOW_TYPE_NORMAL              3
+#define WINDOW_TYPE_4                   4
 #define WINDOW_TYPE_FILL_TRANSPARENT    5
 #define WINDOW_TYPE_WITH_HEADER         6
 #define WINDOW_TYPE_7                   7

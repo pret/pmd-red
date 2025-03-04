@@ -386,21 +386,20 @@ void sub_8012EBC(MenuStruct *param_1)
     const u32 *colorArray;
     s32 counter;
     s32 index;
-    WindowTemplates textStack;
+    WindowTemplates winTemplates;
     u8 buffer[256];
-    Window *ptr_text;
-    WindowTemplate *ptr_text2;
+    Window *window;
 
     if (param_1->unk4D) {
         sub_80073B8(param_1->index);
         index = param_1->index;
-        ptr_text = &gWindows[index];
+        window = &gWindows[index];
 
-        if (ptr_text->unkC == 6) {
-            ptr_text2 = &textStack.id[index];
-            RestoreUnkTextStruct_8006518(&textStack);
+        if (window->type == WINDOW_TYPE_WITH_HEADER) {
+            WindowTemplate *windowTemplate = &winTemplates.id[index];
+            RestoreUnkTextStruct_8006518(&winTemplates);
             x = sub_8008ED0(param_1->unk0);
-            PrintFormattedStringOnWindow(((ptr_text2->header->width * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
+            PrintFormattedStringOnWindow(((windowTemplate->header->width * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }
 
         colorArray = param_1->menuTextColorArray;
@@ -538,20 +537,18 @@ bool8 sub_8013114(MenuStruct *param_1, s32 *menuAction)
     return FALSE;
 }
 
-static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 index)
+static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 windowId)
 {
-    Window *temp;
+    Window *window = &gWindows[windowId];
 
-    temp = &gWindows[index];
-
-    param_1->unk0 = index;
+    param_1->unk0 = windowId;
     param_1->menuIndex = 0;
     param_1->unk1A = menuItemCounter;
     param_1->unk1C = menuItemCounter;
     param_1->unk1E = 0;
     param_1->unk4 = 0;
 
-    if (temp->unkC == 6)
+    if (window->type == WINDOW_TYPE_WITH_HEADER)
         param_1->firstEntryY = 16;
     else
         param_1->firstEntryY = 2;
@@ -798,12 +795,12 @@ void sub_80137B0(MenuInputStruct *param_1, s32 param_2)
         iVar2 = param_2 << 8;
     }
     else {
-        if (gWindows[param_1->unk0].unkC == 6)
+        if (gWindows[param_1->unk0].type == WINDOW_TYPE_WITH_HEADER)
             iVar1 = 16;
         else
             iVar1 = 0;
 
-        iVar2 = (gWindows[param_1->unk0].unk6 * 8 - iVar1) << 8;
+        iVar2 = (gWindows[param_1->unk0].height * 8 - iVar1) << 8;
     }
 
     param_1->unk10 = iVar2 / param_1->unk1C;
@@ -957,7 +954,7 @@ void sub_8013984(MenuInputStruct *param_1)
 
     param_1->unk4 = 0;
 
-    if (window->unkC == 6)
+    if (window->type== WINDOW_TYPE_WITH_HEADER)
         param_1->firstEntryY = 16;
     else
         param_1->firstEntryY = 0;
@@ -965,7 +962,7 @@ void sub_8013984(MenuInputStruct *param_1)
     if (param_1->unk20 < 2)
         param_1->unkC = 0;
     else
-        param_1->unkC = (window->x + window->unk4 - 2) * 8;
+        param_1->unkC = (window->x + window->width - 2) * 8;
 
     param_1->unkE = (window->y + 1) * 8 - 2;
 }

@@ -62,7 +62,7 @@ EWRAM_INIT void (*gIwramTextFunc4)(s32 a0) = sub_8272A78;
 EWRAM_INIT u8 gUnknown_203B090 = 0;
 
 static void ShowWindowsInternal(const WindowTemplates *a0, bool8 a1, bool8 a2, DungeonPos *a3);
-static void AddWindow(Window *a0, u32 *a1, u32 *a2, u16 *a3, u32 a4, const WindowTemplate *a5, bool8 a6, u32 a7, DungeonPos *a8, u8 a9);
+static void AddWindow(Window *windows, u32 *vram, u32 *a2, u16 *a3, u32 windowId, const WindowTemplate *winTemplate, bool8 a6, s32 firstBlockId, DungeonPos *positionModifier, u8 a9);
 static void sub_800677C(Window *a0, s32 a1, u16 *a2, u8 a3);
 static void sub_80069CC(Window *a0, s32 a1, s32 a2, s32 a3, u16 *a4);
 static void sub_8006AC4(Window *a0, s32 a1, s32 a2, s32 a3, u16 *a4);
@@ -182,7 +182,7 @@ void LoadCharmaps(void)
     sCharHeight[1] = 12;
 
     for (k = 0; k < 4; k++) {
-        gWindows[k].unk4 = 0;
+        gWindows[k].width = 0;
         gWindows[k].unk8 = 0;
         gWindows[k].unk46 = 0;
     }
@@ -282,9 +282,7 @@ void ShowWindows(const WindowTemplates *winTemplates, bool8 a1, bool8 a2)
 static void ShowWindowsInternal(const WindowTemplates *winTemplates, bool8 a1, bool8 a2, DungeonPos *positionModifier)
 {
     s32 i;
-    u32 r9;
-
-    r9 = 2;
+    s32 area = 2;
 
     if (winTemplates == NULL)
         winTemplates = &sDummyWindows;
@@ -297,9 +295,9 @@ static void ShowWindowsInternal(const WindowTemplates *winTemplates, bool8 a1, b
         sSavedWindows.id[i] = winTemplates->id[i];
 
         if (winTemplates->id[i].width != 0) {
-            AddWindow(gWindows, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], &winTemplates->id[i], a1, r9, positionModifier, 0);
+            AddWindow(gWindows, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], &winTemplates->id[i], a1, area, positionModifier, 0);
             sub_80089AC(&winTemplates->id[i], positionModifier);
-            r9 += winTemplates->id[i].width * winTemplates->id[i].unk10;
+            area += winTemplates->id[i].width * winTemplates->id[i].unk10;
         }
     }
 
@@ -332,90 +330,86 @@ u32 sub_8006544(u32 index)
     return gUnknown_80B8814[index];
 }
 
-// a1 is a VRAM pointer
-static void AddWindow(Window *windows, u32 *a1, u32 *a2, u16 *a3, u32 windowId, const WindowTemplate *winTemplate, bool8 a6, u32 a7, DungeonPos *positionModifier, u8 a9)
+static void AddWindow(Window *windows, u32 *vram, u32 *a2, u16 *a3, u32 windowId, const WindowTemplate *winTemplate, bool8 a6, s32 firstBlockId, DungeonPos *positionModifier, u8 a9)
 {
     Window *newWindow;
     s32 x, y;
-    s32 iVar6;
     s32 numI;
     u32 uVar1;
-
-    s32 temp;
-    s32 i, j;
 
     newWindow = &windows[windowId];
     x = winTemplate->pos.x + positionModifier->x;
     y =  winTemplate->pos.y + positionModifier->y;
     newWindow->x = x;
     newWindow->y = y;
-    newWindow->unk4 = winTemplate->width;
+    newWindow->width = winTemplate->width;
     newWindow->unk8 = winTemplate->unk10;
-    newWindow->unk6 = winTemplate->height;
-    newWindow->unkC = winTemplate->type;
-    newWindow->unk10 = a7;
+    newWindow->height = winTemplate->height;
+    newWindow->type = winTemplate->type;
+    newWindow->unk10 = firstBlockId;
 
-    if (newWindow->unkC == 6)
-        newWindow->unk14 = a7;
+    if (newWindow->type == WINDOW_TYPE_WITH_HEADER)
+        newWindow->unk14 = firstBlockId;
     else
-        newWindow->unk14 = a7 + winTemplate->unk12 * newWindow->unk4;
+        newWindow->unk14 = firstBlockId + winTemplate->unk12 * newWindow->width;
 
     newWindow->unk18 = &a2[newWindow->unk10 * 8];
     newWindow->unk1C = &a2[newWindow->unk14 * 8];
     newWindow->unk24 = winTemplate->unk12;
-    newWindow->unk28 = &a1[newWindow->unk14 * 8];
+    newWindow->unk28 = &vram[newWindow->unk14 * 8];
 
-    if (newWindow->unkC == 6)
-        newWindow->unk2C = newWindow->unk4 * (newWindow->unk6 + winTemplate->unk12) * 32;
+    if (newWindow->type == WINDOW_TYPE_WITH_HEADER)
+        newWindow->unk2C = newWindow->width * (newWindow->height + winTemplate->unk12) * 32;
     else
-        newWindow->unk2C = newWindow->unk4 * newWindow->unk6 * 32;
+        newWindow->unk2C = newWindow->width * newWindow->height * 32;
 
     newWindow->unk30 = 0;
     newWindow->unk34 = 0;
     newWindow->unk38 = 0;
-    newWindow->unk20 = (newWindow->unk4 * 8) - 8;
-    newWindow->unk45 = newWindow->unkC == 0;
+    newWindow->unk20 = (newWindow->width * 8) - 8;
+    newWindow->unk45 = newWindow->type == WINDOW_TYPE_0;
 
     if (newWindow->unk8 == 0)
         return;
 
     if ((winTemplate->unk0 & 0xA0) != 0x80) {
-        temp = y - 1;
+        s32 newY = y - 1;
+        s32 i, j;
 
-        if (newWindow->unkC == 6) {
+        if (newWindow->type == WINDOW_TYPE_WITH_HEADER) {
             uVar1 = a6 ? newWindow->unk14 : 0;
 
-            sub_8006E94(newWindow, temp, uVar1, winTemplate->header, a3);
+            sub_8006E94(newWindow, newY, uVar1, winTemplate->header, a3);
 
-            temp = y + 2;
-            uVar1 = a6 ? newWindow->unk14 + newWindow->unk4 * (winTemplate->unk12 + 2) : 0;
-            numI = newWindow->unk6 - 2;
+            newY = y + 2;
+            uVar1 = a6 ? newWindow->unk14 + newWindow->width * (winTemplate->unk12 + 2) : 0;
+            numI = newWindow->height - 2;
         }
         else {
-            sub_800677C(newWindow, temp, a3, a9);
+            sub_800677C(newWindow, newY, a3, a9);
 
-            temp = y;
+            newY = y;
             uVar1 = a6 ? newWindow->unk14 : 0;
-            numI = newWindow->unk6;
+            numI = newWindow->height;
         }
 
         for (i = 0; i < numI; i++) {
-            iVar6 = x - 1;
-            sub_80069CC(newWindow, iVar6, temp, i, a3);
-            iVar6 = x;
+            s32 newX = x - 1;
+            sub_80069CC(newWindow, newX, newY, i, a3);
+            newX = x;
 
-            for (j = 0; j < newWindow->unk4; j++) {
-                sub_8006AC4(newWindow, iVar6, temp, uVar1, a3);
+            for (j = 0; j < newWindow->width; j++) {
+                sub_8006AC4(newWindow, newX, newY, uVar1, a3);
 
-                iVar6++;
+                newX++;
                 if (a6)
                     uVar1++;
             }
 
-            sub_8006B70(newWindow, iVar6, temp, i, a3);
-            temp++;
+            sub_8006B70(newWindow, newX, newY, i, a3);
+            newY++;
         }
-        sub_8006C44(newWindow, temp, a3, a9);
+        sub_8006C44(newWindow, newY, a3, a9);
     }
 
     if ((winTemplate->unk0 & 0x80) == 0)
@@ -436,20 +430,20 @@ static void sub_800677C(Window *window, s32 a1, u16 *a2, u8 a3)
     if (a1 < 0)
         return;
 
-    switch (window->unkC) {
-        case 0:
-        case 1:
-        case 2:
-        case 6:
+    switch (window->type) {
+        case WINDOW_TYPE_0:
+        case WINDOW_TYPE_WITHOUT_BORDER:
+        case WINDOW_TYPE_2:
+        case WINDOW_TYPE_WITH_HEADER:
             break;
-        case 3:
+        case WINDOW_TYPE_NORMAL:
             (a2 + a1 * 0x20)[iVar5] = 0xF2D8;
             if (a3 != 0)
                 (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF293;
             else
                 (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
             iVar5++;
-            for (i = 0; i < window->unk4; i++) {
+            for (i = 0; i < window->width; i++) {
                 (a2 + a1 * 0x20)[iVar5] = 0xF2D9;
                 (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
                 iVar5++;
@@ -461,11 +455,11 @@ static void sub_800677C(Window *window, s32 a1, u16 *a2, u8 a3)
             else
                 (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
             break;
-        case 4:
+        case WINDOW_TYPE_4:
             (a2 + a1 * 0x20)[iVar5] = 0xF2E8;
             (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
             iVar5++;
-            for (i = 0; i < window->unk4; i++) {
+            for (i = 0; i < window->width; i++) {
                 (a2 + a1 * 0x20)[iVar5] = 0xF2E9;
                 (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
                 iVar5++;
@@ -474,20 +468,20 @@ static void sub_800677C(Window *window, s32 a1, u16 *a2, u8 a3)
             (a2 + a1 * 0x20)[iVar5] = 0xF6E8;
             (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
             break;
-        case 5:
+        case WINDOW_TYPE_FILL_TRANSPARENT:
             (a2 + a1 * 0x20)[iVar5] = 0xF2DC;
             iVar5++;
-            for (i = 0; i < window->unk4; i++) {
+            for (i = 0; i < window->width; i++) {
                 (a2 + a1 * 0x20)[iVar5] = 0xF2DD;
                 iVar5++;
             }
 
             (a2 + a1 * 0x20)[iVar5] = 0xF6DC;
             break;
-        case 7:
+        case WINDOW_TYPE_7:
            (a2 + a1 * 0x20)[iVar5] = 0xF293;
             iVar5++;
-            for (i = 0; i < window->unk4; i++) {
+            for (i = 0; i < window->width; i++) {
                 (a2 + a1 * 0x20)[iVar5] = 0xF297;
                 iVar5++;
             }
@@ -504,35 +498,35 @@ static void sub_80069CC(Window *window, s32 a1, s32 a2, s32 a3, u16 *a4)
     if (a2 < 0)
         return;
 
-    switch (window->unkC) {
-        case 1:
-        case 2:
+    switch (window->type) {
+        case WINDOW_TYPE_WITHOUT_BORDER:
+        case WINDOW_TYPE_2:
             break;
-        case 0:
+        case WINDOW_TYPE_0:
             if (a3 == 0) {
                 (a4 + a2 * 0x20)[a1] = 0xF297;
                 (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
                 break;
             }
-            if (a3 == window->unk6 - 1) {
+            if (a3 == window->height - 1) {
                 (a4 + a2 * 0x20)[a1] = 0xFA97;
                 (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
                 break;
             }
             // Fallthrough
-        case 3:
-        case 6:
+        case WINDOW_TYPE_NORMAL:
+        case WINDOW_TYPE_WITH_HEADER:
             (a4 + a2 * 0x20)[a1] = 0xF2DA;
             (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
             break;
-        case 4:
+        case WINDOW_TYPE_4:
             (a4 + a2 * 0x20)[a1] = 0xF2EA;
             (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
             break;
-        case 5:
+        case WINDOW_TYPE_FILL_TRANSPARENT:
             (a4 + a2 * 0x20)[a1] = 0xF2DE;
             break;
-        case 7:
+        case WINDOW_TYPE_7:
             (a4 + a2 * 0x20)[a1] = 0xF2B6;
             break;
     }
@@ -545,21 +539,21 @@ static void sub_8006AC4(Window *window, s32 a1, s32 a2, s32 a3, u16 *a4)
     if (a2 < 0)
         return;
 
-    switch (window->unkC) {
-        case 2:
+    switch (window->type) {
+        case WINDOW_TYPE_2:
             (a4 + a2 * 0x20)[a1] = a3 | 0xF000;
             (a4 + a2 * 0x20)[a1 + 0x400] = 0xF278;
             break;
-        case 0:
-        case 1:
-        case 3:
-        case 4:
-        case 6:
+        case WINDOW_TYPE_0:
+        case WINDOW_TYPE_WITHOUT_BORDER:
+        case WINDOW_TYPE_NORMAL:
+        case WINDOW_TYPE_4:
+        case WINDOW_TYPE_WITH_HEADER:
             (a4 + a2 * 0x20)[a1] = a3 | 0xF000;
             (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
             break;
-        case 5:
-        case 7:
+        case WINDOW_TYPE_FILL_TRANSPARENT:
+        case WINDOW_TYPE_7:
             (a4 + a2 * 0x20)[a1] = a3 | 0xF000;
             break;
     }
@@ -572,35 +566,35 @@ static void sub_8006B70(Window *window, s32 a1, s32 a2, s32 a3, u16 *a4)
     if (a2 < 0)
         return;
 
-    switch (window->unkC) {
-        case 1:
-        case 2:
+    switch (window->type) {
+        case WINDOW_TYPE_WITHOUT_BORDER:
+        case WINDOW_TYPE_2:
             break;
-        case 0:
+        case WINDOW_TYPE_0:
             if (a3 == 0) {
                 (a4 + a2 * 0x20)[a1] = 0xF697;
                 (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
                 break;
             }
-            if (a3 == window->unk6 - 1) {
+            if (a3 == window->height - 1) {
                 (a4 + a2 * 0x20)[a1] = 0xFE97;
                 (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
                 break;
             }
             // Fallthrough
-        case 3:
-        case 6:
+        case WINDOW_TYPE_NORMAL:
+        case WINDOW_TYPE_WITH_HEADER:
             (a4 + a2 * 0x20)[a1] = 0xF6DA;
             (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
             break;
-        case 4:
+        case WINDOW_TYPE_4:
             (a4 + a2 * 0x20)[a1] = 0xF6EA;
             (a4 + a2 * 0x20)[a1 + 0x400] = 0xF2DB;
             break;
-        case 5:
+        case WINDOW_TYPE_FILL_TRANSPARENT:
             (a4 + a2 * 0x20)[a1] = 0xF6DE;
             break;
-        case 7:
+        case WINDOW_TYPE_7:
             (a4 + a2 * 0x20)[a1] = 0xF6B6;
             break;
     }
@@ -618,20 +612,20 @@ static void sub_8006C44(Window *window, s32 a1, u16 *a2, u8 a3)
     if (a1 < 0)
         return;
 
-    switch (window->unkC) {
-        case 0:
-        case 1:
-        case 2:
+    switch (window->type) {
+        case WINDOW_TYPE_0:
+        case WINDOW_TYPE_WITHOUT_BORDER:
+        case WINDOW_TYPE_2:
             break;
-        case 3:
-        case 6:
+        case WINDOW_TYPE_NORMAL:
+        case WINDOW_TYPE_WITH_HEADER:
             (a2 + a1 * 0x20)[iVar5] = 0xFAD8;
             if (a3 != 0)
                 (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xFA93;
             else
                 (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
             iVar5++;
-            for (i = 0; i < window->unk4; i++) {
+            for (i = 0; i < window->width; i++) {
                 (a2 + a1 * 0x20)[iVar5] = 0xFAD9;
                 (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
                 iVar5++;
@@ -643,11 +637,11 @@ static void sub_8006C44(Window *window, s32 a1, u16 *a2, u8 a3)
             else
                 (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
             break;
-        case 4:
+        case WINDOW_TYPE_4:
             (a2 + a1 * 0x20)[iVar5] = 0xFAE8;
             (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
             iVar5++;
-            for (i = 0; i < window->unk4; i++) {
+            for (i = 0; i < window->width; i++) {
                 (a2 + a1 * 0x20)[iVar5] = 0xFAE9;
                 (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
                 iVar5++;
@@ -656,20 +650,20 @@ static void sub_8006C44(Window *window, s32 a1, u16 *a2, u8 a3)
             (a2 + a1 * 0x20)[iVar5] = 0xFEE8;
             (a2 + a1 * 0x20)[iVar5 + 0x400] = 0xF2DB;
             break;
-        case 5:
+        case WINDOW_TYPE_FILL_TRANSPARENT:
             (a2 + a1 * 0x20)[iVar5] = 0xFADC;
             iVar5++;
-            for (i = 0; i < window->unk4; i++) {
+            for (i = 0; i < window->width; i++) {
                 (a2 + a1 * 0x20)[iVar5] = 0xFADD;
                 iVar5++;
             }
 
             (a2 + a1 * 0x20)[iVar5] = 0xFEDC;
             break;
-        case 7:
+        case WINDOW_TYPE_7:
            (a2 + a1 * 0x20)[iVar5] = 0xFA93;
             iVar5++;
-            for (i = 0; i < window->unk4; i++) {
+            for (i = 0; i < window->width; i++) {
                 (a2 + a1 * 0x20)[iVar5] = 0xFA97;
                 iVar5++;
             }
@@ -1466,9 +1460,9 @@ void sub_8007334(s32 windowId)
     struct Window *window = &gWindows[windowId];
     s32 r5 = window->unk14;
     s32 r6 = window->y;
-    for (i = 0; i < window->unk6; i++) {
+    for (i = 0; i < window->height; i++) {
         s32 id = window->x;
-        for (j = 0; j < window->unk4; j++) {
+        for (j = 0; j < window->width; j++) {
             gUnknown_202B038[0][r6][id] &= ~0x3ff;
             gUnknown_202B038[0][r6][id] |= r5;
             id++;
@@ -1482,40 +1476,36 @@ UNUSED static void nullsub_154(void)
 {
 }
 
-void sub_80073B8(s32 a0)
+void sub_80073B8(s32 windowId)
 {
-    Window *r1;
+    Window *window = &gWindows[windowId];
 
-    r1 = &gWindows[a0];
-
-    r1->unk3C = &r1->unk1C[(u32)r1->unk2C >> 2];
-    r1->unk40 = r1->unk1C;
-    r1->unk46 = 1;
+    window->unk3C = &window->unk1C[(u32)window->unk2C >> 2];
+    window->unk40 = window->unk1C;
+    window->unk46 = 1;
 }
 
 UNUSED static void nullsub_155(void)
 {
 }
 
-void sub_80073E0(s32 a0)
+void sub_80073E0(s32 windowId)
 {
-    Window *r1;
+    Window *window = &gWindows[windowId];
 
-    r1 = &gWindows[a0];
+    if (window->unk44 == 0) {
+        window->unk30 = &window->unk28[window->unk3C - window->unk1C];
+        window->unk34 = window->unk3C;
+        window->unk38 = (window->unk40 - window->unk3C + 1) * 4;
 
-    if (r1->unk44 == 0) {
-        r1->unk30 = &r1->unk28[r1->unk3C - r1->unk1C];
-        r1->unk34 = r1->unk3C;
-        r1->unk38 = (r1->unk40 - r1->unk3C + 1) * 4;
+        if (window->unk38 >= window->unk2C)
+            window->unk38 = window->unk2C;
 
-        if (r1->unk38 >= r1->unk2C)
-            r1->unk38 = r1->unk2C;
-
-        if (r1->unk38 < 0)
-            r1->unk38 = 0;
+        if (window->unk38 < 0)
+            window->unk38 = 0;
     }
 
-    r1->unk46 = 0;
+    window->unk46 = 0;
 }
 
 UNUSED static void nullsub_156(void)
@@ -1532,7 +1522,7 @@ UNUSED static bool8 sub_8007464(void)
     return FALSE;
 }
 
-static u32 xxx_draw_char(struct Window *a0, s32 x, s32 y, u32 a3, u32 color, u32 a5)
+static u32 xxx_draw_char(struct Window *windows, s32 x, s32 y, u32 a3, u32 color, u32 windowId)
 {
     u32 *r3;
     const struct unkShiftData *shiftData;
@@ -1542,7 +1532,7 @@ static u32 xxx_draw_char(struct Window *a0, s32 x, s32 y, u32 a3, u32 color, u32
     const u16 *local_3c;
     s32 i;
     s32 xDiv8, yDiv8;
-    struct Window *r5 = &a0[a5];
+    struct Window *window = &windows[windowId];
     s32 sp18 = gUnknown_80B853C[color & 0xF];
     u8 var_2C;
     u32 r4;
@@ -1569,47 +1559,47 @@ static u32 xxx_draw_char(struct Window *a0, s32 x, s32 y, u32 a3, u32 color, u32
     }
 
     if (sp0->unkA & 1) {
-        r3 = r5->unk18 + ((((y / 8) * r5->unk4) + (x / 8)) * 8);
+        r3 = window->unk18 + ((((y / 8) * window->width) + (x / 8)) * 8);
         r3 += y - (y / 8 * 8);
         shiftData = &gCharMasksOffsets[x - ((x / 8) * 8)];
         xDiv8 = x / 8;
         yDiv8 = y / 8;
 
-        if (yDiv8 < r5->unk8) {
+        if (yDiv8 < window->unk8) {
             for (i = 0; i < sCharHeight[sCurrentCharmap]; i++) {
                 r2 = (local_44[1] << 0x10) | (local_44[0]);
                 if (r2 != 0) {
-                    if (xDiv8 < r5->unk4) {
+                    if (xDiv8 < window->width) {
                         *r3 |= (shiftData->bytesA & r2) << shiftData->shift_left;
-                        if (r5->unk3C > r3)
-                            r5->unk3C = r3;
-                        if (r5->unk40 < r3)
-                            r5->unk40 = r3;
+                        if (window->unk3C > r3)
+                            window->unk3C = r3;
+                        if (window->unk40 < r3)
+                            window->unk40 = r3;
                     }
-                    if (xDiv8 < r5->unk4 - 1) {
+                    if (xDiv8 < window->width - 1) {
                         r3 += 8;
                         r2 &= shiftData->bytesB;
                         *r3 |= (r2) >> shiftData->shift_right;
-                        if (r5->unk40 < r3)
-                            r5->unk40 = r3;
+                        if (window->unk40 < r3)
+                            window->unk40 = r3;
                         r3 -= 8;
                     }
                 }
 
                 r2 = local_44[2];
                 if (r2 != 0) {
-                    if (xDiv8 < r5->unk4 - 1) {
+                    if (xDiv8 < window->width - 1) {
                         r3 += 8;
                         *r3 |= (r2 & shiftData->bytesA) << shiftData->shift_left;
-                        if (r5->unk40 < r3)
-                            r5->unk40 = r3;
+                        if (window->unk40 < r3)
+                            window->unk40 = r3;
                         r3 -= 8;
                     }
-                    if (xDiv8 < r5->unk4 - 2) {
+                    if (xDiv8 < window->width - 2) {
                         r3 += 16;
                         *r3 |= (r2 & shiftData->bytesB) >> shiftData->shift_right;
-                        if (r5->unk40 < r3)
-                            r5->unk40 = r3;
+                        if (window->unk40 < r3)
+                            window->unk40 = r3;
                         r3 -= 16;
                     }
                 }
@@ -1618,9 +1608,9 @@ static u32 xxx_draw_char(struct Window *a0, s32 x, s32 y, u32 a3, u32 color, u32
                 r3++;
                 y++;
                 if (y % 8 == 0) {
-                    r3 += r5->unk20;
+                    r3 += window->unk20;
                     yDiv8++;
-                    if (yDiv8 >= r5->unk8)
+                    if (yDiv8 >= window->unk8)
                         break;
                 }
             }
@@ -1630,13 +1620,13 @@ static u32 xxx_draw_char(struct Window *a0, s32 x, s32 y, u32 a3, u32 color, u32
         bool8 notFirstIteration = FALSE;
         u32 r1;
 
-        r3 = r5->unk18 + ((((y / 8) * r5->unk4) + (x / 8)) * 8);
+        r3 = window->unk18 + ((((y / 8) * window->width) + (x / 8)) * 8);
         r3 += y - (y / 8 * 8);
         shiftData = &gCharMasksOffsets[x - ((x / 8) * 8)];
         xDiv8 = x / 8;
         yDiv8 = y / 8;
 
-        if (yDiv8 < r5->unk8) {
+        if (yDiv8 < window->unk8) {
             for (i = 0; i < sCharHeight[sCurrentCharmap]; i++) {
                 r4 = (local_44[1] << 0x10) | (local_44[0]);
                 r2 = (0x11111111 & r4) + (sp18 & r4);
@@ -1655,18 +1645,18 @@ static u32 xxx_draw_char(struct Window *a0, s32 x, s32 y, u32 a3, u32 color, u32
                 }
 
                 if (r2 != 0) {
-                    if (xDiv8 < r5->unk4) {
+                    if (xDiv8 < window->width) {
                         *r3 |= (r2 & shiftData->bytesA) << shiftData->shift_left;
-                        if (r5->unk3C > r3)
-                            r5->unk3C = r3;
-                        if (r5->unk40 < r3)
-                            r5->unk40 = r3;
+                        if (window->unk3C > r3)
+                            window->unk3C = r3;
+                        if (window->unk40 < r3)
+                            window->unk40 = r3;
                     }
-                    if (xDiv8 < r5->unk4 - 1) {
+                    if (xDiv8 < window->width - 1) {
                         r3 += 8;
                         *r3 |= (r2 & shiftData->bytesB) >> shiftData->shift_right;
-                        if (r5->unk40 < r3)
-                            r5->unk40 = r3;
+                        if (window->unk40 < r3)
+                            window->unk40 = r3;
                         r3 -= 8;
                     }
                 }
@@ -1688,18 +1678,18 @@ static u32 xxx_draw_char(struct Window *a0, s32 x, s32 y, u32 a3, u32 color, u32
                 }
 
                 if (r2 != 0) {
-                    if (xDiv8 < r5->unk4 - 1) {
+                    if (xDiv8 < window->width - 1) {
                         r3 += 8;
                         *r3 |= (r2 & shiftData->bytesA) << shiftData->shift_left;
-                        if (r5->unk40 < r3)
-                            r5->unk40 = r3;
+                        if (window->unk40 < r3)
+                            window->unk40 = r3;
                         r3 -= 8;
                     }
-                    if (xDiv8 < r5->unk4 - 2) {
+                    if (xDiv8 < window->width - 2) {
                         r3 += 16;
                         *r3 |= (r2 & shiftData->bytesB) >> shiftData->shift_right;
-                        if (r5->unk40 < r3)
-                            r5->unk40 = r3;
+                        if (window->unk40 < r3)
+                            window->unk40 = r3;
                         r3 -= 16;
                     }
                 }
@@ -1711,9 +1701,9 @@ static u32 xxx_draw_char(struct Window *a0, s32 x, s32 y, u32 a3, u32 color, u32
                 r3++;
                 y++;
                 if (y % 8 == 0) {
-                    r3 += r5->unk20;
+                    r3 += window->unk20;
                     yDiv8++;
-                    if (yDiv8 >= r5->unk8)
+                    if (yDiv8 >= window->unk8)
                         break;
                 }
             }
@@ -1759,7 +1749,7 @@ static void AddUnderScoreHighlightInternal(Window *windows, u32 windowId, s32 x,
 
     r4 = y / 8;
 
-    dest = window->unk18 + (((window->unk4 * r4) + (x / 8)) * 8);
+    dest = window->unk18 + (((window->width * r4) + (x / 8)) * 8);
     dest += (r4 * -8) + y;
     r6 = x / 8;
 
@@ -1780,7 +1770,7 @@ static void AddUnderScoreHighlightInternal(Window *windows, u32 windowId, s32 x,
             uVar4 = (uVar4 & 0x11111111) + (uVar4 & r9);
 
             if (uVar4 != 0) {
-                if (r6 < window->unk4) {
+                if (r6 < window->width) {
                     dest[0] |= (shiftData->bytesA & uVar4) << shiftData->shift_left;
 
                     if (window->unk3C > dest)
@@ -1789,7 +1779,7 @@ static void AddUnderScoreHighlightInternal(Window *windows, u32 windowId, s32 x,
                         window->unk40 = dest;
                 }
 
-                if (r6 < window->unk4 - 1) {
+                if (r6 < window->width - 1) {
                     dest += 8;
                     dest[0] |= (uVar4 & shiftData->bytesB) >> shiftData->shift_right;
 
@@ -1814,40 +1804,40 @@ UNUSED static void nullsub_157(void)
 {
 }
 
-static void sub_8007AA4(struct Window *a0, u32 a1, s32 x, s32 y, s32 a4, u32 color)
+static void sub_8007AA4(struct Window *windows, u32 windowId, s32 x, s32 y, s32 a4, u32 color)
 {
-    struct Window *r4 = &a0[a1];
+    struct Window *window = &windows[windowId];
     u32 ip = gUnknown_80B853C[color & 0xF] + 0x11111111;
     const u32 unkBits[] = {0xF, 0xF0, 0xF00, 0xF000, 0xF0000, 0xF00000, 0xF000000, 0xF0000000};
     s32 r3 = y / 8;
-    u32 *dest = r4->unk18 + ((r4->unk4 * r3 + x / 8) * 8);
+    u32 *dest = window->unk18 + ((window->width * r3 + x / 8) * 8);
     s32 r2 = x / 8;
 
     dest += r3 * -8 + y;
     ip &= unkBits[x & 7];
 
-    if (r2 < r4->unk4) {
+    if (r2 < window->width) {
         // This goto looks like a fakematch, but I couldn't get it to work otherwise.
         goto LOOP_MIDDLE;
         while (1) {
             y++;
             dest++;
             if ((y % 8) == 0)
-                dest += r4->unk20;
+                dest += window->unk20;
             a4--;
 
         LOOP_MIDDLE:
             if (a4 <= 0)
                 return;
-            if (r3 >= r4->unk8)
+            if (r3 >= window->unk8)
                 return;
 
             dest[0] |= ip;
 
-            if (r4->unk3C > dest)
-                r4->unk3C = dest;
-            if (r4->unk40 < dest)
-                r4->unk40 = dest;
+            if (window->unk3C > dest)
+                window->unk3C = dest;
+            if (window->unk40 < dest)
+                window->unk40 = dest;
         }
     }
 }
@@ -2293,14 +2283,14 @@ static void sub_8007E64(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 
     a6 /= 8;
     a8 *= 4096;
     if (a4 < window->unk8) {
-        s32 id = (window->unk4 * a4) + a3;
+        s32 id = (window->width * a4) + a3;
         u32 *unk18Ptr = &window->unk18[id * 8];
 
         for (i = 0; i < a6; i++) {
             s32 xMaybe = a3;
             u32 *loopUnk18Ptr = unk18Ptr;
             for (j = 0; j < a5; j++) {
-                if (xMaybe < window->unk4) {
+                if (xMaybe < window->width) {
                     if (window->unk3C > loopUnk18Ptr) {
                         window->unk3C = loopUnk18Ptr;
                     }
@@ -2371,14 +2361,14 @@ static void sub_8008030(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 
     a6 /= 8;
     a8 *= 4096;
     if (a4 < window->unk8) {
-        u32 *unk18Ptr = &window->unk18[((window->unk4 * a4) + (a3 + a5)) * 8];
+        u32 *unk18Ptr = &window->unk18[((window->width * a4) + (a3 + a5)) * 8];
         for (i = 0; i < a6; i++) {
             s32 xMaybe = a3 + a5;
             u32 *loopUnk18Ptr = unk18Ptr;
             for (j = 0; j < a5; j++) {
                 xMaybe--;
                 loopUnk18Ptr -= 8;
-                if (xMaybe < window->unk4) {
+                if (xMaybe < window->width) {
                     if (window->unk3C > loopUnk18Ptr) {
                         window->unk3C = loopUnk18Ptr;
                     }
@@ -2421,14 +2411,14 @@ UNUSED static void sub_80081A4(s32 a0, s32 a3, s32 a4, s32 a7Id)
     a5 = 2;
     a6 = 2;
     if (a4 < window->unk8) {
-        s32 id = (window->unk4 * a4) + a3;
+        s32 id = (window->width * a4) + a3;
         u32 *unk18Ptr = &window->unk28[id * 8];
 
         for (i = 0; i < a6; i++) {
             s32 xMaybe = a3;
             u32 *loopUnk18Ptr = unk18Ptr;
             for (j = 0; j < a5; j++) {
-                if (xMaybe < window->unk4) {
+                if (xMaybe < window->width) {
                     *(loopUnk18Ptr++) = *(a7++);
                     *(loopUnk18Ptr++) = *(a7++);
                     *(loopUnk18Ptr++) = *(a7++);
@@ -2469,9 +2459,9 @@ static void DisplayMonPortrait(Window *a0, u16 a1[32][32], s32 a2, const u8 *com
     Window *window = &a0[a2];
 
     a4 *= 4096;
-    DecompressAT((u8 *)window->unk18, (window->unk4 * 32) * window->unk8, compressedData);
+    DecompressAT((u8 *)window->unk18, (window->width * 32) * window->unk8, compressedData);
     for (i = 0; i < window->unk8; i++) {
-        for (j = 0; j < window->unk4; j++) {
+        for (j = 0; j < window->width; j++) {
             a1[window->y + i][window->x + j] &= 0xFFF;
             a1[window->y + i][window->x + j] |= a4;
         }
@@ -2515,23 +2505,23 @@ UNUSED static void nullsub_163(void)
 {
 }
 
-static void DisplayMonPortraitFlipped(Window *a0, s32 a1, const u8 *compressedData, s32 a3)
+static void DisplayMonPortraitFlipped(Window *windows, s32 windowId, const u8 *compressedData, s32 a3)
 {
     s32 i, j;
-    Window *strPtr = &a0[a1];
+    Window *window = &windows[windowId];
 
-    DisplayMonPortraitSprite(a1, compressedData, a3);
-    for (i = 0; i < strPtr->unk8; i++) {
-        s32 r8 = strPtr->unk4 / 2;
-        if (strPtr->unk4 & 1)
+    DisplayMonPortraitSprite(windowId, compressedData, a3);
+    for (i = 0; i < window->unk8; i++) {
+        s32 r8 = window->width / 2;
+        if (window->width & 1)
             r8++;
         for (j = 0; j < r8; j++) {
             u32 *r4, *r5;
-            s32 unk4Mul = strPtr->unk4 * i;
+            s32 unk4Mul = window->width * i;
 
-            r4 = &strPtr->unk18[(unk4Mul + j) * 8];
+            r4 = &window->unk18[(unk4Mul + j) * 8];
             unk4Mul--;
-            r5 = &strPtr->unk18[(unk4Mul + (strPtr->unk4 - j)) * 8];
+            r5 = &window->unk18[(unk4Mul + (window->width - j)) * 8];
 
             sub_8008334(r4++, r5++);
             sub_8008334(r4++, r5++);
@@ -2569,7 +2559,7 @@ static void sub_80084A4(Window *a0, u16 a1[32][32], u32 a2, s32 a3, s32 a4, s32 
         for (i = 0; i < a6; i++) {
             s32 xMaybe = a3;
             for (j = 0; j < a5; j++) {
-                if (xMaybe < window->unk4) {
+                if (xMaybe < window->width) {
                     a1[window->y + a4][window->x + xMaybe] &= 0xFFF;
                     a1[window->y + a4][window->x + xMaybe] |= a8;
                 }
@@ -2683,11 +2673,11 @@ static const u32 gUnknown_80B8868[] =
     0xFFF00000, 0xFF000000, 0xF0000000
 };
 
-UNUSED static void sub_80086C8(Window *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
+UNUSED static void sub_80086C8(Window *windows, s32 windowId, s32 a2, s32 a3, s32 a4, s32 a5)
 {
     u32 *r5;
     s32 r2, r0, r1;
-    Window *strPtr = &a0[a1];
+    Window *window = &windows[windowId];
 
     if (a2 < 0) {
         a4 += a2;
@@ -2698,17 +2688,17 @@ UNUSED static void sub_80086C8(Window *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a
         a3 = 0;
     }
 
-    if (a4 + a2 > strPtr->unk4 * 8) {
-        a4 = (strPtr->unk4 * 8) - a2;
+    if (a4 + a2 > window->width * 8) {
+        a4 = (window->width * 8) - a2;
     }
-    if (a3 + a5 > strPtr->unk8 * 8) {
-        a5 = (strPtr->unk8 * 8) - a3;
+    if (a3 + a5 > window->unk8 * 8) {
+        a5 = (window->unk8 * 8) - a3;
     }
 
-    r2 = strPtr->unk4 * (a3 / 8);
+    r2 = window->width * (a3 / 8);
     r0 = 8 * (r2 + (a2 / 8));
     r1 = a3 - ((a3 / 8) * 8);
-    r5 = &strPtr->unk18[r0 + r1];
+    r5 = &window->unk18[r0 + r1];
     while (a5 > 0) {
         u32 *loopPtr;
         s32 r4, r6;
@@ -2716,8 +2706,8 @@ UNUSED static void sub_80086C8(Window *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a
         loopPtr = r5;
         r4 = a4;
         r6 = a2;
-        if (strPtr->unk3C > r5) {
-            strPtr->unk3C = r5;
+        if (window->unk3C > r5) {
+            window->unk3C = r5;
         }
 
         while (r4 > 0) {
@@ -2741,12 +2731,12 @@ UNUSED static void sub_80086C8(Window *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a
         }
         a5--;
         a3++;
-        if (strPtr->unk40 < r5) {
-            strPtr->unk40 = r5;
+        if (window->unk40 < r5) {
+            window->unk40 = r5;
         }
         r5++;
         if (!(a3 & 7)) {
-            r5 = &r5[strPtr->unk20];
+            r5 = &r5[window->unk20];
         }
     }
 }
@@ -2760,18 +2750,18 @@ UNUSED static void nullsub_176(void)
 {
 }
 
-static void sub_8008818(Window *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
+static void sub_8008818(Window *windows, s32 windowId, s32 a2, s32 a3, s32 a4, s32 a5)
 {
     s32 i, j;
-    Window *strPtr = &a0[a1];
+    Window *window = &windows[windowId];
     s32 a2Div = a2 / 8;
     s32 a3Div = a3 / 8;
 
     for (i = 0; i < a5; i += 8) {
-        u32 *ptr = &strPtr->unk18[((strPtr->unk4 * a3Div) + a2Div) * 8];
+        u32 *ptr = &window->unk18[((window->width * a3Div) + a2Div) * 8];
         for (j = 0; j < a4; j += 8) {
-            if (strPtr->unk3C > ptr) {
-                strPtr->unk3C = ptr;
+            if (window->unk3C > ptr) {
+                window->unk3C = ptr;
             }
             *(ptr++) = 0;
             *(ptr++) = 0;
@@ -2781,8 +2771,8 @@ static void sub_8008818(Window *a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5)
             *(ptr++) = 0;
             *(ptr++) = 0;
             *ptr = 0;
-            if (strPtr->unk40 < ptr) {
-                strPtr->unk40 = ptr;
+            if (window->unk40 < ptr) {
+                window->unk40 = ptr;
             }
             ptr++;
         }
@@ -2801,28 +2791,28 @@ bool8 xxx_call_update_bg_vram(void)
     return ret;
 }
 
-static bool8 xxx_update_bg_vram(Window *a0)
+static bool8 xxx_update_bg_vram(Window *windows)
 {
     s32 i, j;
     u32 r5;
     bool8 ret = FALSE;
 
-    for (i = 0; i < 4; i++) {
-        Window *strPtr = &a0[i];
-        if (strPtr->unk4 == 0)
+    for (i = 0; i < MAX_WINDOWS; i++) {
+        Window *window = &windows[i];
+        if (window->width == 0)
             continue;
-        r5 = strPtr->unk38;
+        r5 = window->unk38;
         if (r5 == 0)
             continue;
 
-        if (strPtr->unk45) {
+        if (window->unk45) {
             u32 *r2, *r1;
 
-            CpuCopy(strPtr->unk28, strPtr->unk18, 0xD00);
+            CpuCopy(window->unk28, window->unk18, 0xD00);
             // The reason for void casts is because we want to add 0xD00/r5 directly to pointers. Because pointers are u32, without the casts, it would multiply the value by 4.
-            r2 = (void *)(strPtr->unk18) + 0xD00;
-            r1 = (void *)(strPtr->unk28) + 0xD00;
-            for (j = 0; j < strPtr->unk4; j++) {
+            r2 = (void *)(window->unk18) + 0xD00;
+            r1 = (void *)(window->unk28) + 0xD00;
+            for (j = 0; j < window->width; j++) {
                 *(r1++) = *(r2++);
                 *(r1++) = *(r2++);
                 *(r1++) = *(r2++);
@@ -2833,17 +2823,17 @@ static bool8 xxx_update_bg_vram(Window *a0)
                 *(r1++) = 0xFFFFFFFF;
                 r2 += 3;
             }
-            strPtr->unk38 = 0;
+            window->unk38 = 0;
         }
         else {
-            CpuCopy(strPtr->unk30, strPtr->unk34, r5);
-            strPtr->unk34 += (r5 / 4);
-            strPtr->unk30 = (void *)(strPtr->unk30) + r5;
-            strPtr->unk38 -= r5;
+            CpuCopy(window->unk30, window->unk34, r5);
+            window->unk34 += (r5 / 4);
+            window->unk30 = (void *)(window->unk30) + r5;
+            window->unk38 -= r5;
         }
 
-        if (strPtr->unk38 == 0) {
-            strPtr->unk44 = 0;
+        if (window->unk38 == 0) {
+            window->unk44 = 0;
         }
         ret = TRUE;
     }
@@ -3024,21 +3014,21 @@ UNUSED static void nullsub_169(void)
 {
 }
 
-static void PrepareTextbox_8008C6C(Window *strArr, u32 strId)
+static void PrepareTextbox_8008C6C(Window *windows, u32 windowId)
 {
     s32 i;
-    Window *strPtr = &strArr[strId];
+    Window *window = &windows[windowId];
 
-    if (!strPtr->unk45) {
-        s32 count = (strPtr->unk4 * strPtr->unk8) * 32;
+    if (!window->unk45) {
+        s32 count = (window->width * window->unk8) * 32;
         for (i = 0; i < count; i += 32) {
-            CpuClear(&strPtr->unk18[i / 4u], 32);
+            CpuClear(&window->unk18[i / 4u], 32);
         }
     }
     else {
-        s32 count = (strPtr->unk4 * (strPtr->unk8 - 1)) * 32;
-        u32 *ptr = strPtr->unk18;
-        for (i = 0; i < strPtr->unk4; i++) {
+        s32 count = (window->width * (window->unk8 - 1)) * 32;
+        u32 *ptr = window->unk18;
+        for (i = 0; i < window->width; i++) {
             *(ptr++) = 0xFFFFFFFF;
             *(ptr++) = 0xEEEEEEEE;
             *(ptr++) = 0xDDDDDDDD;
@@ -3054,17 +3044,17 @@ static void PrepareTextbox_8008C6C(Window *strArr, u32 strId)
         }
     }
 
-    if (strPtr->unkC == 6) {
-        strPtr->unk46 = 1;
-        AddUnderScoreHighlightInternal(strArr, strId, 0, 10, strPtr->unk4 * 8, 0xE);
-        AddUnderScoreHighlightInternal(strArr, strId, 0, 11, strPtr->unk4 * 8, 0xD);
-        strPtr->unk46 = 0;
+    if (window->type == WINDOW_TYPE_WITH_HEADER) {
+        window->unk46 = 1;
+        AddUnderScoreHighlightInternal(windows, windowId, 0, 10, window->width * 8, 0xE);
+        AddUnderScoreHighlightInternal(windows, windowId, 0, 11, window->width * 8, 0xD);
+        window->unk46 = 0;
     }
 
-    strPtr->unk30 = strPtr->unk28;
-    strPtr->unk34 = strPtr->unk1C;
-    strPtr->unk38 = strPtr->unk2C;
-    strPtr->unk44 = 1;
+    window->unk30 = window->unk28;
+    window->unk34 = window->unk1C;
+    window->unk38 = window->unk2C;
+    window->unk44 = 1;
 }
 
 bool8 sub_8008D8C(u32 strId)
@@ -3355,7 +3345,7 @@ static const u8 *HandleTextFormat(Window *windows, const u8 *str, struct UnkDraw
             }
             else if (str[1] == '+') {
                 str += 2;
-                sp->unk0 = (windows[0].unk4 * 8) - sub_8008ED0(str);
+                sp->unk0 = (windows[0].width * 8) - sub_8008ED0(str);
                 sp->unk0 /= 2;
             }
             else if (str[1] == 'C') {
@@ -3465,9 +3455,9 @@ UNUSED static void sub_8009488(s32 windowId)
     Window *window = &gWindows[windowId];
 
     id0 = window->y;
-    for (i = 0; i < window->unk6; i++) {
+    for (i = 0; i < window->height; i++) {
         id1 = window->x;
-        for (j = 0; j < window->unk4; j++) {
+        for (j = 0; j < window->width; j++) {
             gUnknown_202B038[0][id0][id1] &= 0xFC00;
             gUnknown_202B038[1][id0][id1] = 0xF27A;
             id1++;
@@ -3486,9 +3476,9 @@ void sub_8009524(s32 windowId)
     Window *window = &gWindows[windowId];
     s32 id0 = window->y - 1;
 
-    for (i = 0; i < window->unk6 + 2; i++) {
+    for (i = 0; i < window->height + 2; i++) {
         s32 id1 = window->x - 1;
-        for (j = 0; j < window->unk4 + 2; j++) {
+        for (j = 0; j < window->width + 2; j++) {
             gUnknown_202B038[0][id0][id1] &= 0xFC00;
             gUnknown_202B038[1][id0][id1] = 0xF27A;
             id1++;
@@ -3645,31 +3635,31 @@ IWRAM_INIT void ScrollDownWindow(s32 windowId)
     ScrollDownWindowInternal(gWindows, windowId);
 }
 
-IWRAM_INIT static void ScrollDownWindowInternal(Window *txtStructs, s32 windowId)
+IWRAM_INIT static void ScrollDownWindowInternal(Window *windows, s32 windowId)
 {
-    Window *txtStructPtr = &txtStructs[windowId];
+    Window *window = &windows[windowId];
 
-    if (txtStructPtr->unk8 > 0) {
+    if (window->unk8 > 0) {
         s32 i, j;
         u32 *dstPtr;
         s32 n;
         s32 id8, id9;
 
-        if (txtStructPtr->unkC == 6) {
-            s32 unk4 = txtStructPtr->unk4;
-            s32 dstAdd = ((txtStructPtr->unk24 + 2) * 8);
+        if (window->type == WINDOW_TYPE_WITH_HEADER) {
+            s32 unk4 = window->width;
+            s32 dstAdd = ((window->unk24 + 2) * 8);
             dstAdd *= unk4;
-            dstPtr = txtStructPtr->unk18 + dstAdd;
-            n = txtStructPtr->unk8 - 2;
+            dstPtr = window->unk18 + dstAdd;
+            n = window->unk8 - 2;
         }
         else {
-            dstPtr = txtStructPtr->unk18;
-            n = txtStructPtr->unk8;
+            dstPtr = window->unk18;
+            n = window->unk8;
         }
 
-        id8 = txtStructPtr->unk20 + 8;
-        id9 = txtStructPtr->unk20 + 9;
-        for (i = 0; i < txtStructPtr->unk4; i++) {
+        id8 = window->unk20 + 8;
+        id9 = window->unk20 + 9;
+        for (i = 0; i < window->width; i++) {
             s32 to = n - 1;
             u32 *loopPtr = dstPtr;
             for (j = 0; j < to; j++) {
@@ -3696,10 +3686,10 @@ IWRAM_INIT static void ScrollDownWindowInternal(Window *txtStructs, s32 windowId
             dstPtr += 8;
         }
 
-        txtStructPtr->unk30 = txtStructPtr->unk28;
-        txtStructPtr->unk34 = txtStructPtr->unk1C;
-        txtStructPtr->unk38 = txtStructPtr->unk2C;
-        txtStructPtr->unk44 = 1;
+        window->unk30 = window->unk28;
+        window->unk34 = window->unk1C;
+        window->unk38 = window->unk2C;
+        window->unk44 = 1;
     }
 }
 
@@ -3708,31 +3698,31 @@ IWRAM_INIT void ScrollUpWindow(s32 windowId)
     ScrollUpWindowInternal(gWindows, windowId);
 }
 
-IWRAM_INIT static void ScrollUpWindowInternal(Window *txtStructs, s32 windowId)
+IWRAM_INIT static void ScrollUpWindowInternal(Window *windows, s32 windowId)
 {
-    Window *txtStructPtr = &txtStructs[windowId];
+    Window *window = &windows[windowId];
 
-    if (txtStructPtr->unk8 > 0) {
+    if (window->unk8 > 0) {
         s32 i, j;
         u32 *dstPtr;
         s32 n;
         s32 id8;
         s32 unk4, unk8, dstAdd;
 
-        if (txtStructPtr->unkC == 6) {
-            n = txtStructPtr->unk8 - 2;
+        if (window->type == WINDOW_TYPE_WITH_HEADER) {
+            n = window->unk8 - 2;
         }
         else {
-            n = txtStructPtr->unk8;
+            n = window->unk8;
         }
 
-        unk8 = txtStructPtr->unk8 - 1;
-        unk4 =txtStructPtr->unk4;
+        unk8 = window->unk8 - 1;
+        unk4 = window->width;
         dstAdd = (unk8 * unk4) * 8;
-        dstPtr = txtStructPtr->unk18 + dstAdd;
+        dstPtr = window->unk18 + dstAdd;
 
-        id8 = txtStructPtr->unk20 + 8;
-        for (i = 0; i < txtStructPtr->unk4; i++) {
+        id8 = window->unk20 + 8;
+        for (i = 0; i < window->width; i++) {
             u32 lastTwo = 0;
             s32 to = n - 1;
             u32 *loopPtr = dstPtr;
@@ -3775,10 +3765,10 @@ IWRAM_INIT static void ScrollUpWindowInternal(Window *txtStructs, s32 windowId)
             dstPtr += 8;
         }
 
-        txtStructPtr->unk30 = txtStructPtr->unk28;
-        txtStructPtr->unk34 = txtStructPtr->unk1C;
-        txtStructPtr->unk38 = txtStructPtr->unk2C;
-        txtStructPtr->unk44 = 1;
+        window->unk30 = window->unk28;
+        window->unk34 = window->unk1C;
+        window->unk38 = window->unk2C;
+        window->unk44 = 1;
     }
 }
 
@@ -3787,15 +3777,15 @@ IWRAM_INIT void sub_82729A4(s32 id)
     sub_82729B8(gWindows, id);
 }
 
-IWRAM_INIT static void sub_82729B8(Window *txtStructs, s32 id)
+IWRAM_INIT static void sub_82729B8(Window *windows, s32 id)
 {
     s32 i, j;
-    Window *txtStructPtr = &txtStructs[id];
-    u32 *dstPtr = txtStructPtr->unk18;
-    s32 id8 = txtStructPtr->unk20 + 8;
-    s32 id9 = txtStructPtr->unk20 + 9;
+    Window *window = &windows[id];
+    u32 *dstPtr = window->unk18;
+    s32 id8 = window->unk20 + 8;
+    s32 id9 = window->unk20 + 9;
 
-    for (i = 0; i < txtStructPtr->unk4; i++) {
+    for (i = 0; i < window->width; i++) {
         u32 *loopPtr;
 
         dstPtr[3] = dstPtr[5];
@@ -3830,10 +3820,10 @@ IWRAM_INIT static void sub_82729B8(Window *txtStructs, s32 id)
         dstPtr += 8;
     }
 
-    txtStructPtr->unk30 = txtStructPtr->unk28;
-    txtStructPtr->unk34 = txtStructPtr->unk1C;
-    txtStructPtr->unk38 = txtStructPtr->unk2C;
-    txtStructPtr->unk44 = 1;
+    window->unk30 = window->unk28;
+    window->unk34 = window->unk1C;
+    window->unk38 = window->unk2C;
+    window->unk44 = 1;
 }
 
 IWRAM_INIT void sub_8272A78(s32 id)
@@ -3841,14 +3831,14 @@ IWRAM_INIT void sub_8272A78(s32 id)
     sub_8272A8C(gWindows, id);
 }
 
-IWRAM_INIT static void sub_8272A8C(Window *txtStructs, s32 id)
+IWRAM_INIT static void sub_8272A8C(Window *windows, s32 id)
 {
     s32 i, j;
-    Window *txtStructPtr = &txtStructs[id];
-    u32 *dstPtr = txtStructPtr->unk18;
-    s32 id8 = txtStructPtr->unk20 + 8;
+    Window *window = &windows[id];
+    u32 *dstPtr = window->unk18;
+    s32 id8 = window->unk20 + 8;
 
-    for (i = 0; i < txtStructPtr->unk4; i++) {
+    for (i = 0; i < window->width; i++) {
         u32 *loopPtr;
 
         dstPtr[3] = 0;
@@ -3883,10 +3873,10 @@ IWRAM_INIT static void sub_8272A8C(Window *txtStructs, s32 id)
         dstPtr += 8;
     }
 
-    txtStructPtr->unk30 = txtStructPtr->unk28;
-    txtStructPtr->unk34 = txtStructPtr->unk1C;
-    txtStructPtr->unk38 = txtStructPtr->unk2C;
-    txtStructPtr->unk44 = 1;
+    window->unk30 = window->unk28;
+    window->unk34 = window->unk1C;
+    window->unk38 = window->unk2C;
+    window->unk44 = 1;
 }
 
 // Needed to match, because without it the alignment is different.
