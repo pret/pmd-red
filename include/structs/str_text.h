@@ -4,8 +4,8 @@
 // size: 0x48
 typedef struct Window
 {
-    s16 unk0;
-    s16 unk2;
+    s16 x;
+    s16 y;
     s16 unk4;
     s16 unk6;
     s16 unk8;

@@ -96,14 +96,14 @@ static void PopulateWigglytuffShopFriendAreaInfoScreen(void)
     else
         PrintStringOnWindow(32, 60, sInhabitants, sWigglytuffShop2Work->unk74, 0);
 
-    sub_800792C(sWigglytuffShop2Work->unk74, 4, 64, 20, 4);
+    AddUnderScoreHighlight(sWigglytuffShop2Work->unk74, 4, 64, 20, 4);
 
     if (sWigglytuffShop2Work->unkD != 0)
-        sub_800792C(sWigglytuffShop2Work->unk74, 184, 64, 20, 4);
+        AddUnderScoreHighlight(sWigglytuffShop2Work->unk74, 184, 64, 20, 4);
     else
-        sub_800792C(sWigglytuffShop2Work->unk74, 94, 64, 110, 4);
+        AddUnderScoreHighlight(sWigglytuffShop2Work->unk74, 94, 64, 110, 4);
 
-    sub_800792C(sWigglytuffShop2Work->unk74, 4, 130, 200, 4);
+    AddUnderScoreHighlight(sWigglytuffShop2Work->unk74, 4, 130, 200, 4);
     sub_8007A78(sWigglytuffShop2Work->unk74, 3, 64, 67, 4);
     sub_8007A78(sWigglytuffShop2Work->unk74, 204, 64, 67, 4);
 

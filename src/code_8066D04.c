@@ -1295,8 +1295,8 @@ void sub_806806C(PokemonStruct1 *a0)
         sub_808FF20(&unkStruct, a0, gDungeon->unk644.unk16);
         CreatePokemonInfoTabScreen(spF8[r7], r7, &unkStruct, &var_C8, 0);
 
-        gDungeonMenu.unkC = (gWindows[0].unk0 + 15) * 8;
-        gDungeonMenu.unkE = ((gWindows[0].unk2 + 1) * 8) - 2;
+        gDungeonMenu.unkC = (gWindows[0].x + 15) * 8;
+        gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
 
         while (1) {
             s32 r5;

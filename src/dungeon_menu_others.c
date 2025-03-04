@@ -44,8 +44,26 @@ extern const u8 *const gUnknown_80FEBF8;
 extern const u8 *const gUnknown_80FEC28;
 extern const u8 *const gUnknown_80FDE6C;
 extern const u8 *const gUnknown_80FDEB8;
+extern const u8 *const gUnknown_80FEA44;
+extern const u8 *const gUnknown_80FEA50;
+extern const u8 *const gUnknown_80FEA28;
+extern const u8 *const gUnknown_80FEA10;
+extern const u8 *const gUnknown_80FE9F8;
+extern const u8 *const gUnknown_80FE9E8;
+extern const u8 *const gUnknown_80FE9CC;
+extern const u8 *const gUnknown_80FE8F8;
+extern const u8 *const gUnknown_80FE8F4;
+extern const u8 *const gGameOptionsTextPtr;
+extern const u8 *const gOptionsDungeonTextPtr;
+extern const u8 *const gOptionsOthersTextPtr;
+extern const u8 *const gUnknown_80FE748;
+extern const u8 *const gUnknown_80FE764;
+extern const u8 *const gUnknown_80FE7C0;
+extern const u8 *const gUnknown_80FE788;
+extern const u8 *const gUnknown_80FE7A8;
+extern const u8 *const gUnknown_80FE7E4;
 
-void sub_8065250(void);
+void PrintOthersMenuOptions(void);
 void ShowGameOptionsMenu(void);
 void ShowQuickSaveGiveUpMenu(void);
 void ShowMissionObjectivesMenu(void);
@@ -55,8 +73,8 @@ bool8 ShowDungeonOptions(void);
 bool8 ShowOthersOptions(void);
 void TrySetNewGameOptions(bool8 bPressed);
 void AskToResetToDefault(void);
-void sub_8065574(void);
-void sub_80656C0(void);
+void PrintGameOptions(void);
+void PrintDungeonOptions(void);
 void sub_8065948(void);
 void sub_8065A8C(s32 optionId);
 void sub_8065B3C(s32 optionId);
@@ -64,7 +82,7 @@ bool8 sub_8065BEC(void);
 bool8 sub_8065BF0(void);
 bool8 AskToQuickSave(void);
 bool8 AskToGiveUp(void);
-void sub_806544C(void);
+void PrintQuickSaveMenuOptions(void);
 
 enum {
     OTHERS_GAME_OPTIONS,
@@ -73,6 +91,7 @@ enum {
     OTHERS_MISSION_OBJECTIVES,
     OTHERS_RECRUITMENT_SEARCH,
     OTHERS_HINTS,
+    OTHERS_COUNT
 };
 
 void ShowDungeonOthersMenu(void)
@@ -85,7 +104,7 @@ void ShowDungeonOthersMenu(void)
     while (1) {
         bool8 bPress = FALSE;
 
-        sub_8065250();
+        PrintOthersMenuOptions();
         while (1) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
@@ -162,7 +181,7 @@ void ShowGameOptionsMenu(void)
     while (1) {
         bool8 bPress = FALSE;
 
-        sub_8065574();
+        PrintGameOptions();
         while (1) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
@@ -217,7 +236,7 @@ enum {
     OPTION_WINDOWS,
 };
 
-#define FIRST_OTHERS_OPTION OPTION_WINDOWS
+#define DUNGEON_OPTIONS_COUNT OPTION_WINDOWS
 
 bool8 ShowDungeonOptions(void)
 {
@@ -229,7 +248,7 @@ bool8 ShowDungeonOptions(void)
         bPress = FALSE;
         dpadMoved = FALSE;
 
-        sub_80656C0();
+        PrintDungeonOptions();
         while (1) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
@@ -305,13 +324,13 @@ bool8 ShowOthersOptions(void)
 
             if (gRealInputs.repeated & DPAD_LEFT) {
                 PlayDungeonCursorSE(FALSE);
-                sub_8065A8C(gDungeonMenu.menuIndex + FIRST_OTHERS_OPTION);
+                sub_8065A8C(gDungeonMenu.menuIndex + DUNGEON_OPTIONS_COUNT);
                 dpadMoved = TRUE;
                 break;
             }
             if (gRealInputs.repeated & DPAD_RIGHT) {
                 PlayDungeonCursorSE(FALSE);
-                sub_8065B3C(gDungeonMenu.menuIndex + FIRST_OTHERS_OPTION);
+                sub_8065B3C(gDungeonMenu.menuIndex + DUNGEON_OPTIONS_COUNT);
                 dpadMoved = TRUE;
                 break;
             }
@@ -376,7 +395,7 @@ void ShowQuickSaveGiveUpMenu(void)
     while (1) {
         bool8 bPress = FALSE;
 
-        sub_806544C();
+        PrintQuickSaveMenuOptions();
         while (1) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
@@ -447,6 +466,277 @@ bool8 AskToGiveUp(void)
     sub_8083AB0(0x21B, NULL, GetLeader());
     gDungeon->unk644.unk10 = 1;
     return FALSE;
+}
+
+void PrintOthersMenuOptions(void)
+{
+    s32 optionsCount, currOptionId;
+    WindowHeader header;
+    WindowTemplates windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_WITH_HEADER,
+                .pos = {2, 2},
+                .width = 18,
+                .height = 16,
+                .unk10 = 16,
+                .unk12 = 0,
+                .header = &header,
+            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
+
+    header.count = 1;
+    header.currId = 0;
+    header.f3 = 0;
+    gDungeonMenu.menuIndex = gUnknown_202F2E0;
+    optionsCount = (gDungeon->unk644.canRecruit) ? OTHERS_COUNT : OTHERS_COUNT - 1;
+    gDungeonMenu.unk1A = optionsCount;
+    gDungeonMenu.unk1C = optionsCount;
+    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.unk4 = 0;
+    gDungeonMenu.firstEntryY = 16;
+    gDungeonMenu.unkC = 0;
+    gDungeonMenu.unkE = 0;
+    gDungeonMenu.unk14.x = 0;
+    gDungeonMenu.unk0 = 0;
+    sub_801317C(&gDungeonMenu.unk28);
+    windows.id[0].width = 18;
+    windows.id[0].height = windows.id[0].unk10 = sub_80095E4(optionsCount, 12) + 2;
+    header.width = 10;
+    windows.id[0].pos.x = 2;
+    DungeonShowWindows(&windows, TRUE);
+    sub_80137B0(&gDungeonMenu, 0);
+    sub_80073B8(0);
+    currOptionId = 0;
+    PrintFormattedStringOnWindow(16, 0, gUnknown_80FE8F8, 0, '\0');
+    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80FE9CC, 0, '\0');
+    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80FE9E8, 0, '\0');
+    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80FE9F8, 0, '\0');
+    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80FEA10, 0, '\0');
+    if (gDungeon->unk644.canRecruit) {
+        if (!IsBossFight()) {
+            PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80FEA28, 0, '\0');
+        }
+        else {
+            PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80FEA44, 0, '\0');
+        }
+    }
+    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId), gUnknown_80FEA50, 0, '\0');
+
+    sub_80073E0(0);
+}
+
+struct Struct_80F7C50
+{
+    const u8 *str;
+    s32 val;
+};
+
+// TODO: Fix this table in other file
+
+extern const struct Struct_80F7C50 gUnknown_80F7C50[];
+
+void PrintQuickSaveMenuOptions(void)
+{
+    s32 optionsCount, currOptionId;
+    WindowHeader header;
+    WindowTemplates windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_WITH_HEADER,
+                .pos = {2, 2},
+                .width = 18,
+                .height = 16,
+                .unk10 = 16,
+                .unk12 = 0,
+                .header = &header,
+            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
+
+    header.count = 1;
+    header.currId = 0;
+    header.f3 = 0;
+    gDungeonMenu.menuIndex = 0;
+    optionsCount = 2;
+    gDungeonMenu.unk1A = optionsCount;
+    gDungeonMenu.unk1C = optionsCount;
+    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.unk4 = 0;
+    gDungeonMenu.firstEntryY = 16;
+    gDungeonMenu.unkC = 0;
+    gDungeonMenu.unkE = 0;
+    gDungeonMenu.unk14.x = 0;
+    gDungeonMenu.unk0 = 0;
+    sub_801317C(&gDungeonMenu.unk28);
+    windows.id[0].width = 18;
+    windows.id[0].height = windows.id[0].unk10 = sub_80095E4(optionsCount, 12) + 2;
+    header.width = 10;
+    windows.id[0].pos.x = 2;
+    DungeonShowWindows(&windows, TRUE);
+    sub_80137B0(&gDungeonMenu, 0);
+    sub_80073B8(0);
+    currOptionId = 0;
+    PrintFormattedStringOnWindow(16, 0, gUnknown_80FE8F4, 0, '\0');
+    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80F7C50[43].str, 0, '\0');
+    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, currOptionId++), gUnknown_80F7C50[46].str, 0, '\0');
+
+    sub_80073E0(0);
+}
+
+void PrintGameOptions(void)
+{
+    s32 optionsCount;
+    s32 y[3];
+    WindowHeader header;
+    WindowTemplates windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_WITH_HEADER,
+                .pos = {2, 2},
+                .width = 12,
+                .height = 16,
+                .unk10 = 16,
+                .unk12 = 0,
+                .header = &header,
+            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
+
+    header.count = 1;
+    header.currId = 0;
+    header.f3 = 0;
+    gDungeonMenu.menuIndex = 0;
+    optionsCount = 3;
+    gDungeonMenu.unk1A = optionsCount;
+    gDungeonMenu.unk1C = optionsCount;
+    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.unk4 = 0;
+    gDungeonMenu.firstEntryY = 16;
+    gDungeonMenu.unkC = 0;
+    gDungeonMenu.unkE = 0;
+    gDungeonMenu.unk14.x = 0;
+    gDungeonMenu.unk0 = 0;
+    sub_801317C(&gDungeonMenu.unk28);
+    windows.id[0].width = 12;
+    windows.id[0].height = windows.id[0].unk10 = sub_80095E4(optionsCount, 12) + 2;
+    header.width = 10;
+    windows.id[0].pos.x = 2;
+    DungeonShowWindows(&windows, TRUE);
+    sub_80137B0(&gDungeonMenu, 0);
+
+    y[0] = GetMenuEntryYCoord(&gDungeonMenu, 0);
+    y[1] = GetMenuEntryYCoord(&gDungeonMenu, 1);
+    y[2] = GetMenuEntryYCoord(&gDungeonMenu, 2);
+    sub_80073B8(0);
+    PrintFormattedStringOnWindow(16, 0, gGameOptionsTextPtr, 0, '\0');
+    PrintFormattedStringOnWindow(8, y[0], gOptionsDungeonTextPtr, 0, '\0');
+    PrintFormattedStringOnWindow(8, y[1], gOptionsOthersTextPtr, 0, '\0');
+    PrintFormattedStringOnWindow(8, y[2], gUnknown_80FE748, 0, '\0');
+    sub_80073E0(0);
+}
+
+void PrintDungeonOptions(void)
+{
+    s32 y[DUNGEON_OPTIONS_COUNT];
+    WindowHeader header;
+    WindowTemplates windows = {
+        .id = {
+            [0] = {
+                .type = WINDOW_TYPE_WITH_HEADER,
+                .pos = {2, 2},
+                .width = 18,
+                .height = 16,
+                .unk10 = 16,
+                .unk12 = 0,
+                .header = &header,
+            },
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
+        }
+    };
+    s32 arr[] = {16, 25, 27};
+
+    header.count = 1;
+    header.currId = 0;
+    header.f3 = 0;
+
+    gDungeonMenu.unk1A = DUNGEON_OPTIONS_COUNT;
+    gDungeonMenu.unk1C = DUNGEON_OPTIONS_COUNT;
+    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.unk4 = 0;
+    gDungeonMenu.firstEntryY = 16;
+    gDungeonMenu.unkC = 0;
+    gDungeonMenu.unkE = 0;
+    gDungeonMenu.unk14.x = 0;
+    gDungeonMenu.unk0 = 0;
+    sub_801317C(&gDungeonMenu.unk28);
+    windows.id[0].width = 24;
+    windows.id[0].height = windows.id[0].unk10 = sub_80095E4(DUNGEON_OPTIONS_COUNT, 12) + 2;
+    header.width = 10;
+    windows.id[0].pos.x = 2;
+    DungeonShowWindows(&windows, TRUE);
+    sub_80137B0(&gDungeonMenu, 0);
+
+    y[0] = GetMenuEntryYCoord(&gDungeonMenu, 0);
+    y[1] = GetMenuEntryYCoord(&gDungeonMenu, 1);
+    y[2] = GetMenuEntryYCoord(&gDungeonMenu, 2);
+    y[3] = GetMenuEntryYCoord(&gDungeonMenu, 3);
+    y[4] = GetMenuEntryYCoord(&gDungeonMenu, 4);
+    sub_80073B8(0);
+    PrintFormattedStringOnWindow(16, 0, gOptionsDungeonTextPtr, 0, '\0');
+    PrintFormattedStringOnWindow(8, y[0], gUnknown_80FE764, 0, '\0');
+    PrintFormattedStringOnWindow(8, y[1], gUnknown_80FE788, 0, '\0');
+    PrintFormattedStringOnWindow(8, y[2], gUnknown_80FE7A8, 0, '\0');
+    PrintFormattedStringOnWindow(8, y[3], gUnknown_80FE7C0, 0, '\0');
+    PrintFormattedStringOnWindow(8, y[4], gUnknown_80FE7E4, 0, '\0');
+
+    if (gUnknown_202F2E8.dungeonSpeed != DUNGEON_SPEED_SLOW) {
+        AddDoubleUnderScoreHighlight(0, 136, y[0] + 10, 21, 7);
+    }
+    else {
+        AddDoubleUnderScoreHighlight(0, 80, y[0] + 10, 22, 7);
+    }
+
+    if (gUnknown_202F2E8.FarOffPals != FAROFFPALS_SELF) {
+        AddDoubleUnderScoreHighlight(0, 136, y[1] + 10, 22, 7);
+    }
+    else {
+        AddDoubleUnderScoreHighlight(0, 80, y[1] + 10, 18, 7);
+    }
+
+    if (gUnknown_202F2E8.damageTurn) {
+        AddDoubleUnderScoreHighlight(0, 136, y[2] + 10, 16, 7);
+    }
+    else {
+        AddDoubleUnderScoreHighlight(0, 80, y[2] + 10, 12, 7);
+    }
+
+    if (gUnknown_202F2E8.gridEnable) {
+        AddDoubleUnderScoreHighlight(0, 136, y[3] + 10, 12, 7);
+    }
+    else {
+        AddDoubleUnderScoreHighlight(0, 80, y[3] + 10, 16, 7);
+    }
+
+    AddDoubleUnderScoreHighlight(0, 80 + (gUnknown_202F2E8.mapOption * 40), y[4] + 10, arr[gUnknown_202F2E8.mapOption], 7);
+
+    sub_80073E0(0);
 }
 
 //

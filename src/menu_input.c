@@ -700,12 +700,12 @@ void sub_8013660(MenuInputStruct *param_1)
 void UpdateMenuCursorSpriteCoords(MenuInputStruct *param_1)
 {
     s32 index;
-    Window *temp;
+    Window *window;
 
     index = param_1->unk0;
-    temp = &gWindows[index];
-    param_1->unk8.x = temp->unk0 * 8 + param_1->unk4;
-    param_1->unk8.y = temp->unk2 * 8 + GetMenuEntryYCoord(param_1, param_1->menuIndex);
+    window = &gWindows[index];
+    param_1->unk8.x = window->x * 8 + param_1->unk4;
+    param_1->unk8.y = window->y * 8 + GetMenuEntryYCoord(param_1, param_1->menuIndex);
 }
 
 void MoveMenuCursorDown(MenuInputStruct *param_1)
@@ -931,10 +931,10 @@ void sub_8013984(MenuInputStruct *param_1)
 {
     s32 iVar2;
     s32 iVar4;
-    Window *ptr;
+    Window *window;
 
     iVar4 = param_1->unk0;
-    ptr = &gWindows[iVar4];
+    window = &gWindows[iVar4];
 
     if (param_1->unk1C == 0)
         param_1->unk1C++;
@@ -957,7 +957,7 @@ void sub_8013984(MenuInputStruct *param_1)
 
     param_1->unk4 = 0;
 
-    if (ptr->unkC == 6)
+    if (window->unkC == 6)
         param_1->firstEntryY = 16;
     else
         param_1->firstEntryY = 0;
@@ -965,9 +965,9 @@ void sub_8013984(MenuInputStruct *param_1)
     if (param_1->unk20 < 2)
         param_1->unkC = 0;
     else
-        param_1->unkC = (ptr->unk0 + ptr->unk4 - 2) * 8;
+        param_1->unkC = (window->x + window->unk4 - 2) * 8;
 
-    param_1->unkE = (ptr->unk2 + 1) * 8 - 2;
+    param_1->unkE = (window->y + 1) * 8 - 2;
 }
 
 void sub_8013A54(MenuInputStruct *param_1)
@@ -1078,16 +1078,16 @@ void sub_8013C68(unkStructFor8013AA0 *a0)
     }
 
     for (i = 0; i < a0->unk10; i++)
-        sub_800792C(a0->unk14, a0->unk1C - ((i + 1) * 12) - 1, a0->unk20 + 10, 11, 5);
+        AddUnderScoreHighlight(a0->unk14, a0->unk1C - ((i + 1) * 12) - 1, a0->unk20 + 10, 11, 5);
 }
 
 void sub_8013D10(unkStructFor8013AA0 *a0)
 {
     s32 x, y;
     u8 uVar4;
-    Window *ptr;
+    Window *window;
 
-    ptr = &gWindows[a0->unk14];
+    window = &gWindows[a0->unk14];
     uVar4 = a0->unk24;
 
     switch (sub_8012AE8()) {
@@ -1105,10 +1105,10 @@ void sub_8013D10(unkStructFor8013AA0 *a0)
         a0->unk26 = 8;
     }
 
-    x = (a0->unk1C - ((a0->unk24 + 1) * 12) + (ptr->unk0 * 8)) - 3;
+    x = (a0->unk1C - ((a0->unk24 + 1) * 12) + (window->x * 8)) - 3;
     SpriteSetX(&a0->unk28, x);
 
-    y = a0->unk20 + (ptr->unk2 * 8) - 7;
+    y = a0->unk20 + (window->y * 8) - 7;
     SpriteSetY(&a0->unk28, y);
 }
 
@@ -1152,7 +1152,7 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
 
 void sub_8013E54(void)
 {
-    Window *ptr = &gWindows[0];
+    Window *window = &gWindows[0];
     SpriteOAM SStack_18 = {0};
 
     SpriteSetAffine1(&SStack_18, 0);
@@ -1166,7 +1166,7 @@ void sub_8013E54(void)
     SpriteSetTileNum(&SStack_18, 0x3F0);
     SpriteSetPriority(&SStack_18, 0);
     SpriteSetPalNum(&SStack_18, 15);
-    SpriteSetY(&SStack_18, (ptr->unk2 * 8) + 0x80);
+    SpriteSetY(&SStack_18, (window->y * 8) + 0x80);
     SpriteSetX(&SStack_18, 112);
 
     AddSprite(&SStack_18,0x100,0,0x0);
@@ -1174,7 +1174,7 @@ void sub_8013E54(void)
 
 void sub_8013F84(void)
 {
-    Window *ptr = &gWindows[0];
+    Window *window = &gWindows[0];
     SpriteOAM SStack_18 = {0};
 
     SpriteSetAffine1(&SStack_18, 0);
@@ -1188,7 +1188,7 @@ void sub_8013F84(void)
     SpriteSetTileNum(&SStack_18, 0x3F0);
     SpriteSetPriority(&SStack_18, 0);
     SpriteSetPalNum(&SStack_18, 15);
-    SpriteSetY(&SStack_18, (ptr->unk2 * 8) + 0x60);
+    SpriteSetY(&SStack_18, (window->y * 8) + 0x60);
     SpriteSetX(&SStack_18, 112);
 
     AddSprite(&SStack_18,0x100,0,0x0);

@@ -39,7 +39,7 @@ void sub_8068310(s32 size, u16 **param_2)
 void sub_8068344(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
-        Window *ptr = &gWindows[0];
+        Window *window = &gWindows[0];
         SpriteOAM sprite = {0};
 
         SpriteSetAffine1(&sprite, 0);
@@ -53,8 +53,8 @@ void sub_8068344(void)
         SpriteSetTileNum(&sprite, 0x3F0);
         SpriteSetPriority(&sprite, 0);
         SpriteSetPalNum(&sprite, 15);
-        SpriteSetY(&sprite, (ptr->unk2  * 8) + 0x8);
-        SpriteSetX(&sprite, (ptr->unk0  * 8) + 0x40);
+        SpriteSetY(&sprite, (window->y  * 8) + 0x8);
+        SpriteSetX(&sprite, (window->x  * 8) + 0x40);
         AddSprite(&sprite,0x100,NULL,NULL);
     }
 }
@@ -63,7 +63,7 @@ void sub_8068344(void)
 void sub_80684C4(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
-        Window *ptr = &gWindows[0];
+        Window *window = &gWindows[0];
         SpriteOAM sprite = {0};
 
         SpriteSetAffine1(&sprite, 0);
@@ -77,8 +77,8 @@ void sub_80684C4(void)
         SpriteSetTileNum(&sprite, 0x3F0);
         SpriteSetPriority(&sprite, 0);
         SpriteSetPalNum(&sprite, 15);
-        SpriteSetY(&sprite, (ptr->unk2  * 8) + 0x70);
-        SpriteSetX(&sprite, (ptr->unk0  * 8) + 0x40);
+        SpriteSetY(&sprite, (window->y  * 8) + 0x70);
+        SpriteSetX(&sprite, (window->x  * 8) + 0x40);
         AddSprite(&sprite,0x100,NULL,NULL);
     }
 }

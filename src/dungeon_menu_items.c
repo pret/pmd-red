@@ -448,8 +448,8 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
 
     DungeonShowWindows(windows, 1);
     txtStrPtr = &gWindows[0];
-    gDungeonMenu.unkC = (txtStrPtr->unk0 + 0x10) * 8;
-    gDungeonMenu.unkE = ((txtStrPtr->unk2 + 1) * 8) - 2;
+    gDungeonMenu.unkC = (txtStrPtr->x + 0x10) * 8;
+    gDungeonMenu.unkE = ((txtStrPtr->y + 1) * 8) - 2;
     sub_80137B0(&gDungeonMenu, 0x70);
     sub_80073B8(0);
     x = ((a0 - r10) * 8) + 0xC;

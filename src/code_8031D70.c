@@ -170,7 +170,7 @@ void DrawSOSPasswordScreen(void)
     rowIndex = index % 0x12;
     x = rowIndex * 0xb + 6;
     sub_8012C60(x,y,buffer[index],color,gUnknown_203B334->unk10); // Draw character
-    sub_80078A4(gUnknown_203B334->unk10,x,y + 0xA,10,COLOR_CYAN); // Draw underscore beneath character
+    AddDoubleUnderScoreHighlight(gUnknown_203B334->unk10,x,y + 0xA,10,COLOR_CYAN); // Draw underscore beneath character
   }
   sub_80073E0(gUnknown_203B334->unk10);
 }

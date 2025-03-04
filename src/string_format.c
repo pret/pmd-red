@@ -260,7 +260,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     gUnknown_202E748.unk0 = 4;
     gUnknown_202E748.unk2 = 4;
     gUnknown_202E748.unk8 = 0x70;
-    gUnknown_202E748.unkA = (gWindows[0].unk2 * 8) + 34;
+    gUnknown_202E748.unkA = (gWindows[0].y * 8) + 34;
     gUnknown_202E748.unk10 = 7;
     gUnknown_202E748.unk1C = 0;
     gUnknown_202E748.unk20 = 0;
@@ -541,7 +541,7 @@ void DrawDialogueBoxString(void)
                     }
 
                     gUnknown_202E748.unk8 = 0x70;
-                    gUnknown_202E748.unkA = (gWindows[0].unk2 * 8) + 34;
+                    gUnknown_202E748.unkA = (gWindows[0].y * 8) + 34;
                 }
                 keepLooping = FALSE;
             }

@@ -255,7 +255,7 @@ void xxx_draw_string_80524F0(void)
                 sp.unk10 = 7;
                 sub_80073B8(0);
                 if (strPtr->unk1C054[id] != 0 && strPtr->unk1C066 >= 8) {
-                    sub_80078A4(0, 0, strPtr->unk1C066 - 1, 0xE0, 7);
+                    AddDoubleUnderScoreHighlight(0, 0, strPtr->unk1C066 - 1, 0xE0, 7);
                 }
 
                 while (1) {
@@ -930,7 +930,7 @@ static void PutStringsOnMessageLog(void)
 
         if (msgLogString->unk0) {
             if (msgLogString->unk1) {
-                sub_80078A4(0, 0, y, 0xE0, 7);
+                AddDoubleUnderScoreHighlight(0, 0, y, 0xE0, 7);
             }
             PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
             y += 14;
@@ -978,7 +978,7 @@ static bool8 TryScrollLogUp(s32 a0)
     if (msgLogString->unk0) {
         sub_80087EC(0, 0, 0, 0xD0, 0x10);
         if (msgLogString->unk1) {
-            sub_80078A4(0, 0, y, 0xE0, 7);
+            AddDoubleUnderScoreHighlight(0, 0, y, 0xE0, 7);
         }
         PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
     }
@@ -1028,7 +1028,7 @@ static bool8 TryScrollLogDown(s32 a0)
     if (msgLogString->unk0) {
         sub_80087EC(0, 0, y, 0x68, 0x10);
         if (msgLogString->unk1) {
-            sub_80078A4(0, 0, y, 0xE0, 7);
+            AddDoubleUnderScoreHighlight(0, 0, y, 0xE0, 7);
         }
         PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
     }
@@ -1046,7 +1046,7 @@ static bool8 TryScrollLogDown(s32 a0)
 
 static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 {
-    struct Window *unkStr = &gWindows[0];
+    struct Window *window = &gWindows[0];
     if (!(gDungeonFramesCounter & 8)) {
         SpriteSetAffine1(&sMessageLogArrowSpriteOAM, 0);
         SpriteSetAffine2(&sMessageLogArrowSpriteOAM, 0);
@@ -1055,8 +1055,8 @@ static void CreateMessageLogArrow(bool8 upArrow, s32 y)
         SpriteSetBpp(&sMessageLogArrowSpriteOAM, 0);
         SpriteSetMatrixNum(&sMessageLogArrowSpriteOAM, (upArrow != FALSE) ? (16) : 0);
         SpriteSetPalNum(&sMessageLogArrowSpriteOAM, 15);
-        SpriteSetY(&sMessageLogArrowSpriteOAM, (unkStr->unk2 * 8) + y);
-        SpriteSetX(&sMessageLogArrowSpriteOAM, (unkStr->unk0 * 8) + 92);
+        SpriteSetY(&sMessageLogArrowSpriteOAM, (window->y * 8) + y);
+        SpriteSetX(&sMessageLogArrowSpriteOAM, (window->x * 8) + 92);
         SpriteSetShape(&sMessageLogArrowSpriteOAM, 1);
         SpriteSetSize(&sMessageLogArrowSpriteOAM, 0);
         SpriteSetPriority(&sMessageLogArrowSpriteOAM, 0);

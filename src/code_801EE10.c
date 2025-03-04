@@ -320,7 +320,7 @@ void sub_801F280(bool8 param_1)
             linkChain = MoveFlagLinkChain(move);
             x = !linkChain ? 0x8 : 0xD;
             if (!linkChain && i != 0) {
-                sub_800792C(gUnknown_203B270->unk50,0xc,y - 2,0x78,7);
+                AddUnderScoreHighlight(gUnknown_203B270->unk50,0xc,y - 2,0x78,7);
             }
             PrintFormattedStringOnWindow(x,y,gUnknown_80DC2A0,gUnknown_203B270->unk50,0); // {ARG_MOVE_ITEM_0}
         }

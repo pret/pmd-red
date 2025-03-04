@@ -472,8 +472,8 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, u8 a2, Win
     windows->id[2] = windowNew;
     DungeonShowWindows(windows, TRUE);
     sub_80137B0(&gDungeonMenu, 0);
-    gDungeonMenu.unkC = (gWindows[0].unk0 + 16) * 8;
-    gDungeonMenu.unkE = ((gWindows[0].unk2 + 1) * 8) - 2;
+    gDungeonMenu.unkC = (gWindows[0].x + 16) * 8;
+    gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
     SetMessageArgument_2(gFormatBuffer_Monsters[0], entInfo, 0);
     for (i = 0; i < MAX_MON_MOVES; i++) {
         Move *move = &entInfo->moves.moves[i];
@@ -525,7 +525,7 @@ static void PrintMoveNamesOnWindow(s32 count, Entity *entity, Move *moves, s32 w
             else {
                 x = 8;
                 if (i != 0) {
-                    sub_80078A4(windowId, 12, y - 2, 120, 7);
+                    AddDoubleUnderScoreHighlight(windowId, 12, y - 2, 120, 7);
                 }
             }
             PrintFormattedStringOnWindow(x, y, _("{MOVE_ITEM_0}"), windowId, '\0');
@@ -644,8 +644,8 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
 
         gDungeonMenu.unk1E = currId;
         gDungeonMenu.unk20 = count;
-        gDungeonMenu.unkC = (gWindows[0].unk0 + 23) * 8;
-        gDungeonMenu.unkE = ((gWindows[0].unk2 + 1) * 8) - 2;
+        gDungeonMenu.unkC = (gWindows[0].x + 23) * 8;
+        gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
         gDungeonMenu.unk14.x = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;

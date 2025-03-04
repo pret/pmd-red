@@ -810,7 +810,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         bool8 hasIqSkills = FALSE;
         bool8 hasStatusProblems = FALSE;
         bool8 addCursorSprite = TRUE;
-        Window *unkTxtStr1Ptr = &gWindows[0];
+        Window *mainWindow = &gWindows[0];
 
         sTeamWindowHeader.count = totalSubWindows;
         sTeamWindowHeader.currId = currSubWindowId;
@@ -821,8 +821,8 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         CreatePokemonInfoTabScreen(subWindowIds[currSubWindowId], currSubWindowId, &unkMonStruct, &unkInfoTabStruct, 0);
         gDungeonMenu.unk1E = currSubWindowId;
         gDungeonMenu.unk20 = totalSubWindows;
-        gDungeonMenu.unkC = (unkTxtStr1Ptr->unk0 + 15) * 8;
-        gDungeonMenu.unkE = ((unkTxtStr1Ptr->unk2 + 1) * 8) - 2;
+        gDungeonMenu.unkC = (mainWindow->x + 15) * 8;
+        gDungeonMenu.unkE = ((mainWindow->y + 1) * 8) - 2;
         gDungeonMenu.unk14.x = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;
@@ -1197,7 +1197,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
 static void ShowUpArrowSprite(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
-        Window *txtStrPtr = &gWindows[0];
+        Window *window = &gWindows[0];
         SpriteOAM sprite = {0};
 
         SpriteSetAffine1(&sprite, 0);
@@ -1211,8 +1211,8 @@ static void ShowUpArrowSprite(void)
         SpriteSetTileNum(&sprite, 0x3F0);
         SpriteSetPriority(&sprite, 0);
         SpriteSetPalNum(&sprite, 15);
-        SpriteSetY(&sprite, (txtStrPtr->unk2  * 8) + 0x8);
-        SpriteSetX(&sprite, (txtStrPtr->unk0  * 8) + 0x40);
+        SpriteSetY(&sprite, (window->y  * 8) + 0x8);
+        SpriteSetX(&sprite, (window->x  * 8) + 0x40);
 
         AddSprite(&sprite, 0x100, NULL, NULL);
     }
@@ -1222,7 +1222,7 @@ static void ShowUpArrowSprite(void)
 static void ShowDownArrowSprite(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
-        Window *ptr = &gWindows[0];
+        Window *window = &gWindows[0];
         SpriteOAM sprite = {0};
 
         SpriteSetAffine1(&sprite, 0);
@@ -1236,8 +1236,8 @@ static void ShowDownArrowSprite(void)
         SpriteSetTileNum(&sprite, 0x3F0);
         SpriteSetPriority(&sprite, 0);
         SpriteSetPalNum(&sprite, 15);
-        SpriteSetY(&sprite, (ptr->unk2  * 8) + 0x70);
-        SpriteSetX(&sprite, (ptr->unk0  * 8) + 0x40);
+        SpriteSetY(&sprite, (window->y  * 8) + 0x70);
+        SpriteSetX(&sprite, (window->x  * 8) + 0x40);
         AddSprite(&sprite,0x100,NULL,NULL);
     }
 }
@@ -1245,7 +1245,7 @@ static void ShowDownArrowSprite(void)
 void ShowStatusDescriptionMenuArrow(void)
 {
     if ((gDungeonFramesCounter & 8) != 0) {
-        Window *ptr = &gWindows[0];
+        Window *window = &gWindows[0];
 
         SpriteSetAffine1(&gUnknown_202F268, 0);
         SpriteSetAffine2(&gUnknown_202F268, 0);
@@ -1258,7 +1258,7 @@ void ShowStatusDescriptionMenuArrow(void)
         SpriteSetTileNum(&gUnknown_202F268, 0x3F0);
         SpriteSetPriority(&gUnknown_202F268, 0);
         SpriteSetPalNum(&gUnknown_202F268, 15);
-        SpriteSetY(&gUnknown_202F268, (ptr->unk2  * 8) + 0x60);
+        SpriteSetY(&gUnknown_202F268, (window->y  * 8) + 0x60);
         SpriteSetX(&gUnknown_202F268, 0x70);
         AddSprite(&gUnknown_202F268,0x100,NULL,NULL);
     }
@@ -1616,7 +1616,7 @@ static void PrintMoveNamesOnBottomWindow(Entity *entity)
                 else {
                     x = 8;
                     if (i != 0) {
-                        sub_80078A4(2, 12, y - 2, 120, 7);
+                        AddDoubleUnderScoreHighlight(2, 12, y - 2, 120, 7);
                     }
                 }
                 PrintFormattedStringOnWindow(x, y, _("{MOVE_ITEM_0}"), 2, '\0');

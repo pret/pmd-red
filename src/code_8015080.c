@@ -640,34 +640,34 @@ bool8 sub_8015748(void)
 
 void sub_80157D8(void)
 {
-    Window *txtPtr = &gWindows[1];
+    Window *window = &gWindows[1];
 
     // Note: for cases 4 and 5, the code is identical except for different position structs.
     if (gUnknown_203B1FC->unk0 == 4) {
         s32 x, y;
 
-        x = gUnknown_80DAFC0[gUnknown_203B1FC->unk1C].x + (txtPtr->unk0 * 8);
+        x = gUnknown_80DAFC0[gUnknown_203B1FC->unk1C].x + (window->x * 8);
         SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, x);
 
-        y = gUnknown_80DAFC0[gUnknown_203B1FC->unk1C].y + (txtPtr->unk2 * 8) + 5;
+        y = gUnknown_80DAFC0[gUnknown_203B1FC->unk1C].y + (window->y * 8) + 5;
         SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, y);
     }
     else if (gUnknown_203B1FC->unk0 == 5) {
         s32 x, y;
 
-        x = gUnknown_80DB098[gUnknown_203B1FC->unk1C].x + (txtPtr->unk0 * 8);
+        x = gUnknown_80DB098[gUnknown_203B1FC->unk1C].x + (window->x * 8);
         SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, x);
 
-        y = gUnknown_80DB098[gUnknown_203B1FC->unk1C].y + (txtPtr->unk2 * 8) + 5;
+        y = gUnknown_80DB098[gUnknown_203B1FC->unk1C].y + (window->y * 8) + 5;
         SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, y);
     }
     else {
         s32 x, y;
 
-        x = gUnknown_203B1FC->unk1E[gUnknown_203B1FC->unk1C] + (gUnknown_203B1FC->unk8A[gUnknown_203B1FC->unk1C] / 2) + 30 + (txtPtr->unk0 * 8);
+        x = gUnknown_203B1FC->unk1E[gUnknown_203B1FC->unk1C] + (gUnknown_203B1FC->unk8A[gUnknown_203B1FC->unk1C] / 2) + 30 + (window->x * 8);
         SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, (u16) x);
 
-        y = (txtPtr->unk2 * 8) + 34;
+        y = (window->y * 8) + 34;
         SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, y);
     }
 }
@@ -675,7 +675,7 @@ void sub_80157D8(void)
 void sub_80158BC(void)
 {
     s32 x, y;
-    Window *txtPtr = &gWindows[0];
+    Window *window = &gWindows[0];
     u32 var;
 
     switch (sub_8012AE8()) {
@@ -702,8 +702,8 @@ void sub_80158BC(void)
         gUnknown_203B1FC->unk17 = 8;
     }
 
-    x =  gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].x + (txtPtr->unk0 * 8) - 5;
-    y =  gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].y + (txtPtr->unk2 * 8) + 1;
+    x =  gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].x + (window->x * 8) - 5;
+    y =  gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].y + (window->y * 8) + 1;
     SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite2Attribs, x);
     SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite2Attribs, y);
 }
@@ -769,8 +769,8 @@ void sub_8015A08(u32 unused)
         }
     }
 
-    sub_800792C(0, 0, 0, 0xE0, 0xE);
-    sub_800792C(0, 0, 0x47, 0xE0, 0xE);
+    AddUnderScoreHighlight(0, 0, 0, 0xE0, 0xE);
+    AddUnderScoreHighlight(0, 0, 0x47, 0xE0, 0xE);
     sub_8007A78(0, 0, 0, 0x48, 0xE);
     sub_8007A78(0, 0xDF, 0, 0x48, 0xE);
     sub_80073E0(0);
@@ -783,14 +783,14 @@ void sub_8015C1C(void)
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
     if (gUnknown_203B1FC->unk4 != 0) {
-        sub_800792C(1, 0, 0, 0xE0, 0xE);
-        sub_800792C(1, 0, 0x37, 0xE0, 0xE);
+        AddUnderScoreHighlight(1, 0, 0, 0xE0, 0xE);
+        AddUnderScoreHighlight(1, 0, 0x37, 0xE0, 0xE);
         sub_8007A78(1, 0, 0, 0x38, 0xE);
         sub_8007A78(1, 0xDF, 0, 0x38, 0xE);
     }
     else {
-        sub_800792C(1, 0, 0, 0xB0, 0xE);
-        sub_800792C(1, 0, 0x27, 0xB0, 0xE);
+        AddUnderScoreHighlight(1, 0, 0, 0xB0, 0xE);
+        AddUnderScoreHighlight(1, 0, 0x27, 0xB0, 0xE);
         sub_8007A78(1, 0, 0, 0x28, 0xE);
         sub_8007A78(1, 0xAF, 0, 0x28, 0xE);
     }
@@ -827,7 +827,7 @@ void sub_8015C1C(void)
         case 1:
         case 2:
         case 3:
-            sub_80078A4(1, 38, 33, sub_8016028(), 4);
+            AddDoubleUnderScoreHighlight(1, 38, 33, sub_8016028(), 4);
             if (sub_8015FEC(gUnknown_203B1FC->unkF8, gUnknown_203B1FC->unk1B) > sub_8016028()) {
                 sprintfStatic(text, _("{COLOR RED}%s{RESET}"), gUnknown_203B1FC->unkF8);
             }
@@ -850,7 +850,7 @@ void sub_8015E10(u8 *a0, s32 a1, s32 _a2)
     s32 a2 = (s16) _a2;
 
     for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DAFC0); i++) {
-        sub_80078A4(a1, gUnknown_80DAFC0[i].x, gUnknown_80DAFC0[i].y + 11 + a2, 11, 5);
+        AddDoubleUnderScoreHighlight(a1, gUnknown_80DAFC0[i].x, gUnknown_80DAFC0[i].y + 11 + a2, 11, 5);
     }
 
     for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DAFC0) && a0[i] != 0; i++) {
@@ -876,7 +876,7 @@ void sub_8015EB4(u8 *a0, s32 a1, s32 _a2)
     s32 a2 = (s16) _a2;
 
     for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DB098); i++) {
-        sub_80078A4(a1, gUnknown_80DB098[i].x, gUnknown_80DB098[i].y + 11 + a2, 12, 5);
+        AddDoubleUnderScoreHighlight(a1, gUnknown_80DB098[i].x, gUnknown_80DB098[i].y + 11 + a2, 12, 5);
     }
 
     for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DB098) && a0[i] != 0; i++) {
