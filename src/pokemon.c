@@ -1215,67 +1215,31 @@ s32 sub_808E218(unkStruct_808E218_arg* a1, PokemonStruct1* pokemon)
   return count;
 }
 
-
 s32 GetEvolutionSequence(PokemonStruct1* pokemon, struct EvolveStage* a2)
 {
-#ifdef NONMATCHING
-  s32 count;
-  s32 species;
-  s32 i;
+    s32 count;
+    s32 species;
+    s32 i;
 
-  a2[0].speciesNum = pokemon->speciesNum;
-  a2[0].level = pokemon->level;
+    a2[0].speciesNum = pokemon->speciesNum;
+    a2[0].level = pokemon->level;
 
-  count = 1;
-  species = pokemon->speciesNum;
-  i = 0;
+    count = 1;
+    species = pokemon->speciesNum;
 
-  for (; i < 2; i++) {
-      if (!pokemon->unkC[i].level) {
-          break;
-      }
-      species = (s16) GetPokemonEvolveFrom(species);
-      if (!species) {
-          break;
-      }
-      a2[1 + i].speciesNum = species;
-      a2[1 + i].level = pokemon->unkC[i].level;
-      // wrong increment order:
-      count++;
-  }
-  return count;
-#else
-  s32 count;
-  s32 species;
-  s32 i;
-  struct EvolveStage* stage;
-  struct unkPokeSubStruct_C* has_next_stage;
-
-  a2[0].speciesNum = pokemon->speciesNum;
-  a2[0].level = pokemon->level;
-
-  count = 1;
-  species = pokemon->speciesNum;
-  i = 0;
-  has_next_stage = pokemon->unkC;
-  stage = &a2[1];
-
-  for (; i < 2; i++) {
-      if (!has_next_stage->level) {
-          break;
-      }
-      species = (s16) GetPokemonEvolveFrom(species);
-      if (!species) {
-          break;
-      }
-      stage->speciesNum = species;
-      stage->level = has_next_stage->level;
-      stage++;
-      count++;
-      has_next_stage++;
-  }
-  return count;
-#endif
+    for (i = 0; i < 2; i++) {
+        if (!pokemon->unkC[i].level) {
+            break;
+        }
+        species = (s16) GetPokemonEvolveFrom(species);
+        if (!species) {
+            break;
+        }
+        a2[count].speciesNum = species;
+        a2[count].level = pokemon->unkC[i].level;
+        count++;
+    }
+    return count;
 }
 
 s32 sub_808E400(s32 _species, s16* _a2, bool32 _bodySizeCheck, bool32 _shedinjaCheck)
