@@ -9,6 +9,8 @@
 #include "dungeon_music.h"
 #include "file_system.h"
 #include "play_time.h"
+#include "cpu.h"
+#include "dungeon.h"
 
 extern s32 gUnknown_80F6568[];
 extern u8 gUnknown_202EE01;
@@ -80,4 +82,35 @@ void sub_8040124(void)
 void sub_8040130(void)
 {
     gUnknown_202EE04 = OpenFileAndGetFileDataPtr(&gUnknown_80F6604, &gDungeonFileArchive);
+}
+
+extern DungeonPos gUnknown_203B410;
+extern u8 gUnknown_202EE00;
+extern void *gUnknown_202EE08;
+
+void sub_8040238(void);
+
+void sub_8040150(bool8 a0)
+{
+    s32 i, j;
+
+    for (i = 0; i < UNK1822C_ARR_COUNT; i++) {
+        for (j = 0; j < UNK1822C_ARR_COUNT_2; j++) {
+            CpuClear(&gDungeon->unk1822C.unk1822C[i][j], sizeof(struct UnkDungeonGlobal_1822C_Sub));
+            gDungeon->unk1822C.unk1BA2C[i][j] = 0;
+        }
+    }
+
+    if (!a0) {
+        gUnknown_203B410.x = 100;
+        gUnknown_203B410.y = 100;
+    }
+
+    gDungeon->unk1822C.unk1BDCC = 0;
+    gDungeon->unk1822C.unk1BDD0 = 1;
+    gDungeon->unk1822C.unk1BDD2 = 0;
+    gUnknown_202EE00 = 1;
+    gUnknown_202EE08 = (void *) VRAM + 0x1700;
+    gUnknown_202EE01 = 1;
+    sub_8040238();
 }
