@@ -4,6 +4,10 @@
 #include "structs/dungeon_entity.h"
 #include "string_format.h"
 
+// These flags are used in dungeon message and dungeon menu recruitment file. It's possible these are general scroll flags and should be put elsewhere, like text.h, assuming more files actually use it.
+#define FLAG_CAN_SCROLL_UP      0x1
+#define FLAG_CAN_SCROLL_DOWN    0x2
+
 struct MonDialogueSpriteInfo
 {
     s16 species;

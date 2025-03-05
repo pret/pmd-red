@@ -149,8 +149,6 @@ static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
 EWRAM_DATA static SpriteOAM gUnknown_202F268 = {0};
 EWRAM_DATA static WindowHeader sTeamWindowHeader = {0};
 
-EWRAM_INIT u8 gUnknown_203B43C[4] = {2, 0, 0xD, 0}; // TODO: Move to a better file and figure out the array count. Apparently it's only written to.
-
 struct UnkFieldTeamMenuStruct
 {
     s32 unk0;

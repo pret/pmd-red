@@ -37,7 +37,6 @@ extern void sub_8040238(void);
 extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 
 extern MenuInputStruct gDungeonMenu;
-extern s32 gDungeonSubMenuItemsCount;
 
 extern const u8 *const gUnknown_80FEBF8;
 extern const u8 *const gUnknown_80FEC28;

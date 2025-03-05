@@ -61,10 +61,6 @@ static EWRAM_DATA u8 sMessageLogFlags = 0;
 static EWRAM_DATA SpriteOAM sMessageLogArrowSpriteOAM = {0};
 EWRAM_INIT u8 gUnknown_203B434 = 1;
 
-// Used for sMessageLogFlags
-#define FLAG_CAN_SCROLL_UP      0x1
-#define FLAG_CAN_SCROLL_DOWN    0x2
-
 void sub_80521D0(void)
 {
     s32 i;

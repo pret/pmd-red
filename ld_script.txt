@@ -235,7 +235,6 @@ SECTIONS {
         src/dungeon_menu_stairs.o(.text);
         src/dungeon_menu_others.o(.text);
         src/dungeon_menu_recruitment.o(.text);
-        asm/code_805D8C8.o(.text);
         src/code_8066D04.o(.text);
         src/code_805D8C8.o(.text);
         asm/code_805D8C8_1.o(.text);
