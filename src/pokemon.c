@@ -16,7 +16,6 @@
 #include "cpu.h"
 
 extern struct FileArchive gSystemFileArchive;
-extern struct FileArchive gMonsterFileArchive;
 
 static EWRAM_DATA MonsterDataEntry *gMonsterParameters = {0};
 static EWRAM_DATA OpenedFile *gMonsterParametersFile = {0};
