@@ -291,7 +291,7 @@ static void sub_801059C(void)
     sWorldMapPtr->unk1100[4] = OpenFileAndGetFileDataPtr(gUnknown_80D4014[2], &gTitleMenuFileArchive);
     sWorldMapPtr->unk1100[1] = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
     sWorldMapPtr->unk1100[0] = OpenFileAndGetFileDataPtr(gUnknown_80D4014[3], &gTitleMenuFileArchive);
-    sWorldMapPtr->unk52D4 = GetPokemonOverworldPalette(pokeStruct->speciesNum, 0);
+    sWorldMapPtr->unk52D4 = GetPokemonOverworldPalette(pokeStruct->speciesNum, FALSE);
 
     sub_8005610(sWorldMapPtr->unk1100[2], 0x40, 0x1F, 0);
 
