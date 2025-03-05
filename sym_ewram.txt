@@ -157,15 +157,7 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
     .include "src/dungeon_menu_moves.o"
 	.space 0x4
     .include "src/dungeon_menu_others.o"
-
-gUnknown_202F2F8: /* 202F2F8 (sub_8065FB4 - sub_8066358) */
-	.space 0x4
-gUnknown_202F2FC: /* 202F2FC (sub_8065FB4 - sub_8066358) */
-	.space 0x4
-
-gUnknown_202F300: /* 202F300 (sub_8066434) */
-	.space 0x8
-
+    .include "src/dungeon_menu_recruitment.o"
     .include "src/code_8066D04.o"
     .include "src/dungeon_movement.o"
     .include "src/code_80718D8.o"

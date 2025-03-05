@@ -11,8 +11,6 @@
 #include "sprite.h"
 #include "exclusive_pokemon.h"
 
-extern const u8 gUnknown_8106D68[];
-
 extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
@@ -39,11 +37,11 @@ struct MonRecruitList
     s32 count;
 };
 
-static void sub_80661AC(struct MonRecruitList *tabData, s32 tabId);
+static void PrintAvailableMons(struct MonRecruitList *tabData, s32 tabId);
 static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1);
 static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 a1);
 static void CreateScrollingArrow(bool8 upArrow, s32 y);
-static void sub_80664FC(struct MonRecruitList *tabsData);
+static void SetRecruitableMons(struct MonRecruitList *tabsData);
 
 extern const u8 *const gUnknown_80FA61C;
 extern const u8 *const gUnknown_80FA5F4;
@@ -51,9 +49,10 @@ extern const u8 *const gUnknown_80FEA68;
 extern const u8 *const gUnknown_80FEA80;
 extern const u8 *const gUnknown_80FEA8C;
 
-extern s32 gUnknown_202F2F8;
-extern u8 gUnknown_202F2FC;
-extern SpriteOAM gUnknown_202F300;
+EWRAM_DATA static s32 sScrollId = 0;
+EWRAM_DATA static u8 sScrollFlags = 0;
+EWRAM_DATA static SpriteOAM sScrollingArrowOAM = {0};
+EWRAM_INIT static WindowHeader sRecruitmentWindowHeader = {2, 0, 13, 0};
 
 enum {
     TAB_POTENTIAL_RECRUITS,
@@ -61,7 +60,6 @@ enum {
     TABS_COUNT
 };
 
-static EWRAM_INIT WindowHeader sRecruitmentWindowHeader = {2, 0, 13, 0};
 
 static const WindowTemplates sRecruitmentSearchWindows = {
     .id = {
@@ -80,6 +78,8 @@ static const WindowTemplates sRecruitmentSearchWindows = {
         }
 };
 
+static const u8 gUnknown_8106D68[] = {1, 0, 56, 0, 0, 0, 24, 0, 24, 0, 0, 0, 2, 0, 56, 0, 104, 0, 24, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
 void ShowRecruitmentSearchMenu(void)
 {
     s32 currTabId = 0;
@@ -93,7 +93,7 @@ void ShowRecruitmentSearchMenu(void)
     else {
         struct MonRecruitList tabsData[2];
 
-        sub_80664FC(tabsData);
+        SetRecruitableMons(tabsData);
         while (1) {
             bool8 closeWindow = FALSE;
             struct MonRecruitList *currTabData = &tabsData[currTabId];
@@ -110,9 +110,9 @@ void ShowRecruitmentSearchMenu(void)
             gDungeonMenu.unk14.x = 0;
             gDungeonMenu.unk0 = 0;
             sub_801317C(&gDungeonMenu.unk28);
-            gUnknown_202F2F8 = 0;
-            gUnknown_202F2FC = 0;
-            sub_80661AC(currTabData, currTabId);
+            sScrollId = 0;
+            sScrollFlags = 0;
+            PrintAvailableMons(currTabData, currTabId);
             gDungeonMenu.unkC = (gWindows[0].x + 16) * 8;
             gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
 
@@ -120,7 +120,7 @@ void ShowRecruitmentSearchMenu(void)
                 s32 unkVar;
                 bool8 scroll = FALSE;
 
-                gUnknown_202F2FC = 0;
+                sScrollFlags = 0;
                 unkVar = sub_8014140(0, gUnknown_8106D68);
                 if (TryScrollUp(currTabData, unkVar)) {
                     scroll = TRUE;
@@ -134,10 +134,10 @@ void ShowRecruitmentSearchMenu(void)
                     DungeonRunFrameActions(0x45);
                 }
 
-                if (gUnknown_202F2FC & FLAG_CAN_SCROLL_UP) {
+                if (sScrollFlags & FLAG_CAN_SCROLL_UP) {
                     CreateScrollingArrow(TRUE, 8);
                 }
-                if (gUnknown_202F2FC & FLAG_CAN_SCROLL_DOWN) {
+                if (sScrollFlags & FLAG_CAN_SCROLL_DOWN) {
                     CreateScrollingArrow(FALSE, 0x70);
                 }
 
@@ -169,13 +169,11 @@ void ShowRecruitmentSearchMenu(void)
     }
 }
 
-extern const u8 gUnknown_8106D8C[];
-
-static void sub_80661AC(struct MonRecruitList *tabData, s32 tabId)
+static void PrintAvailableMons(struct MonRecruitList *tabData, s32 tabId)
 {
     u8 text[64];
     s32 i;
-    s32 menuMonId = gUnknown_202F2F8;
+    s32 menuMonId = sScrollId;
     s32 y = 32;
 
     sub_80073B8(0);
@@ -189,7 +187,7 @@ static void sub_80661AC(struct MonRecruitList *tabData, s32 tabId)
     if (tabData->count != 0) {
         for (i = 0; i < 8; i++, menuMonId++, y += 12) {
             if (menuMonId >= 0 && menuMonId < tabData->count) {
-                sprintfStatic(text, gUnknown_8106D8C, tabData->monColor[menuMonId]);
+                sprintfStatic(text, _("{color}%d{POKEMON_0}"), tabData->monColor[menuMonId]);
                 sub_808D930(gFormatBuffer_Monsters[0], tabData->speciesIds[menuMonId]);
                 PrintFormattedStringOnWindow(8, y, text, 0, '\0');
             }
@@ -205,12 +203,12 @@ static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1)
 {
     s32 i;
     u8 text[64];
-    s32 menuMonId = gUnknown_202F2F8;
+    s32 menuMonId = sScrollId;
     if (menuMonId == 0)
         return FALSE;
 
     menuMonId--;
-    gUnknown_202F2FC |= FLAG_CAN_SCROLL_UP;
+    sScrollFlags |= FLAG_CAN_SCROLL_UP;
     if (!(gRealInputs.repeated & DPAD_UP) && a1 != 1) {
         return FALSE;
     }
@@ -218,7 +216,7 @@ static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1)
         PlayDungeonCursorSE(FALSE);
         sub_80073B8(0);
         sub_80087EC(0, 0, 16, 144, 16);
-        sprintfStatic(text, gUnknown_8106D8C, tabData->monColor[menuMonId]);
+        sprintfStatic(text, _("{color}%d{POKEMON_0}"), tabData->monColor[menuMonId]);
         sub_808D930(gFormatBuffer_Monsters[0], tabData->speciesIds[menuMonId]);
         PrintFormattedStringOnWindow(8, 20, text, 0, '\0');
         sub_80073E0(0);
@@ -227,7 +225,7 @@ static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1)
             ScrollUpWindowFunc(0);
             DungeonRunFrameActions(0x45);
         }
-        gUnknown_202F2F8--;
+        sScrollId--;
         return TRUE;
     }
 }
@@ -236,12 +234,12 @@ static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 a1)
 {
     s32 i;
     u8 text[64];
-    s32 menuMonId = gUnknown_202F2F8 + 8;
+    s32 menuMonId = sScrollId + 8;
     s32 y = 128;
     if (tabData->count <= menuMonId)
         return FALSE;
 
-    gUnknown_202F2FC |= FLAG_CAN_SCROLL_DOWN;
+    sScrollFlags |= FLAG_CAN_SCROLL_DOWN;
     if (!(gRealInputs.repeated & DPAD_DOWN) && a1 != 2) {
         return FALSE;
     }
@@ -249,7 +247,7 @@ static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 a1)
         PlayDungeonCursorSE(FALSE);
         sub_80073B8(0);
         sub_80087EC(0, 0, y, 72, 16);
-        sprintfStatic(text, gUnknown_8106D8C, tabData->monColor[menuMonId]);
+        sprintfStatic(text, _("{color}%d{POKEMON_0}"), tabData->monColor[menuMonId]);
         sub_808D930(gFormatBuffer_Monsters[0], tabData->speciesIds[menuMonId]);
         PrintFormattedStringOnWindow(8, y, text, 0, '\0');
         sub_80073E0(0);
@@ -258,7 +256,7 @@ static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 a1)
             ScrollDownWindowFunc(0);
             DungeonRunFrameActions(13);
         }
-        gUnknown_202F2F8++;
+        sScrollId++;
         return TRUE;
     }
 }
@@ -268,26 +266,26 @@ static void CreateScrollingArrow(bool8 upArrow, s32 y)
 {
     struct Window *window = &gWindows[0];
     if (!(gDungeonFramesCounter & 8)) {
-        SpriteSetAffine1(&gUnknown_202F300, 0);
-        SpriteSetAffine2(&gUnknown_202F300, 0);
-        SpriteSetObjMode(&gUnknown_202F300, 0);
-        SpriteSetMosaic(&gUnknown_202F300, 0);
-        SpriteSetBpp(&gUnknown_202F300, 0);
-        SpriteSetMatrixNum(&gUnknown_202F300, (upArrow != FALSE) ? (16) : 0);
-        SpriteSetPalNum(&gUnknown_202F300, 15);
-        SpriteSetY(&gUnknown_202F300, (window->y * 8) + y);
-        SpriteSetX(&gUnknown_202F300, (window->x * 8) + 64);
-        SpriteSetShape(&gUnknown_202F300, 1);
-        SpriteSetSize(&gUnknown_202F300, 0);
-        SpriteSetPriority(&gUnknown_202F300, 0);
-        SpriteSetPalNum(&gUnknown_202F300, 15);
-        SpriteSetTileNum(&gUnknown_202F300, 0x3f0);
+        SpriteSetAffine1(&sScrollingArrowOAM, 0);
+        SpriteSetAffine2(&sScrollingArrowOAM, 0);
+        SpriteSetObjMode(&sScrollingArrowOAM, 0);
+        SpriteSetMosaic(&sScrollingArrowOAM, 0);
+        SpriteSetBpp(&sScrollingArrowOAM, 0);
+        SpriteSetMatrixNum(&sScrollingArrowOAM, (upArrow != FALSE) ? (16) : 0);
+        SpriteSetPalNum(&sScrollingArrowOAM, 15);
+        SpriteSetY(&sScrollingArrowOAM, (window->y * 8) + y);
+        SpriteSetX(&sScrollingArrowOAM, (window->x * 8) + 64);
+        SpriteSetShape(&sScrollingArrowOAM, 1);
+        SpriteSetSize(&sScrollingArrowOAM, 0);
+        SpriteSetPriority(&sScrollingArrowOAM, 0);
+        SpriteSetPalNum(&sScrollingArrowOAM, 15);
+        SpriteSetTileNum(&sScrollingArrowOAM, 0x3f0);
 
-        AddSprite(&gUnknown_202F300, 127, NULL, NULL);
+        AddSprite(&sScrollingArrowOAM, 127, NULL, NULL);
     }
 }
 
-static void sub_80664FC(struct MonRecruitList *tabsData)
+static void SetRecruitableMons(struct MonRecruitList *tabsData)
 {
     s32 i, id, dummy;
     u8 spArray[MONSTER_MAX];
