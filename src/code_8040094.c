@@ -105,7 +105,7 @@ void sub_8040150(bool8 a0)
     for (i = 0; i < UNK1822C_ARR_COUNT; i++) {
         for (j = 0; j < UNK1822C_ARR_COUNT_2; j++) {
             CpuClear(&gDungeon->unk1822C.unk1822C[i][j], sizeof(struct UnkDungeonGlobal_1822C_Sub));
-            gDungeon->unk1822C.unk1BA2C[i][j] = 0;
+            gDungeon->unk1822C.unk1BA2C[i][j] = FALSE;
         }
     }
 
@@ -427,16 +427,109 @@ void sub_80402AC(s32 x, s32 y)
     if (!dungeon->unk1822C.unk1BDD1 && !dungeon->unk1822C.unk1BA2C[yDiv2][xDiv2]) {
         s32 id;
 
-        dungeon->unk1822C.unk1BA2C[yDiv2][xDiv2] = 1;
+        dungeon->unk1822C.unk1BA2C[yDiv2][xDiv2] = TRUE;
         id = dungeon->unk1822C.unk1BDCC;
         if (id < 40) {
-            dungeon->unk1822C.unk1BBEC[id][0] = gUnknown_202EE08 + ((xDiv2 + yDiv2 * 28) * 32);
-            dungeon->unk1822C.unk1BBEC[id][1] = dst;
-            dungeon->unk1822C.unk1BBEC[id][2] = &dungeon->unk1822C.unk1BA2C[yDiv2][xDiv2];
+            dungeon->unk1822C.unk1BBEC[id].ptr1 = gUnknown_202EE08 + ((xDiv2 + yDiv2 * 28) * 32);
+            dungeon->unk1822C.unk1BBEC[id].ptr2 = dst;
+            dungeon->unk1822C.unk1BBEC[id].boolPtr = &dungeon->unk1822C.unk1BA2C[yDiv2][xDiv2];
             dungeon->unk1822C.unk1BDCC++;
         }
         else {
             dungeon->unk1822C.unk1BDD1 = 1;
+        }
+    }
+}
+
+extern s32 gUnknown_202EDD0;
+
+void sub_8040788(void)
+{
+    s32 i;
+    Dungeon *dungeon = gDungeon;
+    if (dungeon == NULL)
+        return;
+    if (!dungeon->unk1822C.unk1BDD0)
+        return;
+    if (sub_800EC74())
+        return;
+
+    if (!dungeon->unk1822C.unk1BDD1) {
+        for (i = 0; i < dungeon->unk1822C.unk1BDCC; i++) {
+            struct UnkDungeonGlobal_unk1BBEC *ptr = &dungeon->unk1822C.unk1BBEC[i];
+            u32 *src = ptr->ptr2;
+            u32 *dst = ptr->ptr1;
+
+            if (gUnknown_202EDD0 == 0 || gUnknown_202EDD0 == 3) {
+                *dst++ = *src++;
+                *dst++ = *src++;
+                *dst++ = *src++;
+                *dst++ = *src++;
+                *dst++ = *src++;
+                *dst++ = *src++;
+                *dst++ = *src++;
+                *dst++ = *src++;
+            }
+            *ptr->boolPtr = FALSE;
+        }
+    }
+    else {
+        void *dst, *src;
+
+        dungeon->unk1822C.unk1BDD1 = FALSE;
+        dst = gUnknown_202EE08;
+        src = dungeon->unk1822C.unk1822C[0][0].arr;
+
+        for (i = 0; i < DUNGEON_MAX_SIZE_X * 8; i += 8) {
+            if (gUnknown_202EDD0 == 0 || gUnknown_202EDD0 == 3) {
+                CpuCopy(dst, src, 0x100);
+            }
+            dst += 0x100;
+            src += 0x100;
+        }
+        dungeon->unk1822C.unk1BDD2 = 1;
+    }
+    dungeon->unk1822C.unk1BDCC = 0;
+}
+
+extern u8 gUnknown_202EE02;
+
+extern void nullsub_11(SpriteOAM *, s32, UnkSpriteMem *, unkStruct_2039DB0 *);
+
+void sub_8040894(void)
+{
+    if (gDungeon->unk181e8.unk18214)
+        return;
+    if (!gDungeon->unk181e8.unk18219)
+        return;
+    if (gUnknown_203B410.x >= 100)
+        return;
+    if ((++gUnknown_202EE02 & 8) == 0) {
+        SpriteOAM sprite = {0};
+
+        SpriteSetAffine1(&sprite, 0);
+        SpriteSetAffine2(&sprite, 0);
+        SpriteSetObjMode(&sprite, 0);
+        SpriteSetMosaic(&sprite, 0);
+        SpriteSetBpp(&sprite, 0);
+        SpriteSetShape(&sprite, 0);
+        SpriteSetMatrixNum(&sprite, 0);
+        SpriteSetSize(&sprite, 0);
+        SpriteSetTileNum(&sprite, 0x215);
+        SpriteSetPriority(&sprite, 0);
+        SpriteSetPalNum(&sprite, 15);
+        SpriteSetUnk6_0(&sprite, 0);
+        SpriteSetUnk6_1(&sprite, 0);
+        // Nulled on GBA
+        if (gGameOptionsRef->mapOption == TOP_MAP_AND_TEAM_NO_BOTTOM) {
+            SpriteSetX(&sprite, (gUnknown_203B410.x * 4) + 16);
+            SpriteSetY(&sprite, (gUnknown_203B410.y + 1) * 4);
+            nullsub_11(&sprite,0x100,NULL,NULL);
+        }
+        else {
+            SpriteSetX(&sprite, (gUnknown_203B410.x * 4) + 8);
+            SpriteSetY(&sprite, (gUnknown_203B410.y) * 4);
+            AddSprite(&sprite,0x100,NULL,NULL);
         }
     }
 }

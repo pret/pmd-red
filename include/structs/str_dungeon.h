@@ -341,11 +341,18 @@ struct UnkDungeonGlobal_1822C_Sub
 #define UNK1822C_ARR_COUNT 16
 #define UNK1822C_ARR_COUNT_2 28
 
+struct UnkDungeonGlobal_unk1BBEC
+{
+    u32 *ptr1;
+    u32 *ptr2;
+    bool8 *boolPtr;
+};
+
 struct UnkDungeonGlobal_1822C
 {
     struct UnkDungeonGlobal_1822C_Sub unk1822C[UNK1822C_ARR_COUNT][UNK1822C_ARR_COUNT_2];
-    u8 unk1BA2C[UNK1822C_ARR_COUNT][UNK1822C_ARR_COUNT_2];
-    void *unk1BBEC[40][3];
+    bool8 unk1BA2C[UNK1822C_ARR_COUNT][UNK1822C_ARR_COUNT_2];
+    struct UnkDungeonGlobal_unk1BBEC unk1BBEC[40];
     s32 unk1BDCC;
     u8 unk1BDD0;
     u8 unk1BDD1;
