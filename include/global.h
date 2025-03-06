@@ -8,6 +8,10 @@
 #include "constants/global.h"
 #include "constants/monster.h"
 
+#define VERSION_BLUE 0
+#define VERSION_RED 1
+#define GAME_VERSION VERSION_RED
+
 // IDE support
 #if defined(__APPLE__) || defined(__CYGWIN__)
 #define _(x) x

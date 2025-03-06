@@ -332,9 +332,10 @@ typedef struct unkDungeon57C
 #define UNK12A18_ARR_COUNT 29
 #define UNK12A18_ARR_COUNT_2 9
 
+// Some palette?
 struct UnkDungeonGlobal_1822C_Sub
 {
-    u8 fill0[0x20];
+    u32 arr[8];
 };
 
 #define UNK1822C_ARR_COUNT 16
@@ -344,10 +345,10 @@ struct UnkDungeonGlobal_1822C
 {
     struct UnkDungeonGlobal_1822C_Sub unk1822C[UNK1822C_ARR_COUNT][UNK1822C_ARR_COUNT_2];
     u8 unk1BA2C[UNK1822C_ARR_COUNT][UNK1822C_ARR_COUNT_2];
-    u8 fillUnk[0x1e0];
+    void *unk1BBEC[40][3];
     s32 unk1BDCC;
     u8 unk1BDD0;
-    u8 fill1BDD1;
+    u8 unk1BDD1;
     u8 unk1BDD2;
 };
 
