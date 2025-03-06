@@ -40,6 +40,7 @@
 #include "constants/trap.h"
 #include "dungeon_serializer.h"
 #include "dungeon_config.h"
+#include "dungeon_map.h"
 
 extern void sub_800EE5C(s32);
 extern void sub_800EF64(void);
@@ -255,17 +256,13 @@ extern void sub_8040094(u8 r0);
 extern void sub_8068BDC(u8 r0);
 extern s16 GetTurnLimit(u8 dungeon);
 extern void sub_8041888(u8 param_1);
-extern void sub_8040150(bool8 param_1);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
 extern void sub_8043CD8(void);
 extern void sub_803E250(void);
-extern void sub_8040130(void);
-extern void sub_8040124(void);
 extern void sub_803E830(void);
 extern void sub_803E214(void);
 extern void nullsub_56(void);
-extern void sub_8040218(void);
 extern void sub_8047104(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
@@ -415,8 +412,8 @@ void RunDungeon(struct UnkStruct_RunDungeon *r8)
     sub_8043CD8();
     sub_80495E4();
     sub_803E250();
-    sub_8040130();
-    sub_8040124();
+    OpenDungeonMapFile();
+    SetDungeonMapToNotShown();
     sub_803F27C(1);
     gUnknown_2026E4E = 2056;
     sub_80095CC(1, 0x14);
@@ -589,7 +586,7 @@ void RunDungeon(struct UnkStruct_RunDungeon *r8)
         sub_8049840();
         sub_803E178();
         gDungeonBrightness = 0;
-        sub_8040124();
+        SetDungeonMapToNotShown();
         sub_803EAF0(4, 0);
         sub_8052210(0);
         sub_803F27C(r6);
@@ -661,7 +658,7 @@ void RunDungeon(struct UnkStruct_RunDungeon *r8)
         }
         sub_8040094(0);
         sub_803EAF0(0, 0);
-        sub_8040150(r6);
+        InitDungeonMap(r6);
         sub_8040A84();
         gDungeon->unkB8 = NULL;
         gDungeon->unk644.unk28 = 0;
@@ -745,7 +742,7 @@ void RunDungeon(struct UnkStruct_RunDungeon *r8)
             sub_8052740(0x4F);
         }
 
-        sub_8040124();
+        SetDungeonMapToNotShown();
         sub_803EAF0(1, 0);
         gDungeon->unk181e8.unk18219 = 0;
         gDungeon->unk181e8.unk18218 = 1;
@@ -915,7 +912,7 @@ void RunDungeon(struct UnkStruct_RunDungeon *r8)
     CloseDungeonPaletteFile();
     sub_803E214();
     nullsub_56();
-    sub_8040218();
+    CloseDungeonMapFile();
     if (r8->unk7C == 1 || r8->unk7C == 4 || r8->unk7C == 2) {
         sub_8047104();
     }

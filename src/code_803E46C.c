@@ -7,7 +7,7 @@
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "code_803E668.h"
-
+#include "dungeon_map.h"
 #include "bg_palette_buffer.h"
 #include "bg_control.h"
 #include "dungeon_music.h"
@@ -32,7 +32,6 @@ void sub_806CC10();
 void sub_804522C();
 void sub_803F9CC();
 extern void xxx_call_update_bg_vram(void);
-void sub_8040894();
 void sub_803ECE0();
 void sub_803EDF0();
 void sub_800E90C();
@@ -82,7 +81,7 @@ void sub_803E490(u32 unused)
     sub_8042E5C();
 
     if(gUnknown_202EDD0 == 0 || gUnknown_202EDD0 == 3 || gGameOptionsRef->mapOption == TOP_MAP_AND_TEAM_NO_BOTTOM)
-        sub_8040894();
+        ShowPlayerDotOnMap();
     sub_803ECE0();
     sub_803EDF0();
 

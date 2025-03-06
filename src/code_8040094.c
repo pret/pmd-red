@@ -9,12 +9,6 @@
 #include "dungeon_music.h"
 #include "file_system.h"
 #include "play_time.h"
-#include "cpu.h"
-#include "dungeon.h"
-#include "code_8009804.h"
-#include "code_800E9E4.h"
-#include "dungeon_util.h"
-#include "code_804267C.h"
 
 extern s32 gUnknown_80F6568[];
 extern const char gUnknown_80F6604; // "zmappat"

@@ -6828,7 +6828,7 @@ _08065062:
 	ldr r0, [r0]
 	str r0, [r1]
 	bl sub_803E13C
-	bl sub_8040238
+	bl LoadDungeonMapPalette
 _08065088:
 	pop {r4}
 	pop {r0}

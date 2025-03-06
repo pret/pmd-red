@@ -9,6 +9,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "dungeon_map.h"
 #include "pokemon.h"
 #include "moves.h"
 #include "items.h"
@@ -76,7 +77,6 @@ bool8 sub_80701A4(Entity *a0);
 void sub_80647F0(Entity *a0);
 void sub_805E738(Entity *a0);
 void sub_803E708(s32 a0, s32 a1);
-void sub_8040A78(void);
 void sub_805E804(void);
 void sub_8064BE0(void);
 void sub_8075680(u32);
@@ -168,7 +168,7 @@ void DungeonHandlePlayerInput(void)
     }
 
     gDungeon->unk644.unk2F = 0;
-    sub_8040A78();
+    ResetMapPlayerDotFrames();
     if (gDungeon->unk1 != 0) {
         gDungeon->unk1 = 0;
         if (!ShouldMonsterRunAwayAndShowEffect(GetLeader(), TRUE)) {

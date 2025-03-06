@@ -348,9 +348,9 @@ struct UnkDungeonGlobal_unk1BBEC
     bool8 *boolPtr;
 };
 
-struct UnkDungeonGlobal_1822C
+struct DungeonMap
 {
-    struct UnkDungeonGlobal_1822C_Sub unk1822C[UNK1822C_ARR_COUNT][UNK1822C_ARR_COUNT_2];
+    struct UnkDungeonGlobal_1822C_Sub dungeonMap[UNK1822C_ARR_COUNT][UNK1822C_ARR_COUNT_2];
     bool8 unk1BA2C[UNK1822C_ARR_COUNT][UNK1822C_ARR_COUNT_2];
     struct UnkDungeonGlobal_unk1BBEC unk1BBEC[40];
     s32 unk1BDCC;
@@ -474,7 +474,7 @@ typedef struct Dungeon
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ UnkDungeonGlobal_unk181E8_sub unk181e8;
-    /* 0x1822C */ struct UnkDungeonGlobal_1822C unk1822C;
+    /* 0x1822C */ struct DungeonMap dungeonMap;
     /* 0x1BDD4 */ struct UnkStructDungeon1BDD4 unk1BDD4;
     /* 0x1BE14 */ struct MessageLogString messageLogStrings[MESSAGE_LOG_STRINGS_COUNT];
     /* 0x1C570 */ DungeonLocation unk1C570;

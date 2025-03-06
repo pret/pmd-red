@@ -1,4 +1,5 @@
 #include "global.h"
+#include "dungeon_map.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
@@ -29,32 +30,41 @@ extern bool8 DoesNotHaveShadedMap(void);
 
 extern const u8 gUnknown_80F65F0[];
 
-EWRAM_DATA u8 gUnknown_202EE00 = 0;
-EWRAM_DATA u8 gUnknown_202EE01 = 0;
-EWRAM_DATA static u8 gUnknown_202EE02 = 0;
-EWRAM_DATA static OpenedFile *gUnknown_202EE04 = NULL;
+struct UnkStruct1
+{
+    u32 **unk0;
+};
+
+struct DungeonMapGfx
+{
+    struct UnkStruct1 *gfx;
+    RGB *pal;
+};
+
+EWRAM_DATA bool8 gUnknown_202EE00 = FALSE;
+EWRAM_DATA bool8 gShowDungeonMap = FALSE;
+EWRAM_DATA static u8 sPlayerDotFrames = 0;
+EWRAM_DATA static OpenedFile *sDungeonMapGfxFile = NULL;
 EWRAM_DATA static void *gUnknown_202EE08 = NULL;
 
-void sub_8040238(void);
-
-void sub_8040124(void)
+void SetDungeonMapToNotShown(void)
 {
-    gUnknown_202EE01 = 0;
+    gShowDungeonMap = FALSE;
 }
 
-void sub_8040130(void)
+void OpenDungeonMapFile(void)
 {
-    gUnknown_202EE04 = OpenFileAndGetFileDataPtr(&gUnknown_80F6604, &gDungeonFileArchive);
+    sDungeonMapGfxFile = OpenFileAndGetFileDataPtr(&gUnknown_80F6604, &gDungeonFileArchive);
 }
 
-void sub_8040150(bool8 a0)
+void InitDungeonMap(bool8 a0)
 {
     s32 i, j;
 
     for (i = 0; i < UNK1822C_ARR_COUNT; i++) {
         for (j = 0; j < UNK1822C_ARR_COUNT_2; j++) {
-            CpuClear(&gDungeon->unk1822C.unk1822C[i][j], sizeof(struct UnkDungeonGlobal_1822C_Sub));
-            gDungeon->unk1822C.unk1BA2C[i][j] = FALSE;
+            CpuClear(&gDungeon->dungeonMap.dungeonMap[i][j], sizeof(struct UnkDungeonGlobal_1822C_Sub));
+            gDungeon->dungeonMap.unk1BA2C[i][j] = FALSE;
         }
     }
 
@@ -63,21 +73,21 @@ void sub_8040150(bool8 a0)
         gUnknown_203B410.y = 100;
     }
 
-    gDungeon->unk1822C.unk1BDCC = 0;
-    gDungeon->unk1822C.unk1BDD0 = 1;
-    gDungeon->unk1822C.unk1BDD2 = 0;
+    gDungeon->dungeonMap.unk1BDCC = 0;
+    gDungeon->dungeonMap.unk1BDD0 = 1;
+    gDungeon->dungeonMap.unk1BDD2 = 0;
     gUnknown_202EE00 = 1;
     gUnknown_202EE08 = (void *) VRAM + 0x1700;
-    gUnknown_202EE01 = 1;
-    sub_8040238();
+    gShowDungeonMap = TRUE;
+    LoadDungeonMapPalette();
 }
 
-void sub_8040218(void)
+void CloseDungeonMapFile(void)
 {
-    if (gUnknown_202EE04 != NULL) {
-        CloseFile(gUnknown_202EE04);
+    if (sDungeonMapGfxFile != NULL) {
+        CloseFile(sDungeonMapGfxFile);
     }
-    sub_8040124();
+    SetDungeonMapToNotShown();
 }
 
 // Used in Pmd's Blue version. Stores different Vram address in gUnknown_202EE08(maybe?), depending on TOP_MAP_AND_TEAM_NO_BOTTOM map option.
@@ -86,24 +96,13 @@ UNUSED static void nullsub_203(void)
 
 }
 
-struct UnkStruct1
-{
-    u32 **unk0;
-};
-
-struct UnkPaletteFileData
-{
-    struct UnkStruct1 *unk0;
-    RGB *pal;
-};
-
-void sub_8040238(void)
+void LoadDungeonMapPalette(void)
 {
     s32 i;
 
-    if (gUnknown_202EE04 == NULL)
+    if (sDungeonMapGfxFile == NULL)
         return;
-    if (!gUnknown_202EE01)
+    if (!gShowDungeonMap)
         return;
 
     for (i = 0; i < 16; i++) {
@@ -112,8 +111,8 @@ void sub_8040238(void)
             nullsub_5(238, &gFontPalette[1]);
         }
         else {
-            SetBGPaletteBufferColorArray(i + 224, &((struct UnkPaletteFileData *)(gUnknown_202EE04->data))->pal[i]);
-            nullsub_5(i + 224, &((struct UnkPaletteFileData *)(gUnknown_202EE04->data))->pal[i]);
+            SetBGPaletteBufferColorArray(i + 224, &((struct DungeonMapGfx *)(sDungeonMapGfxFile->data))->pal[i]);
+            nullsub_5(i + 224, &((struct DungeonMapGfx *)(sDungeonMapGfxFile->data))->pal[i]);
         }
     }
 }
@@ -140,9 +139,9 @@ void sub_80402AC(s32 x, s32 y)
     dungeon = gDungeon;
     r10 = TRUE;
 
-    if (gUnknown_202EE04 == NULL)
+    if (sDungeonMapGfxFile == NULL)
         return;
-    if (!gUnknown_202EE01)
+    if (!gShowDungeonMap)
         return;
     if (sub_800EC74())
         return;
@@ -353,10 +352,10 @@ void sub_80402AC(s32 x, s32 y)
     yDiv2 = (yMinus / 2);
     r3 = x - (xDiv2 * 2);
     r3 += (yMinus - (yDiv2 * 2)) * 2;
-    dst = dungeon->unk1822C.unk1822C[yDiv2][xDiv2].arr;
+    dst = dungeon->dungeonMap.dungeonMap[yDiv2][xDiv2].arr;
     {
-        struct UnkPaletteFileData *ptr = ((struct UnkPaletteFileData *)(&gUnknown_202EE04->data));
-        src = ptr->unk0->unk0[r6 * 4 + r3];
+        struct DungeonMapGfx *ptr = ((struct DungeonMapGfx *)(&sDungeonMapGfxFile->data));
+        src = ptr->gfx->unk0[r6 * 4 + r3];
     }
 
     dst[0] = (dst[0] & src[0]) | src[1];
@@ -368,19 +367,19 @@ void sub_80402AC(s32 x, s32 y)
     dst[6] = (dst[6] & src[12]) | src[13];
     dst[7] = (dst[7] & src[14]) | src[15];
 
-    if (!dungeon->unk1822C.unk1BDD1 && !dungeon->unk1822C.unk1BA2C[yDiv2][xDiv2]) {
+    if (!dungeon->dungeonMap.unk1BDD1 && !dungeon->dungeonMap.unk1BA2C[yDiv2][xDiv2]) {
         s32 id;
 
-        dungeon->unk1822C.unk1BA2C[yDiv2][xDiv2] = TRUE;
-        id = dungeon->unk1822C.unk1BDCC;
+        dungeon->dungeonMap.unk1BA2C[yDiv2][xDiv2] = TRUE;
+        id = dungeon->dungeonMap.unk1BDCC;
         if (id < 40) {
-            dungeon->unk1822C.unk1BBEC[id].ptr1 = gUnknown_202EE08 + ((xDiv2 + yDiv2 * 28) * 32);
-            dungeon->unk1822C.unk1BBEC[id].ptr2 = dst;
-            dungeon->unk1822C.unk1BBEC[id].boolPtr = &dungeon->unk1822C.unk1BA2C[yDiv2][xDiv2];
-            dungeon->unk1822C.unk1BDCC++;
+            dungeon->dungeonMap.unk1BBEC[id].ptr1 = gUnknown_202EE08 + ((xDiv2 + yDiv2 * 28) * 32);
+            dungeon->dungeonMap.unk1BBEC[id].ptr2 = dst;
+            dungeon->dungeonMap.unk1BBEC[id].boolPtr = &dungeon->dungeonMap.unk1BA2C[yDiv2][xDiv2];
+            dungeon->dungeonMap.unk1BDCC++;
         }
         else {
-            dungeon->unk1822C.unk1BDD1 = 1;
+            dungeon->dungeonMap.unk1BDD1 = 1;
         }
     }
 }
@@ -391,14 +390,14 @@ void sub_8040788(void)
     Dungeon *dungeon = gDungeon;
     if (dungeon == NULL)
         return;
-    if (!dungeon->unk1822C.unk1BDD0)
+    if (!dungeon->dungeonMap.unk1BDD0)
         return;
     if (sub_800EC74())
         return;
 
-    if (!dungeon->unk1822C.unk1BDD1) {
-        for (i = 0; i < dungeon->unk1822C.unk1BDCC; i++) {
-            struct UnkDungeonGlobal_unk1BBEC *ptr = &dungeon->unk1822C.unk1BBEC[i];
+    if (!dungeon->dungeonMap.unk1BDD1) {
+        for (i = 0; i < dungeon->dungeonMap.unk1BDCC; i++) {
+            struct UnkDungeonGlobal_unk1BBEC *ptr = &dungeon->dungeonMap.unk1BBEC[i];
             u32 *src = ptr->ptr2;
             u32 *dst = ptr->ptr1;
 
@@ -418,9 +417,9 @@ void sub_8040788(void)
     else {
         void *dst, *src;
 
-        dungeon->unk1822C.unk1BDD1 = FALSE;
+        dungeon->dungeonMap.unk1BDD1 = FALSE;
         dst = gUnknown_202EE08;
-        src = dungeon->unk1822C.unk1822C[0][0].arr;
+        src = dungeon->dungeonMap.dungeonMap[0][0].arr;
 
         for (i = 0; i < DUNGEON_MAX_SIZE_X * 8; i += 8) {
             if (gUnknown_202EDD0 == 0 || gUnknown_202EDD0 == 3) {
@@ -429,12 +428,12 @@ void sub_8040788(void)
             dst += 0x100;
             src += 0x100;
         }
-        dungeon->unk1822C.unk1BDD2 = 1;
+        dungeon->dungeonMap.unk1BDD2 = 1;
     }
-    dungeon->unk1822C.unk1BDCC = 0;
+    dungeon->dungeonMap.unk1BDCC = 0;
 }
 
-void sub_8040894(void)
+void ShowPlayerDotOnMap(void)
 {
     if (gDungeon->unk181e8.unk18214)
         return;
@@ -442,7 +441,7 @@ void sub_8040894(void)
         return;
     if (gUnknown_203B410.x >= 100)
         return;
-    if ((++gUnknown_202EE02 & 8) == 0) {
+    if ((++sPlayerDotFrames & 8) == 0) {
         SpriteOAM sprite = {0};
 
         SpriteSetAffine1(&sprite, 0);
@@ -472,16 +471,16 @@ void sub_8040894(void)
     }
 }
 
-void sub_8040A78(void)
+void ResetMapPlayerDotFrames(void)
 {
-    gUnknown_202EE02 = 0;
+    sPlayerDotFrames = 0;
 }
 
 void sub_8040A84(void)
 {
     s32 x, y;
 
-    gDungeon->unk1822C.unk1BDD1 = TRUE;
+    gDungeon->dungeonMap.unk1BDD1 = TRUE;
 
     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
         for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
@@ -533,20 +532,20 @@ void sub_8040B60(void)
 {
     s32 x, y;
     Dungeon *dungeon = gDungeon;
-    if (dungeon->unk1822C.unk1BDD2) {
+    if (dungeon->dungeonMap.unk1BDD2) {
         #ifdef BUGFIX
         for (y = 0; y < UNK1822C_ARR_COUNT; y++) {
             for (x = 0; x < UNK1822C_ARR_COUNT_2; x++) {
-                dungeon->unk1822C.unk1BA2C[y][x] = FALSE;
+                dungeon->dungeonMap.unk1BA2C[y][x] = FALSE;
             }
         }
         #else
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
             for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
-                dungeon->unk1822C.unk1BA2C[y][x] = FALSE;
+                dungeon->dungeonMap.unk1BA2C[y][x] = FALSE;
             }
         }
         #endif // BUGFIX
-        dungeon->unk1822C.unk1BDD2 = FALSE;
+        dungeon->dungeonMap.unk1BDD2 = FALSE;
     }
 }
