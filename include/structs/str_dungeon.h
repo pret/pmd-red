@@ -338,8 +338,8 @@ struct UnkDungeonGlobal_1822C_Sub
     u32 arr[8];
 };
 
-#define UNK1822C_ARR_COUNT 16
-#define UNK1822C_ARR_COUNT_2 28
+#define UNK1822C_ARR_COUNT (DUNGEON_MAX_SIZE_Y / 2)
+#define UNK1822C_ARR_COUNT_2 (DUNGEON_MAX_SIZE_X / 2)
 
 struct UnkDungeonGlobal_unk1BBEC
 {
