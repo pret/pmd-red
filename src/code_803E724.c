@@ -14,6 +14,7 @@
 #include "dungeon_map_access.h"
 #include "sprite.h"
 #include "bg_control.h"
+#include "dungeon_map.h"
 #include "game_options.h"
 #include "code_800558C.h"
 #include "dungeon_range.h"
@@ -54,15 +55,14 @@ extern u8 gUnknown_20274A5;
 
 extern s32 gUnknown_202EDCC;
 
-extern void sub_8040A84();
+extern void ShowWholeRevealedDungeonMap();
 extern void sub_8083D44(void);
-extern void sub_8040A84(void);
+extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
-extern void sub_80402AC(s32, s32);
+extern void ShowDungeonMapAtPos(s32, s32);
 
 void sub_803EC94(void);
-void sub_8040ABC(u8 a0);
 s32 sub_803EF90(s32 a0, u8 a1);
 void sub_803F580(u8 a0);
 void sub_803F7BC(void);
@@ -279,14 +279,14 @@ void sub_803EAF0(u32 a0, u8 *a1)
             sub_803EC94();
             ShowWindows(NULL, TRUE, TRUE);
             if (gUnknown_203B40C != 0) {
-                sub_8040A84();
-                sub_8040ABC(0);
+                ShowWholeRevealedDungeonMap();
+                UpdateBgTilemapForDungeonMap(FALSE);
             }
             break;
         case 3:
             ShowWindows(&gUnknown_80F62B0, TRUE, TRUE);
             if (gUnknown_203B40C != 0) {
-                sub_8040ABC(1);
+                UpdateBgTilemapForDungeonMap(TRUE);
             }
             break;
         case 6:
@@ -690,7 +690,7 @@ void sub_803F27C(bool8 a0)
         strPtr->unk1820D = FALSE;
         strPtr->unk18211 = 0;
         strPtr->showAllFloorItems = FALSE;
-        strPtr->unk1820B = 0;
+        strPtr->allTilesRevealed = 0;
         strPtr->unk1820C = 0;
     }
 
@@ -742,7 +742,7 @@ bool8 sub_803F428(DungeonPos *pos)
     Entity *cameraEntity = strPtr->cameraTarget;
 
     if (abs(strPtr->cameraPos.x - pos->x) <= 6 && abs(strPtr->cameraPos.y - pos->y) <= 5) {
-        if (strPtr->unk1820B == 0 && strPtr->unk1820C == 0 && cameraEntity != NULL) {
+        if (strPtr->allTilesRevealed == 0 && strPtr->unk1820C == 0 && cameraEntity != NULL) {
             return IsPositionActuallyInSight(&strPtr->cameraPos, pos);
         }
         return TRUE;
@@ -795,7 +795,7 @@ void sub_803F508(Entity *a0)
         sub_806CD90();
     }
     sub_8049ED4();
-    sub_8040A84();
+    ShowWholeRevealedDungeonMap();
 }
 
 void sub_803F580(u8 a0)
@@ -875,7 +875,7 @@ void sub_803F580(u8 a0)
 
         if (before != strPtr->showInvisibleTrapsMonsters) {
             sub_8049ED4();
-            sub_8040A84();
+            ShowWholeRevealedDungeonMap();
             sub_8041888(0);
         }
 
@@ -905,7 +905,7 @@ void sub_803F580(u8 a0)
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
                 Entity *mon = gDungeon->activePokemon[i];
                 if (EntityIsValid(mon)) {
-                    sub_80402AC(mon->pos.x, mon->pos.y);
+                    ShowDungeonMapAtPos(mon->pos.x, mon->pos.y);
                 }
             }
         }
@@ -921,7 +921,7 @@ void sub_803F7BC(void)
     const Tile *tile = GetTile(strPtr->cameraPos.x, strPtr->cameraPos.y);
     u32 roomId = tile->room;
 
-    if (strPtr->unk1820B != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {
+    if (strPtr->allTilesRevealed != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {
         sub_8005838(NULL, 0);
     }
     else if (roomId == CORRIDOR_ROOM) {
@@ -1010,7 +1010,7 @@ void sub_803F9CC(void)
 
     if (!r5) {
         for (i = 1; i < 30; i++) {
-            gUnknown_202B038[0][0][i] = 0;
+            gBgTilemaps[0][0][i] = 0;
         }
         sub_803F38C();
     }
@@ -1151,7 +1151,7 @@ void sub_803FB74(void)
         nullsub_5(0xFF, &gFontPalette[15 + r6]);
     }
 
-    arrPtr = gUnknown_202B038[0][0];
+    arrPtr = gBgTilemaps[0][0];
     unkFloor = gDungeon->unk14 + gDungeon->unk644.dungeonLocation.floor;
     if (strPtr->unk3A != unkFloor) {
         strPtr->unk3A = unkFloor;
@@ -1203,7 +1203,7 @@ void sub_803FB74(void)
     }
 
     for (i = 0; i < 12; i++) {
-        gUnknown_202B038[0][0][18 + i] = (0x2CC + i) | 0xF000;
+        gBgTilemaps[0][0][18 + i] = (0x2CC + i) | 0xF000;
     }
 }
 

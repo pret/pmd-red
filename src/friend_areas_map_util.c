@@ -153,8 +153,8 @@ void FriendAreasMap_UpdateBg(void)
             x1 &= 0x1F;
             y1 &= 0x1F;
 
-            gUnknown_202B038[2][y1][x1] = gFriendAreasMapPtr->unk2014[y2][x2];
-            gUnknown_202B038[3][y1][x1] = gFriendAreasMapPtr->unk14[y2][x2];
+            gBgTilemaps[2][y1][x1] = gFriendAreasMapPtr->unk2014[y2][x2];
+            gBgTilemaps[3][y1][x1] = gFriendAreasMapPtr->unk14[y2][x2];
             x2++;
             x1++;
         }

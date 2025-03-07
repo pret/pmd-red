@@ -36,8 +36,6 @@ void sub_803ECE0();
 void sub_803EDF0();
 void sub_800E90C();
 void sub_8042E5C();
-void sub_8040B60();
-void sub_8040788();
 void sub_800F7D0(DungeonPos *);
 void sub_803E874(s32, s32);
 void sub_803EAF0(s32, s32);
@@ -107,13 +105,13 @@ void sub_803E490(u32 unused)
     TransferBGPaletteBuffer();
     sub_8009908();
     xxx_call_update_bg_vram();
-    sub_8040788();
+    CopyDungeonMapToVram();
     xxx_call_update_bg_sound_input();
 
     gDungeon->unk181e8.unk18213 = 0;
     UpdateDungeonMusic();
     sub_8011860();
-    sub_8040B60();
+    TryResetDungeonMapTilesScheduledForCopy();
     ResetSprites(FALSE);
     nullsub_10(FALSE);
     gUnknown_202EDD4--;

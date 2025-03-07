@@ -17,7 +17,7 @@ extern struct FileArchive gDungeonFileArchive;
 extern void sub_803F7BC(void);
 
 extern void sub_803F580(u32);
-extern void sub_8040A84();
+extern void ShowWholeRevealedDungeonMap();
 
 extern const char *gUnknown_80FD040; // It became brighter on the floor
 
@@ -27,19 +27,19 @@ void HandleLuminousOrbAction(Entity *pokemon)
   int XCoord;
   int YCoord;
 
-  gDungeon->unk181e8.unk1820B = 1;
+  gDungeon->unk181e8.allTilesRevealed = TRUE;
 
   for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
   {
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
     {
       Tile *mapTile = GetTileMut(XCoord, YCoord);
-      mapTile->spawnOrVisibilityFlags |= 1;
+      mapTile->spawnOrVisibilityFlags |= VISIBILITY_FLAG_REVEALED;
     }
   }
   sub_803F580(0);
   sub_8049ED4();
-  sub_8040A84();
+  ShowWholeRevealedDungeonMap();
   LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD040);
 }
 

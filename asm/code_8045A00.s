@@ -1108,7 +1108,7 @@ _08046644:
 	mov r4, sp
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
-	bl sub_80402AC
+	bl ShowDungeonMapAtPos
 	mov r0, sp
 	movs r3, 0
 	ldrsh r0, [r0, r3]

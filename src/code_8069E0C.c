@@ -80,7 +80,7 @@ extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
 extern void sub_803F580(s32);
-extern void sub_8040A84(void);
+extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
@@ -543,7 +543,7 @@ void sub_806A6E8(Entity *entity)
         else {
             if (info->heldItem.id == ITEM_X_RAY_SPECS || info->unk64 == ITEM_X_RAY_SPECS) {
                 sub_803F580(1);
-                sub_8040A84();
+                ShowWholeRevealedDungeonMap();
             }
         }
         sub_807AA30();

@@ -82,7 +82,7 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     u8 priority; // x20
     /* 0x18209 */ u8 visibilityRange; // x21 Dungeon light level.
     /* 0x1820A */ bool8 blinded; // x22 Blacks out the screen when the player has the Blinker status.
-    bool8 unk1820B; // x23
+    bool8 allTilesRevealed; // x23
     bool8 unk1820C; // x24
     bool8 unk1820D; // x25
     bool8 showAllFloorItems; // x26
@@ -338,25 +338,27 @@ struct UnkDungeonGlobal_1822C_Sub
     u32 arr[8];
 };
 
-#define UNK1822C_ARR_COUNT (DUNGEON_MAX_SIZE_Y / 2)
-#define UNK1822C_ARR_COUNT_2 (DUNGEON_MAX_SIZE_X / 2)
+#define DUNGEON_MAP_MAX_Y (DUNGEON_MAX_SIZE_Y / 2)
+#define DUNGEON_MAP_MAX_X (DUNGEON_MAX_SIZE_X / 2)
 
-struct UnkDungeonGlobal_unk1BBEC
+struct DungeonMapVramCopy
 {
-    u32 *ptr1;
-    u32 *ptr2;
+    u32 *vramPtr;
+    u32 *mapArrayPtr;
     bool8 *boolPtr;
 };
 
+#define MAX_SCHEDULED_DUNGEON_MAP_COPIES 40
+
 struct DungeonMap
 {
-    struct UnkDungeonGlobal_1822C_Sub dungeonMap[UNK1822C_ARR_COUNT][UNK1822C_ARR_COUNT_2];
-    bool8 unk1BA2C[UNK1822C_ARR_COUNT][UNK1822C_ARR_COUNT_2];
-    struct UnkDungeonGlobal_unk1BBEC unk1BBEC[40];
-    s32 unk1BDCC;
-    u8 unk1BDD0;
-    u8 unk1BDD1;
-    u8 unk1BDD2;
+    struct UnkDungeonGlobal_1822C_Sub perTile[DUNGEON_MAP_MAX_Y][DUNGEON_MAP_MAX_X];
+    bool8 tileScheduledForCopy[DUNGEON_MAP_MAX_Y][DUNGEON_MAP_MAX_X];
+    struct DungeonMapVramCopy vramCopies[MAX_SCHEDULED_DUNGEON_MAP_COPIES];
+    s32 scheduledVramCopiesCount;
+    bool8 copyToVram;
+    bool8 copyAllAtOnce;
+    bool8 resetTilesScheduledForCopy;
 };
 
 // size: 0x1CEDC

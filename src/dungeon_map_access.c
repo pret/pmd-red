@@ -37,7 +37,7 @@ EWRAM_DATA Tile gOutOfBoundsTileData = {0};
 EWRAM_INIT const Tile *gCurTilesetOobTile = {NULL};
 
 extern u8 sub_8043CE4(u32);
-extern void sub_80402AC(s32, s32);
+extern void ShowDungeonMapAtPos(s32, s32);
 extern int sprintf(char *, const char *, ...);
 
 const Tile *GetTile(s32 x, s32 y)
@@ -503,7 +503,7 @@ void sub_8049ED4(void)
 
         for (j = 0; j < 23; j++) {
             y &= 0x1F;
-            gUnknown_202B038[3][y][x] = *src;
+            gBgTilemaps[3][y][x] = *src;
             src += 3;
             y++;
             r8++;
@@ -618,7 +618,7 @@ void sub_804A1F0(s32 a0, s32 a1)
     for (i = 0; i < 23; i++) {
         x &= 0x1F;
         y &= 0x1F;
-        gUnknown_202B038[3][y][x] = *src;
+        gBgTilemaps[3][y][x] = *src;
         src += 3;
         y++;
         r8++;
@@ -719,7 +719,7 @@ void sub_804A49C(s32 a0, s32 a1)
     for (i = 0; i < 31; i++) {
         x &= 0x1F;
         y &= 0x1F;
-        gUnknown_202B038[3][y][x] = *src;
+        gBgTilemaps[3][y][x] = *src;
         src++;
         x++;
         r9++;
@@ -833,7 +833,7 @@ void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3)
         for (j = 0; j < 21; j++) {
             x &= 0x1F;
             y &= 0x1F;
-            gUnknown_202B038[2][y][x] = *src;
+            gBgTilemaps[2][y][x] = *src;
             src += 3;
             y++;
             var_34++;
@@ -893,7 +893,7 @@ void sub_804AA60(void)
     {
         for(j = 0; j < 0x20; j++)
         {
-            gUnknown_202B038[2][i][j] = 0;
+            gBgTilemaps[2][i][j] = 0;
         }
     }
     sub_80098F8(2);
@@ -1023,7 +1023,7 @@ void sub_804AC20(DungeonPos *pos)
             for (x = xMin; x <= xMax; x++) {
                 tile = GetTileMut(x,y);
                 tile->spawnOrVisibilityFlags |= 3;
-                sub_80402AC(x,y);
+                ShowDungeonMapAtPos(x,y);
             }
         }
     }

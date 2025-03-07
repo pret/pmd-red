@@ -21,7 +21,7 @@ extern DungeonPos gPlayerDotMapPosition;
 extern DungeonPos gUnknown_202EE0C;
 s32 sub_806A4DC(EntityInfo *info);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
-void sub_80402AC(s32, s32);
+void ShowDungeonMapAtPos(s32, s32);
 
 void sub_80694C0(Entity *target,s32 x,int y,char param_4)
 {
@@ -44,7 +44,7 @@ void sub_80694C0(Entity *target,s32 x,int y,char param_4)
             if (tile2->monster == target) {
                 tile2->monster = NULL;
             }
-            sub_80402AC((target->pos).x,(target->pos).y);
+            ShowDungeonMapAtPos((target->pos).x,(target->pos).y);
         }
         (target->prevPos).x = (target->pos).x;
         (target->prevPos).y = (target->pos).y;
@@ -60,7 +60,7 @@ void sub_80694C0(Entity *target,s32 x,int y,char param_4)
             gUnknown_202EE0C.y = y;
             gDungeon->unk1 = 0;
         }
-        sub_80402AC(x,y);
+        ShowDungeonMapAtPos(x,y);
 
         switch(param_4)
         {

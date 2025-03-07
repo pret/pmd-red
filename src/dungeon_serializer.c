@@ -450,7 +450,7 @@ static void WriteDungeonVisibility(DataSerializer *seri)
     WriteU8(seri, gDungeon->unk181e8.priority);
     WriteU8(seri, gDungeon->unk181e8.visibilityRange);
     WriteBool8(seri, gDungeon->unk181e8.blinded);
-    WriteBool8(seri, gDungeon->unk181e8.unk1820B);
+    WriteBool8(seri, gDungeon->unk181e8.allTilesRevealed);
     WriteBool8(seri, gDungeon->unk181e8.unk1820C);
     WriteBool8(seri, gDungeon->unk181e8.unk1820D);
     WriteBool8(seri, gDungeon->unk181e8.showAllFloorItems);
@@ -847,7 +847,7 @@ static void ReadDungeonVisibility(DataSerializer *seri)
     gDungeon->unk181e8.priority = ReadU8(seri);
     gDungeon->unk181e8.visibilityRange = ReadU8(seri);
     gDungeon->unk181e8.blinded = ReadBool8(seri);
-    gDungeon->unk181e8.unk1820B = ReadBool8(seri);
+    gDungeon->unk181e8.allTilesRevealed = ReadBool8(seri);
     gDungeon->unk181e8.unk1820C = ReadBool8(seri);
     gDungeon->unk181e8.unk1820D = ReadBool8(seri);
     gDungeon->unk181e8.showAllFloorItems = ReadBool8(seri);

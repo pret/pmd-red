@@ -220,7 +220,7 @@ bool8 sub_8045804(Entity *ent)
                 if (!saveTyping->showInvisibleTrapsMonsters && monInfo->invisibleClassStatus.status == STATUS_INVISIBLE)
                     return FALSE;
 
-                if (saveTyping->unk1820B || saveTyping->unk1820D)
+                if (saveTyping->allTilesRevealed || saveTyping->unk1820D)
                     return TRUE;
 
                 if (camTarget != NULL)

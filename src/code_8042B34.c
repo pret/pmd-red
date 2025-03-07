@@ -288,7 +288,7 @@ extern void sub_8071DA4(Entity *);
 extern void sub_803E748(void);
 extern void sub_8083D68(void);
 extern void sub_803E7C8(void);
-extern void sub_8040A84(void);
+extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_807E5AC(void);
 extern void TriggerWeatherAbilities(void);
 extern void sub_807E88C(void);
@@ -432,7 +432,7 @@ void RunDungeon(struct UnkStruct_RunDungeon *r8)
     }
 
     if (!r6) {
-        gDungeon->unk181e8.unk1820B = 1;
+        gDungeon->unk181e8.allTilesRevealed = 1;
         gDungeon->unk181e8.unk1820C = 1;
         if (gDungeon->unk644.unk34 == 1) {
             gDungeon->unk644.dungeonLocation.id = r8->unk14.unk0;
@@ -659,7 +659,7 @@ void RunDungeon(struct UnkStruct_RunDungeon *r8)
         sub_8040094(0);
         sub_803EAF0(0, 0);
         InitDungeonMap(r6);
-        sub_8040A84();
+        ShowWholeRevealedDungeonMap();
         gDungeon->unkB8 = NULL;
         gDungeon->unk644.unk28 = 0;
         gDungeon->unk644.unk29 = 0;
@@ -683,7 +683,7 @@ void RunDungeon(struct UnkStruct_RunDungeon *r8)
             }
             else {
                 sub_803F4A0(GetLeader());
-                sub_8040A84();
+                ShowWholeRevealedDungeonMap();
             }
         }
 

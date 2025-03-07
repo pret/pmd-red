@@ -24,7 +24,7 @@ extern void sub_80416E0(PixelPos *r0, u32, bool8);
 extern void sub_80855E4(void *);
 extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);
-extern void sub_8040A84(void);
+extern void ShowWholeRevealedDungeonMap(void);
 
 static void MusicBoxCreation(void);
 static u8 sub_8046D70(void);
@@ -157,7 +157,7 @@ void MusicBoxCreation(void)
     sub_803E708(10,0x41);
     sub_804178C(1);
     gDungeon->unk1356C = 0;
-    sub_8040A84();
+    ShowWholeRevealedDungeonMap();
   }
 }
 

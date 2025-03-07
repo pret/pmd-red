@@ -735,7 +735,7 @@ void sub_8052FB8(const u8 *str)
     {
         s32 i;
         for (i = 1; i < 30; i++) {
-            gUnknown_202B038[0][0][i] = 0;
+            gBgTilemaps[0][0][i] = 0;
         }
     }
 

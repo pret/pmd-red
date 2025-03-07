@@ -41,11 +41,11 @@ struct DungeonMapGfx
     RGB *pal;
 };
 
-EWRAM_DATA bool8 gUnknown_202EE00 = FALSE;
+EWRAM_DATA bool8 gShowMonsterDotsInDungeonMap = FALSE;
 EWRAM_DATA bool8 gShowDungeonMap = FALSE;
 EWRAM_DATA static u8 sPlayerDotFrames = 0;
 EWRAM_DATA static OpenedFile *sDungeonMapGfxFile = NULL;
-EWRAM_DATA static void *gUnknown_202EE08 = NULL;
+EWRAM_DATA static void *sDungeonMapVramDst = NULL;
 
 void SetDungeonMapToNotShown(void)
 {
@@ -61,10 +61,10 @@ void InitDungeonMap(bool8 a0)
 {
     s32 i, j;
 
-    for (i = 0; i < UNK1822C_ARR_COUNT; i++) {
-        for (j = 0; j < UNK1822C_ARR_COUNT_2; j++) {
-            CpuClear(&gDungeon->dungeonMap.dungeonMap[i][j], sizeof(struct UnkDungeonGlobal_1822C_Sub));
-            gDungeon->dungeonMap.unk1BA2C[i][j] = FALSE;
+    for (i = 0; i < DUNGEON_MAP_MAX_Y; i++) {
+        for (j = 0; j < DUNGEON_MAP_MAX_X; j++) {
+            CpuClear(&gDungeon->dungeonMap.perTile[i][j], sizeof(struct UnkDungeonGlobal_1822C_Sub));
+            gDungeon->dungeonMap.tileScheduledForCopy[i][j] = FALSE;
         }
     }
 
@@ -73,11 +73,11 @@ void InitDungeonMap(bool8 a0)
         gPlayerDotMapPosition.y = 100;
     }
 
-    gDungeon->dungeonMap.unk1BDCC = 0;
-    gDungeon->dungeonMap.unk1BDD0 = 1;
-    gDungeon->dungeonMap.unk1BDD2 = 0;
-    gUnknown_202EE00 = 1;
-    gUnknown_202EE08 = (void *) VRAM + 0x1700;
+    gDungeon->dungeonMap.scheduledVramCopiesCount = 0;
+    gDungeon->dungeonMap.copyToVram = TRUE;
+    gDungeon->dungeonMap.resetTilesScheduledForCopy = FALSE;
+    gShowMonsterDotsInDungeonMap = TRUE;
+    sDungeonMapVramDst = (void *) VRAM + 0x1700;
     gShowDungeonMap = TRUE;
     LoadDungeonMapPalette();
 }
@@ -90,7 +90,7 @@ void CloseDungeonMapFile(void)
     SetDungeonMapToNotShown();
 }
 
-// Used in Pmd's Blue version. Stores different Vram address in gUnknown_202EE08(maybe?), depending on TOP_MAP_AND_TEAM_NO_BOTTOM map option.
+// Used in Pmd's Blue version. Stores different Vram address in sDungeonMapVramDst(maybe?), depending on TOP_MAP_AND_TEAM_NO_BOTTOM map option.
 UNUSED static void nullsub_203(void)
 {
 
@@ -117,7 +117,29 @@ void LoadDungeonMapPalette(void)
     }
 }
 
-void sub_80402AC(s32 x, s32 y)
+enum {
+    MAP_GFX_NOTHING,
+    MAP_GFX_UNK1, // Appears to be nothing too
+    MAP_GFX_ENEMY,
+    MAP_GFX_ITEM,
+    MAP_GFX_TRAP,
+    MAP_GFX_SPECIAL_STAIRS,
+    MAP_GFX_STAIRS,
+    MAP_GFX_WONDER_TILE,
+    MAP_GFX_PLAYER,
+    MAP_GFX_WHITE_SQUARE, // Possibly unused? It's like Stairs, but white instead of blue
+    MAP_GFX_ALLY,
+    MAP_GFX_GREEN_DOT, // Used when hallucinating
+};
+
+#define MAP_GFX_TERRAIN_TILES_VISITED 0x10
+#define MAP_GFX_TERRAIN_TILES_REVEALED 0x20
+#define MAP_GFX_TERRAIN_LINE_UP 0x1
+#define MAP_GFX_TERRAIN_LINE_RIGHT 0x2
+#define MAP_GFX_TERRAIN_LINE_DOWN 0x4
+#define MAP_GFX_TERRAIN_LINE_LEFT 0x8
+
+void ShowDungeonMapAtPos(s32 x, s32 y)
 {
     s32 yAdd = 0;
     const Tile *tile;
@@ -127,17 +149,17 @@ void sub_80402AC(s32 x, s32 y)
     bool8 hallucinating;
     bool8 showItems;
     bool8 showHiddenTraps;
-    bool8 r0;
+    bool8 allTilesRevealed;
     bool8 var_24;
-    bool8 r7;
-    s32 r6;
+    bool8 tileKnown;
+    s32 mapGfxType;
     s32 xDiv2, yDiv2;
     u32 *src, *dst;
-    bool8 r10;
+    bool8 lookForMapObject;
     s32 r3, yMinus;
 
     dungeon = gDungeon;
-    r10 = TRUE;
+    lookForMapObject = TRUE;
 
     if (sDungeonMapGfxFile == NULL)
         return;
@@ -169,17 +191,17 @@ void sub_80402AC(s32 x, s32 y)
     blinded = gDungeon->unk181e8.blinded;
     showHiddenTraps = gDungeon->unk181e8.showInvisibleTrapsMonsters;
     showItems = gDungeon->unk181e8.showAllFloorItems;
-    r0 = gDungeon->unk181e8.unk1820B;
+    allTilesRevealed = gDungeon->unk181e8.allTilesRevealed;
     if (blinded) {
-        r7 = tile->spawnOrVisibilityFlags & 1;
+        tileKnown = tile->spawnOrVisibilityFlags & VISIBILITY_FLAG_REVEALED;
         var_24 = FALSE;
     }
     else {
-        if (r0) {
-            r7 = TRUE;
+        if (allTilesRevealed) {
+            tileKnown = TRUE;
         }
         else {
-            r7 = tile->spawnOrVisibilityFlags & 1;
+            tileKnown = tile->spawnOrVisibilityFlags & VISIBILITY_FLAG_REVEALED;
         }
 
         if (GetFloorType() == FLOOR_TYPE_NORMAL) {
@@ -191,159 +213,159 @@ void sub_80402AC(s32 x, s32 y)
     }
 
     if (sub_8094C48() && !gDungeon->unk1356C) {
-        r6 = 0;
+        mapGfxType = MAP_GFX_NOTHING;
         if (!blinded) {
             Entity *entity = tile->monster;
             if (entity != NULL) {
                 s32 entType = GetEntityType(entity);
-                if (gUnknown_202EE00 && entType == ENTITY_MONSTER && sub_8045804(entity)) {
+                if (gShowMonsterDotsInDungeonMap && entType == ENTITY_MONSTER && sub_8045804(entity)) {
                     EntityInfo *entInfo = GetEntInfo(entity);
                     if (IsExperienceLocked(entInfo->joinedAt.id) || entInfo->monsterBehavior == 1 || entInfo->monsterBehavior == 4) {
-                        r6 = 10;
+                        mapGfxType = MAP_GFX_ALLY;
                     }
                     else {
                         if (entInfo->isNotTeamMember) {
-                            r6 = 2;
+                            mapGfxType = MAP_GFX_ENEMY;
                         }
                         else if (entInfo->isTeamLeader) {
                             gPlayerDotMapPosition.x = x;
                             gPlayerDotMapPosition.y = y;
                             if (gDungeon->unk181e8.inFloorMapMode) {
-                                r6 = 8;
+                                mapGfxType = MAP_GFX_PLAYER;
                             }
                         }
                         else {
-                            r6 = 10;
+                            mapGfxType = MAP_GFX_ALLY;
                         }
                     }
-                    r10 = FALSE;
+                    lookForMapObject = FALSE;
                 }
             }
         }
-        if (r10 && !blinded) {
+        if (lookForMapObject && !blinded) {
             Entity *entity = tile->object;
             if (entity != NULL) {
                 s32 entType = GetEntityType(entity);
-                if (!r7) {
-                    r6 = 0;
+                if (!tileKnown) {
+                    mapGfxType = MAP_GFX_NOTHING;
                     if (entType == ENTITY_ITEM) {
                         if ((showItems || (tile->spawnOrVisibilityFlags & 2)) && terrainType != TERRAIN_TYPE_WALL) {
-                            r6 = 3;
+                            mapGfxType = MAP_GFX_ITEM;
                         }
                     }
-                    r10 = FALSE;
+                    lookForMapObject = FALSE;
                 }
                 else {
                     if (entType == ENTITY_TRAP) {
                         if (entity->isVisible || showHiddenTraps) {
                             Trap *trap = GetTrapData(entity);
-                            r6 = gUnknown_80F65F0[trap->id];
-                            r10 = FALSE;
+                            mapGfxType = gUnknown_80F65F0[trap->id];
+                            lookForMapObject = FALSE;
                         }
                     }
                 }
 
-                if (r10) {
+                if (lookForMapObject) {
                     if (entType == ENTITY_ITEM) {
                         if ((showItems || (tile->spawnOrVisibilityFlags & 2)) && terrainType != TERRAIN_TYPE_WALL) {
-                            r6 = 3;
-                            r10 = FALSE;
+                            mapGfxType = MAP_GFX_ITEM;
+                            lookForMapObject = FALSE;
                         }
                     }
                 }
-                if (r10) {
+                if (lookForMapObject) {
                     if (terrainType != TERRAIN_TYPE_NORMAL) {
-                        r6 = 0;
-                        r10 = FALSE;
+                        mapGfxType = MAP_GFX_NOTHING;
+                        lookForMapObject = FALSE;
                     }
                 }
             }
             else {
-                if (!r7) {
+                if (!tileKnown) {
                     if (var_24 && (tile->terrainType & TERRAIN_TYPE_STAIRS)) {
                         if (GetFloorType() == FLOOR_TYPE_NORMAL) {
-                            r6 = 6;
+                            mapGfxType = MAP_GFX_STAIRS;
                         }
                         else {
-                            r6 = 5;
+                            mapGfxType = MAP_GFX_SPECIAL_STAIRS;
                         }
-                        r10 = FALSE;
+                        lookForMapObject = FALSE;
                     }
                 }
                 else {
                     if ((tile->terrainType & TERRAIN_TYPE_STAIRS)) {
                         if (GetFloorType() == FLOOR_TYPE_NORMAL) {
-                            r6 = 6;
+                            mapGfxType = MAP_GFX_STAIRS;
                         }
                         else {
-                            r6 = 5;
+                            mapGfxType = MAP_GFX_SPECIAL_STAIRS;
                         }
-                        r10 = FALSE;
+                        lookForMapObject = FALSE;
                     }
                 }
             }
         }
-        if (!r10) {
+        if (!lookForMapObject) {
             if (hallucinating) {
-                if (r6 != 0) {
-                    r6 = 11;
+                if (mapGfxType != MAP_GFX_NOTHING) {
+                    mapGfxType = MAP_GFX_GREEN_DOT;
                 }
             }
         }
-        if (r6 == 0) {
-            if (!r7) {
-                r6 = 1;
+        if (mapGfxType == MAP_GFX_NOTHING) {
+            if (!tileKnown) {
+                mapGfxType = 1;
             }
             else if (terrainType != TERRAIN_TYPE_NORMAL) {
-                r6 = 1;
+                mapGfxType = 1;
             }
             else {
-                s32 r4 = 1 | 2 | 4 | 8;
+                s32 terrainLine = MAP_GFX_TERRAIN_LINE_UP | MAP_GFX_TERRAIN_LINE_RIGHT | MAP_GFX_TERRAIN_LINE_DOWN | MAP_GFX_TERRAIN_LINE_LEFT;
                 if (y < DUNGEON_MAX_SIZE_Y - 1) {
                     const Tile *adjacentTile = GetTile(x, y + 1);
                     if (GetTerrainType(adjacentTile) == TERRAIN_TYPE_NORMAL) {
-                        r4 &= ~(1);
+                        terrainLine &= ~(MAP_GFX_TERRAIN_LINE_UP);
                     }
                 }
                 if (y >= 1) {
                     const Tile *adjacentTile = GetTile(x, y - 1);
                     if (GetTerrainType(adjacentTile) == TERRAIN_TYPE_NORMAL) {
-                        r4 &= ~(4);
+                        terrainLine &= ~(MAP_GFX_TERRAIN_LINE_DOWN);
                     }
                 }
                 if (x < DUNGEON_MAX_SIZE_X - 1) {
                     const Tile *adjacentTile = GetTile(x + 1, y);
                     if (GetTerrainType(adjacentTile) == TERRAIN_TYPE_NORMAL) {
-                        r4 &= ~(2);
+                        terrainLine &= ~(MAP_GFX_TERRAIN_LINE_RIGHT);
                     }
                 }
                 if (x >= 1) {
                     const Tile *adjacentTile = GetTile(x - 1, y);
                     if (GetTerrainType(adjacentTile) == TERRAIN_TYPE_NORMAL) {
-                        r4 &= ~(8);
+                        terrainLine &= ~(MAP_GFX_TERRAIN_LINE_LEFT);
                     }
                 }
 
-                r6 = (s16) r4;
-                if (tile->spawnOrVisibilityFlags & 2) {
-                    r6 = (s16) (r6 + 16);
+                mapGfxType = (s16) terrainLine;
+                if (tile->spawnOrVisibilityFlags & VISIBILITY_FLAG_VISITED) {
+                    mapGfxType = (s16) (mapGfxType + MAP_GFX_TERRAIN_TILES_VISITED);
                 }
                 else {
-                    r6 = (s16) (r6 + 32);
+                    mapGfxType = (s16) (mapGfxType + MAP_GFX_TERRAIN_TILES_REVEALED);
                 }
             }
         }
 
         // Not possible on GBA.
         if (gGameOptionsRef->mapOption == TOP_MAP_AND_TEAM_NO_BOTTOM) {
-            r6 = (s16) (r6 + 128);
+            mapGfxType = (s16) (mapGfxType + 128);
         }
         else if (DoesNotHaveShadedMap() == TRUE) {
-            r6 = (s16) (r6 + 64);
+            mapGfxType = (s16) (mapGfxType + 64);
         }
     }
     else {
-        r6 = 1;
+        mapGfxType = 1;
         gPlayerDotMapPosition.x = 100;
     }
 
@@ -352,10 +374,10 @@ void sub_80402AC(s32 x, s32 y)
     yDiv2 = (yMinus / 2);
     r3 = x - (xDiv2 * 2);
     r3 += (yMinus - (yDiv2 * 2)) * 2;
-    dst = dungeon->dungeonMap.dungeonMap[yDiv2][xDiv2].arr;
+    dst = dungeon->dungeonMap.perTile[yDiv2][xDiv2].arr;
     {
         struct DungeonMapGfx *ptr = ((struct DungeonMapGfx *)(&sDungeonMapGfxFile->data));
-        src = ptr->gfx->unk0[r6 * 4 + r3];
+        src = ptr->gfx->unk0[mapGfxType * 4 + r3];
     }
 
     dst[0] = (dst[0] & src[0]) | src[1];
@@ -367,39 +389,39 @@ void sub_80402AC(s32 x, s32 y)
     dst[6] = (dst[6] & src[12]) | src[13];
     dst[7] = (dst[7] & src[14]) | src[15];
 
-    if (!dungeon->dungeonMap.unk1BDD1 && !dungeon->dungeonMap.unk1BA2C[yDiv2][xDiv2]) {
+    if (!dungeon->dungeonMap.copyAllAtOnce && !dungeon->dungeonMap.tileScheduledForCopy[yDiv2][xDiv2]) {
         s32 id;
 
-        dungeon->dungeonMap.unk1BA2C[yDiv2][xDiv2] = TRUE;
-        id = dungeon->dungeonMap.unk1BDCC;
-        if (id < 40) {
-            dungeon->dungeonMap.unk1BBEC[id].ptr1 = gUnknown_202EE08 + ((xDiv2 + yDiv2 * 28) * 32);
-            dungeon->dungeonMap.unk1BBEC[id].ptr2 = dst;
-            dungeon->dungeonMap.unk1BBEC[id].boolPtr = &dungeon->dungeonMap.unk1BA2C[yDiv2][xDiv2];
-            dungeon->dungeonMap.unk1BDCC++;
+        dungeon->dungeonMap.tileScheduledForCopy[yDiv2][xDiv2] = TRUE;
+        id = dungeon->dungeonMap.scheduledVramCopiesCount;
+        if (id < MAX_SCHEDULED_DUNGEON_MAP_COPIES) {
+            dungeon->dungeonMap.vramCopies[id].vramPtr = sDungeonMapVramDst + ((xDiv2 + yDiv2 * DUNGEON_MAP_MAX_X) * sizeof(struct UnkDungeonGlobal_1822C_Sub));
+            dungeon->dungeonMap.vramCopies[id].mapArrayPtr = dst;
+            dungeon->dungeonMap.vramCopies[id].boolPtr = &dungeon->dungeonMap.tileScheduledForCopy[yDiv2][xDiv2];
+            dungeon->dungeonMap.scheduledVramCopiesCount++;
         }
         else {
-            dungeon->dungeonMap.unk1BDD1 = 1;
+            dungeon->dungeonMap.copyAllAtOnce = TRUE;
         }
     }
 }
 
-void sub_8040788(void)
+void CopyDungeonMapToVram(void)
 {
     s32 i;
     Dungeon *dungeon = gDungeon;
     if (dungeon == NULL)
         return;
-    if (!dungeon->dungeonMap.unk1BDD0)
+    if (!dungeon->dungeonMap.copyToVram)
         return;
     if (sub_800EC74())
         return;
 
-    if (!dungeon->dungeonMap.unk1BDD1) {
-        for (i = 0; i < dungeon->dungeonMap.unk1BDCC; i++) {
-            struct UnkDungeonGlobal_unk1BBEC *ptr = &dungeon->dungeonMap.unk1BBEC[i];
-            u32 *src = ptr->ptr2;
-            u32 *dst = ptr->ptr1;
+    if (!dungeon->dungeonMap.copyAllAtOnce) {
+        for (i = 0; i < dungeon->dungeonMap.scheduledVramCopiesCount; i++) {
+            struct DungeonMapVramCopy *ptr = &dungeon->dungeonMap.vramCopies[i];
+            u32 *src = ptr->mapArrayPtr;
+            u32 *dst = ptr->vramPtr;
 
             if (gUnknown_202EDD0 == 0 || gUnknown_202EDD0 == 3) {
                 *dst++ = *src++;
@@ -417,9 +439,9 @@ void sub_8040788(void)
     else {
         void *dst, *src;
 
-        dungeon->dungeonMap.unk1BDD1 = FALSE;
-        dst = gUnknown_202EE08;
-        src = dungeon->dungeonMap.dungeonMap[0][0].arr;
+        dungeon->dungeonMap.copyAllAtOnce = FALSE;
+        dst = sDungeonMapVramDst;
+        src = dungeon->dungeonMap.perTile[0][0].arr;
 
         for (i = 0; i < DUNGEON_MAX_SIZE_X * 8; i += 8) {
             if (gUnknown_202EDD0 == 0 || gUnknown_202EDD0 == 3) {
@@ -428,9 +450,9 @@ void sub_8040788(void)
             dst += 0x100;
             src += 0x100;
         }
-        dungeon->dungeonMap.unk1BDD2 = 1;
+        dungeon->dungeonMap.resetTilesScheduledForCopy = TRUE;
     }
-    dungeon->dungeonMap.unk1BDCC = 0;
+    dungeon->dungeonMap.scheduledVramCopiesCount = 0;
 }
 
 void ShowPlayerDotOnMap(void)
@@ -476,24 +498,24 @@ void ResetMapPlayerDotFrames(void)
     sPlayerDotFrames = 0;
 }
 
-void sub_8040A84(void)
+void ShowWholeRevealedDungeonMap(void)
 {
     s32 x, y;
 
-    gDungeon->dungeonMap.unk1BDD1 = TRUE;
+    gDungeon->dungeonMap.copyAllAtOnce = TRUE;
 
     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
         for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
-            sub_80402AC(x, y);
+            ShowDungeonMapAtPos(x, y);
         }
     }
 }
 
-void sub_8040ABC(bool8 a0)
+void UpdateBgTilemapForDungeonMap(bool8 a0)
 {
     s32 id, count1, count2;
     s32 i, j;
-    u16 val;
+    u16 tilemapValue;
 
     if (gGameOptionsRef->mapOption == TOP_MAP_AND_TEAM_NO_BOTTOM) {
         count1 = 15;
@@ -508,44 +530,44 @@ void sub_8040ABC(bool8 a0)
         count2 = 3;
     }
 
-    val = 0xE0B8;
+    tilemapValue = TILEMAP_TILE_NUM(0xB8) | TILEMAP_PAL(14);
     id = 1;
     for (i = 0; i < count1; i++) {
-        u16 *ptr = &gUnknown_202B038[0][id][1];
+        u16 *ptr = &gBgTilemaps[0][id][1];
         for (j = 0; j < 28; j++) {
-            *ptr++ = val++;
+            *ptr++ = tilemapValue++;
         }
         id++;
     }
 
     for (i = 0; i < count2; i++) {
-        u16 *ptr = &gUnknown_202B038[0][id][1];
+        u16 *ptr = &gBgTilemaps[0][id][1];
         for (j = 0; j < 28; j++) {
-            *ptr++ = 0xE000;
+            *ptr++ = TILEMAP_TILE_NUM(0) | TILEMAP_PAL(14);
         }
         id++;
     }
 }
 
-// BUG: Overflowing into unk1BBEC. They forgot that the array size is max X/Y divided by two...
-void sub_8040B60(void)
+// BUG: Overflowing into vramCopies. They forgot that the array size is max X/Y divided by two...
+void TryResetDungeonMapTilesScheduledForCopy(void)
 {
     s32 x, y;
     Dungeon *dungeon = gDungeon;
-    if (dungeon->dungeonMap.unk1BDD2) {
+    if (dungeon->dungeonMap.resetTilesScheduledForCopy) {
         #ifdef BUGFIX
-        for (y = 0; y < UNK1822C_ARR_COUNT; y++) {
-            for (x = 0; x < UNK1822C_ARR_COUNT_2; x++) {
-                dungeon->dungeonMap.unk1BA2C[y][x] = FALSE;
+        for (y = 0; y < DUNGEON_MAP_MAX_Y; y++) {
+            for (x = 0; x < DUNGEON_MAP_MAX_X; x++) {
+                dungeon->dungeonMap.tileScheduledForCopy[y][x] = FALSE;
             }
         }
         #else
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
             for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
-                dungeon->dungeonMap.unk1BA2C[y][x] = FALSE;
+                dungeon->dungeonMap.tileScheduledForCopy[y][x] = FALSE;
             }
         }
         #endif // BUGFIX
-        dungeon->dungeonMap.unk1BDD2 = FALSE;
+        dungeon->dungeonMap.resetTilesScheduledForCopy = FALSE;
     }
 }

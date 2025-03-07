@@ -111,7 +111,7 @@ _0800070C: .4byte gLoadScreenBackgroundPaletteFileNames
 _08000710: .4byte 0x00005b20
 _08000714: .4byte gTitleMenuFileArchive
 _08000718: .4byte gTitlePaletteFile
-_0800071C: .4byte gUnknown_202B038
+_0800071C: .4byte gBgTilemaps
 _08000720: .4byte 0x06008000
 _08000724: .4byte 0x00004b20
 	thumb_func_end LoadTitleScreen

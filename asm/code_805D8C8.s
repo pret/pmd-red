@@ -6426,7 +6426,7 @@ _08064D36:
 	bne _08064D4C
 	b _08064C14
 _08064D4C:
-	bl sub_8040A84
+	bl ShowWholeRevealedDungeonMap
 	movs r0, 0
 	movs r1, 0
 	bl sub_803EAF0
