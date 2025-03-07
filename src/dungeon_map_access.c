@@ -442,7 +442,7 @@ void sub_8049BB0(s32 x, s32 y)
 
 void sub_8049ED4(void)
 {
-    bool32 hallucinating, unk1820F;
+    bool32 hallucinating, showInvisibleTrapsMonsters;
     u16 *src;
     const Tile *tile;
     s32 r7;
@@ -455,7 +455,7 @@ void sub_8049ED4(void)
 
     Dungeon *dungeon = gDungeon;
     hallucinating = dungeon->unk181e8.hallucinating;
-    unk1820F = dungeon->unk181e8.unk1820F;
+    showInvisibleTrapsMonsters = dungeon->unk181e8.showInvisibleTrapsMonsters;
     x = dungeon->unk181e8.cameraPixelPos.x >> 3;
     r10 = gUnknown_80F6A4A[30 + x];
     var_48 = gUnknown_80F6C06[30 + x];
@@ -484,7 +484,7 @@ void sub_8049ED4(void)
         {
             Entity *tileObject = tile->object;
             if (tileObject != NULL) {
-                if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
+                if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || showInvisibleTrapsMonsters)) {
                     u8 trapType = GetEntInfo(tileObject)->flags;
                     src = &dungeon->unk12A18[trapType][r7];
                 }
@@ -529,7 +529,7 @@ void sub_8049ED4(void)
                 {
                     Entity *tileObject = tile->object;
                     if (tileObject != NULL) {
-                        if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
+                        if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || showInvisibleTrapsMonsters)) {
                             u8 trapType = GetEntInfo(tileObject)->flags;
                             src = &dungeon->unk12A18[trapType][r7];
                         }
@@ -562,7 +562,7 @@ void sub_804A1F0(s32 a0, s32 a1)
 {
     const Tile *tile;
     u16 *src;
-    bool32 hallucinating, unk1820F;
+    bool32 hallucinating, showInvisibleTrapsMonsters;
     s32 xTemp, yTemp;
     s32 i;
     s32 r8;
@@ -574,7 +574,7 @@ void sub_804A1F0(s32 a0, s32 a1)
 
     Dungeon *dungeon = gDungeon;
     hallucinating = dungeon->unk181e8.hallucinating;
-    unk1820F = dungeon->unk181e8.unk1820F;
+    showInvisibleTrapsMonsters = dungeon->unk181e8.showInvisibleTrapsMonsters;
     xTemp = dungeon->unk181e8.cameraPixelPos.x + a0;
     yTemp = dungeon->unk181e8.cameraPixelPos.y + a1;
     yTemp >>= 3;
@@ -599,7 +599,7 @@ void sub_804A1F0(s32 a0, s32 a1)
     {
         Entity *tileObject = tile->object;
         if (tileObject != NULL) {
-            if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
+            if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || showInvisibleTrapsMonsters)) {
                 u8 trapType = GetEntInfo(tileObject)->flags;
                 src = &dungeon->unk12A18[trapType][r6];
             }
@@ -640,7 +640,7 @@ void sub_804A1F0(s32 a0, s32 a1)
             {
                 Entity *tileObject = tile->object;
                 if (tileObject != NULL) {
-                    if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
+                    if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || showInvisibleTrapsMonsters)) {
                         u8 trapType = GetEntInfo(tileObject)->flags;
                         src = &dungeon->unk12A18[trapType][r6];
                     }
@@ -664,7 +664,7 @@ void sub_804A49C(s32 a0, s32 a1)
 {
     const Tile *tile;
     u16 *src;
-    bool32 hallucinating, unk1820F;
+    bool32 hallucinating, showInvisibleTrapsMonsters;
     s32 xTemp, yTemp;
     s32 i;
     s32 var_2C;
@@ -676,7 +676,7 @@ void sub_804A49C(s32 a0, s32 a1)
 
     Dungeon *dungeon = gDungeon;
     hallucinating = dungeon->unk181e8.hallucinating;
-    unk1820F = dungeon->unk181e8.unk1820F;
+    showInvisibleTrapsMonsters = dungeon->unk181e8.showInvisibleTrapsMonsters;
     xTemp = dungeon->unk181e8.cameraPixelPos.x + a0;
     yTemp = dungeon->unk181e8.cameraPixelPos.y + a1;
     x = xTemp >> 3;
@@ -700,7 +700,7 @@ void sub_804A49C(s32 a0, s32 a1)
     {
         Entity *tileObject = tile->object;
         if (tileObject != NULL) {
-            if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
+            if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || showInvisibleTrapsMonsters)) {
                 u8 trapType = GetEntInfo(tileObject)->flags;
                 src = &dungeon->unk12A18[trapType][r6];
             }
@@ -741,7 +741,7 @@ void sub_804A49C(s32 a0, s32 a1)
             {
                 Entity *tileObject = tile->object;
                 if (tileObject != NULL) {
-                    if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || unk1820F)) {
+                    if (GetEntityType(tileObject) == ENTITY_TRAP && (tileObject->isVisible || showInvisibleTrapsMonsters)) {
                         u8 trapType = GetEntInfo(tileObject)->flags;
                         src = &dungeon->unk12A18[trapType][r6];
                     }

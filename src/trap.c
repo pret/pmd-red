@@ -247,7 +247,7 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
         if (HasHeldItem(target, ITEM_TRAP_SCARF)) {
             text = *gUnknown_80FDB5C;
         }
-        if ((flag == TRUE) || (gDungeon->unk181e8.unk1820F != 0)) {
+        if ((flag == TRUE) || (gDungeon->unk181e8.showInvisibleTrapsMonsters != 0)) {
             if (rand < 0) text = *gUnknown_80FDB7C;
         }
         else if (rand < 0xf) {

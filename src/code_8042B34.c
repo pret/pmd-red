@@ -56,7 +56,7 @@ struct UnkStruct_203B414
     struct DungeonPos unk8C[16];
 };
 
-EWRAM_INIT DungeonPos gUnknown_203B410 = {100, 100};
+EWRAM_INIT DungeonPos gPlayerDotMapPosition = {100, 100};
 static EWRAM_INIT struct UnkStruct_203B414 *sUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
 EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
@@ -388,8 +388,8 @@ void RunDungeon(struct UnkStruct_RunDungeon *r8)
         dungeonPtr[i] = 0;
     }
 
-    gUnknown_203B410.x = 0; // Needed to match
-    gUnknown_203B410.x = 100;
+    gPlayerDotMapPosition.x = 0; // Needed to match
+    gPlayerDotMapPosition.x = 100;
 
     if (!r6) {
         gDungeon->unk644.unk34 = r8->unkF;

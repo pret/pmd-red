@@ -686,10 +686,10 @@ void sub_803F27C(bool8 a0)
     if (!a0) {
         strPtr->blinded = 0;
         strPtr->hallucinating = 0;
-        strPtr->unk1820F = 0;
+        strPtr->showInvisibleTrapsMonsters = 0;
         strPtr->unk1820D = FALSE;
         strPtr->unk18211 = 0;
-        strPtr->unk1820E = FALSE;
+        strPtr->showAllFloorItems = FALSE;
         strPtr->unk1820B = 0;
         strPtr->unk1820C = 0;
     }
@@ -700,7 +700,7 @@ void sub_803F27C(bool8 a0)
     strPtr->unk18212 = 0;
     strPtr->unk1821B = 0;
     strPtr->unk1821C = 0;
-    strPtr->unk18214 = 0;
+    strPtr->inFloorMapMode = 0;
     strPtr->unk18215 = 1;
     sub_803F38C();
 
@@ -805,7 +805,7 @@ void sub_803F580(u8 a0)
 
     if (cameraTarget != NULL && EntityIsValid(cameraTarget)) {
         s32 i;
-        u32 before, unk18214;
+        u32 before, inFloorMapMode;
         EntityInfo *info = GetEntInfo(cameraTarget);
 
         strPtr->cameraPixelPosMirror = strPtr->cameraPixelPos;
@@ -818,24 +818,24 @@ void sub_803F580(u8 a0)
 
         if (HasHeldItem(cameraTarget, ITEM_X_RAY_SPECS) && info->isTeamLeader) {
             strPtr->unk1820D = TRUE;
-            strPtr->unk1820E = TRUE;
+            strPtr->showAllFloorItems = TRUE;
         }
         else {
             strPtr->unk1820D = info->powerEars;
-            strPtr->unk1820E = info->scanning;
+            strPtr->showAllFloorItems = info->scanning;
         }
 
         strPtr->unk18211 = info->stairSpotter;
         before = strPtr->blinded;
-        unk18214 = strPtr->unk18214;
-        if (unk18214 == 0) {
+        inFloorMapMode = strPtr->inFloorMapMode;
+        if (inFloorMapMode == 0) {
             u32 unkVar;
             if (info->blinkerClassStatus.status == STATUS_BLINKER) {
                 strPtr->blinded = 1;
                 unkVar = 0xE;
             }
             else {
-                strPtr->blinded = unk18214;
+                strPtr->blinded = inFloorMapMode;
                 unkVar = 0;
             }
 
@@ -865,15 +865,15 @@ void sub_803F580(u8 a0)
             sub_8041888(0);
         }
 
-        before = strPtr->unk1820F;
+        before = strPtr->showInvisibleTrapsMonsters;
         if (CanSeeInvisibleMonsters(cameraTarget)) {
-            strPtr->unk1820F = 1;
+            strPtr->showInvisibleTrapsMonsters = 1;
         }
         else {
-            strPtr->unk1820F = 0;
+            strPtr->showInvisibleTrapsMonsters = 0;
         }
 
-        if (before != strPtr->unk1820F) {
+        if (before != strPtr->showInvisibleTrapsMonsters) {
             sub_8049ED4();
             sub_8040A84();
             sub_8041888(0);
@@ -951,7 +951,7 @@ void sub_803F878(s32 a0, s32 a1)
     strPtr->cameraPos.x = a0 / 6144;
     strPtr->cameraPos.y = a1 / 6144;
     strPtr->unk1820D = FALSE;
-    strPtr->unk1820E = FALSE;
+    strPtr->showAllFloorItems = FALSE;
     strPtr->unk18211 = 0;
     strPtr->unk18216 = 0;
 

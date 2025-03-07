@@ -427,7 +427,7 @@ void DungeonHandlePlayerInput(void)
             if (!gDungeon->unk181e8.blinded && gGameOptionsRef->mapOption != 6 && gRealInputs.pressed & SELECT_BUTTON) {
                 s32 prevMapOption = gGameOptionsRef->mapOption;
                 gUnknown_202EE00 = 1;
-                gDungeon->unk181e8.unk18214 = 1;
+                gDungeon->unk181e8.inFloorMapMode = TRUE;
                 if (!sub_8094C48()) {
                     sub_8094C88();
                 }
@@ -447,7 +447,7 @@ void DungeonHandlePlayerInput(void)
                         sub_8040A84();
                     }
                 }
-                gDungeon->unk181e8.unk18214 = 0;
+                gDungeon->unk181e8.inFloorMapMode = FALSE;
                 gGameOptionsRef->mapOption = prevMapOption;
                 gUnknown_202EE00 = 1;
                 sub_8040A84();
@@ -845,7 +845,7 @@ bool8 sub_805E874(void)
                 if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_TRAP && GetEntityType(tile->object) == ENTITY_TRAP) {
                     if (tile->object->isVisible)
                         return FALSE;
-                    if (gDungeon->unk181e8.unk1820F)
+                    if (gDungeon->unk181e8.showInvisibleTrapsMonsters)
                         return FALSE;
                 }
             }
@@ -853,7 +853,7 @@ bool8 sub_805E874(void)
                 if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_TRAP) {
                     if (tile->object->isVisible)
                         return FALSE;
-                    if (gDungeon->unk181e8.unk1820F)
+                    if (gDungeon->unk181e8.showInvisibleTrapsMonsters)
                         return FALSE;
                 }
             }

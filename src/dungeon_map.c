@@ -19,7 +19,7 @@
 
 extern const char gUnknown_80F6604; // "zmappat"
 extern struct FileArchive gDungeonFileArchive;
-extern DungeonPos gUnknown_203B410;
+extern DungeonPos gPlayerDotMapPosition;
 extern s32 gUnknown_202EDD0;
 
 extern void nullsub_11(SpriteOAM *, s32, UnkSpriteMem *, unkStruct_2039DB0 *);
@@ -69,8 +69,8 @@ void InitDungeonMap(bool8 a0)
     }
 
     if (!a0) {
-        gUnknown_203B410.x = 100;
-        gUnknown_203B410.y = 100;
+        gPlayerDotMapPosition.x = 100;
+        gPlayerDotMapPosition.y = 100;
     }
 
     gDungeon->dungeonMap.unk1BDCC = 0;
@@ -125,8 +125,8 @@ void sub_80402AC(s32 x, s32 y)
     bool8 blinded;
     u32 terrainType;
     bool8 hallucinating;
-    bool8 var_2C;
-    bool8 var_28;
+    bool8 showItems;
+    bool8 showHiddenTraps;
     bool8 r0;
     bool8 var_24;
     bool8 r7;
@@ -167,8 +167,8 @@ void sub_80402AC(s32 x, s32 y)
     terrainType = GetTerrainType(tile);
     hallucinating = gDungeon->unk181e8.hallucinating;
     blinded = gDungeon->unk181e8.blinded;
-    var_28 = gDungeon->unk181e8.unk1820F;
-    var_2C = gDungeon->unk181e8.unk1820E;
+    showHiddenTraps = gDungeon->unk181e8.showInvisibleTrapsMonsters;
+    showItems = gDungeon->unk181e8.showAllFloorItems;
     r0 = gDungeon->unk181e8.unk1820B;
     if (blinded) {
         r7 = tile->spawnOrVisibilityFlags & 1;
@@ -206,9 +206,9 @@ void sub_80402AC(s32 x, s32 y)
                             r6 = 2;
                         }
                         else if (entInfo->isTeamLeader) {
-                            gUnknown_203B410.x = x;
-                            gUnknown_203B410.y = y;
-                            if (gDungeon->unk181e8.unk18214) {
+                            gPlayerDotMapPosition.x = x;
+                            gPlayerDotMapPosition.y = y;
+                            if (gDungeon->unk181e8.inFloorMapMode) {
                                 r6 = 8;
                             }
                         }
@@ -227,7 +227,7 @@ void sub_80402AC(s32 x, s32 y)
                 if (!r7) {
                     r6 = 0;
                     if (entType == ENTITY_ITEM) {
-                        if ((var_2C || (tile->spawnOrVisibilityFlags & 2)) && terrainType != TERRAIN_TYPE_WALL) {
+                        if ((showItems || (tile->spawnOrVisibilityFlags & 2)) && terrainType != TERRAIN_TYPE_WALL) {
                             r6 = 3;
                         }
                     }
@@ -235,7 +235,7 @@ void sub_80402AC(s32 x, s32 y)
                 }
                 else {
                     if (entType == ENTITY_TRAP) {
-                        if (entity->isVisible || var_28) {
+                        if (entity->isVisible || showHiddenTraps) {
                             Trap *trap = GetTrapData(entity);
                             r6 = gUnknown_80F65F0[trap->id];
                             r10 = FALSE;
@@ -245,7 +245,7 @@ void sub_80402AC(s32 x, s32 y)
 
                 if (r10) {
                     if (entType == ENTITY_ITEM) {
-                        if ((var_2C || (tile->spawnOrVisibilityFlags & 2)) && terrainType != TERRAIN_TYPE_WALL) {
+                        if ((showItems || (tile->spawnOrVisibilityFlags & 2)) && terrainType != TERRAIN_TYPE_WALL) {
                             r6 = 3;
                             r10 = FALSE;
                         }
@@ -344,7 +344,7 @@ void sub_80402AC(s32 x, s32 y)
     }
     else {
         r6 = 1;
-        gUnknown_203B410.x = 100;
+        gPlayerDotMapPosition.x = 100;
     }
 
     xDiv2 = x / 2;
@@ -435,11 +435,11 @@ void sub_8040788(void)
 
 void ShowPlayerDotOnMap(void)
 {
-    if (gDungeon->unk181e8.unk18214)
+    if (gDungeon->unk181e8.inFloorMapMode)
         return;
     if (!gDungeon->unk181e8.unk18219)
         return;
-    if (gUnknown_203B410.x >= 100)
+    if (gPlayerDotMapPosition.x >= 100)
         return;
     if ((++sPlayerDotFrames & 8) == 0) {
         SpriteOAM sprite = {0};
@@ -459,13 +459,13 @@ void ShowPlayerDotOnMap(void)
         SpriteSetUnk6_1(&sprite, 0);
         // Nulled on GBA
         if (gGameOptionsRef->mapOption == TOP_MAP_AND_TEAM_NO_BOTTOM) {
-            SpriteSetX(&sprite, (gUnknown_203B410.x * 4) + 16);
-            SpriteSetY(&sprite, (gUnknown_203B410.y + 1) * 4);
+            SpriteSetX(&sprite, (gPlayerDotMapPosition.x * 4) + 16);
+            SpriteSetY(&sprite, (gPlayerDotMapPosition.y + 1) * 4);
             nullsub_11(&sprite,0x100,NULL,NULL);
         }
         else {
-            SpriteSetX(&sprite, (gUnknown_203B410.x * 4) + 8);
-            SpriteSetY(&sprite, (gUnknown_203B410.y) * 4);
+            SpriteSetX(&sprite, (gPlayerDotMapPosition.x * 4) + 8);
+            SpriteSetY(&sprite, (gPlayerDotMapPosition.y) * 4);
             AddSprite(&sprite,0x100,NULL,NULL);
         }
     }

@@ -17,7 +17,7 @@ extern u8 gUnknown_810AC62; // 0xC
 extern u8 gUnknown_810AC68; // 0x8
 extern u8 gUnknown_810AC64; // 0x8
 extern u8 gUnknown_810AC66; // 0x8
-extern DungeonPos gUnknown_203B410;
+extern DungeonPos gPlayerDotMapPosition;
 extern DungeonPos gUnknown_202EE0C;
 s32 sub_806A4DC(EntityInfo *info);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
@@ -51,8 +51,8 @@ void sub_80694C0(Entity *target,s32 x,int y,char param_4)
         (target->pos).x = x;
         (target->pos).y = y;
         if (info->isTeamLeader) {
-            gUnknown_203B410.x = x;
-            gUnknown_203B410.y = y;
+            gPlayerDotMapPosition.x = x;
+            gPlayerDotMapPosition.y = y;
         }
         tile->monster = target;
         if (info->isTeamLeader) {
@@ -247,7 +247,7 @@ void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target) {
     param_1->unk44[1].level = 0;
     param_1->IQSkills = info->IQSkillMenuFlags;
     if (gDungeon->unk644.unk16 != 0) {
-        param_1->unk4C = sub_806A4DC(info);   
+        param_1->unk4C = sub_806A4DC(info);
     }
     else {
         param_1->unk4C = 3;
@@ -265,7 +265,7 @@ void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target) {
     }
     if (FixedPointToInt(info->belly) == 0) {
         if (info->isTeamLeader) {
-            param_1->unk58[uVar15] = 19;   
+            param_1->unk58[uVar15] = 19;
         }
         else {
             param_1->unk58[uVar15] = 59;

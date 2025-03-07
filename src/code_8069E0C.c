@@ -2061,7 +2061,7 @@ void sub_806C51C(Entity *entity)
     if (entInfo->isNotTeamMember && (entInfo->apparentID == MONSTER_DEOXYS_ATTACK || entInfo->apparentID == MONSTER_DEOXYS_DEFENSE || entInfo->apparentID == MONSTER_DEOXYS_SPEED)) {
         r4 = TRUE;
     }
-    if (entInfo->invisibleClassStatus.status == STATUS_INVISIBLE && !gDungeon->unk181e8.unk1820F) {
+    if (entInfo->invisibleClassStatus.status == STATUS_INVISIBLE && !gDungeon->unk181e8.showInvisibleTrapsMonsters) {
         r4 = TRUE;
     }
     if (r4) {

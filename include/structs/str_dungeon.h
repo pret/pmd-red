@@ -85,13 +85,13 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     bool8 unk1820B; // x23
     bool8 unk1820C; // x24
     bool8 unk1820D; // x25
-    bool8 unk1820E; // x26
-    bool8 unk1820F; // x27
+    bool8 showAllFloorItems; // x26
+    bool8 showInvisibleTrapsMonsters; // x27
     /* 0x18210 */ bool8 hallucinating; // x28 Displays Substitute and flower sprites when the player has the Cross-Eyed status.
     bool8 unk18211; // x29
     u8 unk18212; // x2A
     bool8 unk18213; // x2B
-    u8 unk18214; // x2C
+    bool8 inFloorMapMode; // x2C
     u8 unk18215; // x2D
     u8 unk18216; // x2E
     u8 unk18217; // x2F
