@@ -10,7 +10,10 @@
 #include "dungeon_util.h"
 #include "code_804267C.h"
 #include "weather.h"
+#include "tile_types.h"
 #include "constants/move_id.h"
+#include "constants/weather.h"
+#include "constants/type.h"
 
 struct UnkStruct_8040094
 {
@@ -40,6 +43,14 @@ extern bool8 sub_800E9A8(s32 a0);
 extern void sub_803EA10(void);
 extern void sub_803E708(s32, u32);
 extern void sub_800EEF8(u16 a0);
+extern bool8 sub_803F428(DungeonPos *pos);
+extern void sub_800EEE0(u16 a0);
+extern s32 sub_800EBC8(struct UnkStruct_8040094 *a0);
+extern bool8 sub_800E7D0(struct UnkStruct_8040094 *a0);
+extern s32 sub_800ED20(u16 param_1);
+extern u8 sub_800EC84(s32 param_1);
+extern bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move);
+extern bool8 IsSleeping(Entity *pokemon);
 
 extern u8 gUnknown_203B40D;
 extern s16 gUnknown_2026E4E;
@@ -270,6 +281,205 @@ void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool3
         sub_800EF64();
         sub_803E46C(0x5A);
         sub_8042DD4(sub_800E52C(a0), entity, 1);
+    }
+}
+
+void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
+{
+    s32 var2;
+    s32 var3;
+    struct UnkStruct_8040094 sp;
+    bool32 r5 = (sub_804143C(entity, move) != 0);
+    u16 r10 = sub_80412E0(move->id, GetApparentWeather(entity), r5);
+    s32 var = sub_800ECB8(r10)->unk4;
+    EntityInfo *ent2Info = NULL;
+
+    if (EntityIsValid(entity2)) {
+        ent2Info = GetEntInfo(entity2);
+        if (!sub_8042768(entity2))
+            return;
+    }
+    else {
+        if (!sub_803F428(pos))
+            return;
+    }
+
+    if (sub_80414C0(entity, move))
+        return;
+    if (var == 0)
+        return;
+
+    var2 = sub_800ECA4(var)->unk1c;
+    if (var2 != -1) {
+        if (EntityIsValid(entity2)) {
+            sub_800569C(&sp.unk8, &entity2->axObj.axdata, var2);
+        }
+        else {
+            sp.unk8 = (DungeonPos) {0};
+        }
+    }
+    else {
+        sp.unk8 = (DungeonPos) {0};
+    }
+
+    sp.unk0 = r10;
+    if (ent2Info != NULL) {
+        sp.unk2 = ent2Info->apparentID;
+        sp.unk4.x = entity2->pixelPos.x / 256;
+        sp.unk4.y = entity2->pixelPos.y / 256;
+        sp.unkC = 0;
+    }
+    else {
+        s32 x, y;
+
+        sp.unk2 = 1;
+        x = X_POS_TO_PIXELPOS(pos->x);
+        sp.unk4.x = x / 256;
+        y = Y_POS_TO_PIXELPOS(pos->y);
+        sp.unk4.y = y / 256;
+        sp.unkC = 0;
+    }
+
+    sp.unk10 = 0;
+    sub_8041500(&sp);
+    sub_800EEE0(r10);
+    sub_800EF64();
+    var3 = sub_800EBC8(&sp);
+    sub_803E46C(0x5B);
+    sub_8042DD4(var3, entity2, 6);
+    while (1) {
+        if (!sub_800E9A8(var3))
+            break;
+        sub_803E46C(0x28);
+    }
+}
+
+u16 sub_80412E0(u16 moveId, u8 weather, bool32 a2)
+{
+    u16 ret = moveId;
+
+    if (moveId == MOVE_WEATHER_BALL) {
+        switch (weather) {
+            case WEATHER_CLEAR:
+            case WEATHER_FOG:
+            case WEATHER_CLOUDY:
+                ret = moveId;
+                break;
+            case WEATHER_SUNNY:
+                ret = 0x19E;
+                break;
+            case WEATHER_SANDSTORM:
+                ret = 0x1A1;
+                break;
+            case WEATHER_RAIN:
+                ret = 0x1A0;
+                break;
+            case WEATHER_HAIL:
+            case WEATHER_SNOW:
+                ret = 0x19F;
+                break;
+        }
+    }
+    else if (a2) {
+        switch (moveId) {
+            case MOVE_DIG:
+                ret = 0x1A2;
+                break;
+            case MOVE_RAZOR_WIND:
+                ret = 0x1A3;
+                break;
+            case MOVE_FOCUS_PUNCH:
+                ret = 0x1A4;
+                break;
+            case MOVE_SKY_ATTACK:
+                ret = 0x1A5;
+                break;
+            case MOVE_SOLARBEAM:
+                ret = 0x1A6;
+                break;
+            case MOVE_FLY:
+                ret = 0x1A7;
+                break;
+            case MOVE_DIVE:
+                ret = 0x1A8;
+                break;
+            case MOVE_BOUNCE:
+                ret = 0x1A9;
+                break;
+            case MOVE_SKULL_BASH:
+                ret = 0x1AA;
+                break;
+            case MOVE_CURSE:
+                ret = 0x1AB;
+                break;
+            case MOVE_SNORE:
+                ret = 0x1AC;
+                break;
+            case MOVE_SLEEP_TALK:
+                ret = 0x1AD;
+                break;
+            default:
+                ret = moveId;
+                break;
+        }
+    }
+
+    return ret;
+}
+
+UNUSED static s32 sub_8041400(u16 moveId, u8 weather, bool32 a2)
+{
+    return sub_800ED20(sub_80412E0(moveId, weather, a2));
+}
+
+bool8 sub_804141C(u16 moveId, u8 weather, bool32 a2)
+{
+    return sub_800EC84(sub_80412E0(moveId, weather, a2));
+}
+
+bool32 sub_804143C(Entity *entity, Move *move)
+{
+    if (move->id == MOVE_CURSE) {
+        if (EntityIsValid(entity) && GetEntityType(entity) == ENTITY_MONSTER) {
+            if (GetEntInfo(entity)->types[0] == TYPE_GHOST || GetEntInfo(entity)->types[1] == TYPE_GHOST)
+                return TRUE;
+            else
+                return FALSE;
+        }
+    }
+    else if (move->id == MOVE_SNORE || move->id == MOVE_SLEEP_TALK) {
+        if (!IsSleeping(entity))
+            return TRUE;
+        else
+            return FALSE;
+    }
+    else if (move->id == MOVE_SOLARBEAM) {
+        if (GetApparentWeather(entity) == WEATHER_SUNNY)
+            return TRUE;
+    }
+
+    return MoveMatchesBideClassStatus(entity, move) != FALSE;
+}
+
+bool8 sub_80414C0(Entity *entity, Move *move)
+{
+    if (move->id == MOVE_DIVE) {
+        if (IsTileGround(GetTileAtEntitySafe(entity)))
+            return TRUE;
+    }
+    if (move->id == MOVE_DIG) {
+        if (GetTerrainType(GetTileAtEntitySafe(entity)) != TERRAIN_TYPE_NORMAL)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+void sub_8041500(struct UnkStruct_8040094 *a0)
+{
+    if (sub_800E7D0(a0)) {
+        sub_803E46C(0x5C);
+        sub_8052740(0x5D);
     }
 }
 
