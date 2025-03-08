@@ -538,6 +538,9 @@ SECTIONS {
         src/code_803D110.o(.rodata);
         data/data_80F59C8_3.o(.rodata);
         src/code_803E724.o(.rodata);
+        data/data_80F59C8_0.o(.rodata);
+        src/dungeon_map.o(.rodata);
+        src/code_8040094_1.o(.rodata);
         data/data_80F59C8.o(.rodata);
         src/dungeon_message.o(.rodata);
         src/dungeon_move.o(.rodata);

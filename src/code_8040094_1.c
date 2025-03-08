@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_message.h"
 #include "dungeon_random.h"
 #include "structs/dungeon_entity.h"

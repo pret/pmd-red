@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_map.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
@@ -16,8 +17,8 @@
 #include "trap.h"
 #include "text.h"
 #include "constants/dungeon.h"
+#include "constants/trap.h"
 
-extern const char gUnknown_80F6604; // "zmappat"
 extern struct FileArchive gDungeonFileArchive;
 extern DungeonPos gPlayerDotMapPosition;
 extern s32 gUnknown_202EDD0;
@@ -27,8 +28,6 @@ extern u8 GetFloorType(void);
 extern bool8 sub_8094C48(void);
 extern bool8 sub_8045804(Entity *ent);
 extern bool8 DoesNotHaveShadedMap(void);
-
-extern const u8 gUnknown_80F65F0[];
 
 struct UnkStruct1
 {
@@ -41,11 +40,58 @@ struct DungeonMapGfx
     RGB *pal;
 };
 
+enum {
+    MAP_GFX_NOTHING,
+    MAP_GFX_UNK1, // Appears to be nothing too
+    MAP_GFX_ENEMY,
+    MAP_GFX_ITEM,
+    MAP_GFX_TRAP,
+    MAP_GFX_SPECIAL_STAIRS,
+    MAP_GFX_STAIRS,
+    MAP_GFX_WONDER_TILE,
+    MAP_GFX_PLAYER,
+    MAP_GFX_WHITE_SQUARE, // Possibly unused? It's like Stairs, but white instead of blue
+    MAP_GFX_ALLY,
+    MAP_GFX_GREEN_DOT, // Used when hallucinating
+};
+
+#define MAP_GFX_TERRAIN_TILES_VISITED 0x10
+#define MAP_GFX_TERRAIN_TILES_REVEALED 0x20
+#define MAP_GFX_TERRAIN_LINE_UP 0x1
+#define MAP_GFX_TERRAIN_LINE_RIGHT 0x2
+#define MAP_GFX_TERRAIN_LINE_DOWN 0x4
+#define MAP_GFX_TERRAIN_LINE_LEFT 0x8
+
 EWRAM_DATA bool8 gShowMonsterDotsInDungeonMap = FALSE;
 EWRAM_DATA bool8 gShowDungeonMap = FALSE;
 EWRAM_DATA static u8 sPlayerDotFrames = 0;
 EWRAM_DATA static OpenedFile *sDungeonMapGfxFile = NULL;
 EWRAM_DATA static void *sDungeonMapVramDst = NULL;
+
+// All traps look the same on Map, except for the Wonder Tile.
+static const u8 sTrapToMapGfxId[NUM_TRAPS] =
+{
+    [TRAP_TRIP_TRAP] = MAP_GFX_TRAP,
+    [TRAP_MUD_TRAP] = MAP_GFX_TRAP,
+    [TRAP_STICKY_TRAP] = MAP_GFX_TRAP,
+    [TRAP_GRIMY_TRAP] = MAP_GFX_TRAP,
+    [TRAP_SUMMON_TRAP] = MAP_GFX_TRAP,
+    [TRAP_PITFALL_TRAP] = MAP_GFX_TRAP,
+    [TRAP_WARP_TRAP] = MAP_GFX_TRAP,
+    [TRAP_WHIRLWIND_TRAP] = MAP_GFX_TRAP,
+    [TRAP_SPIN_TRAP] = MAP_GFX_TRAP,
+    [TRAP_SLUMBER_TRAP] = MAP_GFX_TRAP,
+    [TRAP_SLOW_TRAP] = MAP_GFX_TRAP,
+    [TRAP_SEAL_TRAP] = MAP_GFX_TRAP,
+    [TRAP_POISON_TRAP] = MAP_GFX_TRAP,
+    [TRAP_SELFDESTRUCT_TRAP] = MAP_GFX_TRAP,
+    [TRAP_EXPLOSION_TRAP] = MAP_GFX_TRAP,
+    [TRAP_PP_ZERO_TRAP] = MAP_GFX_TRAP,
+    [TRAP_CHESTNUT_TRAP] = MAP_GFX_TRAP,
+    [TRAP_WONDER_TILE] = MAP_GFX_WONDER_TILE,
+    [TRAP_POKEMON_TRAP] = MAP_GFX_TRAP,
+    [TRAP_SPIKE_TRAP] = MAP_GFX_TRAP,
+};
 
 void SetDungeonMapToNotShown(void)
 {
@@ -54,7 +100,7 @@ void SetDungeonMapToNotShown(void)
 
 void OpenDungeonMapFile(void)
 {
-    sDungeonMapGfxFile = OpenFileAndGetFileDataPtr(&gUnknown_80F6604, &gDungeonFileArchive);
+    sDungeonMapGfxFile = OpenFileAndGetFileDataPtr("zmappat", &gDungeonFileArchive);
 }
 
 void InitDungeonMap(bool8 a0)
@@ -116,28 +162,6 @@ void LoadDungeonMapPalette(void)
         }
     }
 }
-
-enum {
-    MAP_GFX_NOTHING,
-    MAP_GFX_UNK1, // Appears to be nothing too
-    MAP_GFX_ENEMY,
-    MAP_GFX_ITEM,
-    MAP_GFX_TRAP,
-    MAP_GFX_SPECIAL_STAIRS,
-    MAP_GFX_STAIRS,
-    MAP_GFX_WONDER_TILE,
-    MAP_GFX_PLAYER,
-    MAP_GFX_WHITE_SQUARE, // Possibly unused? It's like Stairs, but white instead of blue
-    MAP_GFX_ALLY,
-    MAP_GFX_GREEN_DOT, // Used when hallucinating
-};
-
-#define MAP_GFX_TERRAIN_TILES_VISITED 0x10
-#define MAP_GFX_TERRAIN_TILES_REVEALED 0x20
-#define MAP_GFX_TERRAIN_LINE_UP 0x1
-#define MAP_GFX_TERRAIN_LINE_RIGHT 0x2
-#define MAP_GFX_TERRAIN_LINE_DOWN 0x4
-#define MAP_GFX_TERRAIN_LINE_LEFT 0x8
 
 void ShowDungeonMapAtPos(s32 x, s32 y)
 {
@@ -259,7 +283,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
                     if (entType == ENTITY_TRAP) {
                         if (entity->isVisible || showHiddenTraps) {
                             Trap *trap = GetTrapData(entity);
-                            mapGfxType = gUnknown_80F65F0[trap->id];
+                            mapGfxType = sTrapToMapGfxId[trap->id];
                             lookForMapObject = FALSE;
                         }
                     }
