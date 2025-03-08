@@ -35,7 +35,6 @@ extern void sub_803E46C(u32);
 extern u8 sub_800EA44(s32 species, u16 a2);
 extern s32 sub_800E790(s32 species, u16 a2);
 extern void sub_806CDD4(Entity *entity, u8, u32 direction);
-void sub_8041500(struct UnkStruct_8040094 *a0);
 extern s32 sub_800E52C(struct UnkStruct_8040094 *a0);
 extern s32 sub_800EA84(struct UnkStruct_8040094 *a0);
 extern bool8 sub_800E838(struct UnkStruct_8040094 *a0, s32 a1);
@@ -51,6 +50,7 @@ extern s32 sub_800ED20(u16 param_1);
 extern u8 sub_800EC84(s32 param_1);
 extern bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move);
 extern bool8 IsSleeping(Entity *pokemon);
+extern void sub_80421C0(Entity *pokemon, u16);
 
 extern u8 gUnknown_203B40D;
 extern s16 gUnknown_2026E4E;
@@ -61,13 +61,13 @@ extern const u8 *const gPtrMagnitudeMessage;
 extern const s32 gUnknown_8106A8C[];
 
 u16 sub_80412E0(u16 moveId, u8 weather, bool32 a2);
-bool32 sub_804143C(Entity *entity, Move *move);
-bool8 sub_80414C0(Entity *entity, Move *move);
-bool8 sub_804141C(u16 moveId, u8 weather, bool32 a2);
-void sub_8040C4C(Entity *entity, Move *move, bool32 a2);
-void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2);
-void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2);
-void sub_80421C0(Entity *pokemon, u16);
+static bool32 sub_804143C(Entity *entity, Move *move);
+static bool8 sub_80414C0(Entity *entity, Move *move);
+static bool8 sub_804141C(u16 moveId, u8 weather, bool32 a2);
+static void sub_8040C4C(Entity *entity, Move *move, bool32 a2);
+static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2);
+static void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2);
+static void sub_8041500(struct UnkStruct_8040094 *a0);
 
 bool8 sub_8040BB0(Entity *entity, Move *move, bool8 a2)
 {
@@ -88,7 +88,7 @@ bool8 sub_8040BB0(Entity *entity, Move *move, bool8 a2)
     return r9;
 }
 
-void sub_8040C4C(Entity *entity, Move *move, bool32 a2)
+static void sub_8040C4C(Entity *entity, Move *move, bool32 a2)
 {
     u8 savedUnkVar;
     s32 r4;
@@ -243,7 +243,7 @@ void sub_8040DA0(Entity *entity, Move *move)
     }
 }
 
-void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2)
+static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2)
 {
     EntityInfo *entInfo = GetEntInfo(entity);
     u16 var_24 = sub_80412E0(move->id, GetApparentWeather(entity), a2);
@@ -270,7 +270,7 @@ void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool3
     }
 }
 
-void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2)
+static void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move, bool32 a2)
 {
     u16 r4 = sub_80412E0(move->id, GetApparentWeather(entity), a2);
     s32 var = sub_800ECB8(r4)->unk2;
@@ -432,12 +432,12 @@ UNUSED static s32 sub_8041400(u16 moveId, u8 weather, bool32 a2)
     return sub_800ED20(sub_80412E0(moveId, weather, a2));
 }
 
-bool8 sub_804141C(u16 moveId, u8 weather, bool32 a2)
+static bool8 sub_804141C(u16 moveId, u8 weather, bool32 a2)
 {
     return sub_800EC84(sub_80412E0(moveId, weather, a2));
 }
 
-bool32 sub_804143C(Entity *entity, Move *move)
+static bool32 sub_804143C(Entity *entity, Move *move)
 {
     if (move->id == MOVE_CURSE) {
         if (EntityIsValid(entity) && GetEntityType(entity) == ENTITY_MONSTER) {
@@ -461,7 +461,7 @@ bool32 sub_804143C(Entity *entity, Move *move)
     return MoveMatchesBideClassStatus(entity, move) != FALSE;
 }
 
-bool8 sub_80414C0(Entity *entity, Move *move)
+static bool8 sub_80414C0(Entity *entity, Move *move)
 {
     if (move->id == MOVE_DIVE) {
         if (IsTileGround(GetTileAtEntitySafe(entity)))
@@ -475,12 +475,10 @@ bool8 sub_80414C0(Entity *entity, Move *move)
     return FALSE;
 }
 
-void sub_8041500(struct UnkStruct_8040094 *a0)
+static void sub_8041500(struct UnkStruct_8040094 *a0)
 {
     if (sub_800E7D0(a0)) {
         sub_803E46C(0x5C);
         sub_8052740(0x5D);
     }
 }
-
-//
