@@ -442,7 +442,7 @@ bool8 sub_8085B80(struct_8085B80 *a0)
                 }
                 a0[i].unk8 = unkCPtr[2];
                 a0[i].unkC = unkCPtr;
-                enInfo->action.direction = *(u8 *)unkCPtr & DIRECTION_MASK;
+              enInfo->action.direction = unkCPtr[0] & DIRECTION_MASK;
                 sub_806CDD4(entity, 0, (int)*unkCPtr);
             }
 
