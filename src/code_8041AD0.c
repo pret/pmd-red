@@ -893,3 +893,57 @@ void sub_8042238(Entity *pokemon, Entity *target)
     else
         PlaySoundEffect(0x156);
 }
+
+extern void sub_800EF28(u8);
+extern void sub_803E708(u32, u32);
+extern u32 sub_800E448(u8, DungeonPos *);
+
+void sub_804225C(Entity *entity, DungeonPos *pos, u8 trapId)
+{
+    s32 uVar6;
+    DungeonPos newPos;
+    s32 i, x, y;
+
+    if (trapId == TRAP_WONDER_TILE)
+        return;
+    if (!sub_803F428(pos))
+        return;
+
+    sub_800EF28(trapId);
+    sub_800EF64();
+    sub_803E708(4,0x42);
+
+    x = X_POS_TO_PIXELPOS(pos->x);
+    newPos.x = x / 256;
+
+    y = Y_POS_TO_PIXELPOS(pos->y);
+    newPos.y = y / 256;
+
+    uVar6 = sub_800E448(trapId,&newPos);
+    if (trapId == TRAP_SUMMON_TRAP) {
+        sub_80421C0(0,0x193);
+        sub_803E708(0x28,0x33);
+    }
+    else if (trapId == TRAP_SPIN_TRAP) {
+        EntityInfo *info = GetEntInfo(entity);
+        s32 direction = info->action.direction;
+        for (i = 0; i < 1000; i += 2) {
+            direction--;
+            direction &= DIRECTION_MASK;
+            sub_806CDD4(entity,0,direction);
+            sub_803E708(2,0x33);
+            if (!sub_800E9A8(uVar6))
+                break;
+        }
+        info->action.direction = direction & DIRECTION_MASK;
+    }
+    else {
+        sub_803E708(0x28,0x33);
+    }
+
+    for (i = 0; i < 1000; i++) {
+        sub_803E46C(0x42);
+        if (!sub_800E9A8(uVar6))
+            break;
+    }
+}
