@@ -1,5 +1,6 @@
 #include "global.h"
 #include "dungeon_message.h"
+#include "dungeon_map.h"
 #include "dungeon.h"
 #include "structs/dungeon_entity.h"
 #include "code_803E46C.h"
@@ -33,7 +34,6 @@ static bool8 sub_8052DC0(Entity *);
 extern bool8 sub_8045888(Entity *pokemon);
 extern void sub_805E804(void);
 extern void sub_803EAF0(s32, s32);
-extern void sub_8040238(void);
 extern void sub_8083E28(void);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern void PlayDungeonCancelSE(void);
@@ -375,8 +375,8 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
 
     if (a2) {
         sub_805E804();
-        sub_8040238();
-        if (gUnknown_202EE01) {
+        LoadDungeonMapPalette();
+        if (gShowDungeonMap) {
             sub_803EAF0(0, 0);
         }
         else {
@@ -506,7 +506,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     }
 
     if (dialogueInfo->unk0 != 1 && dialogueInfo->unk0 != 3) {
-        sub_8040238();
+        LoadDungeonMapPalette();
         sub_803EAF0(0, 0);
     }
     sub_803E708(8, 9);
@@ -552,7 +552,7 @@ bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, c
         CloseFile(monPortrait.faceFile);
     }
 
-    sub_8040238();
+    LoadDungeonMapPalette();
     sub_803EAF0(0, 0);
 
     if (chosenMenuIndex == 1)
@@ -595,7 +595,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
         CloseFile(monPortrait.faceFile);
     }
 
-    sub_8040238();
+    LoadDungeonMapPalette();
     sub_803EAF0(0, 0);
     return chosenMenuIndex;
 }
@@ -732,7 +732,7 @@ void sub_8052FB8(const u8 *str)
     {
         s32 i;
         for (i = 1; i < 30; i++) {
-            gUnknown_202B038[0][0][i] = 0;
+            gBgTilemaps[0][0][i] = 0;
         }
     }
 
@@ -782,7 +782,7 @@ void sub_8052FB8(const u8 *str)
 
     ShowWindows(NULL, TRUE, TRUE);
     DungeonRunFrameActions(9);
-    sub_8040238();
+    LoadDungeonMapPalette();
     for (j = 0; j < 8; j++) {
         SetBGPaletteBufferColorArray(240 + j, &gFontPalette[j]);
     }

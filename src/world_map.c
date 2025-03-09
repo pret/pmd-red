@@ -291,7 +291,7 @@ static void sub_801059C(void)
     sWorldMapPtr->unk1100[4] = OpenFileAndGetFileDataPtr(gUnknown_80D4014[2], &gTitleMenuFileArchive);
     sWorldMapPtr->unk1100[1] = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
     sWorldMapPtr->unk1100[0] = OpenFileAndGetFileDataPtr(gUnknown_80D4014[3], &gTitleMenuFileArchive);
-    sWorldMapPtr->unk52D4 = GetPokemonOverworldPalette(pokeStruct->speciesNum, 0);
+    sWorldMapPtr->unk52D4 = GetPokemonOverworldPalette(pokeStruct->speciesNum, FALSE);
 
     sub_8005610(sWorldMapPtr->unk1100[2], 0x40, 0x1F, 0);
 
@@ -367,8 +367,8 @@ static void UpdateBg(void)
             x1 &= 0x1F;
             y1 &= 0x1F;
 
-            gUnknown_202B038[2][y1][x1] = sWorldMapPtr->unk3114[y2][x2];
-            gUnknown_202B038[3][y1][x1] = sWorldMapPtr->unk1114[y2][x2];
+            gBgTilemaps[2][y1][x1] = sWorldMapPtr->unk3114[y2][x2];
+            gBgTilemaps[3][y1][x1] = sWorldMapPtr->unk1114[y2][x2];
             x2++;
             x1++;
         }

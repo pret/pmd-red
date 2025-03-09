@@ -80,7 +80,7 @@ extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
 extern void sub_803F580(s32);
-extern void sub_8040A84(void);
+extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
@@ -543,7 +543,7 @@ void sub_806A6E8(Entity *entity)
         else {
             if (info->heldItem.id == ITEM_X_RAY_SPECS || info->unk64 == ITEM_X_RAY_SPECS) {
                 sub_803F580(1);
-                sub_8040A84();
+                ShowWholeRevealedDungeonMap();
             }
         }
         sub_807AA30();
@@ -2061,7 +2061,7 @@ void sub_806C51C(Entity *entity)
     if (entInfo->isNotTeamMember && (entInfo->apparentID == MONSTER_DEOXYS_ATTACK || entInfo->apparentID == MONSTER_DEOXYS_DEFENSE || entInfo->apparentID == MONSTER_DEOXYS_SPEED)) {
         r4 = TRUE;
     }
-    if (entInfo->invisibleClassStatus.status == STATUS_INVISIBLE && !gDungeon->unk181e8.unk1820F) {
+    if (entInfo->invisibleClassStatus.status == STATUS_INVISIBLE && !gDungeon->unk181e8.showInvisibleTrapsMonsters) {
         r4 = TRUE;
     }
     if (r4) {
@@ -2084,10 +2084,10 @@ void sub_806C51C(Entity *entity)
         }
 
         if (decoySprite) {
-            overworldPal = GetPokemonOverworldPalette(MONSTER_DECOY, 0);
+            overworldPal = GetPokemonOverworldPalette(MONSTER_DECOY, FALSE);
         }
         else {
-            overworldPal = GetPokemonOverworldPalette(entInfo->apparentID, 0);
+            overworldPal = GetPokemonOverworldPalette(entInfo->apparentID, FALSE);
         }
 
         if (entity->unk22 == 0) {
@@ -2106,8 +2106,8 @@ void sub_806C51C(Entity *entity)
     if (xSprite >= -32 && ySprite >= -32 && xSprite <= 271 && ySprite <= 191 && r7 != 6 && entity->unk22 == 0) {
         struct unkStruct_202ED28 *spriteStructPtr = &gUnknown_202ED28[var_34][r7];
         if (entInfo->unk156 != 0) {
-            SpriteSetX(&spriteStructPtr->sprite, xSprite + spriteStructPtr->x);
-            SpriteSetY(&spriteStructPtr->sprite, ySprite + spriteStructPtr->y);
+            SpriteSetX(&spriteStructPtr->sprite, xSprite + spriteStructPtr->pos.x);
+            SpriteSetY(&spriteStructPtr->sprite, ySprite + spriteStructPtr->pos.y);
 
             AddSprite(&spriteStructPtr->sprite, 0, NULL, NULL);
         }

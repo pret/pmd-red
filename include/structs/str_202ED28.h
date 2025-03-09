@@ -1,11 +1,12 @@
 #ifndef GUARD_STR_202ED28_H
 #define GUARD_STR_202ED28_H
 
+#include "structs/str_position.h"
+
 struct unkStruct_202ED28
 {
     SpriteOAM sprite;
-    s16 x;
-    s16 y;
+    DungeonPos pos;
 };
 
 extern struct unkStruct_202ED28 gUnknown_202ED28[][6];

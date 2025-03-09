@@ -109,16 +109,7 @@ gUnknown_202EDE8: /* 202EDE8 (sub_803E250 - sub_803EDF0) */
 gUnknown_202EDFC: /* 202EDFC (sub_803F27C - sub_803F878) */
 	.space 0x4
 
-gUnknown_202EE00: /* 202EE00 (sub_8040150 - sub_805D8C8) */
-	.space 0x1
-gUnknown_202EE01: /* 202EE01 (sub_8040124 - PrintFieldMessage) */
-	.space 0x1
-gUnknown_202EE02: /* 202EE02 (sub_8040894 - sub_8040A78) */
-	.space 0x2
-gUnknown_202EE04: /* 202EE04 (sub_8040130 - sub_80402AC) */
-	.space 0x4
-gUnknown_202EE08: /* 202EE08 (sub_8040150 - sub_8040788) */
-	.space 0x4
+    .include "src/dungeon_map.o"
 
 gUnknown_202EE0C: /* 202EE0C (sub_80694C0 - sub_806B8CC) */
 	.space 0x4

@@ -11,6 +11,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "dungeon_map.h"
 #include "pokemon.h"
 #include "moves.h"
 #include "items.h"
@@ -74,10 +75,8 @@ bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
 void sub_803E708(s32 a0, s32 a1);
-void sub_8040A78(void);
 void sub_8075680(u32);
 void sub_8094C88(void);
-void sub_8040A84(void);
 void sub_8047158(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 void SetLeaderActionToNothing(u8 a0);
@@ -107,7 +106,6 @@ extern void sub_807EC28(bool8);
 extern void PlayDungeonCursorSE(u8 param_1);
 extern const u8 *GetCurrentDungeonName(void);
 
-extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
 
 extern const u8 *gUnknown_80F8A84;
@@ -179,7 +177,7 @@ void DungeonHandlePlayerInput(void)
     }
 
     gDungeon->unk644.unk2F = 0;
-    sub_8040A78();
+    ResetMapPlayerDotFrames();
     if (gDungeon->unk1 != 0) {
         gDungeon->unk1 = 0;
         if (!ShouldMonsterRunAwayAndShowEffect(GetLeader(), TRUE)) {
@@ -437,13 +435,13 @@ void DungeonHandlePlayerInput(void)
             // SELECT button
             if (!gDungeon->unk181e8.blinded && gGameOptionsRef->mapOption != 6 && gRealInputs.pressed & SELECT_BUTTON) {
                 s32 prevMapOption = gGameOptionsRef->mapOption;
-                gUnknown_202EE00 = 1;
-                gDungeon->unk181e8.unk18214 = 1;
+                gShowMonsterDotsInDungeonMap = TRUE;
+                gDungeon->unk181e8.inFloorMapMode = TRUE;
                 if (!sub_8094C48()) {
                     sub_8094C88();
                 }
                 sub_8052210(1);
-                sub_8040A84();
+                ShowWholeRevealedDungeonMap();
                 SetBGOBJEnableFlags(0x1E);
                 sub_803E708(0xA, 0x2F);
                 while (1) {
@@ -454,14 +452,14 @@ void DungeonHandlePlayerInput(void)
                         break;
 
                     if (gRealInputs.pressed & A_BUTTON) {
-                        gUnknown_202EE00 = (gUnknown_202EE00 == 0) ? 1 : 0; // Flip
-                        sub_8040A84();
+                        gShowMonsterDotsInDungeonMap = (gShowMonsterDotsInDungeonMap == FALSE) ? TRUE : FALSE; // Flip
+                        ShowWholeRevealedDungeonMap();
                     }
                 }
-                gDungeon->unk181e8.unk18214 = 0;
+                gDungeon->unk181e8.inFloorMapMode = FALSE;
                 gGameOptionsRef->mapOption = prevMapOption;
-                gUnknown_202EE00 = 1;
-                sub_8040A84();
+                gShowMonsterDotsInDungeonMap = TRUE;
+                ShowWholeRevealedDungeonMap();
                 SetBGOBJEnableFlags(0);
                 DungeonRunFrameActions(0x2F);
                 DungeonRunFrameActions(0x2F);
@@ -868,7 +866,7 @@ static bool8 sub_805E874(void)
                 if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_TRAP && GetEntityType(tile->object) == ENTITY_TRAP) {
                     if (tile->object->isVisible)
                         return FALSE;
-                    if (gDungeon->unk181e8.unk1820F)
+                    if (gDungeon->unk181e8.showInvisibleTrapsMonsters)
                         return FALSE;
                 }
             }
@@ -876,7 +874,7 @@ static bool8 sub_805E874(void)
                 if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_TRAP) {
                     if (tile->object->isVisible)
                         return FALSE;
-                    if (gDungeon->unk181e8.unk1820F)
+                    if (gDungeon->unk181e8.showInvisibleTrapsMonsters)
                         return FALSE;
                 }
             }

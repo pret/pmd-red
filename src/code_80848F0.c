@@ -14,7 +14,7 @@
 #include "structs/str_806B7F8.h"
 
 extern const DungeonPos gUnknown_80F4598[];
-extern void sub_8040A84(void);
+extern void ShowWholeRevealedDungeonMap(void);
 
 struct unkData_8107234
 {
@@ -32,7 +32,7 @@ void sub_80847D4(void)
 
     gDungeon->unk3A0D = 0;
     gDungeon->unk1356C = 0;
-    sub_8040A84();
+    ShowWholeRevealedDungeonMap();
     for(index = 0; index < 0x3e7 && gUnknown_8107234[index].unk0[0] != 0;  index++) {
         fixedRoomNumber = gDungeon->fixedRoomNumber;
         if (fixedRoomNumber - 0x1c < 0x16) {

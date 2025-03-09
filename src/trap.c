@@ -58,7 +58,7 @@ extern u32 gUnknown_8106A50;
 
 void sub_806A9B4(Entity *, u32);
 void sub_80461C8(DungeonPos *, u32);
-void sub_80402AC(s32, s32);
+void ShowDungeonMapAtPos(s32, s32);
 s16 sub_803D970(u32);
 bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
@@ -247,7 +247,7 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
         if (HasHeldItem(target, ITEM_TRAP_SCARF)) {
             text = *gUnknown_80FDB5C;
         }
-        if ((flag == TRUE) || (gDungeon->unk181e8.unk1820F != 0)) {
+        if ((flag == TRUE) || (gDungeon->unk181e8.showInvisibleTrapsMonsters != 0)) {
             if (rand < 0) text = *gUnknown_80FDB7C;
         }
         else if (rand < 0xf) {
@@ -771,7 +771,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
                         counter++;
                     }
                 }
-                sub_80402AC(x,y);
+                ShowDungeonMapAtPos(x,y);
             }
         }
     }

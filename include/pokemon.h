@@ -74,7 +74,7 @@ s16 GetAlphabetParentNo(s16 index, s32 r1);
 s16 GetInternalNo(s16 index);
 s32 CalculateEXPGain(s16 index, s32 level);
 s16 GetPokemonEvolveConditons(s16 index, unkEvolve *);
-u8 GetPokemonOverworldPalette(s16 index, u32 r1);
+u8 GetPokemonOverworldPalette(s16 index, bool32 recolorShopKecleon);
 bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 spriteId);
 OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 OpenedFile *GetDialogueSpriteDataPtr(s32 index);

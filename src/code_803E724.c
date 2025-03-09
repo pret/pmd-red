@@ -14,6 +14,7 @@
 #include "dungeon_map_access.h"
 #include "sprite.h"
 #include "bg_control.h"
+#include "dungeon_map.h"
 #include "game_options.h"
 #include "code_800558C.h"
 #include "dungeon_range.h"
@@ -23,6 +24,7 @@
 #include "constants/item.h"
 #include "constants/status.h"
 #include "code_803E724.h"
+#include "structs/str_202EDE8.h"
 
 extern s32 gDungeonBrightness;
 extern u32 gUnknown_202EDD0;
@@ -54,15 +56,13 @@ extern u8 gUnknown_20274A5;
 
 extern s32 gDungeonFramesCounter;
 
-extern void sub_8040A84();
 extern void PlayDungeonStartButtonSE(void);
-extern void sub_8040A84(void);
+extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
-extern void sub_80402AC(s32, s32);
+extern void ShowDungeonMapAtPos(s32, s32);
 
 void sub_803EC94(void);
-void sub_8040ABC(u8 a0);
 s32 sub_803EF90(s32 a0, u8 a1);
 void sub_803F580(u8 a0);
 void sub_803F7BC(void);
@@ -279,14 +279,14 @@ void sub_803EAF0(u32 a0, u8 *a1)
             sub_803EC94();
             ShowWindows(NULL, TRUE, TRUE);
             if (gUnknown_203B40C != 0) {
-                sub_8040A84();
-                sub_8040ABC(0);
+                ShowWholeRevealedDungeonMap();
+                UpdateBgTilemapForDungeonMap(FALSE);
             }
             break;
         case 3:
             ShowWindows(&gUnknown_80F62B0, TRUE, TRUE);
             if (gUnknown_203B40C != 0) {
-                sub_8040ABC(1);
+                UpdateBgTilemapForDungeonMap(TRUE);
             }
             break;
         case 6:
@@ -371,18 +371,6 @@ void sub_803ECE0(void)
 
     sub_80098BC((void *)VRAM + 0x14400, gUnknown_202EC94->unk4 + ((gUnknown_202EDD8 / 4) * 0x240), 0x240);
 }
-
-struct UnkStruct_202EDE8
-{
-    s16 unk0;
-    s16 unk2;
-    Entity *unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-};
-
-extern struct UnkStruct_202EDE8 gUnknown_202EDE8;
 
 void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
 {
@@ -686,11 +674,11 @@ void sub_803F27C(bool8 a0)
     if (!a0) {
         strPtr->blinded = 0;
         strPtr->hallucinating = 0;
-        strPtr->unk1820F = 0;
+        strPtr->showInvisibleTrapsMonsters = 0;
         strPtr->unk1820D = FALSE;
         strPtr->unk18211 = 0;
-        strPtr->unk1820E = FALSE;
-        strPtr->unk1820B = 0;
+        strPtr->showAllFloorItems = FALSE;
+        strPtr->allTilesRevealed = 0;
         strPtr->unk1820C = 0;
     }
 
@@ -700,7 +688,7 @@ void sub_803F27C(bool8 a0)
     strPtr->unk18212 = 0;
     strPtr->rotateModeDirection = 0;
     strPtr->prevRotateModeDirection = 0;
-    strPtr->unk18214 = 0;
+    strPtr->inFloorMapMode = 0;
     strPtr->unk18215 = 1;
     sub_803F38C();
 
@@ -742,7 +730,7 @@ bool8 sub_803F428(DungeonPos *pos)
     Entity *cameraEntity = strPtr->cameraTarget;
 
     if (abs(strPtr->cameraPos.x - pos->x) <= 6 && abs(strPtr->cameraPos.y - pos->y) <= 5) {
-        if (strPtr->unk1820B == 0 && strPtr->unk1820C == 0 && cameraEntity != NULL) {
+        if (strPtr->allTilesRevealed == 0 && strPtr->unk1820C == 0 && cameraEntity != NULL) {
             return IsPositionActuallyInSight(&strPtr->cameraPos, pos);
         }
         return TRUE;
@@ -795,7 +783,7 @@ void sub_803F508(Entity *a0)
         sub_806CD90();
     }
     sub_8049ED4();
-    sub_8040A84();
+    ShowWholeRevealedDungeonMap();
 }
 
 void sub_803F580(u8 a0)
@@ -805,7 +793,7 @@ void sub_803F580(u8 a0)
 
     if (cameraTarget != NULL && EntityIsValid(cameraTarget)) {
         s32 i;
-        u32 before, unk18214;
+        u32 before, inFloorMapMode;
         EntityInfo *info = GetEntInfo(cameraTarget);
 
         strPtr->cameraPixelPosMirror = strPtr->cameraPixelPos;
@@ -818,24 +806,24 @@ void sub_803F580(u8 a0)
 
         if (HasHeldItem(cameraTarget, ITEM_X_RAY_SPECS) && info->isTeamLeader) {
             strPtr->unk1820D = TRUE;
-            strPtr->unk1820E = TRUE;
+            strPtr->showAllFloorItems = TRUE;
         }
         else {
             strPtr->unk1820D = info->powerEars;
-            strPtr->unk1820E = info->scanning;
+            strPtr->showAllFloorItems = info->scanning;
         }
 
         strPtr->unk18211 = info->stairSpotter;
         before = strPtr->blinded;
-        unk18214 = strPtr->unk18214;
-        if (unk18214 == 0) {
+        inFloorMapMode = strPtr->inFloorMapMode;
+        if (inFloorMapMode == 0) {
             u32 unkVar;
             if (info->blinkerClassStatus.status == STATUS_BLINKER) {
                 strPtr->blinded = 1;
                 unkVar = 0xE;
             }
             else {
-                strPtr->blinded = unk18214;
+                strPtr->blinded = inFloorMapMode;
                 unkVar = 0;
             }
 
@@ -865,17 +853,17 @@ void sub_803F580(u8 a0)
             sub_8041888(0);
         }
 
-        before = strPtr->unk1820F;
+        before = strPtr->showInvisibleTrapsMonsters;
         if (CanSeeInvisibleMonsters(cameraTarget)) {
-            strPtr->unk1820F = 1;
+            strPtr->showInvisibleTrapsMonsters = 1;
         }
         else {
-            strPtr->unk1820F = 0;
+            strPtr->showInvisibleTrapsMonsters = 0;
         }
 
-        if (before != strPtr->unk1820F) {
+        if (before != strPtr->showInvisibleTrapsMonsters) {
             sub_8049ED4();
-            sub_8040A84();
+            ShowWholeRevealedDungeonMap();
             sub_8041888(0);
         }
 
@@ -905,7 +893,7 @@ void sub_803F580(u8 a0)
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
                 Entity *mon = gDungeon->activePokemon[i];
                 if (EntityIsValid(mon)) {
-                    sub_80402AC(mon->pos.x, mon->pos.y);
+                    ShowDungeonMapAtPos(mon->pos.x, mon->pos.y);
                 }
             }
         }
@@ -921,7 +909,7 @@ void sub_803F7BC(void)
     const Tile *tile = GetTile(strPtr->cameraPos.x, strPtr->cameraPos.y);
     u32 roomId = tile->room;
 
-    if (strPtr->unk1820B != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {
+    if (strPtr->allTilesRevealed != 0 || strPtr->unk1820C != 0 || strPtr->unk18217 != 0) {
         sub_8005838(NULL, 0);
     }
     else if (roomId == CORRIDOR_ROOM) {
@@ -951,7 +939,7 @@ void sub_803F878(s32 a0, s32 a1)
     strPtr->cameraPos.x = a0 / 6144;
     strPtr->cameraPos.y = a1 / 6144;
     strPtr->unk1820D = FALSE;
-    strPtr->unk1820E = FALSE;
+    strPtr->showAllFloorItems = FALSE;
     strPtr->unk18211 = 0;
     strPtr->unk18216 = 0;
 
@@ -1010,7 +998,7 @@ void sub_803F9CC(void)
 
     if (!r5) {
         for (i = 1; i < 30; i++) {
-            gUnknown_202B038[0][0][i] = 0;
+            gBgTilemaps[0][0][i] = 0;
         }
         sub_803F38C();
     }
@@ -1151,7 +1139,7 @@ void sub_803FB74(void)
         nullsub_5(0xFF, &gFontPalette[15 + r6]);
     }
 
-    arrPtr = gUnknown_202B038[0][0];
+    arrPtr = gBgTilemaps[0][0];
     unkFloor = gDungeon->unk14 + gDungeon->unk644.dungeonLocation.floor;
     if (strPtr->unk3A != unkFloor) {
         strPtr->unk3A = unkFloor;
@@ -1203,7 +1191,7 @@ void sub_803FB74(void)
     }
 
     for (i = 0; i < 12; i++) {
-        gUnknown_202B038[0][0][18 + i] = (0x2CC + i) | 0xF000;
+        gBgTilemaps[0][0][18 + i] = (0x2CC + i) | 0xF000;
     }
 }
 

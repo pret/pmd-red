@@ -917,7 +917,7 @@ _08069018:
 	ldrsh r0, [r2, r3]
 	movs r3, 0x6
 	ldrsh r1, [r2, r3]
-	bl sub_80402AC
+	bl ShowDungeonMapAtPos
 	movs r5, 0
 	adds r6, r7, 0
 	adds r6, 0xC8

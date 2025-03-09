@@ -18,6 +18,7 @@
 #include "game_options.h"
 #include "post_office_guide2.h"
 #include "dungeon_main.h"
+#include "dungeon_map.h"
 
 extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
@@ -29,11 +30,9 @@ extern void DungeonRunFrameActions(u32 a0);
 extern void DungeonShowWindows(WindowTemplates *a0, bool8 a1);
 extern void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
 extern void sub_8045064(void);
-extern void sub_8040A84(void);
 extern bool8 IsBossFight(void);
 extern u16 GetLeaderActionId(void);
 extern void sub_803E13C(void);
-extern void sub_8040238(void);
 extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 
 extern MenuInputStruct gDungeonMenu;
@@ -175,7 +174,7 @@ void ShowDungeonOthersMenu(void)
             break;
     }
 
-    sub_8040A84();
+    ShowWholeRevealedDungeonMap();
     sub_803EAF0(0, NULL);
 }
 
@@ -387,7 +386,7 @@ static void TrySetNewGameOptions(bool8 bPressed)
         if (DisplayDungeonYesNoMessage(0, gUnknown_80FEBF8, TRUE) == 1) {
             *gGameOptionsRef = sChangedGameOptions;
             sub_803E13C();
-            sub_8040238();
+            LoadDungeonMapPalette();
         }
     }
 }

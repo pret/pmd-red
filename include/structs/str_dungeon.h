@@ -82,16 +82,16 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     u8 priority; // x20
     /* 0x18209 */ u8 visibilityRange; // x21 Dungeon light level.
     /* 0x1820A */ bool8 blinded; // x22 Blacks out the screen when the player has the Blinker status.
-    bool8 unk1820B; // x23
+    bool8 allTilesRevealed; // x23
     bool8 unk1820C; // x24
     bool8 unk1820D; // x25
-    bool8 unk1820E; // x26
-    bool8 unk1820F; // x27
+    bool8 showAllFloorItems; // x26
+    bool8 showInvisibleTrapsMonsters; // x27
     /* 0x18210 */ bool8 hallucinating; // x28 Displays Substitute and flower sprites when the player has the Cross-Eyed status.
     bool8 unk18211; // x29
     u8 unk18212; // x2A
     bool8 unk18213; // x2B
-    u8 unk18214; // x2C
+    bool8 inFloorMapMode; // x2C
     u8 unk18215; // x2D
     u8 unk18216; // x2E
     u8 unk18217; // x2F
@@ -332,6 +332,35 @@ typedef struct unkDungeon57C
 #define UNK12A18_ARR_COUNT 29
 #define UNK12A18_ARR_COUNT_2 9
 
+// Some palette?
+struct UnkDungeonGlobal_1822C_Sub
+{
+    u32 arr[8];
+};
+
+#define DUNGEON_MAP_MAX_Y (DUNGEON_MAX_SIZE_Y / 2)
+#define DUNGEON_MAP_MAX_X (DUNGEON_MAX_SIZE_X / 2)
+
+struct DungeonMapVramCopy
+{
+    u32 *vramPtr;
+    u32 *mapArrayPtr;
+    bool8 *boolPtr;
+};
+
+#define MAX_SCHEDULED_DUNGEON_MAP_COPIES 40
+
+struct DungeonMap
+{
+    struct UnkDungeonGlobal_1822C_Sub perTile[DUNGEON_MAP_MAX_Y][DUNGEON_MAP_MAX_X];
+    bool8 tileScheduledForCopy[DUNGEON_MAP_MAX_Y][DUNGEON_MAP_MAX_X];
+    struct DungeonMapVramCopy vramCopies[MAX_SCHEDULED_DUNGEON_MAP_COPIES];
+    s32 scheduledVramCopiesCount;
+    bool8 copyToVram;
+    bool8 copyAllAtOnce;
+    bool8 resetTilesScheduledForCopy;
+};
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -447,8 +476,8 @@ typedef struct Dungeon
     /* 0x17B44 */ OpenedFile *sprites[MONSTER_MAX];
     /* 0x181E4 */ OpenedFile *paletFile;
     /* 0x181E8 */ UnkDungeonGlobal_unk181E8_sub unk181e8;
-    u8 fill18220[0x1BDD4 - 0x1822C];
-    struct UnkStructDungeon1BDD4 unk1BDD4;
+    /* 0x1822C */ struct DungeonMap dungeonMap;
+    /* 0x1BDD4 */ struct UnkStructDungeon1BDD4 unk1BDD4;
     /* 0x1BE14 */ struct MessageLogString messageLogStrings[MESSAGE_LOG_STRINGS_COUNT];
     /* 0x1C570 */ DungeonLocation unk1C570;
     /* 0x1C574 */ FloorProperties unk1C574;

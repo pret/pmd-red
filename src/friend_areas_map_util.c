@@ -71,7 +71,7 @@ void FriendAreasMap_InitGfx(void)
     gFriendAreasMapPtr->unk0[4] = OpenFileAndGetFileDataPtr(gUnknown_80D408C[2], &gTitleMenuFileArchive);
     gFriendAreasMapPtr->unk0[1] = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
     gFriendAreasMapPtr->unk0[0] = OpenFileAndGetFileDataPtr(gUnknown_80D408C[3], &gTitleMenuFileArchive);
-    gFriendAreasMapPtr->unk4DD0 = GetPokemonOverworldPalette(pokeStruct->speciesNum, 0);
+    gFriendAreasMapPtr->unk4DD0 = GetPokemonOverworldPalette(pokeStruct->speciesNum, FALSE);
 
     sub_8005610(gFriendAreasMapPtr->unk0[2], 0x40, 0x1F, 0);
 
@@ -153,8 +153,8 @@ void FriendAreasMap_UpdateBg(void)
             x1 &= 0x1F;
             y1 &= 0x1F;
 
-            gUnknown_202B038[2][y1][x1] = gFriendAreasMapPtr->unk2014[y2][x2];
-            gUnknown_202B038[3][y1][x1] = gFriendAreasMapPtr->unk14[y2][x2];
+            gBgTilemaps[2][y1][x1] = gFriendAreasMapPtr->unk2014[y2][x2];
+            gBgTilemaps[3][y1][x1] = gFriendAreasMapPtr->unk14[y2][x2];
             x2++;
             x1++;
         }

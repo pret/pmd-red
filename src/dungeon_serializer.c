@@ -15,7 +15,7 @@
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
 extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
 
-extern DungeonPos gUnknown_203B410;
+extern DungeonPos gPlayerDotMapPosition;
 extern Entity *gLeaderPointer; // 203B450
 
 #include "data/dungeon_serializer.h"
@@ -450,11 +450,11 @@ static void WriteDungeonVisibility(DataSerializer *seri)
     WriteU8(seri, gDungeon->unk181e8.priority);
     WriteU8(seri, gDungeon->unk181e8.visibilityRange);
     WriteBool8(seri, gDungeon->unk181e8.blinded);
-    WriteBool8(seri, gDungeon->unk181e8.unk1820B);
+    WriteBool8(seri, gDungeon->unk181e8.allTilesRevealed);
     WriteBool8(seri, gDungeon->unk181e8.unk1820C);
     WriteBool8(seri, gDungeon->unk181e8.unk1820D);
-    WriteBool8(seri, gDungeon->unk181e8.unk1820E);
-    WriteBool8(seri, gDungeon->unk181e8.unk1820F);
+    WriteBool8(seri, gDungeon->unk181e8.showAllFloorItems);
+    WriteBool8(seri, gDungeon->unk181e8.showInvisibleTrapsMonsters);
     WriteBool8(seri, gDungeon->unk181e8.hallucinating);
     WriteBool8(seri, gDungeon->unk181e8.unk18211);
     WriteBool8(seri, gDungeon->unk181e8.unk18213);
@@ -847,11 +847,11 @@ static void ReadDungeonVisibility(DataSerializer *seri)
     gDungeon->unk181e8.priority = ReadU8(seri);
     gDungeon->unk181e8.visibilityRange = ReadU8(seri);
     gDungeon->unk181e8.blinded = ReadBool8(seri);
-    gDungeon->unk181e8.unk1820B = ReadBool8(seri);
+    gDungeon->unk181e8.allTilesRevealed = ReadBool8(seri);
     gDungeon->unk181e8.unk1820C = ReadBool8(seri);
     gDungeon->unk181e8.unk1820D = ReadBool8(seri);
-    gDungeon->unk181e8.unk1820E = ReadBool8(seri);
-    gDungeon->unk181e8.unk1820F = ReadBool8(seri);
+    gDungeon->unk181e8.showAllFloorItems = ReadBool8(seri);
+    gDungeon->unk181e8.showInvisibleTrapsMonsters = ReadBool8(seri);
     gDungeon->unk181e8.hallucinating = ReadBool8(seri);
     gDungeon->unk181e8.unk18211 = ReadBool8(seri);
     gDungeon->unk181e8.unk18213 = ReadBool8(seri);
@@ -1100,8 +1100,8 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
             gLeaderPointer = NULL;
 
             if (monEntInfo->isTeamLeader) {
-                gUnknown_203B410.x = mon->pos.x;
-                gUnknown_203B410.y = mon->pos.y;
+                gPlayerDotMapPosition.x = mon->pos.x;
+                gPlayerDotMapPosition.y = mon->pos.y;
             }
 
             LoadIQSkills(mon);
