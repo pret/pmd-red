@@ -34,7 +34,7 @@ bool8 sub_80302E8(s32 param_1, DungeonPos *param_2, u32 param_3)
     sMakuhitaDojoWork2->s30.s0.unk38 = &sMakuhitaDojoWork2->s30.s0.windows.id[param_1];
     RestoreUnkTextStruct_8006518(&sMakuhitaDojoWork2->s30.s0.windows);
     sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E0804;
-    sMakuhitaDojoWork2->s30.s0.unk38->unk14 = &sMakuhitaDojoWork2->s30.unk9C;
+    sMakuhitaDojoWork2->s30.s0.unk38->header = &sMakuhitaDojoWork2->s30.unk9C;
 
     if (param_2 != NULL)
         sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.unk34].pos = *param_2;
@@ -101,9 +101,9 @@ void sub_8030480(void)
 
 static void sub_80304C8(void)
 {
-    sMakuhitaDojoWork2->s30.unk9C.f0 = 1;
-    sMakuhitaDojoWork2->s30.unk9C.f1 = 0;
-    sMakuhitaDojoWork2->s30.unk9C.f2 = 8;
+    sMakuhitaDojoWork2->s30.unk9C.count = 1;
+    sMakuhitaDojoWork2->s30.unk9C.currId = 0;
+    sMakuhitaDojoWork2->s30.unk9C.width = 8;
     sMakuhitaDojoWork2->s30.unk9C.f3 = 0;
 
     SUB_80095E4_CALL(sMakuhitaDojoWork2->s30.s0);
@@ -122,7 +122,7 @@ static void MakuhitaDojo_DrawCourseList(void)
     CallPrepareTextbox_8008C54(sMakuhitaDojoWork2->s30.s0.unk34);
     sub_80073B8(sMakuhitaDojoWork2->s30.s0.unk34);
     PrintStringOnWindow(10, 0, sCourses, sMakuhitaDojoWork2->s30.s0.unk34, 0);
-    sub_8012BC4((sMakuhitaDojoWork2->s30.unk9C.f2 * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.unk1E + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.unk34);
+    sub_8012BC4((sMakuhitaDojoWork2->s30.unk9C.width * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.unk1E + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.unk34);
 
     for (i = 0; i < sMakuhitaDojoWork2->s30.s0.input.unk1A; i++) {
         iVar6 = sMakuhitaDojoWork2->unk0[sMakuhitaDojoWork2->s30.s0.input.unk1E * sMakuhitaDojoWork2->s30.s0.input.unk1C + i];

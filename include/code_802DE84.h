@@ -11,8 +11,8 @@ struct unkStruct_203B300
     MenuInputStructSub unk0;
     /* 0xC */ unkStruct_802C39C *mail;
     u32 unk10;
-    Window *unk14;
-    Windows unk18;
+    WindowTemplate *unk14;
+    WindowTemplates unk18;
     u8 unk78[4];
 };
 

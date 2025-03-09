@@ -98,8 +98,8 @@ typedef struct UnkDungeonGlobal_unk181E8_sub
     u8 unk18218; // x30
     u8 unk18219; // x31
     u8 unk1821A; // x32
-    u8 unk1821B; // x33
-    u8 unk1821C; // x34
+    u8 rotateModeDirection; // x33
+    u8 prevRotateModeDirection; // x34
     u8 fill1821D; // x35
     s16 unk36; // x36
     s16 unk38; // x38
@@ -249,7 +249,7 @@ typedef struct unkDungeon644
     /* 0x8 */ unkStruct_Dungeon64C unk8;
     /* 0x10 */ u8 unk10;
     /* 0x11 */ u8 fill11[3];
-    /* 0x14 */ u8 unk14;
+    /* 0x14 */ bool8 canRecruit;
     /* 0x15 */ u8 unk15;
     /* 0x16 */ u8 unk16;
     /* 0x17 */ u8 unk17;

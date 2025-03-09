@@ -1,4 +1,4 @@
-static const Window sUnknown_80DC020 = {
+static const WindowTemplate sUnknown_80DC020 = {
     0,
     3,
     0, 0,
@@ -8,7 +8,7 @@ static const Window sUnknown_80DC020 = {
 };
 
 static const WindowHeader sUnknown_80DC038 = {1, 0, 10, 0};
-static const Window sUnknown_80DC03C = {
+static const WindowTemplate sUnknown_80DC03C = {
     0,
     6,
     2, 2,

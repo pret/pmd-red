@@ -51,7 +51,7 @@ bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
     RestoreUnkTextStruct_8006518(&gUnknown_3001B5C->s35C.s0.windows);
     gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC91C;
 
-    gUnknown_3001B5C->s35C.s0.unk38->unk14 = &gUnknown_3001B5C->s35C.unk9C;
+    gUnknown_3001B5C->s35C.s0.unk38->header = &gUnknown_3001B5C->s35C.unk9C;
 
     if (sub != NULL)
         gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34].pos = *sub;
@@ -137,9 +137,9 @@ void sub_80233A0(void)
 
 static void sub_8023420(void)
 {
-    gUnknown_3001B5C->s35C.unk9C.f0 = 1;
-    gUnknown_3001B5C->s35C.unk9C.f1 = 0;
-    gUnknown_3001B5C->s35C.unk9C.f2 = 12;
+    gUnknown_3001B5C->s35C.unk9C.count = 1;
+    gUnknown_3001B5C->s35C.unk9C.currId = 0;
+    gUnknown_3001B5C->s35C.unk9C.width = 12;
     gUnknown_3001B5C->s35C.unk9C.f3 = 0;
 
     SUB_80095E4_CALL_2(gUnknown_3001B5C->s35C.s0);
@@ -162,7 +162,7 @@ static void sub_80234BC(void)
     sub_80073B8(gUnknown_3001B5C->s35C.s0.unk34);
     PrintStringOnWindow(10, 0, sPokemon, gUnknown_3001B5C->s35C.s0.unk34, 0);
 
-    sub_8012BC4((gUnknown_3001B5C->s35C.unk9C.f2 * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.unk1E + 1, 2, 7, gUnknown_3001B5C->s35C.s0.unk34);
+    sub_8012BC4((gUnknown_3001B5C->s35C.unk9C.width * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.unk1E + 1, 2, 7, gUnknown_3001B5C->s35C.s0.unk34);
 
     for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.unk1A; i++) {
         y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.s0.input, i);

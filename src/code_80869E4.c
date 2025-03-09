@@ -147,7 +147,7 @@ void sub_8086448(void)
         YPos += 0x100;
         sub_803F878(XPos, YPos);
         sub_80855E4(sub_8086410);
-        sub_803E46C(0x46);
+        DungeonRunFrameActions(0x46);
     }
 
     sub_80855E4(sub_80863F8);
@@ -173,7 +173,7 @@ static void sub_8086494(void)
 
     for (i = 0; i < 144; i++) {
         sub_80855E4(sub_8086424);
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
     }
 
     sub_80855E4(sub_8086310);
@@ -193,7 +193,7 @@ void sub_8086500(void)
         YPos = GetCameraYPos();
         sub_803F878(XPos, YPos);
         sub_80855E4(sub_8086434);
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
     }
 
     sub_80855E4(sub_8086404);
@@ -213,7 +213,7 @@ void sub_808654C(void)
         YPos = GetCameraYPos();
         sub_803F878(XPos, YPos);
         sub_80855E4(sub_8086434);
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
     }
 
     sub_80855E4(sub_8086404);
@@ -232,7 +232,7 @@ void sub_8086598(void)
         YPos = GetCameraYPos();
         sub_803F878(XPos, YPos - 0x100);
         sub_80855E4(sub_8086410);
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
     }
 
     sub_80855E4(sub_80863F8);
@@ -252,7 +252,7 @@ void sub_80865E8(void)
         sub_803F878(XPos, YPos + 0x200);
         sub_80855E4(sub_8086424);
         sub_80855E4(sub_8086424);
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
     }
 
     sub_80855E4(sub_80863F8);
@@ -272,7 +272,7 @@ void sub_808663C(void)
         sub_803F878(XPos, YPos + 0x200);
         sub_80855E4(sub_8086424);
         sub_80855E4(sub_8086424);
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
     }
 
     sub_80855E4(sub_80863F8);
@@ -286,7 +286,7 @@ void sub_8086690(void)
 
     for (i = 0; i < 48; i++) {
         sub_80855E4(sub_8086434);
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
     }
 
     sub_80855E4(sub_8086404);
@@ -308,7 +308,7 @@ UNUSED static void sub_80866FC(void)
 
     for (i = 0; i >= -250; i -= 10) {
         SetDungeonBGColorRGB(i, i, i, 1, 0);
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
     }
 }
 
@@ -323,7 +323,7 @@ void sub_8086738(void)
 
     for (i = 0; i < 250; i += 10) {
         SetDungeonBGColorRGB(i, i, i, 1, 0);
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
     }
 }
 
@@ -333,7 +333,7 @@ void sub_8086764(void)
 
     for (i = 250; i >= 0; i -= 5) {
         SetDungeonBGColorRGB(i, i, i, 1, 0);
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
     }
 
     sub_8085EB0();
@@ -348,7 +348,7 @@ void sub_8086794(void)
     for (i = 0; i < 200; i++) {
         SetDungeonBGColorRGB(0, 0, 0, 1, 0);
         BgColorCallNullsub4();
-        sub_803E46C(70);
+        DungeonRunFrameActions(70);
 
         if ((i & 3) == 0) {
             gDungeonBrightness++;
@@ -357,7 +357,7 @@ void sub_8086794(void)
         }
     }
 
-    sub_803E46C(70);
+    DungeonRunFrameActions(70);
     gDungeon->unk7 = 0;
 }
 

@@ -1,4 +1,4 @@
-static const Window gUnknown_80DC31C = {
+static const WindowTemplate gUnknown_80DC31C = {
     0,
     3,
     0, 0,
@@ -7,7 +7,7 @@ static const Window gUnknown_80DC31C = {
     NULL
 };
 
-static const Window gUnknown_80DC334 = {
+static const WindowTemplate gUnknown_80DC334 = {
     0,
     3,
     19, 4,
@@ -16,7 +16,7 @@ static const Window gUnknown_80DC334 = {
     NULL
 };
 
-static const Window gUnknown_80DC34C = {
+static const WindowTemplate gUnknown_80DC34C = {
     0,
     3,
     22, 4,
@@ -25,7 +25,7 @@ static const Window gUnknown_80DC34C = {
     NULL
 };
 
-UNUSED static const Window gUnknown_80DC364 = {
+UNUSED static const WindowTemplate gUnknown_80DC364 = {
     0,
     3,
     22, 14,
@@ -34,7 +34,7 @@ UNUSED static const Window gUnknown_80DC364 = {
     NULL
 };
 
-static const Window gUnknown_80DC37C = {
+static const WindowTemplate gUnknown_80DC37C = {
     0,
     3,
     22, 3,

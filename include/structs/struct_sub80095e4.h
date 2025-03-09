@@ -12,8 +12,8 @@ typedef struct struct_Sub80095E4
 {
     /* 0x0 */ MenuInputStruct input;
     u32 unk34;
-    Window *unk38;
-    Windows windows;
+    WindowTemplate *unk38;
+    WindowTemplates windows;
     // size: 0x9C
 } struct_Sub80095E4;
 

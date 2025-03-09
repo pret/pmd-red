@@ -1,4 +1,4 @@
-static const Window sUnknown_80DB7B8 = {
+static const WindowTemplate sUnknown_80DB7B8 = {
     0,
     3,
     0, 0,
@@ -7,7 +7,7 @@ static const Window sUnknown_80DB7B8 = {
     NULL
 };
 
-static const Window sUnknown_80DB7D0 = {
+static const WindowTemplate sUnknown_80DB7D0 = {
     0,
     3,
     3, 3,
@@ -16,7 +16,7 @@ static const Window sUnknown_80DB7D0 = {
     NULL
 };
 
-static const Window sUnknown_80DB7E8 = {
+static const WindowTemplate sUnknown_80DB7E8 = {
     0,
     3,
     20, 4,
@@ -25,7 +25,7 @@ static const Window sUnknown_80DB7E8 = {
     NULL
 };
 
-static const Window sUnknown_80DB800 = {
+static const WindowTemplate sUnknown_80DB800 = {
     0,
     3,
     20, 9,
@@ -34,7 +34,7 @@ static const Window sUnknown_80DB800 = {
     NULL
 };
 
-static const Window sUnknown_80DB818 = {
+static const WindowTemplate sUnknown_80DB818 = {
     0,
     3,
     20, 14,

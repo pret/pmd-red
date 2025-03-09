@@ -49,9 +49,10 @@ struct UnkDrawStringStruct
     s32 unk30;
 };
 
-extern UnkTextStruct1 gUnknown_2027370[4];
+extern Window gWindows[MAX_WINDOWS];
 extern u8 gUnknown_202749A[11];
 extern bool8 gUnknown_20274A5;
+
 // These should probably go to code_8009804.h
 #define TILEMAP_TILE_NUM(num)(num & 0x3FF) // bits 0-9
 #define TILEMAP_FLIP_HORIZONTAL(f)((f & 1) << 10) // bit 10
@@ -59,8 +60,8 @@ extern bool8 gUnknown_20274A5;
 #define TILEMAP_PAL(pal)((pal & 0xF) << 12) // bits 12-15
 extern u16 gBgTilemaps[4][32][32]; // 4 bgs, 32x32 tiles, y dimension goes before x [bgId][y][x]
 
-extern void (*gIwramTextFunc1)(s32 a0);
-extern void (*gIwramTextFunc2)(s32 a0);
+extern void (*ScrollDownWindowFunc)(s32 windowId);
+extern void (*ScrollUpWindowFunc)(s32 windowId);
 extern void (*gIwramTextFunc3)(s32 a0);
 extern void (*gIwramTextFunc4)(s32 a0);
 
@@ -69,15 +70,15 @@ u32 UpdateFadeInTile(u32 a0);
 u32 sub_80063B0(void);
 void SelectCharmap(u32 a0);
 void SetCharacterMask(int a0);
-void ShowWindows(const Windows *windows, bool8 a1, bool8 a2);
-void RestoreUnkTextStruct_8006518(Windows *unkData);
+void ShowWindows(const WindowTemplates *windows, bool8 a1, bool8 a2);
+void RestoreUnkTextStruct_8006518(WindowTemplates *unkData);
 u32 sub_8006544(u32 index);
-void sub_8007334(s32 a0);
+void sub_8007334(s32 windowId);
 void sub_80073B8(s32 a0);
 void sub_80073E0(s32 a0);
 u32 xxx_call_draw_char(s32 x, s32 y, u32 a2, u32 color, u32 a4);
-void sub_80078A4(u32 a0, s32 x, s32 y, s32 a3, u32 color);
-void sub_800792C(u32 a0, s32 x, s32 y, s32 a3, u32 color);
+void AddDoubleUnderScoreHighlight(u32 windowId, s32 x, s32 y, s32 width, u32 color);
+void AddUnderScoreHighlight(u32 windowId, s32 x, s32 y, s32 width, u32 color);
 void sub_8007A78(u32 a0, s32 x, s32 y, s32 a3, u32 color);
 void sub_8007B7C(u32 a0, s32 x, s32 y, s32 a3, u32 color);
 void sub_8007E20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6);

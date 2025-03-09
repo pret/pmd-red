@@ -386,7 +386,7 @@ static void PersonalityTest_DisplayStarterSprite(void)
     s32 paletteIndex;
     s32 emotionId;
     const u8 *gfx;
-    Windows stackArray;
+    WindowTemplates stackArray;
 
     starterID = sPersonalityTestTracker->unk4.StarterID;
     RestoreUnkTextStruct_8006518(&stackArray);

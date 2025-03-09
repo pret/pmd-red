@@ -1403,7 +1403,7 @@ static void unk_MovePrintData(Move *move, s32 y)
     s32 power;
     const u8 *text;
 
-    sub_80078A4(y, 4, 72, 200, COLOR_WHITE_2);
+    AddDoubleUnderScoreHighlight(y, 4, 72, 200, COLOR_WHITE_2);
     sub_8092D54(gFormatBuffer_Monsters[0], move);
     PrintFormattedStringOnWindow(4, 74, gUnknown_810CF00, y, 0);
     PrintFormattedStringOnWindow(4, 86, gPtrTypeText, y, 0);

@@ -2285,7 +2285,7 @@ s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
 
             sub_800EF10(sub_80412E0(move->id, GetApparentWeather(entity), 1));
             sub_800EF64();
-            sub_803E46C(0x5E);
+            DungeonRunFrameActions(0x5E);
             someRetVal = sub_800E710(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), 1));
             if (someRetVal != -1) {
                 sub_800569C(&unkSp1.unk8, &entity->axObj.axdata, someRetVal);
@@ -2438,7 +2438,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
                     r2 /= 2;
                     sub_800E3AC(var_34, &var_64, r2 + var_38);
                 }
-                sub_803E46C(0x30);
+                DungeonRunFrameActions(0x30);
                 pos32.x += var_28;
                 pos32.y += var_24;
                 r9 += var_2C;

@@ -20,7 +20,7 @@
 
 EWRAM_INIT struct unkStruct_203B304 *gUnknown_203B304 = {NULL};
 
-const Window gUnknown_80E0284 =
+const WindowTemplate gUnknown_80E0284 =
 {
     0,
     0x03,
@@ -30,7 +30,7 @@ const Window gUnknown_80E0284 =
     NULL
 };
 
-const Window gUnknown_80E029C =
+const WindowTemplate gUnknown_80E029C =
 {
     0,
     0x03,
@@ -40,7 +40,7 @@ const Window gUnknown_80E029C =
     NULL
 };
 
-const Window gUnknown_80E02B4 =
+const WindowTemplate gUnknown_80E02B4 =
 {
     0,
     0x04,
@@ -50,7 +50,7 @@ const Window gUnknown_80E02B4 =
     NULL
 };
 
-const Window gUnknown_80E02CC =
+const WindowTemplate gUnknown_80E02CC =
 {
     0,
     0x04,

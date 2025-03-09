@@ -71,7 +71,7 @@ extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_80429E8(Entity *r0);
 extern s32 sub_803DA20(s32 param_1);
 extern void sub_80694C0(Entity *, s32, s32, u32);
-extern s32 gUnknown_202EDCC;
+extern s32 gDungeonFramesCounter;
 extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
 extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
 u32 EntityGetStatusSprites(Entity *entity);
@@ -310,7 +310,7 @@ void sub_806A2BC(Entity *pokemon, u8 param_2)
     if (param_2 != '\0') {
       sub_804178C(1);
       while (gDungeon->unk12 < 0x3c) {
-        sub_803E46C(0x34);
+        DungeonRunFrameActions(0x34);
       }
     }
     sub_803E708(4,0x44);
@@ -2008,7 +2008,7 @@ void sub_806C51C(Entity *entity)
     }
     else {
         if (entInfo->unk15D != 0) {
-            if (gUnknown_202EDCC & 4) {
+            if (gDungeonFramesCounter & 4) {
                 x++;
             }
             else {
@@ -2080,7 +2080,7 @@ void sub_806C51C(Entity *entity)
         s32 overworldPal;
 
         if (entInfo->frozenClassStatus.status == STATUS_PETRIFIED || entInfo->burnClassStatus.status == STATUS_PARALYSIS || entInfo->frozenClassStatus.status == STATUS_SHADOW_HOLD) {
-            x += gUnknown_202EDCC & 2;
+            x += gDungeonFramesCounter & 2;
         }
 
         if (decoySprite) {
@@ -2093,7 +2093,7 @@ void sub_806C51C(Entity *entity)
         if (entity->unk22 == 0) {
             DoAxFrame_800558C(&entity->axObj.axdata, x, y, y2, overworldPal, &spriteMasks);
         }
-        else if (entity->unk22 == 1 && (gUnknown_202EDCC & 1)) {
+        else if (entity->unk22 == 1 && (gDungeonFramesCounter & 1)) {
             DoAxFrame_800558C(&entity->axObj.axdata, x, y, y2, overworldPal, &spriteMasks);
         }
     }

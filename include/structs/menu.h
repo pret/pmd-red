@@ -72,7 +72,7 @@ typedef struct unkStructFor8013AA0
     s32 unkC; // maxInclusive?
     s32 unk10;
     s32 unk14; // index of unk18? But read as chosenValue..?
-    Window *unk18;
+    WindowTemplate *unk18;
     s32 unk1C; // width of prompt?
     s32 unk20; // height of prompt?
     u8 unk24; // related to unk10

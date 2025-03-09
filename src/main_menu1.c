@@ -291,9 +291,9 @@ void sub_8035C1C(void)
     sMainMenu->sub.unk2D = 0;
 }
 
-void SetMenuItems(MenuStruct *a0, Windows *a1, s32 index, const Window *a3, const MenuItem *menuItems, bool8 a5, u32 menuAction, bool8 unused)
+void SetMenuItems(MenuStruct *a0, WindowTemplates *a1, s32 index, const WindowTemplate *a3, const MenuItem *menuItems, bool8 a5, u32 menuAction, bool8 unused)
 {
-    Window *winPtrs = a1->id;
+    WindowTemplate *winPtrs = a1->id;
     winPtrs[index] = *a3;
     ResetUnusedInputStruct();
     ShowWindows(a1, TRUE, TRUE);
@@ -306,9 +306,9 @@ void SetMenuItems(MenuStruct *a0, Windows *a1, s32 index, const Window *a3, cons
     a0[index].unk4C = TRUE;
 }
 
-void sub_8035CC0(Windows *dataArray, u32 index)
+void sub_8035CC0(WindowTemplates *dataArray, u32 index)
 {
-    Window *winPtrs;
+    WindowTemplate *winPtrs;
 
     RestoreUnkTextStruct_8006518(dataArray);
     winPtrs = dataArray->id;

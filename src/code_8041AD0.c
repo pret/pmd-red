@@ -116,7 +116,7 @@ s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
             if (!sub_800E9A8(r4)) {
                 break;
             }
-            sub_803E46C(0x42);
+            DungeonRunFrameActions(0x42);
         }
         r4 = -1;
     }
@@ -155,7 +155,7 @@ s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
   if (param_3) {
     counter = 0;
     while ((counter < 100 && (sub_800E9A8(ret)))) {
-      sub_803E46C(0x42);
+      DungeonRunFrameActions(0x42);
       counter++;
     }
     ret = -1;
@@ -168,7 +168,7 @@ u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2)
     sub_800EE5C(param_1->unk0);
     sub_800EF64();
     if(param_2)
-        sub_803E46C(0x42);
+        DungeonRunFrameActions(0x42);
     return sub_800E890(param_1);
 }
 
@@ -181,11 +181,11 @@ void sub_804178C(u8 param_1)
   gDungeon->unk181e8.unk18204 = 0;
   if (sub_800E9FC(param_1) != 0) {
     while ((counter < 1000 && (sub_800E9FC(param_1) != 0))) {
-      sub_803E46C(0x4a);
+      DungeonRunFrameActions(0x4a);
       counter++;
     }
-    sub_803E46C(0x4a);
-    sub_803E46C(0x4a);
+    DungeonRunFrameActions(0x4a);
+    DungeonRunFrameActions(0x4a);
   }
   if ((counter == 1000) || (param_1 != 0)) {
     sub_800DBBC();
@@ -205,7 +205,7 @@ void sub_804178C(u8 param_1)
         gDungeonBrightness = 0x1f;
       }
       sub_803EA10();
-      sub_803E46C(0x4a);
+      DungeonRunFrameActions(0x4a);
       if(gDungeonBrightness == 0x1f) break;
     };
     gUnknown_2026E4E = 0x808;
@@ -1011,7 +1011,7 @@ void sub_804225C(Entity *entity, DungeonPos *pos, u8 trapId)
     }
 
     for (i = 0; i < 1000; i++) {
-        sub_803E46C(0x42);
+        DungeonRunFrameActions(0x42);
         if (!sub_800E9A8(uVar6))
             break;
     }

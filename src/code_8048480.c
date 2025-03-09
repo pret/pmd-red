@@ -27,6 +27,8 @@
 #include "structs/str_dungeon.h"
 #include "structs/str_position.h"
 #include "dungeon_config.h"
+#include "dungeon_menu_team.h"
+#include "dungeon_menu_moves.h"
 
 extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
 
@@ -68,16 +70,11 @@ extern void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
 extern u8 sub_806A538(s32);
 extern void sub_8051E7C(Entity *pokemon);
 extern void sub_8045BF8(u8 *, Item *);
-extern void sub_8063B54(ActionContainer *);
-extern void sub_80637E8(ActionContainer *);
-extern void sub_8063BB4(ActionContainer *);
-extern void sub_8063CF0(ActionContainer *, u32);
-extern void sub_8063A70(ActionContainer *, u32);
-extern u8 sub_8062F90(Entity *, u32, u32, u32, u32);
+extern void ActionShowMoveInfo(ActionContainer *);
+extern void ActionLinkMoves(ActionContainer *);
 extern void sub_8044DF0(Entity *, u32, u32);
 extern void sub_803EAF0(u32, u32);
-extern void sub_8044C10(bool8);
-Entity *DrawFieldGiveItemMenu(u32, u32);
+extern void SetLeaderActionToNothing(bool8);
 extern void sub_8044E24(Entity *, u32, u32);
 extern void sub_804245C(Entity *, Item *);
 extern u8 sub_8072938(Entity *, u16);
@@ -813,7 +810,7 @@ bool8 sub_8048950(Entity *param_1,Item *item)
                 entityInfo->unk157 = flag;
             }
         }
-        entity2 = DrawFieldGiveItemMenu(0,1);
+        entity2 = ShowDungeonToWhichMonMenu(NULL,WHICH_MENU_MOVES);
         if (!EntityIsValid(entity2)) {
             return FALSE;
         }
@@ -878,7 +875,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
           pEVar6->unk157 = flag;
         }
       }
-      entity2 = DrawFieldGiveItemMenu(0,1);
+      entity2 = ShowDungeonToWhichMonMenu(NULL,WHICH_MENU_MOVES);
       if (!EntityIsValid(entity2)) {
         return FALSE;
       }
@@ -924,7 +921,7 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
             }
         }
 
-        entity2 = DrawFieldGiveItemMenu(0,1);
+        entity2 = ShowDungeonToWhichMonMenu(NULL,WHICH_MENU_MOVES);
         if (!EntityIsValid(entity2)) {
             return FALSE;
         }
@@ -932,32 +929,32 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
         originalAction = *entityActionPtr;
         goto LOOP_MIDDLE; // Needed to match
         while (1) {
-            if (entityActionPtr->action == ACTION_UNK1D) {
-                sub_80637E8(entityActionPtr);
+            if (entityActionPtr->action == ACTION_MOVE_INFO) {
+                ActionShowMoveInfo(entityActionPtr);
             }
-            else if (entityActionPtr->action == ACTION_UNK20) {
+            else if (entityActionPtr->action == ACTION_LINK_MOVES) {
                 sub_803EAF0(0,0);
-                sub_8063BB4(entityActionPtr);
-                sub_8044C10(TRUE);
+                ActionLinkMoves(entityActionPtr);
+                SetLeaderActionToNothing(TRUE);
                 ret = TRUE;
             }
-            else if (entityActionPtr->action == ACTION_UNK21) {
+            else if (entityActionPtr->action == ACTION_DELINK_MOVES) {
                 sub_803EAF0(0,0);
-                sub_8063CF0(entityActionPtr,0);
-                sub_8044C10(TRUE);
+                ActionDelinkMoves(entityActionPtr,0);
+                SetLeaderActionToNothing(TRUE);
             }
             else if ((entityActionPtr->action == ACTION_SET_MOVE) || (entityActionPtr->action == ACTION_UNSET_MOVE)) {
                 sub_803EAF0(0,0);
-                sub_8063A70(entityActionPtr,0);
+                ActionSetOrUnsetMove(entityActionPtr, FALSE);
             }
-            else if (entityActionPtr->action == ACTION_UNK1F) {
+            else if (entityActionPtr->action == ACTION_SWITCH_AI_MOVE) {
                 sub_803EAF0(0,0);
-                sub_8063B54(entityActionPtr);
+                ActionToggleMoveUsableForAi(entityActionPtr);
             }
 
         LOOP_MIDDLE:
             ClearMonsterActionFields(entityActionPtr);
-            if (sub_8062F90(entity2,1,0,0,1) != 0) {
+            if (ShowDungeonMovesMenu(entity2,1,0,0,1) != 0) {
                 if (ret) {
                     ASM_MATCH_TRICK(ret);
                     if (DisplayDungeonYesNoMessage(0,*gUnknown_80FECA0,1) == 1) {
@@ -969,7 +966,7 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
                 }
                 else
                 {
-                    sub_8044C10(TRUE);
+                    SetLeaderActionToNothing(TRUE);
                     break;
                 }
             }

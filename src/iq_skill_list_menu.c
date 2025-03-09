@@ -33,7 +33,7 @@ bool8 CreateIQSkillListMenu(s16 species, u32 index, u32 a2)
     sIQSkillListMenu->s24.s0.unk38 = &sIQSkillListMenu->s24.s0.windows.id[index];
     RestoreUnkTextStruct_8006518(&sIQSkillListMenu->s24.s0.windows);
     sIQSkillListMenu->s24.s0.windows.id[sIQSkillListMenu->s24.s0.unk34] = sUnknown_80DBDF0;
-    sIQSkillListMenu->s24.s0.unk38->unk14 = &sIQSkillListMenu->s24.unk9C;
+    sIQSkillListMenu->s24.s0.unk38->header = &sIQSkillListMenu->s24.unk9C;
     sub_8012D08(sIQSkillListMenu->s24.s0.unk38, a2);
     ResetUnusedInputStruct();
     ShowWindows(&sIQSkillListMenu->s24.s0.windows, TRUE, TRUE);
@@ -101,9 +101,9 @@ void CleanIQSkillListMenu(void)
 
 static void sub_801C440(void)
 {
-    sIQSkillListMenu->s24.unk9C.f0 = sIQSkillListMenu->s24.s0.input.unk20;
-    sIQSkillListMenu->s24.unk9C.f1 = sIQSkillListMenu->s24.s0.input.unk1E;
-    sIQSkillListMenu->s24.unk9C.f2 = 10;
+    sIQSkillListMenu->s24.unk9C.count = sIQSkillListMenu->s24.s0.input.unk20;
+    sIQSkillListMenu->s24.unk9C.currId = sIQSkillListMenu->s24.s0.input.unk1E;
+    sIQSkillListMenu->s24.unk9C.width = 10;
     sIQSkillListMenu->s24.unk9C.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&sIQSkillListMenu->s24.s0.windows, TRUE, TRUE);
@@ -126,7 +126,7 @@ void BuildIQSkillList(void)
     PrintStringOnWindow(x2, 0, sIQSkills, sIQSkillListMenu->s24.s0.unk34, 0);
 
     x += 4;
-    x2 = x + sIQSkillListMenu->s24.unk9C.f2 * 8;
+    x2 = x + sIQSkillListMenu->s24.unk9C.width * 8;
     sub_8012BC4(x2, 0, sIQSkillListMenu->s24.s0.input.unk1E + 1, 1, 7, sIQSkillListMenu->s24.s0.unk34);
 
     for (counter = 0; counter < sIQSkillListMenu->s24.s0.input.unk1A; counter++) {

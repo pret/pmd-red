@@ -19,7 +19,7 @@ void sub_8049B8C(void);
 void sub_8049BB0(s32 x, s32 y);
 void sub_804A1F0(s32 a0, s32 a1);
 void sub_804A49C(s32 a0, s32 a1);
-void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
+void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 void sub_804AA60(void);
 void sub_804AAAC(void);
 void sub_804AAD4(void);

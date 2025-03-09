@@ -83,7 +83,7 @@ void sub_807E698(bool8 arg0)
     u8 savedByte;
 
     sub_8042818(GetApparentWeather(NULL), arg0);
-    sub_803E46C(0x25);
+    DungeonRunFrameActions(0x25);
     sub_804178C(1);
     savedByte = gUnknown_203B40D;
     gUnknown_203B40D = 1;
@@ -91,7 +91,7 @@ void sub_807E698(bool8 arg0)
     for (i = 0; i < 64; i++) {
         bool8 r7 = FALSE;
 
-        sub_803E46C(0x25);
+        DungeonRunFrameActions(0x25);
         for (j = 0; j < COLOR_RAMP_COUNT; j++) {
             if (abs(gDungeon->colorRamp[j].r - fileData[weatherArrId + j].r) < 10) {
                 gDungeon->colorRamp[j].r = fileData[weatherArrId + j].r;
@@ -755,7 +755,7 @@ void sub_807F43C(Entity *target, Entity *attacker)
         sub_804535C(attacker, &var_54);
         if (sub_8045888(attacker)) {
             attacker->unk1C.raw = sin_4096(var_2C) << 5;
-            sub_803E46C(0x3B);
+            DungeonRunFrameActions(0x3B);
             if (!(i & 3)) {
                 attackerDirection &= DIRECTION_MASK;
                 sub_806CDD4(attacker, 6, attackerDirection);
@@ -769,7 +769,7 @@ void sub_807F43C(Entity *target, Entity *attacker)
     var_54.y = pixelPosY;
     attacker->unk1C.raw = 0;
     sub_804535C(attacker, &var_54);
-    sub_803E46C(0x3B);
+    DungeonRunFrameActions(0x3B);
     GetEntInfo(attacker)->action.direction = attackerDirection & DIRECTION_MASK;
 
     tileEntity = GetTile(attackerPos.x, attackerPos.y)->monster;

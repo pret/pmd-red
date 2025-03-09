@@ -29,7 +29,7 @@ struct LoadScreen
     // size: 0x27c
     u32 currMenu;
     MenuStruct unk4[4];
-    Windows unk144;
+    WindowTemplates unk144;
     /* 0x1A4 */ u8 formattedTeamName[0x24];
     /* 0x1C8 */ u8 formattedPlayerName[0x24];
     /* 0x1EC */ u8 formattedLocation[0x24];
@@ -48,7 +48,7 @@ void sub_80397B4(void);
 
 extern void sub_80920D8(u8 *);
 
-const Window gUnknown_80E75F8 = {
+const WindowTemplate gUnknown_80E75F8 = {
    0,
    0x03,
    0x00, 0x00,
@@ -57,7 +57,7 @@ const Window gUnknown_80E75F8 = {
    NULL
 };
 
-const Window gUnknown_80E7610 = {
+const WindowTemplate gUnknown_80E7610 = {
    0,
    0x03,
    0x02, 0x02,
@@ -80,7 +80,7 @@ EWRAM_INIT MenuItem gUnknown_203B378[2] = {
 EWRAM_INIT u32 gUnknown_203B388[12] = {0xC, 0xC, 0xE, 0xE, 0xD, 0xE, 0xC, 0xD, 0xD, 0xB, 0xB, 0xB};
 EWRAM_INIT u32 gUnknown_203B3B8[12] = {0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x1A, 0x18, 0x1B, 0x16, 0x19, 0x17};
 
-const Window gUnknown_80E762C = {
+const WindowTemplate gUnknown_80E762C = {
    0,
    0x03,
    0x02, 0x0F,
@@ -124,7 +124,7 @@ const MenuItem gDeleteSaveConfirmMenuItems[3] =
     {NULL, 3},
 };
 
-const Window gUnknown_80E7784 =
+const WindowTemplate gUnknown_80E7784 =
 {
     0,
     0x03,

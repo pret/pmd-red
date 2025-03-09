@@ -38,7 +38,7 @@ extern void sub_80117AC(void);
 extern void sub_8011760(void);
 
 static EWRAM_INIT struct WorldMap *sWorldMapPtr = NULL;
-static EWRAM_INIT Windows sWorldMapWindows = {
+static EWRAM_INIT WindowTemplates sWorldMapWindows = {
     .id = {
         [0] = {
             .type = WINDOW_TYPE_NORMAL,
@@ -54,8 +54,8 @@ static EWRAM_INIT Windows sWorldMapWindows = {
             .height = 3,
             .unk10 = 3,
         },
-        [2] = { .type = WINDOW_TYPE_NORMAL,},
-        [3] = { .type = WINDOW_TYPE_NORMAL,},
+        [2] = WINDOW_DUMMY,
+        [3] = WINDOW_DUMMY,
     }
 };
 
@@ -483,19 +483,18 @@ static void AnimateSprites(bool8 a0)
 
 static void PrintDungeonName(DungeonLocation *dungLocation)
 {
-    const s32 x = 12;
-    Windows windows = {
+    WindowTemplates windows = {
         .id = {
             [0] = {
                 .type = WINDOW_TYPE_NORMAL,
-                .pos = {x, 2},
+                .pos = {12, 2},
                 .width = 16,
                 .height = 2,
                 .unk10 = 2,
             },
-            [1] = {.type = WINDOW_TYPE_NORMAL},
-            [2] = {.type = WINDOW_TYPE_NORMAL},
-            [3] = {.type = WINDOW_TYPE_NORMAL},
+            [1] = WINDOW_DUMMY,
+            [2] = WINDOW_DUMMY,
+            [3] = WINDOW_DUMMY,
         }
     };
 

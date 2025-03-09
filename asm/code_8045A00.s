@@ -1315,7 +1315,7 @@ _080467BE:
 	movs r2, 0
 	bl sub_80462AC
 	movs r0, 0x13
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 	ldr r2, [sp, 0x10]
 	adds r2, 0x55
 	str r2, [sp, 0x10]
@@ -1351,7 +1351,7 @@ _08046822:
 	movs r3, 0xFF
 	bl sub_80462AC
 	movs r0, 0x13
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -1837,7 +1837,7 @@ _08046C06:
 	blt _08046BAA
 _08046C14:
 	movs r0, 0x13
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 	movs r0, 0xA7
 	lsls r0, 3
 	add r0, sp

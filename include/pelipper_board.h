@@ -17,7 +17,7 @@ struct unkStruct_203B308
     MenuStruct unk6C;
     MenuItem menuItems[8];
     u16 unkFC[8];
-    Windows unk10C;
+    WindowTemplates unk10C;
 };
 extern struct unkStruct_203B308 *gPelipperBoard;
 

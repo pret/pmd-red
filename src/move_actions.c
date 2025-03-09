@@ -2616,7 +2616,7 @@ _0805A8C2:
     for(counter = 0; counter < 0xC; counter++)
     {
       IncreaseEntityPixelPos(target,pos2.x,pos2.y);
-      sub_803E46C(0x2c);
+      DungeonRunFrameActions(0x2c);
     }
   }
   tile = GetTileMut(pos1.x,pos1.y);
@@ -2639,7 +2639,7 @@ _0805A9FE:
           for(counter = 0; counter < 0xC; counter++)
           {
             IncreaseEntityPixelPos(target, -pos2.x,-pos2.y);
-            sub_803E46C(0x2c);
+            DungeonRunFrameActions(0x2c);
           }
         }
         goto _0805AA5E;

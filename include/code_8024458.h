@@ -15,8 +15,8 @@ struct unkStruct_203B2AC
     struct unkStruct_808FF20 unk4C;
     struct UnkInfoTabStruct unkB0;
     u32 unkE0;
-    Window *unkE4;
-    Windows unkE8;
+    WindowTemplate *unkE4;
+    WindowTemplates unkE8;
     WindowHeader unk148;
 };
 

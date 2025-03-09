@@ -46,7 +46,7 @@ u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4,
 
     sub_800EE5C(param_1_s32);
     sub_800EF64();
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
     local_40.unk0 = param_1;
     local_40.unk4 = param_2;
     local_40.dir = param_3;
@@ -69,7 +69,7 @@ void sub_8085F44(s32 param_1)
 {
     while (sub_800E9A8(param_1)) {
         sub_800E90C(&gDungeon->unk181e8.cameraPixelPos);
-        sub_803E46C(0x46);
+        DungeonRunFrameActions(0x46);
     }
 }
 

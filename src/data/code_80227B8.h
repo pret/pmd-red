@@ -5,7 +5,7 @@ static const MenuItem sUnknown_80DC584[3] =
     {NULL, 1},
 };
 
-static const Window sUnknown_80DC5A4 =
+static const WindowTemplate sUnknown_80DC5A4 =
 {
     0,
     3,
@@ -14,7 +14,7 @@ static const Window sUnknown_80DC5A4 =
     0, 0,
     NULL
 };
-static const Window sUnknown_80DC5BC =
+static const WindowTemplate sUnknown_80DC5BC =
 {
     0,
     3,
@@ -23,7 +23,7 @@ static const Window sUnknown_80DC5BC =
     3, 0,
     NULL
 };
-static const Window sUnknown_80DC5D4 =
+static const WindowTemplate sUnknown_80DC5D4 =
 {
     0,
     3,

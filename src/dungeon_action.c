@@ -8,6 +8,7 @@
 #include "structs/str_dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_movement.h"
+#include "dungeon_generation.h"
 #include "dungeon_util.h"
 #include "dungeon_pokemon_attributes.h"
 #include "pokemon.h"
@@ -194,37 +195,28 @@ bool8 sub_8044B84(void)
     }
 }
 
-u8 *sub_8044BA8(u16 param_1, u8 id)
+u8 *sub_8044BA8(u16 actionId, u8 id)
 {
-  u32 uVar3;
-  u32 uVar4;
-
-  if ((param_1 == 0x26) && (GetFloorType() == 2)) {
-    return *gUnknown_80F91EC;
-  }
-  else {
-    uVar3 = uVar4 = strcmp(gUnknown_80F7C50[param_1 << 1], gUnknown_80F697C);
-    if (uVar3 != 0) {
-      uVar4 = 1;
+    if (actionId == ACTION_STAIRS && GetFloorType() == FLOOR_TYPE_RESCUE) {
+        return *gUnknown_80F91EC;
     }
-    if ((u8)(uVar4) == 0) {
-        return gActions[GetItemActionType(id)].useText;
+    else {
+        if (!AreStringsDifferent(gUnknown_80F7C50[actionId << 1], gUnknown_80F697C)) {
+            return gActions[GetItemActionType(id)].useText;
+        }
+        else {
+            return gUnknown_80F7C50[actionId << 1];
+        }
     }
-    else
-    {
-        return gUnknown_80F7C50[param_1 << 1];
-    }
-  }
 }
 
-void sub_8044C10(u8 param_1)
+void SetLeaderActionToNothing(bool8 clearActionFields)
 {
     EntityInfo * entityInfo = GetLeaderInfo();
 
     entityInfo->action.action = ACTION_NOTHING;
 
-    if(param_1)
-    {
+    if (clearActionFields) {
         entityInfo->action.actionParameters[0].actionUseIndex = 0;
         entityInfo->action.actionParameters[1].actionUseIndex = 0;
         entityInfo->action.itemTargetPosition.x = -1;

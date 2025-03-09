@@ -912,7 +912,7 @@ bool8 UseAttack(Entity *a0)
     if (gDungeon->unk644.unk28 == 0 && r9) {
         sub_80526D0(0x35);
         for (loop = 0; loop < 24 / gUnknown_202F378; loop++) {
-            sub_803E46C(7);
+            DungeonRunFrameActions(7);
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
                 Entity *mon = gDungeon->activePokemon[i];
                 if (EntityIsValid(mon)) {

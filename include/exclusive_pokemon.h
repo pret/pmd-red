@@ -55,7 +55,7 @@ bool8 sub_8098100(u8 param_1);
 bool8 sub_8098134(s16 pokeID);
 void SetTutorialFlag(s32 param_1);
 bool32 GetTutorialFlag(s32 param_1);
-bool8 IsExclusivePokemonUnlocked(s16 pokeID);
+bool8 IsExclusivePokemonUnlocked(s32 pokeID);
 void UnlockExclusivePokemon(s16 pokeID);
 void WriteExclusivePokemon(DataSerializer *r0);
 void ReadExclusivePokemon(DataSerializer *r0);
