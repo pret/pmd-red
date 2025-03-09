@@ -676,9 +676,9 @@ extern const DungeonPos gUnknown_80F61EC[2][6];
 
 struct Unk80F6224Struct
 {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
+    s32 shape;
+    s32 size;
+    s32 tileNum;
 };
 
 extern const struct Unk80F6224Struct gUnknown_80F621C[2][6];
@@ -733,10 +733,10 @@ void sub_803E250(void)
             SpriteSetObjMode(&gUnknown_202ED28[i][j].sprite, 0);
             SpriteSetMosaic(&gUnknown_202ED28[i][j].sprite, 0);
             SpriteSetBpp(&gUnknown_202ED28[i][j].sprite, 0);
-            SpriteSetShape(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].unk0);
+            SpriteSetShape(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].shape);
             SpriteSetMatrixNum(&gUnknown_202ED28[i][j].sprite, 0);
-            SpriteSetSize(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].unk4);
-            SpriteSetTileNum(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].unk8);
+            SpriteSetSize(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].size);
+            SpriteSetTileNum(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].tileNum);
             SpriteSetPriority(&gUnknown_202ED28[i][j].sprite, 3);
             SpriteSetPalNum(&gUnknown_202ED28[i][j].sprite, 0);
             SpriteSetUnk6_0(&gUnknown_202ED28[i][j].sprite, 0);
