@@ -12,9 +12,11 @@
 
 enum
 {
+    SAVE_NO_STATUS = -1,
     SAVE_COMPLETED,
     SAVE_NOT_WRTTEN,
-    SAVE_FAILED
+    SAVE_FAILED,
+    SAVE_UNK3
 };
 
 enum
@@ -47,6 +49,7 @@ struct UnkStruct_sub_8011DAC
 };
 
 // size: 0x5C
+// This is most likely a debug savestate
 struct UnkStruct_203B184
 {
     /* 0x0 */ TeamInventory *MoneyItems;
@@ -78,7 +81,6 @@ u32 sub_8011C1C(void);
 void sub_8011C28(u32 in);
 s32 sub_8011C34(void);
 void sub_8011C40(s32 in);
-const char *GetGameInternalName(void);
 void sub_8011CA8(u32 *out, s32 size);
 u32 ReadSaveFromPak(u32 *a);
 u32 WriteSavetoPak(s32 *param_1, u32 param_2);

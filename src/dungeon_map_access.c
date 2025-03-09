@@ -93,7 +93,7 @@ void LoadDungeonTilesetAssets(void)
 
   sprintf(fileName,gUnknown_80F6A1C,gUnknown_8108EC0[gDungeon->tileset]); // b%02dcel
   file_1 = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
-  DecompressATFile((void*)gDungeon->unk11884,0x1194,file_1);
+  DecompressATFile(gDungeon->unk11884,0x1194,file_1);
   CloseFile(file_1);
 
   if (gDungeon->tileset < 0x40) {

@@ -78,7 +78,7 @@ void FriendAreasMap_InitGfx(void)
     DecompressATGlobalFile((u32 *)(VRAM + 0x8000), 0x0, file);
     sub_8004AA4(gFriendAreasMapPtr->unk4C4C, gFriendAreasMapPtr->unk0[4], 0x10);
     size = 0x4000;
-    DecompressATFile((u8 *) &gFriendAreasMapPtr->unk14, size, file2);
+    DecompressATFile(&gFriendAreasMapPtr->unk14, size, file2);
 
     gFriendAreasMapPtr->brightness = 0;
     gFriendAreasMapPtr->bgPos.x = 0;
