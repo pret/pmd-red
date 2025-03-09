@@ -32,12 +32,11 @@ extern u32 gStatusSpriteMasks_InvisibleClassStatus[];
 extern u32 gStatusSpriteMasks_BlinkerClassStatus[];
 extern u32 gStatusSpriteMasks_MuzzledStatus[];
 
-
 extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
-extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
 extern u32 sub_806F62C(u32);
+extern u32 sub_800DC9C(s32 a0);
+extern void sub_800569C(DungeonPos *, axdata *, u8);
 extern void PlaySoundEffect(u32);
-extern void sub_8041550(Entity *pokemon, u32, u32, u32, u32, u32);
 
 void EntityUpdateStatusSprites(Entity *entity);
 
@@ -51,8 +50,78 @@ extern void sub_8042E98(void);
 extern void sub_800EE5C(u32);
 extern void sub_800EF64(void);
 
+void sub_804178C(u8 param_1);
 u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);
 s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3);
+s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5);
+
+s32 sub_804151C(Entity *entity, s32 r1, u8 r2)
+{
+    u8 r3 = sub_800DC9C(r1);
+    return sub_8041550(entity, r1, r2, r3, 2, 0);
+}
+
+s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
+{
+    s32 i;
+    EntityInfo *entInfo;
+    DungeonPos pos;
+    unkStruct_80416E0 sp;
+    unkStruct_2039DB0 unkStruct;
+    PixelPos pixelPos;
+    s32 var;
+    s32 r4;
+
+    if (!EntityIsValid(entity))
+        return -1;
+    entInfo = GetEntInfo(entity);
+    if (!sub_8042768(entity))
+        return -1;
+    if (!a5 && entInfo->unkFF == 2)
+        return -1;
+
+    if (a4 != 0) {
+        sub_804178C(a4 == 2);
+    }
+
+    sub_800569C(&pos, &entity->axObj.axdata, a3);
+    if (pos.x != 99 && pos.y != 99) {
+        pixelPos.x = entity->pixelPos.x + (pos.x << 8);
+        pixelPos.y = (entity->pixelPos.y + (pos.y << 8)) - entInfo->unk174.raw;
+    }
+    else {
+        pixelPos.x = entity->pixelPos.x;
+        pixelPos.y = entity->pixelPos.y - entInfo->unk174.raw;
+    }
+
+    var = entity->pixelPos.y / 256;
+    var -= gDungeon->unk181e8.cameraPixelPos.y;
+    var /= 2;
+    var++;
+
+    sp.unk0 = a1;
+    sp.unk4 = 0;
+    sp.dir = -1;
+    sp.x = pixelPos.x / 256;
+    sp.y = pixelPos.y / 256;
+    sp.unk14 = -1;
+    sp.unk10 = 0;
+    sp.unk12 = 0;
+    sp.unk18 = var;
+
+    sub_8004E8C(&unkStruct);
+    r4 = sub_8041764(&sp, FALSE);
+    if (a2) {
+        for (i = 0; i < 100; i++) {
+            if (!sub_800E9A8(r4)) {
+                break;
+            }
+            sub_803E46C(0x42);
+        }
+        r4 = -1;
+    }
+    return r4;
+}
 
 s32 sub_80416A4(DungeonPos *pos_1, u32 param_2, bool8 param_3)
 {

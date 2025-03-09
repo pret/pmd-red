@@ -6,6 +6,7 @@
 #include "code_800E9A8.h"
 #include "file_system.h"
 #include "memory.h"
+#include "dungeon_map.h"
 
 EWRAM_INIT struct unkStruct_203B0CC *gUnknown_203B0CC = NULL;
 
@@ -19,7 +20,6 @@ extern s32 sub_800E2C0(u32);
 extern s32 sub_8000728(void);
 extern u32 sub_800E900(void);
 extern void sub_8009BE4(void);
-extern void sub_8040238(void);
 extern void sub_800F204(void);
 extern void sub_803EAF0(u32, u32);
 extern struct unkStruct_800F18C *sub_800F18C(s32);
@@ -136,7 +136,7 @@ void sub_800DC14(s32 param_1)
     if (preload->unk34 == 4) {
       sub_8009BE4();
       if (sub_8000728() == 1) {
-        sub_8040238();
+        LoadDungeonMapPalette();
         sub_803EAF0(0,0);
         sub_800CD64(0x8000,0);
       }

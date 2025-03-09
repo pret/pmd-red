@@ -142,7 +142,7 @@ _08009B6E:
 	adds r4, r1, 0
 	b _08009B82
 	.align 2, 0
-_08009B74: .4byte gUnknown_202B038
+_08009B74: .4byte gBgTilemaps
 _08009B78: .4byte gUnknown_202D2A0
 _08009B7C: .4byte 0x000003ff
 _08009B80:
@@ -264,6 +264,6 @@ _08009C36:
 	bx r0
 	.align 2, 0
 _08009C54: .4byte gUnknown_202D2A0
-_08009C58: .4byte gUnknown_202B038
+_08009C58: .4byte gBgTilemaps
 	thumb_func_end sub_8009BE4
 

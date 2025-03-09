@@ -52,7 +52,13 @@ struct UnkDrawStringStruct
 extern UnkTextStruct1 gUnknown_2027370[4];
 extern u8 gUnknown_202749A[11];
 extern bool8 gUnknown_20274A5;
-extern u16 gUnknown_202B038[4][32][32]; // Usage points to these dimensions
+// These should probably go to code_8009804.h
+#define TILEMAP_TILE_NUM(num)(num & 0x3FF) // bits 0-9
+#define TILEMAP_FLIP_HORIZONTAL(f)((f & 1) << 10) // bit 10
+#define TILEMAP_FLIP_VERTICAL(f)((f & 1) << 11) // bit 11
+#define TILEMAP_PAL(pal)((pal & 0xF) << 12) // bits 12-15
+extern u16 gBgTilemaps[4][32][32]; // 4 bgs, 32x32 tiles, y dimension goes before x [bgId][y][x]
+
 extern void (*gIwramTextFunc1)(s32 a0);
 extern void (*gIwramTextFunc2)(s32 a0);
 extern void (*gIwramTextFunc3)(s32 a0);

@@ -52,6 +52,9 @@ enum SpawnFlags
     SPAWN_FLAG_UNK7 = 1 << 7, // 0x80 - Not fully understood field. In the dungeon algorithm, it is set to true for all tiles in a Divider secondary structure room.
 };
 
+#define VISIBILITY_FLAG_REVEALED 1 // When using Luminous Orb - whole layout is shown, but grayed-out
+#define VISIBILITY_FLAG_VISITED 2 // Tile was visited, show filled/white layout
+
 // size: 0x18
 typedef struct Tile
 {

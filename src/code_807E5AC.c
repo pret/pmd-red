@@ -877,7 +877,7 @@ extern SpriteOAM gUnknown_202EDC0;
 void sub_807FA9C(void)
 {
     s32 x, y;
-    bool8 unkBool = gDungeon->unk181e8.unk1820F;
+    bool8 unkBool = gDungeon->unk181e8.showInvisibleTrapsMonsters;
 
     for (y = gDungeon->unk181e8.cameraPos.y - 5; y < gDungeon->unk181e8.cameraPos.y + 5; y++) {
         for (x = gDungeon->unk181e8.cameraPos.x - 6; x < gDungeon->unk181e8.cameraPos.x + 6; x++) {

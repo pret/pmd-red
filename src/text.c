@@ -39,7 +39,7 @@ EWRAM_DATA static s32 sUnknown_202B024 = 0;
 EWRAM_DATA static s32 sCharHeight[2] = {0};
 EWRAM_DATA static u32 sTextShadowMask = 0; // Some text color info is stored; retrieve via "& 0xF"
 EWRAM_DATA static u8 sDrawTextShadow = 0;
-EWRAM_DATA ALIGNED(4) u16 gUnknown_202B038[4][32][32] = {0};
+EWRAM_DATA ALIGNED(4) u16 gBgTilemaps[4][32][32] = {0};
 
 IWRAM_DATA static s16 gUnknown_3000E94[161] = {0};
 
@@ -190,12 +190,12 @@ void LoadCharmaps(void)
     sCharacterSpacing = 0;
 
     for (i = 0; i < 20; i++) {
-        gUnknown_202B038[0][i][0] = 0xf279;
-        gUnknown_202B038[1][i][0] = 0xf27a;
+        gBgTilemaps[0][i][0] = 0xf279;
+        gBgTilemaps[1][i][0] = 0xf27a;
 
         for (j = 1; j < 32; j++) {
-            gUnknown_202B038[0][i][j] = 0;
-            gUnknown_202B038[1][i][j] = 0xf27a;
+            gBgTilemaps[0][i][j] = 0;
+            gBgTilemaps[1][i][j] = 0xf27a;
         }
     }
 
@@ -297,7 +297,7 @@ static void SaveUnkTextStructAndXXX_8006438(const Windows *a0, bool8 a1, bool8 a
         sUnknown_202AFC0.id[i] = a0->id[i];
 
         if (a0->id[i].width) {
-            sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], &a0->id[i], a1, r9, a3, 0);
+            sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gBgTilemaps[0][0][0], gUnknown_80B8804[i], &a0->id[i], a1, r9, a3, 0);
             sub_80089AC(&a0->id[i], a3);
             r9 += a0->id[i].width * a0->id[i].unk10;
         }
@@ -1471,8 +1471,8 @@ void sub_8007334(s32 a0)
     for (i = 0; i < textStructPtr->unk6; i++) {
         s32 id = textStructPtr->unk0;
         for (j = 0; j < textStructPtr->unk4; j++) {
-            gUnknown_202B038[0][r6][id] &= ~0x3ff;
-            gUnknown_202B038[0][r6][id] |= r5;
+            gBgTilemaps[0][r6][id] &= ~0x3ff;
+            gBgTilemaps[0][r6][id] |= r5;
             id++;
             r5++;
         }
@@ -1994,7 +1994,7 @@ void sub_8007D00(struct UnkTextStruct1 *windows, u32 windowId, s32 x, s32 y, s32
 
 void sub_8007E20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6)
 {
-    sub_8007E64(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a5, a6);
+    sub_8007E64(gUnknown_2027370, gBgTilemaps[0], a0, a1, a2, a3, a4, a5, a6);
 }
 
 UNUSED static void nullsub_160(void)
@@ -2071,7 +2071,7 @@ static u32 FlipPixelsHorizontally(u32 a0)
 
 UNUSED static void sub_8007FEC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6)
 {
-    sub_8008030(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a5, a6);
+    sub_8008030(gUnknown_2027370, gBgTilemaps[0], a0, a1, a2, a3, a4, a5, a6);
 }
 
 UNUSED static void nullsub_161(void)
@@ -2175,7 +2175,7 @@ UNUSED static void sub_80081A4(s32 a0, s32 a3, s32 a4, s32 a7Id)
 
 void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2)
 {
-    DisplayMonPortrait(gUnknown_2027370, gUnknown_202B038[0], a0, compressedData, a2);
+    DisplayMonPortrait(gUnknown_2027370, gBgTilemaps[0], a0, compressedData, a2);
 }
 
 UNUSED static void nullsub_162(void)
@@ -2266,7 +2266,7 @@ static void DisplayMonPortraitFlipped(UnkTextStruct1 *a0, s32 a1, const u8 *comp
 
 UNUSED static void sub_8008468(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a6)
 {
-    sub_80084A4(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a6);
+    sub_80084A4(gUnknown_2027370, gBgTilemaps[0], a0, a1, a2, a3, a4, a6);
 }
 
 UNUSED static void nullsub_164(void)
@@ -2799,14 +2799,14 @@ UNUSED static bool8 sub_8008DA8(void)
 
 UNUSED static void sub_8008DAC(s32 a0, s32 a1, s32 a2)
 {
-    gUnknown_202B038[0][a1][a0] = a2;
+    gBgTilemaps[0][a1][a0] = a2;
     gUnknown_20274A5 = TRUE;
 }
 
 void sub_8008DC8(s32 a0, s32 a1, u16 a2, s32 a3)
 {
-    gUnknown_202B038[0][a1][a0] = a2;
-    gUnknown_202B038[1][a1][a0] = a3;
+    gBgTilemaps[0][a1][a0] = a2;
+    gBgTilemaps[1][a1][a0] = a3;
     gUnknown_20274A5 = TRUE;
 }
 
@@ -2822,7 +2822,7 @@ UNUSED static void sub_8008DF4(s32 a0, s32 a1, u8 *a2)
         if (r1 >= 97 && r1 <= 122) {
             r1 -= 32;
         }
-        gUnknown_202B038[0][a1][a0] = 0xF000 | (r1 + 0x258);
+        gBgTilemaps[0][a1][a0] = 0xF000 | (r1 + 0x258);
         a2++;
         a0++;
     }
@@ -2844,7 +2844,7 @@ UNUSED static void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
         if (r1 >= 97 && r1 <= 122) {
             r1 -= 32;
         }
-        gUnknown_202B038[0][a1][a0] = 0xF000 | (r1 + 0x258);
+        gBgTilemaps[0][a1][a0] = 0xF000 | (r1 + 0x258);
         a2++;
         a0++;
         a3--;
@@ -3148,14 +3148,14 @@ static void sub_8009388(void)
 {
     s32 i, j;
 
-    gUnknown_202B038[0][0][0] = 0xF279;
-    gUnknown_202B038[1][0][0] = 0xF27A;
+    gBgTilemaps[0][0][0] = 0xF279;
+    gBgTilemaps[1][0][0] = 0xF27A;
     for (i = sUnknown_202B020; i < sUnknown_202B024; i++) {
-        gUnknown_202B038[0][i][0] = 0xF279;
-        gUnknown_202B038[1][i][0] = 0xF27A;
+        gBgTilemaps[0][i][0] = 0xF279;
+        gBgTilemaps[1][i][0] = 0xF27A;
         for (j = 1; j < 32; j++) {
-            gUnknown_202B038[0][i][j] = 0;
-            gUnknown_202B038[1][i][j] = 0xF27A;
+            gBgTilemaps[0][i][j] = 0;
+            gBgTilemaps[1][i][j] = 0xF27A;
         }
     }
 }
@@ -3164,14 +3164,14 @@ void sub_8009408(s32 from, s32 to)
 {
     s32 i, j;
 
-    gUnknown_202B038[0][0][0] = 0xF279;
-    gUnknown_202B038[1][0][0] = 0xF27A;
+    gBgTilemaps[0][0][0] = 0xF279;
+    gBgTilemaps[1][0][0] = 0xF27A;
     for (i = from; i < to; i++) {
-        gUnknown_202B038[0][i][0] = 0xF279;
-        gUnknown_202B038[1][i][0] = 0xF27A;
+        gBgTilemaps[0][i][0] = 0xF279;
+        gBgTilemaps[1][i][0] = 0xF27A;
         for (j = 1; j < 32; j++) {
-            gUnknown_202B038[0][i][j] = 0;
-            gUnknown_202B038[1][i][j] = 0xF27A;
+            gBgTilemaps[0][i][j] = 0;
+            gBgTilemaps[1][i][j] = 0xF27A;
         }
     }
     gUnknown_20274A5 = TRUE;
@@ -3187,8 +3187,8 @@ UNUSED static void sub_8009488(s32 strArrId)
     for (i = 0; i < strPtr->unk6; i++) {
         id1 = strPtr->unk0;
         for (j = 0; j < strPtr->unk4; j++) {
-            gUnknown_202B038[0][id0][id1] &= 0xFC00;
-            gUnknown_202B038[1][id0][id1] = 0xF27A;
+            gBgTilemaps[0][id0][id1] &= 0xFC00;
+            gBgTilemaps[1][id0][id1] = 0xF27A;
             id1++;
         }
         id0++;
@@ -3208,8 +3208,8 @@ void sub_8009524(s32 strArrId)
     for (i = 0; i < strPtr->unk6 + 2; i++) {
         s32 id1 = strPtr->unk0 - 1;
         for (j = 0; j < strPtr->unk4 + 2; j++) {
-            gUnknown_202B038[0][id0][id1] &= 0xFC00;
-            gUnknown_202B038[1][id0][id1] = 0xF27A;
+            gBgTilemaps[0][id0][id1] &= 0xFC00;
+            gBgTilemaps[1][id0][id1] = 0xF27A;
             id1++;
         }
         id0++;

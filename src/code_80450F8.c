@@ -217,10 +217,10 @@ bool8 sub_8045804(Entity *ent)
                 if (!monInfo->isNotTeamMember)
                     return TRUE;
 
-                if (!saveTyping->unk1820F && monInfo->invisibleClassStatus.status == STATUS_INVISIBLE)
+                if (!saveTyping->showInvisibleTrapsMonsters && monInfo->invisibleClassStatus.status == STATUS_INVISIBLE)
                     return FALSE;
 
-                if (saveTyping->unk1820B || saveTyping->unk1820D)
+                if (saveTyping->allTilesRevealed || saveTyping->unk1820D)
                     return TRUE;
 
                 if (camTarget != NULL)
@@ -252,7 +252,7 @@ bool8 sub_8045888(Entity *ent)
 
             switch (GetEntityType(ent)) {
                 case ENTITY_ITEM: {
-                    if (!saveTyping->unk1820E && !sub_803F428(&ent->pos))
+                    if (!saveTyping->showAllFloorItems && !sub_803F428(&ent->pos))
                         return FALSE;
                     break;
                 }
@@ -260,7 +260,7 @@ bool8 sub_8045888(Entity *ent)
                     EntityInfo *monInfo = GetEntInfo(ent);
 
                     if (monInfo->isNotTeamMember) {
-                        if (!gDungeon->unk181e8.unk1820F && monInfo->invisibleClassStatus.status == STATUS_INVISIBLE)
+                        if (!gDungeon->unk181e8.showInvisibleTrapsMonsters && monInfo->invisibleClassStatus.status == STATUS_INVISIBLE)
                             return FALSE;
 
                         if (!saveTyping->unk1820D && !sub_803F428(&ent->pos))
@@ -269,7 +269,7 @@ bool8 sub_8045888(Entity *ent)
                     break;
                 }
                 case ENTITY_TRAP: {
-                    if (!gDungeon->unk181e8.unk1820F && !ent->isVisible)
+                    if (!gDungeon->unk181e8.showInvisibleTrapsMonsters && !ent->isVisible)
                         return FALSE;
                     break;
                 }
