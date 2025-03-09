@@ -418,3 +418,39 @@ void sub_8085B4C(struct_8085B80 a0[], s16 *a1[], Entity *a2[], s32 a3)
         a0[i].unk8 = a1[i][2];
     }
 }
+
+bool8 sub_8085B80(struct_8085B80 *a0)
+{
+    s16 *unkCPtr;
+    int i;
+    bool8 ret = FALSE;
+
+    for (i = 0; i < gUnknown_202F3D8; i++) {
+        Entity *entity = a0[i].unk4;
+        EntityInfo *enInfo = GetEntInfo(entity);
+        unkCPtr = a0[i].unkC;
+        if (a0[i].unk0 != 0) {
+            ret = TRUE;
+            if (a0[i].unk8 == 0) {
+                unkCPtr = unkCPtr + 4;
+                if (unkCPtr[2] == 0) {
+                    a0[i].unk0 = 0;
+                    enInfo->action.direction = unkCPtr[0] & DIRECTION_MASK;
+                    sub_806CDD4(entity, 7, unkCPtr[0]);
+                    sub_80856C8(entity, unkCPtr[5], unkCPtr[6]);
+                    continue;
+                }
+                a0[i].unk8 = unkCPtr[2];
+                a0[i].unkC = unkCPtr;
+                enInfo->action.direction = *(u8 *)unkCPtr & DIRECTION_MASK;
+                sub_806CDD4(entity, 0, (int)*unkCPtr);
+            }
+
+            a0[i].unk8--;
+            IncreaseEntityPixelPos(entity,
+                gAdjacentTileOffsets[*unkCPtr].x * unkCPtr[1] * 0x100,
+                gAdjacentTileOffsets[*unkCPtr].y * unkCPtr[1] * 0x100);
+        }
+    }
+    return ret;
+}
