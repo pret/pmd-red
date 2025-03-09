@@ -23,6 +23,7 @@
 #include "constants/item.h"
 #include "constants/status.h"
 #include "code_803E724.h"
+#include "structs/str_202EDE8.h"
 
 extern s32 gDungeonBrightness;
 extern u32 gUnknown_202EDD0;
@@ -371,18 +372,6 @@ void sub_803ECE0(void)
 
     sub_80098BC((void *)VRAM + 0x14400, gUnknown_202EC94->unk4 + ((gUnknown_202EDD8 / 4) * 0x240), 0x240);
 }
-
-struct UnkStruct_202EDE8
-{
-    s16 unk0;
-    s16 unk2;
-    Entity *unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-};
-
-extern struct UnkStruct_202EDE8 gUnknown_202EDE8;
 
 void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
 {

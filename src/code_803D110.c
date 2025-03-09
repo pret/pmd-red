@@ -12,6 +12,8 @@
 #include "game_options.h"
 #include "text.h"
 #include "constants/dungeon.h"
+#include "structs/str_202ED28.h"
+#include "structs/str_202EDE8.h"
 
 extern void sub_803E13C(void);
 extern void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
@@ -662,5 +664,90 @@ void sub_803E214(void)
 
 void nullsub_56(void) {}
 
-// sub_803E250 left, but it seems to be sprite related, and I'd rather not deal with it now lol
+extern u8 gUnknown_203B40D;
+extern u32 gUnknown_202EDD0;
+extern s32 gUnknown_202EDD4;
+extern s32 gDungeonBrightness;
 
+extern SpriteOAM gUnknown_202EDC0;
+extern SpriteOAM gUnknown_202EDB8;
+
+extern const DungeonPos gUnknown_80F61EC[2][6];
+
+struct Unk80F6224Struct
+{
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+};
+
+extern const struct Unk80F6224Struct gUnknown_80F621C[2][6];
+
+void sub_803E250(void)
+{
+    s32 i, j;
+
+    gUnknown_202EDD0 = 999;
+    gUnknown_202EDD4 = 0;
+    gUnknown_203B40D = 0;
+    gUnknown_202EDE8.unk0 = 0;
+
+    SpriteSetY(&gUnknown_202EDC0, 0);
+    SpriteSetAffine1(&gUnknown_202EDC0, 0);
+    SpriteSetAffine2(&gUnknown_202EDC0, 0);
+    SpriteSetObjMode(&gUnknown_202EDC0, 0);
+    SpriteSetMosaic(&gUnknown_202EDC0, 0);
+    SpriteSetBpp(&gUnknown_202EDC0, 0);
+    SpriteSetShape(&gUnknown_202EDC0, 0);
+    SpriteSetMatrixNum(&gUnknown_202EDC0, 0);
+    SpriteSetSize(&gUnknown_202EDC0, 1);
+    SpriteSetX(&gUnknown_202EDC0, 0);
+    SpriteSetTileNum(&gUnknown_202EDC0, 0);
+    SpriteSetPriority(&gUnknown_202EDC0, 0);
+    SpriteSetPalNum(&gUnknown_202EDC0, 0);
+    SpriteSetUnk6_0(&gUnknown_202EDC0, 0);
+    SpriteSetUnk6_1(&gUnknown_202EDC0, 0);
+    SpriteSetUnk6_2(&gUnknown_202EDC0, 0);
+
+    SpriteSetY(&gUnknown_202EDB8, 0);
+    SpriteSetAffine1(&gUnknown_202EDB8, 0);
+    SpriteSetAffine2(&gUnknown_202EDB8, 0);
+    SpriteSetObjMode(&gUnknown_202EDB8, 0);
+    SpriteSetMosaic(&gUnknown_202EDB8, 0);
+    SpriteSetBpp(&gUnknown_202EDB8, 0);
+    SpriteSetShape(&gUnknown_202EDB8, 0);
+    SpriteSetMatrixNum(&gUnknown_202EDB8, 0);
+    SpriteSetSize(&gUnknown_202EDB8, 0);
+    SpriteSetX(&gUnknown_202EDB8, 0);
+    SpriteSetTileNum(&gUnknown_202EDB8, 0);
+    SpriteSetPriority(&gUnknown_202EDB8, 3);
+    SpriteSetPalNum(&gUnknown_202EDB8, 5);
+    SpriteSetUnk6_0(&gUnknown_202EDB8, 0);
+    SpriteSetUnk6_1(&gUnknown_202EDB8, 0);
+    SpriteSetUnk6_2(&gUnknown_202EDB8, 0);
+
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 6; j++) {
+            SpriteSetAffine1(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetAffine2(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetObjMode(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetMosaic(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetBpp(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetShape(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].unk0);
+            SpriteSetMatrixNum(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetSize(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].unk4);
+            SpriteSetTileNum(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].unk8);
+            SpriteSetPriority(&gUnknown_202ED28[i][j].sprite, 3);
+            SpriteSetPalNum(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetUnk6_0(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetUnk6_1(&gUnknown_202ED28[i][j].sprite, 0);
+
+            gUnknown_202ED28[i][j].pos = gUnknown_80F61EC[i][j];
+        }
+    }
+
+    gDungeon->unk181e8.unk18217 = 1;
+    gDungeon->unk181e8.unk18218 = 1;
+    gDungeonBrightness = 0;
+    SetBGPaletteBufferColorRGB(0xf8, &gFontPalette[8],0,NULL);
+}
