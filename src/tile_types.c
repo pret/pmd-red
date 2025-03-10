@@ -84,7 +84,7 @@ const u8 gDungeonWaterType[76] = {
     DUNGEON_WATER_TYPE_NONE,
 };
 
-extern void sub_80402AC(s32, s32);
+extern void ShowDungeonMapAtPos(s32, s32);
 extern void sub_8049BB0(s32, s32);
 void sub_8042A14(DungeonPos *);
 
@@ -136,7 +136,7 @@ bool8 sub_804AD34(DungeonPos *pos)
       {
         sub_80498A8(x + pos->x, y + pos->y);
         sub_8049BB0(x + pos->x, y + pos->y);
-        sub_80402AC(x + pos->x, y + pos->y);
+        ShowDungeonMapAtPos(x + pos->x, y + pos->y);
       }
     }
   }
@@ -198,7 +198,7 @@ void sub_804AE84(DungeonPos *pos)
       for(x = -1; x < 2; x++)
       {
         sub_80498A8(x + pos->x, y + pos->y);
-        sub_80402AC(x + pos->x, y + pos->y);
+        ShowDungeonMapAtPos(x + pos->x, y + pos->y);
       }
     }
 

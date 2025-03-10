@@ -39,7 +39,7 @@ EWRAM_DATA static s32 sUnknown_202B024 = 0;
 EWRAM_DATA static s32 sCharHeight[2] = {0};
 EWRAM_DATA static u32 sTextShadowMask = 0; // Some text color info is stored; retrieve via "& 0xF"
 EWRAM_DATA static u8 sDrawTextShadow = 0;
-EWRAM_DATA ALIGNED(4) u16 gUnknown_202B038[4][32][32] = {0};
+EWRAM_DATA ALIGNED(4) u16 gBgTilemaps[4][32][32] = {0};
 
 IWRAM_DATA static s16 gUnknown_3000E94[161] = {0};
 
@@ -190,12 +190,12 @@ void LoadCharmaps(void)
     sCharacterSpacing = 0;
 
     for (i = 0; i < 20; i++) {
-        gUnknown_202B038[0][i][0] = 0xf279;
-        gUnknown_202B038[1][i][0] = 0xf27a;
+        gBgTilemaps[0][i][0] = 0xf279;
+        gBgTilemaps[1][i][0] = 0xf27a;
 
         for (j = 1; j < 32; j++) {
-            gUnknown_202B038[0][i][j] = 0;
-            gUnknown_202B038[1][i][j] = 0xf27a;
+            gBgTilemaps[0][i][j] = 0;
+            gBgTilemaps[1][i][j] = 0xf27a;
         }
     }
 
@@ -297,7 +297,7 @@ static void SaveUnkTextStructAndXXX_8006438(const Windows *a0, bool8 a1, bool8 a
         sUnknown_202AFC0.id[i] = a0->id[i];
 
         if (a0->id[i].width) {
-            sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gUnknown_202B038[0][0][0], gUnknown_80B8804[i], &a0->id[i], a1, r9, a3, 0);
+            sub_8006554(gUnknown_2027370, (u32 *)VRAM, sUnknown_20274B4, &gBgTilemaps[0][0][0], gUnknown_80B8804[i], &a0->id[i], a1, r9, a3, 0);
             sub_80089AC(&a0->id[i], a3);
             r9 += a0->id[i].width * a0->id[i].unk10;
         }
@@ -1471,8 +1471,8 @@ void sub_8007334(s32 a0)
     for (i = 0; i < textStructPtr->unk6; i++) {
         s32 id = textStructPtr->unk0;
         for (j = 0; j < textStructPtr->unk4; j++) {
-            gUnknown_202B038[0][r6][id] &= ~0x3ff;
-            gUnknown_202B038[0][r6][id] |= r5;
+            gBgTilemaps[0][r6][id] &= ~0x3ff;
+            gBgTilemaps[0][r6][id] |= r5;
             id++;
             r5++;
         }
@@ -1864,246 +1864,64 @@ UNUSED static void nullsub_158(void)
 {
 }
 
-#ifdef NONMATCHING // https://decomp.me/scratch/AU1bH
-static void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
+void sub_8007BA8(struct UnkTextStruct1 *windows, u32 windowId, s32 x, s32 y, s32 a4, s32 color)
 {
-    s32 iVar1; // r1
-    s32 iVar3;
-    s32 iVar9; // r8?
+    u32 *dst;
+    s32 i;
+    s32 xDiv8, yDiv8;
+    s32 j, k;
 
-    u32 *r4;
-    u32 r5;
-    u32 r6;
-    UnkTextStruct1 *ip;
-    s32 sp4;
-    s32 sp8;
-    u32 sp1C; // Used correctly
-
-    s32 yeah;
-    u32 *sp10; // r2?
-
-    ip = &a0[a1];
-
-    sp8 = y / 8;
-
-    if (sp8 >= ip->unk8)
+    struct UnkTextStruct1 *window = &windows[windowId];
+    yDiv8 = y / 8;
+    if (yDiv8 >= window->unk8)
         return;
 
-    yeah = ip->unk4 * sp8;
+    dst = window->unk18 + (((yDiv8 * window->unk4) + x / 8) * 8);
+    dst += y - (yDiv8 * 8);
 
-    r4 = ip->unk18 + ((yeah + x / 8) * 8);
-    r4 += (sp8 * -8) + y;
+    for (i = 0; i < color; i++) {
+        u32 *loopDst = dst;
+        xDiv8 = x / 8;
 
-    for (sp4 = 0; sp4 < color; sp4++) {
-        sp10 = r4;
-        iVar1 = x / 8;
+        for (j = 0; j < a4; j += 8) {
+            if (xDiv8 < window->unk4) {
+                u32 andBits = 0xF0000000;
+                u32 orBits = 0xE0000000;
+                u32 bits = 0;
+                u32 var = *loopDst;
 
-        for (iVar9 = 0; iVar9 < a4; iVar9 += 8) {
-            if (iVar1 >= ip->unk4)
-                break;
+                for (k = 0; k < 8; k++) {
+                    if (!(var & andBits))
+                        bits |= orBits;
 
-            r6 = 0xF0000000;
-            r5 = 0xE0000000;
-            sp1C = 0;
+                    andBits >>= 4;
+                    orBits >>= 4;
+                }
 
-            for (iVar3 = 0; iVar3 < 8; iVar3++) {
-                if ((sp10[0] & r6) == 0)
-                    sp1C |= r5;
+                *loopDst |= bits;
+                if (window->unk3C > loopDst)
+                    window->unk3C = loopDst;
+                if (window->unk40 < loopDst)
+                    window->unk40 = loopDst;
 
-                r6 >>= 4;
-                r5 >>= 4;
+                xDiv8++;
+                loopDst += 8;
             }
-
-            sp10[0] |= sp1C;
-            if (ip->unk3C > sp10)
-                ip->unk3C = sp10;
-            if (ip->unk40 < sp10)
-                ip->unk40 = sp10;
-            sp10 += 8;
-            iVar1++;
+            else {
+                break;
+            }
         }
 
         y++;
-        r4++;
+        dst++;
         if ((y % 8) == 0) {
-            r4 += ip->unk20;
-            sp8++;
-            if (sp8 >= ip->unk8)
+            dst += window->unk20;
+            yDiv8++;
+            if (yDiv8 >= window->unk8)
                 return;
         }
-
-        sp4++;
     }
 }
-#else
-NAKED
-static void sub_8007BA8(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
-{
-    asm_unified(
-    "push {r4-r7,lr}\n"
-    "\tmov r7, r10\n"
-    "\tmov r6, r9\n"
-    "\tmov r5, r8\n"
-    "\tpush {r5-r7}\n"
-    "\tsub sp, 0x20\n"
-    "\tstr r2, [sp]\n"
-    "\tlsls r2, r1, 3\n"
-    "\tadds r2, r1\n"
-    "\tlsls r2, 3\n"
-    "\tadds r0, r2\n"
-    "\tmov r12, r0\n"
-    "\tadds r0, r3, 0\n"
-    "\tcmp r3, 0\n"
-    "\tbge _08007BC8\n"
-    "\tadds r0, r3, 0x7\n"
-"_08007BC8:\n"
-    "\tasrs r0, 3\n"
-    "\tstr r0, [sp, 0x8]\n"
-    "\tmov r1, r12\n"
-    "\tmovs r2, 0x8\n"
-    "\tldrsh r0, [r1, r2]\n"
-    "\tldr r4, [sp, 0x8]\n"
-    "\tcmp r4, r0\n"
-    "\tbge _08007CC4\n"
-    "\tmovs r7, 0x4\n"
-    "\tldrsh r0, [r1, r7]\n"
-    "\tadds r1, r4, 0\n"
-    "\tmuls r1, r0\n"
-    "\tldr r0, [sp]\n"
-    "\tcmp r0, 0\n"
-    "\tbge _08007BE8\n"
-    "\tadds r0, 0x7\n"
-"_08007BE8:\n"
-    "\tasrs r0, 3\n"
-    "\tadds r0, r1, r0\n"
-    "\tlsls r0, 5\n"
-    "\tmov r2, r12\n"
-    "\tldr r1, [r2, 0x18]\n"
-    "\tadds r4, r1, r0\n"
-    "\tldr r7, [sp, 0x8]\n"
-    "\tlsls r0, r7, 3\n"
-    "\tsubs r0, r3, r0\n"
-    "\tlsls r0, 2\n"
-    "\tadds r4, r0\n"
-    "\tmovs r0, 0\n"
-    "\tstr r0, [sp, 0x4]\n"
-    "\tldr r1, [sp, 0x44]\n"
-    "\tcmp r0, r1\n"
-    "\tbge _08007CC4\n"
-"_08007C08:\n"
-    "\tadds r2, r4, 0\n"
-    "\tldr r0, [sp]\n"
-    "\tcmp r0, 0\n"
-    "\tbge _08007C12\n"
-    "\tadds r0, 0x7\n"
-"_08007C12:\n"
-    "\tasrs r1, r0, 3\n"
-    "\tmovs r7, 0\n"
-    "\tmov r8, r7\n"
-    "\tadds r3, 0x1\n"
-    "\tstr r3, [sp, 0xC]\n"
-    "\tadds r4, 0x4\n"
-    "\tstr r4, [sp, 0x14]\n"
-    "\tldr r0, [sp, 0x40]\n"
-    "\tcmp r8, r0\n"
-    "\tbge _08007C94\n"
-"_08007C26:\n"
-    "\tmov r3, r12\n"
-    "\tmovs r4, 0x4\n"
-    "\tldrsh r0, [r3, r4]\n"
-    "\tcmp r1, r0\n"
-    "\tbge _08007C94\n"
-    "\tmovs r6, 0xF0\n"
-    "\tlsls r6, 24\n"
-    "\tmovs r5, 0xE0\n"
-    "\tlsls r5, 24\n"
-    "\tmovs r7, 0\n"
-    "\tstr r7, [sp, 0x1C]\n"
-    "\tldr r4, [r2]\n"
-    "\tadds r3, r4, 0\n"
-    "\tmov r0, r12\n"
-    "\tldr r0, [r0, 0x3C]\n"
-    "\tmov r9, r0\n"
-    "\tmov r7, r12\n"
-    "\tldr r7, [r7, 0x40]\n"
-    "\tmov r10, r7\n"
-    "\tadds r1, 0x1\n"
-    "\tstr r1, [sp, 0x10]\n"
-    "\tadds r0, r2, 0\n"
-    "\tadds r0, 0x20\n"
-    "\tstr r0, [sp, 0x18]\n"
-    "\tmovs r1, 0x8\n"
-    "\tadd r8, r1\n"
-    "\tmovs r1, 0x7\n"
-"_08007C5C:\n"
-    "\tadds r0, r4, 0\n"
-    "\tands r0, r6\n"
-    "\tcmp r0, 0\n"
-    "\tbne _08007C6A\n"
-    "\tldr r7, [sp, 0x1C]\n"
-    "\torrs r7, r5\n"
-    "\tstr r7, [sp, 0x1C]\n"
-"_08007C6A:\n"
-    "\tlsrs r6, 4\n"
-    "\tlsrs r5, 4\n"
-    "\tsubs r1, 0x1\n"
-    "\tcmp r1, 0\n"
-    "\tbge _08007C5C\n"
-    "\tldr r0, [sp, 0x1C]\n"
-    "\torrs r3, r0\n"
-    "\tstr r3, [r2]\n"
-    "\tcmp r9, r2\n"
-    "\tbls _08007C82\n"
-    "\tmov r1, r12\n"
-    "\tstr r2, [r1, 0x3C]\n"
-"_08007C82:\n"
-    "\tcmp r10, r2\n"
-    "\tbcs _08007C8A\n"
-    "\tmov r3, r12\n"
-    "\tstr r2, [r3, 0x40]\n"
-"_08007C8A:\n"
-    "\tldr r1, [sp, 0x10]\n"
-    "\tldr r2, [sp, 0x18]\n"
-    "\tldr r4, [sp, 0x40]\n"
-    "\tcmp r8, r4\n"
-    "\tblt _08007C26\n"
-"_08007C94:\n"
-    "\tldr r3, [sp, 0xC]\n"
-    "\tldr r4, [sp, 0x14]\n"
-    "\tmovs r0, 0x7\n"
-    "\tands r0, r3\n"
-    "\tcmp r0, 0\n"
-    "\tbne _08007CB8\n"
-    "\tmov r7, r12\n"
-    "\tldr r0, [r7, 0x20]\n"
-    "\tlsls r0, 2\n"
-    "\tadds r4, r0\n"
-    "\tldr r0, [sp, 0x8]\n"
-    "\tadds r0, 0x1\n"
-    "\tstr r0, [sp, 0x8]\n"
-    "\tmovs r1, 0x8\n"
-    "\tldrsh r0, [r7, r1]\n"
-    "\tldr r2, [sp, 0x8]\n"
-    "\tcmp r2, r0\n"
-    "\tbge _08007CC4\n"
-"_08007CB8:\n"
-    "\tldr r7, [sp, 0x4]\n"
-    "\tadds r7, 0x1\n"
-    "\tstr r7, [sp, 0x4]\n"
-    "\tldr r0, [sp, 0x44]\n"
-    "\tcmp r7, r0\n"
-    "\tblt _08007C08\n"
-"_08007CC4:\n"
-    "\tadd sp, 0x20\n"
-    "\tpop {r3-r5}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tmov r10, r5\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0");
-}
-#endif // NONMATCHING
 
 UNUSED static void sub_8007CD4(u32 a0, s32 a1, s32 a2, s32 a3, s32 a4)
 {
@@ -2114,171 +1932,69 @@ UNUSED static void nullsub_159(void)
 {
 }
 
-NAKED // Very similar to sub_8007BA8
-static void sub_8007D00(UnkTextStruct1 *a0, u32 a1, s32 x, s32 y, s32 a4, s32 color)
+// Very similar to sub_8007BA8. It clears bits instead of setting them.
+void sub_8007D00(struct UnkTextStruct1 *windows, u32 windowId, s32 x, s32 y, s32 a4, s32 color)
 {
-    asm_unified(
-    "push {r4-r7,lr}\n"
-    "\tmov r7, r10\n"
-    "\tmov r6, r9\n"
-    "\tmov r5, r8\n"
-    "\tpush {r5-r7}\n"
-    "\tsub sp, 0x20\n"
-    "\tstr r2, [sp]\n"
-    "\tlsls r2, r1, 3\n"
-    "\tadds r2, r1\n"
-    "\tlsls r2, 3\n"
-    "\tadds r0, r2\n"
-    "\tmov r12, r0\n"
-    "\tadds r0, r3, 0\n"
-    "\tcmp r3, 0\n"
-    "\tbge _08007D20\n"
-    "\tadds r0, r3, 0x7\n"
-"_08007D20:\n"
-    "\tasrs r0, 3\n"
-    "\tstr r0, [sp, 0x8]\n"
-    "\tmov r1, r12\n"
-    "\tmovs r2, 0x8\n"
-    "\tldrsh r0, [r1, r2]\n"
-    "\tldr r4, [sp, 0x8]\n"
-    "\tcmp r4, r0\n"
-    "\tbge _08007E0E\n"
-    "\tmovs r5, 0x4\n"
-    "\tldrsh r0, [r1, r5]\n"
-    "\tadds r1, r4, 0\n"
-    "\tmuls r1, r0\n"
-    "\tldr r0, [sp]\n"
-    "\tcmp r0, 0\n"
-    "\tbge _08007D40\n"
-    "\tadds r0, 0x7\n"
-"_08007D40:\n"
-    "\tasrs r0, 3\n"
-    "\tadds r0, r1, r0\n"
-    "\tlsls r0, 5\n"
-    "\tmov r2, r12\n"
-    "\tldr r1, [r2, 0x18]\n"
-    "\tadds r4, r1, r0\n"
-    "\tldr r5, [sp, 0x8]\n"
-    "\tlsls r0, r5, 3\n"
-    "\tsubs r0, r3, r0\n"
-    "\tlsls r0, 2\n"
-    "\tadds r4, r0\n"
-    "\tmovs r0, 0\n"
-    "\tb _08007E06\n"
-"_08007D5A:\n"
-    "\tadds r2, r4, 0\n"
-    "\tldr r0, [sp]\n"
-    "\tcmp r0, 0\n"
-    "\tbge _08007D64\n"
-    "\tadds r0, 0x7\n"
-"_08007D64:\n"
-    "\tasrs r1, r0, 3\n"
-    "\tmovs r5, 0\n"
-    "\tmov r8, r5\n"
-    "\tadds r3, 0x1\n"
-    "\tstr r3, [sp, 0xC]\n"
-    "\tadds r4, 0x4\n"
-    "\tstr r4, [sp, 0x14]\n"
-    "\tldr r0, [sp, 0x40]\n"
-    "\tcmp r8, r0\n"
-    "\tbge _08007DE0\n"
-"_08007D78:\n"
-    "\tmov r3, r12\n"
-    "\tmovs r4, 0x4\n"
-    "\tldrsh r0, [r3, r4]\n"
-    "\tcmp r1, r0\n"
-    "\tbge _08007DE0\n"
-    "\tmovs r4, 0xF0\n"
-    "\tlsls r4, 24\n"
-    "\tmovs r6, 0xE0\n"
-    "\tlsls r6, 24\n"
-    "\tmovs r7, 0\n"
-    "\tldr r5, [r2]\n"
-    "\tstr r5, [sp, 0x1C]\n"
-    "\tadds r3, r5, 0\n"
-    "\tmov r0, r12\n"
-    "\tldr r0, [r0, 0x3C]\n"
-    "\tmov r9, r0\n"
-    "\tmov r5, r12\n"
-    "\tldr r5, [r5, 0x40]\n"
-    "\tmov r10, r5\n"
-    "\tadds r1, 0x1\n"
-    "\tstr r1, [sp, 0x10]\n"
-    "\tadds r0, r2, 0\n"
-    "\tadds r0, 0x20\n"
-    "\tstr r0, [sp, 0x18]\n"
-    "\tmovs r1, 0x8\n"
-    "\tadd r8, r1\n"
-    "\tmovs r1, 0x7\n"
-"_08007DAE:\n"
-    "\tldr r0, [sp, 0x1C]\n"
-    "\tands r0, r4\n"
-    "\tcmp r0, r6\n"
-    "\tbne _08007DB8\n"
-    "\torrs r7, r4\n"
-"_08007DB8:\n"
-    "\tlsrs r4, 4\n"
-    "\tlsrs r6, 4\n"
-    "\tsubs r1, 0x1\n"
-    "\tcmp r1, 0\n"
-    "\tbge _08007DAE\n"
-    "\tbics r3, r7\n"
-    "\tstr r3, [r2]\n"
-    "\tcmp r9, r2\n"
-    "\tbls _08007DCE\n"
-    "\tmov r3, r12\n"
-    "\tstr r2, [r3, 0x3C]\n"
-"_08007DCE:\n"
-    "\tcmp r10, r2\n"
-    "\tbcs _08007DD6\n"
-    "\tmov r4, r12\n"
-    "\tstr r2, [r4, 0x40]\n"
-"_08007DD6:\n"
-    "\tldr r1, [sp, 0x10]\n"
-    "\tldr r2, [sp, 0x18]\n"
-    "\tldr r5, [sp, 0x40]\n"
-    "\tcmp r8, r5\n"
-    "\tblt _08007D78\n"
-"_08007DE0:\n"
-    "\tldr r3, [sp, 0xC]\n"
-    "\tldr r4, [sp, 0x14]\n"
-    "\tmovs r0, 0x7\n"
-    "\tands r0, r3\n"
-    "\tcmp r0, 0\n"
-    "\tbne _08007E02\n"
-    "\tmov r1, r12\n"
-    "\tldr r0, [r1, 0x20]\n"
-    "\tlsls r0, 2\n"
-    "\tadds r4, r0\n"
-    "\tldr r2, [sp, 0x8]\n"
-    "\tadds r2, 0x1\n"
-    "\tstr r2, [sp, 0x8]\n"
-    "\tmovs r5, 0x8\n"
-    "\tldrsh r0, [r1, r5]\n"
-    "\tcmp r2, r0\n"
-    "\tbge _08007E0E\n"
-"_08007E02:\n"
-    "\tldr r0, [sp, 0x4]\n"
-    "\tadds r0, 0x1\n"
-"_08007E06:\n"
-    "\tstr r0, [sp, 0x4]\n"
-    "\tldr r1, [sp, 0x44]\n"
-    "\tcmp r0, r1\n"
-    "\tblt _08007D5A\n"
-"_08007E0E:\n"
-    "\tadd sp, 0x20\n"
-    "\tpop {r3-r5}\n"
-    "\tmov r8, r3\n"
-    "\tmov r9, r4\n"
-    "\tmov r10, r5\n"
-    "\tpop {r4-r7}\n"
-    "\tpop {r0}\n"
-    "\tbx r0");
+    u32 *dst;
+    s32 i;
+    s32 xDiv8, yDiv8;
+    s32 j, k;
+
+    struct UnkTextStruct1 *window = &windows[windowId];
+    yDiv8 = y / 8;
+    if (yDiv8 >= window->unk8)
+        return;
+
+    dst = window->unk18 + (((yDiv8 * window->unk4) + x / 8) * 8);
+    dst += y - (yDiv8 * 8);
+
+    for (i = 0; i < color; i++) {
+        u32 *loopDst = dst;
+        xDiv8 = x / 8;
+
+        for (j = 0; j < a4; j += 8) {
+            if (xDiv8 < window->unk4) {
+                u32 andBits = 0xF0000000;
+                u32 equalBits = 0xE0000000;
+                u32 bits = 0;
+                u32 var = *loopDst;
+
+                for (k = 0; k < 8; k++) {
+                    if ((var & andBits) == equalBits)
+                        bits |= andBits;
+
+                    andBits >>= 4;
+                    equalBits >>= 4;
+                }
+
+                *loopDst &= ~(bits);
+                if (window->unk3C > loopDst)
+                    window->unk3C = loopDst;
+                if (window->unk40 < loopDst)
+                    window->unk40 = loopDst;
+
+                xDiv8++;
+                loopDst += 8;
+            }
+            else {
+                break;
+            }
+        }
+
+        y++;
+        dst++;
+        if ((y % 8) == 0) {
+            dst += window->unk20;
+            yDiv8++;
+            if (yDiv8 >= window->unk8)
+                return;
+        }
+    }
 }
 
 void sub_8007E20(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6)
 {
-    sub_8007E64(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a5, a6);
+    sub_8007E64(gUnknown_2027370, gBgTilemaps[0], a0, a1, a2, a3, a4, a5, a6);
 }
 
 UNUSED static void nullsub_160(void)
@@ -2355,7 +2071,7 @@ static u32 FlipPixelsHorizontally(u32 a0)
 
 UNUSED static void sub_8007FEC(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 *a5, u32 a6)
 {
-    sub_8008030(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a5, a6);
+    sub_8008030(gUnknown_2027370, gBgTilemaps[0], a0, a1, a2, a3, a4, a5, a6);
 }
 
 UNUSED static void nullsub_161(void)
@@ -2459,7 +2175,7 @@ UNUSED static void sub_80081A4(s32 a0, s32 a3, s32 a4, s32 a7Id)
 
 void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2)
 {
-    DisplayMonPortrait(gUnknown_2027370, gUnknown_202B038[0], a0, compressedData, a2);
+    DisplayMonPortrait(gUnknown_2027370, gBgTilemaps[0], a0, compressedData, a2);
 }
 
 UNUSED static void nullsub_162(void)
@@ -2550,7 +2266,7 @@ static void DisplayMonPortraitFlipped(UnkTextStruct1 *a0, s32 a1, const u8 *comp
 
 UNUSED static void sub_8008468(u32 a0, u32 a1, u32 a2, u32 a3, u32 a4, u32 a6)
 {
-    sub_80084A4(gUnknown_2027370, gUnknown_202B038[0], a0, a1, a2, a3, a4, a6);
+    sub_80084A4(gUnknown_2027370, gBgTilemaps[0], a0, a1, a2, a3, a4, a6);
 }
 
 UNUSED static void nullsub_164(void)
@@ -3083,14 +2799,14 @@ UNUSED static bool8 sub_8008DA8(void)
 
 UNUSED static void sub_8008DAC(s32 a0, s32 a1, s32 a2)
 {
-    gUnknown_202B038[0][a1][a0] = a2;
+    gBgTilemaps[0][a1][a0] = a2;
     gUnknown_20274A5 = TRUE;
 }
 
 void sub_8008DC8(s32 a0, s32 a1, u16 a2, s32 a3)
 {
-    gUnknown_202B038[0][a1][a0] = a2;
-    gUnknown_202B038[1][a1][a0] = a3;
+    gBgTilemaps[0][a1][a0] = a2;
+    gBgTilemaps[1][a1][a0] = a3;
     gUnknown_20274A5 = TRUE;
 }
 
@@ -3106,7 +2822,7 @@ UNUSED static void sub_8008DF4(s32 a0, s32 a1, u8 *a2)
         if (r1 >= 97 && r1 <= 122) {
             r1 -= 32;
         }
-        gUnknown_202B038[0][a1][a0] = 0xF000 | (r1 + 0x258);
+        gBgTilemaps[0][a1][a0] = 0xF000 | (r1 + 0x258);
         a2++;
         a0++;
     }
@@ -3128,7 +2844,7 @@ UNUSED static void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
         if (r1 >= 97 && r1 <= 122) {
             r1 -= 32;
         }
-        gUnknown_202B038[0][a1][a0] = 0xF000 | (r1 + 0x258);
+        gBgTilemaps[0][a1][a0] = 0xF000 | (r1 + 0x258);
         a2++;
         a0++;
         a3--;
@@ -3432,14 +3148,14 @@ static void sub_8009388(void)
 {
     s32 i, j;
 
-    gUnknown_202B038[0][0][0] = 0xF279;
-    gUnknown_202B038[1][0][0] = 0xF27A;
+    gBgTilemaps[0][0][0] = 0xF279;
+    gBgTilemaps[1][0][0] = 0xF27A;
     for (i = sUnknown_202B020; i < sUnknown_202B024; i++) {
-        gUnknown_202B038[0][i][0] = 0xF279;
-        gUnknown_202B038[1][i][0] = 0xF27A;
+        gBgTilemaps[0][i][0] = 0xF279;
+        gBgTilemaps[1][i][0] = 0xF27A;
         for (j = 1; j < 32; j++) {
-            gUnknown_202B038[0][i][j] = 0;
-            gUnknown_202B038[1][i][j] = 0xF27A;
+            gBgTilemaps[0][i][j] = 0;
+            gBgTilemaps[1][i][j] = 0xF27A;
         }
     }
 }
@@ -3448,14 +3164,14 @@ void sub_8009408(s32 from, s32 to)
 {
     s32 i, j;
 
-    gUnknown_202B038[0][0][0] = 0xF279;
-    gUnknown_202B038[1][0][0] = 0xF27A;
+    gBgTilemaps[0][0][0] = 0xF279;
+    gBgTilemaps[1][0][0] = 0xF27A;
     for (i = from; i < to; i++) {
-        gUnknown_202B038[0][i][0] = 0xF279;
-        gUnknown_202B038[1][i][0] = 0xF27A;
+        gBgTilemaps[0][i][0] = 0xF279;
+        gBgTilemaps[1][i][0] = 0xF27A;
         for (j = 1; j < 32; j++) {
-            gUnknown_202B038[0][i][j] = 0;
-            gUnknown_202B038[1][i][j] = 0xF27A;
+            gBgTilemaps[0][i][j] = 0;
+            gBgTilemaps[1][i][j] = 0xF27A;
         }
     }
     gUnknown_20274A5 = TRUE;
@@ -3471,8 +3187,8 @@ UNUSED static void sub_8009488(s32 strArrId)
     for (i = 0; i < strPtr->unk6; i++) {
         id1 = strPtr->unk0;
         for (j = 0; j < strPtr->unk4; j++) {
-            gUnknown_202B038[0][id0][id1] &= 0xFC00;
-            gUnknown_202B038[1][id0][id1] = 0xF27A;
+            gBgTilemaps[0][id0][id1] &= 0xFC00;
+            gBgTilemaps[1][id0][id1] = 0xF27A;
             id1++;
         }
         id0++;
@@ -3492,8 +3208,8 @@ void sub_8009524(s32 strArrId)
     for (i = 0; i < strPtr->unk6 + 2; i++) {
         s32 id1 = strPtr->unk0 - 1;
         for (j = 0; j < strPtr->unk4 + 2; j++) {
-            gUnknown_202B038[0][id0][id1] &= 0xFC00;
-            gUnknown_202B038[1][id0][id1] = 0xF27A;
+            gBgTilemaps[0][id0][id1] &= 0xFC00;
+            gBgTilemaps[1][id0][id1] = 0xF27A;
             id1++;
         }
         id0++;

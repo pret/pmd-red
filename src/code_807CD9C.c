@@ -60,7 +60,7 @@ EWRAM_INIT u32 gUnknown_203B444[3] = {0x28, 0x28, 0x50};
 
 void sub_804EB30();
 bool8 ExposeTrap(s32 x, s32 y);
-void sub_8040A84();
+void ShowWholeRevealedDungeonMap();
 void sub_8049ED4();
 void sub_806A5B8(Entity *);
 u8 sub_8045888(Entity *);
@@ -76,7 +76,7 @@ bool8 sub_808384C(DungeonPos *, DungeonPos *);
 u8 sub_8083660(DungeonPos *);
 void sub_80460F8(DungeonPos *, Item *, u32);
 void sub_80462AC(Entity * ,u32, u32, u8, u32);
-extern void sub_80402AC(s32, s32);
+extern void ShowDungeonMapAtPos(s32, s32);
 
 void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
 {
@@ -385,7 +385,7 @@ void sub_807D3CC(Entity *param_1)
     }
     if (flag) {
         LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80FD2F8); // All traps were exposed
-        sub_8040A84();
+        ShowWholeRevealedDungeonMap();
         sub_8049ED4();
     }
     else {
@@ -503,7 +503,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
         for (i = 0; i < itemsCount; i++) {
             if (EntityIsValid(&itemEntities[i])) {
                 sub_80461C8(&itemEntities[i].pos, 1);
-                sub_80402AC(itemEntities[i].pos.x, itemEntities[i].pos.y);
+                ShowDungeonMapAtPos(itemEntities[i].pos.x, itemEntities[i].pos.y);
                 itemVelocity[i].x = (((targetTilePos[i].x * 24 + 4) * 256) - itemEntities[i].pixelPos.x) / 60;
                 itemVelocity[i].y = (((targetTilePos[i].y * 24 + 4) * 256) - itemEntities[i].pixelPos.y) / 60;
             }
@@ -534,7 +534,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
         for (i = 0; i < itemsCount; i++) {
             if (targetTilePos[i].x >= 0) {
                 sub_80460F8(&targetTilePos[i], GetItemData(&itemEntities[i]), 1);
-                sub_80402AC(targetTilePos[i].x, targetTilePos[i].y);
+                ShowDungeonMapAtPos(targetTilePos[i].x, targetTilePos[i].y);
                 hasTrawled = TRUE;
             }
         }
@@ -652,7 +652,7 @@ void HandleDroughtOrbAction(Entity *pokemon, Entity *target) {
 	}
 	gDungeon->unk644.unk2C = 1;
 	sub_806CF60();
-	sub_8040A84();
+	ShowWholeRevealedDungeonMap();
 	sub_8049ED4();
 }
 
@@ -757,7 +757,7 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target) {
 	sub_804AAD4();
 	sub_8049884();
 	sub_806CF60();
-	sub_8040A84();
+	ShowWholeRevealedDungeonMap();
 	sub_8049ED4();
 	LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FD3A0);
 	sub_803E708(0x28,0x2b);
@@ -861,7 +861,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
                 sub_8049BB0(x,y);
             }
         }
-        sub_8040A84();
+        ShowWholeRevealedDungeonMap();
         sub_8049ED4();
     }
 }

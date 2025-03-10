@@ -8,6 +8,7 @@
 #include "code_806CD90.h"
 #include "dungeon.h"
 #include "dungeon_engine.h"
+#include "dungeon_map.h"
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
 #include "dungeon_music.h"
@@ -22,7 +23,6 @@ extern const u32 gUnknown_80F680C[8];
 extern const u16 gUnknown_80F682C[8];
 extern const u8 *gPtrFeralFoundItemMessage[];
 
-extern void sub_8040238(void);
 extern void sub_804151C(Entity *pokemon, u32 r1, u8 r2);
 extern void sub_804178C(u32);
 extern void sub_80416A4(DungeonPos *r0, u32 r1, bool8 r2);
@@ -182,7 +182,7 @@ void sub_80426C8(u32 a0, u32 a1)
         sub_803E46C(0x46);
 
     sub_8042D7C();
-    sub_8040238();
+    LoadDungeonMapPalette();
     sub_8052210(1);
 }
 

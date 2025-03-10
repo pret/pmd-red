@@ -40,7 +40,7 @@
 #include "constants/trap.h"
 #include "dungeon_serializer.h"
 #include "dungeon_config.h"
-#include "code_8042B34.h"
+#include "dungeon_map.h"
 
 extern void sub_800EE5C(s32);
 extern void sub_800EF64(void);
@@ -56,7 +56,7 @@ struct UnkStruct_203B414
     struct DungeonPos unk8C[16];
 };
 
-EWRAM_INIT DungeonPos gUnknown_203B410 = {100, 100};
+EWRAM_INIT DungeonPos gPlayerDotMapPosition = {100, 100};
 static EWRAM_INIT struct UnkStruct_203B414 *sUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
 EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
@@ -256,17 +256,13 @@ extern void sub_8040094(u8 r0);
 extern void sub_8068BDC(u8 r0);
 extern s16 GetTurnLimit(u8 dungeon);
 extern void sub_8041888(u8 param_1);
-extern void sub_8040150(bool8 param_1);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
 extern void sub_8043CD8(void);
 extern void sub_803E250(void);
-extern void sub_8040130(void);
-extern void sub_8040124(void);
 extern void sub_803E830(void);
 extern void sub_803E214(void);
 extern void nullsub_56(void);
-extern void sub_8040218(void);
 extern void sub_8047104(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
@@ -292,7 +288,7 @@ extern void sub_8071DA4(Entity *);
 extern void sub_803E748(void);
 extern void sub_8083D68(void);
 extern void sub_803E7C8(void);
-extern void sub_8040A84(void);
+extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_807E5AC(void);
 extern void TriggerWeatherAbilities(void);
 extern void sub_807E88C(void);
@@ -393,8 +389,8 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
         dungeonPtr[i] = 0;
     }
 
-    gUnknown_203B410.x = 0; // Needed to match
-    gUnknown_203B410.x = 100;
+    gPlayerDotMapPosition.x = 0; // Needed to match
+    gPlayerDotMapPosition.x = 100;
 
     if (!r6) {
         gDungeon->unk644.unk34 = r8->unkF;
@@ -417,8 +413,8 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
     sub_8043CD8();
     sub_80495E4();
     sub_803E250();
-    sub_8040130();
-    sub_8040124();
+    OpenDungeonMapFile();
+    SetDungeonMapToNotShown();
     sub_803F27C(1);
     gUnknown_2026E4E = 2056;
     sub_80095CC(1, 0x14);
@@ -437,7 +433,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
     }
 
     if (!r6) {
-        gDungeon->unk181e8.unk1820B = 1;
+        gDungeon->unk181e8.allTilesRevealed = 1;
         gDungeon->unk181e8.unk1820C = 1;
         if (gDungeon->unk644.unk34 == 1) {
             gDungeon->unk644.dungeonLocation.id = r8->unk14.unk0;
@@ -591,7 +587,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
         sub_8049840();
         sub_803E178();
         gDungeonBrightness = 0;
-        sub_8040124();
+        SetDungeonMapToNotShown();
         sub_803EAF0(4, 0);
         sub_8052210(0);
         sub_803F27C(r6);
@@ -663,8 +659,8 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
         }
         sub_8040094(0);
         sub_803EAF0(0, 0);
-        sub_8040150(r6);
-        sub_8040A84();
+        InitDungeonMap(r6);
+        ShowWholeRevealedDungeonMap();
         gDungeon->unkB8 = NULL;
         gDungeon->unk644.unk28 = 0;
         gDungeon->unk644.unk29 = 0;
@@ -688,7 +684,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
             }
             else {
                 sub_803F4A0(GetLeader());
-                sub_8040A84();
+                ShowWholeRevealedDungeonMap();
             }
         }
 
@@ -747,7 +743,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
             sub_8052740(0x4F);
         }
 
-        sub_8040124();
+        SetDungeonMapToNotShown();
         sub_803EAF0(1, 0);
         gDungeon->unk181e8.unk18219 = 0;
         gDungeon->unk181e8.unk18218 = 1;
@@ -917,7 +913,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
     CloseDungeonPaletteFile();
     sub_803E214();
     nullsub_56();
-    sub_8040218();
+    CloseDungeonMapFile();
     if (r8->unk7C == 1 || r8->unk7C == 4 || r8->unk7C == 2) {
         sub_8047104();
     }

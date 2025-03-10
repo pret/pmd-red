@@ -367,8 +367,8 @@ static void UpdateBg(void)
             x1 &= 0x1F;
             y1 &= 0x1F;
 
-            gUnknown_202B038[2][y1][x1] = sWorldMapPtr->unk3114[y2][x2];
-            gUnknown_202B038[3][y1][x1] = sWorldMapPtr->unk1114[y2][x2];
+            gBgTilemaps[2][y1][x1] = sWorldMapPtr->unk3114[y2][x2];
+            gBgTilemaps[3][y1][x1] = sWorldMapPtr->unk1114[y2][x2];
             x2++;
             x1++;
         }

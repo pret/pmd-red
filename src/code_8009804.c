@@ -123,26 +123,26 @@ void sub_8009908(void)
     gUnknown_202D23C = 0;
     if (gUnknown_202D238[0] != 0) {
         gUnknown_202D238[0] = 0;
-        CpuCopy(BG_SCREEN_ADDR(12), gUnknown_202B038[0], BG_SCREEN_SIZE);
+        CpuCopy(BG_SCREEN_ADDR(12), gBgTilemaps[0], BG_SCREEN_SIZE);
     }
     if (gUnknown_202D238[1] != 0) {
         gUnknown_202D238[1] = 0;
-        CpuCopy(BG_SCREEN_ADDR(13), gUnknown_202B038[1], BG_SCREEN_SIZE);
+        CpuCopy(BG_SCREEN_ADDR(13), gBgTilemaps[1], BG_SCREEN_SIZE);
     }
     if (gUnknown_202D238[2] != 0) {
         gUnknown_202D238[2] = 0;
-        CpuCopy(BG_SCREEN_ADDR(14), gUnknown_202B038[2], BG_SCREEN_SIZE);
+        CpuCopy(BG_SCREEN_ADDR(14), gBgTilemaps[2], BG_SCREEN_SIZE);
     }
     if (gUnknown_202D238[3] != 0) {
         gUnknown_202D238[3] = 0;
-        CpuCopy(BG_SCREEN_ADDR(15), gUnknown_202B038[3], BG_SCREEN_SIZE);
+        CpuCopy(BG_SCREEN_ADDR(15), gBgTilemaps[3], BG_SCREEN_SIZE);
     }
 }
 
 void sub_80099C0(void)
 {
-    CpuCopy(BG_SCREEN_ADDR(12), gUnknown_202B038[0], BG_SCREEN_SIZE);
-    CpuCopy(BG_SCREEN_ADDR(13), gUnknown_202B038[1], BG_SCREEN_SIZE);
+    CpuCopy(BG_SCREEN_ADDR(12), gBgTilemaps[0], BG_SCREEN_SIZE);
+    CpuCopy(BG_SCREEN_ADDR(13), gBgTilemaps[1], BG_SCREEN_SIZE);
 }
 
 void SetFontsBaseColor(RGB a0)

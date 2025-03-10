@@ -428,7 +428,7 @@ _0800E030:
 	bl sub_8000728
 	cmp r0, 0x1
 	bne _0800E058
-	bl sub_8040238
+	bl LoadDungeonMapPalette
 	movs r0, 0
 	movs r1, 0
 	bl sub_803EAF0

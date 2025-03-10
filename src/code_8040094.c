@@ -11,15 +11,13 @@
 #include "play_time.h"
 
 extern s32 gUnknown_80F6568[];
-extern u8 gUnknown_202EE01;
 extern const char gUnknown_80F6604; // "zmappat"
 extern struct FileArchive gDungeonFileArchive;
-extern OpenedFile *gUnknown_202EE04;
 
 extern void sub_803F7BC(void);
 
 extern void sub_803F580(u32);
-extern void sub_8040A84();
+extern void ShowWholeRevealedDungeonMap();
 
 extern const char *gUnknown_80FD040; // It became brighter on the floor
 
@@ -29,19 +27,19 @@ void HandleLuminousOrbAction(Entity *pokemon)
   int XCoord;
   int YCoord;
 
-  gDungeon->unk181e8.unk1820B = 1;
+  gDungeon->unk181e8.allTilesRevealed = TRUE;
 
   for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
   {
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
     {
       Tile *mapTile = GetTileMut(XCoord, YCoord);
-      mapTile->spawnOrVisibilityFlags |= 1;
+      mapTile->spawnOrVisibilityFlags |= VISIBILITY_FLAG_REVEALED;
     }
   }
   sub_803F580(0);
   sub_8049ED4();
-  sub_8040A84();
+  ShowWholeRevealedDungeonMap();
   LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD040);
 }
 
@@ -70,14 +68,4 @@ void sub_80400D4(void)
     gDungeon->unk181e8.unk18200--;
     if(gDungeon->unk181e8.unk18200 == 0)
         gDungeon->unk181e8.unk18200 = gDungeon->unk181e8.unk18204;
-}
-
-void sub_8040124(void)
-{
-    gUnknown_202EE01 = 0;
-}
-
-void sub_8040130(void)
-{
-    gUnknown_202EE04 = OpenFileAndGetFileDataPtr(&gUnknown_80F6604, &gDungeonFileArchive);
 }
