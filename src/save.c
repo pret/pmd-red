@@ -29,7 +29,7 @@ EWRAM_DATA s32 gUnknown_202DE28 = {0};
 
 EWRAM_INIT u32 gUnknown_203B17C = {0};
 EWRAM_INIT const char *gUnknown_203B180 = {"POKE_DUNGEON__05"};
-EWRAM_INIT struct UnkStruct_203B184 *gUnknown_203B184 = {0};
+EWRAM_INIT struct UnkStruct_203B184 *gUnknown_203B184 = {NULL};
 
 ALIGNED(4) static const char fill_save0[] = _("pksdir0");
 ALIGNED(4) static const char fill_save1[] = _("pksdir0");
@@ -70,7 +70,7 @@ void sub_8011C40(s32 x)
     gUnknown_202DE28 = x;
 }
 
-const char *GetGameInternalName(void)
+static const char *GetGameInternalName(void)
 {
     return gUnknown_203B180; // returns POKE_DUNGEON__05
 }
@@ -329,7 +329,7 @@ u32 WriteSavetoPak(s32 *param_1, u32 param_2)
   if (gUnknown_203B184 == NULL) {
     playerSave->unk41C = param_2;
     playerSave->unk418 = sub_8011C34();
-    playerSave->RngState = GetRNGSeed();
+    playerSave->RngState = GetRNGState();
   }
   else {
     playerSave->unk41C = gUnknown_203B184->unk054;

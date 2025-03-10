@@ -28,6 +28,8 @@
 #include "friend_list_menu.h"
 #include "personality_test1.h"
 #include "credits2.h"
+#include "main_loops.h"
+#include "string_format.h"
 
 IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = {NULL};
 
@@ -39,7 +41,6 @@ u8 ScriptPrintText_809B2B8(struct unkStruct_3001B64_unkC *, s32, s32, const char
 bool8 IsTextboxOpen_809B40C(struct unkStruct_3001B64_unkC *);
 extern void sub_801416C(s32, s32);
 extern void ResetTextbox_809B294(void);
-extern void sub_8014144(void);
 extern s32 sub_803B168(void);
 extern void sub_803B1BC(void);
 
@@ -771,7 +772,6 @@ void sub_802E918();
 u32 sub_80282DC(u8 *r0);
 void sub_809927C(u8);
 void sub_80282FC(void);
-void sub_8001064(void);
 extern u8 CreateThankYouMailPelipper(void);
 extern u8 sub_802E864(void);
 extern u8 sub_802DFB0(void);

@@ -10,9 +10,9 @@
 #include "text_util.h"
 #include "text.h"
 
-static EWRAM_DATA OpenedFile *sWazaParametersFile = {0};
-static EWRAM_DATA MoveDataEntry *sMovesData = {0};
-static EWRAM_DATA MoveLearnset *sMoveLearnsets = {0}; // 420 entries, aka (MONSTER_DEOXYS_SPEED + 1), aka (MONSTER_MUNCHLAX)
+static EWRAM_DATA OpenedFile *sWazaParametersFile = { NULL }; // NDS=213C188
+static EWRAM_DATA MoveDataEntry *sMovesData = { NULL }; // NDS=213C18C
+static EWRAM_DATA MoveLearnset *sMoveLearnsets = { NULL }; // NDS=0213C184 | 420 entries, aka (MONSTER_DEOXYS_SPEED + 1), aka (MONSTER_MUNCHLAX)
 
 // data_8107010.s
 extern const unkStruct_80928C0 gUnknown_81098C4;
@@ -49,6 +49,7 @@ static void unk_LinkedSequencesToMoves8(Move *, Move [8][8]);
 static void unk_LinkedSequencesToMoves8_v2(Move *, Move [8][8]);
 static void unk_MovePrintData(Move *, s32);
 
+// arm9.bin::020640A0
 void LoadWazaParameters(void)
 {
     sWazaParametersFile = OpenFileAndGetFileDataPtr(gUnknown_81098D0, &gSystemFileArchive);
@@ -160,6 +161,7 @@ s16 GetMoveTargetAndRange(Move *move, bool32 isAI)
     return sMovesData[move->id].targetingFlags[isAI];
 }
 
+// arm9.bin::02063CE4
 u8 GetMoveType(Move *move)
 {
     return sMovesData[move->id].type;

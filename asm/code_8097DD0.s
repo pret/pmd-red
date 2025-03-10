@@ -101,7 +101,7 @@ _08097E90:
 	ldr r2, [r1]
 	mov r1, r8
 	str r3, [sp, 0x1F4]
-	bl sub_800B2D4
+	bl StrsDifferent_IgnoreCase
 	lsls r0, 24
 	adds r5, r4, 0
 	adds r6, r7, 0x1

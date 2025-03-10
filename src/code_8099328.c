@@ -1,8 +1,9 @@
 #include "global.h"
+#include "code_8099328.h"
 #include "code_80A26CC.h"
 #include "event_flag.h"
 
-u8 sub_80992E0(s16 *param_1, s16 *param_2)
+bool8 sub_80992E0(s16 *param_1, s16 *param_2)
 {
     s32 sVar2;
 

@@ -82,5 +82,6 @@ s16 GetAdventureFloorsExplored(void);
 void UpdateAdventureAchievements(void);
 u32 SaveAdventureData(u8 *r0, u32 size);
 u32 RestoreAdventureData(u8 *r0, u32 size);
+void SetDungeonLocationInfo(DungeonLocation *dl);
 
 #endif // GUARD_CODE_8097670_H

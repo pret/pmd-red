@@ -298,7 +298,7 @@ static void sub_801059C(void)
     DecompressATGlobalFile((u32 *)(VRAM + 0x8000), 0x0, file);
     sub_8004AA4(sWorldMapPtr->unk5150, sWorldMapPtr->unk1100[4], 0x10);
     size = 0x4000;
-    DecompressATFile((u8 *) &sWorldMapPtr->unk1114, size, file2);
+    DecompressATFile(&sWorldMapPtr->unk1114, size, file2);
 
     sWorldMapPtr->brightness = 0;
     sWorldMapPtr->bgPos.x = 0;

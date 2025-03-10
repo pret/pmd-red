@@ -20,6 +20,7 @@
 #include "menu_input.h"
 #include "moves.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "sprite.h"
 #include "text.h"
 
@@ -46,13 +47,10 @@ extern void CreateFriendActionMenu();
 extern void sub_80276A8();
 bool8 sub_8027D9C(PokemonStruct1 *pokeStruct);
 extern u8 sub_8027DCC(PokemonStruct1 *);
-
 extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
-
 extern void sub_808D31C(PokemonStruct1 *);
 extern bool8 sub_808D750(s16 index_);
-extern void sub_808ED00(void);
 
 u32 sub_8027E18(PokemonStruct1 *);
 u8 sub_8027E4C(PokemonStruct1 *r0);

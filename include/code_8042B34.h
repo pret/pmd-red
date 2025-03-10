@@ -1,0 +1,6 @@
+#ifndef GUARD_CODE_8042B34_H
+#define GUARD_CODE_8042B34_H
+
+void sub_8043D50(s32 *a0, s32 *a1);
+
+#endif // GUARD_CODE_8042B34_H

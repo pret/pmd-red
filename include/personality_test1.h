@@ -14,28 +14,30 @@ typedef struct PersonalityQuestion
     /* 0x8 */ const PersonalityEffects *effects;
 } PersonalityQuestion;
 
-struct PersonalityRelated
+// size: 0x30
+typedef struct PersonalityRelated
 {
-    u32 unk4;
-    s16 StarterID;
-    s16 PartnerID;
-    u8 StarterName[0x14];
-    u8 PartnerNick[0x14];
-};
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ s16 StarterID;
+    /* 0x6 */ s16 PartnerID;
+    /* 0x8 */ u8 StarterName[20];
+    /* 0x1C */ u8 PartnerNick[20];
+} PersonalityRelated;
 
-struct PersonalityTestTracker
+// size: 0xC0
+typedef struct PersonalityTestTracker
 {
     /* 0x0 */ s32 FrameCounter;
-    struct PersonalityRelated unk4;
+    /* 0x4 */ PersonalityRelated unk4;
     /* 0x34 */ u32 TestState;
     /* 0x38 */ s32 QuestionCounter;
     /* 0x3C */ u32 currQuestionIndex;
     /* 0x40 */ u8 playerNature;
     /* 0x44 */ s32 NatureTotals[NUM_PERSONALITIES];
     /* 0x78 */ u8 QuestionTracker[NUM_QUIZ_QUESTIONS];
-    /* 0xB0 */ u32 playerGender; // 1 = Female, 0 = Male
+    /* 0xB0 */ u32 playerGender; // 0 = Male, 1 = Female
     /* 0xB4 */ MenuInputStructSub input;
-};
+} PersonalityTestTracker;
 
 bool8 CreateTestTracker(void);
 void DeleteTestTracker(void);

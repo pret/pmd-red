@@ -1051,7 +1051,7 @@ void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level)
     gLevelCurrentPokeId = id;
     sprintf(buffer, "lvmp%03d", id);
     file = OpenFileAndGetFileDataPtr(buffer, &gSystemFileArchive);
-    DecompressATFile((char*)gLevelCurrentData, 0, file);
+    DecompressATFile(gLevelCurrentData, 0, file);
     CloseFile(file);
   }
   level -= 1;

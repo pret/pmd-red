@@ -22,6 +22,7 @@
 #include "moves.h"
 #include "party_list_menu.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "text_util.h"
 #include "text.h"
 
@@ -32,7 +33,6 @@ static EWRAM_INIT unkStruct_203B2B8 *sUnknown_203B2B8 = {NULL};
 extern u32 sub_8026F04(PokemonStruct1 *);
 bool8 CanTakePokemonHeldItem(PokemonStruct1 *r0);
 extern bool8 sub_808D750(s16 index_);
-extern void sub_808ED00(void);
 bool8 sub_8026E88(PokemonStruct1 *r0);
 bool8 sub_8026EB8(PokemonStruct1 *r0);
 void sub_8026E08(u32 r0);

@@ -5,14 +5,14 @@
 typedef struct File
 {
     /* 0x0 */ char *name;
-    /* 0x4 */ const u8 *data;
+    /* 0x4 */ const void *data;
 } File;
 
 // size: 0x8
 typedef struct OpenedFile
 {
     /* 0x0 */ const File *file;
-    /* 0x4 */ const u8 *data;
+    /* 0x4 */ const void *data;
 } OpenedFile;
 
 // size: 0x10
@@ -22,13 +22,6 @@ typedef struct FileArchive
     /* 0x8 */ s32 count;
     /* 0xC */ const File *entries;
 } FileArchive;
-
-// size: 0x8
-typedef struct SiroArchive
-{
-    /* 0x0 */ u32 magic;
-    /* 0x4 */ u8 *data;
-} SiroArchive;
 
 // size: 0x8
 typedef struct UnkFileStruct

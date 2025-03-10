@@ -1,40 +1,40 @@
 #include "global.h"
 #include "cpu.h"
+#include "main_loops.h"
 #include "random.h"
 #include "sprite.h"
 
-static EWRAM_DATA u16 sOAMSpriteCount = {0}; // 2025670 Written to but never read
+static EWRAM_DATA u16 sOAMSpriteCount = {0}; // GBA=2025670 | NDS=20EC504 | Written to but never read
 static EWRAM_DATA s16 sUnknown_2025672[8] = {0};
 static EWRAM_DATA s16 sUnknown_2025682[9] = {0};
 static EWRAM_DATA DungeonPos sUnknown_2025694 = {0};
 static EWRAM_DATA u32 sUnknown_2025698 = {0};
-UNUSED static EWRAM_DATA u32 sUnused1 = {0}; // 202569C
-static EWRAM_DATA SpriteList sUnknown_20256A0 = {0};
+UNUSED static EWRAM_DATA u32 sUnused1 = {0}; // GBA=202569C
+static EWRAM_DATA SpriteList sSpriteList = {0}; // NDS=20ED4C0
 static EWRAM_DATA UnkSpriteLink sUnknown_2025EA8[128] = {0};
 static EWRAM_DATA SpriteOAM sUnknown_20262A8[128] = {0};
-static EWRAM_DATA s32 sSpriteCount = {0}; // 20266A8
-UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // 20266AC
+static EWRAM_DATA s32 sSpriteCount = {0}; // GBA=20266A8
+UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // GBA=20266AC
 
 #define UNK_20266B0_ARR_COUNT 160
 static EWRAM_DATA unkStruct_20266B0 sUnknown_20266B0[UNK_20266B0_ARR_COUNT] = {0};
 
-static EWRAM_DATA void *sCharMemCursor = {0}; // 2026E30
-UNUSED static EWRAM_DATA u32 sUnused3 = {0}; // 2026E34
+static EWRAM_DATA void *sCharMemCursor = {0}; // GBA=2026E30
+UNUSED static EWRAM_DATA u32 sUnused3 = {0}; // GBA=2026E34
 
 static EWRAM_INIT unkStruct_20266B0 *sUnknown_203B074 = {0};
-
-// code.c
-extern void nullsub_3(s32, s32);
 
 static void RegisterSpriteParts_80052BC(UnkSpriteMem *);
 static void AxResInitUnoriented(axdata *, axmain *, u32, u32, u32, bool8);
 
+// arm9.bin::0200265C
 void InitSprites(void)
 {
     ResetSprites(TRUE);
     SetSavingIconCoords(NULL);
 }
 
+// arm9.bin::020024f4
 void ResetSprites(bool8 a0)
 {
     s32 i;
@@ -48,7 +48,7 @@ void ResetSprites(bool8 a0)
     sCharMemCursor = OBJ_VRAM0;
     sUnknown_203B074 = &sUnknown_20266B0[0];
 
-    a = &sUnknown_20256A0.sprites[0];
+    a = &sSpriteList.sprites[0];
     b = a + 1;
 
     // 16 loops, very smart
@@ -132,10 +132,11 @@ void ResetSprites(bool8 a0)
         }
     }
 
-    sUnknown_20256A0.unk800 = 0;
-    sUnknown_20256A0.unk804 = 0;
+    sSpriteList.unk800 = 0;
+    sSpriteList.unk804 = 0;
 }
 
+// arm9.bin::020024CC
 void sub_8004E8C(unkStruct_2039DB0 *a0)
 {
     a0->unk0 = 0xFFFF;
@@ -169,6 +170,7 @@ void sub_8004E8C(unkStruct_2039DB0 *a0)
     *(_dstVar++) = *(_srcVar++);                                                \
 }
 
+// arm9.bin::020021C4
 void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *spriteMasks)
 {
     // size: 0xC
@@ -249,12 +251,13 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
         SpriteSetPalNum(sprite, sUnknown_2025682[sp.unk2.unk0]);
     }
 
-    sUnknown_2025EA8[sSpriteCount].unk0 = sUnknown_20256A0.sprites[spriteId].unk0;
-    sUnknown_20256A0.sprites[spriteId].unk0 = sUnknown_2025EA8 + sSpriteCount;
+    sUnknown_2025EA8[sSpriteCount].unk0 = sSpriteList.sprites[spriteId].unk0;
+    sSpriteList.sprites[spriteId].unk0 = sUnknown_2025EA8 + sSpriteCount;
     sSpriteCount++;
 }
 
 // a2 and spriteMasks are always called with NULL lol
+// arm9.bin::02002088
 void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unkStruct_2039DB0 *spriteMasks)
 {
     s32 yPos;
@@ -286,18 +289,19 @@ void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unk
     if (a2 != NULL)
         RegisterSpriteParts_80052BC(a2);
 
-    sUnknown_2025EA8[sSpriteCount].unk0 = sUnknown_20256A0.sprites[a1].unk0;
-    sUnknown_20256A0.sprites[a1].unk0 = &sUnknown_2025EA8[sSpriteCount];
+    sUnknown_2025EA8[sSpriteCount].unk0 = sSpriteList.sprites[a1].unk0;
+    sSpriteList.sprites[a1].unk0 = &sUnknown_2025EA8[sSpriteCount];
 
     sSpriteCount++;
 }
 
+// arm9.bin::02002048
 void sub_8005180(void)
 {
     UnkSpriteLink *r1;
     UnkSpriteLink *r2;
 
-    r2 = &sUnknown_20256A0.sprites[0];
+    r2 = &sSpriteList.sprites[0];
     r1 = r2;
 
     if (r2 != NULL) {
@@ -314,6 +318,7 @@ void sub_8005180(void)
     r2->unk0 = NULL;
 }
 
+// arm9.bin::02001FB0
 void CopySpritesToOam(void)
 {
     UnkSpriteLink *sLink;
@@ -321,7 +326,7 @@ void CopySpritesToOam(void)
     vu16 *oam;
     s32 count;
 
-    sLink = &sUnknown_20256A0.sprites[0];
+    sLink = &sSpriteList.sprites[0];
     oam = (vu16 *)(OAM + OAM_SIZE); // End of OAM. Work backwards
     count = 0;
 

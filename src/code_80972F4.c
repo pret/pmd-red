@@ -3,15 +3,14 @@
 #include "dungeon.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
-#include "code_80A26CC.h"
+#include "code_80958E8.h"
 #include "code_80972F4.h"
+#include "code_80A26CC.h"
 
 #include "data/story_missions.h"
 
 ALIGNED(4) const u8 gDummyScenarioText[] = _("{COLOR YELLOW_C}Scenario try dummy{RESET}");
 ALIGNED(4) const u8 gBlankMission[] = _("{COLOR RED_W}???{RESET}");
-
-extern void GeneratePelipperJobs(void);
 
 void sub_80972F4(void)
 {

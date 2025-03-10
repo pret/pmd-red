@@ -4,6 +4,7 @@
 #include "structs/menu.h"
 
 // size: 0x1B4
+// for some reason, this is 0x1A4 in NDS, but I (Kermalis) can't find out why yet. It seems like MenuStruct or Windows is smaller in NDS
 typedef struct SaveMenuWork
 {
     /* 0x0 */ u32 currMenu;

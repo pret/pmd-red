@@ -8,7 +8,7 @@
 
 static EWRAM_DATA struct unkStruct_203B494 sUnknown_2039778 = {0};
 
-EWRAM_INIT struct unkStruct_203B494 *gUnknown_203B494 = {0};
+EWRAM_INIT struct unkStruct_203B494 *gUnknown_203B494 = { NULL }; // NDS=20EB98C
 
 // data_810AE24.s
 extern const u8 *gAdventureLogText[];
@@ -30,6 +30,7 @@ struct unkStruct_203B494 *sub_8097680(void)
     return &sUnknown_2039778;
 }
 
+// arm9.bin::0206968C
 void SetDungeonLocationInfo(DungeonLocation *dl)
 {
     gUnknown_203B494->dungeonLocation.id = dl->id;
