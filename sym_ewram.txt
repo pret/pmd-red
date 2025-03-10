@@ -1,6 +1,6 @@
 
     .include "src/m4a.o"
-    .include "src/code_2.o"
+    .include "src/main_loops.o"
 	.space 0x4
 
     .include "src/event_flag.o"

@@ -4823,7 +4823,8 @@ static void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorP
 }
 
 #else
-NAKED static void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps)
+NAKED
+static void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorProps)
 {
     asm_unified("\n"
 "	push {r4-r7,lr}\n"

@@ -77,6 +77,7 @@ struct UnkStruct_203B184
     u32 RngState;
 };
 
+void nullsub_33(void);
 u32 sub_8011C1C(void);
 void sub_8011C28(u32 in);
 s32 sub_8011C34(void);

@@ -79,4 +79,6 @@ PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, short _species);
 void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF20 *mon, struct UnkInfoTabStruct *param_4, u32 windowId);
 void sub_808FF20(struct unkStruct_808FF20 *param_1, struct PokemonStruct1 *pokemon, bool8 param_3);
 
+void sub_808ED00();
+
 #endif // GUARD_POKEMON_3_H

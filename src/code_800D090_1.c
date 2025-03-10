@@ -1,4 +1,5 @@
 #include "global.h"
+#include "code_800D090_1.h"
 
 void nullsub_189(void)
 {}
@@ -42,8 +43,9 @@ void nullsub_197(void)
 void nullsub_198(void)
 {}
 
-u32 sub_800DAAC(void) {
-    return 0;
+bool8 sub_800DAAC(void)
+{
+    return FALSE;
 }
 
 u32 sub_800DAB0(void) {

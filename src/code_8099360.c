@@ -30,7 +30,7 @@ bool8 sub_8099360(u8 *dungeonId) {
     return FALSE;
 }
 
-u8 sub_8099394(u8 *param) {
+bool8 sub_8099394(u8 *param) {
     s16 script_disc;
 
     script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
@@ -62,7 +62,8 @@ void sub_80993E4(void) {
 */
 void sub_8099648(void);
 
-UNUSED static NAKED void sub_80993F0(void)
+NAKED
+UNUSED static void sub_80993F0(void)
 {
     asm_unified("	.text\n"
 "	push {r4-r7,lr}\n"

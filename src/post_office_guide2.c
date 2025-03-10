@@ -5,6 +5,7 @@
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "code_80972F4.h"
+#include "code_8099328.h"
 #include "code_8099360.h"
 #include "code_80A26CC.h"
 #include "constants/mailbox.h"
@@ -21,9 +22,6 @@
 static EWRAM_INIT unkStruct_203B330 *sUnknown_203B330 = {NULL};
 
 #include "data/post_office_guide2.h"
-
-// code_8098BDC.s
-extern u8 sub_80992E0(s16 *, s16 *);
 
 static void DisplayMissionObjectives(void);
 
@@ -171,7 +169,7 @@ static void DisplayMissionObjectives(void)
         case 3:
         case 0:
         default:
-            if (sub_80992E0(&auStack44, &missionIndex) != 0)
+            if (sub_80992E0(&auStack44, &missionIndex))
                 PrintStringOnWindow(10, 16, GetCurrentMissionText(missionIndex), sUnknown_203B330->unk10, 0);
             else if (sub_8099360(&local_test) != 0)
                 PrintStringOnWindow(10, 16, sub_80975DC(sub_80A2688(local_test)), sUnknown_203B330->unk10, 0);

@@ -520,7 +520,8 @@ u32 sub_808ECFC(void)
     return 0;
 }
 
-void sub_808ED00() {
+void sub_808ED00()
+{
     s32 team[4];
     s32 i;
     s32 length = sub_808D580(team);

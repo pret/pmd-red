@@ -19,6 +19,7 @@ static void DecompressAT_Init(u32 *);
 static u32 DecompressATGlobal(u32 *, s32, const char *);
 static void NDS_DecompressRLE(const SiroArchive *);
 
+// arm9.bin::020093F4
 const void *GetSiroPtr(OpenedFile *openedFile)
 {
     const SiroArchive *siro = (const SiroArchive *)openedFile->data;
@@ -33,6 +34,7 @@ const void *GetSiroPtr(OpenedFile *openedFile)
     return openedFile->data;
 }
 
+// arm9.bin::020093A0
 UNUSED static const void *UnusedGetSir0Ptr(const SiroArchive *siro)
 {
     if (siro->magic != MAGIC_SIR0)
@@ -42,6 +44,7 @@ UNUSED static const void *UnusedGetSir0Ptr(const SiroArchive *siro)
     return siro->data;
 }
 
+// arm9.bin::02009324
 static void NDS_DecompressRLE(const SiroArchive *siro)
 {
 }

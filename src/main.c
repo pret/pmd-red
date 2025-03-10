@@ -11,6 +11,7 @@
 #include "flash.h"
 #include "input.h"
 #include "main.h"
+#include "main_loops.h"
 #include "music.h"
 #include "random.h"
 #include "reg_control.h"
@@ -32,11 +33,11 @@ extern const u8 IWRAM_INIT_ROM_START[];
 UNUSED static const char sStringRomUserData[] = "PKD ROM USER DATA 000000";
 
 // code_2.c
-extern void GameLoop(void);
 extern void InitGraphics(void);
 
 extern void Hang(void);
 
+// arm9.bin::02000B88
 void AgbMain(void)
 {
     ALIGNED(4) u8 value[4];

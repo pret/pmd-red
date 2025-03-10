@@ -10,7 +10,7 @@
 #include "sprite.h"
 #include "text.h"
 
-static EWRAM_INIT SaveMenuWork *sUnknown_203B364 = {NULL};
+static EWRAM_INIT SaveMenuWork *sSaveMenuWork = {NULL};
 
 const Window gUnknown_80E6F20 =
 {
@@ -125,29 +125,29 @@ void CreateSaveMenu(s32 currMenu)
 {
   s32 index;
 
-  if (sUnknown_203B364 == NULL) {
-    sUnknown_203B364 = MemoryAlloc(sizeof(SaveMenuWork),8);
-    MemoryFill8(sUnknown_203B364,0,sizeof(SaveMenuWork));
+  if (sSaveMenuWork == NULL) {
+    sSaveMenuWork = MemoryAlloc(sizeof(SaveMenuWork),8);
+    MemoryFill8(sSaveMenuWork,0,sizeof(SaveMenuWork));
   }
   for(index = 0; index < 4; index++){
-    sUnknown_203B364->unk148.id[index] = gUnknown_80E6F20;
+    sSaveMenuWork->unk148.id[index] = gUnknown_80E6F20;
   }
   ResetUnusedInputStruct();
-  ShowWindows(&sUnknown_203B364->unk148, TRUE, TRUE);
+  ShowWindows(&sSaveMenuWork->unk148, TRUE, TRUE);
 
   if (currMenu == MENU_DELETE_SAVE) {
       // Beware, Deleting your Adventure
-    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,gDeletingYourAdventureMenuItems,
+    SetMenuItems(sSaveMenuWork->unk8,&sSaveMenuWork->unk148,0,&gUnknown_80E6F38,gDeletingYourAdventureMenuItems,
                  FALSE,6,FALSE);
   }
   else {
       // Saving your Adventure
-    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
+    SetMenuItems(sSaveMenuWork->unk8,&sSaveMenuWork->unk148,0,&gUnknown_80E6F38,gSavingAdventureMenuItems,
                  FALSE,6,FALSE);
   }
-  sub_8035CF4(sUnknown_203B364->unk8,0,TRUE);
-  sUnknown_203B364->unk4 = 0;
-  sUnknown_203B364->currMenu = currMenu;
+  sub_8035CF4(sSaveMenuWork->unk8,0,TRUE);
+  sSaveMenuWork->unk4 = 0;
+  sSaveMenuWork->currMenu = currMenu;
   sub_8038830();
 }
 
@@ -155,12 +155,13 @@ void CleanSaveMenu(void)
 {
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
-  if (sUnknown_203B364 != NULL) {
-    MemoryFree(sUnknown_203B364);
-    sUnknown_203B364 = NULL;
+  if (sSaveMenuWork != NULL) {
+    MemoryFree(sSaveMenuWork);
+    sSaveMenuWork = NULL;
   }
 }
 
+// arm9.bin::02052F98
 s32 UpdateSaveMenu(void)
 {
   s32 saveStatus;
@@ -172,14 +173,14 @@ s32 UpdateSaveMenu(void)
   menu = MENU_NO_SCREEN_CHANGE;
   action = 3;
 
-  switch(sUnknown_203B364->unk4)
+  switch(sSaveMenuWork->unk4)
   {
       default:
       case 2:
         menu = MENU_NO_SCREEN_CHANGE;
         break;
       case 0:
-        sub_8012FD8(&sUnknown_203B364->unk8[0]);
+        sub_8012FD8(&sSaveMenuWork->unk8[0]);
         uStack_18 = 0;
         sub_80140F8();
         saveStatus = WriteSavetoPak(&uStack_18,sub_8011C1C());
@@ -187,76 +188,76 @@ s32 UpdateSaveMenu(void)
         switch(saveStatus)
         {
             case SAVE_COMPLETED:
-                sub_8035CC0(&sUnknown_203B364->unk148,0);
-                if (sUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
-                    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                sub_8035CC0(&sSaveMenuWork->unk148,0);
+                if (sSaveMenuWork->currMenu == MENU_DELETE_SAVE) {
+                    SetMenuItems(sSaveMenuWork->unk8,&sSaveMenuWork->unk148,0,&gUnknown_80E6F38,
                                 gDeletedSaveMenuItems,FALSE,6,FALSE);
                 }
                 else {
-                    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                    SetMenuItems(sSaveMenuWork->unk8,&sSaveMenuWork->unk148,0,&gUnknown_80E6F38,
                                 gAdventureSavedMenuItems,FALSE,6,FALSE);
                 }
-                if (sUnknown_203B364->currMenu == 0x2d) {
-                    sUnknown_203B364->unk4 = 1;
+                if (sSaveMenuWork->currMenu == 0x2d) {
+                    sSaveMenuWork->unk4 = 1;
                     return MENU_COMMUNICATION_1;
                 }
-                sub_8035CF4(sUnknown_203B364->unk8,0,TRUE);
-                sUnknown_203B364->unk4 = 1;
+                sub_8035CF4(sSaveMenuWork->unk8,0,TRUE);
+                sSaveMenuWork->unk4 = 1;
                 break;
             case SAVE_NOT_WRTTEN:
                 CreateDialogueBoxAndPortrait(gUnknown_80E7178,0,0,0);
-                sUnknown_203B364->unk4 = 5;
+                sSaveMenuWork->unk4 = 5;
                 break;
             default:
-                sub_8035CC0(&sUnknown_203B364->unk148,0);
-                if (sUnknown_203B364->currMenu == MENU_DELETE_SAVE) {
-                    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                sub_8035CC0(&sSaveMenuWork->unk148,0);
+                if (sSaveMenuWork->currMenu == MENU_DELETE_SAVE) {
+                    SetMenuItems(sSaveMenuWork->unk8,&sSaveMenuWork->unk148,0,&gUnknown_80E6F38,
                                     gAdventureCouldNotBeDeletedMenuItems,FALSE,6,FALSE);
                 }
                 else {
-                    SetMenuItems(sUnknown_203B364->unk8,&sUnknown_203B364->unk148,0,&gUnknown_80E6F38,
+                    SetMenuItems(sSaveMenuWork->unk8,&sSaveMenuWork->unk148,0,&gUnknown_80E6F38,
                                     gAdventureCouldNotBeSavedMenuItems,FALSE,6,FALSE);
                 }
-                sub_8035CF4(sUnknown_203B364->unk8,0,TRUE);
-                sUnknown_203B364->unk4 = 1;
+                sub_8035CF4(sSaveMenuWork->unk8,0,TRUE);
+                sSaveMenuWork->unk4 = 1;
                 break;
         }
         menu = MENU_NO_SCREEN_CHANGE;
         break;
       case 1:
-        if (sub_80130A8(&sUnknown_203B364->unk8[0]) == '\0') {
-            sub_8013114(&sUnknown_203B364->unk8[0],&action);
+        if (sub_80130A8(&sSaveMenuWork->unk8[0]) == '\0') {
+            sub_8013114(&sSaveMenuWork->unk8[0],&action);
         }
         switch(action)
         {
             case 2:
             case 4:
-                if ((sUnknown_203B364->currMenu == 0x29) || (sUnknown_203B364->currMenu == MENU_DELETE_SAVE)) {
-                    sUnknown_203B364->unk4 = 1;
+                if ((sSaveMenuWork->currMenu == 0x29) || (sSaveMenuWork->currMenu == MENU_DELETE_SAVE)) {
+                    sSaveMenuWork->unk4 = 1;
                     menu = MENU_MAIN_SCREEN;
                 }
-                else if (sUnknown_203B364->currMenu == 0x2d) {
-                    sUnknown_203B364->unk4 = 1;
+                else if (sSaveMenuWork->currMenu == 0x2d) {
+                    sSaveMenuWork->unk4 = 1;
                     menu = MENU_COMMUNICATION_1;
                 }
-                else if (sUnknown_203B364->currMenu == 0x2c) {
-                    sUnknown_203B364->unk4 = 1;
+                else if (sSaveMenuWork->currMenu == 0x2c) {
+                    sSaveMenuWork->unk4 = 1;
                     menu = 0x1f;
                 }
                 else {
                     mainMenu = GetMainMenu();
                     if (mainMenu->unk3A != 0) {
-                        sUnknown_203B364->unk4 = 1;
+                        sSaveMenuWork->unk4 = 1;
                         menu = 0x35;
                     }
                     else {
-                        sUnknown_203B364->unk4 = 1;
-                        menu = sUnknown_203B364->currMenu == 0x2b ? MENU_WONDER_MAIL : MENU_FRIEND_RESCUE;
+                        sSaveMenuWork->unk4 = 1;
+                        menu = sSaveMenuWork->currMenu == 0x2b ? MENU_WONDER_MAIL : MENU_FRIEND_RESCUE;
                     }
                 }
                 break;
             case 3:
-                sUnknown_203B364->unk4 = 1;
+                sSaveMenuWork->unk4 = 1;
                 break;
         }
         sub_80388C4();
@@ -266,31 +267,31 @@ s32 UpdateSaveMenu(void)
 
 void sub_8038830(void)
 {
-    SpriteSetAffine1(&sUnknown_203B364->unk1A8, 0);
-    SpriteSetAffine2(&sUnknown_203B364->unk1A8, 0);
-    SpriteSetObjMode(&sUnknown_203B364->unk1A8, 0);
-    SpriteSetMosaic(&sUnknown_203B364->unk1A8, 0);
-    SpriteSetBpp(&sUnknown_203B364->unk1A8, 0);
-    SpriteSetShape(&sUnknown_203B364->unk1A8, 1);
+    SpriteSetAffine1(&sSaveMenuWork->unk1A8, 0);
+    SpriteSetAffine2(&sSaveMenuWork->unk1A8, 0);
+    SpriteSetObjMode(&sSaveMenuWork->unk1A8, 0);
+    SpriteSetMosaic(&sSaveMenuWork->unk1A8, 0);
+    SpriteSetBpp(&sSaveMenuWork->unk1A8, 0);
+    SpriteSetShape(&sSaveMenuWork->unk1A8, 1);
 
-    SpriteSetTileNum(&sUnknown_203B364->unk1A8, 0x3F0);
-    SpriteSetPriority(&sUnknown_203B364->unk1A8, 0);
-    SpriteSetPalNum(&sUnknown_203B364->unk1A8, 15);
+    SpriteSetTileNum(&sSaveMenuWork->unk1A8, 0x3F0);
+    SpriteSetPriority(&sSaveMenuWork->unk1A8, 0);
+    SpriteSetPalNum(&sSaveMenuWork->unk1A8, 15);
 
-    SpriteSetMatrixNum(&sUnknown_203B364->unk1A8, 0);
-    SpriteSetSize(&sUnknown_203B364->unk1A8, 0);
+    SpriteSetMatrixNum(&sSaveMenuWork->unk1A8, 0);
+    SpriteSetSize(&sSaveMenuWork->unk1A8, 0);
 
-    SpriteSetX(&sUnknown_203B364->unk1A8, 112);
-    SpriteSetY(&sUnknown_203B364->unk1A8, 104);
+    SpriteSetX(&sSaveMenuWork->unk1A8, 112);
+    SpriteSetY(&sSaveMenuWork->unk1A8, 104);
 
-    sUnknown_203B364->unk1B0 = 0;
+    sSaveMenuWork->unk1B0 = 0;
     ResetSprites(FALSE);
 }
 
 void sub_80388C4(void)
 {
-    if (sUnknown_203B364->unk1B0 & 8)
-        AddSprite(&sUnknown_203B364->unk1A8, 0x100, NULL, NULL);
+    if (sSaveMenuWork->unk1B0 & 8)
+        AddSprite(&sSaveMenuWork->unk1A8, 0x100, NULL, NULL);
 
-    sUnknown_203B364->unk1B0++;
+    sSaveMenuWork->unk1B0++;
 }
