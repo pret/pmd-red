@@ -64,12 +64,12 @@ typedef struct WindowTemplate
 #define MAX_WINDOWS 4
 
 // All fields are zeroed out except for type which is set to WINDOW_TYPE_NORMAL.
-#define WINDOW_DUMMY (Window) { .unk0 = 0, .type = WINDOW_TYPE_NORMAL, .pos = { .x = 0, .y = 0 }, .width = 0, .height = 0, .unk10 = 0, .unk12 = 0, .header = NULL }
+#define WIN_TEMPLATE_DUMMY (WindowTemplate) { .unk0 = 0, .type = WINDOW_TYPE_NORMAL, .pos = { .x = 0, .y = 0 }, .width = 0, .height = 0, .unk10 = 0, .unk12 = 0, .header = NULL }
 
 // size: 0x60
 typedef struct WindowTemplates
 {
-    /* 0x0 */ sWindowTemplate id[MAX_WINDOWS];
+    /* 0x0 */ WindowTemplate id[MAX_WINDOWS];
 } WindowTemplates;
 
 #endif // GUARD_STR_TEXT_H

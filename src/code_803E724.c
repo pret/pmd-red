@@ -185,9 +185,9 @@ static const struct WindowTemplates gUnknown_80F62B0 =
             .unk12 = 0,
             .header = NULL,
         },
-        [1] = WINDOW_DUMMY,
-        [2] = WINDOW_DUMMY,
-        [3] = WINDOW_DUMMY,
+        [1] = WIN_TEMPLATE_DUMMY,
+        [2] = WIN_TEMPLATE_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 
@@ -203,9 +203,9 @@ static const struct WindowTemplates gUnknown_80F6310 =
             .unk12 = 0,
             .header = NULL,
         },
-        [1] = WINDOW_DUMMY,
-        [2] = WINDOW_DUMMY,
-        [3] = WINDOW_DUMMY,
+        [1] = WIN_TEMPLATE_DUMMY,
+        [2] = WIN_TEMPLATE_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 
@@ -239,7 +239,7 @@ static const struct WindowTemplates gUnknown_80F6370 =
             .unk12 = 0,
             .header = NULL,
         },
-        [3] = WINDOW_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 
@@ -255,9 +255,9 @@ static const struct WindowTemplates gUnknown_80F63D0 =
             .unk12 = 2,
             .header = NULL,
         },
-        [1] = WINDOW_DUMMY,
-        [2] = WINDOW_DUMMY,
-        [3] = WINDOW_DUMMY,
+        [1] = WIN_TEMPLATE_DUMMY,
+        [2] = WIN_TEMPLATE_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 

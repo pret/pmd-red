@@ -54,8 +54,8 @@ static EWRAM_INIT WindowTemplates sWorldMapWindows = {
             .height = 3,
             .unk10 = 3,
         },
-        [2] = WINDOW_DUMMY,
-        [3] = WINDOW_DUMMY,
+        [2] = WIN_TEMPLATE_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 
@@ -492,9 +492,9 @@ static void PrintDungeonName(DungeonLocation *dungLocation)
                 .height = 2,
                 .unk10 = 2,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
 

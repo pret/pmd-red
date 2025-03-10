@@ -305,9 +305,9 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
                 .unk10 = 2,
                 .header = &header,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
 

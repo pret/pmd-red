@@ -208,9 +208,9 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
                 .unk12 = 0,
                 .header = &header,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
     u8 unk[4];
@@ -946,9 +946,9 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
                 .unk12 = 0,
                 .header = &header,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
     Move movesLocal[8];

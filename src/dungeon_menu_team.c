@@ -188,9 +188,9 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
                 .unk12 = 0,
                 .header = &sTeamWindowHeader,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
 
@@ -520,9 +520,9 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
                 .unk12 = 2,
                 .header = &sTeamWindowHeader,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
     EntityInfo *monInfo;
@@ -755,9 +755,9 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                 .unk12 = 2,
                 .header = &sTeamWindowHeader,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
     s32 r8;
@@ -1410,9 +1410,9 @@ static void ShowStatusInfoWindow(s32 statusId)
                 .unk12 = 0,
                 .header = &header,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
 
@@ -1488,8 +1488,8 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
                 .unk12 = 0,
                 .header = NULL,
             },
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
     bool8 bPress = FALSE;

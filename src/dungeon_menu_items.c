@@ -133,7 +133,9 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                 .unk10 = 0x10,
                 .header = &header,
             },
-            WINDOW_DUMMY, WINDOW_DUMMY, WINDOW_DUMMY
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY
         },
     };
 

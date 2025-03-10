@@ -159,17 +159,27 @@ static EWRAM_DATA MenuInputStructSub gUnknown_202EC28 = {0};
 static EWRAM_INIT WindowTemplates sUnknown_203B198 = {
     .id = {
         [0] = {
-            .pos = {2, 15},
+            .unk0 = 0,
+            .type = WINDOW_TYPE_0,
+            .pos = { .x = 2, .y = 15 },
             .width = 26,
             .height = 5,
             .unk10 = 7,
+            .unk12 = 0,
+            .header = NULL,
         },
         [1] = {
             .unk0 = 0x40,
             .type = WINDOW_TYPE_7,
+            .pos = { .x = 0, .y = 0 },
+            .width = 0,
+            .height = 0,
+            .unk10 = 0,
+            .unk12 = 0,
+            .header = NULL,
         },
-        [2] = WINDOW_DUMMY,
-        [3] = WINDOW_DUMMY,
+        [2] = WIN_TEMPLATE_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 
