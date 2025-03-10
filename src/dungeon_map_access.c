@@ -761,7 +761,7 @@ void sub_804A49C(s32 a0, s32 a1)
     sub_80098F8(3);
 }
 
-void sub_804A728(DungeonPos *pos, s32 a1, u8 a2, u8 a3)
+void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3)
 {
     DungeonPos spArray[6];
     u16 *src;

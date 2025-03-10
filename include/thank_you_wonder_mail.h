@@ -22,8 +22,8 @@ typedef struct WonderMailStruct_203B2C4
     unkStruct_203B480 unk1E8;
     /* 0x218 */ s8 mailIndex;
     MenuStruct unk21C[4];
-    Windows unk35C;
-    Windows unk3BC;
+    WindowTemplates unk35C;
+    WindowTemplates unk3BC;
     Item unk41C;
     /* 0x420 */ struct MonPortraitMsg monPortrait;
     u32 unk430;

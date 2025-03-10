@@ -20,7 +20,7 @@ struct unkStruct_203B274
 };
 EWRAM_INIT struct unkStruct_203B274 *gUnknown_203B274 = {NULL};
 
-static const Window sUnknown_80DC2AC = {
+static const WindowTemplate sUnknown_80DC2AC = {
     0,
     3,
     0, 0,
@@ -28,7 +28,7 @@ static const Window sUnknown_80DC2AC = {
     0, 0,
     NULL
 };
-static const Window sUnknown_80DC2C4 = {
+static const WindowTemplate sUnknown_80DC2C4 = {
     0,
     6,
     2, 2,
@@ -55,10 +55,10 @@ bool8 sub_801F428(s16 index, s32 param_2)
     gUnknown_203B274->s348.s0.unk38 = &gUnknown_203B274->s348.s0.windows.id[gUnknown_203B274->s348.s0.unk34];
     RestoreUnkTextStruct_8006518(&gUnknown_203B274->s348.s0.windows);
     gUnknown_203B274->s348.s0.windows.id[gUnknown_203B274->s348.s0.unk34] = sUnknown_80DC2C4;
-    gUnknown_203B274->s348.s0.unk38->unk14 = &gUnknown_203B274->s348.unk9C;
-    gUnknown_203B274->s348.unk9C.f0 = 1;
-    gUnknown_203B274->s348.unk9C.f1 = 0;
-    gUnknown_203B274->s348.unk9C.f2 = 0xC;
+    gUnknown_203B274->s348.s0.unk38->header = &gUnknown_203B274->s348.unk9C;
+    gUnknown_203B274->s348.unk9C.count = 1;
+    gUnknown_203B274->s348.unk9C.currId = 0;
+    gUnknown_203B274->s348.unk9C.width = 0xC;
     gUnknown_203B274->s348.unk9C.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B274->s348.s0.windows, TRUE, TRUE);

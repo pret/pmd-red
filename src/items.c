@@ -654,7 +654,7 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
     u32 result;
 
     InitPokemonMove(buffer8, move);
-    sub_80078A4(a2, 4, 82, 200, COLOR_WHITE_2);
+    AddDoubleUnderScoreHighlight(a2, 4, 82, 200, COLOR_WHITE_2);
     PrintFormattedStringOnWindow(4, 84, gPtrTypeText, a2, 0);
     moves_data = GetMoveType(buffer8);
     typestring = GetUnformattedTypeString(moves_data);

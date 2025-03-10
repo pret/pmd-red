@@ -18,7 +18,7 @@ const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
 const WindowHeader UnkData_80D47C4 = {0x01, 0x00, 0x10, 0x00};
 
-const Window gUnknown_80D47C8[MAX_WINDOWS] = {
+const WindowTemplate gUnknown_80D47C8[MAX_WINDOWS] = {
     0,
     0x06,
     0x02, 0x02,
@@ -223,7 +223,7 @@ void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
     xxx_call_draw_char(x + add_x, y, uVar2, color, a4);
 }
 
-void sub_8012CAC(Window *a0, const MenuItem *a1)
+void sub_8012CAC(WindowTemplate *a0, const MenuItem *a1)
 {
     s32 length;
     s32 maxLength;
@@ -244,7 +244,7 @@ void sub_8012CAC(Window *a0, const MenuItem *a1)
     sub_8012D08(a0, count);
 }
 
-void sub_8012D08(Window *param_1, s32 param_2)
+void sub_8012D08(WindowTemplate *param_1, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
@@ -258,7 +258,7 @@ void sub_8012D08(Window *param_1, s32 param_2)
     param_1->unk10 = sVar3;
 }
 
-void sub_8012D34(struct Window *param_1, s32 param_2)
+void sub_8012D34(struct WindowTemplate *param_1, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
@@ -386,21 +386,20 @@ void sub_8012EBC(MenuStruct *param_1)
     const u32 *colorArray;
     s32 counter;
     s32 index;
-    Windows textStack;
+    WindowTemplates winTemplates;
     u8 buffer[256];
-    UnkTextStruct1 *ptr_text;
-    Window *ptr_text2;
+    Window *window;
 
     if (param_1->unk4D) {
         sub_80073B8(param_1->index);
         index = param_1->index;
-        ptr_text = &gUnknown_2027370[index];
+        window = &gWindows[index];
 
-        if (ptr_text->unkC == 6) {
-            ptr_text2 = &textStack.id[index];
-            RestoreUnkTextStruct_8006518(&textStack);
+        if (window->type == WINDOW_TYPE_WITH_HEADER) {
+            WindowTemplate *windowTemplate = &winTemplates.id[index];
+            RestoreUnkTextStruct_8006518(&winTemplates);
             x = sub_8008ED0(param_1->unk0);
-            PrintFormattedStringOnWindow(((ptr_text2->unk14->f2 * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
+            PrintFormattedStringOnWindow(((windowTemplate->header->width * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }
 
         colorArray = param_1->menuTextColorArray;
@@ -538,20 +537,18 @@ bool8 sub_8013114(MenuStruct *param_1, s32 *menuAction)
     return FALSE;
 }
 
-static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 index)
+static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 windowId)
 {
-    UnkTextStruct1 *temp;
+    Window *window = &gWindows[windowId];
 
-    temp = &gUnknown_2027370[index];
-
-    param_1->unk0 = index;
+    param_1->unk0 = windowId;
     param_1->menuIndex = 0;
     param_1->unk1A = menuItemCounter;
     param_1->unk1C = menuItemCounter;
     param_1->unk1E = 0;
     param_1->unk4 = 0;
 
-    if (temp->unkC == 6)
+    if (window->type == WINDOW_TYPE_WITH_HEADER)
         param_1->firstEntryY = 16;
     else
         param_1->firstEntryY = 2;
@@ -595,13 +592,14 @@ void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
             SpriteSetMosaic(&sp, 0);
             SpriteSetBpp(&sp, 0);
             SpriteSetShape(&sp, 0);
+            SpriteSetMatrixNum(&sp, 0);
             SpriteSetSize(&sp, 0);
             SpriteSetTileNum(&sp, 0x3F4);
             SpriteSetPriority(&sp, 0);
             SpriteSetPalNum(&sp, 15);
             SpriteSetUnk6_0(&sp, 0);
             SpriteSetUnk6_1(&sp, 0);
-            SpriteSetX_MatrixNumSize0(&sp, a0->unk8.x);
+            SpriteSetX(&sp, a0->unk8.x);
             SpriteSetY(&sp, a0->unk8.y + 1);
 
             AddSprite(&sp, 0xFF, 0, 0);
@@ -629,13 +627,14 @@ static void sub_801332C(DungeonPos *a0)
     SpriteSetMosaic(&sp, 0);
     SpriteSetBpp(&sp, 0);
     SpriteSetShape(&sp, 0);
+    SpriteSetMatrixNum(&sp, 0);
     SpriteSetSize(&sp, 0);
     SpriteSetTileNum(&sp, 0x3F5);
     SpriteSetPriority(&sp, 0);
     SpriteSetPalNum(&sp, 15);
     SpriteSetUnk6_0(&sp, 0);
     SpriteSetUnk6_1(&sp, 0);
-    SpriteSetX_MatrixNumSize0(&sp, a0->x);
+    SpriteSetX(&sp, a0->x);
     SpriteSetY(&sp, a0->y + 1);
 
     AddSprite(&sp, 0xFF, NULL, NULL);
@@ -653,13 +652,14 @@ static void sub_8013470(MenuInputStruct *a0)
             SpriteSetMosaic(&sp, 0);
             SpriteSetBpp(&sp, 0);
             SpriteSetShape(&sp, 0);
+            SpriteSetMatrixNum(&sp, 0);
             SpriteSetSize(&sp, 0);
             SpriteSetTileNum(&sp, 0x3F2);
             SpriteSetPriority(&sp, 0);
             SpriteSetPalNum(&sp, 15);
             SpriteSetUnk6_0(&sp, 0);
             SpriteSetUnk6_1(&sp, 0);
-            SpriteSetX_MatrixNumSize0(&sp, a0->unkC);
+            SpriteSetX(&sp, a0->unkC);
             SpriteSetY(&sp, a0->unkE);
 
             AddSprite(&sp, 0xFF, NULL, NULL);
@@ -671,13 +671,14 @@ static void sub_8013470(MenuInputStruct *a0)
             SpriteSetMosaic(&sp, 0);
             SpriteSetBpp(&sp, 0);
             SpriteSetShape(&sp, 0);
+            SpriteSetMatrixNum(&sp, 0);
             SpriteSetSize(&sp, 0);
             SpriteSetTileNum(&sp, 0x3F3);
             SpriteSetPriority(&sp, 0);
             SpriteSetPalNum(&sp, 15);
             SpriteSetUnk6_0(&sp, 0);
             SpriteSetUnk6_1(&sp, 0);
-            SpriteSetX_MatrixNumSize0(&sp, a0->unkC + 10);
+            SpriteSetX(&sp, a0->unkC + 10);
             SpriteSetY(&sp, a0->unkE);
 
             AddSprite(&sp, 0xFF, NULL, NULL);
@@ -696,12 +697,12 @@ void sub_8013660(MenuInputStruct *param_1)
 void UpdateMenuCursorSpriteCoords(MenuInputStruct *param_1)
 {
     s32 index;
-    UnkTextStruct1 *temp;
+    Window *window;
 
     index = param_1->unk0;
-    temp = &gUnknown_2027370[index];
-    param_1->unk8.x = temp->unk0 * 8 + param_1->unk4;
-    param_1->unk8.y = temp->unk2 * 8 + GetMenuEntryYCoord(param_1, param_1->menuIndex);
+    window = &gWindows[index];
+    param_1->unk8.x = window->x * 8 + param_1->unk4;
+    param_1->unk8.y = window->y * 8 + GetMenuEntryYCoord(param_1, param_1->menuIndex);
 }
 
 void MoveMenuCursorDown(MenuInputStruct *param_1)
@@ -718,7 +719,7 @@ void MoveMenuCursorDown(MenuInputStruct *param_1)
     }
 }
 
-void sub_80136E0(MenuInputStruct *param_1, u8 param_2)
+void MoveMenuCursorDownWrapAround(MenuInputStruct *param_1, u8 param_2)
 {
     param_1->unk24 = 0;
 
@@ -750,7 +751,7 @@ void MoveMenuCursorUp(MenuInputStruct *param_1)
     }
 }
 
-void sub_8013744(MenuInputStruct *param_1, u8 param_2)
+void MoveMenuCursorUpWrapAround(MenuInputStruct *param_1, u8 param_2)
 {
     param_1->unk24 = 0;
 
@@ -794,12 +795,12 @@ void sub_80137B0(MenuInputStruct *param_1, s32 param_2)
         iVar2 = param_2 << 8;
     }
     else {
-        if (gUnknown_2027370[param_1->unk0].unkC == 6)
+        if (gWindows[param_1->unk0].type == WINDOW_TYPE_WITH_HEADER)
             iVar1 = 16;
         else
             iVar1 = 0;
 
-        iVar2 = (gUnknown_2027370[param_1->unk0].unk6 * 8 - iVar1) << 8;
+        iVar2 = (gWindows[param_1->unk0].height * 8 - iVar1) << 8;
     }
 
     param_1->unk10 = iVar2 / param_1->unk1C;
@@ -927,10 +928,10 @@ void sub_8013984(MenuInputStruct *param_1)
 {
     s32 iVar2;
     s32 iVar4;
-    UnkTextStruct1 *ptr;
+    Window *window;
 
     iVar4 = param_1->unk0;
-    ptr = &gUnknown_2027370[iVar4];
+    window = &gWindows[iVar4];
 
     if (param_1->unk1C == 0)
         param_1->unk1C++;
@@ -953,7 +954,7 @@ void sub_8013984(MenuInputStruct *param_1)
 
     param_1->unk4 = 0;
 
-    if (ptr->unkC == 6)
+    if (window->type== WINDOW_TYPE_WITH_HEADER)
         param_1->firstEntryY = 16;
     else
         param_1->firstEntryY = 0;
@@ -961,9 +962,9 @@ void sub_8013984(MenuInputStruct *param_1)
     if (param_1->unk20 < 2)
         param_1->unkC = 0;
     else
-        param_1->unkC = (ptr->unk0 + ptr->unk4 - 2) * 8;
+        param_1->unkC = (window->x + window->width - 2) * 8;
 
-    param_1->unkE = (ptr->unk2 + 1) * 8 - 2;
+    param_1->unkE = (window->y + 1) * 8 - 2;
 }
 
 void sub_8013A54(MenuInputStruct *param_1)
@@ -1074,16 +1075,16 @@ void sub_8013C68(unkStructFor8013AA0 *a0)
     }
 
     for (i = 0; i < a0->unk10; i++)
-        sub_800792C(a0->unk14, a0->unk1C - ((i + 1) * 12) - 1, a0->unk20 + 10, 11, 5);
+        AddUnderScoreHighlight(a0->unk14, a0->unk1C - ((i + 1) * 12) - 1, a0->unk20 + 10, 11, 5);
 }
 
 void sub_8013D10(unkStructFor8013AA0 *a0)
 {
     s32 x, y;
     u8 uVar4;
-    UnkTextStruct1 *ptr;
+    Window *window;
 
-    ptr = &gUnknown_2027370[a0->unk14];
+    window = &gWindows[a0->unk14];
     uVar4 = a0->unk24;
 
     switch (sub_8012AE8()) {
@@ -1101,10 +1102,10 @@ void sub_8013D10(unkStructFor8013AA0 *a0)
         a0->unk26 = 8;
     }
 
-    x = (a0->unk1C - ((a0->unk24 + 1) * 12) + (ptr->unk0 * 8)) - 3;
+    x = (a0->unk1C - ((a0->unk24 + 1) * 12) + (window->x * 8)) - 3;
     SpriteSetX(&a0->unk28, x);
 
-    y = a0->unk20 + (ptr->unk2 * 8) - 7;
+    y = a0->unk20 + (window->y * 8) - 7;
     SpriteSetY(&a0->unk28, y);
 }
 
@@ -1148,7 +1149,7 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
 
 void sub_8013E54(void)
 {
-    UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+    Window *window = &gWindows[0];
     SpriteOAM SStack_18 = {0};
 
     SpriteSetAffine1(&SStack_18, 0);
@@ -1162,7 +1163,7 @@ void sub_8013E54(void)
     SpriteSetTileNum(&SStack_18, 0x3F0);
     SpriteSetPriority(&SStack_18, 0);
     SpriteSetPalNum(&SStack_18, 15);
-    SpriteSetY(&SStack_18, (ptr->unk2 * 8) + 0x80);
+    SpriteSetY(&SStack_18, (window->y * 8) + 0x80);
     SpriteSetX(&SStack_18, 112);
 
     AddSprite(&SStack_18,0x100,0,0x0);
@@ -1170,7 +1171,7 @@ void sub_8013E54(void)
 
 void sub_8013F84(void)
 {
-    UnkTextStruct1 *ptr = &gUnknown_2027370[0];
+    Window *window = &gWindows[0];
     SpriteOAM SStack_18 = {0};
 
     SpriteSetAffine1(&SStack_18, 0);
@@ -1184,13 +1185,13 @@ void sub_8013F84(void)
     SpriteSetTileNum(&SStack_18, 0x3F0);
     SpriteSetPriority(&SStack_18, 0);
     SpriteSetPalNum(&SStack_18, 15);
-    SpriteSetY(&SStack_18, (ptr->unk2 * 8) + 0x60);
+    SpriteSetY(&SStack_18, (window->y * 8) + 0x60);
     SpriteSetX(&SStack_18, 112);
 
     AddSprite(&SStack_18,0x100,0,0x0);
 }
 
-void sub_80140B4(Windows *a0)
+void sub_80140B4(WindowTemplates *a0)
 {
     s32 i;
 

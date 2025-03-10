@@ -29,8 +29,8 @@ bool8 sub_8024458(s16 speciesNum, s32 a1)
     sUnknown_203B2AC->unkE4 = &sUnknown_203B2AC->unkE8.id[a1];
     RestoreUnkTextStruct_8006518(&sUnknown_203B2AC->unkE8);
     sUnknown_203B2AC->unkE8.id[sUnknown_203B2AC->unkE0] = sUnknown_80DC9C8;
-    sUnknown_203B2AC->unkE4->unk14 = &sUnknown_203B2AC->unk148;
-    sUnknown_203B2AC->unk148.f2 = 10;
+    sUnknown_203B2AC->unkE4->header = &sUnknown_203B2AC->unk148;
+    sUnknown_203B2AC->unk148.width = 10;
     sub_8024604();
     sub_802452C();
     sub_8013984(&sUnknown_203B2AC->input);
@@ -74,8 +74,8 @@ void sub_802453C(void)
 
 static void sub_8024588(void)
 {
-    sUnknown_203B2AC->unk148.f0 = sUnknown_203B2AC->input.unk20;
-    sUnknown_203B2AC->unk148.f1 = sUnknown_203B2AC->input.unk1E;
+    sUnknown_203B2AC->unk148.count = sUnknown_203B2AC->input.unk20;
+    sUnknown_203B2AC->unk148.currId = sUnknown_203B2AC->input.unk1E;
     sUnknown_203B2AC->unk148.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2AC->unkE8, TRUE, TRUE);

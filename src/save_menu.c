@@ -12,7 +12,7 @@
 
 static EWRAM_INIT SaveMenuWork *sSaveMenuWork = {NULL};
 
-const Window gUnknown_80E6F20 =
+const WindowTemplate gUnknown_80E6F20 =
 {
     0,
     0x03,
@@ -22,7 +22,7 @@ const Window gUnknown_80E6F20 =
     NULL
 };
 
-const Window gUnknown_80E6F38 =
+const WindowTemplate gUnknown_80E6F38 =
 {
     0,
     0x03,

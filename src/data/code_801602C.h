@@ -5,7 +5,7 @@ enum
     MENU_ACTION_NO,
 };
 
-UNUSED static const Window sUnknown_80DB670 =
+UNUSED static const WindowTemplate sUnknown_80DB670 =
 {
     0,
     3,

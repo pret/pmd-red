@@ -32,7 +32,7 @@ bool8 sub_801C8C4(s32 a0, s32 a1, DungeonPos *a2, u32 a3)
     sUnknown_203B244->unk4B4.s0.unk38 = &sUnknown_203B244->unk4B4.s0.windows.id[a1];
     RestoreUnkTextStruct_8006518(&sUnknown_203B244->unk4B4.s0.windows);
     sUnknown_203B244->unk4B4.s0.windows.id[sUnknown_203B244->unk4B4.s0.unk34] = sUnknown_80DBE54;
-    sUnknown_203B244->unk4B4.s0.unk38->unk14 = &sUnknown_203B244->unk4B4.unk9C;
+    sUnknown_203B244->unk4B4.s0.unk38->header = &sUnknown_203B244->unk4B4.unk9C;
 
     if (a2 != NULL)
         sUnknown_203B244->unk4B4.s0.windows.id[sUnknown_203B244->unk4B4.s0.unk34].pos = *a2;
@@ -137,9 +137,9 @@ void sub_801CBB8(void)
 
 static void sub_801CC38(void)
 {
-    sUnknown_203B244->unk4B4.unk9C.f0 = 1;
-    sUnknown_203B244->unk4B4.unk9C.f1 = 0;
-    sUnknown_203B244->unk4B4.unk9C.f2 = 12;
+    sUnknown_203B244->unk4B4.unk9C.count = 1;
+    sUnknown_203B244->unk4B4.unk9C.currId = 0;
+    sUnknown_203B244->unk4B4.unk9C.width = 12;
     sUnknown_203B244->unk4B4.unk9C.f3 = 0;
 
     SUB_80095E4_CALL(sUnknown_203B244->unk4B4.s0);
@@ -156,7 +156,7 @@ void sub_801CCD8(void)
     CallPrepareTextbox_8008C54(sUnknown_203B244->unk4B4.s0.unk34);
     sub_80073B8(sUnknown_203B244->unk4B4.s0.unk34);
     PrintStringOnWindow(10, 0, sStorage, sUnknown_203B244->unk4B4.s0.unk34, 0);
-    sub_8012BC4(sUnknown_203B244->unk4B4.unk9C.f2 * 8 + 4, 0, sUnknown_203B244->unk4B4.s0.input.unk1E + 1, 2, 7, sUnknown_203B244->unk4B4.s0.unk34);
+    sub_8012BC4(sUnknown_203B244->unk4B4.unk9C.width * 8 + 4, 0, sUnknown_203B244->unk4B4.s0.input.unk1E + 1, 2, 7, sUnknown_203B244->unk4B4.s0.unk34);
 
     for(index = 0; index < sUnknown_203B244->unk4B4.s0.input.unk1A; index++) {
         itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.unk1C) + index];

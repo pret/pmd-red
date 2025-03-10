@@ -168,12 +168,10 @@ bool32 GetTutorialFlag(s32 index)
     }
 }
 
-bool8 IsExclusivePokemonUnlocked(s16 pokeID)
+bool8 IsExclusivePokemonUnlocked(s32 pokeID)
 {
     s32 index;
-    s32 pokeID_s32;
-
-    pokeID_s32 = pokeID;
+    s32 pokeID_s32 = (s16) pokeID;
 
     for(index = 0; index < NUM_EXCLUSIVE_POKEMON; index++)
     {

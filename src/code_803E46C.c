@@ -20,7 +20,7 @@ EWRAM_INIT u8 gUnknown_203B40C = 0;
 EWRAM_INIT u8 gUnknown_203B40D = 0;
 
 extern s32 gDungeonBrightness;
-extern s32 gUnknown_202EDCC;
+extern s32 gDungeonFramesCounter;
 extern u32 gUnknown_202EDD0;
 extern s32 gUnknown_202EDD4;
 
@@ -40,7 +40,7 @@ void sub_800F7D0(DungeonPos *);
 void sub_803E874(s32, s32);
 void sub_803EAF0(s32, s32);
 
-void sub_803E46C(u32 a0)
+void DungeonRunFrameActions(u32 a0)
 {
     if (gUnknown_203B40C != 0)
         sub_803E490(a0);
@@ -92,7 +92,7 @@ void sub_803E490(u32 unused)
     nullsub_12();
     sub_80060EC();
 
-    gUnknown_202EDCC++;
+    gDungeonFramesCounter++;
 
     IncrementPlayTime(gPlayTimeRef);
     sub_800CB20();
@@ -125,7 +125,7 @@ void sub_803E668(u32 unused)
     nullsub_12();
     sub_8005838(NULL, 0);
     sub_80060EC();
-    gUnknown_202EDCC++;
+    gDungeonFramesCounter++;
     IncrementPlayTime(gPlayTimeRef);
     sub_800CB20();
     LoadBufferedInputs();
@@ -147,7 +147,7 @@ void sub_803E668(u32 unused)
 void sub_803E708(s32 a0, u32 a1)
 {
     while (a0 != 0) {
-        sub_803E46C(a1);
+        DungeonRunFrameActions(a1);
         a0--;
     }
 }
@@ -156,7 +156,7 @@ void sub_803E724(s32 r0)
 {
     do
     {
-        sub_803E46C(r0);
+        DungeonRunFrameActions(r0);
     } while (gRealInputs.held & 0xF0);
 }
 
@@ -187,7 +187,7 @@ void sub_803E748(void) {
             if(gDungeonBrightness <= 0x1E)
                 gDungeonBrightness++;
         sub_803E874(1, index2);
-        sub_803E46C(5);
+        DungeonRunFrameActions(5);
     }
     gUnknown_203B40D = 0;
     gDungeonBrightness = 0x1F;
@@ -203,7 +203,7 @@ void sub_803E7C8(void)
     gUnknown_203B40D = 1;
     gDungeonBrightness = 0;
 
-    sub_803E46C(5);
+    DungeonRunFrameActions(5);
 
     for(index1 = 0; index1 < 0x2C; index1++)
     {
@@ -218,7 +218,7 @@ void sub_803E7C8(void)
                 gDungeon->unk181e8.unk18217 = index2;
             }
         }
-        sub_803E46C(5);
+        DungeonRunFrameActions(5);
     }
     gUnknown_203B40D = 0;
 }
@@ -231,7 +231,7 @@ void sub_803E830(void)
     for(index = 0; index < 0x20; index++)
     {
         sub_803E874(0, 0);
-        sub_803E46C(5);
+        DungeonRunFrameActions(5);
         if(gDungeonBrightness > 0)
             gDungeonBrightness--;
     }

@@ -46,6 +46,11 @@ static inline void InlineStrncpy(u8 *dst, const u8 *src, s32 n)
     strncpy(dst, src, n);
 }
 
+static inline bool8 AreStringsDifferent(const u8 *str1, const u8 *str2)
+{
+    return strcmp(str1, str2) != 0;
+}
+
 // Sometimes incrementing and decrementing a variable changes how registers are allocated, which helps with matching functions. Functionality-wise this doesn't do anything.
 #ifdef NONMATCHING
 #define ASM_MATCH_TRICK(a) {;}

@@ -47,7 +47,7 @@ struct KangaskhanStorageWork
     unkStructFor8013AA0 unkA8;
     /* 0xD8 */ struct MonPortraitMsg monPortrait;
     struct MonPortraitMsg *monPortraitPtr;
-    Windows unkEC;
+    WindowTemplates unkEC;
 };
 
 bool8 CreateKangaskhanStorage(u32 mode);

@@ -32,7 +32,7 @@ extern void sub_800569C(DungeonPos *, axdata *, u8);
 extern void sub_800EEC8(u16 r0);
 extern void sub_800EF64(void);
 extern void sub_8042DD4(s32 a0, Entity *a1, s32 a2);
-extern void sub_803E46C(u32);
+extern void DungeonRunFrameActions(u32);
 extern u8 sub_800EA44(s32 species, u16 a2);
 extern s32 sub_800E790(s32 species, u16 a2);
 extern void sub_806CDD4(Entity *entity, u8, u32 direction);
@@ -116,7 +116,7 @@ static void sub_8040C4C(Entity *entity, Move *move, bool32 a2)
     sub_8041500(&sp);
     sub_800EEC8(r9);
     sub_800EF64();
-    sub_803E46C(0x58);
+    DungeonRunFrameActions(0x58);
     r4 = sub_800EA84(&sp);
     sub_8042DD4(r4, entity, 5);
     savedUnkVar = gUnknown_203B40D;
@@ -139,7 +139,7 @@ static void sub_8040C4C(Entity *entity, Move *move, bool32 a2)
             r8 = FALSE;
         }
         sub_803EA10();
-        sub_803E46C(0x26);
+        DungeonRunFrameActions(0x26);
     }
     gUnknown_203B40D = savedUnkVar;
 }
@@ -225,7 +225,7 @@ void sub_8040DA0(Entity *entity, Move *move)
         for (i = 0; i < 120; i++) {
             u32 unk;
 
-            sub_803E46C(0x59);
+            DungeonRunFrameActions(0x59);
             unk = entity->axObj.axdata.sub1.unk10;
             if (var_24 == 9) {
                 unk |= 2;
@@ -280,7 +280,7 @@ static void sub_8041108(struct UnkStruct_8040094 *a0, Entity *entity, Move *move
         sub_8041500(a0);
         sub_800EEF8(r4);
         sub_800EF64();
-        sub_803E46C(0x5A);
+        DungeonRunFrameActions(0x5A);
         sub_8042DD4(sub_800E52C(a0), entity, 1);
     }
 }
@@ -346,12 +346,12 @@ void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
     sub_800EEE0(r10);
     sub_800EF64();
     var3 = sub_800EBC8(&sp);
-    sub_803E46C(0x5B);
+    DungeonRunFrameActions(0x5B);
     sub_8042DD4(var3, entity2, 6);
     while (1) {
         if (!sub_800E9A8(var3))
             break;
-        sub_803E46C(0x28);
+        DungeonRunFrameActions(0x28);
     }
 }
 
@@ -479,7 +479,7 @@ static bool8 sub_80414C0(Entity *entity, Move *move)
 static void sub_8041500(struct UnkStruct_8040094 *a0)
 {
     if (sub_800E7D0(a0)) {
-        sub_803E46C(0x5C);
+        DungeonRunFrameActions(0x5C);
         sub_8052740(0x5D);
     }
 }

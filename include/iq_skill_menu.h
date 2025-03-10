@@ -19,7 +19,7 @@ struct IQSkillMenu
     /* 0x30 */ s32 menuAction;
     MenuItem unk34[8];
     MenuStruct unk74;
-    Windows unkC4;
+    WindowTemplates unkC4;
 };
 
 bool8 CreateIQSkillMenu(s16 species);

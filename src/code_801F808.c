@@ -23,15 +23,15 @@ struct unkStruct_203B278
     u32 unk24;
     MenuInputStruct unk28;
     u32 unk5C;
-    Window *unk60;
-    Windows windows;
+    WindowTemplate *unk60;
+    WindowTemplates windows;
     WindowHeader unkC4;
     MenuInputStructSub unkC8;
 };
 
 EWRAM_INIT struct unkStruct_203B278 *gUnknown_203B278 = {NULL};
 
-static const Window sUnknown_80DC2F8 = {
+static const WindowTemplate sUnknown_80DC2F8 = {
     0,
     3,
     0, 0,
@@ -114,10 +114,10 @@ void sub_801F930(void)
     switch(gUnknown_203B278->state)
     {
         case 0:
-            gUnknown_203B278->unk60->unk14 = &gUnknown_203B278->unkC4;
-            gUnknown_203B278->unkC4.f0 = gUnknown_203B278->unk28.unk20;
-            gUnknown_203B278->unkC4.f1 = gUnknown_203B278->unk28.unk1E;
-            gUnknown_203B278->unkC4.f2 = 0x10;
+            gUnknown_203B278->unk60->header = &gUnknown_203B278->unkC4;
+            gUnknown_203B278->unkC4.count = gUnknown_203B278->unk28.unk20;
+            gUnknown_203B278->unkC4.currId = gUnknown_203B278->unk28.unk1E;
+            gUnknown_203B278->unkC4.width = 0x10;
             gUnknown_203B278->unkC4.f3 = 0;
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_203B278->windows, TRUE, TRUE);

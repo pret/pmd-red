@@ -11,8 +11,8 @@ struct unkStruct_203B260
     /* 0x4 */ MenuInputStructSub unk4;
     /* 0x10 */ MenuInputStruct input;
     u32 unk44;
-    Window *unk48;
-    Windows unk4C;
+    WindowTemplate *unk48;
+    WindowTemplates unk4C;
 };
 
 bool8 sub_801E198(GameOptions *optionsMenu);

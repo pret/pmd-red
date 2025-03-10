@@ -17,7 +17,7 @@ typedef struct unkStruct_203B3F8
     unkStructFor8013AA0 unk60;
     MenuItem unk90[8];
     u16 unkD0[8];
-    Windows unkE0;
+    WindowTemplates unkE0;
 } unkStruct_203B3F8;
 
 #endif // GUARD_DEBUG_MENU4_H

@@ -249,7 +249,7 @@ _08047370:
 	cmp r4, 0
 	beq _0804737A
 	movs r0, 0x12
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 _0804737A:
 	subs r5, 0x1
 	cmp r5, 0
@@ -788,7 +788,7 @@ _080477B2:
 	cmp r3, 0
 	beq _080477BE
 	movs r0, 0x17
-	bl sub_803E46C
+	bl DungeonRunFrameActions
 _080477BE:
 	ldr r0, [sp, 0x34]
 	add r8, r0

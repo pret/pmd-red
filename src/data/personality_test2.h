@@ -12,7 +12,7 @@ const s16 gPartners[NUM_PARTNERS] =
     MONSTER_MUDKIP
 };
 
-const Window gUnknown_80F4278 =
+const WindowTemplate gUnknown_80F4278 =
 {
     0,
     0x03,
@@ -22,7 +22,7 @@ const Window gUnknown_80F4278 =
     NULL
 };
 
-const Window gUnknown_80F4290 =
+const WindowTemplate gUnknown_80F4290 =
 {
     0,
     0x06,
@@ -32,7 +32,7 @@ const Window gUnknown_80F4290 =
     NULL
 };
 
-const Window gUnknown_80F42A8 =
+const WindowTemplate gUnknown_80F42A8 =
 {
     0,
     0x05,

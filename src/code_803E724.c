@@ -42,7 +42,7 @@ extern struct DungeonPalFile *gDungeonNameBannerPalette;
 extern struct DungeonPalFile *gUnknown_202EC94;
 extern RGB gUnknown_202ECA4[];
 extern u8 gUnknown_203B40C;
-extern MenuInputStruct gUnknown_202EE10;
+extern MenuInputStruct gDungeonMenu;
 extern SpriteOAM gUnknown_202EDDC;
 
 extern const u32 gUnknown_80F6490[];
@@ -54,10 +54,9 @@ extern const u16 gUnknown_80F6544[][9];
 
 extern u8 gUnknown_20274A5;
 
-extern s32 gUnknown_202EDCC;
+extern s32 gDungeonFramesCounter;
 
-extern void ShowWholeRevealedDungeonMap();
-extern void sub_8083D44(void);
+extern void PlayDungeonStartButtonSE(void);
 extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
@@ -174,7 +173,7 @@ void sub_803EA10(void)
     SetBGPaletteBufferColorRGB(248, &gFontPalette[8], gDungeonBrightness, NULL);
 }
 
-static const struct Windows gUnknown_80F62B0 =
+static const struct WindowTemplates gUnknown_80F62B0 =
 {
     .id = {
         [0] = {
@@ -184,7 +183,7 @@ static const struct Windows gUnknown_80F62B0 =
             .height = 5,
             .unk10 = 7,
             .unk12 = 0,
-            .unk14 = NULL,
+            .header = NULL,
         },
         [1] = WINDOW_DUMMY,
         [2] = WINDOW_DUMMY,
@@ -192,7 +191,7 @@ static const struct Windows gUnknown_80F62B0 =
     }
 };
 
-static const struct Windows gUnknown_80F6310 =
+static const struct WindowTemplates gUnknown_80F6310 =
 {
     .id = {
         [0] = {
@@ -202,7 +201,7 @@ static const struct Windows gUnknown_80F6310 =
             .height = 7,
             .unk10 = 7,
             .unk12 = 0,
-            .unk14 = NULL,
+            .header = NULL,
         },
         [1] = WINDOW_DUMMY,
         [2] = WINDOW_DUMMY,
@@ -210,7 +209,7 @@ static const struct Windows gUnknown_80F6310 =
     }
 };
 
-static const struct Windows gUnknown_80F6370 =
+static const struct WindowTemplates gUnknown_80F6370 =
 {
     .id = {
         [0] = {
@@ -220,7 +219,7 @@ static const struct Windows gUnknown_80F6370 =
             .height = 7,
             .unk10 = 7,
             .unk12 = 0,
-            .unk14 = NULL,
+            .header = NULL,
         },
         [1] = {
             .type = WINDOW_TYPE_NORMAL,
@@ -229,7 +228,7 @@ static const struct Windows gUnknown_80F6370 =
             .height = 2,
             .unk10 = 2,
             .unk12 = 0,
-            .unk14 = NULL,
+            .header = NULL,
         },
         [2] = {
             .type = WINDOW_TYPE_NORMAL,
@@ -238,13 +237,13 @@ static const struct Windows gUnknown_80F6370 =
             .height = 6,
             .unk10 = 6,
             .unk12 = 0,
-            .unk14 = NULL,
+            .header = NULL,
         },
         [3] = WINDOW_DUMMY,
     }
 };
 
-static const struct Windows gUnknown_80F63D0 =
+static const struct WindowTemplates gUnknown_80F63D0 =
 {
     .id = {
         [0] = {
@@ -254,7 +253,7 @@ static const struct Windows gUnknown_80F63D0 =
             .height = 14,
             .unk10 = 18,
             .unk12 = 2,
-            .unk14 = NULL,
+            .header = NULL,
         },
         [1] = WINDOW_DUMMY,
         [2] = WINDOW_DUMMY,
@@ -321,7 +320,7 @@ void sub_803EAF0(u32 a0, u8 *a1)
             break;
         case 8:
             if (gUnknown_203B40C != 0) {
-                sub_8083D44();
+                PlayDungeonStartButtonSE();
                 sub_8052210(0);
             }
             CreateConfirmNameMenu(2, a1);
@@ -329,13 +328,13 @@ void sub_803EAF0(u32 a0, u8 *a1)
         case 9:
             if (gUnknown_203B40C != 0) {
                 sub_8052210(0);
-                sub_8083D44();
+                PlayDungeonStartButtonSE();
             }
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_80F63D0, FALSE, TRUE);
             break;
         case 10:
-            sub_8083D44();
+            PlayDungeonStartButtonSE();
             break;
         case 150: // Dummy case put here to match, any value >= 150 works
             break;
@@ -346,15 +345,15 @@ void sub_803EAF0(u32 a0, u8 *a1)
 
 void sub_803EC94(void)
 {
-    gUnknown_202EE10.unk1E = 0;
-    gUnknown_202EE10.unk20 = 0;
-    gUnknown_202EE10.unkC = 0;
-    gUnknown_202EE10.unkE = 0;
-    gUnknown_202EE10.unk14.x = 0;
-    sub_801317C(&gUnknown_202EE10.unk28);
+    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.unkC = 0;
+    gDungeonMenu.unkE = 0;
+    gDungeonMenu.unk14.x = 0;
+    sub_801317C(&gDungeonMenu.unk28);
 }
 
-void sub_803ECB4(Windows *a0, bool8 a1)
+void DungeonShowWindows(WindowTemplates *a0, bool8 a1)
 {
     gUnknown_202EDD0 = 10;
     sub_8052210(0);
@@ -383,7 +382,7 @@ void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
     for (i = 0; i < 20; i++) {
         if (gUnknown_202EDE8.unk0 == 0)
             break;
-        sub_803E46C(0x29);
+        DungeonRunFrameActions(0x29);
     }
 
     var = sub_803EF90(a0, a2);
@@ -687,8 +686,8 @@ void sub_803F27C(bool8 a0)
     strPtr->priority = 3;
     strPtr->unk1821A = 0;
     strPtr->unk18212 = 0;
-    strPtr->unk1821B = 0;
-    strPtr->unk1821C = 0;
+    strPtr->rotateModeDirection = 0;
+    strPtr->prevRotateModeDirection = 0;
     strPtr->inFloorMapMode = 0;
     strPtr->unk18215 = 1;
     sub_803F38C();
@@ -1098,14 +1097,14 @@ void sub_803FB74(void)
         hungry = TRUE;
     }
 
-    if (lowHp && (gUnknown_202EDCC & 16) != 0) {
+    if (lowHp && (gDungeonFramesCounter & 16) != 0) {
         r5 = 32, r6 = 32;
     }
     else {
         r5 = 0, r6 = 0;
     }
 
-    if (hungry && (gUnknown_202EDCC & 16) != 0) {
+    if (hungry && (gDungeonFramesCounter & 16) != 0) {
         r5 = 48, r6 = 48;
     }
 

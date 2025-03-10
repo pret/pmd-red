@@ -8,12 +8,13 @@ enum DungeonAction
     ACTION_WALK = 0x2,
     ACTION_UNK5 = 0x5,
     // Switching between Pokémon in the moves menu.
-    ACTION_NEXT = 0x6,
-    ACTION_PREVIOUS = 0x7,
+    ACTION_MOVES_MENU_NEXT_MON = 0x6,
+    ACTION_MOVES_MENU_PREV_MON = 0x7,
     ACTION_PLACE_ITEM = 0x8,
     // Some actions are different between the leader and AI-controlled Pokémon.
     ACTION_PICK_UP_PLAYER = 0x9, // Picking up an item underfoot.
     ACTION_THROW_ITEM_PLAYER = 0xB,
+    ACTION_SHOW_INFO = 0xC,
     ACTION_EAT_BERRY_SEED_DRINK = 0xD,
     ACTION_USE_TM = 0x12,
     ACTION_TALK_FIELD = 0x13, // Talking to another Pokémon by facing them and interacting.
@@ -24,16 +25,18 @@ enum DungeonAction
     ACTION_CHANGE_TACTICS = 0x1A,
     ACTION_CHECK_SUMMARY = 0x1B,
     ACTION_TALK_MENU = 0x1C, // Talking to another Pokémon via the menu.
-    ACTION_UNK1D = 0x1D,
+    ACTION_MOVE_INFO = 0x1D,
     ACTION_SET_MOVE = 0x1E, // Registering a move.
-    ACTION_UNK1F = 0x1F,
-    ACTION_UNK20 = 0x20,
-    ACTION_UNK21 = 0x21,
+    ACTION_SWITCH_AI_MOVE = 0x1F,
+    ACTION_LINK_MOVES = 0x20,
+    ACTION_DELINK_MOVES = 0x21,
+    ACTION_UNK22 = 0x22,
     ACTION_EAT_AI = 0x23,
     ACTION_THROW_ITEM_AI = 0x24,
     ACTION_STEPPED_ON_TRAP = 0x25,
     ACTION_STAIRS = 0x26,
     ACTION_THROW_STRAIGHT_PLAYER = 0x27,
+    ACTION_QUICK_SAVE = 0x2B,
     ACTION_USE_LINK_BOX = 0x2C,
     ACTION_GIVE_UP = 0x2E,
     ACTION_VIEW_IQ = 0x30,

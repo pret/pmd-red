@@ -86,7 +86,7 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
     sUnknown_203B414->unk8 = (a1 + 1) * 4;
     sub_800EE5C(gUnknown_80F6624[a0][0].unk0);
     sub_800EF64();
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
     sUnknown_203B414->unk4 = a2;
     for (i = 0; i < sUnknown_203B414->unk8; i++) {
         s32 rnd;
@@ -403,7 +403,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
     gDungeon->unk644.unk55 = 0;
     gDungeon->unk644.unk18 = r8->unk9;
     gDungeon->unk644.unk16 = r8->unkC;
-    gDungeon->unk644.unk14 = r8->unkA;
+    gDungeon->unk644.canRecruit = r8->unkA;
     gDungeon->unk644.unk15 = r8->unkB;
     gDungeon->unk644.unk17 = r8->unkD;
     gDungeon->unk644.unk19 = r8->unkE;

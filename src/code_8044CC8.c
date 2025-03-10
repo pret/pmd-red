@@ -2,6 +2,7 @@
 #include "constants/dungeon_action.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
+#include "dungeon_generation.h"
 #include "code_8044CC8.h"
 #include "items.h"
 
@@ -15,15 +16,15 @@ typedef struct ItemText
 // size: 0x8
 typedef struct unkStr_80F7C54
 {
-    u32 unk0;
+    s32 unk0;
     u8 *text;
 } unkStr_80F7C54;
 
 
 
-EWRAM_DATA unkStruct_202EE44 gUnknown_202EE44[10] = {0};
+EWRAM_DATA unkStruct_202EE44 gDungeonSubMenu[10] = {0};
 
-extern s32 gUnknown_202EE6C;
+extern s32 gDungeonSubMenuItemsCount;
 
 extern const ItemText gActions[];
 extern u16 gUnknown_80F6964[NUM_ITEM_CATEGORIES];
@@ -159,79 +160,70 @@ void sub_8044E24(Entity *entity,int index,u32 unused)
 }
 
 // Similar to sub_8044BA8
-u8 *sub_8044EC8(s32 param_1)
+u8 *GetDungeonSubMenuItemString(s32 param_1)
 {
-    u16 uVar1;
-    u32 uVar3;
-    u32 uVar4;
+    u16 actionId = gDungeonSubMenu[param_1].actionId;
 
-    uVar1 = gUnknown_202EE44[param_1].unk0;
-
-    if ((uVar1 == 0x26) && (GetFloorType() == 2)) {
+    if (actionId == ACTION_STAIRS && GetFloorType() == FLOOR_TYPE_RESCUE) {
         return *gUnknown_80F91EC;
     }
     else {
-        uVar3 = uVar4 = strcmp(gUnknown_80F7C50[uVar1 << 1], gUnknown_80F697C);
-        if (uVar3 != 0) {
-            uVar4 = 1;
+        if (!AreStringsDifferent(gUnknown_80F7C50[actionId << 1], gUnknown_80F697C)) {
+            return gActions[GetItemActionType(gDungeonSubMenu[param_1].unk2)].useText;
         }
-        if ((u8)(uVar4) == 0) {
-            return gActions[GetItemActionType(gUnknown_202EE44[param_1].unk2)].useText;
-        }
-        else
-        {
-            return gUnknown_80F7C50[uVar1 << 1];
+        else {
+            return gUnknown_80F7C50[actionId << 1];
         }
     }
 }
 
-bool8 sub_8044F3C(s32 param_1)
+bool8 CanSubMenuItemBeChosen(s32 itemId)
 {
-    if(param_1 < 0)
+    if (itemId < 0)
         return FALSE;
     else
-        return gUnknown_202EE44[param_1].unk3;
+        return gDungeonSubMenu[itemId].canBeChosen;
 }
 
-void sub_8044F5C(u16 param_1, u8 param_2)
+void AddActionToDungeonSubMenu(u16 actionId, u8 param_2)
 {
   int index;
 
-  if (gUnknown_202EE6C < 10) {
-    for(index = 0; index < gUnknown_202EE6C; index++)
+  if (gDungeonSubMenuItemsCount < 10) {
+    for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {
-        if (gUnknown_202EE44[index].unk0 == param_1) {
+        if (gDungeonSubMenu[index].actionId == actionId) {
           return;
         }
     }
-    gUnknown_202EE44[gUnknown_202EE6C].unk0 = param_1;
-    gUnknown_202EE44[gUnknown_202EE6C].unk2 = param_2;
-    gUnknown_202EE44[gUnknown_202EE6C].unk3 = TRUE;
-    gUnknown_202EE6C++;
+    gDungeonSubMenu[gDungeonSubMenuItemsCount].actionId = actionId;
+    gDungeonSubMenu[gDungeonSubMenuItemsCount].unk2 = param_2;
+    gDungeonSubMenu[gDungeonSubMenuItemsCount].canBeChosen = TRUE;
+    gDungeonSubMenuItemsCount++;
   }
 }
 
-s32 sub_8044FB4(u16 param_1)
+s32 ActionToDungeonSubMenuId(u16 actionId)
 {
     int index;
 
-    for(index = 0; index < gUnknown_202EE6C; index++)
+    for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {
-        if (gUnknown_202EE44[index].unk0 == param_1) {
+        if (gDungeonSubMenu[index].actionId == actionId) {
             return index;
         }
     }
     return -1;
 }
 
-void sub_8044FF0(u16 param_1)
+void SetActionUnusableInDungeonSubMenu(u16 actionId)
 {
     int index;
 
-    for(index = 0; index < gUnknown_202EE6C; index++)
+    for(index = 0; index < gDungeonSubMenuItemsCount; index++)
     {
-        if (gUnknown_202EE44[index].unk0 == param_1) {
-           gUnknown_202EE44[index].unk3 = FALSE;
+        if (gDungeonSubMenu[index].actionId == actionId) {
+           gDungeonSubMenu[index].canBeChosen = FALSE;
            return;
         }
     }
@@ -263,20 +255,16 @@ bool8 IsNotAttacking(Entity *param_1, bool8 param_2)
 
 void sub_8045064(void)
 {
-    s32 i;
-    s32 j;
-    unkStruct_202EE44 *iPtr;
-    unkStruct_202EE44 *jPtr;
-    unkStruct_202EE44 temp;
+    s32 i, j;
 
-    for (i = 0; i < gUnknown_202EE6C; i++) {
-        for (j = i + 1; j < gUnknown_202EE6C; j++) {
-            iPtr = &gUnknown_202EE44[i];
-            jPtr = &gUnknown_202EE44[j];
-            if ((s32)gUnknown_80F7C54[iPtr->unk0].unk0 > (s32)gUnknown_80F7C54[jPtr->unk0].unk0) {
-                temp = *iPtr;
-                *iPtr = *jPtr;
-                *jPtr = temp;
+    for (i = 0; i < gDungeonSubMenuItemsCount; i++) {
+        for (j = i + 1; j < gDungeonSubMenuItemsCount; j++) {
+            unkStruct_202EE44 temp;
+            unkStruct_202EE44 *iPtr = &gDungeonSubMenu[i];
+            unkStruct_202EE44 *jPtr = &gDungeonSubMenu[j];
+
+            if (gUnknown_80F7C54[iPtr->actionId].unk0 > gUnknown_80F7C54[jPtr->actionId].unk0) {
+                SWAP(*iPtr, *jPtr, temp);
             }
         }
     }

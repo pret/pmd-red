@@ -169,7 +169,7 @@ bool8 sub_8072CF4(Entity *entity)
             sub_8052740(10);
         }
         sub_806A1E8(entity);
-        sub_803E46C(10);
+        DungeonRunFrameActions(10);
     }
     if (((ACTION_PASS_TURN < info->action.action) && (info->action.action != 4)) && (info->action.action != ACTION_WALK)) {
         info->attacking = TRUE;

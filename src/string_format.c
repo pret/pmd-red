@@ -60,7 +60,7 @@ u32 sub_8014140(void)
 
 // This kinda looks like the 'true' beginning of the file
 static const u32 gUnknown_80D48A0[] = {0x7, 0x2, 0x2};
-static const struct Window gUnknown_80D48AC = {
+static const struct WindowTemplate gUnknown_80D48AC = {
     0x00,
     0x03,
     0x00, 0x00,
@@ -68,7 +68,7 @@ static const struct Window gUnknown_80D48AC = {
     0x00, 0x00, 0x00
 };
 
-static const Window gUnknown_80D48C4 = {
+static const WindowTemplate gUnknown_80D48C4 = {
     0x00,
     0x00,
     0x02, 0x0F,
@@ -77,7 +77,7 @@ static const Window gUnknown_80D48C4 = {
     NULL
 };
 
-static const Window gUnknown_80D48DC = {
+static const WindowTemplate gUnknown_80D48DC = {
     0x00,
     0x02,
     0x02, 0x08,
@@ -148,7 +148,7 @@ static EWRAM_DATA s32 gUnknown_202EC1C = 0;
 // Only read, but never written to. Possibly used in Blue?
 struct NeverWrittenToStruct202EC20
 {
-    struct Window unk0;
+    struct WindowTemplate unk0;
     const u8 *unk18;
 };
 static EWRAM_DATA struct NeverWrittenToStruct202EC20 *sNeverWrittenToUnknownStructPtr = NULL;
@@ -156,7 +156,7 @@ static UNUSED EWRAM_DATA u8 sUnusedEwram1[4] = {0};
 
 static EWRAM_DATA MenuInputStructSub gUnknown_202EC28 = {0};
 
-static EWRAM_INIT Windows sUnknown_203B198 = {
+static EWRAM_INIT WindowTemplates sUnknown_203B198 = {
     .id = {
         [0] = {
             .pos = {2, 15},
@@ -260,7 +260,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     gUnknown_202E748.unk0 = 4;
     gUnknown_202E748.unk2 = 4;
     gUnknown_202E748.unk8 = 0x70;
-    gUnknown_202E748.unkA = (gUnknown_2027370[0].unk2 * 8) + 34;
+    gUnknown_202E748.unkA = (gWindows[0].y * 8) + 34;
     gUnknown_202E748.unk10 = 7;
     gUnknown_202E748.unk1C = 0;
     gUnknown_202E748.unk20 = 0;
@@ -541,7 +541,7 @@ void DrawDialogueBoxString(void)
                     }
 
                     gUnknown_202E748.unk8 = 0x70;
-                    gUnknown_202E748.unkA = (gUnknown_2027370[0].unk2 * 8) + 34;
+                    gUnknown_202E748.unkA = (gWindows[0].y * 8) + 34;
                 }
                 keepLooping = FALSE;
             }

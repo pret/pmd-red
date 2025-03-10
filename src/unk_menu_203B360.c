@@ -15,14 +15,14 @@ typedef struct unkStruct_203B360
     /* 0x0 */ u32 currMenu;
     u32 unk4; // state
     MenuStruct unk8[4];
-    Windows unk148;
+    WindowTemplates unk148;
     SpriteOAM unk1A8;
     u32 unk1B0; // sprite count?
 } unkStruct_203B360;
 
 static EWRAM_INIT unkStruct_203B360 *sUnknown_203B360 = {NULL};
 
-const Window gUnknown_80E6E7C = {
+const WindowTemplate gUnknown_80E6E7C = {
    0,
    0x03,
    0x00, 0x00,
@@ -31,7 +31,7 @@ const Window gUnknown_80E6E7C = {
    NULL
 };
 
-const Window gUnknown_80E6E94 = {
+const WindowTemplate gUnknown_80E6E94 = {
    0,
    0x03,
    0x05, 0x09,

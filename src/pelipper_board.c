@@ -20,7 +20,7 @@
 
 EWRAM_INIT struct unkStruct_203B308 *gPelipperBoard = {NULL};
 
-const Window gUnknown_80E0330 =
+const WindowTemplate gUnknown_80E0330 =
 {
     0,
     0x03,
@@ -30,7 +30,7 @@ const Window gUnknown_80E0330 =
     NULL
 };
 
-const Window gUnknown_80E0348 =
+const WindowTemplate gUnknown_80E0348 =
 {
     0,
     0x03,
@@ -40,7 +40,7 @@ const Window gUnknown_80E0348 =
     NULL
 };
 
-const Window gUnknown_80E0360 =
+const WindowTemplate gUnknown_80E0360 =
 {
     0,
     0x04,
@@ -50,7 +50,7 @@ const Window gUnknown_80E0360 =
     NULL
 };
 
-const Window gUnknown_80E0378 =
+const WindowTemplate gUnknown_80E0378 =
 {
     0,
     0x04,

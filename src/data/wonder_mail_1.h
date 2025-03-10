@@ -40,7 +40,7 @@ const MenuItem gUnknown_80DDAA0[] = {
     {NULL, 10},
 };
 
-const Window gUnknown_80DDACC =
+const WindowTemplate gUnknown_80DDACC =
 {
     0,
     0x03,
@@ -50,7 +50,7 @@ const Window gUnknown_80DDACC =
     NULL
 };
 
-const Window gUnknown_80DDAE4 =
+const WindowTemplate gUnknown_80DDAE4 =
 {
     0,
     0x03,

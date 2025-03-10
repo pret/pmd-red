@@ -94,7 +94,7 @@ gUnknown_202EDC0: /* 202EDC0 (sub_803E250 - sub_80462AC) */
 	.space 0x8
 gDungeonBrightness: /* 202EDC8 (sub_803E250 - sub_8086794) */
 	.space 0x4
-gUnknown_202EDCC: /* 202EDCC (sub_803E490 - sub_807D148) */
+gDungeonFramesCounter: /* 202EDCC (sub_803E490 - sub_807D148) */
 	.space 0x4
 gUnknown_202EDD0: /* 202EDD0 (sub_803E250 - sub_8052210) */
 	.space 0x4
@@ -114,7 +114,7 @@ gUnknown_202EDFC: /* 202EDFC (sub_803F27C - sub_803F878) */
 gUnknown_202EE0C: /* 202EE0C (sub_80694C0 - sub_806B8CC) */
 	.space 0x4
 
-gUnknown_202EE10: /* 202EE10 (sub_803EC94 - sub_8083CE0) */
+gDungeonMenu: /* 202EE10 (sub_803EC94 - sub_8083CE0) */
 	.space 0x28
 
 gUnknown_202EE38: /* 202EE38 (sub_8063834) */
@@ -125,9 +125,9 @@ gUnknown_202EE39: /* 202EE39 (sub_8060E38) */
 gUnknown_202EE3A: /* 202EE3A (sub_8060E38 - sub_8065DBC) */
 	.space 0xA
 
-gUnknown_202EE44: /* 202EE44 (sub_8044EC8 - sub_80647F0) */
+gDungeonSubMenu: /* 202EE44 (sub_8044EC8 - sub_80647F0) */
 	.space 0x28
-gUnknown_202EE6C: /* 202EE6C (sub_8044F5C - sub_8067A80) */
+gDungeonSubMenuItemsCount: /* 202EE6C (sub_8044F5C - sub_8067A80) */
 	.space 0x4
 
 gUnknown_202EE70: /* 202EE70 (sub_804513C - sub_80828E0) */
@@ -139,33 +139,16 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
     .include "src/dungeon_generation.o"
     .include "src/dungeon_message.o"
     .include "src/dungeon_move.o"
-    .include "src/code_805D8C8_1.o"
-
-gUnknown_202F268: /* 202F268 (sub_8062500) */
-	.space 0x8
-gUnknown_202F270: /* 202F270 (sub_8060E38 - sub_8061A38) */
-	.space 0x8
-
-gUnknown_202F278: /* 202F278 (sub_80639E4) */
-	.space 0x60
-
-gUnknown_202F2D8: /* 202F2D8 (sub_8062F90 - sub_8064310) */
-	.space 0x8
-
-gUnknown_202F2E0: /* 202F2E0 (sub_8064BE0 - sub_8065250) */
-	.space 0x8
-
-gUnknown_202F2E8: /* 202F2E8 (sub_8064D74 - sub_8065B3C) */
-	.space 0x10
-
-gUnknown_202F2F8: /* 202F2F8 (sub_8065FB4 - sub_8066358) */
+    .include "src/dungeon_main.o"
 	.space 0x4
-gUnknown_202F2FC: /* 202F2FC (sub_8065FB4 - sub_8066358) */
+    .include "src/dungeon_menu_items.o"
 	.space 0x4
-
-gUnknown_202F300: /* 202F300 (sub_8066434) */
-	.space 0x8
-
+    .include "src/dungeon_menu_team.o"
+	.space 0x4
+    .include "src/dungeon_menu_moves.o"
+	.space 0x4
+    .include "src/dungeon_menu_others.o"
+    .include "src/dungeon_menu_recruitment.o"
     .include "src/code_8066D04.o"
     .include "src/dungeon_movement.o"
     .include "src/code_80718D8.o"

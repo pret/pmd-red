@@ -20,7 +20,7 @@ static void sub_80861EC(Entity *);
 
 void sub_800EE5C(s32);
 void sub_800EF64();
-void sub_803E46C(s32);
+void DungeonRunFrameActions(s32);
 s32 sub_800E700(s32);
 void sub_800569C(DungeonPos *, axdata *, u8);
 void sub_8085F44(s32);
@@ -90,7 +90,7 @@ s32 sub_80861F8(s32 param_1,Entity *param_2,bool32 param_3)
 
     sub_800EE5C(param_1Copy2);
     sub_800EF64();
-    sub_803E46C(0x46);
+    DungeonRunFrameActions(0x46);
     info = GetEntInfo(param_2);
     pos.x = 0;
     pos.y = 0;

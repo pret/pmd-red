@@ -40,11 +40,11 @@ void CreatePartnerSelectionMenu(s16 starterID)
     gUnknown_203B404->s18.s0.windows.id[2] = gUnknown_80F4278;
     gUnknown_203B404->s18.s0.windows.id[3] = gUnknown_80F4278;
 
-    gUnknown_203B404->s18.s0.unk38->unk14 = &gUnknown_203B404->s18.unk9C;
+    gUnknown_203B404->s18.s0.unk38->header = &gUnknown_203B404->s18.unk9C;
 
-    gUnknown_203B404->s18.unk9C.f0 = 1;
-    gUnknown_203B404->s18.unk9C.f1 = 0;
-    gUnknown_203B404->s18.unk9C.f2 = 6;
+    gUnknown_203B404->s18.unk9C.count = 1;
+    gUnknown_203B404->s18.unk9C.currId = 0;
+    gUnknown_203B404->s18.unk9C.width = 6;
     gUnknown_203B404->s18.unk9C.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B404->s18.s0.windows, TRUE, TRUE);

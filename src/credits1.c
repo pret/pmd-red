@@ -8,8 +8,8 @@
 
 static EWRAM_INIT Credits1Work *sCredits1Work = {NULL};
 
-extern const Window gUnknown_80E4A10;
-extern const Window gUnknown_80E4A28;
+extern const WindowTemplate gUnknown_80E4A10;
+extern const WindowTemplate gUnknown_80E4A28;
 extern const u32 gUnknown_80E4A40[];
 extern const CreditsData* gCreditsTable[27];
 

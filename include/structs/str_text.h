@@ -2,14 +2,14 @@
 #define GUARD_STR_TEXT_H
 
 // size: 0x48
-typedef struct UnkTextStruct1
+typedef struct Window
 {
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
+    s16 x;
+    s16 y;
+    s16 width;
+    s16 height;
     s16 unk8;
-    u32 unkC;
+    s32 type;
     u32 unk10;
     u32 unk14;
     u32 *unk18;
@@ -26,21 +26,21 @@ typedef struct UnkTextStruct1
     u8 unk44;
     bool8 unk45;
     u8 unk46;
-} UnkTextStruct1;
+} Window;
 
 // size: 0x4
 typedef struct WindowHeader
 {
-    /* 0x0 */ u8 f0;
-    /* 0x1 */ u8 f1;
-    /* 0x2 */ u8 f2;
+    /* 0x0 */ u8 count; // How many headers there are, it's used for windows which can be scrolled left/right
+    /* 0x1 */ u8 currId; // Id of the current header
+    /* 0x2 */ u8 width;
     /* 0x3 */ u8 f3;
 } WindowHeader;
 
 #include "structs/str_position.h"
 
 // size: 0x18
-typedef struct Window
+typedef struct WindowTemplate
 {
     u8 unk0;
     /* 0x4 */ s32 type;
@@ -49,30 +49,27 @@ typedef struct Window
     /* 0xE */ s16 height;
     s16 unk10; // In most cases it's the same as height. If it's smaller than height, the window may look glitchy. Maybe something with tile allocation/how the window is filled?
     s16 unk12;
-    const WindowHeader *unk14;
-} Window;
-
-#define WINDOW_DUMMY (Window) { .unk0 = 0, .type = WINDOW_TYPE_NORMAL, .pos = { .x = 0, .y = 0 }, .width = 0, .height = 0, .unk10 = 0, .unk12 = 0, .unk14 = NULL }
+    const WindowHeader *header;
+} WindowTemplate;
 
 #define WINDOW_TYPE_0                   0
 #define WINDOW_TYPE_WITHOUT_BORDER      1
-//#define WINDOW_TYPE_2                   2
+#define WINDOW_TYPE_2                   2
 #define WINDOW_TYPE_NORMAL              3
-//#define WINDOW_TYPE_4                   4
+#define WINDOW_TYPE_4                   4
 #define WINDOW_TYPE_FILL_TRANSPARENT    5
 #define WINDOW_TYPE_WITH_HEADER         6
 #define WINDOW_TYPE_7                   7
 
 #define MAX_WINDOWS 4
 
+// All fields are zeroed out except for type which is set to WINDOW_TYPE_NORMAL.
+#define WINDOW_DUMMY (Window) { .unk0 = 0, .type = WINDOW_TYPE_NORMAL, .pos = { .x = 0, .y = 0 }, .width = 0, .height = 0, .unk10 = 0, .unk12 = 0, .header = NULL }
+
 // size: 0x60
-typedef struct Windows
+typedef struct WindowTemplates
 {
-    /* 0x0 */ Window id[MAX_WINDOWS];
-    // Something ugly, so that sub_805FD74 could match weird compiler memcpy/stack initialization
-    #ifndef NONMATCHING
-    u8 fakeMatch[0];
-    #endif // NONMATCHING
-} Windows;
+    /* 0x0 */ sWindowTemplate id[MAX_WINDOWS];
+} WindowTemplates;
 
 #endif // GUARD_STR_TEXT_H
