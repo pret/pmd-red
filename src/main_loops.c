@@ -362,7 +362,7 @@ static void LoadTitleScreen(void)
 "_08000710: .4byte 0x00005b20\n"
 "_08000714: .4byte gTitleMenuFileArchive\n"
 "_08000718: .4byte sTitlePaletteFile\n"
-"_0800071C: .4byte gUnknown_202B038\n"
+"_0800071C: .4byte gBgTilemaps\n"
 "_08000720: .4byte 0x06008000\n"
 "_08000724: .4byte 0x00004b20");
 }
