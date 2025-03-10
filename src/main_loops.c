@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/bg_music.h"
 #include "constants/main_menu.h"
 #include "structs/str_dungeon_8042F6C.h"
@@ -61,17 +62,7 @@ static EWRAM_INIT PersonalityRelated sPersonalityRelated_203B040 = {
     .PartnerNick = {""},
 };
 
-extern const u8 gPMDBuildVersion[];
-extern const u8 gSaveTextYourAdventureHasBeenSaved[];
-extern const u8 gSaveTextYourAdventureHasBeenSavedLong[];
-extern const u8 gSaveTextFailed[];
-extern const u8 gSaveTextTheDataCouldNotBeWritten[];
-extern const u8 gSaveTextQuicksaving[];
-extern const u8 gSaveTextError[];
-extern const u8 gSaveTextCantResume[];
-extern const u8 gSaveTextMayNotResume[];
-extern const unkTalkTable gTalkKindTable[];
-extern const unkTalkTable gBaseKindTable[];
+#include "data/main_loops.h"
 
 static void LoadTitleScreen(void);
 static void NDS_LoadOverlay_GroundMain();
@@ -113,7 +104,7 @@ void GameLoop(void)
     sub_800CD64(0x8000, FALSE);
     sub_8012284();
     InitializeGameOptions(TRUE);
-    SetWindowTitle(gPMDBuildVersion);
+    SetWindowTitle(sPMDBuildVersion);
     sub_800DAAC();
     SetSavingIconCoords(NULL);
 
@@ -366,8 +357,8 @@ static void LoadTitleScreen(void)
 "	pop {r0}\n"
 "	bx r0\n"
 "	.align 2, 0\n"
-"_08000708: .4byte gLoadScreenBackgroundFileNames\n"
-"_0800070C: .4byte gLoadScreenBackgroundPaletteFileNames\n"
+"_08000708: .4byte sLoadScreenBackgroundFileNames\n"
+"_0800070C: .4byte sLoadScreenBackgroundPaletteFileNames\n"
 "_08000710: .4byte 0x00005b20\n"
 "_08000714: .4byte gTitleMenuFileArchive\n"
 "_08000718: .4byte sTitlePaletteFile\n"
@@ -407,7 +398,7 @@ void QuickSave(u32 mode)
     SetCharacterMask(3);
     sub_8005838(NULL, 0);
     sub_80060EC();
-    CreateDialogueBoxAndPortrait(gSaveTextQuicksaving, 0, 0, 0x20);
+    CreateDialogueBoxAndPortrait(sSaveTextQuicksaving, 0, 0, 0x20);
 
     while (TRUE) {
         xxx_update_stuff(0);
@@ -442,7 +433,7 @@ void QuickSave(u32 mode)
                     switch (mode) {
                         case 1:
                         case 3: {
-                            CreateDialogueBoxAndPortrait(gSaveTextYourAdventureHasBeenSaved, 0, 0, 0x321);
+                            CreateDialogueBoxAndPortrait(sSaveTextYourAdventureHasBeenSaved, 0, 0, 0x321);
                             counter = 60;
                             saveStatus = SAVE_NOT_WRTTEN;
                             break;
@@ -450,7 +441,7 @@ void QuickSave(u32 mode)
                         case 0:
                         case 2:
                         default: {
-                            CreateDialogueBoxAndPortrait(gSaveTextYourAdventureHasBeenSavedLong, 0, 0, 0x321);
+                            CreateDialogueBoxAndPortrait(sSaveTextYourAdventureHasBeenSavedLong, 0, 0, 0x321);
                             counter = 60;
                             saveStatus = SAVE_NOT_WRTTEN;
                             break;
@@ -458,11 +449,11 @@ void QuickSave(u32 mode)
                     }
                 }
                 else if (saveStatus == SAVE_NOT_WRTTEN) {
-                    CreateDialogueBoxAndPortrait(gSaveTextTheDataCouldNotBeWritten, 0, 0, 0);
+                    CreateDialogueBoxAndPortrait(sSaveTextTheDataCouldNotBeWritten, 0, 0, 0);
                     saveStatus = SAVE_UNK3;
                 }
                 else {
-                    CreateDialogueBoxAndPortrait(gSaveTextFailed, 0, 0, 0x301);
+                    CreateDialogueBoxAndPortrait(sSaveTextFailed, 0, 0, 0x301);
                     saveStatus = SAVE_FAILED;
                 }
                 break;
@@ -520,22 +511,22 @@ void sub_80008C0(u32 errorKind)
 
     switch (errorKind) {
         case 0: {
-            CreateDialogueBoxAndPortrait(gSaveTextError, 0, 0, 0x20);
+            CreateDialogueBoxAndPortrait(sSaveTextError, 0, 0, 0x20);
             saveStatus = SAVE_FAILED;
             break;
         }
         case 1: {
-            CreateDialogueBoxAndPortrait(gSaveTextCantResume, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sSaveTextCantResume, 0, 0, 0x301);
             saveStatus = SAVE_NOT_WRTTEN;
             break;
         }
         case 2: {
-            CreateDialogueBoxAndPortrait(gSaveTextMayNotResume, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sSaveTextMayNotResume, 0, 0, 0x301);
             saveStatus = SAVE_NOT_WRTTEN;
             break;
         }
         case 3: {
-            CreateDialogueBoxAndPortrait(gSaveTextMayNotResume, 0, 0, 0x301);
+            CreateDialogueBoxAndPortrait(sSaveTextMayNotResume, 0, 0, 0x301);
             saveStatus = SAVE_NOT_WRTTEN;
             break;
         }
@@ -1331,7 +1322,7 @@ void sub_8001064(void)
     }
 
     if (sPersonalityRelated_203B040.StarterID != MONSTER_NONE) {
-        psVar2 = &gBaseKindTable[0];
+        psVar2 = &sBaseKindTable[0];
         while (psVar2->species != MONSTER_NONE && sPersonalityRelated_203B040.StarterID != psVar2->species) {
             psVar2++;
         }
@@ -1339,7 +1330,7 @@ void sub_8001064(void)
     }
 
     if (sPersonalityRelated_203B040.PartnerID != MONSTER_NONE) {
-        psVar2 = &gTalkKindTable[0];
+        psVar2 = &sTalkKindTable[0];
         while (psVar2->species != MONSTER_NONE && sPersonalityRelated_203B040.PartnerID != psVar2->species) {
             psVar2++;
         }

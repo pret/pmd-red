@@ -400,7 +400,7 @@ SECTIONS {
     .rodata :
     ALIGN(4)
     {
-        data/data_code_2.o(.rodata);
+        src/main_loops.o(.rodata);
         data/data.o(.rodata);
         src/memory.o(.rodata);
         data/data1.o(.rodata);
