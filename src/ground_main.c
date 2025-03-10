@@ -5,6 +5,8 @@
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
+#include "code_80958E8.h"
+#include "code_8099360.h"
 #include "code_80A26CC.h"
 #include "debug.h"
 #include "event_flag.h"
@@ -60,12 +62,10 @@ extern void sub_809B614();
 extern void sub_809CA20();
 extern void sub_80A6E80();
 extern void sub_8099BE4();
-extern void sub_8099744();
 extern void nullsub_120();
 extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();
-extern void sub_8099750();
 extern void sub_80A6E68();
 extern void GroundMap_Action();
 extern void nullsub_124();
@@ -75,8 +75,6 @@ extern void GroundEffect_Action();
 
 extern void sub_809CB8C();
 extern void sub_8098CC8();
-extern void GeneratePelipperJobs();
-extern void sub_80961B4();
 extern void ClearAllItems_8091FB4();
 extern u8 sub_809C730();
 extern void sub_8095494(WonderMailSub *param_1, u8 index);

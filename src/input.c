@@ -2,7 +2,7 @@
 #include "code_800C9CC.h"
 #include "input.h"
 
-EWRAM_DATA Inputs gRealInputs = {0}; // 20255F0
+EWRAM_DATA Inputs gRealInputs = {0}; // GBA=20255F0 | NDS=20F5CC0
 static EWRAM_DATA UnusedInputStruct sUnusedInputsRelated = {0}; // 2025600
 static EWRAM_DATA u32 sUnusedScrambledInputJunk[3] = {0}; // 202562C
 static EWRAM_DATA Inputs sBufferedInputs = {0}; // 2025638

@@ -1,7 +1,6 @@
 	.align 2
 	
-.include "src/code_2.o"
-.include "src/code.o"
+.include "src/main_loops.o"
 .include "src/other_random.o"
 .include "src/sprite.o"
 .include "src/code_800558C.o"

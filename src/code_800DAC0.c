@@ -5,6 +5,7 @@
 #include "code_80118A4.h"
 #include "code_800E9A8.h"
 #include "file_system.h"
+#include "main_loops.h"
 #include "memory.h"
 #include "dungeon_map.h"
 
@@ -17,7 +18,6 @@ struct unkStruct_800F18C
 };
 
 extern s32 sub_800E2C0(u32);
-extern s32 sub_8000728(void);
 extern u32 sub_800E900(void);
 extern void sub_8009BE4(void);
 extern void sub_800F204(void);

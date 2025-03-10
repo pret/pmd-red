@@ -58,9 +58,9 @@ void ShowDungeonStairsMenu(Entity *mon)
                     .unk12 = 0,
                     .header = &header,
                 },
-                [1] = WINDOW_DUMMY,
-                [2] = WINDOW_DUMMY,
-                [3] = WINDOW_DUMMY,
+                [1] = WIN_TEMPLATE_DUMMY,
+                [2] = WIN_TEMPLATE_DUMMY,
+                [3] = WIN_TEMPLATE_DUMMY,
             }
         };
 
@@ -178,9 +178,9 @@ static void ShowStairsDescription(DungeonPos *pos)
                     .unk12 = 0,
                     .header = &header,
                 },
-                [1] = WINDOW_DUMMY,
-                [2] = WINDOW_DUMMY,
-                [3] = WINDOW_DUMMY,
+                [1] = WIN_TEMPLATE_DUMMY,
+                [2] = WIN_TEMPLATE_DUMMY,
+                [3] = WIN_TEMPLATE_DUMMY,
             }
         };
         s32 i, statusesCount;

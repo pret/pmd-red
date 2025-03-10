@@ -19,7 +19,7 @@ void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
     s32 i;
     WindowTemplates windows = {
         .id = {
-            [0] = WINDOW_DUMMY,
+            [0] = WIN_TEMPLATE_DUMMY,
             [1] = {
                 .type = WINDOW_TYPE_NORMAL,
                 .pos = {22, 4},
@@ -27,8 +27,8 @@ void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
                 .height = 4,
                 .unk10 = 4,
             },
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
 

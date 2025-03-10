@@ -185,9 +185,9 @@ static const struct WindowTemplates gUnknown_80F62B0 =
             .unk12 = 0,
             .header = NULL,
         },
-        [1] = WINDOW_DUMMY,
-        [2] = WINDOW_DUMMY,
-        [3] = WINDOW_DUMMY,
+        [1] = WIN_TEMPLATE_DUMMY,
+        [2] = WIN_TEMPLATE_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 
@@ -203,9 +203,9 @@ static const struct WindowTemplates gUnknown_80F6310 =
             .unk12 = 0,
             .header = NULL,
         },
-        [1] = WINDOW_DUMMY,
-        [2] = WINDOW_DUMMY,
-        [3] = WINDOW_DUMMY,
+        [1] = WIN_TEMPLATE_DUMMY,
+        [2] = WIN_TEMPLATE_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 
@@ -239,7 +239,7 @@ static const struct WindowTemplates gUnknown_80F6370 =
             .unk12 = 0,
             .header = NULL,
         },
-        [3] = WINDOW_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 
@@ -255,9 +255,9 @@ static const struct WindowTemplates gUnknown_80F63D0 =
             .unk12 = 2,
             .header = NULL,
         },
-        [1] = WINDOW_DUMMY,
-        [2] = WINDOW_DUMMY,
-        [3] = WINDOW_DUMMY,
+        [1] = WIN_TEMPLATE_DUMMY,
+        [2] = WIN_TEMPLATE_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 
@@ -502,7 +502,7 @@ s32 sub_803EF90(s32 a0, u8 a1)
         bitsNo = 0;
         for (id = 0; id < 4; id++) {
             u32 *dst = mainDst;
-            const u32 *src = (u32 *)((&gUnknown_202EC9C->data[4] + r12[id] * 32));
+            const u32 *src = (u32 *)((&((u8 *)gUnknown_202EC9C->data)[4] + r12[id] * 32));
 
             for (i = 0; i < 8; i++) {
                 u32 toOr1, toOr2;
@@ -534,13 +534,13 @@ s32 sub_803EF90(s32 a0, u8 a1)
     if (a0 > 999) a0 = 999;
     if (a0 < -999) a0 = -999;
 
-    r2 = (u32 *)(gUnknown_202EC9C->data + 0x184);
+    r2 = (u32 *)((u8 *)gUnknown_202EC9C->data + 0x184);
     if (a1) {
         if (a0 > 0) {
-            r2 = (u32 *)(gUnknown_202EC9C->data + 0x144);
+            r2 = (u32 *)((u8 *)gUnknown_202EC9C->data + 0x144);
         }
         else if (a0 < 0) {
-            r2 = (u32 *)(gUnknown_202EC9C->data + 0x164);
+            r2 = (u32 *)((u8 *)gUnknown_202EC9C->data + 0x164);
             a0 = -a0;
         }
     }
@@ -596,7 +596,7 @@ s32 sub_803EF90(s32 a0, u8 a1)
         }
 
         if (arrId == 9 && unkBool) {
-            const u32 *src = (u32 *)(&gUnknown_202EC9C->data[4]);
+            const u32 *src = (u32 *)(&((u8 *)gUnknown_202EC9C->data)[4]);
             u32 *dst = mainDst;
             for (i = 0; i < 8; i++) {
                 u32 toOr1, toOr2;
@@ -626,7 +626,7 @@ s32 sub_803EF90(s32 a0, u8 a1)
     }
 
     {
-        const u32 *src = (u32 *)(&gUnknown_202EC9C->data[4] + (a0 * 32));
+        const u32 *src = (u32 *)(&((u8 *)gUnknown_202EC9C->data)[4] + (a0 * 32));
         u32 *dst = mainDst;
         for (i = 0; i < 8; i++) {
             u32 toOr1, toOr2;

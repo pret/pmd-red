@@ -28,12 +28,13 @@ typedef struct Window
     u8 unk46;
 } Window;
 
+// size: 0x4
 typedef struct WindowHeader
 {
-    u8 count; // How many headers there are, it's used for windows which can be scrolled left/right
-    u8 currId; // Id of the current header
-    u8 width;
-    u8 f3;
+    /* 0x0 */ u8 count; // How many headers there are, it's used for windows which can be scrolled left/right
+    /* 0x1 */ u8 currId; // Id of the current header
+    /* 0x2 */ u8 width;
+    /* 0x3 */ u8 f3;
 } WindowHeader;
 
 #include "structs/str_position.h"
@@ -42,17 +43,14 @@ typedef struct WindowHeader
 typedef struct WindowTemplate
 {
     u8 unk0;
-    s32 type;
-    DungeonPos pos;
-    s16 width;
-    s16 height;
+    /* 0x4 */ s32 type;
+    /* 0x8 */ DungeonPos pos;
+    /* 0xC */ s16 width;
+    /* 0xE */ s16 height;
     s16 unk10; // In most cases it's the same as height. If it's smaller than height, the window may look glitchy. Maybe something with tile allocation/how the window is filled?
     s16 unk12;
     const WindowHeader *header;
 } WindowTemplate;
-
-// All fields are zeroed out except for type which is set to WINDOW_TYPE_NORMAL.
-#define WINDOW_DUMMY (WindowTemplate) {.unk0 = 0, .type = WINDOW_TYPE_NORMAL, .width = 0, .pos = {0, 0}, .height = 0, .unk10 = 0, .unk12 = 0, .header = NULL}
 
 #define WINDOW_TYPE_0                   0
 #define WINDOW_TYPE_WITHOUT_BORDER      1
@@ -65,8 +63,13 @@ typedef struct WindowTemplate
 
 #define MAX_WINDOWS 4
 
-typedef struct WindowTemplates {
-    WindowTemplate id[MAX_WINDOWS];
+// All fields are zeroed out except for type which is set to WINDOW_TYPE_NORMAL.
+#define WIN_TEMPLATE_DUMMY (WindowTemplate) { .unk0 = 0, .type = WINDOW_TYPE_NORMAL, .pos = { .x = 0, .y = 0 }, .width = 0, .height = 0, .unk10 = 0, .unk12 = 0, .header = NULL }
+
+// size: 0x60
+typedef struct WindowTemplates
+{
+    /* 0x0 */ WindowTemplate id[MAX_WINDOWS];
 } WindowTemplates;
 
 #endif // GUARD_STR_TEXT_H

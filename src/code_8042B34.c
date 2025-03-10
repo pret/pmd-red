@@ -360,7 +360,8 @@ extern const s16 gUnknown_80F6850[4];
 extern OpenedFile *gDungeonNameBannerPalette;
 
 // This functions is the main 'loop' when the player is in a Dungeon. It runs from the moment the player enters a dungeon, until they leave(by completing or by fainting).
-void RunDungeon(struct UnkStruct_RunDungeon *r8)
+// arm9.bin::0206A848
+void RunDungeon(UnkStruct_RunDungeon *r8)
 {
     bool8 check;
     Entity *leader;

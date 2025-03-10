@@ -949,8 +949,8 @@ static const WindowTemplates gUnknown_8106DC8 = {
             .unk12 = 0,
             .header = NULL
         },
-        [2] = WINDOW_DUMMY,
-        [3] = WINDOW_DUMMY,
+        [2] = WIN_TEMPLATE_DUMMY,
+        [3] = WIN_TEMPLATE_DUMMY,
     }
 };
 

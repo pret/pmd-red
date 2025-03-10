@@ -493,9 +493,9 @@ static void PrintOthersMenuOptions(void)
                 .unk12 = 0,
                 .header = &header,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
 
@@ -566,9 +566,9 @@ static void PrintQuickSaveMenuOptions(void)
                 .unk12 = 0,
                 .header = &header,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
 
@@ -619,9 +619,9 @@ static void PrintGameOptions(void)
                 .unk12 = 0,
                 .header = &header,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
 
@@ -674,9 +674,9 @@ static void PrintDungeonOptions(void)
                 .unk12 = 0,
                 .header = &header,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
     s32 mapOptionUnderscoreWidths[] = {16, 25, 27};
@@ -765,9 +765,9 @@ static void PrintOthersOptions(void)
                 .unk12 = 0,
                 .header = &header,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
     s32 underscoreWidths[] = {19, 17, 25};
@@ -953,9 +953,9 @@ static void PrintHintsMenu(void)
                 .unk12 = 0,
                 .header = &header,
             },
-            [1] = WINDOW_DUMMY,
-            [2] = WINDOW_DUMMY,
-            [3] = WINDOW_DUMMY,
+            [1] = WIN_TEMPLATE_DUMMY,
+            [2] = WIN_TEMPLATE_DUMMY,
+            [3] = WIN_TEMPLATE_DUMMY,
         }
     };
 
@@ -1008,9 +1008,9 @@ static void ShowChosenHintWindow(s32 hintId)
                     .unk12 = 0,
                     .header = &header,
                 },
-                [1] = WINDOW_DUMMY,
-                [2] = WINDOW_DUMMY,
-                [3] = WINDOW_DUMMY,
+                [1] = WIN_TEMPLATE_DUMMY,
+                [2] = WIN_TEMPLATE_DUMMY,
+                [3] = WIN_TEMPLATE_DUMMY,
             }
         };
 

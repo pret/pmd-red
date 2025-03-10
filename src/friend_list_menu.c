@@ -23,6 +23,7 @@
 #include "menu_input.h"
 #include "moves.h"
 #include "pokemon.h"
+#include "pokemon_3.h"
 #include "text.h"
 
 EWRAM_INIT unkStruct_203B2B4 *gUnknown_203B2B4 = {NULL};
@@ -30,8 +31,6 @@ EWRAM_INIT unkStruct_203B2B4 *gUnknown_203B2B4 = {NULL};
 #include "data/friend_list_menu.h"
 
 extern u8 sub_8002658(s16);
-extern void sub_808ED00(void);
-
 extern s32 sub_80144A4(s32 *);
 
 void SetFriendListMenuState(s32);

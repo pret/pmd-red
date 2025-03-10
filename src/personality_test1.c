@@ -1,7 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
 #include "bg_palette_buffer.h"
-#include "code_2.h"
 #include "string_format.h"
 #include "code_801602C.h"
 #include "code_8094D28.h"
@@ -9,6 +8,7 @@
 #include "constants/emotions.h"
 #include "game_options.h"
 #include "input.h"
+#include "main_loops.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "personality_test1.h"
@@ -39,7 +39,7 @@ enum
     PERSONALITY_TEST_END,
 };
 
-static EWRAM_INIT struct PersonalityTestTracker *sPersonalityTestTracker = {NULL};
+static EWRAM_INIT PersonalityTestTracker *sPersonalityTestTracker = {NULL};
 
 #include "data/personality_test1.h"
 
@@ -65,7 +65,7 @@ static void UpdateNatureTotals(void);
 
 bool8 CreateTestTracker(void)
 {
-    sPersonalityTestTracker = MemoryAlloc(sizeof(struct PersonalityTestTracker), 8);
+    sPersonalityTestTracker = MemoryAlloc(sizeof(PersonalityTestTracker), 8);
     sub_801317C(&sPersonalityTestTracker->input);
     InitializeTestStats();
     sub_8099690(1);

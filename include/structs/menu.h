@@ -45,7 +45,7 @@ typedef struct MenuInputStruct
 typedef struct MenuItem
 {
     const u8 *text;
-    s32 menuAction; // action??
+    s32 menuAction;
 } MenuItem;
 
 // size: 0x50

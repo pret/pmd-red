@@ -6,7 +6,7 @@
 #include "structs/str_pokemon.h"
 #include "structs/str_wonder_mail.h"
 
-struct UnkStruct_RunDungeon
+typedef struct UnkStruct_RunDungeon
 {
     u8 unk0;
     DungeonLocation unk4;
@@ -28,9 +28,9 @@ struct UnkStruct_RunDungeon
     u8 unk7E;
     DungeonLocation unk80;
     WonderMailSub unk84;
-};
+} UnkStruct_RunDungeon;
 
-void RunDungeon(struct UnkStruct_RunDungeon *r8);
+// TODO: This func should not be in a structs include file
+void RunDungeon(UnkStruct_RunDungeon *r8);
 
 #endif // GUARD_STR_DUNGEON_8042F6C_H
-

@@ -30,7 +30,7 @@ u32 sub_800CDC8(void)
     return gUnknown_202D800;
 }
 
-void SetWindowTitle(u8 *title)
+void SetWindowTitle(const u8 *title)
 {
 }
 
