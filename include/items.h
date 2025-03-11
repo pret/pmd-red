@@ -6,6 +6,7 @@
 #include "structs/str_pokemon.h"
 #include "structs/subStruct_203B240.h"
 
+extern ItemDataEntry *gItemParametersData;
 extern TeamInventory *gTeamInventoryRef;
 
 void LoadItemParameters(void);
@@ -25,7 +26,7 @@ s32 GetStackSellPrice(Item *param_1);
 s32 GetItemBuyPrice(u8 id);
 s32 GetItemSellPrice(u8 id);
 s32 GetItemOrder(u8 id);
-u8 GetItemPalette(u8 id);
+s32 GetItemPalette(u8 id);
 u32 GetItemActionType(u8 id);
 u32 GetSpawnAmountRange(u8 id, u32 r1);
 u8 *GetItemDescription(u8 id);

@@ -28,7 +28,7 @@ extern struct unkStruct_8090F58 gUnknown_80F699C;
 extern struct unkStruct_8090F58 gUnknown_80F69A8;
 extern struct unkStruct_8090F58 gUnknown_80F6990;
 
-extern bool8 sub_80461C8(DungeonPos *, u32);
+bool8 sub_80461C8(DungeonPos *, bool8);
 void sub_8045BF8(u8 *, Item *);
 extern u32 sub_803D73C(u32);
 bool8 sub_80460F8(DungeonPos *, Item *, bool8);
@@ -380,3 +380,108 @@ bool8 sub_80460F8(DungeonPos *pos, Item *item, bool8 a2)
     gDungeon->numItems = count;
     return TRUE;
 }
+
+bool8 sub_80461C8(DungeonPos *pos, bool8 a2)
+{
+    s32 i, count;
+    Item *item;
+    Tile *tile = GetTileMut(pos->x, pos->y);
+    Entity *tileObject = tile->object;
+    if (tileObject == NULL || GetEntityType(tileObject) != ENTITY_ITEM)
+        return FALSE;
+
+    item = GetItemData(tileObject);
+    if ((tile->terrainType & TERRAIN_TYPE_SHOP) && CanSellItem(item->id)) {
+        if (item->flags & ITEM_FLAG_IN_SHOP) {
+            if (a2) {
+                gDungeon->unk644.unk48 -= GetStackBuyPrice(item);
+            }
+        }
+        else {
+            gDungeon->unk644.unk4C -= GetStackSellPrice(item);
+        }
+    }
+
+    tile->object = NULL;
+    tileObject->type = ENTITY_NOTHING;
+
+    count = 0;
+    for (i = 0; i < DUNGEON_MAX_ITEMS; i++) {
+        if (EntityIsValid(gDungeon->items[i])) {
+            count = i + 1;
+        }
+    }
+    gDungeon->numItems = count;
+    return TRUE;
+}
+
+s32 sub_8046298(Item *item)
+{
+    return gItemParametersData[item->id].icon;
+}
+
+extern bool8 sub_8045888(Entity *);
+
+extern SpriteOAM gUnknown_202EDC0;
+extern u8 gUnknown_203B420[];
+extern u8 gUnknown_203B428[];
+
+bool8 sub_80462AC(Entity * entity, u8 a1, u8 a2, u8 a3, u8 a4)
+{
+    s32 x, y, y2;
+    s32 objMode = 0;
+
+    if (!EntityIsValid(entity))
+        return FALSE;
+
+    if (a2) {
+        s32 terrainType = GetTerrainType(GetTile(entity->pos.x, entity->pos.y));
+
+        if (terrainType == TERRAIN_TYPE_WALL)
+            return FALSE;
+        if (terrainType == TERRAIN_TYPE_SECONDARY) {
+            objMode = 1;
+        }
+
+        if (!sub_8045888(entity))
+            return FALSE;
+    }
+
+    x = (entity->pixelPos.x / 256) - gDungeon->unk181e8.cameraPixelPos.x;
+    y = ((entity->pixelPos.y - entity->unk1C.raw) / 256) - gDungeon->unk181e8.cameraPixelPos.y;
+    y2 = ((entity->pixelPos.y / 256) - gDungeon->unk181e8.cameraPixelPos.y) + 8;
+    y2 /= 2;
+
+    if (x >= -32 && y >= -32 && x <= 272 && y <= 192) {
+        s32 tileNum;
+
+        SpriteSetMatrixNum(&gUnknown_202EDC0, 0);
+        if (a1) {
+            tileNum = 0x17;
+            SpriteSetPalNum(&gUnknown_202EDC0, 10);
+        }
+        else {
+            tileNum = sub_8046298(entity->axObj.info.item);
+            if (a3 != 0xFF && tileNum == 0) {
+                tileNum = gUnknown_203B420[a3];
+                SpriteSetMatrixNum(&gUnknown_202EDC0, gUnknown_203B428[a3] * 8);
+            }
+            SpriteSetPalNum(&gUnknown_202EDC0, GetItemPalette(entity->axObj.info.item->id));
+        }
+
+        SpriteSetY(&gUnknown_202EDC0, y);
+        SpriteSetX(&gUnknown_202EDC0, x);
+        SpriteSetObjMode(&gUnknown_202EDC0, objMode);
+        SpriteSetPriority(&gUnknown_202EDC0, 3);
+        SpriteSetTileNum(&gUnknown_202EDC0, 0x1A0 + tileNum * 4);
+        if (!a4) {
+            y2 = 1;
+        }
+        AddSprite(&gUnknown_202EDC0, y2, NULL, NULL);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+//

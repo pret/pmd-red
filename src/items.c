@@ -265,7 +265,7 @@ s32 GetItemOrder(u8 id)
     return gItemParametersData[id].order;
 }
 
-u8 GetItemPalette(u8 id)
+s32 GetItemPalette(u8 id)
 {
     return gItemParametersData[id].palette;
 }
