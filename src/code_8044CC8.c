@@ -5,13 +5,7 @@
 #include "dungeon_generation.h"
 #include "code_8044CC8.h"
 #include "items.h"
-
-// size: 0x8
-typedef struct ItemText
-{
-    u8 *desc;
-    u8 *useText;
-} ItemText;
+#include "structs/str_item_text.h"
 
 // size: 0x8
 typedef struct unkStr_80F7C54
@@ -20,13 +14,10 @@ typedef struct unkStr_80F7C54
     u8 *text;
 } unkStr_80F7C54;
 
-
-
 EWRAM_DATA unkStruct_202EE44 gDungeonSubMenu[10] = {0};
 
 extern s32 gDungeonSubMenuItemsCount;
 
-extern const ItemText gActions[];
 extern u16 gUnknown_80F6964[NUM_ITEM_CATEGORIES];
 extern u8 gUnknown_80F697C[];
 extern u8 *gUnknown_80F7C50[10];
@@ -160,7 +151,7 @@ void sub_8044E24(Entity *entity,int index,u32 unused)
 }
 
 // Similar to sub_8044BA8
-u8 *GetDungeonSubMenuItemString(s32 param_1)
+const u8 *GetDungeonSubMenuItemString(s32 param_1)
 {
     u16 actionId = gDungeonSubMenu[param_1].actionId;
 

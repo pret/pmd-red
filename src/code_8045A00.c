@@ -8,6 +8,7 @@
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
 #include "dungeon_music.h"
+#include "dungeon_map.h"
 #include "dungeon_ai_targeting.h"
 #include "string_format.h"
 #include "items.h"
@@ -16,6 +17,7 @@
 #include "structs/str_dungeon.h"
 #include "trap.h"
 #include "code_80450F8.h"
+#include "structs/str_item_text.h"
 
 extern u8 *gUnknown_80FE6F4[];
 extern u8 *gPickedUpItemToolbox[];
@@ -95,6 +97,8 @@ void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3)
         break;
   }
 }
+
+// FILE SPLIT HERE
 
 void sub_8045BF8(u8 *buffer, Item *item)
 {
@@ -482,6 +486,123 @@ bool8 sub_80462AC(Entity * entity, u8 a1, u8 a2, u8 a3, u8 a4)
     }
 
     return FALSE;
+}
+
+const u8 *sub_80464AC(Item *item)
+{
+    return gActions[GetItemActionType(item->id)].desc;
+}
+
+void sub_804652C(Entity *entity1, Entity *entity2, Item *item, bool8 a3, DungeonPos *pos);
+
+void sub_80464C8(Entity *entity, DungeonPos *pos, Item *item)
+{
+    s32 x, y;
+    Entity itemEntity;
+
+    itemEntity.type = ENTITY_ITEM;
+    itemEntity.unk24 = 0;
+    itemEntity.isVisible = TRUE;
+    itemEntity.unk22 = 0;
+    itemEntity.axObj.info.item = item;
+    itemEntity.pos = *pos;
+
+    x = ((pos->x * 24) + 4) << 8;
+    y = ((pos->y * 24) + 4) << 8;
+    SetEntityPixelPos(&itemEntity, x, y);
+    itemEntity.spawnGenID = 0;
+    sub_804652C(entity, &itemEntity, item, TRUE, NULL);
+}
+
+void sub_8046734(Entity *entity, DungeonPos *pos);
+
+extern void sub_804219C(PixelPos *pos);
+
+extern const u8 *const gUnknown_80FED30;
+extern const DungeonPos gUnknown_80F4468[];
+extern const u8 *const gItemFellOnGround;
+extern const u8 *const gItemLost;
+extern const u8 *const gItemFellOutOfSight;
+extern const u8 *const gItemFellInWater;
+extern const u8 *const gItemBuried;
+
+void sub_804652C(Entity *entity1, Entity *entity2, Item *item, bool8 a3, DungeonPos *pos)
+{
+    DungeonPos localPos;
+    DungeonPos localPos2;
+    s32 i;
+    const Tile *tile = GetTile(entity2->pos.x, entity2->pos.y);
+    Entity *tileObject = tile->object;
+    bool8 var_24 = FALSE;
+
+    if (tileObject != NULL && GetEntityType(tileObject) == ENTITY_TRAP) {
+        sub_8046734(entity2, &entity2->pos);
+        sub_807FE44(&entity2->pos, 1);
+        LogMessageByIdWithPopupCheckUser(entity1, gUnknown_80FED30);
+        if (!ItemExists(item))
+            return;
+    }
+
+    localPos.x = entity2->pos.x;
+    localPos.y = entity2->pos.y;
+    localPos2 = localPos;
+    if (a3) {
+        i = 0;
+    }
+    else {
+        i = 1;
+    }
+
+    while (1) {
+        if (gUnknown_80F4468[i].x == 99) {
+            var_24 = FALSE;
+            break;
+        }
+        localPos.x = entity2->pos.x + gUnknown_80F4468[i].x;
+        localPos.y = entity2->pos.y + gUnknown_80F4468[i].y;
+        tile = GetTile(localPos.x, localPos.y);
+        if (GetTerrainType(tile) != TERRAIN_TYPE_WALL && !(tile->terrainType & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
+            sub_8046734(entity2, &localPos);
+            localPos2 = localPos;
+            if (GetTerrainType(tile) == (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL) || (sub_80460F8(&localPos, item, TRUE))) {
+                var_24 = TRUE;
+            }
+            break;
+        }
+        i++;
+    }
+
+    sub_8045BF8(gFormatBuffer_Items[0], item);
+    if (var_24) {
+        ShowDungeonMapAtPos(localPos.x, localPos.y);
+        switch (GetTerrainType(GetTile(localPos.x, localPos.y))) {
+            case TERRAIN_TYPE_NORMAL:
+                TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemFellOnGround);
+                break;
+            case TERRAIN_TYPE_SECONDARY:
+                TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemFellInWater);
+                break;
+            case TERRAIN_TYPE_WALL:
+                TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemBuried);
+                break;
+            case TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL:
+                TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemFellOutOfSight);
+                break;
+        }
+    }
+    else {
+        PixelPos pixelPos;
+
+        pixelPos.x = X_POS_TO_PIXELPOS(localPos2.x);
+        pixelPos.y = X_POS_TO_PIXELPOS(localPos2.y); // Intentional or a typo(X vs Y)?
+        if (pos != NULL) {
+            pixelPos.x += pos->x << 8;
+            pixelPos.y += pos->y << 8;
+        }
+
+        sub_804219C(&pixelPos);
+        TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemLost);
+    }
 }
 
 //
