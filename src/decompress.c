@@ -438,7 +438,7 @@ UNUSED static bool32 IsATxPCompressed_unused(char *data)
 
 // Is this for sure part of this file?
 
-bool8 StrsDifferent_IgnoreCase(char *strA, char *strB, s32 maxLen)
+bool8 StrsDifferent_IgnoreCase(const char *strA, const char *strB, s32 maxLen)
 {
     s32 i;
 

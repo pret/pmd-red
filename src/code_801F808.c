@@ -19,7 +19,7 @@ struct unkStruct_203B278
     /* 0x8 */ u16 selectedMoveID;
     s32 unkC;
     s32 unk10;
-    struct subStruct_203B240 *unk14[4];
+    const struct StatusText *unk14[MAX_STATUS_TEXTS];
     u32 unk24;
     MenuInputStruct unk28;
     u32 unk5C;
@@ -133,8 +133,6 @@ void sub_801F930(void)
 
 void sub_801F9A4(void)
 {
-    u8 **name;
-
     switch (gUnknown_203B278->state) {
         case 0:
             CallPrepareTextbox_8008C54(gUnknown_203B278->unk5C);
@@ -145,10 +143,9 @@ void sub_801F9A4(void)
         case 1:
             CallPrepareTextbox_8008C54(gUnknown_203B278->unk5C);
             sub_80073B8(gUnknown_203B278->unk5C);
-            name = &(gUnknown_203B278->unk14[gUnknown_203B278->unkC]->pokeName);
-            strcpy(gFormatBuffer_Monsters[0], *name);
+            InlineStrcpy(gFormatBuffer_Monsters[0], gUnknown_203B278->unk14[gUnknown_203B278->unkC]->name);
             PrintFormattedStringOnWindow(0x10,0,gUnknown_80DC310,gUnknown_203B278->unk5C,0); // $m0
-            PrintFormattedStringOnWindow(4,0x10,gUnknown_203B278->unk14[gUnknown_203B278->unkC]->unk4,gUnknown_203B278->unk5C,0);
+            PrintFormattedStringOnWindow(4,0x10,gUnknown_203B278->unk14[gUnknown_203B278->unkC]->desc,gUnknown_203B278->unk5C,0);
             sub_80073E0(gUnknown_203B278->unk5C);
             break;
         case 2:

@@ -1,8 +1,8 @@
 #ifndef GUARD_CODE_8097DD0_H
 #define GUARD_CODE_8097DD0_H
 
-#include "structs/subStruct_203B240.h"
+#include "structs/str_status_text.h"
 
-extern u32 sub_8097DF0(const u8 *, struct subStruct_203B240 **);
+s32 PrepareStatusStringArrays(const char *str, const struct StatusText *statuses[MAX_STATUS_TEXTS]);
 
 #endif // GUARD_CODE_8097DD0_H

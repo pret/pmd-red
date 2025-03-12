@@ -2,7 +2,7 @@
 #define GUARD_IQ_SKILL_INFO_MENU_H
 
 #include "structs/menu.h"
-#include "structs/subStruct_203B240.h"
+#include "structs/str_status_text.h"
 #include "structs/str_text.h"
 
 // size: 0x94
@@ -12,8 +12,7 @@ struct IQSkillInfoMenu
     /* 0x4 */ u8 chosenIQSkill;
     s32 unk8;
     s32 unkC;
-    struct subStruct_203B240 *unk10[2];
-    u8 fill14[0x20 - 0x18];
+    const struct StatusText *unk10[MAX_STATUS_TEXTS];
     u32 unk20;
     u32 unk24;
     WindowTemplates unk28;

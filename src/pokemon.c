@@ -1299,16 +1299,16 @@ void sub_808E490(Move* a1, s32 species)
 
 char* sub_808E4FC(s32 a1)
 {
-    struct subStruct_203B240 *result[4];
-    sub_8097DF0(gFormattedStatusNames[a1], result);
-    return result[0]->pokeName;
+    const struct StatusText *statuses[MAX_STATUS_TEXTS];
+    PrepareStatusStringArrays(gFormattedStatusNames[a1], statuses);
+    return statuses[0]->name;
 }
 
 char* sub_808E51C(s32 a1)
 {
-    struct subStruct_203B240 *result[4];
-    sub_8097DF0(gFormattedStatusNames[a1], result);
-    return result[0]->unk4;
+    const struct StatusText *statuses[MAX_STATUS_TEXTS];
+    PrepareStatusStringArrays(gFormattedStatusNames[a1], statuses);
+    return statuses[0]->desc;
 }
 
 extern const struct FileArchive gDungeonFileArchive;

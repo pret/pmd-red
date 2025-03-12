@@ -305,7 +305,6 @@ SECTIONS {
         src/code_8097504.o(.text);
         src/code_8097670.o(.text);
         src/code_8097DD0.o(.text);
-        asm/code_8097DD0.o(.text);
         src/code_8097F40.o(.text);
         src/exclusive_pokemon.o(.text);
         src/position_util.o(.text);

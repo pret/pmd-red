@@ -21,6 +21,6 @@ void nullsub_16(void);
 // "Yes\0" and "Tes\0" => TRUE
 // "Yes\0" and "y\0" => TRUE
 // "T\0" and "Tes\0" => TRUE
-bool8 StrsDifferent_IgnoreCase(char *strA, char *strB, s32 maxLen);
+bool8 StrsDifferent_IgnoreCase(const char *strA, const char *strB, s32 maxLen);
 
 #endif // GUARD_DECOMPRESS_H

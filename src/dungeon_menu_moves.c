@@ -617,7 +617,7 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
 {
     WindowTemplates windows;
     WindowHeader header;
-    struct subStruct_203B240 *statuses[4];
+    const struct StatusText *statuses[MAX_STATUS_TEXTS];
     s32 i, count, currId;
 
     sub_80140B4(&windows);
@@ -720,16 +720,16 @@ static const WindowHeader sStatusDescriptionHeader = {
     .width = 16,
 };
 
-void ShowStatusDescriptionMenu(struct subStruct_203B240 *status, MenuInputStructSub *menuSub)
+void ShowStatusDescriptionMenu(const struct StatusText *status, MenuInputStructSub *menuSub)
 {
     sub_80140B4(&sMovesMenuWindows);
     sMovesMenuWindows.id[0].header = &sStatusDescriptionHeader;
     DungeonShowWindows(&sMovesMenuWindows, TRUE);
     sub_80073B8(0);
 
-    strcpy(gFormatBuffer_Monsters[0], status->pokeName);
+    strcpy(gFormatBuffer_Monsters[0], status->name);
     PrintFormattedStringOnWindow(16, 0, _("{POKEMON_0}"), 0, '\0');
-    PrintFormattedStringOnWindow(4, 16, status->unk4, 0, '\0');
+    PrintFormattedStringOnWindow(4, 16, status->desc, 0, '\0');
     sub_80073E0(0);
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk20 = 0;

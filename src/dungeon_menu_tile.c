@@ -154,7 +154,7 @@ static void ShowTileDescription(DungeonPos *pos)
         Entity *object;
         Trap *trap;
         bool8 bPress = FALSE;
-        struct subStruct_203B240 *statuses[4];
+        const struct StatusText *statuses[MAX_STATUS_TEXTS];
         MenuInputStructSub menuSub;
         WindowHeader header;
         WindowTemplates windows = {
@@ -196,7 +196,7 @@ static void ShowTileDescription(DungeonPos *pos)
         PrintStringOnWindow(16, 0, trapName, 0, '\0');
         PrintStringOnWindow(8, 24, gTrapDescriptions[trap->id], 0, '\0');
         sub_80073E0(0);
-        statusesCount = sub_8097DF0(gTrapDescriptions[trap->id], statuses);
+        statusesCount = PrepareStatusStringArrays(gTrapDescriptions[trap->id], statuses);
         while (1) {
             if (statusesCount != 0) {
                 ShowStatusDescriptionMenuArrow();

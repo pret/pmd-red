@@ -5,7 +5,7 @@
 #include "constants/move.h"
 #include "constants/move_id.h"
 #include "pokemon.h"
-#include "structs/subStruct_203B240.h"
+#include "structs/str_status_text.h"
 
 // size: 0x8
 typedef struct MoveLearnset
@@ -66,8 +66,8 @@ s32 unk_FindMoveEnabledForAIBefore8_v2(Move *moves, s32 index);
 void unk_FixLinkedMovesSetEnabled4(Move *moves);
 void unk_FixLinkedMovesSetEnabled8(Move *moves);
 void unk_FixLinkedMovesSetEnabled8_v2(Move *moves);
-s32 unk_MoveIDPrintMoveDescription(s32, u16 moveID, s32, struct subStruct_203B240 **);
-s32 unk_PrintMoveDescription(s32 x, Move *move, s32, struct subStruct_203B240 **);
+s32 unk_MoveIDPrintMoveDescription(s32, u16 moveID, s32, const struct StatusText *statuses[MAX_STATUS_TEXTS]);
+s32 unk_PrintMoveDescription(s32 x, Move *move, s32, const struct StatusText *statuses[MAX_STATUS_TEXTS]);
 s32 unk_SetMoveToFirstInLinkedSequence4(Move *moves, s32 index);
 s32 unk_SetMoveToFirstInLinkedSequence8_v2(Move *moves, s32 index);
 s32 unk_SetMoveToLastInLinkedSequence4(Move *moves, s32 index);

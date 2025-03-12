@@ -1,11 +1,71 @@
 #include "global.h"
+#include "structs/str_status_text.h"
+#include "decompress.h"
 
-bool8 sub_8097DD0(s32 *param_1, s32 *param_2)
+static bool8 AreStatusesTheSame(const struct StatusText *status1, const struct StatusText *status2)
 {
-  if ((param_1[0] == param_2[0]) && (param_1[1] == param_2[1])) {
-    return TRUE;
-  }
-  else {
-    return FALSE;
-  }
+    if (status1->name == status2->name && status1->desc == status2->desc) {
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
+}
+
+extern const struct StatusText gStatusDescriptions[];
+
+s32 PrepareStatusStringArrays(const char *str, const struct StatusText *statuses[MAX_STATUS_TEXTS])
+{
+    s32 i, j;
+    s32 counter;
+    s32 stringLengths[99];
+    char formattedStatusString[100];
+    s32 strLen;
+
+    counter = 0;
+    for (i = 0; i < 99; i++) {
+        if (gStatusDescriptions[i].name == NULL)
+            break;
+
+        for (j = 0; j < 100; j++) {
+            if (gStatusDescriptions[i].name[j] == '#' && gStatusDescriptions[i].name[j + 1] == 'r') {
+                formattedStatusString[j++] = '#';
+                formattedStatusString[j++] = 'r';
+                formattedStatusString[j++] = '\0';
+                break;
+            }
+
+            formattedStatusString[j] = gStatusDescriptions[i].name[j];
+        }
+
+        strLen = strlen(formattedStatusString);
+        stringLengths[i] = strLen;
+    }
+
+    while (*str != '\0') {
+        if (*str == '#') {
+            for (i = 0; i < 99 && gStatusDescriptions[i].name != NULL; i++) {
+                if (StrsDifferent_IgnoreCase(gStatusDescriptions[i].name, str, stringLengths[i]) == 0) {
+                    for (j = 0; j < counter; j++) {
+                        if (AreStatusesTheSame(&gStatusDescriptions[i], statuses[j]) != 0)
+                            break;
+                    }
+
+                    if (j == counter && counter < MAX_STATUS_TEXTS) {
+                        statuses[counter++] = &gStatusDescriptions[i];
+                    }
+                }
+            }
+        }
+        else {
+            u8 c = *str;
+            if (c == 0x81 || c == 0x82 || c == 0x83 || c == 0x84 || c == 0x87) {
+                str++;
+            }
+        }
+
+        str++;
+    }
+
+    return counter;
 }
