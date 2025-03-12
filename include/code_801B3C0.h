@@ -21,8 +21,8 @@ typedef struct unkStruct_203B230
     MenuInputStructSub unk88;
 } unkStruct_203B230;
 
-bool8 sub_801B3C0(Item *item);
+bool8 InitItemDescriptionWindow(Item *item);
 u32 sub_801B410(void);
-void sub_801B450(void);
+void FreeItemDescriptionWindow(void);
 
 #endif // GUARD_CODE_801B3C0_H

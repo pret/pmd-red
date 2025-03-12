@@ -55,9 +55,7 @@ extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_806A6E8(Entity *);
-extern bool8 sub_8047084(s32 itemFlag);
 extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
-extern void sub_8045DB4(DungeonPos *, u32);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
@@ -70,7 +68,6 @@ void ShowDungeonOthersMenu(void);
 void sub_8075680(u32);
 void sub_8094C88(void);
 void sub_8040A84(void);
-void sub_8047158(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 void SetLeaderActionToNothing(u8 a0);
 u16 GetLeaderActionId(void);
@@ -86,7 +83,7 @@ bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
 void PrintOnMainMenu(bool8 printAll);
 bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1);
-void sub_8060D24(UNUSED ActionContainer *a0);
+void DungeonShowItemDescription(UNUSED ActionContainer *a0);
 bool8 ShowDungeonTeamMenu(Entity *a0);
 void ActionShowMoveInfo(ActionContainer *a0);
 void ActionToggleMoveUsableForAi(ActionContainer *a0);
@@ -201,7 +198,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
         }
     }
 
-    if (!gDungeon->unk644.unk17) {
+    if (!gDungeon->unk644.hasInventory) {
         windows.id[0].type = WINDOW_TYPE_NORMAL;
         windows.id[0].pos.y++;
     }

@@ -159,7 +159,7 @@ static void sub_8022A10(void)
             sub_8012D60(&sUnknown_203B294->unkA4, sUnknown_80DC584, 0, 0, 3, 1);
             break;
         case 4:
-            sub_801B3C0(&sUnknown_203B294->item);
+            InitItemDescriptionWindow(&sUnknown_203B294->item);
             break;
         case 5:
             CreateDialogueBoxAndPortrait(sDoesNotAppearHungry, 0, 0, 0x301);
@@ -446,7 +446,7 @@ static void sub_80230E8(void)
     switch (sub_801B410()) {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             sub_8022924(1);
         case 1:
         case 0:

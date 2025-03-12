@@ -41,6 +41,7 @@
 #include "dungeon_serializer.h"
 #include "dungeon_config.h"
 #include "dungeon_map.h"
+#include "dungeon_items.h"
 
 extern void sub_800EE5C(s32);
 extern void sub_800EF64(void);
@@ -263,10 +264,8 @@ extern void sub_803E250(void);
 extern void sub_803E830(void);
 extern void sub_803E214(void);
 extern void nullsub_56(void);
-extern void sub_8047104(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
-extern void sub_804700C(void);
 extern void IncrementThievingSuccesses(void);
 extern void sub_803E13C(void);
 extern void sub_80841EC(void);
@@ -313,7 +312,6 @@ extern void sub_806B168(void);
 extern void sub_806B6C4(void);
 extern void sub_806A338(void);
 extern void sub_8051E3C(void);
-extern void sub_8045CB0(void);
 extern void sub_807FA18(void);
 extern void sub_806A974(void);
 extern void sub_806CF60(void);
@@ -327,7 +325,6 @@ extern void sub_803EAF0(u32, u32);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
 extern void sub_803F4A0(Entity *a0);
 extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
-extern void sub_8046F84(s32 itemFlag);
 extern bool8 sub_8083C50(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void ResetMonEntityData(EntityInfo *, u32);
@@ -405,7 +402,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
     gDungeon->unk644.unk16 = r8->unkC;
     gDungeon->unk644.canRecruit = r8->unkA;
     gDungeon->unk644.unk15 = r8->unkB;
-    gDungeon->unk644.unk17 = r8->unkD;
+    gDungeon->unk644.hasInventory = r8->unkD;
     gDungeon->unk644.unk19 = r8->unkE;
     StopDungeonBGM();
     sub_803D4AC();
@@ -562,9 +559,9 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
             gDungeon->unk644.unk40 = 99;
             gDungeon->unk644.unk42 = 99;
             gDungeon->weather.weather = 0;
-            gDungeon->tileset = gDungeon->unk1C574.unk2;
-            gDungeon->unk3A10 = gDungeon->unk1C574.unk3;
-            gDungeon->fixedRoomNumber = gDungeon->unk1C574.unk12;
+            gDungeon->tileset = gDungeon->floorProperties.unk2;
+            gDungeon->unk3A10 = gDungeon->floorProperties.unk3;
+            gDungeon->fixedRoomNumber = gDungeon->floorProperties.unk12;
             sub_807E5E4(0);
             sub_80842F0();
         }
@@ -618,7 +615,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
         gDungeon->unk17B40 = 0;
         if (!r6) {
             sub_807FA18();
-            sub_8045CB0();
+            CreateFloorItems();
             gDungeon->unk644.unk50 = gDungeon->unk644.unk48;
             gDungeon->unk644.unk4C = 0;
             sub_8051E3C();
@@ -793,13 +790,13 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
                 SaveDungeonState(gSerializedData_203B41C, 0x4800);
             }
             else {
-                sub_8046F84(ITEM_FLAG_IN_SHOP);
+                ClearAllItemsWithFlag(ITEM_FLAG_IN_SHOP);
             }
             sub_806C1D8();
 
             if (gDungeon->unk644.unk10 == 1) {
                 if (gDungeon->unk644.unk2A != 0) {
-                    sub_804700C();
+                    AllItemsToPlainSeed();
                 }
                 check = TRUE;
             }
@@ -915,7 +912,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
     nullsub_56();
     CloseDungeonMapFile();
     if (r8->unk7C == 1 || r8->unk7C == 4 || r8->unk7C == 2) {
-        sub_8047104();
+        CleanUpInventoryItems();
     }
     if (r8->unk7C == 1 || r8->unk7C == -2 || r8->unk7C == 4 || r8->unk7C == -1 || r8->unk7C == 2) {
         if (r8->unk7C == 1 || r8->unk7C == 4 || r8->unk7C == 2) {
@@ -1023,7 +1020,7 @@ void sub_8043D60(void)
         }
     }
 
-    sub_8046F84(ITEM_FLAG_IN_SHOP);
+    ClearAllItemsWithFlag(ITEM_FLAG_IN_SHOP);
 }
 
 bool8 sub_8043ED0(bool8 a0)

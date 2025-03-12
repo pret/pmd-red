@@ -388,10 +388,7 @@ extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_807EAA0(u32, u32);
 extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
 extern void sub_8085374(void);
-extern void sub_8045C28(Item *, u8 , u8 *);
-extern void sub_8046860(Entity *, DungeonPos *, Item *, u32);
-extern u32 sub_803D73C(u32);
-extern void sub_80460F8(DungeonPos *, Item *, u8);
+extern u32 GetRandomFloorItem(u32);
 extern u8 sub_8044B28(void);
 extern bool8 sub_8085B80(struct_8085B80 *);
 
@@ -3548,7 +3545,7 @@ void sub_808AE54(u8 param_1,u8 param_2,DungeonPos *param_3)
   if (!sub_8098100(0x22) && (param_2 == 0x2E) && (param_1 == 0x17)) {
     sub_808B1CC(ITEM_NOTHING);
     if (!sub_8098100(0x1d)) {
-      xxx_init_itemslot_8090A8C(&item,ITEM_ROCK_PART,0);
+      ItemIdToSlot(&item,ITEM_ROCK_PART,0);
       sub_80464C8(GetLeader(),param_3,&item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Regirock's body
@@ -3571,7 +3568,7 @@ void sub_808AEC8(u8 param_1,u8 param_2,DungeonPos *param_3)
   if (!sub_8098100(0x22) && (param_2 == 0x2F) && (param_1 == 0x18)) {
     sub_808B1CC(ITEM_NOTHING);
     if (!sub_8098100(0x1d)) {
-      xxx_init_itemslot_8090A8C(&item,ITEM_ICE_PART,0);
+      ItemIdToSlot(&item,ITEM_ICE_PART,0);
       sub_80464C8(GetLeader(),param_3,&item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Regice's body
@@ -3593,7 +3590,7 @@ void sub_808AF3C(u8 param_1,u8 param_2,DungeonPos *param_3)
   if (!sub_8098100(0x22) && (param_2 == 0x30) && (param_1 == 0x19)) {
     sub_808B1CC(ITEM_NOTHING);
     if (!sub_8098100(0x1d)) {
-      xxx_init_itemslot_8090A8C(&item,ITEM_STEEL_PART,0);
+      ItemIdToSlot(&item,ITEM_STEEL_PART,0);
       sub_80464C8(GetLeader(),param_3, &item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Registeel's body
@@ -3716,7 +3713,7 @@ void sub_808B1CC(u8 itemID)
     tile->terrainType = tile->terrainType | TERRAIN_TYPE_STAIRS;
     if (((itemID != ITEM_NOTHING) && (sub_80860A8(itemID) == 0)) &&
         (sub_80860A8(ITEM_MUSIC_BOX) == 0)) {
-        xxx_init_itemslot_8090A8C(&item,itemID,0);
+        ItemIdToSlot(&item,itemID,0);
         pos.y--;
         sub_80460F8(&pos,&item,1);
     }
@@ -3925,7 +3922,7 @@ void JirachiWish(void)
       {
         for(index = 0; index < 9; index++)
         {
-          sub_8045C28(&moneyItems[index], ITEM_POKE, 0);
+          CreateItemWithStickyChance(&moneyItems[index], ITEM_POKE, 0);
         }
         pos.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
         pos.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
@@ -3950,7 +3947,7 @@ void JirachiWish(void)
       {
         for(index = 0; index < 9; index++)
         {
-          sub_8045C28(&items[index], sub_803D73C(0),0);
+          CreateItemWithStickyChance(&items[index], GetRandomFloorItem(0),0);
         }
         pos.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
         pos.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
@@ -4006,7 +4003,7 @@ void JirachiWish(void)
 
           for(index = 0; index < 4; index++)
           {
-            sub_8045C28(&strengthItems[index],gUnknown_81074FC[DungeonRandInt(8)],0);
+            CreateItemWithStickyChance(&strengthItems[index],gUnknown_81074FC[DungeonRandInt(8)],0);
           }
 
           pos.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);

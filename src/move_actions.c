@@ -116,9 +116,7 @@ void sub_8075900(Entity *pokemon, u8 r1);
 extern u8 sub_8044B28(void);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void sub_804652C(Entity *, Entity *, Item *, u32, DungeonPos *);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
-extern void sub_8045C28(Item *, u8 , u8);
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 extern void MudWaterSportEffect(u32);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
@@ -2391,7 +2389,7 @@ bool8 PayDayMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
       if (!EntityIsValid(target)) {
         pos.x = 0;
         pos.y = 0;
-        sub_8045C28(&item,ITEM_POKE,2);
+        CreateItemWithStickyChance(&item,ITEM_POKE,2);
         sub_805A7D4(pokemon,target,&item,&pos);
       }
     }

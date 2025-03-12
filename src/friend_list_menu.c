@@ -219,7 +219,7 @@ void sub_8025518(void)
         break;
     case FRIEND_LIST_MENU_STATE_INFO:
         HeldItemToSlot(&item, &gUnknown_203B2B4->item1);
-        sub_801B3C0(&item);
+        InitItemDescriptionWindow(&item);
         break;
     case FRIEND_LIST_MENU_STATE_ITEM_GIVEN:
         gUnknown_203B2B4->fallbackState = 2;
@@ -560,7 +560,7 @@ void sub_8025D90(void)
     {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             SetFriendListMenuState(0xC);
         case 0:
         case 1:

@@ -411,7 +411,7 @@ void CleanThankYouMailPelipper(void)
         MemoryFree(sUnknown_203B2C4);
         sUnknown_203B2C4 = NULL;
         sub_8030DE4();
-        sub_801B450();
+        FreeItemDescriptionWindow();
         sub_803084C();
         sub_801CBB8();
         sub_80155F0();
@@ -663,7 +663,7 @@ void sub_802A28C(void)
         RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
-        sub_801B3C0(&sUnknown_203B2C4->unk41C);
+        InitItemDescriptionWindow(&sUnknown_203B2C4->unk41C);
         SetThankYouMailMenuState(SHOW_ITEM_TO_SEND_INFO);
         break;
   }
@@ -675,7 +675,7 @@ void sub_802A33C(void)
  {
      case 2:
      case 3:
-        sub_801B450();
+        FreeItemDescriptionWindow();
         ResetUnusedInputStruct();
         ShowWindows(&sUnknown_203B2C4->unk3BC, TRUE, TRUE);
         sub_801CB5C(TRUE);
@@ -714,7 +714,7 @@ void sub_802A39C(void)
             RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_801B3C0(&sUnknown_203B2C4->unk41C);
+            InitItemDescriptionWindow(&sUnknown_203B2C4->unk41C);
             SetThankYouMailMenuState(SHOW_ITEM_TO_SEND_INFO);
             break;
       case CANCEL_ACTION:

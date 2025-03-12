@@ -128,8 +128,8 @@ static void sub_803A5A0(void)
             sub_803A690();
             break;
         case 4:
-            xxx_init_itemslot_8090A8C(&item, sUnknown_203B3F0->id, 0);
-            sub_801B3C0(&item);
+            ItemIdToSlot(&item, sUnknown_203B3F0->id, 0);
+            InitItemDescriptionWindow(&item);
             break;
         case 5:
             break;
@@ -239,7 +239,7 @@ static void sub_803A86C(void)
             break;
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             sub_803A504(1);
             break;
     }

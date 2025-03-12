@@ -323,7 +323,7 @@ static void sub_8016FF8(void)
             break;
         case 16:
         case 26:
-            sub_801B3C0(&gKangaskhanStorageWork->storedItem);
+            InitItemDescriptionWindow(&gKangaskhanStorageWork->storedItem);
             break;
         case 27:
             sub_80177F8();
@@ -669,14 +669,14 @@ static void sub_8017B88(void)
                 UpdateKangaskhanStorageState(28);
             else {
                 gKangaskhanStorageWork->id = sub_801CB24();
-                xxx_init_itemslot_8090A8C(&gKangaskhanStorageWork->storedItem, gKangaskhanStorageWork->id, 0);
+                ItemIdToSlot(&gKangaskhanStorageWork->storedItem, gKangaskhanStorageWork->id, 0);
                 gKangaskhanStorageWork->storedItem.quantity = 1;
                 UpdateKangaskhanStorageState(25);
             }
             break;
         case 4:
             gKangaskhanStorageWork->id = sub_801CB24();
-            xxx_init_itemslot_8090A8C(&gKangaskhanStorageWork->storedItem, gKangaskhanStorageWork->id, 0);
+            ItemIdToSlot(&gKangaskhanStorageWork->storedItem, gKangaskhanStorageWork->id, 0);
             gKangaskhanStorageWork->storedItem.quantity = 1;
             UpdateKangaskhanStorageState(26);
             break;
@@ -785,7 +785,7 @@ static void sub_8017DC0(void)
             break;
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             UpdateKangaskhanStorageState(14);
             break;
     }
@@ -800,7 +800,7 @@ static void sub_8017DDC(void)
             break;
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             UpdateKangaskhanStorageState(23);
             break;
     }

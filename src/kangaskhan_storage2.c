@@ -168,7 +168,7 @@ static void sub_8018100(void)
             sub_8012D60(&sUnknown_203B20C->unk70, sUnknown_203B20C->unk20, 0, sUnknown_203B20C->unk60, sUnknown_203B20C->menuAction2, 2);
             break;
         case 7:
-            sub_801B3C0(&sUnknown_203B20C->item);
+            InitItemDescriptionWindow(&sUnknown_203B20C->item);
             break;
         case 10:
             sub_801C8C4(1, 3, 0, 10);
@@ -202,7 +202,7 @@ static void sub_8018100(void)
             sub_8012D60(&sUnknown_203B20C->unk70, sUnknown_203B20C->unk20, 0, sUnknown_203B20C->unk60, sUnknown_203B20C->menuAction3, 2);
             break;
         case 14:
-            sub_801B3C0(&sUnknown_203B20C->item);
+            InitItemDescriptionWindow(&sUnknown_203B20C->item);
             break;
         case KANGASKHAN_STORAGE_2_INIT:
         default:
@@ -447,14 +447,14 @@ static void sub_80186F8(void)
             }
             else {
                 sUnknown_203B20C->id = sub_801CB24();
-                xxx_init_itemslot_8090A8C(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
+                ItemIdToSlot(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
                 sUnknown_203B20C->item.quantity = 1;
                 UpdateKangaskhanStorage2State(13);
             }
             break;
         case 4:
             sUnknown_203B20C->id = sub_801CB24();
-            xxx_init_itemslot_8090A8C(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
+            ItemIdToSlot(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
             sUnknown_203B20C->item.quantity = 1;
             UpdateKangaskhanStorage2State(14);
             break;
@@ -606,7 +606,7 @@ static void sub_8018AC8(void)
     switch (sub_801B410()) {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             UpdateKangaskhanStorage2State(5);
             break;
         case 0:
@@ -621,7 +621,7 @@ static void sub_8018AE4(void)
     switch (sub_801B410()) {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             UpdateKangaskhanStorage2State(11);
             break;
         case 0:

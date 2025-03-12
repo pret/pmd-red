@@ -36,8 +36,7 @@
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void HandleOneRoomOrb(Entity *, Entity *);
-extern u32 sub_803D73C(u32);
-extern void sub_8045C28(Item *, u8 , u8);
+extern u32 GetRandomFloorItem(u32);
 extern void sub_80464C8(Entity *, DungeonPos *, Item *);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
@@ -524,13 +523,13 @@ bool8 RecycleMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param
             {
                 Item *item = &gTeamInventoryRef->teamItems[i];
                 if (item->id == ITEM_TM_USED_TM) {
-                    xxx_init_itemslot_8090A8C(item, item->quantity + 0x7d,0);
+                    ItemIdToSlot(item, item->quantity + 0x7d,0);
                     isTMRecycled = TRUE;
                 }
             }
         }
         if (ItemExists(&entityInfo->heldItem) && (entityInfo->heldItem.id == ITEM_TM_USED_TM)) {
-            xxx_init_itemslot_8090A8C(&entityInfo->heldItem,entityInfo->heldItem.quantity + 0x7D,0);
+            ItemIdToSlot(&entityInfo->heldItem,entityInfo->heldItem.quantity + 0x7D,0);
             isTMRecycled = TRUE;
         }
     }
@@ -1133,7 +1132,7 @@ bool8 ItemizeOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
     else
     {
         target->isVisible = FALSE;
-        sub_8045C28(&stack, sub_803D73C(0), 0);
+        CreateItemWithStickyChance(&stack, GetRandomFloorItem(0), 0);
         sub_80464C8(pokemon, &posStruct, &stack);
         sub_8068FE0(target, 0x218, pokemon);
         return TRUE;

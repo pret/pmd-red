@@ -14,7 +14,7 @@ TeamInventory *GetMoneyItemsInfo(void);
 void InitializeMoneyItems(void);
 s32 GetNumberOfFilledInventorySlots(void);
 bool8 IsThrowableItem(u8 id);
-void xxx_init_itemslot_8090A8C(Item *param_1,u8 id,u8 param_3);
+void ItemIdToSlot(Item *param_1,u8 id,u8 param_3);
 void xxx_init_helditem_8090B08(BulkItem *param_1,u8 id);
 void HeldItemToSlot(Item *param_1, BulkItem *param_2);
 void SlotToHeldItem(BulkItem *held, Item *slot);

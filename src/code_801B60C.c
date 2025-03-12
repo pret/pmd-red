@@ -244,7 +244,7 @@ store:
             sub_8012D60(&sUnknown_203B234->unk28, sUnknown_203B234->unkCC, 0, 0, sUnknown_203B234->menuAction, 2);
             break;
         case 11:
-            sub_801B3C0(&sUnknown_203B234->unk20);
+            InitItemDescriptionWindow(&sUnknown_203B234->unk20);
             break;
         case 12:
             sub_801A9E0();
@@ -470,7 +470,7 @@ static void sub_801BEAC(void)
     switch (sub_801B410()) {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             sub_801B748(9);
         case 0:
         case 1:

@@ -127,7 +127,7 @@ typedef struct FloorProperties
     u8 kecleonShopChance; // Percentage chance 0-100%
     u8 monsterHouseChance; // Percentage chance 0-100%
     u8 mazeRoomChance; // Percentage chance 0-100%
-    u8 unkA;
+    u8 itemStickyChance; // Percentage chance 0-100%
     bool8 allowDeadEnds;
     u8 secondaryStructuresBudget; // Maximum number of secondary structures that can be generated
     u8 roomFlags; // See ROOM_FLAG_
@@ -146,11 +146,19 @@ typedef struct FloorProperties
     u8 unk1A;
 } FloorProperties;
 
-typedef struct UnkDungeonGlobal_unk1C590
+enum {
+    ITEM_SPAWN_NORMAL,
+    ITEM_SPAWN_IN_SHOP,
+    ITEM_SPAWN_IN_MONSTER_HOUSE,
+    ITEM_SPAWN_WALL, // ?
+    ITEM_SPAWN_TYPES_COUNT
+};
+
+typedef struct ItemSpawns
 {
     s16 categoryValues[NUM_ITEM_CATEGORIES];
     s16 itemValues[NUMBER_OF_ITEM_IDS];
-} UnkDungeonGlobal_unk1C590;
+} ItemSpawns;
 
 typedef struct UnkDungeonGlobal_unk1CD98
 {
@@ -252,7 +260,7 @@ typedef struct unkDungeon644
     /* 0x14 */ bool8 canRecruit;
     /* 0x15 */ u8 unk15;
     /* 0x16 */ u8 unk16;
-    /* 0x17 */ u8 unk17;
+    /* 0x17 */ bool8 hasInventory;
     /* 0x18 */ u8 unk18;
     /* 0x19 */ u8 unk19;
     /* 0x1A */ u8 fill1A[2];
@@ -480,8 +488,8 @@ typedef struct Dungeon
     /* 0x1BDD4 */ struct UnkStructDungeon1BDD4 unk1BDD4;
     /* 0x1BE14 */ struct MessageLogString messageLogStrings[MESSAGE_LOG_STRINGS_COUNT];
     /* 0x1C570 */ DungeonLocation unk1C570;
-    /* 0x1C574 */ FloorProperties unk1C574;
-    /* 0x1C590 */ UnkDungeonGlobal_unk1C590 unk1C590[4];
+    /* 0x1C574 */ FloorProperties floorProperties;
+    /* 0x1C590 */ ItemSpawns itemSpawns[ITEM_SPAWN_TYPES_COUNT];
     u16 unk1CD70[20];
     UnkDungeonGlobal_unk1CD98 unk1CD98[32];
     UnkDungeonGlobal_unk1CE98_sub unk1CE98; // TODO: not sure how large this is

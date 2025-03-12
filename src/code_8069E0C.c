@@ -66,7 +66,7 @@ extern DungeonPos gUnknown_202EE0C;
 extern void sub_803F4A0(Entity *a0);
 extern bool8 sub_80860A8(u8 id);
 extern u8 gUnknown_202F32C;
-extern u8 sub_803D73C(s32 a0);
+extern u8 GetRandomFloorItem(s32 a0);
 extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_80429E8(Entity *r0);
 extern s32 sub_803DA20(s32 param_1);
@@ -1407,9 +1407,9 @@ bool8 sub_806B8CC(s16 _species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a
         && (entityInfo->abilities[0] == ABILITY_PICKUP || entityInfo->abilities[1] == ABILITY_PICKUP)
         && !ItemExists(&entityInfo->heldItem))
     {
-        u32 pickUpItem = sub_803D73C(0);
+        u32 pickUpItem = GetRandomFloorItem(0);
         if (pickUpItem != ITEM_POKE) {
-            xxx_init_itemslot_8090A8C(&entityInfo->heldItem, pickUpItem, 0);
+            ItemIdToSlot(&entityInfo->heldItem, pickUpItem, 0);
             entityInfo->unkF3 = TRUE;
         }
     }

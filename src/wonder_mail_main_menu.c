@@ -168,7 +168,7 @@ void CleanWonderMailMenu(void)
     MemoryFree(gUnknown_203B3E8);
     gUnknown_203B3E8 = NULL;
     sub_8030DE4(); // Frees 203B324
-    sub_801B450(); // Frees 203B230
+    FreeItemDescriptionWindow(); // Frees 203B230
     sub_803084C(); // Frees 203B320
     sub_801CBB8(); // Frees 203B244
     sub_80155F0(); // Frees 203B1FC

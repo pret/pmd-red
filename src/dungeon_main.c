@@ -68,16 +68,14 @@ extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A6E8(Entity *);
-extern bool8 sub_8047084(s32 itemFlag);
 extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
-extern void sub_8045DB4(DungeonPos *, u32);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
 void sub_803E708(s32 a0, s32 a1);
 void sub_8075680(u32);
 void sub_8094C88(void);
-void sub_8047158(void);
+void ClearUnpaidFlagFromAllItems(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
 void SetLeaderActionToNothing(u8 a0);
 u16 GetLeaderActionId(void);
@@ -584,7 +582,7 @@ void DungeonHandlePlayerInput(void)
         }
         else {
             DungeonRunFrameActions(0xF);
-            sub_8047158();
+            ClearUnpaidFlagFromAllItems();
             ShowMainMenu((r6.a0_16 == 0), r6.a0_24);
             ResetRepeatTimers();
             ResetUnusedInputStruct();
@@ -1047,7 +1045,7 @@ void sub_805EE30(void)
         case ENTITY_ITEM: {
             Item *item = GetItemData(tileObject);
             if (!(item->flags & ITEM_FLAG_IN_SHOP)) {
-                sub_8045DB4(&leader->pos, 1);
+                PickUpItemFromPos(&leader->pos, 1);
             }
             else {
                 gDungeon->unk5C0 = 4;
@@ -1111,7 +1109,7 @@ void sub_805F02C(void)
     if (r8->isTeamLeader) {
         DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9BD8);
     }
-    else if (sub_8047084(ITEM_FLAG_IN_SHOP) || sub_807EF48()) {
+    else if (PlayerHasItemWithFlag(ITEM_FLAG_IN_SHOP) || sub_807EF48()) {
         DisplayDungeonLoggableMessageTrue(r7, gUnknown_80F9C08);
     }
     else if (gDungeon->unk644.unk2A) {
@@ -1204,7 +1202,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
 
     while (1) {
         if (r10 < 0) {
-            SetLeaderActionToNothing(1);
+            SetLeaderActionToNothing(TRUE);
             gTeamMenuChosenId = -1;
             PrintOnMainMenu(printAll);
             sub_806A2BC(GetLeader(), 0);
@@ -1242,7 +1240,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
         if (chosenOption == MAIN_MENU_ITEMS) {
             u16 action;
 
-            SetLeaderActionToNothing(1);
+            SetLeaderActionToNothing(TRUE);
             var_34.a0_8 = 0;
             var_34.a0_16 = 1;
             var_34.a0_24 = 0;
@@ -1251,75 +1249,75 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 r10 = -1;
             }
             if (sub_805FD3C(&var_34) && ShowDungeonItemsMenu(GetLeader(), &var_34)) {
-                SetLeaderActionToNothing(1);
+                SetLeaderActionToNothing(TRUE);
             }
             action = GetLeaderActionId();
-            if (action == 12) {
+            if (action == ACTION_SHOW_INFO) {
                 sub_8044D90(GetLeader(), 0, 12)->flags |= ITEM_FLAG_UNPAID;
-                sub_8060D24(GetLeaderActionContainer());
-                SetLeaderActionToNothing(1);
+                DungeonShowItemDescription(GetLeaderActionContainer());
+                SetLeaderActionToNothing(TRUE);
             }
-            else if (action == 53) {
+            else if (action == ACTION_UNK35) {
                 item = sub_8044D90(GetLeader(), 0, 13);
                 if (!sub_8048A68(GetLeader(), item)) {
-                    SetLeaderActionToNothing(1);
+                    SetLeaderActionToNothing(TRUE);
                 }
             }
-            else if (action == 16) {
+            else if (action == ACTION_UNK10) {
                 item = sub_8044D90(GetLeader(), 0, 14);
                 if (!sub_8048950(GetLeader(), item)) {
-                    SetLeaderActionToNothing(1);
+                    SetLeaderActionToNothing(TRUE);
                 }
             }
-            else if (action == 44) {
+            else if (action == ACTION_USE_LINK_BOX) {
                 item = sub_8044D90(GetLeader(), 0, 15);
                 if (!sub_8048B9C(GetLeader(), item)) {
-                    SetLeaderActionToNothing(1);
+                    SetLeaderActionToNothing(TRUE);
                 }
             }
-            else if (action == 60) {
+            else if (action == ACTION_SET_ITEM) {
                 HandleSetItemAction(GetLeader(), TRUE);
-                SetLeaderActionToNothing(1);
+                SetLeaderActionToNothing(TRUE);
                 sub_803E708(0x50, 0x4D);
                 sub_8052210(0);
                 break;
             }
-            else if (action == 61) {
+            else if (action == ACTION_UNSET_ITEM) {
                 HandleUnsetItemAction(GetLeader(), TRUE);
-                SetLeaderActionToNothing(1);
+                SetLeaderActionToNothing(TRUE);
                 sub_803E708(0x50, 0x4D);
                 sub_8052210(0);
                 break;
             }
 
-            if (GetLeaderActionId() != 0)
+            if (GetLeaderActionId() != ACTION_NOTHING)
                 break;
         }
         else if (chosenOption == MAIN_MENU_TEAM) {
-            SetLeaderActionToNothing(1);
+            SetLeaderActionToNothing(TRUE);
             if (ShowDungeonTeamMenu(GetLeader())) {
                 r10 = -1;
             }
 
             if (GetLeaderActionId() == ACTION_CHECK_SUMMARY) {
                 ShowDungeonSummaryOrIQMenu(GetLeaderActionContainer(), FALSE);
-                SetLeaderActionToNothing(1);
+                SetLeaderActionToNothing(TRUE);
             }
             else if (GetLeaderActionId() == ACTION_TALK_MENU) {
                 sub_806752C(GetLeaderActionContainer());
-                SetLeaderActionToNothing(1);
+                SetLeaderActionToNothing(TRUE);
             }
             else if (GetLeaderActionId() == 0x34) {
                 sub_8067768(GetLeaderActionContainer());
-                SetLeaderActionToNothing(1);
+                SetLeaderActionToNothing(TRUE);
             }
             else if (GetLeaderActionId() == ACTION_CHANGE_TACTICS) {
                 ShowDungeonTacticsMenu(GetLeaderActionContainer());
-                SetLeaderActionToNothing(1);
+                SetLeaderActionToNothing(TRUE);
             }
             else if (GetLeaderActionId() == ACTION_VIEW_IQ) {
                 ShowDungeonSummaryOrIQMenu(GetLeaderActionContainer(), TRUE);
-                SetLeaderActionToNothing(1);
+                SetLeaderActionToNothing(TRUE);
             }
             else if (GetLeaderActionId() == ACTION_CHECK_MOVES) {
                 s32 i, count;
@@ -1349,7 +1347,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             Entity *currEntity;
 
             currMonId = 0;
-            SetLeaderActionToNothing(1);
+            SetLeaderActionToNothing(TRUE);
             for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                 Entity *teamMon = gDungeon->teamPokemon[i];
                 if (EntityIsValid(teamMon)) {
@@ -1452,7 +1450,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 if (GetEntityType(tileObject) == ENTITY_ITEM) {
                     u16 action;
 
-                    SetLeaderActionToNothing(1);
+                    SetLeaderActionToNothing(TRUE);
                     var_30.a0_8 = 0;
                     var_30.a0_16 = 1;
                     var_30.a0_24 = 1;
@@ -1462,45 +1460,45 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                         ASM_MATCH_TRICK(leader);
                     }
                     if (sub_805FD3C(&var_30) && ShowDungeonItemsMenu(GetLeader(), &var_30)) {
-                        SetLeaderActionToNothing(1);
+                        SetLeaderActionToNothing(TRUE);
                     }
 
                     action = GetLeaderActionId();
                     if (action == 0xC) {
                         sub_8044D90(GetLeader(), 0, 0x10)->flags |= ITEM_FLAG_UNPAID;
-                        sub_8060D24(GetLeaderActionContainer());
-                        SetLeaderActionToNothing(1);
+                        DungeonShowItemDescription(GetLeaderActionContainer());
+                        SetLeaderActionToNothing(TRUE);
                     }
                     else if (action == 0x35) {
                         item = sub_8044D90(GetLeader(), 0, 0x11);
                         if (!sub_8048A68(GetLeader(), item)) {
-                            SetLeaderActionToNothing(1);
+                            SetLeaderActionToNothing(TRUE);
                         }
                     }
                     else if (action == 0x10) {
                         item = sub_8044D90(GetLeader(), 0, 0x12);
                         if (!sub_8048950(GetLeader(), item)) {
-                            SetLeaderActionToNothing(1);
+                            SetLeaderActionToNothing(TRUE);
                         }
                     }
                     else if (action == 0x2C) {
                         item = sub_8044D90(GetLeader(), 0, 0x13);
                         if (!sub_8048B9C(GetLeader(), item)) {
-                            SetLeaderActionToNothing(1);
+                            SetLeaderActionToNothing(TRUE);
                         }
                     }
                     if (GetLeaderActionId() != 0)
                         break;
                 }
                 else if (GetEntityType(tileObject) == ENTITY_TRAP) {
-                    SetLeaderActionToNothing(1);
+                    SetLeaderActionToNothing(TRUE);
                     ShowDungeonTileMenu(GetLeader());
                     if (GetLeaderActionId() != 0)
                         break;
                 }
             }
             else if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
-                SetLeaderActionToNothing(1);
+                SetLeaderActionToNothing(TRUE);
                 ShowDungeonStairsMenu(GetLeader());
                 if (GetLeaderActionId() != 0)
                     break;

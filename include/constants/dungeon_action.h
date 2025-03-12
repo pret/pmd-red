@@ -16,6 +16,7 @@ enum DungeonAction
     ACTION_THROW_ITEM_PLAYER = 0xB,
     ACTION_SHOW_INFO = 0xC,
     ACTION_EAT_BERRY_SEED_DRINK = 0xD,
+    ACTION_UNK10 = 0x10,
     ACTION_USE_TM = 0x12,
     ACTION_TALK_FIELD = 0x13, // Talking to another Pokémon by facing them and interacting.
     ACTION_USE_MOVE_PLAYER = 0x14,
@@ -43,12 +44,15 @@ enum DungeonAction
     ACTION_USE_ORB = 0x31,
     ACTION_REGULAR_ATTACK = 0x32,
     ACTION_UNSET_MOVE = 0x33,
+    ACTION_UNK35 = 0x35,
     ACTION_GIVE_ITEM = 0x36,
     ACTION_TAKE_ITEM = 0x37,
     ACTION_USE_ITEM = 0x38,
     ACTION_SECOND_THOUGHTS = 0x39, // Happens with invalid actions, like attempting to eat a non-consumable item.
+    ACTION_UNK3A = 0x3A,
     ACTION_SET_ITEM = 0x3C,
     ACTION_UNSET_ITEM = 0x3D,
+    ACTION_UNK3E = 0x3E,
     ACTION_PICK_UP_AI = 0x3F,
     ACTION_THROW_ARC_PLAYER = 0x41, // Throwing Gravelerocks and Geo Pebbles.
     NUM_DUNGEON_ACTIONS

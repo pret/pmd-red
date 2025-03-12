@@ -693,7 +693,7 @@ void CleanFriendRescueMenu(void)
     sub_802F2C0();
     sub_8030DE4();
     sub_802453C();
-    sub_801B450();
+    FreeItemDescriptionWindow();
   }
 }
 
@@ -2470,7 +2470,7 @@ void sub_8034B88(void)
             RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_801B3C0(&gUnknown_203B33C->item);
+            InitItemDescriptionWindow(&gUnknown_203B33C->item);
             SetFriendRescueMenuState(0x61);
             break;
     }
@@ -2482,7 +2482,7 @@ void sub_8034C38(void)
     {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_203B33C->unk3BC, TRUE, TRUE);
             sub_801CB5C(TRUE);
@@ -2519,7 +2519,7 @@ void sub_8034C98(void)
             RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_801B3C0(&gUnknown_203B33C->item);
+            InitItemDescriptionWindow(&gUnknown_203B33C->item);
             SetFriendRescueMenuState(0x61);
             break;
         case 5:

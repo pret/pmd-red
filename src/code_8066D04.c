@@ -92,19 +92,15 @@ extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8045BF8(u8 *, Item *);
 u8 sub_8048D50();
 void SetActionUnusableInDungeonSubMenu(u16 param_1);
-u8 * sub_80464AC();
 void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
 void sub_8044DF0();
 void sub_8042208(Entity *pokemon, u8 r1);
 void sub_803E708();
 void sub_80479B8();
-u8 sub_80460F8(DungeonPos *, Item *, u32);
 extern void sub_807AB38(Entity *, u32);
 extern Entity * sub_8044DA4(Entity *param_1,int param_2);
 extern void sub_806A6E8(Entity *);
 extern void sub_8044DF0(Entity *, u32, u32);
-extern void sub_8045DB4(DungeonPos *, u32);
-extern bool8 sub_80461C8(DungeonPos *, u32);
 extern bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0);
 extern bool8 sub_8044B28(void);
 Entity *sub_806773C(Entity *entity);
@@ -119,7 +115,7 @@ extern Entity * sub_80696A8(Entity *target);
 void HandlePickUpPlayerAction(Entity *entity)
 {
   GetEntInfo(entity)->action.actionParameters[0].actionUseIndex = 1;
-  sub_8045DB4(&entity->pos,0);
+  PickUpItemFromPos(&entity->pos,0);
 }
 
 void HandleSetItemAction(Entity *param_1, bool8 param_2)

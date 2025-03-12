@@ -268,7 +268,7 @@ static void UpdateLuminousCaveDialogue(void)
             break;
         case 9:
         case 14:
-            sub_801B3C0(&sLuminousCaveWork->chosenItem);
+            InitItemDescriptionWindow(&sLuminousCaveWork->chosenItem);
             break;
         case LUMINOUS_CAVE_LACK_WHAT_NEEDED:
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_GIVE_ITEM_1;
@@ -671,7 +671,7 @@ static void sub_80251CC(void)
     {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             UpdateLuminousCaveState(0x7);
             break;
         case 0:
@@ -686,7 +686,7 @@ static void sub_80251E8(void)
     {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             UpdateLuminousCaveState(0xC);
             break;
         case 0:

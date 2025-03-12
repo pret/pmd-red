@@ -394,7 +394,7 @@ static void UpdateKecleonStoreDialogue(void)
             break;
         case KECLEON_STORE_BUY_ITEM_INFO:
         case KECLEON_STORE_SELL_ITEM_INFO:
-            sub_801B3C0(&sKecleonBrosWork1->soldItem);
+            InitItemDescriptionWindow(&sKecleonBrosWork1->soldItem);
             break;
         case KECLEON_STORE_SELL_ITEM_RECEIPT:
             if (GetNumberOfFilledInventorySlots() == 0 || gTeamInventoryRef->teamMoney >= MAX_TEAM_MONEY) {
@@ -699,7 +699,7 @@ static void sub_80199CC(void)
                 item = GetKecleonWareItem(sKecleonBrosWork1->wareShopItemIndex);
             }
 
-            xxx_init_itemslot_8090A8C(&sKecleonBrosWork1->soldItem, item->id, 0);
+            ItemIdToSlot(&sKecleonBrosWork1->soldItem, item->id, 0);
             sKecleonBrosWork1->soldItem.quantity = item->quantity;
             sKecleonBrosWork1->itemSellPrice = GetStackBuyPrice(&sKecleonBrosWork1->soldItem);
             SetKecleonBrosState(20);
@@ -714,7 +714,7 @@ static void sub_80199CC(void)
                 item = GetKecleonWareItem(sKecleonBrosWork1->wareShopItemIndex);
             }
 
-            xxx_init_itemslot_8090A8C(&sKecleonBrosWork1->soldItem, item->id, 0);
+            ItemIdToSlot(&sKecleonBrosWork1->soldItem, item->id, 0);
             sKecleonBrosWork1->soldItem.quantity = item->quantity;
             sKecleonBrosWork1->itemSellPrice = GetStackBuyPrice(&sKecleonBrosWork1->soldItem);
             SetKecleonBrosState(KECLEON_STORE_BUY_ITEM_INFO);
@@ -831,7 +831,7 @@ static void sub_8019D30(void)
     switch (sub_801B410()) {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             SetKecleonBrosState(19);
             break;
         case 0:
@@ -845,7 +845,7 @@ static void sub_8019D4C(void)
     switch (sub_801B410()) {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             SetKecleonBrosState(27);
             break;
         case 0:

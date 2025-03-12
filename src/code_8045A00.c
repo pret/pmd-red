@@ -12,14 +12,10 @@
 #include "dungeon_ai_targeting.h"
 #include "string_format.h"
 #include "items.h"
+#include "trap.h"
 #include "status_checks_1.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
-#include "trap.h"
-#include "math.h"
-#include "code_80450F8.h"
-#include "dungeon_util.h"
-#include "structs/str_item_text.h"
 
 void sub_8045BF8(u8 *, Item *);
 
@@ -87,8 +83,3 @@ void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3)
         break;
   }
 }
-
-// FILE SPLIT HERE
-
-
-//

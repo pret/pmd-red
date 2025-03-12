@@ -59,6 +59,7 @@ extern void sub_804178C(u32);
 extern void sub_804219C(PixelPos *pos);
 extern void DungeonRunFrameActions(u32);
 extern bool8 sub_8045888(Entity *);
+extern u32 GetRandomFloorItem(u32);
 
 static void MusicBoxCreation(void);
 static u8 sub_8046D70(void);
@@ -67,12 +68,8 @@ extern SpriteOAM gUnknown_202EDC0;
 extern u8 gUnknown_203B420[];
 extern u8 gUnknown_203B428[];
 
-void sub_8046734(Entity *entity, DungeonPos *pos);
-void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item, s32 a4);
-void sub_804652C(Entity *entity1, Entity *entity2, Item *item, bool8 a3, DungeonPos *pos);
-bool8 sub_80461C8(DungeonPos *, bool8);
-extern u32 sub_803D73C(u32);
-bool8 sub_80460F8(DungeonPos *, Item *, bool8);
+static void sub_8046734(Entity *entity, DungeonPos *pos);
+static void sub_8046CE4(Item *item,s32 param_2);
 
 void sub_8045BF8(u8 *buffer, Item *item)
 {
@@ -89,38 +86,39 @@ void sub_8045C18(u8 *buffer, Item *item)
     sub_8090E14(buffer, item, &gUnknown_80F6990);
 }
 
-void sub_8045C28(Item *item, u8 itemID, u32 param_3)
+void CreateItemWithStickyChance(Item *item, u8 itemID, u32 forceSticky)
 {
     bool8 stickyFlag;
 
-    xxx_init_itemslot_8090A8C(item,itemID,0);
+    ItemIdToSlot(item, itemID, FALSE);
     stickyFlag = FALSE;
     if (IsNotSpecialItem(itemID)) {
-        if (param_3 == 0) {
-            if (DungeonRandInt(100) < gDungeon->unk1C574.unkA)
+        if (forceSticky == FORCE_STICKY_RANDOM) {
+            if (DungeonRandInt(100) < gDungeon->floorProperties.itemStickyChance)
                 stickyFlag = TRUE;
             else
                 stickyFlag = FALSE;
         }
-        else if (param_3 == 1) {
+        else if (forceSticky == FORCE_STICKY_ALWAYS) {
             stickyFlag = TRUE;
         }
     }
+
     if (stickyFlag) {
         item->flags |= ITEM_FLAG_STICKY;
     }
 
     if (GetItemCategory(itemID) == CATEGORY_POKE) {
-        sub_8046CE4(item, gDungeon->unk1C574.unk17 * 40);
+        sub_8046CE4(item, gDungeon->floorProperties.unk17 * 40);
     }
 }
 
-void sub_8045CB0(void)
+void CreateFloorItems(void)
 {
     u8 itemID;
     s32 yCounter, xCounter;
     const Tile *tile;
-    u32 uVar5;
+    s32 spawnType;
     Item item;
     u32 flag;
     s32 x = DungeonRandInt(DUNGEON_MAX_SIZE_X);
@@ -141,7 +139,7 @@ void sub_8045CB0(void)
             }
             tile = GetTile(x,y);
 
-            if (!(tile->terrainType & TERRAIN_TYPE_STAIRS) && (tile->spawnOrVisibilityFlags & 2)) {
+            if (!(tile->terrainType & TERRAIN_TYPE_STAIRS) && (tile->spawnOrVisibilityFlags & SPAWN_FLAG_ITEM)) {
                 DungeonPos pos;
                 bool8 shopFlag = FALSE;
                 pos.x = x;
@@ -149,22 +147,22 @@ void sub_8045CB0(void)
 
                 if (tile->terrainType & TERRAIN_TYPE_SHOP) {
                     shopFlag = TRUE;
-                    uVar5 = 1;
+                    spawnType = ITEM_SPAWN_IN_SHOP;
                 }
                 else
                 {
                     if (GetTerrainType(tile) == TERRAIN_TYPE_WALL) {
-                        uVar5 = 3;
+                        spawnType = ITEM_SPAWN_WALL;
                     }
                     else {
-                        uVar5 = (tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE) ? 2 : 0;
+                        spawnType = (tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE) ? ITEM_SPAWN_IN_MONSTER_HOUSE : ITEM_SPAWN_NORMAL;
                     }
                 }
-                itemID = sub_803D73C(uVar5);
+                itemID = GetRandomFloorItem(spawnType);
                 if (!CanSellItem(itemID)) {
-                    shopFlag = 0;
+                    shopFlag = FALSE;
                 }
-                sub_8045C28(&item,itemID,0);
+                CreateItemWithStickyChance(&item,itemID,FORCE_STICKY_RANDOM);
                 if (shopFlag) {
                     item.flags |= flag;
                 }
@@ -174,7 +172,7 @@ void sub_8045CB0(void)
     }
 }
 
-void sub_8045DB4(struct DungeonPos *pos, bool8 printMsg)
+void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
 {
     Item *tileItem;
     int inventoryIds[INVENTORY_SIZE + 1];
@@ -216,7 +214,7 @@ void sub_8045DB4(struct DungeonPos *pos, bool8 printMsg)
     }
     else {
         s32 i, maxItems;
-        if (gDungeon->unk644.unk17 != 0) {
+        if (gDungeon->unk644.hasInventory) {
             for (i = 0; i < INVENTORY_SIZE; i++) {
                 inventoryItems[i] = &gTeamInventoryRef->teamItems[i];
                 inventoryIds[i] = i;
@@ -393,12 +391,12 @@ bool8 sub_80461C8(DungeonPos *pos, bool8 a2)
     return TRUE;
 }
 
-s32 sub_8046298(Item *item)
+static s32 GetItemIconId(Item *item)
 {
     return gItemParametersData[item->id].icon;
 }
 
-bool8 sub_80462AC(Entity * entity, u8 a1, u8 a2, u8 a3, u8 a4)
+bool8 sub_80462AC(Entity * entity, u8 hallucinating, u8 a2, u8 a3, u8 a4)
 {
     s32 x, y, y2;
     s32 objMode = 0;
@@ -428,12 +426,12 @@ bool8 sub_80462AC(Entity * entity, u8 a1, u8 a2, u8 a3, u8 a4)
         s32 tileNum;
 
         SpriteSetMatrixNum(&gUnknown_202EDC0, 0);
-        if (a1) {
+        if (hallucinating) {
             tileNum = 0x17;
             SpriteSetPalNum(&gUnknown_202EDC0, 10);
         }
         else {
-            tileNum = sub_8046298(entity->axObj.info.item);
+            tileNum = GetItemIconId(entity->axObj.info.item);
             if (a3 != 0xFF && tileNum == 0) {
                 tileNum = gUnknown_203B420[a3];
                 SpriteSetMatrixNum(&gUnknown_202EDC0, gUnknown_203B428[a3] * 8);
@@ -560,7 +558,7 @@ void sub_804652C(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Dungeon
     }
 }
 
-void sub_8046734(Entity *entity, DungeonPos *pos)
+static void sub_8046734(Entity *entity, DungeonPos *pos)
 {
     PixelPos posPixel;
     PixelPos calcPixelPos;
@@ -737,7 +735,7 @@ bool8 HasHeldItem(Entity *pokemon, u8 id)
     return TRUE;
 }
 
-void sub_8046CE4(Item *item,s32 param_2)
+static void sub_8046CE4(Item *item,s32 param_2)
 {
     s32 i;
     s32 rand = DungeonRandInt(100);
@@ -768,7 +766,7 @@ void sub_8046D20(void)
     }
 }
 
-u8 sub_8046D70(void)
+static u8 sub_8046D70(void)
 {
     if (gDungeon->unk644.unk46)
         return 0;
@@ -776,7 +774,7 @@ u8 sub_8046D70(void)
         return 0;
 }
 
-void MusicBoxCreation(void)
+static void MusicBoxCreation(void)
 {
     bool8 musicBoxOnce;
     bool8 createMusicBox;
@@ -816,7 +814,7 @@ void MusicBoxCreation(void)
             ZeroOutItem(&gTeamInventoryRef->teamItems[indexes[2]]);
 
             // init the music box
-            xxx_init_itemslot_8090A8C(&gTeamInventoryRef->teamItems[indexes[0]], ITEM_MUSIC_BOX, 0);
+            ItemIdToSlot(&gTeamInventoryRef->teamItems[indexes[0]], ITEM_MUSIC_BOX, 0);
         }
     } while (musicBoxOnce);
 
@@ -871,7 +869,7 @@ bool8 sub_8046F00(Item *item)
     return TRUE;
 }
 
-void sub_8046F84(s32 itemFlag)
+void ClearAllItemsWithFlag(s32 itemFlag)
 {
     s32 i;
 
@@ -895,7 +893,7 @@ void sub_8046F84(s32 itemFlag)
     }
 }
 
-void sub_804700C(void)
+void AllItemsToPlainSeed(void)
 {
     s32 i;
 
@@ -903,7 +901,7 @@ void sub_804700C(void)
     {
         Item *item = &gTeamInventoryRef->teamItems[i];
         if ((item->flags & ITEM_FLAG_EXISTS)) {
-            xxx_init_itemslot_8090A8C(item, ITEM_PLAIN_SEED, 0);
+            ItemIdToSlot(item, ITEM_PLAIN_SEED, FALSE);
         }
     }
     FillInventoryGaps();
@@ -914,13 +912,13 @@ void sub_804700C(void)
             EntityInfo *entityInfo = GetEntInfo(entity);
             Item *item = &entityInfo->heldItem;
             if ((item->flags & ITEM_FLAG_EXISTS)) {
-                xxx_init_itemslot_8090A8C(item, ITEM_PLAIN_SEED, 0);
+                ItemIdToSlot(item, ITEM_PLAIN_SEED, FALSE);
             }
         }
     }
 }
 
-bool8 sub_8047084(s32 itemFlag)
+bool8 PlayerHasItemWithFlag(s32 itemFlag)
 {
     s32 i;
 
@@ -946,7 +944,7 @@ bool8 sub_8047084(s32 itemFlag)
     return FALSE;
 }
 
-void sub_8047104(void)
+void CleanUpInventoryItems(void)
 {
     s32 i;
 
@@ -965,7 +963,7 @@ void sub_8047104(void)
     FillInventoryGaps();
 }
 
-void sub_8047158(void)
+void ClearUnpaidFlagFromAllItems(void)
 {
     s32 i;
 

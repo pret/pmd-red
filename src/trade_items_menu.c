@@ -179,7 +179,7 @@ void sub_80365AC(void)
         RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
-        sub_801B3C0(&sTradeItemsMenu->itemToSend);
+        InitItemDescriptionWindow(&sTradeItemsMenu->itemToSend);
         SetTradeItemMenu(TRADE_ITEMS_ITEM_INFO);
         break;
   }
@@ -203,7 +203,7 @@ void sub_8036674(void)
         RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
-        sub_801B3C0(&sTradeItemsMenu->itemToSend);
+        InitItemDescriptionWindow(&sTradeItemsMenu->itemToSend);
         SetTradeItemMenu(TRADE_ITEMS_ITEM_INFO);
         break;
     case 7:
@@ -222,7 +222,7 @@ void sub_8036728(void)
   {
       case 2:
       case 3:
-        sub_801B450();
+        FreeItemDescriptionWindow();
         ResetUnusedInputStruct();
         ShowWindows(&sTradeItemsMenu->unk1E4, TRUE, TRUE);
         sub_801CB5C(TRUE);
