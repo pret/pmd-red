@@ -61,8 +61,6 @@ EWRAM_INIT DungeonPos gPlayerDotMapPosition = {100, 100};
 static EWRAM_INIT struct UnkStruct_203B414 *sUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
 EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
-EWRAM_INIT u8 gUnknown_203B420[8] = {0x15, 0x00, 0x16, 0x00, 0x15, 0x00, 0x16, 0x00}; // Could be a different file?
-EWRAM_INIT u8 gUnknown_203B428[8] = {0x02, 0x03, 0x01, 0x01, 0x00, 0x00, 0x00, 0x02}; // Could be a different file?
 
 struct UnkStruct_80F6624
 {

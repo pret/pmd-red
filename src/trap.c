@@ -764,7 +764,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
                     local_50.unk4 = 0;
                     local_50.unk10 = 0;
                     if (sub_806B7F8(&local_50, TRUE) != 0) {
-                        sub_80461C8(&local_50.pos,0);
+                        RemoveItemFromDungeonAt(&local_50.pos,0);
                         counter++;
                     }
                 }

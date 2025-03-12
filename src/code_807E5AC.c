@@ -38,7 +38,7 @@ extern u8 gUnknown_203B40D;
 extern OpenedFile *gUnknown_202ECA0;
 
 extern void sub_804178C(u32);
-extern bool8 sub_80461C8(DungeonPos *, u32);
+extern bool8 RemoveItemFromDungeonAt(DungeonPos *, u32);
 extern void sub_80429D8(Entity *r0);
 extern s32 GetMonsterApparentID(Entity *pokemon, s32 id);
 extern void sub_803E874(bool8 r10, s32 r9);
@@ -46,7 +46,7 @@ extern void GetWeatherName(u8 *dst, u8 weatherId);
 extern s32 CalculateStatusTurns(Entity *target, const s16 *turnRange, bool8 factorCurerSkills);
 extern void sub_80838EC(u8 *a);
 extern bool8 sub_8044B28(void);
-extern void sub_80460F8(DungeonPos *, Item *, u32);
+extern void AddItemToDungeonAt(DungeonPos *, Item *, u32);
 
 void sub_807E7FC(bool8 arg0);
 void sub_807EFFC(bool8 arg0);
@@ -498,11 +498,11 @@ void sub_807EFFC(bool8 arg0)
                     Item *itemPtr = GetItemData(tile->object);
                     if (!ItemInShop(itemPtr)) {
                         Item item = *itemPtr;
-                        sub_80461C8(&pos, 1);
+                        RemoveItemFromDungeonAt(&pos, 1);
                         if (CanSellItem(item.id)) {
                             item.flags |= ITEM_FLAG_IN_SHOP;
                         }
-                        sub_80460F8(&pos, &item, 1);
+                        AddItemToDungeonAt(&pos, &item, 1);
                     }
                 }
             }

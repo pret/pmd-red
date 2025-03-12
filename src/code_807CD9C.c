@@ -53,7 +53,7 @@ extern struct DungeonPos *gUnknown_8107178[3];
 
 extern void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 param_4,s32 param_5); // TODO: param_4 should be s16
 extern void sub_804216C(Entity *pokemon, Entity *target, u32 r2);
-extern void sub_80461C8(DungeonPos *, u32);
+extern void RemoveItemFromDungeonAt(DungeonPos *, u32);
 extern void sub_804218C(Entity *pokemon, Entity *target);
 
 EWRAM_INIT u32 gUnknown_203B444[3] = {0x28, 0x28, 0x50};
@@ -74,7 +74,7 @@ void sub_807BB78(Entity *pokemon);
 extern void sub_803F580(u32);
 bool8 sub_808384C(DungeonPos *, DungeonPos *);
 u8 sub_8083660(DungeonPos *);
-void sub_80460F8(DungeonPos *, Item *, u32);
+void AddItemToDungeonAt(DungeonPos *, Item *, u32);
 void sub_80462AC(Entity * ,u32, u32, u8, u32);
 extern void ShowDungeonMapAtPos(s32, s32);
 
@@ -502,7 +502,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
 
         for (i = 0; i < itemsCount; i++) {
             if (EntityIsValid(&itemEntities[i])) {
-                sub_80461C8(&itemEntities[i].pos, 1);
+                RemoveItemFromDungeonAt(&itemEntities[i].pos, 1);
                 ShowDungeonMapAtPos(itemEntities[i].pos.x, itemEntities[i].pos.y);
                 itemVelocity[i].x = (((targetTilePos[i].x * 24 + 4) * 256) - itemEntities[i].pixelPos.x) / 60;
                 itemVelocity[i].y = (((targetTilePos[i].y * 24 + 4) * 256) - itemEntities[i].pixelPos.y) / 60;
@@ -533,7 +533,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
 
         for (i = 0; i < itemsCount; i++) {
             if (targetTilePos[i].x >= 0) {
-                sub_80460F8(&targetTilePos[i], GetItemData(&itemEntities[i]), 1);
+                AddItemToDungeonAt(&targetTilePos[i], GetItemData(&itemEntities[i]), 1);
                 ShowDungeonMapAtPos(targetTilePos[i].x, targetTilePos[i].y);
                 hasTrawled = TRUE;
             }
@@ -834,7 +834,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
                     }
                     entity2 = tile->object;
                     if (((entity2 != NULL) && (entity2 != target)) && (GetEntityType(entity2) == ENTITY_ITEM)) {
-                        sub_80461C8(&pos, 0);
+                        RemoveItemFromDungeonAt(&pos, 0);
                     }
                     entity2 = tile->monster;
                     if (((entity2 != NULL) && (entity2 != target)) && (GetEntityType(entity2) == ENTITY_MONSTER)) {

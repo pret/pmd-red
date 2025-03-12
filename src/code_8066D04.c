@@ -224,7 +224,7 @@ void HandleGiveItemAction(Entity *param_1)
       item2.flags &= ~(ITEM_FLAG_SET);
       sub_8044DF0(param_1,0,100);
       if (bVar3) {
-        sub_80460F8(&param_1->pos,&item1,1);
+        AddItemToDungeonAt(&param_1->pos,&item1,1);
       }
       else {
         AddItemToInventory(&item1);
@@ -382,7 +382,7 @@ void HandlePlaceItemAction(Entity *entity)
         else {
             item->flags &= ~(ITEM_FLAG_SET);
             sub_8045BF8(gFormatBuffer_Items[0],item);
-            if (sub_80460F8(&entity->pos,item,1) == 0) {
+            if (AddItemToDungeonAt(&entity->pos,item,1) == 0) {
                 LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E04);
             }
             else {
@@ -428,9 +428,9 @@ void sub_8066E14(Entity *entity)
             newItems[0].flags &= ~(ITEM_FLAG_SET);
             newItems[1].flags &= ~(ITEM_FLAG_SET);
 
-            sub_80461C8(&info->action.actionParameters[0].itemPos,1);
+            RemoveItemFromDungeonAt(&info->action.actionParameters[0].itemPos,1);
             ZeroOutItem(item[1]);
-            if (!sub_80460F8(&info->action.actionParameters[0].itemPos,&newItems[1],1)) {
+            if (!AddItemToDungeonAt(&info->action.actionParameters[0].itemPos,&newItems[1],1)) {
                 LogMessageByIdWithPopupCheckUser(entity,*gNothingCanBePutDownHere);
             }
             else {
@@ -480,9 +480,9 @@ void sub_8066FA4(Entity *entity)
         newItems[0].flags &= ~(ITEM_FLAG_SET);
         newItems[1].flags &= ~(ITEM_FLAG_SET);
 
-        sub_80461C8(&entity->pos,1);
+        RemoveItemFromDungeonAt(&entity->pos,1);
         ZeroOutItem(item[0]);
-        if (!sub_80460F8(&entity->pos, &newItems[0],1)) {
+        if (!AddItemToDungeonAt(&entity->pos, &newItems[0],1)) {
             LogMessageByIdWithPopupCheckUser(entity,*gNothingCanBePutDownHere);
         }
         else {
@@ -560,7 +560,7 @@ void sub_80671A0(Entity *entity)
 
         if (info->action.actionParameters[0].actionUseIndex == 0x80) {
             item = NULL;
-            sub_80461C8(&info->action.actionParameters[0].itemPos, 1);
+            RemoveItemFromDungeonAt(&info->action.actionParameters[0].itemPos, 1);
         }
 
         r7 = TRUE;
@@ -577,7 +577,7 @@ void sub_80671A0(Entity *entity)
         else {
             if (info->action.actionParameters[0].actionUseIndex == 0x80) {
                 newItem.quantity--;
-                sub_80460F8(&info->action.actionParameters[0].itemPos, &newItem, 1);
+                AddItemToDungeonAt(&info->action.actionParameters[0].itemPos, &newItem, 1);
             }
             else {
                 item->quantity--;

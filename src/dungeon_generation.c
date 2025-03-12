@@ -21,7 +21,7 @@
 extern const u8 gUnknown_80F6DCC[];
 extern struct FileArchive gDungeonFileArchive;
 
-extern void sub_80460F8(DungeonPos *, Item *, u32);
+extern void AddItemToDungeonAt(DungeonPos *, Item *, u32);
 extern s32 sub_803DA20(s16 species);
 extern void sub_8049840(void);
 extern void sub_80429FC(DungeonPos *r0);
@@ -6105,7 +6105,7 @@ static void sub_805193C(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
         item.quantity = quantity;
     }
 
-    sub_80460F8(&pos, &item, 1);
+    AddItemToDungeonAt(&pos, &item, 1);
 }
 
 // s16 species memes strike again. Will the fix ever be discovered?

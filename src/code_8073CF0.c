@@ -146,7 +146,7 @@ void sub_8073D14(Entity *entity)
         }
         AddToTeamMoney(GetMoneyValue(groundItem));
         sub_8045BF8(gFormatBuffer_Items[0], groundItem);
-        sub_80461C8(&entity->pos, 1);
+        RemoveItemFromDungeonAt(&entity->pos, 1);
         DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem);
     }
     else {
@@ -208,7 +208,7 @@ void sub_8073D14(Entity *entity)
                     carriedItems[newInventoryId]->flags |= ITEM_FLAG_STICKY;
 
                 sub_8045BF8(gFormatBuffer_Items[0], groundItem);
-                sub_80461C8(&entity->pos, 1);
+                RemoveItemFromDungeonAt(&entity->pos, 1);
                 PlaySoundEffect(0x14A);
                 if (inventoryIds[newInventoryId] <= -1)
                     DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
@@ -239,7 +239,7 @@ void sub_8073D14(Entity *entity)
             if (inventoryIds[i] <= -1) {
                 _entityInfo->heldItem = *groundItem;
                 sub_8045BF8(gFormatBuffer_Items[0], groundItem);
-                sub_80461C8(&entity->pos, 1);
+                RemoveItemFromDungeonAt(&entity->pos, 1);
                 DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
             }
             else if (AddItemToInventory(groundItem)) {
@@ -248,7 +248,7 @@ void sub_8073D14(Entity *entity)
             }
             else {
                 sub_8045BF8(gFormatBuffer_Items[0], groundItem);
-                sub_80461C8(&entity->pos, 1);
+                RemoveItemFromDungeonAt(&entity->pos, 1);
                 DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItemToolbox);
             }
         }

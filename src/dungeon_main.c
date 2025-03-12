@@ -184,7 +184,7 @@ void DungeonHandlePlayerInput(void)
             ShowDungeonStairsMenu(GetLeader());
             ResetRepeatTimers();
             ResetUnusedInputStruct();
-            if (GetLeaderActionId() != 0) {
+            if (GetLeaderActionId() != ACTION_NOTHING) {
                 return;
             }
         }
@@ -1307,7 +1307,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 sub_806752C(GetLeaderActionContainer());
                 SetLeaderActionToNothing(TRUE);
             }
-            else if (GetLeaderActionId() == 0x34) {
+            else if (GetLeaderActionId() == ACTION_UNK34) {
                 sub_8067768(GetLeaderActionContainer());
                 SetLeaderActionToNothing(TRUE);
             }
@@ -1329,7 +1329,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                     if (EntityIsValid(teamMon)) {
                         if (i == GetLeaderActionContainer()->actionParameters[0].actionUseIndex) {
                             gTeamMenuChosenId = count;
-                            if (GetLeaderActionId() != 0) {
+                            if (GetLeaderActionId() != ACTION_NOTHING) {
                                 sub_806A2BC(teamMon, 0);
                             }
                             break;
@@ -1339,7 +1339,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                 }
             }
 
-            if (GetLeaderActionId() != 0)
+            if (GetLeaderActionId() != ACTION_NOTHING)
                 break;
         }
         else if (chosenOption == MAIN_MENU_MOVES) {
@@ -1439,7 +1439,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             }
             sub_806A2BC(GetLeader(), 0);
             ChangeDungeonCameraPos(&GetLeader()->pos, 0, 1, 1);
-            if (GetLeaderActionId() != 0)
+            if (GetLeaderActionId() != ACTION_NOTHING)
                 break;
         }
         else if (chosenOption == MAIN_MENU_GROUND) {
@@ -1464,43 +1464,43 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                     }
 
                     action = GetLeaderActionId();
-                    if (action == 0xC) {
+                    if (action == ACTION_SHOW_INFO) {
                         sub_8044D90(GetLeader(), 0, 0x10)->flags |= ITEM_FLAG_UNPAID;
                         DungeonShowItemDescription(GetLeaderActionContainer());
                         SetLeaderActionToNothing(TRUE);
                     }
-                    else if (action == 0x35) {
+                    else if (action == ACTION_UNK35) {
                         item = sub_8044D90(GetLeader(), 0, 0x11);
                         if (!sub_8048A68(GetLeader(), item)) {
                             SetLeaderActionToNothing(TRUE);
                         }
                     }
-                    else if (action == 0x10) {
+                    else if (action == ACTION_UNK10) {
                         item = sub_8044D90(GetLeader(), 0, 0x12);
                         if (!sub_8048950(GetLeader(), item)) {
                             SetLeaderActionToNothing(TRUE);
                         }
                     }
-                    else if (action == 0x2C) {
+                    else if (action == ACTION_USE_LINK_BOX) {
                         item = sub_8044D90(GetLeader(), 0, 0x13);
                         if (!sub_8048B9C(GetLeader(), item)) {
                             SetLeaderActionToNothing(TRUE);
                         }
                     }
-                    if (GetLeaderActionId() != 0)
+                    if (GetLeaderActionId() != ACTION_NOTHING)
                         break;
                 }
                 else if (GetEntityType(tileObject) == ENTITY_TRAP) {
                     SetLeaderActionToNothing(TRUE);
                     ShowDungeonTileMenu(GetLeader());
-                    if (GetLeaderActionId() != 0)
+                    if (GetLeaderActionId() != ACTION_NOTHING)
                         break;
                 }
             }
             else if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
                 SetLeaderActionToNothing(TRUE);
                 ShowDungeonStairsMenu(GetLeader());
-                if (GetLeaderActionId() != 0)
+                if (GetLeaderActionId() != ACTION_NOTHING)
                     break;
             }
             else {
@@ -1514,7 +1514,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             ShowDungeonOthersMenu();
             if (gDungeon->unk4)
                 break;
-            if (GetLeaderActionId() != 0)
+            if (GetLeaderActionId() != ACTION_NOTHING)
                 break;
             r10 = -1;
         }

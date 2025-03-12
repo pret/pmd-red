@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_items.h"
 #include "code_803E668.h"
 #include "code_8041AD0.h"
@@ -26,21 +27,20 @@
 #include "code_80450F8.h"
 #include "structs/str_item_text.h"
 
-extern s32 gUnknown_810A3F0[];
-extern u8 *gUnknown_80FA408[];
-extern u8 *gUnknown_810531C[];
-extern u8 *gUnknown_8105360[];
-extern u8 *gUnknown_81053A8[];
-extern u8 *gUnknown_8105434[];
-extern u8 *gPickedUpItemToolbox[];
-extern u8 *gMonTerrifiedCouldntPickUpItem[];
-extern u8 *gPickedUpItem2[];
-extern u8 *gMonCouldntPickUpItem[];
-extern u8 *gPickedUpItem[];
-extern u8 *gMonSteppedOnItem[];
-extern struct unkStruct_8090F58 gUnknown_80F699C;
-extern struct unkStruct_8090F58 gUnknown_80F69A8;
-extern struct unkStruct_8090F58 gUnknown_80F6990;
+extern SpriteOAM gUnknown_202EDC0;
+
+extern const s32 gUnknown_810A3F0[];
+extern const u8 *gUnknown_80FA408[];
+extern const u8 *gUnknown_810531C[];
+extern const u8 *gUnknown_8105360[];
+extern const u8 *gUnknown_81053A8[];
+extern const u8 *gUnknown_8105434[];
+extern const u8 *gPickedUpItemToolbox[];
+extern const u8 *gMonTerrifiedCouldntPickUpItem[];
+extern const u8 *gPickedUpItem2[];
+extern const u8 *gMonCouldntPickUpItem[];
+extern const u8 *gPickedUpItem[];
+extern const u8 *gMonSteppedOnItem[];
 extern const u8 *const gUnknown_80FED30;
 extern const DungeonPos gUnknown_80F4468[];
 extern const u8 *const gItemFellOnGround;
@@ -64,12 +64,15 @@ extern u32 GetRandomFloorItem(u32);
 static void MusicBoxCreation(void);
 static u8 sub_8046D70(void);
 
-extern SpriteOAM gUnknown_202EDC0;
-extern u8 gUnknown_203B420[];
-extern u8 gUnknown_203B428[];
+static EWRAM_INIT u8 sUnkItemTileNums[8] = {0x15, 0x00, 0x16, 0x00, 0x15, 0x00, 0x16, 0x00};
+static EWRAM_INIT u8 sUnkItemMatrixNums[8] = {0x02, 0x03, 0x01, 0x01, 0x00, 0x00, 0x00, 0x02};
 
 static void sub_8046734(Entity *entity, DungeonPos *pos);
 static void sub_8046CE4(Item *item,s32 param_2);
+
+static const struct unkStruct_8090F58 gUnknown_80F6990 = {1, 1, 0, 0, 1};
+static const struct unkStruct_8090F58 gUnknown_80F699C = {0, 0, 0, 0, 1};
+static const struct unkStruct_8090F58 gUnknown_80F69A8 = {0, 0, 0, 0, 0};
 
 void sub_8045BF8(u8 *buffer, Item *item)
 {
@@ -166,7 +169,7 @@ void CreateFloorItems(void)
                 if (shopFlag) {
                     item.flags |= flag;
                 }
-                sub_80460F8(&pos,&item,TRUE);
+                AddItemToDungeonAt(&pos,&item,TRUE);
             }
         }
     }
@@ -208,7 +211,7 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
         PlaySoundEffect(0x14c);
         AddToTeamMoney(GetMoneyValue(tileItem));
         sub_8045BF8(gFormatBuffer_Items[0],tileItem);
-        sub_80461C8(pos,1);
+        RemoveItemFromDungeonAt(pos,TRUE);
         LogMessageByIdWithPopupCheckUser(leader,*gPickedUpItem);
         TryDisplayItemPickupTutorialMessage(tileItem->id);
     }
@@ -275,7 +278,7 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
                     inventoryItems[index]->flags |= ITEM_FLAG_STICKY;
                 }
                 sub_8045BF8(gFormatBuffer_Items[0],tileItem);
-                sub_80461C8(pos,1);
+                RemoveItemFromDungeonAt(pos,TRUE);
                 PlaySoundEffect(0x14a);
                 if (inventoryIds[index] < 0) {
                     LogMessageByIdWithPopupCheckUser(leader,*gPickedUpItem2);
@@ -306,7 +309,7 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
             if (inventoryIds[i] < 0) {
                 leaderInfo->heldItem = *tileItem;
                 sub_8045BF8(gFormatBuffer_Items[0],tileItem);
-                sub_80461C8(pos,1);
+                RemoveItemFromDungeonAt(pos,TRUE);
                 LogMessageByIdWithPopupCheckUser(leader,*gPickedUpItem2);
             }
             else if (AddItemToInventory(tileItem) != 0) {
@@ -315,7 +318,7 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
             }
             else {
                 sub_8045BF8(gFormatBuffer_Items[0],tileItem);
-                sub_80461C8(pos,1);
+                RemoveItemFromDungeonAt(pos,TRUE);
                 LogMessageByIdWithPopupCheckUser(leader,*gPickedUpItemToolbox);
             }
             TryDisplayItemPickupTutorialMessage(tileItem->id);
@@ -323,19 +326,19 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
     }
 }
 
-bool8 sub_80460F8(DungeonPos *pos, Item *item, bool8 a2)
+bool8 AddItemToDungeonAt(DungeonPos *pos, Item *item, bool8 a2)
 {
     s32 i, count;
     Tile *tile;
-    Entity *entity = sub_8045708(pos);
+    Entity *itemEntity = sub_8045708(pos);
 
-    if (entity == NULL)
+    if (itemEntity == NULL)
         return FALSE;
-    *entity->axObj.info.item = *item;
-    entity->axObj.info.item->flags &= ~(ITEM_FLAG_SET);
-    entity->isVisible = TRUE;
+    *itemEntity->axObj.info.item = *item;
+    itemEntity->axObj.info.item->flags &= ~(ITEM_FLAG_SET);
+    itemEntity->isVisible = TRUE;
     tile = GetTileMut(pos->x, pos->y);
-    tile->object = entity;
+    tile->object = itemEntity;
     if ((tile->terrainType & TERRAIN_TYPE_SHOP) && CanSellItem(item->id)) {
         if (item->flags & ITEM_FLAG_IN_SHOP) {
             if (a2) {
@@ -357,7 +360,7 @@ bool8 sub_80460F8(DungeonPos *pos, Item *item, bool8 a2)
     return TRUE;
 }
 
-bool8 sub_80461C8(DungeonPos *pos, bool8 a2)
+bool8 RemoveItemFromDungeonAt(DungeonPos *pos, bool8 a2)
 {
     s32 i, count;
     Item *item;
@@ -433,8 +436,8 @@ bool8 sub_80462AC(Entity * entity, u8 hallucinating, u8 a2, u8 a3, u8 a4)
         else {
             tileNum = GetItemIconId(entity->axObj.info.item);
             if (a3 != 0xFF && tileNum == 0) {
-                tileNum = gUnknown_203B420[a3];
-                SpriteSetMatrixNum(&gUnknown_202EDC0, gUnknown_203B428[a3] * 8);
+                tileNum = sUnkItemTileNums[a3];
+                SpriteSetMatrixNum(&gUnknown_202EDC0, sUnkItemMatrixNums[a3] * 8);
             }
             SpriteSetPalNum(&gUnknown_202EDC0, GetItemPalette(entity->axObj.info.item->id));
         }
@@ -461,7 +464,6 @@ const u8 *sub_80464AC(Item *item)
 
 void sub_80464C8(Entity *entity, DungeonPos *pos, Item *item)
 {
-
     s32 x, y;
     Entity itemEntity;
 
@@ -517,7 +519,7 @@ void sub_804652C(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Dungeon
         if (GetTerrainType(tile) != TERRAIN_TYPE_WALL && !(tile->terrainType & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
             sub_8046734(entity2, &localPos);
             localPos2 = localPos;
-            if (GetTerrainType(tile) == (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL) || (sub_80460F8(&localPos, item, TRUE))) {
+            if (GetTerrainType(tile) == (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL) || (AddItemToDungeonAt(&localPos, item, TRUE))) {
                 var_24 = TRUE;
             }
             break;
@@ -714,7 +716,7 @@ void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item,
 
         for (i = 0; i < count; i++) {
             if (targetTilePos[i].x >= 0) {
-                sub_80460F8(&targetTilePos[i], &item[i], TRUE);
+                AddItemToDungeonAt(&targetTilePos[i], &item[i], TRUE);
             }
         }
     }

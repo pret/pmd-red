@@ -3715,7 +3715,7 @@ void sub_808B1CC(u8 itemID)
         (sub_80860A8(ITEM_MUSIC_BOX) == 0)) {
         ItemIdToSlot(&item,itemID,0);
         pos.y--;
-        sub_80460F8(&pos,&item,1);
+        AddItemToDungeonAt(&pos,&item,1);
     }
     sub_8049ED4();
     ShowWholeRevealedDungeonMap();
