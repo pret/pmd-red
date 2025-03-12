@@ -16,7 +16,9 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "trap.h"
+#include "math.h"
 #include "code_80450F8.h"
+#include "dungeon_util.h"
 #include "structs/str_item_text.h"
 
 extern u8 *gUnknown_80FE6F4[];
@@ -602,6 +604,176 @@ void sub_804652C(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Dungeon
 
         sub_804219C(&pixelPos);
         TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemLost);
+    }
+}
+
+extern void DungeonRunFrameActions(u32);
+
+void sub_8046734(Entity *entity, DungeonPos *pos)
+{
+    PixelPos posPixel;
+    PixelPos calcPixelPos;
+    bool8 hallucinating = gDungeon->unk181e8.hallucinating;
+
+    posPixel.x = ((pos->x * 24) + 4) << 8;
+    posPixel.y = ((pos->y * 24) + 4) << 8;
+    if (abs(entity->pixelPos.x - posPixel.x) > 11 || abs(entity->pixelPos.y - posPixel.y) > 11) {
+        s32 i;
+        PixelPos add;
+        s32 unk = 0; // Direction?
+        s32 sinVal = 0;
+
+        calcPixelPos.x = entity->pixelPos.x;
+        calcPixelPos.y = entity->pixelPos.y;
+
+        add.x = (posPixel.x - calcPixelPos.x) / 24;
+        add.y = (posPixel.y - calcPixelPos.y) / 24;
+        for (i = 0; i < 24; i++) {
+            calcPixelPos.x += add.x;
+            calcPixelPos.y += add.y;
+            entity->unk1C.raw = sin_4096(sinVal) * 12;
+            sub_804535C(entity, &calcPixelPos);
+            sub_80462AC(entity, hallucinating, 0, unk, 0);
+            DungeonRunFrameActions(0x13);
+            sinVal += 85;
+            if ((i & 3) == 0) {
+                unk++;
+            }
+            unk &= 7;
+        }
+    }
+
+    SetEntityPixelPos(entity, posPixel.x, posPixel.y);
+    entity->unk1C.raw = 0;
+    sub_80462AC(entity, hallucinating, 1, 0xFF, 0);
+    DungeonRunFrameActions(0x13);
+}
+
+extern void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item, s32 a4);
+
+void sub_8046860(Entity *entity, DungeonPos *pos, Item *item, s32 a4)
+{
+    sub_804687C(entity, pos, pos, item, a4);
+}
+
+extern const u8 *gSeveralItemsLost;
+extern const u8 *gItemLost;
+extern const u8 *gAllItemsLost;
+
+void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item, s32 count)
+{
+    Entity itemEntities[10];
+    DungeonPos targetTilePos[10];
+    PixelPos itemVelocity[10];
+    u8 targetTileUsed[30];
+    s32 sinVal;
+    s32 i;
+    bool8 r1, r9;
+
+    for (i = 0; i < 30; i++) {
+        targetTileUsed[i] = 0;
+    }
+
+    for (i = 0; i < count; i++) {
+        s32 j;
+        bool8 foundTile = FALSE;
+        DungeonPos pos;
+
+        pos.x = pos2->x;
+        pos.y = pos2->y;
+
+        for (j = 0; j < 30; j++) {
+            if (gUnknown_80F4468[j].x == 99)
+                break;
+            if (!targetTileUsed[j]) {
+                const Tile *tile;
+
+                pos.x = pos2->x + gUnknown_80F4468[j].x;
+                pos.y = pos2->y + gUnknown_80F4468[j].y;
+
+                tile = GetTile(pos.x, pos.y);
+                if (GetTerrainType(tile) != TERRAIN_TYPE_WALL && !(tile->terrainType & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
+                    targetTilePos[i] = pos;
+                    targetTileUsed[j] = TRUE;
+                    foundTile = TRUE;
+                    break;
+                }
+            }
+        }
+
+        if (!foundTile) {
+            targetTilePos[i].x = -1;
+            targetTilePos[i].y = -1;
+        }
+    }
+
+    r1 = FALSE;
+    r9 = FALSE;
+    for (i = 0; i < count; i++) {
+        if (targetTilePos[i].x < 0) {
+            itemEntities[i].type = ENTITY_NOTHING;
+            r9 = TRUE;
+        }
+        else {
+            s32 x, y;
+
+            itemEntities[i].type = ENTITY_ITEM;
+            itemEntities[i].unk24 = 0;
+            itemEntities[i].isVisible = TRUE;
+            itemEntities[i].unk22 = 0;
+            itemEntities[i].axObj.info.item = &item[i];
+            itemEntities[i].pos = targetTilePos[i];
+            x = ((pos1->x * 24) + 4) << 8;
+            y = ((pos1->y * 24) + 4) << 8;
+            SetEntityPixelPos(&itemEntities[i], x, y);
+            itemEntities[i].spawnGenID = 0;
+            itemVelocity[i].x = ((((targetTilePos[i].x * 24) + 4) << 8) - (itemEntities[i].pixelPos.x)) / 24;
+            itemVelocity[i].y = ((((targetTilePos[i].y * 24) + 4) << 8) - (itemEntities[i].pixelPos.y)) / 24;
+            r1 = TRUE;
+        }
+    }
+
+    if (!r1) {
+        if (count > 1) {
+            LogMessageByIdWithPopupCheckUser(entity, gAllItemsLost);
+        }
+        else {
+            LogMessageByIdWithPopupCheckUser(entity, gItemLost);
+        }
+    }
+    else {
+        s32 counter;
+        s32 dirMaybe;
+        bool8 hallucinating;
+
+        if (r9) {
+            LogMessageByIdWithPopupCheckUser(entity, gSeveralItemsLost);
+        }
+
+        dirMaybe = 0;
+        hallucinating = gDungeon->unk181e8.hallucinating;
+        sinVal = 0;
+        for (counter = 0; counter < 24; counter++) {
+            for (i = 0; i < count; i++) {
+                if (EntityIsValid(&itemEntities[i])) {
+                    IncreaseEntityPixelPos(&itemEntities[i], itemVelocity[i].x, itemVelocity[i].y);
+                    itemEntities[i].unk1C.raw = sin_4096(sinVal) * 12;
+                    sub_80462AC(&itemEntities[i], hallucinating, 1, dirMaybe, 0);
+                }
+            }
+            DungeonRunFrameActions(0x13);
+            sinVal += 85;
+            if ((counter & 3) == 0) {
+                dirMaybe++;
+            }
+            dirMaybe &= 7;
+        }
+
+        for (i = 0; i < count; i++) {
+            if (targetTilePos[i].x >= 0) {
+                sub_80460F8(&targetTilePos[i], &item[i], TRUE);
+            }
+        }
     }
 }
 

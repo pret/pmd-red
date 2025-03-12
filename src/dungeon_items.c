@@ -292,15 +292,11 @@ void sub_8047104(void)
         if(item->id == ITEM_POKE)
         {
             AddToTeamMoney(GetMoneyValue(item));
-            item->id = 0;
-            item->quantity = 0;
-            item->flags = 0;
+            ZeroOutItem(item);
         }
         if(item->flags & ITEM_FLAG_IN_SHOP)
         {
-            item->id = 0;
-            item->quantity = 0;
-            item->flags = 0;
+            ZeroOutItem(item);
         }
     }
   }
