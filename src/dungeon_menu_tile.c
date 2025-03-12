@@ -154,7 +154,7 @@ static void ShowTileDescription(DungeonPos *pos)
         Entity *object;
         Trap *trap;
         bool8 bPress = FALSE;
-        const struct StatusText *statuses[MAX_STATUS_TEXTS];
+        STATUSTEXTS(statuses);
         MenuInputStructSub menuSub;
         WindowHeader header;
         WindowTemplates windows = {

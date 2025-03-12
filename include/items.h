@@ -81,7 +81,7 @@ s32 SaveTeamInventory(u8 *, u32 size);
 
 
 s32 WriteHighDecimal(s32, u8 *strbuf, u8);
-u32 sub_80913E0(Item* slot, u32 a2, const struct StatusText *statuses[MAX_STATUS_TEXTS]);
+u32 sub_80913E0(Item* slot, u32 a2, STATUSTEXTS(statuses));
 
 static inline void ZeroOutItem(Item *item)
 {

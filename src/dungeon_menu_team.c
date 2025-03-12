@@ -1262,7 +1262,7 @@ void ShowStatusDescriptionMenuArrow(void)
     }
 }
 
-void ShowStatusesDescriptionMenu(s32 count, const struct StatusText *statuses[MAX_STATUS_TEXTS])
+void ShowStatusesDescriptionMenu(s32 count, STATUSTEXTS(statuses))
 {
     s32 i;
     MenuInputStructSub menuSub;
@@ -1293,7 +1293,7 @@ static void ShowIqDescriptionWindow(u8 iqSkillId)
     MenuInputStructSub menuSub;
     WindowTemplates windows;
     WindowHeader header;
-    const struct StatusText *result[MAX_STATUS_TEXTS];
+    STATUSTEXTS(result);
 
     while (1) {
         s32 count;
@@ -1346,9 +1346,9 @@ static void ShowTacticDescriptionWindow(u8 tacticId)
     MenuInputStructSub menuSub;
     WindowTemplates windows;
     WindowHeader header;
-    const struct StatusText *result[MAX_STATUS_TEXTS];
+    STATUSTEXTS(result);
 
-    while (1) {
+    while (TRUE) {
         s32 count;
         bool8 bPress;
 

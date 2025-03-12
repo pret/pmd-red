@@ -12,7 +12,7 @@ struct IQSkillInfoMenu
     /* 0x4 */ u8 chosenIQSkill;
     s32 unk8;
     s32 unkC;
-    const struct StatusText *unk10[MAX_STATUS_TEXTS];
+    STATUSTEXTS(unk10);
     u32 unk20;
     u32 unk24;
     WindowTemplates unk28;

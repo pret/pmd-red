@@ -3,6 +3,6 @@
 
 #include "structs/str_status_text.h"
 
-s32 PrepareStatusStringArrays(const char *str, const struct StatusText *statuses[MAX_STATUS_TEXTS]);
+s32 PrepareStatusStringArrays(const char *str, STATUSTEXTS(statuses));
 
 #endif // GUARD_CODE_8097DD0_H

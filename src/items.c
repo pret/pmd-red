@@ -632,7 +632,7 @@ u16 GetItemMoveID(u8 index)
   return gItemParametersData[index].moveID;
 }
 
-u32 sub_80913E0(Item* slot, u32 a2, const struct StatusText *statuses[MAX_STATUS_TEXTS])
+u32 sub_80913E0(Item* slot, u32 a2, STATUSTEXTS(statuses))
 {
   u8 buffer88[88];  // some struct
 

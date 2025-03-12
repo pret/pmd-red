@@ -1359,7 +1359,7 @@ void RemoveLinkSequenceFromMoves8(Move *moves, s32 index)
         moves[i] = moveSet[i];
 }
 
-s32 unk_MoveIDPrintMoveDescription(s32 a1, u16 moveID, s32 a3, const struct StatusText *statuses[MAX_STATUS_TEXTS])
+s32 unk_MoveIDPrintMoveDescription(s32 a1, u16 moveID, s32 a3, STATUSTEXTS(statuses))
 {
     Move move;
 
@@ -1367,7 +1367,7 @@ s32 unk_MoveIDPrintMoveDescription(s32 a1, u16 moveID, s32 a3, const struct Stat
     return unk_PrintMoveDescription(a1, &move, a3, statuses);
 }
 
-UNUSED static s32 unk_MovePrintMoveDescription(s32 a1, Move *move, s32 a3, const struct StatusText *statuses[MAX_STATUS_TEXTS])
+UNUSED static s32 unk_MovePrintMoveDescription(s32 a1, Move *move, s32 a3, STATUSTEXTS(statuses))
 {
     Move newMove;
 
@@ -1375,7 +1375,7 @@ UNUSED static s32 unk_MovePrintMoveDescription(s32 a1, Move *move, s32 a3, const
     return unk_PrintMoveDescription(a1, &newMove, a3, statuses);
 }
 
-s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, const struct StatusText *statuses[MAX_STATUS_TEXTS])
+s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, STATUSTEXTS(statuses))
 {
     u8 *moveDescription;
     s32 y;
