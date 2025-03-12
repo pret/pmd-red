@@ -15,4 +15,4 @@ void ActionLinkMoves(ActionContainer *a0);
 void ActionDelinkMoves(ActionContainer *a0, bool8 showMsg);
 bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBPress);
 
-#endif
+#endif // GUARD_DUNGEON_MENU_MOVES_H
