@@ -1359,23 +1359,23 @@ void RemoveLinkSequenceFromMoves8(Move *moves, s32 index)
         moves[i] = moveSet[i];
 }
 
-s32 unk_MoveIDPrintMoveDescription(s32 a1, u16 moveID, s32 a3, struct subStruct_203B240 **a4)
+s32 unk_MoveIDPrintMoveDescription(s32 a1, u16 moveID, s32 a3, const struct StatusText *statuses[MAX_STATUS_TEXTS])
 {
     Move move;
 
     InitPokemonMove(&move, moveID);
-    return unk_PrintMoveDescription(a1, &move, a3, a4);
+    return unk_PrintMoveDescription(a1, &move, a3, statuses);
 }
 
-UNUSED static s32 unk_MovePrintMoveDescription(s32 a1, Move *move, s32 a3, struct subStruct_203B240 **a4)
+UNUSED static s32 unk_MovePrintMoveDescription(s32 a1, Move *move, s32 a3, const struct StatusText *statuses[MAX_STATUS_TEXTS])
 {
     Move newMove;
 
     CopyAndResetMove(&newMove, move);
-    return unk_PrintMoveDescription(a1, &newMove, a3, a4);
+    return unk_PrintMoveDescription(a1, &newMove, a3, statuses);
 }
 
-s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, struct subStruct_203B240 **a4)
+s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, const struct StatusText *statuses[MAX_STATUS_TEXTS])
 {
     u8 *moveDescription;
     s32 y;
@@ -1396,7 +1396,7 @@ s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, struct subStruct_203B240
     unk_MovePrintData(move, a3);
     sub_80073E0(a3);
     strcpy(buffer, sMovesData[move->id].description);
-    return sub_8097DF0(buffer, a4);
+    return PrepareStatusStringArrays(buffer, statuses);
 }
 
 static void unk_MovePrintData(Move *move, s32 y)

@@ -1262,14 +1262,14 @@ void ShowStatusDescriptionMenuArrow(void)
     }
 }
 
-void ShowStatusesDescriptionMenu(s32 count, struct subStruct_203B240 **strings)
+void ShowStatusesDescriptionMenu(s32 count, const struct StatusText *statuses[MAX_STATUS_TEXTS])
 {
     s32 i;
     MenuInputStructSub menuSub;
 
     sub_801317C(&menuSub);
     for (i = 0; i < count; i++) {
-        ShowStatusDescriptionMenu(strings[i], &menuSub);
+        ShowStatusDescriptionMenu(statuses[i], &menuSub);
         while (1) {
             if (i < count - 1) {
                 ShowStatusDescriptionMenuArrow();
@@ -1293,7 +1293,7 @@ static void ShowIqDescriptionWindow(u8 iqSkillId)
     MenuInputStructSub menuSub;
     WindowTemplates windows;
     WindowHeader header;
-    struct subStruct_203B240 *result[4];
+    const struct StatusText *result[MAX_STATUS_TEXTS];
 
     while (1) {
         s32 count;
@@ -1313,7 +1313,7 @@ static void ShowIqDescriptionWindow(u8 iqSkillId)
         PrintFormattedStringOnWindow(16, 0, gUnknown_80FE95C, 0, '\0');
         PrintFormattedStringOnWindow(8, 16, GetIQSkillDescription(iqSkillId), 0, '\0');
         sub_80073E0(0);
-        count = sub_8097DF0(GetIQSkillDescription(iqSkillId), result);
+        count = PrepareStatusStringArrays(GetIQSkillDescription(iqSkillId), result);
         while (1) {
             if (count != 0) {
                 ShowStatusDescriptionMenuArrow();
@@ -1346,7 +1346,7 @@ static void ShowTacticDescriptionWindow(u8 tacticId)
     MenuInputStructSub menuSub;
     WindowTemplates windows;
     WindowHeader header;
-    struct subStruct_203B240 *result[4];
+    const struct StatusText *result[MAX_STATUS_TEXTS];
 
     while (1) {
         s32 count;
@@ -1366,7 +1366,7 @@ static void ShowTacticDescriptionWindow(u8 tacticId)
         PrintFormattedStringOnWindow(16, 0, gUnknown_80FE960, 0, '\0');
         PrintFormattedStringOnWindow(8, 16, GetTacticsDescription(tacticId), 0, '\0');
         sub_80073E0(0);
-        count = sub_8097DF0(GetTacticsDescription(tacticId), result);
+        count = PrepareStatusStringArrays(GetTacticsDescription(tacticId), result);
         while (1) {
             if (count != 0) {
                 ShowStatusDescriptionMenuArrow();

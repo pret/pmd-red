@@ -632,7 +632,7 @@ u16 GetItemMoveID(u8 index)
   return gItemParametersData[index].moveID;
 }
 
-u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
+u32 sub_80913E0(Item* slot, u32 a2, const struct StatusText *statuses[MAX_STATUS_TEXTS])
 {
   u8 buffer88[88];  // some struct
 
@@ -665,7 +665,7 @@ u32 sub_80913E0(Item* slot, u32 a2, struct subStruct_203B240 ** a3)
   }
 
   sub_80073E0(a2);
-  return sub_8097DF0(GetItemDescription(slot->id), a3);
+  return PrepareStatusStringArrays(GetItemDescription(slot->id), statuses);
 }
 
 bool8 CanSellItem(u32 id)

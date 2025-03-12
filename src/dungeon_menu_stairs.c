@@ -164,7 +164,7 @@ static void ShowStairsDescription(DungeonPos *pos)
     while (1) {
         u8 floorType;
         bool8 bPress;
-        struct subStruct_203B240 *statuses[4];
+        const struct StatusText *statuses[MAX_STATUS_TEXTS];
         MenuInputStructSub menuSub;
         WindowHeader header;
         WindowTemplates windows = {
@@ -197,7 +197,7 @@ static void ShowStairsDescription(DungeonPos *pos)
         PrintStringOnWindow(16, 0, gUnknown_80F8104[floorType], 0, '\0');
         PrintStringOnWindow(8, 24, gUnknown_80F7F70[floorType], 0, '\0');
         sub_80073E0(0);
-        statusesCount = sub_8097DF0(gUnknown_80F7F70[floorType], statuses);
+        statusesCount = PrepareStatusStringArrays(gUnknown_80F7F70[floorType], statuses);
         while (1) {
             if (statusesCount != 0) {
                 ShowStatusDescriptionMenuArrow();

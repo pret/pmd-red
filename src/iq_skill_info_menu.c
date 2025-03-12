@@ -75,8 +75,7 @@ static void SetIQSkillInfoMenuState(s32 newState)
 
 static void sub_801C6E4(void)
 {
-    u8 *skillName;
-    struct subStruct_203B240 *preload;
+    const u8 *skillName;
 
     switch (sIQSkillInfoMenu->state) {
         case IQ_SKILL_INFO_MENU_INIT:
@@ -87,16 +86,15 @@ static void sub_801C6E4(void)
             PrintFormattedStringOnWindow(16, 0, sFmtMoveItem0, 0, 0); // {MOVE_ITEM_0}
             PrintStringOnWindow(8, 16, GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk24, 0);
             sub_80073E0(sIQSkillInfoMenu->unk24);
-            sIQSkillInfoMenu->unkC = sub_8097DF0(GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk10);
+            sIQSkillInfoMenu->unkC = PrepareStatusStringArrays(GetIQSkillDescription(sIQSkillInfoMenu->chosenIQSkill), sIQSkillInfoMenu->unk10);
             sIQSkillInfoMenu->unk20 = 0;
             break;
         case 1:
             CallPrepareTextbox_8008C54(sIQSkillInfoMenu->unk24);
             sub_80073B8(sIQSkillInfoMenu->unk24);
-            preload = sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8];
-            strcpy(gFormatBuffer_Monsters[0], preload->pokeName);
+            InlineStrcpy(gFormatBuffer_Monsters[0], sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8]->name);
             PrintFormattedStringOnWindow(16, 0, sFmtPkmn0, sIQSkillInfoMenu->unk24, 0); // {POKEMON_0}
-            PrintFormattedStringOnWindow(4, 16, sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8]->unk4, sIQSkillInfoMenu->unk24, 0);
+            PrintFormattedStringOnWindow(4, 16, sIQSkillInfoMenu->unk10[sIQSkillInfoMenu->unk8]->desc, sIQSkillInfoMenu->unk24, 0);
             sub_80073E0(sIQSkillInfoMenu->unk24);
             break;
         case 2:
