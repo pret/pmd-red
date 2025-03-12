@@ -5,13 +5,22 @@
 #include "structs/axdata.h"
 #include "file_system.h"
 
-// size: 0x20
-struct axMapSprite
+typedef struct Palette256
 {
-    axmain axmain;
-    const u32 *tiles;
-    const RGB *pal;
-    s32 tileCount;
+    RGB pal[256];
+} Palette256;
+
+// size: 0x20
+struct EfoFileData
+{
+    /* 0x0 */ ax_pose **poses; // TODO: Verify if these fields' names are actually valid
+    /* 0x4 */ ax_anim ***animations;
+    /* 0x8 */ s32 animCount;
+    /* 0xC */ void *spriteData; // ?
+    /* 0x10 */ Palette256 *unk10; // ?
+    /* 0x14 */const u32 *tiles;
+    /* 0x18 */const RGB *pal;
+    /* 0x1C */s32 tileCount;
 };
 
 extern s16 *gUnknown_203B078;
@@ -24,6 +33,7 @@ void nullsub_12(void);
 void nullsub_13(void);
 void nullsub_14(void);
 void sub_8005610(OpenedFile *, s32, s32, const RGB *);
+const RGB *sub_8005674(const struct EfoFileData *a0, s32 vramIdx);
 void sub_8005770(s32, const RGB *color, s32, const RGB *ramp);
 void sub_80057E8(void);
 void sub_8005838(s32 *, u8 kind);

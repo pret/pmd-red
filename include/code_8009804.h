@@ -13,8 +13,14 @@ struct unkStruct_202D240
     u32 size;
 };
 
-void vram_related_8009804(void);
+struct unkStruct_8009A1C_ptr
+{
+    u8 fill0;
+    struct EfoFileData *ptr;
+};
 
+void vram_related_8009804(void);
+void sub_8009A1C(const struct EfoFileData *r0, u32 palId, u32 vramDstOffset, u32 r3);
 void InitFontPalette(void);
 void sub_80098A0(void);
 void sub_80098BC(u32 *, const u32 *, u32);

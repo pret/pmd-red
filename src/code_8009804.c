@@ -4,6 +4,7 @@
 #include "cpu.h"
 #include "file_system.h"
 #include "text.h"
+#include "code_800558C.h"
 
 extern const u8 gUnknown_80B88CC[];
 extern const struct FileArchive gSystemFileArchive; // 8300500
@@ -13,27 +14,6 @@ EWRAM_DATA static u8 gUnknown_202D238[4] = {0};
 EWRAM_DATA static s32 gUnknown_202D23C = 0;
 EWRAM_DATA static struct unkStruct_202D240 gUnknown_202D240[8] = {0};
 EWRAM_DATA u32 gUnknown_202D2A0 = 0;
-
-typedef struct Palette256
-{
-    RGB pal[256];
-} Palette256;
-
-struct unkStruct_8009A1C
-{
-    u8 fill0[0x8];
-    s32 unk8;
-    u32 *unkC;
-    Palette256 *unk10;
-};
-
-struct unkStruct_8009A1C_ptr
-{
-    u8 fill0;
-    struct unkStruct_8009A1C *ptr;
-};
-
-void sub_8009A1C(struct unkStruct_8009A1C *r0, u32 palId, u32 vramDstOffset, u32 r3);
 
 void InitFontPalette(void)
 {
@@ -158,16 +138,16 @@ UNUSED static void sub_8009A10(struct unkStruct_8009A1C_ptr *a0, u32 palId, u32 
     sub_8009A1C(a0->ptr, palId, vramDstOffset, r3);
 }
 
-void sub_8009A1C(struct unkStruct_8009A1C *r0, u32 palId, u32 vramDstOffset, u32 r3)
+void sub_8009A1C(const struct EfoFileData *r0, u32 palId, u32 vramDstOffset, u32 r3)
 {
-    s32 i;
+    s32 i, palPtrId;
     u32 *dst, *src;
 
     gUnknown_202D2A0 = r3;
-    src = r0->unkC;
+    src = r0->spriteData;
     dst = (void *)(VRAM) + vramDstOffset;
 
-    for (i = 0; i <= r0->unk8; i++) {
+    for (i = 0; i <= r0->animCount; i++) {
         *dst++ = *src++;
         *dst++ = *src++;
         *dst++ = *src++;
@@ -178,7 +158,7 @@ void sub_8009A1C(struct unkStruct_8009A1C *r0, u32 palId, u32 vramDstOffset, u32
         *dst++ = *src++;
     }
 
-    for (i = 0; i < 16; i++) {
+    for (i = 0, palPtrId = palId * 64; i < 16; i++) {
         SetBGPaletteBufferColorArray(i + 0xE0, &r0->unk10->pal[i + palId * 16]);
     }
 }
