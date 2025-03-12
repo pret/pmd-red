@@ -140,7 +140,7 @@ UNUSED static void sub_8009A10(struct unkStruct_8009A1C_ptr *a0, u32 palId, u32 
 
 void sub_8009A1C(const struct EfoFileData *r0, u32 palId, u32 vramDstOffset, u32 r3)
 {
-    s32 i, palPtrId;
+    s32 i;
     u32 *dst, *src;
 
     gUnknown_202D2A0 = r3;
@@ -158,7 +158,7 @@ void sub_8009A1C(const struct EfoFileData *r0, u32 palId, u32 vramDstOffset, u32
         *dst++ = *src++;
     }
 
-    for (i = 0, palPtrId = palId * 64; i < 16; i++) {
+    for (i = 0; i < 16; i++) {
         SetBGPaletteBufferColorArray(i + 0xE0, &r0->unk10->pal[i + palId * 16]);
     }
 }
