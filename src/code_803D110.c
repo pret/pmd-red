@@ -93,7 +93,7 @@ void sub_803D4D0(void)
     gDungeon->unk1CEC8 = GetDungeonFloorCount(gDungeon->unk644.dungeonLocation.id);
     gDungeon->unk14 = sub_80902C8(gDungeon->unk644.dungeonLocation.id);
 
-    gDungeon->unk1C574 = ((struct UnkDataFileStruct *)(file->data))->unk4[strPtr->unk0];
+    gDungeon->floorProperties = ((struct UnkDataFileStruct *)(file->data))->unk4[strPtr->unk0];
 
     for (i = 0; i < 20; i++) {
         gDungeon->unk1CD70[i] = ((struct UnkDataFileStruct *)(file->data))->unk10[strPtr->unk4][i];
@@ -127,12 +127,12 @@ void sub_803D4D0(void)
 
         arrId = 0;
         for (j = 0; j < NUM_ITEM_CATEGORIES; j++) {
-            gDungeon->unk1C590[i].categoryValues[arrId] = spArray[arrId];
+            gDungeon->itemSpawns[i].categoryValues[arrId] = spArray[arrId];
             arrId++;
         }
 
         for (j = 0; j < NUMBER_OF_ITEM_IDS; j++) {
-            gDungeon->unk1C590[i].itemValues[j] = spArray[arrId];
+            gDungeon->itemSpawns[i].itemValues[j] = spArray[arrId];
             arrId++;
         }
     }
@@ -152,28 +152,28 @@ u8 sub_803D6FC(void)
     return 16;
 }
 
-u8 sub_803D73C(s32 a0)
+u8 GetRandomFloorItem(s32 spawnType)
 {
     s32 i;
     s32 rand = DungeonRandInt(10000);
     u8 category = NUM_ITEM_CATEGORIES;
     for (i = 0; i < NUM_ITEM_CATEGORIES; i++) {
-        if (gDungeon->unk1C590[a0].categoryValues[i] != 0 && gDungeon->unk1C590[a0].categoryValues[i] >= rand) {
+        if (gDungeon->itemSpawns[spawnType].categoryValues[i] != 0 && gDungeon->itemSpawns[spawnType].categoryValues[i] >= rand) {
             category = i;
             break;
         }
     }
     if (category == NUM_ITEM_CATEGORIES)
-        return 105;
+        return ITEM_POKE;
 
     rand = DungeonRandInt(10000);
     for (i = 0; i < NUMBER_OF_ITEM_IDS; i++) {
-        if (gDungeon->unk1C590[a0].itemValues[i] != 0 && GetItemCategory(i) == category && gDungeon->unk1C590[a0].itemValues[i] >= rand) {
+        if (gDungeon->itemSpawns[spawnType].itemValues[i] != 0 && GetItemCategory(i) == category && gDungeon->itemSpawns[spawnType].itemValues[i] >= rand) {
             return i;
         }
     }
 
-    return 105;
+    return ITEM_POKE;
 }
 
 s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id)

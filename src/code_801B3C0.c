@@ -19,7 +19,7 @@ static void sub_801B480(void);
 static void sub_801B51C(void);
 static void sub_801B590(void);
 
-bool8 sub_801B3C0(Item *item)
+bool8 InitItemDescriptionWindow(Item *item)
 {
     ResetSprites(TRUE);
     sUnknown_203B230 = MemoryAlloc(sizeof(unkStruct_203B230),8);
@@ -52,7 +52,7 @@ u32 sub_801B410(void)
     return 0;
 }
 
-void sub_801B450(void)
+void FreeItemDescriptionWindow(void)
 {
     if (sUnknown_203B230 != NULL) {
         MemoryFree(sUnknown_203B230);

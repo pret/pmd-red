@@ -98,33 +98,32 @@ bool8 IsThrowableItem(u8 id)
     return TRUE;
 }
 
-void xxx_init_itemslot_8090A8C(Item *slot, u8 id, u8 param_3)
+void ItemIdToSlot(Item *slot, u8 id, u8 makeSticky)
 {
-  u32 uVar3;
-  u32 uVar4;
+    if (id != ITEM_NOTHING) {
+        slot->flags = ITEM_FLAG_EXISTS;
+        slot->id = id;
+        if (IsThrowableItem(id)) {
+            s32 min = GetSpawnAmountRange(id, MIN_SPAWN_AMOUNT);
+            s32 max = GetSpawnAmountRange(id, MAX_SPAWN_AMOUNT);
+            slot->quantity = RandRange(min, max);
+        }
+        else if (GetItemCategory(id) == CATEGORY_POKE) {
+            slot->quantity = 1;
+        }
+        else {
+            slot->quantity  = 0;
+        }
 
-  if (id != ITEM_NOTHING) {
-    slot->flags = ITEM_FLAG_EXISTS;
-    slot->id = id;
-    if (IsThrowableItem(id)) {
-        uVar3 = GetSpawnAmountRange(id, MIN_SPAWN_AMOUNT);
-        uVar4 = GetSpawnAmountRange(id, MAX_SPAWN_AMOUNT);
-        slot->quantity = RandRange(uVar3, uVar4);
+        if (makeSticky) {
+            slot->flags |= ITEM_FLAG_STICKY;
+        }
     }
-    else if (GetItemCategory(id) == CATEGORY_POKE)
-        slot->quantity  = 1;
-    else
+    else {
+        slot->flags = 0;
+        slot->id = ITEM_NOTHING;
         slot->quantity  = 0;
-
-    if (param_3 != 0)
-        slot->flags |= ITEM_FLAG_STICKY;
-
-  }
-  else {
-    slot->flags = 0;
-    slot->id = ITEM_NOTHING;
-    slot->quantity  = 0;
-  }
+    }
 }
 
 void xxx_init_helditem_8090B08(BulkItem *held, u8 id)
@@ -265,7 +264,7 @@ s32 GetItemOrder(u8 id)
     return gItemParametersData[id].order;
 }
 
-u8 GetItemPalette(u8 id)
+s32 GetItemPalette(u8 id)
 {
     return gItemParametersData[id].palette;
 }
@@ -299,7 +298,7 @@ void BufferItemName(u8* dest, u8 id, struct unkStruct_8090F58* a2)
   Item unkItem;
 
   strncpy(acStack104, gItemParametersData[id].name, 80);
-  xxx_init_itemslot_8090A8C(&unkItem, id, 0);
+  ItemIdToSlot(&unkItem, id, 0);
   unkItem.quantity = 1;
   sub_8090F58(dest, acStack104, &unkItem, a2);
 }
@@ -548,7 +547,7 @@ void ClearItemSlotAt(u32 index)
 bool8 sub_809124C(u8 id, u8 param_3)
 {
   Item temp;
-  xxx_init_itemslot_8090A8C(&temp, id, param_3);
+  ItemIdToSlot(&temp, id, param_3);
   return AddItemToInventory(&temp);
 }
 
@@ -1201,7 +1200,7 @@ u8 sub_8091E94(s32 a0, s32 a1, s32 a2)
 {
     s32 id, i, arrId;
     u8 foundCategory, ret;
-    struct UnkDungeonGlobal_unk1C590 data;
+    struct ItemSpawns data;
     s16 rawArray[NUM_ITEM_CATEGORIES + NUMBER_OF_ITEM_IDS];
     const u16 *ptr = gUnknown_8108E58[a0 - 1];
 

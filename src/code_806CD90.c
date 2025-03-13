@@ -282,7 +282,6 @@ extern void sub_806A390(Entity *r0);
 extern void sub_806F63C(Entity *r0);
 extern void sub_8078084(Entity * pokemon);
 extern void sub_800DBBC(void);
-extern void sub_8045C28(Item *Item, u8 itemID, u32 param_3);
 extern void sub_80464C8(Entity *, DungeonPos *, Item *);
 extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
@@ -869,7 +868,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
         if (reviverSeed != NULL) {
             sub_8042148(target);
-            sub_8045C28(reviverSeed, ITEM_PLAIN_SEED, 2);
+            CreateItemWithStickyChance(reviverSeed, ITEM_PLAIN_SEED, FORCE_STICKY_NEVER);
             target->unk22 = 0;
             targetData->HP = targetData->maxHPStat;
             targetData->unk158 = 0;

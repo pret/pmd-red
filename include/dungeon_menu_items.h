@@ -6,6 +6,6 @@
 
 bool8 sub_805FD3C(struct UnkMenuBitsStruct *a0);
 bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1);
-void sub_8060D24(UNUSED ActionContainer *a0);
+void DungeonShowItemDescription(UNUSED ActionContainer *a0);
 
 #endif

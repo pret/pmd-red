@@ -24,7 +24,7 @@ u8 GetApparentWeather(Entity *pokemon)
 void sub_807E5AC(void)
 {
     u8 weather;
-    weather = gDungeon->unk1C574.unk4;
+    weather = gDungeon->floorProperties.unk4;
     if(weather == WEATHER_COUNT)
         weather = DungeonRandInt(WEATHER_COUNT);
     sub_807E5E4(weather);

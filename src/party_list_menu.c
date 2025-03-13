@@ -229,7 +229,7 @@ void HandlePartyListMenuCallback(void)
             break;
         case 0x15:
             HeldItemToSlot(&item,&sUnknown_203B2B8->item1);
-            sub_801B3C0(&item);
+            InitItemDescriptionWindow(&item);
             break;
         case PARTY_LIST_STATE_MOVES:
             unk_CopyMoves4To8(sUnknown_203B2B8->moves,sUnknown_203B2B8->pokeStruct->moves);
@@ -699,7 +699,7 @@ void sub_8026CF0(void)
     {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             SetPartyListMenuState(PARTY_LIST_STATE_GIVE_ITEM_1);
             break;
         case 0:

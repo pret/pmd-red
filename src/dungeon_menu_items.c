@@ -36,7 +36,6 @@ extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A2BC(Entity *a0, u8 a1);
 extern void SetLeaderActionToNothing(u8 a0);
 extern void sub_803E708(s32 a0, s32 a1);
-extern void sub_8047158(void);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
@@ -83,7 +82,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 a2, bool8 a3, Wind
 static s32 sub_8060800(WindowHeader *a0, s32 a1);
 static bool8 sub_8060860(s32 a0);
 static void sub_8060890(DungeonPos *a0);
-static void sub_8060900(Entity *a0);
+static void SetSubMenuActions(Entity *a0);
 static void ChosenSubMenuToAction(ActionContainer *a0);
 static s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4);
 
@@ -111,7 +110,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
 {
     s32 i, i_r6;
     s32 r8;
-    s32 r9 = 0;
+    s32 inputAction = 0;
 
     u8 var_34 = 1;
     u8 var_30 = 0;
@@ -162,7 +161,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
         s32 id;
         Entity *r4;
 
-        r9 = 0;
+        inputAction = 0;
         for (i = 0; i < INVENTORY_SIZE; i++) {
             Item *item = &gTeamInventoryRef->teamItems[i];
             if (item->flags & ITEM_FLAG_EXISTS && item->flags & ITEM_FLAG_UNPAID) {
@@ -235,7 +234,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     s16 arr[10];
 
                     PlaySoundEffect(0x132);
-                    sub_8047158();
+                    ClearUnpaidFlagFromAllItems();
                     ConvertMoneyItemToMoney();
                     sUnknown_202F240 = 0;
                     r3 = sub_8060D64(arr, var_30, var_34, var_28, a0);
@@ -262,46 +261,46 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                 if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
                     PlayDungeonConfirmationSE();
                     sub_8060890(&a0->pos);
-                    r9 = 1;
+                    inputAction = 1;
                     break;
                 }
                 if (gRealInputs.pressed & START_BUTTON) {
                     PlayDungeonStartButtonSE();
                     sub_8060890(&a0->pos);
-                    r9 = 3;
+                    inputAction = 3;
                     break;
                 }
                 if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
                     PlayDungeonCancelSE();
-                    r9 = 2;
+                    inputAction = 2;
                     break;
                 }
             }
             else {
                 sub_8060890(&a0->pos);
-                r9 = 1;
+                inputAction = 1;
                 break;
             }
         }
         AddMenuCursorSprite(&gDungeonMenu);
         DungeonRunFrameActions(0x14);
         if (sUnknown_202F248[gDungeonMenu.unk1E] <= 1 && !(gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS)) {
-            r9 = 2;
+            inputAction = 2;
         }
 
-        if (r9 == 2) {
+        if (inputAction == 2) {
             sub_803EAF0(0, NULL);
-            r9 = 1;
+            inputAction = 1;
             break;
         }
-        else if (r9 == 0) {
+        else if (inputAction == 0) {
             continue;
         }
-        else if (r9 == 3) {
+        else if (inputAction == 3) {
             SetMonsterActionFields(&a0Info->action, 0xC);
             a0Info->action.actionParameters[0] = sUnknownActionUnk4;
             sub_803EAF0(0, NULL);
-            r9 = 0;
+            inputAction = 0;
             break;
         }
         else {
@@ -309,11 +308,11 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
             if (var_2C != 0) {
                 a0Info->action.actionParameters[1] = sUnknownActionUnk4;
                 sub_803EAF0(0, NULL);
-                r9 = 0;
+                inputAction = 0;
                 break;
             }
 
-            sub_8060900(a0);
+            SetSubMenuActions(a0);
             sub_8060800(&header, gDungeonMenu.unk1E);
             CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
             while (1) {
@@ -331,27 +330,27 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     if (CanSubMenuItemBeChosen(gDungeonMenu.menuIndex)) {
                         PlayDungeonConfirmationSE();
                         ChosenSubMenuToAction(&a0Info->action);
-                        r9 = 0;
+                        inputAction = 0;
                         break;
                     }
                     PlayDungeonCancelSE();
                 }
                 if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
                     PlayDungeonCancelSE();
-                    r9 = 1;
+                    inputAction = 1;
                     break;
                 }
             }
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x14);
             gDungeon->unk181e8.unk18212 = 0;
-            if (r9 != 1 || var_30 != 0) {
-                if (a0Info->action.action == 0x37 || a0Info->action.action == 0x38 || a0Info->action.action == 0x3E) {
+            if (inputAction != 1 || var_30 != 0) {
+                if (a0Info->action.action == ACTION_TAKE_ITEM || a0Info->action.action == ACTION_USE_ITEM || a0Info->action.action == ACTION_UNK3E) {
                     // Hm...
                     int newAction = sUnknownActionUnk4.actionUseIndex - 0x90;
                     a0Info->action.actionParameters[0].actionUseIndex = newAction;
                     sub_803EAF0(0, 0);
-                    r9 = 0;
+                    inputAction = 0;
                     break;
                 }
                 else if (a0Info->action.action == ACTION_GIVE_ITEM) {
@@ -359,7 +358,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     if (ShowDungeonToWhichMonMenu(&teamId, WHICH_MENU_ITEMS) != NULL) {
                         a0Info->action.actionParameters[1].actionUseIndex = teamId;
                         sub_803EAF0(0, 0);
-                        r9 = 0;
+                        inputAction = 0;
                         break;
                     }
                     sub_803EAF0(0, NULL);
@@ -367,7 +366,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                 }
                 else {
                     sub_803EAF0(0, 0);
-                    r9 = 0;
+                    inputAction = 0;
                     break;
                 }
             }
@@ -378,12 +377,12 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
     sub_803E708(2, 0x61);
     sub_804AA60();
     sub_803E708(2, 0x61);
-    return r9;
+    return inputAction;
 }
 
 static const struct unkStruct_8090F58 gUnknown_8106B60 = {1, 1, 0, 80, 1};
 
-static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, bool8 a3, WindowTemplates *windows, WindowHeader *a5)
+static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, bool8 a3, WindowTemplates *windows, WindowHeader *header)
 {
     s32 i, x, y;
     s32 r10;
@@ -401,7 +400,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     EntityInfo *a1Info;
 
     a1Info = GetEntInfo(a1);
-    r10 = sub_8060800(a5, a0);
+    r10 = sub_8060800(header, a0);
     gDungeonMenu.menuIndex = sUnknown_202F240;
     gDungeonMenu.unk1A = 0;
     gDungeonMenu.unk1E = a0;
@@ -416,7 +415,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         case 1:
             windows->id[0].unk10 = 0x10;
             windows->id[0].height = 0x10;
-            a5->width = 0xC;
+            header->width = 0xC;
             gDungeonMenu.firstEntryY = 0x10;
             gDungeonMenu.unk1C = 0xA;
             gDungeon->unk181e8.unk18212 = 1;
@@ -424,7 +423,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         case 2:
             windows->id[0].unk10 = 4;
             windows->id[0].height = 4;
-            a5->width = 6;
+            header->width = 6;
             gDungeonMenu.firstEntryY = 0x12;
             gDungeonMenu.unk1C = 1;
             break;
@@ -432,7 +431,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         default:
             windows->id[0].unk10 = 4;
             windows->id[0].height = 4;
-            a5->width = 0xC;
+            header->width = 0xC;
             gDungeonMenu.firstEntryY = 0x12;
             gDungeonMenu.unk1C = 1;
             break;
@@ -541,9 +540,9 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     }
 }
 
-static s32 sub_8060800(WindowHeader *a0, s32 a1)
+static s32 sub_8060800(WindowHeader *header, s32 a1)
 {
-    s32 i, r1, r2, r3;
+    s32 i, r1, count, currId;
 
     r1 = 0;
     for (i = 0; i < sUnknown_202F258; i++) {
@@ -553,19 +552,19 @@ static s32 sub_8060800(WindowHeader *a0, s32 a1)
     }
 
     if (sUnknown_202F248[a1] <= 1) {
-        r3 = a1;
-        r2 = r1;
+        currId = a1;
+        count = r1;
         r1 = 0;
     }
     else {
-        r3 = a1 - r1;
-        r2 = sUnknown_202F258 - r1;
+        currId = a1 - r1;
+        count = sUnknown_202F258 - r1;
     }
 
-    if (a0 != NULL) {
-        a0->count = r2;
-        a0->currId = r3;
-        a0->f3 = 0;
+    if (header != NULL) {
+        header->count = count;
+        header->currId = currId;
+        header->f3 = 0;
     }
 
     return r1;
@@ -602,7 +601,7 @@ static void sub_8060890(DungeonPos *a0)
     sUnknownActionUnk4.itemPos.y = a0->y;
 }
 
-static void sub_8060900(Entity *a0)
+static void SetSubMenuActions(Entity *a0)
 {
     u16 val_sub8044DC8;
     Item *item = sub_8044CC8(a0, &sUnknownActionUnk4, 0xA);
@@ -611,25 +610,25 @@ static void sub_8060900(Entity *a0)
     gDungeonSubMenuItemsCount = 0;
     if (sUnknownActionUnk4.actionUseIndex < 144) {
         if (sUnknownActionUnk4.actionUseIndex == 128) {
-            AddActionToDungeonSubMenu(9, item->id);
+            AddActionToDungeonSubMenu(ACTION_PICK_UP_PLAYER, item->id);
             if (GetItemCategory(item->id) != CATEGORY_POKE) {
-                bool32 r2 = 0;
-                if (gDungeon->unk644.unk17 != 0) {
+                bool32 noSpace = FALSE;
+                if (gDungeon->unk644.hasInventory) {
                     if (gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].flags & ITEM_FLAG_EXISTS) {
-                        r2 = TRUE;
+                        noSpace = TRUE;
                     }
                 }
                 else if (a0Info->heldItem.flags & ITEM_FLAG_EXISTS) {
-                    r2 = TRUE;
+                    noSpace = TRUE;
                 }
 
-                if (r2) {
-                    SetActionUnusableInDungeonSubMenu(9);
+                if (noSpace) {
+                    SetActionUnusableInDungeonSubMenu(ACTION_PICK_UP_PLAYER);
                 }
             }
         }
-        if (sUnknownActionUnk4.actionUseIndex == 128 && gDungeon->unk644.unk17 != 0) {
-            AddActionToDungeonSubMenu(10, item->id);
+        if (sUnknownActionUnk4.actionUseIndex == 128 && gDungeon->unk644.hasInventory) {
+            AddActionToDungeonSubMenu(ACTION_UNKA, item->id);
         }
         val_sub8044DC8 = sub_8044DC8(item);
         if (val_sub8044DC8 != 0) {
@@ -648,10 +647,10 @@ static void sub_8060900(Entity *a0)
             s32 i;
 
             if (ItemSet(item)) {
-                AddActionToDungeonSubMenu(0x3D, item->id);
+                AddActionToDungeonSubMenu(ACTION_UNSET_ITEM, item->id);
             }
             else {
-                AddActionToDungeonSubMenu(0x3C, item->id);
+                AddActionToDungeonSubMenu(ACTION_SET_ITEM, item->id);
             }
 
             for (i = 0; i < INVENTORY_SIZE; i++) {
@@ -659,8 +658,8 @@ static void sub_8060900(Entity *a0)
                     && ItemSet(&gTeamInventoryRef->teamItems[i])
                     && ItemSticky(&gTeamInventoryRef->teamItems[i]))
                 {
-                    SetActionUnusableInDungeonSubMenu(0x3C);
-                    SetActionUnusableInDungeonSubMenu(0x3D);
+                    SetActionUnusableInDungeonSubMenu(ACTION_SET_ITEM);
+                    SetActionUnusableInDungeonSubMenu(ACTION_UNSET_ITEM);
                     break;
                 }
             }
@@ -671,7 +670,7 @@ static void sub_8060900(Entity *a0)
                 s32 i;
                 bool32 r8 = FALSE;
 
-                AddActionToDungeonSubMenu(0x36, item->id);
+                AddActionToDungeonSubMenu(ACTION_GIVE_ITEM, item->id);
                 for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                     Entity *teamMon = gDungeon->teamPokemon[i];
                     if (EntityIsValid(teamMon)) {
@@ -684,48 +683,48 @@ static void sub_8060900(Entity *a0)
                     }
                 }
                 if (!r8) {
-                    SetActionUnusableInDungeonSubMenu(0x36);
+                    SetActionUnusableInDungeonSubMenu(ACTION_GIVE_ITEM);
                 }
             }
         }
-        else if (gDungeon->unk644.unk17) {
+        else if (gDungeon->unk644.hasInventory) {
             if (gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].flags & ITEM_FLAG_EXISTS) {
-                AddActionToDungeonSubMenu(0x3E, item->id);
+                AddActionToDungeonSubMenu(ACTION_UNK3E, item->id);
             }
             else {
-                AddActionToDungeonSubMenu(0x37, item->id);
+                AddActionToDungeonSubMenu(ACTION_TAKE_ITEM, item->id);
             }
 
             if (CheckVariousConditions(a0)) {
-                SetActionUnusableInDungeonSubMenu(0x37);
-                SetActionUnusableInDungeonSubMenu(0x3E);
+                SetActionUnusableInDungeonSubMenu(ACTION_TAKE_ITEM);
+                SetActionUnusableInDungeonSubMenu(ACTION_UNK3E);
             }
         }
 
         if (sUnknownActionUnk4.actionUseIndex <= 20) {
             Entity *tileEntity = GetTile(a0->pos.x, a0->pos.y)->object;
             if (tileEntity == NULL) {
-                AddActionToDungeonSubMenu(8, item->id);
+                AddActionToDungeonSubMenu(ACTION_PLACE_ITEM, item->id);
             }
             else if (GetEntityType(tileEntity) == ENTITY_ITEM) {
-                AddActionToDungeonSubMenu(0x3A, item->id);
+                AddActionToDungeonSubMenu(ACTION_UNK3A, item->id);
             }
         }
 
         if (GetItemCategory(item->id) == CATEGORY_THROWN_LINE) {
-            AddActionToDungeonSubMenu(0x27, item->id);
+            AddActionToDungeonSubMenu(ACTION_THROW_STRAIGHT_PLAYER, item->id);
         }
         else if (GetItemCategory(item->id) == CATEGORY_THROWN_ARC) {
-            AddActionToDungeonSubMenu(0x41, item->id);
+            AddActionToDungeonSubMenu(ACTION_THROW_ARC_PLAYER, item->id);
         }
         else {
-            AddActionToDungeonSubMenu(0xB, item->id);
+            AddActionToDungeonSubMenu(ACTION_THROW_ITEM_PLAYER, item->id);
         }
 
         if (!MonsterCanThrowItems(a0Info)) {
-            SetActionUnusableInDungeonSubMenu(0x27);
-            SetActionUnusableInDungeonSubMenu(0x41);
-            SetActionUnusableInDungeonSubMenu(0xB);
+            SetActionUnusableInDungeonSubMenu(ACTION_THROW_STRAIGHT_PLAYER);
+            SetActionUnusableInDungeonSubMenu(ACTION_THROW_ARC_PLAYER);
+            SetActionUnusableInDungeonSubMenu(ACTION_THROW_ITEM_PLAYER);
         }
     }
     else {
@@ -749,17 +748,17 @@ static void sub_8060900(Entity *a0)
             if (GetItemCategory(item->id) == CATEGORY_TMS_HMS) r5 = TRUE;
             if (GetItemCategory(item->id) == CATEGORY_ORBS) r5 = TRUE;
 
-            if (gDungeon->unk644.unk17) {
+            if (gDungeon->unk644.hasInventory) {
                 if (r4) {
-                    AddActionToDungeonSubMenu(0x3E, item->id);
+                    AddActionToDungeonSubMenu(ACTION_UNK3E, item->id);
                 }
                 else {
-                    AddActionToDungeonSubMenu(0x37, item->id);
+                    AddActionToDungeonSubMenu(ACTION_TAKE_ITEM, item->id);
                 }
 
                 if (r6) {
-                    SetActionUnusableInDungeonSubMenu(0x37);
-                    SetActionUnusableInDungeonSubMenu(0x3E);
+                    SetActionUnusableInDungeonSubMenu(ACTION_TAKE_ITEM);
+                    SetActionUnusableInDungeonSubMenu(ACTION_UNK3E);
                 }
             }
 
@@ -784,7 +783,7 @@ static void sub_8060900(Entity *a0)
         }
     }
 
-    AddActionToDungeonSubMenu(0xC, item->id);
+    AddActionToDungeonSubMenu(ACTION_SHOW_INFO, item->id);
     sub_8045064();
 }
 
@@ -797,17 +796,17 @@ static void ChosenSubMenuToAction(ActionContainer *a0)
     a0->actionParameters[1].itemPos.y = 0;
 }
 
-void sub_8060D24(UNUSED ActionContainer *a0)
+void DungeonShowItemDescription(UNUSED ActionContainer *a0)
 {
     Item *item = sub_8044D90(GetLeader(), 0, 0xB);
     DungeonShowWindows(NULL, 0);
-    sub_801B3C0(item);
+    InitItemDescriptionWindow(item);
 
     do {
         DungeonRunFrameActions(0x16);
     } while (sub_801B410() == 0);
 
-    sub_801B450();
+    FreeItemDescriptionWindow();
     sub_803EAF0(0, NULL);
 }
 
@@ -816,7 +815,7 @@ static s32 sub_8060D64(s16 *a0, bool8 a1, bool8 a2, bool8 a3, Entity *a4)
     s32 i;
     s32 count = 0;
 
-    if (gDungeon->unk644.unk17 && !a1) {
+    if (gDungeon->unk644.hasInventory && !a1) {
         if (gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS) {
             a0[count++] = 0;
         }

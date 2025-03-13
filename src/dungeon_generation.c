@@ -21,7 +21,7 @@
 extern const u8 gUnknown_80F6DCC[];
 extern struct FileArchive gDungeonFileArchive;
 
-extern void sub_80460F8(DungeonPos *, Item *, u32);
+extern void AddItemToDungeonAt(DungeonPos *, Item *, u32);
 extern s32 sub_803DA20(s16 species);
 extern void sub_8049840(void);
 extern void sub_80429FC(DungeonPos *r0);
@@ -171,7 +171,7 @@ void GenerateFloor(void)
     s32 x, y;
     s32 spawnAttempts;
     bool8 secondaryGen = FALSE;
-    FloorProperties *floorProps = &gDungeon->unk1C574;
+    FloorProperties *floorProps = &gDungeon->floorProperties;
 
     gDungeon->unk13568 = OpenFileAndGetFileDataPtr(gUnknown_80F6DCC, &gDungeonFileArchive);
     sHasKecleonShop = FALSE;
@@ -6094,10 +6094,10 @@ static void sub_805193C(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
     DungeonPos pos = {x, y};
 
     if (sub_805210C(itemId)) {
-        xxx_init_itemslot_8090A8C(&item, ITEM_LINK_CABLE, 0);
+        ItemIdToSlot(&item, ITEM_LINK_CABLE, 0);
     }
     else {
-        xxx_init_itemslot_8090A8C(&item, itemId, 0);
+        ItemIdToSlot(&item, itemId, 0);
     }
 
     item.flags |= itemFlags;
@@ -6105,7 +6105,7 @@ static void sub_805193C(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
         item.quantity = quantity;
     }
 
-    sub_80460F8(&pos, &item, 1);
+    AddItemToDungeonAt(&pos, &item, 1);
 }
 
 // s16 species memes strike again. Will the fix ever be discovered?

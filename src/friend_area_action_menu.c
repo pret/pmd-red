@@ -202,7 +202,7 @@ void sub_8027274(void)
             break;
         case 0xd:
             HeldItemToSlot(&slot, &sUnknown_203B2BC->itemToGive);
-            sub_801B3C0(&slot);
+            InitItemDescriptionWindow(&slot);
             break;
         case 0xe:
             unk_CopyMoves4To8(sUnknown_203B2BC->moves,sUnknown_203B2BC->pokeStruct->moves);
@@ -625,7 +625,7 @@ void sub_8027C84()
     {
         case 2:
         case 3:
-            sub_801B450();
+            FreeItemDescriptionWindow();
             SetFriendAreaActionMenuState(0xB);
         case 0:
         case 1:

@@ -110,6 +110,7 @@
 .include "src/code_803D0D8.o"
 .include "src/code_803E46C.o"
 .include "src/code_8042B34.o"
+.include "src/dungeon_items.o"
 .include "src/dungeon_map_access.o"
 .include "src/dungeon_message.o"
 .include "src/dungeon_move.o"

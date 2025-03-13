@@ -13,18 +13,12 @@
 #include "dungeon_pokemon_attributes.h"
 #include "pokemon.h"
 #include "items.h"
+#include "structs/str_item_text.h"
 
 extern u8 *gUnknown_80F91EC[];
 extern u8 *gUnknown_80F7C50[];
 extern u8 gUnknown_80F697C[];
 extern s16 gSpeedTurns[2][0x19];
-
-typedef struct ItemText
-{
-    u8 *desc;
-    u8 *useText;
-} ItemText;
-extern const ItemText gActions[];
 
 extern void sub_8071B48(void);
 extern void sub_8043ED0(u32);
@@ -195,7 +189,7 @@ bool8 sub_8044B84(void)
     }
 }
 
-u8 *sub_8044BA8(u16 actionId, u8 id)
+const u8 *sub_8044BA8(u16 actionId, u8 id)
 {
     if (actionId == ACTION_STAIRS && GetFloorType() == FLOOR_TYPE_RESCUE) {
         return *gUnknown_80F91EC;

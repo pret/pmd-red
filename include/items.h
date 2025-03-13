@@ -6,6 +6,7 @@
 #include "structs/str_pokemon.h"
 #include "structs/str_status_text.h"
 
+extern ItemDataEntry *gItemParametersData;
 extern TeamInventory *gTeamInventoryRef;
 
 void LoadItemParameters(void);
@@ -13,7 +14,7 @@ TeamInventory *GetMoneyItemsInfo(void);
 void InitializeMoneyItems(void);
 s32 GetNumberOfFilledInventorySlots(void);
 bool8 IsThrowableItem(u8 id);
-void xxx_init_itemslot_8090A8C(Item *param_1,u8 id,u8 param_3);
+void ItemIdToSlot(Item *param_1,u8 id,u8 param_3);
 void xxx_init_helditem_8090B08(BulkItem *param_1,u8 id);
 void HeldItemToSlot(Item *param_1, BulkItem *param_2);
 void SlotToHeldItem(BulkItem *held, Item *slot);
@@ -25,7 +26,7 @@ s32 GetStackSellPrice(Item *param_1);
 s32 GetItemBuyPrice(u8 id);
 s32 GetItemSellPrice(u8 id);
 s32 GetItemOrder(u8 id);
-u8 GetItemPalette(u8 id);
+s32 GetItemPalette(u8 id);
 u32 GetItemActionType(u8 id);
 u32 GetSpawnAmountRange(u8 id, u32 r1);
 u8 *GetItemDescription(u8 id);

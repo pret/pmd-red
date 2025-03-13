@@ -57,16 +57,13 @@ extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 
 void sub_806A9B4(Entity *, u32);
-void sub_80461C8(DungeonPos *, u32);
 void ShowDungeonMapAtPos(s32, s32);
 s16 sub_803D970(u32);
 bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
-extern void sub_804687C(Entity *, DungeonPos *, DungeonPos *, Item *, u32);
 bool8 sub_8045888(Entity *);
 u8 GetFloorType(void);
 void sub_8068FE0(Entity *, u32, Entity *);
-void sub_8045C28(Item *, u8 , u8);
 void sub_8045BF8(u8 *, Item *);
 void DealDamageToEntity(Entity *,s16,u32,u32);
 void sub_806F480(Entity *, u32);
@@ -503,7 +500,7 @@ void HandleGrimyTrap(Entity *pokemon, Entity *target)
             if (((GetItemCategory(itemStack[index]->id) == CATEGORY_FOOD_GUMMIES) && (itemStack[index]->id != ITEM_GRIMY_FOOD)) &&
                 (DungeonRandInt(100) < gGrimyTrapActivateChance)) {
                 badFoodCount++;
-                sub_8045C28(itemStack[index], ITEM_GRIMY_FOOD, 2);
+                CreateItemWithStickyChance(itemStack[index], ITEM_GRIMY_FOOD, 2);
             }
         }
         if (badFoodCount == 1) {
@@ -767,7 +764,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
                     local_50.unk4 = 0;
                     local_50.unk10 = 0;
                     if (sub_806B7F8(&local_50, TRUE) != 0) {
-                        sub_80461C8(&local_50.pos,0);
+                        RemoveItemFromDungeonAt(&local_50.pos,0);
                         counter++;
                     }
                 }

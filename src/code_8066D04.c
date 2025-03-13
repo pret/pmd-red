@@ -92,19 +92,15 @@ extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8045BF8(u8 *, Item *);
 u8 sub_8048D50();
 void SetActionUnusableInDungeonSubMenu(u16 param_1);
-u8 * sub_80464AC();
 void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
 void sub_8044DF0();
 void sub_8042208(Entity *pokemon, u8 r1);
 void sub_803E708();
 void sub_80479B8();
-u8 sub_80460F8(DungeonPos *, Item *, u32);
 extern void sub_807AB38(Entity *, u32);
 extern Entity * sub_8044DA4(Entity *param_1,int param_2);
 extern void sub_806A6E8(Entity *);
 extern void sub_8044DF0(Entity *, u32, u32);
-extern void sub_8045DB4(DungeonPos *, u32);
-extern bool8 sub_80461C8(DungeonPos *, u32);
 extern bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0);
 extern bool8 sub_8044B28(void);
 Entity *sub_806773C(Entity *entity);
@@ -119,7 +115,7 @@ extern Entity * sub_80696A8(Entity *target);
 void HandlePickUpPlayerAction(Entity *entity)
 {
   GetEntInfo(entity)->action.actionParameters[0].actionUseIndex = 1;
-  sub_8045DB4(&entity->pos,0);
+  PickUpItemFromPos(&entity->pos,0);
 }
 
 void HandleSetItemAction(Entity *param_1, bool8 param_2)
@@ -228,7 +224,7 @@ void HandleGiveItemAction(Entity *param_1)
       item2.flags &= ~(ITEM_FLAG_SET);
       sub_8044DF0(param_1,0,100);
       if (bVar3) {
-        sub_80460F8(&param_1->pos,&item1,1);
+        AddItemToDungeonAt(&param_1->pos,&item1,1);
       }
       else {
         AddItemToInventory(&item1);
@@ -386,7 +382,7 @@ void HandlePlaceItemAction(Entity *entity)
         else {
             item->flags &= ~(ITEM_FLAG_SET);
             sub_8045BF8(gFormatBuffer_Items[0],item);
-            if (sub_80460F8(&entity->pos,item,1) == 0) {
+            if (AddItemToDungeonAt(&entity->pos,item,1) == 0) {
                 LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80F8E04);
             }
             else {
@@ -432,9 +428,9 @@ void sub_8066E14(Entity *entity)
             newItems[0].flags &= ~(ITEM_FLAG_SET);
             newItems[1].flags &= ~(ITEM_FLAG_SET);
 
-            sub_80461C8(&info->action.actionParameters[0].itemPos,1);
+            RemoveItemFromDungeonAt(&info->action.actionParameters[0].itemPos,1);
             ZeroOutItem(item[1]);
-            if (!sub_80460F8(&info->action.actionParameters[0].itemPos,&newItems[1],1)) {
+            if (!AddItemToDungeonAt(&info->action.actionParameters[0].itemPos,&newItems[1],1)) {
                 LogMessageByIdWithPopupCheckUser(entity,*gNothingCanBePutDownHere);
             }
             else {
@@ -484,9 +480,9 @@ void sub_8066FA4(Entity *entity)
         newItems[0].flags &= ~(ITEM_FLAG_SET);
         newItems[1].flags &= ~(ITEM_FLAG_SET);
 
-        sub_80461C8(&entity->pos,1);
+        RemoveItemFromDungeonAt(&entity->pos,1);
         ZeroOutItem(item[0]);
-        if (!sub_80460F8(&entity->pos, &newItems[0],1)) {
+        if (!AddItemToDungeonAt(&entity->pos, &newItems[0],1)) {
             LogMessageByIdWithPopupCheckUser(entity,*gNothingCanBePutDownHere);
         }
         else {
@@ -564,7 +560,7 @@ void sub_80671A0(Entity *entity)
 
         if (info->action.actionParameters[0].actionUseIndex == 0x80) {
             item = NULL;
-            sub_80461C8(&info->action.actionParameters[0].itemPos, 1);
+            RemoveItemFromDungeonAt(&info->action.actionParameters[0].itemPos, 1);
         }
 
         r7 = TRUE;
@@ -581,7 +577,7 @@ void sub_80671A0(Entity *entity)
         else {
             if (info->action.actionParameters[0].actionUseIndex == 0x80) {
                 newItem.quantity--;
-                sub_80460F8(&info->action.actionParameters[0].itemPos, &newItem, 1);
+                AddItemToDungeonAt(&info->action.actionParameters[0].itemPos, &newItem, 1);
             }
             else {
                 item->quantity--;

@@ -113,7 +113,7 @@ static inline void SetTerrainWall(Tile *tile)
     SetTerrainType(tile, TERRAIN_TYPE_WALL);
 }
 
-static inline u32 GetTerrainType(const Tile *tile)
+static inline s32 GetTerrainType(const Tile *tile)
 {
     return tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
 }
