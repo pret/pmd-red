@@ -19,7 +19,7 @@ struct unkStruct_203B278
     /* 0x8 */ u16 selectedMoveID;
     s32 unkC;
     s32 unk10;
-    const struct StatusText *unk14[MAX_STATUS_TEXTS];
+    STATUSTEXTS(unk14);
     u32 unk24;
     MenuInputStruct unk28;
     u32 unk5C;
@@ -137,7 +137,7 @@ void sub_801F9A4(void)
         case 0:
             CallPrepareTextbox_8008C54(gUnknown_203B278->unk5C);
             gUnknown_203B278->selectedMoveID = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.unk1E];
-            gUnknown_203B278->unk10 = unk_MoveIDPrintMoveDescription(gUnknown_203B278->unk28.unk1E,gUnknown_203B278->selectedMoveID,gUnknown_203B278->unk5C,gUnknown_203B278->unk14);
+            gUnknown_203B278->unk10 = unk_MoveIDPrintMoveDescription(gUnknown_203B278->unk28.unk1E,gUnknown_203B278->selectedMoveID,gUnknown_203B278->unk5C, gUnknown_203B278->unk14);
             gUnknown_203B278->unk24 = 0;
             break;
         case 1:

@@ -164,7 +164,7 @@ static void ShowStairsDescription(DungeonPos *pos)
     while (1) {
         u8 floorType;
         bool8 bPress;
-        const struct StatusText *statuses[MAX_STATUS_TEXTS];
+        STATUSTEXTS(statuses);
         MenuInputStructSub menuSub;
         WindowHeader header;
         WindowTemplates windows = {

@@ -617,7 +617,7 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
 {
     WindowTemplates windows;
     WindowHeader header;
-    const struct StatusText *statuses[MAX_STATUS_TEXTS];
+    STATUSTEXTS(statuses);
     s32 i, count, currId;
 
     sub_80140B4(&windows);
@@ -720,7 +720,7 @@ static const WindowHeader sStatusDescriptionHeader = {
     .width = 16,
 };
 
-void ShowStatusDescriptionMenu(const struct StatusText *status, MenuInputStructSub *menuSub)
+void ShowStatusDescriptionMenu(const StatusText *status, MenuInputStructSub *menuSub)
 {
     sub_80140B4(&sMovesMenuWindows);
     sMovesMenuWindows.id[0].header = &sStatusDescriptionHeader;

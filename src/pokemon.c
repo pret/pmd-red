@@ -1299,14 +1299,14 @@ void sub_808E490(Move* a1, s32 species)
 
 char* sub_808E4FC(s32 a1)
 {
-    const struct StatusText *statuses[MAX_STATUS_TEXTS];
+    STATUSTEXTS(statuses);
     PrepareStatusStringArrays(gFormattedStatusNames[a1], statuses);
     return statuses[0]->name;
 }
 
 char* sub_808E51C(s32 a1)
 {
-    const struct StatusText *statuses[MAX_STATUS_TEXTS];
+    STATUSTEXTS(statuses);
     PrepareStatusStringArrays(gFormattedStatusNames[a1], statuses);
     return statuses[0]->desc;
 }

@@ -2,7 +2,7 @@
 #include "structs/str_status_text.h"
 #include "decompress.h"
 
-static bool8 AreStatusesTheSame(const struct StatusText *status1, const struct StatusText *status2)
+static bool8 AreStatusesTheSame(const StatusText *status1, const StatusText *status2)
 {
     if (status1->name == status2->name && status1->desc == status2->desc) {
         return TRUE;
@@ -12,9 +12,9 @@ static bool8 AreStatusesTheSame(const struct StatusText *status1, const struct S
     }
 }
 
-extern const struct StatusText gStatusDescriptions[];
+extern const StatusText gStatusDescriptions[];
 
-s32 PrepareStatusStringArrays(const char *str, const struct StatusText *statuses[MAX_STATUS_TEXTS])
+s32 PrepareStatusStringArrays(const char *str, STATUSTEXTS(statuses))
 {
     s32 i, j;
     s32 counter;
