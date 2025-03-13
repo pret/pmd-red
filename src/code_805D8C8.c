@@ -8,6 +8,9 @@
 #include "pokemon_3.h"
 #include "text.h"
 #include "moves.h"
+#include "string_format.h"
+#include "dungeon_message.h"
+#include "constants/dungeon.h"
 
 // monster_sbin.s
 // data_8106A4C.s
@@ -239,7 +242,7 @@ void sub_806890C(void)
         if (PokemonFlag1(pokeStruct) && PokemonFlag2(pokeStruct)) {
             xxx_pokemonstruct_index_to_pokemon2_808DE30(&gRecruitedPokemonRef->pokemon2[index],speciesId);
             if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
-                struct DungeonLocation dungeonLoc = {.id = 0, .floor = 1};
+                struct DungeonLocation dungeonLoc = {.id = DUNGEON_TINY_WOODS, .floor = 1};
                 sub_808CFD0(&stack,pokeStruct->speciesNum,0,0,&dungeonLoc,0);
                 gRecruitedPokemonRef->pokemon2[index].level = stack.level;
                 gRecruitedPokemonRef->pokemon2[index].IQ = stack.IQ;
@@ -260,7 +263,78 @@ void sub_806890C(void)
                 break;
         }
     }
-    for(; index < 4; index++) {
+    for (; index < 4; index++) {
         gRecruitedPokemonRef->pokemon2[index].unk0 = 0;
     }
 }
+
+extern u8 *gUnknown_80FE168[];
+extern u8 *gUnknown_80FE134[];
+extern u8 *gUnknown_80FE0F4[];
+extern u8 *gUnknown_80FE0F8[];
+extern u8 *gUnknown_80FE0AC[];
+
+void sub_8068A84(PokemonStruct1 *pokemon)
+{
+    s32 i, totalBodySize;
+
+    totalBodySize = 0;
+    for (i = 0; i < 4; i++) {
+        PokemonStruct2 *ptr = &gRecruitedPokemonRef->pokemon2[i];
+        if (PokemonFlag1Struct2(ptr)) {
+            totalBodySize += GetBodySize(ptr->speciesNum);
+        }
+    }
+
+    totalBodySize += GetBodySize(pokemon->speciesNum);
+    if (totalBodySize >= 7) {
+        PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,0);
+        if (pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON) {
+            DisplayDungeonMessage(0,*gUnknown_80FE0F4,1);
+        }
+        else if (pokemon->dungeonLocation.id == DUNGEON_RESCUE_TEAM_BASE) {
+            DisplayDungeonMessage(0,*gUnknown_80FE0F8,1);
+        }
+        else {
+            DisplayDungeonMessage(0,*gUnknown_80FE0AC,1);
+        }
+    }
+    else {
+        for (i = 0; i < 4; i++) {
+            PokemonStruct2 *monPtr = &gRecruitedPokemonRef->pokemon2[i];
+            if (!PokemonFlag1Struct2(monPtr)) {
+                xxx_pokemonstruct_to_pokemon2_808DE50(monPtr,pokemon,0x55aa);
+                monPtr->unk0 |= 1;
+                if (monPtr->IQ < 0x1a) {
+                    monPtr->IQ = 0x1a;
+                }
+                monPtr->unk0 |= 2;
+                monPtr->unkC = i;
+                ZeroOutItem(&monPtr->itemSlot);
+                PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,6);
+                if (pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON) {
+                    DisplayDungeonMessage(0,*gUnknown_80FE168,1);
+                }
+                else if (pokemon->dungeonLocation.id == DUNGEON_RESCUE_TEAM_BASE) {
+                    ;
+                }
+                else {
+                    DisplayDungeonMessage(0,*gUnknown_80FE134,1);
+                }
+                return;
+            }
+        }
+        PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,6);
+        if (pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON) {
+            DisplayDungeonMessage(0,*gUnknown_80FE0F4,1);
+        }
+        else if (pokemon->dungeonLocation.id == DUNGEON_RESCUE_TEAM_BASE) {
+            DisplayDungeonMessage(0,*gUnknown_80FE0F8,1);
+        }
+        else {
+            DisplayDungeonMessage(0,*gUnknown_80FE0AC,1);
+        }
+    }
+}
+
+//
