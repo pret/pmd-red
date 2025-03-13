@@ -18,9 +18,9 @@ struct EfoFileData
     /* 0x8 */ s32 animCount;
     /* 0xC */ void *spriteData; // ?
     /* 0x10 */ Palette256 *unk10; // ?
-    /* 0x14 */const u32 *tiles;
-    /* 0x18 */const RGB *pal;
-    /* 0x1C */s32 tileCount;
+    /* 0x14 */ const u32 *tiles;
+    /* 0x18 */ const RGB *pal;
+    /* 0x1C */ s32 tileCount;
 };
 
 extern s16 *gUnknown_203B078;
