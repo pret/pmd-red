@@ -7,6 +7,7 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "text.h"
+#include "moves.h"
 
 // monster_sbin.s
 // data_8106A4C.s
@@ -82,6 +83,8 @@ void sub_80684C4(void)
         AddSprite(&sprite,0x100,NULL,NULL);
     }
 }
+
+// FILE SPLIT HERE
 
 void OpenDungeonPaletteFile(void)
 {
@@ -218,5 +221,46 @@ void CloseAllSpriteFiles(void)
             CloseFile(gDungeon->sprites[i]);
             gDungeon->sprites[i] = NULL;
         }
+    }
+}
+
+extern bool8 IsLevelResetTo1(u8 dungeon);
+extern void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1);
+
+void sub_806890C(void)
+{
+    int index;
+    int speciesId;
+
+    index = 0;
+    for (speciesId = 0; speciesId < NUM_MONSTERS; speciesId++) {
+        PokemonStruct1 stack;
+        PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[speciesId];
+        if (PokemonFlag1(pokeStruct) && PokemonFlag2(pokeStruct)) {
+            xxx_pokemonstruct_index_to_pokemon2_808DE30(&gRecruitedPokemonRef->pokemon2[index],speciesId);
+            if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
+                struct DungeonLocation dungeonLoc = {.id = 0, .floor = 1};
+                sub_808CFD0(&stack,pokeStruct->speciesNum,0,0,&dungeonLoc,0);
+                gRecruitedPokemonRef->pokemon2[index].level = stack.level;
+                gRecruitedPokemonRef->pokemon2[index].IQ = stack.IQ;
+                gRecruitedPokemonRef->pokemon2[index].unk10 = stack.pokeHP;
+                gRecruitedPokemonRef->pokemon2[index].unk12 = stack.pokeHP;
+                gRecruitedPokemonRef->pokemon2[index].offense.att[0] = stack.offense.att[0];
+                gRecruitedPokemonRef->pokemon2[index].offense.att[1] = stack.offense.att[1];
+                gRecruitedPokemonRef->pokemon2[index].offense.def[0] = stack.offense.def[0];
+                gRecruitedPokemonRef->pokemon2[index].offense.def[1] = stack.offense.def[1];
+                gRecruitedPokemonRef->pokemon2[index].currExp = stack.currExp;
+                gRecruitedPokemonRef->pokemon2[index].IQSkills = stack.IQSkills;
+                gRecruitedPokemonRef->pokemon2[index].tacticIndex = stack.tacticIndex;
+                CopyAndResetMoves(&gRecruitedPokemonRef->pokemon2[index].moves, stack.moves);
+            }
+            gRecruitedPokemonRef->pokemon2[index].unkC = index;
+            index++;
+            if (index == 4)
+                break;
+        }
+    }
+    for(; index < 4; index++) {
+        gRecruitedPokemonRef->pokemon2[index].unk0 = 0;
     }
 }
