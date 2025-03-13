@@ -1,23 +1,28 @@
 #include "global.h"
 #include "code_800E9E4.h"
 #include "dungeon_pokemon_sprites.h"
+#include "dungeon_message.h"
 #include "file_system.h"
 #include "main_loops.h"
 #include "memory.h"
 #include "sprite.h"
+#include "code_800C9CC.h"
+#include "code_800558C.h"
+#include "bg_control.h"
+#include "code_8009804.h"
 
 struct unkStruct_203B0D0_sub
 {
     // size: 0x24
     u32 unk0;
-    struct unkStruct_203B0D0_sub *unk4;
-    struct unkStruct_203B0D0_sub *unk8;
+    OpenedFile *file;
+    const struct EfoFileData *fileData;
     u32 unkC;
     s32 unk10;
     s32 unk14;
     s32 unk18;
     s32 unk1C;
-    u32 unk20;
+    const RGB *ramp;
 };
 
 struct unkStruct_203B0D0 {
@@ -66,8 +71,8 @@ void sub_800ED80(void)
     {
         sub = &gUnknown_203B0D0->unk4[index];
         sub->unk0 = 0;
-        sub->unk4 = 0;
-        sub->unk8 = 0;
+        sub->file = NULL;
+        sub->fileData = NULL;
     }
 }
 
@@ -86,9 +91,9 @@ bool8 sub_800EDB0(struct unkStruct_203B0D0_sub *r0)
     return FALSE;
 }
 
-void sub_800EDF0(u32 r0, struct unkStruct_203B0D0_sub *r1) {
+void sub_800EDF0(u32 r0, OpenedFile *file)
+{
     struct unkStruct_203B0D0_sub stack;
-    s32 uVar1;
 
     switch(r0)
     {
@@ -96,26 +101,23 @@ void sub_800EDF0(u32 r0, struct unkStruct_203B0D0_sub *r1) {
             stack.unk0 = 3;
             stack.unkC = 0xE;
             stack.unk10 = -1;
-            stack.unk18 = 0xDC << 2;
+            stack.unk18 = 0x370;
             stack.unk1C = 0x1F;
-            stack.unk14  = -1;
-            stack.unk4 = r1;
+            stack.unk14 = -1;
+            stack.file = file;
             break;
         case 1:
             stack.unk0 = 4;
             stack.unkC = 0xE;
-            stack.unk10 = 0xF0 << 4;
+            stack.unk10 = 0xF00;
             stack.unk18 = -1;
             stack.unk1C = -1;
-
-            // TODO: what math op is this again?
-            uVar1 = sub_8000728();
-            stack.unk14 = (((int)(-(uVar1 ^ 2) | (uVar1 ^ 2)) >> 0x1f) & 2);
-            stack.unk4 = r1;
+            stack.unk14 = (sub_8000728() != 2) ? 2 : 0;
+            stack.file = file;
             break;
     }
-    stack.unk8 = r1->unk4;
-    stack.unk20 = 0;
+    stack.fileData = (void *) file->data;
+    stack.ramp = NULL;
     sub_800EDB0(&stack);
 }
 
@@ -145,7 +147,7 @@ void sub_800EE5C(s32 r0)
                 else if(ret2 != -2)
                 {
                     sub_800F13C(ret2, file, ret);
-                    sub_800EDF0(ret2, (void *)file);
+                    sub_800EDF0(ret2, file);
                 }
                 else {
                     sub_800F204(file);
@@ -201,4 +203,59 @@ void sub_800EF40(u8 r0, u8 r1)
         ret = sub_800ED0C(r0);
     }
     sub_800EE5C(ret);
+}
+
+extern void xxx_call_update_bg_vram(void);
+extern void sub_803EAF0(u32 a0, u8 *a1);
+extern void sub_809971C(u16 a0, const RGB *a1, int a2);
+
+void sub_800EF64(void)
+{
+    s32 i;
+    struct unkStruct_203B0D0_sub *sub;
+
+    for (i = 0; i < 2; i++) {
+        if (gUnknown_203B0D0->unk4[i].unk0 == 0)
+            continue;
+
+        sub = &gUnknown_203B0D0->unk4[i];
+        switch(sub->unk0) {
+            case 1:
+            case 2:
+                 break;
+            case 3:
+                sub_8005674(sub->fileData, sub->unk18);
+                switch(gUnknown_203B0D0->unk0) {
+                    case 1: {
+                        const RGB *pal = sub->fileData->pal;
+                        sub_809971C((sub->unkC + 16) * 16, pal, 0x10);
+                        break;
+                    }
+                    case 0: {
+                        sub_8005770(sub->unkC, sub->fileData->pal, sub->unk1C, sub->ramp);
+                        break;
+                    }
+                }
+                if(sub->file != 0) {
+                    sub_800F204(sub->file);
+                    sub->file = NULL;
+                }
+                break;
+            case 4:
+                if (sub_8000728() == 1) {
+                    sub_800CD64(0, TRUE);
+                    sub_8052210(0);
+                    sub_803EAF0(5, NULL);
+                    sub_800CB20();
+                    xxx_call_update_bg_vram();
+                }
+                sub_8009A1C(sub->fileData, sub->unkC, sub->unk10, sub->unk14);
+                if(sub->file != NULL) {
+                    sub_800F204(sub->file);
+                    sub->file = NULL;
+                }
+                break;
+        }
+        sub->unk0 = 0;
+    }
 }

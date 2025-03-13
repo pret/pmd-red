@@ -29,15 +29,14 @@ extern const s16 gUnknown_80B816A[16 * 10];
 extern const s16 gUnknown_80B82AA[16 * 10];
 extern const s16 gUnknown_80B83EA[16 * 10];
 
-static void sub_800561C(struct axMapSprite *, s32, s32, const RGB *);
-const RGB *sub_8005674(struct axMapSprite *, s32);
+static void sub_800561C(struct EfoFileData *, s32, s32, const RGB *);
 
 void sub_8005610(OpenedFile *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
 {
-    sub_800561C((struct axMapSprite *)a0->data, vramIdx, brightness, ramp);
+    sub_800561C((struct EfoFileData *)a0->data, vramIdx, brightness, ramp);
 }
 
-static void sub_800561C(struct axMapSprite *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
+static void sub_800561C(struct EfoFileData *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
 {
     s32 i;
 
@@ -52,10 +51,10 @@ static void sub_800561C(struct axMapSprite *a0, s32 vramIdx, s32 brightness, con
 
 UNUSED static const RGB *sub_8005668(OpenedFile *a0, s32 vramIdx)
 {
-    return sub_8005674((struct axMapSprite *)a0->data, vramIdx);
+    return sub_8005674((struct EfoFileData *)a0->data, vramIdx);
 }
 
-const RGB *sub_8005674(struct axMapSprite *a0, s32 vramIdx)
+const RGB *sub_8005674(const struct EfoFileData *a0, s32 vramIdx)
 {
     if (a0->tiles != NULL)
         CpuCopy(OBJ_VRAM0 + vramIdx * 0x20, a0->tiles, a0->tileCount * 0x20);
