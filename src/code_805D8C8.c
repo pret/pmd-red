@@ -9,6 +9,14 @@
 #include "text.h"
 #include "moves.h"
 #include "string_format.h"
+#include "code_80450F8.h"
+#include "code_8045A00.h"
+#include "code_803E668.h"
+#include "dungeon_engine.h"
+#include "move_effects_target.h"
+#include "dungeon_map_access.h"
+#include "dungeon_map.h"
+#include "dungeon_leader.h"
 #include "dungeon_message.h"
 #include "constants/dungeon.h"
 
@@ -159,10 +167,10 @@ OpenedFile *GetSpriteData(s32 _species)
     return gDungeon->sprites[species];
 }
 
-static void EnsureSpriteLoaded(s32 _id) // TODO: Should this param be s16? If so, the castform part of LoadPokemonSprite is preventing us
+static void EnsureSpriteLoaded(s32 _id)
 {
     u8 name[12];
-    s32 id = SpeciesId(_id);
+    s32 id = (s16) _id;
 
     if (gDungeon->sprites[id] == NULL) {
         sprintf(name, gUnknown_8106EA0, id);
@@ -170,37 +178,23 @@ static void EnsureSpriteLoaded(s32 _id) // TODO: Should this param be s16? If so
     }
 }
 
-void LoadPokemonSprite(s16 id, bool32 a1)
+void LoadPokemonSprite(s32 _id, bool32 _ignoreDeoxys)
 {
-    s32 id_s32 = SpeciesId(id);
-    bool8 param_2 = a1;
+    s32 id = (s16) _id;
+    bool8 ignoreDeoxys = _ignoreDeoxys;
 
-    if (!param_2 && (id_s32 == MONSTER_DEOXYS_NORMAL || id_s32 == MONSTER_DEOXYS_ATTACK || id_s32 == MONSTER_DEOXYS_DEFENSE || id_s32 == MONSTER_DEOXYS_SPEED)) {
+    if (!ignoreDeoxys && (id == MONSTER_DEOXYS_NORMAL || id == MONSTER_DEOXYS_ATTACK || id == MONSTER_DEOXYS_DEFENSE || id == MONSTER_DEOXYS_SPEED)) {
         EnsureDeoxysLoaded();
     }
     else {
-        EnsureSpriteLoaded(id_s32);
+        s16 idS16;
 
-        if ((u16)(id_s32 - MONSTER_CASTFORM) < 4)
+        EnsureSpriteLoaded(id);
+        idS16 = id;
+        if (idS16 == MONSTER_CASTFORM || IS_CASTFORM_FORM_MONSTER(idS16))
             EnsureCastformLoaded();
     }
 }
-/*void LoadPokemonSprite(s16 id, bool8 a1)
-{
-    s32 id_s32 = SpeciesId(id);
-
-    if (!a1 && (id_s32 == MONSTER_DEOXYS_NORMAL || id_s32 == MONSTER_DEOXYS_ATTACK || id_s32 == MONSTER_DEOXYS_DEFENSE || id_s32 == MONSTER_DEOXYS_SPEED)) {
-        EnsureDeoxysLoaded();
-    }
-    else {
-        EnsureSpriteLoaded(id);
-
-        // TODO: >= MONSTER_CASTFORM && <= MONSTER_CASTFORM_RAINY
-        if (id_s32 == MONSTER_CASTFORM || id_s32 == MONSTER_CASTFORM_SNOWY || id_s32 == MONSTER_CASTFORM_SUNNY || id_s32 == MONSTER_CASTFORM_RAINY)
-        //if ((u16)(id_s32 - MONSTER_CASTFORM) < 4)
-            EnsureCastformLoaded();
-    }
-}*/
 
 static void EnsureCastformLoaded(void)
 {
@@ -229,6 +223,14 @@ void CloseAllSpriteFiles(void)
 
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1);
+extern void DeletePokemonDungeonSprite(s32 id);
+extern void sub_803E178(void);
+extern void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
+extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
+extern bool8 sub_806A58C(s16 r0);
+extern void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
+extern void sub_8078084(Entity * pokemon);
+extern void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2);
 
 void sub_806890C(void)
 {
@@ -273,6 +275,14 @@ extern u8 *gUnknown_80FE134[];
 extern u8 *gUnknown_80FE0F4[];
 extern u8 *gUnknown_80FE0F8[];
 extern u8 *gUnknown_80FE0AC[];
+extern u8 *gUnknown_80FE2D0[];
+extern u8 *gUnknown_80FE268[];
+extern u8 *gUnknown_80FE28C[];
+extern u8 *gUnknown_80FA580[];
+
+extern Entity *gLeaderPointer;
+extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
+extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
 
 void sub_8068A84(PokemonStruct1 *pokemon)
 {
