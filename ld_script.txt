@@ -409,6 +409,7 @@ SECTIONS {
         data/data1.o(.rodata);
         src/random.o(.rodata);
         src/text.o(.rodata);
+        src/code_8009804.o(.rodata);
         data/data2.o(.rodata);
         src/math.o(.rodata);
         src/file_system.o(.rodata);

@@ -15,11 +15,6 @@ struct CharMapStruct
     struct unkChar *unk4;
 };
 
-// data2.s
-extern const char gUnknown_80B88B0[]; // "font"
-extern const char gUnknown_80B88B8[]; // "fontsp"
-extern const char gUnknown_80B88C0[]; // "fontsppa"
-
 // system_sbin.s
 extern const struct FileArchive gSystemFileArchive;
 
@@ -57,9 +52,6 @@ EWRAM_INIT void (*ScrollDownWindowFunc)(s32 windowId) = ScrollDownWindow;
 EWRAM_INIT void (*ScrollUpWindowFunc)(s32 windowId) = ScrollUpWindow;
 EWRAM_INIT void (*gIwramTextFunc3)(s32 a0) = sub_82729A4;
 EWRAM_INIT void (*gIwramTextFunc4)(s32 a0) = sub_8272A78;
-
-// This variable is only used in InitGraphics function, which may or may not belong to text.c
-EWRAM_INIT u8 gUnknown_203B090 = 0;
 
 static void ShowWindowsInternal(const WindowTemplates *a0, bool8 a1, bool8 a2, DungeonPos *a3);
 static void AddWindow(Window *windows, u32 *vram, u32 *a2, u16 *a3, u32 windowId, const WindowTemplate *winTemplate, bool8 a6, s32 firstBlockId, DungeonPos *positionModifier, u8 a9);
@@ -3271,78 +3263,6 @@ static s32 InterpretColorChar(u8 a0)
 
     }
     return 7;
-}
-
-struct FontData {
-    u32 size;
-    u8 dataArray[136 * 32];
-};
-
-struct FontSpData {
-    u32 size;
-    u8 dataArray[16 * 32];
-};
-
-void InitGraphics(void)
-{
-    u32 count;
-    OpenedFile *file;
-    u32 *dest;
-    struct FontData *font;
-    struct FontSpData *fontSp;
-#ifdef NONMATCHING
-    RGB *data;
-    u32 size;
-    const struct FileArchive *arc;
-#else
-    register RGB *data asm("r4");
-    register u32 size asm("r5");
-    register const struct FileArchive *arc asm("r4");
-#endif
-
-    gUnknown_203B090 = 1;
-    dest = (u32 *)VRAM;
-    for(count = 0; count < 0x6000; count++)
-    {
-        *dest++ = 0;
-    }
-
-    dest = (u32 *)PLTT;
-    for(count = 0; count < 0x100; count++)
-    {
-        *dest++ = 0;
-    }
-
-    dest = (u32 *)OAM;
-    for(count = 0; count < 0x100; count++)
-    {
-         *dest++ = 0x00a000a0;
-    }
-
-    arc = &gSystemFileArchive;
-
-    file = OpenFileAndGetFileDataPtr(gUnknown_80B88B0, arc);
-    font = (struct FontData *)(file->data);
-    size = font->size;
-    CpuCopy((u32 *)0x06004f00, font->dataArray, size * 32);
-    CloseFile(file);
-
-    file = OpenFileAndGetFileDataPtr(gUnknown_80B88B8, arc);
-    fontSp = (struct FontSpData *)(file->data);
-    size = fontSp->size;
-    CpuCopy((u32 *)0x06017e00, fontSp->dataArray, size * 32);
-    CloseFile(file);
-
-    InitFontPalette();
-    file = OpenFileAndGetFileDataPtr(gUnknown_80B88C0, arc);
-    data = (RGB *)file->data;
-
-    for(count = 0; (s32)count < 0x10; data++, count++)
-    {
-        SetBGPaletteBufferColorArray(0x1F0 + count, data);
-    }
-    CloseFile(file);
-    TransferBGPaletteBuffer();
 }
 
 // These functions run from IWRAM for improved performance.

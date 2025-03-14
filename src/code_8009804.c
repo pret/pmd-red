@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "bg_palette_buffer.h"
 #include "code_8009804.h"
 #include "cpu.h"
@@ -6,7 +7,6 @@
 #include "text.h"
 #include "code_800558C.h"
 
-extern const u8 gUnknown_80B88CC[];
 extern const struct FileArchive gSystemFileArchive; // 8300500
 
 EWRAM_DATA RGB gFontPalette[128] = {0};
@@ -15,13 +15,77 @@ EWRAM_DATA static s32 gUnknown_202D23C = 0;
 EWRAM_DATA static struct unkStruct_202D240 gUnknown_202D240[8] = {0};
 EWRAM_DATA u32 gUnknown_202D2A0 = 0;
 
+struct FontData
+{
+    s32 size;
+    u8 dataArray[0];
+};
+
+// Only written to.
+EWRAM_INIT static bool8 gUnknown_203B090 = FALSE;
+
+#define OAM_DUMMY 0xA000A0 // y set to 160 - DISPLAY_HEIGHT
+
+void InitGraphics(void)
+{
+    s32 i;
+    OpenedFile *file;
+    u32 *dest;
+    const RGB *rgbColors;
+    struct FontData *font;
+    #ifdef NONMATCHING
+    const FileArchive *sysFileArchieve;
+    #else
+    register const FileArchive *sysFileArchieve asm("r4");
+    #endif // NONMATCHING
+
+    gUnknown_203B090 = TRUE;
+    dest = (u32 *)VRAM;
+    for (i = 0; i < VRAM_SIZE / sizeof(*dest); i++) {
+        *dest++ = 0;
+    }
+
+    dest = (u32 *)PLTT;
+    for (i = 0; i < PLTT_SIZE / sizeof(*dest); i++) {
+        *dest++ = 0;
+    }
+
+    dest = (u32 *)OAM;
+    for (i = 0; i < OAM_SIZE / sizeof(*dest); i++) {
+         *dest++ = OAM_DUMMY;
+    }
+
+    sysFileArchieve = &gSystemFileArchive;
+    file = OpenFileAndGetFileDataPtr("font", sysFileArchieve);
+    font = (struct FontData *)(file->data);
+    i = font->size;
+    CpuCopy((u32 *)(VRAM + 0x4f00), font->dataArray, i * 32);
+    CloseFile(file);
+
+    file = OpenFileAndGetFileDataPtr("fontsp", sysFileArchieve);
+    font = (struct FontData *)(file->data);
+    i = font->size;
+    CpuCopy((u32 *)(VRAM + 0x17e00), font->dataArray, i * 32);
+    CloseFile(file);
+
+    InitFontPalette();
+    file = OpenFileAndGetFileDataPtr("fontsppa", sysFileArchieve);
+    rgbColors = (RGB *)file->data;
+
+    for (i = 0; i < 16; rgbColors++, i++) {
+        SetBGPaletteBufferColorArray(0x1F0 + i, rgbColors);
+    }
+    CloseFile(file);
+    TransferBGPaletteBuffer();
+}
+
 void InitFontPalette(void)
 {
     OpenedFile *fontpalFile;
     s32 i;
     RGB *ptr;
 
-    fontpalFile = OpenFileAndGetFileDataPtr(gUnknown_80B88CC, &gSystemFileArchive); // fontpal
+    fontpalFile = OpenFileAndGetFileDataPtr("fontpal", &gSystemFileArchive);
     CpuCopy(gFontPalette, fontpalFile->data, sizeof(gFontPalette));
 
     if (sub_80063B0() == 1)
@@ -65,8 +129,8 @@ void vram_related_8009804(void)
         *dest++ = 0;
 
     dest = (u32 *)OAM;
-    for (i = 0; i < OAM_SIZE / 4; i++)
-        *dest++ = 0xA000A0; // TODO: Macro or explanation
+    for (i = 0; i < OAM_SIZE / sizeof(*dest); i++)
+        *dest++ = OAM_DUMMY;
 }
 
 void sub_80098A0(void)
