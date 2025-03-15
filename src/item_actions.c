@@ -1,4 +1,5 @@
 #include "global.h"
+#include "item_actions.h"
 #include "code_803E668.h"
 #include "code_8041AD0.h"
 #include "code_8045A00.h"
@@ -82,47 +83,6 @@ extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
 extern void DisplayMsgIfNewIqSkillLearned(EntityInfo *, s32);
 extern u32 HandleDamagingMove(struct Entity *, struct Entity *, struct Move *, u32, u32);
-
-void StunSeedItemAction(Entity *, Entity *);
-void MaxElixirAction(Entity *, Entity *);
-void ProteinItemAction(Entity *, Entity *);
-void CalciumItemAction(Entity *, Entity *);
-void IronItemAction(Entity *, Entity *);
-void ZincItemAction(Entity *, Entity *);
-void sub_80487CC(Entity *, Entity *, u32, u32);
-void GrimyFoodItemAction(Entity *, Entity *);
-void HandleGummiItemAction(Entity *, Entity *, u8);
-void IcePartItemAction(Entity *, Entity *, u8);
-void SteelPartItemAction(Entity *, Entity *, u8);
-void RockPartItemAction(Entity *, Entity *, u8);
-void MusicBoxItemAction(Entity *, Entity *, u8);
-void nullsub_94(Entity *, Entity *, u8);
-void KeyItemAction(Entity *, Entity *, u8);
-void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
-void sub_8048340(Entity *, Entity *, u32);
-void HealSeedItemAction(Entity *, Entity *, u8);
-void WishStoneItemAction(Entity *, Entity *, u8);
-void OranBerryItemAction(Entity *, Entity *);
-void ChestoBerryItemAction(Entity *, Entity *);
-void JoySeedItemAction(Entity *, Entity *);
-void GinsengItemAction(Entity *, Entity *);
-void BlastSeedItemAction(Entity *, Entity *, u8);
-void SitrusBerryItemAction(Entity *, Entity *);
-void WarpSeedItemAction(Entity *, Entity *);
-void PlainSeedItemAction(Entity *, Entity *);
-void SleepSeedItemAction(Entity *, Entity *);
-void TotterSeedItemAction(Entity *, Entity *);
-void CheriBerryItemAction(Entity *, Entity *);
-void PechaBerryItemAction(Entity *, Entity *);
-void QuickSeedItemAction(Entity *, Entity *);
-void HungerSeedItemAction(Entity *, Entity *);
-void RawstBerryItemAction(Entity *, Entity *);
-void LifeSeedItemAction(Entity *, Entity *);
-void AllureSeedItemAction(Entity *, Entity *);
-void EyedropSeedItemAction(Entity *, Entity *);
-void BlinkerSeedItemAction(Entity *, Entity *);
-void DoomSeedItemAction(Entity *, Entity *);
-void sub_80482FC(Entity *, Entity *, u32, u8);
 
 extern void sub_8071DA4(Entity *);
 extern void SetShopkeeperAggression(Entity *, Entity *);

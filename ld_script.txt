@@ -211,7 +211,7 @@ SECTIONS {
         src/code_8045A00.o(.text);
         src/dungeon_items.o(.text);
         asm/code_8046CE4.o(.text);
-        src/code_8048480.o(.text);
+        src/item_actions.o(.text);
         src/dungeon_ai_item_weight.o(.text);
         src/dungeon_map_access.o(.text);
         src/tile_types.o(.text);
@@ -578,7 +578,7 @@ SECTIONS {
         data/data_8109D10.o(.rodata);
         src/pokemon_3.o(.rodata);
         src/items.o(.rodata);
-        src/code_8048480.o(.rodata);
+        src/item_actions.o(.rodata);
         src/friend_area.o(.rodata);
         data/data_810AC60.o(.rodata);
         src/tile_types.o(.rodata);

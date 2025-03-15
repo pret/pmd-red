@@ -226,7 +226,7 @@ bool8 Conversion2MoveAction(Entity *pokemon, Entity *target, Move *move, s32 par
 bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
 bool8 sub_8058C98(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
 bool32 EarthquakeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-bool8 MetalClawMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4, u32 param_5);
+bool8 MetalClawMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4, s32 param_5);
 
 
 
