@@ -34,7 +34,6 @@ extern void sub_806A2BC(Entity *a0, u8 a1);
 extern void sub_803E708(s32 a0, s32 a1);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
-bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
 extern u8 sub_806A538(s32);
 extern void sub_803EAF0(u32, u8 *);
@@ -51,7 +50,6 @@ extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 
 extern void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
 extern void SetActionUnusableInDungeonSubMenu(u16 param_1);
 extern u16 sub_8044DC8(Item *param_1);
-extern bool8 sub_8046F00(Item *item);
 extern void sub_8045064(void);
 extern bool8 PosHasItem(DungeonPos *pos);
 

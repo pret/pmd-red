@@ -21,15 +21,12 @@ extern u8 gUnknown_80F697C[];
 extern s16 gSpeedTurns[2][0x19];
 
 extern void sub_8071B48(void);
-extern void sub_8043ED0(u32);
 extern u8 GetFloorType(void);
 extern bool8 sub_8044B28(void);
 extern void sub_8086AC0(void);
 extern void sub_8043ED0(u32);
 extern void sub_807EAA0(u32, u32);
 extern void UseAttack(u32);
-
-extern void sub_8071B48(void);
 extern void TriggerWeatherAbilities(void);
 extern void sub_8074094(Entity *);
 extern void sub_8071DA4(Entity *);
