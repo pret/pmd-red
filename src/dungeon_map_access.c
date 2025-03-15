@@ -1,5 +1,6 @@
 #include "global.h"
 #include "dungeon_map_access.h"
+#include "dungeon_map.h"
 #include "code_8004AA0.h"
 #include "constants/walkable_tile.h"
 #include "decompress.h"
@@ -37,7 +38,6 @@ EWRAM_DATA Tile gOutOfBoundsTileData = {0};
 EWRAM_INIT const Tile *gCurTilesetOobTile = {NULL};
 
 extern u8 sub_8043CE4(u32);
-extern void ShowDungeonMapAtPos(s32, s32);
 extern int sprintf(char *, const char *, ...);
 
 const Tile *GetTile(s32 x, s32 y)

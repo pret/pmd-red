@@ -20,6 +20,7 @@
 #include "code_8045A00.h"
 #include "string_format.h"
 #include "code_803E46C.h"
+#include "code_803E668.h"
 #include "code_801602C.h"
 #include "code_800D090.h"
 #include "trap.h"
@@ -64,24 +65,14 @@ extern bool8 sub_8048A68(Entity *param_1,Item *item);
 extern bool8 sub_8048950(Entity *param_1,Item *item);
 extern bool8 sub_8048B9C(Entity *param_1,Item *item);
 extern Item *sub_8044D90(Entity *, s32, u32);
-extern void PlayDungeonStartButtonSE(void);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A6E8(Entity *);
-extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
-void sub_803E708(s32 a0, s32 a1);
 void sub_8075680(u32);
-void sub_8094C88(void);
-void ClearUnpaidFlagFromAllItems(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
-void SetLeaderActionToNothing(u8 a0);
-u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
 static void TryCreateModeArrows(Entity *leader);
-bool8 sub_8094C48(void);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
 bool8 sub_8044B28(void);
@@ -90,7 +81,6 @@ s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
 void sub_806752C(ActionContainer *a0);
 void sub_8067768(ActionContainer *a0);
-void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
 extern void GetWeatherName(u8 *dst, u8 weatherId);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
@@ -101,7 +91,6 @@ extern void sub_803F508(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern const u8 *GetCurrentDungeonName(void);
 
 extern Entity *gLeaderPointer;
@@ -431,7 +420,7 @@ void DungeonHandlePlayerInput(void)
             }
 
             // SELECT button
-            if (!gDungeon->unk181e8.blinded && gGameOptionsRef->mapOption != 6 && gRealInputs.pressed & SELECT_BUTTON) {
+            if (!gDungeon->unk181e8.blinded && gGameOptionsRef->mapOption != TOP_MAP_AND_TEAM_NO_BOTTOM && gRealInputs.pressed & SELECT_BUTTON) {
                 s32 prevMapOption = gGameOptionsRef->mapOption;
                 gShowMonsterDotsInDungeonMap = TRUE;
                 gDungeon->unk181e8.inFloorMapMode = TRUE;

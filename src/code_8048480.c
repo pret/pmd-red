@@ -70,11 +70,8 @@ extern void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
 extern u8 sub_806A538(s32);
 extern void sub_8051E7C(Entity *pokemon);
 extern void sub_8045BF8(u8 *, Item *);
-extern void ActionShowMoveInfo(ActionContainer *);
-extern void ActionLinkMoves(ActionContainer *);
 extern void sub_8044DF0(Entity *, u32, u32);
 extern void sub_803EAF0(u32, u32);
-extern void SetLeaderActionToNothing(bool8);
 extern void sub_8044E24(Entity *, u32, u32);
 extern void sub_804245C(Entity *, Item *);
 extern u8 sub_8072938(Entity *, u16);
@@ -129,7 +126,6 @@ void sub_80482FC(Entity *, Entity *, u32, u8);
 
 extern void sub_8071DA4(Entity *);
 extern void SetShopkeeperAggression(Entity *, Entity *);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
 extern void sub_806A6E8(Entity *);
 extern void sub_8042390(Entity *, Item *);
 

@@ -5,8 +5,10 @@
 #include "code_800558C.h"
 #include "code_8009804.h"
 #include "code_800C9CC.h"
+#include "code_800DAC0.h"
 #include "code_80118A4.h"
 #include "code_803E668.h"
+#include "code_806CD90.h"
 #include "dungeon_map.h"
 #include "bg_palette_buffer.h"
 #include "bg_control.h"
@@ -15,6 +17,7 @@
 #include "input.h"
 #include "play_time.h"
 #include "sprite.h"
+#include "text.h"
 
 EWRAM_INIT u8 gUnknown_203B40C = 0;
 EWRAM_INIT u8 gUnknown_203B40D = 0;
@@ -28,13 +31,10 @@ extern void sub_803E490(u32);
 void xxx_draw_string_80524F0(void);
 void sub_8085F78(void);
 void sub_803F580(s32);
-void sub_806CC10();
 void sub_804522C();
 void sub_803F9CC();
-extern void xxx_call_update_bg_vram(void);
 void sub_803ECE0();
 void sub_803EDF0();
-void sub_800E90C();
 void sub_8042E5C();
 void sub_800F7D0(DungeonPos *);
 void sub_803E874(s32, s32);

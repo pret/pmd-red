@@ -3,11 +3,13 @@
 #include "dungeon_menu_stairs.h"
 #include "dungeon_menu_team.h"
 #include "dungeon_menu_moves.h"
+#include "dungeon_music.h"
 #include "dungeon_submenu.h"
 #include "dungeon.h"
 #include "text.h"
 #include "menu_input.h"
 #include "input.h"
+#include "code_803E46C.h"
 #include "code_8044CC8.h"
 #include "dungeon_action.h"
 #include "dungeon_util.h"
@@ -16,13 +18,8 @@
 #include "code_8097DD0.h"
 #include "dungeon_generation.h"
 
-extern void PlayDungeonStartButtonSE(void);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_803EAF0(u32, u8 *);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void DungeonRunFrameActions(u32 a0);
 extern void DungeonShowWindows(WindowTemplates *a0, bool8 a1);
 extern void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
 extern void sub_8045064(void);
