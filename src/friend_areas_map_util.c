@@ -20,8 +20,6 @@
 #include "decompress.h"
 #include "constants/direction.h"
 
-extern void sub_800CB20(void);
-extern void xxx_call_update_bg_sound_input(void);
 extern s32 sprintf(char *, const char *, ...);
 
 extern const FileArchive gTitleMenuFileArchive;

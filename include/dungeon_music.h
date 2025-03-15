@@ -11,6 +11,12 @@ void DungeonStopBGM(void);
 u16 DungeonGetCurrentBGSong(void);
 void StopDungeonBGM(void);
 void UpdateDungeonMusic(void);
+void PlayDungeonCursorSE(bool8 checkMenuEntriesCount);
+void PlayDungeonConfirmationSE(void);
+void PlayDungeonCancelSE(void);
+void PlayDungeonStartButtonSE(void);
+void sub_8083D1C(void);
+
 
 #endif
 

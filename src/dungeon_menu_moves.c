@@ -7,6 +7,7 @@
 #include "input.h"
 #include "structs/map.h"
 #include "dungeon_main.h"
+#include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_action.h"
 #include "dungeon_random.h"
@@ -17,6 +18,7 @@
 #include "code_8045A00.h"
 #include "string_format.h"
 #include "code_803E46C.h"
+#include "code_803E668.h"
 #include "status_checks_1.h"
 #include "dungeon_leader.h"
 #include "tile_types.h"
@@ -28,27 +30,18 @@
 #include "code_8044CC8.h"
 #include "move_util.h"
 
-extern void PlayDungeonStartButtonSE(void);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern void sub_8045064(void);
 extern void sub_803EAF0(u32, u8 *);
-extern void sub_803E708(s32 a0, s32 a1);
 extern void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
 extern void SetActionUnusableInDungeonSubMenu(u16 param_1);
 extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 extern s32 GetTeamMemberEntityIndex(Entity *pokemon);
-extern void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
-extern void SetLeaderActionToNothing(u8 a0);
 extern void sub_806752C(ActionContainer *a0);
-extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
 extern void sub_8067768(ActionContainer *a0);
 extern void sub_806A2BC(Entity *a0, u8 a1);
 extern bool8 sub_8071A8C(Entity *pokemon);
-extern void sub_8083D1C(void);
 extern s32 ActionToDungeonSubMenuId(u16 param_1);
 
 extern s32 gDungeonSubMenuItemsCount;

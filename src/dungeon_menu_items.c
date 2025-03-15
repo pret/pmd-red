@@ -30,11 +30,7 @@
 #include "code_801B3C0.h"
 #include "dungeon_capabilities.h"
 
-extern void PlayDungeonStartButtonSE(void);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A2BC(Entity *a0, u8 a1);
-extern void SetLeaderActionToNothing(u8 a0);
 extern void sub_803E708(s32 a0, s32 a1);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
@@ -46,7 +42,6 @@ extern void sub_803F508(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern s32 gDungeonSubMenuItemsCount;

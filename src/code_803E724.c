@@ -12,6 +12,7 @@
 #include "code_800E9E4.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_map_access.h"
+#include "dungeon_music.h"
 #include "sprite.h"
 #include "bg_control.h"
 #include "dungeon_map.h"
@@ -56,11 +57,8 @@ extern u8 gUnknown_20274A5;
 
 extern s32 gDungeonFramesCounter;
 
-extern void PlayDungeonStartButtonSE(void);
-extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
-extern void ShowDungeonMapAtPos(s32, s32);
 
 void sub_803EC94(void);
 s32 sub_803EF90(s32 a0, u8 a1);

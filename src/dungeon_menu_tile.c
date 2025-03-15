@@ -3,6 +3,7 @@
 #include "dungeon_menu_tile.h"
 #include "dungeon_menu_team.h"
 #include "dungeon_menu_moves.h"
+#include "dungeon_music.h"
 #include "dungeon_submenu.h"
 #include "dungeon.h"
 #include "text.h"
@@ -16,10 +17,6 @@
 #include "trap.h"
 #include "code_8097DD0.h"
 
-extern void PlayDungeonStartButtonSE(void);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_803EAF0(u32, u8 *);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern void DungeonRunFrameActions(u32 a0);
