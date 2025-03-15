@@ -6,6 +6,7 @@
 #include "dungeon_ai_leader.h"
 #include "dungeon_ai.h"
 #include "dungeon_leader.h"
+#include "dungeon_main.h"
 #include "dungeon_movement.h"
 #include "dungeon_util.h"
 #include "structs/dungeon_entity.h"
@@ -25,8 +26,6 @@ extern void sub_8086AC0(void);
 extern void sub_8043ED0(u32);
 extern void sub_8071DA4(Entity *);
 extern void TriggerWeatherAbilities(void);
-extern void DungeonHandlePlayerInput(void);
-extern void sub_805F02C(void);
 
 static void sub_8044454(void);
 static bool8 xxx_dungeon_80442D0(bool8);

@@ -1,7 +1,9 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_menu_recruitment.h"
+#include "code_803E46C.h"
 #include "dungeon.h"
+#include "dungeon_music.h"
 #include "text.h"
 #include "menu_input.h"
 #include "input.h"
@@ -11,16 +13,10 @@
 #include "sprite.h"
 #include "exclusive_pokemon.h"
 
-extern void PlayDungeonStartButtonSE(void);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_803EAF0(u32, u8 *);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void DungeonRunFrameActions(u32 a0);
 extern void DungeonShowWindows(const WindowTemplates *a0, bool8 a1);
 extern void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
-extern u16 GetLeaderActionId(void);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern void sprintfStatic(char *buffer, const char *text, ...);
 extern u8 sub_806F9BC(s32);

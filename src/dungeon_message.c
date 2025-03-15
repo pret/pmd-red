@@ -1,6 +1,8 @@
 #include "global.h"
 #include "dungeon_message.h"
 #include "dungeon_map.h"
+#include "dungeon_main.h"
+#include "dungeon_music.h"
 #include "dungeon.h"
 #include "structs/dungeon_entity.h"
 #include "code_803E46C.h"
@@ -32,15 +34,9 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, u8 r2);
 static bool8 sub_8052DC0(Entity *);
 
 extern bool8 sub_8045888(Entity *pokemon);
-extern void sub_805E804(void);
 extern void sub_803EAF0(s32, s32);
 extern void sub_8083E28(void);
 extern u32 sub_8014140(s32 a0, const void *a1);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern void sub_8007334(s32 a0);
-extern void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
-extern void PlayDungeonCursorSE(u8 param_1);
 
 extern u32 gUnknown_202EDD0;
 extern u8 gUnknown_203B40C;

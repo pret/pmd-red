@@ -8,7 +8,6 @@
 #include "code_8009804.h"
 #include "bg_palette_buffer.h"
 #include "string_format.h"
-#include "code_800D090.h"
 #include "friend_area.h"
 #include "bg_control.h"
 #include "code_800558C.h"
@@ -30,8 +29,6 @@ extern void PlayCancelSoundEffect(void);
 extern void PlayAcceptSoundEffect(void);
 extern void PlayCursorUpDownSoundEffect(void);
 extern s32 sprintf(char *, const char *, ...);
-extern void sub_800CB20(void);
-extern void xxx_call_update_bg_sound_input(void);
 extern void CopyDungeonName1toBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 extern s32 Atan2_4096(PixelPos *a);
 extern void sub_80117AC(void);

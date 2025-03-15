@@ -3,6 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 
+void SetLeaderActionToNothing(bool8 clearActionFields);
 void sub_8044C50(u16 action);
 void ClearMonsterActionFields(ActionContainer *actionPointer);
 void SetMonsterActionFields(ActionContainer *actionPointer, u16 action);

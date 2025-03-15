@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_items.h"
+#include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_8041AD0.h"
 #include "code_8045A00.h"
@@ -10,6 +11,7 @@
 #include "dungeon_leader.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "dungeon_util_1.h"
 #include "pokemon.h"
 #include "structs/str_dungeon.h"
 #include "constants/item.h"
@@ -53,11 +55,8 @@ extern const u8 *gItemLost;
 extern const u8 *gAllItemsLost;
 
 extern void sub_80416E0(PixelPos *r0, u32, bool8);
-extern void sub_80855E4(void *);
-extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);
 extern void sub_804219C(PixelPos *pos);
-extern void DungeonRunFrameActions(u32);
 extern bool8 sub_8045888(Entity *);
 extern u32 GetRandomFloorItem(u32);
 
