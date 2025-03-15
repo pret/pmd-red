@@ -18,7 +18,9 @@
 #include "dungeon_capabilities.h"
 #include "dungeon_config.h"
 #include "dungeon_engine.h"
+#include "dungeon_items.h"
 #include "dungeon_map_access.h"
+#include "dungeon_move.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -54,11 +56,8 @@ extern void sub_8057588(Entity *, u32);
 extern void sub_806A1B0(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8044D40(ActionContainer *, u32);
-extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
-extern void sub_8045BF8(u8 *, struct Item *);
 extern void sub_8044DF0(struct Entity *, u32, u32);
 extern void sub_8071DA4(struct Entity *);
-extern void sub_804AC20(DungeonPos *);
 extern void sub_807EC28(bool8);
 extern void sub_806A5B8(struct Entity *entity);
 

@@ -29,7 +29,6 @@ extern void DungeonShowWindows(WindowTemplates *a0, bool8 a1);
 extern void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
 extern void sub_8045064(void);
 extern void sub_803E13C(void);
-extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 
 extern MenuInputStruct gDungeonMenu;
 

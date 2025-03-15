@@ -45,6 +45,7 @@ bool8 HasCheckpoint(u8 dungeon);
 s16 GetRandomMovementChance(u8 dungeon);
 void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 void PrintDungeonLocationtoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
+bool8 IsKeepMoney(u8 dungeon);
 
 u32 sub_80908D8(DungeonLocation *dungeon);
 u8 sub_8090910(DungeonLocation *dungeon, u32 param_2);

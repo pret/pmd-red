@@ -68,7 +68,6 @@ void sub_806752C(ActionContainer *a0);
 void sub_8067768(ActionContainer *a0);
 extern void sub_80643AC(Entity *pokemon);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
-bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
 extern u8 sub_806A538(s32);
 extern void sub_803EAF0(u32, u8 *);

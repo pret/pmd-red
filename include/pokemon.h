@@ -104,6 +104,7 @@ bool8 ComparePokemonNames(s16, s16);
 void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
 void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level);
 const u8* DecompressMoveID(const u8* a1, u16* moveID);
+s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 bool8 sub_808DA44(s32, u32);
 void sub_808D144(PokemonStruct1 *pokemon, struct unkStruct_808D144 *r1);
 void sub_808CE74(s16 _species, bool32 _isLeader, u8* name);

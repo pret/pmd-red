@@ -15,6 +15,7 @@
 #include "constants/weather.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
+#include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_music.h"
@@ -372,7 +373,6 @@ extern s32 GetCameraYPos(void);
 extern void sub_803F878(u32, s32);
 extern void BgColorCallNullsub4(void);
 extern void sub_8085EB0(void);
-extern void ShowWholeRevealedDungeonMap(void);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_808BBA8(Entity * );
 extern void sub_8041888(u32);

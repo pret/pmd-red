@@ -322,12 +322,9 @@ extern void ShowDungeonNameBanner(void);
 extern void sub_803EAF0(u32, u32);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
 extern void sub_803F4A0(Entity *a0);
-extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 extern bool8 sub_8083C50(void);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void ResetMonEntityData(EntityInfo *, u32);
-extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
-extern bool8 IsKeepMoney(u8 dungeon);
 extern void sub_8042B0C(Entity *);
 
 extern s16 gUnknown_2026E4E;
