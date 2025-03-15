@@ -16,6 +16,7 @@
 #include "dungeon_ai_targeting.h"
 #include "dungeon_engine.h"
 #include "dungeon_items.h"
+#include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
@@ -42,10 +43,7 @@ extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_807FC3C(DungeonPos *, u32, u32);
 extern void sub_8042A64(DungeonPos *);
-extern void ShowWholeRevealedDungeonMap(void);
-extern void sub_80498A8(s32, s32);
 extern void sub_8042A54(DungeonPos *);
-extern void sub_8049BB0(s32, s32);
 extern s16 sub_8057600(Move*, u32);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern void HandleDroughtOrbAction(Entity *);
