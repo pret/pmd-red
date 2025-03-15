@@ -119,7 +119,7 @@ bool8 sub_8047930(Entity *pokemon, Entity *target)
   return flag;
 }
 
-void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item)
+void sub_80479B8(bool8 param_1, bool8 param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item)
 {
   EntityInfo *info;
   u32 flag;

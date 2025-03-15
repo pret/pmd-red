@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_main.h"
+#include "item_actions.h"
 #include "structs/str_dungeon.h"
 #include "number_util.h"
 #include "input.h"
@@ -61,9 +62,6 @@
 
 extern void HandleSetItemAction(Entity *,bool8);
 extern void HandleUnsetItemAction(Entity *,bool8);
-extern bool8 sub_8048A68(Entity *param_1,Item *item);
-extern bool8 sub_8048950(Entity *param_1,Item *item);
-extern bool8 sub_8048B9C(Entity *param_1,Item *item);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern void sub_806A6E8(Entity *);
 bool8 sub_807EF48(void);
@@ -91,7 +89,6 @@ extern void sub_803F508(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
-extern const u8 *GetCurrentDungeonName(void);
 
 extern Entity *gLeaderPointer;
 

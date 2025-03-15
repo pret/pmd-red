@@ -46,9 +46,6 @@
 #include "code_8097DD0.h"
 #include "move_util.h"
 
-extern bool8 sub_8048A68(Entity *param_1,Item *item);
-extern bool8 sub_8048950(Entity *param_1,Item *item);
-extern bool8 sub_8048B9C(Entity *param_1,Item *item);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern void sub_806A6E8(Entity *);
 bool8 sub_807EF48(void);

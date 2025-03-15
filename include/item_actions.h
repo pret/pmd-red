@@ -2,6 +2,11 @@
 #define INCLUDE_ITEM_ACTIONS_H
 
 #include "structs/dungeon_entity.h"
+void sub_80479B8(bool8 param_1, bool8 param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item);
+bool8 sub_8048D50(Entity * pokemon, Item *item);
+bool8 sub_8048950(Entity *param_1, Item *item);
+bool8 sub_8048A68(Entity *param_1,Item *item);
+bool8 sub_8048B9C(Entity *entity, Item *item);
 void StunSeedItemAction(Entity *pokemon, Entity *target);
 void MaxElixirAction(Entity *pokemon, Entity *target);
 void ProteinItemAction(Entity *pokemon, Entity *target);

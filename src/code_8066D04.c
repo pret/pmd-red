@@ -2,12 +2,14 @@
 #include "globaldata.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
+#include "code_803E668.h"
 #include "code_807CD9C.h"
 #include "code_8041AD0.h"
 #include "code_806CD90.h"
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"
 #include "dungeon_music.h"
+#include "item_actions.h"
 #include "position_util.h"
 #include "dungeon_util.h"
 #include "items.h"
@@ -89,14 +91,9 @@ extern bool8 sub_806A564(s16 r0);
 extern void sub_8045C08(u8 *buffer, Item *item);
 extern bool8 sub_8045888(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
-void sub_8045BF8(u8 *, Item *);
-u8 sub_8048D50();
 void SetActionUnusableInDungeonSubMenu(u16 param_1);
 void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
-void sub_8044DF0();
 void sub_8042208(Entity *pokemon, u8 r1);
-void sub_803E708();
-void sub_80479B8();
 extern void sub_807AB38(Entity *, u32);
 extern Entity * sub_8044DA4(Entity *param_1,int param_2);
 extern void sub_806A6E8(Entity *);
@@ -514,7 +511,7 @@ void sub_8067110(Entity *entity)
         item2 = *item;
         sub_8044DF0(entity,0,0x66);
         sub_803E708(0x1e,0x11);
-        sub_80479B8(0,0,0,entity,entity,&item2);
+        sub_80479B8(FALSE,FALSE,FALSE,entity,entity,&item2);
         sub_807AB38(entity,gDungeon->forceMonsterHouse);
     }
 }
