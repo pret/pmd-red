@@ -21,6 +21,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
+#include "move_actions.h"
 #include "move_util.h"
 #include "moves.h"
 #include "number_util.h"
@@ -44,7 +45,6 @@ extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u3
 extern void sub_807FC3C(DungeonPos *, u32, u32);
 extern void sub_8042A64(DungeonPos *);
 extern void sub_8042A54(DungeonPos *);
-extern s16 sub_8057600(Move*, u32);
 extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern void HandleDroughtOrbAction(Entity *);
 extern void HandleLuminousOrbAction(Entity *pokemon);
@@ -74,7 +74,6 @@ extern void SqueezedStatusTarget(Entity *, Entity *, s32, bool32);
 extern void SleepStatusTarget(Entity *, Entity *, s32, s32);
 
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
-extern bool8 MoveRequiresCharging(Entity* pokemon,u16 moveID);
 extern void sub_80783C4(Entity *, Entity *, bool8);
 
 
@@ -120,7 +119,7 @@ extern u32 gMetronomeCalledArrayId;
 
 extern u8 *gUnknown_80FEFF4[];
 
-bool8 EruptionMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_4)
+bool8 EruptionMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     EntityInfo *entityInfo;
     s32 maxHp;
@@ -147,7 +146,7 @@ bool8 EruptionMoveAction(Entity * pokemon, Entity * target, Move *move, u32 para
     return flag;
 }
 
-bool8 GlareMoveAction(Entity * pokemon,Entity * target,Move *move)
+bool8 GlareMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
     ParalyzeStatusTarget(pokemon,target, TRUE);
     return TRUE;
@@ -180,13 +179,13 @@ bool8 PoisonTailMoveAction(Entity * pokemon, Entity * target, Move *move, s32 pa
     return flag;
 }
 
-bool8 RoarMoveAction(Entity * pokemon, Entity * target)
+bool8 RoarMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     BlowAwayTarget(pokemon, target, GetEntInfo(pokemon)->action.direction);
     return TRUE;
 }
 
-bool8 HandleColorChange(Entity * pokemon, Entity * target)
+bool8 HandleColorChange(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     u8 newType;
     const char *typeString;

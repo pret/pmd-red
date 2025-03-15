@@ -26,6 +26,7 @@
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "items.h"
+#include "move_actions.h"
 #include "move_checks.h"
 #include "move_util.h"
 #include "moves.h"
@@ -52,7 +53,6 @@ EWRAM_DATA Entity *gPotentialTargets[NUM_DIRECTIONS] = {0};
 
 extern void sub_8055A00(Entity *, u8, u32, u32, u32);
 extern bool8 sub_8044B28(void);
-extern void sub_8057588(Entity *, u32);
 extern void sub_806A1B0(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8044D40(ActionContainer *, u32);

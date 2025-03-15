@@ -12,6 +12,7 @@
 #include "constants/targeting.h"
 #include "constants/type.h"
 #include "constants/weather.h"
+#include "dungeon_ai.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
@@ -112,14 +113,12 @@ extern bool8 gUnknown_202F220;
 
 extern void sub_806A5B8(Entity *entity);
 extern void sub_80694C0(Entity *, s32, s32, u32);
-void sub_8075900(Entity *pokemon, u8 r1);
 extern u8 sub_8044B28(void);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 extern void MudWaterSportEffect(u32);
-extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_806A6E8(Entity *);
 
 extern void EndAbilityImmuneStatus(Entity *, Entity *);

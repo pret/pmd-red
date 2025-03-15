@@ -34,6 +34,7 @@
 #include "constants/item.h"
 #include "constants/dungeon.h"
 #include "constants/move_id.h"
+#include "move_actions.h"
 
 extern u8 *gUnknown_80F8BE0[];
 extern u8 *gUnknown_80FF76C[];
@@ -82,7 +83,6 @@ extern u32 gUnknown_202F208;
 extern void sub_8071DA4(Entity *);
 extern void sub_806A1B0(Entity *);
 extern void sub_806A9B4(Entity *, u32);
-extern void sub_8057588(Entity * pokemon, u8 param_2);
 extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern bool8 sub_806A58C(s16 a0);
 extern bool8 sub_806A564(s16 r0);
