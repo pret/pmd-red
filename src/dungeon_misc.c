@@ -152,7 +152,7 @@ void LoadDungeonPokemonSprites(void)
 {
     s32 index;
 
-    for(index = 0; index < 0x1A8; index++)
+    for(index = 0; index < MONSTER_MAX; index++)
     {
         gDungeon->sprites[index] = NULL;
     }
@@ -1100,10 +1100,10 @@ void sub_8069D4C(struct unkStruct_8069D4C *r0, Entity *target)
 
     GetPokemonLevelData(&leveldata, info->id, info->level);
     r0->exp = leveldata.expRequired;
-    r0->offense.att[0] = info->atk[0];
-    r0->offense.att[1] = info->atk[1];
-    r0->offense.def[0] = info->def[0];
-    r0->offense.def[1] = info->def[1];
+    r0->att[0] = info->atk[0];
+    r0->att[1] = info->atk[1];
+    r0->def[0] = info->def[0];
+    r0->def[1] = info->def[1];
     r0->heldItem = info->heldItem;
     memcpy(r0->moves.moves, info->moves.moves, sizeof(r0->moves));
     r0->belly = info->belly;

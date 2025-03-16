@@ -32,7 +32,7 @@
 #include "status_checks.h"
 #include "structs/str_dungeon.h"
 #include "targeting_flags.h"
-#include "targeting.h"
+#include "dungeon_misc.h"
 #include "type_effectiveness.h"
 
 #define REGULAR_ATTACK_INDEX 4
@@ -49,7 +49,6 @@ EWRAM_DATA s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS] = {0};
 EWRAM_DATA Entity *gPotentialTargets[NUM_DIRECTIONS] = {0};
 
 extern void sub_8055A00(Entity *, u8, u32, u32, u32);
-extern void sub_806A9B4(Entity *, u8);
 extern bool8 sub_8044B28(void);
 extern void sub_8057588(Entity *, u32);
 extern void sub_806A1B0(Entity *);

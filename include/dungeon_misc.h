@@ -6,20 +6,13 @@
 #include "structs/str_pokemon.h"
 #include "pokemon_3.h"
 
-// NOTE: basically Offense struct but packed to match
-struct unkStruct_8069D4C_sub
-{
-
-    u8 att[2]; // Atk, SpAtk
-    u8 def[2]; // Def, SpDef
-} __attribute__((packed));
-
 struct unkStruct_8069D4C
 {
     s16 id;
     DungeonPos pos;
     s16 HP;
-    struct unkStruct_8069D4C_sub offense;
+    u8 att[2]; // Atk, SpAtk
+    u8 def[2]; // Def, SpDef
     u16 level;
     u32 exp;
     FixedPoint belly;

@@ -12,7 +12,7 @@
 #include "code_803E668.h"
 #include "exclusive_pokemon.h"
 #include "code_8077274_1.h"
-#include "code_8069D4C.h"
+#include "dungeon_misc.h"
 #include "code_8045A00.h"
 #include "position_util.h"
 #include "game_options.h"
@@ -20,7 +20,7 @@
 #include "status.h"
 #include "pokemon.h"
 #include "random.h"
-#include "targeting.h"
+#include "dungeon_misc.h"
 #include "sprite.h"
 #include "structs/str_dungeon.h"
 #include "tile_types.h"
@@ -275,8 +275,6 @@ extern bool8 sub_806F660(Entity *, Entity *);
 extern bool8 sub_806A58C(s16 a0);
 extern void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp);
 extern void sub_8042148(Entity *pokemon);
-extern void sub_8068FE0(Entity *, u32, Entity *r2);
-extern void sub_80694C0(Entity *, s32, s32, u32);
 extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
 extern void sub_806F63C(Entity *r0);
