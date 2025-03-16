@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_805D8C8.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_util.h"
@@ -22,86 +23,46 @@
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"
 
-// monster_sbin.s
-// data_8106A4C.s
-extern const u8 gUnknown_8106EA0[]; // ax%03d
-extern const u8 gUnknown_8106E98[]; // palet
-// ???
-extern s32 sprintf(char *, const char *, ...);
-
-extern u32 gDungeonFramesCounter;
-
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
-extern s32 gUnknown_202F310;
+extern s32 sprintf(char *, const char *, ...);
+extern bool8 IsLevelResetTo1(u8 dungeon);
+extern void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1);
+extern void DeletePokemonDungeonSprite(s32 id);
+extern void sub_803E178(void);
+extern void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
+extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
+extern bool8 sub_806A58C(s16 r0);
+extern void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
+extern void sub_8078084(Entity * pokemon);
+extern void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2);
+extern bool8 sub_806A564(s32 r0);
+extern void sub_808DFDC(s32 a1, PokemonStruct2* a2);
+extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
+extern void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3);
+extern bool8 sub_806A5A4(s32 r0);
+extern u8 sub_806A538(s32);
 
-void sub_8068310(s32 size, u16 **param_2)
-{
-    s32 counter;
-    s32 index;
-    counter = 0;
+extern u8 *gUnknown_80FE168[];
+extern u8 *gUnknown_80FE134[];
+extern u8 *gUnknown_80FE0F4[];
+extern u8 *gUnknown_80FE0F8[];
+extern u8 *gUnknown_80FE0AC[];
+extern u8 *gUnknown_80FE2D0[];
+extern u8 *gUnknown_80FE268[];
+extern u8 *gUnknown_80FE28C[];
+extern u8 *gUnknown_80FA580[];
+extern const u8 *const gUnknown_80FE1A4;
+extern const u8 *const gUnknown_80FE20C;
 
-    for(index = 0; index < size; index++) {
-        if ((*param_2[index] & 0x8000) != 0) {
-            counter++;
-        }
-    }
-    gUnknown_202F310 = counter;
-}
-
-void sub_8068344(void)
-{
-    if ((gDungeonFramesCounter & 8) != 0) {
-        Window *window = &gWindows[0];
-        SpriteOAM sprite = {0};
-
-        SpriteSetAffine1(&sprite, 0);
-        SpriteSetAffine2(&sprite, 0);
-        SpriteSetObjMode(&sprite, 0);
-        SpriteSetMosaic(&sprite, 0);
-        SpriteSetBpp(&sprite, 0);
-        SpriteSetShape(&sprite, 1);
-        SpriteSetMatrixNum(&sprite, 16);
-        SpriteSetSize(&sprite, 0);
-        SpriteSetTileNum(&sprite, 0x3F0);
-        SpriteSetPriority(&sprite, 0);
-        SpriteSetPalNum(&sprite, 15);
-        SpriteSetY(&sprite, (window->y  * 8) + 0x8);
-        SpriteSetX(&sprite, (window->x  * 8) + 0x40);
-        AddSprite(&sprite,0x100,NULL,NULL);
-    }
-}
-
-// The same as sub_80623B0
-void sub_80684C4(void)
-{
-    if ((gDungeonFramesCounter & 8) != 0) {
-        Window *window = &gWindows[0];
-        SpriteOAM sprite = {0};
-
-        SpriteSetAffine1(&sprite, 0);
-        SpriteSetAffine2(&sprite, 0);
-        SpriteSetObjMode(&sprite, 0);
-        SpriteSetMosaic(&sprite, 0);
-        SpriteSetBpp(&sprite, 0);
-        SpriteSetShape(&sprite, 1);
-        SpriteSetMatrixNum(&sprite, 0);
-        SpriteSetSize(&sprite, 0);
-        SpriteSetTileNum(&sprite, 0x3F0);
-        SpriteSetPriority(&sprite, 0);
-        SpriteSetPalNum(&sprite, 15);
-        SpriteSetY(&sprite, (window->y  * 8) + 0x70);
-        SpriteSetX(&sprite, (window->x  * 8) + 0x40);
-        AddSprite(&sprite,0x100,NULL,NULL);
-    }
-}
-
-// FILE SPLIT HERE
+extern Entity *gLeaderPointer;
+extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
+extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
 
 void OpenDungeonPaletteFile(void)
 {
-    gDungeon->paletFile = OpenFileAndGetFileDataPtr(gUnknown_8106E98, &gMonsterFileArchive);
+    gDungeon->paletFile = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
 }
 
 void CloseDungeonPaletteFile(void)
@@ -175,7 +136,7 @@ static void EnsureSpriteLoaded(s32 _id)
     s32 id = (s16) _id;
 
     if (gDungeon->sprites[id] == NULL) {
-        sprintf(name, gUnknown_8106EA0, id);
+        sprintf(name, "ax%03d", id);
         gDungeon->sprites[id] = OpenFileAndGetFileDataPtr(name, &gMonsterFileArchive);
     }
 }
@@ -223,17 +184,6 @@ void CloseAllSpriteFiles(void)
     }
 }
 
-extern bool8 IsLevelResetTo1(u8 dungeon);
-extern void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1);
-extern void DeletePokemonDungeonSprite(s32 id);
-extern void sub_803E178(void);
-extern void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
-extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
-extern bool8 sub_806A58C(s16 r0);
-extern void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
-extern void sub_8078084(Entity * pokemon);
-extern void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2);
-
 void sub_806890C(void)
 {
     int index;
@@ -271,20 +221,6 @@ void sub_806890C(void)
         gRecruitedPokemonRef->pokemon2[index].unk0 = 0;
     }
 }
-
-extern u8 *gUnknown_80FE168[];
-extern u8 *gUnknown_80FE134[];
-extern u8 *gUnknown_80FE0F4[];
-extern u8 *gUnknown_80FE0F8[];
-extern u8 *gUnknown_80FE0AC[];
-extern u8 *gUnknown_80FE2D0[];
-extern u8 *gUnknown_80FE268[];
-extern u8 *gUnknown_80FE28C[];
-extern u8 *gUnknown_80FA580[];
-
-extern Entity *gLeaderPointer;
-extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
-extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
 
 void sub_8068A84(PokemonStruct1 *pokemon)
 {
@@ -348,16 +284,6 @@ void sub_8068A84(PokemonStruct1 *pokemon)
         }
     }
 }
-
-extern bool8 sub_806A564(s32 r0);
-extern void sub_808DFDC(s32 a1, PokemonStruct2* a2);
-extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
-extern void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3);
-extern bool8 sub_806A5A4(s32 r0);
-extern u8 sub_806A538(s32);
-
-extern const u8 *const gUnknown_80FE1A4;
-extern const u8 *const gUnknown_80FE20C;
 
 static inline bool8 IsUnkDungeon(u8 joinedDungeon)
 {
@@ -486,7 +412,7 @@ void sub_8068F28(void)
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         PokemonStruct2 *monStruct2Ptr = &gRecruitedPokemonRef->pokemon2[i];
-        if(PokemonFlag1Struct2(monStruct2Ptr)) {
+        if (PokemonFlag1Struct2(monStruct2Ptr)) {
             if (sub_806A564(monStruct2Ptr->unkA)) {
                 monStruct2Ptr->unk0 = 0;
             }

@@ -1,19 +1,7 @@
         .section .rodata
 
 .align 2,0
-@ sub_8068614 - sub_806A3D4
-        .string "pksdir0\0"
-        .align 2,0
 
-	.global gUnknown_8106E98
-gUnknown_8106E98: @ 8106E98
-        .string "palet\0"
-        .align 2,0
-
-	.global gUnknown_8106EA0
-gUnknown_8106EA0: @ 8106EA0
-        .string "ax%03d\0"
-        .align 2,0
 
 	.global gUnknown_8106EA8
 gUnknown_8106EA8: @ 8106EA8
