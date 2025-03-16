@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_805D8C8.h"
+#include "dungeon_misc.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
@@ -34,7 +34,6 @@
 #include "dungeon_movement.h"
 #include "dungeon_util.h"
 #include "status_checks_1.h"
-#include "code_8069D4C.h"
 #include "exclusive_pokemon.h"
 #include "dungeon_config.h"
 #include "game_options.h"
@@ -100,8 +99,6 @@ extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
 extern int sprintf(char *, const char *, ...);
-extern const u8 gUnknown_8106EA8[]; // talkp%d
-extern const u8 gUnknown_8106EB0[]; // talk%d
 extern const struct FileArchive gDungeonFileArchive;
 
 extern u8 *gUnknown_80FE168[];
@@ -139,7 +136,7 @@ extern u8 gUnknown_202F32C;
 
 bool8 sub_806A538(s16 r0);
 bool8 sub_806A564(s16 r0);
-bool8 sub_806A5A4(s16 r0);
+static bool8 sub_806A5A4(s16 r0);
 
 void OpenDungeonPaletteFile(void)
 {
@@ -1400,10 +1397,10 @@ void sub_806A3D4(u8 *dst, s32 _a1, s32 id, bool32 _a3)
     struct UnkTalkFileStruct *strPtr;
 
     if (a3) {
-        sprintf(fileName, gUnknown_8106EA8, (s16) (a1 / 10));
+        sprintf(fileName, "talkp%d", (s16) (a1 / 10));
     }
     else {
-        sprintf(fileName, gUnknown_8106EB0, (s16) (a1 / 10));
+        sprintf(fileName, "talk%d", (s16) (a1 / 10));
     }
 
     file = OpenFileAndGetFileDataPtr(fileName, &gDungeonFileArchive);
@@ -1487,7 +1484,7 @@ bool8 sub_806A58C(s16 r0)
         return FALSE;
 }
 
-bool8 sub_806A5A4(s16 r0)
+static bool8 sub_806A5A4(s16 r0)
 {
     if (r0 < 0)
         return TRUE;

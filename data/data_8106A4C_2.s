@@ -3,14 +3,6 @@
 .align 2,0
 
 
-	.global gUnknown_8106EA8
-gUnknown_8106EA8: @ 8106EA8
-        .string "talkp%d\0"
-        .align 2,0
-
-	.global gUnknown_8106EB0
-gUnknown_8106EB0: @ 8106EB0
-        .string "talk%d\0"
 
 @ ???
         .align 2,0
