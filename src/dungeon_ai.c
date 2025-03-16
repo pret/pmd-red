@@ -33,7 +33,7 @@
 #include "status_checks.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
-#include "targeting.h"
+#include "dungeon_misc.h"
 #include "tile_types.h"
 
 extern char *gPtrCouldntBeUsedMessage;

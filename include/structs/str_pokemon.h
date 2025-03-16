@@ -62,7 +62,7 @@ typedef struct PokemonStruct2
     /* 0x2 */ bool8 isTeamLeader;
     /* 0x3 */ u8 level;
     /* 0x4 */ DungeonLocation dungeonLocation;
-    /* 0x8 */ u16 IQ;
+    /* 0x8 */ s16 IQ;
     s16 unkA;
     u16 unkC;
     /* 0xE */ s16 speciesNum;
@@ -172,7 +172,7 @@ struct unkStruct_808D144
     /* 0x16 */ u16 level;
     /* 0x18 */ u16 IQ;
     s16 offenseAtk[2]; // atk, spatt, def, spdef (not sure why s16/u16 and not u8)
-    s16 offenseDef[2]; 
+    s16 offenseDef[2];
     /* 0x24 */ u32 currExp;
 };
 

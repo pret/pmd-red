@@ -898,7 +898,7 @@ void sub_8045064(void);
 extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_8068344(void);
 bool8 CanSubMenuItemBeChosen(s32 param_1);
-void sub_8068310(s32 a0, PokemonStruct1 **a1);
+void sub_8068310(s32 n, PokemonStruct1 **monPtrs);
 void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
 extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 u32 sub_8014140(s32 a0, const void *a1);
@@ -911,10 +911,11 @@ extern void sub_803EAF0(u32, u8 *);
 
 extern const s32 gUnknown_8106E80[];
 extern MenuInputStruct gDungeonMenu;
+extern u32 gDungeonFramesCounter;
 
 static EWRAM_DATA WindowHeader gUnknown_202F308 = {0};
 static EWRAM_DATA s32 gUnknown_202F30C = 0;
-EWRAM_DATA s32 gUnknown_202F310 = 0;
+static EWRAM_DATA s32 gUnknown_202F310 = 0;
 
 // It's likely a struct only used in Blue version. Touchpad maybe?
 static const u8 gUnknown_8106DA4[] = {
@@ -1374,3 +1375,62 @@ void sub_806806C(PokemonStruct1 *a0)
     sub_803EAF0(0, NULL);
 }
 
+void sub_8068310(s32 n, PokemonStruct1 **monPtrs)
+{
+    s32 i;
+    s32 counter = 0;
+
+    for (i = 0; i < n; i++) {
+        if ((monPtrs[i]->unk0 & 0x8000) != 0) {
+            counter++;
+        }
+    }
+    gUnknown_202F310 = counter;
+}
+
+void sub_8068344(void)
+{
+    if ((gDungeonFramesCounter & 8) != 0) {
+        Window *window = &gWindows[0];
+        SpriteOAM sprite = {0};
+
+        SpriteSetAffine1(&sprite, 0);
+        SpriteSetAffine2(&sprite, 0);
+        SpriteSetObjMode(&sprite, 0);
+        SpriteSetMosaic(&sprite, 0);
+        SpriteSetBpp(&sprite, 0);
+        SpriteSetShape(&sprite, 1);
+        SpriteSetMatrixNum(&sprite, 16);
+        SpriteSetSize(&sprite, 0);
+        SpriteSetTileNum(&sprite, 0x3F0);
+        SpriteSetPriority(&sprite, 0);
+        SpriteSetPalNum(&sprite, 15);
+        SpriteSetY(&sprite, (window->y  * 8) + 0x8);
+        SpriteSetX(&sprite, (window->x  * 8) + 0x40);
+        AddSprite(&sprite,0x100,NULL,NULL);
+    }
+}
+
+// The same as sub_80623B0
+void sub_80684C4(void)
+{
+    if ((gDungeonFramesCounter & 8) != 0) {
+        Window *window = &gWindows[0];
+        SpriteOAM sprite = {0};
+
+        SpriteSetAffine1(&sprite, 0);
+        SpriteSetAffine2(&sprite, 0);
+        SpriteSetObjMode(&sprite, 0);
+        SpriteSetMosaic(&sprite, 0);
+        SpriteSetBpp(&sprite, 0);
+        SpriteSetShape(&sprite, 1);
+        SpriteSetMatrixNum(&sprite, 0);
+        SpriteSetSize(&sprite, 0);
+        SpriteSetTileNum(&sprite, 0x3F0);
+        SpriteSetPriority(&sprite, 0);
+        SpriteSetPalNum(&sprite, 15);
+        SpriteSetY(&sprite, (window->y  * 8) + 0x70);
+        SpriteSetX(&sprite, (window->x  * 8) + 0x40);
+        AddSprite(&sprite,0x100,NULL,NULL);
+    }
+}

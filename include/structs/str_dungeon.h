@@ -396,7 +396,8 @@ typedef struct Dungeon
     u32 unk18[(0xB8 - 0x18) / 4];
     Entity *unkB8;
     Entity *unkBC;
-    u8 fillC0[0x134 - 0xC0];
+    s32 unkC0;
+    u8 fillC4[0x134 - 0xC4];
     struct unkStruct_Dungeon134_sub unk134;
     /* 0x17C */ RGB colorRamp[COLOR_RAMP_COUNT];
     /* 0x57C */ unkDungeon57C unk57C;

@@ -24,7 +24,7 @@
 #include "charge_move.h"
 #include "dungeon_random.h"
 #include "targeting_flags.h"
-#include "targeting.h"
+#include "dungeon_misc.h"
 #include "dungeon_map_access.h"
 #include "math.h"
 #include "code_800DAC0.h"

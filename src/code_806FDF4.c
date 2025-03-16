@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/type.h"
 #include "structs/str_pokemon.h"
-#include "code_8069D4C.h"
+#include "dungeon_misc.h"
 #include "code_80118A4.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"
@@ -38,7 +38,6 @@ extern u8 *gUnknown_80FA0C8[];
 extern u8 *gUnknown_80FA120[];
 extern u8 *gUnknown_80FA090[];
 
-void sub_8068FE0(Entity *, u32, Entity *);
 u8 sub_806B8CC();
 bool8 DungeonGiveNameToRecruitedMon(u8 *a0);
 void sub_8083D88();
@@ -435,8 +434,8 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
 
             for(iVar2 = 0; iVar2 < 2; iVar2++)
             {
-                pokeStruct2->offense.att[iVar2] = param_3->offense.att[iVar2];
-                pokeStruct2->offense.def[iVar2] = param_3->offense.def[iVar2];
+                pokeStruct2->offense.att[iVar2] = param_3->att[iVar2];
+                pokeStruct2->offense.def[iVar2] = param_3->def[iVar2];
             }
 
             pokeStruct2->currExp = param_3->exp;
@@ -567,8 +566,8 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
 
     for(index2 = 0; index2 < 2; index2++)
     {
-      pokeStruct2->offense.att[index2] = local_74.offense.att[index2];
-      pokeStruct2->offense.def[index2] = local_74.offense.def[index2];
+      pokeStruct2->offense.att[index2] = local_74.att[index2];
+      pokeStruct2->offense.def[index2] = local_74.def[index2];
     }
 
     pokeStruct2->currExp = local_74.exp;
