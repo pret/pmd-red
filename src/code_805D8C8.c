@@ -1050,3 +1050,11 @@ void sub_8069D4C(struct unkStruct_8069D4C *r0, Entity *target)
     r0->maxBelly = info->maxBelly;
     r0->hiddenPower = info->hiddenPower;
 }
+
+void TargetTileInFront(Entity *pokemon)
+{
+    EntityInfo *pokemonInfo = GetEntInfo(pokemon);
+    pokemonInfo->targetPos.x = pokemon->pos.x + gAdjacentTileOffsets[pokemonInfo->action.direction].x;
+    pokemonInfo->targetPos.y = pokemon->pos.y + gAdjacentTileOffsets[pokemonInfo->action.direction].y;
+}
+
