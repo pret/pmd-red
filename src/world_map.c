@@ -3,6 +3,7 @@
 #include "world_map.h"
 #include "sprite.h"
 #include "code_8004AA0.h"
+#include "dungeon.h"
 #include "input.h"
 #include "text.h"
 #include "code_8009804.h"
@@ -29,7 +30,6 @@ extern void PlayCancelSoundEffect(void);
 extern void PlayAcceptSoundEffect(void);
 extern void PlayCursorUpDownSoundEffect(void);
 extern s32 sprintf(char *, const char *, ...);
-extern void CopyDungeonName1toBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 extern s32 Atan2_4096(PixelPos *a);
 extern void sub_80117AC(void);
 extern void sub_8011760(void);

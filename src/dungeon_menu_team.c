@@ -7,9 +7,11 @@
 #include "number_util.h"
 #include "input.h"
 #include "structs/map.h"
+#include "dungeon.h"
+#include "dungeon_action.h"
 #include "dungeon_main.h"
 #include "dungeon_message.h"
-#include "dungeon_action.h"
+#include "dungeon_misc.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -61,16 +63,11 @@ void HandleTalkFieldAction(Entity *);
 bool8 sub_8044B28(void);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
-void sub_806752C(ActionContainer *a0);
-void sub_8067768(ActionContainer *a0);
 extern void sub_80643AC(Entity *pokemon);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 extern Entity *sub_80696A8(Entity *a0);
-extern u8 sub_806A538(s32);
 extern void sub_803EAF0(u32, u8 *);
 extern void sub_803F508(Entity *);
-extern void sub_8041AD0(Entity *pokemon);
-extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
@@ -84,9 +81,7 @@ extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
 extern void sub_8045064(void);
 extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
-extern bool8 CanLeaderSwitch(u8 dungeon);
 extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
-extern void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);

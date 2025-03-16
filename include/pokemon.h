@@ -108,6 +108,10 @@ s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 bool8 sub_808DA44(s32, u32);
 void sub_808D144(PokemonStruct1 *pokemon, struct unkStruct_808D144 *r1);
 void sub_808CE74(s16 _species, bool32 _isLeader, u8* name);
+void xxx_pokemonstruct_index_to_pokemon2_808DE30(PokemonStruct2 *r0, u32 r1);
+void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2);
+void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1* pokemon, PokemonStruct2* a2);
+void sub_808DFDC(s32 a1, PokemonStruct2* a2);
 
 static inline bool8 PokemonFlag1(PokemonStruct1 *mon)
 {

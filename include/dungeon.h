@@ -38,7 +38,9 @@ extern const DungeonName gDungeonNames[];
 
 s32 GetDungeonFloorCount(u8 dungeon);
 const u8 *GetDungeonName1(u8 dungeon);
+const u8 *GetDungeonName2(u8 dungeon);
 bool8 IsStairDirectionUp(u8 dungeon);
+s16 GetTurnLimit(u8 dungeon);
 u32 GetMaxItemsAllowed(u8 dungeon);
 s8 GetRescuesAllowed(u8 dungeon);
 bool8 HasCheckpoint(u8 dungeon);
@@ -46,6 +48,13 @@ s16 GetRandomMovementChance(u8 dungeon);
 void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 void PrintDungeonLocationtoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 bool8 IsKeepMoney(u8 dungeon);
+bool8 IsLevelResetTo1(u8 dungeon);
+bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
+void CopyDungeonName1toBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
+s32 sub_80902C8(u8 dungeon);
+void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
+bool8 CanLeaderSwitch(u8 dungeon);
+bool8 sub_809017C(DungeonLocation* a1);
 
 u32 sub_80908D8(DungeonLocation *dungeon);
 u8 sub_8090910(DungeonLocation *dungeon, u32 param_2);

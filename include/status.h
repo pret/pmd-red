@@ -25,6 +25,7 @@ void HandleScannerOrb(Entity* pokemon, Entity* target);
 void HandleStairsOrb(Entity* pokemon, Entity* target);
 void HandleRadarOrb(Entity* pokemon, Entity* target);
 void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage);
+void sub_8078084(Entity * pokemon);
 void DestinyBondStatusTarget(Entity * pokemon, Entity * target);
 void SureShotStatusTarget(Entity *pokemon, Entity * target, s32 turns);
 void WhifferStatusTarget(Entity *pokemon, Entity * target, s32 turns);

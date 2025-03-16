@@ -16,12 +16,9 @@
 #include "structs/str_202EDE8.h"
 
 extern void sub_803E13C(void);
-extern void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
-extern s32 sub_80902C8(u8 dungeon);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
 extern bool8 sub_80848EC(void);
 extern u8 GetFloorType(void);
-extern const u8 *GetDungeonName2(u8 dungeon);
 
 extern const char gUnknown_80F4D8C[]; // "mapparam"
 extern const char gUnknown_80F60F8[]; // "banrpal"

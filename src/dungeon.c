@@ -42,7 +42,6 @@ extern u8 *gUnknown_8115E28[];
 extern u8 *gUnknown_8115E80[];
 extern u8 gUnknown_8108F50[];
 
-void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
 s32 sub_8091E94(s32 a1, s32 a2, s32 a3); // items.c
 void sub_8090888(u8 *param_1, u8 *param_2);
 bool8 sub_8090820(u16 moveID);
@@ -127,7 +126,7 @@ bool8 sub_809017C(DungeonLocation* a1)
     return FALSE;
 }
 
-void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2)
+void sub_80901D8(DungeonLocation *param_1, DungeonLocation *param_2)
 {
   if (DUNGEON_IS_MAZE(param_2->id)) {
     param_1->id = DUNGEON_NORMAL_MAZE;
@@ -169,7 +168,7 @@ s32 GetDungeonFloorCount(u8 dungeon)
         return gDungeonFloorCount[dungeon];
 }
 
-u8 sub_80902C8(u8 dungeon)
+s32 sub_80902C8(u8 dungeon)
 {
     if (DUNGEON_IS_MAZE(dungeon))
         return 0;

@@ -18,14 +18,9 @@
 #include "decompress.h"
 #include "constants/friend_area.h"
 
-extern u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_);
-extern void sub_801178C(void);
-extern void sub_80117C4(void);
 extern void PlayCancelSoundEffect(void);
 extern void PlayAcceptSoundEffect(void);
 extern void PlayCursorUpDownSoundEffect(void);
-extern s32 sprintf(char *, const char *, ...);
-extern void CopyDungeonName1toBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 extern s32 Atan2_4096(PixelPos *a);
 extern void sub_80117AC(void);
 extern void sub_8011760(void);
