@@ -9,7 +9,7 @@ s32 VecDirection8Sign(PixelPos *param_1);
 s32 VecDirection4SignYX(PixelPos *param_1);
 s8 VecDirection8Radial(PixelPos *param_1);
 s8 VecDirection4Radial(PixelPos *param_1);
-s8 SizedDeltaDirection4(PixelPos *r0, PixelPos *r1, PixelPos *r2, PixelPos *r3);
-s8 SizedDeltaDirection8(PixelPos *r0, PixelPos *r1, PixelPos *r2, PixelPos *r3);
+s8 SizedDeltaDirection4(const PixelPos *r0, const PixelPos *r1, const PixelPos *r2, const PixelPos *r3);
+s8 SizedDeltaDirection8(const PixelPos *r0, const PixelPos *r1, const PixelPos *r2, const PixelPos *r3);
 
 #endif

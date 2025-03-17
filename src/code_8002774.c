@@ -334,7 +334,8 @@ s8 VecDirection4Radial(PixelPos *pixelPos)
     return DIRECTION_SOUTH;
 }
 
-s8 SizedDeltaDirection4(PixelPos *r0, PixelPos *r1, PixelPos *r2, PixelPos *r3) {
+s8 SizedDeltaDirection4(const PixelPos *r0, const PixelPos *r1, const PixelPos *r2, const PixelPos *r3)
+{
     PixelPos stack;
     s32 iVar1;
     s32 iVar2;
@@ -377,7 +378,8 @@ s8 SizedDeltaDirection4(PixelPos *r0, PixelPos *r1, PixelPos *r2, PixelPos *r3) 
     return VecDirection4Radial(&stack);
 }
 
-s8 SizedDeltaDirection8(PixelPos *r0, PixelPos *r1, PixelPos *r2, PixelPos *r3) {
+s8 SizedDeltaDirection8(const PixelPos *r0, const PixelPos *r1, const PixelPos *r2, const PixelPos *r3)
+{
     PixelPos stack;
     s32 iVar1;
     s32 iVar2;

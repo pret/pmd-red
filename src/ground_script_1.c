@@ -7,6 +7,7 @@
 #include "ground_sprite.h"
 #include "ground_map.h"
 #include "dungeon.h"
+#include "string_format.h"
 #include "other_random.h"
 #include "rescue_team_info.h"
 #include "code_80118A4.h"
@@ -17,13 +18,8 @@
 #include "ground_main.h"
 #include "code_80A26CC.h"
 #include "wigglytuff_shop1.h"
-
-// Size: unknown
-typedef struct UnkAction3D
-{
-    u8 fill0[0x4C];
-    u8 unk4C[10];
-} UnkAction3D;
+#include "code_8002774.h"
+#include "wonder_mail.h"
 
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s16, DungeonLocation*, u8);
@@ -108,7 +104,7 @@ void sub_80A87AC(s32, s32);
 void sub_80A8BD8(s16, s32*);
 u32 sub_80A8C2C();
 u32 sub_80A8C98();
-UnkAction3D *sub_80A8D54(s16);
+PokemonStruct1 *sub_80A8D54(s16);
 s16 sub_80A8FD8(s32, PixelPos*);
 s16 sub_80A8F9C(s32, PixelPos*);
 u32 sub_80A9050();
@@ -121,20 +117,57 @@ void DeleteGroundEvents(void);
 void DeleteGroundLives(void);
 void DeleteGroundObjects(void);
 void DeleteGroundEffects(void);
+s32 ExecuteScriptCommand(Action *action);
+bool8 IsFanfareSEPlaying_1(u16 songIndex);
+bool8 sub_8099B94(void);
+bool8 IsEqualtoBGTrack(u16 songIndex);
+void sub_800290C(PixelPos *a0, s32 a1);
+s32 ExecuteScriptCommand(Action *action);
+void InitScriptData(ScriptData *);
+bool8 sub_8099B94(void);
+void sub_800290C(PixelPos*, s32);
+void sub_8002934(PixelPos*, PixelPos*, PixelPos*, s32, s32);
+s8 VecDirection8Radial(PixelPos*);
+PixelPos SetVecFromDirectionSpeed(s8, s32);
+void CopyStringtoBuffer(u8 *buffer, u8 *string);
+bool8 sub_8098DCC(u32 speed);
+extern const PixelPos gUnknown_81164DC;
+extern u32 gUnknown_2039DA4;
+extern char *gUnknown_203B4B0;
+extern char gUnknown_2039D98[10];
+void sub_8099220(void *param_1, s32 param_2);
+extern u32 gUnlockBranchLabels[];
+u8 ScriptPrintNullTextbox(void);
+s16 sub_8002694(u8 param_1); // value -> GroundEnter lookup
+bool8 sub_809B260(void *dst);
+bool8 sub_809B18C(s32 *sp);
+bool8 sub_809AFFC(u8 *);
+u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2);
+bool8 sub_809D234(void);
+s32 GroundLink_GetPos(s32 _arg0, PixelPos *pos);
+void sub_80999FC(s32);
+bool8 sub_809B1C0(s32, s32, char[12]);
+bool8 sub_80023E4(u32 param_1); // some kind of helper for predefined scenario checks
+s32 sub_80A14E8(Action *, u8, s32, s32);
+void sub_80A87AC(s32, s32);
+const ScriptCommand *FindLabel(Action *action, s32 r1);
+void SetRescueTeamName(u8 *buffer);
+s32 GetScriptVarValue(u8 *localVarBuf, s32 varId);
+s32 GetScriptVarArrayValue(u8 *localVarBuf, s32 varId, s32 idx);
+void SetScriptVarValue(u8 *localVarBuf, s32 varId, s32 val);
+void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId, s32 idx, s32 val);
+u32 sub_809034C(s32 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_);
+unkStruct_203B480 * GetMailatIndex(u8 index);
+u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s32 param_2);
 
 s32 sub_80A14E8(Action *, u8, s32, s32);
-s16 HandleAction(void *, DebugLocation *);
-
-extern int gFormatArgs[10];
 
 extern s16 gCurrentMap;
 extern s16 gUnknown_2039A32;
 extern s16 gUnknown_2039A34;
 
 extern struct { const char *unk0; s32 unk4; } gChoices[9];
-extern u8 gUnknown_2039D98[12];
 
-extern PixelPos gUnknown_81164DC;
 extern char gUnknown_81165D4[];
 extern char gUnknown_81165F4[];
 extern char gUnknown_811660C[];
@@ -153,6 +186,800 @@ extern ScriptCommand gUnknown_81164E4;
 
 EWRAM_INIT static int sNumChoices = 0;
 
+s16 HandleAction(Action *action, DebugLocation *debug)
+{
+    ScriptCommand cmd;
+
+    if (action->scriptData.savedState) {
+        bool8 loopContinue = TRUE;
+        while (loopContinue) {
+            switch (action->scriptData.savedState) {
+                case 2: {
+                    switch (action->scriptData.curScriptOp) {
+                        // handled cases (all hex)
+                        // 3, 4, 5, 6, 7, 22..28, 2c, 30..38, 39, 3a, 3b, 3c, 3d, 3e, 3f,
+                        // 58..5b, 5d, 5e, 60, 61..67, 68, 69..6f, 70, 71..76, 77..7c, 7d..82, 83..88,
+                        // 89, 8a, 8b..90, 91..95, 98, 99, 9b..a3, cf, d2..d8, da, db, dc, dd, de, df,
+                        // e0, e1, e2, e3, e5
+                        // other cases up to 0xf1 immediately break (which breaks again and loops for ExScrCmd)
+                        case 0x58 ... 0x5b: case 0x5d: case 0x5e: case 0x60:
+                        case 0x8b ... 0x90: case 0x98: case 0x99:
+                        case 0xdb: case 0xdc: {
+                            if (action->scriptData.unk2A > 0) {
+                                action->scriptData.unk2A--;
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0xdd: {
+                            if (action->callbacks->func4C_spriteRelatedCheck(action->parentObject)) {
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0xde: {
+                            if (action->callbacks->func50_spriteRelated(action->parentObject)) {
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0x22 ... 0x28:
+                        case 0xdf: {
+                            if (sub_8099B94()) {
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0xe0: {
+                            cmd = *action->scriptData.curPtr;
+                            if (IsEqualtoBGTrack(cmd.argShort)) {
+                                if (action->scriptData.unk2C++ < 10800) {
+                                    loopContinue = FALSE;
+                                }
+                                else {
+                                    action->scriptData.savedState = 3;
+                                }
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0xe1: case 0xe2: {
+                            cmd = *action->scriptData.curPtr;
+                            if (IsFanfareSEPlaying_1(cmd.argShort)) {
+                                if (action->scriptData.unk2C++ < 3600) {
+                                    loopContinue = FALSE;
+                                }
+                                else {
+                                    action->scriptData.savedState = 3;
+                                }
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0x61 ... 0x67: {
+                            PixelPos pos, pos2;
+                            action->callbacks->getHitboxCenter(action->parentObject, &pos);
+                            pos2.x = action->scriptData.pos2.x - pos.x;
+                            pos2.y = action->scriptData.pos2.y - pos.y;
+                            sub_800290C(&pos2, action->scriptData.unk30);
+                            if (pos2.x == 0 && pos2.y == 0) {
+                                action->scriptData.savedState = 3;
+                                break;
+                            }
+                            if (action->callbacks->moveRelative(action->parentObject, &pos2) & 9) {
+                                action->scriptData.savedState = 3;
+                                break;
+                            }
+                            action->callbacks->setEventIndex(action->parentObject, 0x1000);
+
+                            if (action->scriptData.unk2A >= 0) {
+                                if (action->scriptData.unk2A > 0) {
+                                    action->scriptData.unk2A--;
+                                    loopContinue = FALSE;
+                                }
+                                else {
+                                    action->scriptData.savedState = 3;
+                                }
+                            }
+                            else {
+                                loopContinue = FALSE;
+                            }
+                            break;
+                        }
+                        case 0x69 ... 0x6f: {
+                            PixelPos pos, pos2;
+                            s32 res;
+                            s32 dir, dirBefore;
+                            s8 dirS8;
+                            action->callbacks->getHitboxCenter(action->parentObject, &pos);
+                            pos2.x = action->scriptData.pos2.x - pos.x;
+                            pos2.y = action->scriptData.pos2.y - pos.y;
+                            sub_800290C(&pos2, action->scriptData.unk30);
+                            if (pos2.x == 0 && pos2.y == 0) {
+                                action->scriptData.savedState = 3;
+                                break;
+                            }
+                            res = action->callbacks->moveRelative(action->parentObject, &pos2);
+                            dir = VecDirection8Radial(&pos2);
+                            dirBefore = action->scriptData.unk26;
+                            dirS8 = dir;
+                            action->scriptData.unk26 = dirS8;
+                            action->callbacks->setDirection(action->parentObject, dir);
+                            if (res & 9) {
+                                action->scriptData.savedState = 3;
+                                break;
+                            }
+                            action->callbacks->setEventIndex(action->parentObject, 0x1000);
+
+                            if (action->scriptData.unk2A >= 0) {
+                                if (action->scriptData.unk2A > 0) {
+                                    action->scriptData.unk2A--;
+                                    loopContinue = FALSE;
+                                }
+                                else {
+                                    action->scriptData.savedState = 3;
+                                }
+                            }
+                            else {
+                                loopContinue = FALSE;
+                            }
+                            break;
+                        }
+                        case 0x71 ... 0x76:
+                        case 0x7d ... 0x82: {
+                            if (action->scriptData.unk2A > 0) {
+                                PixelPos pos;
+                                sub_8002934(&pos, &action->scriptData.pos1, &action->scriptData.pos2, action->scriptData.unk2A, action->scriptData.unk2C);
+                                action->callbacks->moveReal(action->parentObject, &pos);
+                                action->callbacks->setEventIndex(action->parentObject, 0x1000);
+                                action->scriptData.unk2A--;
+                                action->scriptData.unk2C++;
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0x77 ... 0x7c:
+                        case 0x83 ... 0x88: {
+                            if (action->scriptData.unk2A > 0) {
+                                PixelPos pos1, pos2, pos3;
+                                s32 dir, dirBefore;
+                                s8 dirS8;
+
+                                action->callbacks->getHitboxCenter(action->parentObject, &pos1);
+                                sub_8002934(&pos2, &action->scriptData.pos1, &action->scriptData.pos2, action->scriptData.unk2A, action->scriptData.unk2C);
+                                pos3.x = pos2.x - pos1.x;
+                                pos3.y = pos2.y - pos1.y;
+                                dir = VecDirection8Radial(&pos3);
+                                dirBefore = action->scriptData.unk26;
+                                dirS8 = dir;
+                                action->scriptData.unk26 = dirS8;
+                                action->callbacks->setDirection(action->parentObject, dir);
+                                action->callbacks->moveReal(action->parentObject, &pos2);
+                                action->callbacks->setEventIndex(action->parentObject, 0x1000);
+                                action->scriptData.unk2A--;
+                                action->scriptData.unk2C++;
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0x68: case 0x70: {
+                            s32 height, unk;
+                            s32 delta;
+                            action->callbacks->getPosHeightAndUnk(action->parentObject, &height, &unk);
+                            delta = action->scriptData.unk48 - height;
+                            if (delta == 0) {
+                                action->scriptData.savedState = 3;
+                                break;
+                            }
+                            // oh wow, cmn instruction
+                            height += (delta < -action->scriptData.unk30) ? -action->scriptData.unk30 :
+                                      (delta > action->scriptData.unk30) ? action->scriptData.unk30 : delta;
+                            action->callbacks->setPosHeight(action->parentObject, height);
+                            loopContinue = FALSE;
+                            break;
+                        }
+                        case 0x89: case 0x8a: {
+                            PixelPos pos;
+                            s8 dir;
+                            action->callbacks->getDirection(action->parentObject, &dir);
+                            pos = SetVecFromDirectionSpeed(dir, action->scriptData.unk30);
+
+                            if (action->callbacks->moveRelative(action->parentObject, &pos) & 9) {
+                                action->scriptData.savedState = 3;
+                                break;
+                            }
+                            action->callbacks->setEventIndex(action->parentObject, 0x1000);
+
+                            if (action->scriptData.unk2A > 0) {
+                                action->scriptData.unk2A--;
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0x91 ... 0x95: {
+                            if (action->scriptData.unk2A > 0) {
+                                action->scriptData.unk2A--;
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                PixelPos pos1, pos2, pos3, pos4;
+                                s32 tmp1, tmp2;
+                                s8 dir;
+                                bool8 flag;
+                                cmd = *action->scriptData.curPtr;
+                                tmp1 = -1;
+                                tmp2 = -1;
+                                flag = FALSE;
+                                action->callbacks->getDirection(action->parentObject, &dir);
+                                // arg1h synthetic
+                                switch (cmd.op) {
+                                    case 0x91: case 0x92: {
+                                        tmp2 = (s8) action->scriptData.unk4D;
+                                        break;
+                                    }
+                                    case 0x93: {
+                                        s16 res;
+                                        res = sub_80A7AE8((s16)cmd.arg1);
+                                        if (res >= 0) {
+                                            flag = TRUE;
+                                            sub_80A8FD8(res, &pos1);
+                                            sub_80A8F9C(res, &pos2);
+                                        }
+                                        break;
+                                    }
+                                    case 0x94: {
+                                        s32 res;
+                                        res = (s16)sub_80A7AE8((s16)cmd.arg1);
+                                        if (res >= 0) {
+                                            flag = TRUE;
+                                            sub_80A8FD8(res, &pos1);
+                                            pos2 = gUnknown_81164DC;
+                                        }
+                                        break;
+                                    }
+                                    case 0x95: {
+                                        flag = TRUE;
+                                        action->callbacks->getHitboxCenter(action->parentObject, &pos1);
+                                        action->callbacks->getSize(action->parentObject, &pos2);
+                                        GroundLink_GetPos((s16)cmd.arg1, &pos1);
+                                        break;
+                                    }
+                                }
+                                if (flag) {
+                                    action->callbacks->getHitboxCenter(action->parentObject, &pos3);
+                                    action->callbacks->getSize(action->parentObject, &pos4);
+                                    tmp2 = SizedDeltaDirection8(&pos3, &pos4, &pos1, &pos2);
+                                    if (tmp2 == -1) {
+                                        tmp2 = SizedDeltaDirection4(&pos3, &gUnknown_81164DC, &pos1, &gUnknown_81164DC);
+                                    }
+                                }
+                                if (tmp2 == -1 || tmp2 == dir) {
+                                    action->scriptData.savedState = 3;
+                                    break;
+                                }
+
+                                ASM_MATCH_TRICK(dir);
+                                action->scriptData.unk26 = sub_8002A70(dir, tmp2, (u8)cmd.argShort);
+                                action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                                action->scriptData.unk2A = cmd.argByte;
+                            }
+                            break;
+                        }
+                        case 0x9b ... 0xa3: {
+                            if (sub_809D234()) {
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0xe3: case 0xe5: {
+                            if (action->scriptData.unk22 != -1) {
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.script.ptr = ResolveJump(action, gUnlockBranchLabels[action->scriptData.branchDiscriminant]);
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        case 0x2c: case 0x30 ... 0x38: {
+                            if (action->scriptData.unk22 != -1) {
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                                sub_80A87AC(0, 0);
+                            }
+                            break;
+                        }
+                        case 0x39: {
+                            if (action->scriptData.unk22 != -1) {
+                                loopContinue = FALSE;
+                            }
+                            else if (sub_8099B94()) {
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                                sub_80A87AC(0, 0);
+                            }
+                            break;
+                        }
+                        case 0x3b: {
+                            s32 tmp;
+                            cmd = *action->scriptData.curPtr;
+                            tmp = sub_80A14E8(action, cmd.argByte, cmd.argShort, cmd.arg1);
+                            if (tmp < 0) {
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.savedState = 3;
+                                action->scriptData.script.ptr = ResolveJump(action, tmp);
+                            }
+                            break;
+                        }
+                        case 0x3c: {
+                            s32 val;
+                            if (!sub_809B260(&val)) {
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.script.ptr = ResolveJump(action, val);
+                                action->scriptData.savedState = 3;
+                                sub_80A87AC(0, 0);
+                            }
+                            break;
+                        }
+                        case 0x03: {
+                            s32 val;
+                            if (!sub_809B260(&val)) {
+                                loopContinue = FALSE;
+                                break;
+                            }
+                            if (val >= 0) {
+                                cmd = *action->scriptData.curPtr;
+                                GroundMainGroundRequest((s16)sub_8002694((u8)val), 0, cmd.argShort);
+                            }
+                            action->scriptData.script.ptr = ResolveJump(action, val);
+                            action->scriptData.savedState = 3;
+                            sub_80A87AC(0, 0);
+                            break;
+                        }
+                        case 0x04: {
+                            if (action->scriptData.branchDiscriminant == 0) {
+                                s32 val;
+                                if (!sub_809B260(&val)) {
+                                    loopContinue = FALSE;
+                                    break;
+                                }
+                                if (val >= 0) {
+                                    SetScriptVarValue(NULL, 18, sub_80A26B8(val));
+                                    action->scriptData.branchDiscriminant = 1;
+                                } else {
+                                    action->scriptData.branchDiscriminant = -1;
+                                }
+                                sub_80A87AC(0, 0);
+                                break;
+                            }
+                            if (action->scriptData.branchDiscriminant == 1) {
+                                s32 dungeonSelect;
+                                s32 dungeonEnterElt;
+                                cmd = *action->scriptData.curPtr;
+                                dungeonSelect = (s16) GetScriptVarValue(NULL, 18);
+                                dungeonEnterElt = GetScriptVarArrayValue(NULL, 48, (u16) dungeonSelect);
+                                if (dungeonSelect != 19 || dungeonEnterElt != 0) {
+                                    sub_8098DCC(cmd.argShort);
+                                    action->scriptData.script.ptr = ResolveJump(action, 0);
+                                    sub_80A87AC(0, 0);
+                                    action->scriptData.savedState = 3;
+                                    break;
+                                }
+                                SetScriptVarValue(NULL, 19, 19);
+                            }
+                            // fallthrough
+                        }
+                        case 0x06: {
+                            if (action->scriptData.branchDiscriminant == 0) {
+                                s32 val;
+                                s16 disc;
+                                if (!sub_809B260(&val)) {
+                                    loopContinue = FALSE;
+                                    break;
+                                }
+                                if (val >= 0) {
+                                    SetScriptVarValue(NULL, 19, action->scriptData.curScriptOp == 4 ? sub_80A26B8(val) : (s16)val);
+                                    disc = 1;
+                                } else {
+                                    disc = -1;
+                                }
+                                action->scriptData.branchDiscriminant = disc;
+                                sub_80A87AC(0, 0);
+                                break;
+                            }
+                            // fallthrough
+                        }
+                        case 0x07: {
+                            if (action->scriptData.branchDiscriminant == 1) {
+                                s32 dungeonEnter;
+                                u32 res;
+                                struct unkStruct_20398C8 unkStruct;
+                                dungeonEnter = (s16)GetScriptVarValue(NULL, 19);
+                                if (sub_80990EC(&unkStruct, dungeonEnter)) {
+                                    s32 val;
+                                    sub_8099220(&unkStruct, dungeonEnter);
+                                    val = sub_80023E4(6);
+                                    res = sub_809034C(unkStruct.unk0, 0, gUnknown_203B4B0, val, 0);
+                                    gUnknown_2039DA4 = res;
+                                    switch (res) {
+                                        case 2: {
+                                            action->scriptData.branchDiscriminant = 2;
+                                            sub_809B1C0(9, 1, gUnknown_203B4B0);
+                                            if (GroundScriptCheckLockCondition(action, 1)) {
+                                                sub_80A87AC(0, 11);
+                                            }
+                                            break;
+                                        }
+                                        case 0: {
+                                            action->scriptData.branchDiscriminant = 3;
+                                            break;
+                                        }
+                                        case 1: {
+                                            action->scriptData.branchDiscriminant = 4;
+                                            sub_809B1C0(10, 1, gUnknown_203B4B0);
+                                            if (GroundScriptCheckLockCondition(action, 1)) {
+                                                sub_80A87AC(0, 11);
+                                            }
+                                            break;
+                                        }
+                                        default: {
+                                            action->scriptData.branchDiscriminant = -1;
+                                            break;
+                                        }
+                                    }
+                                    break;
+                                }
+                                else {
+                                    action->scriptData.branchDiscriminant = 3;
+                                    break;
+                                }
+                            }
+                        case 0x05:
+                            if (action->scriptData.branchDiscriminant == 1) {
+                                unkStruct_203B480 *ret;
+                                s32 val;
+                                u32 res;
+                                ret = GetMailatIndex(GetScriptVarValue(NULL, 20));
+                                val = sub_80023E4(6);
+                                res = sub_809034C(ret->unk4.dungeon.id, 0, gUnknown_203B4B0, val, 1);
+                                gUnknown_2039DA4 = res;
+                                switch (res) {
+                                    case 2: {
+                                        action->scriptData.branchDiscriminant = 2;
+                                        sub_809B1C0(9, 1, gUnknown_203B4B0);
+                                        if (GroundScriptCheckLockCondition(action, 1)) {
+                                            sub_80A87AC(0, 11);
+                                        }
+                                        break;
+                                    }
+                                    case 0: {
+                                        action->scriptData.branchDiscriminant = 3;
+                                        break;
+                                    }
+                                    case 1: {
+                                        action->scriptData.branchDiscriminant = 4;
+                                        sub_809B1C0(10, 1, gUnknown_203B4B0);
+                                        if (GroundScriptCheckLockCondition(action, 1)) {
+                                            sub_80A87AC(0, 11);
+                                        }
+                                        break;
+                                    }
+                                    default: {
+                                        action->scriptData.branchDiscriminant = -1;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                            if (action->scriptData.branchDiscriminant == 2) {
+                                u32 val;
+                                if (!sub_809B260(&val)) {
+                                    loopContinue = FALSE;
+                                    break;
+                                }
+
+                                if (val != 0) {
+                                    action->scriptData.branchDiscriminant = 3;
+                                    sub_80A87AC(0, 0);
+                                    ScriptPrintNullTextbox();
+                                    break;
+                                }
+                                else {
+                                    action->scriptData.branchDiscriminant = -1;
+                                    sub_80A87AC(0, 0);
+                                    ScriptPrintNullTextbox();
+                                    break;
+                                }
+                            }
+                            if (action->scriptData.branchDiscriminant == 3) {
+                                cmd = *action->scriptData.curPtr;
+                                action->scriptData.savedState = 3;
+                                sub_80999FC(cmd.argShort);
+                                GroundMap_ExecuteEvent(0x70, 0);
+                                if (action->unk8[0] == 0) continue;
+                                action->scriptData.script.ptr = ResolveJump(action, 1);
+                                break;
+                            }
+                            if (action->scriptData.branchDiscriminant == 4) {
+                                u32 val;
+                                if (!sub_809B260(&val)) {
+                                    loopContinue = FALSE;
+                                    break;
+                                }
+                                action->scriptData.branchDiscriminant = -1;
+                                sub_80A87AC(0, 0);
+                                ScriptPrintNullTextbox();
+                                break;
+                            }
+
+                            sub_8099220(0, 0);
+                            SetScriptVarValue(NULL, 19, -1);
+                            action->scriptData.script.ptr = ResolveJump(action, -1);
+                            action->scriptData.savedState = 3;
+                            break;
+                        }
+                        case 0x3d: {
+                            s32 val;
+                            cmd = *action->scriptData.curPtr;
+                            if (!sub_809B260(&val)) {
+                                loopContinue = FALSE;
+                                break;
+                            }
+                            if (val == 1) {
+                                s32 id = (s16)cmd.arg1;
+                                if (id != -1) {
+                                    PokemonStruct1 *mon = sub_80A8D54(id);
+                                    s32 i;
+                                    for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
+                                        mon->name[i] = gUnknown_2039D98[i];
+                                    }
+                                }
+                            }
+                            action->scriptData.script.ptr = ResolveJump(action, val);
+                            action->scriptData.savedState = 3;
+                            sub_80A87AC(0, 0);
+                            break;
+                        }
+                        case 0x3e: {
+                            s32 val;
+                            if (!sub_809B260(&val)) {
+                                loopContinue = FALSE;
+                                break;
+                            }
+                            if (val == 1) {
+                                SetRescueTeamName(gUnknown_2039D98);
+                            }
+                            action->scriptData.script.ptr = ResolveJump(action, val);
+                            action->scriptData.savedState = 3;
+                            sub_80A87AC(0, 0);
+                            break;
+                        }
+                        case 0x3f: {
+                            s32 val;
+                            const u8 *ptr;
+                            cmd = *action->scriptData.curPtr;
+                            ptr = cmd.argPtr;
+                            if (sub_809B260(&val)) {
+                                if (val == 1) {
+                                    s32 i;
+                                    u8 name[16];
+                                    for (i = 0; i < 16; i++) {
+                                        name[i] = '\0';
+                                    }
+
+                                    CopyStringtoBuffer(gUnknown_2039D98, name);
+                                    for (i = 0; i < 16; i++) {
+                                        if (name[i] != ptr[i]) {
+                                            val = 2;
+                                            break;
+                                        }
+                                        if (name[i] == '\0')
+                                            break;
+                                    }
+                                }
+                                action->scriptData.script.ptr = ResolveJump(action, val);
+                                action->scriptData.savedState = 3;
+                                sub_80A87AC(0, 0);
+                            }
+                            else {
+                                loopContinue = FALSE;
+                            }
+                            break;
+                        }
+                        case 0x3a: {
+                            if (action->scriptData.unk2C == 0) {
+                                if (action->scriptData.unk22 != -1) {
+                                    loopContinue = FALSE;
+                                }
+                                else {
+                                    action->scriptData.unk2C++;
+                                }
+                            }
+                            else {
+                                bool8 c;
+                                if (sub_809AFFC(&c)) {
+                                    if (c) {
+                                        cmd = *action->scriptData.curPtr;
+                                        action->scriptData.script.ptr = FindLabel(action, cmd.argShort);
+                                    }
+                                    action->scriptData.savedState = 3;
+                                    sub_80A87AC(0, 0);
+                                }
+                                else {
+                                    loopContinue = FALSE;
+                                }
+                            }
+                            break;
+                        }
+                        case 0xcf: {
+                            cmd = *action->scriptData.curPtr;
+                            if (action->scriptData.unk2C == 0) {
+                                bool8 flag = FALSE;
+                                if (action->scriptData.branchDiscriminant < 0) {
+                                    if (action->scriptData.script.ptr->op != 0xd1) {
+                                        action->scriptData.savedState = 3;
+                                        break;
+                                    }
+                                }
+                                else {
+                                    while (action->scriptData.script.ptr->op == 0xd0) {
+                                        if (action->scriptData.script.ptr->argShort == action->scriptData.branchDiscriminant) {
+                                            flag = TRUE;
+                                            break;
+                                        }
+                                        action->scriptData.script.ptr++;
+                                    }
+                                    if (!flag) {
+                                        while (action->scriptData.script.ptr->op == 0xd1) {
+                                            action->scriptData.script.ptr++;
+                                        }
+                                        action->scriptData.savedState = 3;
+                                        break;
+                                    }
+                                }
+                                if (ScriptPrintText(cmd.argByte, (s16) cmd.arg1, action->scriptData.script.ptr->argPtr)) {
+                                    sub_80A87AC(0,10);
+                                    if (GroundScriptCheckLockCondition(action, 0)) {
+                                        action->scriptData.unk2C = 1;
+                                    }
+                                }
+                                action->scriptData.script.ptr++;
+                            }
+                            else {
+                                if (action->scriptData.unk22 != -1) {
+                                    loopContinue = FALSE;
+                                }
+                                else {
+                                    action->scriptData.unk2C = 0;
+                                    sub_80A87AC(0, 0);
+                                }
+                            }
+                            break;
+                        }
+                        case 0xd2 ... 0xd8: {
+                            s32 tmp;
+                            if (action->scriptData.unk2C == 0) {
+                                if (action->scriptData.unk22 != -1) {
+                                    loopContinue = FALSE;
+                                }
+                                else {
+                                    action->scriptData.unk2C++;
+                                }
+                            }
+                            else if (sub_809B18C(&tmp)) {
+                                if (tmp > 0) {
+                                    cmd = *(action->scriptData.curPtr + action->scriptData.branchDiscriminant + tmp);
+                                    action->scriptData.script.ptr = FindLabel(action, cmd.argShort);
+                                }
+                                action->scriptData.savedState = 3;
+                                sub_80A87AC(0, 0);
+                            }
+                            else {
+                                loopContinue = FALSE;
+                            }
+                            break;
+                        }
+                        case 0xda: {
+                            if (action->scriptData.unk22 != -1) {
+                                loopContinue = FALSE;
+                            }
+                            else {
+                                action->scriptData.script.ptr = ResolveJump(action, gUnlockBranchLabels[1]);
+                                action->scriptData.savedState = 3;
+                            }
+                            break;
+                        }
+                        default:
+                        case 0x08 ... 0x21: case 0x29 ... 0x2b: case 0x2d ... 0x2f: case 0x40 ... 0x57: case 0x5c: case 0x5f:
+                        case 0x96: case 0x97: case 0x9a: case 0xa4 ... 0xce: case 0xd0: case 0xd1: case 0xd9: case 0xe4: case 0xe6 ... 0xf0: {
+                            loopContinue = FALSE;
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case 3: {
+                    s32 state = ExecuteScriptCommand(action);
+                    action->scriptData.savedState = state;
+                    switch ((s16)state) {
+                        case 0: {
+                            if (action->scriptData2.savedState) {
+                                action->scriptData = action->scriptData2;
+                                if (action->callbacks->setDirection && action->scriptData.unk26 != -1) {
+                                    u32 tmp;
+                                    action->callbacks->getFlags(action->parentObject, &tmp);
+                                    if (tmp & 0x400) {
+                                        action->callbacks->setDirection(action->parentObject, action->scriptData.unk26);
+                                    }
+                                }
+                                if (action->callbacks->setEventIndex) {
+                                    action->callbacks->setEventIndex(action->parentObject, action->scriptData.unk24);
+                                }
+                                InitScriptData(&action->scriptData2);
+                            }
+                            else {
+                                InitScriptData(&action->scriptData);
+                            }
+                            return 3;
+                        }
+                        case 3: return 3;
+                        case 4: return 4;
+                        case 1: return 1;
+                        case 2: default: {
+                            action->scriptData.unk2C = 0;
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case 0: case 1: case 4: {
+                    return action->scriptData.savedState;
+                }
+            }
+        }
+        return 3;
+    }
+    else {
+        return 0;
+    }
+}
+
 // Return values:
 // This function returns what's likely an enum, which controls the state of the script engine state machine, and possibly provides information to code calling the engine.
 // The enum is shared at least with HandleAction.
@@ -166,7 +993,8 @@ EWRAM_INIT static int sNumChoices = 0;
 //     This is the only return value that does not return to the script engine caller
 // - Value 3 returns to the caller, but will give control back to ExecuteScriptCommand when reentering the script ("script not finished")
 // - Value 4 is some kind of fatal error state, no further scripting progress will happen. This code is always returned to the caller from now on.
-s32 ExecuteScriptCommand(Action *action) {
+s32 ExecuteScriptCommand(Action *action)
+{
     ScriptCommand curCmd;
     ScriptData *scriptData = &action->scriptData;
 
@@ -763,15 +1591,14 @@ s32 ExecuteScriptCommand(Action *action) {
                 return 2;
             }
             case 0x3d: {
-                UnkAction3D *unk;
                 int i;
                 if ((s16)curCmd.arg1 != -1) {
-                    unk = sub_80A8D54(curCmd.arg1);
-                    if (unk != NULL) {
-                        for (i = 0; i < 10; i++) {
-                            gUnknown_2039D98[i] = unk->unk4C[i];
+                    PokemonStruct1 *mon = sub_80A8D54(curCmd.arg1);
+                    if (mon != NULL) {
+                        for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
+                            gUnknown_2039D98[i] = mon->name[i];
                         }
-                        gUnknown_2039D98[10] = 0;
+                        gUnknown_2039D98[POKEMON_NAME_LENGTH] = 0;
                         sub_809B1C0(4, 0, gUnknown_2039D98);
                         sub_80A87AC(0, 11);
                         return 2;

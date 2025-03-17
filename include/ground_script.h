@@ -82,7 +82,7 @@ typedef struct CallbackData
     /* 0x20 */ void (*setPositionBounds)(void*, PixelPos *from, PixelPos *to);
     /* 0x24 */ bool8 (*moveReal)(void*, PixelPos*);
     /* 0x28 */ void (*setPosHeight)(void*, u32 height);
-    /* 0x2C */ s32 (*setDirection)(void*, s8 dir); // direction must be signed char!
+    /* 0x2C */ s32 (*setDirection)(void*, s32 dir); // direction must be signed char!
     /* 0x30 */ void (*setEventIndex)(void*, u16);
     /* 0x34 */ void (*livesOnlyNullsub)(void*, u16);
     /* 0x38 */ void (*func38)(void*, s16, u32);
