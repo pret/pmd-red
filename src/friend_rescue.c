@@ -703,12 +703,8 @@ void nullsub_40(void)
 
 void sub_8032828(void)
 {
-
     unkStruct_203B480 *mail;
-    u32 temp;
-    u8 buffer [80];
-    PokemonStruct1 *pokeStruct1;
-    PokemonStruct1 *pokeStruct2;
+    u8 buffer[80];
     char *monName;
 
     switch (gUnknown_203B33C->state) {
@@ -824,6 +820,12 @@ void sub_8032828(void)
                 sub_80306A8(WONDER_MAIL_TYPE_SOS, 0, NULL, 6);
             }
             break;
+        case 0x33:
+            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
+            SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E234C, TRUE, 0, FALSE);
+            sub_803092C();
+            sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
+            break;
         case 0x35:
             CreateMenuDialogueBoxAndPortrait(&gUnknown_80E29A0[0], 0, 6, gUnknown_80E22B4, NULL, 4, 0, NULL, 0x101);
             break;
@@ -856,6 +858,12 @@ void sub_8032828(void)
         case 0x2D:
             CreateDialogueBoxAndPortrait(&gUnknown_80E2A80[0], 0, 0, 0x101);
             break;
+        case 0x2E:
+            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            ResetUnusedInputStruct();
+            ShowWindows(NULL, TRUE, TRUE);
+            sub_8031D70(gUnknown_203B33C->unk218, 0);
+            break;
         case 0x2F:
             CreateDialogueBoxAndPortrait(&gUnknown_80E2AA8[0], 0, 0, 0x101);
             break;
@@ -863,19 +871,12 @@ void sub_8032828(void)
             CreateDialogueBoxAndPortrait(&gUnknown_80E2AE4[0], 0, 0, 0x101);
             break;
         case 0x2B:
-        #ifndef NONMATCHING
-            gUnknown_203B33C->unk52C = gUnknown_203B33C->unk52C;
-            gUnknown_80E2BE0[0] = gUnknown_80E2BE0[0];
-        #endif //NONMATCHING
             switch ((u32)gUnknown_203B33C->unk524) {
                 case 0xC:
                     break;
                 case 0xB:
                 case 0xD:
                 case 0xE:
-                    #ifndef NONMATCHING
-                    gUnknown_80E2BE0[0] = gUnknown_80E2BE0[0];
-                    #endif //NONMATCHING
                     CreateDialogueBoxAndPortrait(&gUnknown_80E2B54[0], 0, 0, 0x101);
                     break;
             }
@@ -921,6 +922,12 @@ void sub_8032828(void)
                 sub_80306A8(WONDER_MAIL_TYPE_AOK, 0, NULL, 6);
             }
             break;
+        case 0x1E:
+            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
+            SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E234C, TRUE, 0, FALSE);
+            sub_803092C();
+            sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
+            break;
         case 0x20:
             CreateMenuDialogueBoxAndPortrait(&gUnknown_80E2D30[0], 0, 6, gUnknown_80E22B4, NULL, 4, 0, NULL, 0x101);
             break;
@@ -929,6 +936,10 @@ void sub_8032828(void)
             break;
         case 0x5:
             CreateMenuDialogueBoxAndPortrait(&gUnknown_80E2D7C[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
+            break;
+        case 0xD:
+            nullsub_23(FALSE);
+            CreateDialogueBoxAndPortrait(&gUnknown_80E2DD0[0], 0, NULL, 0);
             break;
         case 0xA:
         case 0x4C:
@@ -947,9 +958,6 @@ void sub_8032828(void)
             sub_8011830();
             gUnknown_203B33C->status = sub_8037B28(gUnknown_203B33C->unk40);
             if (gUnknown_203B33C->status == 0) {
-                #ifndef NONMATCHING
-                u8 *u8ptr;
-                #endif //NONMATCHING
                 switch (gUnknown_203B33C->unk40) {
                     case 0x3:
                         MemoryFill8(&gUnknown_203B33C->unk48, 0, sizeof(unkStruct_203B480));
@@ -959,15 +967,7 @@ void sub_8032828(void)
                     case 0x2:
                         MemoryFill8(&gUnknown_203B33C->unk48, 0, sizeof(unkStruct_203B480));
                         MemoryFill8(&gUnknown_203B33C->unk78, 0, sizeof(unkStruct_203B480));
-                        #ifdef NONMATCHING
-                        // Regswaps
                         gUnknown_203B33C->unk48 = *GetMailatIndex(gUnknown_203B33C->unk218);
-                        #else
-                        gUnknown_80E2BE0[0] = gUnknown_80E2BE0[0];
-                        u8ptr = &gUnknown_203B33C->unk218;
-                        gUnknown_80E2BE0[0] = gUnknown_80E2BE0[0];
-                        gUnknown_203B33C->unk48 = *GetMailatIndex(*u8ptr);
-                        #endif //NONMATCHING
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk48, &gUnknown_203B33C->unk78);
                         break;
                     case 0x5:
@@ -982,10 +982,7 @@ void sub_8032828(void)
                         gUnknown_203B33C->unk130.pokemon.speciesNum = 0;
                         gUnknown_203B33C->unkA8.mail = *GetMailatIndex(gUnknown_203B33C->unk218);
                         if (gUnknown_203B33C->speciesNum != -1) {
-                            pokeStruct1 = &gUnknown_203B33C->unkA8.pokemon;
-                            pokeStruct2 = gRecruitedPokemonRef->pokemon;
-                            pokeStruct2 += gUnknown_203B33C->speciesNum;
-                            memcpy(pokeStruct1, pokeStruct2, sizeof(PokemonStruct1));
+                            gUnknown_203B33C->unkA8.pokemon = gRecruitedPokemonRef->pokemon[gUnknown_203B33C->speciesNum];
                         }
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unkA8, &gUnknown_203B33C->unk130);
                         break;
@@ -1027,6 +1024,12 @@ void sub_8032828(void)
             ShowWindows(NULL, TRUE, TRUE);
             sub_80306A8(WONDER_MAIL_TYPE_SOS, 0, NULL, 6);
             break;
+        case 0x13:
+            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
+            SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E234C, TRUE, 0, FALSE);
+            sub_803092C();
+            sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
+            break;
         case 0x15:
             CreateMenuDialogueBoxAndPortrait(&gUnknown_80E2F78[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
@@ -1061,6 +1064,13 @@ void sub_8032828(void)
             break;
         case 0x5B:
             CreateDialogueBoxAndPortrait(gUnknown_80E30D0, 0, 0, 0x101);
+            break;
+        case 0x5C:
+            if (sub_8030894() == 0) {
+                ResetUnusedInputStruct();
+                ShowWindows(NULL, TRUE, TRUE);
+                sub_80306A8(5, 0, 0, 6);
+            }
             break;
         case 0x5D:
             RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
@@ -1101,13 +1111,17 @@ void sub_8032828(void)
                         gUnknown_203B33C->status = sub_8037D64(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk1B8, &gUnknown_203B33C->unk1E8);
                         break;
                 }
-                temp = 6;
-                if (gUnknown_203B33C->status == 0 && gUnknown_203B33C->unk40 <= 7 && gUnknown_203B33C->unk40 >= temp) {
-                    gUnknown_203B33C->status = sub_80381F4(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk1B8, &gUnknown_203B33C->unk1E8);
-                    if (sub_800D588() != 0)
-                        gUnknown_203B33C->unk420 = gUnknown_203B33C->unk1E8.unk10.unk10;
-                    else
-                        gUnknown_203B33C->unk420 = gUnknown_203B33C->unk1B8.unk10.unk10;
+            }
+            if (gUnknown_203B33C->status == 0) {
+                switch (gUnknown_203B33C->unk40) {
+                    case 0x6:
+                    case 0x7:
+                        gUnknown_203B33C->status = sub_80381F4(gUnknown_203B33C->unk40, &gUnknown_203B33C->unk1B8, &gUnknown_203B33C->unk1E8);
+                        if (sub_800D588() != 0)
+                            gUnknown_203B33C->unk420 = gUnknown_203B33C->unk1E8.unk10.unk10;
+                        else
+                            gUnknown_203B33C->unk420 = gUnknown_203B33C->unk1B8.unk10.unk10;
+                        break;
                 }
             }
             xxx_call_start_bg_music();
@@ -1125,7 +1139,6 @@ void sub_8032828(void)
             CreateDialogueBoxAndPortrait(gUnknown_80E314C, 0, 0, 0x101);
             break;
         case 0x67:
-        case 0x2E:
             RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
@@ -1176,7 +1189,6 @@ void sub_8032828(void)
             gUnknown_203B33C->unk53C.friendAreaReward = 0;
             sub_802F204(&gUnknown_203B33C->unk53C, 0);
             break;
-        case 0xD:
         case 0x62:
             nullsub_23(FALSE);
             CreateDialogueBoxAndPortrait(&gUnknown_80E2DD0[0], 0, NULL, 0);
@@ -1231,7 +1243,6 @@ void sub_8032828(void)
             CreateDialogueBoxAndPortrait(&gUnknown_80E34F0[0], 0, 0, 0x101);
             break;
         case 0x47:
-        case 0x5C:
             if (sub_8030894() == 0) {
                 ResetUnusedInputStruct();
                 ShowWindows(NULL, TRUE, TRUE);
@@ -1239,9 +1250,6 @@ void sub_8032828(void)
             }
             break;
         case 0x48:
-        case 0x13:
-        case 0x1E:
-        case 0x33:
             RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E234C, TRUE, 0, FALSE);
             sub_803092C();
