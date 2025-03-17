@@ -18,7 +18,6 @@ typedef struct Offense
 typedef struct unkPokeSubStruct_C
 {
     u8 level;
-    u8 fill1[3];
 } unkPokeSubStruct_C;
 
 // size: 0x58
