@@ -3,7 +3,7 @@
 #include "bg_palette_buffer.h"
 #include "string_format.h"
 #include "code_801602C.h"
-#include "code_8094D28.h"
+#include "random_mersenne_twister.h"
 #include "code_8099360.h"
 #include "constants/emotions.h"
 #include "game_options.h"
@@ -148,14 +148,14 @@ u32 HandleTestTrackerState(void)
             break;
         case PERSONALITY_TEST_END:
             iVar1 = Rand32Bit() * sPersonalityTestTracker->FrameCounter;
-            sub_8094D28(Rand32Bit());
+            MersenneTwister_InitializeState(Rand32Bit());
 
             for (counter = 0; counter < NUM_PERSONALITIES; counter++)
                 iVar1 *= sPersonalityTestTracker->NatureTotals[counter] + counter + 3;
 
-            iVar1 += sub_8094E4C();
+            iVar1 += Random32MersenneTwister();
             while (iVar1 == -1)
-                iVar1 += sub_8094E4C();
+                iVar1 += Random32MersenneTwister();
 
             sub_8011C40(iVar1);
             return 3;

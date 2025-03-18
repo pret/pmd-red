@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_8094D28.h"
+#include "random_mersenne_twister.h"
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
 #include "dungeon.h"
@@ -277,8 +277,8 @@ void sub_809542C(WonderMailSub *param_1)
 
   gUnknown_203B480->mailType = 1;
   gUnknown_203B480->unk4 = *param_1;
-  sub_8094D28(Rand32Bit());
-  gUnknown_203B480->unk10.unk10 = sub_8094E4C();
+  MersenneTwister_InitializeState(Rand32Bit());
+  gUnknown_203B480->unk10.unk10 = Random32MersenneTwister();
   gUnknown_203B480->clientSpecies = GetPlayerPokemonStruct()->speciesNum;
   PrintPokeNameToBuffer(buffer, GetPlayerPokemonStruct());
   CopyStringtoBuffer(gUnknown_203B480->playerName, buffer);
