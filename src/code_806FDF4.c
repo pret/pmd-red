@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/type.h"
 #include "structs/str_pokemon.h"
+#include "dungeon_main.h"
 #include "dungeon_misc.h"
 #include "code_80118A4.h"
 #include "code_803E668.h"
@@ -39,7 +40,6 @@ extern u8 *gUnknown_80FA120[];
 extern u8 *gUnknown_80FA090[];
 
 u8 sub_806B8CC();
-bool8 DungeonGiveNameToRecruitedMon(u8 *a0);
 void sub_8083D88();
 u8 sub_808529C(s32);
 void nullsub_96(Entity *pokemon,Entity *target);

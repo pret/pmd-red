@@ -46,6 +46,8 @@ s16 GetRandomMovementChance(u8 dungeon);
 void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 void PrintDungeonLocationtoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 
+void sub_80901D8(DungeonLocation *param_1, DungeonLocation *param_2);
+u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_);
 u32 sub_80908D8(DungeonLocation *dungeon);
 u8 sub_8090910(DungeonLocation *dungeon, u32 param_2);
 bool8 IsNotValidDungeon(u8 dungeon);

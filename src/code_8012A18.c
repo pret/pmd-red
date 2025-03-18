@@ -7,8 +7,7 @@
 #include "string_format.h"
 #include "game_options.h"
 #include "sprite.h"
-
-extern void xxx_call_update_bg_vram();
+#include "text.h"
 
 void sub_8012A18()
 {
@@ -17,7 +16,7 @@ void sub_8012A18()
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();
     sub_80060EC();
-    sub_800CB20();
+    WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs(); // Input related
     CopySpritesToOam();
     sub_8005304();

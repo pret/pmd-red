@@ -2,7 +2,10 @@
 #define GUARD_MATH_H
 
 #include "gba/types.h"
+#include "structs/str_position.h"
 #include "number_util.h"
+
+s32 Atan2_4096(PixelPos *a);
 
 /**
  * This function computes the cosine of of `x` using a lookup table. The period of

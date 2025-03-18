@@ -1,4 +1,5 @@
 #include "global.h"
+#include "def_filearchives.h"
 #include "dungeon_generation.h"
 #include "file_system.h"
 #include "tile_types.h"
@@ -17,11 +18,10 @@
 #include "structs/map.h"
 #include "structs/str_806B7F8.h"
 #include "dungeon_config.h"
+#include "dungeon_items.h"
 
 extern const u8 gUnknown_80F6DCC[];
-extern struct FileArchive gDungeonFileArchive;
 
-extern void AddItemToDungeonAt(DungeonPos *, Item *, u32);
 extern s32 sub_803DA20(s16 species);
 extern void sub_8049840(void);
 extern void sub_80429FC(DungeonPos *r0);

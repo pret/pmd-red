@@ -1,19 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
 #include "bg_palette_buffer.h"
+#include "code_800558C.h"
 #include "code_8009804.h"
 #include "cpu.h"
+#include "def_filearchives.h"
 #include "file_system.h"
 #include "text.h"
-#include "code_800558C.h"
-
-extern const struct FileArchive gSystemFileArchive; // 8300500
-
-EWRAM_DATA RGB gFontPalette[128] = {0};
-EWRAM_DATA static u8 gUnknown_202D238[4] = {0};
-EWRAM_DATA static s32 gUnknown_202D23C = 0;
-EWRAM_DATA static struct unkStruct_202D240 gUnknown_202D240[8] = {0};
-EWRAM_DATA u32 gUnknown_202D2A0 = 0;
 
 struct FontData
 {
@@ -21,11 +14,17 @@ struct FontData
     u8 dataArray[0];
 };
 
-// Only written to.
-EWRAM_INIT static bool8 gUnknown_203B090 = FALSE;
+EWRAM_DATA RGB gFontPalette[128] = {0};
+static EWRAM_DATA u8 sUnknown_202D238[4] = {0};
+static EWRAM_DATA s32 sUnknown_202D23C = 0;
+static EWRAM_DATA struct unkStruct_202D240 sUnknown_202D240[8] = {0};
+/*static [.s file not finished yet]*/ EWRAM_DATA u32 gUnknown_202D2A0 = 0;
 
-#define OAM_DUMMY 0xA000A0 // y set to 160 - DISPLAY_HEIGHT
+static EWRAM_INIT bool8 sUnknown_203B090 = FALSE; // Only written to.
 
+#define OAM_DUMMY 0xA000A0 // y set to 160 (DISPLAY_HEIGHT)
+
+// arm9.bin::0200A178
 void InitGraphics(void)
 {
     s32 i;
@@ -39,7 +38,7 @@ void InitGraphics(void)
     register const FileArchive *sysFileArchieve asm("r4");
     #endif // NONMATCHING
 
-    gUnknown_203B090 = TRUE;
+    sUnknown_203B090 = TRUE;
     dest = (u32 *)VRAM;
     for (i = 0; i < VRAM_SIZE / sizeof(*dest); i++) {
         *dest++ = 0;
@@ -68,6 +67,8 @@ void InitGraphics(void)
     CpuCopy((u32 *)(VRAM + 0x17e00), font->dataArray, i * 32);
     CloseFile(file);
 
+    // TODO: Lots missing here from NDS.
+
     InitFontPalette();
     file = OpenFileAndGetFileDataPtr("fontsppa", sysFileArchieve);
     rgbColors = (RGB *)file->data;
@@ -79,6 +80,7 @@ void InitGraphics(void)
     TransferBGPaletteBuffer();
 }
 
+// arm9.bin::0200A100
 void InitFontPalette(void)
 {
     OpenedFile *fontpalFile;
@@ -99,6 +101,7 @@ void InitFontPalette(void)
     CloseFile(fontpalFile);
 }
 
+// arm9.bin::0200A00C
 void vram_related_8009804(void)
 {
     u32 i;
@@ -133,52 +136,60 @@ void vram_related_8009804(void)
         *dest++ = OAM_DUMMY;
 }
 
+// Extra func in NDS here:
+// arm9.bin::02009FC4
+
+// arm9.bin::02009F70
 void sub_80098A0(void)
 {
-    gUnknown_202D23C = 0;
-    gUnknown_202D238[0] = 0;
-    gUnknown_202D238[1] = 0;
-    gUnknown_202D238[2] = 0;
-    gUnknown_202D238[3] = 0;
+    sUnknown_202D23C = 0;
+    sUnknown_202D238[0] = 0;
+    sUnknown_202D238[1] = 0;
+    sUnknown_202D238[2] = 0;
+    sUnknown_202D238[3] = 0;
 }
 
+// arm9.bin::02009F18
 void sub_80098BC(u32 *r0, const u32 *r1, u32 r2)
 {
-    if (gUnknown_202D23C < 8) {
-        gUnknown_202D240[gUnknown_202D23C].unk0 = r0;
-        gUnknown_202D240[gUnknown_202D23C].unk4 = r1;
-        gUnknown_202D240[gUnknown_202D23C].size = r2;
-        gUnknown_202D23C++;
+    if (sUnknown_202D23C < 8) {
+        sUnknown_202D240[sUnknown_202D23C].unk0 = r0;
+        sUnknown_202D240[sUnknown_202D23C].unk4 = r1;
+        sUnknown_202D240[sUnknown_202D23C].size = r2;
+        sUnknown_202D23C++;
     }
 }
 
+// The below func has a sibling in the NDS version.
+// arm9.bin::02009F04 and arm9.bin::02009EF0
+
 void sub_80098F8(u32 r0)
 {
-    gUnknown_202D238[r0] = 1;
+    sUnknown_202D238[r0] = 1;
 }
 
 void sub_8009908(void)
 {
     s32 i;
 
-    for (i = 0; i < gUnknown_202D23C; i++)
-        CpuCopy(gUnknown_202D240[i].unk0, gUnknown_202D240[i].unk4, gUnknown_202D240[i].size);
+    for (i = 0; i < sUnknown_202D23C; i++)
+        CpuCopy(sUnknown_202D240[i].unk0, sUnknown_202D240[i].unk4, sUnknown_202D240[i].size);
 
-    gUnknown_202D23C = 0;
-    if (gUnknown_202D238[0] != 0) {
-        gUnknown_202D238[0] = 0;
+    sUnknown_202D23C = 0;
+    if (sUnknown_202D238[0] != 0) {
+        sUnknown_202D238[0] = 0;
         CpuCopy(BG_SCREEN_ADDR(12), gBgTilemaps[0], BG_SCREEN_SIZE);
     }
-    if (gUnknown_202D238[1] != 0) {
-        gUnknown_202D238[1] = 0;
+    if (sUnknown_202D238[1] != 0) {
+        sUnknown_202D238[1] = 0;
         CpuCopy(BG_SCREEN_ADDR(13), gBgTilemaps[1], BG_SCREEN_SIZE);
     }
-    if (gUnknown_202D238[2] != 0) {
-        gUnknown_202D238[2] = 0;
+    if (sUnknown_202D238[2] != 0) {
+        sUnknown_202D238[2] = 0;
         CpuCopy(BG_SCREEN_ADDR(14), gBgTilemaps[2], BG_SCREEN_SIZE);
     }
-    if (gUnknown_202D238[3] != 0) {
-        gUnknown_202D238[3] = 0;
+    if (sUnknown_202D238[3] != 0) {
+        sUnknown_202D238[3] = 0;
         CpuCopy(BG_SCREEN_ADDR(15), gBgTilemaps[3], BG_SCREEN_SIZE);
     }
 }

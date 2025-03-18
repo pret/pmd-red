@@ -31,4 +31,4 @@ bool8 PlayerHasItemWithFlag(s32 itemFlag);
 void CleanUpInventoryItems(void);
 void ClearUnpaidFlagFromAllItems(void);
 
-#endif
+#endif // GUARD_DUNGEON_ITEMS_H

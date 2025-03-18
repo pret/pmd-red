@@ -25,6 +25,7 @@
 #include "constants/status.h"
 #include "code_803E724.h"
 #include "structs/str_202EDE8.h"
+#include "dungeon_music.h"
 
 extern s32 gDungeonBrightness;
 extern u32 gUnknown_202EDD0;
@@ -52,15 +53,11 @@ extern const s32 gUnknown_80F6520[];
 extern const u16 gUnknown_80F64D8[][9];
 extern const u16 gUnknown_80F6544[][9];
 
-extern u8 gUnknown_20274A5;
-
 extern s32 gDungeonFramesCounter;
 
-extern void PlayDungeonStartButtonSE(void);
 extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
-extern void ShowDungeonMapAtPos(s32, s32);
 
 void sub_803EC94(void);
 s32 sub_803EF90(s32 a0, u8 a1);
@@ -261,21 +258,23 @@ static const struct WindowTemplates gUnknown_80F63D0 =
     }
 };
 
-void sub_803EAF0(u32 a0, u8 *a1)
+// kind==8 uses the `name` param.
+void sub_803EAF0(u32 kind, u8 *name)
 {
-    if (a0 == gUnknown_202EDD0)
+    if (kind == gUnknown_202EDD0)
         return;
 
-    switch (a0) {
-        case 1:
-            if (gUnknown_203B40C != 0) {
+    switch (kind) {
+        case 1: {
+            if (gUnknown_203B40C != 0)
                 sub_8052210(0);
-            }
+
             ResetUnusedInputStruct();
             sub_803EC94();
             ShowWindows(NULL, TRUE, TRUE);
             break;
-        case 0:
+        }
+        case 0: {
             sub_803EC94();
             ShowWindows(NULL, TRUE, TRUE);
             if (gUnknown_203B40C != 0) {
@@ -283,64 +282,75 @@ void sub_803EAF0(u32 a0, u8 *a1)
                 UpdateBgTilemapForDungeonMap(FALSE);
             }
             break;
-        case 3:
+        }
+        case 3: {
             ShowWindows(&gUnknown_80F62B0, TRUE, TRUE);
-            if (gUnknown_203B40C != 0) {
+            if (gUnknown_203B40C != 0)
                 UpdateBgTilemapForDungeonMap(TRUE);
-            }
             break;
-        case 6:
-            if (gUnknown_203B40C != 0) {
+        }
+        case 6: {
+            if (gUnknown_203B40C != 0)
                 sub_8052210(0);
-            }
+
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_80F6310, TRUE, TRUE);
             break;
-        case 7:
-            if (gUnknown_203B40C != 0) {
+        }
+        case 7: {
+            if (gUnknown_203B40C != 0)
                 sub_8052210(0);
-            }
+
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_80F6370, TRUE, TRUE);
             break;
+        }
         case 2:
-        case 4:
-            if (gUnknown_203B40C != 0) {
+        case 4: {
+            if (gUnknown_203B40C != 0)
                 sub_8052210(0);
-            }
+
             ResetUnusedInputStruct();
             sub_803EC94();
             ShowWindows(NULL, TRUE, TRUE);
             break;
-        case 5:
-            if (gUnknown_203B40C != 0) {
+        }
+        case 5: {
+            if (gUnknown_203B40C != 0)
                 sub_8052210(0);
-            }
+
             ShowWindows(NULL, TRUE, TRUE);
             break;
-        case 8:
+        }
+        case 8: {
             if (gUnknown_203B40C != 0) {
                 PlayDungeonStartButtonSE();
                 sub_8052210(0);
             }
-            CreateConfirmNameMenu(2, a1);
+
+            CreateConfirmNameMenu(2, name);
             break;
-        case 9:
+        }
+        case 9: {
             if (gUnknown_203B40C != 0) {
                 sub_8052210(0);
                 PlayDungeonStartButtonSE();
             }
+
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_80F63D0, FALSE, TRUE);
             break;
-        case 10:
+        }
+        case 10: {
             PlayDungeonStartButtonSE();
             break;
-        case 150: // Dummy case put here to match, any value >= 150 works
+        }
+        case 150: { // Dummy case put here to match, any value >= 150 works
             break;
+        }
     }
 
-    gUnknown_202EDD0 = a0;
+    gUnknown_202EDD0 = kind;
 }
 
 void sub_803EC94(void)

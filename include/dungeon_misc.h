@@ -36,14 +36,14 @@ void sub_8068BDC(bool8 a0);
 void sub_8068F28(void);
 void sub_8068F80(void);
 void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3);
-void sub_80694C0(Entity *target,s32 x,int y,char param_4);
+void sub_80694C0(Entity *target,s32 x,s32 y,u8 param_4);
 void sub_80695EC(Entity *param_1,int x,int y);
 Entity * sub_8069660(Entity *target);
 Entity * sub_80696A8(Entity *target);
 Entity * sub_80696FC(Entity *target);
 Entity * sub_806977C(Entity *target);
 void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
-u32 sub_8069D18(DungeonPos *pos,Entity *entity);
+bool8 sub_8069D18(DungeonPos *pos,Entity *entity);
 void sub_8069D4C(struct unkStruct_8069D4C *r0, Entity *target);
 void TargetTileInFront(Entity *pokemon);
 void sub_8069E0C(Entity *pokemon);
@@ -70,10 +70,11 @@ void sub_806A898(Entity *entity, bool8 r7, bool8 showRunAwayEffect);
 void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
 void sub_806A974(void);
 void sub_806A9B4(Entity *entity, s32 moveIndex);
-bool8 sub_806AA0C(s16 _species, bool32 _a1);
+// s16 memes
+//bool8 sub_806AA0C(s16 _species, bool32 _a1);
 void sub_806AA70(void);
 void sub_806AB2C(void);
 void EndAbilityImmuneStatus(Entity *attacker, Entity *target);
 void MarkLastUsedMonMove(Entity *entity, Move *move);
 
-#endif
+#endif // GUARD_DUNGEON_MISC_H

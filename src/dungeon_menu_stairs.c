@@ -1,5 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_803E46C.h"
+#include "code_803E724.h"
+#include "code_8044CC8.h"
 #include "dungeon_menu_stairs.h"
 #include "dungeon_menu_team.h"
 #include "dungeon_menu_moves.h"
@@ -8,23 +11,18 @@
 #include "text.h"
 #include "menu_input.h"
 #include "input.h"
-#include "code_8044CC8.h"
 #include "dungeon_action.h"
 #include "dungeon_util.h"
 #include "dungeon_map_access.h"
 #include "code_8045A00.h"
 #include "code_8097DD0.h"
 #include "dungeon_generation.h"
+#include "dungeon_music.h"
 
-extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
-extern void PlayDungeonCursorSE(u8 param_1);
-extern void sub_803EAF0(u32, u8 *);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void DungeonRunFrameActions(u32 a0);
 extern void DungeonShowWindows(WindowTemplates *a0, bool8 a1);
-extern void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
 extern void sub_8045064(void);
 extern u8 GetFloorType(void);
 
@@ -120,7 +118,7 @@ void ShowDungeonStairsMenu(Entity *mon)
             break;
     }
 
-    sub_803EAF0(0, 0);
+    sub_803EAF0(0, NULL);
 }
 
 static void ShowAndPrintOnStairsMenu(DungeonPos *pos, WindowTemplates *windows, WindowHeader *header)
@@ -238,6 +236,5 @@ static void ShowStairsDescription(DungeonPos *pos)
         }
     }
 
-    sub_803EAF0(0, 0);
+    sub_803EAF0(0, NULL);
 }
-

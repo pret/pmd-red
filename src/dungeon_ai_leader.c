@@ -5,6 +5,7 @@
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_8045A00.h"
+#include "code_8066D04.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
@@ -32,6 +33,7 @@
 #include "status_checks_1.h"
 #include "trap.h"
 #include "dungeon_config.h"
+#include "dungeon_misc.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F222;
@@ -73,12 +75,10 @@ void HandleGiveItemAction(Entity *);
 void HandleTakeItemAction(Entity *);
 void HandleUseItemAction(Entity *);
 void sub_8066FA4(Entity *);
-void HandleSetItemAction(Entity *,bool8);
 void HandleUnsetItemAction(Entity *,bool8);
 extern u8 sub_8044B28(void);
 extern u8 UseAttack(Entity *);
 void sub_806A1E8(Entity *pokemon);
-extern void sub_80694C0(Entity *, s32, s32, u32);
 bool8 sub_804AE08(DungeonPos *pos);
 void HandlePickUpAIAction(Entity *pokemon);
 void HandleThrowItemAIAction(Entity *pokemon);

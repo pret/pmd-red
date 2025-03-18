@@ -5,7 +5,6 @@
 
 void CloseAllSpriteFiles(void);
 
-void OpenDungeonPaletteFile(void);
 void CloseDungeonPaletteFile(void);
 void LoadDungeonPokemonSprites(void);
 void LoadDungeonActivePokemonSprites(void);

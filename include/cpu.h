@@ -1,6 +1,8 @@
 #ifndef GUARD_CPU_H
 #define GUARD_CPU_H
 
+extern u16 gRawKeyInput;
+
 void CpuClear(void *, s32);
 void CpuCopy(void *dest, const void *src, s32 size);
 void nullsub_23(bool8);

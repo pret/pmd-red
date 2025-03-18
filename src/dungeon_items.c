@@ -26,6 +26,7 @@
 #include "math.h"
 #include "code_80450F8.h"
 #include "structs/str_item_text.h"
+#include "code_803E46C.h"
 
 extern SpriteOAM gUnknown_202EDC0;
 
@@ -57,7 +58,6 @@ extern void sub_80855E4(void *);
 extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);
 extern void sub_804219C(PixelPos *pos);
-extern void DungeonRunFrameActions(u32);
 extern bool8 sub_8045888(Entity *);
 extern u32 GetRandomFloorItem(u32);
 

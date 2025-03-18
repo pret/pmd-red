@@ -8,5 +8,6 @@ bool8 HasNegativeStatus(Entity *pokemon);
 bool8 IsSleeping(Entity *pokemon);
 bool8 HasLowHealth(Entity *pokemon);
 s32 sub_8070828(Entity *pokemon, bool8 displayMessage);
+void sub_80709C8(u8 *buffer, EntityInfo *entityInfo);
 
-#endif
+#endif // GUARD_STATUS_CHECKS_1_H

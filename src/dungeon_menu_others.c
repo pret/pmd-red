@@ -7,6 +7,8 @@
 #include "text.h"
 #include "menu_input.h"
 #include "input.h"
+#include "code_803D110.h"
+#include "code_803E724.h"
 #include "code_8044CC8.h"
 #include "dungeon_action.h"
 #include "dungeon_util.h"
@@ -19,21 +21,16 @@
 #include "post_office_guide2.h"
 #include "dungeon_main.h"
 #include "dungeon_map.h"
+#include "dungeon_music.h"
+#include "code_803E46C.h"
 
-extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
-extern void PlayDungeonCursorSE(u8 param_1);
-extern void sub_803EAF0(u32, u8 *);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void DungeonRunFrameActions(u32 a0);
 extern void DungeonShowWindows(WindowTemplates *a0, bool8 a1);
-extern void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
 extern void sub_8045064(void);
 extern bool8 IsBossFight(void);
 extern u16 GetLeaderActionId(void);
-extern void sub_803E13C(void);
-extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 
 extern MenuInputStruct gDungeonMenu;
 

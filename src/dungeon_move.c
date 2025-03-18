@@ -40,6 +40,7 @@
 #include "code_8041AD0.h"
 #include "code_800E9E4.h"
 #include "dungeon_config.h"
+#include "code_800ED38.h"
 
 extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);
@@ -2264,7 +2265,6 @@ struct UnkStruct_sub_800E308_1
 };
 
 extern s32 sub_800E308(struct UnkStruct_sub_800E308_1 *, DungeonPos *);
-extern void sub_800EF64(void);
 
 s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
 {

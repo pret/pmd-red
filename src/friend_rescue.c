@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_800D090.h"
 #include "code_80118A4.h"
 #include "string_format.h"
 #include "code_801B3C0.h"
@@ -307,7 +308,6 @@ extern u32 sub_8023CE8(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
 
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
-extern void sprintfStatic(char *buffer, const char *text, ...);
 
 u32 CreateFriendRescueMenu(void)
 {

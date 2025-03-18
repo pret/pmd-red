@@ -1,15 +1,16 @@
 #include "global.h"
-#include "dungeon.h"
-#include "code_800D090.h"
-#include "pokemon.h"
-#include "moves.h"
-#include "random.h"
-#include "code_8092334.h"
-#include "pokemon_mid.h"
-#include "string_format.h"
 #include "constants/dungeon.h"
-#include "constants/type.h"
 #include "constants/monster.h"
+#include "constants/type.h"
+#include "code_800D090.h"
+#include "code_8092334.h"
+#include "dungeon.h"
+#include "items.h"
+#include "moves.h"
+#include "pokemon.h"
+#include "pokemon_mid.h"
+#include "random.h"
+#include "string_format.h"
 
 extern const char gUnknown_8108F10[];
 extern const char gUnknown_8108F18[];
@@ -42,11 +43,8 @@ extern u8 *gUnknown_8115E28[];
 extern u8 *gUnknown_8115E80[];
 extern u8 gUnknown_8108F50[];
 
-void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
-s32 sub_8091E94(s32 a1, s32 a2, s32 a3); // items.c
-void sub_8090888(u8 *param_1, u8 *param_2);
-bool8 sub_8090820(u16 moveID);
-s32 GetItemPossessionCount(u8 id);
+static void sub_8090888(u8 *param_1, u8 *param_2);
+static bool8 sub_8090820(u16 moveID);
 
 const u8 *GetDungeonName1(u8 dungeon)
 {
@@ -204,6 +202,7 @@ static inline void AddNewLine(const u8 *str, u8 *buffer, u8 *newLine)
     FormatString(str, buffer, newLine, 0);
 }
 
+// I think this checks if the dungeon HM requirement is met
 u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_)
 {
     s32 maxPartyMembers, i;
@@ -384,7 +383,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
     }
 }
 
-bool8 sub_8090820(u16 moveID)
+static bool8 sub_8090820(u16 moveID)
 {
     s32 speciesId, moveIndex;
 
@@ -402,7 +401,7 @@ bool8 sub_8090820(u16 moveID)
     return FALSE;
 }
 
-void sub_8090888(u8 *param_1, u8 *param_2)
+static void sub_8090888(u8 *param_1, u8 *param_2)
 {
     s32 iVar3 = 0;
 

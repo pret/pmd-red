@@ -16,9 +16,6 @@ EWRAM_DATA s16 gUnknown_202DE20 = {0};
 EWRAM_DATA s16 gUnknown_202DE22 = {0};
 EWRAM_DATA s16 gUnknown_202DE24 = {0};
 
-extern bool8 sub_80111C4();
-extern void sub_8010F28();
-
 void sub_8011760(void)
 {
     if (sub_80023E4(13))

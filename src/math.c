@@ -3,7 +3,6 @@
 #include "math.h"
 
 #include "data/math.h"
-#include "structs/str_position.h"
 
 static void F48_16_UDiv(s48_16 *, s48_16 *, s48_16 *);
 static void F48_16_UMul(s48_16 *, s48_16 *, s48_16 *);

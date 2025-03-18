@@ -1,12 +1,13 @@
 #include "global.h"
 #include "structs/str_dungeon.h"
-#include "code_803E46C.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
+#include "code_803E46C.h"
 #include "code_803E668.h"
+#include "code_803E724.h"
 #include "dungeon_map.h"
 #include "bg_palette_buffer.h"
 #include "bg_control.h"
@@ -15,6 +16,7 @@
 #include "input.h"
 #include "play_time.h"
 #include "sprite.h"
+#include "text.h"
 
 EWRAM_INIT u8 gUnknown_203B40C = 0;
 EWRAM_INIT u8 gUnknown_203B40D = 0;
@@ -31,14 +33,12 @@ void sub_803F580(s32);
 void sub_806CC10();
 void sub_804522C();
 void sub_803F9CC();
-extern void xxx_call_update_bg_vram(void);
 void sub_803ECE0();
 void sub_803EDF0();
 void sub_800E90C();
 void sub_8042E5C();
 void sub_800F7D0(DungeonPos *);
 void sub_803E874(s32, s32);
-void sub_803EAF0(s32, s32);
 
 void DungeonRunFrameActions(u32 a0)
 {
@@ -95,7 +95,7 @@ void sub_803E490(u32 unused)
     gDungeonFramesCounter++;
 
     IncrementPlayTime(gPlayTimeRef);
-    sub_800CB20();
+    WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
     CopySpritesToOam();
     nullsub_13();
@@ -127,7 +127,7 @@ void sub_803E668(u32 unused)
     sub_80060EC();
     gDungeonFramesCounter++;
     IncrementPlayTime(gPlayTimeRef);
-    sub_800CB20();
+    WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
     CopySpritesToOam();
     nullsub_13();
@@ -144,11 +144,11 @@ void sub_803E668(u32 unused)
     gUnknown_202EDD4--;
 }
 
-void sub_803E708(s32 a0, u32 a1)
+void sub_803E708(s32 numFrames, u32 a1)
 {
-    while (a0 != 0) {
+    while (numFrames != 0) {
         DungeonRunFrameActions(a1);
-        a0--;
+        numFrames--;
     }
 }
 
@@ -179,7 +179,7 @@ void sub_803E748(void) {
             if(index2 <= 0)
             {
                 index2 = 0;
-                sub_803EAF0(1, 0);
+                sub_803EAF0(1, NULL);
                 gDungeon->unk181e8.unk18217 = index2;
             }
         }
@@ -214,7 +214,7 @@ void sub_803E7C8(void)
             if(index2 <= 0)
             {
                 index2 = 0;
-                sub_803EAF0(1, 0);
+                sub_803EAF0(1, NULL);
                 gDungeon->unk181e8.unk18217 = index2;
             }
         }

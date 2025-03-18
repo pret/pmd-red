@@ -52,6 +52,6 @@ struct UnkStruct_sub_8010268
     u8 unkB4;
 };
 
-void ShowWorldMap(struct UnkStruct_sub_8010268 *r5);
+void ShowWorldMap_Async(struct UnkStruct_sub_8010268 *r5);
 
 #endif

@@ -1,20 +1,22 @@
 #include "global.h"
-#include "dungeon_map_access.h"
-#include "code_8004AA0.h"
 #include "constants/walkable_tile.h"
-#include "decompress.h"
-#include "dungeon_map_access.h"
 #include "structs/str_dungeon.h"
-#include "tile_types.h"
+#include "code_8042B34.h"
+#include "code_8004AA0.h"
+#include "code_8009804.h"
+#include "decompress.h"
+#include "def_filearchives.h"
+#include "dungeon_engine.h"
+#include "dungeon_leader.h"
+#include "dungeon_map.h"
+#include "dungeon_map_access.h"
+#include "dungeon_movement.h"
+#include "dungeon_util.h"
+#include "dungeon_visibility.h"
+#include "game_options.h"
 #include "random.h"
 #include "text.h"
-#include "dungeon_engine.h"
-#include "dungeon_movement.h"
-#include "dungeon_leader.h"
-#include "dungeon_util.h"
-#include "code_8009804.h"
-#include "game_options.h"
-#include "dungeon_visibility.h"
+#include "tile_types.h"
 
 extern const Tile gOtherOobTile;
 extern const Tile gWaterOobTile;
@@ -25,7 +27,6 @@ extern u8 gUnknown_80F6A1C[];
 extern u8 gUnknown_80F6A34[];
 extern u8 gUnknown_80F6A40[];
 extern u8 gUnknown_8108EC0[];
-extern const struct FileArchive gDungeonFileArchive;
 extern const s16 gUnknown_80F6A4A[];
 extern const s16 gUnknown_80F6C06[];
 
@@ -35,10 +36,6 @@ EWRAM_DATA OpenedFile *gUnknown_202F18C = {0};
 EWRAM_DATA Tile gOutOfBoundsTileData = {0};
 
 EWRAM_INIT const Tile *gCurTilesetOobTile = {NULL};
-
-extern u8 sub_8043CE4(u32);
-extern void ShowDungeonMapAtPos(s32, s32);
-extern int sprintf(char *, const char *, ...);
 
 const Tile *GetTile(s32 x, s32 y)
 {

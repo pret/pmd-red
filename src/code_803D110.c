@@ -1,22 +1,22 @@
 #include "global.h"
-#include "dungeon.h"
-#include "pokemon.h"
-#include "file_system.h"
-#include "code_803E46C.h"
-#include "code_8009804.h"
-#include "cpu.h"
-#include "dungeon_random.h"
-#include "bg_palette_buffer.h"
-#include "code_800D090.h"
-#include "pokemon_3.h"
-#include "game_options.h"
-#include "text.h"
 #include "constants/dungeon.h"
 #include "structs/str_202ED28.h"
 #include "structs/str_202EDE8.h"
+#include "bg_palette_buffer.h"
+#include "code_8009804.h"
+#include "code_800D090.h"
+#include "code_803D110.h"
+#include "code_803E46C.h"
+#include "cpu.h"
+#include "def_filearchives.h"
+#include "dungeon.h"
+#include "dungeon_random.h"
+#include "file_system.h"
+#include "game_options.h"
+#include "pokemon.h"
+#include "pokemon_3.h"
+#include "text.h"
 
-extern void sub_803E13C(void);
-extern void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2);
 extern s32 sub_80902C8(u8 dungeon);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
 extern bool8 sub_80848EC(void);
@@ -34,7 +34,6 @@ extern const u32 gUnknown_80F6120[];
 extern const u16 gUnknown_80F5F70[];
 
 extern RGB gUnknown_202ECA4[];
-extern struct FileArchive gDungeonFileArchive;
 extern OpenedFile *gDungeonNameBannerPalette;
 extern OpenedFile *gDungeonNameBannerFontFile;
 extern OpenedFile *gUnknown_202ECA0;
@@ -42,7 +41,6 @@ extern OpenedFile *gUnknown_202EC9C;
 extern OpenedFile *gUnknown_202EC98;
 extern OpenedFile *gUnknown_202EC94;
 extern s32 gDungeonNameBannerFont;
-extern u8 gUnknown_20274A5;
 
 struct UnkDungeonFileData
 {
@@ -62,17 +60,47 @@ struct UnkDataFileStruct
 };
 
 // Very similar to unkChar struct
-struct UnkStruct_sub_803DC6C
+typedef struct UnkStruct_sub_803DC6C
 {
     u8 *unk0;
     u16 unk4;
     u8 unk6;
+} UnkStruct_sub_803DC6C;
+
+extern u32 gUnknown_202EDD0;
+extern s32 gUnknown_202EDD4;
+extern s32 gDungeonBrightness;
+
+extern SpriteOAM gUnknown_202EDC0;
+extern SpriteOAM gUnknown_202EDB8;
+
+extern const DungeonPos gUnknown_80F61EC[2][6];
+
+struct Unk80F6224Struct
+{
+    s32 shape;
+    s32 size;
+    s32 tileNum;
 };
+
+struct FileStruct2
+{
+    s32 count;
+    u8 array[0];
+};
+
+struct FileStruct
+{
+    struct FileStruct2 *ptr;
+    struct u8 *ptr2;
+};
+
+extern const struct Unk80F6224Struct gUnknown_80F621C[2][6];
 
 s32 sub_803DC14(const u8 *dungName, s32 strWidth, s32 a2);
 s32 CalcStringWidth(const u8 *dungName);
 s32 sub_803DC6C(u32 chr, s32 strWidth, s32 a2);
-struct UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr);
+static UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr);
 void sub_803DD30(u8 *a0, u32 *a1);
 
 void sub_803D4D0(void)
@@ -272,7 +300,7 @@ struct DungeonNamePaletteFileData
     RGB pal[16];
 };
 
-void ShowDungeonNameBanner(void)
+void ShowDungeonNameBanner_Async(void)
 {
     u8 text[100];
     s32 var;
@@ -355,7 +383,7 @@ s32 sub_803DC6C(u32 chr, s32 strWidth, s32 a2)
     const u32 *constData;
     u32 sp[72];
     s32 r9;
-    struct UnkStruct_sub_803DC6C *strPtr = sub_803DEC8(chr);
+    UnkStruct_sub_803DC6C *strPtr = sub_803DEC8(chr);
 
     sub_803DD30(strPtr->unk0, sp);
     r9 = strPtr->unk6;
@@ -480,11 +508,11 @@ s32 CalcStringWidth(const u8 *dungName)
     return w;
 }
 
-struct UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr)
+static UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr)
 {
     s32 r2, r4;
-    struct UnkStruct_sub_803DC6C *ret;
-    struct UnkStruct_sub_803DC6C *strPtr = *((struct UnkStruct_sub_803DC6C **) gDungeonNameBannerFontFile->data);
+    UnkStruct_sub_803DC6C *ret;
+    UnkStruct_sub_803DC6C *strPtr = *((UnkStruct_sub_803DC6C **) gDungeonNameBannerFontFile->data);
     // Fakematch? Or just magic numbers which will make more sense once this file is documented?
     if (chr > 63487 && chr < 65535)
     {
@@ -519,18 +547,6 @@ struct UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr)
 
     }
     return ret;
-};
-
-struct FileStruct2
-{
-    s32 count;
-    u8 array[0];
-};
-
-struct FileStruct
-{
-    struct FileStruct2 *ptr;
-    struct u8 *ptr2;
 };
 
 void sub_803DF60(void)
@@ -662,26 +678,9 @@ void sub_803E214(void)
     CloseFile(gUnknown_202ECA0);
 }
 
-void nullsub_56(void) {}
-
-extern u8 gUnknown_203B40D;
-extern u32 gUnknown_202EDD0;
-extern s32 gUnknown_202EDD4;
-extern s32 gDungeonBrightness;
-
-extern SpriteOAM gUnknown_202EDC0;
-extern SpriteOAM gUnknown_202EDB8;
-
-extern const DungeonPos gUnknown_80F61EC[2][6];
-
-struct Unk80F6224Struct
+void nullsub_56(void)
 {
-    s32 shape;
-    s32 size;
-    s32 tileNum;
-};
-
-extern const struct Unk80F6224Struct gUnknown_80F621C[2][6];
+}
 
 void sub_803E250(void)
 {

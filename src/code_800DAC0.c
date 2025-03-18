@@ -2,8 +2,10 @@
 #include "bg_control.h"
 #include "code_800558C.h"
 #include "code_800DAC0.h"
-#include "code_80118A4.h"
 #include "code_800E9A8.h"
+#include "code_80118A4.h"
+#include "code_803E724.h"
+#include "def_filearchives.h"
 #include "file_system.h"
 #include "main_loops.h"
 #include "memory.h"
@@ -21,13 +23,11 @@ extern s32 sub_800E2C0(u32);
 extern u32 sub_800E900(void);
 extern void sub_8009BE4(void);
 extern void sub_800F204(void);
-extern void sub_803EAF0(u32, u32);
 extern struct unkStruct_800F18C *sub_800F18C(s32);
 extern void sub_800DCA8(struct unkStruct_203B0CC_sub *);
 
 extern u8 gefob000_string[];
 extern u8 gefob001_string[];
-extern struct FileArchive gEffectFileArchive;
 
 extern void sub_800F034(void);
 extern void sub_800ED38(u32);
@@ -137,7 +137,7 @@ void sub_800DC14(s32 param_1)
       sub_8009BE4();
       if (sub_8000728() == 1) {
         LoadDungeonMapPalette();
-        sub_803EAF0(0,0);
+        sub_803EAF0(0, NULL);
         sub_800CD64(0x8000,0);
       }
     }

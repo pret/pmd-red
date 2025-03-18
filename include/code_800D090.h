@@ -3,4 +3,4 @@
 
 void sprintfStatic(char *buffer, const char *text, ...);
 
-#endif
+#endif // GUARD_CODE_800D090_H

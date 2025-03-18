@@ -1,20 +1,24 @@
 #include "global.h"
 #include "globaldata.h"
-#include "dungeon_message.h"
-#include "dungeon_random.h"
+#include "constants/move_id.h"
+#include "constants/type.h"
+#include "constants/weather.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
-#include "dungeon_music.h"
-#include "dungeon.h"
+#include "code_800558C.h"
 #include "code_8009804.h"
 #include "code_800E9E4.h"
-#include "dungeon_util.h"
+#include "code_800ED38.h"
+#include "code_803E46C.h"
 #include "code_804267C.h"
-#include "weather.h"
+#include "dungeon.h"
+#include "dungeon_message.h"
+#include "dungeon_move.h"
+#include "dungeon_music.h"
+#include "dungeon_random.h"
+#include "dungeon_util.h"
 #include "tile_types.h"
-#include "constants/move_id.h"
-#include "constants/weather.h"
-#include "constants/type.h"
+#include "weather.h"
 
 struct UnkStruct_8040094
 {
@@ -30,9 +34,7 @@ extern u8 sub_800EC94(s32 param_1);
 extern s32 sub_800E710(s32 a0, u16 a1);
 extern void sub_800569C(DungeonPos *, axdata *, u8);
 extern void sub_800EEC8(u16 r0);
-extern void sub_800EF64(void);
 extern void sub_8042DD4(s32 a0, Entity *a1, s32 a2);
-extern void DungeonRunFrameActions(u32);
 extern u8 sub_800EA44(s32 species, u16 a2);
 extern s32 sub_800E790(s32 species, u16 a2);
 extern void sub_806CDD4(Entity *entity, u8, u32 direction);
@@ -53,10 +55,7 @@ extern bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move);
 extern bool8 IsSleeping(Entity *pokemon);
 extern void sub_80421C0(Entity *pokemon, u16);
 
-extern u8 gUnknown_203B40D;
-extern s16 gUnknown_2026E4E;
 extern s32 gDungeonBrightness;
-extern s32 gUnknown_202F224;
 
 extern const u8 *const gPtrMagnitudeMessage;
 extern const s32 gUnknown_8106A8C[];

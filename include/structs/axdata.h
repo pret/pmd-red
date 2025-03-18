@@ -1,7 +1,7 @@
 #ifndef GUARD_AXDATA_H
 #define GUARD_AXDATA_H
 
-#include "file_system.h"
+#include "structs/str_file_system.h"
 #include "structs/str_position.h"
 
 // size: 0x8
@@ -83,7 +83,7 @@ typedef struct axmain
 struct axObject
 {
     /* 0x0 */ axdata axdata;
-    /* 0x3C */ OpenedFile *spriteFile; // This might be a unkStruct_202EE8C instead and unkStruct_202EE8C.unk0 might be a OpenedFile* etc. See sub_8010F28
+    /* 0x3C */ OpenedFile *spriteFile; // This might be a unkStruct_202EE8C instead and unkStruct_202EE8C.unk0 might be a OpenedFile* etc. See friend_areas_map_util.AnimateSprites()
     s16 unk40_maybeAnimTimer;
     u8 unk42_animId1;
     u8 unk43_animId2;

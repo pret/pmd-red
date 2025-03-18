@@ -3,6 +3,7 @@
 #include "code_800558C.h"
 #include "code_800DAC0.h"
 #include "debug.h"
+#include "def_filearchives.h"
 #include "file_system.h"
 #include "ground_map_1.h"
 #include "ground_sprite.h"
@@ -22,11 +23,6 @@ EWRAM_DATA u32 gUnknown_2039DD4 = {0};
 
 EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 
-// dungeon_sbin.s
-extern const struct FileArchive gDungeonFileArchive;
-// monster_sbin.s
-// ornament_sbin.s
-extern const struct FileArchive gOrnamentFileArchive;
 // data_8115F5C.s
 extern const u8 gUnknown_81177CC[];
 extern const u8 gUnknown_81177D8[];

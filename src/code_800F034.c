@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
-#include <stdio.h>
 #include "code_800E9E4.h"
+#include "def_filearchives.h"
 #include "file_system.h"
 #include "memory.h"
 
@@ -20,8 +20,6 @@ extern struct unkStruct_203B0D4 *gUnknown_203B0D4;
 
 ALIGNED(4) static const u8 gUnknown_80CE77C[] = "efob%03d";
 ALIGNED(4) static const u8 gUnknown_80CE788[] = "efbg%03d";
-
-extern struct FileArchive gEffectFileArchive;
 
 void sub_800F034(void) {
     s32 index;

@@ -33,6 +33,7 @@
 #include "tile_types.h"
 #include "weather.h"
 #include "dungeon_config.h"
+#include "dungeon_misc.h"
 
 extern const u8 *const gUnknown_80FD350;
 extern const u8 *const gUnknown_80FD370;
@@ -111,7 +112,6 @@ extern u32 gUnknown_202F21C;
 extern bool8 gUnknown_202F220;
 
 extern void sub_806A5B8(Entity *entity);
-extern void sub_80694C0(Entity *, s32, s32, u32);
 void sub_8075900(Entity *pokemon, u8 r1);
 extern u8 sub_8044B28(void);
 extern void sub_807EC28(bool8);

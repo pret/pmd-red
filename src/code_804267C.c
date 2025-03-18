@@ -1,5 +1,6 @@
 #include "global.h"
 #include "code_800DAC0.h"
+#include "code_800ED38.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_803E46C.h"
@@ -37,7 +38,6 @@ extern u32 sub_8041764(unkStruct_80416E0 *, bool8);
 extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
 extern u32 sub_800E49C();
 extern void sub_800EF40(u8 r0, u8 r1);
-extern void sub_800EF64(void);
 
 void sub_8042390(Entity *entity, Item *item)
 {

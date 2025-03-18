@@ -111,6 +111,7 @@ static void GroundMap_GetFirstStationScript(ScriptInfoSmall *script, s16 r1)
     GroundMap_GetStationScript(script, r1, 0, 0);
 }
 
+// overlay_0000.bin::02155DD0
 void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
 {
     ScriptInfoSmall script;
@@ -120,7 +121,7 @@ void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
     index_s32 = scriptIndex;
     iVar2 = param_2;
 
-    Log(0,gUnknown_8117594, index_s32, iVar2); // "GroundMap ExecuteEvent %3d %d
+    Log(0, gUnknown_8117594, index_s32, iVar2); // "GroundMap ExecuteEvent %3d %d
     GetFunctionScript(NULL, &script, index_s32);
     if (iVar2 != 0)
         script.state = 5;

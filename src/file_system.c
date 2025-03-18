@@ -2,15 +2,19 @@
 #include "decompress.h"
 #include "file_system.h"
 
+// size: 0x8
+typedef struct UnkFileStruct
+{
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u32 unk4;
+} UnkFileStruct;
+
 EWRAM_DATA u32 gUnknown_202D2A4 = {0};
 EWRAM_DATA OpenedFile gFileCache[64] = {0};
 
 static EWRAM_INIT u32 sFileCacheCursorPosition = {0};
 
 #include "data/file_system.h"
-
-// ???
-extern s32 sprintf(char *, const char *, ...);
 
 UNUSED static void FP48_16_Log(UnkFileStruct *r0, s32 r1)
 {

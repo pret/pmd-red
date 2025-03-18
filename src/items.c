@@ -2,6 +2,7 @@
 #include "code_8097DD0.h"
 #include "constants/colors.h"
 #include "constants/type.h"
+#include "def_filearchives.h"
 #include "items.h"
 #include "moves.h"
 #include "random.h"
@@ -11,9 +12,7 @@
 #include "text_util.h"
 #include "text.h"
 #include "string_format.h"
-#include <stddef.h>
 
-extern struct FileArchive gSystemFileArchive;
 extern const char gItemParaFileName[];
 extern const char gUnknown_8109794[];
 extern const char gUnknown_81097A4[];
@@ -33,7 +32,6 @@ EWRAM_DATA ItemDataEntry *gItemParametersData = {0};
 EWRAM_DATA TeamInventory gTeamInventory = {0};
 EWRAM_INIT TeamInventory *gTeamInventoryRef = {NULL};
 
-extern u8 sub_8091E94(s32 a1, s32 a2, s32 a3);
 extern void SortKecleonShopInventory();
 bool8 AddKecleonWareItem(u8);
 

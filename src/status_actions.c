@@ -3,6 +3,7 @@
 #include "charge_move.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
+#include "dungeon_move.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
@@ -17,6 +18,7 @@
 #include "dungeon_engine.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
+#include "dungeon_misc.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
@@ -38,7 +40,6 @@ extern void sub_807F43C(Entity *, Entity *);
 extern void HandleOneRoomOrb(Entity *, Entity *);
 extern u32 GetRandomFloorItem(u32);
 extern void sub_80464C8(Entity *, DungeonPos *, Item *);
-extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void sub_807FC3C(DungeonPos *, u32, u32);
 extern void sub_8042A64(DungeonPos *);
@@ -58,8 +59,6 @@ extern void sub_806BB6C(Entity *, s32);
 extern void HandleSwitcherOrb(Entity *, Entity *, u32);
 extern u32 HandleDamagingMove(Entity *, Entity *, Move *, s24_8, u32);
 extern void sub_806A6E8(Entity *);
-extern u8 sub_8069D18(DungeonPos *);
-extern u8 sub_804AD34(DungeonPos *);
 
 // TODO include dungeon_ai.h when SqueezedStatusTarget is figured out
 extern void LowerDefenseStageTarget(Entity *, Entity *, s32, s32, u8, bool8);
@@ -113,7 +112,6 @@ extern u8 *gUnknown_80FD3F0[];
 extern u32 gUnknown_8106A50;
 extern u8 *gUnknown_80FDCA0[];
 extern u8 *gUnknown_80FDC9C[];
-extern u32 gUnknown_202F224;
 extern u32 gUnknown_8106A8C[];
 extern u8 *gUnknown_80FC5A8[];
 extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
@@ -603,9 +601,9 @@ bool8 StruggleMoveAction(Entity * pokemon, Entity * target, Move * move, s32 par
     bool8 flag;
 
     flag = FALSE;
-    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
+    if (HandleDamagingMove(pokemon, target, move, IntToF248_2(1), param_4) != 0) {
         flag = TRUE;
-        if (RollSecondaryEffect(pokemon,0) != 0) {
+        if (RollSecondaryEffect(pokemon, 0) != 0) {
             entityHP = GetEntInfo(pokemon)->maxHPStat;
             if (entityHP < 0) {
                 entityHP = entityHP + 3;
@@ -614,40 +612,39 @@ bool8 StruggleMoveAction(Entity * pokemon, Entity * target, Move * move, s32 par
             if (newHP < 1) {
                 newHP = 1;
             }
-            sub_806F370(pokemon,pokemon,newHP,0,0,0,sub_8057600(move,param_4),0,1,0);
+            sub_806F370(pokemon, pokemon, newHP, 0, 0, 0, sub_8057600(move, param_4), 0, 1, 0);
         }
     }
     return flag;
 }
 
-bool8 RockSmashMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+// overlay_0005.bin::0216AF44
+bool8 RockSmashMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     DungeonPos pos;
     bool8 flag = FALSE;
 
-    if (sub_8069D18(&pos) != 0) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD430); // Can't use that diagonally!
+    if (sub_8069D18(&pos, target)) {
+        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FD430); // Can't use that diagonally!
     }
     else {
-        ASM_MATCH_TRICK(target);
         flag = sub_804AD34(&pos);
-        if (flag) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD3F0); // It dug the wall in front!
-        }
-        else {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD40C); // Can't use that here!
-        }
+        if (flag)
+            TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FD3F0); // It dug the wall in front!
+        else
+            TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FD40C); // Can't use that here!
     }
+
     return flag;
 }
 
-bool8 sub_805BA44(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+bool8 sub_805BA44(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     sub_807D3CC(pokemon);
     return TRUE;
 }
 
-bool8 ThiefAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+bool8 ThiefAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
     EntityInfo *pokemonInfo1;
     EntityInfo *pokemonInfo2;

@@ -1,12 +1,13 @@
 #include "global.h"
-#include "code_800D090.h"
-#include "string_format.h"
-#include "code_8092334.h"
-#include "code_8097DD0.h"
 #include "constants/colors.h"
 #include "constants/monster.h"
+#include "code_800D090.h"
+#include "code_8092334.h"
+#include "code_8097DD0.h"
+#include "def_filearchives.h"
 #include "memory.h"
 #include "moves.h"
+#include "string_format.h"
 #include "text_util.h"
 #include "text.h"
 
@@ -32,9 +33,6 @@ extern const u8 gUnknown_8109930[];
 extern const u8* gPtrTypeText;  // "Type"
 extern const u8 *gRangeNames[];
 extern const u8* gUnknown_810CF00;
-
-// system_sbin.s
-extern const struct FileArchive gSystemFileArchive;
 
 static void CopyAndResetMove(Move *, Move *);
 static bool8 sub_80933D8(s32, Move *);

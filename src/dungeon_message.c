@@ -21,6 +21,7 @@
 #include "exclusive_pokemon.h"
 #include "dungeon_leader.h"
 #include "text.h"
+#include "dungeon_music.h"
 
 void sub_80526D0(s32 r0);
 static void PutStringsOnMessageLog(void);
@@ -33,14 +34,12 @@ static bool8 sub_8052DC0(Entity *);
 
 extern bool8 sub_8045888(Entity *pokemon);
 extern void sub_805E804(void);
-extern void sub_803EAF0(s32, s32);
 extern void sub_8083E28(void);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern void sub_8007334(s32 a0);
 extern void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
-extern void PlayDungeonCursorSE(u8 param_1);
 
 extern u32 gUnknown_202EDD0;
 extern u8 gUnknown_203B40C;
@@ -88,7 +87,7 @@ void sub_8052210(bool8 a0)
     gDungeon->unk1BDD4.unk1C06C = 0;
 
     if (a0 && gUnknown_202EDD0 == 3) {
-        sub_803EAF0(0, 0);
+        sub_803EAF0(0, NULL);
         DungeonRunFrameActions(11);
     }
 }
@@ -233,7 +232,7 @@ void xxx_draw_string_80524F0(void)
         case 1:
             if (sub_800EC74())
                 break;
-            sub_803EAF0(3, 0);
+            sub_803EAF0(3, NULL);
         // fall through
         case 2: {
             struct UnkDrawStringStruct sp;
@@ -292,7 +291,7 @@ void xxx_draw_string_80524F0(void)
 
     if (strPtr->unk1C05E == 0 && strPtr->unk1C064 != 0 && --strPtr->unk1C064 == 0) {
         strPtr->unk1C06C = 0;
-        sub_803EAF0(0, 0);
+        sub_803EAF0(0, NULL);
         sub_8052210(FALSE);
     }
 }
@@ -343,7 +342,7 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
         sub_8052740(10);
     }
 
-    sub_803EAF0(2, 0);
+    sub_803EAF0(2, NULL);
     sub_8052210(FALSE);
 
     monPortraitPtr = NULL;
@@ -377,10 +376,10 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
         sub_805E804();
         LoadDungeonMapPalette();
         if (gShowDungeonMap) {
-            sub_803EAF0(0, 0);
+            sub_803EAF0(0, NULL);
         }
         else {
-            sub_803EAF0(1, 0);
+            sub_803EAF0(1, NULL);
         }
     }
 
@@ -496,7 +495,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     }
 
     sub_8052740(10);
-    sub_803EAF0(2, 0);
+    sub_803EAF0(2, NULL);
     sub_8052210(FALSE);
     CreateDialogueBoxAndPortrait(dialogueInfo->str, 0, monPortraitPtr, gUnknown_80F7AEA[dialogueInfo->unk0]);
     PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
@@ -507,7 +506,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 
     if (dialogueInfo->unk0 != 1 && dialogueInfo->unk0 != 3) {
         LoadDungeonMapPalette();
-        sub_803EAF0(0, 0);
+        sub_803EAF0(0, NULL);
     }
     sub_803E708(8, 9);
 }
@@ -518,7 +517,7 @@ bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, c
     s32 chosenMenuIndex;
 
     sub_8052740(10);
-    sub_803EAF0(2, 0);
+    sub_803EAF0(2, NULL);
     sub_8052210(FALSE);
 
     monPortraitPtr = NULL;
@@ -553,7 +552,7 @@ bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, c
     }
 
     LoadDungeonMapPalette();
-    sub_803EAF0(0, 0);
+    sub_803EAF0(0, NULL);
 
     if (chosenMenuIndex == 1)
         return TRUE;
@@ -567,7 +566,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
     s32 chosenMenuIndex;
 
     sub_8052740(10);
-    sub_803EAF0(2, 0);
+    sub_803EAF0(2, NULL);
     sub_8052210(FALSE);
 
     monPortraitPtr = NULL;
@@ -596,7 +595,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
     }
 
     LoadDungeonMapPalette();
-    sub_803EAF0(0, 0);
+    sub_803EAF0(0, NULL);
     return chosenMenuIndex;
 }
 
@@ -860,7 +859,7 @@ bool32 DisplayMessageLog(void)
     MenuInputStructSub menuInput;
 
     sub_801317C(&menuInput);
-    sub_803EAF0(9, 0);
+    sub_803EAF0(9, NULL);
     do {
         DungeonRunFrameActions(13);
         unkRet = sub_8008D8C(0);
@@ -906,7 +905,7 @@ bool32 DisplayMessageLog(void)
         }
     }
 
-    sub_803EAF0(0, 0);
+    sub_803EAF0(0, NULL);
     return TRUE;
 }
 

@@ -18,6 +18,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_music.h"
+#include "dungeon_misc.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util_1.h"
@@ -363,7 +364,6 @@ struct Zapdos2
 extern const struct Zapdos1 gUnknown_810744C;
 extern struct Zapdos2 gUnknown_8107464;
 
-extern void sub_8068FE0(Entity *, u32, u32);
 extern void sub_8042B0C(Entity *);
 extern u8 sub_806FD18(Entity *);
 extern void sub_806FDF4(Entity *, Entity *, Entity **);

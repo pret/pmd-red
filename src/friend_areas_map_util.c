@@ -1,30 +1,27 @@
 #include "global.h"
 #include "globaldata.h"
-#include "friend_areas_map.h"
-#include "sprite.h"
-#include "code_8004AA0.h"
-#include "input.h"
-#include "text.h"
-#include "code_8009804.h"
-#include "bg_palette_buffer.h"
-#include "string_format.h"
-#include "code_800D090.h"
-#include "friend_area.h"
-#include "bg_control.h"
-#include "code_800558C.h"
-#include "game_options.h"
-#include "play_time.h"
-#include "code_80118A4.h"
-#include "code_800C9CC.h"
-#include "pokemon.h"
-#include "decompress.h"
 #include "constants/direction.h"
-
-extern void sub_800CB20(void);
-extern void xxx_call_update_bg_sound_input(void);
-extern s32 sprintf(char *, const char *, ...);
-
-extern const FileArchive gTitleMenuFileArchive;
+#include "bg_control.h"
+#include "bg_palette_buffer.h"
+#include "code_8004AA0.h"
+#include "code_800558C.h"
+#include "code_8009804.h"
+#include "code_800C9CC.h"
+#include "code_800D090.h"
+#include "code_80118A4.h"
+#include "decompress.h"
+#include "def_filearchives.h"
+#include "friend_area.h"
+#include "friend_areas_map.h"
+#include "friend_areas_map_util.h"
+#include "game_options.h"
+#include "input.h"
+#include "menu_input.h"
+#include "play_time.h"
+#include "pokemon.h"
+#include "sprite.h"
+#include "string_format.h"
+#include "text.h"
 
 static inline bool8 CheckAxFlag8000(axdata *ptr)
 {
@@ -58,7 +55,7 @@ static const DungeonPos gUnknown_80D40C4[] =
 
 void FriendAreasMap_InitGfx(void)
 {
-    u8 filename[0xC];
+    u8 filename[12];
     s32 i, size;
 
     PokemonStruct1 *pokeStruct = GetPlayerPokemonStruct();
@@ -383,7 +380,7 @@ void FriendAreasMap_RunFrameActions(void)
     sub_8005180();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);
-    sub_800CB20();
+    WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
     CopySpritesToOam();
     sub_8005304();
@@ -394,4 +391,3 @@ void FriendAreasMap_RunFrameActions(void)
     sub_8011860();
     ResetSprites(FALSE);
 }
-

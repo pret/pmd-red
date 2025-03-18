@@ -4,28 +4,28 @@
 // size: 0x48
 typedef struct Window
 {
-    s16 x;
-    s16 y;
-    s16 width;
-    s16 height;
-    s16 unk8;
-    s32 type;
-    u32 unk10;
-    u32 unk14;
-    u32 *unk18;
-    u32 *unk1C;
-    s32 unk20;
-    s32 unk24;
-    u32 *unk28; // Somewhere in VRAM
-    s32 unk2C;
-    u32 *unk30; // Somewhere in VRAM?
-    u32 *unk34;
-    s32 unk38;
-    u32 *unk3C;
-    u32 *unk40;
-    u8 unk44;
-    bool8 unk45;
-    u8 unk46;
+    /* 0x0 */ s16 x;
+    /* 0x2 */ s16 y;
+    /* 0x4 */ s16 width;
+    /* 0x6 */ s16 height;
+    /* 0x8 */ s16 unk8;
+    /* 0xC */ s32 type;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 *unk18;
+    /* 0x1C */ u32 *unk1C;
+    /* 0x20 */ s32 unk20;
+    /* 0x24 */ s32 unk24;
+    /* 0x28 */ u32 *unk28; // Somewhere in VRAM
+    /* 0x2C */ s32 unk2C;
+    /* 0x30 */ u32 *unk30; // Somewhere in VRAM?
+    /* 0x34 */ u32 *unk34;
+    /* 0x38 */ s32 unk38;
+    /* 0x3C */ u32 *unk3C;
+    /* 0x40 */ u32 *unk40;
+    /* 0x44 */ u8 unk44;
+    /* 0x45 */ bool8 unk45;
+    /* 0x46 */ u8 unk46;
 } Window;
 
 // size: 0x4

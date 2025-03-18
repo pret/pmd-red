@@ -2,6 +2,7 @@
 #include "code_800558C.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
+#include "def_filearchives.h"
 #include "dungeon_message.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
@@ -12,7 +13,6 @@
 
 extern s32 gUnknown_80F6568[];
 extern const char gUnknown_80F6604; // "zmappat"
-extern struct FileArchive gDungeonFileArchive;
 
 extern void sub_803F7BC(void);
 
@@ -49,7 +49,7 @@ void sub_8040094(u8 r0)
     sub_803F7BC();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);
-    sub_800CB20();
+    WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
     xxx_call_update_bg_sound_input();
     UpdateDungeonMusic();

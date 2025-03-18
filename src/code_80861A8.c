@@ -1,12 +1,14 @@
 #include "global.h"
 #include "constants/direction.h"
-#include "code_80861A8.h"
+#include "structs/sprite_oam.h"
 #include "code_800DAC0.h"
+#include "code_800ED38.h"
+#include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_806CD90.h"
+#include "code_80861A8.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
-#include "structs/sprite_oam.h"
 
 extern const unkStruct_2039DB0 gUnknown_8107380;
 
@@ -18,9 +20,6 @@ extern const u8 *gUnknown_810671C[];
 
 static void sub_80861EC(Entity *);
 
-void sub_800EE5C(s32);
-void sub_800EF64();
-void DungeonRunFrameActions(s32);
 s32 sub_800E700(s32);
 void sub_800569C(DungeonPos *, axdata *, u8);
 void sub_8085F44(s32);

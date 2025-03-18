@@ -1,16 +1,17 @@
 #include "global.h"
 #include "globaldata.h"
+#include "structs/str_dungeon.h"
 #include "code_800F958.h"
 #include "code_80450F8.h"
 #include "code_8045A00.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
+#include "dungeon_items.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_serializer.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
-#include "structs/str_dungeon.h"
 
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
 extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
@@ -132,9 +133,6 @@ static void WriteWeather(DataSerializer *seri, Weather *src);
 
 static Entity* sub_80828E0(s16 id, s16 apparentID, s32 index);
 static Entity* sub_8082A08(s32 id, s32 apparentID, s32 index);
-
-// These externs are from other files
-extern void AddItemToDungeonAt(DungeonPos *, Item *, u32);
 
 void SaveDungeonState(u8 *buffer, u32 bufLen)
 {

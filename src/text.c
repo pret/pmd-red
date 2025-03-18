@@ -1,22 +1,20 @@
 #include "global.h"
 #include "globaldata.h"
+#include "structs/str_text.h"
 #include "bg_palette_buffer.h"
-#include "text.h"
-#include "decompress.h"
 #include "code_8009804.h"
 #include "code_800558C.h"
 #include "cpu.h"
-#include "structs/str_text.h"
+#include "decompress.h"
+#include "def_filearchives.h"
 #include "file_system.h"
+#include "text.h"
 
 struct CharMapStruct
 {
     s32 unk0;
     struct unkChar *unk4;
 };
-
-// system_sbin.s
-extern const struct FileArchive gSystemFileArchive;
 
 EWRAM_DATA Window gWindows[MAX_WINDOWS] = {0};
 EWRAM_DATA static struct CharMapStruct *sCharmaps[2] = {NULL};
@@ -264,13 +262,16 @@ void SetCharacterMask(int a0)
     sTextShadowMask = retval;
 }
 
+// arm9.bin::020052E4
 void ShowWindows(const WindowTemplates *winTemplates, bool8 a1, bool8 a2)
 {
     DungeonPos positionModifier = {0, 0};
     ShowWindowsInternal(winTemplates, a1, a2, &positionModifier);
 }
 
-// https://decomp.me/scratch/xF5Y1
+// red  https://decomp.me/scratch/EN6n0 (includes removed code from pmd-blue)
+// blue https://decomp.me/scratch/1y9BG
+// arm9.bin::020051B0
 static void ShowWindowsInternal(const WindowTemplates *winTemplates, bool8 a1, bool8 a2, DungeonPos *positionModifier)
 {
     s32 i;
