@@ -49,7 +49,6 @@ extern const u8 *const gItemFellOutOfSight;
 extern const u8 *const gItemFellInWater;
 extern const u8 *const gItemBuried;
 extern const u8 *gSeveralItemsLost;
-extern const u8 *gItemLost;
 extern const u8 *gAllItemsLost;
 
 extern void sub_80416E0(PixelPos *r0, u32, bool8);
