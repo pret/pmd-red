@@ -16,24 +16,6 @@
 #include "pokemon.h"
 #include "text_util.h"
 
-// size: 0x88
-struct unkStruct_20398C8
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 fill5[0xB - 0x5];
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    WonderMailSub unk10;
-    PokemonStruct1 unk18;
-    u8 fill70[0x88 - 0x70];
-};
-
-
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA u32 gUnknown_20398AC = {0};
 EWRAM_DATA u32 gUnknown_20398B0 = {0};

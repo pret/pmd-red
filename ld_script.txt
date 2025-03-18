@@ -51,7 +51,6 @@ SECTIONS {
         asm/arm_func.o(.text);
         src/main_loops.o(.text);
         src/event_flag.o(.text);
-        asm/code_8002774.o(.text);
         src/code_8002774.o(.text);
         src/memory.o(.text);
         asm/code_80035F0.o(.text);
@@ -313,8 +312,6 @@ SECTIONS {
         asm/code_809C5C4.o(.text);
         src/code_809D148.o(.text);
         src/ground_script.o(.text);
-        asm/handleaction.o(.text);
-        src/ground_script_1.o(.text);
         asm/ground_script.o(.text);
         src/ground_script_2.o(.text);
         src/code_80A26CC.o(.text);
