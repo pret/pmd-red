@@ -24,6 +24,7 @@
 
 static IWRAM_DATA u32 sStateArray[n] = {0}; // the array for the state vector
 static EWRAM_INIT s32 sStateIndex = n + 1; // index into state vector array, 0 <= state_index <= n-1
+// Only read from. For what it's worth, it could be const.
 static EWRAM_INIT u32 sTwistMatrix[2] = {0, a};
 
 void MersenneTwister_InitializeState(u32 seed)
