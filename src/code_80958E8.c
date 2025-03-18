@@ -17,7 +17,6 @@
 #include "event_flag.h"
 #include "rescue_team_info.h"
 
-extern bool8 sub_809017C(DungeonLocation *);
 extern void sub_803C37C(struct DungeonLocation *, u8, u8 *);
 
 extern u8 sub_8097318(s16 param_1);

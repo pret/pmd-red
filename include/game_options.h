@@ -67,5 +67,8 @@ bool8 GameOptionsNotChange(GameOptions *);
 void InitializeGameOptions(bool8 initializeGender);
 void LoadGameOptions(void);
 void SetWindowBGColor(void);
+bool8 sub_8094C48(void);
+bool8 DoesNotHaveShadedMap(void);
+void sub_8094C88(void);
 
 #endif // GUARD_GAME_OPTIONS_H

@@ -7,9 +7,11 @@
 #include "number_util.h"
 #include "input.h"
 #include "structs/map.h"
+#include "dungeon.h"
+#include "dungeon_action.h"
 #include "dungeon_main.h"
 #include "dungeon_message.h"
-#include "dungeon_action.h"
+#include "dungeon_misc.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -46,63 +48,26 @@
 #include "code_8097DD0.h"
 #include "move_util.h"
 
-extern bool8 sub_8048A68(Entity *param_1,Item *item);
-extern bool8 sub_8048950(Entity *param_1,Item *item);
-extern bool8 sub_8048B9C(Entity *param_1,Item *item);
 extern Item *sub_8044D90(Entity *, s32, u32);
-extern void PlayDungeonStartButtonSE(void);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_806A6E8(Entity *);
-extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
-bool8 sub_805E874(void);
 bool8 sub_80701A4(Entity *a0);
-void sub_805E738(Entity *a0);
 void sub_803E708(s32 a0, s32 a1);
-void sub_8040A78(void);
-void sub_805E804(void);
-void ShowDungeonOthersMenu(void);
 void sub_8075680(u32);
-void sub_8094C88(void);
-void sub_8040A84(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
-void SetLeaderActionToNothing(u8 a0);
-u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
 bool8 sub_8094C48(void);
-bool8 sub_805EC4C(Entity *a0, u8 a1);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
 bool8 sub_8044B28(void);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
-void ShowMainMenu(bool8 fromBPress, bool8 a1);
-bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
-void PrintOnMainMenu(bool8 printAll);
-bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1);
-void DungeonShowItemDescription(UNUSED ActionContainer *a0);
-bool8 ShowDungeonTeamMenu(Entity *a0);
-void ActionShowMoveInfo(ActionContainer *a0);
-void ActionToggleMoveUsableForAi(ActionContainer *a0);
-void ActionLinkMoves(ActionContainer *a0);
-void sub_806752C(ActionContainer *a0);
-void ActionSetOrUnsetMove(ActionContainer *a0, bool8 a1);
-void ActionDelinkMoves(ActionContainer *a0, bool8 a1);
-void sub_8067768(ActionContainer *a0);
-void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern void sub_80643AC(Entity *pokemon);
-extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
-bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
-extern u8 sub_806A538(s32);
 extern void sub_803EAF0(u32, u8 *);
 extern void sub_803F508(Entity *);
-extern void sub_8041AD0(Entity *pokemon);
-extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
@@ -116,9 +81,7 @@ extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
 extern void sub_8045064(void);
 extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
-extern bool8 CanLeaderSwitch(u8 dungeon);
 extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
-extern void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);

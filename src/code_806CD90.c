@@ -8,6 +8,7 @@
 #include "constants/type.h"
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"
+#include "dungeon.h"
 #include "dungeon_util.h"
 #include "code_803E668.h"
 #include "exclusive_pokemon.h"
@@ -278,10 +279,8 @@ extern void sub_8042148(Entity *pokemon);
 extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
 extern void sub_806F63C(Entity *r0);
-extern void sub_8078084(Entity * pokemon);
 extern void sub_800DBBC(void);
 extern void sub_80464C8(Entity *, DungeonPos *, Item *);
-extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
 extern bool8 sub_8045888(Entity *r0);

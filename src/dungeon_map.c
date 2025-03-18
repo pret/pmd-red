@@ -25,9 +25,7 @@ extern s32 gUnknown_202EDD0;
 
 extern void nullsub_11(SpriteOAM *, s32, UnkSpriteMem *, unkStruct_2039DB0 *);
 extern u8 GetFloorType(void);
-extern bool8 sub_8094C48(void);
 extern bool8 sub_8045804(Entity *ent);
-extern bool8 DoesNotHaveShadedMap(void);
 
 struct UnkStruct1
 {

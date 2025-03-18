@@ -11,6 +11,7 @@
 #include "dungeon_ai_movement.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_items.h"
+#include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_movement.h"
@@ -140,7 +141,6 @@ extern void nullsub_84(Entity *);
 extern void nullsub_85(Entity *);
 
 extern void sub_803F580(u32);
-extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_8041D9C(Entity *);
 extern void sub_8041DB0(Entity *pokemon);
 extern void sub_8041CA8(Entity *);

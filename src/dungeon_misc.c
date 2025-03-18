@@ -1,12 +1,14 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_misc.h"
+#include "status.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
 #include "file_system.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "structs/str_pokemon.h"
 #include "text.h"
 #include "moves.h"
 #include "string_format.h"
@@ -14,12 +16,14 @@
 #include "code_80450F8.h"
 #include "code_8045A00.h"
 #include "code_803E668.h"
+#include "dungeon.h"
 #include "dungeon_engine.h"
 #include "move_effects_target.h"
 #include "dungeon_map_access.h"
 #include "dungeon_map.h"
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
+#include "dungeon_music.h"
 #include "dungeon_pokemon_attributes.h"
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"
@@ -50,55 +54,22 @@ static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
 extern s32 sprintf(char *, const char *, ...);
-extern bool8 IsLevelResetTo1(u8 dungeon);
-extern void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1);
-extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_803E178(void);
 extern void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
-extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
-extern bool8 sub_806A58C(s16 r0);
 extern void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
-extern void sub_8078084(Entity * pokemon);
-extern void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2);
-extern void sub_808DFDC(s32 a1, PokemonStruct2* a2);
-extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
 extern void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3);
 extern bool8 sub_8070F80(Entity * pokemon, s32 direction);
-extern s32 sub_806A4DC(EntityInfo *info);
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
-extern void EndAbilityImmuneStatus(Entity *, Entity *);
 extern void sub_8041BBC(Entity *r0);
 extern bool8 sub_8045888(Entity *);
-extern void sub_806A2BC(Entity *, u8);
 extern void sub_804178C(u32);
 extern void sub_803F508(Entity *);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
-extern s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id);
-extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
-extern s16 sub_803D970(u32);
-extern bool8 sub_8083660(const DungeonPos *param_1);
-extern void sub_803F4A0(Entity *a0);
-extern bool8 sub_80860A8(u8 id);
-extern u8 sub_803D73C(s32 a0);
 extern void DeletePokemonDungeonSprite(s32 id);
-extern void sub_80429E8(Entity *r0);
-extern s32 sub_803DA20(s32 param_1);
-extern s32 gDungeonFramesCounter;
-extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
-extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
-extern u32 EntityGetStatusSprites(Entity *entity);
-extern void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
-extern void sub_8042EC8(Entity *a0, s32 a1);
-extern Entity *sub_804550C(s16 a);
-extern Entity *sub_80453AC(s16 id);
 extern void sub_803F580(s32);
-extern void ShowWholeRevealedDungeonMap(void);
-extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
-extern Entity *sub_80696A8(Entity *a0);
-extern int sprintf(char *, const char *, ...);
 extern const struct FileArchive gDungeonFileArchive;
 
 extern u8 *gUnknown_80FE168[];
@@ -134,8 +105,6 @@ extern DungeonPos gPlayerDotMapPosition;
 extern DungeonPos gUnknown_202EE0C;
 extern u8 gUnknown_202F32C;
 
-bool8 sub_806A538(s16 r0);
-bool8 sub_806A564(s16 r0);
 static bool8 sub_806A5A4(s16 r0);
 
 void OpenDungeonPaletteFile(void)

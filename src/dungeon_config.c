@@ -1,121 +1,14 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_config.h"
+#include "dungeon_move.h"
 #include "math.h"
+#include "move_actions.h"
 #include "constants/weather.h"
 #include "constants/type.h"
 #include "constants/monster.h"
 #include "constants/dungeon_action.h"
 #include "constants/move_id.h"
-
-// TODO: move these to header files
-extern bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 YawnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 NightmareMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 CharmMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 EncoreMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SuperFangMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 PainSplitMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 TormentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SwaggerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 RockSlideMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 WhirlpoolMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 FakeTearsMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SpiteMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SmokescreenMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 FlatterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 WillOWispMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ReturnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 FlameWheelMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 GustMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 DisableMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ShadowBallMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 BiteMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ThunderMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 EndeavorMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 FacadeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058580(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 BrickBreakMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 RockTombMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 GigaDrainMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ReversalMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SmellingSaltMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 MetalSoundMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 TickleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 OutrageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 LowKickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 AncientPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 RapidSpinMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ScaryFaceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8058E5C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 LickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 FissureMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ExtrasensoryMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 AbsorbMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SkillSwapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 HeadbuttMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 DoubleEdgeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059528(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SmogMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SacredFireMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_80595EC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 MuddyWaterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 TwisterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 TwineedleMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_8059A2C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SupersonicMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 TauntMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 HornDrillMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ThundershockMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ThunderWaveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 BlockMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 PoisonGasMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ToxicMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 PoisonFangMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 PoisonStingMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 TriAttackMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 TrickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 TripleKickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 MudSlapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ThiefMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 RolePlayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 LeerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 PayDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 CurseMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805A568(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SuperpowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 DynamicPunchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 KnockOffMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 SecretPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805AC90(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 ObserverOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 FeatherDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 BeatUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 BlastBurnMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 CrushClawMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 BlazeKickMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 PresentMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 EruptionMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 GlareMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 PoisonTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 RoarMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 sub_805B17C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 WrapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 MagnitudeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 MistBallMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 DestinyBondMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 FalseSwipeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 HiddenPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 AttractMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 MimicMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 FrustrationMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 LeechSeedMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 DreamEaterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 LusterPurgeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 DragonRageMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 FakeOutMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 HandleRegularDamagingMove(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern bool8 StunSporeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
 // Huge list of various config variables for dungeon moves/music/abilities/items/etc. All in one file, because these are scattered all around the codebase with only one pksdir present.
 

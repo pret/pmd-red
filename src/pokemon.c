@@ -9,6 +9,7 @@
 #include "decompress.h"
 #include "file_system.h"
 #include "pokemon_3.h"
+#include "structs/str_pokemon.h"
 #include "text_util.h"
 #include "moves.h"
 #include "friend_area.h"
@@ -935,7 +936,7 @@ bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 spriteId)
     return (gMonsterParameters[index].dialogueSprites >> spriteId) & 1;
 }
 
-void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1)
+void xxx_pokemonstruct_index_to_pokemon2_808DE30(PokemonStruct2 *r0, u32 r1)
 {
     xxx_pokemonstruct_to_pokemon2_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1);
 }
