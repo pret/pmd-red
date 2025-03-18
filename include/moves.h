@@ -91,7 +91,7 @@ void ReadPoke2MovesBits(DataSerializer *, struct Moves *);
 
 static inline bool8 MoveFlagExists(Move *move)
 {
-    return (move->moveFlags & MOVE_FLAG_EXISTS);
+    return (move->moveFlags & MOVE_FLAG_EXISTS) != 0;
 }
 
 static inline bool8 MoveFlagSet(Move *move)
