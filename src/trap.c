@@ -14,6 +14,7 @@
 #include "constants/type.h"
 #include "dungeon_engine.h"
 #include "dungeon_items.h"
+#include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
@@ -26,6 +27,7 @@
 #include "structs/str_dungeon.h"
 #include "structs/str_806B7F8.h"
 #include "dungeon_config.h"
+#include "dungeon_misc.h"
 
 extern u8 *gTrapNames[];
 extern u8 *gUnknown_80FC5FC[];
@@ -56,14 +58,11 @@ extern u8 *gUnknown_80FED08[];
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 
-void sub_806A9B4(Entity *, u32);
-void ShowDungeonMapAtPos(s32, s32);
 s16 sub_803D970(u32);
 bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
 bool8 sub_8045888(Entity *);
 u8 GetFloorType(void);
-void sub_8068FE0(Entity *, u32, Entity *);
 void sub_8045BF8(u8 *, Item *);
 void DealDamageToEntity(Entity *,s16,u32,u32);
 void sub_806F480(Entity *, u32);

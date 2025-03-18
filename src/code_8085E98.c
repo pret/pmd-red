@@ -5,15 +5,13 @@
 #include "dungeon_util.h"
 #include "items.h"
 #include "code_800DAC0.h"
-
+#include "code_800ED38.h"
 #include "structs/sprite_oam.h"
 #include "structs/str_dungeon.h"
 
 extern const unkStruct_2039DB0 gUnknown_8107374;
 
 
-void sub_800EF64(void);
-void sub_800EE5C(s32);
 void sub_8085F44(s32);
 bool8 sub_800E90C(DungeonPos *);
 void sub_8088EE8(void);

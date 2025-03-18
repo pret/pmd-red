@@ -1,12 +1,14 @@
 #include "global.h"
 #include "math.h"
+#include "code_800558C.h"
+#include "code_800DAC0.h"
 #include "code_800E9A8.h"
+#include "code_800ED38.h"
 #include "code_803E46C.h"
 #include "code_803E724.h"
+#include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_806CD90.h"
-#include "code_8041AD0.h"
-#include "code_800DAC0.h"
 #include "dungeon_config.h"
 #include "constants/direction.h"
 #include "constants/status.h"
@@ -41,14 +43,10 @@ extern void PlaySoundEffect(u32);
 void EntityUpdateStatusSprites(Entity *entity);
 
 extern s32 gDungeonBrightness;
-extern u8 gUnknown_203B40D;
-extern s16 gUnknown_2026E4E;
 
 extern void sub_800DBBC(void);
 extern void sub_803EA10(void);
 extern void sub_8042E98(void);
-extern void sub_800EE5C(u32);
-extern void sub_800EF64(void);
 
 void sub_804178C(u8 param_1);
 u32 sub_8041764(unkStruct_80416E0 *param_1, bool8 param_2);

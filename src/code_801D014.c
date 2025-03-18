@@ -1,16 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/friend_area.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
-#include "string_format.h"
-#include "iq_skill_menu.h"
 #include "code_801D014.h"
 #include "code_80227B8.h"
 #include "code_8023868.h"
 #include "code_8024458.h"
 #include "code_80958E8.h"
 #include "common_strings.h"
-#include "constants/friend_area.h"
+#include "def_filearchives.h"
 #include "event_flag.h"
 #include "friend_area.h"
 #include "friend_area_action_menu.h"
@@ -19,11 +18,13 @@
 #include "ground_main.h"
 #include "ground_map_1.h"
 #include "input.h"
+#include "iq_skill_menu.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "options_menu1.h"
 #include "party_list_menu.h"
 #include "rescue_team_info.h"
+#include "string_format.h"
 #include "text.h"
 #include "wigglytuff_shop2.h"
 #include "wonder_mail_802C4C8.h"
@@ -31,8 +32,6 @@
 
 static EWRAM_INIT struct unk_203B250 *sUnknown_203B250 = {NULL};
 static EWRAM_INIT u32 sUnknown_203B254 = {0};
-
-extern const struct FileArchive gTitleMenuFileArchive;
 
 #include "data/code_801D014.h"
 

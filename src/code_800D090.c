@@ -1,7 +1,3 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include "gba/gba.h"
-#include "config.h"
 #include "global.h"
 #include "music.h"
 

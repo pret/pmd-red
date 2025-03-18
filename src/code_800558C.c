@@ -6,19 +6,19 @@
 #include "math.h"
 #include "sprite.h"
 
-EWRAM_DATA u8 gUnknown_2026E38 = 0;
-EWRAM_DATA u32 *gUnknown_2026E3C = 0;
-EWRAM_DATA s32 gUnknown_2026E40 = 0;
-EWRAM_DATA s32 gUnknown_2026E44 = 0;
-EWRAM_DATA s32 gUnknown_2026E48 = 0;
-EWRAM_DATA bool8 gUnknown_2026E4C = 0;
-EWRAM_DATA u16 gUnknown_2026E4E = 0;
-EWRAM_DATA bool32 gUnknown_2026E50 = 0;
-EWRAM_DATA bool32 gUnknown_2026E54 = 0;
-EWRAM_DATA u32 *gUnknown_2026E58 = NULL;
-UNUSED EWRAM_DATA static u32 sUnused0 = 0;
-EWRAM_DATA static s16 gUnknown_2026E60[324] = {0};
-EWRAM_DATA static s16 gUnknown_20270E8[324] = {0};
+EWRAM_DATA bool8 gUnknown_2026E38 = FALSE;
+EWRAM_DATA u32 *gUnknown_2026E3C = NULL;
+static EWRAM_DATA s32 sUnknown_2026E40 = 0; // Read from but never written to
+static EWRAM_DATA s32 sUnknown_2026E44 = 0; // Read from but never written to
+static EWRAM_DATA s32 sUnknown_2026E48 = 0; // Read from but never written to
+static EWRAM_DATA bool8 sUnknown_2026E4C = FALSE;
+EWRAM_DATA s16 gUnknown_2026E4E = 0;
+static EWRAM_DATA bool32 sUnknown_2026E50 = FALSE;
+static EWRAM_DATA bool32 sUnknown_2026E54 = FALSE;
+static EWRAM_DATA u32 *sUnknown_2026E58 = NULL;
+UNUSED static EWRAM_DATA u32 sUnused0 = 0;
+static EWRAM_DATA s16 sUnknown_2026E60[324] = {0}; // These might be [2][162]
+static EWRAM_DATA s16 sUnknown_20270E8[324] = {0};
 
 EWRAM_INIT s16 *gUnknown_203B078 = NULL;
 
@@ -198,12 +198,12 @@ UNUSED static void nullsub_151(void)
 
 void sub_80057E8(void)
 {
-    gUnknown_2026E4C = TRUE;
-    gUnknown_2026E54 = FALSE;
-    gUnknown_2026E50 = 1;
-    gUnknown_2026E58 = NULL;
+    sUnknown_2026E4C = TRUE;
+    sUnknown_2026E54 = FALSE;
+    sUnknown_2026E50 = TRUE;
+    sUnknown_2026E58 = NULL;
     gUnknown_2026E3C = NULL;
-    gUnknown_2026E38 = 0;
+    gUnknown_2026E38 = FALSE;
     gUnknown_2026E4E = 0x60C;
     gUnknown_203B078 = NULL;
 }
@@ -214,16 +214,16 @@ void sub_8005838(s32 *a0, u8 kind)
     s16 *r3;
     s32 i;
 
-    if (!gUnknown_2026E4C)
+    if (!sUnknown_2026E4C)
         kind = 0;
 
-    r3 = !gUnknown_2026E54 ? gUnknown_2026E60 : gUnknown_20270E8;
+    r3 = !sUnknown_2026E54 ? sUnknown_2026E60 : sUnknown_20270E8;
 
     r2 = gUnknown_203B078;
     if (r2 == NULL)
         r2 = (void *) &gUnknown_80B83EA;
 
-    gUnknown_2026E58 = (void *) r3;
+    sUnknown_2026E58 = (void *) r3;
 
     switch (kind) {
         case 0:
@@ -504,9 +504,9 @@ void sub_8005838(s32 *a0, u8 kind)
 
                 s32 j, k;
 
-                val1 = gUnknown_2026E40;
-                val2 = gUnknown_2026E44;
-                val3 = gUnknown_2026E48;
+                val1 = sUnknown_2026E40;
+                val2 = sUnknown_2026E44;
+                val3 = sUnknown_2026E48;
 
                 spC = 0x400 / (val3 / 256 + 1);
                 iVar11 = val2 / 256;
@@ -545,10 +545,10 @@ void sub_8005838(s32 *a0, u8 kind)
                             if (j >= 160)
                                 continue;
 
-                            if (gUnknown_2026E54 == 0)
-                                gUnknown_2026E60[j * 2 + 1] = uVar7;
+                            if (!sUnknown_2026E54)
+                                sUnknown_2026E60[j * 2 + 1] = uVar7;
                             else
-                                gUnknown_20270E8[j * 2 + 1] = uVar7;
+                                sUnknown_20270E8[j * 2 + 1] = uVar7;
                         }
 
                         for (; k > r8; k--) {
@@ -557,10 +557,10 @@ void sub_8005838(s32 *a0, u8 kind)
                             if (k >= 160)
                                 continue;
 
-                            if (gUnknown_2026E54 == 0)
-                                gUnknown_2026E60[k * 2 + 1] = uVar7;
+                            if (!sUnknown_2026E54)
+                                sUnknown_2026E60[k * 2 + 1] = uVar7;
                             else
-                                gUnknown_20270E8[k * 2 + 1] = uVar7;
+                                sUnknown_20270E8[k * 2 + 1] = uVar7;
                         }
                     }
                 }
@@ -571,17 +571,17 @@ void sub_8005838(s32 *a0, u8 kind)
 
 UNUSED static void sub_80060A8(void)
 {
-    gUnknown_2026E3C = gUnknown_2026E58;
-    gUnknown_2026E54 = !gUnknown_2026E54;
-    gUnknown_2026E50 = !gUnknown_2026E50;
+    gUnknown_2026E3C = sUnknown_2026E58;
+    sUnknown_2026E54 = !sUnknown_2026E54;
+    sUnknown_2026E50 = !sUnknown_2026E50;
     gUnknown_2026E38 = FALSE;
 }
 
 void sub_80060EC(void)
 {
-    gUnknown_2026E3C = gUnknown_2026E58;
-    gUnknown_2026E54 = !gUnknown_2026E54;
-    gUnknown_2026E50 = !gUnknown_2026E50;
+    gUnknown_2026E3C = sUnknown_2026E58;
+    sUnknown_2026E54 = !sUnknown_2026E54;
+    sUnknown_2026E50 = !sUnknown_2026E50;
     SetBldAlphaReg((gUnknown_2026E4E & 0x1F00) >> 8, gUnknown_2026E4E & 0x1F);
     gUnknown_2026E38 = TRUE;
 }

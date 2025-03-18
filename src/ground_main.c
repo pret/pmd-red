@@ -74,7 +74,7 @@ void sub_8098BDC(void)
     sub_8099744();
     sub_8011860();
     IncrementPlayTime(gPlayTimeRef);
-    sub_800CB20();
+    WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
     nullsub_120();
     sub_80A5E70();

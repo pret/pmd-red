@@ -29,6 +29,8 @@
 #include "dungeon_config.h"
 #include "dungeon_menu_team.h"
 #include "dungeon_menu_moves.h"
+#include "dungeon_misc.h"
+#include "code_803E724.h"
 
 extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
 
@@ -67,13 +69,11 @@ extern u8 *gUnknown_80F9BD8[];
 #include "data/code_8048480.h"
 
 extern void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
-extern u8 sub_806A538(s32);
 extern void sub_8051E7C(Entity *pokemon);
 extern void sub_8045BF8(u8 *, Item *);
 extern void ActionShowMoveInfo(ActionContainer *);
 extern void ActionLinkMoves(ActionContainer *);
 extern void sub_8044DF0(Entity *, u32, u32);
-extern void sub_803EAF0(u32, u32);
 extern void SetLeaderActionToNothing(bool8);
 extern void sub_8044E24(Entity *, u32, u32);
 extern void sub_804245C(Entity *, Item *);
@@ -933,22 +933,22 @@ bool8 sub_8048B9C(Entity *entity, Item *item)
                 ActionShowMoveInfo(entityActionPtr);
             }
             else if (entityActionPtr->action == ACTION_LINK_MOVES) {
-                sub_803EAF0(0,0);
+                sub_803EAF0(0, NULL);
                 ActionLinkMoves(entityActionPtr);
                 SetLeaderActionToNothing(TRUE);
                 ret = TRUE;
             }
             else if (entityActionPtr->action == ACTION_DELINK_MOVES) {
-                sub_803EAF0(0,0);
+                sub_803EAF0(0, NULL);
                 ActionDelinkMoves(entityActionPtr,0);
                 SetLeaderActionToNothing(TRUE);
             }
             else if ((entityActionPtr->action == ACTION_SET_MOVE) || (entityActionPtr->action == ACTION_UNSET_MOVE)) {
-                sub_803EAF0(0,0);
+                sub_803EAF0(0, NULL);
                 ActionSetOrUnsetMove(entityActionPtr, FALSE);
             }
             else if (entityActionPtr->action == ACTION_SWITCH_AI_MOVE) {
-                sub_803EAF0(0,0);
+                sub_803EAF0(0, NULL);
                 ActionToggleMoveUsableForAi(entityActionPtr);
             }
 

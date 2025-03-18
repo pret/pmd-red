@@ -2,6 +2,7 @@
 #include "code_800F958.h"
 #include "code_803E46C.h"
 #include "code_803E668.h"
+#include "code_8041AD0.h"
 #include "code_8045A00.h"
 #include "code_805D8C8.h"
 #include "code_804267C.h"
@@ -38,6 +39,7 @@
 #include "structs/str_806B7F8.h"
 #include "structs/str_202ED28.h"
 #include "dungeon_config.h"
+#include "dungeon_misc.h"
 
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
@@ -62,12 +64,9 @@ extern u8 GetRandomFloorItem(s32 a0);
 extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_80429E8(Entity *r0);
 extern s32 sub_803DA20(s32 param_1);
-extern void sub_80694C0(Entity *, s32, s32, u32);
 extern s32 gDungeonFramesCounter;
 extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
 extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
-u32 EntityGetStatusSprites(Entity *entity);
-void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
 extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);

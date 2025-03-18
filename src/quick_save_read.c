@@ -5,7 +5,7 @@
 #include "quick_save_read.h"
 #include "save.h"
 
-static EWRAM_INIT QuickSaveRead *sQuickSaveRead = {NULL};
+static EWRAM_INIT QuickSaveRead *sQuickSaveRead = { NULL };
 
 #include "data/quick_save_read.h"
 
@@ -58,7 +58,7 @@ bool8 IsQuickSaveValid(void)
 
 void FinishQuickSaveRead(void)
 {
-    if (sQuickSaveRead != NULL){
+    if (sQuickSaveRead != NULL) {
         MemoryFree(sQuickSaveRead);
         sQuickSaveRead = 0;
     }

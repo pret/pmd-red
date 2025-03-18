@@ -24,13 +24,13 @@ typedef struct UnkStruct_RunDungeon
     PokemonStruct1 unk1C;
     u8 *unk74;
     Dungeon *unk78;
-    s16 unk7C;
+    s16 unk7C; // Set to 5 if the dungeon was skipped (quicksave read failed)
     u8 unk7E;
     DungeonLocation unk80;
     WonderMailSub unk84;
 } UnkStruct_RunDungeon;
 
 // TODO: This func should not be in a structs include file
-void RunDungeon(UnkStruct_RunDungeon *r8);
+void RunDungeon_Async(UnkStruct_RunDungeon *r8);
 
 #endif // GUARD_STR_DUNGEON_8042F6C_H

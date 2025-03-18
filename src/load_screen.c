@@ -21,8 +21,7 @@
 #include "save.h"
 #include "text_util.h"
 #include "text.h"
-
-extern const struct FileArchive gTitleMenuFileArchive;
+#include "def_filearchives.h"
 
 struct LoadScreen
 {

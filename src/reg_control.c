@@ -30,15 +30,15 @@ EWRAM_INIT s16 gUnknown_203B0AE = {-1};
 EWRAM_INIT s16 gUnknown_203B0B0 = {-1}; // Written to but never read
 EWRAM_INIT s16 gUnknown_203B0B2 = {-1}; // Written to but never read
 
-// code_800D090.c
+// code_800D090.s
 extern void sub_800D6AC(void);
 extern void sub_800D7D0(void);
 
 static void UpdateBGControlRegisters(void);
-void VBlankIntr(void);
-void VCountIntr(void);
-void UnusedIntrFunc(void);
-void Timer3Intr(void);
+static void VBlankIntr(void);
+static void VCountIntr(void);
+static void UnusedIntrFunc(void);
+static void Timer3Intr(void);
 
 static const IntrCallback sInitialIntrTable[6] =
 {
@@ -106,7 +106,7 @@ bool8 DisableInterrupts(void)
     return TRUE;
 }
 
-bool8 sub_800B650(void)
+UNUSED static bool8 sub_800B650(void)
 {
     if (!gInterruptsEnabled)
         return FALSE;
@@ -117,7 +117,7 @@ bool8 sub_800B650(void)
     return TRUE;
 }
 
-void AckInterrupt(u16 flag)
+static void AckInterrupt(u16 flag)
 {
     if (!gInterruptsEnabled)
         return;
@@ -154,8 +154,7 @@ IntrCallback SetInterruptCallback(u32 index, IntrCallback new_callback)
     return old_callback;
 }
 
-// Unused?
-s32 sub_800B720(s32 a0, IntrCallback a1)
+UNUSED static s32 sub_800B720(s32 a0, IntrCallback a1)
 {
     s32 r2;
     s32 i;
@@ -200,8 +199,7 @@ s32 sub_800B720(s32 a0, IntrCallback a1)
     return gUnknown_203B0A8;
 }
 
-// Unused?
-void sub_800B850(s16 a0)
+UNUSED static void sub_800B850(s16 a0)
 {
     s32 r2;
     unkStruct_202D648 *r4;
@@ -232,11 +230,11 @@ void sub_800B850(s16 a0)
         EnableInterrupts();
 }
 
-void UnusedIntrFunc(void)
+static void UnusedIntrFunc(void)
 {
 }
 
-void VBlankIntr(void)
+static void VBlankIntr(void)
 {
     s32 index;
 
@@ -256,13 +254,13 @@ void VBlankIntr(void)
     gUnknown_203B0B2 = -1;
     REG_DISPSTAT = DISPSTAT_VBLANK_INTR | DISPSTAT_VCOUNT_INTR;
 
-    if (gUnknown_203B099 == 0)
+    if (!gUnknown_203B099)
         UpdateSound();
 
     AckInterrupt(INTR_FLAG_VBLANK);
 }
 
-void VCountIntr(void)
+static void VCountIntr(void)
 {
     s32 sVar2 = (vs16) REG_VCOUNT;
 
@@ -286,6 +284,7 @@ void VCountIntr(void)
     AckInterrupt(INTR_FLAG_VCOUNT);
 }
 
+// This func waits for vblank and may update sound/input
 void sub_800BA5C(void)
 {
     if (gUnknown_203B09A) {
@@ -324,7 +323,7 @@ void xxx_update_bg_sound_input(void)
     }
 }
 
-void Timer3Intr(void)
+static void Timer3Intr(void)
 {
     if (gIntrCallbacks[4])
         gIntrCallbacks[4]();

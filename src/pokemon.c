@@ -1,21 +1,20 @@
 #include "global.h"
 #include "globaldata.h"
-#include "pokemon.h"
-#include "code_800D090.h"
-#include "code_8097DD0.h"
 #include "constants/colors.h"
 #include "constants/monster.h"
 #include "constants/tactic.h"
+#include "code_800D090.h"
+#include "code_8097DD0.h"
+#include "cpu.h"
 #include "decompress.h"
+#include "def_filearchives.h"
+#include "exclusive_pokemon.h"
 #include "file_system.h"
+#include "friend_area.h"
+#include "moves.h"
+#include "pokemon.h"
 #include "pokemon_3.h"
 #include "text_util.h"
-#include "moves.h"
-#include "friend_area.h"
-#include "exclusive_pokemon.h"
-#include "cpu.h"
-
-extern struct FileArchive gSystemFileArchive;
 
 static EWRAM_DATA MonsterDataEntry *gMonsterParameters = {0};
 static EWRAM_DATA OpenedFile *gMonsterParametersFile = {0};
@@ -47,7 +46,6 @@ extern s16 gBlastBurnIQReq;  // 0x14d
 extern s16 gVoltTackleIQReq;  // 0x14d
 extern char* gFormattedStatusNames[];
 
-extern int sprintf(char *, const char *, ...);
 extern u32 ReturnIntFromChar(u8 r0);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
 
@@ -1310,8 +1308,6 @@ char* sub_808E51C(s32 a1)
     PrepareStatusStringArrays(gFormattedStatusNames[a1], statuses);
     return statuses[0]->desc;
 }
-
-extern const struct FileArchive gDungeonFileArchive;
 
 struct ShadowSpriteFlags {
     u32 shape;

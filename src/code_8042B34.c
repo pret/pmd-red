@@ -4,7 +4,10 @@
 #include "structs/rgb.h"
 #include "structs/sprite_oam.h"
 #include "structs/str_dungeon_8042F6C.h"
+#include "code_800558C.h"
+#include "code_803D110.h"
 #include "code_803E46C.h"
+#include "code_803E724.h"
 #include "code_800E9E4.h"
 #include "code_800DAC0.h"
 #include "code_800E9A8.h"
@@ -42,9 +45,10 @@
 #include "dungeon_config.h"
 #include "dungeon_map.h"
 #include "dungeon_items.h"
+#include "dungeon_misc.h"
+#include "code_8042B34.h"
+#include "code_800ED38.h"
 
-extern void sub_800EE5C(s32);
-extern void sub_800EF64(void);
 extern void sub_800F15C(s32);
 
 struct UnkStruct_203B414
@@ -258,25 +262,18 @@ extern void sub_8041888(u8 param_1);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
 extern void sub_8043CD8(void);
-extern void sub_803E250(void);
 extern void sub_803E830(void);
-extern void sub_803E214(void);
-extern void nullsub_56(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
 extern void IncrementThievingSuccesses(void);
-extern void sub_803E13C(void);
 extern void sub_80841EC(void);
 extern void sub_8084424(void);
 extern void sub_8086130(void);
 extern void FreeDungeonPokemonSprites(void);
-extern void sub_803DF60(void);
-extern void sub_803E02C(void);
 extern void sub_80847D4(void);
 extern void sub_8043D60(void);
 extern void sub_806890C(void);
 extern void sub_80840A4(void);
-extern void sub_803E178(void);
 extern void sub_80848F0(void);
 extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
@@ -315,22 +312,14 @@ extern void sub_806A974(void);
 extern void sub_806CF60(void);
 extern void sub_8068F80(void);
 extern bool8 sub_8044B28(void);
-extern bool8 sub_8083C24(void);
-extern bool8 sub_8083C88(u8 param_1);
 extern bool8 sub_8043ED0(bool8);
-extern void ShowDungeonNameBanner(void);
-extern void sub_803EAF0(u32, u32);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
 extern void sub_803F4A0(Entity *a0);
-extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
-extern bool8 sub_8083C50(void);
-extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 extern bool8 IsKeepMoney(u8 dungeon);
 extern void sub_8042B0C(Entity *);
 
-extern s16 gUnknown_2026E4E;
 extern u8 gUnknown_202F32C;
 extern u8 gUnknown_202F1A8;
 extern s32 gDungeonBrightness;
@@ -356,7 +345,7 @@ extern OpenedFile *gDungeonNameBannerPalette;
 
 // This functions is the main 'loop' when the player is in a Dungeon. It runs from the moment the player enters a dungeon, until they leave(by completing or by fainting).
 // arm9.bin::0206A848
-void RunDungeon(UnkStruct_RunDungeon *r8)
+void RunDungeon_Async(UnkStruct_RunDungeon *r8)
 {
     bool8 check;
     Entity *leader;
@@ -492,7 +481,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
         }
     }
 
-    while (1) {
+    while (TRUE) {
         sub_8098080();
         nullsub_16();
         sub_80521D0();
@@ -583,10 +572,10 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
         sub_803E178();
         gDungeonBrightness = 0;
         SetDungeonMapToNotShown();
-        sub_803EAF0(4, 0);
+        sub_803EAF0(4, NULL);
         sub_8052210(0);
         sub_803F27C(r6);
-        ShowDungeonNameBanner();
+        ShowDungeonNameBanner_Async();
 
         if (!r6) {
             GenerateFloor();
@@ -653,7 +642,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
             sub_803E7C8();
         }
         sub_8040094(0);
-        sub_803EAF0(0, 0);
+        sub_803EAF0(0, NULL);
         InitDungeonMap(r6);
         ShowWholeRevealedDungeonMap();
         gDungeon->unkB8 = NULL;
@@ -739,7 +728,7 @@ void RunDungeon(UnkStruct_RunDungeon *r8)
         }
 
         SetDungeonMapToNotShown();
-        sub_803EAF0(1, 0);
+        sub_803EAF0(1, NULL);
         gDungeon->unk181e8.unk18219 = 0;
         gDungeon->unk181e8.unk18218 = 1;
         if (gDungeon->unk3 == 0

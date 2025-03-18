@@ -1,15 +1,18 @@
 #include "global.h"
+#include "bg_control.h"
+#include "code_800558C.h"
+#include "code_8009804.h"
+#include "code_800C9CC.h"
 #include "code_800E9E4.h"
-#include "dungeon_pokemon_sprites.h"
+#include "code_800ED38.h"
+#include "code_803E724.h"
 #include "dungeon_message.h"
+#include "dungeon_pokemon_sprites.h"
 #include "file_system.h"
 #include "main_loops.h"
 #include "memory.h"
 #include "sprite.h"
-#include "code_800C9CC.h"
-#include "code_800558C.h"
-#include "bg_control.h"
-#include "code_8009804.h"
+#include "text.h"
 
 struct unkStruct_203B0D0_sub
 {
@@ -41,6 +44,8 @@ s32 sub_800F0F4(s32, s32);
 void sub_800F204(OpenedFile *file);
 void sub_800F13C(s32, OpenedFile *, unkStruct_80B9CC4 *);
 void sub_800F15C(s32);
+
+extern void sub_809971C(u16 a0, const RGB *a1, int a2);
 
 void sub_800ED38(s32 r0)
 {
@@ -205,10 +210,6 @@ void sub_800EF40(u8 r0, u8 r1)
     sub_800EE5C(ret);
 }
 
-extern void xxx_call_update_bg_vram(void);
-extern void sub_803EAF0(u32 a0, u8 *a1);
-extern void sub_809971C(u16 a0, const RGB *a1, int a2);
-
 void sub_800EF64(void)
 {
     s32 i;
@@ -246,7 +247,7 @@ void sub_800EF64(void)
                     sub_800CD64(0, TRUE);
                     sub_8052210(0);
                     sub_803EAF0(5, NULL);
-                    sub_800CB20();
+                    WaitForNextFrameAndAdvanceRNG();
                     xxx_call_update_bg_vram();
                 }
                 sub_8009A1C(sub->fileData, sub->unkC, sub->unk10, sub->unk14);

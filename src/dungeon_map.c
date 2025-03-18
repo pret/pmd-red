@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "def_filearchives.h"
 #include "dungeon_map.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
@@ -19,7 +20,6 @@
 #include "constants/dungeon.h"
 #include "constants/trap.h"
 
-extern struct FileArchive gDungeonFileArchive;
 extern DungeonPos gPlayerDotMapPosition;
 extern s32 gUnknown_202EDD0;
 

@@ -1,14 +1,14 @@
 #include "global.h"
-#include "code_80118A4.h"
 #include "constants/bg_music.h"
-#include "dungeon.h"
-#include "music.h"
 #include "structs/menu.h"
 #include "structs/str_dungeon.h"
+#include "code_80118A4.h"
+#include "dungeon.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
+#include "music.h"
+#include "status_checks_1.h"
 #include "text_util.h"
-
 
 extern MenuInputStruct gDungeonMenu;
 
@@ -19,13 +19,11 @@ extern u8 gUnknown_810AC68; // 0x8
 extern u8 gUnknown_810AC64; // 0x8
 extern u8 gUnknown_810AC66; // 0x8
 
-extern void sub_80709C8(u8 *buffer, EntityInfo *entityInfo);
-
 // Dungeon Music Player adds in this flag to tell
 // the system to fade in rather than immediately playing
 #define DUNGEON_MUSIC_FADE_IN 0x8000
 
-void sub_8083AB0(s16 param_0, Entity * target, Entity * entity)
+void sub_8083AB0(s16 param_0, Entity *target, Entity *entity)
 {
   u8 *defPtr;
   u8 *attackPtr;
@@ -96,53 +94,40 @@ void sub_8083AB0(s16 param_0, Entity * target, Entity * entity)
 
 bool8 sub_8083C24(void)
 {
-  UnkDungeonGlobal_unk1CE98_sub *temp;
+    UnkDungeonGlobal_unk1CE98_sub *temp = &gDungeon->unk1CE98;
 
-  temp = &gDungeon->unk1CE98;
+    if (temp->moveID < 0x226)
+        return TRUE;
 
-  if (temp->moveID < 0x226) {
-    return TRUE;
-  }
-  else {
     return FALSE;
-  }
 }
 
 bool8 sub_8083C50(void)
 {
-  UnkDungeonGlobal_unk1CE98_sub *temp;
+    UnkDungeonGlobal_unk1CE98_sub *temp = &gDungeon->unk1CE98;
 
-  temp = &gDungeon->unk1CE98;
+    if (temp->moveID == 0x227 || temp->moveID == 0x22A || temp->moveID == 0x228)
+        return TRUE;
 
-  if ((temp->moveID == 0x227) || (temp->moveID == 0x22A) || (temp->moveID == 0x228)) {
-    return TRUE;
-  }
-  else {
     return FALSE;
-  }
 }
 
 bool8 sub_8083C88(u8 param_1)
 {
-  UnkDungeonGlobal_unk1CE98_sub *temp;
+    UnkDungeonGlobal_unk1CE98_sub *temp = &gDungeon->unk1CE98;
 
-  temp = &gDungeon->unk1CE98;
+    if ((!HasCheckpoint(gDungeon->unk644.dungeonLocation.id) && (gDungeon->unk644.unk18 != 0 || param_1 != 0))
+        || temp->moveID != 0x227) {
+        return TRUE;
+    }
 
-  if ((!HasCheckpoint(gDungeon->unk644.dungeonLocation.id) &&
-      ((gDungeon->unk644.unk18 != 0) || (param_1 != 0))) ||
-     (temp->moveID != 0x227)) {
-    return TRUE;
-  }
-  else {
     return FALSE;
-  }
 }
 
 void PlayDungeonCursorSE(bool8 checkMenuEntriesCount)
 {
-  if ((!checkMenuEntriesCount) || (gDungeonMenu.unk1A > 1)) {
-    PlayFanfareSE(0x12d,MAX_VOLUME);
-  }
+    if (!checkMenuEntriesCount || gDungeonMenu.unk1A > 1)
+        PlayFanfareSE(0x12d,MAX_VOLUME);
 }
 
 void PlayDungeonConfirmationSE(void)

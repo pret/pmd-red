@@ -511,7 +511,7 @@ _080988F8:
 	ldr r0, _08098978
 	ldr r0, [r0]
 	bl IncrementPlayTime
-	bl sub_800CB20
+	bl WaitForNextFrameAndAdvanceRNG
 	bl LoadBufferedInputs
 	bl nullsub_120
 	bl sub_80A5E70

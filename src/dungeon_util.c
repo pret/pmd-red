@@ -1,19 +1,16 @@
 #include "global.h"
-#include "dungeon_util.h"
-
-#include "dungeon_map_access.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_traps.h"
+#include "code_800F958.h"
+#include "code_8041AD0.h"
+#include "code_8069E0C.h"
+#include "code_807E5AC.h"
+#include "dungeon_items.h"
+#include "dungeon_map_access.h"
+#include "dungeon_util.h"
 
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
 extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
-
-u32 EntityGetStatusSprites(Entity *entity);
-void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
-
-void sub_806C51C(Entity *entity);
-extern void sub_80462AC(Entity * ,u32, u32, u32, u32);
-extern void sub_807FA9C();
 
 const DungeonPos gAdjacentTileOffsets[] = {
     {0, 1},

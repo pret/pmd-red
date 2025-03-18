@@ -1,39 +1,43 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_8045A00.h"
-#include "dungeon_message.h"
-#include "code_807CD9C.h"
+#include "constants/dungeon.h"
+#include "constants/item.h"
+#include "constants/move_id.h"
+#include "code_803E46C.h"
+#include "code_803E724.h"
 #include "code_8041AD0.h"
+#include "code_8044CC8.h"
+#include "code_8045A00.h"
+#include "code_8066D04.h"
 #include "code_806CD90.h"
+#include "code_8077274_1.h"
+#include "code_807CD9C.h"
+#include "code_8084778.h"
+#include "dungeon_ai_targeting.h"
+#include "dungeon_capabilities.h"
+#include "dungeon_engine.h"
+#include "dungeon_items.h"
+#include "dungeon_leader.h"
 #include "dungeon_map_access.h"
+#include "dungeon_message.h"
+#include "dungeon_misc.h"
+#include "dungeon_move.h"
 #include "dungeon_movement.h"
 #include "dungeon_music.h"
-#include "position_util.h"
-#include "dungeon_util.h"
-#include "items.h"
-#include "input.h"
-#include "text.h"
-#include "code_803E46C.h"
-#include "string_format.h"
-#include "friend_area.h"
-#include "dungeon_leader.h"
-#include "status_checks_1.h"
-#include "dungeon_ai_targeting.h"
-#include "dungeon_engine.h"
-#include "dungeon_move.h"
-#include "dungeon_items.h"
 #include "dungeon_random.h"
-#include "code_8077274_1.h"
-#include "code_8084778.h"
-#include "pokemon.h"
-#include "trap.h"
-#include "moves.h"
-#include "pokemon_3.h"
+#include "dungeon_util.h"
+#include "friend_area.h"
+#include "input.h"
+#include "items.h"
 #include "menu_input.h"
-#include "dungeon_capabilities.h"
-#include "constants/item.h"
-#include "constants/dungeon.h"
-#include "constants/move_id.h"
+#include "moves.h"
+#include "pokemon.h"
+#include "pokemon_3.h"
+#include "position_util.h"
+#include "status_checks_1.h"
+#include "string_format.h"
+#include "text.h"
+#include "trap.h"
 
 extern u8 *gUnknown_80F8BE0[];
 extern u8 *gUnknown_80FF76C[];
@@ -77,13 +81,10 @@ extern const u8 *const gMonParalyzed;
 extern const u8 *const gUnknown_80FC690;
 
 extern s32 gDungeonSubMenuItemsCount;
-extern u32 gUnknown_202F208;
 
 extern void sub_8071DA4(Entity *);
 extern void sub_806A1B0(Entity *);
-extern void sub_806A9B4(Entity *, u32);
 extern void sub_8057588(Entity * pokemon, u8 param_2);
-extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern bool8 sub_806A58C(s16 a0);
 extern bool8 sub_806A564(s16 r0);
 extern void sub_8045C08(u8 *buffer, Item *item);
@@ -91,8 +92,6 @@ extern bool8 sub_8045888(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8045BF8(u8 *, Item *);
 u8 sub_8048D50();
-void SetActionUnusableInDungeonSubMenu(u16 param_1);
-void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
 void sub_8044DF0();
 void sub_8042208(Entity *pokemon, u8 r1);
 void sub_803E708();
@@ -895,7 +894,6 @@ void sub_8067904(Entity *entity, u16 moveId)
 
 extern void sub_80684C4(void);
 void sub_8045064(void);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_8068344(void);
 bool8 CanSubMenuItemBeChosen(s32 param_1);
 void sub_8068310(s32 n, PokemonStruct1 **monPtrs);
@@ -907,7 +905,6 @@ void PlayDungeonConfirmationSE(void);
 void PlayDungeonCancelSE(void);
 void sub_806806C(PokemonStruct1 *a0);
 void CreateDungeonMenuSubWindow(WindowTemplates *a0, s32 a1);
-extern void sub_803EAF0(u32, u8 *);
 
 extern const s32 gUnknown_8106E80[];
 extern MenuInputStruct gDungeonMenu;

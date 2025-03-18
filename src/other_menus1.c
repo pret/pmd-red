@@ -209,7 +209,7 @@ void sub_80373C4(void)
 {
     sub_8005838(NULL, 0);
     sub_80060EC();
-    sub_800CB20();
+    WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();

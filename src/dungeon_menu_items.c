@@ -18,6 +18,7 @@
 #include "code_8045A00.h"
 #include "string_format.h"
 #include "code_803E46C.h"
+#include "code_803E724.h"
 #include "trap.h"
 #include "dungeon_map_access.h"
 #include "status_checks_1.h"
@@ -30,7 +31,6 @@
 #include "code_801B3C0.h"
 #include "dungeon_capabilities.h"
 
-extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A2BC(Entity *a0, u8 a1);
@@ -40,21 +40,16 @@ extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
-extern u8 sub_806A538(s32);
-extern void sub_803EAF0(u32, u8 *);
 extern void sub_803F508(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern s32 gDungeonSubMenuItemsCount;
 extern const u8 gUnknown_8106B50[];
 extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
-extern void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
-extern void SetActionUnusableInDungeonSubMenu(u16 param_1);
 extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
 extern void sub_8045064(void);
@@ -349,7 +344,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     // Hm...
                     int newAction = sUnknownActionUnk4.actionUseIndex - 0x90;
                     a0Info->action.actionParameters[0].actionUseIndex = newAction;
-                    sub_803EAF0(0, 0);
+                    sub_803EAF0(0, NULL);
                     inputAction = 0;
                     break;
                 }
@@ -357,7 +352,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     s32 teamId;
                     if (ShowDungeonToWhichMonMenu(&teamId, WHICH_MENU_ITEMS) != NULL) {
                         a0Info->action.actionParameters[1].actionUseIndex = teamId;
-                        sub_803EAF0(0, 0);
+                        sub_803EAF0(0, NULL);
                         inputAction = 0;
                         break;
                     }
@@ -365,7 +360,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     SetLeaderActionToNothing(1);
                 }
                 else {
-                    sub_803EAF0(0, 0);
+                    sub_803EAF0(0, NULL);
                     inputAction = 0;
                     break;
                 }

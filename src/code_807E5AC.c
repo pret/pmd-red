@@ -26,6 +26,7 @@
 #include "code_805D8C8.h"
 #include "code_803E668.h"
 #include "code_8045A00.h"
+#include "dungeon_items.h"
 #include "move_util.h"
 #include "moves.h"
 #include "code_80450F8.h"
@@ -33,12 +34,13 @@
 #include "constants/ability.h"
 #include "constants/monster.h"
 #include "constants/type.h"
+#include "dungeon_misc.h"
+#include "code_807E5AC.h"
 
-extern u8 gUnknown_203B40D;
 extern OpenedFile *gUnknown_202ECA0;
+extern SpriteOAM gUnknown_202EDC0;
 
 extern void sub_804178C(u32);
-extern bool8 RemoveItemFromDungeonAt(DungeonPos *, u32);
 extern void sub_80429D8(Entity *r0);
 extern s32 GetMonsterApparentID(Entity *pokemon, s32 id);
 extern void sub_803E874(bool8 r10, s32 r9);
@@ -46,7 +48,6 @@ extern void GetWeatherName(u8 *dst, u8 weatherId);
 extern s32 CalculateStatusTurns(Entity *target, const s16 *turnRange, bool8 factorCurerSkills);
 extern void sub_80838EC(u8 *a);
 extern bool8 sub_8044B28(void);
-extern void AddItemToDungeonAt(DungeonPos *, Item *, u32);
 
 void sub_807E7FC(bool8 arg0);
 void sub_807EFFC(bool8 arg0);
@@ -623,7 +624,6 @@ extern void sub_806A5B8(Entity *);
 extern bool8 sub_8045888(Entity *ent);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_807D068(Entity *, DungeonPos *);
-extern void sub_80694C0(Entity *target,s32 x,int y,char param_4);
 
 void sub_807F9BC(Entity *entity);
 
@@ -871,8 +871,6 @@ void sub_807FA18(void)
         }
     }
 }
-
-extern SpriteOAM gUnknown_202EDC0;
 
 void sub_807FA9C(void)
 {

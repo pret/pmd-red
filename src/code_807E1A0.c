@@ -1,5 +1,5 @@
 #include "global.h"
-
+#include "dungeon_misc.h"
 #include "code_804267C.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
@@ -18,10 +18,8 @@ extern u8 UseAttack(Entity *);
 extern void sub_805E804(void);
 void sub_806A2BC(Entity *pokemon, u8 param_2);
 extern u8 sub_8044B28(void);
-extern void sub_8068FE0(Entity *, u32, Entity *r2);
 extern void nullsub_93(DungeonPos *);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
-extern void sub_80694C0(Entity *, s32, s32, u32);
 extern void sub_807EC28(bool8);
 extern void sub_806A5B8(Entity *);
 

@@ -1,5 +1,5 @@
-#include "debug.h"
 #include "global.h"
+#include "debug.h"
 #include "event_flag.h"
 #include "ground_map_1.h"
 #include "ground_script.h"

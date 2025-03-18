@@ -1,9 +1,11 @@
 #include "global.h"
-#include "file_system.h"
-#include "event_flag.h"
+#include "code_800558C.h"
 #include "code_80A26CC.h"
+#include "def_filearchives.h"
+#include "event_flag.h"
+#include "file_system.h"
+#include "text.h"
 
-extern struct FileArchive gSystemFileArchive;
 extern const u8 gUnknown_811601C[];
 extern u8 gUnknown_20398B8;
 
@@ -60,7 +62,6 @@ void sub_80993E4(void) {
     file or spend time decomping so here it is in
     asm();
 */
-void sub_8099648(void);
 
 NAKED
 UNUSED static void sub_80993F0(void)
@@ -286,7 +287,7 @@ UNUSED static void sub_80993F0(void)
 "	bl sub_8099BE4\n"
 "	bl sub_8099744\n"
 "	bl sub_8011860\n"
-"	bl sub_800CB20\n"
+"	bl WaitForNextFrameAndAdvanceRNG\n"
 "	bl LoadBufferedInputs\n"
 "	bl nullsub_120\n"
 "	bl sub_80A5E70\n"
@@ -327,17 +328,18 @@ UNUSED static void sub_80993F0(void)
 
 void sub_809965C(void);
 
-void sub_8099648(void) {
+void sub_8099648(void)
+{
     sub_8003600();
     sub_809965C();
 }
 
-void nullsub_103(void) {
-    return;
+void nullsub_103(void)
+{
 }
 
-void sub_809965C(void) {
-
+void sub_809965C(void)
+{
     OpenedFile *temp;
     sub_8099690(0);
 
@@ -347,4 +349,3 @@ void sub_809965C(void) {
     sub_800388C(0x1f0, temp->data, 0x10);
     CloseFile(temp);
 }
-

@@ -1,11 +1,12 @@
 #include "global.h"
 #include "constants/dungeon_action.h"
+#include "structs/str_item_text.h"
+#include "code_8044CC8.h"
+#include "dungeon_generation.h"
+#include "dungeon_items.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
-#include "dungeon_generation.h"
-#include "code_8044CC8.h"
 #include "items.h"
-#include "structs/str_item_text.h"
 
 // size: 0x8
 typedef struct unkStr_80F7C54
@@ -25,8 +26,6 @@ extern const unkStr_80F7C54 gUnknown_80F7C54[65];
 extern u8 *gUnknown_80F91EC[];
 extern bool8 sub_8045888(Entity *);
 extern u8 GetFloorType(void);
-void AddItemToDungeonAt(DungeonPos *, Item *, u32);
-bool8 RemoveItemFromDungeonAt(DungeonPos *, u32);
 
 Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3)
 {

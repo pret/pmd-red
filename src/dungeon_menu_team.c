@@ -17,10 +17,12 @@
 #include "moves.h"
 #include "items.h"
 #include "dungeon_music.h"
+#include "dungeon_misc.h"
 #include "dungeon_ai_movement.h"
 #include "code_8045A00.h"
 #include "string_format.h"
 #include "code_803E46C.h"
+#include "code_803E724.h"
 #include "code_801602C.h"
 #include "code_800D090.h"
 #include "dungeon_map_access.h"
@@ -50,10 +52,8 @@ extern bool8 sub_8048A68(Entity *param_1,Item *item);
 extern bool8 sub_8048950(Entity *param_1,Item *item);
 extern bool8 sub_8048B9C(Entity *param_1,Item *item);
 extern Item *sub_8044D90(Entity *, s32, u32);
-extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern void sub_806A6E8(Entity *);
 extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 bool8 sub_807EF48(void);
@@ -98,8 +98,6 @@ extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
-extern u8 sub_806A538(s32);
-extern void sub_803EAF0(u32, u8 *);
 extern void sub_803F508(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
@@ -110,8 +108,6 @@ extern s32 gDungeonSubMenuItemsCount;
 extern const u8 gUnknown_8106B50[];
 extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
-extern void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
-extern void SetActionUnusableInDungeonSubMenu(u16 param_1);
 extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
 extern void sub_8045064(void);
@@ -123,7 +119,6 @@ extern u32 sub_8014140(s32 a0, const void *a1);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
 extern void sub_8045C18(u8 *buffer, Item *item);
-extern bool32 sub_8069D18(DungeonPos *a0, Entity *a1);
 
 extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
@@ -1557,7 +1552,7 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
     DungeonRunFrameActions(0x1B);
     sub_804AA60();
     sub_806A2BC(GetLeader(), 0);
-    sub_803EAF0(0, 0);
+    sub_803EAF0(0, NULL);
     sub_803E708(4, 0x3E);
     if (bPress) {
         return NULL;

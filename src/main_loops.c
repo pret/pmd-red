@@ -19,6 +19,7 @@
 #include "code_80A26CC.h"
 #include "cpu.h"
 #include "debug.h"
+#include "def_filearchives.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
@@ -48,7 +49,6 @@ typedef struct unkTalkTable
     s16 species;
 } unkTalkTable;
 
-extern u16 gUnknown_2026E4E;
 static EWRAM_DATA s32 sTitleBrightness = 0; // NDS=210FAC0
 // TODO: I think there's a 2nd s32 here for the bottom screen TitleBrightness.
 
@@ -69,10 +69,10 @@ static void NDS_LoadOverlay_GroundMain();
 static u32 sub_80009D0(u32 param_1);
 /* static */ // TODO: Uncomment
 void sub_80011E8(u8 *param_1);
-static void xxx_dungeon_8001340(UnkStruct_RunDungeon *r0);
+static void LoadAndRunDungeon_Async(UnkStruct_RunDungeon *r0);
 /* static */ // TODO: Uncomment
 u32 xxx_script_related_8001334(u32 r0);
-static void xxx_update_stuff(u32 r0);
+static void MainLoops_RunFrameActions(u32 unused);
 
 extern u32 xxx_script_related_8098468(u32);
 
@@ -143,13 +143,13 @@ void GameLoop(void)
                 SetBGPaletteBufferColorRGB(i, &((RGB*)sTitlePaletteFile->data)[i], sTitleBrightness, NULL);
             }
 
-            xxx_update_stuff(0);
+            MainLoops_RunFrameActions(0);
         }
 
         if (tmp3) {
             PrepareSavePakRead();
             while ((tmp3 = ReadSavePak()))
-                xxx_update_stuff(0);
+                MainLoops_RunFrameActions(0);
             FinishReadSavePak();
         }
 
@@ -171,13 +171,13 @@ void GameLoop(void)
                 }
 
                 if (!flag) {
-                    xxx_update_stuff(0);
+                    MainLoops_RunFrameActions(0);
                     continue;
                 }
             }
 
             SetUpMenu();
-            xxx_update_stuff(0);
+            MainLoops_RunFrameActions(0);
             nextMenu = UpdateMenu();
             CleanUpMenu();
 
@@ -200,7 +200,7 @@ void GameLoop(void)
                 SetBGPaletteBufferColorRGB(i, &((RGB*)sTitlePaletteFile->data)[i], sTitleBrightness, NULL);
             }
 
-            xxx_update_stuff(0);
+            MainLoops_RunFrameActions(0);
         }
 
         CloseFile(sTitlePaletteFile);
@@ -233,7 +233,7 @@ void GameLoop(void)
 }
 
 // arm9.bin::0200E02C
-static void xxx_update_stuff(u32 r0)
+static void MainLoops_RunFrameActions(u32 unused)
 {
     DrawDialogueBoxString();
     sub_8005838(NULL, 0);
@@ -241,7 +241,7 @@ static void xxx_update_stuff(u32 r0)
     sub_8005180();
     sub_80060EC();
     sub_8011860();
-    sub_800CB20();
+    WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
     CopySpritesToOam();
     sub_8005304();
@@ -375,7 +375,7 @@ s32 sub_8000728(void)
 
 // arm9.bin::0200DB58
 /* static */ // TODO: uncomment
-void QuickSave(u32 mode)
+void QuickSave_Async(u32 mode)
 {
     s32 saveStatus;
     s32 counter;
@@ -401,13 +401,13 @@ void QuickSave(u32 mode)
     CreateDialogueBoxAndPortrait(sSaveTextQuicksaving, 0, 0, 0x20);
 
     while (TRUE) {
-        xxx_update_stuff(0);
+        MainLoops_RunFrameActions(0);
 
         if (saveStatus < SAVE_COMPLETED) {
             sub_8014490();
-            xxx_update_stuff(0);
+            MainLoops_RunFrameActions(0);
             ShowWindows(NULL, TRUE, TRUE);
-            xxx_update_stuff(0);
+            MainLoops_RunFrameActions(0);
             break;
         }
 
@@ -489,7 +489,7 @@ void QuickSave(u32 mode)
 
 // arm9.bin::0200D998
 /*static*/ // TODO: Uncomment
-void sub_80008C0(u32 errorKind)
+void sub_80008C0_Async(u32 errorKind)
 {
     s32 saveStatus = SAVE_COMPLETED;
     s32 counter = 0;
@@ -533,7 +533,7 @@ void sub_80008C0(u32 errorKind)
     }
 
     while (TRUE) {
-        xxx_update_stuff(0);
+        MainLoops_RunFrameActions(0);
 
         if (saveStatus < 0)
             break;
@@ -567,9 +567,9 @@ void sub_80008C0(u32 errorKind)
     }
 
     sub_8014490();
-    xxx_update_stuff(0);
+    MainLoops_RunFrameActions(0);
     ShowWindows(NULL ,TRUE, TRUE);
-    xxx_update_stuff(0);
+    MainLoops_RunFrameActions(0);
 }
 
 // https://decomp.me/scratch/dlKUt (66.34%)
@@ -613,7 +613,7 @@ static u32 sub_80009D0(u32 param_1)
 "	bl SetScriptVarValue\n"
 "	bl sub_8096BD0\n"
 "	movs r0, 0x3\n"
-"	bl QuickSave\n"
+"	bl QuickSave_Async\n"
 "	b _08000A3A\n"
 "_08000A24:\n"
 "	movs r3, 0x1\n"
@@ -656,7 +656,7 @@ static u32 sub_80009D0(u32 param_1)
 "	mov r1, sp\n"
 "	strb r0, [r1, 0x5]\n"
 "	mov r0, sp\n"
-"	bl ShowFriendAreasMap\n"
+"	bl ShowFriendAreasMap_Async\n"
 "	ldr r0, [sp, 0x8]\n"
 "	bl MemoryFree\n"
 "	mov r0, sp\n"
@@ -764,7 +764,7 @@ static u32 sub_80009D0(u32 param_1)
 "	add r4, sp, 0x168\n"
 "	str r0, [r4]\n"
 "	adds r0, r5, 0\n"
-"	bl ShowWorldMap\n"
+"	bl ShowWorldMap_Async\n"
 "	ldr r0, [r4]\n"
 "	bl MemoryFree\n"
 "	add r0, sp, 0x16C\n"
@@ -1037,7 +1037,7 @@ static u32 sub_80009D0(u32 param_1)
 "	movs r7, 0xB\n"
 "	bl sub_8096BD0\n"
 "	movs r0, 0x1\n"
-"	bl sub_80008C0\n"
+"	bl sub_80008C0_Async\n"
 "	b _08000D98\n"
 "_08000D8E:\n"
 "	cmp r5, 0x1\n"
@@ -1099,7 +1099,7 @@ static u32 sub_80009D0(u32 param_1)
 "	cmp r6, 0x3F\n"
 "	bne _08000E0C\n"
 "	movs r0, 0\n"
-"	bl QuickSave\n"
+"	bl QuickSave_Async\n"
 "	b _08000E1E\n"
 "_08000E0C:\n"
 "	adds r0, r6, 0\n"
@@ -1108,7 +1108,7 @@ static u32 sub_80009D0(u32 param_1)
 "	cmp r0, 0\n"
 "	bne _08000E1E\n"
 "	movs r0, 0\n"
-"	bl QuickSave\n"
+"	bl QuickSave_Async\n"
 "_08000E1E:\n"
 "	ldr r0, _08000E70\n"
 "	movs r4, 0x1\n"
@@ -1120,7 +1120,7 @@ static u32 sub_80009D0(u32 param_1)
 "	add r0, sp, 0x174\n"
 "	bl sub_80011E8\n"
 "	adds r0, r5, 0\n"
-"	bl SaveLoadRelated_8000EDC\n"
+"	bl LoadAndRunQuickSaveDungeon_Async\n"
 "	add r4, sp, 0x1EC\n"
 "	movs r0, 0\n"
 "	ldrsh r1, [r4, r0]\n"
@@ -1201,8 +1201,11 @@ static u32 sub_80009D0(u32 param_1)
 "	bx r1");
 }
 
+// This func is probably used for running the dungeon in general (and updating RNG mechanics), not just quicksave.
+// More documentation needed to be sure
+// It'd also be cool to see what happens if a quicksave load fails and the dungeon is skipped entirely
 /* static */ // TODO: Uncomment
-void SaveLoadRelated_8000EDC(UnkStruct_RunDungeon *param_1)
+void LoadAndRunQuickSaveDungeon_Async(UnkStruct_RunDungeon *param_1)
 {
     u8 quickSaveValid;
     s32 quickSaveStatus;
@@ -1216,7 +1219,7 @@ void SaveLoadRelated_8000EDC(UnkStruct_RunDungeon *param_1)
     sub_8014144();
     sub_8043D50(&local_1c, &local_18);
 
-    param_1->unk74 =  MemoryAlloc(local_1c, 7); // size: 0x4800
+    param_1->unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
     param_1->unk78 = MemoryAlloc(local_18, 7); // size: sizeof(Dungeon)
 
     if (param_1->unk8) {
@@ -1225,7 +1228,7 @@ void SaveLoadRelated_8000EDC(UnkStruct_RunDungeon *param_1)
         while (TRUE) {
             if (!ReadQuickSave())
                 break;
-            xxx_update_stuff(0);
+            MainLoops_RunFrameActions(0);
         }
 
         quickSaveValid = IsQuickSaveValid();
@@ -1246,7 +1249,7 @@ void SaveLoadRelated_8000EDC(UnkStruct_RunDungeon *param_1)
     }
 
     if (quickSaveValid) {
-        xxx_dungeon_8001340(param_1);
+        LoadAndRunDungeon_Async(param_1);
         sub_8099648();
         SetWindowBGColor();
         sub_8099690(0);
@@ -1274,7 +1277,7 @@ void SaveLoadRelated_8000EDC(UnkStruct_RunDungeon *param_1)
                 MemoryFree(param_1->unk74);
             }
 
-            xxx_update_stuff(0);
+            MainLoops_RunFrameActions(0);
         }
         FinishQuickSaveWrite();
     }
@@ -1436,6 +1439,7 @@ static void NDS_LoadOverlay_GroundMain()
 static void nullsub_2(UnkStruct_RunDungeon *r0)
 {
     // (not a nullsub in the NDS)
+    // Probably loads the dungeon overlay?
 }
 
 // arm9.bin::0200CAD0
@@ -1446,10 +1450,10 @@ u32 xxx_script_related_8001334(u32 r0)
 }
 
 // arm9.bin::0200CA1C
-static void xxx_dungeon_8001340(UnkStruct_RunDungeon *r0)
+static void LoadAndRunDungeon_Async(UnkStruct_RunDungeon *r0)
 {
     nullsub_2(r0);
-    RunDungeon(r0);
+    RunDungeon_Async(r0);
     NDS_LoadOverlay_GroundMain();
 }
 

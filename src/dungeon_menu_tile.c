@@ -1,5 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_803E46C.h"
+#include "code_803E724.h"
 #include "dungeon_menu_tile.h"
 #include "dungeon_menu_team.h"
 #include "dungeon_menu_moves.h"
@@ -15,16 +17,12 @@
 #include "code_8045A00.h"
 #include "trap.h"
 #include "code_8097DD0.h"
+#include "dungeon_music.h"
 
-extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
-extern void PlayDungeonCursorSE(u8 param_1);
-extern void sub_803EAF0(u32, u8 *);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void DungeonRunFrameActions(u32 a0);
 extern void DungeonShowWindows(WindowTemplates *a0, bool8 a1);
-extern void AddActionToDungeonSubMenu(u16 actionId, u8 param_2);
 extern void sub_8045064(void);
 
 extern MenuInputStruct gDungeonMenu;
@@ -115,7 +113,7 @@ void ShowDungeonTileMenu(Entity *mon)
             break;
     }
 
-    sub_803EAF0(0, 0);
+    sub_803EAF0(0, NULL);
 }
 
 static void ShowAndPrintOnTileMenu(DungeonPos *pos, WindowTemplates *windows, WindowHeader *header)
@@ -237,5 +235,5 @@ static void ShowTileDescription(DungeonPos *pos)
         }
     }
 
-    sub_803EAF0(0, 0);
+    sub_803EAF0(0, NULL);
 }

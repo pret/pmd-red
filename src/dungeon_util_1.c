@@ -1,6 +1,6 @@
 #include "global.h"
 #include "dungeon_util_1.h"
-
+#include "dungeon_misc.h"
 #include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_80450F8.h"
@@ -21,10 +21,6 @@ extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F4A0(u32);
 extern void sub_803F878(s32, s32);
-
-extern void sub_8068FE0(Entity *, u32, Entity*);
-extern void sub_80694C0(Entity *, s32, s32, u32);
-
 
 Entity *xxx_call_GetLeader(void)
 {

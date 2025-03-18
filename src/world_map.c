@@ -1,41 +1,31 @@
 #include "global.h"
 #include "globaldata.h"
-#include "world_map.h"
-#include "sprite.h"
-#include "code_8004AA0.h"
-#include "input.h"
-#include "text.h"
-#include "code_8009804.h"
-#include "bg_palette_buffer.h"
-#include "string_format.h"
-#include "code_800D090.h"
-#include "friend_area.h"
 #include "bg_control.h"
+#include "bg_palette_buffer.h"
+#include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_80118A4.h"
+#include "code_8009804.h"
 #include "code_800C9CC.h"
+#include "code_800D090.h"
+#include "code_80118A4.h"
+#include "decompress.h"
+#include "def_filearchives.h"
+#include "dungeon.h"
+#include "friend_area.h"
 #include "game_options.h"
+#include "input.h"
+#include "math.h"
 #include "play_time.h"
 #include "pokemon.h"
-#include "decompress.h"
+#include "sprite.h"
+#include "string_format.h"
+#include "text.h"
+#include "world_map.h"
 
-extern const FileArchive gTitleMenuFileArchive;
-
-extern u16 gUnknown_2026E4E;
-
-extern u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_);
 extern void sub_801178C(void);
 extern void sub_80117C4(void);
-extern void PlayCancelSoundEffect(void);
-extern void PlayAcceptSoundEffect(void);
-extern void PlayCursorUpDownSoundEffect(void);
-extern s32 sprintf(char *, const char *, ...);
-extern void sub_800CB20(void);
-extern void xxx_call_update_bg_sound_input(void);
+extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void CopyDungeonName1toBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
-extern s32 Atan2_4096(PixelPos *a);
-extern void sub_80117AC(void);
-extern void sub_8011760(void);
 
 static EWRAM_INIT struct WorldMap *sWorldMapPtr = NULL;
 static EWRAM_INIT WindowTemplates sWorldMapWindows = {
@@ -63,21 +53,21 @@ static void ClearWindows(void);
 static void AnimateSprites(bool8 a0);
 static bool8 FadeScreen(void);
 static void nullsub_24(void);
-static void RunFrameActions(void);
+static void WorldMap_RunFrameActions(void);
 static void UpdateMonSpritePosition(void);
 static void UpdateBg(void);
 static void sub_8010494(struct UnkStruct_sub_8010494 *r9);
-static void AnimateMonPath(u8 id1, u8 id2);
+static void AnimateMonPath_Async(u8 id1, u8 id2);
 static void sub_801059C(void);
-static bool8 ShowYesNoWindow(u8 *str);
-static void PrintDialogueMessage(const u8 *text);
-static void FadeFromWorldMap(void);
+static bool8 PlayerEnterDungeonPrompt_Async(u8 *str);
+static void PrintDialogueMessage_Async(const u8 *text);
+static void FadeFromWorldMap_Async(void);
 static void CloseFiles(void);
 static void PrintDungeonName(DungeonLocation *dungLocation);
 
 // Code is very similar to the functions in friend_areas_map_util.c
 
-void ShowWorldMap(struct UnkStruct_sub_8010268 *r5)
+void ShowWorldMap_Async(struct UnkStruct_sub_8010268 *r5)
 {
     s32 i, speciesId, var;
     u8 text[1000];
@@ -89,14 +79,17 @@ void ShowWorldMap(struct UnkStruct_sub_8010268 *r5)
     sub_801059C();
     sub_8010494(&r5->unk4);
     sub_801178C();
-    for (i = 0; i < 60; i++) {
-        RunFrameActions();
-    }
-    AnimateMonPath(r5->unk4.unk0.id, r5->unk4.unk4.id);
+
+    // 60 frame delay
+    for (i = 0; i < 60; i++)
+        WorldMap_RunFrameActions();
+
+    AnimateMonPath_Async(r5->unk4.unk0.id, r5->unk4.unk4.id);
     PrintDungeonName(&r5->unk4.unk4);
-    for (i = 0; i < 60; i++) {
-        RunFrameActions();
-    }
+
+    // 60 frame delay
+    for (i = 0; i < 60; i++)
+        WorldMap_RunFrameActions();
 
     if (r5->unk4.unk10) {
         speciesId = r5->unk4.unk1C;
@@ -111,11 +104,11 @@ void ShowWorldMap(struct UnkStruct_sub_8010268 *r5)
         r5->unkB4 = 1;
     }
     else if (var == 1) {
-        PrintDialogueMessage(text);
+        PrintDialogueMessage_Async(text);
         r5->unkB4 = 0;
     }
     else if (var == 2) {
-        if (ShowYesNoWindow(text)) {
+        if (PlayerEnterDungeonPrompt_Async(text)) {
             r5->unkB4 = 1;
         }
         else {
@@ -123,7 +116,7 @@ void ShowWorldMap(struct UnkStruct_sub_8010268 *r5)
         }
     }
 
-    FadeFromWorldMap();
+    FadeFromWorldMap_Async();
     CloseFiles();
     nullsub_16();
 }
@@ -197,7 +190,7 @@ static const DungeonPos gDungeonCoordinates[] =
 };
 
 // Heavy math function.
-static void AnimateMonPath(u8 id1, u8 id2)
+static void AnimateMonPath_Async(u8 id1, u8 id2)
 {
     s32 i, valMax, r3;
     PixelPos pixelPos;
@@ -222,7 +215,7 @@ static void AnimateMonPath(u8 id1, u8 id2)
         sWorldMapPtr->monSpritePos.y = ((((pos2.y - pos1.y) * (i << 8)) / valMax) / 256) + pos1.y;
         UpdateMonSpritePosition();
         UpdateBg();
-        RunFrameActions();
+        WorldMap_RunFrameActions();
         if (gRealInputs.pressed & A_BUTTON)
             break;
         if (gRealInputs.pressed & B_BUTTON)
@@ -232,7 +225,7 @@ static void AnimateMonPath(u8 id1, u8 id2)
     sWorldMapPtr->monSpritePos = pos2;
     UpdateMonSpritePosition();
     UpdateBg();
-    RunFrameActions();
+    WorldMap_RunFrameActions();
 }
 
 static void sub_8010494(struct UnkStruct_sub_8010494 *r9)
@@ -273,7 +266,7 @@ static char *const gUnknown_80D4014[] =
     "wmp2mcc",
     "wmp2cani",
     "wmp2pal",
-    "wmp2fon1",
+    "wmp2fon1", // Maybe blue uses this?
 };
 
 static void sub_801059C(void)
@@ -385,7 +378,7 @@ static void nullsub_24(void)
 
 }
 
-static void FadeFromWorldMap(void)
+static void FadeFromWorldMap_Async(void)
 {
     s32 i;
 
@@ -393,7 +386,7 @@ static void FadeFromWorldMap(void)
     sub_80117C4();
     for (i = 0; i < 60; i++) {
         sWorldMapPtr->brightness -= 2;
-        RunFrameActions();
+        WorldMap_RunFrameActions();
     }
 }
 
@@ -402,7 +395,7 @@ static void ClearWindows(void)
     ShowWindows(NULL, TRUE, TRUE);
 }
 
-static void RunFrameActions(void)
+static void WorldMap_RunFrameActions(void)
 {
     SetBG2RegOffsets(sWorldMapPtr->bgPos.x, sWorldMapPtr->bgPos.y);
     SetBG3RegOffsets(sWorldMapPtr->bgPos.x, sWorldMapPtr->bgPos.y);
@@ -413,7 +406,7 @@ static void RunFrameActions(void)
     sub_8005180();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);
-    sub_800CB20();
+    WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
     CopySpritesToOam();
     sub_8005304();
@@ -512,42 +505,44 @@ static void PrintDungeonName(DungeonLocation *dungLocation)
     sub_80073E0(0);
 }
 
-static void PrintDialogueMessage(const u8 *text)
+static void PrintDialogueMessage_Async(const u8 *text)
 {
     s32 i, a;
+
     CreateMenuDialogueBoxAndPortrait(text, NULL, 0, NULL, NULL, 3, 0, NULL, 0x301);
+
     do {
         DrawDialogueBoxString();
-        RunFrameActions();
+        WorldMap_RunFrameActions();
     } while (sub_80144A4(&a) != 0);
 
-    for (i = 0; i < 10; i++) {
-        RunFrameActions();
-    }
+    for (i = 0; i < 10; i++)
+        WorldMap_RunFrameActions();
 }
 
-static bool8 ShowYesNoWindow(u8 *str)
+static bool8 PlayerEnterDungeonPrompt_Async(u8 *str)
 {
-    s32 r2, i;
+    s32 height, i;
     MenuInputStruct menuInput;
 
-    r2 = 0;
+    height = 0;
     for (i = 0; str[i] != '\0'; i++) {
-        if (str[i] == '\n') {
-            r2 += 12;
-        }
+        if (str[i] == '\n')
+            height += 12;
     }
-    r2 += 11;
-    r2 /= 8;
+    height += 11;
+    height /= 8;
 
-    sWorldMapWindows.id[0].pos.y = 19 - r2;
-    sWorldMapWindows.id[0].unk10 = r2;
-    sWorldMapWindows.id[0].height = r2;
-    sWorldMapWindows.id[1].pos.y = 14 - r2;
+    sWorldMapWindows.id[0].pos.y = 19 - height;
+    sWorldMapWindows.id[0].unk10 = height;
+    sWorldMapWindows.id[0].height = height;
+    sWorldMapWindows.id[1].pos.y = 14 - height;
     ShowWindows(&sWorldMapWindows, TRUE, TRUE);
+
     sub_80073B8(0);
     PrintFormattedStringOnWindow(4, 0, str, 0, '\0');
     sub_80073E0(0);
+
     sub_80073B8(1);
     PrintFormattedStringOnWindow(10, 0, "Yes", 1, '\0');
     PrintFormattedStringOnWindow(10, 12, "No", 1, '\0');
@@ -569,9 +564,11 @@ static bool8 ShowYesNoWindow(u8 *str)
     menuInput.unk8.y = 8;
     sub_80137B0(&menuInput, 24);
     sub_801317C(&menuInput.unk28);
-    while (1) {
+
+    while (TRUE) {
         AddMenuCursorSprite(&menuInput);
-        RunFrameActions();
+        WorldMap_RunFrameActions();
+
         if (gRealInputs.repeated & DPAD_DOWN) {
             MoveMenuCursorDown(&menuInput);
             PlayCursorUpDownSoundEffect();
@@ -586,12 +583,9 @@ static bool8 ShowYesNoWindow(u8 *str)
         }
     }
 
-    if (menuInput.menuIndex == 0) {
-        return TRUE;
-    }
-    else {
-        return FALSE;
-    }
+    if (menuInput.menuIndex == 0)
+        return TRUE; // Yes
+    return FALSE;
 }
 
 static UNUSED void GetDungeonCoords(u8 id, DungeonPos *pos)
@@ -599,4 +593,3 @@ static UNUSED void GetDungeonCoords(u8 id, DungeonPos *pos)
     pos->x = gDungeonCoordinates[id].x;
     pos->y = gDungeonCoordinates[id].y;
 }
-

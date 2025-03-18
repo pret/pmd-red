@@ -2,6 +2,7 @@
 #include "tile_types.h"
 #include "code_806CD90.h"
 #include "structs/str_dungeon.h"
+#include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 
@@ -84,7 +85,6 @@ const u8 gDungeonWaterType[76] = {
     DUNGEON_WATER_TYPE_NONE,
 };
 
-extern void ShowDungeonMapAtPos(s32, s32);
 extern void sub_8049BB0(s32, s32);
 void sub_8042A14(DungeonPos *);
 

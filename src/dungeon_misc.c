@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_misc.h"
+#include "dungeon_music.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
@@ -45,17 +46,16 @@
 #include "position_util.h"
 #include "dungeon_ai_movement.h"
 #include "code_803E46C.h"
+#include "def_filearchives.h"
+#include "code_803D110.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
-extern s32 sprintf(char *, const char *, ...);
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1);
 extern void DeletePokemonDungeonSprite(s32 id);
-extern void sub_803E178(void);
 extern void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
-extern void sub_8083AB0(s16 param_0, Entity * target, Entity * entity);
 extern bool8 sub_806A58C(s16 r0);
 extern void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
 extern void sub_8078084(Entity * pokemon);
@@ -88,8 +88,6 @@ extern s32 sub_803DA20(s32 param_1);
 extern s32 gDungeonFramesCounter;
 extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
 extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
-extern u32 EntityGetStatusSprites(Entity *entity);
-extern void UpdateDungeonPokemonSprite(int id, short species, int status, char visible);
 extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
@@ -98,8 +96,6 @@ extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
-extern int sprintf(char *, const char *, ...);
-extern const struct FileArchive gDungeonFileArchive;
 
 extern u8 *gUnknown_80FE168[];
 extern u8 *gUnknown_80FE134[];
@@ -134,7 +130,6 @@ extern DungeonPos gPlayerDotMapPosition;
 extern DungeonPos gUnknown_202EE0C;
 extern u8 gUnknown_202F32C;
 
-bool8 sub_806A538(s16 r0);
 bool8 sub_806A564(s16 r0);
 static bool8 sub_806A5A4(s16 r0);
 
@@ -704,7 +699,7 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
     sub_8045ACC();
 }
 
-void sub_80694C0(Entity *target,s32 x,int y,char param_4)
+void sub_80694C0(Entity *target,s32 x,s32 y,u8 param_4)
 {
     Tile *tile;
     Tile *tile2;
@@ -1070,14 +1065,14 @@ void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target)
     return;
 }
 
-u32 sub_8069D18(DungeonPos *pos,Entity *entity)
+bool8 sub_8069D18(DungeonPos *pos,Entity *entity)
 {
     EntityInfo *info;
 
     info = GetEntInfo(entity);
 
-    pos->x = (entity->pos).x + gAdjacentTileOffsets[(info->action).direction].x;
-    pos->y = (entity->pos).y + gAdjacentTileOffsets[(info->action).direction].y;
+    pos->x = entity->pos.x + gAdjacentTileOffsets[info->action.direction].x;
+    pos->y = entity->pos.y + gAdjacentTileOffsets[info->action.direction].y;
     return info->action.direction & 1;
 }
 

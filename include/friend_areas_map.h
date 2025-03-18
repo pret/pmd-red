@@ -1,12 +1,10 @@
 #ifndef GUARD_FRIEND_AREAS_MAP_H
 #define GUARD_FRIEND_AREAS_MAP_H
 
-#include "file_system.h"
-#include "code_8004AA0.h"
-#include "menu_input.h"
-#include "structs/axdata.h"
-#include "structs/str_position.h"
 #include "constants/direction.h"
+#include "structs/menu.h"
+#include "structs/axdata.h"
+#include "code_8004AA0.h"
 
 #define MAX_AREAS_PER_LOCATION 8
 
@@ -104,18 +102,8 @@ struct struct_unk800F990
     u8 unkC;
 };
 
-void ShowFriendAreasMap(struct struct_unk800F990 *param_1);
+void ShowFriendAreasMap_Async(struct struct_unk800F990 *param_1);
 void PrintFriendAreaNameInMap(u8 *strBuffer, u8 index);
 bool8 IsFriendAreaShownOnMap(u8 friendAreaId);
 
-void FriendAreasMap_UpdateMonSpritePosition(void);
-void FriendAreasMap_UpdateBg(void);
-void FriendAreasMap_HideTextWindowAndArrows(void);
-void FriendAreasMap_RunFrameActions(void);
-void FriendAreasMap_ShowDirectionArrows(void);
-void FriendAreasMap_PrintCurrAreaName(void);
-void FriendAreasMap_PrintAvailableSubAreas(void);
-void FriendAreasMap_CloseFiles(void);
-void FriendAreasMap_InitGfx(void);
-
-#endif
+#endif // GUARD_FRIEND_AREAS_MAP_H

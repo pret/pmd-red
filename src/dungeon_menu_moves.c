@@ -17,6 +17,7 @@
 #include "code_8045A00.h"
 #include "string_format.h"
 #include "code_803E46C.h"
+#include "code_803E724.h"
 #include "status_checks_1.h"
 #include "dungeon_leader.h"
 #include "tile_types.h"
@@ -28,17 +29,12 @@
 #include "code_8044CC8.h"
 #include "move_util.h"
 
-extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern void sub_8045064(void);
-extern void sub_803EAF0(u32, u8 *);
 extern void sub_803E708(s32 a0, s32 a1);
-extern void AddActionToDungeonSubMenu(u16 param_1, u8 param_2);
-extern void SetActionUnusableInDungeonSubMenu(u16 param_1);
 extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 extern s32 GetTeamMemberEntityIndex(Entity *pokemon);
 extern void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
@@ -712,7 +708,7 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
         }
     }
 
-    sub_803EAF0(0, 0);
+    sub_803EAF0(0, NULL);
 }
 
 static const WindowHeader sStatusDescriptionHeader = {
@@ -1005,7 +1001,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
             sChosenMoveSlotId = gDungeonMenu.menuIndex;
 
             if (inputAction == 2) {
-                sub_803EAF0(0, 0);
+                sub_803EAF0(0, NULL);
                 sub_803E708(8, 0x1B);
                 ASM_MATCH_TRICK(sChosenMoveSlotId);
                 ShowMovesInfoWindow(moves, sChosenMoveSlotId, MAX_MON_MOVES);
@@ -1050,7 +1046,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
 
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x1b);
-            sub_803EAF0(0, 0);
+            sub_803EAF0(0, NULL);
             if (inputAction == 1)
                 continue;
             if (gDungeonMenu.menuIndex == 1) {

@@ -155,7 +155,6 @@ s32 GetScriptVarValue(u8 *localVarBuf, s32 varId);
 s32 GetScriptVarArrayValue(u8 *localVarBuf, s32 varId, s32 idx);
 void SetScriptVarValue(u8 *localVarBuf, s32 varId, s32 val);
 void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId, s32 idx, s32 val);
-u32 sub_809034C(s32 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_);
 unkStruct_203B480 * GetMailatIndex(u8 index);
 u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s32 param_2);
 

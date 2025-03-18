@@ -13,6 +13,7 @@
 #include "dungeon_generation.h"
 #include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"
+#include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "math.h"
@@ -24,6 +25,8 @@
 #include "code_803E668.h"
 #include "weather.h"
 #include "dungeon_config.h"
+#include "dungeon_misc.h"
+#include "dungeon_items.h"
 
 extern u32 gDungeonFramesCounter;
 
@@ -53,7 +56,6 @@ extern struct DungeonPos *gUnknown_8107178[3];
 
 extern void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s32 param_4,s32 param_5); // TODO: param_4 should be s16
 extern void sub_804216C(Entity *pokemon, Entity *target, u32 r2);
-extern void RemoveItemFromDungeonAt(DungeonPos *, u32);
 extern void sub_804218C(Entity *pokemon, Entity *target);
 
 EWRAM_INIT u32 gUnknown_203B444[3] = {0x28, 0x28, 0x50};
@@ -65,7 +67,6 @@ void sub_8049ED4();
 void sub_806A5B8(Entity *);
 u8 sub_8045888(Entity *);
 void sub_807EC28(u32);
-void sub_80694C0(Entity *, s32, s32, s32);
 void sub_807D068(Entity *, DungeonPos *);
 u8 sub_8044B28(void);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
@@ -74,9 +75,6 @@ void sub_807BB78(Entity *pokemon);
 extern void sub_803F580(u32);
 bool8 sub_808384C(DungeonPos *, DungeonPos *);
 u8 sub_8083660(DungeonPos *);
-void AddItemToDungeonAt(DungeonPos *, Item *, u32);
-void sub_80462AC(Entity * ,u32, u32, u8, u32);
-extern void ShowDungeonMapAtPos(s32, s32);
 
 void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
 {

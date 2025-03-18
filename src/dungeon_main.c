@@ -20,11 +20,13 @@
 #include "code_8045A00.h"
 #include "string_format.h"
 #include "code_803E46C.h"
+#include "code_803E724.h"
 #include "code_801602C.h"
 #include "code_800D090.h"
 #include "trap.h"
 #include "charge_move.h"
 #include "dungeon_map_access.h"
+#include "dungeon_misc.h"
 #include "status_checks_1.h"
 #include "game_options.h"
 #include "weather.h"
@@ -41,6 +43,7 @@
 #include "pokemon_3.h"
 #include "text.h"
 #include "code_806CD90.h"
+#include "code_8066D04.h"
 #include "code_8044CC8.h"
 #include "code_801B3C0.h"
 #include "dungeon_capabilities.h"
@@ -58,13 +61,11 @@
 #include "structs/struct_sub80095e4.h"
 #include "structs/str_text.h"
 
-extern void HandleSetItemAction(Entity *,bool8);
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern bool8 sub_8048A68(Entity *param_1,Item *item);
 extern bool8 sub_8048950(Entity *param_1,Item *item);
 extern bool8 sub_8048B9C(Entity *param_1,Item *item);
 extern Item *sub_8044D90(Entity *, s32, u32);
-extern void PlayDungeonStartButtonSE(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A6E8(Entity *);
@@ -95,13 +96,10 @@ extern bool8 sub_8071A8C(Entity *pokemon);
 extern void GetWeatherName(u8 *dst, u8 weatherId);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 extern Entity *sub_80696A8(Entity *a0);
-extern u8 sub_806A538(s32);
-extern void sub_803EAF0(u32, u8 *);
 extern void sub_803F508(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
-extern void PlayDungeonCursorSE(u8 param_1);
 extern const u8 *GetCurrentDungeonName(void);
 
 extern Entity *gLeaderPointer;
@@ -1637,10 +1635,10 @@ static void PrintOnMainMenu(bool8 printAll)
     }
 }
 
-bool8 DungeonGiveNameToRecruitedMon(u8 *a0)
+bool8 DungeonGiveNameToRecruitedMon(u8 *name)
 {
     s32 r4;
-    sub_803EAF0(8, a0);
+    sub_803EAF0(8, name);
     do
     {
         DungeonRunFrameActions(0xE);
@@ -1650,7 +1648,7 @@ bool8 DungeonGiveNameToRecruitedMon(u8 *a0)
     CleanConfirmNameMenu();
     DungeonRunFrameActions(0xE);
     sub_803EAF0(0, NULL);
-    if (r4 == 3 && *a0 != 0)
+    if (r4 == 3 && *name != '\0')
         return TRUE;
 
     return FALSE;

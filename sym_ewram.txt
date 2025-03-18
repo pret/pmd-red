@@ -67,11 +67,11 @@ gUnknown_202DCF8: /* 202DCF8 (sub_80001E8 - sub_800D9B8) */
     .include "src/rescue_password_menu.o"
 	.space 0x2
 
-gDungeonNameBannerPalette: /* 202EC88 (ShowDungeonNameBanner - xxx_dungeon_8042F6C) */
+gDungeonNameBannerPalette: /* 202EC88 (ShowDungeonNameBanner_Async - xxx_dungeon_8042F6C) */
 	.space 0x4
-gDungeonNameBannerFontFile: /* 202EC8C (ShowDungeonNameBanner - sub_803DEC8) */
+gDungeonNameBannerFontFile: /* 202EC8C (ShowDungeonNameBanner_Async - sub_803DEC8) */
 	.space 0x4
-gDungeonNameBannerFont: /* 202EC90 (ShowDungeonNameBanner - sub_803DEC8) */
+gDungeonNameBannerFont: /* 202EC90 (ShowDungeonNameBanner_Async - sub_803DEC8) */
 	.space 0x4
 
 gUnknown_202EC94: /* 202EC94 (sub_803DF60 - sub_803ECE0) */

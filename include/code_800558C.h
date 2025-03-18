@@ -1,9 +1,8 @@
 #ifndef GUARD_CODE_800558C_H
 #define GUARD_CODE_800558C_H
 
-#include "structs/rgb.h"
 #include "structs/axdata.h"
-#include "file_system.h"
+#include "structs/rgb.h"
 
 typedef struct Palette256
 {
@@ -22,6 +21,10 @@ struct EfoFileData
     /* 0x18 */ const RGB *pal;
     /* 0x1C */ s32 tileCount;
 };
+
+extern bool8 gUnknown_2026E38;
+extern u32 *gUnknown_2026E3C;
+extern s16 gUnknown_2026E4E;
 
 extern s16 *gUnknown_203B078;
 

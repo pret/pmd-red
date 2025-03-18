@@ -1,11 +1,10 @@
 #include "global.h"
-#include "memory.h"
+#include "code_800558C.h"
 #include "debug.h"
 #include "event_flag.h"
 #include "ground_map.h"
 #include "ground_map_2.h"
-
-extern u16 gUnknown_2026E4E;
+#include "memory.h"
 
 IWRAM_INIT unkStruct_3001B74 *gUnknown_3001B74 = {NULL};
 IWRAM_INIT unkStruct_3001B70 *gUnknown_3001B78 = {NULL};
