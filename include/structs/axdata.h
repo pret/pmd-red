@@ -38,7 +38,7 @@ typedef struct __attribute__((packed, aligned(2))) ax_pose_unk2
 typedef struct __attribute__((packed, aligned(2))) ax_pose
 {
     /* 0x0 */ s16 sprite;
-    /* 0x2 */ ax_pose_unk2 unk2; // Always {0, 0} in red (except for end markers which are {0xFF, 0xFF})
+    /* 0x2 */ ax_pose_unk2 unk2; // Always {0, 0} in red (except for end markers {0xFF, 0xFF} and Latios Pose189...)
     /* 0x4 */ u16 flags1;
     /* 0x6 */ u16 flags2;
     /* 0x8 */ u16 flags3;
