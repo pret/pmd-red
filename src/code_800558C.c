@@ -74,10 +74,10 @@ void sub_800569C(DungeonPos *a0, struct axObject *a1, u8 a2)
     if (!(a1->axdata.flags >> 15) || a2 >= 4)
         return;
 
-    if (a1->axdata.paletteData != NULL) {
-        ptr = &((DungeonPos*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
+    if (a1->axdata.positions != NULL) {
+        ptr = &(a1->axdata.positions)[a1->axdata.sub1.poseId * 4];
         ptr2 = &ptr[a2];
-        if (*&ptr2->x == 99 && *&ptr2->y == 99) {
+        if (*&ptr2->x == 99 && ptr2->y == 99) {
             a0->x = 99;
             a0->y = 99;
         }
@@ -96,21 +96,21 @@ void sub_800569C(DungeonPos *a0, struct axObject *a1, u8 a2)
 void sub_8005700(DungeonPos *a0, struct axObject *a1)
 {
     s32 i;
-    DungeonPos *ptr;
 
     if (!(a1->axdata.flags >> 15))
         return;
 
-    if (a1->axdata.paletteData != NULL) {
-        ptr = &((DungeonPos*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
+    if (a1->axdata.positions != NULL) {
+        DungeonPos *positions = &(a1->axdata.positions)[a1->axdata.sub1.poseId * 4];
         for (i = 0; i < 4; i++) {
-            if (*&ptr[i].x == 99 && *&ptr[i].y == 99) {
+            s32 x = positions[i].x;
+            if (x == 99 && positions[i].y == 99) {
                 a0->x = 99;
                 a0->y = 99;
             }
             else {
-                a0->x = a1->axdata.sub1.offset.x + ptr[i].x;
-                a0->y = a1->axdata.sub1.offset.y + ptr[i].y;
+                a0->x = a1->axdata.sub1.offset.x + positions[i].x;
+                a0->y = a1->axdata.sub1.offset.y + positions[i].y;
             }
             a0++;
         }

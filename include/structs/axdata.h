@@ -38,7 +38,7 @@ typedef struct __attribute__((packed, aligned(2))) ax_pose_unk2
 typedef struct __attribute__((packed, aligned(2))) ax_pose
 {
     /* 0x0 */ s16 sprite;
-    /* 0x2 */ ax_pose_unk2 unk2; // Always {0, 0} in red (except for end markers which are {0xFF, 0xFF})
+    /* 0x2 */ ax_pose_unk2 unk2; // Always {0, 0} in red (except for end markers {0xFF, 0xFF} and Latios Pose189...)
     /* 0x4 */ u16 flags1;
     /* 0x6 */ u16 flags2;
     /* 0x8 */ u16 flags3;
@@ -64,7 +64,7 @@ typedef struct axdata
     /* 0x8 */ axdata1 sub1;
     /* 0x28 */ ax_anim *nextAnimData; // next animation data (if flags&0x1000)
     /* 0x2C */ ax_anim *activeAnimData; // current animation data
-    /* 0x30 */ void *paletteData; // ?
+    /* 0x30 */ DungeonPos *positions;
     /* 0x34 */ ax_pose **poseData;
     /* 0x38 */ UnkSpriteMem **spriteData;
 } axdata;
@@ -75,8 +75,8 @@ typedef struct axmain
     /* 0x0 */ ax_pose **poses;
     /* 0x4 */ ax_anim ***animations;
     /* 0x8 */ u32 animCount;
-    /* 0xC */ void *spriteData; // ?
-    /* 0x10 */ void *palettes; // ?
+    /* 0xC */ UnkSpriteMem **spriteData;
+    /* 0x10 */ DungeonPos *positions;
 } axmain;
 
 // size: 0x4C
