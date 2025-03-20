@@ -487,7 +487,7 @@ void AxResInit(axdata *a0, axmain *a1, u32 a2, u32 direction, u32 a4, u32 sprite
     a0->activeAnimData = a0->nextAnimData;
     a0->poseData = a1->poses;
     a0->spriteData = a1->spriteData;
-    a0->paletteData = a1->palettes;
+    a0->positions = a1->positions;
 }
 
 void AxResInitUnorientedFile(axdata *a0, OpenedFile *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
@@ -514,7 +514,7 @@ static void AxResInitUnoriented(axdata *a0, axmain *a1, u32 a2, u32 a3, u32 spri
     a0->nextAnimData = a1->animations[a2][0];
     a0->activeAnimData = a0->nextAnimData;
     a0->poseData = a1->poses;
-    a0->paletteData = 0;
+    a0->positions = NULL;
 }
 
 static inline s16 check_flag_for_80054BC(u16 flags) {

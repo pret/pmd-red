@@ -64,7 +64,7 @@ typedef struct axdata
     /* 0x8 */ axdata1 sub1;
     /* 0x28 */ ax_anim *nextAnimData; // next animation data (if flags&0x1000)
     /* 0x2C */ ax_anim *activeAnimData; // current animation data
-    /* 0x30 */ void *paletteData; // ?
+    /* 0x30 */ DungeonPos *positions;
     /* 0x34 */ ax_pose **poseData;
     /* 0x38 */ UnkSpriteMem **spriteData;
 } axdata;
@@ -75,8 +75,8 @@ typedef struct axmain
     /* 0x0 */ ax_pose **poses;
     /* 0x4 */ ax_anim ***animations;
     /* 0x8 */ u32 animCount;
-    /* 0xC */ void *spriteData; // ?
-    /* 0x10 */ void *palettes; // ?
+    /* 0xC */ UnkSpriteMem **spriteData;
+    /* 0x10 */ DungeonPos *positions;
 } axmain;
 
 // size: 0x4C
