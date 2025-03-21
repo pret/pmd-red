@@ -12,8 +12,6 @@
 #define STOP_BGM 999
 
 #define MAX_VOLUME 256
-#define NUM_BG_PLAYERS (INDEX_FANFARE - INDEX_BGM) + 1 // 2
-#define NUM_SE_PLAYERS (INDEX_SE6 - INDEX_SE1) + 1 // 6
 
 enum MusicPlayerIndex
 {
@@ -25,6 +23,7 @@ enum MusicPlayerIndex
     INDEX_SE4,
     INDEX_SE5,
     INDEX_SE6,
+    MUSIC_PLAYERS_COUNT
 };
 
 // TODO: continue to doc the rest of BG/Fanfare Player States
