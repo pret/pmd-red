@@ -4,7 +4,7 @@
 #include "reg_control.h"
 #include "music.h"
 
-static EWRAM_DATA u16 sMusicPlayerstate = {0};
+static EWRAM_DATA u16 sBGMusicPlayerstate = {0};
 static EWRAM_DATA u16 sCurrentBGSong = {0};
 static EWRAM_DATA u16 sQueuedBGSong = {0};
 static EWRAM_DATA u16 sCurrentFanfareSong = {0};
@@ -37,7 +37,7 @@ void InitMusic(void)
 
     m4aSoundInit();
 
-    sMusicPlayerstate = 0;
+    sBGMusicPlayerstate = 0;
     sCurrentBGSong = STOP_BGM;
     sQueuedBGSong = STOP_BGM;
     sCurrentFanfareSong = STOP_SOUND_EFFECT;
@@ -71,7 +71,7 @@ void StartNewBGM(u16 songIndex)
     if (songIndex == STOP_BGM)
         return;
     if (songIndex == sCurrentBGSong) {
-        if (sMusicPlayerstate == 1 || sMusicPlayerstate == 2)
+        if (sBGMusicPlayerstate == 1 || sBGMusicPlayerstate == 2)
             return;
     }
     if (GetMusicPlayerIndex(songIndex) != INDEX_BGM) {
@@ -84,7 +84,7 @@ void StartNewBGM(u16 songIndex)
     sRestartBGM = TRUE;
 
     if (sFanfareMusicPlayerState == 0) {
-        sMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
+        sBGMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
         m4aSongNumStart(songIndex);
     }
     if (interruptFlag)
@@ -100,7 +100,7 @@ void FadeInNewBGM(u16 songIndex, u16 speed)
     if (songIndex == STOP_BGM)
         return;
     if (songIndex == sCurrentBGSong) {
-        if (sMusicPlayerstate == 1 || sMusicPlayerstate == 2)
+        if (sBGMusicPlayerstate == 1 || sBGMusicPlayerstate == 2)
             return;
     }
 
@@ -117,7 +117,7 @@ void FadeInNewBGM(u16 songIndex, u16 speed)
     sRestartBGM = TRUE;
 
     if (sFanfareMusicPlayerState == 0) {
-        sMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
+        sBGMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
         m4aSongNumStart(songIndex);
         m4aMPlayImmInit(&gMPlayInfo_BGM);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0);
@@ -172,8 +172,8 @@ void FadeOutBGM(u16 speed)
 
     if (sFanfareMusicPlayerState == 0) {
         if (sCurrentBGSong != STOP_BGM) {
-            if (sMusicPlayerstate == 2) {
-                sMusicPlayerstate = 3;
+            if (sBGMusicPlayerstate == 2) {
+                sBGMusicPlayerstate = 3;
                 m4aMPlayFadeOut(&gMPlayInfo_BGM, speed);
             }
             else {
@@ -212,13 +212,13 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
             sCurrentFanfareSong = songIndex;
             if (sFanfareMusicPlayerState == 0) {
                 if (sCurrentBGSong != STOP_BGM) {
-                    if (sMusicPlayerstate == 1 || sMusicPlayerstate == 2) {
+                    if (sBGMusicPlayerstate == 1 || sBGMusicPlayerstate == 2) {
                         sFanfareMusicPlayerState = 1;
                         sMusicTransitionCounter = 16;
                         sRestartBGM = FALSE;
                         m4aMPlayFadeOutTemporarily(&gMPlayInfo_BGM, 1);
                     }
-                    else if (sMusicPlayerstate == 3)
+                    else if (sBGMusicPlayerstate == 3)
                         sFanfareMusicPlayerState = 2;
                     else {
                         sFanfareMusicPlayerState = FANFARE_PLAYER_STATE_PLAYING;
@@ -565,7 +565,7 @@ void UpdateSound(void)
                 }
 
                 if (sCurrentBGSong != STOP_BGM) {
-                    sMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
+                    sBGMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
 
                     if (sRestartBGM)
                         m4aSongNumStart(sCurrentBGSong);
@@ -573,7 +573,7 @@ void UpdateSound(void)
                         m4aMPlayFadeIn(&gMPlayInfo_BGM,4);
                 }
                 else {
-                    sMusicPlayerstate = 0;
+                    sBGMusicPlayerstate = 0;
                     m4aMPlayStop(&gMPlayInfo_BGM);
                 }
 
@@ -582,11 +582,11 @@ void UpdateSound(void)
                 break;
         }
     }
-    else if (sMusicPlayerstate != BG_PLAYER_STATE_INITIALIZE) {
-        switch (sMusicPlayerstate) {
+    else if (sBGMusicPlayerstate != BG_PLAYER_STATE_INITIALIZE) {
+        switch (sBGMusicPlayerstate) {
             case BG_PLAYER_STATE_PLAYING:
                 if (sCurrentBGSong == STOP_BGM || IsMusicPlayerPlaying(INDEX_BGM)) // INDEX_BGM
-                    sMusicPlayerstate = 2;
+                    sBGMusicPlayerstate = 2;
                 break;
             case 2:
             case 3:
@@ -597,7 +597,7 @@ void UpdateSound(void)
                 else
                     m4aMPlayStop(&gMPlayInfo_BGM);
 
-                sMusicPlayerstate = 0;
+                sBGMusicPlayerstate = 0;
                 sCurrentBGSong = STOP_BGM;
                 break;
             case BG_PLAYER_STATE_STOPPED: // Can also be other constants
@@ -609,13 +609,13 @@ void UpdateSound(void)
             u32 queuedBgSong = sQueuedBGSong;
 
             if (sQueuedBGSong != STOP_BGM) {
-                sMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
+                sBGMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
                 sCurrentBGSong = queuedBgSong;
                 m4aSongNumStart(queuedBgSong);
                 sQueuedBGSong = STOP_BGM;
             }
             else {
-                sMusicPlayerstate = 0;
+                sBGMusicPlayerstate = 0;
                 sCurrentBGSong = STOP_BGM;
             }
         }
@@ -661,13 +661,13 @@ void StopBGMusicVSync(void)
 
     if (sFanfareMusicPlayerState == 0) {
         if (sCurrentBGSong != STOP_BGM) {
-            if (sMusicPlayerstate == 1 || sMusicPlayerstate == 2) {
-                if (sMusicPlayerstate == 2)
+            if (sBGMusicPlayerstate == 1 || sBGMusicPlayerstate == 2) {
+                if (sBGMusicPlayerstate == 2)
                     sRestartBGM = FALSE;
-                else if (sMusicPlayerstate == BG_PLAYER_STATE_PLAYING)
+                else if (sBGMusicPlayerstate == BG_PLAYER_STATE_PLAYING)
                     sRestartBGM = TRUE;
 
-                sMusicPlayerstate = BG_PLAYER_STATE_STOPPED;
+                sBGMusicPlayerstate = BG_PLAYER_STATE_STOPPED;
             }
         }
     }
@@ -687,8 +687,8 @@ void StartBGMusicVSync(void)
 
     if (sFanfareMusicPlayerState == 0) {
         if (sCurrentBGSong != STOP_BGM) {
-            if (sMusicPlayerstate == BG_PLAYER_STATE_STOPPED) {
-                sMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
+            if (sBGMusicPlayerstate == BG_PLAYER_STATE_STOPPED) {
+                sBGMusicPlayerstate = BG_PLAYER_STATE_PLAYING;
 
                 if (sRestartBGM)
                     m4aSongNumStart(sCurrentBGSong);
