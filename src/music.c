@@ -45,7 +45,7 @@ void InitMusic(void)
     sMusicTransitionCounter = 0;
     sRestartBGM = FALSE;
 
-    for (playerIndex = INDEX_BGM, musicPlayer = &sMusicPlayers[0]; playerIndex < INDEX_SE6 + 1; playerIndex++, musicPlayer++) {
+    for (playerIndex = INDEX_BGM, musicPlayer = &sMusicPlayers[0]; playerIndex < MUSIC_PLAYERS_COUNT; playerIndex++, musicPlayer++) {
         musicPlayer->unk0 = 0;
         musicPlayer->songIndex = STOP_SOUND_EFFECT;
         musicPlayer->volume = 0;
