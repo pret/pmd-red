@@ -1,8 +1,8 @@
 #include "global.h"
-#include "code_8012A18_1.h"
 #include "structs/sprite_oam.h"
+#include "code_8012A18_1.h"
+#include "text_2.h"
 #include "text_util.h"
-#include "text.h"
 
 struct unkStruct_203B1FC
 {
@@ -50,7 +50,7 @@ s32 sub_8015F44(void)
 void sub_8015F84(void)
 {
     u32 uVar2;
-    const struct unkChar *puVar3;
+    const unkChar *puVar3;
     s32 index;
     s32 total;
 
@@ -73,7 +73,7 @@ void sub_8015F84(void)
 
 s32 sub_8015FEC(u8 *buffer, s32 size)
 {
-    const struct unkChar *iVar2;
+    const unkChar *iVar2;
     s32 currLength;
     s32 length;
     u8 *bufferPtr;

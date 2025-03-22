@@ -1,11 +1,10 @@
 #ifndef GUARD_GULPIN_SHOP_H
 #define GUARD_GULPIN_SHOP_H
 
-#include "file_system.h"
 #include "structs/menu.h"
-#include "structs/str_text.h"
+#include "structs/str_mon_portrait.h"
 #include "structs/str_moves.h"
-#include "string_format.h"
+#include "structs/str_text.h"
 
 // size: 0x18C
 typedef struct GulpinShopWork
@@ -25,8 +24,8 @@ typedef struct GulpinShopWork
     u16 unk68[8];
     MenuStruct unk78;
     u8 fillC8[0x118 - 0xC8];
-    /* 0x118 */ struct MonPortraitMsg monPortrait;
-    struct MonPortraitMsg *monPortraitPtr;
+    /* 0x118 */ MonPortraitMsg monPortrait;
+    MonPortraitMsg *monPortraitPtr;
     WindowTemplates unk12C;
 } GulpinShopWork;
 

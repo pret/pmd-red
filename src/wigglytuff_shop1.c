@@ -1,15 +1,16 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/input.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "constants/input.h"
 #include "event_flag.h"
 #include "friend_area.h"
 #include "input.h"
 #include "items.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
 #include "wigglytuff_shop1.h"
 
 static EWRAM_INIT WigglytuffShop1Work *sWigglytuffShop1Work = {NULL};
@@ -31,7 +32,7 @@ bool8 sub_80211AC(u32 mode, u32 a1)
     sWigglytuffShop1Work->mode = mode;
     sWigglytuffShop1Work->s40.s0.unk34 = a1;
     sWigglytuffShop1Work->s40.s0.unk38 = &sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.unk34];
-    RestoreUnkTextStruct_8006518(&sWigglytuffShop1Work->s40.s0.windows);
+    RestoreSavedWindows(&sWigglytuffShop1Work->s40.s0.windows);
     sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.unk34] = sUnknown_80DC47C;
     sWigglytuffShop1Work->s40.s0.unk38->header = &sWigglytuffShop1Work->s40.unk9C;
     ResetUnusedInputStruct();

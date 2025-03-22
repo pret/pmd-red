@@ -1,18 +1,18 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/colors.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_801B60C.h"
 #include "code_80A26CC.h"
 #include "common_strings.h"
-#include "constants/colors.h"
 #include "dungeon.h"
 #include "input.h"
 #include "makuhita_dojo1.h"
 #include "makuhita_dojo2.h"
 #include "memory.h"
 #include "pokemon.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 
 static EWRAM_INIT MakuhitaDojoWork1 *sMakuhitaDojoWork1 = {NULL};
 
@@ -95,7 +95,7 @@ bool8 MakuhitaDojo_New(u32 mode)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_MAKUHITA);
     sMakuhitaDojoWork1->monPortrait.faceFile = faceFile;
-    sMakuhitaDojoWork1->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
+    sMakuhitaDojoWork1->monPortrait.faceData = (PortraitGfx *) faceFile->data;
     sMakuhitaDojoWork1->monPortrait.spriteId = 0;
     sMakuhitaDojoWork1->monPortrait.flip = FALSE;
     sMakuhitaDojoWork1->monPortrait.unkE = 0;
@@ -152,7 +152,7 @@ static void sub_802FF1C(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(&sMakuhitaDojoWork1->unk6C);
+    RestoreSavedWindows(&sMakuhitaDojoWork1->unk6C);
 
     switch (sMakuhitaDojoWork1->state) {
         case 0:

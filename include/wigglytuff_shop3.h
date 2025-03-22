@@ -1,8 +1,8 @@
 #ifndef GUARD_WIGGLYTUFF_SHOP3_H
 #define GUARD_WIGGLYTUFF_SHOP3_H
 
-#include "file_system.h"
 #include "structs/menu.h"
+#include "structs/str_mon_portrait.h"
 #include "structs/str_text.h"
 
 enum WigglytuffStates
@@ -52,8 +52,8 @@ typedef struct WigglytuffShop3Work
     MenuItem unk1C[8];
     u16 unk5C[8];
     MenuStruct unk6C;
-    /* 0xBC */ struct MonPortraitMsg monPortrait;
-    struct MonPortraitMsg *monPortraitPtr;
+    /* 0xBC */ MonPortraitMsg monPortrait;
+    MonPortraitMsg *monPortraitPtr;
     WindowTemplates unkD0;
     u32 unk130;
     u32 unk134;

@@ -7,6 +7,7 @@
 // Todo: Figure out if this file could be merged with bg_control and cpu?
 EWRAM_INIT u32 gUnknown_203B0B8 = {0};
 
+// Should be arm9.bin02008A00, but it's way different
 void WaitForNextFrameAndAdvanceRNG(void)
 {
     sub_800BA5C();
@@ -27,6 +28,7 @@ UNUSED static void nullsub_180(void)
 {
 }
 
+// Should be arm9.bin::020084D4, but it's way different
 void xxx_call_update_bg_sound_input(void)
 {
     xxx_update_bg_sound_input();

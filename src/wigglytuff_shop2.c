@@ -10,7 +10,9 @@
 #include "menu_input.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 #include "wigglytuff_shop2.h"
 
 static EWRAM_INIT WigglytuffShop2Work *sWigglytuffShop2Work = {NULL};
@@ -32,7 +34,7 @@ bool8 CreateWigglytuffShopFriendAreaMenu(u8 friendArea, bool8 a1, s32 a2)
     sub_8021A60();
     sWigglytuffShop2Work->unk74 = a2;
     sWigglytuffShop2Work->unk78 = &sWigglytuffShop2Work->unk7C.id[a2];
-    RestoreUnkTextStruct_8006518(&sWigglytuffShop2Work->unk7C);
+    RestoreSavedWindows(&sWigglytuffShop2Work->unk7C);
     sWigglytuffShop2Work->unk7C.id[sWigglytuffShop2Work->unk74] = sUnknown_80DC4D8;
     sub_8021820();
     return TRUE;

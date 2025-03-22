@@ -1,8 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
+#include "constants/dungeon.h"
 #include "code_801B3C0.h"
-#include "iq_skill_menu.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_8023868.h"
@@ -10,10 +9,10 @@
 #include "code_8098BDC.h"
 #include "code_8099360.h"
 #include "common_strings.h"
-#include "constants/dungeon.h"
 #include "event_flag.h"
 #include "friend_area_action_menu.h"
 #include "input.h"
+#include "iq_skill_menu.h"
 #include "items.h"
 #include "kecleon_bros4.h"
 #include "memory.h"
@@ -22,7 +21,9 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "sprite.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 static EWRAM_INIT struct unkStruct_203B2BC *sUnknown_203B2BC = {NULL};
 
@@ -140,7 +141,7 @@ void sub_802719C(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B2BC->unk180);
+    RestoreSavedWindows(&sUnknown_203B2BC->unk180);
     switch(sUnknown_203B2BC->state)
     {
         case 3:

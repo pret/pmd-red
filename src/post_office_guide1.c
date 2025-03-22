@@ -1,12 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
+#include "structs/menu.h"
 #include "input.h"
 #include "memory.h"
-#include "structs/menu.h"
 #include "pokemon.h"
 #include "post_office_guide1.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 
 enum PostOfficeStates
 {
@@ -65,7 +65,7 @@ bool8 CreateHelperPelipperMenu(s16 speciesID)
         sPostOfficeHelper->monPortrait.pos.y = 8;
 
         if (sPostOfficeHelper->monPortrait.faceFile != NULL)
-            sPostOfficeHelper->monPortrait.faceData = (struct PortraitGfx *) sPostOfficeHelper->monPortrait.faceFile->data;
+            sPostOfficeHelper->monPortrait.faceData = (PortraitGfx *) sPostOfficeHelper->monPortrait.faceFile->data;
     }
 
     sPostOfficeHelper->currMenuChoice = 0;
@@ -123,7 +123,7 @@ static void nullsub_39(void)
 
 static void UpdateHelperPelipperText(void)
 {
-    struct MonPortraitMsg *monPortraitPtr;
+    MonPortraitMsg *monPortraitPtr;
     monPortraitPtr = NULL;
 
     if (sPostOfficeHelper->monPortrait.faceFile != NULL)

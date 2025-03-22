@@ -8,11 +8,11 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "text.h"
+#include "text_1.h"
 #include "wigglytuff_shop1.h"
 #include "wigglytuff_shop2.h"
 
-static EWRAM_INIT unkStruct_203B3F4 *sUnknown_203B3F4 = {NULL};
+EWRAM_INIT static unkStruct_203B3F4 *sUnknown_203B3F4 = {NULL};
 
 #include "data/debug_menu3.h"
 
@@ -79,7 +79,7 @@ static void sub_803A93C(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B3F4->unk9C);
+    RestoreSavedWindows(&sUnknown_203B3F4->unk9C);
 
     if (sUnknown_203B3F4->state == 2)
         sUnknown_203B3F4->unk9C.id[2] = sUnknown_80E7EA4;

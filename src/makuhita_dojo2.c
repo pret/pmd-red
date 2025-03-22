@@ -1,17 +1,18 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/colors.h"
+#include "constants/input.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "code_80972F4.h"
 #include "code_80A26CC.h"
-#include "constants/colors.h"
-#include "constants/input.h"
 #include "dungeon.h"
 #include "input.h"
 #include "makuhita_dojo2.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
 
 static EWRAM_INIT MakuhitaDojoWork2 *sMakuhitaDojoWork2 = {NULL};
 
@@ -32,7 +33,7 @@ bool8 sub_80302E8(s32 param_1, DungeonPos *param_2, u32 param_3)
 
     sMakuhitaDojoWork2->s30.s0.unk34 = param_1;
     sMakuhitaDojoWork2->s30.s0.unk38 = &sMakuhitaDojoWork2->s30.s0.windows.id[param_1];
-    RestoreUnkTextStruct_8006518(&sMakuhitaDojoWork2->s30.s0.windows);
+    RestoreSavedWindows(&sMakuhitaDojoWork2->s30.s0.windows);
     sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E0804;
     sMakuhitaDojoWork2->s30.s0.unk38->header = &sMakuhitaDojoWork2->s30.unk9C;
 

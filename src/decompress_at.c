@@ -1,67 +1,27 @@
 #include "global.h"
 #include "globaldata.h"
-#include "decompress.h"
+#include "decompress_at.h"
 
-#define MAGIC_SIR0 0x30524953
-#define MAGIC_SIRO 0x4F524953
+EWRAM_DATA u32 *gDecompressBufferPtr = {0}; // NDS=020EDCC8
+EWRAM_DATA u32 *gDecompressBufferStart = {0}; // NDS=02EDCD4
+EWRAM_DATA u32 gDecompressBufferCurrent = {0}; // NDS=020EDCCC
+EWRAM_DATA u32 gDecompressBufferByteInInt = {0}; // NDS=020EDCD0
 
-EWRAM_DATA u32 *gDecompressBufferPtr = {0};
-EWRAM_DATA u32 *gDecompressBufferStart = {0};
-EWRAM_DATA u32 gDecompressBufferCurrent = {0};
-EWRAM_DATA u32 gDecompressBufferByteInInt = {0};
+#include "data/decompress_at.h"
 
-#include "data/decompress.h"
-
-static void DecompressAT_AppendByte(char);
+static void DecompressAT_AppendByte(u8);
 static void DecompressAT_Finish(void);
-static char DecompressAT_GetByte(s32);
+static u8 DecompressAT_GetByte(s32);
 static void DecompressAT_Init(u32 *);
-static u32 DecompressATGlobal(u32 *, s32, const char *);
-static void NDS_DecompressRLE(const SiroArchive *);
+static u32 DecompressATGlobal(u32 *, s32, const u8 *);
 
-// arm9.bin::020093F4
-const void *GetSiroPtr(OpenedFile *openedFile)
-{
-    const SiroArchive *siro = (const SiroArchive *)openedFile->data;
-
-    if (siro->magic == MAGIC_SIR0)
-        NDS_DecompressRLE(openedFile->data);
-    else if (siro->magic != MAGIC_SIRO)
-        return openedFile->data;
-
-    openedFile->data = siro->data;
-
-    return openedFile->data;
-}
-
-// arm9.bin::020093A0
-UNUSED static const void *UnusedGetSir0Ptr(const SiroArchive *siro)
-{
-    if (siro->magic != MAGIC_SIR0)
-        return siro;
-
-    NDS_DecompressRLE(siro);
-    return siro->data;
-}
-
-// arm9.bin::02009324
-static void NDS_DecompressRLE(const SiroArchive *siro)
-{
-}
-
-void nullsub_16(void)
-{
-}
-
-UNUSED static void nullsub_175(void)
-{
-}
-
+// arm9.bin::02003148
 u32 DecompressATFile(void *dst, s32 dstLen, OpenedFile *file)
 {
     return DecompressAT(dst, dstLen, file->data);
 }
 
+// arm9.bin::02002CE4
 u32 DecompressAT(u8 *dst, s32 dstLen, const u8 *src)
 {
     s32 compressedLength = src[5] + (src[6] << 8);
@@ -219,12 +179,14 @@ u32 DecompressAT(u8 *dst, s32 dstLen, const u8 *src)
     return bytesWritten;
 }
 
+// arm9.bin::02002CD4
 u32 DecompressATGlobalFile(u32 *result, s32 resultLength, OpenedFile *file)
 {
     return DecompressATGlobal(result, resultLength, file->data);
 }
 
-static u32 DecompressATGlobal(u32 *result, s32 resultLength, const char *compressedData)
+// arm9.bin::02002804
+static u32 DecompressATGlobal(u32 *result, s32 resultLength, const u8 *compressedData)
 {
     s32 flags[9];
     s32 curIndex;
@@ -384,6 +346,7 @@ static u32 DecompressATGlobal(u32 *result, s32 resultLength, const char *compres
     return bytesWritten;
 }
 
+// arm9.bin::020027C0
 static void DecompressAT_Init(u32 *buffer)
 {
     gDecompressBufferPtr = buffer;
@@ -392,7 +355,8 @@ static void DecompressAT_Init(u32 *buffer)
     gDecompressBufferByteInInt = 0;
 }
 
-static char DecompressAT_GetByte(s32 index)
+// arm9.bin::02002754
+static u8 DecompressAT_GetByte(s32 index)
 {
     u32 data;
     s32 offset;
@@ -410,7 +374,8 @@ static char DecompressAT_GetByte(s32 index)
     return data;
 }
 
-static void DecompressAT_AppendByte(char value)
+// arm9.bin::020026DC
+static void DecompressAT_AppendByte(u8 value)
 {
     gDecompressBufferCurrent |= value << gByteShiftLookup[gDecompressBufferByteInInt];
     *gDecompressBufferPtr = gDecompressBufferCurrent;
@@ -423,40 +388,9 @@ static void DecompressAT_AppendByte(char value)
     }
 }
 
+// arm9.bin::020026AC
 static void DecompressAT_Finish(void)
 {
     if (gDecompressBufferByteInInt)
         *gDecompressBufferPtr = gDecompressBufferCurrent;
-}
-
-UNUSED static bool32 IsATxPCompressed_unused(char *data)
-{
-    if ((data[0] == 'A' && data[1] == 'T' && data[2] == '4' && data[3] == 'P')) return TRUE;
-    if ((data[0] == 'A' && data[1] == 'T' && data[2] == '3' && data[3] == 'P')) return TRUE;
-    return FALSE;
-}
-
-// Is this for sure part of this file?
-
-bool8 StrsDifferent_IgnoreCase(const char *strA, const char *strB, s32 maxLen)
-{
-    s32 i;
-
-    for (i = 0; i < maxLen; i++) {
-        char a = strA[i];
-        char b = strB[i];
-
-        // Uppercase -> lowercase
-        if ('A' <= a && a <= 'Z')
-            a += 0x20;
-        if ('A' <= b && b <= 'Z')
-            b += 0x20;
-
-        if (a != b)
-            return TRUE;
-        // `a` and `b` are equal here, but we check them for null terminators since `maxLen` is just a suggestion
-        if (a == '\0' /*&& b == '\0'*/)
-            break;
-    }
-    return FALSE;
 }

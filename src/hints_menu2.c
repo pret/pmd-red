@@ -1,13 +1,13 @@
 #include "global.h"
 #include "globaldata.h"
+#include "structs/struct_sub80095e4.h"
 #include "code_80118A4.h"
 #include "common_strings.h"
 #include "hints_menu2.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_1.h"
 
 static EWRAM_INIT struct_Sub80095E4_2 *sUnknown_203B268 = {NULL};
 
@@ -23,7 +23,7 @@ bool8 CreateHintDisplayScreen(u32 index)
     sUnknown_203B268 = MemoryAlloc(sizeof(struct_Sub80095E4_2), 8);
     sUnknown_203B268->s0.unk34 = 0;
     sUnknown_203B268->s0.unk38 = &sUnknown_203B268->s0.windows.id[0];
-    RestoreUnkTextStruct_8006518(&sUnknown_203B268->s0.windows);
+    RestoreSavedWindows(&sUnknown_203B268->s0.windows);
     sUnknown_203B268->s0.windows.id[sUnknown_203B268->s0.unk34] = sUnknown_80DC0FC;
     sUnknown_203B268->s0.unk38->header = &sUnknown_203B268->unk9C;
     ResetUnusedInputStruct();

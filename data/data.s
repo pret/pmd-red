@@ -1011,7 +1011,7 @@ gUnknown_80B7DF8:
     .fill 8, 1, 0
 
 	.global gVectorDirections
-gVectorDirections: @ 80B7E3C
+gVectorDirections: @ GBA=080B7E3C | NDS=0208772C
     .4byte 0, 1   @N
     .4byte 1, 1   @NE
     .4byte 1, 0   @E

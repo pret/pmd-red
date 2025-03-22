@@ -1,24 +1,21 @@
 #include "global.h"
 #include "bg_control.h"
-#include "bg_palette_buffer.h"
 #include "code_800558C.h"
-#include "cpu.h"
 #include "math.h"
-#include "sprite.h"
 
 EWRAM_DATA bool8 gUnknown_2026E38 = FALSE;
 EWRAM_DATA u32 *gUnknown_2026E3C = NULL;
-static EWRAM_DATA s32 sUnknown_2026E40 = 0; // Read from but never written to
-static EWRAM_DATA s32 sUnknown_2026E44 = 0; // Read from but never written to
-static EWRAM_DATA s32 sUnknown_2026E48 = 0; // Read from but never written to
-static EWRAM_DATA bool8 sUnknown_2026E4C = FALSE;
+EWRAM_DATA static s32 sUnknown_2026E40 = 0; // Read from but never written to
+EWRAM_DATA static s32 sUnknown_2026E44 = 0; // Read from but never written to
+EWRAM_DATA static s32 sUnknown_2026E48 = 0; // Read from but never written to
+EWRAM_DATA static bool8 sUnknown_2026E4C = FALSE;
 EWRAM_DATA s16 gUnknown_2026E4E = 0;
-static EWRAM_DATA bool32 sUnknown_2026E50 = FALSE;
-static EWRAM_DATA bool32 sUnknown_2026E54 = FALSE;
-static EWRAM_DATA u32 *sUnknown_2026E58 = NULL;
-UNUSED static EWRAM_DATA u32 sUnused0 = 0;
-static EWRAM_DATA s16 sUnknown_2026E60[324] = {0}; // These might be [2][162]
-static EWRAM_DATA s16 sUnknown_20270E8[324] = {0};
+EWRAM_DATA static bool32 sUnknown_2026E50 = FALSE;
+EWRAM_DATA static bool32 sUnknown_2026E54 = FALSE;
+EWRAM_DATA static u32 *sUnknown_2026E58 = NULL;
+UNUSED EWRAM_DATA static u32 sUnused0 = 0;
+EWRAM_DATA static s16 sUnknown_2026E60[324] = {0}; // These might be [2][162]
+EWRAM_DATA static s16 sUnknown_20270E8[324] = {0};
 
 EWRAM_INIT s16 *gUnknown_203B078 = NULL;
 
@@ -29,173 +26,7 @@ extern const s16 gUnknown_80B816A[16 * 10];
 extern const s16 gUnknown_80B82AA[16 * 10];
 extern const s16 gUnknown_80B83EA[16 * 10];
 
-static void sub_800561C(struct EfoFileData *, s32, s32, const RGB *);
-
-void sub_8005610(OpenedFile *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
-{
-    sub_800561C((struct EfoFileData *)a0->data, vramIdx, brightness, ramp);
-}
-
-static void sub_800561C(struct EfoFileData *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
-{
-    s32 i;
-
-    if (a0->tiles != NULL)
-        CpuCopy(OBJ_VRAM0 + vramIdx * 0x20, a0->tiles, a0->tileCount * 0x20);
-
-    if (a0->pal != NULL) {
-        for (i = 0; i < 16; i++)
-            SetBGPaletteBufferColorRGB(i + 480, &a0->pal[i], brightness, ramp);
-    }
-}
-
-UNUSED static const RGB *sub_8005668(OpenedFile *a0, s32 vramIdx)
-{
-    return sub_8005674((struct EfoFileData *)a0->data, vramIdx);
-}
-
-const RGB *sub_8005674(const struct EfoFileData *a0, s32 vramIdx)
-{
-    if (a0->tiles != NULL)
-        CpuCopy(OBJ_VRAM0 + vramIdx * 0x20, a0->tiles, a0->tileCount * 0x20);
-
-    return a0->pal;
-}
-
-void sub_800569C(DungeonPos *a0, struct axObject *a1, u8 a2)
-{
-    DungeonPos *ptr;
-    DungeonPos *ptr2;
-    DungeonPos *ptr3;
-
-    a0->x = 0;
-    a0->y = 0;
-
-    if (!(a1->axdata.flags >> 15) || a2 >= 4)
-        return;
-
-    if (a1->axdata.paletteData != NULL) {
-        ptr = &((DungeonPos*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
-        ptr2 = &ptr[a2];
-        if (*&ptr2->x == 99 && *&ptr2->y == 99) {
-            a0->x = 99;
-            a0->y = 99;
-        }
-        else {
-            ptr3 = &ptr[a2];
-            a0->x = a1->axdata.sub1.offset.x + ptr3->x;
-            a0->y = a1->axdata.sub1.offset.y + ptr3->y;
-        }
-    }
-    else {
-        a0->x = 99;
-        a0->y = 99;
-    }
-}
-
-void sub_8005700(DungeonPos *a0, struct axObject *a1)
-{
-    s32 i;
-    DungeonPos *ptr;
-
-    if (!(a1->axdata.flags >> 15))
-        return;
-
-    if (a1->axdata.paletteData != NULL) {
-        ptr = &((DungeonPos*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
-        for (i = 0; i < 4; i++) {
-            if (*&ptr[i].x == 99 && *&ptr[i].y == 99) {
-                a0->x = 99;
-                a0->y = 99;
-            }
-            else {
-                a0->x = a1->axdata.sub1.offset.x + ptr[i].x;
-                a0->y = a1->axdata.sub1.offset.y + ptr[i].y;
-            }
-            a0++;
-        }
-    }
-    else {
-        for (i = 0; i < 4; i++) {
-            a0->x = 99;
-            a0->y = 99;
-            a0++;
-        }
-    }
-}
-
-UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, const RGB *a3)
-{
-    sub_8005770(a0, (const RGB*)file->data, a2, a3);
-}
-
-void sub_8005770(s32 param_1, const RGB *color, s32 brightness, const RGB *ramp)
-{
-    s32 i;
-
-    for (i = 0; i < 16; i++)
-        SetBGPaletteBufferColorRGB((param_1 + 0x10) * 0x10 + i, &color[i], brightness, ramp);
-}
-
-// Maybe DungeonPos
-void nullsub_7(s16 *a0)
-{}
-
-void nullsub_8(u32 a0)
-{}
-
-void nullsub_9(void)
-{}
-
-void nullsub_10(bool8 a0)
-{}
-
-UNUSED static void nullsub_144(void)
-{}
-
-void nullsub_11(void)
-{}
-
-void nullsub_12(void)
-{}
-
-void nullsub_13(void)
-{}
-
-UNUSED static void nullsub_145(void)
-{}
-
-void nullsub_14(void)
-{}
-
-UNUSED static void nullsub_146(void)
-{}
-
-UNUSED static void nullsub_147(void)
-{}
-
-UNUSED static void nullsub_148(void)
-{}
-
-UNUSED static void nullsub_149(void)
-{}
-
-UNUSED static bool8 sub_80057D8(void)
-{
-    return FALSE;
-}
-
-UNUSED static bool8 sub_80057DC(void)
-{
-    return FALSE;
-}
-
-UNUSED static void nullsub_150(void)
-{}
-
-UNUSED static void nullsub_151(void)
-{}
-
+// arm9.bin::02006154
 void sub_80057E8(void)
 {
     sUnknown_2026E4C = TRUE;
@@ -208,6 +39,7 @@ void sub_80057E8(void)
     gUnknown_203B078 = NULL;
 }
 
+// arm9.bin::02005758
 void sub_8005838(s32 *a0, u8 kind)
 {
     const s16 *r1, *r2;
@@ -569,6 +401,7 @@ void sub_8005838(s32 *a0, u8 kind)
     }
 }
 
+#if (GAME_VERSION == VERSION_RED)
 UNUSED static void sub_80060A8(void)
 {
     gUnknown_2026E3C = sUnknown_2026E58;
@@ -576,7 +409,9 @@ UNUSED static void sub_80060A8(void)
     sUnknown_2026E50 = !sUnknown_2026E50;
     gUnknown_2026E38 = FALSE;
 }
+#endif
 
+// arm9.bin::020056C0
 void sub_80060EC(void)
 {
     gUnknown_2026E3C = sUnknown_2026E58;

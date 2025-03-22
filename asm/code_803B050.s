@@ -20,7 +20,7 @@ sub_803B050:
 	adds r1, 0x84
 	str r1, [r0, 0x38]
 	adds r0, 0x3C
-	bl RestoreUnkTextStruct_8006518
+	bl RestoreSavedWindows
 	ldr r1, [r4]
 	ldr r2, [r1, 0x34]
 	lsls r0, r2, 1

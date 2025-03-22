@@ -13,7 +13,8 @@
 #define IWRAM_INIT __attribute__((section("iwram_init")))
 #define UNUSED __attribute__((unused))
 #define NAKED __attribute__((naked))
-
+#define NORETURN __attribute__((noreturn))
+#define PACKED __attribute__((packed))
 #define ALIGNED(n) __attribute__((aligned(n)))
 
 #define SOUND_INFO_PTR (*(struct SoundInfo **)0x3007FF0)

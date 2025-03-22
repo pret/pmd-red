@@ -16,7 +16,7 @@
 #include "random.h"
 #include "reg_control.h"
 #include "sprite.h"
-#include "text.h"
+#include "text_1.h"
 
 extern u8 ewram_start[];
 extern u8 ewram_end[]; // Force a second storage in the asm

@@ -1,15 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_803D0D8.h"
 #include "constants/main_menu.h"
 #include "constants/wonder_mail.h"
+#include "code_803D0D8.h"
 #include "input.h"
 #include "main_menu1.h"
 #include "main_menu2.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "save.h"
-#include "text.h"
+#include "text_1.h"
 
 static EWRAM_INIT MainMenu2Work *sUnknown_203B34C = {NULL};
 static EWRAM_INIT u32 sUnknown_203B350 = {MENU_DEBUG};

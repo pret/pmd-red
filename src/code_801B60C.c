@@ -1,12 +1,11 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/colors.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_801B3C0.h"
 #include "code_801B60C.h"
 #include "code_8099360.h"
 #include "common_strings.h"
-#include "constants/colors.h"
 #include "event_flag.h"
 #include "input.h"
 #include "items.h"
@@ -14,9 +13,10 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 
-static EWRAM_INIT unkStruct_203B234 *sUnknown_203B234 = {NULL};
+static EWRAM_INIT unkStruct_203B234 *sUnknown_203B234 = { NULL };
 
 #include "data/code_801B60C.h" // 80DBA58
 
@@ -124,7 +124,7 @@ static void sub_801B760(void)
        case 13:
        case 14:
        case 15:
-            RestoreUnkTextStruct_8006518(&sUnknown_203B234->windows);
+            RestoreSavedWindows(&sUnknown_203B234->windows);
             for (i = 0; i < 4; i++)
                 sUnknown_203B234->windows.id[i] = sUnknown_80DBA58;
 
@@ -132,7 +132,7 @@ static void sub_801B760(void)
             ShowWindows(&sUnknown_203B234->windows, TRUE, TRUE);
             break;
         case 10:
-            RestoreUnkTextStruct_8006518(&sUnknown_203B234->windows);
+            RestoreSavedWindows(&sUnknown_203B234->windows);
             sub_801BB5C();
             sUnknown_203B234->windows.id[2] = sUnknown_80DBA70;
             sub_8012CAC(&sUnknown_203B234->windows.id[2], sUnknown_203B234->unkCC);
@@ -140,7 +140,7 @@ static void sub_801B760(void)
             ShowWindows(&sUnknown_203B234->windows, TRUE, TRUE);
             break;
         case 12:
-            RestoreUnkTextStruct_8006518(&sUnknown_203B234->windows);
+            RestoreSavedWindows(&sUnknown_203B234->windows);
             sUnknown_203B234->windows.id[1] = sUnknown_80DBA88;
             ResetUnusedInputStruct();
             ShowWindows(&sUnknown_203B234->windows, TRUE, TRUE);

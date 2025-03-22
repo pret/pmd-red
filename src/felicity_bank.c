@@ -1,14 +1,16 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "common_strings.h"
 #include "felicity_bank.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 
 static EWRAM_INIT FelicityBankWork *sFelicityBankWork = {NULL};
 
@@ -68,7 +70,7 @@ bool8 CreateFelicityBank(s32 mode)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_PERSIAN);
     sFelicityBankWork->monPortrait.faceFile = faceFile;
-    sFelicityBankWork->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
+    sFelicityBankWork->monPortrait.faceData = (PortraitGfx *) faceFile->data;
     sFelicityBankWork->monPortrait.spriteId = 0;
     sFelicityBankWork->monPortrait.flip = FALSE;
     sFelicityBankWork->monPortrait.unkE = 0;
@@ -130,7 +132,7 @@ static void sub_801645C(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sFelicityBankWork->unkA8);
+    RestoreSavedWindows(&sFelicityBankWork->unkA8);
 
     switch (sFelicityBankWork->currState) {
         case 2:

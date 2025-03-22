@@ -1,10 +1,20 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
 #include "code_8099360.h"
 #include "memory.h"
 #include "save.h"
 #include "save_write.h"
+#include "string_format.h"
+
+// size: 0x20
+typedef struct SavePakWrite
+{
+    /* 0x0 */ u32 state;
+    s32 unk4;
+    /* 0x8 */ u32 saveStatus;
+    /* 0xC */ MonPortraitMsg monPortrait;
+    /* 0x1C */ u16 pokeID;
+} SavePakWrite;
 
 static EWRAM_INIT SavePakWrite *sSavePakWrite = {NULL};
 
@@ -26,7 +36,7 @@ void PrepareSavePakWrite(s16 pokemonID)
     if (pokemonID != MONSTER_NONE) {
         file = GetDialogueSpriteDataPtr(pokemonID);
         sSavePakWrite->monPortrait.faceFile = file;
-        sSavePakWrite->monPortrait.faceData = (struct PortraitGfx *) file->data;
+        sSavePakWrite->monPortrait.faceData = (PortraitGfx *) file->data;
         sSavePakWrite->monPortrait.spriteId = 0;
         sSavePakWrite->monPortrait.flip = FALSE;
         sSavePakWrite->monPortrait.unkE = 0;
@@ -35,7 +45,7 @@ void PrepareSavePakWrite(s16 pokemonID)
     }
 
     if (sSavePakWrite->monPortrait.faceFile != 0) {
-        struct MonPortraitMsg *monPortraitPtr = &sSavePakWrite->monPortrait;
+        MonPortraitMsg *monPortraitPtr = &sSavePakWrite->monPortrait;
         CreateDialogueBoxAndPortrait(sSavingAdventure, 0, monPortraitPtr, 0x20);
     }
     else
@@ -46,7 +56,7 @@ void PrepareSavePakWrite(s16 pokemonID)
 
 bool8 WriteSavePak(void)
 {
-    struct MonPortraitMsg *monPortraitPtr;
+    MonPortraitMsg *monPortraitPtr;
     u32 local_14;
     u32 other_stack;
 

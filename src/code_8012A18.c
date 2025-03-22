@@ -7,7 +7,7 @@
 #include "string_format.h"
 #include "game_options.h"
 #include "sprite.h"
-#include "text.h"
+#include "text_2.h"
 
 void sub_8012A18()
 {

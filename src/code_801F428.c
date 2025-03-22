@@ -1,14 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
+#include "structs/struct_sub80095e4.h"
 #include "code_800D090.h"
+#include "code_80118A4.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
 #include "pokemon.h"
-#include "text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_1.h"
+#include "text_2.h"
 
 struct unkStruct_203B274
 {
@@ -18,6 +19,7 @@ struct unkStruct_203B274
     unkStruct_808E218_arg unk8;
     struct_Sub80095E4_2 s348;
 };
+
 EWRAM_INIT struct unkStruct_203B274 *gUnknown_203B274 = {NULL};
 
 static const WindowTemplate sUnknown_80DC2AC = {
@@ -53,7 +55,7 @@ bool8 sub_801F428(s16 index, s32 param_2)
     gUnknown_203B274->unk4 = &gUnknown_203B274->unk8;
     gUnknown_203B274->s348.s0.unk34 = param_2;
     gUnknown_203B274->s348.s0.unk38 = &gUnknown_203B274->s348.s0.windows.id[gUnknown_203B274->s348.s0.unk34];
-    RestoreUnkTextStruct_8006518(&gUnknown_203B274->s348.s0.windows);
+    RestoreSavedWindows(&gUnknown_203B274->s348.s0.windows);
     gUnknown_203B274->s348.s0.windows.id[gUnknown_203B274->s348.s0.unk34] = sUnknown_80DC2C4;
     gUnknown_203B274->s348.s0.unk38->header = &gUnknown_203B274->s348.unk9C;
     gUnknown_203B274->s348.unk9C.count = 1;

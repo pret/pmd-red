@@ -1,20 +1,21 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_802DE84.h"
-#include "mailbox.h"
-#include "pokemon.h"
-#include "items.h"
-#include "memory.h"
-#include "text.h"
 #include "structs/menu.h"
-#include "input.h"
-#include "menu_input.h"
-#include "common_strings.h"
-#include "pelipper_board.h"
 #include "code_80118A4.h"
-#include "wonder_mail_802C10C.h"
-#include "code_80958E8.h"
+#include "code_802DE84.h"
 #include "code_803B050.h"
+#include "code_80958E8.h"
+#include "common_strings.h"
+#include "items.h"
+#include "input.h"
+#include "mailbox.h"
+#include "memory.h"
+#include "menu_input.h"
+#include "pelipper_board.h"
+#include "pokemon.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "wonder_mail_802C10C.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"
 
@@ -145,7 +146,7 @@ void SetPelipperBoardState(u32 newState)
 void sub_802E94C(void)
 {
     s32 index;
-    RestoreUnkTextStruct_8006518(&gPelipperBoard->unk10C);
+    RestoreSavedWindows(&gPelipperBoard->unk10C);
     switch(gPelipperBoard->state)
     {
         case MAIN_PELIPPER_BOARD_MENU:

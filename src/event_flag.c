@@ -14,7 +14,7 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 
-EWRAM_DATA u8 gScriptVarBuffer[0x400] = {0};
+EWRAM_DATA u8 gScriptVarBuffer[0x400] = {0}; // NDS=020876DC
 
 struct GroundEventTableEntry
 {
@@ -54,6 +54,7 @@ extern void nullsub_128(void);
 // A fakematch? Debugging leftover? A bug? No clue.
 #define GET_PTR_x400VAR(varId)(((void*) (&gScriptVarInfo[varId - 0x466])) - 4)
 
+// arm9.bin::0200FF68
 void ThoroughlyResetScriptVars(void)
 {
   s32 iVar1;
@@ -121,12 +122,14 @@ void ThoroughlyResetScriptVars(void)
   sub_80972F4();
 }
 
+#if (GAME_VERSION == VERSION_RED)
 void sub_8001564(void)
 {
     nullsub_128();
 }
+#endif
 
-
+// arm9.bin::0200FEB4
 void ResetScriptVarArray(u8 *localVarBuf, s16 varId_)
 {
     struct ScriptVarInfo *infoPtr;
@@ -145,6 +148,7 @@ void ResetScriptVarArray(u8 *localVarBuf, s16 varId_)
     }
 }
 
+// arm9.bin::0200FE04
 void ClearScriptVarArray(u8 *localVarBuf, s16 varId_)
 {
     struct ScriptVarInfo *infoPtr;
@@ -163,6 +167,7 @@ void ClearScriptVarArray(u8 *localVarBuf, s16 varId_)
     }
 }
 
+// arm9.bin::0200FD60
 void GetScriptVarRef(struct ScriptVarPtr *out, u8 *localVarBuf, s32 varId_)
 {
     struct ScriptVarInfo *infoPtr;
@@ -180,6 +185,7 @@ void GetScriptVarRef(struct ScriptVarPtr *out, u8 *localVarBuf, s32 varId_)
     }
 }
 
+// arm9.bin::0200FC00
 s32 GetScriptVarValue(u8 *localVarBuf, s32 varId_)
 {
     struct ScriptVarPtr sp;
@@ -222,6 +228,7 @@ s32 GetScriptVarValue(u8 *localVarBuf, s32 varId_)
     }
 }
 
+// arm9.bin::0200FA50
 s32 GetScriptVarArrayValue(u8 *localVarBuf, s32 varId_, s32 idx_)
 {
     struct ScriptVarPtr sp;
@@ -267,6 +274,7 @@ s32 GetScriptVarArrayValue(u8 *localVarBuf, s32 varId_, s32 idx_)
     }
 }
 
+// arm9.bin::0200F808
 void SetScriptVarValue(u8 *localVarBuf, s32 varId_, s32 val)
 {
     s32 varID;
@@ -324,6 +332,7 @@ void SetScriptVarValue(u8 *localVarBuf, s32 varId_, s32 val)
     }
 }
 
+// arm9.bin::0200F5A8
 void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId_, s32 idx_, s32 val)
 {
     s32 varID;
@@ -385,6 +394,7 @@ void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId_, s32 idx_, s32 val)
     }
 }
 
+#if (GAME_VERSION == VERSION_RED)
 UNUSED u8 *GetScriptVarPointer(s16 varId)
 {
     struct ScriptVarPtr local_1c;
@@ -400,7 +410,9 @@ UNUSED s16 GetScriptVarArrayLength(s16 varId)
     GetScriptVarRef(&local_1c,0,varId);
     return local_1c.info->arrayLen;
 }
+#endif
 
+// arm9.bin::0200F544
 s32 GetScriptVarArraySum(u8 *localVarBuf, s16 varId)
 {
     s32 counter;
@@ -419,6 +431,7 @@ s32 GetScriptVarArraySum(u8 *localVarBuf, s16 varId)
     return total;
 }
 
+#if (GAME_VERSION == VERSION_RED)
 UNUSED void GetScriptVarString(s16 varId, u8 *buf, s32 maxLen)
 {
   u8 *r1;
@@ -456,13 +469,16 @@ UNUSED void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
     }
   }
 }
+#endif
 
+// arm9.bin::0200F508
 void GetScriptVarScenario(s32 param_1,u32 *param_2,u32 *param_3)
 {
   *param_2 = GetScriptVarArrayValue(NULL, (s16)param_1, 0);
   *param_3 = GetScriptVarArrayValue(NULL, (s16)param_1, 1);
 }
 
+// arm9.bin::0200F36C
 void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
 {
   s32 param_1_s32;
@@ -509,6 +525,7 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
   }
 }
 
+// arm9.bin::0200F2D4
 bool8 ScriptVarScenarioBefore(s16 varId,u32 pMain,s32 pSub)
 {
   s32 sMain;
@@ -528,6 +545,7 @@ bool8 ScriptVarScenarioBefore(s16 varId,u32 pMain,s32 pSub)
   }
 }
 
+// arm9.bin::0200F270
 bool8 ScriptVarScenarioEqual(s16 varId,u32 pMain,s32 pSub)
 {
   s32 sMain;
@@ -542,6 +560,7 @@ bool8 ScriptVarScenarioEqual(s16 varId,u32 pMain,s32 pSub)
   return FALSE;
 }
 
+// arm9.bin::0200F1d8
 bool8 ScriptVarScenarioAfter(s16 varId,u32 pMain,s32 pSub)
 {
   s32 sMain;
@@ -561,6 +580,7 @@ bool8 ScriptVarScenarioAfter(s16 varId,u32 pMain,s32 pSub)
   }
 }
 
+// arm9.bin::0200ECE0
 void sub_8001D88(void)
 {
   u32 local_c;
@@ -654,6 +674,7 @@ void sub_8001D88(void)
   }
 }
 
+// arm9.bin::0200EC08
 s32 _FlagCalc(s32 param_1, s32 param_2, enum FlagCalcOperation operation)
 {
   switch(operation) {
@@ -686,6 +707,7 @@ s32 _FlagCalc(s32 param_1, s32 param_2, enum FlagCalcOperation operation)
   }
 }
 
+// arm9.bin::0200EAE4
 bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation)
 {
   switch(operation) {
@@ -716,11 +738,13 @@ bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation)
   }
 }
 
+// arm9.bin::0200EAD8
 s32 FlagCalc(s32 r0, s32 r1, enum FlagCalcOperation operation)
 {
     return _FlagCalc(r0, r1, operation);
 }
 
+// arm9.bin::0200EA98
 void UpdateScriptVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum FlagCalcOperation operation)
 {
   u32 uVar1;
@@ -731,6 +755,7 @@ void UpdateScriptVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum Fl
   SetScriptVarValue(param_1,param_2,uVar3);
 }
 
+// arm9.bin::0200EA4C
 void UpdateScriptVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagCalcOperation operation)
 {
   s32 uVar1;
@@ -747,11 +772,13 @@ void UpdateScriptVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagCalc
   SetScriptVarValue(param_1,param_2_s32,uVar3);
 }
 
+// arm9.bin::0200EA40
 bool8 FlagJudge(s32 r0, s32 r1, enum FlagJudgeOperation operation)
 {
     return _FlagJudge(r0, r1, operation);
 }
 
+// arm9.bin::0200EA18
 bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum FlagJudgeOperation operation)
 {
   s32 uVar1;
@@ -760,6 +787,7 @@ bool8 JudgeVarWithImmediate(u8 *param_1, s16 param_2, s32 param_3, enum FlagJudg
   return _FlagJudge(uVar1,param_3,operation);
 }
 
+// arm9.bin::0200E9D8
 bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOperation operation)
 {
   s32 uVar1;
@@ -773,6 +801,7 @@ bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOpera
   return _FlagJudge(uVar1,uVar2,operation);
 }
 
+#if (GAME_VERSION == VERSION_RED)
 UNUSED s32 sub_8002354(u32 param_1)
 {
   if (param_1 < 0x3b) {
@@ -815,7 +844,9 @@ UNUSED u8 *sub_80023C4(u32 param_1)
     return gUnknown_80B7144; // NONE
   }
 }
+#endif
 
+// arm9.bin::0200E654
 // 6 checks for post game being reached
 bool8 sub_80023E4(u32 param_1)
 {
@@ -885,8 +916,8 @@ bool8 sub_80023E4(u32 param_1)
   }
 }
 
+// arm9.bin::0200E620
 u8 sub_8002658(s16 param_1)
-
 {
   short sVar1;
   s32 param_1_s32;
@@ -908,9 +939,9 @@ u8 sub_8002658(s16 param_1)
   return 0;
 }
 
+// arm9.bin::0200E5E8
 s16 sub_8002694(u8 param_1)
 {
-
     struct GroundEventTableEntry *puVar2 = gGroundEnterLookupTable;
 
     while (puVar2->groundEnterId != -1) {
@@ -923,32 +954,37 @@ s16 sub_8002694(u8 param_1)
     return -1;
 }
 
+// arm9.bin::0200E5A8
 bool8 sub_80026CC(s16 r0)
 {
     return GetFriendAreaStatus(sub_8002658(r0));
 }
 
+// arm9.bin::0200E568
 void sub_80026E8(s16 r0, bool8 r1)
 {
     UnlockFriendArea(sub_8002658(r0));
 }
 
+// arm9.bin::0200E544
 bool8 SaveGlobalScriptVars(void *r0)
 {
     MemoryCopy8(r0, gScriptVarBuffer, 0x400);
-    return 1;
+    return TRUE;
 }
 
+// arm9.bin::0200E4DC
 bool8 RestoreGlobalScriptVars(u8 *r0)
 {
     struct ScriptVarPtr temp;
     GetScriptVarRef(&temp, NULL, VERSION);
     MemoryCopy8(gScriptVarBuffer, r0, 0x400);
     if (temp.info->defaultValue != *(u32 *)temp.ptr)
-        return 0;
-    return 1;
+        return FALSE;
+    return TRUE;
 }
 
+#if (GAME_VERSION == VERSION_RED)
 UNUSED void SetConditionBit(s32 r0)
 {
     UpdateScriptVarWithImmediate(NULL, CONDITION, r0, CALC_SETBIT);
@@ -963,3 +999,8 @@ UNUSED void nullsub_140(void)
 {
 
 }
+#endif
+
+
+
+// TODO: Merge with main_loops.c (below) and code_8002774.c (above)

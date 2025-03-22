@@ -1,12 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
 #include "bg_palette_buffer.h"
-#include "code_800558C.h"
+#include "structs/axdata.h"
 #include "code_8009804.h"
 #include "cpu.h"
 #include "def_filearchives.h"
 #include "file_system.h"
-#include "text.h"
+#include "text_1.h"
 
 struct FontData
 {
@@ -168,6 +168,7 @@ void sub_80098F8(u32 r0)
     sUnknown_202D238[r0] = 1;
 }
 
+// arm9.bin::02009BE0
 void sub_8009908(void)
 {
     s32 i;
@@ -213,7 +214,7 @@ UNUSED static void sub_8009A10(struct unkStruct_8009A1C_ptr *a0, u32 palId, u32 
     sub_8009A1C(a0->ptr, palId, vramDstOffset, r3);
 }
 
-void sub_8009A1C(const struct EfoFileData *r0, u32 palId, u32 vramDstOffset, u32 r3)
+void sub_8009A1C(const EfoFileData *r0, u32 palId, u32 vramDstOffset, u32 r3)
 {
     s32 i;
     u32 *dst, *src;

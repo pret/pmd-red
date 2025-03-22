@@ -1,17 +1,18 @@
 #include "global.h"
 #include "globaldata.h"
 #include "bg_palette_buffer.h"
-#include "code_80118A4.h"
 #include "constants/emotions.h"
 #include "constants/input.h"
 #include "constants/type.h"
+#include "code_80118A4.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "personality_test2.h"
 #include "pokemon.h"
-#include "text.h"
 #include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 EWRAM_INIT struct PersonalityStruct_203B404 *gUnknown_203B404 = {NULL};
 
@@ -150,10 +151,10 @@ static void PersonalityTest_DisplayPartnerSprite(void)
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
     faceFile = GetDialogueSpriteDataPtr(partnerID);
-    gfx = ((struct PortraitGfx *)(faceFile->data))->sprites[EMOTION_NORMAL].gfx;
+    gfx = ((PortraitGfx *)(faceFile->data))->sprites[EMOTION_NORMAL].gfx;
     emotionId = EMOTION_NORMAL;
     for (paletteIndex = 0; paletteIndex < 0x10; paletteIndex++) {
-        SetBGPaletteBufferColorArray(paletteIndex + 0xE0, &((struct PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[paletteIndex]);
+        SetBGPaletteBufferColorArray(paletteIndex + 0xE0, &((PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[paletteIndex]);
     }
 
     DisplayMonPortraitSpriteFlipped(1, gfx, 14);
