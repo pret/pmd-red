@@ -659,8 +659,8 @@ void sub_800569C(DungeonPos *a0, axObject *a1, u8 a2)
     if (!(a1->axdata.flags >> 15) || a2 >= 4)
         return;
 
-    if (a1->axdata.paletteData != NULL) {
-        ptr = &((DungeonPos*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
+    if (a1->axdata.positions != NULL) {
+        ptr = &((DungeonPos*)a1->axdata.positions)[a1->axdata.sub1.poseId * 4];
         ptr2 = &ptr[a2];
         if (*&ptr2->x == 99 && *&ptr2->y == 99) {
             a0->x = 99;
@@ -687,8 +687,8 @@ void sub_8005700(DungeonPos *a0, axObject *a1)
     if (!(a1->axdata.flags >> 15))
         return;
 
-    if (a1->axdata.paletteData != NULL) {
-        ptr = &((DungeonPos*)a1->axdata.paletteData)[a1->axdata.sub1.poseId * 4];
+    if (a1->axdata.positions != NULL) {
+        ptr = &((DungeonPos*)a1->axdata.positions)[a1->axdata.sub1.poseId * 4];
         for (i = 0; i < 4; i++) {
             if (*&ptr[i].x == 99 && *&ptr[i].y == 99) {
                 a0->x = 99;
