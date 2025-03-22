@@ -12,8 +12,7 @@ static EWRAM_DATA u16 sFanfareMusicPlayerState = {0};
 static EWRAM_DATA u16 sMusicTransitionCounter = {0};
 static EWRAM_DATA bool8 sRestartBGM = {0};
 
-static IWRAM_DATA PMDMusicPlayer sBGMusicPlayers[NUM_BG_PLAYERS] = {0};
-static IWRAM_DATA PMDMusicPlayer sSEMusicPlayers[NUM_SE_PLAYERS] = {0};
+static IWRAM_DATA PMDMusicPlayer sMusicPlayers[MUSIC_PLAYERS_COUNT] = {0};
 
 static u16 GetMusicPlayerIndex(u16 songIndex);
 static bool8 IsBGSong(u32 songIndex);
@@ -46,7 +45,7 @@ void InitMusic(void)
     sMusicTransitionCounter = 0;
     sRestartBGM = FALSE;
 
-    for (playerIndex = INDEX_BGM, musicPlayer = &sBGMusicPlayers[0]; playerIndex < INDEX_SE6 + 1; playerIndex++, musicPlayer++) {
+    for (playerIndex = INDEX_BGM, musicPlayer = &sMusicPlayers[0]; playerIndex < MUSIC_PLAYERS_COUNT; playerIndex++, musicPlayer++) {
         musicPlayer->unk0 = 0;
         musicPlayer->songIndex = STOP_SOUND_EFFECT;
         musicPlayer->volume = 0;
@@ -274,7 +273,7 @@ void PlayFanfareSE(u16 songIndex, u16 volume)
             return;
 
         playerIndex = GetMusicPlayerIndex(songIndex);
-        musicPlayer = &sBGMusicPlayers[playerIndex]; // need to load this before comparison to match
+        musicPlayer = &sMusicPlayers[playerIndex]; // need to load this before comparison to match
 
         if (playerIndex < INDEX_SE1)
             nullsub_20(songIndex);
@@ -310,7 +309,7 @@ UNUSED static void SetSoundEffectVolume(u16 songIndex, u16 volume)
     if (!IsFanfare(songIndex) && IsSoundEffect(songIndex)) {
         playerIndex = GetMusicPlayerIndex(songIndex);
         info = gMPlayTable[playerIndex].info;
-        musicPlayer = &sBGMusicPlayers[playerIndex];
+        musicPlayer = &sMusicPlayers[playerIndex];
         if (playerIndex >= INDEX_SE1) {
             interruptFlag = DisableInterrupts();
             if (musicPlayer->songIndex == songIndex)
@@ -329,7 +328,7 @@ void StopFanfareSE(u16 songIndex)
         PMDMusicPlayer *musicPlayer;
         bool8 interruptFlag = DisableInterrupts();
 
-        for (playerIndex = INDEX_SE1, musicPlayer = &sSEMusicPlayers[0]; playerIndex < INDEX_SE6; playerIndex++, musicPlayer++) {
+        for (playerIndex = INDEX_SE1, musicPlayer = &sMusicPlayers[INDEX_SE1]; playerIndex < INDEX_SE6; playerIndex++, musicPlayer++) {
             m4aMPlayStop(gMPlayTable[playerIndex].info);
             musicPlayer->unk0 = 0;
             musicPlayer->songIndex = STOP_SOUND_EFFECT;
@@ -343,7 +342,7 @@ void StopFanfareSE(u16 songIndex)
     else if (IsSoundEffect(songIndex)) {
         u32 playerIndex = GetMusicPlayerIndex(songIndex);
         struct MusicPlayerInfo *info = gMPlayTable[playerIndex].info;
-        PMDMusicPlayer *musicPlayer = &sBGMusicPlayers[playerIndex];
+        PMDMusicPlayer *musicPlayer = &sMusicPlayers[playerIndex];
 
         if (playerIndex < INDEX_SE1)
             nullsub_21(songIndex);
@@ -406,7 +405,7 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
         PMDMusicPlayer *musicPlayer;
         bool8 interruptFlag = DisableInterrupts();
 
-        for (playerIndex = INDEX_SE1, musicPlayer = &sSEMusicPlayers[0]; playerIndex < INDEX_SE6; playerIndex++, musicPlayer++) {
+        for (playerIndex = INDEX_SE1, musicPlayer = &sMusicPlayers[INDEX_SE1]; playerIndex < INDEX_SE6; playerIndex++, musicPlayer++) {
             if (musicPlayer->songIndex != STOP_SOUND_EFFECT) {
                 if (IsMusicPlayerPlaying(playerIndex))
                     m4aMPlayFadeOut(gMPlayTable[playerIndex].info, speed);
@@ -425,7 +424,7 @@ void FadeOutFanfareSE(u16 songIndex, u16 speed)
     }
     else if (IsSoundEffect(songIndex)) {
         s32 playerIndex = GetMusicPlayerIndex(songIndex);
-        PMDMusicPlayer *musicPlayer = &sBGMusicPlayers[playerIndex];
+        PMDMusicPlayer *musicPlayer = &sMusicPlayers[playerIndex];
         struct MusicPlayerInfo *playerInfo = gMPlayTable[playerIndex].info;
         bool8 interruptFlag = DisableInterrupts();
 
@@ -487,7 +486,7 @@ bool8 IsFanfareSEPlaying(u16 songIndex)
     }
     else if (IsSoundEffect(songIndex)) {
         playerIndex = GetMusicPlayerIndex(songIndex);
-        musicPlayer = &sBGMusicPlayers[playerIndex];
+        musicPlayer = &sMusicPlayers[playerIndex];
         if (INDEX_SE1 > playerIndex)
             return FALSE;
         if (musicPlayer->songIndex == songIndex)
@@ -622,7 +621,7 @@ void UpdateSound(void)
         }
     }
 
-    for (musicPlayerIndex = INDEX_SE1,  musicPlayer = &sSEMusicPlayers[0]; musicPlayerIndex < INDEX_SE6; musicPlayerIndex++, musicPlayer++) {
+    for (musicPlayerIndex = INDEX_SE1,  musicPlayer = &sMusicPlayers[INDEX_SE1]; musicPlayerIndex < INDEX_SE6; musicPlayerIndex++, musicPlayer++) {
         if (musicPlayer->songIndex != STOP_SOUND_EFFECT) {
             switch (musicPlayer->unk0){
                 case 1:

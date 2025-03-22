@@ -654,7 +654,7 @@ void PartyListMenu_HandleMenu2(void)
 {
   u32 nextState;
   struct unkStruct_8090F58 temp;
-  int menuAction;
+  s32 menuAction;
   Item slot;
 
   menuAction = 0;

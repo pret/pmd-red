@@ -188,7 +188,7 @@ void sub_80365AC(void)
 
 void sub_8036674(void)
 {
-  int menuAction;
+  s32 menuAction;
 
   menuAction = -1;
   sub_801CA08(FALSE);
@@ -273,7 +273,7 @@ void sub_8036788(void)
 
 void TradeItem_SendItemConfirm(void)
 {
-  int menuAction;
+  s32 menuAction;
   u16 load;
 
   if (sub_80144A4(&menuAction) == 0)
@@ -298,7 +298,7 @@ void TradeItem_SendItemConfirm(void)
 
 void sub_803689C(void)
 {
-  int menuAction;
+  s32 menuAction;
 
   if (sub_80144A4(&menuAction) == 0) {
       switch(menuAction){
@@ -315,7 +315,7 @@ void sub_803689C(void)
 
 void sub_80368D4(void)
 {
-  int menuAction;
+  s32 menuAction;
 
   if (sub_80144A4(&menuAction) == 0) {
     switch(menuAction){
@@ -481,7 +481,7 @@ void nullsub_52(void)
 
 void sub_8036B28(void)
 {
-  int linkStatus;
+  s32 linkStatus;
 
   switch(sTradeItemsMenu->currMenu) {
     case TRADE_ITEMS_MAIN_MENU:
