@@ -1,13 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
+#include "structs/sprite_oam.h"
 #include "code_800F958.h"
 #include "code_8009804.h"
 #include "cpu.h"
 #include "dungeon_pokemon_sprites.h"
 #include "memory.h"
 #include "sprite.h"
-#include "structs/sprite_oam.h"
-#include <stdio.h>
 
 struct StatusGraphicsInfo
 {
@@ -75,7 +74,7 @@ extern SpriteOAM gUnknown_203B0DC;
 
 extern DungeonPos gUnknown_80D3564;
 
-void DrawStatusSprite(s16 param_1,s32 status,DungeonPos *pos,DungeonPos *posOffset,
+static void DrawStatusSprite(s16 param_1,s32 status,DungeonPos *pos,DungeonPos *posOffset,
                       DungeonPos *posScreen,u32 priority, u32 unused);
 
 DungeonPokemonSprite *GetDungeonPokemonSprite(s32 id)
@@ -200,7 +199,7 @@ void sub_800F2EC(DungeonPokemonSprite *sprite, s32 index, DungeonPos *screenPos)
     }
 }
 
-void DrawStatusSprite(s16 param_1, s32 status, DungeonPos *pos, DungeonPos *posOffset,
+static void DrawStatusSprite(s16 param_1, s32 status, DungeonPos *pos, DungeonPos *posOffset,
                       DungeonPos *posScreen, u32 priority, u32 unused)
 {
     struct StatusSprite sprite;

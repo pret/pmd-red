@@ -1,7 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_801B3C0.h"
 #include "code_8099360.h"
 #include "common_strings.h"
@@ -15,7 +14,8 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 
 static EWRAM_INIT KecleonBrosWork1 *sKecleonBrosWork1 = {NULL};
 
@@ -104,7 +104,7 @@ bool8 CreateKecleonBros(u32 mode)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_KECLEON);
     sKecleonBrosWork1->monPortrait.faceFile = faceFile;
-    sKecleonBrosWork1->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
+    sKecleonBrosWork1->monPortrait.faceData = (PortraitGfx *) faceFile->data;
     sKecleonBrosWork1->monPortrait.spriteId = 0;
     sKecleonBrosWork1->monPortrait.flip = FALSE;
     sKecleonBrosWork1->monPortrait.unkE = 0;
@@ -179,7 +179,7 @@ static void sub_8018D30(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sKecleonBrosWork1->unkE8);
+    RestoreSavedWindows(&sKecleonBrosWork1->unkE8);
 
     switch (sKecleonBrosWork1->currState) {
         case 18:

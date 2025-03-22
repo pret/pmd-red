@@ -144,6 +144,7 @@ void sub_8098CC8(void)
     ClearAllItems_8091FB4();
 }
 
+// arm9.bin::0206C1A4
 bool8 GroundMainGroundRequest(s32 r0, s32 r1, s32 r2)
 {
     s32 temp = (s16) r0; // force a asr shift

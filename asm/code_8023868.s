@@ -170,7 +170,7 @@ _0802398E:
 	adds r1, r0, r1
 	str r1, [r2]
 	adds r0, r6
-	bl RestoreUnkTextStruct_8006518
+	bl RestoreSavedWindows
 	ldr r1, [r5]
 	adds r4, r1, r4
 	ldr r2, [r4]

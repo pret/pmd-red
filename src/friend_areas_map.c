@@ -9,7 +9,7 @@
 #include "code_800C9CC.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "decompress.h"
+#include "decompress_sir.h"
 #include "friend_area.h"
 #include "friend_areas_map.h"
 #include "friend_areas_map_util.h"
@@ -19,7 +19,8 @@
 #include "pokemon.h"
 #include "sprite.h"
 #include "string_format.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_3.h"
 
 EWRAM_INIT struct FriendAreasMap *gFriendAreasMapPtr = NULL;
 EWRAM_DATA static u8 sCurrDirection = 0;

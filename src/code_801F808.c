@@ -1,15 +1,16 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
+#include "structs/menu.h"
+#include "structs/str_text.h"
 #include "code_80118A4.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
 #include "sprite.h"
-#include "structs/menu.h"
-#include "structs/str_text.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 // TODO: UNIFY WITH struct_Sub80095E4
 struct unkStruct_203B278

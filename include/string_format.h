@@ -1,10 +1,11 @@
 #ifndef GUARD_STRING_FORMAT_H
 #define GUARD_STRING_FORMAT_H
 
-#include "file_system.h"
 #include "structs/menu.h"
-#include "structs/str_text.h"
 #include "structs/rgb.h"
+#include "structs/str_file_system.h"
+#include "structs/str_mon_portrait.h"
+#include "structs/str_text.h"
 
 // TODO: once the files close to string_format.c are decompiled, check if these should be included here. Most likely, they should be declared elsewhere.
 // code_80130A8.s
@@ -14,28 +15,6 @@ s32 sub_80144A4(s32 *);
 u32 sub_80151C0(u32, u8 *);
 u32 sub_80154F0(void);
 void sub_80155F0(void);
-
-struct PortraitGfxSub
-{
-    const RGB *pal;
-    const u8 *gfx;
-};
-
-struct PortraitGfx
-{
-    // NOTE: The actual number of sprites is different depending on pokemon. For example, starters have 12 sprites, while most legendaries only 1. [0] means that any number of sprites is valid.
-    struct PortraitGfxSub sprites[0];
-};
-
-struct MonPortraitMsg
-{
-    OpenedFile *faceFile;
-    struct PortraitGfx *faceData;
-    DungeonPos pos;
-    u8 spriteId; // Which mon's sprite to use. For example Kecleon has multiple sprites depending on whether it's green or purple.
-    bool8 flip; // Whether the mon's sprite is flipped.
-    u8 unkE;
-};
 
 #define FORMAT_BUFFER_LEN 80
 #define FRIEND_AREA_BUFFER_LEN 184
@@ -49,10 +28,10 @@ extern u8 gFormatBuffer_FriendArea[FRIEND_AREA_BUFFER_LEN];
 
 void sub_8014144(void);
 void sub_801416C(s32 param_1,s32 param_2);
-void CreateDialogueBoxAndPortrait(const u8 *text, void *param_2, struct MonPortraitMsg *monPortraitPtr, u16 flags);
-void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 flags);
-void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 flags);
-void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, struct MonPortraitMsg *monPortraitPtr, u16 flags);
+void CreateDialogueBoxAndPortrait(const u8 *text, void *param_2, MonPortraitMsg *monPortraitPtr, u16 flags);
+void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, MonPortraitMsg *monPortraitPtr, u16 flags);
+void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, MonPortraitMsg *monPortraitPtr, u16 flags);
+void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, MonPortraitMsg *monPortraitPtr, u16 flags);
 void sub_8014490(void);
 s32 sub_80144A4(s32 *a0);
 void DrawDialogueBoxString(void);

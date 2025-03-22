@@ -39,8 +39,11 @@
 #include "rescue_team_info.h"
 #include "save.h"
 #include "save_read.h"
+#include "sprite.h"
 #include "string_format.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 #include "text_util.h"
 
 typedef struct unkTalkTable
@@ -238,18 +241,26 @@ static void MainLoops_RunFrameActions(u32 unused)
     DrawDialogueBoxString();
     sub_8005838(NULL, 0);
     nullsub_8(gGameOptionsRef->unkA);
+
     sub_8005180();
+    // Extra call here in blue. Seems to be for 2nd screen sprites
+
     sub_80060EC();
     sub_8011860();
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
+
     CopySpritesToOam();
     sub_8005304();
+    // 2 extra calls here in blue. They seem to be copies of the 2 above funcs, but for 2nd screen sprites
+
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();
     sub_8009908();
     xxx_call_update_bg_sound_input();
+
     ResetSprites(FALSE);
+    // Extra call here in blue. Seems to be for 2nd screen sprites
 }
 
 // https://decomp.me/scratch/w6tN1 (82.93%)
@@ -1204,6 +1215,7 @@ static u32 sub_80009D0(u32 param_1)
 // This func is probably used for running the dungeon in general (and updating RNG mechanics), not just quicksave.
 // More documentation needed to be sure
 // It'd also be cool to see what happens if a quicksave load fails and the dungeon is skipped entirely
+// arm9.bin::0200D01C
 /* static */ // TODO: Uncomment
 void LoadAndRunQuickSaveDungeon_Async(UnkStruct_RunDungeon *param_1)
 {
@@ -1288,16 +1300,19 @@ void LoadAndRunQuickSaveDungeon_Async(UnkStruct_RunDungeon *param_1)
     }
 }
 
+// arm9.bin::0200CFF4
 void sub_8001024(PersonalityRelated *dst)
 {
     *dst = sPersonalityRelated_203B040;
 }
 
+// arm9.bin::0200CFA4
 void sub_8001044(PersonalityRelated *src)
 {
     sPersonalityRelated_203B040 = *src;
 }
 
+// arm9.bin::0200CE48
 void sub_8001064(void)
 {
     const unkTalkTable *psVar2;
@@ -1341,6 +1356,7 @@ void sub_8001064(void)
     }
 }
 
+// arm9.bin::0200CDD4
 /* static */ // TODO: Uncomment
 u8 sub_8001170(void)
 {
@@ -1357,6 +1373,7 @@ u8 sub_8001170(void)
     return dungeonID;
 }
 
+// arm9.bin::0200CDA4
 /* static */ // TODO: Uncomment
 void sub_80011CC(u8 *param_1, u8 param_2)
 {
@@ -1373,6 +1390,7 @@ void sub_80011CC(u8 *param_1, u8 param_2)
     param_1[13] = 0;
 }
 
+// arm9.bin::0200CD1C
 /* static */ // TODO: Uncomment
 void sub_80011E8(u8 *param_1)
 {
@@ -1388,6 +1406,7 @@ void sub_80011E8(u8 *param_1)
         param_1[7] = 0;
 }
 
+// arm9.bin::0200CC4C
 /* static */ // TODO: Uncomment
 void sub_8001248(void)
 {
@@ -1409,6 +1428,7 @@ void sub_8001248(void)
     gTeamInventoryRef->teamMoney = 0;
 }
 
+// arm9.bin::0200CB88
 /* static */ // TODO: Uncomment
 void sub_80012C0(void)
 {

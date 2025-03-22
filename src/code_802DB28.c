@@ -1,6 +1,5 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
 #include "code_802DB28.h"
 #include "code_802F204.h"
 #include "code_803C1D0.h"
@@ -10,9 +9,10 @@
 #include "items.h"
 #include "memory.h"
 #include "pokemon.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 
-static EWRAM_INIT struct unkStruct_203B2FC *sUnknown_203B2FC = {NULL};
+EWRAM_INIT static struct unkStruct_203B2FC *sUnknown_203B2FC = {NULL};
 
 #include "data/code_802DB28.h"
 
@@ -49,7 +49,7 @@ bool8 sub_802DB28(u8 jobSlotIndex, u8 dungeon)
     sUnknown_203B2FC->monPortrait.pos.y = 8;
 
     if (sUnknown_203B2FC->monPortrait.faceFile != NULL)
-        sUnknown_203B2FC->monPortrait.faceData = (struct PortraitGfx *) sUnknown_203B2FC->monPortrait.faceFile->data;
+        sUnknown_203B2FC->monPortrait.faceData = (PortraitGfx *) sUnknown_203B2FC->monPortrait.faceFile->data;
 
     sub_802DC28(0);
     return TRUE;
@@ -92,7 +92,7 @@ static void sub_802DC40(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B2FC->unk48);
+    RestoreSavedWindows(&sUnknown_203B2FC->unk48);
 
     switch (sUnknown_203B2FC->state) {
         case 0:

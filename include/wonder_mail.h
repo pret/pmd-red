@@ -2,8 +2,8 @@
 #define GUARD_WONDER_MAIL_H
 
 #include "constants/wonder_mail.h"
-#include "file_system.h"
 #include "structs/menu.h"
+#include "structs/str_mon_portrait.h"
 #include "structs/str_wonder_mail.h"
 
 // size: 0x548
@@ -25,7 +25,7 @@ typedef struct WonderMailStruct_203B2C0
     WindowTemplates unk35C;
     WindowTemplates unk3BC;
     /* 0x41C */ u32 unkfill; // ItemSlot?
-    /* 0x420 */ struct MonPortraitMsg monPortrait;
+    /* 0x420 */ MonPortraitMsg monPortrait;
     /* 0x430 */ u8 padding3[0x534 - 0x430];
     u32 unk534;
     s32 unk538; // A7 << 3

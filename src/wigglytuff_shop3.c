@@ -1,7 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_8023144.h"
 #include "code_8099360.h"
 #include "common_strings.h"
@@ -12,7 +11,8 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 #include "wigglytuff_shop1.h"
 #include "wigglytuff_shop2.h"
 #include "wigglytuff_shop3.h"
@@ -71,7 +71,7 @@ bool8 CreateWigglytuffShop(u32 mode)
 
     file = GetDialogueSpriteDataPtr(MONSTER_WIGGLYTUFF);
     sWigglytuffShop3Work->monPortrait.faceFile = file;
-    sWigglytuffShop3Work->monPortrait.faceData = (struct PortraitGfx *) file->data;
+    sWigglytuffShop3Work->monPortrait.faceData = (PortraitGfx *) file->data;
     sWigglytuffShop3Work->monPortrait.spriteId = 0;
     sWigglytuffShop3Work->monPortrait.flip = FALSE;
     sWigglytuffShop3Work->monPortrait.unkE = 0;
@@ -140,7 +140,7 @@ static void sub_8021D5C(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sWigglytuffShop3Work->unkD0);
+    RestoreSavedWindows(&sWigglytuffShop3Work->unkD0);
 
     switch (sWigglytuffShop3Work->state) {
         case WIGGLYTUFF_UNK9:

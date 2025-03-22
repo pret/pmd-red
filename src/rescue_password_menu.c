@@ -1,9 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
+#include "constants/main_menu.h"
 #include "code_803D0D8.h"
 #include "code_8094F88.h"
-#include "constants/main_menu.h"
 #include "dungeon.h"
 #include "input.h"
 #include "items.h"
@@ -13,7 +12,9 @@
 #include "pokemon.h"
 #include "rescue_password_menu.h"
 #include "save.h"
-#include "text.h"
+#include "sprite.h"
+#include "string_format.h"
+#include "text_1.h"
 
 #define RESCUE_PASSWORD_SIZE 0x36
 
@@ -543,7 +544,7 @@ s32 UpdateRescuePasswordMenu(void)
 
 void DisplayRescuePasswordError(u32 passwordError)
 {
-  RestoreUnkTextStruct_8006518(&gRescuePasswordMenu->unk1A8);
+  RestoreSavedWindows(&gRescuePasswordMenu->unk1A8);
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
   sub_80155F0();
@@ -583,7 +584,7 @@ void DisplayRescuePasswordError(u32 passwordError)
 
 void DisplayPasswordAcceptScreen(void)
 {
-  RestoreUnkTextStruct_8006518(&gRescuePasswordMenu->unk1A8);
+  RestoreSavedWindows(&gRescuePasswordMenu->unk1A8);
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
   sub_80155F0();

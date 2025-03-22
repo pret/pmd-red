@@ -1,15 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/input.h"
+#include "structs/struct_sub80095e4.h"
 #include "code_80118A4.h"
 #include "code_80958E8.h"
 #include "code_80A26CC.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
-#include "structs/struct_sub80095e4.h"
-
+#include "text_1.h"
+#include "text_2.h"
 
 struct unkStruct_203B314
 {
@@ -77,7 +77,7 @@ u32 sub_802F73C(u32 r0, DungeonPos *r1, u32 r2, u8 r3)
     gUnknown_203B314->unkB8 = r3;
     gUnknown_203B314->sBC.s0.unk34 = r0;
     gUnknown_203B314->sBC.s0.unk38 = &gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.unk34];
-    RestoreUnkTextStruct_8006518(&gUnknown_203B314->sBC.s0.windows);
+    RestoreSavedWindows(&gUnknown_203B314->sBC.s0.windows);
 
     if (r3 != 0)
         gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.unk34] = gUnknown_80E072C;

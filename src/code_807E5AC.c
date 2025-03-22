@@ -36,6 +36,7 @@
 #include "constants/type.h"
 #include "dungeon_misc.h"
 #include "code_807E5AC.h"
+#include "sprite.h"
 
 extern OpenedFile *gUnknown_202ECA0;
 extern SpriteOAM gUnknown_202EDC0;

@@ -9,7 +9,6 @@
 #include "structs/str_position.h"
 #include "structs/str_traps.h"
 #include "structs/str_dungeon_location.h"
-#include "sprite.h"
 
 #define DUNGEON_MAX_SIZE_X 56
 #define DUNGEON_MAX_SIZE_Y 32

@@ -1,8 +1,9 @@
 #include "global.h"
 #include "structs/str_position.h"
-#include "other_random.h"
+#include "code_8002774.h"
 #include "math.h"
 #include "memory.h"
+#include "other_random.h"
 
 struct unkStruct_20399E8
 {
@@ -255,8 +256,6 @@ u8 sub_809D248(PixelPos *r0)
 extern s32 sub_80A8FD8(s16 a0, PixelPos *a1);
 extern s32 sub_80AC448(s16 a0, PixelPos *a1);
 extern s32 sub_80AD360(s16 a0, PixelPos *a1);
-extern void sub_800290C(PixelPos *a0, s32 a1);
-extern void sub_8002934(PixelPos *a0, PixelPos *a1, PixelPos *a2, u32 a3, u32 a4);
 extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
 void sub_809D25C(void)

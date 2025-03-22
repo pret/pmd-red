@@ -1,18 +1,18 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_800558C.h"
+#include "structs/axdata.h"
+#include "structs/struct_sub80095e4.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "input.h"
 #include "menu_input.h"
 #include "sprite.h"
+#include "string_format.h"
+#include "text_2.h"
 #include "text_util.h"
-#include "text.h"
 #include "util.h"
-#include "structs/struct_sub80095e4.h"
 
 const u32 gDefaultMenuTextColors[3] = { COLOR_WHITE_2, COLOR_RED, COLOR_RED };
 
@@ -164,7 +164,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 a5)
 {
     s32 iVar1;
     u32 uVar2;
-    const struct unkChar *iVar3;
+    const unkChar *iVar3;
     s32 counter;
     s32 *piVar3;
     s32 *piVar4;
@@ -209,7 +209,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 a5)
 void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
 {
     u32 add_x;
-    const struct unkChar *iVar3;
+    const unkChar *iVar3;
     u32 uVar2;
 
     uVar2 = ReturnIntFromChar2(a2);
@@ -258,7 +258,7 @@ void sub_8012D08(WindowTemplate *param_1, s32 param_2)
     param_1->unk10 = sVar3;
 }
 
-void sub_8012D34(struct WindowTemplate *param_1, s32 param_2)
+void sub_8012D34(WindowTemplate *param_1, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
@@ -397,7 +397,7 @@ void sub_8012EBC(MenuStruct *param_1)
 
         if (window->type == WINDOW_TYPE_WITH_HEADER) {
             WindowTemplate *windowTemplate = &winTemplates.id[index];
-            RestoreUnkTextStruct_8006518(&winTemplates);
+            RestoreSavedWindows(&winTemplates);
             x = sub_8008ED0(param_1->unk0);
             PrintFormattedStringOnWindow(((windowTemplate->header->width * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }

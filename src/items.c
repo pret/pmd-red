@@ -2,16 +2,16 @@
 #include "code_8097DD0.h"
 #include "constants/colors.h"
 #include "constants/type.h"
+#include "code_800D090.h"
 #include "def_filearchives.h"
 #include "items.h"
 #include "moves.h"
-#include "random.h"
 #include "pokemon.h"
 #include "random.h"
-#include "code_800D090.h"
-#include "text_util.h"
-#include "text.h"
 #include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_util.h"
 
 extern const char gItemParaFileName[];
 extern const char gUnknown_8109794[];

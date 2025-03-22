@@ -3,17 +3,19 @@
 #include "code_800D090.h"
 #include "code_803E46C.h"
 #include "code_803E724.h"
-#include "dungeon_menu_recruitment.h"
 #include "dungeon.h"
-#include "text.h"
-#include "menu_input.h"
-#include "input.h"
+#include "dungeon_menu_recruitment.h"
 #include "dungeon_message.h"
+#include "dungeon_music.h"
+#include "exclusive_pokemon.h"
+#include "input.h"
+#include "menu_input.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "sprite.h"
-#include "exclusive_pokemon.h"
-#include "dungeon_music.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
@@ -262,7 +264,7 @@ static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 a1)
 // Almost identical to CreateMessageLogArrow
 static void CreateScrollingArrow(bool8 upArrow, s32 y)
 {
-    struct Window *window = &gWindows[0];
+    Window *window = &gWindows[0];
     if (!(gDungeonFramesCounter & 8)) {
         SpriteSetAffine1(&sScrollingArrowOAM, 0);
         SpriteSetAffine2(&sScrollingArrowOAM, 0);

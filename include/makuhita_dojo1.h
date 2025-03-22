@@ -1,8 +1,8 @@
 #ifndef GUARD_MAKUHITA_DOJO1_H
 #define GUARD_MAKUHITA_DOJO1_H
 
-#include "file_system.h"
 #include "structs/menu.h"
+#include "structs/str_mon_portrait.h"
 #include "structs/str_text.h"
 
 enum MakuhitaDojoInitMode
@@ -28,8 +28,8 @@ typedef struct MakuhitaDojoWork1
     /* 0x14 */ s32 menuAction;
     MenuItem unk18[4];
     u8 fill38[0x58 - 0x38];
-    /* 0x58 */ struct MonPortraitMsg monPortrait;
-    struct MonPortraitMsg *monPortraitPtr;
+    /* 0x58 */ MonPortraitMsg monPortrait;
+    MonPortraitMsg *monPortraitPtr;
     WindowTemplates unk6C;
 } MakuhitaDojoWork1;
 

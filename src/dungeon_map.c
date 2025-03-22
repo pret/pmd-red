@@ -1,29 +1,29 @@
 #include "global.h"
 #include "globaldata.h"
-#include "def_filearchives.h"
-#include "dungeon_map.h"
-#include "structs/dungeon_entity.h"
-#include "structs/str_dungeon.h"
-#include "dungeon_map_access.h"
-#include "dungeon_music.h"
-#include "file_system.h"
-#include "cpu.h"
-#include "dungeon.h"
-#include "game_options.h"
-#include "bg_palette_buffer.h"
-#include "code_8009804.h"
-#include "code_800E9E4.h"
-#include "dungeon_generation.h"
-#include "dungeon_util.h"
-#include "trap.h"
-#include "text.h"
 #include "constants/dungeon.h"
 #include "constants/trap.h"
+#include "structs/dungeon_entity.h"
+#include "structs/str_dungeon.h"
+#include "bg_palette_buffer.h"
+#include "cpu.h"
+#include "code_8009804.h"
+#include "code_800E9E4.h"
+#include "def_filearchives.h"
+#include "dungeon.h"
+#include "dungeon_generation.h"
+#include "dungeon_map.h"
+#include "dungeon_map_access.h"
+#include "dungeon_music.h"
+#include "dungeon_util.h"
+#include "file_system.h"
+#include "game_options.h"
+#include "sprite.h"
+#include "text_1.h"
+#include "trap.h"
 
 extern DungeonPos gPlayerDotMapPosition;
 extern s32 gUnknown_202EDD0;
 
-extern void nullsub_11(SpriteOAM *, s32, UnkSpriteMem *, unkStruct_2039DB0 *);
 extern u8 GetFloorType(void);
 extern bool8 sub_8094C48(void);
 extern bool8 sub_8045804(Entity *ent);

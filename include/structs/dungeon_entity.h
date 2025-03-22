@@ -12,7 +12,6 @@
 #include "structs/str_iq_skill_flags.h"
 #include "math.h"
 #include "number_util.h"
-#include "sprite.h"
 
 #define MAX_STAT_STAGE 20
 #define STAT_MULTIPLIER_THRESHOLD 0.249 // one tick less than 0.25
@@ -361,7 +360,7 @@ typedef struct Entity
     // The global spawn index counter starts at 10. Each Pokémon that spawns increments the counter and
     // gets assigned the current counter value as its spawn index.
     /* 0x26 */ u16 spawnGenID;
-    /* 0x28 */ struct axObject axObj;
+    /* 0x28 */ axObject axObj;
 } Entity;
 
 enum EntityType

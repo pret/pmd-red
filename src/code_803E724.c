@@ -1,31 +1,31 @@
 #include "global.h"
-#include "dungeon.h"
-#include "bg_palette_buffer.h"
-#include "code_8004AA0.h"
-#include "input.h"
-#include "text.h"
-#include "code_801602C.h"
-#include "menu_input.h"
-#include "code_8009804.h"
-#include "code_803E46C.h"
-#include "dungeon_util.h"
-#include "code_800E9E4.h"
-#include "dungeon_pokemon_attributes.h"
-#include "dungeon_map_access.h"
-#include "sprite.h"
-#include "bg_control.h"
-#include "dungeon_map.h"
-#include "game_options.h"
-#include "code_800558C.h"
-#include "dungeon_range.h"
-#include "dungeon_message.h"
-#include "code_806CD90.h"
-#include "dungeon_items.h"
 #include "constants/item.h"
 #include "constants/status.h"
-#include "code_803E724.h"
 #include "structs/str_202EDE8.h"
+#include "bg_control.h"
+#include "bg_palette_buffer.h"
+#include "code_8004AA0.h"
+#include "code_800558C.h"
+#include "code_8009804.h"
+#include "code_800E9E4.h"
+#include "code_801602C.h"
+#include "code_803E46C.h"
+#include "code_803E724.h"
+#include "code_806CD90.h"
+#include "dungeon.h"
+#include "dungeon_items.h"
+#include "dungeon_map.h"
+#include "dungeon_map_access.h"
+#include "dungeon_message.h"
 #include "dungeon_music.h"
+#include "dungeon_pokemon_attributes.h"
+#include "dungeon_range.h"
+#include "dungeon_util.h"
+#include "game_options.h"
+#include "input.h"
+#include "menu_input.h"
+#include "sprite.h"
+#include "text_1.h"
 
 extern s32 gDungeonBrightness;
 extern u32 gUnknown_202EDD0;
@@ -170,7 +170,7 @@ void sub_803EA10(void)
     SetBGPaletteBufferColorRGB(248, &gFontPalette[8], gDungeonBrightness, NULL);
 }
 
-static const struct WindowTemplates gUnknown_80F62B0 =
+static const WindowTemplates gUnknown_80F62B0 =
 {
     .id = {
         [0] = {
@@ -188,7 +188,7 @@ static const struct WindowTemplates gUnknown_80F62B0 =
     }
 };
 
-static const struct WindowTemplates gUnknown_80F6310 =
+static const WindowTemplates gUnknown_80F6310 =
 {
     .id = {
         [0] = {
@@ -206,7 +206,7 @@ static const struct WindowTemplates gUnknown_80F6310 =
     }
 };
 
-static const struct WindowTemplates gUnknown_80F6370 =
+static const WindowTemplates gUnknown_80F6370 =
 {
     .id = {
         [0] = {
@@ -240,7 +240,7 @@ static const struct WindowTemplates gUnknown_80F6370 =
     }
 };
 
-static const struct WindowTemplates gUnknown_80F63D0 =
+static const WindowTemplates gUnknown_80F63D0 =
 {
     .id = {
         [0] = {

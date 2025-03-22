@@ -1,10 +1,9 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/communication_error_codes.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
-#include "constants/communication_error_codes.h"
 #include "cpu.h"
 #include "input.h"
 #include "items.h"
@@ -13,7 +12,9 @@
 #include "menu_input.h"
 #include "other_menus2.h"
 #include "save_write.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 #include "trade_items_menu.h"
 
 static EWRAM_INIT struct TradeItemsMenu *sTradeItemsMenu = {NULL};
@@ -176,7 +177,7 @@ void sub_80365AC(void)
         sTradeItemsMenu->fallbackState = TRADE_ITEMS_SEND_ITEM_SELECTION;
         sTradeItemsMenu->itemToSend.id = sub_801CB24();
         sTradeItemsMenu->itemToSend.quantity = 1;
-        RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk1E4);
+        RestoreSavedWindows(&sTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
         InitItemDescriptionWindow(&sTradeItemsMenu->itemToSend);
@@ -200,7 +201,7 @@ void sub_8036674(void)
         break;
     case 4: // Info
         sTradeItemsMenu->fallbackState = 0x13;
-        RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk1E4);
+        RestoreSavedWindows(&sTradeItemsMenu->unk1E4);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
         InitItemDescriptionWindow(&sTradeItemsMenu->itemToSend);
@@ -505,7 +506,7 @@ void sub_8036B28(void)
         }
         break;
     case TRADE_ITEMS_SEND_ITEM_POPUP_MENU:
-        RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk184);
+        RestoreSavedWindows(&sTradeItemsMenu->unk184);
         SetMenuItems(sTradeItemsMenu->unk44,&sTradeItemsMenu->unk184,3,&sUnknown_80E60EC,
                     sUnknown_80E6104,TRUE,0,FALSE);
         sub_801CCD8();
@@ -647,7 +648,7 @@ void sub_8036F30(void)
 
 void sub_8036F74(void)
 {
-  RestoreUnkTextStruct_8006518(&sTradeItemsMenu->unk184);
+  RestoreSavedWindows(&sTradeItemsMenu->unk184);
   sub_8036ECC(2, gTeamInventoryRef->teamStorage[sTradeItemsMenu->itemToSend.id]);
   sub_801CCD8();
   sub_8035CF4(sTradeItemsMenu->unk44, 3, FALSE);

@@ -1,13 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/communication_error_codes.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "code_802F204.h"
 #include "code_8094F88.h"
-#include "constants/communication_error_codes.h"
 #include "cpu.h"
 #include "input.h"
 #include "items.h"
@@ -19,8 +18,9 @@
 #include "rescue_password_menu.h"
 #include "save.h"
 #include "save_write.h"
+#include "string_format.h"
+#include "text_1.h"
 #include "text_util.h"
-#include "text.h"
 #include "thank_you_wonder_mail.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
@@ -241,7 +241,7 @@ u32 CreateThankYouMailPelipper(void)
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
 
   sUnknown_203B2C4->monPortrait.faceFile = faceFile;
-  sUnknown_203B2C4->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
+  sUnknown_203B2C4->monPortrait.faceData = (PortraitGfx *) faceFile->data;
   sUnknown_203B2C4->monPortrait.spriteId = 0;
   sUnknown_203B2C4->monPortrait.flip = FALSE;
   sUnknown_203B2C4->monPortrait.unkE = 0;
@@ -565,7 +565,7 @@ void sub_802A0C8(void)
     case 4:
         sUnknown_203B2C4->fallbackState = 0x10;
         sUnknown_203B2C4->mailIndex = sub_80307EC();
-        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
+        RestoreSavedWindows(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
         sub_8030D40(sUnknown_203B2C4->mailIndex,0);
@@ -601,7 +601,7 @@ void sub_802A174(void)
         break;
       case INFO_ACTION:
         sUnknown_203B2C4->fallbackState = 0x2b;
-        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
+        RestoreSavedWindows(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
         sub_8030D40(sUnknown_203B2C4->mailIndex,0);
@@ -660,7 +660,7 @@ void sub_802A28C(void)
     case 4:
         sUnknown_203B2C4->fallbackState = 0x13;
         sUnknown_203B2C4->unk41C.id = sub_801CB24();
-        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
+        RestoreSavedWindows(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
         InitItemDescriptionWindow(&sUnknown_203B2C4->unk41C);
@@ -711,7 +711,7 @@ void sub_802A39C(void)
             break;
       case INFO_ACTION:
             sUnknown_203B2C4->fallbackState = 0x2b;
-            RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
+            RestoreSavedWindows(&sUnknown_203B2C4->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             InitItemDescriptionWindow(&sUnknown_203B2C4->unk41C);
@@ -1267,7 +1267,7 @@ void UpdateThankYouMailText(void)
         sub_80306A8(WONDER_MAIL_TYPE_THANK_YOU,0,0,6);
         break;
     case 0x11:
-        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk35C);
+        RestoreSavedWindows(&sUnknown_203B2C4->unk35C);
         SetMenuItems(sUnknown_203B2C4->unk21C,&sUnknown_203B2C4->unk35C,3,&gUnknown_80DED60,gUnknown_80DED78,TRUE,0,FALSE);
         sub_803092C();
         sub_8035CF4(sUnknown_203B2C4->unk21C,3,TRUE);
@@ -1283,7 +1283,7 @@ void UpdateThankYouMailText(void)
         }
         break;
     case 0x14:
-        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk35C);
+        RestoreSavedWindows(&sUnknown_203B2C4->unk35C);
         SetMenuItems(sUnknown_203B2C4->unk21C,&sUnknown_203B2C4->unk35C,3,&gUnknown_80DED48,gUnknown_80DED78,TRUE,0,FALSE);
         sub_801CCD8();
         sub_8035CF4(sUnknown_203B2C4->unk21C,3,TRUE);
@@ -1330,13 +1330,13 @@ void UpdateThankYouMailText(void)
         CreateDialogueBoxAndPortrait(gUnknown_80DF380,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
     case PROCESS_THANK_YOU_PASSWORD:
-        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
+        RestoreSavedWindows(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
         sub_80151C0(4,sUnknown_203B2C4->passwordBuffer);
         break;
     case 0x1a:
-        RestoreUnkTextStruct_8006518(&sUnknown_203B2C4->unk3BC);
+        RestoreSavedWindows(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
         sub_8031D70(sUnknown_203B2C4->mailIndex,0);

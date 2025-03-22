@@ -1,15 +1,17 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
 #include "code_801602C.h"
 #include "code_8023868.h"
 #include "debug_menu4.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 
-static EWRAM_INIT unkStruct_203B3F8 *sUnknown_203B3F8 = {NULL};
+EWRAM_INIT static unkStruct_203B3F8 *sUnknown_203B3F8 = {NULL};
 
 #include "data/debug_menu4.h"
 
@@ -82,7 +84,7 @@ static void sub_803ACE8(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B3F8->unkE0);
+    RestoreSavedWindows(&sUnknown_203B3F8->unkE0);
 
     switch (sUnknown_203B3F8->state) {
         case 3:

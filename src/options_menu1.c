@@ -1,6 +1,5 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "hints_menu1.h"
@@ -10,7 +9,8 @@
 #include "menu_input.h"
 #include "options_menu1.h"
 #include "options_menu2.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 
 enum
 {
@@ -104,7 +104,7 @@ static void sub_801DD84(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B25C->unkBC);
+    RestoreSavedWindows(&sUnknown_203B25C->unkBC);
 
     switch (sUnknown_203B25C->state) {
         case OPTIONS_MENU_INIT:

@@ -4,19 +4,18 @@
 #include "def_filearchives.h"
 #include "event_flag.h"
 #include "file_system.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
 
-extern const u8 gUnknown_811601C[];
 extern u8 gUnknown_20398B8;
 
+extern const u8 gUnknown_811601C[];
+
 extern void sub_8003600(void);
-
 extern s32 sub_800388C(u16, const u8 *, u8);
-
+extern void sub_8099690(u32);
 extern void sub_80A4B38(void);
 extern void sub_80A4B54(void);
-
-extern void sub_8099690(u32);
 
 bool8 sub_8099360(u8 *dungeonId) {
     s16 script_disc;

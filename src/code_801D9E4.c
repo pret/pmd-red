@@ -1,18 +1,19 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/input.h"
+#include "structs/struct_sub80095e4.h"
 #include "code_80118A4.h"
 #include "code_801D9E4.h"
-#include "constants/input.h"
 #include "ground_main.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_1.h"
+#include "text_2.h"
 
-static EWRAM_INIT struct struct_Sub80095E4_2 *sUnknown_203B258 = {NULL};
+EWRAM_INIT static struct struct_Sub80095E4_2 *sUnknown_203B258 = {NULL};
 
-extern struct unkStruct_81188F0 gUnknown_81188F0[10];
+extern const struct unkStruct_81188F0 gUnknown_81188F0[10];
 
 #include "data/code_801D9E4.h"
 
@@ -24,7 +25,7 @@ bool8 sub_801D9E4(void)
     sUnknown_203B258 = MemoryAlloc(sizeof(*sUnknown_203B258), 8);
     sUnknown_203B258->s0.unk34 = 3;
     sUnknown_203B258->s0.unk38 = &sUnknown_203B258->s0.windows.id[3];
-    RestoreUnkTextStruct_8006518(&sUnknown_203B258->s0.windows);
+    RestoreSavedWindows(&sUnknown_203B258->s0.windows);
     sUnknown_203B258->s0.windows.id[sUnknown_203B258->s0.unk34] = sUnknown_80DBF88;
     sUnknown_203B258->s0.unk38->header = &sUnknown_203B258->unk9C;
     ResetUnusedInputStruct();
@@ -104,7 +105,7 @@ static void sub_801DB54(void)
 static void sub_801DBD4(void)
 {
     GroundConversionStruct *temp;
-    struct unkStruct_81188F0 *temp2;
+    const struct unkStruct_81188F0 *temp2;
     s32 x, y, n;
     s16 index;
     int counter;

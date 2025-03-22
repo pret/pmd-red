@@ -2,13 +2,14 @@
 #include "globaldata.h"
 #include "constants/input.h"
 #include "code_80118A4.h"
-#include "string_format.h"
-#include "iq_skill_list_menu.h"
 #include "input.h"
+#include "iq_skill_list_menu.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_3.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 static EWRAM_INIT struct IQSkillListMenu *sIQSkillListMenu = {NULL};
 
@@ -31,7 +32,7 @@ bool8 CreateIQSkillListMenu(s16 species, u32 index, u32 a2)
     sIQSkillListMenu->numIQSkills = GetNumAvailableIQSkills(sIQSkillListMenu->iqSkills, sIQSkillListMenu->pokeStruct->IQ);
     sIQSkillListMenu->s24.s0.unk34 = index;
     sIQSkillListMenu->s24.s0.unk38 = &sIQSkillListMenu->s24.s0.windows.id[index];
-    RestoreUnkTextStruct_8006518(&sIQSkillListMenu->s24.s0.windows);
+    RestoreSavedWindows(&sIQSkillListMenu->s24.s0.windows);
     sIQSkillListMenu->s24.s0.windows.id[sIQSkillListMenu->s24.s0.unk34] = sUnknown_80DBDF0;
     sIQSkillListMenu->s24.s0.unk38->header = &sIQSkillListMenu->s24.unk9C;
     sub_8012D08(sIQSkillListMenu->s24.s0.unk38, a2);

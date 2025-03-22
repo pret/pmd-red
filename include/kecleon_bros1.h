@@ -1,9 +1,9 @@
 #ifndef GUARD_KECLEON_BROS1_H
 #define GUARD_KECLEON_BROS1_H
 
-#include "file_system.h"
 #include "items.h"
 #include "structs/menu.h"
+#include "structs/str_mon_portrait.h"
 #include "structs/str_text.h"
 
 enum KecleonStoreStates
@@ -63,8 +63,8 @@ typedef struct KecleonBrosWork1
     /* 0x34 */ MenuItem menuItems[8];
     u16 unk74[8];
     /* 0x84 */ MenuStruct menu;
-    /* 0xD4 */ struct MonPortraitMsg monPortrait;
-    struct MonPortraitMsg *monPortraitPtr;
+    /* 0xD4 */ MonPortraitMsg monPortrait;
+    MonPortraitMsg *monPortraitPtr;
     WindowTemplates unkE8;
 } KecleonBrosWork1;
 

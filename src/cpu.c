@@ -28,6 +28,7 @@ u32 sub_800CDC8(void)
     return gUnknown_202D800;
 }
 
+// arm9.bin::02007FF4
 void SetWindowTitle(const u8 *title)
 {
 }
@@ -45,11 +46,13 @@ UNUSED static bool8 sub_800CDE0(void)
     return TRUE;
 }
 
+// In NDS, this func is copied to 01FF9FC4
 void CpuCopy(void *dest, const void *src, s32 size)
 {
     CpuCopy32(src, dest, size);
 }
 
+// In NDS, this func is copied to 01FF9FB0
 void CpuClear(void *dest, s32 size)
 {
     CpuFill32(NULL, dest, size);

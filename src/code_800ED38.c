@@ -1,6 +1,6 @@
 #include "global.h"
 #include "bg_control.h"
-#include "code_800558C.h"
+#include "structs/axdata.h"
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_800E9E4.h"
@@ -12,14 +12,14 @@
 #include "main_loops.h"
 #include "memory.h"
 #include "sprite.h"
-#include "text.h"
+#include "text_2.h"
 
 struct unkStruct_203B0D0_sub
 {
     // size: 0x24
     u32 unk0;
     OpenedFile *file;
-    const struct EfoFileData *fileData;
+    const EfoFileData *fileData;
     u32 unkC;
     s32 unk10;
     s32 unk14;

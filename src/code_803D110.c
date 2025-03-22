@@ -15,7 +15,8 @@
 #include "game_options.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_3.h"
 
 extern s32 sub_80902C8(u8 dungeon);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);

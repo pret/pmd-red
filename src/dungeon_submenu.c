@@ -1,9 +1,10 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_800D090.h"
 #include "dungeon_submenu.h"
 #include "menu_input.h"
-#include "text.h"
-#include "code_800D090.h"
+#include "text_1.h"
+#include "text_3.h"
 
 // The reason this short file(just 1 function) exists is because of the pksdir string which usually signifies the file's beginning.
 

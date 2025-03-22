@@ -1,27 +1,30 @@
 #include "global.h"
-#include "dungeon_message.h"
-#include "dungeon_map.h"
-#include "dungeon.h"
 #include "structs/dungeon_entity.h"
-#include "code_803E46C.h"
-#include "code_803E724.h"
-#include "code_8009804.h"
-#include "string_format.h"
-#include "code_800E9E4.h"
-#include "menu_input.h"
-#include "code_803E668.h"
 #include "bg_palette_buffer.h"
-#include "input.h"
-#include "pokemon.h"
-#include "file_system.h"
-#include "dungeon_util_1.h"
+#include "code_8009804.h"
 #include "code_800D090.h"
-#include "dungeon_util.h"
+#include "code_800E9E4.h"
+#include "code_803E46C.h"
+#include "code_803E668.h"
+#include "code_803E724.h"
 #include "code_8045A00.h"
-#include "exclusive_pokemon.h"
+#include "dungeon.h"
 #include "dungeon_leader.h"
-#include "text.h"
+#include "dungeon_map.h"
+#include "dungeon_message.h"
 #include "dungeon_music.h"
+#include "dungeon_util.h"
+#include "dungeon_util_1.h"
+#include "exclusive_pokemon.h"
+#include "file_system.h"
+#include "input.h"
+#include "menu_input.h"
+#include "pokemon.h"
+#include "sprite.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 
 void sub_80526D0(s32 r0);
 static void PutStringsOnMessageLog(void);
@@ -38,8 +41,6 @@ extern void sub_8083E28(void);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
-extern void sub_8007334(s32 a0);
-extern void sub_80087EC(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4);
 
 extern u32 gUnknown_202EDD0;
 extern u8 gUnknown_203B40C;
@@ -235,7 +236,7 @@ void xxx_draw_string_80524F0(void)
             sub_803EAF0(3, NULL);
         // fall through
         case 2: {
-            struct UnkDrawStringStruct sp;
+            UnkDrawStringStruct sp;
             u32 currChr;
 
             s32 id = strPtr->unk1C062;
@@ -335,7 +336,7 @@ void sub_8052740(s32 a0)
 
 void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool8 a2)
 {
-    struct MonPortraitMsg monPortrait, *monPortraitPtr;
+    MonPortraitMsg monPortrait, *monPortraitPtr;
     s32 chosenMenuIndex;
 
     if (gUnknown_203B40C) {
@@ -354,7 +355,7 @@ void DisplayDungeonMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8
         && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
     {
         monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
-        monPortrait.faceData = (struct PortraitGfx *) monPortrait.faceFile->data;
+        monPortrait.faceData = (PortraitGfx *) monPortrait.faceFile->data;
         monPortrait.pos.x = 2;
         monPortrait.pos.y = 9;
         monPortrait.spriteId = monSpriteInfo->spriteId;
@@ -402,12 +403,12 @@ extern const struct Struct_sub_808CDB0 *sub_808CDB0(s32 a0);
 
 void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 {
-    struct MonPortraitMsg monPortrait;
+    MonPortraitMsg monPortrait;
     s32 leaderId, partnerId, dialogueMonId;
     s32 chosenMenuIndex;
     Entity *leader = xxx_call_GetLeader();
     Entity *partner = GetPartnerEntity();
-    struct MonPortraitMsg *monPortraitPtr = NULL;
+    MonPortraitMsg *monPortraitPtr = NULL;
 
     if (leader != NULL) {
         EntityInfo *leaderInfo = GetEntInfo(leader);
@@ -479,7 +480,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
         monPortraitPtr = &monPortrait;
         monPortraitPtr->faceFile = GetDialogueSpriteDataPtr(dialogueMonId);
         if (monPortraitPtr->faceFile != NULL) {
-            monPortraitPtr->faceData = (struct PortraitGfx *) monPortraitPtr->faceFile->data;
+            monPortraitPtr->faceData = (PortraitGfx *) monPortraitPtr->faceFile->data;
             monPortraitPtr->unkE = 0;
             monPortraitPtr->spriteId = dialogueInfo->unk2;
             monPortraitPtr->flip = strPtr->flip;
@@ -513,7 +514,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 
 bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, bool32 defaultYes)
 {
-    struct MonPortraitMsg monPortrait, *monPortraitPtr;
+    MonPortraitMsg monPortrait, *monPortraitPtr;
     s32 chosenMenuIndex;
 
     sub_8052740(10);
@@ -529,7 +530,7 @@ bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, c
         && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
     {
         monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
-        monPortrait.faceData = (struct PortraitGfx *) monPortrait.faceFile->data;
+        monPortrait.faceData = (PortraitGfx *) monPortrait.faceFile->data;
         monPortrait.pos.x = 2;
         monPortrait.pos.y = 9;
         monPortrait.spriteId = monSpriteInfo->spriteId;
@@ -562,7 +563,7 @@ bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, c
 
 s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, const MenuItem *menuItems, u16 unkArg)
 {
-    struct MonPortraitMsg monPortrait, *monPortraitPtr;
+    MonPortraitMsg monPortrait, *monPortraitPtr;
     s32 chosenMenuIndex;
 
     sub_8052740(10);
@@ -578,7 +579,7 @@ s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const
         && IsPokemonDialogueSpriteAvail(monSpriteInfo->species, monSpriteInfo->spriteId))
     {
         monPortrait.faceFile = GetDialogueSpriteDataPtr(monSpriteInfo->species);
-        monPortrait.faceData = (struct PortraitGfx *) monPortrait.faceFile->data;
+        monPortrait.faceData = (PortraitGfx *) monPortrait.faceFile->data;
         monPortrait.pos.x = 2;
         monPortrait.pos.y = 9;
         monPortrait.spriteId = monSpriteInfo->spriteId;
@@ -1041,7 +1042,7 @@ static bool8 TryScrollLogDown(s32 a0)
 
 static void CreateMessageLogArrow(bool8 upArrow, s32 y)
 {
-    struct Window *window = &gWindows[0];
+    Window *window = &gWindows[0];
     if (!(gDungeonFramesCounter & 8)) {
         SpriteSetAffine1(&sMessageLogArrowSpriteOAM, 0);
         SpriteSetAffine2(&sMessageLogArrowSpriteOAM, 0);

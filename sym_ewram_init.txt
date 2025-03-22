@@ -5,7 +5,7 @@
 .include "src/sprite.o"
 .include "src/code_800558C.o"
 .include "src/random.o"
-.include "src/text.o"
+.include "src/text_1.o"
 .include "src/code_8009804.o"
 .include "src/file_system.o"
 .include "src/main.o"

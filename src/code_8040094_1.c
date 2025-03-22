@@ -17,6 +17,7 @@
 #include "dungeon_music.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "sprite.h"
 #include "tile_types.h"
 #include "weather.h"
 
@@ -32,7 +33,6 @@ struct UnkStruct_8040094
 
 extern u8 sub_800EC94(s32 param_1);
 extern s32 sub_800E710(s32 a0, u16 a1);
-extern void sub_800569C(DungeonPos *, axdata *, u8);
 extern void sub_800EEC8(u16 r0);
 extern void sub_8042DD4(s32 a0, Entity *a1, s32 a2);
 extern u8 sub_800EA44(s32 species, u16 a2);
@@ -100,7 +100,7 @@ static void sub_8040C4C(Entity *entity, Move *move, bool32 a2)
     s32 r2 = sub_800E710(apparentId, sub_80412E0(move->id, GetApparentWeather(entity), TRUE));
 
     if (r2 != -1) {
-        sub_800569C(&sp.unk8, &entity->axObj.axdata, r2);
+        sub_800569C(&sp.unk8, &entity->axObj, r2);
     }
     else {
         sp.unk8 = (DungeonPos) {0};
@@ -252,7 +252,7 @@ static void sub_8041038(struct UnkStruct_8040094 *a0, Entity *entity, Move *move
         s32 r2 = sub_800E710(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), a2));
 
         if (r2 != -1) {
-            sub_800569C(&a0->unk8, &entity->axObj.axdata, r2);
+            sub_800569C(&a0->unk8, &entity->axObj, r2);
         }
         else {
             a0->unk8 = (DungeonPos) {0};
@@ -312,7 +312,7 @@ void sub_8041168(Entity *entity, Entity *entity2, Move *move, DungeonPos *pos)
     var2 = sub_800ECA4(var)->unk1c;
     if (var2 != -1) {
         if (EntityIsValid(entity2)) {
-            sub_800569C(&sp.unk8, &entity2->axObj.axdata, var2);
+            sub_800569C(&sp.unk8, &entity2->axObj, var2);
         }
         else {
             sp.unk8 = (DungeonPos) {0};

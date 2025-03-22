@@ -1,16 +1,17 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
-#include "string_format.h"
-#include "code_80958E8.h"
 #include "constants/input.h"
+#include "code_80118A4.h"
+#include "code_80958E8.h"
 #include "input.h"
 #include "pokemon_mail.h"
 #include "pokemon_news1.h"
 #include "pokemon_news2.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 static EWRAM_INIT struct unkStruct_203B2CC *sUnknown_203B2CC = {NULL};
 static EWRAM_INIT u16 sUnknown_203B2D0 = {0};
@@ -34,7 +35,7 @@ bool8 sub_802B640(u32 a0, DungeonPos *a1, u32 a2)
     sUnknown_203B2CC->s38.unk34 = a0;
     sUnknown_203B2CC->s38.unk38 = &sUnknown_203B2CC->s38.windows.id[a0];
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B2CC->s38.windows);
+    RestoreSavedWindows(&sUnknown_203B2CC->s38.windows);
 
     sUnknown_203B2CC->s38.windows.id[sUnknown_203B2CC->s38.unk34] = sUnknown_80DFBEC;
 

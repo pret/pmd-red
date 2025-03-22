@@ -63,6 +63,7 @@ void sub_800D098(void)
     while(REG_KEYINPUT != KEYS_MASK){} // All buttons
 }
 
+// arm9.bin::02007FF8
 void sprintfStatic(char *buffer, const char *text, ...)
 {
     va_list vArgv;

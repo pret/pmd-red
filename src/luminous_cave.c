@@ -1,16 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/bg_music.h"
+#include "constants/colors.h"
+#include "constants/evolution_status.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "code_8097670.h"
 #include "code_8098BDC.h"
 #include "code_8099360.h"
 #include "common_strings.h"
-#include "constants/bg_music.h"
-#include "constants/colors.h"
-#include "constants/evolution_status.h"
 #include "input.h"
 #include "kecleon_bros4.h"
 #include "luminous_cave.h"
@@ -18,8 +17,9 @@
 #include "menu_input.h"
 #include "pokemon.h"
 #include "random.h"
+#include "string_format.h"
+#include "text_1.h"
 #include "text_util.h"
-#include "text.h"
 
 enum
 {
@@ -180,7 +180,7 @@ static void sub_8024804(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sLuminousCaveWork->unk114);
+    RestoreSavedWindows(&sLuminousCaveWork->unk114);
 
     switch (sLuminousCaveWork->state) {
         case 8:

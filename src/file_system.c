@@ -1,5 +1,5 @@
 #include "global.h"
-#include "decompress.h"
+#include "decompress_sir.h"
 #include "file_system.h"
 
 // size: 0x8

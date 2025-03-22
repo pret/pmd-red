@@ -1,21 +1,22 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/colors.h"
+#include "constants/input.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "code_8023144.h"
-#include "constants/colors.h"
-#include "constants/input.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_3.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
 
-static EWRAM_INIT u32 gUnknown_203B298 = {1};
-static EWRAM_INIT u16 gUnknown_203B29C = {0};
-static EWRAM_INIT u16 gUnknown_203B29E = {0};
+EWRAM_INIT static u32 gUnknown_203B298 = {1};
+EWRAM_INIT static u16 gUnknown_203B29C = {0};
+EWRAM_INIT static u16 gUnknown_203B29E = {0};
 EWRAM_INIT s32 gUnknown_203B2A0 = 2;
 EWRAM_INIT s32 gUnknown_203B2A4 = 1;
 EWRAM_INIT u16 gUnknown_203B2A8 = 0;
@@ -48,7 +49,7 @@ bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
 
     gUnknown_3001B5C->s35C.s0.unk34 = index;
     gUnknown_3001B5C->s35C.s0.unk38 = &gUnknown_3001B5C->s35C.s0.windows.id[index];
-    RestoreUnkTextStruct_8006518(&gUnknown_3001B5C->s35C.s0.windows);
+    RestoreSavedWindows(&gUnknown_3001B5C->s35C.s0.windows);
     gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC91C;
 
     gUnknown_3001B5C->s35C.s0.unk38->header = &gUnknown_3001B5C->s35C.unk9C;

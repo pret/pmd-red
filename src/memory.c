@@ -38,7 +38,7 @@ struct HeapFreeListElement
 };
 
 // size: 0x1C
-struct HeapDescriptor
+typedef struct HeapDescriptor
 {
     u32 unk0;
     /* 0x4 */ struct HeapDescriptor *parentHeap;
@@ -47,28 +47,28 @@ struct HeapDescriptor
     /* 0x10 */ s32 freeListLength;
     /* 0x14 */ u8 *start;
     /* 0x18 */ u32 size;
-};
+} HeapDescriptor;
 
 // size: 0x8
 struct unkMemoryStruct
 {
-    struct HeapDescriptor *unk0;
+    HeapDescriptor *unk0;
     u32 end;
 };
 
-static EWRAM_DATA struct HeapDescriptor *sHeapDescriptorList[8] = {0};
+static EWRAM_DATA HeapDescriptor *sHeapDescriptorList[8] = {0};
 static EWRAM_DATA s32 sHeapCount = {0};
 UNUSED static EWRAM_DATA u32 sUnused1 = 0;
-static EWRAM_DATA struct HeapDescriptor sMainHeapDescriptor = {0};
+static EWRAM_DATA HeapDescriptor sMainHeapDescriptor = {0};
 UNUSED static EWRAM_DATA u32 sUnused2 = 0;
 static EWRAM_DATA struct HeapFreeListElement sMainHeapFreeList[32] = {0};
 static EWRAM_DATA u8 sMainHeap[HEAP_SIZE] = {0};
 
-static void DoFree(struct HeapDescriptor *, void *);
-static void DoInitHeap(struct HeapDescriptor *, struct HeapSettings *, struct HeapFreeListElement *, u32);
-static void InitSubHeap(struct HeapDescriptor *, struct HeapMemoryBlock2 *, u32);
-static struct HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b);
-static void *DoAlloc(struct HeapDescriptor *heap, s32 size, u32 a2);
+static void DoFree(HeapDescriptor *, void *);
+static void DoInitHeap(HeapDescriptor *, struct HeapSettings *, struct HeapFreeListElement *, u32);
+static void InitSubHeap(HeapDescriptor *, struct HeapMemoryBlock2 *, u32);
+static HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b);
+static void *DoAlloc(HeapDescriptor *heap, s32 size, u32 a2);
 static void InitHeapInternal(void);
 
 ALIGNED(4) static const char sFileNameText[] = "../system/memory_locate.c";
@@ -127,6 +127,7 @@ UNUSED static void MemoryFill32(u32 *dest, u32 value, s32 size)
     }
 }
 
+// arm9.bin::02010BB4
 void MemoryCopy8(void *dest, void *src, s32 size)
 {
     u8 *dCur = dest;
@@ -154,6 +155,7 @@ void MemoryCopy32(u32 *dest, u32 *src, s32 size)
     }
 }
 
+// arm9.bin::02011320
 static void InitHeapInternal(void)
 {
     struct HeapSettings settings;
@@ -164,7 +166,8 @@ static void InitHeapInternal(void)
     DoInitHeap(&sMainHeapDescriptor, &settings, sMainHeapFreeList, sizeof(sMainHeapFreeList) / sizeof(struct HeapFreeListElement));
 }
 
-static void DoInitHeap(struct HeapDescriptor *descriptor, struct HeapSettings *settings, struct HeapFreeListElement *freeList, u32 freeListLength)
+// arm9.bin::020112A4
+static void DoInitHeap(HeapDescriptor *descriptor, struct HeapSettings *settings, struct HeapFreeListElement *freeList, u32 freeListLength)
 {
     u32 aligned_size;
 
@@ -188,7 +191,7 @@ static void DoInitHeap(struct HeapDescriptor *descriptor, struct HeapSettings *s
     freeList->grp = 0;
 }
 
-static void InitSubHeap(struct HeapDescriptor *parentHeap, struct HeapMemoryBlock2 *block, u32 freeListMax)
+static void InitSubHeap(HeapDescriptor *parentHeap, struct HeapMemoryBlock2 *block, u32 freeListMax)
 {
     u32 freeListSize;
     u32 aligned_size;
@@ -230,7 +233,7 @@ static u32 xxx_memory_attr_related(u32 r0)
     return return_var;
 }
 
-static s32 MemorySearchFromFront(struct HeapDescriptor *heap, s32 atb, s32 size)
+static s32 MemorySearchFromFront(HeapDescriptor *heap, s32 atb, s32 size)
 {
     s32 i;
     struct HeapFreeListElement *curr;
@@ -274,7 +277,7 @@ static s32 MemorySearchFromFront(struct HeapDescriptor *heap, s32 atb, s32 size)
     return -1;
 }
 
-static s32 MemorySearchFromBack(struct HeapDescriptor *heap, s32 atb, s32 size)
+static s32 MemorySearchFromBack(HeapDescriptor *heap, s32 atb, s32 size)
 {
     s32 i;
     struct HeapFreeListElement *curr;
@@ -326,7 +329,7 @@ static const DebugLocation sLocateSetFrontDebugLocation =
     .func = sText_LocateSetFront
 };
 
-static struct HeapFreeListElement * _LocateSetFront(struct HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
+static struct HeapFreeListElement * _LocateSetFront(HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
 {
     s32 i;
     struct HeapFreeListElement *curr;
@@ -370,7 +373,7 @@ static const DebugLocation sLocateSetBackDebugLocation =
     .func = sText_LocateSetBack
 };
 
-static struct HeapFreeListElement * _LocateSetBack(struct HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
+static struct HeapFreeListElement * _LocateSetBack(HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
 {
     s32 i;
     struct HeapFreeListElement *curr;
@@ -416,39 +419,40 @@ static const DebugLocation sLocateSetDebugLocation =
     .func = sText_LocateSet
 };
 
-static void * _LocateSet(struct HeapDescriptor *heap, s32 size, s32 group)
+static void * _LocateSet(HeapDescriptor *heap, s32 size, s32 group)
 {
-  s32 index;
-  struct HeapFreeListElement * foundSet;
-  s32 atb;
+    s32 index;
+    struct HeapFreeListElement * foundSet;
+    s32 atb;
 
-  if (heap == NULL) {
-    heap = &sMainHeapDescriptor;
-  }
+    if (heap == NULL)
+        heap = &sMainHeapDescriptor;
 
-  // Set some sort flag/attr?
-  atb = group >> 8 | 1;
+    // Set some sort flag/attr?
+    atb = group >> 8 | 1;
 
-  // Reset it?
-  group = group & 0xff;
+    // Reset it?
+    group = group & 0xff;
 
-  if ((atb & 2) != 0) {
-    index = MemorySearchFromFront(heap,atb,size);
-    if (index < 0) goto error;
-    foundSet = _LocateSetFront(heap,index,atb,size,group);
-    return foundSet->block.start;
-  }
-  else {
-    index = MemorySearchFromBack(heap,atb,size);
-    if (index < 0) goto error;
-    foundSet = _LocateSetBack(heap,index,atb,size,group);
-    return foundSet->block.start;
-  }
+    if ((atb & 2) != 0) {
+        index = MemorySearchFromFront(heap, atb, size);
+        if (index < 0)
+            goto error;
+        foundSet = _LocateSetFront(heap, index, atb, size, group);
+        return foundSet->block.start;
+    }
+    else {
+        index = MemorySearchFromBack(heap, atb, size);
+        if (index < 0)
+            goto error;
+        foundSet = _LocateSetBack(heap, index, atb, size, group);
+        return foundSet->block.start;
+    }
 
 error:
-   FatalError(&sLocateSetDebugLocation,
-                 "Memroy LocateSet [%p] buffer %8x size can't locate\n    atb %02x grp %3d ", // Spelling error is intentional
-                 heap,size,atb,group);
+    FatalError(&sLocateSetDebugLocation,
+        "Memroy LocateSet [%p] buffer %8x size can't locate\n    atb %02x grp %3d ",
+        heap, size, atb, group);
 }
 
 void *MemoryAlloc(s32 size, s32 group)
@@ -463,49 +467,49 @@ void MemoryFree(void *a)
 
 ALIGNED(4) static const char sText_MemoryLocate_LocalCreate[] = "MemoryLocate_LocalCreate";
 
-UNUSED static struct HeapDescriptor *MemoryLocate_LocalCreate(struct HeapDescriptor *parentHeap,u32 size,u32 param_3,u32 group)
+UNUSED static HeapDescriptor *MemoryLocate_LocalCreate(HeapDescriptor *parentHeap, u32 size, u32 param_3, u32 group)
 {
-  int index;
-  struct HeapFreeListElement *foundSet;
-  struct HeapDescriptor *iVar3;
-  struct unkMemoryStruct local_1c;
+    s32 index;
+    struct HeapFreeListElement *foundSet;
+    HeapDescriptor *iVar3;
+    struct unkMemoryStruct local_1c;
 
-  if (parentHeap == NULL) {
-    parentHeap = &sMainHeapDescriptor;
-  }
+    if (parentHeap == NULL)
+        parentHeap = &sMainHeapDescriptor;
 
-  index = MemorySearchFromBack(parentHeap,9,size);
-  if (index < 0) {
-    static const DebugLocation debugInfo = {
-        .file = sFileNameText,
-        .line = 1109,
-        .func = sText_MemoryLocate_LocalCreate
-    };
-    FatalError(&debugInfo,"Memroy LocalCreate buffer %08x size can't locate",size); // Spelling error is intentional
-  }
+    index = MemorySearchFromBack(parentHeap, 9, size);
 
-  foundSet = _LocateSetBack(parentHeap,index,9,size,group);
-  local_1c.unk0 = (void *) foundSet->block.start;
-  local_1c.end = foundSet->block.size;
+    if (index < 0) {
+        static const DebugLocation debugInfo = {
+            .file = sFileNameText,
+            .line = 1109,
+            .func = sText_MemoryLocate_LocalCreate
+        };
+        FatalError(&debugInfo, "Memroy LocalCreate buffer %08x size can't locate", size);
+    }
 
-  iVar3 = DoCreateSubHeap(&local_1c,param_3);
-  iVar3->parentHeap = parentHeap;
-  return iVar3;
+    foundSet = _LocateSetBack(parentHeap, index, 9, size, group);
+    local_1c.unk0 = (void *)foundSet->block.start;
+    local_1c.end = foundSet->block.size;
+
+    iVar3 = DoCreateSubHeap(&local_1c, param_3);
+    iVar3->parentHeap = parentHeap;
+    return iVar3;
 }
 
-static struct HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b)
+static HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b)
 {
     struct HeapMemoryBlock2 s2;
-    struct HeapDescriptor *a1;
+    HeapDescriptor *a1;
 
     a1 = a->unk0;
-    s2.start = (struct HeapFreeListElement *)((u8*)a1 + sizeof(struct HeapDescriptor));
-    s2.size = a->end - sizeof(struct HeapDescriptor);
+    s2.start = (struct HeapFreeListElement *)((u8*)a1 + sizeof(HeapDescriptor));
+    s2.size = a->end - sizeof(HeapDescriptor);
     InitSubHeap(a1, &s2, b);
     return a1;
 }
 
-UNUSED static void xxx_unused_memory_free(struct HeapDescriptor *a1)
+UNUSED static void xxx_unused_memory_free(HeapDescriptor *a1)
 {
     bool8 b;
     s32 i;
@@ -536,12 +540,12 @@ UNUSED static void xxx_unused_memory_free(struct HeapDescriptor *a1)
     }
 }
 
-static void *DoAlloc(struct HeapDescriptor *heap, s32 size, u32 a2)
+static void *DoAlloc(HeapDescriptor *heap, s32 size, u32 a2)
 {
     return _LocateSet(heap, size, a2 | 0x100);
 }
 
-static void DoFree(struct HeapDescriptor *heapDescriptior, void *ptrToFree)
+static void DoFree(HeapDescriptor *heapDescriptior, void *ptrToFree)
 {
     struct HeapFreeListElement *curr;
     struct HeapFreeListElement *next;

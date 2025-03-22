@@ -1,14 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/input.h"
 #include "code_80118A4.h"
 #include "code_803B050.h"
 #include "code_80958E8.h"
-#include "constants/input.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_mail.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
 #include "wonder_mail_802C10C.h"
 
 static EWRAM_INIT struct unkStruct_203B2E0 *gUnknown_203B2E0 = {NULL};
@@ -17,7 +18,6 @@ static EWRAM_INIT u16 gUnknown_203B2E4 = {0};
 #include "data/wonder_mail_802C10C.h"
 
 static s32 CountPelipperBoardSlots(void);
-
 static void sub_802C328(void);
 
 bool8 sub_802C10C(s32 a0, DungeonPos *a1, s32 a2)
@@ -30,7 +30,7 @@ bool8 sub_802C10C(s32 a0, DungeonPos *a1, s32 a2)
 
     gUnknown_203B2E0->unk8.s0.unk34 = a0;
     gUnknown_203B2E0->unk8.s0.unk38 = &gUnknown_203B2E0->unk8.s0.windows.id[a0];
-    RestoreUnkTextStruct_8006518(&gUnknown_203B2E0->unk8.s0.windows);
+    RestoreSavedWindows(&gUnknown_203B2E0->unk8.s0.windows);
 
     gUnknown_203B2E0->unk8.s0.windows.id[gUnknown_203B2E0->unk8.s0.unk34] = sUnknown_80DFCB4;
     gUnknown_203B2E0->unk8.s0.unk38->header = &gUnknown_203B2E0->unk8.unk9C;

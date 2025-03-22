@@ -1,5 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/mailbox.h"
+#include "constants/wonder_mail.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "code_8094F88.h"
@@ -8,16 +10,15 @@
 #include "code_8099328.h"
 #include "code_8099360.h"
 #include "code_80A26CC.h"
-#include "constants/mailbox.h"
-#include "constants/wonder_mail.h"
 #include "input.h"
 #include "items.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_mail.h"
 #include "post_office_guide2.h"
-#include "text.h"
 #include "string_format.h"
+#include "text_1.h"
+#include "text_3.h"
 
 static EWRAM_INIT unkStruct_203B330 *sUnknown_203B330 = {NULL};
 
@@ -75,7 +76,7 @@ static void sub_8031A84(void)
 {
     s32 jobs;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B330->unk18);
+    RestoreSavedWindows(&sUnknown_203B330->unk18);
     sUnknown_203B330->unk18.id[sUnknown_203B330->unk10] = sUnknown_80E1F18;
 
     if (sUnknown_203B330->unkC == 2) {

@@ -2,15 +2,17 @@
 #include "globaldata.h"
 #include "constants/wonder_mail.h"
 #include "constants/colors.h"
+#include "structs/str_dungeon.h"
+#include "code_80118A4.h"
 #include "code_803D0D8.h"
+#include "code_8094F88.h"
 #include "input.h"
 #include "memory.h"
-#include "text.h"
-#include "structs/str_dungeon.h"
-#include "pokemon.h"
-#include "code_8094F88.h"
 #include "menu_input.h"
-#include "code_80118A4.h"
+#include "pokemon.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 
 struct unkStruct_203B334
 {
@@ -59,7 +61,7 @@ bool8 sub_8031D70(u32 mailIndex, s32 param_2)
   sub_801317C(&gUnknown_203B334->unk4);
   gUnknown_203B334->unk10 = param_2;
   gUnknown_203B334->unk14 = &gUnknown_203B334->unk18.id[param_2];
-  RestoreUnkTextStruct_8006518(&gUnknown_203B334->unk18);
+  RestoreSavedWindows(&gUnknown_203B334->unk18);
   gUnknown_203B334->unk18.id[gUnknown_203B334->unk10] = gUnknown_80E1FC4;
   sub_8031E00();
   return TRUE;

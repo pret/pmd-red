@@ -1,21 +1,21 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/input.h"
+#include "constants/mailbox.h"
+#include "structs/str_802C39C.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "code_803B050.h"
 #include "code_80958E8.h"
-#include "constants/input.h"
-#include "constants/mailbox.h"
 #include "input.h"
-#include "code_80958E8.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "pokemon_mail.h"
 #include "pokemon.h"
+#include "pokemon_mail.h"
 #include "pokemon_news3.h"
-#include "structs/str_802C39C.h"
-#include "text.h"
 #include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 static EWRAM_INIT struct unkStruct_203B2D8 *sUnknown_203B2D8 = {NULL};
 static EWRAM_INIT u16 sUnknown_203B2DC = {0};
@@ -36,7 +36,7 @@ bool8 sub_802BD14(s32 a0, DungeonPos *a1, u32 a2)
 
     sUnknown_203B2D8->unk4.s0.unk34 = a0;
     sUnknown_203B2D8->unk4.s0.unk38 = &sUnknown_203B2D8->unk4.s0.windows.id[a0];
-    RestoreUnkTextStruct_8006518(&sUnknown_203B2D8->unk4.s0.windows);
+    RestoreSavedWindows(&sUnknown_203B2D8->unk4.s0.windows);
     sUnknown_203B2D8->unk4.s0.windows.id[sUnknown_203B2D8->unk4.s0.unk34] = sUnknown_80DFC74;
     sUnknown_203B2D8->unk4.s0.unk38->header = &sUnknown_203B2D8->unk4.unk9C;
 

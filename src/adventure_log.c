@@ -1,22 +1,22 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/input.h"
+#include "structs/struct_sub80095e4.h"
 #include "adventure_log.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_8097670.h"
-#include "constants/input.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
-#include "structs/struct_sub80095e4.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
-static EWRAM_INIT struct_Sub80095E4_2 *sAdventureLog = {NULL};
+static EWRAM_INIT struct_Sub80095E4_2 *sAdventureLog = { NULL };
 
 #include "data/adventure_log.h"
 
 static void DisplayAdventureLog();
-
 static void sub_8032084();
 
 bool8 CreateAdventureLogScreen(u32 kind)
@@ -24,7 +24,7 @@ bool8 CreateAdventureLogScreen(u32 kind)
     sAdventureLog = MemoryAlloc(sizeof(*sAdventureLog), 8);
     sAdventureLog->s0.unk34 = kind;
     sAdventureLog->s0.unk38 = &sAdventureLog->s0.windows.id[kind];
-    RestoreUnkTextStruct_8006518(&sAdventureLog->s0.windows);
+    RestoreSavedWindows(&sAdventureLog->s0.windows);
     sAdventureLog->s0.windows.id[sAdventureLog->s0.unk34] = sUnknown_80E2008;
     sAdventureLog->s0.unk38->header = &sAdventureLog->unk9C;
 

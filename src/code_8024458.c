@@ -1,15 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/input.h"
 #include "code_80118A4.h"
 #include "code_8024458.h"
-#include "constants/input.h"
 #include "event_flag.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "text.h"
+#include "text_1.h"
 
 static EWRAM_INIT struct unkStruct_203B2AC *sUnknown_203B2AC = {NULL};
 
@@ -27,7 +27,7 @@ bool8 sub_8024458(s16 speciesNum, s32 a1)
     sUnknown_203B2AC->speciesNum = speciesNum_s32;
     sUnknown_203B2AC->unkE0 = a1;
     sUnknown_203B2AC->unkE4 = &sUnknown_203B2AC->unkE8.id[a1];
-    RestoreUnkTextStruct_8006518(&sUnknown_203B2AC->unkE8);
+    RestoreSavedWindows(&sUnknown_203B2AC->unkE8);
     sUnknown_203B2AC->unkE8.id[sUnknown_203B2AC->unkE0] = sUnknown_80DC9C8;
     sUnknown_203B2AC->unkE4->header = &sUnknown_203B2AC->unk148;
     sUnknown_203B2AC->unk148.width = 10;

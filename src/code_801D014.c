@@ -25,7 +25,9 @@
 #include "party_list_menu.h"
 #include "rescue_team_info.h"
 #include "string_format.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 #include "wigglytuff_shop2.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"
@@ -187,7 +189,7 @@ static void sub_801D220(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B250->windows);
+    RestoreSavedWindows(&sUnknown_203B250->windows);
 
     switch (sUnknown_203B250->state) {
         case 0:

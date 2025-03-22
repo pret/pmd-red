@@ -1,22 +1,22 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
+#include "constants/colors.h"
+#include "code_80118A4.h"
 #include "code_801AFA4.h"
 #include "code_801B3C0.h"
 #include "code_80227B8.h"
 #include "code_8098BDC.h"
 #include "code_8099360.h"
-#include "code_80118A4.h"
 #include "common_strings.h"
-#include "constants/colors.h"
 #include "input.h"
 #include "kecleon_bros4.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_3.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 
-static EWRAM_INIT unkStruct_203B294 *sUnknown_203B294 = {NULL};
+EWRAM_INIT static unkStruct_203B294 *sUnknown_203B294 = {NULL};
 
 #include "data/code_80227B8.h"
 
@@ -109,7 +109,7 @@ static void sub_802293C(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B294->windows);
+    RestoreSavedWindows(&sUnknown_203B294->windows);
 
     switch (sUnknown_203B294->state) {
         case 2:

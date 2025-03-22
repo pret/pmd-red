@@ -6,7 +6,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "sprite.h"
-#include "text.h"
+#include "text_1.h"
 #include "unk_menu_203B360.h"
 
 // Size: 0x1B4. Similar to SaveMenuWork
@@ -57,7 +57,8 @@ ALIGNED(4) const u8 Caution_80E6F04[] = _("{CENTER_ALIGN}{COLOR RED}Caution!{RES
 static const u8 fill0[] = "pksdir0";
 
 extern void sub_8038440();
-extern void sub_80384D0();
+
+static void sub_80384D0(void);
 
 void sub_80382E4(s32 currMenu)
 {
@@ -147,7 +148,7 @@ void sub_8038440(void)
     sUnknown_203B360->unk1B0 = 0;
 }
 
-void sub_80384D0(void)
+static void sub_80384D0(void)
 {
   if ((sUnknown_203B360->unk1B0 & 8) != 0) {
     AddSprite(&sUnknown_203B360->unk1A8, 0x100, NULL, NULL);

@@ -6,7 +6,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_mail.h"
-#include "text.h"
+#include "text_1.h"
 
 static EWRAM_INIT struct unkStruct_203B300 *sUnknown_203B300 = {NULL};
 
@@ -23,7 +23,7 @@ bool8 sub_802DE84(unkStruct_802C39C *mail)
     sub_801317C(&sUnknown_203B300->unk0);
     sUnknown_203B300->unk10 = sUnknown_203B300->mail->unk0[0];
     sUnknown_203B300->unk14 = &sUnknown_203B300->unk18.id[sUnknown_203B300->unk10];
-    RestoreUnkTextStruct_8006518(&sUnknown_203B300->unk18);
+    RestoreSavedWindows(&sUnknown_203B300->unk18);
     sUnknown_203B300->unk18.id[sUnknown_203B300->unk10] = sUnknown_80E0264;
     sub_802DF14();
     return TRUE;

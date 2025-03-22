@@ -1,9 +1,9 @@
 #ifndef GUARD_KANGASKHAN_STORAGE1_H
 #define GUARD_KANGASKHAN_STORAGE1_H
 
-#include "file_system.h"
 #include "structs/menu.h"
 #include "structs/str_items.h"
+#include "structs/str_mon_portrait.h"
 #include "structs/str_text.h"
 
 enum KangaskhanStorageStates
@@ -45,8 +45,8 @@ struct KangaskhanStorageWork
     u16 unk4C[5];
     MenuStruct unk58;
     unkStructFor8013AA0 unkA8;
-    /* 0xD8 */ struct MonPortraitMsg monPortrait;
-    struct MonPortraitMsg *monPortraitPtr;
+    /* 0xD8 */ MonPortraitMsg monPortrait;
+    MonPortraitMsg *monPortraitPtr;
     WindowTemplates unkEC;
 };
 

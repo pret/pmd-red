@@ -1,6 +1,6 @@
 #include "global.h"
 #include "input.h"
-#include "text.h"
+#include "text_1.h"
 
 u32 CreateDualSlotMenu(void)
 {

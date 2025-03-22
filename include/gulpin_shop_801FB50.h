@@ -2,9 +2,9 @@
 #define GUARD_GULPIN_SHOP_801FB50_H
 
 #include "constants/move.h"
-#include "file_system.h"
 #include "structs/menu.h"
 #include "pokemon.h"
+#include "structs/str_mon_portrait.h"
 #include "structs/str_text.h"
 
 // size: 0x1E0
@@ -33,8 +33,8 @@ typedef struct unkStruct_203B27C
     u16 unkBC[8];
     MenuStruct unkCC;
     u8 fill11C[0x16C - 0x11C];
-    /* 0x16C */ struct MonPortraitMsg monPortrait;
-    struct MonPortraitMsg *monPortraitPtr;
+    /* 0x16C */ MonPortraitMsg monPortrait;
+    MonPortraitMsg *monPortraitPtr;
     WindowTemplates unk180;
 } unkStruct_203B27C;
 

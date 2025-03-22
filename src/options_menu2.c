@@ -1,13 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
 #include "constants/colors.h"
 #include "constants/input.h"
+#include "code_80118A4.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "options_menu2.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 
 static EWRAM_INIT struct unkStruct_203B260 *sUnknown_203B260 = {NULL};
 
@@ -23,7 +25,7 @@ bool8 sub_801E198(GameOptions *optionsMenu)
     sub_801317C(&sUnknown_203B260->unk4);
     sUnknown_203B260->unk44 = 0;
     sUnknown_203B260->unk48 = &sUnknown_203B260->unk4C.id[0];
-    RestoreUnkTextStruct_8006518(&sUnknown_203B260->unk4C);
+    RestoreSavedWindows(&sUnknown_203B260->unk4C);
     sUnknown_203B260->unk4C.id[sUnknown_203B260->unk44] = sUnknown_80DC03C;
     sub_8012D08(sUnknown_203B260->unk48, 1);
     ResetUnusedInputStruct();

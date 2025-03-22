@@ -1,14 +1,13 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/communication_error_codes.h"
+#include "constants/main_menu.h"
+#include "structs/str_dungeon.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
-#include "string_format.h"
-#include "constants/communication_error_codes.h"
-#include "constants/main_menu.h"
-#include "structs/str_dungeon.h"
 #include "input.h"
 #include "items.h"
 #include "memory.h"
@@ -16,7 +15,9 @@
 #include "other_menus1.h"
 #include "other_menus2.h"
 #include "sprite.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 static EWRAM_INIT unkStruct_203B35C *sUnknown_203B35C = {NULL};
 

@@ -171,7 +171,7 @@ bool8 SaveGlobalScriptVars(void *r0);
 bool8 RestoreGlobalScriptVars(u8 *r0);
 
 // .rodata
-extern struct ScriptVarInfo gScriptVarInfo[];
+extern struct ScriptVarInfo gScriptVarInfo[]; // NDS=0210FAC4
 
 // EWRAM
 extern u8 gScriptVarBuffer[0x400];

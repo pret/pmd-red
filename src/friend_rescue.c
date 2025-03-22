@@ -1,17 +1,16 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/communication_error_codes.h"
+#include "constants/monster.h"
+#include "constants/wonder_mail.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "code_8023868.h"
 #include "code_8024458.h"
 #include "code_802F204.h"
 #include "code_8094F88.h"
-#include "constants/communication_error_codes.h"
-#include "constants/monster.h"
-#include "constants/wonder_mail.h"
 #include "cpu.h"
 #include "friend_rescue.h"
 #include "input.h"
@@ -21,10 +20,11 @@
 #include "menu_input.h"
 #include "other_menus2.h"
 #include "pokemon.h"
-#include "save_write.h"
 #include "rescue_password_menu.h"
+#include "save_write.h"
+#include "string_format.h"
+#include "text_1.h"
 #include "text_util.h"
-#include "text.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 
@@ -821,7 +821,7 @@ void sub_8032828(void)
             }
             break;
         case 0x33:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
+            RestoreSavedWindows(&gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E234C, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -844,7 +844,7 @@ void sub_8032828(void)
             CreateDialogueBoxAndPortrait(&gUnknown_80E2A0C[0], 0, 0, 0x101);
             break;
         case 0x3A:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8031D70(gUnknown_203B33C->unk218, 0);
@@ -859,7 +859,7 @@ void sub_8032828(void)
             CreateDialogueBoxAndPortrait(&gUnknown_80E2A80[0], 0, 0, 0x101);
             break;
         case 0x2E:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8031D70(gUnknown_203B33C->unk218, 0);
@@ -901,7 +901,7 @@ void sub_8032828(void)
             sub_8023868(3, 0, 0, 9);
             break;
         case 0x27:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
+            RestoreSavedWindows(&gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, gUnknown_80E234C, TRUE, 0, FALSE);
             sub_8023DA4();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -923,7 +923,7 @@ void sub_8032828(void)
             }
             break;
         case 0x1E:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
+            RestoreSavedWindows(&gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E234C, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -1025,7 +1025,7 @@ void sub_8032828(void)
             sub_80306A8(WONDER_MAIL_TYPE_SOS, 0, NULL, 6);
             break;
         case 0x13:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
+            RestoreSavedWindows(&gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E234C, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -1054,7 +1054,7 @@ void sub_8032828(void)
             CreateDialogueBoxAndPortrait(&gUnknown_80E3078[0], 0, 0, 0x101);
             break;
         case 0x1A:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_80151C0(4, gUnknown_203B33C->passwordBuffer);
@@ -1073,7 +1073,7 @@ void sub_8032828(void)
             }
             break;
         case 0x5D:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
+            RestoreSavedWindows(&gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E2408, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -1089,7 +1089,7 @@ void sub_8032828(void)
             }
             break;
         case 0x60:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
+            RestoreSavedWindows(&gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E23F0, gUnknown_80E2408, TRUE, 0, FALSE);
             sub_801CCD8();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -1130,7 +1130,7 @@ void sub_8032828(void)
             CreateDialogueBoxAndPortrait(gUnknown_80E311C, 0, 0, 0x101);
             break;
         case 0x73:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_80151C0(4, gUnknown_203B33C->passwordBuffer);
@@ -1139,7 +1139,7 @@ void sub_8032828(void)
             CreateDialogueBoxAndPortrait(gUnknown_80E314C, 0, 0, 0x101);
             break;
         case 0x67:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8031D70(gUnknown_203B33C->unk218, 0);
@@ -1250,7 +1250,7 @@ void sub_8032828(void)
             }
             break;
         case 0x48:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk35C);
+            RestoreSavedWindows(&gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E231C, gUnknown_80E234C, TRUE, 0, FALSE);
             sub_803092C();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
@@ -1792,7 +1792,7 @@ void sub_8033FE4(void)
         case 4:
             gUnknown_203B33C->fallbackState = 0x1D;
             gUnknown_203B33C->unk218 = sub_80307EC();
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
@@ -1817,7 +1817,7 @@ void sub_8034074(void)
             break;
         case 10:
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
@@ -1875,7 +1875,7 @@ void sub_803418C(void)
         case 4:
             gUnknown_203B33C->fallbackState = 0x26;
             gUnknown_203B33C->speciesNum = sub_8023B44();
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8024458(gUnknown_203B33C->speciesNum, 0);
@@ -1900,7 +1900,7 @@ void sub_8034254(void)
             break;
         case 10:
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8024458(gUnknown_203B33C->speciesNum, 0);
@@ -2070,7 +2070,7 @@ void sub_8034500(void)
         case 4:
             gUnknown_203B33C->fallbackState = 0x32;
             gUnknown_203B33C->unk218 = sub_80307EC();
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
@@ -2095,7 +2095,7 @@ void sub_8034590(void)
             break;
         case 10:
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
@@ -2394,7 +2394,7 @@ void sub_80349E0(void)
         case 4:
             gUnknown_203B33C->fallbackState = 0x5C;
             gUnknown_203B33C->unk218 = sub_80307EC();
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
@@ -2419,7 +2419,7 @@ void sub_8034A70(void)
             break;
         case 10:
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             sub_8030D40(gUnknown_203B33C->unk218, 0);
@@ -2475,7 +2475,7 @@ void sub_8034B88(void)
         case 4:
             gUnknown_203B33C->fallbackState = 0x5F;
             gUnknown_203B33C->item.id = sub_801CB24();
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             InitItemDescriptionWindow(&gUnknown_203B33C->item);
@@ -2524,7 +2524,7 @@ void sub_8034C98(void)
             break;
         case 10:
             gUnknown_203B33C->fallbackState = FRIEND_RESCUE_MENU_DEFAULT_FALLBACK;
-            RestoreUnkTextStruct_8006518(&gUnknown_203B33C->unk3BC);
+            RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
             InitItemDescriptionWindow(&gUnknown_203B33C->item);

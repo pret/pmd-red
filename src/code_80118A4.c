@@ -1,20 +1,19 @@
 #include "global.h"
-#include "code_800558C.h"
+#include "structs/axdata.h"
 #include "code_8009804.h"
 #include "code_80118A4.h"
 #include "music.h"
 #include "constants/bg_music.h"
 #include "config.h"
-#include "sprite.h"
 #include "event_flag.h"
 #include "file_system.h"
 
 extern const u16 gUnknown_80D4144[8];
 
-EWRAM_DATA u32 gUnknown_202DE1C = {0};
-EWRAM_DATA s16 gUnknown_202DE20 = {0};
-EWRAM_DATA s16 gUnknown_202DE22 = {0};
-EWRAM_DATA s16 gUnknown_202DE24 = {0};
+EWRAM_DATA u32 gUnknown_202DE1C = {0}; // GBA=202DE1C | NDS=02134218
+EWRAM_DATA s16 gUnknown_202DE20 = {0}; // GBA=202DE20 | NDS=0213420C
+EWRAM_DATA s16 gUnknown_202DE22 = {0}; // GBA=202DE22 | NDS=02134210
+EWRAM_DATA s16 gUnknown_202DE24 = {0}; // GBA=202DE24 | NDS=02134214
 
 void sub_8011760(void)
 {
@@ -82,6 +81,7 @@ void xxx_call_start_bg_music(void)
     StartBGMusicVSync();
 }
 
+// arm9.bin::020187C0
 void sub_8011860(void)
 {
     if (gUnknown_202DE20 > 0)

@@ -4,9 +4,10 @@
 #include "event_flag.h"
 #include "input.h"
 #include "memory.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_3.h"
 
-static EWRAM_INIT Credits1Work *sCredits1Work = {NULL};
+EWRAM_INIT static Credits1Work *sCredits1Work = {NULL};
 
 extern const WindowTemplate gUnknown_80E4A10;
 extern const WindowTemplate gUnknown_80E4A28;

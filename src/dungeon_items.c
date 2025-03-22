@@ -27,6 +27,7 @@
 #include "code_80450F8.h"
 #include "structs/str_item_text.h"
 #include "code_803E46C.h"
+#include "sprite.h"
 
 extern SpriteOAM gUnknown_202EDC0;
 

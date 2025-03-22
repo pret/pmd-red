@@ -9,6 +9,7 @@
 #include "code_80861A8.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
+#include "sprite.h"
 
 extern const unkStruct_2039DB0 gUnknown_8107380;
 
@@ -21,7 +22,6 @@ extern const u8 *gUnknown_810671C[];
 static void sub_80861EC(Entity *);
 
 s32 sub_800E700(s32);
-void sub_800569C(DungeonPos *, axdata *, u8);
 void sub_8085F44(s32);
 
 void sub_8052FB8(const u8 *);
@@ -95,7 +95,7 @@ s32 sub_80861F8(s32 param_1,Entity *param_2,bool32 param_3)
     pos.y = 0;
     uStack_38 = sub_800E700(param_1Copy);
     if (uStack_38 != -1) {
-        sub_800569C(&pos,&param_2->axObj.axdata,uStack_38);
+        sub_800569C(&pos, &param_2->axObj, uStack_38);
     }
     stack.unk0 = param_1Copy;
     stack.unk4 = 0;

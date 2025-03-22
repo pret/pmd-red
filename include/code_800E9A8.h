@@ -27,7 +27,7 @@ struct unkStruct_203B0CC_sub
     s32 unk50;
     u8 unk54;
     u8 fill55[0x58 - 0x55];
-    struct axObject unk58;
+    axObject unk58;
     u8 fillA4[0xB8 - 0xA4];
     u32 unkB8;
     u8 fillBC[0xCC - 0xBC];

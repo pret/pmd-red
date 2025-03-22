@@ -1,17 +1,17 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "code_803B050.h"
 #include "code_802DE84.h"
+#include "code_803B050.h"
 #include "code_80958E8.h"
 #include "code_80A26CC.h"
 #include "common_strings.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
+#include "text_1.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"
-#include "text.h"
 
 static EWRAM_INIT struct unkStruct_203B2F0 *sUnknown_203B2F0 = {NULL};
 
@@ -82,7 +82,7 @@ static void sub_802C928(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B2F0->unk19C);
+    RestoreSavedWindows(&sUnknown_203B2F0->unk19C);
 
     switch (sUnknown_203B2F0->state) {
         case 2:
