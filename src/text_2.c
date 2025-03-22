@@ -5,13 +5,6 @@
 #include "text_1.h"
 #include "text_2.h"
 
-static const u32 sUnknown_80B8868[] =
-{
-    0, 0xF, 0xFF, 0xFFF, 0xFFFF, 0xFFFFF, 0xFFFFFF, 0xFFFFFFF,
-    0xFFFFFFFF, 0xFFFFFFF0, 0xFFFFFF00, 0xFFFFF000, 0xFFFF0000,
-    0xFFF00000, 0xFF000000, 0xF0000000
-};
-
 static void AddUnderScoreHighlightInternal(Window *windows, u32 windowId, s32 x, s32 y, s32 width, u32 color);
 static void DisplayMonPortrait(Window *a0, u16 a1[32][32], s32 a2, const u8 *compressedData, u32 a4);
 static void DisplayMonPortraitFlipped(Window *windows, s32 windowId, const u8 *compressedData, s32 a3);
@@ -903,6 +896,13 @@ UNUSED static void nullsub_167(void)
 UNUSED static void nullsub_168(void)
 {
 }
+
+static const u32 sUnknown_80B8868[] =
+{
+    0, 0xF, 0xFF, 0xFFF, 0xFFFF, 0xFFFFF, 0xFFFFFF, 0xFFFFFFF,
+    0xFFFFFFFF, 0xFFFFFFF0, 0xFFFFFF00, 0xFFFFF000, 0xFFFF0000,
+    0xFFF00000, 0xFF000000, 0xF0000000
+};
 
 UNUSED static void sub_80086C8(Window *windows, s32 windowId, s32 a2, s32 a3, s32 a4, s32 a5)
 {

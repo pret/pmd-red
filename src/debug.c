@@ -1,10 +1,21 @@
 #include "global.h"
 #include "debug.h"
 
-static EWRAM_INIT bool32 gNDS_DebugEnabled = {0}; // NDS=020EACE4
-static EWRAM_INIT u8 gUnknown_203B150 = {0};
+EWRAM_INIT static bool32 gNDS_DebugEnabled = {0}; // NDS=020EACE4
+EWRAM_INIT static u8 gUnknown_203B150 = {0};
 
-UNUSED static EWRAM_INIT const char *sUnusedEwramDebugStrings[] =
+ALIGNED(4) static const char gFuncFileLineString[] = "func = '%s'\nfile = '%s'  line = %5d";
+
+ALIGNED(4) static const char gNotEntryText[] = "--- not entry ---";
+ALIGNED(4) static const char gFuncFileLineStringWPrefix[] = "%sfunc = '%s'\nfile = '%s'  line = %5d\n";
+
+ALIGNED(4) static const char gFuncFileLineString2[] = "func = '%s'\nfile = '%s'  line = %5d\n";
+
+ALIGNED(4) static const char debug_fill14[] = "pksdir0";
+ALIGNED(4) static const char gDebugPrintPrefix[] = "  Print  ";
+ALIGNED(4) static const char debug_fill13[] = "pksdir0";
+
+EWRAM_INIT UNUSED static const char *sUnusedEwramDebugStrings[] =
 {
     "Ground",
     "GroundScript",
@@ -17,17 +28,6 @@ UNUSED static EWRAM_INIT const char *sUnusedEwramDebugStrings[] =
     "Memory Card",
     "Performance",
 };
-
-ALIGNED(4) static const char gFuncFileLineString[] = "func = '%s'\nfile = '%s'  line = %5d";
-
-ALIGNED(4) static const char gNotEntryText[] = "--- not entry ---";
-ALIGNED(4) static const char gFuncFileLineStringWPrefix[] = "%sfunc = '%s'\nfile = '%s'  line = %5d\n";
-
-ALIGNED(4) static const char gFuncFileLineString2[] = "func = '%s'\nfile = '%s'  line = %5d\n";
-
-ALIGNED(4) static const char debug_fill14[] = "pksdir0";
-ALIGNED(4) static const char gDebugPrintPrefix[] = "  Print  ";
-ALIGNED(4) static const char debug_fill13[] = "pksdir0";
 
 ALIGNED(4) static const char gNotMountText[] = "not mount log system";
 ALIGNED(4) static const char debug_fill9[] = "pksdir0";

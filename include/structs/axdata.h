@@ -29,21 +29,21 @@ typedef struct axdata1
 } axdata1;
 
 // Size: 0x2
-typedef struct ax_pose_unk2
+typedef struct ALIGNED_PACKED(2) ax_pose_unk2
 {
     u8 unk0;
     s8 unk1;
-} ax_pose_unk2 __attribute__((packed, aligned(2)));
+} ax_pose_unk2;
 
 // size: 0xA
-typedef struct ax_pose
+typedef struct ALIGNED_PACKED(2) ax_pose
 {
     /* 0x0 */ s16 sprite;
     /* 0x2 */ ax_pose_unk2 unk2; // Always {0, 0} in red (except for end markers {0xFF, 0xFF} and Latios Pose189...)
     /* 0x4 */ u16 flags1;
     /* 0x6 */ u16 flags2;
     /* 0x8 */ u16 flags3;
-} ax_pose __attribute__((packed, aligned(2)));
+} ax_pose;
 
 // size: 0xC
 typedef struct ax_anim
