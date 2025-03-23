@@ -1,12 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
 #include "bg_control.h"
+#include "crt0.h"
 #include "debug.h"
 #include "input.h"
 #include "music.h"
 #include "reg_control.h"
 #include "sprite.h"
-#include "crt0.h"
 
 extern void (gUnknown_202DBB8)(void);
 

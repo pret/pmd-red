@@ -8,7 +8,6 @@
 #include "file_system.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "text.h"
 #include "moves.h"
 #include "string_format.h"
 #include "friend_area.h"
@@ -87,7 +86,6 @@ extern void sub_80429E8(Entity *r0);
 extern s32 sub_803DA20(s32 param_1);
 extern s32 gDungeonFramesCounter;
 extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
-extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
 extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);

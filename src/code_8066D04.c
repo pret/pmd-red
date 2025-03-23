@@ -34,9 +34,10 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "position_util.h"
+#include "sprite.h"
 #include "status_checks_1.h"
 #include "string_format.h"
-#include "text.h"
+#include "text_1.h"
 #include "trap.h"
 
 extern u8 *gUnknown_80F8BE0[];

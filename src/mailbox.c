@@ -1,20 +1,20 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_802DE84.h"
-#include "common_strings.h"
-#include "memory.h"
-#include "text.h"
 #include "structs/menu.h"
+#include "code_80118A4.h"
+#include "code_802DE84.h"
+#include "code_803B050.h"
+#include "code_80958E8.h"
+#include "common_strings.h"
 #include "input.h"
 #include "mailbox.h"
+#include "memory.h"
 #include "menu_input.h"
-#include "code_80118A4.h"
 #include "pokemon_news1.h"
 #include "pokemon_news2.h"
 #include "pokemon_news3.h"
-#include "code_80958E8.h"
-#include "code_803B050.h"
-#include "code_80958E8.h"
+#include "text_1.h"
+#include "text_2.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802C860.h"
 
@@ -150,7 +150,7 @@ void SetMailboxState(u32 newState)
 void sub_802E0A0(void)
 {
     s32 index;
-    RestoreUnkTextStruct_8006518(&gUnknown_203B304->unk10C);
+    RestoreSavedWindows(&gUnknown_203B304->unk10C);
     switch(gUnknown_203B304->state)
     {
         case MAIN_MAILBOX_MENU:

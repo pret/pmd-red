@@ -1,15 +1,16 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "game_options.h"
 #include "input.h"
-#include "pokemon_mail.h"
-#include "pokemon.h"
-#include "pokemon_news2.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
+#include "pokemon.h"
+#include "pokemon_mail.h"
+#include "pokemon_news2.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 static EWRAM_INIT struct unkStruct_203B2D4 *sUnknown_203B2D4 = {NULL};
 

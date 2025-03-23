@@ -1,18 +1,19 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
-#include "code_8094F88.h"
 #include "constants/input.h"
 #include "constants/wonder_mail.h"
+#include "structs/str_802C39C.h"
+#include "structs/struct_sub80095e4.h"
+#include "code_80118A4.h"
+#include "code_8094F88.h"
 #include "input.h"
 #include "items.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
 #include "pokemon_mail.h"
-#include "structs/str_802C39C.h"
-#include "text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_1.h"
+#include "text_2.h"
 #include "wonder_mail_4.h"
 
 struct unkStruct_203B320
@@ -87,7 +88,7 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, DungeonPos *r2, u32 r3)
     gUnknown_203B320->s28.s0.unk34 = r1;
 
     gUnknown_203B320->s28.s0.unk38 = &gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.unk34];
-    RestoreUnkTextStruct_8006518(&gUnknown_203B320->s28.s0.windows);
+    RestoreSavedWindows(&gUnknown_203B320->s28.s0.windows);
 
     gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.unk34] = gUnknown_80E0854;
     gUnknown_203B320->s28.s0.unk38->header = &gUnknown_203B320->s28.unk9C;

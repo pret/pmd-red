@@ -1,8 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "string_format.h"
-#include "iq_skill_menu.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_8023868.h"
@@ -12,12 +10,14 @@
 #include "gulpin_shop.h"
 #include "gulpin_shop_801FB50.h"
 #include "input.h"
+#include "iq_skill_menu.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
 #include "pokemon_3.h"
 #include "pokemon.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 
 EWRAM_INIT unkStruct_203B27C *gUnknown_203B27C = {NULL};
 
@@ -98,7 +98,7 @@ bool8 sub_801FB50(u32 mode)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
     gUnknown_203B27C->monPortrait.faceFile = faceFile;
-    gUnknown_203B27C->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
+    gUnknown_203B27C->monPortrait.faceData = (PortraitGfx *) faceFile->data;
     gUnknown_203B27C->monPortrait.spriteId = 0;
     gUnknown_203B27C->monPortrait.flip = FALSE;
     gUnknown_203B27C->monPortrait.unkE = 0;
@@ -194,7 +194,7 @@ static void sub_801FDC0(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(&gUnknown_203B27C->unk180);
+    RestoreSavedWindows(&gUnknown_203B27C->unk180);
 
     switch (gUnknown_203B27C->state) {
         case 0x2:

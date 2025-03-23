@@ -1,9 +1,9 @@
 #ifndef GUARD_STR_3001B64_H
 #define GUARD_STR_3001B64_H
 
-#include "file_system.h"
 #include "structs/menu.h"
-#include "string_format.h"
+#include "structs/str_file_system.h"
+#include "structs/str_mon_portrait.h"
 
 // Maybe Position32?
 struct unkStruct_3001B64_sub_sub
@@ -22,7 +22,7 @@ struct unkStruct_3001B64_sub
     s8 unk6;
     u8 unk7;
     struct unkStruct_3001B64_sub_sub unk8;
-    struct MonPortraitMsg monPortrait;
+    MonPortraitMsg monPortrait;
     /* 0x20 */ OpenedFile *faceFile;
 };
 

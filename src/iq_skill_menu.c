@@ -1,15 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
+#include "common_strings.h"
+#include "input.h"
 #include "iq_skill_menu.h"
 #include "iq_skill_list_menu.h"
 #include "iq_skill_info_menu.h"
-#include "common_strings.h"
-#include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon_3.h"
-#include "text.h"
+#include "text_1.h"
 
 static EWRAM_INIT struct IQSkillMenu *sIQSkillMenu = {NULL};
 
@@ -77,7 +77,7 @@ static void sub_801BFCC(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sIQSkillMenu->unkC4);
+    RestoreSavedWindows(&sIQSkillMenu->unkC4);
 
     if (sIQSkillMenu->state == 2)
         sIQSkillMenu->unkC4.id[2] = sUnknown_80DBDB0;

@@ -1,15 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_8012A18_1.h"
-#include "string_format.h"
 #include "code_801602C.h"
 #include "common_strings.h"
 #include "input.h"
 #include "memory.h"
+#include "string_format.h"
 #include "text_util.h"
-#include "text.h"
+#include "text_1.h"
 
-static EWRAM_INIT struct unkStruct_203B200 *sUnknown_203B200 = {NULL};
+EWRAM_INIT static struct unkStruct_203B200 *sUnknown_203B200 = {NULL};
 
 #include "data/code_801602C.h"
 

@@ -1,15 +1,16 @@
 #include "global.h"
+#include "structs/axdata.h"
 #include "bg_control.h"
-#include "code_800558C.h"
 #include "code_800DAC0.h"
 #include "code_800E9A8.h"
 #include "code_80118A4.h"
 #include "code_803E724.h"
 #include "def_filearchives.h"
+#include "dungeon_map.h"
 #include "file_system.h"
 #include "main_loops.h"
 #include "memory.h"
-#include "dungeon_map.h"
+#include "sprite.h"
 
 EWRAM_INIT struct unkStruct_203B0CC *gUnknown_203B0CC = NULL;
 

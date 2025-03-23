@@ -2,9 +2,9 @@
 #define GUARD_THANK_YOU_WONDER_MAIL_H
 
 #include "constants/wonder_mail.h"
-#include "file_system.h"
 #include "structs/menu.h"
 #include "structs/str_items.h"
+#include "structs/str_mon_portrait.h"
 #include "structs/str_text.h"
 #include "structs/str_wonder_mail.h"
 
@@ -25,7 +25,7 @@ typedef struct WonderMailStruct_203B2C4
     WindowTemplates unk35C;
     WindowTemplates unk3BC;
     Item unk41C;
-    /* 0x420 */ struct MonPortraitMsg monPortrait;
+    /* 0x420 */ MonPortraitMsg monPortrait;
     u32 unk430;
     /* 0x434 */ u8 formattedString[0x100];
     /* 0x534 */ s32 wonderMailMethod;

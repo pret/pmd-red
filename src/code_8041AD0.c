@@ -1,5 +1,10 @@
 #include "global.h"
-#include "math.h"
+#include "constants/direction.h"
+#include "constants/status.h"
+#include "constants/type.h"
+#include "structs/dungeon_entity.h"
+#include "structs/sprite_oam.h"
+#include "structs/str_dungeon.h"
 #include "code_800558C.h"
 #include "code_800DAC0.h"
 #include "code_800E9A8.h"
@@ -10,15 +15,11 @@
 #include "code_804267C.h"
 #include "code_806CD90.h"
 #include "dungeon_config.h"
-#include "constants/direction.h"
-#include "constants/status.h"
-#include "constants/type.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
 #include "items.h"
-#include "structs/dungeon_entity.h"
-#include "structs/sprite_oam.h"
-#include "structs/str_dungeon.h"
+#include "math.h"
+#include "sprite.h"
 
 extern u32 gStatusSpriteMasks_SleepClassStatus[];
 extern u32 gStatusSpriteMasks_BurnClassStatus[];
@@ -37,7 +38,6 @@ extern u32 gStatusSpriteMasks_MuzzledStatus[];
 extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
 extern u32 sub_806F62C(u32);
 extern u32 sub_800DC9C(s32 a0);
-extern void sub_800569C(DungeonPos *, axdata *, u8);
 extern void PlaySoundEffect(u32);
 
 void EntityUpdateStatusSprites(Entity *entity);
@@ -82,7 +82,7 @@ s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
         sub_804178C(a4 == 2);
     }
 
-    sub_800569C(&pos, &entity->axObj.axdata, a3);
+    sub_800569C(&pos, &entity->axObj, a3);
     if (pos.x != 99 && pos.y != 99) {
         pixelPos.x = entity->pixelPos.x + (pos.x << 8);
         pixelPos.y = (entity->pixelPos.y + (pos.y << 8)) - entInfo->unk174.raw;

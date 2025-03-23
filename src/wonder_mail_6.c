@@ -1,12 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_8094F88.h"
 #include "input.h"
 #include "memory.h"
-#include "text.h"
-#include "pokemon.h"
-#include "code_8094F88.h"
 #include "menu_input.h"
+#include "pokemon.h"
 #include "string_format.h"
+#include "text_1.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
 
@@ -18,7 +18,7 @@ struct unkStruct_203B328
     MenuStruct unk8;
     MenuStruct unk58;
     WindowTemplates unkA8;
-    /* 0x108 */ struct MonPortraitMsg monPortrait;
+    /* 0x108 */ MonPortraitMsg monPortrait;
     u32 wonderMailType;
 };
 static EWRAM_INIT struct unkStruct_203B328 *gUnknown_203B328 = {NULL};
@@ -109,7 +109,7 @@ bool8 sub_8030F58(u32 wonderMailType)
   gUnknown_203B328->wonderMailType = wonderMailType;
   file = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   gUnknown_203B328->monPortrait.faceFile = file;
-  gUnknown_203B328->monPortrait.faceData = (struct PortraitGfx *) file->data;
+  gUnknown_203B328->monPortrait.faceData = (PortraitGfx *) file->data;
   gUnknown_203B328->monPortrait.spriteId = 0;
   gUnknown_203B328->monPortrait.flip = FALSE;
   gUnknown_203B328->monPortrait.unkE = 0;
@@ -180,7 +180,7 @@ void sub_80310E4(u32 newState)
 
 static void sub_80310FC(void)
 {
-    RestoreUnkTextStruct_8006518(&gUnknown_203B328->unkA8);
+    RestoreSavedWindows(&gUnknown_203B328->unkA8);
     switch(gUnknown_203B328->state)
     {
         case INIT_STATE:

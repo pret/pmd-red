@@ -1,6 +1,20 @@
 #ifndef GUARD_STR_TEXT_H
 #define GUARD_STR_TEXT_H
 
+#include "structs/str_position.h"
+
+// size: 0xC
+typedef struct unkChar
+{
+    const u16 *unk0;
+    u16 unk4;
+    s16 unk6;
+    u8 unk8;
+    u8 fill9;
+    u8 unkA;
+    u8 fillB;
+} unkChar;
+
 // size: 0x48
 typedef struct Window
 {
@@ -37,8 +51,6 @@ typedef struct WindowHeader
     /* 0x3 */ u8 f3;
 } WindowHeader;
 
-#include "structs/str_position.h"
-
 // size: 0x18
 typedef struct WindowTemplate
 {
@@ -52,14 +64,14 @@ typedef struct WindowTemplate
     const WindowHeader *header;
 } WindowTemplate;
 
-#define WINDOW_TYPE_0                   0
-#define WINDOW_TYPE_WITHOUT_BORDER      1
-#define WINDOW_TYPE_2                   2
-#define WINDOW_TYPE_NORMAL              3
-#define WINDOW_TYPE_4                   4
-#define WINDOW_TYPE_FILL_TRANSPARENT    5
-#define WINDOW_TYPE_WITH_HEADER         6
-#define WINDOW_TYPE_7                   7
+#define WINDOW_TYPE_0                0
+#define WINDOW_TYPE_WITHOUT_BORDER   1
+#define WINDOW_TYPE_2                2
+#define WINDOW_TYPE_NORMAL           3
+#define WINDOW_TYPE_4                4
+#define WINDOW_TYPE_FILL_TRANSPARENT 5
+#define WINDOW_TYPE_WITH_HEADER      6
+#define WINDOW_TYPE_7                7
 
 #define MAX_WINDOWS 4
 

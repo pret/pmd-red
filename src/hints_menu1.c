@@ -1,13 +1,14 @@
 #include "global.h"
 #include "globaldata.h"
+#include "structs/struct_sub80095e4.h"
 #include "code_80118A4.h"
 #include "common_strings.h"
 #include "hints_menu1.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_1.h"
+#include "text_2.h"
 
 static EWRAM_INIT struct_Sub80095E4 *sUnknown_203B264 = {NULL};
 
@@ -24,7 +25,7 @@ bool8 sub_801E3F0(u32 a0)
 
     sUnknown_203B264->unk34 = a0;
     sUnknown_203B264->unk38 = &sUnknown_203B264->windows.id[a0];
-    RestoreUnkTextStruct_8006518(&sUnknown_203B264->windows);
+    RestoreSavedWindows(&sUnknown_203B264->windows);
     sUnknown_203B264->windows.id[sUnknown_203B264->unk34] = sUnknown_80DC0BC;
     sub_8012D08(sUnknown_203B264->unk38, 10);
     ResetUnusedInputStruct();

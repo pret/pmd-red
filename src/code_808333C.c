@@ -1,6 +1,7 @@
 #include "global.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_202ED28.h"
+#include "sprite.h"
 
 bool8 sub_8083568(s32 inX, s32 inY, u8 index)
 {

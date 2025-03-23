@@ -3,15 +3,15 @@
 #include "code_80118A4.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "string_format.h"
 #include "common_strings.h"
 #include "gulpin_shop.h"
 #include "input.h"
-#include "pokemon.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "moves.h"
-#include "text.h"
+#include "pokemon.h"
+#include "string_format.h"
+#include "text_1.h"
 
 static EWRAM_INIT GulpinShopWork *sGulpinShopWork = {NULL};
 
@@ -48,7 +48,7 @@ bool8 CreateGulpinShop(u32 mode, s16 pokeSpecies, Move *moves)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_GULPIN);
     sGulpinShopWork->monPortrait.faceFile = faceFile;
-    sGulpinShopWork->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
+    sGulpinShopWork->monPortrait.faceData = (PortraitGfx *) faceFile->data;
 
     sGulpinShopWork->monPortrait.spriteId = 0;
     sGulpinShopWork->monPortrait.flip = FALSE;
@@ -111,7 +111,7 @@ static void sub_801E980(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(&sGulpinShopWork->unk12C);
+    RestoreSavedWindows(&sGulpinShopWork->unk12C);
 
     switch (sGulpinShopWork->state) {
         case 2:

@@ -3,7 +3,8 @@
 #include "code_8004AA0.h"
 
 void nullsub_6(void)
-{}
+{
+}
 
 void sub_8004AA4(unkStruct_202EE8C *a0, OpenedFile *a1, s32 a2)
 {

@@ -1,16 +1,17 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/input.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_8099360.h"
-#include "constants/input.h"
 #include "input.h"
 #include "items.h"
 #include "kecleon_bros4.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 static EWRAM_INIT unkStruct_203B224 *gUnknown_203B224 = {NULL};
 static EWRAM_INIT u16 gUnknown_203B228 = {0};
@@ -36,7 +37,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
     sub_801AE84();
     gUnknown_203B224->unk54.s0.unk34 = param_2;
     gUnknown_203B224->unk54.s0.unk38 = &gUnknown_203B224->unk54.s0.windows.id[param_2];
-    RestoreUnkTextStruct_8006518(&gUnknown_203B224->unk54.s0.windows);
+    RestoreSavedWindows(&gUnknown_203B224->unk54.s0.windows);
     gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB95C;
     gUnknown_203B224->unk54.s0.unk38->header = &gUnknown_203B224->unk54.unk9C;
 

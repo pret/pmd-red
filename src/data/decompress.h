@@ -1,1 +1,0 @@
-static const u32 gByteShiftLookup[4] = {0, 8, 16, 24};

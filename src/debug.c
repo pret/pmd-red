@@ -1,24 +1,21 @@
 #include "global.h"
 #include "debug.h"
 
-extern void Hang();
-static void FatalErrorHang(void) __attribute__((noreturn));
+EWRAM_INIT static bool32 gNDS_DebugEnabled = {0}; // NDS=020EACE4
+EWRAM_INIT static u8 gUnknown_203B150 = {0};
 
-EWRAM_INIT bool32 gNDS_DebugEnabled = {0};
-EWRAM_INIT u8 gUnknown_203B150 = {0};
+ALIGNED(4) static const char gFuncFileLineString[] = "func = '%s'\nfile = '%s'  line = %5d";
 
-ALIGNED(4) const char gFuncFileLineString[] = "func = '%s'\nfile = '%s'  line = %5d";
+ALIGNED(4) static const char gNotEntryText[] = "--- not entry ---";
+ALIGNED(4) static const char gFuncFileLineStringWPrefix[] = "%sfunc = '%s'\nfile = '%s'  line = %5d\n";
 
-ALIGNED(4) const char gNotEntryText[] = "--- not entry ---";
-ALIGNED(4) const char gFuncFileLineStringWPrefix[] = "%sfunc = '%s'\nfile = '%s'  line = %5d\n";
+ALIGNED(4) static const char gFuncFileLineString2[] = "func = '%s'\nfile = '%s'  line = %5d\n";
 
-ALIGNED(4) const char gFuncFileLineString2[] = "func = '%s'\nfile = '%s'  line = %5d\n";
-
-ALIGNED(4) const char debug_fill14[] = "pksdir0";
-ALIGNED(4) const char gDebugPrintPrefix[] = "  Print  ";
+ALIGNED(4) static const char debug_fill14[] = "pksdir0";
+ALIGNED(4) static const char gDebugPrintPrefix[] = "  Print  ";
 ALIGNED(4) static const char debug_fill13[] = "pksdir0";
 
-static UNUSED EWRAM_INIT const char *sUnusedEwramDebugStrings[] =
+EWRAM_INIT UNUSED static const char *sUnusedEwramDebugStrings[] =
 {
     "Ground",
     "GroundScript",
@@ -32,14 +29,14 @@ static UNUSED EWRAM_INIT const char *sUnusedEwramDebugStrings[] =
     "Performance",
 };
 
-ALIGNED(4) const char gNotMountText[] = "not mount log system";
+ALIGNED(4) static const char gNotMountText[] = "not mount log system";
 ALIGNED(4) static const char debug_fill9[] = "pksdir0";
 ALIGNED(4) static const char debug_fill10[] = "pksdir0";
 ALIGNED(4) static const char debug_fill11[] = "pksdir0";
 ALIGNED(4) static const char debug_fill12[] = "pksdir0";
 
-ALIGNED(4) const char gFatalText[] = "!!!!! Fatal !!!!!\n";
-ALIGNED(4) const char gFatalErrorBufferPlaceholder[] = "%s\n";
+ALIGNED(4) static const char gFatalText[] = "!!!!! Fatal !!!!!\n";
+ALIGNED(4) static const char gFatalErrorBufferPlaceholder[] = "%s\n";
 
 ALIGNED(4) static const char debug_fill0[] = "pksdir0";
 ALIGNED(4) static const char debug_fill1[] = "pksdir0";
@@ -50,6 +47,21 @@ ALIGNED(4) static const char debug_fill5[] = "pksdir0";
 ALIGNED(4) static const char debug_fill6[] = "pksdir0";
 ALIGNED(4) static const char debug_fill7[] = "pksdir0";
 
+extern void Hang();
+
+static void FatalErrorFormatMessage(const u8 *text, ...);
+static void FatalErrorHang(void) NORETURN;
+static void FatalErrorPrintFuncFileLine(const u8 *prefix, const DebugLocation *debug);
+static void nullsub_26(void);
+static void nullsub_27(void);
+static void nullsub_28(void);
+static void nullsub_29(void);
+static void nullsub_30(void);
+static void nullsub_31(void);
+static void nullsub_32(void);
+static void PrintFuncFileLine(u8 *buf, const DebugLocation *loc, const u8 *prefix);
+
+// arm9.bin::0201888C
 void NDS_DebugInit(void)
 {
     nullsub_26();
@@ -66,7 +78,7 @@ void nullsub_25(void)
 {
 }
 
-void nullsub_26(void)
+static void nullsub_26(void)
 {
 }
 
@@ -78,12 +90,12 @@ UNUSED static void PrintFuncFileLineOrNotEntry(u8 *buf, DebugLocation *debug)
         sprintf(buf, gNotEntryText);
 }
 
-void PrintFuncFileLine(u8 *buf, const DebugLocation *loc, const u8* prefix)
+static void PrintFuncFileLine(u8 *buf, const DebugLocation *loc, const u8* prefix)
 {
     sprintf(buf, gFuncFileLineStringWPrefix, prefix, loc->func, loc->file, loc->line);
 }
 
-void PrintMessageWithFuncFileLine(u8 *buffer, const DebugLocation *debug, const u8 *text, ...)
+UNUSED static void PrintMessageWithFuncFileLine(u8 *buffer, const DebugLocation *debug, const u8 *text, ...)
 {
     va_list vArgv;
     u32 length;
@@ -95,103 +107,99 @@ void PrintMessageWithFuncFileLine(u8 *buffer, const DebugLocation *debug, const 
     va_end(vArgv);
 }
 
-void nullsub_199(void)
+UNUSED static void nullsub_199(void)
 {
 }
 
-void nullsub_27(void)
+static void nullsub_27(void)
 {
 }
 
-// Unused
-void sub_8011B08(void)
+UNUSED static void sub_8011B08(void)
 {
     gUnknown_203B150 = 1;
 }
 
-// Unused
-void sub_8011B14(void)
+UNUSED static void sub_8011B14(void)
 {
     gUnknown_203B150 = 0;
 }
 
-// Unused
-u8 sub_8011B20(void)
+UNUSED static u8 sub_8011B20(void)
 {
     gUnknown_203B150 = !gUnknown_203B150;
     return gUnknown_203B150;
 }
 
-// unused
-u8 sub_8011B3C(void)
+UNUSED static u8 sub_8011B3C(void)
 {
     return gUnknown_203B150;
 }
 
-// unused
-void nullsub_137(void)
+UNUSED static void nullsub_137(void)
 {
 
 }
 
-static void FatalErrorPrintFuncFileLine(const char *prefix, const DebugLocation *debug)
+static void FatalErrorPrintFuncFileLine(const u8 *prefix, const DebugLocation *debug)
 {
     char buf[0x100];
-    if(prefix != NULL){
+
+    if (prefix != NULL)
         PrintFuncFileLine(buf, debug, prefix);
-    }
     else
-    {
         PrintFuncFileLine(buf, debug, gDebugPrintPrefix);
-    }
 }
 
-static void FatalErrorFormatMessage(const char *text, ...)
+static void FatalErrorFormatMessage(const u8 *text, ...)
 {
     char bufPrint[0x100];
+
     va_list vArgv;
     va_start(vArgv, text);
     vsprintf(bufPrint, text, vArgv);
     va_end(vArgv);
 }
 
-
-void sub_8011B88(const u8 *text, ...)
+UNUSED static void sub_8011B88(const u8 *text, ...)
 {
     char bufPrint[0x100];
+
     va_list vArgv;
     va_start(vArgv, text);
     vsprintf(bufPrint, text, vArgv);
     va_end(vArgv);
 }
 
-void nullsub_28(void)
+// arm9.bin::02018978
+static void nullsub_28(void)
 {
 }
 
-s8 ScriptLoggingEnabled(bool8 unused)
+// arm9.bin::02018970
+bool8 ScriptLoggingEnabled(bool8 unused)
+{
+    return FALSE;
+}
+
+#if (GAME_VERSION == VERSION_RED)
+UNUSED static u32 sub_8011BA8(void)
 {
     return 0;
 }
 
-// Unused
-u32 sub_8011BA8(void)
-{
-    return 0;
-}
-
-// Unused
-const char *GetNotMountText(void)
+UNUSED static const u8 *GetNotMountText(void)
 {
     return gNotMountText;
 }
 
-// Unused
-void UnusedHang(void)
+UNUSED static void UnusedHang(void)
 {
     Hang();
 }
+#endif
 
+// arm9.bin::02018964
 void Log(u8 num, const u8 *text, ...)
 {
     va_list vArgv;
@@ -199,27 +207,29 @@ void Log(u8 num, const u8 *text, ...)
     va_end(vArgv);
 }
 
-// Unused
-void sub_8011BC8(u32 r0, u32 r1, u32 r2, ...)
+#if (GAME_VERSION == VERSION_RED)
+UNUSED static void sub_8011BC8(u32 r0, u32 r1, u32 r2, ...)
 {
     va_list vArgv;
     va_start(vArgv, r2);
     va_end(vArgv);
 }
+#endif
 
-void nullsub_29()
+// arm9.bin::02018960
+static void nullsub_29()
 {
 }
 
-void nullsub_30()
+static void nullsub_30()
 {
 }
 
-void nullsub_31()
+static void nullsub_31()
 {
 }
 
-void nullsub_32()
+static void nullsub_32()
 {
 }
 
@@ -228,6 +238,7 @@ static void FatalErrorHang()
     Hang();
 }
 
+// arm9.bin::020189C0
 void FatalError(const DebugLocation *debug, const char *text, ...)
 {
     char buf[0x100];

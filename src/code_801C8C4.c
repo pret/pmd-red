@@ -6,12 +6,13 @@
 #include "items.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
 
-static EWRAM_INIT struct unkStruct_203B244 *sUnknown_203B244 = {NULL};
-static EWRAM_INIT u32 sUnknown_203B248 = {0};
-static EWRAM_INIT u16 sUnknown_203B24C = {0};
-static EWRAM_INIT u16 sUnknown_203B24E = {0};
+EWRAM_INIT static struct unkStruct_203B244 *sUnknown_203B244 = { NULL };
+EWRAM_INIT static u32 sUnknown_203B248 = {0};
+EWRAM_INIT static u16 sUnknown_203B24C = {0};
+EWRAM_INIT static u16 sUnknown_203B24E = {0};
 
 #include "data/code_801C8C4.h"
 
@@ -30,7 +31,7 @@ bool8 sub_801C8C4(s32 a0, s32 a1, DungeonPos *a2, u32 a3)
     sub_801CF94();
     sUnknown_203B244->unk4B4.s0.unk34 = a1;
     sUnknown_203B244->unk4B4.s0.unk38 = &sUnknown_203B244->unk4B4.s0.windows.id[a1];
-    RestoreUnkTextStruct_8006518(&sUnknown_203B244->unk4B4.s0.windows);
+    RestoreSavedWindows(&sUnknown_203B244->unk4B4.s0.windows);
     sUnknown_203B244->unk4B4.s0.windows.id[sUnknown_203B244->unk4B4.s0.unk34] = sUnknown_80DBE54;
     sUnknown_203B244->unk4B4.s0.unk38->header = &sUnknown_203B244->unk4B4.unk9C;
 

@@ -1,37 +1,37 @@
 #include "global.h"
 #include "globaldata.h"
-#include "text.h"
-#include "memory.h"
-#include "pokemon.h"
-#include "ground_script.h"
-#include "code_8099360.h"
-#include "code_800D090.h"
-#include "code_800558C.h"
-#include "pokemon_mid.h"
-#include "string_format.h"
-#include "structs/str_3001B64.h"
 #include "constants/dungeon.h"
-#include "wigglytuff_shop1.h"
-#include "event_flag.h"
-#include "input.h"
-#include "ground_main.h"
+#include "structs/str_3001B64.h"
+#include "code_800558C.h"
+#include "code_800D090.h"
+#include "code_80118A4.h"
 #include "code_801D014.h"
+#include "code_8099360.h"
+#include "credits2.h"
+#include "event_flag.h"
+#include "felicity_bank.h"
+#include "flash.h"
+#include "friend_list_menu.h"
+#include "ground_main.h"
+#include "ground_script.h"
+#include "gulpin_shop_801FB50.h"
+#include "input.h"
 #include "kangaskhan_storage1.h"
 #include "kangaskhan_storage2.h"
-#include "felicity_bank.h"
 #include "kecleon_bros1.h"
-#include "gulpin_shop_801FB50.h"
+#include "main_loops.h"
+#include "memory.h"
+#include "personality_test1.h"
+#include "pokemon.h"
+#include "pokemon_mid.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "wigglytuff_shop1.h"
 #include "wigglytuff_shop3.h"
 #include "wonder_mail.h"
-#include "flash.h"
-#include "code_80118A4.h"
-#include "friend_list_menu.h"
-#include "personality_test1.h"
-#include "credits2.h"
-#include "main_loops.h"
-#include "string_format.h"
 
-IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = {NULL};
+IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = { NULL };
 
 extern u16 gUnknown_20399DC;
 extern u16 gUnknown_20399DE;
@@ -606,7 +606,7 @@ bool8 sub_809ADD8(s32 a0_, struct unkStruct_3001B64_sub_sub *a1)
     return TRUE;
 }
 
-struct MonPortraitMsg *sub_809AE3C(s32 a0_)
+MonPortraitMsg *sub_809AE3C(s32 a0_)
 {
     s32 a0 = (s16) a0_;
 

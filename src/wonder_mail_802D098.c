@@ -1,19 +1,19 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
+#include "constants/dungeon.h"
 #include "code_802DE84.h"
 #include "code_803B050.h"
 #include "code_80958E8.h"
 #include "code_80972F4.h"
-#include "code_8099360.h"
 #include "code_8099328.h"
+#include "code_8099360.h"
 #include "common_strings.h"
-#include "constants/dungeon.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "save.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802D098.h"
 
@@ -140,7 +140,7 @@ static void sub_802D1B8(void)
 {
     s32 i;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B2F8->unk1A8);
+    RestoreSavedWindows(&sUnknown_203B2F8->unk1A8);
 
     switch (sUnknown_203B2F8->state) {
         case 13:

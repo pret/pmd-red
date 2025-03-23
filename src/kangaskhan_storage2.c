@@ -1,6 +1,5 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "code_8099360.h"
@@ -10,7 +9,9 @@
 #include "kecleon_bros4.h"
 #include "memory.h"
 #include "menu_input.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 static EWRAM_INIT unkStruct_203B20C *sUnknown_203B20C = {NULL};
 
@@ -108,7 +109,7 @@ static void sub_8017F28(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(&sUnknown_203B20C->unkF0);
+    RestoreSavedWindows(&sUnknown_203B20C->unkF0);
 
     switch (sUnknown_203B20C->state) {
         case KANGASKHAN_STORAGE_2_MAIN:

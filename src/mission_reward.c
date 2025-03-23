@@ -1,16 +1,16 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_80118A4.h"
+#include "code_801B60C.h"
 #include "code_802F204.h"
-#include "pokemon.h"
-#include "rescue_team_info.h"
 #include "friend_area.h"
 #include "input.h"
 #include "items.h"
 #include "memory.h"
+#include "pokemon.h"
+#include "rescue_team_info.h"
 #include "string_format.h"
-#include "code_80118A4.h"
-#include "code_801B60C.h"
-#include "text.h"
+#include "text_1.h"
 
 struct unkStruct_203B310
 {
@@ -21,7 +21,7 @@ struct unkStruct_203B310
     /* 0x9 */ u8 currTeamRank; // team rank
     /* 0xC */ s32 itemRewardIndex;
     unkStruct_802F204 *unk10;
-    /* 0x14 */ struct MonPortraitMsg monPortrait;
+    /* 0x14 */ MonPortraitMsg monPortrait;
     WindowTemplates unk24;
 };
 
@@ -134,7 +134,7 @@ u32 sub_802F204(unkStruct_802F204 *r0, bool8 displayClientSprite)
 
     if(gUnknown_203B310->monPortrait.faceFile != NULL)
     {
-        gUnknown_203B310->monPortrait.faceData = (struct PortraitGfx *) gUnknown_203B310->monPortrait.faceFile->data;
+        gUnknown_203B310->monPortrait.faceData = (PortraitGfx *) gUnknown_203B310->monPortrait.faceFile->data;
     }
 
     SetRewardSceneState(PREP_MONEY_REWARD);
@@ -180,7 +180,7 @@ void sub_802F300(void)
     switch(gUnknown_203B310->state)
     {
         case PREP_MONEY_REWARD:
-            RestoreUnkTextStruct_8006518(&gUnknown_203B310->unk24);
+            RestoreSavedWindows(&gUnknown_203B310->unk24);
             for(index = 0; index < 4; index++)
             {
                 gUnknown_203B310->unk24.id[index] = gUnknown_80E041C;

@@ -1,5 +1,7 @@
 #include "global.h"
 #include "structs/str_dungeon.h"
+#include "bg_control.h"
+#include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
 #include "code_8009804.h"
@@ -9,14 +11,12 @@
 #include "code_803E668.h"
 #include "code_803E724.h"
 #include "dungeon_map.h"
-#include "bg_palette_buffer.h"
-#include "bg_control.h"
 #include "dungeon_music.h"
 #include "game_options.h"
 #include "input.h"
 #include "play_time.h"
 #include "sprite.h"
-#include "text.h"
+#include "text_2.h"
 
 EWRAM_INIT u8 gUnknown_203B40C = 0;
 EWRAM_INIT u8 gUnknown_203B40D = 0;
@@ -26,7 +26,7 @@ extern s32 gDungeonFramesCounter;
 extern u32 gUnknown_202EDD0;
 extern s32 gUnknown_202EDD4;
 
-extern void sub_803E490(u32);
+static void sub_803E490(u32);
 void xxx_draw_string_80524F0(void);
 void sub_8085F78(void);
 void sub_803F580(s32);
@@ -48,7 +48,7 @@ void DungeonRunFrameActions(u32 a0)
         sub_803E668(a0);
 }
 
-void sub_803E490(u32 unused)
+static void sub_803E490(u32 unused)
 {
     gUnknown_202EDD4++;
     xxx_draw_string_80524F0();
