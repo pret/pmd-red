@@ -10,6 +10,7 @@
 #include "string_format.h"
 #include "text_util.h"
 #include "text.h"
+#include "strings.h"
 
 static EWRAM_DATA OpenedFile *sWazaParametersFile = { NULL }; // NDS=213C188
 static EWRAM_DATA MoveDataEntry *sMovesData = { NULL }; // NDS=213C18C
@@ -28,11 +29,6 @@ extern const u8 gUnknown_8109928[];
 extern const u8 gUnknown_810992B;
 extern const u8 gUnknown_810992C[];
 extern const u8 gUnknown_8109930[];
-
-// data_810AE24.s
-extern const u8* gPtrTypeText;  // "Type"
-extern const u8 *gRangeNames[];
-extern const u8* gUnknown_810CF00;
 
 static void CopyAndResetMove(Move *, Move *);
 static bool8 sub_80933D8(s32, Move *);
@@ -1406,7 +1402,7 @@ static void unk_MovePrintData(Move *move, s32 y)
     AddDoubleUnderScoreHighlight(y, 4, 72, 200, COLOR_WHITE_2);
     sub_8092D54(gFormatBuffer_Monsters[0], move);
     PrintFormattedStringOnWindow(4, 74, gUnknown_810CF00, y, 0);
-    PrintFormattedStringOnWindow(4, 86, gPtrTypeText, y, 0);
+    PrintFormattedStringOnWindow(4, 86, gTextType, y, 0);
     type = GetMoveType(move);
     text = GetUnformattedTypeString(type);
     PrintFormattedStringOnWindow(64, 86, text, y, 0);

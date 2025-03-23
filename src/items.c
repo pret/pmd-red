@@ -12,6 +12,7 @@
 #include "text_util.h"
 #include "text.h"
 #include "string_format.h"
+#include "strings.h"
 
 extern const char gItemParaFileName[];
 extern const char gUnknown_8109794[];
@@ -19,11 +20,8 @@ extern const char gUnknown_81097A4[];
 extern s32 gPowersOfTen[];
 extern u8 gHighDigits[];
 extern u16 gGummiStatBoostLUT[];
-extern u8* gPtrTypeText;  // ptr to "Type\0"
-extern u8* gPtrPPD0Text;  // ptr to "PP {VALUE_0} \0"
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
 extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)
-extern const char *gUnknown_810AF50[];
 extern u8 gUnknown_8108F64[0x3f][32];  // some sort of bit lookup table
 extern u8 gInvalidItemIDs[0x10];
 
@@ -652,13 +650,13 @@ u32 sub_80913E0(Item* slot, u32 a2, STATUSTEXTS(statuses))
 
     InitPokemonMove(buffer8, move);
     AddDoubleUnderScoreHighlight(a2, 4, 82, 200, COLOR_WHITE_2);
-    PrintFormattedStringOnWindow(4, 84, gPtrTypeText, a2, 0);
+    PrintFormattedStringOnWindow(4, 84, gTextType, a2, 0);
     moves_data = GetMoveType(buffer8);
     typestring = GetUnformattedTypeString(moves_data);
     PrintFormattedStringOnWindow(64, 84, typestring, a2, 0);
     result = GetMoveBasePP(buffer8);
     gFormatArgs[0] = result;
-    PrintFormattedStringOnWindow(128, 84, gPtrPPD0Text, a2, 0);
+    PrintFormattedStringOnWindow(128, 84, gText_PP_Value0, a2, 0);
   }
 
   sub_80073E0(a2);
