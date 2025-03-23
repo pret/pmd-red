@@ -1,6 +1,5 @@
 #include "global.h"
 #include "strings.h"
-#include "dungeon.h"
 #include "constants/friend_area.h"
 #include "constants/tactic.h"
 #include "constants/iq_skill.h"
