@@ -143,7 +143,7 @@ s32 GroundLink_GetPos(s32 _arg0, PixelPos *pos);
 void sub_80999FC(s32);
 bool8 sub_809B1C0(s32, s32, char[12]);
 bool8 sub_80023E4(u32 param_1); // some kind of helper for predefined scenario checks
-s32 sub_80A14E8(Action *, u8, s32, s32);
+s32 sub_80A14E8(Action *, u8, u32, s32);
 void sub_80A87AC(s32, s32);
 const ScriptCommand *FindLabel(Action *action, s32 r1);
 void SetRescueTeamName(u8 *buffer);
@@ -153,8 +153,6 @@ void SetScriptVarValue(u8 *localVarBuf, s32 varId, s32 val);
 void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId, s32 idx, s32 val);
 unkStruct_203B480 * GetMailatIndex(u8 index);
 u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s32 param_2);
-
-s32 sub_80A14E8(Action *, u8, s32, s32);
 
 extern s16 gCurrentMap;
 extern s16 gUnknown_2039A32;
@@ -196,9 +194,9 @@ extern u8 GroundObjectsCancellAll(void);
 extern u8 GroundEffectsCancelAll(void);
 extern u8 GroundLivesCancelAll(void);
 extern u8 IsTextboxOpen_809A750(void);
-extern s32 sub_80A882C(s16);
-extern s32 sub_80AC240(s16);
-extern s32 sub_80AD158(s16);
+extern Action *sub_80A882C(s16);
+extern Action *sub_80AC240(s16);
+extern Action *sub_80AD158(s16);
 
 EWRAM_INIT static int sNumChoices = 0;
 
@@ -210,7 +208,7 @@ void sub_809D520(void *a0)
     *ptr = v;
 }
 
-s32 sub_809D52C(void *a0)
+Action *sub_809D52C(void *a0)
 {
     s16 *ptr = a0;
 
@@ -3048,3 +3046,4 @@ UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0)
     else
         return FALSE;
 }
+
