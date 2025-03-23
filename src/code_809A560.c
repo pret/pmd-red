@@ -12,6 +12,7 @@
 #include "felicity_bank.h"
 #include "flash.h"
 #include "friend_list_menu.h"
+#include "ground_lives.h"
 #include "ground_main.h"
 #include "ground_script.h"
 #include "gulpin_shop_801FB50.h"
@@ -55,7 +56,6 @@ PokemonStruct1 *sub_808D3F8(void);
 PokemonStruct1 *sub_80A8D54(s16);
 void sub_80A7DDC(s16 *, s16*);
 u8 sub_80A8CF0(s16);
-s16 sub_80A7AE8(s16);
 s16 sub_80A8BFC(s32);
 
 struct Unk8116040Struct

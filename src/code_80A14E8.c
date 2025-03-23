@@ -1,15 +1,20 @@
 #include "global.h"
 #include "ground_script.h"
+#include "constants/dungeon.h"
 #include "constants/friend_area.h"
 #include "constants/item.h"
 #include "constants/monster.h"
+#include "constants/move_id.h"
 #include "code_80118A4.h"
 #include "code_8099360.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "code_80972F4.h"
+#include "code_80A26CC.h"
+#include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
+#include "ground_lives.h"
 #include "ground_main.h"
 #include "input.h"
 #include "items.h"
@@ -52,6 +57,7 @@ extern DungeonLocation gUnknown_8116788;
 extern DungeonLocation gUnknown_811678C;
 extern DungeonLocation gUnknown_8116790;
 extern u16 gUnknown_2039DA8;
+extern u8 gUnknown_2039D98[POKEMON_NAME_LENGTH];
 
 PokemonStruct1 *sub_808D278(s32 species);
 PokemonStruct1 *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation *location, u16 *moveID);
@@ -83,26 +89,8 @@ s32 sub_8011C34(void);
 extern void sub_8011C28(u32);
 
 bool8 ScriptPrintText(s32, s16, const char*);
-extern s16 sub_80A2740(s16);
-extern u8 gUnknown_2039D98[POKEMON_NAME_LENGTH];
-
-// event_flag
-s32 GetScriptVarArrayValue(s32, s32 varID, u16 idx); // sub_8001784
-s32 GetScriptVarValue(u8 *, s32 varID); // sub_8001658();
-void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId, s32 idx, s32 val);
-void GetScriptVarScenario(s32 varId,u32 *outMain,u32 *outSub);
-bool8 ScriptVarScenarioAfter(s16 varId, u32 main, s32 sub);
-void SetScriptVarValue(u8 *localVarBuf, s32 varId, s32 val);
-void sub_80026E8(s16 r0, bool8 r1);
-bool8 sub_80023E4(u32 param_1);
-
 PokemonStruct1 *sub_80A8D54(s16);
-PokemonStruct1 *sub_808D278(s32 species);
 void IncrementAdventureNumJoined(void); // sub_8097848
-
-// ground_lives
-s16 sub_80A7AE8(s16);
-s16 sub_80A8FD8(s32, PixelPos*);
 
 // resuce_team_info
 u8 GetRescueTeamRank(void);
@@ -115,9 +103,9 @@ PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2);
 s16 GroundEffect_Add(s16 id, GroundEffectData*, s16 group, s8 sector);
 extern Action *sub_80AD158(s16);
 
-s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
+s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 {
-    switch(r1)
+    switch(idx)
     {
         case 1:
             sub_8098C58();
@@ -162,18 +150,18 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
             {
                 s32 ret;
                 s32 ret2;
-                if ((r0->unkC).arr[0] == 1)
+                if ((action->unkC).arr[0] == 1)
                 {
                     u8 text[0x100];
                     DungeonLocation dungLocation;
-                    ret = sub_80A8C4C((r0->unkC).arr[1], &dungLocation);
+                    ret = sub_80A8C4C((action->unkC).arr[1], &dungLocation);
                     if(ret != 0)
                     {
                         if (dungLocation.id == 0x44 && ret == 0x104) {
                             return 2;
                         }
                         
-                        ret2 = sub_80A90C8((r0->unkC).arr[1]);
+                        ret2 = sub_80A90C8((action->unkC).arr[1]);
                         InlineStrcpy(text, gFriendAreaDialogue[ret2]);
                         if (ScriptPrintText(0, 1, text) != 0)
                             return 1;
@@ -201,7 +189,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
         case 0xE:
             { 
                 s32 index;
-                for(index = 0x11; index <= 0x16; index++)
+                for(index = 0x11; index < NUM_DUNGEON_MAZE; index++)
                 {
                     if (IsMazeCompleted((s16) index)) {
                         if (!GetScriptVarArrayValue(0, 0x2F, (u16) index)) {
@@ -215,11 +203,11 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
         case 0xF:
             return sub_80964E4() == 0 ? 0 : 1;
         case 0x10:
-            if(r0->unk8[0] == 1)
-                if(r0->unk8[1] == 0)
-                    if(r0->unkC.arr[0] == 1)
+            if(action->unk8[0] == 1)
+                if(action->unk8[1] == 0)
+                    if(action->unkC.arr[0] == 1)
                     {
-                        if(sub_80A87E0(r0->unk8[1], sub_80A8E9C(r0->unkC.arr[1])) != 0)
+                        if(sub_80A87E0(action->unk8[1], sub_80A8E9C(action->unkC.arr[1])) != 0)
                             return 1;
                     }
             return 0;
@@ -228,7 +216,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
         case 0x12:
             {
                 s32 held = gRealInputs.held;
-                if((held & (0x300)))
+                if((held & (R_BUTTON | L_BUTTON)))
                     return 1;
                 else
                     return 0;
@@ -244,8 +232,8 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
             }
             return 0;
         case 0x14:
-            if(r0->unk8[0] == 1)  {
-                if(GetCanMoveFlag(sub_80A8BFC(r0->unk8[1])) != 0)
+            if(action->unk8[0] == 1)  {
+                if(GetCanMoveFlag(sub_80A8BFC(action->unk8[1])))
                     return 1;
             }
             return 0;
@@ -257,7 +245,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                 s32 r5 = sub_80A7AE8(r2);
                 if(r5 >= 0) {
                     r4 = (r3 << 8);
-                    r0->callbacks->getHitboxCenter(r0->parentObject, &sp_318);
+                    action->callbacks->getHitboxCenter(action->parentObject, &sp_318);
                     sub_80A8FD8(r5, &sp_320);
             
                     if(sp_318.x - r4 <= sp_320.x
@@ -276,7 +264,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                 PokemonStruct1 *ptr; ptr = sub_80A8D54(1);
                 if(ptr)
                 {
-                    for(index = 0; index < 10; index++)
+                    for(index = 0; index < POKEMON_NAME_LENGTH; index++)
                     {
                         ptr->name[index] = 0;
                     }
@@ -303,7 +291,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                 sp_4 = gUnknown_8116710;
                 sub_808D144(&sp_2c, &sp_4);
                 ptr = sub_808D1DC(&sp_2c);
-                if (ptr == 0) return 1;
+                if (ptr == NULL) return 1;
                 for(index = 0; index < POKEMON_NAME_LENGTH; index++)
                 {
                     ptr->name[index] = gUnknown_2039D98[index];
@@ -324,25 +312,25 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                  struct unkStruct_808D144 sp_84;
                  PokemonStruct1 sp_ac;
                  
-                UnlockFriendArea(GetFriendArea(0x183));
+                UnlockFriendArea(GetFriendArea(MONSTER_ABSOL));
                 sp_84 = gUnknown_8116738;
                 sub_808D144(&sp_ac, &sp_84);
                 pokemon = sub_808D1DC(&sp_ac);
-                if(pokemon == 0) return 1;
+                if(pokemon == NULL) return 1;
                 IncrementAdventureNumJoined();
-                pokemon->unk0 |= 2;
+                pokemon->unk0 |= FLAG_ON_TEAM;
                 return 0;
              }
         case 0x1C:
             {
-                PokemonStruct1 *pokemon = sub_808D434(0x183, 0);
-                if(pokemon == 0) return 1;
-                pokemon->unk0 |= 2;
+                PokemonStruct1 *pokemon = sub_808D434(MONSTER_ABSOL, 0);
+                if(pokemon == NULL) return 1;
+                pokemon->unk0 |= FLAG_ON_TEAM;
                 return 0;
             }
         case 0x1D:
             {
-                if( sub_808D278(0x104) == 0)
+                if( sub_808D278(MONSTER_SMEARGLE) == 0)
                     return 1;
                 else
                     return 0;
@@ -414,9 +402,9 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
             {
                 PokemonStruct1 *pokemon;
                 pokemon = GetPlayerPokemonStruct();
-                if (pokemon != NULL && pokemon->speciesNum == 0x113)
+                if (pokemon != NULL && pokemon->speciesNum == MONSTER_HO_OH)
                     return 2;
-                else if (sub_8098134(0x113) != 0)
+                else if (sub_8098134(MONSTER_HO_OH) != 0)
                     return 1;
             }
             return 0;
@@ -431,8 +419,8 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                 struct unkStruct_808D144 sp_188;
                 PokemonStruct1 sp_1b0;
                 
-                if(!GetFriendAreaStatus(GetFriendArea(0x199)))
-                    UnlockFriendArea(GetFriendArea(0x199));
+                if(!GetFriendAreaStatus(GetFriendArea(MONSTER_LATIOS)))
+                    UnlockFriendArea(GetFriendArea(MONSTER_LATIOS));
                 sp_188 = gUnknown_8116794;
                 sub_808D144(&sp_1b0, &sp_188);
                 pokemon = sub_808D1DC(&sp_1b0);
@@ -471,7 +459,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
 
         case 0x28:
             {
-                if(GetNumberOfFilledInventorySlots() >= 20)
+                if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                 {
                     Item *item = &gUnknown_81167E4;
                     s32 id = item->id;
@@ -586,13 +574,13 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                   {
                     s32 id = (s16) GetScriptVarValue(0, 0x1F); // NEW_FRIEND_KIND
                       s32 matchMe = id;
-                     WriteFriendAreaName(gFormatBuffer_FriendArea,(GetFriendArea((s16) id)), 0);
+                     WriteFriendAreaName(gFormatBuffer_FriendArea,(GetFriendArea((s16) id)), FALSE);
                     if(id == 0) 
                         return 0;
                 
                     if(!GetFriendAreaStatus(GetFriendArea(id)))
                         UnlockFriendArea(GetFriendArea(id));
-                    pokemon = sub_808D2E8(matchMe, 0 ,0, &gUnknown_81167E8, 0);
+                    pokemon = sub_808D2E8(matchMe, NULL ,ITEM_NOTHING, &gUnknown_81167E8, MOVE_NOTHING);
                     if(pokemon == NULL)
                         return 0;
                     
@@ -603,7 +591,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                   }
                   else
                   {
-                      SetScriptVarValue(0, 0x1F, 0); // NEW_FRIEND_KIND
+                      SetScriptVarValue(NULL, 0x1F, 0); // NEW_FRIEND_KIND
                       return 0;
                   }
             }
@@ -636,7 +624,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
             return 0;
         case 0x30:
             {
-                if(sub_808D278(0x133) == 0)
+                if(sub_808D278(MONSTER_GARDEVOIR) == 0)
                     return 1;
                 else
                     return 0;
@@ -686,7 +674,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                 Item *item = &gUnknown_8116844;
                 for(index = 0; index < 3; index++)
                 {
-                    if(GetNumberOfFilledInventorySlots() > 0x13)
+                    if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                     {
                         id = item->id;
                         if(IsNotMoneyOrUsedTMItem(id))
@@ -705,10 +693,10 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
         case 0x35:
             {
                 PokemonStruct1 *pokemon = GetPlayerPokemonStruct();
-                if(pokemon != NULL && pokemon->speciesNum == 0x71)
+                if(pokemon != NULL && pokemon->speciesNum == MONSTER_CHANSEY)
                     return 2;
                 else
-                    if(sub_8098134(0x71) != 0)
+                    if(sub_8098134(MONSTER_CHANSEY) != 0)
                         return 1;
                     else
                         return 0;
@@ -788,7 +776,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                 sub_80A579C(&sp_340, &sp_348);
                 sp_340.y += 0xC00;
                 sp_348.y += 0xC00;
-                r0->callbacks->getHitboxCenter(r0->parentObject, &sp_350);
+                action->callbacks->getHitboxCenter(action->parentObject, &sp_350);
                 if(sp_350.x < sp_340.x)
                     sp_350.x = sp_340.x;
                 else if (sp_350.x >= sp_348.x)
@@ -817,7 +805,7 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                 s32 ret;
                 s32 held = gRealInputs.held;
                 s32 pressed = gRealInputs.pressed;
-                if(!(pressed & 0xC))
+                if(!(pressed & (START_BUTTON | SELECT_BUTTON)))
                 {
                     PixelPos sp_368;
                     ret = sub_809CFE8(held);
@@ -827,19 +815,19 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
                         sp_368 = SetVecFromDirectionSpeed(ret,0x100);
 
                         to = 2;
-                        if(held & 2) {
+                        if(held & B_BUTTON) {
                             to = 4;
                         }
                         
                         for(index = 0; index < to; index++)
                         {
-                            if(r0->callbacks->moveRelative(r0->parentObject, &sp_368) != 0)
+                            if(action->callbacks->moveRelative(action->parentObject, &sp_368) != 0)
                             {
                                 PixelPos pixelPos = {0, sp_368.y};
-                                if(r0->callbacks->moveRelative(r0->parentObject, &pixelPos) != 0)
+                                if(action->callbacks->moveRelative(action->parentObject, &pixelPos) != 0)
                                 {
                                     PixelPos pixelPos = {sp_368.x, 0};
-                                    r0->callbacks->moveRelative(r0->parentObject, &pixelPos);
+                                    action->callbacks->moveRelative(action->parentObject, &pixelPos);
                                 }
                             }
                         }             
@@ -863,30 +851,30 @@ s32 sub_80A14E8(Action *r0, u8 r1, u32 r2, s32 r3)
             return 0;
         case 0x43:
             gUnknown_2039DA8 = GetCurrentBGSong();
-            if(gUnknown_2039DA8 != 999) 
+            if(gUnknown_2039DA8 != STOP_BGM) 
                 return 1;
             return 0;
         case 0x44:
-            if (gUnknown_2039DA8 != 999)
+            if (gUnknown_2039DA8 != STOP_BGM)
             {
                 xxx_call_start_new_bgm(gUnknown_2039DA8);
-                gUnknown_2039DA8 = 999;
+                gUnknown_2039DA8 = STOP_BGM;
                 return 1;
             }
             return 0;
         case 0x45:
-            if (gUnknown_2039DA8 != 999)
+            if (gUnknown_2039DA8 != STOP_BGM)
             {
                 xxx_call_fade_in_new_bgm(gUnknown_2039DA8, r2);
-                gUnknown_2039DA8 = 999;
+                gUnknown_2039DA8 = STOP_BGM;
                 return 1;
             }
             return 0;
         case 0x46:
-            if (gUnknown_2039DA8 != 999)
+            if (gUnknown_2039DA8 != STOP_BGM)
             {
                 xxx_call_queue_bgm(gUnknown_2039DA8);
-                gUnknown_2039DA8 = 999;
+                gUnknown_2039DA8 = STOP_BGM;
                 return 1;
             }
             return 0;

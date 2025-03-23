@@ -9,6 +9,7 @@
 #include "exclusive_pokemon.h"
 #include "ground_link.h"
 #include "ground_script.h"
+#include "ground_lives.h"
 #include "ground_sprite.h"
 #include "ground_main.h"
 #include "ground_map.h"
@@ -97,7 +98,6 @@ void sub_809D220(s32, s32, s32);
 bool8 GroundCancelAllEntities(void);
 void GroundScriptLockJumpZero(s16);
 s16 GetAdjustedGroundMap(s32);
-s16 sub_80A7AE8(s16);
 void sub_80A87AC(s32, s32);
 void sub_80A8BD8(s16, s32*);
 u32 sub_80A8C2C();
