@@ -1,37 +1,42 @@
 #include "global.h"
+#include "bg_palette_buffer.h"
 #include "cpu.h"
 #include "main_loops.h"
 #include "random.h"
 #include "sprite.h"
 
-static EWRAM_DATA u16 sOAMSpriteCount = {0}; // GBA=2025670 | NDS=20EC504 | Written to but never read
-static EWRAM_DATA s16 sUnknown_2025672[8] = {0};
-static EWRAM_DATA s16 sUnknown_2025682[9] = {0};
-static EWRAM_DATA DungeonPos sUnknown_2025694 = {0};
-static EWRAM_DATA u32 sUnknown_2025698 = {0};
-UNUSED static EWRAM_DATA u32 sUnused1 = {0}; // GBA=202569C
-static EWRAM_DATA SpriteList sSpriteList = {0}; // NDS=20ED4C0
-static EWRAM_DATA UnkSpriteLink sUnknown_2025EA8[128] = {0};
-static EWRAM_DATA SpriteOAM sUnknown_20262A8[128] = {0};
-static EWRAM_DATA s32 sSpriteCount = {0}; // GBA=20266A8
-UNUSED static EWRAM_DATA u32 sUnused2 = {0}; // GBA=20266AC
+EWRAM_DATA static u16 sOAMSpriteCount = {0}; // GBA=2025670 | NDS=20EC504 | Written to but never read
+EWRAM_DATA static s16 sUnknown_2025672[8] = {0};
+EWRAM_DATA static s16 sUnknown_2025682[9] = {0};
+EWRAM_DATA static DungeonPos sUnknown_2025694 = {0};
+EWRAM_DATA static u32 sUnknown_2025698 = {0};
+UNUSED EWRAM_DATA static u32 sUnused1 = {0}; // GBA=202569C
+EWRAM_DATA static SpriteList sSpriteList = {0}; // NDS=20ED4C0
+EWRAM_DATA static UnkSpriteLink sUnknown_2025EA8[128] = {0};
+EWRAM_DATA static SpriteOAM sUnknown_20262A8[128] = {0};
+EWRAM_DATA static s32 sSpriteCount = {0}; // GBA=20266A8
+UNUSED EWRAM_DATA static u32 sUnused2 = {0}; // GBA=20266AC
 
 #define UNK_20266B0_ARR_COUNT 160
-static EWRAM_DATA unkStruct_20266B0 sUnknown_20266B0[UNK_20266B0_ARR_COUNT] = {0};
+EWRAM_DATA static unkStruct_20266B0 sUnknown_20266B0[UNK_20266B0_ARR_COUNT] = {0};
 
-static EWRAM_DATA void *sCharMemCursor = {0}; // GBA=2026E30
-UNUSED static EWRAM_DATA u32 sUnused3 = {0}; // GBA=2026E34
+EWRAM_DATA static void *sCharMemCursor = {0}; // GBA=2026E30
+UNUSED EWRAM_DATA static u32 sUnused3 = {0}; // GBA=2026E34
 
-static EWRAM_INIT unkStruct_20266B0 *sUnknown_203B074 = {0};
+EWRAM_INIT static unkStruct_20266B0 *sUnknown_203B074 = {0};
 
-static void RegisterSpriteParts_80052BC(UnkSpriteMem *);
 static void AxResInitUnoriented(axdata *, axmain *, u32, u32, u32, bool8);
+static void RegisterSpriteParts_80052BC(UnkSpriteMem *);
+static void sub_800533C(ax_pose **, UnkSpriteMem **, axdata1 *, unkStruct_2039DB0 *spriteMasks, bool8);
+static void sub_800561C(const EfoFileData *, s32 vramIdx, s32 brightness, const RGB *ramp);
 
 // arm9.bin::0200265C
 void InitSprites(void)
 {
     ResetSprites(TRUE);
     SetSavingIconCoords(NULL);
+
+    // NDS version has more here
 }
 
 // arm9.bin::020024f4
@@ -147,22 +152,22 @@ void sub_8004E8C(unkStruct_2039DB0 *a0)
     a0->unkA = 0;
 }
 
-// Needed to match AddAxSprite and AddAxSprite. These macros assume SpriteOAM struct has size of 8
-#define SpriteCopy(_dst, _src)          \
-{                                       \
-    u16 *_dstVar = (void *) _dst;       \
-    u16 *_srcVar = (void *) _src;       \
-                                        \
-    *(_dstVar++) = *(_srcVar++);        \
-    *(_dstVar++) = *(_srcVar++);        \
-    *(_dstVar++) = *(_srcVar++);        \
-    *(_dstVar++) = *(_srcVar++);        \
+// Needed to match AddAxSprite and AddSprite. These macros assume SpriteOAM struct has size of 8
+#define SpriteCopy(_dst, _src)      \
+{                                   \
+    u16 *_dstVar = (void *)_dst;    \
+    u16 *_srcVar = (void *)_src;    \
+                                    \
+    *(_dstVar++) = *(_srcVar++);    \
+    *(_dstVar++) = *(_srcVar++);    \
+    *(_dstVar++) = *(_srcVar++);    \
+    *(_dstVar++) = *(_srcVar++);    \
 }
 
 #define SpriteCopyWithMasks(_dst, _src, _spriteMasks)                           \
 {                                                                               \
-    u16 *_dstVar = (void *) _dst;                                               \
-    u16 *_srcVar = (void *) _src;                                               \
+    u16 *_dstVar = (void *)_dst;                                                \
+    u16 *_srcVar = (void *)_src;                                                \
                                                                                 \
     *(_dstVar++) = (*(_srcVar++) & _spriteMasks->unk0) | _spriteMasks->unk6;    \
     *(_dstVar++) = (*(_srcVar++) & _spriteMasks->unk2) | _spriteMasks->unk8;    \
@@ -258,10 +263,10 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
 
 // a2 and spriteMasks are always called with NULL lol
 // arm9.bin::02002088
-void AddSprite(struct SpriteOAM *a0, s32 a1, struct UnkSpriteMem *a2, struct unkStruct_2039DB0 *spriteMasks)
+void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *spriteMasks)
 {
     s32 yPos;
-    struct SpriteOAM *spr;
+    SpriteOAM *spr;
 
     if (sSpriteCount >= 128)
         return;
@@ -369,6 +374,7 @@ void CopySpritesToOam(void)
     sOAMSpriteCount = count;
 }
 
+// arm9.bin::02001F64
 void SetSavingIconCoords(DungeonPos *pos)
 {
     if (pos == NULL) {
@@ -382,6 +388,7 @@ void SetSavingIconCoords(DungeonPos *pos)
     }
 }
 
+// arm9.bin::02001EE8
 void BlinkSavingIcon(void)
 {
     vu16 *oam;
@@ -421,7 +428,8 @@ void BlinkSavingIcon(void)
     }
 }
 
-void RegisterSpriteParts_80052BC(struct UnkSpriteMem *a0)
+// arm9.bin::02001E70
+static void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
 {
     while (a0->byteCount != 0) {
         if ((uintptr_t)sUnknown_203B074 >= (uintptr_t)&sUnknown_20266B0[UNK_20266B0_ARR_COUNT])
@@ -435,6 +443,7 @@ void RegisterSpriteParts_80052BC(struct UnkSpriteMem *a0)
     }
 }
 
+// arm9.bin::02001E14
 void sub_8005304(void)
 {
     unkStruct_20266B0 *s;
@@ -447,7 +456,8 @@ void sub_8005304(void)
     }
 }
 
-void sub_800533C(ax_pose **a0, UnkSpriteMem **a1, axdata1 *a2, unkStruct_2039DB0 *spriteMasks, bool8 a4)
+// arm9.bin::02001D88
+static void sub_800533C(ax_pose **a0, UnkSpriteMem **a1, axdata1 *a2, unkStruct_2039DB0 *spriteMasks, bool8 a4)
 {
     UnkSpriteMem *mem;
     ax_pose *r4;
@@ -462,11 +472,13 @@ void sub_800533C(ax_pose **a0, UnkSpriteMem **a1, axdata1 *a2, unkStruct_2039DB0
     }
 }
 
+// arm9.bin::02001D58
 void AxResInitFile(axdata *a0, OpenedFile *a1, u32 a2, u32 a3, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
     AxResInit(a0, (axmain *)a1->data, a2, a3, a4, spriteAnimIndex, a6);
 }
 
+// arm9.bin::02001CC4
 void AxResInit(axdata *a0, axmain *a1, u32 a2, u32 direction, u32 a4, u32 spriteAnimIndex, bool8 a6)
 {
     a0->flags = 0x8000;
@@ -490,11 +502,13 @@ void AxResInit(axdata *a0, axmain *a1, u32 a2, u32 direction, u32 a4, u32 sprite
     a0->positions = a1->positions;
 }
 
+// arm9.bin::02001C9C
 void AxResInitUnorientedFile(axdata *a0, OpenedFile *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
     AxResInitUnoriented(a0, (axmain *)a1->data, a2, a3, spriteAnimIndex, a5);
 }
 
+// arm9.bin::02001C18
 static void AxResInitUnoriented(axdata *a0, axmain *a1, u32 a2, u32 a3, u32 spriteAnimIndex, bool8 a5)
 {
     a0->flags = 0x8000;
@@ -517,14 +531,16 @@ static void AxResInitUnoriented(axdata *a0, axmain *a1, u32 a2, u32 a3, u32 spri
     a0->positions = NULL;
 }
 
-static inline s16 check_flag_for_80054BC(u16 flags) {
+static inline s16 check_flag_for_80054BC(u16 flags)
+{
     if (flags & 0x2000)
         return 0;
     else
         return flags >> 15;
 }
 
-void RunAxAnimationFrame(struct axdata *a0)
+// arm9.bin::02001AC4
+void RunAxAnimationFrame(axdata *a0)
 {
     ax_anim *aData;
 
@@ -571,7 +587,8 @@ void RunAxAnimationFrame(struct axdata *a0)
     a0->activeAnimData = aData + 1;
 }
 
-void DoAxFrame_800558C(struct axdata *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, unkStruct_2039DB0 *spriteMasks)
+// arm9.bin::020019F4
+void DoAxFrame_800558C(axdata *a0, s32 spriteX, s32 spriteY, u32 a3, u32 paletteNum, unkStruct_2039DB0 *spriteMasks)
 {
     if (!(a0->flags >> 15))
         return;
@@ -591,4 +608,200 @@ void DoAxFrame_800558C(struct axdata *a0, s32 spriteX, s32 spriteY, u32 a3, u32 
 
     if (a0->flags & 0x800)
         a0->flags &= 0xF7FF;
+}
+
+// arm9.bin::020019E4
+void sub_8005610(OpenedFile *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
+{
+    sub_800561C((const EfoFileData *)a0->data, vramIdx, brightness, ramp);
+}
+
+// arm9.bin::02001970
+static void sub_800561C(const EfoFileData *a0, s32 vramIdx, s32 brightness, const RGB *ramp)
+{
+    s32 i;
+
+    if (a0->tiles != NULL)
+        CpuCopy(OBJ_VRAM0 + vramIdx * 0x20, a0->tiles, a0->tileCount * 0x20);
+
+    if (a0->pal != NULL) {
+        for (i = 0; i < 16; i++)
+            SetBGPaletteBufferColorRGB(i + 480, &a0->pal[i], brightness, ramp);
+    }
+}
+
+#if (GAME_VERSION == VERSION_RED)
+UNUSED static const RGB *sub_8005668(OpenedFile *a0, s32 vramIdx)
+{
+    return sub_8005674((const EfoFileData *)a0->data, vramIdx);
+}
+#endif
+
+// arm9.bin::0200193C
+const RGB *sub_8005674(const EfoFileData *a0, s32 vramIdx)
+{
+    if (a0->tiles != NULL)
+        CpuCopy(OBJ_VRAM0 + vramIdx * 0x20, a0->tiles, a0->tileCount * 0x20);
+
+    return a0->pal;
+}
+
+// arm9.bin::02001894
+void sub_800569C(DungeonPos *a0, axObject *a1, u8 a2)
+{
+    DungeonPos *ptr;
+    DungeonPos *ptr2;
+    DungeonPos *ptr3;
+
+    a0->x = 0;
+    a0->y = 0;
+
+    if (!(a1->axdata.flags >> 15) || a2 >= 4)
+        return;
+
+    if (a1->axdata.positions != NULL) {
+        ptr = &((DungeonPos*)a1->axdata.positions)[a1->axdata.sub1.poseId * 4];
+        ptr2 = &ptr[a2];
+        if (*&ptr2->x == 99 && *&ptr2->y == 99) {
+            a0->x = 99;
+            a0->y = 99;
+        }
+        else {
+            ptr3 = &ptr[a2];
+            a0->x = a1->axdata.sub1.offset.x + ptr3->x;
+            a0->y = a1->axdata.sub1.offset.y + ptr3->y;
+        }
+    }
+    else {
+        a0->x = 99;
+        a0->y = 99;
+    }
+}
+
+// arm9.bin::020017D4
+void sub_8005700(DungeonPos *a0, axObject *a1)
+{
+    s32 i;
+    DungeonPos *ptr;
+
+    if (!(a1->axdata.flags >> 15))
+        return;
+
+    if (a1->axdata.positions != NULL) {
+        ptr = &((DungeonPos*)a1->axdata.positions)[a1->axdata.sub1.poseId * 4];
+        for (i = 0; i < 4; i++) {
+            if (*&ptr[i].x == 99 && *&ptr[i].y == 99) {
+                a0->x = 99;
+                a0->y = 99;
+            }
+            else {
+                a0->x = a1->axdata.sub1.offset.x + ptr[i].x;
+                a0->y = a1->axdata.sub1.offset.y + ptr[i].y;
+            }
+            a0++;
+        }
+    }
+    else {
+        for (i = 0; i < 4; i++) {
+            a0->x = 99;
+            a0->y = 99;
+            a0++;
+        }
+    }
+}
+
+#if (GAME_VERSION == VERSION_RED)
+UNUSED static void sub_8005764(s32 a0, OpenedFile *file, s32 a2, const RGB *a3)
+{
+    sub_8005770(a0, (const RGB*)file->data, a2, a3);
+}
+#endif
+
+// arm9.bin::02001794
+void sub_8005770(s32 param_1, const RGB *color, s32 brightness, const RGB *ramp)
+{
+    s32 i;
+
+    for (i = 0; i < 16; i++)
+        SetBGPaletteBufferColorRGB((param_1 + 0x10) * 0x10 + i, &color[i], brightness, ramp);
+}
+
+// Maybe DungeonPos
+// arm9.bin::02001790
+void nullsub_7(s16 *a0)
+{
+}
+
+// arm9.bin::0200178C
+void nullsub_8(u32 a0)
+{
+}
+
+// Should be arm9.bin::02001788
+void nullsub_9(void)
+{
+}
+
+// TODO: Find these in blue if they exist
+
+void nullsub_10(bool8 a0)
+{
+}
+
+UNUSED static void nullsub_144(void)
+{
+}
+
+void nullsub_11(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
+{
+}
+
+void nullsub_12(void)
+{
+}
+
+void nullsub_13(void)
+{
+}
+
+UNUSED static void nullsub_145(void)
+{
+}
+
+void nullsub_14(void)
+{
+}
+
+UNUSED static void nullsub_146(void)
+{
+}
+
+UNUSED static void nullsub_147(void)
+{
+}
+
+UNUSED static void nullsub_148(void)
+{
+}
+
+UNUSED static void nullsub_149(void)
+{
+}
+
+UNUSED static bool8 sub_80057D8(void)
+{
+    return FALSE;
+}
+
+UNUSED static bool8 sub_80057DC(void)
+{
+    return FALSE;
+}
+
+UNUSED static void nullsub_150(void)
+{
+}
+
+UNUSED static void nullsub_151(void)
+{
 }

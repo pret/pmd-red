@@ -1,21 +1,22 @@
 #include "global.h"
+#include "structs/str_dungeon.h"
 #include "code_800DAC0.h"
 #include "code_800ED38.h"
-#include "code_8041AD0.h"
-#include "code_804267C.h"
 #include "code_803E46C.h"
 #include "code_803E668.h"
+#include "code_8041AD0.h"
+#include "code_804267C.h"
 #include "code_8045A00.h"
 #include "code_806CD90.h"
 #include "dungeon.h"
 #include "dungeon_engine.h"
-#include "dungeon_map.h"
 #include "dungeon_leader.h"
+#include "dungeon_map.h"
 #include "dungeon_message.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "items.h"
-#include "structs/str_dungeon.h"
+#include "sprite.h"
 
 extern const u16 gUnknown_80F67DC[4];
 extern const u16 gUnknown_80F67E4[4];
@@ -35,7 +36,6 @@ extern u8 GetFloorType(void);
 extern bool8 sub_8045888(Entity *);
 extern s32 sub_80416E0(PixelPos*, u32, bool8);
 extern u32 sub_8041764(unkStruct_80416E0 *, bool8);
-extern void sub_8005700(DungeonPos *a0, struct axObject *a1);
 extern u32 sub_800E49C();
 extern void sub_800EF40(u8 r0, u8 r1);
 

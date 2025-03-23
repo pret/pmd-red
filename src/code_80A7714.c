@@ -2,8 +2,8 @@
 #include "structs/axdata.h"
 
 extern void sub_80A68A0(u32);
-extern void sub_80A7094(struct axPokemon *, u32, u32, u32);
-extern void sub_80A7310(struct axPokemon *, u32, u32, u32);
+extern void sub_80A7094(axPokemon *, u32, u32, u32);
+extern void sub_80A7310(axPokemon *, u32, u32, u32);
 extern void ResetCurrentScriptFile();
 
 static EWRAM_DATA s16 sUnknown_2039DE0 = {0};
@@ -16,7 +16,7 @@ void sub_80A7714(u32 a0)
     sub_80A68A0(a0);
 }
 
-void sub_80A7720(struct axPokemon *a0, u32 a1, u32 a2)
+void sub_80A7720(axPokemon *a0, u32 a1, u32 a2)
 {
     sub_80A7094(a0, 0, a1, a2);
     sub_80A7310(a0, a1, 0, a2);

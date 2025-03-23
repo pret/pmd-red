@@ -4,8 +4,8 @@
 #include "structs/menu.h"
 #include "structs/str_text.h"
 
-s32 sub_80095E4(s32 a0, s32 a1);
-s32 sub_8009614(s32 a0, s32 a1);
+#include "text_1.h"
+#include "text_3.h"
 
 // Struct related with sub_80095E4
 typedef struct struct_Sub80095E4

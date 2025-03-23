@@ -2,7 +2,6 @@
 #define GUARD_RESCUE_PASSWORD_MENU_H
 
 #include "structs/menu.h"
-#include "sprite.h"
 #include "structs/str_text.h"
 
 // Similar to unkStruct_203B360

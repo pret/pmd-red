@@ -1,15 +1,15 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_802DE84.h"
-#include "memory.h"
-#include "text.h"
-#include "menu_input.h"
 #include "structs/str_802C39C.h"
-#include "common_strings.h"
-#include "code_803B050.h"
-#include "wonder_mail_802CDD4.h"
-#include "input.h"
 #include "structs/struct_sub80095e4.h"
+#include "code_802DE84.h"
+#include "code_803B050.h"
+#include "common_strings.h"
+#include "input.h"
+#include "memory.h"
+#include "menu_input.h"
+#include "text_1.h"
+#include "wonder_mail_802CDD4.h"
 
 struct unkStruct_203B30C
 {
@@ -119,7 +119,7 @@ void sub_802F004(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(&gUnknown_203B30C->unkF0);
+    RestoreSavedWindows(&gUnknown_203B30C->unkF0);
     switch(gUnknown_203B30C->state)
     {
         case 2:

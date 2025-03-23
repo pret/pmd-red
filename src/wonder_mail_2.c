@@ -1,13 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/item.h"
+#include "constants/wonder_mail.h"
 #include "code_800D090.h"
-#include "string_format.h"
 #include "code_802F204.h"
 #include "code_8094F88.h"
 #include "code_8097670.h"
 #include "code_8099360.h"
-#include "constants/item.h"
-#include "constants/wonder_mail.h"
 #include "event_flag.h"
 #include "game_options.h"
 #include "input.h"
@@ -17,14 +16,15 @@
 #include "pokemon_mail.h"
 #include "save.h"
 #include "save_write.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 
 struct unkStruct_203B2C8
 {
     // size: 0x140
     /* 0x0 */ u8 currState;
     /* 0x1 */ u8 unk1;
-    /* 0x4 */ struct MonPortraitMsg monPortrait;
+    /* 0x4 */ MonPortraitMsg monPortrait;
     /* 0x14 */ u8 teamName[4]; // Figure out size of this buffer
     u8 fill18[0x114 - 0x18];
     unkStruct_802F204 unk114;
@@ -86,7 +86,7 @@ u8 sub_802B2D4(void)
   CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, MONSTER_PELIPPER);
   faceFile = GetDialogueSpriteDataPtr(MONSTER_PELIPPER);
   sUnknown_203B2C8->monPortrait.faceFile = faceFile;
-  sUnknown_203B2C8->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
+  sUnknown_203B2C8->monPortrait.faceData = (PortraitGfx *) faceFile->data;
   sUnknown_203B2C8->monPortrait.spriteId = 0;
   sUnknown_203B2C8->monPortrait.flip = FALSE;
   sUnknown_203B2C8->monPortrait.unkE = 0;

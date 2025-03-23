@@ -1,6 +1,5 @@
 #include "global.h"
 #include "globaldata.h"
-#include "string_format.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "code_8099360.h"
@@ -11,7 +10,9 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
 EWRAM_INIT struct KangaskhanStorageWork *gKangaskhanStorageWork = {NULL};
 
@@ -64,7 +65,7 @@ bool8 CreateKangaskhanStorage(u32 mode)
 
     faceFile = GetDialogueSpriteDataPtr(MONSTER_KANGASKHAN);
     gKangaskhanStorageWork->monPortrait.faceFile = faceFile;
-    gKangaskhanStorageWork->monPortrait.faceData = (struct PortraitGfx *) faceFile->data;
+    gKangaskhanStorageWork->monPortrait.faceData = (PortraitGfx *) faceFile->data;
     gKangaskhanStorageWork->monPortrait.spriteId = FALSE;
     gKangaskhanStorageWork->monPortrait.flip = FALSE;
     gKangaskhanStorageWork->monPortrait.unkE = 0;
@@ -145,7 +146,7 @@ static void sub_8016E80(void)
 {
     s32 index;
 
-    RestoreUnkTextStruct_8006518(&gKangaskhanStorageWork->unkEC);
+    RestoreSavedWindows(&gKangaskhanStorageWork->unkEC);
 
     switch (gKangaskhanStorageWork->currState) {
         case 13:

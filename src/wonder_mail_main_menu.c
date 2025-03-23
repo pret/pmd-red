@@ -1,25 +1,25 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
-#include "string_format.h"
-#include "code_801B3C0.h"
-#include "code_803B050.h"
-#include "code_801C8C4.h"
-#include "code_803D0D8.h"
-#include "code_8094F88.h"
 #include "constants/communication_error_codes.h"
 #include "constants/wonder_mail.h"
+#include "code_80118A4.h"
+#include "code_801B3C0.h"
+#include "code_801C8C4.h"
+#include "code_803B050.h"
+#include "code_803D0D8.h"
+#include "code_8094F88.h"
 #include "cpu.h"
 #include "input.h"
 #include "memory.h"
 #include "other_menus2.h"
 #include "save.h"
 #include "save_write.h"
-#include "text.h"
-#include "wonder_mail_802D098.h"
-#include "wonder_mail_main_menu.h"
+#include "string_format.h"
+#include "text_1.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
+#include "wonder_mail_802D098.h"
+#include "wonder_mail_main_menu.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -323,7 +323,7 @@ void PrintWonderMailMainMenuError(u32 status)
 
 void HandlePasswordEntryScreen(void)
 {
-  int iVar2;
+  s32 iVar2;
 
   iVar2 = sub_80154F0();
   MemoryFill8(gUnknown_203B3E8->UNK38.unk38_u8, 0, sizeof(gUnknown_203B3E8->UNK38));
@@ -357,7 +357,7 @@ void HandlePasswordEntryScreen(void)
 
 void AdvanceToPasswordEntryScreen(void)
 {
-  int iVar2;
+  s32 iVar2;
   if(sub_80144A4(&iVar2) == 0)
   {
       SetWonderMailMainMenuState(PASSWORD_ENTRY_SCREEN);
@@ -380,7 +380,7 @@ void HandlePasswordSuccess(void)
 
 void HandlePrepareSaveScreen(void)
 {
-  int iVar2;
+  s32 iVar2;
   if(sub_80144A4(&iVar2) == 0)
   {
       SetWonderMailMainMenuState(SAVE_ADVENTURE);
@@ -390,7 +390,7 @@ void HandlePrepareSaveScreen(void)
 
 void ReturnToGameLinkCableMenu(void)
 {
-  int iVar2;
+  s32 iVar2;
   if(sub_80144A4(&iVar2) == 0)
   {
       SetWonderMailMainMenuState(GAME_LINK_CABLE_MENU);
@@ -399,7 +399,7 @@ void ReturnToGameLinkCableMenu(void)
 
 void HandleSaveAdventureScreen(void)
 {
-  int iVar2;
+  s32 iVar2;
   if(sub_80144A4(&iVar2) == 0)
   {
       if(!WriteSavePak())
@@ -412,7 +412,7 @@ void HandleSaveAdventureScreen(void)
 
 void HandleWonderMailAddedScreen(void)
 {
-  int iVar2;
+  s32 iVar2;
   if(sub_80144A4(&iVar2) == 0)
   {
       SetWonderMailMainMenuState(EXIT_TO_MAIN_MENU);
@@ -444,7 +444,7 @@ void nullsub_54(void)
 
 void WonderMailMainMenuCallback(void)
 {
-  int linkStatus;
+  s32 linkStatus;
   unkStruct_803B344 *temp;
 
   switch(gUnknown_203B3E8->state) {
@@ -558,7 +558,7 @@ void WonderMailMainMenuCallback(void)
         CreateDialogueBoxAndPortrait(gUnknown_80E7C98,0,0,0x101);
         break;
     case PASSWORD_ENTRY_SCREEN:
-        RestoreUnkTextStruct_8006518(&gUnknown_203B3E8->unk1EC);
+        RestoreSavedWindows(&gUnknown_203B3E8->unk1EC);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
         sub_80151C0(5,gUnknown_203B3E8->PasswordEntryBuffer);

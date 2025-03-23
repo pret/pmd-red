@@ -1,33 +1,35 @@
 #include "global.h"
 #include "globaldata.h"
-#include "dungeon_menu_moves.h"
-#include "dungeon_menu_team.h"
-#include "dungeon_submenu.h"
-#include "structs/str_dungeon.h"
-#include "input.h"
 #include "structs/map.h"
-#include "dungeon_main.h"
-#include "dungeon_message.h"
-#include "dungeon_action.h"
-#include "dungeon_random.h"
-#include "dungeon_util.h"
-#include "pokemon.h"
-#include "moves.h"
-#include "dungeon_music.h"
-#include "code_8045A00.h"
-#include "string_format.h"
+#include "structs/str_dungeon.h"
 #include "code_803E46C.h"
 #include "code_803E724.h"
-#include "status_checks_1.h"
-#include "dungeon_leader.h"
-#include "tile_types.h"
-#include "dungeon_visibility.h"
-#include "dungeon_movement.h"
-#include "menu_input.h"
-#include "music.h"
-#include "text.h"
 #include "code_8044CC8.h"
+#include "code_8045A00.h"
+#include "dungeon_action.h"
+#include "dungeon_leader.h"
+#include "dungeon_main.h"
+#include "dungeon_menu_moves.h"
+#include "dungeon_menu_team.h"
+#include "dungeon_message.h"
+#include "dungeon_movement.h"
+#include "dungeon_music.h"
+#include "dungeon_random.h"
+#include "dungeon_submenu.h"
+#include "dungeon_util.h"
+#include "dungeon_visibility.h"
+#include "input.h"
+#include "moves.h"
+#include "menu_input.h"
 #include "move_util.h"
+#include "music.h"
+#include "pokemon.h"
+#include "status_checks_1.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
+#include "tile_types.h"
 
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
@@ -224,12 +226,12 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
         }
     }
 
-    while (1) {
+    while (TRUE) {
         r5 = 0;
         ret = FALSE;
         r10 = FALSE;
         ShowMovesMenuWindows(entity, entInfo, addLinkOptions, &windows, &header, unk, a3, a4);
-        while (1) {
+        while (TRUE) {
             AddMenuCursorSprite_(&gDungeonMenu, unk);
             DungeonRunFrameActions(0x1E);
             if (gRealInputs.repeated & DPAD_DOWN) {

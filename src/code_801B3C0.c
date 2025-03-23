@@ -1,18 +1,19 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_801B3C0.h"
 #include "input.h"
 #include "items.h"
 #include "memory.h"
 #include "menu_input.h"
 #include "sprite.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
-static EWRAM_INIT unkStruct_203B230 *sUnknown_203B230 = {NULL};
+static EWRAM_INIT unkStruct_203B230 *sUnknown_203B230 = { NULL };
 
-#include "data/code_801B3C0.h" // 80DBA4C
+#include "data/code_801B3C0.h"
 
 static void sub_801B46C(u32);
 static void sub_801B480(void);

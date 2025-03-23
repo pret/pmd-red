@@ -1,9 +1,9 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_8097670.h"
 #include "constants/friend_area.h"
 #include "constants/main_menu.h"
 #include "constants/move_id.h"
+#include "code_8097670.h"
 #include "debug_menu1.h"
 #include "friend_area.h"
 #include "input.h"
@@ -12,8 +12,8 @@
 #include "menu_input.h"
 #include "pokemon.h"
 #include "save.h"
+#include "text_1.h"
 #include "text_util.h"
-#include "text.h"
 
 enum DebugMenuOptions
 {

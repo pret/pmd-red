@@ -1,46 +1,47 @@
 #include "global.h"
-#include "dungeon_move.h"
-#include "dungeon_pokemon_attributes.h"
-#include "dungeon_util.h"
-#include "dungeon_message.h"
-#include "moves.h"
-#include "status_checks_1.h"
-#include "dungeon_ai_targeting.h"
-#include "structs/str_damage.h"
 #include "constants/ability.h"
+#include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "constants/weather.h"
-#include "constants/iq_skill.h"
-#include "position_util.h"
-#include "dungeon_items.h"
-#include "code_806CD90.h"
-#include "move_util.h"
-#include "code_808417C.h"
-#include "dungeon_capabilities.h"
-#include "move_effects_target.h"
-#include "status.h"
-#include "weather.h"
-#include "code_8077274_1.h"
+#include "structs/str_damage.h"
 #include "charge_move.h"
-#include "dungeon_random.h"
-#include "targeting_flags.h"
-#include "dungeon_misc.h"
-#include "dungeon_map_access.h"
-#include "math.h"
 #include "code_800DAC0.h"
-#include "text_util.h"
-#include "dungeon_visibility.h"
-#include "code_807CD9C.h"
-#include "dungeon_engine.h"
-#include "status_actions.h"
-#include "code_8045A00.h"
+#include "code_800E9E4.h"
+#include "code_800ED38.h"
+#include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_803E724.h"
-#include "code_803E46C.h"
 #include "code_8041AD0.h"
-#include "code_800E9E4.h"
+#include "code_8045A00.h"
+#include "code_806CD90.h"
+#include "code_8077274_1.h"
+#include "code_807CD9C.h"
+#include "code_808417C.h"
+#include "dungeon_ai_targeting.h"
+#include "dungeon_capabilities.h"
 #include "dungeon_config.h"
-#include "code_800ED38.h"
+#include "dungeon_engine.h"
+#include "dungeon_items.h"
+#include "dungeon_map_access.h"
+#include "dungeon_message.h"
+#include "dungeon_misc.h"
+#include "dungeon_move.h"
+#include "dungeon_pokemon_attributes.h"
+#include "dungeon_random.h"
+#include "dungeon_util.h"
+#include "dungeon_visibility.h"
+#include "math.h"
+#include "move_effects_target.h"
+#include "move_util.h"
+#include "moves.h"
+#include "position_util.h"
+#include "sprite.h"
+#include "status.h"
+#include "status_actions.h"
+#include "status_checks_1.h"
+#include "weather.h"
+#include "targeting_flags.h"
+#include "text_util.h"
 
 extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);
@@ -57,7 +58,6 @@ extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
 extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
-extern void sub_800569C(DungeonPos *, axdata *, u8);
 extern void sub_800EF10(u16 r0);
 extern s32 sub_800E710(s16 a0, u16 a1);
 extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
@@ -2288,7 +2288,7 @@ s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
             DungeonRunFrameActions(0x5E);
             someRetVal = sub_800E710(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), 1));
             if (someRetVal != -1) {
-                sub_800569C(&unkSp1.unk8, &entity->axObj.axdata, someRetVal);
+                sub_800569C(&unkSp1.unk8, &entity->axObj, someRetVal);
             }
             else {
                 unkSp1.unk8 = (DungeonPos) {0};

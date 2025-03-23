@@ -1,9 +1,9 @@
 #include "global.h"
+#include "constants/main_menu.h"
 #include "adventure_log.h"
 #include "adventure_log_menu.h"
-#include "constants/main_menu.h"
 #include "input.h"
-#include "text.h"
+#include "text_1.h"
 
 void CreateAdventureLogMenu(void)
 {

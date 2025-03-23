@@ -9,7 +9,7 @@
 #include "code_800C9CC.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "decompress.h"
+#include "decompress_at.h"
 #include "def_filearchives.h"
 #include "friend_area.h"
 #include "friend_areas_map.h"
@@ -21,7 +21,9 @@
 #include "pokemon.h"
 #include "sprite.h"
 #include "string_format.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 
 static inline bool8 CheckAxFlag8000(axdata *ptr)
 {

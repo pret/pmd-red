@@ -1,18 +1,20 @@
-#include "constants/input.h"
 #include "global.h"
 #include "globaldata.h"
-#include "menu_input.h"
-#include "sprite.h"
-#include "code_80118A4.h"
-#include "string_format.h"
+#include "constants/input.h"
 #include "bg_palette_buffer.h"
-#include "input.h"
-#include "text.h"
-#include "game_options.h"
-#include "pokemon.h"
 #include "code_800D090.h"
-#include "rescue_team_info.h"
+#include "code_80118A4.h"
 #include "event_flag.h"
+#include "game_options.h"
+#include "input.h"
+#include "menu_input.h"
+#include "pokemon.h"
+#include "rescue_team_info.h"
+#include "sprite.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 
 #include "data/code_80140DC.h"
 
@@ -60,7 +62,7 @@ u32 sub_8014140(void)
 
 // This kinda looks like the 'true' beginning of the file
 static const u32 gUnknown_80D48A0[] = {0x7, 0x2, 0x2};
-static const struct WindowTemplate gUnknown_80D48AC = {
+static const WindowTemplate gUnknown_80D48AC = {
     0x00,
     0x03,
     0x00, 0x00,
@@ -94,7 +96,6 @@ ALIGNED(4) static const u8 gUnknown_80D4904[] = "%*d" ;
 extern const u8 gUnknown_80D4908[];
 extern const u8 gUnknown_80D4910[];
 
-extern void SetCharacterMask(int a0);
 extern void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2);
 extern void sub_80073E0(s32 a0);
 extern void sub_8011A04(void);
@@ -126,7 +127,7 @@ static EWRAM_DATA s32 gUnknown_202E738 = 0;
 static EWRAM_DATA s32 gUnknown_202E73C = 0;
 static EWRAM_DATA s32 gUnknown_202E740 = 0;
 static EWRAM_DATA s32 gUnknown_202E744 = 0;
-static EWRAM_DATA struct UnkDrawStringStruct gUnknown_202E748 = {0};
+static EWRAM_DATA UnkDrawStringStruct gUnknown_202E748 = {0};
 static EWRAM_DATA u16 sUnknownTextFlags = 0;
 static EWRAM_DATA s32 gUnknown_202E780 = 0;
 static EWRAM_DATA s32 gUnknown_202E784 = 0;
@@ -148,7 +149,7 @@ static EWRAM_DATA s32 gUnknown_202EC1C = 0;
 // Only read, but never written to. Possibly used in Blue?
 struct NeverWrittenToStruct202EC20
 {
-    struct WindowTemplate unk0;
+    WindowTemplate unk0;
     const u8 *unk18;
 };
 static EWRAM_DATA struct NeverWrittenToStruct202EC20 *sNeverWrittenToUnknownStructPtr = NULL;
@@ -204,22 +205,22 @@ void sub_801416C(s32 param_1,s32 param_2)
     gUnknown_202E73C = (param_2 < 0 ) ? 0 : param_2;
 }
 
-void CreateDialogueBoxAndPortrait(const u8 *text, void *param_2, struct MonPortraitMsg *monPortraitPtr, u16 flags)
+void CreateDialogueBoxAndPortrait(const u8 *text, void *param_2, MonPortraitMsg *monPortraitPtr, u16 flags)
 {
     CreateMenuDialogueBoxAndPortrait(text, param_2, -1, NULL, NULL, 3, 0, monPortraitPtr, flags);
 }
 
-void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 flags)
+void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, MonPortraitMsg *monPortraitPtr, u16 flags)
 {
     CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D485C, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
-void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, struct MonPortraitMsg *monPortraitPtr, u16 flags)
+void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, MonPortraitMsg *monPortraitPtr, u16 flags)
 {
     CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D4880, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
-void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, struct MonPortraitMsg *monPortraitPtr, u16 flags)
+void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, MonPortraitMsg *monPortraitPtr, u16 flags)
 {
     bool8 portraitOn = FALSE;
 
@@ -320,6 +321,7 @@ s32 sub_80144A4(s32 *a0)
     return gUnknown_202E744;
 }
 
+// arm9.bin::0201CEB0
 void DrawDialogueBoxString(void)
 {
     bool8 keepLooping = TRUE;

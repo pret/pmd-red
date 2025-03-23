@@ -1,6 +1,6 @@
 #include "gba/defines.h"
 #include "global.h"
-#include "code_800558C.h"
+#include "structs/axdata.h"
 #include "code_800DAC0.h"
 #include "debug.h"
 #include "def_filearchives.h"

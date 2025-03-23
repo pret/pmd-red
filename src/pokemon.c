@@ -6,7 +6,7 @@
 #include "code_800D090.h"
 #include "code_8097DD0.h"
 #include "cpu.h"
-#include "decompress.h"
+#include "decompress_at.h"
 #include "def_filearchives.h"
 #include "exclusive_pokemon.h"
 #include "file_system.h"
@@ -14,6 +14,7 @@
 #include "moves.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "sprite.h"
 #include "text_util.h"
 
 static EWRAM_DATA MonsterDataEntry *gMonsterParameters = {0};
@@ -26,7 +27,8 @@ static EWRAM_DATA LevelData gLevelCurrentData[0x64] = {0};
 
 EWRAM_INIT unkStruct_203B45C *gRecruitedPokemonRef = {NULL};
 
-struct unkStruct_8107654 {
+struct unkStruct_8107654
+{
     s16 species;
     s32 unk4;
 };

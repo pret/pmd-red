@@ -12,6 +12,7 @@
 ALIGNED(4) const u8 gDummyScenarioText[] = _("{COLOR YELLOW_C}Scenario try dummy{RESET}");
 ALIGNED(4) const u8 gBlankMission[] = _("{COLOR RED_W}???{RESET}");
 
+// arm9.bin::020688A8
 void sub_80972F4(void)
 {
     ClearScriptVarArray(NULL, RESCUE_SCENARIO_ORDER_LIST);

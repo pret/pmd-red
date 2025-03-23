@@ -1,10 +1,9 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/dungeon.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "string_format.h"
 #include "code_801B3C0.h"
-#include "iq_skill_menu.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
 #include "code_80227B8.h"
@@ -12,9 +11,9 @@
 #include "code_8098BDC.h"
 #include "code_8099360.h"
 #include "common_strings.h"
-#include "constants/dungeon.h"
 #include "event_flag.h"
 #include "input.h"
+#include "iq_skill_menu.h"
 #include "items.h"
 #include "kecleon_bros4.h"
 #include "memory.h"
@@ -23,8 +22,10 @@
 #include "party_list_menu.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 #include "text_util.h"
-#include "text.h"
 
 static EWRAM_INIT unkStruct_203B2B8 *sUnknown_203B2B8 = {NULL};
 
@@ -157,7 +158,7 @@ static void SetPartyListMenuState(s32 newState)
 static void sub_802608C(void)
 {
     s32 index;
-    RestoreUnkTextStruct_8006518(&sUnknown_203B2B8->unk220);
+    RestoreSavedWindows(&sUnknown_203B2B8->unk220);
     switch(sUnknown_203B2B8->state)
     {
         case PARTY_LIST_STATE_MAIN_MENU:
@@ -653,7 +654,7 @@ void PartyListMenu_HandleMenu2(void)
 {
   u32 nextState;
   struct unkStruct_8090F58 temp;
-  int menuAction;
+  s32 menuAction;
   Item slot;
 
   menuAction = 0;

@@ -1,10 +1,9 @@
 #ifndef GUARD_FELICITY_BANK_H
 #define GUARD_FELICITY_BANK_H
 
-#include "file_system.h"
 #include "structs/menu.h"
+#include "structs/str_mon_portrait.h"
 #include "structs/str_text.h"
-#include "string_format.h"
 
 #define FELICITY_BANK_ACTION_WITHDRAW 0
 #define FELICITY_BANK_ACTION_DEPOSIT 1
@@ -20,8 +19,8 @@ typedef struct FelicityBankWork
     MenuItem unk14[8];
     u16 unk54[8];
     unkStructFor8013AA0 unk64;
-    /* 0x94 */ struct MonPortraitMsg monPortrait;
-    struct MonPortraitMsg *monPortraitPtr;
+    /* 0x94 */ MonPortraitMsg monPortrait;
+    MonPortraitMsg *monPortraitPtr;
     WindowTemplates unkA8;
 } FelicityBankWork;
 

@@ -1,9 +1,9 @@
 #include "global.h"
 #include "globaldata.h"
-#include "adventure_log_menu.h"
-#include "code_8099360.h"
 #include "constants/item.h"
 #include "constants/main_menu.h"
+#include "adventure_log_menu.h"
+#include "code_8099360.h"
 #include "debug_menu1.h"
 #include "ds_menus.h"
 #include "friend_rescue.h"
@@ -17,7 +17,7 @@
 #include "other_menus1.h"
 #include "rescue_password_menu.h"
 #include "save_menu.h"
-#include "text.h"
+#include "text_1.h"
 #include "trade_items_menu.h"
 #include "unk_menu_203B360.h"
 #include "wonder_mail_main_menu.h"
@@ -310,7 +310,7 @@ void sub_8035CC0(WindowTemplates *dataArray, u32 index)
 {
     WindowTemplate *winPtrs;
 
-    RestoreUnkTextStruct_8006518(dataArray);
+    RestoreSavedWindows(dataArray);
     winPtrs = dataArray->id;
     winPtrs[index] = sUnknown_80E59A8;
     ResetUnusedInputStruct();

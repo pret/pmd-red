@@ -8,8 +8,9 @@
 #include "memory.h"
 #include "moves.h"
 #include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 #include "text_util.h"
-#include "text.h"
 #include "strings.h"
 
 static EWRAM_DATA OpenedFile *sWazaParametersFile = { NULL }; // NDS=213C188

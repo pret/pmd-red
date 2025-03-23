@@ -1,13 +1,14 @@
 #include "global.h"
-#include "string_format.h"
+#include "structs/str_dungeon.h"
 #include "code_8092334.h"
 #include "code_809447C.h"
 #include "dungeon.h"
-#include "structs/str_dungeon.h"
 #include "items.h"
 #include "moves.h"
+#include "string_format.h"
+#include "text_1.h"
+#include "text_3.h"
 #include "text_util.h"
-#include "text.h"
 #include "strings.h"
 
 void ReadBellyBits(DataSerializer *r0, FixedPoint *dst)

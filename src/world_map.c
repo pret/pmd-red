@@ -8,7 +8,8 @@
 #include "code_800C9CC.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
-#include "decompress.h"
+#include "decompress_at.h"
+#include "decompress_sir.h"
 #include "def_filearchives.h"
 #include "dungeon.h"
 #include "friend_area.h"
@@ -19,7 +20,9 @@
 #include "pokemon.h"
 #include "sprite.h"
 #include "string_format.h"
-#include "text.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 #include "world_map.h"
 
 extern void sub_801178C(void);

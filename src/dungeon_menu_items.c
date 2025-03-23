@@ -26,7 +26,7 @@
 #include "dungeon_leader.h"
 #include "tile_types.h"
 #include "menu_input.h"
-#include "text.h"
+#include "text_1.h"
 #include "code_8044CC8.h"
 #include "code_801B3C0.h"
 #include "dungeon_capabilities.h"

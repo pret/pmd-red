@@ -2,14 +2,18 @@
 #include "code_800C9CC.h"
 #include "input.h"
 
-EWRAM_DATA Inputs gRealInputs = {0}; // GBA=20255F0 | NDS=20F5CC0
-static EWRAM_DATA UnusedInputStruct sUnusedInputsRelated = {0}; // 2025600
-static EWRAM_DATA u32 sUnusedScrambledInputJunk[3] = {0}; // 202562C
-static EWRAM_DATA Inputs sBufferedInputs = {0}; // 2025638
-static EWRAM_DATA Inputs sCurrentInputs = {0}; // 2025648
-static EWRAM_DATA Inputs sPrevInputs = {0}; // 2025658
-static EWRAM_DATA InputTimers sInputTimers = {0}; // 2025668
+#define JUNK_INIT 0x4A14C1
+#define JUNK_UPDATE 0x54A1C41
 
+EWRAM_DATA Inputs gRealInputs = {0}; // GBA=20255F0 | NDS=20F5CC0
+static EWRAM_DATA UnusedInputStruct sUnusedInputsRelated = {0}; // GBA=2025600 | NDS=020F5CD0
+static EWRAM_DATA u32 sUnusedScrambledInputJunk[3] = {0}; // GBA=202562C | NDS=020F5C88
+static EWRAM_DATA Inputs sBufferedInputs = {0}; // GBA=2025638 | NDS=020F5C90
+static EWRAM_DATA Inputs sCurrentInputs = {0}; // GBA=2025648 | NDS=020F5CB0
+static EWRAM_DATA Inputs sPrevInputs = {0}; // GBA=2025658 | NDS=020F5CA0
+static EWRAM_DATA InputTimers sInputTimers = {0}; // GBA=2025668 | NDS=020F5C8C
+
+// arm9.bin::0200754C
 void InitInput(void)
 {
     gRealInputs.held = 0;
@@ -22,7 +26,7 @@ void InitInput(void)
     sBufferedInputs.repeated = 0;
     sBufferedInputs.shortPress = 0;
 
-    sUnusedScrambledInputJunk[0] = 0x4A14C1; // seems like random keyboard mashing (see UpdateInput)
+    sUnusedScrambledInputJunk[0] = JUNK_INIT;
 
     sUnusedInputsRelated.unk20 = 0;
     sUnusedInputsRelated.unk0 = 0xFFFF; // probably a mask
@@ -46,6 +50,7 @@ void InitInput(void)
     sInputTimers.holdTimerR = 0;
 }
 
+// arm9.bin::02007200
 void LoadBufferedInputs(void)
 {
     gRealInputs = sBufferedInputs;
@@ -70,7 +75,13 @@ void LoadBufferedInputs(void)
 
     sUnusedInputsRelated.unk28 = 0;
     sUnusedInputsRelated.unk29 = 0;
+
+    // This is way different in blue
 }
+
+// TODO: 2 funcs in blue. Not sure which they are in red, if they exist
+// arm9.bin::020071CC
+// arm9.bin::02007198
 
 UNUSED static bool8 sub_80048B8(void)
 {
@@ -102,6 +113,7 @@ UNUSED static bool8 sub_80048CC(void)
     return FALSE;
 }
 
+// arm9.bin::0200715C
 void ResetRepeatTimers(void)
 {
     gRealInputs.repeated = 0;
@@ -111,6 +123,7 @@ void ResetRepeatTimers(void)
     sInputTimers.holdTimerR = 999;
 }
 
+// arm9.bin::02007130
 void UnpressButtons(void)
 {
     gRealInputs.pressed = 0;
@@ -118,6 +131,7 @@ void UnpressButtons(void)
     sCurrentInputs.pressed = 0;
 }
 
+// arm9.bin::020070D4
 void ResetUnusedInputStruct(void)
 {
     sUnusedInputsRelated.unk20 = 5;
@@ -139,6 +153,7 @@ void ResetUnusedInputStruct(void)
     sUnusedInputsRelated.unk29 = 0;
 }
 
+// arm9.bin::02006EC0
 void UpdateInput(void)
 {
     sPrevInputs = sCurrentInputs;
@@ -162,9 +177,8 @@ void UpdateInput(void)
         sCurrentInputs.heldDpad = 0;
     }
 
-    if (sCurrentInputs.repeatTimerDpad == 1) {
+    if (sCurrentInputs.repeatTimerDpad == 1)
         sCurrentInputs.repeated = (sCurrentInputs.heldDpad & DPAD_ANY) | sCurrentInputs.pressed;
-    }
     else if (sCurrentInputs.repeatTimerDpad == 48) {
         sCurrentInputs.repeatTimerDpad = 43;
         sCurrentInputs.repeated = (sCurrentInputs.heldDpad & DPAD_ANY) | sCurrentInputs.pressed;
@@ -201,5 +215,5 @@ void UpdateInput(void)
     sBufferedInputs.repeated |= sCurrentInputs.repeated;
     sBufferedInputs.shortPress |= sCurrentInputs.shortPress;
 
-    sUnusedScrambledInputJunk[0] *= sCurrentInputs.held | 0x54A1C41; // very similar to odd constant in InitInput - probably keymashing
+    sUnusedScrambledInputJunk[0] *= sCurrentInputs.held | JUNK_UPDATE;
 }

@@ -1,11 +1,10 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/emotions.h"
 #include "bg_palette_buffer.h"
-#include "string_format.h"
 #include "code_801602C.h"
 #include "code_8094D28.h"
 #include "code_8099360.h"
-#include "constants/emotions.h"
 #include "game_options.h"
 #include "input.h"
 #include "main_loops.h"
@@ -15,9 +14,10 @@
 #include "personality_test2.h"
 #include "random.h"
 #include "save.h"
-#include "text_util.h"
-#include "text.h"
 #include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_util.h"
 
 enum
 {
@@ -389,7 +389,7 @@ static void PersonalityTest_DisplayStarterSprite(void)
     WindowTemplates stackArray;
 
     starterID = sPersonalityTestTracker->unk4.StarterID;
-    RestoreUnkTextStruct_8006518(&stackArray);
+    RestoreSavedWindows(&stackArray);
     stackArray.id[1] = sUnknown_80F4244;
     ResetUnusedInputStruct();
     ShowWindows(&stackArray, TRUE, FALSE);
@@ -397,10 +397,10 @@ static void PersonalityTest_DisplayStarterSprite(void)
     sub_80073B8(1);
 
     faceFile = GetDialogueSpriteDataPtr(starterID);
-    gfx = ((struct PortraitGfx *)(faceFile->data))->sprites[EMOTION_HAPPY].gfx;
+    gfx = ((PortraitGfx *)(faceFile->data))->sprites[EMOTION_HAPPY].gfx;
     emotionId = EMOTION_HAPPY;
     for (paletteIndex = 0; paletteIndex < 0x10; paletteIndex++) {
-        SetBGPaletteBufferColorArray(paletteIndex + 0xE0, &((struct PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[paletteIndex]);
+        SetBGPaletteBufferColorArray(paletteIndex + 0xE0, &((PortraitGfx *)(faceFile->data))->sprites[emotionId].pal[paletteIndex]);
     }
 
     DisplayMonPortraitSpriteFlipped(1, gfx, 14);

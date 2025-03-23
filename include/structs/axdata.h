@@ -1,6 +1,7 @@
 #ifndef GUARD_AXDATA_H
 #define GUARD_AXDATA_H
 
+#include "structs/rgb.h"
 #include "structs/str_file_system.h"
 #include "structs/str_position.h"
 
@@ -28,14 +29,14 @@ typedef struct axdata1
 } axdata1;
 
 // Size: 0x2
-typedef struct __attribute__((packed, aligned(2))) ax_pose_unk2
+typedef struct ALIGNED_PACKED(2) ax_pose_unk2
 {
     u8 unk0;
     s8 unk1;
 } ax_pose_unk2;
 
 // size: 0xA
-typedef struct __attribute__((packed, aligned(2))) ax_pose
+typedef struct ALIGNED_PACKED(2) ax_pose
 {
     /* 0x0 */ s16 sprite;
     /* 0x2 */ ax_pose_unk2 unk2; // Always {0, 0} in red (except for end markers {0xFF, 0xFF} and Latios Pose189...)
@@ -80,7 +81,7 @@ typedef struct axmain
 } axmain;
 
 // size: 0x4C
-struct axObject
+typedef struct axObject
 {
     /* 0x0 */ axdata axdata;
     /* 0x3C */ OpenedFile *spriteFile; // This might be a unkStruct_202EE8C instead and unkStruct_202EE8C.unk0 might be a OpenedFile* etc. See friend_areas_map_util.AnimateSprites()
@@ -97,12 +98,12 @@ struct axObject
         struct EntityInfo* monster;
         struct Trap* trap;
     } info;
-};
+} axObject;
 
 // size: 0x80? (assuming it's the last sub-struct of GroundLives)
-struct axPokemon
+typedef struct axPokemon
 {
-    struct axObject obj;
+    axObject obj;
     /* 0x4C */ axmain *axmain;
     u16 flags_0x50;
     s16 unk52;
@@ -123,6 +124,24 @@ struct axPokemon
     s32 unk74;
     s32 unk78;
     s32 unk7C;
-};
+} axPokemon;
+
+typedef struct Palette256
+{
+    RGB pal[256];
+} Palette256;
+
+// size: 0x20
+typedef struct EfoFileData
+{
+    /* 0x0 */ ax_pose **poses; // TODO: Verify if these fields' names are actually valid
+    /* 0x4 */ ax_anim ***animations;
+    /* 0x8 */ s32 animCount;
+    /* 0xC */ void *spriteData; // ?
+    /* 0x10 */ Palette256 *unk10; // ?
+    /* 0x14 */ const u32 *tiles;
+    /* 0x18 */ const RGB *pal;
+    /* 0x1C */ s32 tileCount;
+} EfoFileData;
 
 #endif // GUARD_AXDATA_H

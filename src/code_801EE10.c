@@ -1,17 +1,18 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/input.h"
+#include "code_80118A4.h"
+#include "code_801EE10.h"
 #include "input.h"
 #include "items.h"
-#include "text.h"
 #include "memory.h"
-#include "moves.h"
-#include "code_801EE10.h"
-#include "code_80118A4.h"
 #include "menu_input.h"
+#include "moves.h"
 #include "string_format.h"
+#include "text_1.h"
+#include "text_2.h"
 
-EWRAM_INIT unkStruct_203B270 *gUnknown_203B270 = {NULL};
+EWRAM_INIT unkStruct_203B270 *gUnknown_203B270 = { NULL };
 
 const WindowTemplate gUnknown_80DC240 = {
     0x00,
@@ -84,7 +85,7 @@ u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *tex
     if (iVar8 < four) {
         iVar8 = 4;
     }
-    RestoreUnkTextStruct_8006518(&gUnknown_203B270->windows);
+    RestoreSavedWindows(&gUnknown_203B270->windows);
     gUnknown_203B270->unk50 = param_6;
     gUnknown_203B270->windows.id[param_6] = gUnknown_80DC25C;
     if (gUnknown_203B270->text != NULL) {

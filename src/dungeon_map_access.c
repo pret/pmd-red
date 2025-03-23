@@ -4,7 +4,7 @@
 #include "code_8042B34.h"
 #include "code_8004AA0.h"
 #include "code_8009804.h"
-#include "decompress.h"
+#include "decompress_at.h"
 #include "def_filearchives.h"
 #include "dungeon_engine.h"
 #include "dungeon_leader.h"
@@ -15,7 +15,7 @@
 #include "dungeon_visibility.h"
 #include "game_options.h"
 #include "random.h"
-#include "text.h"
+#include "text_1.h"
 #include "tile_types.h"
 
 extern const Tile gOtherOobTile;

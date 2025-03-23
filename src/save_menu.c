@@ -1,5 +1,4 @@
 #include "global.h"
-#include "string_format.h"
 #include "constants/main_menu.h"
 #include "input.h"
 #include "main_menu1.h"
@@ -8,7 +7,8 @@
 #include "save.h"
 #include "save_menu.h"
 #include "sprite.h"
-#include "text.h"
+#include "string_format.h"
+#include "text_1.h"
 
 static EWRAM_INIT SaveMenuWork *sSaveMenuWork = {NULL};
 
@@ -118,7 +118,6 @@ static void sub_8038830(void);
 static void sub_80388C4(void);
 
 extern void sub_8038440(void);
-extern void sub_80384D0(void);
 extern void sub_80140F8(void);
 
 void CreateSaveMenu(s32 currMenu)

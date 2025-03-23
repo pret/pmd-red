@@ -1,24 +1,23 @@
 #include "global.h"
 #include "code_8002774.h"
+#include "code_80118A4.h"
+#include "code_8097670.h"
+#include "code_80A26CC.h"
 #include "debug.h"
+#include "dungeon.h"
 #include "event_flag.h"
+#include "exclusive_pokemon.h"
 #include "ground_link.h"
 #include "ground_script.h"
 #include "ground_sprite.h"
+#include "ground_main.h"
 #include "ground_map.h"
-#include "dungeon.h"
-#include "string_format.h"
-#include "other_random.h"
-#include "rescue_team_info.h"
-#include "code_80118A4.h"
-#include "code_8097670.h"
-#include "exclusive_pokemon.h"
 #include "items.h"
 #include "math.h"
-#include "ground_main.h"
-#include "code_80A26CC.h"
+#include "other_random.h"
+#include "rescue_team_info.h"
+#include "string_format.h"
 #include "wigglytuff_shop1.h"
-#include "code_8002774.h"
 #include "wonder_mail.h"
 
 void GroundMap_Select(s16);
@@ -120,12 +119,9 @@ s32 ExecuteScriptCommand(Action *action);
 bool8 IsFanfareSEPlaying_1(u16 songIndex);
 bool8 sub_8099B94(void);
 bool8 IsEqualtoBGTrack(u16 songIndex);
-void sub_800290C(PixelPos *a0, s32 a1);
 s32 ExecuteScriptCommand(Action *action);
 void InitScriptData(ScriptData *);
 bool8 sub_8099B94(void);
-void sub_800290C(PixelPos*, s32);
-void sub_8002934(PixelPos*, PixelPos*, PixelPos*, s32, s32);
 s8 VecDirection8Radial(PixelPos*);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 void CopyStringtoBuffer(u8 *buffer, u8 *string);
@@ -1345,6 +1341,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
     }
 }
 
+// overlay_0000.bin::021497FC
 // Return values:
 // This function returns what's likely an enum, which controls the state of the script engine state machine, and possibly provides information to code calling the engine.
 // The enum is shared at least with HandleAction.

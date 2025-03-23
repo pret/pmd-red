@@ -1,7 +1,7 @@
 #include "global.h"
 #include "structs/str_status_text.h"
-#include "decompress.h"
 #include "strings.h"
+#include "decompress_3.h"
 
 static bool8 AreStatusesTheSame(const StatusText *status1, const StatusText *status2)
 {
