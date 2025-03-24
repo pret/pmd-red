@@ -5,54 +5,55 @@
 #include "constants/iq_skill.h"
 #include "constants/dungeon.h"
 #include "constants/ability.h"
+#include "constants/type.h"
 #include "constants/move_range.h"
 #include "structs/str_status_text.h"
 
-const char * const gUnformattedTypeStrings[NUM_POKEMON_TYPES] =
+const char * const gUnformattedTypeStrings[NUM_TYPES] =
 {
-    _("None"),
-    _("Normal"),
-    _("Fire"),
-    _("Water"),
-    _("Grass"),
-    _("Electric"),
-    _("Ice"),
-    _("Fighting"),
-    _("Poison"),
-    _("Ground"),
-    _("Flying"),
-    _("Psychic"),
-    _("Bug"),
-    _("Rock"),
-    _("Ghost"),
-    _("Dragon"),
-    _("Dark"),
-    _("Steel"),
+    [TYPE_NONE] = _("None"),
+    [TYPE_NORMAL] = _("Normal"),
+    [TYPE_FIRE] = _("Fire"),
+    [TYPE_WATER] = _("Water"),
+    [TYPE_GRASS] = _("Grass"),
+    [TYPE_ELECTRIC] = _("Electric"),
+    [TYPE_ICE] = _("Ice"),
+    [TYPE_FIGHTING] = _("Fighting"),
+    [TYPE_POISON] = _("Poison"),
+    [TYPE_GROUND] = _("Ground"),
+    [TYPE_FLYING] = _("Flying"),
+    [TYPE_PSYCHIC] = _("Psychic"),
+    [TYPE_BUG] = _("Bug"),
+    [TYPE_ROCK] = _("Rock"),
+    [TYPE_GHOST] = _("Ghost"),
+    [TYPE_DRAGON] = _("Dragon"),
+    [TYPE_DARK] = _("Dark"),
+    [TYPE_STEEL] = _("Steel"),
 };
 
-const char * const gFormattedTypeStrings[NUM_POKEMON_TYPES] =
+const char * const gFormattedTypeStrings[NUM_TYPES] =
 {
-    _("{color YELLOW}None{reset}"),
-    _("{color YELLOW}Normal{reset}"),
-    _("{color YELLOW}Fire{reset}  "),
-    _("{color YELLOW}Water{reset}"),
-    _("{color YELLOW}Grass{reset}"),
-    _("{color YELLOW}Electric{reset}"),
-    _("{color YELLOW}Ice{reset}  "),
-    _("{color YELLOW}Fighting{reset}"),
-    _("{color YELLOW}Poison{reset}"),
-    _("{color YELLOW}Ground{reset}"),
-    _("{color YELLOW}Flying{reset}"),
-    _("{color YELLOW}Psychic{reset}"),
-    _("{color YELLOW}Bug{reset}"),
-    _("{color YELLOW}Rock{reset}"),
-    _("{color YELLOW}Ghost{reset}"),
-    _("{color YELLOW}Dragon{reset}"),
-    _("{color YELLOW}Dark{reset}"),
-    _("{color YELLOW}Steel{reset}"),
+    [TYPE_NONE] = _("{color YELLOW}None{reset}"),
+    [TYPE_NORMAL] = _("{color YELLOW}Normal{reset}"),
+    [TYPE_FIRE] = _("{color YELLOW}Fire{reset}  "),
+    [TYPE_WATER] = _("{color YELLOW}Water{reset}"),
+    [TYPE_GRASS] = _("{color YELLOW}Grass{reset}"),
+    [TYPE_ELECTRIC] = _("{color YELLOW}Electric{reset}"),
+    [TYPE_ICE] = _("{color YELLOW}Ice{reset}  "),
+    [TYPE_FIGHTING] = _("{color YELLOW}Fighting{reset}"),
+    [TYPE_POISON] = _("{color YELLOW}Poison{reset}"),
+    [TYPE_GROUND] = _("{color YELLOW}Ground{reset}"),
+    [TYPE_FLYING] = _("{color YELLOW}Flying{reset}"),
+    [TYPE_PSYCHIC] = _("{color YELLOW}Psychic{reset}"),
+    [TYPE_BUG] = _("{color YELLOW}Bug{reset}"),
+    [TYPE_ROCK] = _("{color YELLOW}Rock{reset}"),
+    [TYPE_GHOST] = _("{color YELLOW}Ghost{reset}"),
+    [TYPE_DRAGON] = _("{color YELLOW}Dragon{reset}"),
+    [TYPE_DARK] = _("{color YELLOW}Dark{reset}"),
+    [TYPE_STEEL] = _("{color YELLOW}Steel{reset}"),
 };
 
-const u8 *const gUnknown_810AF50[] = {
+const u8 *const gUnknown_810AF50[20] = {
     [0] = _("Arrows"),
     [1] = _("Rocks"),
     [2] = _("Grass"),
@@ -75,7 +76,7 @@ const u8 *const gUnknown_810AF50[] = {
     [19] = _("Drinks"),
 };
 
-const u8 *const gAdventureLogText[] = {
+const u8 *const gAdventureLogText[32] = {
     [0] = _("Reached the Hill of the Ancients."),
     [1] = _("Took to the road as fugitives."),
     [2] = _("Prevented the meteor's collision."),
@@ -110,17 +111,17 @@ const u8 *const gAdventureLogText[] = {
     [31] = _("Jirachi joined the team."),
 };
 
-const u8 *const gRescueTeamRanks[] = {
-    [0] = _("Normal Rank"),
-    [1] = _("Bronze Rank"),
-    [2] = _("Silver Rank"),
-    [3] = _("Gold Rank"),
-    [4] = _("Platinum Rank"),
-    [5] = _("Diamond Rank"),
-    [6] = _("Lucario Rank"),
+const u8 *const gRescueTeamRanks[MAX_TEAM_RANKS] = {
+    [NORMAL_RANK] = _("Normal Rank"),
+    [BRONZE_RANK] = _("Bronze Rank"),
+    [SILVER_RANK] = _("Silver Rank"),
+    [GOLD_RANK] = _("Gold Rank"),
+    [PLATINUM_RANK] = _("Platinum Rank"),
+    [DIAMOND_RANK] = _("Diamond Rank"),
+    [LUCARIO_RANK] = _("Lucario Rank"),
 };
 
-const u8 *const gAbilityNames[] = {
+const u8 *const gAbilityNames[NUM_ABILITIES] = {
     [ABILITY_UNKNOWN] = _("Unknown"),
     [ABILITY_STENCH] = _("Stench"),
     [ABILITY_THICK_FAT] = _("Thick Fat"),
@@ -200,7 +201,7 @@ const u8 *const gAbilityNames[] = {
     [ABILITY_SHIELD_DUST] = _("Shield Dust"),
 };
 
-const u8 *const AbilityDescriptions[] = {
+const u8 *const AbilityDescriptions[NUM_ABILITIES] = {
     [ABILITY_UNKNOWN] = _("{color RED}-------"),
     [ABILITY_STENCH] = _("{color RED}Stench{reset}: May terrify an\nattacking foe."),
     [ABILITY_THICK_FAT] = _("{color RED}Thick Fat{reset}: Resistant to\nFire- and Ice-type moves."),
@@ -280,7 +281,7 @@ const u8 *const AbilityDescriptions[] = {
     [ABILITY_SHIELD_DUST] = _("{color RED}Shield Dust{reset}: Blocks the added\neffects of moves."),
 };
 
-const u8 *const gRangeNames[] = {
+const u8 *const gRangeNames[49] = {
     [MOVE_RANGE_NONE] = _("None"),
     [MOVE_RANGE_THREE_TILES_DIAGONALLY] = _("3 tiles diagonally and in front"),
     [MOVE_RANGE_ONE_TILE_FOE] = _("Foes within 1-tile range"),
@@ -335,7 +336,7 @@ const u8 *const gRangeNames[] = {
 const u8 *const gUnknown_810CF00 = _("Range{UNK_MACRO_3D M3D_64}{POKEMON_0} ");
 const u8 *const gTextType = _("Type");
 const u8 *const gTextPower = _("Power");
-const u8 *const gStatusNames[] = {
+const u8 *const gStatusNames[89] = {
     [0] = _("-"),
     [1] = _("Asleep"),
     [2] = _("Won't get sleepy"),
@@ -427,7 +428,7 @@ const u8 *const gStatusNames[] = {
     [88] = _("Can locate stairs"),
 };
 
-const u8 *const gFormattedStatusNames[] = {
+const u8 *const gFormattedStatusNames[89] = {
     [0] = _("- "),
     [1] = _("{color CYAN}Sleep{reset}  "),
     [2] = _("{color CYAN}Sleepless{reset}  "),
@@ -553,14 +554,14 @@ const u8 *const gUnknown_810DF84 = _("No IQ");
 const u8 *const gUnknown_810DF98 = _("Size:{UNK_MACRO_3E M3E_82}{POKEMON_0}");
 const u8 *const gUnknown_810DFB4 = _("Joined rescue team at:");
 const u8 *const gUnknown_810DFC8 = _("{UNK_MACRO_3E M3E_22}{COLOR CYAN}{MOVE_ITEM_0}{RESET}");
-const u8 *const gEvolutionStrings[] = {
+const u8 *const gEvolutionStrings[4] = {
     [0] = _("Evolution: {UNK_MACRO_3E M3E_54}Not now"),
     [1] = _("Evolution: {UNK_MACRO_3E M3E_54}Possible"),
     [2] = _("Evolution: {UNK_MACRO_3E M3E_54}No more"),
     [3] = _(" "),
 };
 
-const u8 *const gUnknown_810E02C[] = {
+const u8 *const gUnknown_810E02C[6] = {
     [0] = _("0"),
     [1] = _("{STAR_BULLET} "),
     [2] = _("{STAR_BULLET}{STAR_BULLET} "),
@@ -671,7 +672,7 @@ const StatusText gStatusDescriptions[99] = {
     [98] = { NULL, NULL}
 };
 
-const DungeonName gDungeonNames[] = {
+const DungeonName gDungeonNames[NUM_DUNGEONS] = {
     [DUNGEON_TINY_WOODS] = { _("Tiny Woods"), _("Tiny Woods")},
     [DUNGEON_THUNDERWAVE_CAVE] = { _("Thunderwave Cave"), _("Thunderwave Cave")},
     [DUNGEON_MT_STEEL] = { _("Mt. Steel"), _("Mt. Steel")},
@@ -772,7 +773,7 @@ const DungeonName gDungeonNames[] = {
     [DUNGEON_RESCUE_TEAM_MAZE] = { _("Rescue Team Maze"), _("Rescue Team Maze")},
 };
 
-const u8 *const gIQSkillNames[] = {
+const u8 *const gIQSkillNames[NUM_IQ_SKILLS] = {
     [IQ_NONE] = _("."),
     [IQ_TYPE_ADVANTAGE_MASTER] = _("Type-Advantage Master"),
     [IQ_ITEM_CATCHER] = _("Item Catcher"),
@@ -799,7 +800,7 @@ const u8 *const gIQSkillNames[] = {
     [IQ_EXCLUSIVE_MOVE_USER] = _("Exclusive Move-User"),
 };
 
-const u8 *const gIQSkillDescriptions[] = {
+const u8 *const gIQSkillDescriptions[NUM_IQ_SKILLS] = {
     [IQ_NONE] = _("."),
     [IQ_TYPE_ADVANTAGE_MASTER] = _("The Pokémon's critical-hit rate is boosted\nwhen attacking foes with a type\ndisadvantage."),
     [IQ_ITEM_CATCHER] = _("The Pokémon can catch and hold a thrown\nitem.\nIt can't make a catch if it is already\nholding an item. It also can't catch\nSeeds and drink items."),
@@ -826,7 +827,7 @@ const u8 *const gIQSkillDescriptions[] = {
     [IQ_EXCLUSIVE_MOVE_USER] = _("The Pokémon will only use moves. It\nwill not use its regular attack."),
 };
 
-const u8 *const gTacticsNames[] = {
+const u8 *const gTacticsNames[NUM_TACTICS] = {
     [TACTIC_LETS_GO_TOGETHER] = _("Let's go together"),
     [TACTIC_GO_THE_OTHER_WAY] = _("Go the other way"),
     [TACTIC_GO_AFTER_FOES] = _("Go after foes"),
@@ -841,7 +842,7 @@ const u8 *const gTacticsNames[] = {
     [TACTIC_UNUSED] = _("unused "),
 };
 
-const u8 *const gTacticsDescriptions[] = {
+const u8 *const gTacticsDescriptions[NUM_TACTICS + 12] = {
     [TACTIC_LETS_GO_TOGETHER] = _("The Pokémon will try to stay with\nthe leader."),
     [TACTIC_GO_THE_OTHER_WAY] = _("The Pokémon will go off on its own,\nheedless of the leader."),
     [TACTIC_GO_AFTER_FOES] = _("The Pokémon will head straight toward\nany foe it spots."),
@@ -857,7 +858,7 @@ const u8 *const gTacticsDescriptions[] = {
     [NUM_TACTICS ... NUM_TACTICS + 11] = NULL // Used for testing?
 };
 
-const struct unkStruct_8113080 gSpecialDeathTexts[] = {
+const struct unkStruct_8113080 gSpecialDeathTexts[55] = {
     [0] = { 0, _("was transformed into a friend.")},
     [1] = { 0, _("left without being befriended.")},
     [2] = { 0, _("fainted from a debug attack.")},
@@ -932,7 +933,7 @@ const u8 *const gUnknown_8113990 = _("Sp. Atk.{UNK_MACRO_3E M3E_42}{color RED}{V
 const u8 *const gUnknown_81139B4 = _("{UNK_MACRO_3E M3E_80}Sp. Def.{UNK_MACRO_3E M3E_128}{color RED}{VALUE_1}{reset}  ");
 const u8 *const gUnknown_81139B8 = _("None");
 const u8 *const gUnknown_81139CC = _("Item:{UNK_MACRO_3E M3E_42}{MOVE_ITEM_0} ");
-const u8 *const gFriendAreaNames[] = {
+const u8 *const gFriendAreaNames[NUM_FRIEND_AREAS] = {
     [FRIEND_AREA_NONE] = _("None"),
     [BOUNTIFUL_SEA] = _("Bountiful Sea"),
     [TREASURE_SEA] = _("Treasure Sea"),
@@ -993,7 +994,7 @@ const u8 *const gFriendAreaNames[] = {
     [FINAL_ISLAND] = _("Final Island"),
 };
 
-const u8 *const gFriendAreaDescriptions[] = {
+const u8 *const gFriendAreaDescriptions[NUM_FRIEND_AREAS] = {
     [FRIEND_AREA_NONE] = _("None"),
     [BOUNTIFUL_SEA] = _("A sea where warm and cold currents\ncome together. It is bursting with\nmarine life and is also rich in minerals."),
     [TREASURE_SEA] = _("It is said that on its floor lie treasures of\npirate ships sunken long ago."),
@@ -1054,7 +1055,7 @@ const u8 *const gFriendAreaDescriptions[] = {
     [FINAL_ISLAND] = _("This legendary island may not even exist.\nIt hovers on the horizon and disappears\nsuddenly as if it were a mirage."),
 };
 
-const u8 *const gUnknown_8115718[] = {
+const u8 *const gUnknown_8115718[100] = {
     [0] = _("{STAR_BULLET}  "),
     [1] = _("{STAR_BULLET}{STAR_BULLET}  "),
     [2] = _("{STAR_BULLET}{STAR_BULLET}  "),

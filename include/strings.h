@@ -2,6 +2,13 @@
 #define GUARD_STRINGS_H
 
 #include "structs/str_status_text.h"
+#include "rescue_team_info.h"
+#include "constants/type.h"
+#include "constants/ability.h"
+#include "constants/dungeon.h"
+#include "constants/iq_skill.h"
+#include "constants/tactic.h"
+#include "constants/friend_area.h"
 
 // size: 0x8
 typedef struct DungeonName
@@ -16,20 +23,19 @@ struct unkStruct_8113080
     const u8 *text;
 };
 
-#define NUM_POKEMON_TYPES 18
-extern const char * const gUnformattedTypeStrings[NUM_POKEMON_TYPES];
-extern const char * const gFormattedTypeStrings[NUM_POKEMON_TYPES];
-extern const u8 *const gUnknown_810AF50[];
-extern const u8 *const gAdventureLogText[];
-extern const u8 *const gRescueTeamRanks[];
-extern const u8 *const gAbilityNames[];
-extern const u8 *const AbilityDescriptions[];
-extern const u8 *const gRangeNames[];
+extern const char * const gUnformattedTypeStrings[NUM_TYPES];
+extern const char * const gFormattedTypeStrings[NUM_TYPES];
+extern const u8 *const gUnknown_810AF50[20];
+extern const u8 *const gAdventureLogText[32];
+extern const u8 *const gRescueTeamRanks[MAX_TEAM_RANKS];
+extern const u8 *const gAbilityNames[NUM_ABILITIES];
+extern const u8 *const AbilityDescriptions[NUM_ABILITIES];
+extern const u8 *const gRangeNames[49];
 extern const u8 *const gUnknown_810CF00;
 extern const u8 *const gTextType;
 extern const u8 *const gTextPower;
-extern const u8 *const gStatusNames[];
-extern const u8 *const gFormattedStatusNames[];
+extern const u8 *const gStatusNames[89];
+extern const u8 *const gFormattedStatusNames[89];
 extern const u8 *const gUnknown_810DD58;
 extern const u8 *const gText_IqSkills;
 extern const u8 *const gText_LevelUnkMacro;
@@ -63,15 +69,15 @@ extern const u8 *const gUnknown_810DF84;
 extern const u8 *const gUnknown_810DF98;
 extern const u8 *const gUnknown_810DFB4;
 extern const u8 *const gUnknown_810DFC8;
-extern const u8 *const gEvolutionStrings[];
-extern const u8 *const gUnknown_810E02C[];
+extern const u8 *const gEvolutionStrings[4];
+extern const u8 *const gUnknown_810E02C[6];
 extern const StatusText gStatusDescriptions[99];
-extern const DungeonName gDungeonNames[];
-extern const u8 *const gIQSkillNames[];
-extern const u8 *const gIQSkillDescriptions[];
-extern const u8 *const gTacticsNames[];
-extern const u8 *const gTacticsDescriptions[];
-extern const struct unkStruct_8113080 gSpecialDeathTexts[];
+extern const DungeonName gDungeonNames[NUM_DUNGEONS];
+extern const u8 *const gIQSkillNames[NUM_IQ_SKILLS];
+extern const u8 *const gIQSkillDescriptions[NUM_IQ_SKILLS];
+extern const u8 *const gTacticsNames[NUM_TACTICS];
+extern const u8 *const gTacticsDescriptions[NUM_TACTICS + 12];
+extern const struct unkStruct_8113080 gSpecialDeathTexts[55];
 extern const u8 *const gText_DeathToMove;
 extern const u8 *const gUnknown_8113850;
 extern const u8 *const gText_Pokemon1WasDefeatedBy;
@@ -89,9 +95,9 @@ extern const u8 *const gUnknown_8113990;
 extern const u8 *const gUnknown_81139B4;
 extern const u8 *const gUnknown_81139B8;
 extern const u8 *const gUnknown_81139CC;
-extern const u8 *const gFriendAreaNames[];
-extern const u8 *const gFriendAreaDescriptions[];
-extern const u8 *const gUnknown_8115718[];
+extern const u8 *const gFriendAreaNames[NUM_FRIEND_AREAS];
+extern const u8 *const gFriendAreaDescriptions[NUM_FRIEND_AREAS];
+extern const u8 *const gUnknown_8115718[100];
 extern const u8 *const gText_PP_Value0;
 extern const u8 *const gText_TooManyMembersToEnterDungeon;
 extern const u8 *const gText_OnlyOneMonMayEnterDungeon;
