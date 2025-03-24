@@ -9,32 +9,7 @@
 #include "text_1.h"
 #include "text_3.h"
 #include "text_util.h"
-
-struct unkStruct_8113080
-{
-    u8 unk0;
-    u8 *text;
-};
-
-extern const u8 *gPtrDeathToMoveText[];
-extern const u8 *gUnknown_8113850[];
-extern const u8 *gUnknown_8113868[];
-extern const u8 *gUnknown_8113898[];
-extern const u8 *gUnknown_81138C0[];
-extern const u8 *gUnknown_81138D0[];
-extern const u8 *gUnknown_81138E4[];
-extern const u8 *gUnknown_8113950[];
-extern const u8 *gUnknown_8113900[];
-extern const u8 *gUnknown_8113974[];
-extern const u8 *gUnknown_8113918[];
-extern const u8 *gUnknown_8113990[];
-extern const u8 *gUnknown_8113934[];
-extern const u8 *gUnknown_81139B4[];
-extern const u8 *gUnknown_81139B8[];
-extern const u8 *gUnknown_81139CC[];
-extern const u8 *gUnknown_8113870[];
-
-extern struct unkStruct_8113080 gSpecialDeathText[];
+#include "strings.h"
 
 void ReadBellyBits(DataSerializer *r0, FixedPoint *dst)
 {
@@ -59,9 +34,9 @@ static void WriteDeathText(s16 moveID, u8 *buffer)
         moveID_u16 = moveID_s32;
         InitPokemonMoveOrNullObject(&move, moveID_u16);
         BufferMoveName(gFormatBuffer_Items[0], &move, NULL);
-        FormatString(*gPtrDeathToMoveText, buffer, buffer + 200, 0); // $m0's $i0
+        FormatString(gText_DeathToMove, buffer, buffer + 200, 0); // $m0's $i0
     } else {
-        strncpy(buffer, gSpecialDeathText[moveID - 0x1F4].text, 200);
+        strncpy(buffer, gSpecialDeathTexts[moveID - 0x1F4].text, 200);
     }
 }
 
@@ -73,7 +48,7 @@ static u8 sub_8094528(s16 moveID)
     }
     else
     {
-        return gSpecialDeathText[moveID  - 0x1F4].unk0;
+        return gSpecialDeathTexts[moveID  - 0x1F4].unk0;
     }
 }
 
@@ -86,17 +61,17 @@ void sub_8094558(u32 param_1,u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3)
     sub_80073B8(param_1);
     PrintFormattedStringOnWindow(0x10,0,param_2,param_1,0);
     PrintYellowDungeonNametoBuffer(gFormatBuffer_Monsters[0], &param_3->dungeonLocation);
-    PrintFormattedStringOnWindow(4,0x10,*gUnknown_8113850,param_1,0); // #+Place: $m0
+    PrintFormattedStringOnWindow(4,0x10,gUnknown_8113850,param_1,0); // #+Place: $m0
     y = 0x1A;
     sub_80922B4(gFormatBuffer_Monsters[0], param_3->buffer1, POKEMON_NAME_LENGTH);
     sub_80922B4(gFormatBuffer_Monsters[1], param_3->buffer2, POKEMON_NAME_LENGTH);
     if (sub_8094528(param_3->moveID) != 0) {
         // $m1 was defeated by
-        FormatString(*gUnknown_8113868,buffer, buffer + sizeof(buffer),0);
+        FormatString(gText_Pokemon1WasDefeatedBy,buffer, buffer + sizeof(buffer),0);
     }
     else {
         // $m1
-        FormatString(*gUnknown_8113870,buffer, buffer + sizeof(buffer),0);
+        FormatString(gText_Pokemon1,buffer, buffer + sizeof(buffer),0);
     }
 
     x = (0xb0 - sub_8008ED0(buffer)) / 2;
@@ -112,47 +87,47 @@ void sub_8094558(u32 param_1,u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3)
     gFormatArgs[0] = param_3->exp;
     gFormatArgs[1] = param_3->level;
     if (gFormatArgs[1] >= 100) {
-        PrintFormattedStringOnWindow(4,y,*gUnknown_81138C0,param_1,0);
+        PrintFormattedStringOnWindow(4,y,gUnknown_81138C0,param_1,0);
     }
     else {
-        PrintFormattedStringOnWindow(4,y,*gUnknown_8113898,param_1,0);
+        PrintFormattedStringOnWindow(4,y,gUnknown_8113898,param_1,0);
     }
     y += 0xA;
     gFormatArgs[0] = param_3->maxHPStat;
-    PrintFormattedStringOnWindow(4,y,*gUnknown_81138D0,param_1,0);
+    PrintFormattedStringOnWindow(4,y,gUnknown_81138D0,param_1,0);
     y += 0xA;
     gFormatArgs[0] = param_3->atk;
     gFormatArgs[1] = param_3->def;
     if (param_3->attBoost) {
         gFormatArgs[0] = gFormatArgs[0] + param_3->attBoost;
-        PrintFormattedStringOnWindow(4,y,*gUnknown_8113950,param_1,0);
+        PrintFormattedStringOnWindow(4,y,gUnknown_8113950,param_1,0);
     }
     else {
-        PrintFormattedStringOnWindow(4,y,*gUnknown_81138E4,param_1,0);
+        PrintFormattedStringOnWindow(4,y,gUnknown_81138E4,param_1,0);
     }
     if (param_3->defBoost) {
         gFormatArgs[1] = gFormatArgs[1] + param_3->defBoost;
-        PrintFormattedStringOnWindow(4,y,*gUnknown_8113974,param_1,0);
+        PrintFormattedStringOnWindow(4,y,gUnknown_8113974,param_1,0);
     }
     else {
-        PrintFormattedStringOnWindow(4,y,*gUnknown_8113900,param_1,0);
+        PrintFormattedStringOnWindow(4,y,gUnknown_8113900,param_1,0);
     }
     y += 0xA;
     gFormatArgs[0] = param_3->spAtk;
     gFormatArgs[1] = param_3->spDef;
     if (param_3->spAttBoost) {
         gFormatArgs[0] = gFormatArgs[0] + param_3->spAttBoost;
-        PrintFormattedStringOnWindow(4,y,*gUnknown_8113990,param_1,0);
+        PrintFormattedStringOnWindow(4,y,gUnknown_8113990,param_1,0);
     }
     else {
-        PrintFormattedStringOnWindow(4,y,*gUnknown_8113918,param_1,0);
+        PrintFormattedStringOnWindow(4,y,gUnknown_8113918,param_1,0);
     }
     if (param_3->spDefBoost) {
         gFormatArgs[1] = gFormatArgs[1] + param_3->spDefBoost;
-        PrintFormattedStringOnWindow(4,y,*gUnknown_81139B4,param_1,0);
+        PrintFormattedStringOnWindow(4,y,gUnknown_81139B4,param_1,0);
     }
     else {
-        PrintFormattedStringOnWindow(4,y,*gUnknown_8113934,param_1,0);
+        PrintFormattedStringOnWindow(4,y,gUnknown_8113934,param_1,0);
     }
     y += 0x10;
     item = &(param_3->heldItem);
@@ -160,8 +135,8 @@ void sub_8094558(u32 param_1,u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3)
         sub_8090E14(gFormatBuffer_Items[0],item,0);
     }
     else {
-        strcpy(gFormatBuffer_Items[0],*gUnknown_81139B8);
+        strcpy(gFormatBuffer_Items[0],gUnknown_81139B8);
     }
-    PrintFormattedStringOnWindow(4,y,*gUnknown_81139CC,param_1,0);
+    PrintFormattedStringOnWindow(4,y,gUnknown_81139CC,param_1,0);
     sub_80073E0(param_1);
 }

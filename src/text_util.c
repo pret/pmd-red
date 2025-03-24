@@ -1,98 +1,7 @@
 #include "global.h"
 #include "text_util.h"
+#include "strings.h"
 
-#define NUM_POKEMON_TYPES 18
-
-extern const char gNoneText[];
-extern const char gNormalText[];
-extern const char gFireText[];
-extern const char gWaterText[];
-extern const char gGrassText[];
-extern const char gElectricText[];
-extern const char gIceText[];
-extern const char gFightingText[];
-extern const char gPoisonText[];
-extern const char gGroundText[];
-extern const char gFlyingText[];
-extern const char gPsychicText[];
-extern const char gBugText[];
-extern const char gRockText[];
-extern const char gGhostText[];
-extern const char gDragonText[];
-extern const char gDarkText[];
-extern const char gSteelText[];
-
-extern const char gFormattedNoneText[];
-extern const char gFormattedNormalText[];
-extern const char gFormattedFireText[];
-extern const char gFormattedWaterText[];
-extern const char gFormattedGrassText[];
-extern const char gFormattedElectricText[];
-extern const char gFormattedIceText[];
-extern const char gFormattedFightingText[];
-extern const char gFormattedPoisonText[];
-extern const char gFormattedGroundText[];
-extern const char gFormattedFlyingText[];
-extern const char gFormattedPsychicText[];
-extern const char gFormattedBugText[];
-extern const char gFormattedRockText[];
-extern const char gFormattedGhostText[];
-extern const char gFormattedDragonText[];
-extern const char gFormattedDarkText[];
-extern const char gFormattedSteelText[];
-
-
-const char * const gUnformattedTypeStrings[NUM_POKEMON_TYPES] =
-{
-    gNoneText,
-    gNormalText,
-    gFireText,
-    gWaterText,
-    gGrassText,
-    gElectricText,
-    gIceText,
-    gFightingText,
-    gPoisonText,
-    gGroundText,
-    gFlyingText,
-    gPsychicText,
-    gBugText,
-    gRockText,
-    gGhostText,
-    gDragonText,
-    gDarkText,
-    gSteelText,
-};
-
-#include "data/unformatted_type_names.h"
-
-const char * const gFormattedTypeStrings[NUM_POKEMON_TYPES] =
-{
-    gFormattedNoneText,
-    gFormattedNormalText,
-    gFormattedFireText,
-    gFormattedWaterText,
-    gFormattedGrassText,
-    gFormattedElectricText,
-    gFormattedIceText,
-    gFormattedFightingText,
-    gFormattedPoisonText,
-    gFormattedGroundText,
-    gFormattedFlyingText,
-    gFormattedPsychicText,
-    gFormattedBugText,
-    gFormattedRockText,
-    gFormattedGhostText,
-    gFormattedDragonText,
-    gFormattedDarkText,
-    gFormattedSteelText,
-};
-
-#include "data/formatted_type_names.h"
-
-
-extern u8 *gAbilityNames[];
-extern u8 *AbilityDescriptions[];
 extern u8 gIsTypePhysicalTable[];
 extern u8 gUnknown_810AC6A[];
 
@@ -143,7 +52,7 @@ void CopyStringtoBuffer(u8 *buffer, u8 *string)
 }
 
 void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size)
-{ 
+{
   while( 1 ) {
     if (size-- < 1) {
         break;
@@ -184,7 +93,7 @@ void CopyAbilityNametoBuffer(char *buffer, u8 index)
     strncpy(buffer, gAbilityNames[index], 0x50);
 }
 
-u8 *GetAbilityDescription(u8 index)
+const u8 *GetAbilityDescription(u8 index)
 {
     return AbilityDescriptions[index];
 }

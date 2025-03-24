@@ -587,8 +587,8 @@ SECTIONS {
         src/tile_types.o(.rodata);
         src/exclusive_pokemon.o(.rodata);
         src/rescue_team_info.o(.rodata);
+        src/strings.o(.rodata);
         src/text_util.o(.rodata);
-        data/data_810AE24.o(.rodata);
         data/data_810AE24_2.o(.rodata);
         src/position_util.o(.rodata);
         data/data_8115EB8.o(.rodata);
