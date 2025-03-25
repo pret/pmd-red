@@ -6,6 +6,7 @@
 #include "friend_area.h"
 #include "items.h"
 #include "pokemon.h"
+#include "strings.h"
 
 EWRAM_DATA static bool8 sBoughtFriendAreas[NUM_FRIEND_AREAS] = {0};
 
@@ -15,9 +16,6 @@ EWRAM_INIT bool8 *gFriendAreas = {NULL};
 extern const u8 sUnknown_81098A4[];
 extern const u8 sUnknown_81098AC[];
 #include "data/friend_area_settings.h" // 810AA90
-// data_810AE24.s
-extern const u8 *sFriendAreaNames[]; // 81139D0
-extern const u8 *sFriendAreaDescriptions[]; // 8113E30
 
 void LoadFriendAreas(void)
 {
@@ -97,7 +95,7 @@ void sub_809249C(u8 friendArea, bool8 clear)
 
 const u8 *GetFriendAreaName(u8 index)
 {
-    return sFriendAreaNames[index];
+    return gFriendAreaNames[index];
 }
 
 u8 GetFriendAreaUnlockCondition(u8 index)
@@ -112,7 +110,7 @@ s32 GetFriendAreaPrice(u8 index)
 
 void sub_8092558(u8 *buffer, u8 index)
 {
-    sprintfStatic(buffer, sUnknown_81098A4, sFriendAreaNames[index]);
+    sprintfStatic(buffer, sUnknown_81098A4, gFriendAreaNames[index]);
 }
 
 void WriteFriendAreaName(u8 *buffer, u8 index, bool8 printPrice)
@@ -122,15 +120,15 @@ void WriteFriendAreaName(u8 *buffer, u8 index, bool8 printPrice)
 
     if (printPrice) {
         WriteHighDecimal(sFriendAreaSettings[index].price, priceBuffer, 1);
-        sprintfStatic(buffer, sUnknown_81098AC, sFriendAreaNames[index], 96, priceBuffer);
+        sprintfStatic(buffer, sUnknown_81098AC, gFriendAreaNames[index], 96, priceBuffer);
     }
     else
-        strcpy(buffer, sFriendAreaNames[index]);
+        strcpy(buffer, gFriendAreaNames[index]);
 }
 
 const u8 *GetFriendAreaDescription(u8 index)
 {
-    return sFriendAreaDescriptions[index];
+    return gFriendAreaDescriptions[index];
 }
 
 void UnlockFriendArea(u8 index)

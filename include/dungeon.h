@@ -3,13 +3,6 @@
 
 #include "structs/str_dungeon.h"
 
-// size: 0x8
-typedef struct DungeonName
-{
-    const u8 *name1;
-    const u8 *name2;
-} DungeonName;
-
 // size: 0x10
 typedef struct DungeonDataEntry
 {
@@ -34,7 +27,6 @@ typedef struct DungeonDataEntry
 } DungeonDataEntry;
 
 extern const DungeonDataEntry gDungeons[];
-extern const DungeonName gDungeonNames[];
 
 s32 GetDungeonFloorCount(u8 dungeon);
 const u8 *GetDungeonName1(u8 dungeon);

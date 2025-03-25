@@ -11,6 +11,7 @@
 #include "pokemon_mid.h"
 #include "random.h"
 #include "string_format.h"
+#include "strings.h"
 
 extern const char gUnknown_8108F10[];
 extern const char gUnknown_8108F18[];
@@ -22,25 +23,8 @@ extern DungeonLocation gUnknown_8107828[];
 extern u8 gDungeonFloorCount[];
 extern u8 gUnknown_81077E8[];
 extern u8 gUnknown_8108F40[];
-extern u8 *gUnknown_8115DD4[];
-extern u8 *gUnknown_8115E54[];
-extern u8 *gUnknown_8115A2C[];
-extern u8 *gUnknown_81159DC[];
-extern u8 *gUnknown_8115E00[];
 extern u16 gUnknown_8108F42[];
 extern u8 gUnknown_8108F4A[4];
-extern u8 *gUnknown_8115ADC[];
-extern u8 *gUnknown_8115A80[];
-extern u8 *gUnknown_8115BA4[];
-extern u8 *gUnknown_8115B3C[];
-extern u8 *gUnknown_8115C4C[];
-extern u8 *gUnknown_8115BF4[];
-extern u8 *gUnknown_8115D14[];
-extern u8 *gUnknown_8115CB8[];
-extern u8 *gUnknown_8115D5C[];
-extern u8 *gUnknown_8115D94[];
-extern u8 *gUnknown_8115E28[];
-extern u8 *gUnknown_8115E80[];
 extern u8 gUnknown_8108F50[];
 
 static void sub_8090888(u8 *param_1, u8 *param_2);
@@ -243,11 +227,11 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
     }
     if (counter > maxPartyMembers) {
         if (maxPartyMembers == 1) {
-            AddNewLine(*gUnknown_8115A2C,text,newLine);
+            AddNewLine(gText_OnlyOneMonMayEnterDungeon,text,newLine);
         }
         else {
             gFormatArgs[0] = counter - maxPartyMembers;
-            AddNewLine(*gUnknown_81159DC,text,newLine);
+            AddNewLine(gText_TooManyMembersToEnterDungeon,text,newLine);
         }
         sub_8090888(buffer,text);
         r8 = TRUE;
@@ -256,7 +240,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
     if (gDungeons[dungeonIndex].maxItemsAllowed != 0 && gDungeons[dungeonIndex].maxItemsAllowed < numInvSlots) {
         gFormatArgs[0] = gDungeons[dungeonIndex].maxItemsAllowed;
         gFormatArgs[1] = numInvSlots - gDungeons[dungeonIndex].maxItemsAllowed;
-        AddNewLine((!r8) ? *gUnknown_8115A80 : *gUnknown_8115ADC, text, newLine);
+        AddNewLine((!r8) ? gText_OnlyXItemsMayBeBroughtIntoDungeon : gText_AlsoOnlyXItemsMayBeBroughtIntoDungeon, text, newLine);
         sub_8090888(buffer,text);
         r8 = TRUE;
     }
@@ -266,7 +250,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
 
         CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[0],speciesId);
         if (counter > 3) {
-            AddNewLine((!r8) ? *gUnknown_8115B3C : *gUnknown_8115BA4, text,newLine);
+            AddNewLine((!r8) ? gText_ClientCouldNotJoinTooManyMembers : gText_AlsoClientCouldNotJoinTooManyMembers, text,newLine);
             sub_8090888(buffer,text);
             r8 = TRUE;
         }
@@ -279,7 +263,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
             }
         }
         if (bodySize > 6) {
-            AddNewLine((!r8) ? *gUnknown_8115BF4 : *gUnknown_8115C4C, text,newLine);
+            AddNewLine((!r8) ? gText_ClientCouldNotJoinNoSpace : gText_AlsoClientCouldNotJoinNoSpace, text,newLine);
             sub_8090888(buffer,text);
             r8 = TRUE;
         }
@@ -304,7 +288,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
 
             InitPokemonMove(&move,local_4c[i]);
             BufferMoveName(gFormatBuffer_Items[0],&move,0);
-            AddNewLine((!r8) ? *gUnknown_8115CB8 : *gUnknown_8115D14, text,newLine);
+            AddNewLine((!r8) ? gText_MustHaveMonWithMove : gText_AlsoMustHaveMonWithMove, text,newLine);
             sub_8090888(buffer,text);
             r8 = TRUE;
         }
@@ -328,7 +312,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
                 }
             }
             if (otherSpeciesId == NUM_MONSTERS) {
-                AddNewLine((!r8) ? *gUnknown_8115D5C : *gUnknown_8115D94, text,newLine);
+                AddNewLine((!r8) ? gText_MustHaveWaterTypeMon : gText_AlsoMustHaveWaterTypeMon, text,newLine);
                 sub_8090888(buffer,text);
                 r8 = TRUE;
             }
@@ -341,38 +325,38 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
 
     if ((!gDungeons[dungeonIndex].enterWithoutGameSave) || (param_5)) {
         if (!sp_0xf4) {
-            strcpy(buffer,*gUnknown_8115DD4);
+            strcpy(buffer,gText_IsOkToEnterWithFollowingRules);
             strcat(buffer,newLine);
             sp_0xf4 = TRUE;
         }
-        strcat(buffer,*gUnknown_8115E00);
+        strcat(buffer,gText_GameWilllBeSavedBeforeEntering);
         strcat(buffer,newLine);
     }
     if (gDungeons[dungeonIndex].levelResetTo1) {
         if (!sp_0xf4) {
-            strcpy(buffer,*gUnknown_8115DD4);
+            strcpy(buffer,gText_IsOkToEnterWithFollowingRules);
             strcat(buffer,newLine);
             sp_0xf4 = TRUE;
         }
-        strcat(buffer,*gUnknown_8115E28);
+        strcat(buffer,gText_TeamWillEnterAtLv1);
         strcat(buffer,newLine);
     }
     if ((gDungeons[dungeonIndex].maxItemsAllowed == 0) && (numInvSlots + sp_0xf0 != 0)) {
         if (!sp_0xf4) {
-            strcpy(buffer,*gUnknown_8115DD4);
+            strcpy(buffer,gText_IsOkToEnterWithFollowingRules);
             strcat(buffer,newLine);
             sp_0xf4 = TRUE;
         }
-        strcat(buffer,*gUnknown_8115E54);
+        strcat(buffer,gText_AllItemsLostOnEntering);
         strcat(buffer,newLine);
     }
     if ((!gDungeons[dungeonIndex].keepMoney) && (gTeamInventoryRef->teamMoney != 0)) {
         if (!sp_0xf4) {
-            strcpy(buffer,*gUnknown_8115DD4);
+            strcpy(buffer,gText_IsOkToEnterWithFollowingRules);
             strcat(buffer,newLine);
             sp_0xf4 = TRUE;
         }
-        strcat(buffer, *gUnknown_8115E80);
+        strcat(buffer, gText_AllMoneyLostOnEntering);
         strcat(buffer,newLine);
     }
 

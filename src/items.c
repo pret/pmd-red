@@ -12,6 +12,7 @@
 #include "text_1.h"
 #include "text_2.h"
 #include "text_util.h"
+#include "strings.h"
 
 extern const char gItemParaFileName[];
 extern const char gUnknown_8109794[];
@@ -19,11 +20,8 @@ extern const char gUnknown_81097A4[];
 extern s32 gPowersOfTen[];
 extern u8 gHighDigits[];
 extern u16 gGummiStatBoostLUT[];
-extern u8* gPtrTypeText;  // ptr to "Type\0"
-extern u8* gPtrPPD0Text;  // ptr to "PP {VALUE_0} \0"
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
 extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)
-extern const char *gUnknown_810AF50[];
 extern u8 gUnknown_8108F64[0x3f][32];  // some sort of bit lookup table
 extern u8 gInvalidItemIDs[0x10];
 extern const u8 gUnknown_8109770[];

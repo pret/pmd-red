@@ -1,5 +1,6 @@
 #include "global.h"
 #include "structs/str_status_text.h"
+#include "strings.h"
 #include "decompress_3.h"
 
 static bool8 AreStatusesTheSame(const StatusText *status1, const StatusText *status2)
@@ -12,8 +13,6 @@ static bool8 AreStatusesTheSame(const StatusText *status1, const StatusText *sta
     }
 }
 
-extern const StatusText gStatusDescriptions[];
-
 // arm9.bin::02069774
 s32 PrepareStatusStringArrays(const char *str, STATUSTEXTS(statuses))
 {
@@ -24,7 +23,7 @@ s32 PrepareStatusStringArrays(const char *str, STATUSTEXTS(statuses))
     s32 strLen;
 
     counter = 0;
-    for (i = 0; i < 99; i++) {
+    for (i = 0; i < ARRAY_COUNT_INT(gStatusDescriptions); i++) {
         if (gStatusDescriptions[i].name == NULL)
             break;
 
@@ -45,7 +44,7 @@ s32 PrepareStatusStringArrays(const char *str, STATUSTEXTS(statuses))
 
     while (*str != '\0') {
         if (*str == '#') {
-            for (i = 0; i < 99 && gStatusDescriptions[i].name != NULL; i++) {
+            for (i = 0; i < ARRAY_COUNT_INT(gStatusDescriptions) && gStatusDescriptions[i].name != NULL; i++) {
                 if (StrsDifferent_IgnoreCase(gStatusDescriptions[i].name, str, stringLengths[i]) == 0) {
                     for (j = 0; j < counter; j++) {
                         if (AreStatusesTheSame(&gStatusDescriptions[i], statuses[j]) != 0)

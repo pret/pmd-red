@@ -12,11 +12,11 @@ typedef struct PortraitGfxSub
     /* 0x4 */ const u8 *gfx;
 } PortraitGfxSub;
 
-// size: variable
+// size: 0x68
 typedef struct PortraitGfx
 {
-    // NOTE: The actual number of sprites is different depending on pokemon. For example, starters have 12 sprites, while most legendaries only 1. [0] means that any number of sprites is valid.
-    /* 0x0 */ PortraitGfxSub sprites[0];
+    // NOTE: The actual number of sprites is different depending on pokemon. For example, starters have 12 sprites, while most legendaries only 1. Unused sprites are set as NULL, NULL.
+    /* 0x0 */ PortraitGfxSub sprites[13];
 } PortraitGfx;
 
 // size: 0x10

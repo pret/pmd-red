@@ -18,6 +18,7 @@
 #include "pokemon_3.h"
 #include "random.h"
 #include "string_format.h"
+#include "strings.h"
 #include "text_1.h"
 #include "text_util.h"
 
@@ -31,10 +32,6 @@ struct UnusedOffenseStruct
     u8 spDefBoost;
 };
 
-extern u8 *gIQSkillNames[];
-extern u8 *gIQSkillDescriptions[];
-extern u8 *gTacticsDescriptions[];
-extern u8 *gTactics[];
 extern u32 gIQSkillGroups[];
 
 extern SpriteOAM gShadowSprites[3]; // Shadow sprites of some kind
@@ -43,12 +40,6 @@ extern const s16 gUnknown_810AC62; // 0xC
 extern const s16 gUnknown_810AC68; // 0x8
 extern const s16 gUnknown_810AC64; // 0x8
 extern const s16 gUnknown_810AC66; // 0x8
-extern u8 *gUnknown_810DD58[];
-extern u8 *gEvolutionStrings[];
-extern u8 *gExpPts810DD9C_Ptr[];
-extern u8 *gIQSkill810DD68_Ptr[];
-extern u8 *gLevel810DD6C_Ptr[];
-extern u8 *gStatusNames[];
 extern u8 gUnknown_8107754[];
 extern u8 gUnknown_810775C[];
 extern u8 gUnknown_8107768[];
@@ -58,33 +49,6 @@ extern u8 gUnknown_8107788[];
 extern u8 gUnknown_810778C[];
 extern u8 gUnknown_8107790[];
 extern u8 gUnknown_8107798[];
-extern u8 *gUnknown_810DDB8[];
-extern u8 *gUnknown_810DDD0[];
-extern u8 *gUnknown_810DDE4[];
-extern u8 *gUnknown_810DDFC[];
-extern u8 *gUnknown_810DE0C[];
-extern u8 *gUnknown_810DE20[];
-extern u8 *gUnknown_810DE24[];
-extern u8 *gUnknown_810DE28[];
-extern u8 *gUnknown_810DE38[];
-extern u8 *gUnknown_810DE4C[];
-extern u8 *gUnknown_810DE50[];
-extern u8 *gUnknown_810DE54[];
-extern u8 *gUnknown_810DE58[];
-extern u8 *gUnknown_810DE6C[];
-extern u8 *gUnknown_810DE80[];
-extern u8 *gUnknown_810DE98[];
-extern u8 *gUnknown_810DEB4[];
-extern u8 *gUnknown_810DEC8[];
-extern u8 *gUnknown_810DEDC[];
-extern u8 *gUnknown_810DEF4[];
-extern u8 *gUnknown_810DF78[];
-extern u8 *gUnknown_810DF84[];
-extern u8 *gUnknown_810DF98[];
-extern u8 *gUnknown_810DFB4[];
-extern u8 *gUnknown_810DFC8[];
-extern u8 *gUnknown_810E02C[];
-extern u8 *gUnknown_8115718[];
 
 // 2, 4, 6, 7, 8, 9, 8, 0xA, 0xD, 0xF, 0x11
 extern s32 gUnknown_810AC90[10];
@@ -365,27 +329,26 @@ UNUSED static void GetMonOffenseStats(PokemonStruct1 *mon, struct UnusedOffenseS
 }
 
 
-
 // TODO: File boundary?
 
 
 
-u8 *GetIQSkillName(u8 skill)
+const u8 *GetIQSkillName(u8 skill)
 {
     return gIQSkillNames[skill];
 }
 
 void CopyTacticsNameToBuffer(char *buffer, u8 tactic)
 {
-    strncpy(buffer, gTactics[tactic], 0x14);
+    strncpy(buffer, gTacticsNames[tactic], 0x14);
 }
 
-u8 *GetIQSkillDescription(u8 skill)
+const u8 *GetIQSkillDescription(u8 skill)
 {
     return gIQSkillDescriptions[skill];
 }
 
-u8 *GetTacticsDescription(u8 tactic)
+const u8 *GetTacticsDescription(u8 tactic)
 {
     return gTacticsDescriptions[tactic];
 }
@@ -1111,61 +1074,61 @@ void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF
             PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gUnknown_8107754,windowId,'\0');
             gFormatArgs[0] = mon->level;
             gFormatArgs[1] = mon->exp;
-            PrintFormattedStringOnWindow(4,y,*gLevel810DD6C_Ptr,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gText_LevelUnkMacro,windowId,'\0');
             y += 0xA;
-            PrintFormattedStringOnWindow(4,y,*gExpPts810DD9C_Ptr,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gText_ExpPtsUnkMacro,windowId,'\0');
             y += 0xA;
             if (mon->level < 100) {
                 GetPokemonLevelData(&levelData,mon->species,mon->level + 1);
                 gFormatArgs[0] = levelData.expRequired - mon->exp;
-                PrintFormattedStringOnWindow(4,y,*gUnknown_810DDB8,windowId,'\0');
+                PrintFormattedStringOnWindow(4,y,gText_ToNextLevel,windowId,'\0');
             }
             y += 0xC;
             gFormatArgs[0] = mon->HP1;
             gFormatArgs[1] = mon->HP2;
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DDD0,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DDD0,windowId,'\0');
             y += 0xA;
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DDE4,windowId,'\0');
-            str = *gUnknown_810DE0C;
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DDE4,windowId,'\0');
+            str = gUnknown_810DE0C;
             gFormatArgs[0] = mon->offense.att[0];
             if (mon->atkBoost != 0) {
                 gFormatArgs[0] = gFormatArgs[0] + mon->atkBoost;
-                str = *gUnknown_810DE20;
+                str = gUnknown_810DE20;
             }
             PrintFormattedStringOnWindow(4,y,str,windowId,'\0');
             if (mon->defBoost != 0) {
                 gFormatArgs[0] = mon->offense.def[0] + mon->defBoost;
-                PrintFormattedStringOnWindow(4,y,*gUnknown_810DE4C,windowId,'\0');
+                PrintFormattedStringOnWindow(4,y,gUnknown_810DE4C,windowId,'\0');
             }
             else {
                 gFormatArgs[0] = mon->offense.def[0];
-                PrintFormattedStringOnWindow(4,y,*gUnknown_810DE38,windowId,'\0');
+                PrintFormattedStringOnWindow(4,y,gUnknown_810DE38,windowId,'\0');
             }
             y += 0xA;
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DDFC,windowId,'\0');
-            str = *gUnknown_810DE24;
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DDFC,windowId,'\0');
+            str = gUnknown_810DE24;
             gFormatArgs[0] = mon->offense.att[1];
             if (mon->spAtkBoost != 0) {
                 gFormatArgs[0] = gFormatArgs[0] + mon->spAtkBoost;
-                str = *gUnknown_810DE28;
+                str = gUnknown_810DE28;
             }
             PrintFormattedStringOnWindow(4,y,str,windowId,'\0');
             if (mon->spDefBoost != 0) {
                 gFormatArgs[0] = mon->offense.def[1] + mon->spDefBoost;
-                PrintFormattedStringOnWindow(4,y,*gUnknown_810DE54,windowId,'\0');
+                PrintFormattedStringOnWindow(4,y,gUnknown_810DE54,windowId,'\0');
             }
             else {
                 gFormatArgs[0] = mon->offense.def[1];
-                PrintFormattedStringOnWindow(4,y,*gUnknown_810DE50,windowId,'\0');
+                PrintFormattedStringOnWindow(4,y,gUnknown_810DE50,windowId,'\0');
             }
             y += 0xA;
             if (ItemExists(&mon->item)) {
                  sub_8090E14(gFormatBuffer_Items[0],&mon->item,0);
             }
             else {
-                strcpy(gFormatBuffer_Items[0],*gUnknown_810DE58);
+                strcpy(gFormatBuffer_Items[0],gUnknown_810DE58);
             }
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DE6C,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DE6C,windowId,'\0');
             y += 0xC;
             gFormatArgs[0] = mon->IQ;
             iVar8 = mon->IQ / 10;
@@ -1177,12 +1140,12 @@ void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF
             }
 
             InlineStrcpy(gFormatBuffer_Monsters[0],gUnknown_8115718[iVar8]);
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DE80,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DE80,windowId,'\0');
             y += 0xA;
             if (!mon->isTeamLeader)
             {
                 CopyTacticsNameToBuffer(gFormatBuffer_Monsters[0],mon->tactic);
-                PrintFormattedStringOnWindow(4,y,*gUnknown_810DE98,windowId,'\0');
+                PrintFormattedStringOnWindow(4,y,gUnknown_810DE98,windowId,'\0');
             }
             y += 0xA;
             break;
@@ -1208,7 +1171,7 @@ void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF
             s32 iVar11;
             bool8 bVar10;
 
-            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,*gUnknown_810DD58,windowId,'\0');
+            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gUnknown_810DD58,windowId,'\0');
             iVar11 = mon->unk56 - 1;
             y -= 0xC;
             bVar10 = FALSE;
@@ -1233,7 +1196,7 @@ void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF
             }
 
             if (!bVar10) {
-                PrintFormattedStringOnWindow(0xc,0x20,*gUnknown_810DF78,windowId,'\0');
+                PrintFormattedStringOnWindow(0xc,0x20,gUnknown_810DF78,windowId,'\0');
             }
             break;
         }
@@ -1242,7 +1205,7 @@ void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF
             bool8 bVar11;
             u8 iqSkillBuffer[24];
 
-            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,*gIQSkill810DD68_Ptr,windowId,'\0');
+            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gText_IqSkills,windowId,'\0');
             GetNumAvailableIQSkills(iqSkillBuffer,mon->IQ);
             iVar13 = mon->unk40 - 1;
 
@@ -1257,7 +1220,7 @@ void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF
                     if (0x17 < iVar13)
                         break;
                     if (iqSkillBuffer[iVar13] != 0) {
-                        u8 *iqSkillName;
+                        const u8 *iqSkillName;
 
                         bVar11 = TRUE;
                         iqSkillName = GetIQSkillName(iqSkillBuffer[iVar13]);
@@ -1277,7 +1240,7 @@ void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF
             }
 
             if (!bVar11) {
-                PrintFormattedStringOnWindow(0xc,0x20,*gUnknown_810DF84,windowId,'\0');
+                PrintFormattedStringOnWindow(0xc,0x20,gUnknown_810DF84,windowId,'\0');
             }
             break;
         }
@@ -1285,23 +1248,23 @@ void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF
             PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gUnknown_8107798,windowId,'\0');
             CopyMonsterNameToBuffer(gFormatBuffer_Monsters[0],mon->species);
             gFormatArgs[0] = mon->species;
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DEB4,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DEB4,windowId,'\0');
             y += 0xA;
             InlineStrncpy(gFormatBuffer_Items[0],GetFriendAreaName(GetFriendArea(mon->species)),0x50);
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DEC8,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DEC8,windowId,'\0');
             y += 0xA;
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DEDC,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DEDC,windowId,'\0');
             y += 0xD;
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DFB4,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DFB4,windowId,'\0');
             y += 0xA;
             PrintYellowDungeonNametoBuffer(gFormatBuffer_Items[0],&mon->dungeonLocation);
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DFC8,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DFC8,windowId,'\0');
             y += 0xD;
             strncpy(gFormatBuffer_Monsters[0],GetCategoryString(mon->species),0x14);
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DEF4,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DEF4,windowId,'\0');
             y += 0xD;
             strcpy(gFormatBuffer_Monsters[0],gUnknown_810E02C[GetBodySize(mon->species)]);
-            PrintFormattedStringOnWindow(4,y,*gUnknown_810DF98,windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gUnknown_810DF98,windowId,'\0');
             y += 0xD;
             PrintFormattedStringOnWindow(4,y,gEvolutionStrings[mon->unk4C],windowId,'\0');
             break;
