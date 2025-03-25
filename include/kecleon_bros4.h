@@ -1,17 +1,7 @@
 #ifndef GUARD_KECLEON_BROS4_H
 #define GUARD_KECLEON_BROS4_H
 
-#include "constants/item.h"
-#include "structs/menu.h"
-#include "structs/struct_sub80095e4.h"
-
-// size: 0xF4
-typedef struct unkStruct_203B224
-{
-    u32 unk0;
-    u32 unk4[INVENTORY_SIZE];
-    /* 0x54 */ struct_Sub80095E4_2 unk54;
-} unkStruct_203B224;
+#include "structs/str_position.h"
 
 bool8 sub_801A5D8(u32, s32, DungeonPos *, u32);
 u32 sub_801A6E8(bool8);

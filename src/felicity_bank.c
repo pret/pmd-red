@@ -409,22 +409,24 @@ static void sub_8016B48(u8 action)
     sub_80073E0(sFelicityBankWork->unk64.unk14);
 }
 
-static void CreateFelicityMoneySavingsHeader(u32 param_1)
+// arm9.bin::0201FB54
+static void CreateFelicityMoneySavingsHeader(u32 windowId)
 {
-    CallPrepareTextbox_8008C54(param_1);
-    sub_80073B8(param_1);
-    PrintStringOnWindow(16, 4, sDisplayMoney, param_1, 0);
-    sub_8012BC4(96, 4, gTeamInventoryRef->teamMoney, 5, 5, param_1);
-    PrintStringOnWindow(112, 4, sDisplaySavings, param_1, 0);
-    sub_8012BC4(200, 4, gTeamInventoryRef->teamSavings, 7, 5, param_1);
-    sub_80073E0(param_1);
+    CallPrepareTextbox_8008C54(windowId);
+    sub_80073B8(windowId);
+    PrintStringOnWindow(16, 4, sDisplayMoney, windowId, 0);
+    sub_8012BC4(96, 4, gTeamInventoryRef->teamMoney, 5, 5, windowId);
+    PrintStringOnWindow(112, 4, sDisplaySavings, windowId, 0);
+    sub_8012BC4(200, 4, gTeamInventoryRef->teamSavings, 7, 5, windowId);
+    sub_80073E0(windowId);
 }
 
-void DrawTeamMoneyBox(u32 param_1)
+// arm9.bin::0201FAE8
+void DrawTeamMoneyBox(u32 windowId)
 {
-    CallPrepareTextbox_8008C54(param_1);
-    sub_80073B8(param_1);
-    PrintStringOnWindow(6, 0, sMoney, param_1, 0);
-    sub_8012BC4(42, 12, gTeamInventoryRef->teamMoney, 5, 5, param_1);
-    sub_80073E0(param_1);
+    CallPrepareTextbox_8008C54(windowId);
+    sub_80073B8(windowId);
+    PrintStringOnWindow(6, 0, sMoney, windowId, 0);
+    sub_8012BC4(42, 12, gTeamInventoryRef->teamMoney, 5, 5, windowId);
+    sub_80073E0(windowId);
 }

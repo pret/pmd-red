@@ -1476,6 +1476,7 @@ void unk_CopyMoves4To8AndClearFlag2Unk4(Move *destMoves, Move *srcMoves)
         destMoves[movesCopied++].moveFlags = 0;
 }
 
+// arm9.bin::02061E58
 void unk_CopyMoves4To8(Move *destMoves, Move *srcMoves)
 {
     s32 movesCopied;
@@ -1492,6 +1493,7 @@ void unk_CopyMoves4To8(Move *destMoves, Move *srcMoves)
         destMoves[movesCopied++].moveFlags = 0;
 }
 
+// arm9.bin::02061DC0
 void sub_8094060(Move *srcMoves, Move *destMoves)
 {
     s32 i, j;
@@ -1516,6 +1518,7 @@ void sub_8094060(Move *srcMoves, Move *destMoves)
         destMoves[j++].moveFlags = 0;
 }
 
+// arm9.bin::02061D80
 static void WritePoke1MoveBits(DataSerializer *r0, Move *move)
 {
     WriteBits(r0, &move->moveFlags, 4);
@@ -1523,6 +1526,7 @@ static void WritePoke1MoveBits(DataSerializer *r0, Move *move)
     WriteBits(r0, &move->PP, 7);
 }
 
+// arm9.bin::02061D40
 static void ReadPoke1MoveBits(DataSerializer *r0, Move *move)
 {
     ReadBits(r0, &move->moveFlags, 4);
@@ -1530,6 +1534,7 @@ static void ReadPoke1MoveBits(DataSerializer *r0, Move *move)
     ReadBits(r0, &move->PP, 7);
 }
 
+// arm9.bin::02061D08
 void WritePoke1MovesBits(DataSerializer *r0, Move *moveSet)
 {
     s32 i;
@@ -1538,6 +1543,7 @@ void WritePoke1MovesBits(DataSerializer *r0, Move *moveSet)
         WritePoke1MoveBits(r0, &moveSet[i]);
 }
 
+// arm9.bin::02061CD0
 void ReadPoke1MovesBits(DataSerializer *r0, Move *moveSet)
 {
     s32 i;
@@ -1546,6 +1552,7 @@ void ReadPoke1MovesBits(DataSerializer *r0, Move *moveSet)
         ReadPoke1MoveBits(r0, &moveSet[i]);
 }
 
+// arm9.bin::02061C70
 static void WritePoke2MoveBits(DataSerializer *r0, Move *move)
 {
     WriteBits(r0, &move->moveFlags, 4);
@@ -1555,7 +1562,8 @@ static void WritePoke2MoveBits(DataSerializer *r0, Move *move)
     WriteBits(r0, &move->ginseng, 7);
 }
 
-void WritePoke2MovesBits(DataSerializer *r0, struct Moves *r1)
+// arm9.bin::02061C28
+void WritePoke2MovesBits(DataSerializer *r0, Moves *r1)
 {
     s32 i;
 
@@ -1565,6 +1573,7 @@ void WritePoke2MovesBits(DataSerializer *r0, struct Moves *r1)
     WriteBits(r0, &r1->struggleMoveFlags, 8);
 }
 
+// arm9.bin::02061BB0
 static void ReadPoke2MoveBits(DataSerializer *r0, Move *move)
 {
     memset(move, 0, sizeof(Move));
@@ -1575,7 +1584,8 @@ static void ReadPoke2MoveBits(DataSerializer *r0, Move *move)
     ReadBits(r0, &move->ginseng, 7);
 }
 
-void ReadPoke2MovesBits(DataSerializer *r0, struct Moves*r1)
+// arm9.bin::02061B60
+void ReadPoke2MovesBits(DataSerializer *r0, Moves* r1)
 {
     s32 i;
 
@@ -1586,6 +1596,7 @@ void ReadPoke2MovesBits(DataSerializer *r0, struct Moves*r1)
     ReadBits(r0, &r1->struggleMoveFlags, 8);
 }
 
+// arm9.bin::02061AEC
 bool8 DoesMoveCharge(u16 move)
 {
     if (move == MOVE_SOLARBEAM) return TRUE;

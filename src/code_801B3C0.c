@@ -20,10 +20,11 @@ static void sub_801B480(void);
 static void sub_801B51C(void);
 static void sub_801B590(void);
 
+// arm9.bin::02027658
 bool8 InitItemDescriptionWindow(Item *item)
 {
     ResetSprites(TRUE);
-    sUnknown_203B230 = MemoryAlloc(sizeof(unkStruct_203B230),8);
+    sUnknown_203B230 = MemoryAlloc(sizeof(unkStruct_203B230), 8);
     sUnknown_203B230->item = *item;
     sub_801317C(&sUnknown_203B230->unk88);
     sUnknown_203B230->unk24 = 0;
@@ -34,6 +35,7 @@ bool8 InitItemDescriptionWindow(Item *item)
     return TRUE;
 }
 
+// arm9.bin::020275F8
 u32 sub_801B410(void)
 {
     switch (sUnknown_203B230->state) {
@@ -53,6 +55,7 @@ u32 sub_801B410(void)
     return 0;
 }
 
+// arm9.bin::020275C4
 void FreeItemDescriptionWindow(void)
 {
     if (sUnknown_203B230 != NULL) {
@@ -61,12 +64,14 @@ void FreeItemDescriptionWindow(void)
     }
 }
 
+// arm9.bin::020275A8
 static void sub_801B46C(u32 newState)
 {
     sUnknown_203B230->state = newState;
     sub_801B480();
 }
 
+// arm9.bin::02027490
 static void sub_801B480(void)
 {
     switch (sUnknown_203B230->state) {

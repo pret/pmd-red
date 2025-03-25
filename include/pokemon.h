@@ -30,10 +30,10 @@ typedef struct unkStruct_808E218
     HiddenPower unk0[3];
 } unkStruct_808E218;
 
-extern unkStruct_203B45C *gRecruitedPokemonRef;
+extern RecruitedMon *gRecruitedPokemonRef;
 
 void LoadMonsterParameters(void);
-unkStruct_203B45C *GetRecruitedPokemon(void);
+RecruitedMon *GetRecruitedPokemon(void);
 void InitializeRecruitedPokemon(void);
 
 

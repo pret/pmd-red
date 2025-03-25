@@ -19,6 +19,7 @@ static EWRAM_INIT u16 gUnknown_203B218 = {0};
 
 static void sub_801A064(void);
 
+// arm9.bin::020258B0
 bool8 sub_8019E40(u32 r0)
 {
     if (CountKecleonShopItems() == 0)
@@ -40,6 +41,7 @@ bool8 sub_8019E40(u32 r0)
     return TRUE;
 }
 
+// arm9.bin::020257BC
 u32 sub_8019EDC(bool8 r0)
 {
     Item slot;
@@ -77,11 +79,13 @@ u32 sub_8019EDC(bool8 r0)
     }
 }
 
+// arm9.bin::02025798
 u8 sub_8019FB0(void)
 {
     return (gUnknown_203B214->s0.input.unk1E * gUnknown_203B214->s0.input.unk1C) + (u8)gUnknown_203B214->s0.input.menuIndex;
 }
 
+// arm9.bin::02025738
 void sub_8019FCC(bool8 r0)
 {
     ResetUnusedInputStruct();
@@ -94,6 +98,7 @@ void sub_8019FCC(bool8 r0)
         AddMenuCursorSprite(&gUnknown_203B214->s0.input);
 }
 
+// arm9.bin::020256A8
 void sub_801A010(void)
 {
     if (gUnknown_203B214 != NULL) {
@@ -116,6 +121,7 @@ static void sub_801A064(void)
     SUB_80095E4_CALL(gUnknown_203B214->s0);
 }
 
+// arm9.bin::02025480
 void sub_801A0D8(void)
 {
     BulkItem *heldItem;

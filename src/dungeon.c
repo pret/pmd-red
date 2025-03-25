@@ -177,12 +177,14 @@ u8 sub_80902C8(u8 dungeon)
         return gUnknown_81077E8[dungeon];
 }
 
+// arm9.bin::0205ECA0
 void WriteDungeonLocationBits(DataSerializer* r0, DungeonLocation* src)
 {
     WriteBits(r0, &src->id, 7);
     WriteBits(r0, &src->floor, 7);
 }
 
+// arm9.bin::0205EC64
 void ReadDungeonLocationBits(DataSerializer* r0, DungeonLocation* dst)
 {
     dst->id = 0;

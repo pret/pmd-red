@@ -41,7 +41,7 @@ extern const char gFormattedDragonText[];
 extern const char gFormattedDarkText[];
 extern const char gFormattedSteelText[];
 
-
+// NDS=020C81F0
 const char * const gUnformattedTypeStrings[NUM_POKEMON_TYPES] =
 {
     gNoneText,
@@ -103,6 +103,7 @@ u32 ReturnIntFromChar(u8 r0)
     return r0;
 }
 
+// arm9.bin::020614D0
 u32 ReturnIntFromChar2(u8 r0)
 {
     return r0;
@@ -159,6 +160,7 @@ void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size)
   }
 }
 
+// arm9.bin::02061508
 const char *GetUnformattedTypeString(u8 type)
 {
     return gUnformattedTypeStrings[type];

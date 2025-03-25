@@ -25,6 +25,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
+#include "text_3.h"
 #include "text_util.h"
 
 static EWRAM_INIT unkStruct_203B2B8 *sUnknown_203B2B8 = {NULL};

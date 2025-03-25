@@ -18,6 +18,7 @@ void ReverseString(u8 *s, s32 len)
     }
 }
 
+// arm9.bin::0201275C
 s32 ConvertToDecimal(s32 *decimal, s32 n, s32 len)
 {
     s32 sign;

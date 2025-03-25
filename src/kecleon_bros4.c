@@ -1,6 +1,9 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/input.h"
+#include "constants/item.h"
+#include "structs/menu.h"
+#include "structs/struct_sub80095e4.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "code_8099360.h"
@@ -13,6 +16,14 @@
 #include "text_1.h"
 #include "text_2.h"
 
+// size: R=0xF4 | B=0xF0
+typedef struct unkStruct_203B224
+{
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u32 unk4[INVENTORY_SIZE];
+    /* 0x54 */ struct_Sub80095E4_2 unk54;
+} unkStruct_203B224;
+
 static EWRAM_INIT unkStruct_203B224 *gUnknown_203B224 = {NULL};
 static EWRAM_INIT u16 gUnknown_203B228 = {0};
 static EWRAM_INIT u16 gUnknown_203B22A = {0};
@@ -24,6 +35,7 @@ static void SortInventoryItems(void);
 static void sub_801A998(void);
 static s32 sub_801AE24(u32);
 
+// arm9.bin::02026BE4
 bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
 {
     if (GetNumberOfFilledInventorySlots() == 0)
@@ -57,6 +69,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
     return TRUE;
 }
 
+// arm9.bin::02026954
 u32 sub_801A6E8(bool8 param_1)
 {
     s32 index;
@@ -139,11 +152,13 @@ u32 sub_801A6E8(bool8 param_1)
     }
 }
 
+// arm9.bin::02026934
 s32 sub_801A8AC(void)
 {
     return (gUnknown_203B224->unk54.s0.input.unk1E * gUnknown_203B224->unk54.s0.input.unk1C) + gUnknown_203B224->unk54.s0.input.menuIndex;
 }
 
+// arm9.bin::020268C0
 void sub_801A8D0(bool8 r0)
 {
     sub_8099690(1);
@@ -158,6 +173,7 @@ void sub_801A8D0(bool8 r0)
         AddMenuCursorSprite(&gUnknown_203B224->unk54.s0.input);
 }
 
+// arm9.bin::02026818
 void sub_801A928(void)
 {
     if (gUnknown_203B224 != NULL) {
@@ -182,6 +198,7 @@ static void sub_801A998(void)
     ShowWindows(&gUnknown_203B224->unk54.s0.windows, TRUE, TRUE);
 }
 
+// arm9.bin::020262DC
 void sub_801A9E0(void)
 {
     s32 teamItemIndex;
@@ -292,6 +309,7 @@ void sub_801A9E0(void)
     sub_80073E0(gUnknown_203B224->unk54.s0.unk34);
 }
 
+// arm9.bin::02026234
 void sub_801AD34(u32 param_1)
 {
     CallPrepareTextbox_8008C54(param_1);

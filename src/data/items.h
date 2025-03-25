@@ -1,4 +1,5 @@
 // LUT for money item stack size -> money amount
+// NDS=020C359C
 const s32 gUnknown_810A3F0[100] = {
     4,     6,    10,    14,    22,    26,    34,    38,    46,    58,
     62,    74,    82,    86,    94,   106,   118,   122,   134,   142,

@@ -14,30 +14,30 @@ typedef struct Offense
     /* 0x2 */ u8 def[2]; // Def, SpDef
 } Offense;
 
-// size: 0x4
+// size: R=0x4 | B=0x1
 typedef struct unkPokeSubStruct_C
 {
-    u8 level;
+    /* 0x0 */ u8 level;
 } unkPokeSubStruct_C;
 
-// size: 0x58
+// size: R=0x58 | B=0x40
 typedef struct PokemonStruct1
 {
-    u16 unk0; // Probably a union: Sometimes ldrh and sometimes ldrb. Recruited?? "sub_80954CC" only loads 2 bits of info
-    /* 0x2 */ bool8 isTeamLeader;
-    /* 0x3 */ u8 level;
-    /* 0x4 */ DungeonLocation dungeonLocation;
-    /* 0x8 */ s16 speciesNum;
-    unkPokeSubStruct_C unkC[2];
-    /* 0x14 */ s16 IQ;
-    /* 0x16 */ s16 pokeHP;
-    /* 0x18 */ Offense offense;
-    /* 0x1C */ u32 currExp;
-    /* 0x20 */ IqSkillFlags IQSkills;
-    /* 0x24 */ u8 tacticIndex;
-    /* 0x28 */ BulkItem heldItem;
-    /* 0x2C */ Move moves[MAX_MON_MOVES];
-    /* 0x4C */ u8 name[POKEMON_NAME_LENGTH];
+    /* R=0x0  | B=0x0  */ u16 unk0; // Probably a union: Sometimes ldrh and sometimes ldrb. Recruited?? Only 2 bits are serialized
+    /* R=0x2  | B=0x2  */ bool8 isTeamLeader;
+    /* R=0x3  | B=0x3  */ u8 level;
+    /* R=0x4  | B=0x4  */ DungeonLocation dungeonLocation;
+    /* R=0x8  | B=0x6  */ s16 speciesNum;
+    /* R=0xC  | B=0x8  */ unkPokeSubStruct_C unkC[2];
+    /* R=0x14 | B=0xA  */ s16 IQ;
+    /* R=0x16 | B=0xC  */ s16 pokeHP;
+    /* R=0x18 | B=0xE  */ Offense offense;
+    /* R=0x1C | B=0x14 */ u32 currExp;
+    /* R=0x20 | B=0x18 */ IqSkillFlags IQSkills;
+    /* R=0x24 | B=0x1B */ u8 tacticIndex;
+    /* R=0x28 | B=0x1C */ BulkItem heldItem;
+    /* R=0x2C | B=0x1E */ Move moves[MAX_MON_MOVES];
+    /* R=0x4C | B=0x36 */ u8 name[POKEMON_NAME_LENGTH];
 } PokemonStruct1;
 
 // size: 0x4
@@ -47,45 +47,38 @@ typedef struct EvolveStage
     /* 0x2 */ u8 level;
 } EvolveStage;
 
-// size: 0x24
-typedef struct unkStruct_8094184
-{
-    /* 0x0 */ Move moves[MAX_MON_MOVES];
-    u8 unk20;
-} unkStruct_8094184;
-
-// size: 0x64
+// size: R=0x64 | B=0x54
 typedef struct PokemonStruct2
 {
-    u16 unk0; // corresponds to unk0 in PokemonStruct
-    /* 0x2 */ bool8 isTeamLeader;
-    /* 0x3 */ u8 level;
-    /* 0x4 */ DungeonLocation dungeonLocation;
-    /* 0x8 */ s16 IQ;
-    s16 unkA;
-    u16 unkC;
-    /* 0xE */ s16 speciesNum;
-    u16 unk10; // pokeHP
-    u16 unk12; // pokeHP
-    /* 0x14 */ Offense offense; // offense (other offset)
-    /* 0x18 */ u32 currExp;
-    /* 0x1C */ Moves moves;
-    /* 0x40 */ Item itemSlot; // heldItem
-    /* 0x44 */ FixedPoint belly;
-    /* 0x48 */ FixedPoint maxBelly;
-    /* 0x4C */ IqSkillFlags IQSkills;
-    /* 0x50 */ u8 tacticIndex;
-    /* 0x54 */ HiddenPower hiddenPower;
-    /* 0x58 */ u8 name[POKEMON_NAME_LENGTH]; // name (other offset)
+    /* R=0x0  | B=0x0  */ u16 unk0; // corresponds to unk0 in PokemonStruct. Only 2 bits are serialized
+    /* R=0x2  | B=0x2  */ bool8 isTeamLeader;
+    /* R=0x3  | B=0x3  */ u8 level;
+    /* R=0x4  | B=0x4  */ DungeonLocation dungeonLocation;
+    /* R=0x8  | B=0x6  */ s16 IQ;
+    /* R=0xA  | B=0x8  */ s16 unkA;
+    /* R=0xC  | B=0xA  */ u16 unkC;
+    /* R=0xE  | B=0xC  */ s16 speciesNum;
+    /* R=0x10 | B=0xE  */ u16 unk10; // pokeHP
+    /* R=0x12 | B=0x10 */ u16 unk12; // pokeHP
+    /* R=0x14 | B=0x12 */ Offense offense; // offense (other offset)
+    /* R=0x18 | B=0x18 */ u32 currExp;
+    /* R=0x1C | B=0x1C */ Moves moves;
+    /* R=0x40 | B=0x36 */ Item itemSlot; // heldItem
+    /* R=0x44 | B=0x3A */ FixedPoint belly;
+    /* R=0x48 | B=0x3E */ FixedPoint maxBelly;
+    /* R=0x4C | B=0x42 */ IqSkillFlags IQSkills;
+    /* R=0x50 | B=0x45 */ u8 tacticIndex;
+    /* R=0x54 | B=0x46 */ HiddenPower hiddenPower;
+    /* R=0x58 | B=0x4A */ u8 name[POKEMON_NAME_LENGTH]; // name (other offset)
 } PokemonStruct2;
 
-// size: 0x90E8
-typedef struct unkStruct_203B45C
+// size: R=0x90E8 | B=0x6990
+typedef struct RecruitedMon
 {
-    /* 0x0 */ PokemonStruct1 pokemon[NUM_MONSTERS];
-    /* 0x8DF8 */ PokemonStruct2 pokemon2[4];
-    /* 0x8F88 */ PokemonStruct1 team[MAX_TEAM_MEMBERS];
-} unkStruct_203B45C;
+    /* R=0x0    | B=0x0    */ PokemonStruct1 pokemon[NUM_MONSTERS];
+    /* R=0x8DF8 | B=0x6740 */ PokemonStruct2 pokemon2[4];
+    /* R=0x8F88 | B=0x6890 */ PokemonStruct1 team[MAX_TEAM_MEMBERS];
+} RecruitedMon;
 
 // size: 0x4
 typedef struct PreEvolution

@@ -1,5 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
+#include "structs/menu.h"
+#include "structs/str_mon_portrait.h"
+#include "structs/str_text.h"
 #include "code_80118A4.h"
 #include "code_801B3C0.h"
 #include "code_8099360.h"
@@ -17,7 +20,80 @@
 #include "string_format.h"
 #include "text_1.h"
 
-static EWRAM_INIT KecleonBrosWork1 *sKecleonBrosWork1 = {NULL};
+enum KecleonStoreStates
+{
+    KECLEON_STORE_INIT = 0,
+    KECLEON_STORE_MAIN_MENU,
+    KECLEON_STORE_INFO,
+    KECLEON_STORE_UNK3,
+    KECLEON_STORE_EXIT,
+    KECLEON_STORE_NO_STORE_ITEMS,
+    KECLEON_STORE_NO_MONEY,
+    KECLEON_STORE_TOO_MUCH_MONEY,
+    KECLEON_STORE_NO_ITEMS_TO_SELL,
+    KECLEON_STORE_NO_ITEMS,
+    KECLEON_STORE_TOO_MANY_ITEMS,
+    KECLEON_STORE_UNK11,
+    KECLEON_STORE_NOT_ENOUGH_MONEY,
+    KECLEON_STORE_CANT_SELL_ITEM,
+    KECLEON_STORE_SELL_ITEM_TOO_MUCH_MONEY,
+    KECLEON_STORE_UNK15,
+    KECLEON_STORE_BUY_ITEM_MENU,
+    KECLEON_STORE_BUY_ITEM_RECEIPT,
+    KECLEON_STORE_UNK18,
+    KECLEON_STORE_UNK19,
+    KECLEON_STORE_UNK20,
+    KECLEON_STORE_BUY_ITEM_INFO,
+    KECLEON_STORE_BUY_ITEM,
+    KECLEON_STORE_UNK23,
+    KECLEON_STORE_SELL_ITEM_MENU,
+    KECLEON_STORE_SELL_ITEM_RECEIPT,
+    KECLEON_STORE_UNK26,
+    KECLEON_STORE_UNK27,
+    KECLEON_STORE_UNK28,
+    KECLEON_STORE_SELL_ITEM_INFO,
+    KECLEON_STORE_SELL_ITEM,
+    KECLEON_STORE_SELL_ALL_ITEMS,
+    KECLEON_STORE_SELL_ALL_ITEMS_RECEIPT,
+};
+
+enum MenuActions
+{
+    CANCEL_ACTION = 1,
+    BUY_ACTION,
+    SELL_ACTION,
+    SELL_ALL_ACTION,
+    YES_ACTION,
+    NO_ACTION,
+    INFO_ACTION
+};
+
+// size: R=0x148 | B=0x144
+typedef struct KecleonBrosWork1
+{
+    /* 0x0 */ u32 mode; // Corresponds to the enum: KecleonBrosMode
+    /* 0x4 */ bool8 isKecleonItemShop; // FALSE indicates it is Kecleon TM Shop
+    /* 0x8 */ u32 currState;
+    /* 0xC */ u32 fallbackState;
+    /* 0x10 */ s32 itemSellPrice;
+    /* 0x14 */ u32 numInventoryItemToSell;
+    /* 0x18 */ s32 inventoryItemSellPrice;
+    /* 0x1C */ Item soldItem;
+    /* 0x20 */ u8 itemShopItemIndex; // TODO: 0x1F
+    /* 0x21 */ u8 wareShopItemIndex;
+    /* 0x24 */ u32 soldItemInventoryIndex;
+    /* 0x28 */ u32 menuAction1;
+    /* 0x2C */ u32 menuAction2;
+    /* 0x30 */ u32 menuAction3;
+    /* 0x34 */ MenuItem menuItems[8];
+    /* 0x74 */ u16 unk74[8];
+    /* 0x84 */ MenuStruct menu;
+    /* 0xD4 */ MonPortraitMsg monPortrait; // This seems to start 4 bytes earlier on NDS. I think MenuStruct is shorter
+    /* 0xE4 */ MonPortraitMsg *monPortraitPtr;
+    /* 0xE8 */ WindowTemplates unkE8;
+} KecleonBrosWork1;
+
+static EWRAM_INIT KecleonBrosWork1 *sKecleonBrosWork1 = {NULL}; // NDS=020EAD7C
 
 #include "data/kecleon_bros1.h"
 
@@ -44,16 +120,7 @@ static void ProceedToKecleonBros1FallbackState(void);
 static void KecleonCalcSellPriceForAllItems(void);
 static void SetKecleonPortraitSpriteId(bool32 angrySprite);
 
-enum MenuActions {
-    CANCEL_ACTION = 1,
-    BUY_ACTION,
-    SELL_ACTION,
-    SELL_ALL_ACTION,
-    YES_ACTION,
-    NO_ACTION,
-    INFO_ACTION
-};
-
+// arm9.bin::020252B0
 bool8 CreateKecleonBros(u32 mode)
 {
     u8 *monName;
@@ -114,6 +181,7 @@ bool8 CreateKecleonBros(u32 mode)
     return TRUE;
 }
 
+// arm9.bin::020251A4
 u32 KecleonBrosCallback(void)
 {
     switch (sKecleonBrosWork1->currState) {
@@ -159,6 +227,7 @@ u32 KecleonBrosCallback(void)
     return 0;
 }
 
+// arm9.bin::02025160
 void DeleteKecleonBros(void)
 {
     if (sKecleonBrosWork1 != NULL) {
@@ -168,6 +237,7 @@ void DeleteKecleonBros(void)
     }
 }
 
+// arm9.bin::02025138
 static void SetKecleonBrosState(u32 newState)
 {
     sKecleonBrosWork1->currState = newState;
@@ -175,6 +245,7 @@ static void SetKecleonBrosState(u32 newState)
     UpdateKecleonStoreDialogue();
 }
 
+// arm9.bin::02024F44
 static void sub_8018D30(void)
 {
     s32 i;
@@ -215,6 +286,7 @@ static void sub_8018D30(void)
     ShowWindows(&sKecleonBrosWork1->unkE8, TRUE, TRUE);
 }
 
+// arm9.bin::02024500
 static void UpdateKecleonStoreDialogue(void)
 {
     switch (sKecleonBrosWork1->currState) {
@@ -337,7 +409,7 @@ static void UpdateKecleonStoreDialogue(void)
             sub_8090E14(gFormatBuffer_Items[0], &sKecleonBrosWork1->soldItem, 0);
             gFormatArgs[0] = sKecleonBrosWork1->itemSellPrice;
             SetKecleonPortraitSpriteId(FALSE);
-            CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_05], 0, 5,sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
+            CreateMenuDialogueBoxAndPortrait(gCommonKecleonBros[sKecleonBrosWork1->mode][KECLEON_DLG_05], 0, 5, sKecleonBrosWork1->menuItems, NULL, 4, 0, sKecleonBrosWork1->monPortraitPtr, 12);
             break;
         case KECLEON_STORE_BUY_ITEM_RECEIPT:
             if (CountKecleonItems() == 0) {
@@ -421,6 +493,7 @@ static void UpdateKecleonStoreDialogue(void)
     }
 }
 
+// arm9.bin::020243AC
 static void BuildKecleonBrosMainMenu(void)
 {
     s32 i;
@@ -467,6 +540,7 @@ static void BuildKecleonBrosMainMenu(void)
     }
 }
 
+// arm9.bin::020242B0
 static void BuildKecleonBrosBuyItemMenu(void)
 {
     s32 i;
@@ -501,6 +575,7 @@ static void BuildKecleonBrosBuyItemMenu(void)
     }
 }
 
+// arm9.bin::020241B4
 static void BuildKecleonBrosSellItemMenu(void)
 {
     s32 i;
@@ -535,6 +610,7 @@ static void BuildKecleonBrosSellItemMenu(void)
     }
 }
 
+// arm9.bin::02024150
 static void BuildKecleonBrosYesNoMenu(void)
 {
     s32 loopMax = 0;
@@ -550,6 +626,7 @@ static void BuildKecleonBrosYesNoMenu(void)
     sKecleonBrosWork1->menuItems[loopMax].menuAction = CANCEL_ACTION;
 }
 
+// arm9.bin::02023FB8
 static void HandleKecleonBrosMainMenu(void)
 {
     s32 menuAction;
@@ -598,6 +675,7 @@ static void HandleKecleonBrosMainMenu(void)
     }
 }
 
+// arm9.bin::02023EEC
 static void HandleKecleonBrosBuyItemYesNoMenu(void)
 {
     s32 menuAction;
@@ -629,6 +707,7 @@ static void HandleKecleonBrosBuyItemYesNoMenu(void)
     }
 }
 
+// arm9.bin::02023E6C
 static void HandleKecleonBrosSellItemYesNoMenu(void)
 {
     s32 menuAction;
@@ -649,6 +728,7 @@ static void HandleKecleonBrosSellItemYesNoMenu(void)
     }
 }
 
+// arm9.bin::02023D98
 static void HandleKecleonBrosSellAllItemsMenu(void)
 {
     s32 slotIndex;
@@ -678,6 +758,7 @@ static void HandleKecleonBrosSellAllItemsMenu(void)
     }
 }
 
+// arm9.bin::02023BC0
 static void sub_80199CC(void)
 {
     u32 menuAction;
@@ -734,6 +815,7 @@ static void sub_80199CC(void)
     }
 }
 
+// arm9.bin::02023A90
 static void sub_8019B08(void)
 {
     switch (sub_801A6E8(TRUE)) {
@@ -763,6 +845,7 @@ static void sub_8019B08(void)
     }
 }
 
+// arm9.bin::02023990
 static void HandleKecleonBrosBuyItemMenu(void)
 {
     s32 menuAction;
@@ -795,6 +878,7 @@ static void HandleKecleonBrosBuyItemMenu(void)
     }
 }
 
+// arm9.bin::02023880
 static void HandleKecleonBrosSellItemMenu(void)
 {
     s32 menuAction;
@@ -826,6 +910,7 @@ static void HandleKecleonBrosSellItemMenu(void)
     }
 }
 
+// arm9.bin::02023844
 static void sub_8019D30(void)
 {
     switch (sub_801B410()) {
@@ -840,6 +925,7 @@ static void sub_8019D30(void)
     }
 }
 
+// arm9.bin::02023808
 static void sub_8019D4C(void)
 {
     switch (sub_801B410()) {
@@ -854,6 +940,7 @@ static void sub_8019D4C(void)
     }
 }
 
+// arm9.bin::020237D4
 static void ProceedToKecleonBros1FallbackState(void)
 {
     s32 temp;
@@ -862,6 +949,7 @@ static void ProceedToKecleonBros1FallbackState(void)
         SetKecleonBrosState(sKecleonBrosWork1->fallbackState);
 }
 
+// arm9.bin::020237A0
 static u32 CountKecleonItems(void)
 {
     if (sKecleonBrosWork1->isKecleonItemShop)
@@ -870,6 +958,7 @@ static u32 CountKecleonItems(void)
         return CountKecleonWareItems();
 }
 
+// arm9.bin::02023700
 static void KecleonCalcSellPriceForAllItems(void)
 {
     s32 sellPrice;
@@ -889,6 +978,7 @@ static void KecleonCalcSellPriceForAllItems(void)
     }
 }
 
+// arm9.bin::020236B8
 static void SetKecleonPortraitSpriteId(bool32 angrySprite)
 {
     if (sKecleonBrosWork1->isKecleonItemShop) {

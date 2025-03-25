@@ -106,15 +106,15 @@ static void nullsub_35(void);
 static bool8 AppendString(const u8 *, u8 **, u8 *, u16 r3);
 
 // 'd', 'v' and 'V'
-EWRAM_DATA s32 gFormatArgs[10] = {0};
+EWRAM_DATA s32 gFormatArgs[10] = {0}; // NDS=02134278
 // 'i', apparently only i0 and i1 are actually used though it's yet to be verified
-EWRAM_DATA u8 gFormatBuffer_Items[4][FORMAT_BUFFER_LEN] = {0};
+EWRAM_DATA u8 gFormatBuffer_Items[4][FORMAT_BUFFER_LEN] = {0}; // NDS=02134450
 // 'm' which probably stands for 'monster', available through m0 to m9
 EWRAM_DATA u8 gFormatBuffer_Monsters[10][FORMAT_BUFFER_LEN] = {0};
 // 'n' which probably stands for 'name', available through n0 to n9
 EWRAM_DATA u8 gFormatBuffer_Names[10][FORMAT_BUFFER_LEN] = {0};
 // Current textbox's speaker's name
-EWRAM_DATA u8 gSpeakerNameBuffer[FORMAT_BUFFER_LEN] = {0};
+EWRAM_DATA u8 gSpeakerNameBuffer[FORMAT_BUFFER_LEN] = {0}; // NDS=02134400
 // 'h' - Friend Area buffer. This buffer seems larger than others. It's possible it actually has the same length, but there were some unused buffers right after it.
 EWRAM_DATA u8 gFormatBuffer_FriendArea[FRIEND_AREA_BUFFER_LEN] = {0};
 
@@ -220,6 +220,7 @@ void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, MonPortraitMsg 
     CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D4880, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
+// arm9.bin::0201D700
 void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, MonPortraitMsg *monPortraitPtr, u16 flags)
 {
     bool8 portraitOn = FALSE;
@@ -372,10 +373,10 @@ void DrawDialogueBoxString(void)
                         str++;
                      }
                      else {
-                        u32 sp;
+                        u32 chr;
 
-                        str = xxx_get_next_char_from_string(str, &sp);
-                        gUnknown_202E748.unk0 += xxx_call_draw_char(gUnknown_202E748.unk0, gUnknown_202E748.unk2, sp, gUnknown_202E748.unk10, 0);
+                        str = xxx_get_next_char_from_string(str, &chr);
+                        gUnknown_202E748.unk0 += xxx_call_draw_char(gUnknown_202E748.unk0, gUnknown_202E748.unk2, chr, gUnknown_202E748.unk10, 0);
                         gUnknown_202E748.unk2C = gUnknown_202E78C;
                      }
 
@@ -666,6 +667,7 @@ static void UNUSED nullsub_35(void)
 {
 }
 
+// arm9.bin::0201C854
 const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
 {
     u8 txtArray[60];
@@ -853,6 +855,7 @@ static bool8 AppendString(const u8 *str, u8 **dstPtr, u8 *dstMax, u16 flags)
 
 #define FORMAT_STR_MAX_LEN 500
 
+// arm9.bin::0201C7AC
 void PrintFormattedStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr)
 {
     u8 formattedString[FORMAT_STR_MAX_LEN];
@@ -862,6 +865,7 @@ void PrintFormattedStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32
     PrintStringOnWindow(x, y, formattedString, windowId, terminatingChr);
 }
 
+// arm9.bin::0201C750
 void PrintFormattedStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
 {
     u8 formattedString[FORMAT_STR_MAX_LEN];

@@ -3,7 +3,7 @@
 
 #include "constants/item.h"
 
-// size: 0x20
+// size: R=0x20 | B=?
 typedef struct ItemDataEntry
 {
     /* 0x0 */ u8 *name;
@@ -25,6 +25,23 @@ typedef struct ItemDataEntry
 } ItemDataEntry;
 
 // size: 0x4
+typedef struct Gummi
+{
+    /* 0x0 */ s16 boostAmount;
+    /* 0x2 */ u16 flags;
+} Gummi;
+
+// size: R=0xC | B=0x9?
+typedef struct unkStruct_8090F58
+{
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u8 unk4;
+    /* 0x5 */ u8 unk5;
+    /* 0x6 */ s16 unk6;
+    /* 0x8 */ u8 unk8;
+} unkStruct_8090F58;
+
+// size: R=0x4 | B=0x3
 typedef struct Item
 {
     /* 0x0 */ u8 flags;
@@ -32,39 +49,22 @@ typedef struct Item
     /* 0x2 */ u8 id;
 } Item;
 
-// size: 0x4
+// size: R=0x4 | B=0x2
 typedef struct BulkItem
 {
     /* 0x0 */ u8 id;
     /* 0x1 */ u8 quantity;
 } BulkItem;
 
-// size: 0x4
-typedef struct Gummi
-{
-    /* 0x0 */ s16 boostAmount;
-    /* 0x2 */ u16 flags;
-} Gummi;
-
-// size: 0xC
-typedef struct unkStruct_8090F58
-{
-    u32 unk0;
-    u8 unk4;
-    u8 unk5;
-    s16 unk6;
-    u8 unk8;
-} unkStruct_8090F58;
-
-// size: 0x268
+// size: R=0x268 | B=0x23C
 typedef struct TeamInventory
 {
-    /* 0x0 */ Item teamItems[INVENTORY_SIZE];
-    /* 0x50 */ u16 teamStorage[STORAGE_SIZE];
-    /* 0x230 */ BulkItem kecleonShopItems[MAX_KECLEON_ITEM_SHOP_ITEMS];
-    /* 0x250 */ BulkItem kecleonWareItems[MAX_KECLEON_WARE_SHOP_ITEMS];
-    /* 0x260 */ s32 teamMoney;
-    /* 0x264 */ s32 teamSavings;
+    /* R=0x0   | B=0x0   */ Item teamItems[INVENTORY_SIZE];
+    /* R=0x50  | B=0x3C  */ u16 teamStorage[STORAGE_SIZE];
+    /* R=0x230 | B=0x21C */ BulkItem kecleonShopItems[MAX_KECLEON_ITEM_SHOP_ITEMS];
+    /* R=0x250 | B=0x22C */ BulkItem kecleonWareItems[MAX_KECLEON_WARE_SHOP_ITEMS];
+    /* R=0x260 | B=0x234 */ s32 teamMoney;
+    /* R=0x264 | B=0x238 */ s32 teamSavings;
 } TeamInventory;
 
 // TODO: These should be in constants/

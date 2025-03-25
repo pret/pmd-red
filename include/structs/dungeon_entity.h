@@ -47,7 +47,7 @@ typedef struct ActionContainer
     /* 0x14 */ DungeonPos itemTargetPosition;
 } ActionContainer;
 
-// size: 0x4
+// size: R=0x4 | B=0x3
 typedef struct HiddenPower
 {
     /* 0x0 */ s16 hiddenPowerBasePower;
@@ -183,11 +183,11 @@ typedef struct Unk_Entity_x184
     /* 0x19e - 0x1a */ u8 unk1A;
 } Unk_Entity_x184;
 
-// size: 0x24
+// size: R=0x24 | B=0x19?
 typedef struct Moves
 {
-    /* 0x0 */ Move moves[MAX_MON_MOVES];
-    /* 0x20 */ u8 struggleMoveFlags;
+    /* R=0x0  | B=0x0  */ Move moves[MAX_MON_MOVES];
+    /* R=0x20 | B=0x18 */ u8 struggleMoveFlags;
 } Moves;
 
 // size: 0x208

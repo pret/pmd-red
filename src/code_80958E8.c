@@ -1428,6 +1428,7 @@ u32 SaveMailInfo(u8 *r0, u32 size)
     return backup.count;
 }
 
+// arm9.bin::020662A0
 void ReadWonderMailBits(DataSerializer *a, WonderMail *b)
 {
     ReadBits(a, &b->mailType, 4);
@@ -1443,6 +1444,7 @@ void ReadWonderMailBits(DataSerializer *a, WonderMail *b)
     ReadDungeonLocationBits(a, &b->unk4.dungeon);
 }
 
+// arm9.bin::020661E4
 void WriteWonderMailBits(DataSerializer *a, WonderMail *b)
 {
     WriteBits(a, &b->mailType, 4);

@@ -36,12 +36,14 @@ extern const u8 *gUnknown_8113870[];
 
 extern struct unkStruct_8113080 gSpecialDeathText[];
 
+// arm9.bin::02064154
 void ReadBellyBits(DataSerializer *r0, FixedPoint *dst)
 {
     ReadBits(r0, &dst->unk0, 16);
     ReadBits(r0, &dst->unk2, 16);
 }
 
+// arm9.bin::02064124
 void WriteBellyBits(DataSerializer *r0, FixedPoint *src)
 {
     WriteBits(r0, &src->unk0, 16);

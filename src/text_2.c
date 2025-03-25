@@ -24,9 +24,9 @@ static bool8 xxx_update_bg_vram(Window *windows);
 // TODO: Find these funcs in blue. DTCM funcs
 
 // In NDS, this func is copied to 01FF9F34
-u32 xxx_call_draw_char(s32 x, s32 y, u32 a2, u32 color, u32 a4)
+u32 xxx_call_draw_char(s32 x, s32 y, u32 chr, u32 color, u32 windowId)
 {
-    return xxx_draw_char(gWindows, x, y, a2, color, a4);
+    return xxx_draw_char(gWindows, x, y, chr, color, windowId);
 }
 
 UNUSED static bool8 sub_8007464(void)
@@ -35,7 +35,7 @@ UNUSED static bool8 sub_8007464(void)
 }
 
 // In NDS, this func is copied to 01FF994C
-u32 xxx_draw_char(Window *windows, s32 x, s32 y, u32 a3, u32 color, u32 windowId)
+u32 xxx_draw_char(Window *windows, s32 x, s32 y, u32 chr, u32 color, u32 windowId)
 {
     u32 *r3;
     const unkShiftData *shiftData;
@@ -52,13 +52,13 @@ u32 xxx_draw_char(Window *windows, s32 x, s32 y, u32 a3, u32 color, u32 windowId
     u32 r2;
 
     if (gCurrentCharmap == 1) {
-        if (a3 == 0x70 || a3 == 0x6A || a3 == 0x71 || a3 == 0x79 || a3 == 0x67)
+        if (chr == 0x70 || chr == 0x6A || chr == 0x71 || chr == 0x79 || chr == 0x67)
             y += 2;
-        else if (a3 == 0x8199)
+        else if (chr == 0x8199)
             y -= 2;
     }
 
-    sp0 = GetCharacter(a3);
+    sp0 = GetCharacter(chr);
     local_44 = sp0->unk0;
     ASM_MATCH_TRICK(local_3c); // stack doesn't match without it
     local_3c = sp0->unk0;
@@ -226,6 +226,7 @@ u32 xxx_draw_char(Window *windows, s32 x, s32 y, u32 a3, u32 color, u32 windowId
     return sp0->unk6 + gCharacterSpacing;
 }
 
+// Copied to 01ff98f8 in NDS
 void AddDoubleUnderScoreHighlight(u32 windowId, s32 x, s32 y, s32 width, u32 color)
 {
     AddUnderScoreHighlight(windowId, x, y, width, color);
@@ -854,7 +855,7 @@ static s32 HexDigitValue(u8 chr)
 }
 
 // In NDS, this func is copied to 01FF8D80
-const u8 *xxx_get_next_char_from_string(const u8 *a1, u32 *a0)
+const u8 *xxx_get_next_char_from_string(const u8 *a1, u32 *dstChr)
 {
     s32 currChr = *a1;
     if (currChr == 0x7E) {
@@ -868,15 +869,15 @@ const u8 *xxx_get_next_char_from_string(const u8 *a1, u32 *a0)
                 a1++;
             }
         }
-        *a0 = hexDigit;
+        *dstChr = hexDigit;
         return a1;
     }
     else if ((currChr >= 0x81 && currChr <= 0x84) || currChr == 0x87) {
-        *a0 = a1[1] | (a1[0] << 8);
+        *dstChr = a1[1] | (a1[0] << 8);
         return a1 + 2;
     }
     else {
-        *a0 = currChr;
+        *dstChr = currChr;
         return a1 + 1;
     }
 }
@@ -1237,9 +1238,10 @@ void sub_80089AC(const WindowTemplate *r4, DungeonPos *r5_Str)
     }
 }
 
-void CallPrepareTextbox_8008C54(u32 strId)
+// Copied to 01FF818C in NDS
+void CallPrepareTextbox_8008C54(u32 windowId)
 {
-    PrepareTextbox_8008C6C(gWindows, strId);
+    PrepareTextbox_8008C6C(gWindows, windowId);
 }
 
 UNUSED static void nullsub_169(void)

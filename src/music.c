@@ -196,6 +196,7 @@ u16 GetCurrentBGSong(void)
     return sCurrentBGSong;
 }
 
+// arm9.bin::0200ADB8
 void PlayFanfareSE(u16 songIndex, u16 volume)
 {
     u16 playerIndex;

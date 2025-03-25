@@ -26,11 +26,17 @@ extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)
 extern const char *gUnknown_810AF50[];
 extern u8 gUnknown_8108F64[0x3f][32];  // some sort of bit lookup table
 extern u8 gInvalidItemIDs[0x10];
+extern const u8 gUnknown_8109770[];
+extern const u8 gUnknown_8109778[];
+extern const u8 gUnknown_810977C[];
+extern const u8 gUnknown_8109784[];
+extern const u8 gUnknown_810978C[];
+extern const u16* gUnknown_8108E58[];
 
-EWRAM_DATA OpenedFile *gItemParametersFile = {0};
-EWRAM_DATA ItemDataEntry *gItemParametersData = {0};
-EWRAM_DATA TeamInventory gTeamInventory = {0};
-EWRAM_INIT TeamInventory *gTeamInventoryRef = {NULL};
+EWRAM_DATA OpenedFile *gItemParametersFile = {NULL};
+EWRAM_DATA ItemDataEntry *gItemParametersData = {NULL}; // NDS=0213BEF0
+EWRAM_DATA TeamInventory gTeamInventory = {0}; // NDS=0213BEF8
+EWRAM_INIT TeamInventory *gTeamInventoryRef = {NULL}; // NDS=020EAF98
 
 extern void SortKecleonShopInventory();
 bool8 AddKecleonWareItem(u8);
@@ -39,40 +45,40 @@ bool8 AddKecleonWareItem(u8);
 
 static void sub_8090F58(u8 *, u8 *, Item *, const unkStruct_8090F58 *);
 
+// arm9.bin::020610C0
 void LoadItemParameters(void)
 {
-  gTeamInventoryRef = &gTeamInventory;
-  gItemParametersFile = OpenFileAndGetFileDataPtr(gItemParaFileName,&gSystemFileArchive);
-  gItemParametersData = (ItemDataEntry *) gItemParametersFile->data;
+    gTeamInventoryRef = &gTeamInventory;
+    gItemParametersFile = OpenFileAndGetFileDataPtr(gItemParaFileName, &gSystemFileArchive);
+    gItemParametersData = (ItemDataEntry *) gItemParametersFile->data;
+    // More in NDS including loading to vram and UnusedGetSir0Ptr()
 }
 
+// arm9.bin::020610b4
 TeamInventory *GetMoneyItemsInfo(void)
 {
     return &gTeamInventory;
 }
 
+// arm9.bin::02061034
 void InitializeMoneyItems(void)
 {
-  s32 i;
+    s32 i;
 
-  for(i = 0; i < INVENTORY_SIZE; i++)
-  {
-    gTeamInventoryRef->teamItems[i].flags = 0;
-  }
+    for (i = 0; i < INVENTORY_SIZE; i++)
+        gTeamInventoryRef->teamItems[i].flags = 0;
 
-  for(i = 0; i < STORAGE_SIZE; i++)
-  {
-    gTeamInventoryRef->teamStorage[i] = 0;
-  }
+    for (i = 0; i < STORAGE_SIZE; i++)
+        gTeamInventoryRef->teamStorage[i] = 0;
 
-  for(i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++)
-  {
-    InitKecleonShopItem(i);
-  }
-  gTeamInventoryRef->teamMoney = 0;
-  gTeamInventoryRef->teamSavings = 0;
+    for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++)
+        InitKecleonShopItem(i);
+
+    gTeamInventoryRef->teamMoney = 0;
+    gTeamInventoryRef->teamSavings = 0;
 }
 
+// arm9.bin::02060FE4
 s32 GetNumberOfFilledInventorySlots(void)
 {
   s32 i;
@@ -88,6 +94,7 @@ s32 GetNumberOfFilledInventorySlots(void)
   return count;
 }
 
+// arm9.bin::02060FB0
 bool8 IsThrowableItem(u8 id)
 {
   if ((GetItemCategory(id) != CATEGORY_THROWN_LINE) && (GetItemCategory(id) != CATEGORY_THROWN_ARC))
@@ -96,6 +103,7 @@ bool8 IsThrowableItem(u8 id)
     return TRUE;
 }
 
+// arm9.bin::02060F04
 void ItemIdToSlot(Item *slot, u8 id, u8 makeSticky)
 {
     if (id != ITEM_NOTHING) {
@@ -124,6 +132,7 @@ void ItemIdToSlot(Item *slot, u8 id, u8 makeSticky)
     }
 }
 
+// arm9.bin::02060E80
 void xxx_init_helditem_8090B08(BulkItem *held, u8 id)
 {
   u32 uVar2;
@@ -147,6 +156,7 @@ void xxx_init_helditem_8090B08(BulkItem *held, u8 id)
   }
 }
 
+// arm9.bin::02060DF0
 void HeldItemToSlot(Item *slot, BulkItem *held)
 {
     u8 is_throwable;
@@ -171,117 +181,110 @@ void HeldItemToSlot(Item *slot, BulkItem *held)
     }
 }
 
-void SlotToHeldItem(BulkItem *held,Item *slot)
+// arm9.bin::02060DC0
+void SlotToHeldItem(BulkItem *held, Item *slot)
 {
-  if ((slot->flags & ITEM_FLAG_EXISTS) != 0) {
-    held->id = slot->id;
-    held->quantity = slot->quantity;
-  }
-  else {
-    held->id = ITEM_NOTHING;
-  }
+    if ((slot->flags & ITEM_FLAG_EXISTS) != 0) {
+        held->id = slot->id;
+        held->quantity = slot->quantity;
+    }
+    else
+        held->id = ITEM_NOTHING;
 }
 
+// arm9.bin::02060DA8
 u8 GetItemCategory(u8 index)
 {
     return gItemParametersData[index].category;
 }
 
+// arm9.bin::02060D44
 s32 GetStackBuyValue(Item *param_1)
 {
-  if (param_1->id == ITEM_POKE) {
-    return GetMoneyValue(param_1);
-  }
-  else {
-    if (IsThrowableItem(param_1->id)) {
-      return gItemParametersData[param_1->id].buyPrice * param_1->quantity;
-    }
-    else {
-      return gItemParametersData[param_1->id].buyPrice;
-    }
-  }
+    if (param_1->id == ITEM_POKE)
+        return GetMoneyValue(param_1);
+    else if (IsThrowableItem(param_1->id))
+        return gItemParametersData[param_1->id].buyPrice * param_1->quantity;
+    else
+        return gItemParametersData[param_1->id].buyPrice;
 }
 
+// arm9.bin::02060CE0
 s32 GetStackSellValue(Item *param_1)
 {
-  if (param_1->id == ITEM_POKE) {
-    return GetMoneyValue(param_1);
-  }
-  else {
-    if (IsThrowableItem(param_1->id)) {
-      return gItemParametersData[param_1->id].sellPrice * param_1->quantity;
-    }
-    else {
-      return gItemParametersData[param_1->id].sellPrice;
-    }
-  }
+    if (param_1->id == ITEM_POKE)
+        return GetMoneyValue(param_1);
+    else if (IsThrowableItem(param_1->id))
+        return gItemParametersData[param_1->id].sellPrice * param_1->quantity;
+    else
+        return gItemParametersData[param_1->id].sellPrice;
 }
 
+// arm9.bin::02060C7C
 s32 GetStackBuyPrice(Item *param_1)
 {
-  if (!CanSellItem(param_1->id)) {
-    return 0;
-  }
-  else {
-    if (IsThrowableItem(param_1->id)) {
-      return gItemParametersData[param_1->id].buyPrice * param_1->quantity;
-    }
-    else {
-      return gItemParametersData[param_1->id].buyPrice;
-    }
-  }
+    if (!CanSellItem(param_1->id))
+        return 0;
+    else if (IsThrowableItem(param_1->id))
+        return gItemParametersData[param_1->id].buyPrice * param_1->quantity;
+    else
+        return gItemParametersData[param_1->id].buyPrice;
 }
 
+// arm9.bin::02060C18
 s32 GetStackSellPrice(Item *param_1)
 {
-  if (!CanSellItem(param_1->id)) {
-    return 0;
-  }
-  else {
-    if (IsThrowableItem(param_1->id)) {
-      return gItemParametersData[param_1->id].sellPrice * param_1->quantity;
-    }
-    else {
-      return gItemParametersData[param_1->id].sellPrice;
-    }
-  }
+    if (!CanSellItem(param_1->id))
+        return 0;
+    else if (IsThrowableItem(param_1->id))
+        return gItemParametersData[param_1->id].sellPrice * param_1->quantity;
+    else
+        return gItemParametersData[param_1->id].sellPrice;
 }
 
+// arm9.bin::02060C00
 s32 GetItemBuyPrice(u8 id)
 {
     return gItemParametersData[id].buyPrice;
 }
 
+// arm9.bin::02060BE8
 s32 GetItemSellPrice(u8 id)
 {
     return gItemParametersData[id].sellPrice;
 }
 
+// arm9.bin::02060BD0
 s32 GetItemOrder(u8 id)
 {
     return gItemParametersData[id].order;
 }
 
+// arm9.bin::02060BB8
 s32 GetItemPalette(u8 id)
 {
     return gItemParametersData[id].palette;
 }
 
+// arm9.bin::02060BA0
 u32 GetItemActionType(u8 id)
 {
     return gItemParametersData[id].actionType;
 }
 
+// arm9.bin::02060B84
 u32 GetSpawnAmountRange(u8 id, u32 rangeIndex)
 {
     return gItemParametersData[id].spawnAmountRange[rangeIndex];
 }
 
+// arm9.bin::02060B6C
 u8 *GetItemDescription(u8 id)
 {
     return gItemParametersData[id].description;
 }
 
+// arm9.bin::02060B50
 bool8 TestItemAIFlag(u8 id, u32 aiFlag)
 {
     return gItemParametersData[id].aiFlags[aiFlag];
@@ -290,30 +293,26 @@ bool8 TestItemAIFlag(u8 id, u32 aiFlag)
 // a2 is always NULL
 // This func probably appends the quantity of 1, but I haven't checked
 // If it appends quantity, we can rename the func
+// arm9.bin::02060AEC
 void BufferItemName(u8* dest, u8 id, struct unkStruct_8090F58* a2)
 {
-  char acStack104 [80];
-  Item unkItem;
+    u8 acStack104[80]; // 85 in NDS
+    Item unkItem;
 
-  strncpy(acStack104, gItemParametersData[id].name, 80);
-  ItemIdToSlot(&unkItem, id, 0);
-  unkItem.quantity = 1;
-  sub_8090F58(dest, acStack104, &unkItem, a2);
+    strncpy(acStack104, gItemParametersData[id].name, 80);
+    ItemIdToSlot(&unkItem, id, 0);
+    unkItem.quantity = 1;
+    sub_8090F58(dest, acStack104, &unkItem, a2);
 }
 
-extern const u8 gUnknown_8109770[];
-extern const u8 gUnknown_8109778[];
-extern const u8 gUnknown_810977C[];
-extern const u8 gUnknown_8109784[];
-extern const u8 gUnknown_810978C[];
-
-void sub_8090E14(u8* ext_buffer, Item* slot, const struct unkStruct_8090F58* a3) {
+// arm9.bin::020608CC
+void sub_8090E14(u8* ext_buffer, Item* slot, const struct unkStruct_8090F58* a3)
+{
   s32 unk8 = 0;
-  u8 buffer[80];
+  u8 buffer[80]; // 84 in NDS
 
-  if (a3) {
+  if (a3)
     unk8 = a3->unk8 != 0;
-  }
 
   if (GetItemCategory(slot->id) == CATEGORY_THROWN_LINE) {
     // I feel like these labels might actually be there...
@@ -367,10 +366,12 @@ void sub_8090E14(u8* ext_buffer, Item* slot, const struct unkStruct_8090F58* a3)
   return;
 }
 
-static void sub_8090F58(u8* a1, u8 *a2, Item *slot, const struct unkStruct_8090F58* a4) {
+// arm9.bin::020607E4
+static void sub_8090F58(u8* a1, u8 *a2, Item *slot, const struct unkStruct_8090F58* a4)
+{
   u32 unk0;
   s32 value;
-  u8 buffer[40];
+  u8 buffer[40]; // 44 in NDS
 
   if (!a4) {
     strncpy(a1, a2, 80);
@@ -408,6 +409,7 @@ static void sub_8090F58(u8* a1, u8 *a2, Item *slot, const struct unkStruct_8090F
   }
 }
 
+// arm9.bin::020606E0
 s32 WriteHighDecimal(s32 a1, u8 *strbuf, u8 a3)
 {
   s32 i, count;
@@ -450,6 +452,7 @@ s32 WriteHighDecimal(s32 a1, u8 *strbuf, u8 a3)
   return count;
 }
 
+// arm9.bin::02060614
 void FillInventoryGaps()
 {
   // fill inventory gaps
@@ -483,24 +486,30 @@ void FillInventoryGaps()
   }
 }
 
+// arm9.bin::020605A4
 s32 FindItemInInventory(u8 id)
 {
-  s32 i;
-  for (i = 0; i < INVENTORY_SIZE; i++) {
-    if ((gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_EXISTS) && (gTeamInventoryRef->teamItems[i].id == id)) {
-      return i;
+    s32 i;
+
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        if ((gTeamInventoryRef->teamItems[i].flags & ITEM_FLAG_EXISTS)
+            && gTeamInventoryRef->teamItems[i].id == id) {
+            return i;
+        }
     }
-  }
-  return -1;
+
+    return -1;
 }
 
+// arm9.bin::02060540
 s32 GetItemCountInInventory(u8 id)
 {
     s32 i;
     s32 count = 0;
 
     for (i = 0; i < INVENTORY_SIZE; i++) {
-        if (ItemExists(&gTeamInventoryRef->teamItems[i]) && gTeamInventoryRef->teamItems[i].id == id) {
+        if (ItemExists(&gTeamInventoryRef->teamItems[i])
+            && gTeamInventoryRef->teamItems[i].id == id) {
             count++;
         }
     }
@@ -508,6 +517,7 @@ s32 GetItemCountInInventory(u8 id)
     return count;
 }
 
+// arm9.bin::0206049C
 s32 GetItemPossessionCount(u8 id)
 {
     s32 count = GetItemCountInInventory(id);
@@ -526,37 +536,44 @@ s32 GetItemPossessionCount(u8 id)
     return count;
 }
 
+// arm9.bin::0206042C
 void ShiftItemsDownFrom(s32 start)
 {
-  s32 i, j;
-  for (i = start, j = start + 1; i < INVENTORY_SIZE - 1; i++, j++) {
-    gTeamInventoryRef->teamItems[i] = gTeamInventoryRef->teamItems[j];
-  }
-  gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].id = ITEM_NOTHING;
-  gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].flags = 0;
+    s32 i, j;
+
+    for (i = start, j = start + 1; i < INVENTORY_SIZE - 1; i++, j++)
+        gTeamInventoryRef->teamItems[i] = gTeamInventoryRef->teamItems[j];
+
+    gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].id = ITEM_NOTHING;
+    gTeamInventoryRef->teamItems[INVENTORY_SIZE - 1].flags = 0;
 }
 
+// arm9.bin::02060400
 void ClearItemSlotAt(u32 index)
 {
-  gTeamInventoryRef->teamItems[index].id = ITEM_NOTHING;
-  gTeamInventoryRef->teamItems[index].flags = 0;
+    gTeamInventoryRef->teamItems[index].id = ITEM_NOTHING;
+    gTeamInventoryRef->teamItems[index].flags = 0;
 }
 
+// arm9.bin::020603D4
 bool8 sub_809124C(u8 id, u8 param_3)
 {
-  Item temp;
-  ItemIdToSlot(&temp, id, param_3);
-  return AddItemToInventory(&temp);
+    Item temp;
+
+    ItemIdToSlot(&temp, id, param_3);
+    return AddItemToInventory(&temp);
 }
 
+// arm9.bin::020603B0
 bool8 AddHeldItemToInventory(BulkItem* slot)
 {
-  Item temp;
+    Item temp;
 
-  HeldItemToSlot(&temp, slot);
-  return AddItemToInventory(&temp);
+    HeldItemToSlot(&temp, slot);
+    return AddItemToInventory(&temp);
 }
 
+// arm9.bin::02060330
 bool8 AddItemToInventory(const Item* slot)
 {
     s32 i;
@@ -571,6 +588,7 @@ bool8 AddItemToInventory(const Item* slot)
     return TRUE;
 }
 
+// arm9.bin::02060178
 void ConvertMoneyItemToMoney(void)
 {
     s32 i, j;
@@ -608,167 +626,167 @@ void ConvertMoneyItemToMoney(void)
     FillInventoryGaps();
 }
 
+// arm9.bin::02060134
 void AddToTeamMoney(s32 amount)
 {
-  s32 clamped_money;
-  gTeamInventoryRef->teamMoney += amount;
+    s32 clamped_money;
 
-  // clamp money
-  clamped_money = MAX_TEAM_MONEY;
-  if (gTeamInventoryRef->teamMoney <= MAX_TEAM_MONEY) {
-    if (gTeamInventoryRef->teamMoney >= 0) {
-      return;
+    gTeamInventoryRef->teamMoney += amount;
+
+    // clamp money
+    clamped_money = MAX_TEAM_MONEY;
+
+    if (gTeamInventoryRef->teamMoney <= MAX_TEAM_MONEY) {
+        if (gTeamInventoryRef->teamMoney >= 0)
+            return;
+
+        clamped_money = 0;
     }
-    clamped_money = 0;
-  }
-  gTeamInventoryRef->teamMoney = clamped_money;
+
+    gTeamInventoryRef->teamMoney = clamped_money;
 }
 
+// arm9.bin::0206011C
 u16 GetItemMoveID(u8 index)
 {
-  return gItemParametersData[index].moveID;
+    return gItemParametersData[index].moveID;
 }
 
-u32 sub_80913E0(Item* slot, u32 a2, STATUSTEXTS(statuses))
+// arm9.bin::0205FFA0
+u32 sub_80913E0(Item* slot, u32 windowId, STATUSTEXTS(statuses))
 {
-  u8 buffer88[88];  // some struct
+    u8 buffer88[88]; // some struct
 
-  GetItemDescription(slot->id);
-  BufferItemName(buffer88, slot->id, NULL);
-  if (slot->id == ITEM_TM_USED_TM) {
-    // empty TM
-    BufferItemName(gFormatBuffer_Items[0], (u8)(slot->quantity + 125), NULL);
-  }
-  sub_80073B8(a2);
-  PrintFormattedStringOnWindow(16, 0, buffer88, a2, 0);
+    GetItemDescription(slot->id);
+    BufferItemName(buffer88, slot->id, NULL);
 
-  PrintFormattedStringOnWindow(8, 24, GetItemDescription(slot->id), a2, 0);
-  if (GetItemCategory(slot->id) == CATEGORY_TMS_HMS) {
-    Move *buffer8 = (Move*) (buffer88 + 80);  // field in struct
-    u16 move = GetItemMoveID(slot->id);
-    u8 moves_data;
-    const u8* typestring;
-    u32 result;
+    if (slot->id == ITEM_TM_USED_TM) {
+        // empty TM
+        BufferItemName(gFormatBuffer_Items[0], (u8)(slot->quantity + 125), NULL);
+    }
 
-    InitPokemonMove(buffer8, move);
-    AddDoubleUnderScoreHighlight(a2, 4, 82, 200, COLOR_WHITE_2);
-    PrintFormattedStringOnWindow(4, 84, gPtrTypeText, a2, 0);
-    moves_data = GetMoveType(buffer8);
-    typestring = GetUnformattedTypeString(moves_data);
-    PrintFormattedStringOnWindow(64, 84, typestring, a2, 0);
-    result = GetMoveBasePP(buffer8);
-    gFormatArgs[0] = result;
-    PrintFormattedStringOnWindow(128, 84, gPtrPPD0Text, a2, 0);
-  }
+    sub_80073B8(windowId);
+    PrintFormattedStringOnWindow(16, 0, buffer88, windowId, 0);
+    PrintFormattedStringOnWindow(8, 24, GetItemDescription(slot->id), windowId, 0);
 
-  sub_80073E0(a2);
-  return PrepareStatusStringArrays(GetItemDescription(slot->id), statuses);
+    if (GetItemCategory(slot->id) == CATEGORY_TMS_HMS) {
+        Move *buffer8 = (Move*) (buffer88 + 80); // field in struct
+        u16 move = GetItemMoveID(slot->id);
+        u8 moves_data;
+        const u8* typestring;
+        u32 result;
+
+        InitPokemonMove(buffer8, move);
+        AddDoubleUnderScoreHighlight(windowId, 4, 82, 200, COLOR_WHITE_2);
+        PrintFormattedStringOnWindow(4, 84, gPtrTypeText, windowId, 0);
+        moves_data = GetMoveType(buffer8);
+        typestring = GetUnformattedTypeString(moves_data);
+        PrintFormattedStringOnWindow(64, 84, typestring, windowId, 0);
+        result = GetMoveBasePP(buffer8);
+        gFormatArgs[0] = result;
+        PrintFormattedStringOnWindow(128, 84, gPtrPPD0Text, windowId, 0);
+    }
+
+    sub_80073E0(windowId);
+    return PrepareStatusStringArrays(GetItemDescription(slot->id), statuses);
 }
 
+// arm9.bin::0205FF28
 bool8 CanSellItem(u32 id)
 {
-  u8 id_;
-  id = (u8)id;
-  id_ = id;
+    u8 id_;
+    id = (u8)id;
+    id_ = id;
 
-  if (id != ITEM_NOTHING
-      && id != ITEM_POKE
-      && id != ITEM_ROCK_PART
-      && id != ITEM_ICE_PART
-      && id != ITEM_STEEL_PART
-      && id != ITEM_MUSIC_BOX
-      && GetItemSellPrice(id_)
-      && GetItemBuyPrice(id_))
-          return TRUE;
+    if (id != ITEM_NOTHING
+        && id != ITEM_POKE
+        && id != ITEM_ROCK_PART
+        && id != ITEM_ICE_PART
+        && id != ITEM_STEEL_PART
+        && id != ITEM_MUSIC_BOX
+        && GetItemSellPrice(id_)
+        && GetItemBuyPrice(id_))
+        return TRUE;
 
     return FALSE;
 }
 
+// arm9.bin::0205FEFC
 bool8 IsNotMoneyOrUsedTMItem(u8 id)
 {
-  if (id == ITEM_NOTHING) {
-    return FALSE;
-  }
-  else if (id == ITEM_POKE) {
-    return FALSE;
-  }
-  else if (id == ITEM_TM_USED_TM) {
-    return FALSE;
-  }
-  return TRUE;
+    if (id == ITEM_NOTHING)
+        return FALSE;
+    if (id == ITEM_POKE)
+        return FALSE;
+    if (id == ITEM_TM_USED_TM)
+        return FALSE;
+    return TRUE;
 }
 
+// arm9.bin::0205FEAC
 bool8 IsNotSpecialItem(u8 id)
 {
-  if (id == ITEM_NOTHING) {
-    return FALSE;
-  }
-  else if (id == ITEM_POKE) {
-    return FALSE;
-  }
-  else if (id == ITEM_ROCK_PART) {
-    return FALSE;
-  }
-  else if (id == ITEM_ICE_PART) {
-    return FALSE;
-  }
-  else if (id == ITEM_STEEL_PART) {
-    return FALSE;
-  }
-  else if (id == ITEM_MUSIC_BOX) {
-    return FALSE;
-  }
-  return TRUE;
+    if (id == ITEM_NOTHING)
+        return FALSE;
+    if (id == ITEM_POKE)
+        return FALSE;
+    if (id == ITEM_ROCK_PART)
+        return FALSE;
+    if (id == ITEM_ICE_PART)
+        return FALSE;
+    if (id == ITEM_STEEL_PART)
+        return FALSE;
+    if (id == ITEM_MUSIC_BOX)
+        return FALSE;
+    return TRUE;
 }
 
+// arm9.bin::0205FE78
 bool8 IsEdibleItem(u8 id)
 {
-  if (!((GetItemCategory(id) == CATEGORY_BERRIES_SEEDS_VITAMINS) || (GetItemCategory(id) == CATEGORY_FOOD_GUMMIES))) {
-    return FALSE;
-  }
-  return TRUE;
+    if (!(GetItemCategory(id) == CATEGORY_BERRIES_SEEDS_VITAMINS
+        || GetItemCategory(id) == CATEGORY_FOOD_GUMMIES)) {
+        return FALSE;
+    }
+    return TRUE;
 }
 
+// arm9.bin::0205FE10
 bool8 IsHMItem(u8 id)
 {
-  if (id == ITEM_HM_CUT) {
-    return TRUE;
-  }
-  else if (id == ITEM_HM_FLY) {
-    return TRUE;
-  }
-  else if (id == ITEM_HM_SURF) {
-    return TRUE;
-  }
-  else if (id == ITEM_HM_STRENGTH) {
-    return TRUE;
-  }
-  else if (id == ITEM_HM_FLASH) {
-    return TRUE;
-  }
-  else if (id == ITEM_HM_ROCK_SMASH) {
-    return TRUE;
-  }
-  else if (id == ITEM_HM_WATERFALL) {
-    return TRUE;
-  }
-  else if (id == ITEM_HM_DIVE) {
-    return TRUE;
-  }
-  return FALSE;
+    if (id == ITEM_HM_CUT)
+        return TRUE;
+    if (id == ITEM_HM_FLY)
+        return TRUE;
+    if (id == ITEM_HM_SURF)
+        return TRUE;
+    if (id == ITEM_HM_STRENGTH)
+        return TRUE;
+    if (id == ITEM_HM_FLASH)
+        return TRUE;
+    if (id == ITEM_HM_ROCK_SMASH)
+        return TRUE;
+    if (id == ITEM_HM_WATERFALL)
+        return TRUE;
+    if (id == ITEM_HM_DIVE)
+        return TRUE;
+    return FALSE;
 }
 
+// arm9.bin::0205FDFC
 u32 GetMoneyValue(Item* slot)
 {
-  return gUnknown_810A3F0[slot->quantity];
+    return gUnknown_810A3F0[slot->quantity];
 }
 
+// arm9.bin::0205FDE8
 u32 GetMoneyValueHeld(BulkItem* slot)
 {
-  // potentially different slot type (used for held item)
-  return gUnknown_810A3F0[slot->quantity];
+    // potentially different slot type (used for held item)
+    return gUnknown_810A3F0[slot->quantity];
 }
 
+// arm9.bin::0205FC30
 void GetGummiItemStatBoost(PokemonStruct1* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi)
 {
   // item stat buff?
@@ -863,337 +881,383 @@ void GetGummiItemStatBoost(PokemonStruct1* pokemon, u8 id, bool8 checkBoostFlags
   }
 }
 
+// arm9.bin::0205FC10
 bool8 IsGummiItem(u8 id)
 {
-  if (id < ITEM_WHITE_GUMMI) {
-    return FALSE;
-  }
-  if (id > ITEM_SILVER_GUMMI) {
-    return FALSE;
-  }
-  return TRUE;
+    if (id < ITEM_WHITE_GUMMI)
+        return FALSE;
+    if (id > ITEM_SILVER_GUMMI)
+        return FALSE;
+    return TRUE;
 }
 
+// arm9.bin::0205FBA4
 bool8 HasGummiItem(void)
 {
     s32 i;
+
     for (i = 0; i < INVENTORY_SIZE; i++) {
-        if (ItemExists(&gTeamInventoryRef->teamItems[i]) && IsGummiItem(gTeamInventoryRef->teamItems[i].id)) {
+        if (ItemExists(&gTeamInventoryRef->teamItems[i])
+            && IsGummiItem(gTeamInventoryRef->teamItems[i].id)) {
             return TRUE;
         }
     }
+
     return FALSE;
 }
 
+// arm9.bin::0205FB18
 void MoveToStorage(Item* slot)
 {
-  if (IsThrowableItem(slot->id)) {
-    gTeamInventoryRef->teamStorage[slot->id] += slot->quantity;
-  }
-  else {
-    gTeamInventoryRef->teamStorage[slot->id]++;
-  }
+    if (IsThrowableItem(slot->id))
+        gTeamInventoryRef->teamStorage[slot->id] += slot->quantity;
+    else
+        gTeamInventoryRef->teamStorage[slot->id]++;
 
-  if (gTeamInventoryRef->teamStorage[slot->id] > 999) {
-    gTeamInventoryRef->teamStorage[slot->id] = 999;
-  }
+    if (gTeamInventoryRef->teamStorage[slot->id] > 999)
+        gTeamInventoryRef->teamStorage[slot->id] = 999;
 }
 
+// arm9.bin::0205FAE4
 s32 CountKecleonShopItems(void)
 {
-  s32 i;
-  s32 counter = 0;
-  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    if (gTeamInventoryRef->kecleonShopItems[i].id) {
-      counter++;
+    s32 i;
+    s32 counter = 0;
+
+    for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
+        if (gTeamInventoryRef->kecleonShopItems[i].id)
+            counter++;
     }
-  }
-  return counter;
+
+    return counter;
 }
 
+// arm9.bin::0205FAC0
 void InitKecleonShopItem(u8 index)
 {
-  BulkItem* shopItem;
+    BulkItem* shopItem;
 
-  shopItem = &gTeamInventoryRef->kecleonShopItems[index];
-  shopItem->id = ITEM_NOTHING;
-  shopItem->quantity = 0;
+    shopItem = &gTeamInventoryRef->kecleonShopItems[index];
+    shopItem->id = ITEM_NOTHING;
+    shopItem->quantity = 0;
 }
 
+// arm9.bin::0205FAA8
 BulkItem* GetKecleonShopItem(u8 i)
 {
-  return &gTeamInventoryRef->kecleonShopItems[i];
+    return &gTeamInventoryRef->kecleonShopItems[i];
 }
 
+// arm9.bin::0205FA20
 void FillKecleonShopGaps(void)
 {
-  s32 slot_checking = 0;
-  s32 last_filled = 0;
+    s32 slot_checking = 0;
+    s32 last_filled = 0;
 
-  do {
-    while (slot_checking < MAX_KECLEON_ITEM_SHOP_ITEMS) {
-      if (gTeamInventoryRef->kecleonShopItems[slot_checking].id) {
-        break;
-      }
-      // find next empty slot
-      slot_checking++;
-    }
+    do {
+        while (slot_checking < MAX_KECLEON_ITEM_SHOP_ITEMS) {
+            if (gTeamInventoryRef->kecleonShopItems[slot_checking].id)
+                break;
 
-    if (slot_checking == MAX_KECLEON_ITEM_SHOP_ITEMS) {
-      break;
-    }
+            // find next empty slot
+            slot_checking++;
+        }
 
-    if (slot_checking > last_filled) {
-      // shift it down
-      gTeamInventoryRef->kecleonShopItems[last_filled] = gTeamInventoryRef->kecleonShopItems[slot_checking];
-    }
-    slot_checking++;
-    last_filled++;
-  } while (1);
+        if (slot_checking == MAX_KECLEON_ITEM_SHOP_ITEMS)
+            break;
 
-  // clear out the rest of the slots
-  for (; last_filled < MAX_KECLEON_ITEM_SHOP_ITEMS; last_filled++) {
-    InitKecleonShopItem(last_filled);
-  }
+        if (slot_checking > last_filled) {
+            // shift it down
+            gTeamInventoryRef->kecleonShopItems[last_filled] = gTeamInventoryRef->kecleonShopItems[slot_checking];
+        }
+        slot_checking++;
+        last_filled++;
+    } while (TRUE);
+
+    // clear out the rest of the slots
+    for (; last_filled < MAX_KECLEON_ITEM_SHOP_ITEMS; last_filled++)
+        InitKecleonShopItem(last_filled);
 }
 
-void SortKecleonShopInventory(void) {
-  s32 i;
+// arm9.bin::0205F94C
+void SortKecleonShopInventory(void)
+{
+    s32 i;
 
-  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS - 1; i++) {
-    s32 j;
-    for (j = i + 1; j < MAX_KECLEON_ITEM_SHOP_ITEMS; j++) {
-      s32 order_i = GetItemOrder(gTeamInventoryRef->kecleonShopItems[i].id);
-      s32 order_j = GetItemOrder(gTeamInventoryRef->kecleonShopItems[j].id);
-      if (order_i > order_j || (order_i == order_j && gTeamInventoryRef->kecleonShopItems[i].quantity < gTeamInventoryRef->kecleonShopItems[j].quantity)) {
-        BulkItem str_i = gTeamInventoryRef->kecleonShopItems[i];
-        gTeamInventoryRef->kecleonShopItems[i] = gTeamInventoryRef->kecleonShopItems[j];
-        gTeamInventoryRef->kecleonShopItems[j] = str_i;
-      }
+    for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS - 1; i++) {
+        s32 j;
+
+        for (j = i + 1; j < MAX_KECLEON_ITEM_SHOP_ITEMS; j++) {
+            s32 order_i = GetItemOrder(gTeamInventoryRef->kecleonShopItems[i].id);
+            s32 order_j = GetItemOrder(gTeamInventoryRef->kecleonShopItems[j].id);
+
+            if (order_i > order_j || (order_i == order_j && gTeamInventoryRef->kecleonShopItems[i].quantity < gTeamInventoryRef->kecleonShopItems[j].quantity)) {
+                BulkItem str_i = gTeamInventoryRef->kecleonShopItems[i];
+                gTeamInventoryRef->kecleonShopItems[i] = gTeamInventoryRef->kecleonShopItems[j];
+                gTeamInventoryRef->kecleonShopItems[j] = str_i;
+            }
+        }
     }
-  }
 }
 
-void ChooseKecleonShopInventory(u8 index) {
-  u32 data[4];
-  s32 i;
+// arm9.bin::0205F8B8
+void ChooseKecleonShopInventory(u8 index)
+{
+    u32 data[4];
+    s32 i;
 
-  memcpy(data, gUnknown_81097E8, 4 * sizeof(u32));
-  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    InitKecleonShopItem(i);
-  }
-  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    s32 rand_1 = RandInt(9999);
-    s32 rand_2 = RandInt(9999);
-    AddKecleonShopItem(sub_8091E94(data[index], rand_1, rand_2));
-  }
-  SortKecleonShopInventory();
-  ChooseKecleonWareInventory(index);
-}
+    memcpy(data, gUnknown_81097E8, 4 * sizeof(u32));
 
-bool8 AddKecleonShopItem(u8 itemIndex) {
-  BulkItem held;
-  s32 i;
+    for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++)
+        InitKecleonShopItem(i);
 
-  xxx_init_helditem_8090B08(&held, itemIndex);  // initialize
-  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    if (!gTeamInventoryRef->kecleonShopItems[i].id) {
-      gTeamInventoryRef->kecleonShopItems[i] = held;
-      return FALSE;
+    for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
+        s32 rand_1 = RandInt(9999);
+        s32 rand_2 = RandInt(9999);
+
+        AddKecleonShopItem(sub_8091E94(data[index], rand_1, rand_2));
     }
-  }
-  return TRUE;
+
+    SortKecleonShopInventory();
+    ChooseKecleonWareInventory(index);
 }
 
-u32 CountKecleonWareItems(void) {
-  s32 i;
-  u32 count = 0;
-  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    if (gTeamInventoryRef->kecleonWareItems[i].id) {
-      count++;
+// arm9.bin::0205F850
+bool8 AddKecleonShopItem(u8 itemIndex)
+{
+    BulkItem held;
+    s32 i;
+
+    xxx_init_helditem_8090B08(&held, itemIndex); // initialize
+
+    for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
+        if (!gTeamInventoryRef->kecleonShopItems[i].id) {
+            gTeamInventoryRef->kecleonShopItems[i] = held;
+            return FALSE;
+        }
     }
-  }
-  return count;
+
+    return TRUE;
 }
 
-void InitKecleonWareItem(u8 index) {
-  BulkItem* wareItem = &gTeamInventoryRef->kecleonWareItems[index];
-  wareItem->id = ITEM_NOTHING;
-  wareItem->quantity = 0;
+// arm9.bin::0205f81C
+u32 CountKecleonWareItems(void)
+{
+    s32 i;
+    u32 count = 0;
+
+    for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
+        if (gTeamInventoryRef->kecleonWareItems[i].id)
+            count++;
+    }
+
+    return count;
 }
 
-BulkItem* GetKecleonWareItem(u8 index) {
+// arm9.bin::0205F7F8
+void InitKecleonWareItem(u8 index)
+{
+    BulkItem* wareItem = &gTeamInventoryRef->kecleonWareItems[index];
+    wareItem->id = ITEM_NOTHING;
+    wareItem->quantity = 0;
+}
+
+// arm9.bin::0205F7E0
+BulkItem* GetKecleonWareItem(u8 index)
+{
     return &gTeamInventoryRef->kecleonWareItems[index];
 }
 
-void FillKecleonWareGaps(void) {
-  s32 slot_checking = 0;
-  s32 last_filled = 0;
-
-  do {
-    while (slot_checking < MAX_KECLEON_WARE_SHOP_ITEMS) {
-      if (gTeamInventoryRef->kecleonWareItems[slot_checking].id != ITEM_NOTHING) {
-        break;
-      }
-      slot_checking++;
-    }
-
-    if (slot_checking == MAX_KECLEON_WARE_SHOP_ITEMS) {
-      break;
-    }
-
-    if (slot_checking > last_filled) {
-      // shift it down
-      gTeamInventoryRef->kecleonWareItems[last_filled] = gTeamInventoryRef->kecleonWareItems[slot_checking];
-    }
-    slot_checking++;
-    last_filled++;
-  } while (1);
-
-  // clear out the rest of the slots
-  for (; last_filled < MAX_KECLEON_WARE_SHOP_ITEMS; last_filled++) {
-    InitKecleonWareItem(last_filled);
-  }
-}
-
-void SortKecleonWareInventory(void) {
-  s32 i;
-
-  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS - 1; i++) {
-    s32 j;
-    for (j = i + 1; j < MAX_KECLEON_WARE_SHOP_ITEMS; j++) {
-      s32 order_i = GetItemOrder(gTeamInventoryRef->kecleonWareItems[i].id);
-      s32 order_j = GetItemOrder(gTeamInventoryRef->kecleonWareItems[j].id);
-      if (order_i > order_j || (order_i == order_j && gTeamInventoryRef->kecleonWareItems[i].quantity < gTeamInventoryRef->kecleonWareItems[j].quantity)) {
-        BulkItem str_i = gTeamInventoryRef->kecleonWareItems[i];
-        gTeamInventoryRef->kecleonWareItems[i] = gTeamInventoryRef->kecleonWareItems[j];
-        gTeamInventoryRef->kecleonWareItems[j] = str_i;
-      }
-    }
-  }
-}
-
-void ChooseKecleonWareInventory(u8 index) {
-  u32 data[MAX_KECLEON_WARE_SHOP_ITEMS];
-  s32 i;
-
-  memcpy(data, gUnknown_81097F8, 4 * sizeof(u32));
-  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    InitKecleonWareItem(i);
-  }
-  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    s32 rand_1 = RandInt(9999);
-    s32 rand_2 = RandInt(9999);
-    AddKecleonWareItem(sub_8091E94(data[index], rand_1, rand_2));
-  }
-  SortKecleonWareInventory();
-}
-
-bool8 AddKecleonWareItem(u8 itemIndex) {
-  BulkItem held;
-  s32 i;
-
-  xxx_init_helditem_8090B08(&held, itemIndex);  // initialize
-  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    if (!gTeamInventoryRef->kecleonWareItems[i].id) {
-      gTeamInventoryRef->kecleonWareItems[i] = held;
-      return FALSE;
-    }
-  }
-  return TRUE;
-}
-
-s32 SaveTeamInventory(u8* unk0, u32 size)
+// arm9.bin::0205F758
+void FillKecleonWareGaps(void)
 {
-  DataSerializer unk;
-  s32 i;
+    s32 slot_checking = 0;
+    s32 last_filled = 0;
 
-  InitBitWriter(&unk, unk0, size);
-  for (i = 0; i < INVENTORY_SIZE; i++) {
-    WriteItemSlotBits(&unk, &gTeamInventoryRef->teamItems[i]);
-  }
-  for (i = 0; i < STORAGE_SIZE; i++) {
-    WriteBits(&unk, &gTeamInventoryRef->teamStorage[i], 10);
-  }
-  for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-    WriteHeldItemBits(&unk, &gTeamInventoryRef->kecleonShopItems[i]);
-  }
-  for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-    WriteHeldItemBits(&unk, &gTeamInventoryRef->kecleonWareItems[i]);
-  }
-  WriteBits(&unk, &gTeamInventoryRef->teamMoney, 24);
-  WriteBits(&unk, &gTeamInventoryRef->teamSavings, 24);
+    do {
+        while (slot_checking < MAX_KECLEON_WARE_SHOP_ITEMS) {
+            if (gTeamInventoryRef->kecleonWareItems[slot_checking].id != ITEM_NOTHING)
+                break;
 
-  FinishBitSerializer(&unk);
-  return unk.count;
+            slot_checking++;
+        }
+
+        if (slot_checking == MAX_KECLEON_WARE_SHOP_ITEMS)
+            break;
+
+        if (slot_checking > last_filled) {
+            // shift it down
+            gTeamInventoryRef->kecleonWareItems[last_filled] = gTeamInventoryRef->kecleonWareItems[slot_checking];
+        }
+        slot_checking++;
+        last_filled++;
+    } while (TRUE);
+
+    // clear out the rest of the slots
+    for (; last_filled < MAX_KECLEON_WARE_SHOP_ITEMS; last_filled++)
+        InitKecleonWareItem(last_filled);
 }
 
-s32 RestoreTeamInventory(u8 *unk0, u32 size)
+// arm9.bin::0205F684
+void SortKecleonWareInventory(void)
 {
-    DataSerializer unk;
     s32 i;
 
-    InitBitReader(&unk, unk0, size);
-    for (i = 0; i < INVENTORY_SIZE; i++) {
-        ReadItemSlotBits(&unk, &gTeamInventoryRef->teamItems[i]);
-    }
-    for (i = 0; i < STORAGE_SIZE; i++) {
-        ReadBits(&unk, &gTeamInventoryRef->teamStorage[i], 10);
-    }
-    for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
-        ReadHeldItemBits(&unk, &gTeamInventoryRef->kecleonShopItems[i]);
-    }
-    for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-        ReadHeldItemBits(&unk, &gTeamInventoryRef->kecleonWareItems[i]);
-    }
-    ReadBits(&unk, &gTeamInventoryRef->teamMoney, 24);
-    ReadBits(&unk, &gTeamInventoryRef->teamSavings, 24);
+    for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS - 1; i++) {
+        s32 j;
 
-    FinishBitSerializer(&unk);
-    return unk.count;
+        for (j = i + 1; j < MAX_KECLEON_WARE_SHOP_ITEMS; j++) {
+            s32 order_i = GetItemOrder(gTeamInventoryRef->kecleonWareItems[i].id);
+            s32 order_j = GetItemOrder(gTeamInventoryRef->kecleonWareItems[j].id);
+
+            if (order_i > order_j || (order_i == order_j && gTeamInventoryRef->kecleonWareItems[i].quantity < gTeamInventoryRef->kecleonWareItems[j].quantity)) {
+                BulkItem str_i = gTeamInventoryRef->kecleonWareItems[i];
+                gTeamInventoryRef->kecleonWareItems[i] = gTeamInventoryRef->kecleonWareItems[j];
+                gTeamInventoryRef->kecleonWareItems[j] = str_i;
+            }
+        }
+    }
 }
 
+// arm9.bin::0205F5F8
+void ChooseKecleonWareInventory(u8 index)
+{
+    u32 data[MAX_KECLEON_WARE_SHOP_ITEMS];
+    s32 i;
+
+    memcpy(data, gUnknown_81097F8, 4 * sizeof(u32));
+
+    for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++)
+        InitKecleonWareItem(i);
+
+    for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
+        s32 rand_1 = RandInt(9999);
+        s32 rand_2 = RandInt(9999);
+
+        AddKecleonWareItem(sub_8091E94(data[index], rand_1, rand_2));
+    }
+
+    SortKecleonWareInventory();
+}
+
+// arm9.bin::0205F590
+bool8 AddKecleonWareItem(u8 itemIndex)
+{
+    BulkItem held;
+    s32 i;
+
+    xxx_init_helditem_8090B08(&held, itemIndex); // initialize
+
+    for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
+        if (!gTeamInventoryRef->kecleonWareItems[i].id) {
+            gTeamInventoryRef->kecleonWareItems[i] = held;
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+// arm9.bin::0205F474
+s32 SaveTeamInventory(u8* unk0, u32 size)
+{
+    DataSerializer seri;
+    s32 i;
+
+    InitBitWriter(&seri, unk0, size);
+
+    for (i = 0; i < INVENTORY_SIZE; i++)
+        WriteItemSlotBits(&seri, &gTeamInventoryRef->teamItems[i]);
+
+    for (i = 0; i < STORAGE_SIZE; i++)
+        WriteBits(&seri, &gTeamInventoryRef->teamStorage[i], 10);
+
+    for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++)
+        WriteHeldItemBits(&seri, &gTeamInventoryRef->kecleonShopItems[i]);
+
+    for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++)
+        WriteHeldItemBits(&seri, &gTeamInventoryRef->kecleonWareItems[i]);
+
+    WriteBits(&seri, &gTeamInventoryRef->teamMoney, 24);
+    WriteBits(&seri, &gTeamInventoryRef->teamSavings, 24);
+
+    FinishBitSerializer(&seri);
+    return seri.count;
+}
+
+// arm9.bin::0205F358
+s32 RestoreTeamInventory(u8 *unk0, u32 size)
+{
+    DataSerializer seri;
+    s32 i;
+
+    InitBitReader(&seri, unk0, size);
+
+    for (i = 0; i < INVENTORY_SIZE; i++)
+        ReadItemSlotBits(&seri, &gTeamInventoryRef->teamItems[i]);
+
+    for (i = 0; i < STORAGE_SIZE; i++)
+        ReadBits(&seri, &gTeamInventoryRef->teamStorage[i], 10);
+
+    for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++)
+        ReadHeldItemBits(&seri, &gTeamInventoryRef->kecleonShopItems[i]);
+
+    for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++)
+        ReadHeldItemBits(&seri, &gTeamInventoryRef->kecleonWareItems[i]);
+
+    ReadBits(&seri, &gTeamInventoryRef->teamMoney, 24);
+    ReadBits(&seri, &gTeamInventoryRef->teamSavings, 24);
+
+    FinishBitSerializer(&seri);
+    return seri.count;
+}
+
+// arm9.bin::0205F328
 void ReadHeldItemBits(DataSerializer *a1, BulkItem *item)
 {
-  ReadBits(a1, &item->id, 8);
-  ReadBits(a1, &item->quantity, 7);
+    ReadBits(a1, &item->id, 8);
+    ReadBits(a1, &item->quantity, 7);
 }
 
+// arm9.bin::0205F2F8
 void WriteHeldItemBits(DataSerializer *a1, BulkItem *item)
 {
-  WriteBits(a1, &item->id, 8);
-  WriteBits(a1, &item->quantity, 7);
+    WriteBits(a1, &item->id, 8);
+    WriteBits(a1, &item->quantity, 7);
 }
 
+// arm9.bin::0205F2B8
 void ReadItemSlotBits(DataSerializer *a1, Item *slot)
 {
-  ReadBits(a1, &slot->flags, 8);
-  ReadBits(a1, &slot->quantity, 7);
-  ReadBits(a1, &slot->id, 8);
+    ReadBits(a1, &slot->flags, 8);
+    ReadBits(a1, &slot->quantity, 7);
+    ReadBits(a1, &slot->id, 8);
 }
 
+// arm9.bin::0205F278
 void WriteItemSlotBits(DataSerializer *a1, Item *slot)
 {
-  WriteBits(a1, &slot->flags, 8);
-  WriteBits(a1, &slot->quantity, 7);
-  WriteBits(a1, &slot->id, 8);
+    WriteBits(a1, &slot->flags, 8);
+    WriteBits(a1, &slot->quantity, 7);
+    WriteBits(a1, &slot->id, 8);
 }
 
-const char *sub_8091E50(u8 index)
+#if (GAME_VERSION == VERSION_RED)
+UNUSED static const u8 *sub_8091E50(u8 index)
 {
   return gUnknown_810AF50[index];
 }
+#endif
 
+// arm9.bin::0205F240
 u8 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1)
 {
-  if (i0 > 0x3e)
-    return 0;
-  else
+    if (i0 > 0x3e)
+        return 0;
     return (gUnknown_8108F64[i0][i1 >> 3] >> (i1 & 7)) & 1;
 }
 
-extern const u16* gUnknown_8108E58[];
-
+// arm9.bin::0205F0C8
 u8 sub_8091E94(s32 a0, s32 a1, s32 a2)
 {
     s32 id, i, arrId;
@@ -1251,6 +1315,7 @@ u8 sub_8091E94(s32 a0, s32 a1, s32 a2)
     return ret;
 }
 
+// arm9.bin::0205EFAC
 void ClearAllItems_8091FB4(void)
 {
     s32 i;
@@ -1279,19 +1344,19 @@ void ClearAllItems_8091FB4(void)
     }
 }
 
+// arm9.bin::0205EF6C
 bool8 IsInvalidItemReward(u8 itemID)
 {
-  s32 index;
-
-  if (itemID >= NUMBER_OF_ITEM_IDS)
-      return TRUE;
-  else {
-    index = 0;
-    while (gInvalidItemIDs[index] != NUMBER_OF_ITEM_IDS){
-      if (gInvalidItemIDs[index] == itemID)
+    if (itemID >= NUMBER_OF_ITEM_IDS)
         return TRUE;
-      index++;
-    };
-    return FALSE;
-  }
+    else {
+        s32 index = 0;
+
+        while (gInvalidItemIDs[index] != NUMBER_OF_ITEM_IDS) {
+            if (gInvalidItemIDs[index] == itemID)
+                return TRUE;
+            index++;
+        }
+        return FALSE;
+    }
 }

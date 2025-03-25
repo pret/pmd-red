@@ -53,7 +53,7 @@ struct UnkStruct_sub_8011DAC
 struct UnkStruct_203B184
 {
     /* 0x0 */ TeamInventory *MoneyItems;
-    /* 0x4 */ unkStruct_203B45C *recruitedPokemon;
+    /* 0x4 */ RecruitedMon *recruitedPokemon;
     /* 0x8 */ unkStruct_203B480 *unk8;
     /* 0xC */ unkStruct_203B484 *unkC;
     /* 0x10 */ u32 *unk10;
