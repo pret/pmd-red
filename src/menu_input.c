@@ -160,10 +160,11 @@ s32 sub_8012AE8(void)
     return INPUT_NONE;
 }
 
-void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 a5)
+// arm9.bin::0201C4A0
+void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 windowId)
 {
     s32 iVar1;
-    u32 uVar2;
+    u32 chr;
     const unkChar *iVar3;
     s32 counter;
     s32 *piVar3;
@@ -195,10 +196,10 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 a5)
         do {
             iVar1 = *piVar4;
             piVar4++;
-            uVar2 = ReturnIntFromChar2(iVar1 + 0x30);
-            iVar3 = GetCharacter(uVar2);
+            chr = ReturnIntFromChar2(iVar1 + 0x30);
+            iVar3 = GetCharacter(chr);
             total_x += iVar3->unk6;
-            xxx_call_draw_char(x - total_x, y, uVar2, color, a5);
+            xxx_call_draw_char(x - total_x, y, chr, color, windowId);
             counter++;
             if (counter >= len)
                 break;
@@ -273,6 +274,7 @@ void sub_8012D34(WindowTemplate *param_1, s32 param_2)
 
 }
 
+// arm9.bin::0201C26C
 void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
     const u8 *textPtr;
@@ -560,6 +562,7 @@ static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 windo
     sub_801317C(&param_1->unk28);
 }
 
+// arm9.bin::0201BD28
 void sub_801317C(MenuInputStructSub *param_1)
 {
     param_1->unk0 = 0;
@@ -567,17 +570,19 @@ void sub_801317C(MenuInputStructSub *param_1)
     param_1->b_button = 0;
     param_1->dpad_left = 0;
     param_1->dpad_right = 0;
-    param_1->unk8 = -1;
-    param_1->unkA = -1;
+    param_1->unk8.x = -1;
+    param_1->unk8.y = -1;
     nullsub_7(&param_1->unk8);
     ResetUnusedInputStruct();
 }
 
+// arm9.bin::0201BD18
 void AddMenuCursorSprite(MenuInputStruct *param_1)
 {
     AddMenuCursorSprite_(param_1, 0);
 }
 
+// arm9.bin::0201B978
 void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
 {
     struct SpriteOAM sp = {0};
@@ -611,12 +616,15 @@ void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
         sub_801332C(&a0->unk14);
 
     a0->unk24++;
+
+    // More here in NDS
 }
 
 void nullsub_34(MenuInputStructSub *a0, s32 a1)
 {
 }
 
+// arm9.bin::0201B490
 static void sub_801332C(DungeonPos *a0)
 {
     struct SpriteOAM sp = {0};
@@ -640,6 +648,7 @@ static void sub_801332C(DungeonPos *a0)
     AddSprite(&sp, 0xFF, NULL, NULL);
 }
 
+// arm9.bin::0201B1C0
 static void sub_8013470(MenuInputStruct *a0)
 {
     struct SpriteOAM sp = {0};
@@ -694,6 +703,7 @@ void sub_8013660(MenuInputStruct *param_1)
     }
 }
 
+// arm9.bin::0201B14C
 void UpdateMenuCursorSpriteCoords(MenuInputStruct *param_1)
 {
     s32 index;
@@ -811,6 +821,7 @@ void sub_80137F8(MenuInputStruct *param_1, u32 param_2)
     param_1->unk10 = param_2 << 8;
 }
 
+// arm9.bin::0201AF70
 s32 GetMenuEntryYCoord(MenuInputStruct *menu, s32 entryId)
 {
     s32 firstY = menu->firstEntryY;
@@ -1191,13 +1202,11 @@ void sub_8013F84(void)
     AddSprite(&SStack_18,0x100,0,0x0);
 }
 
+// arm9.bin::0201A100
 void sub_80140B4(WindowTemplates *a0)
 {
     s32 i;
 
-    for(i = 0; i < 4; i++)
-    {
+    for (i = 0; i < 4; i++)
         a0->id[i] = gUnknown_80D47C8[i];
-    }
 }
-

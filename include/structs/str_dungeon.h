@@ -159,6 +159,7 @@ typedef struct ItemSpawns
     s16 itemValues[NUMBER_OF_ITEM_IDS];
 } ItemSpawns;
 
+// size: R=0x8 | B=0x6
 typedef struct UnkDungeonGlobal_unk1CD98
 {
     u16 unk0; // species and level

@@ -37,7 +37,7 @@ void BlinkSavingIcon(void);
 void CopySpritesToOam(void);
 void DoAxFrame_800558C(axdata *, s32 spriteX, s32 spriteY, u32, u32 paletteNum, unkStruct_2039DB0 *spriteMasks);
 void InitSprites(void);
-void nullsub_7(s16 *);
+void nullsub_7(DungeonPos *);
 void nullsub_8(u32);
 void nullsub_9(void);
 void nullsub_10(bool8);

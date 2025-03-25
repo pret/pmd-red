@@ -13,6 +13,7 @@ static bool8 AreStatusesTheSame(const StatusText *status1, const StatusText *sta
     }
 }
 
+// arm9.bin::02069774
 s32 PrepareStatusStringArrays(const char *str, STATUSTEXTS(statuses))
 {
     s32 i, j;

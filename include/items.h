@@ -83,7 +83,7 @@ s32 SaveTeamInventory(u8 *, u32 size);
 
 s32 GetItemPossessionCount(u8 id);
 s32 WriteHighDecimal(s32, u8 *strbuf, u8);
-u32 sub_80913E0(Item* slot, u32 a2, STATUSTEXTS(statuses));
+u32 sub_80913E0(Item* slot, u32 windowId, STATUSTEXTS(statuses));
 u8 sub_8091E94(s32 a0, s32 a1, s32 a2);
 
 static inline void ZeroOutItem(Item *item)

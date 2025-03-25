@@ -24,6 +24,7 @@ s16 sub_8094828(u16 moveID, u8 id)
 // New file here
 
 
+// arm9.bin::02064998
 void InitBitReader(DataSerializer *r0, u8 *buffer, s32 bufLen)
 {
     r0->stream = buffer;
@@ -32,6 +33,7 @@ void InitBitReader(DataSerializer *r0, u8 *buffer, s32 bufLen)
     r0->end = buffer + bufLen;
 }
 
+// arm9.bin::0206496C
 void InitBitWriter(DataSerializer *r0, u8 *buffer, s32 bufLen)
 {
     r0->stream = buffer;
@@ -41,10 +43,12 @@ void InitBitWriter(DataSerializer *r0, u8 *buffer, s32 bufLen)
     MemoryClear8(buffer, bufLen);
 }
 
+// arm9.bin::02064968
 void FinishBitSerializer(DataSerializer *seri)
 {
 }
 
+// arm9.bin::020648D0
 void WriteBits(DataSerializer *r0, void *src, s32 numBits)
 {
     s32 curBit;
@@ -92,6 +96,7 @@ UNUSED void sub_80948E4(DataSerializer *seri, void *src, s32 numBytes)
     }
 }
 
+// arm9.bin::0206482C
 void ReadBits(DataSerializer *r0, void *dst, s32 numBits)
 {
     s32 curBit;

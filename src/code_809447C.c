@@ -11,12 +11,14 @@
 #include "text_util.h"
 #include "strings.h"
 
+// arm9.bin::02064154
 void ReadBellyBits(DataSerializer *r0, FixedPoint *dst)
 {
     ReadBits(r0, &dst->unk0, 16);
     ReadBits(r0, &dst->unk2, 16);
 }
 
+// arm9.bin::02064124
 void WriteBellyBits(DataSerializer *r0, FixedPoint *src)
 {
     WriteBits(r0, &src->unk0, 16);

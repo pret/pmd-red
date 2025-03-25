@@ -19,6 +19,7 @@
 #include "kangaskhan_storage1.h"
 #include "kangaskhan_storage2.h"
 #include "kecleon_bros1.h"
+#include "kecleon_bros4.h"
 #include "main_loops.h"
 #include "memory.h"
 #include "personality_test1.h"
@@ -713,8 +714,6 @@ u8 sub_801FB50();
 void sub_80155F0();
 s32 sub_80160D8();
 void ResetTextbox_809B294();
-u8 sub_801A5D8();
-s32 sub_801A6E8(s32);
 s32 sub_801A8AC();
 void sub_801A928();
 s32 sub_8016080();
@@ -1864,7 +1863,7 @@ bool8 sub_809B648(void)
             if (gUnknown_3001B64->unk420 == 1) {
                 ResetTextbox_809B294();
                 ShowWindows(NULL, 1, 1);
-                if (sub_801A5D8(0,0,0,10)) {
+                if (sub_801A5D8(0,0,NULL,10)) {
                     return 1;
                 }
                 else {
@@ -1873,7 +1872,7 @@ bool8 sub_809B648(void)
                 }
             }
             else {
-                switch(sub_801A6E8(1)) {
+                switch(sub_801A6E8(TRUE)) {
                     case 3: {
                         s32 itemArrayId = sub_801A8AC();
                         s32 itemId = gTeamInventoryRef->teamItems[itemArrayId].id;

@@ -5,13 +5,13 @@
 #define JUNK_INIT 0x4A14C1
 #define JUNK_UPDATE 0x54A1C41
 
-EWRAM_DATA Inputs gRealInputs = {0}; // GBA=20255F0 | NDS=20F5CC0
-static EWRAM_DATA UnusedInputStruct sUnusedInputsRelated = {0}; // GBA=2025600 | NDS=020F5CD0
-static EWRAM_DATA u32 sUnusedScrambledInputJunk[3] = {0}; // GBA=202562C | NDS=020F5C88
-static EWRAM_DATA Inputs sBufferedInputs = {0}; // GBA=2025638 | NDS=020F5C90
-static EWRAM_DATA Inputs sCurrentInputs = {0}; // GBA=2025648 | NDS=020F5CB0
-static EWRAM_DATA Inputs sPrevInputs = {0}; // GBA=2025658 | NDS=020F5CA0
-static EWRAM_DATA InputTimers sInputTimers = {0}; // GBA=2025668 | NDS=020F5C8C
+EWRAM_DATA Inputs gRealInputs = {0}; // R=20255F0 | B=20F5CC0
+static EWRAM_DATA UnusedInputStruct sUnusedInputsRelated = {0}; // R=2025600 | B=020F5CD0
+static EWRAM_DATA u32 sUnusedScrambledInputJunk[3] = {0}; // R=202562C | B=020F5C88
+static EWRAM_DATA Inputs sBufferedInputs = {0}; // R=2025638 | B=020F5C90
+static EWRAM_DATA Inputs sCurrentInputs = {0}; // R=2025648 | B=020F5CB0
+static EWRAM_DATA Inputs sPrevInputs = {0}; // R=2025658 | B=020F5CA0
+static EWRAM_DATA InputTimers sInputTimers = {0}; // R=2025668 | B=020F5C8C
 
 // arm9.bin::0200754C
 void InitInput(void)

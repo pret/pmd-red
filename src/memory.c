@@ -101,6 +101,7 @@ UNUSED static void MemoryClear32(u32 *dest, s32 size)
     CpuClear(dest, size);
 }
 
+// arm9.bin::02010BD8
 void MemoryFill8(void *dest, u8 value, s32 size)
 {
     u8 *cur = dest;
@@ -111,6 +112,7 @@ void MemoryFill8(void *dest, u8 value, s32 size)
     }
 }
 
+// arm9.bin::02010BC0
 void MemoryFill16(u16 *dest, u16 value, s32 size)
 {
     while (size > 0) {
@@ -119,6 +121,7 @@ void MemoryFill16(u16 *dest, u16 value, s32 size)
     }
 }
 
+#if (GAME_VERSION == VERSION_RED)
 UNUSED static void MemoryFill32(u32 *dest, u32 value, s32 size)
 {
     while (size > 0) {
@@ -126,6 +129,7 @@ UNUSED static void MemoryFill32(u32 *dest, u32 value, s32 size)
         *dest++ = value;
     }
 }
+#endif
 
 // arm9.bin::02010BB4
 void MemoryCopy8(void *dest, void *src, s32 size)
@@ -455,6 +459,7 @@ error:
         heap, size, atb, group);
 }
 
+// arm9.bin::02010DE0
 void *MemoryAlloc(s32 size, s32 group)
 {
     return DoAlloc(&sMainHeapDescriptor, size, group);

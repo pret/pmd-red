@@ -3,7 +3,7 @@
 
 #include "constants/move.h"
 
-// size: 0x24
+// size: R=0x24 | B=?
 typedef struct MoveDataEntry
 {
     /* 0x0 */ u8 *name;
@@ -29,14 +29,14 @@ typedef struct MoveDataEntry
     /* 0x20 */ u8 *useText; // The text displayed when this move is used.
 } MoveDataEntry;
 
-// size: 0x8
+// size: R=0x8 | B=0x6
 typedef struct Move
 {
-    u8 moveFlags;
-    u8 moveFlags2;
-    u16 id;
-    u8 PP;
-    u8 ginseng; // How much the move is boosted by Ginsengs.
+    /* 0x0 */ u8 moveFlags;
+    /* 0x1 */ u8 moveFlags2;
+    /* 0x2 */ u16 id;
+    /* 0x4 */ u8 PP;
+    /* 0x5 */ u8 ginseng; // How much the move is boosted by Ginsengs.
 } Move;
 
 #endif // GUARD_STR_MOVES_H

@@ -22,6 +22,16 @@
 #include "text_1.h"
 #include "text_util.h"
 
+struct UnusedOffenseStruct
+{
+    s32 att[2];
+    s32 def[2];
+    u8 atkBoost;
+    u8 spAtkBoost;
+    u8 defBoost;
+    u8 spDefBoost;
+};
+
 extern u32 gIQSkillGroups[];
 
 extern SpriteOAM gShadowSprites[3]; // Shadow sprites of some kind
@@ -40,7 +50,7 @@ extern u8 gUnknown_810778C[];
 extern u8 gUnknown_8107790[];
 extern u8 gUnknown_8107798[];
 
-// 2, 4, 6, 7, 8, 9, 0xA, 0xD, 0xF, 0x11
+// 2, 4, 6, 7, 8, 9, 8, 0xA, 0xD, 0xF, 0x11
 extern s32 gUnknown_810AC90[10];
 
 #include "data/pokemon_3.h"
@@ -56,28 +66,33 @@ extern void ReadBellyBits(DataSerializer*, FixedPoint *dst);
 extern void ReadHiddenPowerBits(DataSerializer*, HiddenPower*);
 s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1);
 
+// arm9.bin::02059FDC
 void GenerateHiddenPower(HiddenPower* a1)
 {
-  s32 i;
+    s32 i;
 
-  a1->hiddenPowerBasePower = gUnknown_810AC90[RandInt(10)];
-  for (i = 0; i < 100; i++) {
-    a1->hiddenPowerType = RandInt(NUM_TYPES);
-    if ( a1->hiddenPowerType )
-      break;
-  }
-  if ( i == 100 )
-    a1->hiddenPowerType = TYPE_FIRE;
+    a1->hiddenPowerBasePower = gUnknown_810AC90[RandInt(10)];
+
+    for (i = 0; i < 100; i++) {
+        a1->hiddenPowerType = RandInt(NUM_TYPES);
+        if (a1->hiddenPowerType)
+            break;
+    }
+
+    if (i == 100)
+        a1->hiddenPowerType = TYPE_FIRE;
 }
 
-bool8 HasRecruitedMon(s16 species) {
+// arm9.bin::02059F70
+bool8 HasRecruitedMon(s16 species)
+{
     s32 species_s32 = species;
     s32 i = 0;
     PokemonStruct1 *pokemon = gRecruitedPokemonRef->pokemon;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
         if (((u8)pokemon->unk0 & 1)) {
-            if(pokemon->speciesNum == species_s32)
+            if (pokemon->speciesNum == species_s32)
                 return TRUE;
         }
         pokemon++;
@@ -85,66 +100,68 @@ bool8 HasRecruitedMon(s16 species) {
     return FALSE;
 }
 
-s16 GetBaseSpecies(s16 index) {
+// arm9.bin::02059D94
+s16 GetBaseSpecies(s16 index)
+{
     if (index == MONSTER_CASTFORM_SNOWY)
         return MONSTER_CASTFORM;
     if (index == MONSTER_CASTFORM_SUNNY)
         return MONSTER_CASTFORM;
     if (index == MONSTER_CASTFORM_RAINY)
         return MONSTER_CASTFORM;
-    if(index == MONSTER_UNOWN_B)
+    if (index == MONSTER_UNOWN_B)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_C)
+    if (index == MONSTER_UNOWN_C)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_D)
+    if (index == MONSTER_UNOWN_D)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_E)
+    if (index == MONSTER_UNOWN_E)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_F)
+    if (index == MONSTER_UNOWN_F)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_G)
+    if (index == MONSTER_UNOWN_G)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_H)
+    if (index == MONSTER_UNOWN_H)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_I)
+    if (index == MONSTER_UNOWN_I)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_J)
+    if (index == MONSTER_UNOWN_J)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_K)
+    if (index == MONSTER_UNOWN_K)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_L)
+    if (index == MONSTER_UNOWN_L)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_M)
+    if (index == MONSTER_UNOWN_M)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_N)
+    if (index == MONSTER_UNOWN_N)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_O)
+    if (index == MONSTER_UNOWN_O)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_P)
+    if (index == MONSTER_UNOWN_P)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_Q)
+    if (index == MONSTER_UNOWN_Q)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_R)
+    if (index == MONSTER_UNOWN_R)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_S)
+    if (index == MONSTER_UNOWN_S)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_T)
+    if (index == MONSTER_UNOWN_T)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_U)
+    if (index == MONSTER_UNOWN_U)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_V)
+    if (index == MONSTER_UNOWN_V)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_W)
+    if (index == MONSTER_UNOWN_W)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_X)
+    if (index == MONSTER_UNOWN_X)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_Y)
+    if (index == MONSTER_UNOWN_Y)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_Z)
+    if (index == MONSTER_UNOWN_Z)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_EMARK)
+    if (index == MONSTER_UNOWN_EMARK)
         return MONSTER_UNOWN;
-    if(index == MONSTER_UNOWN_QMARK)
+    if (index == MONSTER_UNOWN_QMARK)
         return MONSTER_UNOWN;
     if (index == MONSTER_DEOXYS_ATTACK)
         return MONSTER_DEOXYS_NORMAL;
@@ -158,7 +175,9 @@ s16 GetBaseSpecies(s16 index) {
     return index;
 }
 
-s16 GetBaseSpeciesNoUnown(s16 index) {
+// arm9.bin::02059D04
+s16 GetBaseSpeciesNoUnown(s16 index)
+{
     s32 a1_ = SpeciesId(index);
     if (index == MONSTER_CASTFORM_SNOWY) {
         return MONSTER_CASTFORM;
@@ -185,96 +204,92 @@ s16 GetBaseSpeciesNoUnown(s16 index) {
     return a1_;
 }
 
+// arm9.bin::02059BB4
 s32 GetUnownIndex(s16 index)
 {
-    if(index == MONSTER_UNOWN_B)
+    if (index == MONSTER_UNOWN_B)
         return 1;
-    if(index == MONSTER_UNOWN_C)
+    if (index == MONSTER_UNOWN_C)
         return 2;
-    if(index == MONSTER_UNOWN_D)
+    if (index == MONSTER_UNOWN_D)
         return 3;
-    if(index == MONSTER_UNOWN_E)
+    if (index == MONSTER_UNOWN_E)
         return 4;
-    if(index == MONSTER_UNOWN_F)
+    if (index == MONSTER_UNOWN_F)
         return 5;
-    if(index == MONSTER_UNOWN_G)
+    if (index == MONSTER_UNOWN_G)
         return 6;
-    if(index == MONSTER_UNOWN_H)
+    if (index == MONSTER_UNOWN_H)
         return 7;
-    if(index == MONSTER_UNOWN_I)
+    if (index == MONSTER_UNOWN_I)
         return 8;
-    if(index == MONSTER_UNOWN_J)
+    if (index == MONSTER_UNOWN_J)
         return 9;
-    if(index == MONSTER_UNOWN_K)
+    if (index == MONSTER_UNOWN_K)
         return 10;
-    if(index == MONSTER_UNOWN_L)
+    if (index == MONSTER_UNOWN_L)
         return 11;
-    if(index == MONSTER_UNOWN_M)
+    if (index == MONSTER_UNOWN_M)
         return 12;
-    if(index == MONSTER_UNOWN_N)
+    if (index == MONSTER_UNOWN_N)
         return 13;
-    if(index == MONSTER_UNOWN_O)
+    if (index == MONSTER_UNOWN_O)
         return 14;
-    if(index == MONSTER_UNOWN_P)
+    if (index == MONSTER_UNOWN_P)
         return 15;
-    if(index == MONSTER_UNOWN_Q)
+    if (index == MONSTER_UNOWN_Q)
         return 16;
-    if(index == MONSTER_UNOWN_R)
+    if (index == MONSTER_UNOWN_R)
         return 17;
-    if(index == MONSTER_UNOWN_S)
+    if (index == MONSTER_UNOWN_S)
         return 18;
-    if(index == MONSTER_UNOWN_T)
+    if (index == MONSTER_UNOWN_T)
         return 19;
-    if(index == MONSTER_UNOWN_U)
+    if (index == MONSTER_UNOWN_U)
         return 20;
-    if(index == MONSTER_UNOWN_V)
+    if (index == MONSTER_UNOWN_V)
         return 21;
-    if(index == MONSTER_UNOWN_W)
+    if (index == MONSTER_UNOWN_W)
         return 22;
-    if(index == MONSTER_UNOWN_X)
+    if (index == MONSTER_UNOWN_X)
         return 23;
-    if(index == MONSTER_UNOWN_Y)
+    if (index == MONSTER_UNOWN_Y)
         return 24;
-    if(index == MONSTER_UNOWN_Z)
+    if (index == MONSTER_UNOWN_Z)
         return 25;
-    if(index == MONSTER_UNOWN_EMARK)
+    if (index == MONSTER_UNOWN_EMARK)
         return 26;
-    if(index == MONSTER_UNOWN_QMARK)
+    if (index == MONSTER_UNOWN_QMARK)
         return 27;
     return 0;
 }
 
+// arm9.bin::02059B98
 s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0)
 {
     return r0->unk0 & 0x000001ff;
 }
 
+// arm9.bin::02059B7C
 void sub_808E9C4(PokemonStruct1 *r0, s16 r1)
 {
     s32 r1_s32 = r1; // cast needed to match
     r0->unk0 =  ((0xFE << 8) & r0->unk0) | r1_s32 ;
 }
 
+#if (GAME_VERSION == VERSION_RED)
 void SetSpeciesLevelToExtract(UnkDungeonGlobal_unk1CD98 *r0, s32 level, s32 species)
 {
     species = SpeciesId(species);
     r0->unk0 = species | (level << 9) ;
 }
+#endif
 
+// arm9.bin::02059B6C
 s32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0)
 {
     return (r0->unk0 >> 9);
 }
-
-struct UnusedOffenseStruct
-{
-    s32 att[2];
-    s32 def[2];
-    u8 atkBoost;
-    u8 spAtkBoost;
-    u8 defBoost;
-    u8 spDefBoost;
-};
 
 UNUSED static void GetMonOffenseStats(PokemonStruct1 *mon, struct UnusedOffenseStruct *dst)
 {
@@ -313,6 +328,11 @@ UNUSED static void GetMonOffenseStats(PokemonStruct1 *mon, struct UnusedOffenseS
     }
 }
 
+
+// TODO: File boundary?
+
+
+
 const u8 *GetIQSkillName(u8 skill)
 {
     return gIQSkillNames[skill];
@@ -346,13 +366,13 @@ void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel)
     availTactics = 0;
     for(tactic = TACTIC_LETS_GO_TOGETHER; tactic < NUM_TACTICS; tactic++)
     {
-        if(gReqTacticLvls[tactic] <= pokeLevel)
+        if (gReqTacticLvls[tactic] <= pokeLevel)
         {
             tacticsBuffer[availTactics] = tactic;
             availTactics++;
         }
     }
-    if(availTactics > TACTIC_UNUSED)
+    if (availTactics > TACTIC_UNUSED)
     {
         return;
     }
@@ -370,7 +390,7 @@ void GetAvailTacticsforLvl_Bool(u8 *tacticsBuffer, s32 pokeLevel)
 
     for(tactic = TACTIC_LETS_GO_TOGETHER; tactic < NUM_TACTICS; tactic++)
     {
-        if(gReqTacticLvls[tactic] <= pokeLevel)
+        if (gReqTacticLvls[tactic] <= pokeLevel)
         {
             tacticsBuffer[tactic] = TRUE;
         }
@@ -383,7 +403,7 @@ void GetAvailTacticsforLvl_Bool(u8 *tacticsBuffer, s32 pokeLevel)
 
 bool8 HasIQForSkill(s32 pokeIQ, u8 IQSkillIndex)
 {
-    if(IQSkillIndex == IQ_NONE)
+    if (IQSkillIndex == IQ_NONE)
     {
         return FALSE;
     }
@@ -499,6 +519,13 @@ void sub_808ED00()
     }
 }
 
+
+
+// File boundary here
+
+
+
+// arm9.bin::0205CC54
 s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
 {
     u16 sixMons[6];
@@ -561,6 +588,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     return backup.count;
 }
 
+// arm9.bin::0205CAE4
 s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
 {
     DataSerializer backup;
@@ -600,6 +628,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
     return backup.count;
 }
 
+// arm9.bin::0205C9D4
 void WritePoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
 {
     WriteBits(a1, &pokemon->level, 7);
@@ -618,9 +647,10 @@ void WritePoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
     WriteBits(a1, &pokemon->tacticIndex, 4);
     WriteHeldItemBits(a1, &pokemon->heldItem);
     WritePoke1MovesBits(a1, pokemon->moves);
-    WriteBits(a1, pokemon->name, 10 * 8);
+    WriteBits(a1, pokemon->name, POKEMON_NAME_LENGTH * 8);
 }
 
+// arm9.bin::0205C890
 void ReadPoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
 {
     memset(pokemon, 0, sizeof(PokemonStruct1));
@@ -647,123 +677,137 @@ void ReadPoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
     ReadBits(a1, &pokemon->tacticIndex, 4);
     ReadHeldItemBits(a1, &pokemon->heldItem);
     ReadPoke1MovesBits(a1, pokemon->moves);
-    ReadBits(a1, pokemon->name, 10 * 8);
+    ReadBits(a1, pokemon->name, POKEMON_NAME_LENGTH * 8);
 }
 
+// arm9.bin::0205C688
 s32 SavePoke2s(u8* buffer, s32 size)
 {
-  DataSerializer backup;
-  s32 i;
-  u8 data_u8_neg1;
-  u8 data_u8_zero;
+    DataSerializer backup;
+    s32 i;
+    u8 data_u8_neg1;
+    u8 data_u8_zero;
 
-  InitBitWriter(&backup, buffer, size);
-  data_u8_neg1 = -1;
-  data_u8_zero = 0;
+    InitBitWriter(&backup, buffer, size);
+    data_u8_neg1 = -1;
+    data_u8_zero = 0;
 
-  for (i = 0; i < 4; i++) {
-    PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
-    WriteBits(&backup, &pokemon2->unk0, 2);
+    for (i = 0; i < 4; i++) {
+        PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
+        WriteBits(&backup, &pokemon2->unk0, 2);
 
-    WriteBits(&backup, pokemon2->isTeamLeader ? &data_u8_neg1 : &data_u8_zero, 1);
-    WriteBits(&backup, &pokemon2->level, 7);
+        WriteBits(&backup, pokemon2->isTeamLeader ? &data_u8_neg1 : &data_u8_zero, 1);
+        WriteBits(&backup, &pokemon2->level, 7);
 
-    WriteDungeonLocationBits(&backup, &pokemon2->dungeonLocation);
-    WriteBits(&backup, &pokemon2->IQ, 10);
-    WriteBits(&backup, &pokemon2->unkA, 16);
-    WriteBits(&backup, &pokemon2->unkC, 16);
-    WriteBits(&backup, &pokemon2->speciesNum, 9);
-    WriteBits(&backup, &pokemon2->unk10, 10);
-    WriteBits(&backup, &pokemon2->unk12, 10);
-    WriteBits(&backup, &pokemon2->offense.att[0], 8);
-    WriteBits(&backup, &pokemon2->offense.att[1], 8);
-    WriteBits(&backup, &pokemon2->offense.def[0], 8);
-    WriteBits(&backup, &pokemon2->offense.def[1], 8);
-    WriteBits(&backup, &pokemon2->currExp, 24);
-    WritePoke2MovesBits(&backup, &pokemon2->moves);
-    WriteItemSlotBits(&backup, &pokemon2->itemSlot);
-    WriteBellyBits(&backup, &pokemon2->belly);
-    WriteBellyBits(&backup, &pokemon2->maxBelly);
-    WriteBits(&backup, &pokemon2->IQSkills, 24);
-    WriteBits(&backup, &pokemon2->tacticIndex, 4);
-    WriteHiddenPowerBits(&backup, &pokemon2->hiddenPower);
-    WriteBits(&backup, &pokemon2->name, 10 * 8);
-  }
+        WriteDungeonLocationBits(&backup, &pokemon2->dungeonLocation);
+        WriteBits(&backup, &pokemon2->IQ, 10);
+        WriteBits(&backup, &pokemon2->unkA, 16);
+        WriteBits(&backup, &pokemon2->unkC, 16);
+        WriteBits(&backup, &pokemon2->speciesNum, 9);
+        WriteBits(&backup, &pokemon2->unk10, 10);
+        WriteBits(&backup, &pokemon2->unk12, 10);
+        WriteBits(&backup, &pokemon2->offense.att[0], 8);
+        WriteBits(&backup, &pokemon2->offense.att[1], 8);
+        WriteBits(&backup, &pokemon2->offense.def[0], 8);
+        WriteBits(&backup, &pokemon2->offense.def[1], 8);
+        WriteBits(&backup, &pokemon2->currExp, 24);
+        WritePoke2MovesBits(&backup, &pokemon2->moves);
+        WriteItemSlotBits(&backup, &pokemon2->itemSlot);
+        WriteBellyBits(&backup, &pokemon2->belly);
+        WriteBellyBits(&backup, &pokemon2->maxBelly);
+        WriteBits(&backup, &pokemon2->IQSkills, 24);
+        WriteBits(&backup, &pokemon2->tacticIndex, 4);
+        WriteHiddenPowerBits(&backup, &pokemon2->hiddenPower);
+        WriteBits(&backup, &pokemon2->name, POKEMON_NAME_LENGTH * 8);
+    }
 
-  FinishBitSerializer(&backup);
-  return backup.count;
+    FinishBitSerializer(&backup);
+    return backup.count;
 }
 
+// arm9.bin::0205C464
 s32 RestorePoke2s(u8* a1, s32 size)
 {
-  DataSerializer backup;
-  s32 i;
+    DataSerializer backup;
+    s32 i;
 
-  InitBitReader(&backup, a1, size);
-  for (i = 0; i < 4; i++) {
-    PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
-    u8 unk2;
+    InitBitReader(&backup, a1, size);
 
-    memset(pokemon2, 0, sizeof(PokemonStruct2));
+    for (i = 0; i < 4; i++) {
+        PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
+        u8 unk2;
 
-    ReadBits(&backup, &pokemon2->unk0, 2);
+        memset(pokemon2, 0, sizeof(PokemonStruct2));
 
-    ReadBits(&backup, &unk2, 1);
-    if (unk2 & 1) {
-        pokemon2->isTeamLeader = TRUE;
+        ReadBits(&backup, &pokemon2->unk0, 2);
+
+        ReadBits(&backup, &unk2, 1);
+        if (unk2 & 1) {
+            pokemon2->isTeamLeader = TRUE;
+        }
+        else {
+            pokemon2->isTeamLeader = FALSE;
+        }
+        ReadBits(&backup, &pokemon2->level, 7);
+
+        ReadDungeonLocationBits(&backup, &pokemon2->dungeonLocation);
+        ReadBits(&backup, &pokemon2->IQ, 10);
+        ReadBits(&backup, &pokemon2->unkA, 16);
+        ReadBits(&backup, &pokemon2->unkC, 16);
+        ReadBits(&backup, &pokemon2->speciesNum, 9);
+        ReadBits(&backup, &pokemon2->unk10, 10);
+        ReadBits(&backup, &pokemon2->unk12, 10);
+        ReadBits(&backup, &pokemon2->offense.att[0], 8);
+        ReadBits(&backup, &pokemon2->offense.att[1], 8);
+        ReadBits(&backup, &pokemon2->offense.def[0], 8);
+        ReadBits(&backup, &pokemon2->offense.def[1], 8);
+        ReadBits(&backup, &pokemon2->currExp, 24);
+        ReadPoke2MovesBits(&backup, &pokemon2->moves);
+        ReadItemSlotBits(&backup, &pokemon2->itemSlot);
+        ReadBellyBits(&backup, &pokemon2->belly);
+        ReadBellyBits(&backup, &pokemon2->maxBelly);
+        ReadBits(&backup, &pokemon2->IQSkills, 24);
+        ReadBits(&backup, &pokemon2->tacticIndex, 4);
+        ReadHiddenPowerBits(&backup, &pokemon2->hiddenPower);
+        ReadBits(&backup, &pokemon2->name, POKEMON_NAME_LENGTH * 8);
     }
-    else {
-        pokemon2->isTeamLeader = FALSE;
-    }
-    ReadBits(&backup, &pokemon2->level, 7);
 
-    ReadDungeonLocationBits(&backup, &pokemon2->dungeonLocation);
-    ReadBits(&backup, &pokemon2->IQ, 10);
-    ReadBits(&backup, &pokemon2->unkA, 16);
-    ReadBits(&backup, &pokemon2->unkC, 16);
-    ReadBits(&backup, &pokemon2->speciesNum, 9);
-    ReadBits(&backup, &pokemon2->unk10, 10);
-    ReadBits(&backup, &pokemon2->unk12, 10);
-    ReadBits(&backup, &pokemon2->offense.att[0], 8);
-    ReadBits(&backup, &pokemon2->offense.att[1], 8);
-    ReadBits(&backup, &pokemon2->offense.def[0], 8);
-    ReadBits(&backup, &pokemon2->offense.def[1], 8);
-    ReadBits(&backup, &pokemon2->currExp, 24);
-    ReadPoke2MovesBits(&backup, &pokemon2->moves);
-    ReadItemSlotBits(&backup, &pokemon2->itemSlot);
-    ReadBellyBits(&backup, &pokemon2->belly);
-    ReadBellyBits(&backup, &pokemon2->maxBelly);
-    ReadBits(&backup, &pokemon2->IQSkills, 24);
-    ReadBits(&backup, &pokemon2->tacticIndex, 4);
-    ReadHiddenPowerBits(&backup, &pokemon2->hiddenPower);
-    ReadBits(&backup, &pokemon2->name, 80);
-  }
-
-  FinishBitSerializer(&backup);
-  return backup.count;
+    FinishBitSerializer(&backup);
+    return backup.count;
 }
 
+// arm9.bin::0205C454
 void ReadPoke1LevelBits(DataSerializer* a1, struct unkPokeSubStruct_C* unkC)
 {
-  ReadBits(a1, &unkC->level, 7);
+    ReadBits(a1, &unkC->level, 7);
 }
 
+// arm9.bin::0205C444
 void WritePoke1LevelBits(DataSerializer* a1, struct unkPokeSubStruct_C* unkC)
 {
-  WriteBits(a1, &unkC->level, 7);
+    WriteBits(a1, &unkC->level, 7);
 }
 
+// arm9.bin::0205C414
 void ReadHiddenPowerBits(DataSerializer* a1, HiddenPower* a2)
 {
-  ReadBits(a1, &a2->hiddenPowerBasePower, 10);
-  ReadBits(a1, &a2->hiddenPowerType, 5);
+    ReadBits(a1, &a2->hiddenPowerBasePower, 10);
+    ReadBits(a1, &a2->hiddenPowerType, 5);
 }
 
+// arm9.bin::0205C3E4
 void WriteHiddenPowerBits(DataSerializer* a1, HiddenPower* a2)
 {
-  WriteBits(a1, &a2->hiddenPowerBasePower, 10);
-  WriteBits(a1, &a2->hiddenPowerType, 5);
+    WriteBits(a1, &a2->hiddenPowerBasePower, 10);
+    WriteBits(a1, &a2->hiddenPowerType, 5);
 }
+
+
+
+
+// File Boundary here
+
+
 
 void sub_808F468(struct PokemonStruct1 *pokemon,struct EvolveStatus *evolveStatus,bool8 param_3)
 {
@@ -966,44 +1010,44 @@ PokemonStruct1 *sub_808F734(PokemonStruct1 *pokemon, s16 _species)
 
 PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, short _species)
 {
-      s32 r6;
-      s32 index;
-      PokemonStruct1 pokeStruct;
-      LevelData levelData;
-      u8 buffer [64];
-      s32 species = _species;
-      bool32 flag = TRUE;
+    s32 r6;
+    s32 index;
+    PokemonStruct1 pokeStruct;
+    LevelData levelData;
+    u8 buffer [64];
+    s32 species = _species;
+    bool32 flag = TRUE;
 
-      pokeStruct = *pokemon;
-      r6 = pokeStruct.speciesNum;
-      GetPokemonLevelData(&levelData,species,pokeStruct.level);
-      pokeStruct.currExp = levelData.expRequired;
-      pokemon->unk0 = 0;
-      pokeStruct.speciesNum = species;
-      if (pokeStruct.unkC[0].level == 0) {
+    pokeStruct = *pokemon;
+    r6 = pokeStruct.speciesNum;
+    GetPokemonLevelData(&levelData,species,pokeStruct.level);
+    pokeStruct.currExp = levelData.expRequired;
+    pokemon->unk0 = 0;
+    pokeStruct.speciesNum = species;
+    if (pokeStruct.unkC[0].level == 0) {
         pokeStruct.unkC[0].level = pokeStruct.level;
-      }
-      else if (pokeStruct.unkC[1].level == 0) {
+    }
+    else if (pokeStruct.unkC[1].level == 0) {
         pokeStruct.unkC[1].level = pokeStruct.level;
-      }
+    }
 
-      CopyStringtoBuffer(buffer, GetMonSpecies(r6));
+    CopyStringtoBuffer(buffer, GetMonSpecies(r6));
 
-      index = 0;
-      goto _start;
-      do
-      {
-          index++;
+    index = 0;
+    goto _start;
+    do
+    {
+        index++;
 _start:
-          if(index >= POKEMON_NAME_LENGTH) break;
-          if(buffer[index] != pokeStruct.name[index]) goto _end;
-          if(buffer[index] == 0) break;
+        if (index >= POKEMON_NAME_LENGTH) break;
+        if (buffer[index] != pokeStruct.name[index]) goto _end;
+        if (buffer[index] == 0) break;
 
-      } while(TRUE);
-      if(flag)
-          BoundedCopyStringtoBuffer(pokeStruct.name, GetMonSpecies(species), POKEMON_NAME_LENGTH);
+    } while(TRUE);
+    if (flag)
+        BoundedCopyStringtoBuffer(pokeStruct.name, GetMonSpecies(species), POKEMON_NAME_LENGTH);
 _end:
-      return sub_808D1DC(&pokeStruct);
+    return sub_808D1DC(&pokeStruct);
 }
 
 UNUSED void sub_808F83C(PokemonStruct1 *pokemon, s16 species, u8 *r2)

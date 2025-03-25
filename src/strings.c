@@ -9,6 +9,7 @@
 #include "constants/move_range.h"
 #include "structs/str_status_text.h"
 
+// NDS=020C81F0
 const char * const gUnformattedTypeStrings[NUM_TYPES] =
 {
     [TYPE_NONE] = _("None"),

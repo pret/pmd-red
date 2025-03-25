@@ -17,15 +17,15 @@
 #include "sprite.h"
 #include "text_util.h"
 
-static EWRAM_DATA MonsterDataEntry *gMonsterParameters = {0};
-static EWRAM_DATA OpenedFile *gMonsterParametersFile = {0};
+static EWRAM_DATA MonsterDataEntry *gMonsterParameters = {NULL}; // B=02135090
+static EWRAM_DATA OpenedFile *gMonsterParametersFile = {NULL};
 static EWRAM_DATA SpriteOAM gShadowSprites[3] = {0};
-static EWRAM_DATA unkStruct_203B45C gRecruitedPokemon = {0};
+static EWRAM_DATA RecruitedMon gRecruitedPokemon = {0}; // B=02135560
 static EWRAM_DATA u16 gLevelCurrentPokeId = {0};
 UNUSED static EWRAM_DATA u16 unused_data[3] = {0};
 static EWRAM_DATA LevelData gLevelCurrentData[0x64] = {0};
 
-EWRAM_INIT unkStruct_203B45C *gRecruitedPokemonRef = {NULL};
+EWRAM_INIT RecruitedMon *gRecruitedPokemonRef = {NULL}; // B=020EAF94
 
 struct unkStruct_8107654
 {
@@ -51,38 +51,37 @@ extern char* gFormattedStatusNames[];
 extern u32 ReturnIntFromChar(u8 r0);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
 
+// arm9.bin::0205C34C
 void LoadMonsterParameters(void)
 {
     gRecruitedPokemonRef = &gRecruitedPokemon;
     gMonsterParametersFile = OpenFileAndGetFileDataPtr(sMonsterParameterFileName, &gSystemFileArchive);
     gMonsterParameters = (MonsterDataEntry *)gMonsterParametersFile->data;
     gLevelCurrentPokeId = 0;
+    // More in blue
 }
 
-unkStruct_203B45C *GetRecruitedPokemon(void)
+// arm9.bin::0205C340
+RecruitedMon *GetRecruitedPokemon(void)
 {
     return &gRecruitedPokemon;
 }
 
+// arm9.bin::0205C2A4
 void InitializeRecruitedPokemon(void)
 {
-  s32 index;
+    s32 index;
 
-  for(index = 0; index < NUM_MONSTERS; index++)
-  {
-    gRecruitedPokemonRef->pokemon[index].unk0 = 0;
-  }
+    for (index = 0; index < NUM_MONSTERS; index++)
+        gRecruitedPokemonRef->pokemon[index].unk0 = 0;
 
-  for(index = 0; index < 4; index++)
-  {
-    gRecruitedPokemonRef->pokemon2[index].unk0 = 0;
-  }
+    for (index = 0; index < 4; index++)
+        gRecruitedPokemonRef->pokemon2[index].unk0 = 0;
 
-  for(index = 0; index < MAX_TEAM_MEMBERS; index++)
-  {
-    gRecruitedPokemonRef->team[index].speciesNum = 0;
-    gRecruitedPokemonRef->team[index].unk0 = 0;
-  }
+    for (index = 0; index < MAX_TEAM_MEMBERS; index++) {
+        gRecruitedPokemonRef->team[index].speciesNum = 0;
+        gRecruitedPokemonRef->team[index].unk0 = 0;
+    }
 }
 
 void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
@@ -648,6 +647,7 @@ void CopyMonsterNameToBuffer(u8 * buffer, s32 index)
     strncpy(buffer, gMonsterParameters[index_s16].species, 0x14);
 }
 
+// arm9.bin::0205B274
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index)
 {
     s32 new_index = index;
@@ -838,6 +838,7 @@ s32 GetBaseDefensiveStat(s32 index, u32 r1)
     return gMonsterParameters[index_s16].baseDefSpDef[r1];
 }
 
+// arm9.bin::0205AE2C
 u8 GetPokemonType(s32 index, u32 typeIndex)
 {
     s16 newIndex = index;
@@ -915,6 +916,7 @@ OpenedFile *OpenPokemonDialogueSpriteFile(s16 index)
     return OpenFile(buffer, &gMonsterFileArchive);
 }
 
+// arm9.bin::0205AC60
 OpenedFile *GetDialogueSpriteDataPtr(s32 index)
 {
     // Looks like this loads the dialogue sprite for the pokemon

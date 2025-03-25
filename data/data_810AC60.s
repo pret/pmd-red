@@ -65,7 +65,7 @@ gIsTypePhysicalTable: @ 810AC7C
         .byte 0x00
 
 	.global gUnknown_810AC90
-gUnknown_810AC90: @ 810AC90
+gUnknown_810AC90: @ R=810AC90 | B=020C3498
         .byte 0x02, 0x00, 0x00, 0x00
         .byte 0x04, 0x00, 0x00, 0x00
         .byte 0x06, 0x00, 0x00, 0x00

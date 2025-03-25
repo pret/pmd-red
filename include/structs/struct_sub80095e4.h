@@ -8,21 +8,21 @@
 #include "text_3.h"
 
 // Struct related with sub_80095E4
+// size: R=0x9C | B=?
 typedef struct struct_Sub80095E4
 {
     /* 0x0 */ MenuInputStruct input;
-    u32 unk34;
-    WindowTemplate *unk38;
-    WindowTemplates windows;
-    // size: 0x9C
+    /* 0x34 */ u32 unk34;
+    /* 0x38 */ WindowTemplate *unk38;
+    /* 0x3C */ WindowTemplates windows;
 } struct_Sub80095E4;
 
-// Has 1 additional array.
-// size: 0xA0
+// Has 1 additional array
+// size: R=0xA0 | B=0x9C?
 typedef struct struct_Sub80095E4_2
 {
     /* 0x0 */ struct_Sub80095E4 s0; // s as in 'struct' ; decided to go against unk as to not have `->unk0->unk3C`
-    WindowHeader unk9C;
+    /* 0x9C */ WindowHeader unk9C;
 } struct_Sub80095E4_2;
 
 // Note: In order to get matching ASM, this macro had to be created.
@@ -33,16 +33,16 @@ typedef struct struct_Sub80095E4_2
     s16 newE;                                                                           \
     s16 a0 = (_a0);                                                                     \
     UNUSED s32 a0_ = a0;                                                                \
-    UNUSED s16 oldE = (ptr).windows.id[(ptr).unk34].height;                                    \
+    UNUSED s16 oldE = (ptr).windows.id[(ptr).unk34].height;                             \
     a0_ = 0;                                                                            \
     new10 = a0 + 2;                                                                     \
     newE = a0;                                                                          \
                                                                                         \
-    (ptr).windows.id[(ptr).unk34].height = newE;                                               \
-    (ptr).windows.id[(ptr).unk34].unk10 = a0 + 2;                                            \
+    (ptr).windows.id[(ptr).unk34].height = newE;                                        \
+    (ptr).windows.id[(ptr).unk34].unk10 = a0 + 2;                                       \
                                                                                         \
     ResetUnusedInputStruct();                                                           \
-    ShowWindows(&(ptr).windows, TRUE, TRUE);                                               \
+    ShowWindows(&(ptr).windows, TRUE, TRUE);                                            \
 }
 
 #define SUB_80095E4_CALL(ptr)                                                           \

@@ -11,6 +11,7 @@ static EWRAM_INIT u8 sUnknown_203B408 = {1};
 
 #include "data/code_803D0D8.h"
 
+// arm9.bin::02059A08
 u8 sub_803D0D8()
 {
     return sUnknown_203B408;
@@ -21,16 +22,19 @@ UNUSED static void sub_803D0E4(u8 a0)
     sUnknown_203B408 = a0;
 }
 
+// arm9.bin::020599F8
 u8 sub_803D0F0(u8 r0)
 {
     return sUnknown_80F42F0[r0];
 }
 
+// arm9.bin::020599E8
 u8 sub_803D100(u8 r0)
 {
     return sUnknown_80F42D0[r0];
 }
 
+// arm9.bin::02059908
 u8 sub_803D110(u8 *param_1, u8 *param_2, s32 size)
 {
     s32 index1;
@@ -73,6 +77,7 @@ u8 sub_803D110(u8 *param_1, u8 *param_2, s32 size)
     return 1;
 }
 
+// arm9.bin::0205986C
 void sub_803D1A8(u8 *param_1, u8 *param_2, s32 size)
 {
     s32 index;
@@ -98,6 +103,7 @@ void sub_803D1A8(u8 *param_1, u8 *param_2, s32 size)
     }
 }
 
+// arm9.bin::02059778
 bool8 sub_803D204(u8 *buffer,unkStruct_203B480 *param_2)
 {
   s32 innerIndex;
@@ -136,10 +142,11 @@ bool8 sub_803D204(u8 *buffer,unkStruct_203B480 *param_2)
     return FALSE;
 }
 
+// arm9.bin::020596B0
 void sub_803D2C0(u8 *buffer, unkStruct_203B480 *mail)
 {
     u8 checksum;
-    int index;
+    s32 index;
     u8 local_c0 [34];
     u8 buffer1 [PASSWORD_BUFFER_SIZE];
     u8 buffer2 [PASSWORD_BUFFER_SIZE];
@@ -168,10 +175,11 @@ void sub_803D2C0(u8 *buffer, unkStruct_203B480 *mail)
     MemoryCopy8(buffer,buffer2,sizeof(buffer2));
 }
 
+// arm9.bin::020595BC
 bool8 DecodeWonderMailPassword(u8* buffer, WonderMail *mail)
 {
     s32 innerIndex;
-    int index;
+    s32 index;
     u8 checksum;
     u8 local_70 [16];
     u8 local_60 [24];
@@ -190,8 +198,6 @@ bool8 DecodeWonderMailPassword(u8* buffer, WonderMail *mail)
         local_60[index] = password[innerIndex];
     }
 
-
-
     if (sub_803D110(local_60,local_70,24) != 0) {
 
         for(index = 1; index < 0xF; index++)
@@ -208,6 +214,7 @@ bool8 DecodeWonderMailPassword(u8* buffer, WonderMail *mail)
     return FALSE;
 }
 
+// arm9.bin::020594F4
 void sub_803D414(u8 *buffer,WonderMail *mail)
 {
     u8 checksum;
@@ -239,6 +246,11 @@ void sub_803D414(u8 *buffer,WonderMail *mail)
     }
     MemoryCopy8(buffer,auStack_44,sizeof(auStack_44));
 }
+
+
+// File boundary?
+
+
 
 void sub_803D4AC(void)
 {

@@ -158,6 +158,7 @@ ALIGNED(4) const u8* const gCommonKangStorage[KANG_MODE_COUNT][KANG_DLG_MAX] =
     }
 };
 
+// NDS=020A7614
 ALIGNED(4) const u8* const gCommonKecleonBros[KECLEON_BROS_MODE_COUNT][KECLEON_DLG_MAX] =
 {
     [KECLEON_BROS_MODE_ITEMS_AWAKE] = {
