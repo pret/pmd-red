@@ -510,7 +510,7 @@ extern const u8 gKaoJirachi[];
 extern const u8 gKaoDeoxysNormal[];
 extern const u8 gKaoMunchlax[];
 extern const u8 gKaoRayquazaCutscene[];
-extern const u8 gPaletFile[];
+extern const u8 gAxMonsPalette[];
 
 const File gMonsterFiles[MONSTER_FILES_COUNT] = {
     [0] = { "ax001", gAxBulbasaur,},
@@ -1009,7 +1009,7 @@ const File gMonsterFiles[MONSTER_FILES_COUNT] = {
     [493] = { "kao414", gKaoDeoxysNormal,},
     [494] = { "kao420", gKaoMunchlax,},
     [495] = { "kao423", gKaoRayquazaCutscene,},
-    [496] = { "palet", gPaletFile,},
+    [496] = { "palet", gAxMonsPalette,},
 };
 
 UNUSED ALIGNED(4) static const char sPksDir3[] = "pksdir0";

@@ -812,6 +812,13 @@ SECTIONS {
     {
         src/monster_sbin.o(.rodata);
         data/monster_sbin.o(.rodata);
+        src/monster_sbin_palet.o(.rodata);
+    } > ROM =0
+    
+    unk_96BD7AC_section :
+    ALIGN(4)
+    {
+        data/unk_96BD7AC.o(.rodata);
     } > ROM =0
 
     effect_sbin_section :
