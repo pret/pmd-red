@@ -676,13 +676,13 @@ u32 sub_80913E0(Item* slot, u32 windowId, STATUSTEXTS(statuses))
 
         InitPokemonMove(buffer8, move);
         AddDoubleUnderScoreHighlight(windowId, 4, 82, 200, COLOR_WHITE_2);
-        PrintFormattedStringOnWindow(4, 84, gPtrTypeText, windowId, 0);
+        PrintFormattedStringOnWindow(4, 84, gTextType, windowId, 0);
         moves_data = GetMoveType(buffer8);
         typestring = GetUnformattedTypeString(moves_data);
         PrintFormattedStringOnWindow(64, 84, typestring, windowId, 0);
         result = GetMoveBasePP(buffer8);
         gFormatArgs[0] = result;
-        PrintFormattedStringOnWindow(128, 84, gPtrPPD0Text, windowId, 0);
+        PrintFormattedStringOnWindow(128, 84, gText_PP_Value0, windowId, 0);
     }
 
     sub_80073E0(windowId);
