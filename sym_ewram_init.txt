@@ -127,7 +127,7 @@
 .include "src/rescue_team_info.o"
 .include "src/friend_area.o"
 .include "src/game_options.o"
-.include "src/code_8094D28.o"
+.include "src/random_mersenne_twister.o"
 .include "src/play_time.o"
 .include "src/code_8094F88.o"
 .include "src/code_80958E8.o"
