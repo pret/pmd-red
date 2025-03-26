@@ -7,6 +7,7 @@
 *.4bpp
 *.8bpp
 *.gbapal
+*.pmdpal
 *.lz
 *.rl
 *.pcm

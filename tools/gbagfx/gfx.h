@@ -49,5 +49,6 @@ void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int m
 void FreeImage(struct Image *image);
 void ReadGbaPalette(char *path, struct Palette *palette);
 void WriteGbaPalette(char *path, struct Palette *palette);
+void WritePmdPalette(char *path, struct Palette *palette);
 
 #endif // GFX_H

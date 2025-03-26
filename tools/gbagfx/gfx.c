@@ -505,3 +505,25 @@ void WriteGbaPalette(char *path, struct Palette *palette)
 
 	fclose(fp);
 }
+
+void WritePmdPalette(char *path, struct Palette *palette)
+{
+	FILE *fp = fopen(path, "wb");
+
+	if (fp == NULL)
+		FATAL_ERROR("Failed to open \"%s\" for writing.\n", path);
+
+	for (int i = 0; i < palette->numColors; i++) {
+		unsigned char red = palette->colors[i].red;
+		unsigned char green = palette->colors[i].green;
+		unsigned char blue = palette->colors[i].blue;
+		unsigned char alpha = 0x80;
+
+		fputc(red, fp);
+		fputc(green, fp);
+		fputc(blue, fp);
+		fputc(alpha, fp);
+	}
+
+	fclose(fp);
+}

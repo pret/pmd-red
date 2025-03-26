@@ -332,10 +332,12 @@ int ExtractData(const std::unique_ptr<unsigned char[]>& buffer, int offset, int 
 
 void CFile::TryConvertIncbin()
 {
-    std::string idents[6] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32" };
+    std::string idents[7] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32", "INCBIN_RGB" };
     int incbinType = -1;
+    int size;
+    bool isSigned, isRGB;
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 7; i++)
     {
         if (CheckIdentifier(idents[i]))
         {
@@ -347,8 +349,17 @@ void CFile::TryConvertIncbin()
     if (incbinType == -1)
         return;
 
-    int size = 1 << (incbinType / 2);
-    bool isSigned = ((incbinType % 2) == 0);
+    // RGB incbin
+    if (incbinType == 6) {
+        isRGB = true;
+        size = 4;
+        isSigned = false;
+    }
+    else {
+        isRGB = false;
+        size = 1 << (incbinType / 2);
+        isSigned = ((incbinType % 2) == 0);
+    }
 
     long oldPos = m_pos;
     long oldLineNum = m_lineNum;
@@ -366,7 +377,8 @@ void CFile::TryConvertIncbin()
 
     m_pos++;
 
-    std::printf("{");
+    if (!isRGB)
+        std::printf("{");
 
     while (true)
     {
@@ -394,7 +406,7 @@ void CFile::TryConvertIncbin()
 
             if (m_buffer[m_pos] == '\\')
                 RaiseError("unexpected escape in path string");
-            
+
             m_pos++;
         }
 
@@ -416,7 +428,9 @@ void CFile::TryConvertIncbin()
             int data = ExtractData(buffer, offset, size);
             offset += size;
 
-            if (isSigned)
+            if (isRGB)
+                std::printf("{%uu, %uu, %uu, %uu},", (data & 0xFF), (data & 0xFF00) >> 8, (data & 0xFF0000) >> 16, (data & 0xFF000000) >> 24);
+            else if (isSigned)
                 std::printf("%d,", data);
             else
                 std::printf("%uu,", data);
@@ -429,13 +443,14 @@ void CFile::TryConvertIncbin()
 
         m_pos++;
     }
-    
+
     if (m_buffer[m_pos] != ')')
         RaiseError("expected ')'");
 
     m_pos++;
 
-    std::printf("}");
+    if (!isRGB)
+        std::printf("}");
 }
 
 // Reports a diagnostic message.
