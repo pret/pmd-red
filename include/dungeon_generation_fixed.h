@@ -4,7 +4,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 
-bool8 PlaceFixedRoomTile(Tile *tile, u8 a1, s32 x, s32 y, u8 a5);
+bool8 PlaceFixedRoomTile(Tile *tile, u8 fixedRoomActionId, s32 x, s32 y, bool8 spawnTrapOrItem);
 void sub_8051E3C(void);
 void sub_8051E7C(Entity *pokemon);
 

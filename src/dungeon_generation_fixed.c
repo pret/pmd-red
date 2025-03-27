@@ -11,13 +11,16 @@
 #include "dungeon_message.h"
 #include "code_803E668.h"
 #include "structs/str_806B7F8.h"
+#include "constants/monster.h"
+#include "constants/trap.h"
+#include "constants/item.h"
 
 extern s32 sub_803DA20(s16 species);
 extern void sub_80429FC(DungeonPos *r0);
 
 static bool8 sub_805210C(u8 itemId);
 
-static void sub_805193C(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
+static void SpawnItemAtPos(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
 {
     Item item;
     DungeonPos pos = {x, y};
@@ -38,7 +41,7 @@ static void sub_805193C(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
 }
 
 // s16 species memes strike again. Will the fix ever be discovered?
-static void sub_8051998(s16 species_, s32 x, s32 y, u32 unk2_, u32 UNUSED unused)
+static void SpawnSpeciesAtPos(s16 species_, s32 x, s32 y, u32 unk2_, u32 UNUSED unused)
 {
     struct unkStruct_806B7F8 unkStruct;
     s32 species = SpeciesId(species_);
@@ -83,21 +86,21 @@ static void SpawnEnemyTrapAtPos(u8 trapId, s32 x, s32 y, bool8 isVisible)
 
 struct UnkStruct_80F6D20
 {
-    u8 unk0;
+    u8 itemId;
     s16 unk2;
     u32 unk4;
-    s16 unk8;
+    s16 speciesId;
     u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
+    u8 trapId;
+    u8 roomId;
+    bool8 trapVisible;
+    bool8 setTerrainToSecondary;
 };
 
 extern const struct UnkStruct_80F6D20 gUnknown_80F6E20[];
 
 // Used to spawn a single tile when generating a fixed room. The tile might contain an item or a monster.
-bool8 PlaceFixedRoomTile(Tile *tile, u8 fixedRoomActionId, s32 x, s32 y, bool8 a5)
+bool8 PlaceFixedRoomTile(Tile *tile, u8 fixedRoomActionId, s32 x, s32 y, bool8 spawnTrapOrItem)
 {
     if (fixedRoomActionId > 0xF) {
         SetTerrainNormal(tile);
@@ -182,13 +185,13 @@ bool8 PlaceFixedRoomTile(Tile *tile, u8 fixedRoomActionId, s32 x, s32 y, bool8 a
         default:
             if (fixedRoomActionId >= 16 && fixedRoomActionId <= 219) {
                 const struct UnkStruct_80F6D20 *ptr = &gUnknown_80F6E20[fixedRoomActionId - 16];
-                tile->room = ptr->unkC;
-                if (ptr->unk0 != 0) {
-                    if (a5) {
-                        sub_805193C(ptr->unk0, x, y, ptr->unk2, ptr->unk4);
+                tile->room = ptr->roomId;
+                if (ptr->itemId != 0) {
+                    if (spawnTrapOrItem) {
+                        SpawnItemAtPos(ptr->itemId, x, y, ptr->unk2, ptr->unk4);
                     }
                     else {
-                        gDungeon->unk644.unk47 = ptr->unk0;
+                        gDungeon->unk644.unk47 = ptr->itemId;
                     }
                 }
                 else {
@@ -198,15 +201,15 @@ bool8 PlaceFixedRoomTile(Tile *tile, u8 fixedRoomActionId, s32 x, s32 y, bool8 a
                     }
                 }
 
-                if (ptr->unk8 != 0) {
-                    sub_8051998(ptr->unk8, x, y, ptr->unkA, fixedRoomActionId);
+                if (ptr->speciesId != 0) {
+                    SpawnSpeciesAtPos(ptr->speciesId, x, y, ptr->unkA, fixedRoomActionId);
                 }
 
-                if (ptr->unkB != 20 && a5) {
-                    SpawnEnemyTrapAtPos(ptr->unkB, x, y, ptr->unkD);
+                if (ptr->trapId != NUM_TRAPS && spawnTrapOrItem) {
+                    SpawnEnemyTrapAtPos(ptr->trapId, x, y, ptr->trapVisible);
                 }
 
-                if (ptr->unkE != 0) {
+                if (ptr->setTerrainToSecondary) {
                     SetTerrainSecondary(tile);
                 }
             }

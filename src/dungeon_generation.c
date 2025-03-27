@@ -5887,11 +5887,11 @@ static u8 sub_80511F0(void)
     return gUnknown_202F1E0;
 }
 
-static bool8 sub_805124C(Tile *tile, u8 a1, s32 x, s32 y, u8 a5)
+static bool8 sub_805124C(Tile *tile, u8 a1, s32 x, s32 y, bool8 spawnTrapOrItem)
 {
     tile->terrainType |= TERRAIN_TYPE_UNBREAKABLE;
     tile->unkE = 0;
-    return PlaceFixedRoomTile(tile, a1, x, y, a5);
+    return PlaceFixedRoomTile(tile, a1, x, y, spawnTrapOrItem);
 }
 
 static void sub_8051288(s32 fixedRoomNumber)
@@ -5909,7 +5909,7 @@ static void sub_8051288(s32 fixedRoomNumber)
     for (y = 5; y < fixedRoomSizeY + 5; y++) {
         for (x = 5; x < fixedRoomSizeX + 5; x++) {
             u8 unk = sub_80511F0();
-            if (sub_805124C(GetTileMut(x, y), unk, x, y, 1)) {
+            if (sub_805124C(GetTileMut(x, y), unk, x, y, TRUE)) {
                 dungeon->stairsSpawn.x = x;
                 dungeon->stairsSpawn.y = y;
             }
@@ -5980,7 +5980,7 @@ static void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber)
                 Tile *tile = GetTileMut(x, y);
 
                 dungeon->unkE87C[xIndex][yIndex] = unk;
-                sub_805124C(&dungeon->unkE27C[xIndex][yIndex], unk, x, y, 0);
+                sub_805124C(&dungeon->unkE27C[xIndex][yIndex], unk, x, y, FALSE);
                 roomId = tile->room;
                 *tile = dungeon->unkE27C[xIndex][yIndex];
                 if (x >= gridCell->start.x + 2 && x < gridCell->end.x - 2 && y >= gridCell->start.y + 2 && y < gridCell->end.y - 2) {
@@ -6001,7 +6001,7 @@ static void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber)
                 Tile *tile = GetTileMut(x, y);
                 u8 roomId = tile->room;
 
-                sub_805124C(tile, unk, x, y, 1);
+                sub_805124C(tile, unk, x, y, TRUE);
                 tile->room = roomId;
                 dungeon->unkE8BC = roomId;
             }
