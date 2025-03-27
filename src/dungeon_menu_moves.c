@@ -29,7 +29,6 @@
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
-#include "tile_types.h"
 
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);

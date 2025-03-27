@@ -30,7 +30,6 @@
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
-#include "tile_types.h"
 #include "weather.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"

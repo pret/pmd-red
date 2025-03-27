@@ -31,7 +31,6 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "text_util.h"
-#include "tile_types.h"
 #include "trap.h"
 #include "weather.h"
 #include "dungeon_config.h"

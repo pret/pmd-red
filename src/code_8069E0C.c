@@ -39,7 +39,6 @@
 #include "random.h"
 #include "sprite.h"
 #include "status_checks_1.h"
-#include "tile_types.h"
 #include "weather.h"
 
 extern void sub_8042900(Entity *r0);

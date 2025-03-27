@@ -18,7 +18,6 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "structs/map.h"
-#include "tile_types.h"
 
 extern void ShowVisualFlags(Entity *r0);
 

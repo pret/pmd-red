@@ -47,7 +47,6 @@
 #include "sprite.h"
 #include "text_1.h"
 #include "text_3.h"
-#include "tile_types.h"
 #include "weather.h"
 
 extern void sub_800F15C(s32);

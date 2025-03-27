@@ -13,7 +13,6 @@
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "structs/str_dungeon.h"
-#include "tile_types.h"
 #include "position_util.h"
 #include "trap.h"
 

@@ -5,7 +5,6 @@
 #include "dungeon_map_access.h"
 #include "dungeon_range.h"
 #include "dungeon_util.h"
-#include "tile_types.h"
 #include "pokemon.h"
 #include "code_805D8C8.h"
 

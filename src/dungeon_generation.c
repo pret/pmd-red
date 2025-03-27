@@ -2,7 +2,6 @@
 #include "def_filearchives.h"
 #include "dungeon_generation.h"
 #include "file_system.h"
-#include "tile_types.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_random.h"

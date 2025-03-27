@@ -218,7 +218,6 @@ SECTIONS {
         src/code_8048480.o(.text);
         src/dungeon_ai_item_weight.o(.text);
         src/dungeon_map_access.o(.text);
-        src/tile_types.o(.text);
         src/dungeon_generation.o(.text);
         src/dungeon_message.o(.text);
         src/dungeon_move.o(.text);
@@ -583,7 +582,7 @@ SECTIONS {
         src/code_8048480.o(.rodata);
         src/friend_area.o(.rodata);
         data/data_810AC60.o(.rodata);
-        src/tile_types.o(.rodata);
+        src/dungeon_map_access.o(.rodata);
         src/exclusive_pokemon.o(.rodata);
         src/rescue_team_info.o(.rodata);
         src/strings.o(.rodata);

@@ -33,7 +33,6 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_misc.h"
-#include "tile_types.h"
 #include "dungeon_config.h"
 
 extern u8 *gUnknown_80FB380[];

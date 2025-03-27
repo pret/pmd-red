@@ -56,7 +56,6 @@
 #include "sprite.h"
 #include "status_checks_1.h"
 #include "string_format.h"
-#include "tile_types.h"
 #include "trap.h"
 #include "weather.h"
 
