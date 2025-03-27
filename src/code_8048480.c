@@ -31,8 +31,7 @@
 #include "dungeon_menu_moves.h"
 #include "dungeon_misc.h"
 #include "code_803E724.h"
-
-extern s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
+#include "dungeon_data.h"
 
 extern u8 *gUnknown_80F89F4[];
 extern u8 *gUnknown_80FB580[];
@@ -65,8 +64,6 @@ extern u8 *gItemStickyDoesntWorkText[];
 extern u8 *gUnknown_80FECA0[];
 extern u8 *gItemStickyDoesntWorkText[];
 extern u8 *gUnknown_80F9BD8[];
-
-#include "data/code_8048480.h"
 
 extern void sub_8078B5C(Entity *, Entity *, u32, u32, u32);
 extern void sub_8051E7C(Entity *pokemon);

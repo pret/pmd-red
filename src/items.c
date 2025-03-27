@@ -14,6 +14,8 @@
 #include "text_util.h"
 #include "strings.h"
 
+extern const s32 gUnknown_810A3F0[100];
+extern const s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
 extern const char gItemParaFileName[];
 extern const char gUnknown_8109794[];
 extern const char gUnknown_81097A4[];
@@ -38,8 +40,6 @@ EWRAM_INIT TeamInventory *gTeamInventoryRef = {NULL}; // NDS=020EAF98
 
 extern void SortKecleonShopInventory();
 bool8 AddKecleonWareItem(u8);
-
-#include "data/items.h"
 
 static void sub_8090F58(u8 *, u8 *, Item *, const unkStruct_8090F58 *);
 
