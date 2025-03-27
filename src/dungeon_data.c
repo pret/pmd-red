@@ -461,7 +461,7 @@ const s16 gUnknown_810AC64 = 8;
 const s16 gUnknown_810AC66 = 8;
 const s16 gUnknown_810AC68 = 8;
 
-const u8 gUnknown_810AC6A[NUM_TYPES] =
+const u8 gBestResistTypeTable[NUM_TYPES] =
 {
     [TYPE_NONE] = TYPE_NONE,
     [TYPE_NORMAL] = TYPE_GHOST,

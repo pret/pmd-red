@@ -48,7 +48,7 @@ extern const s16 gUnknown_810AC62;
 extern const s16 gUnknown_810AC64;
 extern const s16 gUnknown_810AC66;
 extern const s16 gUnknown_810AC68;
-extern const u8 gUnknown_810AC6A[NUM_TYPES];
+extern const u8 gBestResistTypeTable[NUM_TYPES];
 extern const bool8 gIsTypePhysicalTable[NUM_TYPES];
 extern const s32 gUnknown_810AC90[10];
 extern const s16 gFrenzyPlantIQReq;

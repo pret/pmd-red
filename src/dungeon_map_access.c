@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_map_access.h"
 #include "constants/walkable_tile.h"
 #include "structs/str_dungeon.h"
@@ -18,17 +19,7 @@
 #include "text_1.h"
 #include "code_806CD90.h"
 
-extern const Tile gOtherOobTile;
-extern const Tile gWaterOobTile;
-extern u8 gUnknown_80F6A04[];
-extern u8 gUnknown_80F6A10[];
-extern u8 gUnknown_80F6A28[];
-extern u8 gUnknown_80F6A1C[];
-extern u8 gUnknown_80F6A34[];
-extern u8 gUnknown_80F6A40[];
 extern u8 gUnknown_8108EC0[];
-extern const s16 gUnknown_80F6A4A[];
-extern const s16 gUnknown_80F6C06[];
 
 extern void sub_8042A14(DungeonPos *);
 
@@ -38,6 +29,16 @@ EWRAM_DATA OpenedFile *gUnknown_202F18C = {0};
 EWRAM_DATA Tile gOutOfBoundsTileData = {0};
 
 EWRAM_INIT const Tile *gCurTilesetOobTile = {NULL};
+
+static const Tile gOtherOobTile = {
+    .unk8 = 1,
+    .room = CORRIDOR_ROOM
+};
+// These 2 are identical. All fields equal to 0 except unk8 and room.
+static const Tile gWaterOobTile = {
+    .unk8 = 1,
+    .room = CORRIDOR_ROOM
+};
 
 const Tile *GetTile(s32 x, s32 y)
 {
@@ -82,32 +83,32 @@ void LoadDungeonTilesetAssets(void)
   OpenedFile *file_1;
   u8 fileName [12];
 
-  sprintf(fileName,gUnknown_80F6A04,gUnknown_8108EC0[gDungeon->tileset]); // b%02dfon
+  sprintf(fileName,"b%02dfon",gUnknown_8108EC0[gDungeon->tileset]);
   file = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
   DecompressATGlobalFile((u32 *)0x06008000,0,file);
   CloseFile(file);
 
-  sprintf(fileName,gUnknown_80F6A10,gDungeon->tileset); // b%02dpal
+  sprintf(fileName,"b%02dpal",gDungeon->tileset);
   gDungeonPaletteFile = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
 
-  sprintf(fileName,gUnknown_80F6A1C,gUnknown_8108EC0[gDungeon->tileset]); // b%02dcel
+  sprintf(fileName,"b%02dcel",gUnknown_8108EC0[gDungeon->tileset]);
   file_1 = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
   DecompressATFile(gDungeon->unk11884,0x1194,file_1);
   CloseFile(file_1);
 
   if (gDungeon->tileset < 0x40) {
-    sprintf(fileName,gUnknown_80F6A28,gUnknown_8108EC0[gDungeon->tileset]); // b%02dcex
+    sprintf(fileName,"b%02dcex",gUnknown_8108EC0[gDungeon->tileset]);
     file = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
     DecompressATFile(gDungeon->unk12C24,0x930,file);
     CloseFile(file);
   }
   else {
-    sprintf(fileName,gUnknown_80F6A34,gDungeon->tileset); // b%02demap0
+    sprintf(fileName,"b%02demap0",gDungeon->tileset);
     file = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
     DecompressATFile(gDungeon->unk12C24,0x240,file);
     CloseFile(file);
   }
-  sprintf(fileName,gUnknown_80F6A40,gDungeon->tileset); // b%02dcanm
+  sprintf(fileName,"b%02dcanm",gDungeon->tileset);
   gUnknown_202F18C = OpenFileAndGetFileDataPtr(fileName,&gDungeonFileArchive);
   sub_8004AA4(gUnknown_202EE8C,gUnknown_202F18C,0x20);
   gWalkableTileToCrossableTerrain[0] = CROSSABLE_TERRAIN_REGULAR;
@@ -438,6 +439,43 @@ void sub_8049BB0(s32 x, s32 y)
     GetTileMut(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_CREVICE] = flags[CROSSABLE_TERRAIN_CREVICE];
     GetTileMut(x, y)->walkableNeighborFlags[CROSSABLE_TERRAIN_WALL] = flags[CROSSABLE_TERRAIN_WALL];
 }
+
+static const s16 gUnknown_80F6A4A[] = {
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2,
+    0, 1, 2, 0, 1, 2
+};
+
+static const s16 gUnknown_80F6C06[] = {
+    -9, -9, -9, -10, -10, -10, -8, -8, -8, -7, -7, -7,
+    -6, -6, -6, -5, -5, -5, -4, -4, -4, -3, -3, -3,
+    -2, -2, -2, -1, -1, -1, 0, 0, 0, 1, 1, 1,
+    2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6,
+    7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 11,
+    12, 12, 12, 13, 13, 13, 14, 14, 14, 15, 15, 15,
+    16, 16, 16, 17, 17, 17, 18, 18, 18, 19, 19, 19,
+    20, 20, 20, 21, 21, 21, 22, 22, 22, 23, 23, 23,
+    24, 24, 24, 25, 25, 25, 26, 26, 26, 27, 27, 27,
+    28, 28, 28, 29, 29, 29, 30, 30, 30, 31, 31, 31,
+    32, 32, 32, 33, 33, 33, 34, 34, 34, 35, 35, 35,
+    36, 36, 36, 37, 37, 37, 38, 38, 38, 39, 39, 39,
+    40, 40, 40, 41, 41, 41, 42, 42, 42, 43, 43, 43,
+    44, 44, 44, 45, 45, 45, 46, 46, 46, 47, 47, 47,
+    48, 48, 48, 49, 49, 49, 50, 50, 50, 51, 51, 51,
+    52, 52, 52, 53, 53, 53, 54, 54, 54, 55, 55, 55,
+    56, 56, 56, 57, 57, 57, 58, 58, 58, 59, 59, 59,
+    60, 60, 60, 61, 61, 61, 62, 62, 62, 63, 63, 63
+};
 
 void sub_8049ED4(void)
 {
