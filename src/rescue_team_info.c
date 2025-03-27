@@ -98,9 +98,10 @@ u8 GetRescueTeamRank(void)
   return LUCARIO_RANK;
 }
 
-const u8 *GetTeamRankString(u8 index)
+const u8 *GetTeamRankString(u32 index)
 {
-    return gRescueTeamRanks[index];
+    u8 index_u8 = (u8)index;
+    return gRescueTeamRanks[index_u8];
 }
 
 // Unused
