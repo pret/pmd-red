@@ -262,7 +262,7 @@ void HandleGbaToJascPaletteCommand(char *inputPath, char *outputPath, int argc U
     WriteJascPalette(outputPath, &palette);
 }
 
-void HandleJascToGbaPaletteCommand(char *inputPath, char *outputPath, int argc, char **argv)
+static void HandleJascToPaletteCommand(char *inputPath, char *outputPath, int argc, char **argv, bool isPmdPal)
 {
     int numColors = 0;
 
@@ -296,7 +296,22 @@ void HandleJascToGbaPaletteCommand(char *inputPath, char *outputPath, int argc, 
     if (numColors != 0)
         palette.numColors = numColors;
 
-    WriteGbaPalette(outputPath, &palette);
+    if (isPmdPal) {
+        WritePmdPalette(outputPath, &palette);
+    }
+    else {
+        WriteGbaPalette(outputPath, &palette);
+    }
+}
+
+void HandleJascToGbaPaletteCommand(char *inputPath, char *outputPath, int argc, char **argv)
+{
+    HandleJascToPaletteCommand(inputPath, outputPath, argc, argv, false);
+}
+
+void HandleJascToPmdPaletteCommand(char *inputPath, char *outputPath, int argc, char **argv)
+{
+    HandleJascToPaletteCommand(inputPath, outputPath, argc, argv, true);
 }
 
 void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
@@ -554,6 +569,7 @@ int main(int argc, char **argv)
         { "png", "pal", HandlePngToJascPaletteCommand },
         { "gbapal", "pal", HandleGbaToJascPaletteCommand },
         { "pal", "gbapal", HandleJascToGbaPaletteCommand },
+        { "pal", "pmdpal", HandleJascToPmdPaletteCommand },
         { "latfont", "png", HandleLatinFontToPngCommand },
         { "png", "latfont", HandlePngToLatinFontCommand },
         { "hwjpnfont", "png", HandleHalfwidthJapaneseFontToPngCommand },

@@ -612,7 +612,3 @@ ax_sprite 0, 0
 .include "data/kao/deoxysnormal.inc"
 .include "data/kao/munchlax.inc"
 .include "data/kao/rayquazacutscene.inc"
-
-.global gPaletFile
-gPaletFile:
-.incbin "baserom.gba", 0x16BD42C, 0x82BD4
