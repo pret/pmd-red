@@ -581,7 +581,6 @@ SECTIONS {
         src/items.o(.rodata);
         src/code_8048480.o(.rodata);
         src/friend_area.o(.rodata);
-        data/data_810AC60.o(.rodata);
         src/dungeon_map_access.o(.rodata);
         src/exclusive_pokemon.o(.rodata);
         src/rescue_team_info.o(.rodata);
