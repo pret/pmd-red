@@ -129,22 +129,22 @@ void GroundMap_ExecuteEvent(s16 scriptIndex, u32 param_2)
     GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_81175E0);
 }
 
-void GroundMap_ExecuteStation(s16 param_1, s16 param_2, s8 param_3, u32 param_4)
+void GroundMap_ExecuteStation(s32 _map, s32 _group, s32 _sector, bool32 _setScriptState)
 {
     ScriptInfoSmall script;
-    s32 iVar1;
-    s32 iVar2;
-    s32 iVar3;
-    u8 iVar4;
+    s32 map;
+    s32 group;
+    s32 sector;
+    bool8 setScriptState;
 
-    iVar1 = param_1;
-    iVar2 = param_2;
-    iVar3 = param_3;
-    iVar4 = param_4;
+    map = (s16)_map;
+    group = (s16)_group;
+    sector = (s8)_sector;
+    setScriptState = (bool8)_setScriptState;
 
-    Log(0, gUnknown_81175EC, iVar1, iVar2, iVar3, iVar4); // GroundMap ExecuteStation %3d %3d %3d %d
-    GroundMap_GetStationScript(&script, iVar1, iVar2, iVar3);
-    if (iVar4 != 0)
+    Log(0, gUnknown_81175EC, map, group, sector, setScriptState); // GroundMap ExecuteStation %3d %3d %3d %d
+    GroundMap_GetStationScript(&script, map, group, sector);
+    if (setScriptState != 0)
         script.state = 5;
 
     GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_8117644);
