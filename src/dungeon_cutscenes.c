@@ -771,9 +771,9 @@ void sub_8087130(void)
 
 void sub_8087144(void)
 {
-    Entity *iVar2;
-    Entity *iVar3;
-    Entity *iVar4;
+    Entity *gengarEntity;
+    Entity *ekansEntity;
+    Entity *medichamEntity;
     s16 auStack_10c[28];
     s16 puStack_60[28];
     s16 puStack_5c[28];
@@ -781,33 +781,33 @@ void sub_8087144(void)
     Entity *pEStack_58[3];
     struct_8085B80 auStack_4c[3];
 
-    iVar2 = GetEntityFromMonsterBehavior(BEHAVIOR_5);
-    iVar3 = GetEntityFromMonsterBehavior(BEHAVIOR_6);
-    iVar4 = GetEntityFromMonsterBehavior(BEHAVIOR_MEDICHAM);
+    gengarEntity = GetEntityFromMonsterBehavior(BEHAVIOR_GENGAR);
+    ekansEntity = GetEntityFromMonsterBehavior(BEHAVIOR_EKANS);
+    medichamEntity = GetEntityFromMonsterBehavior(BEHAVIOR_MEDICHAM);
     memcpy(auStack_10c,gUnknown_810739C, 0x38);
     memcpy(puStack_60, gUnknown_81073D4, 0x38);
     memcpy(puStack_5c, gUnknown_810740C, 0x38);
     puStack_64[0] = auStack_10c;
     puStack_64[1] = puStack_60;
     puStack_64[2] = puStack_5c;
-    pEStack_58[0] = iVar2;
-    pEStack_58[1] = iVar3;
-    pEStack_58[2] = iVar4;
+    pEStack_58[0] = gengarEntity;
+    pEStack_58[1] = ekansEntity;
+    pEStack_58[2] = medichamEntity;
     DungeonStartNewBGM(MUS_THERES_TROUBLE);
-    sub_8086A54(iVar2);
-    sub_8086A54(iVar3);
-    sub_8086A54(iVar4);
+    sub_8086A54(gengarEntity);
+    sub_8086A54(ekansEntity);
+    sub_8086A54(medichamEntity);
     sub_8085B4C(auStack_4c,puStack_64,pEStack_58,3);
-    GetEntInfo(iVar2)->unk15F = 1;
-    GetEntInfo(iVar3)->unk15F = 1;
-    GetEntInfo(iVar4)->unk15F = 1;
+    GetEntInfo(gengarEntity)->unk15F = 1;
+    GetEntInfo(ekansEntity)->unk15F = 1;
+    GetEntInfo(medichamEntity)->unk15F = 1;
     while( TRUE ) {
         if (!sub_8085B80(auStack_4c)) break;
         DungeonRunFrameActions(0x46);
     }
-    GetEntInfo(iVar2)->unk15F = 0;
-    GetEntInfo(iVar3)->unk15F = 0;
-    GetEntInfo(iVar4)->unk15F = 0;
+    GetEntInfo(gengarEntity)->unk15F = 0;
+    GetEntInfo(ekansEntity)->unk15F = 0;
+    GetEntInfo(medichamEntity)->unk15F = 0;
 }
 
 void sub_8087230(void)
