@@ -5,15 +5,9 @@
 #include "dungeon_generation.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
+#include "dungeon_strings.h"
 #include "dungeon_util.h"
 #include "items.h"
-
-// size: 0x8
-typedef struct unkStr_80F7C54
-{
-    u8 *text;
-    s32 unk0;
-} unkStr_80F7C54;
 
 EWRAM_DATA unkStruct_202EE44 gDungeonSubMenu[10] = {0};
 
@@ -21,8 +15,6 @@ extern s32 gDungeonSubMenuItemsCount;
 
 extern u16 gUnknown_80F6964[NUM_ITEM_CATEGORIES];
 extern u8 gUnknown_80F697C[];
-extern const unkStr_80F7C54 gUnknown_80F7C50[65];
-extern u8 *gUnknown_80F91EC[];
 extern bool8 sub_8045888(Entity *);
 extern u8 GetFloorType(void);
 
@@ -154,14 +146,14 @@ const u8 *GetDungeonSubMenuItemString(s32 param_1)
     u16 actionId = gDungeonSubMenu[param_1].actionId;
 
     if (actionId == ACTION_STAIRS && GetFloorType() == FLOOR_TYPE_RESCUE) {
-        return *gUnknown_80F91EC;
+        return gUnknown_80F91EC;
     }
     else {
-        if (!AreStringsDifferent(gUnknown_80F7C50[actionId].text, gUnknown_80F697C)) {
+        if (!AreStringsDifferent(gUnknown_80F7C50[actionId].str, gUnknown_80F697C)) {
             return gActions[GetItemActionType(gDungeonSubMenu[param_1].unk2)].useText;
         }
         else {
-            return gUnknown_80F7C50[actionId].text;
+            return gUnknown_80F7C50[actionId].str;
         }
     }
 }
@@ -252,7 +244,7 @@ void sub_8045064(void)
             unkStruct_202EE44 *iPtr = &gDungeonSubMenu[i];
             unkStruct_202EE44 *jPtr = &gDungeonSubMenu[j];
 
-            if (gUnknown_80F7C50[iPtr->actionId].unk0 > gUnknown_80F7C50[jPtr->actionId].unk0) {
+            if (gUnknown_80F7C50[iPtr->actionId].val > gUnknown_80F7C50[jPtr->actionId].val) {
                 SWAP(*iPtr, *jPtr, temp);
             }
         }
