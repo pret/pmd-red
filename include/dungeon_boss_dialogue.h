@@ -1,0 +1,6 @@
+#ifndef GUARD_DUNGEON_BOSS_DIALOGUE_H
+#define GUARD_DUNGEON_BOSS_DIALOGUE_H
+
+#include "dungeon_message.h"
+
+#endif // GUARD_DUNGEON_BOSS_DIALOGUE_H

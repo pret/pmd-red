@@ -28,6 +28,7 @@
 #include "dungeon_move.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
+#include "dungeon_strings.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "math.h"
@@ -317,50 +318,6 @@ static void SortTargets(Entity **targetsArray, Entity *attacker);
 
 extern const s32 gUnknown_8106A50;
 extern const s32 gUnknown_8106A4C;
-extern const u8 *const gUnknown_80FEEA4;
-extern const u8 *const gUnknown_80FEEC8;
-extern const u8 *const gUnknown_80FEEEC;
-extern const u8 *const gUnknown_80FEF0C;
-extern const u8 *const gUnknown_80FEF30;
-extern const u8 *const gUnknown_80FEF4C;
-extern const u8 *const gUnknown_80FEF50;
-extern const u8 *const gUnknown_80FEF54;
-extern const u8 *const gUnknown_80FEF74;
-extern const u8 *const gUnknown_80FEF98;
-extern const u8 *const gUnknown_80FEFD0;
-extern const u8 *const gUnknown_80FECA4;
-extern const u8 *const gUnknown_80F9158;
-extern const u8 *const gUnknown_80FC72C;
-extern const u8 *const gUnknown_80FC700;
-extern const u8 *const gUnknown_80FC6D0;
-extern const u8 *const gUnknown_80FC710;
-extern const u8 *const gUnknown_80FC6FC;
-extern const u8 *const gUnknown_80FECBC;
-extern const u8 *const gUnknown_80FECE0;
-extern const u8 *const gUnknown_80F9688;
-extern const u8 *const gUnknown_80FC714;
-extern const u8 *const gUnknown_80FC718;
-extern const u8 *const gUnknown_80FC6A8;
-extern const u8 *const gUnknown_80FD2D0;
-extern const u8 *const gUnknown_80FD2DC;
-extern const u8 *const gUnknown_80F93C8;
-extern const u8 *const gUnknown_80FC690;
-extern const u8 *const gUnknown_80FC6A4;
-extern const u8 *const gUnknown_80FCD28;
-extern const u8 *const gUnknown_80FCD0C;
-extern const u8 *const gUnknown_80FDD88;
-extern const u8 *const gUnknown_80FDD20;
-extern const u8 *const gUnknown_80FDDA8;
-extern const u8 *const gUnknown_80FDD48;
-extern const u8 *const gUnknown_80FDDAC;
-extern const u8 *const gUnknown_80FC52C;
-extern const u8 *const gUnknown_80FC558;
-extern const u8 *const gUnknown_80FC574;
-extern const u8 *const gUnknown_8100524;
-extern const u8 *const gUnknown_80F9364;
-extern const u8 *const gUnknown_80F93A4;
-extern const u8 *const gUnknown_80F9384;
-extern const u8 *const gUnknown_80F9380;
 
 EWRAM_DATA s32 gUnknown_202F208 = 0;
 EWRAM_DATA s32 gUnknown_202F20C = 0;

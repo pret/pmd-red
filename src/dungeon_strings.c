@@ -1,20 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
-#include "structs/str_item_text.h"
-#include "constants/trap.h"
+#include "dungeon_strings.h"
 
-struct Struct_80F7C50
-{
-    const u8 *str;
-    s32 val;
-};
-
-struct TutorialFlagMsg
-{
-    s32 flagId;
-    const u8 *str;
-};
-
+// TODO: Give proper names to the strings
 const ItemText gActions[] = {
     [0] = { _("{POKEMON_0} used\nthe {MOVE_ITEM_0}."), _("Use")},
     [1] = { _("{POKEMON_0} threw\nthe {MOVE_ITEM_0}."), _("Throw")},
@@ -296,15 +284,15 @@ const u8 *const gUnknown_80F9764[] = {
     [20] = _("The recoil hit {POKEMON_1} for\n{VALUE_0} damage!"),
 };
 
-const u8 *const gWeatherNames[] = {
-    [0] = _("Clear"),
-    [1] = _("Sunny"),
-    [2] = _("Sandstorm"),
-    [3] = _("Cloudy"),
-    [4] = _("Rain"),
-    [5] = _("Hail"),
-    [6] = _("Fog"),
-    [7] = _("Snow"),
+const u8 *const gWeatherNames[WEATHER_COUNT] = {
+    [WEATHER_CLEAR] = _("Clear"),
+    [WEATHER_SUNNY] = _("Sunny"),
+    [WEATHER_SANDSTORM] = _("Sandstorm"),
+    [WEATHER_CLOUDY] = _("Cloudy"),
+    [WEATHER_RAIN] = _("Rain"),
+    [WEATHER_HAIL] = _("Hail"),
+    [WEATHER_FOG] = _("Fog"),
+    [WEATHER_SNOW] = _("Snow"),
 };
 
 const u8 *const gUnknown_80F9ACC = _("{POKEMON_0}'s HP went up {VALUE_0}!");
@@ -829,7 +817,7 @@ const u8 *const gUnknown_80FD788 = _("A food item went bad.");
 const u8 *const gUnknown_80FD7AC = _("Several food items went bad.");
 const u8 *const gUnknown_80FD7D4 = _("Nothing particularly bad happened.");
 const u8 *const gUnknown_80FD7F4 = _("Stepped on something weird!");
-const u8 *const gUnknown_80FD7F8[] = {
+const u8 *const gSteppedOnTrapStrings[NUM_TRAPS] = {
     [0] = _("There was a {POKEMON_0} underfoot!"),
     [1] = _("Mud splashed up from the {POKEMON_0}!"),
     [2] = _("Stepped on a Sticky Trap!"),
@@ -1102,35 +1090,40 @@ const u8 *const gUnknown_80FF6A4 = _("You've reached a destination floor!");
 const u8 *const gUnknown_80FF6F8 = _("You've reached a destination floor!\nBut the Pokémon you seek isn't here...");
 const u8 *const gUnknown_80FF730 = _("{MOVE_ITEM_0} was added to\n{POKEMON_0}'s list of usable tactics.");
 const u8 *const gUnknown_80FF76C = _("Items can't be thrown when a Pokémon's\nterrified!");
-const u8 *const gUnknown_80FF770 = _("Hints");
-const u8 *const gUnknown_80FF774[] = {
-    [0] = _("Controls"),
-    [1] = _("Orientation"),
-    [2] = _("Seeds"),
-    [3] = _("Moves"),
-    [4] = _("Range"),
-    [5] = _("Linking moves"),
-    [6] = _("Pokémon types"),
-    [7] = _("Touch Screen"),
+const u8 *const gText_Hints = _("Hints");
+
+const u8 *const gHintsNames[HINTS_COUNT] = {
+    [HINTS_CONTROLS] = _("Controls"),
+    [HINTS_ORIENTATION] = _("Orientation"),
+    [HINTS_SEEDS] = _("Seeds"),
+    [HINTS_MOVES] = _("Moves"),
+    [HINTS_RANGE] = _("Range"),
+    [HINTS_LINKING_MOVES] = _("Linking moves"),
+    [HINTS_POKEMON_TYPES] = _("Pokémon types"),
+    [HINTS_TOUCH_SCREEN] = _("Touch Screen"),
 };
 
-const u8 *const gUnknown_80FF7EC[] = {
-    [0] = _("{L_BUTTON}+{A_BUTTON}: Use set move\n{L_BUTTON}+{B_BUTTON}: Display message log\n{L_BUTTON}+{R_BUTTON}: Throw set item\n{R_BUTTON}+{DPAD}: Move diagonally\n{SELECT_BUTTON}: Floor map\n{START_BUTTON}: Rotate mode\nSelect item/move + {START_BUTTON}: Description"),
-    [1] = _("Avoid attacks by moving diagonally.\nKeeping {R_BUTTON} pressed, press\n{DPAD} to move only diagonally.\nIt's also crucial to change the direction\nyou're facing without taking a step.\nJust tap {R_BUTTON}!"),
-    [2] = _("Seeds can be thrown.\nThey are usually for eating, but throw\nthem at foes to get the same effect.\nIf you have any Seeds you don't want\nto eat, try throwing them at foes.\nYou can also throw them at partners.\nIf they hit, their effects will be felt."),
-    [3] = _("Normal-, Steel-, Poison-, Ground-,\nFlying-, Bug-, Rock-, Ghost-, and\nFighting-type moves are based on\nAttack and Defense. Fire-, Dark-,\nWater-, Grass-, Electric-, Ice-,\nPsychic-, and Dragon-type moves\nare based on Sp. Atk. and Sp. Def."),
-    [4] = _("All moves have a range of effect.\nA move that affects a room, such as\nGrowl, reaches 2 tiles when in a\ncorridor. However, if the visibility is\nlimited to only 1 tile, the move's\nrange will be likewise restricted.\nCheck the descriptions of moves!"),
-    [5] = _("Moves can be linked at the Gulpin Link\nShop or by using a Link Box.\nTwo moves can be linked and used\nsimultaneously.\nIf they're used even once in defeating\na foe, you will earn more Exp. Points,\nbut your Belly will go down faster, too."),
-    [6] = _("There are seventeen types of Pokémon\nand moves: Normal, Fire, Water, Grass,\nElectric, Ice, Fighting, Poison, Ground,\nFlying, Psychic, Bug, Rock, Ghost,\nDragon, Dark, and Steel. All Pokémon\nhave one or two types that determine\nthe damage they take and give."),
-    [7] = _("Press once: Push a foe to attack.\nTouch the floor to move. Advance text.\nCancel.\nPress twice: Use the set move.\nPress your Pokémon to move fast.\nKeep pressed to change directions\nwithout moving."),
-    [8] = _("{L_BUTTON}+{A_BUTTON}: Use set move\n{L_BUTTON}+{B_BUTTON}: Display message log\n{L_BUTTON}+{R_BUTTON}: Throw set item\n{R_BUTTON}+{DPAD}: Move diagonally\n{NDS_Y_BUTTON}: Rotate mode\n{SELECT_BUTTON}: Floor map\nSelect item/move + {START_BUTTON}: Description"),
-    [9] = _("Avoid attacks by moving diagonally.\nKeeping {R_BUTTON} pressed, press\n{DPAD} to move only diagonally.\nIt's crucial to change the direction\nyou're facing without taking a step.\nHold {NDS_Y_BUTTON} to do so.\n"),
-    [10] = _("Seeds can be thrown.\nThey are usually for eating, but throw\nthem at foes to get the same effect.\nIf you have any Seeds you don't want\nto eat, try throwing them at foes.\nYou can also throw them at partners.\nIf they hit, their effects will be felt."),
-    [11] = _("Normal-, Steel-, Poison-, Ground-,\nFlying-, Bug-, Rock-, Ghost-, and\nFighting-type moves are based on\nAttack and Defense. Fire-, Dark-,\nWater-, Grass-, Electric-, Ice-,\nPsychic-, and Dragon-type moves\nare based on Sp. Atk. and Sp. Def."),
-    [12] = _("All moves have a range of effect.\nA move that affects a room, such as\nGrowl, reaches 2 tiles when in a\ncorridor. However, if the visibility is\nlimited to only 1 tile, the move's\nrange will be likewise restricted.\nCheck the descriptions of moves!"),
-    [13] = _("Moves can be linked at the Gulpin Link\nShop or by using a Link Box.\nTwo moves can be linked and used\nsimultaneously.\nIf they're used even once in defeating\na foe, you will earn more Exp. Points,\nbut your Belly will go down faster, too."),
-    [14] = _("There are seventeen types of Pokémon\nand moves: Normal, Fire, Water, Grass,\nElectric, Ice, Fighting, Poison, Ground,\nFlying, Psychic, Bug, Rock, Ghost,\nDragon, Dark, and Steel. All Pokémon\nhave one or two types that determine\nthe damage they take and give."),
-    [15] = _("Touch once to attack a foe, walk,\nadvance text, cancel, or pick up \nan item off the ground.\nTouch twice to use the set move.\nTouch the leader twice to move fast.\nTouch and hold to change directions\nwithout taking a step."),
+const u8 *const gHintsDescriptions[2][HINTS_COUNT] = {
+    [0] = {
+        [HINTS_CONTROLS] = _("{L_BUTTON}+{A_BUTTON}: Use set move\n{L_BUTTON}+{B_BUTTON}: Display message log\n{L_BUTTON}+{R_BUTTON}: Throw set item\n{R_BUTTON}+{DPAD}: Move diagonally\n{SELECT_BUTTON}: Floor map\n{START_BUTTON}: Rotate mode\nSelect item/move + {START_BUTTON}: Description"),
+        [HINTS_ORIENTATION] = _("Avoid attacks by moving diagonally.\nKeeping {R_BUTTON} pressed, press\n{DPAD} to move only diagonally.\nIt's also crucial to change the direction\nyou're facing without taking a step.\nJust tap {R_BUTTON}!"),
+        [HINTS_SEEDS] = _("Seeds can be thrown.\nThey are usually for eating, but throw\nthem at foes to get the same effect.\nIf you have any Seeds you don't want\nto eat, try throwing them at foes.\nYou can also throw them at partners.\nIf they hit, their effects will be felt."),
+        [HINTS_MOVES] = _("Normal-, Steel-, Poison-, Ground-,\nFlying-, Bug-, Rock-, Ghost-, and\nFighting-type moves are based on\nAttack and Defense. Fire-, Dark-,\nWater-, Grass-, Electric-, Ice-,\nPsychic-, and Dragon-type moves\nare based on Sp. Atk. and Sp. Def."),
+        [HINTS_RANGE] = _("All moves have a range of effect.\nA move that affects a room, such as\nGrowl, reaches 2 tiles when in a\ncorridor. However, if the visibility is\nlimited to only 1 tile, the move's\nrange will be likewise restricted.\nCheck the descriptions of moves!"),
+        [HINTS_LINKING_MOVES] = _("Moves can be linked at the Gulpin Link\nShop or by using a Link Box.\nTwo moves can be linked and used\nsimultaneously.\nIf they're used even once in defeating\na foe, you will earn more Exp. Points,\nbut your Belly will go down faster, too."),
+        [HINTS_POKEMON_TYPES] = _("There are seventeen types of Pokémon\nand moves: Normal, Fire, Water, Grass,\nElectric, Ice, Fighting, Poison, Ground,\nFlying, Psychic, Bug, Rock, Ghost,\nDragon, Dark, and Steel. All Pokémon\nhave one or two types that determine\nthe damage they take and give."),
+        [HINTS_TOUCH_SCREEN] = _("Press once: Push a foe to attack.\nTouch the floor to move. Advance text.\nCancel.\nPress twice: Use the set move.\nPress your Pokémon to move fast.\nKeep pressed to change directions\nwithout moving."),
+    },
+    [1] = {
+        [HINTS_CONTROLS] = _("{L_BUTTON}+{A_BUTTON}: Use set move\n{L_BUTTON}+{B_BUTTON}: Display message log\n{L_BUTTON}+{R_BUTTON}: Throw set item\n{R_BUTTON}+{DPAD}: Move diagonally\n{NDS_Y_BUTTON}: Rotate mode\n{SELECT_BUTTON}: Floor map\nSelect item/move + {START_BUTTON}: Description"),
+        [HINTS_ORIENTATION] = _("Avoid attacks by moving diagonally.\nKeeping {R_BUTTON} pressed, press\n{DPAD} to move only diagonally.\nIt's crucial to change the direction\nyou're facing without taking a step.\nHold {NDS_Y_BUTTON} to do so.\n"),
+        [HINTS_SEEDS] = _("Seeds can be thrown.\nThey are usually for eating, but throw\nthem at foes to get the same effect.\nIf you have any Seeds you don't want\nto eat, try throwing them at foes.\nYou can also throw them at partners.\nIf they hit, their effects will be felt."),
+        [HINTS_MOVES] = _("Normal-, Steel-, Poison-, Ground-,\nFlying-, Bug-, Rock-, Ghost-, and\nFighting-type moves are based on\nAttack and Defense. Fire-, Dark-,\nWater-, Grass-, Electric-, Ice-,\nPsychic-, and Dragon-type moves\nare based on Sp. Atk. and Sp. Def."),
+        [HINTS_RANGE] = _("All moves have a range of effect.\nA move that affects a room, such as\nGrowl, reaches 2 tiles when in a\ncorridor. However, if the visibility is\nlimited to only 1 tile, the move's\nrange will be likewise restricted.\nCheck the descriptions of moves!"),
+        [HINTS_LINKING_MOVES] = _("Moves can be linked at the Gulpin Link\nShop or by using a Link Box.\nTwo moves can be linked and used\nsimultaneously.\nIf they're used even once in defeating\na foe, you will earn more Exp. Points,\nbut your Belly will go down faster, too."),
+        [HINTS_POKEMON_TYPES] = _("There are seventeen types of Pokémon\nand moves: Normal, Fire, Water, Grass,\nElectric, Ice, Fighting, Poison, Ground,\nFlying, Psychic, Bug, Rock, Ghost,\nDragon, Dark, and Steel. All Pokémon\nhave one or two types that determine\nthe damage they take and give."),
+        [HINTS_TOUCH_SCREEN] = _("Touch once to attack a foe, walk,\nadvance text, cancel, or pick up \nan item off the ground.\nTouch twice to use the set move.\nTouch the leader twice to move fast.\nTouch and hold to change directions\nwithout taking a step."),
+    }
 };
 
 const u8 *const gUnknown_8100208 = _("Switch places with your teammate?\nThis will cause the teammate to warp.");

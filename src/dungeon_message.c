@@ -27,6 +27,7 @@
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
+#include "dungeon_strings.h"
 
 void sub_80526D0(s32 r0);
 static bool8 sub_8052DC0(Entity *);
@@ -424,55 +425,55 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
         InlineStrcpy(gFormatBuffer_Monsters[1], "??");
     }
 
-    switch (dialogueInfo->unk4) {
-        case 425:
+    switch (dialogueInfo->speciesId) {
+        case DIALOGUE_MONSTER_PLAYER:
             dialogueMonId = leaderId;
             sprintfStatic(gSpeakerNameBuffer, _("{COLOR YELLOW}%s{RESET}"), gFormatBuffer_Monsters);
             break;
-        case 426:
+        case DIALOGUE_MONSTER_PARTNER:
             dialogueMonId = partnerId;
             sprintfStatic(gSpeakerNameBuffer, _("{COLOR YELLOW}%s{RESET}"), gFormatBuffer_Monsters[1]);
             break;
-        case 427:
+        case DIALOGUE_MONSTER_NONE:
             dialogueMonId = MONSTER_NONE;
             InlineStrcpy(gSpeakerNameBuffer, _("{COLOR YELLOW}{SPEECH_BUBBLE}{RESET}"));
             break;
         default:
-            dialogueMonId = dialogueInfo->unk4;
+            dialogueMonId = dialogueInfo->speciesId;
             CopyYellowMonsterNametoBuffer(gSpeakerNameBuffer, dialogueMonId);
             break;
     }
 
-    if (dialogueInfo->unk0 == 2 || dialogueInfo->unk0 == 3) {
+    if (dialogueInfo->type == 2 || dialogueInfo->type == 3) {
         InlineStrcpy(gSpeakerNameBuffer, _("{COLOR YELLOW}{SPEECH_BUBBLE}{RESET}"));
     }
 
     while (1) {
-        if (dialogueInfo->unk6 == 0)
+        if (dialogueInfo->allowType == DIALOGUE_ALLOW_ALL)
             break;
-        if (dialogueInfo->unk6 == 7   && (dialogueMonId == MONSTER_SQUIRTLE || dialogueMonId == MONSTER_TOTODILE))
+        if (dialogueInfo->allowType == DIALOGUE_ONLY_SQUIRTLE_TOTODILE   && (dialogueMonId == MONSTER_SQUIRTLE || dialogueMonId == MONSTER_TOTODILE))
             break;
-        if (dialogueInfo->unk6 == 1   && (dialogueMonId == MONSTER_BULBASAUR || dialogueMonId == MONSTER_CYNDAQUIL || dialogueMonId == MONSTER_MUDKIP || dialogueMonId == MONSTER_PIKACHU || dialogueMonId == MONSTER_CHARMANDER || dialogueMonId == MONSTER_TREECKO))
+        if (dialogueInfo->allowType == DIALOGUE_ALLOW_MOST               && (dialogueMonId == MONSTER_BULBASAUR || dialogueMonId == MONSTER_CYNDAQUIL || dialogueMonId == MONSTER_MUDKIP || dialogueMonId == MONSTER_PIKACHU || dialogueMonId == MONSTER_CHARMANDER || dialogueMonId == MONSTER_TREECKO))
             break;
-        if (dialogueInfo->unk6 == 280 && (dialogueMonId == MONSTER_TORCHIC || dialogueMonId == MONSTER_CHIKORITA))
+        if (dialogueInfo->allowType == DIALOGUE_ONLY_TORCHIC_CHICORITA   && (dialogueMonId == MONSTER_TORCHIC || dialogueMonId == MONSTER_CHIKORITA))
             break;
         dialogueInfo++;
     }
 
     if (!gDungeon->unk181e8.blinded
         && !gDungeon->unk181e8.hallucinating
-        && dialogueInfo->unk0 != 4
-        && dialogueInfo->unk2 != 0x80
+        && dialogueInfo->type != 4
+        && dialogueInfo->spriteId != 0x80
         && dialogueMonId != MONSTER_NONE)
     {
-        const struct Struct_sub_808CDB0 *strPtr = sub_808CDB0(dialogueInfo->unk3);
+        const struct Struct_sub_808CDB0 *strPtr = sub_808CDB0(dialogueInfo->spritePlacementId);
 
         monPortraitPtr = &monPortrait;
         monPortraitPtr->faceFile = GetDialogueSpriteDataPtr(dialogueMonId);
         if (monPortraitPtr->faceFile != NULL) {
             monPortraitPtr->faceData = (PortraitGfx *) monPortraitPtr->faceFile->data;
             monPortraitPtr->unkE = 0;
-            monPortraitPtr->spriteId = dialogueInfo->unk2;
+            monPortraitPtr->spriteId = dialogueInfo->spriteId;
             monPortraitPtr->flip = strPtr->flip;
             monPortraitPtr->pos.x = strPtr->pos.x;
             monPortraitPtr->pos.y = strPtr->pos.y;
@@ -488,14 +489,14 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     sub_8052740(10);
     sub_803EAF0(2, NULL);
     sub_8052210(FALSE);
-    CreateDialogueBoxAndPortrait(dialogueInfo->str, 0, monPortraitPtr, sUnknownDialogueFlags[dialogueInfo->unk0]);
+    CreateDialogueBoxAndPortrait(dialogueInfo->str, 0, monPortraitPtr, sUnknownDialogueFlags[dialogueInfo->type]);
     PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
 
     if (monPortraitPtr != NULL) {
         CloseFile(monPortraitPtr->faceFile);
     }
 
-    if (dialogueInfo->unk0 != 1 && dialogueInfo->unk0 != 3) {
+    if (dialogueInfo->type != 1 && dialogueInfo->type != 3) {
         LoadDungeonMapPalette();
         sub_803EAF0(0, NULL);
     }
@@ -615,31 +616,6 @@ static bool8 sub_8052DC0(Entity *entity)
 {
     return sub_8045888(entity);
 }
-
-struct TutorialFlagMsg
-{
-    s32 flagId;
-    const u8 *str;
-};
-
-extern const struct TutorialFlagMsg gUnknown_80FF020;
-extern const struct TutorialFlagMsg gUnknown_80FF080;
-extern const struct TutorialFlagMsg gUnknown_80FF0D8;
-extern const struct TutorialFlagMsg gUnknown_80FF13C;
-extern const struct TutorialFlagMsg gUnknown_80FF1B4;
-extern const struct TutorialFlagMsg gMovementTutorial;
-extern const struct TutorialFlagMsg gHungerTutorial;
-extern const struct TutorialFlagMsg gFoodTutorial;
-extern const struct TutorialFlagMsg gOranTutorial;
-extern const struct TutorialFlagMsg gCheriTutorial;
-extern const struct TutorialFlagMsg gBlastSeedTutorial;
-extern const struct TutorialFlagMsg gUnknown_80FF4A0;
-extern const struct TutorialFlagMsg gPechaTutorial;
-extern const struct TutorialFlagMsg gSleepSeedTutorial;
-extern const struct TutorialFlagMsg gMoneyTutorial;
-
-extern const u8 *const gUnknown_80FF6F8;
-extern const u8 *const gUnknown_80FF6A4;
 
 static inline bool32 DislayTutorialMsg(Entity *leader, const struct TutorialFlagMsg *tutorial, bool32 unkFunctionCall)
 {

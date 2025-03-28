@@ -16,6 +16,7 @@
 #include "dungeon_music.h"
 #include "dungeon_random.h"
 #include "dungeon_submenu.h"
+#include "dungeon_strings.h"
 #include "dungeon_util.h"
 #include "dungeon_visibility.h"
 #include "input.h"
@@ -50,15 +51,6 @@ extern s32 ActionToDungeonSubMenuId(u16 param_1);
 
 extern s32 gDungeonSubMenuItemsCount;
 extern MenuInputStruct gDungeonMenu;
-
-extern const u8 *const gUnknown_80FE978;
-extern const u8 *const gUnknown_80FDFE8;
-extern const u8 *const gUnknown_80F8B40;
-extern const u8 *const gUnknown_80F8B64;
-extern const u8 *const gUnknown_80F8BB4;
-extern const u8 *const gUnknown_80F8B88;
-extern const u8 *const gUnknown_80FDF70;
-extern const u8 *const gUnknown_80FDF00;
 
 static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
 static void AddMovesSubMenuOptions(Entity *entity, bool8 addLinkOptions, bool8 addUseMove);
