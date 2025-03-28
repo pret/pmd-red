@@ -549,6 +549,7 @@ SECTIONS {
         src/dungeon_generation.o(.rodata);
         src/dungeon_generation_fixed.o(.rodata);
         src/dungeon_message.o(.rodata);
+        src/dungeon_strings.o(.rodata);
         data/data_80F59C8.o(.rodata);
         src/dungeon_message_log.o(.rodata);
         src/dungeon_move.o(.rodata);
