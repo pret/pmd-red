@@ -32,6 +32,7 @@
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
+#include "dungeon_message_log.h"
 #include "dungeon_misc.h"
 #include "dungeon_music.h"
 #include "dungeon_random.h"

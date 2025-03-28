@@ -36,6 +36,7 @@
 #include "dungeon_menu_team.h"
 #include "dungeon_menu_tile.h"
 #include "dungeon_message.h"
+#include "dungeon_message_log.h"
 #include "dungeon_misc.h"
 #include "dungeon_movement.h"
 #include "dungeon_music.h"

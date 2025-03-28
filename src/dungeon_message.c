@@ -1,4 +1,7 @@
 #include "global.h"
+#include "globaldata.h"
+#include "dungeon_message.h"
+#include "dungeon_message_log.h"
 #include "structs/dungeon_entity.h"
 #include "bg_palette_buffer.h"
 #include "code_8009804.h"
@@ -11,7 +14,6 @@
 #include "dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
-#include "dungeon_message.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
@@ -27,13 +29,8 @@
 #include "text_3.h"
 
 void sub_80526D0(s32 r0);
-static void PutStringsOnMessageLog(void);
-static bool8 TryScrollLogDown(s32 a0);
-static bool8 TryScrollLogUp(s32 a0);
-static void CopyStringToMessageLog(const u8 *src, u32 a1, u32 a2);
-static void CreateMessageLogArrow(bool8 upArrow, s32 y);
-static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, u8 r2);
 static bool8 sub_8052DC0(Entity *);
+static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2);
 
 extern bool8 sub_8045888(Entity *pokemon);
 extern void sub_805E804(void);
@@ -47,18 +44,9 @@ extern u8 gUnknown_203B40C;
 extern u8 gUnknown_202EE01;
 extern s32 gDungeonFramesCounter;
 
-extern const u8 gUnknown_80F7AE8[];
-extern const u8 gUnknown_80F7AF8[];
-extern const u8 gUnknown_80F7AFC[];
-extern const u8 gUnknown_80F7B04[];
-extern const u16 gUnknown_80F7AEA[];
-
 static EWRAM_DATA Entity *sLastLogMsgEntity = NULL;
 static UNUSED EWRAM_DATA u8 sUnused = 0;
 static EWRAM_DATA SpriteOAM sUnknown_202F1F0 = {0};
-static EWRAM_DATA s32 sMessageLogCursor = 0;
-static EWRAM_DATA u8 sMessageLogFlags = 0;
-static EWRAM_DATA SpriteOAM sMessageLogArrowSpriteOAM = {0};
 EWRAM_INIT u8 gUnknown_203B434 = 1;
 
 void sub_80521D0(void)
@@ -78,7 +66,7 @@ void sub_8052210(bool8 a0)
     s32 i;
 
     for (i = 0; i < UNK_1BBD4_STR_COUNT; i++) {
-        InlineStrcpy(gDungeon->unk1BDD4.unk0[i], gUnknown_80F7AE8);
+        InlineStrcpy(gDungeon->unk1BDD4.unk0[i], "");
     }
     gDungeon->unk1BDD4.unk1C05F = 0;
     gDungeon->unk1BDD4.unk1C060 = 0;
@@ -401,6 +389,8 @@ struct Struct_sub_808CDB0
 
 extern const struct Struct_sub_808CDB0 *sub_808CDB0(s32 a0);
 
+static const u16 sUnknownDialogueFlags[] = {0x30D, 0x10D, 0x30D, 0x10D, 0x301, 1, 0x11};
+
 void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 {
     MonPortraitMsg monPortrait;
@@ -419,7 +409,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     }
     else {
         leaderId = MONSTER_NONE;
-        strcpy(gFormatBuffer_Monsters[0], gUnknown_80F7AF8); // ??
+        InlineStrcpy(gFormatBuffer_Monsters[0], "??");
     }
 
     if (partner != NULL) {
@@ -431,21 +421,21 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     }
     else {
         partnerId = MONSTER_NONE;
-        strcpy(gFormatBuffer_Monsters[1], gUnknown_80F7AF8); // ??
+        InlineStrcpy(gFormatBuffer_Monsters[1], "??");
     }
 
     switch (dialogueInfo->unk4) {
         case 425:
             dialogueMonId = leaderId;
-            sprintfStatic(gSpeakerNameBuffer, gUnknown_80F7AFC, gFormatBuffer_Monsters);
+            sprintfStatic(gSpeakerNameBuffer, _("{COLOR YELLOW}%s{RESET}"), gFormatBuffer_Monsters);
             break;
         case 426:
             dialogueMonId = partnerId;
-            sprintfStatic(gSpeakerNameBuffer, gUnknown_80F7AFC, gFormatBuffer_Monsters[1]);
+            sprintfStatic(gSpeakerNameBuffer, _("{COLOR YELLOW}%s{RESET}"), gFormatBuffer_Monsters[1]);
             break;
         case 427:
             dialogueMonId = MONSTER_NONE;
-            strcpy(gSpeakerNameBuffer, gUnknown_80F7B04);
+            InlineStrcpy(gSpeakerNameBuffer, _("{COLOR YELLOW}{SPEECH_BUBBLE}{RESET}"));
             break;
         default:
             dialogueMonId = dialogueInfo->unk4;
@@ -454,7 +444,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     }
 
     if (dialogueInfo->unk0 == 2 || dialogueInfo->unk0 == 3) {
-        strcpy(gSpeakerNameBuffer, gUnknown_80F7B04);
+        InlineStrcpy(gSpeakerNameBuffer, _("{COLOR YELLOW}{SPEECH_BUBBLE}{RESET}"));
     }
 
     while (1) {
@@ -498,7 +488,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
     sub_8052740(10);
     sub_803EAF0(2, NULL);
     sub_8052210(FALSE);
-    CreateDialogueBoxAndPortrait(dialogueInfo->str, 0, monPortraitPtr, gUnknown_80F7AEA[dialogueInfo->unk0]);
+    CreateDialogueBoxAndPortrait(dialogueInfo->str, 0, monPortraitPtr, sUnknownDialogueFlags[dialogueInfo->unk0]);
     PRINT_STRING_WAIT_PRESS(&chosenMenuIndex);
 
     if (monPortraitPtr != NULL) {
@@ -607,7 +597,7 @@ void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
         ids[0] = GetEntInfo(leader)->apparentID;
     }
     else {
-        strcpy(gFormatBuffer_Monsters[0], gUnknown_80F7AF8);
+        InlineStrcpy(gFormatBuffer_Monsters[0], "??");
         ids[0] = 0;
     }
 
@@ -616,7 +606,7 @@ void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
         ids[1] = GetEntInfo(partner)->apparentID;
     }
     else {
-        strcpy(gFormatBuffer_Monsters[1], gUnknown_80F7AF8);
+        InlineStrcpy(gFormatBuffer_Monsters[1], "??");
         ids[1] = 0;
     }
 }
@@ -798,268 +788,3 @@ const u8 *GetCurrentDungeonName(void)
         return GetDungeonName1(gDungeon->unk644.dungeonLocation.id);
     }
 }
-
-void ResetMessageLog(void)
-{
-    s32 i;
-
-    gDungeon->unk16 = 0;
-    gDungeon->unkB = 1;
-    for (i = 0; i < MESSAGE_LOG_STRINGS_COUNT; i++) {
-        gDungeon->messageLogStrings[i].str[0] = '\0';
-        gDungeon->messageLogStrings[i].unk0 = 0;
-        gDungeon->messageLogStrings[i].unk1 = 0;
-        gDungeon->messageLogStrings[i].unk2 = 0;
-    }
-}
-
-UNUSED void sub_8053200(void)
-{
-    gDungeon->unkB = 1;
-}
-
-static void CopyStringToMessageLog(const u8 *src, u32 a1, u32 a2)
-{
-    u8 *dst = &gDungeon->messageLogStrings[gDungeon->unk16].str[0];
-    u8 *maxDst = &gDungeon->messageLogStrings[gDungeon->unk16].str[MESSAGE_LOG_BUFFER_SIZE - 1];
-    gDungeon->messageLogStrings[gDungeon->unk16].unk0 = 1;
-    gDungeon->messageLogStrings[gDungeon->unk16].unk1 = a1;
-    gDungeon->messageLogStrings[gDungeon->unk16].unk2 = a2;
-
-    while (*src != '\0') {
-        if (*src == '\r') break;
-        if (dst < maxDst) {
-            *(dst++) = *src;
-        }
-        src++;
-    }
-
-    *dst = '\0';
-    if (++gDungeon->unk16 >= MESSAGE_LOG_STRINGS_COUNT) {
-        gDungeon->unk16 = 0;
-    }
-
-    gDungeon->unkB = 1;
-}
-
-#define MESSAGE_LOG_ROW_COUNT 8 // How many log messages are shown
-
-UNUSED static const char sPksDirMeme[] = "pksdir0";
-// Possibly something menu related?
-// Unfortunately, this is passed to sub_8014140 which is a nullsub. It could be used for Blue and Nintendo DS' touch screen.
-static const u8 sUnknownMessageLogData[] =
-{
-    0x01, 0x00, 0x54, 0x00, 0xf0, 0xff, 0x18, 0x00, 0x18, 0x00, 0x00, 0x00, 0x02, 0x00, 0x54, 0x00,
-    0x6a, 0x00, 0x18, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x70, 0x6b, 0x73, 0x64, 0x69, 0x72, 0x30, 0x00
-};
-
-bool32 DisplayMessageLog(void)
-{
-    bool8 unkRet;
-    MenuInputStructSub menuInput;
-
-    sub_801317C(&menuInput);
-    sub_803EAF0(9, NULL);
-    do {
-        DungeonRunFrameActions(13);
-        unkRet = sub_8008D8C(0);
-    } while (unkRet);
-
-    sMessageLogCursor = 0;
-    sMessageLogFlags = 0;
-    PutStringsOnMessageLog();
-
-    while (1) {
-        s32 unkVar;
-        bool32 scroll = FALSE;
-
-        sMessageLogFlags = 0;
-        nullsub_34(&menuInput, 0);
-        unkVar = sub_8014140(0, sUnknownMessageLogData);
-
-        if (TryScrollLogUp(unkVar))
-            scroll = TRUE;
-        if (TryScrollLogDown(unkVar))
-            scroll = TRUE;
-
-        if (!scroll) {
-            DungeonRunFrameActions(0xD);
-        }
-
-        if (sMessageLogFlags & FLAG_CAN_SCROLL_UP) {
-            CreateMessageLogArrow(TRUE, -8);
-        }
-        if (sMessageLogFlags & FLAG_CAN_SCROLL_DOWN) {
-            CreateMessageLogArrow(FALSE, 114);
-        }
-
-        if (!sub_80048C8()) {
-            if (gRealInputs.pressed & B_BUTTON || menuInput.b_button) {
-                PlayDungeonCancelSE();
-                break;
-            }
-            else if (gRealInputs.pressed & A_BUTTON) {
-                PlayDungeonConfirmationSE();
-                break;
-            }
-        }
-    }
-
-    sub_803EAF0(0, NULL);
-    return TRUE;
-}
-
-static void PutStringsOnMessageLog(void)
-{
-    s32 i;
-    s32 arrId = gDungeon->unk16;
-    s32 y = 16;
-
-    arrId -= 8;
-    if (arrId < 0)
-        arrId += MESSAGE_LOG_STRINGS_COUNT;
-
-    sub_80073B8(0);
-    for (i = 0; i < MESSAGE_LOG_ROW_COUNT; i++) {
-        struct MessageLogString *msgLogString = &gDungeon->messageLogStrings[arrId];
-
-        if (msgLogString->unk0) {
-            if (msgLogString->unk1) {
-                AddDoubleUnderScoreHighlight(0, 0, y, 0xE0, 7);
-            }
-            PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
-            y += 14;
-        }
-        if (++arrId >= MESSAGE_LOG_STRINGS_COUNT)
-            arrId = 0;
-    }
-
-    sub_80073E0(0);
-    sub_8007334(0);
-}
-
-static bool8 TryScrollLogUp(s32 a0)
-{
-    s32 i;
-    struct MessageLogString *msgLogString;
-    s32 y;
-    s32 arrId;
-
-    while (1)
-    {
-        arrId = gDungeon->unk16 + sMessageLogCursor;
-        y = 2;
-        arrId -= 9;
-        while (arrId < 0) {
-            arrId += MESSAGE_LOG_STRINGS_COUNT;
-        }
-        while (arrId >= MESSAGE_LOG_STRINGS_COUNT) {
-            arrId -= MESSAGE_LOG_STRINGS_COUNT;
-        }
-
-        if (gDungeon->messageLogStrings[arrId].unk0 && sMessageLogCursor > -12) {
-            sMessageLogFlags |= FLAG_CAN_SCROLL_UP;
-            if (gRealInputs.repeated & DPAD_UP)
-                break;
-            if (a0 == 1)
-                break;
-        }
-
-        return FALSE;
-    }
-    PlayDungeonCursorSE(0);
-    sub_80073B8(0);
-    msgLogString = &gDungeon->messageLogStrings[arrId];
-    if (msgLogString->unk0) {
-        sub_80087EC(0, 0, 0, 0xD0, 0x10);
-        if (msgLogString->unk1) {
-            AddDoubleUnderScoreHighlight(0, 0, y, 0xE0, 7);
-        }
-        PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
-    }
-    sub_80073E0(0);
-    DungeonRunFrameActions(0xD);
-
-    for (i = 0; i < 7; i++) {
-        ScrollUpWindowFunc(0);
-        DungeonRunFrameActions(0xD);
-    }
-
-    sMessageLogCursor--;
-    return TRUE;
-}
-
-static bool8 TryScrollLogDown(s32 a0)
-{
-    s32 i;
-    struct MessageLogString *msgLogString;
-    s32 y;
-    s32 arrId;
-
-    while (1)
-    {
-        arrId = gDungeon->unk16 + sMessageLogCursor;
-        y = 128;
-        while (arrId < 0) {
-            arrId += MESSAGE_LOG_STRINGS_COUNT;
-        }
-        while (arrId >= MESSAGE_LOG_STRINGS_COUNT) {
-            arrId -= MESSAGE_LOG_STRINGS_COUNT;
-        }
-
-        if (sMessageLogCursor < 0) {
-            sMessageLogFlags |= FLAG_CAN_SCROLL_DOWN;
-            if (gRealInputs.repeated & DPAD_DOWN)
-                break;
-            if (a0 == 2)
-                break;
-        }
-
-        return FALSE;
-    }
-    PlayDungeonCursorSE(0);
-    sub_80073B8(0);
-    msgLogString = &gDungeon->messageLogStrings[arrId];
-    if (msgLogString->unk0) {
-        sub_80087EC(0, 0, y, 0x68, 0x10);
-        if (msgLogString->unk1) {
-            AddDoubleUnderScoreHighlight(0, 0, y, 0xE0, 7);
-        }
-        PrintStringOnWindow(8, y + 3, msgLogString->str, 0, 0xD);
-    }
-    sub_80073E0(0);
-    DungeonRunFrameActions(0xD);
-
-    for (i = 0; i < 7; i++) {
-        ScrollDownWindowFunc(0);
-        DungeonRunFrameActions(0xD);
-    }
-
-    sMessageLogCursor++;
-    return TRUE;
-}
-
-static void CreateMessageLogArrow(bool8 upArrow, s32 y)
-{
-    Window *window = &gWindows[0];
-    if (!(gDungeonFramesCounter & 8)) {
-        SpriteSetAffine1(&sMessageLogArrowSpriteOAM, 0);
-        SpriteSetAffine2(&sMessageLogArrowSpriteOAM, 0);
-        SpriteSetObjMode(&sMessageLogArrowSpriteOAM, 0);
-        SpriteSetMosaic(&sMessageLogArrowSpriteOAM, 0);
-        SpriteSetBpp(&sMessageLogArrowSpriteOAM, 0);
-        SpriteSetMatrixNum(&sMessageLogArrowSpriteOAM, (upArrow != FALSE) ? (16) : 0);
-        SpriteSetPalNum(&sMessageLogArrowSpriteOAM, 15);
-        SpriteSetY(&sMessageLogArrowSpriteOAM, (window->y * 8) + y);
-        SpriteSetX(&sMessageLogArrowSpriteOAM, (window->x * 8) + 92);
-        SpriteSetShape(&sMessageLogArrowSpriteOAM, 1);
-        SpriteSetSize(&sMessageLogArrowSpriteOAM, 0);
-        SpriteSetPriority(&sMessageLogArrowSpriteOAM, 0);
-        SpriteSetPalNum(&sMessageLogArrowSpriteOAM, 15);
-        SpriteSetTileNum(&sMessageLogArrowSpriteOAM, 0x3f0);
-
-        AddSprite(&sMessageLogArrowSpriteOAM, 127, NULL, NULL);
-    }
-}
-

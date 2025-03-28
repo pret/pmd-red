@@ -1,34 +1,6 @@
 #include "constants/status.h"
 .section .rodata
 
-.align 2
-.string "pksdir0\0"
-
-.align 2
-.global gUnknown_80F7AE8
-gUnknown_80F7AE8: @ 80F7AE8
-.byte 0x00, 0x00
-
-.global gUnknown_80F7AEA
-gUnknown_80F7AEA: @ 80F7AEA
-.byte 0x0d, 0x03, 0x0d, 0x01, 0x0d, 0x03, 0x0d, 0x01, 0x01, 0x03, 0x01, 0x00, 0x11, 0x00
-
-.global gUnknown_80F7AF8
-gUnknown_80F7AF8: @ 80F7AF8
-.byte 0x3f, 0x3f, 0x00, 0x00
-
-.global gUnknown_80F7AFC
-gUnknown_80F7AFC: @ 80F7AFC
-.string "{COLOR YELLOW}%s{RESET}\0"
-.align 2,0
-
-.global gUnknown_80F7B04
-gUnknown_80F7B04: @ 80F7B04
-.string "{COLOR YELLOW}"
-.byte 0x87, 0x45
-.string "{RESET}\0"
-.align 2,0
-
 .string "pksdir0\0"
 .align 2,0
 

@@ -15,6 +15,7 @@
 #include "dungeon_menu_others.h"
 #include "dungeon_menu_recruitment.h"
 #include "dungeon_message.h"
+#include "dungeon_message_log.h"
 #include "dungeon_music.h"
 #include "dungeon_submenu.h"
 #include "dungeon_util.h"

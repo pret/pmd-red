@@ -20,6 +20,7 @@
 #include "dungeon_map.h"
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
+#include "dungeon_message_log.h"
 #include "dungeon_pokemon_attributes.h"
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"

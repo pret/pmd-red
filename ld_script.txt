@@ -221,6 +221,7 @@ SECTIONS {
         src/dungeon_generation.o(.text);
         src/dungeon_generation_fixed.o(.text);
         src/dungeon_message.o(.text);
+        src/dungeon_message_log.o(.text);
         src/dungeon_move.o(.text);
         src/move_actions.o(.text);
         src/status_actions.o(.text);
@@ -547,8 +548,9 @@ SECTIONS {
         src/dungeon_map_access.o(.rodata);
         src/dungeon_generation.o(.rodata);
         src/dungeon_generation_fixed.o(.rodata);
-        data/data_80F59C8.o(.rodata);
         src/dungeon_message.o(.rodata);
+        data/data_80F59C8.o(.rodata);
+        src/dungeon_message_log.o(.rodata);
         src/dungeon_move.o(.rodata);
         data/data_8106A4C_0.o(.rodata);
         src/dungeon_main.o(.rodata);
