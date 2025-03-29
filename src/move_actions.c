@@ -136,7 +136,7 @@ extern s16 sub_8057600(Move *move, s32 itemID);
 
 extern u32 gUnknown_8106A4C;
 
-// FILE SPLIT
+// FILE SPLIT - move_actions_1.c
 
 bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
@@ -1091,7 +1091,7 @@ bool8 CosmicPowerMoveAction(Entity *pokemon, Entity *target, Move *move, u32 par
     return TRUE;
 }
 
-// FILE SPLIT
+// FILE SPLIT - move_actions_2.c
 
 bool8 SkyAttackMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
@@ -1997,7 +1997,7 @@ bool8 PoisonFangMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   return flag;
 }
 
-// FILE SPLIT
+// FILE SPLIT - move_actions_3.c
 #include "global.h"
 #include "status_actions.h"
 #include "dungeon_move_util.h"
