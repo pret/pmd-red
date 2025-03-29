@@ -1,5 +1,5 @@
 #include "global.h"
-#include "charge_move.h"
+#include "dungeon_move_util.h"
 #include "code_803E46C.h"
 #include "code_803E724.h"
 #include "code_8045A00.h"
@@ -20,6 +20,7 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
+#include "dungeon_move.h"
 #include "move_effects_target.h"
 #include "moves.h"
 #include "number_util.h"
@@ -104,10 +105,7 @@ extern u8 *gUnknown_80FE330[];
 extern u8 *gUnknown_80FE36C[];
 extern u8 *gPtrForecastPreventsTypeSwitchMessage[];
 
-extern u32 gUnknown_202F210;
-extern u32 gUnknown_202F214;
 extern u8 gUnknown_202F218;
-extern u32 gUnknown_202F21C;
 extern bool8 gUnknown_202F220;
 
 extern void sub_806A5B8(Entity *entity);
@@ -125,81 +123,20 @@ extern void EndAbilityImmuneStatus(Entity *, Entity *);
 extern u8 sub_806F4A4(Entity *, u32);
 extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 extern void nullsub_92(Entity *);
-extern u32 sub_8055864(Entity *pokemon, Entity *target, Move *param_3, s32 param_4, s32 param_5);
 extern u8 sub_807EAA0(u32, u32);
-extern s32 sub_80556BC(Entity *, Entity *, u8, Move *, s24_8, u32);
 
 // move_util.h
-extern bool8 sub_805727C(Entity *, Entity *, s16);
+extern bool8 sub_805727C(Entity *, Entity *, s32);
 bool8 RollSecondaryEffect(Entity *pokemon, s32 chance);
 bool8 sub_80571F0(Entity * pokemon, Move *move);
 
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern u32 HandleDamagingMove(Entity *, Entity *, Move *, s24_8, u32);
-u8 ToItemID(u32 param_1);
-extern s16 sub_8094828(u16, u8);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
+extern s16 sub_8057600(Move *move, s32 itemID);
 
 extern u32 gUnknown_8106A4C;
 
-bool8 MoveRequiresCharging(Entity* pokemon, u16 moveID)
-{
-    if ((moveID == MOVE_SOLARBEAM) && (GetApparentWeather(pokemon) == WEATHER_SUNNY)) {
-        return FALSE;
-    }
-    else {
-        return DoesMoveCharge(moveID);
-    }
-}
-
-void sub_8057588(Entity * pokemon, u8 param_2)
-{
-    Move *move;
-    s32 index;
-    s32 PPtoRemove;
-    s32 PPCounter;
-    EntityInfo *entityInfo;
-
-    if (EntityIsValid(pokemon)) {
-        entityInfo = GetEntInfo(pokemon);
-        for(index = 0; index < MAX_MON_MOVES; index++)
-        {
-            move = &entityInfo->moves.moves[index];
-            if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
-                PPtoRemove = 1;
-                if ((move->moveFlags2 & MOVE_FLAG_LAST_USED)) {
-                    move->moveFlags2 &= ~(MOVE_FLAG_LAST_USED);
-                    PPtoRemove = 2;
-                }
-                if (((move->moveFlags2 & MOVE_FLAG_SET)) && (move->moveFlags2 &= ~(MOVE_FLAG_SET), param_2 != 0))
-                {
-                    if(PPtoRemove != 0)
-                    {
-                        PPCounter = PPtoRemove;
-                        for (; PPCounter != 0; PPCounter--) {
-                            if (move->PP != 0) {
-                                move->PP--;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-s16 sub_8057600(Move *move, s32 itemID)
-{
-    return sub_8094828(move->id, ToItemID(itemID));
-}
-
-u8 ToItemID(u32 itemID)
-{
-    if(itemID == ITEM_NOTHING)
-        return ITEM_NOTHING;
-    else
-        return itemID;
-}
+// FILE SPLIT
 
 bool8 IronTailMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 {
@@ -1154,6 +1091,8 @@ bool8 CosmicPowerMoveAction(Entity *pokemon, Entity *target, Move *move, u32 par
     return TRUE;
 }
 
+// FILE SPLIT
+
 bool8 SkyAttackMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
     bool8 flag = FALSE;
@@ -2058,6 +1997,49 @@ bool8 PoisonFangMoveAction(Entity *pokemon, Entity *target, Move *move, u32 para
   return flag;
 }
 
+// FILE SPLIT
+#include "global.h"
+#include "status_actions.h"
+#include "dungeon_move_util.h"
+#include "code_8045A00.h"
+#include "dungeon_message.h"
+#include "dungeon_move.h"
+#include "code_806CD90.h"
+#include "code_8077274_1.h"
+#include "code_807CD9C.h"
+#include "code_808417C.h"
+#include "constants/ability.h"
+#include "constants/move_id.h"
+#include "constants/status.h"
+#include "constants/targeting.h"
+#include "constants/type.h"
+#include "constants/weather.h"
+#include "dungeon_ai_targeting.h"
+#include "dungeon_engine.h"
+#include "dungeon_items.h"
+#include "dungeon_map_access.h"
+#include "dungeon_misc.h"
+#include "dungeon_pokemon_attributes.h"
+#include "dungeon_util.h"
+#include "dungeon_visibility.h"
+#include "move_util.h"
+#include "moves.h"
+#include "number_util.h"
+#include "pokemon.h"
+#include "status_checks_1.h"
+#include "status.h"
+#include "structs/map.h"
+#include "structs/str_dungeon.h"
+#include "text_util.h"
+#include "trap.h"
+#include "weather.h"
+#include "dungeon_config.h"
+
+extern u8 *gUnknown_80FEB08[];
+extern u8 *gUnknown_80FEFF4[];
+extern u8 *gUnknown_80FC5A8[];
+extern u32 gUnknown_8106A8C[];
+
 bool8 PoisonStingMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
   bool8 flag;
@@ -2257,7 +2239,6 @@ bool8 MudWaterSportMoveAction(Entity * pokemon, Entity * target, Move *move, u32
     }
     return TRUE;
 }
-
 
 bool8 MudSlapMoveAction(Entity *pokemon, Entity *target, Move *move, u32 param_4)
 {
@@ -2878,4 +2859,188 @@ bool8 PresentMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param
             return flag;
         }
     }
+}
+
+bool8 EruptionMoveAction(Entity * pokemon, Entity * target, Move *move, u32 param_4)
+{
+    EntityInfo *entityInfo;
+    s32 maxHp;
+    s32 index;
+    bool8 flag;
+    SendThawedMessage(pokemon, target);
+
+    entityInfo = GetEntInfo(pokemon);
+    maxHp = entityInfo->maxHPStat;
+    if (entityInfo->HP <= entityInfo->maxHPStat / 4) {
+        index = 0;
+    }
+    else if (entityInfo->HP <= maxHp / 2) {
+        index = 1;
+    }
+    else if (entityInfo->HP <= (maxHp * 3) / 4) {
+        index = 2;
+    }
+    else {
+        index = 3;
+    }
+
+    flag = HandleDamagingMove(pokemon,target,move,gEruptionModifiers[index],param_4) ? TRUE : FALSE;
+    return flag;
+}
+
+bool8 GlareMoveAction(Entity * pokemon,Entity * target,Move *move)
+{
+    ParalyzeStatusTarget(pokemon,target, TRUE);
+    return TRUE;
+}
+
+bool8 TransformMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+{
+  if (IsBossFight()) {
+    TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEFF4);
+    return FALSE;
+  }
+  else {
+    move->PP = 0;
+    TransformStatusTarget(pokemon,target);
+    return TRUE;
+  }
+}
+
+bool8 PoisonTailMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+{
+    bool8 flag;
+
+    flag = FALSE;
+    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
+        flag = TRUE;
+        if (sub_805727C(pokemon,target,gPoisonTailSecondaryChance) != 0) {
+            PoisonedStatusTarget(pokemon,target,FALSE);
+        }
+    }
+    return flag;
+}
+
+bool8 RoarMoveAction(Entity * pokemon, Entity * target)
+{
+    BlowAwayTarget(pokemon, target, GetEntInfo(pokemon)->action.direction);
+    return TRUE;
+}
+
+bool8 HandleColorChange(Entity * pokemon, Entity * target)
+{
+    u8 newType;
+    const char *typeString;
+    EntityInfo *entityInfo;
+
+    entityInfo = GetEntInfo(target);
+    newType = gDungeonCamouflageTypes[gDungeon->tileset];
+    if (AbilityIsActive(target, ABILITY_FORECAST)) {
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gPtrForecastPreventsTypeSwitchMessage);
+        return FALSE;
+    }
+    else {
+        entityInfo->types[0] = newType;
+        entityInfo->types[1] = TYPE_NONE;
+        entityInfo->isColorChanged = TRUE;
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1],target,0);
+        typeString = GetUnformattedTypeString(newType);
+        strcpy(gFormatBuffer_Items[0], typeString);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FEB08);
+        return TRUE;
+    }
+}
+
+bool8 TailGlowMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+{
+    RaiseAttackStageTarget(pokemon,target,gUnknown_8106A50, 2);
+    return TRUE;
+}
+
+bool8 sub_805B17C(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+{
+    s32 uVar4;
+    bool8 flag;
+
+    flag = FALSE;
+    if (move->id == MOVE_FIRE_SPIN) {
+        SendThawedMessage(pokemon,target);
+        uVar4 = 0x13c;
+    }
+    else {
+        uVar4 = 0x75;
+        if ((move->id != MOVE_CLAMP) && (uVar4 = 0xf1, move->id == MOVE_BIND)) {
+            uVar4 = 0x7e;
+        }
+    }
+    if (HandleDamagingMove(pokemon,target,move,IntToF248_2(1),param_4) != 0) {
+        flag = TRUE;
+        if (sub_805727C(pokemon,target,gMovesConstrictionChance) != 0) {
+            SqueezedStatusTarget(pokemon,target,uVar4,0);
+        }
+    }
+    return flag;
+}
+
+bool8 PerishSongMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
+{
+    PerishSongTarget(pokemon, target);
+    return TRUE;
+}
+
+bool8 WrapMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
+{
+    WrapTarget(pokemon, target);
+    return TRUE;
+}
+
+bool8 SpikesMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+{
+    bool8 trapLaid;
+    u8 uVar2;
+    bool8 isNotTeamMember;
+
+    trapLaid = FALSE;
+    isNotTeamMember = GetEntInfo(pokemon)->isNotTeamMember;
+    uVar2 = 1;
+
+    if (isNotTeamMember) {
+        uVar2 = 2;
+    }
+    if (LayTrap(&pokemon->pos,TRAP_SPIKE_TRAP,uVar2) != 0) {
+        trapLaid = TRUE;
+    }
+    else
+    {
+        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FC5A8); // A trap can't be laid here!
+    }
+    sub_8049ED4();
+    return trapLaid;
+}
+
+bool8 MagnitudeMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
+{
+    s32 r3;
+    bool8 r6;
+    s32 magnitudeDmgVal;
+    EntityInfo *entityInfo;
+
+    entityInfo = GetEntInfo(target);
+    r3 = gUnknown_202F224;
+    r6 = FALSE;
+
+    gDungeon->unk181e8.unk18200 = gUnknown_8106A8C[r3];
+    gDungeon->unk181e8.unk18204 = 0;
+    magnitudeDmgVal = gMagnitudeDmgValues[r3];
+    if (entityInfo->bideClassStatus.status == STATUS_DIGGING) {
+        magnitudeDmgVal *= 2;
+    }
+    r6 = sub_8055864(pokemon,target,move,magnitudeDmgVal,param_4) ? TRUE : FALSE;
+    return r6;
+}
+
+bool8 MagicCoatMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
+{
+    MagicCoatStatusTarget(pokemon, target);
+    return TRUE;
 }

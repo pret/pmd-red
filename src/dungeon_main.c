@@ -10,7 +10,7 @@
 #include "structs/str_text.h"
 #include "structs/struct_sub80095e4.h"
 #include "bg_control.h"
-#include "charge_move.h"
+#include "dungeon_move_util.h"
 #include "code_800D090.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"

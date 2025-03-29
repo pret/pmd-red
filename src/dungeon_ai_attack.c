@@ -1,6 +1,6 @@
 #include "global.h"
 #include "dungeon_ai_attack.h"
-#include "charge_move.h"
+#include "dungeon_move_util.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
@@ -48,13 +48,10 @@ EWRAM_DATA u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS] = {0};
 EWRAM_DATA s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS] = {0};
 EWRAM_DATA Entity *gPotentialTargets[NUM_DIRECTIONS] = {0};
 
-extern void sub_8055A00(Entity *, u8, u32, u32, u32);
 extern bool8 sub_8044B28(void);
-extern void sub_8057588(Entity *, u32);
 extern void sub_806A1B0(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8044D40(ActionContainer *, u32);
-extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
 extern void sub_8045BF8(u8 *, struct Item *);
 extern void sub_8044DF0(struct Entity *, u32, u32);
 extern void sub_8071DA4(struct Entity *);

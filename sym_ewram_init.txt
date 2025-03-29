@@ -115,6 +115,7 @@
 .include "src/dungeon_map_access.o"
 .include "src/dungeon_message.o"
 .include "src/dungeon_move.o"
+.include "src/dungeon_move_util.o"
 .include "src/dungeon_main.o"
 .include "src/dungeon_menu_recruitment.o"
 .include "src/dungeon_ai_items.o"

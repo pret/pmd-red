@@ -22,6 +22,7 @@
 #include "dungeon_message.h"
 #include "dungeon_misc.h"
 #include "dungeon_move.h"
+#include "dungeon_move_util.h"
 #include "dungeon_movement.h"
 #include "dungeon_music.h"
 #include "dungeon_random.h"

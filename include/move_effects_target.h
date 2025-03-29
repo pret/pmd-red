@@ -16,7 +16,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
 void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage);
 void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage);
 void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage);
-void SqueezedStatusTarget(Entity * pokemon, Entity * target, s16 param_3, bool32 displayMessage);
+void SqueezedStatusTarget(Entity * pokemon, Entity * target, s32 param_3, bool32 displayMessage);
 void ImmobilizedStatusTarget(Entity * pokemon, Entity * target);
 void IngrainedStatusTarget(Entity * pokemon, Entity * target);
 void WrapTarget(Entity * pokemon, Entity * target);

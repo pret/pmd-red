@@ -757,10 +757,10 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
   }
 }
 
-void SqueezedStatusTarget(Entity * pokemon, Entity * target, s16 param_3, bool32 displayMessage)
+void SqueezedStatusTarget(Entity * pokemon, Entity * target, s32 param_3, bool32 displayMessage)
 {
   EntityInfo *entityInfo;
-  s32 param_3_s32 = param_3;
+  s32 param_3_s32 = (s16) param_3;
   bool8 displayMessage_u8 = displayMessage;
 
   if ((EntityIsValid(target)) && (!HasSafeguardStatus(pokemon,target,displayMessage_u8))) {

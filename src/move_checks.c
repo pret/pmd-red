@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "math.h"
 #include "constants/status.h"
 #include "constants/type.h"
