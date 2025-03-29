@@ -33,7 +33,6 @@
 #include "sprite.h"
 #include "status.h"
 #include "text_util.h"
-#include "tile_types.h"
 
 extern u8 gUnknown_202F221;
 

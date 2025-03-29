@@ -631,7 +631,7 @@ void PierceStatusTarget(Entity * pokemon, Entity * target)
     EntityUpdateStatusSprites(target);
 }
 
-void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *move, u8 *message)
+void SetChargeStatusTarget(Entity *pokemon, Entity *target, u8 newStatus, Move *move, const u8 *message)
 {
   bool8 bVar2;
   Move *movePtr;

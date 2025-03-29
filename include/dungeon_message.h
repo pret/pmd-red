@@ -4,23 +4,25 @@
 #include "structs/dungeon_entity.h"
 #include "string_format.h"
 
-// These flags are used in dungeon message and dungeon menu recruitment file. It's possible these are general scroll flags and should be put elsewhere, like text.h, assuming more files actually use it.
-#define FLAG_CAN_SCROLL_UP      0x1
-#define FLAG_CAN_SCROLL_DOWN    0x2
-
 struct MonDialogueSpriteInfo
 {
     s16 species;
     u8 spriteId;
 };
 
+// Depending on partner's pokemon species, the dialogue may be slightly different.
+#define DIALOGUE_ALLOW_ALL 0
+#define DIALOGUE_ALLOW_MOST 1 // Bulbasaur, Cyndaquil, Mudkip, Pikachu, Charmander, Treecko
+#define DIALOGUE_ONLY_SQUIRTLE_TOTODILE 7
+#define DIALOGUE_ONLY_TORCHIC_CHICORITA 280
+
 struct DungeonDialogueStruct
 {
-    u16 unk0;
-    u8 unk2;
-    u8 unk3;
-    s16 unk4;
-    s16 unk6;
+    u16 type;
+    u8 spriteId;
+    u8 spritePlacementId; // Information on mon's portrait x/y and flip
+    s16 speciesId;
+    s16 allowType;
     const u8 *str;
 };
 
@@ -52,7 +54,5 @@ void TryDisplayItemPickupTutorialMessage(u8 itemId);
 void DisplayYouReachedDestFloorStr(void);
 void sub_8052FB8(const u8 *str);
 const u8 *GetCurrentDungeonName(void);
-void ResetMessageLog(void);
-bool32 DisplayMessageLog(void);
 
 #endif // GUARD_DUNGEON_MESSAGE_H

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "status_checks.h"
 #include "dungeon_util.h"
-#include "charge_move.h"
+#include "dungeon_move_util.h"
 #include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"

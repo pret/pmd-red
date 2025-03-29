@@ -424,8 +424,8 @@ enum MonsterBehavior
     BEHAVIOR_ALLY,
     BEHAVIOR_SKARMORY,
     BEHAVIOR_DIGLETT, // Used for Diglett in the Skarmory boss fight.
-    BEHAVIOR_5, // 5 and 6 are probably Gengar and Ekans, but not sure which is which.
-    BEHAVIOR_6,
+    BEHAVIOR_GENGAR,
+    BEHAVIOR_EKANS,
     BEHAVIOR_MEDICHAM,
     BEHAVIOR_ZAPDOS,
     BEHAVIOR_MOLTRES,
@@ -435,7 +435,7 @@ enum MonsterBehavior
     BEHAVIOR_ARTICUNO,
     BEHAVIOR_GROUDON_2,
     BEHAVIOR_RAYQUAZA,
-    BEHAVIOR_16,
+    BEHAVIOR_MANKEY,
     BEHAVIOR_MEWTWO,
     BEHAVIOR_ENTEI,
     BEHAVIOR_RAIKOU,
@@ -455,7 +455,7 @@ enum MonsterBehavior
     BEHAVIOR_33,
     BEHAVIOR_34,
     BEHAVIOR_35,
-    BEHAVIOR_36,
+    BEHAVIOR_MAZE_BOSS,
 };
 
 enum VisualFlag

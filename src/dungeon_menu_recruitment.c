@@ -6,6 +6,7 @@
 #include "dungeon.h"
 #include "dungeon_menu_recruitment.h"
 #include "dungeon_message.h"
+#include "dungeon_message_log.h"
 #include "dungeon_music.h"
 #include "exclusive_pokemon.h"
 #include "input.h"

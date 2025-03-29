@@ -51,13 +51,10 @@ enum SecondaryStructureType {
     SECONDARY_STRUCTURE_DIVIDER, // A "divider" of secondary terrain will split the room in half randomly either horizontally or vertically.
 };
 
+extern bool8 gUnknown_202F1A8;
+
 void GenerateFloor(void);
 bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable);
 void sub_804EB30(void);
-void sub_8051E3C(void);
-
-#include "structs/dungeon_entity.h"
-
-void sub_8051E7C(Entity *pokemon);
 
 #endif

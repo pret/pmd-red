@@ -1,9 +1,7 @@
 #include "global.h"
 #include "text_util.h"
 #include "strings.h"
-
-extern u8 gIsTypePhysicalTable[];
-extern u8 gUnknown_810AC6A[];
+#include "dungeon_data.h"
 
 extern u32 gUnknown_810983C[26]; // TODO: verify size later
 
@@ -87,7 +85,7 @@ u8 IsTypePhysical(u8 index)
 
 u8 sub_8092364(u8 index)
 {
-    return gUnknown_810AC6A[index];
+    return gBestResistTypeTable[index];
 }
 
 void CopyAbilityNametoBuffer(char *buffer, u8 index)

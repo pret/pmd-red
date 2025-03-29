@@ -28,32 +28,7 @@
 #include "structs/str_806B7F8.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
-
-extern u8 *gTrapNames[];
-extern u8 *gUnknown_80FC5FC[];
-extern u8 *gUnknown_80FC5F8[];
-extern u8 *gUnknown_80FDB5C[];
-extern u8 *gUnknown_80FDB7C[];
-extern u8 *gUnknown_80FD7F4[];
-extern u8 *gUnknown_80FD7F8[];
-extern u8 *gUnknown_80FDC18[];
-extern u8 *gUnknown_80FDC40[];
-extern u8 *gUnknown_80FDC7C[];
-extern u8 *gUnknown_80FD7AC[];
-extern u8 *gUnknown_80FD788[];
-extern u8 *gUnknown_80FD7D4[];
-extern u8 *gUnknown_80F970C[];
-extern u8 *gUnknown_80F9728[];
-extern u8 *gUnknown_80FED00[];
-extern u8 *gUnknown_80FED04[];
-extern u8 *gUnknown_80FED0C[];
-extern u8 *gUnknown_80FDAA0[];
-extern u8 *gUnknown_80FDA80[];
-extern u8 *gUnknown_80FDB04[];
-extern u8 *gUnknown_80FDB2C[];
-extern u8 *gUnknown_80FDAE4[];
-extern u8 *gUnknown_80FDACC[];
-extern u8 *gUnknown_80FED08[];
+#include "dungeon_strings.h"
 
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
@@ -158,10 +133,10 @@ bool8 sub_807FD84(Entity *entity)
         gDungeon->unk13570 = 0;
         flag = LayTrap(&gDungeon->trapPos,gDungeon->trapID,gDungeon->unk13579);
         if (flag) {
-            TryDisplayDungeonLoggableMessage5(entity,&gDungeon->trapPos,*gUnknown_80FC5F8); // A trap was laid!
+            TryDisplayDungeonLoggableMessage5(entity,&gDungeon->trapPos,gUnknown_80FC5F8); // A trap was laid!
         }
         else {
-            TryDisplayDungeonLoggableMessage5(entity,&gDungeon->trapPos,*gUnknown_80FC5FC); // A trap can't be laid here.
+            TryDisplayDungeonLoggableMessage5(entity,&gDungeon->trapPos,gUnknown_80FC5FC); // A trap can't be laid here.
         }
         sub_8049ED4();
     }
@@ -218,7 +193,7 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
     s32 rand;
     Trap *trapData;
     Entity *target;
-    u8 *text;
+    const u8 *text;
 
     tile = GetTileMut(pos->x,pos->y);
     entity = tile->object;
@@ -241,13 +216,13 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
         rand = DungeonRandInt(100);
         text = NULL;
         if (HasHeldItem(target, ITEM_TRAP_SCARF)) {
-            text = *gUnknown_80FDB5C;
+            text = gUnknown_80FDB5C;
         }
         if ((flag == TRUE) || (gDungeon->unk181e8.showInvisibleTrapsMonsters != 0)) {
-            if (rand < 0) text = *gUnknown_80FDB7C;
+            if (rand < 0) text = gUnknown_80FDB7C;
         }
         else if (rand < 0xf) {
-            text = *gUnknown_80FDB7C;
+            text = gUnknown_80FDB7C;
         }
         if (text != NULL) {
             if (sub_803F428(pos)) {
@@ -264,10 +239,10 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
         sub_8049ED4();
         sub_804225C(pokemon,pos,trapData->id);
         if (gDungeon->unk181e8.blinded) {
-            LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FD7F4);
+            LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD7F4);
         }
         else {
-            LogMessageByIdWithPopupCheckUser(pokemon,(gUnknown_80FD7F8)[trapData->id]);
+            LogMessageByIdWithPopupCheckUser(pokemon,gSteppedOnTrapStrings[trapData->id]);
         }
     }
     if (target != NULL) {
@@ -387,7 +362,7 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
 
     info = GetEntInfo(target);
     if (HasHeldItem(target,0xe)) {
-        TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDC7C);
+        TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDC7C);
     }
     else
     {
@@ -409,14 +384,14 @@ void HandleStickyTrap(Entity *pokemon,Entity *target)
         }
 
         if (itemCount == 0) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDC40);
+            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDC40);
         }
         else {
             newIndex = DungeonRandInt(itemCount);
             sub_8045BF8(gFormatBuffer_Items[0], itemStack[newIndex]);
             itemStack[newIndex]->flags |= ITEM_FLAG_STICKY;
             sub_80421C0(target, 0x192);
-            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDC18);
+            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDC18);
         }
     }
 }
@@ -503,14 +478,14 @@ void HandleGrimyTrap(Entity *pokemon, Entity *target)
             }
         }
         if (badFoodCount == 1) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD788); // A food item went bad.
+            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD788); // A food item went bad.
         }
         else if (badFoodCount == 0) {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD7D4); // Nothing particularly bad happened.
+            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD7D4); // Nothing particularly bad happened.
         }
         else
         {
-            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FD7AC); // Several food items went bad
+            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD7AC); // Several food items went bad
         }
     }
 }
@@ -523,7 +498,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
     flag = FALSE;
     if (target != NULL) {
         if (IsBossFight()) {
-            LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FED0C); // But nothing happened...
+            LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FED0C); // But nothing happened...
         }
         else
         {
@@ -543,16 +518,16 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                     gDungeon->unk2 = 2;
                     return;
                 }
-                LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80F9728);
+                LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80F9728);
             }
             else
             {
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
                 if (info->isNotTeamMember) {
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F970C); // $m0 fell into the pitfall!
+                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80F970C); // $m0 fell into the pitfall!
                 }
                 else {
-                    DisplayDungeonLoggableMessageTrue(pokemon,*gUnknown_80F970C); // $m0 fell into the pitfall!
+                    DisplayDungeonLoggableMessageTrue(pokemon,gUnknown_80F970C); // $m0 fell into the pitfall!
                 }
                 sub_8068FE0(target,0x215,pokemon);
             }
@@ -604,11 +579,11 @@ void HandleSummonTrap(Entity *pokemon,DungeonPos *pos)
     sub_80421EC(pos,0x194);
     if (pokemonSummonCount == 0) {
 _ret:
-        LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FED04);
+        LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FED04);
     }
     else
     {
-        LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FED00);
+        LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FED00);
     }
   }
 }
@@ -645,9 +620,9 @@ void HandlePPZeroTrap(Entity *param_1,Entity *param_2)
       flag = TRUE;
     }
     if(flag)
-        TryDisplayDungeonLoggableMessage3(param_1,param_2,*gUnknown_80FDA80);
+        TryDisplayDungeonLoggableMessage3(param_1,param_2,gUnknown_80FDA80);
     else
-        TryDisplayDungeonLoggableMessage3(param_1,param_2,*gUnknown_80FDAA0);
+        TryDisplayDungeonLoggableMessage3(param_1,param_2,gUnknown_80FDAA0);
   }
 }
 
@@ -685,9 +660,9 @@ void HandleSealTrap(Entity *param_1,Entity *param_2)
             flag = TRUE;
         }
         if(flag)
-            TryDisplayDungeonLoggableMessage3(param_1,param_2,*gUnknown_80FDB04);
+            TryDisplayDungeonLoggableMessage3(param_1,param_2,gUnknown_80FDB04);
         else
-            TryDisplayDungeonLoggableMessage3(param_1,param_2,*gUnknown_80FDB2C);
+            TryDisplayDungeonLoggableMessage3(param_1,param_2,gUnknown_80FDB2C);
     }
 }
 
@@ -711,7 +686,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
     s32 range = gDungeon->unk181e8.visibilityRange;
 
     if (IsBossFight()) {
-        LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80FED08);
+        LogMessageByIdWithPopupCheckUser(param_1,gUnknown_80FED08);
         return;
     }
 
@@ -773,10 +748,10 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
     }
 
     if (counter != 0) {
-        LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80FDACC);
+        LogMessageByIdWithPopupCheckUser(param_1,gUnknown_80FDACC);
     }
     else {
-        LogMessageByIdWithPopupCheckUser(param_1,*gUnknown_80FDAE4);
+        LogMessageByIdWithPopupCheckUser(param_1,gUnknown_80FDAE4);
     }
 }
 

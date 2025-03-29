@@ -529,7 +529,11 @@ UNK_MACRO_3E = 23 3E @ #> (Seems to be an alignment operator)
 EXTRA_MSG  = 23 50   @ #P
 WAIT_PRESS = 23 57   @ #W
 NEW_LINE = 23 6E     @ #n
-
+UNK_MACRO_5F_1 = 23 5F 01 2E @ #_. (related to gUnknown_202749A)
+UNK_MACRO_5F_2 = 23 5F 02 2E
+UNK_MACRO_5F_3 = 23 5F 03 2E
+UNK_MACRO_5F_4 = 23 5F 04 2E
+UNK_MACRO_5F_5 = 23 5F 05 2E
 
 @ COLOR FORMATTING MACROS
 @

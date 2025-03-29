@@ -21,6 +21,7 @@
 #include "strings.h"
 #include "text_1.h"
 #include "text_util.h"
+#include "dungeon_data.h"
 
 struct UnusedOffenseStruct
 {
@@ -49,11 +50,6 @@ extern u8 gUnknown_8107788[];
 extern u8 gUnknown_810778C[];
 extern u8 gUnknown_8107790[];
 extern u8 gUnknown_8107798[];
-
-// 2, 4, 6, 7, 8, 9, 8, 0xA, 0xD, 0xF, 0x11
-extern s32 gUnknown_810AC90[10];
-
-#include "data/pokemon_3.h"
 
 extern void WriteDungeonLocationBits(DataSerializer*, DungeonLocation*);
 extern void WritePoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);

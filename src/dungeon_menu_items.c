@@ -24,7 +24,6 @@
 #include "status_checks_1.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
-#include "tile_types.h"
 #include "menu_input.h"
 #include "text_1.h"
 #include "code_8044CC8.h"

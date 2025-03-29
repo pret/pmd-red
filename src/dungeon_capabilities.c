@@ -1,10 +1,10 @@
 #include "global.h"
 #include "dungeon_capabilities.h"
-
+#include "dungeon_move_util.h"
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"
 #include "constants/status.h"
-#include "charge_move.h"
+#include "dungeon_move_util.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_capabilities.h"
 #include "dungeon_engine.h"

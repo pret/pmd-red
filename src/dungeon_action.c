@@ -11,12 +11,11 @@
 #include "dungeon_generation.h"
 #include "dungeon_util.h"
 #include "dungeon_pokemon_attributes.h"
+#include "dungeon_strings.h"
 #include "pokemon.h"
 #include "items.h"
 #include "structs/str_item_text.h"
 
-extern u8 *gUnknown_80F91EC[];
-extern u8 *gUnknown_80F7C50[];
 extern u8 gUnknown_80F697C[];
 extern s16 gSpeedTurns[2][0x19];
 
@@ -192,14 +191,14 @@ bool8 sub_8044B84(void)
 const u8 *sub_8044BA8(u16 actionId, u8 id)
 {
     if (actionId == ACTION_STAIRS && GetFloorType() == FLOOR_TYPE_RESCUE) {
-        return *gUnknown_80F91EC;
+        return gUnknown_80F91EC;
     }
     else {
-        if (!AreStringsDifferent(gUnknown_80F7C50[actionId << 1], gUnknown_80F697C)) {
+        if (!AreStringsDifferent(gUnknown_80F7C50[actionId].str, gUnknown_80F697C)) {
             return gActions[GetItemActionType(id)].useText;
         }
         else {
-            return gUnknown_80F7C50[actionId << 1];
+            return gUnknown_80F7C50[actionId].str;
         }
     }
 }

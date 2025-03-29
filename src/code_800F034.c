@@ -18,10 +18,8 @@ struct unkStruct_203B0D4
 
 extern struct unkStruct_203B0D4 *gUnknown_203B0D4;
 
-ALIGNED(4) static const u8 gUnknown_80CE77C[] = "efob%03d";
-ALIGNED(4) static const u8 gUnknown_80CE788[] = "efbg%03d";
-
-void sub_800F034(void) {
+void sub_800F034(void)
+{
     s32 index;
     if(gUnknown_203B0D4 == NULL)
     {
@@ -121,10 +119,10 @@ OpenedFile * sub_800F1C0(u32 animType, s32 effectID)
         case 1:
         case 2:
         case 3:
-            sprintf(fileName,gUnknown_80CE77C,effectID); // efob
+            sprintf(fileName,"efob%03d",effectID);
             break;
         case 4:
-            sprintf(fileName,gUnknown_80CE788,effectID); // efbg
+            sprintf(fileName,"efbg%03d",effectID);
             break;
 
     }

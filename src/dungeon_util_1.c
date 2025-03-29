@@ -345,15 +345,15 @@ bool8 ShouldRunMonsterAI(Entity *pokemon)
     {
         case BEHAVIOR_RESCUE_TARGET:
         case BEHAVIOR_SKARMORY:
-        case BEHAVIOR_5:
-        case BEHAVIOR_6:
+        case BEHAVIOR_GENGAR:
+        case BEHAVIOR_EKANS:
         case BEHAVIOR_MEDICHAM:
         case BEHAVIOR_ZAPDOS:
         case BEHAVIOR_MOLTRES:
         case BEHAVIOR_ARTICUNO:
         case BEHAVIOR_GROUDON_2:
         case BEHAVIOR_RAYQUAZA:
-        case BEHAVIOR_16:
+        case BEHAVIOR_MANKEY:
         case BEHAVIOR_MEWTWO:
         case BEHAVIOR_ENTEI:
         case BEHAVIOR_RAIKOU:
@@ -373,7 +373,7 @@ bool8 ShouldRunMonsterAI(Entity *pokemon)
         case BEHAVIOR_33:
         case BEHAVIOR_34:
         case BEHAVIOR_35:
-        case BEHAVIOR_36:
+        case BEHAVIOR_MAZE_BOSS:
             return TRUE;
         case BEHAVIOR_FIXED_ENEMY:
         case BEHAVIOR_ALLY:

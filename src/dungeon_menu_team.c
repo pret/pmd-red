@@ -45,7 +45,6 @@
 #include "status_checks_1.h"
 #include "string_format.h"
 #include "text_2.h"
-#include "tile_types.h"
 #include "weather.h"
 
 extern bool8 sub_8048A68(Entity *param_1,Item *item);

@@ -32,6 +32,7 @@
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
+#include "dungeon_message_log.h"
 #include "dungeon_misc.h"
 #include "dungeon_music.h"
 #include "dungeon_random.h"
@@ -47,7 +48,6 @@
 #include "sprite.h"
 #include "text_1.h"
 #include "text_3.h"
-#include "tile_types.h"
 #include "weather.h"
 
 extern void sub_800F15C(s32);

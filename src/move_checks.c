@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "math.h"
 #include "constants/status.h"
 #include "constants/type.h"
@@ -17,7 +18,6 @@
 #include "status_actions.h"
 #include "status_checks_1.h"
 #include "text_util.h"
-#include "tile_types.h"
 #include "trap.h"
 #include "weather.h"
 #include "dungeon_config.h"
