@@ -209,7 +209,8 @@ SECTIONS {
         src/dungeon_util.o(.text);
         src/dungeon_items.o(.text);
         asm/code_8046CE4.o(.text);
-        src/code_8048480.o(.text);
+        src/code_8046CE4.o(.text);
+        src/dungeon_item_action.o(.text);
         src/dungeon_ai_item_weight.o(.text);
         src/dungeon_map_access.o(.text);
         src/dungeon_generation.o(.text);
@@ -546,7 +547,8 @@ SECTIONS {
         data/pksdir_1.o(.rodata);
         src/dungeon_util.o(.text);
         src/dungeon_items.o(.rodata);
-        data/data_80F59C8_7.o(.rodata);
+        src/code_8046CE4.o(.rodata);
+        src/dungeon_item_action.o(.rodata);
         src/dungeon_ai_item_weight.o(.rodata);
         src/dungeon_map_access.o(.rodata);
         src/dungeon_generation.o(.rodata);

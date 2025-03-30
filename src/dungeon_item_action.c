@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_803E668.h"
 #include "code_8041AD0.h"
 #include "dungeon_message.h"
@@ -128,36 +129,6 @@ extern void SetShopkeeperAggression(Entity *, Entity *);
 extern void sub_80464C8(Entity *, DungeonPos *, Item *);
 extern void sub_806A6E8(Entity *);
 extern void sub_8042390(Entity *, Item *);
-
-bool8 sub_8047930(Entity *pokemon, Entity *target)
-{
-  bool8 flag;
-
-  if (((GetEntInfo(target)->shopkeeper == TRUE) ||
-       (GetEntInfo(target)->monsterBehavior == BEHAVIOR_DIGLETT)) || (GetEntInfo(target)->monsterBehavior == BEHAVIOR_RESCUE_TARGET)) {
-    return FALSE;
-  }
-  else {
-    if(DungeonRandInt(100) < gUnknownDungeonChance)
-        flag = TRUE;
-    else
-        flag = FALSE;
-    if (GetEntityType(pokemon) == ENTITY_MONSTER) {
-      if (HasHeldItem(pokemon, ITEM_WHIFF_SPECS)) {
-          flag = FALSE;
-      }
-      else {
-        if (HasHeldItem(pokemon, ITEM_LOCKON_SPECS)) {
-          flag = TRUE;
-        }
-      }
-    }
-    if ((GetEntityType(target) == ENTITY_MONSTER) && (HasHeldItem(target, ITEM_DODGE_SCARF))) {
-      flag = FALSE;
-    }
-  }
-  return flag;
-}
 
 void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item)
 {
