@@ -10,7 +10,7 @@
 #include "code_806CD90.h"
 #include "constants/trap.h"
 #include "constants/type.h"
-#include "dungeon_engine.h"
+#include "code_8042B34.h"
 #include "dungeon_items.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"

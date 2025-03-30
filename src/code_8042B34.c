@@ -25,6 +25,7 @@
 #include "dungeon.h"
 #include "dungeon_ai.h"
 #include "dungeon_config.h"
+#include "code_8042B34.h"
 #include "dungeon_engine.h"
 #include "dungeon_generation.h"
 #include "dungeon_items.h"
@@ -76,6 +77,8 @@ struct UnkStruct_80F6624
 extern const struct UnkStruct_80F6624 gUnknown_80F6624[][3];
 
 extern const unkStruct_2039DB0 gUnknown_80F683C;
+
+// These functions are not part of dungeon's overlay5
 
 void sub_8042B34(s32 a0, s32 a1, s32 a2)
 {
@@ -1140,4 +1143,30 @@ void EnforceMaxItemsAndMoney(void)
     if (!IsKeepMoney(gDungeon->unk644.dungeonLocation.id)) {
         gTeamInventoryRef->teamMoney = 0;
     }
+}
+
+bool8 IsBossFight()
+{
+    if (gDungeon->fixedRoomNumber != 0 && gDungeon->fixedRoomNumber <= 0x31)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 IsCurrentFixedRoomBossFight()
+{
+    if (gDungeon->tileset > DUNGEON_OUT_ON_RESCUE)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 IsMakuhitaTrainingMaze(void)
+{
+    if (DUNGEON_IS_MAZE(gDungeon->unk644.dungeonLocation.id))
+        return TRUE;
+    else
+        return FALSE;
 }

@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "dungeon.h"
 #include "dungeon_move_util.h"
-#include "dungeon_engine.h"
+#include "code_8042B34.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
 #include "dungeon_map.h"

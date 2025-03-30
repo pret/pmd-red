@@ -16,7 +16,7 @@
 #include "dungeon_ai.h"
 #include "dungeon_capabilities.h"
 #include "dungeon_config.h"
-#include "dungeon_engine.h"
+#include "code_8042B34.h"
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"

@@ -8,7 +8,7 @@
 #include "code_804267C.h"
 #include "code_806CD90.h"
 #include "dungeon.h"
-#include "dungeon_engine.h"
+#include "code_8042B34.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
 #include "dungeon_message.h"

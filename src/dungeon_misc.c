@@ -12,7 +12,7 @@
 #include "string_format.h"
 #include "friend_area.h"
 #include "code_803E668.h"
-#include "dungeon_engine.h"
+#include "code_8042B34.h"
 #include "move_effects_target.h"
 #include "dungeon_map_access.h"
 #include "dungeon_map.h"
