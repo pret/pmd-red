@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_move.h"
 #include "dungeon_move_util.h"
 #include "constants/ability.h"

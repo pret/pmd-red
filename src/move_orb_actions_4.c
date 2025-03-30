@@ -78,7 +78,6 @@ extern void sub_80783C4(Entity *, Entity *, bool8);
 
 extern u32 gUnknown_8106A50;
 extern u32 gUnknown_8106A4C;
-extern u32 gUnknown_8106A4C;
 
 // TODO The parameters don't match the function definition in pokemon_mid.h (u8*, s16).
 extern void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index);
