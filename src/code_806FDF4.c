@@ -87,8 +87,8 @@ void sub_806F480(Entity *pokemon, u8 r1)
     }
 }
 
-u8 sub_806F4A4(Entity *pokemon, u8 type) {
-
+u8 sub_806F4A4(Entity *pokemon, u8 type)
+{
     EntityInfo *info = GetEntInfo(pokemon);
     s32 index;
 
@@ -172,6 +172,8 @@ void sub_806F63C(Entity *param_1)
         sub_803F508(temp->cameraTarget);
     }
 }
+
+// FILE SPLIT HERE
 
 bool8 sub_806F660(Entity *pokemon, Entity *target)
 {
@@ -283,7 +285,6 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
 
     return TRUE;
 }
-
 
 void nullsub_96(Entity *pokemon,Entity *target)
 {}

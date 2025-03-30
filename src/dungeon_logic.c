@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_logic.h"
 #include "structs/map.h"
 #include "constants/item.h"
@@ -32,53 +33,10 @@
 
 // This file deals with things like controlling movement, walkable tiles, ai targeting, status checks and pokemon attributes.
 
-extern const u8 gUnknown_8106FA4[];
-
 extern void sub_80429B4(Entity *r0);
 extern void ShowVisualFlags(Entity *r0);
 
 EWRAM_DATA u8 gWalkableTileToCrossableTerrain[8] = {0};
-
-const u8 gDirectionBitMasks_1[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
-const u8 gDirectionBitMasks_2[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
-const u8 gDirectionBitMasks_3[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
-const u8 gDirectionBitMasks_4[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
-const u8 gDirectionBitMasks_5[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
-const u8 gDirectionBitMasks_6[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
-const u8 gDirectionBitMasks_7[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
-
-const u8 gTreatmentData[3][2][2][2] = {
-    {
-        {
-            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE},
-            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE}
-        },
-        {
-            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE},
-            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE}
-        }
-    },
-    {
-        {
-            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE},
-            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE}
-        },
-        {
-            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY},
-            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY}
-        }
-    },
-    {
-        {
-            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY},
-            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY}
-        },
-        {
-            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE},
-            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE}
-        }
-    }
-};
 
 u8 GetCrossableTerrain(s16 species)
 {
@@ -471,7 +429,7 @@ void SetMessageArgument_2(u8 *buffer, EntityInfo *param_2, s32 colorNum)
 void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum)
 {
     if (entityInfo->curseClassStatus.status == STATUS_DECOY) {
-        sprintfStatic(buffer, gUnknown_8106FA4, colorNum + 0x30, gUnknown_80F8974);
+        sprintfStatic(buffer, _("{color}%c%s{reset}"), colorNum + 0x30, gUnknown_80F8974);
     }
     else if (entityInfo->isNotTeamMember) {
         CopyCyanMonsterNametoBuffer(buffer, entityInfo->apparentID);
@@ -680,6 +638,47 @@ bool8 CannotAttack(Entity *pokemon, bool8 skipSleep)
 
   return TRUE;
 }
+
+static const u8 gDirectionBitMasks_1[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+static const u8 gDirectionBitMasks_2[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+static const u8 gDirectionBitMasks_3[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+static const u8 gDirectionBitMasks_4[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+static const u8 gDirectionBitMasks_5[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+static const u8 gDirectionBitMasks_6[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+static const u8 gDirectionBitMasks_7[] = {0x1, 0x2, 0x4, 0x8, 0x10, 0x20, 0x40, 0x80};
+
+static const u8 gTreatmentData[3][2][2][2] = {
+    {
+        {
+            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE},
+            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE}
+        },
+        {
+            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE},
+            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE}
+        }
+    },
+    {
+        {
+            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE},
+            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE}
+        },
+        {
+            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY},
+            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY}
+        }
+    },
+    {
+        {
+            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY},
+            {TREATMENT_IGNORE, TREATMENT_TREAT_AS_ENEMY}
+        },
+        {
+            {TREATMENT_TREAT_AS_ENEMY, TREATMENT_IGNORE},
+            {TREATMENT_TREAT_AS_ALLY, TREATMENT_IGNORE}
+        }
+    }
+};
 
 bool8 CanMoveInDirection(Entity *pokemon, u32 direction)
 {
