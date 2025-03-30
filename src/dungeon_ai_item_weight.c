@@ -1,6 +1,6 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_ai_item_weight.h"
-
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "dungeon_ai_targeting.h"

@@ -528,7 +528,7 @@ SECTIONS {
         src/personality_test1.o(.rodata);
         src/personality_test2.o(.rodata);
         src/code_803D0D8.o(.rodata);
-        src/dungeon_util.o(.rodata);
+        src/dungeon_pos_data.o(.rodata);
         data/data_80F4D44.o(.rodata);
         src/dungeon_config.o(.rodata);
         data/data_80F59C8_1.o(.rodata);
@@ -541,9 +541,13 @@ SECTIONS {
         data/pksdir_0.o(.rodata);
         src/code_8041AD0.o(.rodata);
         src/run_dungeon.o(.rodata);
-        data/data_80F59C8_5.o(.rodata);
+        src/dungeon_engine.o(.rodata);
+        src/dungeon_action.o(.rodata);
+        data/pksdir_1.o(.rodata);
+        src/dungeon_util.o(.text);
         src/dungeon_items.o(.rodata);
         data/data_80F59C8_7.o(.rodata);
+        src/dungeon_ai_item_weight.o(.rodata);
         src/dungeon_map_access.o(.rodata);
         src/dungeon_generation.o(.rodata);
         src/dungeon_generation_fixed.o(.rodata);

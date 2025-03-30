@@ -5,5 +5,3 @@
 .string "pksdir0"
 .align 2,0
 .string "pksdir0"
-.align 2,0
-.string "pksdir0"

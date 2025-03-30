@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_action.h"
 #include "constants/dungeon_action.h"
 #include "dungeon_ai.h"
@@ -16,29 +17,36 @@
 #include "code_8044CC8.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
+#include "dungeon_engine.h"
+#include "run_dungeon.h"
 
-extern u8 gUnknown_80F697C[];
-extern s16 gSpeedTurns[2][0x19];
-
-extern void sub_8043ED0(u32);
-extern u8 GetFloorType(void);
 extern bool8 sub_8044B28(void);
 extern void sub_8086AC0(void);
-extern void sub_8043ED0(u32);
 extern void UseAttack(u32);
 extern void TriggerWeatherAbilities(void);
 extern void sub_8071DA4(Entity *);
 extern void TickStatusHeal(Entity *);
 
-
 extern unkStruct_202EE44 gDungeonSubMenu[10];
 
 extern s32 gDungeonSubMenuItemsCount;
 
-extern u16 gUnknown_80F6964[NUM_ITEM_CATEGORIES];
-extern u8 gUnknown_80F697C[];
 extern bool8 sub_8045888(Entity *);
-extern u8 GetFloorType(void);
+
+static const u16 gUnknown_80F6964[NUM_ITEM_CATEGORIES] = {
+    [CATEGORY_THROWN_LINE] = 0,
+    [CATEGORY_THROWN_ARC] = 0,
+    [CATEGORY_BERRIES_SEEDS_VITAMINS] = 13,
+    [CATEGORY_FOOD_GUMMIES] = 14,
+    [CATEGORY_HELD_ITEMS] = 0,
+    [CATEGORY_TMS_HMS] = 16,
+    [CATEGORY_POKE] = 0,
+    [CATEGORY_7] = 18,
+    [CATEGORY_OTHER] = 18,
+    [CATEGORY_ORBS] = 49,
+    [CATEGORY_LINK_BOX] = 44,
+    [CATEGORY_USED_TM] = 18,
+};
 
 UNUSED static const u8 *sub_8044BA8(u16 actionId, u8 id)
 {
@@ -46,7 +54,7 @@ UNUSED static const u8 *sub_8044BA8(u16 actionId, u8 id)
         return gUnknown_80F91EC;
     }
     else {
-        if (!AreStringsDifferent(gUnknown_80F7C50[actionId].str, gUnknown_80F697C)) {
+        if (!AreStringsDifferent(gUnknown_80F7C50[actionId].str, "X")) {
             return gActions[GetItemActionType(id)].useText;
         }
         else {
@@ -240,7 +248,7 @@ const u8 *GetDungeonSubMenuItemString(s32 param_1)
         return gUnknown_80F91EC;
     }
     else {
-        if (!AreStringsDifferent(gUnknown_80F7C50[actionId].str, gUnknown_80F697C)) {
+        if (!AreStringsDifferent(gUnknown_80F7C50[actionId].str, "X")) {
             return gActions[GetItemActionType(gDungeonSubMenu[param_1].unk2)].useText;
         }
         else {

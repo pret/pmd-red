@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "run_dungeon.h"
 #include "code_803E46C.h"
 #include "constants/dungeon.h"
@@ -11,8 +12,6 @@
 #include "structs/str_dungeon.h"
 #include "constants/ability.h"
 #include "dungeon_pokemon_attributes.h"
-
-extern s16 gSpeedTurns[2][25];
 
 extern bool8 sub_8044B28(void);
 extern void TrySpawnMonsterAndActivatePlusMinus(void);
@@ -34,7 +33,13 @@ extern void sub_807EAA0(u32, u32);
 static void sub_8044454(void);
 static bool8 xxx_dungeon_80442D0(bool8);
 
-// First file in overlay5
+const s16 gSpeedTurns[MAX_SPEED_STAGE + 1][25] = {
+    [0] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0},
+    [1] = {0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 9, 0},
+    [2] = {0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0},
+    [3] = {0, 22, 23, 24, 0, 25, 26, 27, 0, 28, 29, 30, 0, 31, 32, 33, 0, 34, 35, 36, 0, 37, 38, 39, 0},
+    [4] = {40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64},
+};
 
 void RunFractionalTurn(bool8 param_1)
 {
