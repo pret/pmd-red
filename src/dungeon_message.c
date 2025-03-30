@@ -10,7 +10,6 @@
 #include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_803E724.h"
-#include "code_8045A00.h"
 #include "dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"

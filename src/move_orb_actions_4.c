@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "status_actions.h"
 #include "dungeon_move_util.h"
-#include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "dungeon_move.h"
 #include "code_806CD90.h"

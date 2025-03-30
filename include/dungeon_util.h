@@ -33,5 +33,7 @@ bool8 CanTargetEntity(Entity *entity, Entity *targetEntity);
 bool8 sub_8045A70(Entity *entity, Entity *targetEntity);
 bool8 sub_8045AAC(Entity *entity, DungeonPos *pos);
 bool8 CanTargetPosition(Entity *entity, DungeonPos *pos);
+void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3);
+void sub_8045ACC(void);
 
 #endif // GUARD_DUNGEON_UTIL_H

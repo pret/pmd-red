@@ -3,7 +3,6 @@
 #include "dungeon_items.h"
 #include "code_803E668.h"
 #include "code_8041AD0.h"
-#include "code_8045A00.h"
 #include "code_80861A8.h"
 #include "code_80869E4.h"
 #include "dungeon_capabilities.h"

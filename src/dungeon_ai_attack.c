@@ -1,7 +1,6 @@
 #include "global.h"
 #include "dungeon_ai_attack.h"
 #include "dungeon_move_util.h"
-#include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "constants/direction.h"

@@ -4,7 +4,6 @@
 #include "status.h"
 #include "weather.h"
 #include "dungeon_ai_targeting.h"
-#include "code_8045A00.h"
 #include "dungeon_capabilities.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"

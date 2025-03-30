@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "code_803E46C.h"
 #include "code_803E724.h"
-#include "code_8045A00.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"

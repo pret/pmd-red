@@ -11,7 +11,6 @@
 #include "moves.h"
 #include "string_format.h"
 #include "friend_area.h"
-#include "code_8045A00.h"
 #include "code_803E668.h"
 #include "dungeon_engine.h"
 #include "move_effects_target.h"

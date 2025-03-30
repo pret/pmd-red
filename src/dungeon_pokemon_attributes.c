@@ -1,7 +1,6 @@
 #include "global.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_message.h"
-#include "code_8045A00.h"
 #include "constants/ability.h"
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"

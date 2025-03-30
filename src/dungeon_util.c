@@ -2,25 +2,40 @@
 #include "dungeon_util.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_traps.h"
+#include "structs/map.h"
 #include "code_800F958.h"
 #include "code_8041AD0.h"
 #include "code_8069E0C.h"
 #include "code_807E5AC.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
-#include "dungeon_util.h"
 #include "code_803E724.h"
 #include "dungeon_range.h"
 #include "pokemon.h"
 #include "code_805D8C8.h"
 #include "constants/status.h"
+#include "constants/item.h"
 #include "dungeon_pokemon_attributes.h"
+#include "dungeon_random.h"
+#include "dungeon_util.h"
+#include "dungeon_leader.h"
+#include "dungeon_message.h"
+#include "dungeon_music.h"
+#include "dungeon_map.h"
+#include "dungeon_ai_targeting.h"
+#include "string_format.h"
+#include "items.h"
+#include "trap.h"
+#include "status_checks_1.h"
 
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
 extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
 
+extern const u8 *gUnknown_80FE6F4[];
+
 extern void sub_8045ACC(void);
 extern s32 GetMonsterApparentID(Entity *pokemon, s32 id);
+extern void sub_8045BF8(u8 *, Item *);
 
 const DungeonPos gAdjacentTileOffsets[] = {
     {0, 1},
@@ -556,4 +571,67 @@ bool8 sub_8045AAC(Entity *entity, DungeonPos *pos)
 bool8 CanTargetPosition(Entity *entity, DungeonPos *pos)
 {
     return IsPositionInSight(&entity->pos, pos);
+}
+
+void sub_8045ACC(void)
+{
+  Entity *entity;
+  s32 index;
+  s32 pokeCount;
+
+  pokeCount = 0;
+
+  for(index = 0; index < MAX_TEAM_MEMBERS; index++)
+  {
+    entity = gDungeon->teamPokemon[index];
+    if (EntityIsValid(entity)) {
+      gDungeon->activePokemon[pokeCount] = entity;
+      pokeCount++;
+    }
+  }
+
+  for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
+  {
+    entity = gDungeon->wildPokemon[index];
+    if (EntityIsValid(entity)) {
+      gDungeon->activePokemon[pokeCount] = entity;
+      pokeCount++;
+    }
+  }
+  for (; pokeCount < DUNGEON_MAX_POKEMON; pokeCount++) {
+    gDungeon->activePokemon[pokeCount] = NULL;
+  }
+}
+
+s32 GetTeamMemberEntityIndex(Entity *pokemon)
+{
+  Entity *entity;
+  s32 index;
+
+  for(index = 0; index < MAX_TEAM_MEMBERS; index++)
+  {
+    entity = gDungeon->teamPokemon[index];
+    if (pokemon == entity)
+      return index;
+  }
+  return -1;
+}
+
+void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3)
+{
+  switch(GetEntityType(entity))
+  {
+    case ENTITY_MONSTER:
+        SetMessageArgument_2(buffer, GetEntInfo(entity), param_3);
+        break;
+    case ENTITY_ITEM:
+        sub_8045BF8(buffer, GetItemData_1(entity));
+        break;
+    case ENTITY_TRAP:
+        GetTrapName(buffer, GetTrapData_1(entity)->id);
+        break;
+    default:
+        strcpy(buffer, *gUnknown_80FE6F4);
+        break;
+  }
 }

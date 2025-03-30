@@ -5,7 +5,6 @@
 #include "dungeon_misc.h"
 #include "code_80118A4.h"
 #include "code_803E668.h"
-#include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"

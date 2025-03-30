@@ -1,7 +1,6 @@
 #include "global.h"
 #include "dungeon_misc.h"
 #include "code_804267C.h"
-#include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "constants/ability.h"
 #include "constants/type.h"

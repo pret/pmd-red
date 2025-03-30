@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "structs/str_dungeon.h"
 #include "code_800F958.h"
-#include "code_8045A00.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
 #include "dungeon_items.h"

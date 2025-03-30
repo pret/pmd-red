@@ -2,7 +2,6 @@
 #include "constants/ability.h"
 #include "constants/weather.h"
 #include "code_803E46C.h"
-#include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "code_807CD9C.h"
