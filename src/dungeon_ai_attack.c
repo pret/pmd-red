@@ -25,7 +25,6 @@
 #include "move_util.h"
 #include "moves.h"
 #include "position_util.h"
-#include "status_checks_1.h"
 #include "status_checks.h"
 #include "structs/str_dungeon.h"
 #include "targeting_flags.h"

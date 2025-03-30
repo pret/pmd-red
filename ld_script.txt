@@ -244,7 +244,6 @@ SECTIONS {
         src/code_806FDF4.o(.text);
         src/status_checks.o(.text);
         src/dungeon_movement.o(.text);
-        src/status_checks_1.o(.text);
         src/dungeon_ai_targeting.o(.text);
         src/dungeon_pokemon_attributes.o(.text);
         src/code_80718D8.o(.text);

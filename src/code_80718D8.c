@@ -12,7 +12,6 @@
 #include "dungeon_util.h"
 #include "dungeon.h"
 #include "pokemon_3.h"
-#include "status_checks_1.h"
 #include "code_805D8C8.h"
 #include "structs/str_806B7F8.h"
 #include "dungeon_ai_targeting.h"

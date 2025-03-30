@@ -52,7 +52,6 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "sprite.h"
-#include "status_checks_1.h"
 #include "string_format.h"
 #include "trap.h"
 #include "weather.h"

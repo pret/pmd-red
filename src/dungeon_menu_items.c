@@ -20,7 +20,6 @@
 #include "code_803E724.h"
 #include "trap.h"
 #include "dungeon_map_access.h"
-#include "status_checks_1.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "menu_input.h"

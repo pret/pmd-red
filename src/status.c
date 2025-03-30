@@ -18,7 +18,6 @@
 #include "math.h"
 #include "move_effects_target.h"
 #include "number_util.h"
-#include "status_checks_1.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_config.h"

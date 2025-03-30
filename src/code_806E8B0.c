@@ -2,7 +2,6 @@
 #include "constants/ability.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_pokemon_attributes.h"
-#include "status_checks_1.h"
 #include "text_util.h"
 #include "dungeon_message.h"
 #include "string_format.h"
@@ -20,6 +19,7 @@
 #include "structs/str_damage.h"
 #include "dungeon_util.h"
 #include "dungeon_config.h"
+#include "dungeon_ai_targeting.h"
 
 void sub_8042940(Entity *r0);
 void sub_80428B0(Entity *r0);

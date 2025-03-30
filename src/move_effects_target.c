@@ -26,7 +26,6 @@
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "status_checks.h"
-#include "status_checks_1.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_misc.h"

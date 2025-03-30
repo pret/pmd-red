@@ -38,7 +38,6 @@
 #include "sprite.h"
 #include "status.h"
 #include "status_actions.h"
-#include "status_checks_1.h"
 #include "weather.h"
 #include "targeting_flags.h"
 #include "text_util.h"

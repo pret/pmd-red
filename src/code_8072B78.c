@@ -8,11 +8,11 @@
 #include "dungeon_util.h"
 #include "moves.h"
 #include "pokemon_mid.h"
-#include "status_checks_1.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "structs/str_pokemon.h"
 #include "structs/str_806B7F8.h"
+#include "dungeon_ai_targeting.h"
 
 extern u8 *gUnknown_80FE2EC[];
 

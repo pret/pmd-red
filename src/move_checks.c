@@ -15,11 +15,11 @@
 #include "number_util.h"
 #include "status.h"
 #include "status_actions.h"
-#include "status_checks_1.h"
 #include "text_util.h"
 #include "trap.h"
 #include "weather.h"
 #include "dungeon_config.h"
+#include "dungeon_ai_targeting.h"
 
 bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
 {

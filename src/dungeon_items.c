@@ -19,7 +19,6 @@
 #include "dungeon_ai_targeting.h"
 #include "string_format.h"
 #include "items.h"
-#include "status_checks_1.h"
 #include "structs/map.h"
 #include "trap.h"
 #include "math.h"

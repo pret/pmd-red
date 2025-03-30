@@ -23,11 +23,11 @@
 #include "move_util.h"
 #include "music.h"
 #include "pokemon.h"
-#include "status_checks_1.h"
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
+#include "dungeon_ai_targeting.h"
 
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);

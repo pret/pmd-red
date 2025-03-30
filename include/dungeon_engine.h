@@ -3,7 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 
-extern const s16 gSpeedTurns[MAX_SPEED_STAGE + 1][25];
+extern const s16 gSpeedTurns[NUM_SPEED_COUNTERS][25];
 
 void RunFractionalTurn(bool8 param_1);
 

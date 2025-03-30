@@ -33,7 +33,7 @@ extern void sub_807EAA0(u32, u32);
 static void sub_8044454(void);
 static bool8 xxx_dungeon_80442D0(bool8);
 
-const s16 gSpeedTurns[MAX_SPEED_STAGE + 1][25] = {
+const s16 gSpeedTurns[NUM_SPEED_COUNTERS][25] = {
     [0] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0},
     [1] = {0, 0, 0, 4, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 9, 0},
     [2] = {0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0},

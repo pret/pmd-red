@@ -17,7 +17,6 @@
 #include "dungeon_items.h"
 #include "moves.h"
 #include "dungeon_random.h"
-#include "status_checks_1.h"
 #include "code_803E668.h"
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"

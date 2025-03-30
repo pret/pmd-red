@@ -27,7 +27,6 @@
 #include "string_format.h"
 #include "items.h"
 #include "trap.h"
-#include "status_checks_1.h"
 
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
 extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];

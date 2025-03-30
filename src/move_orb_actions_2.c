@@ -26,7 +26,6 @@
 #include "number_util.h"
 #include "pokemon.h"
 #include "status_actions.h"
-#include "status_checks_1.h"
 #include "status.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"

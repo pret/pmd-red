@@ -21,12 +21,12 @@
 #include "pokemon.h"
 #include "pokemon_3.h"
 #include "pokemon_mid.h"
-#include "status_checks_1.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "structs/str_806B7F8.h"
 #include "dungeon_config.h"
+#include "dungeon_ai_targeting.h"
 
 extern u8 *gUnknown_80FA8BC[];
 extern u8 *gUnknown_80FA824[];

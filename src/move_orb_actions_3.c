@@ -33,7 +33,6 @@
 #include "pokemon.h"
 #include "status.h"
 #include "status_actions.h"
-#include "status_checks_1.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"

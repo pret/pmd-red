@@ -27,7 +27,6 @@
 #include "pokemon_3.h"
 #include "pokemon.h"
 #include "status.h"
-#include "status_checks_1.h"
 #include "trap.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"

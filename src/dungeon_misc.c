@@ -32,7 +32,6 @@
 #include "dungeon_ai_targeting.h"
 #include "dungeon_movement.h"
 #include "dungeon_util.h"
-#include "status_checks_1.h"
 #include "exclusive_pokemon.h"
 #include "dungeon_config.h"
 #include "game_options.h"
