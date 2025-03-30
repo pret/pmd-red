@@ -10,7 +10,6 @@
 #include "dungeon_ai_item_weight.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_targeting.h"
-#include "dungeon_capabilities.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"

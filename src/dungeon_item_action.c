@@ -12,7 +12,6 @@
 #include "constants/status.h"
 #include "constants/type.h"
 #include "dungeon_action.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_items.h"
 #include "dungeon_music.h"
 #include "dungeon_pokemon_attributes.h"
@@ -32,6 +31,7 @@
 #include "dungeon_misc.h"
 #include "code_803E724.h"
 #include "dungeon_data.h"
+#include "dungeon_ai_targeting.h"
 
 extern u8 *gUnknown_80F89F4[];
 extern u8 *gUnknown_80FB580[];

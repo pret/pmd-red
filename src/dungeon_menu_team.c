@@ -15,7 +15,6 @@
 #include "code_8097DD0.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_movement.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "dungeon_main.h"
@@ -44,6 +43,7 @@
 #include "string_format.h"
 #include "text_2.h"
 #include "weather.h"
+#include "dungeon_ai_targeting.h"
 
 extern bool8 sub_8048A68(Entity *param_1,Item *item);
 extern bool8 sub_8048950(Entity *param_1,Item *item);

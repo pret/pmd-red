@@ -9,8 +9,8 @@
 #include "constants/status.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_attack.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_random.h"
+#include "dungeon_ai_targeting.h"
 
 extern const char *gPtrFrozenMessage[];
 extern const char *gPtrWrappedAroundMessage[];

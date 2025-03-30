@@ -3,6 +3,12 @@
 
 #include "structs/dungeon_entity.h"
 
+bool8 CheckVariousStatuses2(Entity *pokemon, bool8 checkBlinker);
+bool8 sub_8070BC0(Entity* entity);
+bool8 CheckVariousConditions(Entity *pokemon);
+bool8 CheckVariousStatuses(Entity *pokemon);
+bool8 CannotAttack(Entity *pokemon, bool8 skipSleep);
+bool8 CanMoveInDirection(Entity *pokemon, u32 direction);
 bool8 CanAttackInDirection(Entity *pokemon, s32 direction);
 bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemonInFront);
 bool8 IsAtJunction(Entity *pokemon);

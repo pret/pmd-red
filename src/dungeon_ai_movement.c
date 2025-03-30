@@ -9,7 +9,6 @@
 #include "dungeon_action.h"
 #include "dungeon_ai_leader.h"
 #include "dungeon_ai_targeting.h"
-#include "dungeon_capabilities.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"

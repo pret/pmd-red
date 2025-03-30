@@ -16,7 +16,6 @@
 #include "constants/status.h"
 #include "constants/targeting.h"
 #include "dungeon_ai_targeting.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "dungeon_movement.h"

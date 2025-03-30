@@ -14,7 +14,6 @@
 #include "dungeon_action.h"
 #include "dungeon_ai_targeting.h"
 #include "dungeon_ai.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_config.h"
 #include "run_dungeon.h"
 #include "dungeon_map_access.h"

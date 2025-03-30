@@ -37,7 +37,6 @@
 #include "dungeon_config.h"
 #include "game_options.h"
 #include "weather.h"
-#include "dungeon_capabilities.h"
 #include "text_util.h"
 #include "dungeon_random.h"
 #include "position_util.h"

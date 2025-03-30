@@ -20,7 +20,6 @@
 #include "code_807CD9C.h"
 #include "code_808417C.h"
 #include "dungeon_ai_targeting.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_config.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"

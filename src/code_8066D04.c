@@ -13,7 +13,6 @@
 #include "code_807CD9C.h"
 #include "code_8084778.h"
 #include "dungeon_ai_targeting.h"
-#include "dungeon_capabilities.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"

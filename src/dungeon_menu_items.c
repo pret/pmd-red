@@ -27,7 +27,7 @@
 #include "text_1.h"
 #include "code_8044CC8.h"
 #include "code_801B3C0.h"
-#include "dungeon_capabilities.h"
+#include "dungeon_ai_targeting.h"
 
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);

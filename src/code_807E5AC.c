@@ -13,7 +13,6 @@
 #include "dungeon_pokemon_attributes.h"
 #include "string_format.h"
 #include "dungeon_movement.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_map_access.h"
 #include "dungeon_movement.h"
 #include "dungeon_ai_targeting.h"
