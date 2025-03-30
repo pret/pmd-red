@@ -1,6 +1,5 @@
 #include "global.h"
 #include "dungeon_ai.h"
-
 #include "constants/iq_skill.h"
 #include "constants/item.h"
 #include "constants/status.h"
@@ -11,7 +10,6 @@
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "structs/str_dungeon.h"
 #include "position_util.h"
 #include "trap.h"

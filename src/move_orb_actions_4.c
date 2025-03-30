@@ -22,7 +22,6 @@
 #include "dungeon_misc.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "move_util.h"
 #include "moves.h"
 #include "number_util.h"

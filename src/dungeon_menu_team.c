@@ -31,7 +31,6 @@
 #include "dungeon_random.h"
 #include "dungeon_submenu.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "input.h"
 #include "items.h"
 #include "menu_input.h"

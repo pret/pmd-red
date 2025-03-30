@@ -5,7 +5,6 @@
 #include "dungeon_map_access.h"
 #include "items.h"
 #include "pokemon.h"
-#include "code_80450F8.h"
 #include "dungeon_util.h"
 #include "dungeon_items.h"
 #include "dungeon_message.h"

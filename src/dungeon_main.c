@@ -43,7 +43,6 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "game_options.h"
 #include "input.h"
 #include "items.h"

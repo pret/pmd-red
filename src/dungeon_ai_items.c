@@ -17,7 +17,6 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "items.h"
 #include "structs/str_position.h"
 #include "position_util.h"

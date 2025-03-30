@@ -32,7 +32,6 @@
 #include "dungeon_random.h"
 #include "dungeon_strings.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "math.h"
 #include "move_effects_target.h"
 #include "move_util.h"

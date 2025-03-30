@@ -13,7 +13,6 @@
 #include "dungeon_map.h"
 #include "dungeon_movement.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "game_options.h"
 #include "random.h"
 #include "text_1.h"

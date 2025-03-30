@@ -18,7 +18,6 @@
 #include "dungeon_submenu.h"
 #include "dungeon_strings.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "input.h"
 #include "moves.h"
 #include "menu_input.h"

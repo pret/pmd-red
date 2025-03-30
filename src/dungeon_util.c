@@ -1,4 +1,5 @@
 #include "global.h"
+#include "dungeon_util.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_traps.h"
 #include "code_800F958.h"
@@ -9,10 +10,11 @@
 #include "dungeon_map_access.h"
 #include "dungeon_util.h"
 #include "code_803E724.h"
-#include "code_80450F8.h"
 #include "dungeon_range.h"
 #include "pokemon.h"
 #include "code_805D8C8.h"
+#include "constants/status.h"
+#include "dungeon_pokemon_attributes.h"
 
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
 extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
@@ -481,4 +483,77 @@ bool8 sub_8045888(Entity *ent)
     }
 
     return FALSE;
+}
+
+bool8 CanSeeTarget(Entity *entity, Entity *targetEntity)
+{
+    if (!EntityIsValid(entity) || !EntityIsValid(targetEntity) || !targetEntity->isVisible)
+    {
+        return FALSE;
+    }
+    if (targetEntity->type == ENTITY_MONSTER)
+    {
+        if (entity->type == ENTITY_MONSTER)
+        {
+            if (!CanSeeInvisibleMonsters(entity) && GetEntInfo(targetEntity)->invisibleClassStatus.status == STATUS_INVISIBLE)
+            {
+                return FALSE;
+            }
+            if (GetEntInfo(entity)->blinkerClassStatus.status == STATUS_BLINKER)
+            {
+                return FALSE;
+            }
+        }
+        else if (GetEntInfo(targetEntity)->invisibleClassStatus.status == STATUS_INVISIBLE)
+        {
+            return FALSE;
+        }
+    }
+    return IsPositionActuallyInSight(&entity->pos, &targetEntity->pos);
+}
+
+bool8 CanTargetEntity(Entity *entity, Entity *targetEntity)
+{
+    if (!EntityIsValid(entity) || !EntityIsValid(targetEntity) || !targetEntity->isVisible)
+    {
+        return FALSE;
+    }
+    if (targetEntity->type == ENTITY_MONSTER)
+    {
+        if (entity->type == ENTITY_MONSTER)
+        {
+            if (!CanSeeInvisibleMonsters(entity) && GetEntInfo(targetEntity)->invisibleClassStatus.status == STATUS_INVISIBLE)
+            {
+                return FALSE;
+            }
+            if (GetEntInfo(entity)->blinkerClassStatus.status == STATUS_BLINKER)
+            {
+                return FALSE;
+            }
+        }
+        else if (GetEntInfo(targetEntity)->invisibleClassStatus.status == STATUS_INVISIBLE)
+        {
+            return FALSE;
+        }
+    }
+    return IsPositionInSight(&entity->pos, &targetEntity->pos);
+}
+
+bool8 sub_8045A70(Entity *entity, Entity *targetEntity)
+{
+    if (EntityIsValid(entity) && EntityIsValid(targetEntity) && targetEntity->isVisible)
+    {
+         return IsPositionActuallyInSight(&entity->pos, &targetEntity->pos);
+    }
+   return FALSE;
+}
+
+bool8 sub_8045AAC(Entity *entity, DungeonPos *pos)
+{
+    return IsPositionActuallyInSight(&entity->pos, pos);
+}
+
+bool8 CanTargetPosition(Entity *entity, DungeonPos *pos)
+{
+    return IsPositionInSight(&entity->pos, pos);
 }

@@ -1,6 +1,5 @@
 #include "global.h"
 #include "dungeon_ai.h"
-
 #include "code_803E668.h"
 #include "code_803E724.h"
 #include "code_8045A00.h"
@@ -28,7 +27,6 @@
 #include "dungeon_random.h"
 #include "dungeon_util_1.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "pokemon.h"
 #include "status_checks.h"
 #include "structs/map.h"

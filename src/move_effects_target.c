@@ -26,7 +26,6 @@
 #include "dungeon_random.h"
 #include "dungeon_util_1.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "pokemon.h"
 #include "status_checks.h"
 #include "status_checks_1.h"

@@ -9,7 +9,6 @@
 #include "dungeon_util.h"
 #include "items.h"
 #include "pokemon.h"
-#include "code_80450F8.h"
 #include "code_803E668.h"
 #include "constants/direction.h"
 #include "constants/item.h"

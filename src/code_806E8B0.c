@@ -16,7 +16,6 @@
 #include "number_util.h"
 #include "status.h"
 #include "dungeon_random.h"
-#include "code_80450F8.h"
 #include "code_8045A00.h"
 #include "dungeon_items.h"
 #include "structs/str_damage.h"

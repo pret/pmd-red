@@ -24,7 +24,6 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "move_util.h"
 #include "moves.h"
 #include "pokemon_3.h"

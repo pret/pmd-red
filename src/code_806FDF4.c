@@ -15,7 +15,6 @@
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "friend_area.h"
 #include "pokemon.h"
 #include "pokemon_3.h"

@@ -23,7 +23,6 @@
 #include "dungeon_random.h"
 #include "dungeon_misc.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "exclusive_pokemon.h"
 #include "game_options.h"
 #include "move_effects_target.h"

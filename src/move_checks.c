@@ -10,7 +10,6 @@
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "move_checks.h"
 #include "moves.h"
 #include "number_util.h"

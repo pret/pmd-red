@@ -17,7 +17,6 @@
 #include "dungeon_random.h"
 #include "dungeon_range.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "structs/map.h"
 #include "number_util.h"
 #include "position_util.h"

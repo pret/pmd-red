@@ -3,7 +3,6 @@
 #include "dungeon_misc.h"
 #include "code_803E46C.h"
 #include "code_803E668.h"
-#include "code_80450F8.h"
 #include "code_806CD90.h"
 #include "constants/direction.h"
 #include "constants/dungeon.h"

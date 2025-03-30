@@ -11,7 +11,6 @@
 #include "constants/type.h"
 #include "dungeon_items.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "moves.h"
 #include "pokemon_3.h"
 #include "pokemon.h"
