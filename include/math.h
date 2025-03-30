@@ -47,7 +47,7 @@ s24_8 FP24_8_Hypot(s24_8 x, s24_8 y);
 void FP48_16_FromS32(s48_16 *dst, s32 src);
 u32 FP48_16_ToS32(s48_16 *a);
 void FP48_16_FromF248(s48_16 *a, s24_8 b);
-bool8 FP48_16_SLessThan(s48_16 *a, s48_16 *b);
+bool8 FP48_16_SLessThan(const s48_16 *a, const s48_16 *b);
 void FP48_16_Add(s48_16 *dst, s48_16 *a, s48_16 *b);
 void FP48_16_Subtract(s48_16 *dst, s48_16 *a, s48_16 *b);
 

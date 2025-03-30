@@ -554,7 +554,7 @@ static bool8 F48_16_IsNegative(s48_16 *a)
     return FALSE;
 }
 
-bool8 FP48_16_SLessThan(s48_16 *a, s48_16 *b)
+bool8 FP48_16_SLessThan(const s48_16 *a, const s48_16 *b)
 {
     s32 r1;
     u32 a0;
