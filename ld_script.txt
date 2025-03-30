@@ -235,6 +235,7 @@ SECTIONS {
         src/dungeon_menu_others.o(.text);
         src/dungeon_menu_recruitment.o(.text);
         src/code_8066D04.o(.text);
+        src/dungeon_8067A80.o(.text);
         src/dungeon_misc.o(.text);
         src/code_8069E0C.o(.text);
         src/code_806CD90.o(.text);
@@ -574,8 +575,8 @@ SECTIONS {
         src/dungeon_menu_stairs.o(.rodata);
         src/dungeon_menu_others.o(.rodata);
         src/dungeon_menu_recruitment.o(.rodata);
-        data/data_8106A4C.o(.rodata);
         src/code_8066D04.o(.rodata);
+        src/dungeon_8067A80.o(.rodata);
         src/dungeon_misc.o(.rodata);
         data/data_8106A4C_2.o(.rodata);
         src/code_806CD90.o(.rodata);

@@ -45,6 +45,7 @@
 #include "code_803E46C.h"
 #include "def_filearchives.h"
 #include "code_803D110.h"
+#include "dungeon_strings.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
@@ -93,26 +94,6 @@ extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
 
-extern u8 *gUnknown_80FE168[];
-extern u8 *gUnknown_80FE134[];
-extern u8 *gUnknown_80FE0F4[];
-extern u8 *gUnknown_80FE0F8[];
-extern u8 *gUnknown_80FE0AC[];
-extern u8 *gUnknown_80FE2D0[];
-extern u8 *gUnknown_80FE268[];
-extern u8 *gUnknown_80FE28C[];
-extern u8 *gUnknown_80FA580[];
-extern u8 *gUnknown_80FCC7C[];
-extern u8 *gUnknown_80FCCAC[];
-extern u8 *gUnknown_80FDCC8[];
-extern const u8 *const gUnknown_80FD594;
-extern const u8 *const gUnknown_80FD5B8;
-extern const u8 *const gUnknown_80FEAC4;
-extern const u8 *const gPtrLinkMoveTwoUsesWarningMessage;
-extern const u8 *const gPtrLinkMoveOneUseWarningMessage;
-extern const u8 *const gPtrLinkedMovesComeApartMessage;
-extern const u8 *const gUnknown_80FE1A4;
-extern const u8 *const gUnknown_80FE20C;
 extern const s16 gUnknown_810AC60; // 0xC
 extern const s16 gUnknown_810AC62; // 0xC
 extern const s16 gUnknown_810AC68; // 0x8
@@ -307,13 +288,13 @@ void sub_8068A84(PokemonStruct1 *pokemon)
     if (totalBodySize >= 7) {
         PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,0);
         if (pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON) {
-            DisplayDungeonMessage(0,*gUnknown_80FE0F4,1);
+            DisplayDungeonMessage(0,gUnknown_80FE0F4,1);
         }
         else if (pokemon->dungeonLocation.id == DUNGEON_RESCUE_TEAM_BASE) {
-            DisplayDungeonMessage(0,*gUnknown_80FE0F8,1);
+            DisplayDungeonMessage(0,gUnknown_80FE0F8,1);
         }
         else {
-            DisplayDungeonMessage(0,*gUnknown_80FE0AC,1);
+            DisplayDungeonMessage(0,gUnknown_80FE0AC,1);
         }
     }
     else {
@@ -330,26 +311,26 @@ void sub_8068A84(PokemonStruct1 *pokemon)
                 ZeroOutItem(&monPtr->itemSlot);
                 PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,6);
                 if (pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON) {
-                    DisplayDungeonMessage(0,*gUnknown_80FE168,1);
+                    DisplayDungeonMessage(0,gUnknown_80FE168,1);
                 }
                 else if (pokemon->dungeonLocation.id == DUNGEON_RESCUE_TEAM_BASE) {
                     ;
                 }
                 else {
-                    DisplayDungeonMessage(0,*gUnknown_80FE134,1);
+                    DisplayDungeonMessage(0,gUnknown_80FE134,1);
                 }
                 return;
             }
         }
         PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,6);
         if (pokemon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_CLIENT_POKEMON) {
-            DisplayDungeonMessage(0,*gUnknown_80FE0F4,1);
+            DisplayDungeonMessage(0,gUnknown_80FE0F4,1);
         }
         else if (pokemon->dungeonLocation.id == DUNGEON_RESCUE_TEAM_BASE) {
-            DisplayDungeonMessage(0,*gUnknown_80FE0F8,1);
+            DisplayDungeonMessage(0,gUnknown_80FE0F8,1);
         }
         else {
-            DisplayDungeonMessage(0,*gUnknown_80FE0AC,1);
+            DisplayDungeonMessage(0,gUnknown_80FE0AC,1);
         }
     }
 }
@@ -582,8 +563,8 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
                 && gDungeon->unk644.unk34 != TRUE)
             {
                 if (gDungeon->unk644.unk37 > 0) {
-                    if (DisplayDungeonYesNoMessage(NULL,*gUnknown_80FE268,1) == 1) {
-                        DisplayDungeonMessage(NULL,*gUnknown_80FE28C,1);
+                    if (DisplayDungeonYesNoMessage(NULL,gUnknown_80FE268,1) == 1) {
+                        DisplayDungeonMessage(NULL,gUnknown_80FE28C,1);
                         gDungeon->unk4 = 1;
                         gDungeon->unk6 = 1;
                         gDungeon->unk644.unk10 = 1;
@@ -592,7 +573,7 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
                     }
                 }
                 else {
-                    DisplayDungeonMessage(NULL,*gUnknown_80FE2D0,1);
+                    DisplayDungeonMessage(NULL,gUnknown_80FE2D0,1);
                 }
             }
         }
@@ -654,7 +635,7 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
         sub_8084E00(entity,entInfo->monsterBehavior, unkArg == 500);
         if (IS_DEOXYS_FORM_MONSTER(entInfo->apparentID) && !IsBossFight() && entInfo->isNotTeamMember) {
             gDungeon->deoxysDefeat = 1;
-            DisplayDungeonLoggableMessageTrue(entity,*gUnknown_80FA580);
+            DisplayDungeonLoggableMessageTrue(entity,gUnknown_80FA580);
             sub_803E178();
             sub_8049ED4();
         }
@@ -1218,7 +1199,7 @@ void sub_8069F9C(Entity *pokemon, Entity *target, Move *move)
                 targetInfo->abilities[abilityIndex] = abilities[randomIndex];
                 gDungeon->unkC = 1;
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
-                TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80FCC7C);
+                TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FCC7C);
                 sub_8042900(target);
                 EndAbilityImmuneStatus(pokemon, target);
             }
@@ -1242,7 +1223,7 @@ void sub_8069F9C(Entity *pokemon, Entity *target, Move *move)
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
                 str = GetUnformattedTypeString(targetInfo->types[0]);
                 strcpy(gFormatBuffer_Items[0], str);
-                TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FCCAC);
+                TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCCAC);
                 sub_8042968(target);
             }
         }
@@ -1267,7 +1248,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
       SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
       typeString = GetUnformattedTypeString(uVar2_u32);
       strcpy(gFormatBuffer_Items[0],typeString);
-      TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FDCC8);
+      TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FDCC8);
     }
   }
 }

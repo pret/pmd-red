@@ -151,6 +151,7 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
     .include "src/dungeon_menu_others.o"
     .include "src/dungeon_menu_recruitment.o"
     .include "src/code_8066D04.o"
+    .include "src/dungeon_8067A80.o"
     .include "src/dungeon_movement.o"
     .include "src/code_80718D8.o"
 
