@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/tactic.h"
 #include "dungeon_config.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
 #include "code_8041AD0.h"
@@ -14,7 +14,7 @@
 #include "pokemon_3.h"
 #include "code_805D8C8.h"
 #include "structs/str_806B7F8.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_logic.h"
 
 EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
 EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};

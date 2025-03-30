@@ -3,7 +3,7 @@
 #include "code_806CD90.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
-#include "dungeon_movement.h"
+#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "moves.h"
@@ -12,7 +12,7 @@
 #include "structs/map.h"
 #include "structs/str_pokemon.h"
 #include "structs/str_806B7F8.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_logic.h"
 
 extern u8 *gUnknown_80FE2EC[];
 

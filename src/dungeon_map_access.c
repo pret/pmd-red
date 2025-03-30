@@ -11,7 +11,7 @@
 #include "run_dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
-#include "dungeon_movement.h"
+#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "game_options.h"
 #include "random.h"

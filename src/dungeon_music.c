@@ -8,7 +8,7 @@
 #include "dungeon_util.h"
 #include "music.h"
 #include "text_util.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_logic.h"
 
 extern MenuInputStruct gDungeonMenu;
 

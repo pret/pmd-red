@@ -5,7 +5,7 @@
 #include "constants/weather.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_message.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "math.h"
 #include "status.h"

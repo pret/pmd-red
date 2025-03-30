@@ -7,7 +7,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_leader.h"
-#include "dungeon_movement.h"
+#include "dungeon_logic.h"
 #include "dungeon_generation.h"
 #include "dungeon_util.h"
 #include "dungeon_strings.h"

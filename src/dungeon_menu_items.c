@@ -9,7 +9,7 @@
 #include "dungeon_main.h"
 #include "dungeon_message.h"
 #include "dungeon_action.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "items.h"
@@ -26,7 +26,7 @@
 #include "text_1.h"
 #include "code_8044CC8.h"
 #include "code_801B3C0.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_logic.h"
 
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);

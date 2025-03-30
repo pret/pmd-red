@@ -11,7 +11,7 @@
 #include "dungeon_menu_moves.h"
 #include "dungeon_menu_team.h"
 #include "dungeon_message.h"
-#include "dungeon_movement.h"
+#include "dungeon_logic.h"
 #include "dungeon_music.h"
 #include "dungeon_random.h"
 #include "dungeon_submenu.h"
@@ -27,7 +27,7 @@
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_logic.h"
 
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);

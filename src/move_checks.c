@@ -8,7 +8,7 @@
 #include "structs/str_dungeon.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "move_checks.h"
 #include "moves.h"
@@ -19,7 +19,7 @@
 #include "trap.h"
 #include "weather.h"
 #include "dungeon_config.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_logic.h"
 
 bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
 {

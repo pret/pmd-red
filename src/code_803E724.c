@@ -18,7 +18,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_music.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_range.h"
 #include "dungeon_util.h"
 #include "game_options.h"

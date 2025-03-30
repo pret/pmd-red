@@ -6,7 +6,7 @@
 #include "code_806CD90.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_serializer.h"
 #include "dungeon_util.h"
 #include "pokemon.h"

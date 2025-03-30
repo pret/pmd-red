@@ -6,12 +6,12 @@
 #include "dungeon_ai_leader.h"
 #include "dungeon_ai.h"
 #include "dungeon_leader.h"
-#include "dungeon_movement.h"
+#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "constants/ability.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 
 extern bool8 sub_8044B28(void);
 extern void TrySpawnMonsterAndActivatePlusMinus(void);

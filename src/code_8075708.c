@@ -7,12 +7,12 @@
 #include "code_806CD90.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "structs/str_dungeon.h"
 #include "position_util.h"
 #include "trap.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_logic.h"
 
 extern void sub_8073D14(Entity *);
 

@@ -11,7 +11,7 @@
 #include "code_8097670.h"
 #include "dungeon.h"
 #include "dungeon_items.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "friend_area.h"

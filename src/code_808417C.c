@@ -2,7 +2,7 @@
 #include "constants/ability.h"
 #include "constants/iq_skill.h"
 #include "structs/dungeon_entity.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 

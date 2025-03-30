@@ -4,7 +4,7 @@
 #include "structs/str_dungeon.h"
 #include "dungeon_cutscenes.h"
 #include "dungeon_music.h"
-#include "dungeon_movement.h"
+#include "dungeon_logic.h"
 #include "dungeon_util_1.h"
 #include "exclusive_pokemon.h"
 #include "weather.h"

@@ -10,7 +10,7 @@
 #include "dungeon_action.h"
 #include "dungeon_ai_attack.h"
 #include "dungeon_random.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_logic.h"
 
 extern const char *gPtrFrozenMessage[];
 extern const char *gPtrWrappedAroundMessage[];

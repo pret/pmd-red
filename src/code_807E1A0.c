@@ -7,7 +7,7 @@
 #include "dungeon_ai.h"
 #include "dungeon_leader.h"
 #include "dungeon_map_access.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "dungeon_config.h"
 #include "move_util.h"

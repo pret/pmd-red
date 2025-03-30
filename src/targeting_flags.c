@@ -3,7 +3,7 @@
 
 #include "constants/move_id.h"
 #include "constants/type.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "moves.h"
 
 s16 GetMoveTargetAndRangeForPokemon(Entity *pokemon, Move *move, bool32 isAI)
