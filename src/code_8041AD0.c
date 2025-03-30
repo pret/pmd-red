@@ -23,7 +23,7 @@
 #include "sprite.h"
 #include "code_803E668.h"
 #include "dungeon.h"
-#include "code_8042B34.h"
+#include "run_dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
 #include "dungeon_message.h"
@@ -35,9 +35,6 @@
 
 // Unknown dungeon file. File split is correct.
 
-extern const s32 gUnknown_80F67EC[8];
-extern const u32 gUnknown_80F680C[8];
-extern const u16 gUnknown_80F682C[8];
 extern const u8 *gPtrFeralFoundItemMessage[];
 
 extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
@@ -205,13 +202,6 @@ static const u32 sStatusSpriteMasks_BlinkerClassStatus[] = {
 static const u32 sStatusSpriteMasks_MuzzledStatus[] = {
     [STATUS_NONE] = 0,
     /*STATUS_MUZZLED not defined*/[1] = STATUS_SPRITE_MUZZLED,
-};
-
-static const u16 gUnknown_80F67DC[4] = {
-    0xD8, 0xD9, 0xD9, 0x173
-};
-static const u16 gUnknown_80F67E4[4] = {
-    0xDA, 0xDB, 0xDB, 0x174
 };
 
 s32 sub_804151C(Entity *entity, s32 r1, u8 r2)
@@ -1298,6 +1288,13 @@ void PlayStairsSound(void)
     PlaySoundEffect(songIndex);
 }
 
+static const u16 gUnknown_80F67DC[4] = {
+    0xD8, 0xD9, 0xD9, 0x173
+};
+static const u16 gUnknown_80F67E4[4] = {
+    0xDA, 0xDB, 0xDB, 0x174
+};
+
 void sub_80426C8(u32 a0, u32 a1)
 {
     if (a1 == 3)
@@ -1364,6 +1361,16 @@ void sub_80427AC(void)
         }
     }
 }
+
+static const s32 gUnknown_80F67EC[8] = {
+    -1, 331, 239, -1, 16, 20, -1, 223
+};
+static const s32 gUnknown_80F680C[8] = {
+    -1, 331, 239, -1, 440, 20, -1, 223
+};
+static const u16 gUnknown_80F682C[8] = {
+    997, 997, 997, 425, 997, 997, 426, 997
+};
 
 void sub_8042818(u8 a0, bool8 a1)
 {
@@ -1556,18 +1563,7 @@ void sub_8042B20(Entity *entity)
     sub_8042A84(0x1BC, entity, 0xE);
 }
 
-struct UnkStruct_203B414
-{
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC[16];
-    s32 unk4C[16];
-    struct DungeonPos unk8C[16];
-};
-extern struct UnkStruct_203B414 *sUnknown_203B414;
-
-extern const unkStruct_2039DB0 gUnknown_80F683C;
+static const unkStruct_2039DB0 gUnknown_80F683C = {0xFFFF, 0xFFFF, 0xFFFF, 0, 0, 0};
 
 void sub_8042B34(s32 a0, s32 a1, s32 a2)
 {
@@ -1576,37 +1572,37 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
     s32 i;
     s32 r8 = 0;
     Entity *leader = xxx_call_GetLeader();
-    sUnknown_203B414 = MemoryAlloc(sizeof(*sUnknown_203B414), 7);
+    gUnknown_203B414 = MemoryAlloc(sizeof(*gUnknown_203B414), 7);
 
-    sUnknown_203B414->unk0 = a0;
-    sUnknown_203B414->unk8 = (a1 + 1) * 4;
+    gUnknown_203B414->unk0 = a0;
+    gUnknown_203B414->unk8 = (a1 + 1) * 4;
     sub_800EE5C(gUnknown_80F6624[a0][0].unk0);
     sub_800EF64();
     DungeonRunFrameActions(0x46);
-    sUnknown_203B414->unk4 = a2;
-    for (i = 0; i < sUnknown_203B414->unk8; i++) {
+    gUnknown_203B414->unk4 = a2;
+    for (i = 0; i < gUnknown_203B414->unk8; i++) {
         s32 rnd;
 
-        spStruct.unk0 = gUnknown_80F6624[sUnknown_203B414->unk0][r8].unk0;
+        spStruct.unk0 = gUnknown_80F6624[gUnknown_203B414->unk0][r8].unk0;
         spStruct.unk4 = i;
         spStruct.dir = 0;
         spStruct.x = leader->pixelPos.x / 256;
         spStruct.y = leader->pixelPos.y / 256;
 
         rnd = RandInt(2);
-        sUnknown_203B414->unk4C[i] = (gUnknown_80F6624[sUnknown_203B414->unk0][r8].unk4 * 2) + rnd;
-        sUnknown_203B414->unk8C[i].x = RandInt(240) + 152;
-        sUnknown_203B414->unk8C[i].y = RandInt(8 + (i * 2)) - (((i - (i / 4 * 4)) * 40) - 24);
+        gUnknown_203B414->unk4C[i] = (gUnknown_80F6624[gUnknown_203B414->unk0][r8].unk4 * 2) + rnd;
+        gUnknown_203B414->unk8C[i].x = RandInt(240) + 152;
+        gUnknown_203B414->unk8C[i].y = RandInt(8 + (i * 2)) - (((i - (i / 4 * 4)) * 40) - 24);
 
-        spStruct.unk10 = sUnknown_203B414->unk8C[i].x;
-        spStruct.unk12 = sUnknown_203B414->unk8C[i].y;
+        spStruct.unk10 = gUnknown_203B414->unk8C[i].x;
+        spStruct.unk12 = gUnknown_203B414->unk8C[i].y;
         spStruct.unk14 = 4;
         spStruct.unk18 = 0xFFFF;
         stack1C = gUnknown_80F683C;
-        sUnknown_203B414->unkC[i] = sub_800E890(&spStruct);
+        gUnknown_203B414->unkC[i] = sub_800E890(&spStruct);
 
         r8++;
-        if (r8 >= 3 || gUnknown_80F6624[sUnknown_203B414->unk0][r8].unk0 == 0) {
+        if (r8 >= 3 || gUnknown_80F6624[gUnknown_203B414->unk0][r8].unk0 == 0) {
             r8 = 0;
         }
 
@@ -1619,25 +1615,25 @@ bool8 sub_8042CC0(void)
     s32 i;
     bool8 ret = FALSE;
 
-    if (sUnknown_203B414->unk4 != 0) {
+    if (gUnknown_203B414->unk4 != 0) {
         ret = TRUE;
-        sUnknown_203B414->unk4--;
+        gUnknown_203B414->unk4--;
     }
 
-    for (i = 0; i < sUnknown_203B414->unk8; i++) {
-       sUnknown_203B414->unk8C[i].x -= sUnknown_203B414->unk4C[i];
-       if (sUnknown_203B414->unk8C[i].x <= -152) {
-            if (sUnknown_203B414->unk4 > 0) {
-                sUnknown_203B414->unk8C[i].x = 152;
+    for (i = 0; i < gUnknown_203B414->unk8; i++) {
+       gUnknown_203B414->unk8C[i].x -= gUnknown_203B414->unk4C[i];
+       if (gUnknown_203B414->unk8C[i].x <= -152) {
+            if (gUnknown_203B414->unk4 > 0) {
+                gUnknown_203B414->unk8C[i].x = 152;
             }
             else {
-                sUnknown_203B414->unk8C[i].x = -152;
+                gUnknown_203B414->unk8C[i].x = -152;
             }
        }
        else {
             ret = TRUE;
        }
-       sub_800E8AC(sUnknown_203B414->unkC[i], NULL, &sUnknown_203B414->unk8C[i], 0, NULL);
+       sub_800E8AC(gUnknown_203B414->unkC[i], NULL, &gUnknown_203B414->unk8C[i], 0, NULL);
     }
 
     sub_800E90C(&gDungeon->unk181e8.cameraPixelPos);
@@ -1648,17 +1644,17 @@ void sub_8042D7C(void)
 {
     s32 i;
 
-    if (sUnknown_203B414 == NULL)
+    if (gUnknown_203B414 == NULL)
         return;
 
-    for (i = 0; i < sUnknown_203B414->unk8; i++) {
-        if (sub_800E9A8(sUnknown_203B414->unkC[i])) {
-            sub_800DC14(sUnknown_203B414->unkC[i]);
+    for (i = 0; i < gUnknown_203B414->unk8; i++) {
+        if (sub_800E9A8(gUnknown_203B414->unkC[i])) {
+            sub_800DC14(gUnknown_203B414->unkC[i]);
         }
     }
     sub_800DBBC();
-    MemoryFree(sUnknown_203B414);
-    sUnknown_203B414 = NULL;
+    MemoryFree(gUnknown_203B414);
+    gUnknown_203B414 = NULL;
 }
 
 void sub_8042DD4(s32 a0, Entity *a1, s32 a2)
@@ -1737,5 +1733,3 @@ void sub_8042EC8(Entity *a0, s32 a1)
         }
     }
 }
-
-

@@ -1,8 +1,11 @@
 #ifndef GUARD_DUNGEON_MAP_H
 #define GUARD_DUNGEON_MAP_H
 
+#include "structs/str_position.h"
+
 extern bool8 gShowMonsterDotsInDungeonMap;
 extern bool8 gShowDungeonMap;
+extern DungeonPos gPlayerDotMapPosition;
 
 void SetDungeonMapToNotShown(void);
 void OpenDungeonMapFile(void);

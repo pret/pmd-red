@@ -1,10 +1,11 @@
 #include "global.h"
+#include "globaldata.h"
+#include "run_dungeon.h"
 #include "constants/dungeon.h"
 #include "constants/monster.h"
 #include "constants/trap.h"
 #include "structs/rgb.h"
 #include "structs/sprite_oam.h"
-#include "structs/str_dungeon_8042F6C.h"
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
@@ -17,7 +18,6 @@
 #include "code_803E46C.h"
 #include "code_803E668.h"
 #include "code_803E724.h"
-#include "code_8042B34.h"
 #include "code_805D8C8.h"
 #include "code_8094F88.h"
 #include "code_8099360.h"
@@ -25,7 +25,7 @@
 #include "dungeon.h"
 #include "dungeon_ai.h"
 #include "dungeon_config.h"
-#include "code_8042B34.h"
+#include "run_dungeon.h"
 #include "dungeon_engine.h"
 #include "dungeon_generation.h"
 #include "dungeon_items.h"
@@ -37,6 +37,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_music.h"
 #include "dungeon_random.h"
+#include "dungeon_strings.h"
 #include "dungeon_serializer.h"
 #include "dungeon_util.h"
 #include "exclusive_pokemon.h"
@@ -49,14 +50,11 @@
 #include "text_3.h"
 #include "weather.h"
 
-EWRAM_INIT DungeonPos gPlayerDotMapPosition = {100, 100};
-EWRAM_INIT void *sUnknown_203B414 = NULL; // TODO: fix location
+EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
 EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
 
-// These functions are not part of dungeon's overlay5
 extern u8 gUnknown_203B40C;
-
 
 extern void sub_8040094(u8 r0);
 extern void sub_8068BDC(u8 r0);
@@ -133,19 +131,13 @@ void EnforceMaxItemsAndMoney(void);
 static void sub_8043FD0(void);
 void sub_806B404(void);
 u8 GetFloorType(void);
-
-extern const u8 *gUnknown_80FEC48;
-extern const u8 *gUnknown_80FEC7C;
-extern const u8 *gUnknown_81002B8;
-extern const u8 *gPtrFinalChanceMessage;
-extern const u8 *gPtrClientFaintedMessage;
-extern const u8 *const gUnknown_80F89B4;
-extern const u8 *const gUnknown_80F89D4;
-extern const u8 *const gUnknown_80F89D8;
-
-extern const s16 gUnknown_80F6850[4];
+u8 GetFloorType(void);
 
 extern OpenedFile *gDungeonNameBannerPalette;
+
+// These functions are not part of dungeon's overlay5 and connect, in a way, overworld with dungeon.
+
+static const s16 sDeoxysForms[4] = {MONSTER_DEOXYS_NORMAL, MONSTER_DEOXYS_ATTACK, MONSTER_DEOXYS_DEFENSE, MONSTER_DEOXYS_SPEED};
 
 // This functions is the main 'loop' when the player is in a Dungeon. It runs from the moment the player enters a dungeon, until they leave(by completing or by fainting).
 // arm9.bin::0206A848
@@ -306,10 +298,10 @@ void RunDungeon_Async(UnkStruct_RunDungeon *r8)
             s32 rnd;
 
             gDungeon->decoyIsActive = FALSE;
-            rnd = DungeonRandInt(4);
+            rnd = DungeonRandInt(ARRAY_COUNT(sDeoxysForms));
             gDungeon->unk37FD = 0;
             gDungeon->deoxysDefeat = FALSE;
-            gDungeon->deoxysForm = gUnknown_80F6850[rnd];
+            gDungeon->deoxysForm = sDeoxysForms[rnd];
             gDungeon->unk37FF = 0;
             gDungeon->unk644.unk31 = 0;
         }
@@ -946,7 +938,7 @@ void EnforceMaxItemsAndMoney(void)
     }
 }
 
-bool8 IsBossFight()
+bool8 IsBossFight(void)
 {
     if (gDungeon->fixedRoomNumber != 0 && gDungeon->fixedRoomNumber <= 0x31)
     {
@@ -955,7 +947,7 @@ bool8 IsBossFight()
     return FALSE;
 }
 
-bool8 IsCurrentFixedRoomBossFight()
+bool8 IsCurrentFixedRoomBossFight(void)
 {
     if (gDungeon->tileset > DUNGEON_OUT_ON_RESCUE)
     {

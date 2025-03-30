@@ -10,7 +10,7 @@
 #include "code_800C9CC.h"
 #include "code_800D090_1.h"
 #include "code_80118A4.h"
-#include "code_8042B34.h"
+#include "run_dungeon.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "code_8097670.h"

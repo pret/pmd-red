@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_8042B34.h"
+#include "run_dungeon.h"
 #include "code_803E46C.h"
 #include "constants/dungeon.h"
 #include "dungeon_ai_leader.h"
@@ -23,7 +23,6 @@ extern void sub_8044AB4(void);
 extern u8 UseAttack(u32);
 extern void TickStatusHeal(Entity *);
 extern void sub_8086AC0(void);
-extern void sub_8043ED0(u32);
 extern void sub_8071DA4(Entity *);
 extern void TriggerWeatherAbilities(void);
 extern void DungeonHandlePlayerInput(void);

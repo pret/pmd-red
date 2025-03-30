@@ -18,7 +18,7 @@
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "dungeon_config.h"
-#include "code_8042B34.h"
+#include "run_dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_map_access.h"
 #include "dungeon_misc.h"

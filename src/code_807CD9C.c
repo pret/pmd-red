@@ -8,7 +8,7 @@
 #include "structs/str_dungeon.h"
 #include "code_8077274_1.h"
 #include "dungeon_ai.h"
-#include "code_8042B34.h"
+#include "run_dungeon.h"
 #include "dungeon_generation.h"
 #include "dungeon_movement.h"
 #include "dungeon_pokemon_attributes.h"

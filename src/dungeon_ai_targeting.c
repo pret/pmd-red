@@ -9,7 +9,7 @@
 #include "constants/tactic.h"
 #include "constants/targeting.h"
 
-#include "code_8042B34.h"
+#include "run_dungeon.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
