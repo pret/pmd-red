@@ -5,6 +5,7 @@
 #include "constants/weather.h"
 #include "constants/type.h"
 #include "constants/dungeon_action.h"
+#include "structs/str_dungeon.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_moves.h"
 
@@ -287,5 +288,9 @@ struct CalledMove
 #define METRONOME_AVAILABLE_CALLED_MOVES 105
 extern const struct CalledMove gMetronomeCalledMoves[METRONOME_AVAILABLE_CALLED_MOVES];
 extern const struct CalledMove gNaturePowerCalledMoves[];
+
+extern const u16 gUnknown_80F5F70[UNK12A18_ARR_COUNT];
+extern const s32 gUnknown_80F5FAC[76];
+extern const s32 gUnknown_80F60DC[5];
 
 #endif

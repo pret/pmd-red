@@ -81,8 +81,6 @@ extern const u8 *gPtrProtectSavedItMessage;
 extern const u8 *gPtrStenchWavedOffMessage;
 extern const u8 *gUnknown_80FA124[];
 
-extern const s32 gUnknown_80F60DC[];
-
 extern const DungeonPos gUnknown_80F4D44[];
 
 bool8 UseAttack(Entity *a0);

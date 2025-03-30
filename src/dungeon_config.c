@@ -1130,3 +1130,14 @@ const struct CalledMove gNaturePowerCalledMoves[] =
     {MOVE_SURF, HandleRegularDamagingMove},
     {MOVE_ROCK_SLIDE, HandleRegularDamagingMove},
 };
+
+const u16 gUnknown_80F5F70[UNK12A18_ARR_COUNT] = {12, 12, 12, 12, 12, 13, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 12};
+const s32 gUnknown_80F5FAC[76] = {
+    4, 0, 3, 3, 0, 3, 0, 3, 3, 1, 0, 0, 0, 3, 0, 1, 4,
+    0, 1, 1, 0, 3, 3, 0, 1, 3, 0, 0, 3, 3, 0, 3, 4, 4,
+    1, 1, 1, 3, 3, 3, 0, 0, 0, 0, 0, 4, 2, 1, 2, 4, 0,
+    0, 0, 0, 4, 1, 0, 0, 0, 2, 0, 0, 0, 0, 3, 0, 3, 2,
+    1, 1, 2, 1, 1, 4, 4, 1
+};
+
+const s32 gUnknown_80F60DC[5] = {1, 1, 1, 2, 4};

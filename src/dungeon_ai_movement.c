@@ -40,7 +40,7 @@ struct CanMoveInDirectionInfo
     s32 direction;
 };
 
-const s32 gFaceDirectionIncrements[] = {0, 1, -1, 2, -2, 3, -3, 4, 0, -1, 1, -2, 2, -3, 3, 4};
+extern const s32 gFaceDirectionIncrements[];
 
 void AIMovement(Entity *pokemon, bool8 showRunAwayEffect)
 {

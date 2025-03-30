@@ -9,6 +9,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_pokemon_attributes.h"
 #include "dungeon_util.h"
+#include "dungeon_config.h"
 #include "move_util.h"
 #include "moves.h"
 #include "structs/str_dungeon.h"
@@ -22,7 +23,6 @@ extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 move
 extern void sub_807EC28(bool8);
 extern void sub_806A5B8(Entity *);
 
-extern u32 gUnknown_80F5FAC[];
 extern u8 *gUnknown_80F9C4C[];
 extern u8 *gUnknown_80F9C70[];
 extern u8 *gUnknown_80F9C8C[];
