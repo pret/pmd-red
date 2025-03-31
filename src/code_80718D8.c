@@ -15,6 +15,13 @@
 #include "code_805D8C8.h"
 #include "structs/str_806B7F8.h"
 #include "dungeon_logic.h"
+#include "code_806CD90.h"
+#include "moves.h"
+#include "pokemon_mid.h"
+#include "structs/dungeon_entity.h"
+#include "structs/map.h"
+#include "structs/str_pokemon.h"
+#include "structs/str_806B7F8.h"
 
 EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
 EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};
@@ -31,11 +38,16 @@ extern u8 *gUnknown_80F9E80[];
 extern u8 *gUnknown_80F9EC8[];
 extern u8 *gUnknown_80F9EEC[];
 extern u8 *gUnknown_80FCF18[];
-extern u8 *gUnknown_80FED68[];
 extern u8 *gUnknown_80FF730[];
 extern u8 gUnknown_8107010[8];
 extern u8 *gUnknown_8107018[3];
+extern u8 *gUnknown_80FE2EC[];
 
+extern void ResetMonEntityData(EntityInfo *, u32);
+void sub_8069E0C(Entity *pokemon);
+void sub_8042A44(Entity *r0);
+void sub_8083D78(void);
+extern bool8 sub_803D930(u32);
 void sub_8083D58(void);
 void sub_8072778(Entity *, Entity *, u8, u8);
 bool8 sub_80725A4(Entity *, Entity *);
@@ -44,110 +56,9 @@ bool8 sub_80723D0(Entity *, Entity *, u8, u8);
 void sub_807218C(Entity *);
 void sub_806A2BC(Entity *, u32);
 void sub_806A3D4(u8 *, s32, s32, s32);
-extern void sub_8042920(struct Entity *r0);
-extern s16 sub_803D970(u32);
-extern s32 sub_803DA20(s32 param_1);
-extern bool8 sub_806AA0C(s32, u32);
-extern bool8 sub_8083660(DungeonPos *param_1);
+
 extern bool8 sub_803D930(u32);
 extern void sub_8072B78(Entity *pokemon, Entity *target, s16 id);
-
-void sub_8071B48(void)
-{
-  const Tile *tile;
-  struct Entity *entity2;
-  struct Entity *entity;
-  int index;
-  int index1;
-  int counter;
-  struct Entity *entityPtr;
-  s32 level;
-  struct Dungeon *dungeon; // feels like a hack
-  struct unkStruct_806B7F8 local_2c;
-
-  entityPtr = NULL;
-  dungeon = gDungeon;
-  if ((dungeon->unk644.unk20 != 0) &&
-     ((dungeon->unk644.dungeonLocation.id != DUNGEON_METEOR_CAVE || (dungeon->unk37FD == 0)))) {
-    dungeon->unk644.unk1E++;
-    if (dungeon->unk644.unk2A == 0) {
-      if ( dungeon->unk644.unk1E < gUnknown_80F4DAA) {
-        return;
-      }
-    }
-    else {
-      if ( dungeon->unk644.unk1E < gUnknown_80F4DAC) {
-        return;
-      }
-    }
-
-    if (dungeon->unk644.unk1E > 900) {
-      entity2 = dungeon->unk17B34;
-      if ((EntityIsValid(entity2)) && (entity2->spawnGenID == dungeon->unk17B40)) {
-        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity2,0);
-        entityPtr = entity2;
-      }
-    }
-
-      dungeon->unk644.unk1E = 0;
-      dungeon->unk17B34 = NULL;
-
-      counter = 0;
-      for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
-      {
-        entity = dungeon->wildPokemon[index];
-        if ((EntityIsValid(entity)) &&
-           (tile = GetTile((entity->pos).x, (entity->pos).y),
-           (tile->terrainType & 0x100) == 0)) {
-          counter++;
-        }
-      }
-      if (dungeon->unk644.unk2A == 0) {
-        if (gDungeon->monsterHouseRoom == 0xff) {
-            if (counter >= gUnknown_80F4DA6) {
-              return;
-            }
-        }
-        else
-        {
-            if (counter >= gUnknown_80F4DA8) {
-              return;
-            }
-        }
-
-      }
-      if (entityPtr != NULL) {
-        DisplayDungeonLoggableMessageTrue(0,*gUnknown_80FED68);
-        sub_8042920(entityPtr);
-      }
-      if (dungeon->unk644.unk2A != 0) {
-        index1 = 0x17c;
-      }
-      else {
-        index1 = sub_803D970(0);
-      }
-
-      level = sub_803DA20(index1);
-      if (level == 0) {
-        level = 1;
-      }
-      if ((sub_806AA0C(index1, 0)) && (sub_8083660(&local_2c.pos))) {
-        local_2c.species = index1;
-        local_2c.level = level;
-        local_2c.unk2 = 0;
-        if(DungeonRandInt(100) < GetRandomMovementChance(gDungeon->unk644.dungeonLocation.id))
-        {
-            local_2c.unk4 = 1;
-        }
-        else
-        {
-            local_2c.unk4 = 0;
-        }
-        local_2c.unk10 = 0;
-        sub_806B7F8(&local_2c, FALSE);
-      }
-  }
-}
 
 void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
 {
@@ -655,4 +566,547 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
         TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F9EEC); // $m0's level didn't drop!
         return FALSE;
     }
+}
+
+// https://decomp.me/scratch/hOsTU
+NAKED
+void sub_8072778(Entity *a0, Entity *a1, u8 a2, u8 a3)
+{
+    asm_unified("	push {r4-r7,lr}\n"
+"	mov r7, r10\n"
+"	mov r6, r9\n"
+"	mov r5, r8\n"
+"	push {r5-r7}\n"
+"	sub sp, 0xD0\n"
+"	mov r9, r1\n"
+"	lsls r2, 24\n"
+"	lsrs r2, 24\n"
+"	str r2, [sp, 0xC4]\n"
+"	lsls r3, 24\n"
+"	lsrs r3, 24\n"
+"	str r3, [sp, 0xC8]\n"
+"	ldr r0, [r1, 0x70]\n"
+"	mov r8, r0\n"
+"	movs r1, 0\n"
+"	str r1, [sp, 0xCC]\n"
+"	ldrb r0, [r0, 0x6]\n"
+"	cmp r0, 0\n"
+"	beq _080727A8\n"
+"	movs r2, 0\n"
+"	str r2, [sp, 0xC8]\n"
+"	movs r4, 0\n"
+"	str r4, [sp, 0xC4]\n"
+"_080727A8:\n"
+"	mov r0, r8\n"
+"	movs r2, 0x2\n"
+"	ldrsh r1, [r0, r2]\n"
+"	ldrb r2, [r0, 0x9]\n"
+"	movs r4, 0xC\n"
+"	ldrsh r3, [r0, r4]\n"
+"	mov r0, sp\n"
+"	bl GetMovesLearnedAtLevel\n"
+"	adds r7, r0, 0\n"
+"	add r4, sp, 0x20\n"
+"	movs r1, 0x8C\n"
+"	lsls r1, 1\n"
+"	add r1, r8\n"
+"	adds r0, r4, 0\n"
+"	bl unk_CopyMoves4To8AndClearFlag2Unk4\n"
+"	mov r10, r4\n"
+"	cmp r7, 0\n"
+"	beq _08072810\n"
+"	adds r0, r7, 0\n"
+"	bl DungeonRandInt\n"
+"	movs r2, 0\n"
+"	lsls r0, 1\n"
+"	mov r1, sp\n"
+"	adds r6, r1, r0\n"
+"	mov r5, sp\n"
+"	adds r5, 0x21\n"
+"	mov r3, r10\n"
+"_080727E4:\n"
+"	lsls r0, r2, 3\n"
+"	add r0, sp\n"
+"	adds r0, 0x20\n"
+"	ldrb r1, [r0]\n"
+"	movs r0, 0x1\n"
+"	ands r0, r1\n"
+"	cmp r0, 0\n"
+"	bne _08072806\n"
+"	ldrh r1, [r6]\n"
+"	adds r0, r3, 0\n"
+"	bl InitPokemonMove\n"
+"	ldrb r1, [r5]\n"
+"	movs r0, 0x4\n"
+"	orrs r0, r1\n"
+"	strb r0, [r5]\n"
+"	b _08072810\n"
+"_08072806:\n"
+"	adds r5, 0x8\n"
+"	adds r3, 0x8\n"
+"	adds r2, 0x1\n"
+"	cmp r2, 0x7\n"
+"	ble _080727E4\n"
+"_08072810:\n"
+"	movs r5, 0\n"
+"	movs r4, 0x1\n"
+"_08072814:\n"
+"	movs r7, 0\n"
+"	movs r2, 0\n"
+"_08072818:\n"
+"	lsls r0, r2, 3\n"
+"	add r0, sp\n"
+"	adds r0, 0x20\n"
+"	ldrb r1, [r0]\n"
+"	adds r0, r4, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0\n"
+"	beq _0807282A\n"
+"	adds r7, 0x1\n"
+"_0807282A:\n"
+"	adds r2, 0x1\n"
+"	cmp r2, 0x7\n"
+"	ble _08072818\n"
+"	cmp r7, 0x4\n"
+"	bgt _080728D4\n"
+"	movs r3, 0\n"
+"	movs r5, 0\n"
+"	cmp r3, r7\n"
+"	bge _0807287C\n"
+"	movs r4, 0x8C\n"
+"	lsls r4, 1\n"
+"	add r4, r8\n"
+"	mov r6, r10\n"
+"_08072844:\n"
+"	lsls r0, r5, 3\n"
+"	movs r2, 0x8C\n"
+"	lsls r2, 1\n"
+"	add r2, r8\n"
+"	adds r2, r0\n"
+"	ldr r0, [r6]\n"
+"	ldr r1, [r6, 0x4]\n"
+"	str r0, [r2]\n"
+"	str r1, [r2, 0x4]\n"
+"	ldrb r1, [r4, 0x1]\n"
+"	movs r0, 0x4\n"
+"	ands r0, r1\n"
+"	cmp r0, 0\n"
+"	beq _08072872\n"
+"	movs r0, 0xFB\n"
+"	ands r0, r1\n"
+"	strb r0, [r4, 0x1]\n"
+"	add r0, sp, 0x60\n"
+"	adds r1, r4, 0\n"
+"	movs r2, 0\n"
+"	bl BufferMoveName\n"
+"	movs r3, 0x1\n"
+"_08072872:\n"
+"	adds r4, 0x8\n"
+"	adds r6, 0x8\n"
+"	adds r5, 0x1\n"
+"	cmp r5, r7\n"
+"	blt _08072844\n"
+"_0807287C:\n"
+"	cmp r5, 0x3\n"
+"	bgt _08072894\n"
+"	movs r2, 0x8C\n"
+"	lsls r2, 1\n"
+"	movs r1, 0\n"
+"_08072886:\n"
+"	lsls r0, r5, 3\n"
+"	add r0, r8\n"
+"	adds r0, r2\n"
+"	strb r1, [r0]\n"
+"	adds r5, 0x1\n"
+"	cmp r5, 0x3\n"
+"	ble _08072886\n"
+"_08072894:\n"
+"	cmp r3, 0\n"
+"	beq _08072928\n"
+"	ldr r2, [sp, 0xC4]\n"
+"	cmp r2, 0\n"
+"	beq _08072928\n"
+"	ldr r0, _080728C8\n"
+"	mov r1, r8\n"
+"	movs r2, 0\n"
+"	bl SetMessageArgument_2\n"
+"	ldr r0, _080728CC\n"
+"	add r1, sp, 0x60\n"
+"	bl strcpy\n"
+"	mov r0, r9\n"
+"	movs r1, 0x9C\n"
+"	lsls r1, 1\n"
+"	bl sub_80421C0\n"
+"	ldr r0, _080728D0\n"
+"	ldr r1, [r0]\n"
+"	mov r0, r9\n"
+"	bl DisplayDungeonLoggableMessage\n"
+"	b _08072928\n"
+"	.align 2, 0\n"
+"_080728C8: .4byte gFormatBuffer_Monsters\n"
+"_080728CC: .4byte gFormatBuffer_Items\n"
+"_080728D0: .4byte gUnknown_80F9F04\n"
+"_080728D4:\n"
+"	mov r1, r8\n"
+"	ldrb r0, [r1, 0x6]\n"
+"	cmp r0, 0\n"
+"	bne _08072918\n"
+"	ldr r2, [sp, 0xC8]\n"
+"	cmp r2, 0\n"
+"	beq _08072918\n"
+"	ldr r0, [sp, 0xCC]\n"
+"	cmp r0, 0\n"
+"	bne _08072902\n"
+"	ldr r1, [sp, 0xC4]\n"
+"	cmp r1, 0\n"
+"	beq _08072902\n"
+"	movs r0, 0xA\n"
+"	movs r1, 0x6\n"
+"	bl sub_803E708\n"
+"	ldr r0, _08072914\n"
+"	ldr r1, [r0]\n"
+"	movs r0, 0\n"
+"	movs r2, 0x1\n"
+"	bl DisplayDungeonMessage\n"
+"_08072902:\n"
+"	movs r2, 0x1\n"
+"	str r2, [sp, 0xCC]\n"
+"	mov r0, r9\n"
+"	mov r1, r10\n"
+"	movs r3, 0\n"
+"	bl sub_8063E70\n"
+"	b _08072920\n"
+"	.align 2, 0\n"
+"_08072914: .4byte gUnknown_80F9FA4\n"
+"_08072918:\n"
+"	mov r0, r9\n"
+"	mov r1, r10\n"
+"	bl sub_8072B24\n"
+"_08072920:\n"
+"	adds r5, 0x1\n"
+"	cmp r5, 0x1D\n"
+"	bgt _08072928\n"
+"	b _08072814\n"
+"_08072928:\n"
+"	add sp, 0xD0\n"
+"	pop {r3-r5}\n"
+"	mov r8, r3\n"
+"	mov r9, r4\n"
+"	mov r10, r5\n"
+"	pop {r4-r7}\n"
+"	pop {r0}\n"
+"	bx r0\n");
+}
+
+// https://decomp.me/scratch/Sb2mo
+NAKED
+u8 sub_8072938(Entity * a0, u16 a1)
+{
+    asm_unified("	push {r4-r7,lr}\n"
+"	mov r7, r10\n"
+"	mov r6, r9\n"
+"	mov r5, r8\n"
+"	push {r5-r7}\n"
+"	sub sp, 0xA4\n"
+"	mov r9, r0\n"
+"	lsls r1, 16\n"
+"	lsrs r5, r1, 16\n"
+"	ldr r0, [r0, 0x70]\n"
+"	mov r8, r0\n"
+"	movs r1, 0\n"
+"	mov r10, r1\n"
+"	movs r1, 0x8C\n"
+"	lsls r1, 1\n"
+"	add r1, r8\n"
+"	mov r0, sp\n"
+"	bl unk_CopyMoves4To8AndClearFlag2Unk4\n"
+"	movs r3, 0\n"
+"	mov r4, sp\n"
+"	mov r2, sp\n"
+"_08072964:\n"
+"	ldrb r1, [r4]\n"
+"	movs r0, 0x1\n"
+"	ands r0, r1\n"
+"	cmp r0, 0\n"
+"	bne _08072980\n"
+"	adds r0, r2, 0\n"
+"	adds r1, r5, 0\n"
+"	bl InitPokemonMove\n"
+"	ldrb r1, [r4, 0x1]\n"
+"	movs r0, 0x4\n"
+"	orrs r0, r1\n"
+"	strb r0, [r4, 0x1]\n"
+"	b _0807298A\n"
+"_08072980:\n"
+"	adds r4, 0x8\n"
+"	adds r2, 0x8\n"
+"	adds r3, 0x1\n"
+"	cmp r3, 0x7\n"
+"	ble _08072964\n"
+"_0807298A:\n"
+"	movs r4, 0\n"
+"	movs r5, 0x1\n"
+"_0807298E:\n"
+"	movs r7, 0\n"
+"	mov r2, sp\n"
+"	movs r3, 0x7\n"
+"_08072994:\n"
+"	ldrb r1, [r2]\n"
+"	adds r0, r5, 0\n"
+"	ands r0, r1\n"
+"	cmp r0, 0\n"
+"	beq _080729A0\n"
+"	adds r7, 0x1\n"
+"_080729A0:\n"
+"	adds r2, 0x8\n"
+"	subs r3, 0x1\n"
+"	cmp r3, 0\n"
+"	bge _08072994\n"
+"	cmp r7, 0x4\n"
+"	bgt _08072A50\n"
+"	movs r5, 0\n"
+"	cmp r5, r7\n"
+"	bge _080729F4\n"
+"	movs r4, 0x8C\n"
+"	lsls r4, 1\n"
+"	add r4, r8\n"
+"	mov r6, sp\n"
+"_080729BA:\n"
+"	lsls r0, r5, 3\n"
+"	movs r2, 0x8C\n"
+"	lsls r2, 1\n"
+"	add r2, r8\n"
+"	adds r2, r0\n"
+"	ldr r0, [r6]\n"
+"	ldr r1, [r6, 0x4]\n"
+"	str r0, [r2]\n"
+"	str r1, [r2, 0x4]\n"
+"	ldrb r1, [r4, 0x1]\n"
+"	movs r0, 0x4\n"
+"	ands r0, r1\n"
+"	cmp r0, 0\n"
+"	beq _080729EA\n"
+"	movs r0, 0xFB\n"
+"	ands r0, r1\n"
+"	strb r0, [r4, 0x1]\n"
+"	add r0, sp, 0x40\n"
+"	adds r1, r4, 0\n"
+"	movs r2, 0\n"
+"	bl BufferMoveName\n"
+"	movs r0, 0x1\n"
+"	mov r10, r0\n"
+"_080729EA:\n"
+"	adds r4, 0x8\n"
+"	adds r6, 0x8\n"
+"	adds r5, 0x1\n"
+"	cmp r5, r7\n"
+"	blt _080729BA\n"
+"_080729F4:\n"
+"	cmp r5, 0x3\n"
+"	bgt _08072A0C\n"
+"	movs r2, 0x8C\n"
+"	lsls r2, 1\n"
+"	movs r1, 0\n"
+"_080729FE:\n"
+"	lsls r0, r5, 3\n"
+"	add r0, r8\n"
+"	adds r0, r2\n"
+"	strb r1, [r0]\n"
+"	adds r5, 0x1\n"
+"	cmp r5, 0x3\n"
+"	ble _080729FE\n"
+"_08072A0C:\n"
+"	mov r1, r10\n"
+"	cmp r1, 0\n"
+"	beq _08072A92\n"
+"	mov r1, r8\n"
+"	ldrb r0, [r1, 0x6]\n"
+"	cmp r0, 0\n"
+"	bne _08072A8C\n"
+"	ldr r0, _08072A44\n"
+"	mov r1, r9\n"
+"	movs r2, 0\n"
+"	bl SubstitutePlaceholderStringTags\n"
+"	ldr r0, _08072A48\n"
+"	add r1, sp, 0x40\n"
+"	bl strcpy\n"
+"	mov r0, r9\n"
+"	movs r1, 0x9C\n"
+"	lsls r1, 1\n"
+"	bl sub_80421C0\n"
+"	ldr r0, _08072A4C\n"
+"	ldr r1, [r0]\n"
+"	mov r0, r9\n"
+"	bl DisplayDungeonLoggableMessage\n"
+"	b _08072A8C\n"
+"	.align 2, 0\n"
+"_08072A44: .4byte gFormatBuffer_Monsters\n"
+"_08072A48: .4byte gFormatBuffer_Items\n"
+"_08072A4C: .4byte gUnknown_80F9F04\n"
+"_08072A50:\n"
+"	movs r0, 0\n"
+"	mov r10, r0\n"
+"	mov r1, r8\n"
+"	ldrb r0, [r1, 0x6]\n"
+"	cmp r0, 0\n"
+"	bne _08072A84\n"
+"	ldr r0, _08072A80\n"
+"	ldr r1, [r0]\n"
+"	movs r0, 0\n"
+"	movs r2, 0x1\n"
+"	bl DisplayDungeonMessage\n"
+"	mov r0, r9\n"
+"	mov r1, sp\n"
+"	movs r2, 0x1\n"
+"	movs r3, 0x1\n"
+"	bl sub_8063E70\n"
+"	lsls r0, 24\n"
+"	cmp r0, 0\n"
+"	bne _08072A84\n"
+"	movs r0, 0\n"
+"	b _08072AB0\n"
+"	.align 2, 0\n"
+"_08072A80: .4byte gUnknown_80FDF40\n"
+"_08072A84:\n"
+"	adds r4, 0x1\n"
+"	cmp r4, 0x1D\n"
+"	bgt _08072A8C\n"
+"	b _0807298E\n"
+"_08072A8C:\n"
+"	mov r0, r10\n"
+"	cmp r0, 0\n"
+"	bne _08072AAE\n"
+"_08072A92:\n"
+"	mov r1, r8\n"
+"	ldrb r0, [r1, 0x6]\n"
+"	cmp r0, 0\n"
+"	bne _08072AAE\n"
+"	ldr r0, _08072AC0\n"
+"	mov r1, r9\n"
+"	movs r2, 0\n"
+"	bl SubstitutePlaceholderStringTags\n"
+"	ldr r0, _08072AC4\n"
+"	ldr r1, [r0]\n"
+"	mov r0, r9\n"
+"	bl DisplayDungeonLoggableMessage\n"
+"_08072AAE:\n"
+"	movs r0, 0x1\n"
+"_08072AB0:\n"
+"	add sp, 0xA4\n"
+"	pop {r3-r5}\n"
+"	mov r8, r3\n"
+"	mov r9, r4\n"
+"	mov r10, r5\n"
+"	pop {r4-r7}\n"
+"	pop {r1}\n"
+"	bx r1\n"
+"	.align 2, 0\n"
+"_08072AC0: .4byte gFormatBuffer_Monsters\n"
+"_08072AC4: .4byte gUnknown_80F9F2C\n");
+}
+
+void sub_8072AC8(s16 *param_1, s16 species, s32 param_3)
+{
+  const u8 *levelUpMoves;
+  s32 arrIndex;
+  s32 counter;
+  u16 moveIDs [2];
+  s32 species_s32;
+  s32 index;
+
+  species_s32 = species;
+
+  for(index = 0; index < MAX_MON_MOVES; index++) {
+    param_1[index] = MOVE_NOTHING;
+  }
+
+  counter = 0;
+  levelUpMoves = GetLevelUpMoves(species_s32);
+
+  while( 1 ) {
+    if (*levelUpMoves == 0) {
+      return;
+    }
+    levelUpMoves = DecompressMoveID(levelUpMoves,moveIDs);
+    if (*levelUpMoves++ > param_3) break;
+    if (counter == MAX_MON_MOVES) {
+      arrIndex = DungeonRandInt(MAX_MON_MOVES);
+      counter = MAX_MON_MOVES;
+    }
+    else {
+      arrIndex = counter;
+      counter++;
+    }
+    param_1[arrIndex] = moveIDs[0];
+  }
+}
+
+void sub_8072B24(Entity *entity, Move *moves)
+{
+    int index;
+    int count;
+
+    count = 0;
+    for(index = 0; index < 8; index++)
+    {
+        if (moves[index].moveFlags & MOVE_FLAG_EXISTS) {
+            moves[index].moveFlags &= 0xfd;
+            count++;
+        }
+    }
+    index = DungeonRandInt(count);
+    for (; index < 7; index++) {
+        moves[index] = moves[index + 1];
+    }
+    moves[7].moveFlags = 0;
+}
+
+static inline void fu(EntityInfo *entityInfo, s16 id)
+{
+  ++id; --id;
+  entityInfo->apparentID = id;
+  entityInfo->id = id;
+}
+
+void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
+{
+  OpenedFile *file;
+  const Tile *tile;
+  int index;
+  s32 id_s32;
+  EntityInfo *entityInfo;
+  LevelData levelData;
+  struct unkStruct_806B7F8 local_2c;
+
+  id_s32 = id;
+  entityInfo = GetEntInfo(target);
+  SetMessageArgument_2(gFormatBuffer_Monsters[0],entityInfo,0);
+  CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[1],id_s32);
+  file = GetSpriteData(id_s32);
+  fu(entityInfo, id_s32);
+  GetPokemonLevelData(&levelData,id_s32,entityInfo->level);
+  entityInfo->exp = levelData.expRequired;
+  target->axObj.spriteFile = file;
+  ResetMonEntityData(entityInfo,0);
+  sub_8069E0C(target);
+  sub_806CCB4(target,7);
+  TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE2EC);
+  sub_8042A44(target);
+  sub_8083D78();
+  if (id_s32 == MONSTER_NINJASK) {
+    for (index = 0; index < 8; index++) {
+      tile = GetTile(gAdjacentTileOffsets[index].x + target->pos.x,gAdjacentTileOffsets[index].y + target->pos.y);
+      if (sub_807034C(MONSTER_SHEDINJA,tile) == 0) break;
+    }
+    if (sub_803D930(MONSTER_SHEDINJA)) {
+      local_2c.species = MONSTER_SHEDINJA;
+      local_2c.level = entityInfo->level;
+      local_2c.unk2 = 0;
+      local_2c.pos.x = gAdjacentTileOffsets[index].x + target->pos.x;
+      local_2c.pos.y = gAdjacentTileOffsets[index].y + target->pos.y;
+      local_2c.unk4 = 0;
+      local_2c.unk10 = 0;
+      sub_806B7F8(&local_2c, TRUE);
+    }
+  }
 }
