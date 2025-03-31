@@ -280,12 +280,14 @@ PokemonStruct1 *sub_808D1DC(PokemonStruct1 *pokemon)
     return NULL;
 }
 
-PokemonStruct1 *sub_808D278(s16 species, PokemonStruct1 *pokemon)
+PokemonStruct1 *sub_808D278(s32 species)
 {
     u32 friendArea;
     s32 i;
 
-    friendArea = gMonsterParameters[species].friendArea;
+    s16 species_s16 = (s16)species;
+
+    friendArea = gMonsterParameters[species_s16].friendArea;
 
     if(!gFriendAreas[friendArea]) return NULL;
     for (i = 0; i < NUM_MONSTERS; i++) {

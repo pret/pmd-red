@@ -179,11 +179,14 @@ u8 sub_80A2728(s16 index)
     return temp->dungeonIndex;
 }
 
-u8 sub_80A2740(s32 index)
+u8 sub_80A2740(s16 index)
 {
     const DungeonInfo *temp;
+    s32 index_s32;
 
-    temp = GetDungeonInfo_80A2608((s16) index);
+    index_s32 = index;
+
+    temp = GetDungeonInfo_80A2608(index_s32);
     return temp->dungeonIndex;
 }
 

@@ -33,7 +33,7 @@ s32 GetPtsToNextRank(void);
 void SetTeamRankPoints(s32 newPts);
 void AddToTeamRankPts(s32 newPts);
 u8 GetRescueTeamRank(void);
-const u8 *GetTeamRankString(u8 index);
+const u8 *GetTeamRankString(u32 index);
 u8 GetIsTeamRenamed(void);
 u32 SaveRescueTeamInfo(u8 *param_1,u32 param_2);
 u32 ReadRescueTeamInfo(u8 *param_1, u32 param_2);
