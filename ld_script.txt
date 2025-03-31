@@ -260,6 +260,8 @@ SECTIONS {
         src/dungeon_ai_movement.o(.text);
         src/dungeon_ai_attack.o(.text);
         src/blow_away.o(.text);
+        src/warp_target.o(.text);
+        src/expose_trap.o(.text);
         src/code_807CD9C.o(.text);
         src/code_807E1A0.o(.text);
         src/weather.o(.text);
@@ -597,6 +599,8 @@ SECTIONS {
         src/dungeon_ai_movement.o(.rodata);
         src/dungeon_ai_attack.o(.rodata);
         src/blow_away.o(.rodata);
+        src/warp_target.o(.rodata);
+        src/expose_trap.o(.rodata);
         data/data_8107010.o(.rodata);
         src/dungeon_serializer.o(.rodata);
         data/data_8107224.o(.rodata);
