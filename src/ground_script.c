@@ -91,7 +91,7 @@ bool8 sub_809AEEC(const char*);
 bool8 sub_809AF2C(const char*);
 bool8 sub_809AF6C(s16, const char*);
 void sub_809AFC8(bool8, s32, s32, const char*);
-u32 sub_809B028();
+u32 sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
 bool8 sub_809B1C0(s32, s32, char[12]);
 void sub_809B1D4(u8, s32, s32, const char*);
 void sub_809C770(s16, s16);
@@ -151,7 +151,7 @@ extern s16 gCurrentMap;
 extern s16 gUnknown_2039A32;
 extern s16 gUnknown_2039A34;
 
-extern struct { const char *unk0; s32 unk4; } gChoices[9];
+extern MenuItem gChoices[9];
 
 extern char gUnknown_81165D4[];
 extern char gUnknown_81165F4[];
@@ -235,8 +235,8 @@ extern Item gUnknown_81167E4;
 bool8 sub_809124C(u8 id, u8 param_3);
 extern const u8 gUnknown_81167EC[];
 void sub_80A56A0(s32, s32);
-void sub_80A56F0();
-void sub_80A5704();
+void sub_80A56F0(s32 *);
+void sub_80A5704(s32 *);
 void sub_809C760(void);
 void sub_809C6EC(void);
 void sub_809C6CC(u16 param_1);
@@ -2934,13 +2934,13 @@ s32 ExecuteScriptCommand(Action *action)
                 }
                 if (!out) out = gUnknown_81166D8; // ""
                 for (; scriptData->script.ptr->op == 0xd9; scriptData->script.ptr++) {
-                    gChoices[sNumChoices].unk0 = scriptData->script.ptr->argPtr;
-                    gChoices[sNumChoices].unk4 = sNumChoices + 1;
+                    gChoices[sNumChoices].text = scriptData->script.ptr->argPtr;
+                    gChoices[sNumChoices].menuAction = sNumChoices + 1;
                     sNumChoices++;
                 }
                 if (sNumChoices <= 0) break;
-                gChoices[sNumChoices].unk0 = NULL;
-                gChoices[sNumChoices].unk4 = curCmd.argShort;
+                gChoices[sNumChoices].text = NULL;
+                gChoices[sNumChoices].menuAction = curCmd.argShort;
                 switch (curCmd.op) {
                     case 0xd2: case 0xd3: case 0xd6: {
                         sub_809B028(gChoices, (u8)curCmd.argByte > 0, -1, 0, (s16)curCmd.arg1, out);
