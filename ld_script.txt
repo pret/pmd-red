@@ -614,6 +614,7 @@ SECTIONS {
         src/explosion.o(.rodata);
         src/switcher_orb.o(.rodata);
         src/dungeon_wind.o(.rodata);
+        src/weather.o(.rodata);
         data/data_8107010.o(.rodata);
         src/dungeon_serializer.o(.rodata);
         data/data_8107224.o(.rodata);
