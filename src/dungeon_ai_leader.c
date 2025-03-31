@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_ai_leader.h"
 #include "constants/status.h"
 #include "constants/targeting.h"

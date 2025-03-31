@@ -581,6 +581,9 @@ SECTIONS {
         src/dungeon_logic.o(.rodata);
         src/dungeon_8071B48.o(.rodata);
         src/code_80718D8.o(.rodata);
+        src/dungeon_ai_leader.o(.rodata);
+        src/dungeon_8072CF4.o(.rodata);
+        src/dungeon_ai_items.o(.rodata);
         data/data_8107010.o(.rodata);
         src/dungeon_serializer.o(.rodata);
         data/data_8107224.o(.rodata);

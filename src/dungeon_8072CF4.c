@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_ai_leader.h"
 #include "dungeon_move_util.h"
 #include "code_803E46C.h"
