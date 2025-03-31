@@ -7,6 +7,7 @@
 #include "constants/type.h"
 #include "code_806CD90.h"
 #include "dungeon_items.h"
+#include "dungeon_leader.h"
 #include "dungeon_map_access.h"
 #include "dungeon_logic.h"
 #include "dungeon_util.h"
@@ -67,6 +68,7 @@ extern void sub_806A5B8(Entity *);
 extern void sub_807EC28(bool8);
 extern void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
 extern void sub_8074094(Entity *entity);
+extern bool8 sub_803F428(DungeonPos *pos);
 
 extern u8 gUnknown_202F32D;
 
@@ -514,3 +516,34 @@ error:
     return 0;
 }
 
+extern char *gPtrItsaMonsterHouseMessage;
+
+extern u8 sub_8044B28(void);
+extern void sub_807AB38(Entity *, u32);
+extern void sub_8041888(u32);
+
+void sub_8075900(Entity *pokemon, u8 r1)
+{
+    if(EntityIsValid(pokemon))
+    {
+        if(!GetEntInfo(pokemon)->isNotTeamMember)
+        {
+            if(!sub_8044B28())
+            {
+                if(!gDungeon->unk644.monsterHouseTriggered)
+                {
+                    if((GetTileAtEntitySafe(pokemon)->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
+                    {
+                        // It's a monster house!
+                        LogMessageByIdWithPopupCheckUser(GetLeader(), gPtrItsaMonsterHouseMessage);
+                        gDungeon->unk644.monsterHouseTriggeredEvent = TRUE;
+                        sub_807AB38(pokemon, r1);
+                        sub_8041888(0);
+                        if(sub_803F428(&pokemon->pos))
+                            sub_803E708(0x78, 0x39);
+                    }
+                }
+            }
+        }
+    }
+}
