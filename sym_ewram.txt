@@ -162,6 +162,7 @@ gUnknown_202F32D: /* 202F32D (sub_8072CF4 - UseAttack) */
 
     .include "src/dungeon_ai_items.o"
     .include "src/code_8073CF0.o"
+    .include "src/code_8075708.o"
 	.space 0x4
     .include "src/dungeon_ai_attack.o"
     .include "src/code_80869E4.o"
