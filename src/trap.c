@@ -27,9 +27,11 @@
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
 #include "dungeon_strings.h"
+#include "sprite.h"
 
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
+extern SpriteOAM gUnknown_202EDC0;
 
 s16 sub_803D970(u32);
 bool8 sub_806AA0C(s32, s32);
@@ -45,6 +47,79 @@ void sub_806A1E8(Entity *pokemon);
 u8 sub_803D6FC(void);
 Entity *sub_8045684(u8, DungeonPos *, u8);
 extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
+
+void sub_807FA18(void)
+{
+    s32 x, y;
+
+    for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
+        for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
+            Tile *tile = GetTileMut(x, y);
+
+            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_TRAP) {
+                s32 trapId;
+                DungeonPos pos = {x, y};
+
+                if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_UNK6) {
+                    trapId = TRAP_WARP_TRAP;
+                }
+                else {
+                    trapId = sub_803D6FC();
+                }
+
+                if (trapId == TRAP_WONDER_TILE) {
+                    Entity *trap = SpawnTrap(trapId, &pos, 2);
+                    if (trap != NULL) {
+                        tile->object = trap;
+                        trap->isVisible = TRUE;
+                    }
+                }
+                else {
+                    Entity *trap = SpawnTrap(trapId, &pos, 0);
+                    if (trap != NULL) {
+                        tile->object = trap;
+                        trap->isVisible = FALSE;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void sub_807FA9C(void)
+{
+    s32 x, y;
+    bool8 showInvisibles = gDungeon->unk181e8.showInvisibleTrapsMonsters;
+
+    for (y = gDungeon->unk181e8.cameraPos.y - 5; y < gDungeon->unk181e8.cameraPos.y + 5; y++) {
+        for (x = gDungeon->unk181e8.cameraPos.x - 6; x < gDungeon->unk181e8.cameraPos.x + 6; x++) {
+            bool8 r6 = FALSE;
+            const Tile *tile = GetTile(x, y);
+
+            if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_TRAP && (tile->object->isVisible || showInvisibles)) {
+                r6 = TRUE;
+            }
+            if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+                r6 = TRUE;
+            }
+
+            if (r6) {
+                s32 spriteX = (x * 24) - gDungeon->unk181e8.cameraPixelPos.x;
+                s32 spriteY = (y * 24) - gDungeon->unk181e8.cameraPixelPos.y;
+                if (spriteX >= -32 && spriteY >= -32 && spriteX <= 272 && spriteY <= 192)  {
+                    SpriteSetObjMode(&gUnknown_202EDC0, 0);
+                    SpriteSetY(&gUnknown_202EDC0, spriteY);
+                    SpriteSetX(&gUnknown_202EDC0, spriteX);
+                    SpriteSetPriority(&gUnknown_202EDC0, 3);
+                    SpriteSetPalNum(&gUnknown_202EDC0, 10);
+                    SpriteSetTileNum(&gUnknown_202EDC0, 0x1FC);
+
+                    AddSprite(&gUnknown_202EDC0, 0, NULL, NULL);
+                }
+            }
+        }
+    }
+}
 
 void sub_807FC3C(DungeonPos *pos, u32 trapID, u32 param_3)
 {
