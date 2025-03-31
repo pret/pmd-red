@@ -434,9 +434,9 @@ void sub_8074094(Entity *entity)
     }
     else if (entityInfo->burnClassStatus.status == STATUS_BADLY_POISONED) {
         if (entityInfo->burnClassStatus.damageCountdown == 0 || --entityInfo->burnClassStatus.damageCountdown == 0) {
-            s32 turns = entityInfo->burnClassStatus.unk4;
-            if (entityInfo->burnClassStatus.unk4 < BAD_POISON_DMG_TURN_VALUES_COUNT - 1)
-                entityInfo->burnClassStatus.unk4++;
+            s32 turns = entityInfo->burnClassStatus.badlyPoisonedDamageCount;
+            if (entityInfo->burnClassStatus.badlyPoisonedDamageCount < BAD_POISON_DMG_TURN_VALUES_COUNT - 1)
+                entityInfo->burnClassStatus.badlyPoisonedDamageCount++;
             entityInfo->burnClassStatus.damageCountdown = gBadPoisonDmgCountdown;
             if (turns >= BAD_POISON_DMG_TURN_VALUES_COUNT - 1)
                 turns = BAD_POISON_DMG_TURN_VALUES_COUNT - 1;
