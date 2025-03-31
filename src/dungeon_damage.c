@@ -54,7 +54,6 @@ extern void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp);
 extern void sub_8042148(Entity *pokemon);
 extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
-extern void sub_806F63C(Entity *r0);
 extern void sub_8078084(Entity * pokemon);
 extern void sub_800DBBC(void);
 extern void sub_80464C8(Entity *, DungeonPos *, Item *);
@@ -91,6 +90,7 @@ extern const s16 gUnknown_810AC62;
 
 static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8);
 void DealDamageToEntity(Entity *entity, s32 dmg, s32 r6, s32 r4);
+void sub_806F63C(Entity *param_1);
 
 static const u32 gUnknown_8106EFC[] = { 0, 0  };
 static const s48_16 gUnknown_8106F04 = { 0x0, 0x10000 };
