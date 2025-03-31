@@ -877,7 +877,7 @@ void ResetMonEntityData(EntityInfo *entInfo, bool8 setStatsToOne)
     entInfo->burnClassStatus.status = 0;
     entInfo->burnClassStatus.turns = 0;
     entInfo->burnClassStatus.damageCountdown = 0;
-    entInfo->burnClassStatus.unk4 = 0;
+    entInfo->burnClassStatus.badlyPoisonedDamageCount = 0;
     entInfo->frozenClassStatus.status = 0;
     entInfo->frozenClassStatus.turns = 0;
     entInfo->frozenClassStatus.damageCountdown = 0;

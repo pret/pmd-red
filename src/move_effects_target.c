@@ -493,7 +493,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
                 entityInfo->burnClassStatus.status = STATUS_BURN;
                 entityInfo->burnClassStatus.turns = CalculateStatusTurns(target,gBurnTurnRange,TRUE) + 1;
                 entityInfo->burnClassStatus.damageCountdown = 0;
-                entityInfo->burnClassStatus.unk4 = 0;
+                entityInfo->burnClassStatus.badlyPoisonedDamageCount = 0;
                 isNotBurned = FALSE;
                 if (param_3 != 0) {
                     sub_8041C34(target);
@@ -582,7 +582,7 @@ void PoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
                     entityInfo->burnClassStatus.status = STATUS_POISONED;
                     entityInfo->burnClassStatus.turns = CalculateStatusTurns(target,gPoisonTurnRange,TRUE) + 1;
                     entityInfo->burnClassStatus.damageCountdown = 0;
-                    entityInfo->burnClassStatus.unk4 = 0;
+                    entityInfo->burnClassStatus.badlyPoisonedDamageCount = 0;
                     isNotPoisoned = FALSE;
                     sub_8041C6C(target);
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB598);
@@ -669,7 +669,7 @@ void BadlyPoisonedStatusTarget(Entity * pokemon, Entity * target, bool8 displayM
                     entityInfo->burnClassStatus.status = STATUS_BADLY_POISONED;
                     entityInfo->burnClassStatus.turns = CalculateStatusTurns(target,gBadPoisonTurnRange,TRUE) + 1;
                     entityInfo->burnClassStatus.damageCountdown = 0;
-                    entityInfo->burnClassStatus.unk4 = 0;
+                    entityInfo->burnClassStatus.badlyPoisonedDamageCount = 0;
                     isNotBadlyPoisoned = FALSE;
                     sub_8041C7C(target);
                     TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB5B4);

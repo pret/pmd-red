@@ -80,7 +80,7 @@ typedef struct BurnClassStatus
     /* 0x0 */ u8 status;
     /* 0x1 */ u8 turns;
     /* 0x2 */ u8 damageCountdown;
-    /* 0x3 */ u8 unk4;
+    /* 0x3 */ u8 badlyPoisonedDamageCount;
 } BurnClassStatus;
 
 // Useful when checking if a mon is poisoned without having to check for Poison and Bad Poison every time.

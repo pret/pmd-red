@@ -437,7 +437,7 @@ void ParalyzeStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessag
         entityInfo->burnClassStatus.status = STATUS_PARALYSIS;
         entityInfo->burnClassStatus.turns = CalculateStatusTurns(target,gParalysisTurnRange,TRUE) + 1;
         entityInfo->burnClassStatus.damageCountdown = 0;
-        entityInfo->burnClassStatus.unk4 = 0;
+        entityInfo->burnClassStatus.badlyPoisonedDamageCount = 0;
         bVar6 = FALSE;
         TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FB2AC);
         sub_8041C1C(target);

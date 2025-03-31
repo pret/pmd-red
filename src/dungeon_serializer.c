@@ -581,7 +581,7 @@ static void WriteBurnClassStatus(DataSerializer *seri, BurnClassStatus *src)
     WriteBytes(seri, &src->status, 1);
     WriteU8(seri, src->turns);
     WriteU8(seri, src->damageCountdown);
-    WriteU8(seri, src->unk4);
+    WriteU8(seri, src->badlyPoisonedDamageCount);
 }
 
 static void WriteFrozenClassStatus(DataSerializer *seri, FrozenClassStatus *src)
@@ -1372,7 +1372,7 @@ static void ReadBurnClassStatus(DataSerializer *seri, BurnClassStatus *dst)
     ReadBytes(seri, &dst->status, 1);
     dst->turns = ReadU8(seri);
     dst->damageCountdown = ReadU8(seri);
-    dst->unk4 = ReadU8(seri);
+    dst->badlyPoisonedDamageCount = ReadU8(seri);
 }
 
 static void ReadFrozenClassStatus(DataSerializer *seri, FrozenClassStatus *dst)
