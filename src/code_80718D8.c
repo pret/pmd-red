@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/tactic.h"
 #include "dungeon_config.h"
 #include "dungeon_logic.h"
@@ -39,8 +40,6 @@ extern u8 *gUnknown_80F9EC8[];
 extern u8 *gUnknown_80F9EEC[];
 extern u8 *gUnknown_80FCF18[];
 extern u8 *gUnknown_80FF730[];
-extern u8 gUnknown_8107010[8];
-extern u8 *gUnknown_8107018[3];
 extern u8 *gUnknown_80FE2EC[];
 
 extern void ResetMonEntityData(EntityInfo *, u32);
@@ -59,6 +58,13 @@ void sub_806A3D4(u8 *, s32, s32, s32);
 
 extern bool8 sub_803D930(u32);
 extern void sub_8072B78(Entity *pokemon, Entity *target, s16 id);
+
+static const u8 gUnknown_8107010[8] = {0, 1, 1, 2, 1, 1, 0, 0};
+static const u8 * const gUnknown_8107018[3] = {
+    _(""),
+    _("{WAIT_PRESS}\n"),
+    _("\n"),
+};
 
 void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
 {

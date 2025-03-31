@@ -1,31 +1,7 @@
 .section .rodata
 
-@ ???
-.string "pksdir0\0"
-@ sub_807218C
-.string "pksdir0\0"
+.align 2
 
-.global gUnknown_8107010
-gUnknown_8107010: @ 8107010
-.byte 0, 1, 1, 2, 1, 1, 0, 0
-
-.global gUnknown_8107018
-gUnknown_8107018: @ 8107018
-.4byte gUnknown_810702C
-.4byte gUnknown_8107028
-.4byte gUnknown_8107024
-
-.global gUnknown_8107024
-gUnknown_8107024: @ 8107024
-.byte 0x0a, 0x00, 0x00, 0x00
-
-.global gUnknown_8107028
-gUnknown_8107028: @ 8107028
-.byte 0x23, 0x57, 0x0a, 0x00
-
-.global gUnknown_810702C
-gUnknown_810702C: @ 810702C
-.byte 0x00, 0x00, 0x00, 0x00
 .string "pksdir0\0"
 .string "pksdir0\0"
 .string "pksdir0\0"

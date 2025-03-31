@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/tactic.h"
 #include "dungeon_config.h"
 #include "dungeon_logic.h"
