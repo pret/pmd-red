@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_ai_movement.h"
 
 #include "constants/direction.h"
