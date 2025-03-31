@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "trap.h"
 #include "code_803E668.h"
 #include "code_803E724.h"

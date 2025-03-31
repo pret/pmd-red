@@ -618,6 +618,7 @@ SECTIONS {
         src/weather.o(.rodata);
         src/dungeon_kecleon_shop.o(.rodata);
         src/hurl_orb.o(.rodata);
+        src/trap.o(.rodata);
         data/data_8107010.o(.rodata);
         src/dungeon_serializer.o(.rodata);
         data/data_8107224.o(.rodata);
