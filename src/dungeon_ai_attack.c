@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_ai_attack.h"
 #include "dungeon_move_util.h"
 #include "dungeon_message.h"
