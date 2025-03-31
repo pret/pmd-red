@@ -120,7 +120,7 @@
 .include "src/dungeon_main.o"
 .include "src/dungeon_menu_recruitment.o"
 .include "src/dungeon_ai_items.o"
-.include "src/code_807CD9C.o"
+.include "src/explosion.o"
 .include "src/dungeon_leader.o"
 .include "src/dungeon_random.o"
 .include "src/dungeon_music.o"

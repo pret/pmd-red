@@ -27,22 +27,7 @@
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
 
-void sub_804EB30();
-bool8 ExposeTrap(s32 x, s32 y);
-void ShowWholeRevealedDungeonMap();
-void sub_8049ED4();
-void sub_806A5B8(Entity *);
-u8 sub_8045888(Entity *);
-void sub_807EC28(u32);
-u8 sub_8044B28(void);
-extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
-void sub_80421AC(Entity * pokemon, Entity * target);
-void sub_807BB78(Entity *pokemon);
-extern void sub_803F580(u32);
-bool8 sub_808384C(DungeonPos *, DungeonPos *);
-u8 sub_8083660(DungeonPos *);
-
-extern u32 gDungeonFramesCounter;
+bool8 ExposeTrap(s32 x,s32 y);
 
 void sub_807D3CC(Entity *param_1)
 {

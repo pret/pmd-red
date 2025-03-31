@@ -29,40 +29,7 @@ extern u8 *gUnknown_80F9C8C[];
 extern u8 *gUnknown_80F9CBC[];
 extern u8 *gUnknown_80FCAC0[];
 
-void sub_807E1A0(Entity *pokemon,Entity *target,u8 moveType,s16 param_4,s32 param_5)
-{
-  EntityInfo *targetInfo;
-  u8 flag;
-  Move move;
-  s32 newHP;
-  s32 param_4_s32;
 
-  param_4_s32 = param_4;
-
-  if (EntityIsValid(target)) {
-    targetInfo = GetEntInfo(target);
-    InitPokemonMove(&move, MOVE_REGULAR_ATTACK);
-    if (!sub_80571F0(target,&move)) {
-      if (!targetInfo->isNotTeamMember) {
-        newHP = targetInfo->HP;
-        newHP /= 2;
-        if (MonsterIsType(target, TYPE_FIRE)) {
-          newHP /= 2;
-        }
-        if (newHP < 1) {
-          newHP = 1;
-        }
-      }
-      else {
-        newHP = param_5;
-        if (MonsterIsType(target, TYPE_FIRE)) {
-           newHP /= 2;
-        }
-      }
-      sub_806F370(pokemon,target,newHP,0,&flag,moveType,param_4_s32,0,0,0);
-    }
-  }
-}
 
 void HandleSwitcherOrb(Entity *pokemon,Entity *target)
 {
