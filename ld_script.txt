@@ -267,6 +267,7 @@ SECTIONS {
         src/drought_orb.o(.text);
         src/one_room_orb.o(.text);
         src/explosion.o(.text);
+        src/switcher_orb.o(.text);
         src/code_807E1A0.o(.text);
         src/weather.o(.text);
         src/code_807E5AC.o(.text);
@@ -611,6 +612,7 @@ SECTIONS {
         src/one_room_orb.o(.rodata);
         data/pksdir_2.o(.rodata);
         src/explosion.o(.rodata);
+        src/switcher_orb.o(.rodata);
         data/data_8107010.o(.rodata);
         src/dungeon_serializer.o(.rodata);
         data/data_8107224.o(.rodata);
