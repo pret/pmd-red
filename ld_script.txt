@@ -270,6 +270,7 @@ SECTIONS {
         src/switcher_orb.o(.text);
         src/dungeon_wind.o(.text);
         src/weather.o(.text);
+        src/dungeon_kecleon_shop.o(.text);
         src/code_807E5AC.o(.text);
         src/trap.o(.text);
         src/dungeon_serializer.o(.text);
@@ -615,6 +616,7 @@ SECTIONS {
         src/switcher_orb.o(.rodata);
         src/dungeon_wind.o(.rodata);
         src/weather.o(.rodata);
+        src/dungeon_kecleon_shop.o(.rodata);
         data/data_8107010.o(.rodata);
         src/dungeon_serializer.o(.rodata);
         data/data_8107224.o(.rodata);
