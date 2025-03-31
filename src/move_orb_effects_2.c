@@ -102,8 +102,6 @@ extern void sub_8041BF8(Entity *);
 extern void sub_8041BE8(Entity *);
 extern void EntityUpdateStatusSprites(Entity *);
 
-// FILE SPLIT
-
 void ConfuseStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
 {
   EntityInfo *entityInfo;

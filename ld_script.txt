@@ -251,8 +251,11 @@ SECTIONS {
         src/code_8073CF0.o(.text);
         src/code_8075708.o(.text);
         src/dungeon_ai.o(.text);
-        src/move_effects_target.o(.text);
-        src/status.o(.text);
+        src/move_orb_effects_1.o(.text);
+        src/move_orb_effects_2.o(.text);
+        src/move_orb_effects_3.o(.text);
+        src/move_orb_effects_4.o(.text);
+        src/move_orb_effects_5.o(.text);
         src/code_8077274_1.o(.text);
         src/dungeon_ai_movement.o(.text);
         src/dungeon_ai_attack.o(.text);
@@ -587,8 +590,12 @@ SECTIONS {
         src/code_8073CF0.o(.rodata);
         src/code_8075708.o(.rodata);
         src/dungeon_ai.o(.rodata);
-        src/move_effects_target.o(.rodata);
-        src/status.o(.rodata);
+        src/move_orb_effects_1.o(.rodata);
+        src/move_orb_effects_2.o(.rodata);
+        src/move_orb_effects_3.o(.rodata);
+        src/move_orb_effects_4.o(.rodata);
+        src/move_orb_effects_5.o(.rodata);
+        src/code_8077274_1.o(.rodata);
         data/data_8107010.o(.rodata);
         src/dungeon_serializer.o(.rodata);
         data/data_8107224.o(.rodata);
