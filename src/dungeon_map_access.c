@@ -8,7 +8,6 @@
 #include "code_8009804.h"
 #include "decompress_at.h"
 #include "def_filearchives.h"
-#include "run_dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
 #include "dungeon_logic.h"

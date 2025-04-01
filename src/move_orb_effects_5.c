@@ -12,8 +12,6 @@
 #include "constants/status.h"
 #include "constants/type.h"
 #include "dungeon_items.h"
-#include "dungeon_logic.h"
-#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "move_effects_target.h"

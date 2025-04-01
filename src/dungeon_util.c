@@ -23,7 +23,6 @@
 #include "dungeon_message.h"
 #include "dungeon_music.h"
 #include "dungeon_map.h"
-#include "dungeon_logic.h"
 #include "string_format.h"
 #include "items.h"
 #include "trap.h"

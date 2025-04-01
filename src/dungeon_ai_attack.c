@@ -13,7 +13,6 @@
 #include "constants/targeting.h"
 #include "constants/type.h"
 #include "dungeon_action.h"
-#include "dungeon_logic.h"
 #include "dungeon_ai.h"
 #include "dungeon_config.h"
 #include "run_dungeon.h"

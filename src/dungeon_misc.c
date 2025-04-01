@@ -29,8 +29,6 @@
 #include "constants/weather.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "dungeon_logic.h"
-#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "exclusive_pokemon.h"
 #include "dungeon_config.h"

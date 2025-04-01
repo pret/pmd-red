@@ -19,7 +19,6 @@
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
 #include "dungeon_misc.h"
-#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "move_util.h"
 #include "moves.h"

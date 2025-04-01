@@ -13,7 +13,6 @@
 #include "constants/type.h"
 #include "dungeon_items.h"
 #include "dungeon_logic.h"
-#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "move_effects_target.h"
@@ -27,7 +26,6 @@
 #include "dungeon_map_access.h"
 #include "structs/str_806B7F8.h"
 #include "dungeon_config.h"
-#include "dungeon_logic.h"
 #include "dungeon_strings.h"
 
 extern void ShowWholeRevealedDungeonMap();

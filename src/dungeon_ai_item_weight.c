@@ -3,7 +3,6 @@
 #include "dungeon_ai_item_weight.h"
 #include "constants/status.h"
 #include "constants/targeting.h"
-#include "dungeon_logic.h"
 #include "dungeon_map_access.h"
 #include "dungeon_logic.h"
 #include "dungeon_util.h"

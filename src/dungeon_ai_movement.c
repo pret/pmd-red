@@ -12,8 +12,6 @@
 #include "dungeon_logic.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "dungeon_logic.h"
-#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_range.h"
 #include "dungeon_util.h"

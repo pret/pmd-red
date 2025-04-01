@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "constants/tactic.h"
 #include "dungeon_config.h"
-#include "dungeon_logic.h"
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
 #include "code_8041AD0.h"

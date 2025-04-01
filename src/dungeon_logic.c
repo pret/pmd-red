@@ -11,7 +11,6 @@
 #include "dungeon_items.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
 #include "weather.h"

@@ -13,7 +13,6 @@
 #include "code_804267C.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
-#include "dungeon_logic.h"
 #include "dungeon_config.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"

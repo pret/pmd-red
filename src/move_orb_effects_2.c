@@ -13,8 +13,6 @@
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
-#include "dungeon_logic.h"
-#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "math.h"
 #include "move_effects_target.h"

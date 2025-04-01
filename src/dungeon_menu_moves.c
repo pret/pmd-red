@@ -27,7 +27,6 @@
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
-#include "dungeon_logic.h"
 
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);

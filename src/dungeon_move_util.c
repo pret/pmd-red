@@ -26,7 +26,6 @@
 #include "dungeon_message.h"
 #include "dungeon_misc.h"
 #include "dungeon_move.h"
-#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_strings.h"
 #include "dungeon_util.h"

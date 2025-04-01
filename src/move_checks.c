@@ -19,7 +19,6 @@
 #include "trap.h"
 #include "weather.h"
 #include "dungeon_config.h"
-#include "dungeon_logic.h"
 
 bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
 {
