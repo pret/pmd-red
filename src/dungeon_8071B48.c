@@ -70,12 +70,12 @@ void sub_8071B48(void)
         entity = dungeon->wildPokemon[index];
         if ((EntityIsValid(entity)) &&
            (tile = GetTile((entity->pos).x, (entity->pos).y),
-           (tile->terrainType & 0x100) == 0)) {
+           (tile->terrainType & TERRAIN_TYPE_UNBREAKABLE) == 0)) {
           counter++;
         }
       }
       if (dungeon->unk644.unk2A == 0) {
-        if (gDungeon->monsterHouseRoom == 0xff) {
+        if (gDungeon->monsterHouseRoom == CORRIDOR_ROOM) {
             if (counter >= gUnknown_80F4DA6) {
               return;
             }
