@@ -567,7 +567,6 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
 void sub_8072778(Entity *pokemon, Entity *target, u8 param_2, u8 param_3)
 {
     s32 i, j;
-    s32 movei;
     u16 learnedMoves[16];
     Move localMoves[8];
     u8 text[0x64];
@@ -584,11 +583,10 @@ void sub_8072778(Entity *pokemon, Entity *target, u8 param_2, u8 param_3)
     unk_CopyMoves4To8AndClearFlag2Unk4(localMoves, info->moves.moves);
 
     if (count != 0) {
-        movei = DungeonRandInt(count);
+        s32 randIndex = DungeonRandInt(count);
         for (j = 0; j < 8; j++) {
-            if(!(MoveFlagExists(&localMoves[j])))
-            {
-                InitPokemonMove(&localMoves[j], learnedMoves[movei]);
+            if(!MoveFlagExists(&localMoves[j])) {
+                InitPokemonMove(&localMoves[j], learnedMoves[randIndex]);
                 localMoves[j].moveFlags2 |= 4;
                 break;
             }
@@ -644,211 +642,75 @@ void sub_8072778(Entity *pokemon, Entity *target, u8 param_2, u8 param_3)
     }
 }
 
-// https://decomp.me/scratch/Sb2mo
-NAKED
-u8 sub_8072938(Entity * a0, u16 a1)
+bool8 sub_8072938(Entity *target, u16 moveId)
 {
-    asm_unified("	push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	sub sp, 0xA4\n"
-"	mov r9, r0\n"
-"	lsls r1, 16\n"
-"	lsrs r5, r1, 16\n"
-"	ldr r0, [r0, 0x70]\n"
-"	mov r8, r0\n"
-"	movs r1, 0\n"
-"	mov r10, r1\n"
-"	movs r1, 0x8C\n"
-"	lsls r1, 1\n"
-"	add r1, r8\n"
-"	mov r0, sp\n"
-"	bl unk_CopyMoves4To8AndClearFlag2Unk4\n"
-"	movs r3, 0\n"
-"	mov r4, sp\n"
-"	mov r2, sp\n"
-"_08072964:\n"
-"	ldrb r1, [r4]\n"
-"	movs r0, 0x1\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	bne _08072980\n"
-"	adds r0, r2, 0\n"
-"	adds r1, r5, 0\n"
-"	bl InitPokemonMove\n"
-"	ldrb r1, [r4, 0x1]\n"
-"	movs r0, 0x4\n"
-"	orrs r0, r1\n"
-"	strb r0, [r4, 0x1]\n"
-"	b _0807298A\n"
-"_08072980:\n"
-"	adds r4, 0x8\n"
-"	adds r2, 0x8\n"
-"	adds r3, 0x1\n"
-"	cmp r3, 0x7\n"
-"	ble _08072964\n"
-"_0807298A:\n"
-"	movs r4, 0\n"
-"	movs r5, 0x1\n"
-"_0807298E:\n"
-"	movs r7, 0\n"
-"	mov r2, sp\n"
-"	movs r3, 0x7\n"
-"_08072994:\n"
-"	ldrb r1, [r2]\n"
-"	adds r0, r5, 0\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	beq _080729A0\n"
-"	adds r7, 0x1\n"
-"_080729A0:\n"
-"	adds r2, 0x8\n"
-"	subs r3, 0x1\n"
-"	cmp r3, 0\n"
-"	bge _08072994\n"
-"	cmp r7, 0x4\n"
-"	bgt _08072A50\n"
-"	movs r5, 0\n"
-"	cmp r5, r7\n"
-"	bge _080729F4\n"
-"	movs r4, 0x8C\n"
-"	lsls r4, 1\n"
-"	add r4, r8\n"
-"	mov r6, sp\n"
-"_080729BA:\n"
-"	lsls r0, r5, 3\n"
-"	movs r2, 0x8C\n"
-"	lsls r2, 1\n"
-"	add r2, r8\n"
-"	adds r2, r0\n"
-"	ldr r0, [r6]\n"
-"	ldr r1, [r6, 0x4]\n"
-"	str r0, [r2]\n"
-"	str r1, [r2, 0x4]\n"
-"	ldrb r1, [r4, 0x1]\n"
-"	movs r0, 0x4\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	beq _080729EA\n"
-"	movs r0, 0xFB\n"
-"	ands r0, r1\n"
-"	strb r0, [r4, 0x1]\n"
-"	add r0, sp, 0x40\n"
-"	adds r1, r4, 0\n"
-"	movs r2, 0\n"
-"	bl BufferMoveName\n"
-"	movs r0, 0x1\n"
-"	mov r10, r0\n"
-"_080729EA:\n"
-"	adds r4, 0x8\n"
-"	adds r6, 0x8\n"
-"	adds r5, 0x1\n"
-"	cmp r5, r7\n"
-"	blt _080729BA\n"
-"_080729F4:\n"
-"	cmp r5, 0x3\n"
-"	bgt _08072A0C\n"
-"	movs r2, 0x8C\n"
-"	lsls r2, 1\n"
-"	movs r1, 0\n"
-"_080729FE:\n"
-"	lsls r0, r5, 3\n"
-"	add r0, r8\n"
-"	adds r0, r2\n"
-"	strb r1, [r0]\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x3\n"
-"	ble _080729FE\n"
-"_08072A0C:\n"
-"	mov r1, r10\n"
-"	cmp r1, 0\n"
-"	beq _08072A92\n"
-"	mov r1, r8\n"
-"	ldrb r0, [r1, 0x6]\n"
-"	cmp r0, 0\n"
-"	bne _08072A8C\n"
-"	ldr r0, _08072A44\n"
-"	mov r1, r9\n"
-"	movs r2, 0\n"
-"	bl SubstitutePlaceholderStringTags\n"
-"	ldr r0, _08072A48\n"
-"	add r1, sp, 0x40\n"
-"	bl strcpy\n"
-"	mov r0, r9\n"
-"	movs r1, 0x9C\n"
-"	lsls r1, 1\n"
-"	bl sub_80421C0\n"
-"	ldr r0, _08072A4C\n"
-"	ldr r1, [r0]\n"
-"	mov r0, r9\n"
-"	bl DisplayDungeonLoggableMessage\n"
-"	b _08072A8C\n"
-"	.align 2, 0\n"
-"_08072A44: .4byte gFormatBuffer_Monsters\n"
-"_08072A48: .4byte gFormatBuffer_Items\n"
-"_08072A4C: .4byte gUnknown_80F9F04\n"
-"_08072A50:\n"
-"	movs r0, 0\n"
-"	mov r10, r0\n"
-"	mov r1, r8\n"
-"	ldrb r0, [r1, 0x6]\n"
-"	cmp r0, 0\n"
-"	bne _08072A84\n"
-"	ldr r0, _08072A80\n"
-"	ldr r1, [r0]\n"
-"	movs r0, 0\n"
-"	movs r2, 0x1\n"
-"	bl DisplayDungeonMessage\n"
-"	mov r0, r9\n"
-"	mov r1, sp\n"
-"	movs r2, 0x1\n"
-"	movs r3, 0x1\n"
-"	bl sub_8063E70\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _08072A84\n"
-"	movs r0, 0\n"
-"	b _08072AB0\n"
-"	.align 2, 0\n"
-"_08072A80: .4byte gUnknown_80FDF40\n"
-"_08072A84:\n"
-"	adds r4, 0x1\n"
-"	cmp r4, 0x1D\n"
-"	bgt _08072A8C\n"
-"	b _0807298E\n"
-"_08072A8C:\n"
-"	mov r0, r10\n"
-"	cmp r0, 0\n"
-"	bne _08072AAE\n"
-"_08072A92:\n"
-"	mov r1, r8\n"
-"	ldrb r0, [r1, 0x6]\n"
-"	cmp r0, 0\n"
-"	bne _08072AAE\n"
-"	ldr r0, _08072AC0\n"
-"	mov r1, r9\n"
-"	movs r2, 0\n"
-"	bl SubstitutePlaceholderStringTags\n"
-"	ldr r0, _08072AC4\n"
-"	ldr r1, [r0]\n"
-"	mov r0, r9\n"
-"	bl DisplayDungeonLoggableMessage\n"
-"_08072AAE:\n"
-"	movs r0, 0x1\n"
-"_08072AB0:\n"
-"	add sp, 0xA4\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r1}\n"
-"	bx r1\n"
-"	.align 2, 0\n"
-"_08072AC0: .4byte gFormatBuffer_Monsters\n"
-"_08072AC4: .4byte gUnknown_80F9F2C\n");
+    s32 i, j;
+    Move localMoves[8];
+    u8 text[0x64];
+    s32 count;
+    EntityInfo *info = GetEntInfo(target);
+    bool8 r10 = FALSE;
+
+    unk_CopyMoves4To8AndClearFlag2Unk4(localMoves, info->moves.moves);
+    for (j = 0; j < 8; j++) {
+        if(!(MoveFlagExists(&localMoves[j]))) {
+            InitPokemonMove(&localMoves[j], moveId);
+            localMoves[j].moveFlags2 |= 4;
+            break;
+        }
+    }
+
+    for (i = 0; i < 0x1E; i++) {
+        count = 0;
+        for (j = 0; j < 8; j++) {
+            if (MoveFlagExists(&localMoves[j])) {
+                count++;
+            }
+        }
+
+        if (count <= MAX_MON_MOVES) {
+            s32 i;
+
+            for (i = 0; i < count; i++) {
+                info->moves.moves[i] = localMoves[i];
+                if((info->moves.moves[i].moveFlags2 & 4))
+                {
+                    info->moves.moves[i].moveFlags2 &= 0xFB;
+                    BufferMoveName(text, &info->moves.moves[i], 0);
+                    r10 = TRUE;
+                }
+            }
+            for (; i < MAX_MON_MOVES; i++) {
+                ResetMoveFlags(&info->moves.moves[i]);
+            }
+
+            if (r10) {
+                if (!info->isNotTeamMember) {
+                    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
+                    strcpy(gFormatBuffer_Items[0], text);
+                    sub_80421C0(target, 312);
+                    DisplayDungeonLoggableMessage(target, gUnknown_80F9F04);
+                }
+            }
+
+            break;
+        }
+
+        r10 = FALSE;
+
+        if (!info->isNotTeamMember) {
+            DisplayDungeonMessage(0, gUnknown_80FDF40, 1);
+            if (!sub_8063E70(target, localMoves, TRUE, TRUE)) {
+                return FALSE;
+            }
+        }
+    }
+
+    if (!r10 && !info->isNotTeamMember) {
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
+        DisplayDungeonLoggableMessage(target, gUnknown_80F9F2C);
+    }
+    return TRUE;
 }
 
 void sub_8072AC8(s16 *param_1, s16 species, s32 param_3)
