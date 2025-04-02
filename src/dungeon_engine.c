@@ -204,338 +204,130 @@ void sub_80444F4(Entity *pokemon)
   }
 }
 
-// TODO: decompile this function
-// https://decomp.me/scratch/tJyXQ
-NAKED
+struct Struct_8044574
+{
+    Entity *entityPtr;
+    struct Struct_8044574 *next;
+};
+
 void sub_8044574(void)
 {
-    asm_unified("push {r4-r7,lr}\n"
-"mov r7, r10\n"
-"mov r6, r9\n"
-"mov r5, r8\n"
-"push {r5-r7}\n"
-"sub sp, 0x44\n"
-"bl GetLeader\n"
-"mov r10, r0\n"
-"movs r7, 0\n"
-"mov r0, sp\n"
-"adds r0, 0x4\n"
-"str r0, [sp, 0x40]\n"
-"ldr r1, _08044634\n"
-"mov r9, r1\n"
-"_08044592:\n"
-"mov r2, r9\n"
-"ldr r0, [r2]\n"
-"lsls r1, r7, 2\n"
-"ldr r3, _08044638\n"
-"adds r0, r3\n"
-"adds r0, r1\n"
-"ldr r5, [r0]\n"
-"adds r0, r5, 0\n"
-"bl EntityIsValid\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _080446A4\n"
-"ldr r6, [r5, 0x70]\n"
-"mov r8, r6\n"
-"ldrb r0, [r6, 0x7]\n"
-"cmp r0, 0\n"
-"bne _080446A4\n"
-"bl sub_8044B28\n"
-"lsls r0, 24\n"
-"lsrs r4, r0, 24\n"
-"cmp r4, 0\n"
-"bne _080446AC\n"
-"mov r1, r9\n"
-"ldr r0, [r1]\n"
-"adds r0, 0xB8\n"
-"str r5, [r0]\n"
-"bl TriggerWeatherAbilities\n"
-"movs r2, 0xA2\n"
-"lsls r2, 1\n"
-"adds r0, r6, r2\n"
-"strb r4, [r0]\n"
-"adds r0, r5, 0\n"
-"bl CalcSpeedStage\n"
-"mov r3, r9\n"
-"ldr r1, [r3]\n"
-"movs r2, 0xCC\n"
-"lsls r2, 3\n"
-"adds r1, r2\n"
-"movs r3, 0\n"
-"ldrsh r1, [r1, r3]\n"
-"lsls r1, 1\n"
-"movs r2, 0x32\n"
-"muls r0, r2\n"
-"adds r1, r0\n"
-"ldr r0, _0804463C\n"
-"adds r1, r0\n"
-"movs r2, 0\n"
-"ldrsh r0, [r1, r2]\n"
-"cmp r0, 0\n"
-"beq _080446A4\n"
-"movs r3, 0xA4\n"
-"lsls r3, 1\n"
-"adds r0, r6, r3\n"
-"ldrb r0, [r0]\n"
-"cmp r0, 0\n"
-"bne _080446A4\n"
-"ldrh r1, [r6]\n"
-"movs r2, 0x80\n"
-"lsls r2, 8\n"
-"adds r0, r2, 0\n"
-"ands r0, r1\n"
-"cmp r0, 0\n"
-"bne _080446A4\n"
-"movs r3, 0x80\n"
-"lsls r3, 7\n"
-"adds r0, r3, 0\n"
-"ands r0, r1\n"
-"lsls r0, 16\n"
-"lsrs r0, 16\n"
-"cmp r0, 0\n"
-"beq _08044644\n"
-"ldr r2, _08044640\n"
-"adds r0, r2, 0\n"
-"ands r0, r1\n"
-"strh r0, [r6]\n"
-"b _080446A4\n"
-".align 2, 0\n"
-"_08044634: .4byte gDungeon\n"
-"_08044638: .4byte 0x0001357c\n"
-"_0804463C: .4byte gSpeedTurns\n"
-"_08044640: .4byte 0x0000bfff\n"
-"_08044644:\n"
-"ldr r1, _08044668\n"
-"add r1, r8\n"
-"strb r0, [r1]\n"
-"adds r0, r5, 0\n"
-"bl TickStatusHeal\n"
-"adds r0, r5, 0\n"
-"bl EntityIsValid\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _080446A4\n"
-"adds r0, r5, 0\n"
-"bl sub_8071DA4\n"
-"movs r4, 0\n"
-"b _0804466E\n"
-".align 2, 0\n"
-"_08044668: .4byte 0x00000145\n"
-"_0804466C:\n"
-"adds r4, 0x1\n"
-"_0804466E:\n"
-"cmp r4, 0x2\n"
-"bgt _080446A4\n"
-"adds r0, r5, 0\n"
-"movs r1, 0\n"
-"bl RunMonsterAI\n"
-"bl sub_8044B28\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _080446A4\n"
-"adds r0, r5, 0\n"
-"bl sub_8072CF4\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _080446A4\n"
-"bl sub_8086AC0\n"
-"movs r0, 0\n"
-"bl sub_8043ED0\n"
-"bl sub_8044B28\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _0804466C\n"
-"_080446A4:\n"
-"adds r7, 0x1\n"
-"cmp r7, 0x3\n"
-"bgt _080446AC\n"
-"b _08044592\n"
-"_080446AC:\n"
-"movs r0, 0\n"
-"mov r8, r0\n"
-"_080446B0:\n"
-"adds r0, 0x1\n"
-"mov r9, r0\n"
-"add r2, sp, 0x8\n"
-"ldr r1, [sp, 0x40]\n"
-"mov r0, sp\n"
-"movs r7, 0x2\n"
-"_080446BC:\n"
-"mov r3, r8\n"
-"str r3, [r0]\n"
-"str r2, [r1]\n"
-"adds r2, 0x8\n"
-"adds r1, 0x8\n"
-"adds r0, 0x8\n"
-"subs r7, 0x1\n"
-"cmp r7, 0\n"
-"bge _080446BC\n"
-"str r3, [sp, 0x18]\n"
-"str r3, [sp, 0x1C]\n"
-"movs r7, 0\n"
-"_080446D4:\n"
-"ldr r0, _08044710\n"
-"ldr r0, [r0]\n"
-"lsls r1, r7, 2\n"
-"ldr r2, _08044714\n"
-"adds r0, r2\n"
-"adds r0, r1\n"
-"ldr r4, [r0]\n"
-"adds r0, r4, 0\n"
-"bl EntityIsValid\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _08044760\n"
-"ldr r1, [r4, 0x70]\n"
-"movs r3, 0xA2\n"
-"lsls r3, 1\n"
-"adds r2, r1, r3\n"
-"ldrb r0, [r2]\n"
-"cmp r0, 0\n"
-"beq _08044760\n"
-"ldrb r0, [r1, 0x7]\n"
-"cmp r0, 0\n"
-"beq _08044718\n"
-"adds r3, 0x1\n"
-"adds r0, r1, r3\n"
-"mov r1, r8\n"
-"strb r1, [r0]\n"
-"strb r1, [r2]\n"
-"b _08044760\n"
-".align 2, 0\n"
-"_08044710: .4byte gDungeon\n"
-"_08044714: .4byte 0x0001357c\n"
-"_08044718:\n"
-"mov r2, r10\n"
-"movs r3, 0x4\n"
-"ldrsh r1, [r2, r3]\n"
-"movs r2, 0x4\n"
-"ldrsh r0, [r4, r2]\n"
-"subs r2, r1, r0\n"
-"cmp r2, 0\n"
-"bge _0804472A\n"
-"negs r2, r2\n"
-"_0804472A:\n"
-"mov r3, r10\n"
-"movs r0, 0x6\n"
-"ldrsh r1, [r3, r0]\n"
-"movs r3, 0x6\n"
-"ldrsh r0, [r4, r3]\n"
-"subs r1, r0\n"
-"cmp r1, 0\n"
-"bge _0804473C\n"
-"negs r1, r1\n"
-"_0804473C:\n"
-"cmp r1, r2\n"
-"bge _08044742\n"
-"adds r1, r2, 0\n"
-"_08044742:\n"
-"cmp r1, 0x2\n"
-"ble _08044748\n"
-"movs r1, 0x2\n"
-"_08044748:\n"
-"add r3, sp, 0x20\n"
-"lsls r0, r7, 3\n"
-"adds r3, r0\n"
-"str r4, [r3]\n"
-"add r2, sp, 0x24\n"
-"adds r2, r0\n"
-"lsls r1, 3\n"
-"ldr r0, [sp, 0x40]\n"
-"adds r1, r0, r1\n"
-"ldr r0, [r1]\n"
-"str r0, [r2]\n"
-"str r3, [r1]\n"
-"_08044760:\n"
-"adds r7, 0x1\n"
-"cmp r7, 0x3\n"
-"ble _080446D4\n"
-"mov r5, sp\n"
-"movs r6, 0\n"
-"_0804476A:\n"
-"ldr r4, [r5]\n"
-"cmp r4, 0\n"
-"beq _080447A0\n"
-"ldr r1, [r4, 0x70]\n"
-"ldr r3, _08044814\n"
-"adds r2, r1, r3\n"
-"movs r0, 0x1\n"
-"strb r0, [r2]\n"
-"movs r2, 0xA2\n"
-"lsls r2, 1\n"
-"adds r0, r1, r2\n"
-"strb r6, [r0]\n"
-"adds r0, r4, 0\n"
-"movs r1, 0x1\n"
-"bl RunMonsterAI\n"
-"adds r0, r4, 0\n"
-"bl sub_8072CF4\n"
-"bl sub_8086AC0\n"
-"movs r0, 0\n"
-"bl sub_8043ED0\n"
-"adds r0, r4, 0\n"
-"bl EntityIsValid\n"
-"_080447A0:\n"
-"ldr r5, [r5, 0x4]\n"
-"cmp r5, 0\n"
-"bne _0804476A\n"
-"mov r0, r9\n"
-"cmp r0, 0x2\n"
-"ble _080446B0\n"
-"bl sub_8044B28\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"bne _08044802\n"
-"movs r7, 0\n"
-"_080447B8:\n"
-"ldr r0, _08044818\n"
-"ldr r0, [r0]\n"
-"lsls r1, r7, 2\n"
-"ldr r3, _0804481C\n"
-"adds r0, r3\n"
-"adds r0, r1\n"
-"ldr r4, [r0]\n"
-"adds r0, r4, 0\n"
-"bl EntityIsValid\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _080447FC\n"
-"ldr r0, [r4, 0x70]\n"
-"movs r1, 0xA2\n"
-"lsls r1, 1\n"
-"adds r5, r0, r1\n"
-"ldrb r0, [r5]\n"
-"cmp r0, 0\n"
-"beq _080447FC\n"
-"adds r0, r4, 0\n"
-"bl sub_8074094\n"
-"adds r0, r4, 0\n"
-"bl EntityIsValid\n"
-"lsls r0, 24\n"
-"cmp r0, 0\n"
-"beq _080447FC\n"
-"adds r0, r4, 0\n"
-"bl sub_8071DA4\n"
-"movs r0, 0\n"
-"strb r0, [r5]\n"
-"_080447FC:\n"
-"adds r7, 0x1\n"
-"cmp r7, 0x3\n"
-"ble _080447B8\n"
-"_08044802:\n"
-"add sp, 0x44\n"
-"pop {r3-r5}\n"
-"mov r8, r3\n"
-"mov r9, r4\n"
-"mov r10, r5\n"
-"pop {r4-r7}\n"
-"pop {r0}\n"
-"bx r0\n"
-".align 2, 0\n"
-"_08044814: .4byte 0x00000145\n"
-"_08044818: .4byte gDungeon\n"
-"_0804481C: .4byte 0x0001357c");
+    s32 i, id;
+    struct Struct_8044574 sp0[4];
+    struct Struct_8044574 sp40[4];
+
+    Entity *leader = GetLeader();
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        Entity *teamMon = gDungeon->teamPokemon[i];
+        if (EntityIsValid(teamMon)) {
+            EntityInfo *teamMonInfo = GetEntInfo(teamMon);
+            if (!teamMonInfo->isTeamLeader) {
+                s32 spdStage;
+
+                if (sub_8044B28())
+                    break;
+                gDungeon->unkB8 = teamMon;
+                TriggerWeatherAbilities();
+                teamMonInfo->aiAllySkip = FALSE;
+
+                spdStage = CalcSpeedStage(teamMon);
+                if (gSpeedTurns[spdStage][gDungeon->unk644.fractionalTurn] != 0
+                    && !teamMonInfo->attacking
+                    && !(teamMonInfo->flags & 0x8000))
+                {
+                    if (teamMonInfo->flags & 0x4000) {
+                        teamMonInfo->flags &= ~(0x4000);
+                    }
+                    else {
+                        teamMonInfo->recalculateFollow = FALSE;
+                        TickStatusHeal(teamMon);
+                        if (EntityIsValid(teamMon)) {
+                            s32 j;
+
+                            sub_8071DA4(teamMon);
+                            for (j = 0; j < 3; j++) {
+                                RunMonsterAI(teamMon, 0);
+                                if (sub_8044B28() || !sub_8072CF4(teamMon))
+                                    break;
+                                sub_8086AC0();
+                                sub_8043ED0(0);
+                                if (sub_8044B28())
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    for (id = 0; id < 3; id++) {
+        struct Struct_8044574 *ptr;
+
+        for (i = 0; i < 3; i++) {
+            sp0[i].entityPtr = NULL;
+            sp0[i].next = &sp0[i+1];
+        }
+        sp0[3].entityPtr = NULL;
+        sp0[3].next = NULL;
+
+        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+            Entity *teamMon = gDungeon->teamPokemon[i];
+            if (EntityIsValid(teamMon)) {
+                EntityInfo *teamMonInfo = GetEntInfo(teamMon);
+                if (teamMonInfo->aiAllySkip) {
+                    if (teamMonInfo->isTeamLeader) {
+                        teamMonInfo->recalculateFollow = FALSE;
+                        teamMonInfo->aiAllySkip = FALSE;
+                    }
+                    else {
+                        s32 x = abs(leader->pos.x - teamMon->pos.x);
+                        s32 y = abs(leader->pos.y - teamMon->pos.y);
+                        s32 distance = max(x, y);
+
+                        if (distance >= 3)
+                            distance = 2;
+
+                        sp40[i].entityPtr = teamMon;
+                        sp40[i].next = sp0[distance].next;
+                        sp0[distance].next = &sp40[i];
+                    }
+                }
+            }
+        }
+
+        ptr = &sp0[0];
+        while (ptr != NULL) {
+            Entity *entity = ptr->entityPtr;
+            if (entity != NULL) {
+                EntityInfo *info = GetEntInfo(entity);
+                info->recalculateFollow = TRUE;
+                info->aiAllySkip = FALSE;
+                RunMonsterAI(entity,1);
+                sub_8072CF4(entity);
+                sub_8086AC0();
+                sub_8043ED0(0);
+                EntityIsValid(entity); // Does nothing
+            }
+            ptr = ptr->next;
+        }
+    }
+
+    if (!sub_8044B28()) {
+        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+            Entity *teamMon = gDungeon->teamPokemon[i];
+            if (EntityIsValid(teamMon)) {
+                EntityInfo *teamMonInfo = GetEntInfo(teamMon);
+                if (teamMonInfo->aiAllySkip) {
+                    sub_8074094(teamMon);
+                    if (EntityIsValid(teamMon)) {
+                        sub_8071DA4(teamMon);
+                        teamMonInfo->aiAllySkip = FALSE;
+                    }
+                }
+            }
+        }
+    }
 }
 
 void sub_8044820(void)
