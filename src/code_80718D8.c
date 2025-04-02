@@ -15,6 +15,9 @@
 #include "code_805D8C8.h"
 #include "structs/str_806B7F8.h"
 #include "dungeon_logic.h"
+#include "dungeon_strings.h"
+#include "dungeon_menu_moves.h"
+#include "code_803E668.h"
 #include "code_806CD90.h"
 #include "moves.h"
 #include "pokemon_mid.h"
@@ -25,21 +28,6 @@
 
 EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
 EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};
-
-extern u8 *gUnknown_80F9ACC[];
-extern u8 *gUnknown_80F9AEC[];
-extern u8 *gUnknown_80F9B10[];
-extern u8 *gUnknown_80F9B34[];
-extern u8 *gUnknown_80F9B58[];
-extern u8 *gUnknown_80F9B74[];
-extern u8 *gUnknown_80F9B94[];
-extern u8 *gUnknown_80F9E64[];
-extern u8 *gUnknown_80F9E80[];
-extern u8 *gUnknown_80F9EC8[];
-extern u8 *gUnknown_80F9EEC[];
-extern u8 *gUnknown_80FCF18[];
-extern u8 *gUnknown_80FF730[];
-extern u8 *gUnknown_80FE2EC[];
 
 extern void ResetMonEntityData(EntityInfo *, u32);
 void sub_8069E0C(Entity *pokemon);
@@ -57,6 +45,9 @@ void sub_806A3D4(u8 *, s32, s32, s32);
 
 extern bool8 sub_803D930(u32);
 extern void sub_8072B78(Entity *pokemon, Entity *target, s16 id);
+extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
+
+void sub_8072B24(Entity *entity, Move *moves);
 
 static const u8 gUnknown_8107010[8] = {0, 1, 1, 2, 1, 1, 0, 0};
 static const u8 * const gUnknown_8107018[3] = {
@@ -139,7 +130,7 @@ void sub_8071DA4(Entity *entity)
               info->exp += expGained;
               gFormatArgs[0] = expGained;
               SetMessageArgument_2(gFormatBuffer_Monsters[0],info,0);
-              TryDisplayDungeonLoggableMessage3(entityPtr,target,*gUnknown_80F9E64); // $m0 gained $d0 Exp Points
+              TryDisplayDungeonLoggableMessage3(entityPtr,target,gUnknown_80F9E64); // $m0 gained $d0 Exp Points
               flag = sub_80723D0(entityPtr,target,1,1);
             }
           }
@@ -179,7 +170,7 @@ void sub_8071DA4(Entity *entity)
               if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
                 CopyTacticsNameToBuffer(gFormatBuffer_Items[0],tacticIndex);
-                TryDisplayDungeonLoggableMessage3(entityPtr,target,*gUnknown_80FF730); // $i0 was added to $m0's list of usable tactics
+                TryDisplayDungeonLoggableMessage3(entityPtr,target,gUnknown_80FF730); // $i0 was added to $m0's list of usable tactics
               }
             }
           }
@@ -244,7 +235,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
                 if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
                     CopyTacticsNameToBuffer(gFormatBuffer_Items[0],tacticIndex);
-                    TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FF730);
+                    TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FF730);
                 }
             }
         }
@@ -252,7 +243,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
         info->unk149 = 0;
         if ((flag == 0) && (param_4 != 0)) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
-            TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80F9B74);
+            TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80F9B74);
         }
     }
 }
@@ -291,7 +282,7 @@ void sub_807218C(Entity *pokemon)
     }
     else
     {
-        strcpy(buffer, *gUnknown_80FCF18);
+        strcpy(buffer, gUnknown_80FCF18);
     }
     DisplayDungeonMessage(0, buffer, 1);
     buffer[0] = 0;
@@ -299,7 +290,7 @@ void sub_807218C(Entity *pokemon)
 
     if(gFormatArgs[0]> 0)
     {
-        strcat(buffer, *gUnknown_80F9ACC);
+        strcat(buffer, gUnknown_80F9ACC);
         r6++;
     }
 
@@ -307,28 +298,28 @@ void sub_807218C(Entity *pokemon)
     {
         if(gUnknown_8107010[r6] != 0)
             strcat(buffer, gUnknown_8107018[gUnknown_8107010[r6]]);
-        strcat(buffer, *gUnknown_80F9AEC);
+        strcat(buffer, gUnknown_80F9AEC);
         r6++;
     }
     if(gFormatArgs[2]> 0)
     {
         if(gUnknown_8107010[r6] != 0)
             strcat(buffer, gUnknown_8107018[gUnknown_8107010[r6]]);
-        strcat(buffer, *gUnknown_80F9B10);
+        strcat(buffer, gUnknown_80F9B10);
         r6++;
     }
     if(gFormatArgs[3]> 0)
     {
         if(gUnknown_8107010[r6] != 0)
             strcat(buffer, gUnknown_8107018[gUnknown_8107010[r6]]);
-        strcat(buffer, *gUnknown_80F9B34);
+        strcat(buffer, gUnknown_80F9B34);
         r6++;
     }
     if(gFormatArgs[4]> 0)
     {
         if(gUnknown_8107010[r6] != 0)
             strcat(buffer, gUnknown_8107018[gUnknown_8107010[r6]]);
-        strcat(buffer, *gUnknown_80F9B58);
+        strcat(buffer, gUnknown_80F9B58);
     }
 
     if(buffer[0])
@@ -367,7 +358,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
         if(!flag)
         {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
-            TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F9B94);
+            TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F9B94);
         }
     }
 }
@@ -408,7 +399,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
                 gFormatArgs[0] = level;
 
                 SetMessageArgument_2(gFormatBuffer_Monsters[0], info, 0);
-                DisplayDungeonLoggableMessage(target, *gUnknown_80F9E80);
+                DisplayDungeonLoggableMessage(target, gUnknown_80F9E80);
             }
             else
             {
@@ -416,7 +407,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
                     sub_8083D58();
                 gFormatArgs[0] = level;
                 SetMessageArgument_2(gFormatBuffer_Monsters[0], info, 0);
-                DisplayDungeonLoggableMessageTrue(target, *gUnknown_80F9E80);
+                DisplayDungeonLoggableMessageTrue(target, gUnknown_80F9E80);
             }
         }
         flag = TRUE;
@@ -563,244 +554,94 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
     {
         gFormatArgs[0] = info->level;
         sub_80421C0(target, 0xD3 << 1);
-        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F9EC8); // $m0 dropped to Level $d0!
+        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F9EC8); // $m0 dropped to Level $d0!
         return TRUE;
     }
     else
     {
-        TryDisplayDungeonLoggableMessage3(pokemon, target, *gUnknown_80F9EEC); // $m0's level didn't drop!
+        TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80F9EEC); // $m0's level didn't drop!
         return FALSE;
     }
 }
 
-// https://decomp.me/scratch/hOsTU
-NAKED
-void sub_8072778(Entity *a0, Entity *a1, u8 a2, u8 a3)
+void sub_8072778(Entity *pokemon, Entity *target, u8 param_2, u8 param_3)
 {
-    asm_unified("	push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	sub sp, 0xD0\n"
-"	mov r9, r1\n"
-"	lsls r2, 24\n"
-"	lsrs r2, 24\n"
-"	str r2, [sp, 0xC4]\n"
-"	lsls r3, 24\n"
-"	lsrs r3, 24\n"
-"	str r3, [sp, 0xC8]\n"
-"	ldr r0, [r1, 0x70]\n"
-"	mov r8, r0\n"
-"	movs r1, 0\n"
-"	str r1, [sp, 0xCC]\n"
-"	ldrb r0, [r0, 0x6]\n"
-"	cmp r0, 0\n"
-"	beq _080727A8\n"
-"	movs r2, 0\n"
-"	str r2, [sp, 0xC8]\n"
-"	movs r4, 0\n"
-"	str r4, [sp, 0xC4]\n"
-"_080727A8:\n"
-"	mov r0, r8\n"
-"	movs r2, 0x2\n"
-"	ldrsh r1, [r0, r2]\n"
-"	ldrb r2, [r0, 0x9]\n"
-"	movs r4, 0xC\n"
-"	ldrsh r3, [r0, r4]\n"
-"	mov r0, sp\n"
-"	bl GetMovesLearnedAtLevel\n"
-"	adds r7, r0, 0\n"
-"	add r4, sp, 0x20\n"
-"	movs r1, 0x8C\n"
-"	lsls r1, 1\n"
-"	add r1, r8\n"
-"	adds r0, r4, 0\n"
-"	bl unk_CopyMoves4To8AndClearFlag2Unk4\n"
-"	mov r10, r4\n"
-"	cmp r7, 0\n"
-"	beq _08072810\n"
-"	adds r0, r7, 0\n"
-"	bl DungeonRandInt\n"
-"	movs r2, 0\n"
-"	lsls r0, 1\n"
-"	mov r1, sp\n"
-"	adds r6, r1, r0\n"
-"	mov r5, sp\n"
-"	adds r5, 0x21\n"
-"	mov r3, r10\n"
-"_080727E4:\n"
-"	lsls r0, r2, 3\n"
-"	add r0, sp\n"
-"	adds r0, 0x20\n"
-"	ldrb r1, [r0]\n"
-"	movs r0, 0x1\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	bne _08072806\n"
-"	ldrh r1, [r6]\n"
-"	adds r0, r3, 0\n"
-"	bl InitPokemonMove\n"
-"	ldrb r1, [r5]\n"
-"	movs r0, 0x4\n"
-"	orrs r0, r1\n"
-"	strb r0, [r5]\n"
-"	b _08072810\n"
-"_08072806:\n"
-"	adds r5, 0x8\n"
-"	adds r3, 0x8\n"
-"	adds r2, 0x1\n"
-"	cmp r2, 0x7\n"
-"	ble _080727E4\n"
-"_08072810:\n"
-"	movs r5, 0\n"
-"	movs r4, 0x1\n"
-"_08072814:\n"
-"	movs r7, 0\n"
-"	movs r2, 0\n"
-"_08072818:\n"
-"	lsls r0, r2, 3\n"
-"	add r0, sp\n"
-"	adds r0, 0x20\n"
-"	ldrb r1, [r0]\n"
-"	adds r0, r4, 0\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	beq _0807282A\n"
-"	adds r7, 0x1\n"
-"_0807282A:\n"
-"	adds r2, 0x1\n"
-"	cmp r2, 0x7\n"
-"	ble _08072818\n"
-"	cmp r7, 0x4\n"
-"	bgt _080728D4\n"
-"	movs r3, 0\n"
-"	movs r5, 0\n"
-"	cmp r3, r7\n"
-"	bge _0807287C\n"
-"	movs r4, 0x8C\n"
-"	lsls r4, 1\n"
-"	add r4, r8\n"
-"	mov r6, r10\n"
-"_08072844:\n"
-"	lsls r0, r5, 3\n"
-"	movs r2, 0x8C\n"
-"	lsls r2, 1\n"
-"	add r2, r8\n"
-"	adds r2, r0\n"
-"	ldr r0, [r6]\n"
-"	ldr r1, [r6, 0x4]\n"
-"	str r0, [r2]\n"
-"	str r1, [r2, 0x4]\n"
-"	ldrb r1, [r4, 0x1]\n"
-"	movs r0, 0x4\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	beq _08072872\n"
-"	movs r0, 0xFB\n"
-"	ands r0, r1\n"
-"	strb r0, [r4, 0x1]\n"
-"	add r0, sp, 0x60\n"
-"	adds r1, r4, 0\n"
-"	movs r2, 0\n"
-"	bl BufferMoveName\n"
-"	movs r3, 0x1\n"
-"_08072872:\n"
-"	adds r4, 0x8\n"
-"	adds r6, 0x8\n"
-"	adds r5, 0x1\n"
-"	cmp r5, r7\n"
-"	blt _08072844\n"
-"_0807287C:\n"
-"	cmp r5, 0x3\n"
-"	bgt _08072894\n"
-"	movs r2, 0x8C\n"
-"	lsls r2, 1\n"
-"	movs r1, 0\n"
-"_08072886:\n"
-"	lsls r0, r5, 3\n"
-"	add r0, r8\n"
-"	adds r0, r2\n"
-"	strb r1, [r0]\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x3\n"
-"	ble _08072886\n"
-"_08072894:\n"
-"	cmp r3, 0\n"
-"	beq _08072928\n"
-"	ldr r2, [sp, 0xC4]\n"
-"	cmp r2, 0\n"
-"	beq _08072928\n"
-"	ldr r0, _080728C8\n"
-"	mov r1, r8\n"
-"	movs r2, 0\n"
-"	bl SetMessageArgument_2\n"
-"	ldr r0, _080728CC\n"
-"	add r1, sp, 0x60\n"
-"	bl strcpy\n"
-"	mov r0, r9\n"
-"	movs r1, 0x9C\n"
-"	lsls r1, 1\n"
-"	bl sub_80421C0\n"
-"	ldr r0, _080728D0\n"
-"	ldr r1, [r0]\n"
-"	mov r0, r9\n"
-"	bl DisplayDungeonLoggableMessage\n"
-"	b _08072928\n"
-"	.align 2, 0\n"
-"_080728C8: .4byte gFormatBuffer_Monsters\n"
-"_080728CC: .4byte gFormatBuffer_Items\n"
-"_080728D0: .4byte gUnknown_80F9F04\n"
-"_080728D4:\n"
-"	mov r1, r8\n"
-"	ldrb r0, [r1, 0x6]\n"
-"	cmp r0, 0\n"
-"	bne _08072918\n"
-"	ldr r2, [sp, 0xC8]\n"
-"	cmp r2, 0\n"
-"	beq _08072918\n"
-"	ldr r0, [sp, 0xCC]\n"
-"	cmp r0, 0\n"
-"	bne _08072902\n"
-"	ldr r1, [sp, 0xC4]\n"
-"	cmp r1, 0\n"
-"	beq _08072902\n"
-"	movs r0, 0xA\n"
-"	movs r1, 0x6\n"
-"	bl sub_803E708\n"
-"	ldr r0, _08072914\n"
-"	ldr r1, [r0]\n"
-"	movs r0, 0\n"
-"	movs r2, 0x1\n"
-"	bl DisplayDungeonMessage\n"
-"_08072902:\n"
-"	movs r2, 0x1\n"
-"	str r2, [sp, 0xCC]\n"
-"	mov r0, r9\n"
-"	mov r1, r10\n"
-"	movs r3, 0\n"
-"	bl sub_8063E70\n"
-"	b _08072920\n"
-"	.align 2, 0\n"
-"_08072914: .4byte gUnknown_80F9FA4\n"
-"_08072918:\n"
-"	mov r0, r9\n"
-"	mov r1, r10\n"
-"	bl sub_8072B24\n"
-"_08072920:\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x1D\n"
-"	bgt _08072928\n"
-"	b _08072814\n"
-"_08072928:\n"
-"	add sp, 0xD0\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n");
+    s32 i, j;
+    s32 movei;
+    u16 learnedMoves[16];
+    Move localMoves[8];
+    u8 text[0x64];
+    s32 count;
+    EntityInfo *info = GetEntInfo(target);
+    bool8 sp_0xCC = FALSE;
+
+    if (info->isNotTeamMember) {
+        param_3 = 0;
+        param_2 = 0;
+    }
+
+    count = GetMovesLearnedAtLevel(learnedMoves, info->id, info->level, info->IQ);
+    unk_CopyMoves4To8AndClearFlag2Unk4(localMoves, info->moves.moves);
+
+    if (count != 0) {
+        movei = DungeonRandInt(count);
+        for (j = 0; j < 8; j++) {
+            if(!(MoveFlagExists(&localMoves[j])))
+            {
+                InitPokemonMove(&localMoves[j], learnedMoves[movei]);
+                localMoves[j].moveFlags2 |= 4;
+                break;
+            }
+        }
+    }
+
+    for (i = 0; i < 0x1E; i++) {
+        count = 0;
+        for (j = 0; j < 8; j++) {
+            if (MoveFlagExists(&localMoves[j])) {
+                count++;
+            }
+        }
+
+        if (count <= MAX_MON_MOVES) {
+            s32 i;
+            bool8 r3 = FALSE;
+
+            for (i = 0; i < count; i++) {
+                info->moves.moves[i] = localMoves[i];
+                if((info->moves.moves[i].moveFlags2 & 4))
+                {
+                    info->moves.moves[i].moveFlags2 &= 0xFB;
+                    BufferMoveName(text, &info->moves.moves[i], 0);
+                    r3 = TRUE;
+                }
+            }
+            for (; i < MAX_MON_MOVES; i++) {
+                ResetMoveFlags(&info->moves.moves[i]);
+            }
+
+            if (r3 && param_2) {
+                SetMessageArgument_2(gFormatBuffer_Monsters[0], info, 0);
+                strcpy(gFormatBuffer_Items[0], text);
+                sub_80421C0(target, 312);
+                DisplayDungeonLoggableMessage(target, gUnknown_80F9F04);
+            }
+
+            return;
+        }
+
+        if (!info->isNotTeamMember && param_3) {
+            if (!sp_0xCC && param_2) {
+                sub_803E708(0xA, 0x6);
+                DisplayDungeonMessage(0, gUnknown_80F9FA4, 1);
+            }
+            sp_0xCC = 1;
+            sub_8063E70(target, localMoves, 1, 0);
+        }
+        else {
+            sub_8072B24(target, localMoves);
+        }
+    }
 }
 
 // https://decomp.me/scratch/Sb2mo
@@ -1095,7 +936,7 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
   ResetMonEntityData(entityInfo,0);
   sub_8069E0C(target);
   sub_806CCB4(target,7);
-  TryDisplayDungeonLoggableMessage3(pokemon,target,*gUnknown_80FE2EC);
+  TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FE2EC);
   sub_8042A44(target);
   sub_8083D78();
   if (id_s32 == MONSTER_NINJASK) {

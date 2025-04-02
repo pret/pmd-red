@@ -912,11 +912,6 @@ static void sub_8063E30(Move *moves, s32 id)
     unk_FixLinkedMovesSetEnabled8(moves);
 }
 
-static inline void ResetMoveFlags(Move *move)
-{
-    move->moveFlags = 0;
-}
-
 bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBPress)
 {
     s32 i, count;
