@@ -21,7 +21,6 @@
 #include "text_1.h"
 #include "trap.h"
 
-extern DungeonPos gPlayerDotMapPosition;
 extern s32 gUnknown_202EDD0;
 
 extern u8 GetFloorType(void);
@@ -67,6 +66,7 @@ EWRAM_DATA bool8 gShowDungeonMap = FALSE;
 EWRAM_DATA static u8 sPlayerDotFrames = 0;
 EWRAM_DATA static OpenedFile *sDungeonMapGfxFile = NULL;
 EWRAM_DATA static void *sDungeonMapVramDst = NULL;
+EWRAM_INIT DungeonPos gPlayerDotMapPosition = {100, 100};
 
 // All traps look the same on Map, except for the Wonder Tile.
 static const u8 sTrapToMapGfxId[NUM_TRAPS] =

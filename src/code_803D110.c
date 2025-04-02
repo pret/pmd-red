@@ -17,6 +17,7 @@
 #include "pokemon_3.h"
 #include "text_1.h"
 #include "text_3.h"
+#include "dungeon_config.h"
 
 extern s32 sub_80902C8(u8 dungeon);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
@@ -32,7 +33,6 @@ extern const char gUnknown_80F610C[];
 extern const char gUnknown_80F6110[];
 extern const char gUnknown_80F6118[];
 extern const u32 gUnknown_80F6120[];
-extern const u16 gUnknown_80F5F70[];
 
 extern RGB gUnknown_202ECA4[];
 extern OpenedFile *gDungeonNameBannerPalette;

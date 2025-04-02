@@ -138,6 +138,7 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
     .include "src/dungeon_map_access.o"
     .include "src/dungeon_generation.o"
     .include "src/dungeon_message.o"
+    .include "src/dungeon_message_log.o"
     .include "src/dungeon_move.o"
     .include "src/dungeon_main.o"
 	.space 0x4
@@ -150,7 +151,8 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
     .include "src/dungeon_menu_others.o"
     .include "src/dungeon_menu_recruitment.o"
     .include "src/code_8066D04.o"
-    .include "src/dungeon_movement.o"
+    .include "src/dungeon_8067A80.o"
+    .include "src/dungeon_logic.o"
     .include "src/code_80718D8.o"
 
 gUnknown_202F32C: /* 202F32C (xxx_dungeon_8042F6C - sub_8072CF4) */
@@ -160,6 +162,7 @@ gUnknown_202F32D: /* 202F32D (sub_8072CF4 - UseAttack) */
 
     .include "src/dungeon_ai_items.o"
     .include "src/code_8073CF0.o"
+    .include "src/code_8075708.o"
 	.space 0x4
     .include "src/dungeon_ai_attack.o"
     .include "src/code_80869E4.o"

@@ -1,7 +1,7 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_ai_attack.h"
-#include "charge_move.h"
-#include "code_8045A00.h"
+#include "dungeon_move_util.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "constants/direction.h"
@@ -13,22 +13,18 @@
 #include "constants/targeting.h"
 #include "constants/type.h"
 #include "dungeon_action.h"
-#include "dungeon_ai_targeting.h"
 #include "dungeon_ai.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_config.h"
-#include "dungeon_engine.h"
+#include "run_dungeon.h"
 #include "dungeon_map_access.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "items.h"
 #include "move_checks.h"
 #include "move_util.h"
 #include "moves.h"
 #include "position_util.h"
-#include "status_checks_1.h"
 #include "status_checks.h"
 #include "structs/str_dungeon.h"
 #include "targeting_flags.h"
@@ -48,13 +44,10 @@ EWRAM_DATA u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS] = {0};
 EWRAM_DATA s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS] = {0};
 EWRAM_DATA Entity *gPotentialTargets[NUM_DIRECTIONS] = {0};
 
-extern void sub_8055A00(Entity *, u8, u32, u32, u32);
 extern bool8 sub_8044B28(void);
-extern void sub_8057588(Entity *, u32);
 extern void sub_806A1B0(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8044D40(ActionContainer *, u32);
-extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
 extern void sub_8045BF8(u8 *, struct Item *);
 extern void sub_8044DF0(struct Entity *, u32, u32);
 extern void sub_8071DA4(struct Entity *);
@@ -546,23 +539,11 @@ s32 AIConsiderMove(struct AIPossibleMove *aiPossibleMove, Entity *pokemon, Move 
 
 bool8 IsTargetInLineRange(Entity *user, Entity *target, s32 range)
 {
-    s32 distanceX = user->pos.x - target->pos.x;
-    s32 distanceY, distance;
     s32 direction;
-    if (distanceX < 0)
-    {
-        distanceX = -distanceX;
-    }
-    distanceY = user->pos.y - target->pos.y;
-    if (distanceY < 0)
-    {
-        distanceY = -distanceY;
-    }
-    distance = distanceY;
-    if (distanceY < distanceX)
-    {
-        distance = distanceX;
-    }
+    s32 distanceX = abs(user->pos.x - target->pos.x);
+    s32 distanceY = abs(user->pos.y - target->pos.y);
+    s32 distance = max(distanceX, distanceY);
+
     if (distance > RANGED_ATTACK_RANGE || distance > range)
     {
         return FALSE;
@@ -1069,4 +1050,13 @@ void HandleUseOrbAction(Entity *pokemon)
 
     if (!sub_8044B28())
         sub_806A1B0(pokemon);
+}
+
+s16 GetMoveTargetAndRangeForPokemon(Entity *pokemon, Move *move, bool32 isAI)
+{
+    if (move->id == MOVE_CURSE && !isAI && !MonsterIsType(pokemon, TYPE_GHOST))
+    {
+        return TARGETING_FLAG_BOOST_SELF | TARGETING_FLAG_TARGET_SELF;
+    }
+    return GetMoveTargetAndRange(move, isAI);
 }

@@ -30,7 +30,4 @@ typedef struct UnkStruct_RunDungeon
     WonderMailSub unk84;
 } UnkStruct_RunDungeon;
 
-// TODO: This func should not be in a structs include file
-void RunDungeon_Async(UnkStruct_RunDungeon *r8);
-
 #endif // GUARD_STR_DUNGEON_8042F6C_H

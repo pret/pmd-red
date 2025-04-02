@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_ai_movement.h"
 
 #include "constants/direction.h"
@@ -8,16 +9,12 @@
 #include "constants/tactic.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_leader.h"
-#include "dungeon_ai_targeting.h"
-#include "dungeon_capabilities.h"
+#include "dungeon_logic.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "dungeon_movement.h"
-#include "dungeon_pokemon_attributes.h"
 #include "dungeon_random.h"
 #include "dungeon_range.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "structs/map.h"
 #include "number_util.h"
 #include "position_util.h"
@@ -41,7 +38,7 @@ struct CanMoveInDirectionInfo
     s32 direction;
 };
 
-const s32 gFaceDirectionIncrements[] = {0, 1, -1, 2, -2, 3, -3, 4, 0, -1, 1, -2, 2, -3, 3, 4};
+extern const s32 gFaceDirectionIncrements[];
 
 void AIMovement(Entity *pokemon, bool8 showRunAwayEffect)
 {

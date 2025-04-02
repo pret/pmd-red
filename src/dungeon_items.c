@@ -3,10 +3,8 @@
 #include "dungeon_items.h"
 #include "code_803E668.h"
 #include "code_8041AD0.h"
-#include "code_8045A00.h"
 #include "code_80861A8.h"
 #include "code_80869E4.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_leader.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
@@ -17,14 +15,13 @@
 #include "dungeon_message.h"
 #include "dungeon_music.h"
 #include "dungeon_map.h"
-#include "dungeon_ai_targeting.h"
+#include "dungeon_strings.h"
+#include "dungeon_logic.h"
 #include "string_format.h"
 #include "items.h"
-#include "status_checks_1.h"
 #include "structs/map.h"
 #include "trap.h"
 #include "math.h"
-#include "code_80450F8.h"
 #include "structs/str_item_text.h"
 #include "code_803E46C.h"
 #include "sprite.h"
@@ -32,26 +29,11 @@
 extern SpriteOAM gUnknown_202EDC0;
 
 extern const s32 gUnknown_810A3F0[];
-extern const u8 *gUnknown_80FA408[];
 extern const u8 *gUnknown_810531C[];
 extern const u8 *gUnknown_8105360[];
 extern const u8 *gUnknown_81053A8[];
 extern const u8 *gUnknown_8105434[];
-extern const u8 *gPickedUpItemToolbox[];
-extern const u8 *gMonTerrifiedCouldntPickUpItem[];
-extern const u8 *gPickedUpItem2[];
-extern const u8 *gMonCouldntPickUpItem[];
-extern const u8 *gPickedUpItem[];
-extern const u8 *gMonSteppedOnItem[];
-extern const u8 *const gUnknown_80FED30;
 extern const DungeonPos gUnknown_80F4468[];
-extern const u8 *const gItemFellOnGround;
-extern const u8 *const gItemLost;
-extern const u8 *const gItemFellOutOfSight;
-extern const u8 *const gItemFellInWater;
-extern const u8 *const gItemBuried;
-extern const u8 *gSeveralItemsLost;
-extern const u8 *gAllItemsLost;
 
 extern void sub_80416E0(PixelPos *r0, u32, bool8);
 extern void sub_80855E4(void *);
@@ -197,7 +179,7 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
         }
         sub_8045BF8(gFormatBuffer_Items[0],tileItem);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
-        LogMessageByIdWithPopupCheckUser(leader,*gMonSteppedOnItem);
+        LogMessageByIdWithPopupCheckUser(leader,gMonSteppedOnItem);
     }
     else if (ShouldMonsterRunAwayAndShowEffect(leader,1)) {
         if (!printMsg) {
@@ -205,14 +187,14 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
         }
         sub_8045BF8(gFormatBuffer_Items[0],tileItem);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
-        LogMessageByIdWithPopupCheckUser(leader,*gMonTerrifiedCouldntPickUpItem);
+        LogMessageByIdWithPopupCheckUser(leader,gMonTerrifiedCouldntPickUpItem);
     }
     else if (GetItemCategory(tileItem->id) == CATEGORY_POKE) {
         PlaySoundEffect(0x14c);
         AddToTeamMoney(GetMoneyValue(tileItem));
         sub_8045BF8(gFormatBuffer_Items[0],tileItem);
         RemoveItemFromDungeonAt(pos,TRUE);
-        LogMessageByIdWithPopupCheckUser(leader,*gPickedUpItem);
+        LogMessageByIdWithPopupCheckUser(leader,gPickedUpItem);
         TryDisplayItemPickupTutorialMessage(tileItem->id);
     }
     else {
@@ -281,10 +263,10 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
                 RemoveItemFromDungeonAt(pos,TRUE);
                 PlaySoundEffect(0x14a);
                 if (inventoryIds[index] < 0) {
-                    LogMessageByIdWithPopupCheckUser(leader,*gPickedUpItem2);
+                    LogMessageByIdWithPopupCheckUser(leader,gPickedUpItem2);
                 }
                 else {
-                    LogMessageByIdWithPopupCheckUser(leader,*gPickedUpItemToolbox);
+                    LogMessageByIdWithPopupCheckUser(leader,gPickedUpItemToolbox);
                 }
                 TryDisplayItemPickupTutorialMessage(tileItem->id);
                 return;
@@ -302,7 +284,7 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
             }
             sub_8045BF8(gFormatBuffer_Items[0],tileItem);
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
-            LogMessageByIdWithPopupCheckUser(leader,*gMonSteppedOnItem);
+            LogMessageByIdWithPopupCheckUser(leader,gMonSteppedOnItem);
         }
         else {
             PlaySoundEffect(0x14a);
@@ -310,16 +292,16 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
                 leaderInfo->heldItem = *tileItem;
                 sub_8045BF8(gFormatBuffer_Items[0],tileItem);
                 RemoveItemFromDungeonAt(pos,TRUE);
-                LogMessageByIdWithPopupCheckUser(leader,*gPickedUpItem2);
+                LogMessageByIdWithPopupCheckUser(leader,gPickedUpItem2);
             }
             else if (AddItemToInventory(tileItem) != 0) {
                 SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
-                LogMessageByIdWithPopupCheckUser(leader,*gMonCouldntPickUpItem);
+                LogMessageByIdWithPopupCheckUser(leader,gMonCouldntPickUpItem);
             }
             else {
                 sub_8045BF8(gFormatBuffer_Items[0],tileItem);
                 RemoveItemFromDungeonAt(pos,TRUE);
-                LogMessageByIdWithPopupCheckUser(leader,*gPickedUpItemToolbox);
+                LogMessageByIdWithPopupCheckUser(leader,gPickedUpItemToolbox);
             }
             TryDisplayItemPickupTutorialMessage(tileItem->id);
          }
@@ -759,7 +741,7 @@ void sub_8046D20(void)
     cVar1 = gDungeon->unk8;
     gDungeon->unk8 = sub_8046D70();
     if (((gDungeon->unk8 == 1) && (cVar1 == 0)) &&
-         (DisplayDungeonYesNoMessage(0, *gUnknown_80FA408, 1) == 1)) {
+         (DisplayDungeonYesNoMessage(0, gUnknown_80FA408, 1) == 1)) {
         gDungeon->unk4 = 1;
         gDungeon->unk11 = 2;
     }

@@ -1,8 +1,8 @@
 #include "global.h"
+#include "globaldata.h"
 #include "status_checks.h"
 #include "dungeon_util.h"
-#include "charge_move.h"
-#include "code_8045A00.h"
+#include "dungeon_move_util.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "constants/direction.h"
@@ -10,8 +10,8 @@
 #include "constants/status.h"
 #include "dungeon_action.h"
 #include "dungeon_ai_attack.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_random.h"
+#include "dungeon_logic.h"
 
 extern const char *gPtrFrozenMessage[];
 extern const char *gPtrWrappedAroundMessage[];

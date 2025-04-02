@@ -12,11 +12,11 @@
 #include "random.h"
 #include "string_format.h"
 #include "strings.h"
+#include "dungeon_data.h"
 
 extern const char gUnknown_8108F10[];
 extern const char gUnknown_8108F18[];
 extern const char gUnknown_8108F2C[];
-extern u8 gInvalidDungeonIDs[];
 extern u8 gDungeonFloorCount[];
 extern const u8 *const gUnknown_8108084[];
 extern DungeonLocation gUnknown_8107828[];

@@ -1,5 +1,5 @@
 #include "global.h"
-
+#include "globaldata.h"
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
 #include "constants/iq_skill.h"
@@ -9,18 +9,26 @@
 #include "dungeon_ai_attack.h"
 #include "dungeon_ai_item_weight.h"
 #include "dungeon_ai_items.h"
-#include "dungeon_ai_targeting.h"
-#include "dungeon_capabilities.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "items.h"
 #include "structs/str_position.h"
 #include "position_util.h"
+#include "string_format.h"
+#include "dungeon_strings.h"
+#include "dungeon_message.h"
+#include "dungeon_music.h"
+#include "dungeon_items.h"
+#include "constants/dungeon.h"
+
+extern void sub_8045BF8(u8 *, Item *);
+extern void sub_8067110(Entity *);
+extern void sub_80671A0(Entity *);
+extern bool8 sub_8044B28(void);
 
 #define NUM_POTENTIAL_ROCK_TARGETS 20
 #define GROUND_ITEM_TOOLBOX_INDEX 0x80
@@ -39,6 +47,8 @@ EWRAM_DATA bool8 gAIThrownItemDirectionIsUsed[NUM_DIRECTIONS] = {0};
 EWRAM_DATA u32 gAIThrownItemProbabilities[NUM_DIRECTIONS] = {0};
 
 extern TeamInventory *gTeamInventoryRef;
+
+void sub_8073D14(Entity *);
 
 void AIDecideUseItem(Entity *pokemon)
 {
@@ -405,5 +415,169 @@ void TargetThrownItem(Entity *pokemon, Entity *targetPokemon, Item *item, s32 ta
         itemWeight = !ignoreRollChance ? GetAIUseItemProbability(targetPokemon, item, targetingFlags) : 100;
         *targetWeight = itemWeight;
         gAIThrowItemActionChoiceCount++;
+    }
+}
+
+void HandleEatAIAction(Entity *pokemon)
+{
+    sub_8067110(pokemon);
+}
+
+void HandleThrowItemAIAction(Entity *pokemon)
+{
+    sub_80671A0(pokemon);
+}
+
+void HandlePickUpAIAction(Entity *pokemon)
+{
+    sub_8073D14(pokemon);
+}
+
+void sub_8073D14(Entity *entity)
+{
+    Item *groundItem;
+    EntityInfo *_entityInfo;
+    EntityInfo *entityInfo = GetEntInfo(entity);
+    Entity *tileObject = GetTileAtEntitySafe(entity)->object;
+    if (tileObject == NULL)
+        return;
+    if (sub_8044B28())
+        return;
+    SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+    if (entityInfo->isTeamLeader)
+        return;
+    if (entityInfo->shopkeeper == 1)
+        return;
+    if (IsExperienceLocked(entityInfo->joinedAt.id))
+        return;
+    if (entityInfo->monsterBehavior == BEHAVIOR_RESCUE_TARGET)
+        return;
+
+    _entityInfo = GetEntInfo(entity); // Reloaded as a new variable for some reason.
+    groundItem = GetItemData(tileObject);
+    if (groundItem->flags & ITEM_FLAG_IN_SHOP)
+        return;
+
+    if (ShouldMonsterRunAwayAndShowEffect(entity, TRUE)) {
+        sub_8045BF8(gFormatBuffer_Items[0], groundItem);
+        SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+        DisplayDungeonLoggableMessageTrue(entity, gMonTerrifiedCouldntPickUpItem);
+    }
+    else if (!_entityInfo->isNotTeamMember && GetItemCategory(groundItem->id) == CATEGORY_POKE) {
+        // Why check the same thing again?
+        if (_entityInfo->isNotTeamMember) {
+            PlaySoundEffect(0x14B);
+        }
+        else {
+            PlaySoundEffect(0x14C);
+        }
+        AddToTeamMoney(GetMoneyValue(groundItem));
+        sub_8045BF8(gFormatBuffer_Items[0], groundItem);
+        RemoveItemFromDungeonAt(&entity->pos, 1);
+        DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem);
+    }
+    else {
+        s32 i, nItems, newInventoryId;
+        s32 inventoryIds[INVENTORY_SIZE + 1]; // plus held
+        Item *carriedItems[INVENTORY_SIZE + 1]; // plus held
+        s32 newQuantity;
+
+        if (gDungeon->unk644.hasInventory && !_entityInfo->isNotTeamMember) {
+            for (i = 0; i < INVENTORY_SIZE; i++) {
+                carriedItems[i] = &gTeamInventoryRef->teamItems[i];
+                inventoryIds[i] = i;
+            }
+            carriedItems[INVENTORY_SIZE] = &_entityInfo->heldItem;
+            inventoryIds[INVENTORY_SIZE] = -1;
+            nItems = INVENTORY_SIZE + 1;
+        }
+        else {
+            carriedItems[0] = &_entityInfo->heldItem;
+            inventoryIds[0] = -1;
+            nItems = 1;
+        }
+
+        if ((groundItem->id < 9) && !(groundItem->flags & ITEM_FLAG_IN_SHOP)) {
+            newInventoryId = -1;
+            newQuantity = -1;
+            for (i = 0; i < nItems; i++) {
+                if (carriedItems[i]->flags & ITEM_FLAG_EXISTS
+                    && !(carriedItems[i]->flags & ITEM_FLAG_IN_SHOP)
+                    && ((groundItem->id == carriedItems[i]->id) && (groundItem->flags & ITEM_FLAG_STICKY) == (carriedItems[i]->flags & ITEM_FLAG_STICKY))
+                    && carriedItems[i]->quantity != 99 && newQuantity < carriedItems[i]->quantity)
+                {
+                    newQuantity = carriedItems[i]->quantity;
+                    newInventoryId = i;
+                }
+            }
+
+            if (newInventoryId == -1) {
+                newQuantity = -1;
+                for (i = 0; i < nItems; i++) {
+                    if (carriedItems[i]->flags & ITEM_FLAG_EXISTS
+                        && !(carriedItems[i]->flags & ITEM_FLAG_IN_SHOP)
+                        && groundItem->id == carriedItems[i]->id
+                        && carriedItems[i]->quantity != 99
+                        && newQuantity < carriedItems[i]->quantity)
+                    {
+                        newQuantity = carriedItems[i]->quantity;
+                        newInventoryId = i;
+                    }
+                }
+            }
+
+            if (newInventoryId != -1) {
+                s32 quantity = carriedItems[newInventoryId]->quantity + groundItem->quantity;
+                if (quantity >= 99)
+                    quantity = 99;
+                carriedItems[newInventoryId]->quantity = quantity;
+                if (groundItem->flags & ITEM_FLAG_STICKY)
+                    carriedItems[newInventoryId]->flags |= ITEM_FLAG_STICKY;
+
+                sub_8045BF8(gFormatBuffer_Items[0], groundItem);
+                RemoveItemFromDungeonAt(&entity->pos, 1);
+                PlaySoundEffect(0x14A);
+                if (inventoryIds[newInventoryId] <= -1)
+                    DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
+                else
+                    DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItemToolbox);
+
+                return;
+            }
+        }
+
+        for (i = 0; i < nItems; i++) {
+            if (!(carriedItems[i]->flags & ITEM_FLAG_EXISTS))
+                break;
+        }
+
+        if (i == nItems) {
+            sub_8045BF8(gFormatBuffer_Items[0], groundItem);
+            DisplayDungeonLoggableMessageTrue(entity, gMonSteppedOnItem);
+        }
+        else {
+            if (_entityInfo->isNotTeamMember) {
+                PlaySoundEffect(0x14B);
+            }
+            else {
+                PlaySoundEffect(0x14A);
+            }
+
+            if (inventoryIds[i] <= -1) {
+                _entityInfo->heldItem = *groundItem;
+                sub_8045BF8(gFormatBuffer_Items[0], groundItem);
+                RemoveItemFromDungeonAt(&entity->pos, 1);
+                DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
+            }
+            else if (AddItemToInventory(groundItem)) {
+                SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
+                DisplayDungeonLoggableMessageTrue(entity, gMonCouldntPickUpItem);
+            }
+            else {
+                sub_8045BF8(gFormatBuffer_Items[0], groundItem);
+                RemoveItemFromDungeonAt(&entity->pos, 1);
+                DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItemToolbox);
+            }
+        }
     }
 }

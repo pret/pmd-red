@@ -1,9 +1,8 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_ai.h"
-
 #include "code_803E668.h"
 #include "code_803E724.h"
-#include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "code_808417C.h"
@@ -19,55 +18,20 @@
 #include "dungeon_ai_attack.h"
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_movement.h"
-#include "dungeon_ai_targeting.h"
-#include "dungeon_capabilities.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"
 #include "dungeon_map_access.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util_1.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "pokemon.h"
 #include "status_checks.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_misc.h"
-#include "tile_types.h"
 
 extern char *gPtrCouldntBeUsedMessage;
-extern char *gPtrItsaMonsterHouseMessage;
-
-extern u8 sub_8044B28(void);
-extern void sub_807AB38(Entity *, u32);
-extern void sub_8041888(u32);
-
-void sub_8075900(Entity *pokemon, u8 r1)
-{
-    if(EntityIsValid(pokemon))
-    {
-        if(!GetEntInfo(pokemon)->isNotTeamMember)
-        {
-            if(!sub_8044B28())
-            {
-                if(!gDungeon->unk644.monsterHouseTriggered)
-                {
-                    if((GetTileAtEntitySafe(pokemon)->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
-                    {
-                        // It's a monster house!
-                        LogMessageByIdWithPopupCheckUser(GetLeader(), gPtrItsaMonsterHouseMessage);
-                        gDungeon->unk644.monsterHouseTriggeredEvent = TRUE;
-                        sub_807AB38(pokemon, r1);
-                        sub_8041888(0);
-                        if(sub_803F428(&pokemon->pos))
-                            sub_803E708(0x78, 0x39);
-                    }
-                }
-            }
-        }
-    }
-}
 
 void RunMonsterAI(Entity *pokemon, u32 unused)
 {
@@ -187,4 +151,18 @@ void RunMonsterAI(Entity *pokemon, u32 unused)
             }
         }
     }
+}
+
+void sub_8075BA4(Entity *param_1, u8 param_2)
+{
+  EntityInfo * entityInfo = GetEntInfo(param_1);
+
+  if ((param_2 != 0) && (entityInfo->cringeClassStatus.status == STATUS_COWERING)) {
+      entityInfo->action.direction = (entityInfo->action.direction + 4) & DIRECTION_MASK;
+      TargetTileInFront(param_1);
+  }
+  else if (entityInfo->cringeClassStatus.status == STATUS_CONFUSED) {
+      entityInfo->action.direction = DungeonRandInt(NUM_DIRECTIONS);
+      TargetTileInFront(param_1);
+  }
 }

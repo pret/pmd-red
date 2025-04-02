@@ -1,21 +1,20 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/type.h"
 #include "structs/str_pokemon.h"
 #include "dungeon_main.h"
 #include "dungeon_misc.h"
 #include "code_80118A4.h"
 #include "code_803E668.h"
-#include "code_8045A00.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_8097670.h"
 #include "dungeon.h"
 #include "dungeon_items.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "dungeon_visibility.h"
 #include "friend_area.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
@@ -25,19 +24,10 @@
 #include "dungeon_util_1.h"
 #include "math.h"
 #include "dungeon_config.h"
+#include "dungeon_strings.h"
 #include "string_format.h"
 
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
-extern s32 gUnknown_8106F7C[];
-
-extern u8 *gUnknown_80FA0F0[];
-extern u8 *gUnknown_80FA058[];
-extern u8 *gUnknown_80FA030[];
-extern u8 *gUnknown_80F9FE8[];
-extern u8 *gUnknown_80FA004[];
-extern u8 *gUnknown_80FA0C8[];
-extern u8 *gUnknown_80FA120[];
-extern u8 *gUnknown_80FA090[];
 
 u8 sub_806B8CC();
 void sub_8083D88();
@@ -46,134 +36,6 @@ void nullsub_96(Entity *pokemon,Entity *target);
 u8 sub_8097900(s16);
 void sub_806F910(void);
 u8 sub_806F9BC(s16);
-extern void sub_803F508(Entity *);
-
-void SetShopkeeperAggression(Entity *pokemon, Entity *target)
-{
-    EntityInfo *info;
-
-    info = GetEntInfo(target);
-
-    if(info->shopkeeper != SHOPKEEPER_MODE_NORMAL)
-    {
-        if(GetEntityType(pokemon) == ENTITY_MONSTER)
-        {
-            if(GetEntInfo(pokemon)->isNotTeamMember)
-            {
-                info->shopkeeper = SHOPKEEPER_MODE_ATTACK_ENEMIES;
-            }
-            else
-            {
-                info->shopkeeper = SHOPKEEPER_MODE_ATTACK_TEAM;
-            }
-        }
-    }
-}
-
-void sub_806F480(Entity *pokemon, u8 r1)
-{
-    EntityInfo *info;
-
-    info = GetEntInfo(pokemon);
-
-    if(info->shopkeeper != SHOPKEEPER_MODE_NORMAL)
-    {
-        if(r1)
-        {
-            info->shopkeeper = SHOPKEEPER_MODE_ATTACK_ENEMIES;
-        }
-        else
-        {
-            info->shopkeeper = SHOPKEEPER_MODE_ATTACK_TEAM;
-        }
-    }
-}
-
-u8 sub_806F4A4(Entity *pokemon, u8 type) {
-
-    EntityInfo *info = GetEntInfo(pokemon);
-    s32 index;
-
-    if(MonsterIsType(pokemon, TYPE_GHOST))
-    {
-        if(type == TYPE_NORMAL || type == TYPE_FIGHTING)
-            if(!info->exposed)
-                return FALSE;
-    }
-    for(index = 0; index < 2; index++)
-    {
-        if(gTypeEffectivenessChart[type][info->types[index]] == EFFECTIVENESS_IMMUNE)
-            return FALSE;
-    }
-    return TRUE;
-}
-
-void sub_806F500(void)
-{
-    struct unkStruct_Dungeon134_sub *temp;
-
-    temp = &gDungeon->unk134;
-
-    temp->unk134 = 0;
-    temp->unk138 = 0;
-    temp->unk13C[0] = 0;
-    temp->unk13C[1] = 0;
-    temp->unk13E[0] = 0xA;
-    temp->unk13E[1] = 0xA;
-    temp->unk140[0] = 1;
-    temp->unk140[1] = 1;
-    temp->unk140[2] = 0;
-    temp->unk140[4] = 0;
-    temp->unk140[3] = 0;
-    temp->unk140[5] = 0;
-    temp->unk140[6] = 0;
-    temp->unk150 = 0;
-    temp->unk158 = 0;
-    temp->unk15C = F248_ZERO;
-    temp->unk160 = 0;
-    temp->unk161 = 0;
-    temp->unk162 = 0;
-    temp->unk163 = 0;
-    temp->unk164 = 0;
-    temp->unk165 = 0;
-    temp->unk166 = 0;
-    temp->unk167 = 0;
-    temp->unk168 = 0;
-    temp->unk169 = 0;
-    temp->unk16A = 0;
-    temp->unk16C = 0;
-    temp->unk16B = 0;
-    temp->unk16D = 0;
-    temp->fill16E[0] = 0;
-    temp->fill16E[1] = 0;
-    temp->fill16E[2] = 0;
-    temp->fill16E[3] = 0;
-    temp->fill16E[4] = 0;
-    temp->fill16E[5] = 0;
-    temp->fill16E[6] = 0;
-    temp->fill16E[7] = 0;
-    temp->fill16E[8] = 0;
-    temp->fill16E[9] = 0;
-    temp->fill16E[10] = 0;
-    temp->pokemonExposed = FALSE;
-    temp->unk17A = 0;
-}
-
-s32 sub_806F62C(int param_1)
-{
-    return gUnknown_8106F7C[param_1];
-}
-
-void sub_806F63C(Entity *param_1)
-{
-    UnkDungeonGlobal_unk181E8_sub *temp;
-
-    temp = &gDungeon->unk181e8;
-
-    if (temp->cameraTarget == param_1) {
-        sub_803F508(temp->cameraTarget);
-    }
-}
 
 bool8 sub_806F660(Entity *pokemon, Entity *target)
 {
@@ -286,7 +148,6 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
     return TRUE;
 }
 
-
 void nullsub_96(Entity *pokemon,Entity *target)
 {}
 
@@ -391,9 +252,9 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
     sub_806CE68(entity2, direction);
     CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[0],param_3->id);
 
-    if (DisplayDungeonYesNoMessage(0,*gUnknown_80F9FE8,1) == 0) {
+    if (DisplayDungeonYesNoMessage(0,gUnknown_80F9FE8,1) == 0) {
         if (param_3->id != MONSTER_JIRACHI) {
-            LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA004);
+            LogMessageByIdWithPopupCheckUser(entity1,gUnknown_80FA004);
         }
         return 0;
     }
@@ -406,7 +267,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
         }
 
         if (pokeIndex == MAX_TEAM_MEMBERS) {
-            LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA030);
+            LogMessageByIdWithPopupCheckUser(entity1,gUnknown_80FA030);
             return FALSE;
         }
         else {
@@ -447,25 +308,25 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             IncrementAdventureNumJoined();
 
             if (sub_806B8CC(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
-                LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA058);
+                LogMessageByIdWithPopupCheckUser(entity1,gUnknown_80FA058);
                 pokeStruct2->unk0 = 0;
             }
             else {
                 sub_8083D88();
                 sub_803E708(0xa0,0x46);
-                if (DisplayDungeonYesNoMessage(0,*gUnknown_80FA090,1) == 1) {
+                if (DisplayDungeonYesNoMessage(0,gUnknown_80FA090,1) == 1) {
                     while (DungeonGiveNameToRecruitedMon(pokeStruct2->name) == 0) {
-                        DisplayDungeonMessage(0,*gUnknown_80FA0C8,1);
+                        DisplayDungeonMessage(0,gUnknown_80FA0C8,1);
                     }
                 }
                 sub_808D9DC(gFormatBuffer_Monsters[0],pokeStruct2,0);
-                LogMessageByIdWithPopupCheckUser(entity1,*gUnknown_80FA0F0);
+                LogMessageByIdWithPopupCheckUser(entity1,gUnknown_80FA0F0);
                 if (flag) {
                     leader = xxx_call_GetLeader();
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
                     sub_8092558(gFormatBuffer_FriendArea,friendArea);
                     PlaySound(0xce);
-                    DisplayDungeonMessage(0,*gUnknown_80FA120,1);
+                    DisplayDungeonMessage(0,gUnknown_80FA120,1);
                 }
                 if (param_3->id == MONSTER_MEW) {
                     gDungeon->unk4 = 1;
@@ -586,9 +447,9 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       pokeStruct2->unk0 = 0;
     }
     else {
-      if (DisplayDungeonYesNoMessage(0,*gUnknown_80FA090,1) == 1) {
+      if (DisplayDungeonYesNoMessage(0,gUnknown_80FA090,1) == 1) {
         while (!DungeonGiveNameToRecruitedMon(buffer)) {
-          DisplayDungeonMessage(0,*gUnknown_80FA0C8,1);
+          DisplayDungeonMessage(0,gUnknown_80FA0C8,1);
         }
       }
       if (flag) {
@@ -596,7 +457,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
         sub_8092558(gFormatBuffer_FriendArea,friendArea);
         PlaySound(0xce);
-        DisplayDungeonMessage(0,*gUnknown_80FA120,1);
+        DisplayDungeonMessage(0,gUnknown_80FA120,1);
       }
       sub_808D9DC(gFormatBuffer_Monsters[3],pokeStruct2,0);
       *entityPtr = local_2c;

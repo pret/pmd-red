@@ -4,7 +4,6 @@
 #include "code_803E46C.h"
 #include "code_803E724.h"
 #include "code_8044CC8.h"
-#include "code_8045A00.h"
 #include "code_8097DD0.h"
 #include "dungeon.h"
 #include "dungeon_action.h"
@@ -15,7 +14,9 @@
 #include "dungeon_menu_others.h"
 #include "dungeon_menu_recruitment.h"
 #include "dungeon_message.h"
+#include "dungeon_message_log.h"
 #include "dungeon_music.h"
+#include "dungeon_strings.h"
 #include "dungeon_submenu.h"
 #include "dungeon_util.h"
 #include "game_options.h"
@@ -35,35 +36,6 @@ extern bool8 IsBossFight(void);
 extern u16 GetLeaderActionId(void);
 
 extern MenuInputStruct gDungeonMenu;
-
-extern const u8 *const gUnknown_80FEBF8;
-extern const u8 *const gUnknown_80FEC28;
-extern const u8 *const gUnknown_80FDE6C;
-extern const u8 *const gUnknown_80FDEB8;
-extern const u8 *const gUnknown_80FEA44;
-extern const u8 *const gUnknown_80FEA50;
-extern const u8 *const gUnknown_80FEA28;
-extern const u8 *const gUnknown_80FEA10;
-extern const u8 *const gUnknown_80FE9F8;
-extern const u8 *const gUnknown_80FE9E8;
-extern const u8 *const gUnknown_80FE9CC;
-extern const u8 *const gUnknown_80FE8F8;
-extern const u8 *const gUnknown_80FF770;
-extern const u8 *const gUnknown_80FE8F4;
-extern const u8 *const gGameOptionsTextPtr;
-extern const u8 *const gOptionsDungeonTextPtr;
-extern const u8 *const gOptionsOthersTextPtr;
-extern const u8 *const gUnknown_80FE748;
-extern const u8 *const gUnknown_80FE764;
-extern const u8 *const gUnknown_80FE7C0;
-extern const u8 *const gUnknown_80FE788;
-extern const u8 *const gUnknown_80FE7A8;
-extern const u8 *const gUnknown_80FE7E4;
-extern const u8 *const gUnknown_80FA61C;
-extern const u8 *const gUnknown_80FA5F4;
-extern const u8 *const gOptionsOthersTextPtr;
-extern const u8 *const gOptionsWindowColorPtr;
-extern const u8 *const gUnknown_80FF774[];
 
 static void PrintOthersMenuOptions(void);
 static void ShowGameOptionsMenu(void);
@@ -540,16 +512,6 @@ static void PrintOthersMenuOptions(void)
     sub_80073E0(0);
 }
 
-struct Struct_80F7C50
-{
-    const u8 *str;
-    s32 val;
-};
-
-// TODO: Fix this table in other file
-
-extern const struct Struct_80F7C50 gUnknown_80F7C50[];
-
 static void PrintQuickSaveMenuOptions(void)
 {
     s32 optionsCount, currOptionId;
@@ -884,21 +846,6 @@ static bool8 UnknownOthersOption(void)
     return FALSE;
 }
 
-enum
-{
-    HINTS_CONTROLS,
-    HINTS_ORIENTATION,
-    HINTS_SEEDS,
-    HINTS_MOVES,
-    HINTS_RANGE,
-    HINTS_LINKING_MOVES,
-    HINTS_POKEMON_TYPES,
-    HINTS_TOUCH_SCREEN,
-    HINTS_COUNT,
-};
-
-#define HINTS_COUNT_RED_VERSION HINTS_COUNT - 1 // No Touch Screen Hints in Red
-
 static void ShowHintsMenu(void)
 {
     while (1) {
@@ -980,14 +927,12 @@ static void PrintHintsMenu(void)
     DungeonShowWindows(&windows, TRUE);
     sub_80137B0(&gDungeonMenu, 0);
     sub_80073B8(0);
-    PrintFormattedStringOnWindow(16, 0, gUnknown_80FF770, 0, '\0');
+    PrintFormattedStringOnWindow(16, 0, gText_Hints, 0, '\0');
     for (i = 0; i < HINTS_COUNT_RED_VERSION; i++) {
-        PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, i), gUnknown_80FF774[i], 0, '\0');
+        PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gDungeonMenu, i), gHintsNames[i], 0, '\0');
     }
     sub_80073E0(0);
 }
-
-extern const u8 *const gUnknown_80FF7EC[2][HINTS_COUNT];
 
 static void ShowChosenHintWindow(s32 hintId)
 {
@@ -1034,8 +979,8 @@ static void ShowChosenHintWindow(s32 hintId)
         gDungeonMenu.unkC = (gWindows[0].x + 19) * 8;
         gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
         sub_80073B8(0);
-        PrintFormattedStringOnWindow(16 + hintId * 8, 0, gUnknown_80FF774[hintId], 0, '\0');
-        PrintFormattedStringOnWindow(8, 16, gUnknown_80FF7EC[unk9][hintId], 0, '\0');
+        PrintFormattedStringOnWindow(16 + hintId * 8, 0, gHintsNames[hintId], 0, '\0');
+        PrintFormattedStringOnWindow(8, 16, gHintsDescriptions[unk9][hintId], 0, '\0');
         sub_80073E0(0);
 
         while (1) {

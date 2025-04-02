@@ -3,31 +3,6 @@
 
 #include "structs/str_dungeon.h"
 
-// size: 0x10
-typedef struct DungeonDataEntry
-{
-    /* 0x0 */ bool8 stairDirectionUp;
-    // If enabled, enemies will evolve when a team member is KOed (and doesn't revive) if their evolution spawns on the floor.
-    // False for all dungeons, but the code still works if this flag is enabled.
-    /* 0x1 */ bool8 enemiesEvolveWhenKOed;
-    /* 0x2 */ bool8 recruitingEnabled;
-    /* 0x3 */ s8 rescuesAllowed;
-    /* 0x4 */ u8 maxItemsAllowed;
-    /* 0x5 */ u8 maxPartyMembers;
-    /* 0x6 */ bool8 levelResetTo1;
-    /* 0x7 */ bool8 keepMoney;
-    /* 0x8 */ bool8 leaderCanSwitch;
-    /* 0x9 */ bool8 hasCheckpoint;
-    /* 0xA */ bool8 enterWithoutGameSave; // If false, the dungeon will force a quicksave before entering.
-    /* 0xB */ u8 HMMask; // HM mask for dungeon entry requirements (Fly, Dive, Waterfall, Surf, Water).
-    /* 0xC */ s16 turnLimit;
-    // The chance that a wild Pokémon's moveRandomly flag will be set when spawning,
-    // causing them to move randomly inside a room instead of exploring rooms.
-    /* 0xE */ s16 randomMovementChance;
-} DungeonDataEntry;
-
-extern const DungeonDataEntry gDungeons[];
-
 s32 GetDungeonFloorCount(u8 dungeon);
 const u8 *GetDungeonName1(u8 dungeon);
 bool8 IsStairDirectionUp(u8 dungeon);

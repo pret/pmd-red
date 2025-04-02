@@ -7,6 +7,7 @@
 #include "items.h"
 #include "pokemon.h"
 #include "strings.h"
+#include "dungeon_data.h"
 
 EWRAM_DATA static bool8 sBoughtFriendAreas[NUM_FRIEND_AREAS] = {0};
 
@@ -15,7 +16,6 @@ EWRAM_INIT bool8 *gFriendAreas = {NULL};
 // data_8107010.s
 extern const u8 sUnknown_81098A4[];
 extern const u8 sUnknown_81098AC[];
-#include "data/friend_area_settings.h" // 810AA90
 
 void LoadFriendAreas(void)
 {
@@ -41,7 +41,7 @@ u8 sub_80923D4(s32 target)
     s32 sum = 0;
 
     for (i = 0; i < NUM_FRIEND_AREAS; i++) {
-        sum += sFriendAreaSettings[i].num_pokemon;
+        sum += gFriendAreaSettings[i].num_pokemon;
         if (sum > target)
             return i;
     }
@@ -100,12 +100,12 @@ const u8 *GetFriendAreaName(u8 index)
 
 u8 GetFriendAreaUnlockCondition(u8 index)
 {
-    return sFriendAreaSettings[index].unlock_condition;
+    return gFriendAreaSettings[index].unlock_condition;
 }
 
 s32 GetFriendAreaPrice(u8 index)
 {
-    return sFriendAreaSettings[index].price;
+    return gFriendAreaSettings[index].price;
 }
 
 void sub_8092558(u8 *buffer, u8 index)
@@ -119,7 +119,7 @@ void WriteFriendAreaName(u8 *buffer, u8 index, bool8 printPrice)
     u8 priceBuffer[20];
 
     if (printPrice) {
-        WriteHighDecimal(sFriendAreaSettings[index].price, priceBuffer, 1);
+        WriteHighDecimal(gFriendAreaSettings[index].price, priceBuffer, 1);
         sprintfStatic(buffer, sUnknown_81098AC, gFriendAreaNames[index], 96, priceBuffer);
     }
     else
@@ -162,14 +162,14 @@ void GetFriendAreaCapacity2(u8 friendArea, FriendAreaCapacity *dst, bool8 checkL
     iVar4 = 0;
 
     for (i = 0; i < friendArea; i++)
-        iVar4 += sFriendAreaSettings[i].num_pokemon;
+        iVar4 += gFriendAreaSettings[i].num_pokemon;
 
     dst->unk8 = iVar4;
     dst->hasFriendArea = gFriendAreas[i];
 
     if (dst->hasFriendArea) {
         dst->currNoPokemon = 0;
-        dst->maxPokemon = sFriendAreaSettings[i].num_pokemon;
+        dst->maxPokemon = gFriendAreaSettings[i].num_pokemon;
 
         for (i = 0; i < dst->maxPokemon; i++, iVar4++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[iVar4];
@@ -197,14 +197,14 @@ void GetFriendAreaCapacity(u8 areaId, FriendAreaCapacity *dst, bool8 checkPartne
     r5 = 0;
 
     for (i = 0; i < areaId; i++)
-        r5 += sFriendAreaSettings[i].num_pokemon;
+        r5 += gFriendAreaSettings[i].num_pokemon;
 
     dst->unk8 = r5;
     dst->hasFriendArea = gFriendAreas[i];
 
     if (dst->hasFriendArea) {
         dst->currNoPokemon = 0;
-        dst->maxPokemon = sFriendAreaSettings[i].num_pokemon;
+        dst->maxPokemon = gFriendAreaSettings[i].num_pokemon;
         max = dst->maxPokemon;
 
         for (i = 0; i < max; i++, r5++) {

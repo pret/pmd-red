@@ -1,15 +1,13 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_ai_item_weight.h"
-
 #include "constants/status.h"
 #include "constants/targeting.h"
-#include "dungeon_ai_targeting.h"
 #include "dungeon_map_access.h"
-#include "dungeon_pokemon_attributes.h"
+#include "dungeon_logic.h"
 #include "dungeon_util.h"
 #include "moves.h"
 #include "number_util.h"
-#include "status_checks_1.h"
 
 u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
 {

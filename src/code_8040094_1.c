@@ -18,8 +18,8 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "sprite.h"
-#include "tile_types.h"
 #include "weather.h"
+#include "dungeon_map_access.h"
 
 struct UnkStruct_8040094
 {
