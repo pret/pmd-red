@@ -67,7 +67,7 @@ extern void sub_803E830(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
 extern void IncrementThievingSuccesses(void);
-extern void sub_80841EC(void);
+extern void ShowDungeonClearedWindow(void);
 extern void sub_8084424(void);
 extern void sub_8086130(void);
 extern void FreeDungeonPokemonSprites(void);
@@ -654,7 +654,7 @@ void RunDungeon_Async(UnkStruct_RunDungeon *r8)
         sub_803E13C();
         sub_800CDA8(4);
         if (gDungeon->unk6 == 0 && sub_8083C88(gDungeon->unk644.unk34)) {
-            sub_80841EC();
+            ShowDungeonClearedWindow();
         }
 
         if (sub_8083C24()) {

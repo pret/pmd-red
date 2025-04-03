@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/iq_skill.h"
