@@ -621,6 +621,7 @@ SECTIONS {
         src/dungeon_random.o(.rodata);
         src/dungeon_cleared_window.o(.rodata);
         src/dungeon_jobs.o(.rodata);
+        src/code_80848F0.o(.rodata);
         data/data_8107224.o(.rodata);
         src/pokemon.o(.rodata);
         data/data_81076E4.o(.rodata);

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/weather.h"
 #include "constants/dungeon.h"
 #include "constants/direction.h"
@@ -34,6 +35,7 @@
 #include "code_800E9E4.h"
 #include "code_80869E4.h"
 #include "pokemon_3.h"
+#include "dungeon_boss_dialogue.h"
 
 struct RgbS16
 {
@@ -49,14 +51,7 @@ extern s32 gUnknown_202F3D8;
 
 extern const u8 gUnknown_8107358[25];
 extern const DungeonPos gUnknown_80F4598[];
-extern const unkStruct_2039DB0 gUnknown_8107374;
-extern const unkStruct_2039DB0 gUnknown_8107380;
-extern const u8 *const gUnknown_810665C;
-extern const u8 *const gUnknown_810668C;
-extern const u8 *const gUnknown_81066D4;
-extern const u8 *const gUnknown_81066F0;
-extern const u8 *const gUnknown_810671C;
-extern const u32 gUnknown_8107314[];
+extern const struct unkStruct_2039DB0 gUnknown_8107380;
 
 extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
 extern void ShowWholeRevealedDungeonMap(void);
@@ -85,16 +80,55 @@ extern void PlaySoundEffect(u32);
 extern u32 sub_8002A70(u32, s32, u8);
 extern s8 sub_8002984(s8, u8);
 
-static void sub_80861EC(Entity *);
-
 struct unkData_8107234
 {
-    u8 unk0[8];
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
 };
 
-extern struct unkData_8107234 gUnknown_8107234[];
+static void sub_8084854(const struct unkData_8107234 *);
+static void sub_80861EC(Entity *);
 
-void sub_8084854(struct unkData_8107234 *);
+static const struct unkData_8107234 gUnknown_8107234[28] = {
+    [0] = {1, 1, 0, 2, 1, 3},
+    [1] = {2, 4, 2, 5, 3, 6},
+    [2] = {3, 7, 4, 8, 5, 9},
+    [3] = {4, 0xA, 6, 0xB, 7, 0xC},
+    [4] = {5, 0xD, 8, 0xE, 9, 0xF},
+    [5] = {6, 0x10, 0xA, 0x11, 0xA, 0x11},
+    [6] = {7, 0x12, 0xB, 0x13, 0xC, 0x14},
+    [7] = {0x14, 0x15, 0xD, 0x16, 0xD, 0x16},
+    [8] = {8, 0x17, 0xE, 0x18, 0xF, 0x19},
+    [9] = {0xB, 0x1A, 0x10, 0x1B, 0x11, 0x1C},
+    [10] = {9, 0x1D, 0x12, 0x1E, 0x13, 0x1F},
+    [11] = {0xC, 0x20, 0x14, 0x21, 0x15, 0x22},
+    [12] = {0xD, 0x23, 0x16, 0x24, 0x17, 0x25},
+    [13] = {0xE, 0x26, 0x18, 0x27, 0x19, 0x28},
+    [14] = {0xF, 0x29, 0x40, 0x29, 0x1A, 0x2A},
+    [15] = {0x10, 0x2B, 0x1B, 0x2C, 0x1C, 0x2D},
+    [16] = {0x11, 0x2E, 0x40, 0x2E, 0x40, 0x2E},
+    [17] = {0x12, 0x2F, 0x40, 0x2F, 0x40, 0x2F},
+    [18] = {0x13, 0x30, 0x40, 0x30, 0x40, 0x30},
+    [19] = {0xA, 0x31, 0x40, 0x31, 0x1E, 0x32},
+    [20] = {0x15, 0x33, 0x40, 0x33, 0x40, 0x33},
+    [21] = {0x16, 0x34, 0x40, 0x34, 0x40, 0x34},
+    [22] = {0x17, 0x35, 0x40, 0x35, 0x40, 0x35},
+    [23] = {0x19, 0x36, 0x40, 0x36, 0x40, 0x36},
+    [24] = {0x1B, 0x37, 0x40, 0x37, 0x40, 0x37},
+    [25] = {0x1A, 0x38, 0x20, 0x39, 0x20, 0x39},
+    [26] = {0x18, 0x3A, 0x21, 0x3B, 0x21, 0x3B},
+    [27] = {0},
+};
+
+static const s32 gUnknown_8107314[] = {
+    0, -1, 1, -2, 2, -3, 3, -4,
+    4, -4, 4, -4, 4, -4, 4, -4,
+    4
+};
 
 EWRAM_DATA static unkStruct_202F3D0 gUnknown_202F3D0 = {0};
 
@@ -106,12 +140,12 @@ void sub_80847D4(void)
     gDungeon->unk3A0D = 0;
     gDungeon->unk1356C = 0;
     ShowWholeRevealedDungeonMap();
-    for(index = 0; index < 0x3e7 && gUnknown_8107234[index].unk0[0] != 0;  index++) {
+    for(index = 0; index < 0x3e7 && gUnknown_8107234[index].unk0 != 0;  index++) {
         fixedRoomNumber = gDungeon->fixedRoomNumber;
         if (fixedRoomNumber - 0x1c < 0x16) {
             fixedRoomNumber = 0x1b;
         }
-        if (fixedRoomNumber == gUnknown_8107234[index].unk0[0])
+        if (fixedRoomNumber == gUnknown_8107234[index].unk0)
         {
             sub_8084854(&gUnknown_8107234[index]);
             break;
@@ -120,32 +154,26 @@ void sub_80847D4(void)
     sub_8097FF8();
 }
 
-void sub_8084854(struct unkData_8107234 *param_1)
+void sub_8084854(const struct unkData_8107234 *param_1)
 {
-  if (gDungeon->unk644.unk34 != 0) {
-       gDungeon->unk3A0D = param_1->unk0[5];
-  }
-  else
-  {
-    if (sub_8098100(param_1->unk0[4]) != 0) {
-        gDungeon->unk3A0D = param_1->unk0[5];
+    if (gDungeon->unk644.unk34 != 0) {
+        gDungeon->unk3A0D = param_1->unk5;
     }
-    else
-    {
-      if (sub_8098100(param_1->unk0[2]) != 0) {
-        gDungeon->unk3A0D = param_1->unk0[3];
-      }
-      else
-      {
-        gDungeon->unk3A0D = param_1->unk0[1];
-        if (param_1->unk0[2] != 0x40) {
-          sub_8097FA8(param_1->unk0[2]);
+    else if (sub_8098100(param_1->unk4) != 0) {
+        gDungeon->unk3A0D = param_1->unk5;
+    }
+    else if (sub_8098100(param_1->unk2) != 0) {
+        gDungeon->unk3A0D = param_1->unk3;
+    }
+    else {
+        gDungeon->unk3A0D = param_1->unk1;
+        if (param_1->unk2 != 0x40) {
+            sub_8097FA8(param_1->unk2);
         }
-      }
     }
-  }
-  gDungeon->unk644.unk31 = 1;
-  sub_807E5E4(WEATHER_CLEAR);
+
+    gDungeon->unk644.unk31 = 1;
+    sub_807E5E4(WEATHER_CLEAR);
 }
 
 u32 sub_80848EC(void)
@@ -1134,12 +1162,9 @@ bool8 ShouldRunMonsterAI(Entity *pokemon)
 
 UNUSED static void sub_8085B0C(Entity *pokemon)
 {
-  s32 index;
-  u8 local_28 [25];
+  s32 index = 0;
+  u8 local_28[] = {4, 3, 2, 3, 4, 5, 6, 5, 4, 3, 2, 3, 4, 5, 6, 5, 4, 4, 4, 4, 4, 4, 5, 6, 0};
 
-  index = 0;
-
-  memcpy(local_28, gUnknown_8107358, 25);
   while (local_28[index] != 0) {
     SetFacingDirection(pokemon, local_28[index]);
     sub_803E708(6,0x46);
@@ -1308,11 +1333,12 @@ void sub_8085EB0(void)
     gDungeon->unk181e8.unk18215 = 1;
 }
 
+extern const unkStruct_2039DB0 gUnknown_8107374;
+
 u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 param_5)
 {
     u32 uVar1;
     unkStruct_80416E0 local_40;
-    unkStruct_2039DB0 stack1C;
 
     bool8 param_5_bool8;
     s32 param_1_s32 = param_1;
@@ -1331,7 +1357,7 @@ u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 
     local_40.unk10 = 0;
     local_40.unk12 = 0;
     local_40.unk18 = 0xffff;
-    stack1C = gUnknown_8107374;
+    local_40.unk1C = gUnknown_8107374;
 
     uVar1 = sub_800E890(&local_40);
     if (param_5_bool8) {
@@ -1451,7 +1477,6 @@ s32 sub_80861F8(s32 param_1,Entity *param_2,bool32 param_3)
     s32 uStack_38;
     DungeonPos pos;
     unkStruct_80416E0 stack;
-    unkStruct_2039DB0 stack1C;
 
     // Needed to match.
     s32 param_1Copy2 = (s16) param_1;
@@ -1478,7 +1503,7 @@ s32 sub_80861F8(s32 param_1,Entity *param_2,bool32 param_3)
     stack.unk12 = pos.y;
     stack.unk14 = uStack_38;
     stack.unk18 = 0xffff;
-    stack1C = gUnknown_8107380;
+    stack.unk1C = gUnknown_8107380;
 
     uVar2 = sub_800E890(&stack);
     if (param_3_bool32) {
