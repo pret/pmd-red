@@ -19,6 +19,8 @@
 #include "text_3.h"
 #include "dungeon_config.h"
 
+// File split could be wrong here. Todo.
+
 extern bool8 sub_80848EC(void);
 extern u8 GetFloorType(void);
 extern const u8 *GetDungeonName2(u8 dungeon);

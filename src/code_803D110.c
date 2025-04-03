@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/dungeon.h"
 #include "structs/str_202ED28.h"
 #include "structs/str_202EDE8.h"
@@ -19,10 +20,10 @@
 #include "text_3.h"
 #include "dungeon_config.h"
 
+// File split is correct.
+
 extern s32 sub_80902C8(u8 dungeon);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
-
-extern const char gUnknown_80F4D8C[]; // "mapparam"
 
 struct UnkDungeonFileData
 {
@@ -59,7 +60,7 @@ void sub_803D4D0(void)
         return;
 
     gDungeon->unk1C570 = gDungeon->unk644.dungeonLocation2;
-    file = OpenFileAndGetFileDataPtr(gUnknown_80F4D8C, &gDungeonFileArchive);
+    file = OpenFileAndGetFileDataPtr("mapparam", &gDungeonFileArchive);
     strPtr = &((struct UnkDataFileStruct *)(file->data))->unk0[gDungeon->unk1C570.id][gDungeon->unk1C570.floor];
 
     gDungeon->unk1CEC8 = GetDungeonFloorCount(gDungeon->unk644.dungeonLocation.id);

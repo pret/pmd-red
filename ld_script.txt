@@ -554,10 +554,9 @@ SECTIONS {
         src/personality_test2.o(.rodata);
         src/code_803D0D8.o(.rodata);
         src/dungeon_pos_data.o(.rodata);
-        data/data_80F4D44.o(.rodata);
+        src/code_803D110.o(.rodata);
         src/dungeon_config.o(.rodata);
         data/data_80F59C8_1.o(.rodata);
-        src/code_803D110.o(.rodata);
         src/code_803DA7C.o(.rodata);
         data/data_80F59C8_3.o(.rodata);
         src/code_803E724.o(.rodata);
