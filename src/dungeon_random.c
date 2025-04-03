@@ -1,5 +1,11 @@
 #include "global.h"
 #include "dungeon_random.h"
+#include "constants/ability.h"
+#include "constants/iq_skill.h"
+#include "structs/dungeon_entity.h"
+#include "dungeon_logic.h"
+#include "dungeon_random.h"
+#include "dungeon_util.h"
 
 EWRAM_INIT u32 gDungeonRngState = {1};
 EWRAM_INIT u32 gUnknown_203B458 = {1};
@@ -75,3 +81,21 @@ bool8 DungeonRandOutcome_2(s32 percentChance)
     return FALSE;
 }
 
+s32 CalculateStatusTurns(Entity *target, const s16 *turnRange, bool8 factorCurerSkills)
+{
+  s32 numTurns;
+
+  numTurns = DungeonRandRange(turnRange[0],turnRange[1]);
+  if (EntityIsValid(target) && (GetEntityType(target) == ENTITY_MONSTER) && (factorCurerSkills)) {
+    if (IQSkillIsEnabled(target, IQ_SELF_CURER) && (numTurns != 0x7f)) {
+      numTurns /= 2;
+    }
+    if (AbilityIsActive(target, ABILITY_NATURAL_CURE) && (numTurns != 0x7f) && (4 < numTurns)) {
+      numTurns = 5;
+    }
+  }
+  if (numTurns < 1) {
+    numTurns = 1;
+  }
+  return numTurns;
+}

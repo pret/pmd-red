@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "dungeon_range.h"
 #include "dungeon_leader.h"
 #include "dungeon_util.h"

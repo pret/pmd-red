@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/bg_music.h"
 #include "structs/menu.h"
 #include "code_80118A4.h"

@@ -279,7 +279,6 @@ SECTIONS {
         src/dungeon_8083AB0.o(.text);
         src/dungeon_music.o(.text);
         src/dungeon_random.o(.text);
-        src/code_808417C.o(.text);
         asm/code_808417C.o(.text);
         src/code_8084778.o(.text);
         src/code_80848F0.o(.text);
@@ -620,6 +619,9 @@ SECTIONS {
         src/trap.o(.rodata);
         data/pksdir_3.o(.rodata);
         src/dungeon_serializer.o(.rodata);
+        src/dungeon_range.o(.rodata);
+        src/dungeon_8083AB0.o(.rodata);
+        src/dungeon_music.o(.rodata);
         data/data_8107224.o(.rodata);
         src/pokemon.o(.rodata);
         data/data_81076E4.o(.rodata);

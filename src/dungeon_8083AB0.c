@@ -1,4 +1,6 @@
 #include "global.h"
+#include "globaldata.h"
+#include "dungeon_8083AB0.h"
 #include "dungeon.h"
 #include "dungeon_util.h"
 #include "text_util.h"

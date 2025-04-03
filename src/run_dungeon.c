@@ -22,6 +22,7 @@
 #include "code_8094F88.h"
 #include "code_8099360.h"
 #include "cpu.h"
+#include "dungeon_8083AB0.h"
 #include "dungeon.h"
 #include "dungeon_ai.h"
 #include "dungeon_config.h"

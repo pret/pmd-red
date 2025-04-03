@@ -5,7 +5,7 @@
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
-#include "code_808417C.h"
+#include "dungeon_random.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"

@@ -42,6 +42,7 @@
 #include "def_filearchives.h"
 #include "code_803D110.h"
 #include "dungeon_strings.h"
+#include "dungeon_8083AB0.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);

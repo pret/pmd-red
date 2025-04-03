@@ -6,6 +6,7 @@
 #include "code_8044CC8.h"
 #include "code_8097DD0.h"
 #include "dungeon.h"
+#include "dungeon_8083AB0.h"
 #include "dungeon_action.h"
 #include "dungeon_leader.h"
 #include "dungeon_main.h"

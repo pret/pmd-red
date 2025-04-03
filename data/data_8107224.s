@@ -4,12 +4,6 @@
 .string "pksdir0\0"
 @ ???
 .string "pksdir0\0"
-@ ???
-.string "pksdir0\0"
-@ ???
-.string "pksdir0\0"
-@ ???
-.string "pksdir0\0"
 @ START code_808417C #1
 .string "pksdir0\0"
 
