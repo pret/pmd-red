@@ -276,6 +276,7 @@ SECTIONS {
         src/dungeon_serializer.o(.text);
         src/dungeon_range.o(.text);
         asm/code_8083654.o(.text);
+        src/dungeon_8083AB0.o(.text);
         src/dungeon_music.o(.text);
         src/dungeon_random.o(.text);
         src/code_808417C.o(.text);
