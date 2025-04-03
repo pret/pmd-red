@@ -19,9 +19,12 @@
 #include "code_803E668.h"
 #include "code_806CD90.h"
 #include "code_80861A8.h"
+#include "code_8085E98.h"
 #include "dungeon_leader.h"
 #include "random.h"
 #include "math.h"
+#include "code_8004AA0.h"
+#include "bg_palette_buffer.h"
 
 extern s32 gUnknown_202F3D8;
 
@@ -1140,4 +1143,119 @@ bool8 sub_8085B80(struct_8085B80 *a0)
         }
     }
     return ret;
+}
+
+extern OpenedFile *gDungeonPaletteFile;
+
+struct RgbS16
+{
+    s16 r;
+    s16 g;
+    s16 b;
+};
+
+extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
+
+extern s32 gDungeonBrightness;
+extern RGB gUnknown_202ECA4[];
+
+void SetDungeonBGColorRGB(s32 r, s32 g, s32 b, bool8 a3, bool8 a4)
+{
+    s32 i, palIndex, n;
+    const RGB *colorPtr;
+    RGB color;
+    struct RgbS16 colorS16;
+
+    n = 160;
+    sub_8085E98();
+    palIndex = 0;
+    colorPtr = gDungeonPaletteFile->data;
+    if (a4) {
+        if (r >= 0) { r /= 2; }
+        if (g >= 0) { g /= 2; }
+        if (b >= 0) { b /= 2; }
+    }
+
+    color.r = 0;
+    color.g = 0;
+    color.b = 0;
+    SetBGPaletteBufferColorRGB(palIndex, &color, gDungeonBrightness, gDungeon->colorRamp);
+    colorPtr++;
+    palIndex++;
+
+    for (i = 1; i < n; i++) {
+        s32 newR = colorPtr->r + r;
+        s32 newG = colorPtr->g + g;
+        s32 newB = colorPtr->b + b;
+
+        if (newR > 0xFF) { newR = 0xFF; }
+        if (newG > 0xFF) { newG = 0xFF; }
+        if (newB > 0xFF) { newB = 0xFF; }
+
+        if (newR < 0)       { newR = 0; }
+        if (newG < 0)       { newG = 0; }
+        if (newB < 0)       { newB = 0; }
+
+        color.r = newR;
+        color.g = newG;
+        color.b = newB;
+        SetBGPaletteBufferColorRGB(palIndex, &color, gDungeonBrightness, gDungeon->colorRamp);
+        colorPtr++;
+        palIndex++;
+    }
+
+    colorS16.r = r;
+    colorS16.g = g;
+    colorS16.b = b;
+    sub_8004C00(gUnknown_202EE8C, 160, 32, gDungeonBrightness, gDungeon->colorRamp, &colorS16);
+    palIndex += 32;
+
+    colorPtr = gUnknown_202ECA4;
+    n = 32;
+    for (i = 0; i < n; i++) {
+        s32 newR = colorPtr->r + r;
+        s32 newG = colorPtr->g + g;
+        s32 newB = colorPtr->b + b;
+
+        if (newR > 0xFF) { newR = 0xFF; }
+        if (newG > 0xFF) { newG = 0xFF; }
+        if (newB > 0xFF) { newB = 0xFF; }
+
+        if (newR < 0)       { newR = 0; }
+        if (newG < 0)       { newG = 0; }
+        if (newB < 0)       { newB = 0; }
+
+        color.r = newR;
+        color.g = newG;
+        color.b = newB;
+        SetBGPaletteBufferColorRGB(palIndex, &color, gDungeonBrightness, gDungeon->colorRamp);
+        colorPtr++;
+        palIndex++;
+    }
+
+    if (a3) {
+        colorPtr = gDungeon->paletFile->data;
+        palIndex = 256;
+        n = 208;
+        for (i = 0; i < n; i++) {
+            s32 newR = colorPtr->r + r;
+            s32 newG = colorPtr->g + g;
+            s32 newB = colorPtr->b + b;
+
+            if (newR > 0xFF) { newR = 0xFF; }
+            if (newG > 0xFF) { newG = 0xFF; }
+            if (newB > 0xFF) { newB = 0xFF; }
+
+            if (newR < 0)       { newR = 0; }
+            if (newG < 0)       { newG = 0; }
+            if (newB < 0)       { newB = 0; }
+
+            color.r = newR;
+            color.g = newG;
+            color.b = newB;
+            SetBGPaletteBufferColorRGB(palIndex, &color, gDungeonBrightness, NULL);
+            colorPtr++;
+            palIndex++;
+        }
+    }
 }
