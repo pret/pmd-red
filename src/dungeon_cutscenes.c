@@ -28,7 +28,6 @@
 #include "pokemon_3.h"
 #include "pokemon.h"
 #include "position_util.h"
-#include "exclusive_pokemon.h"
 #include "trap.h"
 #include "math.h"
 #include "dungeon_config.h"
@@ -82,8 +81,10 @@ extern void sub_807EAA0(u32, u32);
 extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
 extern void sub_8085374(void);
 extern u32 GetRandomFloorItem(u32);
-extern u8 sub_8044B28(void);
 extern bool8 sub_8085B80(struct_8085B80 *);
+extern void sub_8086A3C(Entity *pokemon);
+extern void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex);
+extern u8 sub_8086AE4(s16 _index);
 
 void sub_8085F44(s32);
 void sub_808BBA8(Entity * );
@@ -145,56 +146,6 @@ void EnableJirachiWishWarpTile(void);
 void sub_808BB3C(DungeonPos *pos);
 void sub_8087144();
 void SkarmoryEntry(Entity *);
-
-void sub_8086A3C(Entity *pokemon)
-{
-    GetEntInfo(pokemon)->unk15C = 1;
-    GetEntInfo(pokemon)->unk15E = 1;
-}
-
-void sub_8086A54(Entity *pokemon)
-{
-    GetEntInfo(pokemon)->unk15C = 1;
-    GetEntInfo(pokemon)->unk15E = 0;
-}
-
-void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
-{
-  EntityInfo *entityInfo = GetEntInfo(pokemon);
-
-  entityInfo->bossFlag = TRUE;
-
-  // BUG: Source of the Reviver Seed Boss Glitch
-  //
-  // Video to demonstration:
-  // https://www.youtube.com/watch?v=rHu7EehrZ68
-  entityInfo->originalHP = entityInfo->maxHPStat;
-  if (newHP != 0) {
-    entityInfo->maxHPStat = newHP;
-    entityInfo->HP = newHP;
-  }
-
-  gDungeon->unk644.bossSongIndex = songIndex;
-  SetDefaultIQSkills(&entityInfo->IQSkillMenuFlags, entityInfo->bossFlag);
-  LoadIQSkills(pokemon);
-}
-
-void sub_8086AC0(void)
-{
-    if(!sub_8044B28())
-        if(gDungeon->unk2 == 0)
-            sub_8097FF8();
-}
-
-u8 sub_8086AE4(s16 _index)
-{
-    s32 pokeIndex = _index;
-
-    if(gDungeon->unk644.unk18 == 0)
-        return 1;
-    else
-        return HasRecruitedMon(pokeIndex);
-}
 
 void sub_8086B14(void)
 {

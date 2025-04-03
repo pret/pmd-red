@@ -26,7 +26,7 @@ void sub_8085F44(s32);
 
 void sub_8052FB8(const u8 *);
 
-void sub_8086124(Entity *entity, u8 param_2)
+UNUSED static void sub_8086124(Entity *entity, u8 param_2)
 {
     GetEntInfo(entity)->unk160 = param_2;
 }

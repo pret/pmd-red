@@ -29,8 +29,7 @@ void sub_8085EB0(void)
     gDungeon->unk181e8.unk18215 = 1;
 }
 
-u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4,
-                bool32 param_5)
+u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 param_5)
 {
     u32 uVar1;
     unkStruct_80416E0 local_40;
@@ -92,12 +91,10 @@ void sub_8085F78(void)
         default:
             break;
     }
-    return;
 }
 
 bool8 sub_80860A8(u8 id)
 {
-
     Item *item;
     EntityInfo *info;
     Entity *entity;

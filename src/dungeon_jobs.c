@@ -1,19 +1,18 @@
 #include "global.h"
+#include "globaldata.h"
+#include "dungeon_jobs.h"
 #include "dungeon_strings.h"
 #include "dungeon_util.h"
 #include "dungeon_message.h"
 #include "dungeon_misc.h"
 #include "dungeon_logic.h"
 #include "dungeon_leader.h"
-#include "code_8084778.h"
 #include "string_format.h"
 #include "code_80958E8.h"
 #include "mailbox.h"
 #include "pokemon_mid.h"
 #include "structs/str_dungeon.h"
 #include "constants/dungeon.h"
-
-extern const u8 gUnknown_8107224[];
 
 extern void sub_8042A34(DungeonPos *r0);
 extern void sub_804178C(u32);
@@ -208,7 +207,7 @@ void sub_8084778(void)
     s32 i;
     WonderMail *wm;
 
-    strcpy(gFormatBuffer_Monsters[3], gUnknown_8107224);
+    InlineStrcpy(gFormatBuffer_Monsters[3], "??????");
 
     for (i = 0; i < MAX_ACCEPTED_JOBS; i++) {
         wm = GetJobSlotInfo(i);

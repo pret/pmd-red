@@ -1,16 +1,5 @@
 .section .rodata
 
-@ START code_808417C #1
-.string "pksdir0\0"
-
-.string "pksdir0\0"
-
-.global gUnknown_8107224
-gUnknown_8107224: @ 8107224
-.string "??????\0"
-.align 2, 0
-@ END code_808417C #1
-@ code_8085B0C
 .string "pksdir0\0"
 
 .global gUnknown_8107234

@@ -8,6 +8,9 @@
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
 #include "random.h"
+#include "pokemon_3.h"
+#include "dungeon_logic.h"
+#include "exclusive_pokemon.h"
 #include "structs/str_dungeon.h"
 
 // This file may originally be merged with code_8086A3C.c and code_8057824_1.c
@@ -24,8 +27,7 @@ s8 sub_8002984(s8, u8);
 extern void BgColorCallNullsub4(void);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern void PlaySoundEffect(u32);
-
-
+extern u8 sub_8044B28(void);
 extern void sub_8085EB0(void);
 extern void sub_803E748(void);
 extern s32 GetCameraXPos(void);
@@ -488,5 +490,55 @@ void sub_80869E4(struct Entity *entity, s32 a1, u8 a2, s32 _someDirection)
         sub_806CE68(entity, info->action.direction);
         sub_803E708(a1, 70);
     }
+}
+
+void sub_8086A3C(Entity *pokemon)
+{
+    GetEntInfo(pokemon)->unk15C = 1;
+    GetEntInfo(pokemon)->unk15E = 1;
+}
+
+void sub_8086A54(Entity *pokemon)
+{
+    GetEntInfo(pokemon)->unk15C = 1;
+    GetEntInfo(pokemon)->unk15E = 0;
+}
+
+void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
+{
+  EntityInfo *entityInfo = GetEntInfo(pokemon);
+
+  entityInfo->bossFlag = TRUE;
+
+  // BUG: Source of the Reviver Seed Boss Glitch
+  //
+  // Video to demonstration:
+  // https://www.youtube.com/watch?v=rHu7EehrZ68
+  entityInfo->originalHP = entityInfo->maxHPStat;
+  if (newHP != 0) {
+    entityInfo->maxHPStat = newHP;
+    entityInfo->HP = newHP;
+  }
+
+  gDungeon->unk644.bossSongIndex = songIndex;
+  SetDefaultIQSkills(&entityInfo->IQSkillMenuFlags, entityInfo->bossFlag);
+  LoadIQSkills(pokemon);
+}
+
+void sub_8086AC0(void)
+{
+    if(!sub_8044B28())
+        if(gDungeon->unk2 == 0)
+            sub_8097FF8();
+}
+
+u8 sub_8086AE4(s16 _index)
+{
+    s32 pokeIndex = _index;
+
+    if(gDungeon->unk644.unk18 == 0)
+        return 1;
+    else
+        return HasRecruitedMon(pokeIndex);
 }
 
