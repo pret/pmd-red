@@ -5,6 +5,7 @@
 #include "constants/dungeon.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_806B7F8.h"
+#include "structs/sprite_oam.h"
 #include "dungeon_cutscenes.h"
 #include "dungeon_music.h"
 #include "dungeon_logic.h"
@@ -25,17 +26,66 @@
 #include "math.h"
 #include "code_8004AA0.h"
 #include "bg_palette_buffer.h"
+#include "code_800E9A8.h"
+#include "items.h"
+#include "code_800DAC0.h"
+#include "code_800ED38.h"
+#include "sprite.h"
+#include "code_800E9E4.h"
+#include "code_80869E4.h"
+#include "pokemon_3.h"
 
+struct RgbS16
+{
+    s16 r;
+    s16 g;
+    s16 b;
+};
+
+extern OpenedFile *gDungeonPaletteFile;
+extern s32 gDungeonBrightness;
+extern RGB gUnknown_202ECA4[];
 extern s32 gUnknown_202F3D8;
 
 extern const u8 gUnknown_8107358[25];
 extern const DungeonPos gUnknown_80F4598[];
+extern const unkStruct_2039DB0 gUnknown_8107374;
+extern const unkStruct_2039DB0 gUnknown_8107380;
+extern const u8 *const gUnknown_810665C;
+extern const u8 *const gUnknown_810668C;
+extern const u8 *const gUnknown_81066D4;
+extern const u8 *const gUnknown_81066F0;
+extern const u8 *const gUnknown_810671C;
+extern const u32 gUnknown_8107314[];
 
+extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
 extern void ShowWholeRevealedDungeonMap(void);
 extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F4A0(u32);
 extern void sub_803F878(s32, s32);
+extern void sub_8085F44(s32);
+extern bool8 sub_800E90C(DungeonPos *);
+extern void sub_8088EE8(void);
+extern void sub_8088848(void);
+extern void sub_808A718(void);
+extern s32 sub_800E700(s32);
+extern void sub_8085F44(s32);
+extern void sub_8052FB8(const u8 *);
+extern void BgColorCallNullsub4(void);
+extern void PlaySoundEffect(u32);
+extern u8 sub_8044B28(void);
+extern void sub_8085EB0(void);
+extern void sub_803E748(void);
+extern s32 GetCameraXPos(void);
+extern s32 GetCameraYPos(void);
+extern void sub_8086A54(Entity *);
+extern void sub_8086A3C(Entity *);
+extern void PlaySoundEffect(u32);
+extern u32 sub_8002A70(u32, s32, u8);
+extern s8 sub_8002984(s8, u8);
+
+static void sub_80861EC(Entity *);
 
 struct unkData_8107234
 {
@@ -45,6 +95,8 @@ struct unkData_8107234
 extern struct unkData_8107234 gUnknown_8107234[];
 
 void sub_8084854(struct unkData_8107234 *);
+
+EWRAM_DATA static unkStruct_202F3D0 gUnknown_202F3D0 = {0};
 
 void sub_80847D4(void)
 {
@@ -1145,20 +1197,6 @@ bool8 sub_8085B80(struct_8085B80 *a0)
     return ret;
 }
 
-extern OpenedFile *gDungeonPaletteFile;
-
-struct RgbS16
-{
-    s16 r;
-    s16 g;
-    s16 b;
-};
-
-extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
-
-extern s32 gDungeonBrightness;
-extern RGB gUnknown_202ECA4[];
-
 void SetDungeonBGColorRGB(s32 r, s32 g, s32 b, bool8 a3, bool8 a4)
 {
     s32 i, palIndex, n;
@@ -1259,3 +1297,697 @@ void SetDungeonBGColorRGB(s32 r, s32 g, s32 b, bool8 a3, bool8 a4)
         }
     }
 }
+
+void sub_8085E98(void)
+{
+    gDungeon->unk181e8.unk18215 = 0;
+}
+
+void sub_8085EB0(void)
+{
+    gDungeon->unk181e8.unk18215 = 1;
+}
+
+u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 param_5)
+{
+    u32 uVar1;
+    unkStruct_80416E0 local_40;
+    unkStruct_2039DB0 stack1C;
+
+    bool8 param_5_bool8;
+    s32 param_1_s32 = param_1;
+
+
+    param_5_bool8 = param_5;
+
+    sub_800EE5C(param_1_s32);
+    sub_800EF64();
+    DungeonRunFrameActions(0x46);
+    local_40.unk0 = param_1;
+    local_40.unk4 = param_2;
+    local_40.dir = param_3;
+    local_40.x = param_4->x;
+    local_40.y = param_4->y;
+    local_40.unk10 = 0;
+    local_40.unk12 = 0;
+    local_40.unk18 = 0xffff;
+    stack1C = gUnknown_8107374;
+
+    uVar1 = sub_800E890(&local_40);
+    if (param_5_bool8) {
+        sub_8085F44(uVar1);
+        uVar1 = -1;
+    }
+    return uVar1;
+}
+
+void sub_8085F44(s32 param_1)
+{
+    while (sub_800E9A8(param_1)) {
+        sub_800E90C(&gDungeon->unk181e8.cameraPixelPos);
+        DungeonRunFrameActions(0x46);
+    }
+}
+
+void sub_8085F78(void)
+{
+    switch(gDungeon->unk3A0D) {
+        case 0x12:
+        case 0x13:
+        case 0x14:
+            sub_8088848();
+            break;
+        case 0x15:
+            sub_8088EE8();
+            break;
+        case 0x29:
+        case 0x2A:
+            sub_808A718();
+            break;
+
+        case 0:
+        case 0x3C:
+        default:
+            break;
+    }
+}
+
+bool8 sub_80860A8(u8 id)
+{
+    Item *item;
+    EntityInfo *info;
+    Entity *entity;
+    int index;
+
+
+    for(index = 0; index < INVENTORY_SIZE; index++)
+    {
+        item = &gTeamInventoryRef->teamItems[index];
+        if((item->flags & 1) != 0)
+        {
+            if((item->id) == id) return TRUE;
+        }
+    }
+
+    for(index = 0; index < MAX_TEAM_MEMBERS; index++)
+    {
+        entity = gDungeon->teamPokemon[index];
+        if (((EntityIsValid(entity)) && (info = GetEntInfo(entity), ((info->heldItem).flags & 1))) && ((info->heldItem).id == id)) return TRUE;
+    }
+    return FALSE;
+}
+
+UNUSED static void sub_8086124(Entity *entity, u8 param_2)
+{
+    GetEntInfo(entity)->unk160 = param_2;
+}
+
+void sub_8086130(void)
+{
+    DungeonFadeOutBGM(0x3c);
+    sub_803E708(0x3c,0x46);
+    sub_8052FB8(gUnknown_810665C);
+    sub_803E708(0x1e,0x46);
+    sub_8052FB8(gUnknown_810668C);
+    sub_803E708(0x1e,0x46);
+    sub_8052FB8(gUnknown_81066D4);
+    sub_803E708(0x1e,0x46);
+    sub_8052FB8(gUnknown_81066F0);
+    sub_803E708(0x1e,0x46);
+    sub_8052FB8(gUnknown_810671C);
+    sub_803E708(0x1e,0x46);
+}
+
+void sub_80861A8(Entity *a0)
+{
+    sub_806CDD4(a0, 0, NUM_DIRECTIONS);
+}
+
+void sub_80861B8(Entity *a0, u8 r1, s32 direction)
+{
+    EntityInfo *info;
+
+    info = GetEntInfo(a0);
+
+    sub_806CDD4(a0, r1, direction);
+    info->unkFE = r1;
+}
+
+void sub_80861D4(Entity *a0, u8 r1, s32 direction)
+{
+    sub_806CDD4(a0, r1, direction);
+    sub_80861EC(a0);
+}
+
+void sub_80861EC(Entity *a0)
+{
+    GetEntInfo(a0)->unkFE = 0x63;
+}
+
+s32 sub_80861F8(s32 param_1,Entity *param_2,bool32 param_3)
+{
+    EntityInfo *info;
+    s32 uVar2;
+    s32 uStack_38;
+    DungeonPos pos;
+    unkStruct_80416E0 stack;
+    unkStruct_2039DB0 stack1C;
+
+    // Needed to match.
+    s32 param_1Copy2 = (s16) param_1;
+    s32 param_1Copy = param_1Copy2;
+    u8 param_3_bool32 = param_3;
+
+    sub_800EE5C(param_1Copy2);
+    sub_800EF64();
+    DungeonRunFrameActions(0x46);
+    info = GetEntInfo(param_2);
+    pos.x = 0;
+    pos.y = 0;
+    uStack_38 = sub_800E700(param_1Copy);
+    if (uStack_38 != -1) {
+        sub_800569C(&pos, &param_2->axObj, uStack_38);
+    }
+    stack.unk0 = param_1Copy;
+    stack.unk4 = 0;
+    stack.dir = info->action.direction;
+    stack.x = (param_2->pixelPos).x / 256;
+    stack.y = (param_2->pixelPos).y / 256;
+
+    stack.unk10 = pos.x;
+    stack.unk12 = pos.y;
+    stack.unk14 = uStack_38;
+    stack.unk18 = 0xffff;
+    stack1C = gUnknown_8107380;
+
+    uVar2 = sub_800E890(&stack);
+    if (param_3_bool32) {
+        sub_8085F44(uVar2);
+        uVar2 = -1;
+    }
+    return uVar2;
+}
+
+void SpriteShockEffect(Entity *entity)
+{
+    PlaySoundEffect(464);
+    sub_80861F8(323, entity, 0);
+}
+
+static void sub_80862DC(Entity *entity)
+{
+    PixelPos pos;
+    pos.x = entity->pixelPos.x;
+    pos.y = entity->pixelPos.y + 0x3800;
+
+    sub_804535C(entity, &pos);
+    sub_806CDD4(entity, 0, DIRECTION_NORTH);
+    sub_8086A54(entity);
+}
+
+static void sub_8086310(Entity *entity)
+{
+    PixelPos pos;
+    pos.x = entity->pixelPos.x;
+    pos.y = entity->pixelPos.y + 0x9000;
+
+    sub_804535C(entity, &pos);
+    sub_806CE68(entity, DIRECTION_SOUTH);
+    sub_8086A3C(entity);
+    entity->isVisible = 0;
+}
+
+static void sub_8086348(Entity *entity)
+{
+    PixelPos pos;
+    pos.x = entity->pixelPos.x + 0x7800;
+    pos.y = entity->pixelPos.y - 0x2000;
+
+    sub_804535C(entity, &pos);
+    sub_806CDD4(entity, 0, DIRECTION_WEST);
+    sub_8086A54(entity);
+}
+
+static void sub_8086384(Entity *entity)
+{
+    PixelPos pos;
+    pos.x = entity->pixelPos.x + 0x7800;
+    pos.y = entity->pixelPos.y;
+
+    sub_804535C(entity, &pos);
+    sub_806CDD4(entity, 0, DIRECTION_WEST);
+    sub_8086A54(entity);
+}
+
+static void sub_80863B8(Entity *entity)
+{
+    sub_806CDD4(entity, 0, DIRECTION_NORTH);
+}
+
+static void sub_80863C8(Entity *entity)
+{
+    sub_806CDD4(entity, 0, DIRECTION_SOUTH);
+}
+
+static void sub_80863D8(Entity *entity)
+{
+    sub_806CDD4(entity, 0, DIRECTION_WEST);
+}
+
+static void sub_80863E8(Entity *entity)
+{
+    sub_806CDD4(entity, 6, DIRECTION_NORTH);
+}
+
+static void sub_80863F8(Entity *entity)
+{
+    sub_806CE68(entity, DIRECTION_NORTH);
+}
+
+static void sub_8086404(Entity *entity)
+{
+    sub_806CE68(entity, DIRECTION_WEST);
+}
+
+static void sub_8086410(Entity *entity)
+{
+    IncreaseEntityPixelPos(entity, 0, -0x100);
+}
+
+static void sub_8086424(Entity *entity)
+{
+    IncreaseEntityPixelPos(entity, 0, 0x100);
+}
+
+static void sub_8086434(Entity *entity)
+{
+    IncreaseEntityPixelPos(entity, -0x100, 0);
+}
+
+void sub_8086448(void)
+{
+    s32 i;
+    u32 XPos;
+    u32 YPos;
+
+    sub_80855E4(sub_80862DC);
+
+    for (i = 0; i < 56; i++) {
+        XPos = GetCameraXPos();
+        YPos = GetCameraYPos();
+        YPos += 0x100;
+        sub_803F878(XPos, YPos);
+        sub_80855E4(sub_8086410);
+        DungeonRunFrameActions(0x46);
+    }
+
+    sub_80855E4(sub_80863F8);
+}
+
+static void sub_8086494(void)
+{
+    s32 i;
+
+    sub_8085930(DIRECTION_NORTHEAST);
+    sub_803E708(4, 70);
+
+    sub_8085930(DIRECTION_EAST);
+    sub_803E708(4, 70);
+
+    sub_8085930(DIRECTION_SOUTHEAST);
+    sub_803E708(4, 70);
+
+    sub_8085930(DIRECTION_SOUTH);
+    sub_803E708(4, 70);
+
+    sub_80855E4(sub_80863C8);
+
+    for (i = 0; i < 144; i++) {
+        sub_80855E4(sub_8086424);
+        DungeonRunFrameActions(70);
+    }
+
+    sub_80855E4(sub_8086310);
+}
+
+void sub_8086500(void)
+{
+    s32 i;
+    u32 XPos;
+    u32 YPos;
+
+    sub_80855E4(sub_8086348);
+
+    for (i = 0; i < 72; i++) {
+        XPos = GetCameraXPos();
+        XPos += 0x100;
+        YPos = GetCameraYPos();
+        sub_803F878(XPos, YPos);
+        sub_80855E4(sub_8086434);
+        DungeonRunFrameActions(70);
+    }
+
+    sub_80855E4(sub_8086404);
+}
+
+void sub_808654C(void)
+{
+    s32 i;
+    u32 XPos;
+    u32 YPos;
+
+    sub_80855E4(sub_8086384);
+
+    for (i = 0; i < 120; i++) {
+        XPos = GetCameraXPos();
+        XPos += 0x100;
+        YPos = GetCameraYPos();
+        sub_803F878(XPos, YPos);
+        sub_80855E4(sub_8086434);
+        DungeonRunFrameActions(70);
+    }
+
+    sub_80855E4(sub_8086404);
+}
+
+void sub_8086598(void)
+{
+    s32 i;
+    u32 XPos;
+    u32 YPos;
+
+    sub_80855E4(sub_80863B8);
+
+    for (i = 0; i < 24; i++) {
+        XPos = GetCameraXPos();
+        YPos = GetCameraYPos();
+        sub_803F878(XPos, YPos - 0x100);
+        sub_80855E4(sub_8086410);
+        DungeonRunFrameActions(70);
+    }
+
+    sub_80855E4(sub_80863F8);
+}
+
+void sub_80865E8(void)
+{
+    s32 i;
+    u32 XPos;
+    u32 YPos;
+
+    sub_80855E4(sub_80863E8);
+
+    for (i = 0; i < 12; i++) {
+        XPos = GetCameraXPos();
+        YPos = GetCameraYPos();
+        sub_803F878(XPos, YPos + 0x200);
+        sub_80855E4(sub_8086424);
+        sub_80855E4(sub_8086424);
+        DungeonRunFrameActions(70);
+    }
+
+    sub_80855E4(sub_80863F8);
+}
+
+void sub_808663C(void)
+{
+    s32 i;
+    u32 XPos;
+    u32 YPos;
+
+    sub_80855E4(sub_80863E8);
+
+    for (i = 0; i < 16; i++) {
+        XPos = GetCameraXPos();
+        YPos = GetCameraYPos();
+        sub_803F878(XPos, YPos + 0x200);
+        sub_80855E4(sub_8086424);
+        sub_80855E4(sub_8086424);
+        DungeonRunFrameActions(70);
+    }
+
+    sub_80855E4(sub_80863F8);
+}
+
+void sub_8086690(void)
+{
+    s32 i;
+
+    sub_80855E4(sub_80863D8);
+
+    for (i = 0; i < 48; i++) {
+        sub_80855E4(sub_8086434);
+        DungeonRunFrameActions(70);
+    }
+
+    sub_80855E4(sub_8086404);
+}
+
+void sub_80866C4(const struct DungeonDialogueStruct *dialogue)
+{
+    SpriteLookAroundEffect(xxx_call_GetLeader());
+    sub_803E708(10, 70);
+    DisplayDungeonDialogue(dialogue);
+    sub_803E708(10, 70);
+    sub_8086494();
+    gDungeon->unk2 = 1;
+}
+
+UNUSED static void sub_80866FC(void)
+{
+    s32 i;
+
+    for (i = 0; i >= -250; i -= 10) {
+        SetDungeonBGColorRGB(i, i, i, 1, 0);
+        DungeonRunFrameActions(70);
+    }
+}
+
+UNUSED static void sub_808627C(void)
+{
+    sub_803E748();
+}
+
+void sub_8086738(void)
+{
+    s32 i;
+
+    for (i = 0; i < 250; i += 10) {
+        SetDungeonBGColorRGB(i, i, i, 1, 0);
+        DungeonRunFrameActions(70);
+    }
+}
+
+void sub_8086764(void)
+{
+    s32 i;
+
+    for (i = 250; i >= 0; i -= 5) {
+        SetDungeonBGColorRGB(i, i, i, 1, 0);
+        DungeonRunFrameActions(70);
+    }
+
+    sub_8085EB0();
+}
+
+void sub_8086794(void)
+{
+    s32 i;
+
+    gDungeonBrightness = 0;
+
+    for (i = 0; i < 200; i++) {
+        SetDungeonBGColorRGB(0, 0, 0, 1, 0);
+        BgColorCallNullsub4();
+        DungeonRunFrameActions(70);
+
+        if ((i & 3) == 0) {
+            gDungeonBrightness++;
+            if (gDungeonBrightness == 31)
+                break;
+        }
+    }
+
+    DungeonRunFrameActions(70);
+    gDungeon->unk7 = 0;
+}
+
+void sub_80867F4(void)
+{
+    gUnknown_202F3D0.unk0 = 0;
+    gUnknown_202F3D0.unk1 = 0;
+    gUnknown_202F3D0.unk2 = 0;
+    gUnknown_202F3D0.unk3 = 0;
+    gUnknown_202F3D0.unk4 = 0;
+    gUnknown_202F3D0.unk5 = 0;
+}
+
+void sub_808680C(void)
+{
+    gUnknown_202F3D0.unk0 = 1;
+    if (gUnknown_202F3D0.unk3 != 0)
+        PlaySoundEffect(505);
+}
+
+void sub_808682C(void)
+{
+    gUnknown_202F3D0.unk0 = 0;
+}
+
+void sub_8086838(u8 entity, u8 r1, u8 r2)
+{
+    gUnknown_202F3D0.unk1 = entity;
+    gUnknown_202F3D0.unk2 = r1;
+    gUnknown_202F3D0.unk3 = r2;
+}
+
+void sub_8086848(u8 entity, u8 r1)
+{
+    gUnknown_202F3D0.unk4 = entity;
+    gUnknown_202F3D0.unk5 = r1;
+}
+
+void sub_8086854(void)
+{
+    if (gUnknown_202F3D0.unk0) {
+        if (gUnknown_202F3D0.unk4 == 0) {
+            if (gUnknown_202F3D0.unk1) {
+                gUnknown_202F3D0.unk4 = 80;
+                gUnknown_202F3D0.unk5 = 16;
+            }
+            else {
+                gUnknown_202F3D0.unk4 = RandInt(6) + 2;
+                gUnknown_202F3D0.unk5 = RandInt(6) + 2;
+            }
+
+            if (gUnknown_202F3D0.unk3 != 0)
+                PlaySoundEffect(505);
+        }
+        else
+            gUnknown_202F3D0.unk4--;
+
+        if (gUnknown_202F3D0.unk5 != 0)
+            gUnknown_202F3D0.unk5--;
+
+        gDungeon->unk181e8.unk181FC = gUnknown_8107314[gUnknown_202F3D0.unk5];
+    }
+    else
+        gDungeon->unk181e8.unk181FC = 0;
+}
+
+void sub_80868F4(Entity *entity)
+{
+    GetEntInfo(entity)->unk15C = 1;
+    GetEntInfo(entity)->unk15D = 1;
+}
+
+void sub_8086910(Entity *entity)
+{
+    GetEntInfo(entity)->unk15C = 0;
+    GetEntInfo(entity)->unk15D = 0;
+}
+
+void sub_808692C(void)
+{
+    sub_80859F0(DIRECTION_NORTHWEST);
+    sub_803E708(4, 70);
+
+    sub_80859F0(DIRECTION_WEST);
+    sub_803E708(4, 70);
+
+    sub_80859F0(DIRECTION_SOUTHWEST);
+    sub_803E708(4, 70);
+
+    sub_80859F0(DIRECTION_SOUTH);
+    sub_803E708(4, 70);
+}
+
+void SpriteLookAroundEffect(Entity *entity)
+{
+    s8 r4;
+    s8 r3;
+
+    r4 = sub_8002984(GetEntInfo(entity)->action.direction, 4);
+
+    sub_80869E4(entity, 4, 2, r4);
+
+    sub_803E708(15, 70);
+
+    r4 = sub_8002984(r4, 5);
+
+    sub_80869E4(entity, 4, 1, r4);
+
+    sub_803E708(15, 70);
+
+    r3 = sub_8002984(r4, 4);
+
+    sub_80869E4(entity, 4, 2, r3);
+
+    sub_803E708(15, 70);
+}
+
+void sub_80869E4(struct Entity *entity, s32 a1, u8 a2, s32 _someDirection)
+{
+    s32 someDirection = (s8) _someDirection;
+    struct EntityInfo *info = GetEntInfo(entity);
+    s32 direction = (s8) info->action.direction;
+
+    while (direction != someDirection) {
+        direction = (s8) sub_8002A70(direction, someDirection, a2);
+        info->action.direction = direction;
+        info->action.direction &= DIRECTION_MASK;
+        sub_806CE68(entity, info->action.direction);
+        sub_803E708(a1, 70);
+    }
+}
+
+void sub_8086A3C(Entity *pokemon)
+{
+    GetEntInfo(pokemon)->unk15C = 1;
+    GetEntInfo(pokemon)->unk15E = 1;
+}
+
+void sub_8086A54(Entity *pokemon)
+{
+    GetEntInfo(pokemon)->unk15C = 1;
+    GetEntInfo(pokemon)->unk15E = 0;
+}
+
+void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
+{
+  EntityInfo *entityInfo = GetEntInfo(pokemon);
+
+  entityInfo->bossFlag = TRUE;
+
+  // BUG: Source of the Reviver Seed Boss Glitch
+  //
+  // Video to demonstration:
+  // https://www.youtube.com/watch?v=rHu7EehrZ68
+  entityInfo->originalHP = entityInfo->maxHPStat;
+  if (newHP != 0) {
+    entityInfo->maxHPStat = newHP;
+    entityInfo->HP = newHP;
+  }
+
+  gDungeon->unk644.bossSongIndex = songIndex;
+  SetDefaultIQSkills(&entityInfo->IQSkillMenuFlags, entityInfo->bossFlag);
+  LoadIQSkills(pokemon);
+}
+
+void sub_8086AC0(void)
+{
+    if(!sub_8044B28())
+        if(gDungeon->unk2 == 0)
+            sub_8097FF8();
+}
+
+u8 sub_8086AE4(s16 _index)
+{
+    s32 pokeIndex = _index;
+
+    if(gDungeon->unk644.unk18 == 0)
+        return 1;
+    else
+        return HasRecruitedMon(pokeIndex);
+}
+

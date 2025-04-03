@@ -282,9 +282,6 @@ SECTIONS {
         src/dungeon_cleared_window.o(.text);
         src/dungeon_jobs.o(.text);
         src/code_80848F0.o(.text);
-        src/code_8085E98.o(.text);
-        src/code_80861A8.o(.text);
-        src/code_80869E4.o(.text);
         src/dungeon_cutscenes.o(.text);
         src/pokemon.o(.text);
         src/pokemon_3.o(.text);
