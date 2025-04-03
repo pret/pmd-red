@@ -1,11 +1,14 @@
 #include "global.h"
 #include "dungeon_range.h"
+#include "dungeon_leader.h"
+#include "dungeon_util.h"
 #include "sprite.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "structs/map.h"
 #include "structs/str_202ED28.h"
 
+EWRAM_INIT Entity *gLeaderPointer = NULL;
 
 bool8 IsPositionActuallyInSight(DungeonPos *pos1, DungeonPos *pos2)
 {
@@ -233,4 +236,26 @@ bool8 sub_8083568(s32 inX, s32 inY, u8 index)
     {
         return FALSE;
     }
+}
+
+Entity* GetLeader(void)
+{
+    Entity *leader = gLeaderPointer;
+    if (leader == NULL) {
+        s32 i;
+        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+            Entity *currentPokemon = gDungeon->teamPokemon[i];
+            if (EntityIsValid(currentPokemon) && GetEntInfo(currentPokemon)->isTeamLeader) {
+                gLeaderPointer = currentPokemon;
+                return currentPokemon;
+            }
+        }
+        return NULL;
+    }
+    return leader;
+}
+
+EntityInfo* GetLeaderInfo(void)
+{
+    return GetEntInfo(GetLeader());
 }
