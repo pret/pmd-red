@@ -288,6 +288,10 @@ SECTIONS {
         src/dungeon_cutscene_moltres.o(.text);
         src/dungeon_cutscene_articuno.o(.text);
         src/dungeon_cutscene_empty_summit.o(.text);
+        src/dungeon_cutscene_groudon.o(.text);
+        src/dungeon_cutscene_magma_cavern.o(.text);
+        src/dungeon_cutscene_rayquaza.o(.text);
+        src/dungeon_cutscene_mankey.o(.text);
         src/dungeon_cutscenes.o(.text);
         src/dungeon_cutscene_jirachi.o(.text);
         src/dungeon_cutscene_lugia.o(.text);
@@ -643,6 +647,10 @@ SECTIONS {
         src/dungeon_cutscene_moltres.o(.rodata);
         src/dungeon_cutscene_articuno.o(.rodata);
         src/dungeon_cutscene_empty_summit.o(.rodata);
+        src/dungeon_cutscene_groudon.o(.rodata);
+        src/dungeon_cutscene_magma_cavern.o(.rodata);
+        src/dungeon_cutscene_rayquaza.o(.rodata);
+        src/dungeon_cutscene_mankey.o(.rodata);
         data/data_8107224.o(.rodata);
         src/dungeon_cutscene_jirachi.o(.rodata);
         src/dungeon_cutscene_lugia.o(.rodata);
