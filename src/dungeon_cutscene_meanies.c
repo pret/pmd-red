@@ -47,7 +47,6 @@ extern void sub_8049B8C(void);
 extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_8086A54(Entity *);
 extern void ResetMonEntityData(EntityInfo *, u32);
-extern void sub_808BBA8(Entity * );
 extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);

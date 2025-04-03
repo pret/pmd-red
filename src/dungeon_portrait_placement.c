@@ -4,7 +4,7 @@
 
 // Note: this file is not part of overlay5. It's most likely arm9.bin, but I couldn't locate the address
 
-static const struct PortraitPlacementInfo gUnknown_8107544[] = {
+static const struct PortraitPlacementInfo sDungeonPortraitsInfo[] = {
     [0] = {{2,  8}, FALSE},
     [1] = {{12, 5}, FALSE},
     [2] = {{2,  8}, FALSE},
@@ -30,5 +30,5 @@ static const struct PortraitPlacementInfo gUnknown_8107544[] = {
 
 const struct PortraitPlacementInfo *GetPortraitPlacementInfo(u8 id)
 {
-    return &gUnknown_8107544[id];
+    return &sDungeonPortraitsInfo[id];
 }
