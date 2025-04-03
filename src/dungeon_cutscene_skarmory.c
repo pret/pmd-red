@@ -106,8 +106,7 @@ void sub_8086B94(void)
 
 void sub_8086BDC(u8 param_1, u8 param_2)
 {
-    param_2 += 0xFF;
-    if ((param_2 == 0 || param_2 == 1) && param_1 == 3) {
+    if ((param_2 == 1 || param_2 == 2) && param_1 == 3) {
         sub_8097FA8(1);
         gDungeon->unk2 = 1;
     }

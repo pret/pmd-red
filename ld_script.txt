@@ -285,7 +285,11 @@ SECTIONS {
         src/dungeon_cutscene_skarmory.o(.text);
         src/dungeon_cutscene_meanies.o(.text);
         src/dungeon_cutscene_zapdos.o(.text);
+        src/dungeon_cutscene_moltres.o(.text);
+        src/dungeon_cutscene_articuno.o(.text);
+        src/dungeon_cutscene_empty_summit.o(.text);
         src/dungeon_cutscenes.o(.text);
+        src/dungeon_portrait_placement.o(.text);
         src/pokemon.o(.text);
         src/pokemon_3.o(.text);
         src/dungeon.o(.text);
@@ -628,7 +632,11 @@ SECTIONS {
         src/dungeon_cutscene_skarmory.o(.rodata);
         src/dungeon_cutscene_meanies.o(.rodata);
         src/dungeon_cutscene_zapdos.o(.rodata);
+        src/dungeon_cutscene_moltres.o(.rodata);
+        src/dungeon_cutscene_articuno.o(.rodata);
+        src/dungeon_cutscene_empty_summit.o(.rodata);
         data/data_8107224.o(.rodata);
+        src/dungeon_portrait_placement.o(.rodata);
         src/pokemon.o(.rodata);
         data/data_81076E4.o(.rodata);
         src/game_options.o(.rodata);
