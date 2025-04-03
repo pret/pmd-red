@@ -14,7 +14,6 @@
 #include "moves.h"
 #include "number_util.h"
 #include "status.h"
-#include "status_actions.h"
 #include "text_util.h"
 #include "trap.h"
 #include "weather.h"
