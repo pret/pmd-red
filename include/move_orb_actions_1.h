@@ -1,5 +1,5 @@
-#ifndef MOVE_ORB_ACTIONS_1_H
-#define MOVE_ORB_ACTIONS_1_H
+#ifndef GUARD_MOVE_ORB_ACTIONS_1_H
+#define GUARD_MOVE_ORB_ACTIONS_1_H
 
 #include "structs/dungeon_entity.h"
 
@@ -80,4 +80,4 @@ bool8 SureShotMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_
 bool8 CosmicPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
 
-#endif /* ifndef MOVE_ORB_ACTIONS_1_H */
+#endif /* ifndef GUARD_MOVE_ORB_ACTIONS_1_H */

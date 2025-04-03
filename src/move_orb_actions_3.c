@@ -457,7 +457,7 @@ bool8 SuperpowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 para
   return flag;
 }
 
-bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, u32 stat, u32 param_5)
+bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, s32 stat, u32 param_5)
 {
   EntityInfo *entityInfo;
   bool8 flag;
@@ -943,7 +943,7 @@ bool8 RoarMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
     return TRUE;
 }
 
-bool8 HandleColorChange(Entity * pokemon, Entity * target)
+bool8 HandleColorChange(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 {
     u8 newType;
     const char *typeString;

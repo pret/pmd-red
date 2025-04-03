@@ -1,5 +1,5 @@
-#ifndef MOVE_ORB_ACTIONS_3_H
-#define MOVE_ORB_ACTIONS_3_H
+#ifndef GUARD_MOVE_ORB_ACTIONS_3_H
+#define GUARD_MOVE_ORB_ACTIONS_3_H
 
 #include "structs/dungeon_entity.h"
 
@@ -34,6 +34,32 @@ bool8 sub_805B17C(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 WrapMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 MagnitudeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 FakeOutMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 TailGlowMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 SurfMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 PerishSongMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 SunnyDayMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 BellyDrumMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 HiJumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,s32 param_4,u8 param_5);
+bool8 JumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,s32 param_4,u8 param_5);
+bool8 SteelWingMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4, u32 param_5);
+bool8 BulkUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 AmnesiaMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 HandleColorChange(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 TransformMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 SplashMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 SpitUpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 SwallowMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 GrowlMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 LightScreenMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 RestMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 sub_805A450(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 MudWaterSportMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 IngrainMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 MagicCoatMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 SpikesMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 WishMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 BounceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 AssistMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 sub_805AAD0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
-
-#endif /* ifndef MOVE_ORB_ACTIONS_3_H */
+#endif /* ifndef GUARD_MOVE_ORB_ACTIONS_3_H */

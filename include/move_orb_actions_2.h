@@ -1,5 +1,5 @@
-#ifndef MOVE_ORB_ACTIONS_2_H
-#define MOVE_ORB_ACTIONS_2_H
+#ifndef GUARD_MOVE_ORB_ACTIONS_2_H
+#define GUARD_MOVE_ORB_ACTIONS_2_H
 
 #include "structs/dungeon_entity.h"
 
@@ -51,7 +51,24 @@ bool8 WaterSpoutMoveAction(Entity *pokemon, Entity *target, Move *move, s32 para
 bool8 StockpileMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 void sub_80783C4(Entity * pokemon, Entity * target, bool8 param_3);
 bool8 StunSporeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 sub_8058C00(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 sub_8059CD8(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 ThunderboltMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 ZapCannonMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 MinimizeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 SwordsDanceMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 GrowthMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 PsychoBoostMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 SafeguardMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 MistMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 MoonlightMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 SolarBeamMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 sub_80599EC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 sub_8058EE0(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 PsywaveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 WarpMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 FlyMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 DiveMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
-
-#endif /* ifndef MOVE_ORB_ACTIONS_2_H */
+#endif /* ifndef GUARD_MOVE_ORB_ACTIONS_2_H */
 
