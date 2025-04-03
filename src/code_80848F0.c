@@ -51,7 +51,6 @@ extern s32 gUnknown_202F3D8;
 
 extern const u8 gUnknown_8107358[25];
 extern const DungeonPos gUnknown_80F4598[];
-extern const struct unkStruct_2039DB0 gUnknown_8107380;
 
 extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
 extern void ShowWholeRevealedDungeonMap(void);
@@ -1333,8 +1332,6 @@ void sub_8085EB0(void)
     gDungeon->unk181e8.unk18215 = 1;
 }
 
-extern const unkStruct_2039DB0 gUnknown_8107374;
-
 u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 param_5)
 {
     u32 uVar1;
@@ -1357,7 +1354,7 @@ u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 
     local_40.unk10 = 0;
     local_40.unk12 = 0;
     local_40.unk18 = 0xffff;
-    local_40.unk1C = gUnknown_8107374;
+    local_40.unk1C = (unkStruct_2039DB0) {0xFFFF, 0xFFFF, 0xFFFF, 0, 0, 0};
 
     uVar1 = sub_800E890(&local_40);
     if (param_5_bool8) {
@@ -1503,7 +1500,7 @@ s32 sub_80861F8(s32 param_1,Entity *param_2,bool32 param_3)
     stack.unk12 = pos.y;
     stack.unk14 = uStack_38;
     stack.unk18 = 0xffff;
-    stack.unk1C = gUnknown_8107380;
+    stack.unk1C = (unkStruct_2039DB0) {0xFFFF, 0xFFFF, 0xFFFF, 0, 0};
 
     uVar2 = sub_800E890(&stack);
     if (param_3_bool32) {
