@@ -1,9 +1,11 @@
 #include "global.h"
 #include "dungeon_range.h"
-
+#include "sprite.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "structs/map.h"
+#include "structs/str_202ED28.h"
+
 
 bool8 IsPositionActuallyInSight(DungeonPos *pos1, DungeonPos *pos2)
 {
@@ -137,33 +139,17 @@ bool8 IsTargetTwoTilesAway(DungeonPos *pos1, DungeonPos *pos2)
     s32 x2;
     s32 y2;
 
-    diff = pos1->x - pos2->x;
-    if (diff < 0)
-    {
-        diff = -diff;
-    }
+    diff = abs(pos1->x - pos2->x);
     if (diff < 2)
     {
-        diff = pos1->y - pos2->y;
-        if (diff < 0)
-        {
-            diff = -diff;
-        }
+        diff = abs(pos1->y - pos2->y);
         if (diff < 2)
         {
             return TRUE;
         }
     }
-    xDiff = pos1->x - pos2->x;
-    if (xDiff < 0)
-    {
-        xDiff = -xDiff;
-    }
-    yDiff = pos1->y - pos2->y;
-    if (yDiff < 0)
-    {
-        yDiff = -yDiff;
-    }
+    xDiff = abs(pos1->x - pos2->x);
+    yDiff = abs(pos1->y - pos2->y);
     if (yDiff < xDiff)
     {
         yDiff = xDiff;
@@ -228,4 +214,23 @@ bool8 IsTargetTwoTilesAway(DungeonPos *pos1, DungeonPos *pos2)
         return TRUE;
     }
     return FALSE;
+}
+
+bool8 sub_8083568(s32 inX, s32 inY, u8 index)
+{
+    s32 x = inX - gDungeon->unk181e8.cameraPixelPos.x;
+    s32 y = inY - gDungeon->unk181e8.cameraPixelPos.y;
+
+    if (x >= -16 && y >= -16 && x <= 255 && y <= 175)
+    {
+        SpriteSetX(&gUnknown_202ED28[0][index].sprite, x + gUnknown_202ED28[0][index].pos.x);
+        SpriteSetY(&gUnknown_202ED28[0][index].sprite, y + gUnknown_202ED28[0][index].pos.y);
+
+        AddSprite(&gUnknown_202ED28[0][index].sprite, 0, NULL, NULL);
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
 }

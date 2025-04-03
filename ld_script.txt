@@ -275,7 +275,6 @@ SECTIONS {
         src/trap.o(.text);
         src/dungeon_serializer.o(.text);
         src/dungeon_range.o(.text);
-        src/code_808333C.o(.text);
         src/dungeon_leader.o(.text);
         asm/code_8083654.o(.text);
         src/dungeon_music.o(.text);
