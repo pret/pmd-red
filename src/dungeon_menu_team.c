@@ -10,7 +10,7 @@
 #include "code_801B3C0.h"
 #include "code_803E46C.h"
 #include "code_803E724.h"
-#include "code_8044CC8.h"
+#include "dungeon_action.h"
 #include "code_806CD90.h"
 #include "code_8097DD0.h"
 #include "dungeon_action.h"

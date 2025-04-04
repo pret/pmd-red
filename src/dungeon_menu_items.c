@@ -24,7 +24,7 @@
 #include "dungeon_leader.h"
 #include "menu_input.h"
 #include "text_1.h"
-#include "code_8044CC8.h"
+#include "dungeon_action.h"
 #include "code_801B3C0.h"
 
 extern void PlayDungeonCancelSE(void);

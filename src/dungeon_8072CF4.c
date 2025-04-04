@@ -32,8 +32,6 @@
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F222;
-extern u8 gUnknown_202F32C;
-extern u8 gUnknown_202F32D;
 extern u8 gUnknown_203B434;
 
 extern u8 *gUnknown_80FA5B4[];
@@ -85,6 +83,9 @@ u32 sub_8075818(Entity *entity);
 extern void MarkLastUsedMonMove(Entity *entity, Move *move);
 bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move);
 extern void sub_80838EC(u8 *a);
+
+EWRAM_DATA u8 gUnknown_202F32C = 0;
+EWRAM_DATA u8 gUnknown_202F32D = 0;
 
 bool8 sub_8072CF4(Entity *entity)
 {

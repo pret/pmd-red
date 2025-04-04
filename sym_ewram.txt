@@ -125,10 +125,7 @@ gUnknown_202EE39: /* 202EE39 (sub_8060E38) */
 gUnknown_202EE3A: /* 202EE3A (sub_8060E38 - sub_8065DBC) */
 	.space 0xA
 
-gDungeonSubMenu: /* 202EE44 (sub_8044EC8 - sub_80647F0) */
-	.space 0x28
-gDungeonSubMenuItemsCount: /* 202EE6C (sub_8044F5C - sub_8067A80) */
-	.space 0x4
+    .include "src/dungeon_action.o"
 
 gUnknown_202EE70: /* 202EE70 (sub_804513C - sub_80828E0) */
 	.space 0x6
@@ -154,23 +151,14 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
     .include "src/dungeon_8067A80.o"
     .include "src/dungeon_logic.o"
     .include "src/code_80718D8.o"
-
-gUnknown_202F32C: /* 202F32C (xxx_dungeon_8042F6C - sub_8072CF4) */
-	.space 0x1
-gUnknown_202F32D: /* 202F32D (sub_8072CF4 - UseAttack) */
-	.space 0x3
-
+    .include "src/dungeon_8072CF4.o"
     .include "src/dungeon_ai_items.o"
     .include "src/code_8073CF0.o"
     .include "src/code_8075708.o"
 	.space 0x4
     .include "src/dungeon_ai_attack.o"
     .include "src/code_80848F0.o"
-
-gUnknown_202F3D8: /* 202F3D8 (sub_8085B4C - sub_8085B80) */
-	.space 0x8
-
-
+	.space 0x4
     .include "src/pokemon.o"
     .include "src/items.o"
     .include "src/rescue_team_info.o"

@@ -47,7 +47,6 @@ struct RgbS16
 extern OpenedFile *gDungeonPaletteFile;
 extern s32 gDungeonBrightness;
 extern RGB gUnknown_202ECA4[];
-extern s32 gUnknown_202F3D8;
 
 extern const u8 gUnknown_8107358[25];
 extern const DungeonPos gUnknown_80F4598[];
@@ -1170,6 +1169,8 @@ UNUSED static void sub_8085B0C(Entity *pokemon)
     index++;
   }
 }
+
+static EWRAM_DATA s32 gUnknown_202F3D8 = 0;
 
 void sub_8085B4C(struct_8085B80 a0[], s16 *a1[], Entity *a2[], s32 a3)
 {
