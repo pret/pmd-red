@@ -12,8 +12,6 @@
 #include "structs/map.h"
 #include "structs/str_202ED28.h"
 
-extern const DungeonPos gUnknown_80F4468[];
-
 EWRAM_INIT Entity *gLeaderPointer = NULL;
 
 bool8 IsPositionActuallyInSight(DungeonPos *pos1, DungeonPos *pos2)

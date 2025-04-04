@@ -563,7 +563,7 @@ static const DungeonPos gUnknown_80F4B30[101] = {
     {99, 99},
 };
 
-const struct Struct80F4CC4 gUnknown_80F4CC4[NUM_DIRECTIONS] = {
+const struct PositionArrayWithOffsets gUnknown_80F4CC4[NUM_DIRECTIONS] = {
     [DIRECTION_SOUTH] =     {gUnknown_80F4810,  1,  1},
     [DIRECTION_SOUTHEAST] = {gUnknown_80F4B30,  1,  1},
     [DIRECTION_EAST] =      {gUnknown_80F499C,  1,  1},
