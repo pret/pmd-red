@@ -63,14 +63,7 @@ gUnknown_202DCF8: /* 202DCF8 (sub_80001E8 - sub_800D9B8) */
     .include "src/rescue_password_menu.o"
     .include "src/code_803DA7C.o"
     .include "src/dungeon_vram.o"
-
-gUnknown_202EDDC: /* 202EDDC (sub_803EDF0) */
-	.space 0xC
-gUnknown_202EDE8: /* 202EDE8 (sub_803E250 - sub_803EDF0) */
-	.space 0x14
-gUnknown_202EDFC: /* 202EDFC (sub_803F27C - sub_803F878) */
-	.space 0x4
-
+    .include "src/dungeon_tilemap.o"
     .include "src/dungeon_map.o"
     .include "src/dungeon_engine.o"
     .include "src/dungeon_action.o"

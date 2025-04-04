@@ -199,8 +199,7 @@ SECTIONS {
         src/code_803D110.o(.text);
         src/code_803DA7C.o(.text);
         src/dungeon_vram.o(.text);
-        src/code_803E724.o(.text);
-        src/code_8040094.o(.text);
+        src/dungeon_tilemap.o(.text);
         src/dungeon_map.o(.text);
         src/code_8040094_1.o(.text);
         src/code_8041AD0.o(.text);
@@ -558,7 +557,7 @@ SECTIONS {
         data/data_80F59C8_1.o(.rodata);
         src/code_803DA7C.o(.rodata);
         src/dungeon_vram.o(.rodata);
-        src/code_803E724.o(.rodata);
+        src/dungeon_tilemap.o(.rodata);
         src/dungeon_map.o(.rodata);
         src/code_8040094_1.o(.rodata);
         data/pksdir_0.o(.rodata);

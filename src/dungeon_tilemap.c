@@ -32,7 +32,6 @@
 #include "code_80118A4.h"
 #include "dungeon_strings.h"
 
-extern u32 gUnknown_202EDFC;
 extern s32 gDungeonFramesCounter;
 
 extern void ShowWholeRevealedDungeonMap(void);
@@ -49,6 +48,8 @@ void sub_803F38C(void);
 void sub_803FB74(void);
 void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3);
 void sub_803FF18(s32 a0, u16 *a1, bool8 a2);
+
+static EWRAM_DATA u32 gUnknown_202EDFC = 0;
 
 void sub_803F27C(bool8 a0)
 {

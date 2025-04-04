@@ -44,7 +44,6 @@ extern struct DungeonPalFile *gDungeonNameBannerPalette;
 extern struct DungeonPalFile *gUnknown_202EC94;
 extern RGB gUnknown_202ECA4[];
 extern MenuInputStruct gDungeonMenu;
-extern SpriteOAM gUnknown_202EDDC;
 extern OpenedFile *gUnknown_202EC9C;
 
 void xxx_draw_string_80524F0(void);
@@ -72,6 +71,9 @@ EWRAM_DATA s32 gDungeonFramesCounter = 0;
 EWRAM_DATA s32 gUnknown_202EDD0 = 0;
 EWRAM_DATA s32 gUnknown_202EDD4 = 0;
 EWRAM_DATA s32 gUnknown_202EDD8 = 0;
+static EWRAM_DATA SpriteOAM gUnknown_202EDDC = {0};
+UNUSED static EWRAM_DATA s32 sUnused = 0;
+EWRAM_DATA struct UnkStruct_202EDE8 gUnknown_202EDE8 = {0};
 
 EWRAM_INIT u8 gUnknown_203B40C = 0;
 EWRAM_INIT u8 gUnknown_203B40D = 0;
