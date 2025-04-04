@@ -3,12 +3,16 @@
 #include "dungeon_range.h"
 #include "dungeon_leader.h"
 #include "dungeon_random.h"
+#include "dungeon_logic.h"
+#include "dungeon_pos_data.h"
 #include "dungeon_util.h"
 #include "sprite.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"
 #include "structs/map.h"
 #include "structs/str_202ED28.h"
+
+extern const DungeonPos gUnknown_80F4468[];
 
 EWRAM_INIT Entity *gLeaderPointer = NULL;
 
@@ -262,7 +266,7 @@ EntityInfo* GetLeaderInfo(void)
     return GetEntInfo(GetLeader());
 }
 
-bool8 sub_8083660(DungeonPos *posArg)
+bool8 sub_8083660(DungeonPos *posDst)
 {
     struct PositionU8 positions[DUNGEON_MAX_SIZE_X_MUL_Y];
     s32 yLoop, xLoop;
@@ -338,8 +342,8 @@ bool8 sub_8083660(DungeonPos *posArg)
 
         if (count != 0) {
             s32 posId = DungeonRandInt(count);
-            posArg->x = positions[posId].x;
-            posArg->y = positions[posId].y;
+            posDst->x = positions[posId].x;
+            posDst->y = positions[posId].y;
             return TRUE;
         }
     }
@@ -347,4 +351,102 @@ bool8 sub_8083660(DungeonPos *posArg)
     return FALSE;
 }
 
-// all of code_8083654.s belongs to this file
+bool8 sub_808384C(DungeonPos *posDst, const DungeonPos *posSrc)
+{
+    s32 i;
+    s32 x, y;
+    const Tile *tile;
+
+    for (i = 0; i < 25; i++) {
+        if (gUnknown_80F4468[i].x == 99)
+            break;
+
+        x = gUnknown_80F4468[i].x + posSrc->x;
+        y = gUnknown_80F4468[i].y + posSrc->y;
+        tile = GetTile(x, y);
+        if (!(tile->terrainType & TERRAIN_TYPE_UNK_x800)
+            && GetTerrainType(tile) == TERRAIN_TYPE_NORMAL
+            && tile->object == NULL
+            && tile->monster == NULL)
+        {
+            posDst->x = x;
+            posDst->y = y;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+void sub_80838EC(u8 *a0)
+{
+    if (*a0 == 0x7F)
+        return;
+    if (*a0 != 0) {
+        *a0 -= 1;
+    }
+}
+
+void sub_8083904(struct DungeonPos *posDst, struct Entity *entityArg)
+{
+    struct EntityInfo *info;
+    s32 xOffset, yOffset;
+    s32 pokeX, pokeY;
+    s32 i;
+    const struct DungeonPos *posArray;
+    Entity **possibleTargets;
+    s32 maxTargets;
+    s32 direction;
+
+    info = GetEntInfo(entityArg);
+    direction = info->action.direction;
+    if (CheckVariousStatuses2(entityArg, TRUE)) {
+        posDst->x = (gAdjacentTileOffsets[direction].x * 3) + entityArg->pos.x;
+        posDst->y = (gAdjacentTileOffsets[direction].y * 3) + entityArg->pos.y;
+    }
+    else if (info->action.itemTargetPosition.x == -1 && info->action.itemTargetPosition.y == -1) {
+        s32 strId = info->action.direction;
+        posArray = gUnknown_80F4CC4[strId].posArray;
+        xOffset = gUnknown_80F4CC4[strId].xOffset;
+        yOffset = gUnknown_80F4CC4[strId].yOffset;
+        pokeX = entityArg->pos.x;
+        pokeY = entityArg->pos.y;
+        if (gDungeon->decoyIsActive) {
+            possibleTargets = gDungeon->activePokemon;
+            maxTargets = DUNGEON_MAX_POKEMON;
+        }
+        else if (!info->isNotTeamMember) {
+            possibleTargets = gDungeon->wildPokemon;
+            maxTargets = DUNGEON_MAX_WILD_POKEMON;
+        }
+        else {
+            possibleTargets = gDungeon->teamPokemon;
+            maxTargets = MAX_TEAM_MEMBERS;
+        }
+
+        while (posArray->x != 99) {
+            s32 x = pokeX + (xOffset * posArray->x);
+            s32 y = pokeY + (yOffset * posArray->y);
+
+            for (i = 0; i < maxTargets; i++) {
+                Entity *entity = possibleTargets[i];
+                if (EntityIsValid(entity)
+                    && entity->pos.x == x
+                    && entity->pos.y == y
+                    && GetTreatmentBetweenMonsters(entityArg,entity,FALSE,FALSE) == 1)
+                {
+                    posDst->x = x;
+                    posDst->y = y;
+                    return;
+                }
+            }
+            posArray++;
+        }
+        posDst->x = (gAdjacentTileOffsets[info->action.direction].x * 2) + entityArg->pos.x;
+        posDst->y = (gAdjacentTileOffsets[info->action.direction].y * 2) + entityArg->pos.y;
+    }
+    else {
+        posDst->x = info->action.itemTargetPosition.x;
+        posDst->y = info->action.itemTargetPosition.y;
+    }
+}
