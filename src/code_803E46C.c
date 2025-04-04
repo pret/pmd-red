@@ -40,23 +40,29 @@ void sub_8042E5C();
 void sub_800F7D0(DungeonPos *);
 void sub_803E874(s32, s32);
 
-struct Unk80F6224Struct
-{
-    s32 shape;
-    s32 size;
-    s32 tileNum;
-};
-
-extern const struct Unk80F6224Struct gUnknown_80F621C[2][6];
-
-extern const DungeonPos gUnknown_80F61EC[2][6];
-
 EWRAM_DATA struct unkStruct_202ED28 gUnknown_202ED28[2][6] = {0};
 EWRAM_DATA SpriteOAM gUnknown_202EDB8 = {0};
 EWRAM_DATA SpriteOAM gUnknown_202EDC0 = {0};
 
 EWRAM_INIT u8 gUnknown_203B40C = 0;
 EWRAM_INIT u8 gUnknown_203B40D = 0;
+
+static const DungeonPos gUnknown_80F61EC[2][6] = {
+    [0] = {{-4, -4}, {-8, -4}, {-16, -4}, {-16, -4}, {-16, -4}, {-16, -4}},
+    [1] = {{-4, -4}, {-8, -4}, {-16, -8}, {-16, -8}, {-16, -8}, {-16, -8}},
+};
+
+struct SpriteInfo
+{
+    s32 shape;
+    s32 size;
+    s32 tileNum;
+};
+
+static const struct SpriteInfo gUnknown_80F621C[2][6] = {
+    [0] = {{0, 0, 0x200}, {1, 0, 0x201}, {1, 1, 0x203}, {1, 1, 0x223}, {1, 1, 0x223}, {1, 1, 0x223}},
+    [1] = {{0, 0, 0x207}, {1, 0, 0x208}, {1, 2, 0x20A}, {1, 2, 0x22A}, {1, 2, 0x22A}, {1, 2, 0x22A}},
+};
 
 void sub_803E250(void)
 {
