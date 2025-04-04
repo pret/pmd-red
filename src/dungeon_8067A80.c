@@ -11,7 +11,6 @@
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
-#include "code_8084778.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"
 #include "dungeon_leader.h"

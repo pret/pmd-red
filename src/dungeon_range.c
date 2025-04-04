@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "dungeon_range.h"
 #include "dungeon_leader.h"
+#include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "sprite.h"
 #include "structs/str_dungeon.h"
@@ -259,6 +260,91 @@ Entity* GetLeader(void)
 EntityInfo* GetLeaderInfo(void)
 {
     return GetEntInfo(GetLeader());
+}
+
+bool8 sub_8083660(DungeonPos *posArg)
+{
+    struct PositionU8 positions[DUNGEON_MAX_SIZE_X_MUL_Y];
+    s32 yLoop, xLoop;
+    Entity *leader = GetLeader();
+    s32 randX, randY;
+    s32 i;
+    s32 x, y;
+    s32 count = 0;
+
+    for (i = 0; i < 3; i++) {
+        DungeonPos leaderPos;
+
+        randX = DungeonRandInt(DUNGEON_MAX_SIZE_X);
+        randY = DungeonRandInt(DUNGEON_MAX_SIZE_Y);
+        leaderPos = leader->pos;
+        x = randX;
+
+        for (xLoop = 0; xLoop < DUNGEON_MAX_SIZE_X; xLoop++) {
+            y = randY;
+            if (count >= DUNGEON_MAX_SIZE_X_MUL_Y)
+                break;
+
+            for (yLoop = 0; yLoop < DUNGEON_MAX_SIZE_Y; yLoop++) {
+                bool8 setPosition = FALSE;
+                const Tile *tile = GetTile(x, y);
+                if (count >= DUNGEON_MAX_SIZE_X_MUL_Y)
+                    break;
+                if (i == 0) {
+                    if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL
+                        && tile->room != CORRIDOR_ROOM
+                        && tile->object == NULL
+                        && tile->monster == NULL
+                        && (abs(leaderPos.x - x) >= 6 || abs(leaderPos.y - y) >= 6))
+                    {
+                        setPosition = TRUE;
+                    }
+                }
+                // No abs checks
+                else if (i == 1) {
+                    if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL
+                        && tile->room != CORRIDOR_ROOM
+                        && tile->object == NULL
+                        && tile->monster == NULL)
+                    {
+                        setPosition = TRUE;
+                    }
+                }
+                // No abs checks and no CORRIDOR_ROOM check
+                else {
+                    if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL
+                        && tile->object == NULL
+                        && tile->monster == NULL)
+                    {
+                        setPosition = TRUE;
+                    }
+                }
+
+                if (setPosition) {
+                    positions[count].x = x;
+                    positions[count].y = y;
+                    count++;
+                }
+
+                if (++y >= DUNGEON_MAX_SIZE_Y) {
+                    y = 0;
+                }
+            }
+
+            if (++x >= DUNGEON_MAX_SIZE_X) {
+                x = 0;
+            }
+        }
+
+        if (count != 0) {
+            s32 posId = DungeonRandInt(count);
+            posArg->x = positions[posId].x;
+            posArg->y = positions[posId].y;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }
 
 // all of code_8083654.s belongs to this file
