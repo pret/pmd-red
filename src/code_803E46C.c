@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "structs/str_dungeon.h"
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
@@ -17,9 +18,8 @@
 #include "play_time.h"
 #include "sprite.h"
 #include "text_2.h"
-
-EWRAM_INIT u8 gUnknown_203B40C = 0;
-EWRAM_INIT u8 gUnknown_203B40D = 0;
+#include "structs/str_202ED28.h"
+#include "structs/str_202EDE8.h"
 
 extern s32 gDungeonBrightness;
 extern s32 gDungeonFramesCounter;
@@ -39,6 +39,93 @@ void sub_800E90C();
 void sub_8042E5C();
 void sub_800F7D0(DungeonPos *);
 void sub_803E874(s32, s32);
+
+struct Unk80F6224Struct
+{
+    s32 shape;
+    s32 size;
+    s32 tileNum;
+};
+
+extern const struct Unk80F6224Struct gUnknown_80F621C[2][6];
+
+extern const DungeonPos gUnknown_80F61EC[2][6];
+
+EWRAM_DATA struct unkStruct_202ED28 gUnknown_202ED28[2][6] = {0};
+EWRAM_DATA SpriteOAM gUnknown_202EDB8 = {0};
+EWRAM_DATA SpriteOAM gUnknown_202EDC0 = {0};
+
+EWRAM_INIT u8 gUnknown_203B40C = 0;
+EWRAM_INIT u8 gUnknown_203B40D = 0;
+
+void sub_803E250(void)
+{
+    s32 i, j;
+
+    gUnknown_202EDD0 = 999;
+    gUnknown_202EDD4 = 0;
+    gUnknown_203B40D = 0;
+    gUnknown_202EDE8.unk0 = 0;
+
+    SpriteSetY(&gUnknown_202EDC0, 0);
+    SpriteSetAffine1(&gUnknown_202EDC0, 0);
+    SpriteSetAffine2(&gUnknown_202EDC0, 0);
+    SpriteSetObjMode(&gUnknown_202EDC0, 0);
+    SpriteSetMosaic(&gUnknown_202EDC0, 0);
+    SpriteSetBpp(&gUnknown_202EDC0, 0);
+    SpriteSetShape(&gUnknown_202EDC0, 0);
+    SpriteSetMatrixNum(&gUnknown_202EDC0, 0);
+    SpriteSetSize(&gUnknown_202EDC0, 1);
+    SpriteSetX(&gUnknown_202EDC0, 0);
+    SpriteSetTileNum(&gUnknown_202EDC0, 0);
+    SpriteSetPriority(&gUnknown_202EDC0, 0);
+    SpriteSetPalNum(&gUnknown_202EDC0, 0);
+    SpriteSetUnk6_0(&gUnknown_202EDC0, 0);
+    SpriteSetUnk6_1(&gUnknown_202EDC0, 0);
+    SpriteSetUnk6_2(&gUnknown_202EDC0, 0);
+
+    SpriteSetY(&gUnknown_202EDB8, 0);
+    SpriteSetAffine1(&gUnknown_202EDB8, 0);
+    SpriteSetAffine2(&gUnknown_202EDB8, 0);
+    SpriteSetObjMode(&gUnknown_202EDB8, 0);
+    SpriteSetMosaic(&gUnknown_202EDB8, 0);
+    SpriteSetBpp(&gUnknown_202EDB8, 0);
+    SpriteSetShape(&gUnknown_202EDB8, 0);
+    SpriteSetMatrixNum(&gUnknown_202EDB8, 0);
+    SpriteSetSize(&gUnknown_202EDB8, 0);
+    SpriteSetX(&gUnknown_202EDB8, 0);
+    SpriteSetTileNum(&gUnknown_202EDB8, 0);
+    SpriteSetPriority(&gUnknown_202EDB8, 3);
+    SpriteSetPalNum(&gUnknown_202EDB8, 5);
+    SpriteSetUnk6_0(&gUnknown_202EDB8, 0);
+    SpriteSetUnk6_1(&gUnknown_202EDB8, 0);
+    SpriteSetUnk6_2(&gUnknown_202EDB8, 0);
+
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 6; j++) {
+            SpriteSetAffine1(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetAffine2(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetObjMode(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetMosaic(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetBpp(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetShape(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].shape);
+            SpriteSetMatrixNum(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetSize(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].size);
+            SpriteSetTileNum(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].tileNum);
+            SpriteSetPriority(&gUnknown_202ED28[i][j].sprite, 3);
+            SpriteSetPalNum(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetUnk6_0(&gUnknown_202ED28[i][j].sprite, 0);
+            SpriteSetUnk6_1(&gUnknown_202ED28[i][j].sprite, 0);
+
+            gUnknown_202ED28[i][j].pos = gUnknown_80F61EC[i][j];
+        }
+    }
+
+    gDungeon->unk181e8.unk18217 = 1;
+    gDungeon->unk181e8.unk18218 = 1;
+    gDungeonBrightness = 0;
+    SetBGPaletteBufferColorRGB(0xf8, &gFontPalette[8],0,NULL);
+}
 
 void DungeonRunFrameActions(u32 a0)
 {
@@ -160,8 +247,8 @@ void sub_803E724(s32 r0)
     } while (gRealInputs.held & 0xF0);
 }
 
-void sub_803E748(void) {
-
+void sub_803E748(void)
+{
     s32 index1;
     s32 index2;
 
@@ -195,7 +282,6 @@ void sub_803E748(void) {
 
 void sub_803E7C8(void)
 {
-
     s32 index1;
     s32 index2;
 

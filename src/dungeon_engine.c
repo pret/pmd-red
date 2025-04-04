@@ -11,6 +11,7 @@
 #include "structs/str_dungeon.h"
 #include "constants/ability.h"
 #include "dungeon_logic.h"
+#include "menu_input.h"
 
 extern bool8 sub_8044B28(void);
 extern void TrySpawnMonsterAndActivatePlusMinus(void);
@@ -31,6 +32,9 @@ extern void sub_807EAA0(u32, u32);
 
 static void sub_8044454(void);
 static bool8 xxx_dungeon_80442D0(bool8);
+
+EWRAM_DATA DungeonPos gUnknown_202EE0C = {0};
+EWRAM_DATA MenuInputStruct gDungeonMenu = {0};
 
 const s16 gSpeedTurns[NUM_SPEED_COUNTERS][25] = {
     [0] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0},

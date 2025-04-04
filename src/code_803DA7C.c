@@ -33,14 +33,13 @@ extern const char gUnknown_80F6110[];
 extern const char gUnknown_80F6118[];
 extern const u32 gUnknown_80F6120[];
 
-extern RGB gUnknown_202ECA4[];
-extern OpenedFile *gDungeonNameBannerPalette;
-extern OpenedFile *gDungeonNameBannerFontFile;
-extern OpenedFile *gUnknown_202ECA0;
-extern OpenedFile *gUnknown_202EC9C;
-extern OpenedFile *gUnknown_202EC98;
-extern OpenedFile *gUnknown_202EC94;
-extern s32 gDungeonNameBannerFont;
+EWRAM_DATA OpenedFile *gDungeonNameBannerPalette = NULL;
+EWRAM_DATA OpenedFile *gDungeonNameBannerFontFile = NULL;
+EWRAM_DATA s32 gDungeonNameBannerFont = 0;
+EWRAM_DATA OpenedFile *gUnknown_202EC94 = NULL;
+EWRAM_DATA OpenedFile *gUnknown_202EC98 = NULL;
+EWRAM_DATA OpenedFile *gUnknown_202EC9C = NULL;
+EWRAM_DATA OpenedFile *gUnknown_202ECA0 = NULL;
 
 // Very similar to unkChar struct
 typedef struct UnkStruct_sub_803DC6C
@@ -49,22 +48,6 @@ typedef struct UnkStruct_sub_803DC6C
     u16 unk4;
     u8 unk6;
 } UnkStruct_sub_803DC6C;
-
-extern u32 gUnknown_202EDD0;
-extern s32 gUnknown_202EDD4;
-extern s32 gDungeonBrightness;
-
-extern SpriteOAM gUnknown_202EDC0;
-extern SpriteOAM gUnknown_202EDB8;
-
-extern const DungeonPos gUnknown_80F61EC[2][6];
-
-struct Unk80F6224Struct
-{
-    s32 shape;
-    s32 size;
-    s32 tileNum;
-};
 
 struct FileStruct2
 {
@@ -77,8 +60,6 @@ struct FileStruct
     struct FileStruct2 *ptr;
     struct u8 *ptr2;
 };
-
-extern const struct Unk80F6224Struct gUnknown_80F621C[2][6];
 
 s32 sub_803DC14(const u8 *dungName, s32 strWidth, s32 a2);
 s32 CalcStringWidth(const u8 *dungName);
@@ -346,6 +327,8 @@ static UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr)
     return ret;
 };
 
+EWRAM_DATA RGB gUnknown_202ECA4[33] = {0};
+
 void sub_803DF60(void)
 {
     u8 *vram;
@@ -477,73 +460,4 @@ void sub_803E214(void)
 
 void nullsub_56(void)
 {
-}
-
-void sub_803E250(void)
-{
-    s32 i, j;
-
-    gUnknown_202EDD0 = 999;
-    gUnknown_202EDD4 = 0;
-    gUnknown_203B40D = 0;
-    gUnknown_202EDE8.unk0 = 0;
-
-    SpriteSetY(&gUnknown_202EDC0, 0);
-    SpriteSetAffine1(&gUnknown_202EDC0, 0);
-    SpriteSetAffine2(&gUnknown_202EDC0, 0);
-    SpriteSetObjMode(&gUnknown_202EDC0, 0);
-    SpriteSetMosaic(&gUnknown_202EDC0, 0);
-    SpriteSetBpp(&gUnknown_202EDC0, 0);
-    SpriteSetShape(&gUnknown_202EDC0, 0);
-    SpriteSetMatrixNum(&gUnknown_202EDC0, 0);
-    SpriteSetSize(&gUnknown_202EDC0, 1);
-    SpriteSetX(&gUnknown_202EDC0, 0);
-    SpriteSetTileNum(&gUnknown_202EDC0, 0);
-    SpriteSetPriority(&gUnknown_202EDC0, 0);
-    SpriteSetPalNum(&gUnknown_202EDC0, 0);
-    SpriteSetUnk6_0(&gUnknown_202EDC0, 0);
-    SpriteSetUnk6_1(&gUnknown_202EDC0, 0);
-    SpriteSetUnk6_2(&gUnknown_202EDC0, 0);
-
-    SpriteSetY(&gUnknown_202EDB8, 0);
-    SpriteSetAffine1(&gUnknown_202EDB8, 0);
-    SpriteSetAffine2(&gUnknown_202EDB8, 0);
-    SpriteSetObjMode(&gUnknown_202EDB8, 0);
-    SpriteSetMosaic(&gUnknown_202EDB8, 0);
-    SpriteSetBpp(&gUnknown_202EDB8, 0);
-    SpriteSetShape(&gUnknown_202EDB8, 0);
-    SpriteSetMatrixNum(&gUnknown_202EDB8, 0);
-    SpriteSetSize(&gUnknown_202EDB8, 0);
-    SpriteSetX(&gUnknown_202EDB8, 0);
-    SpriteSetTileNum(&gUnknown_202EDB8, 0);
-    SpriteSetPriority(&gUnknown_202EDB8, 3);
-    SpriteSetPalNum(&gUnknown_202EDB8, 5);
-    SpriteSetUnk6_0(&gUnknown_202EDB8, 0);
-    SpriteSetUnk6_1(&gUnknown_202EDB8, 0);
-    SpriteSetUnk6_2(&gUnknown_202EDB8, 0);
-
-    for (i = 0; i < 2; i++) {
-        for (j = 0; j < 6; j++) {
-            SpriteSetAffine1(&gUnknown_202ED28[i][j].sprite, 0);
-            SpriteSetAffine2(&gUnknown_202ED28[i][j].sprite, 0);
-            SpriteSetObjMode(&gUnknown_202ED28[i][j].sprite, 0);
-            SpriteSetMosaic(&gUnknown_202ED28[i][j].sprite, 0);
-            SpriteSetBpp(&gUnknown_202ED28[i][j].sprite, 0);
-            SpriteSetShape(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].shape);
-            SpriteSetMatrixNum(&gUnknown_202ED28[i][j].sprite, 0);
-            SpriteSetSize(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].size);
-            SpriteSetTileNum(&gUnknown_202ED28[i][j].sprite, gUnknown_80F621C[i][j].tileNum);
-            SpriteSetPriority(&gUnknown_202ED28[i][j].sprite, 3);
-            SpriteSetPalNum(&gUnknown_202ED28[i][j].sprite, 0);
-            SpriteSetUnk6_0(&gUnknown_202ED28[i][j].sprite, 0);
-            SpriteSetUnk6_1(&gUnknown_202ED28[i][j].sprite, 0);
-
-            gUnknown_202ED28[i][j].pos = gUnknown_80F61EC[i][j];
-        }
-    }
-
-    gDungeon->unk181e8.unk18217 = 1;
-    gDungeon->unk181e8.unk18218 = 1;
-    gDungeonBrightness = 0;
-    SetBGPaletteBufferColorRGB(0xf8, &gFontPalette[8],0,NULL);
 }

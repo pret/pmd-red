@@ -660,6 +660,8 @@ s32 sub_803EF90(s32 a0, u8 a1)
     return ret;
 }
 
+// file SPLIT
+
 void sub_803F27C(bool8 a0)
 {
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;

@@ -557,6 +557,7 @@ SECTIONS {
         src/dungeon_config.o(.rodata);
         data/data_80F59C8_1.o(.rodata);
         src/code_803DA7C.o(.rodata);
+        src/code_803E46C.o(.rodata);
         data/data_80F59C8_3.o(.rodata);
         src/code_803E724.o(.rodata);
         data/data_80F59C8_0.o(.rodata);

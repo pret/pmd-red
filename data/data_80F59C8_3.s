@@ -2,7 +2,6 @@
 .section .rodata
 #.incbin "baserom.gba", 0xF59C4, 0x4
 
-.string "pksdir0\0"
 
 .global gUnknown_80F61EC
 gUnknown_80F61EC: @ 80F61EC
