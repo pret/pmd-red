@@ -67,7 +67,7 @@ static inline bool8 AreStringsDifferent(const u8 *str1, const u8 *str2)
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided\n")
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
-#define ARRAY_COUNT_INT(array) ((s32)(sizeof(array) / sizeof((array)[0]))) // When an int is needed to match.
+#define ARRAY_COUNT_INT(array) ((s32)(ARRAY_COUNT(array))) // When an int is needed to match.
 
 #define SWAP(a, b, temp)    \
 {                           \

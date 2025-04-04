@@ -559,7 +559,6 @@ SECTIONS {
         src/code_803DA7C.o(.rodata);
         src/dungeon_vram.o(.rodata);
         src/code_803E724.o(.rodata);
-        data/data_80F59C8_0.o(.rodata);
         src/dungeon_map.o(.rodata);
         src/code_8040094_1.o(.rodata);
         data/pksdir_0.o(.rodata);

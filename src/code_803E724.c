@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/item.h"
 #include "constants/status.h"
 #include "structs/str_202EDE8.h"
@@ -26,21 +27,19 @@
 #include "menu_input.h"
 #include "sprite.h"
 #include "text_1.h"
+#include "play_time.h"
+#include "code_800C9CC.h"
+#include "code_80118A4.h"
+#include "dungeon_strings.h"
 
 extern u32 gUnknown_202EDFC;
-
-extern const u32 gUnknown_80F6490[];
-extern const s32 gUnknown_80F64B4[];
-extern const s32 gUnknown_80F64FC[];
-extern const s32 gUnknown_80F6520[];
-extern const u16 gUnknown_80F64D8[][9];
-extern const u16 gUnknown_80F6544[][9];
-
 extern s32 gDungeonFramesCounter;
 
 extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
+extern void sub_803F7BC(void);
+extern void ShowWholeRevealedDungeonMap();
 
 void sub_803EC94(void);
 s32 sub_803EF90(s32 a0, u8 a1);
@@ -417,10 +416,9 @@ void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
     s32 i;
     s32 r5;
     u32 r10, r9;
-    u32 sp[9];
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
     u32 *dst = gUnknown_3001018;
-    memcpy(sp, gUnknown_80F6490, sizeof(sp));
+    u32 sp[9] = {0, 0xF, 0xFF, 0xFFF, 0xFFFF, 0xFFFFF, 0xFFFFFF, 0xFFFFFFF, 0xFFFFFFFF};
 
     r10 = 0x22222222;
     r9 = 0x44444444;
@@ -596,6 +594,12 @@ void sub_803FB74(void)
     }
 }
 
+static const s32 gUnknown_80F64B4[] = {90, 80, 70, 60, 50, 40, 30, 20, 10};
+static const u16 gUnknown_80F64D8[][9] = {
+    [0] = {0xF291, 0xF290, 0xF28F, 0xF28E, 0xF28D, 0xF28C, 0xF28B, 0xF28A, 0xF289},
+    [1] = {0xF2C8, 0xF2C7, 0xF2C6, 0xF2C5, 0xF2C4, 0xF2C3, 0xF2C2, 0xF2C1, 0xF2C0},
+};
+
 void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
 {
     s32 var = (a2) ? 0 : 55;
@@ -609,11 +613,15 @@ void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
             a1[0] = 0xF2C8;
             a1[1] = 0xF2C8;
         }
+        return;
     }
-    else if (a0 == 100) {
+
+    if (a0 == 100) {
         a1[0] = 0xF294;
         a1[1] = 0xF295;
+        return;
     }
+    // This is a fakematch, I was actually to decompile this function for Blue(https://decomp.me/scratch/tqonk), but agbcc doesn't want to cooperate...
     else {
         // I thought 'ptr' was a compiler generated variable, but I couldn't match the function without declaring it.
         u16 *ptr = a1 + 1;
@@ -623,7 +631,7 @@ void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
             s32 i;
             s32 arrId = (!a2) ? 1 : 0;
 
-            for (i = 0; i < 9; i++) {
+            for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80F64B4); i++) {
                 ASM_MATCH_TRICK(a1);
                 if (gUnknown_80F64B4[i] <= a0) {
                     *a1 = gUnknown_80F64D8[arrId][i];
@@ -639,6 +647,13 @@ void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
         *a1 = (a0 + varAdd + 0x258) | 0xF000;
     }
 }
+
+static const s32 gUnknown_80F64FC[] = {900, 800, 700, 600, 500, 400, 300, 200, 100};
+static const s32 gUnknown_80F6520[] = {90, 80, 70, 60, 50, 40, 30, 20, 10};
+static const u16 gUnknown_80F6544[][9] = {
+    [0] = {0xF291, 0xF290, 0xF28F, 0xF28E, 0xF28D, 0xF28C, 0xF28B, 0xF28A, 0xF289},
+    [1] = {0xF2C8, 0xF2C7, 0xF2C6, 0xF2C5, 0xF2C4, 0xF2C3, 0xF2C2, 0xF2C1, 0xF2C0},
+};
 
 void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
 {
@@ -656,7 +671,7 @@ void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
         s32 i = 0;
         s32 varAdd = var + 48;
 
-        for (i = 0; i < 9; i++) {
+        for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80F64FC); i++) {
             if (gUnknown_80F64FC[i] <= a0) {
                 *(a1++) = gUnknown_80F6544[arrId][i];
                 a0 -= gUnknown_80F64FC[i];
@@ -668,7 +683,7 @@ void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
             *(a1++) = (toAdd + 0x258) | 0xF000;
         }
 
-        for (i = 0; i < 9; i++) {
+        for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80F6520); i++) {
             if (gUnknown_80F6520[i] <= a0) {
                 *(a1++) = gUnknown_80F6544[arrId][i];
                 a0 -= gUnknown_80F6520[i];
@@ -681,4 +696,56 @@ void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
 
         *a1 = (a0 + varAdd + 0x258) | 0xF000;
     }
+}
+
+void HandleLuminousOrbAction(Entity *pokemon)
+{
+  int XCoord;
+  int YCoord;
+
+  gDungeon->unk181e8.allTilesRevealed = TRUE;
+
+  for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
+  {
+    for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
+    {
+      Tile *mapTile = GetTileMut(XCoord, YCoord);
+      mapTile->spawnOrVisibilityFlags |= VISIBILITY_FLAG_REVEALED;
+    }
+  }
+  sub_803F580(0);
+  sub_8049ED4();
+  ShowWholeRevealedDungeonMap();
+  LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD040);
+}
+
+void sub_8040094(u8 r0)
+{
+    gDungeon->unk181e8.unk18217 = r0;
+    sub_803F7BC();
+    sub_80060EC();
+    IncrementPlayTime(gPlayTimeRef);
+    WaitForNextFrameAndAdvanceRNG();
+    LoadBufferedInputs();
+    xxx_call_update_bg_sound_input();
+    UpdateDungeonMusic();
+    sub_8011860();
+}
+
+static const s32 gUnknown_80F6568[] = {
+    0, -1, 1, -1, 1, -1, 1, -2, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3, -3, 4, -4, 4, -4, 4, -5, 4, -5, 4, -5, 4, -5
+};
+
+void sub_80400D4(void)
+{
+    s32 temp;
+    temp = gDungeon->unk181e8.unk18200;
+    if(temp == 0)
+        return;
+    if(temp >= 0x1F)
+        temp = 0x1F;
+    gDungeon->unk181e8.unk181FC = gUnknown_80F6568[temp];
+    gDungeon->unk181e8.unk18200--;
+    if(gDungeon->unk181e8.unk18200 == 0)
+        gDungeon->unk181e8.unk18200 = gDungeon->unk181e8.unk18204;
 }
