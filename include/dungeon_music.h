@@ -12,10 +12,6 @@ void PlayDungeonStartButtonSE(void);
 void PlaySoundEffect(u32 songIndex);
 void StopDungeonBGM(void);
 void StopSoundEffect(u32 songIndex);
-void sub_8083AB0(s16 param_0, Entity *target, Entity *entity);
-bool8 sub_8083C24(void);
-bool8 sub_8083C50(void);
-bool8 sub_8083C88(u8);
 void UpdateDungeonMusic(void);
 
 #endif // GUARD_DUNGEON_MUSIC_H

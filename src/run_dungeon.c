@@ -15,13 +15,14 @@
 #include "code_800E9E4.h"
 #include "code_800ED38.h"
 #include "code_803D110.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_803E668.h"
 #include "code_803E724.h"
 #include "code_805D8C8.h"
 #include "code_8094F88.h"
 #include "code_8099360.h"
 #include "cpu.h"
+#include "dungeon_8083AB0.h"
 #include "dungeon.h"
 #include "dungeon_ai.h"
 #include "dungeon_config.h"
@@ -66,7 +67,7 @@ extern void sub_803E830(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
 extern void IncrementThievingSuccesses(void);
-extern void sub_80841EC(void);
+extern void ShowDungeonClearedWindow(void);
 extern void sub_8084424(void);
 extern void sub_8086130(void);
 extern void FreeDungeonPokemonSprites(void);
@@ -653,7 +654,7 @@ void RunDungeon_Async(UnkStruct_RunDungeon *r8)
         sub_803E13C();
         sub_800CDA8(4);
         if (gDungeon->unk6 == 0 && sub_8083C88(gDungeon->unk644.unk34)) {
-            sub_80841EC();
+            ShowDungeonClearedWindow();
         }
 
         if (sub_8083C24()) {

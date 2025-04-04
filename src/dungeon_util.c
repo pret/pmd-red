@@ -27,14 +27,14 @@
 #include "items.h"
 #include "trap.h"
 
-extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
-extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
-
 extern const u8 *gUnknown_80FE6F4[];
 
 extern void sub_8045ACC(void);
 extern s32 GetMonsterApparentID(Entity *pokemon, s32 id);
 extern void sub_8045BF8(u8 *, Item *);
+
+EWRAM_DATA u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE] = {0};
+EWRAM_DATA u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE] = {0};
 
 bool8 EntityIsValid(Entity *entity)
 {

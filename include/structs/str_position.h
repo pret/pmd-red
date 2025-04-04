@@ -1,6 +1,13 @@
 #ifndef GUARD_STR_POSITION_H
 #define GUARD_STR_POSITION_H
 
+// Used in dungeon generation and sub_8083660
+struct PositionU8
+{
+    u8 x;
+    u8 y;
+};
+
 // size: 0x4
 typedef struct DungeonPos
 {

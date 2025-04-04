@@ -7,7 +7,7 @@
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"
 #include "structs/str_dungeon.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_803E668.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"

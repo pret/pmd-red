@@ -14,7 +14,7 @@
 #include "pokemon.h"
 #include "items.h"
 #include "structs/str_item_text.h"
-#include "code_8044CC8.h"
+#include "dungeon_action.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
 #include "dungeon_engine.h"
@@ -27,9 +27,8 @@ extern void TriggerWeatherAbilities(void);
 extern void sub_8071DA4(Entity *);
 extern void TickStatusHeal(Entity *);
 
-extern unkStruct_202EE44 gDungeonSubMenu[10];
-
-extern s32 gDungeonSubMenuItemsCount;
+EWRAM_DATA SubMenuAction gDungeonSubMenu[10] = {0};
+EWRAM_DATA s32 gDungeonSubMenuItemsCount = 0;
 
 extern bool8 sub_8045888(Entity *);
 
@@ -339,9 +338,9 @@ void sub_8045064(void)
 
     for (i = 0; i < gDungeonSubMenuItemsCount; i++) {
         for (j = i + 1; j < gDungeonSubMenuItemsCount; j++) {
-            unkStruct_202EE44 temp;
-            unkStruct_202EE44 *iPtr = &gDungeonSubMenu[i];
-            unkStruct_202EE44 *jPtr = &gDungeonSubMenu[j];
+            SubMenuAction temp;
+            SubMenuAction *iPtr = &gDungeonSubMenu[i];
+            SubMenuAction *jPtr = &gDungeonSubMenu[j];
 
             if (gUnknown_80F7C50[iPtr->actionId].val > gUnknown_80F7C50[jPtr->actionId].val) {
                 SWAP(*iPtr, *jPtr, temp);

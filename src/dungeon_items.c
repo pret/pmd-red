@@ -23,7 +23,7 @@
 #include "trap.h"
 #include "math.h"
 #include "structs/str_item_text.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "sprite.h"
 
 extern SpriteOAM gUnknown_202EDC0;

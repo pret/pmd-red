@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "weather.h"
 #include "code_804267C.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "dungeon.h"
 #include "dungeon_config.h"
 #include "dungeon_leader.h"

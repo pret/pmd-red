@@ -246,14 +246,3 @@ void sub_803D414(u8 *buffer,WonderMail *mail)
     }
     MemoryCopy8(buffer,auStack_44,sizeof(auStack_44));
 }
-
-
-// File boundary?
-
-
-
-void sub_803D4AC(void)
-{
-    gDungeon->unk1C570.id = 0x63;
-    gDungeon->unk1C570.floor = 0xFF;
-}

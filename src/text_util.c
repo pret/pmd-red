@@ -42,7 +42,7 @@ u32 sub_80922E4(u32 r0)
     return gUnknown_810983C[r0];
 }
 
-void CopyStringtoBuffer(u8 *buffer, u8 *string)
+void CopyStringtoBuffer(u8 *buffer, const u8 *string)
 {
   while( *string != '\0' ) {
     *buffer++ = *string++;

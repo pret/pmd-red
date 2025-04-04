@@ -7,7 +7,7 @@
 #include "code_8009804.h"
 #include "code_800D090.h"
 #include "code_800E9E4.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_803E668.h"
 #include "code_803E724.h"
 #include "dungeon.h"
@@ -27,6 +27,7 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "dungeon_strings.h"
+#include "dungeon_portrait_placement.h"
 
 void sub_80526D0(s32 r0);
 static bool8 sub_8052DC0(Entity *);
@@ -381,14 +382,6 @@ void DisplayDungeonLoggableMessage(Entity *pokemon, const u8 *str)
     DisplayDungeonLoggableMessageFalse(pokemon, str);
 }
 
-struct Struct_sub_808CDB0
-{
-    DungeonPos pos;
-    bool8 flip;
-};
-
-extern const struct Struct_sub_808CDB0 *sub_808CDB0(s32 a0);
-
 static const u16 sUnknownDialogueFlags[] = {0x30D, 0x10D, 0x30D, 0x10D, 0x301, 1, 0x11};
 
 void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
@@ -465,7 +458,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
         && dialogueInfo->spriteId != 0x80
         && dialogueMonId != MONSTER_NONE)
     {
-        const struct Struct_sub_808CDB0 *strPtr = sub_808CDB0(dialogueInfo->spritePlacementId);
+        const struct PortraitPlacementInfo *placementInfo = GetPortraitPlacementInfo(dialogueInfo->spritePlacementId);
 
         monPortraitPtr = &monPortrait;
         monPortraitPtr->faceFile = GetDialogueSpriteDataPtr(dialogueMonId);
@@ -473,9 +466,9 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
             monPortraitPtr->faceData = (PortraitGfx *) monPortraitPtr->faceFile->data;
             monPortraitPtr->unkE = 0;
             monPortraitPtr->spriteId = dialogueInfo->spriteId;
-            monPortraitPtr->flip = strPtr->flip;
-            monPortraitPtr->pos.x = strPtr->pos.x;
-            monPortraitPtr->pos.y = strPtr->pos.y;
+            monPortraitPtr->flip = placementInfo->flip;
+            monPortraitPtr->pos.x = placementInfo->pos.x;
+            monPortraitPtr->pos.y = placementInfo->pos.y;
             if (monPortraitPtr->pos.y < 2) {
                 monPortraitPtr->pos.y = 2;
             }

@@ -10,7 +10,7 @@
 #include "structs/str_806B7F8.h"
 #include "structs/str_dungeon.h"
 #include "code_800F958.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_803E668.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"

@@ -7,7 +7,7 @@
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
-#include "code_808417C.h"
+#include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/move_id.h"
 #include "constants/status.h"

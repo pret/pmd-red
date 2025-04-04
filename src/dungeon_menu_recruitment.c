@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_800D090.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_803E724.h"
 #include "dungeon.h"
 #include "dungeon_menu_recruitment.h"

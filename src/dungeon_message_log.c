@@ -8,7 +8,7 @@
 #include "text_3.h"
 #include "input.h"
 #include "menu_input.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "dungeon_music.h"
 #include "sprite.h"
 #include "code_803E724.h"
