@@ -17,7 +17,7 @@
 #include "dungeon_util.h"
 #include "dungeon_map_access.h"
 #include "dungeon_misc.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_803E668.h"
 #include "code_806CD90.h"
 #include "code_80861A8.h"

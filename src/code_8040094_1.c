@@ -9,7 +9,7 @@
 #include "code_8009804.h"
 #include "code_800E9E4.h"
 #include "code_800ED38.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_804267C.h"
 #include "dungeon.h"
 #include "dungeon_message.h"

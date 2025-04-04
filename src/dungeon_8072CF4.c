@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "dungeon_ai_leader.h"
 #include "dungeon_move_util.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_8066D04.h"

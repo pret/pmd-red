@@ -32,7 +32,7 @@
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
 #include "status.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 
 extern void sub_80420A0(Entity *);
 extern void sub_8041C58(Entity *r0);

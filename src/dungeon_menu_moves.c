@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_803E724.h"
 #include "dungeon_action.h"
 #include "dungeon_action.h"

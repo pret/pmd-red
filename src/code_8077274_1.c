@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "code_805D8C8.h"

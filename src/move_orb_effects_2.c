@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "status.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "dungeon_random.h"

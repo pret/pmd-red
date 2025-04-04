@@ -38,7 +38,7 @@
 #include "dungeon_random.h"
 #include "position_util.h"
 #include "dungeon_ai_movement.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "def_filearchives.h"
 #include "code_803D110.h"
 #include "dungeon_strings.h"

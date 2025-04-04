@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "run_dungeon.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "constants/dungeon.h"
 #include "dungeon_ai_leader.h"
 #include "dungeon_ai.h"

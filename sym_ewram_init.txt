@@ -109,7 +109,7 @@
 .include "src/personality_test1.o"
 .include "src/personality_test2.o"
 .include "src/code_803D0D8.o"
-.include "src/code_803E46C.o"
+.include "src/dungeon_vram.o"
 .include "src/dungeon_map.o"
 .include "src/run_dungeon.o"
 .include "src/dungeon_items.o"
