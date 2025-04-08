@@ -172,37 +172,31 @@ void sub_807D068(Entity *pokemon, DungeonPos *pos)
 
     posX = X_POS_TO_PIXELPOS(pos->x);
     posY = Y_POS_TO_PIXELPOS(pos->y);
-    diff = (pokemon->pixelPos).x - posX;
-    if (diff < 0) {
-        diff = -diff;
-    }
-    if (diff < 0xc) {
-        diff = (pokemon->pixelPos).y - posY;
-        if (diff < 0) {
-            diff = -diff;
-        }
-        if (diff < 0xc) goto _0807D11E;
-    }
-    iVar8 = 0;
-    pixelX = (pokemon->pixelPos).x;
-    pixelY = (pokemon->pixelPos).y;
-    incrementX = (posX - pixelX) / 0xc;
-    incrementY = (posY - pixelY) / 0xc;
-
-    for(counter = 0; counter < 0xC; counter++)
+    diff = abs(pokemon->pixelPos.x - posX);
+    if (diff < 0xc)
+        diff = abs(pokemon->pixelPos.y - posY);
+    if (diff >= 0xc)
     {
-        pixelX += incrementX;
-        pixelY += incrementY;
-        local_34.x = pixelX;
-        local_34.y = pixelY;
-        pokemon->unk1C.raw = sin_4096(iVar8) * 0xc;
-        sub_804535C(pokemon, &local_34);
-        if (sub_8045888(pokemon)) {
-            DungeonRunFrameActions(0x1a);
+        iVar8 = 0;
+        pixelX = (pokemon->pixelPos).x;
+        pixelY = (pokemon->pixelPos).y;
+        incrementX = (posX - pixelX) / 0xc;
+        incrementY = (posY - pixelY) / 0xc;
+
+        for(counter = 0; counter < 0xC; counter++)
+        {
+            pixelX += incrementX;
+            pixelY += incrementY;
+            local_34.x = pixelX;
+            local_34.y = pixelY;
+            pokemon->unk1C.raw = sin_4096(iVar8) * 0xc;
+            sub_804535C(pokemon, &local_34);
+            if (sub_8045888(pokemon)) {
+                DungeonRunFrameActions(0x1a);
+            }
+            iVar8 = iVar8 + 0xaa;
         }
-        iVar8 = iVar8 + 0xaa;
     }
-_0807D11E:
     local_34.x = posX;
     local_34.y = posY;
     pokemon->unk1C = IntToF248(0);
