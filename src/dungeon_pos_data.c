@@ -1,5 +1,6 @@
 #include "global.h"
-#include "structs/str_position.h"
+#include "globaldata.h"
+#include "dungeon_pos_data.h"
 
 const DungeonPos gAdjacentTileOffsets[] = {
     {0, 1},
@@ -562,21 +563,15 @@ static const DungeonPos gUnknown_80F4B30[101] = {
     {99, 99},
 };
 
-struct Struct80F4CC4 {
-    const DungeonPos *posArray;
-    s16 unk4;
-    s16 unk6;
-};
-
-const struct Struct80F4CC4 gUnknown_80F4CC4[] = {
-    {gUnknown_80F4810, 1, 1},
-    {gUnknown_80F4B30, 1, 1},
-    {gUnknown_80F499C, 1, 1},
-    {gUnknown_80F4B30, 1, -1},
-    {gUnknown_80F4810, -1, -1},
-    {gUnknown_80F4B30, -1, -1},
-    {gUnknown_80F499C, -1, -1},
-    {gUnknown_80F4B30, -1, 1},
+const struct PositionArrayWithOffsets gUnknown_80F4CC4[NUM_DIRECTIONS] = {
+    [DIRECTION_SOUTH] =     {gUnknown_80F4810,  1,  1},
+    [DIRECTION_SOUTHEAST] = {gUnknown_80F4B30,  1,  1},
+    [DIRECTION_EAST] =      {gUnknown_80F499C,  1,  1},
+    [DIRECTION_NORTHEAST] = {gUnknown_80F4B30,  1, -1},
+    [DIRECTION_NORTH] =     {gUnknown_80F4810, -1, -1},
+    [DIRECTION_NORTHWEST] = {gUnknown_80F4B30, -1, -1},
+    [DIRECTION_WEST] =      {gUnknown_80F499C, -1, -1},
+    [DIRECTION_SOUTHWEST] = {gUnknown_80F4B30, -1,  1},
 };
 
 const s32 gFaceDirectionIncrements[] = {0, 1, -1, 2, -2, 3, -3, 4, 0, -1, 1, -2, 2, -3, 3, 4};

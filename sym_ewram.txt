@@ -16,8 +16,6 @@
     .include "src/main.o"
     .include "src/reg_control.o"
     .include "src/music.o"
-    .space 0x3
-
     .include "src/bg_control.o"
     .include "src/cpu.o"
 	.space 0x4
@@ -57,84 +55,19 @@ gUnknown_202DCF8: /* 202DCF8 (sub_80001E8 - sub_800D9B8) */
 
     .include "src/friend_areas_map.o"
     .include "src/code_80118A4.o"
-    .space 0x2
-
     .include "src/save.o"
 	.space 4
     .include "src/string_format.o"
 	.space 4
     .include "src/other_menus2.o"
     .include "src/rescue_password_menu.o"
-	.space 0x2
-
-gDungeonNameBannerPalette: /* 202EC88 (ShowDungeonNameBanner_Async - xxx_dungeon_8042F6C) */
-	.space 0x4
-gDungeonNameBannerFontFile: /* 202EC8C (ShowDungeonNameBanner_Async - sub_803DEC8) */
-	.space 0x4
-gDungeonNameBannerFont: /* 202EC90 (ShowDungeonNameBanner_Async - sub_803DEC8) */
-	.space 0x4
-
-gUnknown_202EC94: /* 202EC94 (sub_803DF60 - sub_803ECE0) */
-	.space 0x4
-gUnknown_202EC98: /* 202EC98 (sub_803DF60 - sub_803E214) */
-	.space 0x4
-gUnknown_202EC9C: /* 202EC9C (sub_803DF60 - sub_803EF90) */
-	.space 0x4
-gUnknown_202ECA0: /* 202ECA0 (sub_803DF60 - sub_807E88C) */
-	.space 0x4
-gUnknown_202ECA4: /* 202ECA4 (sub_803E02C - SetDungeonBGColorRGB) */
-	.space 0x84
-gUnknown_202ED28: /* 202ED28 (sub_803E250 - sub_8083568) */
-	.space 0x8
-gUnknown_202ED30: /* 202ED30 (sub_803E250) */
-	.space 0x88
-gUnknown_202EDB8: /* 202EDB8 (sub_803E250) */
-	.space 0x8
-gUnknown_202EDC0: /* 202EDC0 (sub_803E250 - sub_80462AC) */
-	.space 0x8
-gDungeonBrightness: /* 202EDC8 (sub_803E250 - sub_8086794) */
-	.space 0x4
-gDungeonFramesCounter: /* 202EDCC (sub_803E490 - sub_807D148) */
-	.space 0x4
-gUnknown_202EDD0: /* 202EDD0 (sub_803E250 - sub_8052210) */
-	.space 0x4
-gUnknown_202EDD4: /* 202EDD4 (sub_803E250 - sub_803E668) */
-	.space 0x4
-gUnknown_202EDD8: /* 202EDD8 (sub_803ECE0) */
-	.space 0x4
-gUnknown_202EDDC: /* 202EDDC (sub_803EDF0) */
-	.space 0xC
-gUnknown_202EDE8: /* 202EDE8 (sub_803E250 - sub_803EDF0) */
-	.space 0x14
-gUnknown_202EDFC: /* 202EDFC (sub_803F27C - sub_803F878) */
-	.space 0x4
-
+    .include "src/code_803DA7C.o"
+    .include "src/dungeon_vram.o"
+    .include "src/dungeon_tilemap.o"
     .include "src/dungeon_map.o"
-
-gUnknown_202EE0C: /* 202EE0C (sub_80694C0 - sub_806B8CC) */
-	.space 0x4
-
-gDungeonMenu: /* 202EE10 (sub_803EC94 - sub_8083CE0) */
-	.space 0x28
-
-gUnknown_202EE38: /* 202EE38 (sub_8063834) */
-	.space 0x1
-gUnknown_202EE39: /* 202EE39 (sub_8060E38) */
-	.space 0x1
-
-gUnknown_202EE3A: /* 202EE3A (sub_8060E38 - sub_8065DBC) */
-	.space 0xA
-
-gDungeonSubMenu: /* 202EE44 (sub_8044EC8 - sub_80647F0) */
-	.space 0x28
-gDungeonSubMenuItemsCount: /* 202EE6C (sub_8044F5C - sub_8067A80) */
-	.space 0x4
-
-gUnknown_202EE70: /* 202EE70 (sub_804513C - sub_80828E0) */
-	.space 0x6
-gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
-	.space 0x10
-
+    .include "src/dungeon_engine.o"
+    .include "src/dungeon_action.o"
+    .include "src/dungeon_util.o"
     .include "src/dungeon_map_access.o"
     .include "src/dungeon_generation.o"
     .include "src/dungeon_message.o"
@@ -154,23 +87,14 @@ gUnknown_202EE76: /* 202EE76 (sub_804513C - sub_8082A08) */
     .include "src/dungeon_8067A80.o"
     .include "src/dungeon_logic.o"
     .include "src/code_80718D8.o"
-
-gUnknown_202F32C: /* 202F32C (xxx_dungeon_8042F6C - sub_8072CF4) */
-	.space 0x1
-gUnknown_202F32D: /* 202F32D (sub_8072CF4 - UseAttack) */
-	.space 0x3
-
+    .include "src/dungeon_8072CF4.o"
     .include "src/dungeon_ai_items.o"
     .include "src/code_8073CF0.o"
     .include "src/code_8075708.o"
 	.space 0x4
     .include "src/dungeon_ai_attack.o"
-    .include "src/code_80869E4.o"
-
-gUnknown_202F3D8: /* 202F3D8 (sub_8085B4C - sub_8085B80) */
-	.space 0x8
-
-
+    .include "src/code_80848F0.o"
+	.space 0x4
     .include "src/pokemon.o"
     .include "src/items.o"
     .include "src/rescue_team_info.o"

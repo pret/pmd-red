@@ -23,7 +23,7 @@
 #include "position_util.h"
 #include "dungeon_music.h"
 #include "dungeon_map_access.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_806CD90.h"
 #include "game_options.h"
 #include "dungeon_items.h"

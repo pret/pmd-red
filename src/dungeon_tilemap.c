@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/item.h"
 #include "constants/status.h"
 #include "structs/str_202EDE8.h"
@@ -9,7 +10,7 @@
 #include "code_8009804.h"
 #include "code_800E9E4.h"
 #include "code_801602C.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_803E724.h"
 #include "code_806CD90.h"
 #include "dungeon.h"
@@ -26,38 +27,18 @@
 #include "menu_input.h"
 #include "sprite.h"
 #include "text_1.h"
-
-extern s32 gDungeonBrightness;
-extern u32 gUnknown_202EDD0;
-extern s32 gUnknown_202EDD8;
-extern u32 gUnknown_202EDFC;
-
-struct DungeonPalFile
-{
-    void *unk0;
-    const void *unk4;
-};
-
-extern struct DungeonPalFile *gDungeonPaletteFile;
-extern struct DungeonPalFile *gDungeonNameBannerPalette;
-extern struct DungeonPalFile *gUnknown_202EC94;
-extern RGB gUnknown_202ECA4[];
-extern u8 gUnknown_203B40C;
-extern MenuInputStruct gDungeonMenu;
-extern SpriteOAM gUnknown_202EDDC;
-
-extern const u32 gUnknown_80F6490[];
-extern const s32 gUnknown_80F64B4[];
-extern const s32 gUnknown_80F64FC[];
-extern const s32 gUnknown_80F6520[];
-extern const u16 gUnknown_80F64D8[][9];
-extern const u16 gUnknown_80F6544[][9];
+#include "play_time.h"
+#include "code_800C9CC.h"
+#include "code_80118A4.h"
+#include "dungeon_strings.h"
 
 extern s32 gDungeonFramesCounter;
 
 extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
+extern void sub_803F7BC(void);
+extern void ShowWholeRevealedDungeonMap();
 
 void sub_803EC94(void);
 s32 sub_803EF90(s32 a0, u8 a1);
@@ -68,597 +49,7 @@ void sub_803FB74(void);
 void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3);
 void sub_803FF18(s32 a0, u16 *a1, bool8 a2);
 
-static const RGB sBlackRgb = {0, 0, 0};
-
-void sub_803E874(bool8 r10, s32 r9)
-{
-    s32 i, index, count;
-    const RGB *color;
-
-    color = gDungeonPaletteFile->unk4;
-    SetBGPaletteBufferColorRGB(0, &sBlackRgb, gDungeonBrightness, gDungeon->colorRamp);
-    color++;
-    index = 1;
-    count = 159;
-    for (i = 0; i < count; i++) {
-        SetBGPaletteBufferColorRGB(index, color, gDungeonBrightness, gDungeon->colorRamp);
-        color++;
-        index++;
-    }
-
-    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1BDD4.unk1C06C == 3) {
-        sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
-    }
-
-    index += 32;
-    color = gUnknown_202ECA4;
-    count = 32;
-    for (i = 0; i < count; i++) {
-        SetBGPaletteBufferColorRGB(index, color, gDungeonBrightness, gDungeon->colorRamp);
-        color++;
-        index++;
-    }
-
-    if (r10) {
-        index = 224;
-        color = gDungeonNameBannerPalette->unk4;
-        count = 16;
-        for (i = 0; i < count; i++) {
-            SetBGPaletteBufferColorRGB(index, color, r9, NULL);
-            color++;
-            index++;
-        }
-    }
-
-    SetBGPaletteBufferColorRGB(248, &gFontPalette[8], gDungeonBrightness, NULL);
-
-    color = ((struct DungeonPalFile*) gDungeon->paletFile)->unk4;
-    index = 256;
-    count = 208;
-    for (i = 0; i < count; i++) {
-        SetBGPaletteBufferColorRGB(index, color, gDungeonBrightness, gDungeon->colorRamp);
-        nullsub_4(index, color, gDungeonBrightness, NULL);
-        color++;
-        index++;
-    }
-}
-
-void BgColorCallNullsub4(void)
-{
-    s32 i, index, count;
-    const RGB *color;
-
-    color = ((struct DungeonPalFile*) gDungeon->paletFile)->unk4;
-    index = 256;
-    count = 208;
-    for (i = 0; i < count; i++) {
-        nullsub_4(index, color, gDungeonBrightness, NULL);
-        color++;
-        index++;
-    }
-}
-
-void sub_803EA10(void)
-{
-    s32 i, index, count;
-    const RGB *color;
-
-    color= gDungeonPaletteFile->unk4;
-    SetBGPaletteBufferColorRGB(0, &sBlackRgb, gDungeonBrightness, gDungeon->colorRamp);
-    color++;
-    index = 1;
-    count = 159;
-    for (i = 0; i < count; i++) {
-        SetBGPaletteBufferColorRGB(index, color, gDungeonBrightness, gDungeon->colorRamp);
-        color++;
-        index++;
-    }
-
-    if (gDungeon->unk181e8.unk18215 == 0 || gDungeon->unk1BDD4.unk1C06C == 3) {
-        sub_8004AF0(TRUE, gUnknown_202EE8C, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
-    }
-
-    index += 32;
-    color = gUnknown_202ECA4;
-    count = 32;
-    for (i = 0; i < count; i++) {
-        SetBGPaletteBufferColorRGB(index, color, gDungeonBrightness, gDungeon->colorRamp);
-        color++;
-        index++;
-    }
-
-    SetBGPaletteBufferColorRGB(248, &gFontPalette[8], gDungeonBrightness, NULL);
-}
-
-static const WindowTemplates gUnknown_80F62B0 =
-{
-    .id = {
-        [0] = {
-            .type = WINDOW_TYPE_0,
-            .pos = {2, 15},
-            .width = 26,
-            .height = 5,
-            .unk10 = 7,
-            .unk12 = 0,
-            .header = NULL,
-        },
-        [1] = WIN_TEMPLATE_DUMMY,
-        [2] = WIN_TEMPLATE_DUMMY,
-        [3] = WIN_TEMPLATE_DUMMY,
-    }
-};
-
-static const WindowTemplates gUnknown_80F6310 =
-{
-    .id = {
-        [0] = {
-            .type = WINDOW_TYPE_NORMAL,
-            .pos = {2, 3},
-            .width = 6,
-            .height = 7,
-            .unk10 = 7,
-            .unk12 = 0,
-            .header = NULL,
-        },
-        [1] = WIN_TEMPLATE_DUMMY,
-        [2] = WIN_TEMPLATE_DUMMY,
-        [3] = WIN_TEMPLATE_DUMMY,
-    }
-};
-
-static const WindowTemplates gUnknown_80F6370 =
-{
-    .id = {
-        [0] = {
-            .type = WINDOW_TYPE_NORMAL,
-            .pos = {2, 3},
-            .width = 6,
-            .height = 7,
-            .unk10 = 7,
-            .unk12 = 0,
-            .header = NULL,
-        },
-        [1] = {
-            .type = WINDOW_TYPE_NORMAL,
-            .pos = {10, 4},
-            .width = 17,
-            .height = 2,
-            .unk10 = 2,
-            .unk12 = 0,
-            .header = NULL,
-        },
-        [2] = {
-            .type = WINDOW_TYPE_NORMAL,
-            .pos = {2, 13},
-            .width = 26,
-            .height = 6,
-            .unk10 = 6,
-            .unk12 = 0,
-            .header = NULL,
-        },
-        [3] = WIN_TEMPLATE_DUMMY,
-    }
-};
-
-static const WindowTemplates gUnknown_80F63D0 =
-{
-    .id = {
-        [0] = {
-            .type = WINDOW_TYPE_NORMAL,
-            .pos = {2, 3},
-            .width = 26,
-            .height = 14,
-            .unk10 = 18,
-            .unk12 = 2,
-            .header = NULL,
-        },
-        [1] = WIN_TEMPLATE_DUMMY,
-        [2] = WIN_TEMPLATE_DUMMY,
-        [3] = WIN_TEMPLATE_DUMMY,
-    }
-};
-
-// kind==8 uses the `name` param.
-void sub_803EAF0(u32 kind, u8 *name)
-{
-    if (kind == gUnknown_202EDD0)
-        return;
-
-    switch (kind) {
-        case 1: {
-            if (gUnknown_203B40C != 0)
-                sub_8052210(0);
-
-            ResetUnusedInputStruct();
-            sub_803EC94();
-            ShowWindows(NULL, TRUE, TRUE);
-            break;
-        }
-        case 0: {
-            sub_803EC94();
-            ShowWindows(NULL, TRUE, TRUE);
-            if (gUnknown_203B40C != 0) {
-                ShowWholeRevealedDungeonMap();
-                UpdateBgTilemapForDungeonMap(FALSE);
-            }
-            break;
-        }
-        case 3: {
-            ShowWindows(&gUnknown_80F62B0, TRUE, TRUE);
-            if (gUnknown_203B40C != 0)
-                UpdateBgTilemapForDungeonMap(TRUE);
-            break;
-        }
-        case 6: {
-            if (gUnknown_203B40C != 0)
-                sub_8052210(0);
-
-            ResetUnusedInputStruct();
-            ShowWindows(&gUnknown_80F6310, TRUE, TRUE);
-            break;
-        }
-        case 7: {
-            if (gUnknown_203B40C != 0)
-                sub_8052210(0);
-
-            ResetUnusedInputStruct();
-            ShowWindows(&gUnknown_80F6370, TRUE, TRUE);
-            break;
-        }
-        case 2:
-        case 4: {
-            if (gUnknown_203B40C != 0)
-                sub_8052210(0);
-
-            ResetUnusedInputStruct();
-            sub_803EC94();
-            ShowWindows(NULL, TRUE, TRUE);
-            break;
-        }
-        case 5: {
-            if (gUnknown_203B40C != 0)
-                sub_8052210(0);
-
-            ShowWindows(NULL, TRUE, TRUE);
-            break;
-        }
-        case 8: {
-            if (gUnknown_203B40C != 0) {
-                PlayDungeonStartButtonSE();
-                sub_8052210(0);
-            }
-
-            CreateConfirmNameMenu(2, name);
-            break;
-        }
-        case 9: {
-            if (gUnknown_203B40C != 0) {
-                sub_8052210(0);
-                PlayDungeonStartButtonSE();
-            }
-
-            ResetUnusedInputStruct();
-            ShowWindows(&gUnknown_80F63D0, FALSE, TRUE);
-            break;
-        }
-        case 10: {
-            PlayDungeonStartButtonSE();
-            break;
-        }
-        case 150: { // Dummy case put here to match, any value >= 150 works
-            break;
-        }
-    }
-
-    gUnknown_202EDD0 = kind;
-}
-
-void sub_803EC94(void)
-{
-    gDungeonMenu.unk1E = 0;
-    gDungeonMenu.unk20 = 0;
-    gDungeonMenu.unkC = 0;
-    gDungeonMenu.unkE = 0;
-    gDungeonMenu.unk14.x = 0;
-    sub_801317C(&gDungeonMenu.unk28);
-}
-
-void DungeonShowWindows(WindowTemplates *a0, bool8 a1)
-{
-    gUnknown_202EDD0 = 10;
-    sub_8052210(0);
-    ResetUnusedInputStruct();
-    ShowWindows(a0, TRUE, a1);
-}
-
-void sub_803ECE0(void)
-{
-    gUnknown_202EDD8++;
-    if (gUnknown_202EDD8 < 0)
-        gUnknown_202EDD8 = 0;
-    if (gUnknown_202EDD8 > 11)
-        gUnknown_202EDD8 = 0;
-
-    sub_80098BC((void *)VRAM + 0x14400, gUnknown_202EC94->unk4 + ((gUnknown_202EDD8 / 4) * 0x240), 0x240);
-}
-
-void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
-{
-    s32 i, var;
-
-    if (a0 == 0 || gDungeon->unk181e8.blinded)
-        return;
-
-    for (i = 0; i < 20; i++) {
-        if (gUnknown_202EDE8.unk0 == 0)
-            break;
-        DungeonRunFrameActions(0x29);
-    }
-
-    var = sub_803EF90(a0, a2);
-    gUnknown_202EDE8.unk0 = 60;
-    gUnknown_202EDE8.unk4 = mon;
-    gUnknown_202EDE8.unk8 = mon->spawnGenID;
-    gUnknown_202EDE8.unkC = -(var * 768);
-    gUnknown_202EDE8.unk10 = 0;
-
-    if (a3 < 0) {
-        if (a0 < -999) {
-            gUnknown_202EDE8.unk2 = 6;
-        }
-        else if (a0 >= 0) {
-            gUnknown_202EDE8.unk2 = 10;
-        }
-        else {
-            gUnknown_202EDE8.unk2 = 3;
-        }
-    }
-    else {
-        gUnknown_202EDE8.unk2 = a3;
-    }
-
-    sub_80098BC((void *) VRAM + 0x142C0, gDungeon->unk18, 0x80);
-}
-
-void sub_803EDF0(void)
-{
-    EntityInfo *entInfo;
-    s32 x, y, y1, y2;
-
-    if (gUnknown_202EDE8.unk0 == 0)
-        return;
-    if (!EntityIsValid(gUnknown_202EDE8.unk4)) {
-        gUnknown_202EDE8.unk0 = 0;
-        return;
-    }
-    if (gUnknown_202EDE8.unk8 != gUnknown_202EDE8.unk4->spawnGenID) {
-        gUnknown_202EDE8.unk0 = 0;
-        return;
-    }
-
-    gUnknown_202EDE8.unk0--;
-    gUnknown_202EDE8.unk10 -= 46;
-    entInfo = GetEntInfo(gUnknown_202EDE8.unk4);
-    x = (entInfo->pixelPos.x + (gUnknown_202EDE8.unkC / 256)) - gDungeon->unk181e8.cameraPixelPos.x;
-    y1 = (entInfo->pixelPos.y + (gUnknown_202EDE8.unk10 / 256));
-    y2 = (gDungeon->unk181e8.cameraPixelPos.y + 24);
-    y = y1 - y2;
-
-    // sprite oam memes strike again
-    if (x >= -32 && y >= -8 && x < 240 && y < 160) {
-        SpriteSetY(&gUnknown_202EDDC, y);
-        SpriteSetAffine1(&gUnknown_202EDDC, 0);
-        SpriteSetAffine2(&gUnknown_202EDDC, 0);
-        SpriteSetObjMode(&gUnknown_202EDDC, 0);
-        SpriteSetMosaic(&gUnknown_202EDDC, 0);
-        SpriteSetBpp(&gUnknown_202EDDC, 0);
-        SpriteSetShape(&gUnknown_202EDDC, 1);
-        SpriteSetX(&gUnknown_202EDDC, x);
-        SpriteSetMatrixNum(&gUnknown_202EDDC, 0);
-        SpriteSetSize(&gUnknown_202EDDC, 1);
-        SpriteSetTileNum(&gUnknown_202EDDC, 0x216);
-        SpriteSetPriority(&gUnknown_202EDDC, gDungeon->unk181e8.priority);
-        SpriteSetPalNum(&gUnknown_202EDDC, gUnknown_202EDE8.unk2);
-
-        SpriteSetUnk6_0(&gUnknown_202EDDC, 0);
-        SpriteSetUnk6_1(&gUnknown_202EDDC, 0);
-        SpriteSetUnk6_2(&gUnknown_202EDDC, 0);
-
-        AddSprite(&gUnknown_202EDDC, 0x100, NULL, NULL);
-    }
-}
-
-extern OpenedFile *gUnknown_202EC9C;
-
-static const s32 gUnknown_80F6430[][9] =
-{
-    [0] = {900, 800, 700, 600, 500, 400, 300, 200, 100},
-    [1] = {90, 80, 70, 60, 50, 40, 30, 20, 10},
-};
-
-s32 sub_803EF90(s32 a0, u8 a1)
-{
-    s32 i, id;
-    const u32 *r2;
-    s32 bitsNo;
-    s32 ret;
-    bool8 unkBool;
-    u32 *mainDst = gDungeon->unk18;
-    u32 *sp[] = {(u32 *)(gUnknown_202EC9C->data + 0x124),
-               (u32 *)(gUnknown_202EC9C->data + 0x104),
-               (u32 *)(gUnknown_202EC9C->data + 0xE4),
-               (u32 *)(gUnknown_202EC9C->data + 0xC4),
-               (u32 *)(gUnknown_202EC9C->data + 0xA4),
-               (u32 *)(gUnknown_202EC9C->data + 0x84),
-               (u32 *)(gUnknown_202EC9C->data + 0x64),
-               (u32 *)(gUnknown_202EC9C->data + 0x44),
-               (u32 *)(gUnknown_202EC9C->data + 0x24)};
-    s32 dstId = 0;
-    u32 *clearDst = mainDst;
-    for (i = 0; i < 4; i++) {
-        clearDst[dstId++] = 0;
-        clearDst[dstId++] = 0;
-        clearDst[dstId++] = 0;
-        clearDst[dstId++] = 0;
-        clearDst[dstId++] = 0;
-        clearDst[dstId++] = 0;
-        clearDst[dstId++] = 0;
-        clearDst[dstId++] = 0;
-    }
-
-    if (a0 == 9999) {
-        u32 r12[] = {13, 14, 15, 15};
-
-        bitsNo = 0;
-        for (id = 0; id < 4; id++) {
-            u32 *dst = mainDst;
-            const u32 *src = (u32 *)((&((u8 *)gUnknown_202EC9C->data)[4] + r12[id] * 32));
-
-            for (i = 0; i < 8; i++) {
-                u32 toOr1, toOr2;
-                if (bitsNo == 0) {
-                    toOr1 = 0;
-                    toOr2 = *src;
-                }
-                else {
-                    toOr1 = *src >> (32 - bitsNo);
-                    toOr2 = *src << bitsNo;
-                }
-
-                src++;
-                dst[0] |= toOr2;
-                dst[8] |= toOr1;
-                dst++;
-            }
-
-            bitsNo += 24;
-            if (bitsNo >= 32) {
-                bitsNo -= 32;
-                mainDst += 8;
-            }
-        }
-
-        return 4;
-    }
-
-    if (a0 > 999) a0 = 999;
-    if (a0 < -999) a0 = -999;
-
-    r2 = (u32 *)((u8 *)gUnknown_202EC9C->data + 0x184);
-    if (a1) {
-        if (a0 > 0) {
-            r2 = (u32 *)((u8 *)gUnknown_202EC9C->data + 0x144);
-        }
-        else if (a0 < 0) {
-            r2 = (u32 *)((u8 *)gUnknown_202EC9C->data + 0x164);
-            a0 = -a0;
-        }
-    }
-
-    mainDst[0] = *r2++;
-    mainDst[1] = *r2++;
-    mainDst[2] = *r2++;
-    mainDst[3] = *r2++;
-    mainDst[4] = *r2++;
-    mainDst[5] = *r2++;
-    mainDst[6] = *r2++;
-    mainDst[7] = *r2++;
-
-    bitsNo = 24;
-    ret = 1;
-    unkBool = FALSE;
-    for (id = 0; id < 2; id++) {
-        s32 arrId;
-
-        for (arrId = 0; arrId < 9; arrId++) {
-            if (gUnknown_80F6430[id][arrId] <= a0) {
-                const u32 *src = sp[arrId];
-                u32 *dst = mainDst;
-
-                for (i = 0; i < 8; i++) {
-                    u32 toOr1, toOr2;
-                    if (bitsNo == 0) {
-                        toOr1 = 0;
-                        toOr2 = *src;
-                    }
-                    else {
-                        toOr1 = *src >> (32 - bitsNo);
-                        toOr2 = *src << bitsNo;
-                    }
-
-                    src++;
-                    dst[0] |= toOr2;
-                    dst[8] |= toOr1;
-                    dst++;
-                    unkBool = TRUE;
-                }
-
-                bitsNo += 24;
-                if (bitsNo >= 32) {
-                    bitsNo -= 32;
-                    mainDst += 8;
-                }
-
-                a0 -= gUnknown_80F6430[id][arrId];
-                ret++;
-                break;
-            }
-        }
-
-        if (arrId == 9 && unkBool) {
-            const u32 *src = (u32 *)(&((u8 *)gUnknown_202EC9C->data)[4]);
-            u32 *dst = mainDst;
-            for (i = 0; i < 8; i++) {
-                u32 toOr1, toOr2;
-                if (bitsNo == 0) {
-                    toOr1 = 0;
-                    toOr2 = *src;
-                }
-                else {
-                    toOr1 = *src >> (32 - bitsNo);
-                    toOr2 = *src << bitsNo;
-                }
-
-                src++;
-                dst[0] |= toOr2;
-                dst[8] |= toOr1;
-                dst++;
-            }
-
-            bitsNo += 24;
-            if (bitsNo >= 32) {
-                bitsNo -= 32;
-                mainDst += 8;
-            }
-
-            ret++;
-        }
-    }
-
-    {
-        const u32 *src = (u32 *)(&((u8 *)gUnknown_202EC9C->data)[4] + (a0 * 32));
-        u32 *dst = mainDst;
-        for (i = 0; i < 8; i++) {
-            u32 toOr1, toOr2;
-            if (bitsNo == 0) {
-                toOr1 = 0;
-                toOr2 = *src;
-            }
-            else {
-                toOr1 = *src >> (32 - bitsNo);
-                toOr2 = *src << bitsNo;
-            }
-
-            src++;
-            dst[0] |= toOr2;
-            dst[8] |= toOr1;
-            dst++;
-        }
-    }
-
-    ret++;
-    return ret;
-}
+static EWRAM_DATA u32 gUnknown_202EDFC = 0;
 
 void sub_803F27C(bool8 a0)
 {
@@ -1026,10 +417,9 @@ void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
     s32 i;
     s32 r5;
     u32 r10, r9;
-    u32 sp[9];
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
     u32 *dst = gUnknown_3001018;
-    memcpy(sp, gUnknown_80F6490, sizeof(sp));
+    u32 sp[9] = {0, 0xF, 0xFF, 0xFFF, 0xFFFF, 0xFFFFF, 0xFFFFFF, 0xFFFFFFF, 0xFFFFFFFF};
 
     r10 = 0x22222222;
     r9 = 0x44444444;
@@ -1205,6 +595,12 @@ void sub_803FB74(void)
     }
 }
 
+static const s32 gUnknown_80F64B4[] = {90, 80, 70, 60, 50, 40, 30, 20, 10};
+static const u16 gUnknown_80F64D8[][9] = {
+    [0] = {0xF291, 0xF290, 0xF28F, 0xF28E, 0xF28D, 0xF28C, 0xF28B, 0xF28A, 0xF289},
+    [1] = {0xF2C8, 0xF2C7, 0xF2C6, 0xF2C5, 0xF2C4, 0xF2C3, 0xF2C2, 0xF2C1, 0xF2C0},
+};
+
 void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
 {
     s32 var = (a2) ? 0 : 55;
@@ -1218,11 +614,15 @@ void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
             a1[0] = 0xF2C8;
             a1[1] = 0xF2C8;
         }
+        return;
     }
-    else if (a0 == 100) {
+
+    if (a0 == 100) {
         a1[0] = 0xF294;
         a1[1] = 0xF295;
+        return;
     }
+    // This is a fakematch, I was actually to decompile this function for Blue(https://decomp.me/scratch/tqonk), but agbcc doesn't want to cooperate...
     else {
         // I thought 'ptr' was a compiler generated variable, but I couldn't match the function without declaring it.
         u16 *ptr = a1 + 1;
@@ -1232,7 +632,7 @@ void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
             s32 i;
             s32 arrId = (!a2) ? 1 : 0;
 
-            for (i = 0; i < 9; i++) {
+            for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80F64B4); i++) {
                 ASM_MATCH_TRICK(a1);
                 if (gUnknown_80F64B4[i] <= a0) {
                     *a1 = gUnknown_80F64D8[arrId][i];
@@ -1248,6 +648,13 @@ void sub_803FE30(s32 a0, u16 *a1, bool8 a2, bool8 a3)
         *a1 = (a0 + varAdd + 0x258) | 0xF000;
     }
 }
+
+static const s32 gUnknown_80F64FC[] = {900, 800, 700, 600, 500, 400, 300, 200, 100};
+static const s32 gUnknown_80F6520[] = {90, 80, 70, 60, 50, 40, 30, 20, 10};
+static const u16 gUnknown_80F6544[][9] = {
+    [0] = {0xF291, 0xF290, 0xF28F, 0xF28E, 0xF28D, 0xF28C, 0xF28B, 0xF28A, 0xF289},
+    [1] = {0xF2C8, 0xF2C7, 0xF2C6, 0xF2C5, 0xF2C4, 0xF2C3, 0xF2C2, 0xF2C1, 0xF2C0},
+};
 
 void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
 {
@@ -1265,7 +672,7 @@ void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
         s32 i = 0;
         s32 varAdd = var + 48;
 
-        for (i = 0; i < 9; i++) {
+        for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80F64FC); i++) {
             if (gUnknown_80F64FC[i] <= a0) {
                 *(a1++) = gUnknown_80F6544[arrId][i];
                 a0 -= gUnknown_80F64FC[i];
@@ -1277,7 +684,7 @@ void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
             *(a1++) = (toAdd + 0x258) | 0xF000;
         }
 
-        for (i = 0; i < 9; i++) {
+        for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80F6520); i++) {
             if (gUnknown_80F6520[i] <= a0) {
                 *(a1++) = gUnknown_80F6544[arrId][i];
                 a0 -= gUnknown_80F6520[i];
@@ -1290,4 +697,56 @@ void sub_803FF18(s32 a0, u16 *a1, bool8 a2)
 
         *a1 = (a0 + varAdd + 0x258) | 0xF000;
     }
+}
+
+void HandleLuminousOrbAction(Entity *pokemon)
+{
+  int XCoord;
+  int YCoord;
+
+  gDungeon->unk181e8.allTilesRevealed = TRUE;
+
+  for(YCoord = 0; YCoord < DUNGEON_MAX_SIZE_Y; YCoord++)
+  {
+    for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
+    {
+      Tile *mapTile = GetTileMut(XCoord, YCoord);
+      mapTile->spawnOrVisibilityFlags |= VISIBILITY_FLAG_REVEALED;
+    }
+  }
+  sub_803F580(0);
+  sub_8049ED4();
+  ShowWholeRevealedDungeonMap();
+  LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD040);
+}
+
+void sub_8040094(u8 r0)
+{
+    gDungeon->unk181e8.unk18217 = r0;
+    sub_803F7BC();
+    sub_80060EC();
+    IncrementPlayTime(gPlayTimeRef);
+    WaitForNextFrameAndAdvanceRNG();
+    LoadBufferedInputs();
+    xxx_call_update_bg_sound_input();
+    UpdateDungeonMusic();
+    sub_8011860();
+}
+
+static const s32 gUnknown_80F6568[] = {
+    0, -1, 1, -1, 1, -1, 1, -2, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3, -3, 4, -4, 4, -4, 4, -5, 4, -5, 4, -5, 4, -5
+};
+
+void sub_80400D4(void)
+{
+    s32 temp;
+    temp = gDungeon->unk181e8.unk18200;
+    if(temp == 0)
+        return;
+    if(temp >= 0x1F)
+        temp = 0x1F;
+    gDungeon->unk181e8.unk181FC = gUnknown_80F6568[temp];
+    gDungeon->unk181e8.unk18200--;
+    if(gDungeon->unk181e8.unk18200 == 0)
+        gDungeon->unk181e8.unk18200 = gDungeon->unk181e8.unk18204;
 }

@@ -4044,12 +4044,6 @@ static void ResetFloor(void)
     }
 }
 
-struct PositionU8
-{
-    u8 x;
-    u8 y;
-};
-
 /*
  * ShuffleSpawnPositions - Randomly shuffle an array of spawn positions
  */
@@ -4083,7 +4077,7 @@ static void ShuffleSpawnPositions(struct PositionU8 *spawns, s32 count)
  */
 static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 {
-    struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
+    struct PositionU8 validSpawns[DUNGEON_MAX_NUM_TILES];
     s32 count;
     s32 randIndex;
     s32 i;
@@ -4419,7 +4413,7 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
  */
 static void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 {
-	struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X * DUNGEON_MAX_SIZE_Y];
+	struct PositionU8 validSpawns[DUNGEON_MAX_NUM_TILES];
     s32 count;
     s32 randIndex;
     s32 i;

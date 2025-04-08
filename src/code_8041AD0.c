@@ -10,7 +10,7 @@
 #include "code_800DAC0.h"
 #include "code_800E9A8.h"
 #include "code_800ED38.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_803E724.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
@@ -216,7 +216,6 @@ s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
     EntityInfo *entInfo;
     DungeonPos pos;
     unkStruct_80416E0 sp;
-    unkStruct_2039DB0 unkStruct;
     PixelPos pixelPos;
     s32 var;
     s32 r4;
@@ -258,7 +257,7 @@ s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
     sp.unk12 = 0;
     sp.unk18 = var;
 
-    sub_8004E8C(&unkStruct);
+    sub_8004E8C(&sp.unk1C);
     r4 = sub_8041764(&sp, FALSE);
     if (a2) {
         for (i = 0; i < 100; i++) {
@@ -286,7 +285,6 @@ s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
   int counter;
   s32 ret;
   unkStruct_80416E0 auStack_10;
-  unkStruct_2039DB0 stack1C;
 
   auStack_10.unk0 = param_2;
   auStack_10.unk4 = 0;
@@ -299,7 +297,7 @@ s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
   auStack_10.unk10 = 0;
   auStack_10.unk12 = 0;
   auStack_10.unk18 = 0xffff;
-  sub_8004E8C(&stack1C);
+  sub_8004E8C(&auStack_10.unk1C);
   ret = sub_8041764(&auStack_10, FALSE);
   if (param_3) {
     counter = 0;
@@ -1227,7 +1225,6 @@ s32 sub_8042520(Entity *a0)
     u32 dir;
     s32 iVar8;
     unkStruct_80416E0 local_58;
-    unkStruct_2039DB0 u203; // Unused
     PixelPos local_2c;
 
     if (sub_8045888(a0)) {
@@ -1245,7 +1242,7 @@ s32 sub_8042520(Entity *a0)
         local_58.unk12 = 0;
         local_58.unk14 = -1;
         local_58.unk18 = iVar8;
-        sub_8004E8C(&u203);
+        sub_8004E8C(&local_58.unk1C);
         uVar4 = sub_8041764(&local_58, 0);
 
         for (i = 0; i < 6; i++) {
@@ -1568,7 +1565,6 @@ static const unkStruct_2039DB0 gUnknown_80F683C = {0xFFFF, 0xFFFF, 0xFFFF, 0, 0,
 void sub_8042B34(s32 a0, s32 a1, s32 a2)
 {
     unkStruct_80416E0 spStruct;
-    unkStruct_2039DB0 stack1C;
     s32 i;
     s32 r8 = 0;
     Entity *leader = xxx_call_GetLeader();
@@ -1598,7 +1594,7 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
         spStruct.unk12 = gUnknown_203B414->unk8C[i].y;
         spStruct.unk14 = 4;
         spStruct.unk18 = 0xFFFF;
-        stack1C = gUnknown_80F683C;
+        spStruct.unk1C = gUnknown_80F683C;
         gUnknown_203B414->unkC[i] = sub_800E890(&spStruct);
 
         r8++;

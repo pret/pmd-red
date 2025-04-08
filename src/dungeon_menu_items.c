@@ -16,7 +16,7 @@
 #include "dungeon_music.h"
 #include "dungeon_ai_movement.h"
 #include "string_format.h"
-#include "code_803E46C.h"
+#include "dungeon_vram.h"
 #include "code_803E724.h"
 #include "trap.h"
 #include "dungeon_map_access.h"
@@ -24,7 +24,7 @@
 #include "dungeon_leader.h"
 #include "menu_input.h"
 #include "text_1.h"
-#include "code_8044CC8.h"
+#include "dungeon_action.h"
 #include "code_801B3C0.h"
 
 extern void PlayDungeonCancelSE(void);

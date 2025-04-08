@@ -8,5 +8,5 @@ gUnknown_3000C00: /* 3000C00 */
 
 .include "src/text_1.o"
 .include "src/music.o"
-.include "src/code_803E724.o"
+.include "src/dungeon_tilemap.o"
 .include "src/random_mersenne_twister.o"
