@@ -266,7 +266,7 @@ EntityInfo* GetLeaderInfo(void)
 
 bool8 sub_8083660(DungeonPos *posDst)
 {
-    struct PositionU8 positions[DUNGEON_MAX_SIZE_X_MUL_Y];
+    struct PositionU8 positions[DUNGEON_MAX_NUM_TILES];
     s32 yLoop, xLoop;
     Entity *leader = GetLeader();
     s32 randX, randY;
@@ -284,13 +284,13 @@ bool8 sub_8083660(DungeonPos *posDst)
 
         for (xLoop = 0; xLoop < DUNGEON_MAX_SIZE_X; xLoop++) {
             y = randY;
-            if (count >= DUNGEON_MAX_SIZE_X_MUL_Y)
+            if (count >= DUNGEON_MAX_NUM_TILES)
                 break;
 
             for (yLoop = 0; yLoop < DUNGEON_MAX_SIZE_Y; yLoop++) {
                 bool8 setPosition = FALSE;
                 const Tile *tile = GetTile(x, y);
-                if (count >= DUNGEON_MAX_SIZE_X_MUL_Y)
+                if (count >= DUNGEON_MAX_NUM_TILES)
                     break;
                 if (i == 0) {
                     if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL

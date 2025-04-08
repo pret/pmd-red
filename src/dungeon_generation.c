@@ -4077,7 +4077,7 @@ static void ShuffleSpawnPositions(struct PositionU8 *spawns, s32 count)
  */
 static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 {
-    struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X_MUL_Y];
+    struct PositionU8 validSpawns[DUNGEON_MAX_NUM_TILES];
     s32 count;
     s32 randIndex;
     s32 i;
@@ -4413,7 +4413,7 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
  */
 static void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
 {
-	struct PositionU8 validSpawns[DUNGEON_MAX_SIZE_X_MUL_Y];
+	struct PositionU8 validSpawns[DUNGEON_MAX_NUM_TILES];
     s32 count;
     s32 randIndex;
     s32 i;
