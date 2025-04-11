@@ -427,6 +427,8 @@ SECTIONS {
     {
         src/main_loops.o(.rodata);
         data/data.o(.rodata);
+        src/code_8002774.o(.rodata);
+        data/pksdir_5.o(.rodata);
         src/memory.o(.rodata);
         data/data1.o(.rodata);
         src/random.o(.rodata);

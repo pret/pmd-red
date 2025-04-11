@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_8002774.h"
 #include "constants/direction.h"
 #include "structs/str_position.h"
@@ -11,7 +12,18 @@ struct S
     u8 x0[UNK_STRUCT_ARR_COUNT];
 };
 
-extern const PixelPos gVectorDirections[8];
+const u8 sUnknown_8002774[] = {0, 0, 0, 0, 0, 0, 0, 0};
+
+const PixelPos gVectorDirections[NUM_DIRECTIONS] = {
+    {0, 1}, // N
+    {1, 1}, // NE
+    {1, 0}, // E
+    {1, -1}, // SE
+    {0, -1}, // S
+    {-1, -1}, // SW
+    {-1, 0}, // W
+    {-1, 1}, // NW
+};
 
 static s8 VecDirection4Radial(PixelPos *pixelPos);
 

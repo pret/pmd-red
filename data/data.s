@@ -1005,22 +1005,3 @@ gUnknown_80B7DF8:
 @ ???
 .string "pksdir0\0"
     .fill 28, 1, 0
-
-@ code_8002774.s
-.string "pksdir0\0"
-    .fill 8, 1, 0
-
-	.global gVectorDirections
-gVectorDirections: @ R=080B7E3C | B=0208772C
-    .4byte 0, 1   @N
-    .4byte 1, 1   @NE
-    .4byte 1, 0   @E
-    .4byte 1, -1  @SE
-    .4byte 0, -1  @S
-    .4byte -1, -1 @SW
-    .4byte -1, 0  @W
-    .4byte -1, 1  @NW
-
-@ ???
-.string "pksdir0\0"
-
