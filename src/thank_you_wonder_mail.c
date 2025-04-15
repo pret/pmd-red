@@ -1374,7 +1374,7 @@ void UpdateThankYouMailText(void)
         monName = GetMonSpecies(MONSTER_PELIPPER);
         strcpy(sUnknown_203B2C4->unk53C.clientName,monName); // 0x53C
         sUnknown_203B2C4->unk53C.clientSpecies = MONSTER_PELIPPER; // 0x550
-        sUnknown_203B2C4->unk53C.unk16 = 2; // 0x552
+        sUnknown_203B2C4->unk53C.rewardType = 2; // 0x552
         sUnknown_203B2C4->unk53C.moneyReward = 0; // 0x554
         mailIndex = GetMailIndex(6,sUnknown_203B2C4->unk430);
         mail = GetMailatIndex(mailIndex);

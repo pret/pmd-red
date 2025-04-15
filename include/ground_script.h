@@ -115,8 +115,18 @@ typedef struct GroundMapAction
 {
     // size: 0x110
     /* 0x00 */ Action action;
-    /* 0xE4 */ u16 groundMapId;
-    /* .... */ u8  fillE8[0x110 - 0xE6];
+    /* 0xE4 */ s16 groundMapId;
+               u16 fillE6;
+               u32 unkE8;
+               u32 unkEC;
+               u32 unkF0;
+               u32 unkF4;
+               u32 unkF8;
+               u32 unkFC;
+               u32 unk100;
+               u32 unk104;
+               u32 unk108;
+               u32 unk10C;
 } GroundMapAction;
 
 typedef struct ScriptRef

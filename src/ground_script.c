@@ -42,7 +42,7 @@
 
 
 void GroundMap_Select(s16);
-void GroundMap_SelectDungeon(s16, DungeonLocation*, u8);
+void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
 void GroundMap_GetStationScript(ScriptInfoSmall *out, s16, s32, s32);
 void GroundLives_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
 void GroundObject_ExecuteScript(s32, s16 *, ScriptInfoSmall *);

@@ -123,7 +123,7 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
     else
         uVar1 = sub_803C1D0(&param_1->unk8->dungeon, param_1->mail->missionType);
 
-    PrintStringOnWindow(180, param_1->y, sub_803C1F0(uVar1), param_1->unk0[0], 0);
+    PrintStringOnWindow(180, param_1->y, GetMissionRankText(uVar1), param_1->unk0[0], 0);
 }
 
 void CreateRescueDescription(unkStruct_802C39C *param_1)
@@ -329,7 +329,7 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
 
     y += 12;
     PrintStringOnWindow(10, y, gDifficultyText, param_1->unk0[0], 0);
-    PrintStringOnWindow(68, y, sub_803C1F0(uVar3), param_1->unk0[0], 0);
+    PrintStringOnWindow(68, y, GetMissionRankText(uVar3), param_1->unk0[0], 0);
 
     y += 12;
     PrintStringOnWindow(10, y, gRewardText, param_1->unk0[0], 0);
