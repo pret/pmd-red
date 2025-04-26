@@ -900,6 +900,7 @@ SECTIONS {
     titlemenu_sbin_section 0x8380000 :
     ALIGN(4)
     {
+        src/titlemenu_sbin.o(.rodata);
         data/titlemenu_sbin.o(.rodata);
     } > ROM =0
 
@@ -932,6 +933,7 @@ SECTIONS {
     ground_sbin_section :
     ALIGN(4)
     {
+        src/ground_sbin.o(.rodata);
         data/ground_sbin.o(.rodata);
     } > ROM =0
 

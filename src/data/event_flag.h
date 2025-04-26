@@ -178,3 +178,4 @@ const struct GroundEventTableEntry gGroundEnterLookupTable[58] = {
 
 ALIGNED(4) const u8 gScenarioCalcLogString[] = "SCENARIO CALC [%3d] %4d %4d -> %4d %4d";
 
+ALIGNED(4) const u8 EventFlagFile_Text[] = "../main/event_flag.c";

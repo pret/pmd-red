@@ -19,13 +19,6 @@ EWRAM_DATA u8 gScriptVarBuffer[0x400] = {0}; // NDS=020876DC
 
 #include "data/event_flag.h"
 
-extern DebugLocation gUnknown_80B7318;
-extern u8 gUnknown_80B7324[];
-extern DebugLocation gUnknown_80B7350;
-extern u8 gUnknown_80B735C[];
-extern u8 gUnknown_80B7378[];
-extern u8 gUnknown_80B7388[];
-
 extern bool8 GetScriptMode(void);
 extern bool8 HasCompletedAllMazes(void);
 extern u8 sub_8002658(s16);
@@ -106,7 +99,7 @@ void ThoroughlyResetScriptVars(void)
 }
 
 #if (GAME_VERSION == VERSION_RED)
-void sub_8001564(void)
+UNUSED void sub_8001564(void)
 {
     nullsub_128();
 }
@@ -657,6 +650,14 @@ void sub_8001D88(void)
   }
 }
 
+ALIGNED(4) static const u8 sFlagCalc_Text[] = "_FlagCalc";
+
+static const DebugLocation sFlagCalcDebugLocation = {
+    EventFlagFile_Text,
+    0x551,
+    sFlagCalc_Text
+};
+
 // arm9.bin::0200EC08
 s32 _FlagCalc(s32 param_1, s32 param_2, enum FlagCalcOperation operation)
 {
@@ -686,9 +687,17 @@ s32 _FlagCalc(s32 param_1, s32 param_2, enum FlagCalcOperation operation)
     case CALC_RANDOM:
         return OtherRandInt(param_2);
     default:
-        FatalError(&gUnknown_80B7318,gUnknown_80B7324, operation); // event flag expansion error %d
+        FatalError(&sFlagCalcDebugLocation,"event flag expansion error %d", operation); // event flag expansion error %d
   }
 }
+
+ALIGNED(4) static const u8 sFlagJudge_Text[] = "_FlagJudge";
+
+static const DebugLocation sFlagJudgeDebugLocation = {
+    EventFlagFile_Text,
+    0x57C,
+    sFlagJudge_Text
+};
 
 // arm9.bin::0200EAE4
 bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation)
@@ -717,7 +726,7 @@ bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation)
       case JUDGE_BIT_SET:
         return param_1 >> (param_2) & 1;
       default:
-        FatalError(&gUnknown_80B7350,gUnknown_80B735C, operation); // event flag rule error %d
+        FatalError(&sFlagJudgeDebugLocation,"event flag rule error %d", operation); // event flag rule error %d
   }
 }
 
@@ -801,7 +810,7 @@ UNUSED const u8 *sub_8002374(u32 param_1)
     return gUnknown_80B6D90[param_1].text;
   }
   else {
-    return gUnknown_80B7378; // error number
+    return "error number"; // error number
   }
 }
 
@@ -811,7 +820,7 @@ UNUSED const u8 *sub_8002394(u32 param_1)
     return  gUnknown_80B714C[param_1 - 0x12];
   }
   else if (param_1 == 0xf) {
-    return gUnknown_80B7388; // 1-1
+    return "1-1"; // 1-1
   }
   else {
     return gUnknown_80B7144; // NONE

@@ -2,54 +2,6 @@
 
 	.align 2, 0
 
-    @ event_flag.c
-
-    .global EventFlagFile_Text
-    EventFlagFile_Text:
-    .string "../main/event_flag.c\0"
-    .align 2,0
-
-    .global FlagCalc_Text
-    FlagCalc_Text:
-    .string "_FlagCalc\0"
-    .align 2,0
-
-    .global gUnknown_80B7318
-    gUnknown_80B7318: @ 80B7318
-    .4byte EventFlagFile_Text
-    .byte 0x51, 0x05, 0x00, 0x00
-    .4byte FlagCalc_Text
-
-    .global gUnknown_80B7324
-    gUnknown_80B7324: @ 80B7324
-    .string "event flag expansion error %d\0"
-    .align 2,0
-
-    .global FlagJudge_Text
-    FlagJudge_Text:
-    .string "_FlagJudge\0"
-    .align 2,0
-
-	.global gUnknown_80B7350
-gUnknown_80B7350: @ 80B7350
-        .4byte EventFlagFile_Text
-        .byte 0x7C, 0x05, 0x00, 0x00
-        .4byte FlagJudge_Text
-
-	.global gUnknown_80B735C
-gUnknown_80B735C: @ 80B735C
-        .string "event flag rule error %d\0"
-        .align 2,0
-
-	.global gUnknown_80B7378
-gUnknown_80B7378: @ 80B7378
-        .string "error number\0"
-        .align 2,0
-
-	.global gUnknown_80B7388
-gUnknown_80B7388: @ 80B7388
-        .string "1-1\0"
-
 @ code.c
 .string "pksdir0\0"
 
