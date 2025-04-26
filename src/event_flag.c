@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/friend_area.h"
 #include "constants/item.h"
 #include "items.h"
@@ -16,26 +17,8 @@
 
 EWRAM_DATA u8 gScriptVarBuffer[0x400] = {0}; // NDS=020876DC
 
-struct GroundEventTableEntry
-{
-    // size: 0x4
-    s16 groundEnterId;
-    u8 value; // Seems like friend area number
-};
+#include "data/event_flag.h"
 
-extern struct GroundEventTableEntry gGroundEnterLookupTable[58];
-
-struct unkStruct_80B6D90
-{
-    u8 *text;
-    s32 num;
-};
-extern struct unkStruct_80B6D90 gUnknown_80B6D90[];
-
-extern u8 gUnknown_80B7144[];
-extern u8 *gUnknown_80B714C[];
-extern u8 *gUnknown_80B71A0[];
-extern u8 gUnknown_80B72CC[];
 extern DebugLocation gUnknown_80B7318;
 extern u8 gUnknown_80B7324[];
 extern DebugLocation gUnknown_80B7350;
@@ -487,7 +470,7 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
 
   param_1_s32 = param_1;
   GetScriptVarScenario(param_1_s32,&local_18,&local_14);
-  Log(6,gUnknown_80B72CC,param_1_s32,local_18,local_14,param_2,param_3); // SCENARIO CALC [%3d] %4d %4d -> %4d %4d
+  Log(6,gScenarioCalcLogString,param_1_s32,local_18,local_14,param_2,param_3); // SCENARIO CALC [%3d] %4d %4d -> %4d %4d
   if ((param_1_s32 == 3) && ((param_2 != local_18 || (param_3 != local_14)))) {
     SetScriptVarValue(NULL,CLEAR_COUNT,0);
   }
@@ -812,7 +795,7 @@ UNUSED s32 sub_8002354(u32 param_1)
   }
 }
 
-UNUSED u8 *sub_8002374(u32 param_1)
+UNUSED const u8 *sub_8002374(u32 param_1)
 {
   if (param_1 < 0x3b) {
     return gUnknown_80B6D90[param_1].text;
@@ -822,7 +805,7 @@ UNUSED u8 *sub_8002374(u32 param_1)
   }
 }
 
-UNUSED u8 *sub_8002394(u32 param_1)
+UNUSED const u8 *sub_8002394(u32 param_1)
 {
   if (param_1 - 0x12 < 9) {
     return  gUnknown_80B714C[param_1 - 0x12];
@@ -835,7 +818,7 @@ UNUSED u8 *sub_8002394(u32 param_1)
   }
 }
 
-UNUSED u8 *sub_80023C4(u32 param_1)
+UNUSED const u8 *sub_80023C4(u32 param_1)
 {
   if (param_1 < 4) {
    return gUnknown_80B71A0[param_1]; // CISTART, CECONTINUE, CNLAST, CWEND
@@ -921,7 +904,7 @@ u8 sub_8002658(s16 param_1)
 {
   short sVar1;
   s32 param_1_s32;
-  struct GroundEventTableEntry *ptr;
+  const struct GroundEventTableEntry *ptr;
 
   param_1_s32 = param_1;
 
@@ -942,7 +925,7 @@ u8 sub_8002658(s16 param_1)
 // arm9.bin::0200E5E8
 s16 sub_8002694(u8 param_1)
 {
-    struct GroundEventTableEntry *puVar2 = gGroundEnterLookupTable;
+    const struct GroundEventTableEntry *puVar2 = gGroundEnterLookupTable;
 
     while (puVar2->groundEnterId != -1) {
         if (puVar2->value == param_1) {

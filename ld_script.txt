@@ -426,6 +426,7 @@ SECTIONS {
     ALIGN(4)
     {
         src/main_loops.o(.rodata);
+        src/event_flag.o(.rodata);
         data/data.o(.rodata);
         src/code_8002774.o(.rodata);
         data/pksdir_5.o(.rodata);
