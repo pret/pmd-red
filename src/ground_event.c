@@ -31,7 +31,7 @@ void AllocGroundEvents(void) {
     DeleteGroundEvents();
 }
 
-void DeleteGroundEvents() {
+void DeleteGroundEvents(void) {
     s32 v1;
     struct GroundEvent_sub* current;
     

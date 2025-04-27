@@ -8,11 +8,11 @@ extern u8 *gMissionRankText[];
 extern s32 gUnknown_80E80A0[];
 void sub_803C37C(DungeonLocation *, u8, u8 *);
 
-s32 sub_803C1B4(DungeonLocation *dungeon, u8 r1)
+s32 sub_803C1B4(DungeonLocation *dungeon, u8 missionType)
 {
     s32 temp;
     temp = sub_80908D8(dungeon);
-    if(r1 == 2)
+    if(missionType == 2)
     {
         temp += 2;
     }
@@ -21,26 +21,15 @@ s32 sub_803C1B4(DungeonLocation *dungeon, u8 r1)
     return temp;
 }
 
-NAKED
-u8 sub_803C1D0(DungeonLocation *dungeon, u8 missionType)
+u8 sub_803C1D0(struct DungeonLocation *dungeon, u8 missionType)
 {
-    asm_unified(
-	"\tpush {lr}\n"
-	"\tlsls r1, 24\n"
-	"\tlsrs r1, 24\n"
-	"\tbl sub_803C1B4\n"
-	"\tadds r1, r0, 0\n"
-	"\tlsrs r0, r1, 31\n"
-	"\tadds r0, r1, r0\n"
-	"\tasrs r1, r0, 1\n"
-	"\tlsls r0, r1, 24\n"
-	"\tlsrs r0, 24\n"
-	"\tcmp r0, 0x6\n"
-	"\tbls _0803C1EC\n"
-	"\tmovs r0, 0x6\n"
-"_0803C1EC:\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
+    s32 a = sub_803C1B4(dungeon, missionType);
+    a /= 2;
+    if ((u8)a >= 7) {
+        a = 6; 
+        return a;
+    }
+    return a;
 }
 
 u8 *GetMissionRankText(u8 index)
