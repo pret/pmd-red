@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8099690
-sub_8099690:
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	ldr r0, _080996BC
-	ldr r1, _080996C0
-	bl OpenFileAndGetFileDataPtr
-	adds r6, r0, 0
-	cmp r4, 0x1
-	beq _080996CC
-	cmp r4, 0x2
-	beq _080996D4
-	ldr r0, _080996C4
-	ldr r0, [r0]
-	ldrb r0, [r0, 0xB]
-	ldr r4, _080996C8
-	cmp r0, 0
-	beq _080996D6
-	movs r0, 0x80
-	lsls r0, 1
-	adds r4, r0
-	b _080996D6
-	.align 2, 0
-_080996BC: .4byte gUnknown_8116028
-_080996C0: .4byte gSystemFileArchive
-_080996C4: .4byte gGameOptionsRef
-_080996C8: .4byte gFontPalette + 0x40
-_080996CC:
-	ldr r4, _080996D0
-	b _080996D6
-	.align 2, 0
-_080996D0: .4byte gFontPalette + 0x180
-_080996D4:
-	ldr r4, _08099704
-_080996D6:
-	movs r0, 0xF0
-	adds r1, r4, 0
-	movs r2, 0x10
-	bl sub_800388C
-	adds r5, r4, 0
-	movs r4, 0
-_080996E4:
-	adds r0, r4, 0
-	adds r0, 0xF0
-	adds r1, r5, 0
-	adds r5, 0x4
-	bl nullsub_5
-	adds r4, 0x1
-	cmp r4, 0xF
-	ble _080996E4
-	adds r0, r6, 0
-	bl CloseFile
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08099704: .4byte gFontPalette + 0x1C0
-	thumb_func_end sub_8099690
-
 	thumb_func_start sub_8099708
 sub_8099708:
 	push {lr}

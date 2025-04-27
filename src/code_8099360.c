@@ -1,4 +1,7 @@
 #include "global.h"
+#include "bg_palette_buffer.h"
+#include "code_8009804.h"
+#include "game_options.h"
 #include "code_800558C.h"
 #include "code_80A26CC.h"
 #include "def_filearchives.h"
@@ -346,5 +349,43 @@ void sub_809965C(void)
     temp = OpenFileAndGetFileDataPtr(gUnknown_811601C, &gSystemFileArchive);
 
     sub_800388C(0x1f0, temp->data, 0x10);
+    CloseFile(temp);
+}
+
+extern const u8 gUnknown_8116028[];
+
+void sub_8099690(u32 param_1)
+{
+    OpenedFile *temp;
+    RGB *pal;
+    RGB *var2;
+    u8 gender;
+
+    s32 index;
+
+    temp = OpenFileAndGetFileDataPtr(gUnknown_8116028, &gSystemFileArchive);
+
+    switch(param_1)
+    {
+        default:
+            gender = gGameOptionsRef->playerGender;
+             pal = &gFontPalette[0x10];
+            if(gender != 0)
+                pal += 0x40;
+            break;
+        case 1:
+            pal = &gFontPalette[0x60];
+            break;
+        case 2:
+            pal = &gFontPalette[0x70];
+            break;
+    }
+
+    sub_800388C(0xF0, (u8 *)pal, 0x10);
+    var2 = pal;
+    for(index = 0; index < 0x10; index++)
+    {
+        nullsub_5(index + 0xF0, var2++);
+    }
     CloseFile(temp);
 }
