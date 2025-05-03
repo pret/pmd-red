@@ -5,61 +5,6 @@
 
 	.text
 
-	thumb_func_start GroundObject_Select
-GroundObject_Select:
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	lsls r4, 16
-	asrs r4, 16
-	lsls r1, 16
-	asrs r7, r1, 16
-	lsls r2, 24
-	asrs r6, r2, 24
-	ldr r1, _080ABC54
-	adds r0, r4, 0
-	bl GetGroundScript
-	adds r5, r0, 0
-	ldr r1, _080ABC58
-	str r6, [sp]
-	movs r0, 0
-	adds r2, r4, 0
-	adds r3, r7, 0
-	bl Log
-	lsls r1, r7, 3
-	ldr r0, [r5, 0x4]
-	adds r0, r1
-	lsls r1, r6, 2
-	adds r1, r6
-	lsls r1, 3
-	ldr r0, [r0, 0x4]
-	adds r0, r1
-	ldr r5, [r0, 0xC]
-	ldr r0, [r0, 0x8]
-	cmp r0, 0
-	ble _080ABC4A
-	adds r4, r0, 0
-_080ABC34:
-	movs r0, 0x1
-	negs r0, r0
-	adds r1, r5, 0
-	adds r2, r7, 0
-	adds r3, r6, 0
-	bl GroundObject_Add
-	subs r4, 0x1
-	adds r5, 0x18
-	cmp r4, 0
-	bne _080ABC34
-_080ABC4A:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080ABC54: .4byte gUnknown_81183E4
-_080ABC58: .4byte gUnknown_81183F0
-	thumb_func_end GroundObject_Select
-
 	thumb_func_start GroundObject_Cancel
 GroundObject_Cancel:
 	push {r4-r7,lr}
