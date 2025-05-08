@@ -5,6 +5,9 @@
 #include "event_flag.h"
 #include "ground_main.h"
 #include "code_80A26CC.h"
+#include "code_800D090.h"
+#include "code_80118A4.h"
+#include "string_format.h"
 
 struct unkStruct_3001B68
 {
@@ -413,21 +416,93 @@ void sub_809CB50(void)
     gUnknown_20399E0->unk8 = 0;
 }
 
-void sub_809CB74(void) {
+void sub_809CB74(void)
+{
     MemoryFree(gUnknown_20399E0);
     gUnknown_20399E0 = NULL;
 }
 
 
-void sub_809CB8C(void) {
+void sub_809CB8C(void)
+{
     ClearScriptVarArray(NULL, STATION_ITEM_TEMP);
     ClearScriptVarArray(NULL, DELIVER_ITEM_TEMP);
 }
 
 bool8 HasItemInInventory(u8 item)
 {
-    if(FindItemInInventory(item) >= 0)
+    if (FindItemInInventory(item) >= 0)
         return TRUE;
     else
         return FALSE;
+}
+
+extern bool8 ScriptPrintText(s32 a0, s32 a1_, const char *text);
+extern bool8 sub_809124C(u8 id, u8 param_3);
+
+extern const u8 gUnknown_81163E4[];
+
+struct ItemWithQuantity
+{
+    u8 id;
+    s16 quantity;
+};
+
+bool8 sub_809CBBC(const struct ItemWithQuantity *itemToAdd, u8 *maxMoneyStr, u8 *noItemSpaceStr, u8 *itemGivenStr)
+{
+    char buffer[80];
+
+    if (itemToAdd->id == ITEM_POKE) {
+        int newMoneyAmount;
+        sprintfStatic(buffer,gUnknown_81163E4,itemToAdd->quantity,gItemParametersData[ITEM_POKE].name);
+        newMoneyAmount = gTeamInventoryRef->teamMoney + itemToAdd->quantity;
+        if (newMoneyAmount > MAX_TEAM_MONEY) {
+            if (maxMoneyStr != 0) {
+                ScriptPrintText(0, -1, maxMoneyStr);
+            }
+            return FALSE;
+        }
+
+        gTeamInventoryRef->teamMoney = newMoneyAmount;
+    }
+    else {
+        Item item = {0};
+        item.quantity = itemToAdd->quantity;
+        item.id = itemToAdd->id;
+
+        sub_8090E14(buffer,&item,0);
+        if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
+            if (noItemSpaceStr != 0) {
+                ScriptPrintText(0, -1, noItemSpaceStr);
+            }
+            return FALSE;
+        }
+
+        sub_809124C(item.id,0);
+        FillInventoryGaps();
+    }
+
+    if (itemGivenStr != 0) {
+        strcpy(gFormatBuffer_Items[0], buffer);
+        ScriptPrintText(0, -1, itemGivenStr);
+        xxx_call_play_fanfare_se(0xcb,0x100);
+    }
+
+    return TRUE;
+}
+
+extern const struct ItemWithQuantity gUnknown_81163BC[];
+
+s32 sub_809CC90(s32 r0)
+{
+    const struct ItemWithQuantity *item = &gUnknown_81163BC[r0];
+    if (item->id == ITEM_POKE) {
+        if (gTeamInventoryRef->teamMoney + item->quantity > MAX_TEAM_MONEY)
+            return 2;
+    }
+    else {
+        if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
+            return 2;
+    }
+    return 1;
 }
