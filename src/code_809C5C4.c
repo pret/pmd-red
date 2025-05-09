@@ -8,6 +8,7 @@
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "string_format.h"
+#include "input.h"
 
 struct unkStruct_3001B68
 {
@@ -439,6 +440,11 @@ bool8 HasItemInInventory(u8 item)
 
 extern bool8 ScriptPrintText(s32 a0, s32 a1_, const char *text);
 extern bool8 sub_809124C(u8 id, u8 param_3);
+extern u8 IsTextboxOpen_809A750(void);
+extern u8 sub_809CFE8(u32);
+extern bool8 sub_809B260(s32 *a0);
+extern void GroundMap_ExecuteEvent(s32, s32);
+extern void GroundScriptLockJumpZero(s32 index);
 
 extern const u8 gUnknown_81163E4[];
 
@@ -448,7 +454,7 @@ struct ItemWithQuantity
     s16 quantity;
 };
 
-bool8 sub_809CBBC(const struct ItemWithQuantity *itemToAdd, u8 *maxMoneyStr, u8 *noItemSpaceStr, u8 *itemGivenStr)
+static bool8 sub_809CBBC(const struct ItemWithQuantity *itemToAdd, const u8 *maxMoneyStr, const u8 *noItemSpaceStr, const u8 *itemGivenStr)
 {
     char buffer[80];
 
@@ -493,9 +499,9 @@ bool8 sub_809CBBC(const struct ItemWithQuantity *itemToAdd, u8 *maxMoneyStr, u8 
 
 extern const struct ItemWithQuantity gUnknown_81163BC[];
 
-s32 sub_809CC90(s32 r0)
+s32 sub_809CC90(s32 tableId)
 {
-    const struct ItemWithQuantity *item = &gUnknown_81163BC[r0];
+    const struct ItemWithQuantity *item = &gUnknown_81163BC[tableId];
     if (item->id == ITEM_POKE) {
         if (gTeamInventoryRef->teamMoney + item->quantity > MAX_TEAM_MONEY)
             return 2;
@@ -505,4 +511,247 @@ s32 sub_809CC90(s32 r0)
             return 2;
     }
     return 1;
+}
+
+extern const u8 gUnknown_81163F0[];
+extern const u8 gUnknown_811642C[];
+
+s32 sub_809CCDC(u32 tableId, s32 a1)
+{
+    s32 strId;
+    const struct ItemWithQuantity *item = &gUnknown_81163BC[tableId];
+    gUnknown_20399E0->unk4 = -1;
+    gUnknown_20399E0->unk8 = 0;
+
+    if (a1 > 99) {
+        strId = 2;
+    }
+    else if (a1 > 1) {
+        strId = 1;
+    }
+    else {
+        strId = 0;
+    }
+
+    if (sub_809CBBC(item, gUnknown_81163F0, gUnknown_811642C, gUnknown_203B4A0[strId])) {
+        gUnknown_20399E0->unk4 = tableId;
+        gUnknown_20399E0->unk8 = a1;
+        return 1;
+    }
+    else {
+        return 2;
+    }
+}
+
+s32 sub_809CD48(void)
+{
+    if (IsTextboxOpen_809A750()) {
+        return 0;
+    }
+    return 3;
+}
+
+void nullsub_117(void) {}
+void nullsub_118(void) {}
+
+// TODO: merge this struct with other ground-related structs (if possible, otherwise just give a fitting name)
+struct Tempsub_809CD68Struct
+{
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    u8 unkC;
+    s32 unk10;
+    s32 unk14;
+    u8 unk18;
+};
+
+void sub_809CD68(struct Tempsub_809CD68Struct *dst)
+{
+    dst->unk0 = 0;
+    dst->unk4 = 0;
+    dst->unk10 = -1;
+    dst->unk14 = 0;
+    dst->unk8 = 0;
+    dst->unk18 = 0;
+}
+
+void sub_809CD7C(struct Tempsub_809CD68Struct *dst)
+{
+    dst->unk0 = 0;
+    dst->unk10 = -1;
+    dst->unk14 = 0;
+    dst->unk8 = 0;
+}
+
+void sub_809CD8C(struct Tempsub_809CD68Struct *dst, s32 a1)
+{
+    if (a1 == 5) {
+        sub_809CD68(dst);
+        dst->unk0 = a1;
+    }
+    else if (dst->unk4 != a1) {
+        dst->unk4 = a1;
+        dst->unk10 = -1;
+        dst->unk14 = 0;
+    }
+}
+
+s32 sub_809CDB8(struct Tempsub_809CD68Struct *dst)
+{
+    s32 ret = dst->unk4;
+    if (ret == 0) {
+        ret = dst->unk0;
+    }
+    return ret;
+}
+
+u32 sub_809CDC8(struct Tempsub_809CD68Struct *strPtr, u32 *r6, s8 *r7, s32 *param_4, u32 param_5, u32 param_6)
+{
+    u32 sp_4;
+    s32 sp;
+    s32 r8;
+
+    param_4[0] = -1;
+
+    switch (strPtr->unk0) {
+        case 1:
+            if (param_6 & 0x2000) {
+                sub_809CD68(strPtr);
+                strPtr->unk0 = 2;
+            }
+            break;
+        case 2:
+            if (!(param_6 & 0x2000)) {
+                sub_809CD68(strPtr);
+                strPtr->unk0 = 1;
+            }
+            break;
+    }
+
+    r8 = strPtr->unk4;
+    if (r8 == 0)
+        r8 = strPtr->unk0;
+
+    switch (r8) {
+        case 1:
+        {
+            u16 held = gRealInputs.held;
+            u16 pressed = gRealInputs.pressed;
+            if (held & DPAD_ANY) {
+                if (held & B_BUTTON) {
+                    strPtr->unk10 = 0;
+                }
+                else {
+                    strPtr->unk10 = -1;
+                }
+            }
+            else if (pressed & B_BUTTON) {
+                 strPtr->unk10 = 0x14;
+            }
+            else if (strPtr->unk10 > 1) {
+                 strPtr->unk10--;
+                 if (!(held & B_BUTTON)) {
+                     *r6 = 0x13;
+                     *r7 = -1;
+                     return 5;
+                 }
+            }
+            else {
+                strPtr->unk10 = -1;
+            }
+
+            if (pressed & A_BUTTON) {
+                *r6 = 10;
+            }
+            else if (strPtr->unk10 == 0) {
+                *r6 = 8;
+            }
+            else {
+                *r6 = 7;
+            }
+
+            *r7 = sub_809CFE8(held);
+            return strPtr->unk0;
+        }
+        case 5:
+            if (sub_809B260(&sp)) {
+                if (gGameOptionsRef->unkC == 0)
+                    sub_809C6CC(4);
+                else
+                    sub_809C6CC(3);
+
+                nullsub_104();
+                sub_809CD7C(strPtr);
+                strPtr->unk0 = 1;
+
+                switch (sp) {
+                    case 3:
+                        strPtr->unk0 = 4;
+                        *r6 = 1;
+                        *r7 = -1;
+                        return 4;
+                    case 2:
+                        strPtr->unk0 = 4;
+                        sub_8098D80(0x1E);
+                        *r6 = 1;
+                        *r7 = -1;
+                        return strPtr->unk0;
+                    case 1:
+                        strPtr->unk0 = 4;
+                        *r6 = 1;
+                        *r7 = -1;
+                        return 4;
+                    case 4:
+                        strPtr->unk0 = 4;
+                        GroundMap_ExecuteEvent(0x45, 0);
+                        *r6 = 1;
+                        *r7 = -1;
+                        return strPtr->unk0;
+                }
+                GroundScriptLockJumpZero(2);
+            }
+            break;
+        case 6:
+        case 7:
+             if (sub_809B260(&sp_4)) {
+                sub_809CD7C(strPtr);
+                strPtr->unk0 = 1;
+                return strPtr->unk0;
+             }
+             break;
+        case 2:
+            {
+                if (strPtr->unk8 >= 1) {
+                    strPtr->unk8--;
+                    *r6 = 9;
+                    *r7 = strPtr->unkC;
+                }
+                else {
+                    s32 v;
+                    u16 held = gRealInputs.held;
+                    *r6 = 9;
+                    if (held & 0x40) {
+                        *r7 = 4;
+                    }
+                    else if (held & 0x80) {
+                        *r7 = 0;
+                    }
+                    else {
+                        *r7 = -1;
+                    }
+
+                    // TODO: Fix me, this should be a simple -1 comparision, but agbcc doesn't want to cooperate...
+                    v = strPtr->unkC = *r7;
+                    if ((v << 0x18) != (0xFF) << 0x18) {
+                        strPtr->unk8 = 0x20;
+                    }
+                }
+            }
+            return r8;
+    }
+
+    *r6 = 0;
+    *r7 = -1;
+    return r8;
 }
