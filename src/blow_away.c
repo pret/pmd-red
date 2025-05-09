@@ -29,9 +29,6 @@
 
 void sub_804EB30();
 bool8 ExposeTrap(s32 x, s32 y);
-void ShowWholeRevealedDungeonMap();
-void sub_8049ED4();
-void sub_806A5B8(Entity *);
 u8 sub_8045888(Entity *);
 void sub_807EC28(u32);
 u8 sub_8044B28(void);

@@ -33,7 +33,7 @@ typedef struct unkStruct_802F204
     /* 0x0 */ u8 clientName[POKEMON_NAME_LENGTH];
     /* 0xA */ u8 name2[POKEMON_NAME_LENGTH]; // target name?
     /* 0x14 */ s16 clientSpecies;
-    u8 unk16;
+    u8 rewardType;
     /* 0x18 */ s32 moneyReward;
     /* 0x1C */ u8 itemRewards[MAX_ITEM_REWARDS];
     /* 0x1F */ u8 quantity;

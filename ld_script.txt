@@ -344,6 +344,8 @@ SECTIONS {
         asm/code_80A26CC_1.o(.text);
         src/ground_map.o(.text);
         asm/ground_map_1.o(.text);
+        src/ground_map_1.o(.text);
+        asm/code_80A59DC.o(.text);
         src/ground_map_2.o(.text);
         src/ground_sprite.o(.text);
         asm/ground_sprite.o(.text);
@@ -424,7 +426,10 @@ SECTIONS {
     ALIGN(4)
     {
         src/main_loops.o(.rodata);
+        src/event_flag.o(.rodata);
         data/data.o(.rodata);
+        src/code_8002774.o(.rodata);
+        data/pksdir_5.o(.rodata);
         src/memory.o(.rodata);
         data/data1.o(.rodata);
         src/random.o(.rodata);
@@ -895,6 +900,7 @@ SECTIONS {
     titlemenu_sbin_section 0x8380000 :
     ALIGN(4)
     {
+        src/titlemenu_sbin.o(.rodata);
         data/titlemenu_sbin.o(.rodata);
     } > ROM =0
 
@@ -927,6 +933,7 @@ SECTIONS {
     ground_sbin_section :
     ALIGN(4)
     {
+        src/ground_sbin.o(.rodata);
         data/ground_sbin.o(.rodata);
     } > ROM =0
 

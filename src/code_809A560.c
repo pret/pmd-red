@@ -41,7 +41,6 @@ extern u16 gUnknown_20399DE;
 extern bool8 sub_802FCF0(void);
 u8 ScriptPrintText_809B2B8(struct unkStruct_3001B64_unkC *, s32, s32, const char *);
 bool8 IsTextboxOpen_809B40C(struct unkStruct_3001B64_unkC *);
-extern void sub_801416C(s32, s32);
 extern void ResetTextbox_809B294(void);
 extern s32 sub_803B168(void);
 extern void sub_803B1BC(void);

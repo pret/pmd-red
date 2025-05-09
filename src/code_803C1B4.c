@@ -1,11 +1,18 @@
 #include "global.h"
+#include "structs/str_wonder_mail.h"
 #include "dungeon.h"
+#include "event_flag.h"
+#include "pokemon.h"
 
-u32 sub_803C1B4(DungeonLocation *dungeon, u8 r1)
+extern u8 *gMissionRankText[];
+extern s32 gUnknown_80E80A0[];
+void sub_803C37C(DungeonLocation *, u8, u8 *);
+
+s32 sub_803C1B4(DungeonLocation *dungeon, u8 missionType)
 {
     s32 temp;
     temp = sub_80908D8(dungeon);
-    if(r1 == 2)
+    if(missionType == 2)
     {
         temp += 2;
     }
@@ -14,3 +21,117 @@ u32 sub_803C1B4(DungeonLocation *dungeon, u8 r1)
     return temp;
 }
 
+u8 sub_803C1D0(struct DungeonLocation *dungeon, u8 missionType)
+{
+    s32 a = sub_803C1B4(dungeon, missionType);
+    a /= 2;
+    if ((u8)a >= 7) {
+        a = 6; 
+        return a;
+    }
+    return a;
+}
+
+u8 *GetMissionRankText(u8 index)
+{
+    return gMissionRankText[index];
+}
+
+u32 GetDungeonTeamRankPts(DungeonLocation *dungeon, u8 r1)
+{
+    u32 index = sub_803C1B4(dungeon, r1);
+    return gUnknown_80E80A0[index];
+}
+
+void sub_803C21C(WonderMail *param_1, unkStruct_802F204 *param_2)
+{
+    int index;
+    u32 uVar2;
+
+    uVar2 = sub_803C1D0(&param_1->unk4.dungeon,param_1->missionType);
+    param_2->moneyReward = 0;
+
+    for(index = 0; index < MAX_ITEM_REWARDS; index++)   
+    {
+        param_2->itemRewards[index] = ITEM_NOTHING;
+    }
+    param_2->friendAreaReward = 0;
+    param_2->quantity = 10;
+    switch(param_1->rewardType) {
+        case MONEY:
+            param_2->rewardType = 0;
+            param_2->moneyReward = (uVar2 + 1) * 100;
+            break;
+        case MONEY_EXTRA:
+            param_2->rewardType = 1;
+            param_2->moneyReward = (uVar2 + 1) * 100;
+            param_2->itemRewards[0] = param_1->itemReward;
+            break;
+        case ITEM:
+            param_2->rewardType = 2;
+            param_2->itemRewards[0] = param_1->itemReward;
+            break;
+        case ITEM_EXTRA:
+            param_2->rewardType = 3;
+            param_2->itemRewards[0] = param_1->itemReward;
+            do {
+                sub_803C37C(&param_1->unk4.dungeon,param_1->missionType,&param_2->itemRewards[1]);
+            } while (param_2->itemRewards[0] == param_2->itemRewards[1]);
+            break;
+        case MONEY1:
+            param_2->rewardType = 0;
+            param_2->moneyReward = (uVar2 + 1) * 200;
+            break;
+        case MONEY1_EXTRA:
+            param_2->rewardType = 1;
+            param_2->moneyReward = (uVar2 + 1) * 200;
+            param_2->itemRewards[0] = param_1->itemReward;
+            break;
+        case ITEM1: // ITEM1
+            param_2->rewardType = 2;
+            param_2->itemRewards[0] = param_1->itemReward;
+            break;
+        case ITEM1_EXTRA:
+            param_2->rewardType = 3;
+            param_2->itemRewards[0] = param_1->itemReward;
+            do {
+                sub_803C37C(&param_1->unk4.dungeon,param_1->missionType,&param_2->itemRewards[1]);
+            } while (param_2->itemRewards[0] == param_2->itemRewards[1]);
+            do {
+                do {
+                    sub_803C37C(&param_1->unk4.dungeon,param_1->missionType,&param_2->itemRewards[2]);
+                } while (param_2->itemRewards[0] == param_2->itemRewards[2]);
+            } while (param_2->itemRewards[1] == param_2->itemRewards[2]);
+            break;
+        case FRIEND_AREA:
+            param_2->rewardType = 4;
+            param_2->friendAreaReward = param_1->friendAreaReward;
+            break;
+        default:
+            param_2->rewardType = 5;
+            break;
+    }
+    CopyYellowMonsterNametoBuffer(param_2->clientName, param_1->clientSpecies);
+    param_2->clientSpecies = param_1->clientSpecies;
+    param_2->teamRankPtsReward = GetDungeonTeamRankPts(&param_1->unk4.dungeon,param_1->missionType);
+}
+
+void sub_803C37C(DungeonLocation *location, u8 r1, u8 *itemReward) {
+    s32 r7;
+    bool8 flag;
+    u8 r4;
+    
+    r7 = sub_803C1B4(location, r1);
+    sub_8090910(location, r7);
+
+    do {
+        flag = FALSE;
+        r4 = sub_8090910(location, r7);
+        if(r4 == ITEM_WEAVILE_FIG)
+            flag = GetScriptVarArrayValue(0, EVENT_B01P01, 1) ? TRUE : FALSE;
+        if(r4 == ITEM_MIME_JR_FIG)
+            if(GetScriptVarArrayValue(0, EVENT_B01P01, 0)) flag = TRUE;
+    } while(flag != FALSE);
+
+    *itemReward = r4;
+}

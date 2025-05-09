@@ -39,24 +39,16 @@
 #include "trap.h"
 
 extern void sub_8071DA4(Entity *);
-extern void sub_806A1B0(Entity *);
 extern void sub_8057588(Entity * pokemon, u8 param_2);
-extern bool8 sub_806A58C(s16 a0);
-extern bool8 sub_806A564(s16 r0);
-extern void sub_8045C08(u8 *buffer, Item *item);
 extern bool8 sub_8045888(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
-void sub_8045BF8(u8 *, Item *);
 u8 sub_8048D50();
-void sub_8044DF0();
 void sub_8042208(Entity *pokemon, u8 r1);
 void sub_803E708();
 void sub_80479B8();
 extern void sub_807AB38(Entity *, u32);
 extern Entity * sub_8044DA4(Entity *param_1,int param_2);
-extern void sub_806A6E8(Entity *);
 extern void sub_8044DF0(Entity *, u32, u32);
-extern bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s32 arg_0);
 extern bool8 sub_8044B28(void);
 Entity *sub_806773C(Entity *entity);
 void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
@@ -64,8 +56,6 @@ void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);
 extern void sub_807EF84(void);
 extern void sub_80845E0(Entity *entity);
 extern void sub_8084448(Entity *entity);
-extern void sub_806A3D4(u8 *dst, s32 _a1, s32 id, bool32 _a3);
-extern Entity * sub_80696A8(Entity *target);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {

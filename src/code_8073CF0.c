@@ -33,7 +33,6 @@
 #include "dungeon_strings.h"
 
 extern bool8 sub_8044B28(void);
-extern void sub_8075708(Entity *entity);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern void sub_805229C(void);
 extern void sub_807E8F0(Entity *);

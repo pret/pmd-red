@@ -22,7 +22,7 @@ extern s32 gUnknown_202F224;
 extern s32 gMetronomeCalledArrayId;
 
 void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, s32 itemId, bool32 isLinkedMove);
-bool32 HandleRegularDamagingMove(Entity *attacker, Entity *target, Move *move, s32 itemId);
+bool8 HandleRegularDamagingMove(Entity *attacker, Entity *target, Move *move, s32 itemId);
 s32 HandleDamagingMove(Entity *attacker, Entity *target, Move *move, s24_8 modifier, s32 itemId);
 s32 sub_80556BC(Entity *attacker, Entity *target, u8 moveType, Move *move, s24_8 modifier, s32 itemId);
 s32 sub_8055864(Entity *attacker, Entity *target, Move *move, s32 param_4, s32 itemId);

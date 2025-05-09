@@ -1,6 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
-#include "status_actions.h"
+#include "move_orb_actions_4.h"
+#include "move_orb_actions_2.h"
+#include "dungeon_ai.h"
 #include "dungeon_move_util.h"
 #include "dungeon_message.h"
 #include "dungeon_move.h"
@@ -20,6 +22,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_misc.h"
 #include "dungeon_util.h"
+#include "move_effects_target.h"
 #include "move_util.h"
 #include "moves.h"
 #include "number_util.h"
@@ -35,15 +38,8 @@
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void HandleOneRoomOrb(Entity *, Entity *);
-extern u32 GetRandomFloorItem(u32);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void sub_807FC3C(DungeonPos *, u32, u32);
-extern void sub_8042A64(DungeonPos *);
 extern void ShowWholeRevealedDungeonMap(void);
-extern void sub_80498A8(s32, s32);
-extern void sub_8042A54(DungeonPos *);
-extern void sub_8049BB0(s32, s32);
 extern void HandleDroughtOrbAction(Entity *);
 extern void HandleLuminousOrbAction(Entity *pokemon);
 extern void HandleTrawlOrbAction(Entity *, Entity *);
@@ -52,25 +48,8 @@ extern s16 sub_803D970(u32);
 extern bool8 sub_806AA0C(s32, u32);
 extern void sub_806BB6C(Entity *, s32);
 extern void HandleSwitcherOrb(Entity *, Entity *, u32);
-extern void sub_806A6E8(Entity *);
-
-// TODO include dungeon_ai.h when SqueezedStatusTarget is figured out
-extern void LowerDefenseStageTarget(Entity *, Entity *, s32, s32, u8, bool8);
-extern void RaiseAttackStageTarget(Entity *, Entity *, s32, s32);
-extern void PoisonedStatusTarget(Entity *, Entity *, bool8);
-extern void RaiseDefenseStageTarget(Entity *, Entity *, s32, s32);
-extern void InfatuateStatusTarget(Entity *, Entity *, bool8);
-extern void LowerAttackStageTarget(Entity *, Entity *, s32, s32, u8, bool8);
-extern void PetrifiedStatusTarget(Entity *, Entity *);
-extern void WrapTarget(Entity *, Entity *);
-
-// TODO having matching issues when this isn't s32..  (move_effects_target.h)
-extern void SqueezedStatusTarget(Entity *, Entity *, s32, bool32);
-extern void SleepStatusTarget(Entity *, Entity *, s32, s32);
 
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
-extern bool8 MoveRequiresCharging(Entity* pokemon,u16 moveID);
-extern void sub_80783C4(Entity *, Entity *, bool8);
 
 extern u32 gUnknown_8106A50;
 extern u32 gUnknown_8106A4C;

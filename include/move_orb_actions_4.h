@@ -1,7 +1,6 @@
-#ifndef GUARD_STATUS_ACTIONS_H
-#define GUARD_STATUS_ACTIONS_H
+#ifndef GUARD_MOVE_ORB_ACTIONS_4_H
+#define GUARD_MOVE_ORB_ACTIONS_4_H
 
-#include "constants/move.h"
 #include "structs/dungeon_entity.h"
 
 bool8 DreamEaterMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
@@ -43,13 +42,25 @@ bool8 ShockerOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
 bool8 sub_805C208(Entity *pokemon, Entity *target, Move *move, u32 param_4);
 bool8 sub_805C288(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 bool8 OneRoomOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4);
-bool8 sub_805C3DC(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-bool8 ItemizeOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-bool8 HurlOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-bool8 MobileOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-bool8 StairsOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-bool8 LongtossOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-bool8 PierceOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 MistBallMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 DestinyBondMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 FalseSwipeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 HiddenPowerMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 AttractMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 MimicMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 FrustrationMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 LeechSeedMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 MetalClawMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4, s32 param_5);
+bool8 InvisifyOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 CalmMindMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 DefenseCurlMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 SnatchMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 MetronomeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 ReboundOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 sub_805B314(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 ProtectMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
+bool8 MirrorCoatMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
 
-#endif
+
+#endif /* ifndef MOVE_ORB_ACTIONS_4_H */
+

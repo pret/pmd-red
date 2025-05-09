@@ -1,14 +1,7 @@
 	.section .rodata
 
-	.global gGroundFileArchive
-gGroundFileArchive: @ 9890000
-@ replacing	.incbin "baserom.gba", 0x1890000, 0x5D0000
-.string "pksdir0\0"
-.incbin "baserom.gba", 0x1890008, 0x4
-.4byte gUnknown_9890018
-.string "pksdir0\0"
-.global gUnknown_9890018
-gUnknown_9890018:
+.global gGroundFiles
+gGroundFiles:
 .4byte gUnknown_9892C68
 .4byte gUnknown_9892C78
 .4byte gUnknown_9892C60

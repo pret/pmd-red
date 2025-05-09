@@ -8,6 +8,7 @@
 #include "code_8077274_1.h"
 #include "constants/dungeon.h"
 #include "dungeon_map_access.h"
+#include "dungeon_misc.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon.h"
@@ -30,18 +31,14 @@ EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
 EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};
 
 extern void ResetMonEntityData(EntityInfo *, u32);
-void sub_8069E0C(Entity *pokemon);
 void sub_8042A44(Entity *r0);
 void sub_8083D78(void);
-extern bool8 sub_803D930(u32);
 void sub_8083D58(void);
 void sub_8072778(Entity *, Entity *, u8, u8);
 bool8 sub_80725A4(Entity *, Entity *);
 void GetAvailTacticsforLvl_Bool(u8 *tacticsBuffer, s32 pokeLevel);
 bool8 sub_80723D0(Entity *, Entity *, u8, u8);
 void sub_807218C(Entity *);
-void sub_806A2BC(Entity *, u32);
-void sub_806A3D4(u8 *, s32, s32, s32);
 
 extern bool8 sub_803D930(u32);
 extern void sub_8072B78(Entity *pokemon, Entity *target, s16 id);

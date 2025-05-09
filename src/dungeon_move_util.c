@@ -36,7 +36,7 @@
 #include "position_util.h"
 #include "sprite.h"
 #include "status.h"
-#include "status_actions.h"
+#include "move_orb_actions_4.h"
 #include "weather.h"
 #include "targeting_flags.h"
 #include "text_util.h"
@@ -45,9 +45,6 @@ extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, s24_8, u16, u32);
-extern s16 sub_8057600(Move *move, s32 itemID);
-extern void sub_803ED30(s32, Entity *r0, u8, s32);
-extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_806A1E8(Entity *pokemon);
 extern bool8 sub_8044B28(void);
 extern void sub_804178C(u32);
@@ -60,21 +57,8 @@ extern void sub_800EF10(u16 r0);
 extern s32 sub_800E710(s16 a0, u16 a1);
 extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
-extern Entity *sub_80696A8(Entity *a0);
 extern Entity *GetMonsterAtPos(DungeonPos *pos);
-extern Entity *sub_80696FC(Entity *);
-extern Entity *sub_806977C(Entity *);
-extern void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct DamageStruct *dmgStruct);
-extern void MarkLastUsedMonMove(Entity *entity, Move *move);
-extern s32 sub_8057070(Move *move);
-extern bool8 MoveRequiresCharging(Entity* pokemon,u16 param_2);
 extern s32 sub_800ED20(u16 param_1);
-extern bool32 EarthquakeMoveAction(Entity *pokemon, Entity *target, Move *move, s32 param_4);
-extern void sub_8042930(Entity *r0);
-extern void sub_8041B48(Entity *pokemon);
-extern void sub_8041BA8(Entity *pokemon);
-extern void sub_8042950(Entity *r0);
-extern void sub_80421C0(Entity *pokemon, u16 r1);
 extern s16 sub_8094828(u16, u8);
 struct UnkStruct_sub_800E308_1
 {

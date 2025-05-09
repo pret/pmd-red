@@ -165,7 +165,7 @@ void sub_802B3E0(void)
         monName = GetMonSpecies(MONSTER_PELIPPER);
         strcpy(sUnknown_203B2C8->unk114.clientName, monName);
         sUnknown_203B2C8->unk114.clientSpecies = MONSTER_PELIPPER;
-        sUnknown_203B2C8->unk114.unk16 = 2;
+        sUnknown_203B2C8->unk114.rewardType = 2;
         sUnknown_203B2C8->unk114.moneyReward = 0;
         IncrementFriendRescueSuccesses();
         mail = GetMailatIndex(sUnknown_203B2C8->unk1);

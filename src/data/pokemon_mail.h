@@ -1,3 +1,5 @@
+#include "rescue_team_info.h"
+
 static const u8 * const sUnknown_80E8B94[7] = {
     _("　"),
     _("{ENVELOPE_CLOSED}"),
@@ -16,7 +18,7 @@ static const u8 * const sUnknown_80E8BCC[4] = {
 };
 
 // Used in sub_803C1F0 for some reason
-const u8 * const gUnknown_80E8BF8[7] = {
+const u8 * const gMissionRankText[MAX_TEAM_RANKS] = {
     _("{COLOR DEFAULT}E{RESET}"),
     _("{COLOR GREEN}D{RESET}"),
     _("{COLOR GREEN}C{RESET}"),
