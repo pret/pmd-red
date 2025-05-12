@@ -136,7 +136,6 @@ SECTIONS {
         src/wigglytuff_shop3.o(.text);
         src/code_80227B8.o(.text);
         src/code_8023144.o(.text);
-        asm/code_8023868.o(.text);
         src/code_8023868.o(.text);
         src/code_8024458.o(.text);
         src/luminous_cave.o(.text);

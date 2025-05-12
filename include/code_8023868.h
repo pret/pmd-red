@@ -21,10 +21,10 @@ struct unkStruct_3001B60
 };
 
 // code_8023868.s
-extern void sub_8023868(u32, u32, u32, u32);
+bool8 sub_8023868(u32 r5, u32 windowId, DungeonPos *pos, u32 r10);
 extern u32 sub_8023A94(bool8);
-extern s16 sub_8023B44(void);
-extern void sub_8023B7C(u32);
+extern s32 sub_8023B44(void);
+void sub_8023B7C(bool8 addCursor);
 extern void sub_8023C60(void);
 extern void sub_8023DA4(void);
 extern bool8 sub_8024108(s32);
