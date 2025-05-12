@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/communication_error_codes.h"
 #include "code_80118A4.h"
-#include "code_8023868.h"
+#include "friend_list.h"
 #include "code_8024458.h"
 #include "code_8094F88.h"
 #include "code_80A26CC.h"
@@ -39,7 +39,7 @@ extern void sub_8031E10();
 extern void sub_8031E00();
 extern void sub_8031E10(void);
 extern void sub_8031D70(u8, u32);
-extern u32 sub_8023CE8(void);
+extern u32 FriendList_GetPtr(void);
 extern void sub_8030F58(u32);
 extern void sub_8029B34(void);
 extern void sub_8029AD8(void);
@@ -401,7 +401,7 @@ void sub_80282FC(void)
     MemoryFree(sUnknown_203B2C0);
     sUnknown_203B2C0 = NULL;
     sub_8031E10();
-    sub_8023C60();
+    FriendList_Free();
     sub_803084C();
     sub_80155F0();
     sub_80310B4();
@@ -454,17 +454,17 @@ void sub_8028348(void)
             CreateDialogueBoxAndPortrait(gUnknown_80DDCBC, 0, 0,0x101);
             break;
         case SELECT_HELPER_POKEMON:
-            if(sub_8023CE8() == 0)
+            if(FriendList_GetPtr() == 0)
             {
                 ResetUnusedInputStruct();
                 ShowWindows(NULL, TRUE, TRUE);
-                sub_8023868(3, 0, 0, 9);
+                FriendList_Init(3, 0, 0, 9);
             }
             break;
         case 0x34:
             RestoreSavedWindows(&sUnknown_203B2C0->unk35C);
             SetMenuItems(sUnknown_203B2C0->unk21C, &sUnknown_203B2C0->unk35C, 3, &gUnknown_80DDAE4, gUnknown_80DDAFC, TRUE, 0, FALSE);
-            sub_8023DA4();
+            FriendList_ShowWindow();
             sub_8035CF4(sUnknown_203B2C0->unk21C, 3, TRUE);
             break;
         case NO_POKEMON_IN_FRIEND_AREA:
@@ -1559,20 +1559,20 @@ void sub_80297B8(void)
 
 void sub_80297D4(void)
 {
-    switch(sub_8023A94(TRUE))
+    switch(FriendList_HandleInput(TRUE))
     {
         case 2:
-            sub_8023C60();
+            FriendList_Free();
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);
             sUnknown_203B2C0->speciesNum = -1;
             break;
         case 3:
-            sUnknown_203B2C0->speciesNum = sub_8023B44();
+            sUnknown_203B2C0->speciesNum = FriendList_GetCurrId();
             SetFriendRescueCounterState(0x34);
             break;
         case 4:
             sUnknown_203B2C0->fallbackState = SELECT_HELPER_POKEMON;
-            sUnknown_203B2C0->speciesNum = sub_8023B44();
+            sUnknown_203B2C0->speciesNum = FriendList_GetCurrId();
             RestoreSavedWindows(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
@@ -1586,7 +1586,7 @@ void sub_8029884(void)
 {
     s32 menuAction;
     menuAction = -1;
-    sub_8023A94(FALSE);
+    FriendList_HandleInput(FALSE);
     if(sub_8012FD8(&(sUnknown_203B2C0->unk21C[3])) == 0)
     {
         sub_8013114(&(sUnknown_203B2C0->unk21C[3]), &menuAction);
@@ -1594,7 +1594,7 @@ void sub_8029884(void)
     switch(menuAction)
     {
         case CONFIRM_ACTION:
-            sub_8023C60();
+            FriendList_Free();
             SetFriendRescueCounterState(4);
             break;
         case INFO_ACTION:

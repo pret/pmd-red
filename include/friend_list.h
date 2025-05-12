@@ -1,5 +1,5 @@
-#ifndef GUARD_CODE_8023868_H
-#define GUARD_CODE_8023868_H
+#ifndef GUARD_FRIEND_LIST_H
+#define GUARD_FRIEND_LIST_H
 
 #include "structs/struct_sub80095e4.h"
 
@@ -21,12 +21,12 @@ struct unkStruct_3001B60
 };
 
 // code_8023868.s
-bool8 sub_8023868(u32 r5, u32 windowId, DungeonPos *pos, u32 r10);
-extern u32 sub_8023A94(bool8);
-extern s32 sub_8023B44(void);
+bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10);
+u32 FriendList_HandleInput(bool8);
+s32 FriendList_GetCurrId(void);
 void sub_8023B7C(bool8 addCursor);
-extern void sub_8023C60(void);
-extern void sub_8023DA4(void);
-extern bool8 sub_8024108(s32);
+void FriendList_Free(void);
+void FriendList_ShowWindow(void);
+bool8 sub_8024108(s32);
 
-#endif // GUARD_CODE_8023868_H
+#endif // GUARD_FRIEND_LIST_H

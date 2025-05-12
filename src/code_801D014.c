@@ -5,7 +5,7 @@
 #include "code_800D090.h"
 #include "code_801D014.h"
 #include "code_80227B8.h"
-#include "code_8023868.h"
+#include "friend_list.h"
 #include "code_8024458.h"
 #include "code_80958E8.h"
 #include "common_strings.h"

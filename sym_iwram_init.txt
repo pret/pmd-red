@@ -2,7 +2,7 @@
 	
 .include "src/code_80035F0.o"
 .include "src/code_8023144.o"
-.include "src/code_8023868.o"
+.include "src/friend_list.o"
 .include "src/code_809A560.o"
 .include "src/code_809C5C4.o"
 .include "src/ground_map.o"

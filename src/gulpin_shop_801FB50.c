@@ -3,7 +3,7 @@
 #include "code_80118A4.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "code_8023868.h"
+#include "friend_list.h"
 #include "code_8024458.h"
 #include "common_strings.h"
 #include "felicity_bank.h"
@@ -306,13 +306,13 @@ static void sub_801FF28(void)
             CreateDialogueBoxAndPortrait(gCommonGulpin[gUnknown_203B27C->mode][GULPIN_DLG_08],0,gUnknown_203B27C->monPortraitPtr,0x10d);
             break;
         case 0xf:
-            sub_8023868(2,0,0,10);
+            FriendList_Init(2,0,0,10);
             break;
         case 0x10:
             sub_8023B7C(1);
             break;
         case 0x11:
-            sub_8023DA4();
+            FriendList_ShowWindow();
             sub_8012D60(&gUnknown_203B27C->unkCC,gUnknown_203B27C->unk7C,0,gUnknown_203B27C->unkBC,gUnknown_203B27C->menuAction2,2);
             break;
         case 0x12:
@@ -682,17 +682,17 @@ static void sub_8020A34(void)
 
 static void sub_8020A80(void)
 {
-    switch(sub_8023A94(TRUE))
+    switch(FriendList_HandleInput(TRUE))
     {
         case 3:
-            gUnknown_203B27C->speciesNum = sub_8023B44();
+            gUnknown_203B27C->speciesNum = FriendList_GetCurrId();
             gUnknown_203B27C->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B27C->speciesNum];
             gUnknown_203B27C->isTeamLeader = gUnknown_203B27C->pokeStruct->isTeamLeader;
             PrintPokeNameToBuffer(gFormatBuffer_Monsters[5], gUnknown_203B27C->pokeStruct);
             sub_801FDA8(0x11);
             break;
         case 4:
-            gUnknown_203B27C->speciesNum = sub_8023B44();
+            gUnknown_203B27C->speciesNum = FriendList_GetCurrId();
             gUnknown_203B27C->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B27C->speciesNum];
             gUnknown_203B27C->isTeamLeader = gUnknown_203B27C->pokeStruct->isTeamLeader;
             PrintPokeNameToBuffer(gFormatBuffer_Monsters[5], gUnknown_203B27C->pokeStruct);
@@ -702,7 +702,7 @@ static void sub_8020A80(void)
         case 1:
             break;
         case 2:
-            sub_8023C60();
+            FriendList_Free();
             sub_801FDA8(7);
             break;
     }
@@ -713,7 +713,7 @@ static void sub_8020B38(void)
     s32 menuAction;
 
     menuAction = 0;
-    sub_8023A94(FALSE);
+    FriendList_HandleInput(FALSE);
     if (!sub_8012FD8(&gUnknown_203B27C->unkCC)) {
         sub_8013114(&gUnknown_203B27C->unkCC,&menuAction);
         if (menuAction != CANCEL_ACTION) {
