@@ -20,7 +20,6 @@ struct unkStruct_3001B60
     struct_Sub80095E4_2 unk358;
 };
 
-// code_8023868.s
 bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10);
 u32 FriendList_HandleInput(bool8);
 s32 FriendList_GetCurrId(void);
