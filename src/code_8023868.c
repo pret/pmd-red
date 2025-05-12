@@ -5,7 +5,18 @@
 #include "pokemon.h"
 #include "structs/str_text.h"
 #include "text_util.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
 #include "event_flag.h"
+#include "menu_input.h"
+#include "rescue_team_info.h"
+
+extern const u8 sUnknown_80DC988[];
+extern const u8 sUnknown_80DC980[];
+extern const u8 sUnknown_80DC998[];
+
+extern bool8 sub_808D750(s32 index_);
 
 //static // MAKE STATIC WHEN code_8023868.s IS DONE
 IWRAM_INIT struct unkStruct_3001B60 *gUnknown_3001B60 = {NULL};
@@ -16,10 +27,77 @@ static void SortbyAlphabetNo(s32, s32);
 static void SortbyInternalNo(s32, s32);
 static void SortbyName(s32, s32);
 
-//static bool8 sub_8024184(PokemonStruct1 *pokemon, u8 area);
+bool8 sub_8024184(PokemonStruct1 *pokemon, u8 area);
 void sub_80241A8(void);
 
 // THE REMAINING CODE FROM THIS FILE IS IN code_8023868.s STARTING WITH sub_8023868
+
+void sub_8023DA4(void)
+{
+    s32 i, x;
+    u8 winTxtBuff[40];
+    u8 nameTxtBuff[20];
+    u8 txtBuff3[20];
+
+    CallPrepareTextbox_8008C54(gUnknown_3001B60->unk38C);
+    sub_80073B8(gUnknown_3001B60->unk38C);
+    switch (gUnknown_3001B60->unk0) {
+        case 2:
+            sub_80920D8(winTxtBuff);
+            PrintStringOnWindow(10, 0, winTxtBuff, gUnknown_3001B60->unk38C, '\0');
+            break;
+        case 4:
+            PrintStringOnWindow(10, 0, sUnknown_80DC980, gUnknown_3001B60->unk38C, '\0');
+            x = (gUnknown_3001B60->unk3F6 * 8) + 4;
+            sub_8012BC4(x, 0, gUnknown_3001B60->unk358.unk1E + 1, 2, 7, gUnknown_3001B60->unk38C);
+            break;
+        default:
+            PrintStringOnWindow(10, 0, sUnknown_80DC988, gUnknown_3001B60->unk38C, '\0');
+            x = (gUnknown_3001B60->unk3F6 * 8) + 4;
+            sub_8012BC4(x, 0, gUnknown_3001B60->unk358.unk1E + 1, 2, 7, gUnknown_3001B60->unk38C);
+            break;
+    }
+
+    for (i = 0; i < gUnknown_3001B60->unk358.unk1A; i++) {
+        s32 id = gUnknown_3001B60->unk1A[(gUnknown_3001B60->unk358.unk1E * gUnknown_3001B60->unk358.unk1C) + i];
+        PokemonStruct1 *pokePtr = &gRecruitedPokemonRef->pokemon[id];
+        s32 r6 = 7;
+
+        if (PokemonFlag2(pokePtr)) {
+            if (IsMonPartner(pokePtr)) {
+                r6 = 6;
+            }
+            if (IsMonLeader(pokePtr)) {
+                r6 = 6;
+            }
+            if (pokePtr->isTeamLeader) {
+                r6 = 5;
+            }
+        }
+        else if (gUnknown_3001B60->unk18) {
+            if (sub_808D750(id)) {
+                r6 = 4;
+            }
+            else {
+                r6 = 2;
+            }
+        }
+
+        if (gUnknown_3001B60->unk0 == 4) {
+            sub_8024184(pokePtr, gUnknown_3001B60->unk354);
+        }
+        // Needed to match. agbcc moment
+        else if (gUnknown_3001B60->unk0 == 2) {
+
+        }
+
+        sub_80922B4(nameTxtBuff, pokePtr->name, POKEMON_NAME_LENGTH);
+        sub_808D930(txtBuff3, pokePtr->speciesNum);
+        sprintfStatic(winTxtBuff, sUnknown_80DC998, r6, nameTxtBuff);
+        PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_3001B60->unk358, i), winTxtBuff, gUnknown_3001B60->unk38C, '\0');
+    }
+    sub_80073E0(gUnknown_3001B60->unk38C);
+}
 
 s32 sub_8023F8C(void)
 {
@@ -136,109 +214,59 @@ void sub_80241A8(void)
     }
 }
 
-// TODO: Remove hacky if/do
-static void SortbyInternalNo(s32 param_1, s32 param_2)
+static void SortbyInternalNo(s32 startId, s32 arrId)
 {
-    s16 *r4;
-    s32 iVar4;
-    s16 *r10;
-    s16 *r5;
-    s32 r6;
-    s32 r1;
-    s32 r7;
-    s32 r9;
+    s32 temp;
+    s32 i, j;
+    s16 *arrPtr = &gUnknown_3001B60->unk1A[arrId - 1];
 
-    r10 = &gUnknown_3001B60->unk18 + param_2;
-    r7 = param_1;
-    r1 = param_2 - 1;
-    if (r7 < r1) {
-        r9 = r1;
-        do {
-            r4 = r10;
-            r6 = r1;
-            iVar4 = r7 + 1;
-            for (; r6 > r7; r6--) {
-                if (GetInternalNo(gRecruitedPokemonRef->pokemon[r5 = r4 - 1, *r5].speciesNum) > GetInternalNo(gRecruitedPokemonRef->pokemon[*r4].speciesNum)) {
-                    r1 = *r4;
-                    *r4 = *r5;
-                    *r5 = r1;
-                }
-                r4 = r5;
+    for (i = startId; i < arrId - 1; i++) {
+        s16 * currPtr = arrPtr;
+        for (j = arrId - 1; j > i; j--) {
+            s16 * belowPtr;
+            // TODO: Fix ugly assigment below if possible
+            if (GetInternalNo(gRecruitedPokemonRef->pokemon[*(belowPtr = currPtr - 1)].speciesNum) > GetInternalNo(gRecruitedPokemonRef->pokemon[*currPtr].speciesNum)) {
+                SWAP(*currPtr, *belowPtr, temp);
             }
-            r7 = iVar4;
-            r1 = r9;
-        } while (iVar4 < r1);
+            currPtr--;
+        }
     }
 }
 
-// TODO: Remove hacky if/do
-static void SortbyAlphabetNo(s32 param_1, s32 param_2)
+static void SortbyAlphabetNo(s32 startId, s32 arrId)
 {
-    s16 *r4;
-    s32 iVar4;
-    s16 *r10;
-    s16 *r5;
-    s32 r6;
-    s32 r1;
-    s32 r7;
-    s32 r9;
+    s32 temp;
+    s32 i, j;
+    s16 *arrPtr = &gUnknown_3001B60->unk1A[arrId - 1];
 
-    r10 = &gUnknown_3001B60->unk18 + param_2;
-    r7 = param_1;
-    r1 = param_2 - 1;
-    if (r7 < r1) {
-        r9 = r1;
-        do {
-            r4 = r10;
-            r6 = r1;
-            iVar4 = r7 + 1;
-            for (; r6 > r7; r6--) {
-                if (GetAlphabetParentNo(gRecruitedPokemonRef->pokemon[r5 = r4 - 1, *r5].speciesNum, 0) > GetAlphabetParentNo(gRecruitedPokemonRef->pokemon[*r4].speciesNum, 0)) {
-                    r1 = *r4;
-                    *r4 = *r5;
-                    *r5 = r1;
-                }
-                r4 = r5;
+    for (i = startId; i < arrId - 1; i++) {
+        s16 * currPtr = arrPtr;
+        for (j = arrId - 1; j > i; j--) {
+            s16 * belowPtr;
+            // TODO: Fix ugly assigment below if possible
+            if (GetAlphabetParentNo(gRecruitedPokemonRef->pokemon[*(belowPtr = currPtr - 1)].speciesNum, 0) > GetAlphabetParentNo(gRecruitedPokemonRef->pokemon[*currPtr].speciesNum, 0)) {
+                SWAP(*currPtr, *belowPtr, temp);
             }
-            r7 = iVar4;
-            r1 = r9;
-        } while (iVar4 < r1);
+            currPtr--;
+        }
     }
 }
 
-// TODO: Remove hacky if/do
-static void SortbyName(s32 param_1, s32 param_2)
+static void SortbyName(s32 startId, s32 arrId)
 {
-    s16 *r4;
-    s32 iVar4;
-    s16 *r10;
-    s16 *r5;
-    s32 r6;
-    s32 r1;
-    s32 r7;
-    s32 r9;
+    s32 temp;
+    s32 i, j;
+    s16 *arrPtr = &gUnknown_3001B60->unk1A[arrId - 1];
 
-    r10 = &gUnknown_3001B60->unk18 + param_2;
-    r7 = param_1;
-    r1 = param_2 - 1;
-    if (r7 < r1) {
-        r9 = r1;
-        do {
-            r4 = r10;
-            r6 = r1;
-            iVar4 = r7 + 1;
-            for (; r6 > r7; r6--) {
-                r5 = r4 - 1;
-                if (ComparePokemonNames(*r5, *r4)) {
-                    r1 = *r4;
-                    *r4 = *r5;
-                    *r5 = r1;
-                }
-                r4 = r5;
+    for (i = startId; i < arrId - 1; i++) {
+        s16 * currPtr = arrPtr;
+        for (j = arrId - 1; j > i; j--) {
+            s16 *belowPtr = currPtr - 1;
+            if (ComparePokemonNames(*belowPtr, *currPtr)) {
+                SWAP(*currPtr, *belowPtr, temp);
             }
-            r7 = iVar4;
-            r1 = r9;
-        } while (iVar4 < r1);
+            currPtr--;
+        }
     }
 }
 
@@ -246,7 +274,7 @@ UNUSED static PokemonStruct1 *sub_80243E8(void)
 {
     u8 buffer[40];
     u8 nameBuffer[20];
-    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_3001B60->unk1A[(gUnknown_3001B60->unk376 * gUnknown_3001B60->unk374) + gUnknown_3001B60->unk370]];
+    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_3001B60->unk1A[(gUnknown_3001B60->unk358.unk1E * gUnknown_3001B60->unk358.unk1C) + gUnknown_3001B60->unk358.menuIndex]];
 
     sub_80922B4(nameBuffer, pokeStruct->name, POKEMON_NAME_LENGTH);
     sprintfStatic(buffer, sUnknown_80DC9A4, nameBuffer);

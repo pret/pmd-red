@@ -1,6 +1,8 @@
 #ifndef GUARD_CODE_8023868_H
 #define GUARD_CODE_8023868_H
 
+#include "structs/menu.h"
+
 struct unkStruct_3001B60
 {
     u32 unk0;
@@ -12,12 +14,13 @@ struct unkStruct_3001B60
     u8 unk15;
     u8 unk16;
     u8 unk17;
-    s16 unk18;
-    s16 unk1A[427];
-    s16 unk370;
-    s16 unk372;
-    s16 unk374;
-    s16 unk376;
+    u8 unk18;
+    s16 unk1A[413];
+    u8 unk354;
+    MenuInputStruct unk358;
+    s32 unk38C;
+    u8 fill390[0x3f6-0x390];
+    u8 unk3F6;
 };
 
 // code_8023868.s
