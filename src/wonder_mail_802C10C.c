@@ -28,15 +28,15 @@ bool8 sub_802C10C(s32 a0, DungeonPos *a1, s32 a2)
     if (gUnknown_203B2E0 == NULL)
         gUnknown_203B2E0 = MemoryAlloc(sizeof(struct unkStruct_203B2E0), 8);
 
-    gUnknown_203B2E0->unk8.s0.unk34 = a0;
+    gUnknown_203B2E0->unk8.s0.winId = a0;
     gUnknown_203B2E0->unk8.s0.unk38 = &gUnknown_203B2E0->unk8.s0.windows.id[a0];
     RestoreSavedWindows(&gUnknown_203B2E0->unk8.s0.windows);
 
-    gUnknown_203B2E0->unk8.s0.windows.id[gUnknown_203B2E0->unk8.s0.unk34] = sUnknown_80DFCB4;
-    gUnknown_203B2E0->unk8.s0.unk38->header = &gUnknown_203B2E0->unk8.unk9C;
+    gUnknown_203B2E0->unk8.s0.windows.id[gUnknown_203B2E0->unk8.s0.winId] = sUnknown_80DFCB4;
+    gUnknown_203B2E0->unk8.s0.unk38->header = &gUnknown_203B2E0->unk8.header;
 
     if (a1 != NULL)
-        gUnknown_203B2E0->unk8.s0.windows.id[gUnknown_203B2E0->unk8.s0.unk34].pos = *a1;
+        gUnknown_203B2E0->unk8.s0.windows.id[gUnknown_203B2E0->unk8.s0.winId].pos = *a1;
 
     sub_8012D34(gUnknown_203B2E0->unk8.s0.unk38, a2);
     ResetUnusedInputStruct();
@@ -98,7 +98,7 @@ void sub_802C2D4(void)
 {
     if (gUnknown_203B2E0 != NULL) {
         gUnknown_203B2E4 = gUnknown_203B2E0->unk8.s0.input.menuIndex;
-        gUnknown_203B2E0->unk8.s0.windows.id[gUnknown_203B2E0->unk8.s0.unk34] = sUnknown_80DFC9C;
+        gUnknown_203B2E0->unk8.s0.windows.id[gUnknown_203B2E0->unk8.s0.winId] = sUnknown_80DFC9C;
         ResetUnusedInputStruct();
         ShowWindows(&gUnknown_203B2E0->unk8.s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B2E0);
@@ -108,10 +108,10 @@ void sub_802C2D4(void)
 
 static void sub_802C328(void)
 {
-    gUnknown_203B2E0->unk8.unk9C.count = gUnknown_203B2E0->unk8.s0.input.unk20;
-    gUnknown_203B2E0->unk8.unk9C.currId = gUnknown_203B2E0->unk8.s0.input.unk1E;
-    gUnknown_203B2E0->unk8.unk9C.width = 12;
-    gUnknown_203B2E0->unk8.unk9C.f3 = 0;
+    gUnknown_203B2E0->unk8.header.count = gUnknown_203B2E0->unk8.s0.input.unk20;
+    gUnknown_203B2E0->unk8.header.currId = gUnknown_203B2E0->unk8.s0.input.unk1E;
+    gUnknown_203B2E0->unk8.header.width = 12;
+    gUnknown_203B2E0->unk8.header.f3 = 0;
 
     SUB_8009614_CALL(gUnknown_203B2E0->unk8.s0);
 }
@@ -125,21 +125,21 @@ void DrawPelipperBoardJobMenu(void)
     s32 i;
     unkStruct_802C39C local;
 
-    CallPrepareTextbox_8008C54(gUnknown_203B2E0->unk8.s0.unk34);
-    sub_80073B8(gUnknown_203B2E0->unk8.s0.unk34);
+    CallPrepareTextbox_8008C54(gUnknown_203B2E0->unk8.s0.winId);
+    sub_80073B8(gUnknown_203B2E0->unk8.s0.winId);
     iVar4 = gUnknown_203B2E0->unk8.s0.input.unk1E * 8;
     x = iVar4;
     x += 10;
-    PrintStringOnWindow(x, 0, sBulletinBoard, gUnknown_203B2E0->unk8.s0.unk34, 0);
+    PrintStringOnWindow(x, 0, sBulletinBoard, gUnknown_203B2E0->unk8.s0.winId, 0);
 
     iVar4 += 4;
-    x = iVar4 + (gUnknown_203B2E0->unk8.unk9C.width * 8);
-    sub_8012BC4(x, 0, gUnknown_203B2E0->unk8.s0.input.unk1E + 1, 2, 7, gUnknown_203B2E0->unk8.s0.unk34);
+    x = iVar4 + (gUnknown_203B2E0->unk8.header.width * 8);
+    sub_8012BC4(x, 0, gUnknown_203B2E0->unk8.s0.input.unk1E + 1, 2, 7, gUnknown_203B2E0->unk8.s0.winId);
 
     for (i = 0; i < gUnknown_203B2E0->unk8.s0.input.unk1A; i++) {
         slotIndex = (gUnknown_203B2E0->pelipperBoardSlots[(gUnknown_203B2E0->unk8.s0.input.unk1E * gUnknown_203B2E0->unk8.s0.input.unk1C) + i]);
         mail = GetPelipperBoardSlotInfo(slotIndex);
-        local.unk0[0] = gUnknown_203B2E0->unk8.s0.unk34;
+        local.unk0[0] = gUnknown_203B2E0->unk8.s0.winId;
         local.y = GetMenuEntryYCoord(&gUnknown_203B2E0->unk8.s0.input, i);
         sub_803B35C(mail, &local);
 
@@ -149,7 +149,7 @@ void DrawPelipperBoardJobMenu(void)
         CreateRescueTitle(&local);
     }
 
-    sub_80073E0(gUnknown_203B2E0->unk8.s0.unk34);
+    sub_80073E0(gUnknown_203B2E0->unk8.s0.winId);
 }
 
 static s32 CountPelipperBoardSlots(void)

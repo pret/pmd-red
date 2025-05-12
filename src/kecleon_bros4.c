@@ -47,14 +47,14 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
     gUnknown_203B224->unk0 = param_1;
     FillInventoryGaps();
     sub_801AE84();
-    gUnknown_203B224->unk54.s0.unk34 = param_2;
+    gUnknown_203B224->unk54.s0.winId = param_2;
     gUnknown_203B224->unk54.s0.unk38 = &gUnknown_203B224->unk54.s0.windows.id[param_2];
     RestoreSavedWindows(&gUnknown_203B224->unk54.s0.windows);
-    gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB95C;
-    gUnknown_203B224->unk54.s0.unk38->header = &gUnknown_203B224->unk54.unk9C;
+    gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.winId] = sUnknown_80DB95C;
+    gUnknown_203B224->unk54.s0.unk38->header = &gUnknown_203B224->unk54.header;
 
     if (param_3 != NULL)
-        gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.unk34].pos = *param_3;
+        gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.winId].pos = *param_3;
 
     sub_8012D08(gUnknown_203B224->unk54.s0.unk38, param_4);
     sub_8099690(1);
@@ -179,7 +179,7 @@ void sub_801A928(void)
     if (gUnknown_203B224 != NULL) {
         gUnknown_203B228 = gUnknown_203B224->unk54.s0.input.menuIndex;
         gUnknown_203B22A = gUnknown_203B224->unk54.s0.input.unk1E;
-        gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.unk34] = sUnknown_80DB944;
+        gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.winId] = sUnknown_80DB944;
         sub_8099690(0);
         ResetUnusedInputStruct();
         ShowWindows(&gUnknown_203B224->unk54.s0.windows, TRUE, TRUE);
@@ -190,10 +190,10 @@ void sub_801A928(void)
 
 static void sub_801A998(void)
 {
-    gUnknown_203B224->unk54.unk9C.count = gUnknown_203B224->unk54.s0.input.unk20;
-    gUnknown_203B224->unk54.unk9C.currId = gUnknown_203B224->unk54.s0.input.unk1E;
-    gUnknown_203B224->unk54.unk9C.width = 11;
-    gUnknown_203B224->unk54.unk9C.f3 = 0;
+    gUnknown_203B224->unk54.header.count = gUnknown_203B224->unk54.s0.input.unk20;
+    gUnknown_203B224->unk54.header.currId = gUnknown_203B224->unk54.s0.input.unk1E;
+    gUnknown_203B224->unk54.header.width = 11;
+    gUnknown_203B224->unk54.header.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B224->unk54.s0.windows, TRUE, TRUE);
 }
@@ -207,14 +207,14 @@ void sub_801A9E0(void)
     u8 buf1[80]; // sp4
     Item item; // spC8
 
-    CallPrepareTextbox_8008C54(gUnknown_203B224->unk54.s0.unk34);
-    sub_80073B8(gUnknown_203B224->unk54.s0.unk34);
+    CallPrepareTextbox_8008C54(gUnknown_203B224->unk54.s0.winId);
+    sub_80073B8(gUnknown_203B224->unk54.s0.winId);
     x = gUnknown_203B224->unk54.s0.input.unk1E * 8 + 10;
 
     if (gUnknown_203B224->unk54.s0.input.unk1E == 0)
-        PrintStringOnWindow(x, 0, sTeamToolboxA, gUnknown_203B224->unk54.s0.unk34, 0);
+        PrintStringOnWindow(x, 0, sTeamToolboxA, gUnknown_203B224->unk54.s0.winId, 0);
     else
-        PrintStringOnWindow(x, 0, sTeamToolboxB, gUnknown_203B224->unk54.s0.unk34, 0);
+        PrintStringOnWindow(x, 0, sTeamToolboxB, gUnknown_203B224->unk54.s0.winId, 0);
 
     for (r7 = 0; r7 < gUnknown_203B224->unk54.s0.input.unk1A; r7++) {
         teamItemIndex = (gUnknown_203B224->unk54.s0.input.unk1E * gUnknown_203B224->unk54.s0.input.unk1C) + r7;
@@ -223,7 +223,7 @@ void sub_801A9E0(void)
         switch (gUnknown_203B224->unk0) {
             case 0: {
                 sub_8090E14(buf1, &item, 0);
-                PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
+                PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.winId, 0);
                 break;
             }
             case 1:
@@ -236,7 +236,7 @@ void sub_801A9E0(void)
                 item.flags = 1;
                 sub_8090E14(buf1, &item, &thing);
 
-                PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
+                PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.winId, 0);
                 break;
             }
             case 3: {
@@ -249,10 +249,10 @@ void sub_801A9E0(void)
                 sub_8090E14(buf1, &item, &thing);
 
                 if (gUnknown_203B224->unk4[teamItemIndex] != 0 || sub_801ADA0(teamItemIndex))
-                    PrintStringOnWindow(8,GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input,r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
+                    PrintStringOnWindow(8,GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input,r7), buf1, gUnknown_203B224->unk54.s0.winId, 0);
                 else {
                     strncpy(gFormatBuffer_Items[0], buf1, 80);
-                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.winId, 0);
                 }
                 break;
             }
@@ -270,15 +270,15 @@ void sub_801A9E0(void)
 
                     if (GetStackSellPrice(&item) + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY) {
                         sprintfStatic(buf2, sFmtRed, buf1);
-                        PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf2, gUnknown_203B224->unk54.s0.unk34, 0);
+                        PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf2, gUnknown_203B224->unk54.s0.winId, 0);
                     }
                     else
-                        PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
+                        PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.winId, 0);
                 }
                 else {
                     sub_8090E14(buf1, &item, 0);
                     strncpy(gFormatBuffer_Items[0], buf1, 80);
-                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.winId, 0);
                 }
                 break;
             }
@@ -293,20 +293,20 @@ void sub_801A9E0(void)
                 sub_8090E14(buf1, &item, &thing);
 
                 if (IsGummiItem(item.id))
-                    PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.unk34, 0);
+                    PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), buf1, gUnknown_203B224->unk54.s0.winId, 0);
                 else {
                     strncpy(gFormatBuffer_Items[0], buf1, 80);
-                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), sFmtMoveItem0, gUnknown_203B224->unk54.s0.winId, 0);
                 }
                 break;
             }
         }
 
         if (sub_801AED0(teamItemIndex) & 1)
-            sub_8007B7C(gUnknown_203B224->unk54.s0.unk34, 8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), (gUnknown_203B224->unk54.s0.unk38->width - 2) * 8, 10);
+            sub_8007B7C(gUnknown_203B224->unk54.s0.winId, 8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.s0.input, r7), (gUnknown_203B224->unk54.s0.unk38->width - 2) * 8, 10);
     }
 
-    sub_80073E0(gUnknown_203B224->unk54.s0.unk34);
+    sub_80073E0(gUnknown_203B224->unk54.s0.winId);
 }
 
 // arm9.bin::02026234

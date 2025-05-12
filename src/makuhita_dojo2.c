@@ -31,14 +31,14 @@ bool8 sub_80302E8(s32 param_1, DungeonPos *param_2, u32 param_3)
     if (sMakuhitaDojoWork2 == NULL)
         sMakuhitaDojoWork2 = MemoryAlloc(sizeof(MakuhitaDojoWork2), 8);
 
-    sMakuhitaDojoWork2->s30.s0.unk34 = param_1;
+    sMakuhitaDojoWork2->s30.s0.winId = param_1;
     sMakuhitaDojoWork2->s30.s0.unk38 = &sMakuhitaDojoWork2->s30.s0.windows.id[param_1];
     RestoreSavedWindows(&sMakuhitaDojoWork2->s30.s0.windows);
-    sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E0804;
-    sMakuhitaDojoWork2->s30.s0.unk38->header = &sMakuhitaDojoWork2->s30.unk9C;
+    sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.winId] = sUnknown_80E0804;
+    sMakuhitaDojoWork2->s30.s0.unk38->header = &sMakuhitaDojoWork2->s30.header;
 
     if (param_2 != NULL)
-        sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.unk34].pos = *param_2;
+        sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.winId].pos = *param_2;
 
     sub_8012D08(sMakuhitaDojoWork2->s30.s0.unk38, param_3);
     ResetUnusedInputStruct();
@@ -92,7 +92,7 @@ UNUSED static void sub_8030444(bool8 a0)
 void sub_8030480(void)
 {
     if (sMakuhitaDojoWork2 != NULL) {
-        sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.unk34] = sUnknown_80E07EC;
+        sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.winId] = sUnknown_80E07EC;
         ResetUnusedInputStruct();
         ShowWindows(&sMakuhitaDojoWork2->s30.s0.windows, TRUE, TRUE);
         MemoryFree(sMakuhitaDojoWork2);
@@ -102,10 +102,10 @@ void sub_8030480(void)
 
 static void sub_80304C8(void)
 {
-    sMakuhitaDojoWork2->s30.unk9C.count = 1;
-    sMakuhitaDojoWork2->s30.unk9C.currId = 0;
-    sMakuhitaDojoWork2->s30.unk9C.width = 8;
-    sMakuhitaDojoWork2->s30.unk9C.f3 = 0;
+    sMakuhitaDojoWork2->s30.header.count = 1;
+    sMakuhitaDojoWork2->s30.header.currId = 0;
+    sMakuhitaDojoWork2->s30.header.width = 8;
+    sMakuhitaDojoWork2->s30.header.f3 = 0;
 
     SUB_80095E4_CALL(sMakuhitaDojoWork2->s30.s0);
 }
@@ -120,10 +120,10 @@ static void MakuhitaDojo_DrawCourseList(void)
     s32 i;
     u8 buffer[256];
 
-    CallPrepareTextbox_8008C54(sMakuhitaDojoWork2->s30.s0.unk34);
-    sub_80073B8(sMakuhitaDojoWork2->s30.s0.unk34);
-    PrintStringOnWindow(10, 0, sCourses, sMakuhitaDojoWork2->s30.s0.unk34, 0);
-    sub_8012BC4((sMakuhitaDojoWork2->s30.unk9C.width * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.unk1E + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.unk34);
+    CallPrepareTextbox_8008C54(sMakuhitaDojoWork2->s30.s0.winId);
+    sub_80073B8(sMakuhitaDojoWork2->s30.s0.winId);
+    PrintStringOnWindow(10, 0, sCourses, sMakuhitaDojoWork2->s30.s0.winId, 0);
+    sub_8012BC4((sMakuhitaDojoWork2->s30.header.width * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.unk1E + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.winId);
 
     for (i = 0; i < sMakuhitaDojoWork2->s30.s0.input.unk1A; i++) {
         iVar6 = sMakuhitaDojoWork2->unk0[sMakuhitaDojoWork2->s30.s0.input.unk1E * sMakuhitaDojoWork2->s30.s0.input.unk1C + i];
@@ -134,13 +134,13 @@ static void MakuhitaDojo_DrawCourseList(void)
         y = GetMenuEntryYCoord(&sMakuhitaDojoWork2->s30.s0.input, i);
         color = COLOR_WHITE_2; // COLOR_WHITE again?
         if ((bool8)IsMazeCompleted(mazeIndex)) {
-            PrintStringOnWindow(8, y, sStarBullet, sMakuhitaDojoWork2->s30.s0.unk34, 0);
+            PrintStringOnWindow(8, y, sStarBullet, sMakuhitaDojoWork2->s30.s0.winId, 0);
             color = COLOR_GREEN;
         }
         sprintfStatic(buffer, sFmtColor, color, GetDungeonName1(dungeonIndex));
-        PrintStringOnWindow(16, y, buffer, sMakuhitaDojoWork2->s30.s0.unk34, 0);
+        PrintStringOnWindow(16, y, buffer, sMakuhitaDojoWork2->s30.s0.winId, 0);
     }
-    sub_80073E0(sMakuhitaDojoWork2->s30.s0.unk34);
+    sub_80073E0(sMakuhitaDojoWork2->s30.s0.winId);
 }
 
 static s32 sub_8030668(void)

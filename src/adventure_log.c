@@ -22,11 +22,11 @@ static void sub_8032084();
 bool8 CreateAdventureLogScreen(u32 kind)
 {
     sAdventureLog = MemoryAlloc(sizeof(*sAdventureLog), 8);
-    sAdventureLog->s0.unk34 = kind;
+    sAdventureLog->s0.winId = kind;
     sAdventureLog->s0.unk38 = &sAdventureLog->s0.windows.id[kind];
     RestoreSavedWindows(&sAdventureLog->s0.windows);
-    sAdventureLog->s0.windows.id[sAdventureLog->s0.unk34] = sUnknown_80E2008;
-    sAdventureLog->s0.unk38->header = &sAdventureLog->unk9C;
+    sAdventureLog->s0.windows.id[sAdventureLog->s0.winId] = sUnknown_80E2008;
+    sAdventureLog->s0.unk38->header = &sAdventureLog->header;
 
     ResetUnusedInputStruct();
     ShowWindows(&sAdventureLog->s0.windows, TRUE, TRUE);
@@ -63,7 +63,7 @@ u32 HandleAdventureLogInput(bool8 a0)
 void CleanAdventureLogScreen(void)
 {
     if (sAdventureLog != NULL) {
-        sAdventureLog->s0.windows.id[sAdventureLog->s0.unk34] = sUnknown_80E1FF0;
+        sAdventureLog->s0.windows.id[sAdventureLog->s0.winId] = sUnknown_80E1FF0;
         ResetUnusedInputStruct();
         ShowWindows(&sAdventureLog->s0.windows, TRUE, TRUE);
         MemoryFree(sAdventureLog);
@@ -73,10 +73,10 @@ void CleanAdventureLogScreen(void)
 
 static void sub_8032084(void)
 {
-    sAdventureLog->unk9C.count = sAdventureLog->s0.input.unk20;
-    sAdventureLog->unk9C.currId = sAdventureLog->s0.input.unk1E;
-    sAdventureLog->unk9C.width = 11;
-    sAdventureLog->unk9C.f3 = 0;
+    sAdventureLog->header.count = sAdventureLog->s0.input.unk20;
+    sAdventureLog->header.currId = sAdventureLog->s0.input.unk1E;
+    sAdventureLog->header.width = 11;
+    sAdventureLog->header.f3 = 0;
 
     SUB_80095E4_CALL(sAdventureLog->s0);
 }
@@ -88,16 +88,16 @@ static void DisplayAdventureLog(void)
     s32 r6; // r6
     u8 aa;
 
-    CallPrepareTextbox_8008C54(sAdventureLog->s0.unk34);
-    sub_80073B8(sAdventureLog->s0.unk34);
+    CallPrepareTextbox_8008C54(sAdventureLog->s0.winId);
+    sub_80073B8(sAdventureLog->s0.winId);
     r4 = sAdventureLog->s0.input.unk1E * 8;
     r6 = r4;
     r6 += 10;
-    PrintStringOnWindow(r6, 0, sAdventureLogText, sAdventureLog->s0.unk34, 0);
+    PrintStringOnWindow(r6, 0, sAdventureLogText, sAdventureLog->s0.winId, 0);
 
     r4 += 4;
-    r6 = r4 + (sAdventureLog->unk9C.width * 8);
-    sub_8012BC4(r6, 0, sAdventureLog->s0.input.unk1E + 1, 1, 7, sAdventureLog->s0.unk34);
+    r6 = r4 + (sAdventureLog->header.width * 8);
+    sub_8012BC4(r6, 0, sAdventureLog->s0.input.unk1E + 1, 1, 7, sAdventureLog->s0.winId);
 
     for (i = 0; i < sAdventureLog->s0.input.unk1A; i++) {
         aa = (sAdventureLog->s0.input.unk1E * sAdventureLog->s0.input.unk1C) + i;
@@ -107,31 +107,31 @@ static void DisplayAdventureLog(void)
                 case AA_NUM_FLOORS_EXPLORED: {
                     s32 v1 = GetAdventureFloorsExplored();
                     gFormatArgs[0] = (s16)v1;
-                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.winId, 0);
                     break;
                 }
                 case AA_NUM_MOVES_LEARNED: {
                     s32 v2 = GetAdventureMovesLearned();
                     gFormatArgs[0] = (s16)v2;
-                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.winId, 0);
                     break;
                 }
                 case AA_NUM_THIEVING_SUCCESSES: {
                     s32 v3 = GetThievingSuccesses();
                     gFormatArgs[0] = (s16)v3;
-                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.winId, 0);
                     break;
                 }
                 case AA_NUM_FRIEND_RESCUE_SUCCESSES: {
                     s32 v4 = GetFriendRescueSuccesses();
                     gFormatArgs[0] = v4;
-                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.winId, 0);
                     break;
                 }
                 case AA_NUM_POKEMON_EVOLVED: {
                     s32 v5 = GetAdventureNumEvolved();
                     gFormatArgs[0] = v5;
-                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.winId, 0);
                     break;
                 }
                 case AA_NUM_POKEMON_JOINED: {
@@ -140,14 +140,14 @@ static void DisplayAdventureLog(void)
                     // fallthrough
                 }
                 default: {
-                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.unk34, 0);
+                    PrintFormattedStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), GetAdventureLogLine(aa), sAdventureLog->s0.winId, 0);
                     break;
                 }
             }
         }
         else
-            PrintStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), sPlaceholder, sAdventureLog->s0.unk34, 0);
+            PrintStringOnWindow(8, GetMenuEntryYCoord(&sAdventureLog->s0.input, i), sPlaceholder, sAdventureLog->s0.winId, 0);
     }
 
-    sub_80073E0(sAdventureLog->s0.unk34);
+    sub_80073E0(sAdventureLog->s0.winId);
 }

@@ -23,14 +23,14 @@ static void sub_801DBD4(void);
 bool8 sub_801D9E4(void)
 {
     sUnknown_203B258 = MemoryAlloc(sizeof(*sUnknown_203B258), 8);
-    sUnknown_203B258->s0.unk34 = 3;
+    sUnknown_203B258->s0.winId = 3;
     sUnknown_203B258->s0.unk38 = &sUnknown_203B258->s0.windows.id[3];
     RestoreSavedWindows(&sUnknown_203B258->s0.windows);
-    sUnknown_203B258->s0.windows.id[sUnknown_203B258->s0.unk34] = sUnknown_80DBF88;
-    sUnknown_203B258->s0.unk38->header = &sUnknown_203B258->unk9C;
+    sUnknown_203B258->s0.windows.id[sUnknown_203B258->s0.winId] = sUnknown_80DBF88;
+    sUnknown_203B258->s0.unk38->header = &sUnknown_203B258->header;
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B258->s0.windows, TRUE, TRUE);
-    sub_8013818(&sUnknown_203B258->s0.input, 229, 10, sUnknown_203B258->s0.unk34);
+    sub_8013818(&sUnknown_203B258->s0.input, 229, 10, sUnknown_203B258->s0.winId);
     sub_801DB54();
     sub_801DBD4();
     return TRUE;
@@ -81,7 +81,7 @@ UNUSED static void sub_801DADC(bool8 a0)
 void sub_801DB0C(void)
 {
     if (sUnknown_203B258 != NULL) {
-        sUnknown_203B258->s0.windows.id[sUnknown_203B258->s0.unk34] = sUnknown_80DBF70;
+        sUnknown_203B258->s0.windows.id[sUnknown_203B258->s0.winId] = sUnknown_80DBF70;
         ResetUnusedInputStruct();
         ShowWindows(&sUnknown_203B258->s0.windows, TRUE, TRUE);
         MemoryFree(sUnknown_203B258);
@@ -91,10 +91,10 @@ void sub_801DB0C(void)
 
 static void sub_801DB54(void)
 {
-    sUnknown_203B258->unk9C.count = 1;
-    sUnknown_203B258->unk9C.currId = 0;
-    sUnknown_203B258->unk9C.width = 8;
-    sUnknown_203B258->unk9C.f3 = 0;
+    sUnknown_203B258->header.count = 1;
+    sUnknown_203B258->header.currId = 0;
+    sUnknown_203B258->header.width = 8;
+    sUnknown_203B258->header.f3 = 0;
 
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B258->s0.windows, TRUE, TRUE);
@@ -110,13 +110,13 @@ static void sub_801DBD4(void)
     s16 index;
     int counter;
 
-    CallPrepareTextbox_8008C54(sUnknown_203B258->s0.unk34);
-    sub_80073B8(sUnknown_203B258->s0.unk34);
-    PrintStringOnWindow(10, 0, sField, sUnknown_203B258->s0.unk34, 0); // Field
+    CallPrepareTextbox_8008C54(sUnknown_203B258->s0.winId);
+    sub_80073B8(sUnknown_203B258->s0.winId);
+    PrintStringOnWindow(10, 0, sField, sUnknown_203B258->s0.winId, 0); // Field
 
-    x = (sUnknown_203B258->unk9C.width * 8) - 2;
+    x = (sUnknown_203B258->header.width * 8) - 2;
     n = sUnknown_203B258->s0.input.unk1E + 1;
-    sub_8012BC4(x, 0, n, 2, 7, sUnknown_203B258->s0.unk34);
+    sub_8012BC4(x, 0, n, 2, 7, sUnknown_203B258->s0.winId);
 
     // This line has no real effect. It's a magic 'fakematch' to fool agb into generating the same asm. It can be removed if you don't care about matching.
     if (x) { counter = 0; }
@@ -127,11 +127,11 @@ static void sub_801DBD4(void)
         temp2 = &gUnknown_81188F0[temp->unk4];
 
         y = GetMenuEntryYCoord(&sUnknown_203B258->s0.input, counter);
-        PrintStringOnWindow(8, y, temp2->text1, sUnknown_203B258->s0.unk34, 0);
+        PrintStringOnWindow(8, y, temp2->text1, sUnknown_203B258->s0.winId, 0);
 
         y = GetMenuEntryYCoord(&sUnknown_203B258->s0.input, counter);
-        PrintStringOnWindow(62, y, temp->text, sUnknown_203B258->s0.unk34, 0);
+        PrintStringOnWindow(62, y, temp->text, sUnknown_203B258->s0.winId, 0);
     }
 
-    sub_80073E0(sUnknown_203B258->s0.unk34);
+    sub_80073E0(sUnknown_203B258->s0.winId);
 }

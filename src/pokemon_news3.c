@@ -34,14 +34,14 @@ bool8 sub_802BD14(s32 a0, DungeonPos *a1, u32 a2)
     if (sUnknown_203B2D8 == NULL)
         sUnknown_203B2D8 = MemoryAlloc(sizeof(struct unkStruct_203B2D8), 8);
 
-    sUnknown_203B2D8->unk4.s0.unk34 = a0;
+    sUnknown_203B2D8->unk4.s0.winId = a0;
     sUnknown_203B2D8->unk4.s0.unk38 = &sUnknown_203B2D8->unk4.s0.windows.id[a0];
     RestoreSavedWindows(&sUnknown_203B2D8->unk4.s0.windows);
-    sUnknown_203B2D8->unk4.s0.windows.id[sUnknown_203B2D8->unk4.s0.unk34] = sUnknown_80DFC74;
-    sUnknown_203B2D8->unk4.s0.unk38->header = &sUnknown_203B2D8->unk4.unk9C;
+    sUnknown_203B2D8->unk4.s0.windows.id[sUnknown_203B2D8->unk4.s0.winId] = sUnknown_80DFC74;
+    sUnknown_203B2D8->unk4.s0.unk38->header = &sUnknown_203B2D8->unk4.header;
 
     if (a1 != NULL)
-        sUnknown_203B2D8->unk4.s0.windows.id[sUnknown_203B2D8->unk4.s0.unk34].pos = *a1;
+        sUnknown_203B2D8->unk4.s0.windows.id[sUnknown_203B2D8->unk4.s0.winId].pos = *a1;
 
     sub_8012D34(sUnknown_203B2D8->unk4.s0.unk38, a2);
     ResetUnusedInputStruct();
@@ -104,7 +104,7 @@ void sub_802BEDC(void)
 {
     if (sUnknown_203B2D8 != NULL) {
         sUnknown_203B2DC = sUnknown_203B2D8->unk4.s0.input.menuIndex;
-        sUnknown_203B2D8->unk4.s0.windows.id[sUnknown_203B2D8->unk4.s0.unk34] = sUnknown_80DFC5C;
+        sUnknown_203B2D8->unk4.s0.windows.id[sUnknown_203B2D8->unk4.s0.winId] = sUnknown_80DFC5C;
         ResetUnusedInputStruct();
         ShowWindows(&sUnknown_203B2D8->unk4.s0.windows, TRUE, TRUE);
         MemoryFree(sUnknown_203B2D8);
@@ -114,10 +114,10 @@ void sub_802BEDC(void)
 
 static void sub_802BF30(void)
 {
-    sUnknown_203B2D8->unk4.unk9C.count = 1;
-    sUnknown_203B2D8->unk4.unk9C.currId = 0;
-    sUnknown_203B2D8->unk4.unk9C.width = 12;
-    sUnknown_203B2D8->unk4.unk9C.f3 = 0;
+    sUnknown_203B2D8->unk4.header.count = 1;
+    sUnknown_203B2D8->unk4.header.currId = 0;
+    sUnknown_203B2D8->unk4.header.width = 12;
+    sUnknown_203B2D8->unk4.header.f3 = 0;
     SUB_8009614_CALL(sUnknown_203B2D8->unk4.s0);
 }
 
@@ -129,21 +129,21 @@ void CreateMailMenu(void)
     unkStruct_802C39C local;
     u8 buffer[128];
 
-    CallPrepareTextbox_8008C54(sUnknown_203B2D8->unk4.s0.unk34);
-    sub_80073B8(sUnknown_203B2D8->unk4.s0.unk34);
-    PrintStringOnWindow((sUnknown_203B2D8->unk4.s0.input.unk1E * 8) + 10, 0, sMailbox, sUnknown_203B2D8->unk4.s0.unk34, 0);
+    CallPrepareTextbox_8008C54(sUnknown_203B2D8->unk4.s0.winId);
+    sub_80073B8(sUnknown_203B2D8->unk4.s0.winId);
+    PrintStringOnWindow((sUnknown_203B2D8->unk4.s0.input.unk1E * 8) + 10, 0, sMailbox, sUnknown_203B2D8->unk4.s0.winId, 0);
 
     for (i = 0; i < sUnknown_203B2D8->unk4.s0.input.unk1A; i++) {
         mail = GetMailboxSlotInfo(sUnknown_203B2D8->unk0[(sUnknown_203B2D8->unk4.s0.input.unk1E * sUnknown_203B2D8->unk4.s0.input.unk1C) + i]);
-        local.unk0[0] = sUnknown_203B2D8->unk4.s0.unk34;
+        local.unk0[0] = sUnknown_203B2D8->unk4.s0.winId;
         local.y = GetMenuEntryYCoord(&sUnknown_203B2D8->unk4.s0.input, i);
 
         if (mail->mailType == MAIL_TYPE_UNK1) {
             y = GetMenuEntryYCoord(&sUnknown_203B2D8->unk4.s0.input, i);
-            sub_803B6B0(10, y, 6, sUnknown_203B2D8->unk4.s0.unk34);
+            sub_803B6B0(10, y, 6, sUnknown_203B2D8->unk4.s0.winId);
             PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], GetPlayerPokemonStruct());
             sprintfStatic(buffer, GetPokemonMailHeadline(mail->unk4.dungeon.floor), gFormatBuffer_Monsters[0]);
-            PrintStringOnWindow(21, y, buffer, sUnknown_203B2D8->unk4.s0.unk34, 0);
+            PrintStringOnWindow(21, y, buffer, sUnknown_203B2D8->unk4.s0.winId, 0);
         }
         else {
             sub_803B35C(mail, &local);
@@ -154,7 +154,7 @@ void CreateMailMenu(void)
         }
     }
 
-    sub_80073E0(sUnknown_203B2D8->unk4.s0.unk34);
+    sub_80073E0(sUnknown_203B2D8->unk4.s0.winId);
 }
 
 static s32 CountEmptyMailSlots(void)

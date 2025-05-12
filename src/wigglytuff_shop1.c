@@ -30,11 +30,11 @@ bool8 sub_80211AC(u32 mode, u32 a1)
 
     sWigglytuffShop1Work = MemoryAlloc(sizeof(WigglytuffShop1Work), 8);
     sWigglytuffShop1Work->mode = mode;
-    sWigglytuffShop1Work->s40.s0.unk34 = a1;
-    sWigglytuffShop1Work->s40.s0.unk38 = &sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.unk34];
+    sWigglytuffShop1Work->s40.s0.winId = a1;
+    sWigglytuffShop1Work->s40.s0.unk38 = &sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.winId];
     RestoreSavedWindows(&sWigglytuffShop1Work->s40.s0.windows);
-    sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.unk34] = sUnknown_80DC47C;
-    sWigglytuffShop1Work->s40.s0.unk38->header = &sWigglytuffShop1Work->s40.unk9C;
+    sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.winId] = sUnknown_80DC47C;
+    sWigglytuffShop1Work->s40.s0.unk38->header = &sWigglytuffShop1Work->s40.header;
     ResetUnusedInputStruct();
     ShowWindows(&sWigglytuffShop1Work->s40.s0.windows, TRUE, TRUE);
     sub_8013818(&sWigglytuffShop1Work->s40.s0.input, sub_8021664(), 10, a1);
@@ -104,7 +104,7 @@ void sub_80213A0(void)
         sUnknown_203B284 = sWigglytuffShop1Work->mode;
         sUnknown_203B288 = sWigglytuffShop1Work->s40.s0.input.menuIndex;
         sUnknown_203B28A = sWigglytuffShop1Work->s40.s0.input.unk1E;
-        sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.unk34] = sUnknown_80DC464;
+        sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.winId] = sUnknown_80DC464;
         ResetUnusedInputStruct();
         ShowWindows(&sWigglytuffShop1Work->s40.s0.windows, TRUE, TRUE);
         MemoryFree(sWigglytuffShop1Work);
@@ -114,10 +114,10 @@ void sub_80213A0(void)
 
 static void sub_8021410(void)
 {
-    sWigglytuffShop1Work->s40.unk9C.count = 1;
-    sWigglytuffShop1Work->s40.unk9C.currId = 0;
-    sWigglytuffShop1Work->s40.unk9C.width = 12;
-    sWigglytuffShop1Work->s40.unk9C.f3 = 0;
+    sWigglytuffShop1Work->s40.header.count = 1;
+    sWigglytuffShop1Work->s40.header.currId = 0;
+    sWigglytuffShop1Work->s40.header.width = 12;
+    sWigglytuffShop1Work->s40.header.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&sWigglytuffShop1Work->s40.s0.windows, TRUE, TRUE);
 
@@ -131,11 +131,11 @@ void sub_8021494(void)
     u8 buffer1[80];
     u8 buffer2[80];
 
-    CallPrepareTextbox_8008C54(sWigglytuffShop1Work->s40.s0.unk34);
-    sub_80073B8(sWigglytuffShop1Work->s40.s0.unk34);
-    PrintStringOnWindow(10, 0, sFriendAreas, sWigglytuffShop1Work->s40.s0.unk34, 0);
+    CallPrepareTextbox_8008C54(sWigglytuffShop1Work->s40.s0.winId);
+    sub_80073B8(sWigglytuffShop1Work->s40.s0.winId);
+    PrintStringOnWindow(10, 0, sFriendAreas, sWigglytuffShop1Work->s40.s0.winId, 0);
 
-    sub_8012BC4((sWigglytuffShop1Work->s40.unk9C.width * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.unk1E + 1, 1, 7, sWigglytuffShop1Work->s40.s0.unk34);
+    sub_8012BC4((sWigglytuffShop1Work->s40.header.width * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.unk1E + 1, 1, 7, sWigglytuffShop1Work->s40.s0.winId);
 
     for (i = 0; i < sWigglytuffShop1Work->s40.s0.input.unk1A; i++) {
         friendAreaIndex = sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.unk1E * sWigglytuffShop1Work->s40.s0.input.unk1C) + i];
@@ -144,25 +144,25 @@ void sub_8021494(void)
             WriteFriendAreaName(buffer1, friendAreaIndex, TRUE);
 
             if (GetFriendAreaPrice(friendAreaIndex) <= gTeamInventoryRef->teamMoney)
-                PrintStringOnWindow(8,GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), buffer1, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8,GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), buffer1, sWigglytuffShop1Work->s40.s0.winId, 0);
             else {
                 sprintfStatic(buffer2, sFmtRedString, buffer1);
-                PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.winId, 0);
             }
         }
         else if (sWigglytuffShop1Work->mode == 0) {
             if (gFriendAreas[friendAreaIndex] == TRUE)
-                PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.winId, 0);
             else {
                 sprintfStatic(buffer2, sFmtGreenString, GetFriendAreaName(friendAreaIndex));
-                PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.unk34, 0);
+                PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), buffer2, sWigglytuffShop1Work->s40.s0.winId, 0);
             }
         }
         else
-            PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.unk34, 0);
+            PrintStringOnWindow(8, GetMenuEntryYCoord(&sWigglytuffShop1Work->s40.s0.input, i), GetFriendAreaName(friendAreaIndex), sWigglytuffShop1Work->s40.s0.winId, 0);
     }
 
-    sub_80073E0(sWigglytuffShop1Work->s40.s0.unk34);
+    sub_80073E0(sWigglytuffShop1Work->s40.s0.winId);
 }
 
 static s32 sub_8021664(void)

@@ -11,6 +11,8 @@
 #include "event_flag.h"
 #include "menu_input.h"
 #include "rescue_team_info.h"
+#include "input.h"
+#include "memory.h"
 
 extern const u8 sUnknown_80DC988[];
 extern const u8 sUnknown_80DC980[];
@@ -30,7 +32,52 @@ static void SortbyName(s32, s32);
 bool8 sub_8024184(PokemonStruct1 *pokemon, u8 area);
 void sub_80241A8(void);
 
+extern s32 gUnknown_203B2A0;
+extern s32 gUnknown_203B2A4;
+extern u16 gUnknown_203B2A8;
+extern u16 gUnknown_203B2AA;
+
 // THE REMAINING CODE FROM THIS FILE IS IN code_8023868.s STARTING WITH sub_8023868
+
+void sub_8023C60(void)
+{
+    if (gUnknown_3001B60 != NULL) {
+        gUnknown_203B2A0 = gUnknown_3001B60->unk0;
+        gUnknown_203B2A4 = gUnknown_3001B60->sortMethod;
+        gUnknown_203B2A8 = gUnknown_3001B60->unk358.s0.input.menuIndex;
+        gUnknown_203B2AA = gUnknown_3001B60->unk358.s0.input.unk1E;
+        gUnknown_3001B60->unk358.s0.windows.id[gUnknown_3001B60->unk358.s0.winId] = sUnknown_80DC950;
+        ResetUnusedInputStruct();
+        ShowWindows(&gUnknown_3001B60->unk358.s0.windows, TRUE, TRUE);
+        MemoryFree(gUnknown_3001B60);
+        gUnknown_3001B60 = NULL;
+    }
+}
+
+struct unkStruct_3001B60 *sub_8023CE8(void)
+{
+    return gUnknown_3001B60;
+}
+
+void sub_8023CF4(void)
+{
+    gUnknown_3001B60->unk358.header.count = 1;
+    gUnknown_3001B60->unk358.header.currId = 0;
+    gUnknown_3001B60->unk358.header.f3 = 0;
+    switch (gUnknown_3001B60->unk0) {
+        case 2:
+            gUnknown_3001B60->unk358.header.width = 12;
+            break;
+        case 4:
+            gUnknown_3001B60->unk358.header.width = 12;
+            break;
+        default:
+            gUnknown_3001B60->unk358.header.width = 12;
+            break;
+    }
+
+    SUB_80095E4_CALL_2(gUnknown_3001B60->unk358.s0);
+}
 
 void sub_8023DA4(void)
 {
@@ -39,27 +86,27 @@ void sub_8023DA4(void)
     u8 nameTxtBuff[20];
     u8 txtBuff3[20];
 
-    CallPrepareTextbox_8008C54(gUnknown_3001B60->unk38C);
-    sub_80073B8(gUnknown_3001B60->unk38C);
+    CallPrepareTextbox_8008C54(gUnknown_3001B60->unk358.s0.winId);
+    sub_80073B8(gUnknown_3001B60->unk358.s0.winId);
     switch (gUnknown_3001B60->unk0) {
         case 2:
             sub_80920D8(winTxtBuff);
-            PrintStringOnWindow(10, 0, winTxtBuff, gUnknown_3001B60->unk38C, '\0');
+            PrintStringOnWindow(10, 0, winTxtBuff, gUnknown_3001B60->unk358.s0.winId, '\0');
             break;
         case 4:
-            PrintStringOnWindow(10, 0, sUnknown_80DC980, gUnknown_3001B60->unk38C, '\0');
-            x = (gUnknown_3001B60->unk3F6 * 8) + 4;
-            sub_8012BC4(x, 0, gUnknown_3001B60->unk358.unk1E + 1, 2, 7, gUnknown_3001B60->unk38C);
+            PrintStringOnWindow(10, 0, sUnknown_80DC980, gUnknown_3001B60->unk358.s0.winId, '\0');
+            x = (gUnknown_3001B60->unk358.header.width * 8) + 4;
+            sub_8012BC4(x, 0, gUnknown_3001B60->unk358.s0.input.unk1E + 1, 2, 7, gUnknown_3001B60->unk358.s0.winId);
             break;
         default:
-            PrintStringOnWindow(10, 0, sUnknown_80DC988, gUnknown_3001B60->unk38C, '\0');
-            x = (gUnknown_3001B60->unk3F6 * 8) + 4;
-            sub_8012BC4(x, 0, gUnknown_3001B60->unk358.unk1E + 1, 2, 7, gUnknown_3001B60->unk38C);
+            PrintStringOnWindow(10, 0, sUnknown_80DC988, gUnknown_3001B60->unk358.s0.winId, '\0');
+            x = (gUnknown_3001B60->unk358.header.width * 8) + 4;
+            sub_8012BC4(x, 0, gUnknown_3001B60->unk358.s0.input.unk1E + 1, 2, 7, gUnknown_3001B60->unk358.s0.winId);
             break;
     }
 
-    for (i = 0; i < gUnknown_3001B60->unk358.unk1A; i++) {
-        s32 id = gUnknown_3001B60->unk1A[(gUnknown_3001B60->unk358.unk1E * gUnknown_3001B60->unk358.unk1C) + i];
+    for (i = 0; i < gUnknown_3001B60->unk358.s0.input.unk1A; i++) {
+        s32 id = gUnknown_3001B60->unk1A[(gUnknown_3001B60->unk358.s0.input.unk1E * gUnknown_3001B60->unk358.s0.input.unk1C) + i];
         PokemonStruct1 *pokePtr = &gRecruitedPokemonRef->pokemon[id];
         s32 r6 = 7;
 
@@ -94,9 +141,9 @@ void sub_8023DA4(void)
         sub_80922B4(nameTxtBuff, pokePtr->name, POKEMON_NAME_LENGTH);
         sub_808D930(txtBuff3, pokePtr->speciesNum);
         sprintfStatic(winTxtBuff, sUnknown_80DC998, r6, nameTxtBuff);
-        PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_3001B60->unk358, i), winTxtBuff, gUnknown_3001B60->unk38C, '\0');
+        PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_3001B60->unk358.s0.input, i), winTxtBuff, gUnknown_3001B60->unk358.s0.winId, '\0');
     }
-    sub_80073E0(gUnknown_3001B60->unk38C);
+    sub_80073E0(gUnknown_3001B60->unk358.s0.winId);
 }
 
 s32 sub_8023F8C(void)
@@ -274,7 +321,7 @@ UNUSED static PokemonStruct1 *sub_80243E8(void)
 {
     u8 buffer[40];
     u8 nameBuffer[20];
-    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_3001B60->unk1A[(gUnknown_3001B60->unk358.unk1E * gUnknown_3001B60->unk358.unk1C) + gUnknown_3001B60->unk358.menuIndex]];
+    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_3001B60->unk1A[(gUnknown_3001B60->unk358.s0.input.unk1E * gUnknown_3001B60->unk358.s0.input.unk1C) + gUnknown_3001B60->unk358.s0.input.menuIndex]];
 
     sub_80922B4(nameBuffer, pokeStruct->name, POKEMON_NAME_LENGTH);
     sprintfStatic(buffer, sUnknown_80DC9A4, nameBuffer);

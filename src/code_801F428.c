@@ -53,15 +53,15 @@ bool8 sub_801F428(s16 index, s32 param_2)
     gUnknown_203B274 = MemoryAlloc(sizeof(struct unkStruct_203B274), 0x8);
     gUnknown_203B274->pokeStruct = &gRecruitedPokemonRef->pokemon[index_s32];
     gUnknown_203B274->unk4 = &gUnknown_203B274->unk8;
-    gUnknown_203B274->s348.s0.unk34 = param_2;
-    gUnknown_203B274->s348.s0.unk38 = &gUnknown_203B274->s348.s0.windows.id[gUnknown_203B274->s348.s0.unk34];
+    gUnknown_203B274->s348.s0.winId = param_2;
+    gUnknown_203B274->s348.s0.unk38 = &gUnknown_203B274->s348.s0.windows.id[gUnknown_203B274->s348.s0.winId];
     RestoreSavedWindows(&gUnknown_203B274->s348.s0.windows);
-    gUnknown_203B274->s348.s0.windows.id[gUnknown_203B274->s348.s0.unk34] = sUnknown_80DC2C4;
-    gUnknown_203B274->s348.s0.unk38->header = &gUnknown_203B274->s348.unk9C;
-    gUnknown_203B274->s348.unk9C.count = 1;
-    gUnknown_203B274->s348.unk9C.currId = 0;
-    gUnknown_203B274->s348.unk9C.width = 0xC;
-    gUnknown_203B274->s348.unk9C.f3 = 0;
+    gUnknown_203B274->s348.s0.windows.id[gUnknown_203B274->s348.s0.winId] = sUnknown_80DC2C4;
+    gUnknown_203B274->s348.s0.unk38->header = &gUnknown_203B274->s348.header;
+    gUnknown_203B274->s348.header.count = 1;
+    gUnknown_203B274->s348.header.currId = 0;
+    gUnknown_203B274->s348.header.width = 0xC;
+    gUnknown_203B274->s348.header.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B274->s348.s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_203B274->s348.s0.input, sub_801F7E4(), 4, param_2);
@@ -122,7 +122,7 @@ void sub_801F63C(void)
 {
     if(gUnknown_203B274 != NULL)
     {
-        gUnknown_203B274->s348.s0.windows.id[gUnknown_203B274->s348.s0.unk34] = sUnknown_80DC2AC;
+        gUnknown_203B274->s348.s0.windows.id[gUnknown_203B274->s348.s0.winId] = sUnknown_80DC2AC;
         ResetUnusedInputStruct();
         ShowWindows(&gUnknown_203B274->s348.s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B274);
@@ -142,17 +142,17 @@ void sub_801F700(void)
     u8 buffer2 [48];
     u8 buffer1 [128];
 
-    CallPrepareTextbox_8008C54(gUnknown_203B274->s348.s0.unk34);
-    sub_80073B8(gUnknown_203B274->s348.s0.unk34);
+    CallPrepareTextbox_8008C54(gUnknown_203B274->s348.s0.winId);
+    sub_80073B8(gUnknown_203B274->s348.s0.winId);
     sprintfStatic(buffer1,gUnknown_80DC2DC,gUnknown_203B274->s348.s0.input.unk1E + 1,gUnknown_203B274->s348.s0.input.unk20); // Moves Page: %d/%d
-    PrintStringOnWindow(0x10,0,buffer1,gUnknown_203B274->s348.s0.unk34,0);
+    PrintStringOnWindow(0x10,0,buffer1,gUnknown_203B274->s348.s0.winId,0);
     for(index = 0; index < gUnknown_203B274->s348.s0.input.unk1A; index++)
     {
         sub_8092C84(buffer2,gUnknown_203B274->unk4->unk0[gUnknown_203B274->s348.s0.input.unk1E * gUnknown_203B274->s348.s0.input.unk1C + index]);
         y = GetMenuEntryYCoord(&gUnknown_203B274->s348.s0.input, index);
-        PrintStringOnWindow(8,y,buffer2,gUnknown_203B274->s348.s0.unk34,0);
+        PrintStringOnWindow(8,y,buffer2,gUnknown_203B274->s348.s0.winId,0);
     }
-    sub_80073E0(gUnknown_203B274->s348.s0.unk34);
+    sub_80073E0(gUnknown_203B274->s348.s0.winId);
 }
 
 u32 sub_801F7E4(void)

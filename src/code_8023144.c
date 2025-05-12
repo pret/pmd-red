@@ -47,15 +47,15 @@ bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
     gUnknown_3001B5C->unk0 = param_1_u8;
     gUnknown_3001B5C->unk4 = gUnknown_203B298;
 
-    gUnknown_3001B5C->s35C.s0.unk34 = index;
+    gUnknown_3001B5C->s35C.s0.winId = index;
     gUnknown_3001B5C->s35C.s0.unk38 = &gUnknown_3001B5C->s35C.s0.windows.id[index];
     RestoreSavedWindows(&gUnknown_3001B5C->s35C.s0.windows);
-    gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC91C;
+    gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.winId] = sUnknown_80DC91C;
 
-    gUnknown_3001B5C->s35C.s0.unk38->header = &gUnknown_3001B5C->s35C.unk9C;
+    gUnknown_3001B5C->s35C.s0.unk38->header = &gUnknown_3001B5C->s35C.header;
 
     if (sub != NULL)
-        gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34].pos = *sub;
+        gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.winId].pos = *sub;
 
     sub_8012D08(gUnknown_3001B5C->s35C.s0.unk38, a3);
     ResetUnusedInputStruct();
@@ -128,7 +128,7 @@ void sub_80233A0(void)
         gUnknown_203B298 = gUnknown_3001B5C->unk4;
         gUnknown_203B29C = gUnknown_3001B5C->s35C.s0.input.menuIndex;
         gUnknown_203B29E = gUnknown_3001B5C->s35C.s0.input.unk1E;
-        gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.unk34] = sUnknown_80DC904;
+        gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.winId] = sUnknown_80DC904;
         ResetUnusedInputStruct();
         ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_3001B5C);
@@ -138,10 +138,10 @@ void sub_80233A0(void)
 
 static void sub_8023420(void)
 {
-    gUnknown_3001B5C->s35C.unk9C.count = 1;
-    gUnknown_3001B5C->s35C.unk9C.currId = 0;
-    gUnknown_3001B5C->s35C.unk9C.width = 12;
-    gUnknown_3001B5C->s35C.unk9C.f3 = 0;
+    gUnknown_3001B5C->s35C.header.count = 1;
+    gUnknown_3001B5C->s35C.header.currId = 0;
+    gUnknown_3001B5C->s35C.header.width = 12;
+    gUnknown_3001B5C->s35C.header.f3 = 0;
 
     SUB_80095E4_CALL_2(gUnknown_3001B5C->s35C.s0);
 }
@@ -159,11 +159,11 @@ static void sub_80234BC(void)
     u8 buffer1[100];
     FriendAreaCapacity auStack_2c;
 
-    CallPrepareTextbox_8008C54(gUnknown_3001B5C->s35C.s0.unk34);
-    sub_80073B8(gUnknown_3001B5C->s35C.s0.unk34);
-    PrintStringOnWindow(10, 0, sPokemon, gUnknown_3001B5C->s35C.s0.unk34, 0);
+    CallPrepareTextbox_8008C54(gUnknown_3001B5C->s35C.s0.winId);
+    sub_80073B8(gUnknown_3001B5C->s35C.s0.winId);
+    PrintStringOnWindow(10, 0, sPokemon, gUnknown_3001B5C->s35C.s0.winId, 0);
 
-    sub_8012BC4((gUnknown_3001B5C->s35C.unk9C.width * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.unk1E + 1, 2, 7, gUnknown_3001B5C->s35C.s0.unk34);
+    sub_8012BC4((gUnknown_3001B5C->s35C.header.width * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.unk1E + 1, 2, 7, gUnknown_3001B5C->s35C.s0.winId);
 
     for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.unk1A; i++) {
         y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.s0.input, i);
@@ -175,26 +175,26 @@ static void sub_80234BC(void)
 
         iVar4 = GetDexInternalNo(species, 0);
         cVar2 = (iVar4 % 10) + 48;
-        sub_8012C60(20, y, cVar2, color, gUnknown_3001B5C->s35C.s0.unk34);
+        sub_8012C60(20, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
 
         if (9 < iVar4) {
             iVar4 /= 10;
             cVar2 = (iVar4 % 10) + 48;
-            sub_8012C60(13, y, cVar2, color, gUnknown_3001B5C->s35C.s0.unk34);
+            sub_8012C60(13, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
 
             if (9 < iVar4) {
                 uVar3 = iVar4 / 10;
                 cVar2 = (uVar3 % 10) + 48;
-                sub_8012C60(6, y, cVar2, color, gUnknown_3001B5C->s35C.s0.unk34);
+                sub_8012C60(6, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
             }
         }
 
         sub_808D930(buffer1,species);
         sprintfStatic(buffer2, sFmtColoredString, color, buffer1);
-        PrintStringOnWindow(36, y, buffer2, gUnknown_3001B5C->s35C.s0.unk34, 0);
+        PrintStringOnWindow(36, y, buffer2, gUnknown_3001B5C->s35C.s0.winId, 0);
     }
 
-    sub_80073E0(gUnknown_3001B5C->s35C.s0.unk34);
+    sub_80073E0(gUnknown_3001B5C->s35C.s0.winId);
 }
 
 static u32 sub_80236A4(void)
