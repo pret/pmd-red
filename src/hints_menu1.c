@@ -23,10 +23,10 @@ bool8 sub_801E3F0(u32 a0)
     if (sUnknown_203B264 == NULL)
         sUnknown_203B264 = MemoryAlloc(sizeof(*sUnknown_203B264), 8);
 
-    sUnknown_203B264->unk34 = a0;
+    sUnknown_203B264->winId = a0;
     sUnknown_203B264->unk38 = &sUnknown_203B264->windows.id[a0];
     RestoreSavedWindows(&sUnknown_203B264->windows);
-    sUnknown_203B264->windows.id[sUnknown_203B264->unk34] = sUnknown_80DC0BC;
+    sUnknown_203B264->windows.id[sUnknown_203B264->winId] = sUnknown_80DC0BC;
     sub_8012D08(sUnknown_203B264->unk38, 10);
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B264->windows, TRUE, TRUE);
@@ -86,7 +86,7 @@ void CreateHintSelectionScreen(bool8 cursorSprite)
 void sub_801E54C(void)
 {
     if (sUnknown_203B264 != NULL) {
-        sUnknown_203B264->windows.id[sUnknown_203B264->unk34] = sUnknown_80DC0A0;
+        sUnknown_203B264->windows.id[sUnknown_203B264->winId] = sUnknown_80DC0A0;
         ResetUnusedInputStruct();
         ShowWindows(&sUnknown_203B264->windows, TRUE, TRUE);
         MemoryFree(sUnknown_203B264);
@@ -104,14 +104,14 @@ static void DrawHintSelectionMenu(void)
     s32 hintIndex;
     s32 y;
 
-    CallPrepareTextbox_8008C54(sUnknown_203B264->unk34);
-    sub_80073B8(sUnknown_203B264->unk34);
-    PrintStringOnWindow(16, 0, sHints, sUnknown_203B264->unk34, 0);
+    CallPrepareTextbox_8008C54(sUnknown_203B264->winId);
+    sub_80073B8(sUnknown_203B264->winId);
+    PrintStringOnWindow(16, 0, sHints, sUnknown_203B264->winId, 0);
 
     for (hintIndex = 0; hintIndex < HINT_MAX; hintIndex++) {
         y = GetMenuEntryYCoord(&sUnknown_203B264->input, hintIndex);
-        PrintStringOnWindow(10, y, gCommonHints[hintIndex].heading, sUnknown_203B264->unk34, 0);
+        PrintStringOnWindow(10, y, gCommonHints[hintIndex].heading, sUnknown_203B264->winId, 0);
     }
 
-    sub_80073E0(sUnknown_203B264->unk34);
+    sub_80073E0(sUnknown_203B264->winId);
 }

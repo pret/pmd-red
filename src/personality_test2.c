@@ -33,7 +33,7 @@ void CreatePartnerSelectionMenu(s16 starterID)
 
     sub_803CEAC();
     gUnknown_203B404->StarterID = starterID_s32;
-    gUnknown_203B404->s18.s0.unk34 = 0;
+    gUnknown_203B404->s18.s0.winId = 0;
     gUnknown_203B404->s18.s0.unk38 = &gUnknown_203B404->s18.s0.windows.id[0];
 
     gUnknown_203B404->s18.s0.windows.id[0] = gUnknown_80F4290;
@@ -41,15 +41,15 @@ void CreatePartnerSelectionMenu(s16 starterID)
     gUnknown_203B404->s18.s0.windows.id[2] = gUnknown_80F4278;
     gUnknown_203B404->s18.s0.windows.id[3] = gUnknown_80F4278;
 
-    gUnknown_203B404->s18.s0.unk38->header = &gUnknown_203B404->s18.unk9C;
+    gUnknown_203B404->s18.s0.unk38->header = &gUnknown_203B404->s18.header;
 
-    gUnknown_203B404->s18.unk9C.count = 1;
-    gUnknown_203B404->s18.unk9C.currId = 0;
-    gUnknown_203B404->s18.unk9C.width = 6;
-    gUnknown_203B404->s18.unk9C.f3 = 0;
+    gUnknown_203B404->s18.header.count = 1;
+    gUnknown_203B404->s18.header.currId = 0;
+    gUnknown_203B404->s18.header.width = 6;
+    gUnknown_203B404->s18.header.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B404->s18.s0.windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B404->s18.s0.input, GetValidPartners(), 10, gUnknown_203B404->s18.s0.unk34);
+    sub_8013818(&gUnknown_203B404->s18.s0.input, GetValidPartners(), 10, gUnknown_203B404->s18.s0.winId);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
 }
@@ -91,7 +91,7 @@ UNUSED static void sub_803CE34(bool8 cursorSprite)
 
 void sub_803CE6C(void)
 {
-    gUnknown_203B404->s18.s0.windows.id[gUnknown_203B404->s18.s0.unk34] = gUnknown_80F4278;
+    gUnknown_203B404->s18.s0.windows.id[gUnknown_203B404->s18.s0.winId] = gUnknown_80F4278;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B404->s18.s0.windows, TRUE, TRUE);
     sub_803CECC();
@@ -124,18 +124,18 @@ static void RedrawPartnerSelectionMenu(void)
 
     SUB_80095E4_CALL(gUnknown_203B404->s18.s0);
 
-    CallPrepareTextbox_8008C54(gUnknown_203B404->s18.s0.unk34);
-    sub_80073B8(gUnknown_203B404->s18.s0.unk34);
-    PrintStringOnWindow(12, 0, gPartnerSelectionHeaderText, gUnknown_203B404->s18.s0.unk34, 0);
+    CallPrepareTextbox_8008C54(gUnknown_203B404->s18.s0.winId);
+    sub_80073B8(gUnknown_203B404->s18.s0.winId);
+    PrintStringOnWindow(12, 0, gPartnerSelectionHeaderText, gUnknown_203B404->s18.s0.winId, 0);
 
     monCounter = 0;
     while (monCounter < gUnknown_203B404->s18.s0.input.unk1A) {
         yCoord = GetMenuEntryYCoord(&gUnknown_203B404->s18.s0.input, monCounter);
         monName = GetMonSpecies(gUnknown_203B404->PartnerArray[monCounter]);
-        PrintStringOnWindow(8, yCoord, monName, gUnknown_203B404->s18.s0.unk34, 0);
+        PrintStringOnWindow(8, yCoord, monName, gUnknown_203B404->s18.s0.winId, 0);
         monCounter++;
     }
-    sub_80073E0(gUnknown_203B404->s18.s0.unk34);
+    sub_80073E0(gUnknown_203B404->s18.s0.winId);
     gUnknown_203B404->unk16 = 1;
 }
 

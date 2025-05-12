@@ -6,7 +6,7 @@
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "code_8023868.h"
+#include "friend_list.h"
 #include "code_8024458.h"
 #include "code_8098BDC.h"
 #include "code_8099360.h"
@@ -188,7 +188,7 @@ void sub_8025518(void)
         if (gUnknown_203B2B4->unk0 == 0) {
             uVar3 = 2;
         }
-        sub_8023868(uVar3,0,0,10);
+        FriendList_Init(uVar3,0,0,10);
         break;
     case 2:
         sub_8023B7C(1);
@@ -197,7 +197,7 @@ void sub_8025518(void)
         if (gUnknown_203B2B4->unk0 == 0) {
             sub_8025E68(3,&gUnknown_203B2B4->item2);
         }
-        sub_8023DA4();
+        FriendList_ShowWindow();
         PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],gUnknown_203B2B4->pokeStruct,7);
         PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[1],gUnknown_203B2B4->pokeStruct,6);
         sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction1,2);
@@ -371,22 +371,22 @@ void sub_802591C(void)
 
 void sub_80259F0(void)
 {
-    switch(sub_8023A94(TRUE))
+    switch(FriendList_HandleInput(TRUE))
     {
         case 3:
-            gUnknown_203B2B4->species = sub_8023B44();
+            gUnknown_203B2B4->species = FriendList_GetCurrId();
             gUnknown_203B2B4->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B4->species];
             PeekPokemonItem(gUnknown_203B2B4->species, &gUnknown_203B2B4->item2);
             SetFriendListMenuState(3);
             break;
         case 4:
-            gUnknown_203B2B4->species = sub_8023B44();
+            gUnknown_203B2B4->species = FriendList_GetCurrId();
             gUnknown_203B2B4->pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B4->species];
             PeekPokemonItem(gUnknown_203B2B4->species, &gUnknown_203B2B4->item2);
             SetFriendListMenuState(FRIEND_LIST_MENU_STATE_SUMMARY);
             break;
         case 2:
-            sub_8023C60();
+            FriendList_Free();
             SetFriendListMenuState(FRIEND_LIST_MENU_STATE_EXIT);
             break;
     }
@@ -396,7 +396,7 @@ void sub_8025A84(void)
 {
     s32 menuAction = 0;
 
-    sub_8023A94(FALSE);
+    FriendList_HandleInput(FALSE);
     if(!sub_8012FD8(&gUnknown_203B2B4->unk78))
     {
         sub_8013114(&gUnknown_203B2B4->unk78, &menuAction);
@@ -406,7 +406,7 @@ void sub_8025A84(void)
     {
         case FRIEND_LIST_MENU_VISIT:
             gUnknown_203B2B4->unkD = GetFriendArea(gUnknown_203B2B4->pokeStruct->speciesNum);
-            sub_8023C60();
+            FriendList_Free();
             SetFriendListMenuState(FRIEND_LIST_MENU_STATE_EXIT);
             break;
         case FRIEND_LIST_MENU_GIVE:
@@ -429,7 +429,7 @@ void sub_8025A84(void)
             gUnknown_203B2B4->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
             nullsub_104();
             sub_808ED00();
-            sub_8023C60();
+            FriendList_Free();
             SetFriendListMenuState(FRIEND_LIST_MENU_STATE_STANDBY);
             break;
         case FRIEND_LIST_MENU_MOVES:

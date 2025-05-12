@@ -26,11 +26,11 @@ bool8 sub_8019E40(u32 r0)
         return FALSE;
 
     gUnknown_203B214 = MemoryAlloc(sizeof(*gUnknown_203B214), 8);
-    gUnknown_203B214->s0.unk34 = r0;
-    gUnknown_203B214->s0.unk38 = &gUnknown_203B214->s0.windows.id[gUnknown_203B214->s0.unk34];
+    gUnknown_203B214->s0.winId = r0;
+    gUnknown_203B214->s0.unk38 = &gUnknown_203B214->s0.windows.id[gUnknown_203B214->s0.winId];
     RestoreSavedWindows(&gUnknown_203B214->s0.windows);
-    gUnknown_203B214->s0.windows.id[gUnknown_203B214->s0.unk34] = sUnknown_80DB8CC;
-    gUnknown_203B214->s0.unk38->header = &gUnknown_203B214->unk9C;
+    gUnknown_203B214->s0.windows.id[gUnknown_203B214->s0.winId] = sUnknown_80DB8CC;
+    gUnknown_203B214->s0.unk38->header = &gUnknown_203B214->header;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B214->s0.windows, TRUE, TRUE);
     sub_8013818(&gUnknown_203B214->s0.input, CountKecleonShopItems(), 10, r0);
@@ -103,7 +103,7 @@ void sub_801A010(void)
 {
     if (gUnknown_203B214 != NULL) {
         gUnknown_203B218 = gUnknown_203B214->s0.input.menuIndex;
-        gUnknown_203B214->s0.windows.id[gUnknown_203B214->s0.unk34] = sUnknown_80DB8B4;
+        gUnknown_203B214->s0.windows.id[gUnknown_203B214->s0.winId] = sUnknown_80DB8B4;
         ResetUnusedInputStruct();
         ShowWindows(&gUnknown_203B214->s0.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B214);
@@ -113,10 +113,10 @@ void sub_801A010(void)
 
 static void sub_801A064(void)
 {
-    gUnknown_203B214->unk9C.count = gUnknown_203B214->s0.input.unk20;
-    gUnknown_203B214->unk9C.currId = gUnknown_203B214->s0.input.unk1E;
-    gUnknown_203B214->unk9C.width = 10;
-    gUnknown_203B214->unk9C.f3 = 0;
+    gUnknown_203B214->header.count = gUnknown_203B214->s0.input.unk20;
+    gUnknown_203B214->header.currId = gUnknown_203B214->s0.input.unk1E;
+    gUnknown_203B214->header.width = 10;
+    gUnknown_203B214->header.f3 = 0;
 
     SUB_80095E4_CALL(gUnknown_203B214->s0);
 }
@@ -134,9 +134,9 @@ void sub_801A0D8(void)
     Item item;
     u8 temp_calc;
 
-    CallPrepareTextbox_8008C54(gUnknown_203B214->s0.unk34);
-    sub_80073B8(gUnknown_203B214->s0.unk34);
-    PrintStringOnWindow((gUnknown_203B214->s0.input.unk1E * 8) + 10, 0, sGoods, gUnknown_203B214->s0.unk34, 0);
+    CallPrepareTextbox_8008C54(gUnknown_203B214->s0.winId);
+    sub_80073B8(gUnknown_203B214->s0.winId);
+    PrintStringOnWindow((gUnknown_203B214->s0.input.unk1E * 8) + 10, 0, sGoods, gUnknown_203B214->s0.winId, 0);
 
     for (index = 0; index < gUnknown_203B214->s0.input.unk1A; index++) {
         temp_calc = (gUnknown_203B214->s0.input.unk1E * gUnknown_203B214->s0.input.unk1C) + index;
@@ -153,14 +153,14 @@ void sub_801A0D8(void)
 
         if (buyPrice <= gTeamInventoryRef->teamMoney) {
             y = GetMenuEntryYCoord(&gUnknown_203B214->s0.input, index);
-            PrintStringOnWindow(8, y, auStack204, gUnknown_203B214->s0.unk34, 0);
+            PrintStringOnWindow(8, y, auStack204, gUnknown_203B214->s0.winId, 0);
         }
         else {
             sprintfStatic(auStack112, sFmtRed, auStack204);
             y = GetMenuEntryYCoord(&gUnknown_203B214->s0.input, index);
-            PrintStringOnWindow(8, y, auStack112, gUnknown_203B214->s0.unk34, 0);
+            PrintStringOnWindow(8, y, auStack112, gUnknown_203B214->s0.winId, 0);
         }
     }
 
-    sub_80073E0(gUnknown_203B214->s0.unk34);
+    sub_80073E0(gUnknown_203B214->s0.winId);
 }

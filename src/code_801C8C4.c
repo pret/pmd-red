@@ -29,14 +29,14 @@ bool8 sub_801C8C4(s32 a0, s32 a1, DungeonPos *a2, u32 a3)
 
     sUnknown_203B244->unk0 = a0;
     sub_801CF94();
-    sUnknown_203B244->unk4B4.s0.unk34 = a1;
+    sUnknown_203B244->unk4B4.s0.winId = a1;
     sUnknown_203B244->unk4B4.s0.unk38 = &sUnknown_203B244->unk4B4.s0.windows.id[a1];
     RestoreSavedWindows(&sUnknown_203B244->unk4B4.s0.windows);
-    sUnknown_203B244->unk4B4.s0.windows.id[sUnknown_203B244->unk4B4.s0.unk34] = sUnknown_80DBE54;
-    sUnknown_203B244->unk4B4.s0.unk38->header = &sUnknown_203B244->unk4B4.unk9C;
+    sUnknown_203B244->unk4B4.s0.windows.id[sUnknown_203B244->unk4B4.s0.winId] = sUnknown_80DBE54;
+    sUnknown_203B244->unk4B4.s0.unk38->header = &sUnknown_203B244->unk4B4.header;
 
     if (a2 != NULL)
-        sUnknown_203B244->unk4B4.s0.windows.id[sUnknown_203B244->unk4B4.s0.unk34].pos = *a2;
+        sUnknown_203B244->unk4B4.s0.windows.id[sUnknown_203B244->unk4B4.s0.winId].pos = *a2;
 
     sub_8012D08(sUnknown_203B244->unk4B4.s0.unk38, a3);
     ResetUnusedInputStruct();
@@ -128,7 +128,7 @@ void sub_801CBB8(void)
         sUnknown_203B248 = sUnknown_203B244->unk0;
         sUnknown_203B24C = sUnknown_203B244->unk4B4.s0.input.menuIndex;
         sUnknown_203B24E = sUnknown_203B244->unk4B4.s0.input.unk1E;
-        sUnknown_203B244->unk4B4.s0.windows.id[sUnknown_203B244->unk4B4.s0.unk34] = sUnknown_80DBE3C;
+        sUnknown_203B244->unk4B4.s0.windows.id[sUnknown_203B244->unk4B4.s0.winId] = sUnknown_80DBE3C;
         ResetUnusedInputStruct();
         ShowWindows(&sUnknown_203B244->unk4B4.s0.windows, TRUE, TRUE);
         MemoryFree(sUnknown_203B244);
@@ -138,10 +138,10 @@ void sub_801CBB8(void)
 
 static void sub_801CC38(void)
 {
-    sUnknown_203B244->unk4B4.unk9C.count = 1;
-    sUnknown_203B244->unk4B4.unk9C.currId = 0;
-    sUnknown_203B244->unk4B4.unk9C.width = 12;
-    sUnknown_203B244->unk4B4.unk9C.f3 = 0;
+    sUnknown_203B244->unk4B4.header.count = 1;
+    sUnknown_203B244->unk4B4.header.currId = 0;
+    sUnknown_203B244->unk4B4.header.width = 12;
+    sUnknown_203B244->unk4B4.header.f3 = 0;
 
     SUB_80095E4_CALL(sUnknown_203B244->unk4B4.s0);
 }
@@ -154,24 +154,24 @@ void sub_801CCD8(void)
     s32 index;
     u8 buffer[80];
 
-    CallPrepareTextbox_8008C54(sUnknown_203B244->unk4B4.s0.unk34);
-    sub_80073B8(sUnknown_203B244->unk4B4.s0.unk34);
-    PrintStringOnWindow(10, 0, sStorage, sUnknown_203B244->unk4B4.s0.unk34, 0);
-    sub_8012BC4(sUnknown_203B244->unk4B4.unk9C.width * 8 + 4, 0, sUnknown_203B244->unk4B4.s0.input.unk1E + 1, 2, 7, sUnknown_203B244->unk4B4.s0.unk34);
+    CallPrepareTextbox_8008C54(sUnknown_203B244->unk4B4.s0.winId);
+    sub_80073B8(sUnknown_203B244->unk4B4.s0.winId);
+    PrintStringOnWindow(10, 0, sStorage, sUnknown_203B244->unk4B4.s0.winId, 0);
+    sub_8012BC4(sUnknown_203B244->unk4B4.header.width * 8 + 4, 0, sUnknown_203B244->unk4B4.s0.input.unk1E + 1, 2, 7, sUnknown_203B244->unk4B4.s0.winId);
 
     for(index = 0; index < sUnknown_203B244->unk4B4.s0.input.unk1A; index++) {
         itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.unk1C) + index];
         BufferItemName(buffer, itemID, NULL);
         y = GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index);
-        PrintStringOnWindow(8, y, buffer, sUnknown_203B244->unk4B4.s0.unk34, 0);
+        PrintStringOnWindow(8, y, buffer, sUnknown_203B244->unk4B4.s0.winId, 0);
         y2 = GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index);
-        sub_8012BC4((sUnknown_203B244->unk4B4.s0.unk38->width * 8) - 2, y2, gTeamInventoryRef->teamStorage[itemID], 3, 5, sUnknown_203B244->unk4B4.s0.unk34);
+        sub_8012BC4((sUnknown_203B244->unk4B4.s0.unk38->width * 8) - 2, y2, gTeamInventoryRef->teamStorage[itemID], 3, 5, sUnknown_203B244->unk4B4.s0.winId);
 
         if (sub_801CFE0(itemID) & 1)
-            sub_8007B7C(sUnknown_203B244->unk4B4.s0.unk34, 8, GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index), (sUnknown_203B244->unk4B4.s0.unk38->width - 1) * 8, 10);
+            sub_8007B7C(sUnknown_203B244->unk4B4.s0.winId, 8, GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index), (sUnknown_203B244->unk4B4.s0.unk38->width - 1) * 8, 10);
     }
 
-    sub_80073E0(sUnknown_203B244->unk4B4.s0.unk34);
+    sub_80073E0(sUnknown_203B244->unk4B4.s0.winId);
 }
 
 static u32 sub_801CE58(void)

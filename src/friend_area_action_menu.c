@@ -4,7 +4,7 @@
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
-#include "code_8023868.h"
+#include "friend_list.h"
 #include "code_8024458.h"
 #include "code_8098BDC.h"
 #include "code_8099360.h"
@@ -175,14 +175,14 @@ void sub_8027274(void)
         case FRIEND_AREA_ACTION_MENU_EXIT:
             break;
         case FRIEND_AREA_ACTION_MENU_MAIN:
-            sub_8023868(1,0,0,7);
+            FriendList_Init(1,0,0,7);
             break;
         case FRIEND_AREA_ACTION_MENU_MAIN_2:
             sub_8023B7C(1);
             break;
         case 3:
             sub_8027D40(3, &sUnknown_203B2BC->item2);
-            sub_8023DA4();
+            FriendList_ShowWindow();
             sub_8012D60(&sUnknown_203B2BC->unk7C, sUnknown_203B2BC->menuItems, 0, sUnknown_203B2BC->unk16C, sUnknown_203B2BC->menuAction1, 2);
             break;
         case FRIEND_AREA_ACTION_MENU_SUMMARY:
@@ -383,12 +383,12 @@ void sub_80277FC(void)
 {
   PokemonStruct1 *pokeStruct;
 
-  switch(sub_8023A94(TRUE)) {
+  switch(FriendList_HandleInput(TRUE)) {
       case 0:
       case 1:
         break;
       case 3:
-        sUnknown_203B2BC->targetPoke = sub_8023B44();
+        sUnknown_203B2BC->targetPoke = FriendList_GetCurrId();
         pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
         sUnknown_203B2BC->pokeStruct = pokeStruct;
         sUnknown_203B2BC->isTeamLeader = pokeStruct->isTeamLeader;
@@ -396,7 +396,7 @@ void sub_80277FC(void)
         SetFriendAreaActionMenuState(3);
         break;
       case 4:
-        sUnknown_203B2BC->targetPoke = sub_8023B44();
+        sUnknown_203B2BC->targetPoke = FriendList_GetCurrId();
         pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
         sUnknown_203B2BC->pokeStruct = pokeStruct;
         sUnknown_203B2BC->isTeamLeader = pokeStruct->isTeamLeader;
@@ -404,7 +404,7 @@ void sub_80277FC(void)
         SetFriendAreaActionMenuState(4);
         break;
       case 2:
-        sub_8023C60();
+        FriendList_Free();
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_EXIT);
         break;
   }
@@ -417,7 +417,7 @@ void sub_80278B4(void)
   u32 menuAction;
 
   menuAction = 0;
-  sub_8023A94(FALSE);
+  FriendList_HandleInput(FALSE);
   if ((sub_8012FD8(&sUnknown_203B2BC->unk7C) == 0) && (sub_8013114(&sUnknown_203B2BC->unk7C,&menuAction), menuAction != FRIEND_AREA_ACTION_MENU_ACTION_NONE)) {
     sUnknown_203B2BC->menuAction1 = menuAction;
   }

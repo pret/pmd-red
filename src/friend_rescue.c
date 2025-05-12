@@ -7,7 +7,7 @@
 #include "code_80118A4.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
-#include "code_8023868.h"
+#include "friend_list.h"
 #include "code_8024458.h"
 #include "code_802F204.h"
 #include "code_8094F88.h"
@@ -304,7 +304,7 @@ extern u32 sub_8039068(u32, u8 *passwordBuffer, unkStruct_203B480 *r0);
 
 extern void sub_8031E10(void);
 extern u8 sub_800D588(void);
-extern u32 sub_8023CE8(void);
+extern u32 FriendList_GetPtr(void);
 extern bool8 sub_8031D70(u32 mailIndex, s32);
 
 extern u32 GetDungeonTeamRankPts(DungeonLocation *, u32);
@@ -687,7 +687,7 @@ void CleanFriendRescueMenu(void)
     gUnknown_203B33C = NULL;
     sub_803084C();
     sub_8031E10();
-    sub_8023C60();
+    FriendList_Free();
     sub_80155F0();
     sub_801CBB8();
     sub_802F2C0();
@@ -894,16 +894,16 @@ void sub_8032828(void)
             CreateDialogueBoxAndPortrait(&gUnknown_80E2C48[0], 0, 0, 0x101);
             break;
         case 0x26:
-            if (sub_8023CE8() != 0)
-                sub_8023C60();
+            if (FriendList_GetPtr() != 0)
+                FriendList_Free();
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_8023868(3, 0, 0, 9);
+            FriendList_Init(3, 0, 0, 9);
             break;
         case 0x27:
             RestoreSavedWindows(&gUnknown_203B33C->unk35C);
             SetMenuItems(gUnknown_203B33C->unk21C, &gUnknown_203B33C->unk35C, 3, &gUnknown_80E2334, gUnknown_80E234C, TRUE, 0, FALSE);
-            sub_8023DA4();
+            FriendList_ShowWindow();
             sub_8035CF4(gUnknown_203B33C->unk21C, 3, 1);
             break;
         case 0x24:
@@ -1857,16 +1857,16 @@ void sub_8034130(void)
 
 void sub_803418C(void)
 {
-    switch(sub_8023A94(TRUE))
+    switch(FriendList_HandleInput(TRUE))
     {
         case 2:
-            sub_8023C60();
+            FriendList_Free();
             SetFriendRescueMenuState(FRIEND_RESCUE_MENU_MAIN);
             sub_8035D1C();
             gUnknown_203B33C->speciesNum = -1;
             break;
         case 3:
-            gUnknown_203B33C->speciesNum = sub_8023B44();
+            gUnknown_203B33C->speciesNum = FriendList_GetCurrId();
             if(gUnknown_203B33C->unk524 == 0xE)
                 SetFriendRescueMenuState(9);
             else
@@ -1874,7 +1874,7 @@ void sub_803418C(void)
             break;
         case 4:
             gUnknown_203B33C->fallbackState = 0x26;
-            gUnknown_203B33C->speciesNum = sub_8023B44();
+            gUnknown_203B33C->speciesNum = FriendList_GetCurrId();
             RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
@@ -1889,13 +1889,13 @@ void sub_8034254(void)
     s32 menuAction;
     menuAction = -1;
 
-    sub_8023A94(FALSE);
+    FriendList_HandleInput(FALSE);
     if(!sub_8012FD8(&gUnknown_203B33C->unk21C[3]))
         sub_8013114(&gUnknown_203B33C->unk21C[3], &menuAction);
     switch(menuAction)
     {
         case 9:
-            sub_8023C60();
+            FriendList_Free();
             SetFriendRescueMenuState(0x29);
             break;
         case 10:
@@ -1909,7 +1909,7 @@ void sub_8034254(void)
         case 5:
         case 8:
             sub_8035CC0(&gUnknown_203B33C->unk35C, 3);
-            sub_8023DA4();
+            FriendList_ShowWindow();
             SetFriendRescueMenuState(0x26);
             break;
     }

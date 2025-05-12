@@ -146,6 +146,11 @@ static inline bool8 IsMonPartner(PokemonStruct1 *mon)
     return (mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
 }
 
+static inline bool8 IsMonLeader(PokemonStruct1 *mon)
+{
+    return (mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_LEADER);
+}
+
 // Needed to match a couple of functions which use species id.
 // The theory is that there was some internal species conversion which got scrapped later on.
 static inline s16 SpeciesId(s32 id)

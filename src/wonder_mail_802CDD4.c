@@ -25,11 +25,11 @@ bool8 sub_802CDD4(u32 a0)
     if (sUnknown_203B2F4 == NULL)
         sUnknown_203B2F4 = MemoryAlloc(sizeof(struct_Sub80095E4_2), 8);
 
-    sUnknown_203B2F4->s0.unk34 = a0;
-    sUnknown_203B2F4->s0.unk38 = &sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.unk34];
+    sUnknown_203B2F4->s0.winId = a0;
+    sUnknown_203B2F4->s0.unk38 = &sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.winId];
     RestoreSavedWindows(&sUnknown_203B2F4->s0.windows);
-    sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.unk34] = sUnknown_80DFDA4;
-    sUnknown_203B2F4->s0.unk38->header = &sUnknown_203B2F4->unk9C;
+    sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.winId] = sUnknown_80DFDA4;
+    sUnknown_203B2F4->s0.unk38->header = &sUnknown_203B2F4->header;
     sub_8012D34(sUnknown_203B2F4->s0.unk38, 4);
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2F4->s0.windows, TRUE, TRUE);
@@ -82,7 +82,7 @@ void sub_802CED8(bool8 cursorSprite)
 void sub_802CF14(void)
 {
     if (sUnknown_203B2F4 != NULL) {
-        sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.unk34] = sUnknown_80DFD8C;
+        sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.winId] = sUnknown_80DFD8C;
         ResetUnusedInputStruct();
         ShowWindows(&sUnknown_203B2F4->s0.windows, TRUE, TRUE);
         MemoryFree(sUnknown_203B2F4);
@@ -92,10 +92,10 @@ void sub_802CF14(void)
 
 static void sub_802CF5C(void)
 {
-    sUnknown_203B2F4->unk9C.count = sUnknown_203B2F4->s0.input.unk20;
-    sUnknown_203B2F4->unk9C.currId = sUnknown_203B2F4->s0.input.unk1E;
-    sUnknown_203B2F4->unk9C.width = 12;
-    sUnknown_203B2F4->unk9C.f3 = 0;
+    sUnknown_203B2F4->header.count = sUnknown_203B2F4->s0.input.unk20;
+    sUnknown_203B2F4->header.currId = sUnknown_203B2F4->s0.input.unk1E;
+    sUnknown_203B2F4->header.width = 12;
+    sUnknown_203B2F4->header.f3 = 0;
 
     SUB_8009614_CALL(sUnknown_203B2F4->s0);
 }
@@ -107,20 +107,20 @@ void sub_802CFD0(void)
     s32 r5;
     s32 r4;
 
-    CallPrepareTextbox_8008C54(sUnknown_203B2F4->s0.unk34);
-    sub_80073B8(sUnknown_203B2F4->s0.unk34);
+    CallPrepareTextbox_8008C54(sUnknown_203B2F4->s0.winId);
+    sub_80073B8(sUnknown_203B2F4->s0.winId);
 
     r5 = r4 = (sUnknown_203B2F4->s0.input.unk1E * 8) + 10;
-    PrintStringOnWindow(r5, 0, sRescueEvent, sUnknown_203B2F4->s0.unk34, 0);
+    PrintStringOnWindow(r5, 0, sRescueEvent, sUnknown_203B2F4->s0.winId, 0);
 
     r4 -= 6;
-    r5 = r4 + (sUnknown_203B2F4->unk9C.width * 8);
-    sub_8012BC4(r5, 0, sUnknown_203B2F4->s0.input.unk1E + 1, 2, 7, sUnknown_203B2F4->s0.unk34);
+    r5 = r4 + (sUnknown_203B2F4->header.width * 8);
+    sub_8012BC4(r5, 0, sUnknown_203B2F4->s0.input.unk1E + 1, 2, 7, sUnknown_203B2F4->s0.winId);
 
     for (r5 = 0; r5 < sUnknown_203B2F4->s0.input.unk1A; r5++) {
         iVar1 = sub_803B344((sUnknown_203B2F4->s0.input.unk1E * sUnknown_203B2F4->s0.input.unk1C) + r5);
 
-        local.unk0[0] = sUnknown_203B2F4->s0.unk34;
+        local.unk0[0] = sUnknown_203B2F4->s0.winId;
         local.y = GetMenuEntryYCoord(&sUnknown_203B2F4->s0.input, r5);
         sub_803B35C(&iVar1->mail, &local);
 
@@ -129,5 +129,5 @@ void sub_802CFD0(void)
         CreateRescueTitle(&local);
     }
 
-    sub_80073E0(sUnknown_203B2F4->s0.unk34);
+    sub_80073E0(sUnknown_203B2F4->s0.winId);
 }

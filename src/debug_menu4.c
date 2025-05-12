@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_801602C.h"
-#include "code_8023868.h"
+#include "friend_list.h"
 #include "debug_menu4.h"
 #include "input.h"
 #include "memory.h"
@@ -109,13 +109,13 @@ static void sub_803AD88(void)
 {
     switch (sUnknown_203B3F8->state) {
         case 1:
-            sub_8023868(1, 0, 0, 10);
+            FriendList_Init(1, 0, 0, 10);
             break;
         case 2:
             sub_8023B7C(1);
             break;
         case 3:
-            sub_8023DA4();
+            FriendList_ShowWindow();
             sub_8012D60(&sUnknown_203B3F8->unk10, sUnknown_203B3F8->unk90, 0, sUnknown_203B3F8->unkD0, sUnknown_203B3F8->menuAction, 2);
             break;
         case 5:
@@ -148,7 +148,7 @@ static void sub_803AE58(void)
     PrintStringOnWindow(4, 0, sNumberPrompt, sUnknown_203B3F8->unk60.unk14, 0);
     sub_8013C68(&sUnknown_203B3F8->unk60);
     sub_80073E0(sUnknown_203B3F8->unk60.unk14);
-    sub_8023DA4();
+    FriendList_ShowWindow();
     sub_8012EA4(&sUnknown_203B3F8->unk10, 0);
 }
 
@@ -181,14 +181,14 @@ static void sub_803AEB0(void)
 
 static void sub_803AF38(void)
 {
-    switch (sub_8023A94(TRUE)) {
+    switch (FriendList_HandleInput(TRUE)) {
         case 3:
-            sUnknown_203B3F8->unk4 = sub_8023B44();
+            sUnknown_203B3F8->unk4 = FriendList_GetCurrId();
             sUnknown_203B3F8->pokemon = &gRecruitedPokemonRef->pokemon[sUnknown_203B3F8->unk4];
             sub_803ACD0(3);
             break;
         case 2:
-            sub_8023C60();
+            FriendList_Free();
             sub_803ACD0(7);
             break;
         case 1:
@@ -203,7 +203,7 @@ static void sub_803AF88(void)
 
     menuAction = 0;
 
-    sub_8023A94(FALSE);
+    FriendList_HandleInput(FALSE);
 
     if (sub_8012FD8(&sUnknown_203B3F8->unk10) == 0)
         sub_8013114(&sUnknown_203B3F8->unk10, &menuAction);
@@ -225,7 +225,7 @@ static void sub_803AF88(void)
 
 static void sub_803AFE8(void)
 {
-    sub_8023A94(FALSE);
+    FriendList_HandleInput(FALSE);
     sub_8012FD8(&sUnknown_203B3F8->unk10);
 
     switch (sub_8013BBC(&sUnknown_203B3F8->unk60)) {
