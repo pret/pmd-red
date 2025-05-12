@@ -5,13 +5,15 @@ struct unkStruct_3001B60
 {
     u32 unk0;
     u32 sortMethod;
-    u32 unk8;
+    s32 unk8;
     u32 unkC;
     u32 unk10;
-    u8 fill14[0x18 - 0x14];
+    u8 unk14;
+    u8 unk15;
+    u8 unk16;
+    u8 unk17;
     s16 unk18;
-    s16 unk1A[2];
-    u8 fill1C[0x370 - 0x1E];
+    s16 unk1A[427];
     s16 unk370;
     s16 unk372;
     s16 unk374;
@@ -25,6 +27,6 @@ extern s16 sub_8023B44(void);
 extern void sub_8023B7C(u32);
 extern void sub_8023C60(void);
 extern void sub_8023DA4(void);
-extern bool8 sub_8024108(u32);
+extern bool8 sub_8024108(s32);
 
 #endif // GUARD_CODE_8023868_H

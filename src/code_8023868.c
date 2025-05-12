@@ -5,6 +5,7 @@
 #include "pokemon.h"
 #include "structs/str_text.h"
 #include "text_util.h"
+#include "event_flag.h"
 
 //static // MAKE STATIC WHEN code_8023868.s IS DONE
 IWRAM_INIT struct unkStruct_3001B60 *gUnknown_3001B60 = {NULL};
@@ -16,9 +17,88 @@ static void SortbyInternalNo(s32, s32);
 static void SortbyName(s32, s32);
 
 //static bool8 sub_8024184(PokemonStruct1 *pokemon, u8 area);
-//static void sub_80241A8(void);
+void sub_80241A8(void);
 
 // THE REMAINING CODE FROM THIS FILE IS IN code_8023868.s STARTING WITH sub_8023868
+
+s32 sub_8023F8C(void)
+{
+    s32 i;
+    PokemonStruct1 *pokeStruct;
+
+    gUnknown_3001B60->unk8 = 0;
+    if (!gUnknown_3001B60->unk15) {
+        for (i = 0; i < NUM_MONSTERS; i++) {
+            pokeStruct = &gRecruitedPokemonRef->pokemon[i];
+            if (pokeStruct->isTeamLeader && PokemonFlag1(pokeStruct)) {
+                gUnknown_3001B60->unk1A[gUnknown_3001B60->unk8++] = i;
+                break;
+            }
+        }
+    }
+
+    if (!gUnknown_3001B60->unk16) {
+        for (i = 0; i < NUM_MONSTERS; i++) {
+            pokeStruct = &gRecruitedPokemonRef->pokemon[i];
+            if (IsMonPartner(pokeStruct) && !pokeStruct->isTeamLeader && PokemonFlag2(pokeStruct) && PokemonFlag1(pokeStruct)) {
+                gUnknown_3001B60->unk1A[gUnknown_3001B60->unk8++] = i;
+                break;
+            }
+        }
+    }
+    gUnknown_3001B60->unkC = gUnknown_3001B60->unk8;
+
+    if (!gUnknown_3001B60->unk17) {
+        for (i = 0; i < NUM_MONSTERS; i++) {
+            pokeStruct = &gRecruitedPokemonRef->pokemon[i];
+            if (PokemonFlag2(pokeStruct) && PokemonFlag1(pokeStruct) && !pokeStruct->isTeamLeader && !IsMonPartner(pokeStruct)) {
+                gUnknown_3001B60->unk1A[gUnknown_3001B60->unk8++] = i;
+                if (gUnknown_3001B60->unk8 >= 4) {
+                    break;
+                }
+            }
+        }
+    }
+    gUnknown_3001B60->unk10 = gUnknown_3001B60->unk8;
+
+    if (!gUnknown_3001B60->unk14) {
+        for (i = 0; i < NUM_MONSTERS; i++) {
+            pokeStruct = &gRecruitedPokemonRef->pokemon[i];
+            if (PokemonFlag1(pokeStruct) && !PokemonFlag2(&gRecruitedPokemonRef->pokemon[i])) {
+                gUnknown_3001B60->unk1A[gUnknown_3001B60->unk8++] = i;
+            }
+        }
+    }
+
+    sub_80241A8();
+    return gUnknown_3001B60->unk8;
+}
+
+bool8 sub_8024108(s32 param_1)
+{
+    s32 i;
+
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[i];
+        if (PokemonFlag1(pokeStruct)) {
+            if (param_1 == 2) {
+                if (!PokemonFlag2(pokeStruct)) continue;
+            }
+            else if (param_1 == 3) {
+                if (PokemonFlag2(pokeStruct)) continue;
+            }
+            else if (param_1 == 4) {
+                if (pokeStruct->isTeamLeader) continue;
+                if (!sub_80023E4(9)) {
+                    if (!IsMonPartner(pokeStruct)) return FALSE;
+                    if (PokemonFlag2(pokeStruct)) continue;
+                }
+            }
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
 
 //static // MAKE STATIC WHEN code_8023868.s IS DONE
 bool8 sub_8024184(PokemonStruct1 *pokemon, u8 area)
