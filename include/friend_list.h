@@ -15,7 +15,7 @@ struct unkStruct_3001B60
     u8 unk16;
     u8 unk17;
     u8 unk18;
-    s16 unk1A[413];
+    s16 unk1A[NUM_MONSTERS];
     u8 unk354;
     struct_Sub80095E4_2 unk358;
 };
