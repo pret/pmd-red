@@ -6,25 +6,9 @@
 #include "def_filearchives.h"
 #include "file_system.h"
 #include "constants/dungeon.h"
+#include "structs/dungeon_mapparam.h"
 
 extern bool8 IsWaterDungeon(u32 r0);
-
-struct UnkDungeonFileData
-{
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6[5];
-};
-
-struct UnkDataFileStruct
-{
-    struct UnkDungeonFileData **unk0;
-    FloorProperties *unk4;
-    u16 **unk8;
-    UnkDungeonGlobal_unk1CD98 **unkC;
-    u16 **unk10;
-};
 
 extern const u8 gUnknown_8108EC0[];
 
@@ -40,7 +24,7 @@ void sub_80ADD9C(OpenedFile **a0, OpenedFile **a1, u32 *a2, u32 *a3, u16 *a4, Du
     DungeonLocation dungLoc;
     u8 dungId;
     s32 dungFloor;
-    struct UnkDungeonFileData *strPtr;
+    struct DungeonMapParam1 *strPtr;
     void *r10 = MemoryAlloc(0x930, 7);
     OpenedFile *mapParamFile = OpenFileAndGetFileDataPtr("mapparam", &gDungeonFileArchive);
 
@@ -58,8 +42,8 @@ void sub_80ADD9C(OpenedFile **a0, OpenedFile **a1, u32 *a2, u32 *a3, u16 *a4, Du
         dungFloor = GetDungeonFloorCount(dungId) - 1;
     }
 
-    strPtr = &((struct UnkDataFileStruct *)(mapParamFile->data))->unk0[dungId][dungFloor];
-    r8 = ((struct UnkDataFileStruct *)(mapParamFile->data))->unk4[strPtr->unk0].unk2;
+    strPtr = &((struct DungeonMapParam2 *)(mapParamFile->data))->unk0[dungId][dungFloor];
+    r8 = ((struct DungeonMapParam2 *)(mapParamFile->data))->unk4[strPtr->unk0].unk2;
 
     CloseFile(mapParamFile);
 

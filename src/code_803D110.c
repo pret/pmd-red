@@ -19,28 +19,12 @@
 #include "text_1.h"
 #include "text_3.h"
 #include "dungeon_config.h"
+#include "structs/dungeon_mapparam.h"
 
 // File split is correct.
 
 extern s32 sub_80902C8(u8 dungeon);
 extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
-
-struct UnkDungeonFileData
-{
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6[5];
-};
-
-struct UnkDataFileStruct
-{
-    struct UnkDungeonFileData **unk0;
-    FloorProperties *unk4;
-    u16 **unk8;
-    UnkDungeonGlobal_unk1CD98 **unkC;
-    u16 **unk10;
-};
 
 void sub_803D4AC(void)
 {
@@ -53,7 +37,7 @@ void sub_803D4D0(void)
     s16 spArray[NUM_ITEM_CATEGORIES + NUMBER_OF_ITEM_IDS];
     s32 i, j, k;
     OpenedFile *file;
-    struct UnkDungeonFileData *strPtr;
+    struct DungeonMapParam1 *strPtr;
 
     sub_80901D8(&gDungeon->unk644.dungeonLocation2, &gDungeon->unk644.dungeonLocation);
     if (gDungeon->unk1C570.id == gDungeon->unk644.dungeonLocation2.id && gDungeon->unk1C570.floor == gDungeon->unk644.dungeonLocation2.floor)
@@ -61,18 +45,18 @@ void sub_803D4D0(void)
 
     gDungeon->unk1C570 = gDungeon->unk644.dungeonLocation2;
     file = OpenFileAndGetFileDataPtr("mapparam", &gDungeonFileArchive);
-    strPtr = &((struct UnkDataFileStruct *)(file->data))->unk0[gDungeon->unk1C570.id][gDungeon->unk1C570.floor];
+    strPtr = &((struct DungeonMapParam2 *)(file->data))->unk0[gDungeon->unk1C570.id][gDungeon->unk1C570.floor];
 
     gDungeon->unk1CEC8 = GetDungeonFloorCount(gDungeon->unk644.dungeonLocation.id);
     gDungeon->unk14 = sub_80902C8(gDungeon->unk644.dungeonLocation.id);
 
-    gDungeon->floorProperties = ((struct UnkDataFileStruct *)(file->data))->unk4[strPtr->unk0];
+    gDungeon->floorProperties = ((struct DungeonMapParam2 *)(file->data))->unk4[strPtr->unk0];
 
     for (i = 0; i < 20; i++) {
-        gDungeon->unk1CD70[i] = ((struct UnkDataFileStruct *)(file->data))->unk10[strPtr->unk4][i];
+        gDungeon->unk1CD70[i] = ((struct DungeonMapParam2 *)(file->data))->unk10[strPtr->unk4][i];
     }
     for (i = 0; i < 31; i++) {
-        gDungeon->unk1CD98[i] = ((struct UnkDataFileStruct *)(file->data))->unkC[strPtr->unk2][i];
+        gDungeon->unk1CD98[i] = ((struct DungeonMapParam2 *)(file->data))->unkC[strPtr->unk2][i];
         if (ExtractSpeciesIndex(&gDungeon->unk1CD98[i]) == 0)
             break;
     }
@@ -83,7 +67,7 @@ void sub_803D4D0(void)
 
     for (i = 0; i < 4; i++)
     {
-        u16 *src = ((struct UnkDataFileStruct *)(file->data))->unk8[strPtr->unk6[i]];
+        u16 *src = ((struct DungeonMapParam2 *)(file->data))->unk8[strPtr->unk6[i]];
         s32 arrId = 0;
 
         for (j = 0; j < NUM_ITEM_CATEGORIES + NUMBER_OF_ITEM_IDS; ) {
