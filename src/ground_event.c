@@ -7,7 +7,7 @@ typedef struct GroundEvent
 {
     s16 unk0;
     s16 unk2;
-    s16 unk4; // scriptID
+    s16 unk4; // scriptID or group?
     s8 unk6; // sector
     s32 unk8;
     s32 unkC;
@@ -29,6 +29,7 @@ extern DebugLocation gUnknown_81187DC;
 extern u8 gGroundEventSelectText[];
 extern u8 gGroundEventCancelText[];
 extern u8 gGroundEventAddText[];
+extern u8 gGroundEventDeleteText[];
 
 void AllocGroundEvents(void) {
     s32 ind;
@@ -133,8 +134,8 @@ static inline void SetUnkInGroundEvent(const CompactPos *posPtr, s32 *dst)
 
 struct TestStruct
 {
-    u32 unk0;
-    u32 unk4;
+    s32 unk0;
+    s32 unk4;
 };
 
 extern struct TestStruct sUnknown; // Todo: figure out or guess what this variable could be.
@@ -204,3 +205,187 @@ s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, s32 sec
     return scriptID_s32;
 }
 
+void GroundEvent_Delete(s32 id)
+{
+    s32 scriptID_s32 = (s16) id;
+    GroundEvent *ptr = &gGroundEvents[scriptID_s32];
+    Log(0, gGroundEventDeleteText, scriptID_s32);
+    ptr->unk2 = -1;
+}
+
+bool8 sub_80ADC64(s32 id, ScriptInfoSmall *dst)
+{
+    s32 scriptID_s32 = (s16) id;
+    GroundEvent *ptr = &gGroundEvents[scriptID_s32];
+
+    if (ptr->unk2 != -1) {
+        dst->ptr = ptr->unk1C;
+        dst->state = 2;
+        dst->group = ptr->unk4;
+        dst->sector = ptr->unk6;
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
+}
+
+s16 FindGroundEvent(u32 flags, s32 *arg1, s32 *arg2)
+{
+    s32 i;
+    GroundEvent *ptr = &gGroundEvents[0];
+    for (i = 0; i < 0x20; i = (s16)(i + 1), ptr++) {
+        if (ptr->unk2 != -1
+            && (ptr->unk8 & flags)
+            && ptr->unkC < arg2[0]
+            && ptr->unk14 > arg1[0]
+            && ptr->unk10 < arg2[1]
+            && ptr->unk18 > arg1[1])
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+UNUSED static s16 UnusedFindGroundEvent(u32 flags, s32 *arg1, s32 *arg2)
+{
+    s32 i;
+    GroundEvent *ptr = &gGroundEvents[0];
+    for (i = 0; i < 0x20; i = (s16)(i + 1), ptr++) {
+        if (ptr->unk2 != -1 && (ptr->unk8 & flags)) {
+            struct TestStruct r = {0};
+            r.unk0 = (ptr->unkC + ptr->unk14) / 2;
+            r.unk4 = (ptr->unk10 + ptr->unk18) / 2;
+            if (r.unk0 < arg2[0]
+                && r.unk0 > arg1[0]
+                && r.unk4 < arg2[1]
+                && r.unk4 > arg1[1])
+            {
+                return i;
+            }
+        }
+    }
+
+    return -1;
+}
+
+void nullsub_124(void) {}
+
+// TODO: Check if file split here
+
+#include "dungeon.h"
+#include "decompress_at.h"
+#include "def_filearchives.h"
+#include "file_system.h"
+#include "constants/dungeon.h"
+
+extern bool8 IsWaterDungeon(u32 r0);
+
+struct UnkDungeonFileData
+{
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6[5];
+};
+
+struct UnkDataFileStruct
+{
+    struct UnkDungeonFileData **unk0;
+    FloorProperties *unk4;
+    u16 **unk8;
+    UnkDungeonGlobal_unk1CD98 **unkC;
+    u16 **unk10;
+};
+
+s32 sub_80ADFB8(s32 a0, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5, void *a6, s32 a7);
+
+extern const u8 gUnknown_8108EC0[];
+extern const u8 gMapparamText[];
+extern const u8 gUnknown_811889C[];
+extern const u8 gUnknown_81188B4[];
+extern const u8 gUnknown_81188A8[];
+extern const u8 gUnknown_81188C0[];
+extern const u8 gUnknown_81188CC[];
+extern const u8 gUnknown_81188DC[];
+
+void sub_80ADD9C(OpenedFile **a0, OpenedFile **a1, u32 *a2, u32 *a3, u16 *a4, DungeonLocation *a5, s32 a6, s32 a7, s32 a8, s32 a9)
+{
+    OpenedFile *file;
+    s32 r8;
+    s32 i, j;
+    u8 name[12];
+    DungeonLocation dungLoc;
+    u8 dungId;
+    s32 dungFloor;
+    struct UnkDungeonFileData *strPtr;
+    void *r10 = MemoryAlloc(0x930, 7);
+    OpenedFile *mapParamFile = OpenFileAndGetFileDataPtr(gMapparamText, &gDungeonFileArchive);
+
+    sub_80901D8(&dungLoc, a5);
+    dungId = dungLoc.id;
+    dungFloor = dungLoc.floor;
+    if (dungId > 62) {
+        dungId = 62;
+    }
+
+    if (dungFloor <= 0) {
+        dungFloor = 1;
+    }
+    if (dungFloor >= GetDungeonFloorCount(dungId)) {
+        dungFloor = GetDungeonFloorCount(dungId) - 1;
+    }
+
+    strPtr = &((struct UnkDataFileStruct *)(mapParamFile->data))->unk0[dungId][dungFloor];
+    r8 = ((struct UnkDataFileStruct *)(mapParamFile->data))->unk4[strPtr->unk0].unk2;
+
+    CloseFile(mapParamFile);
+
+    sprintf(name, gUnknown_811889C, gUnknown_8108EC0[r8]);
+    file = OpenFileAndGetFileDataPtr(name, &gDungeonFileArchive);
+    DecompressATGlobalFile(a2, 0, file);
+    CloseFile(file);
+
+    sprintf(name, gUnknown_81188A8, r8);
+    *a0 = OpenFile(name, &gDungeonFileArchive);
+
+    sprintf(name, gUnknown_81188B4, gUnknown_8108EC0[r8]);
+    file = OpenFileAndGetFileDataPtr(name, &gDungeonFileArchive);
+    DecompressATFile(a3, 0x1194, file);
+    CloseFile(file);
+
+    if (r8 < 64) {
+        sprintf(name, gUnknown_81188C0, gUnknown_8108EC0[r8]);
+        file = OpenFileAndGetFileDataPtr(name, &gDungeonFileArchive);
+        DecompressATFile(r10, 0x930, file);
+        CloseFile(file);
+    }
+    else {
+        sprintf(name, gUnknown_81188CC, r8, a6);
+        file = OpenFileAndGetFileDataPtr(name, &gDungeonFileArchive);
+        DecompressATFile(r10, 0x240, file);
+        CloseFile(file);
+    }
+
+    for (i = 0; i < a8; i++) {
+        s32 r7 = !IsWaterDungeon(r8) ? 0 : 3;
+        for (j = 0; j < a7; j++) {
+            a4[(i * a7) + j] = sub_80ADFB8(j, i, a7, a8, a9, r7, r10, r8);
+        }
+    }
+
+    sprintf(name, gUnknown_81188DC, r8);
+    *a1 = OpenFile(name, &gDungeonFileArchive);
+    MemoryFree(r10);
+}
+
+s32 sub_80ADF8C(s32 a0, s32 a1, s32 a2, s32 a3, u16 *a4, s32 a5)
+{
+    s32 ret = a5;
+    if (a0 >= 0 && a1 >= 0 && a0 < a2 && a1 < a3) {
+        ret = a4[a0 + (a1 * a2)];
+    }
+    return ret;
+}
