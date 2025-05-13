@@ -356,7 +356,6 @@ SECTIONS {
         asm/ground_effect.o(.text);
         src/ground_link.o(.text);
         src/ground_event.o(.text);
-        asm/ground_event.o(.text);
         src/m4a_1.o(.text);
         src/m4a.o(.text);
         *libagbsyscall.a:CpuSet.o(.text);
