@@ -131,7 +131,7 @@ typedef struct GroundMapAction
 
 typedef struct ScriptRef
 {
-    u16 id;
+    s16 id;
     s16 type;
     u8 *name;
     const ScriptCommand *script;
