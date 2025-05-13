@@ -356,6 +356,7 @@ SECTIONS {
         asm/ground_effect.o(.text);
         src/ground_link.o(.text);
         src/ground_event.o(.text);
+        src/unk_dungeon_load_maybe.o(.text);
         src/m4a_1.o(.text);
         src/m4a.o(.text);
         *libagbsyscall.a:CpuSet.o(.text);
@@ -695,6 +696,9 @@ SECTIONS {
         data/data_8115F5C.o(.rodata);
         src/code_809A560.o(.rodata);
         data/data_8115F5C_2.o(.rodata);
+        src/ground_event.o(.rodata);
+        src/unk_dungeon_load_maybe.o(.rodata);
+        data/data_8115F5C_3.o(.rodata);
         src/ground_event_data.o(.rodata);
         data/friend_area_dialogue.o(.rodata);
         src/ground_data_t00p01_station.o(.rodata);
