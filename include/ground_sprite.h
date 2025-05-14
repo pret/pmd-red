@@ -1,12 +1,48 @@
 #ifndef GUARD_GROUND_SPRITE_H
 #define GUARD_GROUND_SPRITE_H
 
+#include "structs/sprite_oam.h"
+
+// TODO: Clean up these structs
+
+struct UnkGroundSpriteSubStructx48
+{
+    s16 unk0;
+    u16 unk2;
+    s32 unk4;
+};
+
+struct UnkGroundSpriteStruct
+{
+    u16 unk0;
+    u8 fill2[0x3a];
+    unkStruct_2039DB0 unk3C;
+    struct UnkGroundSpriteSubStructx48 unk48;
+    u16 unk50;
+    s16 unk52;
+    OpenedFile *unk54;
+    s16 unk58;
+    u8 unk5A;
+    s32 unk5C;
+    s32 unk60;
+    u16 unk64;
+    s16 unk66;
+    u16 unk68;
+    u16 unk6A;
+    u16 unk6C;
+    u16 unk6E;
+    u8 unk70;
+    s32 unk74;
+    s32 unk78;
+    s32 unk7C;
+};
+
 // size: 0xC
 typedef struct unkStruct_3001B7C_sub0
 {
     u32 unk0;
     s32 unk4;
-    u32 unk8;
+    struct UnkGroundSpriteStruct *unk8;
 } unkStruct_3001B7C_sub0;
 
 // size: 0x4
@@ -16,10 +52,12 @@ typedef struct unkStruct_3001B7C_sub108
     s16 unk2;
 } unkStruct_3001B7C_sub108;
 
+#define UNK_3001B7C_SUB0_COUNT 22
+
 // size: 0x110
 typedef struct unkStruct_3001B7C
 {
-    unkStruct_3001B7C_sub0 unk0[22];
+    unkStruct_3001B7C_sub0 unk0[UNK_3001B7C_SUB0_COUNT];
     unkStruct_3001B7C_sub108 unk108[2];
 } unkStruct_3001B7C;
 

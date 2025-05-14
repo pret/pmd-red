@@ -206,23 +206,6 @@ u16 sub_80A65E0(u32 a0)
     return (a0 >> 16) & 0x337F;
 }
 
-// TODO: This struct should probable be merged with an already existing one? Or
-struct UnkGroundSpriteStruct
-{
-    u16 unk0;
-    u8 fill2[0x3a];
-    unkStruct_2039DB0 unk3C;
-    s16 unk48;
-    u8 fill4A[6];
-    u16 unk50;
-    s16 unk52;
-    u8 fill54[4];
-    s16 unk58;
-    u32 unk5C;
-    u8 fill60[0x6a-0x60];
-    u16 unk6A;
-};
-
 void sub_80A65F0(struct UnkGroundSpriteStruct *ptr, u16 a1)
 {
     ptr->unk50 = a1;
@@ -249,7 +232,7 @@ void sub_80A6688(struct UnkGroundSpriteStruct *ptr, s32 a0)
 
 bool8 SpriteHasPokemonSize_80A66A4(struct UnkGroundSpriteStruct *ptr)
 {
-    return (ptr->unk48 > 0);
+    return (ptr->unk48.unk0 > 0);
 }
 
 UNUSED static bool8 sub_80A66BC(struct UnkGroundSpriteStruct *ptr)
@@ -262,7 +245,7 @@ UNUSED static bool8 sub_80A66BC(struct UnkGroundSpriteStruct *ptr)
 
 bool8 sub_80A66D4(struct UnkGroundSpriteStruct *ptr)
 {
-    if (ptr->unk52 < 0 && ptr->unk48 > 0)
+    if (ptr->unk52 < 0 && ptr->unk48.unk0 > 0)
         return TRUE;
     else
         return FALSE;
@@ -289,4 +272,182 @@ bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr)
         ptr->unk58 = 0;
     }
     return FALSE;
+}
+
+extern u8 sub_809D248(PixelPos *r0);
+
+bool8 IsOnscreen_80A675C(struct UnkGroundSpriteStruct *ptr, PixelPos *pixPosArg)
+{
+    PixelPos result;
+    PixelPos pixelPos;
+
+    if (sub_809D248(&pixelPos)) {
+        result.x = (pixPosArg->x / 256) - pixelPos.x;
+        result.y = (pixPosArg->y / 256) - pixelPos.y;
+    }
+    else {
+        result.x = (pixPosArg->x / 256);
+        result.y = (pixPosArg->y / 256);
+    }
+
+    if (result.x >= -64 && result.x <= 303 && result.y >= -16 && result.y <= 207) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2);
+bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0);
+void sub_80A69FC(struct UnkGroundSpriteStruct *ptr);
+
+void sub_80A67CC(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2)
+{
+    bool8 r7;
+
+    if (a1 != NULL && a1->unk0 > 0) {
+        r7 = TRUE;
+    }
+    else {
+        r7 = FALSE;
+    }
+
+    sub_80A65F0(ptr, sub_80A65E0(a2));
+    ptr->unk74 = 0;
+    ptr->unk78 = 0;
+    ptr->unk7C = -1;
+    ptr->unk70 = 0;
+    ptr->unk6C = 0;
+    ptr->unk6E = 0;
+    ptr->unk52 = -1;
+    ptr->unk54 = NULL;
+    ptr->unk64 = 0;
+    ptr->unk66 = -1;
+    ptr->unk68 = 0;
+    ptr->unk58 = 0;
+    ptr->unk5A = 0xFF;
+    ptr->unk5C = -1;
+    ptr->unk60 = -1;
+    if (r7) {
+        ptr->unk48 = *a1;
+        if (!sub_80A68F8(ptr, &ptr->unk48, -1) && !(ptr->unk50 & 0x1000) && sub_80A6CF4(&ptr->unk48)) {
+            sub_80A68F8(ptr, &ptr->unk48, -1);
+        }
+    }
+    else {
+        ptr->unk48.unk0 = -1;
+        ptr->unk48.unk2 = 0;
+        ptr->unk48.unk4 = 0;
+    }
+}
+
+void sub_80A68A0(struct UnkGroundSpriteStruct *ptr)
+{
+    if ((ptr->unk50 & 0x200) && ptr->unk58 != 0 && ptr->unk5C != -1) {
+        sub_800DC14(ptr->unk5C);
+    }
+    if (ptr->unk54 != NULL) {
+        CloseFile(ptr->unk54);
+        ptr->unk54 = NULL;
+    }
+    sub_80A69FC(ptr);
+}
+
+// I guess the code inside the loop was commented out or under an ifdef.
+UNUSED static void sub_80A68E8(void)
+{
+    s32 i;
+    for (i = 0; i < UNK_3001B7C_SUB0_COUNT; i++) {
+        ;
+    }
+}
+
+void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16);
+void GroundSprite_ExtendPaletteDelete(struct UnkGroundSpriteStruct *ptr);
+
+bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2)
+{
+    s32 id, count;
+    unkStruct_3001B7C_sub0 *unkPtr = &gUnknown_3001B7C->unk0[0];
+
+    if (a1->unk0 >= a2) {
+        a2 = a1->unk0;
+        count = 0;
+        for (id = 0; id < UNK_3001B7C_SUB0_COUNT; id = (s16)(id + 1), unkPtr++) {
+            if (unkPtr->unk0 == 0) {
+                if (++count >= a2) {
+                    unkPtr -= count - 1;
+                    id = (s16) (id - (count - 1));
+                    break;
+                }
+            }
+            else {
+                count = 0;
+            }
+        }
+    }
+    else {
+        count = 0;
+        id = UNK_3001B7C_SUB0_COUNT - 1;
+        unkPtr = &gUnknown_3001B7C->unk0[UNK_3001B7C_SUB0_COUNT - 1];
+        for (; id >= 0; id = (s16)(id - 1), unkPtr--) {
+            if (unkPtr->unk0 == 0) {
+                if (++count >= a2) {
+                    break;
+                }
+            }
+            else {
+                count = 0;
+            }
+        }
+    }
+
+    if (count >= a2) {
+        s32 i;
+        ptr->unk52 = id;
+        ptr->unk64 = a2;
+        unkPtr->unk0 = 1;
+        unkPtr->unk8 = ptr;
+        GroundSprite_ExtendPaletteAdd(ptr, a1->unk2);
+        for (i = 1; i < a2; i++) {
+            unkPtr[i].unk0 = 2;
+        }
+
+        gUnknown_2039DD4 -= a2;
+        return TRUE;
+    }
+    else {
+        gUnknown_2039DD0 = 0;
+        ptr->unk7C = -1;
+        ptr->unk70 = 0;
+        ptr->unk52 = -1;
+        ptr->unk64 = 0;
+        ptr->unk6C = 0;
+        ptr->unk6E = 0;
+        return FALSE;
+    }
+}
+
+void sub_80A69FC(struct UnkGroundSpriteStruct *ptr)
+{
+    s32 id = ptr->unk52;
+    unkStruct_3001B7C_sub0 *unkPtr = &gUnknown_3001B7C->unk0[id];
+
+    if (id >= 0) {
+        GroundSprite_ExtendPaletteDelete(ptr);
+        unkPtr->unk8 = NULL;
+        unkPtr->unk0 = 0;
+        unkPtr++;
+        gUnknown_2039DD4++;
+        id = (s16)(id + 1);
+        for (; id < UNK_3001B7C_SUB0_COUNT && unkPtr->unk0 == 2; id = (s16)(id + 1)) {
+            unkPtr->unk0 = 0;
+            unkPtr++;
+            gUnknown_2039DD4++;
+        }
+
+        ptr->unk52 = -1;
+        ptr->unk64 = 0;
+        gUnknown_2039DD0 = 1;
+    }
 }
