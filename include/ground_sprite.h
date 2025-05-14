@@ -53,12 +53,13 @@ typedef struct unkStruct_3001B7C_sub108
 } unkStruct_3001B7C_sub108;
 
 #define UNK_3001B7C_SUB0_COUNT 22
+#define UNK_3001B7C_SUB108_COUNT 2
 
 // size: 0x110
 typedef struct unkStruct_3001B7C
 {
     unkStruct_3001B7C_sub0 unk0[UNK_3001B7C_SUB0_COUNT];
-    unkStruct_3001B7C_sub108 unk108[2];
+    unkStruct_3001B7C_sub108 unk108[UNK_3001B7C_SUB108_COUNT];
 } unkStruct_3001B7C;
 
 void GroundSprite_Reset(s16);
