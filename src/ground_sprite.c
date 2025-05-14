@@ -205,3 +205,88 @@ u16 sub_80A65E0(u32 a0)
 {
     return (a0 >> 16) & 0x337F;
 }
+
+// TODO: This struct should probable be merged with an already existing one? Or
+struct UnkGroundSpriteStruct
+{
+    u16 unk0;
+    u8 fill2[0x3a];
+    unkStruct_2039DB0 unk3C;
+    s16 unk48;
+    u8 fill4A[6];
+    u16 unk50;
+    s16 unk52;
+    u8 fill54[4];
+    s16 unk58;
+    u32 unk5C;
+    u8 fill60[0x6a-0x60];
+    u16 unk6A;
+};
+
+void sub_80A65F0(struct UnkGroundSpriteStruct *ptr, u16 a1)
+{
+    ptr->unk50 = a1;
+    ptr->unk6A = ((a1 & 4) ? 0x40 : 0) - ((a1 & 2) ? 0x40 : 0) + ((a1 & 1) ? 0x8 : 0) + 0x40;
+
+    if (ptr->unk50 & 0x8) {
+        ptr->unk3C = gUnknown_2039DC0;
+    }
+    else {
+        ptr->unk3C = gUnknown_2039DB0;
+    }
+
+    if (ptr->unk50 & 0x20) {
+        ptr->unk3C.unk0 &= 0xF3FF;
+        ptr->unk3C.unk6 &= 0xF3FF;
+        ptr->unk3C.unk6 |= 0x400;
+    }
+}
+
+void sub_80A6688(struct UnkGroundSpriteStruct *ptr, s32 a0)
+{
+    sub_80A65F0(ptr, sub_80A65E0(a0));
+}
+
+bool8 SpriteHasPokemonSize_80A66A4(struct UnkGroundSpriteStruct *ptr)
+{
+    return (ptr->unk48 > 0);
+}
+
+UNUSED static bool8 sub_80A66BC(struct UnkGroundSpriteStruct *ptr)
+{
+    if (ptr->unk52 >= 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 sub_80A66D4(struct UnkGroundSpriteStruct *ptr)
+{
+    if (ptr->unk52 < 0 && ptr->unk48 > 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr)
+{
+    if (ptr->unk52 >= 0 && !(ptr->unk0 & 0x2000)) {
+        return (ptr->unk0 & 0x8000) != 0;
+    }
+    return FALSE;
+}
+
+bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr)
+{
+    if (ptr->unk58 != 0) {
+        if (ptr->unk58 == 0x1C0)
+            return TRUE;
+        if (ptr->unk5C == -1)
+            return TRUE;
+        if (sub_800E9E4(ptr->unk5C))
+            return TRUE;
+        ptr->unk5C = -1;
+        ptr->unk58 = 0;
+    }
+    return FALSE;
+}
