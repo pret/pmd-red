@@ -9,6 +9,7 @@
 #include "ground_sprite.h"
 #include "memory.h"
 #include "sprite.h"
+#include "code_800ED38.h"
 
 IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
 
@@ -215,17 +216,17 @@ u16 sub_80A65E0(u32 a0)
 
 void sub_80A65F0(struct UnkGroundSpriteStruct *ptr, u16 a1)
 {
-    ptr->unk50 = a1;
+    ptr->flags_0x50 = a1;
     ptr->unk6A = ((a1 & 4) ? 0x40 : 0) - ((a1 & 2) ? 0x40 : 0) + ((a1 & 1) ? 0x8 : 0) + 0x40;
 
-    if (ptr->unk50 & 0x8) {
+    if (ptr->flags_0x50 & 0x8) {
         ptr->unk3C = gUnknown_2039DC0;
     }
     else {
         ptr->unk3C = gUnknown_2039DB0;
     }
 
-    if (ptr->unk50 & 0x20) {
+    if (ptr->flags_0x50 & 0x20) {
         ptr->unk3C.unk0 &= 0xF3FF;
         ptr->unk3C.unk6 &= 0xF3FF;
         ptr->unk3C.unk6 |= 0x400;
@@ -260,8 +261,8 @@ bool8 sub_80A66D4(struct UnkGroundSpriteStruct *ptr)
 
 bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr)
 {
-    if (ptr->unk52 >= 0 && !(ptr->unk0 & 0x2000)) {
-        return (ptr->unk0 & 0x8000) != 0;
+    if (ptr->unk52 >= 0 && !(ptr->axdata.flags & 0x2000)) {
+        return (ptr->axdata.flags & 0x8000) != 0;
     }
     return FALSE;
 }
@@ -320,8 +321,8 @@ void sub_80A67CC(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStr
     }
 
     sub_80A65F0(ptr, sub_80A65E0(a2));
-    ptr->unk74 = 0;
-    ptr->unk78 = 0;
+    ptr->unk74.x = 0;
+    ptr->unk74.y = 0;
     ptr->unk7C = -1;
     ptr->unk70 = 0;
     ptr->unk6C = 0;
@@ -337,20 +338,20 @@ void sub_80A67CC(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStr
     ptr->unk60 = -1;
     if (r7) {
         ptr->unk48 = *a1;
-        if (!sub_80A68F8(ptr, &ptr->unk48, -1) && !(ptr->unk50 & 0x1000) && sub_80A6CF4(&ptr->unk48)) {
+        if (!sub_80A68F8(ptr, &ptr->unk48, -1) && !(ptr->flags_0x50 & 0x1000) && sub_80A6CF4(&ptr->unk48)) {
             sub_80A68F8(ptr, &ptr->unk48, -1);
         }
     }
     else {
         ptr->unk48.unk0 = -1;
         ptr->unk48.unk2 = 0;
-        ptr->unk48.unk4 = 0;
+        ptr->unk48.axmain = NULL;
     }
 }
 
 void sub_80A68A0(struct UnkGroundSpriteStruct *ptr)
 {
-    if ((ptr->unk50 & 0x200) && ptr->unk58 != 0 && ptr->unk5C != -1) {
+    if ((ptr->flags_0x50 & 0x200) && ptr->unk58 != 0 && ptr->unk5C != -1) {
         sub_800DC14(ptr->unk5C);
     }
     if (ptr->unk54 != NULL) {
@@ -603,10 +604,10 @@ bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0)
         if (sub0Ptr->unk0 == 1) {
             struct UnkGroundSpriteStruct *ptr = sub0Ptr->unk8;
 
-            if (!(ptr->unk50 & 0x2000) && ptr->unk7C >= 0) {
+            if (!(ptr->flags_0x50 & 0x2000) && ptr->unk7C >= 0) {
                 PixelPos resultPos;
-                resultPos.x = (sub0Ptr->unk8->unk74 / 256) - pixelPos.x;
-                resultPos.y = (sub0Ptr->unk8->unk78 / 256) - pixelPos.y;
+                resultPos.x = (ptr->unk74.x / 256) - pixelPos.x;
+                resultPos.y = (ptr->unk74.y / 256) - pixelPos.y;
 
                 if (resultPos.y > 0) {
                     ptr->unk7C = 0x28 + resultPos.y;
@@ -740,7 +741,6 @@ void sub_80A6EFC(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_)
                 return;
             if (!sub_80A68F8(ptr, &ptr->unk48, -1))
                 return;
-
         }
     }
     else {
@@ -755,7 +755,7 @@ void sub_80A6EFC(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_)
     // s16 memes...
     flagResult = a1 & 0x400;
     if ((s16)flagResult) {
-        ptr->unk0 &= ~(0x1000);
+        ptr->axdata.flags &= ~(0x1000);
         return;
     }
 
@@ -779,5 +779,142 @@ void sub_80A6EFC(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_)
     }
 
     ptr->unk6E = 0;
-    AxResInit((void *)ptr, (void *) ptr->unk48.unk4, (a1 & 0xFF) + a2 / 8, a2 & 7, sub0Ptr->unk4, 0, ((u16)a1 & 0x800) != 0); // TODO: fix...
+    AxResInit(&ptr->axdata, ptr->unk48.axmain, (a1 & 0xFF) + a2 / 8, a2 & 7, sub0Ptr->unk4, 0, ((u16)a1 & 0x800) != 0);
+}
+
+void sub_80A7040(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_, s32 a3)
+{
+    s32 a1 = (s16) a1_;
+    s32 a2 = (s8) a2_;
+
+    if (!(ptr->flags_0x50 & 0x200))
+        return;
+
+    if (a1 == 0 || a1 == 0x1C0) {
+        if (sub_80A671C(ptr)) {
+            ptr->unk58 = 0x1C0;
+        }
+    }
+    else {
+        ptr->unk58 = a1;
+        ptr->unk5A = a2;
+        ptr->unk60 = a3;
+    }
+}
+
+extern const unkStruct_2039DB0 gUnknown_81178E0;
+void sub_80A72B8(struct UnkGroundSpriteStruct *ptr, bool8 a1);
+
+bool8 sub_80A7094(struct UnkGroundSpriteStruct *ptr, PixelPos *r10, PixelPos *posArg, s32 a3)
+{
+    PixelPos resultPos;
+    s32 unkY;
+
+    ptr->unk74 = *posArg;
+    ptr->unk7C = 0;
+    if (ptr->flags_0x50 & 0x200 && ptr->unk58 != 0) {
+        if (ptr->unk58 == 0x1C0) {
+            if (ptr->unk5C != -1) {
+                sub_800DC14(ptr->unk5C);
+                ptr->unk5C = -1;
+            }
+            ptr->unk58 = 0;
+        }
+        else if (ptr->unk5C == -1) {
+            unkStruct_2039DB0 unkSubStruct = gUnknown_81178E0;
+            unkStruct_80416E0 unkStruct;
+
+            sub_800EE5C(ptr->unk58);
+            sub_800EF64();
+            unkStruct.unk0 = ptr->unk58;
+            unkStruct.unk4 = 0;
+            unkStruct.dir = (s8) ptr->unk5A;
+            unkStruct.x = posArg->x / 256;
+            unkStruct.y = posArg->y / 256;
+            unkStruct.unk10 = 0;
+            unkStruct.unk12 = 0;
+            unkStruct.unk14 = -1;
+            unkStruct.unk18 = 0;
+            unkStruct.unk1C = unkSubStruct;
+            ptr->unk5C = sub_800E890(&unkStruct);
+        }
+        else if (!sub_800E9E4(ptr->unk5C)) {
+            ptr->unk5C = -1;
+            ptr->unk58 = 0;
+        }
+    }
+
+    if (ptr->unk52 < 0)
+        return FALSE;
+    if (ptr->flags_0x50 & 0x40)
+        return FALSE;
+
+    resultPos = (PixelPos) {-1, -1};
+    resultPos.x = (posArg->x / 256) - gUnknown_2039DD8.x;
+    resultPos.y = (posArg->y / 256) - gUnknown_2039DD8.y;
+    unkY = resultPos.y - (a3 / 256);
+    if (resultPos.x >= -64 && resultPos.x <= 303 && resultPos.y >= -16 && resultPos.y <= 207 && unkY >= -16 && unkY <= 207) {
+        if ((ptr->flags_0x50 & 0x10) && (gUnknown_2039DCC & 1)) {
+            sub_80A72B8(ptr, FALSE);
+            DoAxFrame_800558C(&ptr->axdata, 304, 208, 0, ptr->unk68, &ptr->unk3C);
+            ptr->unk70 = 0;
+            return FALSE;
+        }
+        else {
+            sub_80A72B8(ptr, ptr->unk70);
+            DoAxFrame_800558C(&ptr->axdata, resultPos.x, unkY, resultPos.y + ptr->unk6A, ptr->unk68, &ptr->unk3C);
+            ptr->unk70 = 0;
+            if (r10 != NULL) {
+                *r10 = resultPos;
+            }
+            return TRUE;
+        }
+    }
+    else if (ptr->unk70 != 0) {
+        sub_80A72B8(ptr, TRUE);
+        DoAxFrame_800558C(&ptr->axdata, 304, 208, 0, ptr->unk68, &ptr->unk3C);
+        ptr->unk70 = 0;
+        return FALSE;
+    }
+    else {
+        return FALSE;
+    }
+}
+
+void sub_80A72B8(struct UnkGroundSpriteStruct *ptr, bool8 a1)
+{
+    if (a1) {
+        ptr->unk6E = 0;
+        RunAxAnimationFrame(&ptr->axdata);
+    }
+    else {
+        ptr->unk6E += ptr->unk6C;
+        while (ptr->unk6E >= 0x100) {
+            ptr->unk6E -= 0x100;
+            RunAxAnimationFrame(&ptr->axdata);
+        }
+    }
+}
+
+bool8 sub_80A7310(struct UnkGroundSpriteStruct *ptr, PixelPos *posArg1, PixelPos *posArg2, s32 a3)
+{
+    if (ptr->flags_0x50 & 0x200 && ptr->unk5C != -1) {
+        DungeonPos pos;
+        s32 r7;
+
+        pos.x = posArg1->x / 256;
+        pos.y = posArg1->y / 256;
+        r7 = (pos.y - gUnknown_2039DD8.y) + ptr->unk6A + 2;
+        pos.y -= a3 / 256;
+        if (posArg2 != NULL) {
+            pos.x += posArg2->x;
+            pos.y += posArg2->y;
+        }
+
+        sub_800E8AC(ptr->unk5C, &pos, NULL, r7, &ptr->unk3C);
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
 }

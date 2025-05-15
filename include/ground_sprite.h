@@ -1,7 +1,9 @@
 #ifndef GUARD_GROUND_SPRITE_H
 #define GUARD_GROUND_SPRITE_H
 
+#include "structs/axdata.h"
 #include "structs/sprite_oam.h"
+#include "structs/str_position.h"
 
 // TODO: Clean up these structs
 
@@ -9,16 +11,15 @@ struct UnkGroundSpriteSubStructx48
 {
     s16 unk0;
     u16 unk2;
-    s32 unk4;
+    axmain *axmain;
 };
 
 struct UnkGroundSpriteStruct
 {
-    u16 unk0;
-    u8 fill2[0x3a];
+    axdata axdata;
     unkStruct_2039DB0 unk3C;
     struct UnkGroundSpriteSubStructx48 unk48;
-    u16 unk50;
+    u16 flags_0x50;
     s16 unk52;
     OpenedFile *unk54;
     s16 unk58;
@@ -28,12 +29,11 @@ struct UnkGroundSpriteStruct
     s16 unk64;
     s16 unk66;
     u16 unk68;
-    u16 unk6A;
+    s16 unk6A;
     u16 unk6C;
-    u16 unk6E;
+    s16 unk6E;
     u8 unk70;
-    s32 unk74;
-    s32 unk78;
+    PixelPos unk74;
     s32 unk7C;
 };
 
