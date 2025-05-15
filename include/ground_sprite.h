@@ -62,6 +62,6 @@ typedef struct unkStruct_3001B7C
     unkStruct_3001B7C_sub108 unk108[UNK_3001B7C_SUB108_COUNT];
 } unkStruct_3001B7C;
 
-void GroundSprite_Reset(s16);
+void GroundSprite_Reset(s32);
 
 #endif // GUARD_GROUND_SPRITE_H

@@ -1,5 +1,5 @@
-#include "gba/defines.h"
 #include "global.h"
+#include "globaldata.h"
 #include "structs/axdata.h"
 #include "code_800DAC0.h"
 #include "debug.h"
@@ -19,13 +19,10 @@ EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DC0 = {0};
 EWRAM_DATA u16 gUnknown_2039DCC = {0};
 EWRAM_DATA u16 gUnknown_2039DCE = {0};
 EWRAM_DATA u8 gUnknown_2039DD0 = {0};
-EWRAM_DATA u8 gUnknown_2039DD1[3] = {0, 0, 0}; // Unused, for alignment
 EWRAM_DATA u32 gUnknown_2039DD4 = {0};
 
 EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 
-// data_8115F5C.s
-extern const char gUnknown_81177CC[];
 extern const char gUnknown_81177D8[];
 extern const char gUnknown_81177F4[];
 extern const char gUnknown_8117864[];
@@ -33,8 +30,6 @@ extern const char gUnknown_81177EC[];
 extern const char gUnknown_8117894[];
 extern const char gUnknown_81178C0[];
 extern const char *gUnknown_81178F4[];
-extern const DebugLocation gUnknown_8117858;
-extern const DebugLocation gUnknown_8117888;
 
 // code_8098BDC.s
 extern void sub_809971C(u16, const u8 *, s16);
@@ -45,6 +40,23 @@ extern void InitShadowSprites(u32, u32);
 // ground_sprite.s
 extern void sub_80A6460(void);
 
+extern void sub_800E970(void);
+extern u8 sub_809D248(PixelPos *r0);
+
+extern PixelPos gUnknown_2039DD8;
+
+bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2);
+bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0);
+void sub_80A69FC(struct UnkGroundSpriteStruct *ptr);
+void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16);
+void GroundSprite_ExtendPaletteDelete(struct UnkGroundSpriteStruct *ptr);
+void sub_80ABA7C(void);
+void sub_80ACAD4(void);
+void sub_80AD7AC(void);
+void sub_80A72B8(struct UnkGroundSpriteStruct *ptr, bool8 a1);
+
+extern const unkStruct_2039DB0 gUnknown_81178E0;
+
 void sub_80A62F0(void)
 {
     s32 r0;
@@ -53,7 +65,7 @@ void sub_80A62F0(void)
     s32 r6;
 
     gUnknown_3001B7C = MemoryAlloc(sizeof(unkStruct_3001B7C), 6);
-    gUnknown_203B4B4 = OpenFileAndGetFileDataPtr(gUnknown_81177CC, &gDungeonFileArchive);
+    gUnknown_203B4B4 = OpenFileAndGetFileDataPtr("etcfonta", &gDungeonFileArchive);
 
     sub_800DAC0(1);
 
@@ -78,39 +90,31 @@ void sub_80A62F0(void)
     GroundSprite_Reset(-1);
 }
 
-void GroundSprite_Reset(s16 a0)
+void GroundSprite_Reset(s32 a0)
 {
-    s32 uVar2;
-    unkStruct_2039DB0 *bee;
-    unkStruct_2039DB0 *see;
+    s32 uVar2 = (s16) a0;
 
-    uVar2 = a0;
-
-    Log(0, gUnknown_81177D8);
+    Log(0, "GroundSprite Reset");
     gUnknown_2039DCC = 0;
     gUnknown_2039DCE = 0;
     sub_80A6460();
-
     InitShadowSprites(496, sub_80A4D48(uVar2) ? 3 : 2);
+    sub_8004E8C(&gUnknown_2039DB0);
+    sub_8004E8C(&gUnknown_2039DC0);
 
-    bee = &gUnknown_2039DB0;
-    sub_8004E8C(bee);
-    see = &gUnknown_2039DC0;
-    sub_8004E8C(see);
-
-    see->unk4 &= ~(0x400 | 0x800);
-    see->unkA &= ~(0x400 | 0x800);
-    see->unkA |= 0x800;
+    gUnknown_2039DC0.unk4 &= ~(0x400 | 0x800);
+    gUnknown_2039DC0.unkA &= ~(0x400 | 0x800);
+    gUnknown_2039DC0.unkA |= 0x800;
 
     if (sub_80A4D48(a0)) {
-        bee->unk4 &= ~(0x400 | 0x800);
-        bee->unkA &= ~(0x400 | 0x800);
-        bee->unkA |= (0x400 | 0x800);
+        gUnknown_2039DB0.unk4 &= ~(0x400 | 0x800);
+        gUnknown_2039DB0.unkA &= ~(0x400 | 0x800);
+        gUnknown_2039DB0.unkA |= (0x400 | 0x800);
     }
     else {
-        bee->unk4 &= ~(0x400 | 0x800);
-        bee->unkA &= ~(0x400 | 0x800);
-        bee->unkA |= 0x800;
+        gUnknown_2039DB0.unk4 &= ~(0x400 | 0x800);
+        gUnknown_2039DB0.unkA &= ~(0x400 | 0x800);
+        gUnknown_2039DB0.unkA |= 0x800;
     }
 
     ResetSprites(TRUE);
@@ -124,7 +128,7 @@ void sub_80A6460(void)
     const u8 *data;
     u16 something;
 
-    file = OpenFileAndGetFileDataPtr(gUnknown_81177EC, &gMonsterFileArchive);
+    file = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
 
     something = 0x100;
     data = file->data;
@@ -138,7 +142,7 @@ void sub_80A6460(void)
     CloseFile(file);
 }
 
-void sub_80A64A4(void)
+UNUSED static void sub_80A64A4(void)
 {
     const u8 *r2;
     u16 r4;
@@ -154,7 +158,7 @@ void sub_80A64A4(void)
     r7 = gUnknown_3001B7C->unk108;
     sub_80A6460();
 
-    for (i = 0; i < 2; i++, r7++)
+    for (i = 0; i < UNK_3001B7C_SUB108_COUNT; i++, r7++)
     {
         if (r7->unk2 > 0) {
             r5 = r7->unk0;
@@ -163,7 +167,7 @@ void sub_80A64A4(void)
 
             flag = r5 & 0x200;
             if (flag) {
-                file = OpenFileAndGetFileDataPtr(gUnknown_81177EC, &gMonsterFileArchive);
+                file = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
                 r2 = file->data + (r5 & 0xFF) * 0x40;
             }
             else {
@@ -282,8 +286,6 @@ bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr)
     return FALSE;
 }
 
-extern u8 sub_809D248(PixelPos *r0);
-
 bool8 IsOnscreen_80A675C(struct UnkGroundSpriteStruct *ptr, PixelPos *pixPosArg)
 {
     PixelPos result;
@@ -304,10 +306,6 @@ bool8 IsOnscreen_80A675C(struct UnkGroundSpriteStruct *ptr, PixelPos *pixPosArg)
 
     return FALSE;
 }
-
-bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2);
-bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0);
-void sub_80A69FC(struct UnkGroundSpriteStruct *ptr);
 
 void sub_80A67CC(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2)
 {
@@ -369,9 +367,6 @@ UNUSED static void sub_80A68E8(void)
         ;
     }
 }
-
-void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16);
-void GroundSprite_ExtendPaletteDelete(struct UnkGroundSpriteStruct *ptr);
 
 bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2)
 {
@@ -460,6 +455,9 @@ void sub_80A69FC(struct UnkGroundSpriteStruct *ptr)
     }
 }
 
+extern const DebugLocation gUnknown_8117858;
+extern const DebugLocation gUnknown_8117888;
+
 void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
 {
     OpenedFile *file;
@@ -489,7 +487,7 @@ void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
                     if (ptr != NULL) {
                         ptr->unk68 = r1 - 16;
                     }
-                    Log(0, gUnknown_81177F4, r8, r1, r1 - 16, a1);
+                    Log(0, "extend palette %3d[%3d] %04x up %04x", r8, r1, r1 - 16, a1);
                     return;
                 }
             }
@@ -519,7 +517,7 @@ void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
         var_28 = r8 + 29;
         var_24 = (r8 * 16) + 464;
         if (a1 & 0x200) {
-            file = OpenFileAndGetFileDataPtr(gUnknown_81177EC, &gMonsterFileArchive);
+            file = OpenFileAndGetFileDataPtr("palet", &gMonsterFileArchive);
             r7 = file->data;
             r7 += (a1 & 0xFF) * 64;
         }
@@ -678,20 +676,12 @@ bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0)
     return FALSE;
 }
 
-extern void sub_800E970(void);
-
-extern PixelPos gUnknown_2039DD8;
-
 void sub_80A6E68(void)
 {
     ResetSprites(FALSE);
     nullsub_10(FALSE);
     sub_800E970();
 }
-
-void sub_80ABA7C(void);
-void sub_80ACAD4(void);
-void sub_80AD7AC(void);
 
 void sub_80A6E80(void)
 {
@@ -802,9 +792,6 @@ void sub_80A7040(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_, s32 a3)
     }
 }
 
-extern const unkStruct_2039DB0 gUnknown_81178E0;
-void sub_80A72B8(struct UnkGroundSpriteStruct *ptr, bool8 a1);
-
 bool8 sub_80A7094(struct UnkGroundSpriteStruct *ptr, PixelPos *r10, PixelPos *posArg, s32 a3)
 {
     PixelPos resultPos;
@@ -849,7 +836,8 @@ bool8 sub_80A7094(struct UnkGroundSpriteStruct *ptr, PixelPos *r10, PixelPos *po
     if (ptr->flags_0x50 & 0x40)
         return FALSE;
 
-    resultPos = (PixelPos) {-1, -1};
+    // TODO: fix?
+    resultPos = (PixelPos) {gUnknown_81178E0.unk0, gUnknown_81178E0.unk0};
     resultPos.x = (posArg->x / 256) - gUnknown_2039DD8.x;
     resultPos.y = (posArg->y / 256) - gUnknown_2039DD8.y;
     unkY = resultPos.y - (a3 / 256);
@@ -930,6 +918,8 @@ void sub_80A73EC(void)
         gUnknown_2039DCE = 0;
     }
 }
+
+// File split
 
 #include "pokemon.h"
 
@@ -1022,6 +1012,8 @@ void sub_80A7524(struct UnkGroundSpriteStruct *ptr, s32 monsterId_, PixelPos *pi
     }
 }
 
+// File split
+
 struct GroundObjectKind
 {
     s8 unk0;
@@ -1061,10 +1053,10 @@ void sub_80A7658(struct UnkGroundSpriteStruct *ptr)
     sub_80A68A0(ptr);
 }
 
-void sub_80A7664(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a3)
+void sub_80A7664(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2)
 {
-    sub_80A7094(ptr, NULL, pixelPos, a3);
-    sub_80A7310(ptr, pixelPos, NULL, a3);
+    sub_80A7094(ptr, NULL, pixelPos, a2);
+    sub_80A7310(ptr, pixelPos, NULL, a2);
 }
 
 // Identical to sub_80A75CC, except uses a different table.
@@ -1090,4 +1082,15 @@ void sub_80A7688(struct UnkGroundSpriteStruct *ptr, s32 unused, s32 a2_, s32 a3)
     if (ptr->unk52 >= 0) {
         sub_80A6EFC(ptr, 0x800, 0);
     }
+}
+
+void sub_80A7714(struct UnkGroundSpriteStruct *ptr)
+{
+    sub_80A68A0(ptr);
+}
+
+void sub_80A7720(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2)
+{
+    sub_80A7094(ptr, NULL, pixelPos, a2);
+    sub_80A7310(ptr, pixelPos, NULL, a2);
 }
