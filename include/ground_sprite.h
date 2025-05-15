@@ -25,7 +25,7 @@ struct UnkGroundSpriteStruct
     u8 unk5A;
     s32 unk5C;
     s32 unk60;
-    u16 unk64;
+    s16 unk64;
     s16 unk66;
     u16 unk68;
     u16 unk6A;

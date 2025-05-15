@@ -24,10 +24,16 @@ EWRAM_DATA u32 gUnknown_2039DD4 = {0};
 EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 
 // data_8115F5C.s
-extern const u8 gUnknown_81177CC[];
-extern const u8 gUnknown_81177D8[];
-extern const u8 gUnknown_81177EC[];
-extern const u8 *gUnknown_81178F4[];
+extern const char gUnknown_81177CC[];
+extern const char gUnknown_81177D8[];
+extern const char gUnknown_81177F4[];
+extern const char gUnknown_8117864[];
+extern const char gUnknown_81177EC[];
+extern const char gUnknown_8117894[];
+extern const char gUnknown_81178C0[];
+extern const char *gUnknown_81178F4[];
+extern const DebugLocation gUnknown_8117858;
+extern const DebugLocation gUnknown_8117888;
 
 // code_8098BDC.s
 extern void sub_809971C(u16, const u8 *, s16);
@@ -160,7 +166,8 @@ void sub_80A64A4(void)
                 r2 = file->data + (r5 & 0xFF) * 0x40;
             }
             else {
-                file = OpenFileAndGetFileDataPtr((r5 & 0xFF)[gUnknown_81178F4], &gOrnamentFileArchive);
+                u32 id = r5 & 0xFF;
+                file = OpenFileAndGetFileDataPtr(id[gUnknown_81178F4], &gOrnamentFileArchive);
                 r2 = file->data;
             }
 
@@ -452,28 +459,21 @@ void sub_80A69FC(struct UnkGroundSpriteStruct *ptr)
     }
 }
 
-extern const char gUnknown_81177F4[];
-extern const char gUnknown_8117864[];
-extern const char gUnknown_81177EC[];
-extern const char *gUnknown_81178F4[];
-extern const DebugLocation gUnknown_8117858;
-extern const DebugLocation gUnknown_8117888;
-
 void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
 {
     OpenedFile *file;
-    s32 r1, r8;
+    s32 r8;
     unkStruct_3001B7C_sub108 *sub108Ptr;
-    s32 var_24;
-    s32 var_28;
-    s32 r6;
+    u16 var_28;
+    u16 var_24;
+    u16 r6;
     const void *r7;
     s32 r2;
 
     if (a1 & (0x100 | 0x200)) {
         if (a1 & 0x400) {
-            sub108Ptr = &gUnknown_3001B7C->unk108[0];
-            if (sub108Ptr->unk0 != a1) {
+            sub108Ptr = &gUnknown_3001B7C->unk108[1];
+            if (sub108Ptr->unk0 == a1) {
                 sub108Ptr->unk2++;
                 return;
             }
@@ -481,14 +481,14 @@ void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
         else {
             r8 = 0;
             sub108Ptr = &gUnknown_3001B7C->unk108[0];
-            r1 = 29;
-            for (; r8 < UNK_3001B7C_SUB108_COUNT; r1 = (s16)(r1 + 1), r8++, sub108Ptr++) {
+            for (; r8 < UNK_3001B7C_SUB108_COUNT; r8++, sub108Ptr++) {
                 if (sub108Ptr->unk0 == a1) {
+                    u16 r1 = r8 + 29;
                     sub108Ptr->unk2++;
                     if (ptr != NULL) {
-                        ptr->unk68 = id - 16;
+                        ptr->unk68 = r1 - 16;
                     }
-                    Log(0, gUnknown_81177F4, r8, r1 - 16, a1);
+                    Log(0, gUnknown_81177F4, r8, r1, r1 - 16, a1);
                     return;
                 }
             }
@@ -496,8 +496,8 @@ void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
 
         if (a1 & 0x400) {
             r8 = 1;
-            sub108Ptr = &gUnknown_3001B7C->unk108[0];
-            if (sub108Ptr.unk2 < 0) {
+            sub108Ptr = &gUnknown_3001B7C->unk108[1];
+            if (sub108Ptr->unk2 > 0) {
                 FatalError(&gUnknown_8117858, gUnknown_8117864, a1);
             }
         }
@@ -505,25 +505,26 @@ void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
             r8 = 0;
             sub108Ptr = &gUnknown_3001B7C->unk108[0];
             for (; r8 < UNK_3001B7C_SUB108_COUNT; r8++, sub108Ptr++) {
-                if (sub108Ptr.unk2 < 0) {
+                if (sub108Ptr->unk2 <= 0) {
                     break;
                 }
             }
 
-            if (r8 >= UNK_3001B7C_SUB0_COUNT) {
+            if (r8 >= UNK_3001B7C_SUB108_COUNT) {
                 FatalError(&gUnknown_8117888, gUnknown_8117864, a1);
             }
         }
 
-        var_28 = (u16)(r8 + 29);
-        var_24 = (u16)((r8 * 16) + 29);
+        var_28 = r8 + 29;
+        var_24 = (r8 * 16) + 464;
         if (a1 & 0x200) {
             file = OpenFileAndGetFileDataPtr(gUnknown_81177EC, &gMonsterFileArchive);
             r7 = file->data;
-            r7 += (a1 & 0xFF) * 32;
+            r7 += (a1 & 0xFF) * 64;
         }
         else {
-            file = OpenFileAndGetFileDataPtr(gUnknown_81178F4[a1 & 0xFF], &gMonsterFileArchive);
+            u32 id = a1 & 0xff;
+            file = OpenFileAndGetFileDataPtr(id[gUnknown_81178F4], &gOrnamentFileArchive);
             r7 = file->data;
         }
 
@@ -556,4 +557,227 @@ void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
             ptr->unk68 = a1;
         }
     }
+}
+
+void GroundSprite_ExtendPaletteDelete(struct UnkGroundSpriteStruct *ptr)
+{
+    s32 r5;
+    unkStruct_3001B7C_sub108 *sub108Ptr;
+
+    if (ptr != NULL) {
+        r5 = ptr->unk68 - 13;
+        if (r5 < 0)
+            return;
+    }
+    else {
+        r5 = 1;
+    }
+
+    sub108Ptr = &gUnknown_3001B7C->unk108[r5];
+    if (ptr != NULL) {
+        ptr->unk68 = 0;
+    }
+
+    if (--sub108Ptr->unk2 <= 0) {
+        Log(0, gUnknown_81178C0, r5, sub108Ptr->unk0);
+        sub108Ptr->unk0 = 0;
+        sub108Ptr->unk2 = 0;
+        sub_80997F4(r5 + 29, 0);
+    }
+}
+
+bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0)
+{
+    struct UnkGroundSpriteStruct *spArray[UNK_3001B7C_SUB0_COUNT];
+    s32 i;
+    unkStruct_3001B7C_sub0 *sub0Ptr;
+    PixelPos pixelPos;
+    s32 count = 0;
+    s32 r9 = a0->unk0;
+    s32 r10 = 0;
+    s32 var_28 = -1;
+    s32 var_24 = -1;
+
+    sub_809D248(&pixelPos);
+    for (i = 0, sub0Ptr = &gUnknown_3001B7C->unk0[0]; i < UNK_3001B7C_SUB0_COUNT; i = (s16)(i+1), sub0Ptr++) {
+        if (sub0Ptr->unk0 == 1) {
+            struct UnkGroundSpriteStruct *ptr = sub0Ptr->unk8;
+
+            if (!(ptr->unk50 & 0x2000) && ptr->unk7C >= 0) {
+                PixelPos resultPos;
+                resultPos.x = (sub0Ptr->unk8->unk74 / 256) - pixelPos.x;
+                resultPos.y = (sub0Ptr->unk8->unk78 / 256) - pixelPos.y;
+
+                if (resultPos.y > 0) {
+                    ptr->unk7C = 0x28 + resultPos.y;
+                }
+                else {
+                    ptr->unk7C = 0x28 - resultPos.y;
+                }
+
+                if (resultPos.x > 0) {
+                    if (resultPos.x > ptr->unk7C) {
+                        ptr->unk7C = resultPos.x;
+                    }
+                }
+                else {
+                    if (-resultPos.x > ptr->unk7C) {
+                        ptr->unk7C = -resultPos.x;
+                    }
+                }
+
+                r10 += ptr->unk48.unk0;
+                if (ptr->unk48.unk0 >= r9 && var_24 < ptr->unk7C) {
+                    var_28 = count;
+                    var_24 = ptr->unk7C;
+                }
+                spArray[count++] = ptr;
+            }
+        }
+    }
+
+    if (r10 < r9)
+        return FALSE;
+    if (var_28 >= 0) {
+        sub_80A69FC(spArray[var_28]);
+        return TRUE;
+    }
+
+    while (count > 0) {
+        s32 i;
+        s32 r5 = -1;
+        s32 r3 = -1;
+        s32 r6 = 0;
+
+        for (i = 0; i < count; i++) {
+            if (r3 < spArray[i]->unk7C) {
+                r5 = count; // This looks like a mistake to me? I believe it should be r5 = i instead, however I cannot verify the behavior in-game as I can't find where, if anywhere, this function runs.
+                r3 = spArray[i]->unk7C;
+            }
+        }
+        sub_80A69FC(spArray[r5]);
+
+        count--;
+        for (i = r5; i < count; i++) {
+            spArray[i] = spArray[i + 1];
+        }
+
+        for (i = 0, sub0Ptr = &gUnknown_3001B7C->unk0[0]; i < UNK_3001B7C_SUB0_COUNT; i++, sub0Ptr++) {
+            if (sub0Ptr->unk0 == 0) {
+                if (++r6 >= r9) {
+                    return TRUE;
+                }
+            }
+            else {
+                r6 = 0;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+extern void sub_800E970(void);
+
+extern PixelPos gUnknown_2039DD8;
+
+void sub_80A6E68(void)
+{
+    ResetSprites(FALSE);
+    nullsub_10(FALSE);
+    sub_800E970();
+}
+
+void sub_80ABA7C(void);
+void sub_80ACAD4(void);
+void sub_80AD7AC(void);
+
+void sub_80A6E80(void)
+{
+    DungeonPos pos;
+
+    if (!sub_809D248(&gUnknown_2039DD8)) {
+        gUnknown_2039DD8.x = 0;
+        gUnknown_2039DD8.y = 0;
+    }
+    sub_80ABA7C();
+    sub_80ACAD4();
+    sub_80AD7AC();
+    pos.x = gUnknown_2039DD8.x;
+    pos.y = gUnknown_2039DD8.y;
+    sub_800E90C(&pos);
+    sub_8005180();
+    nullsub_12();
+}
+
+void sub_80A6EC8(struct UnkGroundSpriteStruct *ptr, s32 a1)
+{
+    if (ptr->unk52 > 0) {
+        if (a1 <= ptr->unk48.unk0) {
+            a1 = ptr->unk48.unk0;
+        }
+        if (ptr->unk64 != a1) {
+            ptr->unk66 = a1;
+        }
+    }
+}
+
+void sub_80A6EFC(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_)
+{
+    s32 flagResult;
+    unkStruct_3001B7C_sub0 *sub0Ptr;
+    s32 a1 = (s16) a1_;
+    s32 a2 = (s8) a2_;
+
+    if (ptr->unk52 < 0) {
+        if (ptr->unk66 >= 0) {
+            if (!sub_80A68F8(ptr, &ptr->unk48, ptr->unk66))
+                return;
+            ptr->unk66 = -1;
+        }
+        else {
+            if (ptr->unk48.unk0 <= 0)
+                return;
+            if (!sub_80A68F8(ptr, &ptr->unk48, -1))
+                return;
+
+        }
+    }
+    else {
+        if (ptr->unk66 >= 0) {
+            sub_80A69FC(ptr);
+            if (!sub_80A68F8(ptr, &ptr->unk48, ptr->unk66))
+                return;
+            ptr->unk66 = -1;
+        }
+    }
+
+    // s16 memes...
+    flagResult = a1 & 0x400;
+    if ((s16)flagResult) {
+        ptr->unk0 &= ~(0x1000);
+        return;
+    }
+
+    sub0Ptr = &gUnknown_3001B7C->unk0[ptr->unk52];
+    ptr->unk70 = 1;
+    ptr->unk7C = -1;
+    switch ((a1 & 0x700)) {
+        case 0x300:
+            ptr->unk6C = 0;
+            break;
+        case 0x100:
+            ptr->unk6C = 0x80;
+            break;
+        case 0:
+        default:
+            ptr->unk6C = 0x100;
+            break;
+        case 0x200:
+            ptr->unk6C = 0x200;
+            break;
+    }
+
+    ptr->unk6E = 0;
+    AxResInit((void *)ptr, (void *) ptr->unk48.unk4, (a1 & 0xFF) + a2 / 8, a2 & 7, sub0Ptr->unk4, 0, ((u16)a1 & 0x800) != 0); // TODO: fix...
 }
