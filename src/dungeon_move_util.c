@@ -567,7 +567,7 @@ s32 sub_8056564(Entity *entity, DungeonPos *pos, Move *move, s32 r4)
             DungeonRunFrameActions(0x5E);
             someRetVal = sub_800E710(entInfo->apparentID, sub_80412E0(move->id, GetApparentWeather(entity), 1));
             if (someRetVal != -1) {
-                sub_800569C(&unkSp1.unk8, &entity->axObj, someRetVal);
+                sub_800569C(&unkSp1.unk8, &entity->axObj.axdata, someRetVal);
             }
             else {
                 unkSp1.unk8 = (DungeonPos) {0};

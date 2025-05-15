@@ -647,7 +647,7 @@ const RGB *sub_8005674(const EfoFileData *a0, s32 vramIdx)
 }
 
 // arm9.bin::02001894
-void sub_800569C(DungeonPos *a0, axObject *a1, u8 a2)
+void sub_800569C(DungeonPos *a0, axdata *a1, u8 a2)
 {
     DungeonPos *ptr;
     DungeonPos *ptr2;
@@ -656,11 +656,11 @@ void sub_800569C(DungeonPos *a0, axObject *a1, u8 a2)
     a0->x = 0;
     a0->y = 0;
 
-    if (!(a1->axdata.flags >> 15) || a2 >= 4)
+    if (!(a1->flags >> 15) || a2 >= 4)
         return;
 
-    if (a1->axdata.positions != NULL) {
-        ptr = &((DungeonPos*)a1->axdata.positions)[a1->axdata.sub1.poseId * 4];
+    if (a1->positions != NULL) {
+        ptr = &((DungeonPos*)a1->positions)[a1->sub1.poseId * 4];
         ptr2 = &ptr[a2];
         if (*&ptr2->x == 99 && *&ptr2->y == 99) {
             a0->x = 99;
@@ -668,8 +668,8 @@ void sub_800569C(DungeonPos *a0, axObject *a1, u8 a2)
         }
         else {
             ptr3 = &ptr[a2];
-            a0->x = a1->axdata.sub1.offset.x + ptr3->x;
-            a0->y = a1->axdata.sub1.offset.y + ptr3->y;
+            a0->x = a1->sub1.offset.x + ptr3->x;
+            a0->y = a1->sub1.offset.y + ptr3->y;
         }
     }
     else {
