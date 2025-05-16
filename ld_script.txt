@@ -349,7 +349,7 @@ SECTIONS {
         src/ground_sprite_data.o(.text);
         src/ground_sprite_monster.o(.text);
         src/ground_sprite_util.o(.text);
-        src/code_80A7714.o(.text);
+        src/ground_script_file.o(.text);
         src/ground_lives.o(.text);
         asm/ground_lives.o(.text);
         src/ground_object.o(.text);
@@ -702,6 +702,8 @@ SECTIONS {
         src/ground_sprite_data.o(.rodata);
         src/ground_sprite_monster.o(.rodata);
         src/ground_sprite_util.o(.rodata);
+        data/pksdir_6.o(.rodata);
+        src/ground_script_file.o(.rodata);
         data/data_8115F5C_1.o(.rodata);
         src/ground_event.o(.rodata);
         src/unk_dungeon_load_maybe.o(.rodata);

@@ -2,16 +2,6 @@
 
 .align 2
 
-
-.align 2,0
-.string "pksdir0\0"
-.align 2,0
-.string "pksdir0\0"
-.align 2,0
-
-.global gNullGroundScript
-gNullGroundScript: @ 8117EFC
-.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 .string "pksdir0\0"
 .align 2,0
 
