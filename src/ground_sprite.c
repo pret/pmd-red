@@ -12,24 +12,18 @@
 #include "sprite.h"
 #include "code_800ED38.h"
 
-IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
+static IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
 
-EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DB0 = {0};
-EWRAM_DATA u32 sUnknown_2039DBC = {0}; // Unused, for alignment
-EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DC0 = {0};
-EWRAM_DATA u16 gUnknown_2039DCC = {0};
-EWRAM_DATA u16 gUnknown_2039DCE = {0};
-EWRAM_DATA u8 gUnknown_2039DD0 = {0};
-EWRAM_DATA u32 gUnknown_2039DD4 = {0};
+static EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DB0 = {0};
+UNUSED static EWRAM_DATA u32 sUnknown_2039DBC = {0}; // Unused, for alignment
+static EWRAM_DATA unkStruct_2039DB0 gUnknown_2039DC0 = {0};
+static EWRAM_DATA u16 gUnknown_2039DCC = {0};
+static EWRAM_DATA u16 gUnknown_2039DCE = {0};
+static EWRAM_DATA u8 gUnknown_2039DD0 = {0};
+static EWRAM_DATA u32 gUnknown_2039DD4 = {0};
 static EWRAM_DATA PixelPos gUnknown_2039DD8 = {0};
 
-EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
-
-extern const char gUnknown_81177D8[];
-extern const char gUnknown_81177F4[];
-extern const char gUnknown_8117864[];
-extern const char gUnknown_81177EC[];
-extern const char gUnknown_81178C0[];
+static EWRAM_INIT OpenedFile *gUnknown_203B4B4 = {NULL};
 
 // code_8098BDC.s
 extern void sub_809971C(u16, const u8 *, s16);
@@ -37,23 +31,17 @@ extern void sub_80997F4(u16, u16);
 // pokemon_2.s
 extern void InitShadowSprites(u32, u32);
 
-// ground_sprite.s
-extern void sub_80A6460(void);
-
+extern void sub_80ABA7C(void);
+extern void sub_80ACAD4(void);
+extern void sub_80AD7AC(void);
 extern void sub_800E970(void);
 extern u8 sub_809D248(PixelPos *r0);
 
-bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2);
-bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0);
-void sub_80A69FC(struct UnkGroundSpriteStruct *ptr);
-void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16);
-void GroundSprite_ExtendPaletteDelete(struct UnkGroundSpriteStruct *ptr);
-void sub_80ABA7C(void);
-void sub_80ACAD4(void);
-void sub_80AD7AC(void);
-void sub_80A72B8(struct UnkGroundSpriteStruct *ptr, bool8 a1);
-
-extern const unkStruct_2039DB0 gUnknown_81178E0;
+static bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2);
+static bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0);
+static void sub_80A69FC(struct UnkGroundSpriteStruct *ptr);
+static void sub_80A6460(void);
+static void sub_80A72B8(struct UnkGroundSpriteStruct *ptr, bool8 a1);
 
 void sub_80A62F0(void)
 {
@@ -119,7 +107,7 @@ void GroundSprite_Reset(s32 a0)
     nullsub_10(TRUE);
 }
 
-void sub_80A6460(void)
+static void sub_80A6460(void)
 {
     OpenedFile *file;
     s32 i;
@@ -211,12 +199,12 @@ UNUSED static u16 sub_80A65D8(u16 *a0)
     return a0[40];
 }
 
-u16 sub_80A65E0(u32 a0)
+static u16 sub_80A65E0(u32 a0)
 {
     return (a0 >> 16) & 0x337F;
 }
 
-void sub_80A65F0(struct UnkGroundSpriteStruct *ptr, u16 a1)
+static void sub_80A65F0(struct UnkGroundSpriteStruct *ptr, u16 a1)
 {
     ptr->flags_0x50 = a1;
     ptr->unk6A = ((a1 & 4) ? 0x40 : 0) - ((a1 & 2) ? 0x40 : 0) + ((a1 & 1) ? 0x8 : 0) + 0x40;
@@ -366,7 +354,7 @@ UNUSED static void sub_80A68E8(void)
     }
 }
 
-bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2)
+static bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2)
 {
     s32 id, count;
     unkStruct_3001B7C_sub0 *unkPtr = &gUnknown_3001B7C->unk0[0];
@@ -429,7 +417,7 @@ bool8 sub_80A68F8(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubSt
     }
 }
 
-void sub_80A69FC(struct UnkGroundSpriteStruct *ptr)
+static void sub_80A69FC(struct UnkGroundSpriteStruct *ptr)
 {
     s32 id = ptr->unk52;
     unkStruct_3001B7C_sub0 *unkPtr = &gUnknown_3001B7C->unk0[id];
@@ -580,7 +568,7 @@ void GroundSprite_ExtendPaletteDelete(struct UnkGroundSpriteStruct *ptr)
     }
 }
 
-bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0)
+static bool8 sub_80A6CF4(struct UnkGroundSpriteSubStructx48 *a0)
 {
     struct UnkGroundSpriteStruct *spArray[UNK_3001B7C_SUB0_COUNT];
     s32 i;
@@ -831,10 +819,7 @@ bool8 sub_80A7094(struct UnkGroundSpriteStruct *ptr, PixelPos *r10, PixelPos *po
     if (ptr->flags_0x50 & 0x40)
         return FALSE;
 
-    // Dummy line needed to match.
-    resultPos = (PixelPos) {gUnknown_81178E0.unk0, gUnknown_81178E0.unk0};
-    resultPos.x = (posArg->x / 256) - gUnknown_2039DD8.x;
-    resultPos.y = (posArg->y / 256) - gUnknown_2039DD8.y;
+    resultPos = (PixelPos) {(posArg->x / 256) - gUnknown_2039DD8.x, (posArg->y / 256) - gUnknown_2039DD8.y};
     unkY = resultPos.y - (a3 / 256);
     if (resultPos.x >= -64 && resultPos.x <= 303 && resultPos.y >= -16 && resultPos.y <= 207 && unkY >= -16 && unkY <= 207) {
         if ((ptr->flags_0x50 & 0x10) && (gUnknown_2039DCC & 1)) {
@@ -864,7 +849,7 @@ bool8 sub_80A7094(struct UnkGroundSpriteStruct *ptr, PixelPos *r10, PixelPos *po
     }
 }
 
-void sub_80A72B8(struct UnkGroundSpriteStruct *ptr, bool8 a1)
+static void sub_80A72B8(struct UnkGroundSpriteStruct *ptr, bool8 a1)
 {
     if (a1) {
         ptr->unk6E = 0;
