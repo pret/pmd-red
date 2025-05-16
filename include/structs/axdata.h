@@ -100,32 +100,6 @@ typedef struct axObject
     } info;
 } axObject;
 
-// size: 0x80? (assuming it's the last sub-struct of GroundLives)
-typedef struct axPokemon
-{
-    axObject obj;
-    /* 0x4C */ axmain *axmain;
-    u16 flags_0x50;
-    s16 unk52;
-    u8 fill54[0x58 - 0x54];
-    u16 unk58;
-    u8 unk5A;
-    // 1b padding
-    s32 unk5C;
-    s32 unk60;
-    u8 fill64[0x66 - 0x64];
-    s16 unk66;
-    s16 unk68;
-    s16 unk6A;
-    u16 unk6C;
-    u16 unk6E;
-    u8 unk70;
-    u8 fill71[0x74 - 0x71];
-    s32 unk74;
-    s32 unk78;
-    s32 unk7C;
-} axPokemon;
-
 typedef struct Palette256
 {
     RGB pal[256];

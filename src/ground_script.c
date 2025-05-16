@@ -245,8 +245,6 @@ void sub_80AC1B0(s16, s32);
 void sub_80AD0C8(s16, s32);
 s32 sub_80A5984();
 void sub_80A59A0(s32, s32 *, u16);
-void GroundSprite_ExtendPaletteAdd(u32, u16);
-void GroundSprite_ExtendPaletteDelete(u32);
 extern void sub_80997F4(u16, u16);
 s32 sub_809CFE8(u16 param_1);
 extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
@@ -3157,7 +3155,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                         if (dungLocation.id == DUNGEON_HOWLING_FOREST_2 && ret == 0x104) {
                             return 2;
                         }
-                        
+
                         ret2 = sub_80A90C8((action->unkC).arr[1]);
                         InlineStrcpy(text, gFriendAreaDialogue[ret2]);
                         if (ScriptPrintText(0, 1, text) != 0)
@@ -3184,7 +3182,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return sub_8097640() ? 1 : 0;
             break;
         case 0xE:
-            { 
+            {
                 s32 index;
                 for(index = 0x11; index < NUM_DUNGEON_MAZE; index++)
                 {
@@ -3218,11 +3216,11 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 else
                     return 0;
             }
-            
+
         case 0x13:
             {
                 PokemonStruct1 *ptr;
-                
+
                 ptr = sub_80A8D54(r2);
                 if(ptr)
                     return PokemonFlag2(ptr);
@@ -3244,7 +3242,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     r4 = (r3 << 8);
                     action->callbacks->getHitboxCenter(action->parentObject, &sp_318);
                     sub_80A8FD8(r5, &sp_320);
-            
+
                     if(sp_318.x - r4 <= sp_320.x
                         && sp_318.x + r4 >= sp_320.x
                         && sp_318.y - r4 <= sp_320.y
@@ -3282,8 +3280,8 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 PokemonStruct1 sp_2c;
                 PokemonStruct1 *ptr;
                 s32 index;
-                
-                
+
+
                 UnlockFriendArea(GetFriendArea(MONSTER_MAGNEMITE));
                 sp_4 = gUnknown_8116710;
                 sub_808D144(&sp_2c, &sp_4);
@@ -3308,7 +3306,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 PokemonStruct1 *pokemon;
                  struct unkStruct_808D144 sp_84;
                  PokemonStruct1 sp_ac;
-                 
+
                 UnlockFriendArea(GetFriendArea(MONSTER_ABSOL));
                 sp_84 = gUnknown_8116738;
                 sub_808D144(&sp_ac, &sp_84);
@@ -3335,14 +3333,14 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x1E:
              sub_80A8F50(gUnknown_2039D98, 0x7C, POKEMON_NAME_LENGTH);
              return 0;
-        
+
         case 0x1F:
             {
                 PokemonStruct1 *pokemon;
                 s32 index;
                 struct unkStruct_808D144 sp_108;
                 PokemonStruct1 sp_130;
-                
+
                 sp_108 = gUnknown_8116760;
                 sub_808D144(&sp_130, &sp_108);
                 pokemon = sub_808D1DC(&sp_130);
@@ -3354,7 +3352,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 sub_80922B4(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
                 IncrementAdventureNumJoined();
                 return 0;
-               
+
             }
             break;
 
@@ -3379,7 +3377,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 return 0;
             }
             break;
-        
+
 
         case 0x21:
             if(HasRecruitedMon(MONSTER_ARTICUNO))
@@ -3390,7 +3388,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x22:
             {
                 PokemonStruct1 *pokemon = GetPlayerPokemonStruct();
-                
+
                 if(pokemon->speciesNum != MONSTER_ARTICUNO && pokemon->speciesNum != MONSTER_ZAPDOS && pokemon->speciesNum != MONSTER_MOLTRES)
                     return 1;
             }
@@ -3415,7 +3413,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 s32 index;
                 struct unkStruct_808D144 sp_188;
                 PokemonStruct1 sp_1b0;
-                
+
                 if(!GetFriendAreaStatus(GetFriendArea(MONSTER_LATIOS)))
                     UnlockFriendArea(GetFriendArea(MONSTER_LATIOS));
                 sp_188 = gUnknown_8116794;
@@ -3429,7 +3427,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 IncrementAdventureNumJoined();
                 return 0;
             }
-            
+
             break;
         case 0x26:
             sub_80A8F50(gUnknown_2039D98, 0x7A, POKEMON_NAME_LENGTH);
@@ -3440,7 +3438,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 s32 index;
                 struct unkStruct_808D144 sp_208;
                 PokemonStruct1 sp_230;
-                
+
                 sp_208 = gUnknown_81167BC;
                 sub_808D144(&sp_230, &sp_208);
                 pokemon = sub_808D1DC(&sp_230);
@@ -3463,7 +3461,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     if(IsNotMoneyOrUsedTMItem(id))
                         if(gTeamInventoryRef->teamStorage[id] < 999)
                             gTeamInventoryRef->teamStorage[id] += 1;
-                        
+
                 }
                 else
                 {
@@ -3527,7 +3525,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                         || indexS16 == MONSTER_REGICE
                         || indexS16 == MONSTER_REGISTEEL
                         || indexS16 == MONSTER_CELEBI
-                        ) 
+                        )
                         continue;
                     if(!IsExclusivePokemonUnlocked(index)) continue;
                     if(GetFriendAreaStatus(GetFriendArea(index))) {
@@ -3540,7 +3538,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     if (r4 < 0)
                         break;
                 }
-                
+
                 SetScriptVarValue(NULL, NEW_FRIEND_KIND, index);
                 WriteFriendAreaName(gFormatBuffer_FriendArea, GetFriendArea(index), FALSE);
                 if (GetFriendAreaStatus(GetFriendArea(index)) != 0)
@@ -3552,7 +3550,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             {
                 s32 id = (s16) GetScriptVarValue(0, NEW_FRIEND_KIND);
                 WriteFriendAreaName(gFormatBuffer_FriendArea,(GetFriendArea(id)), FALSE);
-                if (id == 0) 
+                if (id == 0)
                     return 0;
                 else if(GetFriendAreaStatus(GetFriendArea(id)) != 0)
                    return 1;
@@ -3572,15 +3570,15 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     s32 id = (s16) GetScriptVarValue(0, NEW_FRIEND_KIND);
                       s32 matchMe = id;
                      WriteFriendAreaName(gFormatBuffer_FriendArea,(GetFriendArea((s16) id)), FALSE);
-                    if(id == 0) 
+                    if(id == 0)
                         return 0;
-                
+
                     if(!GetFriendAreaStatus(GetFriendArea(id)))
                         UnlockFriendArea(GetFriendArea(id));
                     pokemon = sub_808D2E8(matchMe, NULL ,ITEM_NOTHING, &gUnknown_81167E8, MOVE_NOTHING);
                     if(pokemon == NULL)
                         return 0;
-                    
+
                     for(index = 0; index < POKEMON_NAME_LENGTH; index++)
                         pokemon->name[index] = gUnknown_2039D98[index];
                     IncrementAdventureNumJoined();
@@ -3632,7 +3630,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
 
         case 0x32:
-            {   
+            {
                 struct unkStruct_808D144 sp_288;
                 PokemonStruct1 sp_2b0;
                 sp_288 = gUnknown_811681C;
@@ -3654,7 +3652,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     {
                         if(OtherRandInt(0x100) == 0)
                         {
-                            SetScriptVarArrayValue(0, EVENT_GONBE, 0, 4);  
+                            SetScriptVarArrayValue(0, EVENT_GONBE, 0, 4);
                             return 1;
                         }
                         else
@@ -3663,7 +3661,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 }
             }
             return 0;
-        
+
         case 0x34:
             {
                 s32 index;
@@ -3677,7 +3675,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                         if(IsNotMoneyOrUsedTMItem(id))
                             if(gTeamInventoryRef->teamStorage[id] < 999)
                                 gTeamInventoryRef->teamStorage[id] += 1;
-                        
+
                     }
                     else
                     {
@@ -3760,7 +3758,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 PixelPos sp_348;
                 PixelPos sp_350;
                 PixelPos sp_358;
-                
+
                 sp_308.kind = 1;
                 sp_308.unk1 = 0;
                 sp_308.width = 1;
@@ -3815,7 +3813,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                         if(held & B_BUTTON) {
                             to = 4;
                         }
-                        
+
                         for(index = 0; index < to; index++)
                         {
                             if(action->callbacks->moveRelative(action->parentObject, &sp_368) != 0)
@@ -3827,13 +3825,13 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                                     action->callbacks->moveRelative(action->parentObject, &pixelPos);
                                 }
                             }
-                        }             
+                        }
                     }
                     return -1;
                 }
             }
             break;
-        
+
         case 0x40:
             sub_80993C0(r2 == 0 ? 0 : 1);
             return 0;
@@ -3848,7 +3846,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
         case 0x43:
             gUnknown_2039DA8 = GetCurrentBGSong();
-            if(gUnknown_2039DA8 != STOP_BGM) 
+            if(gUnknown_2039DA8 != STOP_BGM)
                 return 1;
             return 0;
         case 0x44:
@@ -3892,7 +3890,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
     return 0;
 }
 
-void GroundScript_Unlock(void) 
+void GroundScript_Unlock(void)
 {
     s32 index;
     bool8 cond;

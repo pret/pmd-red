@@ -144,8 +144,6 @@ struct TestStruct
     s32 unk4;
 };
 
-extern struct TestStruct sUnknown; // Todo: figure out or guess what this variable could be.
-
 s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, s32 sector)
 {
     s32 i;
@@ -194,11 +192,7 @@ s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, s32 sec
             break;
     }
 
-    // The line below effectively does nothing(it's not even generated in the asm, agbcc ignores it, but changes regalloc...), because 'r' is overwritten in the next two instructions, however it is REQUIRED to match. Only discovered, because it's present in Blue's asm.
-    r = sUnknown;
-
-    r.unk0 = eventData->kind << 11;
-    r.unk4 = eventData->unk1 << 11;
+    r = (struct TestStruct) {eventData->kind << 11, eventData->unk1 << 11};
     SetUnkInGroundEvent(&eventData->pos, sp);
 
     ptr->unkC = sp[0];

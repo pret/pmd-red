@@ -38,4 +38,7 @@ void sub_803B6B0(s32 x, s32 y, u8 index, u32);
 bool8 sub_803C0DC(s16 species);
 bool8 sub_803C110(s16 index);
 
+extern const unkStruct_80E9920 gUnknown_80E9920[21];
+extern const unkStruct_80E9F8C gUnknown_80E9F8C[45];
+
 #endif // POKEMON_MAIL_H

@@ -167,8 +167,4 @@ gUnknown_2039DA8: /* 2039DA8 (sub_80A14E8) */
 	.space 0x8
 
     .include "src/ground_sprite.o"
-
-gUnknown_2039DD8: /* 2039DD8 (sub_80A6E80 - sub_80A7310) */
-	.space 0x8
-
-    .include "src/code_80A7714.o"
+    .include "src/ground_script_file.o"

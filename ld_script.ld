@@ -191,7 +191,6 @@ SECTIONS {
         asm/code_803B050.o(.text);
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
-        asm/code_803C1D0.o(.text);
         src/personality_test1.o(.text);
         src/personality_test2.o(.text);
         src/code_803D0D8.o(.text);
@@ -329,7 +328,6 @@ SECTIONS {
         src/code_8097F40.o(.text);
         src/exclusive_pokemon.o(.text);
         src/position_util.o(.text);
-        asm/code_8098468.o(.text);
         src/ground_main.o(.text);
         src/code_8099328.o(.text);
         src/code_8099360.o(.text);
@@ -346,8 +344,10 @@ SECTIONS {
         asm/code_80A59DC.o(.text);
         src/ground_map_2.o(.text);
         src/ground_sprite.o(.text);
-        asm/ground_sprite.o(.text);
-        src/code_80A7714.o(.text);
+        src/ground_sprite_data.o(.text);
+        src/ground_sprite_monster.o(.text);
+        src/ground_sprite_util.o(.text);
+        src/ground_script_file.o(.text);
         src/ground_lives.o(.text);
         asm/ground_lives.o(.text);
         src/ground_object.o(.text);
@@ -696,6 +696,13 @@ SECTIONS {
         data/data_8115F5C.o(.rodata);
         src/code_809A560.o(.rodata);
         data/data_8115F5C_2.o(.rodata);
+        src/ground_sprite.o(.rodata);
+        src/ground_sprite_data.o(.rodata);
+        src/ground_sprite_monster.o(.rodata);
+        src/ground_sprite_util.o(.rodata);
+        data/pksdir_6.o(.rodata);
+        src/ground_script_file.o(.rodata);
+        data/data_8115F5C_1.o(.rodata);
         src/ground_event.o(.rodata);
         src/unk_dungeon_load_maybe.o(.rodata);
         data/data_8115F5C_3.o(.rodata);

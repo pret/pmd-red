@@ -229,7 +229,7 @@ s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
         sub_804178C(a4 == 2);
     }
 
-    sub_800569C(&pos, &entity->axObj, a3);
+    sub_800569C(&pos, &entity->axObj.axdata, a3);
     if (pos.x != 99 && pos.y != 99) {
         pixelPos.x = entity->pixelPos.x + (pos.x << 8);
         pixelPos.y = (entity->pixelPos.y + (pos.y << 8)) - entInfo->unk174.raw;
@@ -1718,7 +1718,7 @@ void sub_8042EC8(Entity *a0, s32 a1)
 
             if (strPtr->unk8 != -1) {
                 sub_800569C(&sp4,
-                            &a0->axObj,
+                            &a0->axObj.axdata,
                             strPtr->unk8);
             }
 
