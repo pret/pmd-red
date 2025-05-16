@@ -15,9 +15,10 @@
 #include "play_time.h"
 #include "pokemon.h"
 #include "text_util.h"
+#include "code_80A26CC.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
-EWRAM_DATA u32 gUnknown_20398AC = {0};
+EWRAM_DATA s32 gUnknown_20398AC = {0};
 EWRAM_DATA u32 gUnknown_20398B0 = {0};
 EWRAM_DATA u32 gUnknown_20398B4 = {0};
 EWRAM_DATA u8 gUnknown_20398B8 = {0};
@@ -25,7 +26,7 @@ EWRAM_DATA bool8 gUnknown_20398B9 = {0};
 EWRAM_DATA bool8 gScriptMode = {0};
 UNUSED EWRAM_DATA static u8 gUnknown_20398BB = {0};
 EWRAM_DATA u16 gUnknown_20398BC = {0};
-EWRAM_DATA u16 gUnknown_20398BE = {0};
+EWRAM_DATA s16 gUnknown_20398BE = {0};
 EWRAM_DATA u32 gUnknown_20398C0 = {0};
 EWRAM_DATA s16 gUnknown_20398C4 = {0};
 EWRAM_DATA struct unkStruct_20398C8 gUnknown_20398C8 = {0};
@@ -48,18 +49,433 @@ extern void nullsub_120();
 extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();
-extern void sub_80A6E68();
-extern void GroundMap_Action();
-extern void nullsub_124();
-extern void GroundLives_Action();
-extern void GroundObject_Action();
-extern void GroundEffect_Action();
 
 extern void sub_809CB8C();
 extern void sub_8098CC8();
 extern void ClearAllItems_8091FB4();
 extern u8 sub_809C730();
 extern void sub_8095494(WonderMailSub *param_1, u8 index);
+
+extern u16 gUnknown_2026E4E;
+
+// TODO: Move these externs to headers
+extern void GroundSprite_Reset(s32);
+extern s16 sub_8098FCC(u32 unused);
+extern s16 sub_80A2654(s16 r0);
+extern void sub_809A71C(s32);
+extern bool8 sub_809AFAC(void);
+extern bool8 sub_80048BC(void);
+void FadeOutAllMusic(u16 speed);
+extern u8 sub_80023E4(u32);
+extern bool8 sub_809C740(void);
+extern bool8 sub_8099B94(void);
+extern void FreeGroundMapAction(void);
+extern void nullsub_118(void);
+extern void FreeGroundLives(void);
+extern void FreeGroundObjects(void);
+extern void FreeGroundEffects(void);
+extern void FreeGroundEvents(void);
+extern void sub_809CB74(void);
+extern void sub_809A610(void);
+extern void sub_809C618(void);
+extern void sub_80A658C(void);
+extern void sub_809D508(void);
+extern void sub_80A7754(void);
+extern void nullsub_119(void);
+extern void sub_8099768(void);
+extern void nullsub_103(void);
+extern void sub_8099648(void);
+extern void sub_809975C(void);
+extern void sub_809D0AC(void);
+extern void sub_80A7744(void);
+extern void sub_809D490(void);
+extern void sub_80A62F0(void);
+extern void sub_809C5C4(void);
+extern void sub_809A560(void);
+extern void sub_809CB50(void);
+extern void AllocGroundMapAction(void);
+extern void nullsub_117(void);
+extern void AllocGroundEvents(void);
+extern void AllocGroundLives(void);
+extern void AllocGroundObjects(void);
+extern void AllocGroundEffects(void);
+extern void sub_809A62C(void);
+extern void nullsub_124(void);
+extern void GroundLives_Action(void);
+extern void GroundObject_Action(void);
+extern void GroundEffect_Action(void);
+extern void nullsub_105(void);
+extern void sub_809B474(void);
+extern void GroundScript_Unlock();
+extern void sub_809D25C(void);
+extern void sub_80A59DC(void);
+extern void sub_809B614(void);
+extern void sub_809CA20(void);
+extern void sub_80A6E80(void);
+extern void sub_8099BE4(void);
+extern void sub_8099744(void);
+extern void sub_8011860(void);
+extern void IncrementPlayTime(struct PlayTimeStruct *);
+extern void WaitForNextFrameAndAdvanceRNG(void);
+extern void LoadBufferedInputs(void);
+extern void nullsub_120(void);
+extern void sub_80A5E70(void);
+extern void sub_809B638(void);
+extern void nullsub_106(void);
+extern void sub_80A73EC(void);
+extern void sub_8099750(void);
+extern void sub_8009908(void);
+extern void GroundMap_Reset(void);
+extern void sub_809D0BC(void);
+extern void DeleteGroundEvents(void);
+extern void DeleteGroundLives(void);
+extern void DeleteGroundObjects(void);
+extern void DeleteGroundEffects(void);
+extern void sub_809C658(void);
+extern void nullsub_16(void);
+extern void UpdateAdventureAchievements(void);
+extern void xxx_call_update_bg_sound_input(void);
+extern void sub_80A6E68(void);
+extern void sub_80060EC(void);
+extern void sub_801180C(void);
+extern void ScriptPrintNullTextbox(void);
+extern void sub_809977C(void);
+extern void GroundMap_ExecuteEvent(s32, u32);
+extern void UpdateFadeInTile(s32);
+extern void GroundMap_Action(void);
+extern void sub_8098C58(void);
+extern void sub_8001D88(void);
+extern u32 GroundMainGameCancelRequest(u32 r0);
+extern void sub_80999D4(s32);
+extern void sub_809D4B0(void);
+extern void sub_809C63C(void);
+extern void sub_8005838(s32, s32);
+
+u32 xxx_script_related_8098468(s32 param_1)
+{
+    s32 r7;
+    s32 varE;
+
+    gUnknown_20398B4 = param_1;
+    gUnknown_20398B9 = 0;
+    gUnknown_20398B8 = 1;
+    gScriptMode = 0;
+
+    switch (param_1) {
+        case 0xd:
+            gScriptMode = 1;
+            gUnknown_20398B8 = 0;
+            gUnknown_20398B9 = 1;
+            break;
+        case 0xe:
+            gUnknown_20398B8 = 1;
+            gUnknown_20398B9 = 1;
+            break;
+        case 0xf:
+            gUnknown_20398B8 = 1;
+            gUnknown_20398B9 = 1;
+            break;
+        case 0x10: {
+            s32 local_1c;
+            u32 auStack24;
+
+            GetScriptVarScenario(3,&local_1c,&auStack24);
+            gUnknown_20398B8 = local_1c == 0;
+            gUnknown_20398B9 = 1;
+            break;
+        }
+        case 0x11:
+            gUnknown_20398B8 = 0;
+            gUnknown_20398B9 = 1;
+            break;
+        default:
+            break;
+    }
+    sub_801180C();
+    if (gUnknown_20398B9 == 0 && !sub_80023E4(0xd)) {
+        FadeOutAllMusic(0x10);
+    }
+    gUnknown_2026E4E = 0x808;
+    UpdateFadeInTile(0);
+    sub_8099648();
+    sub_809975C();
+    sub_809D0AC();
+    sub_80A7744();
+    sub_809D490();
+    sub_80A62F0();
+    sub_809C5C4();
+    sub_809A560();
+    sub_809CB50();
+    AllocGroundMapAction();
+    nullsub_117();
+    AllocGroundEvents();
+    AllocGroundLives();
+    AllocGroundObjects();
+    AllocGroundEffects();
+    sub_809A62C();
+    gUnknown_203B49C = 0;
+    gUnknown_203B49D = 0;
+    gUnknown_20398A8 = 1;
+    gUnknown_20398AC = 0;
+    gUnknown_20398B0 = -1;
+    gUnknown_20398BE = GetScriptVarValue(0,0xd);
+    varE = GetScriptVarValue(0,0xe);
+    gUnknown_20398C0 = varE;
+    gUnknown_20398C4 = -1;
+    r7 = -1;
+    while (gUnknown_20398A8 - 1 <= 1) {
+        sub_809A71C(-1);
+        ScriptPrintNullTextbox();
+        sub_809977C();
+        switch (gUnknown_20398B4) {
+            case 0:
+                sub_8098C58();
+                gUnknown_20398B4 = 1;
+                break;
+            case 2:
+            case 3:
+                sub_8001D88();
+                break;
+            case 5:
+                r7 = 0x70;
+                break;
+            case 9:
+            case 10:
+            case 0xb:
+            case 0xc: {
+                s32 scriptVar13;
+
+                SetScriptVarValue(0,0x16,gUnknown_20398B4);
+                SetScriptVarValue(0,0x25,0);
+                sub_8098C58();
+                UpdateScriptVarWithImmediate(0,0x15,1,2);
+                scriptVar13 = (s16)GetScriptVarValue(0,0x13);
+                if (scriptVar13 != -1) {
+                    s32 var;
+                    const DungeonInfo *dungInfo;
+                    if (scriptVar13 == 0x51) {
+                        dungInfo = GetDungeonInfo_80A2608((s16)GetScriptVarValue(0,0x14));
+                    }
+                    else {
+                        dungInfo = GetDungeonInfo_80A2608(scriptVar13);
+                    }
+                    r7 = dungInfo->unkA;
+                    if (gUnknown_20398B4 == 9) {
+                        SetScriptVarArrayValue(0,0x31,(u16) scriptVar13,1);
+                    }
+                    var = sub_8098FCC(gUnknown_20398B4);
+                    if (var != -1) {
+                        gUnknown_20398BE = var;
+                        gUnknown_20398C0 = 0;
+                    }
+                }
+                break;
+            }
+            case 0xd:
+                sub_8098C58();
+                gUnknown_20398B4 = 1;
+                SetScriptVarValue(0,0x18,1);
+                SetScriptVarValue(0,0xf,0);
+                SetScriptVarValue(0,0xd,0);
+                SetScriptVarValue(0,0xe,0);
+                r7 = 0x71;
+                break;
+            case 0xe:
+                r7 = 0x73;
+                break;
+            case 0xf:
+                r7 = 0x74;
+                break;
+            case 0x10:
+                r7 = 0x75;
+                break;
+            case 0x11:
+                r7 = 0x76;
+                break;
+        }
+        if (gUnknown_20398B9 == 0) {
+            s32 varD = GetScriptVarValue(0,0xd);
+            SetScriptVarValue(0,0x18,gUnknown_20398B4);
+            if (gUnknown_20398B4 != 1) {
+                if (gUnknown_20398B4 == 3) {
+                    SetScriptVarValue(0,0xf,gUnknown_20398BE);
+                }
+                else {
+                    SetScriptVarValue(0,0xf,varD);
+                }
+            }
+            SetScriptVarValue(0,0xd,gUnknown_20398BE);
+            SetScriptVarValue(0,0xe,gUnknown_20398C0);
+        }
+        gUnknown_20398B4 = 2;
+        gUnknown_20398A8 = 0;
+        gUnknown_20398AC = 0;
+        gUnknown_20398B0 = -1;
+        gUnknown_20398BC = gUnknown_20398BE;
+        gUnknown_20398BE = -1;
+        sub_809977C();
+        sub_809D4B0();
+        GroundSprite_Reset(-1);
+        sub_809C63C();
+        sub_809A62C();
+        GroundMap_Reset();
+        sub_809D0BC();
+        DeleteGroundEvents();
+        DeleteGroundLives();
+        DeleteGroundObjects();
+        DeleteGroundEffects();
+        sub_809C658();
+        nullsub_16();
+        UpdateAdventureAchievements();
+        if (r7 != -1) {
+            GroundMap_ExecuteEvent(r7,0);
+        }
+        else {
+            GroundMap_ExecuteEvent(0x66,0);
+        }
+        GroundMap_Action();
+        sub_8005838(0,0);
+        sub_80060EC();
+        xxx_call_update_bg_sound_input();
+        while ( 1 ) {
+            xxx_call_update_bg_sound_input();
+            sub_80A6E68();
+            if (gUnknown_20398A8 != 0) {
+                if (gUnknown_20398AC > 0) {
+                    gUnknown_20398AC--;
+                    if (gUnknown_20398AC < 1) {
+                        sub_80999D4(gUnknown_20398B0);
+                    }
+                }
+                else if (!sub_8099B94()) {
+                    if (sub_809C740())
+                        break;
+                }
+            }
+            else if (gUnknown_20398B9 != 0 && gUnknown_20398B8 == 0 && !sub_809AFAC()) {
+                u16 pressed = gRealInputs.pressed;
+                if ((pressed & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON | R_BUTTON | L_BUTTON)) || sub_80048BC()) {
+                    GroundMap_ExecuteEvent(0x72,0);
+                    GroundMainGameCancelRequest(0x1e);
+                    FadeOutAllMusic(0x1e);
+                }
+            }
+            GroundMap_Action();
+            nullsub_124();
+            GroundLives_Action();
+            GroundObject_Action();
+            GroundEffect_Action();
+            nullsub_105();
+            sub_809B474();
+            GroundScript_Unlock();
+            sub_809D25C();
+            sub_80A59DC();
+            sub_809B614();
+            sub_809CA20();
+            sub_80A6E80();
+            sub_8099BE4();
+            sub_8099744();
+            sub_8011860();
+            IncrementPlayTime(gPlayTimeRef);
+            WaitForNextFrameAndAdvanceRNG();
+            LoadBufferedInputs();
+            nullsub_120();
+            sub_80A5E70();
+            sub_809B638();
+            nullsub_106();
+            sub_80A73EC();
+            sub_8099750();
+            sub_8009908();
+        }
+
+        GroundMap_Reset();
+        r7 = -1;
+    }
+
+    FreeGroundMapAction();
+    nullsub_118();
+    FreeGroundLives();
+    FreeGroundObjects();
+    FreeGroundEffects();
+    FreeGroundEvents();
+    sub_809CB74();
+    sub_809A610();
+    sub_809C618();
+    sub_80A658C();
+    sub_809D508();
+    sub_80A7754();
+    nullsub_119();
+    sub_8099768();
+    nullsub_103();
+    nullsub_16();
+    if (gUnknown_20398B9 != 0) {
+        if (gUnknown_20398A8 == 9) {
+            FadeOutAllMusic(0x1e);
+            return 0xf;
+        }
+        else if (gUnknown_20398A8 == 10) {
+            return 0x10;
+        }
+        else {
+            FadeOutAllMusic(0x1e);
+            return 0xf;
+        }
+    }
+    else {
+        switch (gUnknown_20398A8) {
+            case 3:
+                SetScriptVarValue(0,0x13,-1);
+                SetScriptVarValue(0,0x14,-1);
+                SetScriptVarValue(0,0x18,4);
+                SetScriptVarValue(0,0x16,4);
+                SetScriptVarValue(0,0xf,GetScriptVarValue(0,0xd));
+                return 5;
+            case 4:
+                SetScriptVarValue(0,0x13,0);
+                SetScriptVarValue(0,0x18,5);
+                SetScriptVarValue(0,0x16,5);
+                SetScriptVarValue(0,0x13,-1);
+                return 6;
+            case 5: {
+                s32 sVar2 = sub_80A2654(gUnknown_20398C4);
+                SetScriptVarValue(0,0x13,gUnknown_20398C4);
+                SetScriptVarValue(0,0x14,sVar2);
+                SetScriptVarArrayValue(0,0x30,(u16) gUnknown_20398C4,1);
+                SetScriptVarValue(0,0x18,7);
+                SetScriptVarValue(0,0x16,7);
+                if ((s16)GetScriptVarValue(0,0x11) == 10) {
+                    SetScriptVarValue(0,0x11,0);
+                }
+                return 7;
+            }
+            case 6:
+                SetScriptVarValue(0,0x13,0x51);
+                SetScriptVarValue(0,0x14,gUnknown_20398C4);
+                SetScriptVarValue(0,0x18,7);
+                SetScriptVarValue(0,0x16,7);
+                if ((s16)GetScriptVarValue(0,0x11) == 10) {
+                    SetScriptVarValue(0,0x11,0);
+                }
+                return 8;
+            case 7:
+                SetScriptVarValue(0,0x13,0x50);
+                SetScriptVarValue(0,0x14,gUnknown_2039950);
+                SetScriptVarValue(0,0x18,7);
+                SetScriptVarValue(0,0x16,7);
+                return 9;
+            case 8:
+                SetScriptVarValue(0,0x13,0x52);
+                SetScriptVarValue(0,0x14,gUnknown_20398C4);
+                SetScriptVarValue(0,0x18,7);
+                SetScriptVarValue(0,0x16,7);
+                return 10;
+            default:
+                SetScriptVarValue(0,0x18,1);
+                FadeOutAllMusic(0x10);
+                return 0xe;
+        }
+    }
+}
 
 void sub_8098BDC(void)
 {
