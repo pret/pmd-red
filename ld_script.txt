@@ -191,7 +191,6 @@ SECTIONS {
         asm/code_803B050.o(.text);
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
-        asm/code_803C1D0.o(.text);
         src/personality_test1.o(.text);
         src/personality_test2.o(.text);
         src/code_803D0D8.o(.text);

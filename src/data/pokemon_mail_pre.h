@@ -95,7 +95,7 @@ const s16 gUnknown_80E8126[33] = {
     MONSTER_NONE
 };
 
-const s16 gUnknown_80E8168[6][2] = {
+const struct PokemonPair gUnknown_80E8168[6] = {
     { MONSTER_NIDORAN_M, MONSTER_NIDORAN_F },
     { MONSTER_NIDORINO, MONSTER_NIDORINA },
     { MONSTER_NIDOKING, MONSTER_NIDOQUEEN },
@@ -104,7 +104,7 @@ const s16 gUnknown_80E8168[6][2] = {
     { MONSTER_MINUN, MONSTER_PLUSLE }
 };
 
-const s16 gUnknown_80E8180[21][2] = {
+const struct PokemonItem gUnknown_80E8180[21] = {
     { MONSTER_GLOOM, ITEM_LEAF_STONE },
     { MONSTER_WEEPINBELL, ITEM_LEAF_STONE },
     { MONSTER_EXEGGCUTE, ITEM_LEAF_STONE },
@@ -129,7 +129,7 @@ const s16 gUnknown_80E8180[21][2] = {
 };
 
 // List of preferred gummis
-const s16 gUnknown_80E81D4[386][2] = {
+const struct PokemonItem gUnknown_80E81D4[386] = {
     { MONSTER_EKANS, ITEM_PINK_GUMMI },
     { MONSTER_ARBOK, ITEM_PINK_GUMMI },
     { MONSTER_ARMALDO, ITEM_GRAY_GUMMI },

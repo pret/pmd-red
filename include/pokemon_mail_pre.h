@@ -1,6 +1,22 @@
 #ifndef POKEMON_MAIL_PRE_H
 #define POKEMON_MAIL_PRE_H
 
+struct PokemonPair
+{
+    s16 speciesA;
+    s16 speciesB;
+};
+
+struct PokemonItem
+{
+    s16 species;
+    u8 itemId;
+};
+
+extern const struct PokemonPair gUnknown_80E8168[6];
+extern const struct PokemonItem gUnknown_80E8180[21];
+extern const struct PokemonItem gUnknown_80E81D4[386];
+
 extern const s16 gUnknown_80E80E0[35];
 extern const s16 gUnknown_80E8126[33];
 extern const u8 gMankeyMission[];
