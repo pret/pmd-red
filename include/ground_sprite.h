@@ -14,6 +14,7 @@ struct UnkGroundSpriteSubStructx48
     axmain *axmain;
 };
 
+// size: 0x80 (probably the last sub-struct of GroundLives)
 struct UnkGroundSpriteStruct
 {
     axdata axdata;
@@ -63,5 +64,11 @@ typedef struct unkStruct_3001B7C
 } unkStruct_3001B7C;
 
 void GroundSprite_Reset(s32);
+void sub_80A67CC(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2);
+void sub_80A68A0(struct UnkGroundSpriteStruct *ptr);
+void sub_80A6EFC(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_);
+void sub_80A7040(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_, s32 a3);
+bool8 sub_80A7094(struct UnkGroundSpriteStruct *ptr, PixelPos *r10, PixelPos *posArg, s32 a3);
+bool8 sub_80A7310(struct UnkGroundSpriteStruct *ptr, PixelPos *posArg1, PixelPos *posArg2, s32 a3);
 
 #endif // GUARD_GROUND_SPRITE_H
