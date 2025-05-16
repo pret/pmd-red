@@ -455,9 +455,6 @@ void sub_80A69FC(struct UnkGroundSpriteStruct *ptr)
     }
 }
 
-extern const DebugLocation gUnknown_8117858;
-extern const DebugLocation gUnknown_8117888;
-
 void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
 {
     OpenedFile *file;
@@ -497,7 +494,7 @@ void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
             r8 = 1;
             sub108Ptr = &gUnknown_3001B7C->unk108[1];
             if (sub108Ptr->unk2 > 0) {
-                FatalError(&gUnknown_8117858, gUnknown_8117864, a1);
+                FATAL_ERROR_ARGS("../ground/ground_sprite.c", 1008, "extend palette buffer error %08x", a1);
             }
         }
         else {
@@ -510,7 +507,7 @@ void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16 a1)
             }
 
             if (r8 >= UNK_3001B7C_SUB108_COUNT) {
-                FatalError(&gUnknown_8117888, gUnknown_8117864, a1);
+                FATAL_ERROR_ARGS("../ground/ground_sprite.c", 1016, "extend palette buffer error %08x", a1);
             }
         }
 

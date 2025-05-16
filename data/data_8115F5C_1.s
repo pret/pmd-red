@@ -4,33 +4,6 @@
 
 
 
-.global GroundSpriteFile_Text
-GroundSpriteFile_Text: @ Text
-.string "../ground/ground_sprite.c\0"
-.align 2,0
-
-.global GroundSprite_ExtendPaletteAdd_Text
-GroundSprite_ExtendPaletteAdd_Text: @ ExtendPaletteAdd
-.string "GroundSprite_ExtendPaletteAdd\0"
-.align 2,0
-
-.global gUnknown_8117858
-gUnknown_8117858: @ 8117858
-.4byte GroundSpriteFile_Text
-.byte 0xF0, 0x03, 0x00, 0x00
-.4byte GroundSprite_ExtendPaletteAdd_Text
-
-.global gUnknown_8117864
-gUnknown_8117864: @ 8117864
-.string "extend palette buffer error %08x\0"
-.align 2,0
-
-.global gUnknown_8117888
-gUnknown_8117888: @ 8117888
-.4byte GroundSpriteFile_Text
-.byte 0xF8, 0x03, 0x00, 0x00
-.4byte GroundSprite_ExtendPaletteAdd_Text
-
 .global gUnknown_8117894
 gUnknown_8117894: @ 8117894
 .string "extend palette %3d[%3d] %04x set %04x %04x\0"

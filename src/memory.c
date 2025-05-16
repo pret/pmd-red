@@ -71,8 +71,6 @@ static HeapDescriptor *DoCreateSubHeap(struct unkMemoryStruct *a, u32 b);
 static void *DoAlloc(HeapDescriptor *heap, s32 size, u32 a2);
 static void InitHeapInternal(void);
 
-ALIGNED(4) static const char sFileNameText[] = "../system/memory_locate.c";
-
 void InitHeap(void)
 {
     InitHeapInternal();
@@ -325,14 +323,6 @@ static s32 MemorySearchFromBack(HeapDescriptor *heap, s32 atb, s32 size)
     return -1;
 }
 
-ALIGNED(4) static const char sText_LocateSetFront[] = "_LocateSetFront";
-static const DebugLocation sLocateSetFrontDebugLocation =
-{
-    .file = sFileNameText,
-    .line = 581,
-    .func = sText_LocateSetFront
-};
-
 static struct HeapFreeListElement * _LocateSetFront(HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
 {
     s32 i;
@@ -352,7 +342,7 @@ static struct HeapFreeListElement * _LocateSetFront(HeapDescriptor *heap, s32 in
 
         heap->freeCount++;
         if (heap->freeCount > heap->freeListLength) {
-            FatalError(&sLocateSetFrontDebugLocation, "Memory Locate sprit max over [%3d/%3d]", heap->freeCount, heap->freeListLength);
+            FATAL_ERROR_ARGS("../system/memory_locate.c", 581, "Memory Locate sprit max over [%3d/%3d]", heap->freeCount, heap->freeListLength);
         }
 
         block = &heap->freeList[index + 1];
@@ -368,14 +358,6 @@ static struct HeapFreeListElement * _LocateSetFront(HeapDescriptor *heap, s32 in
     curr->grp = group;
     return curr;
 }
-
-ALIGNED(4) static const char sText_LocateSetBack[] = "_LocateSetBack";
-static const DebugLocation sLocateSetBackDebugLocation =
-{
-    .file = sFileNameText,
-    .line = 673,
-    .func = sText_LocateSetBack
-};
 
 static struct HeapFreeListElement * _LocateSetBack(HeapDescriptor *heap, s32 index, s32 atb, s32 size, s32 group)
 {
@@ -397,7 +379,7 @@ static struct HeapFreeListElement * _LocateSetBack(HeapDescriptor *heap, s32 ind
 
         heap->freeCount++;
         if (heap->freeCount > heap->freeListLength) {
-            FatalError(&sLocateSetBackDebugLocation, "Memory Locate sprit max over [%3d/%3d]", heap->freeCount, heap->freeListLength);
+            FATAL_ERROR_ARGS("../system/memory_locate.c", 673, "Memory Locate sprit max over [%3d/%3d]", heap->freeCount, heap->freeListLength);
         }
 
         curr->block.size -= sizeAligned;
@@ -414,14 +396,6 @@ static struct HeapFreeListElement * _LocateSetBack(HeapDescriptor *heap, s32 ind
     curr->grp = group;
     return curr;
 }
-
-ALIGNED(4) static const char sText_LocateSet[] = "_LocateSet";
-static const DebugLocation sLocateSetDebugLocation =
-{
-    .file = sFileNameText,
-    .line = 812,
-    .func = sText_LocateSet
-};
 
 static void * _LocateSet(HeapDescriptor *heap, s32 size, s32 group)
 {
@@ -454,9 +428,8 @@ static void * _LocateSet(HeapDescriptor *heap, s32 size, s32 group)
     }
 
 error:
-    FatalError(&sLocateSetDebugLocation,
-        "Memroy LocateSet [%p] buffer %8x size can't locate\n    atb %02x grp %3d ",
-        heap, size, atb, group);
+    FATAL_ERROR_ARGS("../system/memory_locate.c", 812, "Memroy LocateSet [%p] buffer %8x size can't locate\n    atb %02x grp %3d ",
+                     heap, size, atb, group);
 }
 
 // arm9.bin::02010DE0
@@ -469,8 +442,6 @@ void MemoryFree(void *a)
 {
     DoFree(&sMainHeapDescriptor, a);
 }
-
-ALIGNED(4) static const char sText_MemoryLocate_LocalCreate[] = "MemoryLocate_LocalCreate";
 
 UNUSED static HeapDescriptor *MemoryLocate_LocalCreate(HeapDescriptor *parentHeap, u32 size, u32 param_3, u32 group)
 {
@@ -485,12 +456,7 @@ UNUSED static HeapDescriptor *MemoryLocate_LocalCreate(HeapDescriptor *parentHea
     index = MemorySearchFromBack(parentHeap, 9, size);
 
     if (index < 0) {
-        static const DebugLocation debugInfo = {
-            .file = sFileNameText,
-            .line = 1109,
-            .func = sText_MemoryLocate_LocalCreate
-        };
-        FatalError(&debugInfo, "Memroy LocalCreate buffer %08x size can't locate", size);
+        FATAL_ERROR_ARGS("../system/memory_locate.c", 1109, "Memroy LocalCreate buffer %08x size can't locate", size);
     }
 
     foundSet = _LocateSetBack(parentHeap, index, 9, size, group);
