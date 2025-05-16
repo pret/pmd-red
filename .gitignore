@@ -23,7 +23,6 @@ tools/agbcc
 *.id2
 *.nam
 *.til
-*.ld
 tags
 types_*.taghl
 *.swp

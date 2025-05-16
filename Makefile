@@ -267,14 +267,18 @@ $(BUILD_DIR)/sym_ewram_init.ld: sym_ewram_init.txt
 
 $(BUILD_DIR)/sym_iwram_init.ld: sym_iwram_init.txt
 	$(RAMSCRGEN) iwram_init $< ENGLISH > $@
+    
+LD_SCRIPT := ld_script.ld
+LD_SCRIPT_DEPS := $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_iwram.ld $(BUILD_DIR)/sym_ewram_init.ld $(BUILD_DIR)/sym_iwram_init.ld
 
-$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_ewram_init.ld $(BUILD_DIR)/sym_iwram.ld $(BUILD_DIR)/sym_iwram_init.ld
-	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
-
-$(ELF): $(LD_SCRIPT) $(ALL_OBJECTS) $(LIBC) libagbsyscall tools
-	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ $(LIB)
+# Elf from object files
+LDFLAGS = -Map ../../$(MAP)
+$(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(ALL_OBJECTS) libagbsyscall
+	@cd $(BUILD_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(LIB) | cat
+	@echo "cd $(BUILD_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ <objs> <libs> | cat"
 	$(GBAFIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
+# Builds the rom from the elf file
 $(ROM): %.gba: $(ELF)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0xA000000 $< $@
 	$(GBAFIX) $@ -p --silent
@@ -283,9 +287,6 @@ ifeq (,$(filter clean,$(MAKECMDGOALS)))
 -include $(ALL_OBJECTS:.o=.d)
 endif
 
-###################
-### Symbol file ###
-###################
-
+# Symbol file (`make syms`)
 $(SYM): $(ELF)
 	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@
