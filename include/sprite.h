@@ -53,7 +53,7 @@ void sub_8005180(void);
 void sub_8005304(void);
 void sub_8005610(OpenedFile *, s32 vramIdx, s32 brightness, const RGB *ramp);
 const RGB *sub_8005674(const EfoFileData *, s32 vramIdx);
-void sub_800569C(DungeonPos *, axObject *, u8);
+void sub_800569C(DungeonPos *, axdata *, u8);
 void sub_8005700(DungeonPos *, axObject *);
 void sub_8005770(s32, const RGB *color, s32 brightness, const RGB *ramp);
 

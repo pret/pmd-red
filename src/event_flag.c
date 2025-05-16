@@ -463,7 +463,7 @@ void ScenarioCalc(s16 param_1,s32 param_2,s32 param_3)
 
   param_1_s32 = param_1;
   GetScriptVarScenario(param_1_s32,&local_18,&local_14);
-  Log(6,gScenarioCalcLogString,param_1_s32,local_18,local_14,param_2,param_3); // SCENARIO CALC [%3d] %4d %4d -> %4d %4d
+  Log(6,"SCENARIO CALC [%3d] %4d %4d -> %4d %4d",param_1_s32,local_18,local_14,param_2,param_3);
   if ((param_1_s32 == 3) && ((param_2 != local_18 || (param_3 != local_14)))) {
     SetScriptVarValue(NULL,CLEAR_COUNT,0);
   }
@@ -650,14 +650,6 @@ void sub_8001D88(void)
   }
 }
 
-ALIGNED(4) static const u8 sFlagCalc_Text[] = "_FlagCalc";
-
-static const DebugLocation sFlagCalcDebugLocation = {
-    EventFlagFile_Text,
-    0x551,
-    sFlagCalc_Text
-};
-
 // arm9.bin::0200EC08
 s32 _FlagCalc(s32 param_1, s32 param_2, enum FlagCalcOperation operation)
 {
@@ -687,17 +679,9 @@ s32 _FlagCalc(s32 param_1, s32 param_2, enum FlagCalcOperation operation)
     case CALC_RANDOM:
         return OtherRandInt(param_2);
     default:
-        FatalError(&sFlagCalcDebugLocation,"event flag expansion error %d", operation); // event flag expansion error %d
+        FATAL_ERROR_ARGS("../main/event_flag.c", 1361, "event flag expansion error %d", operation);
   }
 }
-
-ALIGNED(4) static const u8 sFlagJudge_Text[] = "_FlagJudge";
-
-static const DebugLocation sFlagJudgeDebugLocation = {
-    EventFlagFile_Text,
-    0x57C,
-    sFlagJudge_Text
-};
 
 // arm9.bin::0200EAE4
 bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation)
@@ -726,7 +710,7 @@ bool8 _FlagJudge(s32 param_1, s32 param_2, enum FlagJudgeOperation operation)
       case JUDGE_BIT_SET:
         return param_1 >> (param_2) & 1;
       default:
-        FatalError(&sFlagJudgeDebugLocation,"event flag rule error %d", operation); // event flag rule error %d
+        FATAL_ERROR_ARGS("../main/event_flag.c", 1404, "event flag rule error %d", operation);
   }
 }
 
