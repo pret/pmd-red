@@ -218,8 +218,8 @@ u32 xxx_script_related_8098468(s32 param_1)
     gUnknown_20398A8 = 1;
     gUnknown_20398AC = 0;
     gUnknown_20398B0 = -1;
-    gUnknown_20398BE = GetScriptVarValue(0,0xd);
-    varE = GetScriptVarValue(0,0xe);
+    gUnknown_20398BE = GetScriptVarValue(0,GROUND_ENTER);
+    varE = GetScriptVarValue(0,GROUND_ENTER_LINK);
     gUnknown_20398C0 = varE;
     gUnknown_20398C4 = -1;
     r7 = -1;
@@ -245,23 +245,23 @@ u32 xxx_script_related_8098468(s32 param_1)
             case 0xc: {
                 s32 scriptVar13;
 
-                SetScriptVarValue(0,0x16,gUnknown_20398B4);
-                SetScriptVarValue(0,0x25,0);
+                SetScriptVarValue(0,DUNGEON_RESULT,gUnknown_20398B4);
+                SetScriptVarValue(0,WARP_LOCK,0);
                 sub_8098C58();
-                UpdateScriptVarWithImmediate(0,0x15,1,2);
-                scriptVar13 = (s16)GetScriptVarValue(0,0x13);
+                UpdateScriptVarWithImmediate(0,DUNGEON_ENTER_FREQUENCY,1,2);
+                scriptVar13 = (s16)GetScriptVarValue(0,DUNGEON_ENTER);
                 if (scriptVar13 != -1) {
                     s32 var;
                     const DungeonInfo *dungInfo;
                     if (scriptVar13 == 0x51) {
-                        dungInfo = GetDungeonInfo_80A2608((s16)GetScriptVarValue(0,0x14));
+                        dungInfo = GetDungeonInfo_80A2608((s16)GetScriptVarValue(0,DUNGEON_ENTER_INDEX));
                     }
                     else {
                         dungInfo = GetDungeonInfo_80A2608(scriptVar13);
                     }
                     r7 = dungInfo->unkA;
                     if (gUnknown_20398B4 == 9) {
-                        SetScriptVarArrayValue(0,0x31,(u16) scriptVar13,1);
+                        SetScriptVarArrayValue(0,DUNGEON_CLEAR_LIST,(u16) scriptVar13,1);
                     }
                     var = sub_8098FCC(gUnknown_20398B4);
                     if (var != -1) {
@@ -274,10 +274,10 @@ u32 xxx_script_related_8098468(s32 param_1)
             case 0xd:
                 sub_8098C58();
                 gUnknown_20398B4 = 1;
-                SetScriptVarValue(0,0x18,1);
-                SetScriptVarValue(0,0xf,0);
-                SetScriptVarValue(0,0xd,0);
-                SetScriptVarValue(0,0xe,0);
+                SetScriptVarValue(0,START_MODE,1);
+                SetScriptVarValue(0,GROUND_GETOUT,0);
+                SetScriptVarValue(0,GROUND_ENTER,0);
+                SetScriptVarValue(0,GROUND_ENTER_LINK,0);
                 r7 = 0x71;
                 break;
             case 0xe:
@@ -294,18 +294,18 @@ u32 xxx_script_related_8098468(s32 param_1)
                 break;
         }
         if (gUnknown_20398B9 == 0) {
-            s32 varD = GetScriptVarValue(0,0xd);
-            SetScriptVarValue(0,0x18,gUnknown_20398B4);
+            s32 var = GetScriptVarValue(0,GROUND_ENTER);
+            SetScriptVarValue(0,START_MODE,gUnknown_20398B4);
             if (gUnknown_20398B4 != 1) {
                 if (gUnknown_20398B4 == 3) {
-                    SetScriptVarValue(0,0xf,gUnknown_20398BE);
+                    SetScriptVarValue(0,GROUND_GETOUT,gUnknown_20398BE);
                 }
                 else {
-                    SetScriptVarValue(0,0xf,varD);
+                    SetScriptVarValue(0,GROUND_GETOUT,var);
                 }
             }
-            SetScriptVarValue(0,0xd,gUnknown_20398BE);
-            SetScriptVarValue(0,0xe,gUnknown_20398C0);
+            SetScriptVarValue(0,GROUND_ENTER,gUnknown_20398BE);
+            SetScriptVarValue(0,GROUND_ENTER_LINK,gUnknown_20398C0);
         }
         gUnknown_20398B4 = 2;
         gUnknown_20398A8 = 0;
@@ -424,53 +424,53 @@ u32 xxx_script_related_8098468(s32 param_1)
     else {
         switch (gUnknown_20398A8) {
             case 3:
-                SetScriptVarValue(0,0x13,-1);
-                SetScriptVarValue(0,0x14,-1);
-                SetScriptVarValue(0,0x18,4);
-                SetScriptVarValue(0,0x16,4);
-                SetScriptVarValue(0,0xf,GetScriptVarValue(0,0xd));
+                SetScriptVarValue(0,DUNGEON_ENTER,-1);
+                SetScriptVarValue(0,DUNGEON_ENTER_INDEX,-1);
+                SetScriptVarValue(0,START_MODE,4);
+                SetScriptVarValue(0,DUNGEON_RESULT,4);
+                SetScriptVarValue(0,GROUND_GETOUT,GetScriptVarValue(0,GROUND_ENTER));
                 return 5;
             case 4:
-                SetScriptVarValue(0,0x13,0);
-                SetScriptVarValue(0,0x18,5);
-                SetScriptVarValue(0,0x16,5);
-                SetScriptVarValue(0,0x13,-1);
+                SetScriptVarValue(0,DUNGEON_ENTER,0);
+                SetScriptVarValue(0,START_MODE,5);
+                SetScriptVarValue(0,DUNGEON_RESULT,5);
+                SetScriptVarValue(0,DUNGEON_ENTER,-1);
                 return 6;
             case 5: {
                 s32 sVar2 = sub_80A2654(gUnknown_20398C4);
-                SetScriptVarValue(0,0x13,gUnknown_20398C4);
-                SetScriptVarValue(0,0x14,sVar2);
-                SetScriptVarArrayValue(0,0x30,(u16) gUnknown_20398C4,1);
-                SetScriptVarValue(0,0x18,7);
-                SetScriptVarValue(0,0x16,7);
-                if ((s16)GetScriptVarValue(0,0x11) == 10) {
-                    SetScriptVarValue(0,0x11,0);
+                SetScriptVarValue(0,DUNGEON_ENTER,gUnknown_20398C4);
+                SetScriptVarValue(0,DUNGEON_ENTER_INDEX,sVar2);
+                SetScriptVarArrayValue(0,DUNGEON_ENTER_LIST,(u16) gUnknown_20398C4,1);
+                SetScriptVarValue(0,START_MODE,7);
+                SetScriptVarValue(0,DUNGEON_RESULT,7);
+                if ((s16)GetScriptVarValue(0,GROUND_PLACE) == 10) {
+                    SetScriptVarValue(0,GROUND_PLACE,0);
                 }
                 return 7;
             }
             case 6:
-                SetScriptVarValue(0,0x13,0x51);
-                SetScriptVarValue(0,0x14,gUnknown_20398C4);
-                SetScriptVarValue(0,0x18,7);
-                SetScriptVarValue(0,0x16,7);
-                if ((s16)GetScriptVarValue(0,0x11) == 10) {
-                    SetScriptVarValue(0,0x11,0);
+                SetScriptVarValue(0,DUNGEON_ENTER,0x51);
+                SetScriptVarValue(0,DUNGEON_ENTER_INDEX,gUnknown_20398C4);
+                SetScriptVarValue(0,START_MODE,7);
+                SetScriptVarValue(0,DUNGEON_RESULT,7);
+                if ((s16)GetScriptVarValue(0,GROUND_PLACE) == 10) {
+                    SetScriptVarValue(0,GROUND_PLACE,0);
                 }
                 return 8;
             case 7:
-                SetScriptVarValue(0,0x13,0x50);
-                SetScriptVarValue(0,0x14,gUnknown_2039950);
-                SetScriptVarValue(0,0x18,7);
-                SetScriptVarValue(0,0x16,7);
+                SetScriptVarValue(0,DUNGEON_ENTER,0x50);
+                SetScriptVarValue(0,DUNGEON_ENTER_INDEX,gUnknown_2039950);
+                SetScriptVarValue(0,START_MODE,7);
+                SetScriptVarValue(0,DUNGEON_RESULT,7);
                 return 9;
             case 8:
-                SetScriptVarValue(0,0x13,0x52);
-                SetScriptVarValue(0,0x14,gUnknown_20398C4);
-                SetScriptVarValue(0,0x18,7);
-                SetScriptVarValue(0,0x16,7);
+                SetScriptVarValue(0,DUNGEON_ENTER,0x52);
+                SetScriptVarValue(0,DUNGEON_ENTER_INDEX,gUnknown_20398C4);
+                SetScriptVarValue(0,START_MODE,7);
+                SetScriptVarValue(0,DUNGEON_RESULT,7);
                 return 10;
             default:
-                SetScriptVarValue(0,0x18,1);
+                SetScriptVarValue(0,START_MODE,1);
                 FadeOutAllMusic(0x10);
                 return 0xe;
         }
