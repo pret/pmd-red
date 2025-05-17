@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "ground_event.h"
 #include "ground_script.h"
 #include "debug.h"
 #include "memory.h"
@@ -230,17 +231,17 @@ bool8 sub_80ADC64(s32 id, ScriptInfoSmall *dst)
     }
 }
 
-s16 FindGroundEvent(u32 flags, s32 *arg1, s32 *arg2)
+s16 FindGroundEvent(u32 flags, PixelPos *arg1, PixelPos *arg2)
 {
     s32 i;
     GroundEvent *ptr = &gGroundEvents[0];
     for (i = 0; i < 0x20; i = (s16)(i + 1), ptr++) {
         if (ptr->unk2 != -1
             && (ptr->unk8 & flags)
-            && ptr->unkC < arg2[0]
-            && ptr->unk14 > arg1[0]
-            && ptr->unk10 < arg2[1]
-            && ptr->unk18 > arg1[1])
+            && ptr->unkC < arg2->x
+            && ptr->unk14 > arg1->x
+            && ptr->unk10 < arg2->y
+            && ptr->unk18 > arg1->y)
         {
             return i;
         }
@@ -249,19 +250,19 @@ s16 FindGroundEvent(u32 flags, s32 *arg1, s32 *arg2)
     return -1;
 }
 
-UNUSED static s16 UnusedFindGroundEvent(u32 flags, s32 *arg1, s32 *arg2)
+UNUSED static s16 UnusedFindGroundEvent(u32 flags, PixelPos *arg1, PixelPos *arg2)
 {
     s32 i;
     GroundEvent *ptr = &gGroundEvents[0];
     for (i = 0; i < 0x20; i = (s16)(i + 1), ptr++) {
         if (ptr->unk2 != -1 && (ptr->unk8 & flags)) {
-            struct TestStruct r = {0};
-            r.unk0 = (ptr->unkC + ptr->unk14) / 2;
-            r.unk4 = (ptr->unk10 + ptr->unk18) / 2;
-            if (r.unk0 < arg2[0]
-                && r.unk0 > arg1[0]
-                && r.unk4 < arg2[1]
-                && r.unk4 > arg1[1])
+            PixelPos resultPos = {0};
+            resultPos.x = (ptr->unkC + ptr->unk14) / 2;
+            resultPos.y = (ptr->unk10 + ptr->unk18) / 2;
+            if (resultPos.x < arg2->x
+                && resultPos.x > arg1->x
+                && resultPos.y < arg2->y
+                && resultPos.y > arg1->y)
             {
                 return i;
             }
