@@ -66,6 +66,7 @@ typedef struct unkStruct_3001B7C
 void GroundSprite_Reset(s32);
 void GroundSprite_ExtendPaletteAdd(struct UnkGroundSpriteStruct *ptr, u16);
 void GroundSprite_ExtendPaletteDelete(struct UnkGroundSpriteStruct *ptr);
+bool8 IsOnscreen_80A675C(struct UnkGroundSpriteStruct *ptr, PixelPos *pixPosArg);
 void sub_80A67CC(struct UnkGroundSpriteStruct *ptr, struct UnkGroundSpriteSubStructx48 *a1, s32 a2);
 void sub_80A68A0(struct UnkGroundSpriteStruct *ptr);
 void sub_80A6EFC(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_);
