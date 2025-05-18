@@ -4,7 +4,7 @@
 #include "structs/str_position.h"
 
 // ground_lives.s
-s16 sub_80A7AE8(s16);
+s32 sub_80A7AE8(s16);
 s16 sub_80A8FD8(s32, PixelPos*);
 
 #endif // GUARD_GROUND_LIVES_H

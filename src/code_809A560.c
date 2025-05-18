@@ -408,7 +408,7 @@ bool8 sub_809A8B8(s32 param_1, s32 param_2)
     }
 
     if (local_28 != -1) {
-        s32 sVar3 = sub_80A7AE8(local_28);
+        s32 sVar3 = (s16) sub_80A7AE8(local_28);
         if (sVar3 >= 0) {
             unkPtr->unk0 = local_28;
             unkPtr->speciesID = sub_80A8BFC(sVar3);

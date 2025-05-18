@@ -153,7 +153,7 @@ u32 sub_801D178(void)
     if (sUnknown_203B250->unkC != GetPlayerPokemonStruct())
         goto _ret4;
 
-    if (sub_80A7AE8(7) < 0)
+    if ((s16) sub_80A7AE8(7) < 0)
         return 0;
 
     pokeStruct = sub_808D3F8();

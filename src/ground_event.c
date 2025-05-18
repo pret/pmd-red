@@ -12,10 +12,8 @@ typedef struct GroundEvent
     s16 unk4; // scriptID or group?
     s8 unk6; // sector
     s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
+    PixelPos unkC;
+    PixelPos unk14;
     const ScriptCommand *unk1C;
 } GroundEvent;
 
@@ -121,30 +119,6 @@ void GroundEvent_Cancel(s32 scriptID, s32 sector)
     }
 }
 
-static inline void SetUnkInGroundEvent(const CompactPos *posPtr, s32 *dst)
-{
-    if (!(posPtr->xFlags & 4)) {
-        s32 unk = posPtr->xTiles << 11;
-        dst[0] = unk;
-        if (posPtr->xFlags & 2) {
-            dst[0] = unk + 0x400;
-        }
-    }
-    if (!(posPtr->yFlags & 4)) {
-        s32 unk = posPtr->yTiles << 11;
-        dst[1] = unk;
-        if (posPtr->yFlags & 2) {
-            dst[1] = unk + 0x400;
-        }
-    }
-}
-
-struct TestStruct
-{
-    s32 unk0;
-    s32 unk4;
-};
-
 s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, s32 sector)
 {
     s32 i;
@@ -153,8 +127,8 @@ s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, s32 sec
     s32 sector_s32 = (s8) sector;
     const ScriptRef *script;
     GroundEvent *ptr;
-    struct TestStruct r;
-    s32 sp[2];
+    PixelPos pos;
+    PixelPos resultPos;
 
     ASM_MATCH_TRICK(sector_s32);
 
@@ -193,13 +167,13 @@ s32 GroundEvent_Add(s32 id, const GroundEventData *eventData, s32 group, s32 sec
             break;
     }
 
-    r = (struct TestStruct) {eventData->kind << 11, eventData->unk1 << 11};
-    SetUnkInGroundEvent(&eventData->pos, sp);
+    pos = (PixelPos) {eventData->kind << 11, eventData->unk1 << 11};
+    SetUnkInGroundEvent(&eventData->pos, &resultPos);
 
-    ptr->unkC = sp[0];
-    ptr->unk14 = sp[0] + r.unk0;
-    ptr->unk10 = sp[1];
-    ptr->unk18 = sp[1] + r.unk4;
+    ptr->unkC.x = resultPos.x;
+    ptr->unk14.x = resultPos.x + pos.x;
+    ptr->unkC.y = resultPos.y;
+    ptr->unk14.y = resultPos.y + pos.y;
     ptr->unk1C = eventData->script->script;
 
     GroundLives_CancelBlank_2();
@@ -238,10 +212,10 @@ s16 FindGroundEvent(u32 flags, PixelPos *arg1, PixelPos *arg2)
     for (i = 0; i < 0x20; i = (s16)(i + 1), ptr++) {
         if (ptr->unk2 != -1
             && (ptr->unk8 & flags)
-            && ptr->unkC < arg2->x
-            && ptr->unk14 > arg1->x
-            && ptr->unk10 < arg2->y
-            && ptr->unk18 > arg1->y)
+            && ptr->unkC.x < arg2->x
+            && ptr->unk14.x > arg1->x
+            && ptr->unkC.y < arg2->y
+            && ptr->unk14.y > arg1->y)
         {
             return i;
         }
@@ -257,8 +231,8 @@ UNUSED static s16 UnusedFindGroundEvent(u32 flags, PixelPos *arg1, PixelPos *arg
     for (i = 0; i < 0x20; i = (s16)(i + 1), ptr++) {
         if (ptr->unk2 != -1 && (ptr->unk8 & flags)) {
             PixelPos resultPos = {0};
-            resultPos.x = (ptr->unkC + ptr->unk14) / 2;
-            resultPos.y = (ptr->unk10 + ptr->unk18) / 2;
+            resultPos.x = (ptr->unkC.x + ptr->unk14.x) / 2;
+            resultPos.y = (ptr->unkC.y + ptr->unk14.y) / 2;
             if (resultPos.x < arg2->x
                 && resultPos.x > arg1->x
                 && resultPos.y < arg2->y

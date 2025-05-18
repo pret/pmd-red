@@ -315,13 +315,10 @@ void InitAction(Action *a0)
     InitScriptData(&a0->scriptData2);
 }
 
-void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s16 group, s8 sector)
+void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s32 group, s32 sector)
 {
-    s32 group_s32;
-    s32 sector_s32;
-
-    group_s32 = group;
-    sector_s32 = sector;
+    s32 group_s32 = (s16) group;
+    s32 sector_s32 = (s8) sector;
 
     InitAction(action);
 
@@ -360,28 +357,28 @@ bool8 sub_809D678(Action *action)
     return action->scriptData.savedState == 0 ? FALSE : TRUE;
 }
 
-bool8 sub_809D684(Action *action, ScriptCommand **scriptPtr)
+bool8 sub_809D684(Action *action, ScriptInfoSmall *scriptInfo)
 {
     if(action->scriptData.savedState != 0)
     {
         if(action->scriptData.savedScript.ptr != 0)
         {
-            if(action->scriptData.savedScript.ptr2 == *scriptPtr) return 1;
+            if(action->scriptData.savedScript.ptr2 == scriptInfo->ptr) return 1;
         }
         else
         {
-            if(action->scriptData.script.ptr2 == *scriptPtr) return 1;
+            if(action->scriptData.script.ptr2 == scriptInfo->ptr) return 1;
         }
     }
     if(action->scriptData2.savedState != 0)
     {
         if(action->scriptData2.savedScript.ptr != 0)
         {
-            if(action->scriptData2.savedScript.ptr2 == *scriptPtr) return 1;
+            if(action->scriptData2.savedScript.ptr2 == scriptInfo->ptr) return 1;
         }
         else
         {
-            if(action->scriptData2.script.ptr2 == *scriptPtr) return 1;
+            if(action->scriptData2.script.ptr2 == scriptInfo->ptr) return 1;
         }
     }
     return 0;
@@ -3237,7 +3234,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 s32 r4;
                 PixelPos sp_318;
                 PixelPos sp_320;
-                s32 r5 = sub_80A7AE8(r2);
+                s32 r5 = (s16) sub_80A7AE8(r2);
                 if(r5 >= 0) {
                     r4 = (r3 << 8);
                     action->callbacks->getHitboxCenter(action->parentObject, &sp_318);
