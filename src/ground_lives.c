@@ -33,18 +33,6 @@ struct unkStruct_3001B80
 };
 IWRAM_INIT struct unkStruct_3001B80 *gGroundLivesMeta = NULL;
 
-// TODO: Merge with code 809C5C4
-struct Tempsub_809CD68Struct
-{
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    u8 unkC;
-    s32 unk10;
-    s32 unk14;
-    u8 unk18;
-};
-
 struct unkStruct_3001B84_sub
 {
     // size: 0x1F0
@@ -62,7 +50,7 @@ struct unkStruct_3001B84_sub
     PixelPos unk30;
     Action unk38;
     u32 unk11C;
-    struct Tempsub_809CD68Struct unk120;
+    struct Struct3001B84_sub120 unk120;
     s16 unk13C;
     s16 unk13E;
     s16 unk140;
@@ -75,7 +63,7 @@ struct unkStruct_3001B84_sub
     u16 unk15E;
     u16 unk160;
     s32 unk164;
-    u16 unk168;
+    s16 unk168;
     u16 unk16A;
     u8 fill16C[1];
     struct UnkGroundSpriteStruct unk170;
@@ -97,6 +85,7 @@ const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
 extern DebugLocation gUnknown_811808C;
 extern u8 gUnknown_8118098[];
 extern u8 gUnknown_81180BC[];
+extern u8 gUnknown_81181B0[];
 
 void AllocGroundLives(void)
 {
@@ -598,19 +587,24 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
 }
 
 extern const char gUnknown_811811C[];
+extern const char gUnknown_8118194[];
 
-extern void sub_809CD68(struct Tempsub_809CD68Struct *dst);
+extern void sub_809CD68(struct Struct3001B84_sub120 *dst);
 
 extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
 extern void sub_80A7428(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 monsterId_, s32 a3);
 extern void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
 extern bool8 ExecutePredefinedScript(Action *param_1, s32 *param_2, s16 index, const DebugLocation *debug);
 extern void sub_809D170(s32 r0, s32 r1);
+extern void sub_80A74E4(struct UnkGroundSpriteStruct *ptr);
 
 extern const CallbackData gGroundLivesCallbacks[];
 extern const DebugLocation gUnknown_8118170;
 extern const DebugLocation gUnknown_811817C;
 extern const DebugLocation gUnknown_8118188;
+extern const DebugLocation gUnknown_81181F4;
+extern const DebugLocation gUnknown_8118218;
+extern const DebugLocation gUnknown_8118250;
 
 void sub_80A9750(struct unkStruct_3001B84_sub *ptr, u16 a1);
 
@@ -851,6 +845,235 @@ s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_
     }
 
     return id;
+}
+
+void GroundLives_Delete(s32 id_)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    Log(0, gUnknown_8118194, id);
+    sub_80A74E4(&livesPtr->unk170);
+    InitAction2(&livesPtr->unk38);
+    livesPtr->unk2 = -1;
+}
+
+extern void sub_80A6688(struct UnkGroundSpriteStruct *ptr, s32 a0);
+extern void sub_80AB5A4(void);
+
+void sub_80A86C8(s32 id_, u32 flags)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1) {
+        if (livesPtr->unk13C == 0) {
+            if (flags & 0x3000) {
+                sub_80AB5A4();
+            }
+        }
+        else {
+            if (flags & 0x1000) {
+                struct GroundLivesMeta_Sub1 *metaPtr = &gGroundLivesMeta->unk0[livesPtr->unk13C];
+
+                metaPtr->unk8 = -1;
+                metaPtr->unk0 = 0;
+                metaPtr->unk4 = 0;
+            }
+        }
+
+        livesPtr->unk11C |= flags;
+        sub_80A6688(&livesPtr->unk170, livesPtr->unk11C);
+    }
+}
+
+void sub_80A8750(s32 id_, u32 flags)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1) {
+        if (livesPtr->unk13C == 0) {
+            if (flags & 0x3000) {
+                sub_80AB5A4();
+            }
+        }
+
+        livesPtr->unk11C &= ~(flags);
+        sub_80A6688(&livesPtr->unk170, livesPtr->unk11C);
+    }
+}
+
+extern void sub_809CD8C(struct Struct3001B84_sub120 *dst, s32 a1);
+extern bool8 sub_809B1C0(s32 a0, u32 kind, u8 *a2);
+extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
+extern bool8 sub_809D678(Action *action);
+
+void sub_80A87AC(s32 id_, s32 a1)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1) {
+        sub_809CD8C(&livesPtr->unk120, a1);
+    }
+}
+
+bool8 sub_80A87E0(s32 id_, u8 *a1)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1 && sub_809B1C0(7, 0, a1)) {
+        sub_809CD8C(&livesPtr->unk120, 5);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+Action *sub_80A882C(s32 id_)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1) {
+        return &livesPtr->unk38;
+    }
+
+    return NULL;
+}
+
+UNUSED static bool8 sub_80A885C(s32 id_, ScriptInfoSmall *scriptInfo, s32 a2_)
+{
+    s32 id = (s16) id_;
+    s32 a2 = (s16) a2_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1) {
+        return GetPredefinedScript(&livesPtr->unk38, scriptInfo, a2);
+    }
+
+    return FALSE;
+}
+
+UNUSED static bool8 sub_80A88A0(s32 id_)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1) {
+        return sub_809D678(&livesPtr->unk38);
+    }
+
+    return FALSE;
+}
+
+bool8 GroundLives_ExecuteScript(s32 id_, s32 *a1, ScriptInfoSmall *scriptInfo)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    Log(0, gUnknown_81181B0, id, livesPtr->unk2, scriptInfo);
+
+    if (livesPtr->unk2 != -1) {
+        GroundScript_ExecutePP(&livesPtr->unk38, a1, scriptInfo, &gUnknown_81181F4);
+        livesPtr->unk15C = 1;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 _ExecutePlayerScript(struct unkStruct_3001B84_sub *livesPtr, s32 *a1, ScriptInfoSmall *scriptInfo)
+{
+    livesPtr->unk15E = 0x300;
+    livesPtr->unk160 = 1;
+    livesPtr->unk164 = 0;
+    if (livesPtr->unk168 != 0x807) {
+        livesPtr->unk168 = 0x807;
+        livesPtr->unk15C = 1;
+    }
+
+    if (scriptInfo != NULL) {
+        return GroundScript_ExecutePP(&livesPtr->unk38, a1, scriptInfo, &gUnknown_8118218);
+    }
+
+    return FALSE;
+}
+
+UNUSED static bool8 sub_80A89AC(s32 id_, s32 *a1, ScriptInfoSmall *scriptInfo)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    return _ExecutePlayerScript(livesPtr, a1, scriptInfo);
+}
+
+bool8 GroundLives_ExecutePlayerScriptActionLives(s32 id1_, s32 id2_)
+{
+    s32 id1 = (s16) id1_;
+    s32 id2 = (s16) id2_;
+
+    if (id1 >= 0 && id2 >= 0) {
+        ScriptInfoSmall scriptInfo;
+        struct unkStruct_3001B84_sub *livesPtr1 = &gGroundLives->array[id1];
+        struct unkStruct_3001B84_sub *livesPtr2 = &gGroundLives->array[id2];
+
+        if (livesPtr1->unk2 != -1 && livesPtr2->unk2 != -1 && GetPredefinedScript(&livesPtr2->unk38, &scriptInfo, 2)) {
+            s32 sp = 1;
+
+            sp |= (id2 << 0x10);
+            ExecutePredefinedScript(&livesPtr2->unk38, (void *) &livesPtr1->unk38.unk8, 3, &gUnknown_8118250); // TODO: fix unk8 field?
+            return _ExecutePlayerScript(livesPtr1, &sp, &scriptInfo);
+        }
+    }
+
+    return FALSE;
+}
+
+extern bool8 sub_80AC274(s32 a0, ScriptInfoSmall *scriptInfo, s32 a2);
+extern void GroundObject_ExecuteScript(s32, void *, ScriptInfoSmall *);
+extern bool8 sub_80ADC64(s32 id, ScriptInfoSmall *dst);
+
+bool8 sub_80A8A5C(s32 id1_, s32 id2_)
+{
+    s32 id1 = (s16) id1_;
+    s32 id2 = (s16) id2_;
+
+    if (id1 >= 0 && id2 >= 0) {
+        ScriptInfoSmall scriptInfo1;
+        struct unkStruct_3001B84_sub *livesPtr1 = &gGroundLives->array[id1];
+
+        if (sub_80AC274(id2, &scriptInfo1, 2)) {
+            s32 sp = 2;
+            ScriptInfoSmall scriptInfo2;
+
+            sp |= (id2 << 0x10);
+            sub_80AC274(id2, &scriptInfo2, 3);
+            GroundObject_ExecuteScript(id2, &livesPtr1->unk38.unk8, &scriptInfo2);
+            return _ExecutePlayerScript(livesPtr1, &sp, &scriptInfo1);
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 sub_80A8ACC(s32 id1_, s32 id2_)
+{
+    s32 id1 = (s16) id1_;
+    s32 id2 = (s16) id2_;
+
+    if (id1 >= 0 && id2 >= 0) {
+        ScriptInfoSmall scriptInfo;
+        struct unkStruct_3001B84_sub *livesPtr1 = &gGroundLives->array[id1];
+
+        if (sub_80ADC64(id2, &scriptInfo)) {
+            return _ExecutePlayerScript(livesPtr1, NULL, &scriptInfo);
+        }
+    }
+
+    return FALSE;
 }
 
 //
