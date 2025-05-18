@@ -1035,6 +1035,10 @@ bool8 GroundLives_ExecutePlayerScriptActionLives(s32 id1_, s32 id2_)
 extern bool8 sub_80AC274(s32 a0, ScriptInfoSmall *scriptInfo, s32 a2);
 extern void GroundObject_ExecuteScript(s32, void *, ScriptInfoSmall *);
 extern bool8 sub_80ADC64(s32 id, ScriptInfoSmall *dst);
+extern bool8 GroundScriptNotify(Action *param_1, s32 param_2);
+extern bool8 GroundScript_Cancel(Action *r0);
+extern PokemonStruct1 *sub_80A8D54(s32);
+extern s32 sub_809CDB8(struct Struct3001B84_sub120 *dst);
 
 bool8 sub_80A8A5C(s32 id1_, s32 id2_)
 {
@@ -1074,6 +1078,138 @@ bool8 sub_80A8ACC(s32 id1_, s32 id2_)
     }
 
     return FALSE;
+}
+
+bool8 GroundLivesNotifyAll(s32 a0_)
+{
+    s32 i;
+    s32 a0 = (s16) a0_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[0];
+    bool8 ret = FALSE;
+
+    for (i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
+        if (livesPtr->unk2 != -1) {
+            ret |= GroundScriptNotify(&livesPtr->unk38, a0);
+        }
+    }
+
+    return ret;
+}
+
+bool8 GroundLivesCancelAll(void)
+{
+    s32 i;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[0];
+    bool8 ret = FALSE;
+
+    for (i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
+        if (livesPtr->unk2 != -1) {
+            ret |= GroundScript_Cancel(&livesPtr->unk38);
+        }
+    }
+
+    return ret;
+}
+
+s32 sub_80A8BBC(s32 id_)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    return livesPtr->unk2;
+}
+
+s32 sub_80A8BD8(s32 id_, u32 *a1)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    *a1 = livesPtr->unk11C;
+    return livesPtr->unk2;
+}
+
+s32 sub_80A8BFC(s32 id_)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1) {
+        return livesPtr->unk8;
+    }
+
+    return 0;
+}
+
+s32 sub_80A8C2C(s32 a0)
+{
+    s16 sp = a0;
+    s16 species;
+
+    sub_80A7DDC(&sp, &species);
+    return species;
+}
+
+s32 sub_80A8C4C(s32 id_, DungeonLocation *dungLoc)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1) {
+        PokemonStruct1 *monStrPtr = sub_80A8D54(livesPtr->unk2);
+        if (monStrPtr != NULL) {
+            *dungLoc = monStrPtr->dungeonLocation;
+        }
+        else {
+            dungLoc->id = NUM_DUNGEONS + 1;
+            dungLoc->floor = 0;
+        }
+
+        return livesPtr->unk8;
+    }
+
+    return 0;
+}
+
+extern const s16 gUnknown_8117FCE[];
+
+bool8 sub_80A8C98(s32 id_)
+{
+    const s16 *arr;
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1) {
+        for (arr = gUnknown_8117FCE; *arr != 0; arr++) {
+            if (*arr == livesPtr->unk8) {
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 sub_80A8CF0(s32 cmpVal_)
+{
+    const s16 *arr;
+    s32 cmpVal = (s16) cmpVal_;
+
+    for (arr = gUnknown_8117FCE; *arr != 0; arr++) {
+        if (*arr == (s16) cmpVal) {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 sub_80A8D20(void)
+{
+    s32 id = (s16) sub_80A7AE8(0);
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    s32 val = sub_809CDB8(&livesPtr->unk120);
+
+    return (val == 1);
 }
 
 //
