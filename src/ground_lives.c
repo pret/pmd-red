@@ -607,7 +607,7 @@ extern const DebugLocation gUnknown_81181F4;
 extern const DebugLocation gUnknown_8118218;
 extern const DebugLocation gUnknown_8118250;
 
-void sub_80A9750(struct unkStruct_3001B84_sub *ptr, u16 a1);
+bool8 sub_80A9750(struct unkStruct_3001B84_sub *ptr, u16 a1);
 
 s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_)
 {
@@ -1370,7 +1370,7 @@ s32 sub_80A8FD8(s32 id_, PixelPos *pixelPos)
     return livesPtr->unk2;
 }
 
-extern void sub_80A9F20(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPos);
+s32 sub_80A9F20(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPos);
 
 UNUSED static s32 sub_80A9028(s32 id_, PixelPos *pixelPos)
 {
@@ -1647,6 +1647,143 @@ s32 sub_80A95AC(struct unkStruct_3001B84_sub *livesPtr, PixelPos *posArg1, Pixel
     }
 
     return 0;
+}
+
+extern const s16 gUnknown_8117F64[];
+
+bool8 sub_80A9750(struct unkStruct_3001B84_sub *livesPtr, u16 a1)
+{
+    s32 r2;
+    u16 f1 = a1 & 0xFF;
+    u16 f2 = (a1 & 0xF00);
+
+    if (f1 != 0) {
+        livesPtr->unk160 = f1;
+    }
+    if (f2 != 0) {
+        livesPtr->unk15E = f2;
+    }
+
+    if (livesPtr->unk160 == 1) {
+        if (a1 == 0x1000) {
+            livesPtr->unk164 = 4;
+            r2 = 0x800;
+        }
+        else {
+            if (livesPtr->unk164 > 0) {
+                r2 = 0x800;
+            }
+            else {
+                r2 = 0x807;
+            }
+        }
+    }
+    else if (livesPtr->unk160 == 2) {
+        if (a1 == 0x1000) {
+            livesPtr->unk164 = 4;
+            r2 = 0x800;
+        }
+        else {
+            if (livesPtr->unk164 > 0) {
+                r2 = 0x800;
+            }
+            else {
+                // Peak programming right here
+                switch (livesPtr->unk8) {
+                    case 12: case 15: case 22: case 41: case 42: case 49: case 72: case 73: case 74: case 81: case 82:
+                    case 91: case 92: case 93: case 109: case 110: case 116: case 117: case 118: case 119: case 130:
+                    case 133: case 137: case 142: case 144: case 145: case 146: case 150: case 151: case 165: case 166:
+                    case 169: case 170: case 171: case 187: case 188: case 189: case 190: case 191: case 193: case 198:
+                    case 230: case 232: case 236: case 248: case 251: case 255: case 258: case 271: case 275: case 276:
+                    case 292: case 294: case 303: case 304: case 309: case 316: case 317: case 332: case 343: case 344:
+                    case 345: case 346: case 355: case 358: case 362: case 363: case 364: case 365: case 368: case 369:
+                    case 374: case 376: case 377: case 378: case 379: case 381: case 383: case 386: case 390: case 395:
+                    case 396: case 397: case 398: case 402: case 403: case 406: case 408: case 409: case 410: case 200:
+                    case 201: case 202: case 203: case 204: case 205: case 206: case 207: case 208: case 209: case 210:
+                    case 211: case 212: case 213: case 214: case 215: case 216: case 217: case 218: case 219: case 220:
+                    case 221: case 222: case 223: case 224: case 225: case 226: case 412: case 413: case 414: case 415:
+                    case 416: case 417: case 418: case 419:
+                        r2 = 0x807;
+                        break;
+                    case 50: case 51: case 53: case 58: case 59: case 98: case 99: case 134: case 135: case 161: case 162:
+                    case 164: case 252: case 277: case 286: case 287: case 323: case 326: case 338: case 339: case 354:
+                    case 359: case 360: case 391: case 401:
+                        r2 = 0x307;
+                        break;
+                    case 65:
+                        if (livesPtr->unk168 != 0x807 && livesPtr->unk168 != 0x307) {
+                            r2 = 0x300;
+                        }
+                        else {
+                            r2 = 0x807;
+                        }
+                        break;
+                    default:
+                        r2 = 0x300;
+                }
+            }
+        }
+    }
+    else {
+        r2 = gUnknown_8117F64[livesPtr->unk160];
+    }
+
+    if (!(r2 & 0x700)) {
+        switch (livesPtr->unk15E) {
+            case 0x100:
+                r2 = (s16) (r2 | 0x300);
+                break;
+            case 0x200:
+                r2 = (s16) (r2 | 0x100);
+                break;
+            case 0x300:
+                break;
+            case 0x400:
+                r2 = (s16) (r2 | 0x200);
+                break;
+            case 0x800:
+                r2 = (s16) (r2 | 0x400);
+                break;
+        }
+    }
+
+    if (livesPtr->unk168 != (s16) r2) {
+        livesPtr->unk168 = r2;
+        livesPtr->unk15C = 1;
+    }
+    else if (livesPtr->unk168 & 0x1000) {
+        livesPtr->unk15C = 1;
+    }
+
+    return FALSE;
+}
+
+s32 sub_80A9F20(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPosArg)
+{
+    s32 ret;
+    PixelPos pixPos1, pixPos2;
+
+    pixPos1.x = pixelPosArg->x - livesPtr->unk14.x;
+    pixPos1.y = pixelPosArg->y - livesPtr->unk14.y;
+
+    pixPos2.x = pixelPosArg->x + livesPtr->unk14.x;
+    pixPos2.y = pixelPosArg->y + livesPtr->unk14.y;
+
+    if (pixPos1.x < livesPtr->unk28.x || pixPos2.x >= livesPtr->unk30.x
+        || pixPos1.y < livesPtr->unk28.y || pixPos2.y >= livesPtr->unk30.y)
+    {
+        return TRUE;
+    }
+
+    ret = sub_80A9488(livesPtr, &pixPos1, &pixPos2);
+    if (ret != 0) {
+        return ret;
+    }
+    else {
+        livesPtr->unk144 = pixPos1;
+        livesPtr->unk14C = pixPos2;
+        return 0;
+    }
 }
 
 //
