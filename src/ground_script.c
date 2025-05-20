@@ -114,7 +114,6 @@ void sub_80A8BD8(s16, s32*);
 u32 sub_80A8C2C();
 u32 sub_80A8C98();
 PokemonStruct1 *sub_80A8D54(s16);
-s16 sub_80A8FD8(s32, PixelPos*);
 s16 sub_80A8F9C(s32, PixelPos*);
 u32 sub_80A9050();
 u32 sub_80A9090();

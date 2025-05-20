@@ -13,6 +13,8 @@
 #include "code_80958E8.h"
 #include "debug.h"
 #include "other_random.h"
+#include "text_util.h"
+#include "code_8002774.h"
 
 struct GroundLivesMeta_Sub1
 {
@@ -41,8 +43,7 @@ struct unkStruct_3001B84_sub
     s16 unk4;
     s8 unk6;
     s16 unk8;
-    s32 unkC;
-    s32 unk10;
+    PixelPos unkC;
     PixelPos unk14;
     s8 unk1C;
     PixelPos unk20;
@@ -720,10 +721,10 @@ s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_
             break;
     }
 
-    livesPtr->unkC = typeDataPtr->unk8 << 11;
-    livesPtr->unk10 = typeDataPtr->unk9 << 11;
-    livesPtr->unk14.x = livesPtr->unkC / 2;
-    livesPtr->unk14.y = livesPtr->unk10 / 2;
+    livesPtr->unkC.x = typeDataPtr->unk8 << 11;
+    livesPtr->unkC.y = typeDataPtr->unk9 << 11;
+    livesPtr->unk14.x = livesPtr->unkC.x / 2;
+    livesPtr->unk14.y = livesPtr->unkC.y / 2;
     livesPtr->unk1C = ptr->unk1;
     SetUnkInGroundEvent(&ptr->pos, &livesPtr->unk20);
     if (var24) {
@@ -793,7 +794,7 @@ s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_
             InitAction2(&livesPtr->unk38);
             InitActionWithParams(&livesPtr->unk38, gGroundLivesCallbacks, livesPtr, group, sector);
             GroundScript_ExecutePP(&livesPtr->unk38, NULL, &gGroundLivesMeta->unk32C, &gUnknown_8118170);
-            ptr2++;ptr2--;
+            ASM_MATCH_TRICK(ptr2);
             *ptr1 = r10;
             *ptr2 = r9;
             r8 = TRUE;
@@ -1210,6 +1211,246 @@ bool8 sub_80A8D20(void)
     s32 val = sub_809CDB8(&livesPtr->unk120);
 
     return (val == 1);
+}
+
+PokemonStruct1 *sub_80A8D54(s32 a0)
+{
+    s16 sp = a0;
+
+    sub_80A7B94(&sp);
+    if (sp == 1 || sp == 6 || sp == 33) {
+        return sub_808D3BC();
+    }
+    if (sp == 2 || sp == 7 || sp == 34) {
+        return sub_808D3F8();
+    }
+    if (sp == 3 || sp == 8 || sp == 35) {
+        return GetPlayerPokemonStruct();
+    }
+
+    if (sp >= 10 && sp <= 13) {
+        s32 val;
+        s32 spArray[4];
+        s32 id = sp - 10;
+
+        if (sub_8098F88())
+            return NULL;
+
+        if (sub_80023E4(9)) {
+            val = sub_808D6A4(spArray);
+        }
+        else {
+            val = sub_808D654(spArray);
+        }
+
+        if (id >= val)
+            return NULL;
+
+        return &gRecruitedPokemonRef->pokemon[spArray[id]];
+    }
+    else if (sp >= 14 && sp <= 29) {
+        PokemonStruct1 *monPtr;
+        s32 id;
+        FriendAreaCapacity fAreaCapacity;
+        u8 map = sub_8002658(GetScriptVarValue(NULL, GROUND_MAP));
+
+        if (map == 0)
+            return NULL;
+
+        id = sp - 14;
+        GetFriendAreaCapacity2(map, &fAreaCapacity, FALSE, FALSE);
+        if (id >= fAreaCapacity.maxPokemon)
+            return NULL;
+
+        monPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
+        if (sub_80023E4(9)) {
+            if (PokemonFlag1(monPtr) && !monPtr->isTeamLeader) {
+                return monPtr;
+            }
+        }
+        else {
+            if (PokemonFlag1(monPtr) && !monPtr->isTeamLeader && !IsMonPartner(monPtr)) {
+                return monPtr;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+PokemonStruct1 *sub_80A8E9C(s32 id_)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    return sub_80A8D54(livesPtr->unk2);
+}
+
+extern const char gGroundLives_InvalidityText[];
+
+void sub_80A8EC0(u8 *buffer,s32 a1)
+{
+    s16 sp = a1;
+    s16 species;
+    PokemonStruct1 *monStruct;
+
+    sub_80A7DDC(&sp, &species);
+    monStruct = sub_80A8D54(sp);
+    if (monStruct != NULL) {
+        sub_80922B4(buffer, monStruct->name, POKEMON_NAME_LENGTH);
+    }
+    else if (sp == 32) {
+        CopyMonsterNameToBuffer(buffer, species);
+    }
+    else if (sp != -1) {
+        const struct GroundLiveTypeData *dataPtr = &gGroundLivesTypeData_811E63C[sp];
+
+        switch (sp) {
+            case 52:
+            case 100:
+                strcpy(buffer, dataPtr->unk4);
+                break;
+            default:
+                CopyMonsterNameToBuffer(buffer, dataPtr->unk2);
+                break;
+        }
+    }
+    else {
+        strcpy(buffer, gGroundLives_InvalidityText);
+    }
+}
+
+void sub_80A8F50(u8 *buffer, s32 a1_, s32 size)
+{
+    u8 text[0x80];
+    s32 a1 = (s16) a1_;
+
+    sub_80A8EC0(text, a1);
+    BoundedCopyStringtoBuffer(buffer, text, size);
+}
+
+UNUSED static void sub_80A8F74(s32 id_, u8 *buffer)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    sub_80A8EC0(buffer, livesPtr->unk2);
+}
+
+s32 sub_80A8F9C(s32 id_, PixelPos *pixelPos)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 == -1) {
+        pixelPos->x = 0;
+        pixelPos->y = 0;
+    }
+    else {
+        *pixelPos = livesPtr->unkC;
+    }
+
+    return livesPtr->unk2;
+}
+
+s32 sub_80A8FD8(s32 id_, PixelPos *pixelPos)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 == -1) {
+        pixelPos->x = 0;
+        pixelPos->y = 0;
+    }
+    else {
+        pixelPos->x = livesPtr->unk144.x + livesPtr->unk14.x;
+        pixelPos->y = livesPtr->unk144.y + livesPtr->unk14.y;
+    }
+
+    return livesPtr->unk2;
+}
+
+extern void sub_80A9F20(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPos);
+
+UNUSED static s32 sub_80A9028(s32 id_, PixelPos *pixelPos)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    sub_80A9F20(livesPtr, pixelPos);
+    return livesPtr->unk2;
+}
+
+s32 sub_80A9050(s32 id_, s8 *a1)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 == -1) {
+        *a1 = -1;
+    }
+    else {
+        *a1 = livesPtr->unk142;
+    }
+
+    return livesPtr->unk2;
+}
+
+s32 sub_80A9090(s32 id_, s32 a1_)
+{
+    s32 id = (s16) id_;
+    s32 a1 = (s8) a1_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    if (livesPtr->unk2 != -1) {
+        livesPtr->unk142 = a1;
+    }
+
+    return livesPtr->unk2;
+}
+
+s32 sub_80A90C8(s32 id_)
+{
+    s32 id = (s16) id_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+
+    return livesPtr->unk140;
+}
+
+UNUSED static bool8 sub_80A90E8(s32 id1_, s32 id2_)
+{
+    s32 id1 = (s16) id1_;
+    s32 id2 = (s16) id2_;
+
+    if (id1 != id2) {
+        struct unkStruct_3001B84_sub *livesPtr1 = &gGroundLives->array[id1];
+        struct unkStruct_3001B84_sub *livesPtr2 = &gGroundLives->array[id2];
+
+        if (livesPtr1->unk2 != -1 && livesPtr2->unk2 != -1) {
+            s32 ret;
+            PixelPos pixelPos1, pixelPos2;
+
+            pixelPos1.x = livesPtr1->unk144.x + livesPtr1->unk14.x;
+            pixelPos1.y = livesPtr1->unk144.y + livesPtr1->unk14.y;
+
+            pixelPos2.x = livesPtr2->unk144.x + livesPtr2->unk14.x;
+            pixelPos2.y = livesPtr2->unk144.y + livesPtr2->unk14.y;
+
+            if (livesPtr1->unk2 <= 36) {
+                ret = SizedDeltaDirection8(&pixelPos1, &livesPtr1->unkC, &pixelPos2, &livesPtr2->unkC);
+            }
+            else {
+                ret = SizedDeltaDirection4(&pixelPos1, &livesPtr1->unkC, &pixelPos2, &livesPtr2->unkC);
+            }
+
+            if (ret != -1) {
+                livesPtr1->unk142 = ret;
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
 }
 
 //
