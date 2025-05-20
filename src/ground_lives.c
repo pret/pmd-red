@@ -38,7 +38,7 @@ IWRAM_INIT struct unkStruct_3001B80 *gGroundLivesMeta = NULL;
 struct unkStruct_3001B84_sub
 {
     // size: 0x1F0
-    u16 unk0;
+    s16 unk0;
     s16 unk2;
     s16 unk4;
     s8 unk6;
@@ -1427,7 +1427,7 @@ UNUSED static bool8 sub_80A90E8(s32 id1_, s32 id2_)
         struct unkStruct_3001B84_sub *livesPtr2 = &gGroundLives->array[id2];
 
         if (livesPtr1->unk2 != -1 && livesPtr2->unk2 != -1) {
-            s32 ret;
+            s32 dir;
             PixelPos pixelPos1, pixelPos2;
 
             pixelPos1.x = livesPtr1->unk144.x + livesPtr1->unk14.x;
@@ -1437,20 +1437,216 @@ UNUSED static bool8 sub_80A90E8(s32 id1_, s32 id2_)
             pixelPos2.y = livesPtr2->unk144.y + livesPtr2->unk14.y;
 
             if (livesPtr1->unk2 <= 36) {
-                ret = SizedDeltaDirection8(&pixelPos1, &livesPtr1->unkC, &pixelPos2, &livesPtr2->unkC);
+                dir = SizedDeltaDirection8(&pixelPos1, &livesPtr1->unkC, &pixelPos2, &livesPtr2->unkC);
             }
             else {
-                ret = SizedDeltaDirection4(&pixelPos1, &livesPtr1->unkC, &pixelPos2, &livesPtr2->unkC);
+                dir = SizedDeltaDirection4(&pixelPos1, &livesPtr1->unkC, &pixelPos2, &livesPtr2->unkC);
             }
 
-            if (ret != -1) {
-                livesPtr1->unk142 = ret;
+            if (dir != -1) {
+                livesPtr1->unk142 = dir;
                 return TRUE;
             }
         }
     }
 
     return FALSE;
+}
+
+extern s32 sub_8002984(s32 _direction1, u32 caseID);
+
+UNUSED static bool8 sub_80A91A0(s32 id1_, s32 id2_)
+{
+    s32 id1 = (s16) id1_;
+    s32 id2 = (s16) id2_;
+
+    if (id1 != id2) {
+        struct unkStruct_3001B84_sub *livesPtr1 = &gGroundLives->array[id1];
+        struct unkStruct_3001B84_sub *livesPtr2 = &gGroundLives->array[id2];
+
+        if (livesPtr1->unk2 != -1 && livesPtr2->unk2 != -1) {
+            s32 dir1, dir2;
+            PixelPos pixelPos1, pixelPos2;
+
+            pixelPos1.x = livesPtr1->unk144.x + livesPtr1->unk14.x;
+            pixelPos1.y = livesPtr1->unk144.y + livesPtr1->unk14.y;
+
+            pixelPos2.x = livesPtr2->unk144.x + livesPtr2->unk14.x;
+            pixelPos2.y = livesPtr2->unk144.y + livesPtr2->unk14.y;
+
+            dir1 = SizedDeltaDirection8(&pixelPos1, &livesPtr1->unkC, &pixelPos2, &livesPtr2->unkC);
+            dir2 = SizedDeltaDirection4(&pixelPos1, &livesPtr1->unkC, &pixelPos2, &livesPtr2->unkC);
+
+            if (dir1 != -1 && dir2 != -1) {
+                if (livesPtr1->unk2 <= 36) {
+                    livesPtr1->unk142 = dir1;
+                }
+                else {
+                    livesPtr1->unk142 = dir2;
+                }
+
+                if (livesPtr2->unk2 <= 37) {
+                    livesPtr2->unk142 = sub_8002984(dir1, 5);
+                }
+                else {
+                    livesPtr2->unk142 = sub_8002984(dir2, 5);
+                }
+
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+s32 GetLivesCollision_80A92A0(s32 id_, u32 flags, PixelPos *pixelPos1, PixelPos *pixelPos2)
+{
+    s32 i;
+    struct unkStruct_3001B84_sub *livesPtr;
+    s32 id = (s16) id_;
+
+    for (livesPtr = &gGroundLives->array[0], i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
+        if (i != id
+            && livesPtr->unk2 != -1
+            && livesPtr->unk11C & flags
+            && livesPtr->unk144.x < pixelPos2->x
+            && livesPtr->unk14C.x > pixelPos1->x
+            && livesPtr->unk144.y < pixelPos2->y
+            && livesPtr->unk14C.y > pixelPos1->y)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+extern u8 sub_80A5934(s32 param_1, PixelPos *, PixelPos *);
+
+s32 sub_80A9344(s32 id_, u32 flags, PixelPos *pixelPos1, PixelPos *pixelPos2)
+{
+    s32 i;
+    struct unkStruct_3001B84_sub *livesPtr;
+    s32 id = (s16) id_;
+
+    for (livesPtr = &gGroundLives->array[0], i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
+        if (i != id && livesPtr->unk2 != -1 && livesPtr->unk11C & flags) {
+            PixelPos resultPos = {0};
+            resultPos.x = livesPtr->unk144.x + livesPtr->unk14.x;
+            resultPos.y = livesPtr->unk144.y + livesPtr->unk14.y;
+            if (resultPos.x < pixelPos2->x
+                && resultPos.x > pixelPos1->x
+                && resultPos.y < pixelPos2->y
+                && resultPos.y > pixelPos1->y)
+            {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+u8 sub_80A93F0(s32 id_, s32 a1_)
+{
+    s32 id = (s16) id_;
+    s32 a1 = (u8) a1_;
+    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    PixelPos pixPos1 = {livesPtr->unk144.x / 2048, livesPtr->unk144.y / 2048};
+    PixelPos posTemp = {((livesPtr->unk14C.x - 1) / 2048), ((livesPtr->unk14C.y - 1) / 2048)};
+    PixelPos pixPos2 = {(posTemp.x- pixPos1.x) + 1, (posTemp.y -pixPos1.y) + 1};
+
+    return sub_80A5934(a1, &pixPos1, &pixPos2);
+}
+
+extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
+extern bool8 sub_80A58C8(PixelPos *, PixelPos *);
+extern s32 sub_80AC4C8(u32 a0, PixelPos *, PixelPos *);
+
+s32 sub_80A9488(struct unkStruct_3001B84_sub *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
+{
+    PixelPos pixPos1 = {posArg1->x / 2048, posArg1->y / 2048};
+    PixelPos posTemp = {((posArg2->x - 1) / 2048), ((posArg2->y - 1) / 2048)};
+    PixelPos pixPos2 = {(posTemp.x- pixPos1.x) + 1, (posTemp.y -pixPos1.y) + 1};
+
+    if (livesPtr->unk11C & 1) {
+        if (CheckMapCollision_80A585C(&pixPos1, &pixPos2))
+            return 1;
+    }
+    if (livesPtr->unk11C & 2) {
+        if (sub_80A58C8(&pixPos1, &pixPos2))
+            return 1;
+    }
+    if (livesPtr->unk11C & 4) {
+        if ((s16) GetLivesCollision_80A92A0(livesPtr->unk0, 4, posArg1, posArg2) >= 0)
+            return 4;
+    }
+    if (livesPtr->unk11C & 8) {
+        if ((s16) sub_80AC4C8(4, posArg1, posArg2) >= 0)
+            return 8;
+    }
+    if (livesPtr->unk11C & 0x10) {
+        if ((s16) FindGroundEvent(0x40, posArg1, posArg2) >= 0)
+            return 0x10;
+    }
+
+    return 0;
+}
+
+extern void sub_80AC3E0(s32 id, s32 *a1);
+
+
+s32 sub_80A95AC(struct unkStruct_3001B84_sub *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
+{
+    PixelPos pixPos1 = {posArg1->x / 2048, posArg1->y / 2048};
+    PixelPos posTemp = {((posArg2->x - 1) / 2048), ((posArg2->y - 1) / 2048)};
+    PixelPos pixPos2 = {(posTemp.x- pixPos1.x) + 1, (posTemp.y -pixPos1.y) + 1};
+
+    if (livesPtr->unk11C & 1) {
+        if (CheckMapCollision_80A585C(&pixPos1, &pixPos2))
+            return 1;
+    }
+    if (livesPtr->unk11C & 2) {
+        if (sub_80A58C8(&pixPos1, &pixPos2))
+            return 1;
+    }
+    if (livesPtr->unk11C & 4) {
+        s32 id2 = (s16) GetLivesCollision_80A92A0(livesPtr->unk0, 0x44, posArg1, posArg2);
+        // Needed for matching.
+        s32 id2_ = id2;
+        if (id2 >= 0) {
+            struct unkStruct_3001B84_sub *ptr2 = &gGroundLives->array[id2];
+
+            if (ptr2->unk11C & 0x40) {
+                if (ptr2->unk11C & 0x200) {
+                    ptr2->unk142 = sub_8002984(livesPtr->unk142, 5);
+                }
+                if (GroundLives_ExecutePlayerScriptActionLives(livesPtr->unk0, id2_))
+                    return 2;
+            }
+            return 1;
+        }
+    }
+    if (livesPtr->unk11C & 8) {
+        s32 id2 = (s16) sub_80AC4C8(0x44, posArg1, posArg2);
+        if (id2 >= 0) {
+            s32 sp;
+
+            sub_80AC3E0(id2, &sp);
+            if ((sp & 0x40) && sub_80A8A5C(livesPtr->unk0, id2))
+                return 2;
+            return 1;
+        }
+    }
+    if (livesPtr->unk11C & 0x10) {
+        s32 id2 = (s16) FindGroundEvent(0x40, posArg1, posArg2);
+        if (id2 >= 0) {
+            if (sub_80A8ACC(livesPtr->unk0, id2))
+                return 2;
+            return 1;
+        }
+    }
+
+    return 0;
 }
 
 //
