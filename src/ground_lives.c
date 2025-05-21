@@ -1593,7 +1593,7 @@ s32 sub_80A9488(struct unkStruct_3001B84_sub *livesPtr, PixelPos *posArg1, Pixel
 }
 
 extern void sub_80AC3E0(s32 id, s32 *a1);
-extern PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2);
+extern PixelPos SetVecFromDirectionSpeed(s32 r1, u32 r2);
 
 s32 sub_80A95AC(struct unkStruct_3001B84_sub *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
 {
@@ -2081,6 +2081,383 @@ bool8 sub_80AA3F8(struct unkStruct_3001B84_sub *livesPtr, s32 a1_)
     }
 
     return FALSE;
+}
+
+s32 sub_80AA660(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
+{
+    s32 id = (s16) sub_80AC4C8(0x100, pixelPosArg1, pixelPosArg2);
+
+    if (id >= 0) {
+        if (sub_80A8A5C(livesPtr->unk0, id))
+            return 4;
+    }
+
+    return 0;
+}
+
+bool8 sub_80AA690(struct unkStruct_3001B84_sub *livesPtr, s32 a1_)
+{
+    s32 i;
+    s32 a1 = (s8) a1_;
+    PixelPos pixPos1 = SetVecFromDirectionSpeed(a1, 0x100);
+    PixelPos tempPos = { (((livesPtr->unkC.x / 2) + 0x200) * pixPos1.x) / 256, (((livesPtr->unkC.y / 2) + 0x200) * pixPos1.y) / 256 };
+    PixelPos pixPos2 = { (livesPtr->unk144.x + livesPtr->unk14.x + tempPos.x) - 768, (livesPtr->unk144.y + livesPtr->unk14.y + tempPos.y) - 768 };
+    PixelPos pixPos3 = { pixPos2.x + 0x600,  pixPos2.y + 0x600 };
+    s32 var;
+
+    var = gUnknown_8117FF0[a1];
+    for (i = 0x200; i < var; i += 0x100) {
+        u32 unk;
+
+        if (pixPos2.x < livesPtr->unk28.x || pixPos3.x >= livesPtr->unk30.x)
+            return FALSE;
+        if (pixPos2.y < livesPtr->unk28.y || pixPos3.y >= livesPtr->unk30.y)
+            return FALSE;
+
+        unk = sub_80AA660(livesPtr, &pixPos2, &pixPos3);
+        switch (unk) {
+            case 0:
+                return FALSE;
+            case 4:
+                return TRUE;
+            case 6:
+                break;
+            default:
+                break;
+        }
+
+        pixPos2.x += pixPos1.x;
+        pixPos2.y += pixPos1.y;
+        pixPos3.x += pixPos1.x;
+        pixPos3.y += pixPos1.y;
+    }
+
+    return FALSE;
+}
+
+s32 sub_80AA7B0(struct unkStruct_3001B84_sub *livesPtr, s16 *a1, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
+{
+    PixelPos pixPos1 = *pixelPosArg1;
+    PixelPos pixPos3 = *pixelPosArg2;
+    PixelPos pixPos2 = {pixPos1.x / 2048, pixPos1.y / 2048};
+    PixelPos tempPos = {(pixPos3.x - 1) / 2048, (pixPos3.y - 1) / 2048};
+    PixelPos pixPos4 = {(tempPos.x - pixPos2.x) + 1, (tempPos.y - pixPos2.y) + 1};
+
+    if (flags & 4) {
+        s32 id2 = (s16) GetLivesCollision_80A92A0(livesPtr->unk0, 0x80, &pixPos1, &pixPos3);
+        if (id2 >= 0) {
+            s16 var = (s16) sub_80A8BBC(id2);
+            if (var >= 14 && var < 30 && sub_80A8E9C(id2) != NULL) {
+                *a1 = id2;
+                sub_80A9090(id2, (s8) sub_8002984(livesPtr->unk142, 5));
+                return 5;
+            }
+        }
+    }
+
+    *a1 = -1;
+    if (sub_80A595C(0x10, &pixPos2, &pixPos4)) {
+        return 6;
+    }
+
+    return 0;
+}
+
+bool8 sub_80AA8BC(struct unkStruct_3001B84_sub *livesPtr, s16 *a1, s32 dir_)
+{
+    s32 i;
+    s32 dir = (s8) dir_;
+    PixelPos pixPos1 = SetVecFromDirectionSpeed(dir, 0x100);
+    PixelPos pixPos5 = { (((livesPtr->unkC.x / 2) + 0x200) * pixPos1.x) / 256, (((livesPtr->unkC.y / 2) + 0x200) * pixPos1.y) / 256 };
+    PixelPos pixPos2 = { (livesPtr->unk144.x + livesPtr->unk14.x + pixPos5.x) - 768, (livesPtr->unk144.y + livesPtr->unk14.y + pixPos5.y) - 768 };
+    PixelPos pixPos3 = { pixPos2.x + 0x600,  pixPos2.y + 0x600 };
+    s32 r10 = gUnknown_8117FF0[dir];
+    s32 var_28 = gUnknown_8118010[dir];
+    s32 var_24 = gUnknown_8118030[dir];
+    s32 unk = 0;
+
+    *a1 = -1;
+    for (i = 0x200; i < r10; i += 0x100) {
+        if (pixPos2.x < livesPtr->unk28.x || pixPos3.x >= livesPtr->unk30.x)
+            return FALSE;
+        if (pixPos2.y < livesPtr->unk28.y || pixPos3.y >= livesPtr->unk30.y)
+            return FALSE;
+
+        unk = sub_80AA7B0(livesPtr, a1, 0xC, &pixPos2, &pixPos3);
+        if (unk == 5)
+            return TRUE;
+
+        pixPos2.x += pixPos1.x;
+        pixPos2.y += pixPos1.y;
+        pixPos3.x += pixPos1.x;
+        pixPos3.y += pixPos1.y;
+
+        if (unk == 6)
+            break;
+    }
+    if (unk != 6)
+        return FALSE;
+
+    for (; i < var_28; i += 0x100) {
+        if (pixPos2.x < livesPtr->unk28.x || pixPos3.x >= livesPtr->unk30.x)
+            return FALSE;
+        if (pixPos2.y < livesPtr->unk28.y || pixPos3.y >= livesPtr->unk30.y)
+            return FALSE;
+
+        unk = sub_80AA7B0(livesPtr, a1, 4, &pixPos2, &pixPos3);
+        if (unk == 5)
+            return TRUE;
+
+        pixPos2.x += pixPos1.x;
+        pixPos2.y += pixPos1.y;
+        pixPos3.x += pixPos1.x;
+        pixPos3.y += pixPos1.y;
+
+        if (unk != 6)
+            break;
+    }
+    if (unk == 6)
+        return FALSE;
+
+    for (i = 0; i < var_24; i += 0x100) {
+        if (pixPos2.x < livesPtr->unk28.x || pixPos3.x >= livesPtr->unk30.x)
+            return FALSE;
+        if (pixPos2.y < livesPtr->unk28.y || pixPos3.y >= livesPtr->unk30.y)
+            return FALSE;
+
+        unk = sub_80AA7B0(livesPtr, a1, 4, &pixPos2, &pixPos3);
+        if (unk == 5)
+            return TRUE;
+        if (unk == 6)
+            return FALSE;
+
+        pixPos2.x += pixPos1.x;
+        pixPos2.y += pixPos1.y;
+        pixPos3.x += pixPos1.x;
+        pixPos3.y += pixPos1.y;
+    }
+
+    return FALSE;
+}
+
+void sub_80AAAE8(struct unkStruct_3001B84_sub *livesPtr, u32 a1, s32 dir_)
+{
+    s32 unk;
+    s32 dir = (s8) dir_;
+    s32 var_28 = -1;
+
+    livesPtr->unk15E = 0x300;
+    livesPtr->unk160 = 1;
+    if (dir != -1) {
+        livesPtr->unk142 = dir;
+    }
+
+    switch (a1) {
+        case 2:
+            livesPtr->unk164 = 0;
+            var_28 = 0x807;
+            sub_80AAF68(livesPtr, 0);
+            break;
+        case 1:
+            livesPtr->unk164 = 0;
+            var_28 = 0x300;
+            sub_80AAF68(livesPtr, 0);
+            break;
+        case 6:
+        case 7:
+        case 8:
+            if (dir != -1) {
+                s32 i;
+                s32 n;
+                PixelPos pixPos, pixPos2, pixPos3;
+
+                unk = 0;
+                livesPtr->unk164 = 4;
+                switch (a1) {
+                    case 6:
+                        var_28 = 0x900;
+                        n = 1;
+                        break;
+                    case 7:
+                        var_28 = 0x800;
+                        n = 2;
+                        break;
+                    case 8:
+                        var_28 = 0xA00;
+                        n = 4;
+                        break;
+                    // Impossible case
+                    default:
+                        livesPtr->unk164 = 0;
+                        var_28 = 0x807;
+                        n = 0;
+                        break;
+                }
+                pixPos = SetVecFromDirectionSpeed(dir, 0x100);
+                for (i = 0; i < n; i++) {
+                    unk = sub_80AA074(livesPtr, &pixPos);
+                    if (unk == 2)
+                        break;
+                    if (unk != 1)
+                        continue;
+
+                    pixPos2.x = 0;
+                    pixPos2.y = pixPos.y;
+                    unk = sub_80AA074(livesPtr, &pixPos2);
+                    if (unk == 2)
+                        break;
+                    if (unk != 1)
+                        continue;
+
+                    pixPos3.x = pixPos.x;
+                    pixPos3.y = 0;
+                    unk = sub_80AA074(livesPtr, &pixPos3);
+                    if (unk == 2)
+                        break;
+                }
+                if (unk == 2) {
+                    var_28 = -1;
+                    sub_80AAF68(livesPtr, 0);
+                }
+                else {
+                    sub_80AAF68(livesPtr, 1);
+                }
+            }
+            else {
+                livesPtr->unk164 = 0;
+                var_28 = 0x807;
+                sub_80AAF68(livesPtr, 0);
+            }
+            break;
+        case 3:
+        case 4:
+        case 5:
+            if (dir != -1) {
+                s32 i;
+                s32 n;
+                PixelPos pixPos, pixPos2, pixPos3;
+
+                livesPtr->unk164 = 4;
+                switch (a1) {
+                    case 3:
+                        var_28 = 0x900;
+                        n = 1;
+                        break;
+                    case 4:
+                        var_28 = 0x800;
+                        n = 2;
+                        break;
+                    case 5:
+                        var_28 = 0xA00;
+                        n = 4;
+                        break;
+                    // Impossible
+                    default:
+                        livesPtr->unk164 = 0;
+                        var_28 = 0x807;
+                        n = 0;
+                        break;
+                }
+                pixPos = SetVecFromDirectionSpeed(dir, 0x100);
+                for (i = 0; i < n; i++) {
+                    if (sub_80A9F94(livesPtr, &pixPos) != 0) {
+                        pixPos2.x = 0;
+                        pixPos2.y = pixPos.y;
+                        if (sub_80A9F94(livesPtr, &pixPos2) != 0) {
+                            pixPos3.x = pixPos.x;
+                            pixPos3.y = 0;
+                            if (sub_80A9F94(livesPtr, &pixPos3) != 0) {
+                                n = 0;
+                            }
+                        }
+                    }
+                }
+                sub_80AAF68(livesPtr, n);
+            }
+            else {
+                livesPtr->unk164 = 0;
+                var_28 = 0x807;
+                sub_80AAF68(livesPtr, 0);
+            }
+            break;
+        case 9:
+            if (livesPtr->unk11C & 0x1000) {
+                gGroundLivesMeta->unk28 = dir;
+            }
+            else {
+                gGroundLivesMeta->unk28 = -1;
+            }
+            livesPtr->unk164 = 0;
+            var_28 = 0x800;
+            livesPtr->unk142 = 4;
+            if (dir != -1) {
+                PixelPos pixPos = SetVecFromDirectionSpeed(dir, 0x100);
+                if (sub_80AA074(livesPtr, &pixPos) == 2) {
+                    var_28 = -1;
+                }
+            }
+            break;
+        case 10:
+            sub_80AA3F8(livesPtr, livesPtr->unk142);
+            break;
+        case 11:
+            if (!sub_80AA690(livesPtr, livesPtr->unk142)) {
+                ScriptInfoSmall scriptInfo;
+
+                GetFunctionScript(NULL, &scriptInfo, 9);
+                _ExecutePlayerScript(livesPtr, NULL, &scriptInfo);
+            }
+            break;
+        case 19: {
+            s16 sp;
+
+            if (sub_80AA8BC(livesPtr, &sp, livesPtr->unk142)) {
+                ScriptInfoSmall scriptInfo;
+
+                GetFunctionScript(NULL, &scriptInfo, 6);
+                GroundLives_ExecuteScript(sp, (void *) &livesPtr->unk38.unk8, &scriptInfo);
+                _ExecutePlayerScript(livesPtr, NULL, NULL);
+                sub_809B1C0(7, 0, (void *) sub_80A8E9C(sp)); // TODO: fix
+            }
+            else {
+                sub_809B1C0(7, 0, NULL);
+            }
+            sub_809CD8C(&livesPtr->unk120, 5);
+            break;
+        }
+        case 20: {
+            ScriptInfoSmall scriptInfo;
+
+            GetFunctionScript(NULL, &scriptInfo, 0x195);
+            _ExecutePlayerScript(livesPtr, NULL, &scriptInfo);
+            break;
+        }
+        default:
+            sub_80AAF68(livesPtr, 0);
+            break;
+    }
+
+    if (var_28 != -1 && var_28 != livesPtr->unk168) {
+        struct UnkGroundSpriteStruct *groundSpritePtr;
+
+        livesPtr->unk15C = 0;
+        groundSpritePtr = &livesPtr->unk170;
+        livesPtr->unk168 = var_28;
+        livesPtr->unk15D = livesPtr->unk142;
+        sub_80A6EFC(groundSpritePtr, var_28, livesPtr->unk142);
+        return;
+    }
+
+    if (livesPtr->unk15C != 0 || livesPtr->unk15D != livesPtr->unk142) {
+        struct UnkGroundSpriteStruct *groundSpritePtr;
+        s32 unk168;
+
+        livesPtr->unk15C = 0;
+        groundSpritePtr = &livesPtr->unk170;
+        unk168 = livesPtr->unk168;
+        livesPtr->unk15D = livesPtr->unk142;
+        sub_80A6EFC(groundSpritePtr, unk168, livesPtr->unk142);
+    }
 }
 
 //
