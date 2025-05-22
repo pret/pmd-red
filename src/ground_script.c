@@ -129,7 +129,6 @@ s32 ExecuteScriptCommand(Action *action);
 bool8 IsFanfareSEPlaying_1(u16 songIndex);
 bool8 IsEqualtoBGTrack(u16 songIndex);
 bool8 sub_8099B94(void);
-s8 VecDirection8Radial(PixelPos*);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_8098DCC(u32 speed);
 extern const PixelPos gUnknown_81164DC;
@@ -722,7 +721,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 break;
                             }
                             res = action->callbacks->moveRelative(action->parentObject, &pos2);
-                            dir = VecDirection8Radial(&pos2);
+                            dir = (s8) VecDirection8Radial(&pos2);
                             dirBefore = action->scriptData.unk26;
                             dirS8 = dir;
                             action->scriptData.unk26 = dirS8;
@@ -774,7 +773,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 sub_8002934(&pos2, &action->scriptData.pos1, &action->scriptData.pos2, action->scriptData.unk2A, action->scriptData.unk2C);
                                 pos3.x = pos2.x - pos1.x;
                                 pos3.y = pos2.y - pos1.y;
-                                dir = VecDirection8Radial(&pos3);
+                                dir = (s8) VecDirection8Radial(&pos3);
                                 dirBefore = action->scriptData.unk26;
                                 dirS8 = dir;
                                 action->scriptData.unk26 = dirS8;
@@ -2847,7 +2846,7 @@ s32 ExecuteScriptCommand(Action *action)
                         GroundLink_GetPos((s16)curCmd.arg1, &pos2);
                         pos3.x = pos2.x - pos.x;
                         pos3.y = pos2.y - pos.y;
-                        val = VecDirection8Radial(&pos3);
+                        val = (s8) VecDirection8Radial(&pos3);
                         break;
                     }
                     case 0xc8: {

@@ -332,7 +332,7 @@ UNUSED static s32 VecDirection4SignYX(PixelPos *param_1)
 }
 
 // arm9.bin::02010680
-s8 VecDirection8Radial(PixelPos *pixelPos)
+s32 VecDirection8Radial(PixelPos *pixelPos)
 {
     PixelPos absPos = {abs(pixelPos->x), abs(pixelPos->y)};
 
@@ -510,5 +510,5 @@ s8 SizedDeltaDirection8(const PixelPos *r0, const PixelPos *r1, const PixelPos *
             stack.y = 0;
     }
 
-    return VecDirection8Radial(&stack);
+    return (s8) VecDirection8Radial(&stack);
 }

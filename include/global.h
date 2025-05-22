@@ -61,6 +61,12 @@ static inline bool8 AreStringsDifferent(const u8 *str1, const u8 *str2)
 #define ASM_MATCH_TRICK(a) {a++;a--;}
 #endif // NONMATCHING
 
+#ifdef NONMATCHING
+#define CMP_S8_NOT_MINUS1(val)(val != -1)
+#else
+#define CMP_S8_NOT_MINUS1(val)((val << 0x18) != ((s8)(-1) << 0x18))
+#endif
+
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 

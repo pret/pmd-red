@@ -19,16 +19,18 @@
 struct GroundLivesMeta_Sub1
 {
     // size: 0xC
-    u32 unk0;
+    s32 unk0;
     u32 unk4;
     s32 unk8;
 };
 
+#define GROUND_LIVES_META_UNK0_COUNT 3
+
 struct unkStruct_3001B80
 {
     // size: 0x338
-   struct GroundLivesMeta_Sub1 unk0[3];
-    u32 unk24;
+    struct GroundLivesMeta_Sub1 unk0[GROUND_LIVES_META_UNK0_COUNT];
+    s32 unk24;
     u8 unk28;
     struct GroundLivesMeta_Sub1 unk2C[0x40];
     ScriptInfoSmall unk32C;
@@ -1909,7 +1911,7 @@ s32 sub_80AA180(struct unkStruct_3001B84_sub *livesPtr, u32 flags, PixelPos *pix
             sub_80A8FD8(id, &pixPos1);
             pixPos2.x = pixPos1.x - (livesPtr->unk144.x + livesPtr->unk14.x);
             pixPos2.y = pixPos1.y - (livesPtr->unk144.y + livesPtr->unk14.y);
-            dir = VecDirection8Radial(&pixPos2);
+            dir = (s8) VecDirection8Radial(&pixPos2);
             if (dir != -1) {
                 // s8 memes
                 s8 *dirDst = &livesPtr->unk142;
@@ -1932,7 +1934,7 @@ s32 sub_80AA180(struct unkStruct_3001B84_sub *livesPtr, u32 flags, PixelPos *pix
             sub_80AC448(id, &pixPos1);
             pixPos2.x = pixPos1.x - (livesPtr->unk144.x + livesPtr->unk14.x);
             pixPos2.y = pixPos1.y - (livesPtr->unk144.y + livesPtr->unk14.y);
-            dir = VecDirection8Radial(&pixPos2);
+            dir = (s8) VecDirection8Radial(&pixPos2);
             if (dir != -1) {
                 // s8 memes
                 s8 *dirDst = &livesPtr->unk142;
@@ -2240,7 +2242,7 @@ bool8 sub_80AA8BC(struct unkStruct_3001B84_sub *livesPtr, s16 *a1, s32 dir_)
     return FALSE;
 }
 
-void sub_80AAAE8(struct unkStruct_3001B84_sub *livesPtr, u32 a1, s32 dir_)
+void sub_80AAAE8(struct unkStruct_3001B84_sub *livesPtr, u32 a1, s32 dir_, s32 unused)
 {
     s32 unk;
     s32 dir = (s8) dir_;
@@ -2638,6 +2640,159 @@ void CallbackLivesSpriteRelated_80AB238(struct unkStruct_3001B84_sub *livesPtr, 
 s32 CallbackLivesMoveRelative(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pos)
 {
     return sub_80A9F94(livesPtr, pos);
+}
+
+extern const DebugLocation gUnknown_8118280;
+extern const DebugLocation gUnknown_811828C;
+void sub_80AB5D4(struct unkStruct_3001B84_sub *livesPtr);
+extern u32 sub_809CDC8(struct Struct3001B84_sub120 *strPtr, u32 *r6, s8 *r7, s32 *param_4, void *param_5, u32 param_6);
+extern u8 sub_809D248(PixelPos *r0);
+extern s16 HandleAction(Action *action, const DebugLocation *debug);
+
+void GroundLives_Action(void)
+{
+    s32 i;
+    struct unkStruct_3001B84_sub *livesPtr;
+    struct GroundLivesMeta_Sub1 *metaPtr;
+
+    for (livesPtr = &gGroundLives->array[0], i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
+        if (livesPtr->unk2 != -1) {
+            s32 actionResult = (s16) HandleAction(&livesPtr->unk38, &gUnknown_8118280);
+            switch (actionResult) {
+                case 4:
+                    GroundLives_Delete(i);
+                    continue;
+                case 0:
+                    if (livesPtr->unk11C & 0x800) {
+                        PixelPos var_44;
+                        u32 var_4C = actionResult;
+                        s8 dir = -1;
+                        s32 var_48 = actionResult;
+                        u32 unkVar = sub_809CDC8(&livesPtr->unk120, &var_4C, &dir, &var_48, &var_44, livesPtr->unk11C);
+
+                        switch (unkVar) {
+                            case 1:
+                            case 2:
+                            case 5:
+                            case 8:
+                                sub_80AAAE8(livesPtr, var_4C, dir, var_48);
+                                break;
+                            case 3: {
+                                PixelPos var_34;
+                                PixelPos pixPos;
+                                PixelPos resultPos;
+                                PixelPos var_2C;
+                                PixelPos var_24;
+
+                                sub_809D248(&pixPos);
+                                resultPos.x = pixPos.x + var_44.x;
+                                resultPos.y = pixPos.y + var_44.y;
+                                var_34 = (PixelPos) { resultPos.x - ((livesPtr->unk144.x + livesPtr->unk14.x) / 256 ), resultPos.y - ((livesPtr->unk144.y + livesPtr->unk14.y) / 256 ) };
+                                var_2C.x = (resultPos.x - 16) * 256;
+                                var_24.x = (resultPos.x + 16) * 256;
+                                var_2C.y = (resultPos.y - 4) * 256;
+                                var_24.y = (resultPos.y + 28) * 256;
+                                if (var_4C == 0xC) {
+                                    if (!sub_80AA180(livesPtr, 0xC, &var_2C, &var_24)) {
+                                        if (var_34.x >= -16 && var_34.x <= 16 && var_34.y >= -28 && var_34.y <= 4) {
+                                            sub_80AAAE8(livesPtr, 19, -1, 0);
+                                        }
+                                    }
+                                }
+                                else {
+                                    if (!(var_34.x >= -16 && var_34.x <= 16 && var_34.y >= -28 && var_34.y <= 4)) {
+                                        s32 newDir = VecDirection8Radial(&var_34);
+                                        dir = newDir;
+
+                                        if (CMP_S8_NOT_MINUS1(newDir)) {
+                                            switch (var_4C) {
+                                                case 16:
+                                                    sub_80AAAE8(livesPtr, 6, dir, 0);
+                                                    break;
+                                                case 17:
+                                                    sub_80AAAE8(livesPtr, 7, dir, 0);
+                                                    break;
+                                                case 18:
+                                                    sub_80AAAE8(livesPtr, 8, dir, 0);
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    else if (livesPtr->unk11C & 0x1000) {
+                        sub_80AB5D4(livesPtr);
+                    }
+                    else {
+                        ExecutePredefinedScript(&livesPtr->unk38, NULL, 1, &gUnknown_811828C);
+                    }
+                    break;
+            }
+            if (livesPtr->unk15C != 0) {
+                livesPtr->unk15C = 0;
+                sub_80A6EFC(&livesPtr->unk170, livesPtr->unk168, (livesPtr->unk15D = livesPtr->unk142));
+            }
+        }
+    }
+
+    metaPtr = &gGroundLivesMeta->unk0[0];
+    livesPtr = &gGroundLives->array[0];
+    metaPtr->unk0 = 0;
+    metaPtr->unk4 = 0;
+
+    if (livesPtr->unk2 == -1) {
+        sub_80AB5A4();
+    }
+    else if (livesPtr->unk11C & 0x2000) {
+        sub_80AB5A4();
+    }
+    else if (livesPtr->unk11C & 0x1000) {
+        s32 prevUnk24 = gGroundLivesMeta->unk24;
+        if (prevUnk24 < 0) {
+            s32 i;
+            struct GroundLivesMeta_Sub1 *loopPtr;
+            struct GroundLivesMeta_Sub1 *metaSub = &gGroundLivesMeta->unk2C[0];
+
+            gGroundLivesMeta->unk24 = 0;
+            gGroundLivesMeta->unk2C[0].unk0 = 0;
+            metaSub->unk4 = livesPtr->unk144.x + livesPtr->unk14.x;
+            metaSub->unk8 = livesPtr->unk144.y + livesPtr->unk14.y;
+            loopPtr = &gGroundLivesMeta->unk0[0];
+            for (i = 0; i < GROUND_LIVES_META_UNK0_COUNT; i++, loopPtr++) {
+                loopPtr->unk8 = 0;
+                loopPtr->unk0 = 0;
+                loopPtr->unk4 = 0;
+            }
+        }
+        else {
+            PixelPos subbed, absed;
+            struct GroundLivesMeta_Sub1 *prev;
+            struct GroundLivesMeta_Sub1 *metaSub;
+            s32 nextUnk24 = (prevUnk24 + 1) % 64;
+            gGroundLivesMeta->unk24 = nextUnk24;
+            metaSub = &gGroundLivesMeta->unk2C[gGroundLivesMeta->unk24];
+            metaSub->unk4 = livesPtr->unk144.x + livesPtr->unk14.x;
+            metaSub->unk8 = livesPtr->unk144.y + livesPtr->unk14.y;
+
+            prev = &gGroundLivesMeta->unk2C[prevUnk24];
+            subbed = (PixelPos) {metaSub->unk4- prev->unk4, metaSub->unk8 - prev->unk8};
+            absed = (PixelPos) {abs(subbed.x), abs(subbed.y)};
+
+            metaSub->unk0 = max(absed.x, absed.y);
+            if (metaSub->unk0 <= 0) {
+                gGroundLivesMeta->unk24 = prevUnk24;
+            }
+            else {
+                gGroundLivesMeta->unk0[0].unk0 = metaSub->unk0;
+            }
+        }
+    }
+    else {
+        sub_80AB5A4();
+    }
 }
 
 //

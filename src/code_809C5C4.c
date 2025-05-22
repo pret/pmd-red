@@ -732,7 +732,7 @@ u32 sub_809CDC8(struct Struct3001B84_sub120 *strPtr, u32 *r6, s8 *r7, s32 *param
 
                     // TODO: Fix me, this should be a simple -1 comparision, but agbcc doesn't want to cooperate...
                     v = strPtr->unkC = *r7;
-                    if ((v << 0x18) != (0xFF) << 0x18) {
+                    if (CMP_S8_NOT_MINUS1(v)) {
                         strPtr->unk8 = 0x20;
                     }
                 }
