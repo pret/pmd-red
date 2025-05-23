@@ -2992,4 +2992,58 @@ void sub_80AB5D4(struct unkStruct_3001B84_sub *livesPtr)
     }
 }
 
-//
+s32 sub_80ABA00(s32 a0)
+{
+    s32 i;
+    s32 ret = 0;
+
+    if (gGroundLivesMeta->unk24 > a0) {
+        for (i = a0 + 1; i < gGroundLivesMeta->unk24; i++) {
+            struct GroundLivesMeta_Sub2C *ptr2C = &gGroundLivesMeta->unk2C[i];
+            ret += ptr2C->unk0;
+        }
+    }
+    else if (gGroundLivesMeta->unk24 < a0) {
+        for (i = a0 + 1; i < GROUND_LIVES_META_UNK2C_COUNT; i++) {
+            struct GroundLivesMeta_Sub2C *ptr2C = &gGroundLivesMeta->unk2C[i];
+            ret += ptr2C->unk0;
+        }
+        for (i = 0; i < gGroundLivesMeta->unk24; i++) {
+            struct GroundLivesMeta_Sub2C *ptr2C = &gGroundLivesMeta->unk2C[i];
+            ret += ptr2C->unk0;
+        }
+    }
+
+    return ret;
+}
+
+extern void sub_80A7524(struct UnkGroundSpriteStruct *ptr, s32 monsterId_, PixelPos *pixelPosArg, s32 a3);
+extern bool8 sub_80A66D4(struct UnkGroundSpriteStruct *ptr);
+extern void sub_80A74F0(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_, s32 a3);
+
+
+void sub_80ABA7C(void)
+{
+    s32 i;
+    struct unkStruct_3001B84_sub *livesPtr;
+
+    for (livesPtr = &gGroundLives->array[0], i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
+        if (livesPtr->unk2 != -1) {
+            PixelPos pixPos = { livesPtr->unk144.x + livesPtr->unk14.x, livesPtr->unk144.y + livesPtr->unk14.y };
+            s32 r7 = livesPtr->unk154.x + livesPtr->unk154.y;
+
+            if (livesPtr->unk164 > 0 && --livesPtr->unk164 <= 0 && (livesPtr->unk160 == 2 || livesPtr->unk160 == 1)) {
+                sub_80A9750(livesPtr, livesPtr->unk160);
+            }
+            if (sub_80A66D4(&livesPtr->unk170)) {
+                livesPtr->unk15C = 0;
+                sub_80A6EFC(&livesPtr->unk170, livesPtr->unk168, livesPtr->unk15D);
+            }
+            if (livesPtr->unk16A != 0) {
+                sub_80A74F0(&livesPtr->unk170, livesPtr->unk16A, livesPtr->unk142, livesPtr->unk16C);
+                livesPtr->unk16A = 0;
+            }
+            sub_80A7524(&livesPtr->unk170, livesPtr->unk8, &pixPos, r7);
+        }
+    }
+}

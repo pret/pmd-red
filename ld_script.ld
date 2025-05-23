@@ -349,7 +349,6 @@ SECTIONS {
         src/ground_sprite_util.o(.text);
         src/ground_script_file.o(.text);
         src/ground_lives.o(.text);
-        asm/ground_lives.o(.text);
         src/ground_object.o(.text);
         asm/ground_object.o(.text);
         src/ground_effect.o(.text);
