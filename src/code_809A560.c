@@ -54,7 +54,7 @@ PokemonStruct1 *sub_808D3BC(void);
 PokemonStruct1 *sub_808D3F8(void);
 PokemonStruct1 *sub_80A8D54(s16);
 void sub_80A7DDC(s16 *, s16*);
-u8 sub_80A8CF0(s16);
+u8 IsStarterMonster(s16);
 s16 sub_80A8BFC(s32);
 
 struct Unk8116040Struct
@@ -398,7 +398,7 @@ bool8 sub_809A8B8(s32 param_1, s32 param_2)
         case 7:
         case 0x21:
         case 0x22:
-        if (sub_80A8CF0(local_26) != 0) {
+        if (IsStarterMonster(local_26)) {
             byte1 = 0x1;
         }
         else {

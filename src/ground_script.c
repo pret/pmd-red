@@ -112,7 +112,7 @@ s16 GetAdjustedGroundMap(s32);
 void sub_80A87AC(s32, s32);
 void sub_80A8BD8(s16, s32*);
 u32 sub_80A8C2C();
-u32 sub_80A8C98();
+u32 GroundLives_IsStarterMon();
 PokemonStruct1 *sub_80A8D54(s16);
 s16 sub_80A8F9C(s32, PixelPos*);
 u32 sub_80A9050();
@@ -2784,7 +2784,7 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0xbe: {
                 if (action->unk8[0] == 1) {
-                    if ((s8)sub_80A8C98(action->unk8[1])) {
+                    if ((s8)GroundLives_IsStarterMon(action->unk8[1])) {
                         scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                     }
                 }

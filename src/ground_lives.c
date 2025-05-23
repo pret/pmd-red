@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "ground_script.h"
 #include "ground_sprite.h"
 #include "ground_event.h"
@@ -44,32 +45,32 @@ struct unkStruct_3001B80
 };
 IWRAM_INIT struct unkStruct_3001B80 *gGroundLivesMeta = NULL;
 
-struct unkStruct_3001B84_sub
+struct GroundLive
 {
     // size: 0x1F0
-    s16 unk0;
+    s16 id; // ID in the gGroundLives array
     s16 unk2;
     s16 unk4;
     s8 unk6;
-    s16 unk8;
+    s16 speciesId;
     PixelPos unkC;
     PixelPos unk14;
     s8 unk1C;
     PixelPos unk20;
     PixelPos unk28;
     PixelPos unk30;
-    Action unk38;
-    u32 unk11C;
+    Action action;
+    u32 flags;
     struct Struct3001B84_sub120 unk120;
     s16 unk13C;
     s16 unk13E;
     s16 unk140;
-    s8 unk142;
+    s8 direction1;
     PixelPos unk144;
     PixelPos unk14C;
     PixelPos unk154;
-    u8 unk15C;
-    s8 unk15D;
+    bool8 directionRelated;
+    s8 direction2;
     u16 unk15E;
     u16 unk160;
     s32 unk164;
@@ -81,29 +82,162 @@ struct unkStruct_3001B84_sub
 
 #define UNK_3001B84_ARR_COUNT 0x18
 
-struct unkStruct_3001B84
+struct GroundLives
 {
-    struct unkStruct_3001B84_sub array[UNK_3001B84_ARR_COUNT];
+    struct GroundLive array[UNK_3001B84_ARR_COUNT];
 };
 
-IWRAM_INIT struct unkStruct_3001B84 *gGroundLives = NULL;
+IWRAM_INIT struct GroundLives *gGroundLives = NULL;
+
+struct GroundLiveTypeData
+{
+    s16 unk0;
+    s16 unk2;
+    const char *unk4;
+    u8 unk8;
+    u8 unk9;
+};
+
+extern const struct GroundLiveTypeData gGroundLivesTypeData_811E63C[];
 
 extern void DeleteGroundLives(void);
+extern s32 sub_8002984(s32 _direction1, u32 caseID);
+extern u32 sub_809CDC8(struct Struct3001B84_sub120 *strPtr, u32 *r6, s8 *r7, s32 *param_4, void *param_5, u32 param_6);
+extern u8 sub_809D248(PixelPos *r0);
+extern s16 HandleAction(Action *action, const DebugLocation *debug);
+extern void sub_80A7524(struct UnkGroundSpriteStruct *ptr, s32 monsterId_, PixelPos *pixelPosArg, s32 a3);
+extern bool8 sub_80A66D4(struct UnkGroundSpriteStruct *ptr);
+extern void sub_80A74F0(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_, s32 a3);
+extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
+extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
+extern void sub_80A6EC8(struct UnkGroundSpriteStruct *ptr, s32 a1);
+extern s32 sub_80AC554(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
+extern s32 sub_80AC448(s32 id_, PixelPos *pixelPos);
+extern bool8 sub_80A595C(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
+extern void sub_80AC3E0(s32 id, s32 *a1);
+extern PixelPos SetVecFromDirectionSpeed(s32 r1, u32 r2);
+extern u8 sub_80A5934(s32 param_1, PixelPos *, PixelPos *);
+extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
+extern bool8 sub_80A58C8(PixelPos *, PixelPos *);
+extern s32 sub_80AC4C8(u32 a0, PixelPos *, PixelPos *);
+extern void sub_809CD8C(struct Struct3001B84_sub120 *dst, s32 a1);
+extern bool8 sub_809B1C0(s32 a0, u32 kind, PokemonStruct1 *a2);
+extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
+extern bool8 sub_809D678(Action *action);
+extern bool8 sub_80AC274(s32 a0, ScriptInfoSmall *scriptInfo, s32 a2);
+extern void GroundObject_ExecuteScript(s32, void *, ScriptInfoSmall *);
+extern bool8 sub_80ADC64(s32 id, ScriptInfoSmall *dst);
+extern bool8 GroundScriptNotify(Action *param_1, s32 param_2);
+extern bool8 GroundScript_Cancel(Action *r0);
+extern PokemonStruct1 *sub_80A8D54(s32);
+extern s32 sub_809CDB8(struct Struct3001B84_sub120 *dst);
+extern void sub_80A6688(struct UnkGroundSpriteStruct *ptr, s32 a0);
+extern s32 sub_808D6A4(s32 *ptr);
+extern s32 sub_808D654(s32 *ptr);
+extern void sub_809CD68(struct Struct3001B84_sub120 *dst);
+extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
+extern void sub_80A7428(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 monsterId_, s32 a3);
+extern void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
+extern bool8 ExecutePredefinedScript(Action *param_1, s32 *param_2, s16 index, const DebugLocation *debug);
+extern void sub_809D170(s32 r0, s32 r1);
+extern void sub_80A74E4(struct UnkGroundSpriteStruct *ptr);
+extern const struct GroundScriptHeader *GetGroundScript(s16 a0, const DebugLocation *);
+
+static s16 CallbackLivesGetIndex(void *livesPtr_);
+static void CallbackLivesGetSize(void *livesPtr_, PixelPos *out);
+static void CallbackLivesSetHitboxPos(void *livesPtr_, PixelPos *posOrNull);
+static void CallbackLivesSetPositionBounds(void *livesPtr_, PixelPos *from, PixelPos *to);
+static void CallbackLivesGetHitboxCenter(void *livesPtr_, PixelPos *out);
+static s32 CallbackLivesMoveReal(void *livesPtr_, PixelPos *pos);
+static void CallbackLivesGetPosHeightAndUnk(void *livesPtr_, u32 *height, u32 *unk);
+static void CallbackLivesSetPosHeight(void *livesPtr_, u32 height);
+static void CallbackLivesGetDirection(void *livesPtr_, s8 *dir);
+static void CallbackLivesSetDirection(void *livesPtr_, s32 dir_);
+static void CallbackLivesSetEventIndex(void *livesPtr_, u16 a1);
+static void CallbackLivesSetUnk_80AB194(void *livesPtr_, s32 a1_, s32 a2);
+static void nullsub_211(void *livesPtr_, u16 a1);
+static bool8 CallbackLivesSpriteRelatedCheck_80AB1C0(void *livesPtr_);
+static bool8 CallbackLivesSpriteRelated_80AB1E4(void *livesPtr_);
+static void CallbackLivesGetFlags(void *livesPtr_, u32 *flags);
+static void CallbackLivesSetFlags(void *livesPtr_, u32 flags);
+static void CallbackLivesClearFlags(void *livesPtr_, u32 flags);
+static void CallbackLivesSpriteRelated_80AB238(void *livesPtr_, s32 a1);
+static s32 CallbackLivesMoveRelative(void *livesPtr_, PixelPos *pos);
+bool8 sub_80A9750(struct GroundLive *ptr, u16 a1);
 void GroundLives_Delete(s32);
 s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_);
-const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
-extern DebugLocation gUnknown_811808C;
-extern u8 gUnknown_8118098[];
-extern u8 gUnknown_81180BC[];
-extern u8 gUnknown_81181B0[];
+void sub_80AB5A4(void);
+s32 sub_80A9F20(struct GroundLive *livesPtr, PixelPos *pixelPos);
+bool8 sub_80AA3F8(struct GroundLive *livesPtr, s32 a1);
+void sub_80AB5D4(struct GroundLive *livesPtr);
+s32 sub_80ABA00(s32);
+void sub_80AAF68(struct GroundLive *livesPtr, u32 unused);
+s32 sub_80A7B94(s16 *a0);
+
+static const CallbackData gGroundLivesCallbacks = {
+    .maybeId = 1,
+    .getIndex = CallbackLivesGetIndex,
+    .getSize = CallbackLivesGetSize,
+    .getHitboxCenter = CallbackLivesGetHitboxCenter,
+    .getPosHeightAndUnk = CallbackLivesGetPosHeightAndUnk,
+    .getDirection = CallbackLivesGetDirection,
+    .getFlags = CallbackLivesGetFlags,
+    .setHitboxPos = CallbackLivesSetHitboxPos,
+    .setPositionBounds = CallbackLivesSetPositionBounds,
+    .moveReal = CallbackLivesMoveReal,
+    .setPosHeight = CallbackLivesSetPosHeight,
+    .setDirection = CallbackLivesSetDirection,
+    .setEventIndex = CallbackLivesSetEventIndex,
+    .livesOnlyNullsub = nullsub_211,
+    .func38 = CallbackLivesSetUnk_80AB194,
+    .setFlags = CallbackLivesSetFlags,
+    .clearFlags = CallbackLivesClearFlags,
+    .func44_livesOnlySpriteRelated = CallbackLivesSpriteRelated_80AB238,
+    .moveRelative = CallbackLivesMoveRelative,
+    .func4C_spriteRelatedCheck = CallbackLivesSpriteRelatedCheck_80AB1C0,
+    .func50_spriteRelated = CallbackLivesSpriteRelated_80AB1E4,
+};
+
+static const s16 gUnknown_8117F64[] = {
+    -1, 0x800, 0x300, 0x300, 0x807, 0x800, 0x805, 0x302,
+    0x306, 0x80B, 0x307, 0x1006, 0x1002, 0x1001, 0x1008,
+    0x100C, 0x1009, 0x100A, 0x1003, 0x1004, 0x803, 0x804,
+    0x100D, 0x100E, 0x100F, 0x1010, 0x1011, 0x1012, 0x1013,
+    0x1014, 0x80D, 0x80E, 0x80F, 0x810, 0x811, 0x812, 0x813,
+    0x814, 0x80D, 0x100E, 0x100F, 0x1010, 0x1011, 0x812,
+    0x1013, 0x1014, 0x1015, 0x1016, 0x1017, 0x818, 0x1019, 0x81A, 0x81B
+};
+
+static const s16 sStarterMons[] = {
+    MONSTER_PIKACHU, MONSTER_MEOWTH, MONSTER_EEVEE, MONSTER_SKITTY, MONSTER_SQUIRTLE, MONSTER_TOTODILE,
+    MONSTER_MUDKIP, MONSTER_PSYDUCK, MONSTER_CHARMANDER, MONSTER_TORCHIC, MONSTER_CYNDAQUIL, MONSTER_CUBONE,
+    MONSTER_MACHOP, MONSTER_BULBASAUR, MONSTER_CHIKORITA, MONSTER_TREECKO,
+    MONSTER_NONE
+};
+
+static const s32 gUnknown_8117FF0[] = {
+    0x600, 0x441, 0x600, 0x441, 0x600, 0x441, 0x600, 0x441
+};
+
+static const s32 gUnknown_8118010[] = {
+    0x2000, 0x16B1, 0x2000, 0x16B1, 0x2000, 0x16B1, 0x2000, 0x16B1
+};
+
+static const s32 gUnknown_8118030[] = {
+    0x800, 0x5AC, 0x800, 0x5AC, 0x800, 0x5AC, 0x800, 0x5AC
+};
+
+static const s32 gUnknown_8118050[] = {
+    0x1400, 0x1400, 0x1800
+};
 
 void AllocGroundLives(void)
 {
     s32 index;
-    struct unkStruct_3001B84_sub *ptr;
+    struct GroundLive *ptr;
 
-    gGroundLivesMeta = MemoryAlloc(sizeof(struct unkStruct_3001B80),6);
-    gGroundLives = MemoryAlloc(sizeof(struct unkStruct_3001B84),6);
+    gGroundLivesMeta = MemoryAlloc(sizeof(*gGroundLivesMeta),6);
+    gGroundLives = MemoryAlloc(sizeof(*gGroundLives),6);
 
     for (index = 0, ptr = &gGroundLives->array[index]; index < UNK_3001B84_ARR_COUNT; index = (s16)(index + 1), ptr++) {
         ptr->unk2 = -1;
@@ -116,7 +250,7 @@ void AllocGroundLives(void)
 void DeleteGroundLives(void)
 {
     int i;
-    struct unkStruct_3001B84_sub *iVar4;
+    struct GroundLive *iVar4;
 
     iVar4 = &gGroundLives->array[0];
     for (i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), iVar4++) {
@@ -169,8 +303,8 @@ void GroundLives_Select(s32 scriptID, s32 group, s32 sector)
     scriptID_s32 = (s16)scriptID;
     group_s32 = (s16)group;
     sector_s32 = (s8)sector;
-    scriptPtr = GetGroundScript(scriptID_s32, &gUnknown_811808C);
-    Log('\0',gUnknown_8118098, scriptID_s32, group_s32, sector_s32);
+    scriptPtr = GetGroundScript(scriptID_s32, DEBUG_LOC_PTR("../ground/ground_lives.c", 542, "GroundLives_Select"));
+    Log('\0',"GroundLives Select %3d  %3d  %3d", scriptID_s32, group_s32, sector_s32);
 
     groupPtr = &scriptPtr->groups[group_s32];
     sectorPtr = &groupPtr->sectors[sector_s32];
@@ -186,7 +320,7 @@ void GroundLives_Select(s32 scriptID, s32 group, s32 sector)
 void GroundLives_Cancel(s32 scriptID, s32 sector)
 {
     s32 index;
-    struct unkStruct_3001B84_sub *ptr;
+    struct GroundLive *ptr;
     s32 sector_s32;
     s32 scriptID_s32;
 
@@ -194,7 +328,7 @@ void GroundLives_Cancel(s32 scriptID, s32 sector)
     sector_s32 = (s8) sector;
 
 
-    Log('\0',gUnknown_81180BC, scriptID_s32, sector_s32);
+    Log('\0',"GroundLives Cancel %3d  %3d", scriptID_s32, sector_s32);
 
     index = 0;
     ptr = &gGroundLives->array[0];
@@ -206,14 +340,12 @@ void GroundLives_Cancel(s32 scriptID, s32 sector)
     }
 }
 
-extern const char gUnknown_81180D8[];
-
 void GroundLives_CancelBlank_1(void)
 {
     s32 i;
-    struct unkStruct_3001B84_sub *ptr;
+    struct GroundLive *ptr;
 
-    Log(0, gUnknown_81180D8);
+    Log(0, "GroundLives CancelBlank");
     for (i = 0, ptr = &gGroundLives->array[0]; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), ptr++) {
         if (ptr->unk2 != -1) {
             PixelPos pixelPos;
@@ -230,12 +362,12 @@ void GroundLives_CancelBlank_1(void)
 void GroundLives_CancelBlank_2(void)
 {
     s32 i;
-    struct unkStruct_3001B84_sub *ptr;
+    struct GroundLive *ptr;
 
-    Log(0, gUnknown_81180D8);
+    Log(0, "GroundLives CancelBlank");
     for (i = 0, ptr = &gGroundLives->array[0]; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), ptr++) {
         if (ptr->unk2 != -1) {
-            if (ptr->unk11C & 0x800) {
+            if (ptr->flags & 0x800) {
                 ptr->unk13E = FindGroundEvent(0x20, &ptr->unk144, &ptr->unk14C);
             }
             else {
@@ -245,12 +377,10 @@ void GroundLives_CancelBlank_2(void)
     }
 }
 
-s32 sub_80A7B94(s16 *a0);
-
 s32 sub_80A7AE8(s16 a0)
 {
     s32 i;
-    struct unkStruct_3001B84_sub *ptr;
+    struct GroundLive *ptr;
     s16 sp = a0;
 
     sub_80A7B94(&sp);
@@ -268,7 +398,7 @@ s32 sub_80A7AE8(s16 a0)
 UNUSED static s16 sub_80A7B40(s32 a0_)
 {
     s32 i;
-    struct unkStruct_3001B84_sub *ptr;
+    struct GroundLive *ptr;
     s32 a0 = (s16) a0_;
 
     for (i = 0, ptr = &gGroundLives->array[0]; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), ptr++) {
@@ -279,20 +409,6 @@ UNUSED static s16 sub_80A7B40(s32 a0_)
 
     return -1;
 }
-
-struct GroundLiveTypeData
-{
-    s16 unk0;
-    s16 unk2;
-    const char *unk4;
-    u8 unk8;
-    u8 unk9;
-};
-
-extern const struct GroundLiveTypeData gGroundLivesTypeData_811E63C[];
-
-extern s32 sub_808D6A4(s32 *ptr);
-extern s32 sub_808D654(s32 *ptr);
 
 s32 sub_80A7B94(s16 *a0)
 {
@@ -454,8 +570,7 @@ s32 sub_80A7B94(s16 *a0)
     return ret;
 }
 
-extern const s16 gUnknown_81180F0[];
-extern const s16 gUnknown_81180FC[];
+static const s16 gUnknown_81180F0[] = {MONSTER_ONIX, MONSTER_NIDOKING, MONSTER_PIDGEY, MONSTER_RATTATA, MONSTER_SANDSHREW, MONSTER_ZUBAT};
 
 s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
 {
@@ -540,9 +655,17 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
             case 35:
                 *speciesDst = GetPlayerPokemonStruct()->speciesNum;
                 break;
-            case 36:
-                *speciesDst = gUnknown_81180FC[RandInt(15)];
+            case 36: {
+                // Identical to sStarterMons table
+                static const s16 starterSpecies[] = { MONSTER_PIKACHU, MONSTER_MEOWTH, MONSTER_EEVEE, MONSTER_SKITTY, MONSTER_SQUIRTLE, MONSTER_TOTODILE,
+                    MONSTER_MUDKIP, MONSTER_PSYDUCK, MONSTER_CHARMANDER, MONSTER_TORCHIC, MONSTER_CYNDAQUIL, MONSTER_CUBONE,
+                    MONSTER_MACHOP, MONSTER_BULBASAUR, MONSTER_CHIKORITA, MONSTER_TREECKO
+                };
+
+                *speciesDst = starterSpecies[RandInt(ARRAY_COUNT(starterSpecies) - 1)]; // For some reason it ignores the last entry
                 return -1;
+            }
+
             case 32: {
                 s32 friendSpecies = (s16) GetScriptVarValue(NULL, NEW_FRIEND_KIND);
                 if (friendSpecies != MONSTER_NONE) {
@@ -589,34 +712,12 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
     return ret;
 }
 
-extern const char gUnknown_811811C[];
-extern const char gUnknown_8118194[];
-
-extern void sub_809CD68(struct Struct3001B84_sub120 *dst);
-
-extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
-extern void sub_80A7428(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 monsterId_, s32 a3);
-extern void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
-extern bool8 ExecutePredefinedScript(Action *param_1, s32 *param_2, s16 index, const DebugLocation *debug);
-extern void sub_809D170(s32 r0, s32 r1);
-extern void sub_80A74E4(struct UnkGroundSpriteStruct *ptr);
-
-extern const CallbackData gGroundLivesCallbacks[];
-extern const DebugLocation gUnknown_8118170;
-extern const DebugLocation gUnknown_811817C;
-extern const DebugLocation gUnknown_8118188;
-extern const DebugLocation gUnknown_81181F4;
-extern const DebugLocation gUnknown_8118218;
-extern const DebugLocation gUnknown_8118250;
-
-bool8 sub_80A9750(struct unkStruct_3001B84_sub *ptr, u16 a1);
-
 s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_)
 {
     s32 id = (s16) id_;
     s32 group = (s16) group_;
     s32 sector = (s8) sector_;
-    struct unkStruct_3001B84_sub *livesPtr;
+    struct GroundLive *livesPtr;
     const struct GroundLiveTypeData *typeDataPtr;
     const ScriptCommand *scrCommand;
     s16 sp12, species;
@@ -682,44 +783,44 @@ s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_
     }
 
     livesPtr = &gGroundLives->array[id];
-    Log(0, gUnknown_811811C, id, sp12, typeDataPtr->unk0, group, sector);
+    Log(0, "GroundLive Add id %3d  kind %3d  type %3d  group %3d  sector %3d", id, sp12, typeDataPtr->unk0, group, sector);
     var24 = (livesPtr->unk2 == -1);
-    livesPtr->unk0 = id;
+    livesPtr->id = id;
     livesPtr->unk2 = sp12;
     livesPtr->unk4 = group;
     livesPtr->unk6 = sector;
-    livesPtr->unk8 = species;
+    livesPtr->speciesId = species;
     sub_809CD68(&livesPtr->unk120);
     livesPtr->unk120.unk0 = 9;
 
     switch (typeDataPtr->unk0) {
         case 1:
-            livesPtr->unk11C = 0x2300181D;
+            livesPtr->flags = 0x2300181D;
             livesPtr->unk120.unk0 = 1;
             break;
         case 2:
-            livesPtr->unk11C = 0x23001000;
+            livesPtr->flags = 0x23001000;
             break;
         case 3:
-            livesPtr->unk11C = 0x2300068D;
+            livesPtr->flags = 0x2300068D;
             break;
         case 6:
-            livesPtr->unk11C = 0x2000000D;
+            livesPtr->flags = 0x2000000D;
             break;
         case 7:
-            livesPtr->unk11C = 0x20000;
+            livesPtr->flags = 0x20000;
             break;
         case 8:
-            livesPtr->unk11C = 0;
+            livesPtr->flags = 0;
             break;
         case 9:
-            livesPtr->unk11C = 0xC0000;
+            livesPtr->flags = 0xC0000;
             break;
         case 10:
-            livesPtr->unk11C = 0x20010000;
+            livesPtr->flags = 0x20010000;
             break;
         default:
-            livesPtr->unk11C = 0x2300068D;
+            livesPtr->flags = 0x2300068D;
             break;
     }
 
@@ -732,7 +833,7 @@ s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_
     if (var24) {
         struct GroundLivesMeta_Sub1 *metaPtr;
 
-        livesPtr->unk142 = livesPtr->unk1C;
+        livesPtr->direction1 = livesPtr->unk1C;
         livesPtr->unk144.x = livesPtr->unk20.x - livesPtr->unk14.x;
         livesPtr->unk14C.x = livesPtr->unk20.x + livesPtr->unk14.x;
         livesPtr->unk144.y = livesPtr->unk20.y - livesPtr->unk14.y;
@@ -751,7 +852,7 @@ s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_
         }
     }
 
-    if (livesPtr->unk11C & 0x800) {
+    if (livesPtr->flags & 0x800) {
         livesPtr->unk13E = FindGroundEvent(0x20, &livesPtr->unk144, &livesPtr->unk14C);
     }
     else {
@@ -760,87 +861,87 @@ s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_
 
     GetCurrentDungeonBounds(&livesPtr->unk28, &livesPtr->unk30);
     if (var24) {
-        livesPtr->unk15D = -1;
+        livesPtr->direction2 = -1;
         livesPtr->unk15E = 0x300;
         livesPtr->unk160 = 1;
         livesPtr->unk164 = 0;
         livesPtr->unk168 = 0x807;
-        livesPtr->unk15C = 1;
+        livesPtr->directionRelated = TRUE;
         livesPtr->unk16A = 0;
-        sub_80A7428(&livesPtr->unk170, livesPtr->unk2, livesPtr->unk8, livesPtr->unk11C);
+        sub_80A7428(&livesPtr->unk170, livesPtr->unk2, livesPtr->speciesId, livesPtr->flags);
     }
 
     if (!var24) {
-        if (sub_809D684(&livesPtr->unk38, &gGroundLivesMeta->unk32C)) {
+        if (sub_809D684(&livesPtr->action, &gGroundLivesMeta->unk32C)) {
             s32 r10;
             s32 r9;
             // Note: these ptr variables are unfortunately a fakematch, but I was not able to match the function without them...
             u16 *ptr1;
             s8 *ptr2;
 
-            if (livesPtr->unk38.scriptData2.savedState != 0) {
-                r10 = livesPtr->unk38.scriptData2.unk24;
-                r9 = livesPtr->unk38.scriptData2.unk26;
+            if (livesPtr->action.scriptData2.savedState != 0) {
+                r10 = livesPtr->action.scriptData2.unk24;
+                r9 = livesPtr->action.scriptData2.unk26;
 
-                ptr1 = &livesPtr->unk38.scriptData.unk24;
-                ptr2 = &livesPtr->unk38.scriptData.unk26;
+                ptr1 = &livesPtr->action.scriptData.unk24;
+                ptr2 = &livesPtr->action.scriptData.unk26;
             }
             else {
-                r10 = livesPtr->unk38.scriptData.unk24;
-                r9 = livesPtr->unk38.scriptData.unk26;
+                r10 = livesPtr->action.scriptData.unk24;
+                r9 = livesPtr->action.scriptData.unk26;
 
-                ptr1 = &livesPtr->unk38.scriptData.unk24;
-                ptr2 = &livesPtr->unk38.scriptData.unk26;
+                ptr1 = &livesPtr->action.scriptData.unk24;
+                ptr2 = &livesPtr->action.scriptData.unk26;
             }
 
-            InitAction2(&livesPtr->unk38);
-            InitActionWithParams(&livesPtr->unk38, gGroundLivesCallbacks, livesPtr, group, sector);
-            GroundScript_ExecutePP(&livesPtr->unk38, NULL, &gGroundLivesMeta->unk32C, &gUnknown_8118170);
+            InitAction2(&livesPtr->action);
+            InitActionWithParams(&livesPtr->action, &gGroundLivesCallbacks, livesPtr, group, sector);
+            GroundScript_ExecutePP(&livesPtr->action, NULL, &gGroundLivesMeta->unk32C, DEBUG_LOC_PTR("../ground/ground_lives.c", 1417, "GroundLives_Add"));
             ASM_MATCH_TRICK(ptr2);
             *ptr1 = r10;
             *ptr2 = r9;
             r8 = TRUE;
         }
         else {
-            InitAction2(&livesPtr->unk38);
-            InitActionWithParams(&livesPtr->unk38, gGroundLivesCallbacks, livesPtr, group, sector);
+            InitAction2(&livesPtr->action);
+            InitActionWithParams(&livesPtr->action, &gGroundLivesCallbacks, livesPtr, group, sector);
         }
     }
     else {
-        InitActionWithParams(&livesPtr->unk38, gGroundLivesCallbacks, livesPtr, group, sector);
+        InitActionWithParams(&livesPtr->action, &gGroundLivesCallbacks, livesPtr, group, sector);
     }
 
     scrCommand = ptr->scripts[1];
     if (scrCommand == NULL) {
         scrCommand = gFunctionScriptTable[19].script;
     }
-    SetPredefinedScript(&livesPtr->unk38, 1, scrCommand);
+    SetPredefinedScript(&livesPtr->action, 1, scrCommand);
 
     scrCommand = ptr->scripts[2];
     if (scrCommand == NULL) {
         scrCommand = gFunctionScriptTable[4].script;
     }
-    SetPredefinedScript(&livesPtr->unk38, 2, scrCommand);
+    SetPredefinedScript(&livesPtr->action, 2, scrCommand);
 
     scrCommand = ptr->scripts[3];
     if (scrCommand == NULL) {
         scrCommand = gFunctionScriptTable[6].script;
     }
-    SetPredefinedScript(&livesPtr->unk38, 3, scrCommand);
+    SetPredefinedScript(&livesPtr->action, 3, scrCommand);
 
     if (ptr->scripts[0] != NULL) {
-        SetPredefinedScript(&livesPtr->unk38, 0, ptr->scripts[0]);
-        if (!var24 && !r8 && !(livesPtr->unk11C & 0x1800)) {
-            GroundScript_ExecutePP(&livesPtr->unk38, NULL, &gGroundLivesMeta->unk32C, &gUnknown_811817C);
-            livesPtr->unk38.scriptData.unk24 = livesPtr->unk160 | livesPtr->unk15E;
-            livesPtr->unk38.scriptData.unk26 = livesPtr->unk142;
+        SetPredefinedScript(&livesPtr->action, 0, ptr->scripts[0]);
+        if (!var24 && !r8 && !(livesPtr->flags & 0x1800)) {
+            GroundScript_ExecutePP(&livesPtr->action, NULL, &gGroundLivesMeta->unk32C, DEBUG_LOC_PTR("../ground/ground_lives.c", 1460, "GroundLives_Add"));
+            livesPtr->action.scriptData.unk24 = livesPtr->unk160 | livesPtr->unk15E;
+            livesPtr->action.scriptData.unk26 = livesPtr->direction1;
         }
-        ExecutePredefinedScript(&livesPtr->unk38, NULL, 0, &gUnknown_8118188);
+        ExecutePredefinedScript(&livesPtr->action, NULL, 0, DEBUG_LOC_PTR("../ground/ground_lives.c", 1466, "GroundLives_Add"));
     }
     else if (r8) {
-        livesPtr->unk15C = 1;
-        livesPtr->unk142 = livesPtr->unk38.scriptData.unk26;
-        sub_80A9750(livesPtr, livesPtr->unk38.scriptData.unk24);
+        livesPtr->directionRelated = TRUE;
+        livesPtr->direction1 = livesPtr->action.scriptData.unk26;
+        sub_80A9750(livesPtr, livesPtr->action.scriptData.unk24);
     }
 
     if (typeDataPtr->unk0 == 1 && var24) {
@@ -853,21 +954,18 @@ s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_
 void GroundLives_Delete(s32 id_)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
-    Log(0, gUnknown_8118194, id);
+    Log(0, "GroundLives Delete id %3d", id);
     sub_80A74E4(&livesPtr->unk170);
-    InitAction2(&livesPtr->unk38);
+    InitAction2(&livesPtr->action);
     livesPtr->unk2 = -1;
 }
-
-extern void sub_80A6688(struct UnkGroundSpriteStruct *ptr, s32 a0);
-void sub_80AB5A4(void);
 
 void sub_80A86C8(s32 id_, u32 flags)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
         if (livesPtr->unk13C == 0) {
@@ -885,15 +983,15 @@ void sub_80A86C8(s32 id_, u32 flags)
             }
         }
 
-        livesPtr->unk11C |= flags;
-        sub_80A6688(&livesPtr->unk170, livesPtr->unk11C);
+        livesPtr->flags |= flags;
+        sub_80A6688(&livesPtr->unk170, livesPtr->flags);
     }
 }
 
 void sub_80A8750(s32 id_, u32 flags)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
         if (livesPtr->unk13C == 0) {
@@ -902,20 +1000,15 @@ void sub_80A8750(s32 id_, u32 flags)
             }
         }
 
-        livesPtr->unk11C &= ~(flags);
-        sub_80A6688(&livesPtr->unk170, livesPtr->unk11C);
+        livesPtr->flags &= ~(flags);
+        sub_80A6688(&livesPtr->unk170, livesPtr->flags);
     }
 }
-
-extern void sub_809CD8C(struct Struct3001B84_sub120 *dst, s32 a1);
-extern bool8 sub_809B1C0(s32 a0, u32 kind, PokemonStruct1 *a2);
-extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
-extern bool8 sub_809D678(Action *action);
 
 void sub_80A87AC(s32 id_, s32 a1)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
         sub_809CD8C(&livesPtr->unk120, a1);
@@ -925,7 +1018,7 @@ void sub_80A87AC(s32 id_, s32 a1)
 bool8 sub_80A87E0(s32 id_, PokemonStruct1 *a1)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1 && sub_809B1C0(7, 0, a1)) {
         sub_809CD8C(&livesPtr->unk120, 5);
@@ -938,10 +1031,10 @@ bool8 sub_80A87E0(s32 id_, PokemonStruct1 *a1)
 Action *sub_80A882C(s32 id_)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
-        return &livesPtr->unk38;
+        return &livesPtr->action;
     }
 
     return NULL;
@@ -951,10 +1044,10 @@ UNUSED static bool8 sub_80A885C(s32 id_, ScriptInfoSmall *scriptInfo, s32 a2_)
 {
     s32 id = (s16) id_;
     s32 a2 = (s16) a2_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
-        return GetPredefinedScript(&livesPtr->unk38, scriptInfo, a2);
+        return GetPredefinedScript(&livesPtr->action, scriptInfo, a2);
     }
 
     return FALSE;
@@ -963,10 +1056,10 @@ UNUSED static bool8 sub_80A885C(s32 id_, ScriptInfoSmall *scriptInfo, s32 a2_)
 UNUSED static bool8 sub_80A88A0(s32 id_)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
-        return sub_809D678(&livesPtr->unk38);
+        return sub_809D678(&livesPtr->action);
     }
 
     return FALSE;
@@ -975,31 +1068,31 @@ UNUSED static bool8 sub_80A88A0(s32 id_)
 bool8 GroundLives_ExecuteScript(s32 id_, s32 *a1, ScriptInfoSmall *scriptInfo)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
-    Log(0, gUnknown_81181B0, id, livesPtr->unk2, scriptInfo);
+    Log(0, "GroundLives Execute %3d  kind %3d  %p", id, livesPtr->unk2, scriptInfo);
 
     if (livesPtr->unk2 != -1) {
-        GroundScript_ExecutePP(&livesPtr->unk38, a1, scriptInfo, &gUnknown_81181F4);
-        livesPtr->unk15C = 1;
+        GroundScript_ExecutePP(&livesPtr->action, a1, scriptInfo, DEBUG_LOC_PTR("../ground/ground_lives.c", 1703, "GroundLives_ExecuteScript"));
+        livesPtr->directionRelated = TRUE;
         return TRUE;
     }
 
     return FALSE;
 }
 
-bool8 _ExecutePlayerScript(struct unkStruct_3001B84_sub *livesPtr, s32 *a1, ScriptInfoSmall *scriptInfo)
+bool8 _ExecutePlayerScript(struct GroundLive *livesPtr, s32 *a1, ScriptInfoSmall *scriptInfo)
 {
     livesPtr->unk15E = 0x300;
     livesPtr->unk160 = 1;
     livesPtr->unk164 = 0;
     if (livesPtr->unk168 != 0x807) {
         livesPtr->unk168 = 0x807;
-        livesPtr->unk15C = 1;
+        livesPtr->directionRelated = TRUE;
     }
 
     if (scriptInfo != NULL) {
-        return GroundScript_ExecutePP(&livesPtr->unk38, a1, scriptInfo, &gUnknown_8118218);
+        return GroundScript_ExecutePP(&livesPtr->action, a1, scriptInfo, DEBUG_LOC_PTR("../ground/ground_lives.c", 1736, "_ExecutePlayerScript"));
     }
 
     return FALSE;
@@ -1008,7 +1101,7 @@ bool8 _ExecutePlayerScript(struct unkStruct_3001B84_sub *livesPtr, s32 *a1, Scri
 UNUSED static bool8 sub_80A89AC(s32 id_, s32 *a1, ScriptInfoSmall *scriptInfo)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     return _ExecutePlayerScript(livesPtr, a1, scriptInfo);
 }
@@ -1020,28 +1113,20 @@ bool8 GroundLives_ExecutePlayerScriptActionLives(s32 id1_, s32 id2_)
 
     if (id1 >= 0 && id2 >= 0) {
         ScriptInfoSmall scriptInfo;
-        struct unkStruct_3001B84_sub *livesPtr1 = &gGroundLives->array[id1];
-        struct unkStruct_3001B84_sub *livesPtr2 = &gGroundLives->array[id2];
+        struct GroundLive *livesPtr1 = &gGroundLives->array[id1];
+        struct GroundLive *livesPtr2 = &gGroundLives->array[id2];
 
-        if (livesPtr1->unk2 != -1 && livesPtr2->unk2 != -1 && GetPredefinedScript(&livesPtr2->unk38, &scriptInfo, 2)) {
+        if (livesPtr1->unk2 != -1 && livesPtr2->unk2 != -1 && GetPredefinedScript(&livesPtr2->action, &scriptInfo, 2)) {
             s32 sp = 1;
 
             sp |= (id2 << 0x10);
-            ExecutePredefinedScript(&livesPtr2->unk38, (void *) &livesPtr1->unk38.unk8, 3, &gUnknown_8118250); // TODO: fix unk8 field?
+            ExecutePredefinedScript(&livesPtr2->action, (void *) &livesPtr1->action.unk8, 3, DEBUG_LOC_PTR("../ground/ground_lives.c", 1785, "GroundLives_ExecutePlayerScriptActionLives")); // TODO: fix unk8 field?
             return _ExecutePlayerScript(livesPtr1, &sp, &scriptInfo);
         }
     }
 
     return FALSE;
 }
-
-extern bool8 sub_80AC274(s32 a0, ScriptInfoSmall *scriptInfo, s32 a2);
-extern void GroundObject_ExecuteScript(s32, void *, ScriptInfoSmall *);
-extern bool8 sub_80ADC64(s32 id, ScriptInfoSmall *dst);
-extern bool8 GroundScriptNotify(Action *param_1, s32 param_2);
-extern bool8 GroundScript_Cancel(Action *r0);
-extern PokemonStruct1 *sub_80A8D54(s32);
-extern s32 sub_809CDB8(struct Struct3001B84_sub120 *dst);
 
 bool8 sub_80A8A5C(s32 id1_, s32 id2_)
 {
@@ -1050,7 +1135,7 @@ bool8 sub_80A8A5C(s32 id1_, s32 id2_)
 
     if (id1 >= 0 && id2 >= 0) {
         ScriptInfoSmall scriptInfo1;
-        struct unkStruct_3001B84_sub *livesPtr1 = &gGroundLives->array[id1];
+        struct GroundLive *livesPtr1 = &gGroundLives->array[id1];
 
         if (sub_80AC274(id2, &scriptInfo1, 2)) {
             s32 sp = 2;
@@ -1058,7 +1143,7 @@ bool8 sub_80A8A5C(s32 id1_, s32 id2_)
 
             sp |= (id2 << 0x10);
             sub_80AC274(id2, &scriptInfo2, 3);
-            GroundObject_ExecuteScript(id2, &livesPtr1->unk38.unk8, &scriptInfo2);
+            GroundObject_ExecuteScript(id2, &livesPtr1->action.unk8, &scriptInfo2);
             return _ExecutePlayerScript(livesPtr1, &sp, &scriptInfo1);
         }
     }
@@ -1073,7 +1158,7 @@ bool8 sub_80A8ACC(s32 id1_, s32 id2_)
 
     if (id1 >= 0 && id2 >= 0) {
         ScriptInfoSmall scriptInfo;
-        struct unkStruct_3001B84_sub *livesPtr1 = &gGroundLives->array[id1];
+        struct GroundLive *livesPtr1 = &gGroundLives->array[id1];
 
         if (sub_80ADC64(id2, &scriptInfo)) {
             return _ExecutePlayerScript(livesPtr1, NULL, &scriptInfo);
@@ -1087,12 +1172,12 @@ bool8 GroundLivesNotifyAll(s32 a0_)
 {
     s32 i;
     s32 a0 = (s16) a0_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[0];
+    struct GroundLive *livesPtr = &gGroundLives->array[0];
     bool8 ret = FALSE;
 
     for (i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
         if (livesPtr->unk2 != -1) {
-            ret |= GroundScriptNotify(&livesPtr->unk38, a0);
+            ret |= GroundScriptNotify(&livesPtr->action, a0);
         }
     }
 
@@ -1102,12 +1187,12 @@ bool8 GroundLivesNotifyAll(s32 a0_)
 bool8 GroundLivesCancelAll(void)
 {
     s32 i;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[0];
+    struct GroundLive *livesPtr = &gGroundLives->array[0];
     bool8 ret = FALSE;
 
     for (i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
         if (livesPtr->unk2 != -1) {
-            ret |= GroundScript_Cancel(&livesPtr->unk38);
+            ret |= GroundScript_Cancel(&livesPtr->action);
         }
     }
 
@@ -1117,7 +1202,7 @@ bool8 GroundLivesCancelAll(void)
 s32 sub_80A8BBC(s32 id_)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     return livesPtr->unk2;
 }
@@ -1125,19 +1210,19 @@ s32 sub_80A8BBC(s32 id_)
 s32 sub_80A8BD8(s32 id_, u32 *a1)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
-    *a1 = livesPtr->unk11C;
+    *a1 = livesPtr->flags;
     return livesPtr->unk2;
 }
 
 s32 sub_80A8BFC(s32 id_)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
-        return livesPtr->unk8;
+        return livesPtr->speciesId;
     }
 
     return 0;
@@ -1155,7 +1240,7 @@ s32 sub_80A8C2C(s32 a0)
 s32 sub_80A8C4C(s32 id_, DungeonLocation *dungLoc)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
         PokemonStruct1 *monStrPtr = sub_80A8D54(livesPtr->unk2);
@@ -1167,23 +1252,21 @@ s32 sub_80A8C4C(s32 id_, DungeonLocation *dungLoc)
             dungLoc->floor = 0;
         }
 
-        return livesPtr->unk8;
+        return livesPtr->speciesId;
     }
 
     return 0;
 }
 
-extern const s16 gUnknown_8117FCE[];
-
-bool8 sub_80A8C98(s32 id_)
+bool8 GroundLives_IsStarterMon(s32 id_)
 {
     const s16 *arr;
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
-        for (arr = gUnknown_8117FCE; *arr != 0; arr++) {
-            if (*arr == livesPtr->unk8) {
+        for (arr = sStarterMons; *arr != MONSTER_NONE; arr++) {
+            if (*arr == livesPtr->speciesId) {
                 return TRUE;
             }
         }
@@ -1192,13 +1275,13 @@ bool8 sub_80A8C98(s32 id_)
     return FALSE;
 }
 
-bool8 sub_80A8CF0(s32 cmpVal_)
+bool8 IsStarterMonster(s32 monsterId_)
 {
     const s16 *arr;
-    s32 cmpVal = (s16) cmpVal_;
+    s32 monsterId = (s16) monsterId_;
 
-    for (arr = gUnknown_8117FCE; *arr != 0; arr++) {
-        if (*arr == (s16) cmpVal) {
+    for (arr = sStarterMons; *arr != MONSTER_NONE; arr++) {
+        if (*arr == (s16) monsterId) {
             return TRUE;
         }
     }
@@ -1209,7 +1292,7 @@ bool8 sub_80A8CF0(s32 cmpVal_)
 bool8 sub_80A8D20(void)
 {
     s32 id = (s16) sub_80A7AE8(0);
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
     s32 val = sub_809CDB8(&livesPtr->unk120);
 
     return (val == 1);
@@ -1283,12 +1366,10 @@ PokemonStruct1 *sub_80A8D54(s32 a0)
 PokemonStruct1 *sub_80A8E9C(s32 id_)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     return sub_80A8D54(livesPtr->unk2);
 }
-
-extern const char gGroundLives_InvalidityText[];
 
 void sub_80A8EC0(u8 *buffer,s32 a1)
 {
@@ -1318,7 +1399,7 @@ void sub_80A8EC0(u8 *buffer,s32 a1)
         }
     }
     else {
-        strcpy(buffer, gGroundLives_InvalidityText);
+        InlineStrcpy(buffer, _("{COLOR RED_W}invalidity{RESET}"));
     }
 }
 
@@ -1334,7 +1415,7 @@ void sub_80A8F50(u8 *buffer, s32 a1_, s32 size)
 UNUSED static void sub_80A8F74(s32 id_, u8 *buffer)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     sub_80A8EC0(buffer, livesPtr->unk2);
 }
@@ -1342,7 +1423,7 @@ UNUSED static void sub_80A8F74(s32 id_, u8 *buffer)
 s32 sub_80A8F9C(s32 id_, PixelPos *pixelPos)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 == -1) {
         pixelPos->x = 0;
@@ -1358,7 +1439,7 @@ s32 sub_80A8F9C(s32 id_, PixelPos *pixelPos)
 s32 sub_80A8FD8(s32 id_, PixelPos *pixelPos)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 == -1) {
         pixelPos->x = 0;
@@ -1372,12 +1453,10 @@ s32 sub_80A8FD8(s32 id_, PixelPos *pixelPos)
     return livesPtr->unk2;
 }
 
-s32 sub_80A9F20(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPos);
-
 UNUSED static s32 sub_80A9028(s32 id_, PixelPos *pixelPos)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     sub_80A9F20(livesPtr, pixelPos);
     return livesPtr->unk2;
@@ -1386,13 +1465,13 @@ UNUSED static s32 sub_80A9028(s32 id_, PixelPos *pixelPos)
 s32 sub_80A9050(s32 id_, s8 *a1)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 == -1) {
         *a1 = -1;
     }
     else {
-        *a1 = livesPtr->unk142;
+        *a1 = livesPtr->direction1;
     }
 
     return livesPtr->unk2;
@@ -1402,10 +1481,10 @@ s32 sub_80A9090(s32 id_, s32 a1_)
 {
     s32 id = (s16) id_;
     s32 a1 = (s8) a1_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
-        livesPtr->unk142 = a1;
+        livesPtr->direction1 = a1;
     }
 
     return livesPtr->unk2;
@@ -1414,7 +1493,7 @@ s32 sub_80A9090(s32 id_, s32 a1_)
 s32 sub_80A90C8(s32 id_)
 {
     s32 id = (s16) id_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     return livesPtr->unk140;
 }
@@ -1425,8 +1504,8 @@ UNUSED static bool8 sub_80A90E8(s32 id1_, s32 id2_)
     s32 id2 = (s16) id2_;
 
     if (id1 != id2) {
-        struct unkStruct_3001B84_sub *livesPtr1 = &gGroundLives->array[id1];
-        struct unkStruct_3001B84_sub *livesPtr2 = &gGroundLives->array[id2];
+        struct GroundLive *livesPtr1 = &gGroundLives->array[id1];
+        struct GroundLive *livesPtr2 = &gGroundLives->array[id2];
 
         if (livesPtr1->unk2 != -1 && livesPtr2->unk2 != -1) {
             s32 dir;
@@ -1446,7 +1525,7 @@ UNUSED static bool8 sub_80A90E8(s32 id1_, s32 id2_)
             }
 
             if (dir != -1) {
-                livesPtr1->unk142 = dir;
+                livesPtr1->direction1 = dir;
                 return TRUE;
             }
         }
@@ -1455,16 +1534,14 @@ UNUSED static bool8 sub_80A90E8(s32 id1_, s32 id2_)
     return FALSE;
 }
 
-extern s32 sub_8002984(s32 _direction1, u32 caseID);
-
 UNUSED static bool8 sub_80A91A0(s32 id1_, s32 id2_)
 {
     s32 id1 = (s16) id1_;
     s32 id2 = (s16) id2_;
 
     if (id1 != id2) {
-        struct unkStruct_3001B84_sub *livesPtr1 = &gGroundLives->array[id1];
-        struct unkStruct_3001B84_sub *livesPtr2 = &gGroundLives->array[id2];
+        struct GroundLive *livesPtr1 = &gGroundLives->array[id1];
+        struct GroundLive *livesPtr2 = &gGroundLives->array[id2];
 
         if (livesPtr1->unk2 != -1 && livesPtr2->unk2 != -1) {
             s32 dir1, dir2;
@@ -1481,17 +1558,17 @@ UNUSED static bool8 sub_80A91A0(s32 id1_, s32 id2_)
 
             if (dir1 != -1 && dir2 != -1) {
                 if (livesPtr1->unk2 <= 36) {
-                    livesPtr1->unk142 = dir1;
+                    livesPtr1->direction1 = dir1;
                 }
                 else {
-                    livesPtr1->unk142 = dir2;
+                    livesPtr1->direction1 = dir2;
                 }
 
                 if (livesPtr2->unk2 <= 37) {
-                    livesPtr2->unk142 = sub_8002984(dir1, 5);
+                    livesPtr2->direction1 = sub_8002984(dir1, 5);
                 }
                 else {
-                    livesPtr2->unk142 = sub_8002984(dir2, 5);
+                    livesPtr2->direction1 = sub_8002984(dir2, 5);
                 }
 
                 return TRUE;
@@ -1505,13 +1582,13 @@ UNUSED static bool8 sub_80A91A0(s32 id1_, s32 id2_)
 s32 GetLivesCollision_80A92A0(s32 id_, u32 flags, PixelPos *pixelPos1, PixelPos *pixelPos2)
 {
     s32 i;
-    struct unkStruct_3001B84_sub *livesPtr;
+    struct GroundLive *livesPtr;
     s32 id = (s16) id_;
 
     for (livesPtr = &gGroundLives->array[0], i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
         if (i != id
             && livesPtr->unk2 != -1
-            && livesPtr->unk11C & flags
+            && livesPtr->flags & flags
             && livesPtr->unk144.x < pixelPos2->x
             && livesPtr->unk14C.x > pixelPos1->x
             && livesPtr->unk144.y < pixelPos2->y
@@ -1523,16 +1600,14 @@ s32 GetLivesCollision_80A92A0(s32 id_, u32 flags, PixelPos *pixelPos1, PixelPos 
     return -1;
 }
 
-extern u8 sub_80A5934(s32 param_1, PixelPos *, PixelPos *);
-
 s32 sub_80A9344(s32 id_, u32 flags, PixelPos *pixelPos1, PixelPos *pixelPos2)
 {
     s32 i;
-    struct unkStruct_3001B84_sub *livesPtr;
+    struct GroundLive *livesPtr;
     s32 id = (s16) id_;
 
     for (livesPtr = &gGroundLives->array[0], i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
-        if (i != id && livesPtr->unk2 != -1 && livesPtr->unk11C & flags) {
+        if (i != id && livesPtr->unk2 != -1 && livesPtr->flags & flags) {
             PixelPos resultPos = {0};
             resultPos.x = livesPtr->unk144.x + livesPtr->unk14.x;
             resultPos.y = livesPtr->unk144.y + livesPtr->unk14.y;
@@ -1552,7 +1627,7 @@ u8 sub_80A93F0(s32 id_, s32 a1_)
 {
     s32 id = (s16) id_;
     s32 a1 = (u8) a1_;
-    struct unkStruct_3001B84_sub *livesPtr = &gGroundLives->array[id];
+    struct GroundLive *livesPtr = &gGroundLives->array[id];
     PixelPos pixPos1 = {livesPtr->unk144.x / 2048, livesPtr->unk144.y / 2048};
     PixelPos posTemp = {((livesPtr->unk14C.x - 1) / 2048), ((livesPtr->unk14C.y - 1) / 2048)};
     PixelPos pixPos2 = {(posTemp.x- pixPos1.x) + 1, (posTemp.y -pixPos1.y) + 1};
@@ -1560,33 +1635,29 @@ u8 sub_80A93F0(s32 id_, s32 a1_)
     return sub_80A5934(a1, &pixPos1, &pixPos2);
 }
 
-extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
-extern bool8 sub_80A58C8(PixelPos *, PixelPos *);
-extern s32 sub_80AC4C8(u32 a0, PixelPos *, PixelPos *);
-
-s32 sub_80A9488(struct unkStruct_3001B84_sub *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
+s32 sub_80A9488(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
 {
     PixelPos pixPos1 = {posArg1->x / 2048, posArg1->y / 2048};
     PixelPos posTemp = {((posArg2->x - 1) / 2048), ((posArg2->y - 1) / 2048)};
     PixelPos pixPos2 = {(posTemp.x- pixPos1.x) + 1, (posTemp.y -pixPos1.y) + 1};
 
-    if (livesPtr->unk11C & 1) {
+    if (livesPtr->flags & 1) {
         if (CheckMapCollision_80A585C(&pixPos1, &pixPos2))
             return 1;
     }
-    if (livesPtr->unk11C & 2) {
+    if (livesPtr->flags & 2) {
         if (sub_80A58C8(&pixPos1, &pixPos2))
             return 1;
     }
-    if (livesPtr->unk11C & 4) {
-        if ((s16) GetLivesCollision_80A92A0(livesPtr->unk0, 4, posArg1, posArg2) >= 0)
+    if (livesPtr->flags & 4) {
+        if ((s16) GetLivesCollision_80A92A0(livesPtr->id, 4, posArg1, posArg2) >= 0)
             return 4;
     }
-    if (livesPtr->unk11C & 8) {
+    if (livesPtr->flags & 8) {
         if ((s16) sub_80AC4C8(4, posArg1, posArg2) >= 0)
             return 8;
     }
-    if (livesPtr->unk11C & 0x10) {
+    if (livesPtr->flags & 0x10) {
         if ((s16) FindGroundEvent(0x40, posArg1, posArg2) >= 0)
             return 0x10;
     }
@@ -1594,55 +1665,52 @@ s32 sub_80A9488(struct unkStruct_3001B84_sub *livesPtr, PixelPos *posArg1, Pixel
     return 0;
 }
 
-extern void sub_80AC3E0(s32 id, s32 *a1);
-extern PixelPos SetVecFromDirectionSpeed(s32 r1, u32 r2);
-
-s32 sub_80A95AC(struct unkStruct_3001B84_sub *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
+s32 sub_80A95AC(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos *posArg2)
 {
     PixelPos pixPos1 = {posArg1->x / 2048, posArg1->y / 2048};
     PixelPos posTemp = {((posArg2->x - 1) / 2048), ((posArg2->y - 1) / 2048)};
     PixelPos pixPos2 = {(posTemp.x- pixPos1.x) + 1, (posTemp.y -pixPos1.y) + 1};
 
-    if (livesPtr->unk11C & 1) {
+    if (livesPtr->flags & 1) {
         if (CheckMapCollision_80A585C(&pixPos1, &pixPos2))
             return 1;
     }
-    if (livesPtr->unk11C & 2) {
+    if (livesPtr->flags & 2) {
         if (sub_80A58C8(&pixPos1, &pixPos2))
             return 1;
     }
-    if (livesPtr->unk11C & 4) {
-        s32 id2 = (s16) GetLivesCollision_80A92A0(livesPtr->unk0, 0x44, posArg1, posArg2);
+    if (livesPtr->flags & 4) {
+        s32 id2 = (s16) GetLivesCollision_80A92A0(livesPtr->id, 0x44, posArg1, posArg2);
         // Needed for matching.
         s32 id2_ = id2;
         if (id2 >= 0) {
-            struct unkStruct_3001B84_sub *ptr2 = &gGroundLives->array[id2];
+            struct GroundLive *ptr2 = &gGroundLives->array[id2];
 
-            if (ptr2->unk11C & 0x40) {
-                if (ptr2->unk11C & 0x200) {
-                    ptr2->unk142 = sub_8002984(livesPtr->unk142, 5);
+            if (ptr2->flags & 0x40) {
+                if (ptr2->flags & 0x200) {
+                    ptr2->direction1 = sub_8002984(livesPtr->direction1, 5);
                 }
-                if (GroundLives_ExecutePlayerScriptActionLives(livesPtr->unk0, id2_))
+                if (GroundLives_ExecutePlayerScriptActionLives(livesPtr->id, id2_))
                     return 2;
             }
             return 1;
         }
     }
-    if (livesPtr->unk11C & 8) {
+    if (livesPtr->flags & 8) {
         s32 id2 = (s16) sub_80AC4C8(0x44, posArg1, posArg2);
         if (id2 >= 0) {
             s32 sp;
 
             sub_80AC3E0(id2, &sp);
-            if ((sp & 0x40) && sub_80A8A5C(livesPtr->unk0, id2))
+            if ((sp & 0x40) && sub_80A8A5C(livesPtr->id, id2))
                 return 2;
             return 1;
         }
     }
-    if (livesPtr->unk11C & 0x10) {
+    if (livesPtr->flags & 0x10) {
         s32 id2 = (s16) FindGroundEvent(0x40, posArg1, posArg2);
         if (id2 >= 0) {
-            if (sub_80A8ACC(livesPtr->unk0, id2))
+            if (sub_80A8ACC(livesPtr->id, id2))
                 return 2;
             return 1;
         }
@@ -1651,9 +1719,7 @@ s32 sub_80A95AC(struct unkStruct_3001B84_sub *livesPtr, PixelPos *posArg1, Pixel
     return 0;
 }
 
-extern const s16 gUnknown_8117F64[];
-
-bool8 sub_80A9750(struct unkStruct_3001B84_sub *livesPtr, u16 a1)
+bool8 sub_80A9750(struct GroundLive *livesPtr, u16 a1)
 {
     s32 r2;
     u16 f1 = a1 & 0xFF;
@@ -1691,7 +1757,7 @@ bool8 sub_80A9750(struct unkStruct_3001B84_sub *livesPtr, u16 a1)
             }
             else {
                 // Peak programming right here
-                switch (livesPtr->unk8) {
+                switch (livesPtr->speciesId) {
                     case 12: case 15: case 22: case 41: case 42: case 49: case 72: case 73: case 74: case 81: case 82:
                     case 91: case 92: case 93: case 109: case 110: case 116: case 117: case 118: case 119: case 130:
                     case 133: case 137: case 142: case 144: case 145: case 146: case 150: case 151: case 165: case 166:
@@ -1751,16 +1817,16 @@ bool8 sub_80A9750(struct unkStruct_3001B84_sub *livesPtr, u16 a1)
 
     if (livesPtr->unk168 != (s16) r2) {
         livesPtr->unk168 = r2;
-        livesPtr->unk15C = 1;
+        livesPtr->directionRelated = TRUE;
     }
     else if (livesPtr->unk168 & 0x1000) {
-        livesPtr->unk15C = 1;
+        livesPtr->directionRelated = TRUE;
     }
 
     return FALSE;
 }
 
-s32 sub_80A9F20(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPosArg)
+s32 sub_80A9F20(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
 {
     s32 ret;
     PixelPos pixPos1, pixPos2;
@@ -1788,9 +1854,7 @@ s32 sub_80A9F20(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPosArg)
     }
 }
 
-void sub_80AAF68(struct unkStruct_3001B84_sub *livesPtr, u32 unused);
-
-s32 sub_80A9F94(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPosArg)
+s32 sub_80A9F94(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
 {
     s32 ret;
     bool8 changed;
@@ -1843,7 +1907,7 @@ s32 sub_80A9F94(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPosArg)
     }
 }
 
-s32 sub_80AA074(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPosArg)
+s32 sub_80AA074(struct GroundLive *livesPtr, PixelPos *pixelPosArg)
 {
     s32 ret;
     PixelPos pixPos1, pixPos2;
@@ -1876,10 +1940,10 @@ s32 sub_80AA074(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPosArg)
     if (ret == 0) {
         livesPtr->unk144 = pixPos1;
         livesPtr->unk14C = pixPos2;
-        if (livesPtr->unk11C & 0x10) {
+        if (livesPtr->flags & 0x10) {
             s32 id = (s16) FindGroundEvent(0x20, &pixPos1, &pixPos2);
             if (id >= 0) {
-                if (livesPtr->unk13E != id && sub_80A8ACC(livesPtr->unk0, id)) {
+                if (livesPtr->unk13E != id && sub_80A8ACC(livesPtr->id, id)) {
                     livesPtr->unk13E = id;
                     ret = 2;
                 }
@@ -1894,17 +1958,12 @@ s32 sub_80AA074(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPosArg)
     return ret;
 }
 
-bool8 sub_80AA3F8(struct unkStruct_3001B84_sub *livesPtr, s32 a1);
-extern s32 sub_80AC554(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
-extern s32 sub_80AC448(s32 id_, PixelPos *pixelPos);
-extern bool8 sub_80A595C(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
-
-s32 sub_80AA180(struct unkStruct_3001B84_sub *livesPtr, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
+s32 sub_80AA180(struct GroundLive *livesPtr, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
 {
     PixelPos pixPos1, pixPos2;
 
     if (flags & 4) {
-        s32 id = (s16) sub_80A9344(livesPtr->unk0, 0x80, pixelPosArg1, pixelPosArg2);
+        s32 id = (s16) sub_80A9344(livesPtr->id, 0x80, pixelPosArg1, pixelPosArg2);
         if (id >= 0) {
             s32 dir;
 
@@ -1914,13 +1973,13 @@ s32 sub_80AA180(struct unkStruct_3001B84_sub *livesPtr, u32 flags, PixelPos *pix
             dir = (s8) VecDirection8Radial(&pixPos2);
             if (dir != -1) {
                 // s8 memes
-                s8 *dirDst = &livesPtr->unk142;
+                s8 *dirDst = &livesPtr->direction1;
                 s8 dirS8 = (s8) dir;
                 *dirDst = dirS8;
-                if (livesPtr->unk15D != livesPtr->unk142) {
-                    livesPtr->unk15C = 1;
+                if (livesPtr->direction2 != livesPtr->direction1) {
+                    livesPtr->directionRelated = TRUE;
                 }
-                if (sub_80AA3F8(livesPtr, livesPtr->unk142))
+                if (sub_80AA3F8(livesPtr, livesPtr->direction1))
                     return 3;
             }
             return 0;
@@ -1937,13 +1996,13 @@ s32 sub_80AA180(struct unkStruct_3001B84_sub *livesPtr, u32 flags, PixelPos *pix
             dir = (s8) VecDirection8Radial(&pixPos2);
             if (dir != -1) {
                 // s8 memes
-                s8 *dirDst = &livesPtr->unk142;
+                s8 *dirDst = &livesPtr->direction1;
                 s8 dirS8 = (s8) dir;
                 *dirDst = dirS8;
-                if (livesPtr->unk15D != livesPtr->unk142) {
-                    livesPtr->unk15C = 1;
+                if (livesPtr->direction2 != livesPtr->direction1) {
+                    livesPtr->directionRelated = TRUE;
                 }
-                if (sub_80AA3F8(livesPtr, livesPtr->unk142))
+                if (sub_80AA3F8(livesPtr, livesPtr->direction1))
                     return 3;
             }
             return 0;
@@ -1953,7 +2012,7 @@ s32 sub_80AA180(struct unkStruct_3001B84_sub *livesPtr, u32 flags, PixelPos *pix
     return 0;
 }
 
-s32 sub_80AA2BC(struct unkStruct_3001B84_sub *livesPtr, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
+s32 sub_80AA2BC(struct GroundLive *livesPtr, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
 {
     PixelPos pixPos1, pixPos2, pixPos3;
     PixelPos posTemp;
@@ -1968,20 +2027,20 @@ s32 sub_80AA2BC(struct unkStruct_3001B84_sub *livesPtr, u32 flags, PixelPos *pix
     pixPos4 = (PixelPos) {(posTemp.x- pixPos2.x) + 1, (posTemp.y -pixPos2.y) + 1};
 
     if (flags & 4) {
-        s32 id2 = (s16) GetLivesCollision_80A92A0(livesPtr->unk0, 0x80, &pixPos1, &pixPos3);
+        s32 id2 = (s16) GetLivesCollision_80A92A0(livesPtr->id, 0x80, &pixPos1, &pixPos3);
         if (id2 >= 0) {
-            struct unkStruct_3001B84_sub *ptr2 = &gGroundLives->array[id2];
-            if (ptr2->unk11C & 0x200) {
-                ptr2->unk142 = sub_8002984(livesPtr->unk142, 5);
+            struct GroundLive *ptr2 = &gGroundLives->array[id2];
+            if (ptr2->flags & 0x200) {
+                ptr2->direction1 = sub_8002984(livesPtr->direction1, 5);
             }
-            if (GroundLives_ExecutePlayerScriptActionLives(livesPtr->unk0, id2))
+            if (GroundLives_ExecutePlayerScriptActionLives(livesPtr->id, id2))
                 return 3;
         }
     }
     if (flags & 8) {
         s32 id2 = (s16) sub_80AC4C8(0x80, &pixPos1, &pixPos3);
         if (id2 >= 0) {
-            if (sub_80A8A5C(livesPtr->unk0, id2))
+            if (sub_80A8A5C(livesPtr->id, id2))
                 return 3;
         }
     }
@@ -1992,11 +2051,7 @@ s32 sub_80AA2BC(struct unkStruct_3001B84_sub *livesPtr, u32 flags, PixelPos *pix
     return 0;
 }
 
-extern const s32 gUnknown_8117FF0[];
-extern const s32 gUnknown_8118010[];
-extern const s32 gUnknown_8118030[];
-
-bool8 sub_80AA3F8(struct unkStruct_3001B84_sub *livesPtr, s32 a1_)
+bool8 sub_80AA3F8(struct GroundLive *livesPtr, s32 a1_)
 {
     s32 i;
     s32 a1 = (s8) a1_;
@@ -2085,19 +2140,19 @@ bool8 sub_80AA3F8(struct unkStruct_3001B84_sub *livesPtr, s32 a1_)
     return FALSE;
 }
 
-s32 sub_80AA660(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
+s32 sub_80AA660(struct GroundLive *livesPtr, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
 {
     s32 id = (s16) sub_80AC4C8(0x100, pixelPosArg1, pixelPosArg2);
 
     if (id >= 0) {
-        if (sub_80A8A5C(livesPtr->unk0, id))
+        if (sub_80A8A5C(livesPtr->id, id))
             return 4;
     }
 
     return 0;
 }
 
-bool8 sub_80AA690(struct unkStruct_3001B84_sub *livesPtr, s32 a1_)
+bool8 sub_80AA690(struct GroundLive *livesPtr, s32 a1_)
 {
     s32 i;
     s32 a1 = (s8) a1_;
@@ -2137,7 +2192,7 @@ bool8 sub_80AA690(struct unkStruct_3001B84_sub *livesPtr, s32 a1_)
     return FALSE;
 }
 
-s32 sub_80AA7B0(struct unkStruct_3001B84_sub *livesPtr, s16 *a1, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
+s32 sub_80AA7B0(struct GroundLive *livesPtr, s16 *a1, u32 flags, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2)
 {
     PixelPos pixPos1 = *pixelPosArg1;
     PixelPos pixPos3 = *pixelPosArg2;
@@ -2146,12 +2201,12 @@ s32 sub_80AA7B0(struct unkStruct_3001B84_sub *livesPtr, s16 *a1, u32 flags, Pixe
     PixelPos pixPos4 = {(tempPos.x - pixPos2.x) + 1, (tempPos.y - pixPos2.y) + 1};
 
     if (flags & 4) {
-        s32 id2 = (s16) GetLivesCollision_80A92A0(livesPtr->unk0, 0x80, &pixPos1, &pixPos3);
+        s32 id2 = (s16) GetLivesCollision_80A92A0(livesPtr->id, 0x80, &pixPos1, &pixPos3);
         if (id2 >= 0) {
             s16 var = (s16) sub_80A8BBC(id2);
             if (var >= 14 && var < 30 && sub_80A8E9C(id2) != NULL) {
                 *a1 = id2;
-                sub_80A9090(id2, (s8) sub_8002984(livesPtr->unk142, 5));
+                sub_80A9090(id2, (s8) sub_8002984(livesPtr->direction1, 5));
                 return 5;
             }
         }
@@ -2165,7 +2220,7 @@ s32 sub_80AA7B0(struct unkStruct_3001B84_sub *livesPtr, s16 *a1, u32 flags, Pixe
     return 0;
 }
 
-bool8 sub_80AA8BC(struct unkStruct_3001B84_sub *livesPtr, s16 *a1, s32 dir_)
+bool8 sub_80AA8BC(struct GroundLive *livesPtr, s16 *a1, s32 dir_)
 {
     s32 i;
     s32 dir = (s8) dir_;
@@ -2242,7 +2297,7 @@ bool8 sub_80AA8BC(struct unkStruct_3001B84_sub *livesPtr, s16 *a1, s32 dir_)
     return FALSE;
 }
 
-void sub_80AAAE8(struct unkStruct_3001B84_sub *livesPtr, u32 a1, s32 dir_, s32 unused)
+void sub_80AAAE8(struct GroundLive *livesPtr, u32 a1, s32 dir_, s32 unused)
 {
     s32 unk;
     s32 dir = (s8) dir_;
@@ -2251,7 +2306,7 @@ void sub_80AAAE8(struct unkStruct_3001B84_sub *livesPtr, u32 a1, s32 dir_, s32 u
     livesPtr->unk15E = 0x300;
     livesPtr->unk160 = 1;
     if (dir != -1) {
-        livesPtr->unk142 = dir;
+        livesPtr->direction1 = dir;
     }
 
     switch (a1) {
@@ -2383,7 +2438,7 @@ void sub_80AAAE8(struct unkStruct_3001B84_sub *livesPtr, u32 a1, s32 dir_, s32 u
             }
             break;
         case 9:
-            if (livesPtr->unk11C & 0x1000) {
+            if (livesPtr->flags & 0x1000) {
                 gGroundLivesMeta->unk28 = dir;
             }
             else {
@@ -2391,7 +2446,7 @@ void sub_80AAAE8(struct unkStruct_3001B84_sub *livesPtr, u32 a1, s32 dir_, s32 u
             }
             livesPtr->unk164 = 0;
             var_28 = 0x800;
-            livesPtr->unk142 = 4;
+            livesPtr->direction1 = 4;
             if (dir != -1) {
                 PixelPos pixPos = SetVecFromDirectionSpeed(dir, 0x100);
                 if (sub_80AA074(livesPtr, &pixPos) == 2) {
@@ -2400,10 +2455,10 @@ void sub_80AAAE8(struct unkStruct_3001B84_sub *livesPtr, u32 a1, s32 dir_, s32 u
             }
             break;
         case 10:
-            sub_80AA3F8(livesPtr, livesPtr->unk142);
+            sub_80AA3F8(livesPtr, livesPtr->direction1);
             break;
         case 11:
-            if (!sub_80AA690(livesPtr, livesPtr->unk142)) {
+            if (!sub_80AA690(livesPtr, livesPtr->direction1)) {
                 ScriptInfoSmall scriptInfo;
 
                 GetFunctionScript(NULL, &scriptInfo, 9);
@@ -2413,13 +2468,13 @@ void sub_80AAAE8(struct unkStruct_3001B84_sub *livesPtr, u32 a1, s32 dir_, s32 u
         case 19: {
             s16 sp;
 
-            if (sub_80AA8BC(livesPtr, &sp, livesPtr->unk142)) {
+            if (sub_80AA8BC(livesPtr, &sp, livesPtr->direction1)) {
                 ScriptInfoSmall scriptInfo;
 
                 GetFunctionScript(NULL, &scriptInfo, 6);
-                GroundLives_ExecuteScript(sp, (void *) &livesPtr->unk38.unk8, &scriptInfo);
+                GroundLives_ExecuteScript(sp, (void *) &livesPtr->action.unk8, &scriptInfo);
                 _ExecutePlayerScript(livesPtr, NULL, NULL);
-                sub_809B1C0(7, 0, sub_80A8E9C(sp)); // TODO: fix
+                sub_809B1C0(7, 0, sub_80A8E9C(sp));
             }
             else {
                 sub_809B1C0(7, 0, NULL);
@@ -2442,30 +2497,30 @@ void sub_80AAAE8(struct unkStruct_3001B84_sub *livesPtr, u32 a1, s32 dir_, s32 u
     if (var_28 != -1 && var_28 != livesPtr->unk168) {
         struct UnkGroundSpriteStruct *groundSpritePtr;
 
-        livesPtr->unk15C = 0;
+        livesPtr->directionRelated = FALSE;
         groundSpritePtr = &livesPtr->unk170;
         livesPtr->unk168 = var_28;
-        livesPtr->unk15D = livesPtr->unk142;
-        sub_80A6EFC(groundSpritePtr, var_28, livesPtr->unk142);
+        livesPtr->direction2 = livesPtr->direction1;
+        sub_80A6EFC(groundSpritePtr, var_28, livesPtr->direction1);
         return;
     }
 
-    if (livesPtr->unk15C != 0 || livesPtr->unk15D != livesPtr->unk142) {
+    if (livesPtr->directionRelated || livesPtr->direction2 != livesPtr->direction1) {
         struct UnkGroundSpriteStruct *groundSpritePtr;
         s32 unk168;
 
-        livesPtr->unk15C = 0;
+        livesPtr->directionRelated = FALSE;
         groundSpritePtr = &livesPtr->unk170;
         unk168 = livesPtr->unk168;
-        livesPtr->unk15D = livesPtr->unk142;
-        sub_80A6EFC(groundSpritePtr, unk168, livesPtr->unk142);
+        livesPtr->direction2 = livesPtr->direction1;
+        sub_80A6EFC(groundSpritePtr, unk168, livesPtr->direction1);
     }
 }
 
-void sub_80AAF68(struct unkStruct_3001B84_sub *livesPtr, u32 unused)
+void sub_80AAF68(struct GroundLive *livesPtr, u32 unused)
 {
-    if (livesPtr->unk11C & 0x4000) {
-        if (sub_80A93F0(livesPtr->unk0, 1)) {
+    if (livesPtr->flags & 0x4000) {
+        if (sub_80A93F0(livesPtr->id, 1)) {
             if (livesPtr->unk170.unk58 == 0) {
                 livesPtr->unk16A = 438;
                 livesPtr->unk16C = -1;
@@ -2474,30 +2529,36 @@ void sub_80AAF68(struct unkStruct_3001B84_sub *livesPtr, u32 unused)
                 livesPtr->unk16A = 448;
                 livesPtr->unk16C = -1;
             }
-            sub_80A8750(livesPtr->unk0, 0x1000000);
+            sub_80A8750(livesPtr->id, 0x1000000);
         }
         else {
             if (livesPtr->unk170.unk58 == 438) {
                 livesPtr->unk16A = 448;
                 livesPtr->unk16C = -1;
             }
-            sub_80A86C8(livesPtr->unk0, 0x1000000);
+            sub_80A86C8(livesPtr->id, 0x1000000);
         }
     }
 }
 
-s32 CallbackLivesGetIndex(struct unkStruct_3001B84_sub *livesPtr)
+static s16 CallbackLivesGetIndex(void *livesPtr_)
 {
-    return livesPtr->unk0;
+    struct GroundLive *livesPtr = livesPtr_;
+
+    return livesPtr->id;
 }
 
-void CallbackLivesGetSize(struct unkStruct_3001B84_sub *livesPtr, PixelPos *out)
+static void CallbackLivesGetSize(void *livesPtr_, PixelPos *out)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     *out = livesPtr->unkC;
 }
 
-void CallbackLivesSetHitboxPos(struct unkStruct_3001B84_sub *livesPtr, PixelPos *posOrNull)
+static void CallbackLivesSetHitboxPos(void *livesPtr_, PixelPos *posOrNull)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     if (posOrNull != NULL) {
         livesPtr->unk144.x = posOrNull->x - livesPtr->unk14.x;
         livesPtr->unk14C.x = posOrNull->x + livesPtr->unk14.x;
@@ -2510,69 +2571,85 @@ void CallbackLivesSetHitboxPos(struct unkStruct_3001B84_sub *livesPtr, PixelPos 
         livesPtr->unk144.y = livesPtr->unk20.y - livesPtr->unk14.y;
         livesPtr->unk14C.y = livesPtr->unk20.y + livesPtr->unk14.y;
         livesPtr->unk154.x = livesPtr->unk154.y = 0;
-        if (livesPtr->unk142 != livesPtr->unk1C) {
-            livesPtr->unk15C = 1;
+        if (livesPtr->direction1 != livesPtr->unk1C) {
+            livesPtr->directionRelated = TRUE;
         }
-        livesPtr->unk142 = livesPtr->unk1C;
+        livesPtr->direction1 = livesPtr->unk1C;
     }
 }
 
-void CallbackLivesSetPositionBounds(struct unkStruct_3001B84_sub *livesPtr, PixelPos *from, PixelPos *to)
+static void CallbackLivesSetPositionBounds(void *livesPtr_, PixelPos *from, PixelPos *to)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     livesPtr->unk28 = *from;
     livesPtr->unk30 = *to;
 }
 
-void CallbackLivesGetHitboxCenter(struct unkStruct_3001B84_sub *livesPtr, PixelPos *out)
+static void CallbackLivesGetHitboxCenter(void *livesPtr_, PixelPos *out)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     out->x = livesPtr->unk144.x + livesPtr->unk14.x;
     out->y = livesPtr->unk144.y + livesPtr->unk14.y;
 }
 
-bool32 CallbackLivesMoveReal(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pos)
+static s32 CallbackLivesMoveReal(void *livesPtr_, PixelPos *pos)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     return sub_80A9F20(livesPtr, pos);
 }
 
-void CallbackLivesGetPosHeightAndUnk(struct unkStruct_3001B84_sub *livesPtr, u32 *height, u32 *unk)
+static void CallbackLivesGetPosHeightAndUnk(void *livesPtr_, u32 *height, u32 *unk)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     *height = livesPtr->unk154.x;
     *unk = livesPtr->unk154.y;
 }
 
-void CallbackLivesSetPosHeight(struct unkStruct_3001B84_sub *livesPtr, u32 height)
+static void CallbackLivesSetPosHeight(void *livesPtr_, u32 height)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     livesPtr->unk154.x = height;
 }
 
-void CallbackLivesGetDirection(struct unkStruct_3001B84_sub *livesPtr, s8 *dir)
+static void CallbackLivesGetDirection(void *livesPtr_, s8 *dir)
 {
-    *dir = livesPtr->unk142;
+    struct GroundLive *livesPtr = livesPtr_;
+
+    *dir = livesPtr->direction1;
 }
 
-void CallbackLivesSetDirection(struct unkStruct_3001B84_sub *livesPtr, s32 dir_)
+static void CallbackLivesSetDirection(void *livesPtr_, s32 dir_)
 {
+    struct GroundLive *livesPtr = livesPtr_;
     s32 dir = (s8) dir_;
 
     if (dir != -1) {
         // s8 memes
-        s8 *dirDst = &livesPtr->unk142;
+        s8 *dirDst = &livesPtr->direction1;
         s8 dirS8 = (s8) dir;
         *dirDst = dirS8;
-        if (livesPtr->unk15D != livesPtr->unk142) {
-            livesPtr->unk15C = 1;
+        if (livesPtr->direction2 != livesPtr->direction1) {
+            livesPtr->directionRelated = TRUE;
         }
     }
 }
 
-void CallbackLivesSetEventIndex(struct unkStruct_3001B84_sub *livesPtr, u16 a1)
+static void CallbackLivesSetEventIndex(void *livesPtr_, u16 a1)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     sub_80A9750(livesPtr, a1);
 }
 
 // s16 memes forced a fakematch https://decomp.me/scratch/x2ALy
-void CallbackLivesSetUnk_80AB194(struct unkStruct_3001B84_sub *livesPtr, s32 a1_, s32 a2)
+static void CallbackLivesSetUnk_80AB194(void *livesPtr_, s32 a1_, s32 a2)
 {
+    struct GroundLive *livesPtr = livesPtr_;
     s32 a1Match = (s16) a1_;
     #ifndef NONMATCHING
     register s16 a1 asm("r3") = a1Match;
@@ -2588,18 +2665,16 @@ void CallbackLivesSetUnk_80AB194(struct unkStruct_3001B84_sub *livesPtr, s32 a1_
     livesPtr->unk16C = a2;
 }
 
-void nullsub_211(void)
+static void nullsub_211(void *livesPtr_, u16 a1)
 {
 
 }
 
-extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
-extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
-extern void sub_80A6EC8(struct UnkGroundSpriteStruct *ptr, s32 a1);
-
-bool8 CallbackLivesSpriteRelatedCheck_80AB1C0(struct unkStruct_3001B84_sub *livesPtr)
+static bool8 CallbackLivesSpriteRelatedCheck_80AB1C0(void *livesPtr_)
 {
-    if (livesPtr->unk15C != 0) {
+    struct GroundLive *livesPtr = livesPtr_;
+
+    if (livesPtr->directionRelated) {
         return TRUE;
     }
     else {
@@ -2607,8 +2682,10 @@ bool8 CallbackLivesSpriteRelatedCheck_80AB1C0(struct unkStruct_3001B84_sub *live
     }
 }
 
-bool8 CallbackLivesSpriteRelated_80AB1E4(struct unkStruct_3001B84_sub *livesPtr)
+static bool8 CallbackLivesSpriteRelated_80AB1E4(void *livesPtr_)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     if (livesPtr->unk16A != 0) {
         return TRUE;
     }
@@ -2617,58 +2694,61 @@ bool8 CallbackLivesSpriteRelated_80AB1E4(struct unkStruct_3001B84_sub *livesPtr)
     }
 }
 
-void CallbackLivesGetFlags(struct unkStruct_3001B84_sub *livesPtr, u32 *flags)
+static void CallbackLivesGetFlags(void *livesPtr_, u32 *flags)
 {
-    *flags = livesPtr->unk11C;
+    struct GroundLive *livesPtr = livesPtr_;
+
+    *flags = livesPtr->flags;
 }
 
-void CallbackLivesSetFlags(struct unkStruct_3001B84_sub *livesPtr, u32 flags)
+static void CallbackLivesSetFlags(void *livesPtr_, u32 flags)
 {
-    sub_80A86C8(livesPtr->unk0, flags);
+    struct GroundLive *livesPtr = livesPtr_;
+
+    sub_80A86C8(livesPtr->id, flags);
 }
 
-void CallbackLivesClearFlags(struct unkStruct_3001B84_sub *livesPtr, u32 flags)
+static void CallbackLivesClearFlags(void *livesPtr_, u32 flags)
 {
-    sub_80A8750(livesPtr->unk0, flags);
+    struct GroundLive *livesPtr = livesPtr_;
+
+    sub_80A8750(livesPtr->id, flags);
 }
 
-void CallbackLivesSpriteRelated_80AB238(struct unkStruct_3001B84_sub *livesPtr, s32 a1)
+static void CallbackLivesSpriteRelated_80AB238(void *livesPtr_, s32 a1)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     sub_80A6EC8(&livesPtr->unk170, a1);
 }
 
-s32 CallbackLivesMoveRelative(struct unkStruct_3001B84_sub *livesPtr, PixelPos *pos)
+static s32 CallbackLivesMoveRelative(void *livesPtr_, PixelPos *pos)
 {
+    struct GroundLive *livesPtr = livesPtr_;
+
     return sub_80A9F94(livesPtr, pos);
 }
-
-extern const DebugLocation gUnknown_8118280;
-extern const DebugLocation gUnknown_811828C;
-void sub_80AB5D4(struct unkStruct_3001B84_sub *livesPtr);
-extern u32 sub_809CDC8(struct Struct3001B84_sub120 *strPtr, u32 *r6, s8 *r7, s32 *param_4, void *param_5, u32 param_6);
-extern u8 sub_809D248(PixelPos *r0);
-extern s16 HandleAction(Action *action, const DebugLocation *debug);
 
 void GroundLives_Action(void)
 {
     s32 i;
-    struct unkStruct_3001B84_sub *livesPtr;
+    struct GroundLive *livesPtr;
     struct GroundLivesMeta_Sub1 *metaPtr;
 
     for (livesPtr = &gGroundLives->array[0], i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
         if (livesPtr->unk2 != -1) {
-            s32 actionResult = (s16) HandleAction(&livesPtr->unk38, &gUnknown_8118280);
+            s32 actionResult = (s16) HandleAction(&livesPtr->action, DEBUG_LOC_PTR("../ground/ground_lives.c", 4514, "GroundLives_Action"));
             switch (actionResult) {
                 case 4:
                     GroundLives_Delete(i);
                     continue;
                 case 0:
-                    if (livesPtr->unk11C & 0x800) {
+                    if (livesPtr->flags & 0x800) {
                         PixelPos var_44;
                         u32 var_4C = actionResult;
                         s8 dir = -1;
                         s32 var_48 = actionResult;
-                        u32 unkVar = sub_809CDC8(&livesPtr->unk120, &var_4C, &dir, &var_48, &var_44, livesPtr->unk11C);
+                        u32 unkVar = sub_809CDC8(&livesPtr->unk120, &var_4C, &dir, &var_48, &var_44, livesPtr->flags);
 
                         switch (unkVar) {
                             case 1:
@@ -2723,17 +2803,17 @@ void GroundLives_Action(void)
                             }
                         }
                     }
-                    else if (livesPtr->unk11C & 0x1000) {
+                    else if (livesPtr->flags & 0x1000) {
                         sub_80AB5D4(livesPtr);
                     }
                     else {
-                        ExecutePredefinedScript(&livesPtr->unk38, NULL, 1, &gUnknown_811828C);
+                        ExecutePredefinedScript(&livesPtr->action, NULL, 1, DEBUG_LOC_PTR("../ground/ground_lives.c", 4622, "GroundLives_Action"));
                     }
                     break;
             }
-            if (livesPtr->unk15C != 0) {
-                livesPtr->unk15C = 0;
-                sub_80A6EFC(&livesPtr->unk170, livesPtr->unk168, (livesPtr->unk15D = livesPtr->unk142));
+            if (livesPtr->directionRelated) {
+                livesPtr->directionRelated = FALSE;
+                sub_80A6EFC(&livesPtr->unk170, livesPtr->unk168, (livesPtr->direction2 = livesPtr->direction1));
             }
         }
     }
@@ -2746,10 +2826,10 @@ void GroundLives_Action(void)
     if (livesPtr->unk2 == -1) {
         sub_80AB5A4();
     }
-    else if (livesPtr->unk11C & 0x2000) {
+    else if (livesPtr->flags & 0x2000) {
         sub_80AB5A4();
     }
-    else if (livesPtr->unk11C & 0x1000) {
+    else if (livesPtr->flags & 0x1000) {
         s32 prevUnk24 = gGroundLivesMeta->unk24;
         if (prevUnk24 < 0) {
             s32 i;
@@ -2811,11 +2891,7 @@ void sub_80AB5A4(void)
     }
 }
 
-s32 sub_80ABA00(s32);
-
-extern const s32 gUnknown_8118050[];
-
-void sub_80AB5D4(struct unkStruct_3001B84_sub *livesPtr)
+void sub_80AB5D4(struct GroundLive *livesPtr)
 {
     struct GroundLivesMeta_Sub1 *metaPtr = &gGroundLivesMeta->unk0[livesPtr->unk13C];
 
@@ -2824,12 +2900,12 @@ void sub_80AB5D4(struct unkStruct_3001B84_sub *livesPtr)
 
     livesPtr->unk15E = 0x300;
     livesPtr->unk160 = 1;
-    if (livesPtr->unk11C & 0x2000) {
-        if (livesPtr->unk142 != 4 || livesPtr->unk168 != 0x800) {
+    if (livesPtr->flags & 0x2000) {
+        if (livesPtr->direction1 != 4 || livesPtr->unk168 != 0x800) {
             livesPtr->unk164 = 0;
             livesPtr->unk168 = 0x800;
-            livesPtr->unk142 = 4;
-            livesPtr->unk15C = 1;
+            livesPtr->direction1 = 4;
+            livesPtr->directionRelated = TRUE;
         }
         if (gGroundLivesMeta->unk28 != -1) {
             PixelPos pixPos = SetVecFromDirectionSpeed(gGroundLivesMeta->unk28, 0x100);
@@ -2965,7 +3041,7 @@ void sub_80AB5D4(struct unkStruct_3001B84_sub *livesPtr)
         if (sub_80A9F20(livesPtr, &pixPos16) == 0) {
             s32 r4;
             PixelPos pixPos24 = { pixPos16.x - pixPos32.x, pixPos16.y - pixPos32.y};
-            livesPtr->unk142 = sub_8002B04(livesPtr->unk142, (s8) VecDirection8Radial(&pixPos24));
+            livesPtr->direction1 = sub_8002B04(livesPtr->direction1, (s8) VecDirection8Radial(&pixPos24));
             if (metaPtr->unk0 > 0) {
                 s16 asS16;
 
@@ -2980,13 +3056,13 @@ void sub_80AB5D4(struct unkStruct_3001B84_sub *livesPtr)
                 sub_80AAF68(livesPtr, 0);
             }
 
-            if (livesPtr->unk15C != 0 || r4 != livesPtr->unk168 || livesPtr->unk15D != livesPtr->unk142) {
+            if (livesPtr->directionRelated || r4 != livesPtr->unk168 || livesPtr->direction2 != livesPtr->direction1) {
                 struct UnkGroundSpriteStruct *groundSpritePtr;
 
-                livesPtr->unk15C = 0;
+                livesPtr->directionRelated = FALSE;
                 groundSpritePtr = &livesPtr->unk170;
                 livesPtr->unk168 = r4;
-                sub_80A6EFC(groundSpritePtr, r4, (livesPtr->unk15D = livesPtr->unk142));
+                sub_80A6EFC(groundSpritePtr, r4, (livesPtr->direction2 = livesPtr->direction1));
             }
         }
     }
@@ -3017,15 +3093,10 @@ s32 sub_80ABA00(s32 a0)
     return ret;
 }
 
-extern void sub_80A7524(struct UnkGroundSpriteStruct *ptr, s32 monsterId_, PixelPos *pixelPosArg, s32 a3);
-extern bool8 sub_80A66D4(struct UnkGroundSpriteStruct *ptr);
-extern void sub_80A74F0(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 a2_, s32 a3);
-
-
 void sub_80ABA7C(void)
 {
     s32 i;
-    struct unkStruct_3001B84_sub *livesPtr;
+    struct GroundLive *livesPtr;
 
     for (livesPtr = &gGroundLives->array[0], i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), livesPtr++) {
         if (livesPtr->unk2 != -1) {
@@ -3036,14 +3107,14 @@ void sub_80ABA7C(void)
                 sub_80A9750(livesPtr, livesPtr->unk160);
             }
             if (sub_80A66D4(&livesPtr->unk170)) {
-                livesPtr->unk15C = 0;
-                sub_80A6EFC(&livesPtr->unk170, livesPtr->unk168, livesPtr->unk15D);
+                livesPtr->directionRelated = FALSE;
+                sub_80A6EFC(&livesPtr->unk170, livesPtr->unk168, livesPtr->direction2);
             }
             if (livesPtr->unk16A != 0) {
-                sub_80A74F0(&livesPtr->unk170, livesPtr->unk16A, livesPtr->unk142, livesPtr->unk16C);
+                sub_80A74F0(&livesPtr->unk170, livesPtr->unk16A, livesPtr->direction1, livesPtr->unk16C);
                 livesPtr->unk16A = 0;
             }
-            sub_80A7524(&livesPtr->unk170, livesPtr->unk8, &pixPos, r7);
+            sub_80A7524(&livesPtr->unk170, livesPtr->speciesId, &pixPos, r7);
         }
     }
 }

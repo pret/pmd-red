@@ -701,6 +701,7 @@ SECTIONS {
         src/ground_sprite_util.o(.rodata);
         data/pksdir_6.o(.rodata);
         src/ground_script_file.o(.rodata);
+        src/ground_lives.o(.rodata);
         data/data_8115F5C_1.o(.rodata);
         src/ground_event.o(.rodata);
         src/unk_dungeon_load_maybe.o(.rodata);

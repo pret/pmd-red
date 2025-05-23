@@ -80,15 +80,15 @@ typedef struct CallbackData
     /* 0x18 */ void (*getFlags)(void*, u32 *flags);
     /* 0x1C */ void (*setHitboxPos)(void*, PixelPos *posOrNull);
     /* 0x20 */ void (*setPositionBounds)(void*, PixelPos *from, PixelPos *to);
-    /* 0x24 */ bool8 (*moveReal)(void*, PixelPos*);
+    /* 0x24 */ s32 (*moveReal)(void*, PixelPos*);
     /* 0x28 */ void (*setPosHeight)(void*, u32 height);
-    /* 0x2C */ s32 (*setDirection)(void*, s32 dir); // direction must be signed char!
+    /* 0x2C */ void (*setDirection)(void*, s32 dir);
     /* 0x30 */ void (*setEventIndex)(void*, u16);
     /* 0x34 */ void (*livesOnlyNullsub)(void*, u16);
-    /* 0x38 */ void (*func38)(void*, s16, u32);
+    /* 0x38 */ void (*func38)(void*, s32, s32);
     /* 0x3C */ void (*setFlags)(void*, u32 bits);
     /* 0x40 */ void (*clearFlags)(void*, u32 bits);
-    /* 0x44 */ void (*func44_livesOnlySpriteRelated)(void*, u32);
+    /* 0x44 */ void (*func44_livesOnlySpriteRelated)(void*, s32);
     /* 0x48 */ s32 (*moveRelative)(void*, PixelPos*);
     /* 0x4C */ bool8 (*func4C_spriteRelatedCheck)(void*);
     /* 0x50 */ bool8 (*func50_spriteRelated)(void*);
