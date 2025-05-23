@@ -24,15 +24,22 @@ struct GroundLivesMeta_Sub1
     s32 unk8;
 };
 
+struct GroundLivesMeta_Sub2C
+{
+    s32 unk0;
+    PixelPos unk4;
+};
+
 #define GROUND_LIVES_META_UNK0_COUNT 3
+#define GROUND_LIVES_META_UNK2C_COUNT 64
 
 struct unkStruct_3001B80
 {
     // size: 0x338
     struct GroundLivesMeta_Sub1 unk0[GROUND_LIVES_META_UNK0_COUNT];
     s32 unk24;
-    u8 unk28;
-    struct GroundLivesMeta_Sub1 unk2C[0x40];
+    s8 unk28;
+    struct GroundLivesMeta_Sub2C unk2C[GROUND_LIVES_META_UNK2C_COUNT];
     ScriptInfoSmall unk32C;
 };
 IWRAM_INIT struct unkStruct_3001B80 *gGroundLivesMeta = NULL;
@@ -98,8 +105,7 @@ void AllocGroundLives(void)
     gGroundLivesMeta = MemoryAlloc(sizeof(struct unkStruct_3001B80),6);
     gGroundLives = MemoryAlloc(sizeof(struct unkStruct_3001B84),6);
 
-    for(index = 0, ptr = &gGroundLives->array[index]; index < UNK_3001B84_ARR_COUNT; index = (s16)(index + 1), ptr++)
-    {
+    for (index = 0, ptr = &gGroundLives->array[index]; index < UNK_3001B84_ARR_COUNT; index = (s16)(index + 1), ptr++) {
         ptr->unk2 = -1;
     }
     GetFunctionScript(0,&gGroundLivesMeta->unk32C,0x19);
@@ -109,39 +115,33 @@ void AllocGroundLives(void)
 
 void DeleteGroundLives(void)
 {
-  int index;
-  struct unkStruct_3001B84_sub *iVar4;
-  struct GroundLivesMeta_Sub1 *ptr;
+    int i;
+    struct unkStruct_3001B84_sub *iVar4;
 
-
-  iVar4 = &gGroundLives->array[0];
-  for(index = 0; index < UNK_3001B84_ARR_COUNT; index = (s16)(index + 1), iVar4++)
-  {
-    if (iVar4->unk2 != -1) {
-      GroundLives_Delete(index);
+    iVar4 = &gGroundLives->array[0];
+    for (i = 0; i < UNK_3001B84_ARR_COUNT; i = (s16)(i + 1), iVar4++) {
+        if (iVar4->unk2 != -1) {
+            GroundLives_Delete(i);
+        }
     }
-  }
 
-  gGroundLivesMeta->unk24 = -1;
-  gGroundLivesMeta->unk28 = -1;
+    gGroundLivesMeta->unk24 = -1;
+    gGroundLivesMeta->unk28 = -1;
 
-
-  for(index = 0; index < 3; ptr++, index++)
-  {
-      ptr = &gGroundLivesMeta->unk0[index];
-      ptr->unk8 = -1;
-      ptr->unk0 = 0;
-      ptr->unk4 = 0;
-  }
+    for (i = 0; i < GROUND_LIVES_META_UNK0_COUNT; i++) {
+        struct GroundLivesMeta_Sub1 *ptr0 = &gGroundLivesMeta->unk0[i];
+        ptr0->unk8 = -1;
+        ptr0->unk0 = 0;
+        ptr0->unk4 = 0;
+    }
 
 
-  for(index = 0; index < 0x40; ptr++, index++)
-  {
-     ptr = &gGroundLivesMeta->unk2C[index];
-      ptr->unk0 = 0;
-      ptr->unk4 = 0;
-      ptr->unk8 = 0;
-  }
+    for (i = 0; i < GROUND_LIVES_META_UNK2C_COUNT; i++) {
+        struct GroundLivesMeta_Sub2C *ptr2C = &gGroundLivesMeta->unk2C[i];
+        ptr2C->unk0 = 0;
+        ptr2C->unk4.x = 0;
+        ptr2C->unk4.y = 0;
+    }
 }
 
 void FreeGroundLives(void)
@@ -862,7 +862,7 @@ void GroundLives_Delete(s32 id_)
 }
 
 extern void sub_80A6688(struct UnkGroundSpriteStruct *ptr, s32 a0);
-extern void sub_80AB5A4(void);
+void sub_80AB5A4(void);
 
 void sub_80A86C8(s32 id_, u32 flags)
 {
@@ -2754,12 +2754,12 @@ void GroundLives_Action(void)
         if (prevUnk24 < 0) {
             s32 i;
             struct GroundLivesMeta_Sub1 *loopPtr;
-            struct GroundLivesMeta_Sub1 *metaSub = &gGroundLivesMeta->unk2C[0];
+            struct GroundLivesMeta_Sub2C *metaSub = &gGroundLivesMeta->unk2C[0];
 
             gGroundLivesMeta->unk24 = 0;
             gGroundLivesMeta->unk2C[0].unk0 = 0;
-            metaSub->unk4 = livesPtr->unk144.x + livesPtr->unk14.x;
-            metaSub->unk8 = livesPtr->unk144.y + livesPtr->unk14.y;
+            metaSub->unk4.x = livesPtr->unk144.x + livesPtr->unk14.x;
+            metaSub->unk4.y = livesPtr->unk144.y + livesPtr->unk14.y;
             loopPtr = &gGroundLivesMeta->unk0[0];
             for (i = 0; i < GROUND_LIVES_META_UNK0_COUNT; i++, loopPtr++) {
                 loopPtr->unk8 = 0;
@@ -2769,16 +2769,16 @@ void GroundLives_Action(void)
         }
         else {
             PixelPos subbed, absed;
-            struct GroundLivesMeta_Sub1 *prev;
-            struct GroundLivesMeta_Sub1 *metaSub;
+            struct GroundLivesMeta_Sub2C *prev;
+            struct GroundLivesMeta_Sub2C *metaSub;
             s32 nextUnk24 = (prevUnk24 + 1) % 64;
             gGroundLivesMeta->unk24 = nextUnk24;
             metaSub = &gGroundLivesMeta->unk2C[gGroundLivesMeta->unk24];
-            metaSub->unk4 = livesPtr->unk144.x + livesPtr->unk14.x;
-            metaSub->unk8 = livesPtr->unk144.y + livesPtr->unk14.y;
+            metaSub->unk4.x = livesPtr->unk144.x + livesPtr->unk14.x;
+            metaSub->unk4.y = livesPtr->unk144.y + livesPtr->unk14.y;
 
             prev = &gGroundLivesMeta->unk2C[prevUnk24];
-            subbed = (PixelPos) {metaSub->unk4- prev->unk4, metaSub->unk8 - prev->unk8};
+            subbed = (PixelPos) {metaSub->unk4.x - prev->unk4.x, metaSub->unk4.y - prev->unk4.y};
             absed = (PixelPos) {abs(subbed.x), abs(subbed.y)};
 
             metaSub->unk0 = max(absed.x, absed.y);
@@ -2792,6 +2792,203 @@ void GroundLives_Action(void)
     }
     else {
         sub_80AB5A4();
+    }
+}
+
+void sub_80AB5A4(void)
+{
+    struct GroundLivesMeta_Sub1 *loopPtr;
+    s32 i;
+
+    gGroundLivesMeta->unk24 = -1;
+    gGroundLivesMeta->unk28 = -1;
+
+    loopPtr = &gGroundLivesMeta->unk0[0];
+    for (i = 0; i < GROUND_LIVES_META_UNK0_COUNT; i++, loopPtr++) {
+        loopPtr->unk8 = -1;
+        loopPtr->unk0 = 0;
+        loopPtr->unk4 = 0;
+    }
+}
+
+s32 sub_80ABA00(s32);
+
+extern const s32 gUnknown_8118050[];
+
+void sub_80AB5D4(struct unkStruct_3001B84_sub *livesPtr)
+{
+    struct GroundLivesMeta_Sub1 *metaPtr = &gGroundLivesMeta->unk0[livesPtr->unk13C];
+
+    if (livesPtr->unk13C == 0)
+        return;
+
+    livesPtr->unk15E = 0x300;
+    livesPtr->unk160 = 1;
+    if (livesPtr->unk11C & 0x2000) {
+        if (livesPtr->unk142 != 4 || livesPtr->unk168 != 0x800) {
+            livesPtr->unk164 = 0;
+            livesPtr->unk168 = 0x800;
+            livesPtr->unk142 = 4;
+            livesPtr->unk15C = 1;
+        }
+        if (gGroundLivesMeta->unk28 != -1) {
+            PixelPos pixPos = SetVecFromDirectionSpeed(gGroundLivesMeta->unk28, 0x100);
+            sub_80A9F94(livesPtr, &pixPos);
+        }
+        if (metaPtr->unk8 < 0 && gGroundLivesMeta->unk24 >= 0) {
+            metaPtr->unk8 = gGroundLivesMeta->unk24;
+            metaPtr->unk0 = 0;
+            metaPtr->unk4 = 0;
+        }
+    }
+    else {
+        PixelPos subbed, absed;
+        struct GroundLivesMeta_Sub2C *unkMeta;
+        s32 r12;
+        s32 r6;
+        s32 r7;
+        bool8 loop;
+        PixelPos pixPos32 = { livesPtr->unk144.x + livesPtr->unk14.x, livesPtr->unk144.y + livesPtr->unk14.y };
+        PixelPos pixPos16 = pixPos32;
+
+        if (metaPtr->unk8 < 0) {
+            if (gGroundLivesMeta->unk24 < 0)
+                return;
+            metaPtr->unk8 = gGroundLivesMeta->unk24;
+            metaPtr->unk0 = 0;
+            metaPtr->unk4 = 0;
+        }
+
+        r7 = metaPtr->unk0;
+        loop = TRUE;
+        while (loop) {
+            s32 r1;
+            struct GroundLivesMeta_Sub2C *meta2CPtr = &gGroundLivesMeta->unk2C[metaPtr->unk8];
+            PixelPos subbedPos = { meta2CPtr->unk4.x - pixPos16.x, meta2CPtr->unk4.y - pixPos16.y };
+
+            if (subbedPos.x > 0) {
+                if (subbedPos.x > r7) {
+                    pixPos16.x = r7 + pixPos16.x;
+                    loop = FALSE;
+                }
+                else {
+                    pixPos16.x = meta2CPtr->unk4.x;
+                }
+                r1 = subbedPos.x;
+            }
+            else if (subbedPos.x < 0) {
+                if (subbedPos.x < -r7) {
+                    pixPos16.x -= r7;
+                    loop = FALSE;
+                }
+                else {
+                    pixPos16.x = meta2CPtr->unk4.x;
+                }
+                r1 = -subbedPos.x;
+            }
+            else {
+                r1 = 0;
+            }
+
+            if (subbedPos.y > 0) {
+                if (subbedPos.y > r7) {
+                    pixPos16.y += r7;
+                    loop = FALSE;
+                }
+                else {
+                    pixPos16.y = meta2CPtr->unk4.y;
+                    if (subbedPos.y > r1) {
+                        r1 = subbedPos.y;
+                    }
+                }
+            }
+            else if (subbedPos.y < 0) {
+                if (subbedPos.y < -r7) {
+                    pixPos16.y -= r7;
+                    loop = FALSE;
+                }
+                else {
+                    pixPos16.y = meta2CPtr->unk4.y;
+                    if (subbedPos.y < -r1) {
+                        r1 = -subbedPos.y;
+                    }
+                }
+            }
+
+            if (loop) {
+                r7 -= r1;
+                if (r7 <= 0) {
+                    loop = FALSE;
+                }
+                else if (metaPtr->unk8 != gGroundLivesMeta->unk24) {
+                    metaPtr->unk8 = (metaPtr->unk8 + 1) % 64;
+                }
+                else {
+                    loop = FALSE;
+                }
+            }
+        }
+
+        r6 = sub_80ABA00(metaPtr->unk8);
+        r12 = gGroundLivesMeta->unk0[livesPtr->unk13C - 1].unk4 + gUnknown_8118050[livesPtr->unk13C];
+        unkMeta = &gGroundLivesMeta->unk2C[metaPtr->unk8];
+        subbed = (PixelPos) {unkMeta->unk4.x - pixPos16.x, unkMeta->unk4.y - pixPos16.y};
+        absed = (PixelPos) {abs(subbed.x), abs(subbed.y)};
+
+        r6 += max(absed.x, absed.y);
+        metaPtr->unk4 = r6;
+        if (r6 <= r12) {
+            if (metaPtr->unk0 > 0) {
+                metaPtr->unk0 -= 256;
+            }
+        }
+        else if (r6 <= livesPtr->unk13C * 0x1800) {
+            if (metaPtr->unk0 < 256) {
+                metaPtr->unk0 += 256;
+            }
+        }
+        else {
+            s32 val = gGroundLivesMeta->unk0[livesPtr->unk13C - 1].unk0;
+            if (val < 256) {
+                val = 256;
+            }
+            if (metaPtr->unk0 < val) {
+                metaPtr->unk0 += 256;
+            }
+        }
+
+        if (((gGroundLivesMeta->unk24 + 64) - metaPtr->unk8) % 64 >= 60) {
+            metaPtr->unk8 = (gGroundLivesMeta->unk24 + 5) % 64;
+            pixPos16 = gGroundLivesMeta->unk2C[metaPtr->unk8].unk4;
+        }
+
+        if (sub_80A9F20(livesPtr, &pixPos16) == 0) {
+            s32 r4;
+            PixelPos pixPos24 = { pixPos16.x - pixPos32.x, pixPos16.y - pixPos32.y};
+            livesPtr->unk142 = sub_8002B04(livesPtr->unk142, (s8) VecDirection8Radial(&pixPos24));
+            if (metaPtr->unk0 > 0) {
+                s16 asS16;
+
+                livesPtr->unk164 = 4;
+                asS16 = (metaPtr->unk0 > 0x200) ? 0xA00 : 0x800;
+                r4 = asS16;
+                sub_80AAF68(livesPtr, 1);
+            }
+            else {
+                r4 = 0x807;
+                livesPtr->unk164 = 0;
+                sub_80AAF68(livesPtr, 0);
+            }
+
+            if (livesPtr->unk15C != 0 || r4 != livesPtr->unk168 || livesPtr->unk15D != livesPtr->unk142) {
+                struct UnkGroundSpriteStruct *groundSpritePtr;
+
+                livesPtr->unk15C = 0;
+                groundSpritePtr = &livesPtr->unk170;
+                livesPtr->unk168 = r4;
+                sub_80A6EFC(groundSpritePtr, r4, (livesPtr->unk15D = livesPtr->unk142));
+            }
+        }
     }
 }
 
