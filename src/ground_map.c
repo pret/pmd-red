@@ -31,7 +31,6 @@ extern bool8 GroundScriptNotify(void *, s32);
 extern const CallbackData gGroundScriptNullCallbacks;
 extern const DebugLocation gUnknown_8117538[];
 
-extern void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s16 group, s8 sector);
 extern void sub_80A2D00(unkStruct_3001B70 *);
 extern void sub_80A2D68(unkStruct_3001B70 *);
 extern void sub_80A2D88(unkStruct_3001B70 *);

@@ -9,6 +9,7 @@
 #include "code_80118A4.h"
 #include "string_format.h"
 #include "input.h"
+#include "ground_lives.h"
 
 struct unkStruct_3001B68
 {
@@ -554,19 +555,7 @@ s32 sub_809CD48(void)
 void nullsub_117(void) {}
 void nullsub_118(void) {}
 
-// TODO: merge this struct with other ground-related structs (if possible, otherwise just give a fitting name)
-struct Tempsub_809CD68Struct
-{
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    u8 unkC;
-    s32 unk10;
-    s32 unk14;
-    u8 unk18;
-};
-
-void sub_809CD68(struct Tempsub_809CD68Struct *dst)
+void sub_809CD68(struct Struct3001B84_sub120 *dst)
 {
     dst->unk0 = 0;
     dst->unk4 = 0;
@@ -576,7 +565,7 @@ void sub_809CD68(struct Tempsub_809CD68Struct *dst)
     dst->unk18 = 0;
 }
 
-void sub_809CD7C(struct Tempsub_809CD68Struct *dst)
+void sub_809CD7C(struct Struct3001B84_sub120 *dst)
 {
     dst->unk0 = 0;
     dst->unk10 = -1;
@@ -584,7 +573,7 @@ void sub_809CD7C(struct Tempsub_809CD68Struct *dst)
     dst->unk8 = 0;
 }
 
-void sub_809CD8C(struct Tempsub_809CD68Struct *dst, s32 a1)
+void sub_809CD8C(struct Struct3001B84_sub120 *dst, s32 a1)
 {
     if (a1 == 5) {
         sub_809CD68(dst);
@@ -597,7 +586,7 @@ void sub_809CD8C(struct Tempsub_809CD68Struct *dst, s32 a1)
     }
 }
 
-s32 sub_809CDB8(struct Tempsub_809CD68Struct *dst)
+s32 sub_809CDB8(struct Struct3001B84_sub120 *dst)
 {
     s32 ret = dst->unk4;
     if (ret == 0) {
@@ -606,7 +595,7 @@ s32 sub_809CDB8(struct Tempsub_809CD68Struct *dst)
     return ret;
 }
 
-u32 sub_809CDC8(struct Tempsub_809CD68Struct *strPtr, u32 *r6, s8 *r7, s32 *param_4, u32 param_5, u32 param_6)
+u32 sub_809CDC8(struct Struct3001B84_sub120 *strPtr, u32 *r6, s8 *r7, s32 *param_4, u32 param_5, u32 param_6)
 {
     u32 sp_4;
     s32 sp;
@@ -743,7 +732,7 @@ u32 sub_809CDC8(struct Tempsub_809CD68Struct *strPtr, u32 *r6, s8 *r7, s32 *para
 
                     // TODO: Fix me, this should be a simple -1 comparision, but agbcc doesn't want to cooperate...
                     v = strPtr->unkC = *r7;
-                    if ((v << 0x18) != (0xFF) << 0x18) {
+                    if (CMP_S8_NOT_MINUS1(v)) {
                         strPtr->unk8 = 0x20;
                     }
                 }

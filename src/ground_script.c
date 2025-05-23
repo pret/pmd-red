@@ -112,9 +112,8 @@ s16 GetAdjustedGroundMap(s32);
 void sub_80A87AC(s32, s32);
 void sub_80A8BD8(s16, s32*);
 u32 sub_80A8C2C();
-u32 sub_80A8C98();
+u32 GroundLives_IsStarterMon();
 PokemonStruct1 *sub_80A8D54(s16);
-s16 sub_80A8FD8(s32, PixelPos*);
 s16 sub_80A8F9C(s32, PixelPos*);
 u32 sub_80A9050();
 u32 sub_80A9090();
@@ -130,7 +129,6 @@ s32 ExecuteScriptCommand(Action *action);
 bool8 IsFanfareSEPlaying_1(u16 songIndex);
 bool8 IsEqualtoBGTrack(u16 songIndex);
 bool8 sub_8099B94(void);
-s8 VecDirection8Radial(PixelPos*);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_8098DCC(u32 speed);
 extern const PixelPos gUnknown_81164DC;
@@ -315,13 +313,10 @@ void InitAction(Action *a0)
     InitScriptData(&a0->scriptData2);
 }
 
-void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s16 group, s8 sector)
+void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s32 group, s32 sector)
 {
-    s32 group_s32;
-    s32 sector_s32;
-
-    group_s32 = group;
-    sector_s32 = sector;
+    s32 group_s32 = (s16) group;
+    s32 sector_s32 = (s8) sector;
 
     InitAction(action);
 
@@ -360,28 +355,28 @@ bool8 sub_809D678(Action *action)
     return action->scriptData.savedState == 0 ? FALSE : TRUE;
 }
 
-bool8 sub_809D684(Action *action, ScriptCommand **scriptPtr)
+bool8 sub_809D684(Action *action, ScriptInfoSmall *scriptInfo)
 {
     if(action->scriptData.savedState != 0)
     {
         if(action->scriptData.savedScript.ptr != 0)
         {
-            if(action->scriptData.savedScript.ptr2 == *scriptPtr) return 1;
+            if(action->scriptData.savedScript.ptr2 == scriptInfo->ptr) return 1;
         }
         else
         {
-            if(action->scriptData.script.ptr2 == *scriptPtr) return 1;
+            if(action->scriptData.script.ptr2 == scriptInfo->ptr) return 1;
         }
     }
     if(action->scriptData2.savedState != 0)
     {
         if(action->scriptData2.savedScript.ptr != 0)
         {
-            if(action->scriptData2.savedScript.ptr2 == *scriptPtr) return 1;
+            if(action->scriptData2.savedScript.ptr2 == scriptInfo->ptr) return 1;
         }
         else
         {
-            if(action->scriptData2.script.ptr2 == *scriptPtr) return 1;
+            if(action->scriptData2.script.ptr2 == scriptInfo->ptr) return 1;
         }
     }
     return 0;
@@ -726,7 +721,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 break;
                             }
                             res = action->callbacks->moveRelative(action->parentObject, &pos2);
-                            dir = VecDirection8Radial(&pos2);
+                            dir = (s8) VecDirection8Radial(&pos2);
                             dirBefore = action->scriptData.unk26;
                             dirS8 = dir;
                             action->scriptData.unk26 = dirS8;
@@ -778,7 +773,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 sub_8002934(&pos2, &action->scriptData.pos1, &action->scriptData.pos2, action->scriptData.unk2A, action->scriptData.unk2C);
                                 pos3.x = pos2.x - pos1.x;
                                 pos3.y = pos2.y - pos1.y;
-                                dir = VecDirection8Radial(&pos3);
+                                dir = (s8) VecDirection8Radial(&pos3);
                                 dirBefore = action->scriptData.unk26;
                                 dirS8 = dir;
                                 action->scriptData.unk26 = dirS8;
@@ -2789,7 +2784,7 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0xbe: {
                 if (action->unk8[0] == 1) {
-                    if ((s8)sub_80A8C98(action->unk8[1])) {
+                    if ((s8)GroundLives_IsStarterMon(action->unk8[1])) {
                         scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                     }
                 }
@@ -2851,7 +2846,7 @@ s32 ExecuteScriptCommand(Action *action)
                         GroundLink_GetPos((s16)curCmd.arg1, &pos2);
                         pos3.x = pos2.x - pos.x;
                         pos3.y = pos2.y - pos.y;
-                        val = VecDirection8Radial(&pos3);
+                        val = (s8) VecDirection8Radial(&pos3);
                         break;
                     }
                     case 0xc8: {
@@ -3237,7 +3232,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 s32 r4;
                 PixelPos sp_318;
                 PixelPos sp_320;
-                s32 r5 = sub_80A7AE8(r2);
+                s32 r5 = (s16) sub_80A7AE8(r2);
                 if(r5 >= 0) {
                     r4 = (r3 << 8);
                     action->callbacks->getHitboxCenter(action->parentObject, &sp_318);
