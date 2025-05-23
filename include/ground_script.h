@@ -2,6 +2,7 @@
 #define GUARD_GROUND_SCRIPT_H
 
 #include "structs/str_position.h"
+#include "number_util.h"
 
 // size: 0x10
 typedef struct ScriptCommand
@@ -204,17 +205,19 @@ struct GroundScriptHeader {
 static inline void SetUnkInGroundEvent(const CompactPos *posPtr, PixelPos *dst)
 {
     if (!(posPtr->xFlags & 4)) {
-        s32 x = posPtr->xTiles << 11;
-        dst->x = x;
+        s32 xAdd = IntToF248(4).raw;
+
+        dst->x = IntToF248(posPtr->xTiles * 8).raw;
         if (posPtr->xFlags & 2) {
-            dst->x += 0x400;
+            dst->x += xAdd;
         }
     }
     if (!(posPtr->yFlags & 4)) {
-        s32 y = posPtr->yTiles << 11;
-        dst->y = y;
+        s32 yAdd = IntToF248(4).raw;
+
+        dst->y = IntToF248(posPtr->yTiles * 8).raw;
         if (posPtr->yFlags & 2) {
-            dst->y += 0x400;
+            dst->y += yAdd;
         }
     }
 }

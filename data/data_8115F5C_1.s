@@ -262,22 +262,3 @@ gUnknown_8118758: @ 8118758
 .4byte gUnknown_81185D8
 .4byte 0x56A
 .4byte GroundEffect_Action_Text
-.string "pksdir0\0"
-.align 2,0
-@ Ground Link
-
-.global GroundLink_FileText
-GroundLink_FileText: @ FileText
-.string "../ground/ground_link.c\0"
-.align 2,0
-
-.global GroundLink_SelectText
-GroundLink_SelectText: @ SelectText
-.string "GroundLink_Select\0"
-.align 2,0
-
-.global gUnknown_8118798
-gUnknown_8118798: @ 8118798
-.4byte GroundLink_FileText
-.byte 0x4D, 0x00, 0x00, 0x00
-.4byte GroundLink_SelectText
