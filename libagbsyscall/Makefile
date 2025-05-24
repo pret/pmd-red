@@ -24,6 +24,7 @@ export AS := $(PREFIX)as
 endif
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
+export RANLIB := $(PREFIX)ranlib
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -93,6 +94,7 @@ clean:
 
 $(LIB): $(ASM_OBJS)
 	$(AR) $(ARFLAGS) $@ $^
+	$(RANLIB) $@
 
 $(ASM_OBJS): libagbsyscall.s
 	$(AS) $(ASFLAGS) --defsym L_$(*F)=1 -o $@ $<
