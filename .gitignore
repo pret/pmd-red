@@ -43,3 +43,6 @@ build/
 *.pyc
 __pycache__/
 *.syms
+.cache
+build-cmake-*
+compile_commands.json

@@ -359,9 +359,9 @@ SECTIONS {
         src/m4a_1.o(.text);
         src/m4a.o(.text);
         *libagbsyscall.a:CpuSet.o(.text);
-        *libagbsyscall.a:SoundBiasReset.o(.text);
+        *libagbsyscall.a:SoundBiasReset.*(.text);
         *libagbsyscall.a:SoundBiasSet.o(.text);
-        *libagbsyscall.a:VBlankIntrWait.o(.text);
+        *libagbsyscall.a:VBlankIntrWait.*(.text);
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
@@ -925,7 +925,7 @@ SECTIONS {
         data/monster_sbin.o(.rodata);
         src/monster_sbin_palet.o(.rodata);
     } > ROM =0
-    
+
     unk_96BD7AC_section :
     ALIGN(4)
     {

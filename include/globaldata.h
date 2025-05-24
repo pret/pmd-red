@@ -5,5 +5,10 @@
 
 // Later, we can move this into "global.h" before the #ifdef guard. But we can only do this if "global.h" isn't included outside of .c files...
 #include "gba/defines.h"
+#include "gba/types.h"
+
+#if (defined(__APPLE__) || defined(__CYGWIN__)) && !defined(_)
+#define _(x) x
+#endif
 
 ALIGNED(4) static const u8 sFill[] = _("pksdir0");
