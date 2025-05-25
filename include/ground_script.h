@@ -202,22 +202,21 @@ struct GroundScriptHeader {
     const struct GroundLink *links;
 };
 
+// NOTE: F248 macros can match but has to be written this way to match in Blue
 static inline void SetUnkInGroundEvent(const CompactPos *posPtr, PixelPos *dst)
 {
     if (!(posPtr->xFlags & 4)) {
-        s32 xAdd = IntToF248(4).raw;
-
-        dst->x = IntToF248(posPtr->xTiles * 8).raw;
+        s32 x = posPtr->xTiles << 11;
+        dst->x = x;
         if (posPtr->xFlags & 2) {
-            dst->x += xAdd;
+            dst->x += 0x400;
         }
     }
     if (!(posPtr->yFlags & 4)) {
-        s32 yAdd = IntToF248(4).raw;
-
-        dst->y = IntToF248(posPtr->yTiles * 8).raw;
+        s32 y = posPtr->yTiles << 11;
+        dst->y = y;
         if (posPtr->yFlags & 2) {
-            dst->y += yAdd;
+            dst->y += 0x400;
         }
     }
 }
