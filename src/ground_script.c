@@ -169,13 +169,13 @@ extern u8 gUnknown_811656C[];
 extern DebugLocation gUnknown_81165C8;
 
 extern void sub_809D520(void *);
-extern u8 GroundObjectsCancellAll(void);
+extern u8 GroundObjectsCancelAll(void);
 extern u8 GroundEffectsCancelAll(void);
 extern u8 GroundLivesCancelAll(void);
 extern u8 IsTextboxOpen_809A750(void);
-extern Action *sub_80A882C(s16);
-extern Action *sub_80AC240(s16);
-extern Action *sub_80AD158(s16);
+extern Action *sub_80A882C(s32);
+extern Action *sub_80AC240(s32);
+extern Action *sub_80AD158(s32);
 
 extern u8 gUnknown_8116848[];
 
@@ -528,7 +528,7 @@ u8 GroundCancelAllEntities(void)
     u8 ret;
 
     ret = GroundLivesCancelAll();
-    ret |= GroundObjectsCancellAll();
+    ret |= GroundObjectsCancelAll();
     ret |= GroundEffectsCancelAll();
     return ret;
 }
