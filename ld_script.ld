@@ -67,7 +67,6 @@ SECTIONS {
         src/text_3.o(.text);
         src/text_4.o(.text);
         src/code_8009804.o(.text);
-        asm/code_8009804.o(.text);
         src/math.o(.text);
         src/file_system.o(.text);
         src/decompress_sir.o(.text);
