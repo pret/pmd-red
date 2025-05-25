@@ -2,6 +2,7 @@
 #define GUARD_GROUND_SCRIPT_H
 
 #include "structs/str_position.h"
+#include "number_util.h"
 
 // size: 0x10
 typedef struct ScriptCommand
@@ -201,6 +202,7 @@ struct GroundScriptHeader {
     const struct GroundLink *links;
 };
 
+// NOTE: F248 macros can match but has to be written this way to match in Blue
 static inline void SetUnkInGroundEvent(const CompactPos *posPtr, PixelPos *dst)
 {
     if (!(posPtr->xFlags & 4)) {
