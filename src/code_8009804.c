@@ -238,3 +238,108 @@ void sub_8009A1C(const EfoFileData *r0, u32 palId, u32 vramDstOffset, u32 r3)
         SetBGPaletteBufferColorArray(i + 0xE0, &r0->unk10->pal[i + palId * 16]);
     }
 }
+
+// Todo: Merge this struct with others once sub_800DE8C is decompiled(if possible)
+struct Struct_8009A7C
+{
+    s32 unk0;
+    u16 **unk4;
+};
+
+bool8 sub_8009A7C(struct Struct_8009A7C *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s32 *a5, u16 *a6)
+{
+    s32 countY;
+    s32 yId;
+    s32 i, j;
+    s32 jStart;
+    s32 countX;
+    s32 r6;
+    u16 *r5;
+
+    if (gUnknown_202D2A0 == 0) {
+        jStart = 1;
+    }
+    else {
+        jStart = 0;
+    }
+
+    if (a1 >= a0->unk0)
+        return FALSE;
+
+    if (a4) {
+        for (i = 0; i < 20; i++) {
+            for (j = jStart; j < 30; j++) {
+                gBgTilemaps[gUnknown_202D2A0][i][j] = 0;
+            }
+        }
+    }
+
+    r5 = a0->unk4[a1];
+    countX = r5[2];
+    countY = r5[3];
+    if (a5 != NULL) {
+        *a5 = r5[4];
+    }
+    if (a6 != NULL) {
+        a6[0] = r5[5];
+        a6[1] = r5[6];
+        a6[2] = r5[7];
+        a6[3] = r5[8];
+    }
+
+    r5 += 10;
+    yId = a3;
+    r6 = 0;
+    for (i = 0; i < countY && yId < 20; i++, yId++) {
+        s32 xId = a2;
+
+        for (j = 0; j < countX; j++, xId++) {
+            u16 r4;
+
+            if (r6 == 0) {
+                u16 curr = *(r5++);
+                if (!(curr & 0xF000)) {
+                    r6 = curr & 0x3FF;
+                    curr = 0;
+                }
+                r4 = curr;
+            }
+            else {
+                r4 = 0;
+            }
+
+            if (r6 != 0) {
+                r6--;
+            }
+
+            if (xId >= jStart && xId < 30 && yId >= 0) {
+                gBgTilemaps[gUnknown_202D2A0][yId][xId] = r4;
+            }
+        }
+    }
+
+    sub_80098F8(gUnknown_202D2A0);
+    return TRUE;
+}
+
+void sub_8009BE4(void)
+{
+    s32 i, j;
+    s32 jStart;
+    s32 n = 32;
+
+    if (gUnknown_202D2A0 == 0) {
+        jStart = 1;
+    }
+    else {
+        jStart = 0;
+    }
+
+    for (i = 0; i < 32; i++) {
+        for (j = jStart; j < n; j++) {
+            gBgTilemaps[gUnknown_202D2A0][i][j] = 0;
+        }
+    }
+
+    sub_80098F8(gUnknown_202D2A0);
+}
