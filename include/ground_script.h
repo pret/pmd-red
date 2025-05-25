@@ -120,10 +120,9 @@ typedef struct GroundMapAction
                u16 fillE6;
                u32 unkE8;
                u32 unkEC;
-               u32 unkF0;
-               u32 unkF4;
-               u32 unkF8;
-               u32 unkFC;
+               s32 unkF0;
+               s32 unkF4;
+               PixelPos unkF8;
                u32 unk100;
                u32 unk104;
                u32 unk108;
