@@ -699,7 +699,7 @@ void sub_806BB6C(Entity *entity, s32 _species)
 {
     s16 apparentSpeciesMatch;
     s32 apparentSpecies = (s16) (GetMonsterApparentID(NULL, species));
-    EntityInfo *entInfo;
+    UNUSED EntityInfo *entInfo;
 
     entity->unk22 = 0;
     entInfo = GetEntInfo(entity);

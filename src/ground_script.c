@@ -134,7 +134,7 @@ bool8 sub_8098DCC(u32 speed);
 extern const PixelPos gUnknown_81164DC;
 extern u32 gUnknown_2039DA4;
 extern char *gUnknown_203B4B0;
-extern char gUnknown_2039D98[10];
+extern char gUnknown_2039D98[];
 void sub_8099220(void *param_1, s32 param_2);
 extern u32 gUnlockBranchLabels[];
 s16 sub_8002694(u8 param_1); // value -> GroundEnter lookup
@@ -710,7 +710,8 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                         case 0x69 ... 0x6f: {
                             PixelPos pos, pos2;
                             s32 res;
-                            s32 dir, dirBefore;
+                            s32 dir;
+                            UNUSED s32 dirBefore;
                             s8 dirS8;
                             action->callbacks->getHitboxCenter(action->parentObject, &pos);
                             pos2.x = action->scriptData.pos2.x - pos.x;
@@ -766,7 +767,8 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                         case 0x83 ... 0x88: {
                             if (action->scriptData.unk2A > 0) {
                                 PixelPos pos1, pos2, pos3;
-                                s32 dir, dirBefore;
+                                s32 dir;
+                                UNUSED s32 dirBefore;
                                 s8 dirS8;
 
                                 action->callbacks->getHitboxCenter(action->parentObject, &pos1);
@@ -833,7 +835,8 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                             }
                             else {
                                 PixelPos pos1, pos2, pos3, pos4;
-                                s32 tmp1, tmp2;
+                                UNUSED s32 tmp1;
+                                s32 tmp2;
                                 s8 dir;
                                 bool8 flag;
                                 cmd = *action->scriptData.curPtr;
@@ -2310,17 +2313,19 @@ s32 ExecuteScriptCommand(Action *action)
                 return 2;
             }
             case 0x73: case 0x79: case 0x7f: case 0x85: {
-                s32 cap1 = curCmd.arg1 * 2 - 1;
-                s32 cap2 = curCmd.arg2 * 2 - 1;
-                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 // BUG: (or two): these lines use the wrong script command arguments to calculate the position offset
                 // making the target position nonsense. But even if they were correct,
                 // the way the cap is calculated would make the random offset biased off-center.
                 // This doesn't affect the released version because these script commands are never used.
 #ifndef BUGFIX
+                s32 cap1 = curCmd.arg1 * 2 - 1;
+                s32 cap2 = curCmd.arg2 * 2 - 1;
+
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2.x = scriptData->pos1.x + ((OtherRandInt(cap1) - curCmd.argShort) << 8);
                 scriptData->pos2.y = scriptData->pos1.y + ((OtherRandInt(cap2) - curCmd.arg1) << 8);
 #else
+                action->callbacks->getHitboxCenter(action->parentObject, &scriptData->pos1);
                 scriptData->pos2.x = scriptData->pos1.x + ((OtherRandInt(curCmd.arg1 * 2 + 1) - curCmd.arg1) << 8);
                 scriptData->pos2.y = scriptData->pos1.y + ((OtherRandInt(curCmd.arg2 * 2 + 1) - curCmd.arg2) << 8);
 #endif
