@@ -189,18 +189,36 @@ s32 mini_vpprintf(void *buf, const char *fmt, va_list va)
             char pad_char = ' ';
             s32 pad_to = 0;
             char l = 0;
+            //char alt_form = 0;    // '#'
+            //char plus_sign = 0;   // '+'
+            bool8 flagsDone = FALSE;
             char *ptr;
 
             ch=*(fmt++);
 
-            /* Zero padding requested */
-            if (ch == '0')
-                pad_char = '0';
-            while (ch >= '0' && ch <= '9')
+            // Parse flags
+            while (!flagsDone)
             {
-                pad_to = pad_to * 10 + (ch - '0');
-                ch= *(fmt++);
+                switch (ch)
+                {
+                    //case '#': alt_form = 1; ch = *(fmt++); break;
+                    //case '+': plus_sign = 1; ch = *(fmt++); break;
+                    case '0': pad_char = '0'; ch = *(fmt++); break;
+                    default: flagsDone = TRUE; break;
+                }
             }
+
+            if (ch == '*') {
+                pad_to = va_arg(va, int);
+                ch = *(fmt++);
+            }
+            else {
+                while (ch >= '0' && ch <= '9') {
+                    pad_to = pad_to * 10 + (ch - '0');
+                    ch = *(fmt++);
+                }
+            }
+
             if(pad_to > (s32) sizeof(bf))
             {
                 pad_to = sizeof(bf);

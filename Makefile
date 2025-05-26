@@ -164,6 +164,8 @@ ifeq ($(MODERN),0)
   $(C_BUILDDIR)/agb_flash_1m.o: CC1FLAGS := -O -mthumb-interwork
   $(C_BUILDDIR)/agb_flash_mx.o: CC1FLAGS := -O -mthumb-interwork
   $(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc
+else
+  $(C_BUILDDIR)/agb_flash.o: override CC1FLAGS += -fno-toplevel-reorder
 endif
 
 #### Main Rules ####
