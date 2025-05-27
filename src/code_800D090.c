@@ -119,20 +119,21 @@ union PtrU16U8
     u8 *asU8;
 };
 
+// Important note: This struct is used in arm_funcs.s, which means the offsets of this struct's memebers CANNOT be changed, unless sub_80001E8 and sub_8000228 are accordingly changed.
 struct UnkStruct_202DCF8
 {
     u8 unk0;
     u8 unk1;
     u8 unk2;
     u8 unk3;
-    u8 fill4[4];
+    s32 unk4;
     u8 unk8;
     u8 unk9;
     u8 unkA;
     u8 unkB;
     u8 fillC[0x14-0xC];
     s32 unk14;
-    u8 fill18[0x28-0x18];
+    s32 unk18[4];
     union PtrU16U8 unk28;
     u16 *unk2C;
     u16 *unk30[4];
@@ -143,23 +144,22 @@ struct UnkStruct_202DCF8
     u16 unk90[2][3][12];
 };
 
-extern struct UnkStruct_202DCF8 gUnknown_202DCF8;
+EWRAM_DATA static u16 gUnknown_202D808[132] = {0};
+EWRAM_DATA static u16 gUnknown_202D910[2][132] = {0};
+EWRAM_DATA static u16 gUnknown_202DB20[8] = {0};
+EWRAM_DATA static u16 gUnknown_202DB30[2][8] = {0};
+EWRAM_DATA static u32 gUnknown_202DB50[2] = {0}; // Only first index used
+EWRAM_DATA static u32 gUnknown_202DB58[2] = {0};
+EWRAM_DATA static u32 gUnknown_202DB60[2] = {0};
+EWRAM_DATA static u32 gUnknown_202DB68 = 0;
+EWRAM_DATA static s32 gUnknown_202DB6C = 0;
+EWRAM_DATA static u8 gUnknown_202DB70 = 0;
+EWRAM_DATA static u32 gUnknown_202DB74 = 0;
+// These should not be in EWRAM, but in IWRAM...
+EWRAM_DATA static u32 gUnknown_202DB78[16] = {0};
+EWRAM_DATA u32 gUnknown_202DBB8[80] = {0};
 
-extern u32 gUnknown_202DB60[2];
-extern u16 gUnknown_202DB30[2][8];
-extern u32 gUnknown_202DB58[2];
-extern u32 gUnknown_202DB74;
-extern u32 gUnknown_202DB50;
-extern u16 gUnknown_202DB208[];
-extern u16 gUnknown_202D808[132];
-extern u16 gUnknown_202D910[2][132];
-extern u16 gUnknown_202DB30[2][8];
-extern u16 gUnknown_202DB20[8];
-extern u32 gUnknown_202DB68;
-extern s32 gUnknown_202DB6C;
-extern u8 gUnknown_202DB70;
-extern u32 gUnknown_202DB78[];
-extern u32 gUnknown_202DBB8[];
+EWRAM_DATA struct UnkStruct_202DCF8 gUnknown_202DCF8 = {0};
 
 extern u32 sub_80001E8(void);
 extern void sub_8000228(void);
@@ -224,8 +224,8 @@ static void sub_800D2EC(u32 unused)
     u16 *ptr = gUnknown_202D808;
 
     for (i = 0; i < 8; i++) {
-        if (gUnknown_202DB50 < (gUnknown_202DB74 / 2)) {
-            gUnknown_202DB20[i] = ptr[gUnknown_202DB50++];
+        if (gUnknown_202DB50[0] < (gUnknown_202DB74 / 2)) {
+            gUnknown_202DB20[i] = ptr[gUnknown_202DB50[0]++];
         }
         else {
             gUnknown_202DB20[i] = 0xFCFC;
@@ -291,7 +291,7 @@ static inline void ClearUnkMemory(void)
     gUnknown_202DB60[1] = 0;
     MemoryClear16(gUnknown_202DB20, sizeof(gUnknown_202DB20));
     MemoryClear16(gUnknown_202DB30[0], sizeof(gUnknown_202DB30));
-    gUnknown_202DB50 = 0;
+    gUnknown_202DB50[0] = 0;
     gUnknown_202DB58[0] = 0;
     gUnknown_202DB58[1] = 0;
     MemoryClear16(gUnknown_202D808, sizeof(gUnknown_202D808));
@@ -403,8 +403,8 @@ void sub_800D6AC(void)
     (*(vu32 *)REG_ADDR_SIOCNT) = 0x2000;
     REG_SIOCNT |= 0x4003;
     CpuFill32(0, &gUnknown_202DCF8, 0x120);
-    CpuCopy32(sub_80001E8, gUnknown_202DB78, 0x40);
-    CpuCopy32(sub_8000228, gUnknown_202DBB8, 0x140);
+    CpuCopy32(sub_80001E8, gUnknown_202DB78, sizeof(gUnknown_202DB78));
+    CpuCopy32(sub_8000228, gUnknown_202DBB8, sizeof(gUnknown_202DBB8));
     gUnknown_202DCF8.unk14 = -1;
     gUnknown_202DCF8.unk28.asU16 = gUnknown_202DCF8.unk60;
     gUnknown_202DCF8.unk2C = gUnknown_202DCF8.unk78;

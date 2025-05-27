@@ -48,7 +48,7 @@ SECTIONS {
     {
         asm/crt0.o(.text);
         src/code_80001DC.o(.text);
-        asm/arm_func.o(.text);
+        src/arm_funcs.o(.text);
         src/main_loops.o(.text);
         src/event_flag.o(.text);
         src/code_8002774.o(.text);
