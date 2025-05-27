@@ -35,9 +35,6 @@
 
 IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = { NULL };
 
-extern u16 gUnknown_20399DC;
-extern u16 gUnknown_20399DE;
-
 extern bool8 sub_802FCF0(void);
 u8 ScriptPrintText_809B2B8(struct unkStruct_3001B64_unkC *, s32, s32, const char *);
 bool8 IsTextboxOpen_809B40C(struct unkStruct_3001B64_unkC *);
@@ -125,6 +122,9 @@ ALIGNED(4) static const u8 sYellowSpeechBubbleText[] = _("{COLOR YELLOW_N}{SPEEC
 ALIGNED(4) static const u8 sYellowStringText[] = _("{COLOR YELLOW_N}%s{RESET}");
 // TODO: Convert to actual string
 ALIGNED(4) static const u8 gUnknown_8116190[] = {0x25, 0x73, 0x23, 0x5b, 0x49, 0x5d, 0x23, 0x7e, 0x20, 0x81, 0x40, 0x23, 0x57, 0x0a, 0x23, 0x5b, 0x4f, 0x5d, 0x23, 0x7e, 0x20, 0x81, 0x40, 0x00};
+
+EWRAM_DATA u16 gUnknown_20399DC = 0;
+EWRAM_DATA u16 gUnknown_20399DE = 0;
 
 void sub_809A560(void)
 {

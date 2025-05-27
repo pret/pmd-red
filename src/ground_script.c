@@ -132,11 +132,8 @@ bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_8098DCC(u32 speed);
 extern const PixelPos gUnknown_81164DC;
-extern u32 gUnknown_2039DA4;
 extern char *gUnknown_203B4B0;
-extern char gUnknown_2039D98[10];
 void sub_8099220(void *param_1, s32 param_2);
-extern u32 gUnlockBranchLabels[];
 s16 sub_8002694(u8 param_1); // value -> GroundEnter lookup
 bool8 sub_809B260(void *dst);
 bool8 sub_809B18C(s32 *sp);
@@ -144,12 +141,6 @@ bool8 sub_809AFFC(u8 *);
 bool8 sub_809D234(void);
 s32 sub_80A14E8(Action *, u8, u32, s32);
 u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s32 param_2);
-
-extern s16 gCurrentMap;
-extern s16 gUnknown_2039A32;
-extern s16 gUnknown_2039A34;
-
-extern MenuItem gChoices[9];
 
 extern char gUnknown_81165D4[];
 extern char gUnknown_81165F4[];
@@ -166,10 +157,6 @@ extern DebugLocation gUnknown_81166B4;
 extern DebugLocation gUnknown_81166F8;
 extern DebugLocation gUnknown_8116704;
 extern ScriptCommand gUnknown_81164E4;
-
-extern u8 gAnyScriptLocked;
-extern u8 gScriptLocks[];
-extern u8 gScriptLockConds[];
 
 extern const DebugLocation gUnknown_8116588;
 extern const DebugLocation gUnknown_8116538;
@@ -224,7 +211,6 @@ extern DungeonLocation gUnknown_81167E8;
 extern DungeonLocation gUnknown_8116788;
 extern DungeonLocation gUnknown_811678C;
 extern DungeonLocation gUnknown_8116790;
-extern u16 gUnknown_2039DA8;
 
 PokemonStruct1 *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation *location, u16 *moveID);
 bool8 HasRecruitedMon(s32 species);
@@ -247,6 +233,18 @@ extern void sub_80997F4(u16, u16);
 s32 sub_809CFE8(u16 param_1);
 extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
+// TODO: make these static maybe?
+EWRAM_DATA s16 gCurrentMap = 0;
+EWRAM_DATA s16 gUnknown_2039A32 = 0;
+EWRAM_DATA s16 gUnknown_2039A34 = 0;
+EWRAM_DATA u8 gAnyScriptLocked = 0;
+ALIGNED(4) EWRAM_DATA u8 gScriptLocks[136] = {0};
+ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[136] = {0};
+EWRAM_DATA u32 gUnlockBranchLabels[130] = {0};
+EWRAM_DATA MenuItem gChoices[9] = {0};
+EWRAM_DATA char gUnknown_2039D98[POKEMON_NAME_LENGTH + 2] = {0};
+EWRAM_DATA u32 gUnknown_2039DA4 = 0;
+EWRAM_DATA u16 gUnknown_2039DA8 = 0;
 EWRAM_INIT static int sNumChoices = 0;
 
 // -1 didn't match

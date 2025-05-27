@@ -24,7 +24,7 @@ struct unkStruct_20399E8
     u8 unk44;
 };
 
-extern struct unkStruct_20399E8 gUnknown_20399E8;
+EWRAM_DATA struct unkStruct_20399E8 gUnknown_20399E8 = {0};
 
 void sub_809D0BC(void);
 void sub_809D4B0(void);

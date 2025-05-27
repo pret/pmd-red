@@ -131,40 +131,11 @@ gUnknown_2039992: /* 2039992 (sub_809977C - sub_8099BE4) */
 gUnknown_2039998: /* 2039998 (sub_809977C - sub_8099E80) */
 	.space 0x44
 
-gUnknown_20399DC: /* 20399DC (sub_809A560 - sub_809B614) */
-	.space 0x2
-gUnknown_20399DE: /* 20399DE (sub_809A560 - sub_809B614) */
-	.space 0x2
-
-gUnknown_20399E0: /* 20399E0 (sub_809CB50 - sub_809CCDC) */
-	.space 0x8
-
-gUnknown_20399E8: /* 20399E8 (sub_809D0BC - sub_809D25C) */
-	.space 0x14
-gUnknown_20399FC: /* 20399FC (sub_809D25C) */
-	.space 0x34
-gCurrentMap: /* 2039A30 (sub_809D4B0 - ExecuteScriptCommand) */
-	.space 0x2
-gUnknown_2039A32: /* 2039A32 (sub_809D4B0 - ExecuteScriptCommand) */
-	.space 0x2
-gUnknown_2039A34: /* 2039A34 (sub_809D4B0 - ExecuteScriptCommand) */
-	.space 0x2
-gAnyScriptLocked: /* 2039A36 (sub_809D4B0 - GroundScript_Unlock) */
-	.space 0x2
-gScriptLocks: /* 2039A38 (sub_809D4B0 - GroundScript_Unlock) */
-	.space 0x88
-gScriptLockConds: /* 2039AC0 (sub_809D4B0 - GroundScript_Unlock) */
-	.space 0x88
-gUnlockBranchLabels: /* 2039B48 (sub_809D4B0 - HandleAction) */
-	.space 0x208
-gChoices: /* 2039D50 (ExecuteScriptCommand) */
-	.space 0x48
-gUnknown_2039D98: /* 2039D98 (HandleAction - sub_80A14E8) [seems to be storage for strings.. used for both Team Name and Player Name] */
-	.space 0xC
-gUnknown_2039DA4: /* 2039DA4 (HandleAction) */
+    .include "src/code_809A560.o"
+    .include "src/code_809C5C4.o"
 	.space 0x4
-gUnknown_2039DA8: /* 2039DA8 (sub_80A14E8) */
-	.space 0x8
-
+    .include "src/code_809D148.o"
+    .include "src/ground_script.o"
+	.space 0x4
     .include "src/ground_sprite.o"
     .include "src/ground_script_file.o"
