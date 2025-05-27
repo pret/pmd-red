@@ -80,7 +80,6 @@ SECTIONS {
         src/cpu.o(.text);
         src/flash.o(.text);
         src/code_800D090.o(.text);
-        asm/code_800D090.o(.text);
         src/code_800D090_1.o(.text);
         src/code_800DAC0.o(.text);
         asm/code_800DAC0.o(.text);

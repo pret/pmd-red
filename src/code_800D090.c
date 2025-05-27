@@ -3,9 +3,6 @@
 #include "memory.h"
 #include "cpu.h"
 
-extern u32 gUnknown_202DB60[2];
-extern u16 gUnknown_202DB30[2][8];
-
 void Hang(void)
 {
     while(1)
@@ -115,6 +112,65 @@ void nullsub_187(void)
 {
 }
 
+// New file?
+union PtrU16U8
+{
+    u16 *asU16;
+    u8 *asU8;
+};
+
+struct UnkStruct_202DCF8
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 fill4[4];
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+    u8 unkB;
+    u8 fillC[0x14-0xC];
+    s32 unk14;
+    u8 fill18[0x28-0x18];
+    union PtrU16U8 unk28;
+    u16 *unk2C;
+    u16 *unk30[4];
+    u16 *unk40[4];
+    u16 *unk50[4];
+    u16 unk60[12];
+    u16 unk78[12];
+    u16 unk90[2][3][12];
+};
+
+extern struct UnkStruct_202DCF8 gUnknown_202DCF8;
+
+extern u32 gUnknown_202DB60[2];
+extern u16 gUnknown_202DB30[2][8];
+extern u32 gUnknown_202DB58[2];
+extern u32 gUnknown_202DB74;
+extern u32 gUnknown_202DB50;
+extern u16 gUnknown_202DB208[];
+extern u16 gUnknown_202D808[132];
+extern u16 gUnknown_202D910[2][132];
+extern u16 gUnknown_202DB30[2][8];
+extern u16 gUnknown_202DB20[8];
+extern u32 gUnknown_202DB68;
+extern s32 gUnknown_202DB6C;
+extern u8 gUnknown_202DB70;
+extern u32 gUnknown_202DB78[];
+extern u32 gUnknown_202DBB8[];
+
+extern u32 sub_80001E8(void);
+extern void sub_8000228(void);
+
+void sub_800D6AC(void);
+void sub_800D7D0(void);
+static u32 sub_800D820(u16 *a0, u16 a1[2][8]);
+static void sub_800D7B8(void);
+static void sub_800D944(u16 *a0);
+static u32 sub_800D9B8(u16 dst[2][8]);
+
 bool8 sub_800D1C0(u32 unused)
 {
     if(gUnknown_202DB60[0] != 2)
@@ -124,7 +180,7 @@ bool8 sub_800D1C0(u32 unused)
     return TRUE;
 }
 
-void sub_800D1E0(void)
+static void sub_800D1E0(void)
 {
     s32 iVar1;
     u32 iVar2;
@@ -140,16 +196,7 @@ void sub_800D1E0(void)
     }
 }
 
-extern u32 gUnknown_202DB58[2];
-extern u32 gUnknown_202DB74;
-extern u32 gUnknown_202DB50;
-extern u16 gUnknown_202DB208[];
-extern u16 gUnknown_202D808[132];
-extern u16 gUnknown_202D910[2][132];
-extern u16 gUnknown_202DB30[2][8];
-extern u16 gUnknown_202DB20[8];
-
-void sub_800D224(s32 a0)
+static void sub_800D224(s32 a0)
 {
     s32 i;
 
@@ -171,7 +218,7 @@ void sub_800D224(s32 a0)
     }
 }
 
-void sub_800D2EC(u32 unused)
+static void sub_800D2EC(u32 unused)
 {
     u32 i;
     u16 *ptr = gUnknown_202D808;
@@ -186,18 +233,12 @@ void sub_800D2EC(u32 unused)
     }
 }
 
-extern u32 gUnknown_202DB68;
-extern s32 gUnknown_202DB6C;
-extern u8 gUnknown_202DB70;
-
-u32 sub_800D820(u16 *a0, u16 *a1);
-
 s32 sub_800D33C(void)
 {
     s32 ret = 0;
 
     gUnknown_202DB6C = gUnknown_202DB68;
-    gUnknown_202DB68 = sub_800D820(gUnknown_202DB20, gUnknown_202DB30[0]);
+    gUnknown_202DB68 = sub_800D820(gUnknown_202DB20, gUnknown_202DB30);
     if (gUnknown_202DB70 == 0) {
         if (gUnknown_202DB68 & 0x100) {
             gUnknown_202DB70 = 1;
@@ -239,10 +280,6 @@ s32 sub_800D33C(void)
 
     return ret;
 }
-
-void sub_800D6AC(void);
-void sub_800D7D0(void);
-void sub_800D7B8(void);
 
 static inline void ClearUnkMemory(void)
 {
@@ -291,7 +328,7 @@ void sub_800D520(void)
     sub_800D7D0();
 }
 
-void sub_800D570()
+void sub_800D570(void)
 {
     sub_800D7B8();
 }
@@ -323,4 +360,197 @@ void sub_800D59C(u16 *src, u32 size)
     }
 
     gUnknown_202D808[1] = ~count - (gUnknown_202DB74 / 2);
+}
+
+bool8 sub_800D600(void)
+{
+    u32 i, j;
+
+    for (i = 0; i < 2; i++) {
+        s32 count = 0;
+        u16 *ptr = gUnknown_202D910[i];
+
+        for (j = 0; j < (gUnknown_202DB74 / 2) - 2; j++) {
+            count += ptr[j];
+        }
+
+        // Interesting casts and arithmetics here.
+        if ((s16) count != (s16) (-1 - (gUnknown_202DB74 / 2)))
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+void sub_800D670(u32 id, void *dst, u32 size)
+{
+    CpuCopy(dst, &gUnknown_202D910[id][2], size);
+}
+
+void sub_800D68C(u32 id)
+{
+    MemoryFill8(gUnknown_202D910[id], 0, sizeof(gUnknown_202D910[0]));
+}
+
+void sub_800D6AC(void)
+{
+    s32 i;
+
+    REG_IME = 0;
+    REG_IE &= 0xFF3F;
+    REG_IME = 1;
+    REG_RCNT = 0;
+    (*(vu32 *)REG_ADDR_SIOCNT) = 0x2000;
+    REG_SIOCNT |= 0x4003;
+    CpuFill32(0, &gUnknown_202DCF8, 0x120);
+    CpuCopy32(sub_80001E8, gUnknown_202DB78, 0x40);
+    CpuCopy32(sub_8000228, gUnknown_202DBB8, 0x140);
+    gUnknown_202DCF8.unk14 = -1;
+    gUnknown_202DCF8.unk28.asU16 = gUnknown_202DCF8.unk60;
+    gUnknown_202DCF8.unk2C = gUnknown_202DCF8.unk78;
+
+    for (i = 0; i < 2; i++) {
+        gUnknown_202DCF8.unk30[i] = gUnknown_202DCF8.unk90[i][0];
+        gUnknown_202DCF8.unk40[i] = gUnknown_202DCF8.unk90[i][1];
+        gUnknown_202DCF8.unk50[i] = gUnknown_202DCF8.unk90[i][2];
+    }
+
+    REG_IME = 0;
+    REG_IE |= 0x80;
+    REG_IME = 1;
+}
+
+static void sub_800D7B8(void)
+{
+    if (gUnknown_202DCF8.unk0 != 0) {
+        gUnknown_202DCF8.unk8 = 1;
+    }
+}
+
+void sub_800D7D0(void)
+{
+    REG_IME = 0;
+    REG_IE &= 0xFF3F;
+    REG_IME = 1;
+    REG_SIOCNT = 0x2003;
+    REG_TM3CNT = 0xB1FC;
+    REG_IF = 0xC0;
+    gUnknown_202DCF8.unk8 = 0;
+}
+
+static u32 sub_800D820(u16 *a0, u16 a1[2][8])
+{
+    u32 ret, var;
+    u32 bits1, bits2, b;
+    u32 r3, r2;
+    u32 si0cnt = (*(vu32 *)REG_ADDR_SIOCNT);
+
+    switch (gUnknown_202DCF8.unk1) {
+        case 0:
+            if (gUnknown_202DCF8.unk14 == -1) {
+                u16 bits = si0cnt & 0x88;
+                if (bits != 8)
+                    break;
+                if (!((u8)(si0cnt & 0x4))) {
+                    vu8 *sioPtru8;
+                    u32 sioBits;
+
+                    REG_IME = 0;
+                    REG_IE &= 0xFF7F;
+                    REG_IE |= 0x40;
+                    REG_IME = 1;
+                    sioPtru8 = ((vu8 *)REG_ADDR_SIOCNT);
+                    sioBits = sioPtru8[1] & ~0x40;
+                    sioPtru8[1] = sioBits;
+                    REG_IF = 0xC0;
+                    REG_TM3CNT = 0xB1FC;
+                    gUnknown_202DCF8.unk0 = 8;
+                }
+            }
+            gUnknown_202DCF8.unk1 = 1;
+        // fallthrough
+        case 1:
+            if (gUnknown_202DCF8.unk2 != 0) {
+                if (gUnknown_202DCF8.unkA < 8) {
+                    gUnknown_202DCF8.unkA++;
+                }
+                else {
+                    gUnknown_202DCF8.unk1 = 2;
+                }
+            }
+        // fallthrough
+        case 2:
+            sub_800D9B8(a1);
+            sub_800D944(a0);
+            break;
+    }
+
+    gUnknown_202DCF8.unkB++;
+    r3 = gUnknown_202DCF8.unk3;
+    r2 = gUnknown_202DCF8.unk2 << 8;
+    b = ((gUnknown_202DCF8.unk0 == 8) ? 0x80 : 0) | r3 | r2;
+    var = b;
+    if (gUnknown_202DCF8.unk9 != 0) {
+        var |= 0x1000;
+    }
+
+    bits1 = (gUnknown_202DCF8.unkA >> 3) << 15;
+    bits2 = (si0cnt << 26) >> 30;
+    if (bits2 >= 2) {
+        ret = 0x2000 | var | bits1;
+    }
+    else {
+        ret = var | bits1;
+    }
+    return ret;
+}
+
+static void sub_800D944(u16 *src)
+{
+    u32 i;
+    s32 count = 0;
+
+    gUnknown_202DCF8.unk28.asU8[0] = gUnknown_202DCF8.unkB;
+    gUnknown_202DCF8.unk28.asU8[1] = gUnknown_202DCF8.unk2 ^ gUnknown_202DCF8.unk3;
+    gUnknown_202DCF8.unk28.asU16[1] = 0;
+    CpuCopy32(src, &gUnknown_202DCF8.unk28.asU16[2], 0x10);
+    for (i = 0; i < 10; i++) {
+        count += gUnknown_202DCF8.unk28.asU16[i];
+    }
+
+    gUnknown_202DCF8.unk28.asU16[1] = ~count - 12;
+    if (gUnknown_202DCF8.unk0 != 0) {
+        REG_TM3CNT_H = 0;
+    }
+    gUnknown_202DCF8.unk14 = -1;
+    if (gUnknown_202DCF8.unk0 != 0 && gUnknown_202DCF8.unk8 != 0) {
+        REG_TM3CNT_H = 0xC0;
+    }
+}
+
+static u32 sub_800D9B8(u16 dst[2][8])
+{
+    s32 i;
+    u8 sp0[4];
+    u32 (*func)(void) = (void *)gUnknown_202DB78;
+    u32 *spAsU32 = (u32 *)sp0;
+
+    *spAsU32 = func();
+    gUnknown_202DCF8.unk3 = 0;
+    for (i = 0; i < 2; i++) {
+        u32 j;
+        s32 count = 0;
+
+        for (j = 0; j < 10; j++) {
+            count += gUnknown_202DCF8.unk50[i][j];
+        }
+
+        if (sp0[i] != 0 && (s16)(count) == (s16)(-13)) {
+            CpuCopy32(&gUnknown_202DCF8.unk50[i][2], dst[i], 0x10);
+            gUnknown_202DCF8.unk3 |= (1 << i);
+        }
+        CpuFill32(0, &gUnknown_202DCF8.unk50[i][2], 0x10);
+    }
+    gUnknown_202DCF8.unk2 |= gUnknown_202DCF8.unk3;
+    return gUnknown_202DCF8.unk3;
 }
