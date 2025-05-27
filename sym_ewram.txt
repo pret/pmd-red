@@ -19,40 +19,7 @@
     .include "src/bg_control.o"
     .include "src/cpu.o"
 	.space 0x4
-
-gUnknown_202D808: /* 202D808 (sub_800D2EC - sub_800D59C) */
-	.space 0x108
-gUnknown_202D910: /* 202D910 (sub_800D224 - sub_800D68C) */
-	.space 0x4
-gUnknown_202D914: /* 202D914 (sub_800D670) */
-	.space 0x20C
-gUnknown_202DB20: /* 202DB20 (sub_800D2EC - sub_800D494) */
-	.space 0x10
-gUnknown_202DB30: /* 202DB30 (sub_800D1E0 - sub_800D494) */
-	.space 0x20
-gUnknown_202DB50: /* 202DB50 (sub_800D2EC - sub_800D494) */
-	.space 0x8
-gUnknown_202DB58: /* 202DB58 (sub_800D224 - sub_800D494) */
-	.space 0x8
-gUnknown_202DB60: /* 202DB60 (sub_800D1C0 - sub_800D494) */
-	.space 0x8
-gUnknown_202DB68: /* 202DB68 (sub_800D33C - sub_800D588) */
-	.space 0x4
-gUnknown_202DB6C: /* 202DB6C (sub_800D33C - sub_800D494) */
-	.space 0x4
-gUnknown_202DB70: /* 202DB70 (sub_800D33C - sub_800D57C) */
-	.space 0x4
-gUnknown_202DB74: /* 202DB74 (sub_800D224 - sub_800D600) */
-	.space 0x4
-
-gUnknown_202DB78: /* 202DB78 (sub_800D6AC - sub_800D9B8) */
-	.space 0x40
-gUnknown_202DBB8: /* 202DBB8 (sub_800D6AC / data_80B9BB8) */
-	.space 0x140
-
-gUnknown_202DCF8: /* 202DCF8 (sub_80001E8 - sub_800D9B8) */
-	.space 0x120
-
+    .include "src/code_800D090.o"
     .include "src/friend_areas_map.o"
     .include "src/code_80118A4.o"
     .include "src/save.o"
