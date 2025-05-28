@@ -80,24 +80,10 @@
     .include "src/exclusive_pokemon.o"
     .space 0x4
     .include "src/ground_main.o"
+	.space 0x4
+    .include "src/code_8099360.o"
 
-	.space 0x7
-
-gUnknown_2039958: /* 2039958 (sub_809977C - sub_8099BE4) */
-	.space 0x10
-gUnknown_2039968: /* 2039968 (sub_809977C - sub_8099BE4) */
-	.space 0x10
-gUnknown_2039978: /* 2039978 (sub_8099A5C - sub_8099E80) */
-	.space 0x8
-gUnknown_2039980: /* 2039980 (sub_809977C - sub_80997F4) */
-	.space 0x10
-gUnknown_2039990: /* 2039990 (sub_809977C - sub_8099BE4) */
 	.space 0x2
-gUnknown_2039992: /* 2039992 (sub_809977C - sub_8099BE4) */
-	.space 0x6
-gUnknown_2039998: /* 2039998 (sub_809977C - sub_8099E80) */
-	.space 0x44
-
 gUnknown_20399DC: /* 20399DC (sub_809A560 - sub_809B614) */
 	.space 0x2
 gUnknown_20399DE: /* 20399DE (sub_809A560 - sub_809B614) */
