@@ -24,7 +24,6 @@
 #include "dungeon_strings.h"
 #include "dungeon_random.h"
 #include "dungeon_misc.h"
-#include "pokemon_mid.h"
 
 extern u32 gUnknown_8106A4C;
 
