@@ -22,7 +22,6 @@
 #include "dungeon_move_util.h"
 #include "code_800D090.h"
 #include "dungeon_message.h"
-#include "pokemon_mid.h"
 #include "dungeon_strings.h"
 #include "constants/move_id.h"
 #include "moves.h"

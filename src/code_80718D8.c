@@ -21,7 +21,6 @@
 #include "code_803E668.h"
 #include "code_806CD90.h"
 #include "moves.h"
-#include "pokemon_mid.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "structs/str_pokemon.h"

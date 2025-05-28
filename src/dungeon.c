@@ -8,7 +8,6 @@
 #include "items.h"
 #include "moves.h"
 #include "pokemon.h"
-#include "pokemon_mid.h"
 #include "random.h"
 #include "string_format.h"
 #include "strings.h"

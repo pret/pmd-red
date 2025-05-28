@@ -54,9 +54,6 @@ extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern u32 gUnknown_8106A50;
 extern u32 gUnknown_8106A4C;
 
-// TODO The parameters don't match the function definition in pokemon_mid.h (u8*, s16).
-extern void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index);
-
 bool8 ProtectMoveAction(Entity * pokemon,Entity * target,Move *move, s32 param_4)
 {
     ProtectStatusTarget(pokemon, target);

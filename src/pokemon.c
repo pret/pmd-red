@@ -656,10 +656,10 @@ void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index)
     sprintfStatic(buffer, gUnknown_8107600, gMonsterParameters[new_index].species); // {color YELLOW}%s{reset}
 }
 
-void CopyCyanMonsterNametoBuffer(u8 *buffer, s16 index)
+void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index_)
 {
-    s32 new_index = index;
-    sprintfStatic(buffer, gUnknown_8107608, gMonsterParameters[new_index].species); // {color CYAN}%s{reset}
+    s32 index = (s16) index_;
+    sprintfStatic(buffer, gUnknown_8107608, gMonsterParameters[index].species); // {color CYAN}%s{reset}
 }
 
 void sub_808D930(u8 *buffer, s32 index)
@@ -1132,7 +1132,7 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species)
 {
   u16 levelUpMoveID;
   u16 HMTMMoveID;
-  s32 species = _species;  // r4
+  s32 species = _species;
   const u8* learnsetPtr;
 
   if (species == MONSTER_DECOY) return 0;
