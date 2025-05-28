@@ -462,12 +462,14 @@ struct UnkStruct_2039978
     struct UnkStruct_2039958 unk8;
 };
 
-extern u8 gUnknown_2039990;
-extern u16 gUnknown_2039998[];
-extern s16 gUnknown_2039992;
-extern struct UnkStruct_2039958 gUnknown_2039958;
-extern struct UnkStruct_2039958 gUnknown_2039968;
-extern struct UnkStruct_2039978 gUnknown_2039978;
+static EWRAM_DATA struct UnkStruct_2039958 gUnknown_2039958 = {0};
+static EWRAM_DATA struct UnkStruct_2039958 gUnknown_2039968 = {0};
+static EWRAM_DATA struct UnkStruct_2039978 gUnknown_2039978 = {0};
+static EWRAM_DATA u8 gUnknown_2039990 = FALSE;
+static EWRAM_DATA s16 gUnknown_2039992 = 0;
+UNUSED static EWRAM_DATA s32 sUnused = 0;
+#define ARR_COUNT_2039998 33
+static EWRAM_DATA u16 gUnknown_2039998[ARR_COUNT_2039998] = {0};
 
 void sub_8099838(struct UnkStruct_2039958 *a0);
 void sub_8099848(struct UnkStruct_2039958 *a0);
@@ -479,7 +481,7 @@ void sub_809977C(void)
 {
     s32 i;
 
-    gUnknown_2039990 = 0;
+    gUnknown_2039990 = FALSE;
     gUnknown_2039992 = 0;
     sub_8099838(&gUnknown_2039958);
     sub_8099838(&gUnknown_2039968);
@@ -490,7 +492,7 @@ void sub_809977C(void)
     sub_8099DD0(0);
     gUnknown_2039968.unkC = 0x100;
     sub_8099E58(0x100);
-    for (i = 0; i < 0x21; i++) {
+    for (i = 0; i < ARR_COUNT_2039998; i++) {
         gUnknown_2039998[i] = 0;
     }
 }
@@ -643,7 +645,7 @@ bool8 sub_80998E0(struct UnkStruct_2039958 *a0)
 
 void sub_80999D4(s32 a0)
 {
-    gUnknown_2039990 = 1;
+    gUnknown_2039990 = TRUE;
     gUnknown_2039992 = a0;
 }
 
@@ -810,7 +812,7 @@ void sub_8099BE4(void)
         }
 
         if (r5) {
-            gUnknown_2039990 = 0;
+            gUnknown_2039990 = FALSE;
         }
     }
     else {
