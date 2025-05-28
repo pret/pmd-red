@@ -18,7 +18,6 @@
 #include "friend_area.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "pokemon_mid.h"
 #include "position_util.h"
 #include "text_util.h"
 #include "dungeon_util_1.h"

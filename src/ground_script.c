@@ -238,9 +238,10 @@ EWRAM_DATA s16 gCurrentMap = 0;
 EWRAM_DATA s16 gUnknown_2039A32 = 0;
 EWRAM_DATA s16 gUnknown_2039A34 = 0;
 EWRAM_DATA u8 gAnyScriptLocked = 0;
-ALIGNED(4) EWRAM_DATA u8 gScriptLocks[136] = {0};
-ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[136] = {0};
-EWRAM_DATA u32 gUnlockBranchLabels[130] = {0};
+// Hard to say why the arrays are larger than SCRIPT_LOCKS_ARR_COUNT. Could be unused EWRAM variables or special case indexes.
+ALIGNED(4) EWRAM_DATA u8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
+ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
+EWRAM_DATA u32 gUnlockBranchLabels[SCRIPT_LOCKS_ARR_COUNT + 1] = {0};
 EWRAM_DATA MenuItem gChoices[9] = {0};
 EWRAM_DATA char gUnknown_2039D98[POKEMON_NAME_LENGTH + 2] = {0};
 EWRAM_DATA u32 gUnknown_2039DA4 = 0;
@@ -3892,7 +3893,7 @@ void GroundScript_Unlock(void)
 
     gAnyScriptLocked = 0;
     index = 0;
-    for (index = 0; index <= 0x80; index++) {
+    for (index = 0; index < SCRIPT_LOCKS_ARR_COUNT; index++) {
         if(gScriptLocks[index] != 0) {
             Log(1, gUnknown_8116848, index);
             cond  = GroundMapNotifyAll(index);

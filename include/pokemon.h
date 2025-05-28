@@ -40,6 +40,7 @@ void InitializeRecruitedPokemon(void);
 u8 GetBodySize(s32 index);
 void CopyMonsterNameToBuffer(u8 * buffer, s32 index);
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index);
+void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index_);
 void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 colorNum);
 void sub_808D930(u8 *buffer, s32 index);
 void sub_808D9DC(u8 *buffer, PokemonStruct2 *, s32 colorNum);

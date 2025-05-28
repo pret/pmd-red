@@ -25,7 +25,6 @@
 #include "memory.h"
 #include "personality_test1.h"
 #include "pokemon.h"
-#include "pokemon_mid.h"
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
