@@ -5,18 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8099708
-sub_8099708:
-	push {lr}
-	sub sp, 0x4
-	str r1, [sp]
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_8003810
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8099708
 
 	thumb_func_start sub_809971C
 sub_809971C:

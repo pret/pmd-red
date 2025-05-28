@@ -389,3 +389,18 @@ void sub_8099690(u32 param_1)
     }
     CloseFile(temp);
 }
+
+// TODO: figure out if a new file starts here...
+
+typedef struct unkStruct_3000400
+{
+    // size: 0x4
+    u8 unk0[0x4];
+} unkStruct_3000400;
+
+extern void sub_8003810(u16 idx, unkStruct_3000400 param_2);
+
+UNUSED static void sub_8099708(u16 a0, unkStruct_3000400 a1)
+{
+    sub_8003810(a0, a1);
+}
