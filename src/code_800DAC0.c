@@ -23,7 +23,7 @@ struct unkStruct_800F18C
 extern s32 sub_800E2C0(u32);
 extern u32 sub_800E900(void);
 extern void sub_8009BE4(void);
-extern void sub_800F204(void);
+extern void sub_800F204(OpenedFile *file);
 extern struct unkStruct_800F18C *sub_800F18C(s32);
 extern void sub_800DCA8(struct unkStruct_203B0CC_sub *);
 
@@ -168,10 +168,10 @@ void sub_800DCA8(struct unkStruct_203B0CC_sub *param_1)
 {
     param_1->unk4 = -1;
     param_1->unk54 = 0;
-    if(param_1->unkB8 != 0)
+    if(param_1->unkB8 != NULL)
     {
-        sub_800F204();
-        param_1->unkB8 = 0;
+        sub_800F204(param_1->unkB8);
+        param_1->unkB8 = NULL;
     }
 }
 

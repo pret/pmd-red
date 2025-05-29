@@ -4,6 +4,7 @@
 #include "structs/axdata.h"
 #include "structs/sprite_oam.h"
 #include "structs/str_position.h"
+#include "structs/str_file_system.h"
 
 struct unkStruct_203B0CC_sub
 {
@@ -29,7 +30,7 @@ struct unkStruct_203B0CC_sub
     u8 fill55[0x58 - 0x55];
     axObject unk58;
     u8 fillA4[0xB8 - 0xA4];
-    u32 unkB8;
+    OpenedFile *unkB8;
     u8 fillBC[0xCC - 0xBC];
     s16 unkCC[2]; // NOTE: might be DungeonPos
 };
