@@ -558,17 +558,7 @@ static void WigglytuffShop_GoToFallbackState(void)
 
 static void sub_80226F0(void)
 {
-    union {
-        vu32 a;
-        vu8 b[4];
-    } temp;
-
-    vu8 *ptr = temp.b;
-    u32 r2 = 0;
-    ptr[0] = 0x80;
-    ptr[1] = 0x80;
-    ptr[2] = 0x10;
-    ptr[3] = r2;
+    unkStruct_3000400 unkStr = {0x80, 0x80, 0x10, 0};
 
     if (sub_8099B94())
         return;
@@ -576,11 +566,11 @@ static void sub_80226F0(void)
     switch (sWigglytuffShop3Work->unk130) {
         case 1:
         case 3:
-            sub_8099AFC(5, 2, temp.a);
+            sub_8099AFC(5, 2, unkStr);
             break;
         case 2:
         case 4:
-            sub_8099A5C(5, 2, temp.a);
+            sub_8099A5C(5, 2, unkStr);
             break;
         case 0:
         default:
