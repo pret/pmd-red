@@ -1823,18 +1823,7 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x27: case 0x28: {
-                // THANK YOU pidgey, only an array *inside* a struct works
-                // TODO: Define this struct globally, so it can be passed to sub_8099A5C and sub_8099AFC
-                // This kind of hackiness is used at all callsites (or they load from a global)
-                s32 color = ({
-                    struct color { u8 arr[4]; } color = {{
-                        curCmd.arg2 >> 16,
-                        curCmd.arg2 >> 8,
-                        curCmd.arg2,
-                        0,
-                    }};
-                    *(s32*)&color;
-                });
+                unkStruct_3000400 color = { curCmd.arg2 >> 16, curCmd.arg2 >> 8, curCmd.arg2, 0 };
                 switch (curCmd.op) {
                     case 0x27:
                         sub_8099A5C(curCmd.argShort, curCmd.arg1, color);

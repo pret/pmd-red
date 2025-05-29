@@ -1,7 +1,6 @@
 #ifndef GUARD_CODE_8099360_H
 #define GUARD_CODE_8099360_H
 
-
 bool8 sub_8099360(u8 *);
 bool8 sub_8099394(u8 *);
 void sub_80993C0(bool8);
@@ -15,10 +14,13 @@ void sub_809965C(void);
 extern void sub_8099690(u32);
 
 // code_8099360.s
-extern void sub_8099744(void);
-extern void sub_8099750(void);
-extern void sub_8099A5C(u32, u32, u32);
-extern void sub_8099AFC(u32, u32, u32);
-extern bool8 sub_8099B94(void);
+
+#include "structs/str_3000400.h"
+
+void sub_8099744(void);
+void sub_8099750(void);
+void sub_8099A5C(s32 a0, s32 a1, unkStruct_3000400 a2);
+void sub_8099AFC(s32 a0, s32 a1, unkStruct_3000400 a2);
+bool8 sub_8099B94(void);
 
 #endif //GUARD_CODE_8099360_H

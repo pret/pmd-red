@@ -11,7 +11,7 @@ EWRAM_INIT static Credits1Work *sCredits1Work = {NULL};
 
 extern const WindowTemplate gUnknown_80E4A10;
 extern const WindowTemplate gUnknown_80E4A28;
-extern const u32 gUnknown_80E4A40[];
+extern const unkStruct_3000400 gUnknown_80E4A40;
 extern const CreditsData* gCreditsTable[27];
 
 bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
@@ -79,29 +79,17 @@ bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
 
     sub_80073E0(0);
     SelectCharmap(0);
-    do {
-        const u32 *a = gUnknown_80E4A40;
-        int b = 9;
-        unsigned long long c = b;
-        sub_8099AFC(c, 0, a[0]);
-    } while(0);
+    sub_8099AFC(9, 0, gUnknown_80E4A40);
     return TRUE;
 }
 
 s32 sub_8035574(void)
 {
-    #ifdef NONMATCHING
-    u32 const *p;
-    #else
-    register u32 const *p asm("r2");
-    #endif
-
     switch (sCredits1Work->unk60) {
         case 0:
             if (!sub_8099B94()) {
                 sCredits1Work->unk60 = 1;
-                p = gUnknown_80E4A40;
-                sub_8099A5C(9, 30, p[0]); // Probably same/similar macro from the above func - Kermalis
+                sub_8099A5C(9, 30, gUnknown_80E4A40);
             }
             break;
         case 1:
@@ -111,8 +99,7 @@ s32 sub_8035574(void)
         case 2:
             if (sCredits1Work->unk64 < 1) {
                 sCredits1Work->unk60 = 3;
-                p = gUnknown_80E4A40;
-                sub_8099AFC(9, 30, p[0]);
+                sub_8099AFC(9, 30, gUnknown_80E4A40);
             }
             sCredits1Work->unk64--;
             break;
@@ -125,8 +112,7 @@ s32 sub_8035574(void)
             break;
         case 4:
             sub_8099690(0);
-            p = gUnknown_80E4A40;
-            sub_8099A5C(1, 0, p[0]);
+            sub_8099A5C(1, 0, gUnknown_80E4A40);
             return 3;
     }
     return 0;

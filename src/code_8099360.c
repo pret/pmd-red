@@ -391,12 +391,8 @@ void sub_8099690(u32 param_1)
 }
 
 // TODO: figure out if a new file starts here...
-
-typedef struct unkStruct_3000400
-{
-    // size: 0x4
-    u8 unk0[0x4];
-} unkStruct_3000400;
+#include "structs/str_3000400.h"
+#include "code_8099360.h"
 
 extern void sub_8003810(u16 idx, unkStruct_3000400 param_2);
 extern void sub_80039B8(void);
