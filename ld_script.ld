@@ -53,6 +53,7 @@ SECTIONS {
         src/event_flag.o(.text);
         src/code_8002774.o(.text);
         src/memory.o(.text);
+        src/code_80035F0.o(.text);
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
         src/util.o(.text);
