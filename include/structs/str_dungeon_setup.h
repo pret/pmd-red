@@ -7,7 +7,8 @@
 #include "structs/str_pokemon.h"
 #include "structs/str_wonder_mail.h"
 
-typedef struct DungeonSetupInfo
+// Apparently used in Dungeon and World Map SetUp Structs
+typedef struct DungeonSetupSubstruct
 {
     DungeonLocation unk0;
     u8 unk4;
@@ -20,6 +21,11 @@ typedef struct DungeonSetupInfo
     u8 unkB;
     u8 unkC;
     u8 unkD;
+} DungeonSetupSubstruct;
+
+typedef struct DungeonSetupInfo
+{
+    DungeonSetupSubstruct sub0; // TODO: find a better name
     DungeonMailSeed dungeonSeed;
     PokemonStruct1 unk18;
     u8 *unk74;

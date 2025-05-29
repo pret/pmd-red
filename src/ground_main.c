@@ -759,7 +759,7 @@ const char *sub_80990B8(void)
 static inline bool8 sub_80990EC_sub(struct DungeonSetupInfo *iVar1, u32 iVar2)
 {
     bool8 flag = FALSE;
-    iVar1->unkB = 0;
+    iVar1->sub0.unkB = 0;
 
     if ((u16)(iVar2 - 0x25) < 3)
         flag = TRUE;
@@ -775,21 +775,20 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s16 param_2)
     const DungeonInfo *iVar1;
     u8 auStack_98 [24];
     u8 nameBuffer [24];
-    u8 r5;
     u8 dungeonIndex;
 
     iVar1 = GetDungeonInfo_80A2608(param_2);
     dungeonIndex = iVar1->dungeonIndex;
-    r5 = 0;
-    param_1->unk0.id = dungeonIndex;
-    param_1->unk0.floor = 1;
-    param_1->unkC = r5;
+
+    param_1->sub0.unk0.id = dungeonIndex;
+    param_1->sub0.unk0.floor = 1;
+    param_1->sub0.unkC = 0;
 
     switch(sub_80A2750(param_2))
     {
         case 1:
             if (sub_80990EC_sub(param_1, param_2)) {
-                param_1->unkC = 1;
+                param_1->sub0.unkC = 1;
                 sub_80A8EC0(auStack_98, 0x5b);
                 BoundedCopyStringtoBuffer(nameBuffer, auStack_98, POKEMON_NAME_LENGTH);
                 {
@@ -813,14 +812,14 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s16 param_2)
             }
             break;
         case 4:
-            param_1->unkB = 0;
+            param_1->sub0.unkB = 0;
             break;
         case 2:
-            param_1->unkB = 2;
+            param_1->sub0.unkB = 2;
             break;
     }
-    param_1->unk4 = 0;
-    param_1->unkD = 0;
+    param_1->sub0.unk4 = 0;
+    param_1->sub0.unkD = 0;
     return iVar1->unk11;
 }
 
@@ -862,8 +861,8 @@ void sub_809927C(u8 param_1)
     SetScriptVarValue(0x0,DUNGEON_ENTER,0x50);
     SetScriptVarValue(0x0,DUNGEON_ENTER_INDEX,gUnknown_2039950);
     sub_8095494(&gUnknown_20398C8.dungeonSeed,param_1);
-    gUnknown_20398C8.unkB = 1;
-    gUnknown_20398C8.unkC = 0;
-    gUnknown_20398C8.unk4 = 0;
-    gUnknown_20398C8.unkD = 0;
+    gUnknown_20398C8.sub0.unkB = 1;
+    gUnknown_20398C8.sub0.unkC = 0;
+    gUnknown_20398C8.sub0.unk4 = 0;
+    gUnknown_20398C8.sub0.unkD = 0;
 }

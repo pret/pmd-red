@@ -45,6 +45,7 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "text_util.h"
+#include "structs/str_dungeon_setup.h"
 
 typedef struct unkTalkTable
 {
@@ -71,7 +72,7 @@ static void LoadTitleScreen(void);
 static void NDS_LoadOverlay_GroundMain();
 static u32 sub_80009D0(u32 param_1);
 /* static */ // TODO: Uncomment
-void sub_80011E8(u8 *param_1);
+void sub_80011E8(DungeonSetupSubstruct *info);
 static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0);
 /* static */ // TODO: Uncomment
 u32 xxx_script_related_8001334(u32 r0);
@@ -1234,7 +1235,7 @@ void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
     param_1->info.unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
     param_1->info.unk78 = MemoryAlloc(local_18, 7); // size: sizeof(Dungeon)
 
-    if (param_1->info.unk4) {
+    if (param_1->info.sub0.unk4) {
         PrepareQuickSaveRead(param_1->info.unk74, local_1c);
 
         while (TRUE) {
@@ -1375,35 +1376,33 @@ u8 sub_8001170(void)
 
 // arm9.bin::0200CDA4
 /* static */ // TODO: Uncomment
-void sub_80011CC(u8 *param_1, u8 param_2)
+void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId)
 {
-    u32 zero = 0;
+    info->unk0.id = dungId;
+    info->unk0.floor = 0;
 
-    param_1[0] = param_2;
-    param_1[1] = zero;
+    sub_80011E8(info);
 
-    sub_80011E8(param_1);
-
-    param_1[11] = 0;
-    param_1[4] = 0;
-    param_1[12] = 0;
-    param_1[13] = 0;
+    info->unkB = 0;
+    info->unk4 = 0;
+    info->unkC = 0;
+    info->unkD = 0;
 }
 
 // arm9.bin::0200CD1C
 /* static */ // TODO: Uncomment
-void sub_80011E8(u8 *param_1)
+void sub_80011E8(DungeonSetupSubstruct *info)
 {
-    param_1[5] = sub_80023E4(8);
-    param_1[6] = sub_80023E4(3);
-    param_1[8] = sub_80023E4(7);
-    param_1[9] = sub_80023E4(0);
-    param_1[10] = sub_80023E4(5);
+    info->unk5 = sub_80023E4(8);
+    info->unk6 = sub_80023E4(3);
+    info->unk8 = sub_80023E4(7);
+    info->unk9 = sub_80023E4(0);
+    info->unkA = sub_80023E4(5);
 
     if (sub_80023E4(24) && sub_80023E4(25) && sub_80023E4(26))
-        param_1[7] = 1;
+        info->unk7 = 1;
     else
-        param_1[7] = 0;
+        info->unk7 = 0;
 }
 
 // arm9.bin::0200CC4C
