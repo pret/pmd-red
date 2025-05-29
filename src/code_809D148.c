@@ -4,6 +4,7 @@
 #include "math.h"
 #include "memory.h"
 #include "other_random.h"
+#include "ground_script.h"
 
 struct unkStruct_20399E8
 {
@@ -24,7 +25,7 @@ struct unkStruct_20399E8
     u8 unk44;
 };
 
-extern struct unkStruct_20399E8 gUnknown_20399E8;
+EWRAM_DATA struct unkStruct_20399E8 gUnknown_20399E8 = {0};
 
 void sub_809D0BC(void);
 void sub_809D4B0(void);
@@ -396,7 +397,7 @@ void sub_809D4B0(void)
     gUnknown_2039A32 = -1;
     gUnknown_2039A34 = -1;
     gAnyScriptLocked = 0;
-    for (i = 0; i < 0x81; i++) {
+    for (i = 0; i < SCRIPT_LOCKS_ARR_COUNT; i++) {
         gScriptLocks[i] = 0;
         gScriptLockConds[i] = 0;
         gUnlockBranchLabels[i] = 0;

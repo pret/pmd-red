@@ -39,7 +39,7 @@ struct unkStruct_20399E0
      u32 unk8;
 };
 
-extern struct unkStruct_20399E0 *gUnknown_20399E0;
+EWRAM_DATA struct unkStruct_20399E0 *gUnknown_20399E0 = {0};
 
 
 void sub_809C63C();

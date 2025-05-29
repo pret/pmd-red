@@ -1,8 +1,6 @@
-
     .include "src/m4a.o"
     .include "src/main_loops.o"
-	.space 0x4
-
+	.space 4
     .include "src/event_flag.o"
     .include "src/memory.o"
     .include "src/bg_palette_buffer.o"
@@ -18,7 +16,7 @@
     .include "src/music.o"
     .include "src/bg_control.o"
     .include "src/cpu.o"
-	.space 0x4
+	.space 4
     .include "src/code_800D090.o"
     .include "src/friend_areas_map.o"
     .include "src/code_80118A4.o"
@@ -41,13 +39,13 @@
     .include "src/dungeon_message_log.o"
     .include "src/dungeon_move.o"
     .include "src/dungeon_main.o"
-	.space 0x4
+	.space 4
     .include "src/dungeon_menu_items.o"
-	.space 0x4
+	.space 4
     .include "src/dungeon_menu_team.o"
-	.space 0x4
+	.space 4
     .include "src/dungeon_menu_moves.o"
-	.space 0x4
+	.space 4
     .include "src/dungeon_menu_others.o"
     .include "src/dungeon_menu_recruitment.o"
     .include "src/code_8066D04.o"
@@ -58,66 +56,34 @@
     .include "src/dungeon_ai_items.o"
     .include "src/code_8073CF0.o"
     .include "src/code_8075708.o"
-	.space 0x4
+	.space 4
     .include "src/dungeon_ai_attack.o"
     .include "src/code_80848F0.o"
-	.space 0x4
+	.space 4
     .include "src/pokemon.o"
     .include "src/items.o"
     .include "src/rescue_team_info.o"
-	.space 0x4
-
+	.space 4
     .include "src/friend_area.o"
     .include "src/moves.o"
     .include "src/game_options.o"
     .include "src/play_time.o"
     .include "src/code_8094F88.o"
-    .space 0x4
+    .space 4
     .include "src/code_80958E8.o"
-    .space 0x4
+    .space 4
     .include "src/code_8097670.o"
-    .space 0x4
+    .space 4
     .include "src/exclusive_pokemon.o"
-    .space 0x4
+    .space 4
     .include "src/ground_main.o"
-	.space 0x4
+	.space 4
     .include "src/code_8099360.o"
-
-	.space 0x2
-gUnknown_20399DC: /* 20399DC (sub_809A560 - sub_809B614) */
-	.space 0x2
-gUnknown_20399DE: /* 20399DE (sub_809A560 - sub_809B614) */
-	.space 0x2
-
-gUnknown_20399E0: /* 20399E0 (sub_809CB50 - sub_809CCDC) */
-	.space 0x8
-
-gUnknown_20399E8: /* 20399E8 (sub_809D0BC - sub_809D25C) */
-	.space 0x14
-gUnknown_20399FC: /* 20399FC (sub_809D25C) */
-	.space 0x34
-gCurrentMap: /* 2039A30 (sub_809D4B0 - ExecuteScriptCommand) */
-	.space 0x2
-gUnknown_2039A32: /* 2039A32 (sub_809D4B0 - ExecuteScriptCommand) */
-	.space 0x2
-gUnknown_2039A34: /* 2039A34 (sub_809D4B0 - ExecuteScriptCommand) */
-	.space 0x2
-gAnyScriptLocked: /* 2039A36 (sub_809D4B0 - GroundScript_Unlock) */
-	.space 0x2
-gScriptLocks: /* 2039A38 (sub_809D4B0 - GroundScript_Unlock) */
-	.space 0x88
-gScriptLockConds: /* 2039AC0 (sub_809D4B0 - GroundScript_Unlock) */
-	.space 0x88
-gUnlockBranchLabels: /* 2039B48 (sub_809D4B0 - HandleAction) */
-	.space 0x208
-gChoices: /* 2039D50 (ExecuteScriptCommand) */
-	.space 0x48
-gUnknown_2039D98: /* 2039D98 (HandleAction - sub_80A14E8) [seems to be storage for strings.. used for both Team Name and Player Name] */
-	.space 0xC
-gUnknown_2039DA4: /* 2039DA4 (HandleAction) */
-	.space 0x4
-gUnknown_2039DA8: /* 2039DA8 (sub_80A14E8) */
-	.space 0x8
-
+    .include "src/code_809A560.o"
+    .include "src/code_809C5C4.o"
+	.space 4
+    .include "src/code_809D148.o"
+    .include "src/ground_script.o"
+	.space 4
     .include "src/ground_sprite.o"
     .include "src/ground_script_file.o"
