@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ground_script.h"
+#include "ground_sprite.h"
 #include "debug.h"
 #include "memory.h"
 
@@ -11,7 +12,13 @@ typedef struct GroundEffect {
     s16 unk6;
     s16 unk8;
     s8 unkA;
-    u8 fillB[0x1c4 - 0xB];
+    u8 fillB[0x14 - 0xB];
+    s32 unk14; // some x?
+    s32 unk18; // some y?
+    u8 fill1C[0x124 - 0x1C];
+    PixelPos unkPixelPos; // 0x124
+    u8 fill12C[0x144 - 0x12C];
+    struct UnkGroundSpriteStruct unk144;
 } GroundEffect;
 
 IWRAM_INIT GroundEffect* gGroundEffects = NULL;  // size 16 array
@@ -100,7 +107,7 @@ void GroundEffect_Cancel(s32 scriptID, s32 sector)
 
     index = 0;
     ptr = &gGroundEffects[0];
-    for(; index < 0x10; index = (s16)(index + 1), ptr++)
+    for(; index < 16; index = (s16)(index + 1), ptr++)
     {
         if((ptr->unk6 != -1) && (ptr->unk8 == scriptID_s32))
             if(sector_s32 < 0 || ptr->unkA == sector_s32)
@@ -108,3 +115,28 @@ void GroundEffect_Cancel(s32 scriptID, s32 sector)
     }
 }
 
+extern const char gUnknown_8118658[];
+
+void GroundEffect_CancelBlank()
+{
+    s32 index;
+    GroundEffect *ptr;
+    PixelPos pos;
+
+    Log(0, gUnknown_8118658); // "GroundEffect CancelBlank"
+
+    index = 0;
+    ptr = &gGroundEffects[0];
+    for (; index < 16; index = (s16)(index + 1), ptr++)
+    {
+        if (ptr->unk6 != -1)
+        {
+            pos.x = ptr->unkPixelPos.x + ptr->unk14;
+            pos.y = ptr->unkPixelPos.y + ptr->unk18;
+            if (!IsOnscreen_80A675C(&ptr->unk144, &pos))
+            {
+                GroundEffect_Delete(index);
+            }
+        }
+    }
+}
