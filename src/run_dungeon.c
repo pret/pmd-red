@@ -141,7 +141,7 @@ static const s16 sDeoxysForms[4] = {MONSTER_DEOXYS_NORMAL, MONSTER_DEOXYS_ATTACK
 
 // This functions is the main 'loop' when the player is in a Dungeon. It runs from the moment the player enters a dungeon, until they leave(by completing or by fainting).
 // arm9.bin::0206A848
-void RunDungeon_Async(UnkStruct_RunDungeon *r8)
+void RunDungeon_Async(DungeonSetupStruct *r8)
 {
     bool8 check;
     Entity *leader;

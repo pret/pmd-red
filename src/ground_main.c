@@ -2,6 +2,7 @@
 #include "constants/dungeon.h"
 #include "constants/move_id.h"
 #include "structs/str_wonder_mail.h"
+#include "structs/str_dungeon_setup.h"
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
@@ -29,7 +30,7 @@ EWRAM_DATA u16 gUnknown_20398BC = {0};
 EWRAM_DATA s16 gUnknown_20398BE = {0};
 EWRAM_DATA u32 gUnknown_20398C0 = {0};
 EWRAM_DATA s16 gUnknown_20398C4 = {0};
-EWRAM_DATA struct unkStruct_20398C8 gUnknown_20398C8 = {0};
+EWRAM_DATA struct DungeonSetupInfo gUnknown_20398C8 = {0};
 EWRAM_DATA u8 gUnknown_2039950 = 0;
 
 EWRAM_INIT bool8 gUnknown_203B49C = {0};
@@ -755,7 +756,7 @@ const char *sub_80990B8(void)
     }
 }
 
-static inline bool8 sub_80990EC_sub(struct unkStruct_20398C8 *iVar1, u32 iVar2)
+static inline bool8 sub_80990EC_sub(struct DungeonSetupInfo *iVar1, u32 iVar2)
 {
     bool8 flag = FALSE;
     iVar1->unkB = 0;
@@ -769,7 +770,7 @@ static inline bool8 sub_80990EC_sub(struct unkStruct_20398C8 *iVar1, u32 iVar2)
 
 extern void sub_80A8EC0(u8 *, u32);
 
-u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s16 param_2)
+u8 sub_80990EC(struct DungeonSetupInfo *param_1, s16 param_2)
 {
     const DungeonInfo *iVar1;
     u8 auStack_98 [24];
@@ -780,8 +781,8 @@ u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s16 param_2)
     iVar1 = GetDungeonInfo_80A2608(param_2);
     dungeonIndex = iVar1->dungeonIndex;
     r5 = 0;
-    param_1->unk0 = dungeonIndex;
-    param_1->unk1 = 1;
+    param_1->unk0.id = dungeonIndex;
+    param_1->unk0.floor = 1;
     param_1->unkC = r5;
 
     switch(sub_80A2750(param_2))
@@ -823,11 +824,11 @@ u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s16 param_2)
     return iVar1->unk11;
 }
 
-u8 sub_80991E0(struct unkStruct_20398C8 *param_1,short *param_2)
+u8 sub_80991E0(struct DungeonSetupInfo *param_1,short *param_2)
 {
     *param_2 = gUnknown_20398C4;
     if (gUnknown_203B49C) {
-        memcpy(param_1, &gUnknown_20398C8, sizeof(struct unkStruct_20398C8));
+        memcpy(param_1, &gUnknown_20398C8, sizeof(struct DungeonSetupInfo));
         return TRUE;
     }
     else {
@@ -835,7 +836,7 @@ u8 sub_80991E0(struct unkStruct_20398C8 *param_1,short *param_2)
     }
 }
 
-void sub_8099220(struct unkStruct_20398C8 *param_1, s16 param_2)
+void sub_8099220(struct DungeonSetupInfo *param_1, s16 param_2)
 {
     s32 param_2_s32 = (s16)param_2;
     if (param_1 != NULL)
@@ -843,7 +844,7 @@ void sub_8099220(struct unkStruct_20398C8 *param_1, s16 param_2)
         gUnknown_203B49C = TRUE;
         gUnknown_203B49D = 0;
         gUnknown_20398C4 = param_2_s32;
-        memcpy(&gUnknown_20398C8, param_1, sizeof(struct unkStruct_20398C8));
+        memcpy(&gUnknown_20398C8, param_1, sizeof(struct DungeonSetupInfo));
     }
     else {
         gUnknown_203B49C = FALSE;
@@ -860,7 +861,7 @@ void sub_809927C(u8 param_1)
     gUnknown_2039950 = param_1;
     SetScriptVarValue(0x0,DUNGEON_ENTER,0x50);
     SetScriptVarValue(0x0,DUNGEON_ENTER_INDEX,gUnknown_2039950);
-    sub_8095494(&gUnknown_20398C8.unk10,param_1);
+    sub_8095494(&gUnknown_20398C8.dungeonSeed,param_1);
     gUnknown_20398C8.unkB = 1;
     gUnknown_20398C8.unkC = 0;
     gUnknown_20398C8.unk4 = 0;

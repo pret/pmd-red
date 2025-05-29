@@ -1,5 +1,5 @@
-#ifndef GUARD_STR_DUNGEON_8042F6C_H
-#define GUARD_STR_DUNGEON_8042F6C_H
+#ifndef GUARD_STR_DUNGEON_SETUP_H
+#define GUARD_STR_DUNGEON_SETUP_H
 
 #include "structs/str_dungeon.h"
 #include "structs/str_dungeon_location.h"
@@ -7,28 +7,34 @@
 #include "structs/str_pokemon.h"
 #include "structs/str_wonder_mail.h"
 
-typedef struct UnkStruct_RunDungeon
+typedef struct DungeonSetupInfo
 {
-    u8 unk0;
-    DungeonLocation unk4;
+    DungeonLocation unk0;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
     u8 unk8;
     u8 unk9;
     u8 unkA;
     u8 unkB;
     u8 unkC;
     u8 unkD;
-    u8 unkE;
-    u8 unkF;
-    u8 unk10;
-    u8 unk11;
     DungeonMailSeed dungeonSeed;
-    PokemonStruct1 unk1C;
+    PokemonStruct1 unk18;
     u8 *unk74;
     Dungeon *unk78;
     s16 unk7C; // Set to 5 if the dungeon was skipped (quicksave read failed)
     u8 unk7E;
     DungeonLocation unk80;
     DungeonMailSeed unk84;
-} UnkStruct_RunDungeon;
+} DungeonSetupInfo;
 
-#endif // GUARD_STR_DUNGEON_8042F6C_H
+typedef struct DungeonSetupStruct
+{
+    s32 unk0;
+    DungeonSetupInfo info;
+    u8 fill8C[44];
+} DungeonSetupStruct;
+
+#endif // GUARD_STR_DUNGEON_SETUP_H

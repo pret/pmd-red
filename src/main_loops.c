@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/bg_music.h"
 #include "constants/main_menu.h"
-#include "structs/str_dungeon_8042F6C.h"
+#include "structs/str_dungeon_setup.h"
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
@@ -72,7 +72,7 @@ static void NDS_LoadOverlay_GroundMain();
 static u32 sub_80009D0(u32 param_1);
 /* static */ // TODO: Uncomment
 void sub_80011E8(u8 *param_1);
-static void LoadAndRunDungeon_Async(UnkStruct_RunDungeon *r0);
+static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0);
 /* static */ // TODO: Uncomment
 u32 xxx_script_related_8001334(u32 r0);
 static void MainLoops_RunFrameActions(u32 unused);
@@ -1217,7 +1217,7 @@ static u32 sub_80009D0(u32 param_1)
 // It'd also be cool to see what happens if a quicksave load fails and the dungeon is skipped entirely
 // arm9.bin::0200D01C
 /* static */ // TODO: Uncomment
-void LoadAndRunQuickSaveDungeon_Async(UnkStruct_RunDungeon *param_1)
+void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
 {
     u8 quickSaveValid;
     s32 quickSaveStatus;
@@ -1231,11 +1231,11 @@ void LoadAndRunQuickSaveDungeon_Async(UnkStruct_RunDungeon *param_1)
     sub_8014144();
     sub_8043D50(&local_1c, &local_18);
 
-    param_1->unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
-    param_1->unk78 = MemoryAlloc(local_18, 7); // size: sizeof(Dungeon)
+    param_1->info.unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
+    param_1->info.unk78 = MemoryAlloc(local_18, 7); // size: sizeof(Dungeon)
 
-    if (param_1->unk8) {
-        PrepareQuickSaveRead(param_1->unk74, local_1c);
+    if (param_1->info.unk4) {
+        PrepareQuickSaveRead(param_1->info.unk74, local_1c);
 
         while (TRUE) {
             if (!ReadQuickSave())
@@ -1267,26 +1267,26 @@ void LoadAndRunQuickSaveDungeon_Async(UnkStruct_RunDungeon *param_1)
         sub_8099690(0);
     }
     else
-        param_1->unk7C = 5;
+        param_1->info.unk7C = 5;
 
-    if (param_1->unk7C == -2)
-        sub_809542C(&param_1->unk84);
+    if (param_1->info.unk7C == -2)
+        sub_809542C(&param_1->info.unk84);
 
-    if (param_1->unk7C == 3 || param_1->unk7C == -2) {
-        SetDungeonLocationInfo(&param_1->unk80);
+    if (param_1->info.unk7C == 3 || param_1->info.unk7C == -2) {
+        SetDungeonLocationInfo(&param_1->info.unk80);
         xxx_call_stop_bgm();
 
-        if (param_1->unk7C == -2)
-            PrepareQuickSaveWrite(param_1->unk74, local_1c, 1);
+        if (param_1->info.unk7C == -2)
+            PrepareQuickSaveWrite(param_1->info.unk74, local_1c, 1);
         else
-            PrepareQuickSaveWrite(param_1->unk74, local_1c, 0);
+            PrepareQuickSaveWrite(param_1->info.unk74, local_1c, 0);
 
         while ((quickSaveStatus = WriteQuickSave(), (quickSaveStatus != 2))) {
             if (quickSaveStatus == 3)
                 break;
             if (quickSaveStatus == 1) {
-                MemoryFree(param_1->unk78);
-                MemoryFree(param_1->unk74);
+                MemoryFree(param_1->info.unk78);
+                MemoryFree(param_1->info.unk74);
             }
 
             MainLoops_RunFrameActions(0);
@@ -1295,8 +1295,8 @@ void LoadAndRunQuickSaveDungeon_Async(UnkStruct_RunDungeon *param_1)
     }
     else {
         sub_808ED00();
-        MemoryFree(param_1->unk78);
-        MemoryFree(param_1->unk74);
+        MemoryFree(param_1->info.unk78);
+        MemoryFree(param_1->info.unk74);
     }
 }
 
@@ -1456,7 +1456,7 @@ static void NDS_LoadOverlay_GroundMain()
 }
 
 // arm9.bin::0200CADC
-static void nullsub_2(UnkStruct_RunDungeon *r0)
+static void nullsub_2(DungeonSetupStruct *r0)
 {
     // (not a nullsub in the NDS)
     // Probably loads the dungeon overlay?
@@ -1470,7 +1470,7 @@ u32 xxx_script_related_8001334(u32 r0)
 }
 
 // arm9.bin::0200CA1C
-static void LoadAndRunDungeon_Async(UnkStruct_RunDungeon *r0)
+static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0)
 {
     nullsub_2(r0);
     RunDungeon_Async(r0);
