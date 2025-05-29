@@ -3,6 +3,7 @@
 
 #include "structs/str_dungeon.h"
 #include "structs/str_dungeon_location.h"
+#include "structs/str_dungeon_mail_seed.h"
 #include "structs/str_pokemon.h"
 #include "structs/str_wonder_mail.h"
 
@@ -20,14 +21,14 @@ typedef struct UnkStruct_RunDungeon
     u8 unkF;
     u8 unk10;
     u8 unk11;
-    unkStruct_Dungeon64C unk14;
+    DungeonMailSeed dungeonSeed;
     PokemonStruct1 unk1C;
     u8 *unk74;
     Dungeon *unk78;
     s16 unk7C; // Set to 5 if the dungeon was skipped (quicksave read failed)
     u8 unk7E;
     DungeonLocation unk80;
-    WonderMailSub unk84;
+    DungeonMailSeed unk84;
 } UnkStruct_RunDungeon;
 
 #endif // GUARD_STR_DUNGEON_8042F6C_H

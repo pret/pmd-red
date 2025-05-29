@@ -1384,7 +1384,7 @@ void UpdateThankYouMailText(void)
         else
             sUnknown_203B2C4->unk53C.itemRewards[0] = ITEM_NOTHING; // unk558
         sUnknown_203B2C4->unk53C.quantity = 1; // unk55B
-        sUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&mail->unk4.dungeon, 0); // unk560
+        sUnknown_203B2C4->unk53C.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeonSeed.location, 0); // unk560
         sUnknown_203B2C4->unk53C.itemRewards[1] = 0; // unk559
         sUnknown_203B2C4->unk53C.itemRewards[2] = 0; // unk55A
         sUnknown_203B2C4->unk53C.friendAreaReward = 0; // unk55C

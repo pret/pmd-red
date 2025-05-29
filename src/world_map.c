@@ -95,7 +95,7 @@ void ShowWorldMap_Async(struct UnkStruct_sub_8010268 *r5)
         WorldMap_RunFrameActions();
 
     if (r5->unk4.unk10) {
-        speciesId = r5->unk4.unk1C;
+        speciesId = r5->unk4.mon.speciesNum;
         ASM_MATCH_TRICK(speciesId);
     }
     else {

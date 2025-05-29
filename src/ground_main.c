@@ -54,7 +54,7 @@ extern void sub_809CB8C();
 extern void sub_8098CC8();
 extern void ClearAllItems_8091FB4();
 extern u8 sub_809C730();
-extern void sub_8095494(WonderMailSub *param_1, u8 index);
+extern void sub_8095494(DungeonMailSeed *param_1, u8 index);
 
 extern u16 gUnknown_2026E4E;
 

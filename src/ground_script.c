@@ -1081,7 +1081,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 u32 res;
                                 ret = GetMailatIndex(GetScriptVarValue(NULL, 20));
                                 val = sub_80023E4(6);
-                                res = sub_809034C(ret->unk4.dungeon.id, 0, gUnknown_203B4B0, val, 1);
+                                res = sub_809034C(ret->dungeonSeed.location.id, 0, gUnknown_203B4B0, val, 1);
                                 gUnknown_2039DA4 = res;
                                 switch (res) {
                                     case 2: {

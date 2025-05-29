@@ -142,7 +142,7 @@ void CreateMailMenu(void)
             y = GetMenuEntryYCoord(&sUnknown_203B2D8->unk4.s0.input, i);
             sub_803B6B0(10, y, 6, sUnknown_203B2D8->unk4.s0.winId);
             PrintPokeNameToBuffer(gFormatBuffer_Monsters[0], GetPlayerPokemonStruct());
-            sprintfStatic(buffer, GetPokemonMailHeadline(mail->unk4.dungeon.floor), gFormatBuffer_Monsters[0]);
+            sprintfStatic(buffer, GetPokemonMailHeadline(mail->dungeonSeed.location.floor), gFormatBuffer_Monsters[0]);
             PrintStringOnWindow(21, y, buffer, sUnknown_203B2D8->unk4.s0.winId, 0);
         }
         else {

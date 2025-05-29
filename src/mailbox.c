@@ -374,7 +374,7 @@ void sub_802E578(void)
             mail = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
             if(mail->mailType == 1)
             {
-                gUnknown_203B304->mailIndex = mail->unk4.dungeon.floor;
+                gUnknown_203B304->mailIndex = mail->dungeonSeed.location.floor;
                 gUnknown_203B304->fallbackState = MAIL_MENU_1;
                 SetMailboxState(DISPLAY_SEL_PKMN_NEWS);
             }
@@ -436,7 +436,7 @@ void HandleMailActionMenu(void)
         case 6:
             PlaySound(0x133);
             mail = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
-            ReceivePKMNNews(mail->unk4.dungeon.floor);
+            ReceivePKMNNews(mail->dungeonSeed.location.floor);
             ResetMailboxSlot(gUnknown_203B304->mailboxIndex);
             ShiftMailboxSlotsDown();
             if(HasNoMailinMailbox())
@@ -452,7 +452,7 @@ void HandleMailActionMenu(void)
         case 7:
             PlayMenuSoundEffect(0);
             mail = GetMailboxSlotInfo(gUnknown_203B304->mailboxIndex);
-            gUnknown_203B304->mailIndex = mail->unk4.dungeon.floor;
+            gUnknown_203B304->mailIndex = mail->dungeonSeed.location.floor;
             gUnknown_203B304->fallbackState = MAIL_MENU_1;
             SetMailboxState(DISPLAY_SEL_PKMN_NEWS);
             break;

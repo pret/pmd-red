@@ -48,7 +48,7 @@ void sub_803C21C(WonderMail *param_1, unkStruct_802F204 *param_2)
     int index;
     u32 uVar2;
 
-    uVar2 = sub_803C1D0(&param_1->unk4.dungeon,param_1->missionType);
+    uVar2 = sub_803C1D0(&param_1->dungeonSeed.location,param_1->missionType);
     param_2->moneyReward = 0;
 
     for(index = 0; index < MAX_ITEM_REWARDS; index++)
@@ -75,7 +75,7 @@ void sub_803C21C(WonderMail *param_1, unkStruct_802F204 *param_2)
             param_2->rewardType = 3;
             param_2->itemRewards[0] = param_1->itemReward;
             do {
-                sub_803C37C(&param_1->unk4.dungeon,param_1->missionType,&param_2->itemRewards[1]);
+                sub_803C37C(&param_1->dungeonSeed.location,param_1->missionType,&param_2->itemRewards[1]);
             } while (param_2->itemRewards[0] == param_2->itemRewards[1]);
             break;
         case MONEY1:
@@ -95,11 +95,11 @@ void sub_803C21C(WonderMail *param_1, unkStruct_802F204 *param_2)
             param_2->rewardType = 3;
             param_2->itemRewards[0] = param_1->itemReward;
             do {
-                sub_803C37C(&param_1->unk4.dungeon,param_1->missionType,&param_2->itemRewards[1]);
+                sub_803C37C(&param_1->dungeonSeed.location,param_1->missionType,&param_2->itemRewards[1]);
             } while (param_2->itemRewards[0] == param_2->itemRewards[1]);
             do {
                 do {
-                    sub_803C37C(&param_1->unk4.dungeon,param_1->missionType,&param_2->itemRewards[2]);
+                    sub_803C37C(&param_1->dungeonSeed.location,param_1->missionType,&param_2->itemRewards[2]);
                 } while (param_2->itemRewards[0] == param_2->itemRewards[2]);
             } while (param_2->itemRewards[1] == param_2->itemRewards[2]);
             break;
@@ -113,7 +113,7 @@ void sub_803C21C(WonderMail *param_1, unkStruct_802F204 *param_2)
     }
     CopyYellowMonsterNametoBuffer(param_2->clientName, param_1->clientSpecies);
     param_2->clientSpecies = param_1->clientSpecies;
-    param_2->teamRankPtsReward = GetDungeonTeamRankPts(&param_1->unk4.dungeon,param_1->missionType);
+    param_2->teamRankPtsReward = GetDungeonTeamRankPts(&param_1->dungeonSeed.location,param_1->missionType);
 }
 
 void sub_803C37C(DungeonLocation *location, u8 r1, u8 *itemReward)
@@ -248,7 +248,7 @@ bool8 sub_803C580(WonderMail *param_1)
         return FALSE;
 
     for (id = 0; id < ARRAY_COUNT_INT(gUnknown_80E8180); ptr++, id++) {
-        if (sub_803C110(ptr->species) && xxx_bit_lut_lookup_8091E50(param_1->unk4.dungeon.id, ptr->itemId)) {
+        if (sub_803C110(ptr->species) && xxx_bit_lut_lookup_8091E50(param_1->dungeonSeed.location.id, ptr->itemId)) {
             array[counter++] = id;
         }
     }
@@ -275,7 +275,7 @@ bool8 sub_803C610(WonderMail *param_1)
     counter = 0;
     ptr = gUnknown_80E81D4;
     for (id = 0; id < ARRAY_COUNT_INT(gUnknown_80E81D4); ptr++, id++) {
-        if (sub_803C110(ptr->species) && xxx_bit_lut_lookup_8091E50(param_1->unk4.dungeon.id, ptr->itemId)) {
+        if (sub_803C110(ptr->species) && xxx_bit_lut_lookup_8091E50(param_1->dungeonSeed.location.id, ptr->itemId)) {
             array[counter++] = id;
         }
     }

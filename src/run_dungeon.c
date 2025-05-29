@@ -174,7 +174,7 @@ void RunDungeon_Async(UnkStruct_RunDungeon *r8)
 
     if (!r6) {
         gDungeon->unk644.unk34 = r8->unkF;
-        gDungeon->unk644.unk8 = r8->unk14;
+        gDungeon->unk644.dungeonSeed = r8->dungeonSeed;
         gDungeon->unk644.windTurns = GetTurnLimit(r8->unk4.id);
         gDungeon->unk644.unk36 = 0;
         gDungeon->unk644.unk37 = GetRescuesAllowed(r8->unk4.id);
@@ -216,7 +216,7 @@ void RunDungeon_Async(UnkStruct_RunDungeon *r8)
         gDungeon->unk181e8.allTilesRevealed = 1;
         gDungeon->unk181e8.unk1820C = 1;
         if (gDungeon->unk644.unk34 == 1) {
-            gDungeon->unk644.dungeonLocation.id = r8->unk14.unk0;
+            gDungeon->unk644.dungeonLocation.id = r8->dungeonSeed.location.id;
             gDungeon->unk644.dungeonLocation.floor = 1;
         }
         else {
@@ -228,7 +228,7 @@ void RunDungeon_Async(UnkStruct_RunDungeon *r8)
     }
     if (!r6) {
         if (gDungeon->unk644.unk34 == 1) {
-            gDungeon->unk644.unk38 = r8->unk14.unk4;
+            gDungeon->unk644.unk38 = r8->dungeonSeed.seed;
         }
         else {
             gDungeon->unk644.unk38 = Rand32Bit() & 0xFFFFFF;
@@ -662,7 +662,7 @@ void RunDungeon_Async(UnkStruct_RunDungeon *r8)
                 r8->unk7C = -2;
                 memset(&r8->unk84, 0, sizeof(r8->unk84));
                 r8->unk80 = gDungeon->unk644.dungeonLocation;
-                r8->unk84.dungeon = gDungeon->unk644.dungeonLocation;
+                r8->unk84.location = gDungeon->unk644.dungeonLocation;
                 r8->unk84.seed = gDungeon->unk644.unk38;
 
             }
@@ -730,7 +730,7 @@ bool8 sub_8043CE4(s32 dungeonId)
 
 u8 GetFloorType(void)
 {
-    if (gDungeon->unk644.unk34 == 1 && gDungeon->unk644.unk8.unk1 == gDungeon->unk644.dungeonLocation.floor)
+    if (gDungeon->unk644.unk34 == 1 && gDungeon->unk644.dungeonSeed.location.floor == gDungeon->unk644.dungeonLocation.floor)
         return FLOOR_TYPE_RESCUE;
     else if (IsBossFight())
         return FLOOR_TYPE_FIXED;

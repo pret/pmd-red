@@ -206,7 +206,7 @@ void sub_803092C(void)
       local.mailMissionType = MISSION_TYPE_FRIEND_RESCUE;
       local.mailStatus = MAIL_STATUS_SUSPENDED;
 
-      local.unk8 = &mail->unk4;
+      local.dungeonSeed = &mail->dungeonSeed;
       local.playerName = mail->playerName;
 
       local.clientSpecies = mail->clientSpecies;

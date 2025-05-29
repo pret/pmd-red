@@ -79,9 +79,9 @@ void InitializeMailJobsNews(void)
     MemoryClear8(gUnknown_203B490->unk1B8, sizeof(gUnknown_203B490->unk1B8));
     for(index = 0; index < 16; index++)
     {
-        gUnknown_203B490->unk230[index].sub.dungeon.id = 99;
-        gUnknown_203B490->unk230[index].sub.dungeon.floor = 1;
-        gUnknown_203B490->unk230[index].sub.seed = 0;
+        gUnknown_203B490->unk230[index].dungeonSeed.location.id = 99;
+        gUnknown_203B490->unk230[index].dungeonSeed.location.floor = 1;
+        gUnknown_203B490->unk230[index].dungeonSeed.seed = 0;
         gUnknown_203B490->unk230[index].checksum = 0;
     }
 }
@@ -108,17 +108,17 @@ bool8 ValidateWonderMail(WonderMail *data)
         return FALSE;
     else
     {
-        if(data->missionType == WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM && GetMaxItemsAllowed(data->unk4.dungeon.id) == 0)
+        if(data->missionType == WONDER_MAIL_MISSION_TYPE_DELIVER_ITEM && GetMaxItemsAllowed(data->dungeonSeed.location.id) == 0)
             return FALSE;
 
         if(data->unk2 > 9)
             return FALSE;
 
-        if(IsNotValidDungeon(data->unk4.dungeon.id))
+        if(IsNotValidDungeon(data->dungeonSeed.location.id))
             return FALSE;
-        if(data->unk4.dungeon.floor >= GetDungeonFloorCount(data->unk4.dungeon.id))
+        if(data->dungeonSeed.location.floor >= GetDungeonFloorCount(data->dungeonSeed.location.id))
             return FALSE;
-        if(sub_809017C(&data->unk4.dungeon))
+        if(sub_809017C(&data->dungeonSeed.location))
             return FALSE;
 
         if(data->clientSpecies == MONSTER_NONE)
@@ -150,7 +150,7 @@ bool8 ValidateWonderMail(WonderMail *data)
             return FALSE;
 
         // Item finding
-        if(data->missionType == WONDER_MAIL_MISSION_TYPE_FIND_ITEM && xxx_bit_lut_lookup_8091E50(data->unk4.dungeon.id, data->targetItem) == 0)
+        if(data->missionType == WONDER_MAIL_MISSION_TYPE_FIND_ITEM && xxx_bit_lut_lookup_8091E50(data->dungeonSeed.location.id, data->targetItem) == 0)
             return FALSE;
 
         if(data->rewardType == BLANK_4 || data->rewardType == END_REWARDS || data->rewardType > END_REWARDS)
@@ -167,7 +167,7 @@ bool8 ValidateWonderMail(WonderMail *data)
         {
             if(GetFriendAreaUnlockCondition(data->friendAreaReward) != UNLOCK_WONDER_MAIL)
                 return FALSE;
-            if(sub_803C1D0(&data->unk4.dungeon, data->missionType) == 0)
+            if(sub_803C1D0(&data->dungeonSeed.location, data->missionType) == 0)
                 return FALSE;
         }
         return TRUE;
@@ -194,7 +194,7 @@ bool8 GenerateMailJobInfo(struct WonderMail *mail)
         mail->missionType = MISSION_TYPE_FRIEND_RESCUE;
     }
     mail->unk2 = 0;
-    mail->unk4.seed = Rand32Bit() & 0xffffff;
+    mail->dungeonSeed.seed = Rand32Bit() & 0xffffff;
     numPokemon = 0;
 
     for (i = 1; i < MONSTER_MAX; i++) {
@@ -217,20 +217,20 @@ bool8 GenerateMailJobInfo(struct WonderMail *mail)
         mail->targetSpecies = mail->clientSpecies;
     }
 
-    mail->targetItem = sub_8095F28(mail->unk4.dungeon.id);
+    mail->targetItem = sub_8095F28(mail->dungeonSeed.location.id);
     if (mail->targetItem == 0) {
         mail->missionType = MISSION_TYPE_FRIEND_RESCUE;
         mail->targetSpecies = mail->clientSpecies;
-        sub_803C37C(&mail->unk4.dungeon,0,&mail->targetItem);
+        sub_803C37C(&mail->dungeonSeed.location,0,&mail->targetItem);
     }
-    itemCount = GetMaxItemsAllowed(mail->unk4.dungeon.id);
+    itemCount = GetMaxItemsAllowed(mail->dungeonSeed.location.id);
     if (itemCount == 0 && mail->missionType == MISSION_TYPE_RESCUE_TARGET) {
         mail->missionType = MISSION_TYPE_FRIEND_RESCUE;
         mail->targetSpecies = mail->clientSpecies;
     }
 
     do {
-        sub_803C37C(&mail->unk4.dungeon,mail->missionType,&mail->itemReward);
+        sub_803C37C(&mail->dungeonSeed.location,mail->missionType,&mail->itemReward);
     } while (mail->targetItem == mail->itemReward);
     mail->friendAreaReward = 0;
 
@@ -327,8 +327,8 @@ bool8 GenerateMailJobDungeonInfo(WonderMail *mail)
       }
 
       if (flag) {
-        mail->unk4.dungeon.id = dungeon;
-        mail->unk4.dungeon.floor = floor;
+        mail->dungeonSeed.location.id = dungeon;
+        mail->dungeonSeed.location.floor = floor;
         return TRUE;
       }
       floor++;
@@ -351,11 +351,11 @@ bool8 sub_8095E38(WonderMail *mail, u8 dungeon, u32 floor, u8 param_4)
 {
     if (mail->mailType != MAIL_TYPE_NONE) {
         if ((mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT) && (param_4 == 1)) {
-            if (mail->unk4.dungeon.id == dungeon) {
+            if (mail->dungeonSeed.location.id == dungeon) {
                 return TRUE;
             }
         }
-        else if ((mail->unk4.dungeon.id == dungeon) && (mail->unk4.dungeon.floor == floor)) {
+        else if ((mail->dungeonSeed.location.id == dungeon) && (mail->dungeonSeed.location.floor == floor)) {
             return TRUE;
         }
     }
@@ -485,8 +485,8 @@ void ResetMailbox(void)
 void ResetMailboxSlot(u8 index)
 {
     gUnknown_203B490->mailboxSlots[index].mailType = MAIL_TYPE_NONE;
-    gUnknown_203B490->mailboxSlots[index].unk4.dungeon.id = 99;
-    gUnknown_203B490->mailboxSlots[index].unk4.dungeon.floor = 0;
+    gUnknown_203B490->mailboxSlots[index].dungeonSeed.location.id = 99;
+    gUnknown_203B490->mailboxSlots[index].dungeonSeed.location.floor = 0;
     gUnknown_203B490->mailboxSlots[index].rewardType = MONEY1;
 }
 
@@ -535,9 +535,9 @@ static void SortMailboxSlots(void)
         {
                 if(gUnknown_203B490->mailboxSlots[r6].mailType != 0)
                 {
-                    if((gUnknown_203B490->mailboxSlots[r1].unk4.dungeon.id > gUnknown_203B490->mailboxSlots[r6].unk4.dungeon.id) ||
-                        ((gUnknown_203B490->mailboxSlots[r1].unk4.dungeon.id == gUnknown_203B490->mailboxSlots[r6].unk4.dungeon.id) &&
-                        (gUnknown_203B490->mailboxSlots[r1].unk4.dungeon.floor > gUnknown_203B490->mailboxSlots[r6].unk4.dungeon.floor)))
+                    if((gUnknown_203B490->mailboxSlots[r1].dungeonSeed.location.id > gUnknown_203B490->mailboxSlots[r6].dungeonSeed.location.id) ||
+                        ((gUnknown_203B490->mailboxSlots[r1].dungeonSeed.location.id == gUnknown_203B490->mailboxSlots[r6].dungeonSeed.location.id) &&
+                        (gUnknown_203B490->mailboxSlots[r1].dungeonSeed.location.floor > gUnknown_203B490->mailboxSlots[r6].dungeonSeed.location.floor)))
                     {
                         job = gUnknown_203B490->mailboxSlots[r1];
                         gUnknown_203B490->mailboxSlots[r1] = gUnknown_203B490->mailboxSlots[r6];
@@ -608,8 +608,8 @@ bool8 sub_80961D8(void)
 _slot:
     slot = GetMailboxSlotInfo(num);
     slot->mailType = 1;
-    slot->unk4.dungeon.id = NUM_DUNGEONS;
-    slot->unk4.dungeon.floor = floor;
+    slot->dungeonSeed.location.id = NUM_DUNGEONS;
+    slot->dungeonSeed.location.floor = floor;
     goto _flag;
 _0809638E:
     for(; num <= index; num++)
@@ -618,7 +618,7 @@ _0809638E:
         if(GenerateMailJobInfo(slot))
         {
             friendAreaReward = sub_8095E78();
-            if(!sub_803C1D0(&slot->unk4.dungeon, slot->missionType)) friendAreaReward = FRIEND_AREA_NONE;
+            if(!sub_803C1D0(&slot->dungeonSeed.location, slot->missionType)) friendAreaReward = FRIEND_AREA_NONE;
             slot->rewardType = RandRange(MONEY1, END_REWARDS);
             if(slot->rewardType == FRIEND_AREA)
             {
@@ -664,8 +664,8 @@ bool8 sub_80963B4(void)
         {
             slot = GetMailboxSlotInfo(num);
             slot->mailType = 1;
-            slot->unk4.dungeon.id = NUM_DUNGEONS;
-            slot->unk4.dungeon.floor = floor;
+            slot->dungeonSeed.location.id = NUM_DUNGEONS;
+            slot->dungeonSeed.location.floor = floor;
             flag = TRUE;
         }
     }
@@ -690,16 +690,16 @@ void sub_80963FC(void)
     slot->mailType = 5;
     slot->missionType = 0;
     slot->unk2 = 0;
-    slot->unk4.dungeon.id = DUNGEON_MT_STEEL;
-    slot->unk4.dungeon.floor = 3;
-    slot->unk4.seed = 0x00ffffff & Rand32Bit();
+    slot->dungeonSeed.location.id = DUNGEON_MT_STEEL;
+    slot->dungeonSeed.location.floor = 3;
+    slot->dungeonSeed.seed = 0x00ffffff & Rand32Bit();
     slot->clientSpecies = MONSTER_PIDGEY;
     slot->targetSpecies = MONSTER_PIDGEY;
-    slot->targetItem = sub_8095F28(slot->unk4.dungeon.id);
+    slot->targetItem = sub_8095F28(slot->dungeonSeed.location.id);
     slot->rewardType = MONEY1;
     do
     {
-        sub_803C37C(&slot->unk4.dungeon, slot->missionType, &slot->itemReward);
+        sub_803C37C(&slot->dungeonSeed.location, slot->missionType, &slot->itemReward);
     } while (slot->targetItem == slot->itemReward);
     slot->friendAreaReward = FRIEND_AREA_NONE;
     ShiftMailboxSlotsDown();
@@ -716,8 +716,8 @@ void sub_8096488(void)
     }
     mail = GetMailboxSlotInfo(0);
     mail->mailType = 1;
-    mail->unk4.dungeon.id = NUM_DUNGEONS;
-    mail->unk4.dungeon.floor = 0;
+    mail->dungeonSeed.location.id = NUM_DUNGEONS;
+    mail->dungeonSeed.location.floor = 0;
 }
 
 bool8 sub_80964B4(void)
@@ -785,8 +785,8 @@ bool8 IsPelipperBoardSlotEmpty(u8 index)
 void ResetPelipperBoardSlot(u8 index)
 {
     gUnknown_203B490->pelipperBoardJobs[index].mailType = MAIL_TYPE_NONE;
-    gUnknown_203B490->pelipperBoardJobs[index].unk4.dungeon.id = 99;
-    gUnknown_203B490->pelipperBoardJobs[index].unk4.dungeon.floor = 0;
+    gUnknown_203B490->pelipperBoardJobs[index].dungeonSeed.location.id = 99;
+    gUnknown_203B490->pelipperBoardJobs[index].dungeonSeed.location.floor = 0;
     gUnknown_203B490->pelipperBoardJobs[index].rewardType = 0;
 }
 
@@ -837,8 +837,8 @@ void SortPelipperJobs(void)
         {
             if(gUnknown_203B490->pelipperBoardJobs[index2].mailType != MAIL_TYPE_NONE)
             {
-                if((gUnknown_203B490->pelipperBoardJobs[index1].unk4.dungeon.id > gUnknown_203B490->pelipperBoardJobs[index2].unk4.dungeon.id) ||
-                ((gUnknown_203B490->pelipperBoardJobs[index1].unk4.dungeon.id == gUnknown_203B490->pelipperBoardJobs[index2].unk4.dungeon.id) && (gUnknown_203B490->pelipperBoardJobs[index1].unk4.dungeon.floor > gUnknown_203B490->pelipperBoardJobs[index2].unk4.dungeon.floor)))
+                if((gUnknown_203B490->pelipperBoardJobs[index1].dungeonSeed.location.id > gUnknown_203B490->pelipperBoardJobs[index2].dungeonSeed.location.id) ||
+                ((gUnknown_203B490->pelipperBoardJobs[index1].dungeonSeed.location.id == gUnknown_203B490->pelipperBoardJobs[index2].dungeonSeed.location.id) && (gUnknown_203B490->pelipperBoardJobs[index1].dungeonSeed.location.floor > gUnknown_203B490->pelipperBoardJobs[index2].dungeonSeed.location.floor)))
                 {
                     mail = gUnknown_203B490->pelipperBoardJobs[index1];
                     gUnknown_203B490->pelipperBoardJobs[index1] = gUnknown_203B490->pelipperBoardJobs[index2];
@@ -867,9 +867,9 @@ void GeneratePelipperJobs(void)
     mail->mailType = MAIL_TYPE_UNK2;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 1;
-    mail->unk4.dungeon.id = DUNGEON_UPROAR_FOREST;
-    mail->unk4.dungeon.floor = 10;
-    mail->unk4.seed = Rand32Bit() & 0xffffff;
+    mail->dungeonSeed.location.id = DUNGEON_UPROAR_FOREST;
+    mail->dungeonSeed.location.floor = 10;
+    mail->dungeonSeed.seed = Rand32Bit() & 0xffffff;
     mail->clientSpecies = MONSTER_WYNAUT;
     mail->targetSpecies = MONSTER_MANKEY;
     mail->targetItem = 0;
@@ -885,9 +885,9 @@ void GeneratePelipperJobs(void)
     mail->mailType = MAIL_TYPE_UNK3;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 2;
-    mail->unk4.dungeon.id = DUNGEON_HOWLING_FOREST;
-    mail->unk4.dungeon.floor = 15;
-    mail->unk4.seed = Rand32Bit() & 0xffffff;
+    mail->dungeonSeed.location.id = DUNGEON_HOWLING_FOREST;
+    mail->dungeonSeed.location.floor = 15;
+    mail->dungeonSeed.seed = Rand32Bit() & 0xffffff;
     mail->clientSpecies = MONSTER_SMEARGLE;
     mail->targetSpecies = MONSTER_SMEARGLE;
     mail->targetItem = 0;
@@ -902,9 +902,9 @@ void GeneratePelipperJobs(void)
     mail->mailType = MAIL_TYPE_UNK4;
     mail->missionType = WONDER_MAIL_MISSION_TYPE_UNK6;
     mail->unk2 = 3;
-    mail->unk4.dungeon.id = DUNGEON_WISH_CAVE;
-    mail->unk4.dungeon.floor = 20;
-    mail->unk4.seed = Rand32Bit() & 0xffffff;
+    mail->dungeonSeed.location.id = DUNGEON_WISH_CAVE;
+    mail->dungeonSeed.location.floor = 20;
+    mail->dungeonSeed.seed = Rand32Bit() & 0xffffff;
     mail->clientSpecies = MONSTER_MEDICHAM;
     mail->targetSpecies = MONSTER_MEDICHAM;
     mail->targetItem = 0;
@@ -931,9 +931,9 @@ bool8 IsMailinJobSlot(WonderMail *mail)
       if(jobSlot->mailType != MAIL_TYPE_NONE)
         if(mail->missionType == jobSlot->missionType)
             if(mail->unk2 == jobSlot->unk2)
-                    if(mail->unk4.dungeon.id == jobSlot->unk4.dungeon.id)
-                        if(mail->unk4.dungeon.floor == jobSlot->unk4.dungeon.floor)
-                            if(mail->unk4.seed == jobSlot->unk4.seed)
+                    if(mail->dungeonSeed.location.id == jobSlot->dungeonSeed.location.id)
+                        if(mail->dungeonSeed.location.floor == jobSlot->dungeonSeed.location.floor)
+                            if(mail->dungeonSeed.seed == jobSlot->dungeonSeed.seed)
                                 if(mail->clientSpecies == jobSlot->clientSpecies)
                                     if(mail->targetSpecies == jobSlot->targetSpecies)
                                         if(mail->targetItem == jobSlot->targetItem)
@@ -952,8 +952,8 @@ bool8 sub_809693C(WonderMail *mail)
   bool8 escortMission;
   s32 index;
 
-  dungeonIndex = mail->unk4.dungeon.id;
-  floor = mail->unk4.dungeon.floor;
+  dungeonIndex = mail->dungeonSeed.location.id;
+  floor = mail->dungeonSeed.location.floor;
   escortMission = FALSE;
   if (!IsValidWonderMail(mail)) {
       return FALSE;
@@ -999,7 +999,7 @@ s32 CountJobsinDungeon(u8 dungeon)
   for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
     mail = GetJobSlotInfo(index);
-    if ((mail->unk4.dungeon.id == dungeon) &&
+    if ((mail->dungeonSeed.location.id == dungeon) &&
        (((mail->mailType == MAIL_TYPE_TAKEN_JOB || (mail->mailType == MAIL_TYPE_UNK8)) || (mail->mailType == MAIL_TYPE_UNK9)))) {
       count++;
     }
@@ -1017,7 +1017,7 @@ bool8 sub_8096A08(u8 dungeon, PokemonStruct1 *pokemon)
   for(index = 0; index < MAX_ACCEPTED_JOBS; index++)
   {
       mail = GetJobSlotInfo(index);
-      if(mail->unk4.dungeon.id == dungeon)
+      if(mail->dungeonSeed.location.id == dungeon)
         if(mail->mailType == MAIL_TYPE_TAKEN_JOB)
             if(mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT)
             {
@@ -1076,7 +1076,7 @@ void sub_8096AF8(struct unkStruct_8096AF8 *param_1, u8 slotIndex,u8 dungeon)
   param_1->unk0 = FALSE;
   param_1->clientSpecies = jobSlot->clientSpecies;
   param_1->targetSpecies = MONSTER_NONE;
-  if (jobSlot->unk4.dungeon.id == dungeon) {
+  if (jobSlot->dungeonSeed.location.id == dungeon) {
     switch(jobSlot->missionType) {
         case WONDER_MAIL_MISSION_TYPE_FIND_ITEM:
             if (jobSlot->mailType == MAIL_TYPE_TAKEN_JOB) {
@@ -1117,7 +1117,7 @@ s16 sub_8096B98(u8 dungeon)
     mail = GetJobSlotInfo(index);
     if(mail->mailType == MAIL_TYPE_TAKEN_JOB)
         if(mail->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT)
-            if(mail->unk4.dungeon.id == dungeon)
+            if(mail->dungeonSeed.location.id == dungeon)
                 return mail->targetSpecies;
   }
   return 0;
@@ -1163,8 +1163,8 @@ bool8 sub_8096C08(u8 *jobIndex)
 void ResetJobSlot(u8 index)
 {
   gUnknown_203B490->jobSlots[index].mailType = MAIL_TYPE_NONE;
-  gUnknown_203B490->jobSlots[index].unk4.dungeon.id = 99;
-  gUnknown_203B490->jobSlots[index].unk4.dungeon.floor = 0;
+  gUnknown_203B490->jobSlots[index].dungeonSeed.location.id = 99;
+  gUnknown_203B490->jobSlots[index].dungeonSeed.location.floor = 0;
   gUnknown_203B490->jobSlots[index].rewardType = MONEY1;
 }
 
@@ -1213,9 +1213,9 @@ void SortJobSlots(void)
         {
                 if(gUnknown_203B490->jobSlots[r6].mailType != 0)
                 {
-                    if((gUnknown_203B490->jobSlots[r1].unk4.dungeon.id > gUnknown_203B490->jobSlots[r6].unk4.dungeon.id) ||
-                        ((gUnknown_203B490->jobSlots[r1].unk4.dungeon.id == gUnknown_203B490->jobSlots[r6].unk4.dungeon.id) &&
-                        (gUnknown_203B490->jobSlots[r1].unk4.dungeon.floor > gUnknown_203B490->jobSlots[r6].unk4.dungeon.floor)))
+                    if((gUnknown_203B490->jobSlots[r1].dungeonSeed.location.id > gUnknown_203B490->jobSlots[r6].dungeonSeed.location.id) ||
+                        ((gUnknown_203B490->jobSlots[r1].dungeonSeed.location.id == gUnknown_203B490->jobSlots[r6].dungeonSeed.location.id) &&
+                        (gUnknown_203B490->jobSlots[r1].dungeonSeed.location.floor > gUnknown_203B490->jobSlots[r6].dungeonSeed.location.floor)))
                     {
                         job = gUnknown_203B490->jobSlots[r1];
                         gUnknown_203B490->jobSlots[r1] = gUnknown_203B490->jobSlots[r6];
@@ -1254,9 +1254,9 @@ u8 sub_8096E2C(void)
     {
         if(gUnknown_203B490->mailboxSlots[index].mailType == 1)
         {
-             if(floor <= gUnknown_203B490->mailboxSlots[index].unk4.dungeon.floor)
-                 if( gUnknown_203B490->mailboxSlots[index].unk4.dungeon.floor < 0x32)
-                    floor =  gUnknown_203B490->mailboxSlots[index].unk4.dungeon.floor + 1;
+             if(floor <= gUnknown_203B490->mailboxSlots[index].dungeonSeed.location.floor)
+                 if( gUnknown_203B490->mailboxSlots[index].dungeonSeed.location.floor < 0x32)
+                    floor =  gUnknown_203B490->mailboxSlots[index].dungeonSeed.location.floor + 1;
         }
     }
 
@@ -1274,7 +1274,7 @@ bool8 sub_8096E80(u8 floor)
     {
         if(gUnknown_203B490->mailboxSlots[index].mailType == 1)
         {
-             if(floor == gUnknown_203B490->mailboxSlots[index].unk4.dungeon.floor)
+             if(floor == gUnknown_203B490->mailboxSlots[index].dungeonSeed.location.floor)
                 return TRUE;
         }
     }
@@ -1287,10 +1287,10 @@ s32 CalculateMailChecksum(WonderMail *mail)
 
     sum = (mail->unk2 + mail->missionType);
 
-    sum += mail->unk4.dungeon.id;
-    sum += mail->unk4.dungeon.floor;
+    sum += mail->dungeonSeed.location.id;
+    sum += mail->dungeonSeed.location.floor;
 
-    sum += mail->unk4.seed << 8;
+    sum += mail->dungeonSeed.seed << 8;
 
     sum += mail->clientSpecies << 12;
 
@@ -1315,7 +1315,7 @@ void sub_8096EEC(WonderMail *mail)
          gUnknown_203B490->unk230[index] =  gUnknown_203B490->unk230[index - 1];
     }
 
-    gUnknown_203B490->unk230[0].sub = mail->unk4;
+    gUnknown_203B490->unk230[0].dungeonSeed = mail->dungeonSeed;
     gUnknown_203B490->unk230[0].checksum = CalculateMailChecksum(mail);
 }
 
@@ -1329,9 +1329,9 @@ bool8 sub_8096F50(WonderMail *mail)
 
     for (index = 0; index < 16; index++) {
         temp  = &gUnknown_203B490->unk230[index];
-        if (temp->sub.dungeon.id == mail->unk4.dungeon.id)
-            if (temp->sub.dungeon.floor == mail->unk4.dungeon.floor)
-                if (temp->sub.seed == mail->unk4.seed)
+        if (temp->dungeonSeed.location.id == mail->dungeonSeed.location.id)
+            if (temp->dungeonSeed.location.floor == mail->dungeonSeed.location.floor)
+                if (temp->dungeonSeed.seed == mail->dungeonSeed.seed)
                     if (temp->checksum == checksum)
                         return TRUE;
     }
@@ -1377,8 +1377,8 @@ u32 RestoreMailInfo(u8 *r0, u32 size)
     for (index = 0; index < 16; index++)
     {
         ReadBits(&backup, &gUnknown_203B490->unk230[index].checksum, 32);
-        ReadBits(&backup, &gUnknown_203B490->unk230[index].sub.seed, 24);
-        ReadDungeonLocationBits(&backup, &gUnknown_203B490->unk230[index].sub.dungeon);
+        ReadBits(&backup, &gUnknown_203B490->unk230[index].dungeonSeed.seed, 24);
+        ReadDungeonLocationBits(&backup, &gUnknown_203B490->unk230[index].dungeonSeed.location);
     }
     FinishBitSerializer(&backup);
     return backup.count;
@@ -1421,8 +1421,8 @@ u32 SaveMailInfo(u8 *r0, u32 size)
     for(index = 0; index < 0x10; index++)
     {
         WriteBits(&backup, &gUnknown_203B490->unk230[index].checksum, 0x20);
-        WriteBits(&backup, &gUnknown_203B490->unk230[index].sub.seed, 0x18);
-        WriteDungeonLocationBits(&backup, &gUnknown_203B490->unk230[index].sub.dungeon);
+        WriteBits(&backup, &gUnknown_203B490->unk230[index].dungeonSeed.seed, 0x18);
+        WriteDungeonLocationBits(&backup, &gUnknown_203B490->unk230[index].dungeonSeed.location);
     }
     FinishBitSerializer(&backup);
     return backup.count;
@@ -1440,8 +1440,8 @@ void ReadWonderMailBits(DataSerializer *a, WonderMail *b)
     ReadBits(a, &b->rewardType, 4);
     ReadBits(a, &b->itemReward, 8);
     ReadBits(a, &b->friendAreaReward, 6);
-    ReadBits(a, &b->unk4.seed, 24);
-    ReadDungeonLocationBits(a, &b->unk4.dungeon);
+    ReadBits(a, &b->dungeonSeed.seed, 24);
+    ReadDungeonLocationBits(a, &b->dungeonSeed.location);
 }
 
 // arm9.bin::020661E4
@@ -1456,6 +1456,6 @@ void WriteWonderMailBits(DataSerializer *a, WonderMail *b)
     WriteBits(a, &b->rewardType, 4);
     WriteBits(a, &b->itemReward, 8);
     WriteBits(a, &b->friendAreaReward, 6);
-    WriteBits(a, &b->unk4.seed, 24);
-    WriteDungeonLocationBits(a, &b->unk4.dungeon);
+    WriteBits(a, &b->dungeonSeed.seed, 24);
+    WriteDungeonLocationBits(a, &b->dungeonSeed.location);
 }

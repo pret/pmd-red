@@ -51,7 +51,7 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
             PrintStringOnWindow(21, param_1->y, gMedichamMission, param_1->unk0[0], 0);
             break;
         case 7:
-            PrintYellowDungeonNametoBuffer(buf_1, &param_1->unk8->dungeon);
+            PrintYellowDungeonNametoBuffer(buf_1, &param_1->dungeonSeed->location);
             PrintStringOnWindow(21, param_1->y, buf_1, param_1->unk0[0], 0);
             break;
         case 12:
@@ -74,7 +74,7 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
             PrintStringOnWindow(21, param_1->y, gUnknown_80E886C, param_1->unk0[0],0);
             break;
         case 10: {
-            u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
+            u8 bVar2 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.id;
             monName = GetMonSpecies(param_1->targetSpecies);
             strcpy(gFormatBuffer_Monsters[0], monName);
             sprintfStatic(buf_1, gUnknown_80EAE5C[bVar2 % 4], gFormatBuffer_Monsters[0]);
@@ -82,7 +82,7 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
             break;
         }
         case 9: {
-            u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
+            u8 bVar2 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.id;
             monName = GetMonSpecies(param_1->targetSpecies);
             strcpy(gFormatBuffer_Monsters[0], monName);
             sprintfStatic(buf_1, gUnknown_80E910C[bVar2 % 10], gFormatBuffer_Monsters[0]);
@@ -90,7 +90,7 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
             break;
         }
         default: {
-            u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
+            u8 bVar2 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.id;
             monName = GetMonSpecies(param_1->targetSpecies);
             strcpy(gFormatBuffer_Monsters[0], monName);
             sprintfStatic(buf_1, gUnknown_80E8C98[bVar2 % 15], gFormatBuffer_Monsters[0]);
@@ -109,19 +109,19 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
     }
     else {
         if (param_1->mailMissionType == MISSION_TYPE_FIND_ITEM) {
-            PrintDungeonLocationtoBuffer(buf_3, &param_1->unk8->dungeon);
+            PrintDungeonLocationtoBuffer(buf_3, &param_1->dungeonSeed->location);
             sprintfStatic(buf_1, gUnknown_80E8884, buf_3);
         }
         else
-            PrintDungeonLocationtoBuffer(buf_1, &param_1->unk8->dungeon);
+            PrintDungeonLocationtoBuffer(buf_1, &param_1->dungeonSeed->location);
 
         PrintStringOnWindow(29, param_1->y + 12, buf_1, param_1->unk0[0], 0);
     }
 
     if (param_1->mailTitleType == 7)
-        uVar1 = sub_803C1D0(&param_1->unk8->dungeon, 0);
+        uVar1 = sub_803C1D0(&param_1->dungeonSeed->location, 0);
     else
-        uVar1 = sub_803C1D0(&param_1->unk8->dungeon, param_1->mail->missionType);
+        uVar1 = sub_803C1D0(&param_1->dungeonSeed->location, param_1->mail->missionType);
 
     PrintStringOnWindow(180, param_1->y, GetMissionRankText(uVar1), param_1->unk0[0], 0);
 }
@@ -190,8 +190,8 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             break;
         case 15:
         case 16: {
-            u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
-            u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
+            u8 bVar2 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.id;
+            u8 bVar3 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.floor;
             BufferItemName(gFormatBuffer_Items[0], param_1->targetItem, NULL);
             sprintfStatic(buf_1, gUnknown_80EB3F8[bVar2 % 22], gFormatBuffer_Items[0]);
             PrintStringOnWindow(10, y, buf_1, param_1->unk0[0], 0);
@@ -203,8 +203,8 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             break;
         }
         case 14: {
-            u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
-            u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
+            u8 bVar2 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.id;
+            u8 bVar3 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.floor;
             monName = GetMonSpecies(param_1->targetSpecies);
             strcpy(gFormatBuffer_Monsters[0], monName);
             sprintfStatic(buf_1, gUnknown_80EAEB8[bVar2 % 20], gFormatBuffer_Monsters[0]);
@@ -217,8 +217,8 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             break;
         }
         case 8: {
-            u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
-            u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
+            u8 bVar2 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.id;
+            u8 bVar3 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.floor;
             monName = GetMonSpecies(param_1->targetSpecies);
             strcpy(gFormatBuffer_Monsters[0], monName);
             sprintfStatic(buf_1, gUnknown_80EB220[bVar2 % 6], gFormatBuffer_Monsters[0]);
@@ -231,8 +231,8 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             break;
         }
         case 13: {
-            u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
-            u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
+            u8 bVar2 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.id;
+            u8 bVar3 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.floor;
             monName = GetMonSpecies(param_1->targetSpecies);
             strcpy(gFormatBuffer_Monsters[0], monName);
             sprintfStatic(buf_1, gUnknown_80E91D4[bVar2 % 45], gFormatBuffer_Monsters[0]);
@@ -245,8 +245,8 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             break;
         }
         default: {
-            u8 bVar2 = param_1->unk8->seed + param_1->unk8->dungeon.id;
-            u8 bVar3 = param_1->unk8->seed + param_1->unk8->dungeon.floor;
+            u8 bVar2 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.id;
+            u8 bVar3 = param_1->dungeonSeed->seed + param_1->dungeonSeed->location.floor;
             monName = GetMonSpecies(param_1->clientSpecies);
             strcpy(gFormatBuffer_Monsters[0], monName);
             sprintfStatic(buf_1, gUnknown_80E8DE4[bVar2 % 13], gFormatBuffer_Monsters[0]);
@@ -314,18 +314,18 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
     PrintStringOnWindow(10, y, gPlaceText, param_1->unk0[0], 0);
 
     if (param_1->mailMissionType == MISSION_TYPE_FIND_ITEM) {
-        PrintDungeonLocationtoBuffer(buf_5, &param_1->unk8->dungeon);
+        PrintDungeonLocationtoBuffer(buf_5, &param_1->dungeonSeed->location);
         sprintfStatic(buf_1, gUnknown_80E8884, buf_5);
     }
     else
-        PrintDungeonLocationtoBuffer(buf_1, &param_1->unk8->dungeon);
+        PrintDungeonLocationtoBuffer(buf_1, &param_1->dungeonSeed->location);
 
     PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
 
     if (param_1->mailMissionType == MISSION_TYPE_FRIEND_RESCUE)
-        uVar3 = sub_803C1D0(&param_1->unk8->dungeon, 0);
+        uVar3 = sub_803C1D0(&param_1->dungeonSeed->location, 0);
     else
-        uVar3 = sub_803C1D0(&param_1->unk8->dungeon, param_1->mail->missionType);
+        uVar3 = sub_803C1D0(&param_1->dungeonSeed->location, param_1->mail->missionType);
 
     y += 12;
     PrintStringOnWindow(10, y, gDifficultyText, param_1->unk0[0], 0);

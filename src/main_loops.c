@@ -483,7 +483,7 @@ void QuickSave_Async(u32 mode)
             case SAVE_FAILED: {
                 s32 temp;
 
-                if (sub_80144A4(&temp) == 0) 
+                if (sub_80144A4(&temp) == 0)
                     saveStatus = SAVE_NO_STATUS;
                 break;
             }

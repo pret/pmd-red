@@ -100,6 +100,7 @@ struct struct_unk800F990
     u8 unk5;
     struct FriendAreasMap *friendAreasMapPtr;
     u8 unkC;
+    u8 fillD[168];
 };
 
 void ShowFriendAreasMap_Async(struct struct_unk800F990 *param_1);

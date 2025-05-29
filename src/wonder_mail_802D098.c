@@ -225,7 +225,7 @@ static void sub_802D2A8(void)
                 MemoryCopy8(sub_8096DE8(), sUnknown_203B2F8->mail->unk18, sizeof(gUnknown_203B490->unk1B8));
             }
 
-            switch (sUnknown_203B2F8->mail->wonderMail.unk4.dungeon.id) {
+            switch (sUnknown_203B2F8->mail->wonderMail.dungeonSeed.location.id) {
                 case DUNGEON_ODDITY_CAVE:
                     sub_8097418(DUNGEON_ODDITY_CAVE - 1, 1);
                     break;
@@ -487,7 +487,7 @@ static void sub_802D940(void)
         case DELETE_ACTION:
             if (sUnknown_203B2F8->unk9) {
                 mail = &gUnknown_203B490->jobSlots[sUnknown_203B2F8->jobSlotIndex];
-                if (mail->mailType > MAIL_TYPE_SUSPENDED_JOB && sUnknown_203B2F8->dungeonID == mail->unk4.dungeon.id) {
+                if (mail->mailType > MAIL_TYPE_SUSPENDED_JOB && sUnknown_203B2F8->dungeonID == mail->dungeonSeed.location.id) {
                     sub_802D1A0(7);
                     break;
                 }
@@ -561,7 +561,7 @@ static bool8 sub_802DAA8(void)
     if (!sUnknown_203B2F8->unk9)
         return TRUE;
 
-    if (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU && sUnknown_203B2F8->dungeonID == mail->unk4.dungeon.id)
+    if (mail->mailType != WONDER_MAIL_TYPE_THANK_YOU && sUnknown_203B2F8->dungeonID == mail->dungeonSeed.location.id)
         return FALSE;
     return TRUE;
 }
@@ -581,7 +581,7 @@ static bool8 sub_802DADC(void)
             return TRUE;
         if (mailType == WONDER_MAIL_TYPE_THANK_YOU)
             return TRUE;
-        if (WONDER_MAIL_TYPE_THANK_YOU < mailType && sUnknown_203B2F8->dungeonID != mail->unk4.dungeon.id)
+        if (WONDER_MAIL_TYPE_THANK_YOU < mailType && sUnknown_203B2F8->dungeonID != mail->dungeonSeed.location.id)
             return TRUE;
     }
 

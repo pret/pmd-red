@@ -7,6 +7,7 @@
 #include "structs/axdata.h"
 #include "structs/str_position.h"
 #include "structs/str_dungeon.h"
+#include "structs/str_pokemon.h"
 
 struct UnkStruct_Sub1
 {
@@ -37,9 +38,7 @@ struct UnkStruct_sub_8010494
     DungeonLocation unk4;
     u8 pad1[8];
     u8 unk10;
-    u8 pad2[0xA];
-    s16 unk1C;
-    u8 pad3[0x6E - 0x20];
+    PokemonStruct1 mon;
     u8 unk6C;
     u8 unk6D[63];
 };
