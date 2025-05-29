@@ -13,10 +13,9 @@ typedef struct GroundEffect {
     s16 unk8;
     s8 unkA;
     u8 fillB[0x14 - 0xB];
-    s32 unk14; // some x?
-    s32 unk18; // some y?
+    PixelPos unkPixelPos14;
     u8 fill1C[0x124 - 0x1C];
-    PixelPos unkPixelPos; // 0x124
+    PixelPos unkPixelPos124;
     u8 fill12C[0x144 - 0x12C];
     struct UnkGroundSpriteStruct unk144;
 } GroundEffect;
@@ -131,8 +130,8 @@ void GroundEffect_CancelBlank()
     {
         if (ptr->unk6 != -1)
         {
-            pos.x = ptr->unkPixelPos.x + ptr->unk14;
-            pos.y = ptr->unkPixelPos.y + ptr->unk18;
+            pos.x = ptr->unkPixelPos124.x + ptr->unkPixelPos14.x;
+            pos.y = ptr->unkPixelPos124.y + ptr->unkPixelPos14.y;
             if (!IsOnscreen_80A675C(&ptr->unk144, &pos))
             {
                 GroundEffect_Delete(index);
