@@ -27,9 +27,9 @@ typedef struct DungeonSetupInfo
 {
     DungeonSetupSubstruct sub0; // TODO: find a better name
     DungeonMailSeed dungeonSeed;
-    PokemonStruct1 unk18;
+    PokemonStruct1 mon;
     u8 *unk74;
-    Dungeon *unk78;
+    Dungeon *dungeon;
     s16 unk7C; // Set to 5 if the dungeon was skipped (quicksave read failed)
     u8 unk7E;
     DungeonLocation unk80;

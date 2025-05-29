@@ -48,6 +48,7 @@
 #include "world_map.h"
 #include "friend_areas_map.h"
 #include "structs/str_dungeon_setup.h"
+#include "constants/friend_area.h"
 
 typedef struct unkTalkTable
 {
@@ -77,8 +78,8 @@ static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId);
 static void sub_80011E8(DungeonSetupSubstruct *info);
 static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1);
 static u8 sub_8001170(void);
-static void sub_8001248(void);
-static void sub_80012C0(void);
+static void RemoveMoneyAndRandomItems(void);
+static void RemoveAllMoneyAndItems(void);
 static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0);
 static u32 xxx_script_related_8001334(u32 r0);
 static void MainLoops_RunFrameActions(u32 unused);
@@ -594,163 +595,163 @@ static void sub_80008C0_Async(u32 errorKind)
 }
 
 // arm9.bin::0200D1E0
-u32 sub_80009D0(u32 a0)
+static u32 sub_80009D0(u32 a0)
 {
-    s32 r7 = GetScriptVarValue(NULL, 0x18);
+    s32 mode = GetScriptVarValue(NULL, START_MODE);
     bool8 ret = FALSE;
 
     sub_801180C();
     FadeOutAllMusic(0x10);
-    if (r7 == 7) {
+    if (mode == 7) {
         if (a0 == 2) {
-            r7 = 8;
+            mode = 8;
         }
         else if (a0 == 3) {
-            r7 = 11;
-            SetScriptVarValue(NULL, 0x18, 0xB);
+            mode = 11;
+            SetScriptVarValue(NULL, START_MODE, 11);
             sub_8096BD0();
             QuickSave_Async(3);
         }
     }
-    else if (r7 != 0 && r7 != 11) {
-        r7 = 1;
+    else if (mode != 0 && mode != 11) {
+        mode = 1;
     }
 
-    ClearScriptVarArray(NULL, 0x41);
+    ClearScriptVarArray(NULL, EVENT_S08E01);
     while (1) {
         s32 r5;
-        struct struct_unk800F990 friendAreasSetup;
-        struct UnkStruct_sub_8010268 worldMapSetup;
+        struct FriendAreasMapSetupStruct friendAreasSetup;
+        struct WorldMapSetupStruct worldMapSetup;
         DungeonSetupStruct dungeonSetup;
         s16 sp552;
 
-        if (r7 == 4) {
-            u8 mapId = sub_8002658(GetScriptVarValue(NULL,0xd));
+        if (mode == 4) {
+            u8 mapId = sub_8002658(GetScriptVarValue(NULL,GROUND_ENTER));
 
-            friendAreasSetup.friendAreasMapPtr = MemoryAlloc(0x4e30,8);
+            friendAreasSetup.friendAreasMapPtr = MemoryAlloc(sizeof(*friendAreasSetup.friendAreasMapPtr),8);
             friendAreasSetup.startingFriendAreaId = mapId;
             friendAreasSetup.unk5 = sub_80023E4(9);
             ShowFriendAreasMap_Async(&friendAreasSetup);
             MemoryFree(friendAreasSetup.friendAreasMapPtr);
-            if (friendAreasSetup.unkC != 0x3A) {
+            if (friendAreasSetup.chosenAreaId != NUM_FRIEND_AREAS) {
                 s32 val;
-                u8 a = friendAreasSetup.unkC;
-                if (a != 0) {
-                    val = sub_8002694(a);
+                u32 areaId = friendAreasSetup.chosenAreaId;
+                if (areaId != FRIEND_AREA_NONE) {
+                    val = sub_8002694(areaId);
                 }
                 else {
                     val = 9;
                 }
-                SetScriptVarValue(NULL,0xd,val);
-                SetScriptVarValue(NULL,0xe,0);
+                SetScriptVarValue(NULL,GROUND_ENTER,val);
+                SetScriptVarValue(NULL,GROUND_ENTER_LINK,0);
             }
-            r7 = 2;
+            mode = 2;
             continue;
         }
-        else if (r7 == 5) {
+        else if (mode == 5) {
             s32 i;
 
-            s32 r8 = (s16) GetScriptVarValue(NULL, 0x12);
-            u8 r6 = sub_80A2740(r8);
+            s32 dungId = (s16) GetScriptVarValue(NULL, DUNGEON_SELECT);
+            u8 r6 = sub_80A2740(dungId);
             for (i = 0; i < 63; i++) {
-                worldMapSetup.unk4.unk6D[i] = sub_80A28F0(i);
+                worldMapSetup.info.unk6D[i] = sub_80A28F0(i);
             }
 
             if (r6 == 99) {
-                r7 = 2;
+                mode = 2;
                 continue;
             }
 
-            worldMapSetup.unk4.unk0.id = DUNGEON_OUT_ON_RESCUE;
-            sub_80011CC(&worldMapSetup.unk4.unk4, r6);
-            worldMapSetup.unk4.unk6C = worldMapSetup.unk4.unk4.unk5;
-            switch ((s16) sub_80A2750(r8)) {
+            worldMapSetup.info.startLocation.id = DUNGEON_OUT_ON_RESCUE;
+            sub_80011CC(&worldMapSetup.info.unk4, r6);
+            worldMapSetup.info.unk6C = worldMapSetup.info.unk4.unk5;
+            switch ((s16) sub_80A2750(dungId)) {
                 case 1:
-                    if (sub_80990EC(&dungeonSetup.info, r8)) {
-                        worldMapSetup.unk4.unk4.unkC = dungeonSetup.info.sub0.unkC;
-                        worldMapSetup.unk4.mon = dungeonSetup.info.unk18;
+                    if (sub_80990EC(&dungeonSetup.info, dungId)) {
+                        worldMapSetup.info.unk4.unkC = dungeonSetup.info.sub0.unkC;
+                        worldMapSetup.info.mon = dungeonSetup.info.mon;
                     }
                     break;
                 case 2:
-                    if (sub_8096A08(worldMapSetup.unk4.unk4.unk0.id, &worldMapSetup.unk4.mon)) {
-                        worldMapSetup.unk4.unk4.unkC = 1;
+                    if (sub_8096A08(worldMapSetup.info.unk4.unk0.id, &worldMapSetup.info.mon)) {
+                        worldMapSetup.info.unk4.unkC = 1;
                     }
                     else {
-                        worldMapSetup.unk4.unk4.unkC = 0;
+                        worldMapSetup.info.unk4.unkC = 0;
                     }
                     break;
             }
 
-            worldMapSetup.unkB0 = MemoryAlloc(sizeof(*worldMapSetup.unkB0), 8);
+            worldMapSetup.worldMap = MemoryAlloc(sizeof(*worldMapSetup.worldMap), 8);
             ShowWorldMap_Async(&worldMapSetup);
-            MemoryFree(worldMapSetup.unkB0);
-            if (worldMapSetup.unkB4 == 0) {
-                r7 = 2;
+            MemoryFree(worldMapSetup.worldMap);
+            if (!worldMapSetup.dungeonEntered) {
+                mode = 2;
                 continue;
             }
-            SetScriptVarValue(NULL, 0x13, r8);
+            SetScriptVarValue(NULL, DUNGEON_ENTER, dungId);
             sUnknown_203B03C = 2;
             sub_800A8F8(4);
             r5 = xxx_script_related_8001334(5);
         }
-        else if (r7 == 8) {
+        else if (mode == 8) {
             r5 = 0;
         }
-        else if (r7 == 7) {
+        else if (mode == 7) {
             r5 = 2;
         }
         else {
-            if (r7 == 11) {
-                sub_80012C0();
+            if (mode == 11) {
+                RemoveAllMoneyAndItems();
             }
-            else if (r7 == 12) {
-                sub_8001248();
+            else if (mode == 12) {
+                RemoveMoneyAndRandomItems();
             }
             sUnknown_203B03C = 2;
             sub_800A8F8(4);
-            r5 = xxx_script_related_8001334(r7);
+            r5 = xxx_script_related_8001334(mode);
             if (r5 == 14) {
                 break;
             }
             else if (r5 == 5) {
-                r7 = 4;
+                mode = 4;
                 continue;
             }
             else if (r5 == 6) {
-                r7 = 5;
+                mode = 5;
                 continue;
             }
         }
 
         dungeonSetup.info.sub0.unkD = 0;
         dungeonSetup.info.sub0.unkC = 0;
-        MemoryFill8(&dungeonSetup.info.unk18, 0, sizeof(dungeonSetup.info.unk18));
-        dungeonSetup.info.unk18.speciesNum = 0;
+        MemoryFill8(&dungeonSetup.info.mon, 0, sizeof(dungeonSetup.info.mon));
+        dungeonSetup.info.mon.speciesNum = 0;
         if (r5 == 7) {
             if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
                 r5 = 13;
-                r7 = 9;
+                mode = 9;
             }
         }
         else if (r5 == 8) {
             if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
                 r5 = 13;
-                r7 = 9;
+                mode = 9;
             }
-            else if (sub_8096A08(dungeonSetup.info.sub0.unk0.id, &dungeonSetup.info.unk18)) {
+            else if (sub_8096A08(dungeonSetup.info.sub0.unk0.id, &dungeonSetup.info.mon)) {
                 dungeonSetup.info.sub0.unkC = 1;
             }
         }
         else if (r5 == 10) {
             if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
                 r5 = 13;
-                r7 = 9;
+                mode = 9;
             }
         }
         else if (r5 == 9) {
             if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
                 r5 = 11;
-                r7 = 12;
+                mode = 12;
             }
         }
         else if (r5 == 0) {
@@ -761,7 +762,7 @@ u32 sub_80009D0(u32 a0)
                 dungeonSetup.info.sub0.unkB = 0;
                 if (gUnknown_203B484->unk4.speciesNum != 0) {
                     dungeonSetup.info.sub0.unkC = 1;
-                    dungeonSetup.info.unk18 = gUnknown_203B484->unk4;
+                    dungeonSetup.info.mon = gUnknown_203B484->unk4;
                 }
                 else {
                     dungeonSetup.info.sub0.unkC = 0;
@@ -771,12 +772,12 @@ u32 sub_80009D0(u32 a0)
             }
             else if (var == 0xF1208) {
                 r5 = 1;
-                r7 = 11;
+                mode = 11;
                 sub_8096BD0();
             }
             else {
                 r5 = 1;
-                r7 = 11;
+                mode = 11;
                 sub_8096BD0();
             }
 
@@ -795,12 +796,12 @@ u32 sub_80009D0(u32 a0)
                 }
                 else if (var == 0xF1208) {
                     r5 = 1;
-                    r7 = 11;
+                    mode = 11;
                     sub_8096BD0();
                 }
                 else {
                     r5 = 1;
-                    r7 = 11;
+                    mode = 11;
                     sub_8096BD0();
                 }
             }
@@ -811,16 +812,16 @@ u32 sub_80009D0(u32 a0)
             if (r5 == 3) {
                 u8 r4 = sub_8001170();
                 r5 = 1;
-                r7 = 11;
+                mode = 11;
                 sub_8096BD0();
                 if (r4 != 63 && r4 != 99 && IsEnterWithoutGameSave(r4)) {
                     if (sub_8011C1C() == 2) {
                         r5 = 3;
-                        r7 = 7;
+                        mode = 7;
                     }
                     else {
                         r5 = 12;
-                        r7 = 10;
+                        mode = 10;
                     }
                 }
 
@@ -830,12 +831,12 @@ u32 sub_80009D0(u32 a0)
             }
             else if (r5 == 4) {
                 r5 = 1;
-                r7 = 11;
+                mode = 11;
                 sub_8096BD0();
                 sub_80008C0_Async(1);
             }
             else if (r5 == 1) {
-                r7 = 11;
+                mode = 11;
                 sub_8096BD0();
             }
         }
@@ -880,22 +881,22 @@ u32 sub_80009D0(u32 a0)
             switch (dungeonSetup.info.unk7C) {
                 case 1:
                 case 4:
-                    r7 = 9;
+                    mode = 9;
                     SetScriptVarArrayValue(NULL, 0x41, 0, (dungeonSetup.info.unk7E != 0) ? 2 : 1);
                     break;
                 case 2:
-                    r7 = 10;
+                    mode = 10;
                     break;
                 case -1:
-                    r7 = 12;
+                    mode = 12;
                     sub_8096BD0();
                     break;
                 case 5:
-                    r7 = 11;
+                    mode = 11;
                     sub_8096BD0();
                     break;
                 default:
-                    r7 = 11;
+                    mode = 11;
                     sub_8096BD0();
                     break;
             }
@@ -914,17 +915,17 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
     u8 quickSaveValid;
     s32 quickSaveStatus;
     s32 local_1c; // 0x4800
-    s32 local_18; // sizeof(Dungeon)
+    s32 dungeonStructSize; // sizeof(Dungeon)
 
     quickSaveValid = TRUE;
     sUnknown_203B03C = 1;
 
     sub_800A8F8(3);
     sub_8014144();
-    sub_8043D50(&local_1c, &local_18);
+    sub_8043D50(&local_1c, &dungeonStructSize);
 
     param_1->info.unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
-    param_1->info.unk78 = MemoryAlloc(local_18, 7); // size: sizeof(Dungeon)
+    param_1->info.dungeon = MemoryAlloc(dungeonStructSize, 7); // size: sizeof(Dungeon)
 
     if (param_1->info.sub0.unk4) {
         PrepareQuickSaveRead(param_1->info.unk74, local_1c);
@@ -977,7 +978,7 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
             if (quickSaveStatus == 3)
                 break;
             if (quickSaveStatus == 1) {
-                MemoryFree(param_1->info.unk78);
+                MemoryFree(param_1->info.dungeon);
                 MemoryFree(param_1->info.unk74);
             }
 
@@ -987,7 +988,7 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
     }
     else {
         sub_808ED00();
-        MemoryFree(param_1->info.unk78);
+        MemoryFree(param_1->info.dungeon);
         MemoryFree(param_1->info.unk74);
     }
 }
@@ -1094,19 +1095,19 @@ static void sub_80011E8(DungeonSetupSubstruct *info)
 }
 
 // arm9.bin::0200CC4C
-static void sub_8001248(void)
+static void RemoveMoneyAndRandomItems(void)
 {
-    s32 index;
+    s32 i;
 
-    for (index = 0; index < INVENTORY_SIZE; index++) {
+    for (i = 0; i < INVENTORY_SIZE; i++) {
         if (RandInt(100) < 50)
-            ZeroOutItem(&gTeamInventoryRef->teamItems[index]);
+            ZeroOutItem(&gTeamInventoryRef->teamItems[i]);
     }
 
     FillInventoryGaps();
 
-    for (index = 0; index < NUM_MONSTERS; index++) {
-        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[index];
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonFlag1(mon) && PokemonFlag2(mon))
             mon->heldItem.id = ITEM_NOTHING;
     }
@@ -1115,18 +1116,18 @@ static void sub_8001248(void)
 }
 
 // arm9.bin::0200CB88
-static void sub_80012C0(void)
+static void RemoveAllMoneyAndItems(void)
 {
-    s32 index;
+    s32 i;
 
-    for (index = 0; index < INVENTORY_SIZE; index++) {
-        ZeroOutItem(&gTeamInventoryRef->teamItems[index]);
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        ZeroOutItem(&gTeamInventoryRef->teamItems[i]);
     }
 
     FillInventoryGaps();
 
-    for (index = 0; index < NUM_MONSTERS; index++) {
-        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[index];
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonFlag1(mon) && PokemonFlag2(mon))
             mon->heldItem.id = ITEM_NOTHING;
     }
@@ -1154,10 +1155,10 @@ static u32 xxx_script_related_8001334(u32 r0)
 }
 
 // arm9.bin::0200CA1C
-static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0)
+static void LoadAndRunDungeon_Async(DungeonSetupStruct *setupPtr)
 {
-    nullsub_2(r0);
-    RunDungeon_Async(r0);
+    nullsub_2(setupPtr);
+    RunDungeon_Async(setupPtr);
     NDS_LoadOverlay_GroundMain();
 }
 

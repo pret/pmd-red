@@ -141,7 +141,7 @@ static const s16 sDeoxysForms[4] = {MONSTER_DEOXYS_NORMAL, MONSTER_DEOXYS_ATTACK
 
 // This functions is the main 'loop' when the player is in a Dungeon. It runs from the moment the player enters a dungeon, until they leave(by completing or by fainting).
 // arm9.bin::0206A848
-void RunDungeon_Async(DungeonSetupStruct *r8)
+void RunDungeon_Async(DungeonSetupStruct *setupPtr)
 {
     bool8 check;
     Entity *leader;
@@ -154,11 +154,11 @@ void RunDungeon_Async(DungeonSetupStruct *r8)
     RGB color;
 
     gUnknown_203B40C = 0;
-    r6 = r8->unk8;
-    r9 = r8->unk11;
-    r10 = r8->unk10;
-    gSerializedData_203B41C = r8->unk74;
-    gDungeon = r8->unk78;
+    r6 = setupPtr->info.sub0.unk4;
+    r9 = setupPtr->info.sub0.unkD;
+    r10 = setupPtr->info.sub0.unkC;
+    gSerializedData_203B41C = setupPtr->info.unk74;
+    gDungeon = setupPtr->info.dungeon;
     if (!r6) {
         *gSerializedData_203B41C = 0;
     }
@@ -173,20 +173,20 @@ void RunDungeon_Async(DungeonSetupStruct *r8)
     gPlayerDotMapPosition.x = 100;
 
     if (!r6) {
-        gDungeon->unk644.unk34 = r8->unkF;
-        gDungeon->unk644.dungeonSeed = r8->dungeonSeed;
-        gDungeon->unk644.windTurns = GetTurnLimit(r8->unk4.id);
+        gDungeon->unk644.unk34 = setupPtr->info.sub0.unkB;
+        gDungeon->unk644.dungeonSeed = setupPtr->info.dungeonSeed;
+        gDungeon->unk644.windTurns = GetTurnLimit(setupPtr->info.sub0.unk0.id);
         gDungeon->unk644.unk36 = 0;
-        gDungeon->unk644.unk37 = GetRescuesAllowed(r8->unk4.id);
+        gDungeon->unk644.unk37 = GetRescuesAllowed(setupPtr->info.sub0.unk0.id);
     }
     gDungeon->unk644.unk54 = 0;
     gDungeon->unk644.unk55 = 0;
-    gDungeon->unk644.unk18 = r8->unk9;
-    gDungeon->unk644.unk16 = r8->unkC;
-    gDungeon->unk644.canRecruit = r8->unkA;
-    gDungeon->unk644.unk15 = r8->unkB;
-    gDungeon->unk644.hasInventory = r8->unkD;
-    gDungeon->unk644.unk19 = r8->unkE;
+    gDungeon->unk644.unk18 = setupPtr->info.sub0.unk5;
+    gDungeon->unk644.unk16 = setupPtr->info.sub0.unk8;
+    gDungeon->unk644.canRecruit = setupPtr->info.sub0.unk6;
+    gDungeon->unk644.unk15 = setupPtr->info.sub0.unk7;
+    gDungeon->unk644.hasInventory = setupPtr->info.sub0.unk9;
+    gDungeon->unk644.unk19 = setupPtr->info.sub0.unkA;
     StopDungeonBGM();
     sub_803D4AC();
     sub_804513C();
@@ -216,11 +216,11 @@ void RunDungeon_Async(DungeonSetupStruct *r8)
         gDungeon->unk181e8.allTilesRevealed = 1;
         gDungeon->unk181e8.unk1820C = 1;
         if (gDungeon->unk644.unk34 == 1) {
-            gDungeon->unk644.dungeonLocation.id = r8->dungeonSeed.location.id;
+            gDungeon->unk644.dungeonLocation.id = setupPtr->info.dungeonSeed.location.id;
             gDungeon->unk644.dungeonLocation.floor = 1;
         }
         else {
-            gDungeon->unk644.dungeonLocation = r8->unk4;
+            gDungeon->unk644.dungeonLocation = setupPtr->info.sub0.unk0;
         }
 
         gDungeon->unk644.unk30 = 0;
@@ -228,7 +228,7 @@ void RunDungeon_Async(DungeonSetupStruct *r8)
     }
     if (!r6) {
         if (gDungeon->unk644.unk34 == 1) {
-            gDungeon->unk644.unk38 = r8->dungeonSeed.seed;
+            gDungeon->unk644.unk38 = setupPtr->info.dungeonSeed.seed;
         }
         else {
             gDungeon->unk644.unk38 = Rand32Bit() & 0xFFFFFF;
@@ -253,11 +253,11 @@ void RunDungeon_Async(DungeonSetupStruct *r8)
     }
 
     if (r10) {
-        r8->unk1C.heldItem.id = 0;
+        setupPtr->info.mon.heldItem.id = 0;
         if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
-            sub_808D0D8(&r8->unk1C);
+            sub_808D0D8(&setupPtr->info.mon);
         }
-        sub_8068A84(&r8->unk1C);
+        sub_8068A84(&setupPtr->info.mon);
         if (r6) {
             sub_806B404();
         }
@@ -561,8 +561,8 @@ void RunDungeon_Async(DungeonSetupStruct *r8)
 
         if (gDungeon->unk3 != 0) {
             SaveDungeonState(gSerializedData_203B41C, 0x4800);
-            r8->unk7C = 3;
-            r8->unk80 = gDungeon->unk644.dungeonLocation;
+            setupPtr->info.unk7C = 3;
+            setupPtr->info.unk80 = gDungeon->unk644.dungeonLocation;
             check = FALSE;
         }
         else
@@ -648,7 +648,7 @@ void RunDungeon_Async(DungeonSetupStruct *r8)
     // See comment above
     FAKEMATCH:
         gUnknown_203B40C = 0;
-        r8->unk7E = 0;
+        setupPtr->info.unk7E = 0;
         sub_8097FF8();
         sub_80095CC(1, 0x14);
         sub_803E13C();
@@ -659,33 +659,33 @@ void RunDungeon_Async(DungeonSetupStruct *r8)
 
         if (sub_8083C24()) {
             if (gDungeon->unk6 != 0) {
-                r8->unk7C = -2;
-                memset(&r8->unk84, 0, sizeof(r8->unk84));
-                r8->unk80 = gDungeon->unk644.dungeonLocation;
-                r8->unk84.location = gDungeon->unk644.dungeonLocation;
-                r8->unk84.seed = gDungeon->unk644.unk38;
+                setupPtr->info.unk7C = -2;
+                memset(&setupPtr->info.unk84, 0, sizeof(setupPtr->info.unk84));
+                setupPtr->info.unk80 = gDungeon->unk644.dungeonLocation;
+                setupPtr->info.unk84.location = gDungeon->unk644.dungeonLocation;
+                setupPtr->info.unk84.seed = gDungeon->unk644.unk38;
 
             }
             else {
-                r8->unk7C = -1;
+                setupPtr->info.unk7C = -1;
             }
         }
         else if (sub_8083C50()) {
             if (gDungeon->unk644.unk34 == 1) {
-                r8->unk7C = 4;
+                setupPtr->info.unk7C = 4;
             }
             else if (gDungeon->unk644.unk34 == 0) {
-                r8->unk7C = 1;
+                setupPtr->info.unk7C = 1;
                 sub_8084424();
             }
             else {
-                r8->unk7C = 1;
+                setupPtr->info.unk7C = 1;
                 sub_8084424();
             }
-            r8->unk7E = gDungeon->unk644.unk30;
+            setupPtr->info.unk7E = gDungeon->unk644.unk30;
         }
         else {
-            r8->unk7C = 2;
+            setupPtr->info.unk7C = 2;
             sub_8084424();
         }
     }
@@ -694,14 +694,14 @@ void RunDungeon_Async(DungeonSetupStruct *r8)
     sub_803E214();
     nullsub_56();
     CloseDungeonMapFile();
-    if (r8->unk7C == 1 || r8->unk7C == 4 || r8->unk7C == 2) {
+    if (setupPtr->info.unk7C == 1 || setupPtr->info.unk7C == 4 || setupPtr->info.unk7C == 2) {
         CleanUpInventoryItems();
     }
-    if (r8->unk7C == 1 || r8->unk7C == -2 || r8->unk7C == 4 || r8->unk7C == -1 || r8->unk7C == 2) {
-        if (r8->unk7C == 1 || r8->unk7C == 4 || r8->unk7C == 2) {
+    if (setupPtr->info.unk7C == 1 || setupPtr->info.unk7C == -2 || setupPtr->info.unk7C == 4 || setupPtr->info.unk7C == -1 || setupPtr->info.unk7C == 2) {
+        if (setupPtr->info.unk7C == 1 || setupPtr->info.unk7C == 4 || setupPtr->info.unk7C == 2) {
             sub_8068BDC(1);
         }
-        else if (r8->unk7C == -2) {
+        else if (setupPtr->info.unk7C == -2) {
             sub_8068BDC(0);
         }
         else {

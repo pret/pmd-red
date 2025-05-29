@@ -59,7 +59,7 @@ static void nullsub_24(void);
 static void WorldMap_RunFrameActions(void);
 static void UpdateMonSpritePosition(void);
 static void UpdateBg(void);
-static void sub_8010494(struct UnkStruct_sub_8010494 *r9);
+static void sub_8010494(struct WorldMapInfo *r9);
 static void AnimateMonPath_Async(u8 id1, u8 id2);
 static void sub_801059C(void);
 static bool8 PlayerEnterDungeonPrompt_Async(u8 *str);
@@ -70,52 +70,52 @@ static void PrintDungeonName(DungeonLocation *dungLocation);
 
 // Code is very similar to the functions in friend_areas_map_util.c
 
-void ShowWorldMap_Async(struct UnkStruct_sub_8010268 *r5)
+void ShowWorldMap_Async(struct WorldMapSetupStruct *setupPtr)
 {
-    s32 i, speciesId, var;
+    s32 i, speciesId, dungeonEnter;
     u8 text[1000];
 
-    sWorldMapPtr = r5->unkB0;
+    sWorldMapPtr = setupPtr->worldMap;
     gUnknown_2026E4E = 2566;
     sub_80095CC(0, 0x14);
     UpdateFadeInTile(2);
     sub_801059C();
-    sub_8010494(&r5->unk4);
+    sub_8010494(&setupPtr->info);
     sub_801178C();
 
     // 60 frame delay
     for (i = 0; i < 60; i++)
         WorldMap_RunFrameActions();
 
-    AnimateMonPath_Async(r5->unk4.unk0.id, r5->unk4.unk4.unk0.id);
-    PrintDungeonName(&r5->unk4.unk4.unk0);
+    AnimateMonPath_Async(setupPtr->info.startLocation.id, setupPtr->info.unk4.unk0.id);
+    PrintDungeonName(&setupPtr->info.unk4.unk0);
 
     // 60 frame delay
     for (i = 0; i < 60; i++)
         WorldMap_RunFrameActions();
 
-    if (r5->unk4.unk4.unkC) {
-        speciesId = r5->unk4.mon.speciesNum;
+    if (setupPtr->info.unk4.unkC) {
+        speciesId = setupPtr->info.mon.speciesNum;
         ASM_MATCH_TRICK(speciesId);
     }
     else {
         speciesId = 0;
     }
 
-    var = sub_809034C(r5->unk4.unk4.unk0.id, speciesId, text, r5->unk4.unk6C, FALSE);
-    if (var == 0) {
-        r5->unkB4 = 1;
+    dungeonEnter = sub_809034C(setupPtr->info.unk4.unk0.id, speciesId, text, setupPtr->info.unk6C, FALSE);
+    if (dungeonEnter == 0) {
+        setupPtr->dungeonEntered = TRUE;
     }
-    else if (var == 1) {
+    else if (dungeonEnter == 1) {
         PrintDialogueMessage_Async(text);
-        r5->unkB4 = 0;
+        setupPtr->dungeonEntered = FALSE;
     }
-    else if (var == 2) {
+    else if (dungeonEnter == 2) {
         if (PlayerEnterDungeonPrompt_Async(text)) {
-            r5->unkB4 = 1;
+            setupPtr->dungeonEntered = TRUE;
         }
         else {
-            r5->unkB4 = 0;
+            setupPtr->dungeonEntered = FALSE;
         }
     }
 
@@ -231,7 +231,7 @@ static void AnimateMonPath_Async(u8 id1, u8 id2)
     WorldMap_RunFrameActions();
 }
 
-static void sub_8010494(struct UnkStruct_sub_8010494 *r9)
+static void sub_8010494(struct WorldMapInfo *info)
 {
     s32 i;
     for (i = 0; i < 64; i++) {
@@ -239,7 +239,7 @@ static void sub_8010494(struct UnkStruct_sub_8010494 *r9)
         u8 r0;
 
         if (i < 63) {
-            r0 = r9->unk6D[i];
+            r0 = info->unk6D[i];
         }
         else {
             r0 = 1;
@@ -256,7 +256,7 @@ static void sub_8010494(struct UnkStruct_sub_8010494 *r9)
     }
 
     AxResInitFile(&sWorldMapPtr->monAxSprite, sWorldMapPtr->unk1100[3], 0, 0, 0, 0, TRUE);
-    sWorldMapPtr->monSpritePos = gDungeonCoordinates[r9->unk0.id];
+    sWorldMapPtr->monSpritePos = gDungeonCoordinates[info->startLocation.id];
     sWorldMapPtr->bgPos.x = sWorldMapPtr->monSpritePos.x - 120;
     sWorldMapPtr->bgPos.y = sWorldMapPtr->monSpritePos.y - 80;
     UpdateMonSpritePosition();

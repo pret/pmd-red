@@ -33,23 +33,23 @@ struct WorldMap
     u8 unk5E98[1500];
 };
 
-struct UnkStruct_sub_8010494
+struct WorldMapInfo
 {
-    DungeonLocation unk0;
+    DungeonLocation startLocation;
     DungeonSetupSubstruct unk4;
     PokemonStruct1 mon;
     u8 unk6C;
     u8 unk6D[63];
 };
 
-struct UnkStruct_sub_8010268
+struct WorldMapSetupStruct
 {
     u8 fill0[4];
-    struct UnkStruct_sub_8010494 unk4;
-    struct WorldMap *unkB0;
-    u8 unkB4;
+    struct WorldMapInfo info;
+    struct WorldMap *worldMap;
+    bool8 dungeonEntered; // Some dungeons have specific requirements, where it's not always possible to enter chosen dungeon.
 };
 
-void ShowWorldMap_Async(struct UnkStruct_sub_8010268 *r5);
+void ShowWorldMap_Async(struct WorldMapSetupStruct *setupPtr);
 
 #endif

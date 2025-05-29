@@ -807,7 +807,7 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s16 param_2)
                             .currExp = 25000,
                         };
 
-                    sub_808D144(&param_1->unk18, &stack);
+                    sub_808D144(&param_1->mon, &stack);
                 }
             }
             break;
