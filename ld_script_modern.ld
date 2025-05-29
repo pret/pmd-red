@@ -21,13 +21,10 @@ SECTIONS {
         data/sound_data.o(.bss);
         INCLUDE "sym_ewram.ld"
         src/agb_flash.o(.bss);
-        *libgcc.a:fp-bit.o(.bss);
-        *libgcc.a:dp-bit.o(.bss);
-        *libc.a:syscalls.o(.bss);
+
         . = ALIGN(16);
 		src/m4a.o(ewram_lib);
 		src/agb_flash.o(ewram_lib);
-		*libc.a:sbrkr.o(COMMON);
 
 		ewram_end = .;
     } > EWRAM
@@ -71,12 +68,8 @@ SECTIONS {
         ewram_init_start = .;
 
 		INCLUDE "sym_ewram_init.ld"
-		*libc.a:impure.o(.data);
-		*libc.a:locale.o(.data);
-		*libc.a:mallocr.o(.data);
 
 		ewram_init_end = .;
-		. = 0x2724; /* This doesn't really do anything other than setting following 0x2724 bytes to 0 in rom */
     } > EWRAM AT>ROM
 
 	EWRAM_INIT_ROM_START = LOADADDR(ewram_init);
