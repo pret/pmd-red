@@ -48,7 +48,6 @@ SECTIONS {
     {
         asm/crt0.o(.text);
         src/code_80001DC.o(.text);
-        asm/arm_func.o(.text);
         src/main_loops.o(.text);
         src/*.o(.text*);
         asm/*.o(.text*);

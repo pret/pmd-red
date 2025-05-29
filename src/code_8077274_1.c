@@ -19,7 +19,6 @@
 #include "math.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
-#include "pokemon_mid.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_map_access.h"

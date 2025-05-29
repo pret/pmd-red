@@ -234,4 +234,7 @@ const ScriptCommand *FindLabel(Action *action, s32 r1);
 const ScriptCommand *ResolveJump(Action *action, s32 r1);
 void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s32 group, s32 sector);
 
+// For gScriptLocks, gScriptLockConds, gUnlockBranchLabels
+#define SCRIPT_LOCKS_ARR_COUNT 129
+
 #endif // GUARD_GROUND_SCRIPT_H

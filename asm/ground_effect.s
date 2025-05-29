@@ -5,69 +5,6 @@
 
 	.text
 
-	thumb_func_start GroundEffect_CancelBlank
-GroundEffect_CancelBlank:
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x8
-	ldr r1, _080ACD7C
-	movs r0, 0
-	bl Log
-	movs r6, 0
-	ldr r0, _080ACD80
-	ldr r4, [r0]
-	movs r0, 0x1
-	negs r0, r0
-	mov r8, r0
-	movs r1, 0x92
-	lsls r1, 1
-	adds r5, r4, r1
-	mov r7, sp
-_080ACD2C:
-	movs r1, 0x6
-	ldrsh r0, [r4, r1]
-	cmp r0, r8
-	beq _080ACD5C
-	ldr r0, [r5]
-	ldr r1, [r4, 0x14]
-	adds r0, r1
-	str r0, [sp]
-	ldr r0, [r5, 0x4]
-	ldr r1, [r4, 0x18]
-	adds r0, r1
-	str r0, [r7, 0x4]
-	movs r1, 0xA2
-	lsls r1, 1
-	adds r0, r4, r1
-	mov r1, sp
-	bl IsOnscreen_80A675C
-	lsls r0, 24
-	cmp r0, 0
-	bne _080ACD5C
-	adds r0, r6, 0
-	bl GroundEffect_Delete
-_080ACD5C:
-	adds r0, r6, 0x1
-	lsls r0, 16
-	asrs r6, r0, 16
-	movs r0, 0xE2
-	lsls r0, 1
-	adds r5, r0
-	adds r4, r0
-	cmp r6, 0xF
-	ble _080ACD2C
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080ACD7C: .4byte gUnknown_8118658
-_080ACD80: .4byte gGroundEffects
-	thumb_func_end GroundEffect_CancelBlank
-
 	thumb_func_start sub_80ACD84
 sub_80ACD84:
 	push {r4-r7,lr}

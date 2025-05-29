@@ -1,11 +1,11 @@
 	#include "asm/constants/gba_constants.inc"
 	#include "asm/macros.inc"
-
+    
 	.syntax unified
 
 	.text	
 
-        arm_func_start sub_80001E8
+    arm_func_start sub_80001E8
 sub_80001E8:
 	stmdb sp!, {r4-r11}
 	mov r12, 0x4000000 @ REG_BASE
