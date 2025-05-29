@@ -87,14 +87,14 @@ void ShowWorldMap_Async(struct UnkStruct_sub_8010268 *r5)
     for (i = 0; i < 60; i++)
         WorldMap_RunFrameActions();
 
-    AnimateMonPath_Async(r5->unk4.unk0.id, r5->unk4.unk4.id);
-    PrintDungeonName(&r5->unk4.unk4);
+    AnimateMonPath_Async(r5->unk4.unk0.id, r5->unk4.unk4.unk0.id);
+    PrintDungeonName(&r5->unk4.unk4.unk0);
 
     // 60 frame delay
     for (i = 0; i < 60; i++)
         WorldMap_RunFrameActions();
 
-    if (r5->unk4.unk10) {
+    if (r5->unk4.unk4.unkC) {
         speciesId = r5->unk4.mon.speciesNum;
         ASM_MATCH_TRICK(speciesId);
     }
@@ -102,7 +102,7 @@ void ShowWorldMap_Async(struct UnkStruct_sub_8010268 *r5)
         speciesId = 0;
     }
 
-    var = sub_809034C(r5->unk4.unk4.id, speciesId, text, r5->unk4.unk6C, FALSE);
+    var = sub_809034C(r5->unk4.unk4.unk0.id, speciesId, text, r5->unk4.unk6C, FALSE);
     if (var == 0) {
         r5->unkB4 = 1;
     }

@@ -73,16 +73,14 @@ static EWRAM_INIT PersonalityRelated sPersonalityRelated_203B040 = {
 static void LoadTitleScreen(void);
 static void NDS_LoadOverlay_GroundMain();
 static u32 sub_80009D0(u32 param_1);
-/* static */ // TODO: Uncomment
-void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId);
-void sub_80011E8(DungeonSetupSubstruct *info);
-void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1);
-u8 sub_8001170(void);
-void sub_8001248(void);
-void sub_80012C0(void);
+static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId);
+static void sub_80011E8(DungeonSetupSubstruct *info);
+static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1);
+static u8 sub_8001170(void);
+static void sub_8001248(void);
+static void sub_80012C0(void);
 static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0);
-/* static */ // TODO: Uncomment
-u32 xxx_script_related_8001334(u32 r0);
+static u32 xxx_script_related_8001334(u32 r0);
 static void MainLoops_RunFrameActions(u32 unused);
 
 extern u8 sub_80990EC(DungeonSetupInfo *param_1, s32 param_2);
@@ -399,8 +397,7 @@ s32 sub_8000728(void)
 }
 
 // arm9.bin::0200DB58
-/* static */ // TODO: uncomment
-void QuickSave_Async(u32 mode)
+static void QuickSave_Async(u32 mode)
 {
     s32 saveStatus;
     s32 counter;
@@ -513,8 +510,7 @@ void QuickSave_Async(u32 mode)
 }
 
 // arm9.bin::0200D998
-/*static*/ // TODO: Uncomment
-void sub_80008C0_Async(u32 errorKind)
+static void sub_80008C0_Async(u32 errorKind)
 {
     s32 saveStatus = SAVE_COMPLETED;
     s32 counter = 0;
@@ -645,8 +641,8 @@ u32 sub_80009D0(u32 a0)
                 else {
                     val = 9;
                 }
-                SetScriptVarValue(NULL,0xd,val); // GROUND_ENTER
-                SetScriptVarValue(NULL,0xe,0); // GROUND_ENTER_LINK
+                SetScriptVarValue(NULL,0xd,val);
+                SetScriptVarValue(NULL,0xe,0);
             }
             r7 = 2;
             continue;
@@ -666,21 +662,21 @@ u32 sub_80009D0(u32 a0)
             }
 
             worldMapSetup.unk4.unk0.id = DUNGEON_OUT_ON_RESCUE;
-            sub_80011CC((void *) &worldMapSetup.unk4.unk4, r6);
-            worldMapSetup.unk4.unk6C = worldMapSetup.unk4.pad1[1];
+            sub_80011CC(&worldMapSetup.unk4.unk4, r6);
+            worldMapSetup.unk4.unk6C = worldMapSetup.unk4.unk4.unk5;
             switch ((s16) sub_80A2750(r8)) {
                 case 1:
                     if (sub_80990EC(&dungeonSetup.info, r8)) {
-                        worldMapSetup.unk4.unk10 = dungeonSetup.info.sub0.unkC;
+                        worldMapSetup.unk4.unk4.unkC = dungeonSetup.info.sub0.unkC;
                         worldMapSetup.unk4.mon = dungeonSetup.info.unk18;
                     }
                     break;
                 case 2:
-                    if (sub_8096A08(worldMapSetup.unk4.unk4.id, &worldMapSetup.unk4.mon)) {
-                        worldMapSetup.unk4.unk10 = 1;
+                    if (sub_8096A08(worldMapSetup.unk4.unk4.unk0.id, &worldMapSetup.unk4.mon)) {
+                        worldMapSetup.unk4.unk4.unkC = 1;
                     }
                     else {
-                        worldMapSetup.unk4.unk10 = 0;
+                        worldMapSetup.unk4.unk4.unkC = 0;
                     }
                     break;
             }
@@ -913,8 +909,7 @@ u32 sub_80009D0(u32 a0)
 // More documentation needed to be sure
 // It'd also be cool to see what happens if a quicksave load fails and the dungeon is skipped entirely
 // arm9.bin::0200D01C
-/* static */ // TODO: Uncomment
-void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
+static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
 {
     u8 quickSaveValid;
     s32 quickSaveStatus;
@@ -1054,8 +1049,7 @@ void sub_8001064(void)
 }
 
 // arm9.bin::0200CDD4
-/* static */ // TODO: Uncomment
-u8 sub_8001170(void)
+static u8 sub_8001170(void)
 {
     s16 local_10;
     s16 auStack_e;
@@ -1071,8 +1065,7 @@ u8 sub_8001170(void)
 }
 
 // arm9.bin::0200CDA4
-/* static */ // TODO: Uncomment
-void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId)
+static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId)
 {
     info->unk0.id = dungId;
     info->unk0.floor = 0;
@@ -1086,8 +1079,7 @@ void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId)
 }
 
 // arm9.bin::0200CD1C
-/* static */ // TODO: Uncomment
-void sub_80011E8(DungeonSetupSubstruct *info)
+static void sub_80011E8(DungeonSetupSubstruct *info)
 {
     info->unk5 = sub_80023E4(8);
     info->unk6 = sub_80023E4(3);
@@ -1102,8 +1094,7 @@ void sub_80011E8(DungeonSetupSubstruct *info)
 }
 
 // arm9.bin::0200CC4C
-/* static */ // TODO: Uncomment
-void sub_8001248(void)
+static void sub_8001248(void)
 {
     s32 index;
 
@@ -1124,8 +1115,7 @@ void sub_8001248(void)
 }
 
 // arm9.bin::0200CB88
-/* static */ // TODO: Uncomment
-void sub_80012C0(void)
+static void sub_80012C0(void)
 {
     s32 index;
 
@@ -1158,8 +1148,7 @@ static void nullsub_2(DungeonSetupStruct *r0)
 }
 
 // arm9.bin::0200CAD0
-/* static */ // TODO: Uncomment
-u32 xxx_script_related_8001334(u32 r0)
+static u32 xxx_script_related_8001334(u32 r0)
 {
     return xxx_script_related_8098468(r0);
 }

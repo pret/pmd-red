@@ -8,6 +8,7 @@
 #include "structs/str_position.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_pokemon.h"
+#include "structs/str_dungeon_setup.h"
 
 struct UnkStruct_Sub1
 {
@@ -35,9 +36,7 @@ struct WorldMap
 struct UnkStruct_sub_8010494
 {
     DungeonLocation unk0;
-    DungeonLocation unk4;
-    u8 pad1[8];
-    u8 unk10;
+    DungeonSetupSubstruct unk4;
     PokemonStruct1 mon;
     u8 unk6C;
     u8 unk6D[63];
