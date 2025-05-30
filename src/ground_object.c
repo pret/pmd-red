@@ -542,3 +542,25 @@ s16 sub_80AC49C(s32 index_, PixelPos *pos)
     
     return parent->unk6;
 }
+
+s32 sub_80AC4C8(s32 index, PixelPos *a0, PixelPos *a1) {
+    GroundObject *parent = &gGroundObjects[0];
+    s32 counter;
+
+    for(counter = 0; counter < 0x10; counter = (s16)(counter + 1), parent++)
+    {
+        if(parent->unk6 != -1)
+        {
+            if(parent->flags & index)
+            {
+                if((parent->unk124.x < a1->x) && (parent->unk12C.x > a0->x))
+                {
+                     if((parent->unk124.y < a1->y) && (parent->unk12C.y > a0->y))
+                        return counter;
+                }
+            }
+        }
+    }
+
+    return -1;
+}
