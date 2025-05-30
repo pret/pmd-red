@@ -59,7 +59,7 @@ unkStruct_203B48C *sub_8095110(void)
 void sub_8095118(void)
 {
   s32 index;
-  unkStruct_203B480 *unused;
+  UNUSED unkStruct_203B480 *unused;
 
   MemoryFill8(gUnknown_203B480, 0, 0x20 * sizeof(unkStruct_203B480));
   MemoryFill8(gUnknown_203B484, 0, sizeof(unkStruct_203B484));
@@ -137,7 +137,7 @@ unkStruct_203B480 * GetMailatIndex(u8 index)
 
 void DeleteMailAtIndex(u8 index)
 {
-  unkStruct_203B480 *unused;
+  UNUSED unkStruct_203B480 *unused;
 
   MemoryFill8(&gUnknown_203B480[index], 0, sizeof(unkStruct_203B480));
   unused = &gUnknown_203B480[index];

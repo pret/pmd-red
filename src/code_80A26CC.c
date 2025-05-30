@@ -127,14 +127,10 @@ s16 sub_80A2688(u8 r0)
     return -1;
 }
 
-s16 sub_80A26B8(s16 r0)
+s16 sub_80A26B8(s16 a0_)
 {
-    // Useless cast that forces correct ordering
-    s32 temp;
-
-    temp = r0;
-
-    return gUnknown_8116F9A[r0];
+    s32 a0 = (s16) a0_;
+    return gUnknown_8116F9A[a0];
 }
 
 s16 sub_80A26CC(s16 r0)

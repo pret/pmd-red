@@ -47,7 +47,12 @@ ALIGNED(4) static const char debug_fill5[] = "pksdir0";
 ALIGNED(4) static const char debug_fill6[] = "pksdir0";
 ALIGNED(4) static const char debug_fill7[] = "pksdir0";
 
+// NORETURN attribute required for Modern
+#ifdef MODERN
+extern void Hang() NORETURN;
+#else
 extern void Hang();
+#endif
 
 static void FatalErrorFormatMessage(const u8 *text, ...);
 static void FatalErrorHang(void) NORETURN;

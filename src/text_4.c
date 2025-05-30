@@ -259,5 +259,7 @@ IWRAM_INIT static void sub_8272A8C(Window *windows, s32 id)
     window->unk44 = 1;
 }
 
+#ifndef NONMATCHING
 // Needed to match, because without it the alignment is different.
 IWRAM_INIT static UNUSED u8 sMatchAlignment = 0;
+#endif // NONMATCHING
