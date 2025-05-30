@@ -139,3 +139,22 @@ void GroundEffect_CancelBlank()
         }
     }
 }
+
+// Unused
+s32 GroundEffect_Find(s32 a0_) {
+    s32 index;
+    s32 a0;
+    GroundEffect *ptr;
+
+    a0 = (s16)a0_;
+    index = 0;
+    ptr = &gGroundEffects[0];
+    for (; index < 16; index = (s16)(index + 1), ptr++)
+    {
+        if (ptr->unk6 == a0)
+        {
+            return index;
+        }
+    }
+    return -1;
+}
