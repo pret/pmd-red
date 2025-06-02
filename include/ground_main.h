@@ -4,22 +4,6 @@
 #include "structs/str_pokemon.h"
 #include "structs/str_wonder_mail.h"
 
-struct unkStruct_20398C8
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 fill5[0xB - 0x5];
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    WonderMailSub unk10;
-    PokemonStruct1 unk18;
-    u8 fill70[0x88 - 0x70];
-};
-
 // size: 0xC
 typedef struct GroundConversionStruct
 {

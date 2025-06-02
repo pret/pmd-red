@@ -5,43 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80ACD84
-sub_80ACD84:
-	push {r4-r7,lr}
-	lsls r0, 16
-	asrs r4, r0, 16
-	movs r3, 0
-	ldr r0, _080ACDA8
-	ldr r1, [r0]
-	movs r6, 0xE2
-	lsls r6, 1
-	movs r2, 0x80
-	lsls r2, 9
-	adds r5, r2, 0
-_080ACD9A:
-	movs r7, 0x6
-	ldrsh r0, [r1, r7]
-	cmp r0, r4
-	bne _080ACDAC
-	adds r0, r3, 0
-	b _080ACDBC
-	.align 2, 0
-_080ACDA8: .4byte gGroundEffects
-_080ACDAC:
-	adds r0, r2, 0
-	adds r2, r5
-	asrs r3, r0, 16
-	adds r1, r6
-	cmp r3, 0xF
-	ble _080ACD9A
-	movs r0, 0x1
-	negs r0, r0
-_080ACDBC:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80ACD84
-
 	thumb_func_start GroundEffect_Add
 GroundEffect_Add:
 	push {r4-r7,lr}

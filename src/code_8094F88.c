@@ -271,22 +271,22 @@ s32 sub_8095400(u32 param_1)
   return -1;
 }
 
-void sub_809542C(WonderMailSub *param_1)
+void sub_809542C(DungeonMailSeed *param_1)
 {
   u8 buffer[20];
 
   gUnknown_203B480->mailType = 1;
-  gUnknown_203B480->unk4 = *param_1;
+  gUnknown_203B480->dungeonSeed = *param_1;
   MersenneTwister_InitializeState(Rand32Bit());
   gUnknown_203B480->unk10.unk10 = Random32MersenneTwister();
   gUnknown_203B480->clientSpecies = GetPlayerPokemonStruct()->speciesNum;
   PrintPokeNameToBuffer(buffer, GetPlayerPokemonStruct());
   CopyStringtoBuffer(gUnknown_203B480->playerName, buffer);
   gUnknown_203B480->unk24 = sub_8011C34();
-  gUnknown_203B480->rescuesAllowed = GetRescuesAllowed(gUnknown_203B480->unk4.dungeon.id);
+  gUnknown_203B480->rescuesAllowed = GetRescuesAllowed(gUnknown_203B480->dungeonSeed.location.id);
 }
 
-void sub_8095494(WonderMailSub *param_1, u8 index)
+void sub_8095494(DungeonMailSeed *param_1, u8 index)
 {
   u32 seed;
   DungeonLocation dungeon;
@@ -295,9 +295,9 @@ void sub_8095494(WonderMailSub *param_1, u8 index)
   mail = gUnknown_203B480;
   mail += index;
 
-  dungeon = mail->unk4.dungeon;
-  seed = mail->unk4.seed;
-  param_1->dungeon = dungeon;
+  dungeon = mail->dungeonSeed.location;
+  seed = mail->dungeonSeed.seed;
+  param_1->location = dungeon;
   param_1->seed = seed;
 }
 
@@ -421,8 +421,8 @@ void sub_8095774(DataSerializer * a, unkStruct_203B480 *b)
     u8 temp;
 
     ReadBits(a, &b->mailType, 4);
-    ReadDungeonLocationBits(a, &b->unk4.dungeon);
-    ReadBits(a, &b->unk4.seed, 24);
+    ReadDungeonLocationBits(a, &b->dungeonSeed.location);
+    ReadBits(a, &b->dungeonSeed.seed, 24);
     ReadBits(a, &b->clientSpecies, 9);
     ReadBits(a, &b->unk10.unk10, 32);
     ReadBits(a, &b->playerName, 10 * 8);
@@ -447,8 +447,8 @@ void sub_8095824(DataSerializer * a, unkStruct_203B480 *b)
     zero = 0;
 
     WriteBits(a, &b->mailType, 4);
-    WriteDungeonLocationBits(a, &b->unk4.dungeon);
-    WriteBits(a, &b->unk4.seed, 24);
+    WriteDungeonLocationBits(a, &b->dungeonSeed.location);
+    WriteBits(a, &b->dungeonSeed.seed, 24);
     WriteBits(a, &b->clientSpecies, 9);
     WriteBits(a, &b->unk10.unk10, 32);
     WriteBits(a, &b->playerName, 10 * 8);

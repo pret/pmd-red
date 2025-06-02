@@ -7,6 +7,8 @@
 #include "structs/axdata.h"
 #include "structs/str_position.h"
 #include "structs/str_dungeon.h"
+#include "structs/str_pokemon.h"
+#include "structs/str_dungeon_setup.h"
 
 struct UnkStruct_Sub1
 {
@@ -31,27 +33,25 @@ struct WorldMap
     u8 unk5E98[1500];
 };
 
-struct UnkStruct_sub_8010494
+#define WORLD_MAP_UNK_6D_COUNT 63
+
+struct WorldMapInfo
 {
-    DungeonLocation unk0;
-    DungeonLocation unk4;
-    u8 pad1[8];
-    u8 unk10;
-    u8 pad2[0xA];
-    s16 unk1C;
-    u8 pad3[0x6E - 0x20];
+    DungeonLocation startLocation;
+    DungeonSetupSubstruct unk4;
+    PokemonStruct1 mon;
     u8 unk6C;
-    u8 unk6D[63];
+    u8 unk6D[WORLD_MAP_UNK_6D_COUNT];
 };
 
-struct UnkStruct_sub_8010268
+struct WorldMapSetupStruct
 {
     u8 fill0[4];
-    struct UnkStruct_sub_8010494 unk4;
-    struct WorldMap *unkB0;
-    u8 unkB4;
+    struct WorldMapInfo info;
+    struct WorldMap *worldMap;
+    bool8 dungeonEntered; // Some dungeons have specific requirements, where it's not always possible to enter chosen dungeon.
 };
 
-void ShowWorldMap_Async(struct UnkStruct_sub_8010268 *r5);
+void ShowWorldMap_Async(struct WorldMapSetupStruct *setupPtr);
 
 #endif

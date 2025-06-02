@@ -169,8 +169,8 @@ void sub_802B3E0(void)
         sUnknown_203B2C8->unk114.moneyReward = 0;
         IncrementFriendRescueSuccesses();
         mail = GetMailatIndex(sUnknown_203B2C8->unk1);
-        sub_803C37C(&mail->unk4.dungeon, 0, sUnknown_203B2C8->unk114.itemRewards);
-        sUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&mail->unk4.dungeon, 0);
+        sub_803C37C(&mail->dungeonSeed.location, 0, sUnknown_203B2C8->unk114.itemRewards);
+        sUnknown_203B2C8->unk114.teamRankPtsReward = GetDungeonTeamRankPts(&mail->dungeonSeed.location, 0);
         sUnknown_203B2C8->unk114.itemRewards[1] = ITEM_NOTHING;
         sUnknown_203B2C8->unk114.itemRewards[2] = ITEM_NOTHING;
         sUnknown_203B2C8->unk114.quantity = 10;

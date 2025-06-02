@@ -39,6 +39,7 @@
 #include "pokemon.h"
 #include "wigglytuff_shop1.h"
 #include "wonder_mail.h"
+#include "structs/str_dungeon_setup.h"
 
 
 void GroundMap_Select(s16);
@@ -140,7 +141,7 @@ bool8 sub_809B18C(s32 *sp);
 bool8 sub_809AFFC(u8 *);
 bool8 sub_809D234(void);
 s32 sub_80A14E8(Action *, u8, u32, s32);
-u8 sub_80990EC(struct unkStruct_20398C8 *param_1, s32 param_2);
+u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
 
 extern char gUnknown_81165D4[];
 extern char gUnknown_81165F4[];
@@ -1036,13 +1037,13 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                             if (action->scriptData.branchDiscriminant == 1) {
                                 s32 dungeonEnter;
                                 u32 res;
-                                struct unkStruct_20398C8 unkStruct;
+                                struct DungeonSetupInfo unkStruct;
                                 dungeonEnter = (s16)GetScriptVarValue(NULL, 19);
                                 if (sub_80990EC(&unkStruct, dungeonEnter)) {
                                     s32 val;
                                     sub_8099220(&unkStruct, dungeonEnter);
                                     val = sub_80023E4(6);
-                                    res = sub_809034C(unkStruct.unk0, 0, gUnknown_203B4B0, val, 0);
+                                    res = sub_809034C(unkStruct.sub0.unk0.id, 0, gUnknown_203B4B0, val, 0);
                                     gUnknown_2039DA4 = res;
                                     switch (res) {
                                         case 2: {
@@ -1084,7 +1085,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 u32 res;
                                 ret = GetMailatIndex(GetScriptVarValue(NULL, 20));
                                 val = sub_80023E4(6);
-                                res = sub_809034C(ret->unk4.dungeon.id, 0, gUnknown_203B4B0, val, 1);
+                                res = sub_809034C(ret->dungeonSeed.location.id, 0, gUnknown_203B4B0, val, 1);
                                 gUnknown_2039DA4 = res;
                                 switch (res) {
                                     case 2: {

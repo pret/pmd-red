@@ -1077,7 +1077,7 @@ void sub_8028FDC(void)
     {
         case YES_ACTION:
             mail = GetMailatIndex(sUnknown_203B2C0->mailIndex);
-            if(!sub_80A2824(mail->unk4.dungeon.id))
+            if(!sub_80A2824(mail->dungeonSeed.location.id))
             {
                 SetFriendRescueCounterState(CANT_GO_TO_DUNGEON);
             }

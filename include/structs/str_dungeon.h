@@ -9,6 +9,7 @@
 #include "structs/str_position.h"
 #include "structs/str_traps.h"
 #include "structs/str_dungeon_location.h"
+#include "structs/str_dungeon_mail_seed.h"
 
 #define DUNGEON_MAX_SIZE_X 56
 #define DUNGEON_MAX_SIZE_Y 32
@@ -206,14 +207,6 @@ struct unkStruct_Dungeon5C4_sub
     Entity *unkC;
 };
 
-// size: 0x8
-typedef struct unkStruct_Dungeon64C
-{
-    u8 unk0;
-    u8 unk1;
-    u32 unk4;
-} unkStruct_Dungeon64C;
-
 #define UNK_1BBD4_STR_COUNT 10
 
 struct UnkStructDungeon1BDD4
@@ -255,7 +248,7 @@ typedef struct unkDungeon644
 {
     /* 0x0 */ DungeonLocation dungeonLocation;
     /* 0x4 */ DungeonLocation dungeonLocation2;
-    /* 0x8 */ unkStruct_Dungeon64C unk8;
+    /* 0x8 */ DungeonMailSeed dungeonSeed;
     /* 0x10 */ u8 unk10;
     /* 0x11 */ u8 fill11[3];
     /* 0x14 */ bool8 canRecruit;

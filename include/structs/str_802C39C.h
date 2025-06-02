@@ -7,7 +7,7 @@
 typedef struct unkStruct_802C39C
 {
     /* 0x0 */ u32 unk0[2];
-    /* 0x8 */ WonderMailSub *unk8;
+    /* 0x8 */ DungeonMailSeed *dungeonSeed;
     /* 0xC */ u8 *playerName;
     /* 0x10 */ s16 clientSpecies;
     /* 0x12 */ s16 targetSpecies;

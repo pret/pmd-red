@@ -93,16 +93,17 @@ struct FriendAreasMap
 
 extern struct FriendAreasMap *gFriendAreasMapPtr;
 
-struct struct_unk800F990
+struct FriendAreasMapSetupStruct
 {
     u32 unk0;
     u8 startingFriendAreaId;
     u8 unk5;
     struct FriendAreasMap *friendAreasMapPtr;
-    u8 unkC;
+    u8 chosenAreaId;
+    u8 fillD[168];
 };
 
-void ShowFriendAreasMap_Async(struct struct_unk800F990 *param_1);
+void ShowFriendAreasMap_Async(struct FriendAreasMapSetupStruct *setupPtr);
 void PrintFriendAreaNameInMap(u8 *strBuffer, u8 index);
 bool8 IsFriendAreaShownOnMap(u8 friendAreaId);
 
