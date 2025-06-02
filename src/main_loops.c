@@ -45,6 +45,7 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "text_util.h"
+#include "decompress_at.h"
 #include "world_map.h"
 #include "friend_areas_map.h"
 #include "structs/str_dungeon_setup.h"
@@ -69,11 +70,9 @@ static EWRAM_INIT PersonalityRelated sPersonalityRelated_203B040 = {
     .PartnerNick = {""},
 };
 
-#include "data/main_loops.h"
-
 static void LoadTitleScreen(void);
 static void NDS_LoadOverlay_GroundMain();
-static u32 sub_80009D0(u32 param_1);
+static u32 RunGameMode_Async(u32 param_1);
 static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId);
 static void sub_80011E8(DungeonSetupSubstruct *info);
 static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1);
@@ -91,6 +90,34 @@ extern u32 xxx_script_related_8098468(u32);
 extern void IncrementNumAdventures(void);
 extern void sub_8096BD0(void);
 extern bool8 IsEnterWithoutGameSave(u8 dungeon);
+
+static const unkTalkTable sBaseKindTable[17] = {
+    [0] = { .unk0 = 0, .species = MONSTER_PIKACHU },
+    [1] = { .unk0 = 1, .species = MONSTER_MEOWTH },
+    [2] = { .unk0 = 2, .species = MONSTER_EEVEE },
+    [3] = { .unk0 = 3, .species = MONSTER_SKITTY },
+    [4] = { .unk0 = 4, .species = MONSTER_SQUIRTLE },
+    [5] = { .unk0 = 5, .species = MONSTER_TOTODILE },
+    [6] = { .unk0 = 6, .species = MONSTER_MUDKIP },
+    [7] = { .unk0 = 7, .species = MONSTER_PSYDUCK },
+    [8] = { .unk0 = 8, .species = MONSTER_CHARMANDER },
+    [9] = { .unk0 = 9, .species = MONSTER_TORCHIC },
+    [10] = { .unk0 = 10, .species = MONSTER_CYNDAQUIL },
+    [11] = { .unk0 = 11, .species = MONSTER_CUBONE },
+    [12] = { .unk0 = 12, .species = MONSTER_MACHOP },
+    [13] = { .unk0 = 13, .species = MONSTER_BULBASAUR },
+    [14] = { .unk0 = 14, .species = MONSTER_CHIKORITA },
+    [15] = { .unk0 = 15, .species = MONSTER_TREECKO },
+    [16] = { .unk0 = 0, .species = MONSTER_NONE },
+};
+
+static const unkTalkTable sTalkKindTable[5] = {
+    [0] = { .unk0 = 1, .species = MONSTER_SQUIRTLE },
+    [1] = { .unk0 = 1, .species = MONSTER_TOTODILE },
+    [2] = { .unk0 = 3, .species = MONSTER_TORCHIC },
+    [3] = { .unk0 = 3, .species = MONSTER_CHIKORITA },
+    [4] = { .unk0 = 2, .species = MONSTER_NONE },
+};
 
 // arm9.bin::0200E0A8
 void GameLoop(void)
@@ -120,7 +147,7 @@ void GameLoop(void)
     sub_800CD64(0x8000, FALSE);
     sub_8012284();
     InitializeGameOptions(TRUE);
-    SetWindowTitle(sPMDBuildVersion);
+    SetWindowTitle(_("PKDi ver 1.0 [Apr 28 2006] 16:37:54"));
     sub_800DAAC();
     SetSavingIconCoords(NULL);
 
@@ -226,21 +253,21 @@ void GameLoop(void)
                 s32 mailIndex = GetFirstIndexofMailType(7);
                 if (mailIndex != -1) {
                     DeleteMailAtIndex(mailIndex);
-                    tmp3 = sub_80009D0(2);
+                    tmp3 = RunGameMode_Async(2);
                 }
                 else
-                    tmp3 = sub_80009D0(1);
+                    tmp3 = RunGameMode_Async(1);
 
                 break;
             }
             case 4: {
-                tmp3 = sub_80009D0(3);
+                tmp3 = RunGameMode_Async(3);
                 break;
             }
             case MENU_NEW_GAME: {
                 sub_80122A8();
                 nullsub_33();
-                tmp3 = sub_80009D0(0);
+                tmp3 = RunGameMode_Async(0);
                 break;
             }
         }
@@ -276,120 +303,42 @@ static void MainLoops_RunFrameActions(u32 unused)
     // Extra call here in blue. Seems to be for 2nd screen sprites
 }
 
-// https://decomp.me/scratch/w6tN1 (82.93%)
-// arm9.bin::0200DE18
-NAKED
+typedef struct TitleMenuFile
+{
+    /* 0x0 */ u16 tilemap[2 * 32 * 32];
+    /* 0x1000 */ u8 vramStuff[0x4B20];
+} TitleMenuFile;
+
 static void LoadTitleScreen(void)
 {
-    asm_unified(
-"	push {r4-r7,lr}\n"
-"	mov r7, r9\n"
-"	mov r6, r8\n"
-"	push {r6,r7}\n"
-"	sub sp, 0x18\n"
-"	mov r1, sp\n"
-"	ldr r0, _08000708\n"
-"	ldm r0!, {r2-r4}\n"
-"	stm r1!, {r2-r4}\n"
-"	add r5, sp, 0xC\n"
-"	adds r1, r5, 0\n"
-"	ldr r0, _0800070C\n"
-"	ldm r0!, {r2-r4}\n"
-"	stm r1!, {r2-r4}\n"
-"	ldr r0, _08000710\n"
-"	movs r1, 0\n"
-"	bl MemoryAlloc\n"
-"	adds r7, r0, 0\n"
-"	movs r0, 0x3\n"
-"	bl RandInt\n"
-"	adds r4, r0, 0\n"
-"	lsls r4, 2\n"
-"	adds r5, r4\n"
-"	ldr r0, [r5]\n"
-"	ldr r5, _08000714\n"
-"	adds r1, r5, 0\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	ldr r1, _08000718\n"
-"	str r0, [r1]\n"
-"	mov r1, sp\n"
-"	adds r0, r1, r4\n"
-"	ldr r0, [r0]\n"
-"	adds r1, r5, 0\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	mov r8, r0\n"
-"	adds r0, r7, 0\n"
-"	movs r1, 0\n"
-"	mov r2, r8\n"
-"	bl DecompressATFile\n"
-"	movs r2, 0\n"
-"	ldr r0, _0800071C\n"
-"	movs r3, 0xC0\n"
-"	lsls r3, 5\n"
-"	adds r3, r0\n"
-"	mov r9, r3\n"
-"	movs r4, 0x80\n"
-"	lsls r4, 5\n"
-"	adds r4, r0\n"
-"	mov r12, r4\n"
-"_080006A0:\n"
-"	movs r5, 0\n"
-"	lsls r1, r2, 6\n"
-"	adds r6, r2, 0x1\n"
-"	mov r0, r9\n"
-"	adds r4, r1, r0\n"
-"	mov r2, r12\n"
-"	adds r3, r1, r2\n"
-"	movs r2, 0x80\n"
-"	lsls r2, 4\n"
-"	adds r0, r7, r2\n"
-"	adds r2, r1, r0\n"
-"	adds r1, r7\n"
-"_080006B8:\n"
-"	ldrh r0, [r1]\n"
-"	strh r0, [r3]\n"
-"	ldrh r0, [r2]\n"
-"	strh r0, [r4]\n"
-"	adds r4, 0x2\n"
-"	adds r3, 0x2\n"
-"	adds r2, 0x2\n"
-"	adds r1, 0x2\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x1F\n"
-"	ble _080006B8\n"
-"	adds r2, r6, 0\n"
-"	cmp r2, 0x1F\n"
-"	ble _080006A0\n"
-"	movs r0, 0x2\n"
-"	bl sub_80098F8\n"
-"	movs r0, 0x3\n"
-"	bl sub_80098F8\n"
-"	ldr r0, _08000720\n"
-"	movs r3, 0x80\n"
-"	lsls r3, 5\n"
-"	adds r1, r7, r3\n"
-"	ldr r2, _08000724\n"
-"	bl CpuCopy\n"
-"	mov r0, r8\n"
-"	bl CloseFile\n"
-"	adds r0, r7, 0\n"
-"	bl MemoryFree\n"
-"	add sp, 0x18\n"
-"	pop {r3,r4}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_08000708: .4byte sLoadScreenBackgroundFileNames\n"
-"_0800070C: .4byte sLoadScreenBackgroundPaletteFileNames\n"
-"_08000710: .4byte 0x00005b20\n"
-"_08000714: .4byte gTitleMenuFileArchive\n"
-"_08000718: .4byte sTitlePaletteFile\n"
-"_0800071C: .4byte gBgTilemaps\n"
-"_08000720: .4byte 0x06008000\n"
-"_08000724: .4byte 0x00004b20");
+    const u8 * renBG[3] = {"titlen0", "titlen1", "titlen2"};
+    const u8 * renPal[3] = {"titlen0p", "titlen1p", "titlen2p"};
+    OpenedFile *bgFile;
+    s32 i, j;
+    TitleMenuFile *stru = MemoryAlloc(sizeof(TitleMenuFile), 0);
+    s32 rnd = RandInt(3);
+
+    sTitlePaletteFile = OpenFileAndGetFileDataPtr(renPal[rnd], &gTitleMenuFileArchive);
+    bgFile = OpenFileAndGetFileDataPtr(renBG[rnd], &gTitleMenuFileArchive);
+    DecompressATFile(&stru->tilemap, 0, bgFile);
+
+    for (i = 0; i < 32; i++) {
+        for (j = 0; j < 32; j++) {
+            u16 *ptr = stru->tilemap;
+            gBgTilemaps[2][i][j] = ptr[i * 32 + j];
+            gBgTilemaps[3][i][j] = ptr[i * 32 + j + (32 * 32)];
+        }
+    }
+
+    sub_80098F8(2);
+    sub_80098F8(3);
+
+    CpuCopy((u32 *)(VRAM + 0x8000), stru->vramStuff, sizeof(stru->vramStuff));
+    CloseFile(bgFile);
+    MemoryFree(stru);
 }
+
+#include "data/main_loops.h"
 
 // arm9.bin::0200ED08
 s32 sub_8000728(void)
@@ -594,8 +543,25 @@ static void sub_80008C0_Async(u32 errorKind)
     MainLoops_RunFrameActions(0);
 }
 
+enum
+{
+    MODE_NEW_GAME,
+    MODE_CONTINUE_GAME,
+    MODE_GROUND, // overworld
+    MODE_3,
+    MODE_FRIEND_AREAS,
+    MODE_DUNGEON_FROM_WORLD_MAP,
+    MODE_6,
+    MODE_7,
+    MODE_8,
+    MODE_DUNGEON_WON,
+    MODE_10,
+    MODE_11,
+    MODE_DUNGEON_LOST,
+};
+
 // arm9.bin::0200D1E0
-static u32 sub_80009D0(u32 a0)
+static u32 RunGameMode_Async(u32 a0)
 {
     s32 mode = GetScriptVarValue(NULL, START_MODE);
     bool8 ret = FALSE;
@@ -614,7 +580,7 @@ static u32 sub_80009D0(u32 a0)
         }
     }
     else if (mode != 0 && mode != 11) {
-        mode = 1;
+        mode = MODE_CONTINUE_GAME;
     }
 
     ClearScriptVarArray(NULL, EVENT_S08E01);
@@ -625,7 +591,7 @@ static u32 sub_80009D0(u32 a0)
         DungeonSetupStruct dungeonSetup;
         s16 sp552;
 
-        if (mode == 4) {
+        if (mode == MODE_FRIEND_AREAS) {
             u8 mapId = sub_8002658(GetScriptVarValue(NULL,GROUND_ENTER));
 
             friendAreasSetup.friendAreasMapPtr = MemoryAlloc(sizeof(*friendAreasSetup.friendAreasMapPtr),8);
@@ -645,10 +611,10 @@ static u32 sub_80009D0(u32 a0)
                 SetScriptVarValue(NULL,GROUND_ENTER,val);
                 SetScriptVarValue(NULL,GROUND_ENTER_LINK,0);
             }
-            mode = 2;
+            mode = MODE_GROUND;
             continue;
         }
-        else if (mode == 5) {
+        else if (mode == MODE_DUNGEON_FROM_WORLD_MAP) {
             s32 i;
 
             s32 dungId = (s16) GetScriptVarValue(NULL, DUNGEON_SELECT);
@@ -686,7 +652,7 @@ static u32 sub_80009D0(u32 a0)
             ShowWorldMap_Async(&worldMapSetup);
             MemoryFree(worldMapSetup.worldMap);
             if (!worldMapSetup.dungeonEntered) {
-                mode = 2;
+                mode = MODE_GROUND;
                 continue;
             }
             SetScriptVarValue(NULL, DUNGEON_ENTER, dungId);
@@ -704,7 +670,7 @@ static u32 sub_80009D0(u32 a0)
             if (mode == 11) {
                 RemoveAllMoneyAndItems();
             }
-            else if (mode == 12) {
+            else if (mode == MODE_DUNGEON_LOST) {
                 RemoveMoneyAndRandomItems();
             }
             sUnknown_203B03C = 2;
@@ -714,11 +680,11 @@ static u32 sub_80009D0(u32 a0)
                 break;
             }
             else if (r5 == 5) {
-                mode = 4;
+                mode = MODE_FRIEND_AREAS;
                 continue;
             }
             else if (r5 == 6) {
-                mode = 5;
+                mode = MODE_DUNGEON_FROM_WORLD_MAP;
                 continue;
             }
         }
@@ -730,13 +696,13 @@ static u32 sub_80009D0(u32 a0)
         if (r5 == 7) {
             if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
                 r5 = 13;
-                mode = 9;
+                mode = MODE_DUNGEON_WON;
             }
         }
         else if (r5 == 8) {
             if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
                 r5 = 13;
-                mode = 9;
+                mode = MODE_DUNGEON_WON;
             }
             else if (sub_8096A08(dungeonSetup.info.sub0.unk0.id, &dungeonSetup.info.mon)) {
                 dungeonSetup.info.sub0.unkC = 1;
@@ -745,13 +711,13 @@ static u32 sub_80009D0(u32 a0)
         else if (r5 == 10) {
             if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
                 r5 = 13;
-                mode = 9;
+                mode = MODE_DUNGEON_WON;
             }
         }
         else if (r5 == 9) {
             if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
                 r5 = 11;
-                mode = 12;
+                mode = MODE_DUNGEON_LOST;
             }
         }
         else if (r5 == 0) {
@@ -877,12 +843,12 @@ static u32 sub_80009D0(u32 a0)
                 break;
             }
 
-            ClearScriptVarArray(NULL, 0x41);
+            ClearScriptVarArray(NULL, EVENT_S08E01);
             switch (dungeonSetup.info.unk7C) {
                 case 1:
                 case 4:
                     mode = 9;
-                    SetScriptVarArrayValue(NULL, 0x41, 0, (dungeonSetup.info.unk7E != 0) ? 2 : 1);
+                    SetScriptVarArrayValue(NULL, EVENT_S08E01, 0, (dungeonSetup.info.unk7E != 0) ? 2 : 1);
                     break;
                 case 2:
                     mode = 10;
@@ -910,7 +876,7 @@ static u32 sub_80009D0(u32 a0)
 // More documentation needed to be sure
 // It'd also be cool to see what happens if a quicksave load fails and the dungeon is skipped entirely
 // arm9.bin::0200D01C
-static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
+static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
 {
     u8 quickSaveValid;
     s32 quickSaveStatus;
@@ -924,11 +890,11 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
     sub_8014144();
     sub_8043D50(&local_1c, &dungeonStructSize);
 
-    param_1->info.unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
-    param_1->info.dungeon = MemoryAlloc(dungeonStructSize, 7); // size: sizeof(Dungeon)
+    setupStr->info.unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
+    setupStr->info.dungeon = MemoryAlloc(dungeonStructSize, 7); // size: sizeof(Dungeon)
 
-    if (param_1->info.sub0.unk4) {
-        PrepareQuickSaveRead(param_1->info.unk74, local_1c);
+    if (setupStr->info.sub0.unk4) {
+        PrepareQuickSaveRead(setupStr->info.unk74, local_1c);
 
         while (TRUE) {
             if (!ReadQuickSave())
@@ -954,32 +920,32 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
     }
 
     if (quickSaveValid) {
-        LoadAndRunDungeon_Async(param_1);
+        LoadAndRunDungeon_Async(setupStr);
         sub_8099648();
         SetWindowBGColor();
         sub_8099690(0);
     }
     else
-        param_1->info.unk7C = 5;
+        setupStr->info.unk7C = 5;
 
-    if (param_1->info.unk7C == -2)
-        sub_809542C(&param_1->info.unk84);
+    if (setupStr->info.unk7C == -2)
+        sub_809542C(&setupStr->info.unk84);
 
-    if (param_1->info.unk7C == 3 || param_1->info.unk7C == -2) {
-        SetDungeonLocationInfo(&param_1->info.unk80);
+    if (setupStr->info.unk7C == 3 || setupStr->info.unk7C == -2) {
+        SetDungeonLocationInfo(&setupStr->info.unk80);
         xxx_call_stop_bgm();
 
-        if (param_1->info.unk7C == -2)
-            PrepareQuickSaveWrite(param_1->info.unk74, local_1c, 1);
+        if (setupStr->info.unk7C == -2)
+            PrepareQuickSaveWrite(setupStr->info.unk74, local_1c, 1);
         else
-            PrepareQuickSaveWrite(param_1->info.unk74, local_1c, 0);
+            PrepareQuickSaveWrite(setupStr->info.unk74, local_1c, 0);
 
         while ((quickSaveStatus = WriteQuickSave(), (quickSaveStatus != 2))) {
             if (quickSaveStatus == 3)
                 break;
             if (quickSaveStatus == 1) {
-                MemoryFree(param_1->info.dungeon);
-                MemoryFree(param_1->info.unk74);
+                MemoryFree(setupStr->info.dungeon);
+                MemoryFree(setupStr->info.unk74);
             }
 
             MainLoops_RunFrameActions(0);
@@ -988,8 +954,8 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1)
     }
     else {
         sub_808ED00();
-        MemoryFree(param_1->info.dungeon);
-        MemoryFree(param_1->info.unk74);
+        MemoryFree(setupStr->info.dungeon);
+        MemoryFree(setupStr->info.unk74);
     }
 }
 
