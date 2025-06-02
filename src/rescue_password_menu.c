@@ -16,6 +16,10 @@
 #include "string_format.h"
 #include "text_1.h"
 
+u32 NamingScreen_Init(u32 type, u8 *defaultText);
+u32 NamingScreen_HandleInput(void);
+void NamingScreen_Free(void);
+
 #define RESCUE_PASSWORD_SIZE 0x36
 
 EWRAM_DATA s32 gCommsTimeout = {0};
@@ -292,7 +296,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
         case 0x1C:
         case 0x1E:
         case 0x20:
-            sub_80151C0(4, gRescuePasswordBuffer);
+            NamingScreen_Init(4, gRescuePasswordBuffer);
             break;
         case MENU_DISPLAY_RESCUE_PASSWORD:
             temp = GetMailatIndex(0x1F);
@@ -302,7 +306,7 @@ void CreateRescuePasswordMenu(u32 currMenu)
             sub_8031D70(0x1F, 0);
             break;
         case MENU_RESCUE_PASSWORD_ENTRY:
-            sub_80151C0(4, gRescuePasswordBuffer);
+            NamingScreen_Init(4, gRescuePasswordBuffer);
             break;
     }
 
@@ -316,7 +320,7 @@ void CleanRescuePasswordMenu(void)
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
   if (gRescuePasswordMenu != NULL) {
-    sub_80155F0();
+    NamingScreen_Free();
     sub_8031E10();
     MemoryFree(gRescuePasswordMenu);
     gRescuePasswordMenu = NULL;
@@ -358,7 +362,7 @@ s32 UpdateRescuePasswordMenu(void)
     case 1:
     case 3:
     case 5:
-        iVar7 = sub_80154F0();
+        iVar7 = NamingScreen_HandleInput();
         MemoryFill8(&mail, 0, sizeof(unkStruct_203B480));
         switch(iVar7)
         {
@@ -460,7 +464,7 @@ s32 UpdateRescuePasswordMenu(void)
         nextMenu =  UpdateRescuePasswordMenu_sub(MENU_WONDER_MAIL);
         break;
     case 7:
-        switch(sub_80154F0())
+        switch(NamingScreen_HandleInput())
         {
             case 3:
                 nextMenu = PASSWORD_ENTRY_NOT_WONDER_MAIL;
@@ -496,7 +500,7 @@ s32 UpdateRescuePasswordMenu(void)
                 sub_8039174();
                 ResetUnusedInputStruct();
                 ShowWindows(NULL, TRUE, TRUE);
-                sub_80151C0(4,gRescuePasswordBuffer);
+                NamingScreen_Init(4,gRescuePasswordBuffer);
                 gRescuePasswordMenu->state = 8;
                 subtract = gRescuePasswordMenu->currMenu - 0x21;
                 nextMenu = MENU_FRIEND_RESCUE;
@@ -524,7 +528,7 @@ s32 UpdateRescuePasswordMenu(void)
                 sub_8039174();
                 ResetUnusedInputStruct();
                 ShowWindows(NULL, TRUE, TRUE);
-                sub_80151C0(4,gRescuePasswordBuffer);
+                NamingScreen_Init(4,gRescuePasswordBuffer);
                 gRescuePasswordMenu->state = ConvertMenutoRescuePasswordState(gRescuePasswordMenu->currMenu);
                 subtract = gRescuePasswordMenu->currMenu - 0x21;
                 nextMenu = 0x2a;
@@ -547,7 +551,7 @@ void DisplayRescuePasswordError(u32 passwordError)
   RestoreSavedWindows(&gRescuePasswordMenu->unk1A8);
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
-  sub_80155F0();
+  NamingScreen_Free();
   switch(passwordError) {
     case PASSWORD_ENTRY_INCORRECT_PASSWORD:
         SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E71FC,gUnknown_80E7214,FALSE,13,FALSE);
@@ -587,7 +591,7 @@ void DisplayPasswordAcceptScreen(void)
   RestoreSavedWindows(&gRescuePasswordMenu->unk1A8);
   ResetUnusedInputStruct();
   ShowWindows(NULL, TRUE, TRUE);
-  sub_80155F0();
+  NamingScreen_Free();
   SetMenuItems(gRescuePasswordMenu->unk8,&gRescuePasswordMenu->unk148,0,&gUnknown_80E7278,gUnknown_80E7290,FALSE,13,FALSE);
   sub_8035CF4(gRescuePasswordMenu->unk8,0,TRUE);
 }

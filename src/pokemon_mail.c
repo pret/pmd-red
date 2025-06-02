@@ -101,10 +101,10 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
 
     if (param_1->mailTitleType == 7) {
         if (param_1->playerName == NULL)
-            PrintStringOnWindow(178 - sub_8016028(), param_1->y, GetMonSpecies(param_1->clientSpecies), param_1->unk0[0], 0);
+            PrintStringOnWindow(178 - GetMaxPokeNameWidth(), param_1->y, GetMonSpecies(param_1->clientSpecies), param_1->unk0[0], 0);
         else {
             sub_80922B4(buf_2, param_1->playerName, POKEMON_NAME_LENGTH);
-            PrintStringOnWindow(178 - sub_8016028(), param_1->y, buf_2, param_1->unk0[0], 0);
+            PrintStringOnWindow(178 - GetMaxPokeNameWidth(), param_1->y, buf_2, param_1->unk0[0], 0);
         }
     }
     else {

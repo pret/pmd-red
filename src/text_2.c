@@ -223,7 +223,7 @@ u32 xxx_draw_char(Window *windows, s32 x, s32 y, u32 chr, u32 color, u32 windowI
         }
     }
 
-    return sp0->unk6 + gCharacterSpacing;
+    return sp0->width + gCharacterSpacing;
 }
 
 // Copied to 01ff98f8 in NDS

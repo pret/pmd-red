@@ -129,7 +129,7 @@ s32 sub_8008ED0(const u8 *str)
         else {
             const unkChar *ptr = GetCharacter(chr);
             if (ptr != NULL) {
-                ret += ptr->unk6 + gCharacterSpacing;
+                ret += ptr->width + gCharacterSpacing;
             }
         }
     }
@@ -211,7 +211,7 @@ static void xxx_draw_string(Window *strArr, s32 x, s32 y, const u8 *str, u32 win
             if (chrPtr != NULL) {
                 s32 x = sp.unk0;
                 s32 x2 = gCharacterSpacing + 10;
-                x +=((x2 - chrPtr->unk6) / 2);
+                x +=((x2 - chrPtr->width) / 2);
                 xxx_draw_char(strArr, x, sp.unk2, currChr, sp.unk10, windowId);
                 sp.unk0 += characterSpacing;
             }

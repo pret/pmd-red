@@ -198,7 +198,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 windowId)
             piVar4++;
             chr = ReturnIntFromChar2(iVar1 + 0x30);
             iVar3 = GetCharacter(chr);
-            total_x += iVar3->unk6;
+            total_x += iVar3->width;
             xxx_call_draw_char(x - total_x, y, chr, color, windowId);
             counter++;
             if (counter >= len)
@@ -216,8 +216,8 @@ void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
     uVar2 = ReturnIntFromChar2(a2);
     iVar3 = GetCharacter(uVar2);
 
-    if (iVar3->unk6 < 12)
-        add_x = ((12 - iVar3->unk6) / 2);
+    if (iVar3->width < 12)
+        add_x = ((12 - iVar3->width) / 2);
     else
         add_x = 0;
 

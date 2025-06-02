@@ -11,6 +11,8 @@
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
+#include "text_util.h"
+#include "constants/input.h"
 
 struct unkStruct_203B1F8
 {
@@ -337,123 +339,136 @@ void sub_80151A4(void)
     }
 }
 
-struct unkStruct_203B1FC
+#define MAX_TEXT_SIZE 54
+
+struct NamingScreen
 {
     // size: 0x198
-    u32 unk0;
+    u32 type;
     u8 unk4;
     // Note: These had to be declared like these, because SpriteOAM is aligned by 4 and these aren't. Makes you think if SpriteOAM is actually a struct, and not just an array of 4 u16s.
     u16 sprite1Attribs[4];
     u16 sprite2Attribs[4];
-    u8 unk16;
-    u8 unk17;
+    u8 letterCursorFrames;
+    u8 inputCursorFrames;
     u8 unk18;
     u8 unk19;
-    u8 unk1A;
-    u8 unk1B;
-    u8 unk1C;
-    u16 unk1E[54];
-    s16 unk8A[54];
-    u8 *unkF8;
-    u8 unkFC[56];
-    u8 *unk134;
+    u8 inputCursorPosition;
+    u8 maxLetters;
+    u8 letterCursorPos;
+    u16 letterTotalWidths[MAX_TEXT_SIZE];
+    s16 letterWidths[MAX_TEXT_SIZE];
+    u8 *textPtr; // Points to the field below. A bit over complicated in my opinion...
+    u8 text[MAX_TEXT_SIZE];
+    u8 *defaultText;
     WindowTemplates windows;
 };
-extern struct unkStruct_203B1FC *gUnknown_203B1FC;
 
-s32 sub_8015F44(void);
+static EWRAM_INIT struct NamingScreen *sNamingScreen = NULL;
+
+static s32 GetEnteredNameLength(void);
 void sub_8015A08(u32);
-void sub_8015C1C(void);
+static void UpdateNameWindow(void);
 void sub_8015F84();
-void sub_80157D8(void);
-void sub_80158BC(void);
-void sub_8015E10(u8 *a0, s32 a1, s32 _a2);
-void sub_8015EB4(u8 *a0, s32 a1, s32 _a2);
-s32 sub_8016028(void);
-s32 sub_8015FEC(u8 *buffer, s32 size);
-u32 sub_801560C(void);
-bool8 sub_8015748(void);
+static void SetLetterCursorSpritePosition(void);
+static void HandleInputCursor(void);
+static void sub_8015E10(u8 *a0, s32 a1, s32 _a2);
+static void sub_8015EB4(u8 *a0, s32 a1, s32 _a2);
+s32 GetMaxPokeNameWidth(void);
+s32 GetStrWidth(u8 *buffer, s32 size);
+static u32 HandleAPress(void);
+static bool8 HandleBPress(void);
 
-u32 sub_80151C0(u32 r0, u8 *buffer)
+enum
+{
+    NAMING_SELF,
+    NAMING_TEAM,
+    NAMING_POKEMON,
+    NAMING_PARTNER,
+    NAMING_PASSWORD1,
+    NAMING_PASSWORD2,
+};
+
+u32 NamingScreen_Init(u32 type, u8 *defaultText)
 {
     SpriteOAM *sprite;
     s32 index;
     s32 i;
 
-    gUnknown_203B1FC = MemoryAlloc(sizeof(*gUnknown_203B1FC), 8);
-    gUnknown_203B1FC->unk0 = r0;
-    gUnknown_203B1FC->unk19 = 0;
-    gUnknown_203B1FC->unk18 = 0;
-    gUnknown_203B1FC->unk4 = 0;
+    sNamingScreen = MemoryAlloc(sizeof(*sNamingScreen), 8);
+    sNamingScreen->type = type;
+    sNamingScreen->unk19 = 0;
+    sNamingScreen->unk18 = 0;
+    sNamingScreen->unk4 = 0;
 
-    switch(gUnknown_203B1FC->unk0) {
-        case 4:
-            gUnknown_203B1FC->unk1A = 9;
-            gUnknown_203B1FC->unk4 = 1;
-            gUnknown_203B1FC->unk1B = 0x36;
+    switch (sNamingScreen->type) {
+        case NAMING_PASSWORD1:
+            sNamingScreen->inputCursorPosition = 9;
+            sNamingScreen->unk4 = 1;
+            sNamingScreen->maxLetters = 0x36;
             break;
-        case 5:
-            gUnknown_203B1FC->unk1A = 9;
-            gUnknown_203B1FC->unk4 = 1;
-            gUnknown_203B1FC->unk1B = 0x18;
+        case NAMING_PASSWORD2:
+            sNamingScreen->inputCursorPosition = 9;
+            sNamingScreen->unk4 = 1;
+            sNamingScreen->maxLetters = 0x18;
             break;
-        case 0:
-        case 1:
-        case 3:
+        case NAMING_SELF:
+        case NAMING_TEAM:
+        case NAMING_PARTNER:
         default:
-            gUnknown_203B1FC->unk1A = 6;
-            gUnknown_203B1FC->unk1B = 0xA;
+            sNamingScreen->inputCursorPosition = 6;
+            sNamingScreen->maxLetters = POKEMON_NAME_LENGTH;
             break;
     }
 
-    gUnknown_203B1FC->unk134 = buffer;
-    gUnknown_203B1FC->unkF8 = gUnknown_203B1FC->unkFC;
+    sNamingScreen->defaultText = defaultText;
+    sNamingScreen->textPtr = sNamingScreen->text;
 
-    for (i = 0; i < 0x36; i++) {
-        gUnknown_203B1FC->unkF8[i] = 0;
+    for (i = 0; i < MAX_TEXT_SIZE; i++) {
+        sNamingScreen->textPtr[i] = '\0';
     }
-    MemoryCopy8(gUnknown_203B1FC->unkF8, gUnknown_203B1FC->unk134, gUnknown_203B1FC->unk1B);
+    MemoryCopy8(sNamingScreen->textPtr, sNamingScreen->defaultText, sNamingScreen->maxLetters);
 
-    for (i = 0; i < gUnknown_203B1FC->unk1B; i++) {
-        if (gUnknown_203B1FC->unkF8[i] == 0) {
+    for (i = 0; i < sNamingScreen->maxLetters; i++) {
+        if (sNamingScreen->textPtr[i] == '\0') {
             break;
         }
     }
-    for (; i < gUnknown_203B1FC->unk1B; i++) {
-        gUnknown_203B1FC->unkF8[i] = 0;
+    for (; i < sNamingScreen->maxLetters; i++) {
+        sNamingScreen->textPtr[i] = '\0';
     }
 
-    gUnknown_203B1FC->unk1C = sub_8015F44();
-    if (gUnknown_203B1FC->unk1C == gUnknown_203B1FC->unk1B) {
-        gUnknown_203B1FC->unk1C--;
+    sNamingScreen->letterCursorPos = GetEnteredNameLength();
+    if (sNamingScreen->letterCursorPos == sNamingScreen->maxLetters) {
+        sNamingScreen->letterCursorPos--;
     }
 
-    SpriteSetAffine1((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0);
-    SpriteSetAffine2((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0);
-    SpriteSetObjMode((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0);
-    SpriteSetMosaic((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0);
-    SpriteSetBpp((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0);
-    SpriteSetPriority((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0);
-    SpriteSetPalNum((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 15);
-    SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, DISPLAY_WIDTH);
-    SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, DISPLAY_WIDTH);
+    SpriteSetAffine1((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
+    SpriteSetAffine2((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
+    SpriteSetObjMode((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
+    SpriteSetMosaic((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
+    SpriteSetBpp((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
+    SpriteSetPriority((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
+    SpriteSetPalNum((SpriteOAM *) &sNamingScreen->sprite1Attribs, 15);
+    SpriteSetX((SpriteOAM *) &sNamingScreen->sprite1Attribs, DISPLAY_WIDTH);
+    SpriteSetY((SpriteOAM *) &sNamingScreen->sprite1Attribs, DISPLAY_WIDTH);
 
-    if (gUnknown_203B1FC->unk4 != 0) {
-        SpriteSetMatrixNum((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0);
-        SpriteSetTileNum((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0x3F6);
-        SpriteSetSize((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0);
-        SpriteSetShape((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 1);
+    if (sNamingScreen->unk4 != 0) {
+        SpriteSetMatrixNum((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
+        SpriteSetTileNum((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0x3F6);
+        SpriteSetSize((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
+        SpriteSetShape((SpriteOAM *) &sNamingScreen->sprite1Attribs, 1);
     }
     else {
-        SpriteSetMatrixNum((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 16);
-        SpriteSetTileNum((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0x3F0);
-        SpriteSetSize((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0);
-        SpriteSetShape((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 1);
+        SpriteSetMatrixNum((SpriteOAM *) &sNamingScreen->sprite1Attribs, 16);
+        SpriteSetTileNum((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0x3F0);
+        SpriteSetSize((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
+        SpriteSetShape((SpriteOAM *) &sNamingScreen->sprite1Attribs, 1);
     }
 
-    gUnknown_203B1FC->unk16 = 4;
+    sNamingScreen->letterCursorFrames = 4;
 
-    sprite = (SpriteOAM *) &gUnknown_203B1FC->sprite2Attribs;
+    sprite = (SpriteOAM *) &sNamingScreen->sprite2Attribs;
 
     SpriteSetAffine1(sprite, 0);
     SpriteSetAffine2(sprite, 0);
@@ -469,134 +484,134 @@ u32 sub_80151C0(u32 r0, u8 *buffer)
     SpriteSetX(sprite, DISPLAY_WIDTH);
     SpriteSetY(sprite, DISPLAY_WIDTH);
 
-    gUnknown_203B1FC->unk17 = 0;
+    sNamingScreen->inputCursorFrames = 0;
 
     for (index = 0; index < 4; index++) {
-        gUnknown_203B1FC->windows.id[index] = gUnknown_80DB538;
+        sNamingScreen->windows.id[index] = gUnknown_80DB538;
     }
 
-    if(gUnknown_203B1FC->unk4 != 0) {
-        gUnknown_203B1FC->windows.id[1] = gUnknown_80DB580;
+    if(sNamingScreen->unk4 != 0) {
+        sNamingScreen->windows.id[1] = gUnknown_80DB580;
     }
     else {
-        gUnknown_203B1FC->windows.id[1] = gUnknown_80DB568;
+        sNamingScreen->windows.id[1] = gUnknown_80DB568;
     }
-    gUnknown_203B1FC->windows.id[0] = gUnknown_80DB550;
+    sNamingScreen->windows.id[0] = gUnknown_80DB550;
 
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B1FC->windows, 1, 1);
+    ShowWindows(&sNamingScreen->windows, 1, 1);
 
     sub_8015A08(1);
-    sub_8015C1C();
+    UpdateNameWindow();
     sub_8015F84();
     return 1;
 }
 
-u32 sub_80154F0(void)
+u32 NamingScreen_HandleInput(void)
 {
-    gUnknown_203B1FC->unk16++;
-    sub_80157D8();
-    if (gUnknown_203B1FC->unk16 & 8) {
-        AddSprite((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, 0x100, NULL, NULL);
+    sNamingScreen->letterCursorFrames++;
+    SetLetterCursorSpritePosition();
+    if (sNamingScreen->letterCursorFrames & 8) {
+        AddSprite((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0x100, NULL, NULL);
     }
 
-    gUnknown_203B1FC->unk17++;
-    sub_80158BC();
-    if (gUnknown_203B1FC->unk17 & 8) {
-        AddSprite((SpriteOAM *) &gUnknown_203B1FC->sprite2Attribs, 0x100, NULL, NULL);
+    sNamingScreen->inputCursorFrames++;
+    HandleInputCursor();
+    if (sNamingScreen->inputCursorFrames & 8) {
+        AddSprite((SpriteOAM *) &sNamingScreen->sprite2Attribs, 0x100, NULL, NULL);
     }
 
     switch (sub_8012AE8()) {
-        case 5:
-            if (gUnknown_203B1FC->unk1C == 0) {
+        case INPUT_L_BUTTON:
+            if (sNamingScreen->letterCursorPos == 0) {
                 PlayMenuSoundEffect(2);
             }
             else {
-                gUnknown_203B1FC->unk1C--;
+                sNamingScreen->letterCursorPos--;
                 PlayMenuSoundEffect(3);
             }
             break;
-        case 6:
-            if (gUnknown_203B1FC->unk1C != gUnknown_203B1FC->unk1B - 1 && gUnknown_203B1FC->unk1C < sub_8015F44()) {
-                gUnknown_203B1FC->unk1C++;
+        case INPUT_R_BUTTON:
+            if (sNamingScreen->letterCursorPos != sNamingScreen->maxLetters - 1 && sNamingScreen->letterCursorPos < GetEnteredNameLength()) {
+                sNamingScreen->letterCursorPos++;
                 PlayMenuSoundEffect(3);
             }
             else {
                 PlayMenuSoundEffect(2);
             }
             break;
-        case 1:
-            return sub_801560C();
-        case 2:
-            if (sub_8015748()) {
+        case INPUT_A_BUTTON:
+            return HandleAPress();
+        case INPUT_B_BUTTON:
+            if (HandleBPress()) {
                 return 2;
             }
             break;
-        case 4:
+        case INPUT_START_BUTTON:
             PlayMenuSoundEffect(3);
-            gUnknown_203B1FC->unk1A = 5;
+            sNamingScreen->inputCursorPosition = 5;
             break;
     }
 
     return 0;
 }
 
-void sub_80155F0(void)
+void NamingScreen_Free(void)
 {
-    if (gUnknown_203B1FC != NULL) {
-        MemoryFree(gUnknown_203B1FC);
-        gUnknown_203B1FC = NULL;
+    if (sNamingScreen != NULL) {
+        MemoryFree(sNamingScreen);
+        sNamingScreen = NULL;
     }
 }
 
-u32 sub_801560C(void)
+static u32 HandleAPress(void)
 {
-    s32 var = gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].unk8;
+    s32 var = gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].unk8;
 
     switch (var) {
         case 0x107:
-            gUnknown_203B1FC->unk18 = (gUnknown_203B1FC->unk18 == 0);
+            sNamingScreen->unk18 = (sNamingScreen->unk18 == 0);
             PlayMenuSoundEffect(4);
             sub_8015A08(0);
             break;
         case 0x105:
-            if (sub_8015748()) {
+            if (HandleBPress()) {
                 return 2;
             }
             break;
         case 0x106:
-            if (sub_8015F44() == 0 || (gUnknown_203B1FC->unk4 != 0 && sub_8015F44() != gUnknown_203B1FC->unk1B)) {
+            if (GetEnteredNameLength() == 0 || (sNamingScreen->unk4 != 0 && GetEnteredNameLength() != sNamingScreen->maxLetters)) {
                 PlayMenuSoundEffect(2);
             }
             else {
                 PlayMenuSoundEffect(0);
-                MemoryCopy8(gUnknown_203B1FC->unk134, gUnknown_203B1FC->unkF8, gUnknown_203B1FC->unk1B);
+                MemoryCopy8(sNamingScreen->defaultText, sNamingScreen->textPtr, sNamingScreen->maxLetters);
                 return 3;
             }
             break;
         default:
-            if (gUnknown_203B1FC->unk4 != 0 && sub_803D0F0(var) == 0xFF) {
+            if (sNamingScreen->unk4 != 0 && sub_803D0F0(var) == 0xFF) {
                 PlayMenuSoundEffect(2);
             }
             else {
-                if (gUnknown_203B1FC->unk18 == 1) {
+                if (sNamingScreen->unk18 == 1) {
                     s32 i;
-                    for (i = gUnknown_203B1FC->unk1B - 2; i >= gUnknown_203B1FC->unk1C; i--) {
-                        u8 *ptr = &gUnknown_203B1FC->unkF8[i];
+                    for (i = sNamingScreen->maxLetters - 2; i >= sNamingScreen->letterCursorPos; i--) {
+                        u8 *ptr = &sNamingScreen->textPtr[i];
                         ptr[1] = ptr[0];
                     }
                 }
 
-                gUnknown_203B1FC->unkF8[gUnknown_203B1FC->unk1C] = var;
-                if (gUnknown_203B1FC->unk1C < gUnknown_203B1FC->unk1B - 1) {
-                    gUnknown_203B1FC->unk1C++;
+                sNamingScreen->textPtr[sNamingScreen->letterCursorPos] = var;
+                if (sNamingScreen->letterCursorPos < sNamingScreen->maxLetters - 1) {
+                    sNamingScreen->letterCursorPos++;
                 }
                 else {
-                    gUnknown_203B1FC->unk1A = 5;
+                    sNamingScreen->inputCursorPosition = 5;
                 }
 
                 PlayMenuSoundEffect(0);
-                sub_8015C1C();
+                UpdateNameWindow();
                 sub_8015F84();
             }
             break;
@@ -605,108 +620,106 @@ u32 sub_801560C(void)
     return 0;
 }
 
-bool8 sub_8015748(void)
+bool8 HandleBPress(void)
 {
-    u32 val = gUnknown_203B1FC->unkF8[gUnknown_203B1FC->unk1C];
-
-    if (val == 0) {
-        if (gUnknown_203B1FC->unk1C == 0) {
+    if (sNamingScreen->textPtr[sNamingScreen->letterCursorPos] == '\0') {
+        if (sNamingScreen->letterCursorPos == 0) {
             PlayMenuSoundEffect(2);
             return TRUE;
         }
         else {
-            gUnknown_203B1FC->unk1C--;
-            gUnknown_203B1FC->unkF8[gUnknown_203B1FC->unk1C] = val;
+            sNamingScreen->letterCursorPos--;
+            sNamingScreen->textPtr[sNamingScreen->letterCursorPos] = '\0';
             PlayMenuSoundEffect(1);
-            sub_8015C1C();
+            UpdateNameWindow();
             sub_8015F84();
         }
     }
     else {
         s32 i, n;
 
-        n = sub_8015F44() - 1;
-        for (i = gUnknown_203B1FC->unk1C; i < n; i++) {
-            u8 *ptr = &gUnknown_203B1FC->unkF8[i];
+        n = GetEnteredNameLength() - 1;
+        for (i = sNamingScreen->letterCursorPos; i < n; i++) {
+            u8 *ptr = &sNamingScreen->textPtr[i];
             ptr[0] = ptr[1];
         }
-        gUnknown_203B1FC->unkF8[n] = 0;
+        sNamingScreen->textPtr[n] = 0;
         PlayMenuSoundEffect(1);
-        sub_8015C1C();
+        UpdateNameWindow();
         sub_8015F84();
     }
 
     return FALSE;
 }
 
-void sub_80157D8(void)
+static void SetLetterCursorSpritePosition(void)
 {
     Window *window = &gWindows[1];
 
-    // Note: for cases 4 and 5, the code is identical except for different position structs.
-    if (gUnknown_203B1FC->unk0 == 4) {
+    // Note: for cases NAMING_PASSWORD1 and NAMING_PASSWORD2, the code is identical except for different position structs.
+    if (sNamingScreen->type == NAMING_PASSWORD1) {
         s32 x, y;
 
-        x = gUnknown_80DAFC0[gUnknown_203B1FC->unk1C].x + (window->x * 8);
-        SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, x);
+        x = gUnknown_80DAFC0[sNamingScreen->letterCursorPos].x + (window->x * 8);
+        SpriteSetX((SpriteOAM *) &sNamingScreen->sprite1Attribs, x);
 
-        y = gUnknown_80DAFC0[gUnknown_203B1FC->unk1C].y + (window->y * 8) + 5;
-        SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, y);
+        y = gUnknown_80DAFC0[sNamingScreen->letterCursorPos].y + (window->y * 8) + 5;
+        SpriteSetY((SpriteOAM *) &sNamingScreen->sprite1Attribs, y);
     }
-    else if (gUnknown_203B1FC->unk0 == 5) {
+    else if (sNamingScreen->type == NAMING_PASSWORD2) {
         s32 x, y;
 
-        x = gUnknown_80DB098[gUnknown_203B1FC->unk1C].x + (window->x * 8);
-        SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, x);
+        x = gUnknown_80DB098[sNamingScreen->letterCursorPos].x + (window->x * 8);
+        SpriteSetX((SpriteOAM *) &sNamingScreen->sprite1Attribs, x);
 
-        y = gUnknown_80DB098[gUnknown_203B1FC->unk1C].y + (window->y * 8) + 5;
-        SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, y);
+        y = gUnknown_80DB098[sNamingScreen->letterCursorPos].y + (window->y * 8) + 5;
+        SpriteSetY((SpriteOAM *) &sNamingScreen->sprite1Attribs, y);
     }
     else {
         s32 x, y;
 
-        x = gUnknown_203B1FC->unk1E[gUnknown_203B1FC->unk1C] + (gUnknown_203B1FC->unk8A[gUnknown_203B1FC->unk1C] / 2) + 30 + (window->x * 8);
-        SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, (u16) x);
+        x = sNamingScreen->letterTotalWidths[sNamingScreen->letterCursorPos] + (sNamingScreen->letterWidths[sNamingScreen->letterCursorPos] / 2) + 30 + (window->x * 8);
+        SpriteSetX((SpriteOAM *) &sNamingScreen->sprite1Attribs, (u16) x);
 
         y = (window->y * 8) + 34;
-        SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite1Attribs, y);
+        SpriteSetY((SpriteOAM *) &sNamingScreen->sprite1Attribs, y);
     }
 }
 
-void sub_80158BC(void)
+static void HandleInputCursor(void)
 {
     s32 x, y;
     Window *window = &gWindows[0];
-    u32 var;
+    u32 newPosition;
 
     switch (sub_8012AE8()) {
-        case 7:
-            var = gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].unk0;
+        case INPUT_DPAD_UP:
+            newPosition = gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].unk0;
             break;
-        case 8:
-            var = gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].unk1;
+        case INPUT_DPAD_DOWN:
+            newPosition = gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].unk1;
             break;
-        case 9:
-            var = gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].unk2;
+        case INPUT_DPAD_LEFT:
+            newPosition = gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].unk2;
             break;
-        case 10:
-            var = gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].unk3;
+        case INPUT_DPAD_RIGHT:
+            newPosition = gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].unk3;
             break;
         default:
-            var = gUnknown_203B1FC->unk1A;
+            newPosition = sNamingScreen->inputCursorPosition;
             break;
     }
 
-    if (var != gUnknown_203B1FC->unk1A) {
-        gUnknown_203B1FC->unk1A = var;
+    if (newPosition != sNamingScreen->inputCursorPosition) {
+        sNamingScreen->inputCursorPosition = newPosition;
         PlayMenuSoundEffect(3);
-        gUnknown_203B1FC->unk17 = 8;
+        sNamingScreen->inputCursorFrames = 8;
     }
 
-    x =  gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].x + (window->x * 8) - 5;
-    y =  gUnknown_80DB0F8[gUnknown_203B1FC->unk19][gUnknown_203B1FC->unk1A].y + (window->y * 8) + 1;
-    SpriteSetX((SpriteOAM *) &gUnknown_203B1FC->sprite2Attribs, x);
-    SpriteSetY((SpriteOAM *) &gUnknown_203B1FC->sprite2Attribs, y);
+    x =  gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].x + (window->x * 8) - 5;
+    y =  gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].y + (window->y * 8) + 1;
+    SpriteSetX((SpriteOAM *) &sNamingScreen->sprite2Attribs, x);
+    SpriteSetY((SpriteOAM *) &sNamingScreen->sprite2Attribs, y);
 }
 
 void sub_8015A08(u32 unused)
@@ -719,10 +732,10 @@ void sub_8015A08(u32 unused)
     CallPrepareTextbox_8008C54(0);
     sub_80073B8(0);
 
-    for (i = 0; (r4 = gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk8) != 0x109; i++) {
+    for (i = 0; (r4 = gUnknown_80DB0F8[sNamingScreen->unk19][i].unk8) != 0x109; i++) {
         s32 r5;
 
-        switch (gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].unk6) {
+        switch (gUnknown_80DB0F8[sNamingScreen->unk19][i].unk6) {
             case 1:
                 r5 = 5;
                 break;
@@ -734,7 +747,7 @@ void sub_8015A08(u32 unused)
                 break;
             default:
                 r5 = 7;
-                if (gUnknown_203B1FC->unk4 != 0) {
+                if (sNamingScreen->unk4 != 0) {
                     if (r4 <= 0xFF) {
                         if (sub_803D0F0(r4) == 0xFF) {
                             r5 = 2;
@@ -749,23 +762,23 @@ void sub_8015A08(u32 unused)
 
         if (r4 != 0x108) {
             if (r4 == 0x107) {
-                if (gUnknown_203B1FC->unk18 == 0) {
-                    PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].x + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].y, _("{COLOR GREEN}OVR{RESET}"), 0, '\0');
+                if (sNamingScreen->unk18 == 0) {
+                    PrintStringOnWindow(gUnknown_80DB0F8[sNamingScreen->unk19][i].x + 3, gUnknown_80DB0F8[sNamingScreen->unk19][i].y, _("{COLOR GREEN}OVR{RESET}"), 0, '\0');
                 }
                 else {
-                    PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].x + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].y, _("{COLOR YELLOW}INS{RESET}"), 0, '\0');
+                    PrintStringOnWindow(gUnknown_80DB0F8[sNamingScreen->unk19][i].x + 3, gUnknown_80DB0F8[sNamingScreen->unk19][i].y, _("{COLOR YELLOW}INS{RESET}"), 0, '\0');
                 }
             }
             else if (r4 == 0x20) {
                 sprintfStatic(text1, _("{COLOR}%c{0x81}{0x59}"), r5);
-                PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].x + 1, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].y, text1, 0, '\0');
+                PrintStringOnWindow(gUnknown_80DB0F8[sNamingScreen->unk19][i].x + 1, gUnknown_80DB0F8[sNamingScreen->unk19][i].y, text1, 0, '\0');
             }
             else if (r4 > 0xFF) {
                 sprintfStatic(text2, _("{COLOR}%c%s"), r5, gUnknown_80DB4F4[r4 & 0xFF]);
-                PrintStringOnWindow(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].x + 3, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].y, text2, 0, '\0');
+                PrintStringOnWindow(gUnknown_80DB0F8[sNamingScreen->unk19][i].x + 3, gUnknown_80DB0F8[sNamingScreen->unk19][i].y, text2, 0, '\0');
             }
             else {
-                sub_8012C60(gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].x, gUnknown_80DB0F8[gUnknown_203B1FC->unk19][i].y, (u8) r4, r5, 0);
+                sub_8012C60(gUnknown_80DB0F8[sNamingScreen->unk19][i].x, gUnknown_80DB0F8[sNamingScreen->unk19][i].y, (u8) r4, r5, 0);
             }
         }
     }
@@ -777,13 +790,13 @@ void sub_8015A08(u32 unused)
     sub_80073E0(0);
 }
 
-void sub_8015C1C(void)
+static void UpdateNameWindow(void)
 {
     u8 text[80];
 
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
-    if (gUnknown_203B1FC->unk4 != 0) {
+    if (sNamingScreen->unk4 != 0) {
         AddUnderScoreHighlight(1, 0, 0, 0xE0, 0xE);
         AddUnderScoreHighlight(1, 0, 0x37, 0xE0, 0xE);
         sub_8007A78(1, 0, 0, 0x38, 0xE);
@@ -796,47 +809,47 @@ void sub_8015C1C(void)
         sub_8007A78(1, 0xAF, 0, 0x28, 0xE);
     }
 
-    switch (gUnknown_203B1FC->unk0) {
-        case 0:
+    switch (sNamingScreen->type) {
+        case NAMING_SELF:
             PrintStringOnWindow(8, 5, _("What is your name?"), 1, '\0');
             break;
-        case 2:
+        case NAMING_POKEMON:
             PrintStringOnWindow(8, 5, _("What is this Pokémon's nickname?"), 1, '\0');
             break;
-        case 3:
+        case NAMING_PARTNER:
             PrintStringOnWindow(8, 5, _("What is your partner's nickname?"), 1, '\0');
             break;
-        case 1:
+        case NAMING_TEAM:
             PrintStringOnWindow(8, 5, _("What is your team's name?"), 1, '\0');
             break;
-        case 4:
+        case NAMING_PASSWORD1:
             PrintStringOnWindow(54, 2, _("Please enter the password."), 1, '\0');
             break;
-        case 5:
+        case NAMING_PASSWORD2:
             PrintStringOnWindow(48, 4, _("Please enter the password."), 1, '\0');
             break;
     }
 
-    switch (gUnknown_203B1FC->unk0) {
-        case 4:
-            sub_8015E10(gUnknown_203B1FC->unkF8, 1, 0);
+    switch (sNamingScreen->type) {
+        case NAMING_PASSWORD1:
+            sub_8015E10(sNamingScreen->textPtr, 1, 0);
             break;
-        case 5:
-            sub_8015EB4(gUnknown_203B1FC->unkF8, 1, 0);
+        case NAMING_PASSWORD2:
+            sub_8015EB4(sNamingScreen->textPtr, 1, 0);
             break;
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-            AddDoubleUnderScoreHighlight(1, 38, 33, sub_8016028(), 4);
-            if (sub_8015FEC(gUnknown_203B1FC->unkF8, gUnknown_203B1FC->unk1B) > sub_8016028()) {
-                sprintfStatic(text, _("{COLOR RED}%s{RESET}"), gUnknown_203B1FC->unkF8);
+        case NAMING_SELF:
+        case NAMING_TEAM:
+        case NAMING_POKEMON:
+        case NAMING_PARTNER:
+            AddDoubleUnderScoreHighlight(1, 38, 33, GetMaxPokeNameWidth(), 4);
+            if (GetStrWidth(sNamingScreen->textPtr, sNamingScreen->maxLetters) > GetMaxPokeNameWidth()) {
+                sprintfStatic(text, _("{COLOR RED}%s{RESET}"), sNamingScreen->textPtr);
             }
-            else if (sub_8015F44() == gUnknown_203B1FC->unk1B) {
-                sprintfStatic(text, _("{COLOR CYAN}%s{RESET}"), gUnknown_203B1FC->unkF8);
+            else if (GetEnteredNameLength() == sNamingScreen->maxLetters) {
+                sprintfStatic(text, _("{COLOR CYAN}%s{RESET}"), sNamingScreen->textPtr);
             }
             else {
-                sprintfStatic(text, _("%s"), gUnknown_203B1FC->unkF8);
+                sprintfStatic(text, _("%s"), sNamingScreen->textPtr);
             }
             PrintStringOnWindow(38, 22, text, 1, '\0');
             break;
@@ -845,7 +858,7 @@ void sub_8015C1C(void)
     sub_80073E0(1);
 }
 
-void sub_8015E10(u8 *a0, s32 a1, s32 _a2)
+static void sub_8015E10(u8 *a0, s32 a1, s32 _a2)
 {
     s32 i;
     s32 a2 = (s16) _a2;
@@ -871,7 +884,7 @@ void sub_8015E10(u8 *a0, s32 a1, s32 _a2)
     }
 }
 
-void sub_8015EB4(u8 *a0, s32 a1, s32 _a2)
+static void sub_8015EB4(u8 *a0, s32 a1, s32 _a2)
 {
     s32 i;
     s32 a2 = (s16) _a2;
@@ -891,4 +904,58 @@ void sub_8015EB4(u8 *a0, s32 a1, s32 _a2)
 
         sub_8012C60(gUnknown_80DB098[i].x, gUnknown_80DB098[i].y + a2, a0[i], arg3, a1);
     }
+}
+
+static s32 GetEnteredNameLength(void)
+{
+    s32 len = 0;
+    s32 i;
+
+    for (i = 0; i < sNamingScreen->maxLetters; i++) {
+        if (sNamingScreen->textPtr[i] != '\0') {
+            len = i + 1;
+        }
+        else {
+            break;
+        }
+    }
+
+    return len;
+}
+
+void sub_8015F84(void)
+{
+    u32 uVar2;
+    const unkChar *puVar3;
+    s32 i;
+    s32 total = 0;
+
+    for (i = 0; i < sNamingScreen->maxLetters; i++) {
+        sNamingScreen->letterTotalWidths[i] = total;
+        if (sNamingScreen->textPtr[i] == '\0') {
+            sNamingScreen->letterWidths[i] = 8;
+            return;
+        }
+        uVar2 = ReturnIntFromChar2(sNamingScreen->textPtr[i]);
+        puVar3 = GetCharacter(uVar2);
+        sNamingScreen->letterWidths[i] = puVar3->width;
+        total += puVar3->width;
+    }
+}
+
+s32 GetStrWidth(u8 *buffer, s32 size)
+{
+    s32 i;
+    s32 width = 0;
+
+    for (i = 0; i < size && buffer[i] != '\0'; i++) {
+        width += GetCharacter(ReturnIntFromChar2(buffer[i]))->width;
+    }
+
+    return width;
+}
+
+s32 GetMaxPokeNameWidth(void)
+{
+    return 60;
 }

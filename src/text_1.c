@@ -95,7 +95,7 @@ const unkChar gUnknown_80B86A4 =
 {
     .unk0 = sUnknown_80B865C,
     .unk4 = 0x81A1,
-    .unk6 = 7,
+    .width = 7,
     .unk8 = 10,
     .fill9 = 0,
     .unkA = 0,

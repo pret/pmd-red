@@ -102,7 +102,6 @@ SECTIONS {
         src/menu_input.o(.text);
         src/string_format.o(.text);
         src/code_8015080.o(.text);
-        src/code_8012A18_1.o(.text);
         src/code_801602C.o(.text);
         src/felicity_bank.o(.text);
         src/kangaskhan_storage1.o(.text);

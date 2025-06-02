@@ -9,6 +9,10 @@
 #include "text_util.h"
 #include "text_1.h"
 
+u32 NamingScreen_Init(u32 type, u8 *defaultText);
+u32 NamingScreen_HandleInput(void);
+void NamingScreen_Free(void);
+
 EWRAM_INIT static struct unkStruct_203B200 *sUnknown_203B200 = {NULL};
 
 #include "data/code_801602C.h"
@@ -98,7 +102,7 @@ static void sub_8016110(void)
 {
     switch (sUnknown_203B200->state) {
         case CONFIRM_NAME_MENU_INIT:
-            sub_80151C0(sUnknown_203B200->unk4, sUnknown_203B200->pokeName);
+            NamingScreen_Init(sUnknown_203B200->unk4, sUnknown_203B200->pokeName);
             break;
         case CONFIRM_NAME_MENU_PROMPT:
             BuildConfirmNameMenu();
@@ -135,21 +139,17 @@ static void BuildConfirmNameMenu(void)
 
 static void sub_80161F8(void)
 {
-    s32 length;
-    s32 maxLength;
-
-    if (sub_80154F0() != 3)
+    if (NamingScreen_HandleInput() != 3)
         return;
 
-    sub_80155F0();
-
+    NamingScreen_Free();
     if (IsNameEmpty()) {
         SetConfirmNameMenuState(CONFIRM_NAME_MENU_EMPTY);
     }
     else {
-        length = sub_8015FEC(sUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
-        maxLength = sub_8016028(); // returns 60
-        if (length > maxLength)
+        s32 width = GetStrWidth(sUnknown_203B200->pokeName, POKEMON_NAME_LENGTH);
+        s32 maxWidth = GetMaxPokeNameWidth(); // returns 60
+        if (width > maxWidth)
             SetConfirmNameMenuState(CONFIRM_NAME_MENU_TOO_LONG);
         else
             SetConfirmNameMenuState(CONFIRM_NAME_MENU_PROMPT);

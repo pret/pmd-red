@@ -8,7 +8,7 @@ typedef struct unkChar
 {
     const u16 *unk0;
     u16 unk4;
-    s16 unk6;
+    s16 width;
     u8 unk8;
     u8 fill9;
     u8 unkA;

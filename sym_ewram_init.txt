@@ -25,7 +25,6 @@
 .include "src/quick_save_write.o"
 .include "src/string_format.o"
 .include "src/code_8015080.o"
-.include "src/code_8012A18_1.o"
 .include "src/code_801602C.o"
 .include "src/felicity_bank.o"
 .include "src/kangaskhan_storage1.o"

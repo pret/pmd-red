@@ -12,7 +12,6 @@
 void sub_80140DC(void);
 void sub_8014114(void);
 s32 sub_80144A4(s32 *);
-u32 sub_80151C0(u32, u8 *);
 u32 sub_80154F0(void);
 void sub_80155F0(void);
 
