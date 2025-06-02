@@ -28,8 +28,8 @@ void sub_80842F0(void)
     for (i = 0; i < MAX_ACCEPTED_JOBS; i++) {
         WonderMail *jobSlot = GetJobSlotInfo(i);
         if (jobSlot->mailType == MAIL_TYPE_TAKEN_JOB) {
-            if (gDungeon->unk644.dungeonLocation.id == jobSlot->unk4.dungeon.id
-                && gDungeon->unk644.dungeonLocation.floor == jobSlot->unk4.dungeon.floor
+            if (gDungeon->unk644.dungeonLocation.id == jobSlot->dungeonSeed.location.id
+                && gDungeon->unk644.dungeonLocation.floor == jobSlot->dungeonSeed.location.floor
                 && jobSlot->missionType != 3)
             {
                 if (jobSlot->missionType == 4) {
@@ -57,8 +57,8 @@ void sub_80843BC(s32 id)
     for (i = 0; i < MAX_ACCEPTED_JOBS; i++) {
         WonderMail *jobSlot = GetJobSlotInfo(i);
         if (jobSlot->mailType == MAIL_TYPE_TAKEN_JOB) {
-            if (gDungeon->unk644.dungeonLocation.id == jobSlot->unk4.dungeon.id
-                && (gDungeon->unk644.dungeonLocation.floor == jobSlot->unk4.dungeon.floor)
+            if (gDungeon->unk644.dungeonLocation.id == jobSlot->dungeonSeed.location.id
+                && (gDungeon->unk644.dungeonLocation.floor == jobSlot->dungeonSeed.location.floor)
                 && (jobSlot->missionType == 0 || jobSlot->missionType == 4 || jobSlot->missionType == 2 || jobSlot->missionType == 1)
                 && id_s32 == jobSlot->targetSpecies) {
                     jobSlot->mailType = MAIL_TYPE_UNK8;
@@ -210,7 +210,7 @@ void sub_8084778(void)
 
     for (i = 0; i < MAX_ACCEPTED_JOBS; i++) {
         wm = GetJobSlotInfo(i);
-        if (wm->mailType == MAIL_TYPE_TAKEN_JOB && gDungeon->unk644.dungeonLocation.id == wm->unk4.dungeon.id && wm->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT) {
+        if (wm->mailType == MAIL_TYPE_TAKEN_JOB && gDungeon->unk644.dungeonLocation.id == wm->dungeonSeed.location.id && wm->missionType == WONDER_MAIL_MISSION_TYPE_ESCORT_CLIENT) {
             CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[3], wm->targetSpecies);
             break;
         }

@@ -629,7 +629,7 @@ u32 ConvertMenutoRescuePasswordState(u32 unused)
 u32 sub_8039068(u32 mailMode, u8 *passwordBuffer, unkStruct_203B480 *param_3)
 {
   if ( (!sub_803D204(passwordBuffer, param_3)) || (WONDER_MAIL_TYPE_OKD < param_3->mailType) ||
-       (param_3->unk4.dungeon.floor >= GetDungeonFloorCount(param_3->unk4.dungeon.id)) ||
+       (param_3->dungeonSeed.location.floor >= GetDungeonFloorCount(param_3->dungeonSeed.location.id)) ||
        (param_3->clientSpecies == MONSTER_NONE) || (MONSTER_MAX - 1 < param_3->clientSpecies) ||
        (IsInvalidItemReward(param_3->item.id))) {
         return PASSWORD_ENTRY_INCORRECT_PASSWORD;

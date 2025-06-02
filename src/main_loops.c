@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/bg_music.h"
 #include "constants/main_menu.h"
-#include "structs/str_dungeon_8042F6C.h"
+#include "structs/str_dungeon_setup.h"
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
@@ -45,6 +45,11 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "text_util.h"
+#include "decompress_at.h"
+#include "world_map.h"
+#include "friend_areas_map.h"
+#include "structs/str_dungeon_setup.h"
+#include "constants/friend_area.h"
 
 typedef struct unkTalkTable
 {
@@ -65,19 +70,54 @@ static EWRAM_INIT PersonalityRelated sPersonalityRelated_203B040 = {
     .PartnerNick = {""},
 };
 
-#include "data/main_loops.h"
-
 static void LoadTitleScreen(void);
 static void NDS_LoadOverlay_GroundMain();
-static u32 sub_80009D0(u32 param_1);
-/* static */ // TODO: Uncomment
-void sub_80011E8(u8 *param_1);
-static void LoadAndRunDungeon_Async(UnkStruct_RunDungeon *r0);
-/* static */ // TODO: Uncomment
-u32 xxx_script_related_8001334(u32 r0);
+static u32 RunGameMode_Async(u32 param_1);
+static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId);
+static void sub_80011E8(DungeonSetupSubstruct *info);
+static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *param_1);
+static u8 sub_8001170(void);
+static void RemoveMoneyAndRandomItems(void);
+static void RemoveAllMoneyAndItems(void);
+static void LoadAndRunDungeon_Async(DungeonSetupStruct *r0);
+static u32 xxx_script_related_8001334(u32 r0);
 static void MainLoops_RunFrameActions(u32 unused);
 
+extern u8 sub_80990EC(DungeonSetupInfo *param_1, s32 param_2);
+extern bool8 sub_8096A08(u8 dungeon, PokemonStruct1 *pokemon);
+extern u8 sub_80991E0(DungeonSetupInfo *param_1,short *param_2);
 extern u32 xxx_script_related_8098468(u32);
+extern void IncrementNumAdventures(void);
+extern void sub_8096BD0(void);
+extern bool8 IsEnterWithoutGameSave(u8 dungeon);
+
+static const unkTalkTable sBaseKindTable[17] = {
+    [0] = { .unk0 = 0, .species = MONSTER_PIKACHU },
+    [1] = { .unk0 = 1, .species = MONSTER_MEOWTH },
+    [2] = { .unk0 = 2, .species = MONSTER_EEVEE },
+    [3] = { .unk0 = 3, .species = MONSTER_SKITTY },
+    [4] = { .unk0 = 4, .species = MONSTER_SQUIRTLE },
+    [5] = { .unk0 = 5, .species = MONSTER_TOTODILE },
+    [6] = { .unk0 = 6, .species = MONSTER_MUDKIP },
+    [7] = { .unk0 = 7, .species = MONSTER_PSYDUCK },
+    [8] = { .unk0 = 8, .species = MONSTER_CHARMANDER },
+    [9] = { .unk0 = 9, .species = MONSTER_TORCHIC },
+    [10] = { .unk0 = 10, .species = MONSTER_CYNDAQUIL },
+    [11] = { .unk0 = 11, .species = MONSTER_CUBONE },
+    [12] = { .unk0 = 12, .species = MONSTER_MACHOP },
+    [13] = { .unk0 = 13, .species = MONSTER_BULBASAUR },
+    [14] = { .unk0 = 14, .species = MONSTER_CHIKORITA },
+    [15] = { .unk0 = 15, .species = MONSTER_TREECKO },
+    [16] = { .unk0 = 0, .species = MONSTER_NONE },
+};
+
+static const unkTalkTable sTalkKindTable[5] = {
+    [0] = { .unk0 = 1, .species = MONSTER_SQUIRTLE },
+    [1] = { .unk0 = 1, .species = MONSTER_TOTODILE },
+    [2] = { .unk0 = 3, .species = MONSTER_TORCHIC },
+    [3] = { .unk0 = 3, .species = MONSTER_CHIKORITA },
+    [4] = { .unk0 = 2, .species = MONSTER_NONE },
+};
 
 // arm9.bin::0200E0A8
 void GameLoop(void)
@@ -107,7 +147,7 @@ void GameLoop(void)
     sub_800CD64(0x8000, FALSE);
     sub_8012284();
     InitializeGameOptions(TRUE);
-    SetWindowTitle(sPMDBuildVersion);
+    SetWindowTitle(_("PKDi ver 1.0 [Apr 28 2006] 16:37:54"));
     sub_800DAAC();
     SetSavingIconCoords(NULL);
 
@@ -213,21 +253,21 @@ void GameLoop(void)
                 s32 mailIndex = GetFirstIndexofMailType(7);
                 if (mailIndex != -1) {
                     DeleteMailAtIndex(mailIndex);
-                    tmp3 = sub_80009D0(2);
+                    tmp3 = RunGameMode_Async(2);
                 }
                 else
-                    tmp3 = sub_80009D0(1);
+                    tmp3 = RunGameMode_Async(1);
 
                 break;
             }
             case 4: {
-                tmp3 = sub_80009D0(3);
+                tmp3 = RunGameMode_Async(3);
                 break;
             }
             case MENU_NEW_GAME: {
                 sub_80122A8();
                 nullsub_33();
-                tmp3 = sub_80009D0(0);
+                tmp3 = RunGameMode_Async(0);
                 break;
             }
         }
@@ -263,120 +303,42 @@ static void MainLoops_RunFrameActions(u32 unused)
     // Extra call here in blue. Seems to be for 2nd screen sprites
 }
 
-// https://decomp.me/scratch/w6tN1 (82.93%)
-// arm9.bin::0200DE18
-NAKED
+typedef struct TitleMenuFile
+{
+    /* 0x0 */ u16 tilemap[2 * 32 * 32];
+    /* 0x1000 */ u8 vramStuff[0x4B20];
+} TitleMenuFile;
+
 static void LoadTitleScreen(void)
 {
-    asm_unified(
-"	push {r4-r7,lr}\n"
-"	mov r7, r9\n"
-"	mov r6, r8\n"
-"	push {r6,r7}\n"
-"	sub sp, 0x18\n"
-"	mov r1, sp\n"
-"	ldr r0, _08000708\n"
-"	ldm r0!, {r2-r4}\n"
-"	stm r1!, {r2-r4}\n"
-"	add r5, sp, 0xC\n"
-"	adds r1, r5, 0\n"
-"	ldr r0, _0800070C\n"
-"	ldm r0!, {r2-r4}\n"
-"	stm r1!, {r2-r4}\n"
-"	ldr r0, _08000710\n"
-"	movs r1, 0\n"
-"	bl MemoryAlloc\n"
-"	adds r7, r0, 0\n"
-"	movs r0, 0x3\n"
-"	bl RandInt\n"
-"	adds r4, r0, 0\n"
-"	lsls r4, 2\n"
-"	adds r5, r4\n"
-"	ldr r0, [r5]\n"
-"	ldr r5, _08000714\n"
-"	adds r1, r5, 0\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	ldr r1, _08000718\n"
-"	str r0, [r1]\n"
-"	mov r1, sp\n"
-"	adds r0, r1, r4\n"
-"	ldr r0, [r0]\n"
-"	adds r1, r5, 0\n"
-"	bl OpenFileAndGetFileDataPtr\n"
-"	mov r8, r0\n"
-"	adds r0, r7, 0\n"
-"	movs r1, 0\n"
-"	mov r2, r8\n"
-"	bl DecompressATFile\n"
-"	movs r2, 0\n"
-"	ldr r0, _0800071C\n"
-"	movs r3, 0xC0\n"
-"	lsls r3, 5\n"
-"	adds r3, r0\n"
-"	mov r9, r3\n"
-"	movs r4, 0x80\n"
-"	lsls r4, 5\n"
-"	adds r4, r0\n"
-"	mov r12, r4\n"
-"_080006A0:\n"
-"	movs r5, 0\n"
-"	lsls r1, r2, 6\n"
-"	adds r6, r2, 0x1\n"
-"	mov r0, r9\n"
-"	adds r4, r1, r0\n"
-"	mov r2, r12\n"
-"	adds r3, r1, r2\n"
-"	movs r2, 0x80\n"
-"	lsls r2, 4\n"
-"	adds r0, r7, r2\n"
-"	adds r2, r1, r0\n"
-"	adds r1, r7\n"
-"_080006B8:\n"
-"	ldrh r0, [r1]\n"
-"	strh r0, [r3]\n"
-"	ldrh r0, [r2]\n"
-"	strh r0, [r4]\n"
-"	adds r4, 0x2\n"
-"	adds r3, 0x2\n"
-"	adds r2, 0x2\n"
-"	adds r1, 0x2\n"
-"	adds r5, 0x1\n"
-"	cmp r5, 0x1F\n"
-"	ble _080006B8\n"
-"	adds r2, r6, 0\n"
-"	cmp r2, 0x1F\n"
-"	ble _080006A0\n"
-"	movs r0, 0x2\n"
-"	bl sub_80098F8\n"
-"	movs r0, 0x3\n"
-"	bl sub_80098F8\n"
-"	ldr r0, _08000720\n"
-"	movs r3, 0x80\n"
-"	lsls r3, 5\n"
-"	adds r1, r7, r3\n"
-"	ldr r2, _08000724\n"
-"	bl CpuCopy\n"
-"	mov r0, r8\n"
-"	bl CloseFile\n"
-"	adds r0, r7, 0\n"
-"	bl MemoryFree\n"
-"	add sp, 0x18\n"
-"	pop {r3,r4}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n"
-"	.align 2, 0\n"
-"_08000708: .4byte sLoadScreenBackgroundFileNames\n"
-"_0800070C: .4byte sLoadScreenBackgroundPaletteFileNames\n"
-"_08000710: .4byte 0x00005b20\n"
-"_08000714: .4byte gTitleMenuFileArchive\n"
-"_08000718: .4byte sTitlePaletteFile\n"
-"_0800071C: .4byte gBgTilemaps\n"
-"_08000720: .4byte 0x06008000\n"
-"_08000724: .4byte 0x00004b20");
+    const u8 * renBG[3] = {"titlen0", "titlen1", "titlen2"};
+    const u8 * renPal[3] = {"titlen0p", "titlen1p", "titlen2p"};
+    OpenedFile *bgFile;
+    s32 i, j;
+    TitleMenuFile *stru = MemoryAlloc(sizeof(TitleMenuFile), 0);
+    s32 rnd = RandInt(3);
+
+    sTitlePaletteFile = OpenFileAndGetFileDataPtr(renPal[rnd], &gTitleMenuFileArchive);
+    bgFile = OpenFileAndGetFileDataPtr(renBG[rnd], &gTitleMenuFileArchive);
+    DecompressATFile(&stru->tilemap, 0, bgFile);
+
+    for (i = 0; i < 32; i++) {
+        for (j = 0; j < 32; j++) {
+            u16 *ptr = stru->tilemap;
+            gBgTilemaps[2][i][j] = ptr[i * 32 + j];
+            gBgTilemaps[3][i][j] = ptr[i * 32 + j + (32 * 32)];
+        }
+    }
+
+    sub_80098F8(2);
+    sub_80098F8(3);
+
+    CpuCopy((u32 *)(VRAM + 0x8000), stru->vramStuff, sizeof(stru->vramStuff));
+    CloseFile(bgFile);
+    MemoryFree(stru);
 }
+
+#include "data/main_loops.h"
 
 // arm9.bin::0200ED08
 s32 sub_8000728(void)
@@ -385,8 +347,7 @@ s32 sub_8000728(void)
 }
 
 // arm9.bin::0200DB58
-/* static */ // TODO: uncomment
-void QuickSave_Async(u32 mode)
+static void QuickSave_Async(u32 mode)
 {
     s32 saveStatus;
     s32 counter;
@@ -483,7 +444,7 @@ void QuickSave_Async(u32 mode)
             case SAVE_FAILED: {
                 s32 temp;
 
-                if (sub_80144A4(&temp) == 0) 
+                if (sub_80144A4(&temp) == 0)
                     saveStatus = SAVE_NO_STATUS;
                 break;
             }
@@ -499,8 +460,7 @@ void QuickSave_Async(u32 mode)
 }
 
 // arm9.bin::0200D998
-/*static*/ // TODO: Uncomment
-void sub_80008C0_Async(u32 errorKind)
+static void sub_80008C0_Async(u32 errorKind)
 {
     s32 saveStatus = SAVE_COMPLETED;
     s32 counter = 0;
@@ -583,659 +543,358 @@ void sub_80008C0_Async(u32 errorKind)
     MainLoops_RunFrameActions(0);
 }
 
-// https://decomp.me/scratch/dlKUt (66.34%)
-// arm9.bin::0200D1E0
-NAKED
-static u32 sub_80009D0(u32 param_1)
+enum
 {
-    asm_unified(
-"	push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	ldr r4, _08000A04\n"
-"	add sp, r4\n"
-"	adds r4, r0, 0\n"
-"	movs r0, 0\n"
-"	movs r1, 0x18\n"
-"	bl GetScriptVarValue\n"
-"	adds r7, r0, 0\n"
-"	movs r0, 0\n"
-"	mov r10, r0\n"
-"	bl sub_801180C\n"
-"	movs r0, 0x10\n"
-"	bl FadeOutAllMusic\n"
-"	cmp r7, 0x7\n"
-"	bne _08000A30\n"
-"	cmp r4, 0x2\n"
-"	bne _08000A08\n"
-"	movs r7, 0x8\n"
-"	b _08000A3A\n"
-"	.align 2, 0\n"
-"_08000A04: .4byte 0xfffffdd4\n"
-"_08000A08:\n"
-"	cmp r4, 0x3\n"
-"	bne _08000A3A\n"
-"	movs r7, 0xB\n"
-"	movs r0, 0\n"
-"	movs r1, 0x18\n"
-"	movs r2, 0xB\n"
-"	bl SetScriptVarValue\n"
-"	bl sub_8096BD0\n"
-"	movs r0, 0x3\n"
-"	bl QuickSave_Async\n"
-"	b _08000A3A\n"
-"_08000A24:\n"
-"	movs r3, 0x1\n"
-"	mov r10, r3\n"
-"	b _08000EC6\n"
-"_08000A2A:\n"
-"	movs r0, 0x1\n"
-"	mov r10, r0\n"
-"	b _08000EC6\n"
-"_08000A30:\n"
-"	cmp r7, 0\n"
-"	beq _08000A3A\n"
-"	cmp r7, 0xB\n"
-"	beq _08000A3A\n"
-"	movs r7, 0x1\n"
-"_08000A3A:\n"
-"	movs r0, 0\n"
-"	movs r1, 0x41\n"
-"	bl ClearScriptVarArray\n"
-"_08000A42:\n"
-"	cmp r7, 0x4\n"
-"	bne _08000AB6\n"
-"	movs r0, 0\n"
-"	movs r1, 0xD\n"
-"	bl GetScriptVarValue\n"
-"	lsls r0, 16\n"
-"	asrs r0, 16\n"
-"	bl sub_8002658\n"
-"	adds r4, r0, 0\n"
-"	lsls r4, 24\n"
-"	lsrs r4, 24\n"
-"	ldr r0, _08000A9C\n"
-"	movs r1, 0x8\n"
-"	bl MemoryAlloc\n"
-"	str r0, [sp, 0x8]\n"
-"	mov r0, sp\n"
-"	strb r4, [r0, 0x4]\n"
-"	movs r0, 0x9\n"
-"	bl sub_80023E4\n"
-"	mov r1, sp\n"
-"	strb r0, [r1, 0x5]\n"
-"	mov r0, sp\n"
-"	bl ShowFriendAreasMap_Async\n"
-"	ldr r0, [sp, 0x8]\n"
-"	bl MemoryFree\n"
-"	mov r0, sp\n"
-"	ldrb r0, [r0, 0xC]\n"
-"	cmp r0, 0x3A\n"
-"	beq _08000B70\n"
-"	mov r0, sp\n"
-"	ldrb r0, [r0, 0xC]\n"
-"	cmp r0, 0\n"
-"	beq _08000AA0\n"
-"	bl sub_8002694\n"
-"	lsls r0, 16\n"
-"	asrs r2, r0, 16\n"
-"	b _08000AA2\n"
-"	.align 2, 0\n"
-"_08000A9C: .4byte 0x00004e30\n"
-"_08000AA0:\n"
-"	movs r2, 0x9\n"
-"_08000AA2:\n"
-"	movs r0, 0\n"
-"	movs r1, 0xD\n"
-"	bl SetScriptVarValue\n"
-"	movs r0, 0\n"
-"	movs r1, 0xE\n"
-"	movs r2, 0\n"
-"	bl SetScriptVarValue\n"
-"	b _08000B70\n"
-"_08000AB6:\n"
-"	cmp r7, 0x5\n"
-"	bne _08000B9C\n"
-"	movs r0, 0\n"
-"	movs r1, 0x12\n"
-"	bl GetScriptVarValue\n"
-"	lsls r0, 16\n"
-"	asrs r0, 16\n"
-"	mov r8, r0\n"
-"	bl sub_80A2740\n"
-"	lsls r0, 24\n"
-"	lsrs r6, r0, 24\n"
-"	movs r4, 0\n"
-"	ldr r5, _08000B18\n"
-"	add r5, sp\n"
-"_08000AD6:\n"
-"	lsls r0, r4, 24\n"
-"	lsrs r0, 24\n"
-"	bl sub_80A28F0\n"
-"	adds r1, r5, r4\n"
-"	strb r0, [r1]\n"
-"	adds r4, 0x1\n"
-"	cmp r4, 0x3E\n"
-"	ble _08000AD6\n"
-"	cmp r6, 0x63\n"
-"	beq _08000B70\n"
-"	add r4, sp, 0xB8\n"
-"	movs r0, 0x3F\n"
-"	strb r0, [r4, 0x4]\n"
-"	add r0, sp, 0xC0\n"
-"	adds r1, r6, 0\n"
-"	bl sub_80011CC\n"
-"	ldrb r1, [r4, 0xD]\n"
-"	add r0, sp, 0x128\n"
-"	strb r1, [r0]\n"
-"	mov r0, r8\n"
-"	bl sub_80A2750\n"
-"	lsls r0, 16\n"
-"	asrs r0, 16\n"
-"	adds r5, r4, 0\n"
-"	cmp r0, 0x1\n"
-"	beq _08000B1C\n"
-"	cmp r0, 0x2\n"
-"	beq _08000B3C\n"
-"	b _08000B50\n"
-"	.align 2, 0\n"
-"_08000B18: .4byte 0x00000129\n"
-"_08000B1C:\n"
-"	add r4, sp, 0x170\n"
-"	add r0, sp, 0x174\n"
-"	mov r1, r8\n"
-"	bl sub_80990EC\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _08000B50\n"
-"	ldrb r0, [r4, 0x10]\n"
-"	strb r0, [r5, 0x14]\n"
-"	add r0, sp, 0xD0\n"
-"	add r1, sp, 0x18C\n"
-"	movs r2, 0x58\n"
-"	bl memcpy\n"
-"	b _08000B50\n"
-"_08000B3C:\n"
-"	ldrb r0, [r5, 0x8]\n"
-"	add r1, sp, 0xD0\n"
-"	bl sub_8096A08\n"
-"	lsls r0, 24\n"
-"	lsrs r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _08000B4E\n"
-"	movs r0, 0x1\n"
-"_08000B4E:\n"
-"	strb r0, [r5, 0x14]\n"
-"_08000B50:\n"
-"	ldr r0, _08000B74\n"
-"	movs r1, 0x8\n"
-"	bl MemoryAlloc\n"
-"	add r4, sp, 0x168\n"
-"	str r0, [r4]\n"
-"	adds r0, r5, 0\n"
-"	bl ShowWorldMap_Async\n"
-"	ldr r0, [r4]\n"
-"	bl MemoryFree\n"
-"	add r0, sp, 0x16C\n"
-"	ldrb r0, [r0]\n"
-"	cmp r0, 0\n"
-"	bne _08000B78\n"
-"_08000B70:\n"
-"	movs r7, 0x2\n"
-"	b _08000A42\n"
-"	.align 2, 0\n"
-"_08000B74: .4byte 0x00006474\n"
-"_08000B78:\n"
-"	movs r0, 0\n"
-"	movs r1, 0x13\n"
-"	mov r2, r8\n"
-"	bl SetScriptVarValue\n"
-"	ldr r1, _08000B98\n"
-"	movs r0, 0x2\n"
-"	str r0, [r1]\n"
-"	movs r0, 0x4\n"
-"	bl sub_800A8F8\n"
-"	movs r0, 0x5\n"
-"	bl xxx_script_related_8001334\n"
-"	adds r5, r0, 0\n"
-"	b _08000BEC\n"
-"	.align 2, 0\n"
-"_08000B98: .4byte sUnknown_203B03C\n"
-"_08000B9C:\n"
-"	cmp r7, 0x8\n"
-"	bne _08000BA4\n"
-"	movs r5, 0\n"
-"	b _08000BEC\n"
-"_08000BA4:\n"
-"	cmp r7, 0x7\n"
-"	bne _08000BAC\n"
-"	movs r5, 0x2\n"
-"	b _08000BEC\n"
-"_08000BAC:\n"
-"	cmp r7, 0xB\n"
-"	bne _08000BB6\n"
-"	bl sub_80012C0\n"
-"	b _08000BBE\n"
-"_08000BB6:\n"
-"	cmp r7, 0xC\n"
-"	bne _08000BBE\n"
-"	bl sub_8001248\n"
-"_08000BBE:\n"
-"	ldr r1, _08000BE0\n"
-"	movs r0, 0x2\n"
-"	str r0, [r1]\n"
-"	movs r0, 0x4\n"
-"	bl sub_800A8F8\n"
-"	adds r0, r7, 0\n"
-"	bl xxx_script_related_8001334\n"
-"	adds r5, r0, 0\n"
-"	cmp r5, 0xE\n"
-"	bne _08000BD8\n"
-"	b _08000EC6\n"
-"_08000BD8:\n"
-"	cmp r5, 0x5\n"
-"	bne _08000BE4\n"
-"	movs r7, 0x4\n"
-"	b _08000A42\n"
-"	.align 2, 0\n"
-"_08000BE0: .4byte sUnknown_203B03C\n"
-"_08000BE4:\n"
-"	cmp r5, 0x6\n"
-"	bne _08000BEC\n"
-"	movs r7, 0x5\n"
-"	b _08000A42\n"
-"_08000BEC:\n"
-"	add r6, sp, 0x170\n"
-"	movs r4, 0\n"
-"	strb r4, [r6, 0x11]\n"
-"	strb r4, [r6, 0x10]\n"
-"	movs r3, 0xC6\n"
-"	lsls r3, 1\n"
-"	add r3, sp\n"
-"	mov r8, r3\n"
-"	mov r0, r8\n"
-"	movs r1, 0\n"
-"	movs r2, 0x58\n"
-"	bl MemoryFill8\n"
-"	movs r0, 0\n"
-"	mov r9, r0\n"
-"	strh r4, [r6, 0x24]\n"
-"	cmp r5, 0x7\n"
-"	beq _08000C3C\n"
-"	cmp r5, 0x8\n"
-"	bne _08000C38\n"
-"	add r0, sp, 0x174\n"
-"	add r1, sp, 0x228\n"
-"	bl sub_80991E0\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _08000C4C\n"
-"	ldrb r0, [r6, 0x4]\n"
-"	mov r1, r8\n"
-"	bl sub_8096A08\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _08000C32\n"
-"	b _08000D98\n"
-"_08000C32:\n"
-"	movs r0, 0x1\n"
-"	strb r0, [r6, 0x10]\n"
-"	b _08000D98\n"
-"_08000C38:\n"
-"	cmp r5, 0xA\n"
-"	bne _08000C52\n"
-"_08000C3C:\n"
-"	add r0, sp, 0x174\n"
-"	add r1, sp, 0x228\n"
-"	bl sub_80991E0\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _08000C4C\n"
-"	b _08000D98\n"
-"_08000C4C:\n"
-"	movs r5, 0xD\n"
-"	movs r7, 0x9\n"
-"	b _08000D98\n"
-"_08000C52:\n"
-"	cmp r5, 0x9\n"
-"	bne _08000C6C\n"
-"	add r0, sp, 0x174\n"
-"	add r1, sp, 0x228\n"
-"	bl sub_80991E0\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _08000C66\n"
-"	b _08000D98\n"
-"_08000C66:\n"
-"	movs r5, 0xB\n"
-"	movs r7, 0xC\n"
-"	b _08000D98\n"
-"_08000C6C:\n"
-"	cmp r5, 0\n"
-"	bne _08000D04\n"
-"	bl sub_8011FA8\n"
-"	adds r1, r0, 0\n"
-"	ldr r0, _08000CA0\n"
-"	cmp r1, r0\n"
-"	bne _08000CC8\n"
-"	movs r2, 0x1\n"
-"	strb r2, [r6, 0x11]\n"
-"	strb r2, [r6, 0x8]\n"
-"	mov r3, r9\n"
-"	strb r3, [r6, 0xF]\n"
-"	ldr r0, _08000CA4\n"
-"	ldr r1, [r0]\n"
-"	movs r3, 0xC\n"
-"	ldrsh r0, [r1, r3]\n"
-"	cmp r0, 0\n"
-"	beq _08000CA8\n"
-"	strb r2, [r6, 0x10]\n"
-"	adds r1, 0x4\n"
-"	mov r0, r8\n"
-"	movs r2, 0x58\n"
-"	bl memcpy\n"
-"	b _08000CAC\n"
-"	.align 2, 0\n"
-"_08000CA0: .4byte 0x000f1207\n"
-"_08000CA4: .4byte gUnknown_203B484\n"
-"_08000CA8:\n"
-"	mov r0, r9\n"
-"	strb r0, [r6, 0x10]\n"
-"_08000CAC:\n"
-"	ldr r4, _08000CC4\n"
-"	ldr r0, [r4]\n"
-"	adds r0, 0x4\n"
-"	movs r1, 0\n"
-"	movs r2, 0x58\n"
-"	bl MemoryFill8\n"
-"	ldr r1, [r4]\n"
-"	movs r0, 0\n"
-"	strh r0, [r1, 0xC]\n"
-"	b _08000CE4\n"
-"	.align 2, 0\n"
-"_08000CC4: .4byte gUnknown_203B484\n"
-"_08000CC8:\n"
-"	ldr r0, _08000CD8\n"
-"	cmp r1, r0\n"
-"	bne _08000CDC\n"
-"	movs r5, 0x1\n"
-"	movs r7, 0xB\n"
-"	bl sub_8096BD0\n"
-"	b _08000CE4\n"
-"	.align 2, 0\n"
-"_08000CD8: .4byte 0x000f1208\n"
-"_08000CDC:\n"
-"	movs r5, 0x1\n"
-"	movs r7, 0xB\n"
-"	bl sub_8096BD0\n"
-"_08000CE4:\n"
-"	cmp r5, 0x1\n"
-"	bne _08000D98\n"
-"	ldr r4, _08000D00\n"
-"	ldr r0, [r4]\n"
-"	adds r0, 0x4\n"
-"	movs r1, 0\n"
-"	movs r2, 0x58\n"
-"	bl MemoryFill8\n"
-"	ldr r1, [r4]\n"
-"	movs r0, 0\n"
-"	strh r0, [r1, 0xC]\n"
-"	b _08000D98\n"
-"	.align 2, 0\n"
-"_08000D00: .4byte gUnknown_203B484\n"
-"_08000D04:\n"
-"	cmp r5, 0x2\n"
-"	bne _08000D98\n"
-"	bl sub_8011C1C\n"
-"	cmp r0, 0x2\n"
-"	bne _08000D34\n"
-"	bl sub_8011FA8\n"
-"	adds r1, r0, 0\n"
-"	movs r0, 0x1\n"
-"	strb r0, [r6, 0x8]\n"
-"	mov r3, r9\n"
-"	strb r3, [r6, 0x11]\n"
-"	ldr r0, _08000D30\n"
-"	cmp r1, r0\n"
-"	beq _08000D36\n"
-"	adds r0, 0x1\n"
-"	movs r5, 0x1\n"
-"	movs r7, 0xB\n"
-"	bl sub_8096BD0\n"
-"	b _08000D36\n"
-"	.align 2, 0\n"
-"_08000D30: .4byte 0x000f1207\n"
-"_08000D34:\n"
-"	movs r5, 0x3\n"
-"_08000D36:\n"
-"	cmp r5, 0x3\n"
-"	bne _08000D7A\n"
-"	bl sub_8001170\n"
-"	lsls r0, 24\n"
-"	lsrs r4, r0, 24\n"
-"	movs r5, 0x1\n"
-"	movs r7, 0xB\n"
-"	bl sub_8096BD0\n"
-"	cmp r4, 0x3F\n"
-"	beq _08000D70\n"
-"	cmp r4, 0x63\n"
-"	beq _08000D70\n"
-"	adds r0, r4, 0\n"
-"	bl IsEnterWithoutGameSave\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _08000D70\n"
-"	bl sub_8011C1C\n"
-"	cmp r0, 0x2\n"
-"	bne _08000D6C\n"
-"	movs r5, 0x3\n"
-"	movs r7, 0x7\n"
-"	b _08000D70\n"
-"_08000D6C:\n"
-"	movs r5, 0xC\n"
-"	movs r7, 0xA\n"
-"_08000D70:\n"
-"	cmp r5, 0x1\n"
-"	bne _08000D98\n"
-"	bl sub_8011C1C\n"
-"	b _08000D98\n"
-"_08000D7A:\n"
-"	cmp r5, 0x4\n"
-"	bne _08000D8E\n"
-"	movs r5, 0x1\n"
-"	movs r7, 0xB\n"
-"	bl sub_8096BD0\n"
-"	movs r0, 0x1\n"
-"	bl sub_80008C0_Async\n"
-"	b _08000D98\n"
-"_08000D8E:\n"
-"	cmp r5, 0x1\n"
-"	bne _08000D98\n"
-"	movs r7, 0xB\n"
-"	bl sub_8096BD0\n"
-"_08000D98:\n"
-"	subs r0, r5, 0x7\n"
-"	cmp r0, 0x3\n"
-"	bls _08000DAC\n"
-"	cmp r5, 0\n"
-"	beq _08000E1E\n"
-"	cmp r5, 0x2\n"
-"	beq _08000DAC\n"
-"	cmp r5, 0x3\n"
-"	beq _08000DAC\n"
-"	b _08000A42\n"
-"_08000DAC:\n"
-"	cmp r5, 0\n"
-"	beq _08000E1E\n"
-"	cmp r5, 0x2\n"
-"	beq _08000E1E\n"
-"	cmp r5, 0x3\n"
-"	beq _08000E1E\n"
-"	bl sub_8001170\n"
-"	lsls r0, 24\n"
-"	lsrs r6, r0, 24\n"
-"	bl IncrementNumAdventures\n"
-"	cmp r5, 0x9\n"
-"	bne _08000E00\n"
-"	ldr r4, _08000DF4\n"
-"	add r4, sp\n"
-"	adds r0, r4, 0\n"
-"	bl sub_8099394\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _08000E00\n"
-"	ldrb r0, [r4]\n"
-"	bl GetMailatIndex\n"
-"	adds r2, r0, 0\n"
-"	adds r0, 0x2C\n"
-"	ldrb r1, [r0]\n"
-"	ldrb r0, [r0]\n"
-"	lsls r0, 24\n"
-"	asrs r0, 24\n"
-"	cmp r0, 0x1\n"
-"	ble _08000DF8\n"
-"	subs r1, 0x1\n"
-"	b _08000DFA\n"
-"	.align 2, 0\n"
-"_08000DF4: .4byte 0x0000022a\n"
-"_08000DF8:\n"
-"	movs r1, 0\n"
-"_08000DFA:\n"
-"	adds r0, r2, 0\n"
-"	adds r0, 0x2C\n"
-"	strb r1, [r0]\n"
-"_08000E00:\n"
-"	cmp r6, 0x3F\n"
-"	bne _08000E0C\n"
-"	movs r0, 0\n"
-"	bl QuickSave_Async\n"
-"	b _08000E1E\n"
-"_08000E0C:\n"
-"	adds r0, r6, 0\n"
-"	bl IsEnterWithoutGameSave\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _08000E1E\n"
-"	movs r0, 0\n"
-"	bl QuickSave_Async\n"
-"_08000E1E:\n"
-"	ldr r0, _08000E70\n"
-"	movs r4, 0x1\n"
-"	str r4, [r0]\n"
-"	movs r0, 0x3\n"
-"	bl sub_800A8F8\n"
-"	add r5, sp, 0x170\n"
-"	str r4, [r5]\n"
-"	add r0, sp, 0x174\n"
-"	bl sub_80011E8\n"
-"	adds r0, r5, 0\n"
-"	bl LoadAndRunQuickSaveDungeon_Async\n"
-"	add r4, sp, 0x1EC\n"
-"	movs r0, 0\n"
-"	ldrsh r1, [r4, r0]\n"
-"	cmp r1, 0x3\n"
-"	bne _08000E46\n"
-"	b _08000A24\n"
-"_08000E46:\n"
-"	movs r0, 0x2\n"
-"	negs r0, r0\n"
-"	cmp r1, r0\n"
-"	bne _08000E50\n"
-"	b _08000A2A\n"
-"_08000E50:\n"
-"	movs r0, 0\n"
-"	movs r1, 0x41\n"
-"	bl ClearScriptVarArray\n"
-"	ldrh r0, [r4]\n"
-"	adds r0, 0x1\n"
-"	lsls r0, 16\n"
-"	asrs r0, 16\n"
-"	cmp r0, 0x6\n"
-"	bhi _08000EBE\n"
-"	lsls r0, 2\n"
-"	ldr r1, _08000E74\n"
-"	adds r0, r1\n"
-"	ldr r0, [r0]\n"
-"	mov pc, r0\n"
-"	.align 2, 0\n"
-"_08000E70: .4byte sUnknown_203B03C\n"
-"_08000E74: .4byte _08000E78\n"
-"	.align 2, 0\n"
-"_08000E78:\n"
-"	.4byte _08000EB6\n"
-"	.4byte _08000EBE\n"
-"	.4byte _08000E94\n"
-"	.4byte _08000EB2\n"
-"	.4byte _08000EBE\n"
-"	.4byte _08000E94\n"
-"	.4byte _08000EBE\n"
-"_08000E94:\n"
-"	movs r7, 0x9\n"
-"	movs r0, 0xF7\n"
-"	lsls r0, 1\n"
-"	add r0, sp\n"
-"	ldrb r0, [r0]\n"
-"	movs r3, 0x1\n"
-"	cmp r0, 0\n"
-"	beq _08000EA6\n"
-"	movs r3, 0x2\n"
-"_08000EA6:\n"
-"	movs r0, 0\n"
-"	movs r1, 0x41\n"
-"	movs r2, 0\n"
-"	bl SetScriptVarArrayValue\n"
-"	b _08000A42\n"
-"_08000EB2:\n"
-"	movs r7, 0xA\n"
-"	b _08000A42\n"
-"_08000EB6:\n"
-"	movs r7, 0xC\n"
-"	bl sub_8096BD0\n"
-"	b _08000A42\n"
-"_08000EBE:\n"
-"	movs r7, 0xB\n"
-"	bl sub_8096BD0\n"
-"	b _08000A42\n"
-"_08000EC6:\n"
-"	mov r0, r10\n"
-"	movs r3, 0x8B\n"
-"	lsls r3, 2\n"
-"	add sp, r3\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r1}\n"
-"	bx r1");
+    MODE_NEW_GAME,
+    MODE_CONTINUE_GAME,
+    MODE_GROUND, // overworld
+    MODE_3,
+    MODE_FRIEND_AREAS,
+    MODE_DUNGEON_FROM_WORLD_MAP,
+    MODE_6,
+    MODE_CONTINUE_QUICKSAVE,
+    MODE_8,
+    MODE_DUNGEON_WON,
+    MODE_10,
+    MODE_11,
+    MODE_DUNGEON_LOST,
+};
+
+// arm9.bin::0200D1E0
+static u32 RunGameMode_Async(u32 a0)
+{
+    s32 mode = GetScriptVarValue(NULL, START_MODE);
+    bool8 ret = FALSE;
+
+    sub_801180C();
+    FadeOutAllMusic(0x10);
+    if (mode == MODE_CONTINUE_QUICKSAVE) {
+        if (a0 == 2) {
+            mode = MODE_8;
+        }
+        else if (a0 == 3) {
+            mode = MODE_11;
+            SetScriptVarValue(NULL, START_MODE, 11);
+            sub_8096BD0();
+            QuickSave_Async(3);
+        }
+    }
+    else if (mode != MODE_NEW_GAME && mode != MODE_11) {
+        mode = MODE_CONTINUE_GAME;
+    }
+
+    ClearScriptVarArray(NULL, EVENT_S08E01);
+    while (1) {
+        s32 r5;
+        struct FriendAreasMapSetupStruct friendAreasSetup;
+        struct WorldMapSetupStruct worldMapSetup;
+        DungeonSetupStruct dungeonSetup;
+        s16 sp552;
+
+        if (mode == MODE_FRIEND_AREAS) {
+            u8 mapId = sub_8002658(GetScriptVarValue(NULL,GROUND_ENTER));
+
+            friendAreasSetup.friendAreasMapPtr = MemoryAlloc(sizeof(*friendAreasSetup.friendAreasMapPtr),8);
+            friendAreasSetup.startingFriendAreaId = mapId;
+            friendAreasSetup.unk5 = sub_80023E4(9);
+            ShowFriendAreasMap_Async(&friendAreasSetup);
+            MemoryFree(friendAreasSetup.friendAreasMapPtr);
+            if (friendAreasSetup.chosenAreaId != NUM_FRIEND_AREAS) {
+                s32 val;
+                u32 areaId = friendAreasSetup.chosenAreaId;
+                if (areaId != FRIEND_AREA_NONE) {
+                    val = sub_8002694(areaId);
+                }
+                else {
+                    val = 9;
+                }
+                SetScriptVarValue(NULL,GROUND_ENTER,val);
+                SetScriptVarValue(NULL,GROUND_ENTER_LINK,0);
+            }
+            mode = MODE_GROUND;
+            continue;
+        }
+        else if (mode == MODE_DUNGEON_FROM_WORLD_MAP) {
+            s32 i;
+
+            s32 dungId = (s16) GetScriptVarValue(NULL, DUNGEON_SELECT);
+            u8 r6 = sub_80A2740(dungId);
+            for (i = 0; i < WORLD_MAP_UNK_6D_COUNT; i++) {
+                worldMapSetup.info.unk6D[i] = sub_80A28F0(i);
+            }
+
+            if (r6 == 99) {
+                mode = MODE_GROUND;
+                continue;
+            }
+
+            worldMapSetup.info.startLocation.id = DUNGEON_OUT_ON_RESCUE;
+            sub_80011CC(&worldMapSetup.info.unk4, r6);
+            worldMapSetup.info.unk6C = worldMapSetup.info.unk4.unk5;
+            switch ((s16) sub_80A2750(dungId)) {
+                case 1:
+                    if (sub_80990EC(&dungeonSetup.info, dungId)) {
+                        worldMapSetup.info.unk4.unkC = dungeonSetup.info.sub0.unkC;
+                        worldMapSetup.info.mon = dungeonSetup.info.mon;
+                    }
+                    break;
+                case 2:
+                    if (sub_8096A08(worldMapSetup.info.unk4.unk0.id, &worldMapSetup.info.mon)) {
+                        worldMapSetup.info.unk4.unkC = 1;
+                    }
+                    else {
+                        worldMapSetup.info.unk4.unkC = 0;
+                    }
+                    break;
+            }
+
+            worldMapSetup.worldMap = MemoryAlloc(sizeof(*worldMapSetup.worldMap), 8);
+            ShowWorldMap_Async(&worldMapSetup);
+            MemoryFree(worldMapSetup.worldMap);
+            if (!worldMapSetup.dungeonEntered) {
+                mode = MODE_GROUND;
+                continue;
+            }
+            SetScriptVarValue(NULL, DUNGEON_ENTER, dungId);
+            sUnknown_203B03C = 2;
+            sub_800A8F8(4);
+            r5 = xxx_script_related_8001334(5);
+        }
+        else if (mode == MODE_8) {
+            r5 = 0;
+        }
+        else if (mode == MODE_CONTINUE_QUICKSAVE) {
+            r5 = 2;
+        }
+        else {
+            if (mode == MODE_11) {
+                RemoveAllMoneyAndItems();
+            }
+            else if (mode == MODE_DUNGEON_LOST) {
+                RemoveMoneyAndRandomItems();
+            }
+            sUnknown_203B03C = 2;
+            sub_800A8F8(4);
+            r5 = xxx_script_related_8001334(mode);
+            if (r5 == 14) {
+                break;
+            }
+            else if (r5 == 5) {
+                mode = MODE_FRIEND_AREAS;
+                continue;
+            }
+            else if (r5 == 6) {
+                mode = MODE_DUNGEON_FROM_WORLD_MAP;
+                continue;
+            }
+        }
+
+        dungeonSetup.info.sub0.unkD = 0;
+        dungeonSetup.info.sub0.unkC = 0;
+        MemoryFill8(&dungeonSetup.info.mon, 0, sizeof(dungeonSetup.info.mon));
+        dungeonSetup.info.mon.speciesNum = 0;
+        if (r5 == 7) {
+            if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
+                r5 = 13;
+                mode = MODE_DUNGEON_WON;
+            }
+        }
+        else if (r5 == 8) {
+            if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
+                r5 = 13;
+                mode = MODE_DUNGEON_WON;
+            }
+            else if (sub_8096A08(dungeonSetup.info.sub0.unk0.id, &dungeonSetup.info.mon)) {
+                dungeonSetup.info.sub0.unkC = 1;
+            }
+        }
+        else if (r5 == 10) {
+            if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
+                r5 = 13;
+                mode = MODE_DUNGEON_WON;
+            }
+        }
+        else if (r5 == 9) {
+            if (!sub_80991E0(&dungeonSetup.info, &sp552)) {
+                r5 = 11;
+                mode = MODE_DUNGEON_LOST;
+            }
+        }
+        else if (r5 == 0) {
+            u32 var = sub_8011FA8();
+            if (var == 0xF1207) {
+                dungeonSetup.info.sub0.unkD = 1;
+                dungeonSetup.info.sub0.unk4 = 1;
+                dungeonSetup.info.sub0.unkB = 0;
+                if (gUnknown_203B484->unk4.speciesNum != 0) {
+                    dungeonSetup.info.sub0.unkC = 1;
+                    dungeonSetup.info.mon = gUnknown_203B484->unk4;
+                }
+                else {
+                    dungeonSetup.info.sub0.unkC = 0;
+                }
+                MemoryFill8(&gUnknown_203B484->unk4, 0, sizeof(gUnknown_203B484->unk4));
+                gUnknown_203B484->unk4.speciesNum = 0;
+            }
+            else if (var == 0xF1208) {
+                r5 = 1;
+                mode = MODE_11;
+                sub_8096BD0();
+            }
+            else {
+                r5 = 1;
+                mode = MODE_11;
+                sub_8096BD0();
+            }
+
+            if (r5 == 1) {
+                MemoryFill8(&gUnknown_203B484->unk4, 0, sizeof(gUnknown_203B484->unk4));
+                gUnknown_203B484->unk4.speciesNum = 0;
+            }
+        }
+        else if (r5 == 2) {
+            if (sub_8011C1C() == 2) {
+                u32 var = sub_8011FA8();
+                dungeonSetup.info.sub0.unk4 = 1;
+                dungeonSetup.info.sub0.unkD = 0;
+                if (var == 0xF1207) {
+                    ;
+                }
+                else if (var == 0xF1208) {
+                    r5 = 1;
+                    mode = MODE_11;
+                    sub_8096BD0();
+                }
+                else {
+                    r5 = 1;
+                    mode = MODE_11;
+                    sub_8096BD0();
+                }
+            }
+            else {
+                r5 = 3;
+            }
+
+            if (r5 == 3) {
+                u8 r4 = sub_8001170();
+                r5 = 1;
+                mode = MODE_11;
+                sub_8096BD0();
+                if (r4 != 63 && r4 != 99 && IsEnterWithoutGameSave(r4)) {
+                    if (sub_8011C1C() == 2) {
+                        r5 = 3;
+                        mode = MODE_CONTINUE_QUICKSAVE;
+                    }
+                    else {
+                        r5 = 12;
+                        mode = MODE_10;
+                    }
+                }
+
+                if (r5 == 1) {
+                    sub_8011C1C();
+                }
+            }
+            else if (r5 == 4) {
+                r5 = 1;
+                mode = MODE_11;
+                sub_8096BD0();
+                sub_80008C0_Async(1);
+            }
+            else if (r5 == 1) {
+                mode = MODE_11;
+                sub_8096BD0();
+            }
+        }
+
+        if (r5 == 7 || r5 == 8 || r5 == 9 || r5 == 10 || r5 == 0 || r5 == 2 || r5 == 3) {
+            if (r5 != 0 && r5 != 2 && r5 != 3) {
+                u8 r6 = sub_8001170();
+
+                IncrementNumAdventures();
+                if (r5 == 9) {
+                    u8 sp554;
+
+                    if (sub_8099394(&sp554)) {
+                        unkStruct_203B480 *mail = GetMailatIndex(sp554);
+                        mail->rescuesAllowed = (mail->rescuesAllowed > 1) ? mail->rescuesAllowed - 1 : 0;
+                    }
+                }
+
+                if (r6 == 63) {
+                    QuickSave_Async(0);
+                }
+                else if (!IsEnterWithoutGameSave(r6)) {
+                    QuickSave_Async(0);
+                }
+            }
+
+            sUnknown_203B03C = 1;
+            sub_800A8F8(3);
+            dungeonSetup.unk0 = 1;
+            sub_80011E8(&dungeonSetup.info.sub0);
+            LoadAndRunQuickSaveDungeon_Async(&dungeonSetup);
+            if (dungeonSetup.info.unk7C == 3) {
+                ret = TRUE;
+                break;
+            }
+            if (dungeonSetup.info.unk7C == -2) {
+                ret = TRUE;
+                break;
+            }
+
+            ClearScriptVarArray(NULL, EVENT_S08E01);
+            switch (dungeonSetup.info.unk7C) {
+                case 1:
+                case 4:
+                    mode = MODE_DUNGEON_WON;
+                    SetScriptVarArrayValue(NULL, EVENT_S08E01, 0, (dungeonSetup.info.unk7E != 0) ? 2 : 1);
+                    break;
+                case 2:
+                    mode = MODE_10;
+                    break;
+                case -1:
+                    mode = MODE_DUNGEON_LOST;
+                    sub_8096BD0();
+                    break;
+                case 5:
+                    mode = MODE_11;
+                    sub_8096BD0();
+                    break;
+                default:
+                    mode = MODE_11;
+                    sub_8096BD0();
+                    break;
+            }
+        }
+    }
+
+    return ret;
 }
 
 // This func is probably used for running the dungeon in general (and updating RNG mechanics), not just quicksave.
 // More documentation needed to be sure
 // It'd also be cool to see what happens if a quicksave load fails and the dungeon is skipped entirely
 // arm9.bin::0200D01C
-/* static */ // TODO: Uncomment
-void LoadAndRunQuickSaveDungeon_Async(UnkStruct_RunDungeon *param_1)
+static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
 {
     u8 quickSaveValid;
     s32 quickSaveStatus;
     s32 local_1c; // 0x4800
-    s32 local_18; // sizeof(Dungeon)
+    s32 dungeonStructSize; // sizeof(Dungeon)
 
     quickSaveValid = TRUE;
     sUnknown_203B03C = 1;
 
     sub_800A8F8(3);
     sub_8014144();
-    sub_8043D50(&local_1c, &local_18);
+    sub_8043D50(&local_1c, &dungeonStructSize);
 
-    param_1->unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
-    param_1->unk78 = MemoryAlloc(local_18, 7); // size: sizeof(Dungeon)
+    setupStr->info.unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
+    setupStr->info.dungeon = MemoryAlloc(dungeonStructSize, 7); // size: sizeof(Dungeon)
 
-    if (param_1->unk8) {
-        PrepareQuickSaveRead(param_1->unk74, local_1c);
+    if (setupStr->info.sub0.unk4) {
+        PrepareQuickSaveRead(setupStr->info.unk74, local_1c);
 
         while (TRUE) {
             if (!ReadQuickSave())
@@ -1261,32 +920,32 @@ void LoadAndRunQuickSaveDungeon_Async(UnkStruct_RunDungeon *param_1)
     }
 
     if (quickSaveValid) {
-        LoadAndRunDungeon_Async(param_1);
+        LoadAndRunDungeon_Async(setupStr);
         sub_8099648();
         SetWindowBGColor();
         sub_8099690(0);
     }
     else
-        param_1->unk7C = 5;
+        setupStr->info.unk7C = 5;
 
-    if (param_1->unk7C == -2)
-        sub_809542C(&param_1->unk84);
+    if (setupStr->info.unk7C == -2)
+        sub_809542C(&setupStr->info.unk84);
 
-    if (param_1->unk7C == 3 || param_1->unk7C == -2) {
-        SetDungeonLocationInfo(&param_1->unk80);
+    if (setupStr->info.unk7C == 3 || setupStr->info.unk7C == -2) {
+        SetDungeonLocationInfo(&setupStr->info.unk80);
         xxx_call_stop_bgm();
 
-        if (param_1->unk7C == -2)
-            PrepareQuickSaveWrite(param_1->unk74, local_1c, 1);
+        if (setupStr->info.unk7C == -2)
+            PrepareQuickSaveWrite(setupStr->info.unk74, local_1c, 1);
         else
-            PrepareQuickSaveWrite(param_1->unk74, local_1c, 0);
+            PrepareQuickSaveWrite(setupStr->info.unk74, local_1c, 0);
 
         while ((quickSaveStatus = WriteQuickSave(), (quickSaveStatus != 2))) {
             if (quickSaveStatus == 3)
                 break;
             if (quickSaveStatus == 1) {
-                MemoryFree(param_1->unk78);
-                MemoryFree(param_1->unk74);
+                MemoryFree(setupStr->info.dungeon);
+                MemoryFree(setupStr->info.unk74);
             }
 
             MainLoops_RunFrameActions(0);
@@ -1295,8 +954,8 @@ void LoadAndRunQuickSaveDungeon_Async(UnkStruct_RunDungeon *param_1)
     }
     else {
         sub_808ED00();
-        MemoryFree(param_1->unk78);
-        MemoryFree(param_1->unk74);
+        MemoryFree(setupStr->info.dungeon);
+        MemoryFree(setupStr->info.unk74);
     }
 }
 
@@ -1357,8 +1016,7 @@ void sub_8001064(void)
 }
 
 // arm9.bin::0200CDD4
-/* static */ // TODO: Uncomment
-u8 sub_8001170(void)
+static u8 sub_8001170(void)
 {
     s16 local_10;
     s16 auStack_e;
@@ -1374,53 +1032,48 @@ u8 sub_8001170(void)
 }
 
 // arm9.bin::0200CDA4
-/* static */ // TODO: Uncomment
-void sub_80011CC(u8 *param_1, u8 param_2)
+static void sub_80011CC(DungeonSetupSubstruct *info, u8 dungId)
 {
-    u32 zero = 0;
+    info->unk0.id = dungId;
+    info->unk0.floor = 0;
 
-    param_1[0] = param_2;
-    param_1[1] = zero;
+    sub_80011E8(info);
 
-    sub_80011E8(param_1);
-
-    param_1[11] = 0;
-    param_1[4] = 0;
-    param_1[12] = 0;
-    param_1[13] = 0;
+    info->unkB = 0;
+    info->unk4 = 0;
+    info->unkC = 0;
+    info->unkD = 0;
 }
 
 // arm9.bin::0200CD1C
-/* static */ // TODO: Uncomment
-void sub_80011E8(u8 *param_1)
+static void sub_80011E8(DungeonSetupSubstruct *info)
 {
-    param_1[5] = sub_80023E4(8);
-    param_1[6] = sub_80023E4(3);
-    param_1[8] = sub_80023E4(7);
-    param_1[9] = sub_80023E4(0);
-    param_1[10] = sub_80023E4(5);
+    info->unk5 = sub_80023E4(8);
+    info->unk6 = sub_80023E4(3);
+    info->unk8 = sub_80023E4(7);
+    info->unk9 = sub_80023E4(0);
+    info->unkA = sub_80023E4(5);
 
     if (sub_80023E4(24) && sub_80023E4(25) && sub_80023E4(26))
-        param_1[7] = 1;
+        info->unk7 = 1;
     else
-        param_1[7] = 0;
+        info->unk7 = 0;
 }
 
 // arm9.bin::0200CC4C
-/* static */ // TODO: Uncomment
-void sub_8001248(void)
+static void RemoveMoneyAndRandomItems(void)
 {
-    s32 index;
+    s32 i;
 
-    for (index = 0; index < INVENTORY_SIZE; index++) {
+    for (i = 0; i < INVENTORY_SIZE; i++) {
         if (RandInt(100) < 50)
-            ZeroOutItem(&gTeamInventoryRef->teamItems[index]);
+            ZeroOutItem(&gTeamInventoryRef->teamItems[i]);
     }
 
     FillInventoryGaps();
 
-    for (index = 0; index < NUM_MONSTERS; index++) {
-        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[index];
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonFlag1(mon) && PokemonFlag2(mon))
             mon->heldItem.id = ITEM_NOTHING;
     }
@@ -1429,19 +1082,18 @@ void sub_8001248(void)
 }
 
 // arm9.bin::0200CB88
-/* static */ // TODO: Uncomment
-void sub_80012C0(void)
+static void RemoveAllMoneyAndItems(void)
 {
-    s32 index;
+    s32 i;
 
-    for (index = 0; index < INVENTORY_SIZE; index++) {
-        ZeroOutItem(&gTeamInventoryRef->teamItems[index]);
+    for (i = 0; i < INVENTORY_SIZE; i++) {
+        ZeroOutItem(&gTeamInventoryRef->teamItems[i]);
     }
 
     FillInventoryGaps();
 
-    for (index = 0; index < NUM_MONSTERS; index++) {
-        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[index];
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonFlag1(mon) && PokemonFlag2(mon))
             mon->heldItem.id = ITEM_NOTHING;
     }
@@ -1456,24 +1108,23 @@ static void NDS_LoadOverlay_GroundMain()
 }
 
 // arm9.bin::0200CADC
-static void nullsub_2(UnkStruct_RunDungeon *r0)
+static void nullsub_2(DungeonSetupStruct *r0)
 {
     // (not a nullsub in the NDS)
     // Probably loads the dungeon overlay?
 }
 
 // arm9.bin::0200CAD0
-/* static */ // TODO: Uncomment
-u32 xxx_script_related_8001334(u32 r0)
+static u32 xxx_script_related_8001334(u32 r0)
 {
     return xxx_script_related_8098468(r0);
 }
 
 // arm9.bin::0200CA1C
-static void LoadAndRunDungeon_Async(UnkStruct_RunDungeon *r0)
+static void LoadAndRunDungeon_Async(DungeonSetupStruct *setupPtr)
 {
-    nullsub_2(r0);
-    RunDungeon_Async(r0);
+    nullsub_2(setupPtr);
+    RunDungeon_Async(setupPtr);
     NDS_LoadOverlay_GroundMain();
 }
 

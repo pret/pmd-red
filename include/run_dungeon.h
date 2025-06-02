@@ -1,7 +1,7 @@
 #ifndef GUARD_RUN_DUNGEON_H
 #define GUARD_RUN_DUNGEON_H
 
-#include "structs/str_dungeon_8042F6C.h"
+#include "structs/str_dungeon_setup.h"
 
 struct UnkStruct_203B414
 {
@@ -15,7 +15,7 @@ struct UnkStruct_203B414
 
 extern struct UnkStruct_203B414 *gUnknown_203B414;
 
-void RunDungeon_Async(UnkStruct_RunDungeon *r8);
+void RunDungeon_Async(DungeonSetupStruct *r8);
 void sub_8043CD8(void);
 bool8 sub_8043CE4(s32 dungeonId);
 u8 GetFloorType(void);

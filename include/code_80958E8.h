@@ -8,7 +8,7 @@
 // size: 0xC
 typedef struct subStruct_203B490
 {
-    WonderMailSub sub;
+    DungeonMailSeed dungeonSeed;
     /* 0x8 */ s32 checksum; // really dumb checksum that just adds all the fields of WonderMail struct
 } subStruct_203B490;
 

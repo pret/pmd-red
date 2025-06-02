@@ -147,7 +147,7 @@ static void sub_802CAA4(void)
             case 5:
                 sUnknown_203B2F0->unk10C[loopMax].text = sTakeJob;
 
-                if (sub_809693C(mail) || !sub_80A2824(mail->unk4.dungeon.id))
+                if (sub_809693C(mail) || !sub_80A2824(mail->dungeonSeed.location.id))
                     sUnknown_203B2F0->unk10C[loopMax].menuAction = -1;
                 else
                     sUnknown_203B2F0->unk10C[loopMax].menuAction = 2;

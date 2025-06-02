@@ -123,7 +123,7 @@ void sub_8030E48(void)
   stack.mailTitleType = 7;
   stack.mailMissionType = MISSION_TYPE_FRIEND_RESCUE;
   stack.mailStatus = MAIL_STATUS_SUSPENDED;
-  stack.unk8 = &mail->unk4;
+  stack.dungeonSeed = &mail->dungeonSeed;
   stack.playerName = mail->playerName;
   stack.clientSpecies = mail->clientSpecies;
   stack.targetSpecies = mail->clientSpecies;

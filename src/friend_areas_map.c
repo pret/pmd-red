@@ -35,18 +35,18 @@ static u8 GetChosenDirection(void);
 static void InitMapLocations(u8 startingFriendAreaId);
 static void MoveToNewLocation_Async(s32 destLocationId, s32 direction, s32 nFrames);
 
-void ShowFriendAreasMap_Async(struct struct_unk800F990 *param_1)
+void ShowFriendAreasMap_Async(struct FriendAreasMapSetupStruct *setupPtr)
 {
-    gFriendAreasMapPtr = param_1->friendAreasMapPtr;
+    gFriendAreasMapPtr = setupPtr->friendAreasMapPtr;
     gUnknown_2026E4E = 0x1010;
     sub_80095CC(0, 20);
     UpdateFadeInTile(2);
     gFriendAreasMapPtr->locationsInfo = sFriendAreaLocations[0];
-    gFriendAreasMapPtr->unk4A2C = param_1->unk5;
+    gFriendAreasMapPtr->unk4A2C = setupPtr->unk5;
     FriendAreasMap_InitGfx();
     gFriendAreasMapPtr->unk4A28 = -1;
     gFriendAreasMapPtr->unk4A1C = -1;
-    InitMapLocations(param_1->startingFriendAreaId);
+    InitMapLocations(setupPtr->startingFriendAreaId);
     gFriendAreasMapPtr->locationIdOnBPress = gFriendAreasMapPtr->teamBaseLocationId;
     sCurrDirection = 0xff;
     sHeldDpadCounter = 0;
@@ -63,12 +63,12 @@ void ShowFriendAreasMap_Async(struct struct_unk800F990 *param_1)
         else if (inputRet == 2) {
             if (!ChooseAreaInLocation_Async())
                 continue;
-            param_1->unkC = gFriendAreasMapPtr->chosenFriendAreaId;
+            setupPtr->chosenAreaId = gFriendAreasMapPtr->chosenFriendAreaId;
             break;
         }
         else if (inputRet == 3) {
             if (gFriendAreasMapPtr->currLocationId == gFriendAreasMapPtr->locationIdOnBPress) {
-                param_1->unkC = 0;
+                setupPtr->chosenAreaId = FRIEND_AREA_NONE;
                 break;
             }
             MoveToNewLocation_Async(gFriendAreasMapPtr->locationIdOnBPress, DIRECTION_SOUTH, 10);
