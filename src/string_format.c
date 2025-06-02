@@ -88,14 +88,6 @@ static const WindowTemplate gUnknown_80D48DC = {
     NULL
 };
 
-
-ALIGNED(4) static const u8 sSpeakerNameSeparator[] = ": ";
-ALIGNED(4) static const u8 sUnknownTeamName[] = "????";
-ALIGNED(4) static const u8 gUnknown_80D4900[] = "%d";
-ALIGNED(4) static const u8 gUnknown_80D4904[] = "%*d" ;
-extern const u8 gUnknown_80D4908[];
-extern const u8 gUnknown_80D4910[];
-
 extern void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2);
 extern void sub_80073E0(s32 a0);
 extern void sub_8011A04(void);
@@ -691,7 +683,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                 r9 = FALSE;
                 if (flags & 8) {
                     AppendString(gSpeakerNameBuffer, &dst, dstMax, flags);
-                    AppendString(sSpeakerNameSeparator, &dst, dstMax, flags);
+                    AppendString(": ", &dst, dstMax, flags);
                 }
             }
             else if (r9) {
@@ -745,7 +737,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                         sub_80920D8(sFormatBuffer_TeamName);
                     }
                     else {
-                        strcpy(sFormatBuffer_TeamName, sUnknownTeamName); // ????
+                        InlineStrcpy(sFormatBuffer_TeamName, "????");
                     }
                     txtPtr = sFormatBuffer_TeamName;
                     break;
@@ -755,7 +747,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                     break;
                 case 'd':
                     str++;
-                    sprintfStatic(txtArray, gUnknown_80D4900, gFormatArgs[*(str++) - '0']);
+                    sprintfStatic(txtArray, "%d", gFormatArgs[*(str++) - '0']);
                     txtPtr = txtArray;
                     break;
                 case 'v': {
@@ -764,7 +756,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
 
                     str++;
                     a = gFormatArgs[*(str++) - '0'];
-                    sprintfStatic(txtArray, gUnknown_80D4904, *(str++) - '0', a);
+                    sprintfStatic(txtArray, "%*d", *(str++) - '0', a);
                     unkTxtPtr = txtArray;
                     while (*unkTxtPtr != '\0') {
                         if (*unkTxtPtr == ' ') {
@@ -782,7 +774,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
 
                     str++;
                     a = gFormatArgs[*(str++) - '0'];
-                    sprintfStatic(txtArray, gUnknown_80D4908, *(str++) - '0', a);
+                    sprintfStatic(txtArray, "%0*d", *(str++) - '0', a);
                     unkTxtPtr = txtArray;
                     while (*unkTxtPtr != '\0') {
                         if (*unkTxtPtr == ' ') {
@@ -794,7 +786,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                     }
                     break;
                 case '$':
-                    txtPtr = gUnknown_80D4910;
+                    txtPtr = "$";
                     break;
                 case '-':
                     str++;

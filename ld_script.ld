@@ -452,7 +452,6 @@ SECTIONS {
         src/quick_save_write.o(.rodata);
         src/menu_input.o(.rodata);
         src/string_format.o(.rodata);
-        data/data_80D47B8.o(.rodata);
         src/common_strings.o(.rodata);
         src/code_8015080.o(.rodata);
         src/code_801602C.o(.rodata);
