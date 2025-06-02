@@ -52,16 +52,16 @@ const WindowTemplate gUnknown_80DAFA0 = {
    NULL
 };
 
-struct Struct80DB0F8
+struct LayoutInfo
 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
+    u8 upPos;
+    u8 downPos;
+    u8 leftPos;
+    u8 rightPos;
     u8 x;
     u8 y;
-    u8 unk6;
-    s32 unk8;
+    u8 colorType;
+    s32 letter;
 };
 
 UNUSED static const char sPksDir[] = "pksdir0";
@@ -151,99 +151,105 @@ static const DungeonPos gUnknown_80DB098[] =
     {0xBA, 0x24},
 };
 
+#define NAMING_LETTER_DEL 0x105
+#define NAMING_LETTER_END 0x106
+#define NAMING_LETTER_INS_OVR 0x107
+#define NAMING_LETTER_BLANK 0x108
+#define NAMING_LETTER_TERMINATOR 0x109
+
 // It was programmed as a 2d array, however it's effectively a 1d array(since there's only one entry for [0][x]). Could be different in Blue?
-static const struct Struct80DB0F8 gUnknown_80DB0F8[][85] =
+static const struct LayoutInfo sLayoutInfo[][85] =
 {
     [0] = {
-        {0,  0,  0,  0,  8,   3,  0, 264},
-        {0,  0,  0,  0,  8,   14, 0, 264},
-        {0,  0,  0,  0,  8,   25, 0, 264},
-        {5,  4,  81, 9,  8,   36, 3, 263},
-        {3,  5,  82, 10, 8,   47, 3, 261},
-        {4,  3,  83, 11, 8,   58, 3, 262},
-        {11, 7,  78, 12, 36,  3,  0, 97},
-        {6,  8,  79, 13, 36,  14, 0, 110},
-        {7,  9,  80, 14, 36,  25, 0, 65},
-        {8,  10, 3,  15, 36,  36, 0, 78},
-        {9,  11, 4,  16, 36,  47, 0, 233},
-        {10, 6,  5,  17, 36,  58, 0, 43},
-        {17, 13, 6,  18, 50,  3,  0, 98},
-        {12, 14, 7,  19, 50,  14, 0, 111},
-        {13, 15, 8,  20, 50,  25, 0, 66},
-        {14, 16, 9,  21, 50,  36, 0, 79},
-        {15, 17, 10, 22, 50,  47, 0, 49},
-        {16, 12, 11, 23, 50,  58, 0, 45},
-        {23, 19, 12, 24, 64,  3,  0, 99},
-        {18, 20, 13, 25, 64,  14, 0, 112},
-        {19, 21, 14, 26, 64,  25, 0, 67},
-        {20, 22, 15, 27, 64,  36, 0, 80},
-        {21, 23, 16, 28, 64,  47, 0, 50},
-        {22, 18, 17, 29, 64,  58, 0, 44},
-        {29, 25, 18, 30, 78,  3,  0, 100},
-        {24, 26, 19, 31, 78,  14, 0, 113},
-        {25, 27, 20, 32, 78,  25, 0, 68},
-        {26, 28, 21, 33, 78,  36, 0, 81},
-        {27, 29, 22, 34, 78,  47, 0, 51},
-        {28, 24, 23, 35, 78,  58, 0, 46},
-        {35, 31, 24, 36, 92,  3,  0, 101},
-        {30, 32, 25, 37, 92,  14, 0, 114},
-        {31, 33, 26, 38, 92,  25, 0, 69},
-        {32, 34, 27, 39, 92,  36, 0, 82},
-        {33, 35, 28, 40, 92,  47, 0, 52},
-        {34, 30, 29, 41, 92,  58, 0, 33},
-        {41, 37, 30, 42, 106, 3,  0, 102},
-        {36, 38, 31, 43, 106, 14, 0, 115},
-        {37, 39, 32, 44, 106, 25, 0, 70},
-        {38, 40, 33, 45, 106, 36, 0, 83},
-        {39, 41, 34, 46, 106, 47, 0, 53},
-        {40, 36, 35, 47, 106, 58, 0, 63},
-        {47, 43, 36, 48, 120, 3,  0, 103},
-        {42, 44, 37, 49, 120, 14, 0, 116},
-        {43, 45, 38, 50, 120, 25, 0, 71},
-        {44, 46, 39, 51, 120, 36, 0, 84},
-        {45, 47, 40, 52, 120, 47, 0, 54},
+        {0, 0, 0, 0, 8, 3, 0, NAMING_LETTER_BLANK},
+        {0, 0, 0, 0, 8, 14, 0, NAMING_LETTER_BLANK},
+        {0, 0, 0, 0, 8, 25, 0, NAMING_LETTER_BLANK},
+        {5, 4, 81, 9, 8, 36, 3, NAMING_LETTER_INS_OVR},
+        {3, 5, 82, 10, 8, 47, 3, NAMING_LETTER_DEL},
+        {4, 3, 83, 11, 8, 58, 3, NAMING_LETTER_END},
+        {11, 7, 78, 12, 36, 3, 0, 'a'},
+        {6, 8, 79, 13, 36, 14, 0, 'n'},
+        {7, 9, 80, 14, 36, 25, 0, 'A'},
+        {8, 10, 3, 15, 36, 36, 0, 'N'},
+        {9, 11, 4, 16, 36, 47, 0, 233},
+        {10, 6, 5, 17, 36, 58, 0, '+'},
+        {17, 13, 6, 18, 50, 3, 0, 'b'},
+        {12, 14, 7, 19, 50, 14, 0, 'o'},
+        {13, 15, 8, 20, 50, 25, 0, 'B'},
+        {14, 16, 9, 21, 50, 36, 0, 'O'},
+        {15, 17, 10, 22, 50, 47, 0, '1'},
+        {16, 12, 11, 23, 50, 58, 0, '-'},
+        {23, 19, 12, 24, 64, 3, 0, 'c'},
+        {18, 20, 13, 25, 64, 14, 0, 'p'},
+        {19, 21, 14, 26, 64, 25, 0, 'C'},
+        {20, 22, 15, 27, 64, 36, 0, 'P'},
+        {21, 23, 16, 28, 64, 47, 0, '2'},
+        {22, 18, 17, 29, 64, 58, 0, ','},
+        {29, 25, 18, 30, 78, 3, 0, 'd'},
+        {24, 26, 19, 31, 78, 14, 0, 'q'},
+        {25, 27, 20, 32, 78, 25, 0, 'D'},
+        {26, 28, 21, 33, 78, 36, 0, 'Q'},
+        {27, 29, 22, 34, 78, 47, 0, '3'},
+        {28, 24, 23, 35, 78, 58, 0, '.'},
+        {35, 31, 24, 36, 92, 3, 0, 'e'},
+        {30, 32, 25, 37, 92, 14, 0, 'r'},
+        {31, 33, 26, 38, 92, 25, 0, 'E'},
+        {32, 34, 27, 39, 92, 36, 0, 'R'},
+        {33, 35, 28, 40, 92, 47, 0, '4'},
+        {34, 30, 29, 41, 92, 58, 0, '!'},
+        {41, 37, 30, 42, 106, 3, 0, 'f'},
+        {36, 38, 31, 43, 106, 14, 0, 's'},
+        {37, 39, 32, 44, 106, 25, 0, 'F'},
+        {38, 40, 33, 45, 106, 36, 0, 'S'},
+        {39, 41, 34, 46, 106, 47, 0, '5'},
+        {40, 36, 35, 47, 106, 58, 0, '?'},
+        {47, 43, 36, 48, 120, 3, 0, 'g'},
+        {42, 44, 37, 49, 120, 14, 0, 't'},
+        {43, 45, 38, 50, 120, 25, 0, 'G'},
+        {44, 46, 39, 51, 120, 36, 0, 'T'},
+        {45, 47, 40, 52, 120, 47, 0, '6'},
         {46, 42, 41, 53, 120, 58, 0, 145},
-        {53, 49, 42, 54, 134, 3,  0, 104},
-        {48, 50, 43, 55, 134, 14, 0, 117},
-        {49, 51, 44, 56, 134, 25, 0, 72},
-        {50, 52, 45, 57, 134, 36, 0, 85},
-        {51, 53, 46, 58, 134, 47, 0, 55},
+        {53, 49, 42, 54, 134, 3, 0, 'h'},
+        {48, 50, 43, 55, 134, 14, 0, 'u'},
+        {49, 51, 44, 56, 134, 25, 0, 'H'},
+        {50, 52, 45, 57, 134, 36, 0, 'U'},
+        {51, 53, 46, 58, 134, 47, 0, '7'},
         {52, 48, 47, 59, 134, 58, 0, 146},
-        {59, 55, 48, 60, 148, 3,  0, 105},
-        {54, 56, 49, 61, 148, 14, 0, 118},
-        {55, 57, 50, 62, 148, 25, 0, 73},
-        {56, 58, 51, 63, 148, 36, 0, 86},
-        {57, 59, 52, 64, 148, 47, 0, 56},
+        {59, 55, 48, 60, 148, 3, 0, 'i'},
+        {54, 56, 49, 61, 148, 14, 0, 'v'},
+        {55, 57, 50, 62, 148, 25, 0, 'I'},
+        {56, 58, 51, 63, 148, 36, 0, 'V'},
+        {57, 59, 52, 64, 148, 47, 0, '8'},
         {58, 54, 53, 65, 148, 58, 0, 147},
-        {65, 61, 54, 66, 162, 3,  0, 106},
-        {60, 62, 55, 67, 162, 14, 0, 119},
-        {61, 63, 56, 68, 162, 25, 0, 74},
-        {62, 64, 57, 69, 162, 36, 0, 87},
-        {63, 65, 58, 70, 162, 47, 0, 57},
+        {65, 61, 54, 66, 162, 3, 0, 'j'},
+        {60, 62, 55, 67, 162, 14, 0, 'w'},
+        {61, 63, 56, 68, 162, 25, 0, 'J'},
+        {62, 64, 57, 69, 162, 36, 0, 'W'},
+        {63, 65, 58, 70, 162, 47, 0, '9'},
         {64, 60, 59, 71, 162, 58, 0, 148},
-        {71, 67, 60, 72, 176, 3,  0, 107},
-        {66, 68, 61, 73, 176, 14, 0, 120},
-        {67, 69, 62, 74, 176, 25, 0, 75},
-        {68, 70, 63, 75, 176, 36, 0, 88},
-        {69, 71, 64, 76, 176, 47, 0, 48},
+        {71, 67, 60, 72, 176, 3, 0, 'k'},
+        {66, 68, 61, 73, 176, 14, 0, 'x'},
+        {67, 69, 62, 74, 176, 25, 0, 'K'},
+        {68, 70, 63, 75, 176, 36, 0, 'X'},
+        {69, 71, 64, 76, 176, 47, 0, '0'},
         {70, 66, 65, 77, 176, 58, 0, 189},
-        {77, 73, 66, 78, 190, 3,  0, 108},
-        {72, 74, 67, 79, 190, 14, 0, 121},
-        {73, 75, 68, 80, 190, 25, 0, 76},
-        {74, 76, 69, 81, 190, 36, 0, 89},
-        {75, 77, 70, 82, 190, 47, 0, 58},
+        {77, 73, 66, 78, 190, 3, 0, 'l'},
+        {72, 74, 67, 79, 190, 14, 0, 'y'},
+        {73, 75, 68, 80, 190, 25, 0, 'L'},
+        {74, 76, 69, 81, 190, 36, 0, 'Y'},
+        {75, 77, 70, 82, 190, 47, 0, ':'},
         {76, 72, 71, 83, 190, 58, 0, 190},
-        {83, 79, 72, 6,  204, 3,  0, 109},
-        {78, 80, 73, 7,  204, 14, 0, 122},
-        {79, 81, 74, 8,  204, 25, 0, 77},
-        {80, 82, 75, 3,  204, 36, 0, 90},
-        {81, 83, 76, 4,  204, 47, 0, 133},
-        {82, 78, 77, 5,  204, 58, 0, 32},
-        {0,  0,  0,  0,  8,   3,  2, 265},
+        {83, 79, 72, 6, 204, 3, 0, 'm'},
+        {78, 80, 73, 7, 204, 14, 0, 'z'},
+        {79, 81, 74, 8, 204, 25, 0, 'M'},
+        {80, 82, 75, 3, 204, 36, 0, 'Z'},
+        {81, 83, 76, 4, 204, 47, 0, 133},
+        {82, 78, 77, 5, 204, 58, 0, ' '},
+        {0, 0, 0, 0, 8, 3, 2, NAMING_LETTER_TERMINATOR},
     }
 };
 
-static const u8 *const gUnknown_80DB4F4[] =
+static const u8 *const sSpecialLetters[] =
 {
     _("゛"),
     _("゜"),
@@ -254,40 +260,39 @@ static const u8 *const gUnknown_80DB4F4[] =
     _("END"),
 };
 
-static const WindowTemplate gUnknown_80DB538 = {
-   0x00,
-   0x03,
-   0x00, 0x00,
-   0x00, 0x00,
-   0x00, 0x00,
-   NULL
+static const WindowTemplate sWindowTemplateDummy = WIN_TEMPLATE_DUMMY;
+
+static const WindowTemplate sInputWindowTemplate = {
+    .unk0 = 0,
+    .type = WINDOW_TYPE_WITHOUT_BORDER,
+    .pos = {1, 10},
+    .width = 28,
+    .height = 9,
+    .unk10 = 9,
+    .unk12 = 0,
+    .header = NULL,
 };
 
-static const WindowTemplate gUnknown_80DB550 = {
-   0x00,
-   0x01,
-   0x01, 0x0A,
-   0x1C, 0x09,
-   0x09, 0x00,
-   NULL
+static const WindowTemplate sNameWindowTemplate = {
+    .unk0 = 0,
+    .type = WINDOW_TYPE_WITHOUT_BORDER,
+    .pos = {4, 3},
+    .width = 22,
+    .height = 5,
+    .unk10 = 5,
+    .unk12 = 0,
+    .header = NULL,
 };
 
-static const WindowTemplate gUnknown_80DB568 = {
-   0x00,
-   0x01,
-   0x04, 0x03,
-   0x16, 0x05,
-   0x05, 0x00,
-   NULL
-};
-
-static const WindowTemplate gUnknown_80DB580 = {
-   0x00,
-   0x01,
-   0x01, 0x02,
-   0x1C, 0x07,
-   0x07, 0x00,
-   NULL
+static const WindowTemplate sPasswordNameWindowTemplate = {
+    .unk0 = 0,
+    .type = WINDOW_TYPE_WITHOUT_BORDER,
+    .pos = {1, 2},
+    .width = 28,
+    .height = 7,
+    .unk10 = 7,
+    .unk12 = 0,
+    .header = NULL,
 };
 
 bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems)
@@ -345,14 +350,14 @@ struct NamingScreen
 {
     // size: 0x198
     u32 type;
-    u8 unk4;
+    bool8 isPassword;
     // Note: These had to be declared like these, because SpriteOAM is aligned by 4 and these aren't. Makes you think if SpriteOAM is actually a struct, and not just an array of 4 u16s.
     u16 sprite1Attribs[4];
     u16 sprite2Attribs[4];
     u8 letterCursorFrames;
     u8 inputCursorFrames;
     u8 unk18;
-    u8 unk19;
+    u8 inputCursorArrId; // Always 0
     u8 inputCursorPosition;
     u8 maxLetters;
     u8 letterCursorPos;
@@ -367,7 +372,7 @@ struct NamingScreen
 static EWRAM_INIT struct NamingScreen *sNamingScreen = NULL;
 
 static s32 GetEnteredNameLength(void);
-void sub_8015A08(u32);
+static void UpdateInputWindow(bool8);
 static void UpdateNameWindow(void);
 void sub_8015F84();
 static void SetLetterCursorSpritePosition(void);
@@ -389,6 +394,9 @@ enum
     NAMING_PASSWORD2,
 };
 
+#define NAMING_WINDOW_INPUT 0
+#define NAMING_WINDOW_NAME 1
+
 u32 NamingScreen_Init(u32 type, u8 *defaultText)
 {
     SpriteOAM *sprite;
@@ -397,19 +405,19 @@ u32 NamingScreen_Init(u32 type, u8 *defaultText)
 
     sNamingScreen = MemoryAlloc(sizeof(*sNamingScreen), 8);
     sNamingScreen->type = type;
-    sNamingScreen->unk19 = 0;
+    sNamingScreen->inputCursorArrId = 0;
     sNamingScreen->unk18 = 0;
-    sNamingScreen->unk4 = 0;
+    sNamingScreen->isPassword = 0;
 
     switch (sNamingScreen->type) {
         case NAMING_PASSWORD1:
             sNamingScreen->inputCursorPosition = 9;
-            sNamingScreen->unk4 = 1;
+            sNamingScreen->isPassword = TRUE;
             sNamingScreen->maxLetters = 0x36;
             break;
         case NAMING_PASSWORD2:
             sNamingScreen->inputCursorPosition = 9;
-            sNamingScreen->unk4 = 1;
+            sNamingScreen->isPassword = TRUE;
             sNamingScreen->maxLetters = 0x18;
             break;
         case NAMING_SELF:
@@ -453,7 +461,7 @@ u32 NamingScreen_Init(u32 type, u8 *defaultText)
     SpriteSetX((SpriteOAM *) &sNamingScreen->sprite1Attribs, DISPLAY_WIDTH);
     SpriteSetY((SpriteOAM *) &sNamingScreen->sprite1Attribs, DISPLAY_WIDTH);
 
-    if (sNamingScreen->unk4 != 0) {
+    if (sNamingScreen->isPassword) {
         SpriteSetMatrixNum((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
         SpriteSetTileNum((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0x3F6);
         SpriteSetSize((SpriteOAM *) &sNamingScreen->sprite1Attribs, 0);
@@ -486,22 +494,22 @@ u32 NamingScreen_Init(u32 type, u8 *defaultText)
 
     sNamingScreen->inputCursorFrames = 0;
 
-    for (index = 0; index < 4; index++) {
-        sNamingScreen->windows.id[index] = gUnknown_80DB538;
+    for (index = 0; index < MAX_WINDOWS; index++) {
+        sNamingScreen->windows.id[index] = sWindowTemplateDummy;
     }
 
-    if(sNamingScreen->unk4 != 0) {
-        sNamingScreen->windows.id[1] = gUnknown_80DB580;
+    if (sNamingScreen->isPassword) {
+        sNamingScreen->windows.id[NAMING_WINDOW_NAME] = sPasswordNameWindowTemplate;
     }
     else {
-        sNamingScreen->windows.id[1] = gUnknown_80DB568;
+        sNamingScreen->windows.id[NAMING_WINDOW_NAME] = sNameWindowTemplate;
     }
-    sNamingScreen->windows.id[0] = gUnknown_80DB550;
+    sNamingScreen->windows.id[NAMING_WINDOW_INPUT] = sInputWindowTemplate;
 
     ResetUnusedInputStruct();
     ShowWindows(&sNamingScreen->windows, 1, 1);
 
-    sub_8015A08(1);
+    UpdateInputWindow(TRUE);
     UpdateNameWindow();
     sub_8015F84();
     return 1;
@@ -566,21 +574,21 @@ void NamingScreen_Free(void)
 
 static u32 HandleAPress(void)
 {
-    s32 var = gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].unk8;
+    s32 letter = sLayoutInfo[sNamingScreen->inputCursorArrId][sNamingScreen->inputCursorPosition].letter;
 
-    switch (var) {
-        case 0x107:
+    switch (letter) {
+        case NAMING_LETTER_INS_OVR:
             sNamingScreen->unk18 = (sNamingScreen->unk18 == 0);
             PlayMenuSoundEffect(4);
-            sub_8015A08(0);
+            UpdateInputWindow(FALSE);
             break;
-        case 0x105:
+        case NAMING_LETTER_DEL:
             if (HandleBPress()) {
                 return 2;
             }
             break;
-        case 0x106:
-            if (GetEnteredNameLength() == 0 || (sNamingScreen->unk4 != 0 && GetEnteredNameLength() != sNamingScreen->maxLetters)) {
+        case NAMING_LETTER_END:
+            if (GetEnteredNameLength() == 0 || (sNamingScreen->isPassword && GetEnteredNameLength() != sNamingScreen->maxLetters)) {
                 PlayMenuSoundEffect(2);
             }
             else {
@@ -590,7 +598,7 @@ static u32 HandleAPress(void)
             }
             break;
         default:
-            if (sNamingScreen->unk4 != 0 && sub_803D0F0(var) == 0xFF) {
+            if (sNamingScreen->isPassword && sub_803D0F0(letter) == 0xFF) {
                 PlayMenuSoundEffect(2);
             }
             else {
@@ -602,7 +610,7 @@ static u32 HandleAPress(void)
                     }
                 }
 
-                sNamingScreen->textPtr[sNamingScreen->letterCursorPos] = var;
+                sNamingScreen->textPtr[sNamingScreen->letterCursorPos] = letter;
                 if (sNamingScreen->letterCursorPos < sNamingScreen->maxLetters - 1) {
                     sNamingScreen->letterCursorPos++;
                 }
@@ -694,16 +702,16 @@ static void HandleInputCursor(void)
 
     switch (sub_8012AE8()) {
         case INPUT_DPAD_UP:
-            newPosition = gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].unk0;
+            newPosition = sLayoutInfo[sNamingScreen->inputCursorArrId][sNamingScreen->inputCursorPosition].upPos;
             break;
         case INPUT_DPAD_DOWN:
-            newPosition = gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].unk1;
+            newPosition = sLayoutInfo[sNamingScreen->inputCursorArrId][sNamingScreen->inputCursorPosition].downPos;
             break;
         case INPUT_DPAD_LEFT:
-            newPosition = gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].unk2;
+            newPosition = sLayoutInfo[sNamingScreen->inputCursorArrId][sNamingScreen->inputCursorPosition].leftPos;
             break;
         case INPUT_DPAD_RIGHT:
-            newPosition = gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].unk3;
+            newPosition = sLayoutInfo[sNamingScreen->inputCursorArrId][sNamingScreen->inputCursorPosition].rightPos;
             break;
         default:
             newPosition = sNamingScreen->inputCursorPosition;
@@ -716,15 +724,15 @@ static void HandleInputCursor(void)
         sNamingScreen->inputCursorFrames = 8;
     }
 
-    x =  gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].x + (window->x * 8) - 5;
-    y =  gUnknown_80DB0F8[sNamingScreen->unk19][sNamingScreen->inputCursorPosition].y + (window->y * 8) + 1;
+    x =  sLayoutInfo[sNamingScreen->inputCursorArrId][sNamingScreen->inputCursorPosition].x + (window->x * 8) - 5;
+    y =  sLayoutInfo[sNamingScreen->inputCursorArrId][sNamingScreen->inputCursorPosition].y + (window->y * 8) + 1;
     SpriteSetX((SpriteOAM *) &sNamingScreen->sprite2Attribs, x);
     SpriteSetY((SpriteOAM *) &sNamingScreen->sprite2Attribs, y);
 }
 
-void sub_8015A08(u32 unused)
+static void UpdateInputWindow(bool8 unused)
 {
-    s32 r4;
+    s32 letter;
     s32 i;
     u8 text1[16];
     u8 text2[16];
@@ -732,62 +740,62 @@ void sub_8015A08(u32 unused)
     CallPrepareTextbox_8008C54(0);
     sub_80073B8(0);
 
-    for (i = 0; (r4 = gUnknown_80DB0F8[sNamingScreen->unk19][i].unk8) != 0x109; i++) {
-        s32 r5;
+    for (i = 0; (letter = sLayoutInfo[sNamingScreen->inputCursorArrId][i].letter) != NAMING_LETTER_TERMINATOR; i++) {
+        s32 color;
 
-        switch (gUnknown_80DB0F8[sNamingScreen->unk19][i].unk6) {
+        switch (sLayoutInfo[sNamingScreen->inputCursorArrId][i].colorType) {
             case 1:
-                r5 = 5;
+                color = 5;
                 break;
             case 2:
-                r5 = 2;
+                color = 2;
                 break;
             case 3:
-                r5 = 7;
+                color = 7;
                 break;
             default:
-                r5 = 7;
-                if (sNamingScreen->unk4 != 0) {
-                    if (r4 <= 0xFF) {
-                        if (sub_803D0F0(r4) == 0xFF) {
-                            r5 = 2;
+                color = 7;
+                if (sNamingScreen->isPassword) {
+                    if (letter <= 0xFF) {
+                        if (sub_803D0F0(letter) == 0xFF) {
+                            color = 2;
                         }
                     }
-                    else if (r4 < 0x102) {
-                        r5 = 2;
+                    else if (letter < 0x102) {
+                        color = 2;
                     }
                 }
                 break;
         }
 
-        if (r4 != 0x108) {
-            if (r4 == 0x107) {
+        if (letter != NAMING_LETTER_BLANK) {
+            if (letter == NAMING_LETTER_INS_OVR) {
                 if (sNamingScreen->unk18 == 0) {
-                    PrintStringOnWindow(gUnknown_80DB0F8[sNamingScreen->unk19][i].x + 3, gUnknown_80DB0F8[sNamingScreen->unk19][i].y, _("{COLOR GREEN}OVR{RESET}"), 0, '\0');
+                    PrintStringOnWindow(sLayoutInfo[sNamingScreen->inputCursorArrId][i].x + 3, sLayoutInfo[sNamingScreen->inputCursorArrId][i].y, _("{COLOR GREEN}OVR{RESET}"), NAMING_WINDOW_INPUT, '\0');
                 }
                 else {
-                    PrintStringOnWindow(gUnknown_80DB0F8[sNamingScreen->unk19][i].x + 3, gUnknown_80DB0F8[sNamingScreen->unk19][i].y, _("{COLOR YELLOW}INS{RESET}"), 0, '\0');
+                    PrintStringOnWindow(sLayoutInfo[sNamingScreen->inputCursorArrId][i].x + 3, sLayoutInfo[sNamingScreen->inputCursorArrId][i].y, _("{COLOR YELLOW}INS{RESET}"), NAMING_WINDOW_INPUT, '\0');
                 }
             }
-            else if (r4 == 0x20) {
-                sprintfStatic(text1, _("{COLOR}%c{0x81}{0x59}"), r5);
-                PrintStringOnWindow(gUnknown_80DB0F8[sNamingScreen->unk19][i].x + 1, gUnknown_80DB0F8[sNamingScreen->unk19][i].y, text1, 0, '\0');
+            else if (letter == ' ') {
+                sprintfStatic(text1, _("{COLOR}%c{0x81}{0x59}"), color);
+                PrintStringOnWindow(sLayoutInfo[sNamingScreen->inputCursorArrId][i].x + 1, sLayoutInfo[sNamingScreen->inputCursorArrId][i].y, text1, NAMING_WINDOW_INPUT, '\0');
             }
-            else if (r4 > 0xFF) {
-                sprintfStatic(text2, _("{COLOR}%c%s"), r5, gUnknown_80DB4F4[r4 & 0xFF]);
-                PrintStringOnWindow(gUnknown_80DB0F8[sNamingScreen->unk19][i].x + 3, gUnknown_80DB0F8[sNamingScreen->unk19][i].y, text2, 0, '\0');
+            else if (letter > 0xFF) {
+                sprintfStatic(text2, _("{COLOR}%c%s"), color, sSpecialLetters[letter & 0xFF]);
+                PrintStringOnWindow(sLayoutInfo[sNamingScreen->inputCursorArrId][i].x + 3, sLayoutInfo[sNamingScreen->inputCursorArrId][i].y, text2, NAMING_WINDOW_INPUT, '\0');
             }
             else {
-                sub_8012C60(gUnknown_80DB0F8[sNamingScreen->unk19][i].x, gUnknown_80DB0F8[sNamingScreen->unk19][i].y, (u8) r4, r5, 0);
+                sub_8012C60(sLayoutInfo[sNamingScreen->inputCursorArrId][i].x, sLayoutInfo[sNamingScreen->inputCursorArrId][i].y, (u8) letter, color, 0);
             }
         }
     }
 
-    AddUnderScoreHighlight(0, 0, 0, 0xE0, 0xE);
-    AddUnderScoreHighlight(0, 0, 0x47, 0xE0, 0xE);
-    sub_8007A78(0, 0, 0, 0x48, 0xE);
-    sub_8007A78(0, 0xDF, 0, 0x48, 0xE);
-    sub_80073E0(0);
+    AddUnderScoreHighlight(NAMING_WINDOW_INPUT, 0, 0, 0xE0, 0xE);
+    AddUnderScoreHighlight(NAMING_WINDOW_INPUT, 0, 0x47, 0xE0, 0xE);
+    sub_8007A78(NAMING_WINDOW_INPUT, 0, 0, 0x48, 0xE);
+    sub_8007A78(NAMING_WINDOW_INPUT, 0xDF, 0, 0x48, 0xE);
+    sub_80073E0(NAMING_WINDOW_INPUT);
 }
 
 static void UpdateNameWindow(void)
@@ -796,37 +804,37 @@ static void UpdateNameWindow(void)
 
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
-    if (sNamingScreen->unk4 != 0) {
-        AddUnderScoreHighlight(1, 0, 0, 0xE0, 0xE);
-        AddUnderScoreHighlight(1, 0, 0x37, 0xE0, 0xE);
-        sub_8007A78(1, 0, 0, 0x38, 0xE);
-        sub_8007A78(1, 0xDF, 0, 0x38, 0xE);
+    if (sNamingScreen->isPassword) {
+        AddUnderScoreHighlight(NAMING_WINDOW_NAME, 0, 0, 0xE0, 0xE);
+        AddUnderScoreHighlight(NAMING_WINDOW_NAME, 0, 0x37, 0xE0, 0xE);
+        sub_8007A78(NAMING_WINDOW_NAME, 0, 0, 0x38, 0xE);
+        sub_8007A78(NAMING_WINDOW_NAME, 0xDF, 0, 0x38, 0xE);
     }
     else {
-        AddUnderScoreHighlight(1, 0, 0, 0xB0, 0xE);
-        AddUnderScoreHighlight(1, 0, 0x27, 0xB0, 0xE);
-        sub_8007A78(1, 0, 0, 0x28, 0xE);
-        sub_8007A78(1, 0xAF, 0, 0x28, 0xE);
+        AddUnderScoreHighlight(NAMING_WINDOW_NAME, 0, 0, 0xB0, 0xE);
+        AddUnderScoreHighlight(NAMING_WINDOW_NAME, 0, 0x27, 0xB0, 0xE);
+        sub_8007A78(NAMING_WINDOW_NAME, 0, 0, 0x28, 0xE);
+        sub_8007A78(NAMING_WINDOW_NAME, 0xAF, 0, 0x28, 0xE);
     }
 
     switch (sNamingScreen->type) {
         case NAMING_SELF:
-            PrintStringOnWindow(8, 5, _("What is your name?"), 1, '\0');
+            PrintStringOnWindow(8, 5, _("What is your name?"), NAMING_WINDOW_NAME, '\0');
             break;
         case NAMING_POKEMON:
-            PrintStringOnWindow(8, 5, _("What is this Pokémon's nickname?"), 1, '\0');
+            PrintStringOnWindow(8, 5, _("What is this Pokémon's nickname?"), NAMING_WINDOW_NAME, '\0');
             break;
         case NAMING_PARTNER:
-            PrintStringOnWindow(8, 5, _("What is your partner's nickname?"), 1, '\0');
+            PrintStringOnWindow(8, 5, _("What is your partner's nickname?"), NAMING_WINDOW_NAME, '\0');
             break;
         case NAMING_TEAM:
-            PrintStringOnWindow(8, 5, _("What is your team's name?"), 1, '\0');
+            PrintStringOnWindow(8, 5, _("What is your team's name?"), NAMING_WINDOW_NAME, '\0');
             break;
         case NAMING_PASSWORD1:
-            PrintStringOnWindow(54, 2, _("Please enter the password."), 1, '\0');
+            PrintStringOnWindow(54, 2, _("Please enter the password."), NAMING_WINDOW_NAME, '\0');
             break;
         case NAMING_PASSWORD2:
-            PrintStringOnWindow(48, 4, _("Please enter the password."), 1, '\0');
+            PrintStringOnWindow(48, 4, _("Please enter the password."), NAMING_WINDOW_NAME, '\0');
             break;
     }
 
@@ -841,7 +849,7 @@ static void UpdateNameWindow(void)
         case NAMING_TEAM:
         case NAMING_POKEMON:
         case NAMING_PARTNER:
-            AddDoubleUnderScoreHighlight(1, 38, 33, GetMaxPokeNameWidth(), 4);
+            AddDoubleUnderScoreHighlight(NAMING_WINDOW_NAME, 38, 33, GetMaxPokeNameWidth(), 4);
             if (GetStrWidth(sNamingScreen->textPtr, sNamingScreen->maxLetters) > GetMaxPokeNameWidth()) {
                 sprintfStatic(text, _("{COLOR RED}%s{RESET}"), sNamingScreen->textPtr);
             }
@@ -851,11 +859,11 @@ static void UpdateNameWindow(void)
             else {
                 sprintfStatic(text, _("%s"), sNamingScreen->textPtr);
             }
-            PrintStringOnWindow(38, 22, text, 1, '\0');
+            PrintStringOnWindow(38, 22, text, NAMING_WINDOW_NAME, '\0');
             break;
     }
 
-    sub_80073E0(1);
+    sub_80073E0(NAMING_WINDOW_NAME);
 }
 
 static void sub_8015E10(u8 *a0, s32 a1, s32 _a2)
