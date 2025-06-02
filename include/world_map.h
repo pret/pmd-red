@@ -33,13 +33,15 @@ struct WorldMap
     u8 unk5E98[1500];
 };
 
+#define WORLD_MAP_UNK_6D_COUNT 63
+
 struct WorldMapInfo
 {
     DungeonLocation startLocation;
     DungeonSetupSubstruct unk4;
     PokemonStruct1 mon;
     u8 unk6C;
-    u8 unk6D[63];
+    u8 unk6D[WORLD_MAP_UNK_6D_COUNT];
 };
 
 struct WorldMapSetupStruct

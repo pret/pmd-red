@@ -238,7 +238,7 @@ static void sub_8010494(struct WorldMapInfo *info)
         struct UnkStruct_Sub1 *structPtr = &sWorldMapPtr->unk0[i];
         u8 r0;
 
-        if (i < 63) {
+        if (i < WORLD_MAP_UNK_6D_COUNT) {
             r0 = info->unk6D[i];
         }
         else {
@@ -247,7 +247,7 @@ static void sub_8010494(struct WorldMapInfo *info)
 
         if (r0) {
             structPtr->unk0 = 1;
-            AxResInitFile(&structPtr->unk8, sWorldMapPtr->unk1100[2], (i == 63) ? 12 : 1, 0, 0x40, 0, 1);
+            AxResInitFile(&structPtr->unk8, sWorldMapPtr->unk1100[2], (i == WORLD_MAP_UNK_6D_COUNT) ? 12 : 1, 0, 0x40, 0, 1);
             structPtr->unk4 = gDungeonCoordinates[i];
         }
         else {

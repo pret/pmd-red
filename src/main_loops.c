@@ -552,7 +552,7 @@ enum
     MODE_FRIEND_AREAS,
     MODE_DUNGEON_FROM_WORLD_MAP,
     MODE_6,
-    MODE_7,
+    MODE_CONTINUE_QUICKSAVE,
     MODE_8,
     MODE_DUNGEON_WON,
     MODE_10,
@@ -568,18 +568,18 @@ static u32 RunGameMode_Async(u32 a0)
 
     sub_801180C();
     FadeOutAllMusic(0x10);
-    if (mode == 7) {
+    if (mode == MODE_CONTINUE_QUICKSAVE) {
         if (a0 == 2) {
-            mode = 8;
+            mode = MODE_8;
         }
         else if (a0 == 3) {
-            mode = 11;
+            mode = MODE_11;
             SetScriptVarValue(NULL, START_MODE, 11);
             sub_8096BD0();
             QuickSave_Async(3);
         }
     }
-    else if (mode != 0 && mode != 11) {
+    else if (mode != MODE_NEW_GAME && mode != MODE_11) {
         mode = MODE_CONTINUE_GAME;
     }
 
@@ -619,12 +619,12 @@ static u32 RunGameMode_Async(u32 a0)
 
             s32 dungId = (s16) GetScriptVarValue(NULL, DUNGEON_SELECT);
             u8 r6 = sub_80A2740(dungId);
-            for (i = 0; i < 63; i++) {
+            for (i = 0; i < WORLD_MAP_UNK_6D_COUNT; i++) {
                 worldMapSetup.info.unk6D[i] = sub_80A28F0(i);
             }
 
             if (r6 == 99) {
-                mode = 2;
+                mode = MODE_GROUND;
                 continue;
             }
 
@@ -660,14 +660,14 @@ static u32 RunGameMode_Async(u32 a0)
             sub_800A8F8(4);
             r5 = xxx_script_related_8001334(5);
         }
-        else if (mode == 8) {
+        else if (mode == MODE_8) {
             r5 = 0;
         }
-        else if (mode == 7) {
+        else if (mode == MODE_CONTINUE_QUICKSAVE) {
             r5 = 2;
         }
         else {
-            if (mode == 11) {
+            if (mode == MODE_11) {
                 RemoveAllMoneyAndItems();
             }
             else if (mode == MODE_DUNGEON_LOST) {
@@ -738,12 +738,12 @@ static u32 RunGameMode_Async(u32 a0)
             }
             else if (var == 0xF1208) {
                 r5 = 1;
-                mode = 11;
+                mode = MODE_11;
                 sub_8096BD0();
             }
             else {
                 r5 = 1;
-                mode = 11;
+                mode = MODE_11;
                 sub_8096BD0();
             }
 
@@ -762,12 +762,12 @@ static u32 RunGameMode_Async(u32 a0)
                 }
                 else if (var == 0xF1208) {
                     r5 = 1;
-                    mode = 11;
+                    mode = MODE_11;
                     sub_8096BD0();
                 }
                 else {
                     r5 = 1;
-                    mode = 11;
+                    mode = MODE_11;
                     sub_8096BD0();
                 }
             }
@@ -778,16 +778,16 @@ static u32 RunGameMode_Async(u32 a0)
             if (r5 == 3) {
                 u8 r4 = sub_8001170();
                 r5 = 1;
-                mode = 11;
+                mode = MODE_11;
                 sub_8096BD0();
                 if (r4 != 63 && r4 != 99 && IsEnterWithoutGameSave(r4)) {
                     if (sub_8011C1C() == 2) {
                         r5 = 3;
-                        mode = 7;
+                        mode = MODE_CONTINUE_QUICKSAVE;
                     }
                     else {
                         r5 = 12;
-                        mode = 10;
+                        mode = MODE_10;
                     }
                 }
 
@@ -797,12 +797,12 @@ static u32 RunGameMode_Async(u32 a0)
             }
             else if (r5 == 4) {
                 r5 = 1;
-                mode = 11;
+                mode = MODE_11;
                 sub_8096BD0();
                 sub_80008C0_Async(1);
             }
             else if (r5 == 1) {
-                mode = 11;
+                mode = MODE_11;
                 sub_8096BD0();
             }
         }
@@ -847,22 +847,22 @@ static u32 RunGameMode_Async(u32 a0)
             switch (dungeonSetup.info.unk7C) {
                 case 1:
                 case 4:
-                    mode = 9;
+                    mode = MODE_DUNGEON_WON;
                     SetScriptVarArrayValue(NULL, EVENT_S08E01, 0, (dungeonSetup.info.unk7E != 0) ? 2 : 1);
                     break;
                 case 2:
-                    mode = 10;
+                    mode = MODE_10;
                     break;
                 case -1:
-                    mode = 12;
+                    mode = MODE_DUNGEON_LOST;
                     sub_8096BD0();
                     break;
                 case 5:
-                    mode = 11;
+                    mode = MODE_11;
                     sub_8096BD0();
                     break;
                 default:
-                    mode = 11;
+                    mode = MODE_11;
                     sub_8096BD0();
                     break;
             }
