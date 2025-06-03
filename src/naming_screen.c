@@ -56,8 +56,6 @@ static void SetLetterCursorSpritePosition(void);
 static void HandleInputCursor(void);
 static void UpdatePassword1Window(u8 *text, s32 windowId, s32 _yAdd);
 static void UpdatePassword2Window(u8 *text, s32 windowId, s32 _yAdd);
-s32 GetMaxPokeNameWidth(void);
-s32 GetStrWidth(u8 *buffer, s32 size);
 static u32 HandleAPress(void);
 static bool8 HandleBPress(void);
 
@@ -86,7 +84,7 @@ struct LayoutInfo
     s32 letter;
 };
 
-static const DungeonPos gUnknown_80DAFC0[] =
+static const DungeonPos sPassword1CursorPositions[] =
 {
     {3, 0xD},
     {0xF, 0xD},
@@ -144,7 +142,7 @@ static const DungeonPos gUnknown_80DAFC0[] =
     {0xD1, 0x28},
 };
 
-static const DungeonPos gUnknown_80DB098[] =
+static const DungeonPos sPassword2CursorPositions[] =
 {
     {0x20, 0x12},
     {0x2E, 0x12},
@@ -591,19 +589,19 @@ static void SetLetterCursorSpritePosition(void)
     if (sNamingScreen->type == NAMING_PASSWORD1) {
         s32 x, y;
 
-        x = gUnknown_80DAFC0[sNamingScreen->letterCursorPos].x + (window->x * 8);
+        x = sPassword1CursorPositions[sNamingScreen->letterCursorPos].x + (window->x * 8);
         SpriteSetX((SpriteOAM *) &sNamingScreen->spriteLetterCursor, x);
 
-        y = gUnknown_80DAFC0[sNamingScreen->letterCursorPos].y + (window->y * 8) + 5;
+        y = sPassword1CursorPositions[sNamingScreen->letterCursorPos].y + (window->y * 8) + 5;
         SpriteSetY((SpriteOAM *) &sNamingScreen->spriteLetterCursor, y);
     }
     else if (sNamingScreen->type == NAMING_PASSWORD2) {
         s32 x, y;
 
-        x = gUnknown_80DB098[sNamingScreen->letterCursorPos].x + (window->x * 8);
+        x = sPassword2CursorPositions[sNamingScreen->letterCursorPos].x + (window->x * 8);
         SpriteSetX((SpriteOAM *) &sNamingScreen->spriteLetterCursor, x);
 
-        y = gUnknown_80DB098[sNamingScreen->letterCursorPos].y + (window->y * 8) + 5;
+        y = sPassword2CursorPositions[sNamingScreen->letterCursorPos].y + (window->y * 8) + 5;
         SpriteSetY((SpriteOAM *) &sNamingScreen->spriteLetterCursor, y);
     }
     else {
@@ -794,11 +792,11 @@ static void UpdatePassword1Window(u8 *text, s32 windowId, s32 _yAdd)
     s32 i;
     s32 yAdd = (s16) _yAdd;
 
-    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DAFC0); i++) {
-        AddDoubleUnderScoreHighlight(windowId, gUnknown_80DAFC0[i].x, gUnknown_80DAFC0[i].y + 11 + yAdd, 11, 5);
+    for (i = 0; i < ARRAY_COUNT_INT(sPassword1CursorPositions); i++) {
+        AddDoubleUnderScoreHighlight(windowId, sPassword1CursorPositions[i].x, sPassword1CursorPositions[i].y + 11 + yAdd, 11, 5);
     }
 
-    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DAFC0) && text[i] != '\0'; i++) {
+    for (i = 0; i < ARRAY_COUNT_INT(sPassword1CursorPositions) && text[i] != '\0'; i++) {
         s32 color;
 
         if (i <= 4) color = 7;
@@ -811,7 +809,7 @@ static void UpdatePassword1Window(u8 *text, s32 windowId, s32 _yAdd)
         else if (i <= 48) color = 6;
         else color = 7;
 
-        DrawCharOnWindowWidth12(gUnknown_80DAFC0[i].x, gUnknown_80DAFC0[i].y + yAdd, text[i], color, windowId);
+        DrawCharOnWindowWidth12(sPassword1CursorPositions[i].x, sPassword1CursorPositions[i].y + yAdd, text[i], color, windowId);
     }
 }
 
@@ -820,11 +818,11 @@ static void UpdatePassword2Window(u8 *text, s32 windowId, s32 _yAdd)
     s32 i;
     s32 yAdd = (s16) _yAdd;
 
-    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DB098); i++) {
-        AddDoubleUnderScoreHighlight(windowId, gUnknown_80DB098[i].x, gUnknown_80DB098[i].y + 11 + yAdd, 12, 5);
+    for (i = 0; i < ARRAY_COUNT_INT(sPassword2CursorPositions); i++) {
+        AddDoubleUnderScoreHighlight(windowId, sPassword2CursorPositions[i].x, sPassword2CursorPositions[i].y + 11 + yAdd, 12, 5);
     }
 
-    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80DB098) && text[i] != '\0'; i++) {
+    for (i = 0; i < ARRAY_COUNT_INT(sPassword2CursorPositions) && text[i] != '\0'; i++) {
         s32 color;
 
         if (i <= 3) color = 7;
@@ -833,7 +831,7 @@ static void UpdatePassword2Window(u8 *text, s32 windowId, s32 _yAdd)
         else if (i <= 19) color = 6;
         else color = 7;
 
-        DrawCharOnWindowWidth12(gUnknown_80DB098[i].x, gUnknown_80DB098[i].y + yAdd, text[i], color, windowId);
+        DrawCharOnWindowWidth12(sPassword2CursorPositions[i].x, sPassword2CursorPositions[i].y + yAdd, text[i], color, windowId);
     }
 }
 

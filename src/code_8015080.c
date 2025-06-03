@@ -25,14 +25,7 @@ struct unkStruct_203B1F8
 
 EWRAM_INIT struct unkStruct_203B1F8 *gUnknown_203B1F8 = {NULL};
 
-const WindowTemplate gUnknown_80DAF70 = {
-   0x00,
-   0x03,
-   0x00, 0x00,
-   0x00, 0x00,
-   0x00, 0x00,
-   NULL
-};
+static const WindowTemplate sWindowTemplateDummy = WIN_TEMPLATE_DUMMY;
 
 const WindowTemplate gUnknown_80DAF88 = {
    0x00,
@@ -59,9 +52,9 @@ bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems)
     gUnknown_203B1F8 = MemoryAlloc(sizeof(struct unkStruct_203B1F8), 8);
     gUnknown_203B1F8->menuAction = 0;
 
-    for(index = 0; index < 4; index++)
+    for(index = 0; index < MAX_WINDOWS; index++)
     {
-        gUnknown_203B1F8->windows.id[index] = gUnknown_80DAF70;
+        gUnknown_203B1F8->windows.id[index] = sWindowTemplateDummy;
     }
 
     gUnknown_203B1F8->windows.id[0] = gUnknown_80DAF88;
