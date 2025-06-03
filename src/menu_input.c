@@ -199,7 +199,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 windowId)
             chr = ReturnIntFromChar2(iVar1 + 0x30);
             iVar3 = GetCharacter(chr);
             total_x += iVar3->width;
-            xxx_call_draw_char(x - total_x, y, chr, color, windowId);
+            DrawCharOnWindow(x - total_x, y, chr, color, windowId);
             counter++;
             if (counter >= len)
                 break;
@@ -207,21 +207,18 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 windowId)
     }
 }
 
-void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
+void DrawCharOnWindowWidth12(u32 x, u32 y, u32 chr, u32 color, u32 windowId)
 {
     u32 add_x;
-    const unkChar *iVar3;
-    u32 uVar2;
+    u32 chrId = ReturnIntFromChar2(chr);
+    const unkChar *chrInfo = GetCharacter(chrId);
 
-    uVar2 = ReturnIntFromChar2(a2);
-    iVar3 = GetCharacter(uVar2);
-
-    if (iVar3->width < 12)
-        add_x = ((12 - iVar3->width) / 2);
+    if (chrInfo->width < 12)
+        add_x = ((12 - chrInfo->width) / 2);
     else
         add_x = 0;
 
-    xxx_call_draw_char(x + add_x, y, uVar2, color, a4);
+    DrawCharOnWindow(x + add_x, y, chrId, color, windowId);
 }
 
 void sub_8012CAC(WindowTemplate *a0, const MenuItem *a1)
@@ -1082,7 +1079,7 @@ void sub_8013C68(unkStructFor8013AA0 *a0)
         else
             ch = '0' + sp[i];
 
-        sub_8012C60(a0->unk1C - ((i + 1) * 12), a0->unk20, ch, 7, a0->unk14);
+        DrawCharOnWindowWidth12(a0->unk1C - ((i + 1) * 12), a0->unk20, ch, 7, a0->unk14);
     }
 
     for (i = 0; i < a0->unk10; i++)

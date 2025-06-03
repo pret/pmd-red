@@ -24,9 +24,9 @@ static bool8 xxx_update_bg_vram(Window *windows);
 // TODO: Find these funcs in blue. DTCM funcs
 
 // In NDS, this func is copied to 01FF9F34
-u32 xxx_call_draw_char(s32 x, s32 y, u32 chr, u32 color, u32 windowId)
+u32 DrawCharOnWindow(s32 x, s32 y, u32 chr, u32 color, u32 windowId)
 {
-    return xxx_draw_char(gWindows, x, y, chr, color, windowId);
+    return DrawCharOnWindowInternal(gWindows, x, y, chr, color, windowId);
 }
 
 UNUSED static bool8 sub_8007464(void)
@@ -35,7 +35,7 @@ UNUSED static bool8 sub_8007464(void)
 }
 
 // In NDS, this func is copied to 01FF994C
-u32 xxx_draw_char(Window *windows, s32 x, s32 y, u32 chr, u32 color, u32 windowId)
+u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, u32 windowId)
 {
     u32 *r3;
     const unkShiftData *shiftData;

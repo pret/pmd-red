@@ -379,7 +379,7 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             }
 
             x = counter % 12;
-            sub_8012C60((x * 10) + 84, y, local_34[counter], color, param_1->unk0[0]);
+            DrawCharOnWindowWidth12((x * 10) + 84, y, local_34[counter], color, param_1->unk0[0]);
         }
     }
 }

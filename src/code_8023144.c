@@ -175,17 +175,17 @@ static void sub_80234BC(void)
 
         iVar4 = GetDexInternalNo(species, 0);
         cVar2 = (iVar4 % 10) + 48;
-        sub_8012C60(20, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
+        DrawCharOnWindowWidth12(20, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
 
         if (9 < iVar4) {
             iVar4 /= 10;
             cVar2 = (iVar4 % 10) + 48;
-            sub_8012C60(13, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
+            DrawCharOnWindowWidth12(13, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
 
             if (9 < iVar4) {
                 uVar3 = iVar4 / 10;
                 cVar2 = (uVar3 % 10) + 48;
-                sub_8012C60(6, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
+                DrawCharOnWindowWidth12(6, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
             }
         }
 
