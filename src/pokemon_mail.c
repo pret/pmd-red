@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "constants/colors.h"
 #include "code_800D090.h"
-#include "code_8012A18_1.h"
 #include "code_803C1D0.h"
 #include "code_803D0D8.h"
 #include "dungeon.h"
@@ -17,6 +16,7 @@
 #include "string_format.h"
 #include "text_3.h"
 #include "text_util.h"
+#include "naming_screen.h"
 
 #include "data/pokemon_mail.h"
 
