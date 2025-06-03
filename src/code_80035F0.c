@@ -22,9 +22,11 @@ typedef struct unkStruct_3000C00
     void (*unk10)(u32);
 } unkStruct_3000C00;
 
-unkStruct_3000C00 gUnknown_3000C00[0x20];
-
-struct S gUnknown_3000400[0x200];
+// TODO: make static once whole file is decompiled
+#define UNK_3000400_ARR_COUNT 0x200
+#define UNK_3000C00_ARR_COUNT 0x21
+IWRAM_DATA struct S gUnknown_3000400[UNK_3000400_ARR_COUNT] = {0};
+IWRAM_DATA unkStruct_3000C00 gUnknown_3000C00[UNK_3000C00_ARR_COUNT] = {0};
 
 void sub_8003A34(u32, u32);
 void sub_8003AC0(u32, u32);
@@ -63,7 +65,7 @@ void sub_8003600(void)
     zero = 0;
     it2 = &gUnknown_3000400[0];
 
-    for (i = 0; i < 0x200; it2++, i++)
+    for (i = 0; i < UNK_3000400_ARR_COUNT; it2++, i++)
     {
         it2->x0.x0[0] = zero;
         it2->x0.x0[1] = zero;
@@ -71,7 +73,7 @@ void sub_8003600(void)
         it2->x0.x0[3] = zero;
     }
 
-    for (i = 0; i < 0x21; i++, it1++)
+    for (i = 0; i < UNK_3000C00_ARR_COUNT; i++, it1++)
     {
         it1->unk0 = FALSE;
         it1->unk2 = 0x100;
@@ -93,7 +95,7 @@ void sub_8003664(s32 param_1, s16 param_2)
     unkStruct_3000C00 *ptr;
     idx = param_1;
     ptr = &gUnknown_3000C00[idx];
-    
+
     ptr->unk0 = TRUE;
     ptr->unk2 = param_2;
     ptr->unk4.unk0[0] = 0;
@@ -137,7 +139,7 @@ void sub_80036F4(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
     ptr->unk8 = 0;
     ptr->unkC = &sub_8003E2C;
     ptr->unk10 = &sub_8003EC0;
-    
+
     gUnknown_3001B58 = TRUE;
 }
 
@@ -249,7 +251,7 @@ void sub_800388C(u32 param_1, struct S *param_2, s32 param_3)
     }
 
     ptr3 = &gUnknown_3000C00[idx2];
-    
+
     for (i = idx2; i <= sVar2; i++, ptr3++)
     {
         ptr3->unk0 = TRUE;
@@ -279,7 +281,7 @@ UNUSED void sub_80038F0(u32 param_1, s16 *param_2, s32 param_3)
     }
 
     ptr2 = &gUnknown_3000C00[idx2];
-    
+
     for (i = idx2; i <= uVar; i++, ptr2++)
     {
         ptr2->unk0 = TRUE;

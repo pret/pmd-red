@@ -1,11 +1,5 @@
 .include "src/m4a.o"
-
-gUnknown_3000400: /* 3000400 */
-	.space 0x800
-
-gUnknown_3000C00: /* 3000C00 */
-	.space 0x294
-
+.include "src/code_80035F0.o"
 .include "src/text_1.o"
 .include "src/music.o"
 .include "src/dungeon_tilemap.o"
