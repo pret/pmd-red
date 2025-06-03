@@ -20,10 +20,7 @@
 #include "wonder_mail_5.h"
 #include "wonder_mail_802D098.h"
 #include "wonder_mail_main_menu.h"
-
-u32 NamingScreen_Init(u32 type, u8 *defaultText);
-u32 NamingScreen_HandleInput(void);
-void NamingScreen_Free(void);
+#include "naming_screen.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1

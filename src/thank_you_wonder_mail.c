@@ -24,10 +24,7 @@
 #include "thank_you_wonder_mail.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
-
-u32 NamingScreen_Init(u32 type, u8 *defaultText);
-u32 NamingScreen_HandleInput(void);
-void NamingScreen_Free(void);
+#include "naming_screen.h"
 
 static EWRAM_INIT WonderMailStruct_203B2C4 *sUnknown_203B2C4 = {NULL};
 

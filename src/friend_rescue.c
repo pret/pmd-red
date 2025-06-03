@@ -27,10 +27,7 @@
 #include "text_util.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
-
-u32 NamingScreen_Init(u32 type, u8 *defaultText);
-u32 NamingScreen_HandleInput(void);
-void NamingScreen_Free(void);
+#include "naming_screen.h"
 
 extern void SetFriendRescueMenuState(u32);
 

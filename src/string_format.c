@@ -46,7 +46,7 @@ void sub_8014114(void) {
 void nullsub_201(void) {}
 
 u32 sub_8014128(void) {
-    if(sub_8012AE8() == INPUT_B_BUTTON) return 0;
+    if(GetMenuInput() == INPUT_B_BUTTON) return 0;
     else return 1;
 }
 

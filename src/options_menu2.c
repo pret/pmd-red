@@ -42,7 +42,7 @@ u32 sub_801E218(void)
 
     flag = FALSE;
 
-    switch (sub_8012AE8()) {
+    switch (GetMenuInput()) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;

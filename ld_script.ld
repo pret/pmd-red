@@ -101,6 +101,7 @@ SECTIONS {
         src/code_8012A18.o(.text);
         src/menu_input.o(.text);
         src/string_format.o(.text);
+        src/code_8015080.o(.text);
         src/naming_screen.o(.text);
         src/code_801602C.o(.text);
         src/felicity_bank.o(.text);
@@ -453,6 +454,7 @@ SECTIONS {
         src/string_format.o(.rodata);
         data/data_80D47B8.o(.rodata);
         src/common_strings.o(.rodata);
+        src/code_8015080.o(.rodata);
         src/naming_screen.o(.rodata);
         src/code_801602C.o(.rodata);
         src/felicity_bank.o(.rodata);

@@ -31,10 +31,7 @@
 #include "wigglytuff_shop1.h"
 #include "wigglytuff_shop3.h"
 #include "wonder_mail.h"
-
-u32 NamingScreen_Init(u32 type, u8 *defaultText);
-u32 NamingScreen_HandleInput(void);
-void NamingScreen_Free(void);
+#include "naming_screen.h"
 
 IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = { NULL };
 

@@ -15,10 +15,7 @@
 #include "sprite.h"
 #include "string_format.h"
 #include "text_1.h"
-
-u32 NamingScreen_Init(u32 type, u8 *defaultText);
-u32 NamingScreen_HandleInput(void);
-void NamingScreen_Free(void);
+#include "naming_screen.h"
 
 #define RESCUE_PASSWORD_SIZE 0x36
 

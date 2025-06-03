@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "naming_screen.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
 #include "code_803D0D8.h"
@@ -14,43 +15,64 @@
 #include "text_util.h"
 #include "constants/input.h"
 
-struct unkStruct_203B1F8
+#define MAX_TEXT_SIZE 54
+
+enum
 {
-    // size: 0x4B4
-    u32 menuAction;
-    MenuStruct unk4;
+    MODE_OVR,
+    MODE_INS,
+};
+
+struct NamingScreen
+{
+    // size: 0x198
+    u32 type;
+    bool8 isPassword;
+    // Note: These had to be declared like these, because SpriteOAM is aligned by 4 and these aren't. Makes you think if SpriteOAM is actually a struct, and not just an array of 4 u16s.
+    u16 spriteLetterCursor[4];
+    u16 spriteInputCursor[4];
+    u8 letterCursorFrames;
+    u8 inputCursorFrames;
+    u8 insOvr;
+    u8 inputCursorArrId; // Always 0
+    u8 inputCursorPosition;
+    u8 maxLetters;
+    u8 letterCursorPos;
+    u16 letterTotalWidths[MAX_TEXT_SIZE];
+    s16 letterWidths[MAX_TEXT_SIZE];
+    u8 *textPtr; // Points to the field below. A bit over complicated in my opinion...
+    u8 text[MAX_TEXT_SIZE];
+    u8 *defaultText;
     WindowTemplates windows;
-    u8 buffer[0x400];
 };
 
-EWRAM_INIT struct unkStruct_203B1F8 *gUnknown_203B1F8 = {NULL};
+static EWRAM_INIT struct NamingScreen *sNamingScreen = NULL;
 
-const WindowTemplate gUnknown_80DAF70 = {
-   0x00,
-   0x03,
-   0x00, 0x00,
-   0x00, 0x00,
-   0x00, 0x00,
-   NULL
+static s32 GetEnteredNameLength(void);
+static void UpdateInputWindow(bool8);
+static void UpdateNameWindow(void);
+static void UpdateLetterWidths(void);
+static void SetLetterCursorSpritePosition(void);
+static void HandleInputCursor(void);
+static void UpdatePassword1Window(u8 *text, s32 windowId, s32 _yAdd);
+static void UpdatePassword2Window(u8 *text, s32 windowId, s32 _yAdd);
+s32 GetMaxPokeNameWidth(void);
+s32 GetStrWidth(u8 *buffer, s32 size);
+static u32 HandleAPress(void);
+static bool8 HandleBPress(void);
+
+enum
+{
+    NAMING_SELF,
+    NAMING_TEAM,
+    NAMING_POKEMON,
+    NAMING_PARTNER,
+    NAMING_PASSWORD1,
+    NAMING_PASSWORD2,
 };
 
-const WindowTemplate gUnknown_80DAF88 = {
-   0x00,
-   0x03,
-   0x02, 0x02,
-   0x1A, 0x0c,
-   0x0c, 0x00,
-   NULL
-};
-
-const WindowTemplate gUnknown_80DAFA0 = {
-   0x00,
-   0x03,
-   0x16, 0x0F,
-   0x06, 0x03,
-   0x03, 0x00,
-   NULL
-};
+#define NAMING_WINDOW_INPUT 0
+#define NAMING_WINDOW_NAME 1
 
 struct LayoutInfo
 {
@@ -64,7 +86,6 @@ struct LayoutInfo
     s32 letter;
 };
 
-UNUSED static const char sPksDir[] = "pksdir0";
 static const DungeonPos gUnknown_80DAFC0[] =
 {
     {3, 0xD},
@@ -295,114 +316,6 @@ static const WindowTemplate sPasswordNameWindowTemplate = {
     .header = NULL,
 };
 
-bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems)
-{
-    s32 index;
-
-    gUnknown_203B1F8 = MemoryAlloc(sizeof(struct unkStruct_203B1F8), 8);
-    gUnknown_203B1F8->menuAction = 0;
-
-    for(index = 0; index < 4; index++)
-    {
-        gUnknown_203B1F8->windows.id[index] = gUnknown_80DAF70;
-    }
-
-    gUnknown_203B1F8->windows.id[0] = gUnknown_80DAF88;
-    gUnknown_203B1F8->windows.id[2] = gUnknown_80DAFA0;
-    sub_8012CAC(&gUnknown_203B1F8->windows.id[2], menuItems);
-    ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B1F8->windows, 1, 1);
-    sub_80073B8(0);
-    FormatString(buffer, gUnknown_203B1F8->buffer, gUnknown_203B1F8->buffer + 0x400, 0);
-    PrintStringOnWindow(4, 4, gUnknown_203B1F8->buffer, 0, 0);
-    sub_80073E0(0);
-    sub_8012D60(&gUnknown_203B1F8->unk4, menuItems, 0, 0, -1, 2);
-    return TRUE;
-}
-
-u32 sub_801516C(void)
-{
-    if(!sub_8012FD8(&gUnknown_203B1F8->unk4)) {
-        sub_8013114(&gUnknown_203B1F8->unk4, &gUnknown_203B1F8->menuAction);
-        return 3;
-    }
-    else {
-        return 0;
-    }
-}
-
-u32 sub_8015198(void)
-{
-    return gUnknown_203B1F8->menuAction;
-}
-
-void sub_80151A4(void)
-{
-    if(gUnknown_203B1F8) {
-        MemoryFree(gUnknown_203B1F8);
-        gUnknown_203B1F8 = NULL;
-    }
-}
-
-#define MAX_TEXT_SIZE 54
-
-enum
-{
-    MODE_OVR,
-    MODE_INS,
-};
-
-struct NamingScreen
-{
-    // size: 0x198
-    u32 type;
-    bool8 isPassword;
-    // Note: These had to be declared like these, because SpriteOAM is aligned by 4 and these aren't. Makes you think if SpriteOAM is actually a struct, and not just an array of 4 u16s.
-    u16 spriteLetterCursor[4];
-    u16 spriteInputCursor[4];
-    u8 letterCursorFrames;
-    u8 inputCursorFrames;
-    u8 insOvr;
-    u8 inputCursorArrId; // Always 0
-    u8 inputCursorPosition;
-    u8 maxLetters;
-    u8 letterCursorPos;
-    u16 letterTotalWidths[MAX_TEXT_SIZE];
-    s16 letterWidths[MAX_TEXT_SIZE];
-    u8 *textPtr; // Points to the field below. A bit over complicated in my opinion...
-    u8 text[MAX_TEXT_SIZE];
-    u8 *defaultText;
-    WindowTemplates windows;
-};
-
-static EWRAM_INIT struct NamingScreen *sNamingScreen = NULL;
-
-static s32 GetEnteredNameLength(void);
-static void UpdateInputWindow(bool8);
-static void UpdateNameWindow(void);
-static void UpdateLetterWidths(void);
-static void SetLetterCursorSpritePosition(void);
-static void HandleInputCursor(void);
-static void UpdatePassword1Window(u8 *text, s32 windowId, s32 _yAdd);
-static void UpdatePassword2Window(u8 *text, s32 windowId, s32 _yAdd);
-s32 GetMaxPokeNameWidth(void);
-s32 GetStrWidth(u8 *buffer, s32 size);
-static u32 HandleAPress(void);
-static bool8 HandleBPress(void);
-
-enum
-{
-    NAMING_SELF,
-    NAMING_TEAM,
-    NAMING_POKEMON,
-    NAMING_PARTNER,
-    NAMING_PASSWORD1,
-    NAMING_PASSWORD2,
-};
-
-#define NAMING_WINDOW_INPUT 0
-#define NAMING_WINDOW_NAME 1
-
 u32 NamingScreen_Init(u32 type, u8 *defaultText)
 {
     SpriteOAM *sprite;
@@ -426,9 +339,13 @@ u32 NamingScreen_Init(u32 type, u8 *defaultText)
             sNamingScreen->isPassword = TRUE;
             sNamingScreen->maxLetters = 0x18;
             break;
-        case NAMING_SELF:
         case NAMING_TEAM:
+            sNamingScreen->inputCursorPosition = 6;
+            sNamingScreen->maxLetters = TEAM_NAME_LENGTH;
+            break;
+        case NAMING_SELF:
         case NAMING_PARTNER:
+        case NAMING_POKEMON:
         default:
             sNamingScreen->inputCursorPosition = 6;
             sNamingScreen->maxLetters = POKEMON_NAME_LENGTH;
@@ -535,7 +452,7 @@ u32 NamingScreen_HandleInput(void)
         AddSprite((SpriteOAM *) &sNamingScreen->spriteInputCursor, 0x100, NULL, NULL);
     }
 
-    switch (sub_8012AE8()) {
+    switch (GetMenuInput()) {
         case INPUT_L_BUTTON:
             if (sNamingScreen->letterCursorPos == 0) {
                 PlayMenuSoundEffect(2);
@@ -706,7 +623,7 @@ static void HandleInputCursor(void)
     Window *window = &gWindows[0];
     u32 newPosition;
 
-    switch (sub_8012AE8()) {
+    switch (GetMenuInput()) {
         case INPUT_DPAD_UP:
             newPosition = sLayoutInfo[sNamingScreen->inputCursorArrId][sNamingScreen->inputCursorPosition].upPos;
             break;

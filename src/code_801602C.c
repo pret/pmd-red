@@ -8,10 +8,7 @@
 #include "string_format.h"
 #include "text_util.h"
 #include "text_1.h"
-
-u32 NamingScreen_Init(u32 type, u8 *defaultText);
-u32 NamingScreen_HandleInput(void);
-void NamingScreen_Free(void);
+#include "naming_screen.h"
 
 EWRAM_INIT static struct unkStruct_203B200 *sUnknown_203B200 = {NULL};
 
