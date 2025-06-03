@@ -462,3 +462,129 @@ UNUSED static const u8 *sub_80A2B28(u16 r0)
 {
     return sub_80A2B18(GetScriptVarValue(NULL, GROUND_PLACE));
 }
+
+#include "ground_map.h"
+#include "text_1.h"
+#include "memory.h"
+#include "file_system.h"
+
+extern void sub_80A456C(unkStruct_3001B70 *, u32, const PixelPos *);
+extern const PixelPos gUnknown_81172B8;
+
+void sub_80A2B40(unkStruct_3001B70 *mapPtr, const SubStruct_52C *a1)
+{
+    SubStruct_0 *unk0Ptr;
+    s32 id, unk0Id, unk3E0Id;
+    s32 i;
+
+    mapPtr->unk52C = *a1;
+    mapPtr->unk548 = MemoryAlloc(mapPtr->unk52C.unk8 * 18, 6);
+    for (id = 0; id < mapPtr->unk52C.unkC; id++) {
+        mapPtr->unk554[id] = &gBgTilemaps[2 + mapPtr->unk52C.unkA + id][0][0];
+        mapPtr->unk54C[id] = MemoryAlloc(mapPtr->unk52C.unk10 * 128, 6);
+    }
+    for (; id < UNK_54C_ARR_COUNT; id++) {
+        mapPtr->unk554[id] = NULL;
+        mapPtr->unk54C[id] = NULL;
+    }
+
+    if (mapPtr->unk52C.unk14 != NULL) {
+        mapPtr->unk544 = MemoryAlloc(mapPtr->unk52C.unkE * 256, 6);
+    }
+    else {
+        mapPtr->unk544 = NULL;
+    }
+
+    mapPtr->unk430 = NULL;
+    mapPtr->unk434 = NULL;
+    mapPtr->unk438 = NULL;
+    mapPtr->unk43C = NULL;
+    mapPtr->unk440 = NULL;
+    mapPtr->unk52A = 0;
+    mapPtr->unk444 = -1;
+    mapPtr->unk468 = 0;
+    mapPtr->unk448 = 0;
+    mapPtr->unk449 = 0;
+    mapPtr->unk44A = 0;
+    mapPtr->unk44B = 0;
+    mapPtr->unk44C = 0;
+    mapPtr->unk44D = 0;
+    unk0Ptr = &mapPtr->unk0[0];
+    mapPtr->unk46C = 0;
+    mapPtr->unk470 = 0;
+    mapPtr->unk471 = 0;
+
+    for (unk0Id = 0; unk0Id < UNK_0_ARR_COUNT; unk0Id++, unk0Ptr++) {
+        unk0Ptr->unk0 = 0;
+        unk0Ptr->unk2 = 0;
+        unk0Ptr->unk8 = 0;
+        unk0Ptr->unk4 = 0;
+    }
+
+    for (unk3E0Id = 0; unk3E0Id < UNK_3E0_ARR_COUNT; unk3E0Id++) {
+        SubStruct_3E0 *unkPtr = &mapPtr->unk3E0[unk3E0Id];
+        unkPtr->unk0 = 0;
+        unkPtr->unk1 = 0;
+        unkPtr->unk2 = 0;
+        unkPtr->unk4 = 0;
+        unkPtr->unk8 = NULL;
+        unkPtr->unkC = 0;
+        unkPtr->unk12 = 0;
+        unkPtr->unk10 = 0;
+        unkPtr->unk1C = 0;
+        unkPtr->unk14 = 0;
+        unkPtr->unk20 = 0;
+        unkPtr->unk24 = 0;
+    }
+
+    for (i = 0; i < 2; i++) {
+        sub_80A456C(mapPtr, i, &gUnknown_81172B8);
+    }
+}
+
+void sub_80A2DD4(unkStruct_3001B70 *mapPtr);
+
+void sub_80A2D00(unkStruct_3001B70 *mapPtr)
+{
+    s32 i;
+
+    sub_80A2DD4(mapPtr);
+    TRY_FREE_AND_SET_NULL(mapPtr->unk544);
+    FREE_AND_SET_NULL(mapPtr->unk548);
+
+    for (i = 0; i < UNK_54C_ARR_COUNT; i++) {
+        if (mapPtr->unk554[i] != NULL) {
+            mapPtr->unk554[i] = NULL;
+        }
+        TRY_FREE_AND_SET_NULL(mapPtr->unk54C[i]);
+    }
+}
+
+void sub_80A2D68(unkStruct_3001B70 *mapPtr)
+{
+    TRY_FREE_AND_SET_NULL(mapPtr->unk544);
+}
+
+void sub_80A2D88(unkStruct_3001B70 *mapPtr)
+{
+    if (mapPtr->unk52C.unk14 != NULL) {
+        void *unk448 = &mapPtr->unk448;
+        mapPtr->unk544 = MemoryAlloc(mapPtr->unk52C.unkE * 256, 6);
+        mapPtr->unk52C.unk14(mapPtr->unk544, mapPtr->unk468, unk448, mapPtr->unk52C.unkE);
+    }
+}
+
+void sub_80A2DD4(unkStruct_3001B70 *mapPtr)
+{
+    s32 i;
+
+    for (i = 0; i < UNK_3E0_ARR_COUNT; i++) {
+        SubStruct_3E0 *unkPtr = &mapPtr->unk3E0[i];
+        TRY_CLOSE_FILE_AND_SET_NULL(unkPtr->unk8);
+    }
+    TRY_CLOSE_FILE_AND_SET_NULL(mapPtr->unk43C);
+    TRY_CLOSE_FILE_AND_SET_NULL(mapPtr->unk440);
+    TRY_CLOSE_FILE_AND_SET_NULL(mapPtr->unk430);
+    TRY_CLOSE_FILE_AND_SET_NULL(mapPtr->unk434);
+    TRY_CLOSE_FILE_AND_SET_NULL(mapPtr->unk438);
+}
