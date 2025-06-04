@@ -14,6 +14,7 @@
 #include "text_3.h"
 #include "text_util.h"
 #include "constants/input.h"
+#include "constants/colors.h"
 
 #define MAX_TEXT_SIZE 54
 
@@ -666,24 +667,24 @@ static void UpdateInputWindow(bool8 unused)
 
         switch (sLayoutInfo[sNamingScreen->inputCursorArrId][i].colorType) {
             case 1:
-                color = 5;
+                color = COLOR_CYAN;
                 break;
             case 2:
-                color = 2;
+                color = COLOR_RED;
                 break;
             case 3:
-                color = 7;
+                color = COLOR_WHITE_2;
                 break;
             default:
-                color = 7;
+                color = COLOR_WHITE_2;
                 if (sNamingScreen->isPassword) {
                     if (letter <= 0xFF) {
                         if (sub_803D0F0(letter) == 0xFF) {
-                            color = 2;
+                            color = COLOR_RED;
                         }
                     }
                     else if (letter < 0x102) {
-                        color = 2;
+                        color = COLOR_RED;
                     }
                 }
                 break;
@@ -799,14 +800,14 @@ static void UpdatePassword1Window(u8 *text, s32 windowId, s32 _yAdd)
     for (i = 0; i < ARRAY_COUNT_INT(sPassword1CursorPositions) && text[i] != '\0'; i++) {
         s32 color;
 
-        if (i <= 4) color = 7;
-        else if (i <= 12) color = 6;
-        else if (i <= 17) color = 7;
-        else if (i <= 22) color = 7;
-        else if (i <= 30) color = 6;
-        else if (i <= 35) color = 7;
-        else if (i <= 40) color = 7;
-        else if (i <= 48) color = 6;
+        if (i <= 4) color = COLOR_WHITE_2;
+        else if (i <= 12) color = COLOR_YELLOW;
+        else if (i <= 17) color = COLOR_WHITE_2;
+        else if (i <= 22) color = COLOR_WHITE_2;
+        else if (i <= 30) color = COLOR_YELLOW;
+        else if (i <= 35) color = COLOR_WHITE_2;
+        else if (i <= 40) color = COLOR_WHITE_2;
+        else if (i <= 48) color = COLOR_YELLOW;
         else color = 7;
 
         DrawCharOnWindowWidth12(sPassword1CursorPositions[i].x, sPassword1CursorPositions[i].y + yAdd, text[i], color, windowId);
@@ -825,11 +826,11 @@ static void UpdatePassword2Window(u8 *text, s32 windowId, s32 _yAdd)
     for (i = 0; i < ARRAY_COUNT_INT(sPassword2CursorPositions) && text[i] != '\0'; i++) {
         s32 color;
 
-        if (i <= 3) color = 7;
-        else if (i <= 7) color = 6;
-        else if (i <= 15) color = 7;
-        else if (i <= 19) color = 6;
-        else color = 7;
+        if (i <= 3) color = COLOR_WHITE_2;
+        else if (i <= 7) color = COLOR_YELLOW;
+        else if (i <= 15) color = COLOR_WHITE_2;
+        else if (i <= 19) color = COLOR_YELLOW;
+        else color = COLOR_WHITE_2;
 
         DrawCharOnWindowWidth12(sPassword2CursorPositions[i].x, sPassword2CursorPositions[i].y + yAdd, text[i], color, windowId);
     }
