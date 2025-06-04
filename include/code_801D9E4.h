@@ -10,8 +10,7 @@ struct unkStruct_81188F0
     /* 0x0 */ u8 *text1;
     /* 0x4 */ u8 *text2;
     /* 0x8 */ u8 *text3;
-    /* 0xC */ u8 *text4;
-    /* 0x10 */ u32 unk1;
+    /* 0xC */ u8 *text4[2];
     /* 0x14 */ u32 unk2;
     /* 0x18 */ u32 unk3;
 };

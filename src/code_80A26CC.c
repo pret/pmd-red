@@ -507,12 +507,12 @@ void sub_80A2B40(unkStruct_3001B70 *mapPtr, const SubStruct_52C *a1)
     mapPtr->unk52A = 0;
     mapPtr->unk444 = -1;
     mapPtr->unk468 = 0;
-    mapPtr->unk448 = 0;
-    mapPtr->unk449 = 0;
-    mapPtr->unk44A = 0;
-    mapPtr->unk44B = 0;
-    mapPtr->unk44C = 0;
-    mapPtr->unk44D = 0;
+    mapPtr->unk448.unk0 = 0;
+    mapPtr->unk448.unk1 = 0;
+    mapPtr->unk448.unk2 = 0;
+    mapPtr->unk448.unk3 = 0;
+    mapPtr->unk448.unk4 = 0;
+    mapPtr->unk448.unk5 = 0;
     unk0Ptr = &mapPtr->unk0[0];
     mapPtr->unk46C = 0;
     mapPtr->unk470 = 0;
@@ -607,12 +607,12 @@ void sub_80A2E64(unkStruct_3001B70 *mapPtr)
     sub_80A2DD4(mapPtr);
     mapPtr->unk444 = -1;
     mapPtr->unk528 = 0;
-    mapPtr->unk448 = 0;
-    mapPtr->unk449 = 0;
-    mapPtr->unk44A = 0;
-    mapPtr->unk44B = 0;
-    mapPtr->unk44C = 0;
-    mapPtr->unk44D = 0;
+    mapPtr->unk448.unk0 = 0;
+    mapPtr->unk448.unk1 = 0;
+    mapPtr->unk448.unk2 = 0;
+    mapPtr->unk448.unk3 = 0;
+    mapPtr->unk448.unk4 = 0;
+    mapPtr->unk448.unk5 = 0;
     unk0Ptr = &mapPtr->unk0[0];
     mapPtr->unk46C = 0;
     mapPtr->unk470 = 0;
@@ -657,13 +657,42 @@ void sub_80A2E64(unkStruct_3001B70 *mapPtr)
     mapPtr->unk52A = 1;
 }
 
+// RGB?
+u8* sub_80A3908(void * a0, const void * a1, void * a2, SubStruct_448 *);
+void sub_80A37C4(u16 * a0, const u16 *a1, SubStruct_52C *a2, SubStruct_545 *a3);
+void _UncompressCell(void * a0, u16 *a1, const void * a2, SubStruct_52C *a3, SubStruct_545 *a4);
+
 extern const struct unkStruct_81188F0 gUnknown_81188F0[10];
 extern const FileArchive gGroundFileArchive;
 
-/*
+extern void sub_809971C(u16 a0, const void *a1, int a2);
+
+struct UnkFileStruct
+{
+    u8 unk0;
+    s16 unk2;
+    void *unk4[0]; // This is most likely wrong, will need to be fixed.
+};
+
 void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
 {
+    SubStruct_0 *sub0Ptr;
+    u16 r5;
+    s32 i, j, k;
     const struct unkStruct_81188F0 *dataPtr;
+    s16 *mapPtr_464;
+    SubStruct_545 *mapPtr_454;
+    const u16 *file_434;
+    const void *file_438;
+    const void *file_430;
+    SubStruct_448 *mapPtr_448;
+    struct S str2;
+    struct S str1;
+    const void *r7;
+    s32 unk0Id;
+    s32 id;
+    void *vramPtr;
+    s32 sum;
     s32 a1 = (s16) a1_;
 
     if (a1 == -1) {
@@ -677,7 +706,158 @@ void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
     mapPtr->unk430 = OpenFileAndGetFileDataPtr(dataPtr->text1, &gGroundFileArchive);
     mapPtr->unk434 = OpenFileAndGetFileDataPtr(dataPtr->text2, &gGroundFileArchive);
     mapPtr->unk438 = OpenFileAndGetFileDataPtr(dataPtr->text3, &gGroundFileArchive);
+    file_430 = mapPtr->unk430->data;
+    file_434 = mapPtr->unk434->data;
+    file_438 = mapPtr->unk438->data;
+    mapPtr_464 = mapPtr->unk464;
+    mapPtr_454 = &mapPtr->unk454;
+    mapPtr_448 = &mapPtr->unk448;
+
+    mapPtr_464[0] = *(u8 *)(file_430); file_430 += 2;
+    mapPtr_464[1] = *(u8 *)(file_430); file_430 += 2;
+
+    mapPtr_454->unk0 = *file_434++;
+    mapPtr_454->unk2 = *file_434++;
+    mapPtr_454->unk4 = *file_434++;
+
+    sum = mapPtr_454->unk4;
+    for (k = 0; k < 4; k++) {
+        mapPtr_454->unk6[k] = *file_434++;
+        sum += mapPtr_454->unk6[k];
+    }
+    mapPtr_454->unkE = *file_434++;
+
+    mapPtr_448->unk0 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk1 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk2 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk3 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk4 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk5 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk6 = *(u8 *)(file_438); file_438 += 2;
+    mapPtr_448->unk8 = *(u8 *)(file_438); file_438 += 2;
+    mapPtr_448->unkA = *(u8 *)(file_438); file_438 += 2;
+
+    r7 = file_430;
+    r5 = mapPtr->unk52C.unk0 * 16;
+    str2 = (struct S) {0};
+    str1.x0.x0[0] = 0xff;
+    str1.x0.x0[1] = 0xff;
+    str1.x0.x0[2] = 0xff;
+    str1.x0.x0[3] = 0;
+    for (i = 0; i < mapPtr_464[0] && i < mapPtr->unk52C.unk2; i++) {
+        sub_8003810(r5++, str2);
+        sub_809971C(r5, r7, 15);
+        r5 += 15;
+        r7 += 60;
+    }
+    for (; i < mapPtr->unk52C.unk2; i++) {
+        sub_8003810(r5++, str2);
+        for (j = 0; j < 15; j++) {
+            sub_8003810(r5++, str1);
+        }
+    }
+
+    sub_80A37C4((void *)(VRAM + 0x8000 + mapPtr->unk52C.unk4 * 32), file_434, &mapPtr->unk52C, &mapPtr->unk454);
+    _UncompressCell(mapPtr->unk548, &mapPtr->unk528, file_434 + ((mapPtr_454->unk4 - 1) * 16), &mapPtr->unk52C, &mapPtr->unk454);
+    file_438 = sub_80A3908(&mapPtr->unk54C, file_438, &mapPtr->unk52C, &mapPtr->unk448);
+    mapPtr->unk468 = file_438;
+    if (mapPtr->unk544 != NULL) {
+        mapPtr->unk52C.unk14(mapPtr->unk544, file_438, mapPtr_448, mapPtr->unk52C.unkE);
+    }
+
+    sub0Ptr = mapPtr->unk0;
+    unk0Id = 0;
+    if (mapPtr_464[1] != 0) {
+        const s16 *r3 = file_430 + (mapPtr_464[0] * 60);
+        const void *r6 = &r3[mapPtr_464[0] * 2];
+
+        mapPtr->unk46C = r3;
+        mapPtr->unk470 = 1;
+        mapPtr->unk471 = 1;
+        for (; unk0Id < mapPtr_464[0] && unk0Id < mapPtr->unk52C.unk2; unk0Id++, sub0Ptr++, r3 += 2) {
+            if (r3[1] > 0) {
+                sub0Ptr->unk4 = r6;
+                r6 += r3[1] * 60;
+            }
+            else {
+                sub0Ptr->unk4 = NULL;
+            }
+            sub0Ptr->unk0 = 0;
+            sub0Ptr->unk2 = 0;
+            sub0Ptr->unk8 = 0;
+        }
+    }
+    else {
+        mapPtr->unk46C = NULL;
+        mapPtr->unk470 = 0;
+        mapPtr->unk471 = 0;
+    }
+
+    for (; unk0Id < UNK_0_ARR_COUNT; unk0Id++, sub0Ptr++) {
+        sub0Ptr->unk0 = 0;
+        sub0Ptr->unk2 = 0;
+        sub0Ptr->unk4 = sub0Ptr->unk8 = 0;
+    }
+
+    vramPtr = (void *)(VRAM + 0x8000 + (mapPtr->unk52C.unk4 + mapPtr_454->unk4) * 32);
+    for (id = 0; id < 2; id++) {
+        SubStruct_3E0 *sub3E0 = &mapPtr->unk3E0[id];
+        if (dataPtr->text4[id] != NULL) {
+            const struct UnkFileStruct *fileStr;
+            const void *r1, *r0;
+
+            sub3E0->unk8 = OpenFileAndGetFileDataPtr(dataPtr->text4[id], &gGroundFileArchive);
+            sub3E0->unk0 = 1;
+            sub3E0->unk1 = 1;
+            fileStr = sub3E0->unk8->data;
+            sub3E0->unkC = fileStr;
+            r1 = &fileStr->unk4;
+            r0 = r1 + fileStr->unk2 * 4;
+            sub3E0->unk10 = sub3E0->unk12 = r1;
+            sub3E0->unk14 = sub3E0->unk1C = r0;
+            sub3E0->unk2 = 0;
+            sub3E0->unk4 = (u32) fileStr->unk4[0]; // ?
+            sub3E0->unk20 = vramPtr;
+            sub3E0->unk24 = mapPtr_454->unk6[id] * 32;
+
+            vramPtr += mapPtr_454->unk6[id] * 32;
+        }
+        else {
+            sub3E0->unk0 = 0;
+            sub3E0->unk1 = 0;
+            sub3E0->unk4 = 0;
+            sub3E0->unk2 = 0;
+            sub3E0->unk8 = NULL;
+            sub3E0->unkC = 0;
+            sub3E0->unk12 = 0;
+            sub3E0->unk10 = 0;
+            sub3E0->unk1C = 0;
+            sub3E0->unk14 = 0;
+            sub3E0->unk20 = 0;
+            sub3E0->unk24 = 0;
+        }
+    }
+    for (; id < 4; id++) {
+        if (dataPtr->text4[id] != NULL) {
+            s32 n;
+            OpenedFile *file = OpenFileAndGetFileDataPtr(dataPtr->text4[id], &gGroundFileArchive);
+            const struct UnkFileStruct *fileStr = file->data;
+            u16 *r1 = (void *) fileStr->unk4;
+            r1 += fileStr->unk2 * 2;
+
+            n = mapPtr_454->unk6[id] * 16;
+            for (k = 0; k < n; k++) {
+                *(u16 *)(vramPtr) = *r1;
+                r1++;
+                vramPtr += 2;
+            }
+            CloseFile(file);
+        }
+    }
+
+    sub_80A3BB0(mapPtr, 0);
+    sub_80A3EB0(&mapPtr->unk488);
+    mapPtr->unk52A = 1;
 }
-*/
 
 //

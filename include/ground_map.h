@@ -7,8 +7,8 @@ typedef struct SubStruct_0
 {
     u16 unk0;
     u16 unk2;
-    s32 unk4;
-    s32 unk8;
+    const void *unk4;
+    const void *unk8;
     u8 fillC;
 } SubStruct_0;
 
@@ -19,12 +19,12 @@ typedef struct SubStruct_3E0
     u16 unk2;
     u16 unk4;
     OpenedFile *unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk12;
-    s32 unk14;
-    s32 unk1C;
-    s32 unk20;
+    const void *unkC;
+    const void *unk10;
+    const void *unk12;
+    const void *unk14;
+    const void *unk1C;
+    void *unk20;
     s32 unk24;
 } SubStruct_3E0;
 
@@ -40,20 +40,43 @@ typedef struct SubStruct_52C
 {
     s16 unk0; // 0x52C
     s16 unk2; // 0x52E
-    u8 fill4[0x4]; // 0x530
+    s16 unk4; // 0x530
+    s16 unk6; // 0x532
     s16 unk8; // 0x534
     s16 unkA; // 0x536
     s16 unkC; // 0x538
     s16 unkE; // 0x53A
     s16 unk10; // 0x53C
     s16 unk12; // 0x53E
-    void (*unk14)(void *, s32, void *, s32); // TODO: fix void * to proper ptr types 0x540
+    void (*unk14)(void *, const void *, void *, s32); // TODO: fix void * to proper ptr types 0x540
 } SubStruct_52C;
+
+typedef struct SubStruct_448
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u16 unk6;
+    u16 unk8;
+    u16 unkA;
+} SubStruct_448;
 
 #define UNK_0_ARR_COUNT 14
 #define UNK_3E0_ARR_COUNT 2
 
 #define UNK_54C_ARR_COUNT 2
+
+typedef struct SubStruct_545
+{
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6[4];
+    s16 unkE;
+} SubStruct_545;
 
 // size: 0x55C
 typedef struct unkStruct_3001B70
@@ -67,16 +90,11 @@ typedef struct unkStruct_3001B70
     OpenedFile *unk43C;
     OpenedFile *unk440;
     s16 unk444;
-    u8 fill446[2];
-    u8 unk448;
-    u8 unk449;
-    u8 unk44A;
-    u8 unk44B;
-    u8 unk44C;
-    u8 unk44D;
-    u8 fill44E[0x468-0x44E];
-    s32 unk468;
-    s32 unk46C;
+    SubStruct_448 unk448;
+    SubStruct_545 unk454;
+    s16 unk464[2];
+    const void *unk468;
+    const void *unk46C;
     u8 unk470;
     u8 unk471;
     u8 fill472[0x488-0x472];
