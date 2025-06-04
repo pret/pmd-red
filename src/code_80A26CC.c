@@ -463,10 +463,14 @@ UNUSED static const u8 *sub_80A2B28(u16 r0)
     return sub_80A2B18(GetScriptVarValue(NULL, GROUND_PLACE));
 }
 
+// TODO: Figure out if a new file starts here
+
 #include "ground_map.h"
 #include "text_1.h"
 #include "memory.h"
 #include "file_system.h"
+#include "code_8002774.h"
+#include "code_801D9E4.h"
 
 extern void sub_80A456C(unkStruct_3001B70 *, u32, const PixelPos *);
 extern const PixelPos gUnknown_81172B8;
@@ -543,6 +547,8 @@ void sub_80A2B40(unkStruct_3001B70 *mapPtr, const SubStruct_52C *a1)
 }
 
 void sub_80A2DD4(unkStruct_3001B70 *mapPtr);
+void sub_80A3BB0(unkStruct_3001B70 *mapPtr, s32 a0);
+void sub_80A3EB0(SubStruct_488 *mapSubstructPtr);
 
 void sub_80A2D00(unkStruct_3001B70 *mapPtr)
 {
@@ -588,3 +594,90 @@ void sub_80A2DD4(unkStruct_3001B70 *mapPtr)
     TRY_CLOSE_FILE_AND_SET_NULL(mapPtr->unk434);
     TRY_CLOSE_FILE_AND_SET_NULL(mapPtr->unk438);
 }
+
+extern void sub_8003810(u32 param_1, struct S param_2);
+
+void sub_80A2E64(unkStruct_3001B70 *mapPtr)
+{
+    u16 r6;
+    s32 i, j;
+    SubStruct_0 *unk0Ptr;
+    s32 unk0Id, unk3E0Id;
+
+    sub_80A2DD4(mapPtr);
+    mapPtr->unk444 = -1;
+    mapPtr->unk528 = 0;
+    mapPtr->unk448 = 0;
+    mapPtr->unk449 = 0;
+    mapPtr->unk44A = 0;
+    mapPtr->unk44B = 0;
+    mapPtr->unk44C = 0;
+    mapPtr->unk44D = 0;
+    unk0Ptr = &mapPtr->unk0[0];
+    mapPtr->unk46C = 0;
+    mapPtr->unk470 = 0;
+    mapPtr->unk471 = 0;
+
+    for (unk0Id = 0; unk0Id < UNK_0_ARR_COUNT; unk0Id++, unk0Ptr++) {
+        unk0Ptr->unk0 = 0;
+        unk0Ptr->unk2 = 0;
+        unk0Ptr->unk8 = 0;
+        unk0Ptr->unk4 = 0;
+    }
+
+    for (unk3E0Id = 0; unk3E0Id < UNK_3E0_ARR_COUNT; unk3E0Id++) {
+        SubStruct_3E0 *unkPtr = &mapPtr->unk3E0[unk3E0Id];
+        unkPtr->unk0 = 0;
+        unkPtr->unk1 = 0;
+        unkPtr->unk2 = 0;
+        unkPtr->unk4 = 0;
+        unkPtr->unk8 = NULL;
+        unkPtr->unkC = 0;
+        unkPtr->unk12 = 0;
+        unkPtr->unk10 = 0;
+        unkPtr->unk1C = 0;
+        unkPtr->unk14 = 0;
+        unkPtr->unk20 = 0;
+        unkPtr->unk24 = 0;
+    }
+
+    r6 = mapPtr->unk52C.unk0 * 16;
+    for (i = 0; i < mapPtr->unk52C.unk2; i++) {
+        struct S str1 = {0};
+        struct S str2 = {0xFF, 0xFF, 0xFF, 0};
+
+        sub_8003810(r6++, str1);
+        for (j = 0; j < 15; j++) {
+            sub_8003810(r6++, str2);
+        }
+    }
+
+    sub_80A3BB0(mapPtr, 0);
+    sub_80A3EB0(&mapPtr->unk488);
+    mapPtr->unk52A = 1;
+}
+
+extern const struct unkStruct_81188F0 gUnknown_81188F0[10];
+extern const FileArchive gGroundFileArchive;
+
+/*
+void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
+{
+    const struct unkStruct_81188F0 *dataPtr;
+    s32 a1 = (s16) a1_;
+
+    if (a1 == -1) {
+        sub_80A2E64(mapPtr);
+        return;
+    }
+
+    sub_80A2DD4(mapPtr);
+    mapPtr->unk444 = a1;
+    dataPtr = &gUnknown_81188F0[a1];
+    mapPtr->unk430 = OpenFileAndGetFileDataPtr(dataPtr->text1, &gGroundFileArchive);
+    mapPtr->unk434 = OpenFileAndGetFileDataPtr(dataPtr->text2, &gGroundFileArchive);
+    mapPtr->unk438 = OpenFileAndGetFileDataPtr(dataPtr->text3, &gGroundFileArchive);
+}
+*/
+
+//

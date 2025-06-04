@@ -28,10 +28,19 @@ typedef struct SubStruct_3E0
     s32 unk24;
 } SubStruct_3E0;
 
+typedef struct SubStruct_488
+{
+    u8 fill0[0x18];
+    void (*unk18)(struct SubStruct_488 *);
+    u8 fill1C[0x84];
+} SubStruct_488;
+
 // size: 0x18?
 typedef struct SubStruct_52C
 {
-    u8 fill0[8]; // 0x52C
+    s16 unk0; // 0x52C
+    s16 unk2; // 0x52E
+    u8 fill4[0x4]; // 0x530
     s16 unk8; // 0x534
     s16 unkA; // 0x536
     s16 unkC; // 0x538
@@ -70,7 +79,9 @@ typedef struct unkStruct_3001B70
     s32 unk46C;
     u8 unk470;
     u8 unk471;
-    u8 fill472[0x52A-0x472];
+    u8 fill472[0x488-0x472];
+    struct SubStruct_488 unk488;
+    u16 unk528;
     u8 unk52A;
     SubStruct_52C unk52C;
     void *unk544;
