@@ -2,7 +2,6 @@
 #include "globaldata.h"
 #include "constants/colors.h"
 #include "code_800D090.h"
-#include "code_8012A18_1.h"
 #include "code_803C1D0.h"
 #include "code_803D0D8.h"
 #include "dungeon.h"
@@ -17,6 +16,7 @@
 #include "string_format.h"
 #include "text_3.h"
 #include "text_util.h"
+#include "naming_screen.h"
 
 #include "data/pokemon_mail.h"
 
@@ -101,10 +101,10 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
 
     if (param_1->mailTitleType == 7) {
         if (param_1->playerName == NULL)
-            PrintStringOnWindow(178 - sub_8016028(), param_1->y, GetMonSpecies(param_1->clientSpecies), param_1->unk0[0], 0);
+            PrintStringOnWindow(178 - GetMaxPokeNameWidth(), param_1->y, GetMonSpecies(param_1->clientSpecies), param_1->unk0[0], 0);
         else {
             sub_80922B4(buf_2, param_1->playerName, POKEMON_NAME_LENGTH);
-            PrintStringOnWindow(178 - sub_8016028(), param_1->y, buf_2, param_1->unk0[0], 0);
+            PrintStringOnWindow(178 - GetMaxPokeNameWidth(), param_1->y, buf_2, param_1->unk0[0], 0);
         }
     }
     else {
@@ -379,7 +379,7 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
             }
 
             x = counter % 12;
-            sub_8012C60((x * 10) + 84, y, local_34[counter], color, param_1->unk0[0]);
+            DrawCharOnWindowWidth12((x * 10) + 84, y, local_34[counter], color, param_1->unk0[0]);
         }
     }
 }

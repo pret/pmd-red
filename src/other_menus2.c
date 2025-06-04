@@ -9,6 +9,7 @@
 #include "other_menus2.h"
 #include "pokemon.h"
 #include "save.h"
+#include "menu_input.h"
 #include "structs/str_dungeon.h"
 
 typedef struct unkStruct_800D670
@@ -41,7 +42,6 @@ extern u8 sub_800D600(void);
 extern void sub_800D670(s32 idx, void *dst, s32 size);
 extern void sub_800D68C(u32);
 void sub_800D414(void);
-s32 sub_8012AE8(void);
 
 // Inline needed for 8-bit return cast
 static inline bool8 IsNotChunsoft(unkStruct_800D670 *unk)
@@ -118,7 +118,7 @@ s32 sub_8037B28(s32 mode)
     while (TRUE) {
         for (i = 0; i < 1; i++) {
             sub_80373C4();
-            switch (sub_8012AE8()) {
+            switch (GetMenuInput()) {
                 case 2:
                 case 3:
                     sub_800D520();

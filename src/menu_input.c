@@ -71,7 +71,7 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *);
 u32 sub_8012A64(MenuInputStructSub *r0, s32 r1)
 {
     if (r0 == NULL)
-        return sub_8012AE8();
+        return GetMenuInput();
 
     if (r1 != -1)
         nullsub_34(r0, r1);
@@ -82,7 +82,7 @@ u32 sub_8012A64(MenuInputStructSub *r0, s32 r1)
     }
 
     if (r0->b_button == 0)
-        return sub_8012AE8();
+        return GetMenuInput();
 
     r0->b_button = 0;
     return INPUT_B_BUTTON;
@@ -104,10 +104,10 @@ s32 GetKeyPress(MenuInputStruct *r0)
             return INPUT_DPAD_RIGHT;
     }
 
-    return sub_8012AE8();
+    return GetMenuInput();
 }
 
-s32 sub_8012AE8(void)
+s32 GetMenuInput(void)
 {
     if (gRealInputs.held & R_BUTTON) {
         if (gRealInputs.pressed & A_BUTTON)
@@ -198,8 +198,8 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 windowId)
             piVar4++;
             chr = ReturnIntFromChar2(iVar1 + 0x30);
             iVar3 = GetCharacter(chr);
-            total_x += iVar3->unk6;
-            xxx_call_draw_char(x - total_x, y, chr, color, windowId);
+            total_x += iVar3->width;
+            DrawCharOnWindow(x - total_x, y, chr, color, windowId);
             counter++;
             if (counter >= len)
                 break;
@@ -207,21 +207,18 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 windowId)
     }
 }
 
-void sub_8012C60(u32 x, u32 y, u32 a2, u32 color, u32 a4)
+void DrawCharOnWindowWidth12(u32 x, u32 y, u32 chr, u32 color, u32 windowId)
 {
     u32 add_x;
-    const unkChar *iVar3;
-    u32 uVar2;
+    u32 chrId = ReturnIntFromChar2(chr);
+    const unkChar *chrInfo = GetCharacter(chrId);
 
-    uVar2 = ReturnIntFromChar2(a2);
-    iVar3 = GetCharacter(uVar2);
-
-    if (iVar3->unk6 < 12)
-        add_x = ((12 - iVar3->unk6) / 2);
+    if (chrInfo->width < 12)
+        add_x = ((12 - chrInfo->width) / 2);
     else
         add_x = 0;
 
-    xxx_call_draw_char(x + add_x, y, uVar2, color, a4);
+    DrawCharOnWindow(x + add_x, y, chrId, color, windowId);
 }
 
 void sub_8012CAC(WindowTemplate *a0, const MenuItem *a1)
@@ -1054,7 +1051,7 @@ u32 sub_8013BBC(unkStructFor8013AA0 *a0)
     if (sub_8013DD0(a0))
         return 1;
 
-    switch (sub_8012AE8()) {
+    switch (GetMenuInput()) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
@@ -1082,7 +1079,7 @@ void sub_8013C68(unkStructFor8013AA0 *a0)
         else
             ch = '0' + sp[i];
 
-        sub_8012C60(a0->unk1C - ((i + 1) * 12), a0->unk20, ch, 7, a0->unk14);
+        DrawCharOnWindowWidth12(a0->unk1C - ((i + 1) * 12), a0->unk20, ch, 7, a0->unk14);
     }
 
     for (i = 0; i < a0->unk10; i++)
@@ -1098,7 +1095,7 @@ void sub_8013D10(unkStructFor8013AA0 *a0)
     window = &gWindows[a0->unk14];
     uVar4 = a0->unk24;
 
-    switch (sub_8012AE8()) {
+    switch (GetMenuInput()) {
         case INPUT_DPAD_LEFT:
             uVar4 = a0->unk24 < a0->unk25 - 1 ? a0->unk24 + 1 : 0;
             break;
@@ -1124,7 +1121,7 @@ static bool8 sub_8013DD0(unkStructFor8013AA0 *a0)
 {
     s32 iVar2;
 
-    switch (sub_8012AE8()) {
+    switch (GetMenuInput()) {
         case INPUT_DPAD_UP:
             if (a0->unk0 == a0->unkC) {
                 PlayMenuSoundEffect(2);

@@ -252,7 +252,7 @@ void xxx_draw_string_80524F0(void)
                         sp.unk0 += 6;
                     }
                     else {
-                        sp.unk0 += xxx_call_draw_char(sp.unk0, sp.unk2, currChr, sp.unk10, 0);
+                        sp.unk0 += DrawCharOnWindow(sp.unk0, sp.unk2, currChr, sp.unk10, 0);
                     }
                 }
                 sub_80073E0(0);
