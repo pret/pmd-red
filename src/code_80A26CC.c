@@ -552,7 +552,7 @@ void sub_80A2B40(unkStruct_3001B70 *mapPtr, const SubStruct_52C *a1)
 
 void sub_80A2DD4(unkStruct_3001B70 *mapPtr);
 void sub_80A3BB0(unkStruct_3001B70 *mapPtr, s32 a0);
-void sub_80A3EB0(SubStruct_488 *mapSubstructPtr);
+void sub_80A3EB0(SubStruct_488 *map488);
 
 void sub_80A2D00(unkStruct_3001B70 *mapPtr)
 {
@@ -1207,7 +1207,7 @@ void sub_80A3BB0(unkStruct_3001B70 *mapPtr, s32 a0_)
                         map488[i].unk18 = sub_80A3EF4;
                         break;
                     case 2:
-                        map488[i].unk18 = (map488[i].unk6 != 0) ? sub_80A41C4 : sub_80A4088;
+                        map488[i].unk18 = (map488[i].unk6 != FALSE) ? sub_80A41C4 : sub_80A4088;
                         break;
                 }
                 break;
@@ -1228,9 +1228,119 @@ void sub_80A3BB0(unkStruct_3001B70 *mapPtr, s32 a0_)
         }
         sub_80A3E14(&map488[i], &mapPtr->unk478[i]);
     }
-    for (i = mapPtr->unk474; i < UNK_488_ARR_COUNT; i++) {
+    for (i = mapPtr->unk474; i < UNK_54C_ARR_COUNT; i++) {
         sub_80A456C(mapPtr, i, &gUnknown_8117314);
         sub_80A3D40(&map488[i], mapPtr, 0, 0, FALSE);
+    }
+}
+
+void sub_80A3D40(SubStruct_488 *a0, unkStruct_3001B70 *mapPtr, s32 a2, s32 a3, bool8 a4)
+{
+    s32 i, j;
+
+    a0->unk0 = mapPtr->unk528;
+    a0->unk2 = a2;
+    a0->unk4 = a3;
+    a0->unk6 = a4;
+    a0->unk8 = mapPtr->unk448.unk4;
+    a0->unkC = mapPtr->unk448.unk5;
+    a0->unk10 = mapPtr->unk448.unk0 * 8;
+    a0->unk14 = mapPtr->unk448.unk1 * 8;
+    a0->unk1C = mapPtr->unk548;
+
+    for (i = 0, j = a2; i < a3 && j < mapPtr->unk52C.unkC; i++, j++) {
+        a0->unk20[i] = mapPtr->unk54C[j];
+        a0->unk28[i] = mapPtr->unk554[j];
+    }
+    for (; i < UNK_54C_ARR_COUNT; i++) {
+        a0->unk20[i] = NULL;
+        a0->unk28[i] = NULL;
+    }
+
+    sub_80A3E14(a0, &mapPtr->unk478[0]);
+}
+
+void sub_80A3E14(SubStruct_488 *a0, PixelPos *a1)
+{
+    a0->unk30.x = a1->x;
+    a0->unk38.x = a0->unk30.x / 8;
+    a0->unk30.y = a1->y;
+    a0->unk38.y = a0->unk30.y / 8;
+
+    switch (a0->unk0) {
+        case 0:
+            a0->unk40.x = 0;
+            a0->unk40.y = 0;
+            a0->unk48.x = 0;
+            a0->unk48.y = 0;
+            break;
+        case 1:
+            a0->unk40.x = a0->unk38.x / 2;
+            a0->unk40.y = a0->unk38.y / 2;
+            a0->unk48.x = a0->unk30.x % 16;
+            a0->unk48.y = a0->unk30.y % 16;
+            break;
+        case 2:
+            a0->unk40.x = a0->unk38.x / 3;
+            a0->unk40.y = a0->unk38.y / 3;
+            a0->unk48.x = a0->unk30.x % 8;
+            a0->unk48.y = a0->unk30.y % 24;
+            break;
+    }
+}
+
+void sub_80A3EB0(SubStruct_488 *map488)
+{
+    map488->unk18(map488);
+}
+
+void sub_80A3EBC(SubStruct_488 *map488)
+{
+    s32 i;
+    u16 *dst = map488->unk28[0];
+
+    for (i = 0; i < 1024; i++) {
+        *dst++ = 0;
+    }
+}
+
+void sub_80A3ED4(SubStruct_488 *map488)
+{
+    s32 i;
+    u16 *dst1 = map488->unk28[0];
+    u16 *dst2 = map488->unk28[1];
+
+    for (i = 0; i < 1024; i++) {
+        *dst1++ = 0;
+        *dst2++ = 0;
+    }
+}
+
+void sub_80A3EF4(SubStruct_488 *map488)
+{
+    s32 arrPtrId;
+    s32 i, j;
+    u16 *arrPtrs[2];
+    u16 *ptr = &map488->unk20[0][(map488->unk40.y * 64) + map488->unk40.x];
+    s32 unk28Id = 0;
+
+    for (i = 0; i < 11; ptr += 64, i++) {
+        u16 *currPtr = ptr;
+
+        for (arrPtrId = 0; arrPtrId < 2; arrPtrId++) {
+            arrPtrs[arrPtrId] = &map488->unk28[0][unk28Id];
+            unk28Id += 32;
+        }
+
+        for (j = 0; j < 16; j++) {
+            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            for (arrPtrId = 0; arrPtrId < 2; arrPtrId++) {
+                u16 *currDst = arrPtrs[arrPtrId];
+                *currDst++ = *currSrc++;
+                *currDst++ = *currSrc++;
+                arrPtrs[arrPtrId] = currDst;
+            }
+        }
     }
 }
 

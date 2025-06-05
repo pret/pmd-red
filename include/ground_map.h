@@ -5,6 +5,12 @@
 #include "structs/str_202EE8C.h"
 #include "structs/str_position.h"
 
+#define UNK_0_ARR_COUNT 14
+#define UNK_E0_ARR_COUNT 32
+#define UNK_3E0_ARR_COUNT 2
+#define UNK_54C_ARR_COUNT 2
+#define UNK_545_UNK6_ARR_COUNT 4
+
 typedef struct SubStruct_0
 {
     u16 unk0;
@@ -30,19 +36,26 @@ typedef struct SubStruct_3E0
     s32 unk24;
 } SubStruct_3E0;
 
+// Note: not 100% about structs being PixelPos yet to verify
+
 typedef struct SubStruct_488
 {
     s16 unk0;
     u16 unk2;
     s16 unk4;
-    u8 unk6;
+    bool8 unk6;
     s32 unk8;
     s32 unkC;
     s32 unk10;
     s32 unk14;
     void (*unk18)(struct SubStruct_488 *);
-    s32 unk1C;
-    u8 fill1C[0x30];
+    u16 *unk1C;
+    u16 *unk20[UNK_54C_ARR_COUNT];
+    u16 *unk28[UNK_54C_ARR_COUNT];
+    PixelPos unk30;
+    PixelPos unk38;
+    PixelPos unk40;
+    PixelPos unk48;
 } SubStruct_488;
 
 // size: 0x18?
@@ -74,13 +87,6 @@ typedef struct SubStruct_448
     u16 unkA;
 } SubStruct_448;
 
-#define UNK_0_ARR_COUNT 14
-#define UNK_E0_ARR_COUNT 32
-#define UNK_3E0_ARR_COUNT 2
-#define UNK_488_ARR_COUNT 2
-#define UNK_54C_ARR_COUNT 2
-#define UNK_545_UNK6_ARR_COUNT 4
-
 typedef struct SubStruct_545
 {
     s16 unk0;
@@ -110,13 +116,13 @@ typedef struct unkStruct_3001B70
     u8 unk470;
     u8 unk471;
     s32 unk474;
-    PixelPos unk478[UNK_488_ARR_COUNT];
-    struct SubStruct_488 unk488[UNK_488_ARR_COUNT];
+    PixelPos unk478[UNK_54C_ARR_COUNT];
+    struct SubStruct_488 unk488[UNK_54C_ARR_COUNT];
     u16 unk528;
     u8 unk52A;
     SubStruct_52C unk52C;
     u16 *unk544;
-    u32 *unk548;
+    u16 *unk548;
     u16 *unk54C[UNK_54C_ARR_COUNT];
     u16 *unk554[UNK_54C_ARR_COUNT];
 } unkStruct_3001B70;
