@@ -472,6 +472,7 @@ UNUSED static const u8 *sub_80A2B28(u16 r0)
 #include "code_8002774.h"
 #include "code_801D9E4.h"
 #include "code_8004AA0.h"
+#include "debug.h"
 #include "unk_dungeon_load.h"
 #include "constants/dungeon.h"
 
@@ -660,9 +661,8 @@ void sub_80A2E64(unkStruct_3001B70 *mapPtr)
     mapPtr->unk52A = 1;
 }
 
-// RGB?
-u8* sub_80A3908(void * a0, const void * a1, SubStruct_52C * a2, SubStruct_448 *);
-void sub_80A37C4(u16 * a0, const u16 *a1, SubStruct_52C *a2, SubStruct_545 *a3);
+const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2, SubStruct_448 *a3);
+void sub_80A37C4(void *vramDst, const u16 *src_, SubStruct_52C *a2, SubStruct_545 *a3);
 void _UncompressCell(void * a0, u16 *a1, const void * a2, SubStruct_52C *a3, SubStruct_545 *a4);
 
 extern const struct unkStruct_81188F0 gUnknown_81188F0[10];
@@ -724,7 +724,7 @@ void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
     mapPtr_454->unk4 = *file_434++;
 
     sum = mapPtr_454->unk4;
-    for (k = 0; k < 4; k++) {
+    for (k = 0; k < UNK_545_UNK6_ARR_COUNT; k++) {
         mapPtr_454->unk6[k] = *file_434++;
         sum += mapPtr_454->unk6[k];
     }
@@ -762,7 +762,7 @@ void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
 
     sub_80A37C4((void *)(VRAM + 0x8000 + mapPtr->unk52C.unk4 * 32), file_434, &mapPtr->unk52C, &mapPtr->unk454);
     _UncompressCell(mapPtr->unk548, &mapPtr->unk528, file_434 + ((mapPtr_454->unk4 - 1) * 16), &mapPtr->unk52C, &mapPtr->unk454);
-    file_438 = sub_80A3908(&mapPtr->unk54C, file_438, &mapPtr->unk52C, &mapPtr->unk448);
+    file_438 = sub_80A3908(mapPtr->unk54C, file_438, &mapPtr->unk52C, &mapPtr->unk448);
     mapPtr->unk468 = file_438;
     if (mapPtr->unk544 != NULL) {
         mapPtr->unk52C.unk14(mapPtr->unk544, file_438, mapPtr_448, mapPtr->unk52C.unkE);
@@ -866,7 +866,7 @@ void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
 void sub_80A3440(unkStruct_3001B70 *mapPtr, s32 a1_, DungeonLocation *dungLoc, s32 a3)
 {
     SubStruct_0 *sub0Ptr;
-    s32 k;
+    s32 i;
     SubStruct_545 *mapPtr_454;
     const u16 *file_434;
     const void *file_438;
@@ -904,8 +904,8 @@ void sub_80A3440(unkStruct_3001B70 *mapPtr, s32 a1_, DungeonLocation *dungLoc, s
     mapPtr_454->unk2 = *file_434++;
     mapPtr_454->unk4 = *file_434++;
 
-    for (k = 0; k < 4; k++) {
-        mapPtr_454->unk6[k] = *file_434++;
+    for (i = 0; i < UNK_545_UNK6_ARR_COUNT; i++) {
+        mapPtr_454->unk6[i] = *file_434++;
     }
     mapPtr_454->unkE = *file_434++;
 
@@ -930,8 +930,8 @@ void sub_80A3440(unkStruct_3001B70 *mapPtr, s32 a1_, DungeonLocation *dungLoc, s
 
     mapPtr->unk52C.unk14(mapPtr->unk544, file_438, mapPtr_448, mapPtr->unk52C.unkE);
     mapPtr_454->unk4 = 0x200;
-    for (k = 0; k < 4; k++) {
-        mapPtr_454->unk6[k] = 0;
+    for (i = 0; i < UNK_545_UNK6_ARR_COUNT; i++) {
+        mapPtr_454->unk6[i] = 0;
     }
 
     mapPtr_454->unkE = 250;
@@ -1000,6 +1000,153 @@ void sub_80A3440(unkStruct_3001B70 *mapPtr, s32 a1_, DungeonLocation *dungLoc, s
     mapPtr->unk52A = 1;
     // bad sp alloc for compiler generated variables...
     ASM_MATCH_TRICK(mapPtr_454->unk6[0]);
+}
+
+void sub_80A37C4(void *vramDst, const u16 *src_, SubStruct_52C *a2, SubStruct_545 *a3)
+{
+    const u16 *src = src_;
+    u16 *dst = vramDst;
+    s32 id, i;
+
+    for (i = 0; i < 16; i++) {
+        *dst++ = 0;
+    }
+    for (id = 1; id < a3->unk4; id++) {
+        for (i = 0; i < 16; i++) {
+            *dst++ = *src++;
+        }
+    }
+    for (; id < a2->unk6; id++) {
+        for (i = 0; i < 16; i++) {
+            *dst++ = 0xFFFF;
+        }
+    }
+}
+
+extern const DebugLocation gUnknown_81172E8;
+extern const char gUnknown_81172F4[];
+
+void _UncompressCell(void *dst_, u16 *a1, const void *src_, SubStruct_52C *a3, SubStruct_545 *a4)
+{
+    s32 id, i;
+    s32 n;
+
+    const u16 *src = src_;
+    u16 *dst = dst_;
+    u16 r6 = (a3->unk0 << 12) | a3->unk4;
+
+    if (a4->unk0 == 2 && a4->unk2 == 2) {
+        *a1 = 1;
+        n = 4;
+    }
+    else if (a4->unk0 == 3 && a4->unk2 == 3) {
+        *a1 = 2;
+        n = 9;
+    }
+    else {
+        *a1 = 0;
+        FatalError(&gUnknown_81172E8, gUnknown_81172F4, a4->unk0, a4->unk2);
+    }
+
+    for (i = 0; i < 9; i++) {
+        *dst++ = 0;
+    }
+    for (id = 1; id < a4->unkE; id++) {
+        for (i = 0; i < n; i++) {
+            *dst++ = *src++ + r6;
+        }
+        for (; i < 9; i++) {
+            *dst++ = 0;
+        }
+    }
+    for (; id < a3->unk8; id++) {
+        for (i = 0; i < 9; i++) {
+            *dst++ = 0;
+        }
+    }
+}
+
+// Tilemap decompression algorhitm?
+const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2, SubStruct_448 *a3)
+{
+    s32 i, j, k, l;
+    const u8 *src = src_;
+
+    for (i = 0; i < a2->unkC; i++) {
+        u16 *dst = dstArray[i];
+
+        for (j = 0; j < a3->unk5; j++) {
+            k = 0;
+            if (j == 0) {
+                while (k < a3->unk4) {
+                    s32 val = *src++;
+                    if (val > 191) {
+                        for (l = 191; l < val; l++) {
+                            s32 dstVal = src[0] | (src[1] << 8) | (src[2] << 16); src += 3;
+                            *dst++ = dstVal & 0xFFF;
+                            *dst++ = (dstVal >> 12) & 0xFFF;
+                        }
+                        k += (val - 191) * 2;
+                    }
+                    else if (val > 127) {
+                        s32 dstVal = src[0] | (src[1] << 8) | (src[2] << 16); src += 3;
+                        for (l = 127; l < val; l++) {
+                            *dst++ = dstVal & 0xFFF;
+                            *dst++ = (dstVal >> 12) & 0xFFF;
+                        }
+                        k += (val - 127) * 2;
+                    }
+                    else {
+                        for (l = 0; l <= val; l++) {
+                            *dst++ = 0;
+                            *dst++ = 0;
+                        }
+                        k += (val + 1) * 2;
+                    }
+                }
+            }
+            else {
+                u16 *ptrVal = dst - 64;
+                while (k < a3->unk4) {
+                    s32 val = *src++;
+                    if (val > 191) {
+                        for (l = 191; l < val; l++) {
+                            s32 dstVal = src[0] | (src[1] << 8) | (src[2] << 16); src += 3;
+                            *dst++ = (dstVal & 0xFFF) ^ *ptrVal++;
+                            *dst++ = ((dstVal >> 12) & 0xFFF) ^ *ptrVal++;
+                        }
+                        k += (val - 191) * 2;
+                    }
+                    else if (val > 127) {
+                        s32 dstVal = src[0] | (src[1] << 8) | (src[2] << 16); src += 3;
+                        for (l = 127; l < val; l++) {
+                            *dst++ = (dstVal & 0xFFF) ^ *ptrVal++;
+                            *dst++ = ((dstVal >> 12) & 0xFFF) ^ *ptrVal++;
+                        }
+                        k += (val - 127) * 2;
+                    }
+                    else {
+                        for (l = 0; l <= val; l++) {
+                            *dst++ = *ptrVal++;
+                            *dst++ = *ptrVal++;
+                        }
+                        k += (val + 1) * 2;
+                    }
+                }
+            }
+
+            for (; k < 64; k++) {
+                *dst++ = 0;
+            }
+        }
+        for (; j < a2->unk10; j++) {
+            for (k = 0; k < 64; k++) {
+                *dst++ = 0;
+            }
+        }
+    }
+
+    return src;
 }
 
 //

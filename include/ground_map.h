@@ -68,15 +68,15 @@ typedef struct SubStruct_448
 #define UNK_0_ARR_COUNT 14
 #define UNK_E0_ARR_COUNT 32
 #define UNK_3E0_ARR_COUNT 2
-
 #define UNK_54C_ARR_COUNT 2
+#define UNK_545_UNK6_ARR_COUNT 4
 
 typedef struct SubStruct_545
 {
     s16 unk0;
     s16 unk2;
     s16 unk4;
-    s16 unk6[4];
+    s16 unk6[UNK_545_UNK6_ARR_COUNT];
     s16 unkE;
 } SubStruct_545;
 
