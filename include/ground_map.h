@@ -2,6 +2,7 @@
 #define GUARD_GROUND_MAP_H
 
 #include "structs/str_file_system.h"
+#include "structs/str_202EE8C.h"
 
 typedef struct SubStruct_0
 {
@@ -65,6 +66,7 @@ typedef struct SubStruct_448
 } SubStruct_448;
 
 #define UNK_0_ARR_COUNT 14
+#define UNK_E0_ARR_COUNT 32
 #define UNK_3E0_ARR_COUNT 2
 
 #define UNK_54C_ARR_COUNT 2
@@ -82,7 +84,7 @@ typedef struct SubStruct_545
 typedef struct unkStruct_3001B70
 {
     SubStruct_0 unk0[UNK_0_ARR_COUNT];
-    u8 fillUnk[0x300];
+    unkStruct_202EE8C unkE0[UNK_E0_ARR_COUNT];
     SubStruct_3E0 unk3E0[UNK_3E0_ARR_COUNT];
     OpenedFile *unk430;
     OpenedFile *unk434;
@@ -102,9 +104,9 @@ typedef struct unkStruct_3001B70
     u16 unk528;
     u8 unk52A;
     SubStruct_52C unk52C;
-    void *unk544;
-    void *unk548;
-    void *unk54C[UNK_54C_ARR_COUNT];
+    u16 *unk544;
+    u32 *unk548;
+    u16 *unk54C[UNK_54C_ARR_COUNT];
     u16 *unk554[UNK_54C_ARR_COUNT];
 } unkStruct_3001B70;
 

@@ -471,6 +471,9 @@ UNUSED static const u8 *sub_80A2B28(u16 r0)
 #include "file_system.h"
 #include "code_8002774.h"
 #include "code_801D9E4.h"
+#include "code_8004AA0.h"
+#include "unk_dungeon_load.h"
+#include "constants/dungeon.h"
 
 extern void sub_80A456C(unkStruct_3001B70 *, u32, const PixelPos *);
 extern const PixelPos gUnknown_81172B8;
@@ -658,7 +661,7 @@ void sub_80A2E64(unkStruct_3001B70 *mapPtr)
 }
 
 // RGB?
-u8* sub_80A3908(void * a0, const void * a1, void * a2, SubStruct_448 *);
+u8* sub_80A3908(void * a0, const void * a1, SubStruct_52C * a2, SubStruct_448 *);
 void sub_80A37C4(u16 * a0, const u16 *a1, SubStruct_52C *a2, SubStruct_545 *a3);
 void _UncompressCell(void * a0, u16 *a1, const void * a2, SubStruct_52C *a3, SubStruct_545 *a4);
 
@@ -858,6 +861,145 @@ void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
     sub_80A3BB0(mapPtr, 0);
     sub_80A3EB0(&mapPtr->unk488);
     mapPtr->unk52A = 1;
+}
+
+void sub_80A3440(unkStruct_3001B70 *mapPtr, s32 a1_, DungeonLocation *dungLoc, s32 a3)
+{
+    SubStruct_0 *sub0Ptr;
+    s32 k;
+    SubStruct_545 *mapPtr_454;
+    const u16 *file_434;
+    const void *file_438;
+    const void *file_430;
+    SubStruct_448 *mapPtr_448;
+    s32 unk0Id, sub3E0Id;
+    const struct unkStruct_81188F0 *dataPtr;
+    s16 *mapPtr_464;
+    u16 *unkPtrArray[2];
+    s32 a1 = (s16) a1_;
+
+    if (a1 == -1 || dungLoc->id == DUNGEON_INVALID) {
+        sub_80A2E64(mapPtr);
+        return;
+    }
+
+    sub_80A2FBC(mapPtr, a1);
+    sub_80A2DD4(mapPtr);
+    mapPtr->unk444 = a1;
+    dataPtr = &gUnknown_81188F0[a1];
+    mapPtr->unk430 = OpenFileAndGetFileDataPtr(dataPtr->text1, &gGroundFileArchive);
+    mapPtr->unk434 = OpenFileAndGetFileDataPtr(dataPtr->text2, &gGroundFileArchive);
+    mapPtr->unk438 = OpenFileAndGetFileDataPtr(dataPtr->text3, &gGroundFileArchive);
+    file_430 = mapPtr->unk430->data;
+    file_434 = mapPtr->unk434->data;
+    file_438 = mapPtr->unk438->data;
+    mapPtr_464 = mapPtr->unk464;
+    mapPtr_454 = &mapPtr->unk454;
+    mapPtr_448 = &mapPtr->unk448;
+
+    mapPtr_464[0] = *(u8 *)(file_430); file_430 += 2;
+    mapPtr_464[1] = *(u8 *)(file_430); file_430 += 2;
+
+    mapPtr_454->unk0 = *file_434++;
+    mapPtr_454->unk2 = *file_434++;
+    mapPtr_454->unk4 = *file_434++;
+
+    for (k = 0; k < 4; k++) {
+        mapPtr_454->unk6[k] = *file_434++;
+    }
+    mapPtr_454->unkE = *file_434++;
+
+    mapPtr_448->unk0 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk1 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk2 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk3 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk4 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk5 = *(u8 *)(file_438); file_438 += 1;
+    mapPtr_448->unk6 = *(u8 *)(file_438); file_438 += 2;
+    mapPtr_448->unk8 = *(u8 *)(file_438); file_438 += 2;
+    mapPtr_448->unkA = *(u8 *)(file_438); file_438 += 2;
+
+    unkPtrArray[0] = mapPtr->unk544;
+    unkPtrArray[1] = NULL;
+    file_438 = sub_80A3908(unkPtrArray, file_438, &mapPtr->unk52C, &mapPtr->unk448);
+    mapPtr->unk468 = file_438;
+    sub_80ADD9C(&mapPtr->unk43C, &mapPtr->unk440, (void *)(VRAM + 0x8000), mapPtr->unk548, mapPtr->unk54C[0], dungLoc, a3, 0x40, mapPtr_448->unk5, mapPtr->unk544, 0);
+    // Unused return values
+    GetFileDataPtr(mapPtr->unk43C, 0);
+    GetFileDataPtr(mapPtr->unk440, 0);
+
+    mapPtr->unk52C.unk14(mapPtr->unk544, file_438, mapPtr_448, mapPtr->unk52C.unkE);
+    mapPtr_454->unk4 = 0x200;
+    for (k = 0; k < 4; k++) {
+        mapPtr_454->unk6[k] = 0;
+    }
+
+    mapPtr_454->unkE = 250;
+    mapPtr->unk464[0] = 12;
+    mapPtr->unk464[1] = 0;
+    if (mapPtr->unk43C != NULL) {
+        s32 i, j;
+        const struct S *strPtr = mapPtr->unk43C->data;
+        u16 r7 = 0;
+        struct S str0 = {0};
+        struct S str1;
+
+        str1.x0.x0[0] = 0xff;
+        str1.x0.x0[1] = 0xff;
+        str1.x0.x0[2] = 0xff;
+        str1.x0.x0[3] = 0;
+
+        for (i = 0; i < 12 && i < mapPtr->unk52C.unk2; i++) {
+            sub_8003810(r7++, str0);
+            strPtr++;
+            for (j = 0; j < 15; j++) {
+                struct S str2 = {strPtr->x0.x0[0], strPtr->x0.x0[1], strPtr->x0.x0[2], strPtr->x0.x0[3]};
+                sub_8003810(r7++, str2);
+                strPtr++;
+            }
+        }
+        for (; i < mapPtr->unk52C.unk2; i++) {
+            sub_8003810(r7++, str0);
+            for (j = 0; j < 15; j++) {
+                sub_8003810(r7++, str1);
+            }
+        }
+    }
+
+    sub0Ptr = mapPtr->unk0;
+    if (mapPtr->unk440 != NULL) {
+        sub_8004AA4(mapPtr->unkE0, mapPtr->unk440, UNK_E0_ARR_COUNT);
+    }
+    mapPtr->unk46C = NULL;
+    mapPtr->unk470 = 0;
+    mapPtr->unk471 = 0;
+
+    for (unk0Id = 0; unk0Id < UNK_0_ARR_COUNT; unk0Id++, sub0Ptr++) {
+        sub0Ptr->unk0 = 0;
+        sub0Ptr->unk2 = 0;
+        sub0Ptr->unk4 = sub0Ptr->unk8 = 0;
+    }
+
+    for (sub3E0Id = 0; sub3E0Id < UNK_3E0_ARR_COUNT; sub3E0Id++) {
+        SubStruct_3E0 *sub3E0 = &mapPtr->unk3E0[sub3E0Id];
+        sub3E0->unk0 = 0;
+        sub3E0->unk1 = 0;
+        sub3E0->unk4 = 0;
+        sub3E0->unk2 = 0;
+        sub3E0->unk8 = NULL;
+        sub3E0->unkC = 0;
+        sub3E0->unk12 = 0;
+        sub3E0->unk10 = 0;
+        sub3E0->unk1C = 0;
+        sub3E0->unk14 = 0;
+        sub3E0->unk20 = 0;
+        sub3E0->unk24 = 0;
+    }
+    sub_80A3BB0(mapPtr, 0);
+    sub_80A3EB0(&mapPtr->unk488);
+    mapPtr->unk52A = 1;
+    // bad sp alloc for compiler generated variables...
+    ASM_MATCH_TRICK(mapPtr_454->unk6[0]);
 }
 
 //
