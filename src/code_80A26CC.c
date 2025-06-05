@@ -463,7 +463,7 @@ UNUSED static const u8 *sub_80A2B28(u16 r0)
     return sub_80A2B18(GetScriptVarValue(NULL, GROUND_PLACE));
 }
 
-// TODO: Figure out if a new file starts here
+// TODO: Figure out if a new file starts here. Edit: new file indeed starts here
 
 #include "ground_map.h"
 #include "text_1.h"
@@ -657,7 +657,7 @@ void sub_80A2E64(unkStruct_3001B70 *mapPtr)
     }
 
     sub_80A3BB0(mapPtr, 0);
-    sub_80A3EB0(&mapPtr->unk488);
+    sub_80A3EB0(mapPtr->unk488);
     mapPtr->unk52A = 1;
 }
 
@@ -859,7 +859,7 @@ void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
     }
 
     sub_80A3BB0(mapPtr, 0);
-    sub_80A3EB0(&mapPtr->unk488);
+    sub_80A3EB0(mapPtr->unk488);
     mapPtr->unk52A = 1;
 }
 
@@ -996,7 +996,7 @@ void sub_80A3440(unkStruct_3001B70 *mapPtr, s32 a1_, DungeonLocation *dungLoc, s
         sub3E0->unk24 = 0;
     }
     sub_80A3BB0(mapPtr, 0);
-    sub_80A3EB0(&mapPtr->unk488);
+    sub_80A3EB0(mapPtr->unk488);
     mapPtr->unk52A = 1;
     // bad sp alloc for compiler generated variables...
     ASM_MATCH_TRICK(mapPtr_454->unk6[0]);
@@ -1147,6 +1147,91 @@ const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2, SubSt
     }
 
     return src;
+}
+
+void sub_80A3B80(unkStruct_3001B70 *mapPtr, u8 a1, u8 a2)
+{
+    if (mapPtr->unk46C != NULL) {
+        mapPtr->unk470 = a1;
+        mapPtr->unk471 = a2;
+    }
+}
+
+extern const PixelPos gUnknown_8117314;
+void sub_80A3D40(SubStruct_488 *a0, unkStruct_3001B70 *mapPtr, s32 a2, s32 a3, bool8 a4);
+void sub_80A3E14(SubStruct_488 *a0, PixelPos *a1);
+void sub_80A3EBC(SubStruct_488 *a0);
+void sub_80A3EF4(SubStruct_488 *a0);
+void sub_80A4088(SubStruct_488 *a0);
+void sub_80A41C4(SubStruct_488 *a0);
+void sub_80A3ED4(SubStruct_488 *a0);
+void sub_80A3F94(SubStruct_488 *a0);
+void sub_80A4358(SubStruct_488 *a0);
+
+void sub_80A3BB0(unkStruct_3001B70 *mapPtr, s32 a0_)
+{
+    s32 i;
+    // s16 memes strike yet again
+    s32 a0Match = (s16) a0_;
+    s32 a0 = a0Match;
+
+    SubStruct_488 *map488 = mapPtr->unk488;
+
+    switch (a0) {
+        default:
+        case 0:
+        case 1:
+            mapPtr->unk474 = 1;
+            sub_80A3D40(&map488[0], mapPtr, 0, mapPtr->unk52C.unkC, (a0 == 1));
+            break;
+        case 2:
+        case 3:
+        case 4:
+            mapPtr->unk474 = 2;
+            sub_80A3D40(&map488[0], mapPtr, 0, mapPtr->unk52C.unkC - 1, (a0 == 4));
+            sub_80A3D40(&map488[1], mapPtr, mapPtr->unk52C.unkC - 1, 1, (a0 != 2));
+            break;
+    }
+
+    for (i = 0; i < mapPtr->unk474; i++) {
+        sub_80A456C(mapPtr, i, &gUnknown_8117314);
+        switch (map488[i].unk4) {
+            default:
+            case 1:
+                switch (map488[i].unk0) {
+                    default:
+                    case 0:
+                        map488[i].unk18 = sub_80A3EBC;
+                        break;
+                    case 1:
+                        map488[i].unk18 = sub_80A3EF4;
+                        break;
+                    case 2:
+                        map488[i].unk18 = (map488[i].unk6 != 0) ? sub_80A41C4 : sub_80A4088;
+                        break;
+                }
+                break;
+            case 2:
+                switch (map488[i].unk0) {
+                    default:
+                    case 0:
+                        map488[i].unk18 = sub_80A3ED4;
+                        break;
+                    case 1:
+                        map488[i].unk18 = sub_80A3F94;
+                        break;
+                    case 2:
+                        map488[i].unk18 = sub_80A4358;
+                        break;
+                }
+                break;
+        }
+        sub_80A3E14(&map488[i], &mapPtr->unk478[i]);
+    }
+    for (i = mapPtr->unk474; i < UNK_488_ARR_COUNT; i++) {
+        sub_80A456C(mapPtr, i, &gUnknown_8117314);
+        sub_80A3D40(&map488[i], mapPtr, 0, 0, FALSE);
+    }
 }
 
 //

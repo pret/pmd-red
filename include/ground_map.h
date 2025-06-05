@@ -3,6 +3,7 @@
 
 #include "structs/str_file_system.h"
 #include "structs/str_202EE8C.h"
+#include "structs/str_position.h"
 
 typedef struct SubStruct_0
 {
@@ -31,9 +32,17 @@ typedef struct SubStruct_3E0
 
 typedef struct SubStruct_488
 {
-    u8 fill0[0x18];
+    s16 unk0;
+    u16 unk2;
+    s16 unk4;
+    u8 unk6;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
     void (*unk18)(struct SubStruct_488 *);
-    u8 fill1C[0x84];
+    s32 unk1C;
+    u8 fill1C[0x30];
 } SubStruct_488;
 
 // size: 0x18?
@@ -68,6 +77,7 @@ typedef struct SubStruct_448
 #define UNK_0_ARR_COUNT 14
 #define UNK_E0_ARR_COUNT 32
 #define UNK_3E0_ARR_COUNT 2
+#define UNK_488_ARR_COUNT 2
 #define UNK_54C_ARR_COUNT 2
 #define UNK_545_UNK6_ARR_COUNT 4
 
@@ -99,8 +109,9 @@ typedef struct unkStruct_3001B70
     const void *unk46C;
     u8 unk470;
     u8 unk471;
-    u8 fill472[0x488-0x472];
-    struct SubStruct_488 unk488;
+    s32 unk474;
+    PixelPos unk478[UNK_488_ARR_COUNT];
+    struct SubStruct_488 unk488[UNK_488_ARR_COUNT];
     u16 unk528;
     u8 unk52A;
     SubStruct_52C unk52C;
