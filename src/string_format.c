@@ -46,7 +46,7 @@ void sub_8014114(void) {
 void nullsub_201(void) {}
 
 u32 sub_8014128(void) {
-    if(sub_8012AE8() == INPUT_B_BUTTON) return 0;
+    if(GetMenuInput() == INPUT_B_BUTTON) return 0;
     else return 1;
 }
 
@@ -368,7 +368,7 @@ void DrawDialogueBoxString(void)
                         u32 chr;
 
                         str = xxx_get_next_char_from_string(str, &chr);
-                        gUnknown_202E748.unk0 += xxx_call_draw_char(gUnknown_202E748.unk0, gUnknown_202E748.unk2, chr, gUnknown_202E748.unk10, 0);
+                        gUnknown_202E748.unk0 += DrawCharOnWindow(gUnknown_202E748.unk0, gUnknown_202E748.unk2, chr, gUnknown_202E748.unk10, 0);
                         gUnknown_202E748.unk2C = gUnknown_202E78C;
                      }
 

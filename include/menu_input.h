@@ -6,9 +6,9 @@
 
 u32 sub_8012A64(MenuInputStructSub *r0, s32 r1);
 s32 GetKeyPress(MenuInputStruct *r0);
-s32 sub_8012AE8(void);
+s32 GetMenuInput(void);
 void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 windowId);
-void sub_8012C60(u32 x, u32 y, u32 param_3, u32 color, u32 param_5);
+void DrawCharOnWindowWidth12(u32 x, u32 y, u32 param_3, u32 color, u32 param_5);
 void sub_8012CAC(WindowTemplate *param_1, const MenuItem *param_2);
 void sub_8012D08(WindowTemplate *param_1, s32 param_2);
 void sub_8012D34(WindowTemplate *param_1, s32 param_2);

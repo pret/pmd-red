@@ -31,6 +31,7 @@
 #include "wigglytuff_shop1.h"
 #include "wigglytuff_shop3.h"
 #include "wonder_mail.h"
+#include "naming_screen.h"
 
 IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = { NULL };
 
@@ -709,7 +710,7 @@ void MakuhitaDojo_Delete();
 u32 HandleMakuhitaDojoState();
 s16 sub_802FED0();
 u8 sub_801FB50();
-void sub_80155F0();
+void NamingScreen_Free();
 s32 sub_80160D8();
 void ResetTextbox_809B294();
 s32 sub_801A8AC();
@@ -1385,13 +1386,13 @@ bool8 sub_809B648(void)
         case 6:
             if (gUnknown_3001B64->unk420 == 1) {
                 ResetTextbox_809B294();
-                sub_80151C0(4,gUnknown_3001B64->unk42C);
+                NamingScreen_Init(4,gUnknown_3001B64->unk42C);
             }
             else {
-                s32 var = sub_80154F0();
+                s32 var = NamingScreen_HandleInput();
                 if (var == 3)
                 {
-                    sub_80155F0();
+                    NamingScreen_Free();
                     gUnknown_3001B64->unk430 = 1;
                     return 0;
                 }
@@ -1400,7 +1401,7 @@ bool8 sub_809B648(void)
                     if (gUnknown_3001B64->unk424 == 0) {
                         return 1;
                     }
-                    sub_80155F0();
+                    NamingScreen_Free();
                     gUnknown_3001B64->unk430 = 0;
                     return 0;
                 }

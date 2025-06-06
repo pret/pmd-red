@@ -6,7 +6,7 @@
 static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringStruct *sp);
 static s32 InterpretColorChar(u8 a0);
 static const u8 *sub_800915C(s16 *a0, const u8 *str);
-static void xxx_draw_string(Window *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing);
+static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing);
 
 // arm9.bin::02003D4C
 bool8 sub_8008D8C(s32 windowId)
@@ -129,7 +129,7 @@ s32 sub_8008ED0(const u8 *str)
         else {
             const unkChar *ptr = GetCharacter(chr);
             if (ptr != NULL) {
-                ret += ptr->unk6 + gCharacterSpacing;
+                ret += ptr->width + gCharacterSpacing;
             }
         }
     }
@@ -140,13 +140,13 @@ s32 sub_8008ED0(const u8 *str)
 // arm9.bin::02003AE8
 void PrintStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing)
 {
-    xxx_draw_string(gWindows, x, y, str, windowId, terminatingChr, 0, lineSpacing);
+    DrawStringInternal(gWindows, x, y, str, windowId, terminatingChr, 0, lineSpacing);
 }
 
 // arm9.bin::02003A9C
 void PrintStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr)
 {
-    xxx_draw_string(gWindows, x, y, str, windowId, terminatingChr, 0, 13);
+    DrawStringInternal(gWindows, x, y, str, windowId, terminatingChr, 0, 13);
 }
 
 // arm9.bin::02003A50
@@ -159,7 +159,7 @@ UNUSED static void nullsub_170(s32 x, s32 y, const u8 *str, u32 windowId, u32 te
 // Identical to PrintStringOnWindow
 UNUSED static void UnusedPrintStringOnWindow(s32 x, u32 y, const u8 *str, u32 windowId, u32 terminatingChr)
 {
-    xxx_draw_string(gWindows, x, y, str, windowId, terminatingChr, 0, 13);
+    DrawStringInternal(gWindows, x, y, str, windowId, terminatingChr, 0, 13);
 }
 
 UNUSED static void nullsub_171(void)
@@ -168,7 +168,7 @@ UNUSED static void nullsub_171(void)
 #endif
 
 // arm9.bin::020038A4
-static void xxx_draw_string(Window *strArr, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing)
+static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing)
 {
     UnkDrawStringStruct sp;
     u32 currChr;
@@ -178,7 +178,7 @@ static void xxx_draw_string(Window *strArr, s32 x, s32 y, const u8 *str, u32 win
     sp.unkC = x;
     sp.unk10 = 7;
     while (TRUE) {
-        str = HandleTextFormat(strArr, str, &sp);
+        str = HandleTextFormat(windows, str, &sp);
         str = xxx_get_next_char_from_string(str, &currChr);
         if (currChr == '\0' || currChr == terminatingChr)
             break;
@@ -204,15 +204,15 @@ static void xxx_draw_string(Window *strArr, s32 x, s32 y, const u8 *str, u32 win
             sp.unk0 += 6;
         }
         else if (characterSpacing == 0) {
-            sp.unk0 += xxx_draw_char(strArr, sp.unk0, sp.unk2, currChr, sp.unk10, windowId);
+            sp.unk0 += DrawCharOnWindowInternal(windows, sp.unk0, sp.unk2, currChr, sp.unk10, windowId);
         }
         else {
             const unkChar *chrPtr = GetCharacter(currChr);
             if (chrPtr != NULL) {
                 s32 x = sp.unk0;
                 s32 x2 = gCharacterSpacing + 10;
-                x +=((x2 - chrPtr->unk6) / 2);
-                xxx_draw_char(strArr, x, sp.unk2, currChr, sp.unk10, windowId);
+                x +=((x2 - chrPtr->width) / 2);
+                DrawCharOnWindowInternal(windows, x, sp.unk2, currChr, sp.unk10, windowId);
                 sp.unk0 += characterSpacing;
             }
         }

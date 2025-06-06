@@ -22,6 +22,7 @@
 #include "wonder_mail.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
+#include "naming_screen.h"
 
 static EWRAM_INIT WonderMailStruct_203B2C0 *sUnknown_203B2C0 = {NULL};
 
@@ -403,7 +404,7 @@ void sub_80282FC(void)
     sub_8031E10();
     FriendList_Free();
     sub_803084C();
-    sub_80155F0();
+    NamingScreen_Free();
     sub_80310B4();
     sub_8030DE4();
     sub_802453C();
@@ -575,7 +576,7 @@ void sub_8028348(void)
             RestoreSavedWindows(&sUnknown_203B2C0->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_80151C0(4, sUnknown_203B2C0->passwordBuffer);
+            NamingScreen_Init(4, sUnknown_203B2C0->passwordBuffer);
             break;
         case 8:
             switch(sUnknown_203B2C0->unk538)
@@ -1356,7 +1357,7 @@ void sub_80293F4(void)
     u32 return_var;
     unkStruct_203B480 mail;
 
-    return_var = sub_80154F0();
+    return_var = NamingScreen_HandleInput();
     MemoryFill8(&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
@@ -1387,10 +1388,10 @@ void sub_80293F4(void)
                     default:
                         break;
                 }
-            sub_80155F0();
+            NamingScreen_Free();
             break;
         case 2:
-            sub_80155F0();
+            NamingScreen_Free();
             ResetUnusedInputStruct();
             ShowWindows(&sUnknown_203B2C0->unk3BC, TRUE, TRUE);
             SetFriendRescueCounterState(FRIEND_RESCUE_MAIN);

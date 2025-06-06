@@ -24,6 +24,7 @@
 #include "thank_you_wonder_mail.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
+#include "naming_screen.h"
 
 static EWRAM_INIT WonderMailStruct_203B2C4 *sUnknown_203B2C4 = {NULL};
 
@@ -414,7 +415,7 @@ void CleanThankYouMailPelipper(void)
         FreeItemDescriptionWindow();
         sub_803084C();
         sub_801CBB8();
-        sub_80155F0();
+        NamingScreen_Free();
         sub_8031E10();
         sub_802F2C0();
     }
@@ -790,7 +791,7 @@ void HandleThankYouMailPasswordMenu(void)
   u32 return_var;
   unkStruct_203B480 mail1;
 
-  return_var = sub_80154F0();
+  return_var = NamingScreen_HandleInput();
   MemoryFill8(&mail1, 0, sizeof(unkStruct_203B480));
   switch(return_var)
   {
@@ -821,10 +822,10 @@ void HandleThankYouMailPasswordMenu(void)
             case 7:
                 break;
         }
-    sub_80155F0();
+    NamingScreen_Free();
     break;
   case 2:
-    sub_80155F0();
+    NamingScreen_Free();
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2C4->unk3BC, TRUE, TRUE);
     SetThankYouMailMenuState(ANYTHING_ELSE_THANK_YOU_MAIN_MENU);
@@ -1333,7 +1334,7 @@ void UpdateThankYouMailText(void)
         RestoreSavedWindows(&sUnknown_203B2C4->unk3BC);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
-        sub_80151C0(4,sUnknown_203B2C4->passwordBuffer);
+        NamingScreen_Init(4,sUnknown_203B2C4->passwordBuffer);
         break;
     case 0x1a:
         RestoreSavedWindows(&sUnknown_203B2C4->unk3BC);

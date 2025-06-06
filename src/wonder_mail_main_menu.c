@@ -20,6 +20,7 @@
 #include "wonder_mail_5.h"
 #include "wonder_mail_802D098.h"
 #include "wonder_mail_main_menu.h"
+#include "naming_screen.h"
 
 #define SELECT_WONDER_MAIL_MODE_MAIN_SCREEN 0
 #define SEND_WONDER_MAIL_MAIN_SCREEN 1
@@ -171,7 +172,7 @@ void CleanWonderMailMenu(void)
     FreeItemDescriptionWindow(); // Frees 203B230
     sub_803084C(); // Frees 203B320
     sub_801CBB8(); // Frees 203B244
-    sub_80155F0(); // Frees 203B1FC
+    NamingScreen_Free(); // Frees 203B1FC
     sub_8031E10(); // Frees 203B334
   }
 }
@@ -325,11 +326,11 @@ void HandlePasswordEntryScreen(void)
 {
   s32 iVar2;
 
-  iVar2 = sub_80154F0();
+  iVar2 = NamingScreen_HandleInput();
   MemoryFill8(gUnknown_203B3E8->UNK38.unk38_u8, 0, sizeof(gUnknown_203B3E8->UNK38));
   switch(iVar2){
     case 3:
-      sub_80155F0();
+      NamingScreen_Free();
       ResetUnusedInputStruct();
       ShowWindows(&gUnknown_203B3E8->unk1EC, TRUE, TRUE);
       if ( !DecodeWonderMailPassword(gUnknown_203B3E8->PasswordEntryBuffer, &gUnknown_203B3E8->UNK38.decodedMail) || !IsValidWonderMail(&gUnknown_203B3E8->UNK38.decodedMail) )
@@ -347,7 +348,7 @@ void HandlePasswordEntryScreen(void)
       }
       break;
     case 2:
-        sub_80155F0();
+        NamingScreen_Free();
         ResetUnusedInputStruct();
         ShowWindows(&gUnknown_203B3E8->unk1EC, TRUE, TRUE);
         SetWonderMailMainMenuState(EXIT_TO_MAIN_MENU);
@@ -561,7 +562,7 @@ void WonderMailMainMenuCallback(void)
         RestoreSavedWindows(&gUnknown_203B3E8->unk1EC);
         ResetUnusedInputStruct();
         ShowWindows(NULL, TRUE, TRUE);
-        sub_80151C0(5,gUnknown_203B3E8->PasswordEntryBuffer);
+        NamingScreen_Init(5,gUnknown_203B3E8->PasswordEntryBuffer);
         break;
     case PASSWORD_INVALID:
         CreateMenuDialogueBoxAndPortrait(gUnknown_80E7CC4,0,6,gUnknown_80E78F8,0,4,0,0,0x101);

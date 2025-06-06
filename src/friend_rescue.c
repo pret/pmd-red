@@ -27,6 +27,7 @@
 #include "text_util.h"
 #include "wonder_mail_4.h"
 #include "wonder_mail_5.h"
+#include "naming_screen.h"
 
 extern void SetFriendRescueMenuState(u32);
 
@@ -688,7 +689,7 @@ void CleanFriendRescueMenu(void)
     sub_803084C();
     sub_8031E10();
     FriendList_Free();
-    sub_80155F0();
+    NamingScreen_Free();
     sub_801CBB8();
     sub_802F2C0();
     sub_8030DE4();
@@ -1057,7 +1058,7 @@ void sub_8032828(void)
             RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_80151C0(4, gUnknown_203B33C->passwordBuffer);
+            NamingScreen_Init(4, gUnknown_203B33C->passwordBuffer);
             break;
         case 0x5A:
             CreateMenuDialogueBoxAndPortrait(&gUnknown_80E30A4[0], 0, 6, gUnknown_80E2458, NULL, 4, 0, NULL, 0x101);
@@ -1133,7 +1134,7 @@ void sub_8032828(void)
             RestoreSavedWindows(&gUnknown_203B33C->unk3BC);
             ResetUnusedInputStruct();
             ShowWindows(NULL, TRUE, TRUE);
-            sub_80151C0(4, gUnknown_203B33C->passwordBuffer);
+            NamingScreen_Init(4, gUnknown_203B33C->passwordBuffer);
             break;
         case 0x66:
             CreateDialogueBoxAndPortrait(gUnknown_80E314C, 0, 0, 0x101);
@@ -1659,7 +1660,7 @@ void sub_8033DBC(void)
     unkStruct_203B480 mail;
     unkStruct_203B480 *mail2;
 
-    return_var = sub_80154F0();
+    return_var = NamingScreen_HandleInput();
     MemoryFill8(&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
@@ -1717,10 +1718,10 @@ void sub_8033DBC(void)
                     default:
                         break;
                 }
-            sub_80155F0();
+            NamingScreen_Free();
             break;
         case 2:
-            sub_80155F0();
+            NamingScreen_Free();
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(FRIEND_RESCUE_MENU_MAIN);
@@ -2555,7 +2556,7 @@ void sub_8034D74(void)
     unkStruct_203B480 mail;
     unkStruct_203B480 *mail2;
 
-    return_var = sub_80154F0();
+    return_var = NamingScreen_HandleInput();
     MemoryFill8(&mail, 0, sizeof(unkStruct_203B480));
     switch(return_var)
     {
@@ -2585,10 +2586,10 @@ void sub_8034D74(void)
                     default:
                         break;
                 }
-            sub_80155F0();
+            NamingScreen_Free();
             break;
         case 2:
-            sub_80155F0();
+            NamingScreen_Free();
             ResetUnusedInputStruct();
             ShowWindows(&gUnknown_203B33C->unk3BC, TRUE, TRUE);
             SetFriendRescueMenuState(FRIEND_RESCUE_MENU_MAIN);

@@ -53,6 +53,7 @@ SECTIONS {
         src/event_flag.o(.text);
         src/code_8002774.o(.text);
         src/memory.o(.text);
+        src/code_80035F0.o(.text);
         asm/code_80035F0.o(.text);
         src/other_random.o(.text);
         src/util.o(.text);
@@ -102,7 +103,7 @@ SECTIONS {
         src/menu_input.o(.text);
         src/string_format.o(.text);
         src/code_8015080.o(.text);
-        src/code_8012A18_1.o(.text);
+        src/naming_screen.o(.text);
         src/code_801602C.o(.text);
         src/felicity_bank.o(.text);
         src/kangaskhan_storage1.o(.text);
@@ -454,6 +455,7 @@ SECTIONS {
         src/string_format.o(.rodata);
         src/common_strings.o(.rodata);
         src/code_8015080.o(.rodata);
+        src/naming_screen.o(.rodata);
         src/code_801602C.o(.rodata);
         src/felicity_bank.o(.rodata);
         src/kangaskhan_storage1.o(.rodata);
