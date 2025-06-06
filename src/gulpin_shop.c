@@ -95,8 +95,7 @@ void DestroyGulpinShop(void)
 {
     if (sGulpinShopWork != NULL) {
         CloseFile(sGulpinShopWork->monPortrait.faceFile);
-        MemoryFree(sGulpinShopWork);
-        sGulpinShopWork = NULL;
+        FREE_AND_SET_NULL(sGulpinShopWork);
     }
 }
 

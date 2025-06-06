@@ -130,8 +130,7 @@ void DeleteKangaskhanStorage(void)
 {
     if (gKangaskhanStorageWork != NULL) {
         CloseFile(gKangaskhanStorageWork->monPortrait.faceFile);
-        MemoryFree(gKangaskhanStorageWork);
-        gKangaskhanStorageWork = NULL;
+        FREE_AND_SET_NULL(gKangaskhanStorageWork);
     }
 }
 

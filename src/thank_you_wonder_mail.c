@@ -406,11 +406,9 @@ u32 ThankYouMailPelipperCallback(void)
 
 void CleanThankYouMailPelipper(void)
 {
-    if(sUnknown_203B2C4 != NULL)
-    {
+    if (sUnknown_203B2C4 != NULL) {
         CloseFile(sUnknown_203B2C4->monPortrait.faceFile);
-        MemoryFree(sUnknown_203B2C4);
-        sUnknown_203B2C4 = NULL;
+        FREE_AND_SET_NULL(sUnknown_203B2C4);
         sub_8030DE4();
         FreeItemDescriptionWindow();
         sub_803084C();

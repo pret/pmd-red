@@ -164,8 +164,7 @@ void CleanLuminousCave(void)
 {
     if (sLuminousCaveWork != NULL) {
         CloseFile(sLuminousCaveWork->unk104);
-        MemoryFree(sLuminousCaveWork);
-        sLuminousCaveWork = NULL;
+        FREE_AND_SET_NULL(sLuminousCaveWork);
     }
 }
 

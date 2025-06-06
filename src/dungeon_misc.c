@@ -224,10 +224,7 @@ void CloseAllSpriteFiles(void)
     s32 i;
 
     for (i = 0; i < MONSTER_MAX; i++) {
-        if (gDungeon->sprites[i] != NULL) {
-            CloseFile(gDungeon->sprites[i]);
-            gDungeon->sprites[i] = NULL;
-        }
+        TRY_CLOSE_FILE_AND_SET_NULL(gDungeon->sprites[i]);
     }
 }
 

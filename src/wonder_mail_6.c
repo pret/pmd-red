@@ -166,8 +166,7 @@ void sub_80310B4(void)
     sub_803084C();
     if (gUnknown_203B328 != NULL) {
         CloseFile(gUnknown_203B328->monPortrait.faceFile);
-        MemoryFree(gUnknown_203B328);
-        gUnknown_203B328 = NULL;
+        FREE_AND_SET_NULL(gUnknown_203B328);
     }
 }
 
