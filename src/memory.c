@@ -149,7 +149,7 @@ UNUSED static void MemoryCopy16(u16 *dest, u16 *src, s32 size)
     }
 }
 
-void MemoryCopy32(u32 *dest, u32 *src, s32 size)
+void MemoryCopy32(u32 *dest, const u32 *src, s32 size)
 {
     while (size > 0) {
         size -= 4;

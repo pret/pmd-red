@@ -335,7 +335,6 @@ SECTIONS {
         src/code_809D148.o(.text);
         src/ground_script.o(.text);
         src/code_80A26CC.o(.text);
-        asm/code_80A26CC_1.o(.text);
         src/ground_map.o(.text);
         asm/ground_map_1.o(.text);
         src/ground_map_1.o(.text);

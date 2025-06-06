@@ -13,41 +13,45 @@
 
 typedef struct SubStruct_0
 {
-    u16 unk0;
-    u16 unk2;
+    s16 unk0;
+    s16 unk2;
     const void *unk4;
     const void *unk8;
     u8 fillC;
 } SubStruct_0;
 
+struct UnkFileStruct
+{
+    u8 unk0;
+    s16 unk2;
+    void *unk4[0]; // This is most likely wrong, will need to be fixed.
+};
+
 typedef struct SubStruct_3E0
 {
     u8 unk0;
     u8 unk1;
-    u16 unk2;
-    u16 unk4;
+    s16 unk2;
+    s16 unk4;
     OpenedFile *unk8;
-    const void *unkC;
+    const struct UnkFileStruct *unkC;
     const void *unk10;
-    const void *unk12;
     const void *unk14;
+    const void *unk18;
     const void *unk1C;
     void *unk20;
-    s32 unk24;
+    u32 unk24;
 } SubStruct_3E0;
-
-// Note: not 100% about structs being PixelPos yet to verify
 
 typedef struct SubStruct_488
 {
     s16 unk0;
-    u16 unk2;
+    s16 unk2;
     s16 unk4;
     bool8 unk6;
     s32 unk8;
     s32 unkC;
-    s32 unk10;
-    s32 unk14;
+    PixelPos unk10;
     void (*unk18)(struct SubStruct_488 *);
     u16 *unk1C;
     u16 *unk20[UNK_54C_ARR_COUNT];
@@ -55,7 +59,7 @@ typedef struct SubStruct_488
     PixelPos unk30;
     PixelPos unk38;
     PixelPos unk40;
-    PixelPos unk48;
+    PixelPos bgRegOffsets; // Either bg2 or bg3
 } SubStruct_488;
 
 // size: 0x18?

@@ -472,12 +472,36 @@ UNUSED static const u8 *sub_80A2B28(u16 r0)
 #include "code_8002774.h"
 #include "code_801D9E4.h"
 #include "code_8004AA0.h"
+#include "code_8009804.h"
 #include "debug.h"
+#include "bg_control.h"
 #include "unk_dungeon_load.h"
 #include "constants/dungeon.h"
 
-extern void sub_80A456C(unkStruct_3001B70 *, u32, const PixelPos *);
+void sub_80A456C(unkStruct_3001B70 *mapPtr, s32 id, const PixelPos *srcPos);
+void sub_80A2DD4(unkStruct_3001B70 *mapPtr);
+void sub_80A3BB0(unkStruct_3001B70 *mapPtr, s32 a0);
+void sub_80A3EB0(SubStruct_488 *map488);
+const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2, SubStruct_448 *a3);
+void sub_80A37C4(void *vramDst, const u16 *src_, SubStruct_52C *a2, SubStruct_545 *a3);
+void _UncompressCell(void * a0, u16 *a1, const void * a2, SubStruct_52C *a3, SubStruct_545 *a4);
+void sub_80A3D40(SubStruct_488 *map488, unkStruct_3001B70 *mapPtr, s32 a2, s32 a3, bool8 a4);
+void sub_80A3E14(SubStruct_488 *map488, PixelPos *a1);
+void sub_80A3EBC(SubStruct_488 *map488);
+void sub_80A3EF4(SubStruct_488 *map488);
+void sub_80A4088(SubStruct_488 *map488);
+void sub_80A41C4(SubStruct_488 *map488);
+void sub_80A3ED4(SubStruct_488 *map488);
+void sub_80A3F94(SubStruct_488 *map488);
+void sub_80A4358(SubStruct_488 *map488);
+
+extern const DebugLocation gUnknown_81172E8;
+extern const char gUnknown_81172F4[];
 extern const PixelPos gUnknown_81172B8;
+extern const PixelPos gUnknown_8117314;
+
+extern void sub_8003810(u16 param_1, struct S param_2);
+extern void sub_809971C(u16 a0, const void *a1, int a2);
 
 void sub_80A2B40(unkStruct_3001B70 *mapPtr, const SubStruct_52C *a1)
 {
@@ -537,10 +561,10 @@ void sub_80A2B40(unkStruct_3001B70 *mapPtr, const SubStruct_52C *a1)
         unkPtr->unk4 = 0;
         unkPtr->unk8 = NULL;
         unkPtr->unkC = 0;
-        unkPtr->unk12 = 0;
+        unkPtr->unk14 = 0;
         unkPtr->unk10 = 0;
         unkPtr->unk1C = 0;
-        unkPtr->unk14 = 0;
+        unkPtr->unk18 = 0;
         unkPtr->unk20 = 0;
         unkPtr->unk24 = 0;
     }
@@ -549,10 +573,6 @@ void sub_80A2B40(unkStruct_3001B70 *mapPtr, const SubStruct_52C *a1)
         sub_80A456C(mapPtr, i, &gUnknown_81172B8);
     }
 }
-
-void sub_80A2DD4(unkStruct_3001B70 *mapPtr);
-void sub_80A3BB0(unkStruct_3001B70 *mapPtr, s32 a0);
-void sub_80A3EB0(SubStruct_488 *map488);
 
 void sub_80A2D00(unkStruct_3001B70 *mapPtr)
 {
@@ -599,8 +619,6 @@ void sub_80A2DD4(unkStruct_3001B70 *mapPtr)
     TRY_CLOSE_FILE_AND_SET_NULL(mapPtr->unk438);
 }
 
-extern void sub_8003810(u32 param_1, struct S param_2);
-
 void sub_80A2E64(unkStruct_3001B70 *mapPtr)
 {
     u16 r6;
@@ -637,10 +655,10 @@ void sub_80A2E64(unkStruct_3001B70 *mapPtr)
         unkPtr->unk4 = 0;
         unkPtr->unk8 = NULL;
         unkPtr->unkC = 0;
-        unkPtr->unk12 = 0;
+        unkPtr->unk14 = 0;
         unkPtr->unk10 = 0;
         unkPtr->unk1C = 0;
-        unkPtr->unk14 = 0;
+        unkPtr->unk18 = 0;
         unkPtr->unk20 = 0;
         unkPtr->unk24 = 0;
     }
@@ -661,21 +679,8 @@ void sub_80A2E64(unkStruct_3001B70 *mapPtr)
     mapPtr->unk52A = 1;
 }
 
-const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2, SubStruct_448 *a3);
-void sub_80A37C4(void *vramDst, const u16 *src_, SubStruct_52C *a2, SubStruct_545 *a3);
-void _UncompressCell(void * a0, u16 *a1, const void * a2, SubStruct_52C *a3, SubStruct_545 *a4);
-
 extern const struct unkStruct_81188F0 gUnknown_81188F0[10];
 extern const FileArchive gGroundFileArchive;
-
-extern void sub_809971C(u16 a0, const void *a1, int a2);
-
-struct UnkFileStruct
-{
-    u8 unk0;
-    s16 unk2;
-    void *unk4[0]; // This is most likely wrong, will need to be fixed.
-};
 
 void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
 {
@@ -816,8 +821,8 @@ void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
             sub3E0->unkC = fileStr;
             r1 = &fileStr->unk4;
             r0 = r1 + fileStr->unk2 * 4;
-            sub3E0->unk10 = sub3E0->unk12 = r1;
-            sub3E0->unk14 = sub3E0->unk1C = r0;
+            sub3E0->unk10 = sub3E0->unk14 = r1;
+            sub3E0->unk18 = sub3E0->unk1C = r0;
             sub3E0->unk2 = 0;
             sub3E0->unk4 = (u32) fileStr->unk4[0]; // ?
             sub3E0->unk20 = vramPtr;
@@ -832,10 +837,10 @@ void sub_80A2FBC(unkStruct_3001B70 *mapPtr, s32 a1_)
             sub3E0->unk2 = 0;
             sub3E0->unk8 = NULL;
             sub3E0->unkC = 0;
-            sub3E0->unk12 = 0;
+            sub3E0->unk14 = 0;
             sub3E0->unk10 = 0;
             sub3E0->unk1C = 0;
-            sub3E0->unk14 = 0;
+            sub3E0->unk18 = 0;
             sub3E0->unk20 = 0;
             sub3E0->unk24 = 0;
         }
@@ -988,10 +993,10 @@ void sub_80A3440(unkStruct_3001B70 *mapPtr, s32 a1_, DungeonLocation *dungLoc, s
         sub3E0->unk2 = 0;
         sub3E0->unk8 = NULL;
         sub3E0->unkC = 0;
-        sub3E0->unk12 = 0;
+        sub3E0->unk14 = 0;
         sub3E0->unk10 = 0;
         sub3E0->unk1C = 0;
-        sub3E0->unk14 = 0;
+        sub3E0->unk18 = 0;
         sub3E0->unk20 = 0;
         sub3E0->unk24 = 0;
     }
@@ -1022,9 +1027,6 @@ void sub_80A37C4(void *vramDst, const u16 *src_, SubStruct_52C *a2, SubStruct_54
         }
     }
 }
-
-extern const DebugLocation gUnknown_81172E8;
-extern const char gUnknown_81172F4[];
 
 void _UncompressCell(void *dst_, u16 *a1, const void *src_, SubStruct_52C *a3, SubStruct_545 *a4)
 {
@@ -1157,17 +1159,6 @@ void sub_80A3B80(unkStruct_3001B70 *mapPtr, u8 a1, u8 a2)
     }
 }
 
-extern const PixelPos gUnknown_8117314;
-void sub_80A3D40(SubStruct_488 *a0, unkStruct_3001B70 *mapPtr, s32 a2, s32 a3, bool8 a4);
-void sub_80A3E14(SubStruct_488 *a0, PixelPos *a1);
-void sub_80A3EBC(SubStruct_488 *a0);
-void sub_80A3EF4(SubStruct_488 *a0);
-void sub_80A4088(SubStruct_488 *a0);
-void sub_80A41C4(SubStruct_488 *a0);
-void sub_80A3ED4(SubStruct_488 *a0);
-void sub_80A3F94(SubStruct_488 *a0);
-void sub_80A4358(SubStruct_488 *a0);
-
 void sub_80A3BB0(unkStruct_3001B70 *mapPtr, s32 a0_)
 {
     s32 i;
@@ -1234,57 +1225,57 @@ void sub_80A3BB0(unkStruct_3001B70 *mapPtr, s32 a0_)
     }
 }
 
-void sub_80A3D40(SubStruct_488 *a0, unkStruct_3001B70 *mapPtr, s32 a2, s32 a3, bool8 a4)
+void sub_80A3D40(SubStruct_488 *map488, unkStruct_3001B70 *mapPtr, s32 a2, s32 a3, bool8 a4)
 {
     s32 i, j;
 
-    a0->unk0 = mapPtr->unk528;
-    a0->unk2 = a2;
-    a0->unk4 = a3;
-    a0->unk6 = a4;
-    a0->unk8 = mapPtr->unk448.unk4;
-    a0->unkC = mapPtr->unk448.unk5;
-    a0->unk10 = mapPtr->unk448.unk0 * 8;
-    a0->unk14 = mapPtr->unk448.unk1 * 8;
-    a0->unk1C = mapPtr->unk548;
+    map488->unk0 = mapPtr->unk528;
+    map488->unk2 = a2;
+    map488->unk4 = a3;
+    map488->unk6 = a4;
+    map488->unk8 = mapPtr->unk448.unk4;
+    map488->unkC = mapPtr->unk448.unk5;
+    map488->unk10.x = mapPtr->unk448.unk0 * 8;
+    map488->unk10.y = mapPtr->unk448.unk1 * 8;
+    map488->unk1C = mapPtr->unk548;
 
     for (i = 0, j = a2; i < a3 && j < mapPtr->unk52C.unkC; i++, j++) {
-        a0->unk20[i] = mapPtr->unk54C[j];
-        a0->unk28[i] = mapPtr->unk554[j];
+        map488->unk20[i] = mapPtr->unk54C[j];
+        map488->unk28[i] = mapPtr->unk554[j];
     }
     for (; i < UNK_54C_ARR_COUNT; i++) {
-        a0->unk20[i] = NULL;
-        a0->unk28[i] = NULL;
+        map488->unk20[i] = NULL;
+        map488->unk28[i] = NULL;
     }
 
-    sub_80A3E14(a0, &mapPtr->unk478[0]);
+    sub_80A3E14(map488, &mapPtr->unk478[0]);
 }
 
-void sub_80A3E14(SubStruct_488 *a0, PixelPos *a1)
+void sub_80A3E14(SubStruct_488 *map488, PixelPos *a1)
 {
-    a0->unk30.x = a1->x;
-    a0->unk38.x = a0->unk30.x / 8;
-    a0->unk30.y = a1->y;
-    a0->unk38.y = a0->unk30.y / 8;
+    map488->unk30.x = a1->x;
+    map488->unk38.x = map488->unk30.x / 8;
+    map488->unk30.y = a1->y;
+    map488->unk38.y = map488->unk30.y / 8;
 
-    switch (a0->unk0) {
+    switch (map488->unk0) {
         case 0:
-            a0->unk40.x = 0;
-            a0->unk40.y = 0;
-            a0->unk48.x = 0;
-            a0->unk48.y = 0;
+            map488->unk40.x = 0;
+            map488->unk40.y = 0;
+            map488->bgRegOffsets.x = 0;
+            map488->bgRegOffsets.y = 0;
             break;
         case 1:
-            a0->unk40.x = a0->unk38.x / 2;
-            a0->unk40.y = a0->unk38.y / 2;
-            a0->unk48.x = a0->unk30.x % 16;
-            a0->unk48.y = a0->unk30.y % 16;
+            map488->unk40.x = map488->unk38.x / 2;
+            map488->unk40.y = map488->unk38.y / 2;
+            map488->bgRegOffsets.x = map488->unk30.x % 16;
+            map488->bgRegOffsets.y = map488->unk30.y % 16;
             break;
         case 2:
-            a0->unk40.x = a0->unk38.x / 3;
-            a0->unk40.y = a0->unk38.y / 3;
-            a0->unk48.x = a0->unk30.x % 8;
-            a0->unk48.y = a0->unk30.y % 24;
+            map488->unk40.x = map488->unk38.x / 3;
+            map488->unk40.y = map488->unk38.y / 3;
+            map488->bgRegOffsets.x = map488->unk30.x % 8;
+            map488->bgRegOffsets.y = map488->unk30.y % 24;
             break;
     }
 }
@@ -1344,4 +1335,586 @@ void sub_80A3EF4(SubStruct_488 *map488)
     }
 }
 
-//
+void sub_80A3F94(SubStruct_488 *map488)
+{
+    s32 arrPtrId;
+    u16 *ptr1, *ptr2;
+    u16 *arrPtrs1[2];
+    u16 *arrPtrs2[2];
+    s32 unk28Id;
+    s32 i, j;
+
+    ptr1 = &map488->unk20[0][(map488->unk40.y * 64) + map488->unk40.x];
+    ptr2 = &map488->unk20[1][(map488->unk40.y * 64) + map488->unk40.x];
+    unk28Id = 0;
+    for (i = 0; i < 11; ptr1 += 64, ptr2 += 64, i++) {
+        u16 *currPtr1 = ptr1;
+        u16 *currPtr2 = ptr2;
+
+        for (arrPtrId = 0; arrPtrId < 2; arrPtrId++) {
+            arrPtrs1[arrPtrId] = &map488->unk28[0][unk28Id];
+            arrPtrs2[arrPtrId] = &map488->unk28[1][unk28Id];
+            unk28Id += 32;
+        }
+
+        for (j = 0; j < 16; j++) {
+            u16 *currSrc1 = &map488->unk1C[*currPtr1++ * 9];
+            u16 *currSrc2 = &map488->unk1C[*currPtr2++ * 9];
+            for (arrPtrId = 0; arrPtrId < 2; arrPtrId++) {
+                u16 *currDst1 = arrPtrs1[arrPtrId];
+                u16 *currDst2 = arrPtrs2[arrPtrId];
+                *currDst1++ = *currSrc1++;
+                *currDst1++ = *currSrc1++;
+                *currDst2++ = *currSrc2++;
+                *currDst2++ = *currSrc2++;
+                arrPtrs1[arrPtrId] = currDst1;
+                arrPtrs2[arrPtrId] = currDst2;
+            }
+        }
+    }
+}
+
+void sub_80A4088(SubStruct_488 *map488)
+{
+    s32 arrPtrId;
+    s32 i, j;
+    u16 *arrPtrs[3];
+    s32 mod3 = map488->unk38.x % 3;
+    u16 *ptr = &map488->unk20[0][(map488->unk40.y * 64) + map488->unk40.x];
+    s32 unk28Id = 0;
+
+    for (i = 0; i < 8; ptr += 64, i++) {
+        u16 *currPtr = ptr;
+
+        for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+            arrPtrs[arrPtrId] = &map488->unk28[0][unk28Id];
+            unk28Id += 32;
+        }
+
+        if (mod3 != 0) {
+            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+
+            if (mod3 == 1) {
+                currSrc++;
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    u16 *currDst = arrPtrs[arrPtrId];
+                    *currDst++ = currSrc[0];
+                    *currDst++ = currSrc[1];
+                    arrPtrs[arrPtrId] = currDst;
+                    currSrc += 3;
+                }
+            }
+            else {
+                currSrc += 2;
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    u16 *currDst = arrPtrs[arrPtrId];
+                    *currDst++ = currSrc[0];
+                    arrPtrs[arrPtrId] = currDst;
+                    currSrc += 3;
+                }
+            }
+        }
+
+        for (j = 0; j < 10; j++) {
+            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                u16 *currDst = arrPtrs[arrPtrId];
+                *currDst++ = *currSrc++;
+                *currDst++ = *currSrc++;
+                *currDst++ = *currSrc++;
+                arrPtrs[arrPtrId] = currDst;
+            }
+        }
+
+        if (mod3 != 1) {
+            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            if (mod3 == 0) {
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    u16 *currDst = arrPtrs[arrPtrId];
+                    currDst[0] = currSrc[0];
+                    currDst[1] = currSrc[1];
+                    currSrc += 3;
+                }
+            }
+            else {
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    u16 *currDst = arrPtrs[arrPtrId];
+                    currDst[0] = currSrc[0];
+                    currSrc += 3;
+                }
+            }
+        }
+    }
+}
+
+void sub_80A41C4(SubStruct_488 *map488)
+{
+    s32 mod3;
+    s32 arrPtrId;
+    u16 *ptr;
+    u16 *arrPtrs[3];
+    s32 unk28Id;
+    s32 i, j;
+    s32 sub1, sub2;
+
+    // Screw you agbcc...
+    ASM_MATCH_TRICK(ptr);ASM_MATCH_TRICK(ptr);ASM_MATCH_TRICK(ptr);ASM_MATCH_TRICK(ptr);ASM_MATCH_TRICK(ptr);
+
+    mod3 = map488->unk38.x % 3;
+    ptr = &map488->unk20[0][(map488->unk40.y * 64) + map488->unk40.x];
+    unk28Id = 0;
+    sub1 = map488->unkC - map488->unk40.y;
+    sub2 = map488->unk8 - map488->unk40.x;
+
+    for (i = 0; i < 8; ptr += 64, i++) {
+        u16 *currPtr;
+        s32 currSub2 = sub2;
+
+        if (sub1 > 0) {
+            sub1--;
+            currPtr = ptr;
+        }
+        else {
+            sub1 = map488->unkC;
+            ptr = &map488->unk20[0][map488->unk40.x];
+            currPtr = ptr;
+        }
+
+        for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+            arrPtrs[arrPtrId] = &map488->unk28[0][unk28Id];
+            unk28Id += 32;
+        }
+
+        if (mod3 != 0) {
+            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+
+            if (mod3 == 1) {
+                currSrc++;
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    u16 *currDst = arrPtrs[arrPtrId];
+                    *currDst++ = currSrc[0];
+                    *currDst++ = currSrc[1];
+                    arrPtrs[arrPtrId] = currDst;
+                    currSrc += 3;
+                }
+            }
+            else {
+                currSrc += 2;
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    *arrPtrs[arrPtrId]++ = *currSrc;
+                    currSrc += 3;
+                }
+            }
+
+            currSub2--;
+            if (currSub2 <= 0) {
+                currSub2 = map488->unk8;
+                currPtr -= currSub2;
+            }
+        }
+
+        for (j = 0; j < 10; j++) {
+            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+
+            for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                u16 *currDst = arrPtrs[arrPtrId];
+                *currDst++ = *currSrc++;
+                *currDst++ = *currSrc++;
+                *currDst++ = *currSrc++;
+                arrPtrs[arrPtrId] = currDst;
+            }
+
+            if (--currSub2 <= 0) {
+                currSub2 = map488->unk8;
+                currPtr -= currSub2;
+            }
+        }
+
+        // Interestingly enough this part is NOT present in Blue...
+        if (mod3 != 1) {
+            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            if (mod3 == 0) {
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    u16 *currDst = arrPtrs[arrPtrId];
+                    currDst[0] = currSrc[0];
+                    currDst[1] = currSrc[1];
+                    currSrc += 3;
+                }
+            }
+            else {
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    u16 *currDst = arrPtrs[arrPtrId];
+                    currDst[0] = currSrc[0];
+                    currSrc += 3;
+                }
+            }
+        }
+    }
+}
+
+void sub_80A4358(SubStruct_488 *map488)
+{
+    s32 arrPtrId;
+    s32 i, j;
+    u16 *arrPtrs1[3];
+    u16 *arrPtrs2[3];
+    s32 mod3 = map488->unk38.x % 3;
+    u16 *ptr1 = &map488->unk20[0][(map488->unk40.y * 64) + map488->unk40.x];
+    u16 *ptr2 = &map488->unk20[1][(map488->unk40.y * 64) + map488->unk40.x];
+    s32 unk28Id = 0;
+
+    // Stack memes again...
+    ASM_MATCH_TRICK(ptr2);ASM_MATCH_TRICK(ptr2);ASM_MATCH_TRICK(ptr2);
+
+    for (i = 0; i < 8; ptr1 += 64, ptr2 += 64, i++) {
+        u16 *currPtr1 = ptr1;
+        u16 *currPtr2 = ptr2;
+
+        for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+            arrPtrs1[arrPtrId] = &map488->unk28[0][unk28Id];
+            arrPtrs2[arrPtrId] = &map488->unk28[1][unk28Id];
+            unk28Id += 32;
+        }
+
+        if (mod3 != 0) {
+            u16 *currSrc1 = &map488->unk1C[*currPtr1++ * 9];
+            u16 *currSrc2 = &map488->unk1C[*currPtr2++ * 9];
+
+            if (mod3 == 1) {
+                currSrc1++;
+                currSrc2++;
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    u16 *currDst1, *currDst2;
+                    currDst1 = arrPtrs1[arrPtrId];
+                    currDst2 = arrPtrs2[arrPtrId];
+                    *currDst1++ = currSrc1[0];
+                    *currDst1++ = currSrc1[1];
+                    *currDst2++ = currSrc2[0];
+                    *currDst2++ = currSrc2[1];
+                    arrPtrs1[arrPtrId] = currDst1;
+                    arrPtrs2[arrPtrId] = currDst2;
+                    currSrc1 += 3;
+                    currSrc2 += 3;
+                }
+            }
+            else {
+                currSrc1 += 2;
+                currSrc2 += 2;
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    *arrPtrs1[arrPtrId]++ = currSrc1[0];
+                    *arrPtrs2[arrPtrId]++ = currSrc2[0];
+                    currSrc1 += 3;
+                    currSrc2 += 3;
+                }
+            }
+        }
+
+        for (j = 0; j < 10; j++) {
+            u16 *currSrc1 = &map488->unk1C[*currPtr1++ * 9];
+            u16 *currSrc2 = &map488->unk1C[*currPtr2++ * 9];
+            for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                u16 *currDst1 = arrPtrs1[arrPtrId];
+                u16 *currDst2 = arrPtrs2[arrPtrId];
+                *currDst1++ = *currSrc1++;
+                *currDst1++ = *currSrc1++;
+                *currDst1++ = *currSrc1++;
+                *currDst2++ = *currSrc2++;
+                *currDst2++ = *currSrc2++;
+                *currDst2++ = *currSrc2++;
+                arrPtrs1[arrPtrId] = currDst1;
+                arrPtrs2[arrPtrId] = currDst2;
+            }
+        }
+
+        if (mod3 != 1) {
+            u16 *currSrc1 = &map488->unk1C[*currPtr1++ * 9];
+            u16 *currSrc2 = &map488->unk1C[*currPtr2++ * 9];
+            if (mod3 == 0) {
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    u16 *currDst1 = arrPtrs1[arrPtrId];
+                    u16 *currDst2 = arrPtrs2[arrPtrId];
+                    currDst1[0] = currSrc1[0];
+                    currDst1[1] = currSrc1[1];
+                    currDst2[0] = currSrc2[0];
+                    currDst2[1] = currSrc2[1];
+                    currSrc1 += 3;
+                    currSrc2 += 3;
+                }
+            }
+            else {
+                for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
+                    u16 *currDst1, *currDst2;
+
+                    currDst1 = arrPtrs1[arrPtrId];
+                    currDst1[0] = currSrc1[0];
+                    currDst2 = arrPtrs2[arrPtrId];
+                    currDst2[0] = currSrc2[0];
+                    currSrc1 += 3;
+                    currSrc2 += 3;
+                }
+            }
+        }
+    }
+}
+
+void sub_80A4558(unkStruct_3001B70 *mapPtr, s32 id, PixelPos *dstPos)
+{
+    *dstPos = mapPtr->unk478[id];
+}
+
+void sub_80A456C(unkStruct_3001B70 *mapPtr, s32 id, const PixelPos *srcPos)
+{
+    mapPtr->unk478[id] = *srcPos;
+}
+
+void sub_80A4580(unkStruct_3001B70 *mapPtr, s32 id, PixelPos *pixPos)
+{
+    SubStruct_488 *map488 = &mapPtr->unk488[id];
+
+    if (pixPos->x < 0) {
+        if (map488->unk6) {
+            do {
+                pixPos->x += map488->unk10.x;
+            } while (pixPos->x < 0);
+        }
+        else {
+            pixPos->x = 0;
+        }
+    }
+    else if (pixPos->x >= map488->unk10.x) {
+        if (map488->unk6) {
+            do {
+                pixPos->x -= map488->unk10.x;
+            } while (pixPos->x >= map488->unk10.x);
+        }
+        else {
+            pixPos->x = map488->unk10.x - 1;
+        }
+    }
+
+    if (pixPos->y < 0) {
+        if (map488->unk6) {
+            do {
+                pixPos->y += map488->unk10.y;
+            } while (pixPos->y < 0);
+        }
+        else {
+            pixPos->y = 0;
+        }
+    }
+    else if (pixPos->y >= map488->unk10.y) {
+        if (map488->unk6) {
+            do {
+                pixPos->y -= map488->unk10.y;
+            } while (pixPos->y >= map488->unk10.y);
+        }
+        else {
+            pixPos->y = map488->unk10.y - 1;
+        }
+    }
+}
+
+void sub_80A4608(unkStruct_3001B70 *mapPtr, PixelPos *dstPos)
+{
+    dstPos->x = mapPtr->unk448.unk0;
+    dstPos->y = mapPtr->unk448.unk1;
+}
+
+UNUSED static void sub_80A4620(unkStruct_3001B70 *mapPtr, PixelPos *dstPos)
+{
+    dstPos->x = mapPtr->unk448.unk0 * 8;
+    dstPos->y = mapPtr->unk448.unk1 * 8;
+}
+
+void GetDungeonBounds(unkStruct_3001B70 *mapPtr, PixelPos *dstPos1, PixelPos *dstPos2)
+{
+    dstPos1->x = 0;
+    dstPos1->y = 0;
+    dstPos2->x = mapPtr->unk448.unk0 << 11;
+    dstPos2->y = mapPtr->unk448.unk1 << 11;
+}
+
+u8 sub_80A4660(unkStruct_3001B70 *mapPtr, u8 bits, PixelPos *pixPos1, PixelPos *boundary)
+{
+    s32 i, j;
+    u8 *currPtr;
+    void *ptr = mapPtr->unk544;
+
+    if (ptr == NULL)
+        return 0;
+
+    ptr += ((pixPos1->y * 256) + pixPos1->x + 0x405);
+    for (i = boundary->y; i > 0; i--) {
+        for (j = boundary->x, currPtr = ptr; j > 0; j--) {
+            u8 ret = *currPtr++ & bits;
+            if (ret)
+                return ret;
+        }
+        ptr += 256;
+    }
+
+    return 0;
+}
+
+u8 sub_80A46C0(unkStruct_3001B70 *mapPtr, u8 bits, PixelPos *pixPos1, PixelPos *boundary)
+{
+    s32 i, j;
+    u8 *currPtr;
+    void *ptr = mapPtr->unk544;
+
+    if (ptr == NULL)
+        return 0;
+
+    ptr += ((pixPos1->y * 256) + pixPos1->x + 0x405);
+    for (i = boundary->y; i > 0; i--) {
+        for (j = boundary->x, currPtr = ptr; j > 0; j--) {
+            u8 ret = *currPtr++ & bits;
+            if (ret != bits)
+                return 0;
+        }
+        ptr += 256;
+    }
+
+    return 1;
+}
+
+u16 sub_80A4720(unkStruct_3001B70 *mapPtr, s32 id, PixelPos *pixPos)
+{
+    u16 *ptr = mapPtr->unk54C[id] + (pixPos->y * 64);
+    ptr += pixPos->x;
+    return *ptr;
+}
+
+void sub_80A4740(unkStruct_3001B70 *mapPtr, s32 id, PixelPos *pixPos, u32 dstVal)
+{
+    u16 *ptr = mapPtr->unk54C[id] + (pixPos->y * 64);
+    ptr += pixPos->x;
+    *ptr = dstVal;
+}
+
+void sub_80A4764(unkStruct_3001B70 *mapPtr)
+{
+    s32 i, j;
+    s32 unk3E0Id;
+    SubStruct_488 *map488;
+    PixelPos *map478;
+
+    if (mapPtr->unk444 == -1)
+        return;
+
+    if (mapPtr->unk464[1] != 0) {
+        s32 i;
+        SubStruct_0 *sub0Ptr = mapPtr->unk0;
+        const u16 *ptr = mapPtr->unk46C;
+        u16 r6 = mapPtr->unk52C.unk0 * 16;
+
+        for (i = 0; i < mapPtr->unk464[0]; i++, sub0Ptr++, ptr += 2, r6 += 16) {
+            if (sub0Ptr->unk4 != NULL && --sub0Ptr->unk2 <= 0) {
+                if (--sub0Ptr->unk0 <= 0) {
+                    if (mapPtr->unk471) {
+                        sub0Ptr->unk2 = ptr[0];
+                        sub0Ptr->unk0 = ptr[1];
+                        sub0Ptr->unk8 = sub0Ptr->unk4;
+                    }
+                    else {
+                        sub0Ptr->unk0 = 0;
+                        sub0Ptr->unk2 = 0;
+                        sub0Ptr->unk8 = NULL;
+                    }
+                }
+                else {
+                    sub0Ptr->unk2 = ptr[0];
+                }
+
+                if (sub0Ptr->unk8 != NULL) {
+                    struct S empty = {0};
+                    sub_8003810(r6, empty);
+                    sub_809971C(r6 + 1, sub0Ptr->unk8, 15);
+                    sub0Ptr->unk8 += 60;
+                }
+            }
+        }
+
+        mapPtr->unk471 = mapPtr->unk470;
+    }
+    else if (mapPtr->unk440 != NULL) {
+        s32 i;
+        unkStruct_202EE8C *unkE0Ptr = mapPtr->unkE0;
+        s32 r6 = 160;
+
+        for (i = 0; i < 32; i++, unkE0Ptr++, r6++) {
+            struct S color;
+
+            if (sub_8004D14(unkE0Ptr, 1) && !sub_8004D40(unkE0Ptr, 1) && --unkE0Ptr->unk6 <= 0) {
+                unkE0Ptr->unk6 = unkE0Ptr->unk4;
+                if (unkE0Ptr->unkC >= unkE0Ptr->unk10) {
+                    unkE0Ptr->unkC = unkE0Ptr->unk8;
+                }
+                unkE0Ptr->unk14 = *unkE0Ptr->unkC++;
+                color = (struct S) {unkE0Ptr->unk14.r, unkE0Ptr->unk14.g, unkE0Ptr->unk14.b, unkE0Ptr->unk14.unk4};
+                sub_8003810(r6, color);
+            }
+        }
+    }
+
+    for (unk3E0Id = 0; unk3E0Id < UNK_3E0_ARR_COUNT; unk3E0Id++) {
+        SubStruct_3E0 *sub3E0Ptr = &mapPtr->unk3E0[unk3E0Id];
+
+        if (sub3E0Ptr->unk0 && sub3E0Ptr->unk4-- <= 0) {
+            sub3E0Ptr->unk14 += 4;
+            sub3E0Ptr->unk1C += (sub3E0Ptr->unk24 / 2) * 2;
+            if (++sub3E0Ptr->unk2 >= sub3E0Ptr->unkC->unk2) {
+                sub3E0Ptr->unk14 = sub3E0Ptr->unk10;
+                sub3E0Ptr->unk1C = sub3E0Ptr->unk18;
+                sub3E0Ptr->unk2 = 0;
+            }
+            sub3E0Ptr->unk1 = 1;
+            sub3E0Ptr->unk4 = *(u32 *)(sub3E0Ptr->unk14);
+        }
+    }
+
+    map488 = mapPtr->unk488;
+    map478 = mapPtr->unk478;
+    for (i = 0; i < mapPtr->unk474; i++, map488++, map478++) {
+        s32 unk;
+
+        sub_80A3E14(map488, map478);
+        sub_80A3EB0(map488);
+        for (j = 0, unk = map488->unk2 + mapPtr->unk52C.unkA; j < map488->unk4; j++, unk++) {
+            switch (unk) {
+                case 0:
+                    SetBG2RegOffsets(map488->bgRegOffsets.x, map488->bgRegOffsets.y);
+                    break;
+                case 1:
+                    SetBG3RegOffsets(map488->bgRegOffsets.x, map488->bgRegOffsets.y);
+                    break;
+            }
+        }
+    }
+
+    mapPtr->unk52A = 1;
+}
+
+void sub_80A49E8(unkStruct_3001B70 *mapPtr)
+{
+    s32 i;
+    s32 unk3E0Id;
+
+    for (unk3E0Id = 0; unk3E0Id < UNK_3E0_ARR_COUNT; unk3E0Id++) {
+        SubStruct_3E0 *sub3E0Ptr = &mapPtr->unk3E0[unk3E0Id];
+
+        if (sub3E0Ptr->unk1) {
+            MemoryCopy32(sub3E0Ptr->unk20, sub3E0Ptr->unk1C, sub3E0Ptr->unk24);
+            sub3E0Ptr->unk1 = FALSE;
+            mapPtr->unk52A = 1;
+        }
+    }
+
+    if (mapPtr->unk52A) {
+        s32 unk;
+        for (i = 0, unk = mapPtr->unk52C.unkA; i < mapPtr->unk52C.unkC; i++, unk++) {
+            sub_80098F8(unk + 2);
+        }
+        mapPtr->unk52A = 0;
+    }
+}

@@ -8,7 +8,7 @@ void MemoryClear16(u16 *dest, s32 size);
 void MemoryFill8(void *dest, u8 value, s32 size);
 void MemoryFill16(u16 *dest, u16 value, s32 size);
 void MemoryCopy8(void *dest, void *src, s32 size);
-void MemoryCopy32(u32 *dest, u32 *src, s32 size);
+void MemoryCopy32(u32 *dest, const u32 *src, s32 size);
 
 void *MemoryAlloc(s32 size, s32 group);
 void MemoryFree(void *a);
