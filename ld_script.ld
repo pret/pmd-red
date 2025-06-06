@@ -20,7 +20,6 @@ SECTIONS {
 
         data/sound_data.o(.bss);
         INCLUDE "sym_ewram.ld"
-        src/agb_flash.o(.bss);
         *libgcc.a:fp-bit.o(.bss);
         *libgcc.a:dp-bit.o(.bss);
         *libc.a:syscalls.o(.bss);

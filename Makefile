@@ -312,11 +312,11 @@ $(BUILD_DIR)/sym_iwram_init.ld: sym_iwram_init.txt
     
 ifeq ($(MODERN),0)
   LD_SCRIPT := ld_script.ld
+  LD_SCRIPT_DEPS := $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_iwram.ld $(BUILD_DIR)/sym_ewram_init.ld $(BUILD_DIR)/sym_iwram_init.ld
 else
   LD_SCRIPT := ld_script_modern.ld
+  LD_SCRIPT_DEPS :=
 endif
-
-LD_SCRIPT_DEPS := $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_iwram.ld $(BUILD_DIR)/sym_ewram_init.ld $(BUILD_DIR)/sym_iwram_init.ld
 
 # Elf from object files
 LDFLAGS = -Map ../../$(MAP)

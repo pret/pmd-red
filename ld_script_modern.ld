@@ -19,12 +19,8 @@ SECTIONS {
         ewram_start = .;
 
         data/sound_data.o(.bss);
-        INCLUDE "sym_ewram.ld"
-        src/agb_flash.o(.bss);
-
-        . = ALIGN(16);
-		src/m4a.o(ewram_lib);
-		src/agb_flash.o(ewram_lib);
+        *(ewram_data*);
+        *(ewram_lib*);
 
 		ewram_end = .;
     } > EWRAM
@@ -33,7 +29,7 @@ SECTIONS {
     ALIGN(4)
     {
         iwram_start = .;
-        INCLUDE "sym_iwram.ld"
+        *(iwram_data*);
 		iwram_end = .;
     } > IWRAM
 
@@ -67,7 +63,7 @@ SECTIONS {
     {
         ewram_init_start = .;
 
-		INCLUDE "sym_ewram_init.ld"
+		*(ewram_init*);
 
 		ewram_init_end = .;
     } > EWRAM AT>ROM
@@ -79,7 +75,7 @@ SECTIONS {
 	{
 		iwram_init_start = .;
 
-        INCLUDE "sym_iwram_init.ld"
+        *(iwram_init*);
 
 		iwram_init_end = .;
     } > IWRAM AT>ROM

@@ -1,10 +1,10 @@
 #include "gba/gba.h"
 #include "gba/flash_internal.h"
 
-static u8 sTimerNum;
-static u16 sTimerCount;
-static vu16 *sTimerReg;
-static u16 sSavedIme;
+static EWRAM_DATA u8 sTimerNum = 0;
+static EWRAM_DATA u16 sTimerCount = 0;
+static EWRAM_DATA vu16 *sTimerReg = 0;
+static EWRAM_DATA u16 sSavedIme = 0;
 
 EWRAM_LIB u8 gFlashTimeoutFlag = {0};
 EWRAM_LIB u8 (*PollFlashStatus)(u8 *) = {0};
