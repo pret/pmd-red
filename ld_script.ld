@@ -335,6 +335,7 @@ SECTIONS {
         src/code_809D148.o(.text);
         src/ground_script.o(.text);
         src/code_80A26CC.o(.text);
+        src/ground_bg.o(.text);
         src/ground_map.o(.text);
         asm/ground_map_1.o(.text);
         src/ground_map_1.o(.text);
@@ -690,6 +691,8 @@ SECTIONS {
         data/data_8115F5C.o(.rodata);
         src/code_809A560.o(.rodata);
         data/data_8115F5C_2.o(.rodata);
+        src/ground_bg.o(.rodata);
+        data/data_8115F5C_2_1.o(.rodata);
         src/ground_sprite.o(.rodata);
         src/ground_sprite_data.o(.rodata);
         src/ground_sprite_monster.o(.rodata);
