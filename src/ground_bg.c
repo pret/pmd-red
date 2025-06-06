@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "ground_bg.h"
 #include "ground_map.h"
 #include "text_1.h"
 #include "memory.h"
@@ -13,11 +14,13 @@
 #include "unk_dungeon_load.h"
 #include "constants/dungeon.h"
 
+// This file most likely deals with map loading and writing to VRAM. It even has a custom decompression function.
+
 extern const struct unkStruct_81188F0 gUnknown_81188F0[10];
 extern const FileArchive gGroundFileArchive;
 
 void sub_80A456C(GroundBg *groundBg, s32 id, const PixelPos *srcPos);
-static void sub_80A2DD4(GroundBg *groundBg);
+static void CloseOpenedFiles(GroundBg *groundBg);
 void sub_80A3BB0(GroundBg *groundBg, s32 a0);
 static void sub_80A3EB0(SubStruct_488 *map488);
 static const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2, SubStruct_448 *a3);
@@ -38,7 +41,7 @@ extern void sub_809971C(u16 a0, const void *a1, int a2);
 
 static const PixelPos sPositionZero = {0, 0};
 
-void sub_80A2B40(GroundBg *groundBg, const SubStruct_52C *a1)
+void GroundBg_Init(GroundBg *groundBg, const SubStruct_52C *a1)
 {
     SubStruct_0 *unk0Ptr;
     s32 id, unk0Id, unk3E0Id;
@@ -109,11 +112,11 @@ void sub_80A2B40(GroundBg *groundBg, const SubStruct_52C *a1)
     }
 }
 
-void sub_80A2D00(GroundBg *groundBg)
+void GroundBg_FreeAll(GroundBg *groundBg)
 {
     s32 i;
 
-    sub_80A2DD4(groundBg);
+    CloseOpenedFiles(groundBg);
     TRY_FREE_AND_SET_NULL(groundBg->unk544);
     FREE_AND_SET_NULL(groundBg->unk548);
 
@@ -139,7 +142,7 @@ void sub_80A2D88(GroundBg *groundBg)
     }
 }
 
-void sub_80A2DD4(GroundBg *groundBg)
+static void CloseOpenedFiles(GroundBg *groundBg)
 {
     s32 i;
 
@@ -161,7 +164,7 @@ void sub_80A2E64(GroundBg *groundBg)
     SubStruct_0 *unk0Ptr;
     s32 unk0Id, unk3E0Id;
 
-    sub_80A2DD4(groundBg);
+    CloseOpenedFiles(groundBg);
     groundBg->unk444 = -1;
     groundBg->unk528 = 0;
     groundBg->unk448.unk0 = 0;
@@ -240,7 +243,7 @@ void sub_80A2FBC(GroundBg *groundBg, s32 a1_)
         return;
     }
 
-    sub_80A2DD4(groundBg);
+    CloseOpenedFiles(groundBg);
     groundBg->unk444 = a1;
     dataPtr = &gUnknown_81188F0[a1];
     groundBg->unk430 = OpenFileAndGetFileDataPtr(dataPtr->text1, &gGroundFileArchive);
@@ -421,7 +424,7 @@ void sub_80A3440(GroundBg *groundBg, s32 a1_, DungeonLocation *dungLoc, s32 a3)
     }
 
     sub_80A2FBC(groundBg, a1);
-    sub_80A2DD4(groundBg);
+    CloseOpenedFiles(groundBg);
     groundBg->unk444 = a1;
     dataPtr = &gUnknown_81188F0[a1];
     groundBg->unk430 = OpenFileAndGetFileDataPtr(dataPtr->text1, &gGroundFileArchive);
@@ -601,7 +604,7 @@ static void _UncompressCell(void *dst_, u16 *a1, const void *src_, SubStruct_52C
 }
 
 // Tilemap decompression algorhitm?
-static const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2, SubStruct_448 *a3)
+static const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2, SubStruct_448 *mapPtr_448)
 {
     s32 i, j, k, l;
     const u8 *src = src_;
@@ -609,10 +612,10 @@ static const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2
     for (i = 0; i < a2->unkC; i++) {
         u16 *dst = dstArray[i];
 
-        for (j = 0; j < a3->unk5; j++) {
+        for (j = 0; j < mapPtr_448->unk5; j++) {
             k = 0;
             if (j == 0) {
-                while (k < a3->unk4) {
+                while (k < mapPtr_448->unk4) {
                     s32 val = *src++;
                     if (val > 191) {
                         for (l = 191; l < val; l++) {
@@ -641,7 +644,7 @@ static const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2
             }
             else {
                 u16 *ptrVal = dst - 64;
-                while (k < a3->unk4) {
+                while (k < mapPtr_448->unk4) {
                     s32 val = *src++;
                     if (val > 191) {
                         for (l = 191; l < val; l++) {
