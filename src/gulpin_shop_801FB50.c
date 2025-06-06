@@ -178,8 +178,7 @@ void sub_801FD7C(void)
 {
     if (gUnknown_203B27C) {
         CloseFile(gUnknown_203B27C->monPortrait.faceFile);
-        MemoryFree(gUnknown_203B27C);
-        gUnknown_203B27C = NULL;
+        FREE_AND_SET_NULL(gUnknown_203B27C);
     }
 }
 

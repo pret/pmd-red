@@ -314,11 +314,7 @@ void sub_809A83C(s16 param_1)
     temp->monPortrait.spriteId = 0;
     strcpy(gFormatBuffer_Monsters[param_1], sInvalidText);
     strcpy(gFormatBuffer_Names[param_1], sInvalidText);
-    if(temp->faceFile)
-    {
-        CloseFile(temp->faceFile);
-        temp->faceFile = NULL;
-    }
+    TRY_CLOSE_FILE_AND_SET_NULL(temp->faceFile);
 }
 
 bool8 sub_809A8B8(s32 param_1, s32 param_2)
@@ -331,10 +327,7 @@ bool8 sub_809A8B8(s32 param_1, s32 param_2)
     u8 uVar9 = 1;
     u8 byte1 = 0;
 
-    if (unkPtr->faceFile != NULL) {
-        CloseFile(unkPtr->faceFile);
-        unkPtr->faceFile = NULL;
-    }
+    TRY_CLOSE_FILE_AND_SET_NULL(unkPtr->faceFile);
 
     sub_80A7DDC(&local_28,&local_26);
     if (local_28 >= 10 && local_28 <= 29) {
@@ -508,10 +501,7 @@ bool8 sub_809AC7C(s32 a0_, s32 a1_, s32 a2_)
     u8 a2 = (u8) a2_;
     struct unkStruct_3001B64_sub *unkPtr = &gUnknown_3001B64->unk43C[a0];
 
-    if (unkPtr->faceFile != NULL) {
-        CloseFile(unkPtr->faceFile);
-        unkPtr->faceFile = NULL;
-    }
+    TRY_CLOSE_FILE_AND_SET_NULL(unkPtr->faceFile);
 
     if (unkPtr->speciesID >= 0 && r5 != -1 && unkPtr->speciesID != 0) {
         if (a2 != 0x15) {

@@ -232,8 +232,7 @@ void DeleteKecleonBros(void)
 {
     if (sKecleonBrosWork1 != NULL) {
         CloseFile(sKecleonBrosWork1->monPortrait.faceFile);
-        MemoryFree(sKecleonBrosWork1);
-        sKecleonBrosWork1 = NULL;
+        FREE_AND_SET_NULL(sKecleonBrosWork1);
     }
 }
 

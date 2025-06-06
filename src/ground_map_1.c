@@ -9,8 +9,8 @@ extern DebugLocation gUnknown_8117770;
 extern s16 HandleAction(Action *action, DebugLocation *debug);
 extern void sub_80A4740(void *, s32, s32 *, u32);
 extern u32 sub_80A4720(void *, s32, s32 *);
-extern u8 sub_80A46C0(unkStruct_3001B70 *, u32, s32, s32);
-extern u8 sub_80A4660(unkStruct_3001B70 *, u32, s32, s32);
+extern u8 sub_80A46C0(GroundBg *, u32, s32, s32);
+extern u8 sub_80A4660(GroundBg *, u32, s32, s32);
 
 u8 sub_80A5934(s32 param_1, s32 param_2, s32 param_3)
 {
@@ -42,9 +42,9 @@ void GroundMap_Action(void)
 }
 
 extern u8 sub_809D248(PixelPos *r0);
-extern void sub_80A4580(unkStruct_3001B70 *, u32, PixelPos *);
-extern void sub_80A456C(unkStruct_3001B70 *, u32, const PixelPos *);
-extern void sub_80A4764(unkStruct_3001B70 *);
+extern void sub_80A4580(GroundBg *, u32, PixelPos *);
+extern void sub_80A456C(GroundBg *, u32, const PixelPos *);
+extern void sub_80A4764(GroundBg *);
 
 extern GroundMapAction *gGroundMapAction;
 

@@ -398,8 +398,7 @@ void sub_80282FC(void)
 {
   if (sUnknown_203B2C0 != NULL) {
     CloseFile(sUnknown_203B2C0->monPortrait.faceFile);
-    MemoryFree(sUnknown_203B2C0);
-    sUnknown_203B2C0 = NULL;
+    FREE_AND_SET_NULL(sUnknown_203B2C0);
     sub_8031E10();
     FriendList_Free();
     sub_803084C();

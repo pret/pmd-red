@@ -8,7 +8,7 @@
 #include "memory.h"
 
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
-IWRAM_INIT unkStruct_3001B70 *gGroundMapDungeon_3001B70 = {NULL};
+IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
 
 extern GroundMapAction *gGroundMapAction;
 
@@ -31,9 +31,9 @@ extern bool8 GroundScriptNotify(void *, s32);
 extern const CallbackData gGroundScriptNullCallbacks;
 extern const DebugLocation gUnknown_8117538[];
 
-extern void sub_80A2D00(unkStruct_3001B70 *);
-extern void sub_80A2D68(unkStruct_3001B70 *);
-extern void sub_80A2D88(unkStruct_3001B70 *);
+extern void sub_80A2D00(GroundBg *);
+extern void sub_80A2D68(GroundBg *);
+extern void sub_80A2D88(GroundBg *);
 
 void AllocGroundMapAction(void)
 {

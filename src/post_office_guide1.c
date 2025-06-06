@@ -112,8 +112,7 @@ void CleanHelperPelipper(void)
     if (sPostOfficeHelper != NULL) {
         if (sPostOfficeHelper->monPortrait.faceFile != NULL)
             CloseFile(sPostOfficeHelper->monPortrait.faceFile);
-        MemoryFree(sPostOfficeHelper);
-        sPostOfficeHelper = NULL;
+        FREE_AND_SET_NULL(sPostOfficeHelper);
     }
 }
 

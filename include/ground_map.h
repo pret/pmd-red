@@ -101,7 +101,7 @@ typedef struct SubStruct_545
 } SubStruct_545;
 
 // size: 0x55C
-typedef struct unkStruct_3001B70
+typedef struct GroundBg
 {
     SubStruct_0 unk0[UNK_0_ARR_COUNT];
     unkStruct_202EE8C unkE0[UNK_E0_ARR_COUNT];
@@ -129,9 +129,9 @@ typedef struct unkStruct_3001B70
     u16 *unk548;
     u16 *unk54C[UNK_54C_ARR_COUNT];
     u16 *unk554[UNK_54C_ARR_COUNT];
-} unkStruct_3001B70;
+} GroundBg;
 
-extern unkStruct_3001B70 *gGroundMapDungeon_3001B70;
+extern GroundBg *gGroundMapDungeon_3001B70;
 
 void GroundMap_Reset(void);
 

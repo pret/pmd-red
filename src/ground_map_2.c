@@ -7,22 +7,22 @@
 #include "memory.h"
 
 IWRAM_INIT unkStruct_3001B74 *gUnknown_3001B74 = {NULL};
-IWRAM_INIT unkStruct_3001B70 *gUnknown_3001B78 = {NULL};
+IWRAM_INIT GroundBg *gUnknown_3001B78 = {NULL};
 
 extern const u8 gUnknown_8117784[];
 extern const s16 gUnknown_811E5F4[][2];
 extern const u8 gGroundWeatherSelect[];
 extern const s32 gUnknown_81177BC[];
 
-extern void sub_80A3BB0(unkStruct_3001B70 *, u32);
-extern void sub_80A2D00(unkStruct_3001B70 *);
-extern void sub_80A2B40(unkStruct_3001B70 *, const u8 *);
-extern void sub_80A2FBC(unkStruct_3001B70 *, u32);
-extern void sub_80A49E8(unkStruct_3001B70 *);
-extern void sub_80A456C(unkStruct_3001B70 *, u32, const s32 *);
-extern void sub_80A4580(unkStruct_3001B70 *, u32, s32 *);
+extern void sub_80A3BB0(GroundBg *, u32);
+extern void sub_80A2D00(GroundBg *);
+extern void sub_80A2B40(GroundBg *, const u8 *);
+extern void sub_80A2FBC(GroundBg *, u32);
+extern void sub_80A49E8(GroundBg *);
+extern void sub_80A456C(GroundBg *, u32, const s32 *);
+extern void sub_80A4580(GroundBg *, u32, s32 *);
 extern void sub_80A56C0(s32 *);
-extern void sub_80A4764(unkStruct_3001B70 *);
+extern void sub_80A4764(GroundBg *);
 
 static void sub_80A62D0(void);
 
@@ -62,7 +62,7 @@ void sub_80A5EDC(u8 param_1)
     }
 
     if (param_1) {
-        gUnknown_3001B78 = MemoryAlloc(sizeof(unkStruct_3001B70), 6);
+        gUnknown_3001B78 = MemoryAlloc(sizeof(GroundBg), 6);
         sub_80A2B40(gUnknown_3001B78, gUnknown_8117784);
         sub_80A2FBC(gUnknown_3001B78, -1);
     }
