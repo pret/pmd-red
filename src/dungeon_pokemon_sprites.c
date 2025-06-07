@@ -6,6 +6,7 @@
 #include "cpu.h"
 #include "memory.h"
 #include "sprite.h"
+#include "constants/status.h"
 
 // size: 0x8
 typedef struct DungeonPokemonStatusSprite
@@ -26,8 +27,7 @@ typedef struct DungeonPokemonSprite
     /* 0x11 */ u8 priority;
     /* 0x14 */ DungeonPos pos;
     /* 0x18 */ DungeonPos statusOffsets[2];
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u32 unk24;
+    /* 0x20 */ DungeonPos unk20[2];
     /* 0x28 */ DungeonPokemonStatusSprite statusSprites[2];
     /* 0x38 */ u8 unk38;
     u16 fill3A;
@@ -35,13 +35,13 @@ typedef struct DungeonPokemonSprite
     /* 0x3E */ u16 unk3E;
 } DungeonPokemonSprite;
 
-#define MAX_DUNGEON_SPRITES 22
+#define MAX_DUNGEON_POKEMON_SPRITES 22
 
 // size: 0x584
 typedef struct DungeonPokemonSprites
 {
     /* 0x0 */ s32 frame;
-    /* 0x4 */ DungeonPokemonSprite sprites[MAX_DUNGEON_SPRITES];
+    /* 0x4 */ DungeonPokemonSprite sprites[MAX_DUNGEON_POKEMON_SPRITES];
 } DungeonPokemonSprites;
 
 struct StatusGraphicsInfo
@@ -54,26 +54,46 @@ struct StatusGraphicsInfo
      /* 0x14 */ s32 offsetIntoGraphic;
 };
 
+enum {
+    STATUS_GFX_NONE,
+    STATUS_GFX_SLEEPLESS,
+    STATUS_GFX_BURNED,
+    STATUS_GFX_POISONED,
+    STATUS_GFX_FROZEN,
+    STATUS_GFX_CONFUSED,
+    STATUS_GFX_WHIFFER,
+    STATUS_GFX_TAUNTED,
+    STATUS_GFX_LOWHP,
+    STATUS_GFX_SHIELD,
+    STATUS_GFX_STATDOWN,
+    STATUS_GFX_SWORD,
+    STATUS_GFX_BLINKER,
+    STATUS_GFX_CROSS_EYED,
+    STATUS_GFX_EYEDROPS,
+    STATUS_GFX_MUZZLED,
+    STATUS_GFX_SLEEP,
+};
+
 #define TILE_SIZE_2BPP 32
 
-const struct StatusGraphicsInfo gStatusGraphics[] = {
-    {0, 0, 0,  0,  0,  0},
-    {1, 1, 0,  0,  14, TILE_SIZE_2BPP * 0  },  // sleepless
-    {2, 2, 1,  0,  7,  TILE_SIZE_2BPP * 14 },  // burned
-    {2, 2, 5,  0,  16, TILE_SIZE_2BPP * 42 },  // poisoned
-    {4, 4, 9,  0,  6,  TILE_SIZE_2BPP * 106},  // frozen
-    {4, 2, 25, 0,  4,  TILE_SIZE_2BPP * 202},  // confused
-    {2, 2, 33, 0,  9,  TILE_SIZE_2BPP * 234},  // whiffer
-    {2, 2, 37, 0,  8,  TILE_SIZE_2BPP * 270},  // taunted
-    {1, 2, 41, 0,  8,  TILE_SIZE_2BPP * 302},  // lowhp
-    {2, 2, 43, 0,  13, TILE_SIZE_2BPP * 318},  // shield
-    {2, 2, 47, 10, 10, TILE_SIZE_2BPP * 370},  // statdown
-    {2, 2, 51, 0,  13, TILE_SIZE_2BPP * 410},  // sword
-    {1, 1, 55, 0,  14, TILE_SIZE_2BPP * 462},  // blinker
-    {2, 2, 56, 0,  10, TILE_SIZE_2BPP * 476},  // cross-eyed
-    {1, 1, 60, 0,  14, TILE_SIZE_2BPP * 516},  // eyedrops
-    {2, 2, 61, 0,  8,  TILE_SIZE_2BPP * 530},  // muzzled
-    {2, 2, 65, 4,  10, TILE_SIZE_2BPP * 562},  // sleep
+static const struct StatusGraphicsInfo sStatusGfxInfo[] = {
+    [STATUS_GFX_NONE]       = {0, 0, 0,  0,  0,  0},
+    [STATUS_GFX_SLEEPLESS]  = {1, 1, 0,  0,  14, TILE_SIZE_2BPP * 0  },
+    [STATUS_GFX_BURNED]     = {2, 2, 1,  0,  7,  TILE_SIZE_2BPP * 14 },
+    [STATUS_GFX_POISONED]   = {2, 2, 5,  0,  16, TILE_SIZE_2BPP * 42 },
+    [STATUS_GFX_FROZEN]     = {4, 4, 9,  0,  6,  TILE_SIZE_2BPP * 106},
+    [STATUS_GFX_CONFUSED]   = {4, 2, 25, 0,  4,  TILE_SIZE_2BPP * 202},
+    [STATUS_GFX_WHIFFER]    = {2, 2, 33, 0,  9,  TILE_SIZE_2BPP * 234},
+    [STATUS_GFX_TAUNTED]    = {2, 2, 37, 0,  8,  TILE_SIZE_2BPP * 270},
+    [STATUS_GFX_LOWHP]      = {1, 2, 41, 0,  8,  TILE_SIZE_2BPP * 302},
+    [STATUS_GFX_SHIELD]     = {2, 2, 43, 0,  13, TILE_SIZE_2BPP * 318},
+    [STATUS_GFX_STATDOWN]   = {2, 2, 47, 10, 10, TILE_SIZE_2BPP * 370},
+    [STATUS_GFX_SWORD]      = {2, 2, 51, 0,  13, TILE_SIZE_2BPP * 410},
+    [STATUS_GFX_BLINKER]    = {1, 1, 55, 0,  14, TILE_SIZE_2BPP * 462},
+    [STATUS_GFX_CROSS_EYED] = {2, 2, 56, 0,  10, TILE_SIZE_2BPP * 476},
+    [STATUS_GFX_EYEDROPS]   = {1, 1, 60, 0,  14, TILE_SIZE_2BPP * 516},
+    [STATUS_GFX_MUZZLED]    = {2, 2, 61, 0,  8,  TILE_SIZE_2BPP * 530},
+    [STATUS_GFX_SLEEP]      = {2, 2, 65, 4,  10, TILE_SIZE_2BPP * 562},
 };
 
 static const u8 sStatusGfx[] = INCBIN_U8("graphics/status/sleepless.4bpp",
@@ -95,45 +115,46 @@ static const u8 sStatusGfx[] = INCBIN_U8("graphics/status/sleepless.4bpp",
 
 struct StatusSprite
 {
-    u32 image;
+    u32 gfxIndex;
     u32 palIndex;
 };
 
+// + 1 because of how StatusSymbolBitToIndex operates
 static const struct StatusSprite sStatusSpritesInfo[] = {
-    [0] = {0, 0},
-    [1] = {1,  0},
-    [2] = {2,  0},
-    [3] = {3,  11},
-    [4] = {3,  7},
-    [5] = {5,  0},
-    [6] = {6,  0},
-    [7] = {7,  0},
-    [8] = {8,  0},
-    [9] = {9,  0},
-    [10] = {9,  4},
-    [11] = {9,  3},
-    [12] = {9,  10},
-    [13] = {9,  5},
-    [14] = {8,  0},
-    [15] = {3,  6},
-    [16] = {8,  3},
-    [17] = {11, 0},
-    [18] = {6,  10},
-    [19] = {11, 5},
-    [20] = {11, 4},
-    [21] = {12, 0},
-    [22] = {13, 0},
-    [23] = {14, 0},
-    [24] = {15, 0},
-    [25] = {9,  7},
-    [26] = {14, 4},
-    [27] = {16, 4},
-    [28] = {10, 3},
-    [29] = {4,  0},
+    [0] =                                   {STATUS_GFX_NONE, 0},
+    [STATUS_SPRITE_ID_SLEEPLESS + 1] =      {STATUS_GFX_SLEEPLESS,  0},
+    [STATUS_SPRITE_ID_BURNED + 1] =         {STATUS_GFX_BURNED,  0},
+    [STATUS_SPRITE_ID_POISONED + 1] =       {STATUS_GFX_POISONED,  11},
+    [STATUS_SPRITE_ID_BADLY_POISONED + 1] = {STATUS_GFX_POISONED,  7},
+    [STATUS_SPRITE_ID_CONFUSED + 1] =       {STATUS_GFX_CONFUSED,  0},
+    [STATUS_SPRITE_ID_COWERING + 1] =       {STATUS_GFX_WHIFFER,  0},
+    [STATUS_SPRITE_ID_TAUNTED + 1] =        {STATUS_GFX_TAUNTED,  0},
+    [STATUS_SPRITE_ID_ENCORE + 1] =         {STATUS_GFX_LOWHP,  0},
+    [STATUS_SPRITE_ID_SHIELD_BLUE + 1] =    {STATUS_GFX_SHIELD,  0},
+    [STATUS_SPRITE_ID_SHIELD_RED + 1] =     {STATUS_GFX_SHIELD,  4},
+    [STATUS_SPRITE_ID_SHIELD_YELLOW + 1] =  {STATUS_GFX_SHIELD,  3},
+    [STATUS_SPRITE_ID_SHIELD_GREEN + 1] =   {STATUS_GFX_SHIELD,  10},
+    [STATUS_SPRITE_ID_ENDURE + 1] =         {STATUS_GFX_SHIELD,  5},
+    [STATUS_SPRITE_ID_LOWHP + 1] =          {STATUS_GFX_LOWHP,  0},
+    [STATUS_SPRITE_ID_CURSED + 1] =         {STATUS_GFX_POISONED,  6},
+    [STATUS_SPRITE_ID_SNATCH + 1] =         {STATUS_GFX_LOWHP,  3},
+    [STATUS_SPRITE_ID_SURE_SHOT + 1] =      {STATUS_GFX_SWORD, 0},
+    [STATUS_SPRITE_ID_WHIFFER + 1] =        {STATUS_GFX_WHIFFER,  10},
+    [STATUS_SPRITE_ID_SET_DAMAGE + 1] =     {STATUS_GFX_SWORD, 5},
+    [STATUS_SPRITE_ID_FOCUS_ENERGY + 1] =   {STATUS_GFX_SWORD, 4},
+    [STATUS_SPRITE_ID_BLINKER + 1] =        {STATUS_GFX_BLINKER, 0},
+    [STATUS_SPRITE_ID_CROSS_EYED + 1] =     {STATUS_GFX_CROSS_EYED, 0},
+    [STATUS_SPRITE_ID_EYEDROPS + 1] =       {STATUS_GFX_EYEDROPS, 0},
+    [STATUS_SPRITE_ID_MUZZLED + 1] =        {STATUS_GFX_MUZZLED, 0},
+    [STATUS_SPRITE_ID_GRUDGE + 1] =         {STATUS_GFX_SHIELD,  7},
+    [STATUS_SPRITE_ID_EXPOSED + 1] =        {STATUS_GFX_EYEDROPS, 4},
+    [STATUS_SPRITE_ID_SLEEP + 1] =          {STATUS_GFX_SLEEP, 4},
+    [STATUS_SPRITE_ID_STAT_DOWN + 1] =      {STATUS_GFX_STATDOWN, 3},
+    [STATUS_SPRITE_ID_FROZEN + 1] =         {STATUS_GFX_FROZEN,  0},
 };
 
-EWRAM_INIT DungeonPokemonSprites *gDungeonPokemonSprites = NULL;
-EWRAM_INIT SpriteOAM sStatusSpriteOAM = {0};
+static EWRAM_INIT DungeonPokemonSprites *sDungeonPokemonSprites = NULL;
+static EWRAM_INIT SpriteOAM sStatusSpriteOAM = {0};
 
 static void DrawStatusSprite(s16 param_1,s32 status,DungeonPos *pos,DungeonPos *posOffset, DungeonPos *posScreen,u32 priority, u32 unused);
 
@@ -141,9 +162,9 @@ static DungeonPokemonSprite *GetSpriteById(s32 id)
 {
     s32 i;
 
-    for (i = 0; i < MAX_DUNGEON_SPRITES; i++) {
-        if (gDungeonPokemonSprites->sprites[i].exists && gDungeonPokemonSprites->sprites[i].id == id) {
-            return &gDungeonPokemonSprites->sprites[i];
+    for (i = 0; i < MAX_DUNGEON_POKEMON_SPRITES; i++) {
+        if (sDungeonPokemonSprites->sprites[i].exists && sDungeonPokemonSprites->sprites[i].id == id) {
+            return &sDungeonPokemonSprites->sprites[i];
         }
     }
 
@@ -154,9 +175,9 @@ static DungeonPokemonSprite *GetFirstFreeSlot(void)
 {
     s32 i;
 
-    for (i = 0; i < MAX_DUNGEON_SPRITES; i++) {
-        if (!gDungeonPokemonSprites->sprites[i].exists) {
-            return &gDungeonPokemonSprites->sprites[i];
+    for (i = 0; i < MAX_DUNGEON_POKEMON_SPRITES; i++) {
+        if (!sDungeonPokemonSprites->sprites[i].exists) {
+            return &sDungeonPokemonSprites->sprites[i];
         }
     }
     return NULL;
@@ -164,45 +185,44 @@ static DungeonPokemonSprite *GetFirstFreeSlot(void)
 
 static u32 GetNextStatusSymbol(DungeonPokemonSprite *sprite, s32 statusIndex)
 {
-    u32 uVar1;
+    u32 bits;
     u32 status;
-    s32 counter;
-    s32 max;
-    u32 uVar5;
-    u32 uVar6;
+    s32 i;
+    s32 n;
+    u32 lastBit;
+    u32 secondLastBit;
     DungeonPokemonStatusSprite *statusSprite;
 
     statusSprite = &sprite->statusSprites[statusIndex];
-    uVar5 = 0x10000000;
+    lastBit = (1 << STATUS_SPRITE_ID_LAST);
     if (statusIndex == 0) {
-        uVar5 = 1;
+        lastBit = 1;
     }
-    uVar6 = 0x10000000;
+    secondLastBit = (1 << STATUS_SPRITE_ID_LAST);
     if (statusIndex == 0) {
-        uVar6 = 0x8000000;
+        secondLastBit = (1 << (STATUS_SPRITE_ID_LAST - 1));
     }
-    max = 1;
+    n = 1;
     if (statusIndex == 0) {
-        max = 0x1c;
+        n = STATUS_SPRITE_ID_LAST;
     }
     if (sprite->status == 0) {
         return 0;
     }
 
     status = statusSprite->status;
-    uVar1 = uVar5;
+    bits = lastBit;
     if (status != 0) {
-        uVar1 = status;
+        bits = status;
     }
 
-    for(counter = 0; counter < max; counter++)
-    {
-        uVar1 *= 2;
-        if (uVar1 > uVar6) {
-            uVar1 = uVar5;
+    for (i = 0; i < n; i++) {
+        bits <<= 1;
+        if (bits > secondLastBit) {
+            bits = lastBit;
         }
-        if ((sprite->status & uVar1) != 0) {
-            return uVar1;
+        if (sprite->status & bits) {
+            return bits;
         }
     }
     return 0;
@@ -210,14 +230,12 @@ static u32 GetNextStatusSymbol(DungeonPokemonSprite *sprite, s32 statusIndex)
 
 static u32 StatusSymbolBitToIndex(u32 statusBit)
 {
-  u32 index;
-
-  index = 0;
-  while (statusBit != 0) {
-      statusBit >>= 1;
-      index++;
-  }
-  return index;
+    u32 index = 0;
+    while (statusBit != 0) {
+        statusBit >>= 1;
+        index++;
+    }
+    return index;
 }
 
 static void UpdateStatusSprite(DungeonPokemonSprite *sprite, s32 index, DungeonPos *screenPos)
@@ -251,66 +269,63 @@ static void UpdateStatusSprite(DungeonPokemonSprite *sprite, s32 index, DungeonP
     }
 }
 
+#define STATUS_GFX_VRAM_INDEX 0x32B
+
 static void DrawStatusSprite(s16 species, s32 status, DungeonPos *pos, DungeonPos *posOffset, DungeonPos *posScreen, u32 priority, u32 unused)
 {
-    struct StatusSprite spriteInfo;
-    s32 posY;
-    s32 posX;
-    u32 uVar7;
-    s32 vramIndex;
-    const struct StatusGraphicsInfo *ptr;
+    s32 posX, posY;
+    s32 ySubbed;
+    struct StatusSprite spriteInfo = sStatusSpritesInfo[status];
+    const struct StatusGraphicsInfo *gfxInfo = &sStatusGfxInfo[spriteInfo.gfxIndex];
+    s32 vramIndex = (gfxInfo->vramIndex + STATUS_GFX_VRAM_INDEX);
 
-    spriteInfo = sStatusSpritesInfo[status];
-    ptr = &gStatusGraphics[spriteInfo.image];
-    vramIndex = (ptr->vramIndex + 0x32b);
     SpriteSetPriority(&sStatusSpriteOAM, priority);
-
-    posX = (pos->x - ptr->width  * 4 - posScreen->x) + posOffset->x;
-    posY = (pos->y - ptr->height * 4 - posScreen->y) + posOffset->y;
-    uVar7 = posY - 16;
-    if ((((-0x20 <= posX) && (-0x20 <= posY)) && (posX < 0xf0)) && (posY < 0xa0)) {
-        switch(spriteInfo.image) {
-            case 1:
-            case 0xc:
-            case 0xe:
+    posX = (pos->x - gfxInfo->width  * 4 - posScreen->x) + posOffset->x;
+    posY = (pos->y - gfxInfo->height * 4 - posScreen->y) + posOffset->y;
+    ySubbed = posY - 16;
+    if (posX >= -32 && posY >= -32 && posX < 240 && posY < 160) {
+        switch (spriteInfo.gfxIndex) {
+            case STATUS_GFX_SLEEPLESS:
+            case STATUS_GFX_BLINKER:
+            case STATUS_GFX_EYEDROPS:
                 SpriteSetShape(&sStatusSpriteOAM, 0);
                 SpriteSetSize(&sStatusSpriteOAM, 0);
                 SpriteSetX(&sStatusSpriteOAM, posX);
-                SpriteSetY(&sStatusSpriteOAM, uVar7);
+                SpriteSetY(&sStatusSpriteOAM, ySubbed);
                 break;
-            case 8:
+            case STATUS_GFX_LOWHP:
                 SpriteSetShape(&sStatusSpriteOAM, 2);
                 SpriteSetSize(&sStatusSpriteOAM, 0);
                 SpriteSetX(&sStatusSpriteOAM, posX);
-                SpriteSetY(&sStatusSpriteOAM, uVar7);
+                SpriteSetY(&sStatusSpriteOAM, ySubbed);
                 break;
-            case 2:
-            case 3:
-            case 6:
-            case 7:
-            case 9:
-            case 10:
-            case 11:
-            case 13:
-            case 15:
+            case STATUS_GFX_BURNED:
+            case STATUS_GFX_POISONED:
+            case STATUS_GFX_WHIFFER:
+            case STATUS_GFX_TAUNTED:
+            case STATUS_GFX_SHIELD:
+            case STATUS_GFX_STATDOWN:
+            case STATUS_GFX_SWORD:
+            case STATUS_GFX_CROSS_EYED:
+            case STATUS_GFX_MUZZLED:
                 SpriteSetShape(&sStatusSpriteOAM, 0);
                 SpriteSetSize(&sStatusSpriteOAM, 1);
                 SpriteSetX(&sStatusSpriteOAM, posX);
-                SpriteSetY(&sStatusSpriteOAM, uVar7);
+                SpriteSetY(&sStatusSpriteOAM, ySubbed);
                 break;
-            case 0x10:
+            case STATUS_GFX_SLEEP:
                 SpriteSetShape(&sStatusSpriteOAM, 0);
                 SpriteSetSize(&sStatusSpriteOAM, 1);
                 SpriteSetX(&sStatusSpriteOAM, posX + 8);
-                SpriteSetY(&sStatusSpriteOAM, uVar7);
+                SpriteSetY(&sStatusSpriteOAM, ySubbed);
                 break;
-            case 5:
+            case STATUS_GFX_CONFUSED:
                 SpriteSetShape(&sStatusSpriteOAM, 1);
                 SpriteSetSize(&sStatusSpriteOAM, 2);
                 SpriteSetX(&sStatusSpriteOAM, posX);
-                SpriteSetY(&sStatusSpriteOAM, uVar7);
+                SpriteSetY(&sStatusSpriteOAM, ySubbed);
                 break;
-            case 4:
+            case STATUS_GFX_FROZEN:
                 SpriteSetShape(&sStatusSpriteOAM, 0);
                 SpriteSetSize(&sStatusSpriteOAM, 2);
                 SpriteSetX(&sStatusSpriteOAM, posX);
@@ -325,12 +340,12 @@ static void DrawStatusSprite(s16 species, s32 status, DungeonPos *pos, DungeonPo
 
 static void LoadStatusGraphics(s32 graphicIndex, bool8 queueLoad)
 {
-    const struct StatusGraphicsInfo *graphic = &gStatusGraphics[graphicIndex];
-    s32 offset = graphic->offsetIntoGraphic;
-    s32 graphicsCount = graphic->graphicsCount;
-    s32 size = graphic->width  * graphic->height * 0x20;
-    s32 vramIndex = (graphic->vramIndex + 0x32b) * 0x20;
-    s32 frame = (gDungeonPokemonSprites->frame / 4) % graphicsCount;
+    const struct StatusGraphicsInfo *gfxInfo = &sStatusGfxInfo[graphicIndex];
+    s32 offset = gfxInfo->offsetIntoGraphic;
+    s32 graphicsCount = gfxInfo->graphicsCount;
+    s32 size = gfxInfo->width  * gfxInfo->height * 32;
+    s32 vramIndex = (gfxInfo->vramIndex + STATUS_GFX_VRAM_INDEX) * 32;
+    s32 frame = (sDungeonPokemonSprites->frame / 4) % graphicsCount;
     const u8 *ptr = sStatusGfx + offset + (frame * size);
 
     if (queueLoad) {
@@ -343,32 +358,32 @@ static void LoadStatusGraphics(s32 graphicIndex, bool8 queueLoad)
 
 void InitDungeonPokemonSprites(void)
 {
-    if (gDungeonPokemonSprites == NULL) {
-        gDungeonPokemonSprites = MemoryAlloc(sizeof(DungeonPokemonSprites),0xc);
-        MemoryClear8(gDungeonPokemonSprites,sizeof(DungeonPokemonSprites));
+    if (sDungeonPokemonSprites == NULL) {
+        sDungeonPokemonSprites = MemoryAlloc(sizeof(DungeonPokemonSprites),12);
+        MemoryClear8(sDungeonPokemonSprites,sizeof(DungeonPokemonSprites));
     }
-    gDungeonPokemonSprites->frame = 0;
-    LoadStatusGraphics(1,FALSE);
-    LoadStatusGraphics(2,FALSE);
-    LoadStatusGraphics(3,FALSE);
-    LoadStatusGraphics(4,FALSE);
-    LoadStatusGraphics(5,FALSE);
-    LoadStatusGraphics(6,FALSE);
-    LoadStatusGraphics(7,FALSE);
-    LoadStatusGraphics(8,FALSE);
-    LoadStatusGraphics(9,FALSE);
-    LoadStatusGraphics(10,FALSE);
-    LoadStatusGraphics(0xb,FALSE);
-    LoadStatusGraphics(0xc,FALSE);
-    LoadStatusGraphics(0xd,FALSE);
-    LoadStatusGraphics(0xe,FALSE);
-    LoadStatusGraphics(0xf,FALSE);
-    LoadStatusGraphics(0x10,FALSE);
+    sDungeonPokemonSprites->frame = 0;
+    LoadStatusGraphics(STATUS_GFX_SLEEPLESS,FALSE);
+    LoadStatusGraphics(STATUS_GFX_BURNED,FALSE);
+    LoadStatusGraphics(STATUS_GFX_POISONED,FALSE);
+    LoadStatusGraphics(STATUS_GFX_FROZEN,FALSE);
+    LoadStatusGraphics(STATUS_GFX_CONFUSED,FALSE);
+    LoadStatusGraphics(STATUS_GFX_WHIFFER,FALSE);
+    LoadStatusGraphics(STATUS_GFX_TAUNTED,FALSE);
+    LoadStatusGraphics(STATUS_GFX_LOWHP,FALSE);
+    LoadStatusGraphics(STATUS_GFX_SHIELD,FALSE);
+    LoadStatusGraphics(STATUS_GFX_STATDOWN,FALSE);
+    LoadStatusGraphics(STATUS_GFX_SWORD,FALSE);
+    LoadStatusGraphics(STATUS_GFX_BLINKER,FALSE);
+    LoadStatusGraphics(STATUS_GFX_CROSS_EYED,FALSE);
+    LoadStatusGraphics(STATUS_GFX_EYEDROPS,FALSE);
+    LoadStatusGraphics(STATUS_GFX_MUZZLED,FALSE);
+    LoadStatusGraphics(STATUS_GFX_SLEEP,FALSE);
 }
 
 void FreeDungeonPokemonSprites(void)
 {
-    TRY_FREE_AND_SET_NULL(gDungeonPokemonSprites);
+    TRY_FREE_AND_SET_NULL(sDungeonPokemonSprites);
 }
 
 void UpdateDungeonPokemonSprite(s32 dungeonSpriteId, s32 species_, s32 status, u32 visible_)
@@ -376,7 +391,7 @@ void UpdateDungeonPokemonSprite(s32 dungeonSpriteId, s32 species_, s32 status, u
     s32 species = (s16) species_;
     u32 visible = (u8) visible_;
 
-    if (gDungeonPokemonSprites != NULL) {
+    if (sDungeonPokemonSprites != NULL) {
         DungeonPokemonSprite *sprite = GetSpriteById(dungeonSpriteId);
         if (sprite != NULL) {
             sprite->species = species;
@@ -387,16 +402,16 @@ void UpdateDungeonPokemonSprite(s32 dungeonSpriteId, s32 species_, s32 status, u
     }
 }
 
-UNUSED static void sub_800F794(s32 id, s32 r1, s32 r2, s32 r3, s32 *r4)
+UNUSED static void sub_800F794(s32 id, s32 r1, s32 r2, s32 r3, DungeonPos *statusOffsets)
 {
-    if (gDungeonPokemonSprites != NULL) {
+    if (sDungeonPokemonSprites != NULL) {
         DungeonPokemonSprite *sprite = GetSpriteById(id);
         if (sprite != NULL) {
             sprite->unk38 = 1;
             sprite->unk3C = r2;
             sprite->unk3E = r3;
-            sprite->unk20 = r4[0];
-            sprite->unk24 = r4[3];
+            sprite->unk20[0] = statusOffsets[0];
+            sprite->unk20[1] = statusOffsets[3];
         }
     }
 }
@@ -405,44 +420,44 @@ void FrameUpdateDungeonStatusSprites(DungeonPos *screenPos)
 {
     s32 i;
 
-    if (gDungeonPokemonSprites == NULL)
+    if (sDungeonPokemonSprites == NULL)
         return;
 
-    switch (gDungeonPokemonSprites->frame % 4) {
+    switch (sDungeonPokemonSprites->frame % 4) {
         case 0:
-            LoadStatusGraphics(1, TRUE);
-            LoadStatusGraphics(2, TRUE);
-            LoadStatusGraphics(3, TRUE);
-            LoadStatusGraphics(4, TRUE);
+            LoadStatusGraphics(STATUS_GFX_SLEEPLESS, TRUE);
+            LoadStatusGraphics(STATUS_GFX_BURNED, TRUE);
+            LoadStatusGraphics(STATUS_GFX_POISONED, TRUE);
+            LoadStatusGraphics(STATUS_GFX_FROZEN, TRUE);
             break;
         case 1:
-            LoadStatusGraphics(5, TRUE);
-            LoadStatusGraphics(6, TRUE);
-            LoadStatusGraphics(7, TRUE);
-            LoadStatusGraphics(8, TRUE);
+            LoadStatusGraphics(STATUS_GFX_CONFUSED, TRUE);
+            LoadStatusGraphics(STATUS_GFX_WHIFFER, TRUE);
+            LoadStatusGraphics(STATUS_GFX_TAUNTED, TRUE);
+            LoadStatusGraphics(STATUS_GFX_LOWHP, TRUE);
             break;
         case 2:
-            LoadStatusGraphics(9, TRUE);
-            LoadStatusGraphics(0xA, TRUE);
-            LoadStatusGraphics(0xB, TRUE);
-            LoadStatusGraphics(0xC, TRUE);
+            LoadStatusGraphics(STATUS_GFX_SHIELD, TRUE);
+            LoadStatusGraphics(STATUS_GFX_STATDOWN, TRUE);
+            LoadStatusGraphics(STATUS_GFX_SWORD, TRUE);
+            LoadStatusGraphics(STATUS_GFX_BLINKER, TRUE);
             break;
         case 3:
-            LoadStatusGraphics(0xD, TRUE);
-            LoadStatusGraphics(0xE, TRUE);
-            LoadStatusGraphics(0xF, TRUE);
-            LoadStatusGraphics(0x10, TRUE);
+            LoadStatusGraphics(STATUS_GFX_CROSS_EYED, TRUE);
+            LoadStatusGraphics(STATUS_GFX_EYEDROPS, TRUE);
+            LoadStatusGraphics(STATUS_GFX_MUZZLED, TRUE);
+            LoadStatusGraphics(STATUS_GFX_SLEEP, TRUE);
             break;
     }
 
-    for (i = 0; i < MAX_DUNGEON_SPRITES; i++) {
-        if (gDungeonPokemonSprites->sprites[i].exists) {
-            DungeonPokemonSprite *spritePtr = &gDungeonPokemonSprites->sprites[i];
+    for (i = 0; i < MAX_DUNGEON_POKEMON_SPRITES; i++) {
+        if (sDungeonPokemonSprites->sprites[i].exists) {
+            DungeonPokemonSprite *spritePtr = &sDungeonPokemonSprites->sprites[i];
             UpdateStatusSprite(spritePtr, 0, screenPos);
             UpdateStatusSprite(spritePtr, 1, screenPos);
         }
     }
-    gDungeonPokemonSprites->frame++;
+    sDungeonPokemonSprites->frame++;
 }
 
 void AddPokemonDungeonSprite(s32 dungeonSpriteId, s32 species_, DungeonPos *pos, u32 priority)
@@ -451,7 +466,7 @@ void AddPokemonDungeonSprite(s32 dungeonSpriteId, s32 species_, DungeonPos *pos,
     DungeonPokemonSprite *newSprite;
     s32 species = (s16) species_;
 
-    if (gDungeonPokemonSprites == NULL)
+    if (sDungeonPokemonSprites == NULL)
         return;
     if (GetSpriteById(dungeonSpriteId) != NULL)
         return;
@@ -477,7 +492,7 @@ void DeletePokemonDungeonSprite(s32 dungeonSpriteId)
 {
     DungeonPokemonSprite *dSprite;
 
-    if (gDungeonPokemonSprites == NULL)
+    if (sDungeonPokemonSprites == NULL)
         return;
 
     dSprite = GetSpriteById(dungeonSpriteId);
@@ -489,7 +504,7 @@ void DeletePokemonDungeonSprite(s32 dungeonSpriteId)
 
 void UpdateDungeonPokemonSprite2(s32 dungeonSpriteId, DungeonPos *pos, DungeonPos *statusOffsets, u32 priority)
 {
-    if (gDungeonPokemonSprites != NULL) {
+    if (sDungeonPokemonSprites != NULL) {
         DungeonPokemonSprite *sprite = GetSpriteById(dungeonSpriteId);
         if (sprite != NULL) {
             sprite->pos = *pos;
