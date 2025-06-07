@@ -45,6 +45,10 @@ jobs:
       - name: Build via Makefile
         run: |
           make -j${nproc} compare
+          
+      - name: Modern
+        run: |
+          make -j${nproc} modern
       
       # only run OK when pushed to master
       - name: Run OK webhook
