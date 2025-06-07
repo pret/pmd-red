@@ -73,8 +73,8 @@ u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, 
 
     if (sp0->unkA & 1) {
         r3 = window->unk18 + ((((y / 8) * window->width) + (x / 8)) * 8);
-        r3 += y - (y / 8 * 8);
-        shiftData = &gCharMasksOffsets[x - ((x / 8) * 8)];
+        r3 += y % 8;
+        shiftData = &gCharMasksOffsets[x % 8];
         xDiv8 = x / 8;
         yDiv8 = y / 8;
 

@@ -26,7 +26,8 @@
 	.space 4
     .include "src/other_menus2.o"
     .include "src/rescue_password_menu.o"
-    .include "src/code_803DA7C.o"
+    .include "src/dungeon_name_banner.o"
+    .include "src/code_803DA7C_2.o"
     .include "src/dungeon_vram.o"
     .include "src/dungeon_tilemap.o"
     .include "src/dungeon_map.o"
