@@ -115,11 +115,14 @@ else
 endif
 
 #### Files ####
-
+BUILD_NAME_NORMAL = red
+BUILD_NAME_MODERN = red_modern
+BUILD_DIR_NORMAL := build/pmd_$(BUILD_NAME_NORMAL)
+BUILD_DIR_MODERN := build/pmd_$(BUILD_NAME_MODERN)
 ifeq ($(MODERN),0)
-  BUILD_NAME = red
+  BUILD_NAME = $(BUILD_NAME_NORMAL)
 else
-  BUILD_NAME = red_modern
+  BUILD_NAME = $(BUILD_NAME_MODERN)
 endif
 BUILD_DIR := build/pmd_$(BUILD_NAME)
 
@@ -236,7 +239,8 @@ clean-tools:
 
 tidy:
 	$(RM) -f $(ROM) $(ELF) $(MAP) $(SYM)
-	$(RM) -r $(BUILD_DIR)
+	$(RM) -r $(BUILD_DIR_NORMAL)
+	$(RM) -r $(BUILD_DIR_MODERN)
 	$(RM) -f $(ITEM_DATA)
 	$(RM) -f $(MOVE_DATA)
 	$(RM) -f $(MONSTER_DATA)
