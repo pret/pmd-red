@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>
+#include <stdlib.h>
 #include "config.h" // We need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
 
@@ -53,6 +54,17 @@ static inline bool8 AreStringsDifferent(const u8 *str1, const u8 *str2)
 {
     return strcmp(str1, str2) != 0;
 }
+
+#ifdef MODERN
+#define BUGFIX
+#define NONMATCHING
+
+#include "mini_printf.h"
+void sprintfStatic(char *buffer, const char *text, ...);
+// Use miniprintf instead of library printf functions
+#define sprintf sprintfStatic
+#define vsprintf mini_vsprintf
+#endif // MODERN
 
 // Sometimes incrementing and decrementing a variable changes how registers are allocated, which helps with matching functions. Functionality-wise this doesn't do anything.
 #ifdef NONMATCHING

@@ -1,4 +1,4 @@
-#include <string.h>
+#include "global.h"
 #include "gba/m4a_internal.h"
 
 extern const u8 gCgb3Vol[];

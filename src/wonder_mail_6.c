@@ -295,7 +295,7 @@ static void HandleWonderMail6DeleteMailMenu(u32 state)
 {
   s32 index;
   s32 menuAction;
-  unkStruct_203B480 *unused;
+  UNUSED unkStruct_203B480 *unused;
 
   menuAction = 0;
   sub_8030768(0);

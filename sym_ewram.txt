@@ -87,3 +87,4 @@
 	.space 4
     .include "src/ground_sprite.o"
     .include "src/ground_script_file.o"
+    .include "src/agb_flash.o"

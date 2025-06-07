@@ -1030,10 +1030,8 @@ void ExposeStatusTarget(Entity * pokemon, Entity * target, s16 param_3)
 
 void IdentityItemHolders(Entity *pokemon, Entity *target)
 {
-  EntityInfo *entityInfo;
-
   if ((EntityIsValid(target)) && (!HasSafeguardStatus(pokemon, target, TRUE))) {
-    entityInfo = GetEntInfo(target);
+    UNUSED EntityInfo *entityInfo = GetEntInfo(target);
     if (!gDungeon->unk644.itemHoldersIdentified) {
         nullsub_89(target);
         gDungeon->unk644.itemHoldersIdentified = TRUE;

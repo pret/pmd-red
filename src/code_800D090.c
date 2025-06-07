@@ -156,7 +156,7 @@ EWRAM_DATA static s32 gUnknown_202DB6C = 0;
 EWRAM_DATA static u8 gUnknown_202DB70 = 0;
 EWRAM_DATA static u32 gUnknown_202DB74 = 0;
 // These should not be in EWRAM, but in IWRAM...
-EWRAM_DATA static u32 gUnknown_202DB78[16] = {0};
+EWRAM_DATA u32 gUnknown_202DB78[16] = {0};
 EWRAM_DATA u32 gUnknown_202DBB8[80] = {0};
 
 EWRAM_DATA struct UnkStruct_202DCF8 gUnknown_202DCF8 = {0};
