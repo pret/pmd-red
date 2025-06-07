@@ -107,7 +107,7 @@ else
   CC1 := $(shell $(PATH_MODERNCC) --print-prog-name=cc1) -quiet
   LIBPATH := -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libc.a))"
   LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
-  override CC1FLAGS += -mthumb -mthumb-interwork -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wimplicit -Wparentheses -Wunused -Werror -O2 -fno-toplevel-reorder
+  override CC1FLAGS += -mthumb -mthumb-interwork -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wimplicit -Wparentheses -Wunused -Werror -O2
   INCLUDE_DIRS := include
   INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
   INCLUDE_PATHS := $(INCLUDE_DIRS:%=-I %)
