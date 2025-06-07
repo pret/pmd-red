@@ -16,9 +16,7 @@ EWRAM_DATA u8 gMPlayMemAccArea[0x10] = {0};
 EWRAM_DATA struct MusicPlayerInfo gMPlayInfo_SE2 = {0};
 
 EWRAM_LIB struct SoundInfo gSoundInfo = {0};
-EWRAM_LIB MPlayFunc gMPlayJumpTable[34] = {0};
-EWRAM_LIB u32 gUnknown_203AF08 = {0};
-EWRAM_LIB u32 gUnknown_203AF0C = {0};
+EWRAM_LIB MPlayFunc gMPlayJumpTable[36] = {0};
 EWRAM_LIB struct CgbChannel gCgbChans[4] = {0};
 
 u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)

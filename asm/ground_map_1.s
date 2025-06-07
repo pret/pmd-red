@@ -26,7 +26,7 @@ GroundMap_Select:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _080A4E08
-	bl sub_80A2D00
+	bl GroundBg_FreeAll
 	ldr r0, [r4]
 	bl MemoryFree
 	movs r0, 0
@@ -47,7 +47,7 @@ _080A4E08:
 	bne _080A4E4C
 	ldr r1, _080A4E48
 	adds r0, r2, 0
-	bl sub_80A2B40
+	bl GroundBg_Init
 	ldr r0, [r4]
 	adds r1, r5, 0
 	bl sub_80A2FBC
@@ -97,7 +97,7 @@ _080A4EA8:
 	ldr r0, _080A4EC0
 	ldr r0, [r0]
 	ldr r1, _080A4EC4
-	bl sub_80A2B40
+	bl GroundBg_Init
 	ldr r1, _080A4EC8
 	movs r2, 0x80
 	lsls r2, 5
@@ -152,7 +152,7 @@ _080A4F20:
 	ldr r0, _080A4FA0
 	ldr r0, [r0]
 	ldr r1, _080A4FA4
-	bl sub_80A2B40
+	bl GroundBg_Init
 	movs r0, 0x1
 	bl sub_80A5EDC
 _080A4F30:
@@ -385,7 +385,7 @@ GroundMap_SelectDungeon:
 	ldr r0, [r7]
 	cmp r0, 0
 	beq _080A5110
-	bl sub_80A2D00
+	bl GroundBg_FreeAll
 	ldr r0, [r7]
 	bl MemoryFree
 	movs r0, 0
@@ -413,7 +413,7 @@ _080A5110:
 _080A5138:
 	ldr r1, _080A515C
 	adds r0, r2, 0
-	bl sub_80A2B40
+	bl GroundBg_Init
 	ldr r0, [r7]
 	adds r1, r6, 0
 	bl sub_80A2FBC
@@ -447,7 +447,7 @@ _080A5188: .4byte gUnknown_8117740
 _080A518C:
 	ldr r1, _080A51FC
 	adds r0, r2, 0
-	bl sub_80A2B40
+	bl GroundBg_Init
 	movs r0, 0x1
 	bl sub_80A5EDC
 	ldr r0, [r7]

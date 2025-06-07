@@ -116,8 +116,7 @@ void DestroyFelicityBank(void)
 {
     if (sFelicityBankWork != NULL) {
         CloseFile(sFelicityBankWork->monPortrait.faceFile);
-        MemoryFree(sFelicityBankWork);
-        sFelicityBankWork = NULL;
+        FREE_AND_SET_NULL(sFelicityBankWork);
     }
 }
 

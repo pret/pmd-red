@@ -131,8 +131,7 @@ void FinishWriteSavePak(void)
     if (sSavePakWrite != NULL) {
         if (sSavePakWrite->monPortrait.faceFile != NULL)
             CloseFile(sSavePakWrite->monPortrait.faceFile);
-        MemoryFree(sSavePakWrite);
-        sSavePakWrite = NULL;
+        FREE_AND_SET_NULL(sSavePakWrite);
     }
     sub_80993E4();
 }

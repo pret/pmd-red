@@ -458,3 +458,4 @@ UNUSED static const u8 *sub_80A2B28(u16 r0)
 {
     return sub_80A2B18(GetScriptVarValue(NULL, GROUND_PLACE));
 }
+

@@ -136,8 +136,7 @@ void MakuhitaDojo_Delete(void)
 {
     if (sMakuhitaDojoWork1 != NULL) {
         CloseFile(sMakuhitaDojoWork1->monPortrait.faceFile);
-        MemoryFree(sMakuhitaDojoWork1);
-        sMakuhitaDojoWork1 = NULL;
+        FREE_AND_SET_NULL(sMakuhitaDojoWork1);
     }
 }
 

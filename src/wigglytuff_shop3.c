@@ -124,8 +124,7 @@ void CleanWigglytuffShop(void)
 {
     if (sWigglytuffShop3Work) {
         CloseFile(sWigglytuffShop3Work->monPortrait.faceFile);
-        MemoryFree(sWigglytuffShop3Work);
-        sWigglytuffShop3Work = NULL;
+        FREE_AND_SET_NULL(sWigglytuffShop3Work);
     }
 }
 

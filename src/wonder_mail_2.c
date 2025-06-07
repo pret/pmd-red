@@ -128,11 +128,9 @@ u32 sub_802B358(void)
 
 void sub_802B3B8(void)
 {
-    if(sUnknown_203B2C8 != NULL)
-    {
+    if (sUnknown_203B2C8 != NULL) {
         CloseFile(sUnknown_203B2C8->monPortrait.faceFile);
-        MemoryFree(sUnknown_203B2C8);
-        sUnknown_203B2C8 = NULL;
+        FREE_AND_SET_NULL(sUnknown_203B2C8);
     }
 }
 
