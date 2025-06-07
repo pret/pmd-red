@@ -12,6 +12,7 @@
 #define EWRAM_INIT __attribute__((section("ewram_init")))
 #define IWRAM_INIT __attribute__((section("iwram_init")))
 #define UNUSED __attribute__((unused))
+#define USED __attribute__((used))
 #define NAKED __attribute__((naked))
 #define NORETURN __attribute__((noreturn))
 #define PACKED __attribute__((packed))
