@@ -56,6 +56,7 @@ static inline bool8 AreStringsDifferent(const u8 *str1, const u8 *str2)
 }
 
 #ifdef MODERN
+a=0;
 #define BUGFIX
 #define NONMATCHING
 
