@@ -33,15 +33,6 @@ struct unkStruct_8107654
     s32 unk4;
 };
 
-ALIGNED(4) static const char sMonsterParameterFileName[] = "monspara";
-ALIGNED(4) static const char gUnknown_8107600[] = _("{color YELLOW_RAW}%s{reset}");
-ALIGNED(4) static const char gUnknown_8107608[] = _("{color CYAN_RAW}%s{reset}");
-ALIGNED(4) static const char gUnownLetters[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?";
-ALIGNED(4) static const char gUnknown_8107630[] = "%s%c";
-ALIGNED(4) static const char gUnknown_8107638[] = "%s";
-ALIGNED(4) static const char gUnknown_810763C[] = _("{color}%c%s{reset}");
-static const u8 gUnknown_8107645[12] = {0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-
 extern s16 gFrenzyPlantIQReq;  // 0x14d
 extern s16 gHydroCannonIQReq;  // 0x14d
 extern s16 gBlastBurnIQReq;  // 0x14d
@@ -55,7 +46,7 @@ extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct
 void LoadMonsterParameters(void)
 {
     gRecruitedPokemonRef = &gRecruitedPokemon;
-    gMonsterParametersFile = OpenFileAndGetFileDataPtr(sMonsterParameterFileName, &gSystemFileArchive);
+    gMonsterParametersFile = OpenFileAndGetFileDataPtr("monspara", &gSystemFileArchive);
     gMonsterParameters = (MonsterDataEntry *)gMonsterParametersFile->data;
     gLevelCurrentPokeId = 0;
     // More in blue
@@ -653,30 +644,25 @@ void CopyMonsterNameToBuffer(u8 * buffer, s32 index)
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index)
 {
     s32 new_index = index;
-    sprintfStatic(buffer, gUnknown_8107600, gMonsterParameters[new_index].species); // {color YELLOW}%s{reset}
+    sprintfStatic(buffer, _("{color YELLOW_RAW}%s{reset}"), gMonsterParameters[new_index].species);
 }
 
 void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index_)
 {
     s32 index = (s16) index_;
-    sprintfStatic(buffer, gUnknown_8107608, gMonsterParameters[index].species); // {color CYAN}%s{reset}
+    sprintfStatic(buffer, _("{color CYAN_RAW}%s{reset}"), gMonsterParameters[index].species);
 }
 
 void sub_808D930(u8 *buffer, s32 index)
 {
-  char *unownString;
-  s32 unownIndex;
-  const char *preload;
   s16 index_s16 = index;
 
   if (GetBaseSpecies(index_s16) == MONSTER_UNOWN) {
-    preload = gUnknown_8107630; // %s%c
-    unownString = GetMonSpecies(MONSTER_UNOWN);
-    unownIndex = GetUnownIndex(index_s16);
-    sprintfStatic(buffer,preload,unownString,gUnownLetters[unownIndex]); // ABCDEFGHIJKLMNOPQRSTUVWXYZ!?
+    char *const unownLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!?";
+    sprintfStatic(buffer,"%s%c",GetMonSpecies(MONSTER_UNOWN),unownLetters[GetUnownIndex(index_s16)]);
   }
   else {
-    sprintfStatic(buffer,gUnknown_8107638, gMonsterParameters[index_s16].species); // %s
+    sprintfStatic(buffer,"%s", gMonsterParameters[index_s16].species);
   }
 }
 
@@ -693,7 +679,7 @@ void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 color
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_CYAN;
   }
-  sprintfStatic(buffer,gUnknown_810763C,colorNum,nameBuffer); // {color}%c%s{reset}
+  sprintfStatic(buffer,_("{color}%c%s{reset}"),colorNum,nameBuffer);
 }
 
 void sub_808D9DC(u8 *buffer, PokemonStruct2 *param_2, s32 colorNum)
@@ -704,7 +690,7 @@ void sub_808D9DC(u8 *buffer, PokemonStruct2 *param_2, s32 colorNum)
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_YELLOW;
   }
-  sprintfStatic(buffer,gUnknown_810763C,colorNum,nameBuffer); // {color}%c%s{reset}
+  sprintfStatic(buffer,_("{color}%c%s{reset}"),colorNum,nameBuffer);
 }
 
 void sub_808DA0C(u8 *buffer, PokemonStruct2 *param_2)
@@ -712,13 +698,15 @@ void sub_808DA0C(u8 *buffer, PokemonStruct2 *param_2)
   u8 nameBuffer [20];
 
   sub_80922B4(nameBuffer, param_2->name, POKEMON_NAME_LENGTH);
-  sprintfStatic(buffer,gUnknown_8107638,nameBuffer); // %s
+  sprintfStatic(buffer,"%s",nameBuffer);
 }
 
 void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon)
 {
   sub_80922B4(buffer, pokemon->name, POKEMON_NAME_LENGTH);
 }
+
+static const u8 gUnknown_8107645[12] = {0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 bool8 sub_808DA44(s32 _species, u32 a2_)
 {

@@ -2,35 +2,7 @@
 
 .align 2,0
 
-@ pokemon_3 #1
-.string "pksdir0\0"
 
-.global gIQSkillGroups
-gIQSkillGroups: @ 81076E4
-.4byte 9999
-.4byte 4
-.4byte 1
-.4byte 2
-.4byte 4
-.4byte 4
-.4byte 6
-.4byte 7
-.4byte 8
-.4byte 9
-.4byte 9
-.4byte 9
-.4byte 10
-.4byte 10
-.4byte 11
-.4byte 11
-.4byte 14
-.4byte 14
-.4byte 14
-.4byte 16
-.4byte 16
-.4byte 9
-.4byte 17
-.4byte 6
 @ pokemon_3 #2
 .string "pksdir0\0"
 @ pokemon_3 #3

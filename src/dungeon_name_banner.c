@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_name_banner.h"
 #include "constants/dungeon.h"
 #include "structs/str_202ED28.h"
 #include "structs/str_202EDE8.h"

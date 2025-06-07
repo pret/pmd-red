@@ -671,6 +671,7 @@ SECTIONS {
         src/dungeon_cutscene_no_one_here.o(.rodata);
         src/dungeon_portrait_placement.o(.rodata);
         src/pokemon.o(.rodata);
+        src/pokemon_3.o(.rodata);
         data/data_81076E4.o(.rodata);
         src/game_options.o(.rodata);
         src/random_mersenne_twister.o(.rodata);

@@ -35,6 +35,7 @@
 #include "dungeon_message_log.h"
 #include "dungeon_misc.h"
 #include "dungeon_music.h"
+#include "dungeon_name_banner.h"
 #include "dungeon_random.h"
 #include "dungeon_strings.h"
 #include "dungeon_serializer.h"

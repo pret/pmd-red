@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/ability.h"
 #include "constants/colors.h"
 #include "constants/dungeon.h"
@@ -32,8 +33,6 @@ struct UnusedOffenseStruct
     u8 defBoost;
     u8 spDefBoost;
 };
-
-extern u32 gIQSkillGroups[];
 
 extern SpriteOAM gShadowSprites[3]; // Shadow sprites of some kind
 extern const s16 gUnknown_810AC60; // 0xC
@@ -443,6 +442,10 @@ void ToggleIQSkill(IqSkillFlags *iq, u32 skillIndex)
         SetIQSkill(iq, skillIndex);
     }
 }
+
+static const s32 gIQSkillGroups[] = {
+    9999, 4, 1, 2, 4, 4, 6, 7, 8, 9, 9, 9, 10, 10, 11, 11, 14, 14, 14, 16, 16, 9, 17, 6
+};
 
 void SetIQSkill(IqSkillFlags *iq, u32 skillIndex)
 {
