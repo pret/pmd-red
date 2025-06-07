@@ -3,6 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 
+void sub_806C51C(Entity *entity);
 void sub_806CC10(void);
 void sub_806CC70(void);
 void sub_806CCB4(Entity *entity, u8);
