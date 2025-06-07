@@ -49,7 +49,6 @@ static void EnsureDeoxysLoaded(void);
 
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1);
-extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
 extern bool8 sub_806A58C(s16 r0);
 extern void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
@@ -81,7 +80,6 @@ extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_80429E8(Entity *r0);
 extern s32 sub_803DA20(s32 param_1);
 extern s32 gDungeonFramesCounter;
-extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
 extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
@@ -663,7 +661,7 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
         mon2Ptr->unk0 = 0;
     }
 
-    DeletePokemonDungeonSprite(entInfo->unk98);
+    DeletePokemonDungeonSprite(entInfo->dungeonSpriteId);
     gLeaderPointer = 0;
     gDungeon->unkC = 1;
     entity->type = ENTITY_NOTHING;
@@ -1326,7 +1324,7 @@ void sub_806A338(void)
         Entity *entity = gDungeon->activePokemon[i];
         if (EntityIsValid(entity) && (GetEntInfo(entity)->curseClassStatus.status == STATUS_SNATCH)) {
             gDungeon->snatchPokemon = entity;
-            gDungeon->unk17B3C = GetEntInfo(entity)->unk98;
+            gDungeon->unk17B3C = GetEntInfo(entity)->dungeonSpriteId;
             return;
         }
     }

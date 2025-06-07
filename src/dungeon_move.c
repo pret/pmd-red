@@ -128,7 +128,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                 Entity *snatchMon = gDungeon->snatchPokemon;
                 if (GetEntityType(snatchMon) == ENTITY_MONSTER
                     && snatchMon != attacker
-                    &&  GetEntInfo(snatchMon)->unk98 == gDungeon->unk17B3C
+                    && GetEntInfo(snatchMon)->dungeonSpriteId == gDungeon->unk17B3C
                     && targetInfo->unkFF == 0)
                 {
                     TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80FCD28); // The move was snatched.
@@ -139,7 +139,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                 Entity *lightRodMon = gDungeon->lightningRodPokemon;
                 if (GetEntityType(lightRodMon) == ENTITY_MONSTER) {
                     EntityInfo *lightRodInfo = GetEntInfo(lightRodMon);
-                    if (lightRodInfo->unk98 == gDungeon->unk17B38
+                    if (lightRodInfo->dungeonSpriteId == gDungeon->unk17B38
                         && GetTreatmentBetweenMonsters(lightRodMon, attacker, TRUE, FALSE) == 1
                         && ((targetInfo->unkFF == 0 && lightRodInfo->unkFF == 0) || currTarget == lightRodMon))
                     {

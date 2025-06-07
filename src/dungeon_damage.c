@@ -256,7 +256,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
             if (destBondTarget == NULL) {
                 targetInfo->leechSeedClassStatus.status = 0;
             }
-            else if (GetEntInfo(destBondTarget)->unk98 != targetInfo->leechSeedClassStatus.unk4) {
+            else if (GetEntInfo(destBondTarget)->dungeonSpriteId != targetInfo->leechSeedClassStatus.unk4) {
                 targetInfo->leechSeedClassStatus.status = 0;
             }
             else {

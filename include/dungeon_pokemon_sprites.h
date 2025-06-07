@@ -3,41 +3,12 @@
 
 #include "structs/str_position.h"
 
-// size: 0x8
-typedef struct DungeonPokemonStatusSprite
-{
-    /* 0x0 */ u32 status;
-    /* 0x4 */ s32 frame;
-} DungeonPokemonStatusSprite;
-
-// size: 0x40
-typedef struct DungeonPokemonSprite
-{
-    /* 0x0 */ u8 exists;
-    /* 0x4 */ u32 id;
-    /* 0x8 */ u16 species; // Or sprite ID?
-    /* 0xA */ u16 unkA;
-    /* 0xC */ u32 status;
-    /* 0x10 */ u8 visible;
-    /* 0x11 */ u8 priority;
-    /* 0x14 */ DungeonPos pos;
-    /* 0x18 */ DungeonPos statusOffsets[2];
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u32 unk24;
-    /* 0x28 */ DungeonPokemonStatusSprite statusSprites[2];
-    /* 0x38 */ u8 unk38;
-    u16 fill3A;
-    /* 0x3C */ u16 unk3C;
-    /* 0x3E */ u16 unk3E;
-} DungeonPokemonSprite;
-
-// size: 0x584
-typedef struct DungeonPokemonSprites
-{
-    /* 0x0 */ s32 frame;
-    /* 0x4 */ DungeonPokemonSprite sprites[22];
-} DungeonPokemonSprites;
-
-extern DungeonPokemonSprites *gDungeonPokemonSprites;
+void InitDungeonPokemonSprites(void);
+void FreeDungeonPokemonSprites(void);
+void UpdateDungeonPokemonSprite(s32 dungeonSpriteId, s32 species_, s32 status, u32 visible_);
+void FrameUpdateDungeonStatusSprites(DungeonPos *screenPos);
+void AddPokemonDungeonSprite(s32 dungeonSpriteId, s32 species_, DungeonPos *pos, u32 priority);
+void DeletePokemonDungeonSprite(s32 dungeonSpriteId);
+void UpdateDungeonPokemonSprite2(s32 dungeonSpriteId, DungeonPos *pos, DungeonPos *statusOffsets, u32 priority);
 
 #endif // GUARD_DUNGEON_POKEMON_SPRITES_H
