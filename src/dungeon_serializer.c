@@ -1,7 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
 #include "structs/str_dungeon.h"
-#include "code_800F958.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
 #include "dungeon_items.h"
@@ -9,6 +8,7 @@
 #include "dungeon_logic.h"
 #include "dungeon_serializer.h"
 #include "dungeon_util.h"
+#include "dungeon_pokemon_sprites.h"
 #include "pokemon.h"
 
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
@@ -323,7 +323,7 @@ static void WriteMonster(DataSerializer *seri, Entity *src)
     WriteIQSkills(seri, &info->IQSkillFlags);
     WriteTactic(seri, info->tactic);
     WriteHiddenPower(seri, &info->hiddenPower);
-    WriteU32(seri, info->unk98);
+    WriteU32(seri, info->dungeonSpriteId);
     WriteU32(seri, info->unk9C);
     WriteU32(seri, info->unkA0);
     WriteSleepClassStatus(seri, &info->sleepClassStatus);
@@ -1006,7 +1006,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
     ReadIQSkills(seri, &entInfo.IQSkillFlags);
     entInfo.tactic = ReadTactic(seri);
     ReadHiddenPower(seri, &entInfo.hiddenPower);
-    entInfo.unk98 = ReadU32(seri);
+    entInfo.dungeonSpriteId = ReadU32(seri);
     entInfo.unk9C = ReadU32(seri);
     entInfo.unkA0 = ReadU32(seri);
     ReadSleepClassStatus(seri, &entInfo.sleepClassStatus);
@@ -1238,7 +1238,7 @@ void sub_8082B40(void)
             entity->axObj.spriteFile = GetSpriteData(info->apparentID);
             sub_806CCB4(entity, sub_806CEBC(entity));
             pos = entity->pos;
-            AddPokemonDungeonSprite(info->unk98, info->apparentID, &pos, 3);
+            AddPokemonDungeonSprite(info->dungeonSpriteId, info->apparentID, &pos, 3);
             entity->room = GetTileMut(entity->pos.x, entity->pos.y)->room;
         }
     }

@@ -87,7 +87,7 @@ SECTIONS {
         src/code_800E9E4.o(.text);
         src/code_800ED38.o(.text);
         src/code_800F034.o(.text);
-        src/code_800F958.o(.text);
+        src/dungeon_pokemon_sprites.o(.text);
         src/friend_areas_map.o(.text);
         src/world_map.o(.text);
         src/friend_areas_map_util.o(.text);
@@ -438,8 +438,7 @@ SECTIONS {
         src/reg_control.o(.rodata);
         data/data_80B9BB8_2.o(.rodata);
         src/code_800F034.o(.rodata);
-        src/code_800F958.o(.rodata);
-        data/data_80CE77C.o(.rodata);
+        src/dungeon_pokemon_sprites.o(.rodata);
         src/friend_areas_map.o(.rodata);
         src/world_map.o(.rodata);
         src/friend_areas_map_util.o(.rodata);

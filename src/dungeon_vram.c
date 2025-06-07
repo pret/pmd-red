@@ -27,6 +27,7 @@
 #include "dungeon_logic.h"
 #include "dungeon_range.h"
 #include "dungeon_util.h"
+#include "dungeon_pokemon_sprites.h"
 #include "menu_input.h"
 #include "code_801602C.h"
 
@@ -55,7 +56,6 @@ void sub_803ECE0();
 void sub_803EDF0();
 void sub_800E90C();
 void sub_8042E5C();
-void sub_800F7D0(DungeonPos *);
 
 static void sub_803E490(u32);
 static s32 sub_803EF90(s32 a0, u8 a1);
@@ -193,7 +193,7 @@ static void sub_803E490(u32 unused)
     sub_804522C();
     sub_803F9CC();
 
-    sub_800F7D0(&gDungeon->unk181e8.cameraPixelPos);
+    FrameUpdateDungeonStatusSprites(&gDungeon->unk181e8.cameraPixelPos);
 
     if(gDungeon->unk12 <= 0x63)
         gDungeon->unk12++;

@@ -347,7 +347,7 @@ void HandleLeechSeed(Entity * pokemon, Entity * target, bool8 displayMessage)
                 if (pokemon == gDungeon->activePokemon[index]) {
                     entityInfo->leechSeedClassStatus.unk8 = index;
                     entityInfo2 = GetEntInfo(pokemon);
-                    entityInfo->leechSeedClassStatus.unk4 = entityInfo2->unk98;
+                    entityInfo->leechSeedClassStatus.unk4 = entityInfo2->dungeonSpriteId;
                 }
             }
             TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FAE58);
@@ -372,7 +372,7 @@ void sub_8078084(Entity * pokemon)
             entityInfo2 = GetEntInfo(target);
             if(entityInfo2->leechSeedClassStatus.status == STATUS_LEECH_SEED || entityInfo2->leechSeedClassStatus.status == STATUS_DESTINY_BOND)
             {
-                if(entityInfo2->leechSeedClassStatus.unk4 == entityInfo->unk98)
+                if(entityInfo2->leechSeedClassStatus.unk4 == entityInfo->dungeonSpriteId)
                 {
                     entityInfo2->leechSeedClassStatus.status = STATUS_NONE;
                     EntityUpdateStatusSprites(target);
@@ -413,7 +413,7 @@ void DestinyBondStatusTarget(Entity * pokemon, Entity * target)
             if (target == gDungeon->activePokemon[index]) {
                 entityInfo->leechSeedClassStatus.unk8 = index;
                 entityInfo2 = GetEntInfo(target);
-                entityInfo->leechSeedClassStatus.unk4 = entityInfo2->unk98;
+                entityInfo->leechSeedClassStatus.unk4 = entityInfo2->dungeonSpriteId;
             }
         }
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FBB4C);
@@ -626,7 +626,7 @@ void SnatchStatusTarget(Entity * pokemon, Entity * target)
     }
 
     gDungeon->snatchPokemon = target;
-    gDungeon->unk17B3C = targetEntityInfo->unk98;
+    gDungeon->unk17B3C = targetEntityInfo->dungeonSpriteId;
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB01C);
     EntityUpdateStatusSprites(target);

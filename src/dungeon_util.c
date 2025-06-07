@@ -4,7 +4,6 @@
 #include "structs/str_dungeon.h"
 #include "structs/str_traps.h"
 #include "structs/map.h"
-#include "code_800F958.h"
 #include "code_8041AD0.h"
 #include "code_806CD90.h"
 #include "dungeon_items.h"
@@ -20,6 +19,7 @@
 #include "dungeon_util.h"
 #include "dungeon_leader.h"
 #include "dungeon_message.h"
+#include "dungeon_pokemon_sprites.h"
 #include "dungeon_music.h"
 #include "dungeon_map.h"
 #include "string_format.h"
@@ -153,7 +153,7 @@ void sub_804522C(void)
                 {
                     info = GetEntInfo(entity);
                     statusSprites = EntityGetStatusSprites(entity);
-                    UpdateDungeonPokemonSprite(info->unk98, info->apparentID, statusSprites, FALSE);
+                    UpdateDungeonPokemonSprite(info->dungeonSpriteId, info->apparentID, statusSprites, FALSE);
                 }
             }
         }

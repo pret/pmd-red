@@ -15,6 +15,7 @@
 .include "src/cpu.o"
 .include "src/code_800DAC0.o"
 .include "src/code_800ED38.o"
+.include "src/dungeon_pokemon_sprites.o"
 .include "src/friend_areas_map.o"
 .include "src/world_map.o"
 .include "src/debug.o"

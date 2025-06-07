@@ -316,7 +316,7 @@ void sub_8074094(Entity *entity)
             }
             else {
                 EntityInfo *targetInfo = GetEntInfo(target);
-                if (targetInfo->unk98 != entityInfo->leechSeedClassStatus.unk4) {
+                if (targetInfo->dungeonSpriteId != entityInfo->leechSeedClassStatus.unk4) {
                     entityInfo->leechSeedClassStatus.status = 0;
                 }
                 else {
