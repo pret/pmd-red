@@ -300,8 +300,8 @@ static void sub_801059C(void)
     sWorldMapPtr->bgPos.x = 0;
     sWorldMapPtr->bgPos.y = 0;
 
-    for (i = 0; i < 1500; i++) {
-        sWorldMapPtr->unk52E0[i] |= 0xFFFF;
+    for (i = 0; i < UNK_WORLD_MAP_52E0_COUNT; i++) {
+        sWorldMapPtr->unk52E0[i] = 0xFFFF;
         sWorldMapPtr->unk5E98[i] = 0;
     }
 

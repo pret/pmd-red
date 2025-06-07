@@ -12,7 +12,6 @@
 #include "code_800E9E4.h"
 #include "code_800ED38.h"
 #include "dungeon_vram.h"
-#include "code_803E668.h"
 #include "code_803E724.h"
 #include "code_8041AD0.h"
 #include "code_806CD90.h"

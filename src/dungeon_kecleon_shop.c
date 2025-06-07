@@ -20,7 +20,6 @@
 #include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "code_805D8C8.h"
-#include "code_803E668.h"
 #include "dungeon_items.h"
 #include "move_util.h"
 #include "moves.h"
@@ -29,7 +28,6 @@
 #include "constants/monster.h"
 #include "constants/type.h"
 #include "dungeon_misc.h"
-#include "code_807E5AC.h"
 #include "sprite.h"
 #include "dungeon_strings.h"
 

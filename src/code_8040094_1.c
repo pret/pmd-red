@@ -43,7 +43,6 @@ extern s32 sub_800EA84(struct UnkStruct_8040094 *a0);
 extern bool8 sub_800E838(struct UnkStruct_8040094 *a0, s32 a1);
 extern bool8 sub_800E9A8(s32 a0);
 extern void sub_803EA10(void);
-extern void sub_803E708(s32, u32);
 extern void sub_800EEF8(u16 a0);
 extern bool8 sub_803F428(DungeonPos *pos);
 extern void sub_800EEE0(u16 a0);

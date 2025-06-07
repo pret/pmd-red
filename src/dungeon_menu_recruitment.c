@@ -21,7 +21,6 @@
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void DungeonShowWindows(const WindowTemplates *a0, bool8 a1);
 extern u16 GetLeaderActionId(void);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern u8 sub_806F9BC(s32);

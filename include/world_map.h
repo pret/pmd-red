@@ -10,6 +10,8 @@
 #include "structs/str_pokemon.h"
 #include "structs/str_dungeon_setup.h"
 
+#define UNK_WORLD_MAP_52E0_COUNT 1500
+
 struct UnkStruct_Sub1
 {
     u8 unk0;
@@ -29,8 +31,9 @@ struct WorldMap
     s32 unk52D4;
     DungeonPos bgPos;
     DungeonPos monSpritePos;
-    u16 unk52E0[1500];
-    u8 unk5E98[1500];
+    // Both fields below are effectively unused. Could be NDS-only?
+    u16 unk52E0[UNK_WORLD_MAP_52E0_COUNT];
+    u8 unk5E98[UNK_WORLD_MAP_52E0_COUNT];
 };
 
 #define WORLD_MAP_UNK_6D_COUNT 63

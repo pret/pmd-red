@@ -20,7 +20,6 @@
 #include "moves.h"
 #include "move_util.h"
 #include "code_8041AD0.h"
-#include "code_803E668.h"
 #include "weather.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"

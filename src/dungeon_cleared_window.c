@@ -2,11 +2,10 @@
 #include "globaldata.h"
 #include "dungeon.h"
 #include "dungeon_strings.h"
+#include "dungeon_vram.h"
 #include "input.h"
 #include "text_1.h"
-#include "code_803E668.h"
 
-extern void DungeonShowWindows(WindowTemplates *a0, bool8 a1);
 extern void sub_8094558(u32 param_1, const u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3);
 extern void PlayDungeonCompleteBGM(void);
 extern void PlayDungeonFailBGM(void);

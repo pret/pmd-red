@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "code_800D090.h"
 #include "dungeon_submenu.h"
+#include "dungeon_vram.h"
 #include "menu_input.h"
 #include "text_1.h"
 #include "text_3.h"
@@ -13,7 +14,6 @@ extern s32 gDungeonSubMenuItemsCount;
 
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 
 void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
 {

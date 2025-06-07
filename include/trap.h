@@ -5,6 +5,7 @@
 #include "structs/map.h"
 #include "structs/str_position.h"
 
+void sub_807FA9C(void);
 bool8 CanLayTrap(DungeonPos *pos);
 bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3);
 bool8 sub_807FD84(Entity *entity);
@@ -28,13 +29,7 @@ void HandlePPZeroTrap(Entity *pokemon, Entity *target);
 void HandleWonderTile(Entity *pokemon, Entity *target);
 void HandleSealTrap(Entity *pokemon, Entity *target);
 void HandleWhirlwindTrap(Entity *entity, Entity *target);
-
-// code_807FCD4.s
-extern void HandleSealTrap(Entity *pokemon, Entity *target);
-extern void HandleWhirlwindTrap(Entity *entity, Entity *target);
-extern void HandlePokemonTrap(Entity *pokemon, DungeonPos *pos);
-
-// trap_1.c
+void HandlePokemonTrap(Entity *pokemon, DungeonPos *pos);
 void HandleTripTrap(Entity *pokemon, Entity *target);
 void SetTrap(Tile *tile, u8 id);
 

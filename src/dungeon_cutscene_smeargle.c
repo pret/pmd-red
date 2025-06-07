@@ -3,7 +3,6 @@
 #include "code_800DAC0.h"
 #include "code_800E9A8.h"
 #include "dungeon_vram.h"
-#include "code_803E668.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_80861A8.h"
