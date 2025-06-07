@@ -66,7 +66,7 @@ SECTIONS {
         src/text_2.o(.text);
         src/text_3.o(.text);
         src/text_4.o(.text);
-        src/code_8009804.o(.text);
+        src/graphics_memory.o(.text);
         src/math.o(.text);
         src/file_system.o(.text);
         src/decompress_sir.o(.text);
@@ -428,7 +428,7 @@ SECTIONS {
         src/random.o(.rodata);
         src/text_1.o(.rodata);
         src/text_2.o(.rodata);
-        src/code_8009804.o(.rodata);
+        src/graphics_memory.o(.rodata);
         data/data2.o(.rodata);
         src/math.o(.rodata);
         src/file_system.o(.rodata);

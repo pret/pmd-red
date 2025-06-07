@@ -3,7 +3,7 @@
 #include "structs/str_text.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "cpu.h"
 #include "decompress_at.h"
 #include "def_filearchives.h"

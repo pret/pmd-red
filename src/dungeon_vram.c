@@ -6,7 +6,7 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "code_803E724.h"
@@ -226,7 +226,7 @@ static void sub_803E490(u32 unused)
     nullsub_14();
 
     TransferBGPaletteBuffer();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_vram();
     CopyDungeonMapToVram();
     xxx_call_update_bg_sound_input();
@@ -257,7 +257,7 @@ void sub_803E668(u32 unused)
     sub_8005304();
     nullsub_14();
     TransferBGPaletteBuffer();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_vram();
     xxx_call_update_bg_sound_input();
     gDungeon->unk181e8.unk18213 = 0;
@@ -672,7 +672,7 @@ void sub_803ECE0(void)
     if (gUnknown_202EDD8 > 11)
         gUnknown_202EDD8 = 0;
 
-    sub_80098BC((void *)VRAM + 0x14400, gUnknown_202EC94->unk4 + ((gUnknown_202EDD8 / 4) * 0x240), 0x240);
+    ScheduleMemCopy((void *)VRAM + 0x14400, gUnknown_202EC94->unk4 + ((gUnknown_202EDD8 / 4) * 0x240), 0x240);
 }
 
 void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
@@ -710,7 +710,7 @@ void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
         gUnknown_202EDE8.unk2 = a3;
     }
 
-    sub_80098BC((void *) VRAM + 0x142C0, gDungeon->unk18, 0x80);
+    ScheduleMemCopy((void *) VRAM + 0x142C0, gDungeon->unk18, 0x80);
 }
 
 void sub_803EDF0(void)

@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "structs/sprite_oam.h"
 #include "code_800F958.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "cpu.h"
 #include "dungeon_pokemon_sprites.h"
 #include "memory.h"
@@ -295,7 +295,7 @@ void LoadStatusGraphics(s32 graphicIndex, bool8 param_2)
     ptr = (u8 *)gStatusGraphics4bpp + (offset) + (frame);
 
     if (param_2) {
-        sub_80098BC((void *)(VRAM + 0x10000 + vramIndex), (void *)ptr, size);   
+        ScheduleMemCopy((void *)(VRAM + 0x10000 + vramIndex), (void *)ptr, size);   
     }
     else {
         CpuCopy((void *)(VRAM + 0x10000 + vramIndex), ptr, size);

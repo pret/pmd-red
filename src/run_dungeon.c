@@ -9,7 +9,7 @@
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800DAC0.h"
 #include "code_800E9A8.h"
 #include "code_800E9E4.h"
@@ -61,7 +61,6 @@ extern s16 GetTurnLimit(u8 dungeon);
 extern void sub_8041888(u8 param_1);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
-extern void sub_8043CD8(void);
 extern void sub_803E830(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
@@ -137,6 +136,8 @@ extern OpenedFile *gDungeonNameBannerPalette;
 // These functions are not part of dungeon's overlay5 and connect, in a way, overworld with dungeon.
 
 static const s16 sDeoxysForms[4] = {MONSTER_DEOXYS_NORMAL, MONSTER_DEOXYS_ATTACK, MONSTER_DEOXYS_DEFENSE, MONSTER_DEOXYS_SPEED};
+
+static void sub_8043CD8(void);
 
 // This functions is the main 'loop' when the player is in a Dungeon. It runs from the moment the player enters a dungeon, until they leave(by completing or by fainting).
 // arm9.bin::0206A848
@@ -714,9 +715,9 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
     nullsub_16();
 }
 
-void sub_8043CD8(void)
+static void sub_8043CD8(void)
 {
-    vram_related_8009804();
+    ResetVramPalOAM();
 }
 
 bool8 sub_8043CE4(s32 dungeonId)

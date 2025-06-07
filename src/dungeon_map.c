@@ -6,7 +6,7 @@
 #include "structs/str_dungeon.h"
 #include "bg_palette_buffer.h"
 #include "cpu.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800E9E4.h"
 #include "def_filearchives.h"
 #include "dungeon.h"

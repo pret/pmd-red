@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_8092334.h"
 #include "game_options.h"
 

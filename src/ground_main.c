@@ -3,7 +3,7 @@
 #include "constants/move_id.h"
 #include "structs/str_wonder_mail.h"
 #include "structs/str_dungeon_setup.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "code_80958E8.h"
@@ -125,7 +125,7 @@ extern void sub_809B638(void);
 extern void nullsub_106(void);
 extern void sub_80A73EC(void);
 extern void sub_8099750(void);
-extern void sub_8009908(void);
+extern void DoScheduledMemCopies(void);
 extern void GroundMap_Reset(void);
 extern void sub_809D0BC(void);
 extern void DeleteGroundEvents(void);
@@ -386,7 +386,7 @@ u32 xxx_script_related_8098468(s32 param_1)
             nullsub_106();
             sub_80A73EC();
             sub_8099750();
-            sub_8009908();
+            DoScheduledMemCopies();
         }
 
         GroundMap_Reset();
@@ -499,7 +499,7 @@ void sub_8098BDC(void)
     nullsub_106();
     sub_80A73EC();
     sub_8099750();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
     sub_80A6E68();
     GroundMap_Action();

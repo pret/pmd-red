@@ -8,7 +8,7 @@
 #include "code_8002774.h"
 #include "code_801D9E4.h"
 #include "code_8004AA0.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "debug.h"
 #include "bg_control.h"
 #include "unk_dungeon_load.h"
@@ -1450,7 +1450,7 @@ void sub_80A49E8(GroundBg *groundBg)
     if (groundBg->unk52A) {
         s32 unk;
         for (i = 0, unk = groundBg->unk52C.unkA; i < groundBg->unk52C.unkC; i++, unk++) {
-            sub_80098F8(unk + 2);
+            ScheduleBgTilemapCopy(unk + 2);
         }
         groundBg->unk52A = 0;
     }

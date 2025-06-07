@@ -1,8 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
+#include "graphics_memory.h"
 #include "bg_palette_buffer.h"
 #include "structs/axdata.h"
-#include "code_8009804.h"
 #include "cpu.h"
 #include "def_filearchives.h"
 #include "file_system.h"
@@ -14,11 +14,21 @@ struct FontData
     u8 dataArray[0];
 };
 
+// size: 0xC
+struct MemCopyData
+{
+    u32 *dst;
+    const u32 *src;
+    u32 size;
+};
+
+#define MAX_MEM_COPIES 8
+
 EWRAM_DATA RGB gFontPalette[128] = {0};
-static EWRAM_DATA u8 sUnknown_202D238[4] = {0};
-static EWRAM_DATA s32 sUnknown_202D23C = 0;
-static EWRAM_DATA struct unkStruct_202D240 sUnknown_202D240[8] = {0};
-/*static [.s file not finished yet]*/ EWRAM_DATA u32 gUnknown_202D2A0 = 0;
+static EWRAM_DATA bool8 sTilemapCopyScheduled[4] = {FALSE};
+static EWRAM_DATA s32 sNumMemCopies = 0;
+static EWRAM_DATA struct MemCopyData sMemCopies[MAX_MEM_COPIES] = {0};
+static EWRAM_DATA u32 gUnknown_202D2A0 = 0;
 
 static EWRAM_INIT bool8 sUnknown_203B090 = FALSE; // Only written to.
 
@@ -102,7 +112,7 @@ void InitFontPalette(void)
 }
 
 // arm9.bin::0200A00C
-void vram_related_8009804(void)
+void ResetVramPalOAM(void)
 {
     u32 i;
     u32 *dest;
@@ -123,12 +133,13 @@ void vram_related_8009804(void)
     for (i = 0; i < 0x1F80; i++)
         *dest++ = 0;
 
+    // Keeps the last pal
     dest = (u32 *)PLTT;
-    for (i = 0; i < 120; i++)
+    for (i = 0; i < (BG_PLTT_SIZE / sizeof(*dest) - 8); i++)
         *dest++ = 0;
 
     dest = (u32 *)OBJ_PLTT;
-    for (i = 0; i < 120; i++)
+    for (i = 0; i < (OBJ_PLTT_SIZE / sizeof(*dest) - 8); i++)
         *dest++ = 0;
 
     dest = (u32 *)OAM;
@@ -140,62 +151,62 @@ void vram_related_8009804(void)
 // arm9.bin::02009FC4
 
 // arm9.bin::02009F70
-void sub_80098A0(void)
+void ResetScheduledMemCopies(void)
 {
-    sUnknown_202D23C = 0;
-    sUnknown_202D238[0] = 0;
-    sUnknown_202D238[1] = 0;
-    sUnknown_202D238[2] = 0;
-    sUnknown_202D238[3] = 0;
+    sNumMemCopies = 0;
+    sTilemapCopyScheduled[0] = FALSE;
+    sTilemapCopyScheduled[1] = FALSE;
+    sTilemapCopyScheduled[2] = FALSE;
+    sTilemapCopyScheduled[3] = FALSE;
 }
 
 // arm9.bin::02009F18
-void sub_80098BC(u32 *r0, const u32 *r1, u32 r2)
+void ScheduleMemCopy(u32 *dst, const u32 *src, u32 size)
 {
-    if (sUnknown_202D23C < 8) {
-        sUnknown_202D240[sUnknown_202D23C].unk0 = r0;
-        sUnknown_202D240[sUnknown_202D23C].unk4 = r1;
-        sUnknown_202D240[sUnknown_202D23C].size = r2;
-        sUnknown_202D23C++;
+    if (sNumMemCopies < MAX_MEM_COPIES) {
+        sMemCopies[sNumMemCopies].dst = dst;
+        sMemCopies[sNumMemCopies].src = src;
+        sMemCopies[sNumMemCopies].size = size;
+        sNumMemCopies++;
     }
 }
 
 // The below func has a sibling in the NDS version.
 // arm9.bin::02009F04 and arm9.bin::02009EF0
 
-void sub_80098F8(u32 r0)
+void ScheduleBgTilemapCopy(u32 bgId)
 {
-    sUnknown_202D238[r0] = 1;
+    sTilemapCopyScheduled[bgId] = TRUE;
 }
 
 // arm9.bin::02009BE0
-void sub_8009908(void)
+void DoScheduledMemCopies(void)
 {
     s32 i;
 
-    for (i = 0; i < sUnknown_202D23C; i++)
-        CpuCopy(sUnknown_202D240[i].unk0, sUnknown_202D240[i].unk4, sUnknown_202D240[i].size);
+    for (i = 0; i < sNumMemCopies; i++)
+        CpuCopy(sMemCopies[i].dst, sMemCopies[i].src, sMemCopies[i].size);
 
-    sUnknown_202D23C = 0;
-    if (sUnknown_202D238[0] != 0) {
-        sUnknown_202D238[0] = 0;
+    sNumMemCopies = 0;
+    if (sTilemapCopyScheduled[0]) {
+        sTilemapCopyScheduled[0] = FALSE;
         CpuCopy(BG_SCREEN_ADDR(12), gBgTilemaps[0], BG_SCREEN_SIZE);
     }
-    if (sUnknown_202D238[1] != 0) {
-        sUnknown_202D238[1] = 0;
+    if (sTilemapCopyScheduled[1]) {
+        sTilemapCopyScheduled[1] = FALSE;
         CpuCopy(BG_SCREEN_ADDR(13), gBgTilemaps[1], BG_SCREEN_SIZE);
     }
-    if (sUnknown_202D238[2] != 0) {
-        sUnknown_202D238[2] = 0;
+    if (sTilemapCopyScheduled[2]) {
+        sTilemapCopyScheduled[2] = FALSE;
         CpuCopy(BG_SCREEN_ADDR(14), gBgTilemaps[2], BG_SCREEN_SIZE);
     }
-    if (sUnknown_202D238[3] != 0) {
-        sUnknown_202D238[3] = 0;
+    if (sTilemapCopyScheduled[3]) {
+        sTilemapCopyScheduled[3] = FALSE;
         CpuCopy(BG_SCREEN_ADDR(15), gBgTilemaps[3], BG_SCREEN_SIZE);
     }
 }
 
-void sub_80099C0(void)
+void CopyBgTilemaps0And1(void)
 {
     CpuCopy(BG_SCREEN_ADDR(12), gBgTilemaps[0], BG_SCREEN_SIZE);
     CpuCopy(BG_SCREEN_ADDR(13), gBgTilemaps[1], BG_SCREEN_SIZE);
@@ -318,7 +329,7 @@ bool8 sub_8009A7C(struct Struct_8009A7C *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s
         }
     }
 
-    sub_80098F8(gUnknown_202D2A0);
+    ScheduleBgTilemapCopy(gUnknown_202D2A0);
     return TRUE;
 }
 
@@ -341,5 +352,5 @@ void sub_8009BE4(void)
         }
     }
 
-    sub_80098F8(gUnknown_202D2A0);
+    ScheduleBgTilemapCopy(gUnknown_202D2A0);
 }

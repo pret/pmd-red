@@ -7,7 +7,7 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800E9E4.h"
 #include "code_801602C.h"
 #include "dungeon_vram.h"
@@ -472,7 +472,7 @@ void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
             r5 = 0;
         }
     }
-    sub_80098BC((void *) VRAM + 0x5980, gUnknown_3001018, sizeof(gUnknown_3001018));
+    ScheduleMemCopy((void *) VRAM + 0x5980, gUnknown_3001018, sizeof(gUnknown_3001018));
 }
 
 void sub_803FB74(void)

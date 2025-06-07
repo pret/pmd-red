@@ -3,7 +3,7 @@
 #include "structs/str_202ED28.h"
 #include "structs/str_202EDE8.h"
 #include "bg_palette_buffer.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800D090.h"
 #include "code_803D110.h"
 #include "dungeon_vram.h"
@@ -321,7 +321,6 @@ static UnkStruct_sub_803DC6C *sub_803DEC8(s32 chr)
         ret = &strPtr[r4];
         if (ret->unk4 != chr)
             ret = &strPtr[1];
-
 
     }
     return ret;

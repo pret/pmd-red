@@ -4,7 +4,7 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
@@ -372,8 +372,8 @@ static void UpdateBg(void)
         y1++;
     }
 
-    sub_80098F8(2);
-    sub_80098F8(3);
+    ScheduleBgTilemapCopy(2);
+    ScheduleBgTilemapCopy(3);
 }
 
 static void nullsub_24(void)
@@ -416,7 +416,7 @@ static void WorldMap_RunFrameActions(void)
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();
     nullsub_24();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
     sub_8011860();
     ResetSprites(FALSE);

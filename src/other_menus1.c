@@ -5,7 +5,7 @@
 #include "structs/str_dungeon.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "input.h"
@@ -214,7 +214,7 @@ void sub_80373C4(void)
     LoadBufferedInputs();
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
     ResetSprites(FALSE);
 }

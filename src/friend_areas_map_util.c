@@ -5,7 +5,7 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
@@ -161,8 +161,8 @@ void FriendAreasMap_UpdateBg(void)
         y1++;
     }
 
-    sub_80098F8(2);
-    sub_80098F8(3);
+    ScheduleBgTilemapCopy(2);
+    ScheduleBgTilemapCopy(3);
 }
 
 void FriendAreasMap_HideTextWindowAndArrows(void)
@@ -388,7 +388,7 @@ void FriendAreasMap_RunFrameActions(void)
     sub_8005304();
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
     sub_8011860();
     ResetSprites(FALSE);

@@ -6,7 +6,7 @@
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090_1.h"
 #include "code_80118A4.h"
@@ -296,7 +296,7 @@ static void MainLoops_RunFrameActions(u32 unused)
 
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
 
     ResetSprites(FALSE);
@@ -330,8 +330,8 @@ static void LoadTitleScreen(void)
         }
     }
 
-    sub_80098F8(2);
-    sub_80098F8(3);
+    ScheduleBgTilemapCopy(2);
+    ScheduleBgTilemapCopy(3);
 
     CpuCopy((u32 *)(VRAM + 0x8000), stru->vramStuff, sizeof(stru->vramStuff));
     CloseFile(bgFile);

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "cpu.h"
 #include "decompress_at.h"
 #include "text_1.h"
@@ -1018,7 +1018,7 @@ bool8 xxx_call_update_bg_vram(void)
     bool8 ret = FALSE;
     if (gUnknown_20274A5 != 0) {
         gUnknown_20274A5 = FALSE;
-        sub_80099C0();
+        CopyBgTilemaps0And1();
     }
     ret = xxx_update_bg_vram(gWindows);
     return ret;
