@@ -24,7 +24,6 @@
 #include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "code_805D8C8.h"
-#include "code_803E668.h"
 #include "dungeon_items.h"
 #include "move_util.h"
 #include "moves.h"

@@ -22,7 +22,6 @@
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void DungeonShowWindows(WindowTemplates *a0, bool8 a1);
 extern void sub_8045064(void);
 extern u8 GetFloorType(void);
 

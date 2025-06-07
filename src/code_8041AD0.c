@@ -21,7 +21,6 @@
 #include "items.h"
 #include "math.h"
 #include "sprite.h"
-#include "code_803E668.h"
 #include "dungeon.h"
 #include "run_dungeon.h"
 #include "dungeon_leader.h"

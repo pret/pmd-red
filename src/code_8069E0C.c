@@ -11,7 +11,6 @@
 #include "structs/str_dungeon.h"
 #include "code_800F958.h"
 #include "dungeon_vram.h"
-#include "code_803E668.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"

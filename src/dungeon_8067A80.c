@@ -43,7 +43,6 @@ extern void sub_8068344(void);
 bool8 CanSubMenuItemBeChosen(s32 param_1);
 void sub_8068310(s32 n, PokemonStruct1 **monPtrs);
 void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
-extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 u32 sub_8014140(s32 a0, const void *a1);
 void sub_8083D1C(void);
 void PlayDungeonConfirmationSE(void);

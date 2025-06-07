@@ -66,7 +66,6 @@ extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
-void sub_803E708(s32 a0, s32 a1);
 void sub_8075680(u32);
 void sub_8094C88(void);
 void ClearUnpaidFlagFromAllItems(void);

@@ -9,7 +9,6 @@
 #include "code_8009804.h"
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
-#include "code_803E668.h"
 #include "code_803E724.h"
 #include "dungeon_map.h"
 #include "dungeon_music.h"
@@ -657,12 +656,12 @@ static void sub_803EC94(void)
     sub_801317C(&gDungeonMenu.unk28);
 }
 
-void DungeonShowWindows(WindowTemplates *a0, bool8 a1)
+void DungeonShowWindows(const WindowTemplates *winTemplates, bool8 a1)
 {
     gUnknown_202EDD0 = 10;
     sub_8052210(0);
     ResetUnusedInputStruct();
-    ShowWindows(a0, TRUE, a1);
+    ShowWindows(winTemplates, TRUE, a1);
 }
 
 void sub_803ECE0(void)

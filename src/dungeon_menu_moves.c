@@ -33,8 +33,6 @@ extern void PlayDungeonConfirmationSE(void);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern void sub_8045064(void);
-extern void sub_803E708(s32 a0, s32 a1);
-extern void DungeonShowWindows(WindowTemplates *a0, u8 a1);
 extern s32 GetTeamMemberEntityIndex(Entity *pokemon);
 extern void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern void SetLeaderActionToNothing(u8 a0);
