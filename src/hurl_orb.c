@@ -8,7 +8,6 @@
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"
-#include "code_807E5AC.h"
 #include "constants/ability.h"
 #include "constants/monster.h"
 #include "constants/type.h"

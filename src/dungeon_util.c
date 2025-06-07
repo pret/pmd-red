@@ -7,7 +7,6 @@
 #include "code_800F958.h"
 #include "code_8041AD0.h"
 #include "code_8069E0C.h"
-#include "code_807E5AC.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
 #include "code_803E724.h"

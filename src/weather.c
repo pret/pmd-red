@@ -33,7 +33,6 @@
 #include "constants/monster.h"
 #include "constants/type.h"
 #include "dungeon_misc.h"
-#include "code_807E5AC.h"
 #include "sprite.h"
 #include "dungeon_strings.h"
 

@@ -1,6 +1,0 @@
-#ifndef GUARD_CODE_807E5AC_H
-#define GUARD_CODE_807E5AC_H
-
-void sub_807FA9C(void);
-
-#endif // GUARD_CODE_807E5AC_H
