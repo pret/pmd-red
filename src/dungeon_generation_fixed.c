@@ -9,12 +9,12 @@
 #include "dungeon_util.h"
 #include "dungeon_items.h"
 #include "dungeon_message.h"
+#include "dungeon_spawns.h"
 #include "structs/str_806B7F8.h"
 #include "constants/monster.h"
 #include "constants/trap.h"
 #include "constants/item.h"
 
-extern s32 sub_803DA20(s16 species);
 extern void sub_80429FC(DungeonPos *r0);
 
 static bool8 sub_805210C(u8 itemId);
@@ -48,7 +48,7 @@ static void SpawnSpeciesAtPos(s16 species_, s32 x, s32 y, u32 monsterBehav_, u32
 
     if (species_ == MONSTER_DECOY) {
         unkStruct.species = MONSTER_POLIWAG;
-        unkStruct.level = sub_803DA20(MONSTER_POLIWAG);
+        unkStruct.level = GetSpawnedMonsterLevel(MONSTER_POLIWAG);
         unkStruct.unk2 = monsterBehav;
         unkStruct.unk4 = 0;
         unkStruct.unk10 = 0;
@@ -58,7 +58,7 @@ static void SpawnSpeciesAtPos(s16 species_, s32 x, s32 y, u32 monsterBehav_, u32
     }
     else if (species != MONSTER_NONE) {
         unkStruct.species = species;
-        unkStruct.level = sub_803DA20(species);
+        unkStruct.level = GetSpawnedMonsterLevel(species);
         unkStruct.unk2 = monsterBehav;
         unkStruct.unk4 = 0;
         unkStruct.unk10 = 0;

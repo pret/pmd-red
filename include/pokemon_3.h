@@ -2,7 +2,7 @@
 #define GUARD_POKEMON_3_H
 
 #include "pokemon.h"
-#include "structs/str_packed_pokemon_data.h"
+#include "structs/str_spawn_pokemon_data.h"
 
 // size: 0x8
 typedef struct EvolveStatus
@@ -73,10 +73,10 @@ void SetDefaultIQSkills(IqSkillFlags *iq, bool8 enableSelfCurer);
 void sub_808F468(PokemonStruct1 *param_1, EvolveStatus *evolveStatus, bool8 param_3);
 s32 sub_808F700(PokemonStruct1 *pokemon);
 PokemonStruct1 *sub_808F734(PokemonStruct1 *pokemon, s16 _species);
-s16 ExtractSpeciesIndex(PackedPokemonData *data);
-void SetSpeciesToExtract(PackedPokemonData *data, s32 species_);
-void SetSpeciesLevelToExtract(PackedPokemonData *data, s32 level, s32 species_);
-s32 ExtractLevel(PackedPokemonData *data);
+s16 ExtractSpeciesIndex(SpawnPokemonData *data);
+void SetSpeciesToExtract(SpawnPokemonData *data, s32 species_);
+void SetSpeciesLevelToExtract(SpawnPokemonData *data, s32 level, s32 species_);
+s32 ExtractLevel(SpawnPokemonData *data);
 PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, short _species);
 void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF20 *mon, struct UnkInfoTabStruct *param_4, u32 windowId);
 void sub_808FF20(struct unkStruct_808FF20 *param_1, struct PokemonStruct1 *pokemon, bool8 param_3);

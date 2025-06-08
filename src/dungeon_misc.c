@@ -124,9 +124,9 @@ void LoadDungeonPokemonSprites(void)
         gDungeon->sprites[index] = NULL;
     }
     LoadPokemonSprite(MONSTER_DECOY, TRUE);
-    for(index = 0; index < gDungeon->unk37E4; index++)
+    for(index = 0; index < gDungeon->currFloorMonsterSpawnsCount; index++)
     {
-        LoadPokemonSprite(ExtractSpeciesIndex(&gDungeon->unk343C[index]), TRUE);
+        LoadPokemonSprite(ExtractSpeciesIndex(&gDungeon->monsterSpawns[index]), TRUE);
     }
     if(gDungeon->unk644.unk44)
     {

@@ -12,6 +12,7 @@
 #include "dungeon_random.h"
 #include "dungeon_vram.h"
 #include "dungeon_util.h"
+#include "dungeon_spawns.h"
 #include "dungeon.h"
 #include "pokemon_3.h"
 #include "code_805D8C8.h"
@@ -39,7 +40,6 @@ void GetAvailTacticsforLvl_Bool(u8 *tacticsBuffer, s32 pokeLevel);
 bool8 sub_80723D0(Entity *, Entity *, u8, u8);
 void sub_807218C(Entity *);
 
-extern bool8 sub_803D930(u32);
 extern void sub_8072B78(Entity *pokemon, Entity *target, s16 id);
 extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 
@@ -137,7 +137,7 @@ void sub_8071DA4(Entity *entity)
               for(counter = 0; counter < numMons; counter++)
               {
                 id = &idStack[randIndex];
-                if ((sub_803D930(*id) != 0) && (GetSpriteData(*id) != NULL)) {
+                if ((CanMonsterBeSpawnedHere(*id) != 0) && (GetSpriteData(*id) != NULL)) {
                   sub_8072B78(entityPtr,target,*id);
                   break;
                 }
@@ -802,7 +802,7 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
       tile = GetTile(gAdjacentTileOffsets[index].x + target->pos.x,gAdjacentTileOffsets[index].y + target->pos.y);
       if (sub_807034C(MONSTER_SHEDINJA,tile) == 0) break;
     }
-    if (sub_803D930(MONSTER_SHEDINJA)) {
+    if (CanMonsterBeSpawnedHere(MONSTER_SHEDINJA)) {
       local_2c.species = MONSTER_SHEDINJA;
       local_2c.level = entityInfo->level;
       local_2c.unk2 = 0;

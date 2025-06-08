@@ -192,7 +192,7 @@ SECTIONS {
         src/personality_test1.o(.text);
         src/personality_test2.o(.text);
         src/code_803D0D8.o(.text);
-        src/code_803D110.o(.text);
+        src/dungeon_spawns.o(.text);
         src/dungeon_name_banner.o(.text);
         src/code_803DA7C_2.o(.text);
         src/dungeon_vram.o(.text);
@@ -551,7 +551,7 @@ SECTIONS {
         src/personality_test2.o(.rodata);
         src/code_803D0D8.o(.rodata);
         src/dungeon_pos_data.o(.rodata);
-        src/code_803D110.o(.rodata);
+        src/dungeon_spawns.o(.rodata);
         src/dungeon_config.o(.rodata);
         src/dungeon_name_banner.o(.rodata);
         src/code_803DA7C_2.o(.rodata);

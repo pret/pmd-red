@@ -24,6 +24,7 @@
 #include "dungeon_strings.h"
 #include "dungeon_random.h"
 #include "dungeon_misc.h"
+#include "dungeon_spawns.h"
 
 extern u32 gUnknown_8106A4C;
 
@@ -85,7 +86,6 @@ extern void nullsub_87(Entity *);
 extern void nullsub_86(Entity *);
 extern void sub_8041E0C(Entity *);
 extern void sub_8041DD8(Entity *r0, s32 r1); // NOTE: is s16 in another file
-extern s32 sub_803D870(PackedPokemonData *strPtr, s32 id);
 extern bool8 sub_806AA0C(s32, u32);
 extern void sub_803F580(u32);
 extern void ShowWholeRevealedDungeonMap(void);
@@ -909,7 +909,7 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
     s32 index;
     EntityInfo *entityInfo;
     OpenedFile *sprite;
-    PackedPokemonData auStack544[64];
+    SpawnPokemonData auStack544[64];
 
     if (!EntityIsValid(target))
         return;
@@ -920,7 +920,7 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
         TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FBF04);
     else {
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
-        iVar5 = sub_803D870(auStack544, 0);
+        iVar5 = GetAvailableMonsToTransform(auStack544, 0);
 
         if (iVar5 == 0)
             TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FBEE4);

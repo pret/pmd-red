@@ -294,16 +294,16 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
         spArray[i] = 0;
     }
 
-    for (id = 0; id < gDungeon->unk37E4; id++) {
+    for (id = 0; id < gDungeon->currFloorMonsterSpawnsCount; id++) {
         u8 byte = 1;
-        s32 val1 = gDungeon->unk343C[id].unk2[0];
-        s32 val2 = gDungeon->unk343C[id].unk2[1];
+        s32 val1 = gDungeon->monsterSpawns[id].randNum[0];
+        s32 val2 = gDungeon->monsterSpawns[id].randNum[1];
         if (val1 == 0) {
             if (val2 == 0)
                 continue;
             byte = 2;
         }
-        spArray[ExtractSpeciesIndex(&gDungeon->unk343C[id])] = byte;
+        spArray[ExtractSpeciesIndex(&gDungeon->monsterSpawns[id])] = byte;
     }
 
     if (gDungeon->unk644.unk2A) {

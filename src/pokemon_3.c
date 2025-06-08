@@ -260,13 +260,13 @@ s32 GetUnownIndex(s16 index)
 }
 
 // arm9.bin::02059B98
-s16 ExtractSpeciesIndex(PackedPokemonData *data)
+s16 ExtractSpeciesIndex(SpawnPokemonData *data)
 {
     return data->bits & PACKED_BITS_SPECIES;
 }
 
 // arm9.bin::02059B7C
-void SetSpeciesToExtract(PackedPokemonData *data, s32 species_)
+void SetSpeciesToExtract(SpawnPokemonData *data, s32 species_)
 {
     s32 species = (s16) species_;
     data->bits &= (PACKED_BITS_LEVEL << PACKED_BITS_LEVEL_SHIFT);
@@ -274,7 +274,7 @@ void SetSpeciesToExtract(PackedPokemonData *data, s32 species_)
 }
 
 #if (GAME_VERSION == VERSION_RED)
-void SetSpeciesLevelToExtract(PackedPokemonData *data, s32 level, s32 species_)
+void SetSpeciesLevelToExtract(SpawnPokemonData *data, s32 level, s32 species_)
 {
     s32 species = (s16) (species_);
     data->bits = species | (level << PACKED_BITS_LEVEL_SHIFT) ;
@@ -282,7 +282,7 @@ void SetSpeciesLevelToExtract(PackedPokemonData *data, s32 level, s32 species_)
 #endif
 
 // arm9.bin::02059B6C
-s32 ExtractLevel(PackedPokemonData *data)
+s32 ExtractLevel(SpawnPokemonData *data)
 {
     return (data->bits >> PACKED_BITS_LEVEL_SHIFT) & PACKED_BITS_LEVEL;
 }

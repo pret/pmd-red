@@ -10,7 +10,7 @@
 #include "structs/str_traps.h"
 #include "structs/str_dungeon_location.h"
 #include "structs/str_dungeon_mail_seed.h"
-#include "structs/str_packed_pokemon_data.h"
+#include "structs/str_spawn_pokemon_data.h"
 
 #define DUNGEON_MAX_SIZE_X 56
 #define DUNGEON_MAX_SIZE_Y 32
@@ -357,6 +357,8 @@ struct DungeonMap
     bool8 resetTilesScheduledForCopy;
 };
 
+#define MONSTER_SPAWNS_ARR_COUNT 32
+
 // size: 0x1CEDC
 typedef struct Dungeon
 {
@@ -396,12 +398,12 @@ typedef struct Dungeon
     EntityInfo unk69C[MAX_TEAM_MEMBERS];
     EntityInfo unkEBC[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
     /* 0x2F3C */ unkDungeon2F3C unk2F3C[64];
-    /* 0x343C */ PackedPokemonData unk343C[32];
+    /* 0x343C */ SpawnPokemonData monsterSpawns[MONSTER_SPAWNS_ARR_COUNT];
     u8 fill353C[0x363c-0x353c];
     /* 0x363C */ u8 expYieldRankings[MONSTER_MAX];
-    /* 0x37E4 */ s32 unk37E4;
+    /* 0x37E4 */ s32 currFloorMonsterSpawnsCount;
     u8 fill37E8[4];
-    /* 0x37EC */ u8 unk37EC;
+    /* 0x37EC */ bool8 monsterSpawnsPopulated; // From fileMonsterSpawns to monsterSpawns
     /* 0x37F0 */ u32 unk37F0;
     /* 0x37F4 */ s32 unk37F4;
     /* 0x37F8 */ bool8 plusIsActive[2]; // Index 0: Enemy , Index 1: Team
@@ -479,8 +481,8 @@ typedef struct Dungeon
     /* 0x1C570 */ DungeonLocation unk1C570;
     /* 0x1C574 */ FloorProperties floorProperties;
     /* 0x1C590 */ ItemSpawns itemSpawns[ITEM_SPAWN_TYPES_COUNT];
-    u16 unk1CD70[20];
-    PackedPokemonData unk1CD98[32];
+    /* 0x1CD70 */ u16 trapSpawnChances[NUM_TRAPS];
+    SpawnPokemonData fileMonsterSpawns[MONSTER_SPAWNS_ARR_COUNT]; // Taken directly from "mapparam" which corresponds to available monsters on given dungeon's floor.
     UnkDungeonGlobal_unk1CE98_sub unk1CE98; // TODO: not sure how large this is
     u8 unk1CEC8;
     /* 0x1CECC */ DungeonMusicPlayer musPlayer;

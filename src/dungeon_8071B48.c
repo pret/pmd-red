@@ -15,12 +15,11 @@
 #include "code_805D8C8.h"
 #include "structs/str_806B7F8.h"
 #include "dungeon_logic.h"
+#include "dungeon_spawns.h"
 
 extern u8 *gUnknown_80FED68[];
 
 extern void sub_8042920(struct Entity *r0);
-extern s16 sub_803D970(u32);
-extern s32 sub_803DA20(s32 param_1);
 extern bool8 sub_806AA0C(s32, u32);
 extern bool8 sub_8083660(DungeonPos *param_1);
 
@@ -96,10 +95,10 @@ void sub_8071B48(void)
         index1 = 0x17c;
       }
       else {
-        index1 = sub_803D970(0);
+        index1 = GetRandomFloorMonsterId(0);
       }
 
-      level = sub_803DA20(index1);
+      level = GetSpawnedMonsterLevel(index1);
       if (level == 0) {
         level = 1;
       }

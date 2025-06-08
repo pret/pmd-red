@@ -2,7 +2,7 @@
 #define GUARD_DUNGEON_MAPPARAM_H
 
 #include "dungeon.h"
-#include "structs/str_packed_pokemon_data.h"
+#include "structs/str_spawn_pokemon_data.h"
 
 struct DungeonMapParam1
 {
@@ -15,10 +15,10 @@ struct DungeonMapParam1
 struct DungeonMapParam2
 {
     struct DungeonMapParam1 **unk0;
-    FloorProperties *unk4;
-    u16 **unk8;
-    PackedPokemonData **unkC;
-    u16 **unk10;
+    FloorProperties *floorProperties;
+    u16 **itemSpawns;
+    SpawnPokemonData **monsterSpawns;
+    u16 **trapSpawnChances;
 };
 
 #endif

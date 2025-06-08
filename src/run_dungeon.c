@@ -36,6 +36,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_music.h"
 #include "dungeon_name_banner.h"
+#include "dungeon_spawns.h"
 #include "dungeon_random.h"
 #include "dungeon_strings.h"
 #include "dungeon_serializer.h"
@@ -94,11 +95,10 @@ extern void sub_807E7FC(u8);
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern void sub_8068A84(PokemonStruct1 *pokemon);
 extern void sub_807EAA0(u32, u32);
-extern void sub_803D4D0(void);
+extern void SetFloorItemMonsterSpawns(void);
 extern void sub_80842F0(void);
 extern void sub_80427AC(void);
 extern void sub_806AA70(void);
-extern void sub_803D8F0(void);
 extern void sub_806AD3C(void);
 extern void sub_806C42C(void);
 extern void sub_806B678(void);
@@ -294,7 +294,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             gDungeon->unk644.unk24 = 10;
             InitDungeonRNG(gDungeon->unk644.unk3C);
         }
-        gDungeon->unk37EC = 0;
+        gDungeon->monsterSpawnsPopulated = FALSE;
         if (!r6) {
             s32 rnd;
 
@@ -306,7 +306,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             gDungeon->unk37FF = 0;
             gDungeon->unk644.unk31 = 0;
         }
-        sub_803D4D0();
+        SetFloorItemMonsterSpawns();
         gDungeon->unk1 = 0;
         gDungeon->unk10 = 0;
         gDungeon->unk2 = 0;
@@ -349,7 +349,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             sub_807E5E4(0);
             sub_80842F0();
         }
-        sub_803D8F0();
+        SetCurrentMonsterSpawns();
         LoadDungeonPokemonSprites();
         if (!r6) {
             sub_80687AC();

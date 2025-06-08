@@ -32,6 +32,7 @@
 #include "pokemon_3.h"
 #include "position_util.h"
 #include "weather.h"
+#include "dungeon_spawns.h"
 
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
@@ -43,9 +44,7 @@ extern void sub_804178C(u32);
 extern void sub_803F508(Entity *);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
-extern s32 sub_803D808(PackedPokemonData *strPtr, s32 id);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
-extern s16 sub_803D970(u32);
 extern bool8 sub_8083660(const DungeonPos *param_1);
 extern Entity *gLeaderPointer;
 extern DungeonPos gUnknown_202EE0C;
@@ -55,7 +54,6 @@ extern u8 gUnknown_202F32C;
 extern u8 GetRandomFloorItem(s32 a0);
 extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_80429E8(Entity *r0);
-extern s32 sub_803DA20(s32 param_1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
 extern void sub_803F580(s32);
@@ -80,9 +78,9 @@ void sub_806AD3C(void)
 {
     s32 r10;
     s32 i, j;
-    PackedPokemonData sp[64];
+    SpawnPokemonData sp[64];
     unkDungeon2F3C *structPtr = gDungeon->unk2F3C;
-    s32 var_24 = sub_803D808(sp, 0);
+    s32 var_24 = SetMonsterSpawnsArray(sp, 0);
 
     for (i = 0; i < var_24; structPtr++, i++) {
         structPtr->species = ExtractSpeciesIndex(&sp[i]);
@@ -212,14 +210,14 @@ void sub_806AED8(Moves *moves, s16 *maxHPStat, u8 *atk, u8 *def, s16 _species, s
     moves->struggleMoveFlags = 0;
 }
 
-UNUSED static s32 sub_806B09C(PackedPokemonData *unkPtr, bool8 a1)
+UNUSED static s32 sub_806B09C(SpawnPokemonData *unkPtr, bool8 a1)
 {
     s32 i, j;
     s32 count = 0;
     s16 *unk2Field;
-    PackedPokemonData *loopPtr;
+    SpawnPokemonData *loopPtr;
 
-    for (i = 0, unk2Field = unkPtr->unk2, loopPtr = unkPtr; i < MAX_TEAM_MEMBERS; i++) {
+    for (i = 0, unk2Field = unkPtr->randNum, loopPtr = unkPtr; i < MAX_TEAM_MEMBERS; i++) {
         PokemonStruct2 *monStructPtr = &gRecruitedPokemonRef->pokemon2[i];
 
         if (PokemonFlag1Struct2(monStructPtr) && PokemonFlag2Struct2(monStructPtr))
@@ -233,18 +231,18 @@ UNUSED static s32 sub_806B09C(PackedPokemonData *unkPtr, bool8 a1)
                 SetSpeciesLevelToExtract(loopPtr, 0, monStructPtr->speciesNum);
                 unk2Field[0] = 0;
                 unk2Field[1] = 0;
-                unk2Field += sizeof(*unkPtr) / sizeof(unkPtr->unk2[0]); // Hacky solution, because loopPtr->unk2[0/1] = 0; doesn't match
+                unk2Field += sizeof(*unkPtr) / sizeof(unkPtr->randNum[0]); // Hacky solution, because loopPtr->unk2[0/1] = 0; doesn't match
                 loopPtr++;
                 count++;
             }
         }
     }
 
-    count = sub_803D808(unkPtr, count);
+    count = SetMonsterSpawnsArray(unkPtr, count);
     if (a1) {
         SetSpeciesLevelToExtract(&unkPtr[count], 1, MONSTER_DECOY);
-        unkPtr[count].unk2[0] = 0;
-        unkPtr[count].unk2[1] = 0;
+        unkPtr[count].randNum[0] = 0;
+        unkPtr[count].randNum[1] = 0;
         count++;
     }
 
@@ -511,7 +509,7 @@ void sub_806B6C4(void)
                     r6 = TRUE;
                 }
                 else {
-                    spStruct.species = sub_803D970(0);
+                    spStruct.species = GetRandomFloorMonsterId(0);
                     spStruct.level = 0;
                     spStruct.unk2 = 0;
                 }
@@ -770,7 +768,7 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
     gDungeon->unk37F0++;
     entInfo->unk9C = 0;
     if (structPtr->level == 0) {
-        entInfo->level = sub_803DA20(structPtr->species);
+        entInfo->level = GetSpawnedMonsterLevel(structPtr->species);
     }
     else {
         entInfo->level = structPtr->level;
