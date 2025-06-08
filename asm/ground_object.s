@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start CallbackObjectGetPosHeightAndUnk
-CallbackObjectGetPosHeightAndUnk:
-	push {r4,lr}
-	adds r3, r0, 0
-	movs r4, 0x9A
-	lsls r4, 1
-	adds r0, r3, r4
-	ldr r0, [r0]
-	str r0, [r1]
-	movs r1, 0x9C
-	lsls r1, 1
-	adds r0, r3, r1
-	ldr r0, [r0]
-	str r0, [r2]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end CallbackObjectGetPosHeightAndUnk
-
-	thumb_func_start CallbackObjectSetPosHeight
-CallbackObjectSetPosHeight:
-	movs r2, 0x9A
-	lsls r2, 1
-	adds r0, r2
-	str r1, [r0]
-	bx lr
-	thumb_func_end CallbackObjectSetPosHeight
-
-	thumb_func_start CallbackObjectGetDirection
-CallbackObjectGetDirection:
-	movs r2, 0x90
-	lsls r2, 1
-	adds r0, r2
-	ldrb r0, [r0]
-	strb r0, [r1]
-	bx lr
-	thumb_func_end CallbackObjectGetDirection
-
-	thumb_func_start CallbackObjectSetDirection
-CallbackObjectSetDirection:
-	push {lr}
-	adds r2, r0, 0
-	lsls r1, 24
-	asrs r1, 24
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _080AC934
-	movs r3, 0x90
-	lsls r3, 1
-	adds r0, r2, r3
-	strb r1, [r0]
-_080AC934:
-	pop {r0}
-	bx r0
-	thumb_func_end CallbackObjectSetDirection
-
 	thumb_func_start CallbackObjectSetEventIndex
 CallbackObjectSetEventIndex:
 	push {r4,r5,lr}

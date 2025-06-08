@@ -66,10 +66,10 @@ static void CallbackObjectSetHitboxPos(void *objectPtr_, PixelPos *posOrNull);
 static void CallbackObjectSetPositionBounds(void *objectPtr_, PixelPos *from, PixelPos *to);
 static void CallbackObjectGetHitboxCenter(void *objectPtr_, PixelPos *out);
 static s32 CallbackObjectMoveReal(void *objectPtr_, PixelPos *pos);
-extern void CallbackObjectGetPosHeightAndUnk(void *objectPtr_, u32 *height, u32 *unk);
-extern void CallbackObjectSetPosHeight(void *objectPtr_, u32 height);
-extern void CallbackObjectGetDirection(void *objectPtr_, s8 *dir);
-extern void CallbackObjectSetDirection(void *objectPtr_, s32 dir_);
+static void CallbackObjectGetPosHeightAndUnk(void *objectPtr_, u32 *height, u32 *unk);
+static void CallbackObjectSetPosHeight(void *objectPtr_, u32 height);
+static void CallbackObjectGetDirection(void *objectPtr_, s8 *dir);
+static void CallbackObjectSetDirection(void *objectPtr_, s32 dir_);
 extern void CallbackObjectSetEventIndex(void *objectPtr_, u16 a1);
 extern void CallbackObjectSetUnk_80AC998(void *objectPtr_, s32 a1_, s32 a2);
 extern bool8 CallbackObjectSpriteRelatedCheck_80AC9B8(void *objectPtr_);
@@ -170,8 +170,9 @@ static const struct ScriptCommand gUnknown_8118350[] = {
     JUMP_LABEL(0),
 };
 
-const u8 gUnknown_81183A0[] = {
-0xFF, 0xFF,  0x0,  0x8, 0x1,  0x8,  0x0, 0x10, 0x1, 0x10,  0x2, 0x10, 0x3, 0x10,  0x0,  0x8, 0x1,  0x8,  0x2,  0x8, 0x3,  0x8,  0x4,  0x8, 0x5,  0x8,  0x6,  0x8, 0x7,  0x8,  0x8,  0x8, 0x9,  0x8,  0xA,  0x8, 0xB,  0x8,  0xC,  0x8, 0xD,  0x8,  0xE,  0x8, 0xF,  0x8,  0x0,  0x0};
+const s16 gUnknown_81183A0[24] = {
+0xFFFF, 0x800, 0x801, 0x1000, 0x1001, 0x1002, 0x1003, 0x800, 0x801, 0x802, 0x803, 0x804, 0x805, 0x806, 0x807, 0x808, 0x809, 0x80A, 0x80B, 0x80C, 0x80D, 0x80E, 0x80F, 0x0
+};
 
 void AllocGroundObjects(void) 
 {
@@ -910,3 +911,39 @@ static s32 CallbackObjectMoveReal(void *objectPtr_, PixelPos *pos)
     struct GroundObject *objectPtr = objectPtr_;
     return TryMoveObjectRelative_80AC6AC(objectPtr, pos);
 }
+
+static void CallbackObjectGetPosHeightAndUnk(void *livesPtr_, u32 *height, u32 *unk)
+{
+    struct GroundObject *livesPtr = livesPtr_;
+
+    *height = livesPtr->unk134.x;
+    *unk = livesPtr->unk134.y;
+}
+
+static void CallbackObjectSetPosHeight(void *livesPtr_, u32 height)
+{
+    struct GroundObject *livesPtr = livesPtr_;
+
+    livesPtr->unk134.x = height;
+}
+
+static void CallbackObjectGetDirection(void *livesPtr_, s8 *direction)
+{
+    struct GroundObject *livesPtr = livesPtr_;
+
+    *direction = livesPtr->unk120;
+}
+
+static void CallbackObjectSetDirection(void *livesPtr_, s32 direction)
+{
+    struct GroundObject *livesPtr = livesPtr_;
+    s32 dir = (s8) direction;
+
+    if (dir != -1) {
+        livesPtr->unk120 = dir;
+    }
+}
+
+
+
+
