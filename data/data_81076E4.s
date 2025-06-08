@@ -3,53 +3,7 @@
 .align 2,0
 
 
-@ pokemon_3 #2
-.string "pksdir0\0"
-@ pokemon_3 #3
-.string "pksdir0\0"
 
-.global gUnknown_8107754
-gUnknown_8107754: @ 8107754
-.string "Stats\0"
-.align 2,0
-
-.global gUnknown_810775C
-gUnknown_810775C: @ 810775C
-.string "Features\0"
-.align 2,0
-
-.global gUnknown_8107768
-gUnknown_8107768: @ 8107768
-.string "Type:\0"
-.align 2,0
-
-.global gUnknown_8107770
-gUnknown_8107770: @ 8107770
-.string "Special Abilities:\0"
-.align 2,0
-
-.global gUnknown_8107784
-gUnknown_8107784: @ 8107784
-.string "{MOVE_ITEM_1}\0"
-.align 2,0
-
-.global gUnknown_8107788
-gUnknown_8107788: @ 8107788
-.byte 0x87, 0x42, 0x00, 0x00
-
-.global gUnknown_810778C
-gUnknown_810778C: @ 810778C
-.byte 0x87, 0x40, 0x00, 0x00
-
-.global gUnknown_8107790
-gUnknown_8107790: @ 8107790
-.string "{MOVE_ITEM_0}{MOVE_ITEM_1}\0"
-.align 2,0
-
-.global gUnknown_8107798
-gUnknown_8107798: @ 8107798
-.string "Info\0"
-.align 2,0
 @ dungeon
 .string "pksdir0\0"
 .align 2,0

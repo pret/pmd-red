@@ -8,7 +8,7 @@
 #include "memory.h"
 #include "menu_input.h"
 #include "pokemon.h"
-#include "pokemon_3.h"
+#include "pokemon_summary_window.h"
 #include "text_1.h"
 
 static EWRAM_INIT struct unkStruct_203B2AC *sUnknown_203B2AC = {NULL};
@@ -83,13 +83,13 @@ static void sub_8024588(void)
 
 static void sub_80245D0(void)
 {
-    CreatePokemonInfoTabScreen(sUnknown_203B2AC->unk34[sUnknown_203B2AC->input.unk1E], sUnknown_203B2AC->input.unk1E, &sUnknown_203B2AC->unk4C, &sUnknown_203B2AC->unkB0, sUnknown_203B2AC->unkE0);
+    ShowPokemonSummaryWindow(sUnknown_203B2AC->unk34[sUnknown_203B2AC->input.unk1E], sUnknown_203B2AC->input.unk1E, &sUnknown_203B2AC->unk4C, &sUnknown_203B2AC->unkB0, sUnknown_203B2AC->unkE0);
 }
 
 static void sub_8024604(void)
 {
     PokemonStruct1 *pokeStruct;
-    struct unkStruct_808FF20 *iVar3;
+    struct MonSummaryInfo *iVar3;
 
     sUnknown_203B2AC->unk34[0] = 2;
     sUnknown_203B2AC->unk34[1] = 3;
@@ -98,5 +98,5 @@ static void sub_8024604(void)
     sub_8013818(&sUnknown_203B2AC->input, 3, 1, sUnknown_203B2AC->unkE0);
     iVar3 = &sUnknown_203B2AC->unk4C;
     pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2AC->speciesNum];
-    sub_808FF20(iVar3, pokeStruct, sub_80023E4(7));
+    SetMonSummaryInfo(iVar3, pokeStruct, sub_80023E4(7));
 }

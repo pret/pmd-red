@@ -25,6 +25,7 @@
 #include "dungeon_random.h"
 #include "dungeon_misc.h"
 #include "dungeon_spawns.h"
+#include "pokemon_3.h"
 
 extern u32 gUnknown_8106A4C;
 

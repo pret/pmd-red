@@ -4,7 +4,7 @@
 #include "file_system.h"
 #include "items.h"
 #include "structs/menu.h"
-#include "pokemon_3.h"
+#include "pokemon_evolution.h"
 #include "structs/str_text.h"
 
 // size: 0x174

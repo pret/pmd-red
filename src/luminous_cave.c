@@ -20,6 +20,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_util.h"
+#include "pokemon_evolution.h"
 
 enum
 {

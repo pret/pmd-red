@@ -8,6 +8,7 @@
 #include "file_system.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "pokemon_evolution.h"
 #include "moves.h"
 #include "string_format.h"
 #include "friend_area.h"
@@ -831,7 +832,7 @@ Entity * sub_806977C(Entity *target)
     return NULL;
 }
 
-void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target)
+void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target)
 {
     int index;
     u8 *atkPtr;

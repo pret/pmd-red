@@ -106,7 +106,6 @@ extern void sub_8045064(void);
 extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
 extern bool8 CanLeaderSwitch(u8 dungeon);
 extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
-extern void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
 extern u32 sub_8014140(s32 a0, const void *a1);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
@@ -712,21 +711,11 @@ static void PrintMonTactics(s32 firstId, u8 *tacticIds, EntityInfo *mon, s32 win
     sub_80073E0(windowId);
 }
 
-enum
-{
-    SUB_WINDOW_NONE,
-    SUB_WINDOW_STATUS,
-    SUB_WINDOW_STATS,
-    SUB_WINDOW_FEATUERS,
-    SUB_WINDOW_IQ,
-    SUB_WINDOW_INFO,
-};
-
 // The way this function was written, it seems that they planned to put IQ skills in the Summary Menu first, but later decided to create a separate menu for it.
 void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
 {
     s32 subWindowIds[6];
-    struct unkStruct_808FF20 unkMonStruct;
+    struct MonSummaryInfo monSummaryInfo;
     struct UnkInfoTabStruct unkInfoTabStruct;
     WindowTemplates windows = {
         .id = {
@@ -783,8 +772,8 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         totalSubWindows = 4;
     }
 
-    unkMonStruct.unk40 = 0;
-    unkMonStruct.unk56 = 0;
+    monSummaryInfo.unk40 = 0;
+    monSummaryInfo.unk56 = 0;
     gDungeonMenu.menuIndex = 0;
 
     while (1) {
@@ -799,8 +788,8 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         sTeamWindowHeader.width = 10;
         sTeamWindowHeader.f3 = 0;
         DungeonShowWindows(&windows, TRUE);
-        sub_8069844(&unkMonStruct, entity);
-        CreatePokemonInfoTabScreen(subWindowIds[currSubWindowId], currSubWindowId, &unkMonStruct, &unkInfoTabStruct, 0);
+        SetMonSummaryInfoFromEntity(&monSummaryInfo, entity);
+        ShowPokemonSummaryWindow(subWindowIds[currSubWindowId], currSubWindowId, &monSummaryInfo, &unkInfoTabStruct, 0);
         gDungeonMenu.unk1E = currSubWindowId;
         gDungeonMenu.unk20 = totalSubWindows;
         gDungeonMenu.unkC = (mainWindow->x + 15) * 8;
@@ -862,7 +851,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                     r5 = TRUE;
                     ShowDownArrowSprite();
                 }
-                if (unkMonStruct.unk40 != 0) {
+                if (monSummaryInfo.unk40 != 0) {
                     r6 = TRUE;
                     ShowUpArrowSprite();
                 }
@@ -872,7 +861,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                     r5 = TRUE;
                     ShowDownArrowSprite();
                 }
-                if (unkMonStruct.unk56 != 0) {
+                if (monSummaryInfo.unk56 != 0) {
                     r6 = TRUE;
                     ShowUpArrowSprite();
                 }
@@ -910,7 +899,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                             ScrollDownWindowFunc(0);
                             DungeonRunFrameActions(28);
                         }
-                        unkMonStruct.unk56++;
+                        monSummaryInfo.unk56++;
                     }
                     r8 = 7;
                     break;
@@ -924,7 +913,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                                 ScrollDownWindowFunc(0);
                                 DungeonRunFrameActions(28);
                             }
-                            unkMonStruct.unk56++;
+                            monSummaryInfo.unk56++;
                         }
                         r8 = 7;
                         break;
@@ -935,13 +924,13 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                 }
 
                 if (unkVar == 1 && r6) {
-                    if (unkMonStruct.unk56 != 0) {
+                    if (monSummaryInfo.unk56 != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
                             ScrollUpWindowFunc(0);
                             DungeonRunFrameActions(28);
                         }
-                        unkMonStruct.unk56--;
+                        monSummaryInfo.unk56--;
                     }
                     r8 = 0;
                     break;
@@ -949,13 +938,13 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                 if (gRealInputs.repeated & DPAD_UP) {
                     PlayDungeonCursorSE(1);
                     if (gDungeonMenu.menuIndex == 0) {
-                        if (unkMonStruct.unk56 != 0) {
+                        if (monSummaryInfo.unk56 != 0) {
                             s32 i;
                             for (i = 0; i < 6; i++) {
                                 ScrollUpWindowFunc(0);
                                 DungeonRunFrameActions(28);
                             }
-                            unkMonStruct.unk56--;
+                            monSummaryInfo.unk56--;
                         }
                         r8 = 0;
                         break;
@@ -973,7 +962,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                             ScrollDownWindowFunc(0);
                             DungeonRunFrameActions(28);
                         }
-                        unkMonStruct.unk40++;
+                        monSummaryInfo.unk40++;
                     }
                     r8 = 7;
                     break;
@@ -987,7 +976,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                                 ScrollDownWindowFunc(0);
                                 DungeonRunFrameActions(28);
                             }
-                            unkMonStruct.unk40++;
+                            monSummaryInfo.unk40++;
                         }
                         r8 = 7;
                         break;
@@ -998,13 +987,13 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                 }
 
                 if (unkVar == 1 && r6) {
-                    if (unkMonStruct.unk40 != 0) {
+                    if (monSummaryInfo.unk40 != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
                             ScrollUpWindowFunc(0);
                             DungeonRunFrameActions(28);
                         }
-                        unkMonStruct.unk40--;
+                        monSummaryInfo.unk40--;
                     }
                     r8 = 0;
                     break;
@@ -1012,13 +1001,13 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                 if (gRealInputs.repeated & DPAD_UP) {
                     PlayDungeonCursorSE(1);
                     if (gDungeonMenu.menuIndex == 0) {
-                        if (unkMonStruct.unk40 != 0) {
+                        if (monSummaryInfo.unk40 != 0) {
                             s32 i;
                             for (i = 0; i < 6; i++) {
                                 ScrollUpWindowFunc(0);
                                 DungeonRunFrameActions(28);
                             }
-                            unkMonStruct.unk40--;
+                            monSummaryInfo.unk40--;
                         }
                         r8 = 0;
                         break;

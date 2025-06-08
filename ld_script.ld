@@ -306,6 +306,8 @@ SECTIONS {
         src/dungeon_portrait_placement.o(.text);
         src/pokemon.o(.text);
         src/pokemon_3.o(.text);
+        src/pokemon_evolution.o(.text);
+        src/pokemon_summary_window.o(.text);
         src/dungeon.o(.text);
         src/items.o(.text);
         src/rescue_team_info.o(.text);
@@ -672,6 +674,8 @@ SECTIONS {
         src/dungeon_portrait_placement.o(.rodata);
         src/pokemon.o(.rodata);
         src/pokemon_3.o(.rodata);
+        src/pokemon_evolution.o(.rodata);
+        src/pokemon_summary_window.o(.rodata);
         data/data_81076E4.o(.rodata);
         src/game_options.o(.rodata);
         src/random_mersenne_twister.o(.rodata);

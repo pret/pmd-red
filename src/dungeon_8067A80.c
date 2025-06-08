@@ -388,7 +388,7 @@ void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2_, s32 a3, s32 a4)
 
 void sub_806806C(PokemonStruct1 *a0)
 {
-    struct unkStruct_808FF20 unkStruct;
+    struct MonSummaryInfo unkStruct;
     struct UnkInfoTabStruct var_C8;
     WindowTemplates spTxtStruct = {0};
     s32 r7;
@@ -431,8 +431,8 @@ void sub_806806C(PokemonStruct1 *a0)
 
         sub_801317C(&gDungeonMenu.unk28);
         DungeonShowWindows(&spTxtStruct, 1);
-        sub_808FF20(&unkStruct, a0, gDungeon->unk644.unk16);
-        CreatePokemonInfoTabScreen(spF8[r7], r7, &unkStruct, &var_C8, 0);
+        SetMonSummaryInfo(&unkStruct, a0, gDungeon->unk644.unk16);
+        ShowPokemonSummaryWindow(spF8[r7], r7, &unkStruct, &var_C8, 0);
 
         gDungeonMenu.unkC = (gWindows[0].x + 15) * 8;
         gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
