@@ -29,7 +29,7 @@ void sub_80ADD9C(OpenedFile **a0, OpenedFile **a1, u32 *a2, void *a3, u16 *a4, D
     void *r10 = MemoryAlloc(0x930, 7);
     OpenedFile *mapParamFile = OpenFileAndGetFileDataPtr("mapparam", &gDungeonFileArchive);
 
-    sub_80901D8(&dungLoc, a5);
+    GeneralizeMazeDungeonLoc(&dungLoc, a5);
     dungId = dungLoc.id;
     dungFloor = dungLoc.floor;
     if (dungId > 62) {

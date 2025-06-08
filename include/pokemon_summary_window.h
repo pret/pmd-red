@@ -39,7 +39,7 @@ struct MonSummaryInfo
     s16 unk40;
     s16 fill42;
     struct unkPokeSubStruct_C unk44[2];
-    u8 unk4C;
+    u8 evoStringId;
     u8 fill4D[3];
     IqSkillFlags IQSkills; // 0x50
     u8 tactic;

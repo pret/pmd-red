@@ -226,7 +226,7 @@ void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryI
             strcpy(gFormatBuffer_Monsters[0],gUnknown_810E02C[GetBodySize(monInfo->species)]);
             PrintFormattedStringOnWindow(4,y,gUnknown_810DF98,windowId,'\0');
             y += 0xD;
-            PrintFormattedStringOnWindow(4,y,gEvolutionStrings[monInfo->unk4C],windowId,'\0');
+            PrintFormattedStringOnWindow(4,y,gEvolutionStrings[monInfo->evoStringId],windowId,'\0');
             break;
         }
     }
@@ -284,10 +284,10 @@ void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct PokemonStruct1 *pokemo
     dst->unk44[1] = pokemon->unkC[1];
     dst->IQSkills = pokemon->IQSkills;
     if (param_3) {
-        dst->unk4C = sub_808F700(pokemon);
+        dst->evoStringId = GetMonSummaryScreenEvoStringId(pokemon);
     }
     else {
-        dst->unk4C = 3;
+        dst->evoStringId = EVO_STRING_EMPTY;
     }
 
     for(index = 0; index < 0xC; index++)

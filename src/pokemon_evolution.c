@@ -9,7 +9,7 @@
 #include "constants/evolve_type.h"
 #include "constants/evolution_status.h"
 
-void sub_808F468(PokemonStruct1 *pokemon, EvolveStatus *evolveStatus,bool8 param_3)
+void SetMonEvolveStatus(PokemonStruct1 *pokemon, EvolveStatus *evolveStatus, bool8 param_3)
 {
     struct FriendAreaCapacity friendAreaCapacity;
     struct unkEvolve evolveConditions;
@@ -170,19 +170,19 @@ void sub_808F468(PokemonStruct1 *pokemon, EvolveStatus *evolveStatus,bool8 param
     }
 }
 
-s32 sub_808F700(PokemonStruct1 *pokemon)
+s32 GetMonSummaryScreenEvoStringId(PokemonStruct1 *pokemon)
 {
     EvolveStatus evolveStatus;
 
-    sub_808F468(pokemon, &evolveStatus, 0);
-    if ((evolveStatus.evolutionConditionStatus & EVOLUTION_GOOD)) {
-        return 1;
+    SetMonEvolveStatus(pokemon, &evolveStatus, 0);
+    if (evolveStatus.evolutionConditionStatus & EVOLUTION_GOOD) {
+        return EVO_STRING_POSSIBLE;
     }
-    else if ((evolveStatus.evolutionConditionStatus & EVOLUTION_NO_MORE)) {
-        return 2;
+    else if (evolveStatus.evolutionConditionStatus & EVOLUTION_NO_MORE) {
+        return EVO_STRING_NO_MORE;
     }
     else {
-        return 0;
+        return EVO_STRING_NOT_NOW;
     }
 }
 

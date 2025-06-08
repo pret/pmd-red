@@ -4,6 +4,7 @@
 #include "structs/str_dungeon.h"
 
 s32 GetDungeonFloorCount(u8 dungeon);
+s32 GetDungeonStartingFloor(u8 dungeon);
 const u8 *GetDungeonName1(u8 dungeon);
 bool8 IsStairDirectionUp(u8 dungeon);
 u32 GetMaxItemsAllowed(u8 dungeon);
@@ -13,7 +14,7 @@ s16 GetRandomMovementChance(u8 dungeon);
 void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 void PrintDungeonLocationtoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 
-void sub_80901D8(DungeonLocation *param_1, DungeonLocation *param_2);
+void GeneralizeMazeDungeonLoc(DungeonLocation *dst, const DungeonLocation *src);
 u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_);
 u32 sub_80908D8(DungeonLocation *dungeon);
 u8 sub_8090910(DungeonLocation *dungeon, u32 param_2);

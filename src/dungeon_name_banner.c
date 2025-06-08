@@ -63,7 +63,7 @@ void ShowDungeonNameBanner_Async(void)
     }
     CpuClear((void *)(VRAM + 0x140), 0x1C00);
     if (sub_80848EC()) {
-        s32 currFloor = gDungeon->unk644.dungeonLocation.floor + gDungeon->unk14;
+        s32 currFloor = gDungeon->unk644.dungeonLocation.floor + gDungeon->startFloorId;
         const u8 *dungName = GetDungeonName2(gDungeon->unk644.dungeonLocation.id);
         s32 r5 = 10;
 

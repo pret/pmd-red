@@ -381,7 +381,7 @@ typedef struct Dungeon
     u8 unk10;
     u8 unk11;
     s16 unk12;
-    s16 unk14;
+    s16 startFloorId; // It's always 0 by default(see sDungeonStartingFloor table). If changed, it would be possible for the first entered floor to be displayed as not B1, but the specified number.
     s16 unk16;
     u32 unk18[(0xB8 - 0x18) / 4];
     Entity *unkB8;

@@ -893,10 +893,10 @@ void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target)
     param_1->unk44[1].level = 0;
     param_1->IQSkills = info->IQSkillMenuFlags;
     if (gDungeon->unk644.unk16 != 0) {
-        param_1->unk4C = sub_806A4DC(info);
+        param_1->evoStringId = sub_806A4DC(info);
     }
     else {
-        param_1->unk4C = 3;
+        param_1->evoStringId = EVO_STRING_EMPTY;
     }
 
     uVar15 = 0;
@@ -1414,7 +1414,7 @@ s32 sub_806A4DC(EntityInfo *info)
     pokemon.offense.att[0] = info->atk[0];
     pokemon.offense.def[0] = info->def[0];
 
-    return sub_808F700(&pokemon);
+    return GetMonSummaryScreenEvoStringId(&pokemon);
 }
 
 bool8 sub_806A538(s16 r0)

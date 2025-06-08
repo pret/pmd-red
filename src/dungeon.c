@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/dungeon.h"
 #include "constants/monster.h"
 #include "constants/type.h"
@@ -16,11 +17,7 @@
 extern const char gUnknown_8108F10[];
 extern const char gUnknown_8108F18[];
 extern const char gUnknown_8108F2C[];
-extern u8 gDungeonFloorCount[];
 extern const u8 *const gUnknown_8108084[];
-extern DungeonLocation gUnknown_8107828[];
-extern u8 gDungeonFloorCount[];
-extern u8 gUnknown_81077E8[];
 extern u8 gUnknown_8108F40[];
 extern u16 gUnknown_8108F42[];
 extern u8 gUnknown_8108F4A[4];
@@ -28,6 +25,223 @@ extern u8 gUnknown_8108F50[];
 
 static void sub_8090888(u8 *param_1, u8 *param_2);
 static bool8 sub_8090820(u16 moveID);
+
+static const u8 sDungeonFloorCount[] = {
+    [DUNGEON_TINY_WOODS]                = 4,
+    [DUNGEON_THUNDERWAVE_CAVE]          = 6,
+    [DUNGEON_MT_STEEL]                  = 10,
+    [DUNGEON_SINISTER_WOODS]            = 14,
+    [DUNGEON_SILENT_CHASM]              = 10,
+    [DUNGEON_MT_THUNDER]                = 11,
+    [DUNGEON_MT_THUNDER_PEAK]           = 4,
+    [DUNGEON_GREAT_CANYON]              = 13,
+    [DUNGEON_LAPIS_CAVE]                = 15,
+    [DUNGEON_MT_BLAZE]                  = 13,
+    [DUNGEON_MT_BLAZE_PEAK]             = 4,
+    [DUNGEON_FROSTY_FOREST]             = 10,
+    [DUNGEON_FROSTY_GROTTO]             = 6,
+    [DUNGEON_MT_FREEZE]                 = 16,
+    [DUNGEON_MT_FREEZE_PEAK]            = 6,
+    [DUNGEON_MAGMA_CAVERN]              = 24,
+    [DUNGEON_MAGMA_CAVERN_PIT]          = 4,
+    [DUNGEON_SKY_TOWER]                 = 26,
+    [DUNGEON_SKY_TOWER_SUMMIT]          = 10,
+    [DUNGEON_STORMY_SEA]                = 41,
+    [DUNGEON_SILVER_TRENCH]             = 100,
+    [DUNGEON_METEOR_CAVE]               = 21,
+    [DUNGEON_MT_FREEZE_PEAK_2]          = 5,
+    [DUNGEON_WESTERN_CAVE]              = 100,
+    [DUNGEON_BOSS_3]                    = 21,
+    [DUNGEON_BOSS_4]                    = 12,
+    [DUNGEON_WISH_CAVE]                 = 100,
+    [DUNGEON_BURIED_RELIC]              = 100,
+    [DUNGEON_PITFALL_VALLEY]            = 26,
+    [DUNGEON_NORTHERN_RANGE]            = 26,
+    [DUNGEON_BOSS_9]                    = 13,
+    [DUNGEON_DESERT_REGION]             = 21,
+    [DUNGEON_SOUTHERN_CAVERN]           = 51,
+    [DUNGEON_WYVERN_HILL]               = 31,
+    [DUNGEON_FIERY_FIELD]               = 31,
+    [DUNGEON_NORTHWIND_FIELD]           = 31,
+    [DUNGEON_SOLAR_CAVE]                = 21,
+    [DUNGEON_LIGHTNING_FIELD]           = 31,
+    [DUNGEON_DARKNIGHT_RELIC]           = 16,
+    [DUNGEON_WONDROUS_SEA]              = 13,
+    [DUNGEON_MURKY_CAVE]                = 20,
+    [DUNGEON_GRAND_SEA]                 = 31,
+    [DUNGEON_UPROAR_FOREST]             = 11,
+    [DUNGEON_ODDITY_CAVE]               = 16,
+    [DUNGEON_REMAINS_ISLAND]            = 21,
+    [DUNGEON_MARVELOUS_SEA]             = 21,
+    [DUNGEON_FANTASY_STRAIT]            = 31,
+    [DUNGEON_ROCK_PATH]                 = 5,
+    [DUNGEON_SNOW_PATH]                 = 5,
+    [DUNGEON_AUTOPILOT]                 = 11,
+    [DUNGEON_D50]                       = 3,
+    [DUNGEON_D51]                       = 51,
+    [DUNGEON_NORMAL_MAZE]               = 70,
+    [DUNGEON_HOWLING_FOREST]            = 16,
+    [DUNGEON_D54]                       = 31,
+    [DUNGEON_POISON_MAZE]               = 20,
+    [DUNGEON_WATERFALL_POND]            = 20,
+    [DUNGEON_UNKNOWN_RELIC]             = 12,
+    [DUNGEON_JOYOUS_TOWER]              = 100,
+    [DUNGEON_FAR_OFF_SEA]               = 76,
+    [DUNGEON_MT_FARAWAY]                = 41,
+    [DUNGEON_D61]                       = 100,
+    [DUNGEON_PURITY_FOREST]             = 100,
+    [DUNGEON_OUT_ON_RESCUE]             = 2,
+};
+
+// All dungeons always start at the first floor.
+static const u8 sDungeonStartingFloor[] = {
+    [DUNGEON_TINY_WOODS]                = 0,
+    [DUNGEON_THUNDERWAVE_CAVE]          = 0,
+    [DUNGEON_MT_STEEL]                  = 0,
+    [DUNGEON_SINISTER_WOODS]            = 0,
+    [DUNGEON_SILENT_CHASM]              = 0,
+    [DUNGEON_MT_THUNDER]                = 0,
+    [DUNGEON_MT_THUNDER_PEAK]           = 0,
+    [DUNGEON_GREAT_CANYON]              = 0,
+    [DUNGEON_LAPIS_CAVE]                = 0,
+    [DUNGEON_MT_BLAZE]                  = 0,
+    [DUNGEON_MT_BLAZE_PEAK]             = 0,
+    [DUNGEON_FROSTY_FOREST]             = 0,
+    [DUNGEON_FROSTY_GROTTO]             = 0,
+    [DUNGEON_MT_FREEZE]                 = 0,
+    [DUNGEON_MT_FREEZE_PEAK]            = 0,
+    [DUNGEON_MAGMA_CAVERN]              = 0,
+    [DUNGEON_MAGMA_CAVERN_PIT]          = 0,
+    [DUNGEON_SKY_TOWER]                 = 0,
+    [DUNGEON_SKY_TOWER_SUMMIT]          = 0,
+    [DUNGEON_STORMY_SEA]                = 0,
+    [DUNGEON_SILVER_TRENCH]             = 0,
+    [DUNGEON_METEOR_CAVE]               = 0,
+    [DUNGEON_MT_FREEZE_PEAK_2]          = 0,
+    [DUNGEON_WESTERN_CAVE]              = 0,
+    [DUNGEON_BOSS_3]                    = 0,
+    [DUNGEON_BOSS_4]                    = 0,
+    [DUNGEON_WISH_CAVE]                 = 0,
+    [DUNGEON_BURIED_RELIC]              = 0,
+    [DUNGEON_PITFALL_VALLEY]            = 0,
+    [DUNGEON_NORTHERN_RANGE]            = 0,
+    [DUNGEON_BOSS_9]                    = 0,
+    [DUNGEON_DESERT_REGION]             = 0,
+    [DUNGEON_SOUTHERN_CAVERN]           = 0,
+    [DUNGEON_WYVERN_HILL]               = 0,
+    [DUNGEON_FIERY_FIELD]               = 0,
+    [DUNGEON_NORTHWIND_FIELD]           = 0,
+    [DUNGEON_SOLAR_CAVE]                = 0,
+    [DUNGEON_LIGHTNING_FIELD]           = 0,
+    [DUNGEON_DARKNIGHT_RELIC]           = 0,
+    [DUNGEON_WONDROUS_SEA]              = 0,
+    [DUNGEON_MURKY_CAVE]                = 0,
+    [DUNGEON_GRAND_SEA]                 = 0,
+    [DUNGEON_UPROAR_FOREST]             = 0,
+    [DUNGEON_ODDITY_CAVE]               = 0,
+    [DUNGEON_REMAINS_ISLAND]            = 0,
+    [DUNGEON_MARVELOUS_SEA]             = 0,
+    [DUNGEON_FANTASY_STRAIT]            = 0,
+    [DUNGEON_ROCK_PATH]                 = 0,
+    [DUNGEON_SNOW_PATH]                 = 0,
+    [DUNGEON_AUTOPILOT]                 = 0,
+    [DUNGEON_D50]                       = 0,
+    [DUNGEON_D51]                       = 0,
+    [DUNGEON_NORMAL_MAZE]               = 0,
+    [DUNGEON_HOWLING_FOREST]            = 0,
+    [DUNGEON_D54]                       = 0,
+    [DUNGEON_POISON_MAZE]               = 0,
+    [DUNGEON_WATERFALL_POND]            = 0,
+    [DUNGEON_UNKNOWN_RELIC]             = 0,
+    [DUNGEON_JOYOUS_TOWER]              = 0,
+    [DUNGEON_FAR_OFF_SEA]               = 0,
+    [DUNGEON_MT_FARAWAY]                = 0,
+    [DUNGEON_D61]                       = 0,
+    [DUNGEON_PURITY_FOREST]             = 0,
+    [DUNGEON_OUT_ON_RESCUE]             = 0,
+};
+
+static const DungeonLocation gUnknown_8107828[] =
+{
+    { .id = DUNGEON_MT_STEEL, .floor = 9 },
+    { .id = DUNGEON_SINISTER_WOODS, .floor = 13 },
+    { .id = DUNGEON_MT_THUNDER_PEAK, .floor = 3 },
+    { .id = DUNGEON_MT_BLAZE_PEAK, .floor = 3 },
+    { .id = DUNGEON_FROSTY_GROTTO, .floor = 5 },
+    { .id = DUNGEON_MT_FREEZE_PEAK, .floor = 5 },
+    { .id = DUNGEON_MAGMA_CAVERN_PIT, .floor = 2 },
+    { .id = DUNGEON_MAGMA_CAVERN_PIT, .floor = 3 },
+    { .id = DUNGEON_SKY_TOWER_SUMMIT, .floor = 9 },
+    { .id = DUNGEON_STORMY_SEA, .floor = 40 },
+    { .id = DUNGEON_SILVER_TRENCH, .floor = 99 },
+    { .id = DUNGEON_METEOR_CAVE, .floor = 20 },
+    { .id = DUNGEON_WESTERN_CAVE, .floor = 59 },
+    { .id = DUNGEON_WESTERN_CAVE, .floor = 99 },
+    { .id = DUNGEON_WISH_CAVE, .floor = 20 },
+    { .id = DUNGEON_WISH_CAVE, .floor = 50 },
+    { .id = DUNGEON_WISH_CAVE, .floor = 99 },
+    { .id = DUNGEON_BURIED_RELIC, .floor = 15 },
+    { .id = DUNGEON_BURIED_RELIC, .floor = 25 },
+    { .id = DUNGEON_BURIED_RELIC, .floor = 35 },
+    { .id = DUNGEON_BURIED_RELIC, .floor = 45 },
+    { .id = DUNGEON_BURIED_RELIC, .floor = 60 },
+    { .id = DUNGEON_BURIED_RELIC, .floor = 70 },
+    { .id = DUNGEON_BURIED_RELIC, .floor = 80 },
+    { .id = DUNGEON_NORTHERN_RANGE, .floor = 25 },
+    { .id = DUNGEON_WYVERN_HILL, .floor = 20 },
+    { .id = DUNGEON_WYVERN_HILL, .floor = 30 },
+    { .id = DUNGEON_FIERY_FIELD, .floor = 30 },
+    { .id = DUNGEON_NORTHWIND_FIELD, .floor = 20 },
+    { .id = DUNGEON_NORTHWIND_FIELD, .floor = 30 },
+    { .id = DUNGEON_SOLAR_CAVE, .floor = 10 },
+    { .id = DUNGEON_SOLAR_CAVE, .floor = 15 },
+    { .id = DUNGEON_SOLAR_CAVE, .floor = 20 },
+    { .id = DUNGEON_LIGHTNING_FIELD, .floor = 30 },
+    { .id = DUNGEON_GRAND_SEA, .floor = 15 },
+    { .id = DUNGEON_GRAND_SEA, .floor = 25 },
+    { .id = DUNGEON_UPROAR_FOREST, .floor = 10 },
+    { .id = DUNGEON_AUTOPILOT, .floor = 1 },
+    { .id = DUNGEON_AUTOPILOT, .floor = 2 },
+    { .id = DUNGEON_AUTOPILOT, .floor = 3 },
+    { .id = DUNGEON_AUTOPILOT, .floor = 4 },
+    { .id = DUNGEON_AUTOPILOT, .floor = 5 },
+    { .id = DUNGEON_AUTOPILOT, .floor = 6 },
+    { .id = DUNGEON_AUTOPILOT, .floor = 7 },
+    { .id = DUNGEON_AUTOPILOT, .floor = 8 },
+    { .id = DUNGEON_AUTOPILOT, .floor = 9 },
+    { .id = DUNGEON_AUTOPILOT, .floor = 10 },
+    // Used for all mazes, see GeneralizeMazeDungeonLoc
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 3 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 6 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 9 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 12 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 15 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 18 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 21 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 24 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 27 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 30 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 33 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 36 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 39 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 42 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 45 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 48 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 51 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 54 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 57 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 60 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 63 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 66 },
+    { .id = DUNGEON_NORMAL_MAZE, .floor = 69 },
+    { .id = DUNGEON_HOWLING_FOREST, .floor = 15 },
+    { .id = DUNGEON_FAR_OFF_SEA, .floor = 50 },
+    { .id = DUNGEON_FAR_OFF_SEA, .floor = 72 },
+    { .id = DUNGEON_MT_FARAWAY, .floor = 30 },
+    { .id = DUNGEON_MT_FARAWAY, .floor = 40 },
+    { .id = DUNGEON_PURITY_FOREST, .floor = 99 },
+    { .id = DUNGEON_OUT_ON_RESCUE, .floor = 255 }
+};
 
 const u8 *GetDungeonName1(u8 dungeon)
 {
@@ -98,8 +312,8 @@ bool8 sub_809017C(DungeonLocation* a1)
 {
     DungeonLocation location;
     int i;
-    sub_80901D8(&location, a1);
-    for (i = 0; i < 999 && gUnknown_8107828[i].id != 63; ++i) {
+    GeneralizeMazeDungeonLoc(&location, a1);
+    for (i = 0; i < 999 && gUnknown_8107828[i].id != DUNGEON_OUT_ON_RESCUE; ++i) {
         if (location.id == gUnknown_8107828[i].id &&
             location.floor == gUnknown_8107828[i].floor) {
             return TRUE;
@@ -108,15 +322,16 @@ bool8 sub_809017C(DungeonLocation* a1)
     return FALSE;
 }
 
-void sub_80901D8(DungeonLocation *param_1,DungeonLocation *param_2)
+// Treats all mazes as DUNGEON_NORMAL_MAZE
+void GeneralizeMazeDungeonLoc(DungeonLocation *dst, const DungeonLocation *src)
 {
-  if (DUNGEON_IS_MAZE(param_2->id)) {
-    param_1->id = DUNGEON_NORMAL_MAZE;
-    param_1->floor = (param_2->id - DUNGEON_NORMAL_MAZE_2) * 3 + param_2->floor;
-  }
-  else {
-    *param_1 = *param_2;
-  }
+    if (DUNGEON_IS_MAZE(src->id)) {
+        dst->id = DUNGEON_NORMAL_MAZE;
+        dst->floor = (src->id - DUNGEON_NORMAL_MAZE_2) * 3 + src->floor;
+    }
+    else {
+        *dst = *src;
+    }
 }
 
 void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation)
@@ -144,20 +359,20 @@ s32 GetDungeonFloorCount(u8 dungeon)
 {
     if (DUNGEON_IS_MAZE(dungeon))
         return 4;
-    else if(dungeon > DUNGEON_PURITY_FOREST)
+    else if (dungeon > DUNGEON_PURITY_FOREST)
         return 1;
     else
-        return gDungeonFloorCount[dungeon];
+        return sDungeonFloorCount[dungeon];
 }
 
-u8 sub_80902C8(u8 dungeon)
+s32 GetDungeonStartingFloor(u8 dungeon)
 {
     if (DUNGEON_IS_MAZE(dungeon))
         return 0;
-    else if(dungeon > DUNGEON_PURITY_FOREST)
+    else if (dungeon > DUNGEON_PURITY_FOREST)
         return 0;
     else
-        return gUnknown_81077E8[dungeon];
+        return sDungeonStartingFloor[dungeon];
 }
 
 // arm9.bin::0205ECA0
@@ -414,7 +629,7 @@ static void sub_8090888(u8 *param_1, u8 *param_2)
 
 u32 sub_80908D8(DungeonLocation *dungeon)
 {
-    if (dungeon->id < DUNGEON_OUT_ON_RESCUE && dungeon->floor < gDungeonFloorCount[dungeon->id]) {
+    if (dungeon->id < DUNGEON_OUT_ON_RESCUE && dungeon->floor < sDungeonFloorCount[dungeon->id]) {
         return gUnknown_8108084[dungeon->id][dungeon->floor];
     }
     else {
@@ -426,7 +641,7 @@ u8 sub_8090910(DungeonLocation *dungeon, u32 param_2)
 {
     s32 rand1 = RandInt(9999);
     s32 rand2 = RandInt(9999);
-    if (dungeon->id < DUNGEON_OUT_ON_RESCUE && dungeon->floor < gDungeonFloorCount[dungeon->id]) {
+    if (dungeon->id < DUNGEON_OUT_ON_RESCUE && dungeon->floor < sDungeonFloorCount[dungeon->id]) {
         return sub_8091E94(param_2, rand1, rand2);
     }
     else {

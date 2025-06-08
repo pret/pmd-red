@@ -23,10 +23,6 @@
 #include "dungeon_config.h"
 #include "structs/dungeon_mapparam.h"
 
-// File split is correct.
-
-extern s32 sub_80902C8(u8 dungeon);
-
 void sub_803D4AC(void)
 {
     gDungeon->unk1C570.id = DUNGEON_INVALID;
@@ -40,7 +36,7 @@ void SetFloorItemMonsterSpawns(void)
     OpenedFile *file;
     struct DungeonMapParam1 *strPtr;
 
-    sub_80901D8(&gDungeon->unk644.dungeonLocation2, &gDungeon->unk644.dungeonLocation);
+    GeneralizeMazeDungeonLoc(&gDungeon->unk644.dungeonLocation2, &gDungeon->unk644.dungeonLocation);
     if (gDungeon->unk1C570.id == gDungeon->unk644.dungeonLocation2.id && gDungeon->unk1C570.floor == gDungeon->unk644.dungeonLocation2.floor)
         return;
 
@@ -49,7 +45,7 @@ void SetFloorItemMonsterSpawns(void)
     strPtr = &((struct DungeonMapParam2 *)(file->data))->unk0[gDungeon->unk1C570.id][gDungeon->unk1C570.floor];
 
     gDungeon->unk1CEC8 = GetDungeonFloorCount(gDungeon->unk644.dungeonLocation.id);
-    gDungeon->unk14 = sub_80902C8(gDungeon->unk644.dungeonLocation.id);
+    gDungeon->startFloorId = GetDungeonStartingFloor(gDungeon->unk644.dungeonLocation.id);
 
     gDungeon->floorProperties = ((struct DungeonMapParam2 *)(file->data))->floorProperties[strPtr->unk0];
 

@@ -3,6 +3,14 @@
 
 #include "structs/str_pokemon.h"
 
+enum
+{
+    EVO_STRING_NOT_NOW,
+    EVO_STRING_POSSIBLE,
+    EVO_STRING_NO_MORE,
+    EVO_STRING_EMPTY,
+};
+
 // size: 0x8
 typedef struct EvolveStatus
 {
@@ -15,8 +23,8 @@ typedef struct EvolveStatus
     /* 0x6 */ s16 targetEvolveSpecies;
 } EvolveStatus;
 
-void sub_808F468(struct PokemonStruct1 *pokemon, EvolveStatus *evolveStatus,bool8 param_3);
-s32 sub_808F700(PokemonStruct1 *pokemon);
+void SetMonEvolveStatus(struct PokemonStruct1 *pokemon, EvolveStatus *evolveStatus,bool8 param_3);
+s32 GetMonSummaryScreenEvoStringId(PokemonStruct1 *pokemon);
 PokemonStruct1 *sub_808F734(PokemonStruct1 *pokemon, s16 _species);
 PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, s16 _species);
 

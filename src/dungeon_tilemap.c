@@ -479,7 +479,7 @@ void sub_803FB74(void)
 {
     s32 i;
     u16 *arrPtr;
-    s32 r5, r6, unkFloor;
+    s32 r5, r6, currFloor;
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
     bool32 lowHp = FALSE;
     bool32 hungry = FALSE;
@@ -540,9 +540,9 @@ void sub_803FB74(void)
     }
 
     arrPtr = gBgTilemaps[0][0];
-    unkFloor = gDungeon->unk14 + gDungeon->unk644.dungeonLocation.floor;
-    if (strPtr->unk3A != unkFloor) {
-        strPtr->unk3A = unkFloor;
+    currFloor = gDungeon->startFloorId + gDungeon->unk644.dungeonLocation.floor;
+    if (strPtr->unk3A != currFloor) {
+        strPtr->unk3A = currFloor;
         if (IsStairDirectionUp(gDungeon->unk644.dungeonLocation.id)) {
             arrPtr[1] = 0;
         }
@@ -550,12 +550,12 @@ void sub_803FB74(void)
             arrPtr[1] = 0xF2BE;
         }
 
-        if (unkFloor < 10) {
-            sub_803FE30(unkFloor, &arrPtr[2], strPtr->unk18216, 1);
+        if (currFloor < 10) {
+            sub_803FE30(currFloor, &arrPtr[2], strPtr->unk18216, 1);
             arrPtr[3] = 0xF2B8;
         }
         else {
-            sub_803FE30(unkFloor, &arrPtr[2], strPtr->unk18216, 0);
+            sub_803FE30(currFloor, &arrPtr[2], strPtr->unk18216, 0);
             arrPtr[4] = 0xF2B8;
         }
     }

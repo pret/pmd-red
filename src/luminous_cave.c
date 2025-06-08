@@ -734,7 +734,7 @@ static void sub_8025254(void)
     }
 
     sLuminousCaveWork->evolveStatus.wurmpleVal = RandInt(0xFF);
-    sub_808F468(sLuminousCaveWork->pokeStruct, &sLuminousCaveWork->evolveStatus, 1);
+    SetMonEvolveStatus(sLuminousCaveWork->pokeStruct, &sLuminousCaveWork->evolveStatus, 1);
 }
 
 static bool8 LuminousCave_HasOnly1Member(void)
