@@ -10,6 +10,7 @@
 #include "structs/str_traps.h"
 #include "structs/str_dungeon_location.h"
 #include "structs/str_dungeon_mail_seed.h"
+#include "structs/str_packed_pokemon_data.h"
 
 #define DUNGEON_MAX_SIZE_X 56
 #define DUNGEON_MAX_SIZE_Y 32
@@ -160,13 +161,6 @@ typedef struct ItemSpawns
     s16 categoryValues[NUM_ITEM_CATEGORIES];
     s16 itemValues[NUMBER_OF_ITEM_IDS];
 } ItemSpawns;
-
-// size: R=0x8 | B=0x6
-typedef struct UnkDungeonGlobal_unk1CD98
-{
-    u16 unk0; // species and level
-    s16 unk2[2];
-} UnkDungeonGlobal_unk1CD98;
 
 struct unkStruct_Dungeon134_sub
 {
@@ -402,7 +396,7 @@ typedef struct Dungeon
     EntityInfo unk69C[MAX_TEAM_MEMBERS];
     EntityInfo unkEBC[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
     /* 0x2F3C */ unkDungeon2F3C unk2F3C[64];
-    /* 0x343C */ UnkDungeonGlobal_unk1CD98 unk343C[32];
+    /* 0x343C */ PackedPokemonData unk343C[32];
     u8 fill353C[0x363c-0x353c];
     /* 0x363C */ u8 expYieldRankings[MONSTER_MAX];
     /* 0x37E4 */ s32 unk37E4;
@@ -486,7 +480,7 @@ typedef struct Dungeon
     /* 0x1C574 */ FloorProperties floorProperties;
     /* 0x1C590 */ ItemSpawns itemSpawns[ITEM_SPAWN_TYPES_COUNT];
     u16 unk1CD70[20];
-    UnkDungeonGlobal_unk1CD98 unk1CD98[32];
+    PackedPokemonData unk1CD98[32];
     UnkDungeonGlobal_unk1CE98_sub unk1CE98; // TODO: not sure how large this is
     u8 unk1CEC8;
     /* 0x1CECC */ DungeonMusicPlayer musPlayer;

@@ -69,7 +69,6 @@ extern void sub_804178C(u32);
 extern void sub_803F508(Entity *);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
-extern s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
 extern s16 sub_803D970(u32);
 extern bool8 sub_8083660(const DungeonPos *param_1);

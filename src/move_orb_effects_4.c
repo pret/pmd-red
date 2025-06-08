@@ -66,8 +66,6 @@ extern void nullsub_88(Entity *);
 extern void nullsub_87(Entity *);
 extern void nullsub_86(Entity *);
 extern void sub_8041E0C(Entity *);
-extern void sub_8041DD8(Entity *r0, s32 r1); // NOTE: is s16 in another file
-extern s32 sub_803D870(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id);
 extern bool8 sub_806AA0C(s32, u32);
 
 void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus)

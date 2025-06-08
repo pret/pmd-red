@@ -260,30 +260,31 @@ s32 GetUnownIndex(s16 index)
 }
 
 // arm9.bin::02059B98
-s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0)
+s16 ExtractSpeciesIndex(PackedPokemonData *data)
 {
-    return r0->unk0 & 0x000001ff;
+    return data->bits & PACKED_BITS_SPECIES;
 }
 
 // arm9.bin::02059B7C
-void sub_808E9C4(PokemonStruct1 *r0, s16 r1)
+void SetSpeciesToExtract(PackedPokemonData *data, s32 species_)
 {
-    s32 r1_s32 = r1; // cast needed to match
-    r0->unk0 =  ((0xFE << 8) & r0->unk0) | r1_s32 ;
+    s32 species = (s16) species_;
+    data->bits &= (PACKED_BITS_LEVEL << PACKED_BITS_LEVEL_SHIFT);
+    data->bits |= species;
 }
 
 #if (GAME_VERSION == VERSION_RED)
-void SetSpeciesLevelToExtract(UnkDungeonGlobal_unk1CD98 *r0, s32 level, s32 species)
+void SetSpeciesLevelToExtract(PackedPokemonData *data, s32 level, s32 species_)
 {
-    species = SpeciesId(species);
-    r0->unk0 = species | (level << 9) ;
+    s32 species = (s16) (species_);
+    data->bits = species | (level << PACKED_BITS_LEVEL_SHIFT) ;
 }
 #endif
 
 // arm9.bin::02059B6C
-s32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0)
+s32 ExtractLevel(PackedPokemonData *data)
 {
-    return (r0->unk0 >> 9);
+    return (data->bits >> PACKED_BITS_LEVEL_SHIFT) & PACKED_BITS_LEVEL;
 }
 
 UNUSED static void GetMonOffenseStats(PokemonStruct1 *mon, struct UnusedOffenseStruct *dst)
@@ -443,8 +444,31 @@ void ToggleIQSkill(IqSkillFlags *iq, u32 skillIndex)
     }
 }
 
-static const s32 gIQSkillGroups[] = {
-    9999, 4, 1, 2, 4, 4, 6, 7, 8, 9, 9, 9, 10, 10, 11, 11, 14, 14, 14, 16, 16, 9, 17, 6
+static const s32 sIQSkillGroups[NUM_IQ_SKILLS] = {
+    [IQ_NONE] = 9999,
+    [IQ_TYPE_ADVANTAGE_MASTER] = 4,
+    [IQ_ITEM_CATCHER] = 1,
+    [IQ_COURSE_CHECKER] = 2,
+    [IQ_SURE_HIT_ATTACKER] = 4,
+    [IQ_QUICK_DODGER] = 4,
+    [IQ_PP_CHECKER] = 6,
+    [IQ_NONTRAITOR] = 7,
+    [IQ_STATUS_CHECKER] = 8,
+    [IQ_EXP_GO_GETTER] = 9,
+    [IQ_EFFICIENCY_EXPERT] = 9,
+    [IQ_WEAK_TYPE_PICKER] = 9,
+    [IQ_ALL_TERRAIN_HIKER] = 10,
+    [IQ_SUPER_MOBILE] = 10,
+    [IQ_TRAP_AVOIDER] = 11,
+    [IQ_HOUSE_AVOIDER] = 11,
+    [IQ_ENERGY_SAVER] = 14,
+    [IQ_NONSLEEPER] = 14,
+    [IQ_SELF_CURER] = 14,
+    [IQ_TRAP_SEER] = 16,
+    [IQ_LAVA_EVADER] = 16,
+    [IQ_DEDICATED_TRAVELER] = 9,
+    [IQ_ITEM_MASTER] = 17,
+    [IQ_EXCLUSIVE_MOVE_USER] = 6,
 };
 
 void SetIQSkill(IqSkillFlags *iq, u32 skillIndex)
@@ -453,9 +477,9 @@ void SetIQSkill(IqSkillFlags *iq, u32 skillIndex)
     s32 iqSkillGroup;
     s32 bit;
 
-    for (iqSkill = 0, iqSkillGroup = gIQSkillGroups[skillIndex]; iqSkill < NUM_IQ_SKILLS; iqSkill++) {
+    for (iqSkill = 0, iqSkillGroup = sIQSkillGroups[skillIndex]; iqSkill < NUM_IQ_SKILLS; iqSkill++) {
         // Turn off each IQ Skill that's in the same group as the chosen skill
-        if (iqSkillGroup == gIQSkillGroups[iqSkill]) {
+        if (iqSkillGroup == sIQSkillGroups[iqSkill]) {
             s32 bit = 1 << (iqSkill);
             iq->flags[0] &= ~(bit);
             iq->flags[1] &= ~(bit >> 8);
@@ -503,7 +527,7 @@ u32 sub_808ECFC(void)
     return 0;
 }
 
-void sub_808ED00()
+void sub_808ED00(void)
 {
     s32 team[4];
     s32 i;

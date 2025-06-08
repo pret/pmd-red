@@ -24,11 +24,10 @@
 // File split is correct.
 
 extern s32 sub_80902C8(u8 dungeon);
-extern void sub_808E9C4(UnkDungeonGlobal_unk1CD98 *r0, s16 r1);
 
 void sub_803D4AC(void)
 {
-    gDungeon->unk1C570.id = 0x63;
+    gDungeon->unk1C570.id = DUNGEON_INVALID;
     gDungeon->unk1C570.floor = 0xFF;
 }
 
@@ -61,7 +60,7 @@ void sub_803D4D0(void)
             break;
     }
     while (i <= 31) {
-        sub_808E9C4(&gDungeon->unk1CD98[i], 0);
+        SetSpeciesToExtract(&gDungeon->unk1CD98[i], 0);
         i++;
     }
 
@@ -133,7 +132,7 @@ u8 GetRandomFloorItem(s32 spawnType)
     return ITEM_POKE;
 }
 
-s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id)
+s32 sub_803D808(PackedPokemonData *strPtr, s32 id)
 {
     s32 i;
 
@@ -147,7 +146,7 @@ s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id)
     return id;
 }
 
-s32 sub_803D870(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id)
+s32 sub_803D870(PackedPokemonData *strPtr, s32 id)
 {
     s32 i;
 
