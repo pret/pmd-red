@@ -17,7 +17,6 @@
 extern const char gUnknown_8108F10[];
 extern const char gUnknown_8108F18[];
 extern const char gUnknown_8108F2C[];
-extern const u8 *const gUnknown_8108084[];
 extern u8 gUnknown_8108F40[];
 extern u16 gUnknown_8108F42[];
 extern u8 gUnknown_8108F4A[4];
@@ -241,6 +240,139 @@ static const DungeonLocation gUnknown_8107828[] =
     { .id = DUNGEON_MT_FARAWAY, .floor = 40 },
     { .id = DUNGEON_PURITY_FOREST, .floor = 99 },
     { .id = DUNGEON_OUT_ON_RESCUE, .floor = 255 }
+};
+
+static const u8 sUnkFloorData_TinyWoods[] = {0, 1, 1, 1};
+static const u8 sUnkFloorData_ThunderwaveCave[] = {0, 1, 1, 1, 1, 1};
+static const u8 sUnkFloorData_MtSteel[] = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+static const u8 sUnkFloorData_SinisterWoods[] = {0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2};
+static const u8 sUnkFloorData_SilentChasm[] = {0, 2, 2, 2, 2, 2, 2, 2, 3, 3};
+static const u8 sUnkFloorData_MtThunder[] = {0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
+static const u8 sUnkFloorData_MtThunderPeak[] = {0, 3, 3, 3};
+static const u8 sUnkFloorData_GreatCanyon[] = {0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
+static const u8 sUnkFloorData_LapisCave[] = {0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
+static const u8 sUnkFloorData_MtBlaze[] = {0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
+static const u8 sUnkFloorData_MtBlazePeak[] = {0, 4, 4, 4};
+static const u8 sUnkFloorData_FrostyForest[] = {0, 4, 4, 4, 4, 4, 5, 5, 5, 5};
+static const u8 sUnkFloorData_FrostyGrotto[] = {0, 5, 5, 5, 5, 5};
+static const u8 sUnkFloorData_MtFreeze[] = {0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
+static const u8 sUnkFloorData_MtFreezePeak[] = {0, 5, 5, 5, 5, 5};
+static const u8 sUnkFloorData_MagmaCavern[] = {0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6};
+static const u8 sUnkFloorData_MagmaCavernPit[] = {0, 6, 6, 6};
+static const u8 sUnkFloorData_SkyTower[] = {0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6};
+static const u8 sUnkFloorData_SkyTowerSummit[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7};
+static const u8 sUnkFloorData_StormySea[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9};
+static const u8 sUnkFloorData_SilverTrench[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11};
+static const u8 sUnkFloorData_MeteorCave[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+static const u8 sUnkFloorData_MtFreezePeak_2[] = {0, 5, 5, 5, 5};
+static const u8 sUnkFloorData_WesternCave[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12};
+static const u8 sUnkFloorData_Boss_3[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+static const u8 sUnkFloorData_Boss_4[] = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+static const u8 sUnkFloorData_WishCave[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12};
+static const u8 sUnkFloorData_BuriedRelic[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12};
+static const u8 sUnkFloorData_PitfallValley[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9};
+static const u8 sUnkFloorData_NorthernRange[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9};
+static const u8 sUnkFloorData_Boss_9[] = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+static const u8 sUnkFloorData_DesertRegion[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+static const u8 sUnkFloorData_SouthernCavern[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9};
+static const u8 sUnkFloorData_WyvernHill[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9};
+static const u8 sUnkFloorData_FieryField[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9};
+static const u8 sUnkFloorData_NorthwindField[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9};
+static const u8 sUnkFloorData_SolarCave[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+static const u8 sUnkFloorData_LightningField[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9};
+static const u8 sUnkFloorData_DarknightRelic[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
+static const u8 sUnkFloorData_WondrousSea[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8};
+static const u8 sUnkFloorData_MurkyCave[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+static const u8 sUnkFloorData_GrandSea[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+static const u8 sUnkFloorData_UproarForest[] = {0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
+static const u8 sUnkFloorData_OddityCave[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
+static const u8 sUnkFloorData_RemainsIsland[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+static const u8 sUnkFloorData_MarvelousSea[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8};
+static const u8 sUnkFloorData_FantasyStrait[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9};
+static const u8 sUnkFloorData_RockPath[] = {0, 1, 1, 1, 1};
+static const u8 sUnkFloorData_SnowPath[] = {0, 1, 1, 1, 1};
+static const u8 sUnkFloorData_Autopilot[] = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+static const u8 sUnkFloorData_D50[] = {0, 1, 1};
+static const u8 sUnkFloorData_D51[] = {0, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15};
+static const u8 sUnkFloorData_NormalMaze[] = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+static const u8 sUnkFloorData_HowlingForest[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
+static const u8 sUnkFloorData_D54[] = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+static const u8 sUnkFloorData_PoisonMaze[] = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+static const u8 sUnkFloorData_WaterfallPond[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
+static const u8 sUnkFloorData_UnknownRelic[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
+static const u8 sUnkFloorData_JoyousTower[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12};
+static const u8 sUnkFloorData_FarOffSea[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12};
+static const u8 sUnkFloorData_MtFaraway[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10};
+static const u8 sUnkFloorData_D61[] = {0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12};
+static const u8 sUnkFloorData_PurityForest[] = {0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14};
+static const u8 sUnkFloorData_OutOnRescue[] = {0, 7, 0};
+
+// [id][floor]
+static const u8 *const sUnkDungeonFloorData[] = {
+    [DUNGEON_TINY_WOODS] = sUnkFloorData_TinyWoods,
+    [DUNGEON_THUNDERWAVE_CAVE] = sUnkFloorData_ThunderwaveCave,
+    [DUNGEON_MT_STEEL] = sUnkFloorData_MtSteel,
+    [DUNGEON_SINISTER_WOODS] = sUnkFloorData_SinisterWoods,
+    [DUNGEON_SILENT_CHASM] = sUnkFloorData_SilentChasm,
+    [DUNGEON_MT_THUNDER] = sUnkFloorData_MtThunder,
+    [DUNGEON_MT_THUNDER_PEAK] = sUnkFloorData_MtThunderPeak,
+    [DUNGEON_GREAT_CANYON] = sUnkFloorData_GreatCanyon,
+    [DUNGEON_LAPIS_CAVE] = sUnkFloorData_LapisCave,
+    [DUNGEON_MT_BLAZE] = sUnkFloorData_MtBlaze,
+    [DUNGEON_MT_BLAZE_PEAK] = sUnkFloorData_MtBlazePeak,
+    [DUNGEON_FROSTY_FOREST] = sUnkFloorData_FrostyForest,
+    [DUNGEON_FROSTY_GROTTO] = sUnkFloorData_FrostyGrotto,
+    [DUNGEON_MT_FREEZE] = sUnkFloorData_MtFreeze,
+    [DUNGEON_MT_FREEZE_PEAK] = sUnkFloorData_MtFreezePeak,
+    [DUNGEON_MAGMA_CAVERN] = sUnkFloorData_MagmaCavern,
+    [DUNGEON_MAGMA_CAVERN_PIT] = sUnkFloorData_MagmaCavernPit,
+    [DUNGEON_SKY_TOWER] = sUnkFloorData_SkyTower,
+    [DUNGEON_SKY_TOWER_SUMMIT] = sUnkFloorData_SkyTowerSummit,
+    [DUNGEON_STORMY_SEA] = sUnkFloorData_StormySea,
+    [DUNGEON_SILVER_TRENCH] = sUnkFloorData_SilverTrench,
+    [DUNGEON_METEOR_CAVE] = sUnkFloorData_MeteorCave,
+    [DUNGEON_MT_FREEZE_PEAK_2] = sUnkFloorData_MtFreezePeak_2,
+    [DUNGEON_WESTERN_CAVE] = sUnkFloorData_WesternCave,
+    [DUNGEON_BOSS_3] = sUnkFloorData_Boss_3,
+    [DUNGEON_BOSS_4] = sUnkFloorData_Boss_4,
+    [DUNGEON_WISH_CAVE] = sUnkFloorData_WishCave,
+    [DUNGEON_BURIED_RELIC] = sUnkFloorData_BuriedRelic,
+    [DUNGEON_PITFALL_VALLEY] = sUnkFloorData_PitfallValley,
+    [DUNGEON_NORTHERN_RANGE] = sUnkFloorData_NorthernRange,
+    [DUNGEON_BOSS_9] = sUnkFloorData_Boss_9,
+    [DUNGEON_DESERT_REGION] = sUnkFloorData_DesertRegion,
+    [DUNGEON_SOUTHERN_CAVERN] = sUnkFloorData_SouthernCavern,
+    [DUNGEON_WYVERN_HILL] = sUnkFloorData_WyvernHill,
+    [DUNGEON_FIERY_FIELD] = sUnkFloorData_FieryField,
+    [DUNGEON_NORTHWIND_FIELD] = sUnkFloorData_NorthwindField,
+    [DUNGEON_SOLAR_CAVE] = sUnkFloorData_SolarCave,
+    [DUNGEON_LIGHTNING_FIELD] = sUnkFloorData_LightningField,
+    [DUNGEON_DARKNIGHT_RELIC] = sUnkFloorData_DarknightRelic,
+    [DUNGEON_WONDROUS_SEA] = sUnkFloorData_WondrousSea,
+    [DUNGEON_MURKY_CAVE] = sUnkFloorData_MurkyCave,
+    [DUNGEON_GRAND_SEA] = sUnkFloorData_GrandSea,
+    [DUNGEON_UPROAR_FOREST] = sUnkFloorData_UproarForest,
+    [DUNGEON_ODDITY_CAVE] = sUnkFloorData_OddityCave,
+    [DUNGEON_REMAINS_ISLAND] = sUnkFloorData_RemainsIsland,
+    [DUNGEON_MARVELOUS_SEA] = sUnkFloorData_MarvelousSea,
+    [DUNGEON_FANTASY_STRAIT] = sUnkFloorData_FantasyStrait,
+    [DUNGEON_ROCK_PATH] = sUnkFloorData_RockPath,
+    [DUNGEON_SNOW_PATH] = sUnkFloorData_SnowPath,
+    [DUNGEON_AUTOPILOT] = sUnkFloorData_Autopilot,
+    [DUNGEON_D50] = sUnkFloorData_D50,
+    [DUNGEON_D51] = sUnkFloorData_D51,
+    [DUNGEON_NORMAL_MAZE] = sUnkFloorData_NormalMaze,
+    [DUNGEON_HOWLING_FOREST] = sUnkFloorData_HowlingForest,
+    [DUNGEON_D54] = sUnkFloorData_D54,
+    [DUNGEON_POISON_MAZE] = sUnkFloorData_PoisonMaze,
+    [DUNGEON_WATERFALL_POND] = sUnkFloorData_WaterfallPond,
+    [DUNGEON_UNKNOWN_RELIC] = sUnkFloorData_UnknownRelic,
+    [DUNGEON_JOYOUS_TOWER] = sUnkFloorData_JoyousTower,
+    [DUNGEON_FAR_OFF_SEA] = sUnkFloorData_FarOffSea,
+    [DUNGEON_MT_FARAWAY] = sUnkFloorData_MtFaraway,
+    [DUNGEON_D61] = sUnkFloorData_D61,
+    [DUNGEON_PURITY_FOREST] = sUnkFloorData_PurityForest,
+    [DUNGEON_OUT_ON_RESCUE] = sUnkFloorData_OutOnRescue,
 };
 
 const u8 *GetDungeonName1(u8 dungeon)
@@ -630,7 +762,7 @@ static void sub_8090888(u8 *param_1, u8 *param_2)
 u32 sub_80908D8(DungeonLocation *dungeon)
 {
     if (dungeon->id < DUNGEON_OUT_ON_RESCUE && dungeon->floor < sDungeonFloorCount[dungeon->id]) {
-        return gUnknown_8108084[dungeon->id][dungeon->floor];
+        return sUnkDungeonFloorData[dungeon->id][dungeon->floor];
     }
     else {
         return 1;
