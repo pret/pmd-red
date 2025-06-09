@@ -13,6 +13,7 @@
 #include "text_2.h"
 #include "text_util.h"
 #include "strings.h"
+#include "dungeon_info.h"
 
 extern const s32 gUnknown_810A3F0[100];
 extern const s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
@@ -31,7 +32,6 @@ extern const u8 gUnknown_8109778[];
 extern const u8 gUnknown_810977C[];
 extern const u8 gUnknown_8109784[];
 extern const u8 gUnknown_810978C[];
-extern const u16* gUnknown_8108E58[];
 
 EWRAM_DATA OpenedFile *gItemParametersFile = {NULL};
 EWRAM_DATA ItemDataEntry *gItemParametersData = {NULL}; // NDS=0213BEF0
@@ -1013,7 +1013,7 @@ void ChooseKecleonShopInventory(u8 index)
         s32 rand_1 = RandInt(9999);
         s32 rand_2 = RandInt(9999);
 
-        AddKecleonShopItem(sub_8091E94(data[index], rand_1, rand_2));
+        AddKecleonShopItem(GetRandomItemForSet(data[index], rand_1, rand_2));
     }
 
     SortKecleonShopInventory();
@@ -1129,10 +1129,10 @@ void ChooseKecleonWareInventory(u8 index)
         InitKecleonWareItem(i);
 
     for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
-        s32 rand_1 = RandInt(9999);
-        s32 rand_2 = RandInt(9999);
+        s32 rand_1 = RandInt(ITEM_SETS_RANDOM_CAP);
+        s32 rand_2 = RandInt(ITEM_SETS_RANDOM_CAP);
 
-        AddKecleonWareItem(sub_8091E94(data[index], rand_1, rand_2));
+        AddKecleonWareItem(GetRandomItemForSet(data[index], rand_1, rand_2));
     }
 
     SortKecleonWareInventory();
@@ -1256,19 +1256,19 @@ u8 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1)
 }
 
 // arm9.bin::0205F0C8
-u8 sub_8091E94(s32 a0, s32 a1, s32 a2)
+u8 GetRandomItemForSet(s32 setId, s32 rndValCategory, s32 rndValItem)
 {
     s32 id, i, arrId;
     u8 foundCategory, ret;
     struct ItemSpawns data;
     s16 rawArray[NUM_ITEM_CATEGORIES + NUMBER_OF_ITEM_IDS];
-    const u16 *ptr = gUnknown_8108E58[a0 - 1];
+    const u16 *ptr = gRandomItemsSets[setId - 1];
 
     id = 0;
     arrId = 0;
     while (id < NUM_ITEM_CATEGORIES + NUMBER_OF_ITEM_IDS) {
-        if (ptr[arrId] >= 30000) {
-            s32 a = ptr[arrId] - 30000;
+        if (ptr[arrId] >= ITEM_SETS_SKIP_NUMBER) {
+            s32 a = ptr[arrId] - ITEM_SETS_SKIP_NUMBER;
 
             while (a != 0) {
                 rawArray[id++] = 0;
@@ -1294,7 +1294,7 @@ u8 sub_8091E94(s32 a0, s32 a1, s32 a2)
 
     foundCategory = NUM_ITEM_CATEGORIES;
     for (i = 0; i < NUM_ITEM_CATEGORIES; i++) {
-        if (data.categoryValues[i] != 0 && data.categoryValues[i] >= a1) {
+        if (data.categoryValues[i] != 0 && data.categoryValues[i] >= rndValCategory) {
             foundCategory = i;
             break;
         }
@@ -1303,7 +1303,7 @@ u8 sub_8091E94(s32 a0, s32 a1, s32 a2)
     ret = ITEM_PLAIN_SEED;
     if (foundCategory != NUM_ITEM_CATEGORIES) {
         for (i = 0; i < NUMBER_OF_ITEM_IDS; i++) {
-            if (data.itemValues[i] != 0 && GetItemCategory(i) == foundCategory && data.itemValues[i] >= a2) {
+            if (data.itemValues[i] != 0 && GetItemCategory(i) == foundCategory && data.itemValues[i] >= rndValItem) {
                 ret = i;
                 break;
             }

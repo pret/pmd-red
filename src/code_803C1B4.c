@@ -123,11 +123,11 @@ void sub_803C37C(DungeonLocation *location, u8 r1, u8 *itemReward)
     u8 r4;
 
     r7 = sub_803C1B4(location, r1);
-    sub_8090910(location, r7);
+    GetRandomItemForValidDungeonLoc(location, r7);
 
     do {
         flag = FALSE;
-        r4 = sub_8090910(location, r7);
+        r4 = GetRandomItemForValidDungeonLoc(location, r7);
         if(r4 == ITEM_WEAVILE_FIG)
             flag = GetScriptVarArrayValue(0, EVENT_B01P01, 1) ? TRUE : FALSE;
         if(r4 == ITEM_MIME_JR_FIG)

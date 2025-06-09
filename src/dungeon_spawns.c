@@ -62,14 +62,14 @@ void SetFloorItemMonsterSpawns(void)
         i++;
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < ITEM_SPAWN_TYPES_COUNT; i++)
     {
         u16 *src = ((struct DungeonMapParam2 *)(file->data))->itemSpawns[strPtr->unk6[i]];
         s32 arrId = 0;
 
         for (j = 0; j < NUM_ITEM_CATEGORIES + NUMBER_OF_ITEM_IDS; ) {
-            if (src[arrId] >= 30000) {
-                for (k = src[arrId] - 30000; k != 0; k--) {
+            if (src[arrId] >= ITEM_SETS_SKIP_NUMBER) {
+                for (k = src[arrId] - ITEM_SETS_SKIP_NUMBER; k != 0; k--) {
                     spArray[j++] = 0;
                 }
             }
@@ -109,7 +109,7 @@ u8 GetRandomFloorTrap(void)
 u8 GetRandomFloorItem(s32 spawnType)
 {
     s32 i;
-    s32 rand = DungeonRandInt(10000);
+    s32 rand = DungeonRandInt(ITEM_SETS_RANDOM_CAP + 1);
     u8 category = NUM_ITEM_CATEGORIES;
     for (i = 0; i < NUM_ITEM_CATEGORIES; i++) {
         if (gDungeon->itemSpawns[spawnType].categoryValues[i] != 0 && gDungeon->itemSpawns[spawnType].categoryValues[i] >= rand) {
@@ -120,7 +120,7 @@ u8 GetRandomFloorItem(s32 spawnType)
     if (category == NUM_ITEM_CATEGORIES)
         return ITEM_POKE;
 
-    rand = DungeonRandInt(10000);
+    rand = DungeonRandInt(ITEM_SETS_RANDOM_CAP + 1);
     for (i = 0; i < NUMBER_OF_ITEM_IDS; i++) {
         if (gDungeon->itemSpawns[spawnType].itemValues[i] != 0 && GetItemCategory(i) == category && gDungeon->itemSpawns[spawnType].itemValues[i] >= rand) {
             return i;
