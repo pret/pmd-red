@@ -5,7 +5,7 @@
 #include "code_803E724.h"
 #include "dungeon_action.h"
 #include "code_8097DD0.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_8083AB0.h"
 #include "dungeon_action.h"
 #include "dungeon_leader.h"
@@ -27,6 +27,7 @@
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
+#include "run_dungeon.h"
 
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);

@@ -11,7 +11,7 @@
 #include "decompress_at.h"
 #include "decompress_sir.h"
 #include "def_filearchives.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "friend_area.h"
 #include "game_options.h"
 #include "input.h"

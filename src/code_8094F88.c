@@ -3,7 +3,7 @@
 #include "random_mersenne_twister.h"
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "memory.h"
 #include "moves.h"
 #include "pokemon.h"

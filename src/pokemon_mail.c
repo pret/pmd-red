@@ -4,7 +4,7 @@
 #include "code_800D090.h"
 #include "code_803C1D0.h"
 #include "code_803D0D8.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "items.h"

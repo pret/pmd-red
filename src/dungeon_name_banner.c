@@ -9,7 +9,7 @@
 #include "dungeon_vram.h"
 #include "cpu.h"
 #include "def_filearchives.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "file_system.h"
 #include "pokemon.h"
 #include "pokemon_3.h"

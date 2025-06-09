@@ -10,7 +10,7 @@
 #include "dungeon_map_access.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "pokemon_3.h"
 #include "code_805D8C8.h"
 #include "structs/str_806B7F8.h"

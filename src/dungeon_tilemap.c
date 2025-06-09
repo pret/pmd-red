@@ -13,7 +13,7 @@
 #include "dungeon_vram.h"
 #include "code_803E724.h"
 #include "code_806CD90.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_items.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
@@ -31,6 +31,7 @@
 #include "code_800C9CC.h"
 #include "code_80118A4.h"
 #include "dungeon_strings.h"
+#include "run_dungeon.h"
 
 extern s32 gDungeonFramesCounter;
 

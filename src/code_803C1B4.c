@@ -1,6 +1,6 @@
 #include "global.h"
 #include "structs/str_wonder_mail.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "pokemon.h"
 
@@ -11,7 +11,7 @@ void sub_803C37C(DungeonLocation *, u8, u8 *);
 s32 sub_803C1B4(DungeonLocation *dungeon, u8 missionType)
 {
     s32 temp;
-    temp = sub_80908D8(dungeon);
+    temp = GetDungeonLocMissionDifficulty(dungeon);
     if(missionType == 2)
     {
         temp += 2;

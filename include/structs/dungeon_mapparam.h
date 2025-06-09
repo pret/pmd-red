@@ -1,7 +1,7 @@
 #ifndef GUARD_DUNGEON_MAPPARAM_H
 #define GUARD_DUNGEON_MAPPARAM_H
 
-#include "dungeon.h"
+#include "structs/str_dungeon.h"
 #include "structs/str_spawn_pokemon_data.h"
 
 struct DungeonMapParam1

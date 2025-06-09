@@ -9,7 +9,7 @@
 #include "items.h"
 #include "text_util.h"
 #include "friend_area.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_data.h"
 #include "constants/ability.h"
 #include "constants/type.h"

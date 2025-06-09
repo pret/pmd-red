@@ -6,7 +6,7 @@
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"
 #include "constants/wonder_mail.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "random.h"
 #include "friend_area.h"
 #include "items.h"

@@ -14,7 +14,7 @@
 #include "code_8097670.h"
 #include "code_80A26CC.h"
 #include "debug.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"

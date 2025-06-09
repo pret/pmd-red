@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "unk_dungeon_load.h"
 #include "memory.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "decompress_at.h"
 #include "def_filearchives.h"
 #include "file_system.h"

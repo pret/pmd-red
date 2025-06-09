@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "dungeon_message_log.h"
 #include "dungeon_message.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
@@ -12,6 +12,7 @@
 #include "dungeon_music.h"
 #include "sprite.h"
 #include "code_803E724.h"
+#include "run_dungeon.h"
 
 #define MESSAGE_LOG_ROW_COUNT 8 // How many log messages are shown
 

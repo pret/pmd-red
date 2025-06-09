@@ -22,7 +22,7 @@
 #include "code_8099360.h"
 #include "cpu.h"
 #include "dungeon_8083AB0.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_ai.h"
 #include "dungeon_config.h"
 #include "dungeon_engine.h"
@@ -53,7 +53,7 @@
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
-EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
+static EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
 
 extern u8 gUnknown_203B40C;
 
@@ -129,8 +129,6 @@ extern Entity *gLeaderPointer;
 void EnforceMaxItemsAndMoney(void);
 static void sub_8043FD0(void);
 void sub_806B404(void);
-u8 GetFloorType(void);
-u8 GetFloorType(void);
 
 extern OpenedFile *gDungeonNameBannerPalette;
 

@@ -9,7 +9,7 @@
 #include "graphics_memory.h"
 #include "code_800E9E4.h"
 #include "def_filearchives.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_generation.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"

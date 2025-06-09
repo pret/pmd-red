@@ -9,7 +9,7 @@
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_8097670.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_items.h"
 #include "dungeon_logic.h"
 #include "dungeon_random.h"

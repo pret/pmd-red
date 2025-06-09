@@ -6,7 +6,7 @@
 #include "code_80118A4.h"
 #include "code_80972F4.h"
 #include "code_80A26CC.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "input.h"
 #include "makuhita_dojo2.h"
 #include "memory.h"

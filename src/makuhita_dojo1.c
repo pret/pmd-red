@@ -5,7 +5,7 @@
 #include "code_801B60C.h"
 #include "code_80A26CC.h"
 #include "common_strings.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "input.h"
 #include "makuhita_dojo1.h"
 #include "makuhita_dojo2.h"

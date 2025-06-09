@@ -9,7 +9,7 @@
 #include "code_800E9E4.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
 #include "dungeon_music.h"

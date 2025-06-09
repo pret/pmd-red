@@ -3,7 +3,7 @@
 #include "code_800D090.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_menu_recruitment.h"
 #include "dungeon_message.h"
 #include "dungeon_message_log.h"

@@ -8,7 +8,7 @@
 #include "code_8094F88.h"
 #include "code_8097670.h"
 #include "def_filearchives.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "file_system.h"
 #include "ground_main.h"

@@ -1,12 +1,13 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_8083AB0.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_util.h"
 #include "text_util.h"
 #include "dungeon_logic.h"
 #include "dungeon_data.h"
 #include "dungeon_strings.h"
+#include "run_dungeon.h"
 
 void sub_8083AB0(s16 param_0, Entity *target, Entity *entity)
 {

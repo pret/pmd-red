@@ -7,7 +7,7 @@
 #include "constants/type.h"
 #include "structs/sprite_oam.h"
 #include "structs/str_pokemon.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "friend_area.h"
 #include "luminous_cave.h"
 #include "moves.h"

@@ -4,7 +4,7 @@
 #include "code_803E724.h"
 #include "dungeon_action.h"
 #include "code_8097DD0.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_action.h"
 #include "dungeon_generation.h"
 #include "dungeon_map_access.h"
