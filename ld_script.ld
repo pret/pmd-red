@@ -677,6 +677,7 @@ SECTIONS {
         src/pokemon_evolution.o(.rodata);
         src/pokemon_summary_window.o(.rodata);
         src/dungeon_info.o(.rodata);
+        src/items.o(.rodata);
         data/data_81076E4.o(.rodata);
         src/game_options.o(.rodata);
         src/random_mersenne_twister.o(.rodata);
