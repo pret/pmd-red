@@ -4,6 +4,7 @@
 #include "structs/str_dungeon_location.h"
 
 extern const u16 *const gRandomItemsSets[];
+extern const u8 gUnknown_8108EC0[];
 
 s32 GetDungeonFloorCount(u8 dungeon);
 s32 GetDungeonStartingFloor(u8 dungeon);

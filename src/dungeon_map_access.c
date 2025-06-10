@@ -11,13 +11,12 @@
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
 #include "dungeon_logic.h"
+#include "dungeon_info.h"
 #include "dungeon_util.h"
 #include "game_options.h"
 #include "random.h"
 #include "text_1.h"
 #include "code_806CD90.h"
-
-extern u8 gUnknown_8108EC0[];
 
 extern void sub_8042A14(DungeonPos *);
 

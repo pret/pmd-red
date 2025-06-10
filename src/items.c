@@ -21,7 +21,6 @@ extern const char gItemParaFileName[];
 extern const char gUnknown_8109794[];
 extern const char gUnknown_81097A4[];
 extern s32 gPowersOfTen[];
-extern u8 gHighDigits[];
 extern u16 gGummiStatBoostLUT[];
 extern u32 gUnknown_81097E8[4];  // some sort of lookup table (16, 18, 20, 22)
 extern u32 gUnknown_81097F8[4];  // some sort of lookup table (17, 19, 21, 23)
@@ -38,8 +37,8 @@ EWRAM_DATA ItemDataEntry *gItemParametersData = {NULL}; // NDS=0213BEF0
 EWRAM_DATA TeamInventory gTeamInventory = {0}; // NDS=0213BEF8
 EWRAM_INIT TeamInventory *gTeamInventoryRef = {NULL}; // NDS=020EAF98
 
-extern void SortKecleonShopInventory();
-bool8 AddKecleonWareItem(u8);
+static void SortKecleonShopInventory(void);
+static bool8 AddKecleonWareItem(u8 itemIndex);
 
 static void sub_8090F58(u8 *, u8 *, Item *, const unkStruct_8090F58 *);
 
@@ -407,6 +406,8 @@ static void sub_8090F58(u8* a1, u8 *a2, Item *slot, const struct unkStruct_8090F
   }
 }
 
+extern u8 gHighDigits[][2];
+
 // arm9.bin::020606E0
 s32 WriteHighDecimal(s32 a1, u8 *strbuf, u8 a3)
 {
@@ -429,13 +430,13 @@ s32 WriteHighDecimal(s32 a1, u8 *strbuf, u8 a3)
 
     if (div) {
         cond = 1;
-        *strbuf++ = gHighDigits[2 * div];
-        *strbuf++ = (gHighDigits + 1)[2 * div];  // weird staggered arrays...
+        *strbuf++ = gHighDigits[div][0];
+        *strbuf++ = gHighDigits[div][1];
         count++;
     }
     else if (cond) {
-        *strbuf++ = gHighDigits[0];
-        *strbuf++ = (gHighDigits + 1)[0];  // weird staggered arrays...
+        *strbuf++ = gHighDigits[0][0];
+        *strbuf++ = gHighDigits[0][1];
         count++;
     }
     else if (a3) {
@@ -443,15 +444,15 @@ s32 WriteHighDecimal(s32 a1, u8 *strbuf, u8 a3)
     }
   }
 
-  *strbuf++ = gHighDigits[2 * a1];
-  *strbuf   = (gHighDigits + 1)[2 * a1];
+  *strbuf++ = gHighDigits[a1][0];
+  *strbuf   = gHighDigits[a1][1];
   count += 1;
   strbuf[1] = 0;  // null termination
   return count;
 }
 
 // arm9.bin::02060614
-void FillInventoryGaps()
+void FillInventoryGaps(void)
 {
   // fill inventory gaps
   s32 slot_checking = 0;
@@ -978,7 +979,7 @@ void FillKecleonShopGaps(void)
 }
 
 // arm9.bin::0205F94C
-void SortKecleonShopInventory(void)
+static void SortKecleonShopInventory(void)
 {
     s32 i;
 
@@ -1139,7 +1140,7 @@ void ChooseKecleonWareInventory(u8 index)
 }
 
 // arm9.bin::0205F590
-bool8 AddKecleonWareItem(u8 itemIndex)
+static bool8 AddKecleonWareItem(u8 itemIndex)
 {
     BulkItem held;
     s32 i;

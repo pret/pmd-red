@@ -14,16 +14,8 @@
 #include "strings.h"
 #include "dungeon_data.h"
 
-extern const char gUnknown_8108F10[];
-extern const char gUnknown_8108F18[];
-extern const char gUnknown_8108F2C[];
-extern u8 gUnknown_8108F40[];
-extern u16 gUnknown_8108F42[];
-extern u8 gUnknown_8108F4A[4];
-extern u8 gUnknown_8108F50[];
-
-static void sub_8090888(u8 *param_1, u8 *param_2);
-static bool8 sub_8090820(u16 moveID);
+static void AppendWithNewLines(u8 *dst, const u8 *src);
+static bool8 TeamMonWithMove(u16 moveID);
 
 static const u8 sDungeonFloorCount[] = {
     [DUNGEON_TINY_WOODS]                = 4,
@@ -2382,6 +2374,16 @@ const u16 *const gRandomItemsSets[] = {
     [RANDOM_ITEMS_SET_26 - 1] = sRandomItemsSet26,
 };
 
+// Values are used for file reading(probably related to dungeon gfx), indexed by gDungeon->tileset
+const u8 gUnknown_8108EC0[] = {
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+    16, 17, 18, 19, 20, 21, 16, 23, 24, 25, 20, 23, 28,
+    29, 30, 31, 32, 33, 28, 35, 36, 37, 30, 39, 40, 41,
+    42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+    55, 56, 45, 45, 59, 60, 48, 62, 63, 64, 65, 66, 67,
+    68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79
+};
+
 const u8 *GetDungeonName1(u8 dungeon)
 {
     return gDungeonNames[dungeon].name1;
@@ -2475,17 +2477,16 @@ void GeneralizeMazeDungeonLoc(DungeonLocation *dst, const DungeonLocation *src)
 
 void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation)
 {
-    sprintfStatic(buffer, gUnknown_8108F10, gDungeonNames[dungeonLocation->id].name1); // {color YELLOW_D}%s{reset} (normal floor print (no B)
+    sprintfStatic(buffer, _("{color YELLOW_D}%s{reset}"), gDungeonNames[dungeonLocation->id].name1);
 }
 
 void PrintDungeonLocationtoBuffer(u8 *buffer, DungeonLocation *dungeonLocation)
 {
-    if(gDungeons[dungeonLocation->id].stairDirectionUp){
-        sprintfStatic(buffer, gUnknown_8108F18, gDungeonNames[dungeonLocation->id].name1, dungeonLocation->floor); //_F
+    if (gDungeons[dungeonLocation->id].stairDirectionUp){
+        sprintfStatic(buffer, _("{color YELLOW_D}%s{reset}　{color CYAN}%d{reset}F"), gDungeonNames[dungeonLocation->id].name1, dungeonLocation->floor); //_F
     }
-    else
-    {
-        sprintfStatic(buffer, gUnknown_8108F2C, gDungeonNames[dungeonLocation->id].name1, dungeonLocation->floor); // B _F
+    else {
+        sprintfStatic(buffer, _("{color YELLOW_D}%s{reset}　B{color CYAN}%d{reset}F"), gDungeonNames[dungeonLocation->id].name1, dungeonLocation->floor); // B _F
     }
 }
 
@@ -2542,12 +2543,12 @@ static inline void AddNewLine(const u8 *str, u8 *buffer, u8 *newLine)
 }
 
 // I think this checks if the dungeon HM requirement is met
-u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_)
+u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, bool32 param_5_)
 {
     s32 maxPartyMembers, i;
 
     s32 speciesId = (s16) speciesId_;
-    bool32 param_4 = (bool8) (param_4_);
+    bool32 requireHm = (bool8) (requireHm_);
     bool32 param_5 = (bool8) (param_5_);
 
     s32 numInvSlots = GetNumberOfFilledInventorySlots();
@@ -2561,7 +2562,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
     newLine[0] = '\n';
     newLine[1] = 0;
 
-    strcpy(buffer,gUnknown_8108F40);
+    InlineStrcpy(buffer,""); // Empty string
     sp_0xf0 = 0;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
@@ -2575,7 +2576,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
     }
 
     maxPartyMembers = gDungeons[dungeonIndex].maxPartyMembers;
-    if (!param_4 && maxPartyMembers > 3) {
+    if (!requireHm && maxPartyMembers > 3) {
         maxPartyMembers = 3;
     }
     if (counter > maxPartyMembers) {
@@ -2586,7 +2587,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
             gFormatArgs[0] = counter - maxPartyMembers;
             AddNewLine(gText_TooManyMembersToEnterDungeon,text,newLine);
         }
-        sub_8090888(buffer,text);
+        AppendWithNewLines(buffer,text);
         r8 = TRUE;
     }
 
@@ -2594,7 +2595,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
         gFormatArgs[0] = gDungeons[dungeonIndex].maxItemsAllowed;
         gFormatArgs[1] = numInvSlots - gDungeons[dungeonIndex].maxItemsAllowed;
         AddNewLine((!r8) ? gText_OnlyXItemsMayBeBroughtIntoDungeon : gText_AlsoOnlyXItemsMayBeBroughtIntoDungeon, text, newLine);
-        sub_8090888(buffer,text);
+        AppendWithNewLines(buffer,text);
         r8 = TRUE;
     }
 
@@ -2604,7 +2605,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
         CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[0],speciesId);
         if (counter > 3) {
             AddNewLine((!r8) ? gText_ClientCouldNotJoinTooManyMembers : gText_AlsoClientCouldNotJoinTooManyMembers, text,newLine);
-            sub_8090888(buffer,text);
+            AppendWithNewLines(buffer,text);
             r8 = TRUE;
         }
         bodySize = GetBodySize(speciesId);
@@ -2617,21 +2618,18 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
         }
         if (bodySize > 6) {
             AddNewLine((!r8) ? gText_ClientCouldNotJoinNoSpace : gText_AlsoClientCouldNotJoinNoSpace, text,newLine);
-            sub_8090888(buffer,text);
+            AppendWithNewLines(buffer,text);
             r8 = TRUE;
         }
     }
-    if (param_4) {
+
+    if (requireHm) {
         s32 i;
-        //u16 local_4c[4] = {0x99, 0x9C, 0x9b, 0xdb};
-        //u8 local_44[4] = {0xe1, 0xe7, 0xe6, 0xe2};
-        u16 local_4c[4];
-        u8 local_44[4];
-        memcpy(local_4c,gUnknown_8108F42,8);
-        memcpy(local_44,gUnknown_8108F4A,4);
+        u16 movesNeeded[4] = {MOVE_FLY, MOVE_DIVE, MOVE_WATERFALL, MOVE_SURF};
+        u8 hmsNeeded[4] = {ITEM_HM_FLY, ITEM_HM_DIVE, ITEM_HM_WATERFALL, ITEM_HM_SURF};
 
         for (i = 0; i < 4; i++) {
-            if ((((gDungeons[dungeonIndex].HMMask >> (i) & 1) != 0) && !sub_8090820(local_4c[i])) && GetItemPossessionCount(local_44[i]) == 0) {
+            if ((((gDungeons[dungeonIndex].HMMask >> (i) & 1) != 0) && !TeamMonWithMove(movesNeeded[i])) && GetItemPossessionCount(hmsNeeded[i]) == 0) {
                 break;
             }
         }
@@ -2639,10 +2637,10 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
         if (i < 4) {
             struct Move move;
 
-            InitPokemonMove(&move,local_4c[i]);
+            InitPokemonMove(&move,movesNeeded[i]);
             BufferMoveName(gFormatBuffer_Items[0],&move,0);
             AddNewLine((!r8) ? gText_MustHaveMonWithMove : gText_AlsoMustHaveMonWithMove, text,newLine);
-            sub_8090888(buffer,text);
+            AppendWithNewLines(buffer,text);
             r8 = TRUE;
         }
     }
@@ -2666,7 +2664,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
             }
             if (otherSpeciesId == NUM_MONSTERS) {
                 AddNewLine((!r8) ? gText_MustHaveWaterTypeMon : gText_AlsoMustHaveWaterTypeMon, text,newLine);
-                sub_8090888(buffer,text);
+                AppendWithNewLines(buffer,text);
                 r8 = TRUE;
             }
         }
@@ -2717,12 +2715,12 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bo
         return 2;
     }
     else {
-        sprintfStatic(buffer,gUnknown_8108F50);
+        sprintfStatic(buffer,_("No problem."));
         return 0;
     }
 }
 
-static bool8 sub_8090820(u16 moveID)
+static bool8 TeamMonWithMove(u16 moveID)
 {
     s32 speciesId, moveIndex;
 
@@ -2740,30 +2738,30 @@ static bool8 sub_8090820(u16 moveID)
     return FALSE;
 }
 
-static void sub_8090888(u8 *param_1, u8 *param_2)
+static void AppendWithNewLines(u8 *dst, const u8 *src)
 {
-    s32 iVar3 = 0;
+    s32 newLinesCount = 0;
 
-    while (*param_1 != '\0') {
-        switch (*param_1) {
+    while (*dst != '\0') {
+        switch (*dst) {
             case '\n':
-                iVar3++;
+                newLinesCount++;
                 break;
         }
-        param_1++;
+        dst++;
     }
 
-    while (iVar3 % 3) {
-        *param_1++ = '\n';
-        iVar3++;
+    while (newLinesCount % 3) {
+        *dst++ = '\n';
+        newLinesCount++;
     }
 
-    while (*param_2 != '\0') {
-        *param_1++ = *param_2;
-        param_2++;
+    while (*src != '\0') {
+        *dst++ = *src;
+        src++;
     }
 
-    *param_1 = '\0';
+    *dst = '\0';
 }
 
 u32 GetDungeonLocMissionDifficulty(DungeonLocation *dungeon)
