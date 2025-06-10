@@ -19,6 +19,7 @@
 #include "text_1.h"
 #include "text_util.h"
 #include "dungeon_data.h"
+#include "number_util.h"
 
 struct UnusedOffenseStruct
 {
@@ -37,9 +38,7 @@ extern void WritePoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);
 void ReadDungeonLocationBits(DataSerializer*, DungeonLocation*);
 void ReadPoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);
 
-extern void WriteBellyBits(DataSerializer*, FixedPoint *src);
 extern void WriteHiddenPowerBits(DataSerializer*, HiddenPower*);
-extern void ReadBellyBits(DataSerializer*, FixedPoint *dst);
 extern void ReadHiddenPowerBits(DataSerializer*, HiddenPower*);
 s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1);
 

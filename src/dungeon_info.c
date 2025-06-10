@@ -4,7 +4,7 @@
 #include "constants/monster.h"
 #include "constants/type.h"
 #include "code_800D090.h"
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "dungeon_info.h"
 #include "items.h"
 #include "moves.h"

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "rescue_team_info.h"
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "text_util.h"
 #include "event_flag.h"
 

@@ -1,28 +1,8 @@
 #include "global.h"
-#include "code_8092334.h"
+#include "globaldata.h"
+#include "data_serializer.h"
 #include "memory.h"
 #include "items.h"
-
-
-s16 sub_8094828(u16 moveID, u8 id)
-{
-    if(id != 0)
-    {
-        if(GetItemCategory(id) == CATEGORY_ORBS)
-            return 0x223;
-        else
-            return 0x224;
-    }
-    else
-    {
-        return moveID;
-    }
-}
-
-
-
-// New file here
-
 
 // arm9.bin::02064998
 void InitBitReader(DataSerializer *r0, u8 *buffer, s32 bufLen)
@@ -78,7 +58,7 @@ void WriteBits(DataSerializer *r0, void *src, s32 numBits)
     }
 }
 
-UNUSED void sub_80948E4(DataSerializer *seri, void *src, s32 numBytes)
+static UNUSED void sub_80948E4(DataSerializer *seri, void *src, s32 numBytes)
 {
     s32 iVar1;
     u8 *curByte;

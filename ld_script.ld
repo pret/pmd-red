@@ -318,7 +318,7 @@ SECTIONS {
         src/moves.o(.text);
         src/number_util.o(.text);
         src/code_809447C.o(.text);
-        src/code_8092334.o(.text);
+        src/data_serializer.o(.text);
         src/game_options.o(.text);
         src/random_mersenne_twister.o(.text);
         src/play_time.o(.text);
@@ -686,7 +686,9 @@ SECTIONS {
         src/pokemon_abilities.o(.rodata);
         src/friend_area.o(.rodata);
         src/moves.o(.rodata);
-        data/data_81076E4.o(.rodata);
+        src/number_util.o(.rodata);
+        src/code_809447C.o(.rodata);
+        src/data_serializer.o(.rodata);
         src/game_options.o(.rodata);
         src/random_mersenne_twister.o(.rodata);
         src/play_time.o(.rodata);

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_800D090.h"
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"
 #include "friend_area.h"

@@ -1,6 +1,7 @@
 #include "global.h"
+#include "globaldata.h"
 #include "structs/str_dungeon.h"
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "dungeon_info.h"
 #include "items.h"
 #include "moves.h"
@@ -9,20 +10,6 @@
 #include "text_3.h"
 #include "text_util.h"
 #include "strings.h"
-
-// arm9.bin::02064154
-void ReadBellyBits(DataSerializer *r0, FixedPoint *dst)
-{
-    ReadBits(r0, &dst->unk0, 16);
-    ReadBits(r0, &dst->unk2, 16);
-}
-
-// arm9.bin::02064124
-void WriteBellyBits(DataSerializer *r0, FixedPoint *src)
-{
-    WriteBits(r0, &src->unk0, 16);
-    WriteBits(r0, &src->unk2, 16);
-}
 
 static void WriteDeathText(s16 moveID, u8 *buffer)
 {
@@ -140,4 +127,19 @@ void sub_8094558(u32 param_1,u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3)
     }
     PrintFormattedStringOnWindow(4,y,gUnknown_81139CC,param_1,0);
     sub_80073E0(param_1);
+}
+
+s16 sub_8094828(u16 moveID, u8 id)
+{
+    if(id != 0)
+    {
+        if(GetItemCategory(id) == CATEGORY_ORBS)
+            return 0x223;
+        else
+            return 0x224;
+    }
+    else
+    {
+        return moveID;
+    }
 }

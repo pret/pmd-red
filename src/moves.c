@@ -3,7 +3,7 @@
 #include "constants/colors.h"
 #include "constants/monster.h"
 #include "code_800D090.h"
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "code_8097DD0.h"
 #include "def_filearchives.h"
 #include "memory.h"

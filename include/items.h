@@ -1,7 +1,7 @@
 #ifndef GUARD_ITEMS_H
 #define GUARD_ITEMS_H
 
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "structs/str_items.h"
 #include "structs/str_pokemon.h"
 #include "structs/str_status_text.h"

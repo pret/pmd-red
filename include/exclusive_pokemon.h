@@ -1,7 +1,7 @@
 #ifndef GUARD_EXCLUSIVE_POKEMON_H
 #define GUARD_EXCLUSIVE_POKEMON_H
 
-#include "code_8092334.h"
+#include "data_serializer.h"
 
 
 #define NUM_EXCLUSIVE_POKEMON 12

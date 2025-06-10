@@ -46,7 +46,7 @@ void ShowDungeonClearedWindow(void)
     else {
         PlayDungeonFailBGM();
     }
-    sub_8094558(0, gUnknown_80FE6E8,&gDungeon->unk1CE98); // The Last Outing
+    sub_8094558(0, gText_TheLastOuting,&gDungeon->unk1CE98);
     while(1) {
         sub_803E668(0x36);
         UpdateDungeonMusic();

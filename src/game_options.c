@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "graphics_memory.h"
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "game_options.h"
 
 struct unkStruct_8094CB0
