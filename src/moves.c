@@ -58,16 +58,11 @@ void BufferDefaultMoveName(u8 *buffer, Move *move, const MoveBufferStruct *buffe
     BufferMoveName(buffer, &moveCopy, bufferParams);
 }
 
-enum
-{
-    BUFFER_MOVE_JUST_NAME,
-};
-
 void BufferMoveName(u8 *buffer, Move *move, const MoveBufferStruct *bufferParams)
 {
     u32 color;
     u32 basePP;
-    u8 localBuffer[12];
+    u8 ginsengBoostStr[12];
 
     color = GetColorForMove(move);
 
@@ -75,43 +70,43 @@ void BufferMoveName(u8 *buffer, Move *move, const MoveBufferStruct *bufferParams
         bufferParams = &sDefaultMoveBufferParams;
 
     if (move->ginseng != 0)
-        sprintfStatic(localBuffer, _("%+d"), move->ginseng);
+        sprintfStatic(ginsengBoostStr, _("%+d"), move->ginseng);
     else
-        localBuffer[0] = '\0';
+        ginsengBoostStr[0] = '\0';
 
-    if (bufferParams->unk8 != 0)
+    if (bufferParams->redColor)
         color = COLOR_RED;
-    if (bufferParams->unk9 != 0 && DoesMoveCharge(move->id))
+    if (bufferParams->useRedColorForChargingMoves && DoesMoveCharge(move->id))
         color = COLOR_RED;
 
     switch (bufferParams->style) {
         case BUFFER_MOVE_JUST_NAME:
             sprintfStatic(buffer, _("{color}%c%s%s{reset}"),
-                color, sMovesData[move->id].name, localBuffer);
+                color, sMovesData[move->id].name, ginsengBoostStr);
             break;
-        case 1:
+        case BUFFER_MOVE_SET_ICON_POSITIONED_PP_UNUSED:
             basePP = GetMoveBasePP(move);
             sprintfStatic(buffer, _("{color}%c#:%s%s%s#;%c%2d/%2d{reset}"),
                 color, move->moveFlags & MOVE_FLAG_SET ? _("{ICON_SET}") : _("{ICON_BLANK}"),
-                sMovesData[move->id].name, localBuffer, bufferParams->xPPCoord, move->PP, basePP);
+                sMovesData[move->id].name, ginsengBoostStr, bufferParams->xPPCoord, move->PP, basePP);
             break;
-        case 2:
+        case BUFFER_MOVE_SET_ICON_POSITIONED_PP:
             basePP = GetMoveBasePP(move);
             sprintfStatic(buffer, _("{color}%c%s%s%s{MOVE_X_POSITION}%c%2d/%2d{reset}"),
                 color, move->moveFlags & MOVE_FLAG_SET ? _("{ICON_SET}") : _("{ICON_BLANK}"),
-                sMovesData[move->id].name, localBuffer, bufferParams->xPPCoord, move->PP, basePP);
+                sMovesData[move->id].name, ginsengBoostStr, bufferParams->xPPCoord, move->PP, basePP);
             break;
-        case 3:
+        case BUFFER_MOVE_STAR_ICON_POSITIONED_PP_UNUSED:
             basePP = GetMoveBasePP(move);
             sprintfStatic(buffer, _("{color}%c#:%s%s%s#;%c%2d/%2d{reset}"),
                 color, move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI ? _("{STAR_BULLET}") : _("{ICON_BLANK}"),
-                sMovesData[move->id].name, localBuffer, bufferParams->xPPCoord, move->PP, basePP);
+                sMovesData[move->id].name, ginsengBoostStr, bufferParams->xPPCoord, move->PP, basePP);
             break;
-        case 4:
+        case BUFFER_MOVE_STAR_ICON_POSITIONED_PP:
             basePP = GetMoveBasePP(move);
             sprintfStatic(buffer, _("{color}%c%s%s%s{MOVE_X_POSITION}%c%2d/%2d{reset}"),
                 color, move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI ? _("{STAR_BULLET}") : _("{ICON_BLANK}"),
-                sMovesData[move->id].name, localBuffer, bufferParams->xPPCoord, move->PP, basePP);
+                sMovesData[move->id].name, ginsengBoostStr, bufferParams->xPPCoord, move->PP, basePP);
             break;
     }
 }

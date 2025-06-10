@@ -299,21 +299,21 @@ void sub_801F280(bool8 param_1)
         move = &gUnknown_203B270->moves[i];
         if (MoveFlagExists(move)) {
             if (gUnknown_203B270->isTeamLeader) {
-                uStack_30.style = 2;
+                uStack_30.style = BUFFER_MOVE_SET_ICON_POSITIONED_PP;
             }
             else {
-                uStack_30.style = 4;
+                uStack_30.style = BUFFER_MOVE_STAR_ICON_POSITIONED_PP;
             }
 
             if (gUnknown_203B270->unk6) {
-                uStack_30.unk9 = 1;
+                uStack_30.useRedColorForChargingMoves = TRUE;
             }
             else {
-                uStack_30.unk9 = 0;
+                uStack_30.useRedColorForChargingMoves = FALSE;
             }
 
             if (i >= MAX_MON_MOVES) {
-                uStack_30.unk8 = 1;
+                uStack_30.redColor = TRUE;
             }
 
             BufferDefaultMoveName(gFormatBuffer_Items[0],move,&uStack_30);

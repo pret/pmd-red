@@ -1567,18 +1567,18 @@ static void PrintMoveNamesOnBottomWindow(Entity *entity)
         s32 i;
 
         for (i = 0; i < MAX_MON_MOVES; i++) {
-            MoveBufferStruct movStruct = {0, .xPPCoord = X_PP_COORD_DEFAULT, 0, 0};
+            MoveBufferStruct movStruct = {0, .xPPCoord = X_PP_COORD_DEFAULT, .redColor = FALSE, .useRedColorForChargingMoves = FALSE};
             Move *move = &entInfo->moves.moves[i];
 
             if (MoveFlagExists(move)) {
                 if (entInfo->isTeamLeader) {
-                    movStruct.style = 2;
+                    movStruct.style = BUFFER_MOVE_SET_ICON_POSITIONED_PP;
                 }
                 else {
-                    movStruct.style = 4;
+                    movStruct.style = BUFFER_MOVE_STAR_ICON_POSITIONED_PP;
                 }
 
-                movStruct.unk8 = (CanMonsterUseMove(entity, move, TRUE) == FALSE);
+                movStruct.redColor = (CanMonsterUseMove(entity, move, TRUE) == FALSE);
                 BufferMoveName(gFormatBuffer_Items[0], move, &movStruct);
 
                 if (MoveFlagLinkChain(move)) {

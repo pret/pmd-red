@@ -6,6 +6,15 @@
 #include "pokemon.h"
 #include "structs/str_status_text.h"
 
+enum
+{
+    BUFFER_MOVE_JUST_NAME,
+    BUFFER_MOVE_SET_ICON_POSITIONED_PP_UNUSED, // Uses different formatting - unused
+    BUFFER_MOVE_SET_ICON_POSITIONED_PP,
+    BUFFER_MOVE_STAR_ICON_POSITIONED_PP_UNUSED, // Uses different formatting - unused
+    BUFFER_MOVE_STAR_ICON_POSITIONED_PP,
+};
+
 #define X_PP_COORD_DEFAULT 106
 
 // size: 0xC
@@ -13,8 +22,8 @@ typedef struct MoveBufferStruct
 {
     u32 style;
     s32 xPPCoord;
-    u8 unk8;
-    u8 unk9;
+    bool8 redColor;
+    bool8 useRedColorForChargingMoves;
 } MoveBufferStruct;
 
 // size: 0x8

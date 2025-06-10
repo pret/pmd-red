@@ -47,11 +47,11 @@ extern s32 ActionToDungeonSubMenuId(u16 param_1);
 extern s32 gDungeonSubMenuItemsCount;
 extern MenuInputStruct gDungeonMenu;
 
-static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
+static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redColorForChargingMoves, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
 static void AddMovesSubMenuOptions(Entity *entity, bool8 addLinkOptions, bool8 addUseMove);
 static void SetSubMenuOptionAction(ActionContainer *a0, s32 a1, s32 a2);
 static void MenuChosenOptionToAction(ActionContainer *a0, s32 a1);
-static void PrintMoveNamesOnWindow(s32 count, Entity *entity, Move *moves, s32 windowId, u8 a4, s32 a5);
+static void PrintMoveNamesOnWindow(s32 count, Entity *entity, Move *moves, s32 windowId, bool8 redColorForChargingMoves, s32 a5);
 static bool8 IsMoveLinkedAndNotCharging(EntityInfo *entInfo, s32 moveId_);
 static bool8 IsMoveLinked(EntityInfo *entInfo, s32 id);
 static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount);
@@ -413,7 +413,7 @@ bool8 ShowDungeonMovesMenu(Entity * entity, bool8 addLinkOptions, bool8 addUseMo
     return ret;
 }
 
-static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, u8 a2, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7)
+static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redColorForChargingMoves, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7)
 {
     s32 i, movesCount;
     WindowTemplate windowNew = {
@@ -473,13 +473,13 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, u8 a2, Win
         }
     }
 
-    PrintMoveNamesOnWindow(4, entity, entInfo->moves.moves, 0, a2, arg6);
+    PrintMoveNamesOnWindow(4, entity, entInfo->moves.moves, 0, redColorForChargingMoves, arg6);
     sub_80073B8(2);
     PrintFormattedStringOnWindow(4, 0, gUnknown_80FDFE8, 2, '\0');
     sub_80073E0(2);
 }
 
-static void PrintMoveNamesOnWindow(s32 count, Entity *entity, Move *moves, s32 windowId, u8 a4, s32 a5)
+static void PrintMoveNamesOnWindow(s32 count, Entity *entity, Move *moves, s32 windowId, bool8 redColorForChargingMoves, s32 a5)
 {
     s32 i;
     EntityInfo *entInfo = GetEntInfo(entity);
@@ -489,18 +489,18 @@ static void PrintMoveNamesOnWindow(s32 count, Entity *entity, Move *moves, s32 w
     PrintFormattedStringOnWindow((a5 * 8) + 10, 0, gUnknown_80FE978, windowId, '\0');
     for (i = 0; i < count; i++) {
         s32 x, y;
-        MoveBufferStruct movStruct = {0, .xPPCoord = X_PP_COORD_DEFAULT, 0, a4};
+        MoveBufferStruct movStruct = {0, .xPPCoord = X_PP_COORD_DEFAULT, .redColor = FALSE, .useRedColorForChargingMoves = redColorForChargingMoves};
         Move *move = &moves[i];
 
         if (MoveFlagExists(move)) {
             if (entInfo->isTeamLeader) {
-                movStruct.style = 2;
+                movStruct.style = BUFFER_MOVE_SET_ICON_POSITIONED_PP;
             }
             else {
-                movStruct.style = 4;
+                movStruct.style = BUFFER_MOVE_STAR_ICON_POSITIONED_PP;
             }
 
-            movStruct.unk8 = (CanMonsterUseMove(entity, move, TRUE) == FALSE);
+            movStruct.redColor = (CanMonsterUseMove(entity, move, TRUE) == FALSE);
             BufferMoveName(gFormatBuffer_Items[0], move, &movStruct);
             y = GetMenuEntryYCoord(&gDungeonMenu, i);
             if (MoveFlagLinkChain(move)) {
