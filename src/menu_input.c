@@ -196,7 +196,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 windowId)
         do {
             iVar1 = *piVar4;
             piVar4++;
-            chr = ReturnIntFromChar2(iVar1 + 0x30);
+            chr = GetCharId(iVar1 + 0x30);
             iVar3 = GetCharacter(chr);
             total_x += iVar3->width;
             DrawCharOnWindow(x - total_x, y, chr, color, windowId);
@@ -210,7 +210,7 @@ void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 windowId)
 void DrawCharOnWindowWidth12(u32 x, u32 y, u32 chr, u32 color, u32 windowId)
 {
     u32 add_x;
-    u32 chrId = ReturnIntFromChar2(chr);
+    u32 chrId = GetCharId(chr);
     const unkChar *chrInfo = GetCharacter(chrId);
 
     if (chrInfo->width < 12)

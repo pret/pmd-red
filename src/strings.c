@@ -202,7 +202,7 @@ const u8 *const gAbilityNames[NUM_ABILITIES] = {
     [ABILITY_SHIELD_DUST] = _("Shield Dust"),
 };
 
-const u8 *const AbilityDescriptions[NUM_ABILITIES] = {
+const u8 *const gAbilityDescriptions[NUM_ABILITIES] = {
     [ABILITY_UNKNOWN] = _("{color RED}-------"),
     [ABILITY_STENCH] = _("{color RED}Stench{reset}: May terrify an\nattacking foe."),
     [ABILITY_THICK_FAT] = _("{color RED}Thick Fat{reset}: Resistant to\nFire- and Ice-type moves."),

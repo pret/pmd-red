@@ -39,7 +39,6 @@ extern s16 gBlastBurnIQReq;  // 0x14d
 extern s16 gVoltTackleIQReq;  // 0x14d
 extern char* gFormattedStatusNames[];
 
-extern u32 ReturnIntFromChar(u8 r0);
 extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
 
 // arm9.bin::0205C34C
@@ -675,7 +674,7 @@ void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 color
 {
   u8 nameBuffer [20];
 
-  sub_80922B4(nameBuffer, pokemon->name, POKEMON_NAME_LENGTH);
+  StrncpyCustom(nameBuffer, pokemon->name, POKEMON_NAME_LENGTH);
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_CYAN;
   }
@@ -686,7 +685,7 @@ void sub_808D9DC(u8 *buffer, PokemonStruct2 *param_2, s32 colorNum)
 {
   u8 nameBuffer [20];
 
-  sub_80922B4(nameBuffer, param_2->name, POKEMON_NAME_LENGTH);
+  StrncpyCustom(nameBuffer, param_2->name, POKEMON_NAME_LENGTH);
   if (colorNum == COLOR_WHITE) {
     colorNum = COLOR_YELLOW;
   }
@@ -697,13 +696,13 @@ void sub_808DA0C(u8 *buffer, PokemonStruct2 *param_2)
 {
   u8 nameBuffer [20];
 
-  sub_80922B4(nameBuffer, param_2->name, POKEMON_NAME_LENGTH);
+  StrncpyCustom(nameBuffer, param_2->name, POKEMON_NAME_LENGTH);
   sprintfStatic(buffer,"%s",nameBuffer);
 }
 
 void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon)
 {
-  sub_80922B4(buffer, pokemon->name, POKEMON_NAME_LENGTH);
+  StrncpyCustom(buffer, pokemon->name, POKEMON_NAME_LENGTH);
 }
 
 static const u8 gUnknown_8107645[12] = {0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};

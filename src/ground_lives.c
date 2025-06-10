@@ -1380,7 +1380,7 @@ void sub_80A8EC0(u8 *buffer,s32 a1)
     sub_80A7DDC(&sp, &species);
     monStruct = sub_80A8D54(sp);
     if (monStruct != NULL) {
-        sub_80922B4(buffer, monStruct->name, POKEMON_NAME_LENGTH);
+        StrncpyCustom(buffer, monStruct->name, POKEMON_NAME_LENGTH);
     }
     else if (sp == 32) {
         CopyMonsterNameToBuffer(buffer, species);

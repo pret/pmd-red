@@ -866,7 +866,7 @@ static void UpdateLetterWidths(void)
             sNamingScreen->letterWidths[i] = 8;
             return;
         }
-        chrId = ReturnIntFromChar2(sNamingScreen->textPtr[i]);
+        chrId = GetCharId(sNamingScreen->textPtr[i]);
         chrInfo = GetCharacter(chrId);
         sNamingScreen->letterWidths[i] = chrInfo->width;
         total += chrInfo->width;
@@ -879,7 +879,7 @@ s32 GetStrWidth(u8 *buffer, s32 size)
     s32 width = 0;
 
     for (i = 0; i < size && buffer[i] != '\0'; i++) {
-        width += GetCharacter(ReturnIntFromChar2(buffer[i]))->width;
+        width += GetCharacter(GetCharId(buffer[i]))->width;
     }
 
     return width;

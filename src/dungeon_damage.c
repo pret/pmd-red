@@ -2,7 +2,7 @@
 #include "constants/ability.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_logic.h"
-#include "text_util.h"
+#include "pokemon_types.h"
 #include "dungeon_message.h"
 #include "string_format.h"
 #include "type_effectiveness.h"

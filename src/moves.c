@@ -10,7 +10,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
-#include "text_util.h"
+#include "pokemon_types.h"
 #include "strings.h"
 
 static EWRAM_DATA OpenedFile *sWazaParametersFile = { NULL }; // NDS=213C188

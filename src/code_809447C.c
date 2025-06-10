@@ -65,8 +65,8 @@ void sub_8094558(u32 param_1,u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3)
     PrintYellowDungeonNametoBuffer(gFormatBuffer_Monsters[0], &param_3->dungeonLocation);
     PrintFormattedStringOnWindow(4,0x10,gUnknown_8113850,param_1,0); // #+Place: $m0
     y = 0x1A;
-    sub_80922B4(gFormatBuffer_Monsters[0], param_3->buffer1, POKEMON_NAME_LENGTH);
-    sub_80922B4(gFormatBuffer_Monsters[1], param_3->buffer2, POKEMON_NAME_LENGTH);
+    StrncpyCustom(gFormatBuffer_Monsters[0], param_3->buffer1, POKEMON_NAME_LENGTH);
+    StrncpyCustom(gFormatBuffer_Monsters[1], param_3->buffer2, POKEMON_NAME_LENGTH);
     if (sub_8094528(param_3->moveID) != 0) {
         // $m1 was defeated by
         FormatString(gText_Pokemon1WasDefeatedBy,buffer, buffer + sizeof(buffer),0);

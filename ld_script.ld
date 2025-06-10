@@ -312,6 +312,8 @@ SECTIONS {
         src/items.o(.text);
         src/rescue_team_info.o(.text);
         src/text_util.o(.text);
+        src/pokemon_types.o(.text);
+        src/pokemon_abilities.o(.text);
         src/friend_area.o(.text);
         src/moves.o(.text);
         src/number_util.o(.text);
@@ -678,6 +680,10 @@ SECTIONS {
         src/pokemon_summary_window.o(.rodata);
         src/dungeon_info.o(.rodata);
         src/items.o(.rodata);
+        src/rescue_team_info.o(.rodata);
+        src/text_util.o(.rodata);
+        src/pokemon_types.o(.rodata);
+        src/pokemon_abilities.o(.rodata);
         data/data_81076E4.o(.rodata);
         src/game_options.o(.rodata);
         src/random_mersenne_twister.o(.rodata);
@@ -689,9 +695,7 @@ SECTIONS {
         data/data_8109D10.o(.rodata);
         src/dungeon_data.o(.rodata);
         src/exclusive_pokemon.o(.rodata);
-        src/rescue_team_info.o(.rodata);
         src/strings.o(.rodata);
-        src/text_util.o(.rodata);
         data/data_810AE24_2.o(.rodata);
         src/position_util.o(.rodata);
         data/data_8115EB8.o(.rodata);

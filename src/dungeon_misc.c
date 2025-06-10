@@ -34,7 +34,7 @@
 #include "dungeon_config.h"
 #include "game_options.h"
 #include "weather.h"
-#include "text_util.h"
+#include "pokemon_types.h"
 #include "dungeon_random.h"
 #include "position_util.h"
 #include "dungeon_ai_movement.h"
@@ -1233,7 +1233,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
   if ((((EntityIsValid(pokemon)) && (EntityIsValid(target))) && (pokemon != target))
      && (entityInfo = GetEntInfo(target), entityInfo->reflectClassStatus.status == STATUS_CONVERSION2)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
-    uVar2_u32 = sub_8092364(moveType);
+    uVar2_u32 = GetBestResistingType(moveType);
     if (uVar2_u32 != TYPE_NONE) {
       entityInfo->types[0] = uVar2_u32;
       entityInfo->types[1] = 0;

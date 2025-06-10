@@ -38,7 +38,7 @@
 #include "move_orb_actions_4.h"
 #include "weather.h"
 #include "targeting_flags.h"
-#include "text_util.h"
+#include "pokemon_types.h"
 
 extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);

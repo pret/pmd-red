@@ -3280,7 +3280,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 {
                     ptr->name[index] = gUnknown_2039D98[index];
                 }
-                sub_80922B4(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
+                StrncpyCustom(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
                 IncrementAdventureNumJoined();
                 return 0;
             }
@@ -3338,7 +3338,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 {
                     pokemon->name[index] = gUnknown_2039D98[index];
                 }
-                sub_80922B4(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
+                StrncpyCustom(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
                 IncrementAdventureNumJoined();
                 return 0;
 

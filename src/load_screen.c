@@ -300,9 +300,9 @@ void DrawLoadScreenText(void)
   // Draw Player Name
   playerInfo = GetPlayerPokemonStruct();
   if (playerInfo == NULL)
-        sub_80922B4(playerName, gNoNamePlaceholder, POKEMON_NAME_LENGTH);
+        StrncpyCustom(playerName, gNoNamePlaceholder, POKEMON_NAME_LENGTH);
   else
-        sub_80922B4(playerName, playerInfo->name, POKEMON_NAME_LENGTH);
+        StrncpyCustom(playerName, playerInfo->name, POKEMON_NAME_LENGTH);
   sprintfStatic(gLoadScreen->formattedPlayerName,gUnknown_80E7804,playerName);
   PrintStringOnWindow(64,12,gLoadScreen->formattedPlayerName,0,0);
 
@@ -358,7 +358,7 @@ void DrawLoadScreenText(void)
        temp2 =  gUnknown_203B484;
        if(temp2->unk4.speciesNum != MONSTER_NONE) {
             sub_808D930(speciesHelper,temp2->unk4.speciesNum);
-            sub_80922B4(nameHelper,temp2->unk4.name,POKEMON_NAME_LENGTH);
+            StrncpyCustom(nameHelper,temp2->unk4.name,POKEMON_NAME_LENGTH);
             sprintfStatic(gLoadScreen->formattedHelperInfo,gHelperInfoPlaceholder,nameHelper,speciesHelper); // %s (%s)
        }
        else

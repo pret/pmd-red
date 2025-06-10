@@ -12,7 +12,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
-#include "text_util.h"
+#include "pokemon_types.h"
 #include "strings.h"
 #include "dungeon_info.h"
 

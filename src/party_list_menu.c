@@ -780,7 +780,7 @@ void sub_8026E08(u32 r0)
 
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
-    sub_80922B4(gFormatBuffer_Monsters[0], sUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
+    StrncpyCustom(gFormatBuffer_Monsters[0], sUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
     sub_808D930(buffer, sUnknown_203B2B8->pokeStruct->speciesNum);
     sprintfStatic(buffer1, sUnknown_80DD6E0, gFormatBuffer_Monsters[0]);
     x = sub_8008ED0(buffer1);

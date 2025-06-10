@@ -29,7 +29,7 @@ extern const u8 *const gUnknown_810AF50[20];
 extern const u8 *const gAdventureLogText[32];
 extern const u8 *const gRescueTeamRanks[MAX_TEAM_RANKS];
 extern const u8 *const gAbilityNames[NUM_ABILITIES];
-extern const u8 *const AbilityDescriptions[NUM_ABILITIES];
+extern const u8 *const gAbilityDescriptions[NUM_ABILITIES];
 extern const u8 *const gRangeNames[49];
 extern const u8 *const gUnknown_810CF00;
 extern const u8 *const gTextType;

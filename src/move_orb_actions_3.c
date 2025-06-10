@@ -36,7 +36,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
-#include "text_util.h"
+#include "pokemon_types.h"
 #include "trap.h"
 #include "weather.h"
 

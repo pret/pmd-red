@@ -291,7 +291,7 @@ void FriendList_ShowWindow(void)
             ;
         }
 
-        sub_80922B4(nameTxtBuff, pokePtr->name, POKEMON_NAME_LENGTH);
+        StrncpyCustom(nameTxtBuff, pokePtr->name, POKEMON_NAME_LENGTH);
         sub_808D930(txtBuff3, pokePtr->speciesNum);
         sprintfStatic(winTxtBuff, _("{color}%c%s{reset}"), color, nameTxtBuff);
         PrintStringOnWindow(8, GetMenuEntryYCoord(&sFriendList->unk358.s0.input, i), winTxtBuff, sFriendList->unk358.s0.winId, '\0');
@@ -470,7 +470,7 @@ UNUSED static PokemonStruct1 *sub_80243E8(void)
     u8 nameBuffer[20];
     PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[sFriendList->unk1A[(sFriendList->unk358.s0.input.unk1E * sFriendList->unk358.s0.input.unk1C) + sFriendList->unk358.s0.input.menuIndex]];
 
-    sub_80922B4(nameBuffer, pokeStruct->name, POKEMON_NAME_LENGTH);
+    StrncpyCustom(nameBuffer, pokeStruct->name, POKEMON_NAME_LENGTH);
     sprintfStatic(buffer, "%s", nameBuffer);
     return pokeStruct;
 }
