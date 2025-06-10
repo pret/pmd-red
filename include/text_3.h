@@ -4,7 +4,7 @@
 // size: 0x34
 typedef struct UnkDrawStringStruct
 {
-    s16 unk0;
+    s16 x;
     s16 unk2;
     s16 unk4;
     s16 unk6;

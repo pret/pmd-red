@@ -684,6 +684,8 @@ SECTIONS {
         src/text_util.o(.rodata);
         src/pokemon_types.o(.rodata);
         src/pokemon_abilities.o(.rodata);
+        src/friend_area.o(.rodata);
+        src/moves.o(.rodata);
         data/data_81076E4.o(.rodata);
         src/game_options.o(.rodata);
         src/random_mersenne_twister.o(.rodata);

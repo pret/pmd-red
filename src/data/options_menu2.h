@@ -18,7 +18,7 @@ static const WindowTemplate sUnknown_80DC03C = {
 };
 
 ALIGNED(4) static const u8 sGameOptions[] = _("Game Options");
-ALIGNED(4) static const u8 sUnknown_80DC064[] = _("Windows{UNK_MACRO_3D M3D_80}Blue{UNK_MACRO_3D M3D_120}Red{UNK_MACRO_3D M3D_160}Green");
+ALIGNED(4) static const u8 sUnknown_80DC064[] = _("Windows{MOVE_X_POSITION_BY_80}Blue{MOVE_X_POSITION_BY_120}Red{MOVE_X_POSITION_BY_160}Green");
 ALIGNED(4) static const u8 sBlue[] = _("Blue");
 ALIGNED(4) static const u8 sRed[] = _("Red");
 ALIGNED(4) static const u8 sGreen[] = _("Green");

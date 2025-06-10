@@ -418,10 +418,10 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
                 gFormatArgs[1] = monInfo->maxHPStat;
                 y = GetMenuEntryYCoord(&gDungeonMenu, i);
                 if (monInfo->isTeamLeader) {
-                    PrintFormattedStringOnWindow(9, y, _("{STAR_BULLET}{POKEMON_0}{UNK_MACRO_3D}{0x59}{POKEMON_1}"), 0, 0);
+                    PrintFormattedStringOnWindow(9, y, _("{STAR_BULLET}{POKEMON_0}{MOVE_X_POSITION}{0x59}{POKEMON_1}"), 0, 0);
                 }
                 else {
-                    PrintFormattedStringOnWindow(9, y, _("{ICON_BLANK}{POKEMON_0}{UNK_MACRO_3D}{0x59}{POKEMON_1}"), 0, 0);
+                    PrintFormattedStringOnWindow(9, y, _("{ICON_BLANK}{POKEMON_0}{MOVE_X_POSITION}{0x59}{POKEMON_1}"), 0, 0);
                 }
             }
         }
@@ -1567,15 +1567,15 @@ static void PrintMoveNamesOnBottomWindow(Entity *entity)
         s32 i;
 
         for (i = 0; i < MAX_MON_MOVES; i++) {
-            unkStruct_80928C0 movStruct = {0, 106, 0, 0};
+            MoveBufferStruct movStruct = {0, .xPPCoord = X_PP_COORD_DEFAULT, 0, 0};
             Move *move = &entInfo->moves.moves[i];
 
             if (MoveFlagExists(move)) {
                 if (entInfo->isTeamLeader) {
-                    movStruct.unk0 = 2;
+                    movStruct.style = 2;
                 }
                 else {
-                    movStruct.unk0 = 4;
+                    movStruct.style = 4;
                 }
 
                 movStruct.unk8 = (CanMonsterUseMove(entity, move, TRUE) == FALSE);

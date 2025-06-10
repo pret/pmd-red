@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/colors.h"
 #include "constants/monster.h"
 #include "code_800D090.h"
@@ -17,20 +18,6 @@ static EWRAM_DATA OpenedFile *sWazaParametersFile = { NULL }; // NDS=213C188
 static EWRAM_DATA MoveDataEntry *sMovesData = { NULL }; // NDS=213C18C
 static EWRAM_DATA MoveLearnset *sMoveLearnsets = { NULL }; // NDS=0213C184 | 420 entries, aka (MONSTER_DEOXYS_SPEED + 1), aka (MONSTER_MUNCHLAX)
 
-// data_8107010.s
-extern const unkStruct_80928C0 gUnknown_81098C4;
-extern const u8 gUnknown_81098D0[];
-extern const u8 gUnknown_81098DC[];
-extern const u8 gUnknown_81098E0[];
-extern const u8 gUnknown_81098EC[];
-extern const u8 gUnknown_8109908[];
-extern const u8 gUnknown_810990C[];
-extern const u8 gUnknown_8109910[];
-extern const u8 gUnknown_8109928[];
-extern const u8 gUnknown_810992B;
-extern const u8 gUnknown_810992C[];
-extern const u8 gUnknown_8109930[];
-
 static void CopyAndResetMove(Move *, Move *);
 static bool8 sub_80933D8(s32, Move *);
 static s32 unk_FindMarkedMoveInLinkedSequences44(Move [MAX_MON_MOVES][MAX_MON_MOVES]);
@@ -44,16 +31,18 @@ static void unk_LinkedSequencesToMoves8(Move *, Move [8][8]);
 static void unk_LinkedSequencesToMoves8_v2(Move *, Move [8][8]);
 static void unk_MovePrintData(Move *, s32);
 
+static const MoveBufferStruct sDefaultMoveBufferParams = {0};
+
 // arm9.bin::020640A0
 void LoadWazaParameters(void)
 {
-    sWazaParametersFile = OpenFileAndGetFileDataPtr(gUnknown_81098D0, &gSystemFileArchive);
+    sWazaParametersFile = OpenFileAndGetFileDataPtr("wazapara", &gSystemFileArchive);
 
     sMovesData = ((MoveDataFile *)(sWazaParametersFile->data))->moveData;
     sMoveLearnsets = ((MoveDataFile *)(sWazaParametersFile->data))->moveLearnsets;
 }
 
-u8 sub_809287C(Move *move)
+static u8 GetColorForMove(Move *move)
 {
     if (move->moveFlags & MOVE_FLAG_DISABLED)
         return 50;
@@ -62,62 +51,67 @@ u8 sub_809287C(Move *move)
     return 50;
 }
 
-void sub_80928A0(u8 *buffer, Move *move, const unkStruct_80928C0 *a2)
+void BufferDefaultMoveName(u8 *buffer, Move *move, const MoveBufferStruct *bufferParams)
 {
-    Move stack;
-    CopyAndResetMove(&stack, move);
-    BufferMoveName(buffer, &stack, a2);
+    Move moveCopy;
+    CopyAndResetMove(&moveCopy, move);
+    BufferMoveName(buffer, &moveCopy, bufferParams);
 }
 
-void BufferMoveName(u8 *buffer, Move *move, const unkStruct_80928C0 *param_3)
+enum
 {
-    u32 uVar2;
+    BUFFER_MOVE_JUST_NAME,
+};
+
+void BufferMoveName(u8 *buffer, Move *move, const MoveBufferStruct *bufferParams)
+{
+    u32 color;
     u32 basePP;
     u8 localBuffer[12];
 
-    uVar2 = sub_809287C(move);
+    color = GetColorForMove(move);
 
-    if (param_3 == NULL)
-        param_3 = &gUnknown_81098C4;
+    if (bufferParams == NULL)
+        bufferParams = &sDefaultMoveBufferParams;
 
     if (move->ginseng != 0)
-        sprintfStatic(localBuffer, gUnknown_81098DC, move->ginseng); // %+d
+        sprintfStatic(localBuffer, _("%+d"), move->ginseng);
     else
         localBuffer[0] = '\0';
 
-    if (param_3->unk8 != 0)
-        uVar2 = 2;
-    if (param_3->unk9 != 0 && DoesMoveCharge(move->id))
-        uVar2 = 2;
+    if (bufferParams->unk8 != 0)
+        color = COLOR_RED;
+    if (bufferParams->unk9 != 0 && DoesMoveCharge(move->id))
+        color = COLOR_RED;
 
-    switch (param_3->unk0) {
-        case 0:
-            sprintfStatic(buffer, gUnknown_81098E0,
-                uVar2, sMovesData[move->id].name, localBuffer);
+    switch (bufferParams->style) {
+        case BUFFER_MOVE_JUST_NAME:
+            sprintfStatic(buffer, _("{color}%c%s%s{reset}"),
+                color, sMovesData[move->id].name, localBuffer);
             break;
         case 1:
             basePP = GetMoveBasePP(move);
-            sprintfStatic(buffer, gUnknown_81098EC,
-                uVar2, move->moveFlags & MOVE_FLAG_SET ? gUnknown_8109908 : gUnknown_810990C,
-                sMovesData[move->id].name, localBuffer, param_3->unk4, move->PP, basePP);
+            sprintfStatic(buffer, _("{color}%c#:%s%s%s#;%c%2d/%2d{reset}"),
+                color, move->moveFlags & MOVE_FLAG_SET ? _("{ICON_SET}") : _("{ICON_BLANK}"),
+                sMovesData[move->id].name, localBuffer, bufferParams->xPPCoord, move->PP, basePP);
             break;
         case 2:
             basePP = GetMoveBasePP(move);
-            sprintfStatic(buffer, gUnknown_8109910,
-                uVar2, move->moveFlags & MOVE_FLAG_SET ? gUnknown_8109908 : gUnknown_810990C,
-                sMovesData[move->id].name, localBuffer, param_3->unk4, move->PP, basePP);
+            sprintfStatic(buffer, _("{color}%c%s%s%s{MOVE_X_POSITION}%c%2d/%2d{reset}"),
+                color, move->moveFlags & MOVE_FLAG_SET ? _("{ICON_SET}") : _("{ICON_BLANK}"),
+                sMovesData[move->id].name, localBuffer, bufferParams->xPPCoord, move->PP, basePP);
             break;
         case 3:
             basePP = GetMoveBasePP(move);
-            sprintfStatic(buffer, gUnknown_81098EC,
-                uVar2, move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI ? gUnknown_8109928 : gUnknown_810990C,
-                sMovesData[move->id].name, localBuffer, param_3->unk4, move->PP, basePP);
+            sprintfStatic(buffer, _("{color}%c#:%s%s%s#;%c%2d/%2d{reset}"),
+                color, move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI ? _("{STAR_BULLET}") : _("{ICON_BLANK}"),
+                sMovesData[move->id].name, localBuffer, bufferParams->xPPCoord, move->PP, basePP);
             break;
         case 4:
             basePP = GetMoveBasePP(move);
-            sprintfStatic(buffer, gUnknown_8109910,
-                uVar2, move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI ? gUnknown_8109928 : gUnknown_810990C,
-                sMovesData[move->id].name, localBuffer, param_3->unk4, move->PP, basePP);
+            sprintfStatic(buffer, _("{color}%c%s%s%s{MOVE_X_POSITION}%c%2d/%2d{reset}"),
+                color, move->moveFlags & MOVE_FLAG_ENABLED_FOR_AI ? _("{STAR_BULLET}") : _("{ICON_BLANK}"),
+                sMovesData[move->id].name, localBuffer, bufferParams->xPPCoord, move->PP, basePP);
             break;
     }
 }
@@ -162,13 +156,15 @@ u8 GetMoveType(Move *move)
     return sMovesData[move->id].type;
 }
 
+static const u8 gDummyMoves[] = {0};
+
 const u8 *GetLevelUpMoves(s16 species)
 {
     s32 id = SpeciesId(species);
     if (species == MONSTER_DECOY || species == MONSTER_NONE)
-        return &gUnknown_810992B;
+        return gDummyMoves;
     if (id == MONSTER_MUNCHLAX)
-        return &gUnknown_810992B;
+        return gDummyMoves;
 
     return sMoveLearnsets[id].levelUpMoves;
 }
@@ -177,9 +173,9 @@ const u8 *GetHMTMMoves(s16 species)
 {
     s32 id = SpeciesId(species);
     if (species == MONSTER_DECOY || species == MONSTER_NONE)
-        return &gUnknown_810992B;
+        return gDummyMoves;
     if (id == MONSTER_MUNCHLAX)
-        return &gUnknown_810992B;
+        return gDummyMoves;
 
     return sMoveLearnsets[id].HMTMMoves;
 }
@@ -280,7 +276,7 @@ bool8 IsSoundMove(Move *move)
 
 static void sub_8092D54(u8 *buffer, Move *move)
 {
-    sprintfStatic(buffer, gUnknown_810992C, gRangeNames[GetMoveRangeID(move)]);
+    sprintfStatic(buffer, _("%s"), gRangeNames[GetMoveRangeID(move)]);
 }
 
 // this function is the same as the two after the next one
@@ -1378,7 +1374,7 @@ s32 unk_PrintMoveDescription(s32 x, Move *move, s32 a3, STATUSTEXTS(statuses))
 
     sub_80073B8(a3);
     BufferMoveName(gFormatBuffer_Monsters[0], move, 0);
-    PrintFormattedStringOnWindow(8 * x + 16, 0, gUnknown_8109930, a3, 0);
+    PrintFormattedStringOnWindow(8 * x + 16, 0, _("{POKEMON_0}"), a3, 0);
     y = 19;
     moveDescription = sMovesData[move->id].description;
 

@@ -1,11 +1,21 @@
 #ifndef GUARD_MOVES_H
 #define GUARD_MOVES_H
 
-#include "code_809447C.h"
 #include "constants/move.h"
 #include "constants/move_id.h"
 #include "pokemon.h"
 #include "structs/str_status_text.h"
+
+#define X_PP_COORD_DEFAULT 106
+
+// size: 0xC
+typedef struct MoveBufferStruct
+{
+    u32 style;
+    s32 xPPCoord;
+    u8 unk8;
+    u8 unk9;
+} MoveBufferStruct;
 
 // size: 0x8
 typedef struct MoveLearnset
@@ -75,9 +85,8 @@ s32 unk_SetMoveToLastInLinkedSequence8_v2(Move *moves, s32 index);
 bool8 UnlinkMovesAfter(s32 index, Move *moves);
 void UnSetMove(s32 index, Move *moves);
 
-u8 sub_809287C(Move *move);
-void sub_80928A0(u8 *buffer, Move *move, const unkStruct_80928C0 *);
-void BufferMoveName(u8 *buffer, Move *move, const unkStruct_80928C0 *);
+void BufferDefaultMoveName(u8 *buffer, Move *move, const MoveBufferStruct *); // Default = regular PP num and no flags2
+void BufferMoveName(u8 *buffer, Move *move, const MoveBufferStruct *);
 void InitPokemonMoveOrNullObject(Move *move, u16 moveID);
 void sub_8092C84(u8 *buffer, u16 moveID);
 s32 sub_8092DB8(Move *moves, s32 index);

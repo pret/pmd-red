@@ -293,16 +293,16 @@ void sub_801F280(bool8 param_1)
         struct Move *move;
         bool8 linkChain;
         s32 x, y;
-        struct unkStruct_80928C0 uStack_30 = {0};
+        struct MoveBufferStruct uStack_30 = {0};
 
-        uStack_30.unk4 = 0x6a;
+        uStack_30.xPPCoord = X_PP_COORD_DEFAULT;
         move = &gUnknown_203B270->moves[i];
         if (MoveFlagExists(move)) {
             if (gUnknown_203B270->isTeamLeader) {
-                uStack_30.unk0 = 2;
+                uStack_30.style = 2;
             }
             else {
-                uStack_30.unk0 = 4;
+                uStack_30.style = 4;
             }
 
             if (gUnknown_203B270->unk6) {
@@ -316,7 +316,7 @@ void sub_801F280(bool8 param_1)
                 uStack_30.unk8 = 1;
             }
 
-            sub_80928A0(gFormatBuffer_Items[0],move,&uStack_30);
+            BufferDefaultMoveName(gFormatBuffer_Items[0],move,&uStack_30);
             y = GetMenuEntryYCoord(&gUnknown_203B270->input,i);
             linkChain = MoveFlagLinkChain(move);
             x = !linkChain ? 0x8 : 0xD;

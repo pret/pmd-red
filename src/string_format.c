@@ -261,7 +261,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     sUnknown_203B198.id[3] = gUnknown_80D48AC;
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B198, TRUE, TRUE);
-    gUnknown_202E748.unk0 = 4;
+    gUnknown_202E748.x = 4;
     gUnknown_202E748.unk2 = 4;
     gUnknown_202E748.unk8 = 0x70;
     gUnknown_202E748.unkA = (gWindows[0].y * 8) + 34;
@@ -360,7 +360,7 @@ void DrawDialogueBoxString(void)
                      }
 
                      if (*str == '\r' || *str == '\n') {
-                        gUnknown_202E748.unk0 = 4;
+                        gUnknown_202E748.x = 4;
                         gUnknown_202E748.unk2 += 11;
                         str++;
                      }
@@ -368,7 +368,7 @@ void DrawDialogueBoxString(void)
                         u32 chr;
 
                         str = xxx_get_next_char_from_string(str, &chr);
-                        gUnknown_202E748.unk0 += DrawCharOnWindow(gUnknown_202E748.unk0, gUnknown_202E748.unk2, chr, gUnknown_202E748.unk10, 0);
+                        gUnknown_202E748.x += DrawCharOnWindow(gUnknown_202E748.x, gUnknown_202E748.unk2, chr, gUnknown_202E748.unk10, 0);
                         gUnknown_202E748.unk2C = gUnknown_202E78C;
                      }
 
@@ -521,7 +521,7 @@ void DrawDialogueBoxString(void)
                         gUnknown_202E744 = 11;
                     }
                     else if (gUnknown_202E744 == 8) {
-                        gUnknown_202E748.unk0 = 4;
+                        gUnknown_202E748.x = 4;
                         if (gUnknown_202E748.unk2 > 34) {
                             gUnknown_202E748.unk2 = 4;
                             if (sUnknownTextFlags & 0x10) {

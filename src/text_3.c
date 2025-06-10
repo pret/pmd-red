@@ -173,7 +173,7 @@ static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32
     UnkDrawStringStruct sp;
     u32 currChr;
 
-    sp.unk0 = x;
+    sp.x = x;
     sp.unk2 = y;
     sp.unkC = x;
     sp.unk10 = 7;
@@ -193,27 +193,27 @@ static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32
             break;
         }
         else if (currChr == '\r' || currChr == '\n') {
-            sp.unk0 = sp.unkC;
+            sp.x = sp.unkC;
             sp.unk2 += lineSpacing;
         }
         else if (currChr == '\x1D') { // ASCII group separator.
-            sp.unk0 = sp.unkC;
+            sp.x = sp.unkC;
             sp.unk2 += 5;
         }
         else if (currChr == '`') {
-            sp.unk0 += 6;
+            sp.x += 6;
         }
         else if (characterSpacing == 0) {
-            sp.unk0 += DrawCharOnWindowInternal(windows, sp.unk0, sp.unk2, currChr, sp.unk10, windowId);
+            sp.x += DrawCharOnWindowInternal(windows, sp.x, sp.unk2, currChr, sp.unk10, windowId);
         }
         else {
             const unkChar *chrPtr = GetCharacter(currChr);
             if (chrPtr != NULL) {
-                s32 x = sp.unk0;
+                s32 x = sp.x;
                 s32 x2 = gCharacterSpacing + 10;
                 x +=((x2 - chrPtr->width) / 2);
                 DrawCharOnWindowInternal(windows, x, sp.unk2, currChr, sp.unk10, windowId);
-                sp.unk0 += characterSpacing;
+                sp.x += characterSpacing;
             }
         }
     }
@@ -283,7 +283,7 @@ static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringS
                     break;
             }
             else if (str[1] == '=') {
-                sp->unk0 = str[2];
+                sp->x = str[2];
                 str += 3;
                 if (*str == '.')
                     str++;
@@ -295,29 +295,29 @@ static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringS
                     str++;
             }
             else if (str[1] == '>') {
-                str = sub_800915C(&sp->unk0, str + 2);
+                str = sub_800915C(&sp->x, str + 2);
             }
             else if (str[1] == '.') {
-                sp->unk0 += str[2];
+                sp->x += str[2];
                 str += 3;
             }
             else if (str[1] == 'n') {
-                sp->unk0 = sp->unkC;
+                sp->x = sp->unkC;
                 sp->unk2 += 11;
                 str += 2;
             }
             else if (str[1] == ':') {
-                sp->unk4 = sp->unk0;
+                sp->unk4 = sp->x;
                 str += 2;
             }
             else if (str[1] == ';') {
-                sp->unk0 = sp->unk4 + str[2];
+                sp->x = sp->unk4 + str[2];
                 str += 3;
             }
             else if (str[1] == '+') {
                 str += 2;
-                sp->unk0 = (windows[0].width * 8) - sub_8008ED0(str);
-                sp->unk0 /= 2;
+                sp->x = (windows[0].width * 8) - sub_8008ED0(str);
+                sp->x /= 2;
             }
             else if (str[1] == 'C') {
                 sp->unk14 = sp->unk10;
@@ -350,7 +350,7 @@ static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringS
             }
             else if (str[1] == 'W') {
                 str += 2;
-                sp->unk8 = ((windows[0].x * 8) + sp->unk0) - 2;
+                sp->unk8 = ((windows[0].x * 8) + sp->x) - 2;
                 sp->unkA = ((windows[0].y * 8) + sp->unk2) + 3;
                 sp->unk20 = 1;
                 break;

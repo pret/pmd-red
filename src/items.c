@@ -399,7 +399,7 @@ void sub_8090E14(u8* ext_buffer, Item* slot, const struct unkStruct_8090F58* a3)
 
   if (a3) {
     if (a3->unk4 && (slot->flags & ITEM_FLAG_SET)) {
-      sprintfStatic(ext_buffer, _("{ICON_ITEM_SET}%s"), buffer);
+      sprintfStatic(ext_buffer, _("{ICON_SET}%s"), buffer);
       strncpy(buffer, ext_buffer, 80);
     }
     if ((*(u32*)a3 == 1) || (*(u32*)a3 == 3)) {
@@ -455,7 +455,7 @@ static void sub_8090F58(u8* a1, u8 *a2, Item *slot, const struct unkStruct_8090F
 
   if (a4->unk6) {
     WriteHighDecimal(value, buffer, 1);
-    sprintfStatic(a1, _("%s{UNK_MACRO_3D}%c{COLOR GREEN_RAW}%s{RESET}"), a2, a4->unk6, buffer);
+    sprintfStatic(a1, _("%s{MOVE_X_POSITION}%c{COLOR GREEN_RAW}%s{RESET}"), a2, a4->unk6, buffer);
   }
   else {
     WriteHighDecimal(value, buffer, 0);

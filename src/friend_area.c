@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_800D090.h"
 #include "code_8092334.h"
 #include "constants/dungeon.h"
@@ -12,10 +13,6 @@
 EWRAM_DATA static bool8 sBoughtFriendAreas[NUM_FRIEND_AREAS] = {0};
 
 EWRAM_INIT bool8 *gFriendAreas = {NULL};
-
-// data_8107010.s
-extern const u8 sUnknown_81098A4[];
-extern const u8 sUnknown_81098AC[];
 
 void LoadFriendAreas(void)
 {
@@ -110,7 +107,7 @@ s32 GetFriendAreaPrice(u8 index)
 
 void sub_8092558(u8 *buffer, u8 index)
 {
-    sprintfStatic(buffer, sUnknown_81098A4, gFriendAreaNames[index]);
+    sprintfStatic(buffer, _("{color GREEN_RAW}%s{reset}"), gFriendAreaNames[index]);
 }
 
 void WriteFriendAreaName(u8 *buffer, u8 index, bool8 printPrice)
@@ -120,7 +117,7 @@ void WriteFriendAreaName(u8 *buffer, u8 index, bool8 printPrice)
 
     if (printPrice) {
         WriteHighDecimal(gFriendAreaSettings[index].price, priceBuffer, 1);
-        sprintfStatic(buffer, sUnknown_81098AC, gFriendAreaNames[index], 96, priceBuffer);
+        sprintfStatic(buffer, _("%s{MOVE_X_POSITION}%c{COLOR GREEN_RAW}%s{RESET}"), gFriendAreaNames[index], 96, priceBuffer);
     }
     else
         strcpy(buffer, gFriendAreaNames[index]);

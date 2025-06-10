@@ -489,15 +489,15 @@ static void PrintMoveNamesOnWindow(s32 count, Entity *entity, Move *moves, s32 w
     PrintFormattedStringOnWindow((a5 * 8) + 10, 0, gUnknown_80FE978, windowId, '\0');
     for (i = 0; i < count; i++) {
         s32 x, y;
-        unkStruct_80928C0 movStruct = {0, 106, 0, a4};
+        MoveBufferStruct movStruct = {0, .xPPCoord = X_PP_COORD_DEFAULT, 0, a4};
         Move *move = &moves[i];
 
         if (MoveFlagExists(move)) {
             if (entInfo->isTeamLeader) {
-                movStruct.unk0 = 2;
+                movStruct.style = 2;
             }
             else {
-                movStruct.unk0 = 4;
+                movStruct.style = 4;
             }
 
             movStruct.unk8 = (CanMonsterUseMove(entity, move, TRUE) == FALSE);
