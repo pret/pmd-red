@@ -4,7 +4,7 @@
 #include "structs/str_3001B64.h"
 #include "code_800558C.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801D014.h"
 #include "code_8099360.h"
 #include "credits2.h"

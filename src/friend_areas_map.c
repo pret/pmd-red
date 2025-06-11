@@ -8,7 +8,7 @@
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "decompress_sir.h"
 #include "friend_area.h"
 #include "friend_areas_map.h"

@@ -6,7 +6,7 @@
 #include "constants/monster.h"
 #include "constants/move_id.h"
 #include "code_8002774.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_8099360.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
@@ -127,8 +127,6 @@ void DeleteGroundLives(void);
 void DeleteGroundObjects(void);
 void DeleteGroundEffects(void);
 s32 ExecuteScriptCommand(Action *action);
-bool8 IsSoundPlaying(u16 songIndex);
-bool8 IsEqualtoBGTrack(u16 songIndex);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_8098DCC(u32 speed);
@@ -2035,7 +2033,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x44: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
                 if (id != 999) {
-                    xxx_call_start_new_bgm((u16)id);
+                    StartNewBGM_((u16)id);
                 } else {
                     StopBGMusic();
                 }
@@ -3841,7 +3839,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x44:
             if (gUnknown_2039DA8 != STOP_BGM)
             {
-                xxx_call_start_new_bgm(gUnknown_2039DA8);
+                StartNewBGM_(gUnknown_2039DA8);
                 gUnknown_2039DA8 = STOP_BGM;
                 return 1;
             }

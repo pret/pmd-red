@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "friend_list.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "pokemon.h"
 #include "structs/str_text.h"
 #include "text_util.h"

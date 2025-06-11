@@ -3,7 +3,7 @@
 #include "structs/menu.h"
 #include "structs/str_mon_portrait.h"
 #include "structs/str_text.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_8099360.h"
 #include "common_strings.h"

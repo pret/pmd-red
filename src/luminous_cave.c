@@ -3,7 +3,7 @@
 #include "constants/bg_music.h"
 #include "constants/colors.h"
 #include "constants/evolution_status.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "code_8097670.h"

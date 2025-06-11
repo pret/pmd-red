@@ -1,30 +1,28 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "music.h"
 #include "constants/bg_music.h"
 
-extern const u16 gUnknown_80D4144[8];
+static EWRAM_DATA u32 sUnknownUnused = {0}; // Unused, only set in an unused function R=202DE1C | B=2134218
+static EWRAM_DATA s16 sSoundEffectCounter1 = {0}; // R=202DE20 | B=213420C
+static EWRAM_DATA s16 sSoundEffectCounter2 = {0}; // R=202DE22 | B=2134210
+static EWRAM_DATA s16 sUnusedCounter = {0}; // Contrary to the variables above, this one is never effectively checked. R=202DE24 | B=2134214
 
-static EWRAM_DATA u32 gUnknown_202DE1C = {0}; // R=202DE1C | B=2134218
-static EWRAM_DATA s16 gUnknown_202DE20 = {0}; // R=202DE20 | B=213420C
-static EWRAM_DATA s16 gUnknown_202DE22 = {0}; // R=202DE22 | B=2134210
-static EWRAM_DATA s16 gUnknown_202DE24 = {0}; // R=202DE24 | B=2134214
-
-void sub_801180C(void)
+void ResetSoundEffectCounters(void)
 {
-    gUnknown_202DE1C = 0;
-    gUnknown_202DE20 = 0;
-    gUnknown_202DE22 = 0;
-    gUnknown_202DE24 = 0;
+    sUnknownUnused = 0;
+    sSoundEffectCounter1 = 0;
+    sSoundEffectCounter2 = 0;
+    sUnusedCounter = 0;
 }
 
-void sub_8011830(void)
+void StopBGMResetSoundEffectCounters(void)
 {
     StopBGMusicVSync();
-    gUnknown_202DE20 = 0;
-    gUnknown_202DE22 = 0;
-    gUnknown_202DE24 = 0;
+    sSoundEffectCounter1 = 0;
+    sSoundEffectCounter2 = 0;
+    sUnusedCounter = 0;
 }
 
 void StartBGMusic(void)
@@ -33,16 +31,16 @@ void StartBGMusic(void)
 }
 
 // arm9.bin::020187C0
-void sub_8011860(void)
+void UpdateSoundEffectCounters(void)
 {
-    if (gUnknown_202DE20 > 0)
-        gUnknown_202DE20--;
+    if (sSoundEffectCounter1 > 0)
+        sSoundEffectCounter1--;
 
-    if (gUnknown_202DE22 > 0)
-        gUnknown_202DE22--;
+    if (sSoundEffectCounter2 > 0)
+        sSoundEffectCounter2--;
 
-    if (gUnknown_202DE24 > 0)
-        gUnknown_202DE24--;
+    if (sUnusedCounter > 0)
+        sUnusedCounter--;
 }
 
 void StopAllMusic_1(void)
@@ -59,7 +57,7 @@ void FadeOutAllMusic(u16 speed)
     FadeOutFanfareSE(STOP_SOUND_EFFECT, speed);
 }
 
-void xxx_call_start_new_bgm(u16 songIndex)
+void StartNewBGM_(u16 songIndex)
 {
     StartNewBGM(songIndex);
 }
@@ -120,25 +118,27 @@ bool8 IsSoundPlaying(u16 songIndex)
     return IsFanfareSEPlaying(songIndex);
 }
 
-void PlayMenuSoundEffect(u32 a0)
+static const u16 sMenuSoundEffects[] = {302, 303, 303, 301, 304, 306, 307};
+
+void PlayMenuSoundEffect(u32 arrId)
 {
-    if (gUnknown_202DE20 > 0)
+    if (sSoundEffectCounter1 > 0)
         return;
 
-    PlayFanfareSE(gUnknown_80D4144[a0], MAX_VOLUME);
-    gUnknown_202DE20 = 4;
+    PlayFanfareSE(sMenuSoundEffects[arrId], MAX_VOLUME);
+    sSoundEffectCounter1 = 4;
 }
 
 void sub_8011A04(void)
 {
-    if (gUnknown_202DE22 > 0)
+    if (sSoundEffectCounter2 > 0)
         return;
 
-    gUnknown_202DE22 = 3;
+    sSoundEffectCounter2 = 3;
     PlayFanfareSE(305, MAX_VOLUME);
 }
 
 UNUSED static void sub_8011A2C(u32 a0)
 {
-    gUnknown_202DE1C = a0;
+    sUnknownUnused = a0;
 }

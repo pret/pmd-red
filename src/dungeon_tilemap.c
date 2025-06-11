@@ -29,7 +29,7 @@
 #include "text_1.h"
 #include "play_time.h"
 #include "code_800C9CC.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "dungeon_strings.h"
 #include "run_dungeon.h"
 
@@ -731,7 +731,7 @@ void sub_8040094(u8 r0)
     LoadBufferedInputs();
     xxx_call_update_bg_sound_input();
     UpdateDungeonMusic();
-    sub_8011860();
+    UpdateSoundEffectCounters();
 }
 
 static const s32 gUnknown_80F6568[] = {

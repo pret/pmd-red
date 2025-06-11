@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "string_format.h"
 #include "code_8097670.h"
 #include "event_flag.h"
@@ -404,7 +404,7 @@ u32 sub_8012240(void)
     s32 status;
     struct unk_struct *r5 = MemoryAlloc(sizeof(struct unk_struct), 5);
     MemoryFill8(r5, 0xFF, 0x4);
-    sub_8011830();
+    StopBGMResetSoundEffectCounters();
     status = WriteFlashData(0x1F, (u8 *)r5, sizeof(struct unk_struct));
     StartBGMusic();
     MemoryFree(r5);

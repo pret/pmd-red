@@ -3,7 +3,7 @@
 #include "constants/input.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "event_flag.h"
 #include "game_options.h"
 #include "input.h"
@@ -25,7 +25,7 @@ void sub_80140DC(void)
     pos.x = 200;
     pos.y = 128;
     SetSavingIconCoords(&pos);
-    sub_8011830();
+    StopBGMResetSoundEffectCounters();
 }
 
 void sub_80140F8(void)
@@ -35,7 +35,7 @@ void sub_80140F8(void)
     pos.x = 188;
     pos.y = 64;
     SetSavingIconCoords(&pos);
-    sub_8011830();
+    StopBGMResetSoundEffectCounters();
 }
 
 void sub_8014114(void) {
@@ -90,7 +90,6 @@ static const WindowTemplate gUnknown_80D48DC = {
 
 extern void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2);
 extern void sub_80073E0(s32 a0);
-extern void sub_8011A04(void);
 
 static void sub_8014A88(void);
 static bool8 sub_8014B94(void);

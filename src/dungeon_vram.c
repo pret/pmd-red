@@ -8,7 +8,7 @@
 #include "code_800558C.h"
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_803E724.h"
 #include "dungeon_map.h"
 #include "dungeon_music.h"
@@ -233,7 +233,7 @@ static void sub_803E490(u32 unused)
 
     gDungeon->unk181e8.unk18213 = 0;
     UpdateDungeonMusic();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     TryResetDungeonMapTilesScheduledForCopy();
     ResetSprites(FALSE);
     nullsub_10(FALSE);
@@ -261,7 +261,7 @@ void sub_803E668(u32 unused)
     xxx_call_update_bg_vram();
     xxx_call_update_bg_sound_input();
     gDungeon->unk181e8.unk18213 = 0;
-    sub_8011860();
+    UpdateSoundEffectCounters();
     ResetSprites(FALSE);
     nullsub_10(FALSE);
     gUnknown_202EDD4--;

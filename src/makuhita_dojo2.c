@@ -3,7 +3,7 @@
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_80972F4.h"
 #include "code_80A26CC.h"
 #include "dungeon_info.h"

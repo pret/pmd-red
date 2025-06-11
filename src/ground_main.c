@@ -5,7 +5,7 @@
 #include "structs/str_dungeon_setup.h"
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_80958E8.h"
 #include "code_8099360.h"
 #include "code_80A26CC.h"
@@ -115,7 +115,7 @@ extern void sub_809CA20(void);
 extern void sub_80A6E80(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
-extern void sub_8011860(void);
+extern void UpdateSoundEffectCounters(void);
 extern void IncrementPlayTime(struct PlayTimeStruct *);
 extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void LoadBufferedInputs(void);
@@ -138,7 +138,6 @@ extern void UpdateAdventureAchievements(void);
 extern void xxx_call_update_bg_sound_input(void);
 extern void sub_80A6E68(void);
 extern void sub_80060EC(void);
-extern void sub_801180C(void);
 extern void ScriptPrintNullTextbox(void);
 extern void sub_809977C(void);
 extern void GroundMap_ExecuteEvent(s32, u32);
@@ -192,7 +191,7 @@ u32 xxx_script_related_8098468(s32 param_1)
         default:
             break;
     }
-    sub_801180C();
+    ResetSoundEffectCounters();
     if (gUnknown_20398B9 == 0 && !sub_80023E4(0xd)) {
         FadeOutAllMusic(0x10);
     }
@@ -376,7 +375,7 @@ u32 xxx_script_related_8098468(s32 param_1)
             sub_80A6E80();
             sub_8099BE4();
             sub_8099744();
-            sub_8011860();
+            UpdateSoundEffectCounters();
             IncrementPlayTime(gPlayTimeRef);
             WaitForNextFrameAndAdvanceRNG();
             LoadBufferedInputs();
@@ -489,7 +488,7 @@ void sub_8098BDC(void)
     sub_80A6E80();
     sub_8099BE4();
     sub_8099744();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     IncrementPlayTime(gPlayTimeRef);
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();

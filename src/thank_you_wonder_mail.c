@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/communication_error_codes.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "code_802F204.h"
@@ -1289,7 +1289,7 @@ void UpdateThankYouMailText(void)
         break;
     case THANK_YOU_MAIL_COMMS_FINISHED:
         sUnknown_203B2C4->linkError = COMMS_GOOD;
-        sub_8011830();
+        StopBGMResetSoundEffectCounters();
         linkStatus = sub_8037B28(sUnknown_203B2C4->unk40);
         sUnknown_203B2C4->linkError = linkStatus;
         if (linkStatus == COMMS_GOOD)

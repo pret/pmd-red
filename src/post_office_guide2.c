@@ -3,7 +3,7 @@
 #include "constants/mailbox.h"
 #include "constants/wonder_mail.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "code_80972F4.h"

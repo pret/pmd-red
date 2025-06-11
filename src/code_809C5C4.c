@@ -6,7 +6,7 @@
 #include "ground_main.h"
 #include "code_80A26CC.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "string_format.h"
 #include "input.h"
 #include "ground_lives.h"

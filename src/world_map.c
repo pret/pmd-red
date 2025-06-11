@@ -7,7 +7,7 @@
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "world_map_sound.h"
 #include "decompress_at.h"
 #include "decompress_sir.h"
@@ -417,7 +417,7 @@ static void WorldMap_RunFrameActions(void)
     nullsub_24();
     DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     ResetSprites(FALSE);
 }
 

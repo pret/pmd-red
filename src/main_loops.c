@@ -9,7 +9,7 @@
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090_1.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "run_dungeon.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
@@ -129,7 +129,7 @@ void GameLoop(void)
 
     InitHeap();
     NDS_DebugInit();
-    sub_801180C();
+    ResetSoundEffectCounters();
     NDS_LoadOverlay_GroundMain();
     sub_8014144();
     LoadMonsterParameters();
@@ -286,7 +286,7 @@ static void MainLoops_RunFrameActions(u32 unused)
     // Extra call here in blue. Seems to be for 2nd screen sprites
 
     sub_80060EC();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
 
@@ -566,7 +566,7 @@ static u32 RunGameMode_Async(u32 a0)
     s32 mode = GetScriptVarValue(NULL, START_MODE);
     bool8 ret = FALSE;
 
-    sub_801180C();
+    ResetSoundEffectCounters();
     FadeOutAllMusic(0x10);
     if (mode == MODE_CONTINUE_QUICKSAVE) {
         if (a0 == 2) {
@@ -904,7 +904,7 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
 
         quickSaveValid = IsQuickSaveValid();
         FinishQuickSaveRead();
-        sub_8011830();
+        StopBGMResetSoundEffectCounters();
 
         if (quickSaveValid)
             sub_80121E0(0xF1208);

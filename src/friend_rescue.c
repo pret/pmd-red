@@ -4,7 +4,7 @@
 #include "constants/monster.h"
 #include "constants/wonder_mail.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "friend_list.h"
@@ -956,7 +956,7 @@ void sub_8032828(void)
             break;
         case 0x7:
             gUnknown_203B33C->status = 0;
-            sub_8011830();
+            StopBGMResetSoundEffectCounters();
             gUnknown_203B33C->status = sub_8037B28(gUnknown_203B33C->unk40);
             if (gUnknown_203B33C->status == 0) {
                 switch (gUnknown_203B33C->unk40) {
@@ -1097,7 +1097,7 @@ void sub_8032828(void)
             break;
         case 0x6A:
             gUnknown_203B33C->status = 0;
-            sub_8011830();
+            StopBGMResetSoundEffectCounters();
             gUnknown_203B33C->status = sub_8037B28(gUnknown_203B33C->unk40);
             if (gUnknown_203B33C->status == 0) {
                 switch (gUnknown_203B33C->unk40) {

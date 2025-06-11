@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "common_strings.h"
 #include "input.h"
 #include "iq_skill_menu.h"

@@ -3,7 +3,7 @@
 #include "constants/wonder_mail.h"
 #include "constants/colors.h"
 #include "structs/str_dungeon.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_803D0D8.h"
 #include "code_8094F88.h"
 #include "input.h"

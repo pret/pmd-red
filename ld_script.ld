@@ -451,7 +451,6 @@ SECTIONS {
         src/friend_areas_map_util.o(.rodata);
         src/world_map_sound.o(.rodata);
         src/music_util.o(.rodata);
-        data/data_80CE77C_2.o(.rodata);
         src/debug.o(.rodata);
         src/save.o(.rodata);
         src/save_read.o(.rodata);

@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/input.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "event_flag.h"
 #include "friend_area.h"
 #include "input.h"

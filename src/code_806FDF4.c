@@ -4,7 +4,7 @@
 #include "structs/str_pokemon.h"
 #include "dungeon_main.h"
 #include "dungeon_misc.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"

@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/bg_music.h"
 #include "structs/menu.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "dungeon_info.h"
 #include "dungeon_music.h"
 #include "music.h"

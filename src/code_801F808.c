@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"

@@ -3,7 +3,7 @@
 #include "code_800558C.h"
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "string_format.h"
 #include "game_options.h"
 #include "sprite.h"
@@ -11,7 +11,7 @@
 
 void sub_8012A18()
 {
-    sub_8011860();
+    UpdateSoundEffectCounters();
     DrawDialogueBoxString();
     nullsub_8(gGameOptionsRef->unkA);
     sub_8005180();

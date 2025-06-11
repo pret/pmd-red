@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "structs/struct_sub80095e4.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "common_strings.h"
 #include "hints_menu1.h"
 #include "input.h"

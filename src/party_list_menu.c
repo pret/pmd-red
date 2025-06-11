@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/dungeon.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"

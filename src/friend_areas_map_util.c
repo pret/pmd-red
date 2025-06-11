@@ -8,7 +8,7 @@
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "decompress_at.h"
 #include "def_filearchives.h"
 #include "friend_area.h"
@@ -390,6 +390,6 @@ void FriendAreasMap_RunFrameActions(void)
     xxx_call_update_bg_vram();
     DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     ResetSprites(FALSE);
 }

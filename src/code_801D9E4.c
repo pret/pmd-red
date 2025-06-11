@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/input.h"
 #include "structs/struct_sub80095e4.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801D9E4.h"
 #include "ground_main.h"
 #include "input.h"

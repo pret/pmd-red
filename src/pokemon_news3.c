@@ -4,7 +4,7 @@
 #include "constants/mailbox.h"
 #include "structs/str_802C39C.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_803B050.h"
 #include "code_80958E8.h"
 #include "input.h"

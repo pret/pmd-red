@@ -7,7 +7,7 @@
 #include "code_800558C.h"
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "input.h"
 #include "items.h"
 #include "memory.h"
@@ -234,7 +234,7 @@ static void sub_8037400(void)
     r6 = NULL;
     r5 = NULL;
     sub_8037810();
-    sub_8011830();
+    StopBGMResetSoundEffectCounters();
     sUnknown_203B35C->linkStatus = sub_8037B28(sUnknown_203B35C->unk0);
     if (sUnknown_203B35C->linkStatus == COMMS_GOOD) {
         switch (sUnknown_203B35C->unk0) {

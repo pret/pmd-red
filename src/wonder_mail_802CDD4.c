@@ -4,7 +4,7 @@
 #include "structs/str_802C39C.h"
 #include "structs/str_wonder_mail.h"
 #include "structs/struct_sub80095e4.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_803B050.h"
 #include "input.h"
 #include "memory.h"

@@ -3,7 +3,7 @@
 #include "constants/input.h"
 #include "structs/struct_sub80095e4.h"
 #include "adventure_log.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_8097670.h"
 #include "input.h"
 #include "memory.h"

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/communication_error_codes.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "friend_list.h"
 #include "code_8024458.h"
 #include "code_8094F88.h"
@@ -508,7 +508,7 @@ void sub_8028348(void)
             break;
         case FRIEND_RESCUE_COMMUNICATING:
             sUnknown_203B2C0->linkError = COMMS_GOOD;
-            sub_8011830();
+            StopBGMResetSoundEffectCounters();
             linkError = sub_8037B28(sUnknown_203B2C0->unk40);
             sUnknown_203B2C0->linkError = linkError;
             if(linkError == COMMS_GOOD)
