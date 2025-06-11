@@ -333,8 +333,9 @@ SECTIONS {
         src/exclusive_pokemon.o(.text);
         src/position_util.o(.text);
         src/ground_main.o(.text);
-        src/code_8099328.o(.text);
+        src/debug_field_map.o(.text);
         src/code_8099360.o(.text);
+        src/palette_util.o(.text);
         src/code_809A560.o(.text);
         src/code_809C5C4.o(.text);
         src/code_809D148.o(.text);
@@ -706,7 +707,9 @@ SECTIONS {
         src/position_util.o(.rodata);
         data/data_8115EB8.o(.rodata);
         src/ground_main.o(.rodata);
-        data/data_8115F5C.o(.rodata);
+        src/debug_field_map.o(.rodata);
+        src/code_8099360.o(.rodata);
+        src/palette_util.o(.rodata);
         src/code_809A560.o(.rodata);
         data/data_8115F5C_2.o(.rodata);
         src/ground_bg.o(.rodata);

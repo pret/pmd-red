@@ -7,7 +7,6 @@
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "code_80972F4.h"
-#include "code_8099328.h"
 #include "code_8099360.h"
 #include "code_80A26CC.h"
 #include "input.h"
@@ -19,6 +18,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_3.h"
+#include "ground_main.h"
 
 static EWRAM_INIT unkStruct_203B330 *sUnknown_203B330 = {NULL};
 

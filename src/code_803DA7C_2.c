@@ -14,8 +14,7 @@
 #include "text_1.h"
 #include "text_3.h"
 #include "dungeon_config.h"
-
-extern u8 GetFloorType(void);
+#include "run_dungeon.h"
 
 EWRAM_DATA OpenedFile *gUnknown_202EC94 = NULL;
 EWRAM_DATA OpenedFile *gUnknown_202EC98 = NULL;

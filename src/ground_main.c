@@ -36,8 +36,6 @@ EWRAM_DATA u8 gUnknown_2039950 = 0;
 EWRAM_INIT bool8 gUnknown_203B49C = {0};
 EWRAM_INIT u8 gUnknown_203B49D = {0};
 
-#include "data/ground_main.h"
-
 extern void sub_809B57C();
 extern void GroundScript_Unlock();
 extern void sub_809D25C();
@@ -66,7 +64,6 @@ extern s16 sub_80A2654(s16 r0);
 extern void sub_809A71C(s32);
 extern bool8 sub_809AFAC(void);
 extern bool8 sub_80048BC(void);
-void FadeOutAllMusic(u16 speed);
 extern u8 sub_80023E4(u32);
 extern bool8 sub_809C740(void);
 extern bool8 sub_8099B94(void);
@@ -115,8 +112,6 @@ extern void sub_809CA20(void);
 extern void sub_80A6E80(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
-extern void UpdateSoundEffectCounters(void);
-extern void IncrementPlayTime(struct PlayTimeStruct *);
 extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void LoadBufferedInputs(void);
 extern void nullsub_120(void);
@@ -566,7 +561,7 @@ bool8 GroundMainGroundRequest(s32 r0, s32 r1, s32 r2)
     s32 temp = (s16) r0; // force a asr shift
     if(gUnknown_20398A8 == 0)
     {
-        Log(0, sFmtGroundRequest, temp, r2);
+        Log(0, "GroundMain ground request %3d %3d", temp, r2);
         gUnknown_20398A8 = 1;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r2;
@@ -618,7 +613,7 @@ bool8 GroundMainRescueRequest(s32 r0, s32 r1)
     s32 r5 = r2;
     if(gUnknown_20398A8 == 0)
     {
-        Log(0, sFmtRescueRequest, r2, r1);
+        Log(0, "GroundMain recue request %3d %3d", r2, r1);
         if(gUnknown_203B49D != 0)
         {
             gUnknown_20398A8 = 7;
@@ -648,7 +643,7 @@ UNUSED static bool8 GroundMainUserRescueRequest(u32 r0)
 {
     if (gUnknown_20398A8 == 0) {
         if(gUnknown_203B49D != 0) {
-            Log(0, sFmtUserRescueRequest, r0);
+            Log(0, "GroundMain user rescue request %3d", r0);
             gUnknown_20398A8 = 7;
             gUnknown_20398AC = 1;
             gUnknown_20398B0 = r0;
@@ -662,7 +657,7 @@ UNUSED static bool8 GroundMainUserRescueRequest(u32 r0)
 bool32 GroundMainGameEndRequest(u32 r0)
 {
     if (gUnknown_20398A8 == 0) {
-        Log(0, sFmtGameEndRequest, r0);
+        Log(0, "GroundMain game end request %3d", r0);
         gUnknown_20398A8 = 9;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r0;
@@ -675,7 +670,7 @@ bool32 GroundMainGameEndRequest(u32 r0)
 bool32 GroundMainGameCancelRequest(u32 r0)
 {
     if (gUnknown_20398A8 == 0) {
-        Log(0, sFmtGameCancelRequest, r0);
+        Log(0, "GroundMain game cancel request %3d", r0);
         gUnknown_20398A8 = 10;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r0;
@@ -695,7 +690,7 @@ bool8 GetScriptMode(void)
     return gScriptMode;
 }
 
-s16 sub_8098FA0(void)
+UNUSED static s16 sub_8098FA0(void)
 {
     return GetScriptVarValue(NULL, GROUND_PLACE);
 }
@@ -741,16 +736,13 @@ s16 sub_8098FCC(u32 unused)
     return iVar3->unk4;
 }
 
-const char *sub_80990B8(void)
+UNUSED static const char *sub_80990B8(void)
 {
-    s16 index;
-    index = sub_8098FCC(0xB);
-    if(index != -1)
-    {
+    s16 index = sub_8098FCC(0xB);
+    if (index != -1) {
         return sub_80A2B18(gGroundConversion_811BAF4[index].unk2);
     }
-    else
-    {
+    else {
         return sub_8098FB4();
     }
 }
@@ -864,4 +856,82 @@ void sub_809927C(u8 param_1)
     gUnknown_20398C8.sub0.unkC = 0;
     gUnknown_20398C8.sub0.unk4 = 0;
     gUnknown_20398C8.sub0.unkD = 0;
+}
+
+bool8 sub_80992E0(s16 *param_1, s16 *param_2)
+{
+    s32 sVar2;
+
+    sVar2 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
+    if ((((sVar2 != -1) && (sVar2 != 0x50)) && (sVar2 != 0x51)) && (sVar2 != 0x52)) {
+        *param_1 = sVar2;
+        *param_2 = GetScriptVarValue(NULL,DUNGEON_ENTER_INDEX);
+        return TRUE;
+    }
+    else {
+        *param_1 = -1;
+        *param_2 = -1;
+        return FALSE;
+    }
+}
+
+bool8 sub_8099328(u8 *dungeonId)
+{
+    s16 script_disc;
+    const DungeonInfo* dungeonInfo;
+
+    script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
+    if (script_disc == 0x51) {
+        script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
+        dungeonInfo = GetDungeonInfo_80A2608(script_disc);
+        if (dungeonInfo->dungeonIndex < 0x3f) {
+            *dungeonId = dungeonInfo->dungeonIndex;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_8099360(u8 *dungeonId)
+{
+    s16 script_disc;
+    const DungeonInfo* dungeonInfo;
+
+    script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
+    if (script_disc == 0x52) {
+        script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
+        dungeonInfo = GetDungeonInfo_80A2608(script_disc);
+            *dungeonId = dungeonInfo->dungeonIndex;
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8099394(u8 *param)
+{
+    s16 script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
+    if (script_disc == 0x50) {
+        script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
+        *param = script_disc;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_80993C0(bool8 param)
+{
+    gUnknown_20398B8 = (param == FALSE);
+}
+
+extern void sub_80A4B38(void);
+extern void sub_80A4B54(void);
+
+void sub_80993D8(void)
+{
+    sub_80A4B38();
+}
+
+void sub_80993E4(void)
+{
+    sub_80A4B54();
 }

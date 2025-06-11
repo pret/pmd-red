@@ -10,7 +10,6 @@
 #include "pokemon.h"
 #include "friend_area.h"
 #include "random.h"
-#include "code_8099328.h"
 #include "code_80958E8.h"
 #include "debug.h"
 #include "other_random.h"
