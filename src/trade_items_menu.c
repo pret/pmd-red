@@ -557,7 +557,7 @@ void sub_8036B28(void)
         if(sTradeItemsMenu->linkStatus == COMMS_GOOD && sTradeItemsMenu->itemMode <= 1){
             sTradeItemsMenu->linkStatus = sub_80381F4(sTradeItemsMenu->itemMode,&sTradeItemsMenu->unk244,&sTradeItemsMenu->unk24C);
         }
-        xxx_call_start_bg_music();
+        StartBGMusic();
         break;
     case 0xe:
         if (sTradeItemsMenu->unk24C.quantity == 0) {

@@ -232,7 +232,7 @@ void sub_8012CAC(WindowTemplate *a0, const MenuItem *a1)
 
     for (; a1->text != NULL; a1++) {
         count = (s16)(count + 1); // Because a simple `count++;` wasn't enough.
-        length = (s16) sub_8008ED0(a1->text);
+        length = (s16) GetStringLineWidth(a1->text);
         if (length > maxLength) {
             maxLength = length;
         }
@@ -397,7 +397,7 @@ void sub_8012EBC(MenuStruct *param_1)
         if (window->type == WINDOW_TYPE_WITH_HEADER) {
             WindowTemplate *windowTemplate = &winTemplates.id[index];
             RestoreSavedWindows(&winTemplates);
-            x = sub_8008ED0(param_1->unk0);
+            x = GetStringLineWidth(param_1->unk0);
             PrintFormattedStringOnWindow(((windowTemplate->header->width * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
         }
 

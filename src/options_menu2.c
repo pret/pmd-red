@@ -111,15 +111,15 @@ static void CreateOptionsMenu(void)
 
     switch (sUnknown_203B260->optionsMenu->windowColor) {
         case WINDOW_COLOR_BLUE:
-            length = sub_8008ED0(sBlue);
+            length = GetStringLineWidth(sBlue);
             AddDoubleUnderScoreHighlight(sUnknown_203B260->unk44, (sUnknown_203B260->optionsMenu->windowColor * 40) + 80, y + 10, length, COLOR_WHITE_2);
             break;
         case WINDOW_COLOR_RED:
-            length = sub_8008ED0(sRed);
+            length = GetStringLineWidth(sRed);
             AddDoubleUnderScoreHighlight(sUnknown_203B260->unk44, (sUnknown_203B260->optionsMenu->windowColor * 40) + 80, y + 10, length, COLOR_WHITE_2);
             break;
         case WINDOW_COLOR_GREEN:
-            length = sub_8008ED0(sGreen);
+            length = GetStringLineWidth(sGreen);
             AddDoubleUnderScoreHighlight(sUnknown_203B260->unk44, (sUnknown_203B260->optionsMenu->windowColor * 40) + 80, y + 10, length, COLOR_WHITE_2);
             break;
     }

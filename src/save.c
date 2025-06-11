@@ -406,7 +406,7 @@ u32 sub_8012240(void)
     MemoryFill8(r5, 0xFF, 0x4);
     sub_8011830();
     status = WriteFlashData(0x1F, (u8 *)r5, sizeof(struct unk_struct));
-    xxx_call_start_bg_music();
+    StartBGMusic();
     MemoryFree(r5);
     if (status != 0)
         return SAVE_FAILED;

@@ -82,7 +82,7 @@ UNUSED static void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
 #endif
 
 // arm9.bin::02003B34
-s32 sub_8008ED0(const u8 *str)
+s32 GetStringLineWidth(const u8 *str)
 {
     s32 ret = 0;
 
@@ -316,7 +316,7 @@ static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringS
             }
             else if (str[1] == '+') {
                 str += 2;
-                sp->x = (windows[0].width * 8) - sub_8008ED0(str);
+                sp->x = (windows[0].width * 8) - GetStringLineWidth(str);
                 sp->x /= 2;
             }
             else if (str[1] == 'C') {

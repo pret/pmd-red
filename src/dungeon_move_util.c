@@ -39,6 +39,7 @@
 #include "weather.h"
 #include "targeting_flags.h"
 #include "pokemon_types.h"
+#include "dungeon_run_end.h"
 
 extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);
@@ -58,7 +59,6 @@ extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
 extern Entity *GetMonsterAtPos(DungeonPos *pos);
 extern s32 sub_800ED20(u16 param_1);
-extern s16 sub_8094828(u16, u8);
 struct UnkStruct_sub_800E308_1
 {
     s16 unk0;

@@ -918,7 +918,7 @@ const struct unkStruct_8113080 gSpecialDeathTexts[55] = {
 };
 
 const u8 *const gText_DeathToMove = _("{POKEMON_0}'s {MOVE_ITEM_0}.");
-const u8 *const gUnknown_8113850 = _("{CENTER_ALIGN}Place: {POKEMON_0}");
+const u8 *const gText_AlignPlaceX = _("{CENTER_ALIGN}Place: {POKEMON_0}");
 const u8 *const gText_Pokemon1WasDefeatedBy = _("{POKEMON_1} was defeated by");
 const u8 *const gText_Pokemon1 = _("{POKEMON_1}");
 const u8 *const gUnknown_8113898 = _("Level {UNK_MACRO_3E M3E_42}{VALUE_1}{UNK_MACRO_3E M3E_64}Exp. Pts. {VALUE_0} ");
@@ -933,7 +933,7 @@ const u8 *const gUnknown_8113974 = _("{UNK_MACRO_3E M3E_80}Defense{UNK_MACRO_3E 
 const u8 *const gUnknown_8113990 = _("Sp. Atk.{UNK_MACRO_3E M3E_42}{color RED}{VALUE_0}{reset}  ");
 const u8 *const gUnknown_81139B4 = _("{UNK_MACRO_3E M3E_80}Sp. Def.{UNK_MACRO_3E M3E_128}{color RED}{VALUE_1}{reset}  ");
 const u8 *const gUnknown_81139B8 = _("None");
-const u8 *const gUnknown_81139CC = _("Item:{UNK_MACRO_3E M3E_42}{MOVE_ITEM_0} ");
+const u8 *const gText_ItemAlignedX = _("Item:{UNK_MACRO_3E M3E_42}{MOVE_ITEM_0} ");
 const u8 *const gFriendAreaNames[NUM_FRIEND_AREAS] = {
     [FRIEND_AREA_NONE] = _("None"),
     [BOUNTIFUL_SEA] = _("Bountiful Sea"),

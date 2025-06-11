@@ -1322,7 +1322,7 @@ void UpdateThankYouMailText(void)
                 }
             }
         }
-        xxx_call_start_bg_music();
+        StartBGMusic();
         break;
     case PROMPT_THANK_YOU_PASSWORD:
         // OK. Please enter the Thank-You Mail Password

@@ -2,8 +2,6 @@
 
     .align 2,0
 
-        .asciz "pksdir0"
-        .asciz "pksdir0"
 
 	.global gUnknown_80D4144
 gUnknown_80D4144: @ 80D4144

@@ -326,7 +326,7 @@ static void sub_8037400(void)
         }
     }
 
-    xxx_call_start_bg_music();
+    StartBGMusic();
 }
 
 static void sub_80376CC(void)

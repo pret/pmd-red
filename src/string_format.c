@@ -39,7 +39,7 @@ void sub_80140F8(void)
 }
 
 void sub_8014114(void) {
-    xxx_call_start_bg_music();
+    StartBGMusic();
     SetSavingIconCoords(NULL);
 }
 
@@ -611,7 +611,7 @@ static void sub_8014A88(void)
 
         r5 += 12;
         FormatString(menuItem->text, text, text + sizeof(text), 0);
-        val = sub_8008ED0(text);
+        val = GetStringLineWidth(text);
         if (r7 < val) {
             r7 = val;
         }

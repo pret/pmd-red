@@ -19,7 +19,7 @@
 	.space 4
     .include "src/code_800D090.o"
     .include "src/friend_areas_map.o"
-    .include "src/code_80118A4.o"
+    .include "src/music_util.o"
     .include "src/save.o"
 	.space 4
     .include "src/string_format.o"

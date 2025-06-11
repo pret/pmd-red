@@ -574,7 +574,7 @@ static void sub_801D894(void)
         location = GetFriendAreaName(sUnknown_203B250->currFriendAreaLocation);
 
     FormatString(location, buffer, buffer + sizeof(buffer), 0);
-    location_length = sub_8008ED0(buffer);
+    location_length = GetStringLineWidth(buffer);
     x_coord = (128 - location_length) / 2; // Centers the location name
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);

@@ -911,7 +911,7 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
         else
             sub_80121E0(0xF1209);
 
-        xxx_call_start_bg_music();
+        StartBGMusic();
     }
     else {
         GeneratePelipperJobs();
@@ -933,7 +933,7 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
 
     if (setupStr->info.unk7C == 3 || setupStr->info.unk7C == -2) {
         SetDungeonLocationInfo(&setupStr->info.unk80);
-        xxx_call_stop_bgm();
+        StopBGMusic();
 
         if (setupStr->info.unk7C == -2)
             PrepareQuickSaveWrite(setupStr->info.unk74, local_1c, 1);

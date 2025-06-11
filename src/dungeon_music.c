@@ -125,7 +125,7 @@ void DungeonFadeOutBGM(u16 speed)
 void DungeonStopBGM(void)
 {
     StopDungeonBGM();
-    xxx_call_stop_bgm();
+    StopBGMusic();
 }
 
 u16 DungeonGetCurrentBGSong(void)

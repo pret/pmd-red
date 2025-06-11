@@ -553,7 +553,7 @@ void WonderMailMainMenuCallback(void)
                 }
             }
         }
-        xxx_call_start_bg_music();
+        StartBGMusic();
         break;
     case PROMPT_PASSWORD_ENTRY:
         CreateDialogueBoxAndPortrait(gUnknown_80E7C98,0,0,0x101);

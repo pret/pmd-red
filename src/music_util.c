@@ -1,64 +1,15 @@
 #include "global.h"
-#include "structs/axdata.h"
-#include "graphics_memory.h"
+#include "globaldata.h"
 #include "code_80118A4.h"
 #include "music.h"
 #include "constants/bg_music.h"
-#include "config.h"
-#include "event_flag.h"
-#include "file_system.h"
 
 extern const u16 gUnknown_80D4144[8];
 
-EWRAM_DATA u32 gUnknown_202DE1C = {0}; // R=202DE1C | B=2134218
-EWRAM_DATA s16 gUnknown_202DE20 = {0}; // R=202DE20 | B=213420C
-EWRAM_DATA s16 gUnknown_202DE22 = {0}; // R=202DE22 | B=2134210
-EWRAM_DATA s16 gUnknown_202DE24 = {0}; // R=202DE24 | B=2134214
-
-void sub_8011760(void)
-{
-    if (sub_80023E4(13))
-        StartNewBGM(MUS_WORLD_CALAMITY);
-    else if (sub_80023E4(12))
-        StartNewBGM(MUS_POKEMON_SQUARE);
-}
-
-void sub_801178C(void)
-{
-    if (sub_80023E4(13))
-        StartNewBGM(MUS_WORLD_CALAMITY);
-    else
-        StartNewBGM(MUS_POKEMON_SQUARE);
-}
-
-void sub_80117AC(void)
-{
-    if (!sub_80023E4(13))
-        FadeOutBGM(30);
-}
-
-void sub_80117C4(void)
-{
-    FadeOutBGM(30);
-}
-
-// When you press A on a menu
-void PlayAcceptSoundEffect(void)
-{
-    PlayFanfareSE(302, MAX_VOLUME);
-}
-
-// When you press B on a menu
-void PlayCancelSoundEffect(void)
-{
-    PlayFanfareSE(303, MAX_VOLUME);
-}
-
-// When you go up or down
-void PlayCursorUpDownSoundEffect(void)
-{
-    PlayFanfareSE(301, MAX_VOLUME);
-}
+static EWRAM_DATA u32 gUnknown_202DE1C = {0}; // R=202DE1C | B=2134218
+static EWRAM_DATA s16 gUnknown_202DE20 = {0}; // R=202DE20 | B=213420C
+static EWRAM_DATA s16 gUnknown_202DE22 = {0}; // R=202DE22 | B=2134210
+static EWRAM_DATA s16 gUnknown_202DE24 = {0}; // R=202DE24 | B=2134214
 
 void sub_801180C(void)
 {
@@ -76,7 +27,7 @@ void sub_8011830(void)
     gUnknown_202DE24 = 0;
 }
 
-void xxx_call_start_bg_music(void)
+void StartBGMusic(void)
 {
     StartBGMusicVSync();
 }
@@ -96,9 +47,9 @@ void sub_8011860(void)
 
 void StopAllMusic_1(void)
 {
-    xxx_call_stop_bgm();
-    xxx_call_stop_fanfare_se(STOP_FANFARE);
-    xxx_call_stop_fanfare_se(STOP_SOUND_EFFECT);
+    StopBGMusic();
+    StopSound(STOP_FANFARE);
+    StopSound(STOP_SOUND_EFFECT);
 }
 
 void FadeOutAllMusic(u16 speed)
@@ -113,22 +64,22 @@ void xxx_call_start_new_bgm(u16 songIndex)
     StartNewBGM(songIndex);
 }
 
-void xxx_call_fade_in_new_bgm(u16 songIndex, u16 speed)
+void FadeInNewBGM_(u16 songIndex, u16 speed)
 {
     FadeInNewBGM(songIndex, speed);
 }
 
-void xxx_call_queue_bgm(u16 songIndex)
+void QueueBGM_(u16 songIndex)
 {
     QueueBGM(songIndex);
 }
 
-void xxx_call_stop_bgm()
+void StopBGMusic(void)
 {
     StopBGM();
 }
 
-void xxx_call_fade_out_bgm(u16 speed)
+void FadeOutBGM_(u16 speed)
 {
     FadeOutBGM(speed);
 }
@@ -143,7 +94,7 @@ bool8 IsEqualtoBGTrack(u16 songIndex)
     return currBGSong == songIndex;
 }
 
-void xxx_call_play_fanfare_se(u16 songIndex, u16 volume)
+void PlaySoundWithVolume(u16 songIndex, u16 volume)
 {
     PlayFanfareSE(songIndex, volume);
 }
@@ -154,17 +105,17 @@ void PlaySound(u16 songIndex)
     PlayFanfareSE(songIndex, MAX_VOLUME);
 }
 
-void xxx_call_stop_fanfare_se(u16 songIndex)
+void StopSound(u16 songIndex)
 {
     StopFanfareSE(songIndex);
 }
 
-void xxx_call_fade_out_fanfare_se(u16 songIndex, u16 speed)
+void FadeOutSound(u16 songIndex, u16 speed)
 {
     FadeOutFanfareSE(songIndex, speed);
 }
 
-bool8 IsFanfareSEPlaying_1(u16 songIndex)
+bool8 IsSoundPlaying(u16 songIndex)
 {
     return IsFanfareSEPlaying(songIndex);
 }

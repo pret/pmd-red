@@ -21,6 +21,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_3.h"
+#include "world_map_sound.h"
 
 EWRAM_INIT struct FriendAreasMap *gFriendAreasMapPtr = NULL;
 EWRAM_DATA static u8 sCurrDirection = 0;
@@ -50,7 +51,7 @@ void ShowFriendAreasMap_Async(struct FriendAreasMapSetupStruct *setupPtr)
     gFriendAreasMapPtr->locationIdOnBPress = gFriendAreasMapPtr->teamBaseLocationId;
     sCurrDirection = 0xff;
     sHeldDpadCounter = 0;
-    sub_8011760();
+    PlayFriendAreasMapBGM();
 
     while (TRUE) {
         s32 newLocationId = 0;
@@ -162,7 +163,7 @@ static void FriendAreasMap_FadeOut_Async(void)
     s32 i;
 
     FriendAreasMap_HideTextWindowAndArrows();
-    sub_80117AC();
+    FadeOutFriendAreasMapBGM();
 
     for (i = 0; i < 60; i++) {
         gFriendAreasMapPtr->brightness -= 2;

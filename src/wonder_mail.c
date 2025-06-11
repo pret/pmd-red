@@ -545,11 +545,11 @@ void sub_8028348(void)
                             break;
                     }
                 }
-                xxx_call_start_bg_music();
+                StartBGMusic();
             }
             else
             {
-                xxx_call_start_bg_music();
+                StartBGMusic();
             }
             break;
         case RECEIVED_FRIEND_SOS_MAIL:

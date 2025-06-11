@@ -1589,7 +1589,7 @@ static void PrintOnMainMenu(bool8 printAll)
         EntityInfo *leaderInfo = GetEntInfo(GetLeader());
         const u8 *dungeonName = GetCurrentDungeonName();
 
-        x = (136 - sub_8008ED0(dungeonName)) / 2;
+        x = (136 - GetStringLineWidth(dungeonName)) / 2;
         sub_80073B8(1);
         PrintStringOnWindow(x, 2, dungeonName, 1, 0);
         sub_80073E0(1);

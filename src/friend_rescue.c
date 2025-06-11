@@ -1010,7 +1010,7 @@ void sub_8032828(void)
                     }
                 }
             }
-            xxx_call_start_bg_music();
+            StartBGMusic();
             break;
         case 0x10:
             CreateDialogueBoxAndPortrait(&gUnknown_80E2F14[0], 0, 0, 0x101);
@@ -1125,7 +1125,7 @@ void sub_8032828(void)
                         break;
                 }
             }
-            xxx_call_start_bg_music();
+            StartBGMusic();
             break;
         case 0x72:
             CreateDialogueBoxAndPortrait(gUnknown_80E311C, 0, 0, 0x101);

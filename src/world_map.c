@@ -8,6 +8,7 @@
 #include "code_800C9CC.h"
 #include "code_800D090.h"
 #include "code_80118A4.h"
+#include "world_map_sound.h"
 #include "decompress_at.h"
 #include "decompress_sir.h"
 #include "def_filearchives.h"
@@ -25,8 +26,6 @@
 #include "text_3.h"
 #include "world_map.h"
 
-extern void sub_801178C(void);
-extern void sub_80117C4(void);
 extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void CopyDungeonName1toBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 
@@ -81,7 +80,7 @@ void ShowWorldMap_Async(struct WorldMapSetupStruct *setupPtr)
     UpdateFadeInTile(2);
     sub_801059C();
     sub_8010494(&setupPtr->info);
-    sub_801178C();
+    PlayWorldMapBGM();
 
     // 60 frame delay
     for (i = 0; i < 60; i++)
@@ -386,7 +385,7 @@ static void FadeFromWorldMap_Async(void)
     s32 i;
 
     ClearWindows();
-    sub_80117C4();
+    FadeOutWorldMapBGM();
     for (i = 0; i < 60; i++) {
         sWorldMapPtr->brightness -= 2;
         WorldMap_RunFrameActions();

@@ -492,7 +492,7 @@ static bool8 sub_809CBBC(const struct ItemWithQuantity *itemToAdd, const u8 *max
     if (itemGivenStr != 0) {
         strcpy(gFormatBuffer_Items[0], buffer);
         ScriptPrintText(0, -1, itemGivenStr);
-        xxx_call_play_fanfare_se(0xcb,0x100);
+        PlaySoundWithVolume(0xcb,0x100);
     }
 
     return TRUE;

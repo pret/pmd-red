@@ -91,7 +91,8 @@ SECTIONS {
         src/friend_areas_map.o(.text);
         src/world_map.o(.text);
         src/friend_areas_map_util.o(.text);
-        src/code_80118A4.o(.text);
+        src/world_map_sound.o(.text);
+        src/music_util.o(.text);
         src/debug.o(.text);
         src/save.o(.text);
         src/save_read.o(.text);
@@ -317,7 +318,7 @@ SECTIONS {
         src/friend_area.o(.text);
         src/moves.o(.text);
         src/number_util.o(.text);
-        src/code_809447C.o(.text);
+        src/dungeon_run_end.o(.text);
         src/data_serializer.o(.text);
         src/game_options.o(.text);
         src/random_mersenne_twister.o(.text);
@@ -448,6 +449,8 @@ SECTIONS {
         src/friend_areas_map.o(.rodata);
         src/world_map.o(.rodata);
         src/friend_areas_map_util.o(.rodata);
+        src/world_map_sound.o(.rodata);
+        src/music_util.o(.rodata);
         data/data_80CE77C_2.o(.rodata);
         src/debug.o(.rodata);
         src/save.o(.rodata);
@@ -687,7 +690,7 @@ SECTIONS {
         src/friend_area.o(.rodata);
         src/moves.o(.rodata);
         src/number_util.o(.rodata);
-        src/code_809447C.o(.rodata);
+        src/dungeon_run_end.o(.rodata);
         src/data_serializer.o(.rodata);
         src/game_options.o(.rodata);
         src/random_mersenne_twister.o(.rodata);
