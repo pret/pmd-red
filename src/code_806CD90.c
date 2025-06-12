@@ -20,6 +20,7 @@
 #include "dungeon_random.h"
 #include "dungeon_misc.h"
 #include "dungeon_util.h"
+#include "dungeon_pokemon_sprites.h"
 #include "exclusive_pokemon.h"
 #include "move_effects_target.h"
 #include "pokemon.h"
@@ -30,7 +31,6 @@
 #include "text_util.h"
 #include "sprite.h"
 #include "random.h"
-#include "code_800F958.h"
 #include "structs/str_202ED28.h"
 
 const u8 gUnknown_8106EC8[][13] = {
@@ -44,7 +44,6 @@ const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x00, 0x00, 0x70, 0x6b, 0x73, 0
 extern s32 gDungeonFramesCounter;
 
 extern void sub_8042EC8(Entity *a0, s32 a1);
-extern void sub_800F958(s32 dungeonSpriteID, DungeonPos *pos, DungeonPos *statusOffsets, u32 a3);
 
 static inline u16 GetUnkFlag(Entity *entity)
 {
@@ -224,10 +223,10 @@ void sub_806C51C(Entity *entity)
     pos1.y = ((entity->pixelPos.y - entity->unk1C.raw) - entInfo->unk174.raw) / 256;
 
     sub_8005700(posArray, &entity->axObj);
-    sub_800F958(entInfo->unk98, &pos1, posArray, gDungeon->unk181e8.priority);
+    UpdateDungeonPokemonSprite2(entInfo->dungeonSpriteId, &pos1, posArray, gDungeon->unk181e8.priority);
 
     statusSprites = EntityGetStatusSprites(entity);
-    UpdateDungeonPokemonSprite(entInfo->unk98, entInfo->apparentID, statusSprites, (var_3C && entInfo->unk14C));
+    UpdateDungeonPokemonSprite(entInfo->dungeonSpriteId, entInfo->apparentID, statusSprites, (var_3C && entInfo->unk14C));
 
     sub_8042EC8(entity, y2);
     if (entInfo->unk15C == 0) {

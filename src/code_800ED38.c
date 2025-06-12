@@ -7,7 +7,6 @@
 #include "code_800ED38.h"
 #include "code_803E724.h"
 #include "dungeon_message.h"
-#include "dungeon_pokemon_sprites.h"
 #include "file_system.h"
 #include "main_loops.h"
 #include "memory.h"
@@ -36,8 +35,6 @@ struct unkStruct_203B0D0 {
 
 EWRAM_INIT struct unkStruct_203B0D0 *gUnknown_203B0D0 = NULL;
 EWRAM_INIT void *gUnknown_203B0D4 = NULL; // TODO: figure out the actual struct
-EWRAM_INIT DungeonPokemonSprites *gDungeonPokemonSprites = NULL; // Todo: move to a different file, or merge files in this rom region
-EWRAM_INIT SpriteOAM gUnknown_203B0DC = {0};
 
 OpenedFile *sub_800F1C0(s32, s32);
 s32 sub_800F0F4(s32, s32);
