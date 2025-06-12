@@ -116,7 +116,7 @@ bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10)
     if (gUnknown_203B2A0 == sFriendList->unk0) {
         sFriendList->unk358.s0.input.menuIndex = gUnknown_203B2A8;
         sFriendList->unk358.s0.input.currPage = gUnknown_203B2AA;
-        sub_8013984(&sFriendList->unk358.s0.input);
+        MenuUpdatePagesData(&sFriendList->unk358.s0.input);
     }
     SetUpWindowHeader();
     FriendList_ShowWindow();
@@ -148,7 +148,7 @@ u32 FriendList_HandleInput(bool8 a0)
             FriendList_ShowWindow();
             return 1;
         default:
-            if (sub_80138B8(&sFriendList->unk358.s0.input, TRUE)) {
+            if (MenuCursorUpdate(&sFriendList->unk358.s0.input, TRUE)) {
                 SetUpWindowHeader();
                 FriendList_ShowWindow();
                 return 1;
@@ -159,7 +159,7 @@ u32 FriendList_HandleInput(bool8 a0)
 
 s32 FriendList_GetCurrId(void)
 {
-    return sFriendList->unk1A[(sFriendList->unk358.s0.input.currPage * sFriendList->unk358.s0.input.entriesPerPage) + sFriendList->unk358.s0.input.menuIndex];
+    return sFriendList->unk1A[GET_CURRENT_MENU_ENTRY(sFriendList->unk358.s0.input)];
 }
 
 void sub_8023B7C(bool8 addCursor)
@@ -167,7 +167,7 @@ void sub_8023B7C(bool8 addCursor)
     ResetUnusedInputStruct();
     ShowWindows(&sFriendList->unk358.s0.windows, FALSE, FALSE);
     sFriendList->unk358.s0.input.totalEntriesCount = sub_8023BD8();
-    sub_8013984(&sFriendList->unk358.s0.input);
+    MenuUpdatePagesData(&sFriendList->unk358.s0.input);
     SetUpWindowHeader();
     FriendList_ShowWindow();
     if (addCursor) {
@@ -258,7 +258,7 @@ void FriendList_ShowWindow(void)
             break;
     }
 
-    for (i = 0; i < sFriendList->unk358.s0.input.unk1A; i++) {
+    for (i = 0; i < sFriendList->unk358.s0.input.currPageEntries; i++) {
         s32 id = sFriendList->unk1A[(sFriendList->unk358.s0.input.currPage * sFriendList->unk358.s0.input.entriesPerPage) + i];
         PokemonStruct1 *pokePtr = &gRecruitedPokemonRef->pokemon[id];
         u8 color = 7;
@@ -468,7 +468,7 @@ UNUSED static PokemonStruct1 *sub_80243E8(void)
 {
     u8 buffer[40];
     u8 nameBuffer[20];
-    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[sFriendList->unk1A[(sFriendList->unk358.s0.input.currPage * sFriendList->unk358.s0.input.entriesPerPage) + sFriendList->unk358.s0.input.menuIndex]];
+    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[sFriendList->unk1A[GET_CURRENT_MENU_ENTRY(sFriendList->unk358.s0.input)]];
 
     StrncpyCustom(nameBuffer, pokeStruct->name, POKEMON_NAME_LENGTH);
     sprintfStatic(buffer, "%s", nameBuffer);

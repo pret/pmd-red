@@ -16,7 +16,7 @@ struct IQSkillInfoMenu
     u32 unk20;
     u32 unk24;
     WindowTemplates unk28;
-    MenuInputStructSub unk88;
+    TouchScreenMenuInput unk88;
 };
 
 bool8 CreateIQSkillInfoMenu(u8 iqSkill);

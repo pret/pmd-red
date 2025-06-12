@@ -34,7 +34,7 @@ bool8 sub_80319A4(u8 param_1, u8 dungeon, s32 param_3)
     sUnknown_203B330 = MemoryAlloc(sizeof(unkStruct_203B330), 8);
     sUnknown_203B330->unkC = param_1;
     sUnknown_203B330->dungeonIndex = dungeon;
-    sub_801317C(&sUnknown_203B330->input);
+    ResetTouchScreenMenuInput(&sUnknown_203B330->input);
     sUnknown_203B330->unk10 = param_3;
     sUnknown_203B330->unk14 = &sUnknown_203B330->unk18.id[param_3];
     sub_8031A2C();

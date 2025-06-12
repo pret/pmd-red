@@ -66,7 +66,7 @@ u16 HandlePartnerSelectionInput(void)
         return gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.s0.input.menuIndex];
     }
 
-    if (sub_80138B8(&gUnknown_203B404->s18.s0.input, TRUE))
+    if (MenuCursorUpdate(&gUnknown_203B404->s18.s0.input, TRUE))
         RedrawPartnerSelectionMenu();
 
     if (partnerID != gUnknown_203B404->s18.s0.input.menuIndex)
@@ -81,7 +81,7 @@ u16 HandlePartnerSelectionInput(void)
 UNUSED static void sub_803CE34(bool8 cursorSprite)
 {
     gUnknown_203B404->s18.s0.input.totalEntriesCount = GetValidPartners();
-    sub_8013984(&gUnknown_203B404->s18.s0.input);
+    MenuUpdatePagesData(&gUnknown_203B404->s18.s0.input);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
 
@@ -129,7 +129,7 @@ static void RedrawPartnerSelectionMenu(void)
     PrintStringOnWindow(12, 0, gPartnerSelectionHeaderText, gUnknown_203B404->s18.s0.winId, 0);
 
     monCounter = 0;
-    while (monCounter < gUnknown_203B404->s18.s0.input.unk1A) {
+    while (monCounter < gUnknown_203B404->s18.s0.input.currPageEntries) {
         yCoord = GetMenuEntryYCoord(&gUnknown_203B404->s18.s0.input, monCounter);
         monName = GetMonSpecies(gUnknown_203B404->PartnerArray[monCounter]);
         PrintStringOnWindow(8, yCoord, monName, gUnknown_203B404->s18.s0.winId, 0);

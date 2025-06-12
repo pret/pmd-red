@@ -146,7 +146,7 @@ struct NeverWrittenToStruct202EC20
 static EWRAM_DATA struct NeverWrittenToStruct202EC20 *sNeverWrittenToUnknownStructPtr = NULL;
 static UNUSED EWRAM_DATA u8 sUnusedEwram1[4] = {0};
 
-static EWRAM_DATA MenuInputStructSub gUnknown_202EC28 = {0};
+static EWRAM_DATA TouchScreenMenuInput gUnknown_202EC28 = {0};
 
 static EWRAM_INIT WindowTemplates sUnknown_203B198 = {
     .id = {
@@ -223,7 +223,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     sDialogueMenuItems = menuItems;
     gUnknown_202EC18 = arg_0;
     gUnknown_202EC1C = r9;
-    sub_801317C(&gUnknown_202EC28);
+    ResetTouchScreenMenuInput(&gUnknown_202EC28);
     if (flags & 0x10) {
         sUnknown_203B198.id[0] = gUnknown_80D48DC;
     }
@@ -388,7 +388,7 @@ void DrawDialogueBoxString(void)
                 }
                 sub_80073E0(0);
                 gUnknown_202E794 = str;
-                sub_801317C(&gUnknown_202EC28);
+                ResetTouchScreenMenuInput(&gUnknown_202EC28);
                 if (gUnknown_202E794[0] == '\0') {
                     if (sDialogueMenuItems != NULL) {
                         gUnknown_202E744 = 3;
@@ -459,7 +459,7 @@ void DrawDialogueBoxString(void)
             case 9: {
                 bool8 buttonPress = FALSE;
                 gUnknown_202E748.unk20 = 0;
-                nullsub_34(&gUnknown_202EC28, 0);
+                GetTouchScreenMenuInput(&gUnknown_202EC28, 0);
                 if (!(sUnknownTextFlags & 1)) {
                     buttonPress = TRUE;
                 }

@@ -135,7 +135,7 @@ u32 sub_802F8A0(u8 r0)
                 PlayMenuSoundEffect(0);
                 return 3;
             default:
-                if(sub_80138B8(&gUnknown_203B314->sBC.s0.input, 1) != 0)
+                if(MenuCursorUpdate(&gUnknown_203B314->sBC.s0.input, 1) != 0)
                 {
                     sub_802F9C0();
                     sub_802FA50();
@@ -151,13 +151,13 @@ u32 sub_802F8A0(u8 r0)
 
 s16 sub_802F90C(void)
 {
-    return gUnknown_203B314->unk0[(gUnknown_203B314->sBC.s0.input.currPage * gUnknown_203B314->sBC.s0.input.entriesPerPage) + gUnknown_203B314->sBC.s0.input.menuIndex];
+    return gUnknown_203B314->unk0[GET_CURRENT_MENU_ENTRY(gUnknown_203B314->sBC.s0.input)];
 }
 
 void sub_802F938(u8 r0)
 {
     gUnknown_203B314->sBC.s0.input.totalEntriesCount = sub_802FBF4();
-    sub_8013984(&gUnknown_203B314->sBC.s0.input);
+    MenuUpdatePagesData(&gUnknown_203B314->sBC.s0.input);
     sub_802F9C0();
     sub_802FA50();
 
@@ -201,7 +201,7 @@ void sub_802FA50(void)
   PrintStringOnWindow(10,0,gUnknown_80E0744,gUnknown_203B314->sBC.s0.winId,0);
   sub_8012BC4(gUnknown_203B314->sBC.header.width * 8 + 4,0,gUnknown_203B314->sBC.s0.input.currPage + 1,2,7,gUnknown_203B314->sBC.s0.winId);
   if (gUnknown_203B314->unkB8 != 0) {
-    for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
+    for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.currPageEntries; counter++)
     {
         y = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
         index = gUnknown_203B314->sBC.s0.input.currPage * gUnknown_203B314->sBC.s0.input.entriesPerPage + counter;
@@ -216,7 +216,7 @@ void sub_802FA50(void)
     }
   }
   else {
-    for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
+    for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.currPageEntries; counter++)
     {
         y2 = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
         text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->sBC.s0.input.currPage * gUnknown_203B314->sBC.s0.input.entriesPerPage + counter]);

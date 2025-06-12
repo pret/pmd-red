@@ -63,7 +63,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
     CreateMenuOnWindow(&gUnknown_203B224->unk54.s0.input, GetNumberOfFilledInventorySlots(), param_4, param_2);
     gUnknown_203B224->unk54.s0.input.menuIndex = gUnknown_203B228;
     gUnknown_203B224->unk54.s0.input.currPage = gUnknown_203B22A;
-    sub_8013984(&gUnknown_203B224->unk54.s0.input);
+    MenuUpdatePagesData(&gUnknown_203B224->unk54.s0.input);
     sub_801A998();
     sub_801A9E0();
     return TRUE;
@@ -125,7 +125,7 @@ u32 sub_801A6E8(bool8 param_1)
             if (gUnknown_203B224->unk4[index] != 0 || sub_801ADA0(index)) {
                 PlayMenuSoundEffect(6);
                 gUnknown_203B224->unk4[index] ^= 1;
-                sub_80138B8(&gUnknown_203B224->unk54.s0.input, 0);
+                MenuCursorUpdate(&gUnknown_203B224->unk54.s0.input, 0);
                 sub_801A9E0();
                 return 1;
             }
@@ -141,7 +141,7 @@ u32 sub_801A6E8(bool8 param_1)
             // NOTE: fallthrough needed here
         default:
             _0801A87C:
-            if (sub_80138B8(&gUnknown_203B224->unk54.s0.input, 1) != FALSE) {
+            if (MenuCursorUpdate(&gUnknown_203B224->unk54.s0.input, 1) != FALSE) {
                 sub_801A998();
                 sub_801A9E0();
                 return 1;
@@ -155,7 +155,7 @@ u32 sub_801A6E8(bool8 param_1)
 // arm9.bin::02026934
 s32 sub_801A8AC(void)
 {
-    return (gUnknown_203B224->unk54.s0.input.currPage * gUnknown_203B224->unk54.s0.input.entriesPerPage) + gUnknown_203B224->unk54.s0.input.menuIndex;
+    return GET_CURRENT_MENU_ENTRY(gUnknown_203B224->unk54.s0.input);
 }
 
 // arm9.bin::020268C0
@@ -166,7 +166,7 @@ void sub_801A8D0(bool8 r0)
     ShowWindows(&gUnknown_203B224->unk54.s0.windows, FALSE, FALSE);
     FillInventoryGaps();
     gUnknown_203B224->unk54.s0.input.totalEntriesCount = GetNumberOfFilledInventorySlots();
-    sub_8013984(&gUnknown_203B224->unk54.s0.input);
+    MenuUpdatePagesData(&gUnknown_203B224->unk54.s0.input);
     sub_801A998();
     sub_801A9E0();
     if (r0)
@@ -190,7 +190,7 @@ void sub_801A928(void)
 
 static void sub_801A998(void)
 {
-    gUnknown_203B224->unk54.header.count = gUnknown_203B224->unk54.s0.input.unk20;
+    gUnknown_203B224->unk54.header.count = gUnknown_203B224->unk54.s0.input.pagesCount;
     gUnknown_203B224->unk54.header.currId = gUnknown_203B224->unk54.s0.input.currPage;
     gUnknown_203B224->unk54.header.width = 11;
     gUnknown_203B224->unk54.header.f3 = 0;
@@ -216,7 +216,7 @@ void sub_801A9E0(void)
     else
         PrintStringOnWindow(x, 0, sTeamToolboxB, gUnknown_203B224->unk54.s0.winId, 0);
 
-    for (r7 = 0; r7 < gUnknown_203B224->unk54.s0.input.unk1A; r7++) {
+    for (r7 = 0; r7 < gUnknown_203B224->unk54.s0.input.currPageEntries; r7++) {
         teamItemIndex = (gUnknown_203B224->unk54.s0.input.currPage * gUnknown_203B224->unk54.s0.input.entriesPerPage) + r7;
         item = gTeamInventoryRef->teamItems[teamItemIndex];
 

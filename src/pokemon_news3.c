@@ -46,9 +46,9 @@ bool8 sub_802BD14(s32 a0, DungeonPos *a1, u32 a2)
     sub_8012D34(sUnknown_203B2D8->unk4.s0.unk38, a2);
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2D8->unk4.s0.windows, TRUE, TRUE);
-    sub_8013848(&sUnknown_203B2D8->unk4.s0.input, CountEmptyMailSlots(), a2, a0);
+    CreateMenuOnWindow2(&sUnknown_203B2D8->unk4.s0.input, CountEmptyMailSlots(), a2, a0);
     sUnknown_203B2D8->unk4.s0.input.menuIndex = sUnknown_203B2DC;
-    sub_8013984(&sUnknown_203B2D8->unk4.s0.input);
+    MenuUpdatePagesData(&sUnknown_203B2D8->unk4.s0.input);
     sub_802BF30();
     CreateMailMenu();
     return TRUE;
@@ -72,7 +72,7 @@ u32 sub_802BDEC(bool8 a0)
             PlayMenuSoundEffect(4);
             return 4;
         default:
-            if (sub_80138B8(&sUnknown_203B2D8->unk4.s0.input, 1)) {
+            if (MenuCursorUpdate(&sUnknown_203B2D8->unk4.s0.input, 1)) {
                 sub_802BF30();
                 CreateMailMenu();
                 return 1;
@@ -83,7 +83,7 @@ u32 sub_802BDEC(bool8 a0)
 
 u8 sub_802BE74(void)
 {
-    return sUnknown_203B2D8->unk0[(sUnknown_203B2D8->unk4.s0.input.currPage * sUnknown_203B2D8->unk4.s0.input.entriesPerPage) + sUnknown_203B2D8->unk4.s0.input.menuIndex];
+    return sUnknown_203B2D8->unk0[GET_CURRENT_MENU_ENTRY(sUnknown_203B2D8->unk4.s0.input)];
 }
 
 void sub_802BE94(bool8 cursorSprite)
@@ -92,7 +92,7 @@ void sub_802BE94(bool8 cursorSprite)
     ShowWindows(&sUnknown_203B2D8->unk4.s0.windows, FALSE, FALSE);
 
     sUnknown_203B2D8->unk4.s0.input.totalEntriesCount = CountEmptyMailSlots();
-    sub_8013984(&sUnknown_203B2D8->unk4.s0.input);
+    MenuUpdatePagesData(&sUnknown_203B2D8->unk4.s0.input);
     sub_802BF30();
     CreateMailMenu();
 
@@ -133,7 +133,7 @@ void CreateMailMenu(void)
     sub_80073B8(sUnknown_203B2D8->unk4.s0.winId);
     PrintStringOnWindow((sUnknown_203B2D8->unk4.s0.input.currPage * 8) + 10, 0, sMailbox, sUnknown_203B2D8->unk4.s0.winId, 0);
 
-    for (i = 0; i < sUnknown_203B2D8->unk4.s0.input.unk1A; i++) {
+    for (i = 0; i < sUnknown_203B2D8->unk4.s0.input.currPageEntries; i++) {
         mail = GetMailboxSlotInfo(sUnknown_203B2D8->unk0[(sUnknown_203B2D8->unk4.s0.input.currPage * sUnknown_203B2D8->unk4.s0.input.entriesPerPage) + i]);
         local.unk0[0] = sUnknown_203B2D8->unk4.s0.winId;
         local.y = GetMenuEntryYCoord(&sUnknown_203B2D8->unk4.s0.input, i);

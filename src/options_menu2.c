@@ -22,7 +22,7 @@ bool8 sub_801E198(GameOptions *optionsMenu)
 {
     sUnknown_203B260 = MemoryAlloc(sizeof(struct unkStruct_203B260), 8);
     sUnknown_203B260->optionsMenu = optionsMenu;
-    sub_801317C(&sUnknown_203B260->unk4);
+    ResetTouchScreenMenuInput(&sUnknown_203B260->unk4);
     sUnknown_203B260->unk44 = 0;
     sUnknown_203B260->unk48 = &sUnknown_203B260->unk4C.id[0];
     RestoreSavedWindows(&sUnknown_203B260->unk4C);
@@ -74,7 +74,7 @@ u32 sub_801E218(void)
     }
 
     // == TRUE is needed for matching
-    if (sub_80138B8(&sUnknown_203B260->input, 1) || flag == TRUE) {
+    if (MenuCursorUpdate(&sUnknown_203B260->input, 1) || flag == TRUE) {
         nullsub_38();
         CreateOptionsMenu();
         return 1;

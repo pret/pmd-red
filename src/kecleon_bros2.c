@@ -35,7 +35,7 @@ bool8 sub_8019E40(u32 r0)
     ShowWindows(&gUnknown_203B214->s0.windows, TRUE, TRUE);
     CreateMenuOnWindow(&gUnknown_203B214->s0.input, CountKecleonShopItems(), 10, r0);
     gUnknown_203B214->s0.input.menuIndex = gUnknown_203B218;
-    sub_8013984(&gUnknown_203B214->s0.input);
+    MenuUpdatePagesData(&gUnknown_203B214->s0.input);
     sub_801A064();
     sub_801A0D8();
     return TRUE;
@@ -70,7 +70,7 @@ u32 sub_8019EDC(bool8 r0)
             PlayMenuSoundEffect(4);
             return 4;
         default:
-            if (sub_80138B8(&gUnknown_203B214->s0.input, 1) != FALSE) {
+            if (MenuCursorUpdate(&gUnknown_203B214->s0.input, 1) != FALSE) {
                 sub_801A064();
                 sub_801A0D8();
                 return 1;
@@ -82,7 +82,7 @@ u32 sub_8019EDC(bool8 r0)
 // arm9.bin::02025798
 u8 sub_8019FB0(void)
 {
-    return (gUnknown_203B214->s0.input.currPage * gUnknown_203B214->s0.input.entriesPerPage) + (u8)gUnknown_203B214->s0.input.menuIndex;
+    return GET_CURRENT_MENU_ENTRY(gUnknown_203B214->s0.input);
 }
 
 // arm9.bin::02025738
@@ -91,7 +91,7 @@ void sub_8019FCC(bool8 r0)
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B214->s0.windows, FALSE, FALSE);
     gUnknown_203B214->s0.input.totalEntriesCount = CountKecleonShopItems();
-    sub_8013984(&gUnknown_203B214->s0.input);
+    MenuUpdatePagesData(&gUnknown_203B214->s0.input);
     sub_801A064();
     sub_801A0D8();
     if (r0)
@@ -113,7 +113,7 @@ void sub_801A010(void)
 
 static void sub_801A064(void)
 {
-    gUnknown_203B214->header.count = gUnknown_203B214->s0.input.unk20;
+    gUnknown_203B214->header.count = gUnknown_203B214->s0.input.pagesCount;
     gUnknown_203B214->header.currId = gUnknown_203B214->s0.input.currPage;
     gUnknown_203B214->header.width = 10;
     gUnknown_203B214->header.f3 = 0;
@@ -138,7 +138,7 @@ void sub_801A0D8(void)
     sub_80073B8(gUnknown_203B214->s0.winId);
     PrintStringOnWindow((gUnknown_203B214->s0.input.currPage * 8) + 10, 0, sGoods, gUnknown_203B214->s0.winId, 0);
 
-    for (index = 0; index < gUnknown_203B214->s0.input.unk1A; index++) {
+    for (index = 0; index < gUnknown_203B214->s0.input.currPageEntries; index++) {
         temp_calc = (gUnknown_203B214->s0.input.currPage * gUnknown_203B214->s0.input.entriesPerPage) + index;
         heldItem = GetKecleonShopItem(temp_calc);
         item.id = heldItem->id;

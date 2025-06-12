@@ -18,7 +18,7 @@
 struct unkStruct_203B324
 {
     // size: 0x78
-    MenuInputStructSub unk0;
+    TouchScreenMenuInput unk0;
     u8 mailIndex;
     u32 windowID;
     WindowTemplate *unk14;
@@ -62,7 +62,7 @@ bool8 sub_8030D40(u8 mailIndex, s32 windowID)
 {
   gUnknown_203B324 = MemoryAlloc(sizeof(struct unkStruct_203B324), 8);
   gUnknown_203B324->mailIndex = mailIndex;
-  sub_801317C(&gUnknown_203B324->unk0);
+  ResetTouchScreenMenuInput(&gUnknown_203B324->unk0);
   gUnknown_203B324->windowID = windowID;
   gUnknown_203B324->unk14 = &gUnknown_203B324->unk18.id[windowID];
   RestoreSavedWindows(&gUnknown_203B324->unk18);

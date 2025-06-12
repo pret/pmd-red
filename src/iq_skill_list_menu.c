@@ -62,7 +62,7 @@ u32 HandleIQSkillListMenuInput(bool8 a0)
             PlayMenuSoundEffect(4);
             return 4;
         default:
-            if (sub_80138B8(&sIQSkillListMenu->s24.s0.input, 1) != 0) {
+            if (MenuCursorUpdate(&sIQSkillListMenu->s24.s0.input, 1) != 0) {
                 sub_801C440();
                 BuildIQSkillList();
                 return 1;
@@ -73,7 +73,7 @@ u32 HandleIQSkillListMenuInput(bool8 a0)
 
 s32 GetIQSkillSelection(void)
 {
-    return (sIQSkillListMenu->s24.s0.input.currPage * sIQSkillListMenu->s24.s0.input.entriesPerPage) + sIQSkillListMenu->s24.s0.input.menuIndex;
+    return GET_CURRENT_MENU_ENTRY(sIQSkillListMenu->s24.s0.input);
 }
 
 void RedrawIQSkillListMenu(bool8 addCursor)
@@ -81,7 +81,7 @@ void RedrawIQSkillListMenu(bool8 addCursor)
     ResetUnusedInputStruct();
     ShowWindows(&sIQSkillListMenu->s24.s0.windows, FALSE, FALSE);
     sIQSkillListMenu->s24.s0.input.totalEntriesCount = sIQSkillListMenu->numIQSkills;
-    sub_8013984(&sIQSkillListMenu->s24.s0.input);
+    MenuUpdatePagesData(&sIQSkillListMenu->s24.s0.input);
     sub_801C440();
     BuildIQSkillList();
 
@@ -102,7 +102,7 @@ void CleanIQSkillListMenu(void)
 
 static void sub_801C440(void)
 {
-    sIQSkillListMenu->s24.header.count = sIQSkillListMenu->s24.s0.input.unk20;
+    sIQSkillListMenu->s24.header.count = sIQSkillListMenu->s24.s0.input.pagesCount;
     sIQSkillListMenu->s24.header.currId = sIQSkillListMenu->s24.s0.input.currPage;
     sIQSkillListMenu->s24.header.width = 10;
     sIQSkillListMenu->s24.header.f3 = 0;
@@ -130,7 +130,7 @@ void BuildIQSkillList(void)
     x2 = x + sIQSkillListMenu->s24.header.width * 8;
     sub_8012BC4(x2, 0, sIQSkillListMenu->s24.s0.input.currPage + 1, 1, 7, sIQSkillListMenu->s24.s0.winId);
 
-    for (counter = 0; counter < sIQSkillListMenu->s24.s0.input.unk1A; counter++) {
+    for (counter = 0; counter < sIQSkillListMenu->s24.s0.input.currPageEntries; counter++) {
         skillIndex = sIQSkillListMenu->iqSkills[(sIQSkillListMenu->s24.s0.input.currPage * sIQSkillListMenu->s24.s0.input.entriesPerPage) + counter];
 
         y = GetMenuEntryYCoord(&sIQSkillListMenu->s24.s0.input, counter);

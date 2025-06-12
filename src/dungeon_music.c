@@ -16,7 +16,7 @@ extern MenuInputStruct gDungeonMenu;
 
 void PlayDungeonCursorSE(bool8 checkMenuEntriesCount)
 {
-    if (!checkMenuEntriesCount || gDungeonMenu.unk1A > 1)
+    if (!checkMenuEntriesCount || gDungeonMenu.currPageEntries > 1)
         PlayFanfareSE(0x12d,MAX_VOLUME);
 }
 

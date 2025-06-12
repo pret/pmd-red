@@ -36,7 +36,7 @@ typedef struct PersonalityTestTracker
     /* 0x44 */ s32 NatureTotals[NUM_PERSONALITIES];
     /* 0x78 */ u8 QuestionTracker[NUM_QUIZ_QUESTIONS];
     /* 0xB0 */ u32 playerGender; // 0 = Male, 1 = Female
-    /* 0xB4 */ MenuInputStructSub input;
+    /* 0xB4 */ TouchScreenMenuInput input;
 } PersonalityTestTracker;
 
 bool8 CreateTestTracker(void);

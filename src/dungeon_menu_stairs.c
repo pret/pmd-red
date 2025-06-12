@@ -81,7 +81,7 @@ void ShowDungeonStairsMenu(Entity *mon)
                 MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                 if (gDungeonMenu.menuIndex == 1) {
                     PlayDungeonConfirmationSE();
                     ShowStairsDescription(&mon->pos);
@@ -104,7 +104,7 @@ void ShowDungeonStairsMenu(Entity *mon)
                 }
                 PlayDungeonCancelSE();
             }
-            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonCancelSE();
                 inputAction = 1;
                 break;
@@ -162,7 +162,7 @@ static void ShowStairsDescription(DungeonPos *pos)
         u8 floorType;
         bool8 bPress;
         STATUSTEXTS(statuses);
-        MenuInputStructSub menuSub;
+        TouchScreenMenuInput menuSub;
         WindowHeader header;
         WindowTemplates windows = {
             .id = {
@@ -182,7 +182,7 @@ static void ShowStairsDescription(DungeonPos *pos)
         };
         s32 i, statusesCount;
 
-        sub_801317C(&menuSub);
+        ResetTouchScreenMenuInput(&menuSub);
         header.count = 1;
         header.currId = 0;
         header.width = 16;
@@ -199,7 +199,7 @@ static void ShowStairsDescription(DungeonPos *pos)
             if (statusesCount != 0) {
                 ShowStatusDescriptionMenuArrow();
             }
-            nullsub_34(&menuSub, 0);
+            GetTouchScreenMenuInput(&menuSub, 0);
             DungeonRunFrameActions(0x16);
             if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
                 PlayDungeonConfirmationSE();
@@ -221,7 +221,7 @@ static void ShowStairsDescription(DungeonPos *pos)
                 if (i < statusesCount - 1) {
                     ShowStatusDescriptionMenuArrow();
                 }
-                nullsub_34(&menuSub, 0);
+                GetTouchScreenMenuInput(&menuSub, 0);
                 DungeonRunFrameActions(0x16);
                 if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
                     PlayDungeonConfirmationSE();

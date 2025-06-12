@@ -64,24 +64,24 @@ u32 DebugFieldMapWindow_GetInput(void)
         case INPUT_A_BUTTON:
             return DEBUG_INPUT_A_PRESS;
         default:
-            if (sub_80138B8(&sDebugWindow->s0.input, 1)) {
+            if (MenuCursorUpdate(&sDebugWindow->s0.input, TRUE)) {
                 sub_801DB54();
                 sub_801DBD4();
-                return 1;
+                return DEBUG_INPUT_DPAD;
             }
-            return 0;
+            return DEBUG_INPUT_NOTHING;
     }
 }
 
 s16 DebugFieldMapWindow_GetCurrentIndex(void)
 {
-    return (sDebugWindow->s0.input.currPage * sDebugWindow->s0.input.entriesPerPage) + sDebugWindow->s0.input.menuIndex;
+    return GET_CURRENT_MENU_ENTRY(sDebugWindow->s0.input);
 }
 
 UNUSED static void sub_801DADC(bool8 a0)
 {
     sDebugWindow->s0.input.totalEntriesCount = 229;
-    sub_8013984(&sDebugWindow->s0.input);
+    MenuUpdatePagesData(&sDebugWindow->s0.input);
     sub_801DB54();
     sub_801DBD4();
     if (a0)
@@ -130,7 +130,7 @@ static void sub_801DBD4(void)
     // This line has no real effect. It's a magic 'fakematch' to fool agb into generating the same asm. It can be removed if you don't care about matching.
     if (x) { counter = 0; }
 
-    for (counter = 0; counter < sDebugWindow->s0.input.unk1A; counter++) {
+    for (counter = 0; counter < sDebugWindow->s0.input.currPageEntries; counter++) {
         index = (sDebugWindow->s0.input.currPage * sDebugWindow->s0.input.entriesPerPage) + counter;
         temp = &gGroundConversion_811BAF4[index];
         temp2 = &gUnknown_81188F0[temp->unk4];

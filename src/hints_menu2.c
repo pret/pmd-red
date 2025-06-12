@@ -45,7 +45,7 @@ u32 HandleHintDisplayScreenInput(void)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if (sub_8013938(&sUnknown_203B268->s0.input)) {
+            if (MenuCursorUpdateOnlyLeftRight(&sUnknown_203B268->s0.input)) {
                 sub_801E714();
                 return 1;
             }
@@ -72,7 +72,7 @@ void DestroyHintDisplayScreen(void)
 
 static void sub_801E76C(void)
 {
-    sUnknown_203B268->header.count = sUnknown_203B268->s0.input.unk20;
+    sUnknown_203B268->header.count = sUnknown_203B268->s0.input.pagesCount;
     sUnknown_203B268->header.currId = sUnknown_203B268->s0.input.currPage;
     sUnknown_203B268->header.width = 15;
     sUnknown_203B268->header.f3 = 0;

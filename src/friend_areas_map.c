@@ -143,13 +143,13 @@ static bool8 ChooseAreaInLocation_Async(void)
             PlayCursorUpDownSoundEffect();
         }
 
-        if ((gRealInputs.pressed & A_BUTTON) || menuPtr->unk28.a_button) {
+        if ((gRealInputs.pressed & A_BUTTON) || menuPtr->touchScreen.a_button) {
             PlayAcceptSoundEffect();
             gFriendAreasMapPtr->chosenFriendAreaId = gFriendAreasMapPtr->displayedAreas[menuPtr->menuIndex];
             ret = TRUE;
             break;
         }
-        if ((gRealInputs.pressed & B_BUTTON) || menuPtr->unk28.b_button) {
+        if ((gRealInputs.pressed & B_BUTTON) || menuPtr->touchScreen.b_button) {
             PlayCancelSoundEffect();
             break;
         }

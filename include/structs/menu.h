@@ -6,7 +6,7 @@
 #include "structs/str_position.h"
 
 // size: R=0xC | NDS=0xA?
-typedef struct MenuInputStructSub
+typedef struct TouchScreenMenuInput
 {
     /* R=0x0 | B=0x0 */ u8 unk0;
     /* R=0x1 | B=0x1 */ u8 a_button;
@@ -15,7 +15,7 @@ typedef struct MenuInputStructSub
     /* R=0x4 | B=0x4 */ u8 dpad_left;
     /* R=0x5 | B=0x5 */ u8 unk5;
     /* R=0x8 | B=0x6 */ DungeonPos unk8;
-} MenuInputStructSub;
+} TouchScreenMenuInput;
 
 // size: R=0x34 | NDS=0x32?
 typedef struct MenuInputStruct
@@ -28,14 +28,14 @@ typedef struct MenuInputStruct
     /* 0x10 */ u32 unk10;
     /* 0x14 */ DungeonPos unk14;
     /* 0x18 */ s16 menuIndex;
-    /* 0x1A */ s16 unk1A;
+    /* 0x1A */ s16 currPageEntries;
     /* 0x1C */ s16 entriesPerPage;
     /* 0x1E */ s16 currPage;
-    /* 0x20 */ s16 unk20;
+    /* 0x20 */ s16 pagesCount;
     /* 0x22 */ s16 totalEntriesCount;
     /* 0x24 */ u16 unk24;
     /* 0x26 */ u16 unk26;
-    /* 0x28 */ MenuInputStructSub unk28;
+    /* 0x28 */ TouchScreenMenuInput touchScreen; // For obvious reason unused on GBA
 } MenuInputStruct;
 
 // size: 0x8

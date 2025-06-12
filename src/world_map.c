@@ -551,10 +551,10 @@ static bool8 PlayerEnterDungeonPrompt_Async(u8 *str)
     sub_80073E0(1);
 
     menuInput.menuIndex = 1;
-    menuInput.unk1A = 2;
+    menuInput.currPageEntries = 2;
     menuInput.entriesPerPage = 2;
     menuInput.currPage = 0;
-    menuInput.unk20 = 0;
+    menuInput.pagesCount = 0;
     menuInput.unk4 = 0;
     menuInput.firstEntryY = 0;
     menuInput.windowId = 1;
@@ -565,7 +565,7 @@ static bool8 PlayerEnterDungeonPrompt_Async(u8 *str)
     menuInput.cursorArrowPos.x = 8;
     menuInput.cursorArrowPos.y = 8;
     sub_80137B0(&menuInput, 24);
-    sub_801317C(&menuInput.unk28);
+    ResetTouchScreenMenuInput(&menuInput.touchScreen);
 
     while (TRUE) {
         AddMenuCursorSprite(&menuInput);
@@ -579,7 +579,7 @@ static bool8 PlayerEnterDungeonPrompt_Async(u8 *str)
             MoveMenuCursorUp(&menuInput);
             PlayCursorUpDownSoundEffect();
         }
-        if ((gRealInputs.pressed & A_BUTTON) || menuInput.unk28.a_button) {
+        if ((gRealInputs.pressed & A_BUTTON) || menuInput.touchScreen.a_button) {
             PlayAcceptSoundEffect();
             break;
         }

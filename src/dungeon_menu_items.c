@@ -192,7 +192,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
             DungeonRunFrameActions(0x14);
             if (!var_30) {
                 if (sUnknown_202F258 > 1) {
-                    if ((gRealInputs.pressed & DPAD_LEFT) || gDungeonMenu.unk28.dpad_left) {
+                    if ((gRealInputs.pressed & DPAD_LEFT) || gDungeonMenu.touchScreen.dpad_left) {
                         PlayDungeonCursorSE(0);
                         if (--r8 < 0) {
                             r8 = sUnknown_202F258 - 1;
@@ -200,7 +200,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                         sUnknown_202F240 = var_30;
                         break;
                     }
-                    if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.unk28.dpad_right) {
+                    if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.touchScreen.dpad_right) {
                         PlayDungeonCursorSE(0);
                         if (++r8 == sUnknown_202F258) {
                             r8 = 0;
@@ -247,7 +247,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     }
                     break;
                 }
-                if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+                if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                     PlayDungeonConfirmationSE();
                     sub_8060890(&a0->pos);
                     inputAction = 1;
@@ -259,7 +259,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     inputAction = 3;
                     break;
                 }
-                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                     PlayDungeonCancelSE();
                     inputAction = 2;
                     break;
@@ -315,7 +315,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     PlayDungeonCursorSE(1);
                     MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
                 }
-                if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+                if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                     if (CanSubMenuItemBeChosen(gDungeonMenu.menuIndex)) {
                         PlayDungeonConfirmationSE();
                         ChosenSubMenuToAction(&a0Info->action);
@@ -324,7 +324,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
                     }
                     PlayDungeonCancelSE();
                 }
-                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                     PlayDungeonCancelSE();
                     inputAction = 1;
                     break;
@@ -391,13 +391,13 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     a1Info = GetEntInfo(a1);
     r10 = sub_8060800(header, a0);
     gDungeonMenu.menuIndex = sUnknown_202F240;
-    gDungeonMenu.unk1A = 0;
+    gDungeonMenu.currPageEntries = 0;
     gDungeonMenu.currPage = a0;
-    gDungeonMenu.unk20 = sUnknown_202F258;
+    gDungeonMenu.pagesCount = sUnknown_202F258;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.windowId = 0;
     gDungeonMenu.unk14.x = 0;
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     gDungeon->unk181e8.unk18212 = 0;
     switch (sUnknown_202F248[a0]) {
         case 0:
@@ -449,7 +449,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         PrintFormattedStringOnWindow(x, 0, gTeamToolboxAPtr, 0, 0);
         for (i = 0; i < 10; i++) {
             if (ItemExists(&gTeamInventoryRef->teamItems[i])) {
-                gDungeonMenu.unk1A++;
+                gDungeonMenu.currPageEntries++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i], &gUnknown_8106B60);
                 y = GetMenuEntryYCoord(&gDungeonMenu, i);
                 PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
@@ -463,7 +463,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         PrintFormattedStringOnWindow(x, 0, gTeamToolboxBPtr, 0, 0);
         for (i = 0; i < 10; i++) {
             if (ItemExists(&gTeamInventoryRef->teamItems[i + 10])) {
-                gDungeonMenu.unk1A++;
+                gDungeonMenu.currPageEntries++;
                 sub_8090E14(txtBuff, &gTeamInventoryRef->teamItems[i + 10], &gUnknown_8106B60);
                 y = GetMenuEntryYCoord(&gDungeonMenu, i);
                 PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
@@ -478,7 +478,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
             Item *item = GetItemData(tile->object);
             PrintFormattedStringOnWindow(x, 0, gFieldItemMenuGroundTextPtr, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
-                gDungeonMenu.unk1A++;
+                gDungeonMenu.currPageEntries++;
                 sub_8090E14(txtBuff, item, &gUnknown_8106B60);
                 y = GetMenuEntryYCoord(&gDungeonMenu, 0);
                 PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
@@ -493,7 +493,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
             SetMessageArgument_2(gFormatBuffer_Monsters[0], a1Info, 0);
             PrintFormattedStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
-                gDungeonMenu.unk1A++;
+                gDungeonMenu.currPageEntries++;
                 sub_8090E14(txtBuff, item, &gUnknown_8106B60);
                 y = GetMenuEntryYCoord(&gDungeonMenu, 0);
                 PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
@@ -508,7 +508,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
                 SetMessageArgument_2(gFormatBuffer_Monsters[0], monInfo, 0);
                 PrintFormattedStringOnWindow(x, 0, gUnknown_80FE940, 0, 0);
                 if (item->flags & ITEM_FLAG_EXISTS) {
-                    gDungeonMenu.unk1A++;
+                    gDungeonMenu.currPageEntries++;
                     sub_8090E14(txtBuff, item, &gUnknown_8106B60);
                     y = GetMenuEntryYCoord(&gDungeonMenu, 0);
                     PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
@@ -518,7 +518,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         break;
     }
 
-    if (gDungeonMenu.menuIndex >= gDungeonMenu.unk1A) {
+    if (gDungeonMenu.menuIndex >= gDungeonMenu.currPageEntries) {
         gDungeonMenu.menuIndex = 0;
     }
     sub_80073E0(0);
@@ -561,7 +561,7 @@ static s32 sub_8060800(WindowHeader *header, s32 a1)
 
 static bool8 sub_8060860(s32 a0)
 {
-    if (gDungeonMenu.unk1A <= 1 || sUnknown_202F248[a0] > 1)
+    if (gDungeonMenu.currPageEntries <= 1 || sUnknown_202F248[a0] > 1)
         return FALSE;
     else
         return TRUE;

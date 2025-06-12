@@ -124,7 +124,7 @@ u32 sub_8030768(u8 r0)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if(sub_80138B8(&gUnknown_203B320->s28.s0.input, TRUE) != 0)
+            if(MenuCursorUpdate(&gUnknown_203B320->s28.s0.input, TRUE) != 0)
             {
                 sub_80308A0();
                 sub_803092C();
@@ -137,13 +137,13 @@ u32 sub_8030768(u8 r0)
 
 u8 sub_80307EC(void)
 {
-    return gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.currPage * gUnknown_203B320->s28.s0.input.entriesPerPage) + gUnknown_203B320->s28.s0.input.menuIndex];
+    return gUnknown_203B320->unk0[GET_CURRENT_MENU_ENTRY(gUnknown_203B320->s28.s0.input)];
 }
 
 void sub_8030810(u8 r0)
 {
     gUnknown_203B320->s28.s0.input.totalEntriesCount = sub_8030A74();
-    sub_8013984(&gUnknown_203B320->s28.s0.input);
+    MenuUpdatePagesData(&gUnknown_203B320->s28.s0.input);
 
     sub_80308A0();
     sub_803092C();
@@ -170,7 +170,7 @@ u8 *sub_8030894(void)
 
 void sub_80308A0(void)
 {
-    gUnknown_203B320->s28.header.count = gUnknown_203B320->s28.s0.input.unk20;
+    gUnknown_203B320->s28.header.count = gUnknown_203B320->s28.s0.input.pagesCount;
     gUnknown_203B320->s28.header.currId = gUnknown_203B320->s28.s0.input.currPage;
     gUnknown_203B320->s28.header.width = 12;
     gUnknown_203B320->s28.header.f3 = 0;
@@ -198,7 +198,7 @@ void sub_803092C(void)
   r5 = r4 + gUnknown_203B320->s28.header.width * 8;
   sub_8012BC4(r5,0,gUnknown_203B320->s28.s0.input.currPage + 1,1,7,gUnknown_203B320->s28.s0.winId);
 
-  for (index = 0; index < gUnknown_203B320->s28.s0.input.unk1A; index++) {
+  for (index = 0; index < gUnknown_203B320->s28.s0.input.currPageEntries; index++) {
       mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.currPage * gUnknown_203B320->s28.s0.input.entriesPerPage) + index]);
       local.unk0[0] = gUnknown_203B320->s28.s0.winId;
       local.y = GetMenuEntryYCoord(&gUnknown_203B320->s28.s0.input,index);

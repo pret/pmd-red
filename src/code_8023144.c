@@ -63,7 +63,7 @@ bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
     CreateMenuOnWindow(&gUnknown_3001B5C->s35C.s0.input, sub_80236A4(), a3, index);
     gUnknown_3001B5C->s35C.s0.input.menuIndex = gUnknown_203B29C;
     gUnknown_3001B5C->s35C.s0.input.currPage = gUnknown_203B29E;
-    sub_8013984(&gUnknown_3001B5C->s35C.s0.input);
+    MenuUpdatePagesData(&gUnknown_3001B5C->s35C.s0.input);
     sub_8023420();
     sub_80234BC();
     return TRUE;
@@ -95,7 +95,7 @@ u32 sub_8023278(bool8 a0)
             sub_80236A4();
             break;
         default:
-            if (sub_80138B8(&gUnknown_3001B5C->s35C.s0.input, 1) == 0)
+            if (MenuCursorUpdate(&gUnknown_3001B5C->s35C.s0.input, 1) == 0)
                 return 0;
             break;
     }
@@ -107,14 +107,14 @@ u32 sub_8023278(bool8 a0)
 
 s16 sub_802331C(void)
 {
-    return gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.currPage * gUnknown_3001B5C->s35C.s0.input.entriesPerPage) + gUnknown_3001B5C->s35C.s0.input.menuIndex];
+    return gUnknown_3001B5C->unkC[GET_CURRENT_MENU_ENTRY(gUnknown_3001B5C->s35C.s0.input)];
 }
 
 void sub_8023354(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, FALSE, FALSE);
-    sub_8013984(&gUnknown_3001B5C->s35C.s0.input);
+    MenuUpdatePagesData(&gUnknown_3001B5C->s35C.s0.input);
     sub_8023420();
     sub_80234BC();
 
@@ -165,7 +165,7 @@ static void sub_80234BC(void)
 
     sub_8012BC4((gUnknown_3001B5C->s35C.header.width * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.currPage + 1, 2, 7, gUnknown_3001B5C->s35C.s0.winId);
 
-    for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.unk1A; i++) {
+    for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.currPageEntries; i++) {
         y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.s0.input, i);
         species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.currPage * gUnknown_3001B5C->s35C.s0.input.entriesPerPage) + i];
         GetFriendAreaCapacity2(GetFriendArea(species), &auStack_2c, FALSE, FALSE);

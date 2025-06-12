@@ -129,7 +129,7 @@ _0803B140:
 _0803B144:
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl sub_80138B8
+	bl MenuCursorUpdate
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803B156
@@ -177,7 +177,7 @@ sub_803B18C:
 	ldr r0, [r5]
 	movs r1, 0xE5
 	strh r1, [r0, 0x22]
-	bl sub_8013984
+	bl MenuUpdatePagesData
 	bl sub_803B204
 	bl sub_803B284
 	cmp r4, 0

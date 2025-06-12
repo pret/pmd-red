@@ -6,7 +6,7 @@
 
 typedef struct WigglytuffShop2Work
 {
-    MenuInputStructSub unk0;
+    TouchScreenMenuInput unk0;
     /* 0xC */ u8 friendArea;
     bool8 unkD;
     s16 friendAreaSpecies[0x10];

@@ -38,9 +38,9 @@ void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
 
     gDungeonMenu.menuIndex = 0;
     gDungeonMenu.entriesPerPage = gDungeonSubMenuItemsCount;
-    gDungeonMenu.unk1A = gDungeonSubMenuItemsCount;
+    gDungeonMenu.currPageEntries = gDungeonSubMenuItemsCount;
     gDungeonMenu.currPage = 0;
-    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.pagesCount = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 0;
     gDungeonMenu.windowId = 1;
@@ -48,7 +48,7 @@ void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
     gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14 = gDungeonMenu.cursorArrowPos;
 
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
 
     windows.id[1].pos.x = subWindowX;
     windows.id[1].width = 28 - subWindowX;

@@ -91,7 +91,7 @@ u32 sub_801F520(u8 param_1)
             default:
                 break;
         }
-        if (sub_80138B8(&gUnknown_203B274->s348.s0.input,1) != 0) {
+        if (MenuCursorUpdate(&gUnknown_203B274->s348.s0.input,1) != 0) {
             sub_801F690();
             sub_801F700();
             return 1;
@@ -104,14 +104,14 @@ u32 sub_801F520(u8 param_1)
 
 u16 sub_801F5B4(void)
 {
-    return gUnknown_203B274->unk4->unk0[gUnknown_203B274->s348.s0.input.currPage * gUnknown_203B274->s348.s0.input.entriesPerPage + gUnknown_203B274->s348.s0.input.menuIndex];
+    return gUnknown_203B274->unk4->unk0[GET_CURRENT_MENU_ENTRY(gUnknown_203B274->s348.s0.input)];
 }
 
 void sub_801F5F0(bool8 r0)
 {
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B274->s348.s0.windows, FALSE, FALSE);
-    sub_8013984(&gUnknown_203B274->s348.s0.input);
+    MenuUpdatePagesData(&gUnknown_203B274->s348.s0.input);
     sub_801F690();
     sub_801F700();
     if(r0)
@@ -144,9 +144,9 @@ void sub_801F700(void)
 
     CallPrepareTextbox_8008C54(gUnknown_203B274->s348.s0.winId);
     sub_80073B8(gUnknown_203B274->s348.s0.winId);
-    sprintfStatic(buffer1,gUnknown_80DC2DC,gUnknown_203B274->s348.s0.input.currPage + 1,gUnknown_203B274->s348.s0.input.unk20); // Moves Page: %d/%d
+    sprintfStatic(buffer1,gUnknown_80DC2DC,gUnknown_203B274->s348.s0.input.currPage + 1,gUnknown_203B274->s348.s0.input.pagesCount); // Moves Page: %d/%d
     PrintStringOnWindow(0x10,0,buffer1,gUnknown_203B274->s348.s0.winId,0);
-    for(index = 0; index < gUnknown_203B274->s348.s0.input.unk1A; index++)
+    for(index = 0; index < gUnknown_203B274->s348.s0.input.currPageEntries; index++)
     {
         sub_8092C84(buffer2,gUnknown_203B274->unk4->unk0[gUnknown_203B274->s348.s0.input.currPage * gUnknown_203B274->s348.s0.input.entriesPerPage + index]);
         y = GetMenuEntryYCoord(&gUnknown_203B274->s348.s0.input, index);

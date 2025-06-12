@@ -41,9 +41,9 @@ bool8 sub_802C10C(s32 a0, DungeonPos *a1, s32 a2)
     sub_8012D34(gUnknown_203B2E0->unk8.s0.unk38, a2);
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B2E0->unk8.s0.windows, TRUE, TRUE);
-    sub_8013848(&gUnknown_203B2E0->unk8.s0.input, CountPelipperBoardSlots(), a2, a0);
+    CreateMenuOnWindow2(&gUnknown_203B2E0->unk8.s0.input, CountPelipperBoardSlots(), a2, a0);
     gUnknown_203B2E0->unk8.s0.input.menuIndex = gUnknown_203B2E4;
-    sub_8013984(&gUnknown_203B2E0->unk8.s0.input);
+    MenuUpdatePagesData(&gUnknown_203B2E0->unk8.s0.input);
     sub_802C328();
     DrawPelipperBoardJobMenu();
     return TRUE;
@@ -67,7 +67,7 @@ u32 sub_802C1E4(bool8 a0)
             PlayMenuSoundEffect(4);
             return 4;
         default:
-            if (sub_80138B8(&gUnknown_203B2E0->unk8.s0.input, 1)) {
+            if (MenuCursorUpdate(&gUnknown_203B2E0->unk8.s0.input, 1)) {
                 sub_802C328();
                 DrawPelipperBoardJobMenu();
                 return 1;
@@ -78,7 +78,7 @@ u32 sub_802C1E4(bool8 a0)
 
 u8 sub_802C26C(void)
 {
-    return gUnknown_203B2E0->pelipperBoardSlots[(gUnknown_203B2E0->unk8.s0.input.currPage * gUnknown_203B2E0->unk8.s0.input.entriesPerPage) + gUnknown_203B2E0->unk8.s0.input.menuIndex];
+    return gUnknown_203B2E0->pelipperBoardSlots[GET_CURRENT_MENU_ENTRY(gUnknown_203B2E0->unk8.s0.input)];
 }
 
 void sub_802C28C(bool8 cursorSprite)
@@ -86,7 +86,7 @@ void sub_802C28C(bool8 cursorSprite)
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B2E0->unk8.s0.windows, FALSE, FALSE);
     gUnknown_203B2E0->unk8.s0.input.totalEntriesCount = CountPelipperBoardSlots();
-    sub_8013984(&gUnknown_203B2E0->unk8.s0.input);
+    MenuUpdatePagesData(&gUnknown_203B2E0->unk8.s0.input);
     sub_802C328();
     DrawPelipperBoardJobMenu();
 
@@ -108,7 +108,7 @@ void sub_802C2D4(void)
 
 static void sub_802C328(void)
 {
-    gUnknown_203B2E0->unk8.header.count = gUnknown_203B2E0->unk8.s0.input.unk20;
+    gUnknown_203B2E0->unk8.header.count = gUnknown_203B2E0->unk8.s0.input.pagesCount;
     gUnknown_203B2E0->unk8.header.currId = gUnknown_203B2E0->unk8.s0.input.currPage;
     gUnknown_203B2E0->unk8.header.width = 12;
     gUnknown_203B2E0->unk8.header.f3 = 0;
@@ -136,7 +136,7 @@ void DrawPelipperBoardJobMenu(void)
     x = iVar4 + (gUnknown_203B2E0->unk8.header.width * 8);
     sub_8012BC4(x, 0, gUnknown_203B2E0->unk8.s0.input.currPage + 1, 2, 7, gUnknown_203B2E0->unk8.s0.winId);
 
-    for (i = 0; i < gUnknown_203B2E0->unk8.s0.input.unk1A; i++) {
+    for (i = 0; i < gUnknown_203B2E0->unk8.s0.input.currPageEntries; i++) {
         slotIndex = (gUnknown_203B2E0->pelipperBoardSlots[(gUnknown_203B2E0->unk8.s0.input.currPage * gUnknown_203B2E0->unk8.s0.input.entriesPerPage) + i]);
         mail = GetPelipperBoardSlotInfo(slotIndex);
         local.unk0[0] = gUnknown_203B2E0->unk8.s0.winId;

@@ -43,9 +43,9 @@ bool8 sub_802C4C8(s32 a0, DungeonPos *a1, u32 a2)
     sub_8012D34(gUnknown_203B2E8->unk8.s0.unk38, a2);
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B2E8->unk8.s0.windows, TRUE, TRUE);
-    sub_8013848(&gUnknown_203B2E8->unk8.s0.input, CountAcceptedJobs(), a2, a0);
+    CreateMenuOnWindow2(&gUnknown_203B2E8->unk8.s0.input, CountAcceptedJobs(), a2, a0);
     gUnknown_203B2E8->unk8.s0.input.menuIndex = gUnknown_203B2EC;
-    sub_8013984(&gUnknown_203B2E8->unk8.s0.input);
+    MenuUpdatePagesData(&gUnknown_203B2E8->unk8.s0.input);
     sub_802C6DC();
     DrawJobListMenu();
     return TRUE;
@@ -70,7 +70,7 @@ u32 sub_802C598(bool8 a0)
             return 4;
     }
 
-    if (sub_80138B8(&gUnknown_203B2E8->unk8.s0.input, 1)) {
+    if (MenuCursorUpdate(&gUnknown_203B2E8->unk8.s0.input, 1)) {
         sub_802C6DC();
         DrawJobListMenu();
         return 1;
@@ -80,7 +80,7 @@ u32 sub_802C598(bool8 a0)
 
 u8 GetPelipperBoardSlotIndex(void)
 {
-    return gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.currPage * gUnknown_203B2E8->unk8.s0.input.entriesPerPage) + gUnknown_203B2E8->unk8.s0.input.menuIndex];
+    return gUnknown_203B2E8->pelipperBoardSlots[GET_CURRENT_MENU_ENTRY(gUnknown_203B2E8->unk8.s0.input)];
 }
 
 void sub_802C640(bool8 cursorSprite)
@@ -88,7 +88,7 @@ void sub_802C640(bool8 cursorSprite)
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B2E8->unk8.s0.windows, FALSE, FALSE);
     gUnknown_203B2E8->unk8.s0.input.totalEntriesCount = CountAcceptedJobs();
-    sub_8013984(&gUnknown_203B2E8->unk8.s0.input);
+    MenuUpdatePagesData(&gUnknown_203B2E8->unk8.s0.input);
     sub_802C6DC();
     DrawJobListMenu();
 
@@ -110,7 +110,7 @@ void sub_802C688(void)
 
 static void sub_802C6DC(void)
 {
-    gUnknown_203B2E8->unk8.header.count = gUnknown_203B2E8->unk8.s0.input.unk20;
+    gUnknown_203B2E8->unk8.header.count = gUnknown_203B2E8->unk8.s0.input.pagesCount;
     gUnknown_203B2E8->unk8.header.currId = gUnknown_203B2E8->unk8.s0.input.currPage;
     gUnknown_203B2E8->unk8.header.width = 12;
     gUnknown_203B2E8->unk8.header.f3 = 0;
@@ -137,7 +137,7 @@ void DrawJobListMenu(void)
     x = r4 + (gUnknown_203B2E8->unk8.header.width * 8);
     sub_8012BC4(x, 0, gUnknown_203B2E8->unk8.s0.input.currPage + 1, 2, 7, gUnknown_203B2E8->unk8.s0.winId);
 
-    for (i = 0;  i < gUnknown_203B2E8->unk8.s0.input.unk1A; i++) {
+    for (i = 0;  i < gUnknown_203B2E8->unk8.s0.input.currPageEntries; i++) {
         mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.currPage * gUnknown_203B2E8->unk8.s0.input.entriesPerPage) + i]);
         local.unk0[0] = gUnknown_203B2E8->unk8.s0.winId;
         local.y = GetMenuEntryYCoord(&gUnknown_203B2E8->unk8.s0.input, i);

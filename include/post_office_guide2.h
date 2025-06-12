@@ -7,7 +7,7 @@
 // size: 0x78
 typedef struct unkStruct_203B330
 {
-    /* 0x0 */ MenuInputStructSub input;
+    /* 0x0 */ TouchScreenMenuInput input;
     u8 unkC;
     /* 0xD */ u8 dungeonIndex;
     u32 unk10;

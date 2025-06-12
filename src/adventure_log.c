@@ -51,7 +51,7 @@ u32 HandleAdventureLogInput(bool8 a0)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if (sub_8013938(&sAdventureLog->s0.input)) {
+            if (MenuCursorUpdateOnlyLeftRight(&sAdventureLog->s0.input)) {
                 sub_8032084();
                 DisplayAdventureLog();
                 return 1;
@@ -73,7 +73,7 @@ void CleanAdventureLogScreen(void)
 
 static void sub_8032084(void)
 {
-    sAdventureLog->header.count = sAdventureLog->s0.input.unk20;
+    sAdventureLog->header.count = sAdventureLog->s0.input.pagesCount;
     sAdventureLog->header.currId = sAdventureLog->s0.input.currPage;
     sAdventureLog->header.width = 11;
     sAdventureLog->header.f3 = 0;
@@ -99,7 +99,7 @@ static void DisplayAdventureLog(void)
     r6 = r4 + (sAdventureLog->header.width * 8);
     sub_8012BC4(r6, 0, sAdventureLog->s0.input.currPage + 1, 1, 7, sAdventureLog->s0.winId);
 
-    for (i = 0; i < sAdventureLog->s0.input.unk1A; i++) {
+    for (i = 0; i < sAdventureLog->s0.input.currPageEntries; i++) {
         aa = (sAdventureLog->s0.input.currPage * sAdventureLog->s0.input.entriesPerPage) + i;
 
         if (GetAdventureAchievement(aa)) {

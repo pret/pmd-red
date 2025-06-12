@@ -42,7 +42,7 @@ bool8 sub_80211AC(u32 mode, u32 a1)
     if (sUnknown_203B284 == sWigglytuffShop1Work->mode) {
         sWigglytuffShop1Work->s40.s0.input.menuIndex = sUnknown_203B288;
         sWigglytuffShop1Work->s40.s0.input.currPage = sUnknown_203B28A;
-        sub_8013984(&sWigglytuffShop1Work->s40.s0.input);
+        MenuUpdatePagesData(&sWigglytuffShop1Work->s40.s0.input);
     }
 
     sub_8021410();
@@ -71,7 +71,7 @@ u32 sub_8021274(bool8 a0)
             PlayMenuSoundEffect(4);
             return 4;
         default:
-            if (sub_80138B8(&sWigglytuffShop1Work->s40.s0.input, 1) != 0) {
+            if (MenuCursorUpdate(&sWigglytuffShop1Work->s40.s0.input, 1) != 0) {
                 sub_8021410();
                 sub_8021494();
                 return 1;
@@ -82,7 +82,7 @@ u32 sub_8021274(bool8 a0)
 
 u8 sub_802132C(void)
 {
-    return sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.currPage * sWigglytuffShop1Work->s40.s0.input.entriesPerPage) + sWigglytuffShop1Work->s40.s0.input.menuIndex];
+    return sWigglytuffShop1Work->friendAreas[GET_CURRENT_MENU_ENTRY(sWigglytuffShop1Work->s40.s0.input)];
 }
 
 void sub_8021354(bool8 cursorSprite)
@@ -90,7 +90,7 @@ void sub_8021354(bool8 cursorSprite)
     ResetUnusedInputStruct();
     ShowWindows(&sWigglytuffShop1Work->s40.s0.windows, FALSE, FALSE);
     sWigglytuffShop1Work->s40.s0.input.totalEntriesCount = sub_8021664();
-    sub_8013984(&sWigglytuffShop1Work->s40.s0.input);
+    MenuUpdatePagesData(&sWigglytuffShop1Work->s40.s0.input);
     sub_8021410();
     sub_8021494();
 
@@ -137,7 +137,7 @@ void sub_8021494(void)
 
     sub_8012BC4((sWigglytuffShop1Work->s40.header.width * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.currPage + 1, 1, 7, sWigglytuffShop1Work->s40.s0.winId);
 
-    for (i = 0; i < sWigglytuffShop1Work->s40.s0.input.unk1A; i++) {
+    for (i = 0; i < sWigglytuffShop1Work->s40.s0.input.currPageEntries; i++) {
         friendAreaIndex = sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.currPage * sWigglytuffShop1Work->s40.s0.input.entriesPerPage) + i];
 
         if (sWigglytuffShop1Work->mode == 2) {

@@ -64,7 +64,7 @@ u32 sub_80303AC(bool8 param_1)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if (sub_80138B8(&sMakuhitaDojoWork2->s30.s0.input, 1)) {
+            if (MenuCursorUpdate(&sMakuhitaDojoWork2->s30.s0.input, 1)) {
                 sub_80304C8();
                 MakuhitaDojo_DrawCourseList();
                 return 1;
@@ -76,13 +76,13 @@ u32 sub_80303AC(bool8 param_1)
 
 s16 sub_8030418(void)
 {
-    return sMakuhitaDojoWork2->unk0[(sMakuhitaDojoWork2->s30.s0.input.currPage * sMakuhitaDojoWork2->s30.s0.input.entriesPerPage) + sMakuhitaDojoWork2->s30.s0.input.menuIndex];
+    return sMakuhitaDojoWork2->unk0[GET_CURRENT_MENU_ENTRY(sMakuhitaDojoWork2->s30.s0.input)];
 }
 
 UNUSED static void sub_8030444(bool8 a0)
 {
     sMakuhitaDojoWork2->s30.s0.input.totalEntriesCount = sub_8030668();
-    sub_8013984(&sMakuhitaDojoWork2->s30.s0.input);
+    MenuUpdatePagesData(&sMakuhitaDojoWork2->s30.s0.input);
     sub_80304C8();
     MakuhitaDojo_DrawCourseList();
     if (a0)
@@ -125,7 +125,7 @@ static void MakuhitaDojo_DrawCourseList(void)
     PrintStringOnWindow(10, 0, sCourses, sMakuhitaDojoWork2->s30.s0.winId, 0);
     sub_8012BC4((sMakuhitaDojoWork2->s30.header.width * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.currPage + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.winId);
 
-    for (i = 0; i < sMakuhitaDojoWork2->s30.s0.input.unk1A; i++) {
+    for (i = 0; i < sMakuhitaDojoWork2->s30.s0.input.currPageEntries; i++) {
         iVar6 = sMakuhitaDojoWork2->unk0[sMakuhitaDojoWork2->s30.s0.input.currPage * sMakuhitaDojoWork2->s30.s0.input.entriesPerPage + i];
         dungeonIndex = sub_80A2740(iVar6);
 

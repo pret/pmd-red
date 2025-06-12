@@ -26,7 +26,7 @@ bool8 sub_802B9FC(u8 mailIndex)
 {
     sUnknown_203B2D4 = MemoryAlloc(sizeof(struct unkStruct_203B2D4), 8);
     sUnknown_203B2D4->currMailIndex = mailIndex;
-    sub_801317C(&sUnknown_203B2D4->unk88);
+    ResetTouchScreenMenuInput(&sUnknown_203B2D4->unk88);
     sUnknown_203B2D4->unk24 = 0;
     sUnknown_203B2D4->unk28.id[0] = sUnknown_80DFC34;
     sUnknown_203B2D4->unk28.id[1] = sUnknown_80DFC18;

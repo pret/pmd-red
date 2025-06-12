@@ -100,16 +100,16 @@ void ShowRecruitmentSearchMenu(void)
 
             sRecruitmentWindowHeader.currId = currTabId;
             DungeonShowWindows(&sRecruitmentSearchWindows, TRUE);
-            gDungeonMenu.unk1A = 0;
+            gDungeonMenu.currPageEntries = 0;
             gDungeonMenu.menuIndex = 0;
             gDungeonMenu.entriesPerPage = 0;
             gDungeonMenu.currPage = currTabId;
-            gDungeonMenu.unk20 = 2;
+            gDungeonMenu.pagesCount = 2;
             gDungeonMenu.unk4 = 0;
             gDungeonMenu.firstEntryY = 16;
             gDungeonMenu.unk14.x = 0;
             gDungeonMenu.windowId = 0;
-            sub_801317C(&gDungeonMenu.unk28);
+            ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
             sScrollId = 0;
             sScrollFlags = 0;
             PrintAvailableMons(currTabData, currTabId);
@@ -141,7 +141,7 @@ void ShowRecruitmentSearchMenu(void)
                     CreateScrollingArrow(FALSE, 0x70);
                 }
 
-                if ((gRealInputs.pressed & (DPAD_LEFT | DPAD_RIGHT)) || gDungeonMenu.unk28.dpad_left || gDungeonMenu.unk28.dpad_right) {
+                if ((gRealInputs.pressed & (DPAD_LEFT | DPAD_RIGHT)) || gDungeonMenu.touchScreen.dpad_left || gDungeonMenu.touchScreen.dpad_right) {
                     PlayDungeonCursorSE(FALSE);
                     currTabId = (currTabId == 0) ? 1 : 0;
                     break;
@@ -149,7 +149,7 @@ void ShowRecruitmentSearchMenu(void)
 
                 if (sub_80048C8())
                     continue;
-                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                     PlayDungeonCancelSE();
                     closeWindow = TRUE;
                     break;

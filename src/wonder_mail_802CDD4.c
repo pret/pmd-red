@@ -33,7 +33,7 @@ bool8 sub_802CDD4(u32 a0)
     sub_8012D34(sUnknown_203B2F4->s0.unk38, 4);
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2F4->s0.windows, TRUE, TRUE);
-    sub_8013848(&sUnknown_203B2F4->s0.input, 5, 4, a0);
+    CreateMenuOnWindow2(&sUnknown_203B2F4->s0.input, 5, 4, a0);
     sub_802CF5C();
     sub_802CFD0();
     return TRUE;
@@ -53,7 +53,7 @@ u32 sub_802CE5C(bool8 a0)
         case INPUT_A_BUTTON:
             return 3;
         default:
-            if (sub_80138B8(&sUnknown_203B2F4->s0.input, TRUE)) {
+            if (MenuCursorUpdate(&sUnknown_203B2F4->s0.input, TRUE)) {
                 sub_802CF5C();
                 sub_802CFD0();
                 return 1;
@@ -64,14 +64,14 @@ u32 sub_802CE5C(bool8 a0)
 
 u8 sub_802CEBC(void)
 {
-    return (sUnknown_203B2F4->s0.input.currPage * sUnknown_203B2F4->s0.input.entriesPerPage) + sUnknown_203B2F4->s0.input.menuIndex;
+    return GET_CURRENT_MENU_ENTRY(sUnknown_203B2F4->s0.input);
 }
 
 void sub_802CED8(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2F4->s0.windows, FALSE, FALSE);
-    sub_8013984(&sUnknown_203B2F4->s0.input);
+    MenuUpdatePagesData(&sUnknown_203B2F4->s0.input);
     sub_802CF5C();
     sub_802CFD0();
 
@@ -92,7 +92,7 @@ void sub_802CF14(void)
 
 static void sub_802CF5C(void)
 {
-    sUnknown_203B2F4->header.count = sUnknown_203B2F4->s0.input.unk20;
+    sUnknown_203B2F4->header.count = sUnknown_203B2F4->s0.input.pagesCount;
     sUnknown_203B2F4->header.currId = sUnknown_203B2F4->s0.input.currPage;
     sUnknown_203B2F4->header.width = 12;
     sUnknown_203B2F4->header.f3 = 0;
@@ -117,7 +117,7 @@ void sub_802CFD0(void)
     r5 = r4 + (sUnknown_203B2F4->header.width * 8);
     sub_8012BC4(r5, 0, sUnknown_203B2F4->s0.input.currPage + 1, 2, 7, sUnknown_203B2F4->s0.winId);
 
-    for (r5 = 0; r5 < sUnknown_203B2F4->s0.input.unk1A; r5++) {
+    for (r5 = 0; r5 < sUnknown_203B2F4->s0.input.currPageEntries; r5++) {
         iVar1 = sub_803B344((sUnknown_203B2F4->s0.input.currPage * sUnknown_203B2F4->s0.input.entriesPerPage) + r5);
 
         local.unk0[0] = sUnknown_203B2F4->s0.winId;

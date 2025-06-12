@@ -253,7 +253,7 @@ void sub_801F1B0(bool8 param_1, bool8 param_2)
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B270->windows, TRUE, TRUE);
     gUnknown_203B270->input.totalEntriesCount = sub_801F3F8();
-    sub_8013984(&gUnknown_203B270->input);
+    MenuUpdatePagesData(&gUnknown_203B270->input);
     gUnknown_203B270->input.menuIndex = sub_8092F4C(gUnknown_203B270->moves, gUnknown_203B270->input.menuIndex);
     sub_801F280(TRUE);
     if(param_1)
@@ -289,7 +289,7 @@ void sub_801F280(bool8 param_1)
     strcpy(gFormatBuffer_Monsters[0],buffer);
     PrintFormattedStringOnWindow(0xc,0,gUnknown_80DC28C,gUnknown_203B270->unk50,0); // Move: {COLOR_1 YELLOW}{ARG_POKEMON_0){END_COLOR_TEXT_1}
 
-    for (i = 0; i < gUnknown_203B270->input.unk1A; i++) {
+    for (i = 0; i < gUnknown_203B270->input.currPageEntries; i++) {
         struct Move *move;
         bool8 linkChain;
         s32 x, y;

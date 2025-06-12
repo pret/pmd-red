@@ -33,7 +33,7 @@ bool8 sub_8024458(s16 speciesNum, s32 a1)
     sUnknown_203B2AC->unk148.width = 10;
     sub_8024604();
     sub_802452C();
-    sub_8013984(&sUnknown_203B2AC->input);
+    MenuUpdatePagesData(&sUnknown_203B2AC->input);
     return TRUE;
 }
 
@@ -47,7 +47,7 @@ u32 sub_80244E4(void)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if (sub_8013938(&sUnknown_203B2AC->input)) {
+            if (MenuCursorUpdateOnlyLeftRight(&sUnknown_203B2AC->input)) {
                 sub_802452C();
                 return 1;
             }
@@ -74,7 +74,7 @@ void sub_802453C(void)
 
 static void sub_8024588(void)
 {
-    sUnknown_203B2AC->unk148.count = sUnknown_203B2AC->input.unk20;
+    sUnknown_203B2AC->unk148.count = sUnknown_203B2AC->input.pagesCount;
     sUnknown_203B2AC->unk148.currId = sUnknown_203B2AC->input.currPage;
     sUnknown_203B2AC->unk148.f3 = 0;
     ResetUnusedInputStruct();

@@ -55,7 +55,7 @@ u32 sub_801E474(bool8 a0)
             PlayMenuSoundEffect(4);
             return 4;
         default:
-            if(sub_80138B8(&sUnknown_203B264->input, 1))
+            if(MenuCursorUpdate(&sUnknown_203B264->input, 1))
             {
                 sub_801E594();
                 DrawHintSelectionMenu();
@@ -68,14 +68,14 @@ u32 sub_801E474(bool8 a0)
 
 s32 GetChosenHintIndex(void)
 {
-    return (sUnknown_203B264->input.currPage * sUnknown_203B264->input.entriesPerPage) + sUnknown_203B264->input.menuIndex;
+    return GET_CURRENT_MENU_ENTRY(sUnknown_203B264->input);
 }
 
 void CreateHintSelectionScreen(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B264->windows, FALSE, FALSE);
-    sub_8013984(&sUnknown_203B264->input);
+    MenuUpdatePagesData(&sUnknown_203B264->input);
     sub_801E594();
     DrawHintSelectionMenu();
 

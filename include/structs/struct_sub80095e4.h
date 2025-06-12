@@ -47,13 +47,13 @@ typedef struct struct_Sub80095E4_2
 
 #define SUB_80095E4_CALL(ptr)                                                           \
 {                                                                                       \
-    SUB_8009_MATCH(ptr, sub_80095E4((ptr).input.unk1A, 12) + 2)                         \
+    SUB_8009_MATCH(ptr, sub_80095E4((ptr).input.currPageEntries, 12) + 2)               \
 }
 
 // For sub_801C440 and sub_8023420 where unkE and unk10 are the same.
 #define SUB_80095E4_CALL_2(ptr)                                                         \
 {                                                                                       \
-    s32 a0 = sub_80095E4((ptr).input.unk1A, 12) + 2;                                    \
+    s32 a0 = sub_80095E4((ptr).input.currPageEntries, 12) + 2;                          \
     UNUSED s16 oldE = (ptr).windows.id[(ptr).winId].height;                             \
     s16 newE = a0;                                                                      \
                                                                                         \
@@ -67,7 +67,7 @@ typedef struct struct_Sub80095E4_2
 // sub_802BF30 and sub_802C328 use a different function call, and 24 instead of 12
 #define SUB_8009614_CALL(ptr)                                                           \
 {                                                                                       \
-    SUB_8009_MATCH(ptr, sub_8009614((ptr).input.unk1A, 24) + 2)                         \
+    SUB_8009_MATCH(ptr, sub_8009614((ptr).input.currPageEntries, 24) + 2)               \
 }
 
 #endif // GUARD_struct_sub80095e4_H

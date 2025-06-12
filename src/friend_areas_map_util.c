@@ -324,10 +324,10 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
     header.width = 18;
     header.f3 = 0;
     menuInput->menuIndex = 0;
-    menuInput->unk1A = count;
+    menuInput->currPageEntries = count;
     menuInput->entriesPerPage = count;
     menuInput->currPage = 0;
-    menuInput->unk20 = 0;
+    menuInput->pagesCount = 0;
     menuInput->unk4 = 0;
     menuInput->firstEntryY = 16;
     menuInput->windowId = 0;
@@ -337,7 +337,7 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
     menuInput->unk14.y = 0;
     menuInput->cursorArrowPos.x = 8;
     menuInput->cursorArrowPos.y = 8;
-    sub_801317C(&menuInput->unk28);
+    ResetTouchScreenMenuInput(&menuInput->touchScreen);
     var = sub_80095E4(menuInput->entriesPerPage, 0);
     windows.id[0].unk10 = windows.id[0].height = var + 2;
     sub_80137B0(menuInput, var * 8);

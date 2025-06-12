@@ -649,11 +649,11 @@ void sub_803EAF0(u32 kind, u8 *name)
 static void sub_803EC94(void)
 {
     gDungeonMenu.currPage = 0;
-    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.pagesCount = 0;
     gDungeonMenu.leftRightArrowsPos.x = 0;
     gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
 }
 
 void DungeonShowWindows(const WindowTemplates *winTemplates, bool8 a1)

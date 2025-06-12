@@ -97,7 +97,7 @@ void ShowDungeonOthersMenu(void)
                 MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                 if (gDungeonMenu.menuIndex != OTHERS_RECRUITMENT_SEARCH || (gDungeon->unk644.canRecruit && !IsBossFight())) {
                     PlayDungeonConfirmationSE();
                 }
@@ -106,7 +106,7 @@ void ShowDungeonOthersMenu(void)
                 }
                 break;
             }
-            else if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+            else if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonCancelSE();
                 bPress = TRUE;
                 break;
@@ -174,11 +174,11 @@ static void ShowGameOptionsMenu(void)
                 MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                 PlayDungeonConfirmationSE();
                 break;
             }
-            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonCancelSE();
                 bPress = TRUE;
                 break;
@@ -256,7 +256,7 @@ static bool8 ShowDungeonOptions(void)
                 break;
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.b_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonConfirmationSE();
                 break;
             }
@@ -317,7 +317,7 @@ static bool8 ShowOthersOptions(void)
                 break;
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.b_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonConfirmationSE();
                 break;
             }
@@ -390,11 +390,11 @@ static void ShowQuickSaveGiveUpMenu(void)
                 MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                 PlayDungeonConfirmationSE();
                 break;
             }
-            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonCancelSE();
                 bPress = TRUE;
                 break;
@@ -476,17 +476,17 @@ static void PrintOthersMenuOptions(void)
     header.f3 = 0;
     gDungeonMenu.menuIndex = sOthersCursorId;
     optionsCount = (gDungeon->unk644.canRecruit) ? OTHERS_COUNT : OTHERS_COUNT - 1;
-    gDungeonMenu.unk1A = optionsCount;
+    gDungeonMenu.currPageEntries = optionsCount;
     gDungeonMenu.entriesPerPage = optionsCount;
     gDungeonMenu.currPage = 0;
-    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.pagesCount = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
     gDungeonMenu.leftRightArrowsPos.x = 0;
     gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 18;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(optionsCount, 12) + 2;
     header.width = 10;
@@ -539,17 +539,17 @@ static void PrintQuickSaveMenuOptions(void)
     header.f3 = 0;
     gDungeonMenu.menuIndex = 0;
     optionsCount = 2;
-    gDungeonMenu.unk1A = optionsCount;
+    gDungeonMenu.currPageEntries = optionsCount;
     gDungeonMenu.entriesPerPage = optionsCount;
     gDungeonMenu.currPage = 0;
-    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.pagesCount = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
     gDungeonMenu.leftRightArrowsPos.x = 0;
     gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 18;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(optionsCount, 12) + 2;
     header.width = 10;
@@ -592,17 +592,17 @@ static void PrintGameOptions(void)
     header.f3 = 0;
     gDungeonMenu.menuIndex = 0;
     optionsCount = 3;
-    gDungeonMenu.unk1A = optionsCount;
+    gDungeonMenu.currPageEntries = optionsCount;
     gDungeonMenu.entriesPerPage = optionsCount;
     gDungeonMenu.currPage = 0;
-    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.pagesCount = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
     gDungeonMenu.leftRightArrowsPos.x = 0;
     gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 12;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(optionsCount, 12) + 2;
     header.width = 10;
@@ -647,17 +647,17 @@ static void PrintDungeonOptions(void)
     header.currId = 0;
     header.f3 = 0;
 
-    gDungeonMenu.unk1A = DUNGEON_OPTIONS_COUNT;
+    gDungeonMenu.currPageEntries = DUNGEON_OPTIONS_COUNT;
     gDungeonMenu.entriesPerPage = DUNGEON_OPTIONS_COUNT;
     gDungeonMenu.currPage = 0;
-    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.pagesCount = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
     gDungeonMenu.leftRightArrowsPos.x = 0;
     gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 24;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(DUNGEON_OPTIONS_COUNT, 12) + 2;
     header.width = 10;
@@ -738,17 +738,17 @@ static void PrintOthersOptions(void)
     header.currId = 0;
     header.f3 = 0;
 
-    gDungeonMenu.unk1A = OTHERS_OPTIONS_COUNT;
+    gDungeonMenu.currPageEntries = OTHERS_OPTIONS_COUNT;
     gDungeonMenu.entriesPerPage = OTHERS_OPTIONS_COUNT;
     gDungeonMenu.currPage = 0;
-    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.pagesCount = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
     gDungeonMenu.leftRightArrowsPos.x = 0;
     gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 24;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(OTHERS_OPTIONS_COUNT, 12) + 2;
     header.width = 10;
@@ -865,11 +865,11 @@ static void ShowHintsMenu(void)
                 MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                 PlayDungeonConfirmationSE();
                 break;
             }
-            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonCancelSE();
                 bPress = TRUE;
                 break;
@@ -910,17 +910,17 @@ static void PrintHintsMenu(void)
     header.currId = 0;
     header.f3 = 0;
     gDungeonMenu.menuIndex = 0;
-    gDungeonMenu.unk1A = HINTS_COUNT_RED_VERSION;
+    gDungeonMenu.currPageEntries = HINTS_COUNT_RED_VERSION;
     gDungeonMenu.entriesPerPage = HINTS_COUNT_RED_VERSION;
     gDungeonMenu.currPage = 0;
-    gDungeonMenu.unk20 = 0;
+    gDungeonMenu.pagesCount = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
     gDungeonMenu.leftRightArrowsPos.x = 0;
     gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     windows.id[0].width = 12;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(HINTS_COUNT_RED_VERSION, 12) + 2;
     header.width = 10;
@@ -963,15 +963,15 @@ static void ShowChosenHintWindow(s32 hintId)
         header.currId = hintId;
         header.f3 = 0;
         gDungeonMenu.currPage = hintId;
-        gDungeonMenu.unk20 = HINTS_COUNT_RED_VERSION;
-        gDungeonMenu.unk1A = 0;
+        gDungeonMenu.pagesCount = HINTS_COUNT_RED_VERSION;
+        gDungeonMenu.currPageEntries = 0;
         gDungeonMenu.menuIndex = 0;
         gDungeonMenu.entriesPerPage = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;
         gDungeonMenu.unk14.x = 0;
         gDungeonMenu.windowId = 0;
-        sub_801317C(&gDungeonMenu.unk28);
+        ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
         windows.id[0].width = 24;
         windows.id[0].height = windows.id[0].unk10 = sub_80095E4(HINTS_COUNT, 12) + 2;
         header.width = 10;
@@ -987,7 +987,7 @@ static void ShowChosenHintWindow(s32 hintId)
         while (1) {
             AddMenuCursorSprite(&gDungeonMenu);
             DungeonRunFrameActions(0x24);
-            if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.unk28.dpad_right) {
+            if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.touchScreen.dpad_right) {
                 PlayDungeonCursorSE(FALSE);
                 if (++hintId == HINTS_COUNT_RED_VERSION) {
                     hintId = 0;
@@ -995,7 +995,7 @@ static void ShowChosenHintWindow(s32 hintId)
                 dpadPressed = TRUE;
                 break;
             }
-            if ((gRealInputs.pressed & DPAD_LEFT) || gDungeonMenu.unk28.dpad_left) {
+            if ((gRealInputs.pressed & DPAD_LEFT) || gDungeonMenu.touchScreen.dpad_left) {
                 PlayDungeonCursorSE(FALSE);
                 if (--hintId == -1) {
                     hintId = HINTS_COUNT_RED_VERSION - 1;
@@ -1004,11 +1004,11 @@ static void ShowChosenHintWindow(s32 hintId)
                 break;
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                 PlayDungeonConfirmationSE();
                 break;
             }
-            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonCancelSE();
                 break;
             }
