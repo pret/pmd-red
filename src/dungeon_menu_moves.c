@@ -440,13 +440,13 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
 
     gDungeonMenu.menuIndex = sChosenMoveSlotId;
     gDungeonMenu.unk1A = movesCount;
-    gDungeonMenu.unk1C = 4;
+    gDungeonMenu.entriesPerPage = 4;
     gDungeonMenu.unk1E = arg6;
     gDungeonMenu.unk20 = arg7;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
     gDungeonMenu.unk14.x = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);
 
     windows->id[0].height = windows->id[0].unk10 = sub_80095E4(4, 0xC) + 2;
@@ -633,11 +633,11 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
         gDungeonMenu.unk14.x = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;
-        gDungeonMenu.unk0 = 0;
+        gDungeonMenu.windowId = 0;
         sub_801317C(&gDungeonMenu.unk28);
         gDungeonMenu.menuIndex = 0;
         gDungeonMenu.unk1A = 0;
-        gDungeonMenu.unk1C = 0;
+        gDungeonMenu.entriesPerPage = 0;
         DungeonShowWindows(&windows, TRUE);
         statusesCount = unk_PrintMoveDescription(currId, &moves[firstMoveId + currId], 0, statuses);
         while (1) {
@@ -722,10 +722,10 @@ void ShowStatusDescriptionMenu(const StatusText *status, MenuInputStructSub *men
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     gDungeonMenu.menuIndex = 0;
     gDungeonMenu.unk1A = 0;
-    gDungeonMenu.unk1C = 0;
+    gDungeonMenu.entriesPerPage = 0;
     sub_801317C(menuSub);
 }
 
@@ -1115,7 +1115,7 @@ static void sub_8064228(Entity *entity, Move *moves, WindowTemplates *windows, W
 
     gDungeonMenu.menuIndex = sChosenMoveSlotId;
     gDungeonMenu.unk1A = count;
-    gDungeonMenu.unk1C = count;
+    gDungeonMenu.entriesPerPage = count;
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
@@ -1123,7 +1123,7 @@ static void sub_8064228(Entity *entity, Move *moves, WindowTemplates *windows, W
     gDungeonMenu.unkC = 0;
     gDungeonMenu.unkE = 0;
     gDungeonMenu.unk14.x = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);
     windows->id[0].height = windows->id[0].unk10 = sub_80095E4(count, 12) + 2;
     header->width = 14;

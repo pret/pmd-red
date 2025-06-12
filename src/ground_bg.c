@@ -6,7 +6,7 @@
 #include "memory.h"
 #include "file_system.h"
 #include "code_8002774.h"
-#include "code_801D9E4.h"
+#include "structs/str_81188F0.h"
 #include "code_8004AA0.h"
 #include "graphics_memory.h"
 #include "debug.h"
@@ -16,7 +16,6 @@
 
 // This file most likely deals with map loading and writing to VRAM. It even has a custom decompression function.
 
-extern const struct unkStruct_81188F0 gUnknown_81188F0[10];
 extern const FileArchive gGroundFileArchive;
 
 void sub_80A456C(GroundBg *groundBg, s32 id, const PixelPos *srcPos);

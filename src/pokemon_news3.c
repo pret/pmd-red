@@ -83,7 +83,7 @@ u32 sub_802BDEC(bool8 a0)
 
 u8 sub_802BE74(void)
 {
-    return sUnknown_203B2D8->unk0[(sUnknown_203B2D8->unk4.s0.input.unk1E * sUnknown_203B2D8->unk4.s0.input.unk1C) + sUnknown_203B2D8->unk4.s0.input.menuIndex];
+    return sUnknown_203B2D8->unk0[(sUnknown_203B2D8->unk4.s0.input.unk1E * sUnknown_203B2D8->unk4.s0.input.entriesPerPage) + sUnknown_203B2D8->unk4.s0.input.menuIndex];
 }
 
 void sub_802BE94(bool8 cursorSprite)
@@ -91,7 +91,7 @@ void sub_802BE94(bool8 cursorSprite)
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2D8->unk4.s0.windows, FALSE, FALSE);
 
-    sUnknown_203B2D8->unk4.s0.input.unk22 = CountEmptyMailSlots();
+    sUnknown_203B2D8->unk4.s0.input.totalEntriesCount = CountEmptyMailSlots();
     sub_8013984(&sUnknown_203B2D8->unk4.s0.input);
     sub_802BF30();
     CreateMailMenu();
@@ -134,7 +134,7 @@ void CreateMailMenu(void)
     PrintStringOnWindow((sUnknown_203B2D8->unk4.s0.input.unk1E * 8) + 10, 0, sMailbox, sUnknown_203B2D8->unk4.s0.winId, 0);
 
     for (i = 0; i < sUnknown_203B2D8->unk4.s0.input.unk1A; i++) {
-        mail = GetMailboxSlotInfo(sUnknown_203B2D8->unk0[(sUnknown_203B2D8->unk4.s0.input.unk1E * sUnknown_203B2D8->unk4.s0.input.unk1C) + i]);
+        mail = GetMailboxSlotInfo(sUnknown_203B2D8->unk0[(sUnknown_203B2D8->unk4.s0.input.unk1E * sUnknown_203B2D8->unk4.s0.input.entriesPerPage) + i]);
         local.unk0[0] = sUnknown_203B2D8->unk4.s0.winId;
         local.y = GetMenuEntryYCoord(&sUnknown_203B2D8->unk4.s0.input, i);
 

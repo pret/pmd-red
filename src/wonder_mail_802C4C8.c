@@ -80,14 +80,14 @@ u32 sub_802C598(bool8 a0)
 
 u8 GetPelipperBoardSlotIndex(void)
 {
-    return gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.unk1E * gUnknown_203B2E8->unk8.s0.input.unk1C) + gUnknown_203B2E8->unk8.s0.input.menuIndex];
+    return gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.unk1E * gUnknown_203B2E8->unk8.s0.input.entriesPerPage) + gUnknown_203B2E8->unk8.s0.input.menuIndex];
 }
 
 void sub_802C640(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B2E8->unk8.s0.windows, FALSE, FALSE);
-    gUnknown_203B2E8->unk8.s0.input.unk22 = CountAcceptedJobs();
+    gUnknown_203B2E8->unk8.s0.input.totalEntriesCount = CountAcceptedJobs();
     sub_8013984(&gUnknown_203B2E8->unk8.s0.input);
     sub_802C6DC();
     DrawJobListMenu();
@@ -138,7 +138,7 @@ void DrawJobListMenu(void)
     sub_8012BC4(x, 0, gUnknown_203B2E8->unk8.s0.input.unk1E + 1, 2, 7, gUnknown_203B2E8->unk8.s0.winId);
 
     for (i = 0;  i < gUnknown_203B2E8->unk8.s0.input.unk1A; i++) {
-        mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.unk1E * gUnknown_203B2E8->unk8.s0.input.unk1C) + i]);
+        mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.unk1E * gUnknown_203B2E8->unk8.s0.input.entriesPerPage) + i]);
         local.unk0[0] = gUnknown_203B2E8->unk8.s0.winId;
         local.y = GetMenuEntryYCoord(&gUnknown_203B2E8->unk8.s0.input, i);
         sub_803B35C(mail, &local);

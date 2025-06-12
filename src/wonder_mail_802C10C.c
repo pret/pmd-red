@@ -78,14 +78,14 @@ u32 sub_802C1E4(bool8 a0)
 
 u8 sub_802C26C(void)
 {
-    return gUnknown_203B2E0->pelipperBoardSlots[(gUnknown_203B2E0->unk8.s0.input.unk1E * gUnknown_203B2E0->unk8.s0.input.unk1C) + gUnknown_203B2E0->unk8.s0.input.menuIndex];
+    return gUnknown_203B2E0->pelipperBoardSlots[(gUnknown_203B2E0->unk8.s0.input.unk1E * gUnknown_203B2E0->unk8.s0.input.entriesPerPage) + gUnknown_203B2E0->unk8.s0.input.menuIndex];
 }
 
 void sub_802C28C(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B2E0->unk8.s0.windows, FALSE, FALSE);
-    gUnknown_203B2E0->unk8.s0.input.unk22 = CountPelipperBoardSlots();
+    gUnknown_203B2E0->unk8.s0.input.totalEntriesCount = CountPelipperBoardSlots();
     sub_8013984(&gUnknown_203B2E0->unk8.s0.input);
     sub_802C328();
     DrawPelipperBoardJobMenu();
@@ -137,7 +137,7 @@ void DrawPelipperBoardJobMenu(void)
     sub_8012BC4(x, 0, gUnknown_203B2E0->unk8.s0.input.unk1E + 1, 2, 7, gUnknown_203B2E0->unk8.s0.winId);
 
     for (i = 0; i < gUnknown_203B2E0->unk8.s0.input.unk1A; i++) {
-        slotIndex = (gUnknown_203B2E0->pelipperBoardSlots[(gUnknown_203B2E0->unk8.s0.input.unk1E * gUnknown_203B2E0->unk8.s0.input.unk1C) + i]);
+        slotIndex = (gUnknown_203B2E0->pelipperBoardSlots[(gUnknown_203B2E0->unk8.s0.input.unk1E * gUnknown_203B2E0->unk8.s0.input.entriesPerPage) + i]);
         mail = GetPelipperBoardSlotInfo(slotIndex);
         local.unk0[0] = gUnknown_203B2E0->unk8.s0.winId;
         local.y = GetMenuEntryYCoord(&gUnknown_203B2E0->unk8.s0.input, i);

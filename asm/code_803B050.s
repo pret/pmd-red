@@ -77,7 +77,7 @@ _0803B0C8:
 	ldr r3, [r0, 0x34]
 	adds r1, r2, 0
 	movs r2, 0xA
-	bl sub_8013818
+	bl CreateMenuOnWindow
 	bl sub_803B204
 	bl sub_803B284
 	movs r0, 0x1

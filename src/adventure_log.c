@@ -30,7 +30,7 @@ bool8 CreateAdventureLogScreen(u32 kind)
 
     ResetUnusedInputStruct();
     ShowWindows(&sAdventureLog->s0.windows, TRUE, TRUE);
-    sub_8013818(&sAdventureLog->s0.input, 0x20, 8, kind);
+    CreateMenuOnWindow(&sAdventureLog->s0.input, 0x20, 8, kind);
     sub_8032084();
     DisplayAdventureLog();
     return TRUE;
@@ -100,7 +100,7 @@ static void DisplayAdventureLog(void)
     sub_8012BC4(r6, 0, sAdventureLog->s0.input.unk1E + 1, 1, 7, sAdventureLog->s0.winId);
 
     for (i = 0; i < sAdventureLog->s0.input.unk1A; i++) {
-        aa = (sAdventureLog->s0.input.unk1E * sAdventureLog->s0.input.unk1C) + i;
+        aa = (sAdventureLog->s0.input.unk1E * sAdventureLog->s0.input.entriesPerPage) + i;
 
         if (GetAdventureAchievement(aa)) {
             switch (aa) {

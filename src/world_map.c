@@ -552,12 +552,12 @@ static bool8 PlayerEnterDungeonPrompt_Async(u8 *str)
 
     menuInput.menuIndex = 1;
     menuInput.unk1A = 2;
-    menuInput.unk1C = 2;
+    menuInput.entriesPerPage = 2;
     menuInput.unk1E = 0;
     menuInput.unk20 = 0;
     menuInput.unk4 = 0;
     menuInput.firstEntryY = 0;
-    menuInput.unk0 = 1;
+    menuInput.windowId = 1;
     menuInput.unkC = 0;
     menuInput.unkE = 0;
     menuInput.unk14.x = 0;

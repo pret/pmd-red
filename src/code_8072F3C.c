@@ -92,7 +92,7 @@ u32 sub_802F73C(u32 r0, DungeonPos *r1, u32 r2, u8 r3)
     sub_8012D08(gUnknown_203B314->sBC.s0.unk38, r2);
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B314->sBC.s0.windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B314->sBC.s0.input, sub_802FBF4(), r2, r0);
+    CreateMenuOnWindow(&gUnknown_203B314->sBC.s0.input, sub_802FBF4(), r2, r0);
     sub_802F9C0();
     sub_802FA50();
     return 1;
@@ -105,7 +105,7 @@ u32 sub_802F848(s16 param_1)
 
     param_1_32 = param_1; // cast needed
 
-    for( index = 0; index < gUnknown_203B314->sBC.s0.input.unk22; index++ ) {
+    for( index = 0; index < gUnknown_203B314->sBC.s0.input.totalEntriesCount; index++ ) {
         if (gUnknown_203B314->unk0[index] == param_1_32) {
             sub_8013878(&gUnknown_203B314->sBC.s0.input,index);
             sub_802F9C0();
@@ -151,12 +151,12 @@ u32 sub_802F8A0(u8 r0)
 
 s16 sub_802F90C(void)
 {
-    return gUnknown_203B314->unk0[(gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.unk1C) + gUnknown_203B314->sBC.s0.input.menuIndex];
+    return gUnknown_203B314->unk0[(gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.entriesPerPage) + gUnknown_203B314->sBC.s0.input.menuIndex];
 }
 
 void sub_802F938(u8 r0)
 {
-    gUnknown_203B314->sBC.s0.input.unk22 = sub_802FBF4();
+    gUnknown_203B314->sBC.s0.input.totalEntriesCount = sub_802FBF4();
     sub_8013984(&gUnknown_203B314->sBC.s0.input);
     sub_802F9C0();
     sub_802FA50();
@@ -204,7 +204,7 @@ void sub_802FA50(void)
     for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
     {
         y = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
-        index = gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.unk1C + counter;
+        index = gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.entriesPerPage + counter;
         sVar1 = gUnknown_203B314->unk0[index];
         if (gUnknown_203B314->unk5C[index] != 0) {
             PrintStringOnWindow(10,y,gUnknown_80E0750,gUnknown_203B314->sBC.s0.winId,0);
@@ -219,7 +219,7 @@ void sub_802FA50(void)
     for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
     {
         y2 = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
-        text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.unk1C + counter]);
+        text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.entriesPerPage + counter]);
         PrintStringOnWindow(8,y2,text,gUnknown_203B314->sBC.s0.winId,0);
     }
   }

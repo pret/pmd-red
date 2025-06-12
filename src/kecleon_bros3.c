@@ -33,7 +33,7 @@ bool8 sub_801A20C(u32 r0)
     gUnknown_203B21C->s0.unk38->header = &gUnknown_203B21C->header;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B21C->s0.windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B21C->s0.input, CountKecleonWareItems(), 10, r0);
+    CreateMenuOnWindow(&gUnknown_203B21C->s0.input, CountKecleonWareItems(), 10, r0);
     gUnknown_203B21C->s0.input.menuIndex = gUnknown_203B220;
     sub_8013984(&gUnknown_203B21C->s0.input);
     sub_801A430();
@@ -82,7 +82,7 @@ u32 sub_801A2A8(bool8 r0)
 // arm9.bin::02025CC4
 u8 sub_801A37C(void)
 {
-    return (gUnknown_203B21C->s0.input.unk1E * gUnknown_203B21C->s0.input.unk1C) + gUnknown_203B21C->s0.input.menuIndex;
+    return (gUnknown_203B21C->s0.input.unk1E * gUnknown_203B21C->s0.input.entriesPerPage) + gUnknown_203B21C->s0.input.menuIndex;
 }
 
 // arm9.bin::02025C64
@@ -90,7 +90,7 @@ void sub_801A398(bool8 r0)
 {
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B21C->s0.windows, FALSE, FALSE);
-    gUnknown_203B21C->s0.input.unk22 = CountKecleonWareItems();
+    gUnknown_203B21C->s0.input.totalEntriesCount = CountKecleonWareItems();
     sub_8013984(&gUnknown_203B21C->s0.input);
     sub_801A430();
     sub_801A4A4();
@@ -139,7 +139,7 @@ void sub_801A4A4(void)
     PrintStringOnWindow(gUnknown_203B21C->s0.input.unk1E * 8 + 10, 0, sGoods, gUnknown_203B21C->s0.winId, 0);
 
     for (index = 0; index < gUnknown_203B21C->s0.input.unk1A; index++) {
-        temp_calc = (gUnknown_203B21C->s0.input.unk1E * gUnknown_203B21C->s0.input.unk1C) + index;
+        temp_calc = (gUnknown_203B21C->s0.input.unk1E * gUnknown_203B21C->s0.input.entriesPerPage) + index;
         heldItem = GetKecleonWareItem(temp_calc);
         item.id = heldItem->id;
         item.quantity = heldItem->quantity;

@@ -477,7 +477,7 @@ static void PrintOthersMenuOptions(void)
     gDungeonMenu.menuIndex = sOthersCursorId;
     optionsCount = (gDungeon->unk644.canRecruit) ? OTHERS_COUNT : OTHERS_COUNT - 1;
     gDungeonMenu.unk1A = optionsCount;
-    gDungeonMenu.unk1C = optionsCount;
+    gDungeonMenu.entriesPerPage = optionsCount;
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
@@ -485,7 +485,7 @@ static void PrintOthersMenuOptions(void)
     gDungeonMenu.unkC = 0;
     gDungeonMenu.unkE = 0;
     gDungeonMenu.unk14.x = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);
     windows.id[0].width = 18;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(optionsCount, 12) + 2;
@@ -540,7 +540,7 @@ static void PrintQuickSaveMenuOptions(void)
     gDungeonMenu.menuIndex = 0;
     optionsCount = 2;
     gDungeonMenu.unk1A = optionsCount;
-    gDungeonMenu.unk1C = optionsCount;
+    gDungeonMenu.entriesPerPage = optionsCount;
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
@@ -548,7 +548,7 @@ static void PrintQuickSaveMenuOptions(void)
     gDungeonMenu.unkC = 0;
     gDungeonMenu.unkE = 0;
     gDungeonMenu.unk14.x = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);
     windows.id[0].width = 18;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(optionsCount, 12) + 2;
@@ -593,7 +593,7 @@ static void PrintGameOptions(void)
     gDungeonMenu.menuIndex = 0;
     optionsCount = 3;
     gDungeonMenu.unk1A = optionsCount;
-    gDungeonMenu.unk1C = optionsCount;
+    gDungeonMenu.entriesPerPage = optionsCount;
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
@@ -601,7 +601,7 @@ static void PrintGameOptions(void)
     gDungeonMenu.unkC = 0;
     gDungeonMenu.unkE = 0;
     gDungeonMenu.unk14.x = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);
     windows.id[0].width = 12;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(optionsCount, 12) + 2;
@@ -648,7 +648,7 @@ static void PrintDungeonOptions(void)
     header.f3 = 0;
 
     gDungeonMenu.unk1A = DUNGEON_OPTIONS_COUNT;
-    gDungeonMenu.unk1C = DUNGEON_OPTIONS_COUNT;
+    gDungeonMenu.entriesPerPage = DUNGEON_OPTIONS_COUNT;
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
@@ -656,7 +656,7 @@ static void PrintDungeonOptions(void)
     gDungeonMenu.unkC = 0;
     gDungeonMenu.unkE = 0;
     gDungeonMenu.unk14.x = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);
     windows.id[0].width = 24;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(DUNGEON_OPTIONS_COUNT, 12) + 2;
@@ -739,7 +739,7 @@ static void PrintOthersOptions(void)
     header.f3 = 0;
 
     gDungeonMenu.unk1A = OTHERS_OPTIONS_COUNT;
-    gDungeonMenu.unk1C = OTHERS_OPTIONS_COUNT;
+    gDungeonMenu.entriesPerPage = OTHERS_OPTIONS_COUNT;
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
@@ -747,7 +747,7 @@ static void PrintOthersOptions(void)
     gDungeonMenu.unkC = 0;
     gDungeonMenu.unkE = 0;
     gDungeonMenu.unk14.x = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);
     windows.id[0].width = 24;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(OTHERS_OPTIONS_COUNT, 12) + 2;
@@ -911,7 +911,7 @@ static void PrintHintsMenu(void)
     header.f3 = 0;
     gDungeonMenu.menuIndex = 0;
     gDungeonMenu.unk1A = HINTS_COUNT_RED_VERSION;
-    gDungeonMenu.unk1C = HINTS_COUNT_RED_VERSION;
+    gDungeonMenu.entriesPerPage = HINTS_COUNT_RED_VERSION;
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
@@ -919,7 +919,7 @@ static void PrintHintsMenu(void)
     gDungeonMenu.unkC = 0;
     gDungeonMenu.unkE = 0;
     gDungeonMenu.unk14.x = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);
     windows.id[0].width = 12;
     windows.id[0].height = windows.id[0].unk10 = sub_80095E4(HINTS_COUNT_RED_VERSION, 12) + 2;
@@ -966,11 +966,11 @@ static void ShowChosenHintWindow(s32 hintId)
         gDungeonMenu.unk20 = HINTS_COUNT_RED_VERSION;
         gDungeonMenu.unk1A = 0;
         gDungeonMenu.menuIndex = 0;
-        gDungeonMenu.unk1C = 0;
+        gDungeonMenu.entriesPerPage = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;
         gDungeonMenu.unk14.x = 0;
-        gDungeonMenu.unk0 = 0;
+        gDungeonMenu.windowId = 0;
         sub_801317C(&gDungeonMenu.unk28);
         windows.id[0].width = 24;
         windows.id[0].height = windows.id[0].unk10 = sub_80095E4(HINTS_COUNT, 12) + 2;

@@ -43,7 +43,7 @@ bool8 sub_80302E8(s32 param_1, DungeonPos *param_2, u32 param_3)
     sub_8012D08(sMakuhitaDojoWork2->s30.s0.unk38, param_3);
     ResetUnusedInputStruct();
     ShowWindows(&sMakuhitaDojoWork2->s30.s0.windows, TRUE, TRUE);
-    sub_8013818(&sMakuhitaDojoWork2->s30.s0.input, sub_8030668(), param_3, param_1);
+    CreateMenuOnWindow(&sMakuhitaDojoWork2->s30.s0.input, sub_8030668(), param_3, param_1);
     sub_80304C8();
     MakuhitaDojo_DrawCourseList();
     return TRUE;
@@ -76,12 +76,12 @@ u32 sub_80303AC(bool8 param_1)
 
 s16 sub_8030418(void)
 {
-    return sMakuhitaDojoWork2->unk0[(sMakuhitaDojoWork2->s30.s0.input.unk1E * sMakuhitaDojoWork2->s30.s0.input.unk1C) + sMakuhitaDojoWork2->s30.s0.input.menuIndex];
+    return sMakuhitaDojoWork2->unk0[(sMakuhitaDojoWork2->s30.s0.input.unk1E * sMakuhitaDojoWork2->s30.s0.input.entriesPerPage) + sMakuhitaDojoWork2->s30.s0.input.menuIndex];
 }
 
 UNUSED static void sub_8030444(bool8 a0)
 {
-    sMakuhitaDojoWork2->s30.s0.input.unk22 = sub_8030668();
+    sMakuhitaDojoWork2->s30.s0.input.totalEntriesCount = sub_8030668();
     sub_8013984(&sMakuhitaDojoWork2->s30.s0.input);
     sub_80304C8();
     MakuhitaDojo_DrawCourseList();
@@ -126,7 +126,7 @@ static void MakuhitaDojo_DrawCourseList(void)
     sub_8012BC4((sMakuhitaDojoWork2->s30.header.width * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.unk1E + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.winId);
 
     for (i = 0; i < sMakuhitaDojoWork2->s30.s0.input.unk1A; i++) {
-        iVar6 = sMakuhitaDojoWork2->unk0[sMakuhitaDojoWork2->s30.s0.input.unk1E * sMakuhitaDojoWork2->s30.s0.input.unk1C + i];
+        iVar6 = sMakuhitaDojoWork2->unk0[sMakuhitaDojoWork2->s30.s0.input.unk1E * sMakuhitaDojoWork2->s30.s0.input.entriesPerPage + i];
         dungeonIndex = sub_80A2740(iVar6);
 
         mazeIndex = sub_80A2668(iVar6);

@@ -95,7 +95,7 @@ u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *tex
     sub_8012D08(&gUnknown_203B270->windows.id[gUnknown_203B270->unk50],iVar8);
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B270->windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B270->input,iVar5,iVar5,param_6);
+    CreateMenuOnWindow(&gUnknown_203B270->input,iVar5,iVar5,param_6);
     sub_8013780(&gUnknown_203B270->input,0);
     sub_801F280(TRUE);
     return 1;
@@ -252,7 +252,7 @@ void sub_801F1B0(bool8 param_1, bool8 param_2)
         gUnknown_203B270->unk4 = param_2;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B270->windows, TRUE, TRUE);
-    gUnknown_203B270->input.unk22 = sub_801F3F8();
+    gUnknown_203B270->input.totalEntriesCount = sub_801F3F8();
     sub_8013984(&gUnknown_203B270->input);
     gUnknown_203B270->input.menuIndex = sub_8092F4C(gUnknown_203B270->moves, gUnknown_203B270->input.menuIndex);
     sub_801F280(TRUE);

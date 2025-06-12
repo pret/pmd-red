@@ -1,8 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
+#include "debug_field_map_window.h"
 #include "music_util.h"
 #include "code_800558C.h"
-#include "code_801D9E4.h"
 #include "code_8099360.h"
 #include "code_800C9CC.h"
 #include "graphics_memory.h"
@@ -31,17 +31,17 @@ extern s32 sub_809CFE8(u16 param_1);
 extern PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2);
 extern void sub_809D158(s32, PixelPos*);
 
-UNUSED static void sub_80993F0(void)
+UNUSED static void DebugMapViewer(void)
 {
     PixelPos currPos;
-    s32 r10 = 0;
+    s32 mapId = 0;
 
     ResetSoundEffectCounters();
     FadeOutAllMusic(16);
     gUnknown_2026E4E = 0x808;
     UpdateFadeInTile(0);
     sub_80095CC(0, 0x14);
-    ShowWindows(NULL, TRUE, TRUE); // TODO: Create a Hide/Reset Windows macro/static inline
+    ShowWindows(NULL, TRUE, TRUE);
     sub_8009408(0, 20);
     sub_8099648();
     sub_809975C();
@@ -52,38 +52,39 @@ UNUSED static void sub_80993F0(void)
     while (1) {
         bool8 quitMapView;
         PixelPos pixPos1, pixPos2;
-        PixelPos pixPos3;
+        PixelPos boundary;
 
-        if (sub_801D9E4()) {
-            sub_801DA58(r10);
+        if (DebugFieldMapWindow_Init()) {
+            sub_801DA58(mapId);
             while (1) {
                 sub_8005838(NULL, 0);
                 sub_8012A18(0);
-                switch (sub_801DA78()) {
-                    case 3:
-                        r10 = sub_801DAC0();
+                switch (DebugFieldMapWindow_GetInput()) {
+                    case DEBUG_INPUT_A_PRESS:
+                        mapId = DebugFieldMapWindow_GetCurrentIndex();
                         break;
-                    case 2:
-                        r10 = -1;
+                    case DEBUG_INPUT_B_PRESS:
+                        mapId = -1;
                         break;
                     default:
                         continue;
+
                 }
                 break;
             }
         }
         else {
-            r10 = -1;
+            mapId = -1;
         }
 
-        sub_801DB0C();
-        if (r10 == -1)
+        DebugFieldMapWindow_Free();
+        if (mapId == -1)
             break;
 
         ShowWindows(NULL, TRUE, TRUE);
         GroundMap_Reset();
         sub_809D0BC();
-        GroundMap_Select(r10);
+        GroundMap_Select(mapId);
         sub_80A579C(&pixPos1, &pixPos2);
         pixPos1.y += 0xC00;
         pixPos2.y += 0xC00;
@@ -91,8 +92,8 @@ UNUSED static void sub_80993F0(void)
         pixPos1.y -= 0x400;
         pixPos2.x += 0x400;
         pixPos2.y += 0x400;
-        pixPos3.x = pixPos2.x - pixPos1.x;
-        pixPos3.y = pixPos2.y - pixPos1.y;
+        boundary.x = pixPos2.x - pixPos1.x;
+        boundary.y = pixPos2.y - pixPos1.y;
         currPos.x = 0;
         currPos.y = 0;
         sub_80999E8(4);
@@ -121,15 +122,15 @@ UNUSED static void sub_80993F0(void)
                         if (currPos.x < 0) {
                             currPos.x = 0;
                         }
-                        else if (currPos.x >= pixPos3.x) {
-                            currPos.x = pixPos3.x - 1;
+                        else if (currPos.x >= boundary.x) {
+                            currPos.x = boundary.x - 1;
                         }
 
                         if (currPos.y < 0) {
                             currPos.y = 0;
                         }
-                        else if (currPos.y >= pixPos3.y) {
-                            currPos.y = pixPos3.y - 1;
+                        else if (currPos.y >= boundary.y) {
+                            currPos.y = boundary.y - 1;
                         }
                     }
                     pixPos4.x = pixPos1.x + currPos.x;

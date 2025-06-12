@@ -28,7 +28,7 @@ bool8 CreateHintDisplayScreen(u32 index)
     sUnknown_203B268->s0.unk38->header = &sUnknown_203B268->header;
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B268->s0.windows, TRUE, TRUE);
-    sub_8013818(&sUnknown_203B268->s0.input, 5, 1, sUnknown_203B268->s0.winId);
+    CreateMenuOnWindow(&sUnknown_203B268->s0.input, 5, 1, sUnknown_203B268->s0.winId);
     sUnknown_203B268->s0.input.unk1E = index;
     sub_801E714();
 

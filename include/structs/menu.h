@@ -20,7 +20,7 @@ typedef struct MenuInputStructSub
 // size: R=0x34 | NDS=0x32?
 typedef struct MenuInputStruct
 {
-    /* 0x0  */ s32 unk0;
+    /* 0x0  */ s32 windowId;
     /* 0x4  */ u16 unk4;
     /* 0x6  */ s16 firstEntryY;
     /* 0x8  */ DungeonPos unk8;
@@ -30,10 +30,10 @@ typedef struct MenuInputStruct
     /* 0x14 */ DungeonPos unk14;
     /* 0x18 */ s16 menuIndex;
     /* 0x1A */ s16 unk1A;
-    /* 0x1C */ s16 unk1C;
+    /* 0x1C */ s16 entriesPerPage;
     /* 0x1E */ s16 unk1E;
     /* 0x20 */ s16 unk20;
-    /* 0x22 */ s16 unk22;
+    /* 0x22 */ s16 totalEntriesCount;
     /* 0x24 */ u16 unk24;
     /* 0x26 */ u16 unk26;
     /* 0x28 */ MenuInputStructSub unk28;

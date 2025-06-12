@@ -46,7 +46,7 @@ bool8 sub_802B640(u32 a0, DungeonPos *a1, u32 a2)
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2CC->s38.windows, TRUE, TRUE);
 
-    sub_8013818(&sUnknown_203B2CC->s38.input, GetNumPKMNNews(), a2, a0);
+    CreateMenuOnWindow(&sUnknown_203B2CC->s38.input, GetNumPKMNNews(), a2, a0);
 
     sUnknown_203B2CC->s38.input.menuIndex = sUnknown_203B2D0;
     sUnknown_203B2CC->s38.input.unk1E = sUnknown_203B2D2;
@@ -87,7 +87,7 @@ u32 sub_802B720(bool8 a0)
 
 u8 GetPokemonNewsIndex(void)
 {
-    return sUnknown_203B2CC->receivedNewsletters[(sUnknown_203B2CC->s38.input.unk1E * sUnknown_203B2CC->s38.input.unk1C) + sUnknown_203B2CC->s38.input.menuIndex];
+    return sUnknown_203B2CC->receivedNewsletters[(sUnknown_203B2CC->s38.input.unk1E * sUnknown_203B2CC->s38.input.entriesPerPage) + sUnknown_203B2CC->s38.input.menuIndex];
 }
 
 void sub_802B7D0(bool8 cursorSprite)
@@ -95,7 +95,7 @@ void sub_802B7D0(bool8 cursorSprite)
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2CC->s38.windows, FALSE, FALSE);
 
-    sUnknown_203B2CC->s38.input.unk22 = GetNumPKMNNews();
+    sUnknown_203B2CC->s38.input.totalEntriesCount = GetNumPKMNNews();
     sub_8013984(&sUnknown_203B2CC->s38.input);
     sub_802B880();
     CreatePKMNNewsMenu();
@@ -141,7 +141,7 @@ static void CreatePKMNNewsMenu(void)
 
     for (index = 0; index < sUnknown_203B2CC->s38.input.unk1A; index++) {
         y = GetMenuEntryYCoord(&sUnknown_203B2CC->s38.input, index);
-        new_index = (sUnknown_203B2CC->s38.input.unk1E * sUnknown_203B2CC->s38.input.unk1C) + index;
+        new_index = (sUnknown_203B2CC->s38.input.unk1E * sUnknown_203B2CC->s38.input.entriesPerPage) + index;
         mailIndex = sUnknown_203B2CC->receivedNewsletters[new_index];
         sub_803B6B0(10, y, 6, sUnknown_203B2CC->s38.winId);
         sub_802BC7C();

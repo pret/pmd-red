@@ -345,7 +345,7 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
     sTeamWindowHeader.f3 = 0;
     gDungeonMenu.menuIndex = gTeamMenuChosenId;
     gDungeonMenu.unk1A = count;
-    gDungeonMenu.unk1C = count;
+    gDungeonMenu.entriesPerPage = count;
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
@@ -353,7 +353,7 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
     gDungeonMenu.unkC = 0;
     gDungeonMenu.unkE = 0;
     gDungeonMenu.unk14.x = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);
     r0 = sub_80095E4(count, 0);
     if (r10) {
@@ -534,7 +534,7 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
                 break;
         }
         gDungeonMenu.unk1A = i;
-        gDungeonMenu.unk1C = 8;
+        gDungeonMenu.entriesPerPage = 8;
         gDungeonMenu.unk1E = 0;
         gDungeonMenu.unk20 = 0;
         gDungeonMenu.unk4 = 0;
@@ -542,7 +542,7 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
         gDungeonMenu.unkC = 0;
         gDungeonMenu.unkE = 0;
         gDungeonMenu.unk14.x = 0;
-        gDungeonMenu.unk0 = 0;
+        gDungeonMenu.windowId = 0;
         sub_801317C(&gDungeonMenu.unk28);
         sub_80137B0(&gDungeonMenu, 0);
         gDungeonMenu.menuIndex = menuIndex;
@@ -797,11 +797,11 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         gDungeonMenu.unk14.x = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;
-        gDungeonMenu.unk0 = 0;
+        gDungeonMenu.windowId = 0;
         sub_801317C(&gDungeonMenu.unk28);
         gDungeonMenu.menuIndex = 0;
         gDungeonMenu.unk1A = 0;
-        gDungeonMenu.unk1C = 0;
+        gDungeonMenu.entriesPerPage = 0;
 
         if (subWindowIds[currSubWindowId] == SUB_WINDOW_STATUS) {
             s32 i;
@@ -815,7 +815,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
             if (i != 0) {
                 hasStatusProblems = TRUE;
                 gDungeonMenu.unk1A = i;
-                gDungeonMenu.unk1C = 8;
+                gDungeonMenu.entriesPerPage = 8;
                 sub_80137B0(&gDungeonMenu, 0);
             }
             gDungeonMenu.menuIndex = r8;
@@ -832,7 +832,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
             if (i != 0) {
                 hasIqSkills = TRUE;
                 gDungeonMenu.unk1A = i;
-                gDungeonMenu.unk1C = 8;
+                gDungeonMenu.entriesPerPage = 8;
                 sub_80137B0(&gDungeonMenu, 0);
             }
             gDungeonMenu.menuIndex = r8;

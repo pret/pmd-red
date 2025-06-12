@@ -123,7 +123,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
             sub_8067F00(a0, a3, gUnknown_202F30C, a2, a1);
             gDungeonMenu.unk1A = min(a2, 8);
             gDungeonMenu.menuIndex = r10;
-            gDungeonMenu.unk1C = 8;
+            gDungeonMenu.entriesPerPage = 8;
             gDungeonMenu.unk1E = 0;
             gDungeonMenu.unk20 = 0;
             gDungeonMenu.unk4 = 0;
@@ -131,7 +131,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
             gDungeonMenu.unkC = 0;
             gDungeonMenu.unkE = 0;
             gDungeonMenu.unk14.x = 0;
-            gDungeonMenu.unk0 = 0;
+            gDungeonMenu.windowId = 0;
             sub_801317C(&gDungeonMenu.unk28);
             sub_80137B0(&gDungeonMenu, 0);
             while (1) {
@@ -423,11 +423,11 @@ void sub_806806C(PokemonStruct1 *a0)
         gDungeonMenu.unk20 = 4;
         gDungeonMenu.unk1A = 0;
         gDungeonMenu.menuIndex = 0;
-        gDungeonMenu.unk1C = 0;
+        gDungeonMenu.entriesPerPage = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;
         gDungeonMenu.unk14.x = 0;
-        gDungeonMenu.unk0 = 0;
+        gDungeonMenu.windowId = 0;
 
         sub_801317C(&gDungeonMenu.unk28);
         DungeonShowWindows(&spTxtStruct, 1);

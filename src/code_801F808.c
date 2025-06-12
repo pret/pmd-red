@@ -66,7 +66,7 @@ bool8 sub_801F808(u16 *moveIDs)
     {
         if(gUnknown_203B278->moveIDs[index - 1] != 0) break;
     }
-    sub_8013818(&gUnknown_203B278->unk28,index,1,gUnknown_203B278->unk5C);
+    CreateMenuOnWindow(&gUnknown_203B278->unk28,index,1,gUnknown_203B278->unk5C);
     sub_801317C(&gUnknown_203B278->unkC8);
     sub_801F918(0);
     return 1;

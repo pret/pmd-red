@@ -60,7 +60,7 @@ bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
     sub_8012D08(gUnknown_3001B5C->s35C.s0.unk38, a3);
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_3001B5C->s35C.s0.input, sub_80236A4(), a3, index);
+    CreateMenuOnWindow(&gUnknown_3001B5C->s35C.s0.input, sub_80236A4(), a3, index);
     gUnknown_3001B5C->s35C.s0.input.menuIndex = gUnknown_203B29C;
     gUnknown_3001B5C->s35C.s0.input.unk1E = gUnknown_203B29E;
     sub_8013984(&gUnknown_3001B5C->s35C.s0.input);
@@ -107,7 +107,7 @@ u32 sub_8023278(bool8 a0)
 
 s16 sub_802331C(void)
 {
-    return gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.unk1C) + gUnknown_3001B5C->s35C.s0.input.menuIndex];
+    return gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.entriesPerPage) + gUnknown_3001B5C->s35C.s0.input.menuIndex];
 }
 
 void sub_8023354(bool8 cursorSprite)
@@ -167,7 +167,7 @@ static void sub_80234BC(void)
 
     for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.unk1A; i++) {
         y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.s0.input, i);
-        species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.unk1C) + i];
+        species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.entriesPerPage) + i];
         GetFriendAreaCapacity2(GetFriendArea(species), &auStack_2c, FALSE, FALSE);
         color = COLOR_WHITE_2;
         if (auStack_2c.hasFriendArea)

@@ -30,7 +30,7 @@ bool8 sub_801E198(GameOptions *optionsMenu)
     sub_8012D08(sUnknown_203B260->unk48, 1);
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B260->unk4C, TRUE, TRUE);
-    sub_8013818(&sUnknown_203B260->input, 1, 1, sUnknown_203B260->unk44);
+    CreateMenuOnWindow(&sUnknown_203B260->input, 1, 1, sUnknown_203B260->unk44);
     nullsub_38();
     CreateOptionsMenu();
     return TRUE;

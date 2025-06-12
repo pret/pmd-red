@@ -99,7 +99,7 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, DungeonPos *r2, u32 r3)
     sub_8012D08(gUnknown_203B320->s28.s0.unk38, r3);
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B320->s28.s0.windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B320->s28.s0.input, sub_8030A74(), r3, r1);
+    CreateMenuOnWindow(&gUnknown_203B320->s28.s0.input, sub_8030A74(), r3, r1);
     sub_80308A0();
     sub_803092C();
     return 1;
@@ -137,12 +137,12 @@ u32 sub_8030768(u8 r0)
 
 u8 sub_80307EC(void)
 {
-    return gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.unk1E * gUnknown_203B320->s28.s0.input.unk1C) + gUnknown_203B320->s28.s0.input.menuIndex];
+    return gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.unk1E * gUnknown_203B320->s28.s0.input.entriesPerPage) + gUnknown_203B320->s28.s0.input.menuIndex];
 }
 
 void sub_8030810(u8 r0)
 {
-    gUnknown_203B320->s28.s0.input.unk22 = sub_8030A74();
+    gUnknown_203B320->s28.s0.input.totalEntriesCount = sub_8030A74();
     sub_8013984(&gUnknown_203B320->s28.s0.input);
 
     sub_80308A0();
@@ -199,7 +199,7 @@ void sub_803092C(void)
   sub_8012BC4(r5,0,gUnknown_203B320->s28.s0.input.unk1E + 1,1,7,gUnknown_203B320->s28.s0.winId);
 
   for (index = 0; index < gUnknown_203B320->s28.s0.input.unk1A; index++) {
-      mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.unk1E * gUnknown_203B320->s28.s0.input.unk1C) + index]);
+      mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.unk1E * gUnknown_203B320->s28.s0.input.entriesPerPage) + index]);
       local.unk0[0] = gUnknown_203B320->s28.s0.winId;
       local.y = GetMenuEntryYCoord(&gUnknown_203B320->s28.s0.input,index);
       local.mailTitleType = 7;

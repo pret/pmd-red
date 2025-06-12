@@ -60,7 +60,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
     sub_8099690(1);
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B224->unk54.s0.windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B224->unk54.s0.input, GetNumberOfFilledInventorySlots(), param_4, param_2);
+    CreateMenuOnWindow(&gUnknown_203B224->unk54.s0.input, GetNumberOfFilledInventorySlots(), param_4, param_2);
     gUnknown_203B224->unk54.s0.input.menuIndex = gUnknown_203B228;
     gUnknown_203B224->unk54.s0.input.unk1E = gUnknown_203B22A;
     sub_8013984(&gUnknown_203B224->unk54.s0.input);
@@ -155,7 +155,7 @@ u32 sub_801A6E8(bool8 param_1)
 // arm9.bin::02026934
 s32 sub_801A8AC(void)
 {
-    return (gUnknown_203B224->unk54.s0.input.unk1E * gUnknown_203B224->unk54.s0.input.unk1C) + gUnknown_203B224->unk54.s0.input.menuIndex;
+    return (gUnknown_203B224->unk54.s0.input.unk1E * gUnknown_203B224->unk54.s0.input.entriesPerPage) + gUnknown_203B224->unk54.s0.input.menuIndex;
 }
 
 // arm9.bin::020268C0
@@ -165,7 +165,7 @@ void sub_801A8D0(bool8 r0)
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B224->unk54.s0.windows, FALSE, FALSE);
     FillInventoryGaps();
-    gUnknown_203B224->unk54.s0.input.unk22 = GetNumberOfFilledInventorySlots();
+    gUnknown_203B224->unk54.s0.input.totalEntriesCount = GetNumberOfFilledInventorySlots();
     sub_8013984(&gUnknown_203B224->unk54.s0.input);
     sub_801A998();
     sub_801A9E0();
@@ -217,7 +217,7 @@ void sub_801A9E0(void)
         PrintStringOnWindow(x, 0, sTeamToolboxB, gUnknown_203B224->unk54.s0.winId, 0);
 
     for (r7 = 0; r7 < gUnknown_203B224->unk54.s0.input.unk1A; r7++) {
-        teamItemIndex = (gUnknown_203B224->unk54.s0.input.unk1E * gUnknown_203B224->unk54.s0.input.unk1C) + r7;
+        teamItemIndex = (gUnknown_203B224->unk54.s0.input.unk1E * gUnknown_203B224->unk54.s0.input.entriesPerPage) + r7;
         item = gTeamInventoryRef->teamItems[teamItemIndex];
 
         switch (gUnknown_203B224->unk0) {

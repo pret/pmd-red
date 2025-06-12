@@ -49,7 +49,7 @@ void CreatePartnerSelectionMenu(s16 starterID)
     gUnknown_203B404->s18.header.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B404->s18.s0.windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B404->s18.s0.input, GetValidPartners(), 10, gUnknown_203B404->s18.s0.winId);
+    CreateMenuOnWindow(&gUnknown_203B404->s18.s0.input, GetValidPartners(), 10, gUnknown_203B404->s18.s0.winId);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
 }
@@ -80,7 +80,7 @@ u16 HandlePartnerSelectionInput(void)
 
 UNUSED static void sub_803CE34(bool8 cursorSprite)
 {
-    gUnknown_203B404->s18.s0.input.unk22 = GetValidPartners();
+    gUnknown_203B404->s18.s0.input.totalEntriesCount = GetValidPartners();
     sub_8013984(&gUnknown_203B404->s18.s0.input);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();

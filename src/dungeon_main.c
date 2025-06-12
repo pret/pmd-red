@@ -1534,13 +1534,13 @@ static void PrintOnMainMenu(bool8 printAll)
 
     gDungeonMenu.menuIndex = 0;
     gDungeonMenu.unk1A = 5;
-    gDungeonMenu.unk1C = 5;
+    gDungeonMenu.entriesPerPage = 5;
     gDungeonMenu.unk1E = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 2;
     gDungeonMenu.unkC = 0;
     gDungeonMenu.unkE = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     gDungeonMenu.unk14.x = 0;
     sub_801317C(&gDungeonMenu.unk28);
     sub_80137B0(&gDungeonMenu, 0x38);

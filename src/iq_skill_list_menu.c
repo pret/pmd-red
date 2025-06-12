@@ -38,7 +38,7 @@ bool8 CreateIQSkillListMenu(s16 species, u32 index, u32 a2)
     sub_8012D08(sIQSkillListMenu->s24.s0.unk38, a2);
     ResetUnusedInputStruct();
     ShowWindows(&sIQSkillListMenu->s24.s0.windows, TRUE, TRUE);
-    sub_8013818(&sIQSkillListMenu->s24.s0.input, sIQSkillListMenu->numIQSkills, a2, index);
+    CreateMenuOnWindow(&sIQSkillListMenu->s24.s0.input, sIQSkillListMenu->numIQSkills, a2, index);
     sub_801C440();
     BuildIQSkillList();
     return TRUE;
@@ -73,14 +73,14 @@ u32 HandleIQSkillListMenuInput(bool8 a0)
 
 s32 GetIQSkillSelection(void)
 {
-    return (sIQSkillListMenu->s24.s0.input.unk1E * sIQSkillListMenu->s24.s0.input.unk1C) + sIQSkillListMenu->s24.s0.input.menuIndex;
+    return (sIQSkillListMenu->s24.s0.input.unk1E * sIQSkillListMenu->s24.s0.input.entriesPerPage) + sIQSkillListMenu->s24.s0.input.menuIndex;
 }
 
 void RedrawIQSkillListMenu(bool8 addCursor)
 {
     ResetUnusedInputStruct();
     ShowWindows(&sIQSkillListMenu->s24.s0.windows, FALSE, FALSE);
-    sIQSkillListMenu->s24.s0.input.unk22 = sIQSkillListMenu->numIQSkills;
+    sIQSkillListMenu->s24.s0.input.totalEntriesCount = sIQSkillListMenu->numIQSkills;
     sub_8013984(&sIQSkillListMenu->s24.s0.input);
     sub_801C440();
     BuildIQSkillList();
@@ -131,7 +131,7 @@ void BuildIQSkillList(void)
     sub_8012BC4(x2, 0, sIQSkillListMenu->s24.s0.input.unk1E + 1, 1, 7, sIQSkillListMenu->s24.s0.winId);
 
     for (counter = 0; counter < sIQSkillListMenu->s24.s0.input.unk1A; counter++) {
-        skillIndex = sIQSkillListMenu->iqSkills[(sIQSkillListMenu->s24.s0.input.unk1E * sIQSkillListMenu->s24.s0.input.unk1C) + counter];
+        skillIndex = sIQSkillListMenu->iqSkills[(sIQSkillListMenu->s24.s0.input.unk1E * sIQSkillListMenu->s24.s0.input.entriesPerPage) + counter];
 
         y = GetMenuEntryYCoord(&sIQSkillListMenu->s24.s0.input, counter);
         strncpy(gFormatBuffer_Items[1], GetIQSkillName(skillIndex), 80);

@@ -242,37 +242,37 @@ void sub_8012CAC(WindowTemplate *a0, const MenuItem *a1)
     sub_8012D08(a0, count);
 }
 
-void sub_8012D08(WindowTemplate *param_1, s32 param_2)
+void sub_8012D08(WindowTemplate *winTemplate, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
 
     sVar2 = (s16) sub_80095E4(param_2, 12);
-    if (param_1->type == WINDOW_TYPE_WITH_HEADER)
+    if (winTemplate->type == WINDOW_TYPE_WITH_HEADER)
         sVar2 = (s16)(sVar2 + 2);
 
     sVar3 = sVar2;
-    param_1->height = sVar3;
-    param_1->unk10 = sVar3;
+    winTemplate->height = sVar3;
+    winTemplate->unk10 = sVar3;
 }
 
-void sub_8012D34(WindowTemplate *param_1, s32 param_2)
+void sub_8012D34(WindowTemplate *winTemplate, s32 param_2)
 {
     s32 sVar2;
     s16 sVar3;
 
     sVar2 = (s16) sub_8009614(param_2, 24);
-    if (param_1->type == WINDOW_TYPE_WITH_HEADER)
+    if (winTemplate->type == WINDOW_TYPE_WITH_HEADER)
         sVar2 = (s16)(sVar2 + 2);
 
     sVar3 = sVar2;
-    param_1->height = sVar3;
-    param_1->unk10 = sVar3;
+    winTemplate->height = sVar3;
+    winTemplate->unk10 = sVar3;
 
 }
 
 // arm9.bin::0201C26C
-void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
+void sub_8012D60(MenuStruct *menu, const MenuItem *menuItems, const u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
     const u8 *textPtr;
     s32 counter;
@@ -282,14 +282,14 @@ void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colo
     counter = 0;
     menuIndex = -1;
     iVar1 = 0;
-    param_1->index = index;
-    param_1->menuItems = menuItems;
-    param_1->menuTextColorArray = colorArray;
+    menu->index = index;
+    menu->menuItems = menuItems;
+    menu->menuTextColorArray = colorArray;
 
     if (colorArray == NULL)
-        param_1->menuTextColorArray = gDefaultMenuTextColors;
+        menu->menuTextColorArray = gDefaultMenuTextColors;
 
-    param_1->unkC = param_4;
+    menu->unkC = param_4;
     textPtr = menuItems->text;
 
     if (textPtr) {
@@ -309,17 +309,17 @@ void sub_8012D60(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colo
     if (menuIndex < 0)
         menuIndex = iVar1;
 
-    sub_8013134(&param_1->input, counter, index);
-    param_1->input.menuIndex = menuIndex;
-    sub_80137B0(&param_1->input, 0);
+    sub_8013134(&menu->input, counter, index);
+    menu->input.menuIndex = menuIndex;
+    sub_80137B0(&menu->input, 0);
 
-    param_1->unk4C = TRUE;
-    param_1->unk4D = TRUE;
-    param_1->unk4E = TRUE;
-    param_1->menuAction = -1;
+    menu->unk4C = TRUE;
+    menu->unk4D = TRUE;
+    menu->unk4E = TRUE;
+    menu->menuAction = -1;
 }
 
-void sub_8012E04(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
+void sub_8012E04(MenuStruct *menu, const MenuItem *menuItems, const u32 *colorArray, u16 *param_4, s32 menuAction, s32 index)
 {
     const u8 *textPtr;
     s32 counter;
@@ -350,31 +350,31 @@ void sub_8012E04(MenuStruct *param_1, const MenuItem *menuItems, const u32 *colo
     if (menuIndex < 0)
         menuIndex = iVar1;
 
-    sub_8013134(&param_1->input, counter, index);
-    param_1->input.menuIndex = menuIndex;
-    sub_80137B0(&param_1->input, 0);
+    sub_8013134(&menu->input, counter, index);
+    menu->input.menuIndex = menuIndex;
+    sub_80137B0(&menu->input, 0);
 
-    param_1->index = index;
-    param_1->menuTextColorArray = colorArray;
+    menu->index = index;
+    menu->menuTextColorArray = colorArray;
     if (colorArray == NULL)
-        param_1->menuTextColorArray = gDefaultMenuTextColors;
+        menu->menuTextColorArray = gDefaultMenuTextColors;
 
-    param_1->unkC = param_4;
-    param_1->menuItems = menuItems;
-    param_1->unk4E = FALSE;
-    param_1->unk4C = TRUE;
-    param_1->unk4D = TRUE;
-    param_1->menuAction = -1;
+    menu->unkC = param_4;
+    menu->menuItems = menuItems;
+    menu->unk4E = FALSE;
+    menu->unk4C = TRUE;
+    menu->unk4D = TRUE;
+    menu->menuAction = -1;
 }
 
-void sub_8012EA4(MenuStruct *param_1, bool8 r1)
+void sub_8012EA4(MenuStruct *menu, bool8 r1)
 {
-    param_1->unk4C = r1;
-    param_1->unk4D = TRUE;
-    sub_8012EBC(param_1);
+    menu->unk4C = r1;
+    menu->unk4D = TRUE;
+    sub_8012EBC(menu);
 }
 
-void sub_8012EBC(MenuStruct *param_1)
+void sub_8012EBC(MenuStruct *menu)
 {
     s32 x;
     s32 y;
@@ -389,21 +389,21 @@ void sub_8012EBC(MenuStruct *param_1)
     u8 buffer[256];
     Window *window;
 
-    if (param_1->unk4D) {
-        sub_80073B8(param_1->index);
-        index = param_1->index;
+    if (menu->unk4D) {
+        sub_80073B8(menu->index);
+        index = menu->index;
         window = &gWindows[index];
 
         if (window->type == WINDOW_TYPE_WITH_HEADER) {
             WindowTemplate *windowTemplate = &winTemplates.id[index];
             RestoreSavedWindows(&winTemplates);
-            x = GetStringLineWidth(param_1->unk0);
-            PrintFormattedStringOnWindow(((windowTemplate->header->width * 8 - x) / 2) + 8, 0, param_1->unk0, param_1->index, 0);
+            x = GetStringLineWidth(menu->unk0);
+            PrintFormattedStringOnWindow(((windowTemplate->header->width * 8 - x) / 2) + 8, 0, menu->unk0, menu->index, 0);
         }
 
-        colorArray = param_1->menuTextColorArray;
-        menuItemsPtr = param_1->menuItems;
-        _puVar2 = param_1->unkC;
+        colorArray = menu->menuTextColorArray;
+        menuItemsPtr = menu->menuItems;
+        _puVar2 = menu->unkC;
         counter = 0;
 
         if (menuItemsPtr->text != NULL) {
@@ -422,141 +422,141 @@ void sub_8012EBC(MenuStruct *param_1)
                     color = colorArray[0]; // Use the default white
 
                 sprintfStatic(buffer,gUnknown_80D4828, color, textPtr);
-                y = GetMenuEntryYCoord(&param_1->input, counter);
-                PrintFormattedStringOnWindow(8, y, buffer, param_1->index, 0);
+                y = GetMenuEntryYCoord(&menu->input, counter);
+                PrintFormattedStringOnWindow(8, y, buffer, menu->index, 0);
                 menuItemsPtr++;
                 counter++;
             } while (menuItemsPtr->text != NULL);
         }
 
-        sub_80073E0(param_1->index);
-        param_1->unk4D = FALSE;
+        sub_80073E0(menu->index);
+        menu->unk4D = FALSE;
     }
 
-    if (param_1->unk4E) {
-        if (param_1->unk4C)
-            AddMenuCursorSprite(&param_1->input);
+    if (menu->unk4E) {
+        if (menu->unk4C)
+            AddMenuCursorSprite(&menu->input);
         else
-            sub_8013660(&param_1->input);
+            sub_8013660(&menu->input);
     }
 }
 
-bool8 sub_8012FD8(MenuStruct *param_1)
+bool8 sub_8012FD8(MenuStruct *menu)
 {
     u32 prevMenuIndex;
     s32 index;
     const MenuItem *item;
 
-    prevMenuIndex = param_1->input.menuIndex;
+    prevMenuIndex = menu->input.menuIndex;
 
-    if (param_1->unk4C) {
-        switch (GetKeyPress(&param_1->input)) {
+    if (menu->unk4C) {
+        switch (GetKeyPress(&menu->input)) {
             case INPUT_DPAD_DOWN:
-                MoveMenuCursorDown(&param_1->input);
-                if (prevMenuIndex != param_1->input.menuIndex)
+                MoveMenuCursorDown(&menu->input);
+                if (prevMenuIndex != menu->input.menuIndex)
                     PlayMenuSoundEffect(3);
                 break;
             case INPUT_DPAD_UP:
-                MoveMenuCursorUp(&param_1->input);
-                if (prevMenuIndex != param_1->input.menuIndex)
+                MoveMenuCursorUp(&menu->input);
+                if (prevMenuIndex != menu->input.menuIndex)
                     PlayMenuSoundEffect(3);
                 break;
             case INPUT_A_BUTTON:
-                index = sub_80137A8(&param_1->input);
-                item = &param_1->menuItems[index];
+                index = sub_80137A8(&menu->input);
+                item = &menu->menuItems[index];
 
-                if (item->menuAction > -1 && (param_1->unkC == NULL || param_1->unkC[index] != 1)) {
-                    param_1->menuAction = item->menuAction;
-                    ++param_1; --param_1;
-                    param_1->unk4C = FALSE;
-                    param_1->input.unk24 = 0;
+                if (item->menuAction > -1 && (menu->unkC == NULL || menu->unkC[index] != 1)) {
+                    menu->menuAction = item->menuAction;
+                    ++menu; --menu;
+                    menu->unk4C = FALSE;
+                    menu->input.unk24 = 0;
                 }
                 else {
                     PlayMenuSoundEffect(2);
                     break;
                 }
 
-                if (param_1->unkC != NULL && param_1->unkC[index] == 2)
+                if (menu->unkC != NULL && menu->unkC[index] == 2)
                     PlayMenuSoundEffect(2);
                 else
                     PlayMenuSoundEffect(0);
                 break;
             case INPUT_B_BUTTON:
-                if (param_1->menuItems[param_1->input.unk1A].menuAction > -1) {
-                    param_1->menuAction = param_1->menuItems[param_1->input.unk1A].menuAction;
-                    param_1->unk4C = FALSE;
+                if (menu->menuItems[menu->input.unk1A].menuAction > -1) {
+                    menu->menuAction = menu->menuItems[menu->input.unk1A].menuAction;
+                    menu->unk4C = FALSE;
                     PlayMenuSoundEffect(1);
                 }
                 break;
         }
     }
 
-    sub_8012EBC(param_1);
-    return param_1->unk4C;
+    sub_8012EBC(menu);
+    return menu->unk4C;
 }
 
-bool8 sub_80130A8(MenuStruct *param_1)
+bool8 sub_80130A8(MenuStruct *menu)
 {
     s32 index;
     const MenuItem *menuItem;
 
-    if (param_1->unk4C) {
-        switch (GetKeyPress(&param_1->input))
+    if (menu->unk4C) {
+        switch (GetKeyPress(&menu->input))
         {
             case INPUT_A_BUTTON:
-                index = sub_80137A8(&param_1->input);
-                menuItem = &param_1->menuItems[index];
-                param_1->menuAction = menuItem->menuAction;
-                param_1->unk4C = FALSE;
-                param_1->input.unk24 = 0;
+                index = sub_80137A8(&menu->input);
+                menuItem = &menu->menuItems[index];
+                menu->menuAction = menuItem->menuAction;
+                menu->unk4C = FALSE;
+                menu->input.unk24 = 0;
                 PlayMenuSoundEffect(0);
                 break;
             case INPUT_B_BUTTON:
-                if (param_1->menuItems[param_1->input.unk1A].menuAction > -1) {
-                    param_1->menuAction = param_1->menuItems[param_1->input.unk1A].menuAction;
-                    param_1->unk4C = FALSE;
+                if (menu->menuItems[menu->input.unk1A].menuAction > -1) {
+                    menu->menuAction = menu->menuItems[menu->input.unk1A].menuAction;
+                    menu->unk4C = FALSE;
                     PlayMenuSoundEffect(0);
                 }
                 break;
         }
     }
 
-    sub_8012EBC(param_1);
-    return param_1->unk4C;
+    sub_8012EBC(menu);
+    return menu->unk4C;
 }
 
-bool8 sub_8013114(MenuStruct *param_1, s32 *menuAction)
+bool8 sub_8013114(MenuStruct *menu, s32 *menuAction)
 {
-    if (param_1->unk4C)
+    if (menu->unk4C)
         return TRUE;
 
     if (menuAction != NULL)
-        *menuAction = param_1->menuAction;
+        *menuAction = menu->menuAction;
 
     return FALSE;
 }
 
-static void sub_8013134(MenuInputStruct *param_1, u32 menuItemCounter, u32 windowId)
+static void sub_8013134(MenuInputStruct *menuInput, u32 menuItemCounter, u32 windowId)
 {
     Window *window = &gWindows[windowId];
 
-    param_1->unk0 = windowId;
-    param_1->menuIndex = 0;
-    param_1->unk1A = menuItemCounter;
-    param_1->unk1C = menuItemCounter;
-    param_1->unk1E = 0;
-    param_1->unk4 = 0;
+    menuInput->windowId = windowId;
+    menuInput->menuIndex = 0;
+    menuInput->unk1A = menuItemCounter;
+    menuInput->entriesPerPage = menuItemCounter;
+    menuInput->unk1E = 0;
+    menuInput->unk4 = 0;
 
     if (window->type == WINDOW_TYPE_WITH_HEADER)
-        param_1->firstEntryY = 16;
+        menuInput->firstEntryY = 16;
     else
-        param_1->firstEntryY = 2;
+        menuInput->firstEntryY = 2;
 
-    param_1->unkC = 0;
-    param_1->unkE = 0;
-    param_1->unk14.x = 0;
-    param_1->unk24 = 0;
-    sub_801317C(&param_1->unk28);
+    menuInput->unkC = 0;
+    menuInput->unkE = 0;
+    menuInput->unk14.x = 0;
+    menuInput->unk24 = 0;
+    sub_801317C(&menuInput->unk28);
 }
 
 // arm9.bin::0201BD28
@@ -574,20 +574,20 @@ void sub_801317C(MenuInputStructSub *param_1)
 }
 
 // arm9.bin::0201BD18
-void AddMenuCursorSprite(MenuInputStruct *param_1)
+void AddMenuCursorSprite(MenuInputStruct *menuInput)
 {
-    AddMenuCursorSprite_(param_1, 0);
+    AddMenuCursorSprite_(menuInput, 0);
 }
 
 // arm9.bin::0201B978
-void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
+void AddMenuCursorSprite_(MenuInputStruct *menuInput, u8 *a1)
 {
     struct SpriteOAM sp = {0};
 
-    if (a0->unk1A > 0) {
-        UpdateMenuCursorSpriteCoords(a0);
+    if (menuInput->unk1A > 0) {
+        UpdateMenuCursorSpriteCoords(menuInput);
 
-        if (!(a0->unk24 & 8)) {
+        if (!(menuInput->unk24 & 8)) {
             SpriteSetAffine1(&sp, 0);
             SpriteSetAffine2(&sp, 0);
             SpriteSetObjMode(&sp, 0);
@@ -601,18 +601,18 @@ void AddMenuCursorSprite_(MenuInputStruct *a0, u8 *a1)
             SpriteSetPalNum(&sp, 15);
             SpriteSetUnk6_0(&sp, 0);
             SpriteSetUnk6_1(&sp, 0);
-            SpriteSetX(&sp, a0->unk8.x);
-            SpriteSetY(&sp, a0->unk8.y + 1);
+            SpriteSetX(&sp, menuInput->unk8.x);
+            SpriteSetY(&sp, menuInput->unk8.y + 1);
 
             AddSprite(&sp, 0xFF, 0, 0);
         }
     }
 
-    sub_8013470(a0);
-    if (a0->unk14.x != 0)
-        sub_801332C(&a0->unk14);
+    sub_8013470(menuInput);
+    if (menuInput->unk14.x != 0)
+        sub_801332C(&menuInput->unk14);
 
-    a0->unk24++;
+    menuInput->unk24++;
 
     // More here in NDS
 }
@@ -692,108 +692,104 @@ static void sub_8013470(MenuInputStruct *a0)
     }
 }
 
-void sub_8013660(MenuInputStruct *param_1)
+void sub_8013660(MenuInputStruct *menuInput)
 {
-    if (0 < param_1->unk1A) {
-        UpdateMenuCursorSpriteCoords(param_1);
-        sub_801332C(&param_1->unk8);
+    if (0 < menuInput->unk1A) {
+        UpdateMenuCursorSpriteCoords(menuInput);
+        sub_801332C(&menuInput->unk8);
     }
 }
 
 // arm9.bin::0201B14C
-void UpdateMenuCursorSpriteCoords(MenuInputStruct *param_1)
+void UpdateMenuCursorSpriteCoords(MenuInputStruct *menuInput)
 {
-    s32 index;
-    Window *window;
-
-    index = param_1->unk0;
-    window = &gWindows[index];
-    param_1->unk8.x = window->x * 8 + param_1->unk4;
-    param_1->unk8.y = window->y * 8 + GetMenuEntryYCoord(param_1, param_1->menuIndex);
+    Window *window = &gWindows[menuInput->windowId];
+    menuInput->unk8.x = window->x * 8 + menuInput->unk4;
+    menuInput->unk8.y = window->y * 8 + GetMenuEntryYCoord(menuInput, menuInput->menuIndex);
 }
 
-void MoveMenuCursorDown(MenuInputStruct *param_1)
+void MoveMenuCursorDown(MenuInputStruct *menuInput)
 {
-    param_1->unk24 = 0;
+    menuInput->unk24 = 0;
 
-    if (param_1->unk1A < 1)
-        param_1->menuIndex = 0;
+    if (menuInput->unk1A < 1)
+        menuInput->menuIndex = 0;
     else {
-        param_1->menuIndex++;
+        menuInput->menuIndex++;
 
-        if (param_1->menuIndex >= param_1->unk1A)
-            param_1->menuIndex = 0;
+        if (menuInput->menuIndex >= menuInput->unk1A)
+            menuInput->menuIndex = 0;
     }
 }
 
-void MoveMenuCursorDownWrapAround(MenuInputStruct *param_1, u8 param_2)
+void MoveMenuCursorDownWrapAround(MenuInputStruct *menuInput, u8 param_2)
 {
-    param_1->unk24 = 0;
+    menuInput->unk24 = 0;
 
-    if (param_1->unk1A < 1)
-        param_1->menuIndex = 0;
+    if (menuInput->unk1A < 1)
+        menuInput->menuIndex = 0;
     else {
-        param_1->menuIndex++;
+        menuInput->menuIndex++;
 
-        if (param_1->menuIndex >= param_1->unk1A) {
+        if (menuInput->menuIndex >= menuInput->unk1A) {
             if (param_2 != 0)
-                param_1->menuIndex = 0;
+                menuInput->menuIndex = 0;
             else
-                param_1->menuIndex = param_1->unk1A - 1;
+                menuInput->menuIndex = menuInput->unk1A - 1;
         }
     }
 }
 
-void MoveMenuCursorUp(MenuInputStruct *param_1)
+void MoveMenuCursorUp(MenuInputStruct *menuInput)
 {
-    param_1->unk24 = 0;
+    menuInput->unk24 = 0;
 
-    if (param_1->unk1A < 1)
-        param_1->menuIndex = 0;
+    if (menuInput->unk1A < 1)
+        menuInput->menuIndex = 0;
     else {
-        param_1->menuIndex--;
+        menuInput->menuIndex--;
 
-        if (param_1->menuIndex < 0)
-            param_1->menuIndex = param_1->unk1A - 1;
+        if (menuInput->menuIndex < 0)
+            menuInput->menuIndex = menuInput->unk1A - 1;
     }
 }
 
-void MoveMenuCursorUpWrapAround(MenuInputStruct *param_1, u8 param_2)
+void MoveMenuCursorUpWrapAround(MenuInputStruct *menuInput, u8 param_2)
 {
-    param_1->unk24 = 0;
+    menuInput->unk24 = 0;
 
-    if (param_1->unk1A < 1)
-        param_1->menuIndex = 0;
+    if (menuInput->unk1A < 1)
+        menuInput->menuIndex = 0;
     else {
-        param_1->menuIndex--;
+        menuInput->menuIndex--;
 
-        if (param_1->menuIndex < 0) {
+        if (menuInput->menuIndex < 0) {
             if (param_2 != 0)
-                param_1->menuIndex = param_1->unk1A - 1;
+                menuInput->menuIndex = menuInput->unk1A - 1;
             else
-                param_1->menuIndex = 0;
+                menuInput->menuIndex = 0;
         }
     }
 }
 
-void sub_8013780(MenuInputStruct *param_1, s32 param_2)
+void sub_8013780(MenuInputStruct *menuInput, s32 param_2)
 {
     if (param_2 < 0)
-        param_1->menuIndex = 0;
-    else if (param_2 >= param_1->unk1A)
-        param_1->menuIndex = param_1->unk1A - 1;
+        menuInput->menuIndex = 0;
+    else if (param_2 >= menuInput->unk1A)
+        menuInput->menuIndex = menuInput->unk1A - 1;
     else
-        param_1->menuIndex = param_2;
+        menuInput->menuIndex = param_2;
 
-    param_1->unk24 = 0;
+    menuInput->unk24 = 0;
 }
 
-s32 sub_80137A8(MenuInputStruct *param_1)
+s32 sub_80137A8(MenuInputStruct *menuInput)
 {
-    return param_1->menuIndex;
+    return menuInput->menuIndex;
 }
 
-void sub_80137B0(MenuInputStruct *param_1, s32 param_2)
+void sub_80137B0(MenuInputStruct *menuInput, s32 param_2)
 {
     s32 iVar1;
     s32 iVar2;
@@ -802,197 +798,195 @@ void sub_80137B0(MenuInputStruct *param_1, s32 param_2)
         iVar2 = param_2 << 8;
     }
     else {
-        if (gWindows[param_1->unk0].type == WINDOW_TYPE_WITH_HEADER)
+        if (gWindows[menuInput->windowId].type == WINDOW_TYPE_WITH_HEADER)
             iVar1 = 16;
         else
             iVar1 = 0;
 
-        iVar2 = (gWindows[param_1->unk0].height * 8 - iVar1) << 8;
+        iVar2 = (gWindows[menuInput->windowId].height * 8 - iVar1) << 8;
     }
 
-    param_1->unk10 = iVar2 / param_1->unk1C;
+    menuInput->unk10 = iVar2 / menuInput->entriesPerPage;
 }
 
-void sub_80137F8(MenuInputStruct *param_1, u32 param_2)
+void sub_80137F8(MenuInputStruct *menuInput, u32 param_2)
 {
-    param_1->unk10 = param_2 << 8;
+    menuInput->unk10 = param_2 << 8;
 }
 
 // arm9.bin::0201AF70
-s32 GetMenuEntryYCoord(MenuInputStruct *menu, s32 entryId)
+s32 GetMenuEntryYCoord(MenuInputStruct *menuInput, s32 entryId)
 {
-    s32 firstY = menu->firstEntryY;
-    s32 iVar1 = entryId * menu->unk10;
+    s32 firstY = menuInput->firstEntryY;
+    s32 iVar1 = entryId * menuInput->unk10;
 
     return firstY + (iVar1 / 256);
 }
 
-void sub_8013818(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
+void CreateMenuOnWindow(MenuInputStruct *menuInput, s32 totalCount, u32 perPageCount, s32 windowId)
 {
-    param_1->unk0 = param_4;
-    param_1->unk22 = param_2;
-    param_1->unk1C = param_3;
-    param_1->unk14.x = 0;
-    param_1->unk24 = 0;
-    param_1->menuIndex = 0;
-    param_1->unk1E = 0;
+    menuInput->windowId = windowId;
+    menuInput->totalEntriesCount = totalCount;
+    menuInput->entriesPerPage = perPageCount;
+    menuInput->unk14.x = 0;
+    menuInput->unk24 = 0;
+    menuInput->menuIndex = 0;
+    menuInput->unk1E = 0;
 
-    sub_801317C(&param_1->unk28);
-    sub_8013984(param_1);
-    sub_80137F8(param_1, 12);
+    sub_801317C(&menuInput->unk28);
+    sub_8013984(menuInput);
+    sub_80137F8(menuInput, 12);
 }
 
-void sub_8013848(MenuInputStruct *param_1, s32 param_2, u32 param_3, s32 param_4)
+void sub_8013848(MenuInputStruct *menuInput, s32 totalCount, u32 perPageCount, s32 windowId)
 {
-    param_1->unk0 = param_4;
-    param_1->unk22 = param_2;
-    param_1->unk1C = param_3;
-    param_1->unk14.x = 0;
-    param_1->unk24 = 0;
-    param_1->menuIndex = 0;
-    param_1->unk1E = 0;
+    menuInput->windowId = windowId;
+    menuInput->totalEntriesCount = totalCount;
+    menuInput->entriesPerPage = perPageCount;
+    menuInput->unk14.x = 0;
+    menuInput->unk24 = 0;
+    menuInput->menuIndex = 0;
+    menuInput->unk1E = 0;
 
-    sub_801317C(&param_1->unk28);
-    sub_8013984(param_1);
-    sub_80137F8(param_1, 24);
+    sub_801317C(&menuInput->unk28);
+    sub_8013984(menuInput);
+    sub_80137F8(menuInput, 24);
 }
 
-void sub_8013878(MenuInputStruct *param_1, s32 param_2)
+void sub_8013878(MenuInputStruct *menuInput, s32 param_2)
 {
     if (param_2 < 0)
         param_2 = 0;
-    else if (param_2 >= param_1->unk22)
-        param_2 = param_1->unk22 - 1;
+    else if (param_2 >= menuInput->totalEntriesCount)
+        param_2 = menuInput->totalEntriesCount - 1;
 
-    param_1->unk1E = param_2 / param_1->unk1C;
-    param_1->menuIndex = param_2 % param_1->unk1C;
-    param_1->unk24 = 0;
-    sub_8013984(param_1);
+    menuInput->unk1E = param_2 / menuInput->entriesPerPage;
+    menuInput->menuIndex = param_2 % menuInput->entriesPerPage;
+    menuInput->unk24 = 0;
+    sub_8013984(menuInput);
 }
 
-bool8 sub_80138B8(MenuInputStruct *param_1, bool8 param_2)
+bool8 sub_80138B8(MenuInputStruct *menuInput, bool8 param_2)
 {
     s32 sVar1;
     s32 oldIndex;
 
-    sVar1 = param_1->unk1E;
-    oldIndex = param_1->menuIndex;
-    AddMenuCursorSprite(param_1);
+    sVar1 = menuInput->unk1E;
+    oldIndex = menuInput->menuIndex;
+    AddMenuCursorSprite(menuInput);
 
     if (param_2) {
-        switch (GetKeyPress(param_1)) {
+        switch (GetKeyPress(menuInput)) {
             case INPUT_DPAD_UP:
-                MoveMenuCursorUp(param_1);
-                if (oldIndex != param_1->menuIndex)
+                MoveMenuCursorUp(menuInput);
+                if (oldIndex != menuInput->menuIndex)
                     PlayMenuSoundEffect(3);
                 break;
             case INPUT_DPAD_DOWN:
-                MoveMenuCursorDown(param_1);
-                if (oldIndex != param_1->menuIndex)
+                MoveMenuCursorDown(menuInput);
+                if (oldIndex != menuInput->menuIndex)
                     PlayMenuSoundEffect(3);
                 break;
             case INPUT_DPAD_LEFT:
-                sub_8013A7C(param_1);
+                sub_8013A7C(menuInput);
                 break;
             case INPUT_DPAD_RIGHT:
-                sub_8013A54(param_1);
+                sub_8013A54(menuInput);
                 break;
         }
     }
 
-    if (sVar1 != param_1->unk1E) {
+    if (sVar1 != menuInput->unk1E) {
         PlayMenuSoundEffect(4);
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_8013938(MenuInputStruct *param_1)
+bool8 sub_8013938(MenuInputStruct *menuInput)
 {
     s32 sVar1;
 
-    sVar1 = param_1->unk1E;
-    param_1->unk1A = 0;
-    param_1->unk14.x = 0;
-    AddMenuCursorSprite(param_1);
+    sVar1 = menuInput->unk1E;
+    menuInput->unk1A = 0;
+    menuInput->unk14.x = 0;
+    AddMenuCursorSprite(menuInput);
 
-    switch (GetKeyPress(param_1)) {
+    switch (GetKeyPress(menuInput)) {
         case INPUT_DPAD_LEFT:
-            sub_8013A7C(param_1);
+            sub_8013A7C(menuInput);
             break;
         case INPUT_DPAD_RIGHT:
-            sub_8013A54(param_1);
+            sub_8013A54(menuInput);
             break;
     }
 
-    if (sVar1 != param_1->unk1E) {
+    if (sVar1 != menuInput->unk1E) {
         PlayMenuSoundEffect(4);
         return TRUE;
     }
     return FALSE;
 }
 
-void sub_8013984(MenuInputStruct *param_1)
+void sub_8013984(MenuInputStruct *menuInput)
 {
     s32 iVar2;
-    s32 iVar4;
     Window *window;
 
-    iVar4 = param_1->unk0;
-    window = &gWindows[iVar4];
+    window = &gWindows[menuInput->windowId];
 
-    if (param_1->unk1C == 0)
-        param_1->unk1C++;
+    if (menuInput->entriesPerPage == 0)
+        menuInput->entriesPerPage++;
 
-    param_1->unk20 = param_1->unk22 / param_1->unk1C;
-    iVar2 = param_1->unk22 % param_1->unk1C;
+    menuInput->unk20 = menuInput->totalEntriesCount / menuInput->entriesPerPage;
+    iVar2 = menuInput->totalEntriesCount % menuInput->entriesPerPage;
     if (iVar2 != 0)
-        param_1->unk20++;
+        menuInput->unk20++;
 
-    if (param_1->unk1E > param_1->unk20 - 1)
-        param_1->unk1E = param_1->unk20 - 1;
+    if (menuInput->unk1E > menuInput->unk20 - 1)
+        menuInput->unk1E = menuInput->unk20 - 1;
 
-    if (param_1->unk1E != param_1->unk20 - 1 || param_1->unk22 % param_1->unk1C == 0)
-        param_1->unk1A = param_1->unk1C;
+    if (menuInput->unk1E != menuInput->unk20 - 1 || menuInput->totalEntriesCount % menuInput->entriesPerPage == 0)
+        menuInput->unk1A = menuInput->entriesPerPage;
     else
-        param_1->unk1A = param_1->unk22 % param_1->unk1C;
+        menuInput->unk1A = menuInput->totalEntriesCount % menuInput->entriesPerPage;
 
-    if (param_1->menuIndex > param_1->unk1A - 1)
-        param_1->menuIndex = param_1->unk1A - 1;
+    if (menuInput->menuIndex > menuInput->unk1A - 1)
+        menuInput->menuIndex = menuInput->unk1A - 1;
 
-    param_1->unk4 = 0;
+    menuInput->unk4 = 0;
 
     if (window->type== WINDOW_TYPE_WITH_HEADER)
-        param_1->firstEntryY = 16;
+        menuInput->firstEntryY = 16;
     else
-        param_1->firstEntryY = 0;
+        menuInput->firstEntryY = 0;
 
-    if (param_1->unk20 < 2)
-        param_1->unkC = 0;
+    if (menuInput->unk20 < 2)
+        menuInput->unkC = 0;
     else
-        param_1->unkC = (window->x + window->width - 2) * 8;
+        menuInput->unkC = (window->x + window->width - 2) * 8;
 
-    param_1->unkE = (window->y + 1) * 8 - 2;
+    menuInput->unkE = (window->y + 1) * 8 - 2;
 }
 
-void sub_8013A54(MenuInputStruct *param_1)
+void sub_8013A54(MenuInputStruct *menuInput)
 {
-    if (param_1->unk1E < param_1->unk20 - 1)
-        param_1->unk1E++;
+    if (menuInput->unk1E < menuInput->unk20 - 1)
+        menuInput->unk1E++;
     else
-        param_1->unk1E = 0;
+        menuInput->unk1E = 0;
 
-    sub_8013984(param_1);
+    sub_8013984(menuInput);
 }
 
-void sub_8013A7C(MenuInputStruct *param_1)
+void sub_8013A7C(MenuInputStruct *menuInput)
 {
-    if (param_1->unk1E < 1)
-        param_1->unk1E = param_1->unk20 - 1;
+    if (menuInput->unk1E < 1)
+        menuInput->unk1E = menuInput->unk20 - 1;
     else
-        param_1->unk1E--;
+        menuInput->unk1E--;
 
-    sub_8013984(param_1);
+    sub_8013984(menuInput);
 }
 
 void sub_8013AA0(unkStructFor8013AA0 *a0)

@@ -30,7 +30,7 @@ bool8 sub_801E3F0(u32 a0)
     sub_8012D08(sUnknown_203B264->unk38, 10);
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B264->windows, TRUE, TRUE);
-    sub_8013818(&sUnknown_203B264->input, 5, 10, a0);
+    CreateMenuOnWindow(&sUnknown_203B264->input, 5, 10, a0);
     sub_801E594();
     DrawHintSelectionMenu();
     return TRUE;
@@ -68,7 +68,7 @@ u32 sub_801E474(bool8 a0)
 
 s32 GetChosenHintIndex(void)
 {
-    return (sUnknown_203B264->input.unk1E * sUnknown_203B264->input.unk1C) + sUnknown_203B264->input.menuIndex;
+    return (sUnknown_203B264->input.unk1E * sUnknown_203B264->input.entriesPerPage) + sUnknown_203B264->input.menuIndex;
 }
 
 void CreateHintSelectionScreen(bool8 cursorSprite)

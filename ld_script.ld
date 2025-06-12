@@ -120,7 +120,7 @@ SECTIONS {
         src/iq_skill_info_menu.o(.text);
         src/code_801C8C4.o(.text);
         src/code_801D014.o(.text);
-        src/code_801D9E4.o(.text);
+        src/debug_field_map_window.o(.text);
         src/options_menu1.o(.text);
         src/options_menu2.o(.text);
         src/hints_menu1.o(.text);
@@ -479,7 +479,7 @@ SECTIONS {
         src/iq_skill_info_menu.o(.rodata);
         src/code_801C8C4.o(.rodata);
         src/code_801D014.o(.rodata);
-        src/code_801D9E4.o(.rodata);
+        src/debug_field_map_window.o(.rodata);
         src/options_menu1.o(.rodata);
         src/options_menu2.o(.rodata);
         src/hints_menu1.o(.rodata);

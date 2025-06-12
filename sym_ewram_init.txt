@@ -42,7 +42,7 @@
 .include "src/iq_skill_info_menu.o"
 .include "src/code_801C8C4.o"
 .include "src/code_801D014.o"
-.include "src/code_801D9E4.o"
+.include "src/debug_field_map_window.o"
 .include "src/options_menu1.o"
 .include "src/options_menu2.o"
 .include "src/hints_menu1.o"

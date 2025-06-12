@@ -102,13 +102,13 @@ void ShowRecruitmentSearchMenu(void)
             DungeonShowWindows(&sRecruitmentSearchWindows, TRUE);
             gDungeonMenu.unk1A = 0;
             gDungeonMenu.menuIndex = 0;
-            gDungeonMenu.unk1C = 0;
+            gDungeonMenu.entriesPerPage = 0;
             gDungeonMenu.unk1E = currTabId;
             gDungeonMenu.unk20 = 2;
             gDungeonMenu.unk4 = 0;
             gDungeonMenu.firstEntryY = 16;
             gDungeonMenu.unk14.x = 0;
-            gDungeonMenu.unk0 = 0;
+            gDungeonMenu.windowId = 0;
             sub_801317C(&gDungeonMenu.unk28);
             sScrollId = 0;
             sScrollFlags = 0;

@@ -41,7 +41,7 @@ bool8 sub_801C8C4(s32 a0, s32 a1, DungeonPos *a2, u32 a3)
     sub_8012D08(sUnknown_203B244->unk4B4.s0.unk38, a3);
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B244->unk4B4.s0.windows, TRUE, TRUE);
-    sub_8013818(&sUnknown_203B244->unk4B4.s0.input, sub_801CE58(), a3, a1);
+    CreateMenuOnWindow(&sUnknown_203B244->unk4B4.s0.input, sub_801CE58(), a3, a1);
 
     if (sUnknown_203B248 == sUnknown_203B244->unk0) {
         sUnknown_203B244->unk4B4.s0.input.menuIndex = sUnknown_203B24C;
@@ -106,14 +106,14 @@ u32 sub_801CA08(bool8 a0)
 
 u8 sub_801CB24(void)
 {
-    return sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.unk1C) + sUnknown_203B244->unk4B4.s0.input.menuIndex];
+    return sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.entriesPerPage) + sUnknown_203B244->unk4B4.s0.input.menuIndex];
 }
 
 void sub_801CB5C(bool8 a0)
 {
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B244->unk4B4.s0.windows, FALSE, FALSE);
-    sUnknown_203B244->unk4B4.s0.input.unk22 = sub_801CE58();
+    sUnknown_203B244->unk4B4.s0.input.totalEntriesCount = sub_801CE58();
     sub_8013984(&sUnknown_203B244->unk4B4.s0.input);
     sub_801CC38();
     sub_801CCD8();
@@ -160,7 +160,7 @@ void sub_801CCD8(void)
     sub_8012BC4(sUnknown_203B244->unk4B4.header.width * 8 + 4, 0, sUnknown_203B244->unk4B4.s0.input.unk1E + 1, 2, 7, sUnknown_203B244->unk4B4.s0.winId);
 
     for(index = 0; index < sUnknown_203B244->unk4B4.s0.input.unk1A; index++) {
-        itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.unk1C) + index];
+        itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.entriesPerPage) + index];
         BufferItemName(buffer, itemID, NULL);
         y = GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index);
         PrintStringOnWindow(8, y, buffer, sUnknown_203B244->unk4B4.s0.winId, 0);

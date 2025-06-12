@@ -64,7 +64,7 @@ u32 sub_802CE5C(bool8 a0)
 
 u8 sub_802CEBC(void)
 {
-    return (sUnknown_203B2F4->s0.input.unk1E * sUnknown_203B2F4->s0.input.unk1C) + sUnknown_203B2F4->s0.input.menuIndex;
+    return (sUnknown_203B2F4->s0.input.unk1E * sUnknown_203B2F4->s0.input.entriesPerPage) + sUnknown_203B2F4->s0.input.menuIndex;
 }
 
 void sub_802CED8(bool8 cursorSprite)
@@ -118,7 +118,7 @@ void sub_802CFD0(void)
     sub_8012BC4(r5, 0, sUnknown_203B2F4->s0.input.unk1E + 1, 2, 7, sUnknown_203B2F4->s0.winId);
 
     for (r5 = 0; r5 < sUnknown_203B2F4->s0.input.unk1A; r5++) {
-        iVar1 = sub_803B344((sUnknown_203B2F4->s0.input.unk1E * sUnknown_203B2F4->s0.input.unk1C) + r5);
+        iVar1 = sub_803B344((sUnknown_203B2F4->s0.input.unk1E * sUnknown_203B2F4->s0.input.entriesPerPage) + r5);
 
         local.unk0[0] = sUnknown_203B2F4->s0.winId;
         local.y = GetMenuEntryYCoord(&sUnknown_203B2F4->s0.input, r5);

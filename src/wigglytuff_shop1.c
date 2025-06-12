@@ -37,7 +37,7 @@ bool8 sub_80211AC(u32 mode, u32 a1)
     sWigglytuffShop1Work->s40.s0.unk38->header = &sWigglytuffShop1Work->s40.header;
     ResetUnusedInputStruct();
     ShowWindows(&sWigglytuffShop1Work->s40.s0.windows, TRUE, TRUE);
-    sub_8013818(&sWigglytuffShop1Work->s40.s0.input, sub_8021664(), 10, a1);
+    CreateMenuOnWindow(&sWigglytuffShop1Work->s40.s0.input, sub_8021664(), 10, a1);
 
     if (sUnknown_203B284 == sWigglytuffShop1Work->mode) {
         sWigglytuffShop1Work->s40.s0.input.menuIndex = sUnknown_203B288;
@@ -82,14 +82,14 @@ u32 sub_8021274(bool8 a0)
 
 u8 sub_802132C(void)
 {
-    return sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.unk1E * sWigglytuffShop1Work->s40.s0.input.unk1C) + sWigglytuffShop1Work->s40.s0.input.menuIndex];
+    return sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.unk1E * sWigglytuffShop1Work->s40.s0.input.entriesPerPage) + sWigglytuffShop1Work->s40.s0.input.menuIndex];
 }
 
 void sub_8021354(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
     ShowWindows(&sWigglytuffShop1Work->s40.s0.windows, FALSE, FALSE);
-    sWigglytuffShop1Work->s40.s0.input.unk22 = sub_8021664();
+    sWigglytuffShop1Work->s40.s0.input.totalEntriesCount = sub_8021664();
     sub_8013984(&sWigglytuffShop1Work->s40.s0.input);
     sub_8021410();
     sub_8021494();
@@ -138,7 +138,7 @@ void sub_8021494(void)
     sub_8012BC4((sWigglytuffShop1Work->s40.header.width * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.unk1E + 1, 1, 7, sWigglytuffShop1Work->s40.s0.winId);
 
     for (i = 0; i < sWigglytuffShop1Work->s40.s0.input.unk1A; i++) {
-        friendAreaIndex = sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.unk1E * sWigglytuffShop1Work->s40.s0.input.unk1C) + i];
+        friendAreaIndex = sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.unk1E * sWigglytuffShop1Work->s40.s0.input.entriesPerPage) + i];
 
         if (sWigglytuffShop1Work->mode == 2) {
             WriteFriendAreaName(buffer1, friendAreaIndex, TRUE);

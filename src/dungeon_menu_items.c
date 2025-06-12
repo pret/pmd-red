@@ -395,7 +395,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     gDungeonMenu.unk1E = a0;
     gDungeonMenu.unk20 = sUnknown_202F258;
     gDungeonMenu.unk4 = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.windowId = 0;
     gDungeonMenu.unk14.x = 0;
     sub_801317C(&gDungeonMenu.unk28);
     gDungeon->unk181e8.unk18212 = 0;
@@ -406,7 +406,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
             windows->id[0].height = 0x10;
             header->width = 0xC;
             gDungeonMenu.firstEntryY = 0x10;
-            gDungeonMenu.unk1C = 0xA;
+            gDungeonMenu.entriesPerPage = 0xA;
             gDungeon->unk181e8.unk18212 = 1;
             break;
         case 2:
@@ -414,7 +414,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
             windows->id[0].height = 4;
             header->width = 6;
             gDungeonMenu.firstEntryY = 0x12;
-            gDungeonMenu.unk1C = 1;
+            gDungeonMenu.entriesPerPage = 1;
             break;
         case 3:
         default:
@@ -422,7 +422,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
             windows->id[0].height = 4;
             header->width = 0xC;
             gDungeonMenu.firstEntryY = 0x12;
-            gDungeonMenu.unk1C = 1;
+            gDungeonMenu.entriesPerPage = 1;
             break;
     }
 
