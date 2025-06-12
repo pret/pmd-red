@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
+#include "palette_util.h"
 #include "bg_palette_buffer.h"
-#include "structs/str_3000400.h"
 
 extern void sub_80039B8(void);
 extern void TransferBGPaletteBuffer(void);
@@ -37,7 +37,6 @@ UNUSED static EWRAM_DATA s32 sUnused = 0;
 #define ARR_COUNT_2039998 33
 static EWRAM_DATA u16 gUnknown_2039998[ARR_COUNT_2039998] = {0};
 
-void sub_809977C(void);
 static void sub_8099838(struct UnkStruct_2039958 *a0);
 static void sub_8099848(struct UnkStruct_2039958 *a0);
 static void sub_8099DD0(u16 a0);

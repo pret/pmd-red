@@ -1,272 +1,168 @@
 #include "global.h"
 #include "globaldata.h"
+#include "music_util.h"
+#include "code_800558C.h"
+#include "code_801D9E4.h"
+#include "code_8099360.h"
+#include "code_800C9CC.h"
+#include "graphics_memory.h"
+#include "text_1.h"
+#include "text_2.h"
+#include "text_3.h"
+#include "ground_map.h"
+#include "ground_map_2.h"
+#include "palette_util.h"
+#include "string_format.h"
+#include "sprite.h"
+#include "game_options.h"
+#include "input.h"
+#include "structs/str_position.h"
 
-/*
-    TODO: this is a function that is never called
-    and is very long. I didn't want to split up the
-    file or spend time decomping so here it is in
-    asm();
-*/
+extern void sub_809D0AC(void);
+extern void sub_8012A18(s32 unused);
+extern void sub_809D0BC(void);
+extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
+extern void GroundMap_Select(s16);
+extern void sub_80999E8(s32 a0);
+extern void nullsub_120(void);
+extern void sub_80A59DC(void);
+extern void sub_809D25C(void);
+extern s32 sub_809CFE8(u16 param_1);
+extern PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2);
+extern void sub_809D158(s32, PixelPos*);
 
-NAKED
 UNUSED static void sub_80993F0(void)
 {
-    asm_unified("	.text\n"
-"	push {r4-r7,lr}\n"
-"	mov r7, r10\n"
-"	mov r6, r9\n"
-"	mov r5, r8\n"
-"	push {r5-r7}\n"
-"	sub sp, 0x28\n"
-"	movs r0, 0\n"
-"	mov r10, r0\n"
-"	bl ResetSoundEffectCounters\n"
-"	movs r0, 0x10\n"
-"	bl FadeOutAllMusic\n"
-"	ldr r1, _0809948C\n"
-"	ldr r2, _08099490\n"
-"	adds r0, r2, 0\n"
-"	strh r0, [r1]\n"
-"	movs r0, 0\n"
-"	bl UpdateFadeInTile\n"
-"	movs r0, 0\n"
-"	movs r1, 0x14\n"
-"	bl sub_80095CC\n"
-"	movs r0, 0\n"
-"	movs r1, 0x1\n"
-"	movs r2, 0x1\n"
-"	bl ShowWindows\n"
-"	movs r0, 0\n"
-"	movs r1, 0x14\n"
-"	bl sub_8009408\n"
-"	bl sub_8099648\n"
-"	bl sub_809975C\n"
-"	bl sub_809D0AC\n"
-"	bl sub_8014144\n"
-"	movs r0, 0\n"
-"	movs r1, 0\n"
-"	bl sub_8005838\n"
-"	bl AllocGroundMapAction\n"
-"	mov r7, sp\n"
-"	add r0, sp, 0x8\n"
-"	mov r8, r0\n"
-"_08099454:\n"
-"	bl sub_801D9E4\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	beq _0809949C\n"
-"	mov r0, r10\n"
-"	bl sub_801DA58\n"
-"_08099464:\n"
-"	movs r0, 0\n"
-"	movs r1, 0\n"
-"	bl sub_8005838\n"
-"	movs r0, 0\n"
-"	bl sub_8012A18\n"
-"	bl sub_801DA78\n"
-"	cmp r0, 0x2\n"
-"	beq _08099494\n"
-"	cmp r0, 0x3\n"
-"	bne _08099464\n"
-"	bl sub_801DAC0\n"
-"	lsls r0, 16\n"
-"	asrs r0, 16\n"
-"	mov r10, r0\n"
-"	b _080994A2\n"
-"	.align 2, 0\n"
-"_0809948C: .4byte gUnknown_2026E4E\n"
-"_08099490: .4byte 0x00000808\n"
-"_08099494:\n"
-"	movs r1, 0x1\n"
-"	negs r1, r1\n"
-"	mov r10, r1\n"
-"	b _080994A2\n"
-"_0809949C:\n"
-"	movs r2, 0x1\n"
-"	negs r2, r2\n"
-"	mov r10, r2\n"
-"_080994A2:\n"
-"	bl sub_801DB0C\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	cmp r10, r0\n"
-"	bne _080994B0\n"
-"	b _08099624\n"
-"_080994B0:\n"
-"	movs r0, 0\n"
-"	movs r1, 0x1\n"
-"	movs r2, 0x1\n"
-"	bl ShowWindows\n"
-"	bl GroundMap_Reset\n"
-"	bl sub_809D0BC\n"
-"	mov r0, r10\n"
-"	bl GroundMap_Select\n"
-"	mov r0, sp\n"
-"	mov r1, r8\n"
-"	bl sub_80A579C\n"
-"	ldr r0, [r7, 0x4]\n"
-"	movs r1, 0xC0\n"
-"	lsls r1, 4\n"
-"	adds r0, r1\n"
-"	str r0, [r7, 0x4]\n"
-"	mov r2, r8\n"
-"	ldr r0, [r2, 0x4]\n"
-"	adds r0, r1\n"
-"	str r0, [r2, 0x4]\n"
-"	ldr r0, [sp]\n"
-"	ldr r1, _08099520\n"
-"	adds r0, r1\n"
-"	str r0, [sp]\n"
-"	ldr r0, [r7, 0x4]\n"
-"	adds r0, r1\n"
-"	str r0, [r7, 0x4]\n"
-"	ldr r0, [sp, 0x8]\n"
-"	movs r2, 0x80\n"
-"	lsls r2, 3\n"
-"	adds r0, r2\n"
-"	str r0, [sp, 0x8]\n"
-"	mov r0, r8\n"
-"	ldr r1, [r0, 0x4]\n"
-"	adds r1, r2\n"
-"	str r1, [r0, 0x4]\n"
-"	ldr r2, [sp, 0x8]\n"
-"	ldr r0, [sp]\n"
-"	subs r0, r2, r0\n"
-"	str r0, [sp, 0x20]\n"
-"	ldr r0, [r7, 0x4]\n"
-"	subs r0, r1, r0\n"
-"	str r0, [sp, 0x24]\n"
-"	movs r4, 0\n"
-"	movs r5, 0\n"
-"	movs r0, 0x4\n"
-"	bl sub_80999E8\n"
-"	mov r9, r5\n"
-"	b _08099604\n"
-"	.align 2, 0\n"
-"_08099520: .4byte 0xfffffc00\n"
-"_08099524:\n"
-"	ldr r0, _0809953C\n"
-"	ldrh r1, [r0, 0x2]\n"
-"	ldrh r6, [r0]\n"
-"	movs r0, 0x4\n"
-"	ands r1, r0\n"
-"	cmp r1, 0\n"
-"	beq _08099540\n"
-"	bl sub_80999FC\n"
-"	movs r1, 0x1\n"
-"	mov r9, r1\n"
-"	b _080995AE\n"
-"	.align 2, 0\n"
-"_0809953C: .4byte gRealInputs\n"
-"_08099540:\n"
-"	adds r0, r6, 0\n"
-"	bl sub_809CFE8\n"
-"	lsls r0, 24\n"
-"	asrs r1, r0, 24\n"
-"	movs r2, 0x1\n"
-"	negs r2, r2\n"
-"	cmp r1, r2\n"
-"	beq _0809959A\n"
-"	add r0, sp, 0x10\n"
-"	movs r2, 0x80\n"
-"	lsls r2, 1\n"
-"	bl SetVecFromDirectionSpeed\n"
-"	ldr r2, [sp, 0x10]\n"
-"	ldr r3, [sp, 0x14]\n"
-"	movs r0, 0x2\n"
-"	ands r6, r0\n"
-"	cmp r6, 0\n"
-"	beq _0809956A\n"
-"	movs r0, 0x4\n"
-"_0809956A:\n"
-"	adds r1, r0, 0\n"
-"	muls r1, r2\n"
-"	adds r1, r4\n"
-"	adds r4, r1, 0\n"
-"	muls r0, r3\n"
-"	adds r5, r0\n"
-"	cmp r1, 0\n"
-"	bge _0809957E\n"
-"	movs r4, 0\n"
-"	b _08099588\n"
-"_0809957E:\n"
-"	ldr r0, [sp, 0x20]\n"
-"	cmp r4, r0\n"
-"	blt _08099588\n"
-"	adds r4, r0, 0\n"
-"	subs r4, 0x1\n"
-"_08099588:\n"
-"	cmp r5, 0\n"
-"	bge _08099590\n"
-"	movs r5, 0\n"
-"	b _0809959A\n"
-"_08099590:\n"
-"	ldr r1, [sp, 0x24]\n"
-"	cmp r5, r1\n"
-"	blt _0809959A\n"
-"	adds r5, r1, 0\n"
-"	subs r5, 0x1\n"
-"_0809959A:\n"
-"	ldr r0, [sp]\n"
-"	adds r0, r4\n"
-"	str r0, [sp, 0x18]\n"
-"	ldr r0, [r7, 0x4]\n"
-"	adds r0, r5\n"
-"	add r1, sp, 0x18\n"
-"	str r0, [r1, 0x4]\n"
-"	movs r0, 0\n"
-"	bl sub_809D158\n"
-"_080995AE:\n"
-"	bl sub_809D25C\n"
-"	bl sub_80A59DC\n"
-"	bl DrawDialogueBoxString\n"
-"	movs r0, 0\n"
-"	movs r1, 0\n"
-"	bl sub_8005838\n"
-"	bl sub_80060EC\n"
-"	ldr r0, _08099620\n"
-"	ldr r0, [r0]\n"
-"	ldrb r0, [r0, 0xA]\n"
-"	bl nullsub_8\n"
-"	bl sub_8005180\n"
-"	bl sub_8099BE4\n"
-"	bl sub_8099744\n"
-"	bl UpdateSoundEffectCounters\n"
-"	bl WaitForNextFrameAndAdvanceRNG\n"
-"	bl LoadBufferedInputs\n"
-"	bl nullsub_120\n"
-"	bl sub_80A5E70\n"
-"	bl xxx_call_update_bg_vram\n"
-"	bl CopySpritesToOam\n"
-"	bl sub_8005304\n"
-"	bl sub_8099750\n"
-"	bl DoScheduledMemCopies\n"
-"_08099604:\n"
-"	bl xxx_call_update_bg_sound_input\n"
-"	movs r0, 0\n"
-"	bl ResetSprites\n"
-"	mov r2, r9\n"
-"	cmp r2, 0\n"
-"	beq _08099524\n"
-"	bl sub_8099B94\n"
-"	lsls r0, 24\n"
-"	cmp r0, 0\n"
-"	bne _080995AE\n"
-"	b _08099454\n"
-"	.align 2, 0\n"
-"_08099620: .4byte gGameOptionsRef\n"
-"_08099624:\n"
-"	movs r0, 0x10\n"
-"	bl FadeOutAllMusic\n"
-"	bl FreeGroundMapAction\n"
-"	bl sub_8099768\n"
-"	bl nullsub_103\n"
-"	add sp, 0x28\n"
-"	pop {r3-r5}\n"
-"	mov r8, r3\n"
-"	mov r9, r4\n"
-"	mov r10, r5\n"
-"	pop {r4-r7}\n"
-"	pop {r0}\n"
-"	bx r0\n");
+    PixelPos currPos;
+    s32 r10 = 0;
+
+    ResetSoundEffectCounters();
+    FadeOutAllMusic(16);
+    gUnknown_2026E4E = 0x808;
+    UpdateFadeInTile(0);
+    sub_80095CC(0, 0x14);
+    ShowWindows(NULL, TRUE, TRUE); // TODO: Create a Hide/Reset Windows macro/static inline
+    sub_8009408(0, 20);
+    sub_8099648();
+    sub_809975C();
+    sub_809D0AC();
+    sub_8014144();
+    sub_8005838(NULL, 0);
+    AllocGroundMapAction();
+    while (1) {
+        bool8 quitMapView;
+        PixelPos pixPos1, pixPos2;
+        PixelPos pixPos3;
+
+        if (sub_801D9E4()) {
+            sub_801DA58(r10);
+            while (1) {
+                sub_8005838(NULL, 0);
+                sub_8012A18(0);
+                switch (sub_801DA78()) {
+                    case 3:
+                        r10 = sub_801DAC0();
+                        break;
+                    case 2:
+                        r10 = -1;
+                        break;
+                    default:
+                        continue;
+                }
+                break;
+            }
+        }
+        else {
+            r10 = -1;
+        }
+
+        sub_801DB0C();
+        if (r10 == -1)
+            break;
+
+        ShowWindows(NULL, TRUE, TRUE);
+        GroundMap_Reset();
+        sub_809D0BC();
+        GroundMap_Select(r10);
+        sub_80A579C(&pixPos1, &pixPos2);
+        pixPos1.y += 0xC00;
+        pixPos2.y += 0xC00;
+        pixPos1.x -= 0x400;
+        pixPos1.y -= 0x400;
+        pixPos2.x += 0x400;
+        pixPos2.y += 0x400;
+        pixPos3.x = pixPos2.x - pixPos1.x;
+        pixPos3.y = pixPos2.y - pixPos1.y;
+        currPos.x = 0;
+        currPos.y = 0;
+        sub_80999E8(4);
+        quitMapView = FALSE;
+        while (1) {
+            xxx_call_update_bg_sound_input();
+            ResetSprites(FALSE);
+            if (quitMapView && !sub_8099B94())
+                break;
+            if (!quitMapView) {
+                u32 pressed = gRealInputs.pressed;
+                u32 held = gRealInputs.held;
+                if (pressed & SELECT_BUTTON) {
+                    sub_80999FC(4);
+                    quitMapView = TRUE;
+                }
+                else {
+                    PixelPos pixPos4;
+                    s8 dir = sub_809CFE8(held);
+                    if (dir != -1) {
+                        PixelPos vecPos = SetVecFromDirectionSpeed(dir, 256);
+                        s32 spdMultiplier = (held & B_BUTTON) ? 4 : 2;
+
+                        currPos.x += vecPos.x * spdMultiplier;
+                        currPos.y += vecPos.y * spdMultiplier;
+                        if (currPos.x < 0) {
+                            currPos.x = 0;
+                        }
+                        else if (currPos.x >= pixPos3.x) {
+                            currPos.x = pixPos3.x - 1;
+                        }
+
+                        if (currPos.y < 0) {
+                            currPos.y = 0;
+                        }
+                        else if (currPos.y >= pixPos3.y) {
+                            currPos.y = pixPos3.y - 1;
+                        }
+                    }
+                    pixPos4.x = pixPos1.x + currPos.x;
+                    pixPos4.y = pixPos1.y + currPos.y;
+                    sub_809D158(0, &pixPos4);
+                }
+            }
+
+            sub_809D25C();
+            sub_80A59DC();
+            DrawDialogueBoxString();
+            sub_8005838(NULL, 0);
+            sub_80060EC();
+            nullsub_8(gGameOptionsRef->unkA);
+            sub_8005180();
+            sub_8099BE4();
+            sub_8099744();
+            UpdateSoundEffectCounters();
+            WaitForNextFrameAndAdvanceRNG();
+            LoadBufferedInputs();
+            nullsub_120();
+            sub_80A5E70();
+            xxx_call_update_bg_vram();
+            CopySpritesToOam();
+            sub_8005304();
+            sub_8099750();
+            DoScheduledMemCopies();
+        }
+    }
+
+    FadeOutAllMusic(16);
+    FreeGroundMapAction();
+    sub_8099768();
+    nullsub_103();
 }
+
