@@ -68,7 +68,7 @@ u32 sub_801E474(bool8 a0)
 
 s32 GetChosenHintIndex(void)
 {
-    return (sUnknown_203B264->input.unk1E * sUnknown_203B264->input.entriesPerPage) + sUnknown_203B264->input.menuIndex;
+    return (sUnknown_203B264->input.currPage * sUnknown_203B264->input.entriesPerPage) + sUnknown_203B264->input.menuIndex;
 }
 
 void CreateHintSelectionScreen(bool8 cursorSprite)

@@ -117,7 +117,7 @@ void sub_801F930(void)
         case 0:
             gUnknown_203B278->unk60->header = &gUnknown_203B278->unkC4;
             gUnknown_203B278->unkC4.count = gUnknown_203B278->unk28.unk20;
-            gUnknown_203B278->unkC4.currId = gUnknown_203B278->unk28.unk1E;
+            gUnknown_203B278->unkC4.currId = gUnknown_203B278->unk28.currPage;
             gUnknown_203B278->unkC4.width = 0x10;
             gUnknown_203B278->unkC4.f3 = 0;
             ResetUnusedInputStruct();
@@ -137,8 +137,8 @@ void sub_801F9A4(void)
     switch (gUnknown_203B278->state) {
         case 0:
             CallPrepareTextbox_8008C54(gUnknown_203B278->unk5C);
-            gUnknown_203B278->selectedMoveID = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.unk1E];
-            gUnknown_203B278->unk10 = unk_MoveIDPrintMoveDescription(gUnknown_203B278->unk28.unk1E,gUnknown_203B278->selectedMoveID,gUnknown_203B278->unk5C, gUnknown_203B278->unk14);
+            gUnknown_203B278->selectedMoveID = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.currPage];
+            gUnknown_203B278->unk10 = unk_MoveIDPrintMoveDescription(gUnknown_203B278->unk28.currPage,gUnknown_203B278->selectedMoveID,gUnknown_203B278->unk5C, gUnknown_203B278->unk14);
             gUnknown_203B278->unk24 = 0;
             break;
         case 1:

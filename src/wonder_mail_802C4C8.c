@@ -80,7 +80,7 @@ u32 sub_802C598(bool8 a0)
 
 u8 GetPelipperBoardSlotIndex(void)
 {
-    return gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.unk1E * gUnknown_203B2E8->unk8.s0.input.entriesPerPage) + gUnknown_203B2E8->unk8.s0.input.menuIndex];
+    return gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.currPage * gUnknown_203B2E8->unk8.s0.input.entriesPerPage) + gUnknown_203B2E8->unk8.s0.input.menuIndex];
 }
 
 void sub_802C640(bool8 cursorSprite)
@@ -111,7 +111,7 @@ void sub_802C688(void)
 static void sub_802C6DC(void)
 {
     gUnknown_203B2E8->unk8.header.count = gUnknown_203B2E8->unk8.s0.input.unk20;
-    gUnknown_203B2E8->unk8.header.currId = gUnknown_203B2E8->unk8.s0.input.unk1E;
+    gUnknown_203B2E8->unk8.header.currId = gUnknown_203B2E8->unk8.s0.input.currPage;
     gUnknown_203B2E8->unk8.header.width = 12;
     gUnknown_203B2E8->unk8.header.f3 = 0;
 
@@ -128,17 +128,17 @@ void DrawJobListMenu(void)
 
     CallPrepareTextbox_8008C54(gUnknown_203B2E8->unk8.s0.winId);
     sub_80073B8(gUnknown_203B2E8->unk8.s0.winId);
-    r4 = gUnknown_203B2E8->unk8.s0.input.unk1E * 8;
+    r4 = gUnknown_203B2E8->unk8.s0.input.currPage * 8;
     x = r4;
     x += 10;
     PrintStringOnWindow(x, 0, sJobList, gUnknown_203B2E8->unk8.s0.winId, 0);
 
     r4 += 4;
     x = r4 + (gUnknown_203B2E8->unk8.header.width * 8);
-    sub_8012BC4(x, 0, gUnknown_203B2E8->unk8.s0.input.unk1E + 1, 2, 7, gUnknown_203B2E8->unk8.s0.winId);
+    sub_8012BC4(x, 0, gUnknown_203B2E8->unk8.s0.input.currPage + 1, 2, 7, gUnknown_203B2E8->unk8.s0.winId);
 
     for (i = 0;  i < gUnknown_203B2E8->unk8.s0.input.unk1A; i++) {
-        mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.unk1E * gUnknown_203B2E8->unk8.s0.input.entriesPerPage) + i]);
+        mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.currPage * gUnknown_203B2E8->unk8.s0.input.entriesPerPage) + i]);
         local.unk0[0] = gUnknown_203B2E8->unk8.s0.winId;
         local.y = GetMenuEntryYCoord(&gUnknown_203B2E8->unk8.s0.input, i);
         sub_803B35C(mail, &local);

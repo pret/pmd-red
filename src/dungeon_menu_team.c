@@ -346,12 +346,12 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
     gDungeonMenu.menuIndex = gTeamMenuChosenId;
     gDungeonMenu.unk1A = count;
     gDungeonMenu.entriesPerPage = count;
-    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.currPage = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = (r10 != FALSE) * 16;
-    gDungeonMenu.unkC = 0;
-    gDungeonMenu.unkE = 0;
+    gDungeonMenu.leftRightArrowsPos.x = 0;
+    gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);
@@ -535,12 +535,12 @@ void ShowDungeonTacticsMenu(ActionContainer *a0)
         }
         gDungeonMenu.unk1A = i;
         gDungeonMenu.entriesPerPage = 8;
-        gDungeonMenu.unk1E = 0;
+        gDungeonMenu.currPage = 0;
         gDungeonMenu.unk20 = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;
-        gDungeonMenu.unkC = 0;
-        gDungeonMenu.unkE = 0;
+        gDungeonMenu.leftRightArrowsPos.x = 0;
+        gDungeonMenu.leftRightArrowsPos.y = 0;
         gDungeonMenu.unk14.x = 0;
         gDungeonMenu.windowId = 0;
         sub_801317C(&gDungeonMenu.unk28);
@@ -790,10 +790,10 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         DungeonShowWindows(&windows, TRUE);
         SetMonSummaryInfoFromEntity(&monSummaryInfo, entity);
         ShowPokemonSummaryWindow(subWindowIds[currSubWindowId], currSubWindowId, &monSummaryInfo, &unkInfoTabStruct, 0);
-        gDungeonMenu.unk1E = currSubWindowId;
+        gDungeonMenu.currPage = currSubWindowId;
         gDungeonMenu.unk20 = totalSubWindows;
-        gDungeonMenu.unkC = (mainWindow->x + 15) * 8;
-        gDungeonMenu.unkE = ((mainWindow->y + 1) * 8) - 2;
+        gDungeonMenu.leftRightArrowsPos.x = (mainWindow->x + 15) * 8;
+        gDungeonMenu.leftRightArrowsPos.y = ((mainWindow->y + 1) * 8) - 2;
         gDungeonMenu.unk14.x = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;
@@ -1630,10 +1630,10 @@ static void PrintItemNameOnBottomWindow(Entity *entity)
 
 static void ResetDungeonMenu(void)
 {
-    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.currPage = 0;
     gDungeonMenu.unk20 = 0;
-    gDungeonMenu.unkC = 0;
-    gDungeonMenu.unkE = 0;
+    gDungeonMenu.leftRightArrowsPos.x = 0;
+    gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     sub_801317C(&gDungeonMenu.unk28);
 }

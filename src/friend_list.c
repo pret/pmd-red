@@ -115,7 +115,7 @@ bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10)
     CreateMenuOnWindow(&sFriendList->unk358.s0.input, sub_8023F8C(), r10, windowId);
     if (gUnknown_203B2A0 == sFriendList->unk0) {
         sFriendList->unk358.s0.input.menuIndex = gUnknown_203B2A8;
-        sFriendList->unk358.s0.input.unk1E = gUnknown_203B2AA;
+        sFriendList->unk358.s0.input.currPage = gUnknown_203B2AA;
         sub_8013984(&sFriendList->unk358.s0.input);
     }
     SetUpWindowHeader();
@@ -159,7 +159,7 @@ u32 FriendList_HandleInput(bool8 a0)
 
 s32 FriendList_GetCurrId(void)
 {
-    return sFriendList->unk1A[(sFriendList->unk358.s0.input.unk1E * sFriendList->unk358.s0.input.entriesPerPage) + sFriendList->unk358.s0.input.menuIndex];
+    return sFriendList->unk1A[(sFriendList->unk358.s0.input.currPage * sFriendList->unk358.s0.input.entriesPerPage) + sFriendList->unk358.s0.input.menuIndex];
 }
 
 void sub_8023B7C(bool8 addCursor)
@@ -198,7 +198,7 @@ void FriendList_Free(void)
         gUnknown_203B2A0 = sFriendList->unk0;
         gUnknown_203B2A4 = sFriendList->sortMethod;
         gUnknown_203B2A8 = sFriendList->unk358.s0.input.menuIndex;
-        gUnknown_203B2AA = sFriendList->unk358.s0.input.unk1E;
+        gUnknown_203B2AA = sFriendList->unk358.s0.input.currPage;
         sFriendList->unk358.s0.windows.id[sFriendList->unk358.s0.winId] = sDummyWinTemplate;
         ResetUnusedInputStruct();
         ShowWindows(&sFriendList->unk358.s0.windows, TRUE, TRUE);
@@ -249,17 +249,17 @@ void FriendList_ShowWindow(void)
         case 4:
             PrintStringOnWindow(10, 0, "Friends", sFriendList->unk358.s0.winId, '\0');
             x = (sFriendList->unk358.header.width * 8) + 4;
-            sub_8012BC4(x, 0, sFriendList->unk358.s0.input.unk1E + 1, 2, 7, sFriendList->unk358.s0.winId);
+            sub_8012BC4(x, 0, sFriendList->unk358.s0.input.currPage + 1, 2, 7, sFriendList->unk358.s0.winId);
             break;
         default:
             PrintStringOnWindow(10, 0, _("Pokémon Friends"), sFriendList->unk358.s0.winId, '\0');
             x = (sFriendList->unk358.header.width * 8) + 4;
-            sub_8012BC4(x, 0, sFriendList->unk358.s0.input.unk1E + 1, 2, 7, sFriendList->unk358.s0.winId);
+            sub_8012BC4(x, 0, sFriendList->unk358.s0.input.currPage + 1, 2, 7, sFriendList->unk358.s0.winId);
             break;
     }
 
     for (i = 0; i < sFriendList->unk358.s0.input.unk1A; i++) {
-        s32 id = sFriendList->unk1A[(sFriendList->unk358.s0.input.unk1E * sFriendList->unk358.s0.input.entriesPerPage) + i];
+        s32 id = sFriendList->unk1A[(sFriendList->unk358.s0.input.currPage * sFriendList->unk358.s0.input.entriesPerPage) + i];
         PokemonStruct1 *pokePtr = &gRecruitedPokemonRef->pokemon[id];
         u8 color = 7;
 
@@ -468,7 +468,7 @@ UNUSED static PokemonStruct1 *sub_80243E8(void)
 {
     u8 buffer[40];
     u8 nameBuffer[20];
-    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[sFriendList->unk1A[(sFriendList->unk358.s0.input.unk1E * sFriendList->unk358.s0.input.entriesPerPage) + sFriendList->unk358.s0.input.menuIndex]];
+    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[sFriendList->unk1A[(sFriendList->unk358.s0.input.currPage * sFriendList->unk358.s0.input.entriesPerPage) + sFriendList->unk358.s0.input.menuIndex]];
 
     StrncpyCustom(nameBuffer, pokeStruct->name, POKEMON_NAME_LENGTH);
     sprintfStatic(buffer, "%s", nameBuffer);

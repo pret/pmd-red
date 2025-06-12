@@ -137,7 +137,7 @@ u32 sub_8030768(u8 r0)
 
 u8 sub_80307EC(void)
 {
-    return gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.unk1E * gUnknown_203B320->s28.s0.input.entriesPerPage) + gUnknown_203B320->s28.s0.input.menuIndex];
+    return gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.currPage * gUnknown_203B320->s28.s0.input.entriesPerPage) + gUnknown_203B320->s28.s0.input.menuIndex];
 }
 
 void sub_8030810(u8 r0)
@@ -171,7 +171,7 @@ u8 *sub_8030894(void)
 void sub_80308A0(void)
 {
     gUnknown_203B320->s28.header.count = gUnknown_203B320->s28.s0.input.unk20;
-    gUnknown_203B320->s28.header.currId = gUnknown_203B320->s28.s0.input.unk1E;
+    gUnknown_203B320->s28.header.currId = gUnknown_203B320->s28.s0.input.currPage;
     gUnknown_203B320->s28.header.width = 12;
     gUnknown_203B320->s28.header.f3 = 0;
     ResetUnusedInputStruct();
@@ -190,16 +190,16 @@ void sub_803092C(void)
 
   CallPrepareTextbox_8008C54(gUnknown_203B320->s28.s0.winId);
   sub_80073B8(gUnknown_203B320->s28.s0.winId);
-  r4 = gUnknown_203B320->s28.s0.input.unk1E * 8;
+  r4 = gUnknown_203B320->s28.s0.input.currPage * 8;
   r5 = r4;
   r5 += 10;
   PrintStringOnWindow(r5,0,gUnknown_80E086C[gUnknown_203B320->wonderMailType],gUnknown_203B320->s28.s0.winId,0);
   r4 += 4;
   r5 = r4 + gUnknown_203B320->s28.header.width * 8;
-  sub_8012BC4(r5,0,gUnknown_203B320->s28.s0.input.unk1E + 1,1,7,gUnknown_203B320->s28.s0.winId);
+  sub_8012BC4(r5,0,gUnknown_203B320->s28.s0.input.currPage + 1,1,7,gUnknown_203B320->s28.s0.winId);
 
   for (index = 0; index < gUnknown_203B320->s28.s0.input.unk1A; index++) {
-      mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.unk1E * gUnknown_203B320->s28.s0.input.entriesPerPage) + index]);
+      mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.currPage * gUnknown_203B320->s28.s0.input.entriesPerPage) + index]);
       local.unk0[0] = gUnknown_203B320->s28.s0.winId;
       local.y = GetMenuEntryYCoord(&gUnknown_203B320->s28.s0.input,index);
       local.mailTitleType = 7;

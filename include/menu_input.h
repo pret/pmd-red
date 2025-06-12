@@ -38,8 +38,6 @@ void sub_8013878(MenuInputStruct *param_1, s32 param_2);
 bool8 sub_80138B8(MenuInputStruct *param_1, bool8 param_2);
 bool8 sub_8013938(MenuInputStruct *param_1);
 void sub_8013984(MenuInputStruct * param_1);
-void sub_8013A54(MenuInputStruct *param_1);
-void sub_8013A7C(MenuInputStruct *param_1);
 void AddMenuCursorSprite_(MenuInputStruct *, u8 *);
 void nullsub_34(MenuInputStructSub *, s32 a1);
 

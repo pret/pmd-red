@@ -62,7 +62,7 @@ bool8 sub_801A5D8(u32 param_1, s32 param_2, DungeonPos *param_3, u32 param_4)
     ShowWindows(&gUnknown_203B224->unk54.s0.windows, TRUE, TRUE);
     CreateMenuOnWindow(&gUnknown_203B224->unk54.s0.input, GetNumberOfFilledInventorySlots(), param_4, param_2);
     gUnknown_203B224->unk54.s0.input.menuIndex = gUnknown_203B228;
-    gUnknown_203B224->unk54.s0.input.unk1E = gUnknown_203B22A;
+    gUnknown_203B224->unk54.s0.input.currPage = gUnknown_203B22A;
     sub_8013984(&gUnknown_203B224->unk54.s0.input);
     sub_801A998();
     sub_801A9E0();
@@ -155,7 +155,7 @@ u32 sub_801A6E8(bool8 param_1)
 // arm9.bin::02026934
 s32 sub_801A8AC(void)
 {
-    return (gUnknown_203B224->unk54.s0.input.unk1E * gUnknown_203B224->unk54.s0.input.entriesPerPage) + gUnknown_203B224->unk54.s0.input.menuIndex;
+    return (gUnknown_203B224->unk54.s0.input.currPage * gUnknown_203B224->unk54.s0.input.entriesPerPage) + gUnknown_203B224->unk54.s0.input.menuIndex;
 }
 
 // arm9.bin::020268C0
@@ -178,7 +178,7 @@ void sub_801A928(void)
 {
     if (gUnknown_203B224 != NULL) {
         gUnknown_203B228 = gUnknown_203B224->unk54.s0.input.menuIndex;
-        gUnknown_203B22A = gUnknown_203B224->unk54.s0.input.unk1E;
+        gUnknown_203B22A = gUnknown_203B224->unk54.s0.input.currPage;
         gUnknown_203B224->unk54.s0.windows.id[gUnknown_203B224->unk54.s0.winId] = sUnknown_80DB944;
         sub_8099690(0);
         ResetUnusedInputStruct();
@@ -191,7 +191,7 @@ void sub_801A928(void)
 static void sub_801A998(void)
 {
     gUnknown_203B224->unk54.header.count = gUnknown_203B224->unk54.s0.input.unk20;
-    gUnknown_203B224->unk54.header.currId = gUnknown_203B224->unk54.s0.input.unk1E;
+    gUnknown_203B224->unk54.header.currId = gUnknown_203B224->unk54.s0.input.currPage;
     gUnknown_203B224->unk54.header.width = 11;
     gUnknown_203B224->unk54.header.f3 = 0;
     ResetUnusedInputStruct();
@@ -209,15 +209,15 @@ void sub_801A9E0(void)
 
     CallPrepareTextbox_8008C54(gUnknown_203B224->unk54.s0.winId);
     sub_80073B8(gUnknown_203B224->unk54.s0.winId);
-    x = gUnknown_203B224->unk54.s0.input.unk1E * 8 + 10;
+    x = gUnknown_203B224->unk54.s0.input.currPage * 8 + 10;
 
-    if (gUnknown_203B224->unk54.s0.input.unk1E == 0)
+    if (gUnknown_203B224->unk54.s0.input.currPage == 0)
         PrintStringOnWindow(x, 0, sTeamToolboxA, gUnknown_203B224->unk54.s0.winId, 0);
     else
         PrintStringOnWindow(x, 0, sTeamToolboxB, gUnknown_203B224->unk54.s0.winId, 0);
 
     for (r7 = 0; r7 < gUnknown_203B224->unk54.s0.input.unk1A; r7++) {
-        teamItemIndex = (gUnknown_203B224->unk54.s0.input.unk1E * gUnknown_203B224->unk54.s0.input.entriesPerPage) + r7;
+        teamItemIndex = (gUnknown_203B224->unk54.s0.input.currPage * gUnknown_203B224->unk54.s0.input.entriesPerPage) + r7;
         item = gTeamInventoryRef->teamItems[teamItemIndex];
 
         switch (gUnknown_203B224->unk0) {

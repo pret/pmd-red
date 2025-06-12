@@ -648,10 +648,10 @@ void sub_803EAF0(u32 kind, u8 *name)
 
 static void sub_803EC94(void)
 {
-    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.currPage = 0;
     gDungeonMenu.unk20 = 0;
-    gDungeonMenu.unkC = 0;
-    gDungeonMenu.unkE = 0;
+    gDungeonMenu.leftRightArrowsPos.x = 0;
+    gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     sub_801317C(&gDungeonMenu.unk28);
 }

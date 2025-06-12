@@ -124,12 +124,12 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
             gDungeonMenu.unk1A = min(a2, 8);
             gDungeonMenu.menuIndex = r10;
             gDungeonMenu.entriesPerPage = 8;
-            gDungeonMenu.unk1E = 0;
+            gDungeonMenu.currPage = 0;
             gDungeonMenu.unk20 = 0;
             gDungeonMenu.unk4 = 0;
             gDungeonMenu.firstEntryY = 18;
-            gDungeonMenu.unkC = 0;
-            gDungeonMenu.unkE = 0;
+            gDungeonMenu.leftRightArrowsPos.x = 0;
+            gDungeonMenu.leftRightArrowsPos.y = 0;
             gDungeonMenu.unk14.x = 0;
             gDungeonMenu.windowId = 0;
             sub_801317C(&gDungeonMenu.unk28);
@@ -419,7 +419,7 @@ void sub_806806C(PokemonStruct1 *a0)
         gUnknown_202F308.width = 10;
         gUnknown_202F308.f3 = 0;
 
-        gDungeonMenu.unk1E = r7;
+        gDungeonMenu.currPage = r7;
         gDungeonMenu.unk20 = 4;
         gDungeonMenu.unk1A = 0;
         gDungeonMenu.menuIndex = 0;
@@ -434,8 +434,8 @@ void sub_806806C(PokemonStruct1 *a0)
         SetMonSummaryInfo(&unkStruct, a0, gDungeon->unk644.unk16);
         ShowPokemonSummaryWindow(spF8[r7], r7, &unkStruct, &var_C8, 0);
 
-        gDungeonMenu.unkC = (gWindows[0].x + 15) * 8;
-        gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
+        gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 15) * 8;
+        gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
 
         while (1) {
             s32 r5;

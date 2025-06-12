@@ -73,7 +73,7 @@ u32 HandleIQSkillListMenuInput(bool8 a0)
 
 s32 GetIQSkillSelection(void)
 {
-    return (sIQSkillListMenu->s24.s0.input.unk1E * sIQSkillListMenu->s24.s0.input.entriesPerPage) + sIQSkillListMenu->s24.s0.input.menuIndex;
+    return (sIQSkillListMenu->s24.s0.input.currPage * sIQSkillListMenu->s24.s0.input.entriesPerPage) + sIQSkillListMenu->s24.s0.input.menuIndex;
 }
 
 void RedrawIQSkillListMenu(bool8 addCursor)
@@ -103,7 +103,7 @@ void CleanIQSkillListMenu(void)
 static void sub_801C440(void)
 {
     sIQSkillListMenu->s24.header.count = sIQSkillListMenu->s24.s0.input.unk20;
-    sIQSkillListMenu->s24.header.currId = sIQSkillListMenu->s24.s0.input.unk1E;
+    sIQSkillListMenu->s24.header.currId = sIQSkillListMenu->s24.s0.input.currPage;
     sIQSkillListMenu->s24.header.width = 10;
     sIQSkillListMenu->s24.header.f3 = 0;
     ResetUnusedInputStruct();
@@ -121,17 +121,17 @@ void BuildIQSkillList(void)
 
     CallPrepareTextbox_8008C54(sIQSkillListMenu->s24.s0.winId);
     sub_80073B8(sIQSkillListMenu->s24.s0.winId);
-    x = sIQSkillListMenu->s24.s0.input.unk1E * 8;
+    x = sIQSkillListMenu->s24.s0.input.currPage * 8;
     x2 = x;
     x2 += 10;
     PrintStringOnWindow(x2, 0, sIQSkills, sIQSkillListMenu->s24.s0.winId, 0);
 
     x += 4;
     x2 = x + sIQSkillListMenu->s24.header.width * 8;
-    sub_8012BC4(x2, 0, sIQSkillListMenu->s24.s0.input.unk1E + 1, 1, 7, sIQSkillListMenu->s24.s0.winId);
+    sub_8012BC4(x2, 0, sIQSkillListMenu->s24.s0.input.currPage + 1, 1, 7, sIQSkillListMenu->s24.s0.winId);
 
     for (counter = 0; counter < sIQSkillListMenu->s24.s0.input.unk1A; counter++) {
-        skillIndex = sIQSkillListMenu->iqSkills[(sIQSkillListMenu->s24.s0.input.unk1E * sIQSkillListMenu->s24.s0.input.entriesPerPage) + counter];
+        skillIndex = sIQSkillListMenu->iqSkills[(sIQSkillListMenu->s24.s0.input.currPage * sIQSkillListMenu->s24.s0.input.entriesPerPage) + counter];
 
         y = GetMenuEntryYCoord(&sIQSkillListMenu->s24.s0.input, counter);
         strncpy(gFormatBuffer_Items[1], GetIQSkillName(skillIndex), 80);

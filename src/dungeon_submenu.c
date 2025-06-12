@@ -39,14 +39,14 @@ void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
     gDungeonMenu.menuIndex = 0;
     gDungeonMenu.entriesPerPage = gDungeonSubMenuItemsCount;
     gDungeonMenu.unk1A = gDungeonSubMenuItemsCount;
-    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.currPage = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 0;
     gDungeonMenu.windowId = 1;
-    gDungeonMenu.unkC = 0;
-    gDungeonMenu.unkE = 0;
-    gDungeonMenu.unk14 = gDungeonMenu.unk8;
+    gDungeonMenu.leftRightArrowsPos.x = 0;
+    gDungeonMenu.leftRightArrowsPos.y = 0;
+    gDungeonMenu.unk14 = gDungeonMenu.cursorArrowPos;
 
     sub_801317C(&gDungeonMenu.unk28);
 

@@ -62,7 +62,7 @@ bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
     ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, TRUE, TRUE);
     CreateMenuOnWindow(&gUnknown_3001B5C->s35C.s0.input, sub_80236A4(), a3, index);
     gUnknown_3001B5C->s35C.s0.input.menuIndex = gUnknown_203B29C;
-    gUnknown_3001B5C->s35C.s0.input.unk1E = gUnknown_203B29E;
+    gUnknown_3001B5C->s35C.s0.input.currPage = gUnknown_203B29E;
     sub_8013984(&gUnknown_3001B5C->s35C.s0.input);
     sub_8023420();
     sub_80234BC();
@@ -107,7 +107,7 @@ u32 sub_8023278(bool8 a0)
 
 s16 sub_802331C(void)
 {
-    return gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.entriesPerPage) + gUnknown_3001B5C->s35C.s0.input.menuIndex];
+    return gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.currPage * gUnknown_3001B5C->s35C.s0.input.entriesPerPage) + gUnknown_3001B5C->s35C.s0.input.menuIndex];
 }
 
 void sub_8023354(bool8 cursorSprite)
@@ -127,7 +127,7 @@ void sub_80233A0(void)
     if (gUnknown_3001B5C != NULL) {
         gUnknown_203B298 = gUnknown_3001B5C->unk4;
         gUnknown_203B29C = gUnknown_3001B5C->s35C.s0.input.menuIndex;
-        gUnknown_203B29E = gUnknown_3001B5C->s35C.s0.input.unk1E;
+        gUnknown_203B29E = gUnknown_3001B5C->s35C.s0.input.currPage;
         gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.winId] = sUnknown_80DC904;
         ResetUnusedInputStruct();
         ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, TRUE, TRUE);
@@ -163,11 +163,11 @@ static void sub_80234BC(void)
     sub_80073B8(gUnknown_3001B5C->s35C.s0.winId);
     PrintStringOnWindow(10, 0, sPokemon, gUnknown_3001B5C->s35C.s0.winId, 0);
 
-    sub_8012BC4((gUnknown_3001B5C->s35C.header.width * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.unk1E + 1, 2, 7, gUnknown_3001B5C->s35C.s0.winId);
+    sub_8012BC4((gUnknown_3001B5C->s35C.header.width * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.currPage + 1, 2, 7, gUnknown_3001B5C->s35C.s0.winId);
 
     for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.unk1A; i++) {
         y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.s0.input, i);
-        species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.unk1E * gUnknown_3001B5C->s35C.s0.input.entriesPerPage) + i];
+        species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.currPage * gUnknown_3001B5C->s35C.s0.input.entriesPerPage) + i];
         GetFriendAreaCapacity2(GetFriendArea(species), &auStack_2c, FALSE, FALSE);
         color = COLOR_WHITE_2;
         if (auStack_2c.hasFriendArea)

@@ -151,7 +151,7 @@ u32 sub_802F8A0(u8 r0)
 
 s16 sub_802F90C(void)
 {
-    return gUnknown_203B314->unk0[(gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.entriesPerPage) + gUnknown_203B314->sBC.s0.input.menuIndex];
+    return gUnknown_203B314->unk0[(gUnknown_203B314->sBC.s0.input.currPage * gUnknown_203B314->sBC.s0.input.entriesPerPage) + gUnknown_203B314->sBC.s0.input.menuIndex];
 }
 
 void sub_802F938(u8 r0)
@@ -199,12 +199,12 @@ void sub_802FA50(void)
   CallPrepareTextbox_8008C54(gUnknown_203B314->sBC.s0.winId);
   sub_80073B8(gUnknown_203B314->sBC.s0.winId);
   PrintStringOnWindow(10,0,gUnknown_80E0744,gUnknown_203B314->sBC.s0.winId,0);
-  sub_8012BC4(gUnknown_203B314->sBC.header.width * 8 + 4,0,gUnknown_203B314->sBC.s0.input.unk1E + 1,2,7,gUnknown_203B314->sBC.s0.winId);
+  sub_8012BC4(gUnknown_203B314->sBC.header.width * 8 + 4,0,gUnknown_203B314->sBC.s0.input.currPage + 1,2,7,gUnknown_203B314->sBC.s0.winId);
   if (gUnknown_203B314->unkB8 != 0) {
     for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
     {
         y = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
-        index = gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.entriesPerPage + counter;
+        index = gUnknown_203B314->sBC.s0.input.currPage * gUnknown_203B314->sBC.s0.input.entriesPerPage + counter;
         sVar1 = gUnknown_203B314->unk0[index];
         if (gUnknown_203B314->unk5C[index] != 0) {
             PrintStringOnWindow(10,y,gUnknown_80E0750,gUnknown_203B314->sBC.s0.winId,0);
@@ -219,7 +219,7 @@ void sub_802FA50(void)
     for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.unk1A; counter++)
     {
         y2 = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
-        text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->sBC.s0.input.unk1E * gUnknown_203B314->sBC.s0.input.entriesPerPage + counter]);
+        text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->sBC.s0.input.currPage * gUnknown_203B314->sBC.s0.input.entriesPerPage + counter]);
         PrintStringOnWindow(8,y2,text,gUnknown_203B314->sBC.s0.winId,0);
     }
   }

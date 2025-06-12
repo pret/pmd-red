@@ -75,7 +75,7 @@ void sub_802453C(void)
 static void sub_8024588(void)
 {
     sUnknown_203B2AC->unk148.count = sUnknown_203B2AC->input.unk20;
-    sUnknown_203B2AC->unk148.currId = sUnknown_203B2AC->input.unk1E;
+    sUnknown_203B2AC->unk148.currId = sUnknown_203B2AC->input.currPage;
     sUnknown_203B2AC->unk148.f3 = 0;
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2AC->unkE8, TRUE, TRUE);
@@ -83,7 +83,7 @@ static void sub_8024588(void)
 
 static void sub_80245D0(void)
 {
-    ShowPokemonSummaryWindow(sUnknown_203B2AC->unk34[sUnknown_203B2AC->input.unk1E], sUnknown_203B2AC->input.unk1E, &sUnknown_203B2AC->unk4C, &sUnknown_203B2AC->unkB0, sUnknown_203B2AC->unkE0);
+    ShowPokemonSummaryWindow(sUnknown_203B2AC->unk34[sUnknown_203B2AC->input.currPage], sUnknown_203B2AC->input.currPage, &sUnknown_203B2AC->unk4C, &sUnknown_203B2AC->unkB0, sUnknown_203B2AC->unkE0);
 }
 
 static void sub_8024604(void)

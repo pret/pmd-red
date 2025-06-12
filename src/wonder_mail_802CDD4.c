@@ -64,7 +64,7 @@ u32 sub_802CE5C(bool8 a0)
 
 u8 sub_802CEBC(void)
 {
-    return (sUnknown_203B2F4->s0.input.unk1E * sUnknown_203B2F4->s0.input.entriesPerPage) + sUnknown_203B2F4->s0.input.menuIndex;
+    return (sUnknown_203B2F4->s0.input.currPage * sUnknown_203B2F4->s0.input.entriesPerPage) + sUnknown_203B2F4->s0.input.menuIndex;
 }
 
 void sub_802CED8(bool8 cursorSprite)
@@ -93,7 +93,7 @@ void sub_802CF14(void)
 static void sub_802CF5C(void)
 {
     sUnknown_203B2F4->header.count = sUnknown_203B2F4->s0.input.unk20;
-    sUnknown_203B2F4->header.currId = sUnknown_203B2F4->s0.input.unk1E;
+    sUnknown_203B2F4->header.currId = sUnknown_203B2F4->s0.input.currPage;
     sUnknown_203B2F4->header.width = 12;
     sUnknown_203B2F4->header.f3 = 0;
 
@@ -110,15 +110,15 @@ void sub_802CFD0(void)
     CallPrepareTextbox_8008C54(sUnknown_203B2F4->s0.winId);
     sub_80073B8(sUnknown_203B2F4->s0.winId);
 
-    r5 = r4 = (sUnknown_203B2F4->s0.input.unk1E * 8) + 10;
+    r5 = r4 = (sUnknown_203B2F4->s0.input.currPage * 8) + 10;
     PrintStringOnWindow(r5, 0, sRescueEvent, sUnknown_203B2F4->s0.winId, 0);
 
     r4 -= 6;
     r5 = r4 + (sUnknown_203B2F4->header.width * 8);
-    sub_8012BC4(r5, 0, sUnknown_203B2F4->s0.input.unk1E + 1, 2, 7, sUnknown_203B2F4->s0.winId);
+    sub_8012BC4(r5, 0, sUnknown_203B2F4->s0.input.currPage + 1, 2, 7, sUnknown_203B2F4->s0.winId);
 
     for (r5 = 0; r5 < sUnknown_203B2F4->s0.input.unk1A; r5++) {
-        iVar1 = sub_803B344((sUnknown_203B2F4->s0.input.unk1E * sUnknown_203B2F4->s0.input.entriesPerPage) + r5);
+        iVar1 = sub_803B344((sUnknown_203B2F4->s0.input.currPage * sUnknown_203B2F4->s0.input.entriesPerPage) + r5);
 
         local.unk0[0] = sUnknown_203B2F4->s0.winId;
         local.y = GetMenuEntryYCoord(&sUnknown_203B2F4->s0.input, r5);

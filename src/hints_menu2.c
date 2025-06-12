@@ -29,7 +29,7 @@ bool8 CreateHintDisplayScreen(u32 index)
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B268->s0.windows, TRUE, TRUE);
     CreateMenuOnWindow(&sUnknown_203B268->s0.input, 5, 1, sUnknown_203B268->s0.winId);
-    sUnknown_203B268->s0.input.unk1E = index;
+    sUnknown_203B268->s0.input.currPage = index;
     sub_801E714();
 
     return TRUE;
@@ -73,7 +73,7 @@ void DestroyHintDisplayScreen(void)
 static void sub_801E76C(void)
 {
     sUnknown_203B268->header.count = sUnknown_203B268->s0.input.unk20;
-    sUnknown_203B268->header.currId = sUnknown_203B268->s0.input.unk1E;
+    sUnknown_203B268->header.currId = sUnknown_203B268->s0.input.currPage;
     sUnknown_203B268->header.width = 15;
     sUnknown_203B268->header.f3 = 0;
     ResetUnusedInputStruct();
@@ -83,7 +83,7 @@ static void sub_801E76C(void)
 static void DisplayChosenHint(void)
 {
     sub_80073B8(sUnknown_203B268->s0.winId);
-    PrintStringOnWindow((sUnknown_203B268->s0.input.unk1E * 8) + 16, 0, gCommonHints[sUnknown_203B268->s0.input.unk1E].heading, sUnknown_203B268->s0.winId, 0);
-    PrintStringOnWindow(10, 20, gCommonHints[sUnknown_203B268->s0.input.unk1E].body, sUnknown_203B268->s0.winId, 0);
+    PrintStringOnWindow((sUnknown_203B268->s0.input.currPage * 8) + 16, 0, gCommonHints[sUnknown_203B268->s0.input.currPage].heading, sUnknown_203B268->s0.winId, 0);
+    PrintStringOnWindow(10, 20, gCommonHints[sUnknown_203B268->s0.input.currPage].body, sUnknown_203B268->s0.winId, 0);
     sub_80073E0(sUnknown_203B268->s0.winId);
 }

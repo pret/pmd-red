@@ -103,7 +103,7 @@ void ShowRecruitmentSearchMenu(void)
             gDungeonMenu.unk1A = 0;
             gDungeonMenu.menuIndex = 0;
             gDungeonMenu.entriesPerPage = 0;
-            gDungeonMenu.unk1E = currTabId;
+            gDungeonMenu.currPage = currTabId;
             gDungeonMenu.unk20 = 2;
             gDungeonMenu.unk4 = 0;
             gDungeonMenu.firstEntryY = 16;
@@ -113,8 +113,8 @@ void ShowRecruitmentSearchMenu(void)
             sScrollId = 0;
             sScrollFlags = 0;
             PrintAvailableMons(currTabData, currTabId);
-            gDungeonMenu.unkC = (gWindows[0].x + 16) * 8;
-            gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
+            gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 16) * 8;
+            gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
 
             while (1) {
                 s32 unkVar;

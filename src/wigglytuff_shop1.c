@@ -41,7 +41,7 @@ bool8 sub_80211AC(u32 mode, u32 a1)
 
     if (sUnknown_203B284 == sWigglytuffShop1Work->mode) {
         sWigglytuffShop1Work->s40.s0.input.menuIndex = sUnknown_203B288;
-        sWigglytuffShop1Work->s40.s0.input.unk1E = sUnknown_203B28A;
+        sWigglytuffShop1Work->s40.s0.input.currPage = sUnknown_203B28A;
         sub_8013984(&sWigglytuffShop1Work->s40.s0.input);
     }
 
@@ -82,7 +82,7 @@ u32 sub_8021274(bool8 a0)
 
 u8 sub_802132C(void)
 {
-    return sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.unk1E * sWigglytuffShop1Work->s40.s0.input.entriesPerPage) + sWigglytuffShop1Work->s40.s0.input.menuIndex];
+    return sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.currPage * sWigglytuffShop1Work->s40.s0.input.entriesPerPage) + sWigglytuffShop1Work->s40.s0.input.menuIndex];
 }
 
 void sub_8021354(bool8 cursorSprite)
@@ -103,7 +103,7 @@ void sub_80213A0(void)
     if (sWigglytuffShop1Work) {
         sUnknown_203B284 = sWigglytuffShop1Work->mode;
         sUnknown_203B288 = sWigglytuffShop1Work->s40.s0.input.menuIndex;
-        sUnknown_203B28A = sWigglytuffShop1Work->s40.s0.input.unk1E;
+        sUnknown_203B28A = sWigglytuffShop1Work->s40.s0.input.currPage;
         sWigglytuffShop1Work->s40.s0.windows.id[sWigglytuffShop1Work->s40.s0.winId] = sUnknown_80DC464;
         ResetUnusedInputStruct();
         ShowWindows(&sWigglytuffShop1Work->s40.s0.windows, TRUE, TRUE);
@@ -135,10 +135,10 @@ void sub_8021494(void)
     sub_80073B8(sWigglytuffShop1Work->s40.s0.winId);
     PrintStringOnWindow(10, 0, sFriendAreas, sWigglytuffShop1Work->s40.s0.winId, 0);
 
-    sub_8012BC4((sWigglytuffShop1Work->s40.header.width * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.unk1E + 1, 1, 7, sWigglytuffShop1Work->s40.s0.winId);
+    sub_8012BC4((sWigglytuffShop1Work->s40.header.width * 8) + 4, 0, sWigglytuffShop1Work->s40.s0.input.currPage + 1, 1, 7, sWigglytuffShop1Work->s40.s0.winId);
 
     for (i = 0; i < sWigglytuffShop1Work->s40.s0.input.unk1A; i++) {
-        friendAreaIndex = sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.unk1E * sWigglytuffShop1Work->s40.s0.input.entriesPerPage) + i];
+        friendAreaIndex = sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.s0.input.currPage * sWigglytuffShop1Work->s40.s0.input.entriesPerPage) + i];
 
         if (sWigglytuffShop1Work->mode == 2) {
             WriteFriendAreaName(buffer1, friendAreaIndex, TRUE);

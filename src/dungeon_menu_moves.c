@@ -441,7 +441,7 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
     gDungeonMenu.menuIndex = sChosenMoveSlotId;
     gDungeonMenu.unk1A = movesCount;
     gDungeonMenu.entriesPerPage = 4;
-    gDungeonMenu.unk1E = arg6;
+    gDungeonMenu.currPage = arg6;
     gDungeonMenu.unk20 = arg7;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
@@ -456,8 +456,8 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
     windows->id[2] = windowNew;
     DungeonShowWindows(windows, TRUE);
     sub_80137B0(&gDungeonMenu, 0);
-    gDungeonMenu.unkC = (gWindows[0].x + 16) * 8;
-    gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
+    gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 16) * 8;
+    gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
     SetMessageArgument_2(gFormatBuffer_Monsters[0], entInfo, 0);
     for (i = 0; i < MAX_MON_MOVES; i++) {
         Move *move = &entInfo->moves.moves[i];
@@ -626,10 +626,10 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
         header.width = 12;
         header.f3 = 0;
 
-        gDungeonMenu.unk1E = currId;
+        gDungeonMenu.currPage = currId;
         gDungeonMenu.unk20 = count;
-        gDungeonMenu.unkC = (gWindows[0].x + 23) * 8;
-        gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
+        gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 23) * 8;
+        gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
         gDungeonMenu.unk14.x = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;
@@ -715,10 +715,10 @@ void ShowStatusDescriptionMenu(const StatusText *status, MenuInputStructSub *men
     PrintFormattedStringOnWindow(16, 0, _("{POKEMON_0}"), 0, '\0');
     PrintFormattedStringOnWindow(4, 16, status->desc, 0, '\0');
     sub_80073E0(0);
-    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.currPage = 0;
     gDungeonMenu.unk20 = 0;
-    gDungeonMenu.unkC = 0;
-    gDungeonMenu.unkE = 0;
+    gDungeonMenu.leftRightArrowsPos.x = 0;
+    gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
@@ -1116,12 +1116,12 @@ static void sub_8064228(Entity *entity, Move *moves, WindowTemplates *windows, W
     gDungeonMenu.menuIndex = sChosenMoveSlotId;
     gDungeonMenu.unk1A = count;
     gDungeonMenu.entriesPerPage = count;
-    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.currPage = 0;
     gDungeonMenu.unk20 = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 16;
-    gDungeonMenu.unkC = 0;
-    gDungeonMenu.unkE = 0;
+    gDungeonMenu.leftRightArrowsPos.x = 0;
+    gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
     sub_801317C(&gDungeonMenu.unk28);

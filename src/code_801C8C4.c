@@ -45,7 +45,7 @@ bool8 sub_801C8C4(s32 a0, s32 a1, DungeonPos *a2, u32 a3)
 
     if (sUnknown_203B248 == sUnknown_203B244->unk0) {
         sUnknown_203B244->unk4B4.s0.input.menuIndex = sUnknown_203B24C;
-        sUnknown_203B244->unk4B4.s0.input.unk1E = sUnknown_203B24E;
+        sUnknown_203B244->unk4B4.s0.input.currPage = sUnknown_203B24E;
         sub_8013984(&sUnknown_203B244->unk4B4.s0.input);
     }
 
@@ -106,7 +106,7 @@ u32 sub_801CA08(bool8 a0)
 
 u8 sub_801CB24(void)
 {
-    return sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.entriesPerPage) + sUnknown_203B244->unk4B4.s0.input.menuIndex];
+    return sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.currPage * sUnknown_203B244->unk4B4.s0.input.entriesPerPage) + sUnknown_203B244->unk4B4.s0.input.menuIndex];
 }
 
 void sub_801CB5C(bool8 a0)
@@ -127,7 +127,7 @@ void sub_801CBB8(void)
     if (sUnknown_203B244 != NULL) {
         sUnknown_203B248 = sUnknown_203B244->unk0;
         sUnknown_203B24C = sUnknown_203B244->unk4B4.s0.input.menuIndex;
-        sUnknown_203B24E = sUnknown_203B244->unk4B4.s0.input.unk1E;
+        sUnknown_203B24E = sUnknown_203B244->unk4B4.s0.input.currPage;
         sUnknown_203B244->unk4B4.s0.windows.id[sUnknown_203B244->unk4B4.s0.winId] = sUnknown_80DBE3C;
         ResetUnusedInputStruct();
         ShowWindows(&sUnknown_203B244->unk4B4.s0.windows, TRUE, TRUE);
@@ -157,10 +157,10 @@ void sub_801CCD8(void)
     CallPrepareTextbox_8008C54(sUnknown_203B244->unk4B4.s0.winId);
     sub_80073B8(sUnknown_203B244->unk4B4.s0.winId);
     PrintStringOnWindow(10, 0, sStorage, sUnknown_203B244->unk4B4.s0.winId, 0);
-    sub_8012BC4(sUnknown_203B244->unk4B4.header.width * 8 + 4, 0, sUnknown_203B244->unk4B4.s0.input.unk1E + 1, 2, 7, sUnknown_203B244->unk4B4.s0.winId);
+    sub_8012BC4(sUnknown_203B244->unk4B4.header.width * 8 + 4, 0, sUnknown_203B244->unk4B4.s0.input.currPage + 1, 2, 7, sUnknown_203B244->unk4B4.s0.winId);
 
     for(index = 0; index < sUnknown_203B244->unk4B4.s0.input.unk1A; index++) {
-        itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.unk1E * sUnknown_203B244->unk4B4.s0.input.entriesPerPage) + index];
+        itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.s0.input.currPage * sUnknown_203B244->unk4B4.s0.input.entriesPerPage) + index];
         BufferItemName(buffer, itemID, NULL);
         y = GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.s0.input, index);
         PrintStringOnWindow(8, y, buffer, sUnknown_203B244->unk4B4.s0.winId, 0);

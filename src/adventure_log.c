@@ -74,7 +74,7 @@ void CleanAdventureLogScreen(void)
 static void sub_8032084(void)
 {
     sAdventureLog->header.count = sAdventureLog->s0.input.unk20;
-    sAdventureLog->header.currId = sAdventureLog->s0.input.unk1E;
+    sAdventureLog->header.currId = sAdventureLog->s0.input.currPage;
     sAdventureLog->header.width = 11;
     sAdventureLog->header.f3 = 0;
 
@@ -90,17 +90,17 @@ static void DisplayAdventureLog(void)
 
     CallPrepareTextbox_8008C54(sAdventureLog->s0.winId);
     sub_80073B8(sAdventureLog->s0.winId);
-    r4 = sAdventureLog->s0.input.unk1E * 8;
+    r4 = sAdventureLog->s0.input.currPage * 8;
     r6 = r4;
     r6 += 10;
     PrintStringOnWindow(r6, 0, sAdventureLogText, sAdventureLog->s0.winId, 0);
 
     r4 += 4;
     r6 = r4 + (sAdventureLog->header.width * 8);
-    sub_8012BC4(r6, 0, sAdventureLog->s0.input.unk1E + 1, 1, 7, sAdventureLog->s0.winId);
+    sub_8012BC4(r6, 0, sAdventureLog->s0.input.currPage + 1, 1, 7, sAdventureLog->s0.winId);
 
     for (i = 0; i < sAdventureLog->s0.input.unk1A; i++) {
-        aa = (sAdventureLog->s0.input.unk1E * sAdventureLog->s0.input.entriesPerPage) + i;
+        aa = (sAdventureLog->s0.input.currPage * sAdventureLog->s0.input.entriesPerPage) + i;
 
         if (GetAdventureAchievement(aa)) {
             switch (aa) {

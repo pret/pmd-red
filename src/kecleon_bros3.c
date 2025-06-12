@@ -82,7 +82,7 @@ u32 sub_801A2A8(bool8 r0)
 // arm9.bin::02025CC4
 u8 sub_801A37C(void)
 {
-    return (gUnknown_203B21C->s0.input.unk1E * gUnknown_203B21C->s0.input.entriesPerPage) + gUnknown_203B21C->s0.input.menuIndex;
+    return (gUnknown_203B21C->s0.input.currPage * gUnknown_203B21C->s0.input.entriesPerPage) + gUnknown_203B21C->s0.input.menuIndex;
 }
 
 // arm9.bin::02025C64
@@ -114,7 +114,7 @@ void sub_801A3DC(void)
 static void sub_801A430(void)
 {
     gUnknown_203B21C->header.count = gUnknown_203B21C->s0.input.unk20;
-    gUnknown_203B21C->header.currId = gUnknown_203B21C->s0.input.unk1E;
+    gUnknown_203B21C->header.currId = gUnknown_203B21C->s0.input.currPage;
     gUnknown_203B21C->header.width = 10;
     gUnknown_203B21C->header.f3 = 0;
 
@@ -136,10 +136,10 @@ void sub_801A4A4(void)
 
     CallPrepareTextbox_8008C54(gUnknown_203B21C->s0.winId);
     sub_80073B8(gUnknown_203B21C->s0.winId);
-    PrintStringOnWindow(gUnknown_203B21C->s0.input.unk1E * 8 + 10, 0, sGoods, gUnknown_203B21C->s0.winId, 0);
+    PrintStringOnWindow(gUnknown_203B21C->s0.input.currPage * 8 + 10, 0, sGoods, gUnknown_203B21C->s0.winId, 0);
 
     for (index = 0; index < gUnknown_203B21C->s0.input.unk1A; index++) {
-        temp_calc = (gUnknown_203B21C->s0.input.unk1E * gUnknown_203B21C->s0.input.entriesPerPage) + index;
+        temp_calc = (gUnknown_203B21C->s0.input.currPage * gUnknown_203B21C->s0.input.entriesPerPage) + index;
         heldItem = GetKecleonWareItem(temp_calc);
         item.id = heldItem->id;
         item.quantity = heldItem->quantity;

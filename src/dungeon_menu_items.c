@@ -177,7 +177,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
         }
         PrintOnDungeonItemsMenu(r8, a0, var_2C, var_30, &windows, &header);
 
-        id = sUnknown_202F248[gDungeonMenu.unk1E];
+        id = sUnknown_202F248[gDungeonMenu.currPage];
         if (id >= MAX_TEAM_MEMBERS) {
             r4 = gDungeon->teamPokemon[id - MAX_TEAM_MEMBERS];
         }
@@ -273,7 +273,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
         }
         AddMenuCursorSprite(&gDungeonMenu);
         DungeonRunFrameActions(0x14);
-        if (sUnknown_202F248[gDungeonMenu.unk1E] <= 1 && !(gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS)) {
+        if (sUnknown_202F248[gDungeonMenu.currPage] <= 1 && !(gTeamInventoryRef->teamItems[0].flags & ITEM_FLAG_EXISTS)) {
             inputAction = 2;
         }
 
@@ -302,7 +302,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
             }
 
             SetSubMenuActions(a0);
-            sub_8060800(&header, gDungeonMenu.unk1E);
+            sub_8060800(&header, gDungeonMenu.currPage);
             CreateDungeonMenuSubWindow(&windows.id[0], 0x16);
             while (1) {
                 AddMenuCursorSprite(&gDungeonMenu);
@@ -392,7 +392,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     r10 = sub_8060800(header, a0);
     gDungeonMenu.menuIndex = sUnknown_202F240;
     gDungeonMenu.unk1A = 0;
-    gDungeonMenu.unk1E = a0;
+    gDungeonMenu.currPage = a0;
     gDungeonMenu.unk20 = sUnknown_202F258;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.windowId = 0;
@@ -427,7 +427,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
     }
 
     if (showWhichWindow) {
-        gDungeonMenu.unkC += 0x40;
+        gDungeonMenu.leftRightArrowsPos.x += 0x40;
         windows->id[0].pos.x = 0xA;
         windows->id[1] = whichWindow;
     }
@@ -438,8 +438,8 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
 
     DungeonShowWindows(windows, 1);
     txtStrPtr = &gWindows[0];
-    gDungeonMenu.unkC = (txtStrPtr->x + 0x10) * 8;
-    gDungeonMenu.unkE = ((txtStrPtr->y + 1) * 8) - 2;
+    gDungeonMenu.leftRightArrowsPos.x = (txtStrPtr->x + 0x10) * 8;
+    gDungeonMenu.leftRightArrowsPos.y = ((txtStrPtr->y + 1) * 8) - 2;
     sub_80137B0(&gDungeonMenu, 0x70);
     sub_80073B8(0);
     x = ((a0 - r10) * 8) + 0xC;
@@ -484,7 +484,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
                 PrintFormattedStringOnWindow(8, y, txtBuff, 0, 0);
             }
             if (a3) {
-                gDungeonMenu.unk8.x = gDungeonMenu.unk8.y = 0;
+                gDungeonMenu.cursorArrowPos.x = gDungeonMenu.cursorArrowPos.y = 0;
             }
         }
         break;
@@ -569,7 +569,7 @@ static bool8 sub_8060860(s32 a0)
 
 static void sub_8060890(DungeonPos *a0)
 {
-    s32 var = sUnknown_202F248[gDungeonMenu.unk1E];
+    s32 var = sUnknown_202F248[gDungeonMenu.currPage];
     switch (var)
     {
     case 0:

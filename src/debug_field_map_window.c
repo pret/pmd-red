@@ -75,7 +75,7 @@ u32 DebugFieldMapWindow_GetInput(void)
 
 s16 DebugFieldMapWindow_GetCurrentIndex(void)
 {
-    return (sDebugWindow->s0.input.unk1E * sDebugWindow->s0.input.entriesPerPage) + sDebugWindow->s0.input.menuIndex;
+    return (sDebugWindow->s0.input.currPage * sDebugWindow->s0.input.entriesPerPage) + sDebugWindow->s0.input.menuIndex;
 }
 
 UNUSED static void sub_801DADC(bool8 a0)
@@ -124,14 +124,14 @@ static void sub_801DBD4(void)
     PrintStringOnWindow(10, 0, _("Field"), sDebugWindow->s0.winId, 0);
 
     x = (sDebugWindow->header.width * 8) - 2;
-    n = sDebugWindow->s0.input.unk1E + 1;
+    n = sDebugWindow->s0.input.currPage + 1;
     sub_8012BC4(x, 0, n, 2, 7, sDebugWindow->s0.winId);
 
     // This line has no real effect. It's a magic 'fakematch' to fool agb into generating the same asm. It can be removed if you don't care about matching.
     if (x) { counter = 0; }
 
     for (counter = 0; counter < sDebugWindow->s0.input.unk1A; counter++) {
-        index = (sDebugWindow->s0.input.unk1E * sDebugWindow->s0.input.entriesPerPage) + counter;
+        index = (sDebugWindow->s0.input.currPage * sDebugWindow->s0.input.entriesPerPage) + counter;
         temp = &gGroundConversion_811BAF4[index];
         temp2 = &gUnknown_81188F0[temp->unk4];
 

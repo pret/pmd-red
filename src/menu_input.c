@@ -64,9 +64,10 @@ const s32 gUnknown_80D4830[9] = {
 
 static void sub_8013134(MenuInputStruct *, u32, u32);
 static void sub_801332C(DungeonPos *a0);
-static void sub_8013470(MenuInputStruct *);
+static void ShowLeftRightArrows(MenuInputStruct *);
 static bool8 sub_8013DD0(unkStructFor8013AA0 *);
-
+static void MenuScrollLeft(MenuInputStruct *menuInput);
+static void MenuScrollRight(MenuInputStruct *menuInput);
 
 u32 sub_8012A64(MenuInputStructSub *r0, s32 r1)
 {
@@ -544,7 +545,7 @@ static void sub_8013134(MenuInputStruct *menuInput, u32 menuItemCounter, u32 win
     menuInput->menuIndex = 0;
     menuInput->unk1A = menuItemCounter;
     menuInput->entriesPerPage = menuItemCounter;
-    menuInput->unk1E = 0;
+    menuInput->currPage = 0;
     menuInput->unk4 = 0;
 
     if (window->type == WINDOW_TYPE_WITH_HEADER)
@@ -552,8 +553,8 @@ static void sub_8013134(MenuInputStruct *menuInput, u32 menuItemCounter, u32 win
     else
         menuInput->firstEntryY = 2;
 
-    menuInput->unkC = 0;
-    menuInput->unkE = 0;
+    menuInput->leftRightArrowsPos.x = 0;
+    menuInput->leftRightArrowsPos.y = 0;
     menuInput->unk14.x = 0;
     menuInput->unk24 = 0;
     sub_801317C(&menuInput->unk28);
@@ -576,7 +577,7 @@ void sub_801317C(MenuInputStructSub *param_1)
 // arm9.bin::0201BD18
 void AddMenuCursorSprite(MenuInputStruct *menuInput)
 {
-    AddMenuCursorSprite_(menuInput, 0);
+    AddMenuCursorSprite_(menuInput, NULL);
 }
 
 // arm9.bin::0201B978
@@ -601,14 +602,14 @@ void AddMenuCursorSprite_(MenuInputStruct *menuInput, u8 *a1)
             SpriteSetPalNum(&sp, 15);
             SpriteSetUnk6_0(&sp, 0);
             SpriteSetUnk6_1(&sp, 0);
-            SpriteSetX(&sp, menuInput->unk8.x);
-            SpriteSetY(&sp, menuInput->unk8.y + 1);
+            SpriteSetX(&sp, menuInput->cursorArrowPos.x);
+            SpriteSetY(&sp, menuInput->cursorArrowPos.y + 1);
 
             AddSprite(&sp, 0xFF, 0, 0);
         }
     }
 
-    sub_8013470(menuInput);
+    ShowLeftRightArrows(menuInput);
     if (menuInput->unk14.x != 0)
         sub_801332C(&menuInput->unk14);
 
@@ -646,12 +647,12 @@ static void sub_801332C(DungeonPos *a0)
 }
 
 // arm9.bin::0201B1C0
-static void sub_8013470(MenuInputStruct *a0)
+static void ShowLeftRightArrows(MenuInputStruct *menuInput)
 {
     struct SpriteOAM sp = {0};
 
-    if (a0->unkC != 0) {
-        if (a0->unk1E != 0) {
+    if (menuInput->leftRightArrowsPos.x != 0) {
+        if (menuInput->currPage != 0) { // Left arrow
             SpriteSetAffine1(&sp, 0);
             SpriteSetAffine2(&sp, 0);
             SpriteSetObjMode(&sp, 0);
@@ -665,12 +666,12 @@ static void sub_8013470(MenuInputStruct *a0)
             SpriteSetPalNum(&sp, 15);
             SpriteSetUnk6_0(&sp, 0);
             SpriteSetUnk6_1(&sp, 0);
-            SpriteSetX(&sp, a0->unkC);
-            SpriteSetY(&sp, a0->unkE);
+            SpriteSetX(&sp, menuInput->leftRightArrowsPos.x);
+            SpriteSetY(&sp, menuInput->leftRightArrowsPos.y);
 
             AddSprite(&sp, 0xFF, NULL, NULL);
         }
-        if (a0->unk20 != 0 && a0->unk20 != a0->unk1E + 1) {
+        if (menuInput->unk20 != 0 && menuInput->unk20 != menuInput->currPage + 1) { // Right arrow
             SpriteSetAffine1(&sp, 0);
             SpriteSetAffine2(&sp, 0);
             SpriteSetObjMode(&sp, 0);
@@ -684,8 +685,8 @@ static void sub_8013470(MenuInputStruct *a0)
             SpriteSetPalNum(&sp, 15);
             SpriteSetUnk6_0(&sp, 0);
             SpriteSetUnk6_1(&sp, 0);
-            SpriteSetX(&sp, a0->unkC + 10);
-            SpriteSetY(&sp, a0->unkE);
+            SpriteSetX(&sp, menuInput->leftRightArrowsPos.x + 10);
+            SpriteSetY(&sp, menuInput->leftRightArrowsPos.y);
 
             AddSprite(&sp, 0xFF, NULL, NULL);
         }
@@ -696,7 +697,7 @@ void sub_8013660(MenuInputStruct *menuInput)
 {
     if (0 < menuInput->unk1A) {
         UpdateMenuCursorSpriteCoords(menuInput);
-        sub_801332C(&menuInput->unk8);
+        sub_801332C(&menuInput->cursorArrowPos);
     }
 }
 
@@ -704,8 +705,8 @@ void sub_8013660(MenuInputStruct *menuInput)
 void UpdateMenuCursorSpriteCoords(MenuInputStruct *menuInput)
 {
     Window *window = &gWindows[menuInput->windowId];
-    menuInput->unk8.x = window->x * 8 + menuInput->unk4;
-    menuInput->unk8.y = window->y * 8 + GetMenuEntryYCoord(menuInput, menuInput->menuIndex);
+    menuInput->cursorArrowPos.x = window->x * 8 + menuInput->unk4;
+    menuInput->cursorArrowPos.y = window->y * 8 + GetMenuEntryYCoord(menuInput, menuInput->menuIndex);
 }
 
 void MoveMenuCursorDown(MenuInputStruct *menuInput)
@@ -831,7 +832,7 @@ void CreateMenuOnWindow(MenuInputStruct *menuInput, s32 totalCount, u32 perPageC
     menuInput->unk14.x = 0;
     menuInput->unk24 = 0;
     menuInput->menuIndex = 0;
-    menuInput->unk1E = 0;
+    menuInput->currPage = 0;
 
     sub_801317C(&menuInput->unk28);
     sub_8013984(menuInput);
@@ -846,7 +847,7 @@ void sub_8013848(MenuInputStruct *menuInput, s32 totalCount, u32 perPageCount, s
     menuInput->unk14.x = 0;
     menuInput->unk24 = 0;
     menuInput->menuIndex = 0;
-    menuInput->unk1E = 0;
+    menuInput->currPage = 0;
 
     sub_801317C(&menuInput->unk28);
     sub_8013984(menuInput);
@@ -860,7 +861,7 @@ void sub_8013878(MenuInputStruct *menuInput, s32 param_2)
     else if (param_2 >= menuInput->totalEntriesCount)
         param_2 = menuInput->totalEntriesCount - 1;
 
-    menuInput->unk1E = param_2 / menuInput->entriesPerPage;
+    menuInput->currPage = param_2 / menuInput->entriesPerPage;
     menuInput->menuIndex = param_2 % menuInput->entriesPerPage;
     menuInput->unk24 = 0;
     sub_8013984(menuInput);
@@ -871,7 +872,7 @@ bool8 sub_80138B8(MenuInputStruct *menuInput, bool8 param_2)
     s32 sVar1;
     s32 oldIndex;
 
-    sVar1 = menuInput->unk1E;
+    sVar1 = menuInput->currPage;
     oldIndex = menuInput->menuIndex;
     AddMenuCursorSprite(menuInput);
 
@@ -888,15 +889,15 @@ bool8 sub_80138B8(MenuInputStruct *menuInput, bool8 param_2)
                     PlayMenuSoundEffect(3);
                 break;
             case INPUT_DPAD_LEFT:
-                sub_8013A7C(menuInput);
+                MenuScrollLeft(menuInput);
                 break;
             case INPUT_DPAD_RIGHT:
-                sub_8013A54(menuInput);
+                MenuScrollRight(menuInput);
                 break;
         }
     }
 
-    if (sVar1 != menuInput->unk1E) {
+    if (sVar1 != menuInput->currPage) {
         PlayMenuSoundEffect(4);
         return TRUE;
     }
@@ -907,21 +908,21 @@ bool8 sub_8013938(MenuInputStruct *menuInput)
 {
     s32 sVar1;
 
-    sVar1 = menuInput->unk1E;
+    sVar1 = menuInput->currPage;
     menuInput->unk1A = 0;
     menuInput->unk14.x = 0;
     AddMenuCursorSprite(menuInput);
 
     switch (GetKeyPress(menuInput)) {
         case INPUT_DPAD_LEFT:
-            sub_8013A7C(menuInput);
+            MenuScrollLeft(menuInput);
             break;
         case INPUT_DPAD_RIGHT:
-            sub_8013A54(menuInput);
+            MenuScrollRight(menuInput);
             break;
     }
 
-    if (sVar1 != menuInput->unk1E) {
+    if (sVar1 != menuInput->currPage) {
         PlayMenuSoundEffect(4);
         return TRUE;
     }
@@ -943,10 +944,10 @@ void sub_8013984(MenuInputStruct *menuInput)
     if (iVar2 != 0)
         menuInput->unk20++;
 
-    if (menuInput->unk1E > menuInput->unk20 - 1)
-        menuInput->unk1E = menuInput->unk20 - 1;
+    if (menuInput->currPage > menuInput->unk20 - 1)
+        menuInput->currPage = menuInput->unk20 - 1;
 
-    if (menuInput->unk1E != menuInput->unk20 - 1 || menuInput->totalEntriesCount % menuInput->entriesPerPage == 0)
+    if (menuInput->currPage != menuInput->unk20 - 1 || menuInput->totalEntriesCount % menuInput->entriesPerPage == 0)
         menuInput->unk1A = menuInput->entriesPerPage;
     else
         menuInput->unk1A = menuInput->totalEntriesCount % menuInput->entriesPerPage;
@@ -962,29 +963,29 @@ void sub_8013984(MenuInputStruct *menuInput)
         menuInput->firstEntryY = 0;
 
     if (menuInput->unk20 < 2)
-        menuInput->unkC = 0;
+        menuInput->leftRightArrowsPos.x = 0;
     else
-        menuInput->unkC = (window->x + window->width - 2) * 8;
+        menuInput->leftRightArrowsPos.x = (window->x + window->width - 2) * 8;
 
-    menuInput->unkE = (window->y + 1) * 8 - 2;
+    menuInput->leftRightArrowsPos.y = (window->y + 1) * 8 - 2;
 }
 
-void sub_8013A54(MenuInputStruct *menuInput)
+void MenuScrollRight(MenuInputStruct *menuInput)
 {
-    if (menuInput->unk1E < menuInput->unk20 - 1)
-        menuInput->unk1E++;
+    if (menuInput->currPage < menuInput->unk20 - 1)
+        menuInput->currPage++;
     else
-        menuInput->unk1E = 0;
+        menuInput->currPage = 0;
 
     sub_8013984(menuInput);
 }
 
-void sub_8013A7C(MenuInputStruct *menuInput)
+static void MenuScrollLeft(MenuInputStruct *menuInput)
 {
-    if (menuInput->unk1E < 1)
-        menuInput->unk1E = menuInput->unk20 - 1;
+    if (menuInput->currPage < 1)
+        menuInput->currPage = menuInput->unk20 - 1;
     else
-        menuInput->unk1E--;
+        menuInput->currPage--;
 
     sub_8013984(menuInput);
 }

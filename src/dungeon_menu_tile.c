@@ -60,8 +60,8 @@ void ShowDungeonTileMenu(Entity *mon)
         ShowAndPrintOnTileMenu(&mon->pos, &windows, &header);
         DungeonRunFrameActions(0x2D);
         AddTileSubMenuOptions(mon);
-        gDungeonMenu.unk8.x = 0;
-        gDungeonMenu.unk8.y = 0;
+        gDungeonMenu.cursorArrowPos.x = 0;
+        gDungeonMenu.cursorArrowPos.y = 0;
         CreateDungeonMenuSubWindow(&windows.id[0], 22);
 
         while (1) {

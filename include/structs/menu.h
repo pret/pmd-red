@@ -23,15 +23,14 @@ typedef struct MenuInputStruct
     /* 0x0  */ s32 windowId;
     /* 0x4  */ u16 unk4;
     /* 0x6  */ s16 firstEntryY;
-    /* 0x8  */ DungeonPos unk8;
-    /* 0xC  */ s16 unkC; // Maybe DungeonPos
-    /* 0xE  */ s16 unkE;
+    /* 0x8  */ DungeonPos cursorArrowPos;
+    /* 0xC  */ DungeonPos leftRightArrowsPos;
     /* 0x10 */ u32 unk10;
     /* 0x14 */ DungeonPos unk14;
     /* 0x18 */ s16 menuIndex;
     /* 0x1A */ s16 unk1A;
     /* 0x1C */ s16 entriesPerPage;
-    /* 0x1E */ s16 unk1E;
+    /* 0x1E */ s16 currPage;
     /* 0x20 */ s16 unk20;
     /* 0x22 */ s16 totalEntriesCount;
     /* 0x24 */ u16 unk24;
