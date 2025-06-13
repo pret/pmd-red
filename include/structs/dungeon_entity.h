@@ -238,7 +238,7 @@ typedef struct EntityInfo
     /* 0x90 */ IqSkillFlags IQSkillFlags;
     /* 0x94 */ u8 tactic;
     u8 fill95[0x98 - 0x95];
-    /* 0x98 */ u32 unk98;
+    /* 0x98 */ u32 dungeonSpriteId;
     /* 0x9C */ u32 unk9C;
     /* 0xA0 */ s32 unkA0;
     /* 0xA4 */ u8 monsterBehavior;

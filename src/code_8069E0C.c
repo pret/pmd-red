@@ -9,7 +9,6 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_806B7F8.h"
 #include "structs/str_dungeon.h"
-#include "code_800F958.h"
 #include "dungeon_vram.h"
 #include "code_805D8C8.h"
 #include "code_806CD90.h"
@@ -22,6 +21,7 @@
 #include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_message.h"
+#include "dungeon_pokemon_sprites.h"
 #include "dungeon_util.h"
 #include "exclusive_pokemon.h"
 #include "file_system.h"
@@ -52,7 +52,6 @@ extern void sub_803F4A0(Entity *a0);
 extern bool8 sub_80860A8(u8 id);
 extern u8 gUnknown_202F32C;
 extern u8 GetRandomFloorItem(s32 a0);
-extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_80429E8(Entity *r0);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
@@ -682,7 +681,7 @@ void sub_806BB6C(Entity *entity, s32 _species)
     struct unkStruct_806B7F8 spStruct;
     EntityInfo *entInfo = GetEntInfo(entity);
 
-    DeletePokemonDungeonSprite(entInfo->unk98);
+    DeletePokemonDungeonSprite(entInfo->dungeonSpriteId);
     // s16 memes...
     spStruct.species = 0;
     speciesMatch = species;
@@ -764,7 +763,7 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
         }
     }
 
-    entInfo->unk98 = gDungeon->unk37F0;
+    entInfo->dungeonSpriteId = gDungeon->unk37F0;
     gDungeon->unk37F0++;
     entInfo->unk9C = 0;
     if (structPtr->level == 0) {
@@ -848,7 +847,7 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
 
     entityPos.x = entity->pos.x;
     entityPos.y = entity->pos.y;
-    AddPokemonDungeonSprite(entInfo->unk98, entInfo->apparentID, &entityPos, gDungeon->unk181e8.priority);
+    AddPokemonDungeonSprite(entInfo->dungeonSpriteId, entInfo->apparentID, &entityPos, gDungeon->unk181e8.priority);
     LoadIQSkills(entity);
     sub_806A898(entity, FALSE, FALSE);
 }

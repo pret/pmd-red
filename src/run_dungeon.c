@@ -37,6 +37,7 @@
 #include "dungeon_music.h"
 #include "dungeon_name_banner.h"
 #include "dungeon_spawns.h"
+#include "dungeon_pokemon_sprites.h"
 #include "dungeon_random.h"
 #include "dungeon_strings.h"
 #include "dungeon_serializer.h"
@@ -70,7 +71,6 @@ extern void IncrementThievingSuccesses(void);
 extern void ShowDungeonClearedWindow(void);
 extern void sub_8084424(void);
 extern void sub_8086130(void);
-extern void FreeDungeonPokemonSprites(void);
 extern void sub_80847D4(void);
 extern void sub_8043D60(void);
 extern void sub_806890C(void);
@@ -87,7 +87,6 @@ extern void ShowWholeRevealedDungeonMap(void);
 extern void sub_807E5AC(void);
 extern void TriggerWeatherAbilities(void);
 extern void sub_807E88C(void);
-extern void InitDungeonPokemonSprites(void);
 extern void nullsub_16(void);
 extern void sub_80521D0(void);
 extern void sub_803F27C(u8);
