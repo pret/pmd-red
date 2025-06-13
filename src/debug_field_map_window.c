@@ -116,7 +116,7 @@ static void PrintCurrentPageText(void)
 {
     GroundConversionStruct *temp;
     const struct unkStruct_81188F0 *temp2;
-    s32 x, y, n;
+    s32 x, y, pageNum;
     s16 index;
     int counter;
 
@@ -125,8 +125,8 @@ static void PrintCurrentPageText(void)
     PrintStringOnWindow(10, 0, _("Field"), sDebugWindow->m.menuWinId, 0);
 
     x = (sDebugWindow->header.width * 8) - 2;
-    n = sDebugWindow->m.input.currPage + 1;
-    sub_8012BC4(x, 0, n, 2, 7, sDebugWindow->m.menuWinId);
+    pageNum = sDebugWindow->m.input.currPage + 1;
+    PrintNumOnWindow(x, 0, pageNum, 2, 7, sDebugWindow->m.menuWinId);
 
     // This line has no real effect. It's a magic 'fakematch' to fool agb into generating the same asm. It can be removed if you don't care about matching.
     if (x) { counter = 0; }

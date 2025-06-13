@@ -125,7 +125,7 @@ typedef struct MenuHeaderWindow
     UPDATE_MENU_WINDOW_HEIGHT_INTERNAL(ptr, CalcEntriesTotalHeight((ptr).input.currPageEntries, DEFAULT_MENU_ENTRY_HEIGHT) + 2) \
 }
 
-// For Windows where height is the same as entries height.
+// For Windows where height is the same as unk10.
 #define UPDATE_MENU_WINDOW_HEIGHT_2(ptr)                                                \
 {                                                                                       \
     s32 newHeightVal = CalcEntriesTotalHeight((ptr).input.currPageEntries, DEFAULT_MENU_ENTRY_HEIGHT) + 2;                \

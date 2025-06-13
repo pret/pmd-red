@@ -115,7 +115,7 @@ void sub_802CFD0(void)
 
     r4 -= 6;
     r5 = r4 + (sUnknown_203B2F4->header.width * 8);
-    sub_8012BC4(r5, 0, sUnknown_203B2F4->m.input.currPage + 1, 2, 7, sUnknown_203B2F4->m.menuWinId);
+    PrintNumOnWindow(r5, 0, sUnknown_203B2F4->m.input.currPage + 1, 2, 7, sUnknown_203B2F4->m.menuWinId);
 
     for (r5 = 0; r5 < sUnknown_203B2F4->m.input.currPageEntries; r5++) {
         iVar1 = sub_803B344((sUnknown_203B2F4->m.input.currPage * sUnknown_203B2F4->m.input.entriesPerPage) + r5);

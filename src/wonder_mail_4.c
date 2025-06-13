@@ -196,7 +196,7 @@ void sub_803092C(void)
   PrintStringOnWindow(r5,0,gUnknown_80E086C[gUnknown_203B320->wonderMailType],gUnknown_203B320->s28.m.menuWinId,0);
   r4 += 4;
   r5 = r4 + gUnknown_203B320->s28.header.width * 8;
-  sub_8012BC4(r5,0,gUnknown_203B320->s28.m.input.currPage + 1,1,7,gUnknown_203B320->s28.m.menuWinId);
+  PrintNumOnWindow(r5,0,gUnknown_203B320->s28.m.input.currPage + 1,1,7,gUnknown_203B320->s28.m.menuWinId);
 
   for (index = 0; index < gUnknown_203B320->s28.m.input.currPageEntries; index++) {
       mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->s28.m.input.currPage * gUnknown_203B320->s28.m.input.entriesPerPage) + index]);

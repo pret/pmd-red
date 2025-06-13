@@ -327,7 +327,7 @@ sub_803B284:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x2
-	bl sub_8012BC4
+	bl PrintNumOnWindow
 	movs r5, 0
 	ldr r0, [r6]
 	movs r1, 0x1A

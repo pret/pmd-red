@@ -533,9 +533,9 @@ void CreateMailAcceptedStatusBox(u32 r0)
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
     PrintStringOnWindow(3, 0, gMailAccepted, r0, 0);
-    sub_8012BC4(0x12, 0xD, GetNumAcceptedJobs(), 2, 7, r0);
+    PrintNumOnWindow(0x12, 0xD, GetNumAcceptedJobs(), 2, 7, r0);
     PrintStringOnWindow(0x16, 0xD, gUnknown_80E0324, r0, 0); // "/"
-    sub_8012BC4(0x23, 0xD, MAX_ACCEPTED_JOBS, 2, 7, r0);
+    PrintNumOnWindow(0x23, 0xD, MAX_ACCEPTED_JOBS, 2, 7, r0);
     sub_80073E0(r0);
 }
 

@@ -414,9 +414,9 @@ static void CreateFelicityMoneySavingsHeader(u32 windowId)
     CallPrepareTextbox_8008C54(windowId);
     sub_80073B8(windowId);
     PrintStringOnWindow(16, 4, sDisplayMoney, windowId, 0);
-    sub_8012BC4(96, 4, gTeamInventoryRef->teamMoney, 5, 5, windowId);
+    PrintNumOnWindow(96, 4, gTeamInventoryRef->teamMoney, 5, 5, windowId);
     PrintStringOnWindow(112, 4, sDisplaySavings, windowId, 0);
-    sub_8012BC4(200, 4, gTeamInventoryRef->teamSavings, 7, 5, windowId);
+    PrintNumOnWindow(200, 4, gTeamInventoryRef->teamSavings, 7, 5, windowId);
     sub_80073E0(windowId);
 }
 
@@ -426,6 +426,6 @@ void DrawTeamMoneyBox(u32 windowId)
     CallPrepareTextbox_8008C54(windowId);
     sub_80073B8(windowId);
     PrintStringOnWindow(6, 0, sMoney, windowId, 0);
-    sub_8012BC4(42, 12, gTeamInventoryRef->teamMoney, 5, 5, windowId);
+    PrintNumOnWindow(42, 12, gTeamInventoryRef->teamMoney, 5, 5, windowId);
     sub_80073E0(windowId);
 }

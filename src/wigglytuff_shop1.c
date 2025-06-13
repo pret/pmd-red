@@ -135,7 +135,7 @@ void sub_8021494(void)
     sub_80073B8(sWigglytuffShop1Work->s40.m.menuWinId);
     PrintStringOnWindow(10, 0, sFriendAreas, sWigglytuffShop1Work->s40.m.menuWinId, 0);
 
-    sub_8012BC4((sWigglytuffShop1Work->s40.header.width * 8) + 4, 0, sWigglytuffShop1Work->s40.m.input.currPage + 1, 1, 7, sWigglytuffShop1Work->s40.m.menuWinId);
+    PrintNumOnWindow((sWigglytuffShop1Work->s40.header.width * 8) + 4, 0, sWigglytuffShop1Work->s40.m.input.currPage + 1, 1, 7, sWigglytuffShop1Work->s40.m.menuWinId);
 
     for (i = 0; i < sWigglytuffShop1Work->s40.m.input.currPageEntries; i++) {
         friendAreaIndex = sWigglytuffShop1Work->friendAreas[(sWigglytuffShop1Work->s40.m.input.currPage * sWigglytuffShop1Work->s40.m.input.entriesPerPage) + i];

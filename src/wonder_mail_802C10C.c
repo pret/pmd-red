@@ -134,7 +134,7 @@ void DrawPelipperBoardJobMenu(void)
 
     iVar4 += 4;
     x = iVar4 + (gUnknown_203B2E0->unk8.header.width * 8);
-    sub_8012BC4(x, 0, gUnknown_203B2E0->unk8.m.input.currPage + 1, 2, 7, gUnknown_203B2E0->unk8.m.menuWinId);
+    PrintNumOnWindow(x, 0, gUnknown_203B2E0->unk8.m.input.currPage + 1, 2, 7, gUnknown_203B2E0->unk8.m.menuWinId);
 
     for (i = 0; i < gUnknown_203B2E0->unk8.m.input.currPageEntries; i++) {
         slotIndex = (gUnknown_203B2E0->pelipperBoardSlots[(gUnknown_203B2E0->unk8.m.input.currPage * gUnknown_203B2E0->unk8.m.input.entriesPerPage) + i]);

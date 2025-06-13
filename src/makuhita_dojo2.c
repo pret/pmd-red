@@ -123,7 +123,7 @@ static void MakuhitaDojo_DrawCourseList(void)
     CallPrepareTextbox_8008C54(sMakuhitaDojoWork2->s30.m.menuWinId);
     sub_80073B8(sMakuhitaDojoWork2->s30.m.menuWinId);
     PrintStringOnWindow(10, 0, sCourses, sMakuhitaDojoWork2->s30.m.menuWinId, 0);
-    sub_8012BC4((sMakuhitaDojoWork2->s30.header.width * 8) + 4, 0, sMakuhitaDojoWork2->s30.m.input.currPage + 1, 2, 7, sMakuhitaDojoWork2->s30.m.menuWinId);
+    PrintNumOnWindow((sMakuhitaDojoWork2->s30.header.width * 8) + 4, 0, sMakuhitaDojoWork2->s30.m.input.currPage + 1, 2, 7, sMakuhitaDojoWork2->s30.m.menuWinId);
 
     for (i = 0; i < sMakuhitaDojoWork2->s30.m.input.currPageEntries; i++) {
         iVar6 = sMakuhitaDojoWork2->unk0[sMakuhitaDojoWork2->s30.m.input.currPage * sMakuhitaDojoWork2->s30.m.input.entriesPerPage + i];

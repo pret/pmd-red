@@ -158,7 +158,7 @@ void sub_801CCD8(void)
     CallPrepareTextbox_8008C54(sUnknown_203B244->unk4B4.m.menuWinId);
     sub_80073B8(sUnknown_203B244->unk4B4.m.menuWinId);
     PrintStringOnWindow(10, 0, sStorage, sUnknown_203B244->unk4B4.m.menuWinId, 0);
-    sub_8012BC4(sUnknown_203B244->unk4B4.header.width * 8 + 4, 0, sUnknown_203B244->unk4B4.m.input.currPage + 1, 2, 7, sUnknown_203B244->unk4B4.m.menuWinId);
+    PrintNumOnWindow(sUnknown_203B244->unk4B4.header.width * 8 + 4, 0, sUnknown_203B244->unk4B4.m.input.currPage + 1, 2, 7, sUnknown_203B244->unk4B4.m.menuWinId);
 
     for(index = 0; index < sUnknown_203B244->unk4B4.m.input.currPageEntries; index++) {
         itemID = sUnknown_203B244->itemIDs[(sUnknown_203B244->unk4B4.m.input.currPage * sUnknown_203B244->unk4B4.m.input.entriesPerPage) + index];
@@ -166,7 +166,7 @@ void sub_801CCD8(void)
         y = GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.m.input, index);
         PrintStringOnWindow(8, y, buffer, sUnknown_203B244->unk4B4.m.menuWinId, 0);
         y2 = GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.m.input, index);
-        sub_8012BC4((sUnknown_203B244->unk4B4.m.menuWindow->width * 8) - 2, y2, gTeamInventoryRef->teamStorage[itemID], 3, 5, sUnknown_203B244->unk4B4.m.menuWinId);
+        PrintNumOnWindow((sUnknown_203B244->unk4B4.m.menuWindow->width * 8) - 2, y2, gTeamInventoryRef->teamStorage[itemID], 3, 5, sUnknown_203B244->unk4B4.m.menuWinId);
 
         if (sub_801CFE0(itemID) & 1)
             sub_8007B7C(sUnknown_203B244->unk4B4.m.menuWinId, 8, GetMenuEntryYCoord(&sUnknown_203B244->unk4B4.m.input, index), (sUnknown_203B244->unk4B4.m.menuWindow->width - 1) * 8, 10);

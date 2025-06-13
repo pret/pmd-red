@@ -164,7 +164,7 @@ static void sub_80234BC(void)
     sub_80073B8(gUnknown_3001B5C->s35C.m.menuWinId);
     PrintStringOnWindow(10, 0, sPokemon, gUnknown_3001B5C->s35C.m.menuWinId, 0);
 
-    sub_8012BC4((gUnknown_3001B5C->s35C.header.width * 8) + 4, 0, gUnknown_3001B5C->s35C.m.input.currPage + 1, 2, 7, gUnknown_3001B5C->s35C.m.menuWinId);
+    PrintNumOnWindow((gUnknown_3001B5C->s35C.header.width * 8) + 4, 0, gUnknown_3001B5C->s35C.m.input.currPage + 1, 2, 7, gUnknown_3001B5C->s35C.m.menuWinId);
 
     for (i = 0; i < gUnknown_3001B5C->s35C.m.input.currPageEntries; i++) {
         y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.m.input, i);

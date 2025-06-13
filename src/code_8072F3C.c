@@ -199,7 +199,7 @@ void sub_802FA50(void)
   CallPrepareTextbox_8008C54(gUnknown_203B314->sBC.m.menuWinId);
   sub_80073B8(gUnknown_203B314->sBC.m.menuWinId);
   PrintStringOnWindow(10,0,gUnknown_80E0744,gUnknown_203B314->sBC.m.menuWinId,0);
-  sub_8012BC4(gUnknown_203B314->sBC.header.width * 8 + 4,0,gUnknown_203B314->sBC.m.input.currPage + 1,2,7,gUnknown_203B314->sBC.m.menuWinId);
+  PrintNumOnWindow(gUnknown_203B314->sBC.header.width * 8 + 4,0,gUnknown_203B314->sBC.m.input.currPage + 1,2,7,gUnknown_203B314->sBC.m.menuWinId);
   if (gUnknown_203B314->unkB8 != 0) {
     for(counter = 0; counter < gUnknown_203B314->sBC.m.input.currPageEntries; counter++)
     {

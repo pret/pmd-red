@@ -128,7 +128,7 @@ void BuildIQSkillList(void)
 
     x += 4;
     x2 = x + sIQSkillListMenu->s24.header.width * 8;
-    sub_8012BC4(x2, 0, sIQSkillListMenu->s24.m.input.currPage + 1, 1, 7, sIQSkillListMenu->s24.m.menuWinId);
+    PrintNumOnWindow(x2, 0, sIQSkillListMenu->s24.m.input.currPage + 1, 1, 7, sIQSkillListMenu->s24.m.menuWinId);
 
     for (counter = 0; counter < sIQSkillListMenu->s24.m.input.currPageEntries; counter++) {
         skillIndex = sIQSkillListMenu->iqSkills[(sIQSkillListMenu->s24.m.input.currPage * sIQSkillListMenu->s24.m.input.entriesPerPage) + counter];

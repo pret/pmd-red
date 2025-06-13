@@ -97,7 +97,7 @@ static void DisplayAdventureLog(void)
 
     r4 += 4;
     r6 = r4 + (sAdventureLog->header.width * 8);
-    sub_8012BC4(r6, 0, sAdventureLog->m.input.currPage + 1, 1, 7, sAdventureLog->m.menuWinId);
+    PrintNumOnWindow(r6, 0, sAdventureLog->m.input.currPage + 1, 1, 7, sAdventureLog->m.menuWinId);
 
     for (i = 0; i < sAdventureLog->m.input.currPageEntries; i++) {
         aa = (sAdventureLog->m.input.currPage * sAdventureLog->m.input.entriesPerPage) + i;

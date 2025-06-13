@@ -149,49 +149,22 @@ s32 GetMenuInput(void)
 }
 
 // arm9.bin::0201C4A0
-void sub_8012BC4(u32 x, u32 y, s32 n, s32 len, u32 color, u32 windowId)
+void PrintNumOnWindow(s32 x, s32 y, s32 num, s32 len, u32 color, u32 windowId)
 {
-    s32 iVar1;
-    u32 chr;
-    const unkChar *iVar3;
-    s32 counter;
-    s32 *piVar3;
-    s32 *piVar4;
-    s32 total_x;
     s32 decimal[8];
+    s32 i;
+    s32 totalX = 0;
 
-    total_x = 0;
-
-    ConvertToDecimal(decimal, n, len);
-
-    counter = len - 1;
-    if (counter > 0) {
-        piVar3 = &decimal[counter];
-        if (*piVar3 == 0) {
-            do {
-                *piVar3 = 0xFF;
-                piVar3--;
-                counter--;
-                if (counter <= 0)
-                    break;
-            } while(*piVar3 == 0);
-        }
+    ConvertToDecimal(decimal, num, len);
+    for (i = len - 1; i > 0 && decimal[i] == 0; i--) {
+        decimal[i] = 0xFF;
     }
+    for (i = 0; i < len && decimal[i] != 0xFF; i++) {
+        u32 digitChr = GetCharId(decimal[i] + '0');
+        const unkChar *chrInfo = GetCharacter(digitChr);
 
-    counter = 0;
-    if (counter < len && decimal[0] != 0xFF) {
-        piVar4 = &decimal[0];
-        do {
-            iVar1 = *piVar4;
-            piVar4++;
-            chr = GetCharId(iVar1 + 0x30);
-            iVar3 = GetCharacter(chr);
-            total_x += iVar3->width;
-            DrawCharOnWindow(x - total_x, y, chr, color, windowId);
-            counter++;
-            if (counter >= len)
-                break;
-        } while (*piVar4 != 0xff);
+        totalX += chrInfo->width;
+        DrawCharOnWindow(x - totalX, y, digitChr, color, windowId);
     }
 }
 

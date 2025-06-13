@@ -315,9 +315,9 @@ void sub_801AD34(u32 param_1)
     CallPrepareTextbox_8008C54(param_1);
     sub_80073B8(param_1);
     PrintStringOnWindow(6, 0, sItems, param_1, 0);
-    sub_8012BC4(18, 13, GetNumberOfFilledInventorySlots(), 2, 7, param_1);
+    PrintNumOnWindow(18, 13, GetNumberOfFilledInventorySlots(), 2, 7, param_1);
     PrintStringOnWindow(22, 13, sSlash, param_1, 0);
-    sub_8012BC4(43, 13, INVENTORY_SIZE, 2, 7, param_1);
+    PrintNumOnWindow(43, 13, INVENTORY_SIZE, 2, 7, param_1);
     sub_80073E0(param_1);
 }
 

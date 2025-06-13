@@ -249,12 +249,12 @@ void FriendList_ShowWindow(void)
         case 4:
             PrintStringOnWindow(10, 0, "Friends", sFriendList->unk358.m.menuWinId, '\0');
             x = (sFriendList->unk358.header.width * 8) + 4;
-            sub_8012BC4(x, 0, sFriendList->unk358.m.input.currPage + 1, 2, 7, sFriendList->unk358.m.menuWinId);
+            PrintNumOnWindow(x, 0, sFriendList->unk358.m.input.currPage + 1, 2, 7, sFriendList->unk358.m.menuWinId);
             break;
         default:
             PrintStringOnWindow(10, 0, _("Pokémon Friends"), sFriendList->unk358.m.menuWinId, '\0');
             x = (sFriendList->unk358.header.width * 8) + 4;
-            sub_8012BC4(x, 0, sFriendList->unk358.m.input.currPage + 1, 2, 7, sFriendList->unk358.m.menuWinId);
+            PrintNumOnWindow(x, 0, sFriendList->unk358.m.input.currPage + 1, 2, 7, sFriendList->unk358.m.menuWinId);
             break;
     }
 

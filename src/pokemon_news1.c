@@ -137,7 +137,7 @@ static void CreatePKMNNewsMenu(void)
     sub_80073B8(sUnknown_203B2CC->s38.menuWinId);
     PrintStringOnWindow(10, 0, sNewsList, sUnknown_203B2CC->s38.menuWinId, 0);
 
-    sub_8012BC4((sUnknown_80DFBE8.width * 8) + 4, 0, sUnknown_203B2CC->s38.input.currPage + 1, 2, 7, sUnknown_203B2CC->s38.menuWinId);
+    PrintNumOnWindow((sUnknown_80DFBE8.width * 8) + 4, 0, sUnknown_203B2CC->s38.input.currPage + 1, 2, 7, sUnknown_203B2CC->s38.menuWinId);
 
     for (index = 0; index < sUnknown_203B2CC->s38.input.currPageEntries; index++) {
         y = GetMenuEntryYCoord(&sUnknown_203B2CC->s38.input, index);

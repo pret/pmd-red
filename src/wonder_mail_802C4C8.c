@@ -135,7 +135,7 @@ void DrawJobListMenu(void)
 
     r4 += 4;
     x = r4 + (gUnknown_203B2E8->unk8.header.width * 8);
-    sub_8012BC4(x, 0, gUnknown_203B2E8->unk8.m.input.currPage + 1, 2, 7, gUnknown_203B2E8->unk8.m.menuWinId);
+    PrintNumOnWindow(x, 0, gUnknown_203B2E8->unk8.m.input.currPage + 1, 2, 7, gUnknown_203B2E8->unk8.m.menuWinId);
 
     for (i = 0;  i < gUnknown_203B2E8->unk8.m.input.currPageEntries; i++) {
         mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.m.input.currPage * gUnknown_203B2E8->unk8.m.input.entriesPerPage) + i]);
