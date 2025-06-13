@@ -6,7 +6,7 @@
 #include "ground_main.h"
 #include "code_80A26CC.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "string_format.h"
 #include "input.h"
 #include "ground_lives.h"
@@ -492,7 +492,7 @@ static bool8 sub_809CBBC(const struct ItemWithQuantity *itemToAdd, const u8 *max
     if (itemGivenStr != 0) {
         strcpy(gFormatBuffer_Items[0], buffer);
         ScriptPrintText(0, -1, itemGivenStr);
-        xxx_call_play_fanfare_se(0xcb,0x100);
+        PlaySoundWithVolume(0xcb,0x100);
     }
 
     return TRUE;

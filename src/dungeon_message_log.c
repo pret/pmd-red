@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "dungeon_message_log.h"
 #include "dungeon_message.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
@@ -12,6 +12,7 @@
 #include "dungeon_music.h"
 #include "sprite.h"
 #include "code_803E724.h"
+#include "run_dungeon.h"
 
 #define MESSAGE_LOG_ROW_COUNT 8 // How many log messages are shown
 
@@ -89,9 +90,9 @@ static const u8 sUnknownMessageLogData[] =
 bool32 DisplayMessageLog(void)
 {
     bool8 unkRet;
-    MenuInputStructSub menuInput;
+    TouchScreenMenuInput menuInput;
 
-    sub_801317C(&menuInput);
+    ResetTouchScreenMenuInput(&menuInput);
     sub_803EAF0(9, NULL);
     do {
         DungeonRunFrameActions(13);
@@ -107,7 +108,7 @@ bool32 DisplayMessageLog(void)
         bool32 scroll = FALSE;
 
         sMessageLogFlags = 0;
-        nullsub_34(&menuInput, 0);
+        GetTouchScreenMenuInput(&menuInput, 0);
         unkVar = sub_8014140(0, sUnknownMessageLogData);
 
         if (TryScrollLogUp(unkVar))

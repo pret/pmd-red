@@ -4,12 +4,12 @@
 #include "dungeon_message_log.h"
 #include "structs/dungeon_entity.h"
 #include "bg_palette_buffer.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800D090.h"
 #include "code_800E9E4.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
 #include "dungeon_music.h"
@@ -234,7 +234,7 @@ void xxx_draw_string_80524F0(void)
             else {
                 const u8 *txtPtr = strPtr->unk0[id];
 
-                sp.unk0 = 4;
+                sp.x = 4;
                 sp.unk2 = strPtr->unk1C066;
                 sp.unk10 = 7;
                 sub_80073B8(0);
@@ -248,10 +248,10 @@ void xxx_draw_string_80524F0(void)
                         break;
                     txtPtr = xxx_get_next_char_from_string(txtPtr, &currChr);
                     if (currChr == '`') {
-                        sp.unk0 += 6;
+                        sp.x += 6;
                     }
                     else {
-                        sp.unk0 += DrawCharOnWindow(sp.unk0, sp.unk2, currChr, sp.unk10, 0);
+                        sp.x += DrawCharOnWindow(sp.x, sp.unk2, currChr, sp.unk10, 0);
                     }
                 }
                 sub_80073E0(0);

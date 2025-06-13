@@ -4,7 +4,7 @@
 // size: 0x34
 typedef struct UnkDrawStringStruct
 {
-    s16 unk0;
+    s16 x;
     s16 unk2;
     s16 unk4;
     s16 unk6;
@@ -29,13 +29,13 @@ void PrintStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminat
 void PrintStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing);
 bool8 sub_8008D8C(s32 windowId);
 void sub_8008DC8(s32 x, s32 y, u16 bg0Val, u16 bg1Val);
-s32 sub_8008ED0(const u8 *str);
+s32 GetStringLineWidth(const u8 *str);
 void sub_8009388(void);
 void sub_8009408(s32 from, s32 to);
 void sub_8009524(s32 windowId);
 void sub_80095CC(s32 a0, s32 a1);
-s32 sub_80095E4(s32 a0, s32 a1);
-s32 sub_8009614(s32 a0, s32 a1);
+s32 CalcEntriesTotalHeight(s32 entriesCount, s32 entryHeight);
+s32 CalcTwoLinesEntriesTotalHeight(s32 entriesCount, s32 entryHeight);
 const u8 *xxx_handle_format_global(const u8 *str, UnkDrawStringStruct *unkStrPtr);
 
 #endif // GUARD_TEXT_3_H

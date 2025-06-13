@@ -121,18 +121,18 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
 
             DungeonShowWindows(&spTxtStruct, 1);
             sub_8067F00(a0, a3, gUnknown_202F30C, a2, a1);
-            gDungeonMenu.unk1A = min(a2, 8);
+            gDungeonMenu.currPageEntries = min(a2, 8);
             gDungeonMenu.menuIndex = r10;
-            gDungeonMenu.unk1C = 8;
-            gDungeonMenu.unk1E = 0;
-            gDungeonMenu.unk20 = 0;
+            gDungeonMenu.entriesPerPage = 8;
+            gDungeonMenu.currPage = 0;
+            gDungeonMenu.pagesCount = 0;
             gDungeonMenu.unk4 = 0;
             gDungeonMenu.firstEntryY = 18;
-            gDungeonMenu.unkC = 0;
-            gDungeonMenu.unkE = 0;
+            gDungeonMenu.leftRightArrowsPos.x = 0;
+            gDungeonMenu.leftRightArrowsPos.y = 0;
             gDungeonMenu.unk14.x = 0;
-            gDungeonMenu.unk0 = 0;
-            sub_801317C(&gDungeonMenu.unk28);
+            gDungeonMenu.windowId = 0;
+            ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
             sub_80137B0(&gDungeonMenu, 0);
             while (1) {
                 s32 r4;
@@ -222,12 +222,12 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                     r7 = 3;
                     break;
                 }
-                if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+                if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                     PlayDungeonConfirmationSE();
                     r7 = 1;
                     break;
                 }
-                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                     PlayDungeonCancelSE();
                     r7 = 2;
                     break;
@@ -296,7 +296,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                         MoveMenuCursorUpWrapAround(&gDungeonMenu, 1);
                     }
 
-                    if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+                    if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                         if (CanSubMenuItemBeChosen(gDungeonMenu.menuIndex)) {
                             PlayDungeonConfirmationSE();
                             r7 = 1;
@@ -304,7 +304,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                         }
                         PlayDungeonCancelSE();
                     }
-                    if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                    if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                         PlayDungeonCancelSE();
                         r7 = 0;
                         break;
@@ -388,7 +388,7 @@ void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2_, s32 a3, s32 a4)
 
 void sub_806806C(PokemonStruct1 *a0)
 {
-    struct unkStruct_808FF20 unkStruct;
+    struct MonSummaryInfo unkStruct;
     struct UnkInfoTabStruct var_C8;
     WindowTemplates spTxtStruct = {0};
     s32 r7;
@@ -419,23 +419,23 @@ void sub_806806C(PokemonStruct1 *a0)
         gUnknown_202F308.width = 10;
         gUnknown_202F308.f3 = 0;
 
-        gDungeonMenu.unk1E = r7;
-        gDungeonMenu.unk20 = 4;
-        gDungeonMenu.unk1A = 0;
+        gDungeonMenu.currPage = r7;
+        gDungeonMenu.pagesCount = 4;
+        gDungeonMenu.currPageEntries = 0;
         gDungeonMenu.menuIndex = 0;
-        gDungeonMenu.unk1C = 0;
+        gDungeonMenu.entriesPerPage = 0;
         gDungeonMenu.unk4 = 0;
         gDungeonMenu.firstEntryY = 16;
         gDungeonMenu.unk14.x = 0;
-        gDungeonMenu.unk0 = 0;
+        gDungeonMenu.windowId = 0;
 
-        sub_801317C(&gDungeonMenu.unk28);
+        ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
         DungeonShowWindows(&spTxtStruct, 1);
-        sub_808FF20(&unkStruct, a0, gDungeon->unk644.unk16);
-        CreatePokemonInfoTabScreen(spF8[r7], r7, &unkStruct, &var_C8, 0);
+        SetMonSummaryInfo(&unkStruct, a0, gDungeon->unk644.unk16);
+        ShowPokemonSummaryWindow(spF8[r7], r7, &unkStruct, &var_C8, 0);
 
-        gDungeonMenu.unkC = (gWindows[0].x + 15) * 8;
-        gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
+        gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 15) * 8;
+        gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
 
         while (1) {
             s32 r5;
@@ -452,14 +452,14 @@ void sub_806806C(PokemonStruct1 *a0)
 
             r5 = sub_8014140(0, gUnknown_8106DA4);
             DungeonRunFrameActions(0x1C);
-            if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.unk28.dpad_right) {
+            if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.touchScreen.dpad_right) {
                 PlayDungeonCursorSE(0);
                 if (++r7 == 4) {
                     r7 = 0;
                 }
                 break;
             }
-            if ((gRealInputs.pressed & DPAD_LEFT) || gDungeonMenu.unk28.dpad_left) {
+            if ((gRealInputs.pressed & DPAD_LEFT) || gDungeonMenu.touchScreen.dpad_left) {
                 PlayDungeonCursorSE(0);
                 if (--r7 == -1) {
                     r7 = 3;
@@ -496,12 +496,12 @@ void sub_806806C(PokemonStruct1 *a0)
                 continue;
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                 PlayDungeonConfirmationSE();
                 loopBreak = TRUE;
                 break;
             }
-            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonCancelSE();
                 loopBreak = TRUE;
                 break;

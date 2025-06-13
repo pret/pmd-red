@@ -8,6 +8,7 @@
 #include "file_system.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "pokemon_evolution.h"
 #include "moves.h"
 #include "string_format.h"
 #include "friend_area.h"
@@ -33,7 +34,7 @@
 #include "dungeon_config.h"
 #include "game_options.h"
 #include "weather.h"
-#include "text_util.h"
+#include "pokemon_types.h"
 #include "dungeon_random.h"
 #include "position_util.h"
 #include "dungeon_ai_movement.h"
@@ -68,7 +69,6 @@ extern void sub_804178C(u32);
 extern void sub_803F508(Entity *);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
-extern s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
 extern s16 sub_803D970(u32);
 extern bool8 sub_8083660(const DungeonPos *param_1);
@@ -123,9 +123,9 @@ void LoadDungeonPokemonSprites(void)
         gDungeon->sprites[index] = NULL;
     }
     LoadPokemonSprite(MONSTER_DECOY, TRUE);
-    for(index = 0; index < gDungeon->unk37E4; index++)
+    for(index = 0; index < gDungeon->currFloorMonsterSpawnsCount; index++)
     {
-        LoadPokemonSprite(ExtractSpeciesIndex(&gDungeon->unk343C[index]), TRUE);
+        LoadPokemonSprite(ExtractSpeciesIndex(&gDungeon->monsterSpawns[index]), TRUE);
     }
     if(gDungeon->unk644.unk44)
     {
@@ -830,7 +830,7 @@ Entity * sub_806977C(Entity *target)
     return NULL;
 }
 
-void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target)
+void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target)
 {
     int index;
     u8 *atkPtr;
@@ -891,10 +891,10 @@ void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target)
     param_1->unk44[1].level = 0;
     param_1->IQSkills = info->IQSkillMenuFlags;
     if (gDungeon->unk644.unk16 != 0) {
-        param_1->unk4C = sub_806A4DC(info);
+        param_1->evoStringId = sub_806A4DC(info);
     }
     else {
-        param_1->unk4C = 3;
+        param_1->evoStringId = EVO_STRING_EMPTY;
     }
 
     uVar15 = 0;
@@ -1231,7 +1231,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
   if ((((EntityIsValid(pokemon)) && (EntityIsValid(target))) && (pokemon != target))
      && (entityInfo = GetEntInfo(target), entityInfo->reflectClassStatus.status == STATUS_CONVERSION2)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
-    uVar2_u32 = sub_8092364(moveType);
+    uVar2_u32 = GetBestResistingType(moveType);
     if (uVar2_u32 != TYPE_NONE) {
       entityInfo->types[0] = uVar2_u32;
       entityInfo->types[1] = 0;
@@ -1412,7 +1412,7 @@ s32 sub_806A4DC(EntityInfo *info)
     pokemon.offense.att[0] = info->atk[0];
     pokemon.offense.def[0] = info->def[0];
 
-    return sub_808F700(&pokemon);
+    return GetMonSummaryScreenEvoStringId(&pokemon);
 }
 
 bool8 sub_806A538(s16 r0)

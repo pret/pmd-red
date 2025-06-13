@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "cpu.h"
 #include "decompress_at.h"
 #include "text_1.h"
@@ -73,8 +73,8 @@ u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, 
 
     if (sp0->unkA & 1) {
         r3 = window->unk18 + ((((y / 8) * window->width) + (x / 8)) * 8);
-        r3 += y - (y / 8 * 8);
-        shiftData = &gCharMasksOffsets[x - ((x / 8) * 8)];
+        r3 += y % 8;
+        shiftData = &gCharMasksOffsets[x % 8];
         xDiv8 = x / 8;
         yDiv8 = y / 8;
 
@@ -1018,7 +1018,7 @@ bool8 xxx_call_update_bg_vram(void)
     bool8 ret = FALSE;
     if (gUnknown_20274A5 != 0) {
         gUnknown_20274A5 = FALSE;
-        sub_80099C0();
+        CopyBgTilemaps0And1();
     }
     ret = xxx_update_bg_vram(gWindows);
     return ret;

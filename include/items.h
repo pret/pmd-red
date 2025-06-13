@@ -1,13 +1,45 @@
 #ifndef GUARD_ITEMS_H
 #define GUARD_ITEMS_H
 
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "structs/str_items.h"
 #include "structs/str_pokemon.h"
 #include "structs/str_status_text.h"
 
 extern ItemDataEntry *gItemParametersData;
 extern TeamInventory *gTeamInventoryRef;
+
+#define ITEM_SETS_RANDOM_CAP 9999
+#define ITEM_SETS_SKIP_NUMBER 30000
+enum
+{
+    RANDOM_ITEMS_SET_1 = 1,
+    RANDOM_ITEMS_SET_2,
+    RANDOM_ITEMS_SET_3,
+    RANDOM_ITEMS_SET_4,
+    RANDOM_ITEMS_SET_5,
+    RANDOM_ITEMS_SET_6,
+    RANDOM_ITEMS_SET_7,
+    RANDOM_ITEMS_SET_8,
+    RANDOM_ITEMS_SET_9,
+    RANDOM_ITEMS_SET_10,
+    RANDOM_ITEMS_SET_11,
+    RANDOM_ITEMS_SET_12,
+    RANDOM_ITEMS_SET_13,
+    RANDOM_ITEMS_SET_14,
+    RANDOM_ITEMS_SET_15,
+    RANDOM_ITEMS_SET_KECLEON_SHOP_1,
+    RANDOM_ITEMS_SET_KECLEON_WARES_1,
+    RANDOM_ITEMS_SET_KECLEON_SHOP_2,
+    RANDOM_ITEMS_SET_KECLEON_WARES_2,
+    RANDOM_ITEMS_SET_KECLEON_SHOP_3,
+    RANDOM_ITEMS_SET_KECLEON_WARES_3,
+    RANDOM_ITEMS_SET_KECLEON_SHOP_4,
+    RANDOM_ITEMS_SET_KECLEON_WARES_4,
+    RANDOM_ITEMS_SET_24,
+    RANDOM_ITEMS_SET_25,
+    RANDOM_ITEMS_SET_26,
+};
 
 void LoadItemParameters(void);
 TeamInventory *GetMoneyItemsInfo(void);
@@ -47,7 +79,6 @@ s32 CountKecleonShopItems(void);
 void InitKecleonShopItem(u8 index);
 BulkItem *GetKecleonShopItem(u8 index);
 void FillKecleonShopGaps(void);
-void SortKecleonShopInventory(void);
 void ChooseKecleonShopInventory(u8 index);
 bool8 AddKecleonShopItem(u8 itemIndex);
 u32 CountKecleonWareItems(void);
@@ -56,8 +87,7 @@ BulkItem* GetKecleonWareItem(u8 index);
 void FillKecleonWareGaps(void);
 void SortKecleonWareInventory(void);
 void ChooseKecleonWareInventory(u8 index);
-bool8 AddKecleonWareItem(u8 itemIndex);
-void FillInventoryGaps();
+void FillInventoryGaps(void);
 bool8 AddHeldItemToInventory(BulkItem* slot);
 bool8 IsNotMoneyOrUsedTMItem(u8 id);
 bool8 IsNotSpecialItem(u8 id);
@@ -84,7 +114,7 @@ s32 SaveTeamInventory(u8 *, u32 size);
 s32 GetItemPossessionCount(u8 id);
 s32 WriteHighDecimal(s32, u8 *strbuf, u8);
 u32 sub_80913E0(Item* slot, u32 windowId, STATUSTEXTS(statuses));
-u8 sub_8091E94(s32 a0, s32 a1, s32 a2);
+u8 GetRandomItemForSet(s32 a0, s32 a1, s32 a2);
 
 static inline void ZeroOutItem(Item *item)
 {

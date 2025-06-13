@@ -3,8 +3,8 @@
 #include "constants/input.h"
 #include "structs/str_802C39C.h"
 #include "structs/str_wonder_mail.h"
-#include "structs/struct_sub80095e4.h"
-#include "code_80118A4.h"
+#include "text_3.h"
+#include "music_util.h"
 #include "code_803B050.h"
 #include "input.h"
 #include "memory.h"
@@ -14,7 +14,7 @@
 #include "text_2.h"
 #include "wonder_mail_802CDD4.h"
 
-static EWRAM_INIT struct_Sub80095E4_2 *sUnknown_203B2F4 = {NULL};
+static EWRAM_INIT MenuHeaderWindow *sUnknown_203B2F4 = {NULL};
 
 #include "data/wonder_mail_802CDD4.h"
 
@@ -23,17 +23,17 @@ static void sub_802CF5C(void);
 bool8 sub_802CDD4(u32 a0)
 {
     if (sUnknown_203B2F4 == NULL)
-        sUnknown_203B2F4 = MemoryAlloc(sizeof(struct_Sub80095E4_2), 8);
+        sUnknown_203B2F4 = MemoryAlloc(sizeof(MenuHeaderWindow), 8);
 
-    sUnknown_203B2F4->s0.winId = a0;
-    sUnknown_203B2F4->s0.unk38 = &sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.winId];
-    RestoreSavedWindows(&sUnknown_203B2F4->s0.windows);
-    sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.winId] = sUnknown_80DFDA4;
-    sUnknown_203B2F4->s0.unk38->header = &sUnknown_203B2F4->header;
-    sub_8012D34(sUnknown_203B2F4->s0.unk38, 4);
+    sUnknown_203B2F4->m.menuWinId = a0;
+    sUnknown_203B2F4->m.menuWindow = &sUnknown_203B2F4->m.windows.id[sUnknown_203B2F4->m.menuWinId];
+    RestoreSavedWindows(&sUnknown_203B2F4->m.windows);
+    sUnknown_203B2F4->m.windows.id[sUnknown_203B2F4->m.menuWinId] = sUnknown_80DFDA4;
+    sUnknown_203B2F4->m.menuWindow->header = &sUnknown_203B2F4->header;
+    sub_8012D34(sUnknown_203B2F4->m.menuWindow, 4);
     ResetUnusedInputStruct();
-    ShowWindows(&sUnknown_203B2F4->s0.windows, TRUE, TRUE);
-    sub_8013848(&sUnknown_203B2F4->s0.input, 5, 4, a0);
+    ShowWindows(&sUnknown_203B2F4->m.windows, TRUE, TRUE);
+    CreateMenuOnWindowTwoLinesEntry(&sUnknown_203B2F4->m.input, 5, 4, a0);
     sub_802CF5C();
     sub_802CFD0();
     return TRUE;
@@ -42,18 +42,18 @@ bool8 sub_802CDD4(u32 a0)
 u32 sub_802CE5C(bool8 a0)
 {
     if (!a0) {
-        sub_8013660(&sUnknown_203B2F4->s0.input);
+        sub_8013660(&sUnknown_203B2F4->m.input);
         return 0;
     }
 
-    switch (GetKeyPress(&sUnknown_203B2F4->s0.input)) {
+    switch (GetKeyPress(&sUnknown_203B2F4->m.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
         case INPUT_A_BUTTON:
             return 3;
         default:
-            if (sub_80138B8(&sUnknown_203B2F4->s0.input, TRUE)) {
+            if (MenuCursorUpdate(&sUnknown_203B2F4->m.input, TRUE)) {
                 sub_802CF5C();
                 sub_802CFD0();
                 return 1;
@@ -64,27 +64,27 @@ u32 sub_802CE5C(bool8 a0)
 
 u8 sub_802CEBC(void)
 {
-    return (sUnknown_203B2F4->s0.input.unk1E * sUnknown_203B2F4->s0.input.unk1C) + sUnknown_203B2F4->s0.input.menuIndex;
+    return GET_CURRENT_MENU_ENTRY(sUnknown_203B2F4->m.input);
 }
 
 void sub_802CED8(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    ShowWindows(&sUnknown_203B2F4->s0.windows, FALSE, FALSE);
-    sub_8013984(&sUnknown_203B2F4->s0.input);
+    ShowWindows(&sUnknown_203B2F4->m.windows, FALSE, FALSE);
+    MenuUpdatePagesData(&sUnknown_203B2F4->m.input);
     sub_802CF5C();
     sub_802CFD0();
 
     if (cursorSprite)
-        AddMenuCursorSprite(&sUnknown_203B2F4->s0.input);
+        AddMenuCursorSprite(&sUnknown_203B2F4->m.input);
 }
 
 void sub_802CF14(void)
 {
     if (sUnknown_203B2F4 != NULL) {
-        sUnknown_203B2F4->s0.windows.id[sUnknown_203B2F4->s0.winId] = sUnknown_80DFD8C;
+        sUnknown_203B2F4->m.windows.id[sUnknown_203B2F4->m.menuWinId] = sUnknown_80DFD8C;
         ResetUnusedInputStruct();
-        ShowWindows(&sUnknown_203B2F4->s0.windows, TRUE, TRUE);
+        ShowWindows(&sUnknown_203B2F4->m.windows, TRUE, TRUE);
         MemoryFree(sUnknown_203B2F4);
         sUnknown_203B2F4 = NULL;
     }
@@ -92,12 +92,12 @@ void sub_802CF14(void)
 
 static void sub_802CF5C(void)
 {
-    sUnknown_203B2F4->header.count = sUnknown_203B2F4->s0.input.unk20;
-    sUnknown_203B2F4->header.currId = sUnknown_203B2F4->s0.input.unk1E;
+    sUnknown_203B2F4->header.count = sUnknown_203B2F4->m.input.pagesCount;
+    sUnknown_203B2F4->header.currId = sUnknown_203B2F4->m.input.currPage;
     sUnknown_203B2F4->header.width = 12;
     sUnknown_203B2F4->header.f3 = 0;
 
-    SUB_8009614_CALL(sUnknown_203B2F4->s0);
+    UPDATE_TWO_LINES_MENU_WINDOW_HEIGHT(sUnknown_203B2F4->m);
 }
 
 void sub_802CFD0(void)
@@ -107,21 +107,21 @@ void sub_802CFD0(void)
     s32 r5;
     s32 r4;
 
-    CallPrepareTextbox_8008C54(sUnknown_203B2F4->s0.winId);
-    sub_80073B8(sUnknown_203B2F4->s0.winId);
+    CallPrepareTextbox_8008C54(sUnknown_203B2F4->m.menuWinId);
+    sub_80073B8(sUnknown_203B2F4->m.menuWinId);
 
-    r5 = r4 = (sUnknown_203B2F4->s0.input.unk1E * 8) + 10;
-    PrintStringOnWindow(r5, 0, sRescueEvent, sUnknown_203B2F4->s0.winId, 0);
+    r5 = r4 = (sUnknown_203B2F4->m.input.currPage * 8) + 10;
+    PrintStringOnWindow(r5, 0, sRescueEvent, sUnknown_203B2F4->m.menuWinId, 0);
 
     r4 -= 6;
     r5 = r4 + (sUnknown_203B2F4->header.width * 8);
-    sub_8012BC4(r5, 0, sUnknown_203B2F4->s0.input.unk1E + 1, 2, 7, sUnknown_203B2F4->s0.winId);
+    PrintNumOnWindow(r5, 0, sUnknown_203B2F4->m.input.currPage + 1, 2, 7, sUnknown_203B2F4->m.menuWinId);
 
-    for (r5 = 0; r5 < sUnknown_203B2F4->s0.input.unk1A; r5++) {
-        iVar1 = sub_803B344((sUnknown_203B2F4->s0.input.unk1E * sUnknown_203B2F4->s0.input.unk1C) + r5);
+    for (r5 = 0; r5 < sUnknown_203B2F4->m.input.currPageEntries; r5++) {
+        iVar1 = sub_803B344((sUnknown_203B2F4->m.input.currPage * sUnknown_203B2F4->m.input.entriesPerPage) + r5);
 
-        local.unk0[0] = sUnknown_203B2F4->s0.winId;
-        local.y = GetMenuEntryYCoord(&sUnknown_203B2F4->s0.input, r5);
+        local.unk0[0] = sUnknown_203B2F4->m.menuWinId;
+        local.y = GetMenuEntryYCoord(&sUnknown_203B2F4->m.input, r5);
         sub_803B35C(&iVar1->mail, &local);
 
         local.unk43 = 1;
@@ -129,5 +129,5 @@ void sub_802CFD0(void)
         CreateRescueTitle(&local);
     }
 
-    sub_80073E0(sUnknown_203B2F4->s0.winId);
+    sub_80073E0(sUnknown_203B2F4->m.menuWinId);
 }

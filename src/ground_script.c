@@ -6,7 +6,7 @@
 #include "constants/monster.h"
 #include "constants/move_id.h"
 #include "code_8002774.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_8099360.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
@@ -14,7 +14,7 @@
 #include "code_8097670.h"
 #include "code_80A26CC.h"
 #include "debug.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
@@ -127,8 +127,6 @@ void DeleteGroundLives(void);
 void DeleteGroundObjects(void);
 void DeleteGroundEffects(void);
 s32 ExecuteScriptCommand(Action *action);
-bool8 IsFanfareSEPlaying_1(u16 songIndex);
-bool8 IsEqualtoBGTrack(u16 songIndex);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_8098DCC(u32 speed);
@@ -664,7 +662,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                         }
                         case 0xe1: case 0xe2: {
                             cmd = *action->scriptData.curPtr;
-                            if (IsFanfareSEPlaying_1(cmd.argShort)) {
+                            if (IsSoundPlaying(cmd.argShort)) {
                                 if (action->scriptData.unk2C++ < 3600) {
                                     loopContinue = FALSE;
                                 }
@@ -2035,46 +2033,46 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x44: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
                 if (id != 999) {
-                    xxx_call_start_new_bgm((u16)id);
+                    StartNewBGM_((u16)id);
                 } else {
-                    xxx_call_stop_bgm();
+                    StopBGMusic();
                 }
                 break;
             }
             case 0x45: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
                 if (id != 999) {
-                    xxx_call_fade_in_new_bgm((u16)id, (u16)curCmd.argShort); //sub_8011900
+                    FadeInNewBGM_((u16)id, (u16)curCmd.argShort); //sub_8011900
                 } else {
-                    xxx_call_stop_bgm();
+                    StopBGMusic();
                 }
                 break;
             }
             case 0x46: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
                 if (id != 999) {
-                    xxx_call_queue_bgm((u16)id);
+                    QueueBGM_((u16)id);
                 }
                 break;
             }
             case 0x47: {
-                xxx_call_stop_bgm();
+                StopBGMusic();
                 break;
             }
             case 0x48: {
-                xxx_call_fade_out_bgm(curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
+                FadeOutBGM_(curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
                 break;
             }
             case 0x49: case 0x4c: {
-                xxx_call_play_fanfare_se((u16)curCmd.arg1, 256);
+                PlaySoundWithVolume((u16)curCmd.arg1, 256);
                 break;
             }
             case 0x4a: case 0x4d: {
-                xxx_call_stop_fanfare_se((u16)curCmd.arg1);
+                StopSound((u16)curCmd.arg1);
                 break;
             }
             case 0x4b: case 0x4e: {
-                xxx_call_fade_out_fanfare_se((u16)curCmd.arg1, curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
+                FadeOutSound((u16)curCmd.arg1, curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
                 break;
             }
             case 0x4f: {
@@ -3280,7 +3278,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 {
                     ptr->name[index] = gUnknown_2039D98[index];
                 }
-                sub_80922B4(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
+                StrncpyCustom(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
                 IncrementAdventureNumJoined();
                 return 0;
             }
@@ -3338,7 +3336,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 {
                     pokemon->name[index] = gUnknown_2039D98[index];
                 }
-                sub_80922B4(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
+                StrncpyCustom(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
                 IncrementAdventureNumJoined();
                 return 0;
 
@@ -3841,7 +3839,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x44:
             if (gUnknown_2039DA8 != STOP_BGM)
             {
-                xxx_call_start_new_bgm(gUnknown_2039DA8);
+                StartNewBGM_(gUnknown_2039DA8);
                 gUnknown_2039DA8 = STOP_BGM;
                 return 1;
             }
@@ -3849,7 +3847,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x45:
             if (gUnknown_2039DA8 != STOP_BGM)
             {
-                xxx_call_fade_in_new_bgm(gUnknown_2039DA8, r2);
+                FadeInNewBGM_(gUnknown_2039DA8, r2);
                 gUnknown_2039DA8 = STOP_BGM;
                 return 1;
             }
@@ -3857,7 +3855,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x46:
             if (gUnknown_2039DA8 != STOP_BGM)
             {
-                xxx_call_queue_bgm(gUnknown_2039DA8);
+                QueueBGM_(gUnknown_2039DA8);
                 gUnknown_2039DA8 = STOP_BGM;
                 return 1;
             }

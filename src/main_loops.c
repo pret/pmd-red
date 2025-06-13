@@ -6,15 +6,14 @@
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090_1.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "run_dungeon.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "code_8097670.h"
-#include "code_8099328.h"
 #include "code_8099360.h"
 #include "code_80A26CC.h"
 #include "cpu.h"
@@ -24,6 +23,7 @@
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
 #include "game_options.h"
+#include "ground_main.h"
 #include "main_loops.h"
 #include "main_menu1.h"
 #include "main_menu2.h"
@@ -129,7 +129,7 @@ void GameLoop(void)
 
     InitHeap();
     NDS_DebugInit();
-    sub_801180C();
+    ResetSoundEffectCounters();
     NDS_LoadOverlay_GroundMain();
     sub_8014144();
     LoadMonsterParameters();
@@ -286,7 +286,7 @@ static void MainLoops_RunFrameActions(u32 unused)
     // Extra call here in blue. Seems to be for 2nd screen sprites
 
     sub_80060EC();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
 
@@ -296,7 +296,7 @@ static void MainLoops_RunFrameActions(u32 unused)
 
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
 
     ResetSprites(FALSE);
@@ -330,8 +330,8 @@ static void LoadTitleScreen(void)
         }
     }
 
-    sub_80098F8(2);
-    sub_80098F8(3);
+    ScheduleBgTilemapCopy(2);
+    ScheduleBgTilemapCopy(3);
 
     CpuCopy((u32 *)(VRAM + 0x8000), stru->vramStuff, sizeof(stru->vramStuff));
     CloseFile(bgFile);
@@ -566,7 +566,7 @@ static u32 RunGameMode_Async(u32 a0)
     s32 mode = GetScriptVarValue(NULL, START_MODE);
     bool8 ret = FALSE;
 
-    sub_801180C();
+    ResetSoundEffectCounters();
     FadeOutAllMusic(0x10);
     if (mode == MODE_CONTINUE_QUICKSAVE) {
         if (a0 == 2) {
@@ -904,14 +904,14 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
 
         quickSaveValid = IsQuickSaveValid();
         FinishQuickSaveRead();
-        sub_8011830();
+        StopBGMResetSoundEffectCounters();
 
         if (quickSaveValid)
             sub_80121E0(0xF1208);
         else
             sub_80121E0(0xF1209);
 
-        xxx_call_start_bg_music();
+        StartBGMusic();
     }
     else {
         GeneratePelipperJobs();
@@ -933,7 +933,7 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
 
     if (setupStr->info.unk7C == 3 || setupStr->info.unk7C == -2) {
         SetDungeonLocationInfo(&setupStr->info.unk80);
-        xxx_call_stop_bgm();
+        StopBGMusic();
 
         if (setupStr->info.unk7C == -2)
             PrepareQuickSaveWrite(setupStr->info.unk74, local_1c, 1);

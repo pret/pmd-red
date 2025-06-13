@@ -3,7 +3,7 @@
 #include "constants/input.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "event_flag.h"
 #include "game_options.h"
 #include "input.h"
@@ -25,7 +25,7 @@ void sub_80140DC(void)
     pos.x = 200;
     pos.y = 128;
     SetSavingIconCoords(&pos);
-    sub_8011830();
+    StopBGMResetSoundEffectCounters();
 }
 
 void sub_80140F8(void)
@@ -35,11 +35,11 @@ void sub_80140F8(void)
     pos.x = 188;
     pos.y = 64;
     SetSavingIconCoords(&pos);
-    sub_8011830();
+    StopBGMResetSoundEffectCounters();
 }
 
 void sub_8014114(void) {
-    xxx_call_start_bg_music();
+    StartBGMusic();
     SetSavingIconCoords(NULL);
 }
 
@@ -90,7 +90,6 @@ static const WindowTemplate gUnknown_80D48DC = {
 
 extern void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2);
 extern void sub_80073E0(s32 a0);
-extern void sub_8011A04(void);
 
 static void sub_8014A88(void);
 static bool8 sub_8014B94(void);
@@ -147,7 +146,7 @@ struct NeverWrittenToStruct202EC20
 static EWRAM_DATA struct NeverWrittenToStruct202EC20 *sNeverWrittenToUnknownStructPtr = NULL;
 static UNUSED EWRAM_DATA u8 sUnusedEwram1[4] = {0};
 
-static EWRAM_DATA MenuInputStructSub gUnknown_202EC28 = {0};
+static EWRAM_DATA TouchScreenMenuInput gUnknown_202EC28 = {0};
 
 static EWRAM_INIT WindowTemplates sUnknown_203B198 = {
     .id = {
@@ -224,7 +223,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     sDialogueMenuItems = menuItems;
     gUnknown_202EC18 = arg_0;
     gUnknown_202EC1C = r9;
-    sub_801317C(&gUnknown_202EC28);
+    ResetTouchScreenMenuInput(&gUnknown_202EC28);
     if (flags & 0x10) {
         sUnknown_203B198.id[0] = gUnknown_80D48DC;
     }
@@ -261,7 +260,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     sUnknown_203B198.id[3] = gUnknown_80D48AC;
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B198, TRUE, TRUE);
-    gUnknown_202E748.unk0 = 4;
+    gUnknown_202E748.x = 4;
     gUnknown_202E748.unk2 = 4;
     gUnknown_202E748.unk8 = 0x70;
     gUnknown_202E748.unkA = (gWindows[0].y * 8) + 34;
@@ -360,7 +359,7 @@ void DrawDialogueBoxString(void)
                      }
 
                      if (*str == '\r' || *str == '\n') {
-                        gUnknown_202E748.unk0 = 4;
+                        gUnknown_202E748.x = 4;
                         gUnknown_202E748.unk2 += 11;
                         str++;
                      }
@@ -368,7 +367,7 @@ void DrawDialogueBoxString(void)
                         u32 chr;
 
                         str = xxx_get_next_char_from_string(str, &chr);
-                        gUnknown_202E748.unk0 += DrawCharOnWindow(gUnknown_202E748.unk0, gUnknown_202E748.unk2, chr, gUnknown_202E748.unk10, 0);
+                        gUnknown_202E748.x += DrawCharOnWindow(gUnknown_202E748.x, gUnknown_202E748.unk2, chr, gUnknown_202E748.unk10, 0);
                         gUnknown_202E748.unk2C = gUnknown_202E78C;
                      }
 
@@ -389,7 +388,7 @@ void DrawDialogueBoxString(void)
                 }
                 sub_80073E0(0);
                 gUnknown_202E794 = str;
-                sub_801317C(&gUnknown_202EC28);
+                ResetTouchScreenMenuInput(&gUnknown_202EC28);
                 if (gUnknown_202E794[0] == '\0') {
                     if (sDialogueMenuItems != NULL) {
                         gUnknown_202E744 = 3;
@@ -460,7 +459,7 @@ void DrawDialogueBoxString(void)
             case 9: {
                 bool8 buttonPress = FALSE;
                 gUnknown_202E748.unk20 = 0;
-                nullsub_34(&gUnknown_202EC28, 0);
+                GetTouchScreenMenuInput(&gUnknown_202EC28, 0);
                 if (!(sUnknownTextFlags & 1)) {
                     buttonPress = TRUE;
                 }
@@ -521,7 +520,7 @@ void DrawDialogueBoxString(void)
                         gUnknown_202E744 = 11;
                     }
                     else if (gUnknown_202E744 == 8) {
-                        gUnknown_202E748.unk0 = 4;
+                        gUnknown_202E748.x = 4;
                         if (gUnknown_202E748.unk2 > 34) {
                             gUnknown_202E748.unk2 = 4;
                             if (sUnknownTextFlags & 0x10) {
@@ -611,7 +610,7 @@ static void sub_8014A88(void)
 
         r5 += 12;
         FormatString(menuItem->text, text, text + sizeof(text), 0);
-        val = sub_8008ED0(text);
+        val = GetStringLineWidth(text);
         if (r7 < val) {
             r7 = val;
         }

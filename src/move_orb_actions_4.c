@@ -44,7 +44,7 @@ extern void HandleDroughtOrbAction(Entity *);
 extern void HandleLuminousOrbAction(Entity *pokemon);
 extern void HandleTrawlOrbAction(Entity *, Entity *);
 extern void HandlePounceOrbAction(Entity *, Entity *, s32);
-extern s16 sub_803D970(u32);
+extern s16 GetRandomFloorMonsterId(u32);
 extern bool8 sub_806AA0C(s32, u32);
 extern void sub_806BB6C(Entity *, s32);
 extern void HandleSwitcherOrb(Entity *, Entity *, u32);
@@ -581,7 +581,7 @@ bool8 TransferOrbAction(Entity *pokemon, Entity * target, Move *move, s32 param_
         else
         {
             for (r6 = 0; r6 < 0x1E; r6++) {
-                targetID = sub_803D970(0);
+                targetID = GetRandomFloorMonsterId(0);
                 if ((sub_806AA0C(targetID,0)) && (oldID != targetID)) {
                     if (GetBodySize(oldID) == GetBodySize(targetID)) break;
                 }

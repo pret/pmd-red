@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "structs/menu.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_802DE84.h"
 #include "code_803B050.h"
 #include "code_80958E8.h"
@@ -436,8 +436,8 @@ void CreatePelipperAcceptedStatusBox(u32 r0)
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
     PrintStringOnWindow(3, 0, gPelipperBoard_Accepted, r0, 0);
-    sub_8012BC4(0x12, 0xD, GetNumAcceptedJobs(), 2, 7, r0);
+    PrintNumOnWindow(0x12, 0xD, GetNumAcceptedJobs(), 2, 7, r0);
     PrintStringOnWindow(0x16, 0xD, gPelipperStatusSlash, r0, 0); // "/"
-    sub_8012BC4(0x23, 0xD, MAX_ACCEPTED_JOBS, 2, 7, r0);
+    PrintNumOnWindow(0x23, 0xD, MAX_ACCEPTED_JOBS, 2, 7, r0);
     sub_80073E0(r0);
 }

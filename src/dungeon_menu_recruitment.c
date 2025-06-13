@@ -3,7 +3,7 @@
 #include "code_800D090.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_menu_recruitment.h"
 #include "dungeon_message.h"
 #include "dungeon_message_log.h"
@@ -100,21 +100,21 @@ void ShowRecruitmentSearchMenu(void)
 
             sRecruitmentWindowHeader.currId = currTabId;
             DungeonShowWindows(&sRecruitmentSearchWindows, TRUE);
-            gDungeonMenu.unk1A = 0;
+            gDungeonMenu.currPageEntries = 0;
             gDungeonMenu.menuIndex = 0;
-            gDungeonMenu.unk1C = 0;
-            gDungeonMenu.unk1E = currTabId;
-            gDungeonMenu.unk20 = 2;
+            gDungeonMenu.entriesPerPage = 0;
+            gDungeonMenu.currPage = currTabId;
+            gDungeonMenu.pagesCount = 2;
             gDungeonMenu.unk4 = 0;
             gDungeonMenu.firstEntryY = 16;
             gDungeonMenu.unk14.x = 0;
-            gDungeonMenu.unk0 = 0;
-            sub_801317C(&gDungeonMenu.unk28);
+            gDungeonMenu.windowId = 0;
+            ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
             sScrollId = 0;
             sScrollFlags = 0;
             PrintAvailableMons(currTabData, currTabId);
-            gDungeonMenu.unkC = (gWindows[0].x + 16) * 8;
-            gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
+            gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 16) * 8;
+            gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
 
             while (1) {
                 s32 unkVar;
@@ -141,7 +141,7 @@ void ShowRecruitmentSearchMenu(void)
                     CreateScrollingArrow(FALSE, 0x70);
                 }
 
-                if ((gRealInputs.pressed & (DPAD_LEFT | DPAD_RIGHT)) || gDungeonMenu.unk28.dpad_left || gDungeonMenu.unk28.dpad_right) {
+                if ((gRealInputs.pressed & (DPAD_LEFT | DPAD_RIGHT)) || gDungeonMenu.touchScreen.dpad_left || gDungeonMenu.touchScreen.dpad_right) {
                     PlayDungeonCursorSE(FALSE);
                     currTabId = (currTabId == 0) ? 1 : 0;
                     break;
@@ -149,7 +149,7 @@ void ShowRecruitmentSearchMenu(void)
 
                 if (sub_80048C8())
                     continue;
-                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                     PlayDungeonCancelSE();
                     closeWindow = TRUE;
                     break;
@@ -294,16 +294,16 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
         spArray[i] = 0;
     }
 
-    for (id = 0; id < gDungeon->unk37E4; id++) {
+    for (id = 0; id < gDungeon->currFloorMonsterSpawnsCount; id++) {
         u8 byte = 1;
-        s32 val1 = gDungeon->unk343C[id].unk2[0];
-        s32 val2 = gDungeon->unk343C[id].unk2[1];
+        s32 val1 = gDungeon->monsterSpawns[id].randNum[0];
+        s32 val2 = gDungeon->monsterSpawns[id].randNum[1];
         if (val1 == 0) {
             if (val2 == 0)
                 continue;
             byte = 2;
         }
-        spArray[ExtractSpeciesIndex(&gDungeon->unk343C[id])] = byte;
+        spArray[ExtractSpeciesIndex(&gDungeon->monsterSpawns[id])] = byte;
     }
 
     if (gDungeon->unk644.unk2A) {

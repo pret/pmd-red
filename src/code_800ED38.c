@@ -1,7 +1,7 @@
 #include "global.h"
 #include "bg_control.h"
 #include "structs/axdata.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800E9E4.h"
 #include "code_800ED38.h"

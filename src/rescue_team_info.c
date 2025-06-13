@@ -1,6 +1,7 @@
 #include "global.h"
+#include "globaldata.h"
 #include "rescue_team_info.h"
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "text_util.h"
 #include "event_flag.h"
 
@@ -10,8 +11,16 @@ EWRAM_DATA struct RescueTeamData gRescueTeamInfo = {0};
 extern void BoundedCopyStringtoBuffer(u8 *buffer, u8 *string, s32 size);
 
 extern const u8 *gRescueTeamRanks[];
-extern s32 gRescueRankMaxPoints[MAX_TEAM_RANKS];
-extern u8 gTeamNamePlaceholder[0x8]; // Pokemon
+
+static const s32 sRescueRankMaxPoints[MAX_TEAM_RANKS] = {
+    [NORMAL_RANK] = 50,
+    [BRONZE_RANK] = 500,
+    [SILVER_RANK] = 1500,
+    [GOLD_RANK] = 3000,
+    [PLATINUM_RANK] = 7500,
+    [DIAMOND_RANK] = 15000,
+    [LUCARIO_RANK] = 100000000,
+};
 
 void LoadRescueTeamInfo(void)
 {
@@ -25,7 +34,7 @@ struct RescueTeamData *GetRescueTeamInfo(void)
 
 void InitializeRescueTeamInfo(void)
 {
-    BoundedCopyStringtoBuffer(gRescueTeamInfoRef->teamName, gTeamNamePlaceholder, TEAM_NAME_LENGTH);
+    BoundedCopyStringtoBuffer(gRescueTeamInfoRef->teamName, _("Pokémon"), TEAM_NAME_LENGTH);
     gRescueTeamInfoRef->teamRankPts = 0;
     gRescueTeamInfoRef->isTeamRenamed = FALSE;
 }
@@ -41,7 +50,7 @@ void sub_80920B8(u8 *buffer)
 
 void sub_80920D8(u8 *buffer)
 {
-    sub_80922B4(buffer, gRescueTeamInfoRef->teamName, TEAM_NAME_LENGTH);
+    StrncpyCustom(buffer, gRescueTeamInfoRef->teamName, TEAM_NAME_LENGTH);
 }
 
 void SetRescueTeamName(u8 *buffer)
@@ -68,7 +77,7 @@ s32 GetPtsToNextRank(void)
   }
   else
   {
-      return (gRescueRankMaxPoints[teamRank] - gRescueTeamInfoRef->teamRankPts);
+      return (sRescueRankMaxPoints[teamRank] - gRescueTeamInfoRef->teamRankPts);
   }
 }
 
@@ -91,7 +100,7 @@ u8 GetRescueTeamRank(void)
   s32 rank;
 
   for(rank = NORMAL_RANK; rank < MAX_TEAM_RANKS; rank++){
-    if (gRescueTeamInfoRef->teamRankPts < gRescueRankMaxPoints[rank]) {
+    if (gRescueTeamInfoRef->teamRankPts < sRescueRankMaxPoints[rank]) {
       return rank;
     }
   }

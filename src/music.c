@@ -586,14 +586,14 @@ void UpdateSound(void)
     else if (sBGMusicPlayerstate != BG_PLAYER_STATE_INITIALIZE) {
         switch (sBGMusicPlayerstate) {
             case BG_PLAYER_STATE_PLAYING:
-                if (sCurrentBGSong == STOP_BGM || IsMusicPlayerPlaying(INDEX_BGM)) // INDEX_BGM
+                if (sCurrentBGSong == STOP_BGM || IsMusicPlayerPlaying(INDEX_BGM))
                     sBGMusicPlayerstate = 2;
                 break;
             case 2:
             case 3:
                 if (sCurrentBGSong != STOP_BGM) {
                     if (IsMusicPlayerPlaying(INDEX_BGM))
-                        break; // INDEX_BGM
+                        break;
                 }
                 else
                     m4aMPlayStop(&gMPlayInfo_BGM);

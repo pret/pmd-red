@@ -77,7 +77,7 @@ _0803B0C8:
 	ldr r3, [r0, 0x34]
 	adds r1, r2, 0
 	movs r2, 0xA
-	bl sub_8013818
+	bl CreateMenuOnWindow
 	bl sub_803B204
 	bl sub_803B284
 	movs r0, 0x1
@@ -98,7 +98,7 @@ sub_803B100:
 	asrs r1, 16
 	ldr r0, _0803B11C
 	ldr r0, [r0]
-	bl sub_8013878
+	bl MoveMenuToEntryId
 	bl sub_803B204
 	bl sub_803B284
 	pop {r0}
@@ -129,7 +129,7 @@ _0803B140:
 _0803B144:
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl sub_80138B8
+	bl MenuCursorUpdate
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803B156
@@ -177,7 +177,7 @@ sub_803B18C:
 	ldr r0, [r5]
 	movs r1, 0xE5
 	strh r1, [r0, 0x22]
-	bl sub_8013984
+	bl MenuUpdatePagesData
 	bl sub_803B204
 	bl sub_803B284
 	cmp r4, 0
@@ -258,7 +258,7 @@ sub_803B204:
 	movs r1, 0x1A
 	ldrsh r0, [r0, r1]
 	movs r1, 0xC
-	bl sub_80095E4
+	bl CalcEntriesTotalHeight
 	adds r0, 0x2
 	lsls r0, 16
 	ldr r2, [r4]
@@ -327,7 +327,7 @@ sub_803B284:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r3, 0x2
-	bl sub_8012BC4
+	bl PrintNumOnWindow
 	movs r5, 0
 	ldr r0, [r6]
 	movs r1, 0x1A

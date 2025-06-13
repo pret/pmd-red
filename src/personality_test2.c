@@ -4,7 +4,7 @@
 #include "constants/emotions.h"
 #include "constants/input.h"
 #include "constants/type.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -33,23 +33,23 @@ void CreatePartnerSelectionMenu(s16 starterID)
 
     sub_803CEAC();
     gUnknown_203B404->StarterID = starterID_s32;
-    gUnknown_203B404->s18.s0.winId = 0;
-    gUnknown_203B404->s18.s0.unk38 = &gUnknown_203B404->s18.s0.windows.id[0];
+    gUnknown_203B404->s18.m.menuWinId = 0;
+    gUnknown_203B404->s18.m.menuWindow = &gUnknown_203B404->s18.m.windows.id[0];
 
-    gUnknown_203B404->s18.s0.windows.id[0] = gUnknown_80F4290;
-    gUnknown_203B404->s18.s0.windows.id[1] = gUnknown_80F42A8;
-    gUnknown_203B404->s18.s0.windows.id[2] = gUnknown_80F4278;
-    gUnknown_203B404->s18.s0.windows.id[3] = gUnknown_80F4278;
+    gUnknown_203B404->s18.m.windows.id[0] = gUnknown_80F4290;
+    gUnknown_203B404->s18.m.windows.id[1] = gUnknown_80F42A8;
+    gUnknown_203B404->s18.m.windows.id[2] = gUnknown_80F4278;
+    gUnknown_203B404->s18.m.windows.id[3] = gUnknown_80F4278;
 
-    gUnknown_203B404->s18.s0.unk38->header = &gUnknown_203B404->s18.header;
+    gUnknown_203B404->s18.m.menuWindow->header = &gUnknown_203B404->s18.header;
 
     gUnknown_203B404->s18.header.count = 1;
     gUnknown_203B404->s18.header.currId = 0;
     gUnknown_203B404->s18.header.width = 6;
     gUnknown_203B404->s18.header.f3 = 0;
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B404->s18.s0.windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B404->s18.s0.input, GetValidPartners(), 10, gUnknown_203B404->s18.s0.winId);
+    ShowWindows(&gUnknown_203B404->s18.m.windows, TRUE, TRUE);
+    CreateMenuOnWindow(&gUnknown_203B404->s18.m.input, GetValidPartners(), 10, gUnknown_203B404->s18.m.menuWinId);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
 }
@@ -58,18 +58,18 @@ u16 HandlePartnerSelectionInput(void)
 {
     s32 partnerID;
 
-    partnerID = gUnknown_203B404->s18.s0.input.menuIndex;
+    partnerID = gUnknown_203B404->s18.m.input.menuIndex;
     gUnknown_203B404->unk16 = 0;
 
-    if (GetKeyPress(&gUnknown_203B404->s18.s0.input) == INPUT_A_BUTTON) {
+    if (GetKeyPress(&gUnknown_203B404->s18.m.input) == INPUT_A_BUTTON) {
         PlayMenuSoundEffect(0);
-        return gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.s0.input.menuIndex];
+        return gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.m.input.menuIndex];
     }
 
-    if (sub_80138B8(&gUnknown_203B404->s18.s0.input, TRUE))
+    if (MenuCursorUpdate(&gUnknown_203B404->s18.m.input, TRUE))
         RedrawPartnerSelectionMenu();
 
-    if (partnerID != gUnknown_203B404->s18.s0.input.menuIndex)
+    if (partnerID != gUnknown_203B404->s18.m.input.menuIndex)
         PersonalityTest_DisplayPartnerSprite();
 
     if (gUnknown_203B404->unk16 != 0) {
@@ -80,20 +80,20 @@ u16 HandlePartnerSelectionInput(void)
 
 UNUSED static void sub_803CE34(bool8 cursorSprite)
 {
-    gUnknown_203B404->s18.s0.input.unk22 = GetValidPartners();
-    sub_8013984(&gUnknown_203B404->s18.s0.input);
+    gUnknown_203B404->s18.m.input.totalEntriesCount = GetValidPartners();
+    MenuUpdatePagesData(&gUnknown_203B404->s18.m.input);
     RedrawPartnerSelectionMenu();
     PersonalityTest_DisplayPartnerSprite();
 
     if (cursorSprite)
-        AddMenuCursorSprite(&gUnknown_203B404->s18.s0.input);
+        AddMenuCursorSprite(&gUnknown_203B404->s18.m.input);
 }
 
 void sub_803CE6C(void)
 {
-    gUnknown_203B404->s18.s0.windows.id[gUnknown_203B404->s18.s0.winId] = gUnknown_80F4278;
+    gUnknown_203B404->s18.m.windows.id[gUnknown_203B404->s18.m.menuWinId] = gUnknown_80F4278;
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B404->s18.s0.windows, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B404->s18.m.windows, TRUE, TRUE);
     sub_803CECC();
 }
 
@@ -122,20 +122,20 @@ static void RedrawPartnerSelectionMenu(void)
     const u8 *monName;
     s32 monCounter;
 
-    SUB_80095E4_CALL(gUnknown_203B404->s18.s0);
+    UPDATE_MENU_WINDOW_HEIGHT(gUnknown_203B404->s18.m);
 
-    CallPrepareTextbox_8008C54(gUnknown_203B404->s18.s0.winId);
-    sub_80073B8(gUnknown_203B404->s18.s0.winId);
-    PrintStringOnWindow(12, 0, gPartnerSelectionHeaderText, gUnknown_203B404->s18.s0.winId, 0);
+    CallPrepareTextbox_8008C54(gUnknown_203B404->s18.m.menuWinId);
+    sub_80073B8(gUnknown_203B404->s18.m.menuWinId);
+    PrintStringOnWindow(12, 0, gPartnerSelectionHeaderText, gUnknown_203B404->s18.m.menuWinId, 0);
 
     monCounter = 0;
-    while (monCounter < gUnknown_203B404->s18.s0.input.unk1A) {
-        yCoord = GetMenuEntryYCoord(&gUnknown_203B404->s18.s0.input, monCounter);
+    while (monCounter < gUnknown_203B404->s18.m.input.currPageEntries) {
+        yCoord = GetMenuEntryYCoord(&gUnknown_203B404->s18.m.input, monCounter);
         monName = GetMonSpecies(gUnknown_203B404->PartnerArray[monCounter]);
-        PrintStringOnWindow(8, yCoord, monName, gUnknown_203B404->s18.s0.winId, 0);
+        PrintStringOnWindow(8, yCoord, monName, gUnknown_203B404->s18.m.menuWinId, 0);
         monCounter++;
     }
-    sub_80073E0(gUnknown_203B404->s18.s0.winId);
+    sub_80073E0(gUnknown_203B404->s18.m.menuWinId);
     gUnknown_203B404->unk16 = 1;
 }
 
@@ -147,7 +147,7 @@ static void PersonalityTest_DisplayPartnerSprite(void)
     const u8 *gfx;
     s32 emotionId;
 
-    partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.s0.input.menuIndex];
+    partnerID = gUnknown_203B404->PartnerArray[gUnknown_203B404->s18.m.input.menuIndex];
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);
     faceFile = GetDialogueSpriteDataPtr(partnerID);

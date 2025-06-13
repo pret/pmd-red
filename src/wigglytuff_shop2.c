@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "common_strings.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
@@ -30,7 +30,7 @@ bool8 CreateWigglytuffShopFriendAreaMenu(u8 friendArea, bool8 a1, s32 a2)
     sWigglytuffShop2Work = MemoryAlloc(sizeof(WigglytuffShop2Work), 8);
     sWigglytuffShop2Work->friendArea = friendArea;
     sWigglytuffShop2Work->unkD = a1;
-    sub_801317C(&sWigglytuffShop2Work->unk0);
+    ResetTouchScreenMenuInput(&sWigglytuffShop2Work->unk0);
     sub_8021A60();
     sWigglytuffShop2Work->unk74 = a2;
     sWigglytuffShop2Work->unk78 = &sWigglytuffShop2Work->unk7C.id[a2];

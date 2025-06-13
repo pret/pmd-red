@@ -4,7 +4,7 @@
 #include "constants/monster.h"
 #include "constants/wonder_mail.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "friend_list.h"
@@ -956,7 +956,7 @@ void sub_8032828(void)
             break;
         case 0x7:
             gUnknown_203B33C->status = 0;
-            sub_8011830();
+            StopBGMResetSoundEffectCounters();
             gUnknown_203B33C->status = sub_8037B28(gUnknown_203B33C->unk40);
             if (gUnknown_203B33C->status == 0) {
                 switch (gUnknown_203B33C->unk40) {
@@ -1010,7 +1010,7 @@ void sub_8032828(void)
                     }
                 }
             }
-            xxx_call_start_bg_music();
+            StartBGMusic();
             break;
         case 0x10:
             CreateDialogueBoxAndPortrait(&gUnknown_80E2F14[0], 0, 0, 0x101);
@@ -1097,7 +1097,7 @@ void sub_8032828(void)
             break;
         case 0x6A:
             gUnknown_203B33C->status = 0;
-            sub_8011830();
+            StopBGMResetSoundEffectCounters();
             gUnknown_203B33C->status = sub_8037B28(gUnknown_203B33C->unk40);
             if (gUnknown_203B33C->status == 0) {
                 switch (gUnknown_203B33C->unk40) {
@@ -1125,7 +1125,7 @@ void sub_8032828(void)
                         break;
                 }
             }
-            xxx_call_start_bg_music();
+            StartBGMusic();
             break;
         case 0x72:
             CreateDialogueBoxAndPortrait(gUnknown_80E311C, 0, 0, 0x101);
@@ -1212,7 +1212,7 @@ void sub_8032828(void)
             CreateMenuDialogueBoxAndPortrait(&gUnknown_80E2D7C[0], 0, 6, gUnknown_80E2290, NULL, 4, 0, NULL, 0x101);
             break;
         case 0x59:
-            sub_80922B4(buffer, GetPlayerPokemonStruct()->name, POKEMON_NAME_LENGTH);
+            StrncpyCustom(buffer, GetPlayerPokemonStruct()->name, POKEMON_NAME_LENGTH);
             sprintfStatic(gUnknown_203B33C->unk424, gUnknown_80E32C4, buffer);
             CreateDialogueBoxAndPortrait(gUnknown_203B33C->unk424, 0, 0, 0x101);
             break;

@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/dungeon.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
 #include "code_801EE10_mid.h"
@@ -780,10 +780,10 @@ void sub_8026E08(u32 r0)
 
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
-    sub_80922B4(gFormatBuffer_Monsters[0], sUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
+    StrncpyCustom(gFormatBuffer_Monsters[0], sUnknown_203B2B8->pokeStruct->name, POKEMON_NAME_LENGTH);
     sub_808D930(buffer, sUnknown_203B2B8->pokeStruct->speciesNum);
     sprintfStatic(buffer1, sUnknown_80DD6E0, gFormatBuffer_Monsters[0]);
-    x = sub_8008ED0(buffer1);
+    x = GetStringLineWidth(buffer1);
     PrintStringOnWindow(((sUnknown_80DD370.width << 3) - x) / 2, 3, buffer1, r0, 0);
     sub_80073E0(r0);
 }

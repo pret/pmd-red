@@ -9,7 +9,7 @@
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800DAC0.h"
 #include "code_800E9A8.h"
 #include "code_800E9E4.h"
@@ -22,7 +22,7 @@
 #include "code_8099360.h"
 #include "cpu.h"
 #include "dungeon_8083AB0.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_ai.h"
 #include "dungeon_config.h"
 #include "dungeon_engine.h"
@@ -35,6 +35,8 @@
 #include "dungeon_message_log.h"
 #include "dungeon_misc.h"
 #include "dungeon_music.h"
+#include "dungeon_name_banner.h"
+#include "dungeon_spawns.h"
 #include "dungeon_pokemon_sprites.h"
 #include "dungeon_random.h"
 #include "dungeon_strings.h"
@@ -52,7 +54,7 @@
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
-EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
+static EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
 
 extern u8 gUnknown_203B40C;
 
@@ -62,7 +64,6 @@ extern s16 GetTurnLimit(u8 dungeon);
 extern void sub_8041888(u8 param_1);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
-extern void sub_8043CD8(void);
 extern void sub_803E830(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
@@ -93,11 +94,10 @@ extern void sub_807E7FC(u8);
 extern bool8 IsLevelResetTo1(u8 dungeon);
 extern void sub_8068A84(PokemonStruct1 *pokemon);
 extern void sub_807EAA0(u32, u32);
-extern void sub_803D4D0(void);
+extern void SetFloorItemMonsterSpawns(void);
 extern void sub_80842F0(void);
 extern void sub_80427AC(void);
 extern void sub_806AA70(void);
-extern void sub_803D8F0(void);
 extern void sub_806AD3C(void);
 extern void sub_806C42C(void);
 extern void sub_806B678(void);
@@ -128,14 +128,14 @@ extern Entity *gLeaderPointer;
 void EnforceMaxItemsAndMoney(void);
 static void sub_8043FD0(void);
 void sub_806B404(void);
-u8 GetFloorType(void);
-u8 GetFloorType(void);
 
 extern OpenedFile *gDungeonNameBannerPalette;
 
 // These functions are not part of dungeon's overlay5 and connect, in a way, overworld with dungeon.
 
 static const s16 sDeoxysForms[4] = {MONSTER_DEOXYS_NORMAL, MONSTER_DEOXYS_ATTACK, MONSTER_DEOXYS_DEFENSE, MONSTER_DEOXYS_SPEED};
+
+static void sub_8043CD8(void);
 
 // This functions is the main 'loop' when the player is in a Dungeon. It runs from the moment the player enters a dungeon, until they leave(by completing or by fainting).
 // arm9.bin::0206A848
@@ -291,7 +291,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             gDungeon->unk644.unk24 = 10;
             InitDungeonRNG(gDungeon->unk644.unk3C);
         }
-        gDungeon->unk37EC = 0;
+        gDungeon->monsterSpawnsPopulated = FALSE;
         if (!r6) {
             s32 rnd;
 
@@ -303,7 +303,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             gDungeon->unk37FF = 0;
             gDungeon->unk644.unk31 = 0;
         }
-        sub_803D4D0();
+        SetFloorItemMonsterSpawns();
         gDungeon->unk1 = 0;
         gDungeon->unk10 = 0;
         gDungeon->unk2 = 0;
@@ -346,7 +346,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             sub_807E5E4(0);
             sub_80842F0();
         }
-        sub_803D8F0();
+        SetCurrentMonsterSpawns();
         LoadDungeonPokemonSprites();
         if (!r6) {
             sub_80687AC();
@@ -713,9 +713,9 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
     nullsub_16();
 }
 
-void sub_8043CD8(void)
+static void sub_8043CD8(void)
 {
-    vram_related_8009804();
+    ResetVramPalOAM();
 }
 
 bool8 sub_8043CE4(s32 dungeonId)

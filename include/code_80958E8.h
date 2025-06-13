@@ -3,7 +3,7 @@
 
 #include "constants/mailbox.h"
 #include "structs/str_wonder_mail.h"
-#include "code_8092334.h"
+#include "data_serializer.h"
 
 // size: 0xC
 typedef struct subStruct_203B490

@@ -686,7 +686,7 @@ extern const u8 *const gUnknown_80FE674;
 extern const u8 *const gUnknown_80FE690;
 extern const u8 *const gUnknown_80FE6B4;
 extern const u8 *const gUnknown_80FE6D4;
-extern const u8 *const gUnknown_80FE6E8;
+extern const u8 *const gText_TheLastOuting;
 extern const u8 *const gUnknown_80FE6F4;
 extern const u8 *const gUnknown_80FE708;
 extern const u8 *const gUnknown_80FE70C;
