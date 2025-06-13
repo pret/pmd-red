@@ -34,8 +34,8 @@ void sub_8009388(void);
 void sub_8009408(s32 from, s32 to);
 void sub_8009524(s32 windowId);
 void sub_80095CC(s32 a0, s32 a1);
-s32 sub_80095E4(s32 a0, s32 a1);
-s32 sub_8009614(s32 a0, s32 a1);
+s32 CalcEntriesTotalHeight(s32 entriesCount, s32 entryHeight);
+s32 CalcTwoLinesEntriesTotalHeight(s32 entriesCount, s32 entryHeight);
 const u8 *xxx_handle_format_global(const u8 *str, UnkDrawStringStruct *unkStrPtr);
 
 #endif // GUARD_TEXT_3_H

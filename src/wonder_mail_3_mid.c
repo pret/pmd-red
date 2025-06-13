@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "structs/str_802C39C.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_3.h"
 #include "code_802DE84.h"
 #include "code_803B050.h"
 #include "common_strings.h"

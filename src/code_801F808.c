@@ -12,7 +12,7 @@
 #include "text_1.h"
 #include "text_2.h"
 
-// TODO: UNIFY WITH struct_Sub80095E4
+// TODO: UNIFY WITH MenuWindow
 struct unkStruct_203B278
 {
     /* 0x0 */ s32 state;

@@ -98,7 +98,7 @@ sub_803B100:
 	asrs r1, 16
 	ldr r0, _0803B11C
 	ldr r0, [r0]
-	bl sub_8013878
+	bl MoveMenuToEntryId
 	bl sub_803B204
 	bl sub_803B284
 	pop {r0}
@@ -258,7 +258,7 @@ sub_803B204:
 	movs r1, 0x1A
 	ldrsh r0, [r0, r1]
 	movs r1, 0xC
-	bl sub_80095E4
+	bl CalcEntriesTotalHeight
 	adds r0, 0x2
 	lsls r0, 16
 	ldr r2, [r4]

@@ -1,16 +1,16 @@
 #include "global.h"
 #include "globaldata.h"
-#include "structs/axdata.h"
-#include "structs/struct_sub80095e4.h"
+#include "menu_input.h"
+#include "text_3.h"
 #include "code_800D090.h"
 #include "music_util.h"
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "input.h"
-#include "menu_input.h"
 #include "sprite.h"
 #include "string_format.h"
 #include "text_2.h"
+#include "text_1.h"
 #include "text_util.h"
 #include "util.h"
 
@@ -230,12 +230,12 @@ void sub_8012CAC(WindowTemplate *a0, const MenuItem *a1)
     sub_8012D08(a0, count);
 }
 
-void sub_8012D08(WindowTemplate *winTemplate, s32 param_2)
+void sub_8012D08(WindowTemplate *winTemplate, s32 entriesCount)
 {
     s32 sVar2;
     s16 sVar3;
 
-    sVar2 = (s16) sub_80095E4(param_2, 12);
+    sVar2 = (s16) CalcEntriesTotalHeight(entriesCount, DEFAULT_MENU_ENTRY_HEIGHT);
     if (winTemplate->type == WINDOW_TYPE_WITH_HEADER)
         sVar2 = (s16)(sVar2 + 2);
 
@@ -244,19 +244,18 @@ void sub_8012D08(WindowTemplate *winTemplate, s32 param_2)
     winTemplate->unk10 = sVar3;
 }
 
-void sub_8012D34(WindowTemplate *winTemplate, s32 param_2)
+void sub_8012D34(WindowTemplate *winTemplate, s32 entriesCount)
 {
     s32 sVar2;
     s16 sVar3;
 
-    sVar2 = (s16) sub_8009614(param_2, 24);
+    sVar2 = (s16) CalcTwoLinesEntriesTotalHeight(entriesCount, TWO_LINES_MENU_ENTRY_HEIGHT);
     if (winTemplate->type == WINDOW_TYPE_WITH_HEADER)
         sVar2 = (s16)(sVar2 + 2);
 
     sVar3 = sVar2;
     winTemplate->height = sVar3;
     winTemplate->unk10 = sVar3;
-
 }
 
 // arm9.bin::0201C26C
@@ -794,62 +793,57 @@ void sub_80137B0(MenuInputStruct *menuInput, s32 param_2)
         iVar2 = (gWindows[menuInput->windowId].height * 8 - iVar1) << 8;
     }
 
-    menuInput->unk10 = iVar2 / menuInput->entriesPerPage;
+    menuInput->entryHeight = iVar2 / menuInput->entriesPerPage;
 }
 
-void sub_80137F8(MenuInputStruct *menuInput, u32 param_2)
+static void SetEntryHeight(MenuInputStruct *menuInput, s32 height)
 {
-    menuInput->unk10 = param_2 << 8;
+    menuInput->entryHeight = height * 256;
 }
 
 // arm9.bin::0201AF70
 s32 GetMenuEntryYCoord(MenuInputStruct *menuInput, s32 entryId)
 {
     s32 firstY = menuInput->firstEntryY;
-    s32 iVar1 = entryId * menuInput->unk10;
+    s32 height = entryId * menuInput->entryHeight;
 
-    return firstY + (iVar1 / 256);
+    return firstY + (height / 256);
+}
+
+static inline void CreateMenuOnWindowInternal(MenuInputStruct *menuInput, s32 totalCount, u32 perPageCount, s32 windowId, s32 entryHeight)
+{
+    menuInput->windowId = windowId;
+    menuInput->totalEntriesCount = totalCount;
+    menuInput->entriesPerPage = perPageCount;
+    menuInput->unk14.x = 0;
+    menuInput->unk24 = 0;
+    menuInput->menuIndex = 0;
+    menuInput->currPage = 0;
+
+    ResetTouchScreenMenuInput(&menuInput->touchScreen);
+    MenuUpdatePagesData(menuInput);
+    SetEntryHeight(menuInput, entryHeight);
 }
 
 void CreateMenuOnWindow(MenuInputStruct *menuInput, s32 totalCount, u32 perPageCount, s32 windowId)
 {
-    menuInput->windowId = windowId;
-    menuInput->totalEntriesCount = totalCount;
-    menuInput->entriesPerPage = perPageCount;
-    menuInput->unk14.x = 0;
-    menuInput->unk24 = 0;
-    menuInput->menuIndex = 0;
-    menuInput->currPage = 0;
-
-    ResetTouchScreenMenuInput(&menuInput->touchScreen);
-    MenuUpdatePagesData(menuInput);
-    sub_80137F8(menuInput, 12);
+    CreateMenuOnWindowInternal(menuInput, totalCount, perPageCount, windowId, DEFAULT_MENU_ENTRY_HEIGHT);
 }
 
-void CreateMenuOnWindow2(MenuInputStruct *menuInput, s32 totalCount, u32 perPageCount, s32 windowId)
+void CreateMenuOnWindowTwoLinesEntry(MenuInputStruct *menuInput, s32 totalCount, u32 perPageCount, s32 windowId)
 {
-    menuInput->windowId = windowId;
-    menuInput->totalEntriesCount = totalCount;
-    menuInput->entriesPerPage = perPageCount;
-    menuInput->unk14.x = 0;
-    menuInput->unk24 = 0;
-    menuInput->menuIndex = 0;
-    menuInput->currPage = 0;
-
-    ResetTouchScreenMenuInput(&menuInput->touchScreen);
-    MenuUpdatePagesData(menuInput);
-    sub_80137F8(menuInput, 24);
+    CreateMenuOnWindowInternal(menuInput, totalCount, perPageCount, windowId, TWO_LINES_MENU_ENTRY_HEIGHT);
 }
 
-void sub_8013878(MenuInputStruct *menuInput, s32 param_2)
+void MoveMenuToEntryId(MenuInputStruct *menuInput, s32 entryId)
 {
-    if (param_2 < 0)
-        param_2 = 0;
-    else if (param_2 >= menuInput->totalEntriesCount)
-        param_2 = menuInput->totalEntriesCount - 1;
+    if (entryId < 0)
+        entryId = 0;
+    else if (entryId >= menuInput->totalEntriesCount)
+        entryId = menuInput->totalEntriesCount - 1;
 
-    menuInput->currPage = param_2 / menuInput->entriesPerPage;
-    menuInput->menuIndex = param_2 % menuInput->entriesPerPage;
+    menuInput->currPage = entryId / menuInput->entriesPerPage;
+    menuInput->menuIndex = entryId % menuInput->entriesPerPage;
     menuInput->unk24 = 0;
     MenuUpdatePagesData(menuInput);
 }
@@ -1191,6 +1185,6 @@ void sub_80140B4(WindowTemplates *a0)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_WINDOWS; i++)
         a0->id[i] = gUnknown_80D47C8[i];
 }

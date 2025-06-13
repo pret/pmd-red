@@ -101,22 +101,22 @@ bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10)
         sFriendList->unk354 = 0;
     }
 
-    sFriendList->unk358.s0.winId = windowId;
-    sFriendList->unk358.s0.unk38 = &sFriendList->unk358.s0.windows.id[windowId];
-    RestoreSavedWindows(&sFriendList->unk358.s0.windows);
-    sFriendList->unk358.s0.windows.id[sFriendList->unk358.s0.winId] = sUnknown_80DC968;
-    sFriendList->unk358.s0.unk38->header = &sFriendList->unk358.header;
+    sFriendList->unk358.m.menuWinId = windowId;
+    sFriendList->unk358.m.menuWindow = &sFriendList->unk358.m.windows.id[windowId];
+    RestoreSavedWindows(&sFriendList->unk358.m.windows);
+    sFriendList->unk358.m.windows.id[sFriendList->unk358.m.menuWinId] = sUnknown_80DC968;
+    sFriendList->unk358.m.menuWindow->header = &sFriendList->unk358.header;
     if (pos != NULL) {
-        sFriendList->unk358.s0.windows.id[sFriendList->unk358.s0.winId].pos = *pos;
+        sFriendList->unk358.m.windows.id[sFriendList->unk358.m.menuWinId].pos = *pos;
     }
-    sub_8012D08(sFriendList->unk358.s0.unk38, r10);
+    sub_8012D08(sFriendList->unk358.m.menuWindow, r10);
     ResetUnusedInputStruct();
-    ShowWindows(&sFriendList->unk358.s0.windows, TRUE, TRUE);
-    CreateMenuOnWindow(&sFriendList->unk358.s0.input, sub_8023F8C(), r10, windowId);
+    ShowWindows(&sFriendList->unk358.m.windows, TRUE, TRUE);
+    CreateMenuOnWindow(&sFriendList->unk358.m.input, sub_8023F8C(), r10, windowId);
     if (gUnknown_203B2A0 == sFriendList->unk0) {
-        sFriendList->unk358.s0.input.menuIndex = gUnknown_203B2A8;
-        sFriendList->unk358.s0.input.currPage = gUnknown_203B2AA;
-        MenuUpdatePagesData(&sFriendList->unk358.s0.input);
+        sFriendList->unk358.m.input.menuIndex = gUnknown_203B2A8;
+        sFriendList->unk358.m.input.currPage = gUnknown_203B2AA;
+        MenuUpdatePagesData(&sFriendList->unk358.m.input);
     }
     SetUpWindowHeader();
     FriendList_ShowWindow();
@@ -126,11 +126,11 @@ bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10)
 u32 FriendList_HandleInput(bool8 a0)
 {
     if (!a0) {
-        sub_8013660(&sFriendList->unk358.s0.input);
+        sub_8013660(&sFriendList->unk358.m.input);
         return 0;
     }
 
-    switch (GetKeyPress(&sFriendList->unk358.s0.input)) {
+    switch (GetKeyPress(&sFriendList->unk358.m.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
@@ -148,7 +148,7 @@ u32 FriendList_HandleInput(bool8 a0)
             FriendList_ShowWindow();
             return 1;
         default:
-            if (MenuCursorUpdate(&sFriendList->unk358.s0.input, TRUE)) {
+            if (MenuCursorUpdate(&sFriendList->unk358.m.input, TRUE)) {
                 SetUpWindowHeader();
                 FriendList_ShowWindow();
                 return 1;
@@ -159,19 +159,19 @@ u32 FriendList_HandleInput(bool8 a0)
 
 s32 FriendList_GetCurrId(void)
 {
-    return sFriendList->unk1A[GET_CURRENT_MENU_ENTRY(sFriendList->unk358.s0.input)];
+    return sFriendList->unk1A[GET_CURRENT_MENU_ENTRY(sFriendList->unk358.m.input)];
 }
 
 void sub_8023B7C(bool8 addCursor)
 {
     ResetUnusedInputStruct();
-    ShowWindows(&sFriendList->unk358.s0.windows, FALSE, FALSE);
-    sFriendList->unk358.s0.input.totalEntriesCount = sub_8023BD8();
-    MenuUpdatePagesData(&sFriendList->unk358.s0.input);
+    ShowWindows(&sFriendList->unk358.m.windows, FALSE, FALSE);
+    sFriendList->unk358.m.input.totalEntriesCount = sub_8023BD8();
+    MenuUpdatePagesData(&sFriendList->unk358.m.input);
     SetUpWindowHeader();
     FriendList_ShowWindow();
     if (addCursor) {
-        AddMenuCursorSprite(&sFriendList->unk358.s0.input);
+        AddMenuCursorSprite(&sFriendList->unk358.m.input);
     }
 }
 
@@ -197,11 +197,11 @@ void FriendList_Free(void)
     if (sFriendList != NULL) {
         gUnknown_203B2A0 = sFriendList->unk0;
         gUnknown_203B2A4 = sFriendList->sortMethod;
-        gUnknown_203B2A8 = sFriendList->unk358.s0.input.menuIndex;
-        gUnknown_203B2AA = sFriendList->unk358.s0.input.currPage;
-        sFriendList->unk358.s0.windows.id[sFriendList->unk358.s0.winId] = sDummyWinTemplate;
+        gUnknown_203B2A8 = sFriendList->unk358.m.input.menuIndex;
+        gUnknown_203B2AA = sFriendList->unk358.m.input.currPage;
+        sFriendList->unk358.m.windows.id[sFriendList->unk358.m.menuWinId] = sDummyWinTemplate;
         ResetUnusedInputStruct();
-        ShowWindows(&sFriendList->unk358.s0.windows, TRUE, TRUE);
+        ShowWindows(&sFriendList->unk358.m.windows, TRUE, TRUE);
         MemoryFree(sFriendList);
         sFriendList = NULL;
     }
@@ -229,7 +229,7 @@ static void SetUpWindowHeader(void)
             break;
     }
 
-    SUB_80095E4_CALL_2(sFriendList->unk358.s0);
+    UPDATE_MENU_WINDOW_HEIGHT_2(sFriendList->unk358.m);
 }
 
 void FriendList_ShowWindow(void)
@@ -239,27 +239,27 @@ void FriendList_ShowWindow(void)
     u8 nameTxtBuff[POKEMON_NAME_LENGTH * 2];
     u8 txtBuff3[20];
 
-    CallPrepareTextbox_8008C54(sFriendList->unk358.s0.winId);
-    sub_80073B8(sFriendList->unk358.s0.winId);
+    CallPrepareTextbox_8008C54(sFriendList->unk358.m.menuWinId);
+    sub_80073B8(sFriendList->unk358.m.menuWinId);
     switch (sFriendList->unk0) {
         case 2:
             sub_80920D8(winTxtBuff);
-            PrintStringOnWindow(10, 0, winTxtBuff, sFriendList->unk358.s0.winId, '\0');
+            PrintStringOnWindow(10, 0, winTxtBuff, sFriendList->unk358.m.menuWinId, '\0');
             break;
         case 4:
-            PrintStringOnWindow(10, 0, "Friends", sFriendList->unk358.s0.winId, '\0');
+            PrintStringOnWindow(10, 0, "Friends", sFriendList->unk358.m.menuWinId, '\0');
             x = (sFriendList->unk358.header.width * 8) + 4;
-            sub_8012BC4(x, 0, sFriendList->unk358.s0.input.currPage + 1, 2, 7, sFriendList->unk358.s0.winId);
+            sub_8012BC4(x, 0, sFriendList->unk358.m.input.currPage + 1, 2, 7, sFriendList->unk358.m.menuWinId);
             break;
         default:
-            PrintStringOnWindow(10, 0, _("Pokémon Friends"), sFriendList->unk358.s0.winId, '\0');
+            PrintStringOnWindow(10, 0, _("Pokémon Friends"), sFriendList->unk358.m.menuWinId, '\0');
             x = (sFriendList->unk358.header.width * 8) + 4;
-            sub_8012BC4(x, 0, sFriendList->unk358.s0.input.currPage + 1, 2, 7, sFriendList->unk358.s0.winId);
+            sub_8012BC4(x, 0, sFriendList->unk358.m.input.currPage + 1, 2, 7, sFriendList->unk358.m.menuWinId);
             break;
     }
 
-    for (i = 0; i < sFriendList->unk358.s0.input.currPageEntries; i++) {
-        s32 id = sFriendList->unk1A[(sFriendList->unk358.s0.input.currPage * sFriendList->unk358.s0.input.entriesPerPage) + i];
+    for (i = 0; i < sFriendList->unk358.m.input.currPageEntries; i++) {
+        s32 id = sFriendList->unk1A[(sFriendList->unk358.m.input.currPage * sFriendList->unk358.m.input.entriesPerPage) + i];
         PokemonStruct1 *pokePtr = &gRecruitedPokemonRef->pokemon[id];
         u8 color = 7;
 
@@ -294,9 +294,9 @@ void FriendList_ShowWindow(void)
         StrncpyCustom(nameTxtBuff, pokePtr->name, POKEMON_NAME_LENGTH);
         sub_808D930(txtBuff3, pokePtr->speciesNum);
         sprintfStatic(winTxtBuff, _("{color}%c%s{reset}"), color, nameTxtBuff);
-        PrintStringOnWindow(8, GetMenuEntryYCoord(&sFriendList->unk358.s0.input, i), winTxtBuff, sFriendList->unk358.s0.winId, '\0');
+        PrintStringOnWindow(8, GetMenuEntryYCoord(&sFriendList->unk358.m.input, i), winTxtBuff, sFriendList->unk358.m.menuWinId, '\0');
     }
-    sub_80073E0(sFriendList->unk358.s0.winId);
+    sub_80073E0(sFriendList->unk358.m.menuWinId);
 }
 
 static s32 sub_8023F8C(void)
@@ -468,7 +468,7 @@ UNUSED static PokemonStruct1 *sub_80243E8(void)
 {
     u8 buffer[40];
     u8 nameBuffer[20];
-    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[sFriendList->unk1A[GET_CURRENT_MENU_ENTRY(sFriendList->unk358.s0.input)]];
+    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[sFriendList->unk1A[GET_CURRENT_MENU_ENTRY(sFriendList->unk358.m.input)]];
 
     StrncpyCustom(nameBuffer, pokeStruct->name, POKEMON_NAME_LENGTH);
     sprintfStatic(buffer, "%s", nameBuffer);

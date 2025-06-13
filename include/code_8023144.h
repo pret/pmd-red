@@ -3,7 +3,7 @@
 
 #include "structs/menu.h"
 #include "structs/str_text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_3.h"
 
 // size: 0x3FC
 typedef struct unkStruct_3001B5C
@@ -14,7 +14,7 @@ typedef struct unkStruct_3001B5C
     s16 unkC[420];
     u8 unk354;
     u8 fill355[0x35C - 0x355];
-    /* 0x35C */ struct_Sub80095E4_2 s35C;
+    /* 0x35C */ MenuHeaderWindow s35C;
 } unkStruct_3001B5C;
 
 bool8 sub_8023144(s32, s32 index, DungeonPos *sub, u32);

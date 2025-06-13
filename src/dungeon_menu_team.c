@@ -4,7 +4,8 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_1.h"
+#include "text_3.h"
 #include "code_800D090.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"
@@ -306,12 +307,12 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
 
 static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemplates *windows, bool8 a2)
 {
-    s32 r0;
+    s32 height;
     DungeonPos pos;
     s32 i;
 
     s32 count = 0;
-    bool8 r10 = (windows->id[0].type == WINDOW_TYPE_WITH_HEADER);
+    bool8 withHeader = (windows->id[0].type == WINDOW_TYPE_WITH_HEADER);
 
     sub_8069D18(&pos, GetLeader());
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
@@ -349,18 +350,18 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
     gDungeonMenu.currPage = 0;
     gDungeonMenu.pagesCount = 0;
     gDungeonMenu.unk4 = 0;
-    gDungeonMenu.firstEntryY = (r10 != FALSE) * 16;
+    gDungeonMenu.firstEntryY = (withHeader != FALSE) * 16;
     gDungeonMenu.leftRightArrowsPos.x = 0;
     gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
-    r0 = sub_80095E4(count, 0);
-    if (r10) {
-        r0 += 2;
+    height = CalcEntriesTotalHeight(count, 0);
+    if (withHeader) {
+        height += 2;
     }
-    windows->id[0].unk10 = r0;
-    windows->id[0].height = r0;
+    windows->id[0].unk10 = height;
+    windows->id[0].height = height;
     sTeamWindowHeader.width = 8;
     if (a2) {
         windows->id[1] = windows->id[3];
@@ -369,7 +370,7 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
     DungeonShowWindows(windows, 1);
     sub_80137B0(&gDungeonMenu, 0);
     sub_80073B8(0);
-    if (r10) {
+    if (withHeader) {
         PrintFormattedStringOnWindow(0xC, 0, _("$t"), 0, 0);
     }
 

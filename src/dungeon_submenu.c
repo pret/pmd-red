@@ -52,7 +52,7 @@ void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
 
     windows.id[1].pos.x = subWindowX;
     windows.id[1].width = 28 - subWindowX;
-    windows.id[1].height = windows.id[1].unk10 = sub_80095E4(gDungeonMenu.entriesPerPage, 0);
+    windows.id[1].height = windows.id[1].unk10 = CalcEntriesTotalHeight(gDungeonMenu.entriesPerPage, 0);
     DungeonShowWindows(&windows, FALSE);
     sub_80137B0(&gDungeonMenu, windows.id[1].height * 8);
     sub_80073B8(1);

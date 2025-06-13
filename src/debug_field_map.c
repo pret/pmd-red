@@ -55,7 +55,7 @@ UNUSED static void DebugMapViewer(void)
         PixelPos boundary;
 
         if (DebugFieldMapWindow_Init()) {
-            sub_801DA58(mapId);
+            DebugFieldMapWindow_MoveMenuTo(mapId);
             while (1) {
                 sub_8005838(NULL, 0);
                 sub_8012A18(0);

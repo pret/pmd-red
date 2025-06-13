@@ -338,7 +338,7 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
     menuInput->cursorArrowPos.x = 8;
     menuInput->cursorArrowPos.y = 8;
     ResetTouchScreenMenuInput(&menuInput->touchScreen);
-    var = sub_80095E4(menuInput->entriesPerPage, 0);
+    var = CalcEntriesTotalHeight(menuInput->entriesPerPage, 0);
     windows.id[0].unk10 = windows.id[0].height = var + 2;
     sub_80137B0(menuInput, var * 8);
 

@@ -487,32 +487,30 @@ UNUSED static void nullsub_174(void)
 #endif
 
 // arm9.bin::02003278
-s32 sub_80095E4(s32 a0, s32 a1)
+s32 CalcEntriesTotalHeight(s32 entriesCount, s32 entryHeight)
 {
-    s32 r1;
+    s32 totalHeight;
 
-    if (a1 == 0)
-        a1 = 10;
-    r1 = a0 * a1;
+    if (entryHeight == 0)
+        entryHeight = 10;
+    totalHeight = entriesCount * entryHeight;
 
-    if ((r1 % 8) != 0)
-        return (r1 / 8) + 1;
+    if ((totalHeight % 8) != 0)
+        return (totalHeight / 8) + 1;
     else
-        return r1 / 8;
+        return totalHeight / 8;
 }
 
 // arm9.bin::02003238
-// Same as sub_80095E4 except it doesn't check for a1 == 0
-s32 sub_8009614(s32 a0, s32 a1)
+// Same as CalcEntriesTotalHeight except it doesn't check for entryHeight == 0. Only called for menu windows which use TWO_LINES_MENU_ENTRY_HEIGHT
+s32 CalcTwoLinesEntriesTotalHeight(s32 entriesCount, s32 entryHeight)
 {
-    s32 r1;
+    s32 totalHeight = entriesCount * entryHeight;
 
-    r1 = a0 * a1;
-
-    if ((r1 % 8) != 0)
-        return (r1 / 8) + 1;
+    if ((totalHeight % 8) != 0)
+        return (totalHeight / 8) + 1;
     else
-        return r1 / 8;
+        return totalHeight / 8;
 }
 
 // arm9.bin::02003158

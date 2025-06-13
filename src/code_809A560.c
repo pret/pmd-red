@@ -28,6 +28,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
+#include "text_3.h"
 #include "wigglytuff_shop1.h"
 #include "wigglytuff_shop3.h"
 #include "wonder_mail.h"

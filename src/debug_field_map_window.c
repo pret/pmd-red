@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "debug_field_map_window.h"
 #include "constants/input.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_3.h"
 #include "music_util.h"
 #include "ground_main.h"
 #include "input.h"
@@ -12,61 +12,62 @@
 #include "text_2.h"
 #include "structs/str_81188F0.h"
 
-EWRAM_INIT static struct struct_Sub80095E4_2 *sDebugWindow = {NULL};
+EWRAM_INIT static struct MenuHeaderWindow *sDebugWindow = {NULL};
 
 static const WindowTemplate sDummyWinTemplate = WIN_TEMPLATE_DUMMY;
 
-static const WindowTemplate sUnknown_80DBF88 = {
-    0,
-    6,
-    2, 2,
-    24, 17,
-    17, 0,
-    NULL
+static const WindowTemplate sDebugWindowTemplate = {
+    .unk0 = 0,
+    .type = WINDOW_TYPE_WITH_HEADER,
+    .pos = {2, 2},
+    .width = 24,
+    .height = 17,
+    .unk10 = 17,
+    .unk12 = 0,
+    .header = NULL,
 };
 
-static void sub_801DB54(void);
-static void sub_801DBD4(void);
+static void ShowWindowsWithHeader(void);
+static void PrintCurrentPageText(void);
 
 #define WINDOW_ID_DEBUG 3
 
 bool8 DebugFieldMapWindow_Init(void)
 {
     sDebugWindow = MemoryAlloc(sizeof(*sDebugWindow), 8);
-    sDebugWindow->s0.winId = WINDOW_ID_DEBUG;
-    sDebugWindow->s0.unk38 = &sDebugWindow->s0.windows.id[WINDOW_ID_DEBUG];
-    RestoreSavedWindows(&sDebugWindow->s0.windows);
-    sDebugWindow->s0.windows.id[sDebugWindow->s0.winId] = sUnknown_80DBF88;
-    sDebugWindow->s0.unk38->header = &sDebugWindow->header;
+    sDebugWindow->m.menuWinId = WINDOW_ID_DEBUG;
+    sDebugWindow->m.menuWindow = &sDebugWindow->m.windows.id[WINDOW_ID_DEBUG];
+    RestoreSavedWindows(&sDebugWindow->m.windows);
+    sDebugWindow->m.windows.id[sDebugWindow->m.menuWinId] = sDebugWindowTemplate;
+    sDebugWindow->m.menuWindow->header = &sDebugWindow->header;
     ResetUnusedInputStruct();
-    ShowWindows(&sDebugWindow->s0.windows, TRUE, TRUE);
-    CreateMenuOnWindow(&sDebugWindow->s0.input, 229, 10, sDebugWindow->s0.winId);
-    sub_801DB54();
-    sub_801DBD4();
+    ShowWindows(&sDebugWindow->m.windows, TRUE, TRUE);
+    CreateMenuOnWindow(&sDebugWindow->m.input, 229, 10, sDebugWindow->m.menuWinId);
+    ShowWindowsWithHeader();
+    PrintCurrentPageText();
     return TRUE;
 }
 
-void sub_801DA58(s16 a0)
+void DebugFieldMapWindow_MoveMenuTo(s16 entryId_)
 {
-    s32 cast;
-    cast = a0;
-    sub_8013878(&sDebugWindow->s0.input, cast);
-    sub_801DB54();
-    sub_801DBD4();
+    s32 entryId = entryId_;
+    MoveMenuToEntryId(&sDebugWindow->m.input, entryId);
+    ShowWindowsWithHeader();
+    PrintCurrentPageText();
 }
 
 u32 DebugFieldMapWindow_GetInput(void)
 {
-    switch (GetKeyPress(&sDebugWindow->s0.input)) {
+    switch (GetKeyPress(&sDebugWindow->m.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return DEBUG_INPUT_B_PRESS;
         case INPUT_A_BUTTON:
             return DEBUG_INPUT_A_PRESS;
         default:
-            if (MenuCursorUpdate(&sDebugWindow->s0.input, TRUE)) {
-                sub_801DB54();
-                sub_801DBD4();
+            if (MenuCursorUpdate(&sDebugWindow->m.input, TRUE)) {
+                ShowWindowsWithHeader();
+                PrintCurrentPageText();
                 return DEBUG_INPUT_DPAD;
             }
             return DEBUG_INPUT_NOTHING;
@@ -75,30 +76,30 @@ u32 DebugFieldMapWindow_GetInput(void)
 
 s16 DebugFieldMapWindow_GetCurrentIndex(void)
 {
-    return GET_CURRENT_MENU_ENTRY(sDebugWindow->s0.input);
+    return GET_CURRENT_MENU_ENTRY(sDebugWindow->m.input);
 }
 
-UNUSED static void sub_801DADC(bool8 a0)
+UNUSED static void ShowDebugFieldMapWindow(bool8 addCursorSprite)
 {
-    sDebugWindow->s0.input.totalEntriesCount = 229;
-    MenuUpdatePagesData(&sDebugWindow->s0.input);
-    sub_801DB54();
-    sub_801DBD4();
-    if (a0)
-        AddMenuCursorSprite(&sDebugWindow->s0.input);
+    sDebugWindow->m.input.totalEntriesCount = 229;
+    MenuUpdatePagesData(&sDebugWindow->m.input);
+    ShowWindowsWithHeader();
+    PrintCurrentPageText();
+    if (addCursorSprite)
+        AddMenuCursorSprite(&sDebugWindow->m.input);
 }
 
 void DebugFieldMapWindow_Free(void)
 {
     if (sDebugWindow != NULL) {
-        sDebugWindow->s0.windows.id[sDebugWindow->s0.winId] = sDummyWinTemplate;
+        sDebugWindow->m.windows.id[sDebugWindow->m.menuWinId] = sDummyWinTemplate;
         ResetUnusedInputStruct();
-        ShowWindows(&sDebugWindow->s0.windows, TRUE, TRUE);
+        ShowWindows(&sDebugWindow->m.windows, TRUE, TRUE);
         FREE_AND_SET_NULL(sDebugWindow);
     }
 }
 
-static void sub_801DB54(void)
+static void ShowWindowsWithHeader(void)
 {
     sDebugWindow->header.count = 1;
     sDebugWindow->header.currId = 0;
@@ -106,12 +107,12 @@ static void sub_801DB54(void)
     sDebugWindow->header.f3 = 0;
 
     ResetUnusedInputStruct();
-    ShowWindows(&sDebugWindow->s0.windows, TRUE, TRUE);
+    ShowWindows(&sDebugWindow->m.windows, TRUE, TRUE);
 
-    SUB_80095E4_CALL(sDebugWindow->s0);
+    UPDATE_MENU_WINDOW_HEIGHT(sDebugWindow->m);
 }
 
-static void sub_801DBD4(void)
+static void PrintCurrentPageText(void)
 {
     GroundConversionStruct *temp;
     const struct unkStruct_81188F0 *temp2;
@@ -119,28 +120,28 @@ static void sub_801DBD4(void)
     s16 index;
     int counter;
 
-    CallPrepareTextbox_8008C54(sDebugWindow->s0.winId);
-    sub_80073B8(sDebugWindow->s0.winId);
-    PrintStringOnWindow(10, 0, _("Field"), sDebugWindow->s0.winId, 0);
+    CallPrepareTextbox_8008C54(sDebugWindow->m.menuWinId);
+    sub_80073B8(sDebugWindow->m.menuWinId);
+    PrintStringOnWindow(10, 0, _("Field"), sDebugWindow->m.menuWinId, 0);
 
     x = (sDebugWindow->header.width * 8) - 2;
-    n = sDebugWindow->s0.input.currPage + 1;
-    sub_8012BC4(x, 0, n, 2, 7, sDebugWindow->s0.winId);
+    n = sDebugWindow->m.input.currPage + 1;
+    sub_8012BC4(x, 0, n, 2, 7, sDebugWindow->m.menuWinId);
 
     // This line has no real effect. It's a magic 'fakematch' to fool agb into generating the same asm. It can be removed if you don't care about matching.
     if (x) { counter = 0; }
 
-    for (counter = 0; counter < sDebugWindow->s0.input.currPageEntries; counter++) {
-        index = (sDebugWindow->s0.input.currPage * sDebugWindow->s0.input.entriesPerPage) + counter;
+    for (counter = 0; counter < sDebugWindow->m.input.currPageEntries; counter++) {
+        index = (sDebugWindow->m.input.currPage * sDebugWindow->m.input.entriesPerPage) + counter;
         temp = &gGroundConversion_811BAF4[index];
         temp2 = &gUnknown_81188F0[temp->unk4];
 
-        y = GetMenuEntryYCoord(&sDebugWindow->s0.input, counter);
-        PrintStringOnWindow(8, y, temp2->text1, sDebugWindow->s0.winId, 0);
+        y = GetMenuEntryYCoord(&sDebugWindow->m.input, counter);
+        PrintStringOnWindow(8, y, temp2->text1, sDebugWindow->m.menuWinId, 0);
 
-        y = GetMenuEntryYCoord(&sDebugWindow->s0.input, counter);
-        PrintStringOnWindow(62, y, temp->text, sDebugWindow->s0.winId, 0);
+        y = GetMenuEntryYCoord(&sDebugWindow->m.input, counter);
+        PrintStringOnWindow(62, y, temp->text, sDebugWindow->m.menuWinId, 0);
     }
 
-    sub_80073E0(sDebugWindow->s0.winId);
+    sub_80073E0(sDebugWindow->m.menuWinId);
 }

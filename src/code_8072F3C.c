@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/input.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_3.h"
 #include "music_util.h"
 #include "code_80958E8.h"
 #include "code_80A26CC.h"
@@ -24,7 +24,7 @@ struct unkStruct_203B314
     u8 unkB9;
     u8 unkBA;
     u8 unkBB;
-    struct struct_Sub80095E4_2 sBC;
+    struct MenuHeaderWindow sBC;
 };
 
 EWRAM_INIT struct unkStruct_203B314 *gUnknown_203B314 = {NULL};
@@ -75,24 +75,24 @@ u32 sub_802F73C(u32 r0, DungeonPos *r1, u32 r2, u8 r3)
         gUnknown_203B314 = MemoryAlloc(sizeof(struct unkStruct_203B314), 8);
 
     gUnknown_203B314->unkB8 = r3;
-    gUnknown_203B314->sBC.s0.winId = r0;
-    gUnknown_203B314->sBC.s0.unk38 = &gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.winId];
-    RestoreSavedWindows(&gUnknown_203B314->sBC.s0.windows);
+    gUnknown_203B314->sBC.m.menuWinId = r0;
+    gUnknown_203B314->sBC.m.menuWindow = &gUnknown_203B314->sBC.m.windows.id[gUnknown_203B314->sBC.m.menuWinId];
+    RestoreSavedWindows(&gUnknown_203B314->sBC.m.windows);
 
     if (r3 != 0)
-        gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.winId] = gUnknown_80E072C;
+        gUnknown_203B314->sBC.m.windows.id[gUnknown_203B314->sBC.m.menuWinId] = gUnknown_80E072C;
     else
-        gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.winId] = gUnknown_80E0714;
+        gUnknown_203B314->sBC.m.windows.id[gUnknown_203B314->sBC.m.menuWinId] = gUnknown_80E0714;
 
-    gUnknown_203B314->sBC.s0.unk38->header = &gUnknown_203B314->sBC.header;
+    gUnknown_203B314->sBC.m.menuWindow->header = &gUnknown_203B314->sBC.header;
 
     if (r1 != 0)
-        gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.winId].pos = *r1;
+        gUnknown_203B314->sBC.m.windows.id[gUnknown_203B314->sBC.m.menuWinId].pos = *r1;
 
-    sub_8012D08(gUnknown_203B314->sBC.s0.unk38, r2);
+    sub_8012D08(gUnknown_203B314->sBC.m.menuWindow, r2);
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B314->sBC.s0.windows, TRUE, TRUE);
-    CreateMenuOnWindow(&gUnknown_203B314->sBC.s0.input, sub_802FBF4(), r2, r0);
+    ShowWindows(&gUnknown_203B314->sBC.m.windows, TRUE, TRUE);
+    CreateMenuOnWindow(&gUnknown_203B314->sBC.m.input, sub_802FBF4(), r2, r0);
     sub_802F9C0();
     sub_802FA50();
     return 1;
@@ -105,15 +105,15 @@ u32 sub_802F848(s16 param_1)
 
     param_1_32 = param_1; // cast needed
 
-    for( index = 0; index < gUnknown_203B314->sBC.s0.input.totalEntriesCount; index++ ) {
+    for( index = 0; index < gUnknown_203B314->sBC.m.input.totalEntriesCount; index++ ) {
         if (gUnknown_203B314->unk0[index] == param_1_32) {
-            sub_8013878(&gUnknown_203B314->sBC.s0.input,index);
+            MoveMenuToEntryId(&gUnknown_203B314->sBC.m.input,index);
             sub_802F9C0();
             sub_802FA50();
             return 1;
         }
     }
-    sub_8013878(&gUnknown_203B314->sBC.s0.input,0);
+    MoveMenuToEntryId(&gUnknown_203B314->sBC.m.input,0);
     return 0;
 }
 
@@ -121,12 +121,12 @@ u32 sub_802F8A0(u8 r0)
 {
     if(r0 == 0)
     {
-        sub_8013660(&gUnknown_203B314->sBC.s0.input);
+        sub_8013660(&gUnknown_203B314->sBC.m.input);
         return 0;
     }
     else
     {
-        switch(GetKeyPress(&gUnknown_203B314->sBC.s0.input))
+        switch(GetKeyPress(&gUnknown_203B314->sBC.m.input))
         {
             case INPUT_B_BUTTON:
                 PlayMenuSoundEffect(1);
@@ -135,7 +135,7 @@ u32 sub_802F8A0(u8 r0)
                 PlayMenuSoundEffect(0);
                 return 3;
             default:
-                if(MenuCursorUpdate(&gUnknown_203B314->sBC.s0.input, 1) != 0)
+                if(MenuCursorUpdate(&gUnknown_203B314->sBC.m.input, 1) != 0)
                 {
                     sub_802F9C0();
                     sub_802FA50();
@@ -151,27 +151,27 @@ u32 sub_802F8A0(u8 r0)
 
 s16 sub_802F90C(void)
 {
-    return gUnknown_203B314->unk0[GET_CURRENT_MENU_ENTRY(gUnknown_203B314->sBC.s0.input)];
+    return gUnknown_203B314->unk0[GET_CURRENT_MENU_ENTRY(gUnknown_203B314->sBC.m.input)];
 }
 
 void sub_802F938(u8 r0)
 {
-    gUnknown_203B314->sBC.s0.input.totalEntriesCount = sub_802FBF4();
-    MenuUpdatePagesData(&gUnknown_203B314->sBC.s0.input);
+    gUnknown_203B314->sBC.m.input.totalEntriesCount = sub_802FBF4();
+    MenuUpdatePagesData(&gUnknown_203B314->sBC.m.input);
     sub_802F9C0();
     sub_802FA50();
 
     if(r0 != 0)
-        AddMenuCursorSprite(&gUnknown_203B314->sBC.s0.input);
+        AddMenuCursorSprite(&gUnknown_203B314->sBC.m.input);
 }
 
 void sub_802F974(void)
 {
     if(gUnknown_203B314 != NULL)
     {
-        gUnknown_203B314->sBC.s0.windows.id[gUnknown_203B314->sBC.s0.winId] = gUnknown_80E06FC;
+        gUnknown_203B314->sBC.m.windows.id[gUnknown_203B314->sBC.m.menuWinId] = gUnknown_80E06FC;
         ResetUnusedInputStruct();
-        ShowWindows(&gUnknown_203B314->sBC.s0.windows, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B314->sBC.m.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B314);
         gUnknown_203B314 = NULL;
     }
@@ -184,7 +184,7 @@ void sub_802F9C0(void)
     gUnknown_203B314->sBC.header.width = 8;
     gUnknown_203B314->sBC.header.f3 = 0;
 
-    SUB_80095E4_CALL(gUnknown_203B314->sBC.s0);
+    UPDATE_MENU_WINDOW_HEIGHT(gUnknown_203B314->sBC.m);
 }
 
 void sub_802FA50(void)
@@ -196,34 +196,34 @@ void sub_802FA50(void)
   int index;
   int counter;
 
-  CallPrepareTextbox_8008C54(gUnknown_203B314->sBC.s0.winId);
-  sub_80073B8(gUnknown_203B314->sBC.s0.winId);
-  PrintStringOnWindow(10,0,gUnknown_80E0744,gUnknown_203B314->sBC.s0.winId,0);
-  sub_8012BC4(gUnknown_203B314->sBC.header.width * 8 + 4,0,gUnknown_203B314->sBC.s0.input.currPage + 1,2,7,gUnknown_203B314->sBC.s0.winId);
+  CallPrepareTextbox_8008C54(gUnknown_203B314->sBC.m.menuWinId);
+  sub_80073B8(gUnknown_203B314->sBC.m.menuWinId);
+  PrintStringOnWindow(10,0,gUnknown_80E0744,gUnknown_203B314->sBC.m.menuWinId,0);
+  sub_8012BC4(gUnknown_203B314->sBC.header.width * 8 + 4,0,gUnknown_203B314->sBC.m.input.currPage + 1,2,7,gUnknown_203B314->sBC.m.menuWinId);
   if (gUnknown_203B314->unkB8 != 0) {
-    for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.currPageEntries; counter++)
+    for(counter = 0; counter < gUnknown_203B314->sBC.m.input.currPageEntries; counter++)
     {
-        y = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
-        index = gUnknown_203B314->sBC.s0.input.currPage * gUnknown_203B314->sBC.s0.input.entriesPerPage + counter;
+        y = GetMenuEntryYCoord(&gUnknown_203B314->sBC.m.input,counter);
+        index = gUnknown_203B314->sBC.m.input.currPage * gUnknown_203B314->sBC.m.input.entriesPerPage + counter;
         sVar1 = gUnknown_203B314->unk0[index];
         if (gUnknown_203B314->unk5C[index] != 0) {
-            PrintStringOnWindow(10,y,gUnknown_80E0750,gUnknown_203B314->sBC.s0.winId,0);
+            PrintStringOnWindow(10,y,gUnknown_80E0750,gUnknown_203B314->sBC.m.menuWinId,0);
         }
         else if (gUnknown_203B314->unk8A[index] != 0) {
-            PrintStringOnWindow(10,y,gUnknown_80E0754,gUnknown_203B314->sBC.s0.winId,0);
+            PrintStringOnWindow(10,y,gUnknown_80E0754,gUnknown_203B314->sBC.m.menuWinId,0);
         }
-        PrintStringOnWindow(0x18,y,sub_80974A0(sVar1),gUnknown_203B314->sBC.s0.winId,0);
+        PrintStringOnWindow(0x18,y,sub_80974A0(sVar1),gUnknown_203B314->sBC.m.menuWinId,0);
     }
   }
   else {
-    for(counter = 0; counter < gUnknown_203B314->sBC.s0.input.currPageEntries; counter++)
+    for(counter = 0; counter < gUnknown_203B314->sBC.m.input.currPageEntries; counter++)
     {
-        y2 = GetMenuEntryYCoord(&gUnknown_203B314->sBC.s0.input,counter);
-        text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->sBC.s0.input.currPage * gUnknown_203B314->sBC.s0.input.entriesPerPage + counter]);
-        PrintStringOnWindow(8,y2,text,gUnknown_203B314->sBC.s0.winId,0);
+        y2 = GetMenuEntryYCoord(&gUnknown_203B314->sBC.m.input,counter);
+        text = sub_80974A0(gUnknown_203B314->unk0[gUnknown_203B314->sBC.m.input.currPage * gUnknown_203B314->sBC.m.input.entriesPerPage + counter]);
+        PrintStringOnWindow(8,y2,text,gUnknown_203B314->sBC.m.menuWinId,0);
     }
   }
-  sub_80073E0(gUnknown_203B314->sBC.s0.winId);
+  sub_80073E0(gUnknown_203B314->sBC.m.menuWinId);
 }
 
 static inline void sub_802FBF4_sub(u8 *test, s32 counter)

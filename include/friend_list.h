@@ -1,7 +1,8 @@
 #ifndef GUARD_FRIEND_LIST_H
 #define GUARD_FRIEND_LIST_H
 
-#include "structs/struct_sub80095e4.h"
+#include "structs/str_position.h"
+#include "structs/menu.h"
 
 struct unkStruct_3001B60
 {
@@ -17,7 +18,7 @@ struct unkStruct_3001B60
     u8 unk18;
     s16 unk1A[NUM_MONSTERS];
     u8 unk354;
-    struct_Sub80095E4_2 unk358;
+    MenuHeaderWindow unk358;
 };
 
 bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10);

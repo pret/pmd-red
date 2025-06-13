@@ -13,6 +13,7 @@
 #include "pokemon_3.h"
 #include "text_1.h"
 #include "text_2.h"
+#include "text_3.h"
 
 EWRAM_INIT static u32 gUnknown_203B298 = {1};
 EWRAM_INIT static u16 gUnknown_203B29C = {0};
@@ -47,23 +48,23 @@ bool8 sub_8023144(s32 a0, s32 index, DungeonPos *sub, u32 a3)
     gUnknown_3001B5C->unk0 = param_1_u8;
     gUnknown_3001B5C->unk4 = gUnknown_203B298;
 
-    gUnknown_3001B5C->s35C.s0.winId = index;
-    gUnknown_3001B5C->s35C.s0.unk38 = &gUnknown_3001B5C->s35C.s0.windows.id[index];
-    RestoreSavedWindows(&gUnknown_3001B5C->s35C.s0.windows);
-    gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.winId] = sUnknown_80DC91C;
+    gUnknown_3001B5C->s35C.m.menuWinId = index;
+    gUnknown_3001B5C->s35C.m.menuWindow = &gUnknown_3001B5C->s35C.m.windows.id[index];
+    RestoreSavedWindows(&gUnknown_3001B5C->s35C.m.windows);
+    gUnknown_3001B5C->s35C.m.windows.id[gUnknown_3001B5C->s35C.m.menuWinId] = sUnknown_80DC91C;
 
-    gUnknown_3001B5C->s35C.s0.unk38->header = &gUnknown_3001B5C->s35C.header;
+    gUnknown_3001B5C->s35C.m.menuWindow->header = &gUnknown_3001B5C->s35C.header;
 
     if (sub != NULL)
-        gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.winId].pos = *sub;
+        gUnknown_3001B5C->s35C.m.windows.id[gUnknown_3001B5C->s35C.m.menuWinId].pos = *sub;
 
-    sub_8012D08(gUnknown_3001B5C->s35C.s0.unk38, a3);
+    sub_8012D08(gUnknown_3001B5C->s35C.m.menuWindow, a3);
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, TRUE, TRUE);
-    CreateMenuOnWindow(&gUnknown_3001B5C->s35C.s0.input, sub_80236A4(), a3, index);
-    gUnknown_3001B5C->s35C.s0.input.menuIndex = gUnknown_203B29C;
-    gUnknown_3001B5C->s35C.s0.input.currPage = gUnknown_203B29E;
-    MenuUpdatePagesData(&gUnknown_3001B5C->s35C.s0.input);
+    ShowWindows(&gUnknown_3001B5C->s35C.m.windows, TRUE, TRUE);
+    CreateMenuOnWindow(&gUnknown_3001B5C->s35C.m.input, sub_80236A4(), a3, index);
+    gUnknown_3001B5C->s35C.m.input.menuIndex = gUnknown_203B29C;
+    gUnknown_3001B5C->s35C.m.input.currPage = gUnknown_203B29E;
+    MenuUpdatePagesData(&gUnknown_3001B5C->s35C.m.input);
     sub_8023420();
     sub_80234BC();
     return TRUE;
@@ -75,11 +76,11 @@ u32 sub_8023278(bool8 a0)
     u32 temp;
 
     if (!a0) {
-        sub_8013660(&gUnknown_3001B5C->s35C.s0.input);
+        sub_8013660(&gUnknown_3001B5C->s35C.m.input);
         return 0;
     }
 
-    switch (GetKeyPress(&gUnknown_3001B5C->s35C.s0.input)) {
+    switch (GetKeyPress(&gUnknown_3001B5C->s35C.m.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
@@ -95,7 +96,7 @@ u32 sub_8023278(bool8 a0)
             sub_80236A4();
             break;
         default:
-            if (MenuCursorUpdate(&gUnknown_3001B5C->s35C.s0.input, 1) == 0)
+            if (MenuCursorUpdate(&gUnknown_3001B5C->s35C.m.input, 1) == 0)
                 return 0;
             break;
     }
@@ -107,30 +108,30 @@ u32 sub_8023278(bool8 a0)
 
 s16 sub_802331C(void)
 {
-    return gUnknown_3001B5C->unkC[GET_CURRENT_MENU_ENTRY(gUnknown_3001B5C->s35C.s0.input)];
+    return gUnknown_3001B5C->unkC[GET_CURRENT_MENU_ENTRY(gUnknown_3001B5C->s35C.m.input)];
 }
 
 void sub_8023354(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, FALSE, FALSE);
-    MenuUpdatePagesData(&gUnknown_3001B5C->s35C.s0.input);
+    ShowWindows(&gUnknown_3001B5C->s35C.m.windows, FALSE, FALSE);
+    MenuUpdatePagesData(&gUnknown_3001B5C->s35C.m.input);
     sub_8023420();
     sub_80234BC();
 
     if (cursorSprite)
-        AddMenuCursorSprite(&gUnknown_3001B5C->s35C.s0.input);
+        AddMenuCursorSprite(&gUnknown_3001B5C->s35C.m.input);
 }
 
 void sub_80233A0(void)
 {
     if (gUnknown_3001B5C != NULL) {
         gUnknown_203B298 = gUnknown_3001B5C->unk4;
-        gUnknown_203B29C = gUnknown_3001B5C->s35C.s0.input.menuIndex;
-        gUnknown_203B29E = gUnknown_3001B5C->s35C.s0.input.currPage;
-        gUnknown_3001B5C->s35C.s0.windows.id[gUnknown_3001B5C->s35C.s0.winId] = sUnknown_80DC904;
+        gUnknown_203B29C = gUnknown_3001B5C->s35C.m.input.menuIndex;
+        gUnknown_203B29E = gUnknown_3001B5C->s35C.m.input.currPage;
+        gUnknown_3001B5C->s35C.m.windows.id[gUnknown_3001B5C->s35C.m.menuWinId] = sUnknown_80DC904;
         ResetUnusedInputStruct();
-        ShowWindows(&gUnknown_3001B5C->s35C.s0.windows, TRUE, TRUE);
+        ShowWindows(&gUnknown_3001B5C->s35C.m.windows, TRUE, TRUE);
         MemoryFree(gUnknown_3001B5C);
         gUnknown_3001B5C = NULL;
     }
@@ -143,7 +144,7 @@ static void sub_8023420(void)
     gUnknown_3001B5C->s35C.header.width = 12;
     gUnknown_3001B5C->s35C.header.f3 = 0;
 
-    SUB_80095E4_CALL_2(gUnknown_3001B5C->s35C.s0);
+    UPDATE_MENU_WINDOW_HEIGHT_2(gUnknown_3001B5C->s35C.m);
 }
 
 static void sub_80234BC(void)
@@ -159,15 +160,15 @@ static void sub_80234BC(void)
     u8 buffer1[100];
     FriendAreaCapacity auStack_2c;
 
-    CallPrepareTextbox_8008C54(gUnknown_3001B5C->s35C.s0.winId);
-    sub_80073B8(gUnknown_3001B5C->s35C.s0.winId);
-    PrintStringOnWindow(10, 0, sPokemon, gUnknown_3001B5C->s35C.s0.winId, 0);
+    CallPrepareTextbox_8008C54(gUnknown_3001B5C->s35C.m.menuWinId);
+    sub_80073B8(gUnknown_3001B5C->s35C.m.menuWinId);
+    PrintStringOnWindow(10, 0, sPokemon, gUnknown_3001B5C->s35C.m.menuWinId, 0);
 
-    sub_8012BC4((gUnknown_3001B5C->s35C.header.width * 8) + 4, 0, gUnknown_3001B5C->s35C.s0.input.currPage + 1, 2, 7, gUnknown_3001B5C->s35C.s0.winId);
+    sub_8012BC4((gUnknown_3001B5C->s35C.header.width * 8) + 4, 0, gUnknown_3001B5C->s35C.m.input.currPage + 1, 2, 7, gUnknown_3001B5C->s35C.m.menuWinId);
 
-    for (i = 0; i < gUnknown_3001B5C->s35C.s0.input.currPageEntries; i++) {
-        y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.s0.input, i);
-        species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.s0.input.currPage * gUnknown_3001B5C->s35C.s0.input.entriesPerPage) + i];
+    for (i = 0; i < gUnknown_3001B5C->s35C.m.input.currPageEntries; i++) {
+        y = GetMenuEntryYCoord(&gUnknown_3001B5C->s35C.m.input, i);
+        species = gUnknown_3001B5C->unkC[(gUnknown_3001B5C->s35C.m.input.currPage * gUnknown_3001B5C->s35C.m.input.entriesPerPage) + i];
         GetFriendAreaCapacity2(GetFriendArea(species), &auStack_2c, FALSE, FALSE);
         color = COLOR_WHITE_2;
         if (auStack_2c.hasFriendArea)
@@ -175,26 +176,26 @@ static void sub_80234BC(void)
 
         iVar4 = GetDexInternalNo(species, 0);
         cVar2 = (iVar4 % 10) + 48;
-        DrawCharOnWindowWidth12(20, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
+        DrawCharOnWindowWidth12(20, y, cVar2, color, gUnknown_3001B5C->s35C.m.menuWinId);
 
         if (9 < iVar4) {
             iVar4 /= 10;
             cVar2 = (iVar4 % 10) + 48;
-            DrawCharOnWindowWidth12(13, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
+            DrawCharOnWindowWidth12(13, y, cVar2, color, gUnknown_3001B5C->s35C.m.menuWinId);
 
             if (9 < iVar4) {
                 uVar3 = iVar4 / 10;
                 cVar2 = (uVar3 % 10) + 48;
-                DrawCharOnWindowWidth12(6, y, cVar2, color, gUnknown_3001B5C->s35C.s0.winId);
+                DrawCharOnWindowWidth12(6, y, cVar2, color, gUnknown_3001B5C->s35C.m.menuWinId);
             }
         }
 
         sub_808D930(buffer1,species);
         sprintfStatic(buffer2, sFmtColoredString, color, buffer1);
-        PrintStringOnWindow(36, y, buffer2, gUnknown_3001B5C->s35C.s0.winId, 0);
+        PrintStringOnWindow(36, y, buffer2, gUnknown_3001B5C->s35C.m.menuWinId, 0);
     }
 
-    sub_80073E0(gUnknown_3001B5C->s35C.s0.winId);
+    sub_80073E0(gUnknown_3001B5C->s35C.m.menuWinId);
 }
 
 static u32 sub_80236A4(void)

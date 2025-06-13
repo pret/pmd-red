@@ -3,7 +3,7 @@
 #include "constants/input.h"
 #include "constants/wonder_mail.h"
 #include "structs/str_802C39C.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_3.h"
 #include "music_util.h"
 #include "code_8094F88.h"
 #include "input.h"
@@ -21,7 +21,7 @@ struct unkStruct_203B320
     // size: 0xC4
     u8 unk0[0x20];
     u32 wonderMailType;
-    struct_Sub80095E4_2 s28;
+    MenuHeaderWindow s28;
 };
 static EWRAM_INIT struct unkStruct_203B320 *gUnknown_203B320 = {NULL};
 
@@ -85,21 +85,21 @@ u32 sub_80306A8(u32 wonderMailType, u32 r1, DungeonPos *r2, u32 r3)
 
     gUnknown_203B320 = MemoryAlloc(sizeof(struct unkStruct_203B320), 8);
     gUnknown_203B320->wonderMailType = wonderMailType;
-    gUnknown_203B320->s28.s0.winId = r1;
+    gUnknown_203B320->s28.m.menuWinId = r1;
 
-    gUnknown_203B320->s28.s0.unk38 = &gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.winId];
-    RestoreSavedWindows(&gUnknown_203B320->s28.s0.windows);
+    gUnknown_203B320->s28.m.menuWindow = &gUnknown_203B320->s28.m.windows.id[gUnknown_203B320->s28.m.menuWinId];
+    RestoreSavedWindows(&gUnknown_203B320->s28.m.windows);
 
-    gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.winId] = gUnknown_80E0854;
-    gUnknown_203B320->s28.s0.unk38->header = &gUnknown_203B320->s28.header;
+    gUnknown_203B320->s28.m.windows.id[gUnknown_203B320->s28.m.menuWinId] = gUnknown_80E0854;
+    gUnknown_203B320->s28.m.menuWindow->header = &gUnknown_203B320->s28.header;
 
     if (r2 != 0)
-        gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.winId].pos = *r2;
+        gUnknown_203B320->s28.m.windows.id[gUnknown_203B320->s28.m.menuWinId].pos = *r2;
 
-    sub_8012D08(gUnknown_203B320->s28.s0.unk38, r3);
+    sub_8012D08(gUnknown_203B320->s28.m.menuWindow, r3);
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B320->s28.s0.windows, TRUE, TRUE);
-    CreateMenuOnWindow(&gUnknown_203B320->s28.s0.input, sub_8030A74(), r3, r1);
+    ShowWindows(&gUnknown_203B320->s28.m.windows, TRUE, TRUE);
+    CreateMenuOnWindow(&gUnknown_203B320->s28.m.input, sub_8030A74(), r3, r1);
     sub_80308A0();
     sub_803092C();
     return 1;
@@ -109,10 +109,10 @@ u32 sub_8030768(u8 r0)
 {
     if(r0 == 0)
     {
-        sub_8013660(&gUnknown_203B320->s28.s0.input);
+        sub_8013660(&gUnknown_203B320->s28.m.input);
         return 0;
     }
-    switch(GetKeyPress(&gUnknown_203B320->s28.s0.input))
+    switch(GetKeyPress(&gUnknown_203B320->s28.m.input))
     {
         case INPUT_START_BUTTON:
             PlayMenuSoundEffect(4);
@@ -124,7 +124,7 @@ u32 sub_8030768(u8 r0)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if(MenuCursorUpdate(&gUnknown_203B320->s28.s0.input, TRUE) != 0)
+            if(MenuCursorUpdate(&gUnknown_203B320->s28.m.input, TRUE) != 0)
             {
                 sub_80308A0();
                 sub_803092C();
@@ -137,27 +137,27 @@ u32 sub_8030768(u8 r0)
 
 u8 sub_80307EC(void)
 {
-    return gUnknown_203B320->unk0[GET_CURRENT_MENU_ENTRY(gUnknown_203B320->s28.s0.input)];
+    return gUnknown_203B320->unk0[GET_CURRENT_MENU_ENTRY(gUnknown_203B320->s28.m.input)];
 }
 
 void sub_8030810(u8 r0)
 {
-    gUnknown_203B320->s28.s0.input.totalEntriesCount = sub_8030A74();
-    MenuUpdatePagesData(&gUnknown_203B320->s28.s0.input);
+    gUnknown_203B320->s28.m.input.totalEntriesCount = sub_8030A74();
+    MenuUpdatePagesData(&gUnknown_203B320->s28.m.input);
 
     sub_80308A0();
     sub_803092C();
     if(r0 != 0)
-        AddMenuCursorSprite(&gUnknown_203B320->s28.s0.input);
+        AddMenuCursorSprite(&gUnknown_203B320->s28.m.input);
 }
 
 void sub_803084C(void)
 {
     if(gUnknown_203B320 != NULL)
     {
-        gUnknown_203B320->s28.s0.windows.id[gUnknown_203B320->s28.s0.winId] = gUnknown_80E083C;
+        gUnknown_203B320->s28.m.windows.id[gUnknown_203B320->s28.m.menuWinId] = gUnknown_80E083C;
         ResetUnusedInputStruct();
-        ShowWindows(&gUnknown_203B320->s28.s0.windows, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B320->s28.m.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B320);
         gUnknown_203B320 = NULL;
     }
@@ -170,14 +170,14 @@ u8 *sub_8030894(void)
 
 void sub_80308A0(void)
 {
-    gUnknown_203B320->s28.header.count = gUnknown_203B320->s28.s0.input.pagesCount;
-    gUnknown_203B320->s28.header.currId = gUnknown_203B320->s28.s0.input.currPage;
+    gUnknown_203B320->s28.header.count = gUnknown_203B320->s28.m.input.pagesCount;
+    gUnknown_203B320->s28.header.currId = gUnknown_203B320->s28.m.input.currPage;
     gUnknown_203B320->s28.header.width = 12;
     gUnknown_203B320->s28.header.f3 = 0;
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B320->s28.s0.windows, TRUE, TRUE);
+    ShowWindows(&gUnknown_203B320->s28.m.windows, TRUE, TRUE);
 
-    SUB_80095E4_CALL(gUnknown_203B320->s28.s0);
+    UPDATE_MENU_WINDOW_HEIGHT(gUnknown_203B320->s28.m);
 }
 
 void sub_803092C(void)
@@ -188,20 +188,20 @@ void sub_803092C(void)
   s32 index;
   unkStruct_802C39C local;
 
-  CallPrepareTextbox_8008C54(gUnknown_203B320->s28.s0.winId);
-  sub_80073B8(gUnknown_203B320->s28.s0.winId);
-  r4 = gUnknown_203B320->s28.s0.input.currPage * 8;
+  CallPrepareTextbox_8008C54(gUnknown_203B320->s28.m.menuWinId);
+  sub_80073B8(gUnknown_203B320->s28.m.menuWinId);
+  r4 = gUnknown_203B320->s28.m.input.currPage * 8;
   r5 = r4;
   r5 += 10;
-  PrintStringOnWindow(r5,0,gUnknown_80E086C[gUnknown_203B320->wonderMailType],gUnknown_203B320->s28.s0.winId,0);
+  PrintStringOnWindow(r5,0,gUnknown_80E086C[gUnknown_203B320->wonderMailType],gUnknown_203B320->s28.m.menuWinId,0);
   r4 += 4;
   r5 = r4 + gUnknown_203B320->s28.header.width * 8;
-  sub_8012BC4(r5,0,gUnknown_203B320->s28.s0.input.currPage + 1,1,7,gUnknown_203B320->s28.s0.winId);
+  sub_8012BC4(r5,0,gUnknown_203B320->s28.m.input.currPage + 1,1,7,gUnknown_203B320->s28.m.menuWinId);
 
-  for (index = 0; index < gUnknown_203B320->s28.s0.input.currPageEntries; index++) {
-      mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->s28.s0.input.currPage * gUnknown_203B320->s28.s0.input.entriesPerPage) + index]);
-      local.unk0[0] = gUnknown_203B320->s28.s0.winId;
-      local.y = GetMenuEntryYCoord(&gUnknown_203B320->s28.s0.input,index);
+  for (index = 0; index < gUnknown_203B320->s28.m.input.currPageEntries; index++) {
+      mail = GetMailatIndex(gUnknown_203B320->unk0[(gUnknown_203B320->s28.m.input.currPage * gUnknown_203B320->s28.m.input.entriesPerPage) + index]);
+      local.unk0[0] = gUnknown_203B320->s28.m.menuWinId;
+      local.y = GetMenuEntryYCoord(&gUnknown_203B320->s28.m.input,index);
       local.mailTitleType = 7;
       local.mailMissionType = MISSION_TYPE_FRIEND_RESCUE;
       local.mailStatus = MAIL_STATUS_SUSPENDED;
@@ -232,7 +232,7 @@ void sub_803092C(void)
       }
       CreateRescueTitle(&local);
   }
-  sub_80073E0(gUnknown_203B320->s28.s0.winId);
+  sub_80073E0(gUnknown_203B320->s28.m.menuWinId);
 }
 
 s32 sub_8030A74(void)

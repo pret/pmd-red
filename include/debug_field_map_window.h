@@ -7,7 +7,7 @@
 #define DEBUG_INPUT_A_PRESS 3
 
 bool8 DebugFieldMapWindow_Init(void);
-void sub_801DA58(s16);
+void DebugFieldMapWindow_MoveMenuTo(s16);
 u32 DebugFieldMapWindow_GetInput(void);
 s16 DebugFieldMapWindow_GetCurrentIndex(void);
 void DebugFieldMapWindow_Free(void);

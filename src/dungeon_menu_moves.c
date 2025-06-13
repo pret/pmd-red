@@ -449,7 +449,7 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
 
-    windows->id[0].height = windows->id[0].unk10 = sub_80095E4(4, 0xC) + 2;
+    windows->id[0].height = windows->id[0].unk10 = CalcEntriesTotalHeight(4, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header->width = 13;
     windows->id[0].pos.x = 2;
     windows->id[1] = windows->id[3];
@@ -1125,7 +1125,7 @@ static void sub_8064228(Entity *entity, Move *moves, WindowTemplates *windows, W
     gDungeonMenu.unk14.x = 0;
     gDungeonMenu.windowId = 0;
     ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
-    windows->id[0].height = windows->id[0].unk10 = sub_80095E4(count, 12) + 2;
+    windows->id[0].height = windows->id[0].unk10 = CalcEntriesTotalHeight(count, DEFAULT_MENU_ENTRY_HEIGHT) + 2;
     header->width = 14;
     windows->id[0].pos.x = 2;
     windows->id[1] = windows->id[3];
