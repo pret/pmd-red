@@ -43,7 +43,6 @@ extern void sub_8068344(void);
 bool8 CanSubMenuItemBeChosen(s32 param_1);
 void sub_8068310(s32 n, PokemonStruct1 **monPtrs);
 void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
-u32 sub_8014140(s32 a0, const void *a1);
 void sub_8083D1C(void);
 void PlayDungeonConfirmationSE(void);
 void PlayDungeonCancelSE(void);
@@ -60,7 +59,7 @@ static EWRAM_DATA s32 gUnknown_202F30C = 0;
 static EWRAM_DATA s32 gUnknown_202F310 = 0;
 
 // It's likely a struct only used in Blue version. Touchpad maybe?
-static const u8 gUnknown_8106DA4[] = {
+static const u8 sTouchScreenArrowPressData[] = {
     0x01, 0, 0x38, 0, 0, 0, 0x18, 0, 0x18, 0, 0, 0, 0x02, 0, 0x38, 0, 0x68, 0, 0x18, 0, 0x18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
@@ -135,7 +134,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
             ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
             sub_80137B0(&gDungeonMenu, 0);
             while (1) {
-                s32 r4;
+                s32 touchScreenArrow;
 
                 AddMenuCursorSprite(&gDungeonMenu);
                 r5 = 0;
@@ -149,9 +148,9 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                     sub_8068344();
                 }
 
-                r4 = sub_8014140(0, gUnknown_8106DA4);
+                touchScreenArrow = GetTouchScreenArrowPress(0, sTouchScreenArrowPressData);
                 DungeonRunFrameActions(0x37);
-                if (r4 == 2 && r5) {
+                if (touchScreenArrow == TOUCH_SCREEN_ARROW_DOWN_PRESS && r5) {
                     if (a2 - gUnknown_202F30C > 8) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
@@ -182,7 +181,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                     MoveMenuCursorDownWrapAround(&gDungeonMenu, 0);
                 }
 
-                if (r4 == 1 && r7 != 0) {
+                if (touchScreenArrow == TOUCH_SCREEN_ARROW_UP_PRESS && r7 != 0) {
                     if (gUnknown_202F30C != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
@@ -450,7 +449,7 @@ void sub_806806C(PokemonStruct1 *a0)
                 }
             }
 
-            r5 = sub_8014140(0, gUnknown_8106DA4);
+            r5 = GetTouchScreenArrowPress(0, sTouchScreenArrowPressData);
             DungeonRunFrameActions(0x1C);
             if ((gRealInputs.pressed & DPAD_RIGHT) || gDungeonMenu.touchScreen.dpad_right) {
                 PlayDungeonCursorSE(0);

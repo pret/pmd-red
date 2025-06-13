@@ -16,51 +16,20 @@
 #include "text_2.h"
 #include "text_3.h"
 
-#include "data/code_80140DC.h"
-
-void sub_80140DC(void)
+static const MenuItem sYesNoMenuItems[] =
 {
-    DungeonPos pos;
+        {_("*Yes"), 1},
+        {_("No"), 0},
+        {NULL, -1}
+};
 
-    pos.x = 200;
-    pos.y = 128;
-    SetSavingIconCoords(&pos);
-    StopBGMResetSoundEffectCounters();
-}
-
-void sub_80140F8(void)
+static const MenuItem sYesNoMenuItems_DefaultNo[] =
 {
-    DungeonPos pos;
+        {_("Yes"), 1},
+        {_("*No"), 0},
+        {NULL, -1}
+};
 
-    pos.x = 188;
-    pos.y = 64;
-    SetSavingIconCoords(&pos);
-    StopBGMResetSoundEffectCounters();
-}
-
-void sub_8014114(void) {
-    StartBGMusic();
-    SetSavingIconCoords(NULL);
-}
-
-void nullsub_201(void) {}
-
-u32 sub_8014128(void) {
-    if(GetMenuInput() == INPUT_B_BUTTON) return 0;
-    else return 1;
-}
-
-u32 sub_801413C(void)
-{
-    return 0;
-}
-
-u32 sub_8014140(void)
-{
-    return 0;
-}
-
-// This kinda looks like the 'true' beginning of the file
 static const u32 gUnknown_80D48A0[] = {0x7, 0x2, 0x2};
 static const WindowTemplate gUnknown_80D48AC = {
     0x00,
@@ -146,7 +115,7 @@ struct NeverWrittenToStruct202EC20
 static EWRAM_DATA struct NeverWrittenToStruct202EC20 *sNeverWrittenToUnknownStructPtr = NULL;
 static UNUSED EWRAM_DATA u8 sUnusedEwram1[4] = {0};
 
-static EWRAM_DATA TouchScreenMenuInput gUnknown_202EC28 = {0};
+static EWRAM_DATA TouchScreenMenuInput sDialogueMenuTouchScreenInput = {0};
 
 static EWRAM_INIT WindowTemplates sUnknown_203B198 = {
     .id = {
@@ -203,12 +172,12 @@ void CreateDialogueBoxAndPortrait(const u8 *text, void *param_2, MonPortraitMsg 
 
 void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, MonPortraitMsg *monPortraitPtr, u16 flags)
 {
-    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D485C, NULL, 3, 0, monPortraitPtr, flags | 0x300);
+    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, sYesNoMenuItems, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
 void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, MonPortraitMsg *monPortraitPtr, u16 flags)
 {
-    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D4880, NULL, 3, 0, monPortraitPtr, flags | 0x300);
+    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, sYesNoMenuItems_DefaultNo, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
 // arm9.bin::0201D700
@@ -223,7 +192,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     sDialogueMenuItems = menuItems;
     gUnknown_202EC18 = arg_0;
     gUnknown_202EC1C = r9;
-    ResetTouchScreenMenuInput(&gUnknown_202EC28);
+    ResetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput);
     if (flags & 0x10) {
         sUnknown_203B198.id[0] = gUnknown_80D48DC;
     }
@@ -388,7 +357,7 @@ void DrawDialogueBoxString(void)
                 }
                 sub_80073E0(0);
                 gUnknown_202E794 = str;
-                ResetTouchScreenMenuInput(&gUnknown_202EC28);
+                ResetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput);
                 if (gUnknown_202E794[0] == '\0') {
                     if (sDialogueMenuItems != NULL) {
                         gUnknown_202E744 = 3;
@@ -459,14 +428,12 @@ void DrawDialogueBoxString(void)
             case 9: {
                 bool8 buttonPress = FALSE;
                 gUnknown_202E748.unk20 = 0;
-                GetTouchScreenMenuInput(&gUnknown_202EC28, 0);
+                GetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput, 0);
                 if (!(sUnknownTextFlags & 1)) {
                     buttonPress = TRUE;
                 }
-                else
-                {
-                    if (sUnknownTextFlags & 2)
-                    {
+                else {
+                    if (sUnknownTextFlags & 2) {
                         if (gUnknown_202E780 > 0) {
                             gUnknown_202E780--;
                         }
@@ -474,13 +441,13 @@ void DrawDialogueBoxString(void)
                             buttonPress = TRUE;
                         }
                     }
-                    else if (gRealInputs.pressed & AB_BUTTONS || gUnknown_202EC28.a_button) {
+                    else if (gRealInputs.pressed & AB_BUTTONS || sDialogueMenuTouchScreenInput.a_button) {
                         buttonPress = TRUE;
                     }
                     else if ((gRealInputs.held & (DPAD_ANY | B_BUTTON)) == B_BUTTON) {
                         buttonPress = TRUE;
                     }
-                    else if (gUnknown_202EC28.unk5) {
+                    else if (sDialogueMenuTouchScreenInput.unk5) {
                         buttonPress = TRUE;
                     }
                 }
@@ -865,5 +832,3 @@ void PrintFormattedStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u3
     formattedString[FORMAT_STR_MAX_LEN - 1] = '\0';
     PrintStringOnWindow2(x, y, formattedString, windowId, terminatingChr, lineSpacing);
 }
-
-//

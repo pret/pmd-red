@@ -1161,3 +1161,43 @@ void sub_80140B4(WindowTemplates *a0)
     for (i = 0; i < MAX_WINDOWS; i++)
         a0->id[i] = gUnknown_80D47C8[i];
 }
+
+void sub_80140DC(void)
+{
+    DungeonPos pos = {200, 128};
+
+    SetSavingIconCoords(&pos);
+    StopBGMResetSoundEffectCounters();
+}
+
+void sub_80140F8(void)
+{
+    DungeonPos pos = {188, 64};
+
+    SetSavingIconCoords(&pos);
+    StopBGMResetSoundEffectCounters();
+}
+
+void sub_8014114(void)
+{
+    StartBGMusic();
+    SetSavingIconCoords(NULL);
+}
+
+UNUSED static void nullsub_201(void) {}
+
+UNUSED static bool8 sub_8014128(void)
+{
+    if (GetMenuInput() == INPUT_B_BUTTON) return FALSE;
+    else return TRUE;
+}
+
+UNUSED static u32 sub_801413C(void)
+{
+    return 0;
+}
+
+u32 GetTouchScreenArrowPress(s32 a0, const void *a1)
+{
+    return 0;
+}

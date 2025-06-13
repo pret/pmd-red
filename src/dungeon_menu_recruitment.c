@@ -22,7 +22,6 @@ extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern u16 GetLeaderActionId(void);
-extern u32 sub_8014140(s32 a0, const void *a1);
 extern u8 sub_806F9BC(s32);
 extern bool8 sub_80860A8(u8 id);
 extern bool8 sub_806A564(s32 r0);
@@ -78,7 +77,7 @@ static const WindowTemplates sRecruitmentSearchWindows = {
         }
 };
 
-static const u8 gUnknown_8106D68[] = {1, 0, 56, 0, 0, 0, 24, 0, 24, 0, 0, 0, 2, 0, 56, 0, 104, 0, 24, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+static const u8 sTouchScreenArrowPressData[] = {1, 0, 56, 0, 0, 0, 24, 0, 24, 0, 0, 0, 2, 0, 56, 0, 104, 0, 24, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 void ShowRecruitmentSearchMenu(void)
 {
@@ -117,15 +116,15 @@ void ShowRecruitmentSearchMenu(void)
             gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
 
             while (1) {
-                s32 unkVar;
+                s32 touchScreenArrow;
                 bool8 scroll = FALSE;
 
                 sScrollFlags = 0;
-                unkVar = sub_8014140(0, gUnknown_8106D68);
-                if (TryScrollUp(currTabData, unkVar)) {
+                touchScreenArrow = GetTouchScreenArrowPress(0, sTouchScreenArrowPressData);
+                if (TryScrollUp(currTabData, touchScreenArrow)) {
                     scroll = TRUE;
                 }
-                if (TryScrollDown(currTabData, unkVar)) {
+                if (TryScrollDown(currTabData, touchScreenArrow)) {
                     scroll = TRUE;
                 }
 
@@ -199,7 +198,7 @@ static void PrintAvailableMons(struct MonRecruitList *tabData, s32 tabId)
     sub_80073E0(0);
 }
 
-static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1)
+static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 touchScreenArrow)
 {
     s32 i;
     u8 text[64];
@@ -209,7 +208,7 @@ static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1)
 
     menuMonId--;
     sScrollFlags |= FLAG_CAN_SCROLL_UP;
-    if (!(gRealInputs.repeated & DPAD_UP) && a1 != 1) {
+    if (!(gRealInputs.repeated & DPAD_UP) && touchScreenArrow != TOUCH_SCREEN_ARROW_UP_PRESS) {
         return FALSE;
     }
     else {
@@ -230,7 +229,7 @@ static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1)
     }
 }
 
-static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 a1)
+static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 touchScreenArrow)
 {
     s32 i;
     u8 text[64];
@@ -240,7 +239,7 @@ static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 a1)
         return FALSE;
 
     sScrollFlags |= FLAG_CAN_SCROLL_DOWN;
-    if (!(gRealInputs.repeated & DPAD_DOWN) && a1 != 2) {
+    if (!(gRealInputs.repeated & DPAD_DOWN) && touchScreenArrow != TOUCH_SCREEN_ARROW_DOWN_PRESS) {
         return FALSE;
     }
     else {

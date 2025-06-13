@@ -7,14 +7,6 @@
 #include "structs/str_mon_portrait.h"
 #include "structs/str_text.h"
 
-// TODO: once the files close to string_format.c are decompiled, check if these should be included here. Most likely, they should be declared elsewhere.
-// code_80130A8.s
-void sub_80140DC(void);
-void sub_8014114(void);
-s32 sub_80144A4(s32 *);
-u32 sub_80154F0(void);
-void sub_80155F0(void);
-
 #define FORMAT_BUFFER_LEN 80
 #define FRIEND_AREA_BUFFER_LEN 184
 

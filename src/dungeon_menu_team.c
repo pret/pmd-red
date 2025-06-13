@@ -107,7 +107,6 @@ extern void sub_8045064(void);
 extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
 extern bool8 CanLeaderSwitch(u8 dungeon);
 extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
-extern u32 sub_8014140(s32 a0, const void *a1);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
 extern void sub_8045C18(u8 *buffer, Item *item);
@@ -154,7 +153,7 @@ static void PrintItemNameOnBottomWindow(Entity *entity);
 static void ResetDungeonMenu(void);
 
 // Struct only used in Blue maybe?
-static const u8 gUnknown_8106B8C[] = {1, 0, 56, 0, 0, 0, 24, 0, 24, 0, 0, 0, 2, 0, 56, 0, 104, 0, 24, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+static const u8 sTouchScreenArrowPressData[] = {1, 0, 56, 0, 0, 0, 24, 0, 24, 0, 0, 0, 2, 0, 56, 0, 104, 0, 24, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 bool8 ShowDungeonTeamMenu(Entity *a0)
 {
@@ -840,30 +839,30 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
         }
 
         while (1) {
-            s32 unkVar;
-            bool8 r5, r6;
+            s32 touchScreenArrow;
+            bool8 downArrowShown, upArrowShown;
 
             AddMenuCursorSprite(&gDungeonMenu);
-            unkVar = sub_8014140(0, gUnknown_8106B8C);
-            r5 = FALSE;
-            r6 = FALSE;
+            touchScreenArrow = GetTouchScreenArrowPress(0, sTouchScreenArrowPressData);
+            downArrowShown = FALSE;
+            upArrowShown = FALSE;
             if (hasIqSkills) {
                 if (unkInfoTabStruct.unk0[8] != 0) {
-                    r5 = TRUE;
+                    downArrowShown = TRUE;
                     ShowDownArrowSprite();
                 }
                 if (monSummaryInfo.unk40 != 0) {
-                    r6 = TRUE;
+                    upArrowShown = TRUE;
                     ShowUpArrowSprite();
                 }
             }
             if (hasStatusProblems) {
                 if (unkInfoTabStruct.unkC[8] != 0) {
-                    r5 = TRUE;
+                    downArrowShown = TRUE;
                     ShowDownArrowSprite();
                 }
                 if (monSummaryInfo.unk56 != 0) {
-                    r6 = TRUE;
+                    upArrowShown = TRUE;
                     ShowUpArrowSprite();
                 }
             }
@@ -892,7 +891,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
             }
 
             if (hasStatusProblems) {
-                if (unkVar == 2 && r5) {
+                if (touchScreenArrow == TOUCH_SCREEN_ARROW_DOWN_PRESS && downArrowShown) {
                     PlayDungeonCursorSE(0);
                     if (unkInfoTabStruct.unkC[8] != 0) {
                         s32 i;
@@ -924,7 +923,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                     }
                 }
 
-                if (unkVar == 1 && r6) {
+                if (touchScreenArrow == TOUCH_SCREEN_ARROW_UP_PRESS && upArrowShown) {
                     if (monSummaryInfo.unk56 != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
@@ -956,7 +955,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                 }
             }
             else if (hasIqSkills) {
-                if (unkVar == 2 && r5) {
+                if (touchScreenArrow == TOUCH_SCREEN_ARROW_DOWN_PRESS && downArrowShown) {
                     if (unkInfoTabStruct.unk0[8] != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {
@@ -987,7 +986,7 @@ void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 showIq)
                     }
                 }
 
-                if (unkVar == 1 && r6) {
+                if (touchScreenArrow == TOUCH_SCREEN_ARROW_UP_PRESS && upArrowShown) {
                     if (monSummaryInfo.unk40 != 0) {
                         s32 i;
                         for (i = 0; i < 6; i++) {

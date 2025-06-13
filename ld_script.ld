@@ -527,7 +527,6 @@ SECTIONS {
         src/code_8031D70.o(.rodata);
         src/adventure_log.o(.rodata);
         src/friend_rescue.o(.rodata);
-        data/friend_rescue.o(.rodata);
         data/credits1.o(.rodata);
         src/credits2.o(.rodata);
         src/main_menu1.o(.rodata);

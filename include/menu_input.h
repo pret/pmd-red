@@ -38,7 +38,6 @@ bool8 MenuCursorUpdateOnlyLeftRight(MenuInputStruct *param_1);
 void MenuUpdatePagesData(MenuInputStruct * param_1);
 void AddMenuCursorSprite_(MenuInputStruct *, u8 *);
 void GetTouchScreenMenuInput(TouchScreenMenuInput *touchScreen, s32 a1);
-
 void sub_8013AA0(unkStructFor8013AA0 *);
 u32 sub_8013BBC(unkStructFor8013AA0 *);
 void sub_8013C68(unkStructFor8013AA0 *);
@@ -46,6 +45,13 @@ void sub_8013D10(unkStructFor8013AA0 *);
 void sub_8013E54(void);
 void sub_8013F84(void);
 void sub_80140B4(WindowTemplates *);
+void sub_80140DC(void);
+void sub_80140F8(void);
+void sub_8014114(void);
+
+#define TOUCH_SCREEN_ARROW_UP_PRESS 1
+#define TOUCH_SCREEN_ARROW_DOWN_PRESS 2
+u32 GetTouchScreenArrowPress(s32 a0, const void *a1);
 
 #define GET_CURRENT_MENU_ENTRY(menuInput)((menuInput.currPage * menuInput.entriesPerPage) + menuInput.menuIndex)
 
