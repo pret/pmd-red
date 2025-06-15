@@ -660,7 +660,7 @@ bool8 sub_806B8CC(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a4, b
     {
         u32 pickUpItem = GetRandomFloorItem(0);
         if (pickUpItem != ITEM_POKE) {
-            ItemIdToSlot(&entityInfo->heldItem, pickUpItem, 0);
+            ItemIdToItem(&entityInfo->heldItem, pickUpItem, 0);
             entityInfo->unkF3 = TRUE;
         }
     }

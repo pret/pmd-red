@@ -25,10 +25,10 @@ static void SpawnItemAtPos(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
     DungeonPos pos = {x, y};
 
     if (sub_805210C(itemId)) {
-        ItemIdToSlot(&item, ITEM_LINK_CABLE, 0);
+        ItemIdToItem(&item, ITEM_LINK_CABLE, 0);
     }
     else {
-        ItemIdToSlot(&item, itemId, 0);
+        ItemIdToItem(&item, itemId, 0);
     }
 
     item.flags |= itemFlags;

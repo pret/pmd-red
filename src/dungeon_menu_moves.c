@@ -1061,7 +1061,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
         }
 
         if (yesNoAnswer == 1) {
-            moves[sChosenMoveSlotId].moveFlags = 0;
+            ResetMoveFlags(&moves[sChosenMoveSlotId]);
             for (i = sChosenMoveSlotId + 1; i < 8; i++) {
                 Move *move = &moves[i];
                 if (!MoveFlagExists(move))

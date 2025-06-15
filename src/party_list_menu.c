@@ -230,7 +230,7 @@ void HandlePartyListMenuCallback(void)
             sub_8012D60(&sUnknown_203B2B8->unkCC,sUnknown_203B2B8->unk16C,0,sUnknown_203B2B8->unk20C,sUnknown_203B2B8->menuAction2,2);
             break;
         case 0x15:
-            HeldItemToSlot(&item,&sUnknown_203B2B8->item1);
+            BulkItemToItem(&item,&sUnknown_203B2B8->item1);
             InitItemDescriptionWindow(&item);
             break;
         case PARTY_LIST_STATE_MOVES:
@@ -672,7 +672,7 @@ void PartyListMenu_HandleMenu2(void)
           AddHeldItemToInventory(&sUnknown_203B2B8->item2);
           nextState = PARTY_LIST_STATE_GIVEN_ITEM_HELD_ITEM;
         }
-        HeldItemToSlot(&slot,&sUnknown_203B2B8->item1);
+        BulkItemToItem(&slot,&sUnknown_203B2B8->item1);
         temp.unk0 = 0;
         temp.unk4 = 0;
         temp.unk8 = 1;
@@ -760,7 +760,7 @@ void sub_8026DAC(u32 r0, BulkItem *item)
 
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
-    HeldItemToSlot(&slot, item);
+    BulkItemToItem(&slot, item);
     temp.unk0 = 0;
     temp.unk4 = 0;
     temp.unk8 = 1;

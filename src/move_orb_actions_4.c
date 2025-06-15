@@ -271,13 +271,13 @@ bool8 RecycleMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param
             {
                 Item *item = &gTeamInventoryRef->teamItems[i];
                 if (item->id == ITEM_TM_USED_TM) {
-                    ItemIdToSlot(item, item->quantity + 0x7d,0);
+                    ItemIdToItem(item, item->quantity + 0x7d,0);
                     isTMRecycled = TRUE;
                 }
             }
         }
         if (ItemExists(&entityInfo->heldItem) && (entityInfo->heldItem.id == ITEM_TM_USED_TM)) {
-            ItemIdToSlot(&entityInfo->heldItem,entityInfo->heldItem.quantity + 0x7D,0);
+            ItemIdToItem(&entityInfo->heldItem,entityInfo->heldItem.quantity + 0x7D,0);
             isTMRecycled = TRUE;
         }
     }

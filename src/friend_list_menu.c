@@ -219,7 +219,7 @@ void sub_8025518(void)
         sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction2,2);
         break;
     case FRIEND_LIST_MENU_STATE_INFO:
-        HeldItemToSlot(&item, &gUnknown_203B2B4->item1);
+        BulkItemToItem(&item, &gUnknown_203B2B4->item1);
         InitItemDescriptionWindow(&item);
         break;
     case FRIEND_LIST_MENU_STATE_ITEM_GIVEN:
@@ -534,7 +534,7 @@ void sub_8025CB4(void)
                 AddHeldItemToInventory(&gUnknown_203B2B4->item2);
                 nextState = FRIEND_LIST_MENU_STATE_ITEM_EXCHANGE;
             }
-            HeldItemToSlot(&item,&gUnknown_203B2B4->item1);
+            BulkItemToItem(&item,&gUnknown_203B2B4->item1);
             a3.unk0 = 0;
             a3.unk4 = 0;
             a3.unk8 = 1;
@@ -634,7 +634,7 @@ void sub_8025E68(u32 r0, BulkItem *heldItem)
 
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
-    HeldItemToSlot(&item, heldItem);
+    BulkItemToItem(&item, heldItem);
     a3.unk0 = 0;
     a3.unk4 = 0;
     a3.unk8 = 1;

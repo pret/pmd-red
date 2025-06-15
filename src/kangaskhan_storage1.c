@@ -669,14 +669,14 @@ static void sub_8017B88(void)
                 UpdateKangaskhanStorageState(28);
             else {
                 gKangaskhanStorageWork->id = sub_801CB24();
-                ItemIdToSlot(&gKangaskhanStorageWork->storedItem, gKangaskhanStorageWork->id, 0);
+                ItemIdToItem(&gKangaskhanStorageWork->storedItem, gKangaskhanStorageWork->id, 0);
                 gKangaskhanStorageWork->storedItem.quantity = 1;
                 UpdateKangaskhanStorageState(25);
             }
             break;
         case 4:
             gKangaskhanStorageWork->id = sub_801CB24();
-            ItemIdToSlot(&gKangaskhanStorageWork->storedItem, gKangaskhanStorageWork->id, 0);
+            ItemIdToItem(&gKangaskhanStorageWork->storedItem, gKangaskhanStorageWork->id, 0);
             gKangaskhanStorageWork->storedItem.quantity = 1;
             UpdateKangaskhanStorageState(26);
             break;

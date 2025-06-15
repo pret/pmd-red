@@ -172,7 +172,6 @@ u8 sub_80A8D20();
 bool8 sub_80A87E0();
 s16 sub_80A8BFC(s16);
 void sub_80A8F50(const u8 *buffer, s32, s32 size);
-Pokemon *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation *location, u16 *moveID);
 bool8 HasRecruitedMon(s32 species);
 extern Item gUnknown_8116844;
 extern Item gUnknown_81167E4;
@@ -203,7 +202,7 @@ ALIGNED(4) EWRAM_DATA u8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
 ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
 EWRAM_DATA u32 gUnlockBranchLabels[SCRIPT_LOCKS_ARR_COUNT + 1] = {0};
 EWRAM_DATA MenuItem gChoices[9] = {0};
-EWRAM_DATA char gUnknown_2039D98[POKEMON_NAME_LENGTH + 2] = {0};
+static EWRAM_DATA char sPokeNameBuffer[POKEMON_NAME_LENGTH + 2] = {0};
 EWRAM_DATA u32 gUnknown_2039DA4 = 0;
 EWRAM_DATA u16 gUnknown_2039DA8 = 0;
 EWRAM_INIT static int sNumChoices = 0;
@@ -1165,7 +1164,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                     Pokemon *mon = sub_80A8D54(id);
                                     s32 i;
                                     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
-                                        mon->name[i] = gUnknown_2039D98[i];
+                                        mon->name[i] = sPokeNameBuffer[i];
                                     }
                                 }
                             }
@@ -1181,7 +1180,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 break;
                             }
                             if (val == 1) {
-                                SetRescueTeamName(gUnknown_2039D98);
+                                SetRescueTeamName(sPokeNameBuffer);
                             }
                             action->scriptData.script.ptr = ResolveJump(action, val);
                             action->scriptData.savedState = 3;
@@ -1201,7 +1200,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                         name[i] = '\0';
                                     }
 
-                                    CopyStringtoBuffer(gUnknown_2039D98, name);
+                                    CopyStringtoBuffer(sPokeNameBuffer, name);
                                     for (i = 0; i < 16; i++) {
                                         if (name[i] != ptr[i]) {
                                             val = 2;
@@ -1978,33 +1977,33 @@ s32 ExecuteScriptCommand(Action *action)
                     Pokemon *mon = sub_80A8D54(curCmd.arg1);
                     if (mon != NULL) {
                         for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
-                            gUnknown_2039D98[i] = mon->name[i];
+                            sPokeNameBuffer[i] = mon->name[i];
                         }
-                        gUnknown_2039D98[POKEMON_NAME_LENGTH] = 0;
-                        sub_809B1C0(4, 0, gUnknown_2039D98);
+                        sPokeNameBuffer[POKEMON_NAME_LENGTH] = 0;
+                        sub_809B1C0(4, 0, sPokeNameBuffer);
                         sub_80A87AC(0, 11);
                         return 2;
                     }
                     break;
                 } else {
-                    sub_809B1C0(4, 1, gUnknown_2039D98);
+                    sub_809B1C0(4, 1, sPokeNameBuffer);
                     sub_80A87AC(0, 11);
                     return 2;
                 }
             }
             case 0x3e: {
-                sub_80920B8(gUnknown_2039D98);
-                gUnknown_2039D98[10] = 0;
-                sub_809B1C0(5, 0, gUnknown_2039D98);
+                sub_80920B8(sPokeNameBuffer);
+                sPokeNameBuffer[10] = 0;
+                sub_809B1C0(5, 0, sPokeNameBuffer);
                 sub_80A87AC(0, 11);
                 return 2;
             }
             case 0x3f: {
                 int i;
                 for (i = 0; i < 12; i++) {
-                    gUnknown_2039D98[i] = 0;
+                    sPokeNameBuffer[i] = 0;
                 }
-                sub_809B1C0(6, (u8)curCmd.argByte, gUnknown_2039D98);
+                sub_809B1C0(6, (u8)curCmd.argByte, sPokeNameBuffer);
                 sub_80A87AC(0, 11);
                 return 2;
             }
@@ -3070,7 +3069,6 @@ UNUSED static bool8 GroundScript_ExecuteTrigger(s16 r0)
         return FALSE;
 }
 
-extern struct StoryMonData gUnknown_8116760;
 extern struct StoryMonData gUnknown_8116794;
 extern struct StoryMonData gUnknown_81167BC;
 extern struct StoryMonData gUnknown_8116738;
@@ -3253,13 +3251,13 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             UnlockFriendArea(MIST_RISE_FOREST);
             return 0;
         case 0x18:
-            sub_80A8F50(gUnknown_2039D98, 0x3C, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x3C, POKEMON_NAME_LENGTH);
             return 0;
         case 0x19:
             UnlockFriendArea(GetFriendArea(MONSTER_MAGNEMITE));
             {
-                struct StoryMonData sp_4 = {
-                    .name = gUnknown_2039D98,
+                struct StoryMonData magnemiteData = {
+                    .name = sPokeNameBuffer,
                     .speciesNum = MONSTER_MAGNEMITE,
                     .itemID = ITEM_NOTHING,
                     .dungeonLocation = {.id = DUNGEON_POKEMON_SQUARE_2, .floor = 0},
@@ -3271,44 +3269,57 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     .offenseDef = {20, 18},
                     .currExp = 4560,
                 };
-                Pokemon sp_2c;
-                Pokemon *ptr;
+                Pokemon magnemiteMon;
+                Pokemon *recruitPtr;
                 s32 index;
 
-                ConvertStoryMonToPokemon(&sp_2c, &sp_4);
-                ptr = sub_808D1DC(&sp_2c);
-                if (ptr == NULL) return 1;
-                for(index = 0; index < POKEMON_NAME_LENGTH; index++)
-                {
-                    ptr->name[index] = gUnknown_2039D98[index];
+                ConvertStoryMonToPokemon(&magnemiteMon, &magnemiteData);
+                recruitPtr = TryAddPokemonToRecruited(&magnemiteMon);
+                if (recruitPtr == NULL)
+                    return 1;
+                for (index = 0; index < POKEMON_NAME_LENGTH; index++) {
+                    recruitPtr->name[index] = sPokeNameBuffer[index];
                 }
-                StrncpyCustom(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
+                StrncpyCustom(gFormatBuffer_Names[r2], sPokeNameBuffer, POKEMON_NAME_LENGTH);
                 IncrementAdventureNumJoined();
                 return 0;
             }
             break;
         case 0x1A:
-            sub_80A8F50(gUnknown_2039D98, 0x53, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x53, POKEMON_NAME_LENGTH);
             return 0;
-         case 0x1B:
+        case 0x1B:
+             UnlockFriendArea(GetFriendArea(MONSTER_ABSOL));
              {
-                Pokemon *pokemon;
-                 struct StoryMonData sp_84;
-                 Pokemon sp_ac;
+                Pokemon *recruitPtr;
+                struct StoryMonData absolData = {
+                    .name = sPokeNameBuffer,
+                    .speciesNum = MONSTER_ABSOL,
+                    .itemID = ITEM_NOTHING,
+                    .dungeonLocation = {.id = DUNGEON_FROSTY_GROTTO_2, .floor = 0},
+                    .moveID = {MOVE_SCRATCH, MOVE_LEER, MOVE_TAUNT, MOVE_QUICK_ATTACK},
+                    .pokeHP = 80,
+                    .level = 20,
+                    .IQ = 1,
+                    .offenseAtk = {33, 32},
+                    .offenseDef = {31, 32},
+                    .currExp = 43000,
+                };
+                Pokemon absolMon;
 
-                UnlockFriendArea(GetFriendArea(MONSTER_ABSOL));
-                sp_84 = gUnknown_8116738;
-                ConvertStoryMonToPokemon(&sp_ac, &sp_84);
-                pokemon = sub_808D1DC(&sp_ac);
-                if(pokemon == NULL) return 1;
+                ConvertStoryMonToPokemon(&absolMon, &absolData);
+                recruitPtr = TryAddPokemonToRecruited(&absolMon);
+                if (recruitPtr == NULL)
+                    return 1;
                 IncrementAdventureNumJoined();
-                pokemon->flags |= POKEMON_FLAG_ON_TEAM;
+                recruitPtr->flags |= POKEMON_FLAG_ON_TEAM;
                 return 0;
              }
         case 0x1C:
             {
-                Pokemon *pokemon = sub_808D434(MONSTER_ABSOL, 0);
-                if(pokemon == NULL) return 1;
+                Pokemon *pokemon = GetRecruitedMonBySpecies(MONSTER_ABSOL, 0);
+                if (pokemon == NULL)
+                    return 1;
                 pokemon->flags |= POKEMON_FLAG_ON_TEAM;
                 return 0;
             }
@@ -3320,65 +3331,67 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     return 0;
             }
         case 0x1E:
-             sub_80A8F50(gUnknown_2039D98, 0x7C, POKEMON_NAME_LENGTH);
+             sub_80A8F50(sPokeNameBuffer, 0x7C, POKEMON_NAME_LENGTH);
              return 0;
 
         case 0x1F:
             {
-                Pokemon *pokemon;
+                Pokemon *recruitPtr;
                 s32 index;
-                struct StoryMonData sp_108;
-                Pokemon sp_130;
+                struct StoryMonData smeargleData = {
+                    .name = sPokeNameBuffer,
+                    .speciesNum = MONSTER_SMEARGLE,
+                    .itemID = ITEM_NOTHING,
+                    .dungeonLocation = {.id = DUNGEON_HOWLING_FOREST_2, .floor = 0},
+                    .moveID = {MOVE_SKETCH, MOVE_NOTHING, MOVE_NOTHING, MOVE_NOTHING},
+                    .pokeHP = 47,
+                    .level = 5,
+                    .IQ = 1,
+                    .offenseAtk = {16, 20},
+                    .offenseDef = {20, 16},
+                    .currExp = 1600,
+                };
+                Pokemon smeargleMon;
 
-                sp_108 = gUnknown_8116760;
-                ConvertStoryMonToPokemon(&sp_130, &sp_108);
-                pokemon = sub_808D1DC(&sp_130);
-                if(!pokemon) return 1;
-                for(index = 0; index < POKEMON_NAME_LENGTH; index++)
-                {
-                    pokemon->name[index] = gUnknown_2039D98[index];
+                ConvertStoryMonToPokemon(&smeargleMon, &smeargleData);
+                recruitPtr = TryAddPokemonToRecruited(&smeargleMon);
+                if (!recruitPtr)
+                    return 1;
+                for (index = 0; index < POKEMON_NAME_LENGTH; index++) {
+                    recruitPtr->name[index] = sPokeNameBuffer[index];
                 }
-                StrncpyCustom(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
+                StrncpyCustom(gFormatBuffer_Names[r2], sPokeNameBuffer, POKEMON_NAME_LENGTH);
                 IncrementAdventureNumJoined();
                 return 0;
-
             }
             break;
-
         case 0x20:
-            {
-                sub_80026E8(0x9E, 0x1);
-                if(sub_808D434(MONSTER_ZAPDOS, 0) == NULL)
-                {
-                    if(sub_808D2E8(MONSTER_ZAPDOS, NULL, ITEM_NOTHING, &gUnknown_8116788, NULL))
-                        IncrementAdventureNumJoined();
-                }
-                if(sub_808D434(MONSTER_MOLTRES, 0) == NULL)
-                {
-                    if(sub_808D2E8(MONSTER_MOLTRES, NULL, ITEM_NOTHING, &gUnknown_811678C, NULL))
-                        IncrementAdventureNumJoined();
-                }
-                if(sub_808D434(MONSTER_ARTICUNO, 0) == NULL)
-                {
-                    if(sub_808D2E8(MONSTER_ARTICUNO, NULL, ITEM_NOTHING, &gUnknown_8116790, NULL))
-                        IncrementAdventureNumJoined();
-                }
-                return 0;
+            sub_80026E8(0x9E, 0x1);
+            if (GetRecruitedMonBySpecies(MONSTER_ZAPDOS, 0) == NULL) {
+                static const DungeonLocation zapdosLoc = {.id = DUNGEON_MT_THUNDER_PEAK, .floor = 99};
+                if (TryAddLevel1PokemonToRecruited(MONSTER_ZAPDOS, NULL, ITEM_NOTHING, &zapdosLoc, NULL))
+                    IncrementAdventureNumJoined();
             }
-            break;
-
-
+            if (GetRecruitedMonBySpecies(MONSTER_MOLTRES, 0) == NULL) {
+                static const DungeonLocation moltresLoc = {.id = DUNGEON_MT_BLAZE_PEAK, .floor = 99};
+                if (TryAddLevel1PokemonToRecruited(MONSTER_MOLTRES, NULL, ITEM_NOTHING, &moltresLoc, NULL))
+                    IncrementAdventureNumJoined();
+            }
+            if (GetRecruitedMonBySpecies(MONSTER_ARTICUNO, 0) == NULL) {
+                static const DungeonLocation articunoLoc = {.id = DUNGEON_FROSTY_GROTTO, .floor = 99};
+                if (TryAddLevel1PokemonToRecruited(MONSTER_ARTICUNO, NULL, ITEM_NOTHING, &articunoLoc, NULL))
+                    IncrementAdventureNumJoined();
+            }
+            return 0;
         case 0x21:
-            if(HasRecruitedMon(MONSTER_ARTICUNO))
-                if(HasRecruitedMon(MONSTER_ZAPDOS))
-                    if(HasRecruitedMon(MONSTER_MOLTRES))
-                        return 1;
+            if (HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES))
+                return 1;
             return 0;
         case 0x22:
             {
                 Pokemon *pokemon = GetPlayerPokemonStruct();
 
-                if(pokemon->speciesNum != MONSTER_ARTICUNO && pokemon->speciesNum != MONSTER_ZAPDOS && pokemon->speciesNum != MONSTER_MOLTRES)
+                if (pokemon->speciesNum != MONSTER_ARTICUNO && pokemon->speciesNum != MONSTER_ZAPDOS && pokemon->speciesNum != MONSTER_MOLTRES)
                     return 1;
             }
             return 0;
@@ -3393,25 +3406,36 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             return 0;
         case 0x24:
-            sub_80A8F50(gUnknown_2039D98, 0x79, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x79, POKEMON_NAME_LENGTH);
             return 0;
 
         case 0x25:
+            if (!GetFriendAreaStatus(GetFriendArea(MONSTER_LATIOS)))
+                UnlockFriendArea(GetFriendArea(MONSTER_LATIOS));
             {
-                Pokemon *pokemon;
+                Pokemon *recruitPtr;
                 s32 index;
-                struct StoryMonData sp_188;
-                Pokemon sp_1b0;
+                struct StoryMonData latiosData = {
+                    .name = sPokeNameBuffer,
+                    .speciesNum = MONSTER_LATIOS,
+                    .itemID = ITEM_NOTHING,
+                    .dungeonLocation = {.id = DUNGEON_POKEMON_SQUARE, .floor = 0},
+                    .moveID = {MOVE_PSYWAVE, MOVE_MEMENTO, MOVE_HELPING_HAND, MOVE_SAFEGUARD},
+                    .pokeHP = 125,
+                    .level = 30,
+                    .IQ = 1,
+                    .offenseAtk = {60, 59},
+                    .offenseDef = {42, 44},
+                    .currExp = 273400,
+                };
+                Pokemon latiosMon;
 
-                if(!GetFriendAreaStatus(GetFriendArea(MONSTER_LATIOS)))
-                    UnlockFriendArea(GetFriendArea(MONSTER_LATIOS));
-                sp_188 = gUnknown_8116794;
-                ConvertStoryMonToPokemon(&sp_1b0, &sp_188);
-                pokemon = sub_808D1DC(&sp_1b0);
-                if(pokemon == NULL) return 1;
-                for(index = 0; index < POKEMON_NAME_LENGTH; index++)
-                {
-                    pokemon->name[index] = gUnknown_2039D98[index];
+                ConvertStoryMonToPokemon(&latiosMon, &latiosData);
+                recruitPtr = TryAddPokemonToRecruited(&latiosMon);
+                if (recruitPtr == NULL)
+                    return 1;
+                for (index = 0; index < POKEMON_NAME_LENGTH; index++) {
+                    recruitPtr->name[index] = sPokeNameBuffer[index];
                 }
                 IncrementAdventureNumJoined();
                 return 0;
@@ -3419,7 +3443,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
             break;
         case 0x26:
-            sub_80A8F50(gUnknown_2039D98, 0x7A, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x7A, POKEMON_NAME_LENGTH);
             return 0;
         case 0x27:
             {
@@ -3430,11 +3454,11 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
                 sp_208 = gUnknown_81167BC;
                 ConvertStoryMonToPokemon(&sp_230, &sp_208);
-                pokemon = sub_808D1DC(&sp_230);
+                pokemon = TryAddPokemonToRecruited(&sp_230);
                 if(pokemon == NULL) return 1;
                 for(index = 0; index < POKEMON_NAME_LENGTH; index++)
                 {
-                    pokemon->name[index] = gUnknown_2039D98[index];
+                    pokemon->name[index] = sPokeNameBuffer[index];
                 }
                 IncrementAdventureNumJoined();
                 return 0;
@@ -3548,7 +3572,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             break;
         case 0x2B:
-            sub_80A8F50(gUnknown_2039D98, 0x20, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x20, POKEMON_NAME_LENGTH);
             return 0;
         case 0x2C:
             {
@@ -3564,12 +3588,12 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
                     if(!GetFriendAreaStatus(GetFriendArea(id)))
                         UnlockFriendArea(GetFriendArea(id));
-                    pokemon = sub_808D2E8(matchMe, NULL ,ITEM_NOTHING, &gUnknown_81167E8, MOVE_NOTHING);
+                    pokemon = TryAddLevel1PokemonToRecruited(matchMe, NULL ,ITEM_NOTHING, &gUnknown_81167E8, MOVE_NOTHING);
                     if(pokemon == NULL)
                         return 0;
 
                     for(index = 0; index < POKEMON_NAME_LENGTH; index++)
-                        pokemon->name[index] = gUnknown_2039D98[index];
+                        pokemon->name[index] = sPokeNameBuffer[index];
                     IncrementAdventureNumJoined();
                     return 1;
                   }
@@ -3615,7 +3639,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             break;
         case 0x31:
-            sub_80A8F50(gUnknown_2039D98, 0x52, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x52, POKEMON_NAME_LENGTH);
             return 0;
 
         case 0x32:
@@ -3624,7 +3648,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 Pokemon sp_2b0;
                 sp_288 = gUnknown_811681C;
                 ConvertStoryMonToPokemon(&sp_2b0, &sp_288);
-                if(sub_808D1DC(&sp_2b0) == 0) {
+                if(TryAddPokemonToRecruited(&sp_2b0) == 0) {
                     return 1;
                 }
                 else {

@@ -1031,7 +1031,7 @@ bool8 sub_8096A08(u8 dungeon, Pokemon *pokemon)
                 temp = 0x100;
                 local_14 |= temp;
 
-                sub_808CFD0(pokemon,mail->clientSpecies,NULL,0,(DungeonLocation *) &local_14,NULL);
+                CreateLevel1Pokemon(pokemon,mail->clientSpecies,NULL,0,(DungeonLocation *) &local_14,NULL);
                 return TRUE;
             }
   }

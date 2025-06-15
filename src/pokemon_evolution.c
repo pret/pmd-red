@@ -245,7 +245,7 @@ Pokemon *sub_808F798(Pokemon *pokemon, s16 _species)
     if (copy)
         BoundedCopyStringtoBuffer(pokeStruct.name, GetMonSpecies(species), POKEMON_NAME_LENGTH);
 
-    return sub_808D1DC(&pokeStruct);
+    return TryAddPokemonToRecruited(&pokeStruct);
 }
 
 UNUSED static void sub_808F83C(Pokemon *pokemon, s16 species, u8 *r2)

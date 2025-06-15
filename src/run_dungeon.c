@@ -73,7 +73,6 @@ extern void sub_8084424(void);
 extern void sub_8086130(void);
 extern void sub_80847D4(void);
 extern void sub_8043D60(void);
-extern void sub_806890C(void);
 extern void sub_80840A4(void);
 extern void sub_80848F0(void);
 extern void IncrementAdventureFloorsExplored(void);
@@ -237,7 +236,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         if (!sub_80980A4() && gDungeon->unk644.dungeonLocation.id == DUNGEON_TINY_WOODS) {
             sub_8043FD0();
         }
-        sub_806890C();
+        SetDungeonMonsFromTeam();
     }
 
     if (r9) {

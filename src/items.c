@@ -158,92 +158,86 @@ bool8 IsThrowableItem(u8 id)
 }
 
 // arm9.bin::02060F04
-void ItemIdToSlot(Item *slot, u8 id, u8 makeSticky)
+void ItemIdToItem(Item *item, u8 id, bool8 makeSticky)
 {
     if (id != ITEM_NOTHING) {
-        slot->flags = ITEM_FLAG_EXISTS;
-        slot->id = id;
+        item->flags = ITEM_FLAG_EXISTS;
+        item->id = id;
         if (IsThrowableItem(id)) {
             s32 min = GetSpawnAmountRange(id, MIN_SPAWN_AMOUNT);
             s32 max = GetSpawnAmountRange(id, MAX_SPAWN_AMOUNT);
-            slot->quantity = RandRange(min, max);
+            item->quantity = RandRange(min, max);
         }
         else if (GetItemCategory(id) == CATEGORY_POKE) {
-            slot->quantity = 1;
+            item->quantity = 1;
         }
         else {
-            slot->quantity  = 0;
+            item->quantity  = 0;
         }
 
         if (makeSticky) {
-            slot->flags |= ITEM_FLAG_STICKY;
+            item->flags |= ITEM_FLAG_STICKY;
         }
     }
     else {
-        slot->flags = 0;
-        slot->id = ITEM_NOTHING;
-        slot->quantity  = 0;
+        item->flags = 0;
+        item->id = ITEM_NOTHING;
+        item->quantity  = 0;
     }
 }
 
 // arm9.bin::02060E80
-void xxx_init_helditem_8090B08(BulkItem *held, u8 id)
+void ItemIdToBulkItem(BulkItem *dst, u8 id)
 {
-  u32 uVar2;
-  u32 uVar3;
-
-  if (id != ITEM_NOTHING) {
-    held->id = id;
-    if (IsThrowableItem(id)) {
-        uVar2 = GetSpawnAmountRange(id,MIN_SPAWN_AMOUNT);
-        uVar3 = GetSpawnAmountRange(id,MAX_SPAWN_AMOUNT);
-        held->quantity = RandRange(uVar2, uVar3);
+    if (id != ITEM_NOTHING) {
+        dst->id = id;
+        if (IsThrowableItem(id)) {
+            s32 min = GetSpawnAmountRange(id, MIN_SPAWN_AMOUNT);
+            s32 max = GetSpawnAmountRange(id, MAX_SPAWN_AMOUNT);
+            dst->quantity = RandRange(min, max);
+        }
+        else if (GetItemCategory(id) == CATEGORY_POKE)
+            dst->quantity = 1;
+        else
+            dst->quantity = 0;
     }
-    else if (GetItemCategory(id) == CATEGORY_POKE)
-        held->quantity = 1;
-    else
-        held->quantity = 0;
-  }
-  else {
-    held->id = ITEM_NOTHING;
-    held->quantity = 0;
-  }
+    else {
+        dst->id = ITEM_NOTHING;
+        dst->quantity = 0;
+    }
 }
 
 // arm9.bin::02060DF0
-void HeldItemToSlot(Item *slot, BulkItem *held)
+void BulkItemToItem(Item *dst, BulkItem *src)
 {
     u8 is_throwable;
 
-    if(held->id != ITEM_NOTHING)
-    {
-        slot->flags = ITEM_FLAG_EXISTS;
-        slot->id = held->id;
-        is_throwable = IsThrowableItem(slot->id);
-        if(is_throwable != 0 || GetItemCategory(slot->id) == CATEGORY_POKE)
-            slot->quantity = held->quantity;
-        else if(slot->id == ITEM_TM_USED_TM)
-            slot->quantity = held->quantity;
+    if (src->id != ITEM_NOTHING) {
+        dst->flags = ITEM_FLAG_EXISTS;
+        dst->id = src->id;
+        is_throwable = IsThrowableItem(dst->id);
+        if (is_throwable != 0 || GetItemCategory(dst->id) == CATEGORY_POKE)
+            dst->quantity = src->quantity;
+        else if (dst->id == ITEM_TM_USED_TM)
+            dst->quantity = src->quantity;
         else
-            slot->quantity = 0;
+            dst->quantity = 0;
     }
-    else
-    {
-        slot->id = ITEM_NOTHING;
-        slot->quantity = 0;
-        slot->flags = 0;
+    else {
+        ZeroOutItem(dst);
     }
 }
 
 // arm9.bin::02060DC0
-void SlotToHeldItem(BulkItem *held, Item *slot)
+void ItemToBulkItem(BulkItem *dst, Item *src)
 {
-    if ((slot->flags & ITEM_FLAG_EXISTS) != 0) {
-        held->id = slot->id;
-        held->quantity = slot->quantity;
+    if (ItemExists(src)) {
+        dst->id = src->id;
+        dst->quantity = src->quantity;
     }
-    else
-        held->id = ITEM_NOTHING;
+    else {
+        dst->id = ITEM_NOTHING;
+    }
 }
 
 // arm9.bin::02060DA8
@@ -354,7 +348,7 @@ void BufferItemName(u8* dest, u8 id, struct unkStruct_8090F58* a2)
     Item unkItem;
 
     strncpy(acStack104, gItemParametersData[id].name, 80);
-    ItemIdToSlot(&unkItem, id, 0);
+    ItemIdToItem(&unkItem, id, 0);
     unkItem.quantity = 1;
     sub_8090F58(dest, acStack104, &unkItem, a2);
 }
@@ -631,7 +625,7 @@ bool8 sub_809124C(u8 id, u8 param_3)
 {
     Item temp;
 
-    ItemIdToSlot(&temp, id, param_3);
+    ItemIdToItem(&temp, id, param_3);
     return AddItemToInventory(&temp);
 }
 
@@ -640,7 +634,7 @@ bool8 AddHeldItemToInventory(BulkItem* slot)
 {
     Item temp;
 
-    HeldItemToSlot(&temp, slot);
+    BulkItemToItem(&temp, slot);
     return AddItemToInventory(&temp);
 }
 
@@ -1098,7 +1092,7 @@ bool8 AddKecleonShopItem(u8 itemIndex)
     BulkItem held;
     s32 i;
 
-    xxx_init_helditem_8090B08(&held, itemIndex); // initialize
+    ItemIdToBulkItem(&held, itemIndex); // initialize
 
     for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
         if (!gTeamInventoryRef->kecleonShopItems[i].id) {
@@ -1214,7 +1208,7 @@ static bool8 AddKecleonWareItem(u8 itemIndex)
     BulkItem held;
     s32 i;
 
-    xxx_init_helditem_8090B08(&held, itemIndex); // initialize
+    ItemIdToBulkItem(&held, itemIndex); // initialize
 
     for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
         if (!gTeamInventoryRef->kecleonWareItems[i].id) {

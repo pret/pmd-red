@@ -48,7 +48,6 @@ static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
 extern bool8 IsLevelResetTo1(u8 dungeon);
-extern void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1);
 extern void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
 extern bool8 sub_806A58C(s16 r0);
 extern void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
@@ -223,40 +222,39 @@ void CloseAllSpriteFiles(void)
     }
 }
 
-void sub_806890C(void)
+void SetDungeonMonsFromTeam(void)
 {
     int index;
-    int speciesId;
+    int recruitedId;
 
     index = 0;
-    for (speciesId = 0; speciesId < NUM_MONSTERS; speciesId++) {
-        Pokemon stack;
-        Pokemon *pokeStruct = &gRecruitedPokemonRef->pokemon[speciesId];
+    for (recruitedId = 0; recruitedId < NUM_MONSTERS; recruitedId++) {
+        Pokemon lvl1Mon;
+        Pokemon *pokeStruct = &gRecruitedPokemonRef->pokemon[recruitedId];
         if (PokemonExists(pokeStruct) && PokemonFlag2(pokeStruct)) {
-            xxx_pokemonstruct_index_to_pokemon2_808DE30(&gRecruitedPokemonRef->dungeonTeam[index],speciesId);
+            RecruitedPokemonToDungeonMon(&gRecruitedPokemonRef->dungeonTeam[index],recruitedId);
             if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
                 struct DungeonLocation dungeonLoc = {.id = DUNGEON_TINY_WOODS, .floor = 1};
-                sub_808CFD0(&stack,pokeStruct->speciesNum,0,0,&dungeonLoc,0);
-                gRecruitedPokemonRef->dungeonTeam[index].level = stack.level;
-                gRecruitedPokemonRef->dungeonTeam[index].IQ = stack.IQ;
-                gRecruitedPokemonRef->dungeonTeam[index].unk10 = stack.pokeHP;
-                gRecruitedPokemonRef->dungeonTeam[index].unk12 = stack.pokeHP;
-                gRecruitedPokemonRef->dungeonTeam[index].offense.att[0] = stack.offense.att[0];
-                gRecruitedPokemonRef->dungeonTeam[index].offense.att[1] = stack.offense.att[1];
-                gRecruitedPokemonRef->dungeonTeam[index].offense.def[0] = stack.offense.def[0];
-                gRecruitedPokemonRef->dungeonTeam[index].offense.def[1] = stack.offense.def[1];
-                gRecruitedPokemonRef->dungeonTeam[index].currExp = stack.currExp;
-                gRecruitedPokemonRef->dungeonTeam[index].IQSkills = stack.IQSkills;
-                gRecruitedPokemonRef->dungeonTeam[index].tacticIndex = stack.tacticIndex;
-                CopyAndResetMoves(&gRecruitedPokemonRef->dungeonTeam[index].moves, stack.moves);
+                CreateLevel1Pokemon(&lvl1Mon,pokeStruct->speciesNum,0,0,&dungeonLoc,0);
+                gRecruitedPokemonRef->dungeonTeam[index].level = lvl1Mon.level;
+                gRecruitedPokemonRef->dungeonTeam[index].IQ = lvl1Mon.IQ;
+                gRecruitedPokemonRef->dungeonTeam[index].unk10 = lvl1Mon.pokeHP;
+                gRecruitedPokemonRef->dungeonTeam[index].unk12 = lvl1Mon.pokeHP;
+                gRecruitedPokemonRef->dungeonTeam[index].offense.att[0] = lvl1Mon.offense.att[0];
+                gRecruitedPokemonRef->dungeonTeam[index].offense.att[1] = lvl1Mon.offense.att[1];
+                gRecruitedPokemonRef->dungeonTeam[index].offense.def[0] = lvl1Mon.offense.def[0];
+                gRecruitedPokemonRef->dungeonTeam[index].offense.def[1] = lvl1Mon.offense.def[1];
+                gRecruitedPokemonRef->dungeonTeam[index].currExp = lvl1Mon.currExp;
+                gRecruitedPokemonRef->dungeonTeam[index].IQSkills = lvl1Mon.IQSkills;
+                gRecruitedPokemonRef->dungeonTeam[index].tacticIndex = lvl1Mon.tacticIndex;
+                CopyAndResetMoves(&gRecruitedPokemonRef->dungeonTeam[index].moves, lvl1Mon.moves);
             }
             gRecruitedPokemonRef->dungeonTeam[index].unkC = index;
-            index++;
-            if (index == 4)
+            if (++index == MAX_TEAM_MEMBERS)
                 break;
         }
     }
-    for (; index < 4; index++) {
+    for (; index < MAX_TEAM_MEMBERS; index++) {
         gRecruitedPokemonRef->dungeonTeam[index].flags = 0;
     }
 }
@@ -406,7 +404,7 @@ void sub_8068BDC(bool8 a0)
             s32 k;
             for (k = 0; k < j; k++) {
                 if (monPointers[k]->flags & POKEMON_FLAG_x4000) {
-                    sub_808D1DC(monPointers[k]);
+                    TryAddPokemonToRecruited(monPointers[k]);
                 }
             }
         }
@@ -437,7 +435,7 @@ void sub_8068BDC(bool8 a0)
             }
             for (id = 0; id < j; id++) {
                 if (PokemonExists(monPointers[id]) && (monPointers[id]->flags & POKEMON_FLAG_x4000)) {
-                    sub_808D1DC(monPointers[id]);
+                    TryAddPokemonToRecruited(monPointers[id]);
                     monPointers[id]->flags = 0;
                 }
             }
@@ -1402,7 +1400,7 @@ s32 sub_806A4DC(EntityInfo *info)
     loc.id = 0;
     loc.floor = 1;
 
-    sub_808CFD0(&pokemon, info->id, NULL, 0, &loc, 0);
+    CreateLevel1Pokemon(&pokemon, info->id, NULL, 0, &loc, 0);
 
     pokemon.speciesNum = info->id;
     pokemon.level = info->level;

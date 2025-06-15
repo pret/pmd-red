@@ -30,7 +30,7 @@ void sub_80687AC(void);
 OpenedFile *GetSpriteData(s32 _species);
 void LoadPokemonSprite(s32 _id, bool32 _ignoreDeoxys);
 void CloseAllSpriteFiles(void);
-void sub_806890C(void);
+void SetDungeonMonsFromTeam(void);
 void sub_8068A84(Pokemon *pokemon);
 void sub_8068BDC(bool8 a0);
 void sub_8068F28(void);

@@ -278,7 +278,7 @@ void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool
         }
     }
     dst->tactic = pokemon->tacticIndex;
-    HeldItemToSlot(&dst->item,&pokemon->heldItem);
+    BulkItemToItem(&dst->item,&pokemon->heldItem);
     dst->IQ = pokemon->IQ;
     dst->dungeonLocation = pokemon->dungeonLocation;
     dst->unk44[0] = pokemon->unkC[0];

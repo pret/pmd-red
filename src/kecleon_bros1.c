@@ -779,7 +779,7 @@ static void sub_80199CC(void)
                 item = GetKecleonWareItem(sKecleonBrosWork1->wareShopItemIndex);
             }
 
-            ItemIdToSlot(&sKecleonBrosWork1->soldItem, item->id, 0);
+            ItemIdToItem(&sKecleonBrosWork1->soldItem, item->id, 0);
             sKecleonBrosWork1->soldItem.quantity = item->quantity;
             sKecleonBrosWork1->itemSellPrice = GetStackBuyPrice(&sKecleonBrosWork1->soldItem);
             SetKecleonBrosState(20);
@@ -794,7 +794,7 @@ static void sub_80199CC(void)
                 item = GetKecleonWareItem(sKecleonBrosWork1->wareShopItemIndex);
             }
 
-            ItemIdToSlot(&sKecleonBrosWork1->soldItem, item->id, 0);
+            ItemIdToItem(&sKecleonBrosWork1->soldItem, item->id, 0);
             sKecleonBrosWork1->soldItem.quantity = item->quantity;
             sKecleonBrosWork1->itemSellPrice = GetStackBuyPrice(&sKecleonBrosWork1->soldItem);
             SetKecleonBrosState(KECLEON_STORE_BUY_ITEM_INFO);

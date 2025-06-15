@@ -202,7 +202,7 @@ void sub_8027274(void)
             sub_8012D60(&sUnknown_203B2BC->unk7C,sUnknown_203B2BC->menuItems,0,sUnknown_203B2BC->unk16C,sUnknown_203B2BC->menuAction2,2);
             break;
         case 0xd:
-            HeldItemToSlot(&slot, &sUnknown_203B2BC->itemToGive);
+            BulkItemToItem(&slot, &sUnknown_203B2BC->itemToGive);
             InitItemDescriptionWindow(&slot);
             break;
         case 0xe:
@@ -685,7 +685,7 @@ void sub_8027D40(u32 r0, BulkItem *heldItem)
 
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
-    HeldItemToSlot(&slot, heldItem);
+    BulkItemToItem(&slot, heldItem);
     a3.unk0 = 0;
     a3.unk4 = 0;
     a3.unk8 = 1;
