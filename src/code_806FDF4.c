@@ -127,7 +127,7 @@ bool8 sub_806F660(Entity *pokemon, Entity *target)
     }
 
     for (i = 0; i < 4; i++) {
-        if (!PokemonFlag1Struct2(&gRecruitedPokemonRef->pokemon2[i]))
+        if (!DungeonMonExists(&gRecruitedPokemonRef->dungeonTeam[i]))
             break;
     }
     if (i == 4) {
@@ -236,7 +236,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
     u8 friendArea;
     bool8 flag;
     Entity *leader;
-    PokemonStruct2 *pokeStruct2;
+    DungeonMon *pokeStruct2;
     int pokeIndex;
     Entity *local_2c;
     s32 iVar2;
@@ -261,7 +261,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
     {
         for(pokeIndex = 0; pokeIndex < MAX_TEAM_MEMBERS; pokeIndex++)
         {
-            if (!(PokemonFlag1Struct2(&gRecruitedPokemonRef->pokemon2[pokeIndex])))
+            if (!(DungeonMonExists(&gRecruitedPokemonRef->dungeonTeam[pokeIndex])))
                 break;
         }
 
@@ -275,7 +275,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                 flag = TRUE;
             }
             sub_8068FE0(entity2,500,entity1);
-            pokeStruct2 = &gRecruitedPokemonRef->pokemon2[pokeIndex];
+            pokeStruct2 = &gRecruitedPokemonRef->dungeonTeam[pokeIndex];
             pokeStruct2->flags = 3;
             pokeStruct2->isTeamLeader = FALSE;
             pokeStruct2->level = param_3->level;
@@ -283,7 +283,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             SetDefaultIQSkills(&pokeStruct2->IQSkills,FALSE);
             pokeStruct2->hiddenPower = param_3->hiddenPower;
             pokeStruct2->tacticIndex = 0;
-            pokeStruct2->unkA = -1;
+            pokeStruct2->recruitedPokemonId = -1;
             pokeStruct2->unkC = pokeIndex;
             pokeStruct2->speciesNum = param_3->id;
             (pokeStruct2->dungeonLocation) = gDungeon->unk644.dungeonLocation;
@@ -363,7 +363,7 @@ bool8 sub_806FD18(Entity *param_1)
 
 
     for (i = 0; i < 4; i++) {
-        if (!(PokemonFlag1Struct2(&gRecruitedPokemonRef->pokemon2[i])))
+        if (!(DungeonMonExists(&gRecruitedPokemonRef->dungeonTeam[i])))
             break;
     }
 
@@ -385,7 +385,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
   u8 friendArea;
   bool8 flag;
   Entity *leader;
-  PokemonStruct2 *pokeStruct2;
+  DungeonMon *pokeStruct2;
   int index;
   struct unkStruct_8069D4C local_74;
   Entity *local_2c;
@@ -399,7 +399,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
 
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
   {
-    if (((u8)(index[gRecruitedPokemonRef->pokemon2].flags) & 1) == 0) break;
+    if (!DungeonMonExists(&gRecruitedPokemonRef->dungeonTeam[index])) break;
   }
 
   if (index == MAX_TEAM_MEMBERS) {
@@ -407,7 +407,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
   }
   else {
     friendArea = GetFriendArea(local_74.id);
-    pokeStruct2 = &gRecruitedPokemonRef->pokemon2[index];
+    pokeStruct2 = &gRecruitedPokemonRef->dungeonTeam[index];
     pokeStruct2->flags = 3;
     pokeStruct2->isTeamLeader = FALSE;
     pokeStruct2->level = local_74.level;
@@ -415,7 +415,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
     SetDefaultIQSkills(&pokeStruct2->IQSkills,FALSE);
     pokeStruct2->hiddenPower = local_74.hiddenPower;
     pokeStruct2->tacticIndex = 0;
-    pokeStruct2->unkA = -1;
+    pokeStruct2->recruitedPokemonId = -1;
     pokeStruct2->unkC = index;
     pokeStruct2->speciesNum = local_74.id;
     pokeStruct2->dungeonLocation = gDungeon->unk644.dungeonLocation;

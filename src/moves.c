@@ -281,17 +281,13 @@ s32 unk_FindMoveEnabledForAIAfter4(Move *moves, s32 index)
     s32 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++) {
-        u8 flag;
-
         if (++index == MAX_MON_MOVES)
             return 0;
 
-        if (!(moves[index].moveFlags & MOVE_FLAG_EXISTS))
+        if (!MoveFlagExists(&moves[index]))
             return 0;
 
-        // checks MOVE_FLAG_ENABLED_FOR_AI
-        flag = (moves[index].moveFlags >> 1);
-        if (!(flag & 1))
+        if (!MoveFlagLinkChain(&moves[index]))
             return index;
     }
 
@@ -303,8 +299,6 @@ s32 sub_8092DB8(Move *moves, s32 index)
     s32 i, j;
 
     for (i = 0; i < MAX_MON_MOVES; i++) {
-        u8 flag;
-
         if (--index < 0) {
             for (j = MAX_MON_MOVES - 1; j >= 0; j--) {
                 if (!(moves[j].moveFlags & MOVE_FLAG_EXISTS)) {
@@ -320,12 +314,10 @@ s32 sub_8092DB8(Move *moves, s32 index)
                 return 0;
         }
 
-        if (!(moves[index].moveFlags & MOVE_FLAG_EXISTS))
+        if (!MoveFlagExists(&moves[index]))
             return 0;
 
-        // checks MOVE_FLAG_ENABLED_FOR_AI
-        flag = (moves[index].moveFlags >> 1);
-        if (!(flag & 1))
+        if (!(MoveFlagLinkChain(&moves[index])))
             return index;
     }
 
@@ -337,17 +329,13 @@ s32 unk_FindMoveEnabledForAIAfter8(Move *moves, s32 index)
     s32 i;
 
     for (i = 0; i < 8; i++) {
-        u8 flag;
-
         if (++index == 8)
             return 0;
 
-        if (!(moves[index].moveFlags & 1))
+        if (!MoveFlagExists(&moves[index]))
             return 0;
 
-        // checks MOVE_FLAG_ENABLED_FOR_AI
-        flag = (moves[index].moveFlags >> 1);
-        if (!(flag & 1))
+        if (!(MoveFlagLinkChain(&moves[index])))
             return index;
     }
 
@@ -359,17 +347,13 @@ s32 unk_FindMoveEnabledForAIAfter8_v2(Move *moves, s32 index)
     s32 i;
 
     for (i = 0; i < 8; i++) {
-        u8 flag;
-
         if (++index == 8)
             return 0;
 
-        if (!(moves[index].moveFlags & 1))
+        if (!MoveFlagExists(&moves[index]))
             return 0;
 
-        // checks MOVE_FLAG_ENABLED_FOR_AI
-        flag = (moves[index].moveFlags >> 1);
-        if (!(flag & 1))
+        if (!(MoveFlagLinkChain(&moves[index])))
             return index;
     }
 
@@ -383,27 +367,21 @@ s32 unk_FindMoveEnabledForAIBefore8(Move *moves, s32 index)
     s32 i, j;
 
     for (i = 0; i < 8; i++) {
-        u8 flag;
-
         if (--index < 0) {
             for (j = 7; j > 0; j--) {
-                if (!(moves[j].moveFlags & MOVE_FLAG_EXISTS))
+                if (!MoveFlagExists(&moves[j]))
                     continue;
 
-                // checks MOVE_FLAG_ENABLED_FOR_AI
-                flag = (moves[j].moveFlags >> 1);
-                if (!(flag & 1))
+                if (!(MoveFlagLinkChain(&moves[j])))
                     return j;
             }
             return 0;
         }
 
-        if (!(moves[index].moveFlags & MOVE_FLAG_EXISTS))
+        if (!MoveFlagExists(&moves[index]))
             return 0;
 
-        // checks MOVE_FLAG_ENABLED_FOR_AI
-        flag = (moves[index].moveFlags >> 1);
-        if (!(flag & 1))
+        if (!(MoveFlagLinkChain(&moves[index])))
             return index;
     }
 
@@ -415,27 +393,21 @@ s32 unk_FindMoveEnabledForAIBefore8_v2(Move *moves, s32 index)
     s32 i, j;
 
     for (i = 0; i < 8; i++) {
-        u8 flag;
-
         if (--index < 0) {
             for (j = 7; j > 0; j--) {
-                if (!(moves[j].moveFlags & MOVE_FLAG_EXISTS))
+                if (!MoveFlagExists(&moves[j]))
                     continue;
 
-                // checks MOVE_FLAG_ENABLED_FOR_AI
-                flag = (moves[j].moveFlags >> 1);
-                if (!(flag & 1))
+                if (!(MoveFlagLinkChain(&moves[j])))
                     return j;
             }
             return 0;
         }
 
-        if (!(moves[index].moveFlags & MOVE_FLAG_EXISTS))
+        if (!MoveFlagExists(&moves[index]))
             return 0;
 
-        // checks MOVE_FLAG_ENABLED_FOR_AI
-        flag = (moves[index].moveFlags >> 1);
-        if (!(flag & 1))
+        if (!(MoveFlagLinkChain(&moves[index])))
             return index;
     }
 
@@ -448,14 +420,11 @@ s32 sub_8092F4C(Move *moves, s32 index)
 
     for (i = index; i > 0; i--) {
         Move* move = &moves[i];
-        u8 flag;
 
-        if (!(move->moveFlags & MOVE_FLAG_EXISTS))
+        if (!MoveFlagExists(move))
             return 0;
 
-        // checks MOVE_FLAG_ENABLED_FOR_AI
-        flag = (move->moveFlags >> 1);
-        if (!(flag & 1))
+        if (!(MoveFlagLinkChain(move)))
             return i;
     }
 
@@ -729,7 +698,7 @@ bool8 IsAnyMoveLinked(s32 unused, Move *moves)
     counter = 0;
 
     for (i = 0; i < 8; i++) {
-        if ((moves[i].moveFlags & MOVE_FLAG_EXISTS) && !(moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+        if ((moves[i].moveFlags & MOVE_FLAG_EXISTS) && !(MOVE_FLAG_LINK_CHAIN(&moves[i])))
             counter++;
     }
 
@@ -755,13 +724,13 @@ bool8 TryLinkMovesAfter(s32 index, Move *moves)
         return FALSE;
 
     for (i = index + 1; i < 8; i++) {
-        if (!(moves[i].moveFlags & MOVE_FLAG_EXISTS))
+        if (!MoveFlagExists(&moves[i]))
             return FALSE;
 
         if (DoesMoveCharge(moves[i].id))
             return FALSE;
 
-        if (!(moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)) {
+        if (!(MOVE_FLAG_LINK_CHAIN(&moves[i]))) {
             moves[i].moveFlags |= MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN;
             unk_FixLinkedMovesSetEnabled8_v2(moves);
             return TRUE;
@@ -778,13 +747,15 @@ bool8 UnlinkMovesAfter(s32 index, Move *moves)
     s32 r4;
 
     for (i = index + 1, r4 = 0; r4 < 8 && i < 8; i++, r4++) {
-        if (!(moves[i].moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
-            goto label; // for some reason we can't use break here
-
-        moves[i].moveFlags &= ~MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN;
-        result = TRUE;
+        if (MOVE_FLAG_LINK_CHAIN(&moves[i])) {
+            MOVE_FLAG_CLEAR_LINK_CHAIN(&moves[i]);
+            result = TRUE;
+        }
+        else {
+            break;
+        }
     }
-label:
+
     unk_FixLinkedMovesSetEnabled8_v2(moves);
     return result;
 }
@@ -801,7 +772,7 @@ bool8 IsNextMoveLinked(s32 index, Move *moves)
     if (!(move->moveFlags & MOVE_FLAG_EXISTS))
         return FALSE;
 
-    if (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
+    if MOVE_FLAG_LINK_CHAIN(move)
         return TRUE;
 
     return FALSE;
@@ -862,7 +833,7 @@ s32 GetLinkedSequence(s32 index, Move *moves, u16 *sequenceMoveIDs)
 
     for (index++, sequenceMoveIDs++; index < 8 && linkedSequenceLength <= 3; index++) {
         move = &moves[index];
-        if (!(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+        if (!MOVE_FLAG_LINK_CHAIN(move))
             return linkedSequenceLength;
 
         *sequenceMoveIDs++ = move->id;
@@ -889,7 +860,7 @@ s32 sub_80935B8(Move *moves, s32 index)
     while (linkSequenceStart >= 0) {
         Move *move = &moves[linkSequenceStart];
 
-        if (!((move->moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)))
+        if (!((move->moveFlags & MOVE_FLAG_EXISTS) && MOVE_FLAG_LINK_CHAIN(move)))
             break;
 
         linkSequenceStart--;
@@ -901,7 +872,7 @@ s32 sub_80935B8(Move *moves, s32 index)
     for (i = linkSequenceStart + 1; i < MAX_MON_MOVES; i++) {
         Move *move = &moves[i];
 
-        if (!((move->moveFlags & MOVE_FLAG_EXISTS) && (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)))
+        if (!((move->moveFlags & MOVE_FLAG_EXISTS) && MOVE_FLAG_LINK_CHAIN(move)))
             break;
 
         isNonTrivialLinkSequence = TRUE;
@@ -915,7 +886,7 @@ s32 sub_80935B8(Move *moves, s32 index)
     while (--i >= linkSequenceStart) {
         Move* move = &moves[i];
 
-        if (!(move->moveFlags & MOVE_FLAG_EXISTS))
+        if (!MoveFlagExists(move))
             break;
 
         if (pp > move->PP)
@@ -930,12 +901,12 @@ s32 sub_80935B8(Move *moves, s32 index)
         return pp;
 
     for (i = linkSequenceStart + 1; i < MAX_MON_MOVES; i++) {
-        Move* move = &moves[i];
+        Move *move = &moves[i];
 
-        if (!(moves[i].moveFlags & MOVE_FLAG_EXISTS))
+        if (!MoveFlagExists(move))
             break;
 
-        if (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN) {
+        if MOVE_FLAG_LINK_CHAIN(move) {
             move->moveFlags &= ~MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN;
             any_move_linked = TRUE;
         }
@@ -1125,7 +1096,7 @@ static void unk_GetLinkedSequences8(Move *moves, Move linkedSequences[8][8])
     for (j = 0, k = 0; k < 8; j++, k++) {
         Move* move = &moves[k];
 
-        if (k == 0 || !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)) {
+        if (k == 0 || !MOVE_FLAG_LINK_CHAIN(move)) {
             moveSetIndex++;
             j = 0;
         }
@@ -1291,7 +1262,7 @@ UNUSED static void RemoveLinkSequenceFromMoves8_v2(Move *moves, s32 index)
 
     for (i = index + 1; i < 8; i++) {
         Move* move = &moves[i];
-        if (!MoveFlagExists(move) || !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+        if (!MoveFlagExists(move) || !MOVE_FLAG_LINK_CHAIN(move))
             break;
 
         move->moveFlags = 0;
@@ -1322,7 +1293,7 @@ void RemoveLinkSequenceFromMoves8(Move *moves, s32 index)
 
     for (i = index + 1; i < 8; i++) {
         Move* move = &moves[i];
-        if (!MoveFlagExists(move) || !(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+        if (!MoveFlagExists(move) || !MOVE_FLAG_LINK_CHAIN(move))
             break;
 
         move->moveFlags = 0;

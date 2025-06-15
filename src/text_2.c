@@ -65,7 +65,7 @@ u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, 
     sp8 = sp0->unk0 - 3;
 
     if (gDrawTextShadow != 0) {
-        var_2C = (sp0->unkA >> 1) & 1;
+        var_2C = (sp0->unkA & 2) != 0;
     }
     else {
         var_2C = 0;

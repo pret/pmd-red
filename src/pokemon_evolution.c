@@ -9,7 +9,7 @@
 #include "constants/evolve_type.h"
 #include "constants/evolution_status.h"
 
-void SetMonEvolveStatus(PokemonStruct1 *pokemon, EvolveStatus *evolveStatus, bool8 param_3)
+void SetMonEvolveStatus(Pokemon *pokemon, EvolveStatus *evolveStatus, bool8 param_3)
 {
     struct FriendAreaCapacity friendAreaCapacity;
     struct unkEvolve evolveConditions;
@@ -170,7 +170,7 @@ void SetMonEvolveStatus(PokemonStruct1 *pokemon, EvolveStatus *evolveStatus, boo
     }
 }
 
-s32 GetMonSummaryScreenEvoStringId(PokemonStruct1 *pokemon)
+s32 GetMonSummaryScreenEvoStringId(Pokemon *pokemon)
 {
     EvolveStatus evolveStatus;
 
@@ -186,11 +186,11 @@ s32 GetMonSummaryScreenEvoStringId(PokemonStruct1 *pokemon)
     }
 }
 
-PokemonStruct1 *sub_808F734(PokemonStruct1 *pokemon, s16 _species)
+Pokemon *sub_808F734(Pokemon *pokemon, s16 _species)
 {
-    PokemonStruct1 *uVar1;
-    PokemonStruct1 *iVar3;
-    PokemonStruct1 pokeStruct;
+    Pokemon *uVar1;
+    Pokemon *iVar3;
+    Pokemon pokeStruct;
     s32 species = _species;
 
     iVar3 = NULL;
@@ -208,11 +208,11 @@ PokemonStruct1 *sub_808F734(PokemonStruct1 *pokemon, s16 _species)
     return uVar1;
 }
 
-PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, s16 _species)
+Pokemon *sub_808F798(Pokemon *pokemon, s16 _species)
 {
     s32 r6;
     s32 i;
-    PokemonStruct1 pokeStruct;
+    Pokemon pokeStruct;
     LevelData levelData;
     u8 buffer [64];
     s32 species = _species;
@@ -248,7 +248,7 @@ PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, s16 _species)
     return sub_808D1DC(&pokeStruct);
 }
 
-UNUSED static void sub_808F83C(PokemonStruct1 *pokemon, s16 species, u8 *r2)
+UNUSED static void sub_808F83C(Pokemon *pokemon, s16 species, u8 *r2)
 {
     *r2 = 0;
 }

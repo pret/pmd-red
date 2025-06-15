@@ -64,7 +64,7 @@ bool8 HasRecruitedMon(s16 species)
 {
     s32 species_s32 = species;
     s32 i = 0;
-    PokemonStruct1 *pokemon = gRecruitedPokemonRef->pokemon;
+    Pokemon *pokemon = gRecruitedPokemonRef->pokemon;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
         if (((u8)pokemon->flags & 1)) {
@@ -268,7 +268,7 @@ s32 ExtractLevel(SpawnPokemonData *data)
     return (data->bits >> PACKED_BITS_LEVEL_SHIFT) & PACKED_BITS_LEVEL;
 }
 
-UNUSED static void GetMonOffenseStats(PokemonStruct1 *mon, struct UnusedOffenseStruct *dst)
+UNUSED static void GetMonOffenseStats(Pokemon *mon, struct UnusedOffenseStruct *dst)
 {
     dst->att[0] = mon->offense.att[0];
     dst->att[1] = mon->offense.att[1];
@@ -543,7 +543,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     count = 0;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        PokemonStruct1 *pokemon = &gRecruitedPokemonRef->pokemon[i];
+        Pokemon *pokemon = &gRecruitedPokemonRef->pokemon[i];
 
         if (PokemonExists(pokemon)) {
             if (pokemon->flags & POKEMON_FLAG_ON_TEAM)
@@ -622,7 +622,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
 }
 
 // arm9.bin::0205C9D4
-void WritePoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
+void WritePoke1Bits(DataSerializer* a1, Pokemon* pokemon)
 {
     WriteBits(a1, &pokemon->level, 7);
     WriteBits(a1, &pokemon->speciesNum, 9);
@@ -644,9 +644,9 @@ void WritePoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
 }
 
 // arm9.bin::0205C890
-void ReadPoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
+void ReadPoke1Bits(DataSerializer* a1, Pokemon* pokemon)
 {
-    memset(pokemon, 0, sizeof(PokemonStruct1));
+    memset(pokemon, 0, sizeof(Pokemon));
 
     pokemon->flags = POKEMON_FLAG_NONE;
     pokemon->isTeamLeader = FALSE;
@@ -686,7 +686,7 @@ s32 SavePoke2s(u8* buffer, s32 size)
     data_u8_zero = 0;
 
     for (i = 0; i < 4; i++) {
-        PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
+        DungeonMon* pokemon2 = &gRecruitedPokemonRef->dungeonTeam[i];
         WriteBits(&backup, &pokemon2->flags, 2);
 
         WriteBits(&backup, pokemon2->isTeamLeader ? &data_u8_neg1 : &data_u8_zero, 1);
@@ -694,7 +694,7 @@ s32 SavePoke2s(u8* buffer, s32 size)
 
         WriteDungeonLocationBits(&backup, &pokemon2->dungeonLocation);
         WriteBits(&backup, &pokemon2->IQ, 10);
-        WriteBits(&backup, &pokemon2->unkA, 16);
+        WriteBits(&backup, &pokemon2->recruitedPokemonId, 16);
         WriteBits(&backup, &pokemon2->unkC, 16);
         WriteBits(&backup, &pokemon2->speciesNum, 9);
         WriteBits(&backup, &pokemon2->unk10, 10);
@@ -727,10 +727,10 @@ s32 RestorePoke2s(u8* a1, s32 size)
     InitBitReader(&backup, a1, size);
 
     for (i = 0; i < 4; i++) {
-        PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
+        DungeonMon* pokemon2 = &gRecruitedPokemonRef->dungeonTeam[i];
         u8 unk2;
 
-        memset(pokemon2, 0, sizeof(PokemonStruct2));
+        memset(pokemon2, 0, sizeof(DungeonMon));
 
         ReadBits(&backup, &pokemon2->flags, 2);
 
@@ -745,7 +745,7 @@ s32 RestorePoke2s(u8* a1, s32 size)
 
         ReadDungeonLocationBits(&backup, &pokemon2->dungeonLocation);
         ReadBits(&backup, &pokemon2->IQ, 10);
-        ReadBits(&backup, &pokemon2->unkA, 16);
+        ReadBits(&backup, &pokemon2->recruitedPokemonId, 16);
         ReadBits(&backup, &pokemon2->unkC, 16);
         ReadBits(&backup, &pokemon2->speciesNum, 9);
         ReadBits(&backup, &pokemon2->unk10, 10);

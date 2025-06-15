@@ -1059,7 +1059,7 @@ void sub_8051E7C(Entity *pokemon)
     }
 }
 
-static inline bool8 MonHasItem(PokemonStruct1 *mon)
+static inline bool8 MonHasItem(Pokemon *mon)
 {
     return (mon->heldItem.id != 0);
 }
@@ -1076,8 +1076,8 @@ static bool8 sub_805210C(u8 itemId)
     }
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-        if (PokemonFlag1Struct2(&gRecruitedPokemonRef->pokemon2[i]) && ItemExists(&gRecruitedPokemonRef->pokemon2[i].itemSlot)) {
-            if (gRecruitedPokemonRef->pokemon2[i].itemSlot.id == itemId)
+        if (DungeonMonExists(&gRecruitedPokemonRef->dungeonTeam[i]) && ItemExists(&gRecruitedPokemonRef->dungeonTeam[i].itemSlot)) {
+            if (gRecruitedPokemonRef->dungeonTeam[i].itemSlot.id == itemId)
                 return TRUE;
         }
     }

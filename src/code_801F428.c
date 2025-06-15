@@ -14,7 +14,7 @@
 struct unkStruct_203B274
 {
     // size: 0x3e8
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     unkStruct_808E218_arg *unk4;
     unkStruct_808E218_arg unk8;
     MenuHeaderWindow s348;

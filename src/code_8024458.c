@@ -88,7 +88,7 @@ static void sub_80245D0(void)
 
 static void sub_8024604(void)
 {
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     struct MonSummaryInfo *iVar3;
 
     sUnknown_203B2AC->unk34[0] = 2;

@@ -2566,7 +2566,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, 
     sp_0xf0 = 0;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        struct PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
+        struct Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonExists(mon) && PokemonFlag2(mon)) {
             if (mon->heldItem.id != 0) {
                 sp_0xf0++;
@@ -2610,7 +2610,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, 
         }
         bodySize = GetBodySize(speciesId);
         for (i = 0; i < NUM_MONSTERS; i++) {
-            struct PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
+            struct Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
 
             if (PokemonExists(mon) && PokemonFlag2(mon)){
                 bodySize += GetBodySize(mon->speciesNum);
@@ -2654,7 +2654,7 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, 
 
         if (otherSpeciesId == NUM_MONSTERS) {
             for (otherSpeciesId = 0; otherSpeciesId < NUM_MONSTERS; otherSpeciesId++) {
-                struct PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[otherSpeciesId];
+                struct Pokemon *mon = &gRecruitedPokemonRef->pokemon[otherSpeciesId];
 
                 if (PokemonExists(mon) && PokemonFlag2(mon)
                     && (GetPokemonType(mon->speciesNum,0) == TYPE_WATER || GetPokemonType(mon->speciesNum,1) == TYPE_WATER))
@@ -2725,7 +2725,7 @@ static bool8 TeamMonWithMove(u16 moveID)
     s32 speciesId, moveIndex;
 
     for (speciesId = 0; speciesId < NUM_MONSTERS; speciesId++) {
-        PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[speciesId];
+        Pokemon *pokeStruct = &gRecruitedPokemonRef->pokemon[speciesId];
         if (PokemonExists(pokeStruct) && PokemonFlag2(pokeStruct)) {
             for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++) {
                 Move *move = &pokeStruct->moves[moveIndex];

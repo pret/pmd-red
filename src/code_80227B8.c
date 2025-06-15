@@ -31,7 +31,7 @@ static void sub_80230E8(void);
 static void sub_8023104(void);
 static void sub_8023120(void);
 
-bool8 sub_80227B8(PokemonStruct1 *pkmn)
+bool8 sub_80227B8(Pokemon *pkmn)
 {
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);

@@ -397,8 +397,8 @@ static void sub_8037810(void)
     MemoryFill8(&sUnknown_203B35C->unk25C, 0, sizeof(unkStruct_203B480));
     MemoryFill8(&sUnknown_203B35C->unk28C, 0, sizeof(unkStruct_203B480));
     MemoryFill8(&sUnknown_203B35C->unk314, 0, sizeof(unkStruct_203B480));
-    MemoryFill8(&sUnknown_203B35C->unk2BC, 0, sizeof(PokemonStruct1));
-    MemoryFill8(&sUnknown_203B35C->unk344, 0, sizeof(PokemonStruct1));
+    MemoryFill8(&sUnknown_203B35C->unk2BC, 0, sizeof(Pokemon));
+    MemoryFill8(&sUnknown_203B35C->unk344, 0, sizeof(Pokemon));
     MemoryFill8(sUnknown_203B35C->unk39C, 0, 0xb4); // unkStruct_803B344?
     MemoryFill8(sUnknown_203B35C->unk450, 0, 0xb4); // unkStruct_803B344?
 

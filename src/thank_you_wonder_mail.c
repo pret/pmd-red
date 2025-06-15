@@ -1238,8 +1238,8 @@ void UpdateThankYouMailText(void)
   u8 buffer1 [80];
   u8 buffer2 [80];
   u8 mailIndex;
-  PokemonStruct1 *pokeStruct;
-  PokemonStruct1 *pokeStruct2;
+  Pokemon *pokeStruct;
+  Pokemon *pokeStruct2;
   s32 linkStatus;
   unkStruct_203B480 *mail;
 

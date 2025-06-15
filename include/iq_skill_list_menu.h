@@ -11,7 +11,7 @@
 struct IQSkillListMenu
 {
     /* 0x0 */ s16 species;
-    /* 0x4 */ PokemonStruct1 *pokeStruct;
+    /* 0x4 */ Pokemon *pokeStruct;
     /* 0x8 */ u8 iqSkills[NUM_IQ_SKILLS];
     /* 0x20 */ s32 numIQSkills;
     /* 0x24 */ MenuHeaderWindow s24;

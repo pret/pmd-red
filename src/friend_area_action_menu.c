@@ -46,15 +46,15 @@ extern void sub_8027CA0();
 extern void sub_8027D00();
 extern void CreateFriendActionMenu();
 extern void sub_80276A8();
-bool8 sub_8027D9C(PokemonStruct1 *pokeStruct);
-extern u8 sub_8027DCC(PokemonStruct1 *);
+bool8 sub_8027D9C(Pokemon *pokeStruct);
+extern u8 sub_8027DCC(Pokemon *);
 extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
-extern void sub_808D31C(PokemonStruct1 *);
+extern void sub_808D31C(Pokemon *);
 extern bool8 sub_808D750(s16 index_);
 
-u32 sub_8027E18(PokemonStruct1 *);
-u8 sub_8027E4C(PokemonStruct1 *r0);
+u32 sub_8027E18(Pokemon *);
+u8 sub_8027E4C(Pokemon *r0);
 void sub_8027EB8(void);
 
 #include "data/friend_area_action_menu.h"
@@ -239,14 +239,13 @@ void CreateFriendActionMenu(void)
 {
   int index;
   s32 loopMax;
-  PokemonStruct1 *pokeStruct;
+  Pokemon *pokeStruct;
 
   loopMax = 0;
   pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
   MemoryFill16(sUnknown_203B2BC->unk16C,0,sizeof(sUnknown_203B2BC->unk16C));
 
-  if((pokeStruct->flags >> 1) % 2)
-  {
+  if (PokemonFlag2(pokeStruct)) {
       sUnknown_203B2BC->menuItems[loopMax].text = sStandBy;
       sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_STANDBY;
       if(!sub_8027D9C(pokeStruct))
@@ -381,7 +380,7 @@ void sub_8027794(void)
 
 void sub_80277FC(void)
 {
-  PokemonStruct1 *pokeStruct;
+  Pokemon *pokeStruct;
 
   switch(FriendList_HandleInput(TRUE)) {
       case 0:
@@ -412,8 +411,8 @@ void sub_80277FC(void)
 
 void sub_80278B4(void)
 {
-  PokemonStruct1 *playerStruct;
-  PokemonStruct1 *newLeader;
+  Pokemon *playerStruct;
+  Pokemon *newLeader;
   u32 menuAction;
 
   menuAction = 0;
@@ -696,7 +695,7 @@ void sub_8027D40(u32 r0, BulkItem *heldItem)
     sub_80073E0(r0);
 }
 
-bool8 sub_8027D9C(PokemonStruct1 *pokeStruct)
+bool8 sub_8027D9C(Pokemon *pokeStruct)
 {
     u32 var1;
     if(!pokeStruct->isTeamLeader)
@@ -715,7 +714,7 @@ bool8 sub_8027D9C(PokemonStruct1 *pokeStruct)
     return TRUE;
 }
 
-bool8 sub_8027DCC(PokemonStruct1 *pokeStruct)
+bool8 sub_8027DCC(Pokemon *pokeStruct)
 {
     u32 var1;
     if(sub_808D3BC() != pokeStruct)
@@ -740,7 +739,7 @@ bool8 sub_8027DCC(PokemonStruct1 *pokeStruct)
     return FALSE;
 }
 
-u32 sub_8027E18(PokemonStruct1 *pokeStruct)
+u32 sub_8027E18(Pokemon *pokeStruct)
 {
     if(pokeStruct->heldItem.id == ITEM_NOTHING)
         return 0;
@@ -752,7 +751,7 @@ u32 sub_8027E18(PokemonStruct1 *pokeStruct)
         return 3;
 }
 
-bool8 sub_8027E4C(PokemonStruct1 *pokeStruct)
+bool8 sub_8027E4C(Pokemon *pokeStruct)
 {
     if(!IsNotMoneyOrUsedTMItem(pokeStruct->heldItem.id))
         return FALSE;

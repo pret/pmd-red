@@ -60,7 +60,7 @@ void FriendAreasMap_InitGfx(void)
     u8 filename[12];
     s32 i, size;
 
-    PokemonStruct1 *pokeStruct = GetPlayerPokemonStruct();
+    Pokemon *pokeStruct = GetPlayerPokemonStruct();
     OpenedFile *file = OpenFileAndGetFileDataPtr(gUnknown_80D408C[0], &gTitleMenuFileArchive);
     OpenedFile *file2 = OpenFileAndGetFileDataPtr(gUnknown_80D408C[1], &gTitleMenuFileArchive);
 

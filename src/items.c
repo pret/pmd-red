@@ -595,7 +595,7 @@ s32 GetItemPossessionCount(u8 id)
     s32 i = 0;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
+        Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonExists(mon)
         && PokemonFlag2(mon)
         && (mon->heldItem.id != ITEM_NOTHING)
@@ -860,7 +860,7 @@ u32 GetMoneyValueHeld(BulkItem* slot)
 static const u16 sGummiStatBoostsFlags[] = {1, 2, 4, 8};
 
 // arm9.bin::0205FC30
-void GetGummiItemStatBoost(PokemonStruct1* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi)
+void GetGummiItemStatBoost(Pokemon* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi)
 {
   // item stat buff?
   s8 result;
@@ -1401,7 +1401,7 @@ void ClearAllItems_8091FB4(void)
     FillInventoryGaps();
     for (i = 0; i < NUM_MONSTERS; i++) {
         if (PokemonExists(&gRecruitedPokemonRef->pokemon[i])) {
-            PokemonStruct1 *pokemon = &gRecruitedPokemonRef->pokemon[i];
+            Pokemon *pokemon = &gRecruitedPokemonRef->pokemon[i];
             if (pokemon->heldItem.id) {
                 if (pokemon->heldItem.id == ITEM_POKE) {
                     AddToTeamMoney(GetMoneyValueHeld(&pokemon->heldItem));

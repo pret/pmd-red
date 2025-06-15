@@ -23,9 +23,9 @@ typedef struct EvolveStatus
     /* 0x6 */ s16 targetEvolveSpecies;
 } EvolveStatus;
 
-void SetMonEvolveStatus(struct PokemonStruct1 *pokemon, EvolveStatus *evolveStatus,bool8 param_3);
-s32 GetMonSummaryScreenEvoStringId(PokemonStruct1 *pokemon);
-PokemonStruct1 *sub_808F734(PokemonStruct1 *pokemon, s16 _species);
-PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, s16 _species);
+void SetMonEvolveStatus(struct Pokemon *pokemon, EvolveStatus *evolveStatus,bool8 param_3);
+s32 GetMonSummaryScreenEvoStringId(Pokemon *pokemon);
+Pokemon *sub_808F734(Pokemon *pokemon, s16 _species);
+Pokemon *sub_808F798(Pokemon *pokemon, s16 _species);
 
 #endif // GUARD_POKEMON_EVOLUTION_H

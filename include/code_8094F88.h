@@ -11,7 +11,7 @@
 typedef struct unkStruct_203B484
 {
     /* 0x0 */ u32 unk0;
-    /* 0x4 */ PokemonStruct1 unk4;
+    /* 0x4 */ Pokemon unk4;
 } unkStruct_203B484;
 
 // size: 0x84

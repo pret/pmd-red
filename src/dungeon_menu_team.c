@@ -385,7 +385,7 @@ static void PrintOnDungeonTeamMenu(struct UnkFieldTeamMenuStruct *a0, WindowTemp
                 s32 color = (a0->unk14[i] != 0) ? 6 : 2;
 
                 sub_8070968(gFormatBuffer_Monsters[0], monInfo, color);
-                if (sub_806A538(gRecruitedPokemonRef->pokemon2[monInfo->teamIndex].unkA)) {
+                if (sub_806A538(gRecruitedPokemonRef->dungeonTeam[monInfo->teamIndex].recruitedPokemonId)) {
                     if (monInfo->HP <= monInfo->maxHPStat / 4) {
                         InlineStrcpy(gFormatBuffer_Monsters[1], _("{HEART_RED_TINY}"));
                     }
@@ -459,8 +459,8 @@ static void AddTeamSubMenuOptions(struct UnkFieldTeamMenuStruct *a0)
             r5 = FALSE;
         }
         else {
-            PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[monInfo->teamIndex];
-            if (sub_806A538(mon->unkA)) {
+            DungeonMon *mon = &gRecruitedPokemonRef->dungeonTeam[monInfo->teamIndex];
+            if (sub_806A538(mon->recruitedPokemonId)) {
                 r5 = FALSE;
             }
         }
@@ -1581,7 +1581,7 @@ static void PrintMoveNamesOnBottomWindow(Entity *entity)
                 movStruct.redColor = (CanMonsterUseMove(entity, move, TRUE) == FALSE);
                 BufferMoveName(gFormatBuffer_Items[0], move, &movStruct);
 
-                if (MoveFlagLinkChain(move)) {
+                if MOVE_FLAG_LINK_CHAIN(move) {
                     x = 13;
                 }
                 else {

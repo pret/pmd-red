@@ -327,7 +327,7 @@ u32 sub_80954B4(void)
 u32 sub_80954CC(u8 *buffer, u32 size)
 {
     DataSerializer backup;
-    PokemonStruct1 *mon;
+    Pokemon *mon;
     s32 i;
 
     InitBitReader(&backup, buffer, size);
@@ -339,7 +339,7 @@ u32 sub_80954CC(u8 *buffer, u32 size)
     ReadBits(&backup, &gUnknown_203B484->unk0, 32);
 
     mon = &gUnknown_203B484->unk4;
-    memset(mon, 0, sizeof(PokemonStruct1));
+    memset(mon, 0, sizeof(Pokemon));
 
     ReadBits(&backup, &mon->flags, 2);
     ReadBits(&backup, &mon->isTeamLeader, 1);
@@ -373,7 +373,7 @@ u32 sub_80954CC(u8 *buffer, u32 size)
 u32 sub_8095624(u8 *buffer, u32 b)
 {
     DataSerializer backup;
-    PokemonStruct1 *mon;
+    Pokemon *mon;
     s32 i;
 
     InitBitWriter(&backup, buffer, b);

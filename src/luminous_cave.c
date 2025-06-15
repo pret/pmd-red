@@ -740,18 +740,17 @@ static void sub_8025254(void)
 static bool8 LuminousCave_HasOnly1Member(void)
 {
     s32 memberCount;
-    s32 index;
-    PokemonStruct1 *preload;
+    s32 i;
+    Pokemon *mon;
 
-    preload = &gRecruitedPokemonRef->pokemon[0];
+    mon = &gRecruitedPokemonRef->pokemon[0];
     memberCount = 0;
-    for(index = 0; index < NUM_MONSTERS; index++, preload++)
-    {
-        if((preload->flags >> 1) & 1)
+    for (i = 0; i < NUM_MONSTERS; i++, mon++) {
+        if (PokemonFlag2(mon))
             memberCount++;
     }
 
-    if(memberCount == 1)
+    if (memberCount == 1)
         return TRUE;
     else
         return FALSE;

@@ -151,7 +151,7 @@ bool8 HasNoAvailIQSkills(s16 species)
 {
     s32 species_s32;
     u8 iqSkillBuffer[NUM_IQ_SKILLS];
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
 
     species_s32 = species;
     pokeStruct = &gRecruitedPokemonRef->pokemon[species_s32];

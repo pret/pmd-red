@@ -121,7 +121,7 @@ extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
 extern bool8 sub_80A58C8(PixelPos *, PixelPos *);
 extern s32 sub_80AC4C8(u32 a0, PixelPos *, PixelPos *);
 extern void sub_809CD8C(struct Struct3001B84_sub120 *dst, s32 a1);
-extern bool8 sub_809B1C0(s32 a0, u32 kind, PokemonStruct1 *a2);
+extern bool8 sub_809B1C0(s32 a0, u32 kind, Pokemon *a2);
 extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
 extern bool8 sub_809D678(Action *action);
 extern bool8 sub_80AC274(s32 a0, ScriptInfoSmall *scriptInfo, s32 a2);
@@ -129,7 +129,7 @@ extern void GroundObject_ExecuteScript(s32, void *, ScriptInfoSmall *);
 extern bool8 sub_80ADC64(s32 id, ScriptInfoSmall *dst);
 extern bool8 GroundScriptNotify(Action *param_1, s32 param_2);
 extern bool8 GroundScript_Cancel(Action *r0);
-extern PokemonStruct1 *sub_80A8D54(s32);
+extern Pokemon *sub_80A8D54(s32);
 extern s32 sub_809CDB8(struct Struct3001B84_sub120 *dst);
 extern void sub_80A6688(struct UnkGroundSpriteStruct *ptr, s32 a0);
 extern s32 sub_808D6A4(s32 *ptr);
@@ -425,7 +425,7 @@ s32 sub_80A7B94(s16 *a0)
                     *a0 = 2;
                     break;
                 case 2: {
-                    PokemonStruct1 *playerMonStruct = GetPlayerPokemonStruct();
+                    Pokemon *playerMonStruct = GetPlayerPokemonStruct();
                     if (sub_808D3BC() == playerMonStruct) {
                         *a0 = 1;
                     }
@@ -471,7 +471,7 @@ s32 sub_80A7B94(s16 *a0)
                     *a0 = 7;
                     break;
                 case 3: {
-                    PokemonStruct1 *playerMonStruct = GetPlayerPokemonStruct();
+                    Pokemon *playerMonStruct = GetPlayerPokemonStruct();
                     if (sub_808D3BC() == playerMonStruct) {
                         *a0 = 6;
                     }
@@ -539,7 +539,7 @@ s32 sub_80A7B94(s16 *a0)
                 s32 id = *a0 - 14;
                 GetFriendAreaCapacity2(map, &fAreaCapacity, FALSE, FALSE);
                 if (id < fAreaCapacity.maxPokemon) {
-                    PokemonStruct1 *monStrPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
+                    Pokemon *monStrPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
                     if (sub_80023E4(9)) {
                         if (PokemonExists(monStrPtr) && !monStrPtr->isTeamLeader) {
                             return -1;
@@ -557,7 +557,7 @@ s32 sub_80A7B94(s16 *a0)
         return -1;
     }
     else if (id == 0x23) {
-        PokemonStruct1 *playerMonStruct = GetPlayerPokemonStruct();
+        Pokemon *playerMonStruct = GetPlayerPokemonStruct();
         if (sub_808D3BC() == playerMonStruct) {
             *a0 = 0x21;
         }
@@ -604,7 +604,7 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
             }
 
             if (id < val) {
-                PokemonStruct1 *monStrPtr = &gRecruitedPokemonRef->pokemon[sp[id]];
+                Pokemon *monStrPtr = &gRecruitedPokemonRef->pokemon[sp[id]];
                 *speciesDst = monStrPtr->speciesNum;
                 return -1;
             }
@@ -617,7 +617,7 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
                 s32 id = *a0 - 14;
                 GetFriendAreaCapacity2(map, &fAreaCapacity, FALSE, FALSE);
                 if (id < fAreaCapacity.maxPokemon) {
-                    PokemonStruct1 *monStrPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
+                    Pokemon *monStrPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
                     if (sub_80023E4(9)) {
                         if (PokemonExists(monStrPtr) && !monStrPtr->isTeamLeader) {
                             *speciesDst = monStrPtr->speciesNum;
@@ -1014,7 +1014,7 @@ void sub_80A87AC(s32 id_, s32 a1)
     }
 }
 
-bool8 sub_80A87E0(s32 id_, PokemonStruct1 *a1)
+bool8 sub_80A87E0(s32 id_, Pokemon *a1)
 {
     s32 id = (s16) id_;
     struct GroundLive *livesPtr = &gGroundLives->array[id];
@@ -1240,7 +1240,7 @@ s32 sub_80A8C4C(s32 id_, DungeonLocation *dungLoc)
     struct GroundLive *livesPtr = &gGroundLives->array[id];
 
     if (livesPtr->unk2 != -1) {
-        PokemonStruct1 *monStrPtr = sub_80A8D54(livesPtr->unk2);
+        Pokemon *monStrPtr = sub_80A8D54(livesPtr->unk2);
         if (monStrPtr != NULL) {
             *dungLoc = monStrPtr->dungeonLocation;
         }
@@ -1295,7 +1295,7 @@ bool8 sub_80A8D20(void)
     return (val == 1);
 }
 
-PokemonStruct1 *sub_80A8D54(s32 a0)
+Pokemon *sub_80A8D54(s32 a0)
 {
     s16 sp = a0;
 
@@ -1331,7 +1331,7 @@ PokemonStruct1 *sub_80A8D54(s32 a0)
         return &gRecruitedPokemonRef->pokemon[spArray[id]];
     }
     else if (sp >= 14 && sp <= 29) {
-        PokemonStruct1 *monPtr;
+        Pokemon *monPtr;
         s32 id;
         FriendAreaCapacity fAreaCapacity;
         u8 map = sub_8002658(GetScriptVarValue(NULL, GROUND_MAP));
@@ -1360,7 +1360,7 @@ PokemonStruct1 *sub_80A8D54(s32 a0)
     return NULL;
 }
 
-PokemonStruct1 *sub_80A8E9C(s32 id_)
+Pokemon *sub_80A8E9C(s32 id_)
 {
     s32 id = (s16) id_;
     struct GroundLive *livesPtr = &gGroundLives->array[id];
@@ -1372,7 +1372,7 @@ void sub_80A8EC0(u8 *buffer,s32 a1)
 {
     s16 sp = a1;
     s16 species;
-    PokemonStruct1 *monStruct;
+    Pokemon *monStruct;
 
     sub_80A7DDC(&sp, &species);
     monStruct = sub_80A8D54(sp);

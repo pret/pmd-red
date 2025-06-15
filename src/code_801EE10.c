@@ -215,7 +215,7 @@ _134:
         {
             move =  &gUnknown_203B270->moves[index2];
             if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
-                if ((move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)) {
+                if (MOVE_FLAG_LINK_CHAIN(move)) {
                     gUnknown_203B270->fill14[index2] = 1;
                 }
                 else {
@@ -318,7 +318,7 @@ void sub_801F280(bool8 param_1)
 
             BufferDefaultMoveName(gFormatBuffer_Items[0],move,&uStack_30);
             y = GetMenuEntryYCoord(&gUnknown_203B270->input,i);
-            linkChain = MoveFlagLinkChain(move);
+            linkChain = MOVE_FLAG_LINK_CHAIN(move);
             x = !linkChain ? 0x8 : 0xD;
             if (!linkChain && i != 0) {
                 AddUnderScoreHighlight(gUnknown_203B270->unk50,0xc,y - 2,0x78,7);

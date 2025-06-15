@@ -32,16 +32,16 @@ static EWRAM_INIT unkStruct_203B2B8 *sUnknown_203B2B8 = {NULL};
 
 #include "data/party_list_menu.h"
 
-extern u32 sub_8026F04(PokemonStruct1 *);
-bool8 CanTakePokemonHeldItem(PokemonStruct1 *r0);
+extern u32 sub_8026F04(Pokemon *);
+bool8 CanTakePokemonHeldItem(Pokemon *r0);
 extern bool8 sub_808D750(s16 index_);
-bool8 sub_8026E88(PokemonStruct1 *r0);
-bool8 sub_8026EB8(PokemonStruct1 *r0);
+bool8 sub_8026E88(Pokemon *r0);
+bool8 sub_8026EB8(Pokemon *r0);
 void sub_8026E08(u32 r0);
 void sub_8026DAC(u32 r0, BulkItem *item);
 void sub_8026FA4(void);
 void PartyListMenu_BuildYesNoMenu(void);
-extern void sub_808D31C(PokemonStruct1 *);
+extern void sub_808D31C(Pokemon *);
 
 void PartyListMenu_CreateMenu2(void);
 void PartyListMenu_CreateMenu1(void);
@@ -63,7 +63,7 @@ void PartyListMenu_GotoFallbackState(void);
 static void SetPartyListMenuState(s32 newState);
 static void sub_802608C(void);
 
-bool8 CreatePartyListMenu(PokemonStruct1 *pokeStruct)
+bool8 CreatePartyListMenu(Pokemon *pokeStruct)
 {
     s32 i;
 
@@ -304,10 +304,8 @@ void HandlePartyListMenuCallback(void)
 }
 
 void PartyListMenu_CreateMenu1(void) {
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     s32 index;
-    s32 one;
-    u16 temp;
     s32 loopMax = 0;
     pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2B8->pokeSpecies];
     MemoryFill16(sUnknown_203B2B8->unk20C, 0, sizeof(sUnknown_203B2B8->unk20C));
@@ -315,7 +313,7 @@ void PartyListMenu_CreateMenu1(void) {
 
     PeekPokemonItem(sUnknown_203B2B8->pokeSpecies, &sUnknown_203B2B8->item2);
 
-    if(temp = pokeStruct->flags >> 1, one = 1, temp & one)
+    if (PokemonFlag2(pokeStruct))
     {
         sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuStandBy;
         sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_STANDBY;
@@ -367,7 +365,7 @@ void PartyListMenu_CreateMenu1(void) {
     }
     loopMax += 1;
 
-    if((temp = pokeStruct->flags >> 1, one = 1, temp & one) == 0)
+    if (!PokemonFlag2(pokeStruct))
     {
         sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSayFarewell;
         sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_SAY_FAREWELL;
@@ -458,8 +456,8 @@ void PartyListMenu_BuildYesNoMenu(void) {
 
 void PartyListMenu_HandleMenu1(void)
 {
-  PokemonStruct1 *playerPokemon;
-  PokemonStruct1 *newLeader;
+  Pokemon *playerPokemon;
+  Pokemon *newLeader;
   s32 choice;
 
   choice = 0;
@@ -788,7 +786,7 @@ void sub_8026E08(u32 r0)
     sub_80073E0(r0);
 }
 
-bool8 sub_8026E88(PokemonStruct1 *r0)
+bool8 sub_8026E88(Pokemon *r0)
 {
     bool8 flag;
     if(!r0->isTeamLeader)
@@ -803,7 +801,7 @@ bool8 sub_8026E88(PokemonStruct1 *r0)
     return TRUE;
 }
 
-bool8 sub_8026EB8(PokemonStruct1 *r0)
+bool8 sub_8026EB8(Pokemon *r0)
 {
     bool8 flag;
     if(sub_808D3BC() != r0)
@@ -825,7 +823,7 @@ bool8 sub_8026EB8(PokemonStruct1 *r0)
 }
 
 
-u32 sub_8026F04(PokemonStruct1 *r0)
+u32 sub_8026F04(Pokemon *r0)
 {
     if(r0->heldItem.id == ITEM_NOTHING)
         return 0;
@@ -837,7 +835,7 @@ u32 sub_8026F04(PokemonStruct1 *r0)
         return 3;
 }
 
-bool8 CanTakePokemonHeldItem(PokemonStruct1 *r0)
+bool8 CanTakePokemonHeldItem(Pokemon *r0)
 {
     if(IsNotMoneyOrUsedTMItem(r0->heldItem.id))
     {

@@ -68,7 +68,7 @@ extern void sub_806A6E8(Entity *entity);
 s32 sub_806C444(s32 species, s32 level);
 s32 sub_806C488(s32 species, s32 level, s32 categoryIndex);
 s32 sub_806C4D4(s32 species, s32 level, s32 categoryIndex);
-bool8 sub_806B8CC(s16 _species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool32 _a5, u32 _a6);
+bool8 sub_806B8CC(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a4, bool32 _a5, u32 _a6);
 void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, DungeonPos *pos);
 void ResetMonEntityData(EntityInfo *, bool8 a1);
 void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
@@ -217,9 +217,9 @@ UNUSED static s32 sub_806B09C(SpawnPokemonData *unkPtr, bool8 a1)
     SpawnPokemonData *loopPtr;
 
     for (i = 0, unk2Field = unkPtr->randNum, loopPtr = unkPtr; i < MAX_TEAM_MEMBERS; i++) {
-        PokemonStruct2 *monStructPtr = &gRecruitedPokemonRef->pokemon2[i];
+        DungeonMon *monStructPtr = &gRecruitedPokemonRef->dungeonTeam[i];
 
-        if (PokemonFlag1Struct2(monStructPtr) && PokemonFlag2Struct2(monStructPtr))
+        if (DungeonMonExists(monStructPtr) && PokemonFlag2Struct2(monStructPtr))
         {
             for (j = 0; j < count; j++) {
                 if (ExtractSpeciesIndex(&unkPtr[j]) == monStructPtr->speciesNum)
@@ -253,21 +253,21 @@ extern const DungeonPos gUnknown_80F4598[];
 void sub_806B168(void)
 {
     s32 count;
-    PokemonStruct2 *monPtrs[MAX_TEAM_MEMBERS];
-    PokemonStruct2 *monPtrs2[MAX_TEAM_MEMBERS]; // Leader and partner?
+    DungeonMon *monPtrs[MAX_TEAM_MEMBERS];
+    DungeonMon *monPtrs2[MAX_TEAM_MEMBERS]; // Leader and partner?
     u8 playerSpawnRoomId = GetTile(gDungeon->playerSpawn.x, gDungeon->playerSpawn.y)->room;
     s32 i;
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-        PokemonStruct2 *currMonPtr = &gRecruitedPokemonRef->pokemon2[i];
+        DungeonMon *currMonPtr = &gRecruitedPokemonRef->dungeonTeam[i];
         currMonPtr->unkC = i;
     }
 
     // Populate monPtrs
     count = 0;
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-        PokemonStruct2 *currMonPtr = &gRecruitedPokemonRef->pokemon2[i];
-        if (PokemonFlag1Struct2(currMonPtr) && PokemonFlag2Struct2(currMonPtr)) {
+        DungeonMon *currMonPtr = &gRecruitedPokemonRef->dungeonTeam[i];
+        if (DungeonMonExists(currMonPtr) && PokemonFlag2Struct2(currMonPtr)) {
             monPtrs[count++] = currMonPtr;
         }
     }
@@ -278,7 +278,7 @@ void sub_806B168(void)
     // Populate monPtrs2
     count = 0;
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-        PokemonStruct2 *currMonPtr = monPtrs[i];
+        DungeonMon *currMonPtr = monPtrs[i];
         if (currMonPtr != NULL && currMonPtr->isTeamLeader) {
             monPtrs[i] = NULL;
             monPtrs2[count++] = currMonPtr;
@@ -287,7 +287,7 @@ void sub_806B168(void)
 
     if (gDungeon->unk644.unk18 == 0) {
         for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-            PokemonStruct2 *currMonPtr = monPtrs[i];
+            DungeonMon *currMonPtr = monPtrs[i];
             if (currMonPtr != NULL && currMonPtr->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER) {
                 monPtrs[i] = NULL;
                 monPtrs2[count++] = currMonPtr;
@@ -296,7 +296,7 @@ void sub_806B168(void)
     }
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-        PokemonStruct2 *currMonPtr = monPtrs[i];
+        DungeonMon *currMonPtr = monPtrs[i];
         if (monPtrs[i] != NULL) {
             monPtrs[i] = NULL;
             monPtrs2[count++] = currMonPtr;
@@ -308,7 +308,7 @@ void sub_806B168(void)
 
     // Do something else
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-        PokemonStruct2 *currMonPtr = monPtrs2[i];
+        DungeonMon *currMonPtr = monPtrs2[i];
 
         if (currMonPtr != NULL) {
             DungeonPos unkPosition;
@@ -362,14 +362,14 @@ void sub_806B404(void)
 {
     Entity *leader;
     s32 i;
-    PokemonStruct2 *monPtrs[MAX_TEAM_MEMBERS];
+    DungeonMon *monPtrs[MAX_TEAM_MEMBERS];
     u8 roomId;
     DungeonPos pos;
     s32 count = 0;
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-        PokemonStruct2 *currMonPtr = &gRecruitedPokemonRef->pokemon2[i];
-        if (PokemonFlag1Struct2(currMonPtr) && PokemonFlag2Struct2(currMonPtr) && currMonPtr->unkA == 0x55AA) {
+        DungeonMon *currMonPtr = &gRecruitedPokemonRef->dungeonTeam[i];
+        if (DungeonMonExists(currMonPtr) && PokemonFlag2Struct2(currMonPtr) && currMonPtr->recruitedPokemonId == UNK_RECRUITED_POKEMON_ID_55AA) {
             monPtrs[count++] = currMonPtr;
             break;
         }
@@ -395,10 +395,10 @@ void sub_806B404(void)
         bool8 skipNextLoop;
         const Tile *tile;
         s32 j;
-        PokemonStruct2 *currMonPtr = monPtrs[i];
+        DungeonMon *currMonPtr = monPtrs[i];
 
-        if (currMonPtr != NULL && PokemonFlag1Struct2(currMonPtr) && PokemonFlag2Struct2(currMonPtr) && currMonPtr->unkA == 0x55AA) {
-            currMonPtr->unkA = 0x5AA5;
+        if (currMonPtr != NULL && DungeonMonExists(currMonPtr) && PokemonFlag2Struct2(currMonPtr) && currMonPtr->recruitedPokemonId == UNK_RECRUITED_POKEMON_ID_55AA) {
+            currMonPtr->recruitedPokemonId = UNK_RECRUITED_POKEMON_ID_5AA5;
             skipNextLoop = FALSE;
             j = 0;
             while (1) {
@@ -561,7 +561,7 @@ Entity* sub_806B7F8(struct unkStruct_806B7F8 *structPtr, bool8 a1)
     return entity;
 }
 
-bool8 sub_806B8CC(s16 _species, s32 x, s32 y, PokemonStruct2 *monPtr, Entity **a4, bool32 _a5, u32 _a6)
+bool8 sub_806B8CC(s16 _species, s32 x, s32 y, DungeonMon *monPtr, Entity **a4, bool32 _a5, u32 _a6)
 {
     s32 i;
     DungeonPos unkPosition;
@@ -964,7 +964,7 @@ void sub_806C1D8(void)
 void sub_806C264(s32 teamIndex, EntityInfo *entInfo)
 {
     s32 i;
-    PokemonStruct2 *monPtr = &gRecruitedPokemonRef->pokemon2[teamIndex];
+    DungeonMon *monPtr = &gRecruitedPokemonRef->dungeonTeam[teamIndex];
 
     monPtr->unk10 = entInfo->HP;
     monPtr->unk12 = entInfo->maxHPStat;
@@ -987,8 +987,8 @@ void sub_806C264(s32 teamIndex, EntityInfo *entInfo)
     monPtr->belly = entInfo->belly;
     monPtr->maxBelly = entInfo->maxBelly;
     monPtr->itemSlot = entInfo->heldItem;
-    if (monPtr->unkA == 0x55AA) {
-        monPtr->unkA = 0x5AA5;
+    if (monPtr->recruitedPokemonId == UNK_RECRUITED_POKEMON_ID_55AA) {
+        monPtr->recruitedPokemonId = UNK_RECRUITED_POKEMON_ID_5AA5;
     }
 }
 

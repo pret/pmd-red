@@ -51,7 +51,7 @@ void sub_8025E08(void);
 void sub_8025E24(void);
 void FriendListMenu_GotoFallbackState(void);
 void sub_8025E68(u32 , BulkItem *);
-bool8 FriendListMenu_isOnTeam(PokemonStruct1 *);
+bool8 FriendListMenu_isOnTeam(Pokemon *);
 
 
 bool8 CreateFriendListMenu(s32 param_1)
@@ -261,7 +261,7 @@ void sub_8025518(void)
 void sub_8025728(void)
 {
     int index;
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     s32 loopMax = 0;
 
     pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B4->species];
@@ -644,7 +644,7 @@ void sub_8025E68(u32 r0, BulkItem *heldItem)
     sub_80073E0(r0);
 }
 
-bool8 FriendListMenu_isOnTeam(PokemonStruct1 *pokeStruct)
+bool8 FriendListMenu_isOnTeam(Pokemon *pokeStruct)
 {
     bool32 flag;
     if (pokeStruct->isTeamLeader)

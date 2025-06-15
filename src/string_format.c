@@ -683,7 +683,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                 case 'm':
                     str++;
                     if (*str == 'm') {
-                        PokemonStruct1 *monStruct = sub_808D3BC();
+                        Pokemon *monStruct = sub_808D3BC();
                         txtPtr = sFormatBuffer_UnknownMonster;
                         PrintColoredPokeNameToBuffer(sFormatBuffer_UnknownMonster, monStruct, 0);
                     }

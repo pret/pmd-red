@@ -1111,12 +1111,12 @@ void sub_805F02C(void)
         r8->isTeamLeader = TRUE;
         leaderInfo->isTeamLeader = FALSE;
         for (i = 0; i < 4; i++) {
-            PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[i];
-            PokemonStruct1 *r5 = NULL;
+            DungeonMon *mon = &gRecruitedPokemonRef->dungeonTeam[i];
+            Pokemon *r5 = NULL;
 
             if ((u8)mon->flags & 1) {
-                if (!sub_806A538(mon->unkA)) {
-                    r5 = &gRecruitedPokemonRef->pokemon[mon->unkA];
+                if (!sub_806A538(mon->recruitedPokemonId)) {
+                    r5 = &gRecruitedPokemonRef->pokemon[mon->recruitedPokemonId];
                 }
                 if (i == r8->teamIndex) {
                     mon->isTeamLeader = TRUE;

@@ -115,7 +115,7 @@ void sub_80A87AC(s32, s32);
 void sub_80A8BD8(s16, s32*);
 u32 sub_80A8C2C();
 u32 GroundLives_IsStarterMon();
-PokemonStruct1 *sub_80A8D54(s16);
+Pokemon *sub_80A8D54(s16);
 s16 sub_80A8F9C(s32, PixelPos*);
 u32 sub_80A9050();
 u32 sub_80A9090();
@@ -172,7 +172,7 @@ u8 sub_80A8D20();
 bool8 sub_80A87E0();
 s16 sub_80A8BFC(s16);
 void sub_80A8F50(const u8 *buffer, s32, s32 size);
-PokemonStruct1 *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation *location, u16 *moveID);
+Pokemon *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation *location, u16 *moveID);
 bool8 HasRecruitedMon(s32 species);
 extern Item gUnknown_8116844;
 extern Item gUnknown_81167E4;
@@ -1162,7 +1162,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                             if (val == 1) {
                                 s32 id = (s16)cmd.arg1;
                                 if (id != -1) {
-                                    PokemonStruct1 *mon = sub_80A8D54(id);
+                                    Pokemon *mon = sub_80A8D54(id);
                                     s32 i;
                                     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
                                         mon->name[i] = gUnknown_2039D98[i];
@@ -1975,7 +1975,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x3d: {
                 int i;
                 if ((s16)curCmd.arg1 != -1) {
-                    PokemonStruct1 *mon = sub_80A8D54(curCmd.arg1);
+                    Pokemon *mon = sub_80A8D54(curCmd.arg1);
                     if (mon != NULL) {
                         for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
                             gUnknown_2039D98[i] = mon->name[i];
@@ -3200,7 +3200,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
         case 0x13:
             {
-                PokemonStruct1 *ptr;
+                Pokemon *ptr;
 
                 ptr = sub_80A8D54(r2);
                 if(ptr)
@@ -3237,7 +3237,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x16:
             {
                 s32 index;
-                PokemonStruct1 *ptr; ptr = sub_80A8D54(1);
+                Pokemon *ptr; ptr = sub_80A8D54(1);
                 if(ptr)
                 {
                     for(index = 0; index < POKEMON_NAME_LENGTH; index++)
@@ -3271,8 +3271,8 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     .offenseDef = {20, 18},
                     .currExp = 4560,
                 };
-                PokemonStruct1 sp_2c;
-                PokemonStruct1 *ptr;
+                Pokemon sp_2c;
+                Pokemon *ptr;
                 s32 index;
 
                 ConvertStoryMonToPokemon(&sp_2c, &sp_4);
@@ -3292,9 +3292,9 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
          case 0x1B:
              {
-                PokemonStruct1 *pokemon;
+                Pokemon *pokemon;
                  struct StoryMonData sp_84;
-                 PokemonStruct1 sp_ac;
+                 Pokemon sp_ac;
 
                 UnlockFriendArea(GetFriendArea(MONSTER_ABSOL));
                 sp_84 = gUnknown_8116738;
@@ -3307,7 +3307,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
              }
         case 0x1C:
             {
-                PokemonStruct1 *pokemon = sub_808D434(MONSTER_ABSOL, 0);
+                Pokemon *pokemon = sub_808D434(MONSTER_ABSOL, 0);
                 if(pokemon == NULL) return 1;
                 pokemon->flags |= POKEMON_FLAG_ON_TEAM;
                 return 0;
@@ -3325,10 +3325,10 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
         case 0x1F:
             {
-                PokemonStruct1 *pokemon;
+                Pokemon *pokemon;
                 s32 index;
                 struct StoryMonData sp_108;
-                PokemonStruct1 sp_130;
+                Pokemon sp_130;
 
                 sp_108 = gUnknown_8116760;
                 ConvertStoryMonToPokemon(&sp_130, &sp_108);
@@ -3376,7 +3376,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
         case 0x22:
             {
-                PokemonStruct1 *pokemon = GetPlayerPokemonStruct();
+                Pokemon *pokemon = GetPlayerPokemonStruct();
 
                 if(pokemon->speciesNum != MONSTER_ARTICUNO && pokemon->speciesNum != MONSTER_ZAPDOS && pokemon->speciesNum != MONSTER_MOLTRES)
                     return 1;
@@ -3384,7 +3384,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
          case 0x23:
             {
-                PokemonStruct1 *pokemon;
+                Pokemon *pokemon;
                 pokemon = GetPlayerPokemonStruct();
                 if (pokemon != NULL && pokemon->speciesNum == MONSTER_HO_OH)
                     return 2;
@@ -3398,10 +3398,10 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
         case 0x25:
             {
-                PokemonStruct1 *pokemon;
+                Pokemon *pokemon;
                 s32 index;
                 struct StoryMonData sp_188;
-                PokemonStruct1 sp_1b0;
+                Pokemon sp_1b0;
 
                 if(!GetFriendAreaStatus(GetFriendArea(MONSTER_LATIOS)))
                     UnlockFriendArea(GetFriendArea(MONSTER_LATIOS));
@@ -3423,10 +3423,10 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
         case 0x27:
             {
-                PokemonStruct1 *pokemon;
+                Pokemon *pokemon;
                 s32 index;
                 struct StoryMonData sp_208;
-                PokemonStruct1 sp_230;
+                Pokemon sp_230;
 
                 sp_208 = gUnknown_81167BC;
                 ConvertStoryMonToPokemon(&sp_230, &sp_208);
@@ -3552,7 +3552,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
         case 0x2C:
             {
-                PokemonStruct1 *pokemon;
+                Pokemon *pokemon;
                 s32 index;
                   if(r2 != 0)
                   {
@@ -3621,7 +3621,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x32:
             {
                 struct StoryMonData sp_288;
-                PokemonStruct1 sp_2b0;
+                Pokemon sp_2b0;
                 sp_288 = gUnknown_811681C;
                 ConvertStoryMonToPokemon(&sp_2b0, &sp_288);
                 if(sub_808D1DC(&sp_2b0) == 0) {
@@ -3676,7 +3676,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
         case 0x35:
             {
-                PokemonStruct1 *pokemon = GetPlayerPokemonStruct();
+                Pokemon *pokemon = GetPlayerPokemonStruct();
                 if(pokemon != NULL && pokemon->speciesNum == MONSTER_CHANSEY)
                     return 2;
                 else

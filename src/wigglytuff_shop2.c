@@ -136,7 +136,7 @@ static void sub_8021A60(void)
     s32 areaIndex;
     s32 iVar6;
     s32 index;
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
 
     sWigglytuffShop2Work->numPokemoninFriendArea = 0;
 

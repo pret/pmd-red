@@ -41,12 +41,12 @@ extern void sub_80684C4(void);
 void sub_8045064(void);
 extern void sub_8068344(void);
 bool8 CanSubMenuItemBeChosen(s32 param_1);
-void sub_8068310(s32 n, PokemonStruct1 **monPtrs);
-void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2, s32 a3, s32 a4);
+void sub_8068310(s32 n, Pokemon **monPtrs);
+void sub_8067F00(u8 a0, Pokemon **a1, s32 a2, s32 a3, s32 a4);
 void sub_8083D1C(void);
 void PlayDungeonConfirmationSE(void);
 void PlayDungeonCancelSE(void);
-void sub_806806C(PokemonStruct1 *a0);
+void sub_806806C(Pokemon *a0);
 void CreateDungeonMenuSubWindow(WindowTemplates *a0, s32 a1);
 
 extern const s32 gUnknown_8106E80[];
@@ -92,7 +92,7 @@ static const WindowTemplates gUnknown_8106DC8 = {
     }
 };
 
-void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
+void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3)
 {
     s32 i;
     s32 r10;
@@ -331,7 +331,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
     }
 }
 
-void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2_, s32 a3, s32 a4)
+void sub_8067F00(u8 a0, Pokemon **a1, s32 a2_, s32 a3, s32 a4)
 {
     s32 i, y;
     s32 a2;
@@ -385,7 +385,7 @@ void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2_, s32 a3, s32 a4)
     sub_80073E0(1);
 }
 
-void sub_806806C(PokemonStruct1 *a0)
+void sub_806806C(Pokemon *a0)
 {
     struct MonSummaryInfo unkStruct;
     struct UnkInfoTabStruct var_C8;
@@ -516,7 +516,7 @@ void sub_806806C(PokemonStruct1 *a0)
     sub_803EAF0(0, NULL);
 }
 
-void sub_8068310(s32 n, PokemonStruct1 **monPtrs)
+void sub_8068310(s32 n, Pokemon **monPtrs)
 {
     s32 i;
     s32 counter = 0;

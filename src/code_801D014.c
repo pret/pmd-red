@@ -55,10 +55,10 @@ static void sub_801D85C(void);
 static void sub_801D878(void);
 static void sub_801D894(void);
 
-bool8 sub_801D014(PokemonStruct1 *a0)
+bool8 sub_801D014(Pokemon *a0)
 {
     s32 index;
-    PokemonStruct1 *pokemon;
+    Pokemon *pokemon;
     struct unk_203B250 *preload;
 
     ResetUnusedInputStruct();
@@ -139,8 +139,6 @@ u32 sub_801D0DC(void)
 
 u32 sub_801D178(void)
 {
-    PokemonStruct1 *pokeStruct;
-
     if (sUnknown_203B250->unk9 != 0)
         return 2;
 
@@ -151,17 +149,15 @@ u32 sub_801D178(void)
         return 1;
 
     if (sUnknown_203B250->unkC != GetPlayerPokemonStruct())
-        goto _ret4;
+        return 4;
 
     if ((s16) sub_80A7AE8(7) < 0)
         return 0;
 
-    pokeStruct = sub_808D3F8();
-    if (!(pokeStruct->flags >> 1 & 1))
-_ret4:
-        return 4;
+    if (PokemonFlag2(sub_808D3F8()))
+        return 0;
 
-    return 0;
+    return 4;
 }
 
 u8 sub_801D1D4(void)

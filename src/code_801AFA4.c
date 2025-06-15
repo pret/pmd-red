@@ -192,7 +192,7 @@ static s32 GetNumMonsAbleToLearnItemMove(void)
     s32 numMons;
     s32 i;
     s32 team[MAX_TEAM_MEMBERS];
-    PokemonStruct1 *preload;
+    Pokemon *preload;
 
     length = sub_808D580(team);
     sUnknown_203B22C->monsAbleToLearnMove = 0;
@@ -214,7 +214,7 @@ static s32 GetNumMonsAbleToLearnItemMove(void)
 UNUSED static bool8 sub_801B374(u8 id)
 {
     u16 moveID;
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     s32 i;
 
     pokeStruct = &gRecruitedPokemonRef->pokemon[0];

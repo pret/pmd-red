@@ -49,7 +49,7 @@ struct unkStruct_203B2BC
     u32 id;
     BulkItem itemToGive;
     BulkItem item2;
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     bool8 isTeamLeader;
     u32 moveIndex;  // some sort of move index
     u16 moveID;

@@ -14,7 +14,7 @@ typedef struct unkStruct_203B270
     u8 unk5;
     u8 unk6;
     u8 unk7;
-    /* 0x8 */ PokemonStruct1 *pokeStruct;
+    /* 0x8 */ Pokemon *pokeStruct;
     /* 0xC */ u8 isTeamLeader;
     /* 0x10 */ Move *moves;
     u8 fill14[0x1C - 0x14];

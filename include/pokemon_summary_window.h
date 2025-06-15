@@ -55,6 +55,6 @@ struct UnkInfoTabStruct
 };
 
 void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryInfo *monInfo, struct UnkInfoTabStruct *param_4, u32 windowId);
-void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct PokemonStruct1 *pokemon, bool8 param_3);
+void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool8 param_3);
 
 #endif // GUARD_POKEMON_SUMMARY_WINDOW_H

@@ -406,7 +406,7 @@ bool8 sub_803C0DC(s16 species)
 
 bool8 sub_803C110(s16 index)
 {
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     const s16 *psVar5;
     const s16 *psVar6;
     s32 species_s32;

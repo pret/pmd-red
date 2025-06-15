@@ -107,6 +107,11 @@ void sub_8094060(Move *srcMoves, Move *destMoves);
 void WritePoke2MovesBits(DataSerializer *, struct Moves *);
 void ReadPoke2MovesBits(DataSerializer *, struct Moves *);
 
+// Note: The reason for both macros and static inlines is that some functions require the '!= 0', while others don't.
+#define MOVE_FLAG_LINK_CHAIN(move)((move)->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
+#define MOVE_FLAG_SET_LINK_CHAIN(move)((move)->moveFlags |= MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)
+#define MOVE_FLAG_CLEAR_LINK_CHAIN(move)((move)->moveFlags &= ~(MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+
 static inline void ResetMoveFlags(Move *move)
 {
     move->moveFlags = 0;
@@ -129,7 +134,7 @@ static inline bool8 MoveFlagLastUsed(Move *move)
 
 static inline bool8 MoveFlagLinkChain(Move *move)
 {
-    return (move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN);
+    return MOVE_FLAG_LINK_CHAIN(move) != 0;
 }
 
 static inline bool8 MoveFlagDisabled(Move *move)

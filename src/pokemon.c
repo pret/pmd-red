@@ -39,7 +39,7 @@ extern s16 gBlastBurnIQReq;  // 0x14d
 extern s16 gVoltTackleIQReq;  // 0x14d
 extern char* gFormattedStatusNames[];
 
-extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
+extern void DungeonMonToPokemon(Pokemon*, DungeonMon*);
 
 // arm9.bin::0205C34C
 void LoadMonsterParameters(void)
@@ -66,7 +66,7 @@ void InitializeRecruitedPokemon(void)
         gRecruitedPokemonRef->pokemon[index].flags = 0;
 
     for (index = 0; index < 4; index++)
-        gRecruitedPokemonRef->pokemon2[index].flags = 0;
+        gRecruitedPokemonRef->dungeonTeam[index].flags = 0;
 
     for (index = 0; index < MAX_TEAM_MEMBERS; index++) {
         gRecruitedPokemonRef->team[index].speciesNum = 0;
@@ -76,7 +76,7 @@ void InitializeRecruitedPokemon(void)
 
 void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
 {
-     struct PokemonStruct1 pokemon;
+     struct Pokemon pokemon;
      u8 name_buffer[20];
      u32 friendArea;
      s32 i;
@@ -134,7 +134,7 @@ void sub_808CE74(s16 _species, bool32 _isLeader, u8* name)
      }
 }
 
-void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID)
+void sub_808CFD0(Pokemon *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID)
 {
     u8 name_buffer[20];
     s32 i;
@@ -191,7 +191,7 @@ void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, D
     }
 }
 
-void sub_808D0D8(PokemonStruct1 *pokemon)
+void sub_808D0D8(Pokemon *pokemon)
 {
      pokemon->level = 1;
      pokemon->pokeHP = GetBaseHP(pokemon->speciesNum);
@@ -206,7 +206,7 @@ void sub_808D0D8(PokemonStruct1 *pokemon)
      sub_808E490(pokemon->moves, pokemon->speciesNum);
 }
 
-void ConvertStoryMonToPokemon(PokemonStruct1 *dst, struct StoryMonData *src)
+void ConvertStoryMonToPokemon(Pokemon *dst, struct StoryMonData *src)
 {
     s32 i;
 
@@ -242,7 +242,7 @@ void ConvertStoryMonToPokemon(PokemonStruct1 *dst, struct StoryMonData *src)
     }
 }
 
-PokemonStruct1 *sub_808D1DC(PokemonStruct1 *pokemon)
+Pokemon *sub_808D1DC(Pokemon *pokemon)
 {
     u32 friendArea;
     s32 i;
@@ -256,7 +256,7 @@ PokemonStruct1 *sub_808D1DC(PokemonStruct1 *pokemon)
             u8 speciesFriendArea = sub_80923D4(i);
             if (speciesFriendArea == friendArea) {
                 gRecruitedPokemonRef->pokemon[i] = *pokemon;
-                gRecruitedPokemonRef->pokemon[i].flags &= 0xbfff;
+                gRecruitedPokemonRef->pokemon[i].flags &= ~(POKEMON_FLAG_x4000);
                 sub_80980B4(pokemon->speciesNum);
                 return &gRecruitedPokemonRef->pokemon[i];
             }
@@ -265,7 +265,7 @@ PokemonStruct1 *sub_808D1DC(PokemonStruct1 *pokemon)
     return NULL;
 }
 
-PokemonStruct1 *sub_808D278(s32 species)
+Pokemon *sub_808D278(s32 species)
 {
     u32 friendArea;
     s32 i;
@@ -286,21 +286,21 @@ PokemonStruct1 *sub_808D278(s32 species)
     return NULL;
 }
 
-PokemonStruct1 *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation *location, u16 *moveID)
+Pokemon *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation *location, u16 *moveID)
 {
-    PokemonStruct1 pokemon;
+    Pokemon pokemon;
 
     sub_808CFD0(&pokemon, species, name, (u8)_itemID, location, moveID);
     return sub_808D1DC(&pokemon);
 }
 
-void sub_808D31C(PokemonStruct1 *param_1)
+void sub_808D31C(Pokemon *param_1)
 {
   if ((!IsMonTeamLeader(param_1)) && !IsMonPartner(param_1))
       param_1->flags = 0;
 }
 
-PokemonStruct1 * GetPlayerPokemonStruct(void)
+Pokemon * GetPlayerPokemonStruct(void)
 {
     s32 index;
 
@@ -315,7 +315,7 @@ PokemonStruct1 * GetPlayerPokemonStruct(void)
     return NULL;
 }
 
-PokemonStruct1 * sub_808D378(void)
+Pokemon * sub_808D378(void)
 {
     s32 index;
 
@@ -330,7 +330,7 @@ PokemonStruct1 * sub_808D378(void)
     return NULL;
 }
 
-PokemonStruct1 * sub_808D3BC(void)
+Pokemon * sub_808D3BC(void)
 {
     s32 index;
     for (index = 0; index < NUM_MONSTERS; index++) {
@@ -343,7 +343,7 @@ PokemonStruct1 * sub_808D3BC(void)
     return NULL;
 }
 
-PokemonStruct1 * sub_808D3F8(void)
+Pokemon * sub_808D3F8(void)
 {
     s32 index;
     for (index = 0; index < NUM_MONSTERS; index++) {
@@ -356,9 +356,9 @@ PokemonStruct1 * sub_808D3F8(void)
     return NULL;
 }
 
-PokemonStruct1 * sub_808D434(s16 species, s32 param_2)
+Pokemon * sub_808D434(s16 species, s32 param_2)
 {
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     s32 index;
     s32 counter;
     s32 species_s32 = species;
@@ -380,7 +380,7 @@ s32 GetFriendSum_808D480(void)
 {
     s32 index;
     s32 count;
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
 
     pokeStruct = gRecruitedPokemonRef->pokemon;
     count = 0;
@@ -396,7 +396,7 @@ s32 GetFriendSum_808D480(void)
 bool8 sub_808D4B0(void)
 {
     s32 index;
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     bool8 flag;
 
     pokeStruct = gRecruitedPokemonRef->pokemon;
@@ -414,7 +414,7 @@ bool8 sub_808D4B0(void)
 bool8 sub_808D500(void)
 {
     s32 index;
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     bool8 flag;
 
     pokeStruct = gRecruitedPokemonRef->pokemon;
@@ -432,7 +432,7 @@ bool8 sub_808D500(void)
 s32 GetUnitSum_808D544(s32 *team)
 {
     s32 count, i;
-    PokemonStruct1 *mon = gRecruitedPokemonRef->pokemon;
+    Pokemon *mon = gRecruitedPokemonRef->pokemon;
 
     count = 0;
     for (i = 0; i < NUM_MONSTERS; i++, mon++) {
@@ -449,7 +449,7 @@ s32 GetUnitSum_808D544(s32 *team)
 
 s32 sub_808D580(s32 *team)
 {
-    PokemonStruct1 *mon;
+    Pokemon *mon;
     s32 index;
     s32 counter;
 
@@ -492,7 +492,7 @@ s32 sub_808D580(s32 *team)
 s32 sub_808D654(s32 *ptr)
 {
     s32 i;
-    PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[0];
+    Pokemon *mon = &gRecruitedPokemonRef->pokemon[0];
     s32 count = 0;
     s32 *ptr2;
 
@@ -513,7 +513,7 @@ s32 sub_808D654(s32 *ptr)
 s32 sub_808D6A4(s32 *ptr)
 {
     s32 i;
-    PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[0];
+    Pokemon *mon = &gRecruitedPokemonRef->pokemon[0];
     s32 count = 0;
     s32 *ptr2;
 
@@ -536,7 +536,7 @@ bool8 sub_808D6E8()
     s32 count = 0;
     s32 size_count = 0;
     for (i = 0; i < NUM_MONSTERS; i++) {
-        PokemonStruct1* pokemon = &gRecruitedPokemonRef->pokemon[i];
+        Pokemon* pokemon = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonExists(pokemon) && PokemonFlag2(pokemon)) {
             size_count += GetBodySize(pokemon->speciesNum);
             count++;
@@ -550,7 +550,7 @@ bool8 sub_808D6E8()
 
  bool8 sub_808D750(s32 index_)
  {
-     PokemonStruct1* pokemon;
+     Pokemon* pokemon;
      s32 i;
      s32 index = (s16) index_;
      s32 count = 0;
@@ -577,19 +577,19 @@ bool8 sub_808D6E8()
 
 void PeekPokemonItem(s16 index_, BulkItem* item) {
     s32 index = index_;
-    PokemonStruct1* pokemon = &gRecruitedPokemonRef->pokemon[index];
+    Pokemon* pokemon = &gRecruitedPokemonRef->pokemon[index];
     item->id = pokemon->heldItem.id;
     item->quantity = pokemon->heldItem.quantity;
 }
 
 void GivePokemonItem(s16 index_, BulkItem* item) {
     s32 index = index_;
-    PokemonStruct1* pokemon = &gRecruitedPokemonRef->pokemon[index];
+    Pokemon* pokemon = &gRecruitedPokemonRef->pokemon[index];
     pokemon->heldItem.id = item->id;
     pokemon->heldItem.quantity = item->quantity;
 }
 
-bool8 IsPokemonRenamed(PokemonStruct1* pokemon) {
+bool8 IsPokemonRenamed(Pokemon* pokemon) {
     char species_name[20];
     char* species = GetMonSpecies(pokemon->speciesNum);
     s32 i;
@@ -665,7 +665,7 @@ char * GetMonSpecies(s16 index)
     return gMonsterParameters[index].species;
 }
 
-void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 colorNum)
+void PrintColoredPokeNameToBuffer(u8 *buffer, Pokemon *pokemon, s32 colorNum)
 {
   u8 nameBuffer [20];
 
@@ -676,7 +676,7 @@ void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 color
   sprintfStatic(buffer,_("{color}%c%s{reset}"),colorNum,nameBuffer);
 }
 
-void sub_808D9DC(u8 *buffer, PokemonStruct2 *param_2, s32 colorNum)
+void sub_808D9DC(u8 *buffer, DungeonMon *param_2, s32 colorNum)
 {
   u8 nameBuffer [20];
 
@@ -687,7 +687,7 @@ void sub_808D9DC(u8 *buffer, PokemonStruct2 *param_2, s32 colorNum)
   sprintfStatic(buffer,_("{color}%c%s{reset}"),colorNum,nameBuffer);
 }
 
-void sub_808DA0C(u8 *buffer, PokemonStruct2 *param_2)
+void sub_808DA0C(u8 *buffer, DungeonMon *param_2)
 {
   u8 nameBuffer [20];
 
@@ -695,7 +695,7 @@ void sub_808DA0C(u8 *buffer, PokemonStruct2 *param_2)
   sprintfStatic(buffer,"%s",nameBuffer);
 }
 
-void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon)
+void PrintPokeNameToBuffer(u8 *buffer, Pokemon *pokemon)
 {
   StrncpyCustom(buffer, pokemon->name, POKEMON_NAME_LENGTH);
 }
@@ -921,102 +921,94 @@ bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 spriteId)
     return (gMonsterParameters[index].dialogueSprites >> spriteId) & 1;
 }
 
-void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1)
+void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 recruitedPokemonId)
 {
-    xxx_pokemonstruct_to_pokemon2_808DE50(r0, &gRecruitedPokemonRef->pokemon[r1], r1);
+    PokemonToDungeonMon(r0, &gRecruitedPokemonRef->pokemon[recruitedPokemonId], recruitedPokemonId);
 }
 
-void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 * a1, PokemonStruct1 *pokemon, s32 a3)
-{
-    s32 i;
-    BulkItem* held;
-    Item* slot;
-
-    a1->flags = pokemon->flags;
-    a1->level = pokemon->level;
-    a1->IQ = pokemon->IQ;
-    a1->IQSkills = pokemon->IQSkills;
-    GenerateHiddenPower(&a1->hiddenPower);
-    a1->dungeonLocation = pokemon->dungeonLocation;
-    a1->isTeamLeader = pokemon->isTeamLeader;
-    a1->unkA = a3;
-    a1->speciesNum = pokemon->speciesNum;
-    a1->tacticIndex = pokemon->tacticIndex;
-    a1->unk12 = pokemon->pokeHP;
-    a1->unk10 = pokemon->pokeHP;
-
-    for (i = 0; i < 2; i++) {
-        a1->offense.att[i] = pokemon->offense.att[i];
-        a1->offense.def[i] = pokemon->offense.def[i];
-    }
-
-    a1->currExp = pokemon->currExp;
-    CopyAndResetMoves(&a1->moves, pokemon->moves);
-
-    for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
-        a1->name[i] = pokemon->name[i];
-    }
-
-    held = &pokemon->heldItem;
-    slot = &a1->itemSlot;
-
-    if ((u32)(-held->id | held->id) >> 31) {
-        HeldItemToSlot(slot, held);
-    }
-    else {
-        slot->id = ITEM_NOTHING;
-        slot->quantity = 0;
-        slot->flags = 0;
-    }
-
-    a1->belly = IntToFixedPoint(100);
-    a1->maxBelly = IntToFixedPoint(100);
-}
-
-void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2)
-{
-    xxx_pokemon2_to_pokemonstruct_808DF44(&a1[gRecruitedPokemonRef->pokemon], a2);
-}
-
-
-void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1* pokemon, PokemonStruct2* a2)
+void PokemonToDungeonMon(DungeonMon *dst, Pokemon *src, s32 recruitedPokemonId)
 {
     s32 i;
 
-    pokemon->flags = a2->flags;
-    pokemon->level = a2->level;
-    pokemon->IQ = a2->IQ;
-    pokemon->IQSkills = a2->IQSkills;
-    pokemon->dungeonLocation = a2->dungeonLocation;
-    pokemon->isTeamLeader = a2->isTeamLeader;
-    pokemon->speciesNum = a2->speciesNum;
-    pokemon->tacticIndex = a2->tacticIndex;
-    pokemon->pokeHP = a2->unk12;
+    dst->flags = src->flags;
+    dst->level = src->level;
+    dst->IQ = src->IQ;
+    dst->IQSkills = src->IQSkills;
+    GenerateHiddenPower(&dst->hiddenPower);
+    dst->dungeonLocation = src->dungeonLocation;
+    dst->isTeamLeader = src->isTeamLeader;
+    dst->recruitedPokemonId = recruitedPokemonId;
+    dst->speciesNum = src->speciesNum;
+    dst->tacticIndex = src->tacticIndex;
+    dst->unk12 = src->pokeHP;
+    dst->unk10 = src->pokeHP;
 
     for (i = 0; i < 2; i++) {
-        pokemon->offense.att[i] = a2->offense.att[i];
-        pokemon->offense.def[i] = a2->offense.def[i];
+        dst->offense.att[i] = src->offense.att[i];
+        dst->offense.def[i] = src->offense.def[i];
     }
 
-    pokemon->currExp = a2->currExp;
-    CopyBareMoveData(pokemon->moves, a2->moves.moves);
+    dst->currExp = src->currExp;
+    CopyAndResetMoves(&dst->moves, src->moves);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
-        pokemon->name[i] = a2->name[i];
+        dst->name[i] = src->name[i];
     }
 
-    if (a2->itemSlot.flags & ITEM_FLAG_EXISTS) {
-        SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
+    if (BulkItemExists(&src->heldItem)) {
+        HeldItemToSlot(&dst->itemSlot, &src->heldItem);
     }
     else {
-        pokemon->heldItem.id = ITEM_NOTHING;
+        ZeroOutItem(&dst->itemSlot);
+    }
+
+    dst->belly = IntToFixedPoint(100);
+    dst->maxBelly = IntToFixedPoint(100);
+}
+
+void DungeonMonToRecruitedPokemon(s32 id, DungeonMon* src)
+{
+    DungeonMonToPokemon(&gRecruitedPokemonRef->pokemon[id], src);
+}
+
+void DungeonMonToPokemon(Pokemon* dst, DungeonMon* src)
+{
+    s32 i;
+
+    dst->flags = src->flags;
+    dst->level = src->level;
+    dst->IQ = src->IQ;
+    dst->IQSkills = src->IQSkills;
+    dst->dungeonLocation = src->dungeonLocation;
+    dst->isTeamLeader = src->isTeamLeader;
+    dst->speciesNum = src->speciesNum;
+    dst->tacticIndex = src->tacticIndex;
+    dst->pokeHP = src->unk12;
+
+    for (i = 0; i < 2; i++) {
+        dst->offense.att[i] = src->offense.att[i];
+        dst->offense.def[i] = src->offense.def[i];
+    }
+
+    dst->currExp = src->currExp;
+    CopyBareMoveData(dst->moves, src->moves.moves);
+
+    for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
+        dst->name[i] = src->name[i];
+    }
+
+    if (src->itemSlot.flags & ITEM_FLAG_EXISTS) {
+        SlotToHeldItem(&dst->heldItem, &src->itemSlot);
+    }
+    else {
+        dst->heldItem.id = ITEM_NOTHING;
     }
 }
 
-void sub_808DFDC(s32 a1, PokemonStruct2* a2)
+void sub_808DFDC(s32 a1, DungeonMon* a2)
 {
     // transfer item from unk to pokemon at index
-    PokemonStruct1* pokemon = &gRecruitedPokemonRef->pokemon[a1];
+    Pokemon* pokemon = &gRecruitedPokemonRef->pokemon[a1];
     if (a2->itemSlot.flags & ITEM_FLAG_EXISTS) {
         SlotToHeldItem(&pokemon->heldItem, &a2->itemSlot);
     }
@@ -1142,7 +1134,7 @@ bool8 CanMonLearnMove(u16 moveID, s16 _species)
 }
 
 
-s32 sub_808E218(unkStruct_808E218_arg* a1, PokemonStruct1* pokemon)
+s32 sub_808E218(unkStruct_808E218_arg* a1, Pokemon* pokemon)
 {
   s32 i;
   s32 count;
@@ -1201,7 +1193,7 @@ s32 sub_808E218(unkStruct_808E218_arg* a1, PokemonStruct1* pokemon)
   return count;
 }
 
-s32 GetEvolutionSequence(PokemonStruct1* pokemon, struct EvolveStage* a2)
+s32 GetEvolutionSequence(Pokemon* pokemon, struct EvolveStage* a2)
 {
     s32 count;
     s32 species;

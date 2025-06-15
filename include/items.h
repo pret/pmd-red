@@ -97,7 +97,7 @@ bool8 IsEdibleItem(u8 id);
 u8 xxx_bit_lut_lookup_8091E50(u8 i0, u8 i1);
 bool8 IsInvalidItemReward(u8 itemID);
 bool8 HasGummiItem(void);
-void GetGummiItemStatBoost(PokemonStruct1* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi);
+void GetGummiItemStatBoost(Pokemon* pokemon, u8 id, bool8 checkBoostFlags, Gummi *gummi);
 
 void ReadHeldItemBits(DataSerializer *, BulkItem *);
 void WriteHeldItemBits(DataSerializer *, BulkItem *);
@@ -141,6 +141,11 @@ static inline bool8 ItemSet(Item *item)
 static inline bool8 ItemInShop(Item *item)
 {
     return (item->flags & ITEM_FLAG_IN_SHOP);
+}
+
+static inline bool8 BulkItemExists(BulkItem *item)
+{
+    return item->id != 0;
 }
 
 #endif // GUARD_ITEMS_H

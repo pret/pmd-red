@@ -43,13 +43,13 @@ u8 GetBodySize(s32 index);
 void CopyMonsterNameToBuffer(u8 * buffer, s32 index);
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index);
 void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index_);
-void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 colorNum);
+void PrintColoredPokeNameToBuffer(u8 *buffer, Pokemon *pokemon, s32 colorNum);
 void sub_808D930(u8 *buffer, s32 index);
-void sub_808D9DC(u8 *buffer, PokemonStruct2 *, s32 colorNum);
-void sub_808DA0C(u8 *buffer, PokemonStruct2 *);
+void sub_808D9DC(u8 *buffer, DungeonMon *, s32 colorNum);
+void sub_808DA0C(u8 *buffer, DungeonMon *);
 void PeekPokemonItem(s16 index_, BulkItem* item);
 void GivePokemonItem(s16 index_, BulkItem* item);
-bool8 IsPokemonRenamed(PokemonStruct1* pokemon);
+bool8 IsPokemonRenamed(Pokemon* pokemon);
 bool8 CanMonLearnMove(u16 moveID, s16 _species);
 
 u8 *GetCategoryString(s16 index);
@@ -83,73 +83,75 @@ OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 OpenedFile *GetDialogueSpriteDataPtr(s32 index);
 s32 GetUnownIndex(s16 index);
 void GenerateHiddenPower(HiddenPower *);
-s32 GetEvolutionSequence(PokemonStruct1 *pokemon, EvolveStage *);
+s32 GetEvolutionSequence(Pokemon *pokemon, EvolveStage *);
 s32 sub_808E400(s32 _species, s16* _a2, bool32 _bodySizeCheck, bool32 _shedinjaCheck);
 void sub_808E490(Move* a1, s32 species);
-void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 *, PokemonStruct1 *, s32);
-void WritePoke1Bits(DataSerializer *, PokemonStruct1 *pokemon);
-void ReadPoke1Bits(DataSerializer *, PokemonStruct1 *);
-s32 sub_808E218(unkStruct_808E218_arg *, PokemonStruct1 *pokemon);
-void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID);
-void sub_808D0D8(PokemonStruct1 *pokemon);
-PokemonStruct1 *GetPlayerPokemonStruct(void);
-PokemonStruct1 *sub_808D1DC(PokemonStruct1*);
-PokemonStruct1 *sub_808D378(void);
-PokemonStruct1 *sub_808D3BC(void);
-PokemonStruct1 *sub_808D3F8(void);
-PokemonStruct1 * sub_808D434(s16 species, s32 param_2);
+void PokemonToDungeonMon(DungeonMon *, Pokemon *, s32);
+void DungeonMonToRecruitedPokemon(s32 id, DungeonMon* src);
+void DungeonMonToPokemon(Pokemon* dst, DungeonMon* src);
+void WritePoke1Bits(DataSerializer *, Pokemon *pokemon);
+void ReadPoke1Bits(DataSerializer *, Pokemon *);
+s32 sub_808E218(unkStruct_808E218_arg *, Pokemon *pokemon);
+void sub_808CFD0(Pokemon *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID);
+void sub_808D0D8(Pokemon *pokemon);
+Pokemon *GetPlayerPokemonStruct(void);
+Pokemon *sub_808D1DC(Pokemon*);
+Pokemon *sub_808D378(void);
+Pokemon *sub_808D3BC(void);
+Pokemon *sub_808D3F8(void);
+Pokemon * sub_808D434(s16 species, s32 param_2);
 s32 GetFriendSum_808D480(void);
 bool8 sub_808D4B0(void);
 bool8 sub_808D500(void);
 s32 GetUnitSum_808D544(s32 *);
 s32 sub_808D580(s32 *);
 bool8 ComparePokemonNames(s16, s16);
-void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
+void PrintPokeNameToBuffer(u8 *buffer, Pokemon *pokemon);
 void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level);
 const u8* DecompressMoveID(const u8* a1, u16* moveID);
 bool8 sub_808DA44(s32, u32);
-void ConvertStoryMonToPokemon(PokemonStruct1 *dst, struct StoryMonData *src);
+void ConvertStoryMonToPokemon(Pokemon *dst, struct StoryMonData *src);
 void sub_808CE74(s16 _species, bool32 _isLeader, u8* name);
-PokemonStruct1 *sub_808D278(s32 species);
+Pokemon *sub_808D278(s32 species);
 
-static inline bool8 PokemonExists(PokemonStruct1 *mon)
+static inline bool8 PokemonExists(Pokemon *mon)
 {
     return (mon->flags & POKEMON_FLAG_EXISTS) != 0;
 }
 
-static inline bool8 PokemonFlag1Struct2(PokemonStruct2 *mon)
+static inline bool8 DungeonMonExists(DungeonMon *mon)
 {
     return (mon->flags & POKEMON_FLAG_EXISTS) != 0;
 }
 
-static inline bool8 PokemonFlag2(PokemonStruct1 *mon)
+static inline bool8 PokemonFlag2(Pokemon *mon)
 {
     return (mon->flags & POKEMON_FLAG_ON_TEAM) != 0;
 }
 
-static inline bool8 PokemonFlag2Struct2(PokemonStruct2 *mon)
+static inline bool8 PokemonFlag2Struct2(DungeonMon *mon)
 {
     return (mon->flags & POKEMON_FLAG_ON_TEAM) != 0;
 }
 
-static inline void SetPokemonFlag2(PokemonStruct1 *mon)
+static inline void SetPokemonFlag2(Pokemon *mon)
 {
     mon->flags |= POKEMON_FLAG_ON_TEAM;
 }
 
-static inline bool8 IsMonTeamLeader(PokemonStruct1 *pokemon)
+static inline bool8 IsMonTeamLeader(Pokemon *pokemon)
 {
     return pokemon->isTeamLeader != FALSE;
 }
 
 #include "constants/dungeon.h"
 
-static inline bool8 IsMonPartner(PokemonStruct1 *mon)
+static inline bool8 IsMonPartner(Pokemon *mon)
 {
     return (mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
 }
 
-static inline bool8 IsMonLeader(PokemonStruct1 *mon)
+static inline bool8 IsMonLeader(Pokemon *mon)
 {
     return (mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_LEADER);
 }

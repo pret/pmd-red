@@ -24,7 +24,7 @@ static IWRAM_INIT struct unkStruct_3001B60 *sFriendList = {NULL};
 static void SortbyAlphabetNo(s32, s32);
 static void SortbyInternalNo(s32, s32);
 static void SortbyName(s32, s32);
-static bool8 MonHasFriendArea(PokemonStruct1 *pokemon, u8 area);
+static bool8 MonHasFriendArea(Pokemon *pokemon, u8 area);
 static void SortNames(void);
 static void SetUpWindowHeader(void);
 static s32 sub_8023BD8(void);
@@ -260,7 +260,7 @@ void FriendList_ShowWindow(void)
 
     for (i = 0; i < sFriendList->unk358.m.input.currPageEntries; i++) {
         s32 id = sFriendList->unk1A[(sFriendList->unk358.m.input.currPage * sFriendList->unk358.m.input.entriesPerPage) + i];
-        PokemonStruct1 *pokePtr = &gRecruitedPokemonRef->pokemon[id];
+        Pokemon *pokePtr = &gRecruitedPokemonRef->pokemon[id];
         u8 color = 7;
 
         if (PokemonFlag2(pokePtr)) {
@@ -302,7 +302,7 @@ void FriendList_ShowWindow(void)
 static s32 sub_8023F8C(void)
 {
     s32 i;
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
 
     sFriendList->unk8 = 0;
     if (!sFriendList->unk15) {
@@ -357,7 +357,7 @@ bool8 sub_8024108(s32 param_1)
     s32 i;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[i];
+        Pokemon *pokeStruct = &gRecruitedPokemonRef->pokemon[i];
         if (PokemonExists(pokeStruct)) {
             if (param_1 == 2) {
                 if (!PokemonFlag2(pokeStruct)) continue;
@@ -378,7 +378,7 @@ bool8 sub_8024108(s32 param_1)
     return TRUE;
 }
 
-static bool8 MonHasFriendArea(PokemonStruct1 *pokemon, u8 area)
+static bool8 MonHasFriendArea(Pokemon *pokemon, u8 area)
 {
     if (area == GetFriendArea(pokemon->speciesNum))
         return TRUE;
@@ -464,11 +464,11 @@ static void SortbyName(s32 startId, s32 arrId)
     }
 }
 
-UNUSED static PokemonStruct1 *sub_80243E8(void)
+UNUSED static Pokemon *sub_80243E8(void)
 {
     u8 buffer[40];
     u8 nameBuffer[20];
-    PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[sFriendList->unk1A[GET_CURRENT_MENU_ENTRY(sFriendList->unk358.m.input)]];
+    Pokemon *pokeStruct = &gRecruitedPokemonRef->pokemon[sFriendList->unk1A[GET_CURRENT_MENU_ENTRY(sFriendList->unk358.m.input)]];
 
     StrncpyCustom(nameBuffer, pokeStruct->name, POKEMON_NAME_LENGTH);
     sprintfStatic(buffer, "%s", nameBuffer);

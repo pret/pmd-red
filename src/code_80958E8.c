@@ -1007,7 +1007,7 @@ s32 CountJobsinDungeon(u8 dungeon)
   return count;
 }
 
-bool8 sub_8096A08(u8 dungeon, PokemonStruct1 *pokemon)
+bool8 sub_8096A08(u8 dungeon, Pokemon *pokemon)
 {
   WonderMail *mail;
   s32 index;

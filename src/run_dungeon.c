@@ -92,7 +92,7 @@ extern void sub_80521D0(void);
 extern void sub_803F27C(u8);
 extern void sub_807E7FC(u8);
 extern bool8 IsLevelResetTo1(u8 dungeon);
-extern void sub_8068A84(PokemonStruct1 *pokemon);
+extern void sub_8068A84(Pokemon *pokemon);
 extern void sub_807EAA0(u32, u32);
 extern void SetFloorItemMonsterSpawns(void);
 extern void sub_80842F0(void);
@@ -857,7 +857,7 @@ static void sub_8043FD0(void)
     for (level = 2; level <= 5; level++) {
         s32 i, monId, movesCount;
         for (monId = 0; monId < NUM_MONSTERS; monId++) {
-            PokemonStruct1 *monStruct = &gRecruitedPokemonRef->pokemon[monId];
+            Pokemon *monStruct = &gRecruitedPokemonRef->pokemon[monId];
             if (PokemonExists(monStruct) && PokemonFlag2(monStruct)) {
                 u16 learnedMoves[16];
                 LevelData levelData;
@@ -924,7 +924,7 @@ void EnforceMaxItemsAndMoney(void)
             ZeroOutItem(&gTeamInventoryRef->teamItems[i]);
         }
         for (i = 0; i < NUM_MONSTERS; i++) {
-            PokemonStruct1 *mon = (&gRecruitedPokemonRef->pokemon[i]);
+            Pokemon *mon = (&gRecruitedPokemonRef->pokemon[i]);
             if (PokemonExists(mon) && PokemonFlag2(mon)) {
                 mon->heldItem.id = 0;
             }

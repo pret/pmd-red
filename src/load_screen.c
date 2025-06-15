@@ -270,7 +270,7 @@ void DrawLoadScreenText(void)
   u32 hours;
   u32 minutes;
   u32 seconds;
-  PokemonStruct1 *playerInfo;
+  Pokemon *playerInfo;
   unkStruct_203B484 *temp2;
   u8 *r2;
 

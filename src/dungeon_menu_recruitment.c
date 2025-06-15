@@ -351,12 +351,12 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
                 }
 
                 if (!monIsRecruited) {
-                    for (k = 0; k < 4; k++) {
-                        PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[k];
-                        if (PokemonFlag1Struct2(mon) && !sub_806A564(mon->unkA) && mon->speciesNum == speciesId)
+                    for (k = 0; k < MAX_TEAM_MEMBERS; k++) {
+                        DungeonMon *mon = &gRecruitedPokemonRef->dungeonTeam[k];
+                        if (DungeonMonExists(mon) && !sub_806A564(mon->recruitedPokemonId) && mon->speciesNum == speciesId)
                             break;
                     }
-                    if (k != 4) {
+                    if (k != MAX_TEAM_MEMBERS) {
                         monIsRecruited = TRUE;
                         monNameColor = 6;
                     }

@@ -76,7 +76,7 @@ void sub_809249C(u8 friendArea, bool8 clear)
         return;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        PokemonStruct1 *pokemon = &gRecruitedPokemonRef->pokemon[i];
+        Pokemon *pokemon = &gRecruitedPokemonRef->pokemon[i];
 
         if (PokemonExists(pokemon) && sub_80923D4(i) == friendArea) {
             if (IsMonPartner(pokemon) || IsMonTeamLeader(pokemon))
@@ -152,7 +152,7 @@ bool8 HasAllFriendAreas(void)
 
 void GetFriendAreaCapacity2(u8 friendArea, FriendAreaCapacity *dst, bool8 checkLeader, bool8 checkPartner)
 {
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     s32 i;
     s32 iVar4;
 
@@ -186,7 +186,7 @@ void GetFriendAreaCapacity2(u8 friendArea, FriendAreaCapacity *dst, bool8 checkL
 
 void GetFriendAreaCapacity(u8 areaId, FriendAreaCapacity *dst, bool8 checkPartner)
 {
-    PokemonStruct1 *mon;
+    Pokemon *mon;
     s32 r5;
     s32 i;
     s32 max;

@@ -468,7 +468,7 @@ static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redC
                 gDungeonMenu.menuIndex = 0;
             }
         }
-        else if (MoveFlagLinkChain(move)) {
+        else if MOVE_FLAG_LINK_CHAIN(move) {
             arg5[i] = 1;
         }
     }
@@ -503,7 +503,7 @@ static void PrintMoveNamesOnWindow(s32 count, Entity *entity, Move *moves, s32 w
             movStruct.redColor = (CanMonsterUseMove(entity, move, TRUE) == FALSE);
             BufferMoveName(gFormatBuffer_Items[0], move, &movStruct);
             y = GetMenuEntryYCoord(&gDungeonMenu, i);
-            if (MoveFlagLinkChain(move)) {
+            if MOVE_FLAG_LINK_CHAIN(move) {
                 x = 13;
             }
             else {
@@ -611,7 +611,7 @@ static void ShowMovesInfoWindow(Move *moves, s32 firstMoveId, s32 movesCount)
     for (i = firstMoveId + 1; i < movesCount; i++) {
         if (!MoveFlagExists(&moves[i]))
             break;
-        if (!MoveFlagLinkChain(&moves[i]))
+        if (!MOVE_FLAG_LINK_CHAIN(&moves[i]))
             break;
         count++;
     }
@@ -787,7 +787,7 @@ void ActionLinkMoves(ActionContainer *a0)
     for (id++; id < MAX_MON_MOVES; id++) {
         if (!MoveFlagExists(&entInfo->moves.moves[id]))
             break;
-        if (!MoveFlagLinkChain(&entInfo->moves.moves[id]))
+        if (!MOVE_FLAG_LINK_CHAIN(&entInfo->moves.moves[id]))
             break;
         if (++linkedCount >= MAX_MON_MOVES)
             break;
@@ -823,7 +823,7 @@ static bool8 IsMoveLinkedAndNotCharging(EntityInfo *entInfo, s32 moveId_)
 
         if (!MoveFlagExists(move))
             break;
-        if (!MoveFlagLinkChain(move)) {
+        if (!MOVE_FLAG_LINK_CHAIN(move)) {
             ret = TRUE;
             break;
         }
@@ -848,7 +848,7 @@ void ActionDelinkMoves(ActionContainer *a0, bool8 showMsg)
     id++;
     for (linkedCount = 0; linkedCount < MAX_MON_MOVES && id < MAX_MON_MOVES; id++, linkedCount++) {
         Move *move = &entInfo->moves.moves[id];
-        if (MoveFlagLinkChain(move)) {
+        if MOVE_FLAG_LINK_CHAIN(move) {
             move->moveFlags &= ~(MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN);
             unlInked = TRUE;
         }
@@ -879,7 +879,7 @@ static bool8 IsMoveLinked(EntityInfo *entInfo, s32 id)
     for (linkedCount = 0; linkedCount < MAX_MON_MOVES && id < MAX_MON_MOVES; linkedCount++) {
         Move *move = &entInfo->moves.moves[id];
 
-        if (MoveFlagLinkChain(move)) {
+        if MOVE_FLAG_LINK_CHAIN(move) {
             linkFound = TRUE;
             id++;
         }
@@ -899,7 +899,7 @@ static void sub_8063E30(Move *moves, s32 id)
 
     id++;
     for (i = 0; i < 8 && id < 8; id++, i++) {
-        if (MoveFlagLinkChain(&moves[id])) {
+        if (MOVE_FLAG_LINK_CHAIN(&moves[id])) {
             moves[id].moveFlags &= ~(MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN);
         }
         else {
@@ -1050,8 +1050,8 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
             Move *move = &moves[sChosenMoveSlotId];
             s32 nextMoveId = sChosenMoveSlotId + 1;
 
-            if (nextMoveId < 8 && MoveFlagExists(&moves[nextMoveId])) {
-                linked = MoveFlagLinkChain(&moves[nextMoveId]) != 0;
+            if (nextMoveId < 8 && MoveFlagExists(&moves[nextMoveId]) && MOVE_FLAG_LINK_CHAIN(&moves[nextMoveId])) {
+                linked = TRUE;
             }
             BufferMoveName(gFormatBuffer_Items[0], move, NULL);
             yesNoAnswer = DisplayDungeonYesNoMessage(NULL, (!linked) ? gUnknown_80FDF70 : gUnknown_80FDF00, FALSE);
@@ -1066,7 +1066,7 @@ bool8 sub_8063E70(Entity *entity, Move *moves, bool8 showYesNoBox, bool8 allowBP
                 Move *move = &moves[i];
                 if (!MoveFlagExists(move))
                     break;
-                if (!(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+                if (!MOVE_FLAG_LINK_CHAIN(move))
                     break;
 
                 ResetMoveFlags(move);
@@ -1156,7 +1156,7 @@ static bool8 sub_8064358(Move *moves, s32 id)
     for (linkedCount = 0; linkedCount < 8 && id < 8; linkedCount++) {
         Move *move = &moves[id];
 
-        if (MoveFlagLinkChain(move)) {
+        if MOVE_FLAG_LINK_CHAIN(move) {
             linkFound = TRUE;
             id++;
         }

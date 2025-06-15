@@ -393,7 +393,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 
     if (leader != NULL) {
         EntityInfo *leaderInfo = GetEntInfo(leader);
-        PokemonStruct2 *monStruct2 = &gRecruitedPokemonRef->pokemon2[leaderInfo->teamIndex];
+        DungeonMon *monStruct2 = &gRecruitedPokemonRef->dungeonTeam[leaderInfo->teamIndex];
 
         sub_808DA0C(gFormatBuffer_Monsters[0], monStruct2);
         leaderId = leaderInfo->apparentID;
@@ -405,7 +405,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 
     if (partner != NULL) {
         EntityInfo *partnerInfo = GetEntInfo(partner);
-        PokemonStruct2 *monStruct2 = &gRecruitedPokemonRef->pokemon2[partnerInfo->teamIndex];
+        DungeonMon *monStruct2 = &gRecruitedPokemonRef->dungeonTeam[partnerInfo->teamIndex];
 
         sub_808DA0C(gFormatBuffer_Monsters[1], monStruct2);
         partnerId = partnerInfo->apparentID;

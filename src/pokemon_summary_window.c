@@ -234,7 +234,7 @@ void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryI
     sub_80073E0(windowId);
 }
 
-void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct PokemonStruct1 *pokemon, bool8 param_3)
+void SetMonSummaryInfo(struct MonSummaryInfo *dst, struct Pokemon *pokemon, bool8 param_3)
 {
     s32 index;
 

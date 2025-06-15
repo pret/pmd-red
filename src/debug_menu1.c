@@ -139,7 +139,7 @@ static void sub_803A3BC(void)
 
     item = ITEM_CHERI_BERRY;
     for (i = 0; i < 300; i++) {
-        PokemonStruct1 pokemon;
+        Pokemon pokemon;
         u16 moves[MAX_MON_MOVES];
         u8 buffer[20];
         DungeonLocation dungeonLoc = {.id = DUNGEON_MT_THUNDER_PEAK, .floor = 16};
