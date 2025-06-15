@@ -181,7 +181,7 @@ static s32 sub_8023BD8(void)
 
     for (i = 0; i < sFriendList->unk8; i++) {
         s32 id = sFriendList->unk1A[i];
-        if (!PokemonFlag1(&gRecruitedPokemonRef->pokemon[id])) {
+        if (!PokemonExists(&gRecruitedPokemonRef->pokemon[id])) {
             sFriendList->unk8--;
             for (j = i; j < sFriendList->unk8; j++) {
                 sFriendList->unk1A[j] = sFriendList->unk1A[j + 1];
@@ -308,7 +308,7 @@ static s32 sub_8023F8C(void)
     if (!sFriendList->unk15) {
         for (i = 0; i < NUM_MONSTERS; i++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[i];
-            if (pokeStruct->isTeamLeader && PokemonFlag1(pokeStruct)) {
+            if (pokeStruct->isTeamLeader && PokemonExists(pokeStruct)) {
                 sFriendList->unk1A[sFriendList->unk8++] = i;
                 break;
             }
@@ -318,7 +318,7 @@ static s32 sub_8023F8C(void)
     if (!sFriendList->unk16) {
         for (i = 0; i < NUM_MONSTERS; i++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[i];
-            if (IsMonPartner(pokeStruct) && !pokeStruct->isTeamLeader && PokemonFlag2(pokeStruct) && PokemonFlag1(pokeStruct)) {
+            if (IsMonPartner(pokeStruct) && !pokeStruct->isTeamLeader && PokemonFlag2(pokeStruct) && PokemonExists(pokeStruct)) {
                 sFriendList->unk1A[sFriendList->unk8++] = i;
                 break;
             }
@@ -329,7 +329,7 @@ static s32 sub_8023F8C(void)
     if (!sFriendList->unk17) {
         for (i = 0; i < NUM_MONSTERS; i++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[i];
-            if (PokemonFlag2(pokeStruct) && PokemonFlag1(pokeStruct) && !pokeStruct->isTeamLeader && !IsMonPartner(pokeStruct)) {
+            if (PokemonFlag2(pokeStruct) && PokemonExists(pokeStruct) && !pokeStruct->isTeamLeader && !IsMonPartner(pokeStruct)) {
                 sFriendList->unk1A[sFriendList->unk8++] = i;
                 if (sFriendList->unk8 >= 4) {
                     break;
@@ -342,7 +342,7 @@ static s32 sub_8023F8C(void)
     if (!sFriendList->unk14) {
         for (i = 0; i < NUM_MONSTERS; i++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[i];
-            if (PokemonFlag1(pokeStruct) && !PokemonFlag2(&gRecruitedPokemonRef->pokemon[i])) {
+            if (PokemonExists(pokeStruct) && !PokemonFlag2(&gRecruitedPokemonRef->pokemon[i])) {
                 sFriendList->unk1A[sFriendList->unk8++] = i;
             }
         }
@@ -358,7 +358,7 @@ bool8 sub_8024108(s32 param_1)
 
     for (i = 0; i < NUM_MONSTERS; i++) {
         PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[i];
-        if (PokemonFlag1(pokeStruct)) {
+        if (PokemonExists(pokeStruct)) {
             if (param_1 == 2) {
                 if (!PokemonFlag2(pokeStruct)) continue;
             }

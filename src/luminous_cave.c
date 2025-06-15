@@ -747,7 +747,7 @@ static bool8 LuminousCave_HasOnly1Member(void)
     memberCount = 0;
     for(index = 0; index < NUM_MONSTERS; index++, preload++)
     {
-        if((preload->unk0 >> 1) & 1)
+        if((preload->flags >> 1) & 1)
             memberCount++;
     }
 

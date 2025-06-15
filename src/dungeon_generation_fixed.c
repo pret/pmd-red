@@ -1083,7 +1083,7 @@ static bool8 sub_805210C(u8 itemId)
     }
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])) {
+        if (PokemonExists(&gRecruitedPokemonRef->pokemon[i])) {
             if (MonHasItem(&gRecruitedPokemonRef->pokemon[i]) && gRecruitedPokemonRef->pokemon[i].heldItem.id == itemId)
                 return TRUE;
         }

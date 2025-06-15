@@ -596,7 +596,7 @@ s32 GetItemPossessionCount(u8 id)
 
     for (i = 0; i < NUM_MONSTERS; i++) {
         PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
-        if (PokemonFlag1(mon)
+        if (PokemonExists(mon)
         && PokemonFlag2(mon)
         && (mon->heldItem.id != ITEM_NOTHING)
         && (mon->heldItem.id == id))
@@ -1400,7 +1400,7 @@ void ClearAllItems_8091FB4(void)
     }
     FillInventoryGaps();
     for (i = 0; i < NUM_MONSTERS; i++) {
-        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])) {
+        if (PokemonExists(&gRecruitedPokemonRef->pokemon[i])) {
             PokemonStruct1 *pokemon = &gRecruitedPokemonRef->pokemon[i];
             if (pokemon->heldItem.id) {
                 if (pokemon->heldItem.id == ITEM_POKE) {

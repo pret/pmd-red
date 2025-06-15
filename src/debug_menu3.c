@@ -225,8 +225,8 @@ static bool8 sub_803ABC8(void)
 
         mon = &gRecruitedPokemonRef->pokemon[i];
 
-        if ((mask & mon->unk0) != 0
-            && ((mon->unk0 >> 1) & mask) != 0
+        if ((mask & mon->flags) != 0
+            && ((mon->flags >> 1) & mask) != 0
             && sUnknown_203B3F4->friendArea == GetFriendArea(mon->speciesNum))
             return FALSE;
 

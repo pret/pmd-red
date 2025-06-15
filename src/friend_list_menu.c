@@ -426,7 +426,7 @@ void sub_8025A84(void)
             SetFriendListMenuState(FRIEND_LIST_MENU_STATE_TAKE);
             break;
         case FRIEND_LIST_MENU_STANDBY:
-            gUnknown_203B2B4->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
+            gUnknown_203B2B4->pokeStruct->flags &= ~(POKEMON_FLAG_ON_TEAM);
             nullsub_104();
             sub_808ED00();
             FriendList_Free();

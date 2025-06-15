@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "ground_script.h"
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"
@@ -130,7 +131,7 @@ s32 ExecuteScriptCommand(Action *action);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_8098DCC(u32 speed);
-extern const PixelPos gUnknown_81164DC;
+
 extern char *gUnknown_203B4B0;
 void sub_8099220(void *param_1, s32 param_2);
 s16 sub_8002694(u8 param_1); // value -> GroundEnter lookup
@@ -140,31 +141,6 @@ bool8 sub_809AFFC(u8 *);
 bool8 sub_809D234(void);
 s32 sub_80A14E8(Action *, u8, u32, s32);
 u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
-
-extern char gUnknown_81165D4[];
-extern char gUnknown_81165F4[];
-extern char gUnknown_811660C[];
-extern char gUnknown_8116628[];
-extern char gUnknown_8116644[];
-extern char gUnknown_8116664[];
-extern char gUnknown_8116684[];
-extern char gUnknown_81166C0[];
-extern char gUnknown_81166D8[];
-
-extern const CallbackData gGroundScriptTriggerCallbacks;
-extern DebugLocation gUnknown_81166B4;
-extern DebugLocation gUnknown_81166F8;
-extern DebugLocation gUnknown_8116704;
-extern ScriptCommand gUnknown_81164E4;
-
-extern const DebugLocation gUnknown_8116588;
-extern const DebugLocation gUnknown_8116538;
-extern const DebugLocation gUnknown_8116560;
-extern u8 gUnknown_8116594[];
-extern u8 gUnknown_8116544[];
-extern u8 gUnknown_811656C[];
-
-extern DebugLocation gUnknown_81165C8;
 
 extern u8 GroundObjectsCancellAll(void);
 extern u8 GroundEffectsCancelAll(void);
@@ -196,18 +172,6 @@ u8 sub_80A8D20();
 bool8 sub_80A87E0();
 s16 sub_80A8BFC(s16);
 void sub_80A8F50(const u8 *buffer, s32, s32 size);
-
-extern struct unkStruct_808D144 gUnknown_8116710;
-extern struct unkStruct_808D144 gUnknown_8116760;
-extern struct unkStruct_808D144 gUnknown_8116794;
-extern struct unkStruct_808D144 gUnknown_81167BC;
-extern struct unkStruct_808D144 gUnknown_8116738;
-extern struct unkStruct_808D144 gUnknown_811681C;
-extern DungeonLocation gUnknown_81167E8;
-extern DungeonLocation gUnknown_8116788;
-extern DungeonLocation gUnknown_811678C;
-extern DungeonLocation gUnknown_8116790;
-
 PokemonStruct1 *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation *location, u16 *moveID);
 bool8 HasRecruitedMon(s32 species);
 extern Item gUnknown_8116844;
@@ -243,6 +207,42 @@ EWRAM_DATA char gUnknown_2039D98[POKEMON_NAME_LENGTH + 2] = {0};
 EWRAM_DATA u32 gUnknown_2039DA4 = 0;
 EWRAM_DATA u16 gUnknown_2039DA8 = 0;
 EWRAM_INIT static int sNumChoices = 0;
+
+static const CallbackData sNullCallbackData = {
+    .maybeId = 4,
+    .getIndex = NULL,
+    .getSize = NULL,
+    .getHitboxCenter = NULL,
+    .getPosHeightAndUnk = NULL,
+    .getDirection = NULL,
+    .getFlags = NULL,
+    .setHitboxPos = NULL,
+    .setPositionBounds = NULL,
+    .moveReal = NULL,
+    .setPosHeight = NULL,
+    .setDirection = NULL,
+    .setEventIndex = NULL,
+    .livesOnlyNullsub = NULL,
+    .func38 = NULL,
+    .setFlags = NULL,
+    .clearFlags = NULL,
+    .func44_livesOnlySpriteRelated = NULL,
+    .moveRelative = NULL,
+    .func4C_spriteRelatedCheck = NULL,
+    .func50_spriteRelated = NULL,
+};
+
+static const PixelPos sPixelPosZero = {0, 0};
+
+// TODO GET RID OF IT
+const u8 GroundScriptFile_Text[];
+
+static const ScriptCommand gUnknown_81164E4[] = {
+    {0xF6, 0, 0xC5, 0, 0, GroundScriptFile_Text},
+    {0xEF, 0, 0,    0, 0, NULL},
+};
+
+ALIGNED(4) const u8 GroundScriptFile_Text[] = "../ground/ground_script.c";
 
 // -1 didn't match
 void sub_809D520(ActionUnkIds *a0)
@@ -327,12 +327,12 @@ void InitAction2(Action *action)
     InitAction(action);
 }
 
-UNUSED s16 sub_809D654(Action *action)
+UNUSED static s16 sub_809D654(Action *action)
 {
     return action->scriptData.savedState;
 }
 
-UNUSED s16 sub_809D65C(Action *action)
+UNUSED static s16 sub_809D65C(Action *action)
 {
     if(action->scriptData.savedState != 0)
         return action->scriptData.state;
@@ -438,26 +438,26 @@ bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSm
             break;
         case 5:
             if (action->scriptData.state != 2) {
-                // "execute script type error B" at ../ground/ground_script.c:688
-                FatalError(&gUnknown_8116538, gUnknown_8116544);
+                FATAL_ERROR_ARGS(GroundScriptFile_Text, 688, "execute script type error B");
             }
             if (action->scriptData2.state != -1) {
-                // "execute script type error C" at ../ground/ground_script.c:689
-                FatalError(&gUnknown_8116560, gUnknown_811656C);
+                FATAL_ERROR_ARGS(GroundScriptFile_Text, 689, "execute script type error C");
             }
             action->scriptData2 = action->scriptData;
             break;
         case 0:
-            if (action->scriptData.state != 1) goto _0809D84A;
-            action->scriptData2 = action->scriptData;
+            if (action->scriptData.state != 1) {
+                InitScriptData(&action->scriptData2);
+            }
+            else {
+                action->scriptData2 = action->scriptData;
+            }
             break;
         case 1:
-        _0809D84A:
             InitScriptData(&action->scriptData2);
             break;
         default:
-            // "execute script type error %d" at ../ground/ground_script.c:708
-            FatalError(&gUnknown_8116588, gUnknown_8116594, param_3->state);
+            FATAL_ERROR_ARGS(GroundScriptFile_Text, 708, "execute script type error %d", param_3->state);
     }
     InitScriptData(&action->scriptData);
     if (param_2 != NULL) {
@@ -510,7 +510,7 @@ u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
 bool8 GroundScript_Cancel(Action *r0)
 {
     // NOTE: Will always return TRUE
-    return ActionResetScriptDataForDeletion(r0, &gUnknown_81165C8);
+    return ActionResetScriptDataForDeletion(r0, DEBUG_LOC_PTR(GroundScriptFile_Text, 821, "GroundScript_Cancel"));
 }
 
 u8 GroundCancelAllEntities(void)
@@ -856,7 +856,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                         if (res >= 0) {
                                             flag = TRUE;
                                             sub_80A8FD8(res, &pos1);
-                                            pos2 = gUnknown_81164DC;
+                                            pos2 = sPixelPosZero;
                                         }
                                         break;
                                     }
@@ -873,7 +873,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                     action->callbacks->getSize(action->parentObject, &pos4);
                                     tmp2 = SizedDeltaDirection8(&pos3, &pos4, &pos1, &pos2);
                                     if (tmp2 == -1) {
-                                        tmp2 = SizedDeltaDirection4(&pos3, &gUnknown_81164DC, &pos1, &gUnknown_81164DC);
+                                        tmp2 = SizedDeltaDirection4(&pos3, &sPixelPosZero, &pos1, &sPixelPosZero);
                                     }
                                 }
                                 if (tmp2 == -1 || tmp2 == dir) {
@@ -1406,8 +1406,7 @@ s32 ExecuteScriptCommand(Action *action)
                 u32 argCopy = arg;
                 u32 byte = (u8)curCmd.argByte;
                 if (ScriptLoggingEnabled(TRUE)) {
-                    // "    ground select %3d[%s] %3d"
-                    Log(1, gUnknown_81165D4, arg, gGroundConversion_811BAF4[arg].text, byte);
+                    Log(1, "    ground select %3d[%s] %3d", arg, gGroundConversion_811BAF4[arg].text, byte);
                 }
                 GroundMainGroundRequest(argCopy, byte, curCmd.argShort);
                 break;
@@ -1416,8 +1415,7 @@ s32 ExecuteScriptCommand(Action *action)
                 s32 arg = (s16)curCmd.arg1;
                 if (arg == -1) arg = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
                 if (ScriptLoggingEnabled(TRUE)) {
-                    // "    dungeon select %3d"
-                    Log(1, gUnknown_81165F4, arg);
+                    Log(1, "    dungeon select %3d", arg);
                 }
                 if (arg != -1) {
                     GroundMainRescueRequest(arg, curCmd.argShort);
@@ -1480,7 +1478,7 @@ s32 ExecuteScriptCommand(Action *action)
                     SetScriptVarValue(NULL, DUNGEON_ENTER, tmp);
                 }
                 if (ScriptLoggingEnabled(TRUE)) {
-                    Log(1, gUnknown_811660C, tmp);
+                    Log(1, "    dungeon enter check %3d", tmp);
                 }
                 if (tmp != -1) {
                     action->scriptData.branchDiscriminant = 1;
@@ -1496,16 +1494,14 @@ s32 ExecuteScriptCommand(Action *action)
                     gUnknown_2039A32 = GetAdjustedGroundMap((s16)curCmd.arg1);
                     gUnknown_2039A34 = gUnknown_2039A32;
                     if (ScriptLoggingEnabled(TRUE)) {
-                        // "    map select %3d %3d[%s]"
-                        Log(1,gUnknown_8116628,gCurrentMap,gUnknown_2039A32,
+                        Log(1,"    map select %3d %3d[%s]",gCurrentMap,gUnknown_2039A32,
                             gGroundConversion_811BAF4[gCurrentMap].text);
                     }
                 } else {
                     gUnknown_2039A32 = gCurrentMap = curCmd.arg1;
                     gUnknown_2039A34 = curCmd.arg1;
                     if (ScriptLoggingEnabled(TRUE)) {
-                        // "    ground select %3d %3d[%s]"
-                        Log(1,gUnknown_8116644,gCurrentMap,gUnknown_2039A32,
+                        Log(1,"    ground select %3d %3d[%s]",gCurrentMap,gUnknown_2039A32,
                             gGroundConversion_811BAF4[gCurrentMap].text);
                     }
                 }
@@ -1530,8 +1526,7 @@ s32 ExecuteScriptCommand(Action *action)
                 tmp = GetDungeonInfo_80A2608((s16)curCmd.arg1);
                 gUnknown_2039A34 = gUnknown_2039A32 = gCurrentMap = (s16)curCmd.arg2;
                 if (ScriptLoggingEnabled(TRUE)) {
-                    // "    dungeon select %3d %3d[%s]"
-                    Log(1, gUnknown_8116664, gCurrentMap,gUnknown_2039A32,
+                    Log(1, "    dungeon select %3d %3d[%s]", gCurrentMap,gUnknown_2039A32,
                         gGroundConversion_811BAF4[gCurrentMap].text);
                 }
                 GroundSprite_Reset(gUnknown_2039A32);
@@ -1723,8 +1718,7 @@ s32 ExecuteScriptCommand(Action *action)
                 if (!((u16)(a - 0x37) < 0x11) && (s16)sub_80A2750(a) == 1) {
                     if (thing == -1) {
                         if (ScriptLoggingEnabled(TRUE)) {
-                            // "    dungeon rescue select %3d"
-                            Log(1, gUnknown_8116684, a);
+                            Log(1, "    dungeon rescue select %3d", a);
                         }
                         GroundMainRescueRequest(a, -1);
                     } else {
@@ -1779,7 +1773,7 @@ s32 ExecuteScriptCommand(Action *action)
                         sub_80A8FD8(ret, &pos3);
                         sub_80A8F9C(ret, &pos4);
                         if ((tmp = SizedDeltaDirection8(&pos3, &pos4, &pos1, &pos2)) != -1 ||
-                            (tmp = SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC)) != -1) {
+                            (tmp = SizedDeltaDirection4(&pos1, &sPixelPosZero, &pos3, &sPixelPosZero)) != -1) {
                             sub_80A9090(ret, tmp);
                         }
                     }
@@ -2423,7 +2417,7 @@ s32 ExecuteScriptCommand(Action *action)
                         if (val >= 0) {
                             flag = TRUE;
                             sub_80A8FD8(val, &pos1);
-                            pos2 = gUnknown_81164DC;
+                            pos2 = sPixelPosZero;
                         }
                         break;
                     }
@@ -2445,7 +2439,7 @@ s32 ExecuteScriptCommand(Action *action)
 
                     tmp = -1;
                     if (dir == tmp) {
-                        dir = SizedDeltaDirection4(&pos3, &gUnknown_81164DC, &pos1, &gUnknown_81164DC);
+                        dir = SizedDeltaDirection4(&pos3, &sPixelPosZero, &pos1, &sPixelPosZero);
                     }
                     if (dir == tmp) {
                         action->callbacks->getDirection(action->parentObject, &dir);
@@ -2843,7 +2837,7 @@ s32 ExecuteScriptCommand(Action *action)
                             sub_80A8F9C(tmp, &pos4);
                             val = SizedDeltaDirection8(&pos1, &pos2, &pos3, &pos4);
                             if (val == -1) {
-                                val = SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC);
+                                val = SizedDeltaDirection4(&pos1, &sPixelPosZero, &pos3, &sPixelPosZero);
                             }
                         } else {
                             val = -1;
@@ -2857,9 +2851,9 @@ s32 ExecuteScriptCommand(Action *action)
                             action->callbacks->getHitboxCenter(action->parentObject, &pos1);
                             action->callbacks->getSize(action->parentObject, &pos2);
                             sub_80A8FD8(tmp, &pos3);
-                            val = SizedDeltaDirection8(&pos1, &pos2, &pos3, &gUnknown_81164DC);
+                            val = SizedDeltaDirection8(&pos1, &pos2, &pos3, &sPixelPosZero);
                             if (val == -1) {
-                                val = SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC);
+                                val = SizedDeltaDirection4(&pos1, &sPixelPosZero, &pos3, &sPixelPosZero);
                             }
                         } else {
                             val = -1;
@@ -2872,8 +2866,7 @@ s32 ExecuteScriptCommand(Action *action)
                     }
                     default: {
                         // The locdata says this is part of an inlined function... :/
-                        // "switch type error %d"
-                        FatalError(&gUnknown_81166B4, gUnknown_81166C0, curCmd.op);
+                        FATAL_ERROR_ARGS2(GroundScriptFile_Text, 4222, "_AnalyzeProcess", "switch type error %d", curCmd.op);
                     }
                 }
                 scriptData->script.ptr = ResolveJump(action, val);
@@ -2909,7 +2902,7 @@ s32 ExecuteScriptCommand(Action *action)
                         }
                     }
                 }
-                if (!out) out = gUnknown_81166D8; // ""
+                if (!out) out = "";
                 for (; scriptData->script.ptr->op == 0xd9; scriptData->script.ptr++) {
                     gChoices[sNumChoices].text = scriptData->script.ptr->argPtr;
                     gChoices[sNumChoices].menuAction = sNumChoices + 1;
@@ -3046,12 +3039,12 @@ s32 ExecuteScriptCommand(Action *action)
     }
 }
 
-UNUSED u32 sub_80A1440(s32 r0, s32 r1, s32 r2)
+UNUSED static u32 sub_80A1440(s32 r0, s32 r1, s32 r2)
 {
    return sub_80A14E8(NULL, r0, r1, r2);
 }
 
-UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0)
+UNUSED static bool8 GroundScript_ExecuteTrigger(s16 r0)
 {
     s32 ret;
     ScriptInfoSmall scriptInfo;
@@ -3062,20 +3055,30 @@ UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0)
 
     if(ptr->type != 0xB)
         return FALSE;
-    InitActionWithParams(&action, &gGroundScriptTriggerCallbacks, NULL, 0, 0);
+    InitActionWithParams(&action, &sNullCallbackData, NULL, 0, 0);
     GetFunctionScript(NULL, &scriptInfo, r0);
-    GroundScript_ExecutePP(&action, NULL, &scriptInfo, &gUnknown_81166F8);
+    GroundScript_ExecutePP(&action, NULL, &scriptInfo, DEBUG_LOC_PTR(GroundScriptFile_Text, 4553, "GroundScript_ExecuteTrigger"));
 
     action.scriptData.savedScript = action.scriptData.script;
-    action.scriptData.savedScript.ptr = &gUnknown_81164E4;
-    action.scriptData.savedScript.ptr2 = &gUnknown_81164E4;
-    ret = HandleAction(&action, &gUnknown_8116704);
+    action.scriptData.savedScript.ptr = gUnknown_81164E4;
+    action.scriptData.savedScript.ptr2 = gUnknown_81164E4;
+    ret = HandleAction(&action, DEBUG_LOC_PTR(GroundScriptFile_Text, 4558, "GroundScript_ExecuteTrigger"));
     InitAction2(&action);
     if(ret == 0)
         return TRUE;
     else
         return FALSE;
 }
+
+extern struct StoryMonData gUnknown_8116760;
+extern struct StoryMonData gUnknown_8116794;
+extern struct StoryMonData gUnknown_81167BC;
+extern struct StoryMonData gUnknown_8116738;
+extern struct StoryMonData gUnknown_811681C;
+extern DungeonLocation gUnknown_81167E8;
+extern DungeonLocation gUnknown_8116788;
+extern DungeonLocation gUnknown_811678C;
+extern DungeonLocation gUnknown_8116790;
 
 s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 {
@@ -3253,16 +3256,26 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             sub_80A8F50(gUnknown_2039D98, 0x3C, POKEMON_NAME_LENGTH);
             return 0;
         case 0x19:
+            UnlockFriendArea(GetFriendArea(MONSTER_MAGNEMITE));
             {
-                struct unkStruct_808D144 sp_4;
+                struct StoryMonData sp_4 = {
+                    .name = gUnknown_2039D98,
+                    .speciesNum = MONSTER_MAGNEMITE,
+                    .itemID = ITEM_NOTHING,
+                    .dungeonLocation = {.id = DUNGEON_POKEMON_SQUARE_2, .floor = 0},
+                    .moveID = {MOVE_METAL_SOUND, MOVE_TACKLE, MOVE_THUNDERSHOCK, MOVE_NOTHING},
+                    .pokeHP = 38,
+                    .level = 6,
+                    .IQ = 1,
+                    .offenseAtk = {20, 18},
+                    .offenseDef = {20, 18},
+                    .currExp = 4560,
+                };
                 PokemonStruct1 sp_2c;
                 PokemonStruct1 *ptr;
                 s32 index;
 
-
-                UnlockFriendArea(GetFriendArea(MONSTER_MAGNEMITE));
-                sp_4 = gUnknown_8116710;
-                sub_808D144(&sp_2c, &sp_4);
+                ConvertStoryMonToPokemon(&sp_2c, &sp_4);
                 ptr = sub_808D1DC(&sp_2c);
                 if (ptr == NULL) return 1;
                 for(index = 0; index < POKEMON_NAME_LENGTH; index++)
@@ -3274,31 +3287,29 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 return 0;
             }
             break;
-
         case 0x1A:
             sub_80A8F50(gUnknown_2039D98, 0x53, POKEMON_NAME_LENGTH);
             return 0;
-
          case 0x1B:
              {
                 PokemonStruct1 *pokemon;
-                 struct unkStruct_808D144 sp_84;
+                 struct StoryMonData sp_84;
                  PokemonStruct1 sp_ac;
 
                 UnlockFriendArea(GetFriendArea(MONSTER_ABSOL));
                 sp_84 = gUnknown_8116738;
-                sub_808D144(&sp_ac, &sp_84);
+                ConvertStoryMonToPokemon(&sp_ac, &sp_84);
                 pokemon = sub_808D1DC(&sp_ac);
                 if(pokemon == NULL) return 1;
                 IncrementAdventureNumJoined();
-                pokemon->unk0 |= FLAG_ON_TEAM;
+                pokemon->flags |= POKEMON_FLAG_ON_TEAM;
                 return 0;
              }
         case 0x1C:
             {
                 PokemonStruct1 *pokemon = sub_808D434(MONSTER_ABSOL, 0);
                 if(pokemon == NULL) return 1;
-                pokemon->unk0 |= FLAG_ON_TEAM;
+                pokemon->flags |= POKEMON_FLAG_ON_TEAM;
                 return 0;
             }
         case 0x1D:
@@ -3316,11 +3327,11 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             {
                 PokemonStruct1 *pokemon;
                 s32 index;
-                struct unkStruct_808D144 sp_108;
+                struct StoryMonData sp_108;
                 PokemonStruct1 sp_130;
 
                 sp_108 = gUnknown_8116760;
-                sub_808D144(&sp_130, &sp_108);
+                ConvertStoryMonToPokemon(&sp_130, &sp_108);
                 pokemon = sub_808D1DC(&sp_130);
                 if(!pokemon) return 1;
                 for(index = 0; index < POKEMON_NAME_LENGTH; index++)
@@ -3389,13 +3400,13 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             {
                 PokemonStruct1 *pokemon;
                 s32 index;
-                struct unkStruct_808D144 sp_188;
+                struct StoryMonData sp_188;
                 PokemonStruct1 sp_1b0;
 
                 if(!GetFriendAreaStatus(GetFriendArea(MONSTER_LATIOS)))
                     UnlockFriendArea(GetFriendArea(MONSTER_LATIOS));
                 sp_188 = gUnknown_8116794;
-                sub_808D144(&sp_1b0, &sp_188);
+                ConvertStoryMonToPokemon(&sp_1b0, &sp_188);
                 pokemon = sub_808D1DC(&sp_1b0);
                 if(pokemon == NULL) return 1;
                 for(index = 0; index < POKEMON_NAME_LENGTH; index++)
@@ -3414,11 +3425,11 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             {
                 PokemonStruct1 *pokemon;
                 s32 index;
-                struct unkStruct_808D144 sp_208;
+                struct StoryMonData sp_208;
                 PokemonStruct1 sp_230;
 
                 sp_208 = gUnknown_81167BC;
-                sub_808D144(&sp_230, &sp_208);
+                ConvertStoryMonToPokemon(&sp_230, &sp_208);
                 pokemon = sub_808D1DC(&sp_230);
                 if(pokemon == NULL) return 1;
                 for(index = 0; index < POKEMON_NAME_LENGTH; index++)
@@ -3609,10 +3620,10 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
         case 0x32:
             {
-                struct unkStruct_808D144 sp_288;
+                struct StoryMonData sp_288;
                 PokemonStruct1 sp_2b0;
                 sp_288 = gUnknown_811681C;
-                sub_808D144(&sp_2b0, &sp_288);
+                ConvertStoryMonToPokemon(&sp_2b0, &sp_288);
                 if(sub_808D1DC(&sp_2b0) == 0) {
                     return 1;
                 }

@@ -315,7 +315,7 @@ void PartyListMenu_CreateMenu1(void) {
 
     PeekPokemonItem(sUnknown_203B2B8->pokeSpecies, &sUnknown_203B2B8->item2);
 
-    if(temp = pokeStruct->unk0 >> 1, one = 1, temp & one)
+    if(temp = pokeStruct->flags >> 1, one = 1, temp & one)
     {
         sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuStandBy;
         sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_STANDBY;
@@ -367,7 +367,7 @@ void PartyListMenu_CreateMenu1(void) {
     }
     loopMax += 1;
 
-    if((temp = pokeStruct->unk0 >> 1, one = 1, temp & one) == 0)
+    if((temp = pokeStruct->flags >> 1, one = 1, temp & one) == 0)
     {
         sUnknown_203B2B8->unk16C[loopMax].text = sPartyMenuSayFarewell;
         sUnknown_203B2B8->unk16C[loopMax].menuAction = PARTY_LIST_MENU_SAY_FAREWELL;
@@ -476,7 +476,7 @@ void PartyListMenu_HandleMenu1(void)
         SetPartyListMenuState(PARTY_LIST_STATE_JOIN_TEAM);
         break;
     case PARTY_LIST_MENU_STANDBY:
-        sUnknown_203B2B8->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
+        sUnknown_203B2B8->pokeStruct->flags &= ~(POKEMON_FLAG_ON_TEAM);
         nullsub_104();
         sub_808ED00();
         SetPartyListMenuState(PARTY_LIST_STATE_STANDBY);

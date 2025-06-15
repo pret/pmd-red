@@ -53,7 +53,7 @@ void sub_8092404(u8 r0, u16 *r1, bool8 allowLeader, bool8 allowPartner)
 
     count = 0;
     for (i = 0; i < NUM_MONSTERS; i++) {
-        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])
+        if (PokemonExists(&gRecruitedPokemonRef->pokemon[i])
             && (!IsMonTeamLeader(&gRecruitedPokemonRef->pokemon[i]) || allowLeader)
             && (!IsMonPartner(&gRecruitedPokemonRef->pokemon[i]) || allowPartner)
             && sub_80923D4(i) == r0
@@ -78,11 +78,11 @@ void sub_809249C(u8 friendArea, bool8 clear)
     for (i = 0; i < NUM_MONSTERS; i++) {
         PokemonStruct1 *pokemon = &gRecruitedPokemonRef->pokemon[i];
 
-        if (PokemonFlag1(pokemon) && sub_80923D4(i) == friendArea) {
+        if (PokemonExists(pokemon) && sub_80923D4(i) == friendArea) {
             if (IsMonPartner(pokemon) || IsMonTeamLeader(pokemon))
                 clear = FALSE;
             else
-                pokemon->unk0 = 0;
+                pokemon->flags = 0;
         }
     }
 
@@ -171,7 +171,7 @@ void GetFriendAreaCapacity2(u8 friendArea, FriendAreaCapacity *dst, bool8 checkL
         for (i = 0; i < dst->maxPokemon; i++, iVar4++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[iVar4];
 
-            if (PokemonFlag1(pokeStruct) &&
+            if (PokemonExists(pokeStruct) &&
                 (!checkLeader || !IsMonTeamLeader(pokeStruct)) &&
                 (!checkPartner || pokeStruct->dungeonLocation.id != DUNGEON_JOIN_LOCATION_PARTNER)) {
                 dst->currNoPokemon++;
@@ -206,7 +206,7 @@ void GetFriendAreaCapacity(u8 areaId, FriendAreaCapacity *dst, bool8 checkPartne
 
         for (i = 0; i < max; i++, r5++) {
             mon = &gRecruitedPokemonRef->pokemon[r5];
-            if (PokemonFlag1(mon)) {
+            if (PokemonExists(mon)) {
                 if (mon->isTeamLeader || (!checkPartner && mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER))
                     dst->maxPokemon--;
                 else

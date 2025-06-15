@@ -541,12 +541,12 @@ s32 sub_80A7B94(s16 *a0)
                 if (id < fAreaCapacity.maxPokemon) {
                     PokemonStruct1 *monStrPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
                     if (sub_80023E4(9)) {
-                        if (PokemonFlag1(monStrPtr) && !monStrPtr->isTeamLeader) {
+                        if (PokemonExists(monStrPtr) && !monStrPtr->isTeamLeader) {
                             return -1;
                         }
                     }
                     else {
-                        if (PokemonFlag1(monStrPtr) && !monStrPtr->isTeamLeader && !IsMonPartner(monStrPtr)) {
+                        if (PokemonExists(monStrPtr) && !monStrPtr->isTeamLeader && !IsMonPartner(monStrPtr)) {
                             return -1;
                         }
                     }
@@ -619,13 +619,13 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
                 if (id < fAreaCapacity.maxPokemon) {
                     PokemonStruct1 *monStrPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
                     if (sub_80023E4(9)) {
-                        if (PokemonFlag1(monStrPtr) && !monStrPtr->isTeamLeader) {
+                        if (PokemonExists(monStrPtr) && !monStrPtr->isTeamLeader) {
                             *speciesDst = monStrPtr->speciesNum;
                             return -1;
                         }
                     }
                     else {
-                        if (PokemonFlag1(monStrPtr) && !monStrPtr->isTeamLeader && !IsMonPartner(monStrPtr)) {
+                        if (PokemonExists(monStrPtr) && !monStrPtr->isTeamLeader && !IsMonPartner(monStrPtr)) {
                             *speciesDst = monStrPtr->speciesNum;
                             return -1;
                         }
@@ -1346,12 +1346,12 @@ PokemonStruct1 *sub_80A8D54(s32 a0)
 
         monPtr = &gRecruitedPokemonRef->pokemon[fAreaCapacity.unk8 + id];
         if (sub_80023E4(9)) {
-            if (PokemonFlag1(monPtr) && !monPtr->isTeamLeader) {
+            if (PokemonExists(monPtr) && !monPtr->isTeamLeader) {
                 return monPtr;
             }
         }
         else {
-            if (PokemonFlag1(monPtr) && !monPtr->isTeamLeader && !IsMonPartner(monPtr)) {
+            if (PokemonExists(monPtr) && !monPtr->isTeamLeader && !IsMonPartner(monPtr)) {
                 return monPtr;
             }
         }

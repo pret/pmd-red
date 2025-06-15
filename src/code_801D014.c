@@ -157,7 +157,7 @@ u32 sub_801D178(void)
         return 0;
 
     pokeStruct = sub_808D3F8();
-    if (!(pokeStruct->unk0 >> 1 & 1))
+    if (!(pokeStruct->flags >> 1 & 1))
 _ret4:
         return 4;
 

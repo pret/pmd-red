@@ -343,7 +343,7 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
             }
             else {
                 for (k = 0; k < NUM_MONSTERS; k++) {
-                    if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[k]) && gRecruitedPokemonRef->pokemon[k].speciesNum == speciesId)
+                    if (PokemonExists(&gRecruitedPokemonRef->pokemon[k]) && gRecruitedPokemonRef->pokemon[k].speciesNum == speciesId)
                         break;
                 }
                 if (k != NUM_MONSTERS) {

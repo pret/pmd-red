@@ -222,7 +222,7 @@ PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, s16 _species)
     r6 = pokeStruct.speciesNum;
     GetPokemonLevelData(&levelData,species,pokeStruct.level);
     pokeStruct.currExp = levelData.expRequired;
-    pokemon->unk0 = 0;
+    pokemon->flags = 0;
     pokeStruct.speciesNum = species;
     if (pokeStruct.unkC[0].level == 0) {
         pokeStruct.unkC[0].level = pokeStruct.level;

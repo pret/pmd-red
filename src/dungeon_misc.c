@@ -143,7 +143,7 @@ void LoadDungeonPokemonSprites(void)
         for(index = 0; index < MAX_TEAM_MEMBERS; index++)
         {
             PokemonStruct1 *ptr = &gRecruitedPokemonRef->team[index];
-            if(PokemonFlag1(ptr))
+            if(PokemonExists(ptr))
                 LoadPokemonSprite(ptr->speciesNum, TRUE);
         }
     }
@@ -234,7 +234,7 @@ void sub_806890C(void)
     for (speciesId = 0; speciesId < NUM_MONSTERS; speciesId++) {
         PokemonStruct1 stack;
         PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[speciesId];
-        if (PokemonFlag1(pokeStruct) && PokemonFlag2(pokeStruct)) {
+        if (PokemonExists(pokeStruct) && PokemonFlag2(pokeStruct)) {
             xxx_pokemonstruct_index_to_pokemon2_808DE30(&gRecruitedPokemonRef->pokemon2[index],speciesId);
             if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
                 struct DungeonLocation dungeonLoc = {.id = DUNGEON_TINY_WOODS, .floor = 1};
@@ -259,7 +259,7 @@ void sub_806890C(void)
         }
     }
     for (; index < 4; index++) {
-        gRecruitedPokemonRef->pokemon2[index].unk0 = 0;
+        gRecruitedPokemonRef->pokemon2[index].flags = 0;
     }
 }
 
@@ -268,7 +268,7 @@ void sub_8068A84(PokemonStruct1 *pokemon)
     s32 i, totalBodySize;
 
     totalBodySize = 0;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         PokemonStruct2 *ptr = &gRecruitedPokemonRef->pokemon2[i];
         if (PokemonFlag1Struct2(ptr)) {
             totalBodySize += GetBodySize(ptr->speciesNum);
@@ -289,15 +289,15 @@ void sub_8068A84(PokemonStruct1 *pokemon)
         }
     }
     else {
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
             PokemonStruct2 *monPtr = &gRecruitedPokemonRef->pokemon2[i];
             if (!PokemonFlag1Struct2(monPtr)) {
                 xxx_pokemonstruct_to_pokemon2_808DE50(monPtr,pokemon,0x55aa);
-                monPtr->unk0 |= 1;
+                monPtr->flags |= POKEMON_FLAG_EXISTS;
                 if (monPtr->IQ < 0x1a) {
                     monPtr->IQ = 0x1a;
                 }
-                monPtr->unk0 |= 2;
+                monPtr->flags |= 2;
                 monPtr->unkC = i;
                 ZeroOutItem(&monPtr->itemSlot);
                 PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,6);
@@ -397,7 +397,7 @@ void sub_8068BDC(bool8 a0)
             if (PokemonFlag1Struct2(monPtr) && sub_806A5A4(monPtr->unkA) && GetFriendArea(monPtr->speciesNum) == friendAreaId && a0) {
                 monPointers[j] = &mon1Structs[id];
                 xxx_pokemon2_to_pokemonstruct_808DF44(monPointers[j], monPtr);
-                monPointers[j]->unk0 |= 0x4000;
+                monPointers[j]->flags |= POKEMON_FLAG_x4000;
                 monPointers[j]->unkC[0].level = 0;
                 monPointers[j]->unkC[1].level = 0;
                 j++;
@@ -407,7 +407,7 @@ void sub_8068BDC(bool8 a0)
         if (j <= areaCapacity.maxPokemon) {
             s32 k;
             for (k = 0; k < j; k++) {
-                if (monPointers[k]->unk0 & 0x4000) {
+                if (monPointers[k]->flags & POKEMON_FLAG_x4000) {
                     sub_808D1DC(monPointers[k]);
                 }
             }
@@ -419,7 +419,7 @@ void sub_8068BDC(bool8 a0)
                 sub_8067A80(friendAreaId, j - areaCapacity.maxPokemon, j, monPointers);
                 for (id = 0; id < j; id++) {
                     PokemonStruct1 *monPtr = monPointers[id];
-                    if (PokemonFlag1(monPtr) && (monPtr->unk0 & 0x8000)) {
+                    if (PokemonExists(monPtr) && (monPtr->flags & POKEMON_FLAG_x8000)) {
                         if (IsUnkDungeon(monPtr->dungeonLocation.id)) {
                             break;
                         }
@@ -433,14 +433,14 @@ void sub_8068BDC(bool8 a0)
             }
 
             for (id = 0; id < j; id++) {
-                if (PokemonFlag1(monPointers[id]) && (monPointers[id]->unk0 & 0x8000)) {
-                    monPointers[id]->unk0 = 0;
+                if (PokemonExists(monPointers[id]) && (monPointers[id]->flags & POKEMON_FLAG_x8000)) {
+                    monPointers[id]->flags = 0;
                 }
             }
             for (id = 0; id < j; id++) {
-                if (PokemonFlag1(monPointers[id]) && (monPointers[id]->unk0 & 0x4000)) {
+                if (PokemonExists(monPointers[id]) && (monPointers[id]->flags & POKEMON_FLAG_x4000)) {
                     sub_808D1DC(monPointers[id]);
-                    monPointers[id]->unk0 = 0;
+                    monPointers[id]->flags = 0;
                 }
             }
         }
@@ -455,10 +455,10 @@ void sub_8068F28(void)
         PokemonStruct2 *monStruct2Ptr = &gRecruitedPokemonRef->pokemon2[i];
         if (PokemonFlag1Struct2(monStruct2Ptr)) {
             if (sub_806A564(monStruct2Ptr->unkA)) {
-                monStruct2Ptr->unk0 = 0;
+                monStruct2Ptr->flags = 0;
             }
             else if (sub_806A538(monStruct2Ptr->unkA)) {
-                monStruct2Ptr->unk0 = 0;
+                monStruct2Ptr->flags = 0;
             }
         }
     }
@@ -483,7 +483,7 @@ void sub_8068F80(void)
 
 static inline void ClearOnTeamFlag(PokemonStruct1 *mon)
 {
-    mon->unk0 &= ~(FLAG_ON_TEAM);
+    mon->flags &= ~(POKEMON_FLAG_ON_TEAM);
 }
 
 static inline void ClearMonItemId(PokemonStruct1 *mon)
@@ -597,7 +597,7 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
                         ClearMonItemId(&gRecruitedPokemonRef->pokemon[partnerStruct->unkA]);
                     }
                 }
-                partnerStruct->unk0 = 0;
+                partnerStruct->flags = 0;
             }
         }
     }
@@ -657,7 +657,7 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
                 ClearOnTeamFlag(&gRecruitedPokemonRef->pokemon[mon2Ptr->unkA]);
             }
         }
-        mon2Ptr->unk0 = 0;
+        mon2Ptr->flags = 0;
     }
 
     DeletePokemonDungeonSprite(entInfo->dungeonSpriteId);

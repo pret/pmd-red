@@ -23,7 +23,7 @@ typedef struct unkPokeSubStruct_C
 // size: R=0x58 | B=0x40
 typedef struct PokemonStruct1
 {
-    /* R=0x0  | B=0x0  */ u16 unk0; // Probably a union: Sometimes ldrh and sometimes ldrb. Recruited?? Only 2 bits are serialized
+    /* R=0x0  | B=0x0  */ u16 flags;
     /* R=0x2  | B=0x2  */ bool8 isTeamLeader;
     /* R=0x3  | B=0x3  */ u8 level;
     /* R=0x4  | B=0x4  */ DungeonLocation dungeonLocation;
@@ -50,7 +50,7 @@ typedef struct EvolveStage
 // size: R=0x64 | B=0x54
 typedef struct PokemonStruct2
 {
-    /* R=0x0  | B=0x0  */ u16 unk0; // corresponds to unk0 in PokemonStruct. Only 2 bits are serialized
+    /* R=0x0  | B=0x0  */ u16 flags; // corresponds to flags in PokemonStruct.
     /* R=0x2  | B=0x2  */ bool8 isTeamLeader;
     /* R=0x3  | B=0x3  */ u8 level;
     /* R=0x4  | B=0x4  */ DungeonLocation dungeonLocation;
@@ -147,13 +147,7 @@ typedef struct LevelData
     u16 fillA;
 } LevelData;
 
-// Definitely wrong but need to figure out better structure later
-struct FaceData
-{
-    u8 *unk0[5];
-};
-
-struct unkStruct_808D144
+struct StoryMonData
 {
     /* 0x0 */ u8 *name;
     /* 0x4 */ s16 speciesNum;

@@ -67,7 +67,7 @@ bool8 HasRecruitedMon(s16 species)
     PokemonStruct1 *pokemon = gRecruitedPokemonRef->pokemon;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        if (((u8)pokemon->unk0 & 1)) {
+        if (((u8)pokemon->flags & 1)) {
             if (pokemon->speciesNum == species_s32)
                 return TRUE;
         }
@@ -517,7 +517,7 @@ void sub_808ED00(void)
         }
 
         for (; i < MAX_TEAM_MEMBERS; i++) {
-            gRecruitedPokemonRef->team[i].unk0 = FLAG_NONE;
+            gRecruitedPokemonRef->team[i].flags = POKEMON_FLAG_NONE;
         }
     }
 }
@@ -545,8 +545,8 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     for (i = 0; i < NUM_MONSTERS; i++) {
         PokemonStruct1 *pokemon = &gRecruitedPokemonRef->pokemon[i];
 
-        if (PokemonFlag1(pokemon)) {
-            if (pokemon->unk0 & FLAG_ON_TEAM)
+        if (PokemonExists(pokemon)) {
+            if (pokemon->flags & POKEMON_FLAG_ON_TEAM)
                 sixMons[count++] = i;
 
             if (IsMonTeamLeader(pokemon))
@@ -561,7 +561,7 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
     // Team members
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
         u8 data_u8;
-        if (PokemonFlag1(&gRecruitedPokemonRef->team[i]))
+        if (PokemonExists(&gRecruitedPokemonRef->team[i]))
             data_u8 = 0xFF;
         else
             data_u8 = 0;
@@ -600,16 +600,16 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
         ReadBits(&backup, &data_u8, 1);
         ReadPoke1Bits(&backup, &gRecruitedPokemonRef->team[i]);
         if (data_u8 & 1)
-            gRecruitedPokemonRef->team[i].unk0 = FLAG_ON_TEAM | FLAG_UNK_1;
+            gRecruitedPokemonRef->team[i].flags = POKEMON_FLAG_ON_TEAM | POKEMON_FLAG_EXISTS;
         else
-            gRecruitedPokemonRef->team[i].unk0 = FLAG_NONE;
+            gRecruitedPokemonRef->team[i].flags = POKEMON_FLAG_NONE;
     }
 
     // ???
     for (i = 0; i < 6; i++) {
         ReadBits(&backup, &data_s16, 16);
         if ((u16)data_s16 < NUM_MONSTERS)
-            gRecruitedPokemonRef->pokemon[data_s16].unk0 |= FLAG_ON_TEAM;
+            gRecruitedPokemonRef->pokemon[data_s16].flags |= POKEMON_FLAG_ON_TEAM;
     }
 
     // Team leader
@@ -648,12 +648,12 @@ void ReadPoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
 {
     memset(pokemon, 0, sizeof(PokemonStruct1));
 
-    pokemon->unk0 = FLAG_NONE;
+    pokemon->flags = POKEMON_FLAG_NONE;
     pokemon->isTeamLeader = FALSE;
 
     ReadBits(a1, &pokemon->level, 7);
     if (pokemon->level)
-        pokemon->unk0 |= FLAG_UNK_1;
+        pokemon->flags |= POKEMON_FLAG_EXISTS;
 
     ReadBits(a1, &pokemon->speciesNum, 9);
     ReadDungeonLocationBits(a1, &pokemon->dungeonLocation);
@@ -687,7 +687,7 @@ s32 SavePoke2s(u8* buffer, s32 size)
 
     for (i = 0; i < 4; i++) {
         PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
-        WriteBits(&backup, &pokemon2->unk0, 2);
+        WriteBits(&backup, &pokemon2->flags, 2);
 
         WriteBits(&backup, pokemon2->isTeamLeader ? &data_u8_neg1 : &data_u8_zero, 1);
         WriteBits(&backup, &pokemon2->level, 7);
@@ -732,7 +732,7 @@ s32 RestorePoke2s(u8* a1, s32 size)
 
         memset(pokemon2, 0, sizeof(PokemonStruct2));
 
-        ReadBits(&backup, &pokemon2->unk0, 2);
+        ReadBits(&backup, &pokemon2->flags, 2);
 
         ReadBits(&backup, &unk2, 1);
         if (unk2 & 1) {

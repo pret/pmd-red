@@ -166,7 +166,7 @@ static void sub_8021A60(void)
 
     for (index = 0; index < NUM_MONSTERS; index++) {
         pokeStruct = &gRecruitedPokemonRef->pokemon[index];
-        if (!((u8)pokeStruct->unk0 & 1))
+        if (!((u8)pokeStruct->flags & 1))
             continue;
 
         areaIndex = CheckSpeciesinWigglytuffFriendArea(pokeStruct->speciesNum);

@@ -101,7 +101,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
     gUnknown_202F30C = 0;
     r10 = 0;
     for (i = 0; i < a2; i++) {
-        a3[i]->unk0 &= ~(0x8000);
+        a3[i]->flags &= ~(POKEMON_FLAG_x8000);
     }
 
     while (1) {
@@ -266,7 +266,7 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                 AddActionToDungeonSubMenu(0x29, 0);
                 AddActionToDungeonSubMenu(0x2A, 0);
                 AddActionToDungeonSubMenu(0x40, 0);
-                if (a3[arrId]->unk0 & 0x8000) {
+                if (a3[arrId]->flags & POKEMON_FLAG_x8000) {
                     SetActionUnusableInDungeonSubMenu(0x29);
                 }
                 else {
@@ -314,11 +314,11 @@ void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3)
                 DungeonRunFrameActions(0x37);
                 if (r7 != 0) {
                     if (gDungeonMenu.menuIndex == 0) {
-                        a3[arrId]->unk0 |= 0x8000;
+                        a3[arrId]->flags |= POKEMON_FLAG_x8000;
                         sub_8068310(a2, a3);
                     }
                     else if (gDungeonMenu.menuIndex == 1) {
-                        a3[arrId]->unk0 &= ~(0x8000);
+                        a3[arrId]->flags &= ~(POKEMON_FLAG_x8000);
                         sub_8068310(a2, a3);
                     }
                     else {
@@ -352,14 +352,14 @@ void sub_8067F00(u8 a0, PokemonStruct1 **a1, s32 a2_, s32 a3, s32 a4)
             PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0], a1[a2], 0);
             sub_808D930(gFormatBuffer_Monsters[1], a1[a2]->speciesNum);
             gFormatArgs[0] = a2 + 1;
-            if (a1[a2]->unk0 & 0x8000) {
+            if (a1[a2]->flags & POKEMON_FLAG_x8000) {
                 InlineStrcpy(gFormatBuffer_Items[0], _("{STAR_BULLET}"));
             }
             else {
                 InlineStrcpy(gFormatBuffer_Items[0], _("{ICON_BLANK}"));
             }
 
-            if (a1[a2]->unk0 & 0x4000) {
+            if (a1[a2]->flags & POKEMON_FLAG_x4000) {
                 PrintFormattedStringOnWindow(7, y, _("{MOVE_ITEM_0}{color CYAN}$v02:{POKEMON_0}{reset}"), 0, '\0');
             }
             else {
@@ -522,7 +522,7 @@ void sub_8068310(s32 n, PokemonStruct1 **monPtrs)
     s32 counter = 0;
 
     for (i = 0; i < n; i++) {
-        if ((monPtrs[i]->unk0 & 0x8000) != 0) {
+        if ((monPtrs[i]->flags & POKEMON_FLAG_x8000) != 0) {
             counter++;
         }
     }

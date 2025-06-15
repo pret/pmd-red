@@ -1114,7 +1114,7 @@ void sub_805F02C(void)
             PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[i];
             PokemonStruct1 *r5 = NULL;
 
-            if ((u8)mon->unk0 & 1) {
+            if ((u8)mon->flags & 1) {
                 if (!sub_806A538(mon->unkA)) {
                     r5 = &gRecruitedPokemonRef->pokemon[mon->unkA];
                 }

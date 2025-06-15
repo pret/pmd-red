@@ -719,6 +719,8 @@ SECTIONS {
         src/palette_util.o(.rodata);
         src/code_809A560.o(.rodata);
         data/data_8115F5C_2.o(.rodata);
+        src/ground_script.o(.rodata);
+        data/data_8115F5C_2_.o(.rodata);
         src/ground_bg.o(.rodata);
         data/data_8115F5C_2_1.o(.rodata);
         src/ground_sprite.o(.rodata);

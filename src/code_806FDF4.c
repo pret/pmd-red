@@ -276,7 +276,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
             }
             sub_8068FE0(entity2,500,entity1);
             pokeStruct2 = &gRecruitedPokemonRef->pokemon2[pokeIndex];
-            pokeStruct2->unk0 = 3;
+            pokeStruct2->flags = 3;
             pokeStruct2->isTeamLeader = FALSE;
             pokeStruct2->level = param_3->level;
             pokeStruct2->IQ = 1;
@@ -308,7 +308,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
 
             if (sub_806B8CC(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
                 LogMessageByIdWithPopupCheckUser(entity1,gUnknown_80FA058);
-                pokeStruct2->unk0 = 0;
+                pokeStruct2->flags = 0;
             }
             else {
                 sub_8083D88();
@@ -399,7 +399,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
 
   for(index = 0; index < MAX_TEAM_MEMBERS; index++)
   {
-    if (((u8)(index[gRecruitedPokemonRef->pokemon2].unk0) & 1) == 0) break;
+    if (((u8)(index[gRecruitedPokemonRef->pokemon2].flags) & 1) == 0) break;
   }
 
   if (index == MAX_TEAM_MEMBERS) {
@@ -408,7 +408,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
   else {
     friendArea = GetFriendArea(local_74.id);
     pokeStruct2 = &gRecruitedPokemonRef->pokemon2[index];
-    pokeStruct2->unk0 = 3;
+    pokeStruct2->flags = 3;
     pokeStruct2->isTeamLeader = FALSE;
     pokeStruct2->level = local_74.level;
     pokeStruct2->IQ = 1;
@@ -443,7 +443,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
     IncrementAdventureNumJoined();
     sub_8068FE0(entity2,500,entity1);
     if (sub_806B8CC(local_74.id,local_74.pos.x,local_74.pos.y,pokeStruct2,&local_2c,0,0) == 0) {
-      pokeStruct2->unk0 = 0;
+      pokeStruct2->flags = 0;
     }
     else {
       if (DisplayDungeonYesNoMessage(0,gUnknown_80FA090,1) == 1) {

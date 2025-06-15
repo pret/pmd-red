@@ -245,7 +245,7 @@ void CreateFriendActionMenu(void)
   pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
   MemoryFill16(sUnknown_203B2BC->unk16C,0,sizeof(sUnknown_203B2BC->unk16C));
 
-  if((pokeStruct->unk0 >> 1) % 2)
+  if((pokeStruct->flags >> 1) % 2)
   {
       sUnknown_203B2BC->menuItems[loopMax].text = sStandBy;
       sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_STANDBY;
@@ -431,7 +431,7 @@ void sub_80278B4(void)
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);
         break;
       case FRIEND_AREA_ACTION_MENU_ACTION_STANDBY:
-        sUnknown_203B2BC->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
+        sUnknown_203B2BC->pokeStruct->flags &= ~(POKEMON_FLAG_ON_TEAM);
         nullsub_104();
         sub_808ED00();
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);

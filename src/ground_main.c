@@ -775,30 +775,29 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s16 param_2)
     param_1->sub0.unk0.floor = 1;
     param_1->sub0.unkC = 0;
 
-    switch(sub_80A2750(param_2))
-    {
+    switch (sub_80A2750(param_2)) {
         case 1:
             if (sub_80990EC_sub(param_1, param_2)) {
                 param_1->sub0.unkC = 1;
                 sub_80A8EC0(auStack_98, 0x5b);
                 BoundedCopyStringtoBuffer(nameBuffer, auStack_98, POKEMON_NAME_LENGTH);
                 {
-                    struct unkStruct_808D144 stack =
-                        {
-                            .name = nameBuffer,
-                            .speciesNum = MONSTER_GENGAR,
-                            .itemID = ITEM_NOTHING,
-                            .dungeonLocation= {DUNGEON_RESCUE_TEAM_BASE, 0}, // DUNGEON_RESCUE_TEAM_BASE
-                            .moveID = {MOVE_SCRATCH, MOVE_LEER, MOVE_TAUNT, MOVE_QUICK_ATTACK},
-                            .pokeHP = 80,
-                            .level = 15,
-                            .IQ = 1,
-                            .offenseAtk = {25, 25},
-                            .offenseDef = {15, 15},
-                            .currExp = 25000,
-                        };
+                    struct StoryMonData gengarData =
+                    {
+                        .name = nameBuffer,
+                        .speciesNum = MONSTER_GENGAR,
+                        .itemID = ITEM_NOTHING,
+                        .dungeonLocation= {DUNGEON_RESCUE_TEAM_BASE, 0},
+                        .moveID = {MOVE_SCRATCH, MOVE_LEER, MOVE_TAUNT, MOVE_QUICK_ATTACK},
+                        .pokeHP = 80,
+                        .level = 15,
+                        .IQ = 1,
+                        .offenseAtk = {25, 25},
+                        .offenseDef = {15, 15},
+                        .currExp = 25000,
+                    };
 
-                    sub_808D144(&param_1->mon, &stack);
+                    ConvertStoryMonToPokemon(&param_1->mon, &gengarData);
                 }
             }
             break;
