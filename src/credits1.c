@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_8099360.h"
 #include "credits1.h"
 #include "event_flag.h"
@@ -9,9 +10,85 @@
 
 EWRAM_INIT static Credits1Work *sCredits1Work = {NULL};
 
-extern const WindowTemplate gUnknown_80E4A10;
-extern const WindowTemplate gUnknown_80E4A28;
-extern const unkStruct_3000400 gUnknown_80E4A40;
+static const WindowTemplate sDummyWinTemplate = WIN_TEMPLATE_DUMMY;
+static const WindowTemplate gUnknown_80E4A28 = {
+    .unk0 = 0,
+    .type = WINDOW_TYPE_2,
+    .pos = {2, 2},
+    .width = 26,
+    .height = 16,
+    .unk10 = 16,
+    .unk12 = 0,
+    .header = NULL,
+};
+
+static const unkStruct_3000400 gUnknown_80E4A40 = {{0x18, 0x18, 0x38, 0}};
+
+UNUSED static const u8 sUnknownUnusedData[][2] = {
+    {0x21, 0xff},
+    {0x22, 0xff},
+    {0x23, 0xff},
+    {0x24, 0xff},
+    {0x25, 0xff},
+    {0x26, 0xff},
+    {0x27, 0xff},
+    {0x28, 0xff},
+    {0x29, 0xff},
+    {0x2a, 0xff},
+    {0x2b, 0xff},
+    {0x2c, 0xff},
+    {0x2d, 0xff},
+    {0x2e, 0xff},
+    {0x2f, 0xff},
+    {0x30, 0xff},
+    {0x31, 0xff},
+    {0x32, 0xff},
+    {0x33, 0xff},
+    {0x34, 0xff},
+    {0x35, 0xff},
+    {0x36, 0xff},
+    {0x37, 0xff},
+    {0x38, 0xff},
+    {0x39, 0xff},
+    {0x3a, 0xff},
+    {0x41, 0xff},
+    {0x42, 0xff},
+    {0x43, 0xff},
+    {0x44, 0xff},
+    {0x45, 0xff},
+    {0x46, 0xff},
+    {0x47, 0xff},
+    {0x48, 0xff},
+    {0x49, 0xff},
+    {0x4a, 0xff},
+    {0x4b, 0xff},
+    {0x4c, 0xff},
+    {0x4d, 0xff},
+    {0x4e, 0xff},
+    {0x4f, 0xff},
+    {0x50, 0xff},
+    {0x51, 0xff},
+    {0x52, 0xff},
+    {0x53, 0xff},
+    {0x54, 0xff},
+    {0x55, 0xff},
+    {0x56, 0xff},
+    {0x57, 0xff},
+    {0x58, 0xff},
+    {0x59, 0xff},
+    {0x5a, 0xff},
+    {0x10, 0xff},
+    {0x11, 0xff},
+    {0x12, 0xff},
+    {0x13, 0xff},
+    {0x14, 0xff},
+    {0x15, 0xff},
+    {0x16, 0xff},
+    {0x17, 0xff},
+    {0x18, 0xff},
+    {0x19, 0xff}
+};
+
 extern const CreditsData* gCreditsTable[27];
 
 bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
@@ -20,7 +97,6 @@ bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
     s32 x;
     s32 y;
     const CreditsData *cred;
-    u8 *srcText;
     u8 *destText1;
     u8 *destText2;
     u8 curChar;
@@ -31,8 +107,8 @@ bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
     sCredits1Work->unk64 = param_2;
     sCredits1Work->creditsCategoryIndex = creditsCategoryIndex;
 
-    for (i = 0; i < 4; i++)
-        sCredits1Work->unk0.id[i] = gUnknown_80E4A10;
+    for (i = 0; i < MAX_WINDOWS; i++)
+        sCredits1Work->unk0.id[i] = sDummyWinTemplate;
     sCredits1Work->unk0.id[0] = gUnknown_80E4A28;
 
     ResetUnusedInputStruct();
@@ -43,7 +119,7 @@ bool8 DrawCredits(s32 creditsCategoryIndex, s32 param_2)
     cred = creditsCategoryIndex[gCreditsTable]; // WTF
     y = 0;
     while (cred->text != NULL) {
-        srcText = cred->text;
+        const u8 *srcText = cred->text;
         if (cred->y >= 0)
             y = cred->y;
         else

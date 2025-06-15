@@ -37,282 +37,282 @@ extern TeamInventory *gTeamInventoryRef;
 // NOTE: MenuItems and WindowTemplate defined in here..
 #include "data/friend_rescue_menus.h"
 
-const u8 gUnknown_80E25F4[] = "What would you like to do?";
+static const u8 gUnknown_80E25F4[] = "What would you like to do?";
 
-ALIGNED(4) const u8 gUnknown_80E2610[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2610[] = _(
         "How would you like to send your\n"
         "{COLOR CYAN_G}SOS Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E2640[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2640[] = _(
         "How would you like to receive your\n"
         "friend's {COLOR CYAN_G}SOS Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E2680[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2680[] = _(
         "How would you like to send your\n"
         "{COLOR CYAN_G}A-OK Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E26B0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E26B0[] = _(
         "How would you like to receive your\n"
         "friend's {COLOR CYAN_G}A-OK Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E26F0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E26F0[] = _(
         "How would you like to send your\n"
         "{COLOR CYAN_G}Thank-You Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E2728[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2728[] = _(
         "How would you like to receive your\n"
         "friend's {COLOR CYAN_G}Thank-You Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E276C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E276C[] = _(
         "The GBA Game Pak does not have\n"
         "an {COLOR CYAN_G}A-OK Mail{RESET} on it.");
 
-ALIGNED(4) const u8 gUnknown_80E27A4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E27A4[] = _(
         "If you accept an {COLOR CYAN_G}A-OK Mail{RESET}, the\n"
         "{COLOR CYAN_G}Thank-You Mail{RESET} you received before\n"
         "will be overwritten. Is that OK?");
 
-ALIGNED(4) const u8 gUnknown_80E2814[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2814[] = _(
         "Please enter the {COLOR CYAN_G}A-OK Mail password{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E2840[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2840[] = _(
         "The {COLOR CYAN_G}A-OK Mail{RESET} will be received and\n"
         "processed.");
 
-ALIGNED(4) const u8 gUnknown_80E2874[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2874[] = _(
         "A {COLOR CYAN_G}helper Pokémon{RESET} also arrived!");
 
-ALIGNED(4) const u8 gUnknown_80E2898[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2898[] = _(
         "An {COLOR CYAN_G}A-OK Mail{RESET} was received.\n"
         "Your adventure will be saved.");
 
-ALIGNED(4) const u8 gUnknown_80E28D8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E28D8[] = _(
         "Resume your game using {COLOR CYAN_G}Revive Team{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E2904[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2904[] = _(
         "Your friend's Mailbox is full.\n"
         "This piece of mail cannot be sent.\n"
         "The recipient must delete old mail.");
 
-ALIGNED(4) const u8 gUnknown_80E296C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E296C[] = _(
         "Please choose the {COLOR CYAN_G}SOS Mail{RESET} you want\n"
         "to send.");
 
-ALIGNED(4) const u8 gUnknown_80E29A0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E29A0[] = _(
         "This {COLOR CYAN_G}SOS Mail{RESET} will be sent.\n"
         "Is that OK?");
 
-ALIGNED(4) const u8 gUnknown_80E29D0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E29D0[] = _(
         "Your {COLOR CYAN_G}SOS Mail{RESET} was sent.\n"
         "Your adventure will be saved.");
 
-ALIGNED(4) const u8 gUnknown_80E2A0C[] = "Save completed.";
+ALIGNED(4) static const u8 gUnknown_80E2A0C[] = "Save completed.";
 
-ALIGNED(4) const u8 gUnknown_80E2A1C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2A1C[] = _(
         "Please give this password to the friend\n"
         "coming to your rescue.");
 
-ALIGNED(4) const u8 gUnknown_80E2A5C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2A5C[] = _(
         "Here is the {COLOR CYAN_G}SOS Mail password{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E2A80[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2A80[] = _(
         "Here is the {COLOR CYAN_G}A-OK Mail password{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E2AA8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2AA8[] = _(
 "Please give this password to the friend\n"
 "that you rescued.");
 
-ALIGNED(4) const u8 gUnknown_80E2AE4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2AE4[] = _(
 "Please connect a {COLOR CYAN_G}Link Cable{RESET}.\n"
 "When your friend's side is ready, you may\n"
 "communicate and exchange data.");
 
-ALIGNED(4) const u8 gUnknown_80E2B54[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2B54[] = _(
 "Your {COLOR CYAN_G}A-OK Mail{RESET} was sent.\n"
 "Your adventure will be saved.");
 
-ALIGNED(4) const u8 gUnknown_80E2B90[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2B90[] = _(
 "Using a {COLOR CYAN_G}Game Link cable{RESET},\n"
 "you can send a {COLOR CYAN_G}helper Pokémon{RESET} to\n"
 "a friend.");
 
-ALIGNED(4) const u8 gUnknown_80E2BE0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2BE0[] = _(
 "Your own Pokémon will not disappear\n"
 "if you send it as a helper.\n"
 "Will you send a helper to your friend?");
 
-ALIGNED(4) const u8 gUnknown_80E2C48[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2C48[] = _(
 "Pick the Pokémon to be sent as a helper.\n"
 "(Any hold item will not be sent.)");
 
-ALIGNED(4) const u8 gUnknown_80E2C94[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2C94[] = _(
 "No Pokémon are in your Friend Areas.\n"
 "What would you like to do?");
 
-ALIGNED(4) const u8 gUnknown_80E2CD4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2CD4[] = _(
 "Is this Pokémon OK?");
 
-ALIGNED(4) const u8 gUnknown_80E2CE8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2CE8[] = _(
 "Please choose the {COLOR CYAN_G}A-OK Mail{RESET} that should\n"
 "be sent to your friend.");
 
-ALIGNED(4) const u8 gUnknown_80E2D30[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2D30[] = _(
 "This {COLOR CYAN_G}A-OK Mail{RESET} will be sent.\n"
 "Is that OK?");
 
-ALIGNED(4) const u8 gUnknown_80E2D60[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2D60[] = _(
 "There is no {COLOR CYAN_G}A-OK Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E2D7C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2D7C[] = _(
 "Connect the {COLOR CYAN_G}Game Link cable{RESET}.\n"
 "When your friend is ready, begin\n"
 "communication.");
 
-ALIGNED(4) const u8 gUnknown_80E2DD0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2DD0[] = _(
 "{CENTER_ALIGN}Communicating...\n"
 "{CENTER_ALIGN}Please wait with the power on.\n"
 "{CENTER_ALIGN}To cancel, press {B_BUTTON}.");
 
-ALIGNED(4) const u8 gUnknown_80E2E20[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2E20[] = _(
 "The GBA Game Pak will be written to.\n"
 "Is that OK?");
 
-ALIGNED(4) const u8 gUnknown_80E2E54[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2E54[] = _(
 "{CENTER_ALIGN}Reading from GBA Game Pak.\n"
 "{CENTER_ALIGN}Do not remove the GBA Game Pak.\n"
 "{CENTER_ALIGN}Please wait with the power on.");
 
-ALIGNED(4) const u8 gUnknown_80E2EB4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2EB4[] = _(
 "{CENTER_ALIGN}Writing to GBA Game Pak.\n"
 "{CENTER_ALIGN}Do not remove the GBA Game Pak.\n"
 "{CENTER_ALIGN}Please wait with the power on.");
 
-ALIGNED(4) const u8 gUnknown_80E2F14[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2F14[] = _(
 "There is no {COLOR CYAN_G}SOS Mail{RESET} on\n"
 "the GBA Game Pak.");
 
-ALIGNED(4) const u8 gUnknown_80E2F44[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2F44[] = _(
 "Please choose an {COLOR CYAN_G}SOS Mail{RESET}\n"
 "on the GBA Game Pak.");
 
-ALIGNED(4) const u8 gUnknown_80E2F78[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2F78[] = _(
 "Is it OK to accept this {COLOR CYAN_G}SOS Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E2FA0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2FA0[] = _(
 "There is no more space for accepting\n"
 "new mail.\n"
 "You must delete old mail.");
 
-ALIGNED(4) const u8 gUnknown_80E2FEC[] = _(
+ALIGNED(4) static const u8 gUnknown_80E2FEC[] = _(
 "The {COLOR CYAN_G}SOS Mail{RESET} has been received.\n"
 "Your adventure will be saved.");
 
-ALIGNED(4) const u8 gUnknown_80E3030[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3030[] = _(
 "Please embark on your rescue mission\n"
 "from the Pelipper Post Office. ");
 
-ALIGNED(4) const u8 gUnknown_80E3078[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3078[] = _(
 "Please enter the {COLOR CYAN_G}SOS Mail password{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E30A4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E30A4[] = _(
 "Is it OK to send this {COLOR CYAN_G}Thank-You Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E30D0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E30D0[] = _(
 "Please choose the {COLOR CYAN_G}Thank-You Mail{RESET} that\n"
 "should be sent to your friend.");
 
-ALIGNED(4) const u8 gUnknown_80E311C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E311C[] = _(
 "Please enter the {COLOR CYAN_G}Thank-You Mail password{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E314C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E314C[] = _(
 "The {COLOR CYAN_G}Thank-You Mail password{RESET} will be\n"
 "shown.");
 
-ALIGNED(4) const u8 gUnknown_80E317C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E317C[] = _(
 "Your adventure will be saved.");
 
-ALIGNED(4) const u8 gUnknown_80E319C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E319C[] = _(
 "Steps will now be taken to receive the\n"
 "{COLOR CYAN_G}Thank-You Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E31D8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E31D8[] = _(
 "All preparations have been made.");
 
-ALIGNED(4) const u8 gUnknown_80E31FC[] = _(
+ALIGNED(4) static const u8 gUnknown_80E31FC[] = _(
 "The {COLOR CYAN_G}Thank-You Mail{RESET} was sent.");
 
-ALIGNED(4) const u8 gUnknown_80E3220[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3220[] = _(
 "You received the {COLOR CYAN_G}Thank-You Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E3248[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3248[] = _(
 "The {COLOR CYAN_G}Thank-You Mail{RESET} was sent.\n"
 "Your adventure will be saved.");
 
-ALIGNED(4) const u8 gUnknown_80E3288[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3288[] = _(
 "Steps will now be taken to send your\n"
 "{COLOR CYAN_G}Thank-You Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E32C4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E32C4[] = _(
 "OK. You're good to go.\n"
 "{COLOR YELLOW_N}%s{RESET}, I hope your sense of\n"
 "gratitude reaches your friend.");
 
-ALIGNED(4) const u8 gUnknown_80E331C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E331C[] = _(
 "The item chosen here can't be exchanged\n"
 "with anything else.\n"
 "Are you sure this item is OK?");
 
-ALIGNED(4) const u8 gUnknown_80E3378[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3378[] = _(
 "Please choose the item to be sent.");
 
-ALIGNED(4) const u8 gUnknown_80E339C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E339C[] = _(
 "There are no items in storage.\n"
 "What would you like to do?");
 
-ALIGNED(4) const u8 gUnknown_80E33D8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E33D8[] = _(
 "Would you like to choose\n"
 "a {COLOR CYAN_G}reward item{RESET} from storage and\n"
 "send it with your mail?");
 
-ALIGNED(4) const u8 gUnknown_80E3430[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3430[] = _(
 "This mail already has an attached\n"
 "{COLOR CYAN_G}reward item{RESET}.{EXTRA_MSG}Once an item has been chosen, it may not\n"
 "be exchanged with another item.");
 
-ALIGNED(4) const u8 gUnknown_80E34B0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E34B0[] = _(
 "Would you like to resend the mail\n"
 "with the same item attached?");
 
-ALIGNED(4) const u8 gUnknown_80E34F0[] = _(
+ALIGNED(4) static const u8 gUnknown_80E34F0[] = _(
 "Please select a {COLOR CYAN_G}Thank-You Mail{RESET}\n"
 "from the GBA Game Pak.");
 
-ALIGNED(4) const u8 gUnknown_80E352C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E352C[] = _(
 "Is it OK to accept this {COLOR CYAN_G}Thank-You Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E355C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E355C[] = _(
 "Mail can't be sent to a GBA Game Pak\n"
 "with the game quicksaved in a dungeon.");
 
-ALIGNED(4) const u8 gUnknown_80E35AC[] = _(
+ALIGNED(4) static const u8 gUnknown_80E35AC[] = _(
 "The GBA Game Pak does not have\n"
 "a {COLOR CYAN_G}Thank-You Mail{RESET} on it.");
 
-ALIGNED(4) const u8 gUnknown_80E35E8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E35E8[] = _(
 "There is no {COLOR CYAN_G}Thank-You Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E360C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E360C[] = _(
 "How would you like to send\n"
 "your {COLOR CYAN_G}Thank-You Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E3644[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3644[] = _(
 "How would you like to receive\n"
 "the {COLOR CYAN_G}Thank-You Mail{RESET}?");
 
-ALIGNED(4) const u8 gUnknown_80E367C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E367C[] = _(
 "Read which Info?");
 
-ALIGNED(4) const u8 gUnknown_80E3690[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3690[] = _(
 "If your team is defeated and in need\n"
 "of rescuing, send an {COLOR CYAN_G}SOS Mail{RESET}\n"
 "to a friend.{EXTRA_MSG}Once you send your mail, you must wait\n"
@@ -323,7 +323,7 @@ ALIGNED(4) const u8 gUnknown_80E3690[] = _(
 "to send a {COLOR CYAN_G}Thank-You Mail{RESET} to the friend\n"
 "who came to your rescue.");
 
-ALIGNED(4) const u8 gUnknown_80E3818[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3818[] = _(
 "If your team is defeated in\n"
 "a dungeon, you may send a friend\n"
 "an {COLOR CYAN_G}SOS Mail{RESET} for help.{EXTRA_MSG}However, there are some places\n"
@@ -334,7 +334,7 @@ ALIGNED(4) const u8 gUnknown_80E3818[] = _(
 "you will have to give up and return\n"
 "to your rescue team base.");
 
-ALIGNED(4) const u8 gUnknown_80E3998[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3998[] = _(
 "If your friend successfully rescues\n"
 "your team, accept your friend's\n"
 "{COLOR CYAN_G}A-OK Mail{RESET}.{EXTRA_MSG}Once the {COLOR CYAN_G}A-OK Mail{RESET} is received,\n"
@@ -345,14 +345,14 @@ ALIGNED(4) const u8 gUnknown_80E3998[] = _(
 "be able to bring an item with it when\n"
 "joining your team.");
 
-ALIGNED(4) const u8 gUnknown_80E3B1C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3B1C[] = _(
 "If your team has been rescued, be sure\n"
 "to send a {COLOR CYAN_G}Thank-You Mail{RESET} to the friend\n"
 "that came to your help.{EXTRA_MSG}You may also attach a {COLOR CYAN_G}reward item{RESET}\n"
 "from storage to your {COLOR CYAN_G}Thank-You Mail{RESET}\n"
 "and send it to your friend.");
 
-ALIGNED(4) const u8 gUnknown_80E3BF8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3BF8[] = _(
 "If your friend's team needs rescuing,\n"
 "you must first receive an {COLOR CYAN_G}SOS Mail{RESET}\n"
 "from your friend.{EXTRA_MSG}When you get the mail, you may embark\n"
@@ -364,13 +364,13 @@ ALIGNED(4) const u8 gUnknown_80E3BF8[] = _(
 "you may not choose {COLOR CYAN_G}Go Rescue{RESET}.\n"
 "Your last save must be out of a dungeon.");
 
-ALIGNED(4) const u8 gUnknown_80E3DE4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3DE4[] = _(
 "You may receive an {COLOR CYAN_G}SOS Mail{RESET} from\n"
 "a friend's team that lies defeated in\n"
 "a dungeon.{EXTRA_MSG}If there is no space for new mail, delete\n"
 "old mail at the {COLOR CYAN_G}Pelipper Post Office{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E3E98[] = _(
+ALIGNED(4) static const u8 gUnknown_80E3E98[] = _(
 "If you successfully rescue your friend's\n"
 "team, send your friend an {COLOR CYAN_G}A-OK Mail{RESET}.{EXTRA_MSG}Using a {COLOR CYAN_G}Game Link cable{RESET}, you may\n"
 "also send your friend a Pokémon from\n"
@@ -379,7 +379,7 @@ ALIGNED(4) const u8 gUnknown_80E3E98[] = _(
 "its Friend Area.{EXTRA_MSG}If there is no space for new mail, delete\n"
 "old mail at the {COLOR CYAN_G}Pelipper Post Office{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E4014[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4014[] = _(
 "When you receive an {COLOR CYAN_G}SOS Mail{RESET},\n"
 "you may embark on your rescue mission\n"
 "from the {COLOR CYAN_G}Pelipper Post Office{RESET}.{EXTRA_MSG}Beware--if you do not have access to\n"
@@ -387,13 +387,13 @@ ALIGNED(4) const u8 gUnknown_80E4014[] = _(
 "on a rescue mission there.{EXTRA_MSG}Accept challenging rescues only\n"
 "if you are ready and qualified!");
 
-ALIGNED(4) const u8 gUnknown_80E4130[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4130[] = _(
 "If you send an {COLOR CYAN_G}A-OK Mail{RESET}, you may\n"
 "receive a {COLOR CYAN_G}Thank-You Mail{RESET} in return\n"
 "from your friend.{EXTRA_MSG}The {COLOR CYAN_G}Thank-You Mail{RESET} may also come\n"
 "with a {COLOR CYAN_G}reward item{RESET} attached.");
 
-ALIGNED(4) const u8 gUnknown_80E41DC[] = _(
+ALIGNED(4) static const u8 gUnknown_80E41DC[] = _(
 "Using the {COLOR CYAN_G}Dual Slot{RESET} function,\n"
 "you may perform rescue operations with\n"
 "friends using the GBA Game Pak version.{EXTRA_MSG}Insert the DS Game Card and the GBA\n"
@@ -402,7 +402,7 @@ ALIGNED(4) const u8 gUnknown_80E41DC[] = _(
 "the {COLOR CYAN_G}Dual Slot{RESET} function will be\n"
 "available on the main menu. ");
 
-ALIGNED(4) const u8 gUnknown_80E4314[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4314[] = _(
 "Friends can rescue each other's defeated\n"
 "teams using a {COLOR CYAN_G}Game Link cable{RESET},\n"
 "{COLOR CYAN_G}passwords{RESET}, and so on.{EXTRA_MSG}You may go on a rescue mission to save\n"
@@ -412,87 +412,87 @@ ALIGNED(4) const u8 gUnknown_80E4314[] = _(
 "exchange help with faraway friends.");
 
 
-ALIGNED(4) const u8 gUnknown_80E4480[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4480[] = _(
 "There was a communication error.");
 
-ALIGNED(4) const u8 gUnknown_80E44A4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E44A4[] = _(
 "An incorrect number of GBA systems are\n"
 "connected.\n"
 "Please redo this process from the start.");
 
-ALIGNED(4) const u8 gUnknown_80E4500[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4500[] = _(
 "There is no response from your friend.\n"
 "Please redo this process from the start.");
 
-ALIGNED(4) const u8 gUnknown_80E4550[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4550[] = _(
 "The sender and receiver appear to be\n"
 "in different modes.\n"
 "Please redo the process from the start.");
 
-ALIGNED(4) const u8 gUnknown_80E45B4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E45B4[] = _(
 "Your storage space is full.\n"
 "Please make room, then redo the\n"
 "process from the start.");
 
-ALIGNED(4) const u8 gUnknown_80E460C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E460C[] = _(
 "This mail has been received before.\n"
 "It cannot be received again.");
 
-ALIGNED(4) const u8 gUnknown_80E4650[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4650[] = _(
 "This mail has been sent already.\n"
 "It cannot be sent again.");
 
-ALIGNED(4) const u8 gUnknown_80E468C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E468C[] = _(
 "You do not appear eligible to receive\n"
 "this {COLOR CYAN_G}A-OK Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E46C8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E46C8[] = _(
 "Your friend is not eligible to receive\n"
 "this {COLOR CYAN_G}A-OK Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E4704[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4704[] = _(
 "You do not appear eligible to receive\n"
 "this {COLOR CYAN_G}Thank-You Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E4744[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4744[] = _(
 "Your friend is not eligible to receive\n"
 "this {COLOR CYAN_G}Thank-You Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E4788[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4788[] = _(
 "Something went wrong.\n"
 "Please turn off the power and\n"
 "reinsert the GBA Game Pak.");
 
-ALIGNED(4) const u8 gUnknown_80E47D8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E47D8[] = _(
 "There is no space for receiving new\n"
 "mail.\n"
 "Please delete old mail, then try again.");
 
-ALIGNED(4) const u8 gUnknown_80E482C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E482C[] = _(
 "There is no response from your friend.\n"
 "Please make sure the sender and receiver\n"
 "are ready, then redo this from the start.");
 
-ALIGNED(4) const u8 gUnknown_80E48A8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E48A8[] = _(
 "This password is incorrect.\n"
 "Would you like to enter it again?");
 
-ALIGNED(4) const u8 gUnknown_80E48E8[] = _(
+ALIGNED(4) static const u8 gUnknown_80E48E8[] = _(
 "This password does not appear to be\n"
 "that of an {COLOR CYAN_G}SOS Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E4928[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4928[] = _(
 "Received the {COLOR CYAN_G}SOS Mail{RESET}.\n"
 "Your adventure will be saved.");
 
-ALIGNED(4) const u8 gUnknown_80E4964[] = _(
+ALIGNED(4) static const u8 gUnknown_80E4964[] = _(
 "This password does not appear to be\n"
 "an {COLOR CYAN_G}A-OK Mail{RESET}.");
 
-ALIGNED(4) const u8 gUnknown_80E499C[] = _(
+ALIGNED(4) static const u8 gUnknown_80E499C[] = _(
 "This password can no longer be used.");
 
-ALIGNED(4) const u8 gUnknown_80E49C4[] = _(
+ALIGNED(4) static const u8 gUnknown_80E49C4[] = _(
 "This password does not appear to be\n"
 "that of a {COLOR CYAN_G}Thank-You Mail{RESET}.");
 

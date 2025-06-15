@@ -427,6 +427,7 @@ SECTIONS {
     {
         src/main_loops.o(.rodata);
         src/event_flag.o(.rodata);
+        src/script_vars_info.o(.rodata);
         data/data.o(.rodata);
         src/code_8002774.o(.rodata);
         data/pksdir_5.o(.rodata);
@@ -527,6 +528,7 @@ SECTIONS {
         src/code_8031D70.o(.rodata);
         src/adventure_log.o(.rodata);
         src/friend_rescue.o(.rodata);
+        src/credits1.o(.rodata);
         data/credits1.o(.rodata);
         src/credits2.o(.rodata);
         src/main_menu1.o(.rodata);

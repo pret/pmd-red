@@ -27,16 +27,13 @@ extern void sub_80973A8(u32, u32);
 extern void sub_80972F4(void);
 extern void nullsub_128(void);
 
-// A fakematch? Debugging leftover? A bug? No clue.
-#define GET_PTR_x400VAR(varId)(((void*) (&gScriptVarInfo[varId - 0x466])) - 4)
-
 // arm9.bin::0200FF68
 void ThoroughlyResetScriptVars(void)
 {
   s32 iVar1;
   s32 iVar3;
   u16 uVar2;
-  struct ScriptVarInfo *puVar1;
+  const struct ScriptVarInfo *puVar1;
 
   for(iVar3 = 0; iVar3 < 0x400; iVar3++)
   {
@@ -108,15 +105,15 @@ UNUSED void sub_8001564(void)
 // arm9.bin::0200FEB4
 void ResetScriptVarArray(u8 *localVarBuf, s16 varId_)
 {
-    struct ScriptVarInfo *infoPtr;
+    const struct ScriptVarInfo *infoPtr;
     u16 i;
     s32 varId = varId_;
 
     if (varId < 0x400) {
-        infoPtr = &(gScriptVarInfo)[varId];
+        infoPtr = &gScriptVarInfo[varId];
     }
     else {
-        infoPtr = GET_PTR_x400VAR(varId);
+        infoPtr = &sLocalScriptVarInfo[varId - 0x400];
     }
 
     for (i = 0; i < infoPtr->arrayLen; i++) {
@@ -127,15 +124,15 @@ void ResetScriptVarArray(u8 *localVarBuf, s16 varId_)
 // arm9.bin::0200FE04
 void ClearScriptVarArray(u8 *localVarBuf, s16 varId_)
 {
-    struct ScriptVarInfo *infoPtr;
+    const struct ScriptVarInfo *infoPtr;
     u16 i;
     s32 varId = varId_;
 
     if (varId < 0x400) {
-        infoPtr = &(gScriptVarInfo)[varId];
+        infoPtr = &gScriptVarInfo[varId];
     }
     else {
-        infoPtr = GET_PTR_x400VAR(varId);
+        infoPtr = &sLocalScriptVarInfo[varId - 0x400];
     }
 
     for (i = 0; i < infoPtr->arrayLen; i++) {
@@ -146,7 +143,7 @@ void ClearScriptVarArray(u8 *localVarBuf, s16 varId_)
 // arm9.bin::0200FD60
 void GetScriptVarRef(struct ScriptVarPtr *out, u8 *localVarBuf, s32 varId_)
 {
-    struct ScriptVarInfo *infoPtr;
+    const struct ScriptVarInfo *infoPtr;
     s32 varId = (s16) varId_;
 
     if (varId < 0x400) {
@@ -155,7 +152,7 @@ void GetScriptVarRef(struct ScriptVarPtr *out, u8 *localVarBuf, s32 varId_)
         out->ptr = &gScriptVarBuffer[infoPtr->bufOffset];
     }
     else {
-        infoPtr = GET_PTR_x400VAR(varId);
+        infoPtr = &sLocalScriptVarInfo[varId - 0x400];
         out->info = infoPtr;
         out->ptr = &localVarBuf[infoPtr->bufOffset * 4];
     }
@@ -807,7 +804,7 @@ UNUSED const u8 *sub_8002394(u32 param_1)
     return "1-1"; // 1-1
   }
   else {
-    return gUnknown_80B7144; // NONE
+    return "NONE";
   }
 }
 
@@ -817,7 +814,7 @@ UNUSED const u8 *sub_80023C4(u32 param_1)
    return gUnknown_80B71A0[param_1]; // CISTART, CECONTINUE, CNLAST, CWEND
   }
   else {
-    return gUnknown_80B7144; // NONE
+    return "NONE";
   }
 }
 #endif
