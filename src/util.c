@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "util.h"
 
 void ReverseString(u8 *s, s32 len)

@@ -432,7 +432,14 @@ SECTIONS {
         src/code_8002774.o(.rodata);
         data/pksdir_5.o(.rodata);
         src/memory.o(.rodata);
-        data/data1.o(.rodata);
+        src/code_80035F0.o(.rodata);
+        src/other_random.o(.rodata);
+        src/util.o(.rodata);
+        src/bg_palette_buffer.o(.rodata);
+        src/input.o(.rodata);
+        src/code_8004AA0.o(.rodata);
+        src/sprite.o(.rodata);
+        src/code_800558C.o(.rodata);
         src/random.o(.rodata);
         src/text_1.o(.rodata);
         src/text_2.o(.rodata);
