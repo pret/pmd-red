@@ -46,9 +46,8 @@
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
 void GroundMap_GetStationScript(ScriptInfoSmall *out, s16, s32, s32);
-void GroundLives_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
-void GroundObject_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
-void GroundEffect_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
+void GroundObject_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
+void GroundEffect_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
 void GroundLives_Select(s32, s32 group, s32 sector);
 void GroundObject_Select(s32, s32 group, s32 sector);
 void GroundEffect_Select(s32, s32 group, s32 sector);
@@ -167,7 +166,6 @@ extern u8 gUnknown_811656C[];
 
 extern DebugLocation gUnknown_81165C8;
 
-extern void sub_809D520(void *);
 extern u8 GroundObjectsCancellAll(void);
 extern u8 GroundEffectsCancelAll(void);
 extern u8 GroundLivesCancelAll(void);
@@ -247,25 +245,20 @@ EWRAM_DATA u16 gUnknown_2039DA8 = 0;
 EWRAM_INIT static int sNumChoices = 0;
 
 // -1 didn't match
-void sub_809D520(void *a0)
+void sub_809D520(ActionUnkIds *a0)
 {
-    u16 *ptr = a0;
-    u16 v = 0xFFFF;
-    *ptr = v;
+    a0->unk0 = -1;
 }
 
-Action *sub_809D52C(void *a0)
+Action *sub_809D52C(ActionUnkIds *a0)
 {
-    s16 *ptr = a0;
-
-    switch (ptr[0])
-    {
-    case 0: return 0;
-    case 1: return sub_80A882C(ptr[1]);
-    case 2: return sub_80AC240(ptr[1]);
-    case 3: return sub_80AD158(ptr[1]);
+    switch (a0->unk0) {
+        case 0: return 0;
+        case 1: return sub_80A882C(a0->unk2);
+        case 2: return sub_80AC240(a0->unk2);
+        case 3: return sub_80AD158(a0->unk2);
     }
-    return 0;
+    return NULL;
 }
 
 void InitScriptData(ScriptData *a0)
@@ -321,12 +314,12 @@ void InitActionWithParams(Action *action, const CallbackData *callbacks, void *p
     action->parentObject = parent;
     action->group = group_s32;
     action->sector = sector_s32;
-    action->unk8[0] = callbacks->maybeId;
+    action->unk8.unk0 = callbacks->maybeId;
 
     if(callbacks->getIndex)
-        action->unk8[1] = callbacks->getIndex(parent);
+        action->unk8.unk2 = callbacks->getIndex(parent);
     else
-        action->unk8[1] = 0;
+        action->unk8.unk2 = 0;
 }
 
 void InitAction2(Action *action)
@@ -427,7 +420,7 @@ bool8 ActionResetScriptDataForDeletion(Action *param_1, DebugLocation *unused)
     return TRUE;
 }
 
-bool8 GroundScript_ExecutePP(Action *action, s32 *param_2, ScriptInfoSmall *param_3, const DebugLocation *unused)
+bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSmall *param_3, const DebugLocation *unused)
 {
     if ((param_3 == NULL) || (param_3->ptr == NULL)) {
         return FALSE;
@@ -468,7 +461,7 @@ bool8 GroundScript_ExecutePP(Action *action, s32 *param_2, ScriptInfoSmall *para
     }
     InitScriptData(&action->scriptData);
     if (param_2 != NULL) {
-        action->unkC.raw = param_2[0];
+        action->unkC = *param_2;
     }
     else {
         sub_809D520(&action->unkC);
@@ -488,7 +481,7 @@ bool8 GroundScript_ExecutePP(Action *action, s32 *param_2, ScriptInfoSmall *para
     return TRUE;
 }
 
-bool8 ExecutePredefinedScript(Action *param_1, s32 *param_2, s16 index, DebugLocation *debug)
+bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, DebugLocation *debug)
 {
     ScriptInfoSmall auStack28;
 
@@ -1137,7 +1130,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 action->scriptData.savedState = 3;
                                 sub_80999FC(cmd.argShort);
                                 GroundMap_ExecuteEvent(0x70, 0);
-                                if (action->unk8[0] == 0) continue;
+                                if (action->unk8.unk0 == 0) continue;
                                 action->scriptData.script.ptr = ResolveJump(action, 1);
                                 break;
                             }
@@ -1716,7 +1709,7 @@ s32 ExecuteScriptCommand(Action *action)
                 if (gUnknown_2039A34 != map) {
                     gUnknown_2039A34 = map;
                     GroundCancelAllEntities();
-                    if (action->unk8[0] != 0)
+                    if (action->unk8.unk0 != 0)
                         return 4; // Fatal?
                 }
                 break;
@@ -1744,26 +1737,26 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x20: {
-                switch (action->unkC.arr[0]) {
+                switch (action->unkC.unk0) {
                     case 0:
                         GroundMap_ExecuteEvent(curCmd.argShort, 0);
                         break;
                     case 1: {
                         ScriptInfoSmall info1;
                         GetFunctionScript(action, &info1, curCmd.argShort);
-                        GroundLives_ExecuteScript(action->unkC.arr[1], action->unk8, &info1);
+                        GroundLives_ExecuteScript(action->unkC.unk2, &action->unk8, &info1);
                         break;
                     }
                     case 2: {
                         ScriptInfoSmall info2;
                         GetFunctionScript(action, &info2, curCmd.argShort);
-                        GroundObject_ExecuteScript(action->unkC.arr[1], action->unk8, &info2);
+                        GroundObject_ExecuteScript(action->unkC.unk2, &action->unk8, &info2);
                         break;
                     }
                     case 3: {
                         ScriptInfoSmall info3;
                         GetFunctionScript(action, &info3, curCmd.argShort);
-                        GroundEffect_ExecuteScript(action->unkC.arr[1], action->unk8, &info3);
+                        GroundEffect_ExecuteScript(action->unkC.unk2, &action->unk8, &info3);
                         break;
                     }
                 }
@@ -1790,7 +1783,7 @@ s32 ExecuteScriptCommand(Action *action)
                             sub_80A9090(ret, tmp);
                         }
                     }
-                    GroundLives_ExecutePlayerScriptActionLives(action->unk8[1], ret);
+                    GroundLives_ExecutePlayerScriptActionLives(action->unk8.unk2, ret);
                     return 3;
                 }
                 break;
@@ -1866,30 +1859,30 @@ s32 ExecuteScriptCommand(Action *action)
                         break;
                     }
                     case 1: {
-                        sub_80A2500(curCmd.argShort, action->unk8);
+                        sub_80A2500(curCmd.argShort, &action->unk8);
                         break;
                     }
                     case 2: {
-                        sub_80A2500(curCmd.argShort, action->unkC.arr);
+                        sub_80A2500(curCmd.argShort, &action->unkC);
                         break;
                     }
                     case 3: {
-                        struct {s16 unk0; s16 unk2;} unk;
+                        ActionUnkIds unk;
                         unk.unk2 = sub_80A7AE8((s16)curCmd.arg1);
                         unk.unk0 = 1;
-                        sub_80A2500(curCmd.argShort, (void*)&unk);
+                        sub_80A2500(curCmd.argShort, &unk);
                         break;
                     }
                     case 4: {
-                        sub_80A252C(curCmd.argShort, action->unk8);
+                        sub_80A252C(curCmd.argShort, &action->unk8);
                         break;
                     }
                     case 5: {
-                        sub_80A252C(curCmd.argShort, action->unkC.arr);
+                        sub_80A252C(curCmd.argShort, &action->unkC);
                         break;
                     }
                     case 6: {
-                        struct {s16 unk0; s16 unk2;} unk;
+                        ActionUnkIds unk;
                         s16 res = sub_80A7AE8((s16)curCmd.arg1);
                         unk.unk2 = res;
                         if (unk.unk2 >= 0) {
@@ -1901,11 +1894,11 @@ s32 ExecuteScriptCommand(Action *action)
                         break;
                     }
                     case 7: {
-                        sub_80A2558(curCmd.argShort, action->unk8);
+                        sub_80A2558(curCmd.argShort, &action->unk8);
                         break;
                     }
                     case 8: {
-                        sub_80A2558(curCmd.argShort, action->unkC.arr);
+                        sub_80A2558(curCmd.argShort, &action->unkC);
                         break;
                     }
                     case 9: {
@@ -2086,7 +2079,7 @@ s32 ExecuteScriptCommand(Action *action)
                 PixelPos pos;
                 s8 c;
                 {
-                    Action *tmp = (Action*)sub_809D52C(action->unkC.arr);
+                    Action *tmp = sub_809D52C(&action->unkC);
                     ptr = tmp;
                 }
                 if (ptr) {
@@ -2485,7 +2478,7 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0x98: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_809D170(1, id);
                         break;
@@ -2501,7 +2494,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x99: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D158(0, &unk);
@@ -2524,7 +2517,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x9b: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 if (id < 0) break;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_809D1A8(1, id, curCmd.argShort);
                         return 2;
@@ -2540,7 +2533,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x9c: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D190(0, &unk, curCmd.argShort);
@@ -2563,7 +2556,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x9e: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 if (id < 0) break;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_809D1E4(1, id, curCmd.argShort);
                         return 2;
@@ -2579,7 +2572,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x9f: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D1CC(0, &unk, curCmd.argShort);
@@ -2602,7 +2595,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0xa1: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 if (id < 0) break;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_809D220(1, id, curCmd.argShort);
                         return 2;
@@ -2618,7 +2611,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0xa2: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D208(0, &unk, curCmd.argShort);
@@ -2774,8 +2767,8 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0xbe: {
-                if (action->unk8[0] == 1) {
-                    if ((s8)GroundLives_IsStarterMon(action->unk8[1])) {
+                if (action->unk8.unk0 == 1) {
+                    if ((s8)GroundLives_IsStarterMon(action->unk8.unk2)) {
                         scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                     }
                 }
@@ -3129,11 +3122,11 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             break;
         case 0xA:
             {
-                if ((action->unkC).arr[0] == 1)
+                if ((action->unkC).unk0 == 1)
                 {
                     u8 text[0x100];
                     DungeonLocation dungLocation;
-                    s32 ret = sub_80A8C4C(action->unkC.arr[1], &dungLocation);
+                    s32 ret = sub_80A8C4C(action->unkC.unk2, &dungLocation);
                     if (ret != 0)
                     {
                         s32 dialogueId;
@@ -3141,7 +3134,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                             return 2;
                         }
 
-                        dialogueId = GetFriendAreaDialogueId(action->unkC.arr[1]);
+                        dialogueId = GetFriendAreaDialogueId(action->unkC.unk2);
                         InlineStrcpy(text, gFriendAreaDialogue[dialogueId]);
                         if (ScriptPrintText(0, 1, text) != 0)
                             return 1;
@@ -3183,11 +3176,11 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0xF:
             return sub_80964E4() == 0 ? 0 : 1;
         case 0x10:
-            if(action->unk8[0] == 1)
-                if(action->unk8[1] == 0)
-                    if(action->unkC.arr[0] == 1)
+            if(action->unk8.unk0 == 1)
+                if(action->unk8.unk2 == 0)
+                    if(action->unkC.unk0 == 1)
                     {
-                        if(sub_80A87E0(action->unk8[1], sub_80A8E9C(action->unkC.arr[1])) != 0)
+                        if(sub_80A87E0(action->unk8.unk2, sub_80A8E9C(action->unkC.unk2)) != 0)
                             return 1;
                     }
             return 0;
@@ -3212,8 +3205,8 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             return 0;
         case 0x14:
-            if(action->unk8[0] == 1)  {
-                if(GetCanMoveFlag(sub_80A8BFC(action->unk8[1])))
+            if(action->unk8.unk0 == 1)  {
+                if(GetCanMoveFlag(sub_80A8BFC(action->unk8.unk2)))
                     return 1;
             }
             return 0;

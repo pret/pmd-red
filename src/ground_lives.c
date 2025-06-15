@@ -138,7 +138,6 @@ extern void sub_809CD68(struct Struct3001B84_sub120 *dst);
 extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
 extern void sub_80A7428(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 monsterId_, s32 a3);
 extern void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);
-extern bool8 ExecutePredefinedScript(Action *param_1, s32 *param_2, s16 index, const DebugLocation *debug);
 extern void sub_809D170(s32 r0, s32 r1);
 extern void sub_80A74E4(struct UnkGroundSpriteStruct *ptr);
 extern const struct GroundScriptHeader *GetGroundScript(s16 a0, const DebugLocation *);
@@ -1065,7 +1064,7 @@ UNUSED static bool8 sub_80A88A0(s32 id_)
     return FALSE;
 }
 
-bool8 GroundLives_ExecuteScript(s32 id_, s32 *a1, ScriptInfoSmall *scriptInfo)
+bool8 GroundLives_ExecuteScript(s32 id_, ActionUnkIds *a1, ScriptInfoSmall *scriptInfo)
 {
     s32 id = (s16) id_;
     struct GroundLive *livesPtr = &gGroundLives->array[id];
@@ -1081,7 +1080,7 @@ bool8 GroundLives_ExecuteScript(s32 id_, s32 *a1, ScriptInfoSmall *scriptInfo)
     return FALSE;
 }
 
-bool8 _ExecutePlayerScript(struct GroundLive *livesPtr, s32 *a1, ScriptInfoSmall *scriptInfo)
+static bool8 _ExecutePlayerScript(struct GroundLive *livesPtr, ActionUnkIds *a1, ScriptInfoSmall *scriptInfo)
 {
     livesPtr->unk15E = 0x300;
     livesPtr->unk160 = 1;
@@ -1098,7 +1097,7 @@ bool8 _ExecutePlayerScript(struct GroundLive *livesPtr, s32 *a1, ScriptInfoSmall
     return FALSE;
 }
 
-UNUSED static bool8 sub_80A89AC(s32 id_, s32 *a1, ScriptInfoSmall *scriptInfo)
+UNUSED static bool8 sub_80A89AC(s32 id_, ActionUnkIds *a1, ScriptInfoSmall *scriptInfo)
 {
     s32 id = (s16) id_;
     struct GroundLive *livesPtr = &gGroundLives->array[id];
@@ -1117,10 +1116,9 @@ bool8 GroundLives_ExecutePlayerScriptActionLives(s32 id1_, s32 id2_)
         struct GroundLive *livesPtr2 = &gGroundLives->array[id2];
 
         if (livesPtr1->unk2 != -1 && livesPtr2->unk2 != -1 && GetPredefinedScript(&livesPtr2->action, &scriptInfo, 2)) {
-            s32 sp = 1;
+            ActionUnkIds sp = {1, id2};
 
-            sp |= (id2 << 0x10);
-            ExecutePredefinedScript(&livesPtr2->action, (void *) &livesPtr1->action.unk8, 3, DEBUG_LOC_PTR("../ground/ground_lives.c", 1785, "GroundLives_ExecutePlayerScriptActionLives")); // TODO: fix unk8 field?
+            ExecutePredefinedScript(&livesPtr2->action, &livesPtr1->action.unk8, 3, DEBUG_LOC_PTR("../ground/ground_lives.c", 1785, "GroundLives_ExecutePlayerScriptActionLives"));
             return _ExecutePlayerScript(livesPtr1, &sp, &scriptInfo);
         }
     }
@@ -1138,10 +1136,9 @@ bool8 sub_80A8A5C(s32 id1_, s32 id2_)
         struct GroundLive *livesPtr1 = &gGroundLives->array[id1];
 
         if (sub_80AC274(id2, &scriptInfo1, 2)) {
-            s32 sp = 2;
             ScriptInfoSmall scriptInfo2;
+            ActionUnkIds sp = {2, id2};
 
-            sp |= (id2 << 0x10);
             sub_80AC274(id2, &scriptInfo2, 3);
             GroundObject_ExecuteScript(id2, &livesPtr1->action.unk8, &scriptInfo2);
             return _ExecutePlayerScript(livesPtr1, &sp, &scriptInfo1);

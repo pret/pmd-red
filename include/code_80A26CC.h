@@ -1,6 +1,8 @@
 #ifndef GUARD_CODE_80A26CC_H
 #define GUARD_CODE_80A26CC_H
 
+#include "structs/str_ground_script.h"
+
 // size: 0x14
 typedef struct DungeonInfo
 {
@@ -17,9 +19,9 @@ typedef struct DungeonInfo
     /* 0x11 */ u8 unk11;
 } DungeonInfo;
 
-void sub_80A2500(s32, s16 *);
-void sub_80A252C(s32, s16 *);
-void sub_80A2558(s32, s16 *);
+void sub_80A2500(s32 param_1, ActionUnkIds *param_2);
+void sub_80A252C(s32, ActionUnkIds *);
+void sub_80A2558(s32, ActionUnkIds *);
 void sub_80A2584(s16, s16);
 void sub_80A2598(s16, s16);
 u32 sub_80A25AC(u16);
