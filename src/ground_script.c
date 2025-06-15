@@ -39,6 +39,7 @@
 #include "pokemon.h"
 #include "wigglytuff_shop1.h"
 #include "wonder_mail.h"
+#include "friend_area_dialogue.h"
 #include "structs/str_dungeon_setup.h"
 
 
@@ -190,7 +191,6 @@ void sub_8096488(void);
 bool8 sub_80964B4(void);
 extern void nullsub_104(void);
 s16 sub_80A8C4C();
-s16 sub_80A90C8();
 bool8 sub_8097640();
 u8 sub_80964E4();
 s32 sub_80A8E9C();
@@ -199,7 +199,6 @@ bool8 sub_80A87E0();
 s16 sub_80A8BFC(s16);
 void sub_80A8F50(const u8 *buffer, s32, s32 size);
 
-extern const u8 *gFriendAreaDialogue[];
 extern struct unkStruct_808D144 gUnknown_8116710;
 extern struct unkStruct_808D144 gUnknown_8116760;
 extern struct unkStruct_808D144 gUnknown_8116794;
@@ -3130,21 +3129,20 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             break;
         case 0xA:
             {
-                s32 ret;
-                s32 ret2;
                 if ((action->unkC).arr[0] == 1)
                 {
                     u8 text[0x100];
                     DungeonLocation dungLocation;
-                    ret = sub_80A8C4C((action->unkC).arr[1], &dungLocation);
-                    if(ret != 0)
+                    s32 ret = sub_80A8C4C(action->unkC.arr[1], &dungLocation);
+                    if (ret != 0)
                     {
+                        s32 dialogueId;
                         if (dungLocation.id == DUNGEON_HOWLING_FOREST_2 && ret == 0x104) {
                             return 2;
                         }
 
-                        ret2 = sub_80A90C8((action->unkC).arr[1]);
-                        InlineStrcpy(text, gFriendAreaDialogue[ret2]);
+                        dialogueId = GetFriendAreaDialogueId(action->unkC.arr[1]);
+                        InlineStrcpy(text, gFriendAreaDialogue[dialogueId]);
                         if (ScriptPrintText(0, 1, text) != 0)
                             return 1;
                     }

@@ -15,6 +15,7 @@
 #include "other_random.h"
 #include "text_util.h"
 #include "code_8002774.h"
+#include "friend_area_dialogue.h"
 
 struct GroundLivesMeta_Sub1
 {
@@ -63,7 +64,7 @@ struct GroundLive
     struct Struct3001B84_sub120 unk120;
     s16 unk13C;
     s16 unk13E;
-    s16 unk140;
+    s16 friendAreaDialogueId;
     s8 direction1;
     PixelPos unk144;
     PixelPos unk14C;
@@ -844,10 +845,10 @@ s32 GroundLives_Add(s32 id_, const GroundLivesData *ptr, s32 group_, s32 sector_
         metaPtr->unk0 = 0;
         metaPtr->unk4 = 0;
         if (livesPtr->unk2 >= 14 && livesPtr->unk2 <= 29) {
-            livesPtr->unk140 = OtherRandInt(0x12);
+            livesPtr->friendAreaDialogueId = OtherRandInt(FRIEND_AREA_DIALOGUES_COUNT);
         }
         else {
-            livesPtr->unk140 = 0;
+            livesPtr->friendAreaDialogueId = 0;
         }
     }
 
@@ -1489,12 +1490,12 @@ s32 sub_80A9090(s32 id_, s32 a1_)
     return livesPtr->unk2;
 }
 
-s32 sub_80A90C8(s32 id_)
+s16 GetFriendAreaDialogueId(s32 id_)
 {
     s32 id = (s16) id_;
     struct GroundLive *livesPtr = &gGroundLives->array[id];
 
-    return livesPtr->unk140;
+    return livesPtr->friendAreaDialogueId;
 }
 
 UNUSED static bool8 sub_80A90E8(s32 id1_, s32 id2_)

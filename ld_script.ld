@@ -444,11 +444,11 @@ SECTIONS {
         src/text_1.o(.rodata);
         src/text_2.o(.rodata);
         src/graphics_memory.o(.rodata);
-        data/data2.o(.rodata);
+        data/pksdir_7.o(.rodata);
         src/math.o(.rodata);
         src/file_system.o(.rodata);
         src/decompress_at.o(.rodata);
-        data/data_80B9BB8.o(.rodata);
+        data/pksdir_8.o(.rodata);
         src/main.o(.rodata);
         src/reg_control.o(.rodata);
         data/data_80B9BB8_2.o(.rodata);
@@ -734,7 +734,7 @@ SECTIONS {
         src/unk_dungeon_load_maybe.o(.rodata);
         data/data_8115F5C_3.o(.rodata);
         src/ground_event_data.o(.rodata);
-        data/friend_area_dialogue.o(.rodata);
+        src/friend_area_dialogue.o(.rodata);
         src/ground_data_t00p01_station.o(.rodata);
         src/ground_data_t01p01_station.o(.rodata);
         src/ground_data_t01p02a_station.o(.rodata);
