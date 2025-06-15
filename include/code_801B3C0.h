@@ -17,7 +17,7 @@ typedef struct unkStruct_203B230
     /* 0x20 */ u32 unk20;
     /* 0x24 */ u32 unk24;
     /* 0x28 */ WindowTemplates unk28;
-    /* 0x88 */ MenuInputStructSub unk88;
+    /* 0x88 */ TouchScreenMenuInput unk88;
 } unkStruct_203B230;
 
 bool8 InitItemDescriptionWindow(Item *item);

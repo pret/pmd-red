@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "bg_palette_buffer.h"
 #include "cpu.h"
 

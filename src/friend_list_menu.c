@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/dungeon.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "code_801EE10.h"
@@ -51,7 +51,7 @@ void sub_8025E08(void);
 void sub_8025E24(void);
 void FriendListMenu_GotoFallbackState(void);
 void sub_8025E68(u32 , BulkItem *);
-bool8 FriendListMenu_isOnTeam(PokemonStruct1 *);
+bool8 FriendListMenu_isOnTeam(Pokemon *);
 
 
 bool8 CreateFriendListMenu(s32 param_1)
@@ -219,7 +219,7 @@ void sub_8025518(void)
         sub_8012D60(&gUnknown_203B2B4->unk78,gUnknown_203B2B4->unkC8,0,gUnknown_203B2B4->unk108,gUnknown_203B2B4->menuAction2,2);
         break;
     case FRIEND_LIST_MENU_STATE_INFO:
-        HeldItemToSlot(&item, &gUnknown_203B2B4->item1);
+        BulkItemToItem(&item, &gUnknown_203B2B4->item1);
         InitItemDescriptionWindow(&item);
         break;
     case FRIEND_LIST_MENU_STATE_ITEM_GIVEN:
@@ -261,7 +261,7 @@ void sub_8025518(void)
 void sub_8025728(void)
 {
     int index;
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     s32 loopMax = 0;
 
     pokeStruct = &gRecruitedPokemonRef->pokemon[gUnknown_203B2B4->species];
@@ -426,7 +426,7 @@ void sub_8025A84(void)
             SetFriendListMenuState(FRIEND_LIST_MENU_STATE_TAKE);
             break;
         case FRIEND_LIST_MENU_STANDBY:
-            gUnknown_203B2B4->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
+            gUnknown_203B2B4->pokeStruct->flags &= ~(POKEMON_FLAG_ON_TEAM);
             nullsub_104();
             sub_808ED00();
             FriendList_Free();
@@ -534,7 +534,7 @@ void sub_8025CB4(void)
                 AddHeldItemToInventory(&gUnknown_203B2B4->item2);
                 nextState = FRIEND_LIST_MENU_STATE_ITEM_EXCHANGE;
             }
-            HeldItemToSlot(&item,&gUnknown_203B2B4->item1);
+            BulkItemToItem(&item,&gUnknown_203B2B4->item1);
             a3.unk0 = 0;
             a3.unk4 = 0;
             a3.unk8 = 1;
@@ -634,7 +634,7 @@ void sub_8025E68(u32 r0, BulkItem *heldItem)
 
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
-    HeldItemToSlot(&item, heldItem);
+    BulkItemToItem(&item, heldItem);
     a3.unk0 = 0;
     a3.unk4 = 0;
     a3.unk8 = 1;
@@ -644,7 +644,7 @@ void sub_8025E68(u32 r0, BulkItem *heldItem)
     sub_80073E0(r0);
 }
 
-bool8 FriendListMenu_isOnTeam(PokemonStruct1 *pokeStruct)
+bool8 FriendListMenu_isOnTeam(Pokemon *pokeStruct)
 {
     bool32 flag;
     if (pokeStruct->isTeamLeader)

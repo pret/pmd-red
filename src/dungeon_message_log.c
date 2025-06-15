@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "dungeon_message_log.h"
 #include "dungeon_message.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "text_1.h"
 #include "text_2.h"
 #include "text_3.h"
@@ -12,13 +12,14 @@
 #include "dungeon_music.h"
 #include "sprite.h"
 #include "code_803E724.h"
+#include "run_dungeon.h"
 
 #define MESSAGE_LOG_ROW_COUNT 8 // How many log messages are shown
 
 extern bool8 sub_8045888(Entity *pokemon);
 extern void sub_805E804(void);
 extern void sub_8083E28(void);
-extern u32 sub_8014140(s32 a0, const void *a1);
+extern u32 GetTouchScreenArrowPress(s32 a0, const void *a1);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 
@@ -48,7 +49,7 @@ void ResetMessageLog(void)
 }
 
 // Unused in Red, used in Blue
-void sub_8053200(void)
+UNUSED static void sub_8053200(void)
 {
     gDungeon->unkB = 1;
 }
@@ -78,8 +79,8 @@ void CopyStringToMessageLog(const u8 *src, u32 a1, u32 a2)
 }
 
 // Possibly something menu related?
-// Unfortunately, this is passed to sub_8014140 which is a nullsub. It could be used for Blue and Nintendo DS' touch screen.
-static const u8 sUnknownMessageLogData[] =
+// Unfortunately, this is passed to GetTouchScreenArrowPress which is a nullsub. It could be used for Blue and Nintendo DS' touch screen.
+static const u8 sTouchScreenArrowPressData[] =
 {
     0x01, 0x00, 0x54, 0x00, 0xf0, 0xff, 0x18, 0x00, 0x18, 0x00, 0x00, 0x00, 0x02, 0x00, 0x54, 0x00,
     0x6a, 0x00, 0x18, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -89,9 +90,9 @@ static const u8 sUnknownMessageLogData[] =
 bool32 DisplayMessageLog(void)
 {
     bool8 unkRet;
-    MenuInputStructSub menuInput;
+    TouchScreenMenuInput touchScreenInput;
 
-    sub_801317C(&menuInput);
+    ResetTouchScreenMenuInput(&touchScreenInput);
     sub_803EAF0(9, NULL);
     do {
         DungeonRunFrameActions(13);
@@ -103,16 +104,16 @@ bool32 DisplayMessageLog(void)
     PutStringsOnMessageLog();
 
     while (1) {
-        s32 unkVar;
+        s32 touchScreenArrow;
         bool32 scroll = FALSE;
 
         sMessageLogFlags = 0;
-        nullsub_34(&menuInput, 0);
-        unkVar = sub_8014140(0, sUnknownMessageLogData);
+        GetTouchScreenMenuInput(&touchScreenInput, 0);
+        touchScreenArrow = GetTouchScreenArrowPress(0, sTouchScreenArrowPressData);
 
-        if (TryScrollLogUp(unkVar))
+        if (TryScrollLogUp(touchScreenArrow))
             scroll = TRUE;
-        if (TryScrollLogDown(unkVar))
+        if (TryScrollLogDown(touchScreenArrow))
             scroll = TRUE;
 
         if (!scroll) {
@@ -127,7 +128,7 @@ bool32 DisplayMessageLog(void)
         }
 
         if (!sub_80048C8()) {
-            if (gRealInputs.pressed & B_BUTTON || menuInput.b_button) {
+            if (gRealInputs.pressed & B_BUTTON || touchScreenInput.b_button) {
                 PlayDungeonCancelSE();
                 break;
             }
@@ -171,7 +172,7 @@ static void PutStringsOnMessageLog(void)
     sub_8007334(0);
 }
 
-static bool8 TryScrollLogUp(s32 a0)
+static bool8 TryScrollLogUp(s32 touchScreenArrow)
 {
     s32 i;
     struct MessageLogString *msgLogString;
@@ -194,7 +195,7 @@ static bool8 TryScrollLogUp(s32 a0)
             sMessageLogFlags |= FLAG_CAN_SCROLL_UP;
             if (gRealInputs.repeated & DPAD_UP)
                 break;
-            if (a0 == 1)
+            if (touchScreenArrow == TOUCH_SCREEN_ARROW_UP_PRESS)
                 break;
         }
 
@@ -222,7 +223,7 @@ static bool8 TryScrollLogUp(s32 a0)
     return TRUE;
 }
 
-static bool8 TryScrollLogDown(s32 a0)
+static bool8 TryScrollLogDown(s32 touchScreenArrow)
 {
     s32 i;
     struct MessageLogString *msgLogString;
@@ -244,7 +245,7 @@ static bool8 TryScrollLogDown(s32 a0)
             sMessageLogFlags |= FLAG_CAN_SCROLL_DOWN;
             if (gRealInputs.repeated & DPAD_DOWN)
                 break;
-            if (a0 == 2)
+            if (touchScreenArrow == TOUCH_SCREEN_ARROW_DOWN_PRESS)
                 break;
         }
 

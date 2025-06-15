@@ -3,7 +3,7 @@
 #include "random_mersenne_twister.h"
 #include "code_8094F88.h"
 #include "constants/wonder_mail.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "memory.h"
 #include "moves.h"
 #include "pokemon.h"
@@ -327,7 +327,7 @@ u32 sub_80954B4(void)
 u32 sub_80954CC(u8 *buffer, u32 size)
 {
     DataSerializer backup;
-    PokemonStruct1 *mon;
+    Pokemon *mon;
     s32 i;
 
     InitBitReader(&backup, buffer, size);
@@ -339,9 +339,9 @@ u32 sub_80954CC(u8 *buffer, u32 size)
     ReadBits(&backup, &gUnknown_203B484->unk0, 32);
 
     mon = &gUnknown_203B484->unk4;
-    memset(mon, 0, sizeof(PokemonStruct1));
+    memset(mon, 0, sizeof(Pokemon));
 
-    ReadBits(&backup, &mon->unk0, 2);
+    ReadBits(&backup, &mon->flags, 2);
     ReadBits(&backup, &mon->isTeamLeader, 1);
     ReadBits(&backup, &mon->level, 7);
     ReadDungeonLocationBits(&backup, &mon->dungeonLocation);
@@ -373,7 +373,7 @@ u32 sub_80954CC(u8 *buffer, u32 size)
 u32 sub_8095624(u8 *buffer, u32 b)
 {
     DataSerializer backup;
-    PokemonStruct1 *mon;
+    Pokemon *mon;
     s32 i;
 
     InitBitWriter(&backup, buffer, b);
@@ -386,7 +386,7 @@ u32 sub_8095624(u8 *buffer, u32 b)
 
     mon = &gUnknown_203B484->unk4;
 
-    WriteBits(&backup, &mon->unk0, 2);
+    WriteBits(&backup, &mon->flags, 2);
     WriteBits(&backup, &mon->isTeamLeader, 1);
     WriteBits(&backup, &mon->level, 7);
     WriteDungeonLocationBits(&backup, &mon->dungeonLocation);

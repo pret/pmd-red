@@ -4,7 +4,7 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "cpu.h"
 #include "crt0.h"
 #include "file_system.h"
@@ -96,7 +96,7 @@ void AgbMain(void)
     sub_80057E8();
     InitFileSystem();
     LoadCharmaps();
-    sub_80098A0();
+    ResetScheduledMemCopies();
     InitGraphics();
     SetInterruptCallback(1, VBlank_CB);
     REG_DISPCNT = DISPCNT_WIN1_ON | DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP; // 32576

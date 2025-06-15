@@ -5,7 +5,6 @@
 #include "code_803B050.h"
 #include "code_80958E8.h"
 #include "code_80972F4.h"
-#include "code_8099328.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "input.h"
@@ -16,6 +15,7 @@
 #include "text_1.h"
 #include "wonder_mail_802C4C8.h"
 #include "wonder_mail_802D098.h"
+#include "ground_main.h"
 
 enum WonderMailRescueStates
 {

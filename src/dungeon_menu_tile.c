@@ -4,7 +4,7 @@
 #include "code_803E724.h"
 #include "dungeon_action.h"
 #include "code_8097DD0.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_action.h"
 #include "dungeon_map_access.h"
 #include "dungeon_menu_moves.h"
@@ -60,8 +60,8 @@ void ShowDungeonTileMenu(Entity *mon)
         ShowAndPrintOnTileMenu(&mon->pos, &windows, &header);
         DungeonRunFrameActions(0x2D);
         AddTileSubMenuOptions(mon);
-        gDungeonMenu.unk8.x = 0;
-        gDungeonMenu.unk8.y = 0;
+        gDungeonMenu.cursorArrowPos.x = 0;
+        gDungeonMenu.cursorArrowPos.y = 0;
         CreateDungeonMenuSubWindow(&windows.id[0], 22);
 
         while (1) {
@@ -76,7 +76,7 @@ void ShowDungeonTileMenu(Entity *mon)
                 MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                 if (gDungeonMenu.menuIndex == 1) {
                     PlayDungeonConfirmationSE();
                     ShowTileDescription(&mon->pos);
@@ -99,7 +99,7 @@ void ShowDungeonTileMenu(Entity *mon)
                 }
                 PlayDungeonCancelSE();
             }
-            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonCancelSE();
                 inputAction = 1;
                 break;
@@ -152,7 +152,7 @@ static void ShowTileDescription(DungeonPos *pos)
         Trap *trap;
         bool8 bPress = FALSE;
         STATUSTEXTS(statuses);
-        MenuInputStructSub menuSub;
+        TouchScreenMenuInput menuSub;
         WindowHeader header;
         WindowTemplates windows = {
             .id = {
@@ -173,7 +173,7 @@ static void ShowTileDescription(DungeonPos *pos)
         u8 trapName[0x60];
         s32 i, statusesCount;
 
-        sub_801317C(&menuSub);
+        ResetTouchScreenMenuInput(&menuSub);
         header.count = 1;
         header.currId = 0;
         header.width = 16;
@@ -198,7 +198,7 @@ static void ShowTileDescription(DungeonPos *pos)
             if (statusesCount != 0) {
                 ShowStatusDescriptionMenuArrow();
             }
-            nullsub_34(&menuSub, 0);
+            GetTouchScreenMenuInput(&menuSub, 0);
             DungeonRunFrameActions(0x16);
             if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
                 PlayDungeonConfirmationSE();
@@ -220,7 +220,7 @@ static void ShowTileDescription(DungeonPos *pos)
                 if (i < statusesCount - 1) {
                     ShowStatusDescriptionMenuArrow();
                 }
-                nullsub_34(&menuSub, 0);
+                GetTouchScreenMenuInput(&menuSub, 0);
                 DungeonRunFrameActions(0x16);
                 if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
                     PlayDungeonConfirmationSE();

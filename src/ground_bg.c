@@ -6,9 +6,9 @@
 #include "memory.h"
 #include "file_system.h"
 #include "code_8002774.h"
-#include "code_801D9E4.h"
+#include "structs/str_81188F0.h"
 #include "code_8004AA0.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "debug.h"
 #include "bg_control.h"
 #include "unk_dungeon_load.h"
@@ -16,7 +16,6 @@
 
 // This file most likely deals with map loading and writing to VRAM. It even has a custom decompression function.
 
-extern const struct unkStruct_81188F0 gUnknown_81188F0[10];
 extern const FileArchive gGroundFileArchive;
 
 void sub_80A456C(GroundBg *groundBg, s32 id, const PixelPos *srcPos);
@@ -1450,7 +1449,7 @@ void sub_80A49E8(GroundBg *groundBg)
     if (groundBg->unk52A) {
         s32 unk;
         for (i = 0, unk = groundBg->unk52C.unkA; i < groundBg->unk52C.unkC; i++, unk++) {
-            sub_80098F8(unk + 2);
+            ScheduleBgTilemapCopy(unk + 2);
         }
         groundBg->unk52A = 0;
     }

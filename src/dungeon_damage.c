@@ -2,7 +2,7 @@
 #include "constants/ability.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_logic.h"
-#include "text_util.h"
+#include "pokemon_types.h"
 #include "dungeon_message.h"
 #include "string_format.h"
 #include "type_effectiveness.h"
@@ -513,7 +513,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         }
     }
     else {
-        PokemonStruct2 *recruitedMon = &gRecruitedPokemonRef->pokemon2[targetData->teamIndex];
+        DungeonMon *recruitedMon = &gRecruitedPokemonRef->dungeonTeam[targetData->teamIndex];
         if (targetData->isTeamLeader || (targetData->joinedAt.id == DUNGEON_JOIN_LOCATION_PARTNER && gDungeon->unk644.unk18 == 0)) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9CEC[r8]);
         }
@@ -523,7 +523,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         else if (targetData->monsterBehavior == BEHAVIOR_RESCUE_TARGET) {
             DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9DF0[r8]);
         }
-        else if (sub_806A58C(recruitedMon->unkA)) {
+        else if (sub_806A58C(recruitedMon->recruitedPokemonId)) {
             if (gDungeon->unk644.unk19 != 0) {
                 DisplayDungeonLoggableMessageTrue(attacker, gUnknown_80F9D8C[r8]);
             }

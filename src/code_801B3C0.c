@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B3C0.h"
 #include "input.h"
 #include "items.h"
@@ -26,7 +26,7 @@ bool8 InitItemDescriptionWindow(Item *item)
     ResetSprites(TRUE);
     sUnknown_203B230 = MemoryAlloc(sizeof(unkStruct_203B230), 8);
     sUnknown_203B230->item = *item;
-    sub_801317C(&sUnknown_203B230->unk88);
+    ResetTouchScreenMenuInput(&sUnknown_203B230->unk88);
     sUnknown_203B230->unk24 = 0;
     sub_80140B4(&sUnknown_203B230->unk28);
     ResetUnusedInputStruct();

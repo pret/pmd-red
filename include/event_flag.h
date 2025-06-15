@@ -133,7 +133,7 @@ struct ScriptVarInfo {
 // size: 0x8
 struct ScriptVarPtr
 {
-    /* 0x0 */ struct ScriptVarInfo *info;
+    /* 0x0 */ const struct ScriptVarInfo *info;
     /* 0x4 */ u8 *ptr;
 };
 
@@ -170,8 +170,8 @@ void sub_80026E8(s16 r0, bool8 r1);
 bool8 SaveGlobalScriptVars(void *r0);
 bool8 RestoreGlobalScriptVars(u8 *r0);
 
-// .rodata
-extern struct ScriptVarInfo gScriptVarInfo[]; // NDS=0210FAC4
+// script_vars_info.c
+extern const struct ScriptVarInfo gScriptVarInfo[]; // NDS=0210FAC4
 
 // EWRAM
 extern u8 gScriptVarBuffer[0x400];

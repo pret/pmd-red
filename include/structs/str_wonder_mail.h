@@ -70,7 +70,7 @@ typedef struct unkStruct_203B480
 typedef struct WonderMailStruct_203B2C0_sub
 {
     /* 0x0 */ unkStruct_203B480 mail;
-    /* 0x30 */ PokemonStruct1 pokemon;
+    /* 0x30 */ Pokemon pokemon;
 } WonderMailStruct_203B2C0_sub;
 
 #endif // GUARD_STR_WONDER_MAIL_H

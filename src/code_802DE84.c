@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_802DE84.h"
 #include "input.h"
 #include "memory.h"
@@ -20,7 +20,7 @@ bool8 sub_802DE84(unkStruct_802C39C *mail)
 {
     sUnknown_203B300 = MemoryAlloc(sizeof(struct unkStruct_203B300), 8);
     sUnknown_203B300->mail = mail;
-    sub_801317C(&sUnknown_203B300->unk0);
+    ResetTouchScreenMenuInput(&sUnknown_203B300->unk0);
     sUnknown_203B300->unk10 = sUnknown_203B300->mail->unk0[0];
     sUnknown_203B300->unk14 = &sUnknown_203B300->unk18.id[sUnknown_203B300->unk10];
     RestoreSavedWindows(&sUnknown_203B300->unk18);

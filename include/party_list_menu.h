@@ -17,7 +17,7 @@ typedef struct unkStruct_203B2B8
     /* 0xC */ u32 id;
     /* 0x10 */ BulkItem item1;
     /* 0x14 */ BulkItem item2;
-    /* 0x18 */ PokemonStruct1 *pokeStruct;
+    /* 0x18 */ Pokemon *pokeStruct;
     /* 0x1C */ bool8 isTeamLeader;
     /* 0x20 */ u32 moveIndex;
     /* 0x24 */ u16 moveID;
@@ -35,7 +35,7 @@ typedef struct unkStruct_203B2B8
     WindowTemplates unk220;
 } unkStruct_203B2B8;
 
-bool8 CreatePartyListMenu(PokemonStruct1 *pokeStruct);
+bool8 CreatePartyListMenu(Pokemon *pokeStruct);
 u32 sub_8025F68(void);
 bool8 sub_802604C(void);
 void CleanPartyListMenu(void);

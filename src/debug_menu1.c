@@ -139,7 +139,7 @@ static void sub_803A3BC(void)
 
     item = ITEM_CHERI_BERRY;
     for (i = 0; i < 300; i++) {
-        PokemonStruct1 pokemon;
+        Pokemon pokemon;
         u16 moves[MAX_MON_MOVES];
         u8 buffer[20];
         DungeonLocation dungeonLoc = {.id = DUNGEON_MT_THUNDER_PEAK, .floor = 16};
@@ -150,8 +150,8 @@ static void sub_803A3BC(void)
         CopyMonsterNameToBuffer(buffer, speciesIndex);
         CopyStringtoBuffer(buffer, buffer);
         buffer[0] = '@';
-        sub_808CFD0(&pokemon, speciesIndex, buffer, item, &dungeonLoc, moves);
-        sub_808D1DC(&pokemon);
+        CreateLevel1Pokemon(&pokemon, speciesIndex, buffer, item, &dungeonLoc, moves);
+        TryAddPokemonToRecruited(&pokemon);
     }
 
     sp_0x80 = 0;

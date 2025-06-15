@@ -4,13 +4,13 @@
 #include "constants/friend_area.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_3.h"
 
 typedef struct WigglytuffShop1Work
 {
     /* 0x0 */ u8 friendAreas[NUM_FRIEND_AREAS];
     /* 0x3C */ u32 mode;
-    struct_Sub80095E4_2 s40;
+    MenuHeaderWindow s40;
 
 } WigglytuffShop1Work;
 

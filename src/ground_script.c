@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "ground_script.h"
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"
@@ -6,7 +7,7 @@
 #include "constants/monster.h"
 #include "constants/move_id.h"
 #include "code_8002774.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_8099360.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
@@ -14,7 +15,7 @@
 #include "code_8097670.h"
 #include "code_80A26CC.h"
 #include "debug.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
@@ -39,15 +40,15 @@
 #include "pokemon.h"
 #include "wigglytuff_shop1.h"
 #include "wonder_mail.h"
+#include "friend_area_dialogue.h"
 #include "structs/str_dungeon_setup.h"
 
 
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
 void GroundMap_GetStationScript(ScriptInfoSmall *out, s16, s32, s32);
-void GroundLives_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
-void GroundObject_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
-void GroundEffect_ExecuteScript(s32, s16 *, ScriptInfoSmall *);
+void GroundObject_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
+void GroundEffect_ExecuteScript(s32, ActionUnkIds *, ScriptInfoSmall *);
 void GroundLives_Select(s32, s32 group, s32 sector);
 void GroundObject_Select(s32, s32 group, s32 sector);
 void GroundEffect_Select(s32, s32 group, s32 sector);
@@ -114,7 +115,7 @@ void sub_80A87AC(s32, s32);
 void sub_80A8BD8(s16, s32*);
 u32 sub_80A8C2C();
 u32 GroundLives_IsStarterMon();
-PokemonStruct1 *sub_80A8D54(s16);
+Pokemon *sub_80A8D54(s16);
 s16 sub_80A8F9C(s32, PixelPos*);
 u32 sub_80A9050();
 u32 sub_80A9090();
@@ -127,12 +128,10 @@ void DeleteGroundLives(void);
 void DeleteGroundObjects(void);
 void DeleteGroundEffects(void);
 s32 ExecuteScriptCommand(Action *action);
-bool8 IsFanfareSEPlaying_1(u16 songIndex);
-bool8 IsEqualtoBGTrack(u16 songIndex);
 bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_8098DCC(u32 speed);
-extern const PixelPos gUnknown_81164DC;
+
 extern char *gUnknown_203B4B0;
 void sub_8099220(void *param_1, s32 param_2);
 s16 sub_8002694(u8 param_1); // value -> GroundEnter lookup
@@ -143,32 +142,6 @@ bool8 sub_809D234(void);
 s32 sub_80A14E8(Action *, u8, u32, s32);
 u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
 
-extern char gUnknown_81165D4[];
-extern char gUnknown_81165F4[];
-extern char gUnknown_811660C[];
-extern char gUnknown_8116628[];
-extern char gUnknown_8116644[];
-extern char gUnknown_8116664[];
-extern char gUnknown_8116684[];
-extern char gUnknown_81166C0[];
-extern char gUnknown_81166D8[];
-
-extern const CallbackData gGroundScriptTriggerCallbacks;
-extern DebugLocation gUnknown_81166B4;
-extern DebugLocation gUnknown_81166F8;
-extern DebugLocation gUnknown_8116704;
-extern ScriptCommand gUnknown_81164E4;
-
-extern const DebugLocation gUnknown_8116588;
-extern const DebugLocation gUnknown_8116538;
-extern const DebugLocation gUnknown_8116560;
-extern u8 gUnknown_8116594[];
-extern u8 gUnknown_8116544[];
-extern u8 gUnknown_811656C[];
-
-extern DebugLocation gUnknown_81165C8;
-
-extern void sub_809D520(void *);
 extern u8 GroundObjectsCancellAll(void);
 extern u8 GroundEffectsCancelAll(void);
 extern u8 GroundLivesCancelAll(void);
@@ -192,7 +165,6 @@ void sub_8096488(void);
 bool8 sub_80964B4(void);
 extern void nullsub_104(void);
 s16 sub_80A8C4C();
-s16 sub_80A90C8();
 bool8 sub_8097640();
 u8 sub_80964E4();
 s32 sub_80A8E9C();
@@ -200,20 +172,6 @@ u8 sub_80A8D20();
 bool8 sub_80A87E0();
 s16 sub_80A8BFC(s16);
 void sub_80A8F50(const u8 *buffer, s32, s32 size);
-
-extern const u8 *gFriendAreaDialogue[];
-extern struct unkStruct_808D144 gUnknown_8116710;
-extern struct unkStruct_808D144 gUnknown_8116760;
-extern struct unkStruct_808D144 gUnknown_8116794;
-extern struct unkStruct_808D144 gUnknown_81167BC;
-extern struct unkStruct_808D144 gUnknown_8116738;
-extern struct unkStruct_808D144 gUnknown_811681C;
-extern DungeonLocation gUnknown_81167E8;
-extern DungeonLocation gUnknown_8116788;
-extern DungeonLocation gUnknown_811678C;
-extern DungeonLocation gUnknown_8116790;
-
-PokemonStruct1 *sub_808D2E8(s32 species, u8 *name, u32 _itemID, DungeonLocation *location, u16 *moveID);
 bool8 HasRecruitedMon(s32 species);
 extern Item gUnknown_8116844;
 extern Item gUnknown_81167E4;
@@ -244,31 +202,62 @@ ALIGNED(4) EWRAM_DATA u8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
 ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
 EWRAM_DATA u32 gUnlockBranchLabels[SCRIPT_LOCKS_ARR_COUNT + 1] = {0};
 EWRAM_DATA MenuItem gChoices[9] = {0};
-EWRAM_DATA char gUnknown_2039D98[POKEMON_NAME_LENGTH + 2] = {0};
+static EWRAM_DATA char sPokeNameBuffer[POKEMON_NAME_LENGTH + 2] = {0};
 EWRAM_DATA u32 gUnknown_2039DA4 = 0;
 EWRAM_DATA u16 gUnknown_2039DA8 = 0;
 EWRAM_INIT static int sNumChoices = 0;
 
+static const CallbackData sNullCallbackData = {
+    .maybeId = 4,
+    .getIndex = NULL,
+    .getSize = NULL,
+    .getHitboxCenter = NULL,
+    .getPosHeightAndUnk = NULL,
+    .getDirection = NULL,
+    .getFlags = NULL,
+    .setHitboxPos = NULL,
+    .setPositionBounds = NULL,
+    .moveReal = NULL,
+    .setPosHeight = NULL,
+    .setDirection = NULL,
+    .setEventIndex = NULL,
+    .livesOnlyNullsub = NULL,
+    .func38 = NULL,
+    .setFlags = NULL,
+    .clearFlags = NULL,
+    .func44_livesOnlySpriteRelated = NULL,
+    .moveRelative = NULL,
+    .func4C_spriteRelatedCheck = NULL,
+    .func50_spriteRelated = NULL,
+};
+
+static const PixelPos sPixelPosZero = {0, 0};
+
+// TODO GET RID OF IT
+const u8 GroundScriptFile_Text[];
+
+static const ScriptCommand gUnknown_81164E4[] = {
+    {0xF6, 0, 0xC5, 0, 0, GroundScriptFile_Text},
+    {0xEF, 0, 0,    0, 0, NULL},
+};
+
+ALIGNED(4) const u8 GroundScriptFile_Text[] = "../ground/ground_script.c";
+
 // -1 didn't match
-void sub_809D520(void *a0)
+void sub_809D520(ActionUnkIds *a0)
 {
-    u16 *ptr = a0;
-    u16 v = 0xFFFF;
-    *ptr = v;
+    a0->unk0 = -1;
 }
 
-Action *sub_809D52C(void *a0)
+Action *sub_809D52C(ActionUnkIds *a0)
 {
-    s16 *ptr = a0;
-
-    switch (ptr[0])
-    {
-    case 0: return 0;
-    case 1: return sub_80A882C(ptr[1]);
-    case 2: return sub_80AC240(ptr[1]);
-    case 3: return sub_80AD158(ptr[1]);
+    switch (a0->unk0) {
+        case 0: return 0;
+        case 1: return sub_80A882C(a0->unk2);
+        case 2: return sub_80AC240(a0->unk2);
+        case 3: return sub_80AD158(a0->unk2);
     }
-    return 0;
+    return NULL;
 }
 
 void InitScriptData(ScriptData *a0)
@@ -324,12 +313,12 @@ void InitActionWithParams(Action *action, const CallbackData *callbacks, void *p
     action->parentObject = parent;
     action->group = group_s32;
     action->sector = sector_s32;
-    action->unk8[0] = callbacks->maybeId;
+    action->unk8.unk0 = callbacks->maybeId;
 
     if(callbacks->getIndex)
-        action->unk8[1] = callbacks->getIndex(parent);
+        action->unk8.unk2 = callbacks->getIndex(parent);
     else
-        action->unk8[1] = 0;
+        action->unk8.unk2 = 0;
 }
 
 void InitAction2(Action *action)
@@ -337,12 +326,12 @@ void InitAction2(Action *action)
     InitAction(action);
 }
 
-UNUSED s16 sub_809D654(Action *action)
+UNUSED static s16 sub_809D654(Action *action)
 {
     return action->scriptData.savedState;
 }
 
-UNUSED s16 sub_809D65C(Action *action)
+UNUSED static s16 sub_809D65C(Action *action)
 {
     if(action->scriptData.savedState != 0)
         return action->scriptData.state;
@@ -430,7 +419,7 @@ bool8 ActionResetScriptDataForDeletion(Action *param_1, DebugLocation *unused)
     return TRUE;
 }
 
-bool8 GroundScript_ExecutePP(Action *action, s32 *param_2, ScriptInfoSmall *param_3, const DebugLocation *unused)
+bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSmall *param_3, const DebugLocation *unused)
 {
     if ((param_3 == NULL) || (param_3->ptr == NULL)) {
         return FALSE;
@@ -448,30 +437,30 @@ bool8 GroundScript_ExecutePP(Action *action, s32 *param_2, ScriptInfoSmall *para
             break;
         case 5:
             if (action->scriptData.state != 2) {
-                // "execute script type error B" at ../ground/ground_script.c:688
-                FatalError(&gUnknown_8116538, gUnknown_8116544);
+                FATAL_ERROR_ARGS(GroundScriptFile_Text, 688, "execute script type error B");
             }
             if (action->scriptData2.state != -1) {
-                // "execute script type error C" at ../ground/ground_script.c:689
-                FatalError(&gUnknown_8116560, gUnknown_811656C);
+                FATAL_ERROR_ARGS(GroundScriptFile_Text, 689, "execute script type error C");
             }
             action->scriptData2 = action->scriptData;
             break;
         case 0:
-            if (action->scriptData.state != 1) goto _0809D84A;
-            action->scriptData2 = action->scriptData;
+            if (action->scriptData.state != 1) {
+                InitScriptData(&action->scriptData2);
+            }
+            else {
+                action->scriptData2 = action->scriptData;
+            }
             break;
         case 1:
-        _0809D84A:
             InitScriptData(&action->scriptData2);
             break;
         default:
-            // "execute script type error %d" at ../ground/ground_script.c:708
-            FatalError(&gUnknown_8116588, gUnknown_8116594, param_3->state);
+            FATAL_ERROR_ARGS(GroundScriptFile_Text, 708, "execute script type error %d", param_3->state);
     }
     InitScriptData(&action->scriptData);
     if (param_2 != NULL) {
-        action->unkC.raw = param_2[0];
+        action->unkC = *param_2;
     }
     else {
         sub_809D520(&action->unkC);
@@ -491,7 +480,7 @@ bool8 GroundScript_ExecutePP(Action *action, s32 *param_2, ScriptInfoSmall *para
     return TRUE;
 }
 
-bool8 ExecutePredefinedScript(Action *param_1, s32 *param_2, s16 index, DebugLocation *debug)
+bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, DebugLocation *debug)
 {
     ScriptInfoSmall auStack28;
 
@@ -520,7 +509,7 @@ u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
 bool8 GroundScript_Cancel(Action *r0)
 {
     // NOTE: Will always return TRUE
-    return ActionResetScriptDataForDeletion(r0, &gUnknown_81165C8);
+    return ActionResetScriptDataForDeletion(r0, DEBUG_LOC_PTR(GroundScriptFile_Text, 821, "GroundScript_Cancel"));
 }
 
 u8 GroundCancelAllEntities(void)
@@ -664,7 +653,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                         }
                         case 0xe1: case 0xe2: {
                             cmd = *action->scriptData.curPtr;
-                            if (IsFanfareSEPlaying_1(cmd.argShort)) {
+                            if (IsSoundPlaying(cmd.argShort)) {
                                 if (action->scriptData.unk2C++ < 3600) {
                                     loopContinue = FALSE;
                                 }
@@ -866,7 +855,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                         if (res >= 0) {
                                             flag = TRUE;
                                             sub_80A8FD8(res, &pos1);
-                                            pos2 = gUnknown_81164DC;
+                                            pos2 = sPixelPosZero;
                                         }
                                         break;
                                     }
@@ -883,7 +872,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                     action->callbacks->getSize(action->parentObject, &pos4);
                                     tmp2 = SizedDeltaDirection8(&pos3, &pos4, &pos1, &pos2);
                                     if (tmp2 == -1) {
-                                        tmp2 = SizedDeltaDirection4(&pos3, &gUnknown_81164DC, &pos1, &gUnknown_81164DC);
+                                        tmp2 = SizedDeltaDirection4(&pos3, &sPixelPosZero, &pos1, &sPixelPosZero);
                                     }
                                 }
                                 if (tmp2 == -1 || tmp2 == dir) {
@@ -1140,7 +1129,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 action->scriptData.savedState = 3;
                                 sub_80999FC(cmd.argShort);
                                 GroundMap_ExecuteEvent(0x70, 0);
-                                if (action->unk8[0] == 0) continue;
+                                if (action->unk8.unk0 == 0) continue;
                                 action->scriptData.script.ptr = ResolveJump(action, 1);
                                 break;
                             }
@@ -1172,10 +1161,10 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                             if (val == 1) {
                                 s32 id = (s16)cmd.arg1;
                                 if (id != -1) {
-                                    PokemonStruct1 *mon = sub_80A8D54(id);
+                                    Pokemon *mon = sub_80A8D54(id);
                                     s32 i;
                                     for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
-                                        mon->name[i] = gUnknown_2039D98[i];
+                                        mon->name[i] = sPokeNameBuffer[i];
                                     }
                                 }
                             }
@@ -1191,7 +1180,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 break;
                             }
                             if (val == 1) {
-                                SetRescueTeamName(gUnknown_2039D98);
+                                SetRescueTeamName(sPokeNameBuffer);
                             }
                             action->scriptData.script.ptr = ResolveJump(action, val);
                             action->scriptData.savedState = 3;
@@ -1211,7 +1200,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                         name[i] = '\0';
                                     }
 
-                                    CopyStringtoBuffer(gUnknown_2039D98, name);
+                                    CopyStringtoBuffer(sPokeNameBuffer, name);
                                     for (i = 0; i < 16; i++) {
                                         if (name[i] != ptr[i]) {
                                             val = 2;
@@ -1416,8 +1405,7 @@ s32 ExecuteScriptCommand(Action *action)
                 u32 argCopy = arg;
                 u32 byte = (u8)curCmd.argByte;
                 if (ScriptLoggingEnabled(TRUE)) {
-                    // "    ground select %3d[%s] %3d"
-                    Log(1, gUnknown_81165D4, arg, gGroundConversion_811BAF4[arg].text, byte);
+                    Log(1, "    ground select %3d[%s] %3d", arg, gGroundConversion_811BAF4[arg].text, byte);
                 }
                 GroundMainGroundRequest(argCopy, byte, curCmd.argShort);
                 break;
@@ -1426,8 +1414,7 @@ s32 ExecuteScriptCommand(Action *action)
                 s32 arg = (s16)curCmd.arg1;
                 if (arg == -1) arg = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
                 if (ScriptLoggingEnabled(TRUE)) {
-                    // "    dungeon select %3d"
-                    Log(1, gUnknown_81165F4, arg);
+                    Log(1, "    dungeon select %3d", arg);
                 }
                 if (arg != -1) {
                     GroundMainRescueRequest(arg, curCmd.argShort);
@@ -1490,7 +1477,7 @@ s32 ExecuteScriptCommand(Action *action)
                     SetScriptVarValue(NULL, DUNGEON_ENTER, tmp);
                 }
                 if (ScriptLoggingEnabled(TRUE)) {
-                    Log(1, gUnknown_811660C, tmp);
+                    Log(1, "    dungeon enter check %3d", tmp);
                 }
                 if (tmp != -1) {
                     action->scriptData.branchDiscriminant = 1;
@@ -1506,16 +1493,14 @@ s32 ExecuteScriptCommand(Action *action)
                     gUnknown_2039A32 = GetAdjustedGroundMap((s16)curCmd.arg1);
                     gUnknown_2039A34 = gUnknown_2039A32;
                     if (ScriptLoggingEnabled(TRUE)) {
-                        // "    map select %3d %3d[%s]"
-                        Log(1,gUnknown_8116628,gCurrentMap,gUnknown_2039A32,
+                        Log(1,"    map select %3d %3d[%s]",gCurrentMap,gUnknown_2039A32,
                             gGroundConversion_811BAF4[gCurrentMap].text);
                     }
                 } else {
                     gUnknown_2039A32 = gCurrentMap = curCmd.arg1;
                     gUnknown_2039A34 = curCmd.arg1;
                     if (ScriptLoggingEnabled(TRUE)) {
-                        // "    ground select %3d %3d[%s]"
-                        Log(1,gUnknown_8116644,gCurrentMap,gUnknown_2039A32,
+                        Log(1,"    ground select %3d %3d[%s]",gCurrentMap,gUnknown_2039A32,
                             gGroundConversion_811BAF4[gCurrentMap].text);
                     }
                 }
@@ -1540,8 +1525,7 @@ s32 ExecuteScriptCommand(Action *action)
                 tmp = GetDungeonInfo_80A2608((s16)curCmd.arg1);
                 gUnknown_2039A34 = gUnknown_2039A32 = gCurrentMap = (s16)curCmd.arg2;
                 if (ScriptLoggingEnabled(TRUE)) {
-                    // "    dungeon select %3d %3d[%s]"
-                    Log(1, gUnknown_8116664, gCurrentMap,gUnknown_2039A32,
+                    Log(1, "    dungeon select %3d %3d[%s]", gCurrentMap,gUnknown_2039A32,
                         gGroundConversion_811BAF4[gCurrentMap].text);
                 }
                 GroundSprite_Reset(gUnknown_2039A32);
@@ -1719,7 +1703,7 @@ s32 ExecuteScriptCommand(Action *action)
                 if (gUnknown_2039A34 != map) {
                     gUnknown_2039A34 = map;
                     GroundCancelAllEntities();
-                    if (action->unk8[0] != 0)
+                    if (action->unk8.unk0 != 0)
                         return 4; // Fatal?
                 }
                 break;
@@ -1733,8 +1717,7 @@ s32 ExecuteScriptCommand(Action *action)
                 if (!((u16)(a - 0x37) < 0x11) && (s16)sub_80A2750(a) == 1) {
                     if (thing == -1) {
                         if (ScriptLoggingEnabled(TRUE)) {
-                            // "    dungeon rescue select %3d"
-                            Log(1, gUnknown_8116684, a);
+                            Log(1, "    dungeon rescue select %3d", a);
                         }
                         GroundMainRescueRequest(a, -1);
                     } else {
@@ -1747,26 +1730,26 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x20: {
-                switch (action->unkC.arr[0]) {
+                switch (action->unkC.unk0) {
                     case 0:
                         GroundMap_ExecuteEvent(curCmd.argShort, 0);
                         break;
                     case 1: {
                         ScriptInfoSmall info1;
                         GetFunctionScript(action, &info1, curCmd.argShort);
-                        GroundLives_ExecuteScript(action->unkC.arr[1], action->unk8, &info1);
+                        GroundLives_ExecuteScript(action->unkC.unk2, &action->unk8, &info1);
                         break;
                     }
                     case 2: {
                         ScriptInfoSmall info2;
                         GetFunctionScript(action, &info2, curCmd.argShort);
-                        GroundObject_ExecuteScript(action->unkC.arr[1], action->unk8, &info2);
+                        GroundObject_ExecuteScript(action->unkC.unk2, &action->unk8, &info2);
                         break;
                     }
                     case 3: {
                         ScriptInfoSmall info3;
                         GetFunctionScript(action, &info3, curCmd.argShort);
-                        GroundEffect_ExecuteScript(action->unkC.arr[1], action->unk8, &info3);
+                        GroundEffect_ExecuteScript(action->unkC.unk2, &action->unk8, &info3);
                         break;
                     }
                 }
@@ -1789,11 +1772,11 @@ s32 ExecuteScriptCommand(Action *action)
                         sub_80A8FD8(ret, &pos3);
                         sub_80A8F9C(ret, &pos4);
                         if ((tmp = SizedDeltaDirection8(&pos3, &pos4, &pos1, &pos2)) != -1 ||
-                            (tmp = SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC)) != -1) {
+                            (tmp = SizedDeltaDirection4(&pos1, &sPixelPosZero, &pos3, &sPixelPosZero)) != -1) {
                             sub_80A9090(ret, tmp);
                         }
                     }
-                    GroundLives_ExecutePlayerScriptActionLives(action->unk8[1], ret);
+                    GroundLives_ExecutePlayerScriptActionLives(action->unk8.unk2, ret);
                     return 3;
                 }
                 break;
@@ -1869,30 +1852,30 @@ s32 ExecuteScriptCommand(Action *action)
                         break;
                     }
                     case 1: {
-                        sub_80A2500(curCmd.argShort, action->unk8);
+                        sub_80A2500(curCmd.argShort, &action->unk8);
                         break;
                     }
                     case 2: {
-                        sub_80A2500(curCmd.argShort, action->unkC.arr);
+                        sub_80A2500(curCmd.argShort, &action->unkC);
                         break;
                     }
                     case 3: {
-                        struct {s16 unk0; s16 unk2;} unk;
+                        ActionUnkIds unk;
                         unk.unk2 = sub_80A7AE8((s16)curCmd.arg1);
                         unk.unk0 = 1;
-                        sub_80A2500(curCmd.argShort, (void*)&unk);
+                        sub_80A2500(curCmd.argShort, &unk);
                         break;
                     }
                     case 4: {
-                        sub_80A252C(curCmd.argShort, action->unk8);
+                        sub_80A252C(curCmd.argShort, &action->unk8);
                         break;
                     }
                     case 5: {
-                        sub_80A252C(curCmd.argShort, action->unkC.arr);
+                        sub_80A252C(curCmd.argShort, &action->unkC);
                         break;
                     }
                     case 6: {
-                        struct {s16 unk0; s16 unk2;} unk;
+                        ActionUnkIds unk;
                         s16 res = sub_80A7AE8((s16)curCmd.arg1);
                         unk.unk2 = res;
                         if (unk.unk2 >= 0) {
@@ -1904,11 +1887,11 @@ s32 ExecuteScriptCommand(Action *action)
                         break;
                     }
                     case 7: {
-                        sub_80A2558(curCmd.argShort, action->unk8);
+                        sub_80A2558(curCmd.argShort, &action->unk8);
                         break;
                     }
                     case 8: {
-                        sub_80A2558(curCmd.argShort, action->unkC.arr);
+                        sub_80A2558(curCmd.argShort, &action->unkC);
                         break;
                     }
                     case 9: {
@@ -1991,36 +1974,36 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x3d: {
                 int i;
                 if ((s16)curCmd.arg1 != -1) {
-                    PokemonStruct1 *mon = sub_80A8D54(curCmd.arg1);
+                    Pokemon *mon = sub_80A8D54(curCmd.arg1);
                     if (mon != NULL) {
                         for (i = 0; i < POKEMON_NAME_LENGTH; i++) {
-                            gUnknown_2039D98[i] = mon->name[i];
+                            sPokeNameBuffer[i] = mon->name[i];
                         }
-                        gUnknown_2039D98[POKEMON_NAME_LENGTH] = 0;
-                        sub_809B1C0(4, 0, gUnknown_2039D98);
+                        sPokeNameBuffer[POKEMON_NAME_LENGTH] = 0;
+                        sub_809B1C0(4, 0, sPokeNameBuffer);
                         sub_80A87AC(0, 11);
                         return 2;
                     }
                     break;
                 } else {
-                    sub_809B1C0(4, 1, gUnknown_2039D98);
+                    sub_809B1C0(4, 1, sPokeNameBuffer);
                     sub_80A87AC(0, 11);
                     return 2;
                 }
             }
             case 0x3e: {
-                sub_80920B8(gUnknown_2039D98);
-                gUnknown_2039D98[10] = 0;
-                sub_809B1C0(5, 0, gUnknown_2039D98);
+                sub_80920B8(sPokeNameBuffer);
+                sPokeNameBuffer[10] = 0;
+                sub_809B1C0(5, 0, sPokeNameBuffer);
                 sub_80A87AC(0, 11);
                 return 2;
             }
             case 0x3f: {
                 int i;
                 for (i = 0; i < 12; i++) {
-                    gUnknown_2039D98[i] = 0;
+                    sPokeNameBuffer[i] = 0;
                 }
-                sub_809B1C0(6, (u8)curCmd.argByte, gUnknown_2039D98);
+                sub_809B1C0(6, (u8)curCmd.argByte, sPokeNameBuffer);
                 sub_80A87AC(0, 11);
                 return 2;
             }
@@ -2035,46 +2018,46 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x44: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
                 if (id != 999) {
-                    xxx_call_start_new_bgm((u16)id);
+                    StartNewBGM_((u16)id);
                 } else {
-                    xxx_call_stop_bgm();
+                    StopBGMusic();
                 }
                 break;
             }
             case 0x45: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
                 if (id != 999) {
-                    xxx_call_fade_in_new_bgm((u16)id, (u16)curCmd.argShort); //sub_8011900
+                    FadeInNewBGM_((u16)id, (u16)curCmd.argShort); //sub_8011900
                 } else {
-                    xxx_call_stop_bgm();
+                    StopBGMusic();
                 }
                 break;
             }
             case 0x46: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
                 if (id != 999) {
-                    xxx_call_queue_bgm((u16)id);
+                    QueueBGM_((u16)id);
                 }
                 break;
             }
             case 0x47: {
-                xxx_call_stop_bgm();
+                StopBGMusic();
                 break;
             }
             case 0x48: {
-                xxx_call_fade_out_bgm(curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
+                FadeOutBGM_(curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
                 break;
             }
             case 0x49: case 0x4c: {
-                xxx_call_play_fanfare_se((u16)curCmd.arg1, 256);
+                PlaySoundWithVolume((u16)curCmd.arg1, 256);
                 break;
             }
             case 0x4a: case 0x4d: {
-                xxx_call_stop_fanfare_se((u16)curCmd.arg1);
+                StopSound((u16)curCmd.arg1);
                 break;
             }
             case 0x4b: case 0x4e: {
-                xxx_call_fade_out_fanfare_se((u16)curCmd.arg1, curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
+                FadeOutSound((u16)curCmd.arg1, curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
                 break;
             }
             case 0x4f: {
@@ -2089,7 +2072,7 @@ s32 ExecuteScriptCommand(Action *action)
                 PixelPos pos;
                 s8 c;
                 {
-                    Action *tmp = (Action*)sub_809D52C(action->unkC.arr);
+                    Action *tmp = sub_809D52C(&action->unkC);
                     ptr = tmp;
                 }
                 if (ptr) {
@@ -2433,7 +2416,7 @@ s32 ExecuteScriptCommand(Action *action)
                         if (val >= 0) {
                             flag = TRUE;
                             sub_80A8FD8(val, &pos1);
-                            pos2 = gUnknown_81164DC;
+                            pos2 = sPixelPosZero;
                         }
                         break;
                     }
@@ -2455,7 +2438,7 @@ s32 ExecuteScriptCommand(Action *action)
 
                     tmp = -1;
                     if (dir == tmp) {
-                        dir = SizedDeltaDirection4(&pos3, &gUnknown_81164DC, &pos1, &gUnknown_81164DC);
+                        dir = SizedDeltaDirection4(&pos3, &sPixelPosZero, &pos1, &sPixelPosZero);
                     }
                     if (dir == tmp) {
                         action->callbacks->getDirection(action->parentObject, &dir);
@@ -2488,7 +2471,7 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0x98: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_809D170(1, id);
                         break;
@@ -2504,7 +2487,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x99: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D158(0, &unk);
@@ -2527,7 +2510,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x9b: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 if (id < 0) break;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_809D1A8(1, id, curCmd.argShort);
                         return 2;
@@ -2543,7 +2526,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x9c: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D190(0, &unk, curCmd.argShort);
@@ -2566,7 +2549,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x9e: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 if (id < 0) break;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_809D1E4(1, id, curCmd.argShort);
                         return 2;
@@ -2582,7 +2565,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x9f: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D1CC(0, &unk, curCmd.argShort);
@@ -2605,7 +2588,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0xa1: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 if (id < 0) break;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_809D220(1, id, curCmd.argShort);
                         return 2;
@@ -2621,7 +2604,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0xa2: {
                 s32 id = action->callbacks->getIndex(action->parentObject);
                 PixelPos unk;
-                switch(action->unk8[0]) {
+                switch(action->unk8.unk0) {
                     case 1:
                         sub_80A8FD8(id, &unk);
                         sub_809D208(0, &unk, curCmd.argShort);
@@ -2777,8 +2760,8 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0xbe: {
-                if (action->unk8[0] == 1) {
-                    if ((s8)GroundLives_IsStarterMon(action->unk8[1])) {
+                if (action->unk8.unk0 == 1) {
+                    if ((s8)GroundLives_IsStarterMon(action->unk8.unk2)) {
                         scriptData->script.ptr = FindLabel(action, (u8)curCmd.argByte);
                     }
                 }
@@ -2853,7 +2836,7 @@ s32 ExecuteScriptCommand(Action *action)
                             sub_80A8F9C(tmp, &pos4);
                             val = SizedDeltaDirection8(&pos1, &pos2, &pos3, &pos4);
                             if (val == -1) {
-                                val = SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC);
+                                val = SizedDeltaDirection4(&pos1, &sPixelPosZero, &pos3, &sPixelPosZero);
                             }
                         } else {
                             val = -1;
@@ -2867,9 +2850,9 @@ s32 ExecuteScriptCommand(Action *action)
                             action->callbacks->getHitboxCenter(action->parentObject, &pos1);
                             action->callbacks->getSize(action->parentObject, &pos2);
                             sub_80A8FD8(tmp, &pos3);
-                            val = SizedDeltaDirection8(&pos1, &pos2, &pos3, &gUnknown_81164DC);
+                            val = SizedDeltaDirection8(&pos1, &pos2, &pos3, &sPixelPosZero);
                             if (val == -1) {
-                                val = SizedDeltaDirection4(&pos1, &gUnknown_81164DC, &pos3, &gUnknown_81164DC);
+                                val = SizedDeltaDirection4(&pos1, &sPixelPosZero, &pos3, &sPixelPosZero);
                             }
                         } else {
                             val = -1;
@@ -2882,8 +2865,7 @@ s32 ExecuteScriptCommand(Action *action)
                     }
                     default: {
                         // The locdata says this is part of an inlined function... :/
-                        // "switch type error %d"
-                        FatalError(&gUnknown_81166B4, gUnknown_81166C0, curCmd.op);
+                        FATAL_ERROR_ARGS2(GroundScriptFile_Text, 4222, "_AnalyzeProcess", "switch type error %d", curCmd.op);
                     }
                 }
                 scriptData->script.ptr = ResolveJump(action, val);
@@ -2919,7 +2901,7 @@ s32 ExecuteScriptCommand(Action *action)
                         }
                     }
                 }
-                if (!out) out = gUnknown_81166D8; // ""
+                if (!out) out = "";
                 for (; scriptData->script.ptr->op == 0xd9; scriptData->script.ptr++) {
                     gChoices[sNumChoices].text = scriptData->script.ptr->argPtr;
                     gChoices[sNumChoices].menuAction = sNumChoices + 1;
@@ -3056,12 +3038,12 @@ s32 ExecuteScriptCommand(Action *action)
     }
 }
 
-UNUSED u32 sub_80A1440(s32 r0, s32 r1, s32 r2)
+UNUSED static u32 sub_80A1440(s32 r0, s32 r1, s32 r2)
 {
    return sub_80A14E8(NULL, r0, r1, r2);
 }
 
-UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0)
+UNUSED static bool8 GroundScript_ExecuteTrigger(s16 r0)
 {
     s32 ret;
     ScriptInfoSmall scriptInfo;
@@ -3072,20 +3054,29 @@ UNUSED bool8 GroundScript_ExecuteTrigger(s16 r0)
 
     if(ptr->type != 0xB)
         return FALSE;
-    InitActionWithParams(&action, &gGroundScriptTriggerCallbacks, NULL, 0, 0);
+    InitActionWithParams(&action, &sNullCallbackData, NULL, 0, 0);
     GetFunctionScript(NULL, &scriptInfo, r0);
-    GroundScript_ExecutePP(&action, NULL, &scriptInfo, &gUnknown_81166F8);
+    GroundScript_ExecutePP(&action, NULL, &scriptInfo, DEBUG_LOC_PTR(GroundScriptFile_Text, 4553, "GroundScript_ExecuteTrigger"));
 
     action.scriptData.savedScript = action.scriptData.script;
-    action.scriptData.savedScript.ptr = &gUnknown_81164E4;
-    action.scriptData.savedScript.ptr2 = &gUnknown_81164E4;
-    ret = HandleAction(&action, &gUnknown_8116704);
+    action.scriptData.savedScript.ptr = gUnknown_81164E4;
+    action.scriptData.savedScript.ptr2 = gUnknown_81164E4;
+    ret = HandleAction(&action, DEBUG_LOC_PTR(GroundScriptFile_Text, 4558, "GroundScript_ExecuteTrigger"));
     InitAction2(&action);
     if(ret == 0)
         return TRUE;
     else
         return FALSE;
 }
+
+extern struct StoryMonData gUnknown_8116794;
+extern struct StoryMonData gUnknown_81167BC;
+extern struct StoryMonData gUnknown_8116738;
+extern struct StoryMonData gUnknown_811681C;
+extern DungeonLocation gUnknown_81167E8;
+extern DungeonLocation gUnknown_8116788;
+extern DungeonLocation gUnknown_811678C;
+extern DungeonLocation gUnknown_8116790;
 
 s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 {
@@ -3132,21 +3123,20 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             break;
         case 0xA:
             {
-                s32 ret;
-                s32 ret2;
-                if ((action->unkC).arr[0] == 1)
+                if ((action->unkC).unk0 == 1)
                 {
                     u8 text[0x100];
                     DungeonLocation dungLocation;
-                    ret = sub_80A8C4C((action->unkC).arr[1], &dungLocation);
-                    if(ret != 0)
+                    s32 ret = sub_80A8C4C(action->unkC.unk2, &dungLocation);
+                    if (ret != 0)
                     {
+                        s32 dialogueId;
                         if (dungLocation.id == DUNGEON_HOWLING_FOREST_2 && ret == 0x104) {
                             return 2;
                         }
 
-                        ret2 = sub_80A90C8((action->unkC).arr[1]);
-                        InlineStrcpy(text, gFriendAreaDialogue[ret2]);
+                        dialogueId = GetFriendAreaDialogueId(action->unkC.unk2);
+                        InlineStrcpy(text, gFriendAreaDialogue[dialogueId]);
                         if (ScriptPrintText(0, 1, text) != 0)
                             return 1;
                     }
@@ -3187,11 +3177,11 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0xF:
             return sub_80964E4() == 0 ? 0 : 1;
         case 0x10:
-            if(action->unk8[0] == 1)
-                if(action->unk8[1] == 0)
-                    if(action->unkC.arr[0] == 1)
+            if(action->unk8.unk0 == 1)
+                if(action->unk8.unk2 == 0)
+                    if(action->unkC.unk0 == 1)
                     {
-                        if(sub_80A87E0(action->unk8[1], sub_80A8E9C(action->unkC.arr[1])) != 0)
+                        if(sub_80A87E0(action->unk8.unk2, sub_80A8E9C(action->unkC.unk2)) != 0)
                             return 1;
                     }
             return 0;
@@ -3208,7 +3198,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
         case 0x13:
             {
-                PokemonStruct1 *ptr;
+                Pokemon *ptr;
 
                 ptr = sub_80A8D54(r2);
                 if(ptr)
@@ -3216,8 +3206,8 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             return 0;
         case 0x14:
-            if(action->unk8[0] == 1)  {
-                if(GetCanMoveFlag(sub_80A8BFC(action->unk8[1])))
+            if(action->unk8.unk0 == 1)  {
+                if(GetCanMoveFlag(sub_80A8BFC(action->unk8.unk2)))
                     return 1;
             }
             return 0;
@@ -3245,7 +3235,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x16:
             {
                 s32 index;
-                PokemonStruct1 *ptr; ptr = sub_80A8D54(1);
+                Pokemon *ptr; ptr = sub_80A8D54(1);
                 if(ptr)
                 {
                     for(index = 0; index < POKEMON_NAME_LENGTH; index++)
@@ -3261,55 +3251,76 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             UnlockFriendArea(MIST_RISE_FOREST);
             return 0;
         case 0x18:
-            sub_80A8F50(gUnknown_2039D98, 0x3C, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x3C, POKEMON_NAME_LENGTH);
             return 0;
         case 0x19:
+            UnlockFriendArea(GetFriendArea(MONSTER_MAGNEMITE));
             {
-                struct unkStruct_808D144 sp_4;
-                PokemonStruct1 sp_2c;
-                PokemonStruct1 *ptr;
+                struct StoryMonData magnemiteData = {
+                    .name = sPokeNameBuffer,
+                    .speciesNum = MONSTER_MAGNEMITE,
+                    .itemID = ITEM_NOTHING,
+                    .dungeonLocation = {.id = DUNGEON_POKEMON_SQUARE_2, .floor = 0},
+                    .moveID = {MOVE_METAL_SOUND, MOVE_TACKLE, MOVE_THUNDERSHOCK, MOVE_NOTHING},
+                    .pokeHP = 38,
+                    .level = 6,
+                    .IQ = 1,
+                    .offenseAtk = {20, 18},
+                    .offenseDef = {20, 18},
+                    .currExp = 4560,
+                };
+                Pokemon magnemiteMon;
+                Pokemon *recruitPtr;
                 s32 index;
 
-
-                UnlockFriendArea(GetFriendArea(MONSTER_MAGNEMITE));
-                sp_4 = gUnknown_8116710;
-                sub_808D144(&sp_2c, &sp_4);
-                ptr = sub_808D1DC(&sp_2c);
-                if (ptr == NULL) return 1;
-                for(index = 0; index < POKEMON_NAME_LENGTH; index++)
-                {
-                    ptr->name[index] = gUnknown_2039D98[index];
+                ConvertStoryMonToPokemon(&magnemiteMon, &magnemiteData);
+                recruitPtr = TryAddPokemonToRecruited(&magnemiteMon);
+                if (recruitPtr == NULL)
+                    return 1;
+                for (index = 0; index < POKEMON_NAME_LENGTH; index++) {
+                    recruitPtr->name[index] = sPokeNameBuffer[index];
                 }
-                sub_80922B4(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
+                StrncpyCustom(gFormatBuffer_Names[r2], sPokeNameBuffer, POKEMON_NAME_LENGTH);
                 IncrementAdventureNumJoined();
                 return 0;
             }
             break;
-
         case 0x1A:
-            sub_80A8F50(gUnknown_2039D98, 0x53, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x53, POKEMON_NAME_LENGTH);
             return 0;
-
-         case 0x1B:
+        case 0x1B:
+             UnlockFriendArea(GetFriendArea(MONSTER_ABSOL));
              {
-                PokemonStruct1 *pokemon;
-                 struct unkStruct_808D144 sp_84;
-                 PokemonStruct1 sp_ac;
+                Pokemon *recruitPtr;
+                struct StoryMonData absolData = {
+                    .name = sPokeNameBuffer,
+                    .speciesNum = MONSTER_ABSOL,
+                    .itemID = ITEM_NOTHING,
+                    .dungeonLocation = {.id = DUNGEON_FROSTY_GROTTO_2, .floor = 0},
+                    .moveID = {MOVE_SCRATCH, MOVE_LEER, MOVE_TAUNT, MOVE_QUICK_ATTACK},
+                    .pokeHP = 80,
+                    .level = 20,
+                    .IQ = 1,
+                    .offenseAtk = {33, 32},
+                    .offenseDef = {31, 32},
+                    .currExp = 43000,
+                };
+                Pokemon absolMon;
 
-                UnlockFriendArea(GetFriendArea(MONSTER_ABSOL));
-                sp_84 = gUnknown_8116738;
-                sub_808D144(&sp_ac, &sp_84);
-                pokemon = sub_808D1DC(&sp_ac);
-                if(pokemon == NULL) return 1;
+                ConvertStoryMonToPokemon(&absolMon, &absolData);
+                recruitPtr = TryAddPokemonToRecruited(&absolMon);
+                if (recruitPtr == NULL)
+                    return 1;
                 IncrementAdventureNumJoined();
-                pokemon->unk0 |= FLAG_ON_TEAM;
+                recruitPtr->flags |= POKEMON_FLAG_ON_TEAM;
                 return 0;
              }
         case 0x1C:
             {
-                PokemonStruct1 *pokemon = sub_808D434(MONSTER_ABSOL, 0);
-                if(pokemon == NULL) return 1;
-                pokemon->unk0 |= FLAG_ON_TEAM;
+                Pokemon *pokemon = GetRecruitedMonBySpecies(MONSTER_ABSOL, 0);
+                if (pokemon == NULL)
+                    return 1;
+                pokemon->flags |= POKEMON_FLAG_ON_TEAM;
                 return 0;
             }
         case 0x1D:
@@ -3320,71 +3331,73 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                     return 0;
             }
         case 0x1E:
-             sub_80A8F50(gUnknown_2039D98, 0x7C, POKEMON_NAME_LENGTH);
+             sub_80A8F50(sPokeNameBuffer, 0x7C, POKEMON_NAME_LENGTH);
              return 0;
 
         case 0x1F:
             {
-                PokemonStruct1 *pokemon;
+                Pokemon *recruitPtr;
                 s32 index;
-                struct unkStruct_808D144 sp_108;
-                PokemonStruct1 sp_130;
+                struct StoryMonData smeargleData = {
+                    .name = sPokeNameBuffer,
+                    .speciesNum = MONSTER_SMEARGLE,
+                    .itemID = ITEM_NOTHING,
+                    .dungeonLocation = {.id = DUNGEON_HOWLING_FOREST_2, .floor = 0},
+                    .moveID = {MOVE_SKETCH, MOVE_NOTHING, MOVE_NOTHING, MOVE_NOTHING},
+                    .pokeHP = 47,
+                    .level = 5,
+                    .IQ = 1,
+                    .offenseAtk = {16, 20},
+                    .offenseDef = {20, 16},
+                    .currExp = 1600,
+                };
+                Pokemon smeargleMon;
 
-                sp_108 = gUnknown_8116760;
-                sub_808D144(&sp_130, &sp_108);
-                pokemon = sub_808D1DC(&sp_130);
-                if(!pokemon) return 1;
-                for(index = 0; index < POKEMON_NAME_LENGTH; index++)
-                {
-                    pokemon->name[index] = gUnknown_2039D98[index];
+                ConvertStoryMonToPokemon(&smeargleMon, &smeargleData);
+                recruitPtr = TryAddPokemonToRecruited(&smeargleMon);
+                if (!recruitPtr)
+                    return 1;
+                for (index = 0; index < POKEMON_NAME_LENGTH; index++) {
+                    recruitPtr->name[index] = sPokeNameBuffer[index];
                 }
-                sub_80922B4(gFormatBuffer_Names[r2], gUnknown_2039D98, POKEMON_NAME_LENGTH);
+                StrncpyCustom(gFormatBuffer_Names[r2], sPokeNameBuffer, POKEMON_NAME_LENGTH);
                 IncrementAdventureNumJoined();
                 return 0;
-
             }
             break;
-
         case 0x20:
-            {
-                sub_80026E8(0x9E, 0x1);
-                if(sub_808D434(MONSTER_ZAPDOS, 0) == NULL)
-                {
-                    if(sub_808D2E8(MONSTER_ZAPDOS, NULL, ITEM_NOTHING, &gUnknown_8116788, NULL))
-                        IncrementAdventureNumJoined();
-                }
-                if(sub_808D434(MONSTER_MOLTRES, 0) == NULL)
-                {
-                    if(sub_808D2E8(MONSTER_MOLTRES, NULL, ITEM_NOTHING, &gUnknown_811678C, NULL))
-                        IncrementAdventureNumJoined();
-                }
-                if(sub_808D434(MONSTER_ARTICUNO, 0) == NULL)
-                {
-                    if(sub_808D2E8(MONSTER_ARTICUNO, NULL, ITEM_NOTHING, &gUnknown_8116790, NULL))
-                        IncrementAdventureNumJoined();
-                }
-                return 0;
+            sub_80026E8(0x9E, 0x1);
+            if (GetRecruitedMonBySpecies(MONSTER_ZAPDOS, 0) == NULL) {
+                static const DungeonLocation zapdosLoc = {.id = DUNGEON_MT_THUNDER_PEAK, .floor = 99};
+                if (TryAddLevel1PokemonToRecruited(MONSTER_ZAPDOS, NULL, ITEM_NOTHING, &zapdosLoc, NULL))
+                    IncrementAdventureNumJoined();
             }
-            break;
-
-
+            if (GetRecruitedMonBySpecies(MONSTER_MOLTRES, 0) == NULL) {
+                static const DungeonLocation moltresLoc = {.id = DUNGEON_MT_BLAZE_PEAK, .floor = 99};
+                if (TryAddLevel1PokemonToRecruited(MONSTER_MOLTRES, NULL, ITEM_NOTHING, &moltresLoc, NULL))
+                    IncrementAdventureNumJoined();
+            }
+            if (GetRecruitedMonBySpecies(MONSTER_ARTICUNO, 0) == NULL) {
+                static const DungeonLocation articunoLoc = {.id = DUNGEON_FROSTY_GROTTO, .floor = 99};
+                if (TryAddLevel1PokemonToRecruited(MONSTER_ARTICUNO, NULL, ITEM_NOTHING, &articunoLoc, NULL))
+                    IncrementAdventureNumJoined();
+            }
+            return 0;
         case 0x21:
-            if(HasRecruitedMon(MONSTER_ARTICUNO))
-                if(HasRecruitedMon(MONSTER_ZAPDOS))
-                    if(HasRecruitedMon(MONSTER_MOLTRES))
-                        return 1;
+            if (HasRecruitedMon(MONSTER_ARTICUNO) && HasRecruitedMon(MONSTER_ZAPDOS) && HasRecruitedMon(MONSTER_MOLTRES))
+                return 1;
             return 0;
         case 0x22:
             {
-                PokemonStruct1 *pokemon = GetPlayerPokemonStruct();
+                Pokemon *pokemon = GetPlayerPokemonStruct();
 
-                if(pokemon->speciesNum != MONSTER_ARTICUNO && pokemon->speciesNum != MONSTER_ZAPDOS && pokemon->speciesNum != MONSTER_MOLTRES)
+                if (pokemon->speciesNum != MONSTER_ARTICUNO && pokemon->speciesNum != MONSTER_ZAPDOS && pokemon->speciesNum != MONSTER_MOLTRES)
                     return 1;
             }
             return 0;
          case 0x23:
             {
-                PokemonStruct1 *pokemon;
+                Pokemon *pokemon;
                 pokemon = GetPlayerPokemonStruct();
                 if (pokemon != NULL && pokemon->speciesNum == MONSTER_HO_OH)
                     return 2;
@@ -3393,25 +3406,36 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             return 0;
         case 0x24:
-            sub_80A8F50(gUnknown_2039D98, 0x79, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x79, POKEMON_NAME_LENGTH);
             return 0;
 
         case 0x25:
+            if (!GetFriendAreaStatus(GetFriendArea(MONSTER_LATIOS)))
+                UnlockFriendArea(GetFriendArea(MONSTER_LATIOS));
             {
-                PokemonStruct1 *pokemon;
+                Pokemon *recruitPtr;
                 s32 index;
-                struct unkStruct_808D144 sp_188;
-                PokemonStruct1 sp_1b0;
+                struct StoryMonData latiosData = {
+                    .name = sPokeNameBuffer,
+                    .speciesNum = MONSTER_LATIOS,
+                    .itemID = ITEM_NOTHING,
+                    .dungeonLocation = {.id = DUNGEON_POKEMON_SQUARE, .floor = 0},
+                    .moveID = {MOVE_PSYWAVE, MOVE_MEMENTO, MOVE_HELPING_HAND, MOVE_SAFEGUARD},
+                    .pokeHP = 125,
+                    .level = 30,
+                    .IQ = 1,
+                    .offenseAtk = {60, 59},
+                    .offenseDef = {42, 44},
+                    .currExp = 273400,
+                };
+                Pokemon latiosMon;
 
-                if(!GetFriendAreaStatus(GetFriendArea(MONSTER_LATIOS)))
-                    UnlockFriendArea(GetFriendArea(MONSTER_LATIOS));
-                sp_188 = gUnknown_8116794;
-                sub_808D144(&sp_1b0, &sp_188);
-                pokemon = sub_808D1DC(&sp_1b0);
-                if(pokemon == NULL) return 1;
-                for(index = 0; index < POKEMON_NAME_LENGTH; index++)
-                {
-                    pokemon->name[index] = gUnknown_2039D98[index];
+                ConvertStoryMonToPokemon(&latiosMon, &latiosData);
+                recruitPtr = TryAddPokemonToRecruited(&latiosMon);
+                if (recruitPtr == NULL)
+                    return 1;
+                for (index = 0; index < POKEMON_NAME_LENGTH; index++) {
+                    recruitPtr->name[index] = sPokeNameBuffer[index];
                 }
                 IncrementAdventureNumJoined();
                 return 0;
@@ -3419,22 +3443,22 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
             break;
         case 0x26:
-            sub_80A8F50(gUnknown_2039D98, 0x7A, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x7A, POKEMON_NAME_LENGTH);
             return 0;
         case 0x27:
             {
-                PokemonStruct1 *pokemon;
+                Pokemon *pokemon;
                 s32 index;
-                struct unkStruct_808D144 sp_208;
-                PokemonStruct1 sp_230;
+                struct StoryMonData sp_208;
+                Pokemon sp_230;
 
                 sp_208 = gUnknown_81167BC;
-                sub_808D144(&sp_230, &sp_208);
-                pokemon = sub_808D1DC(&sp_230);
+                ConvertStoryMonToPokemon(&sp_230, &sp_208);
+                pokemon = TryAddPokemonToRecruited(&sp_230);
                 if(pokemon == NULL) return 1;
                 for(index = 0; index < POKEMON_NAME_LENGTH; index++)
                 {
-                    pokemon->name[index] = gUnknown_2039D98[index];
+                    pokemon->name[index] = sPokeNameBuffer[index];
                 }
                 IncrementAdventureNumJoined();
                 return 0;
@@ -3548,11 +3572,11 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             break;
         case 0x2B:
-            sub_80A8F50(gUnknown_2039D98, 0x20, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x20, POKEMON_NAME_LENGTH);
             return 0;
         case 0x2C:
             {
-                PokemonStruct1 *pokemon;
+                Pokemon *pokemon;
                 s32 index;
                   if(r2 != 0)
                   {
@@ -3564,12 +3588,12 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
                     if(!GetFriendAreaStatus(GetFriendArea(id)))
                         UnlockFriendArea(GetFriendArea(id));
-                    pokemon = sub_808D2E8(matchMe, NULL ,ITEM_NOTHING, &gUnknown_81167E8, MOVE_NOTHING);
+                    pokemon = TryAddLevel1PokemonToRecruited(matchMe, NULL ,ITEM_NOTHING, &gUnknown_81167E8, MOVE_NOTHING);
                     if(pokemon == NULL)
                         return 0;
 
                     for(index = 0; index < POKEMON_NAME_LENGTH; index++)
-                        pokemon->name[index] = gUnknown_2039D98[index];
+                        pokemon->name[index] = sPokeNameBuffer[index];
                     IncrementAdventureNumJoined();
                     return 1;
                   }
@@ -3615,16 +3639,16 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             break;
         case 0x31:
-            sub_80A8F50(gUnknown_2039D98, 0x52, POKEMON_NAME_LENGTH);
+            sub_80A8F50(sPokeNameBuffer, 0x52, POKEMON_NAME_LENGTH);
             return 0;
 
         case 0x32:
             {
-                struct unkStruct_808D144 sp_288;
-                PokemonStruct1 sp_2b0;
+                struct StoryMonData sp_288;
+                Pokemon sp_2b0;
                 sp_288 = gUnknown_811681C;
-                sub_808D144(&sp_2b0, &sp_288);
-                if(sub_808D1DC(&sp_2b0) == 0) {
+                ConvertStoryMonToPokemon(&sp_2b0, &sp_288);
+                if(TryAddPokemonToRecruited(&sp_2b0) == 0) {
                     return 1;
                 }
                 else {
@@ -3676,7 +3700,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
         case 0x35:
             {
-                PokemonStruct1 *pokemon = GetPlayerPokemonStruct();
+                Pokemon *pokemon = GetPlayerPokemonStruct();
                 if(pokemon != NULL && pokemon->speciesNum == MONSTER_CHANSEY)
                     return 2;
                 else
@@ -3841,7 +3865,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x44:
             if (gUnknown_2039DA8 != STOP_BGM)
             {
-                xxx_call_start_new_bgm(gUnknown_2039DA8);
+                StartNewBGM_(gUnknown_2039DA8);
                 gUnknown_2039DA8 = STOP_BGM;
                 return 1;
             }
@@ -3849,7 +3873,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x45:
             if (gUnknown_2039DA8 != STOP_BGM)
             {
-                xxx_call_fade_in_new_bgm(gUnknown_2039DA8, r2);
+                FadeInNewBGM_(gUnknown_2039DA8, r2);
                 gUnknown_2039DA8 = STOP_BGM;
                 return 1;
             }
@@ -3857,7 +3881,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x46:
             if (gUnknown_2039DA8 != STOP_BGM)
             {
-                xxx_call_queue_bgm(gUnknown_2039DA8);
+                QueueBGM_(gUnknown_2039DA8);
                 gUnknown_2039DA8 = STOP_BGM;
                 return 1;
             }

@@ -3,7 +3,7 @@
 #include "constants/input.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "event_flag.h"
 #include "game_options.h"
 #include "input.h"
@@ -16,51 +16,20 @@
 #include "text_2.h"
 #include "text_3.h"
 
-#include "data/code_80140DC.h"
-
-void sub_80140DC(void)
+static const MenuItem sYesNoMenuItems[] =
 {
-    DungeonPos pos;
+        {_("*Yes"), 1},
+        {_("No"), 0},
+        {NULL, -1}
+};
 
-    pos.x = 200;
-    pos.y = 128;
-    SetSavingIconCoords(&pos);
-    sub_8011830();
-}
-
-void sub_80140F8(void)
+static const MenuItem sYesNoMenuItems_DefaultNo[] =
 {
-    DungeonPos pos;
+        {_("Yes"), 1},
+        {_("*No"), 0},
+        {NULL, -1}
+};
 
-    pos.x = 188;
-    pos.y = 64;
-    SetSavingIconCoords(&pos);
-    sub_8011830();
-}
-
-void sub_8014114(void) {
-    xxx_call_start_bg_music();
-    SetSavingIconCoords(NULL);
-}
-
-void nullsub_201(void) {}
-
-u32 sub_8014128(void) {
-    if(GetMenuInput() == INPUT_B_BUTTON) return 0;
-    else return 1;
-}
-
-u32 sub_801413C(void)
-{
-    return 0;
-}
-
-u32 sub_8014140(void)
-{
-    return 0;
-}
-
-// This kinda looks like the 'true' beginning of the file
 static const u32 gUnknown_80D48A0[] = {0x7, 0x2, 0x2};
 static const WindowTemplate gUnknown_80D48AC = {
     0x00,
@@ -90,7 +59,6 @@ static const WindowTemplate gUnknown_80D48DC = {
 
 extern void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2);
 extern void sub_80073E0(s32 a0);
-extern void sub_8011A04(void);
 
 static void sub_8014A88(void);
 static bool8 sub_8014B94(void);
@@ -147,7 +115,7 @@ struct NeverWrittenToStruct202EC20
 static EWRAM_DATA struct NeverWrittenToStruct202EC20 *sNeverWrittenToUnknownStructPtr = NULL;
 static UNUSED EWRAM_DATA u8 sUnusedEwram1[4] = {0};
 
-static EWRAM_DATA MenuInputStructSub gUnknown_202EC28 = {0};
+static EWRAM_DATA TouchScreenMenuInput sDialogueMenuTouchScreenInput = {0};
 
 static EWRAM_INIT WindowTemplates sUnknown_203B198 = {
     .id = {
@@ -204,12 +172,12 @@ void CreateDialogueBoxAndPortrait(const u8 *text, void *param_2, MonPortraitMsg 
 
 void CreateYesNoDialogueBoxAndPortrait_DefaultYes(const u8 *text, MonPortraitMsg *monPortraitPtr, u16 flags)
 {
-    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D485C, NULL, 3, 0, monPortraitPtr, flags | 0x300);
+    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, sYesNoMenuItems, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
 void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, MonPortraitMsg *monPortraitPtr, u16 flags)
 {
-    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, gUnknown_80D4880, NULL, 3, 0, monPortraitPtr, flags | 0x300);
+    CreateMenuDialogueBoxAndPortrait(text, NULL, -1, sYesNoMenuItems_DefaultNo, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
 // arm9.bin::0201D700
@@ -224,7 +192,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     sDialogueMenuItems = menuItems;
     gUnknown_202EC18 = arg_0;
     gUnknown_202EC1C = r9;
-    sub_801317C(&gUnknown_202EC28);
+    ResetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput);
     if (flags & 0x10) {
         sUnknown_203B198.id[0] = gUnknown_80D48DC;
     }
@@ -261,7 +229,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     sUnknown_203B198.id[3] = gUnknown_80D48AC;
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B198, TRUE, TRUE);
-    gUnknown_202E748.unk0 = 4;
+    gUnknown_202E748.x = 4;
     gUnknown_202E748.unk2 = 4;
     gUnknown_202E748.unk8 = 0x70;
     gUnknown_202E748.unkA = (gWindows[0].y * 8) + 34;
@@ -360,7 +328,7 @@ void DrawDialogueBoxString(void)
                      }
 
                      if (*str == '\r' || *str == '\n') {
-                        gUnknown_202E748.unk0 = 4;
+                        gUnknown_202E748.x = 4;
                         gUnknown_202E748.unk2 += 11;
                         str++;
                      }
@@ -368,7 +336,7 @@ void DrawDialogueBoxString(void)
                         u32 chr;
 
                         str = xxx_get_next_char_from_string(str, &chr);
-                        gUnknown_202E748.unk0 += DrawCharOnWindow(gUnknown_202E748.unk0, gUnknown_202E748.unk2, chr, gUnknown_202E748.unk10, 0);
+                        gUnknown_202E748.x += DrawCharOnWindow(gUnknown_202E748.x, gUnknown_202E748.unk2, chr, gUnknown_202E748.unk10, 0);
                         gUnknown_202E748.unk2C = gUnknown_202E78C;
                      }
 
@@ -389,7 +357,7 @@ void DrawDialogueBoxString(void)
                 }
                 sub_80073E0(0);
                 gUnknown_202E794 = str;
-                sub_801317C(&gUnknown_202EC28);
+                ResetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput);
                 if (gUnknown_202E794[0] == '\0') {
                     if (sDialogueMenuItems != NULL) {
                         gUnknown_202E744 = 3;
@@ -460,14 +428,12 @@ void DrawDialogueBoxString(void)
             case 9: {
                 bool8 buttonPress = FALSE;
                 gUnknown_202E748.unk20 = 0;
-                nullsub_34(&gUnknown_202EC28, 0);
+                GetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput, 0);
                 if (!(sUnknownTextFlags & 1)) {
                     buttonPress = TRUE;
                 }
-                else
-                {
-                    if (sUnknownTextFlags & 2)
-                    {
+                else {
+                    if (sUnknownTextFlags & 2) {
                         if (gUnknown_202E780 > 0) {
                             gUnknown_202E780--;
                         }
@@ -475,13 +441,13 @@ void DrawDialogueBoxString(void)
                             buttonPress = TRUE;
                         }
                     }
-                    else if (gRealInputs.pressed & AB_BUTTONS || gUnknown_202EC28.a_button) {
+                    else if (gRealInputs.pressed & AB_BUTTONS || sDialogueMenuTouchScreenInput.a_button) {
                         buttonPress = TRUE;
                     }
                     else if ((gRealInputs.held & (DPAD_ANY | B_BUTTON)) == B_BUTTON) {
                         buttonPress = TRUE;
                     }
-                    else if (gUnknown_202EC28.unk5) {
+                    else if (sDialogueMenuTouchScreenInput.unk5) {
                         buttonPress = TRUE;
                     }
                 }
@@ -521,7 +487,7 @@ void DrawDialogueBoxString(void)
                         gUnknown_202E744 = 11;
                     }
                     else if (gUnknown_202E744 == 8) {
-                        gUnknown_202E748.unk0 = 4;
+                        gUnknown_202E748.x = 4;
                         if (gUnknown_202E748.unk2 > 34) {
                             gUnknown_202E748.unk2 = 4;
                             if (sUnknownTextFlags & 0x10) {
@@ -611,7 +577,7 @@ static void sub_8014A88(void)
 
         r5 += 12;
         FormatString(menuItem->text, text, text + sizeof(text), 0);
-        val = sub_8008ED0(text);
+        val = GetStringLineWidth(text);
         if (r7 < val) {
             r7 = val;
         }
@@ -717,7 +683,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
                 case 'm':
                     str++;
                     if (*str == 'm') {
-                        PokemonStruct1 *monStruct = sub_808D3BC();
+                        Pokemon *monStruct = sub_808D3BC();
                         txtPtr = sFormatBuffer_UnknownMonster;
                         PrintColoredPokeNameToBuffer(sFormatBuffer_UnknownMonster, monStruct, 0);
                     }
@@ -866,5 +832,3 @@ void PrintFormattedStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u3
     formattedString[FORMAT_STR_MAX_LEN - 1] = '\0';
     PrintStringOnWindow2(x, y, formattedString, windowId, terminatingChr, lineSpacing);
 }
-
-//

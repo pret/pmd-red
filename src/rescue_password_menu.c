@@ -3,7 +3,7 @@
 #include "constants/main_menu.h"
 #include "code_803D0D8.h"
 #include "code_8094F88.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "input.h"
 #include "items.h"
 #include "main_menu1.h"

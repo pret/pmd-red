@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "menu_input.h"
 #include "string_format.h"
 #include "memory.h"
 #include "quick_save_write.h"

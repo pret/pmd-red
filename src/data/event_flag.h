@@ -1,15 +1,4 @@
-struct LocalScriptVarInfo
-{
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    s16 unk8;
-    s16 unkA;
-    const u8 *text;
-};
-
-const struct LocalScriptVarInfo sLocalScriptVarInfo[4] = {
+static const struct ScriptVarInfo sLocalScriptVarInfo[4] = {
     5, 7, 0, 0, 1, 0, "LOCAL0",
     5, 7, 2, 0, 1, 0, "LOCAL1",
     5, 7, 4, 0, 1, 0, "LOCAL2",
@@ -22,10 +11,8 @@ struct unkStruct_80B6D90
     s32 num;
 };
 
-const u8 gUnknown_80B7144[];
-
 const struct unkStruct_80B6D90 gUnknown_80B6D90[59] = {
-    {gUnknown_80B7144, 0},
+    {"NONE", 0},
     {"M00E01A", -1},
     {"M01E01A", -1},
     {"M01E02A", -1},
@@ -85,8 +72,6 @@ const struct unkStruct_80B6D90 gUnknown_80B6D90[59] = {
     {"NEXT DAY", -1},
     {"DEBUG GROUND", -1},
 };
-
-ALIGNED(4) const u8 gUnknown_80B7144[] = "NONE";
 
 const u8 *const gUnknown_80B714C[10] = {
     "2-1",

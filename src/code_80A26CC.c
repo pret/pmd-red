@@ -17,30 +17,30 @@ extern void sub_809AC18(s32, s32);
 
 s16 sub_80A8BBC(s16);
 
-void sub_80A2500(s32 param_1, s16 *param_2)
+void sub_80A2500(s32 param_1, ActionUnkIds *param_2)
 {
     s16 temp;
-    if (*param_2 == 1) {
+    if (param_2->unk0 == 1) {
         temp = param_1;
-        sub_809AB4C(temp, sub_80A8BBC(param_2[1]));
+        sub_809AB4C(temp, sub_80A8BBC(param_2->unk2));
     }
 }
 
-void sub_80A252C(s32 param_1, s16 *param_2)
+void sub_80A252C(s32 param_1, ActionUnkIds *param_2)
 {
     s16 temp;
-    if (*param_2 == 1) {
+    if (param_2->unk0 == 1) {
         temp = param_1;
-        sub_809ABB4(temp, sub_80A8BBC(param_2[1]));
+        sub_809ABB4(temp, sub_80A8BBC(param_2->unk2));
     }
 }
 
-void sub_80A2558(s32 param_1, s16 *param_2)
+void sub_80A2558(s32 param_1, ActionUnkIds *param_2)
 {
     s16 temp;
-    if (*param_2 == 1) {
+    if (param_2->unk0 == 1) {
         temp = param_1;
-        sub_809AC18(temp, sub_80A8BBC(param_2[1]));
+        sub_809AC18(temp, sub_80A8BBC(param_2->unk2));
     }
 }
 

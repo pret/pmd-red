@@ -11,7 +11,7 @@ struct IQSkillMenu
 {
     /* 0x0 */ u32 state;
     /* 0x4 */ s16 species;
-    /* 0x8 */ PokemonStruct1 *pokeStruct;
+    /* 0x8 */ Pokemon *pokeStruct;
     /* 0xC */ u8 iqSkills[NUM_IQ_SKILLS];
     /* 0x24 */ u32 menuIndex;
     /* 0x28 */ u8 iqSkillIndex;

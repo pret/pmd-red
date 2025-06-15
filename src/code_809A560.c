@@ -4,7 +4,7 @@
 #include "structs/str_3001B64.h"
 #include "code_800558C.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801D014.h"
 #include "code_8099360.h"
 #include "credits2.h"
@@ -28,6 +28,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
+#include "text_3.h"
 #include "wigglytuff_shop1.h"
 #include "wigglytuff_shop3.h"
 #include "wonder_mail.h"
@@ -47,9 +48,9 @@ void sub_809A62C(void);
 void sub_809A7EC(void);
 void sub_809A83C(s16 index);
 extern void sub_80A8EC0(u8 *, u32);
-PokemonStruct1 *sub_808D3BC(void);
-PokemonStruct1 *sub_808D3F8(void);
-PokemonStruct1 *sub_80A8D54(s16);
+Pokemon *sub_808D3BC(void);
+Pokemon *sub_808D3F8(void);
+Pokemon *sub_80A8D54(s16);
 void sub_80A7DDC(s16 *, s16*);
 u8 IsStarterMonster(s16);
 s16 sub_80A8BFC(s32);
@@ -332,7 +333,7 @@ bool8 sub_809A8B8(s32 param_1, s32 param_2)
 
     sub_80A7DDC(&local_28,&local_26);
     if (local_28 >= 10 && local_28 <= 29) {
-        PokemonStruct1 *pPVar6 = sub_80A8D54(local_28);
+        Pokemon *pPVar6 = sub_80A8D54(local_28);
         if (pPVar6 == NULL) {
             uVar9 = '\0';
         }

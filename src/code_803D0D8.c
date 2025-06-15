@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "structs/str_wonder_mail.h"
 #include "code_803D0D8.h"
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "memory.h"
