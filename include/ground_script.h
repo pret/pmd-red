@@ -25,6 +25,7 @@ static inline void SetUnkInGroundEvent(const CompactPos *posPtr, PixelPos *dst)
 
 #include "debug.h"
 
+void sub_809D4B0(void);
 void InitScriptData(ScriptData *a0);
 u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2);
 void InitAction2(Action *action);
@@ -35,8 +36,5 @@ bool8 ActionResetScriptData(Action *param_1, const DebugLocation *unused);
 bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSmall *param_3, const DebugLocation *unused);
 bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, DebugLocation *debug);
 void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s32 group, s32 sector);
-
-// For gScriptLocks, gScriptLockConds, gUnlockBranchLabels
-#define SCRIPT_LOCKS_ARR_COUNT 129
 
 #endif // GUARD_GROUND_SCRIPT_H

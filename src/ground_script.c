@@ -43,6 +43,7 @@
 #include "wonder_mail.h"
 #include "palette_util.h"
 #include "pokemon_3.h"
+#include "memory.h"
 #include "friend_area_dialogue.h"
 #include "structs/str_dungeon_setup.h"
 #include "ground_map_conversion_table.h"
@@ -129,7 +130,6 @@ bool8 sub_8099B94(void);
 PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_8098DCC(u32 speed);
 
-extern char *gUnknown_203B4B0;
 void sub_8099220(void *param_1, s32 param_2);
 s16 sub_8002694(u8 param_1); // value -> GroundEnter lookup
 bool8 sub_809B260(void *dst);
@@ -184,19 +184,24 @@ void sub_80A59A0(s32, s32 *, u16);
 s32 sub_809CFE8(u16 param_1);
 extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
-EWRAM_DATA s16 gCurrentMap = 0;
-EWRAM_DATA s16 gUnknown_2039A32 = 0;
-EWRAM_DATA s16 gUnknown_2039A34 = 0;
-EWRAM_DATA u8 gAnyScriptLocked = 0;
+// For gScriptLocks, gScriptLockConds, gUnlockBranchLabels
+#define SCRIPT_LOCKS_ARR_COUNT 129
+
+static EWRAM_DATA s16 gCurrentMap = 0;
+static EWRAM_DATA s16 gUnknown_2039A32 = 0;
+static EWRAM_DATA s16 gUnknown_2039A34 = 0;
+static EWRAM_DATA u8 gAnyScriptLocked = 0;
 // Hard to say why the arrays are larger than SCRIPT_LOCKS_ARR_COUNT. Could be unused EWRAM variables or special case indexes.
-ALIGNED(4) EWRAM_DATA u8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
-ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
-EWRAM_DATA u32 gUnlockBranchLabels[SCRIPT_LOCKS_ARR_COUNT + 1] = {0};
+static ALIGNED(4) EWRAM_DATA u8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
+static ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
+static EWRAM_DATA u32 gUnlockBranchLabels[SCRIPT_LOCKS_ARR_COUNT + 1] = {0};
 static EWRAM_DATA MenuItem gChoices[9] = {0};
 static EWRAM_DATA char sPokeNameBuffer[POKEMON_NAME_LENGTH + 2] = {0};
 static EWRAM_DATA u32 gUnknown_2039DA4 = 0;
 static EWRAM_DATA u16 gUnknown_2039DA8 = 0;
-EWRAM_INIT static int sNumChoices = 0;
+
+static EWRAM_INIT int sNumChoices = 0;
+static EWRAM_INIT u8 *gUnknown_203B4B0 = NULL;
 
 static const CallbackData sNullCallbackData = {
     .maybeId = 4,
@@ -237,6 +242,33 @@ static void sub_80A2558(s32 param_1, ActionUnkIds *param_2);
 static void sub_80A2584(s16 r0, s16 r1);
 static void sub_80A2598(s16 r0, s16 r1);
 static u32 sub_80A25AC(u16 param_1);
+
+void sub_809D490(void)
+{
+    UNUSED void *oldPtr = gUnknown_203B4B0; // Needed to match
+    gUnknown_203B4B0 = MemoryAlloc(0x400, 6);
+    sub_809D4B0();
+}
+
+void sub_809D4B0(void)
+{
+    s32 i;
+
+    gCurrentMap = -1;
+    gUnknown_2039A32 = -1;
+    gUnknown_2039A34 = -1;
+    gAnyScriptLocked = 0;
+    for (i = 0; i < SCRIPT_LOCKS_ARR_COUNT; i++) {
+        gScriptLocks[i] = 0;
+        gScriptLockConds[i] = 0;
+        gUnlockBranchLabels[i] = 0;
+    }
+}
+
+void sub_809D508(void)
+{
+    FREE_AND_SET_NULL(gUnknown_203B4B0);
+}
 
 static void sub_809D520(ActionUnkIds *a0)
 {
