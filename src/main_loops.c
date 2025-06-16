@@ -601,15 +601,15 @@ static u32 RunGameMode_Async(u32 a0)
             ShowFriendAreasMap_Async(&friendAreasSetup);
             MemoryFree(friendAreasSetup.friendAreasMapPtr);
             if (friendAreasSetup.chosenAreaId != NUM_FRIEND_AREAS) {
-                s32 val;
+                s32 mapId;
                 u32 areaId = friendAreasSetup.chosenAreaId;
                 if (areaId != FRIEND_AREA_NONE) {
-                    val = FriendAreaIdToMapId(areaId);
+                    mapId = FriendAreaIdToMapId(areaId);
                 }
                 else {
-                    val = MAP_TEAM_BASE;
+                    mapId = MAP_TEAM_BASE;
                 }
-                SetScriptVarValue(NULL,GROUND_ENTER,val);
+                SetScriptVarValue(NULL,GROUND_ENTER,mapId);
                 SetScriptVarValue(NULL,GROUND_ENTER_LINK,0);
             }
             mode = MODE_GROUND;

@@ -15,9 +15,10 @@
 #include "code_8097670.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "ground_place.h"
 #include "script_vars_info.h"
 
-EWRAM_DATA u8 gScriptVarBuffer[0x400] = {0}; // NDS=020876DC
+EWRAM_DATA u8 gScriptVarBuffer[SCRIPT_VAR_BUFFER_LEN] = {0}; // NDS=020876DC
 
 #include "data/event_flag.h"
 
@@ -31,69 +32,67 @@ extern void nullsub_128(void);
 // arm9.bin::0200FF68
 void ThoroughlyResetScriptVars(void)
 {
-  s32 iVar1;
-  s32 iVar3;
-  u16 uVar2;
-  const struct ScriptVarInfo *puVar1;
+    s32 i;
+    s32 bufferId;
 
-  for(iVar3 = 0; iVar3 < 0x400; iVar3++)
-  {
-    gScriptVarBuffer[iVar3] = 0;
-  }
-
-  for(iVar1 = 0; iVar1 < 0x51; iVar1 = (iVar1 + 1) * 0x10000 >> 0x10)
-  {
-    puVar1 = &gScriptVarInfo[iVar1];
-    if (((puVar1->type != 0) && ((puVar1->type != 8)))) {
-      for (uVar2 = 0; uVar2 < puVar1->arrayLen; uVar2++) {
-        SetScriptVarArrayValue(NULL, iVar1, uVar2, puVar1->defaultValue);
-      }
+    for (bufferId = 0; bufferId < SCRIPT_VAR_BUFFER_LEN; bufferId++) {
+        gScriptVarBuffer[bufferId] = 0;
     }
-  }
-  ClearScriptVarArray(NULL, CONDITION);
-  ScenarioCalc(SCENARIO_SELECT,0,0);
-  ScenarioCalc(SCENARIO_MAIN,0,0);
-  ScenarioCalc(SCENARIO_SUB1,0,0);
-  ScenarioCalc(SCENARIO_SUB2,0,0);
-  ScenarioCalc(SCENARIO_SUB3,0,0);
-  ScenarioCalc(SCENARIO_SUB4,0,0);
-  ScenarioCalc(SCENARIO_SUB5,0,0);
-  ScenarioCalc(SCENARIO_SUB6,0,0);
-  ScenarioCalc(SCENARIO_SUB7,0,0);
-  ScenarioCalc(SCENARIO_SUB8,0,0);
-  ScenarioCalc(SCENARIO_SUB9,0,0);
-  SetScriptVarValue(NULL,GROUND_ENTER,0xa2);
-  SetScriptVarValue(NULL,GROUND_ENTER_LINK,0);
-  SetScriptVarValue(NULL,GROUND_GETOUT,0xa2);
-  SetScriptVarValue(NULL,GROUND_MAP,-1);
-  SetScriptVarValue(NULL,GROUND_PLACE,0x24);
-  SetScriptVarValue(NULL,DUNGEON_SELECT,-1);
-  SetScriptVarValue(NULL,DUNGEON_ENTER,0);
-  SetScriptVarValue(NULL,DUNGEON_ENTER_INDEX,-1);
-  SetScriptVarValue(NULL,DUNGEON_RESULT,0);
-  SetScriptVarValue(NULL,START_MODE,0);
-  SetScriptVarValue(NULL,CLEAR_COUNT,0);
-  SetScriptVarValue(NULL,WEATHER_KIND,-1);
-  SetScriptVarValue(NULL,PLAYER_KIND,0);
-  SetScriptVarValue(NULL,PARTNER1_KIND,0);
-  SetScriptVarValue(NULL,PARTNER2_KIND,0);
-  SetScriptVarValue(NULL,NEW_FRIEND_KIND,0);
-  ClearScriptVarArray(NULL,WARP_LIST);
-  SetScriptVarValue(NULL,WARP_LOCK,0);
-  SetScriptVarValue(NULL,PARTNER_TALK_KIND,0);
-  SetScriptVarValue(NULL,BASE_KIND,0);
-  SetScriptVarValue(NULL,BASE_LEVEL,0);
-  SetScriptVarValue(NULL,FLAG_KIND,0);
-  SetScriptVarValue(NULL,FLAG_KIND_CHANGE_REQUEST,0);
-  ClearScriptVarArray(NULL,RESCUE_SCENARIO_ORDER_LIST);
-  ClearScriptVarArray(NULL,RESCUE_SCENARIO_JOB_LIST);
-  ClearScriptVarArray(NULL,RESCUE_SCENARIO_CONQUEST_LIST);
-  ClearScriptVarArray(NULL,TRAINING_CONQUEST_LIST);
-  ClearScriptVarArray(NULL,TRAINING_PRESENT_LIST);
-  ClearScriptVarArray(NULL,DUNGEON_ENTER_LIST);
-  ClearScriptVarArray(NULL,DUNGEON_CLEAR_LIST);
-  ClearScriptVarArray(NULL,EVENT_S08E01);
-  sub_80972F4();
+
+    // Doesn't touch the last var SUM
+    for (i = 0; i < SCRIPT_VARS_COUNT - 1; i = (s16) (i + 1)) {
+        const struct ScriptVarInfo *varInfo = &gScriptVarInfo[i];
+        if (varInfo->type != SCRIPT_VAR_TYPE_0 && varInfo->type != SCRIPT_VAR_TYPE_SPECIAL) {
+            u16 j;
+            for (j = 0; j < varInfo->arrayLen; j++) {
+                SetScriptVarArrayValue(NULL, i, j, varInfo->defaultValue);
+            }
+        }
+    }
+    ClearScriptVarArray(NULL, CONDITION);
+    ScenarioCalc(SCENARIO_SELECT,0,0);
+    ScenarioCalc(SCENARIO_MAIN,0,0);
+    ScenarioCalc(SCENARIO_SUB1,0,0);
+    ScenarioCalc(SCENARIO_SUB2,0,0);
+    ScenarioCalc(SCENARIO_SUB3,0,0);
+    ScenarioCalc(SCENARIO_SUB4,0,0);
+    ScenarioCalc(SCENARIO_SUB5,0,0);
+    ScenarioCalc(SCENARIO_SUB6,0,0);
+    ScenarioCalc(SCENARIO_SUB7,0,0);
+    ScenarioCalc(SCENARIO_SUB8,0,0);
+    ScenarioCalc(SCENARIO_SUB9,0,0);
+    SetScriptVarValue(NULL,GROUND_ENTER,MAP_PERSONALITY_TEST_CYAN);
+    SetScriptVarValue(NULL,GROUND_ENTER_LINK,0);
+    SetScriptVarValue(NULL,GROUND_GETOUT,0xa2);
+    SetScriptVarValue(NULL,GROUND_MAP,-1);
+    SetScriptVarValue(NULL,GROUND_PLACE,GROUND_PLACE_NEW_GAME);
+    SetScriptVarValue(NULL,DUNGEON_SELECT,-1);
+    SetScriptVarValue(NULL,DUNGEON_ENTER,0);
+    SetScriptVarValue(NULL,DUNGEON_ENTER_INDEX,-1);
+    SetScriptVarValue(NULL,DUNGEON_RESULT,0);
+    SetScriptVarValue(NULL,START_MODE,0);
+    SetScriptVarValue(NULL,CLEAR_COUNT,0);
+    SetScriptVarValue(NULL,WEATHER_KIND,-1);
+    SetScriptVarValue(NULL,PLAYER_KIND,0);
+    SetScriptVarValue(NULL,PARTNER1_KIND,0);
+    SetScriptVarValue(NULL,PARTNER2_KIND,0);
+    SetScriptVarValue(NULL,NEW_FRIEND_KIND,0);
+    ClearScriptVarArray(NULL,WARP_LIST);
+    SetScriptVarValue(NULL,WARP_LOCK,0);
+    SetScriptVarValue(NULL,PARTNER_TALK_KIND,0);
+    SetScriptVarValue(NULL,BASE_KIND,0);
+    SetScriptVarValue(NULL,BASE_LEVEL,0);
+    SetScriptVarValue(NULL,FLAG_KIND,0);
+    SetScriptVarValue(NULL,FLAG_KIND_CHANGE_REQUEST,0);
+    ClearScriptVarArray(NULL,RESCUE_SCENARIO_ORDER_LIST);
+    ClearScriptVarArray(NULL,RESCUE_SCENARIO_JOB_LIST);
+    ClearScriptVarArray(NULL,RESCUE_SCENARIO_CONQUEST_LIST);
+    ClearScriptVarArray(NULL,TRAINING_CONQUEST_LIST);
+    ClearScriptVarArray(NULL,TRAINING_PRESENT_LIST);
+    ClearScriptVarArray(NULL,DUNGEON_ENTER_LIST);
+    ClearScriptVarArray(NULL,DUNGEON_CLEAR_LIST);
+    ClearScriptVarArray(NULL,EVENT_S08E01);
+    sub_80972F4();
 }
 
 #if (GAME_VERSION == VERSION_RED)
@@ -110,11 +109,11 @@ void ResetScriptVarArray(u8 *localVarBuf, s16 varId_)
     u16 i;
     s32 varId = varId_;
 
-    if (varId < 0x400) {
+    if (varId < LOCAL0) {
         infoPtr = &gScriptVarInfo[varId];
     }
     else {
-        infoPtr = &sLocalScriptVarInfo[varId - 0x400];
+        infoPtr = &sLocalScriptVarInfo[varId - LOCAL0];
     }
 
     for (i = 0; i < infoPtr->arrayLen; i++) {
@@ -129,11 +128,11 @@ void ClearScriptVarArray(u8 *localVarBuf, s16 varId_)
     u16 i;
     s32 varId = varId_;
 
-    if (varId < 0x400) {
+    if (varId < LOCAL0) {
         infoPtr = &gScriptVarInfo[varId];
     }
     else {
-        infoPtr = &sLocalScriptVarInfo[varId - 0x400];
+        infoPtr = &sLocalScriptVarInfo[varId - LOCAL0];
     }
 
     for (i = 0; i < infoPtr->arrayLen; i++) {
@@ -147,13 +146,13 @@ void GetScriptVarRef(struct ScriptVarPtr *out, u8 *localVarBuf, s32 varId_)
     const struct ScriptVarInfo *infoPtr;
     s32 varId = (s16) varId_;
 
-    if (varId < 0x400) {
+    if (varId < LOCAL0) {
         infoPtr = &gScriptVarInfo[varId];
         out->info = infoPtr;
         out->ptr = &gScriptVarBuffer[infoPtr->bufOffset];
     }
     else {
-        infoPtr = &sLocalScriptVarInfo[varId - 0x400];
+        infoPtr = &sLocalScriptVarInfo[varId - LOCAL0];
         out->info = infoPtr;
         out->ptr = &localVarBuf[infoPtr->bufOffset * 4];
     }
@@ -168,33 +167,33 @@ s32 GetScriptVarValue(u8 *localVarBuf, s32 varId_)
     GetScriptVarRef(&sp, localVarBuf, varId);
 
     switch (sp.info->type) {
-        case 1: {
+        case SCRIPT_VAR_TYPE_BIT: {
             s32 bitOffset = sp.info->bitOffset;
             u8 a = 1 << bitOffset;
             return (*sp.ptr & a) != FALSE; // Read bit-packed bool flag
         }
-        case 2:
-        case 7:
+        case SCRIPT_VAR_TYPE_U8:
+        case SCRIPT_VAR_TYPE_U8_2:
             return *((u8 *)sp.ptr);
-        case 3:
+        case SCRIPT_VAR_TYPE_S8:
             return *((s8 *)sp.ptr);
-        case 4:
+        case SCRIPT_VAR_TYPE_U16:
             return *((u16 *)sp.ptr);
-        case 5:
+        case SCRIPT_VAR_TYPE_S16:
             return *((s16 *)sp.ptr);
-        case 6:
-            return *((u32 *)sp.ptr);
-        case 8:
+        case SCRIPT_VAR_TYPE_S32:
+            return *((s32 *)sp.ptr);
+        case SCRIPT_VAR_TYPE_SPECIAL:
             switch ((s16)varId) {
-                case 23:
+                case SCRIPT_MODE:
                     return GetScriptMode() != FALSE;
-                case 32:
+                case FRIEND_SUM:
                     return GetFriendSum_808D480();
-                case 33:
+                case UNIT_SUM:
                     return GetUnitSum_808D544(0);
-                case 34:
+                case GOLD:
                     return gTeamInventoryRef->teamMoney;
-                case 35:
+                case BANK_GOLD:
                     return gTeamInventoryRef->teamSavings;
             }
         default:
@@ -212,35 +211,35 @@ s32 GetScriptVarArrayValue(u8 *localVarBuf, s32 varId_, s32 idx_)
     GetScriptVarRef(&sp, localVarBuf, varId);
 
     switch (sp.info->type) {
-        case 1: {
+        case SCRIPT_VAR_TYPE_BIT: {
             s32 bitOffset = (u16) sp.info->bitOffset;
             u16 flagNum = idx + bitOffset;
             u8 *a = &sp.ptr[flagNum / 8];
             u8 b = 1 << (flagNum % 8);
             return (*a & b) != FALSE; // Read bit-packed bool flag
         }
-        case 2:
-        case 7:
+        case SCRIPT_VAR_TYPE_U8:
+        case SCRIPT_VAR_TYPE_U8_2:
             return ((u8 *)sp.ptr)[idx];
-        case 3:
+        case SCRIPT_VAR_TYPE_S8:
             return ((s8 *)sp.ptr)[idx];
-        case 4:
+        case SCRIPT_VAR_TYPE_U16:
             return ((u16 *)sp.ptr)[idx];
-        case 5:
+        case SCRIPT_VAR_TYPE_S16:
             return ((s16 *)sp.ptr)[idx];
-        case 6:
+        case SCRIPT_VAR_TYPE_S32:
             return ((u32 *)sp.ptr)[idx];
-        case 8:
+        case SCRIPT_VAR_TYPE_SPECIAL:
             switch ((s16)varId) {
-                case 23:
+                case SCRIPT_MODE:
                     return GetScriptMode() != FALSE;
-                case 32:
+                case FRIEND_SUM:
                     return GetFriendSum_808D480();
-                case 33:
+                case UNIT_SUM:
                     return GetUnitSum_808D544(0);
-                case 34:
+                case GOLD:
                     return gTeamInventoryRef->teamMoney;
-                case 35:
+                case BANK_GOLD:
                     return gTeamInventoryRef->teamSavings;
             }
         default:
@@ -258,7 +257,7 @@ void SetScriptVarValue(u8 *localVarBuf, s32 varId_, s32 val)
     GetScriptVarRef(&sp, localVarBuf, varID);
 
     switch (sp.info->type) {
-        case 1: {
+        case SCRIPT_VAR_TYPE_BIT: {
             u8 bVar1 = 1 << sp.info->bitOffset;
 
             if (val != 0)
@@ -267,37 +266,37 @@ void SetScriptVarValue(u8 *localVarBuf, s32 varId_, s32 val)
                 *sp.ptr = (bVar1 | *sp.ptr) ^ bVar1;
             break;
         }
-        case 2: {
-            *((s8 *)sp.ptr) = val;
-            break;
-        }
-        case 3: {
+        case SCRIPT_VAR_TYPE_U8: {
             *((u8 *)sp.ptr) = val;
             break;
         }
-        case 7: {
-            *((bool8 *)sp.ptr) = val;
+        case SCRIPT_VAR_TYPE_S8: {
+            *((s8 *)sp.ptr) = val;
             break;
         }
-        case 4: {
-            *((s16 *)sp.ptr) = val;
+        case SCRIPT_VAR_TYPE_U8_2: {
+            *((u8 *)sp.ptr) = val;
             break;
         }
-        case 5: {
+        case SCRIPT_VAR_TYPE_U16: {
             *((u16 *)sp.ptr) = val;
             break;
         }
-        case 6: {
+        case SCRIPT_VAR_TYPE_S16: {
+            *((s16 *)sp.ptr) = val;
+            break;
+        }
+        case SCRIPT_VAR_TYPE_S32: {
             *((s32 *)sp.ptr) = val;
             break;
         }
-        case 8: {
+        case SCRIPT_VAR_TYPE_SPECIAL: {
             switch (varID) {
-                case 0x22: {
+                case GOLD: {
                     gTeamInventoryRef->teamMoney = val;
                     break;
                 }
-                case 0x23: {
+                case BANK_GOLD: {
                     gTeamInventoryRef->teamSavings = val;
                     break;
                 }
@@ -318,7 +317,7 @@ void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId_, s32 idx_, s32 val)
     GetScriptVarRef(&sp, localVarBuf, varID);
 
     switch (sp.info->type) {
-        case 1: {
+        case SCRIPT_VAR_TYPE_BIT: {
             s32 bitOffset = (u16)sp.info->bitOffset;
             u16 flagNum = idx + bitOffset;
             u8 *a = &sp.ptr[flagNum / 8];
@@ -329,37 +328,37 @@ void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId_, s32 idx_, s32 val)
                 *a = (bVar1 | *a) ^ bVar1;
             break;
         }
-        case 2: {
-            ((s8 *)sp.ptr)[idx] = val;
-            break;
-        }
-        case 3: {
+        case SCRIPT_VAR_TYPE_U8: {
             ((u8 *)sp.ptr)[idx] = val;
             break;
         }
-        case 7: {
-            ((bool8 *)sp.ptr)[idx] = val;
+        case SCRIPT_VAR_TYPE_S8: {
+            ((s8 *)sp.ptr)[idx] = val;
             break;
         }
-        case 4: {
-            ((s16 *)sp.ptr)[idx] = val;
+        case SCRIPT_VAR_TYPE_U8_2: {
+            ((u8 *)sp.ptr)[idx] = val;
             break;
         }
-        case 5: {
+        case SCRIPT_VAR_TYPE_U16: {
             ((u16 *)sp.ptr)[idx] = val;
             break;
         }
-        case 6: {
+        case SCRIPT_VAR_TYPE_S16: {
+            ((s16 *)sp.ptr)[idx] = val;
+            break;
+        }
+        case SCRIPT_VAR_TYPE_S32: {
             ((s32 *)sp.ptr)[idx] = val;
             break;
         }
-        case 8: {
+        case SCRIPT_VAR_TYPE_SPECIAL: {
             switch (varID) {
-                case 0x22: {
+                case GOLD: {
                     gTeamInventoryRef->teamMoney = val;
                     break;
                 }
-                case 0x23: {
+                case BANK_GOLD: {
                     gTeamInventoryRef->teamSavings = val;
                     break;
                 }
@@ -369,7 +368,7 @@ void SetScriptVarArrayValue(u8 *localVarBuf, s32 varId_, s32 idx_, s32 val)
 }
 
 #if (GAME_VERSION == VERSION_RED)
-UNUSED u8 *GetScriptVarPointer(s16 varId)
+UNUSED static u8 *GetScriptVarPointer(s16 varId)
 {
     struct ScriptVarPtr local_1c;
 
@@ -377,7 +376,7 @@ UNUSED u8 *GetScriptVarPointer(s16 varId)
     return local_1c.ptr;
 }
 
-UNUSED s16 GetScriptVarArrayLength(s16 varId)
+UNUSED static s16 GetScriptVarArrayLength(s16 varId)
 {
     struct ScriptVarPtr local_1c;
 
@@ -406,7 +405,7 @@ s32 GetScriptVarArraySum(u8 *localVarBuf, s16 varId)
 }
 
 #if (GAME_VERSION == VERSION_RED)
-UNUSED void GetScriptVarString(s16 varId, u8 *buf, s32 maxLen)
+UNUSED static void GetScriptVarString(s16 varId, u8 *buf, s32 maxLen)
 {
   u8 *r1;
   s32 r2;
@@ -423,7 +422,7 @@ UNUSED void GetScriptVarString(s16 varId, u8 *buf, s32 maxLen)
  *buf = 0;
 }
 
-UNUSED void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
+UNUSED static void ScriptVarStringPopFirstChar(s16 varId,u32 param_2,s32 maxLen)
 {
   u8 *r1;
   s32 r2;
@@ -776,7 +775,7 @@ bool8 JudgeVarWithVar(u8 *param_1, s16 param_2, s16 param_3, enum FlagJudgeOpera
 }
 
 #if (GAME_VERSION == VERSION_RED)
-UNUSED s32 sub_8002354(u32 param_1)
+UNUSED static s32 sub_8002354(u32 param_1)
 {
   if (param_1 < 0x3b) {
     return gUnknown_80B6D90[param_1].num;
@@ -786,7 +785,7 @@ UNUSED s32 sub_8002354(u32 param_1)
   }
 }
 
-UNUSED const u8 *sub_8002374(u32 param_1)
+UNUSED static const u8 *sub_8002374(u32 param_1)
 {
   if (param_1 < 0x3b) {
     return gUnknown_80B6D90[param_1].text;
@@ -796,7 +795,7 @@ UNUSED const u8 *sub_8002374(u32 param_1)
   }
 }
 
-UNUSED const u8 *sub_8002394(u32 param_1)
+UNUSED static const u8 *sub_8002394(u32 param_1)
 {
   if (param_1 - 0x12 < 9) {
     return  gUnknown_80B714C[param_1 - 0x12];
@@ -809,7 +808,7 @@ UNUSED const u8 *sub_8002394(u32 param_1)
   }
 }
 
-UNUSED const u8 *sub_80023C4(u32 param_1)
+UNUSED static const u8 *sub_80023C4(u32 param_1)
 {
   if (param_1 < 4) {
    return gUnknown_80B71A0[param_1]; // CISTART, CECONTINUE, CNLAST, CWEND
@@ -934,40 +933,36 @@ void sub_80026E8(s16 r0, bool8 r1)
 }
 
 // arm9.bin::0200E544
-bool8 SaveGlobalScriptVars(void *r0)
+bool8 SaveGlobalScriptVars(void *dest)
 {
-    MemoryCopy8(r0, gScriptVarBuffer, 0x400);
+    MemoryCopy8(dest, gScriptVarBuffer, SCRIPT_VAR_BUFFER_LEN);
     return TRUE;
 }
 
 // arm9.bin::0200E4DC
-bool8 RestoreGlobalScriptVars(u8 *r0)
+bool8 RestoreGlobalScriptVars(u8 *src)
 {
     struct ScriptVarPtr temp;
     GetScriptVarRef(&temp, NULL, VERSION);
-    MemoryCopy8(gScriptVarBuffer, r0, 0x400);
+    MemoryCopy8(gScriptVarBuffer, src, SCRIPT_VAR_BUFFER_LEN);
     if (temp.info->defaultValue != *(u32 *)temp.ptr)
         return FALSE;
     return TRUE;
 }
 
 #if (GAME_VERSION == VERSION_RED)
-UNUSED void SetConditionBit(s32 r0)
+UNUSED static void SetConditionBit(s32 r0)
 {
     UpdateScriptVarWithImmediate(NULL, CONDITION, r0, CALC_SETBIT);
 }
 
-UNUSED u8 sub_800276C(void)
+UNUSED static u8 sub_800276C(void)
 {
     return 0;
 }
 
-UNUSED void nullsub_140(void)
+UNUSED static void nullsub_140(void)
 {
 
 }
 #endif
-
-
-
-// TODO: Merge with main_loops.c (below) and code_8002774.c (above)

@@ -1,8 +1,8 @@
 static const struct ScriptVarInfo sLocalScriptVarInfo[4] = {
-    5, 7, 0, 0, 1, 0, "LOCAL0",
-    5, 7, 2, 0, 1, 0, "LOCAL1",
-    5, 7, 4, 0, 1, 0, "LOCAL2",
-    5, 7, 6, 0, 1, 0, "LOCAL3",
+    {.type = SCRIPT_VAR_TYPE_S16, 7, 0, 0, 1, 0, "LOCAL0"},
+    {.type = SCRIPT_VAR_TYPE_S16, 7, 2, 0, 1, 0, "LOCAL1"},
+    {.type = SCRIPT_VAR_TYPE_S16, 7, 4, 0, 1, 0, "LOCAL2"},
+    {.type = SCRIPT_VAR_TYPE_S16, 7, 6, 0, 1, 0, "LOCAL3"},
 };
 
 struct unkStruct_80B6D90
@@ -99,7 +99,7 @@ struct MapIdToFriendAreaIdStruct
     u8 friendAreaId;
 };
 
-static const struct MapIdToFriendAreaIdStruct sMapIdToFriendAreaIdTable[58] = {
+static const struct MapIdToFriendAreaIdStruct sMapIdToFriendAreaIdTable[NUM_FRIEND_AREAS] = {
     {MAP_FRIEND_AREA_BOUNTIFUL_SEA, BOUNTIFUL_SEA},
     {MAP_FRIEND_AREA_TREASURE_SEA, TREASURE_SEA},
     {MAP_FRIEND_AREA_SERENE_SEA, SERENE_SEA},

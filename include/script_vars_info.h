@@ -3,6 +3,18 @@
 
 #include "constants/event_flag.h"
 
+enum {
+    SCRIPT_VAR_TYPE_0, // 0
+    SCRIPT_VAR_TYPE_BIT, // 1
+    SCRIPT_VAR_TYPE_U8, // 2
+    SCRIPT_VAR_TYPE_S8, // 3
+    SCRIPT_VAR_TYPE_U16, // 4
+    SCRIPT_VAR_TYPE_S16, // 5
+    SCRIPT_VAR_TYPE_S32, // 6
+    SCRIPT_VAR_TYPE_U8_2, // 7 Unused
+    SCRIPT_VAR_TYPE_SPECIAL, // 8
+};
+
 // size: 0x10
 struct ScriptVarInfo {
     s16 type;
@@ -11,7 +23,7 @@ struct ScriptVarInfo {
     s16 bitOffset;
     s16 arrayLen;
     s16 defaultValue;
-    char *name;
+    const char *name;
 };
 
 extern const struct ScriptVarInfo gScriptVarInfo[SCRIPT_VARS_COUNT];

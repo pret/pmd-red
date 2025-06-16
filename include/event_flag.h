@@ -39,10 +39,11 @@ u8 MapIdToFriendAreaId(s16 mapId_); // map -> friend area lookup
 s16 FriendAreaIdToMapId(u8 friendAreaId); // friend area -> map lookup
 bool8 sub_80026CC(s16 r0);
 void sub_80026E8(s16 r0, bool8 r1);
-bool8 SaveGlobalScriptVars(void *r0);
-bool8 RestoreGlobalScriptVars(u8 *r0);
+bool8 SaveGlobalScriptVars(void *dest);
+bool8 RestoreGlobalScriptVars(u8 *src);
 
 // EWRAM
-extern u8 gScriptVarBuffer[0x400];
+#define SCRIPT_VAR_BUFFER_LEN 0x400
+extern u8 gScriptVarBuffer[SCRIPT_VAR_BUFFER_LEN];
 
 #endif // GUARD_EVENT_FLAG_H
