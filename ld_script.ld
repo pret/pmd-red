@@ -737,6 +737,8 @@ SECTIONS {
         src/ground_event.o(.rodata);
         src/unk_dungeon_load_maybe.o(.rodata);
         data/data_8115F5C_3.o(.rodata);
+        src/ground_map_conversion_table.o(.rodata);
+        data/data_8115F5C_3_.o(.rodata);
         src/ground_event_data.o(.rodata);
         src/friend_area_dialogue.o(.rodata);
         src/ground_data_t00p01_station.o(.rodata);

@@ -40,14 +40,14 @@ static inline s16 Self_s16(s16 a)
 }
 
 // Needed to match a couple of functions.
-static inline void InlineStrcpy(u8 *dst, const u8 *src)
+static inline u8 *InlineStrcpy(u8 *dst, const u8 *src)
 {
-    strcpy(dst, src);
+    return strcpy(dst, src);
 }
 
-static inline void InlineStrncpy(u8 *dst, const u8 *src, s32 n)
+static inline u8 *InlineStrncpy(u8 *dst, const u8 *src, s32 n)
 {
-    strncpy(dst, src, n);
+    return strncpy(dst, src, n);
 }
 
 static inline bool8 AreStringsDifferent(const u8 *str1, const u8 *str2)

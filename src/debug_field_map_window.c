@@ -10,6 +10,7 @@
 #include "menu_input.h"
 #include "text_1.h"
 #include "text_2.h"
+#include "ground_map_conversion_table.h"
 #include "structs/str_81188F0.h"
 
 EWRAM_INIT static struct MenuHeaderWindow *sDebugWindow = {NULL};
@@ -114,11 +115,8 @@ static void ShowWindowsWithHeader(void)
 
 static void PrintCurrentPageText(void)
 {
-    GroundConversionStruct *temp;
-    const struct unkStruct_81188F0 *temp2;
     s32 x, y, pageNum;
-    s16 index;
-    int counter;
+    s32 i;
 
     CallPrepareTextbox_8008C54(sDebugWindow->m.menuWinId);
     sub_80073B8(sDebugWindow->m.menuWinId);
@@ -129,18 +127,18 @@ static void PrintCurrentPageText(void)
     PrintNumOnWindow(x, 0, pageNum, 2, 7, sDebugWindow->m.menuWinId);
 
     // This line has no real effect. It's a magic 'fakematch' to fool agb into generating the same asm. It can be removed if you don't care about matching.
-    if (x) { counter = 0; }
+    if (x) { i = 0; }
 
-    for (counter = 0; counter < sDebugWindow->m.input.currPageEntries; counter++) {
-        index = (sDebugWindow->m.input.currPage * sDebugWindow->m.input.entriesPerPage) + counter;
-        temp = &gGroundConversion_811BAF4[index];
-        temp2 = &gUnknown_81188F0[temp->unk4];
+    for (i = 0; i < sDebugWindow->m.input.currPageEntries; i++) {
+        s16 index = (sDebugWindow->m.input.currPage * sDebugWindow->m.input.entriesPerPage) + i;
+        const GroundConversionStruct *mapConversionPtr = &gGroundMapConversionTable[index];
+        const struct unkStruct_81188F0 *mapFilesPtr = &gUnknown_81188F0[mapConversionPtr->mapFileTableId];
 
-        y = GetMenuEntryYCoord(&sDebugWindow->m.input, counter);
-        PrintStringOnWindow(8, y, temp2->text1, sDebugWindow->m.menuWinId, 0);
+        y = GetMenuEntryYCoord(&sDebugWindow->m.input, i);
+        PrintStringOnWindow(8, y, mapFilesPtr->fileName1, sDebugWindow->m.menuWinId, 0);
 
-        y = GetMenuEntryYCoord(&sDebugWindow->m.input, counter);
-        PrintStringOnWindow(62, y, temp->text, sDebugWindow->m.menuWinId, 0);
+        y = GetMenuEntryYCoord(&sDebugWindow->m.input, i);
+        PrintStringOnWindow(62, y, mapConversionPtr->text, sDebugWindow->m.menuWinId, 0);
     }
 
     sub_80073E0(sDebugWindow->m.menuWinId);

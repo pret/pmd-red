@@ -17,6 +17,7 @@
 #include "play_time.h"
 #include "pokemon.h"
 #include "text_util.h"
+#include "ground_map_conversion_table.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -740,7 +741,7 @@ UNUSED static const char *sub_80990B8(void)
 {
     s16 index = sub_8098FCC(0xB);
     if (index != -1) {
-        return GetGroundPlaceName(gGroundConversion_811BAF4[index].unk2);
+        return GetGroundPlaceName(gGroundMapConversionTable[index].groundPlaceId);
     }
     else {
         return GetCurrentGroundPlaceName();

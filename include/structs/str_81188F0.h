@@ -4,12 +4,13 @@
 // size: 0x1C
 struct unkStruct_81188F0
 {
-    /* 0x0 */ const u8 *text1;
-    /* 0x4 */ const u8 *text2;
-    /* 0x8 */ const u8 *text3;
-    /* 0xC */ const u8 *text4[2];
-    /* 0x14 */ u32 unk2;
-    /* 0x18 */ u32 unk3;
+    /* 0x0 */ const u8 *fileName1;
+    /* 0x4 */ const u8 *fileName2;
+    /* 0x8 */ const u8 *fileName3;
+    /* 0xC */ const u8 *fileName4[2];
+    // Unused, always NULL
+    /* 0x14 */ const u8 *unusedFileName5;
+    /* 0x18 */ const u8 *unusedFileName6;
 };
 
 extern const struct unkStruct_81188F0 gUnknown_81188F0[];

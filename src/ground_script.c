@@ -45,7 +45,7 @@
 #include "pokemon_3.h"
 #include "friend_area_dialogue.h"
 #include "structs/str_dungeon_setup.h"
-
+#include "ground_map_conversion_table.h"
 
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
@@ -1401,7 +1401,7 @@ s32 ExecuteScriptCommand(Action *action)
                 u32 argCopy = arg;
                 u32 byte = (u8)curCmd.argByte;
                 if (ScriptLoggingEnabled(TRUE)) {
-                    Log(1, "    ground select %3d[%s] %3d", arg, gGroundConversion_811BAF4[arg].text, byte);
+                    Log(1, "    ground select %3d[%s] %3d", arg, gGroundMapConversionTable[arg].text, byte);
                 }
                 GroundMainGroundRequest(argCopy, byte, curCmd.argShort);
                 break;
@@ -1490,25 +1490,25 @@ s32 ExecuteScriptCommand(Action *action)
                     gUnknown_2039A34 = gUnknown_2039A32;
                     if (ScriptLoggingEnabled(TRUE)) {
                         Log(1,"    map select %3d %3d[%s]",gCurrentMap,gUnknown_2039A32,
-                            gGroundConversion_811BAF4[gCurrentMap].text);
+                            gGroundMapConversionTable[gCurrentMap].text);
                     }
                 } else {
                     gUnknown_2039A32 = gCurrentMap = curCmd.arg1;
                     gUnknown_2039A34 = curCmd.arg1;
                     if (ScriptLoggingEnabled(TRUE)) {
                         Log(1,"    ground select %3d %3d[%s]",gCurrentMap,gUnknown_2039A32,
-                            gGroundConversion_811BAF4[gCurrentMap].text);
+                            gGroundMapConversionTable[gCurrentMap].text);
                     }
                 }
                 SetScriptVarValue(NULL,GROUND_MAP,gCurrentMap);
-                SetScriptVarValue(NULL,GROUND_PLACE,gGroundConversion_811BAF4[gCurrentMap].unk2);
+                SetScriptVarValue(NULL,GROUND_PLACE,gGroundMapConversionTable[gCurrentMap].groundPlaceId);
                 GroundSprite_Reset(gUnknown_2039A32);
                 sub_809D0BC();
                 DeleteGroundEvents();
                 DeleteGroundLives();
                 DeleteGroundObjects();
                 DeleteGroundEffects();
-                sub_809C770(gCurrentMap, gGroundConversion_811BAF4[gCurrentMap].unk2);
+                sub_809C770(gCurrentMap, gGroundMapConversionTable[gCurrentMap].groundPlaceId);
                 GroundMap_Select(gUnknown_2039A32);
                 GroundLink_Select(gUnknown_2039A32);
                 GroundLives_Select(gUnknown_2039A32,0,0);
@@ -1522,7 +1522,7 @@ s32 ExecuteScriptCommand(Action *action)
                 gUnknown_2039A34 = gUnknown_2039A32 = gCurrentMap = (s16)curCmd.arg2;
                 if (ScriptLoggingEnabled(TRUE)) {
                     Log(1, "    dungeon select %3d %3d[%s]", gCurrentMap,gUnknown_2039A32,
-                        gGroundConversion_811BAF4[gCurrentMap].text);
+                        gGroundMapConversionTable[gCurrentMap].text);
                 }
                 GroundSprite_Reset(gUnknown_2039A32);
                 sub_809D0BC();

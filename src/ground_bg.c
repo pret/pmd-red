@@ -245,9 +245,9 @@ void sub_80A2FBC(GroundBg *groundBg, s32 a1_)
     CloseOpenedFiles(groundBg);
     groundBg->unk444 = a1;
     dataPtr = &gUnknown_81188F0[a1];
-    groundBg->unk430 = OpenFileAndGetFileDataPtr(dataPtr->text1, &gGroundFileArchive);
-    groundBg->unk434 = OpenFileAndGetFileDataPtr(dataPtr->text2, &gGroundFileArchive);
-    groundBg->unk438 = OpenFileAndGetFileDataPtr(dataPtr->text3, &gGroundFileArchive);
+    groundBg->unk430 = OpenFileAndGetFileDataPtr(dataPtr->fileName1, &gGroundFileArchive);
+    groundBg->unk434 = OpenFileAndGetFileDataPtr(dataPtr->fileName2, &gGroundFileArchive);
+    groundBg->unk438 = OpenFileAndGetFileDataPtr(dataPtr->fileName3, &gGroundFileArchive);
     file_430 = groundBg->unk430->data;
     file_434 = groundBg->unk434->data;
     file_438 = groundBg->unk438->data;
@@ -344,11 +344,11 @@ void sub_80A2FBC(GroundBg *groundBg, s32 a1_)
     vramPtr = (void *)(VRAM + 0x8000 + (groundBg->unk52C.unk4 + mapPtr_454->unk4) * 32);
     for (id = 0; id < 2; id++) {
         SubStruct_3E0 *sub3E0 = &groundBg->unk3E0[id];
-        if (dataPtr->text4[id] != NULL) {
+        if (dataPtr->fileName4[id] != NULL) {
             const struct UnkFileStruct *fileStr;
             const void *r1, *r0;
 
-            sub3E0->unk8 = OpenFileAndGetFileDataPtr(dataPtr->text4[id], &gGroundFileArchive);
+            sub3E0->unk8 = OpenFileAndGetFileDataPtr(dataPtr->fileName4[id], &gGroundFileArchive);
             sub3E0->unk0 = 1;
             sub3E0->unk1 = 1;
             fileStr = sub3E0->unk8->data;
@@ -380,9 +380,9 @@ void sub_80A2FBC(GroundBg *groundBg, s32 a1_)
         }
     }
     for (; id < 4; id++) {
-        if (dataPtr->text4[id] != NULL) {
+        if (dataPtr->fileName4[id] != NULL) {
             s32 n;
-            OpenedFile *file = OpenFileAndGetFileDataPtr(dataPtr->text4[id], &gGroundFileArchive);
+            OpenedFile *file = OpenFileAndGetFileDataPtr(dataPtr->fileName4[id], &gGroundFileArchive);
             const struct UnkFileStruct *fileStr = file->data;
             u16 *r1 = (void *) fileStr->unk4;
             r1 += fileStr->unk2 * 2;
@@ -426,9 +426,9 @@ void sub_80A3440(GroundBg *groundBg, s32 a1_, DungeonLocation *dungLoc, s32 a3)
     CloseOpenedFiles(groundBg);
     groundBg->unk444 = a1;
     dataPtr = &gUnknown_81188F0[a1];
-    groundBg->unk430 = OpenFileAndGetFileDataPtr(dataPtr->text1, &gGroundFileArchive);
-    groundBg->unk434 = OpenFileAndGetFileDataPtr(dataPtr->text2, &gGroundFileArchive);
-    groundBg->unk438 = OpenFileAndGetFileDataPtr(dataPtr->text3, &gGroundFileArchive);
+    groundBg->unk430 = OpenFileAndGetFileDataPtr(dataPtr->fileName1, &gGroundFileArchive);
+    groundBg->unk434 = OpenFileAndGetFileDataPtr(dataPtr->fileName2, &gGroundFileArchive);
+    groundBg->unk438 = OpenFileAndGetFileDataPtr(dataPtr->fileName3, &gGroundFileArchive);
     file_430 = groundBg->unk430->data;
     file_434 = groundBg->unk434->data;
     file_438 = groundBg->unk438->data;

@@ -7,6 +7,7 @@
 #include "ground_map_2.h"
 #include "ground_script.h"
 #include "memory.h"
+#include "ground_map_conversion_table.h"
 
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
@@ -178,8 +179,8 @@ bool8 GroundMapNotifyAll(s16 param_1)
 bool8 sub_80A4D48(s16 index)
 {
     if (index == -1) return TRUE;
-    if (gGroundConversion_811BAF4[index].unk0 == 5) return FALSE;
-    if (gGroundConversion_811BAF4[index].unk0 != 8) return TRUE;
+    if (gGroundMapConversionTable[index].unk0 == 5) return FALSE;
+    if (gGroundMapConversionTable[index].unk0 != 8) return TRUE;
     return FALSE;
 }
 

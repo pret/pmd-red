@@ -253,11 +253,6 @@ u32 UpdateLoadScreenMenu(void)
   return nextMenu;
 }
 
-static inline u8 *DrawLoadScreenTextSub(u8 *teamNameBuffer) {
-  strcpy(teamNameBuffer,gNoTeamNamePlaceholder);
-  return teamNameBuffer;
-}
-
 void DrawLoadScreenText(void)
 {
   int iVar2;
@@ -272,7 +267,6 @@ void DrawLoadScreenText(void)
   u32 seconds;
   Pokemon *playerInfo;
   unkStruct_203B484 *temp2;
-  u8 *r2;
 
   iVar2 = sub_8011FA8();
   CallPrepareTextbox_8008C54(0);
@@ -287,14 +281,12 @@ void DrawLoadScreenText(void)
   // Draw Team Name
   if (sub_80023E4(0)) {
     sub_80920D8(teamNameBuffer);
-    r2 = teamNameBuffer;
   }
   else {
-    // NOTE: static inline was needed here to match -jiang
-    r2 = DrawLoadScreenTextSub(teamNameBuffer);
+    InlineStrcpy(teamNameBuffer,gNoTeamNamePlaceholder);
   }
 
-  sprintfStatic(gLoadScreen->formattedTeamName,gUnknown_80E7804,r2);
+  sprintfStatic(gLoadScreen->formattedTeamName,gUnknown_80E7804,teamNameBuffer);
   PrintStringOnWindow(64,0,gLoadScreen->formattedTeamName,0,0);
 
   // Draw Player Name
