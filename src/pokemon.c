@@ -201,7 +201,7 @@ void sub_808D0D8(Pokemon *pokemon)
      sub_808E490(pokemon->moves, pokemon->speciesNum);
 }
 
-void ConvertStoryMonToPokemon(Pokemon *dst, struct StoryMonData *src)
+void ConvertStoryMonToPokemon(Pokemon *dst, const struct StoryMonData *src)
 {
     s32 i;
 

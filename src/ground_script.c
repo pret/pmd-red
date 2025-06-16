@@ -150,8 +150,6 @@ extern Action *sub_80A882C(s16);
 extern Action *sub_80AC240(s16);
 extern Action *sub_80AD158(s16);
 
-extern u8 gUnknown_8116848[];
-
 bool8 GroundLivesNotifyAll(s16);
 bool8 GroundObjectsNotifyAll(s16);
 bool8 GroundEffectsNotifyAll(s16);
@@ -173,10 +171,7 @@ bool8 sub_80A87E0();
 s16 sub_80A8BFC(s16);
 void sub_80A8F50(const u8 *buffer, s32, s32 size);
 bool8 HasRecruitedMon(s32 species);
-extern Item gUnknown_8116844;
 extern Item gUnknown_81167E4;
-bool8 sub_809124C(u8 id, u8 param_3);
-extern const u8 gUnknown_81167EC[];
 void sub_80A56A0(s32, s32);
 void sub_80A56F0(s32 *);
 void sub_80A5704(s32 *);
@@ -233,15 +228,10 @@ static const CallbackData sNullCallbackData = {
 
 static const PixelPos sPixelPosZero = {0, 0};
 
-// TODO GET RID OF IT
-const u8 GroundScriptFile_Text[];
-
 static const ScriptCommand gUnknown_81164E4[] = {
-    {0xF6, 0, 0xC5, 0, 0, GroundScriptFile_Text},
+    {0xF6, 0, 0xC5, 0, 0, "../ground/ground_script.c"},
     {0xEF, 0, 0,    0, 0, NULL},
 };
-
-ALIGNED(4) const u8 GroundScriptFile_Text[] = "../ground/ground_script.c";
 
 // -1 didn't match
 void sub_809D520(ActionUnkIds *a0)
@@ -437,10 +427,10 @@ bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSm
             break;
         case 5:
             if (action->scriptData.state != 2) {
-                FATAL_ERROR_ARGS(GroundScriptFile_Text, 688, "execute script type error B");
+                FATAL_ERROR_ARGS("../ground/ground_script.c", 688, "execute script type error B");
             }
             if (action->scriptData2.state != -1) {
-                FATAL_ERROR_ARGS(GroundScriptFile_Text, 689, "execute script type error C");
+                FATAL_ERROR_ARGS("../ground/ground_script.c", 689, "execute script type error C");
             }
             action->scriptData2 = action->scriptData;
             break;
@@ -456,7 +446,7 @@ bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSm
             InitScriptData(&action->scriptData2);
             break;
         default:
-            FATAL_ERROR_ARGS(GroundScriptFile_Text, 708, "execute script type error %d", param_3->state);
+            FATAL_ERROR_ARGS("../ground/ground_script.c", 708, "execute script type error %d", param_3->state);
     }
     InitScriptData(&action->scriptData);
     if (param_2 != NULL) {
@@ -509,7 +499,7 @@ u8 GroundScriptCheckLockCondition(Action *param_1, s16 param_2)
 bool8 GroundScript_Cancel(Action *r0)
 {
     // NOTE: Will always return TRUE
-    return ActionResetScriptDataForDeletion(r0, DEBUG_LOC_PTR(GroundScriptFile_Text, 821, "GroundScript_Cancel"));
+    return ActionResetScriptDataForDeletion(r0, DEBUG_LOC_PTR("../ground/ground_script.c", 821, "GroundScript_Cancel"));
 }
 
 u8 GroundCancelAllEntities(void)
@@ -2865,7 +2855,7 @@ s32 ExecuteScriptCommand(Action *action)
                     }
                     default: {
                         // The locdata says this is part of an inlined function... :/
-                        FATAL_ERROR_ARGS2(GroundScriptFile_Text, 4222, "_AnalyzeProcess", "switch type error %d", curCmd.op);
+                        FATAL_ERROR_ARGS2("../ground/ground_script.c", 4222, "_AnalyzeProcess", "switch type error %d", curCmd.op);
                     }
                 }
                 scriptData->script.ptr = ResolveJump(action, val);
@@ -3056,12 +3046,12 @@ UNUSED static bool8 GroundScript_ExecuteTrigger(s16 r0)
         return FALSE;
     InitActionWithParams(&action, &sNullCallbackData, NULL, 0, 0);
     GetFunctionScript(NULL, &scriptInfo, r0);
-    GroundScript_ExecutePP(&action, NULL, &scriptInfo, DEBUG_LOC_PTR(GroundScriptFile_Text, 4553, "GroundScript_ExecuteTrigger"));
+    GroundScript_ExecutePP(&action, NULL, &scriptInfo, DEBUG_LOC_PTR("../ground/ground_script.c", 4553, "GroundScript_ExecuteTrigger"));
 
     action.scriptData.savedScript = action.scriptData.script;
     action.scriptData.savedScript.ptr = gUnknown_81164E4;
     action.scriptData.savedScript.ptr2 = gUnknown_81164E4;
-    ret = HandleAction(&action, DEBUG_LOC_PTR(GroundScriptFile_Text, 4558, "GroundScript_ExecuteTrigger"));
+    ret = HandleAction(&action, DEBUG_LOC_PTR("../ground/ground_script.c", 4558, "GroundScript_ExecuteTrigger"));
     InitAction2(&action);
     if(ret == 0)
         return TRUE;
@@ -3069,11 +3059,8 @@ UNUSED static bool8 GroundScript_ExecuteTrigger(s16 r0)
         return FALSE;
 }
 
-extern struct StoryMonData gUnknown_8116794;
-extern struct StoryMonData gUnknown_81167BC;
 extern struct StoryMonData gUnknown_8116738;
 extern struct StoryMonData gUnknown_811681C;
-extern DungeonLocation gUnknown_81167E8;
 extern DungeonLocation gUnknown_8116788;
 extern DungeonLocation gUnknown_811678C;
 extern DungeonLocation gUnknown_8116790;
@@ -3447,18 +3434,29 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
         case 0x27:
             {
-                Pokemon *pokemon;
+                Pokemon *recruitPtr;
                 s32 index;
-                struct StoryMonData sp_208;
-                Pokemon sp_230;
+                struct StoryMonData latiasData = {
+                    .name = sPokeNameBuffer,
+                    .speciesNum = MONSTER_LATIAS,
+                    .itemID = ITEM_NOTHING,
+                    .dungeonLocation = {.id = DUNGEON_POKEMON_SQUARE, .floor = 0},
+                    .moveID = {MOVE_PSYWAVE, MOVE_WISH, MOVE_HELPING_HAND, MOVE_SAFEGUARD},
+                    .pokeHP = 120,
+                    .level = 28,
+                    .IQ = 1,
+                    .offenseAtk = {58, 57},
+                    .offenseDef = {40, 43},
+                    .currExp = 245400,
+                };
+                Pokemon latiasMon;
 
-                sp_208 = gUnknown_81167BC;
-                ConvertStoryMonToPokemon(&sp_230, &sp_208);
-                pokemon = TryAddPokemonToRecruited(&sp_230);
-                if(pokemon == NULL) return 1;
-                for(index = 0; index < POKEMON_NAME_LENGTH; index++)
-                {
-                    pokemon->name[index] = sPokeNameBuffer[index];
+                ConvertStoryMonToPokemon(&latiasMon, &latiasData);
+                recruitPtr = TryAddPokemonToRecruited(&latiasMon);
+                if (recruitPtr == NULL)
+                    return 1;
+                for (index = 0; index < POKEMON_NAME_LENGTH; index++) {
+                    recruitPtr->name[index] = sPokeNameBuffer[index];
                 }
                 IncrementAdventureNumJoined();
                 return 0;
@@ -3467,24 +3465,18 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 
         case 0x28:
             {
-                if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
-                {
-                    Item *item = &gUnknown_81167E4;
-                    s32 id = item->id;
-                    if(IsNotMoneyOrUsedTMItem(id))
-                        if(gTeamInventoryRef->teamStorage[id] < 999)
-                            gTeamInventoryRef->teamStorage[id] += 1;
+                static const Item item = {.flags = 0, .quantity = 0, .id = ITEM_WISH_STONE};
+                if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
+                    if (IsNotMoneyOrUsedTMItem(item.id) && gTeamInventoryRef->teamStorage[item.id] < 999)
+                        gTeamInventoryRef->teamStorage[item.id] += 1;
 
                 }
-                else
-                {
-                    Item *item = &gUnknown_81167E4;
-                    sub_809124C(item->id, 0);
+                else {
+                    AddItemIdToInventory(item.id, FALSE);
                     FillInventoryGaps();
                 }
+                return 0;
             }
-            return 0;
-
         case 0x29:
             {
                 s32 index = (s16)(RandInt(0x1A2) + 1);
@@ -3576,32 +3568,32 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             return 0;
         case 0x2C:
             {
-                Pokemon *pokemon;
+                Pokemon *recruitPtr;
                 s32 index;
-                  if(r2 != 0)
-                  {
+                if (r2 != 0) {
+                    static const DungeonLocation dungLoc = {.id = DUNGEON_RESCUE_TEAM_BASE_2, .floor = 0};
                     s32 id = (s16) GetScriptVarValue(0, NEW_FRIEND_KIND);
-                      s32 matchMe = id;
-                     WriteFriendAreaName(gFormatBuffer_FriendArea,(GetFriendArea((s16) id)), FALSE);
-                    if(id == 0)
+                    s32 id_ = id;
+                    WriteFriendAreaName(gFormatBuffer_FriendArea,(GetFriendArea((s16)id)), FALSE);
+                    if (id == 0)
                         return 0;
 
-                    if(!GetFriendAreaStatus(GetFriendArea(id)))
+                    if (!GetFriendAreaStatus(GetFriendArea(id)))
                         UnlockFriendArea(GetFriendArea(id));
-                    pokemon = TryAddLevel1PokemonToRecruited(matchMe, NULL ,ITEM_NOTHING, &gUnknown_81167E8, MOVE_NOTHING);
-                    if(pokemon == NULL)
+
+                    recruitPtr = TryAddLevel1PokemonToRecruited(id_, NULL ,ITEM_NOTHING, &dungLoc, MOVE_NOTHING);
+                    if (recruitPtr == NULL)
                         return 0;
 
-                    for(index = 0; index < POKEMON_NAME_LENGTH; index++)
-                        pokemon->name[index] = sPokeNameBuffer[index];
+                    for (index = 0; index < POKEMON_NAME_LENGTH; index++)
+                        recruitPtr->name[index] = sPokeNameBuffer[index];
                     IncrementAdventureNumJoined();
                     return 1;
-                  }
-                  else
-                  {
-                      SetScriptVarValue(NULL, NEW_FRIEND_KIND, 0);
-                      return 0;
-                  }
+                }
+                else {
+                    SetScriptVarValue(NULL, NEW_FRIEND_KIND, 0);
+                    return 0;
+                }
             }
 
         case 0x2D:
@@ -3613,13 +3605,13 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             {
                 s32 rankBefore = GetRescueTeamRank();
                 s32 points = GetPtsToNextRank();
-                if(points > 0) {
+                if (points > 0) {
                     s32 rankAfter;
                     AddToTeamRankPts(points);
                     rankAfter = GetRescueTeamRank();
                     InlineStrcpy(gFormatBuffer_Items[0], GetTeamRankString(rankBefore));
                     InlineStrcpy(gFormatBuffer_Items[1], GetTeamRankString(rankAfter));
-                    if(ScriptPrintText(0, -1, gUnknown_81167EC) != 0)
+                    if (ScriptPrintText(0, -1, _("{CENTER_ALIGN}The rescue rank went up from\n{CENTER_ALIGN}{MOVE_ITEM_0} to {MOVE_ITEM_1}!")) != 0)
                         return 1;
                 }
                 else {
@@ -3628,27 +3620,36 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
         // breakthrough
         case 0x2F:
-            AddToTeamMoney(0x2710);
+            AddToTeamMoney(10000);
             return 0;
         case 0x30:
-            {
-                if(sub_808D278(MONSTER_GARDEVOIR) == 0)
-                    return 1;
-                else
-                    return 0;
-            }
-            break;
+            if (sub_808D278(MONSTER_GARDEVOIR) == 0)
+                return 1;
+            else
+                return 0;
         case 0x31:
             sub_80A8F50(sPokeNameBuffer, 0x52, POKEMON_NAME_LENGTH);
             return 0;
 
         case 0x32:
             {
-                struct StoryMonData sp_288;
-                Pokemon sp_2b0;
-                sp_288 = gUnknown_811681C;
-                ConvertStoryMonToPokemon(&sp_2b0, &sp_288);
-                if(TryAddPokemonToRecruited(&sp_2b0) == 0) {
+                struct StoryMonData gardevoirData = {
+                    .name = sPokeNameBuffer,
+                    .speciesNum = MONSTER_GARDEVOIR,
+                    .itemID = ITEM_NOTHING,
+                    .dungeonLocation = {.id = DUNGEON_RESCUE_TEAM_BASE_2, .floor = 0},
+                    .moveID = {MOVE_CONFUSION, MOVE_DOUBLE_TEAM, MOVE_TELEPORT, MOVE_GROWL},
+                    .pokeHP = 53,
+                    .level = 5,
+                    .IQ = 1,
+                    .offenseAtk = {18, 18},
+                    .offenseDef = {11, 10},
+                    .currExp = 2800,
+                };
+                Pokemon gardevoirMon;
+
+                ConvertStoryMonToPokemon(&gardevoirMon, &gardevoirData);
+                if (TryAddPokemonToRecruited(&gardevoirMon) == 0) {
                     return 1;
                 }
                 else {
@@ -3657,42 +3658,31 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
                 }
             }
         case 0x33:
-            if(ScriptVarScenarioAfter(SCENARIO_MAIN, 0x12, -1))
+            if (ScriptVarScenarioAfter(SCENARIO_MAIN, 0x12, -1)
+               && GetScriptVarValue(0, GROUND_GETOUT) != 4
+               && GetScriptVarArrayValue(0, EVENT_GONBE, 0) <= 0)
             {
-                if(GetScriptVarValue(0, GROUND_GETOUT) != 4)
-                {
-                    if (GetScriptVarArrayValue(0, EVENT_GONBE, 0) <= 0)
-                    {
-                        if(OtherRandInt(0x100) == 0)
-                        {
-                            SetScriptVarArrayValue(0, EVENT_GONBE, 0, 4);
-                            return 1;
-                        }
-                        else
-                            SetScriptVarArrayValue(0, EVENT_GONBE, 0, 1);
-                    }
+                if (OtherRandInt(0x100) == 0) {
+                    SetScriptVarArrayValue(0, EVENT_GONBE, 0, 4);
+                    return 1;
+                }
+                else {
+                    SetScriptVarArrayValue(0, EVENT_GONBE, 0, 1);
                 }
             }
             return 0;
-
         case 0x34:
             {
-                s32 index;
-                s32 id;
-                Item *item = &gUnknown_8116844;
-                for(index = 0; index < 3; index++)
-                {
-                    if(GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
-                    {
-                        id = item->id;
-                        if(IsNotMoneyOrUsedTMItem(id))
-                            if(gTeamInventoryRef->teamStorage[id] < 999)
-                                gTeamInventoryRef->teamStorage[id] += 1;
+                s32 i;
+                static const Item appleItem = {.flags = 0, .quantity = 0, .id = ITEM_APPLE};
+                for (i = 0; i < 3; i++) {
+                    if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
+                        if (IsNotMoneyOrUsedTMItem(appleItem.id) && gTeamInventoryRef->teamStorage[appleItem.id] < 999)
+                            gTeamInventoryRef->teamStorage[appleItem.id] += 1;
 
                     }
-                    else
-                    {
-                        sub_809124C(item->id, 0);
+                    else {
+                        AddItemIdToInventory(appleItem.id, 0);
                         FillInventoryGaps();
                     }
                 }
@@ -3914,7 +3904,7 @@ void GroundScript_Unlock(void)
     index = 0;
     for (index = 0; index < SCRIPT_LOCKS_ARR_COUNT; index++) {
         if(gScriptLocks[index] != 0) {
-            Log(1, gUnknown_8116848, index);
+            Log(1, "GroundScript unlock %3d", index);
             cond  = GroundMapNotifyAll(index);
             cond |= GroundLivesNotifyAll(index);
             cond |= GroundObjectsNotifyAll(index);
@@ -3948,8 +3938,13 @@ const ScriptCommand *FindLabel(Action *action, s32 r1)
         script = *scriptPtr;
         scriptPtr++;
 
-        if(script.op == 0xF4 && r1 == script.argShort) break;
+        if (script.op == 0xF4 && r1 == script.argShort) break;
 
+        {
+            UNUSED static const u8 maybeFuncName[] = "_SearchScriptLabel";
+            UNUSED static const DebugLocation unusedDebugLoc = {"../ground/ground_script.c", 5822, maybeFuncName};
+            UNUSED static const u8 scrLabelError[] = "Script label search error %d";
+        }
         // DS: Assert(script.op != 0, "script search label error %d", label)
         // DS: Assert(script.op != 0xF6, "script search label error %d", label)
     }

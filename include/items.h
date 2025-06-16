@@ -88,6 +88,7 @@ void FillKecleonWareGaps(void);
 void SortKecleonWareInventory(void);
 void ChooseKecleonWareInventory(u8 index);
 void FillInventoryGaps(void);
+bool8 AddItemIdToInventory(u8 id, bool8 makeSticky);
 bool8 AddHeldItemToInventory(BulkItem* slot);
 bool8 IsNotMoneyOrUsedTMItem(u8 id);
 bool8 IsNotSpecialItem(u8 id);

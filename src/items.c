@@ -621,12 +621,12 @@ void ClearItemSlotAt(u32 index)
 }
 
 // arm9.bin::020603D4
-bool8 sub_809124C(u8 id, u8 param_3)
+bool8 AddItemIdToInventory(u8 id, bool8 makeSticky)
 {
-    Item temp;
+    Item item;
 
-    ItemIdToItem(&temp, id, param_3);
-    return AddItemToInventory(&temp);
+    ItemIdToItem(&item, id, makeSticky);
+    return AddItemToInventory(&item);
 }
 
 // arm9.bin::020603B0

@@ -440,7 +440,6 @@ bool8 HasItemInInventory(u8 item)
 }
 
 extern bool8 ScriptPrintText(s32 a0, s32 a1_, const char *text);
-extern bool8 sub_809124C(u8 id, u8 param_3);
 extern u8 IsTextboxOpen_809A750(void);
 extern u8 sub_809CFE8(u32);
 extern bool8 sub_809B260(s32 *a0);
@@ -485,7 +484,7 @@ static bool8 sub_809CBBC(const struct ItemWithQuantity *itemToAdd, const u8 *max
             return FALSE;
         }
 
-        sub_809124C(item.id,0);
+        AddItemIdToInventory(item.id, FALSE);
         FillInventoryGaps();
     }
 

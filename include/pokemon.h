@@ -112,7 +112,7 @@ void PrintPokeNameToBuffer(u8 *buffer, Pokemon *pokemon);
 void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level);
 const u8* DecompressMoveID(const u8* a1, u16* moveID);
 bool8 sub_808DA44(s32, u32);
-void ConvertStoryMonToPokemon(Pokemon *dst, struct StoryMonData *src);
+void ConvertStoryMonToPokemon(Pokemon *dst, const struct StoryMonData *src);
 void sub_808CE74(s16 _species, bool32 _isLeader, u8* name);
 Pokemon *sub_808D278(s32 species);
 
