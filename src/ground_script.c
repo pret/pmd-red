@@ -131,7 +131,6 @@ PixelPos SetVecFromDirectionSpeed(s8, s32);
 bool8 sub_8098DCC(u32 speed);
 
 void sub_8099220(void *param_1, s32 param_2);
-s16 FriendAreaIdToMapId(u8 param_1); // value -> GroundEnter lookup
 bool8 sub_809B260(void *dst);
 bool8 sub_809B18C(s32 *sp);
 bool8 sub_809AFFC(u8 *);

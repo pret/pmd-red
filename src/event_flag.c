@@ -15,6 +15,7 @@
 #include "code_8097670.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "script_vars_info.h"
 
 EWRAM_DATA u8 gScriptVarBuffer[0x400] = {0}; // NDS=020876DC
 

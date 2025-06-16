@@ -1,4 +1,4 @@
-#include "event_flag.h"
+#include "constants/event_flag.h"
 #include "constants/item.h"
 #include "constants/ground_map.h"
 #include "structs/str_ground_script.h"

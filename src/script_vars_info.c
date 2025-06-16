@@ -1,8 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
-#include "event_flag.h"
+#include "script_vars_info.h"
 
-const struct ScriptVarInfo gScriptVarInfo[] = {
+const struct ScriptVarInfo gScriptVarInfo[SCRIPT_VARS_COUNT] = {
     [VERSION] = {6, 2, 0, 0, 1, 29, "VERSION"},
     [CONDITION] = {6, 2, 4, 0, 1, 0, "CONDITION"},
     [SCENARIO_SELECT] = {2, 2, 110, 0, 2, 0, "SCENARIO_SELECT"},
