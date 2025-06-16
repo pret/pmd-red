@@ -233,4 +233,9 @@ enum {
     MAP_COUNT,
 };
 
+// These are automatically adjusted via GetAdjustedGroundMap.
+#define MAP_TEAM_BASE           MAP_TEAM_BASE_PIKACHU_BASIC
+#define MAP_TEAM_BASE_INSIDE    MAP_TEAM_BASE_INSIDE_PIKACHU_BASIC
+#define TEAM_BASE_MAPS_PER_SPECIES 6 // 3 on the inside and 3 on the outside (basic, construction, final)
+
 #endif // GUARD_CONSTANTS_GROUND_MAP_H

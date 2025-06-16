@@ -108,7 +108,6 @@ void sub_809D1E4(s32, s32, s32);
 void sub_809D208(s32, PixelPos*, s32);
 void sub_809D220(s32, s32, s32);
 void GroundScriptLockJumpZero(s16);
-s16 GetAdjustedGroundMap(s32);
 void sub_80A87AC(s32, s32);
 void sub_80A8BD8(s16, s32*);
 u32 sub_80A8C2C();
