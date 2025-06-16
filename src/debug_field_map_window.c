@@ -43,7 +43,7 @@ bool8 DebugFieldMapWindow_Init(void)
     sDebugWindow->m.menuWindow->header = &sDebugWindow->header;
     ResetUnusedInputStruct();
     ShowWindows(&sDebugWindow->m.windows, TRUE, TRUE);
-    CreateMenuOnWindow(&sDebugWindow->m.input, 229, 10, sDebugWindow->m.menuWinId);
+    CreateMenuOnWindow(&sDebugWindow->m.input, MAP_COUNT, 10, sDebugWindow->m.menuWinId);
     ShowWindowsWithHeader();
     PrintCurrentPageText();
     return TRUE;
@@ -82,7 +82,7 @@ s16 DebugFieldMapWindow_GetCurrentIndex(void)
 
 UNUSED static void ShowDebugFieldMapWindow(bool8 addCursorSprite)
 {
-    sDebugWindow->m.input.totalEntriesCount = 229;
+    sDebugWindow->m.input.totalEntriesCount = MAP_COUNT;
     MenuUpdatePagesData(&sDebugWindow->m.input);
     ShowWindowsWithHeader();
     PrintCurrentPageText();

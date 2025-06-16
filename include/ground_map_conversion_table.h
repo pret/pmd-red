@@ -13,6 +13,6 @@ typedef struct GroundConversionStruct
     /* 0x8 */ const u8 *text;
 } GroundConversionStruct;
 
-extern const GroundConversionStruct gGroundMapConversionTable[MAP_COUNT + 1];
+extern const GroundConversionStruct gGroundMapConversionTable[MAP_COUNT];
 
 #endif // GUARD_GROUND_MAP_CONVERSION_TABLE_H

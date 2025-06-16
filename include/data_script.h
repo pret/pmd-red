@@ -2,7 +2,7 @@
 #include "constants/item.h"
 #include "constants/ground_map.h"
 #include "structs/str_ground_script.h"
-#define LPARRAY(x) (sizeof(x)/sizeof(*(x))), x
+#define LPARRAY(x) (ARRAY_COUNT(x)), x
 
 #define CPOS_HALFTILE 0x2
 #define CPOS_CURRENT  0x4

@@ -1,10 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
-#include "ground_script.h"
+#include "map_script_table.h"
 
 static EWRAM_DATA s16 sScriptFileId = {0};
-
-extern const struct GroundScriptHeader *gMapScriptTable[]; // 811E2F8
 
 static void ResetCurrentScriptFile(void);
 

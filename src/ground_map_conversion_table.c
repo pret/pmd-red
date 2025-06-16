@@ -4,7 +4,7 @@
 #include "ground_place.h"
 #include "constants/ground_map.h"
 
-const GroundConversionStruct gGroundMapConversionTable[MAP_COUNT + 1] = {
+const GroundConversionStruct gGroundMapConversionTable[MAP_COUNT] = {
     [MAP_SQUARE] = {
         .unk0 = 1,
         .groundPlaceId = GROUND_PLACE_SQUARE,
@@ -1545,63 +1545,63 @@ const GroundConversionStruct gGroundMapConversionTable[MAP_COUNT + 1] = {
         .unk6 = -1,
         .text = _("__ground_amd_conversion_00228"),
     },
-    [MAP_D24] = {
+    [MAP_D24_1] = {
         .unk0 = 3,
         .groundPlaceId = GROUND_PLACE_DUNGEON,
         .mapFileTableId = 229,
         .unk6 = -1,
         .text = _("__ground_amd_conversion_00229"),
     },
-    [MAP_D25] = {
+    [MAP_D24_2] = {
         .unk0 = 1,
         .groundPlaceId = GROUND_PLACE_DUNGEON,
         .mapFileTableId = 230,
         .unk6 = -1,
         .text = _("__ground_amd_conversion_00230"),
     },
-    [MAP_PERSONALITY_TEST_MULTICOLOR] = {
+    [MAP_D25] = {
         .unk0 = 10,
         .groundPlaceId = GROUND_PLACE_DUNGEON,
         .mapFileTableId = 231,
         .unk6 = -1,
         .text = _("__ground_amd_conversion_00231"),
     },
-    [MAP_TITLE_SCREEN] = {
+    [MAP_PERSONALITY_TEST_MULTICOLOR] = {
         .unk0 = 9,
         .groundPlaceId = GROUND_PLACE_SCENE,
         .mapFileTableId = 232,
         .unk6 = -1,
         .text = _("__ground_amd_conversion_00232"),
     },
-    [MAP_INTRO] = {
+    [MAP_TITLE_SCREEN] = {
         .unk0 = 9,
         .groundPlaceId = GROUND_PLACE_SCENE,
         .mapFileTableId = 233,
         .unk6 = -1,
         .text = _("__ground_amd_conversion_00233"),
     },
-    [MAP_LOGO_POKEMON_COMPANY] = {
+    [MAP_INTRO] = {
         .unk0 = 4,
         .groundPlaceId = GROUND_PLACE_SCENE,
         .mapFileTableId = 234,
         .unk6 = -1,
         .text = _("__ground_amd_conversion_00235"),
     },
-    [MAP_LOGO_WARNING] = {
+    [MAP_LOGO_POKEMON_COMPANY] = {
         .unk0 = 4,
         .groundPlaceId = GROUND_PLACE_SCENE,
         .mapFileTableId = 235,
         .unk6 = -1,
         .text = _("__ground_amd_conversion_00237"),
     },
-    [MAP_TEAM_BASE_WALL_MAP] = {
+    [MAP_LOGO_WARNING] = {
         .unk0 = 4,
         .groundPlaceId = GROUND_PLACE_SCENE,
         .mapFileTableId = 236,
         .unk6 = -1,
         .text = _("__ground_amd_conversion_00239"),
     },
-    [MAP_COUNT] = {
+    [MAP_TEAM_BASE_WALL_MAP] = {
         .unk0 = 4,
         .groundPlaceId = GROUND_PLACE_SCENE,
         .mapFileTableId = 237,
