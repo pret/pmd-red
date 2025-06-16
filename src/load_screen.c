@@ -320,7 +320,7 @@ void DrawLoadScreenText(void)
             switch(GetScriptVarValue(NULL,START_MODE))
             {
                 default:
-                    sprintfStatic(auStack356,gUnknown_80E7804,sub_8098FB4());
+                    sprintfStatic(auStack356,gUnknown_80E7804,GetCurrentGroundPlaceName());
                     FormatString(auStack356,gLoadScreen->formattedLocation,gLoadScreen->formattedPlayTime,0);
                     break;
                 case 0x7:

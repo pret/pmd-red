@@ -8,7 +8,7 @@ void sub_8099750(void);
 void sub_809975C(void);
 void sub_8099768(void);
 void sub_809977C(void);
-void sub_80997F4(u16 a0, u32 a1);
+void sub_80997F4(u16 a0, u16 a1);
 void sub_80999D4(s32 a0);
 void sub_80999E8(s32 a0);
 void sub_80999FC(s32 a0);

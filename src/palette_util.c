@@ -85,7 +85,7 @@ void sub_809977C(void)
     }
 }
 
-void sub_80997F4(u16 a0, u32 a1)
+void sub_80997F4(u16 a0, u16 a1)
 {
     gUnknown_2039998[a0] = a1;
     sub_8099848(&gUnknown_2039958);

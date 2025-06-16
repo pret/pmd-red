@@ -60,15 +60,15 @@ void GenerateHiddenPower(HiddenPower* a1)
 }
 
 // arm9.bin::02059F70
-bool8 HasRecruitedMon(s16 species)
+bool8 HasRecruitedMon(s32 species_)
 {
-    s32 species_s32 = species;
+    s32 species = (s16) species_;
     s32 i = 0;
     Pokemon *pokemon = gRecruitedPokemonRef->pokemon;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        if (((u8)pokemon->flags & 1)) {
-            if (pokemon->speciesNum == species_s32)
+        if (PokemonExists(pokemon)) {
+            if (pokemon->speciesNum == species)
                 return TRUE;
         }
         pokemon++;

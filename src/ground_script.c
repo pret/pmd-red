@@ -14,6 +14,7 @@
 #include "code_80972F4.h"
 #include "code_8097670.h"
 #include "code_80A26CC.h"
+#include "code_8098BDC.h"
 #include "debug.h"
 #include "dungeon_info.h"
 #include "event_flag.h"
@@ -40,6 +41,8 @@
 #include "pokemon.h"
 #include "wigglytuff_shop1.h"
 #include "wonder_mail.h"
+#include "palette_util.h"
+#include "pokemon_3.h"
 #include "friend_area_dialogue.h"
 #include "structs/str_dungeon_setup.h"
 
@@ -74,11 +77,6 @@ bool8 sub_802FCF0(void);
 void sub_809733C(s16, bool8);
 void sub_80973A8(s16, bool8);
 void sub_80975A8(s16, bool8);
-u32 sub_80999E8();
-void sub_80999FC(s32);
-u32 sub_8099A10();
-u32 sub_8099A34();
-u32 sub_8099A48();
 u32 sub_809A6E4();
 u32 sub_809A6F8();
 u32 sub_809A738();
@@ -149,6 +147,10 @@ extern u8 IsTextboxOpen_809A750(void);
 extern Action *sub_80A882C(s16);
 extern Action *sub_80AC240(s16);
 extern Action *sub_80AD158(s16);
+extern void sub_809AB4C(s32, s32);
+extern void sub_809ABB4(s32, s32);
+extern void sub_809AC18(s32, s32);
+extern s16 sub_80A8BBC(s32 id_);
 
 bool8 GroundLivesNotifyAll(s16);
 bool8 GroundObjectsNotifyAll(s16);
@@ -161,7 +163,6 @@ void ResetMailbox(void);
 void sub_80963FC(void);
 void sub_8096488(void);
 bool8 sub_80964B4(void);
-extern void nullsub_104(void);
 s16 sub_80A8C4C();
 bool8 sub_8097640();
 u8 sub_80964E4();
@@ -170,8 +171,6 @@ u8 sub_80A8D20();
 bool8 sub_80A87E0();
 s16 sub_80A8BFC(s16);
 void sub_80A8F50(const u8 *buffer, s32, s32 size);
-bool8 HasRecruitedMon(s32 species);
-extern Item gUnknown_81167E4;
 void sub_80A56A0(s32, s32);
 void sub_80A56F0(s32 *);
 void sub_80A5704(s32 *);
@@ -183,7 +182,6 @@ void sub_80AC1B0(s16, s32);
 void sub_80AD0C8(s16, s32);
 s32 sub_80A5984();
 void sub_80A59A0(s32, s32 *, u16);
-extern void sub_80997F4(u16, u16);
 s32 sub_809CFE8(u16 param_1);
 extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
@@ -233,13 +231,21 @@ static const ScriptCommand gUnknown_81164E4[] = {
     {0xEF, 0, 0,    0, 0, NULL},
 };
 
-// -1 didn't match
-void sub_809D520(ActionUnkIds *a0)
+static const ScriptCommand *FindLabel(Action *action, s32 r1);
+static const ScriptCommand *ResolveJump(Action *action, s32 r1);
+static void sub_80A2500(s32 param_1, ActionUnkIds *param_2);
+static void sub_80A252C(s32 param_1, ActionUnkIds *param_2);
+static void sub_80A2558(s32 param_1, ActionUnkIds *param_2);
+static void sub_80A2584(s16 r0, s16 r1);
+static void sub_80A2598(s16 r0, s16 r1);
+static u32 sub_80A25AC(u16 param_1);
+
+static void sub_809D520(ActionUnkIds *a0)
 {
     a0->unk0 = -1;
 }
 
-Action *sub_809D52C(ActionUnkIds *a0)
+static Action *sub_809D52C(ActionUnkIds *a0)
 {
     switch (a0->unk0) {
         case 0: return 0;
@@ -1782,7 +1788,7 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x24: {
-                sub_8099A10(curCmd.argShort, (u16)curCmd.arg1, (u16)curCmd.arg2);
+                sub_8099A10(curCmd.argShort, curCmd.arg1, curCmd.arg2);
                 if (curCmd.argByte) return 2;
                 break;
             }
@@ -3059,12 +3065,6 @@ UNUSED static bool8 GroundScript_ExecuteTrigger(s16 r0)
         return FALSE;
 }
 
-extern struct StoryMonData gUnknown_8116738;
-extern struct StoryMonData gUnknown_811681C;
-extern DungeonLocation gUnknown_8116788;
-extern DungeonLocation gUnknown_811678C;
-extern DungeonLocation gUnknown_8116790;
-
 s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
 {
     switch(idx)
@@ -3925,7 +3925,7 @@ void GroundScript_Unlock(void)
     }
 }
 
-const ScriptCommand *FindLabel(Action *action, s32 r1)
+static const ScriptCommand *FindLabel(Action *action, s32 r1)
 {
     ScriptCommand script;
     const ScriptCommand *scriptPtr2;
@@ -3951,7 +3951,7 @@ const ScriptCommand *FindLabel(Action *action, s32 r1)
     return scriptPtr;
 }
 
-const ScriptCommand *ResolveJump(Action *action, s32 r1)
+static const ScriptCommand *ResolveJump(Action *action, s32 r1)
 {
     ScriptCommand script;
     const ScriptCommand *scriptPtr;
@@ -3984,4 +3984,55 @@ const ScriptCommand *ResolveJump(Action *action, s32 r1)
         }
         scriptPtr++;
     }
+}
+
+static void sub_80A2500(s32 param_1, ActionUnkIds *param_2)
+{
+    if (param_2->unk0 == 1) {
+        sub_809AB4C((s16) param_1, sub_80A8BBC(param_2->unk2));
+    }
+}
+
+static void sub_80A252C(s32 param_1, ActionUnkIds *param_2)
+{
+    if (param_2->unk0 == 1) {
+        sub_809ABB4((s16) param_1, sub_80A8BBC(param_2->unk2));
+    }
+}
+
+static void sub_80A2558(s32 param_1, ActionUnkIds *param_2)
+{
+    if (param_2->unk0 == 1) {
+        sub_809AC18((s16) param_1, sub_80A8BBC(param_2->unk2));
+    }
+}
+
+static void sub_80A2584(s16 r0, s16 r1)
+{
+    s32 iVar2 = r1;
+    s32 iVar1 = r0;
+    sub_809ABB4(iVar1, iVar2);
+}
+
+static void sub_80A2598(s16 r0, s16 r1)
+{
+    s32 iVar2 = r1;
+    s32 iVar1 = r0;
+    sub_809AC18(iVar1, iVar2);
+}
+
+static u32 sub_80A25AC(u16 param_1)
+{
+    if (sub_8098F88())
+        return param_1;
+    if (param_1 == 50)
+        return 50;
+    if (!sub_80023E4(12))
+        return 999;
+    if (sub_80023E4(13))
+        return 19;
+    if (param_1 != 1)
+        return param_1;
+    GetScriptVarValue(NULL, BASE_LEVEL); // wut???
+    return 1;
 }

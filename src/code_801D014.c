@@ -565,7 +565,7 @@ static void sub_801D894(void)
     u8 buffer[100]; // sp +4
 
     if (sUnknown_203B250->currFriendAreaLocation == FRIEND_AREA_NONE)
-        location = sub_8098FB4();
+        location = GetCurrentGroundPlaceName();
     else
         location = GetFriendAreaName(sUnknown_203B250->currFriendAreaLocation);
 

@@ -341,6 +341,7 @@ SECTIONS {
         src/code_809D148.o(.text);
         src/ground_script.o(.text);
         src/code_80A26CC.o(.text);
+        src/ground_place.o(.text);
         src/ground_bg.o(.text);
         src/ground_map.o(.text);
         asm/ground_map_1.o(.text);
@@ -720,7 +721,8 @@ SECTIONS {
         src/code_809A560.o(.rodata);
         data/data_8115F5C_2.o(.rodata);
         src/ground_script.o(.rodata);
-        data/data_8115F5C_2_.o(.rodata);
+        src/code_80A26CC.o(.rodata);
+        src/ground_place.o(.rodata);
         src/ground_bg.o(.rodata);
         data/data_8115F5C_2_1.o(.rodata);
         src/ground_sprite.o(.rodata);

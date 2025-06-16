@@ -15,7 +15,7 @@ typedef struct GroundConversionStruct
 } GroundConversionStruct;
 
 bool8 sub_8098F88(void);
-const char *sub_8098FB4(void);
+const char *GetCurrentGroundPlaceName(void);
 
 bool8 GroundMainGroundRequest(s32 r0, s32 r1, s32 r2);
 bool8 GroundMainRescueRequest(s32 r0, s32 r1);

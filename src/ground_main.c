@@ -9,6 +9,7 @@
 #include "code_80958E8.h"
 #include "code_8099360.h"
 #include "code_80A26CC.h"
+#include "ground_place.h"
 #include "debug.h"
 #include "event_flag.h"
 #include "ground_main.h"
@@ -16,7 +17,6 @@
 #include "play_time.h"
 #include "pokemon.h"
 #include "text_util.h"
-#include "code_80A26CC.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -695,9 +695,9 @@ UNUSED static s16 sub_8098FA0(void)
     return GetScriptVarValue(NULL, GROUND_PLACE);
 }
 
-const char *sub_8098FB4(void)
+const char *GetCurrentGroundPlaceName(void)
 {
-    return sub_80A2B18(GetScriptVarValue(NULL, GROUND_PLACE));
+    return GetGroundPlaceName(GetScriptVarValue(NULL, GROUND_PLACE));
 }
 
 s16 sub_8098FCC(u32 unused)
@@ -740,10 +740,10 @@ UNUSED static const char *sub_80990B8(void)
 {
     s16 index = sub_8098FCC(0xB);
     if (index != -1) {
-        return sub_80A2B18(gGroundConversion_811BAF4[index].unk2);
+        return GetGroundPlaceName(gGroundConversion_811BAF4[index].unk2);
     }
     else {
-        return sub_8098FB4();
+        return GetCurrentGroundPlaceName();
     }
 }
 

@@ -34,8 +34,6 @@ bool8 GroundScriptLockCond(Action *param_1, s16 index, s32 param_3);
 bool8 ActionResetScriptData(Action *param_1, const DebugLocation *unused);
 bool8 GroundScript_ExecutePP(Action *action, ActionUnkIds *param_2, ScriptInfoSmall *param_3, const DebugLocation *unused);
 bool8 ExecutePredefinedScript(Action *param_1, ActionUnkIds *param_2, s16 index, DebugLocation *debug);
-const ScriptCommand *FindLabel(Action *action, s32 r1);
-const ScriptCommand *ResolveJump(Action *action, s32 r1);
 void InitActionWithParams(Action *action, const CallbackData *callbacks, void *parent, s32 group, s32 sector);
 
 // For gScriptLocks, gScriptLockConds, gUnlockBranchLabels

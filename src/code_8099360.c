@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "code_8099360.h"
 #include "bg_palette_buffer.h"
 #include "graphics_memory.h"
 #include "game_options.h"
@@ -13,9 +14,6 @@ extern u8 gUnknown_20398B8;
 extern void sub_8003600(void);
 extern s32 sub_800388C(u16, const u8 *, u8);
 extern void sub_8003810(u16 idx, unkStruct_3000400 param_2);
-
-void sub_809965C(void);
-void sub_8099690(u32 param_1);
 
 void sub_8099648(void)
 {
