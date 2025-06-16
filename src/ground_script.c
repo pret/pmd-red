@@ -184,7 +184,6 @@ void sub_80A59A0(s32, s32 *, u16);
 s32 sub_809CFE8(u16 param_1);
 extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
-// TODO: make these static maybe?
 EWRAM_DATA s16 gCurrentMap = 0;
 EWRAM_DATA s16 gUnknown_2039A32 = 0;
 EWRAM_DATA s16 gUnknown_2039A34 = 0;
@@ -193,10 +192,10 @@ EWRAM_DATA u8 gAnyScriptLocked = 0;
 ALIGNED(4) EWRAM_DATA u8 gScriptLocks[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
 ALIGNED(4) EWRAM_DATA u8 gScriptLockConds[SCRIPT_LOCKS_ARR_COUNT + 7] = {0};
 EWRAM_DATA u32 gUnlockBranchLabels[SCRIPT_LOCKS_ARR_COUNT + 1] = {0};
-EWRAM_DATA MenuItem gChoices[9] = {0};
+static EWRAM_DATA MenuItem gChoices[9] = {0};
 static EWRAM_DATA char sPokeNameBuffer[POKEMON_NAME_LENGTH + 2] = {0};
-EWRAM_DATA u32 gUnknown_2039DA4 = 0;
-EWRAM_DATA u16 gUnknown_2039DA8 = 0;
+static EWRAM_DATA u32 gUnknown_2039DA4 = 0;
+static EWRAM_DATA u16 gUnknown_2039DA8 = 0;
 EWRAM_INIT static int sNumChoices = 0;
 
 static const CallbackData sNullCallbackData = {
