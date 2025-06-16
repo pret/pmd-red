@@ -142,8 +142,8 @@ static const struct ScriptCommand s_gs199_g0_s4_lives1_dlg0[] = { /* 0x824ed98 *
 static const struct ScriptCommand s_gs199_g1_s0_station_sref_script[] = { /* 0x824edc8 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 199),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 199),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_FROSTY_FOREST_MID),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_FROSTY_FOREST_MID),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_FROSTY_FOREST_MID),
@@ -210,8 +210,8 @@ static const struct ScriptCommand s_gs199_g1_s0_lives1_dlg0[] = { /* 0x824f190 *
 static const struct ScriptCommand s_gs199_g2_s0_station_sref_script[] = { /* 0x824f260 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 199),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 199),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_FROSTY_FOREST_MID),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_FROSTY_FOREST_MID),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_FROSTY_FOREST_MID),

@@ -63,7 +63,7 @@ void ThoroughlyResetScriptVars(void)
     ScenarioCalc(SCENARIO_SUB9,0,0);
     SetScriptVarValue(NULL,GROUND_ENTER,MAP_PERSONALITY_TEST_CYAN);
     SetScriptVarValue(NULL,GROUND_ENTER_LINK,0);
-    SetScriptVarValue(NULL,GROUND_GETOUT,0xa2);
+    SetScriptVarValue(NULL,GROUND_GETOUT,MAP_PERSONALITY_TEST_CYAN);
     SetScriptVarValue(NULL,GROUND_MAP,-1);
     SetScriptVarValue(NULL,GROUND_PLACE,GROUND_PLACE_NEW_GAME);
     SetScriptVarValue(NULL,DUNGEON_SELECT,-1);

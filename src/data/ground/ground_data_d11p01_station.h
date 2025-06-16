@@ -127,8 +127,8 @@ static const struct ScriptCommand s_gs201_g0_s5_obj1_dlg2[] = { /* 0x825243c */
 static const struct ScriptCommand s_gs201_g1_s0_station_sref_script[] = { /* 0x825245c */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 201),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 201),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_MT_FREEZE_ENTRY),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_MT_FREEZE_ENTRY),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     { 0x3b, 0x1c,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -435,8 +435,8 @@ static const struct ScriptCommand s_gs201_g2_s1_lives1_dlg0[] = { /* 0x8253f50 *
 static const struct ScriptCommand s_gs201_g3_s0_station_sref_script[] = { /* 0x82540c0 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 201),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 201),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_MT_FREEZE_ENTRY),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_MT_FREEZE_ENTRY),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     { 0x3b, 0x1c,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -498,8 +498,8 @@ static const struct ScriptCommand s_gs201_g3_s0_lives1_dlg0[] = { /* 0x8254430 *
 static const struct ScriptCommand s_gs201_g4_s0_station_sref_script[] = { /* 0x8254500 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 201),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 201),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_MT_FREEZE_ENTRY),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_MT_FREEZE_ENTRY),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     { 0x3b, 0x1c,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -568,8 +568,8 @@ static const struct ScriptCommand s_gs201_g4_s0_lives1_dlg0[] = { /* 0x825492c *
 static const struct ScriptCommand s_gs201_g5_s0_station_sref_script[] = { /* 0x8254a0c */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 201),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 201),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_MT_FREEZE_ENTRY),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_MT_FREEZE_ENTRY),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     { 0x3b, 0x1c,  0x0000,  0x00000000,  0x00000000, NULL },

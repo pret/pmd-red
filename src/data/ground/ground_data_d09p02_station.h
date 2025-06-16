@@ -8,7 +8,7 @@
 
 static const struct ScriptCommand s_gs196_g0_s0_station_sref_script[] = { /* 0x8248a54 */
     DEBUGINFO,
-    SELECT_MAP(196),
+    SELECT_MAP(MAP_MT_BLAZE_MID),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_EQ, 12, /* to label */ 0),
     COND(JUDGE_GT, 17, /* to label */ 1),
@@ -142,11 +142,11 @@ static const struct ScriptCommand s_gs196_g0_s4_lives1_dlg0[] = { /* 0x82490d8 *
 static const struct ScriptCommand s_gs196_g1_s0_station_sref_script[] = { /* 0x8249108 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 196),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 196),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_MT_BLAZE_MID),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_MT_BLAZE_MID),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
-    SELECT_MAP(196),
+    SELECT_MAP(MAP_MT_BLAZE_MID),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(25),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },

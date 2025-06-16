@@ -149,8 +149,8 @@ static const struct ScriptCommand s_gs202_g0_s4_lives1_dlg0[] = { /* 0x8255d94 *
 static const struct ScriptCommand s_gs202_g1_s0_station_sref_script[] = { /* 0x8255dc4 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 202),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 202),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_MT_FREEZE_MID),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_MT_FREEZE_MID),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     JUMPIF_EQUAL(SCENARIO_MAIN, 14, /* to label */ 0),

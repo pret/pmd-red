@@ -98,8 +98,8 @@ static const struct ScriptCommand s_gs12_g0_s0_evt1_sref_script[] = { /* 0x81e1d
   LABEL(0), /* = 0x00 */
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(SAVE_START_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     { 0x3c, 0x0e,  0x0000,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(SAVE_END_FUNC),
     JUMP_SCRIPT(END_TALK),
@@ -247,8 +247,8 @@ static const struct ScriptCommand s_gs12_g2_s0_lives0_dlg0[] = { /* 0x81e2444 */
 static const struct ScriptCommand s_gs12_g3_s0_station_sref_script[] = { /* 0x81e24a4 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 6, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -283,8 +283,8 @@ static const struct ScriptCommand s_gs12_g3_s0_lives0_dlg0[] = { /* 0x81e2608 */
 static const struct ScriptCommand s_gs12_g4_s0_station_sref_script[] = { /* 0x81e2688 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 6, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -311,8 +311,8 @@ static const struct ScriptCommand s_gs12_g4_s0_lives0_dlg0[] = { /* 0x81e2764 */
 
 static const struct ScriptCommand s_gs12_g5_s0_station_sref_script[] = { /* 0x81e27e4 */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
     SELECT_ENTITIES(0, 2),
     SELECT_EVENTS(0, 0),
@@ -326,8 +326,8 @@ static const struct ScriptRef s_gs12_g5_s0_station_sref = { 402, 7, NULL /* EVEN
 static const struct ScriptCommand s_gs12_g6_s0_station_sref_script[] = { /* 0x81e2880 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -361,8 +361,8 @@ static const struct ScriptCommand s_gs12_g6_s0_lives0_dlg0[] = { /* 0x81e29cc */
 
 static const struct ScriptCommand s_gs12_g7_s0_station_sref_script[] = { /* 0x81e2a4c */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -390,8 +390,8 @@ static const struct ScriptCommand s_gs12_g7_s0_lives0_dlg0[] = { /* 0x81e2b18 */
 static const struct ScriptCommand s_gs12_g8_s0_station_sref_script[] = { /* 0x81e2b98 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 6, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -421,8 +421,8 @@ static const struct ScriptCommand s_gs12_g8_s0_lives0_dlg0[] = { /* 0x81e2c74 */
 static const struct ScriptCommand s_gs12_g9_s0_station_sref_script[] = { /* 0x81e2d14 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -1290,8 +1290,8 @@ static const struct ScriptCommand s_gs12_g14_s0_lives1_dlg0[] = { /* 0x81e7334 *
 static const struct ScriptCommand s_gs12_g15_s0_station_sref_script[] = { /* 0x81e7424 - PART 1 0:22:25-0:22:53 - First day cutscene */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -1382,8 +1382,8 @@ static const struct ScriptRef s_gs12_g16_s0_evt1_sref = { 57, 7, NULL /* NORMAL_
 static const struct ScriptCommand s_gs12_g16_s1_station_sref_script[] = { /* 0x81e79b0 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -1411,8 +1411,8 @@ static const struct ScriptCommand s_gs12_g16_s1_lives0_dlg0[] = { /* 0x81e7a8c *
 static const struct ScriptCommand s_gs12_g17_s0_station_sref_script[] = { /* 0x81e7b0c */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -1451,8 +1451,8 @@ static const struct ScriptCommand s_gs12_g17_s0_lives0_dlg0[] = { /* 0x81e7be8 *
 
 static const struct ScriptCommand s_gs12_g18_s0_station_sref_script[] = { /* 0x81e7e1c */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -1485,8 +1485,8 @@ static const struct ScriptCommand s_gs12_g18_s0_lives0_dlg0[] = { /* 0x81e7f38 *
 static const struct ScriptCommand s_gs12_g19_s0_station_sref_script[] = { /* 0x81e7fb8 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -1524,8 +1524,8 @@ static const struct ScriptCommand s_gs12_g19_s0_lives0_dlg0[] = { /* 0x81e8094 *
 static const struct ScriptCommand s_gs12_g20_s0_station_sref_script[] = { /* 0x81e8268 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -1652,8 +1652,8 @@ static const struct ScriptCommand s_gs12_g20_s1_lives0_dlg0[] = { /* 0x81e8ac8 *
 
 static const struct ScriptCommand s_gs12_g21_s0_station_sref_script[] = { /* 0x81e8c38 */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -1687,8 +1687,8 @@ static const struct ScriptCommand s_gs12_g21_s0_lives0_dlg0[] = { /* 0x81e8d54 *
 static const struct ScriptCommand s_gs12_g22_s0_station_sref_script[] = { /* 0x81e8de4 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -1723,8 +1723,8 @@ static const struct ScriptCommand s_gs12_g22_s0_lives0_dlg0[] = { /* 0x81e8f30 *
 static const struct ScriptCommand s_gs12_g23_s0_station_sref_script[] = { /* 0x81e8fb0 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -1759,8 +1759,8 @@ static const struct ScriptCommand s_gs12_g23_s0_lives0_dlg0[] = { /* 0x81e90fc *
 static const struct ScriptCommand s_gs12_g24_s0_station_sref_script[] = { /* 0x81e917c */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -1794,8 +1794,8 @@ static const struct ScriptCommand s_gs12_g24_s0_lives0_dlg0[] = { /* 0x81e92c8 *
 
 static const struct ScriptCommand s_gs12_g25_s0_station_sref_script[] = { /* 0x81e9348 */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -1823,8 +1823,8 @@ static const struct ScriptCommand s_gs12_g25_s0_lives0_dlg0[] = { /* 0x81e9414 *
 static const struct ScriptCommand s_gs12_g26_s0_station_sref_script[] = { /* 0x81e9494 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -1858,8 +1858,8 @@ static const struct ScriptCommand s_gs12_g26_s0_lives0_dlg0[] = { /* 0x81e95e0 *
 
 static const struct ScriptCommand s_gs12_g27_s0_station_sref_script[] = { /* 0x81e9660 */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -1887,8 +1887,8 @@ static const struct ScriptCommand s_gs12_g27_s0_lives0_dlg0[] = { /* 0x81e972c *
 static const struct ScriptCommand s_gs12_g28_s0_station_sref_script[] = { /* 0x81e97ac */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -1922,8 +1922,8 @@ static const struct ScriptCommand s_gs12_g28_s0_lives0_dlg0[] = { /* 0x81e98f8 *
 
 static const struct ScriptCommand s_gs12_g29_s0_station_sref_script[] = { /* 0x81e9978 */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -1951,8 +1951,8 @@ static const struct ScriptCommand s_gs12_g29_s0_lives0_dlg0[] = { /* 0x81e9a44 *
 static const struct ScriptCommand s_gs12_g30_s0_station_sref_script[] = { /* 0x81e9ac4 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -1986,8 +1986,8 @@ static const struct ScriptCommand s_gs12_g30_s0_lives0_dlg0[] = { /* 0x81e9c10 *
 
 static const struct ScriptCommand s_gs12_g31_s0_station_sref_script[] = { /* 0x81e9c90 */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -2015,8 +2015,8 @@ static const struct ScriptCommand s_gs12_g31_s0_lives0_dlg0[] = { /* 0x81e9d5c *
 static const struct ScriptCommand s_gs12_g32_s0_station_sref_script[] = { /* 0x81e9ddc */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -2096,8 +2096,8 @@ static const struct ScriptCommand s_gs12_g33_s0_lives0_dlg0[] = { /* 0x81ea094 *
 static const struct ScriptCommand s_gs12_g34_s0_station_sref_script[] = { /* 0x81ea2d8 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -2137,8 +2137,8 @@ static const struct ScriptCommand s_gs12_g34_s0_lives0_dlg0[] = { /* 0x81ea3c4 *
 static const struct ScriptCommand s_gs12_g35_s0_station_sref_script[] = { /* 0x81ea5a4 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -2215,8 +2215,8 @@ static const struct ScriptCommand s_gs12_g36_s0_lives0_dlg0[] = { /* 0x81ea85c *
 static const struct ScriptCommand s_gs12_g37_s0_station_sref_script[] = { /* 0x81eaa5c */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -2252,8 +2252,8 @@ static const struct ScriptCommand s_gs12_g37_s0_lives0_dlg0[] = { /* 0x81eab48 *
 static const struct ScriptCommand s_gs12_g38_s0_station_sref_script[] = { /* 0x81eaca0 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -2385,8 +2385,8 @@ static const struct ScriptCommand s_gs12_g39_s1_lives0_dlg0[] = { /* 0x81eb468 *
 static const struct ScriptCommand s_gs12_g40_s0_station_sref_script[] = { /* 0x81eb528 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -2420,8 +2420,8 @@ static const struct ScriptCommand s_gs12_g40_s0_lives0_dlg0[] = { /* 0x81eb674 *
 
 static const struct ScriptCommand s_gs12_g41_s0_station_sref_script[] = { /* 0x81eb6f4 */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -2546,8 +2546,8 @@ static const struct ScriptCommand s_gs12_g42_s0_eff1_script[] = { /* 0x81ebe54 *
 static const struct ScriptCommand s_gs12_g43_s0_station_sref_script[] = { /* 0x81ebee4 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     BGM_STOP,
@@ -2581,8 +2581,8 @@ static const struct ScriptCommand s_gs12_g43_s0_lives0_dlg0[] = { /* 0x81ec030 *
 
 static const struct ScriptCommand s_gs12_g44_s0_station_sref_script[] = { /* 0x81ec0b0 */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
@@ -2610,8 +2610,8 @@ static const struct ScriptCommand s_gs12_g44_s0_lives0_dlg0[] = { /* 0x81ec17c *
 static const struct ScriptCommand s_gs12_g45_s0_station_sref_script[] = { /* 0x81ec1fc */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     { 0x2d, 0x09,  0x0000,  0x00000021,  0x00000000, NULL },
@@ -2721,8 +2721,8 @@ static const struct ScriptRef s_gs12_g46_s0_evt1_sref = { 57, 7, NULL /* NORMAL_
 static const struct ScriptCommand s_gs12_g46_s1_station_sref_script[] = { /* 0x81ecb38 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     SELECT_MAP(MAP_TEAM_BASE_INSIDE),
