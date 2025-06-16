@@ -8,7 +8,7 @@
 
 static const struct ScriptCommand s_gs202_g0_s0_station_sref_script[] = { /* 0x82556a0 */
     DEBUGINFO,
-    SELECT_MAP(202),
+    SELECT_MAP(MAP_MT_FREEZE_MID),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_EQ, 14, /* to label */ 0),
     COND(JUDGE_GT, 17, /* to label */ 1),
@@ -158,7 +158,7 @@ static const struct ScriptCommand s_gs202_g1_s0_station_sref_script[] = { /* 0x8
   LABEL(0), /* = 0x00 */
     { 0x3b, 0x1c,  0x0000,  0x00000000,  0x00000000, NULL },
   LABEL(1), /* = 0x01 */
-    SELECT_MAP(202),
+    SELECT_MAP(MAP_MT_FREEZE_MID),
     CALL_STATION(  2,  0),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(115),

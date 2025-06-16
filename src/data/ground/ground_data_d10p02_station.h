@@ -8,7 +8,7 @@
 
 static const struct ScriptCommand s_gs199_g0_s0_station_sref_script[] = { /* 0x824e714 */
     DEBUGINFO,
-    SELECT_MAP(199),
+    SELECT_MAP(MAP_FROSTY_FOREST_MID),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_EQ, 13, /* to label */ 0),
     COND(JUDGE_GT, 17, /* to label */ 1),
@@ -146,7 +146,7 @@ static const struct ScriptCommand s_gs199_g1_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 199),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
-    SELECT_MAP(199),
+    SELECT_MAP(MAP_FROSTY_FOREST_MID),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(104),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -214,7 +214,7 @@ static const struct ScriptCommand s_gs199_g2_s0_station_sref_script[] = { /* 0x8
     UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 199),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
-    SELECT_MAP(199),
+    SELECT_MAP(MAP_FROSTY_FOREST_MID),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(104),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },

@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "constants/friend_area.h"
 #include "constants/item.h"
+#include "constants/ground_map.h"
 #include "items.h"
 #include "event_flag.h"
 #include "debug.h"
@@ -21,7 +22,6 @@ EWRAM_DATA u8 gScriptVarBuffer[0x400] = {0}; // NDS=020876DC
 
 extern bool8 GetScriptMode(void);
 extern bool8 HasCompletedAllMazes(void);
-extern u8 sub_8002658(s16);
 extern void sub_809733C(u32, u32);
 extern void sub_80973A8(u32, u32);
 extern void sub_80972F4(void);
@@ -890,38 +890,31 @@ bool8 sub_80023E4(u32 param_1)
 }
 
 // arm9.bin::0200E620
-u8 sub_8002658(s16 param_1)
+u8 MapIdToFriendAreaId(s16 mapId_)
 {
-  short sVar1;
-  s32 param_1_s32;
-  const struct GroundEventTableEntry *ptr;
+    s32 mapId = mapId_;
+    const struct MapIdToFriendAreaIdStruct *ptr;
 
-  param_1_s32 = param_1;
+    for (ptr = sMapIdToFriendAreaIdTable; ptr->mapId != -1; ptr++) {
+        if (ptr->mapId == (s16) mapId) {
+            return ptr->friendAreaId;
+        }
+        ASM_MATCH_TRICK(ptr);
+    }
 
-  ptr = gGroundEnterLookupTable;
-  sVar1 = gGroundEnterLookupTable[0].groundEnterId;
-  if (sVar1 != -1) {
-    do {
-      if (sVar1 == param_1_s32) {
-        return ptr->value;
-      }
-      ptr++;
-      sVar1 = ptr->groundEnterId;
-    } while (sVar1 != -1);
-  }
-  return 0;
+    return FRIEND_AREA_NONE;
 }
 
 // arm9.bin::0200E5E8
-s16 sub_8002694(u8 param_1)
+s16 FriendAreaIdToMapId(u8 friendAreaId)
 {
-    const struct GroundEventTableEntry *puVar2 = gGroundEnterLookupTable;
+    const struct MapIdToFriendAreaIdStruct *ptr = sMapIdToFriendAreaIdTable;
 
-    while (puVar2->groundEnterId != -1) {
-        if (puVar2->value == param_1) {
-            return puVar2->groundEnterId;
+    while (ptr->mapId != -1) {
+        if (ptr->friendAreaId == friendAreaId) {
+            return ptr->mapId;
         }
-        puVar2++;
+        ptr++;
     }
 
     return -1;
@@ -930,13 +923,13 @@ s16 sub_8002694(u8 param_1)
 // arm9.bin::0200E5A8
 bool8 sub_80026CC(s16 r0)
 {
-    return GetFriendAreaStatus(sub_8002658(r0));
+    return GetFriendAreaStatus(MapIdToFriendAreaId(r0));
 }
 
 // arm9.bin::0200E568
 void sub_80026E8(s16 r0, bool8 r1)
 {
-    UnlockFriendArea(sub_8002658(r0));
+    UnlockFriendArea(MapIdToFriendAreaId(r0));
 }
 
 // arm9.bin::0200E544

@@ -95,7 +95,7 @@ bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10)
     }
 
     if (sFriendList->unk0 == 4) {
-        sFriendList->unk354 = sub_8002658(sub_80A5728());
+        sFriendList->unk354 = MapIdToFriendAreaId(sub_80A5728());
     }
     else {
         sFriendList->unk354 = 0;

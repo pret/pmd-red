@@ -533,7 +533,7 @@ s32 sub_80A7B94(s16 *a0)
         }
         else if (*a0 >= 14 && *a0 <= 29) {
             FriendAreaCapacity fAreaCapacity;
-            u8 map = sub_8002658(GetScriptVarValue(NULL, GROUND_MAP));
+            u8 map = MapIdToFriendAreaId(GetScriptVarValue(NULL, GROUND_MAP));
 
             if (map != 0) {
                 s32 id = *a0 - 14;
@@ -611,7 +611,7 @@ s32 sub_80A7DDC(s16 *a0, s16 *speciesDst)
         }
         else if (*a0 >= 14 && *a0 <= 29) {
             FriendAreaCapacity fAreaCapacity;
-            u8 map = sub_8002658(GetScriptVarValue(NULL, GROUND_MAP));
+            u8 map = MapIdToFriendAreaId(GetScriptVarValue(NULL, GROUND_MAP));
 
             if (map != 0) {
                 s32 id = *a0 - 14;
@@ -1334,7 +1334,7 @@ Pokemon *sub_80A8D54(s32 a0)
         Pokemon *monPtr;
         s32 id;
         FriendAreaCapacity fAreaCapacity;
-        u8 map = sub_8002658(GetScriptVarValue(NULL, GROUND_MAP));
+        u8 map = MapIdToFriendAreaId(GetScriptVarValue(NULL, GROUND_MAP));
 
         if (map == 0)
             return NULL;

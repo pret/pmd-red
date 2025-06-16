@@ -1,7 +1,7 @@
-#include "ground_script.h"
 #include "event_flag.h"
 #include "constants/item.h"
 #include "constants/ground_map.h"
+#include "structs/str_ground_script.h"
 #define LPARRAY(x) (sizeof(x)/sizeof(*(x))), x
 
 #define CPOS_HALFTILE 0x2

@@ -1915,7 +1915,7 @@ void sub_809C39C(void)
 {
     gUnknown_3001B64->unk430 = sub_801D178();
     if(gUnknown_3001B64->unk430 == 3)
-        GroundMainGroundRequest(sub_8002694(sub_801D1D4()), 0, -1);
+        GroundMainGroundRequest(FriendAreaIdToMapId(sub_801D1D4()), 0, -1);
     sub_801D1E0();
 }
 
@@ -1923,7 +1923,7 @@ void sub_809C3D8(void)
 {
     gUnknown_3001B64->unk430 = sub_801D178();
     if(gUnknown_3001B64->unk430 == 3)
-        GroundMainGroundRequest(sub_8002694(sub_801D1D4()), 0, -1);
+        GroundMainGroundRequest(FriendAreaIdToMapId(sub_801D1D4()), 0, -1);
     sub_801D1E0();
 }
 
@@ -1936,7 +1936,7 @@ void sub_809C414(void)
     if(val != 0)
     {
         gUnknown_3001B64->unk430 = val;
-        GroundMainGroundRequest(sub_8002694(val), 0, -1);
+        GroundMainGroundRequest(FriendAreaIdToMapId(val), 0, -1);
     }
     else
 {

@@ -31,7 +31,6 @@ EWRAM_INIT unkStruct_203B2B4 *gUnknown_203B2B4 = {NULL};
 
 #include "data/friend_list_menu.h"
 
-extern u8 sub_8002658(s16);
 extern s32 sub_80144A4(s32 *);
 
 void SetFriendListMenuState(s32);
@@ -63,7 +62,7 @@ bool8 CreateFriendListMenu(s32 param_1)
     gUnknown_203B2B4 = MemoryAlloc(sizeof(unkStruct_203B2B4),8);
     gUnknown_203B2B4->menuAction1 = 0;
     gUnknown_203B2B4->unk0 = param_1;
-    gUnknown_203B2B4->unkC = sub_8002658(sub_80A5728());
+    gUnknown_203B2B4->unkC = MapIdToFriendAreaId(sub_80A5728());
     gUnknown_203B2B4->unkD = 0;
     if (gUnknown_203B2B4->unk0 == 2) {
       SetFriendListMenuState(0);

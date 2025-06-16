@@ -201,7 +201,7 @@ void sub_809C770(s16 param_1, s16 param_2)
     uVar3 = gUnknown_3001B68->unk19;
     switch(param_2_s32) {
         case 9:
-            uVar2 = sub_8002658(param_1_s32);
+            uVar2 = MapIdToFriendAreaId(param_1_s32);
             if (uVar2 == 0) {
                 return;
             }

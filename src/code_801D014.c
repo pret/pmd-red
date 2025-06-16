@@ -82,7 +82,7 @@ bool8 sub_801D014(Pokemon *a0)
     else
         sUnknown_203B250->index = NUM_MONSTERS;
 
-    sUnknown_203B250->currFriendAreaLocation = sub_8002658(sub_80A5728());
+    sUnknown_203B250->currFriendAreaLocation = MapIdToFriendAreaId(sub_80A5728());
     sUnknown_203B250->unk8 = 0;
     sUnknown_203B250->unk9 = 0;
     sUnknown_203B250->unkC = GetPlayerPokemonStruct();

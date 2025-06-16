@@ -50,6 +50,7 @@
 #include "friend_areas_map.h"
 #include "structs/str_dungeon_setup.h"
 #include "constants/friend_area.h"
+#include "constants/ground_map.h"
 
 typedef struct unkTalkTable
 {
@@ -592,10 +593,10 @@ static u32 RunGameMode_Async(u32 a0)
         s16 sp552;
 
         if (mode == MODE_FRIEND_AREAS) {
-            u8 mapId = sub_8002658(GetScriptVarValue(NULL,GROUND_ENTER));
+            u8 friendAreaId = MapIdToFriendAreaId(GetScriptVarValue(NULL,GROUND_ENTER));
 
             friendAreasSetup.friendAreasMapPtr = MemoryAlloc(sizeof(*friendAreasSetup.friendAreasMapPtr),8);
-            friendAreasSetup.startingFriendAreaId = mapId;
+            friendAreasSetup.startingFriendAreaId = friendAreaId;
             friendAreasSetup.unk5 = sub_80023E4(9);
             ShowFriendAreasMap_Async(&friendAreasSetup);
             MemoryFree(friendAreasSetup.friendAreasMapPtr);
@@ -603,10 +604,10 @@ static u32 RunGameMode_Async(u32 a0)
                 s32 val;
                 u32 areaId = friendAreasSetup.chosenAreaId;
                 if (areaId != FRIEND_AREA_NONE) {
-                    val = sub_8002694(areaId);
+                    val = FriendAreaIdToMapId(areaId);
                 }
                 else {
-                    val = 9;
+                    val = MAP_TEAM_BASE;
                 }
                 SetScriptVarValue(NULL,GROUND_ENTER,val);
                 SetScriptVarValue(NULL,GROUND_ENTER_LINK,0);
