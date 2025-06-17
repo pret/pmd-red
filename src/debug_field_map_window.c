@@ -11,7 +11,7 @@
 #include "text_1.h"
 #include "text_2.h"
 #include "ground_map_conversion_table.h"
-#include "structs/str_81188F0.h"
+#include "map_files_table.h"
 
 EWRAM_INIT static struct MenuHeaderWindow *sDebugWindow = {NULL};
 
@@ -132,7 +132,7 @@ static void PrintCurrentPageText(void)
     for (i = 0; i < sDebugWindow->m.input.currPageEntries; i++) {
         s16 index = (sDebugWindow->m.input.currPage * sDebugWindow->m.input.entriesPerPage) + i;
         const GroundConversionStruct *mapConversionPtr = &gGroundMapConversionTable[index];
-        const struct unkStruct_81188F0 *mapFilesPtr = &gUnknown_81188F0[mapConversionPtr->mapFileTableId];
+        const struct MapFilesStruct *mapFilesPtr = &gMapFilesTable[mapConversionPtr->mapFileTableId];
 
         y = GetMenuEntryYCoord(&sDebugWindow->m.input, i);
         PrintStringOnWindow(8, y, mapFilesPtr->fileName1, sDebugWindow->m.menuWinId, 0);

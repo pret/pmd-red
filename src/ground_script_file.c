@@ -50,10 +50,10 @@ bool8 ChangeScriptFile(s16 a0)
 
 static const struct GroundScriptHeader sNullGroundScript = {0};
 
-const struct GroundScriptHeader *GetGroundScript(s16 a0)
+const struct GroundScriptHeader *GetGroundScript(s16 mapId)
 {
-    if (a0 != -1)
-        return gMapScriptTable[a0];
+    if (mapId != -1)
+        return gMapScriptTable[mapId];
     else
         return &sNullGroundScript;
 }

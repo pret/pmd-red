@@ -6,7 +6,7 @@
 #include "memory.h"
 #include "file_system.h"
 #include "code_8002774.h"
-#include "structs/str_81188F0.h"
+#include "map_files_table.h"
 #include "code_8004AA0.h"
 #include "graphics_memory.h"
 #include "debug.h"
@@ -70,7 +70,7 @@ void GroundBg_Init(GroundBg *groundBg, const SubStruct_52C *a1)
     groundBg->unk43C = NULL;
     groundBg->unk440 = NULL;
     groundBg->unk52A = 0;
-    groundBg->unk444 = -1;
+    groundBg->mapFileId = -1;
     groundBg->unk468 = 0;
     groundBg->unk448.unk0 = 0;
     groundBg->unk448.unk1 = 0;
@@ -164,7 +164,7 @@ void sub_80A2E64(GroundBg *groundBg)
     s32 unk0Id, unk3E0Id;
 
     CloseOpenedFiles(groundBg);
-    groundBg->unk444 = -1;
+    groundBg->mapFileId = -1;
     groundBg->unk528 = 0;
     groundBg->unk448.unk0 = 0;
     groundBg->unk448.unk1 = 0;
@@ -216,12 +216,12 @@ void sub_80A2E64(GroundBg *groundBg)
     groundBg->unk52A = 1;
 }
 
-void sub_80A2FBC(GroundBg *groundBg, s32 a1_)
+void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
 {
     SubStruct_0 *sub0Ptr;
     u16 r5;
     s32 i, j, k;
-    const struct unkStruct_81188F0 *dataPtr;
+    const struct MapFilesStruct *mapFilesPtr;
     s16 *mapPtr_464;
     SubStruct_545 *mapPtr_454;
     const u16 *file_434;
@@ -235,19 +235,19 @@ void sub_80A2FBC(GroundBg *groundBg, s32 a1_)
     s32 id;
     void *vramPtr;
     s32 sum;
-    s32 a1 = (s16) a1_;
+    s32 mapFileId = (s16) mapFileId_;
 
-    if (a1 == -1) {
+    if (mapFileId == -1) {
         sub_80A2E64(groundBg);
         return;
     }
 
     CloseOpenedFiles(groundBg);
-    groundBg->unk444 = a1;
-    dataPtr = &gUnknown_81188F0[a1];
-    groundBg->unk430 = OpenFileAndGetFileDataPtr(dataPtr->fileName1, &gGroundFileArchive);
-    groundBg->unk434 = OpenFileAndGetFileDataPtr(dataPtr->fileName2, &gGroundFileArchive);
-    groundBg->unk438 = OpenFileAndGetFileDataPtr(dataPtr->fileName3, &gGroundFileArchive);
+    groundBg->mapFileId = mapFileId;
+    mapFilesPtr = &gMapFilesTable[mapFileId];
+    groundBg->unk430 = OpenFileAndGetFileDataPtr(mapFilesPtr->fileName1, &gGroundFileArchive);
+    groundBg->unk434 = OpenFileAndGetFileDataPtr(mapFilesPtr->fileName2, &gGroundFileArchive);
+    groundBg->unk438 = OpenFileAndGetFileDataPtr(mapFilesPtr->fileName3, &gGroundFileArchive);
     file_430 = groundBg->unk430->data;
     file_434 = groundBg->unk434->data;
     file_438 = groundBg->unk438->data;
@@ -344,11 +344,11 @@ void sub_80A2FBC(GroundBg *groundBg, s32 a1_)
     vramPtr = (void *)(VRAM + 0x8000 + (groundBg->unk52C.unk4 + mapPtr_454->unk4) * 32);
     for (id = 0; id < 2; id++) {
         SubStruct_3E0 *sub3E0 = &groundBg->unk3E0[id];
-        if (dataPtr->fileName4[id] != NULL) {
+        if (mapFilesPtr->fileName4[id] != NULL) {
             const struct UnkFileStruct *fileStr;
             const void *r1, *r0;
 
-            sub3E0->unk8 = OpenFileAndGetFileDataPtr(dataPtr->fileName4[id], &gGroundFileArchive);
+            sub3E0->unk8 = OpenFileAndGetFileDataPtr(mapFilesPtr->fileName4[id], &gGroundFileArchive);
             sub3E0->unk0 = 1;
             sub3E0->unk1 = 1;
             fileStr = sub3E0->unk8->data;
@@ -380,9 +380,9 @@ void sub_80A2FBC(GroundBg *groundBg, s32 a1_)
         }
     }
     for (; id < 4; id++) {
-        if (dataPtr->fileName4[id] != NULL) {
+        if (mapFilesPtr->fileName4[id] != NULL) {
             s32 n;
-            OpenedFile *file = OpenFileAndGetFileDataPtr(dataPtr->fileName4[id], &gGroundFileArchive);
+            OpenedFile *file = OpenFileAndGetFileDataPtr(mapFilesPtr->fileName4[id], &gGroundFileArchive);
             const struct UnkFileStruct *fileStr = file->data;
             u16 *r1 = (void *) fileStr->unk4;
             r1 += fileStr->unk2 * 2;
@@ -402,7 +402,7 @@ void sub_80A2FBC(GroundBg *groundBg, s32 a1_)
     groundBg->unk52A = 1;
 }
 
-void sub_80A3440(GroundBg *groundBg, s32 a1_, DungeonLocation *dungLoc, s32 a3)
+void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, DungeonLocation *dungLoc, s32 a3)
 {
     SubStruct_0 *sub0Ptr;
     s32 i;
@@ -412,23 +412,23 @@ void sub_80A3440(GroundBg *groundBg, s32 a1_, DungeonLocation *dungLoc, s32 a3)
     const void *file_430;
     SubStruct_448 *mapPtr_448;
     s32 unk0Id, sub3E0Id;
-    const struct unkStruct_81188F0 *dataPtr;
+    const struct MapFilesStruct *mapFilesPtr;
     s16 *mapPtr_464;
     u16 *unkPtrArray[2];
-    s32 a1 = (s16) a1_;
+    s32 mapFileId = (s16) mapFileId_;
 
-    if (a1 == -1 || dungLoc->id == DUNGEON_INVALID) {
+    if (mapFileId == -1 || dungLoc->id == DUNGEON_INVALID) {
         sub_80A2E64(groundBg);
         return;
     }
 
-    sub_80A2FBC(groundBg, a1);
+    sub_80A2FBC(groundBg, mapFileId);
     CloseOpenedFiles(groundBg);
-    groundBg->unk444 = a1;
-    dataPtr = &gUnknown_81188F0[a1];
-    groundBg->unk430 = OpenFileAndGetFileDataPtr(dataPtr->fileName1, &gGroundFileArchive);
-    groundBg->unk434 = OpenFileAndGetFileDataPtr(dataPtr->fileName2, &gGroundFileArchive);
-    groundBg->unk438 = OpenFileAndGetFileDataPtr(dataPtr->fileName3, &gGroundFileArchive);
+    groundBg->mapFileId = mapFileId;
+    mapFilesPtr = &gMapFilesTable[mapFileId];
+    groundBg->unk430 = OpenFileAndGetFileDataPtr(mapFilesPtr->fileName1, &gGroundFileArchive);
+    groundBg->unk434 = OpenFileAndGetFileDataPtr(mapFilesPtr->fileName2, &gGroundFileArchive);
+    groundBg->unk438 = OpenFileAndGetFileDataPtr(mapFilesPtr->fileName3, &gGroundFileArchive);
     file_430 = groundBg->unk430->data;
     file_434 = groundBg->unk434->data;
     file_438 = groundBg->unk438->data;
@@ -1335,7 +1335,7 @@ void sub_80A4764(GroundBg *groundBg)
     SubStruct_488 *map488;
     PixelPos *map478;
 
-    if (groundBg->unk444 == -1)
+    if (groundBg->mapFileId == -1)
         return;
 
     if (groundBg->unk464[1] != 0) {
