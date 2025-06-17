@@ -30,8 +30,8 @@ void InitializeGameOptions(bool8 initializeGender)
     {
         gGameOptionsRef->playerGender = MALE;
     }
-    gGameOptionsRef->unk9 = 0;
-    gGameOptionsRef->unkA = 0;
+    gGameOptionsRef->controls = CONTROLS_GBA;
+    gGameOptionsRef->touchScreen = 0;
     gGameOptionsRef->dungeonSpeed = DUNGEON_SPEED_SLOW;
     gGameOptionsRef->FarOffPals = FAROFFPALS_LOCK;
     gGameOptionsRef->damageTurn = TRUE;
@@ -41,27 +41,27 @@ void InitializeGameOptions(bool8 initializeGender)
     SetWindowBGColor();
 }
 
-bool8 GameOptionsNotChange(GameOptions *r0)
+bool8 GameOptionsNotChange(GameOptions *newOptions)
 {
-    if (gGameOptionsRef->windowColor != r0->windowColor)
+    if (gGameOptionsRef->windowColor != newOptions->windowColor)
         return FALSE;
-    if (gGameOptionsRef->unk9 != r0->unk9)
+    if (gGameOptionsRef->controls != newOptions->controls)
         return FALSE;
-    if (gGameOptionsRef->unkA != r0->unkA)
+    if (gGameOptionsRef->touchScreen != newOptions->touchScreen)
         return FALSE;
-    if (gGameOptionsRef->playerGender != r0->playerGender)
+    if (gGameOptionsRef->playerGender != newOptions->playerGender)
         return FALSE;
-    if (gGameOptionsRef->dungeonSpeed != r0->dungeonSpeed)
+    if (gGameOptionsRef->dungeonSpeed != newOptions->dungeonSpeed)
         return FALSE;
-    if (gGameOptionsRef->FarOffPals != r0->FarOffPals)
+    if (gGameOptionsRef->FarOffPals != newOptions->FarOffPals)
         return FALSE;
-    if (gGameOptionsRef->damageTurn != r0->damageTurn)
+    if (gGameOptionsRef->damageTurn != newOptions->damageTurn)
         return FALSE;
-    if (gGameOptionsRef->gridEnable != r0->gridEnable)
+    if (gGameOptionsRef->gridEnable != newOptions->gridEnable)
         return FALSE;
-    if (gGameOptionsRef->mapOption != r0->mapOption)
+    if (gGameOptionsRef->mapOption != newOptions->mapOption)
         return FALSE;
-    if (gGameOptionsRef->unkC != r0->unkC)
+    if (gGameOptionsRef->unkC != newOptions->unkC)
         return FALSE;
 
     return TRUE;
@@ -79,7 +79,7 @@ void WriteGameOptionsBits(DataSerializer *param_1)
 
     WriteBits(param_1, &gGameOptionsRef->windowColor, 2);
 
-    if(gGameOptionsRef->unk9 != 0)
+    if (gGameOptionsRef->controls != CONTROLS_GBA)
     {
         puVar2 = &neg_1;
     }
@@ -89,7 +89,7 @@ void WriteGameOptionsBits(DataSerializer *param_1)
     }
     WriteBits(param_1, puVar2, 1);
 
-    if(gGameOptionsRef->unkA != 0)
+    if(gGameOptionsRef->touchScreen)
     {
         puVar2 = &neg_1;
     }
@@ -160,10 +160,10 @@ void ReadGameOptionsBits(DataSerializer *param_1)
     gGameOptionsRef->windowColor  = byteArray[0] & NUM_WINDOW_COLORS;
 
     ReadBits(param_1, byteArray, 1);
-    gGameOptionsRef->unk9  = byteArray[0] & 1;
+    gGameOptionsRef->controls  = byteArray[0] & 1;
 
     ReadBits(param_1, byteArray, 1);
-    gGameOptionsRef->unkA  = byteArray[0] & 1;
+    gGameOptionsRef->touchScreen  = byteArray[0] & 1;
 
     ReadBits(param_1, byteArray, 1);
     gGameOptionsRef->playerGender  = byteArray[0] & 1;

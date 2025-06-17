@@ -937,7 +937,7 @@ static void PrintHintsMenu(void)
 
 static void ShowChosenHintWindow(s32 hintId)
 {
-    bool8 unk9 = (gGameOptionsRef->unk9 != 0);
+    bool8 dsControls = (gGameOptionsRef->controls != CONTROLS_GBA);
 
     while (1) {
         bool8 dpadPressed = FALSE;
@@ -981,7 +981,7 @@ static void ShowChosenHintWindow(s32 hintId)
         gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
         sub_80073B8(0);
         PrintFormattedStringOnWindow(16 + hintId * 8, 0, gHintsNames[hintId], 0, '\0');
-        PrintFormattedStringOnWindow(8, 16, gHintsDescriptions[unk9][hintId], 0, '\0');
+        PrintFormattedStringOnWindow(8, 16, gHintsDescriptions[dsControls][hintId], 0, '\0');
         sub_80073E0(0);
 
         while (1) {

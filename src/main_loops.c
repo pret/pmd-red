@@ -281,7 +281,7 @@ static void MainLoops_RunFrameActions(u32 unused)
 {
     DrawDialogueBoxString();
     sub_8005838(NULL, 0);
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
 
     sub_8005180();
     // Extra call here in blue. Seems to be for 2nd screen sprites

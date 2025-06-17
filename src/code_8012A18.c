@@ -13,7 +13,7 @@ void sub_8012A18()
 {
     UpdateSoundEffectCounters();
     DrawDialogueBoxString();
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     sub_80060EC();
     WaitForNextFrameAndAdvanceRNG();

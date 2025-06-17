@@ -378,7 +378,7 @@ void FriendAreasMap_RunFrameActions(void)
     AnimateSprites();
     sub_8004AF0(FadeScreen(), gFriendAreasMapPtr->unk4C4C, 0xB0, 16, gFriendAreasMapPtr->brightness, NULL);
     sub_8005838(NULL, 0);
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);

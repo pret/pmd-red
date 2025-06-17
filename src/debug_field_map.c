@@ -143,7 +143,7 @@ UNUSED static void DebugMapViewer(void)
             DrawDialogueBoxString();
             sub_8005838(NULL, 0);
             sub_80060EC();
-            nullsub_8(gGameOptionsRef->unkA);
+            nullsub_8(gGameOptionsRef->touchScreen);
             sub_8005180();
             sub_8099BE4();
             sub_8099744();

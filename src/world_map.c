@@ -404,7 +404,7 @@ static void WorldMap_RunFrameActions(void)
     AnimateSprites(TRUE);
     FadeScreen();
     sub_8005838(NULL, 0);
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);

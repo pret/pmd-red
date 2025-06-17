@@ -356,7 +356,7 @@ void DungeonHandlePlayerInput(void)
                 break;
             }
 
-            if (gGameOptionsRef->unk9 == 0
+            if (gGameOptionsRef->controls == CONTROLS_GBA
                 && (gRealInputs.pressed & B_BUTTON || (!unkBool && bPress))
                 && unkPtr->unk1821A != 0)
             {
@@ -386,7 +386,7 @@ void DungeonHandlePlayerInput(void)
             }
 
             highlightTiles = FALSE;
-            if (gGameOptionsRef->unk9 == 0) {
+            if (gGameOptionsRef->controls == CONTROLS_GBA) {
                 if (gRealInputs.shortPress & R_BUTTON || rPress || gRealInputs.pressed & START_BUTTON) {
                     highlightTiles = TRUE;
                 }

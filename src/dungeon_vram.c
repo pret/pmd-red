@@ -210,7 +210,7 @@ static void sub_803E490(u32 unused)
     if(gDungeon->unk181e8.unk18215 != 0 && gDungeon->unk1BDD4.unk1C06C != 3)
         sub_8004AF0(gUnknown_203B40D, gUnknown_202EE8C, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
 
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     nullsub_12();
     sub_80060EC();
@@ -243,7 +243,7 @@ static void sub_803E490(u32 unused)
 void sub_803E668(u32 unused)
 {
     gUnknown_202EDD4++;
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     nullsub_12();
     sub_8005838(NULL, 0);
