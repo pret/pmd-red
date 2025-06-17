@@ -81,7 +81,6 @@
 	.space 4
     .include "src/palette_util.o"
     .include "src/code_809A560.o"
-    .include "src/code_809C5C4.o"
     .include "src/script_item.o"
 	.space 4
     .include "src/code_809D148.o"

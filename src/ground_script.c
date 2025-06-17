@@ -14,7 +14,6 @@
 #include "code_80972F4.h"
 #include "code_8097670.h"
 #include "code_80A26CC.h"
-#include "code_8098BDC.h"
 #include "debug.h"
 #include "dungeon_info.h"
 #include "event_flag.h"
@@ -49,6 +48,7 @@
 #include "friend_area_dialogue.h"
 #include "structs/str_dungeon_setup.h"
 #include "ground_map_conversion_table.h"
+#include "unk_ds_only_feature.h"
 
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
@@ -97,7 +97,6 @@ void sub_809AFC8(bool8, s32, s32, const char*);
 u32 sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
 bool8 sub_809B1C0(s32, s32, char[12]);
 void sub_809B1D4(u8, s32, s32, const char*);
-void sub_809C770(s16, s16);
 void sub_809D0BC(void);
 void sub_809D124(s32, s32, s32);
 void sub_809D158(s32, PixelPos*);
@@ -172,9 +171,6 @@ void sub_80A8F50(const u8 *buffer, s32, s32 size);
 void sub_80A56A0(s32, s32);
 void sub_80A56F0(s32 *);
 void sub_80A5704(s32 *);
-void sub_809C760(void);
-void sub_809C6EC(void);
-void sub_809C6CC(u16 param_1);
 void sub_80A86C8(s16, s32);
 void sub_80AC1B0(s16, s32);
 void sub_80AD0C8(s16, s32);

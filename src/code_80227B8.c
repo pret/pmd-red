@@ -5,7 +5,6 @@
 #include "code_801AFA4.h"
 #include "code_801B3C0.h"
 #include "code_80227B8.h"
-#include "code_8098BDC.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "input.h"
@@ -15,6 +14,7 @@
 #include "pokemon_3.h"
 #include "string_format.h"
 #include "text_1.h"
+#include "unk_ds_only_feature.h"
 
 EWRAM_INIT static unkStruct_203B294 *sUnknown_203B294 = {NULL};
 

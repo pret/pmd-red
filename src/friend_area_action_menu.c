@@ -6,7 +6,6 @@
 #include "code_801EE10_mid.h"
 #include "friend_list.h"
 #include "code_8024458.h"
-#include "code_8098BDC.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "event_flag.h"
@@ -24,6 +23,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
+#include "unk_ds_only_feature.h"
 
 static EWRAM_INIT struct unkStruct_203B2BC *sUnknown_203B2BC = {NULL};
 

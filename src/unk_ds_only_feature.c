@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "unk_ds_only_feature.h"
 #include "memory.h"
 #include "game_options.h"
 #include "event_flag.h"
@@ -9,7 +10,7 @@
 #include "constants/ground_map.h"
 #include "constants/friend_area.h"
 
-// This file effectively does nothing on GBA.
+// This file effectively does nothing on GBA. If I were to guess I'd say it's bottom/top screen related.
 
 struct unkStruct_3001B68
 {
@@ -32,9 +33,6 @@ struct unkStruct_3001B68
 static IWRAM_INIT struct unkStruct_3001B68 *sUnknown_3001B68 = {NULL};
 
 UNUSED static const u8 sUnused[4] = {0};
-
-bool8 sub_809C740(void);
-void sub_809C63C(void);
 
 static void nullsub_107();
 static void nullsub_108();
@@ -84,7 +82,7 @@ void sub_809C63C(void)
 
 void sub_809C658(void)
 {
-    switch(sUnknown_3001B68->unkA) {
+    switch (sUnknown_3001B68->unkA) {
         case 3:
             nullsub_111();
             nullsub_112();

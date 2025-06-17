@@ -20,6 +20,7 @@
 #include "ground_map_conversion_table.h"
 #include "ground_lives_helper.h"
 #include "script_item.h"
+#include "unk_ds_only_feature.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -54,7 +55,6 @@ extern void sub_80A73EC();
 
 extern void sub_8098CC8();
 extern void ClearAllItems_8091FB4();
-extern u8 sub_809C730();
 extern void sub_8095494(DungeonMailSeed *param_1, u8 index);
 
 extern u16 gUnknown_2026E4E;
@@ -67,7 +67,6 @@ extern void sub_809A71C(s32);
 extern bool8 sub_809AFAC(void);
 extern bool8 sub_80048BC(void);
 extern u8 sub_80023E4(u32);
-extern bool8 sub_809C740(void);
 extern bool8 sub_8099B94(void);
 extern void FreeGroundMapAction(void);
 extern void FreeGroundLives(void);
@@ -75,7 +74,6 @@ extern void FreeGroundObjects(void);
 extern void FreeGroundEffects(void);
 extern void FreeGroundEvents(void);
 extern void sub_809A610(void);
-extern void sub_809C618(void);
 extern void sub_80A658C(void);
 extern void sub_809D508(void);
 extern void sub_80A7754(void);
@@ -88,7 +86,6 @@ extern void sub_809D0AC(void);
 extern void sub_80A7744(void);
 extern void sub_809D490(void);
 extern void sub_80A62F0(void);
-extern void sub_809C5C4(void);
 extern void sub_809A560(void);
 extern void AllocGroundMapAction(void);
 extern void AllocGroundEvents(void);
@@ -100,13 +97,11 @@ extern void nullsub_124(void);
 extern void GroundLives_Action(void);
 extern void GroundObject_Action(void);
 extern void GroundEffect_Action(void);
-extern void nullsub_105(void);
 extern void sub_809B474(void);
 extern void GroundScript_Unlock();
 extern void sub_809D25C(void);
 extern void sub_80A59DC(void);
 extern void sub_809B614(void);
-extern void sub_809CA20(void);
 extern void sub_80A6E80(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
@@ -115,17 +110,14 @@ extern void LoadBufferedInputs(void);
 extern void nullsub_120(void);
 extern void sub_80A5E70(void);
 extern void sub_809B638(void);
-extern void nullsub_106(void);
 extern void sub_80A73EC(void);
 extern void sub_8099750(void);
-extern void DoScheduledMemCopies(void);
 extern void GroundMap_Reset(void);
 extern void sub_809D0BC(void);
 extern void DeleteGroundEvents(void);
 extern void DeleteGroundLives(void);
 extern void DeleteGroundObjects(void);
 extern void DeleteGroundEffects(void);
-extern void sub_809C658(void);
 extern void nullsub_16(void);
 extern void UpdateAdventureAchievements(void);
 extern void xxx_call_update_bg_sound_input(void);
@@ -141,7 +133,6 @@ extern void sub_8001D88(void);
 extern u32 GroundMainGameCancelRequest(u32 r0);
 extern void sub_80999D4(s32);
 extern void sub_809D4B0(void);
-extern void sub_809C63C(void);
 extern void sub_8005838(s32, s32);
 
 u32 xxx_script_related_8098468(s32 param_1)

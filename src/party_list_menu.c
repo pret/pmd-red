@@ -8,7 +8,6 @@
 #include "code_801EE10_mid.h"
 #include "code_80227B8.h"
 #include "code_8024458.h"
-#include "code_8098BDC.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "event_flag.h"
@@ -27,6 +26,7 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "text_util.h"
+#include "unk_ds_only_feature.h"
 
 static EWRAM_INIT unkStruct_203B2B8 *sUnknown_203B2B8 = {NULL};
 

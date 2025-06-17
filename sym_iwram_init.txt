@@ -4,7 +4,7 @@
 .include "src/code_8023144.o"
 .include "src/friend_list.o"
 .include "src/code_809A560.o"
-.include "src/code_809C5C4.o"
+.include "src/unk_ds_only_feature.o"
 .include "src/ground_map.o"
 .include "src/ground_map_2.o"
 .include "src/ground_sprite.o"
