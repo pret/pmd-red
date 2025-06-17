@@ -137,7 +137,7 @@
 .include "src/code_8097670.o"
 .include "src/exclusive_pokemon.o"
 .include "src/ground_main.o"
-.include "src/code_809C5C4.o"
+.include "src/script_item.o"
 .include "src/ground_script.o"
 .include "src/ground_sprite.o"
 .include "src/ground_link.o"

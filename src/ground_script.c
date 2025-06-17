@@ -44,6 +44,7 @@
 #include "palette_util.h"
 #include "pokemon_3.h"
 #include "memory.h"
+#include "script_item.h"
 #include "ground_lives_helper.h"
 #include "friend_area_dialogue.h"
 #include "structs/str_dungeon_setup.h"
@@ -97,8 +98,6 @@ u32 sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *
 bool8 sub_809B1C0(s32, s32, char[12]);
 void sub_809B1D4(u8, s32, s32, const char*);
 void sub_809C770(s16, s16);
-s32 HasItemInInventory(u8);
-u32 sub_809CC90();
 void sub_809D0BC(void);
 void sub_809D124(s32, s32, s32);
 void sub_809D158(s32, PixelPos*);
@@ -2885,7 +2884,7 @@ s32 ExecuteScriptCommand(Action *action)
                         break;
                     }
                     case 0xcb: {
-                        val = sub_809CC90(curCmd.argShort);
+                        val = CheckScriptItemSpace(curCmd.argShort);
                         break;
                     }
                     default: {

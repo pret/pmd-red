@@ -19,6 +19,7 @@
 #include "text_util.h"
 #include "ground_map_conversion_table.h"
 #include "ground_lives_helper.h"
+#include "script_item.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -51,7 +52,6 @@ extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();
 
-extern void sub_809CB8C();
 extern void sub_8098CC8();
 extern void ClearAllItems_8091FB4();
 extern u8 sub_809C730();
@@ -74,7 +74,6 @@ extern void FreeGroundLives(void);
 extern void FreeGroundObjects(void);
 extern void FreeGroundEffects(void);
 extern void FreeGroundEvents(void);
-extern void sub_809CB74(void);
 extern void sub_809A610(void);
 extern void sub_809C618(void);
 extern void sub_80A658C(void);
@@ -91,7 +90,6 @@ extern void sub_809D490(void);
 extern void sub_80A62F0(void);
 extern void sub_809C5C4(void);
 extern void sub_809A560(void);
-extern void sub_809CB50(void);
 extern void AllocGroundMapAction(void);
 extern void AllocGroundEvents(void);
 extern void AllocGroundLives(void);
@@ -200,7 +198,7 @@ u32 xxx_script_related_8098468(s32 param_1)
     sub_80A62F0();
     sub_809C5C4();
     sub_809A560();
-    sub_809CB50();
+    InitInternalScriptItemsData();
     AllocGroundMapAction();
     nullsub_117();
     AllocGroundEvents();
@@ -393,7 +391,7 @@ u32 xxx_script_related_8098468(s32 param_1)
     FreeGroundObjects();
     FreeGroundEffects();
     FreeGroundEvents();
-    sub_809CB74();
+    FreeInternalScriptItemsData();
     sub_809A610();
     sub_809C618();
     sub_80A658C();
@@ -508,7 +506,7 @@ void sub_8098C58(void)
     s32 temp, temp2;
     ClearScriptVarArray(NULL, GROUND_LOCAL);
     ClearScriptVarArray(NULL, EVENT_LOCAL);
-    sub_809CB8C();
+    ClearScriptItemScriptVars();
     sub_8001D88();
 
     if (GetScriptVarValue(NULL, FLAG_KIND_CHANGE_REQUEST) != 0) {

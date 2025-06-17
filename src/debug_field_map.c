@@ -15,6 +15,7 @@
 #include "string_format.h"
 #include "sprite.h"
 #include "game_options.h"
+#include "ground_lives_helper.h"
 #include "input.h"
 #include "structs/str_position.h"
 
@@ -27,7 +28,6 @@ extern void sub_80999E8(s32 a0);
 extern void nullsub_120(void);
 extern void sub_80A59DC(void);
 extern void sub_809D25C(void);
-extern s32 DpadToDirection(u16 param_1);
 extern PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2);
 extern void sub_809D158(s32, PixelPos*);
 
@@ -68,7 +68,6 @@ UNUSED static void DebugMapViewer(void)
                         break;
                     default:
                         continue;
-
                 }
                 break;
             }

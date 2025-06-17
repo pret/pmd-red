@@ -1,13 +1,10 @@
 #include "global.h"
-#include "items.h"
+#include "globaldata.h"
 #include "memory.h"
 #include "game_options.h"
 #include "event_flag.h"
 #include "ground_main.h"
 #include "code_80A26CC.h"
-#include "code_800D090.h"
-#include "music_util.h"
-#include "string_format.h"
 
 struct unkStruct_3001B68
 {
@@ -27,18 +24,9 @@ struct unkStruct_3001B68
      u8  unk20;
 };
 
-IWRAM_INIT struct unkStruct_3001B68 *gUnknown_3001B68 = {NULL};
+static IWRAM_INIT struct unkStruct_3001B68 *gUnknown_3001B68 = {NULL};
 
-
-struct unkStruct_20399E0
-{
-     u32 unk0;
-     s32 unk4;
-     u32 unk8;
-};
-
-EWRAM_DATA struct unkStruct_20399E0 *gUnknown_20399E0 = {0};
-
+UNUSED static const u8 sUnused[4] = {0};
 
 void sub_809C63C();
 u8 sub_809C740(void);
@@ -52,12 +40,6 @@ void nullsub_113();
 void nullsub_114();
 void nullsub_115();
 void nullsub_116();
-
-extern const char gUnknown_8116390[];
-extern const char gUnknown_811636C[];
-extern const char gUnknown_811633C[];
-
-EWRAM_INIT const char *gUnknown_203B4A0[3] = {gUnknown_8116390, gUnknown_811636C, gUnknown_811633C};
 
 void sub_809C5C4(void)
 {
@@ -396,7 +378,6 @@ void sub_809CA20(void)
     }
 }
 
-
 void nullsub_106(void) {}
 void nullsub_107(void) {}
 void nullsub_108(void) {}
@@ -408,139 +389,3 @@ void nullsub_113(void) {}
 void nullsub_114(void) {}
 void nullsub_115(void) {}
 void nullsub_116(void) {}
-
-void sub_809CB50(void)
-{
-    gUnknown_20399E0 = MemoryAlloc(sizeof(struct unkStruct_20399E0), 6);
-    gUnknown_20399E0->unk4 = -1;
-    gUnknown_20399E0->unk8 = 0;
-}
-
-void sub_809CB74(void)
-{
-    MemoryFree(gUnknown_20399E0);
-    gUnknown_20399E0 = NULL;
-}
-
-
-void sub_809CB8C(void)
-{
-    ClearScriptVarArray(NULL, STATION_ITEM_TEMP);
-    ClearScriptVarArray(NULL, DELIVER_ITEM_TEMP);
-}
-
-bool8 HasItemInInventory(u8 item)
-{
-    if (FindItemInInventory(item) >= 0)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-extern bool8 ScriptPrintText(s32 a0, s32 a1_, const char *text);
-extern u8 IsTextboxOpen_809A750(void);
-
-extern const u8 gUnknown_81163E4[];
-
-struct ItemWithQuantity
-{
-    u8 id;
-    s16 quantity;
-};
-
-static bool8 sub_809CBBC(const struct ItemWithQuantity *itemToAdd, const u8 *maxMoneyStr, const u8 *noItemSpaceStr, const u8 *itemGivenStr)
-{
-    char buffer[80];
-
-    if (itemToAdd->id == ITEM_POKE) {
-        int newMoneyAmount;
-        sprintfStatic(buffer,gUnknown_81163E4,itemToAdd->quantity,gItemParametersData[ITEM_POKE].name);
-        newMoneyAmount = gTeamInventoryRef->teamMoney + itemToAdd->quantity;
-        if (newMoneyAmount > MAX_TEAM_MONEY) {
-            if (maxMoneyStr != 0) {
-                ScriptPrintText(0, -1, maxMoneyStr);
-            }
-            return FALSE;
-        }
-
-        gTeamInventoryRef->teamMoney = newMoneyAmount;
-    }
-    else {
-        Item item = {0};
-        item.quantity = itemToAdd->quantity;
-        item.id = itemToAdd->id;
-
-        sub_8090E14(buffer,&item,0);
-        if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE) {
-            if (noItemSpaceStr != 0) {
-                ScriptPrintText(0, -1, noItemSpaceStr);
-            }
-            return FALSE;
-        }
-
-        AddItemIdToInventory(item.id, FALSE);
-        FillInventoryGaps();
-    }
-
-    if (itemGivenStr != 0) {
-        strcpy(gFormatBuffer_Items[0], buffer);
-        ScriptPrintText(0, -1, itemGivenStr);
-        PlaySoundWithVolume(0xcb,0x100);
-    }
-
-    return TRUE;
-}
-
-extern const struct ItemWithQuantity gUnknown_81163BC[];
-
-s32 sub_809CC90(s32 tableId)
-{
-    const struct ItemWithQuantity *item = &gUnknown_81163BC[tableId];
-    if (item->id == ITEM_POKE) {
-        if (gTeamInventoryRef->teamMoney + item->quantity > MAX_TEAM_MONEY)
-            return 2;
-    }
-    else {
-        if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
-            return 2;
-    }
-    return 1;
-}
-
-extern const u8 gUnknown_81163F0[];
-extern const u8 gUnknown_811642C[];
-
-s32 sub_809CCDC(u32 tableId, s32 a1)
-{
-    s32 strId;
-    const struct ItemWithQuantity *item = &gUnknown_81163BC[tableId];
-    gUnknown_20399E0->unk4 = -1;
-    gUnknown_20399E0->unk8 = 0;
-
-    if (a1 > 99) {
-        strId = 2;
-    }
-    else if (a1 > 1) {
-        strId = 1;
-    }
-    else {
-        strId = 0;
-    }
-
-    if (sub_809CBBC(item, gUnknown_81163F0, gUnknown_811642C, gUnknown_203B4A0[strId])) {
-        gUnknown_20399E0->unk4 = tableId;
-        gUnknown_20399E0->unk8 = a1;
-        return 1;
-    }
-    else {
-        return 2;
-    }
-}
-
-s32 sub_809CD48(void)
-{
-    if (IsTextboxOpen_809A750()) {
-        return 0;
-    }
-    return 3;
-}

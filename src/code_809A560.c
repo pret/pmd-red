@@ -33,8 +33,9 @@
 #include "wigglytuff_shop3.h"
 #include "wonder_mail.h"
 #include "naming_screen.h"
+#include "script_item.h"
 
-IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = { NULL };
+static IWRAM_INIT struct unkStruct_3001B64 *gUnknown_3001B64 = { NULL };
 
 extern bool8 sub_802FCF0(void);
 u8 ScriptPrintText_809B2B8(struct unkStruct_3001B64_unkC *, s32, s32, const char *);
@@ -42,6 +43,13 @@ bool8 IsTextboxOpen_809B40C(struct unkStruct_3001B64_unkC *);
 extern void ResetTextbox_809B294(void);
 extern s32 sub_803B168(void);
 extern void sub_803B1BC(void);
+
+struct unkStruct_8096AF8
+{
+    bool8 unk0;
+    /* 0x2 */ s16 clientSpecies;
+    /* 0x4 */ s16 targetSpecies;
+};
 
 u32 xxx_script_textboxes_809A680(u32 param_1, u32 param_2);
 void sub_809A62C(void);
@@ -54,6 +62,109 @@ Pokemon *sub_80A8D54(s16);
 void sub_80A7DDC(s16 *, s16*);
 u8 IsStarterMonster(s16);
 s16 sub_80A8BFC(s32);
+void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
+bool8 sub_809B18C(s32 *sp);
+extern void sub_8099A34(s32 a0);
+extern void sub_8099A48(s32 a0);
+extern void GroundScriptLock(s16 index, s32 r1);
+extern void GroundScriptLockJumpZero(s16 index);
+extern u8 sub_802B2D4(void);
+extern void sub_802B3B8(void);
+extern u32 sub_802B358(void);
+void sub_8096AF8(struct unkStruct_8096AF8 *, u8 slotIndex, u8 dungeon);
+u8 sub_802DB28(u8, u8);
+void sub_8096BD0();
+void ScenarioCalc(s16 varId, s32 main, s32 sub);
+void MakuhitaDojo_Delete();
+u32 HandleMakuhitaDojoState();
+s16 sub_802FED0();
+u8 sub_801FB50();
+void NamingScreen_Free();
+s32 sub_80160D8();
+void ResetTextbox_809B294();
+s32 sub_801A8AC();
+void sub_801A928();
+s32 sub_8016080();
+void CleanConfirmNameMenu();
+u32 CreateConfirmNameMenu(u32 mode, u8 *name);
+bool8 DrawCredits(s32 creditsCategoryIndex, s32);
+u32 sub_8035574();
+void sub_803565C();
+u8 sub_8094D14();
+void sub_802465C();
+s32 sub_80246F0();
+s32 GetScriptVarValue(u8 *localVarBuf, s32 varId);
+bool8 HasEvolutionCompleted();
+void GroundMap_ExecuteEvent();
+void SetScriptVarValue(u8 *localVarBuf, s32 varId, s32 val);
+void CleanLuminousCave();
+u8 sub_80023E4();
+u8 CreateFriendListMenu();
+void PlayMenuSoundEffect();
+bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems);
+s32 sub_801516C();
+void sub_80151A4();
+s32 sub_8015198();
+u8 sub_80211AC();
+void sub_80213A0();
+u8 sub_802132C();
+u8 MakuhitaDojo_New();
+u8 sub_803B050();
+void sub_803B100();
+u8 sub_801B60C();
+u8 CreateKecleonBros();
+s16 sub_80A2654(s16);
+u8 sub_802F73C();
+u8 sub_802F848();
+s32 sub_802F8A0();
+void sub_802F974();
+s16 sub_802F90C();
+s16 sub_80A26B8();
+u8 sub_80302E8();
+s32 sub_80303AC();
+void sub_8030480();
+s16 sub_8030418();
+void PrepareSavePakWrite();
+u8 WriteSavePak();
+void FinishWriteSavePak();
+u8 CreateKangaskhanStorage();
+void sub_8011C28();
+u8 CreateHelperPelipperMenu();
+u8 CreateWigglytuffShop();
+u8 sub_8099328();
+void GetScriptVarScenario(s32 varId,u32 *outMain,u32 *outSub);
+u32 sub_802E90C();
+void sub_802E918();
+u32 sub_80282DC(u8 *r0);
+void sub_809927C(u8);
+void sub_80282FC(void);
+extern u8 CreateThankYouMailPelipper(void);
+extern u8 sub_802E864(void);
+extern u8 sub_802DFB0(void);
+extern void CleanThankYouMailPelipper(void);
+extern void CleanHelperPelipper(void);
+extern void sub_802E06C(void);
+extern void sub_802DC00(void);
+extern void sub_801B72C(void);
+extern u32 ThankYouMailPelipperCallback(void);
+extern u32 HelperPelipperCallback(void);
+extern u32 sub_802E890(void);
+extern u32 sub_802DFD8(void);
+extern u32 sub_802DBD4(void);
+extern u32 sub_803B120(void);
+extern u32 sub_801B6AC(void);
+u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
+bool8 sub_809B648(void);
+void sub_809B57C(void);
+bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, u8 *a3);
+void sub_809C39C(void);
+void sub_809C3D8(void);
+void sub_809C504(void);
+void sub_809C464(void);
+void sub_809C478(void);
+void sub_809C414(void);
+void sub_809C4B0(void);
+void sub_809C550(void);
 
 struct Unk8116040Struct
 {
@@ -101,7 +212,7 @@ static const MenuItem gUnknown_811610C[] =
     {NULL, 0},
 };
 
-static const MenuItem gUnknown_811612C[] =
+static const MenuItem sEmptyMenuItems[] =
 {
     {NULL, 0},
 };
@@ -677,107 +788,6 @@ bool8 sub_809AFAC(void)
     return (gUnknown_3001B64->unk0 == 4);
 }
 
-struct unkStruct_8096AF8
-{
-    bool8 unk0;
-    /* 0x2 */ s16 clientSpecies;
-    /* 0x4 */ s16 targetSpecies;
-};
-
-void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
-bool8 sub_809B18C(s32 *sp);
-extern void sub_8099A34(s32 a0);
-extern void sub_8099A48(s32 a0);
-extern void GroundScriptLock(s16 index, s32 r1);
-extern void GroundScriptLockJumpZero(s16 index);
-extern u8 sub_802B2D4(void);
-extern void sub_802B3B8(void);
-extern u32 sub_802B358(void);
-void sub_8096AF8(struct unkStruct_8096AF8 *, u8 slotIndex, u8 dungeon);
-u8 sub_802DB28(u8, u8);
-void sub_8096BD0();
-void ScenarioCalc(s16 varId, s32 main, s32 sub);
-void MakuhitaDojo_Delete();
-u32 HandleMakuhitaDojoState();
-s16 sub_802FED0();
-u8 sub_801FB50();
-void NamingScreen_Free();
-s32 sub_80160D8();
-void ResetTextbox_809B294();
-s32 sub_801A8AC();
-void sub_801A928();
-s32 sub_8016080();
-void CleanConfirmNameMenu();
-u32 CreateConfirmNameMenu(u32 mode, u8 *name);
-bool8 DrawCredits(s32 creditsCategoryIndex, s32);
-u32 sub_8035574();
-void sub_803565C();
-u8 sub_8094D14();
-void sub_802465C();
-s32 sub_80246F0();
-s32 GetScriptVarValue(u8 *localVarBuf, s32 varId);
-bool8 HasEvolutionCompleted();
-void GroundMap_ExecuteEvent();
-void SetScriptVarValue(u8 *localVarBuf, s32 varId, s32 val);
-void CleanLuminousCave();
-u8 sub_80023E4();
-u8 CreateFriendListMenu();
-void PlayMenuSoundEffect();
-bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems);
-s32 sub_801516C();
-void sub_80151A4();
-s32 sub_8015198();
-u8 sub_80211AC();
-void sub_80213A0();
-u8 sub_802132C();
-u8 MakuhitaDojo_New();
-u8 sub_803B050();
-void sub_803B100();
-s32 sub_809CCDC();
-u8 sub_801B60C();
-u8 CreateKecleonBros();
-s16 sub_80A2654(s16);
-u8 sub_802F73C();
-u8 sub_802F848();
-s32 sub_802F8A0();
-void sub_802F974();
-s16 sub_802F90C();
-s16 sub_80A26B8();
-u8 sub_80302E8();
-s32 sub_80303AC();
-void sub_8030480();
-s16 sub_8030418();
-void PrepareSavePakWrite();
-u8 WriteSavePak();
-void FinishWriteSavePak();
-u8 CreateKangaskhanStorage();
-void sub_8011C28();
-u8 CreateHelperPelipperMenu();
-u8 CreateWigglytuffShop();
-u8 sub_8099328();
-void GetScriptVarScenario(s32 varId,u32 *outMain,u32 *outSub);
-u32 sub_802E90C();
-void sub_802E918();
-u32 sub_80282DC(u8 *r0);
-void sub_809927C(u8);
-void sub_80282FC(void);
-extern u8 CreateThankYouMailPelipper(void);
-extern u8 sub_802E864(void);
-extern u8 sub_802DFB0(void);
-extern void CleanThankYouMailPelipper(void);
-extern void CleanHelperPelipper(void);
-extern void sub_802E06C(void);
-extern void sub_802DC00(void);
-extern void sub_801B72C(void);
-extern u32 ThankYouMailPelipperCallback(void);
-extern u32 HelperPelipperCallback(void);
-extern u32 sub_802E890(void);
-extern u32 sub_802DFD8(void);
-extern u32 sub_802DBD4(void);
-extern u32 sub_803B120(void);
-extern u32 sub_809CD48(void);
-extern u32 sub_801B6AC(void);
-
 void sub_809AFC8(s32 a0_, s32 a1, s32 a2_, const char *text)
 {
     s32 a0 = (u8) a0_;
@@ -796,19 +806,6 @@ bool8 sub_809AFFC(u8 *a0)
     }
     return ret;
 }
-
-u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
-bool8 sub_809B648(void);
-void sub_809B57C(void);
-bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, u8 *a3);
-void sub_809C39C(void);
-void sub_809C3D8(void);
-void sub_809C504(void);
-void sub_809C464(void);
-void sub_809C478(void);
-void sub_809C414(void);
-void sub_809C4B0(void);
-void sub_809C550(void);
 
 void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text)
 {
@@ -1276,7 +1273,7 @@ static const struct unkStruct_3001B64_unk418 gUnknown_8116308 =
     .unk0 = 0,
     .unk4 = NULL,
     .unk8 = NULL,
-    .unkC = sub_809CD48,
+    .unkC = ScriptItemTextboxFunc,
 };
 
 static const struct unkStruct_3001B64_unk418 gUnknown_8116318 =
@@ -1436,7 +1433,7 @@ bool8 sub_809B648(void)
             ResetTextbox_809B294();
             if (gUnknown_3001B64->unk420 == 1) {
                 ResetTextbox_809B294();
-                if (!sub_8015080(gUnknown_3001B64->unk42C, gUnknown_811612C)) {
+                if (!sub_8015080(gUnknown_3001B64->unk42C, sEmptyMenuItems)) {
                     gUnknown_3001B64->unk430 = -1;
                     return 0;
                 }
@@ -1833,7 +1830,7 @@ bool8 sub_809B648(void)
             gUnknown_3001B64->unk430 = -2;
             return 0;
         case 0x2b:
-            gUnknown_3001B64->unk430 = sub_809CCDC(gUnknown_3001B64->unk424,gUnknown_3001B64->unk428);
+            gUnknown_3001B64->unk430 = TryGiveScriptItem(gUnknown_3001B64->unk424,gUnknown_3001B64->unk428);
             gUnknown_3001B64->unk418 = &gUnknown_8116308;
             return 1;
         case 0x2c: {

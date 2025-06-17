@@ -93,11 +93,6 @@ void sub_809D148(s32 r0)
 
 }
 
-struct Test1
-{
-    u64 ukn0;
-};
-
 void sub_809D158(s32 r0, const PixelPos *r1)
 {
     gUnknown_20399E8.unk0 = r0;
