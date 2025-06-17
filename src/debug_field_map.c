@@ -27,7 +27,7 @@ extern void sub_80999E8(s32 a0);
 extern void nullsub_120(void);
 extern void sub_80A59DC(void);
 extern void sub_809D25C(void);
-extern s32 sub_809CFE8(u16 param_1);
+extern s32 DpadToDirection(u16 param_1);
 extern PixelPos SetVecFromDirectionSpeed(s8 r1, u32 r2);
 extern void sub_809D158(s32, PixelPos*);
 
@@ -112,7 +112,7 @@ UNUSED static void DebugMapViewer(void)
                 }
                 else {
                     PixelPos pixPos4;
-                    s8 dir = sub_809CFE8(held);
+                    s8 dir = DpadToDirection(held);
                     if (dir != -1) {
                         PixelPos vecPos = SetVecFromDirectionSpeed(dir, 256);
                         s32 spdMultiplier = (held & B_BUTTON) ? 4 : 2;

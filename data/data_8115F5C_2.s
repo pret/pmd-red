@@ -56,13 +56,4 @@ gUnknown_811642C: @ 811642C
 .string "{CENTER_ALIGN}However, {NAME_0}'s team\n"
 .string "{CENTER_ALIGN}had too many items already...\0"
 .align 2,0
-.string "pksdir0\0"
-.align 2,0
-.string "pksdir0\0"
-.align 2,0
-
-.global gZeroPos_8116478
-gZeroPos_8116478: @ 8116478
-.byte 0x00, 0x00, 0x00, 0x00
-.byte 0x00, 0x00, 0x00, 0x00
 

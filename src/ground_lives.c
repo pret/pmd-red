@@ -16,6 +16,7 @@
 #include "text_util.h"
 #include "code_8002774.h"
 #include "friend_area_dialogue.h"
+#include "ground_lives_helper.h"
 
 struct GroundLivesMeta_Sub1
 {
@@ -61,7 +62,7 @@ struct GroundLive
     PixelPos unk30;
     Action action;
     u32 flags;
-    struct Struct3001B84_sub120 unk120;
+    struct GroundLives_Sub120 unk120;
     s16 unk13C;
     s16 unk13E;
     s16 friendAreaDialogueId;
@@ -102,7 +103,6 @@ extern const struct GroundLiveTypeData gGroundLivesTypeData_811E63C[];
 
 extern void DeleteGroundLives(void);
 extern s32 sub_8002984(s32 _direction1, u32 caseID);
-extern u32 sub_809CDC8(struct Struct3001B84_sub120 *strPtr, u32 *r6, s8 *r7, s32 *param_4, void *param_5, u32 param_6);
 extern u8 sub_809D248(PixelPos *r0);
 extern s16 HandleAction(Action *action, const DebugLocation *debug);
 extern void sub_80A7524(struct UnkGroundSpriteStruct *ptr, s32 monsterId_, PixelPos *pixelPosArg, s32 a3);
@@ -120,7 +120,6 @@ extern u8 sub_80A5934(s32 param_1, PixelPos *, PixelPos *);
 extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
 extern bool8 sub_80A58C8(PixelPos *, PixelPos *);
 extern s32 sub_80AC4C8(u32 a0, PixelPos *, PixelPos *);
-extern void sub_809CD8C(struct Struct3001B84_sub120 *dst, s32 a1);
 extern bool8 sub_809B1C0(s32 a0, u32 kind, Pokemon *a2);
 extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
 extern bool8 sub_809D678(Action *action);
@@ -130,11 +129,9 @@ extern bool8 sub_80ADC64(s32 id, ScriptInfoSmall *dst);
 extern bool8 GroundScriptNotify(Action *param_1, s32 param_2);
 extern bool8 GroundScript_Cancel(Action *r0);
 extern Pokemon *sub_80A8D54(s32);
-extern s32 sub_809CDB8(struct Struct3001B84_sub120 *dst);
 extern void sub_80A6688(struct UnkGroundSpriteStruct *ptr, s32 a0);
 extern s32 sub_808D6A4(s32 *ptr);
 extern s32 sub_808D654(s32 *ptr);
-extern void sub_809CD68(struct Struct3001B84_sub120 *dst);
 extern bool8 GetCurrentDungeonBounds(PixelPos *a0, PixelPos *a1);
 extern void sub_80A7428(struct UnkGroundSpriteStruct *ptr, s32 a1_, s32 monsterId_, s32 a3);
 extern void SetPredefinedScript(Action *param_1, s16 index, const ScriptCommand *param_3);

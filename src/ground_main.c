@@ -18,6 +18,7 @@
 #include "pokemon.h"
 #include "text_util.h"
 #include "ground_map_conversion_table.h"
+#include "ground_lives_helper.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -69,7 +70,6 @@ extern u8 sub_80023E4(u32);
 extern bool8 sub_809C740(void);
 extern bool8 sub_8099B94(void);
 extern void FreeGroundMapAction(void);
-extern void nullsub_118(void);
 extern void FreeGroundLives(void);
 extern void FreeGroundObjects(void);
 extern void FreeGroundEffects(void);
@@ -93,7 +93,6 @@ extern void sub_809C5C4(void);
 extern void sub_809A560(void);
 extern void sub_809CB50(void);
 extern void AllocGroundMapAction(void);
-extern void nullsub_117(void);
 extern void AllocGroundEvents(void);
 extern void AllocGroundLives(void);
 extern void AllocGroundObjects(void);

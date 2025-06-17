@@ -44,6 +44,7 @@
 #include "palette_util.h"
 #include "pokemon_3.h"
 #include "memory.h"
+#include "ground_lives_helper.h"
 #include "friend_area_dialogue.h"
 #include "structs/str_dungeon_setup.h"
 #include "ground_map_conversion_table.h"
@@ -180,7 +181,6 @@ void sub_80AC1B0(s16, s32);
 void sub_80AD0C8(s16, s32);
 s32 sub_80A5984();
 void sub_80A59A0(s32, s32 *, u16);
-s32 sub_809CFE8(u16 param_1);
 extern bool8 sub_80A579C(PixelPos *a0, PixelPos *a1);
 
 // For gScriptLocks, gScriptLockConds, gUnlockBranchLabels
@@ -3829,17 +3829,16 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
         case 0x3F:
             {
                 s32 index;
-                s32 ret;
                 s32 held = gRealInputs.held;
                 s32 pressed = gRealInputs.pressed;
                 if(!(pressed & (START_BUTTON | SELECT_BUTTON)))
                 {
                     PixelPos sp_368;
-                    ret = sub_809CFE8(held);
-                    if((s8)ret != -1)
+                    s32 dir = DpadToDirection(held);
+                    if((s8)dir != -1)
                     {
                         s32 to;
-                        sp_368 = SetVecFromDirectionSpeed(ret,0x100);
+                        sp_368 = SetVecFromDirectionSpeed(dir,0x100);
 
                         to = 2;
                         if(held & B_BUTTON) {
