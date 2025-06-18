@@ -204,7 +204,7 @@ static const struct ScriptCommand s_gs171_g3_s0_lives0_dlg0[] = { /* 0x82200b0 *
     { 0xe4, 0x00,  0x0009,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     FANFARE_PLAY(212),
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_0}'s team received\n{CENTER_ALIGN}the {COLOR GREEN}Teleport Gem{RESET}.") },
+    MSG_INSTANT(_("{CENTER_ALIGN}{NAME_0}'s team received\n{CENTER_ALIGN}the {COLOR GREEN}Teleport Gem{RESET}.")),
     { 0xe1, 0x00,  0x00d4,  0x00000000,  0x00000000, NULL },
     TEXTBOX_CLEAR,
     WAIT(30),

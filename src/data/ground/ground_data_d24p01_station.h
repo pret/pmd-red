@@ -77,7 +77,7 @@ static const struct ScriptCommand s_gs220_g1_s0_lives0_dlg0[] = { /* 0x826abb0 *
     { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     FANFARE_PLAY2(348),
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_2} placed the {COLOR GREEN_I}9-Tail Crest{RESET}\n{CENTER_ALIGN}in the hollow spot.") },
+    MSG_INSTANT(_("{CENTER_ALIGN}{NAME_2} placed the {COLOR GREEN_I}9-Tail Crest{RESET}\n{CENTER_ALIGN}in the hollow spot.")),
     TEXTBOX_CLEAR,
     WAIT(60),
     BGM_STOP,

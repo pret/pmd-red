@@ -174,7 +174,7 @@ static const struct ScriptCommand s_gs203_g1_s0_lives0_dlg0[] = { /* 0x82566f8 *
     { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     WAIT(30),
     FANFARE_PLAY(212),
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_2} received the\n{CENTER_ALIGN}{COLOR GREEN_I}9-Tail Crest{RESET} from {NAME_3}.") },
+    MSG_INSTANT(_("{CENTER_ALIGN}{NAME_2} received the\n{CENTER_ALIGN}{COLOR GREEN_I}9-Tail Crest{RESET} from {NAME_3}.")),
     { 0xe1, 0x00,  0x00d4,  0x00000000,  0x00000000, NULL },
     TEXTBOX_CLEAR,
     WAIT(30),

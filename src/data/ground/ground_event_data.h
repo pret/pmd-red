@@ -37,7 +37,7 @@ static const struct ScriptCommand s_script_WAIT_START_FUNC[] = { /* 0x811ef28 */
 
 static const struct ScriptCommand s_script_INCOMPLETE_TALK[] = { /* 0x811ef58 */
     DEBUGINFO,
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{COLOR RED_W}Unregistered dialog script{RESET}") },
+    MSG_INSTANT(_("{COLOR RED_W}Unregistered dialog script{RESET}")),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -75,8 +75,8 @@ static const struct ScriptCommand s_script_OBJECT_REPLY_NORMAL[] = { /* 0x811f0a
 
 static const struct ScriptCommand s_script_EXAMINE_MISS[] = { /* 0x811f0e8 */
     DEBUGINFO,
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{NAME_0} checked underfoot.") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("But there was nothing to be found...") },
+    MSG_INSTANT(_("{NAME_0} checked underfoot.")),
+    MSG_INSTANT(_("But there was nothing to be found...")),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -557,7 +557,7 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER_FUNC[] = { /* 
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
     { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
+    MSG_INSTANT(_("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
@@ -569,7 +569,7 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER2_FUNC[] = { /*
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
     { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
+    MSG_INSTANT(_("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
@@ -581,7 +581,7 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER3_FUNC[] = { /*
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
     { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
+    MSG_INSTANT(_("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
@@ -593,7 +593,7 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER4_FUNC[] = { /*
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
     { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
+    MSG_INSTANT(_("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
     RET_DIRECT,

@@ -283,7 +283,7 @@ static const struct ScriptCommand s_gs200_g1_s0_lives0_dlg0[] = { /* 0x824fcb4 *
     WAIT(30),
     BGM_STOP,
     FANFARE_PLAY(204),
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}{NAME_3} joined the team!") },
+    MSG_INSTANT(_("{CENTER_ALIGN}{NAME_3} joined the team!")),
     { 0xe1, 0x00,  0x00cc,  0x00000000,  0x00000000, NULL },
     TEXTBOX_CLEAR,
     { 0x3b, 0x1a,  0x0000,  0x00000000,  0x00000000, NULL },

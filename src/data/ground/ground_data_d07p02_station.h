@@ -118,7 +118,7 @@ static const struct ScriptCommand s_gs192_g1_s0_lives0_dlg0[] = { /* 0x823e36c *
     WAIT(30),
     BGM_STOP,
     FANFARE_PLAY(205),
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}Gained access to\n{CENTER_ALIGN}the {COLOR YELLOW_D}Fiery Field{RESET}!") },
+    MSG_INSTANT(_("{CENTER_ALIGN}Gained access to\n{CENTER_ALIGN}the {COLOR YELLOW_D}Fiery Field{RESET}!")),
     { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
     TEXTBOX_CLEAR,
     WAIT(30),

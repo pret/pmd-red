@@ -46,6 +46,7 @@
 // 30..39: various text printing
 #define TEXTBOX_CLEAR                  { 0x30, 0, 0, 0, 0, NULL }
 #define TEXTBOX_CLEAR2                 { 0x31, 0, 0, 0, 0, NULL } // Used rarely, I don't think there's a functional difference between 0x30 and 0x31.
+#define MSG_INSTANT(msg)               { 0x32, 0, -1, 0, 0, msg }
 #define MSG_NPC(id, msg)               { 0x34, 0, id, 0, 0, msg } // ID is portrait id of the npc. -1 means no portrait
 // 3a: yes/no choice (only used for saving)
 // 3b: uber command (conditional jump)
