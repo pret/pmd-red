@@ -540,6 +540,7 @@ UNK_MACRO_5F_2 = 23 5F 02 2E
 UNK_MACRO_5F_3 = 23 5F 03 2E
 UNK_MACRO_5F_4 = 23 5F 04 2E
 UNK_MACRO_5F_5 = 23 5F 05 2E
+WAIT_FRAMES = 23 7E @ #~ Next char is the number of frames to wait before printing the next character
 
 @ COLOR FORMATTING MACROS
 @

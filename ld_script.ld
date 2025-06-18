@@ -336,7 +336,7 @@ SECTIONS {
         src/debug_field_map.o(.text);
         src/code_8099360.o(.text);
         src/palette_util.o(.text);
-        src/code_809A560.o(.text);
+        src/textbox.o(.text);
         src/unk_ds_only_feature.o(.text);
         src/script_item.o(.text);
         src/ground_lives_helper.o(.text);
@@ -720,7 +720,7 @@ SECTIONS {
         src/debug_field_map.o(.rodata);
         src/code_8099360.o(.rodata);
         src/palette_util.o(.rodata);
-        src/code_809A560.o(.rodata);
+        src/textbox.o(.rodata);
         src/unk_ds_only_feature.o(.rodata);
         src/script_item.o(.rodata);
         src/ground_lives_helper.o(.rodata);

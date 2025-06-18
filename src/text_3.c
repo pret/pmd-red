@@ -3,7 +3,7 @@
 #include "text_2.h"
 #include "text_3.h"
 
-static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringStruct *sp);
+static const u8 *HandleCharFormatInternal(Window *windows, const u8 *str, UnkDrawStringStruct *sp);
 static s32 InterpretColorChar(u8 a0);
 static const u8 *sub_800915C(s16 *a0, const u8 *str);
 static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing);
@@ -90,7 +90,7 @@ s32 GetStringLineWidth(const u8 *str)
         const u8 *strPtr;
         u32 chr;
 
-        strPtr = xxx_get_next_char_from_string(str, &chr);
+        strPtr = GetNextCharFromStr(str, &chr);
         str = strPtr;
         if (chr == '\0')
             break;
@@ -178,8 +178,8 @@ static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32
     sp.unkC = x;
     sp.unk10 = 7;
     while (TRUE) {
-        str = HandleTextFormat(windows, str, &sp);
-        str = xxx_get_next_char_from_string(str, &currChr);
+        str = HandleCharFormatInternal(windows, str, &sp);
+        str = GetNextCharFromStr(str, &currChr);
         if (currChr == '\0' || currChr == terminatingChr)
             break;
 
@@ -245,9 +245,9 @@ static const u8 *sub_800915C(s16 *a0, const u8 *str)
 }
 
 // arm9.bin::02003844
-const u8 *xxx_handle_format_global(const u8 *str, UnkDrawStringStruct *unkStrPtr)
+const u8 *HandleSpecialCharFormat(const u8 *str, UnkDrawStringStruct *unkStrPtr)
 {
-    return HandleTextFormat(gWindows, str, unkStrPtr);
+    return HandleCharFormatInternal(gWindows, str, unkStrPtr);
 }
 
 #if (GAME_VERSION == VERSION_RED)
@@ -258,7 +258,7 @@ UNUSED static s32 sub_80091A8(s32 a0)
 #endif
 
 // arm9.bin::02003514
-static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringStruct *sp)
+static const u8 *HandleCharFormatInternal(Window *windows, const u8 *str, UnkDrawStringStruct *sp)
 {
     while (TRUE) {
         if (str[0] == '#') {
@@ -370,7 +370,7 @@ static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringS
                 break;
             }
             else if (str[1] == '~') {
-                sp->unk2C = str[2];
+                sp->framesToWait = str[2];
                 sp->unk21 = 1;
                 str += 3;
             }

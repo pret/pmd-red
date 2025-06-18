@@ -129,7 +129,7 @@ void PlayMenuSoundEffect(u32 arrId)
     sSoundEffectCounter1 = 4;
 }
 
-void sub_8011A04(void)
+void PlayDialogueTextSound(void)
 {
     if (sSoundEffectCounter2 > 0)
         return;

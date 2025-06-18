@@ -21,8 +21,8 @@ typedef struct UnkDrawStringStruct
     u8 fill23;
     const u8 * (*unk24)(const u8 *, const u8 *, struct UnkDrawStringStruct *);
     s32 unk28;
-    s32 unk2C;
-    s32 unk30;
+    s32 framesToWait;
+    s32 currFrames;
 } UnkDrawStringStruct;
 
 void PrintStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr);
@@ -36,6 +36,6 @@ void sub_8009524(s32 windowId);
 void sub_80095CC(s32 a0, s32 a1);
 s32 CalcEntriesTotalHeight(s32 entriesCount, s32 entryHeight);
 s32 CalcTwoLinesEntriesTotalHeight(s32 entriesCount, s32 entryHeight);
-const u8 *xxx_handle_format_global(const u8 *str, UnkDrawStringStruct *unkStrPtr);
+const u8 *HandleSpecialCharFormat(const u8 *str, UnkDrawStringStruct *unkStrPtr);
 
 #endif // GUARD_TEXT_3_H

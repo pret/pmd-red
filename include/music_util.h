@@ -19,6 +19,6 @@ void StopSound(u16 songIndex);
 void FadeOutSound(u16 songIndex, u16 speed);
 bool8 IsSoundPlaying(u16 songIndex);
 void PlayMenuSoundEffect(u32 arrId);
-void sub_8011A04(void);
+void PlayDialogueTextSound(void);
 
 #endif // GUARD_MUSIC_UTIL_H

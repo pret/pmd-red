@@ -242,10 +242,10 @@ void xxx_draw_string_80524F0(void)
                 }
 
                 while (1) {
-                    txtPtr = xxx_handle_format_global(txtPtr, &sp);
+                    txtPtr = HandleSpecialCharFormat(txtPtr, &sp);
                     if (*txtPtr == '\0' || *txtPtr == '\r' || *txtPtr == '\n')
                         break;
-                    txtPtr = xxx_get_next_char_from_string(txtPtr, &currChr);
+                    txtPtr = GetNextCharFromStr(txtPtr, &currChr);
                     if (currChr == '`') {
                         sp.x += 6;
                     }

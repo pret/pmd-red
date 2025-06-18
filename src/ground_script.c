@@ -49,6 +49,7 @@
 #include "structs/str_dungeon_setup.h"
 #include "ground_map_conversion_table.h"
 #include "unk_ds_only_feature.h"
+#include "textbox.h"
 
 void GroundMap_Select(s16);
 void GroundMap_SelectDungeon(s32, DungeonLocation*, u32);
@@ -84,12 +85,8 @@ u32 sub_809A6E4();
 u32 sub_809A6F8();
 u32 sub_809A738();
 u32 sub_809A768();
-bool8 ScriptPrintNullTextbox(void);
-bool8 ScriptPrintEmptyTextbox(void);
-void sub_809A83C(s16);
 u32 sub_809AC7C();
 u32 sub_809ADD8();
-bool8 ScriptPrintText(s32, s16, const char*);
 bool8 sub_809AEEC(const char*);
 bool8 sub_809AF2C(const char*);
 bool8 sub_809AF6C(s16, const char*);
@@ -1134,13 +1131,13 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 if (val != 0) {
                                     action->scriptData.branchDiscriminant = 3;
                                     sub_80A87AC(0, 0);
-                                    ScriptPrintNullTextbox();
+                                    ScriptClearTextbox();
                                     break;
                                 }
                                 else {
                                     action->scriptData.branchDiscriminant = -1;
                                     sub_80A87AC(0, 0);
-                                    ScriptPrintNullTextbox();
+                                    ScriptClearTextbox();
                                     break;
                                 }
                             }
@@ -1161,7 +1158,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 }
                                 action->scriptData.branchDiscriminant = -1;
                                 sub_80A87AC(0, 0);
-                                ScriptPrintNullTextbox();
+                                ScriptClearTextbox();
                                 break;
                             }
 
@@ -1858,17 +1855,17 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x30: {
-                ScriptPrintNullTextbox();
+                ScriptClearTextbox();
                 break;
             }
             case 0x31: {
-                ScriptPrintEmptyTextbox();
+                ScriptClearTextbox2();
                 break;
             }
             case 0x2d: {
                 switch ((u8)curCmd.argByte) {
                     case 0: {
-                        sub_809A83C(curCmd.argShort);
+                        ResetTextboxPortrait(curCmd.argShort);
                         break;
                     }
                     case 1: {
@@ -1944,10 +1941,10 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x2f: {
-                s32 unk[2];
-                unk[0] = curCmd.arg1;
-                unk[1] = curCmd.arg2;
-                sub_809ADD8(curCmd.argShort, unk);
+                PixelPos pos;
+                pos.x = curCmd.arg1;
+                pos.y = curCmd.arg2;
+                sub_809ADD8(curCmd.argShort, &pos);
                 break;
             }
             case 0x32 ... 0x38: {

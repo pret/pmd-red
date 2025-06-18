@@ -86,16 +86,16 @@ static EWRAM_DATA u8 sFormatBuffer_TeamName[FORMAT_BUFFER_LEN] = {0};
 static EWRAM_DATA s32 gUnknown_202E738 = 0;
 static EWRAM_DATA s32 gUnknown_202E73C = 0;
 static EWRAM_DATA s32 gUnknown_202E740 = 0;
-static EWRAM_DATA s32 gUnknown_202E744 = 0;
-static EWRAM_DATA UnkDrawStringStruct gUnknown_202E748 = {0};
-static EWRAM_DATA u16 sUnknownTextFlags = 0;
+static EWRAM_DATA s32 sPrintStringState = 0;
+static EWRAM_DATA UnkDrawStringStruct sTextPrintStruct = {0};
+static EWRAM_DATA u16 sStringFormatFlags = 0;
 static EWRAM_DATA s32 gUnknown_202E780 = 0;
 static EWRAM_DATA s32 gUnknown_202E784 = 0;
-static EWRAM_DATA s32 gUnknown_202E788 = 0;
-static EWRAM_DATA s32 gUnknown_202E78C = 0;
-static EWRAM_DATA bool8 gUnknown_202E790 = FALSE;
+static EWRAM_DATA s32 sTextPrintSpeed = 0;
+static EWRAM_DATA s32 sFramesBetweenCharPrints = 0;
+static EWRAM_DATA bool8 sInstantText = FALSE;
 static EWRAM_DATA u8 sArrowFrames = 0;
-static EWRAM_DATA const u8 *gUnknown_202E794 = NULL;
+static EWRAM_DATA const u8 *sCurrStr = NULL;
 
 #define DIALOGUE_TEXT_BUFFER_SIZE 1000
 static EWRAM_DATA u8 sDialogueTextBuffer[DIALOGUE_TEXT_BUFFER_SIZE] = {0};
@@ -146,7 +146,7 @@ static EWRAM_INIT WindowTemplates sUnknown_203B198 = {
 
 void sub_8014144(void)
 {
-    gUnknown_202E744 = 0;
+    sPrintStringState = 0;
     gUnknown_202E738 = 60;
     gUnknown_202E73C = 60;
     gUnknown_202E740 = 0;
@@ -180,14 +180,21 @@ void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, MonPortraitMsg 
     CreateMenuDialogueBoxAndPortrait(text, NULL, -1, sYesNoMenuItems_DefaultNo, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
+enum
+{
+    STATE_FINISHED,
+    STATE_PRINT_CHAR,
+    STATE_PRINT_CHAR_SOUND_WAIT,
+};
+
 // arm9.bin::0201D700
 void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, MonPortraitMsg *monPortraitPtr, u16 flags)
 {
     bool8 portraitOn = FALSE;
 
     FormatString(text, sDialogueTextBuffer, sDialogueTextBuffer + DIALOGUE_TEXT_BUFFER_SIZE - 1, flags);
-    gUnknown_202E794 = sDialogueTextBuffer;
-    gUnknown_202E748.unk24 = a1;
+    sCurrStr = sDialogueTextBuffer;
+    sTextPrintStruct.unk24 = a1;
     gUnknown_202EC10 = a5;
     sDialogueMenuItems = menuItems;
     gUnknown_202EC18 = arg_0;
@@ -229,28 +236,28 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     sUnknown_203B198.id[3] = gUnknown_80D48AC;
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B198, TRUE, TRUE);
-    gUnknown_202E748.x = 4;
-    gUnknown_202E748.unk2 = 4;
-    gUnknown_202E748.unk8 = 0x70;
-    gUnknown_202E748.unkA = (gWindows[0].y * 8) + 34;
-    gUnknown_202E748.unk10 = 7;
-    gUnknown_202E748.unk1C = 0;
-    gUnknown_202E748.unk20 = 0;
+    sTextPrintStruct.x = 4;
+    sTextPrintStruct.unk2 = 4;
+    sTextPrintStruct.unk8 = 0x70;
+    sTextPrintStruct.unkA = (gWindows[0].y * 8) + 34;
+    sTextPrintStruct.unk10 = 7;
+    sTextPrintStruct.unk1C = 0;
+    sTextPrintStruct.unk20 = 0;
     SetCharacterMask((flags & 0x10) ? 8 : 3);
-    gUnknown_202E744 = 1;
-    sUnknownTextFlags = flags;
-    if (flags & 0x20) {
-        gUnknown_202E790 = TRUE;
+    sPrintStringState = 1;
+    sStringFormatFlags = flags;
+    if (flags & STR_FORMAT_FLAG_INSTANT_TEXT) {
+        sInstantText = TRUE;
     }
     else {
-        gUnknown_202E790 = FALSE;
+        sInstantText = FALSE;
     }
 
     if (flags & 0x400) {
         SetWindowBGColor();
     }
-    gUnknown_202E788 = 1;
-    gUnknown_202E78C = 1;
+    sTextPrintSpeed = 1;
+    sFramesBetweenCharPrints = 1;
     UnpressButtons();
     sArrowFrames = 0;
     gUnknown_202E784 = 0;
@@ -270,7 +277,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
 
 void sub_8014490(void)
 {
-    gUnknown_202E744 = 0;
+    sPrintStringState = STATE_FINISHED;
     gUnknown_202EC1C = 0;
 }
 
@@ -279,7 +286,7 @@ s32 sub_80144A4(s32 *a0)
     if (a0 != NULL) {
         *a0 = gUnknown_202EC1C;
     }
-    return gUnknown_202E744;
+    return sPrintStringState;
 }
 
 // arm9.bin::0201CEB0
@@ -289,35 +296,35 @@ void DrawDialogueBoxString(void)
 
     gUnknown_202E784++;
     while (keepLooping) {
-        switch (gUnknown_202E744) {
-            case 0: {
+        switch (sPrintStringState) {
+            case STATE_FINISHED: {
                 keepLooping = FALSE;
             }
             break;
-            case 1: {
-                const u8 *str = gUnknown_202E794;
-                s32 r7;
+            case STATE_PRINT_CHAR: {
+                const u8 *str = sCurrStr;
+                s32 txtSpeed;
 
-                if (gUnknown_202E790) {
-                    r7 = 99999;
+                if (sInstantText) {
+                    txtSpeed = 99999;
                 }
                 else {
-                    r7 = gUnknown_202E788;
+                    txtSpeed = sTextPrintSpeed;
                 }
-                gUnknown_202E748.unk2C = 0;
+                sTextPrintStruct.framesToWait = 0;
                 sub_80073B8(0);
-                while (r7 > 0) {
-                     str = xxx_handle_format_global(str, &gUnknown_202E748);
-                     if (gUnknown_202E748.unk21 != 0) {
+                while (txtSpeed > 0) {
+                     str = HandleSpecialCharFormat(str, &sTextPrintStruct);
+                     if (sTextPrintStruct.unk21 != 0) {
                         break;
                      }
-                     if (gUnknown_202E748.unk20 != 0) {
-                        if (gUnknown_202E748.unk2 > 34) {
-                            gUnknown_202E744 = 8;
+                     if (sTextPrintStruct.unk20 != 0) {
+                        if (sTextPrintStruct.unk2 > 34) {
+                            sPrintStringState = 8;
                             gUnknown_202E780 = gUnknown_202E738;
                         }
                         else {
-                            gUnknown_202E744 = 7;
+                            sPrintStringState = 7;
                             gUnknown_202E780 = gUnknown_202E73C;
                         }
                         sArrowFrames = 0;
@@ -328,75 +335,75 @@ void DrawDialogueBoxString(void)
                      }
 
                      if (*str == '\r' || *str == '\n') {
-                        gUnknown_202E748.x = 4;
-                        gUnknown_202E748.unk2 += 11;
+                        sTextPrintStruct.x = 4;
+                        sTextPrintStruct.unk2 += 11;
                         str++;
                      }
                      else {
                         u32 chr;
 
-                        str = xxx_get_next_char_from_string(str, &chr);
-                        gUnknown_202E748.x += DrawCharOnWindow(gUnknown_202E748.x, gUnknown_202E748.unk2, chr, gUnknown_202E748.unk10, 0);
-                        gUnknown_202E748.unk2C = gUnknown_202E78C;
+                        str = GetNextCharFromStr(str, &chr);
+                        sTextPrintStruct.x += DrawCharOnWindow(sTextPrintStruct.x, sTextPrintStruct.unk2, chr, sTextPrintStruct.unk10, 0);
+                        sTextPrintStruct.framesToWait = sFramesBetweenCharPrints;
                      }
 
-                     if (gUnknown_202E748.unk2 > 34) {
-                        if (!(sUnknownTextFlags & 0x10)) {
-                            gUnknown_202E748.unk1C = 0;
-                            gUnknown_202E748.unk20 = 1;
-                            gUnknown_202E744 = 8;
+                     if (sTextPrintStruct.unk2 > 34) {
+                        if (!(sStringFormatFlags & 0x10)) {
+                            sTextPrintStruct.unk1C = 0;
+                            sTextPrintStruct.unk20 = 1;
+                            sPrintStringState = 8;
                             sArrowFrames = 0;
                             gUnknown_202E780 = gUnknown_202E738;
                             break;
                         }
                         else {
-                            gUnknown_202E748.unk2 = 4;
+                            sTextPrintStruct.unk2 = 4;
                         }
                      }
-                     r7--;
+                     txtSpeed--;
                 }
                 sub_80073E0(0);
-                gUnknown_202E794 = str;
+                sCurrStr = str;
                 ResetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput);
-                if (gUnknown_202E794[0] == '\0') {
+                if (*sCurrStr == '\0') {
                     if (sDialogueMenuItems != NULL) {
-                        gUnknown_202E744 = 3;
+                        sPrintStringState = 3;
                     }
                     else {
-                        gUnknown_202E744 = 6;
+                        sPrintStringState = 6;
                     }
                     keepLooping = FALSE;
                 }
                 else {
-                    gUnknown_202E748.unk30 = 0;
-                    if (gUnknown_202E748.unk20 != 0) {
-                        if (gUnknown_202E744 == 1) {
-                            gUnknown_202E744 = 7;
+                    sTextPrintStruct.currFrames = 0;
+                    if (sTextPrintStruct.unk20 != 0) {
+                        if (sPrintStringState == 1) {
+                            sPrintStringState = 7;
                             sArrowFrames = 0;
                             gUnknown_202E780 = gUnknown_202E738;
                         }
                         keepLooping = FALSE;
                     }
                     else {
-                        gUnknown_202E744 = 2;
+                        sPrintStringState = STATE_PRINT_CHAR_SOUND_WAIT;
                     }
                 }
             }
             break;
-            case 2: {
-                if (sUnknownTextFlags & 4) {
-                    sub_8011A04();
+            case STATE_PRINT_CHAR_SOUND_WAIT: {
+                if (sStringFormatFlags & STR_FORMAT_FLAG_DIALOGUE_SOUND) {
+                    PlayDialogueTextSound();
                 }
-                if (!(sUnknownTextFlags & 2)) {
-                    if (sUnknownTextFlags & 0x40 && gRealInputs.pressed & AB_BUTTONS) {
-                        gUnknown_202E790 = TRUE;
-                        gUnknown_202E748.unk30 = 99999;
+                if (!(sStringFormatFlags & 2)) {
+                    if (sStringFormatFlags & STR_FORMAT_FLAG_INSTANT_TEXT_ON_AB_PRESS && gRealInputs.pressed & AB_BUTTONS) {
+                        sInstantText = TRUE;
+                        sTextPrintStruct.currFrames = 99999;
                     }
                 }
 
-                if (++gUnknown_202E748.unk30 > gUnknown_202E748.unk2C) {
-                    gUnknown_202E744 = 1;
-                    gUnknown_202E748.unk21 = 0;
+                if (++sTextPrintStruct.currFrames > sTextPrintStruct.framesToWait) {
+                    sPrintStringState = STATE_PRINT_CHAR;
+                    sTextPrintStruct.unk21 = 0;
                 }
                 else {
                     keepLooping = FALSE;
@@ -404,13 +411,13 @@ void DrawDialogueBoxString(void)
             }
             break;
             case 6: {
-                if (sUnknownTextFlags & 0x100) {
-                    gUnknown_202E744 = 9;
+                if (sStringFormatFlags & 0x100) {
+                    sPrintStringState = 9;
                     sArrowFrames = 0;
                     if (gUnknown_202E740 > 0) {
                         gUnknown_202E780 = gUnknown_202E740 - gUnknown_202E784;
                         if (gUnknown_202E780 < 0) {
-                            gUnknown_202E744 = 11;
+                            sPrintStringState = 11;
                             gUnknown_202E780 = 0;
                         }
                     }
@@ -419,7 +426,7 @@ void DrawDialogueBoxString(void)
                     }
                 }
                 else {
-                    gUnknown_202E744 = 11;
+                    sPrintStringState = 11;
                 }
             }
             break;
@@ -427,13 +434,13 @@ void DrawDialogueBoxString(void)
             case 8:
             case 9: {
                 bool8 buttonPress = FALSE;
-                gUnknown_202E748.unk20 = 0;
+                sTextPrintStruct.unk20 = 0;
                 GetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput, 0);
-                if (!(sUnknownTextFlags & 1)) {
+                if (!(sStringFormatFlags & 1)) {
                     buttonPress = TRUE;
                 }
                 else {
-                    if (sUnknownTextFlags & 2) {
+                    if (sStringFormatFlags & 2) {
                         if (gUnknown_202E780 > 0) {
                             gUnknown_202E780--;
                         }
@@ -454,7 +461,7 @@ void DrawDialogueBoxString(void)
 
                 if (!buttonPress) {
                     sArrowFrames++;
-                    if (!(sUnknownTextFlags & 0x2) && sArrowFrames & 8) {
+                    if (!(sStringFormatFlags & 0x2) && sArrowFrames & 8) {
                         SpriteSetAffine1(&sDialogueBoxArrowSprite, 0);
                         SpriteSetAffine2(&sDialogueBoxArrowSprite, 0);
                         SpriteSetObjMode(&sDialogueBoxArrowSprite, 0);
@@ -467,93 +474,93 @@ void DrawDialogueBoxString(void)
                         SpriteSetPriority(&sDialogueBoxArrowSprite, 0);
                         SpriteSetPalNum(&sDialogueBoxArrowSprite, 15);
 
-                        if (sUnknownTextFlags & 0x10) {
+                        if (sStringFormatFlags & 0x10) {
                             SpriteSetY(&sDialogueBoxArrowSprite, 120);
                             SpriteSetX(&sDialogueBoxArrowSprite, 112);
                         }
                         else {
-                            SpriteSetY(&sDialogueBoxArrowSprite, gUnknown_202E748.unkA + 1);
-                            SpriteSetX(&sDialogueBoxArrowSprite, gUnknown_202E748.unk8);
+                            SpriteSetY(&sDialogueBoxArrowSprite, sTextPrintStruct.unkA + 1);
+                            SpriteSetX(&sDialogueBoxArrowSprite, sTextPrintStruct.unk8);
                         }
 
                         AddSprite(&sDialogueBoxArrowSprite, 0x100, NULL, NULL);
                     }
                 }
                 else {
-                    if (*gUnknown_202E794 == '\0') {
-                        gUnknown_202E744 = 11;
+                    if (*sCurrStr == '\0') {
+                        sPrintStringState = 11;
                     }
-                    else if (gUnknown_202E744 == 9) {
-                        gUnknown_202E744 = 11;
+                    else if (sPrintStringState == 9) {
+                        sPrintStringState = 11;
                     }
-                    else if (gUnknown_202E744 == 8) {
-                        gUnknown_202E748.x = 4;
-                        if (gUnknown_202E748.unk2 > 34) {
-                            gUnknown_202E748.unk2 = 4;
-                            if (sUnknownTextFlags & 0x10) {
+                    else if (sPrintStringState == 8) {
+                        sTextPrintStruct.x = 4;
+                        if (sTextPrintStruct.unk2 > 34) {
+                            sTextPrintStruct.unk2 = 4;
+                            if (sStringFormatFlags & 0x10) {
                                 CallPrepareTextbox_8008C54(0);
-                                gUnknown_202E744 = 1;
+                                sPrintStringState = 1;
                             }
-                            else if (gUnknown_202E748.unk1C != 0) {
+                            else if (sTextPrintStruct.unk1C != 0) {
                                 CallPrepareTextbox_8008C54(0);
-                                gUnknown_202E744 = 1;
+                                sPrintStringState = 1;
                             }
                             else {
-                                gUnknown_202E744 = 10;
-                                gUnknown_202E748.unk28 = 0;
+                                sPrintStringState = 10;
+                                sTextPrintStruct.unk28 = 0;
                             }
                         }
                         else {
-                            gUnknown_202E744 = 1;
+                            sPrintStringState = 1;
                         }
                     }
                     else {
-                        gUnknown_202E744 = 1;
+                        sPrintStringState = 1;
                     }
 
-                    gUnknown_202E748.unk8 = 0x70;
-                    gUnknown_202E748.unkA = (gWindows[0].y * 8) + 34;
+                    sTextPrintStruct.unk8 = 0x70;
+                    sTextPrintStruct.unkA = (gWindows[0].y * 8) + 34;
                 }
                 keepLooping = FALSE;
             }
             break;
             case 10: {
-                gUnknown_202E748.unk28++;
+                sTextPrintStruct.unk28++;
                 gIwramTextFunc3(0);
-                if (gUnknown_202E748.unk28 > 17) {
-                    gUnknown_202E744 = 1;
+                if (sTextPrintStruct.unk28 > 17) {
+                    sPrintStringState = 1;
                 }
                 keepLooping = FALSE;
             }
             break;
             case 11: {
-                if (sUnknownTextFlags & 0x200) {
+                if (sStringFormatFlags & 0x200) {
                     ResetUnusedInputStruct();
                     ShowWindows(NULL, TRUE, TRUE);
-                    gUnknown_202E744 = 0;
+                    sPrintStringState = 0;
                 }
                 else {
-                    gUnknown_202E744 = 0;
+                    sPrintStringState = 0;
                 }
                 keepLooping = FALSE;
             }
             break;
             case 3: {
                 sub_8014A88();
-                gUnknown_202E744 = 4;
+                sPrintStringState = 4;
                 keepLooping = FALSE;
             }
             break;
             case 4: {
                 if (sub_8014B94()) {
-                    gUnknown_202E744 = 5;
+                    sPrintStringState = 5;
                 }
                 keepLooping = FALSE;
             }
             break;
             case 5: {
                 nullsub_35();
-                gUnknown_202E744 = 11;
+                sPrintStringState = 11;
             }
             break;
         }
@@ -639,7 +646,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
         if (currChar == '\0')
             break;
         if (currChar == '\r' || currChar == '\n') {
-            if (flags & 0x80)
+            if (flags & STR_FORMAT_FLAG_NEW_LINE_TERMINATES)
                 break;
             r9 = TRUE;
         }
@@ -647,7 +654,7 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
             if (r10) {
                 r10 = FALSE;
                 r9 = FALSE;
-                if (flags & 8) {
+                if (flags & STR_FORMAT_FLAG_SPEAKER_NAME) {
                     AppendString(gSpeakerNameBuffer, &dst, dstMax, flags);
                     AppendString(": ", &dst, dstMax, flags);
                 }
@@ -760,7 +767,6 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags)
             }
 
             if (txtPtr != NULL) {
-
                 if (AppendString(txtPtr, &dst, dstMax, flags))
                     break;
             }
@@ -796,7 +802,7 @@ static bool8 AppendString(const u8 *str, u8 **dstPtr, u8 *dstMax, u16 flags)
 {
     u8 *dst = *dstPtr;
     while (*str != '\0') {
-        if (flags & 0x80 && *str == '\r') {
+        if (flags & STR_FORMAT_FLAG_NEW_LINE_TERMINATES && *str == '\r') {
             *dstPtr = dst;
             return TRUE;
         }

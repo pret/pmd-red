@@ -21,6 +21,7 @@
 #include "ground_lives_helper.h"
 #include "script_item.h"
 #include "unk_ds_only_feature.h"
+#include "textbox.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -73,7 +74,6 @@ extern void FreeGroundLives(void);
 extern void FreeGroundObjects(void);
 extern void FreeGroundEffects(void);
 extern void FreeGroundEvents(void);
-extern void sub_809A610(void);
 extern void sub_80A658C(void);
 extern void sub_809D508(void);
 extern void sub_80A7754(void);
@@ -86,7 +86,6 @@ extern void sub_809D0AC(void);
 extern void sub_80A7744(void);
 extern void sub_809D490(void);
 extern void sub_80A62F0(void);
-extern void sub_809A560(void);
 extern void AllocGroundMapAction(void);
 extern void AllocGroundEvents(void);
 extern void AllocGroundLives(void);
@@ -123,7 +122,6 @@ extern void UpdateAdventureAchievements(void);
 extern void xxx_call_update_bg_sound_input(void);
 extern void sub_80A6E68(void);
 extern void sub_80060EC(void);
-extern void ScriptPrintNullTextbox(void);
 extern void sub_809977C(void);
 extern void GroundMap_ExecuteEvent(s32, u32);
 extern void UpdateFadeInTile(s32);
@@ -188,7 +186,7 @@ u32 xxx_script_related_8098468(s32 param_1)
     sub_809D490();
     sub_80A62F0();
     sub_809C5C4();
-    sub_809A560();
+    TextboxInit();
     InitInternalScriptItemsData();
     AllocGroundMapAction();
     nullsub_117();
@@ -209,7 +207,7 @@ u32 xxx_script_related_8098468(s32 param_1)
     r7 = -1;
     while (gUnknown_20398A8 - 1 <= 1) {
         sub_809A71C(-1);
-        ScriptPrintNullTextbox();
+        ScriptClearTextbox();
         sub_809977C();
         switch (gUnknown_20398B4) {
             case 0:
@@ -383,7 +381,7 @@ u32 xxx_script_related_8098468(s32 param_1)
     FreeGroundEffects();
     FreeGroundEvents();
     FreeInternalScriptItemsData();
-    sub_809A610();
+    TextboxFree();
     sub_809C618();
     sub_80A658C();
     sub_809D508();

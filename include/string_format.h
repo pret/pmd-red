@@ -30,4 +30,10 @@ const u8 *FormatString(const u8 *str, u8 *dst, u8 *dstMax, u16 flags);
 void PrintFormattedStringOnWindow(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr);
 void PrintFormattedStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 lineSpacing);
 
+#define STR_FORMAT_FLAG_DIALOGUE_SOUND 0x4
+#define STR_FORMAT_FLAG_SPEAKER_NAME 0x8
+#define STR_FORMAT_FLAG_INSTANT_TEXT 0x20
+#define STR_FORMAT_FLAG_INSTANT_TEXT_ON_AB_PRESS 0x40
+#define STR_FORMAT_FLAG_NEW_LINE_TERMINATES 0x80
+
 #endif // GUARD_STRING_FORMAT_H

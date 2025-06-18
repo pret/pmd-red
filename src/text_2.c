@@ -855,30 +855,30 @@ static s32 HexDigitValue(u8 chr)
 }
 
 // In NDS, this func is copied to 01FF8D80
-const u8 *xxx_get_next_char_from_string(const u8 *a1, u32 *dstChr)
+const u8 *GetNextCharFromStr(const u8 *str, u32 *dstChr)
 {
-    s32 currChr = *a1;
-    if (currChr == 0x7E) {
+    s32 currChr = *str;
+    if (currChr == '~') {
         s32 hexDigit;
 
-        a1++;
-        hexDigit = (HexDigitValue(a1[0]) << 4) + HexDigitValue(a1[1]);
-        if (*a1 != '\0') {
-            a1++;
-            if (*a1 != '\0') {
-                a1++;
+        str++;
+        hexDigit = (HexDigitValue(str[0]) << 4) + HexDigitValue(str[1]);
+        if (*str != '\0') {
+            str++;
+            if (*str != '\0') {
+                str++;
             }
         }
         *dstChr = hexDigit;
-        return a1;
+        return str;
     }
     else if ((currChr >= 0x81 && currChr <= 0x84) || currChr == 0x87) {
-        *dstChr = a1[1] | (a1[0] << 8);
-        return a1 + 2;
+        *dstChr = str[1] | (str[0] << 8);
+        return str + 2;
     }
     else {
         *dstChr = currChr;
-        return a1 + 1;
+        return str + 1;
     }
 }
 
