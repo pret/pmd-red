@@ -273,18 +273,22 @@ static const MenuItem sEmptyMenuItems[] =
     {NULL, 0},
 };
 
-static const u32 sTextboxTypes[] =
+static const u32 sScriptTextboxTypes[] =
 {
-    1, 1, 1, 1, 1
+    [SCRIPT_TEXT_TYPE_INSTANT] =    1,
+    [SCRIPT_TEXT_TYPE_PLAYER] =     1,
+    [SCRIPT_TEXT_TYPE_NPC] =        1,
+    [SCRIPT_TEXT_TYPE_LETTER] =     1,
+    [SCRIPT_TEXT_TYPE_4] =          1,
 };
 
-static const u16 sFlagSets[] =
+static const u16 sScriptFlagSets[] =
 {
-    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_INSTANT_TEXT,
-    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS,
-    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_SPEAKER,
-    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_DIALOGUE_SOUND,
-    0x01,
+    [SCRIPT_TEXT_TYPE_INSTANT] =    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_INSTANT_TEXT,
+    [SCRIPT_TEXT_TYPE_PLAYER] =     TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS,
+    [SCRIPT_TEXT_TYPE_NPC] =        TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_SPEAKER,
+    [SCRIPT_TEXT_TYPE_LETTER] =     TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_DIALOGUE_SOUND,
+    [SCRIPT_TEXT_TYPE_4] =          0x01,
     // These are effectively unused
     0x121, 0x101, 0x10D, 0x105, 0
 };
@@ -798,8 +802,8 @@ bool8 ScriptPrintText(s32 scriptMsgType, s32 speakerId_, const char *text)
         return ScriptClearTextbox2();
     }
     else {
-        ResetTextboxType(sTextboxTypes[scriptMsgType], 0);
-        return ScriptPrintTextInternal(&sTextbox->unkC, sFlagSets[scriptMsgType], speakerId, text);
+        ResetTextboxType(sScriptTextboxTypes[scriptMsgType], 0);
+        return ScriptPrintTextInternal(&sTextbox->unkC, sScriptFlagSets[scriptMsgType], speakerId, text);
     }
 }
 
@@ -874,7 +878,7 @@ void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, c
     s32 a1 = (u8) a1_;
     s32 a4 = (s16) a4_;
 
-    ResetTextboxType(sTextboxTypes[a3], 0);
+    ResetTextboxType(sScriptTextboxTypes[a3], 0);
     sTextbox->unk414 = 1;
     sTextbox->unk418 = NULL;
     sTextbox->unk41C = menuItems;
@@ -882,7 +886,7 @@ void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, c
     sTextbox->unk424 = (a1 != 0) ? 2 : 0;
     sTextbox->unk428 = 0;
     sTextbox->unk430 = a2;
-    if (sFlagSets[a3] & TEXTBOX_FLAG_SPEAKER) {
+    if (sScriptFlagSets[a3] & TEXTBOX_FLAG_SPEAKER) {
         if (a4 < 0) {
             strcpy(gSpeakerNameBuffer, sYellowSpeechBubbleText);
         }
@@ -892,9 +896,9 @@ void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, c
     }
 
     CreateMenuDialogueBoxAndPortrait(text, sub_809B428, a2, menuItems, 0, 4, 0, GetSpeakerPortrait(a4),
-         ((sFlagSets[a3] & TEXTBOX_FLAG_SPEAKER) ? STR_FORMAT_FLAG_SPEAKER_NAME | STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
-        | ((sFlagSets[a3] & TEXTBOX_FLAG_DIALOGUE_SOUND) ? STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
-        | ((sFlagSets[a3] & TEXTBOX_FLAG_INSTANT_TEXT) ? STR_FORMAT_FLAG_INSTANT_TEXT | STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2 : STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2));
+         ((sScriptFlagSets[a3] & TEXTBOX_FLAG_SPEAKER) ? STR_FORMAT_FLAG_SPEAKER_NAME | STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
+        | ((sScriptFlagSets[a3] & TEXTBOX_FLAG_DIALOGUE_SOUND) ? STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
+        | ((sScriptFlagSets[a3] & TEXTBOX_FLAG_INSTANT_TEXT) ? STR_FORMAT_FLAG_INSTANT_TEXT | STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2 : STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2));
 
     if (sTextbox->unk424 & 2) {
         sub_809A6E4(1);

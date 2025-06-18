@@ -37,6 +37,7 @@
 // 22..2f: ???
 #define TEXTBOX_AUTO_PRESS(endF, midF) { 0x2b, 0, 0, endF, midF, NULL} // Waits specified number of frames, then automatically does a button press without waiting for player's input. -1 disables it.
 // 30..39: various text printing
+#define MSG_NPC(id, msg)             { 0x41, 0, id, 0, 0, msg } // ID is portrait id of the npc. -1 means no portrait
 // 3a: yes/no choice (only used for saving)
 // 3b: uber command (conditional jump)
 // 3c: unknown textbox-related cjump

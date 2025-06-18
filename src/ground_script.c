@@ -1949,11 +1949,11 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x32 ... 0x38: {
                 s8 ret = 0;
                 switch (scriptData->curScriptOp) {
-                    case 0x32: ret = ScriptPrintText(0, curCmd.argShort, curCmd.argPtr); break;
-                    case 0x33: ret = ScriptPrintText(1, curCmd.argShort, curCmd.argPtr); break;
-                    case 0x34: ret = ScriptPrintText(2, curCmd.argShort, curCmd.argPtr); break;
-                    case 0x35: ret = ScriptPrintText(3, curCmd.argShort, curCmd.argPtr); break;
-                    case 0x36: ret = ScriptPrintText(4, curCmd.argShort, curCmd.argPtr); break;
+                    case 0x32: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_INSTANT, curCmd.argShort, curCmd.argPtr); break;
+                    case 0x33: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_PLAYER, curCmd.argShort, curCmd.argPtr); break;
+                    case 0x34: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_NPC, curCmd.argShort, curCmd.argPtr); break;
+                    case 0x35: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_LETTER, curCmd.argShort, curCmd.argPtr); break;
+                    case 0x36: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_4, curCmd.argShort, curCmd.argPtr); break;
                     case 0x37: ret = sub_809AEEC(curCmd.argPtr); break;
                     case 0x38: ret = sub_809AF2C(curCmd.argPtr); break;
                 }
