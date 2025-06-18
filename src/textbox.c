@@ -2,6 +2,7 @@
 #include "globaldata.h"
 #include "textbox.h"
 #include "constants/dungeon.h"
+#include "constants/monster.h"
 #include "code_800558C.h"
 #include "code_800D090.h"
 #include "music_util.h"
@@ -70,13 +71,17 @@ struct unkStruct_3001B64_unk418
 
 #define MAX_TEXTBOX_PORTRAITS 10
 
+enum {
+    TEXTBOX_TYPE_NORMAL = 1,
+};
+
 struct Textbox
 {
     // size: 0x5A8
-    u32 unk0;
+    u32 type;
     s32 endMsgFrames;
     s32 midMsgFrames;
-    struct TextboxText unkC;
+    struct TextboxText text;
     u32 unk414;
     const struct unkStruct_3001B64_unk418 *unk418;
     const MenuItem *unk41C;
@@ -267,11 +272,11 @@ static const MenuItem sEmptyMenuItems[] =
 
 static const u32 sScriptTextboxTypes[] =
 {
-    [SCRIPT_TEXT_TYPE_INSTANT] =    1,
-    [SCRIPT_TEXT_TYPE_PLAYER] =     1,
-    [SCRIPT_TEXT_TYPE_NPC] =        1,
-    [SCRIPT_TEXT_TYPE_LETTER] =     1,
-    [SCRIPT_TEXT_TYPE_4] =          1,
+    [SCRIPT_TEXT_TYPE_INSTANT] =    TEXTBOX_TYPE_NORMAL,
+    [SCRIPT_TEXT_TYPE_PLAYER] =     TEXTBOX_TYPE_NORMAL,
+    [SCRIPT_TEXT_TYPE_NPC] =        TEXTBOX_TYPE_NORMAL,
+    [SCRIPT_TEXT_TYPE_LETTER] =     TEXTBOX_TYPE_NORMAL,
+    [SCRIPT_TEXT_TYPE_4] =          TEXTBOX_TYPE_NORMAL,
 };
 
 static const u16 sScriptFlagSets[] =
@@ -296,14 +301,14 @@ EWRAM_DATA u16 gUnknown_20399DE = 0;
 
 static void ResetAllTextboxPortraits(void);
 static bool8 ScriptPrintTextInternal(struct TextboxText *ptr, u32 flags_, s32 a2_, const char *text);
-static u32 ResetTextboxType(u32 param_1, u32 param_2);
+static u32 ResetTextboxType(u32 textboxType, bool8 unused);
 static void ResetTextbox(void);
 
 void TextboxInit(void)
 {
     ResetDialogueBox();
     sTextbox = MemoryAlloc(sizeof(struct Textbox), 6);
-    sTextbox->unk0 = 0;
+    sTextbox->type = 0;
     sTextbox->endMsgFrames = -1;
     sTextbox->midMsgFrames = -1;
     gUnknown_20399DC = 0;
@@ -335,7 +340,7 @@ void TextboxResetAll(void)
 {
     s32 index;
 
-    sTextbox->unk0 = 0;
+    sTextbox->type = 0;
     sTextbox->endMsgFrames = -1;
     sTextbox->midMsgFrames = -1;
     gUnknown_20399DC = 0;
@@ -344,17 +349,17 @@ void TextboxResetAll(void)
         ResetTextboxPortrait(index);
     }
     sTextbox->unk414 = 0;
-    ResetTextboxType(0, 1);
+    ResetTextboxType(0, TRUE);
 }
 
-static u32 ResetTextboxType(u32 param_1, u32 unused)
+static u32 ResetTextboxType(u32 textboxType, bool8 unused)
 {
-    switch (param_1) {
+    switch (textboxType) {
         case 0:
             ResetTextbox();
             ShowWindows(0,1,1);
             break;
-        case 1:
+        case TEXTBOX_TYPE_NORMAL:
             ResetTextbox();
             break;
         case 2:
@@ -371,7 +376,7 @@ static u32 ResetTextboxType(u32 param_1, u32 unused)
             ShowWindows(0,1,1);
             break;
     }
-    sTextbox->unk0 = param_1;
+    sTextbox->type = textboxType;
     return 1;
 }
 
@@ -410,7 +415,7 @@ void SetAutoPressTextboxMidEndMsgFrames(s32 endMsgFrames, s32 midMsgFrames)
 
 u8 IsTextboxOpen_809A750(void)
 {
-    return IsTextboxOpen_809B40C(&sTextbox->unkC);
+    return IsTextboxOpen_809B40C(&sTextbox->text);
 }
 
 u32 sub_809A768(void)
@@ -421,27 +426,27 @@ u32 sub_809A768(void)
 // I think these two functions are functionally equivalent.
 bool8 ScriptClearTextbox(void)
 {
-    switch (sTextbox->unk0) {
+    switch (sTextbox->type) {
         case 3:
-            return ScriptPrintTextInternal(&sTextbox->unkC,4,-1,0);
+            return ScriptPrintTextInternal(&sTextbox->text,4,-1,0);
         case 1:
         case 2:
-            return ScriptPrintTextInternal(&sTextbox->unkC,0x84,-1,0);
+            return ScriptPrintTextInternal(&sTextbox->text,0x84,-1,0);
         default:
-            ResetTextboxType(0, 1);
+            ResetTextboxType(0, TRUE);
             return FALSE;
     }
 }
 
 bool8 ScriptClearTextbox2(void)
 {
-    switch (sTextbox->unk0) {
+    switch (sTextbox->type) {
         case 3:
         case 1:
         case 2:
-            return ScriptPrintTextInternal(&sTextbox->unkC,4,-1,0);
+            return ScriptPrintTextInternal(&sTextbox->text,4,-1,0);
         default:
-            ResetTextboxType(0, 1);
+            ResetTextboxType(0, TRUE);
             return FALSE;
     }
 }
@@ -494,11 +499,11 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
     s16 speciesId;
     s32 portraitId = (s16) param_1;
     s16 local_28 = (s16) param_2;
-    struct TextboxPortrait *unkPtr = &sTextbox->portraits[portraitId];
+    struct TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
     bool8 showPortrait = TRUE;
     bool8 byte1 = FALSE;
 
-    TRY_CLOSE_FILE_AND_SET_NULL(unkPtr->faceFile);
+    TRY_CLOSE_FILE_AND_SET_NULL(portraitPtr->faceFile);
 
     sub_80A7DDC(&local_28,&speciesId);
     if (local_28 >= 10 && local_28 <= 29) {
@@ -518,11 +523,11 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
                  || pPVar6->dungeonLocation.id == DUNGEON_POKEMON_SQUARE_2)
         {
             switch (speciesId) {
-                case 0x104:
-                case 0x133:
-                case 0x183:
-                case 0x198:
-                case 0x199:
+                case MONSTER_SMEARGLE:
+                case MONSTER_GARDEVOIR:
+                case MONSTER_ABSOL:
+                case MONSTER_LATIAS:
+                case MONSTER_LATIOS:
                     break;
                 default:
                     showPortrait = FALSE;
@@ -531,21 +536,21 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
         }
         else {
             switch (speciesId) {
-                case 0x90:
-                case 0x91:
-                case 0x92:
-                case 0x96:
-                case 0x10C:
-                case 0x10D:
-                case 0x10E:
-                case 0x112:
-                case 0x113:
-                case 0x19A:
-                case 0x19B:
-                case 0x19C:
-                case 0x19D:
-                case 0x19E:
-                case 0x1A7:
+                case MONSTER_ARTICUNO:
+                case MONSTER_ZAPDOS:
+                case MONSTER_MOLTRES:
+                case MONSTER_MEWTWO:
+                case MONSTER_RAIKOU:
+                case MONSTER_ENTEI:
+                case MONSTER_SUICUNE:
+                case MONSTER_LUGIA:
+                case MONSTER_HO_OH:
+                case MONSTER_KYOGRE:
+                case MONSTER_GROUDON:
+                case MONSTER_RAYQUAZA:
+                case MONSTER_JIRACHI:
+                case MONSTER_DEOXYS_NORMAL:
+                case MONSTER_RAYQUAZA_CUTSCENE:
                     break;
                 default:
                     showPortrait = FALSE;
@@ -573,35 +578,35 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
     if (local_28 != -1) {
         s32 sVar3 = (s16) sub_80A7AE8(local_28);
         if (sVar3 >= 0) {
-            unkPtr->unk0 = local_28;
-            unkPtr->speciesID = sub_80A8BFC(sVar3);
+            portraitPtr->unk0 = local_28;
+            portraitPtr->speciesID = sub_80A8BFC(sVar3);
             strcpy(gFormatBuffer_Monsters[portraitId], sUndefineText);
             strcpy(gFormatBuffer_Names[portraitId], sUndefineText);
-            unkPtr->showPortrait = showPortrait;
-            unkPtr->unk5 = byte1;
-            unkPtr->spriteId = -1;
-            unkPtr->placementId = 0;
-            unkPtr->posDelta.x = 0;
-            unkPtr->posDelta.y = 0;
-            unkPtr->monPortrait.faceFile = NULL;
-            unkPtr->monPortrait.faceData = NULL;
-            unkPtr->monPortrait.spriteId = 0;
+            portraitPtr->showPortrait = showPortrait;
+            portraitPtr->unk5 = byte1;
+            portraitPtr->spriteId = -1;
+            portraitPtr->placementId = 0;
+            portraitPtr->posDelta.x = 0;
+            portraitPtr->posDelta.y = 0;
+            portraitPtr->monPortrait.faceFile = NULL;
+            portraitPtr->monPortrait.faceData = NULL;
+            portraitPtr->monPortrait.spriteId = 0;
             ret = TRUE;
         }
         else if (speciesId != 0) {
-            unkPtr->unk0 = local_28;
-            unkPtr->speciesID = speciesId;
+            portraitPtr->unk0 = local_28;
+            portraitPtr->speciesID = speciesId;
             strcpy(gFormatBuffer_Monsters[portraitId], sUndefineText);
             strcpy(gFormatBuffer_Names[portraitId], sUndefineText);
-            unkPtr->showPortrait = showPortrait;
-            unkPtr->unk5 = byte1;
-            unkPtr->spriteId = -1;
-            unkPtr->placementId = 0;
-            unkPtr->posDelta.x = 0;
-            unkPtr->posDelta.y = 0;
-            unkPtr->monPortrait.faceFile = NULL;
-            unkPtr->monPortrait.faceData = NULL;
-            unkPtr->monPortrait.spriteId = 0;
+            portraitPtr->showPortrait = showPortrait;
+            portraitPtr->unk5 = byte1;
+            portraitPtr->spriteId = -1;
+            portraitPtr->placementId = 0;
+            portraitPtr->posDelta.x = 0;
+            portraitPtr->posDelta.y = 0;
+            portraitPtr->monPortrait.faceFile = NULL;
+            portraitPtr->monPortrait.faceData = NULL;
+            portraitPtr->monPortrait.spriteId = 0;
             ret = TRUE;
         }
         else {
@@ -796,11 +801,12 @@ bool8 ScriptPrintText(s32 scriptMsgType, s32 speakerId_, const char *text)
         return ScriptClearTextbox2();
     }
     else {
-        ResetTextboxType(sScriptTextboxTypes[scriptMsgType], 0);
-        return ScriptPrintTextInternal(&sTextbox->unkC, sScriptFlagSets[scriptMsgType], speakerId, text);
+        ResetTextboxType(sScriptTextboxTypes[scriptMsgType], FALSE);
+        return ScriptPrintTextInternal(&sTextbox->text, sScriptFlagSets[scriptMsgType], speakerId, text);
     }
 }
 
+// These 2 functions are identical.
 bool8 sub_809AEEC(const char *text)
 {
     if (text == NULL) {
@@ -810,8 +816,8 @@ bool8 sub_809AEEC(const char *text)
         return ScriptClearTextbox();
     }
     else {
-        ResetTextboxType(2, 1);
-        return ScriptPrintTextInternal(&sTextbox->unkC, 0xC2, -1, text);
+        ResetTextboxType(2, TRUE);
+        return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_UNUSED_x2, -1, text);
     }
 }
 
@@ -824,8 +830,8 @@ bool8 sub_809AF2C(const char *text)
         return ScriptClearTextbox();
     }
     else {
-        ResetTextboxType(2, 1);
-        return ScriptPrintTextInternal(&sTextbox->unkC, 0xC2, -1, text);
+        ResetTextboxType(2, TRUE);
+        return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_UNUSED_x2, -1, text);
     }
 }
 
@@ -838,14 +844,14 @@ bool8 sub_809AF6C(s32 unused, const char *text)
         return ScriptClearTextbox();
     }
     else {
-        ResetTextboxType(3, 1);
-        return ScriptPrintTextInternal(&sTextbox->unkC, 0x65, -1, text);
+        ResetTextboxType(3, TRUE);
+        return ScriptPrintTextInternal(&sTextbox->text, 0x65, -1, text);
     }
 }
 
 bool8 sub_809AFAC(void)
 {
-    return (sTextbox->unk0 == 4);
+    return (sTextbox->type == 4);
 }
 
 void sub_809AFC8(s32 a0_, s32 a1, s32 a2_, const char *text)
@@ -872,7 +878,7 @@ void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, c
     s32 a1 = (u8) a1_;
     s32 a4 = (s16) a4_;
 
-    ResetTextboxType(sScriptTextboxTypes[a3], 0);
+    ResetTextboxType(sScriptTextboxTypes[a3], FALSE);
     sTextbox->unk414 = 1;
     sTextbox->unk418 = NULL;
     sTextbox->unk41C = menuItems;
@@ -929,7 +935,7 @@ bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, u8 *a3)
             break;
     }
 
-    ResetTextboxType(4, 0);
+    ResetTextboxType(4, FALSE);
     sTextbox->unk414 = a0;
     sTextbox->unk418 = NULL;
     sTextbox->unk41C = NULL;
@@ -955,7 +961,7 @@ static void ResetTextbox(void)
 {
     SetCharacterMask(3);
     // All this function call does is basically setting textboxText->unk4 = 0;
-    ScriptPrintTextInternal(&sTextbox->unkC, 0, -1, NULL);
+    ScriptPrintTextInternal(&sTextbox->text, 0, -1, NULL);
 }
 
 static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_, s32 speakerId_, const char *text)
@@ -972,7 +978,7 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
 
         if (flags & 4) {
             sub_8014490();
-            ResetTextboxType(0, 1);
+            ResetTextboxType(0, TRUE);
         }
         return TRUE;
     }
@@ -987,7 +993,7 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
         }
     }
 
-    if (sTextbox->unk0 == 3) {
+    if (sTextbox->type == 3) {
         sprintfStatic(textboxText->buffer, _("%s#[I]{WAIT_FRAMES 0x20}{0x81}{0x40}{WAIT_PRESS}\n#[O]{WAIT_FRAMES 0x20}{0x81}{0x40}"), text); // #[I] and #[O] are text macros to be documented
         text = textboxText->buffer;
     }
@@ -995,8 +1001,8 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
     CreateMenuDialogueBoxAndPortrait(text, sub_809B428, -1, NULL, 0, 3, 0, GetSpeakerPortrait(speakerId),
          ((flags & TEXTBOX_FLAG_SPEAKER) ? STR_FORMAT_FLAG_SPEAKER_NAME | STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
          | ((flags & TEXTBOX_FLAG_DIALOGUE_SOUND) ? STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
-         | ((sTextbox->unk0 == 3) ? 0x10 : 0)
-         | ((sTextbox->unk0 == 2) ? 0x10 : 0)
+         | ((sTextbox->type == 3) ? STR_FORMAT_FLAG_ONLY_TEXT : 0)
+         | ((sTextbox->type == 2) ? STR_FORMAT_FLAG_ONLY_TEXT : 0)
          | ((flags & TEXTBOX_FLAG_INSTANT_TEXT) ? STR_FORMAT_FLAG_INSTANT_TEXT : 0)
          | ((flags & TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2) ? STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2 : 0)
          | ((flags & TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS) ? STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS : 0)
@@ -1045,7 +1051,7 @@ void sub_809B474(void)
 {
     const struct unkStruct_3001B64_unk418 *unkStructPtr;
 
-    switch (sTextbox->unk0) {
+    switch (sTextbox->type) {
         case 0:
         case 1:
         case 2:
@@ -1057,7 +1063,7 @@ void sub_809B474(void)
                 case 1:
                     if (!sub_809B648()) {
                         sTextbox->unk420 = 3;
-                        ResetTextboxType(0, 1);
+                        ResetTextboxType(0, TRUE);
                         break;
                     }
 
@@ -1068,7 +1074,7 @@ void sub_809B474(void)
                             if (!unkStructPtr->unk4()) {
                                 sTextbox->unk430 = -1;
                                 sTextbox->unk420 = 3;
-                                ResetTextboxType(0, 1);
+                                ResetTextboxType(0, TRUE);
                                 break;
                             }
                         }
@@ -1092,7 +1098,7 @@ void sub_809B474(void)
                         break;
                     }
                     sTextbox->unk420 = 3;
-                    ResetTextboxType(0, 1);
+                    ResetTextboxType(0, TRUE);
                     break;
             }
             break;
@@ -1103,7 +1109,7 @@ void sub_809B474(void)
 void sub_809B57C(void)
 {
     DrawDialogueBoxString();
-    switch (sTextbox->unk0) {
+    switch (sTextbox->type) {
         case 1:
         case 2:
         case 3:
@@ -1122,7 +1128,7 @@ void sub_809B57C(void)
                     s32 sp;
                     if (sub_80144A4(&sp) == 0) {
                         GroundScriptLockJumpZero(0);
-                        sTextbox->unk0 = 0;
+                        sTextbox->type = 0;
                     }
                     break;
                 }

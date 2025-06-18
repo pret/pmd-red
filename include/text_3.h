@@ -8,8 +8,8 @@ typedef struct UnkDrawStringStruct
     s16 y;
     s16 unk4;
     s16 unk6;
-    s16 unk8;
-    s16 unkA;
+    s16 arrowSpritePosX;
+    s16 arrowSpritePosY;
     s32 unkC;
     u32 unk10;
     u32 unk14;

@@ -251,7 +251,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives10_dlg2[] = { /* 0x8133068 */
     CHOICE(/* label */  1, _("Main 0A〜4B Demo")),
     CHOICE(/* label */  2, _("Main 5A〜7B")),
     CHOICE(/* label */  3, _("Main 8A〜10A Ending")),
-    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Farewell") },
+    MSG_NPC(-1, _(" Farewell")),
     { 0x22, 0x01,  0x0004,  0x00000000,  0x00000000, NULL },
     JUMP_SCRIPT(END_TALK),
   LABEL(1), /* = 0x01 */
@@ -917,7 +917,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives11_dlg2[] = { /* 0x8136060 */
     ASK3(FALSE, /*default*/ 0, /* speaker */ -1, _(" I'm the event test Pokémon!\nMotions will differ from the real thing!")),
     CHOICE(/* label */  1, _("Sub 0〜4")),
     CHOICE(/* label */  2, _("Sub 5〜9")),
-    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Farewell.") },
+    MSG_NPC(-1, _(" Farewell.")),
     { 0x22, 0x01,  0x0004,  0x00000000,  0x00000000, NULL },
     JUMP_SCRIPT(END_TALK),
   LABEL(1), /* = 0x01 */

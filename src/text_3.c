@@ -350,8 +350,8 @@ static const u8 *HandleCharFormatInternal(Window *windows, const u8 *str, UnkDra
             }
             else if (str[1] == 'W') {
                 str += 2;
-                sp->unk8 = ((windows[0].x * 8) + sp->x) - 2;
-                sp->unkA = ((windows[0].y * 8) + sp->y) + 3;
+                sp->arrowSpritePosX = ((windows[0].x * 8) + sp->x) - 2;
+                sp->arrowSpritePosY = ((windows[0].y * 8) + sp->y) + 3;
                 sp->waitButtonPress = TRUE;
                 break;
             }

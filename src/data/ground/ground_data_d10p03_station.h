@@ -160,7 +160,7 @@ static const struct ScriptCommand s_gs200_g1_s0_lives0_dlg0[] = { /* 0x824fcb4 *
     { 0x28, 0x01,  0x0005,  0x00000002,  0x00ffffff, NULL },
     { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     BGM_FADEOUT(120),
-    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Stop it!") },
+    MSG_NPC(-1, _(" Stop it!")),
     TEXTBOX_CLEAR,
     BGM_FADEOUT(120),
     { 0x27, 0x00,  0x0005,  0x00000028,  0x00ffffff, NULL },

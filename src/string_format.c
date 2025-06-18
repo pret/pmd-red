@@ -31,30 +31,28 @@ static const MenuItem sYesNoMenuItems_DefaultNo[] =
 };
 
 static const u32 gUnknown_80D48A0[] = {0x7, 0x2, 0x2};
-static const WindowTemplate gUnknown_80D48AC = {
-    0x00,
-    0x03,
-    0x00, 0x00,
-    0x00, 0x00,
-    0x00, 0x00, 0x00
+static const WindowTemplate sWinTemplateDummy = WIN_TEMPLATE_DUMMY;
+
+static const WindowTemplate sDialogueBoxWindowTemplate = {
+    .unk0 = 0,
+    .type = WINDOW_TYPE_0,
+    .pos = {2, 15},
+    .width = 26,
+    .height = 5,
+    .unk10 = 7,
+    .unk12 = 0,
+    .header = NULL,
 };
 
-static const WindowTemplate gUnknown_80D48C4 = {
-    0x00,
-    0x00,
-    0x02, 0x0F,
-    0x1A, 0x05,
-    0x07, 0x00,
-    NULL
-};
-
-static const WindowTemplate gUnknown_80D48DC = {
-    0x00,
-    0x02,
-    0x02, 0x08,
-    0x1A, 0x05,
-    0x07, 0x00,
-    NULL
+static const WindowTemplate sOnlyTextDialogueBoxWindowTemplate = {
+    .unk0 = 0,
+    .type = WINDOW_TYPE_ONLY_TEXT,
+    .pos = {2, 8},
+    .width = 26,
+    .height = 5,
+    .unk10 = 7,
+    .unk12 = 0,
+    .header = NULL,
 };
 
 extern void DisplayMonPortraitSprite(s32 a0, const u8 *compressedData, s32 a2);
@@ -117,7 +115,7 @@ static UNUSED EWRAM_DATA u8 sUnusedEwram1[4] = {0};
 
 static EWRAM_DATA TouchScreenMenuInput sDialogueMenuTouchScreenInput = {0};
 
-static EWRAM_INIT WindowTemplates sUnknown_203B198 = {
+static EWRAM_INIT WindowTemplates sDialogueBoxWinTemplates = {
     .id = {
         [0] = {
             .unk0 = 0,
@@ -212,50 +210,50 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     gUnknown_202EC18 = arg_0;
     gUnknown_202EC1C = r9;
     ResetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput);
-    if (flags & 0x10) {
-        sUnknown_203B198.id[0] = gUnknown_80D48DC;
+    if (flags & STR_FORMAT_FLAG_ONLY_TEXT) {
+        sDialogueBoxWinTemplates.id[0] = sOnlyTextDialogueBoxWindowTemplate;
     }
     else {
-        sUnknown_203B198.id[0] = gUnknown_80D48C4;
+        sDialogueBoxWinTemplates.id[0] = sDialogueBoxWindowTemplate;
     }
 
-    sUnknown_203B198.id[1].width = 0;
-    sUnknown_203B198.id[1].height = 0;
-    sUnknown_203B198.id[1].unk10 = 0;
-    sUnknown_203B198.id[1].unk0 = 0x40;
+    sDialogueBoxWinTemplates.id[1].width = 0;
+    sDialogueBoxWinTemplates.id[1].height = 0;
+    sDialogueBoxWinTemplates.id[1].unk10 = 0;
+    sDialogueBoxWinTemplates.id[1].unk0 = 0x40;
 
     if (monPortraitPtr != NULL && monPortraitPtr->faceData != NULL && monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].gfx != 0) {
         s32 i;
 
-        sUnknown_203B198.id[1].pos.x = monPortraitPtr->pos.x;
-        sUnknown_203B198.id[1].pos.y = monPortraitPtr->pos.y;
-        sUnknown_203B198.id[1].width = 5;
-        sUnknown_203B198.id[1].height = 5;
-        sUnknown_203B198.id[1].unk10 = 5;
+        sDialogueBoxWinTemplates.id[1].pos.x = monPortraitPtr->pos.x;
+        sDialogueBoxWinTemplates.id[1].pos.y = monPortraitPtr->pos.y;
+        sDialogueBoxWinTemplates.id[1].width = 5;
+        sDialogueBoxWinTemplates.id[1].height = 5;
+        sDialogueBoxWinTemplates.id[1].unk10 = 5;
         for (i = 0; i < 16; i++) {
             SetBGPaletteBufferColorArray(224 + i, &monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].pal[i]);
         }
         portraitOn = TRUE;
         if (monPortraitPtr->unkE) {
-            sUnknown_203B198.id[1].type = WINDOW_TYPE_7;
+            sDialogueBoxWinTemplates.id[1].type = WINDOW_TYPE_7;
         }
         else {
-            sUnknown_203B198.id[1].type = WINDOW_TYPE_FILL_TRANSPARENT;
+            sDialogueBoxWinTemplates.id[1].type = WINDOW_TYPE_FILL_TRANSPARENT;
         }
     }
 
-    sUnknown_203B198.id[2] = gUnknown_80D48AC;
-    sUnknown_203B198.id[3] = gUnknown_80D48AC;
+    sDialogueBoxWinTemplates.id[2] = sWinTemplateDummy;
+    sDialogueBoxWinTemplates.id[3] = sWinTemplateDummy;
     ResetUnusedInputStruct();
-    ShowWindows(&sUnknown_203B198, TRUE, TRUE);
+    ShowWindows(&sDialogueBoxWinTemplates, TRUE, TRUE);
     sTextPrintStruct.x = 4;
     sTextPrintStruct.y = 4;
-    sTextPrintStruct.unk8 = 0x70;
-    sTextPrintStruct.unkA = (gWindows[0].y * 8) + TEXTBOX_HEIGHT;
+    sTextPrintStruct.arrowSpritePosX = 0x70;
+    sTextPrintStruct.arrowSpritePosY = (gWindows[0].y * 8) + TEXTBOX_HEIGHT;
     sTextPrintStruct.unk10 = 7;
     sTextPrintStruct.unk1C = 0;
     sTextPrintStruct.waitButtonPress = 0;
-    SetCharacterMask((flags & 0x10) ? 8 : 3);
+    SetCharacterMask((flags & STR_FORMAT_FLAG_ONLY_TEXT) ? 8 : 3);
     sPrintStringState = 1;
     sStringFormatFlags = flags;
     if (flags & STR_FORMAT_FLAG_INSTANT_TEXT) {
@@ -360,7 +358,7 @@ void DrawDialogueBoxString(void)
                      }
 
                      if (TEXTBOX_OUT_OF_SPACE(sTextPrintStruct.y)) {
-                        if (!(sStringFormatFlags & 0x10)) {
+                        if (!(sStringFormatFlags & STR_FORMAT_FLAG_ONLY_TEXT)) {
                             sTextPrintStruct.unk1C = 0;
                             sTextPrintStruct.waitButtonPress = TRUE;
                             sPrintStringState = STATE_WAIT_FOR_BUTTON_NEW_TEXTBOX;
@@ -486,13 +484,13 @@ void DrawDialogueBoxString(void)
                         SpriteSetPriority(&sDialogueBoxArrowSprite, 0);
                         SpriteSetPalNum(&sDialogueBoxArrowSprite, 15);
 
-                        if (sStringFormatFlags & 0x10) {
+                        if (sStringFormatFlags & STR_FORMAT_FLAG_ONLY_TEXT) {
                             SpriteSetY(&sDialogueBoxArrowSprite, 120);
                             SpriteSetX(&sDialogueBoxArrowSprite, 112);
                         }
                         else {
-                            SpriteSetY(&sDialogueBoxArrowSprite, sTextPrintStruct.unkA + 1);
-                            SpriteSetX(&sDialogueBoxArrowSprite, sTextPrintStruct.unk8);
+                            SpriteSetY(&sDialogueBoxArrowSprite, sTextPrintStruct.arrowSpritePosY + 1);
+                            SpriteSetX(&sDialogueBoxArrowSprite, sTextPrintStruct.arrowSpritePosX);
                         }
 
                         AddSprite(&sDialogueBoxArrowSprite, 256, NULL, NULL);
@@ -509,13 +507,13 @@ void DrawDialogueBoxString(void)
                         sTextPrintStruct.x = 4;
                         if (TEXTBOX_OUT_OF_SPACE(sTextPrintStruct.y)) {
                             sTextPrintStruct.y = 4;
-                            if (sStringFormatFlags & 0x10) {
+                            if (sStringFormatFlags & STR_FORMAT_FLAG_ONLY_TEXT) {
                                 CallPrepareTextbox_8008C54(0);
-                                sPrintStringState = 1;
+                                sPrintStringState = STATE_PRINT_CHAR;
                             }
                             else if (sTextPrintStruct.unk1C != 0) {
                                 CallPrepareTextbox_8008C54(0);
-                                sPrintStringState = 1;
+                                sPrintStringState = STATE_PRINT_CHAR;
                             }
                             else {
                                 sPrintStringState = 10;
@@ -523,15 +521,15 @@ void DrawDialogueBoxString(void)
                             }
                         }
                         else {
-                            sPrintStringState = 1;
+                            sPrintStringState = STATE_PRINT_CHAR;
                         }
                     }
                     else {
-                        sPrintStringState = 1;
+                        sPrintStringState = STATE_PRINT_CHAR;
                     }
 
-                    sTextPrintStruct.unk8 = 0x70;
-                    sTextPrintStruct.unkA = (gWindows[0].y * 8) + TEXTBOX_HEIGHT;
+                    sTextPrintStruct.arrowSpritePosX = 0x70;
+                    sTextPrintStruct.arrowSpritePosY = (gWindows[0].y * 8) + TEXTBOX_HEIGHT;
                 }
                 keepLooping = FALSE;
             }
@@ -540,7 +538,7 @@ void DrawDialogueBoxString(void)
                 sTextPrintStruct.unk28++;
                 gIwramTextFunc3(0);
                 if (sTextPrintStruct.unk28 > 17) {
-                    sPrintStringState = 1;
+                    sPrintStringState = STATE_PRINT_CHAR;
                 }
                 keepLooping = FALSE;
             }
@@ -606,21 +604,21 @@ static void sub_8014A88(void)
     if (r5 % 8)
         r2++;
 
-    sUnknown_203B198.id[2].type = gUnknown_202EC10;
+    sDialogueBoxWinTemplates.id[2].type = gUnknown_202EC10;
     r1 = r7 / 8;
     r1 += 2;
-    sUnknown_203B198.id[2].width = r1;
-    sUnknown_203B198.id[2].unk10 = r2;
-    sUnknown_203B198.id[2].height = r2;
-    sUnknown_203B198.id[2].pos.x = 28 - r1;
-    sUnknown_203B198.id[2].pos.y = 14 - r2;
-    sUnknown_203B198.id[0].unk0 = 0x80;
-    sUnknown_203B198.id[1].unk0 = 0xC0;
+    sDialogueBoxWinTemplates.id[2].width = r1;
+    sDialogueBoxWinTemplates.id[2].unk10 = r2;
+    sDialogueBoxWinTemplates.id[2].height = r2;
+    sDialogueBoxWinTemplates.id[2].pos.x = 28 - r1;
+    sDialogueBoxWinTemplates.id[2].pos.y = 14 - r2;
+    sDialogueBoxWinTemplates.id[0].unk0 = 0x80;
+    sDialogueBoxWinTemplates.id[1].unk0 = 0xC0;
     if (sNeverWrittenToUnknownStructPtr != NULL) {
-        sUnknown_203B198.id[3] = sNeverWrittenToUnknownStructPtr->unk0;
+        sDialogueBoxWinTemplates.id[3] = sNeverWrittenToUnknownStructPtr->unk0;
     }
     ResetUnusedInputStruct();
-    ShowWindows(&sUnknown_203B198, TRUE, FALSE);
+    ShowWindows(&sDialogueBoxWinTemplates, TRUE, FALSE);
     sub_8012D60(&gUnknown_202EBC0, sDialogueMenuItems, gUnknown_80D48A0, gUnknown_202EC18, gUnknown_202EC1C, 2);
     if (sNeverWrittenToUnknownStructPtr != NULL) {
         sub_80073B8(3);

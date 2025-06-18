@@ -410,7 +410,7 @@ static void PutWindowTopBorderTilemap(Window *window, s32 y, u16 tilemaps[4][32]
     switch (window->type) {
         case WINDOW_TYPE_0:
         case WINDOW_TYPE_WITHOUT_BORDER:
-        case WINDOW_TYPE_2:
+        case WINDOW_TYPE_ONLY_TEXT:
         case WINDOW_TYPE_WITH_HEADER:
             break;
         case WINDOW_TYPE_NORMAL:
@@ -478,7 +478,7 @@ static void PutWindowLeftBorderTilemap(Window *window, s32 x, s32 y, s32 a3, u16
 
     switch (window->type) {
         case WINDOW_TYPE_WITHOUT_BORDER:
-        case WINDOW_TYPE_2:
+        case WINDOW_TYPE_ONLY_TEXT:
             break;
         case WINDOW_TYPE_0:
             if (a3 == 0) {
@@ -519,7 +519,7 @@ static void PutWindowFillTilemap(Window *window, s32 x, s32 y, s32 a3, u16 tilem
         return;
 
     switch (window->type) {
-        case WINDOW_TYPE_2:
+        case WINDOW_TYPE_ONLY_TEXT:
             tilemaps[0][y][x] = a3 | TILEMAP_PAL(15);
             tilemaps[1][y][x] = TILEMAP_TILE_NUM(0x278) | TILEMAP_PAL(15);
             break;
@@ -548,7 +548,7 @@ static void PutWindowRightBorderTilemap(Window *window, s32 x, s32 y, s32 a3, u1
 
     switch (window->type) {
         case WINDOW_TYPE_WITHOUT_BORDER:
-        case WINDOW_TYPE_2:
+        case WINDOW_TYPE_ONLY_TEXT:
             break;
         case WINDOW_TYPE_0:
             if (a3 == 0) {
@@ -596,7 +596,7 @@ static void PutWindowBottomBorderTilemap(Window *window, s32 y, u16 tilemaps[4][
     switch (window->type) {
         case WINDOW_TYPE_0:
         case WINDOW_TYPE_WITHOUT_BORDER:
-        case WINDOW_TYPE_2:
+        case WINDOW_TYPE_ONLY_TEXT:
             break;
         case WINDOW_TYPE_NORMAL:
         case WINDOW_TYPE_WITH_HEADER:

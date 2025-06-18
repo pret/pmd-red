@@ -34,6 +34,7 @@ void PrintFormattedStringOnWindow2(s32 x, s32 y, const u8 *str, u32 windowId, u3
 #define STR_FORMAT_FLAG_TIMED_AUTO_MSG_CLOSE 0x2 // Textbox closes automatically after waiting a couple of frames.
 #define STR_FORMAT_FLAG_DIALOGUE_SOUND 0x4
 #define STR_FORMAT_FLAG_SPEAKER_NAME 0x8
+#define STR_FORMAT_FLAG_ONLY_TEXT 0x10 // No window, prints only text
 #define STR_FORMAT_FLAG_INSTANT_TEXT 0x20
 #define STR_FORMAT_FLAG_INSTANT_TEXT_ON_AB_PRESS 0x40
 #define STR_FORMAT_FLAG_NEW_LINE_TERMINATES 0x80

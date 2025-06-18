@@ -1909,7 +1909,7 @@ s32 ExecuteScriptCommand(Action *action)
                         break;
                     }
                     case 9: {
-                        struct {s16 unk0; s16 unk2;} unk;
+                        ActionUnkIds unk;
                         s16 res = sub_80A7AE8((s16)curCmd.arg1);
                         unk.unk2 = res;
                         if (unk.unk2 >= 0) {
@@ -2007,15 +2007,15 @@ s32 ExecuteScriptCommand(Action *action)
             }
             case 0x3e: {
                 sub_80920B8(sPokeNameBuffer);
-                sPokeNameBuffer[10] = 0;
+                sPokeNameBuffer[10] = '\0';
                 sub_809B1C0(5, 0, sPokeNameBuffer);
                 sub_80A87AC(0, 11);
                 return 2;
             }
             case 0x3f: {
                 int i;
-                for (i = 0; i < 12; i++) {
-                    sPokeNameBuffer[i] = 0;
+                for (i = 0; i < ARRAY_COUNT_INT(sPokeNameBuffer); i++) {
+                    sPokeNameBuffer[i] = '\0';
                 }
                 sub_809B1C0(6, (u8)curCmd.argByte, sPokeNameBuffer);
                 sub_80A87AC(0, 11);
@@ -2026,13 +2026,13 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x43: {
-                FadeOutAllMusic(curCmd.argShort < 0 ? 30 : (u16)curCmd.argShort);
+                FadeOutAllMusic(curCmd.argShort < 0 ? 30 : curCmd.argShort);
                 break;
             }
             case 0x44: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
                 if (id != 999) {
-                    StartNewBGM_((u16)id);
+                    StartNewBGM_(id);
                 } else {
                     StopBGMusic();
                 }
@@ -2041,7 +2041,7 @@ s32 ExecuteScriptCommand(Action *action)
             case 0x45: {
                 u16 id = curCmd.argByte == 0 ? sub_80A25AC((u16)curCmd.arg1) : curCmd.arg1;
                 if (id != 999) {
-                    FadeInNewBGM_((u16)id, (u16)curCmd.argShort); //sub_8011900
+                    FadeInNewBGM_(id, curCmd.argShort);
                 } else {
                     StopBGMusic();
                 }

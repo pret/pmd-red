@@ -64,7 +64,7 @@ static const struct ScriptCommand s_gs185_g1_s0_lives0_dlg0[] = { /* 0x8234d94 *
     VARIANT_DEFAULT(_(" No one should hold us back\nnow. Let's find {NAME_2}.")),
     TEXTBOX_CLEAR,
     WAIT(16),
-    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Um, excuse me...") },
+    MSG_NPC(-1, _(" Um, excuse me...")),
     TEXTBOX_CLEAR,
     WAIT(16),
     { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },

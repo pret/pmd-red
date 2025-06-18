@@ -478,7 +478,7 @@ static const struct ScriptCommand s_gs4_g1_s1_lives0_dlg0[] = { /* 0x818b710 */
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
     { 0x34, 0x00,  0x0003,  0x00000000,  0x00000000, _(" (Papa still hasn't come\nhome...)") },
-    { 0x34, 0x00, -0x0001,  0x00000000,  0x00000000, _(" Our son!{WAIT_PRESS}\nSorry to make you wait!") },
+    MSG_NPC(-1, _(" Our son!{WAIT_PRESS}\nSorry to make you wait!")),
     TEXTBOX_CLEAR,
     WAIT(10),
     FANFARE_PLAY2(465),
