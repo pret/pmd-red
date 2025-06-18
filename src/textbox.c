@@ -44,11 +44,11 @@ struct TextboxPortrait
     // size: 0x24
     s16 unk0;
     /* 0x2 */ s16 speciesID;
-    u8 unk4;
+    bool8 showPortrait;
     u8 unk5;
-    s8 unk6;
+    s8 spriteId;
     u8 placementId;
-    PixelPos unk8;
+    PixelPos posDelta; // By default 0, 0. Allows to modify the position of the portrait. Can be changed by the scripting command 0x2f.
     MonPortraitMsg monPortrait;
     /* 0x20 */ OpenedFile *faceFile;
 };
@@ -455,12 +455,12 @@ static void ResetAllTextboxPortraits(void)
     for (i = 0; i < MAX_TEXTBOX_PORTRAITS; i++, ptr++) {
         ptr->unk0 = -1;
         ptr->speciesID = MONSTER_NONE;
-        ptr->unk4 = 0;
+        ptr->showPortrait = 0;
         ptr->unk5 = 0;
-        ptr->unk6 = -1;
+        ptr->spriteId = -1;
         ptr->placementId = 0;
-        ptr->unk8.x = 0;
-        ptr->unk8.y = 0;
+        ptr->posDelta.x = 0;
+        ptr->posDelta.y = 0;
         ptr->monPortrait.faceFile = NULL;
         ptr->monPortrait.faceData = NULL;
         ptr->monPortrait.spriteId = 0;
@@ -475,12 +475,12 @@ void ResetTextboxPortrait(s16 id_)
 
     ptr->unk0 = -1;
     ptr->speciesID = MONSTER_NONE;
-    ptr->unk4 = 0;
+    ptr->showPortrait = 0;
     ptr->unk5 = 0;
-    ptr->unk6 = -1;
+    ptr->spriteId = -1;
     ptr->placementId = 0;
-    ptr->unk8.x = 0;
-    ptr->unk8.y = 0;
+    ptr->posDelta.x = 0;
+    ptr->posDelta.y = 0;
     ptr->monPortrait.faceFile = NULL;
     ptr->monPortrait.faceData = NULL;
     ptr->monPortrait.spriteId = 0;
@@ -492,20 +492,20 @@ void ResetTextboxPortrait(s16 id_)
 static bool8 sub_809A8B8(s32 param_1, s32 param_2)
 {
     bool8 ret;
-    s16 local_26;
+    s16 speciesId;
     s32 portraitId = (s16) param_1;
     s16 local_28 = (s16) param_2;
     struct TextboxPortrait *unkPtr = &sTextbox->portraits[portraitId];
-    u8 uVar9 = 1;
-    u8 byte1 = 0;
+    bool8 showPortrait = TRUE;
+    bool8 byte1 = FALSE;
 
     TRY_CLOSE_FILE_AND_SET_NULL(unkPtr->faceFile);
 
-    sub_80A7DDC(&local_28,&local_26);
+    sub_80A7DDC(&local_28,&speciesId);
     if (local_28 >= 10 && local_28 <= 29) {
         Pokemon *pPVar6 = sub_80A8D54(local_28);
         if (pPVar6 == NULL) {
-            uVar9 = '\0';
+            showPortrait = FALSE;
         }
         else if (pPVar6 == sub_808D3BC()) {
             local_28 = 0x21;
@@ -518,7 +518,7 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
                  || pPVar6->dungeonLocation.id == DUNGEON_POKEMON_SQUARE
                  || pPVar6->dungeonLocation.id == DUNGEON_POKEMON_SQUARE_2)
         {
-            switch (local_26) {
+            switch (speciesId) {
                 case 0x104:
                 case 0x133:
                 case 0x183:
@@ -526,12 +526,12 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
                 case 0x199:
                     break;
                 default:
-                    uVar9 = 0;
+                    showPortrait = FALSE;
                     break;
             }
         }
         else {
-            switch (local_26) {
+            switch (speciesId) {
                 case 0x90:
                 case 0x91:
                 case 0x92:
@@ -549,24 +549,24 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
                 case 0x1A7:
                     break;
                 default:
-                    uVar9 = 0;
+                    showPortrait = FALSE;
                     break;
             }
         }
     }
 
-    switch(local_28) {
+    switch (local_28) {
         case 1:
         case 2:
         case 6:
         case 7:
         case 0x21:
         case 0x22:
-        if (IsStarterMonster(local_26)) {
-            byte1 = 0x1;
+        if (IsStarterMonster(speciesId)) {
+            byte1 = TRUE;
         }
         else {
-            uVar9 = 0;
+            showPortrait = FALSE;
         }
         break;
     }
@@ -578,28 +578,28 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
             unkPtr->speciesID = sub_80A8BFC(sVar3);
             strcpy(gFormatBuffer_Monsters[portraitId], sUndefineText);
             strcpy(gFormatBuffer_Names[portraitId], sUndefineText);
-            unkPtr->unk4 = uVar9;
+            unkPtr->showPortrait = showPortrait;
             unkPtr->unk5 = byte1;
-            unkPtr->unk6 = 0xff;
+            unkPtr->spriteId = -1;
             unkPtr->placementId = 0;
-            unkPtr->unk8.x = 0;
-            unkPtr->unk8.y = 0;
+            unkPtr->posDelta.x = 0;
+            unkPtr->posDelta.y = 0;
             unkPtr->monPortrait.faceFile = NULL;
             unkPtr->monPortrait.faceData = NULL;
             unkPtr->monPortrait.spriteId = 0;
             ret = TRUE;
         }
-        else if (local_26 != 0) {
+        else if (speciesId != 0) {
             unkPtr->unk0 = local_28;
-            unkPtr->speciesID = local_26;
+            unkPtr->speciesID = speciesId;
             strcpy(gFormatBuffer_Monsters[portraitId], sUndefineText);
             strcpy(gFormatBuffer_Names[portraitId], sUndefineText);
-            unkPtr->unk4 = uVar9;
+            unkPtr->showPortrait = showPortrait;
             unkPtr->unk5 = byte1;
-            unkPtr->unk6 = 0xff;
+            unkPtr->spriteId = -1;
             unkPtr->placementId = 0;
-            unkPtr->unk8.x = 0;
-            unkPtr->unk8.y = 0;
+            unkPtr->posDelta.x = 0;
+            unkPtr->posDelta.y = 0;
             unkPtr->monPortrait.faceFile = NULL;
             unkPtr->monPortrait.faceData = NULL;
             unkPtr->monPortrait.spriteId = 0;
@@ -666,104 +666,106 @@ bool8 sub_809AC18(s32 a0_, s32 a1_)
     }
 }
 
-bool8 sub_809AC7C(s32 portraitId_, s32 a1_, s32 placementId_)
+bool8 ScriptSetPortraitInfo(s32 portraitId_, s32 spriteId_, s32 placementId_)
 {
     s32 portraitId = (s16) portraitId_;
-    s32 r5 = (s8) a1_;
+    s32 spriteId = (s8) spriteId_;
     u8 placementId = (u8) placementId_;
-    struct TextboxPortrait *unkPtr = &sTextbox->portraits[portraitId];
+    struct TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
 
-    TRY_CLOSE_FILE_AND_SET_NULL(unkPtr->faceFile);
+    TRY_CLOSE_FILE_AND_SET_NULL(portraitPtr->faceFile);
 
-    if (unkPtr->speciesID >= 0 && r5 != -1 && unkPtr->speciesID != 0) {
+    if (portraitPtr->speciesID >= 0 && spriteId != -1 && portraitPtr->speciesID != 0) {
+        // Keep previous placementId if PLACEMENT_COUNT is passed.
         if (placementId != PLACEMENT_COUNT) {
-            unkPtr->placementId = placementId;
-            unkPtr->unk8.x = 0;
-            unkPtr->unk8.y = 0;
+            portraitPtr->placementId = placementId;
+            portraitPtr->posDelta.x = 0;
+            portraitPtr->posDelta.y = 0;
         }
-        unkPtr->monPortrait.pos.x = sPortraitPlacements[unkPtr->placementId].pos.x + unkPtr->unk8.x;
-        unkPtr->monPortrait.pos.y = sPortraitPlacements[unkPtr->placementId].pos.y + unkPtr->unk8.y;
-        unkPtr->monPortrait.flip = sPortraitPlacements[unkPtr->placementId].flip;
-        unkPtr->monPortrait.unkE = 0;
-        if (r5 == -2) {
-            unkPtr->unk6 = r5;
-            unkPtr->monPortrait.faceFile = NULL;
-            unkPtr->monPortrait.faceData = NULL;
-            unkPtr->monPortrait.spriteId = 0;
+        portraitPtr->monPortrait.pos.x = sPortraitPlacements[portraitPtr->placementId].pos.x + portraitPtr->posDelta.x;
+        portraitPtr->monPortrait.pos.y = sPortraitPlacements[portraitPtr->placementId].pos.y + portraitPtr->posDelta.y;
+        portraitPtr->monPortrait.flip = sPortraitPlacements[portraitPtr->placementId].flip;
+        portraitPtr->monPortrait.unkE = 0;
+        if (spriteId == -2) {
+            portraitPtr->spriteId = -2;
+            portraitPtr->monPortrait.faceFile = NULL;
+            portraitPtr->monPortrait.faceData = NULL;
+            portraitPtr->monPortrait.spriteId = 0;
             return FALSE;
         }
 
-        if (unkPtr->unk4) {
-            unkPtr->faceFile = OpenPokemonDialogueSpriteFile(unkPtr->speciesID);
-            if (unkPtr->faceFile != NULL) {
-                unkPtr->unk6 = r5;
-                unkPtr->monPortrait.faceFile = unkPtr->faceFile;
-                GetFileDataPtr(unkPtr->faceFile, 0);
-                switch (unkPtr->unk0) {
+        if (portraitPtr->showPortrait) {
+            portraitPtr->faceFile = OpenPokemonDialogueSpriteFile(portraitPtr->speciesID);
+            if (portraitPtr->faceFile != NULL) {
+                portraitPtr->spriteId = spriteId;
+                portraitPtr->monPortrait.faceFile = portraitPtr->faceFile;
+                GetFileDataPtr(portraitPtr->faceFile, 0);
+                // first 4 bits are actually spriteId, there's also some 0x40 flag which isn't really used. I assume it marks that the spriteId was changed?
+                switch (portraitPtr->unk0) {
                     case 0x47:
-                        if ((r5 & 0xF) < 6) {
-                            r5 = (s8) (r5 + 6);
-                            r5 = (s8) (r5 | 0x40);
+                        if ((spriteId & 0xF) < 6) {
+                            spriteId = (s8) (spriteId + 6);
+                            spriteId = (s8) (spriteId | 0x40);
                         }
                         break;
                     case 0x4D:
-                        if (unkPtr->monPortrait.flip && (r5 & 0xF) < 4) {
-                            unkPtr->monPortrait.flip = FALSE;
-                            r5 = (s8) (r5 + 4);
-                            r5 = (s8) (r5 | 0x40);
+                        if (portraitPtr->monPortrait.flip && (spriteId & 0xF) < 4) {
+                            portraitPtr->monPortrait.flip = FALSE;
+                            spriteId = (s8) (spriteId + 4);
+                            spriteId = (s8) (spriteId | 0x40);
                         }
                         break;
                     case 0x53:
-                        if (unkPtr->monPortrait.flip && (r5 & 0xF) < 1) {
-                            unkPtr->monPortrait.flip = FALSE;
-                            r5 = (s8) (r5 + 1);
-                            r5 = (s8) (r5 | 0x40);
+                        if (portraitPtr->monPortrait.flip && (spriteId & 0xF) < 1) {
+                            portraitPtr->monPortrait.flip = FALSE;
+                            spriteId = (s8) (spriteId + 1);
+                            spriteId = (s8) (spriteId | 0x40);
                         }
                         break;
                     case 0x73:
-                        if (unkPtr->monPortrait.flip && (r5 & 0xF) < 2) {
-                            unkPtr->monPortrait.flip = FALSE;
-                            r5 = (s8) (r5 + 2);
-                            r5 = (s8) (r5 | 0x40);
+                        if (portraitPtr->monPortrait.flip && (spriteId & 0xF) < 2) {
+                            portraitPtr->monPortrait.flip = FALSE;
+                            spriteId = (s8) (spriteId + 2);
+                            spriteId = (s8) (spriteId | 0x40);
                         }
                         break;
                 }
 
-                unkPtr->monPortrait.faceData = (void *) unkPtr->faceFile->data;
-                unkPtr->monPortrait.spriteId = r5 & 0xF;
+                portraitPtr->monPortrait.faceData = (void *) portraitPtr->faceFile->data;
+                portraitPtr->monPortrait.spriteId = spriteId & 0xF;
             }
             else {
-                unkPtr->monPortrait.faceFile = NULL;
-                unkPtr->monPortrait.faceData = NULL;
-                unkPtr->monPortrait.spriteId = 0;
+                portraitPtr->monPortrait.faceFile = NULL;
+                portraitPtr->monPortrait.faceData = NULL;
+                portraitPtr->monPortrait.spriteId = 0;
             }
             return TRUE;
         }
     }
 
-    unkPtr->unk6 = 0xFF;
-    unkPtr->placementId = 0;
-    unkPtr->unk8.x = 0;
-    unkPtr->unk8.y = 0;
-    unkPtr->monPortrait.faceFile = NULL;
-    unkPtr->monPortrait.faceData = NULL;
-    unkPtr->monPortrait.spriteId = 0;
+    portraitPtr->spriteId = -1;
+    portraitPtr->placementId = 0;
+    portraitPtr->posDelta.x = 0;
+    portraitPtr->posDelta.y = 0;
+    portraitPtr->monPortrait.faceFile = NULL;
+    portraitPtr->monPortrait.faceData = NULL;
+    portraitPtr->monPortrait.spriteId = 0;
     return FALSE;
 }
 
-bool8 sub_809ADD8(s32 a0_, PixelPos *a1)
+bool8 sub_809ADD8(s32 portraitId_, PixelPos *newPosDelta)
 {
-    s32 a0 = (s16) a0_;
-    struct TextboxPortrait *unkPtr = &sTextbox->portraits[a0];
+    s32 portraitId = (s16) portraitId_;
+    struct TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
 
-    if (unkPtr->speciesID < 0)
+    if (portraitPtr->speciesID < 0)
         return FALSE;
-    if (unkPtr->speciesID == MONSTER_NONE)
+    if (portraitPtr->speciesID == MONSTER_NONE)
         return FALSE;
 
-    unkPtr->unk8 = *a1;
-    unkPtr->monPortrait.pos.x = sPortraitPlacements[unkPtr->placementId].pos.x + unkPtr->unk8.x;
-    unkPtr->monPortrait.pos.y = sPortraitPlacements[unkPtr->placementId].pos.y + unkPtr->unk8.y;
+    portraitPtr->posDelta = *newPosDelta;
+    portraitPtr->monPortrait.pos.x = sPortraitPlacements[portraitPtr->placementId].pos.x + portraitPtr->posDelta.x;
+    portraitPtr->monPortrait.pos.y = sPortraitPlacements[portraitPtr->placementId].pos.y + portraitPtr->posDelta.y;
     return TRUE;
 }
 
@@ -773,8 +775,8 @@ static MonPortraitMsg *GetSpeakerPortrait(s32 portraitId_)
 
     if (portraitId >= 0) {
         struct TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];
-        if (portraitPtr->speciesID != MONSTER_NONE && portraitPtr->unk6 == -1) {
-            sub_809AC7C(portraitId, 0, 0);
+        if (portraitPtr->speciesID != MONSTER_NONE && portraitPtr->spriteId == -1) {
+            ScriptSetPortraitInfo(portraitId, 0, 0);
         }
         if (portraitPtr->monPortrait.faceFile != NULL) {
             return &portraitPtr->monPortrait;

@@ -1,6 +1,7 @@
 #include "constants/event_flag.h"
 #include "constants/item.h"
 #include "constants/ground_map.h"
+#include "portrait_placement.h"
 #include "structs/str_ground_script.h"
 #define LPARRAY(x) (ARRAY_COUNT(x)), x
 
@@ -36,6 +37,10 @@
 // 21: follow object/make object follow/get parented?
 // 22..2f: ???
 #define TEXTBOX_AUTO_PRESS(endF, midF) { 0x2b, 0, 0, endF, midF, NULL} // Waits specified number of frames, then automatically does a button press without waiting for player's input. -1 disables it.
+
+// Note for the spriteId: first 4 bits(0xF) are the actual spriteId, but sometimes a 0x40 flag is attached to it, but it has no practical use. Could be different in Blue?
+#define PORTRAIT(place, id, sprite)    { 0x2e, place, id, sprite, 0, NULL } // Sets up portrait data for the specified speaker
+#define PORTRAIT_REP(id, sprite)       { 0x2e, PLACEMENT_COUNT, id, sprite, 0, NULL } // Same as the above, but it assumes the last used placement for the speaker. Useful in long scripts, where you don't need to remember all the placements.
 // 30..39: various text printing
 #define MSG_NPC(id, msg)             { 0x34, 0, id, 0, 0, msg } // ID is portrait id of the npc. -1 means no portrait
 // 3a: yes/no choice (only used for saving)

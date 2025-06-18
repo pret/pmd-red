@@ -84,7 +84,6 @@ void sub_80975A8(s16, bool8);
 u32 sub_809A6E4();
 u32 sub_809A6F8();
 u32 sub_809A768();
-u32 sub_809AC7C();
 u32 sub_809ADD8();
 bool8 sub_809AEEC(const char*);
 bool8 sub_809AF2C(const char*);
@@ -1936,7 +1935,7 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x2e: {
-                sub_809AC7C(curCmd.argShort, (s8)curCmd.arg1, (u8)curCmd.argByte);
+                ScriptSetPortraitInfo(curCmd.argShort, (s8)curCmd.arg1, (u8)curCmd.argByte);
                 break;
             }
             case 0x2f: {
