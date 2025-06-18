@@ -24,6 +24,7 @@
 #include "main_loops.h"
 #include "memory.h"
 #include "personality_test1.h"
+#include "portrait_placement.h"
 #include "pokemon.h"
 #include "string_format.h"
 #include "text_1.h"
@@ -46,7 +47,7 @@ struct TextboxPortrait
     u8 unk4;
     u8 unk5;
     s8 unk6;
-    u8 unk7;
+    u8 placementId;
     PixelPos unk8;
     MonPortraitMsg monPortrait;
     /* 0x20 */ OpenedFile *faceFile;
@@ -222,36 +223,28 @@ void sub_809C550(void);
 #define TEXTBOX_FLAG_SPEAKER 0x100 // Speaker's name + dialogue sound
 #define TEXTBOX_FLAG_DIALOGUE_SOUND 0x200 // Only dialogue sound
 
-struct Unk8116040Struct
-{
-    s16 x;
-    s16 y;
-    bool8 flip;
-};
-
-static const struct Unk8116040Struct gUnknown_8116040[] =
-{
-    {2, 8, FALSE},
-    {12, 5, FALSE},
-    {2, 8, FALSE},
-    {23, 8, TRUE},
-    {7, 8, FALSE},
-    {18, 8, TRUE},
-    {13, 5, TRUE},
-    {2, 8, TRUE},
-    {23, 8, FALSE},
-    {7, 8, TRUE},
-    {18, 8, FALSE},
-    {12, 1, FALSE},
-    {2, 2, FALSE},
-    {23, 2, TRUE},
-    {7, 1, FALSE},
-    {18, 1, TRUE},
-    {13, 1, TRUE},
-    {2, 2, TRUE},
-    {23, 2, FALSE},
-    {7, 1, TRUE},
-    {18, 1, FALSE},
+static const struct PortraitPlacementInfo sPortraitPlacements[PLACEMENT_COUNT] = {
+    [PLACEMENT_LEFT]                    = {{2,  8}, FALSE},
+    [PLACEMENT_MIDDLE_TOP]              = {{12, 5}, FALSE},
+    [PLACEMENT_LEFT_]                   = {{2,  8}, FALSE},
+    [PLACEMENT_RIGHT]                   = {{23, 8}, TRUE},
+    [PLACEMENT_MIDDLE_LEFT]             = {{7,  8}, FALSE},
+    [PLACEMENT_MIDDLE_RIGHT]            = {{18, 8}, TRUE},
+    [PLACEMENT_MIDDLE_TOP_FLIP]         = {{13, 5}, TRUE},
+    [PLACEMENT_LEFT_FLIP]               = {{2,  8}, TRUE},
+    [PLACEMENT_RIGHT_FLIP]              = {{23, 8}, FALSE},
+    [PLACEMENT_MIDDLE_LEFT_FLIP]        = {{7,  8}, TRUE},
+    [PLACEMENT_MIDDLE_RIGHT_FLIP]       = {{18, 8}, FALSE},
+    [PLACEMENT_TOP]                     = {{12, 1}, FALSE},
+    [PLACEMENT_TOP_LEFT]                = {{2,  2}, FALSE},
+    [PLACEMENT_TOP_RIGHT]               = {{23, 2}, TRUE},
+    [PLACEMENT_MIDDLE_TOP_LEFT]         = {{7,  1}, FALSE},
+    [PLACEMENT_MIDDLE_TOP_RIGHT]        = {{18, 1}, TRUE},
+    [PLACEMENT_TOP_FLIP]                = {{13, 1}, TRUE},
+    [PLACEMENT_TOP_LEFT_FLIP]           = {{2,  2}, TRUE},
+    [PLACEMENT_TOP_RIGHT_FLIP]          = {{23, 2}, FALSE},
+    [PLACEMENT_MIDDLE_TOP_LEFT_FLIP]    = {{7,  1}, TRUE},
+    [PLACEMENT_MIDDLE_TOP_RIGHT_FLIP]   = {{18, 1}, FALSE},
 };
 
 static const MenuItem gUnknown_81160E8[] =
@@ -465,7 +458,7 @@ static void ResetAllTextboxPortraits(void)
         ptr->unk4 = 0;
         ptr->unk5 = 0;
         ptr->unk6 = -1;
-        ptr->unk7 = 0;
+        ptr->placementId = 0;
         ptr->unk8.x = 0;
         ptr->unk8.y = 0;
         ptr->monPortrait.faceFile = NULL;
@@ -485,7 +478,7 @@ void ResetTextboxPortrait(s16 id_)
     ptr->unk4 = 0;
     ptr->unk5 = 0;
     ptr->unk6 = -1;
-    ptr->unk7 = 0;
+    ptr->placementId = 0;
     ptr->unk8.x = 0;
     ptr->unk8.y = 0;
     ptr->monPortrait.faceFile = NULL;
@@ -588,7 +581,7 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
             unkPtr->unk4 = uVar9;
             unkPtr->unk5 = byte1;
             unkPtr->unk6 = 0xff;
-            unkPtr->unk7 = 0;
+            unkPtr->placementId = 0;
             unkPtr->unk8.x = 0;
             unkPtr->unk8.y = 0;
             unkPtr->monPortrait.faceFile = NULL;
@@ -604,7 +597,7 @@ static bool8 sub_809A8B8(s32 param_1, s32 param_2)
             unkPtr->unk4 = uVar9;
             unkPtr->unk5 = byte1;
             unkPtr->unk6 = 0xff;
-            unkPtr->unk7 = 0;
+            unkPtr->placementId = 0;
             unkPtr->unk8.x = 0;
             unkPtr->unk8.y = 0;
             unkPtr->monPortrait.faceFile = NULL;
@@ -629,10 +622,10 @@ bool8 sub_809AB4C(s32 a0_, s32 a1_)
 {
     s32 a0 = (s16) a0_;
     s32 a1 = (s16) a1_;
-    struct TextboxPortrait *ptr = &sTextbox->portraits[a0];
+    struct TextboxPortrait *portrait = &sTextbox->portraits[a0];
 
     if (sub_809A8B8(a0, a1)) {
-        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], ptr->speciesID);
+        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], portrait->speciesID);
         strcpy(gFormatBuffer_Names[a0], sSpeechBubbleText);
         return TRUE;
     }
@@ -645,10 +638,10 @@ bool8 sub_809ABB4(s32 a0_, s32 a1_)
 {
     s32 a0 = (s16) a0_;
     s32 a1 = (s16) a1_;
-    struct TextboxPortrait *ptr = &sTextbox->portraits[a0];
+    struct TextboxPortrait *portrait = &sTextbox->portraits[a0];
 
     if (sub_809A8B8(a0, a1)) {
-        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], ptr->speciesID);
+        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], portrait->speciesID);
         strcpy(gFormatBuffer_Names[a0], gFormatBuffer_Monsters[a0]);
         return TRUE;
     }
@@ -661,11 +654,11 @@ bool8 sub_809AC18(s32 a0_, s32 a1_)
 {
     s32 a0 = (s16) a0_;
     s32 a1 = (s16) a1_;
-    struct TextboxPortrait *unkPtr = &sTextbox->portraits[a0];
+    struct TextboxPortrait *portrait = &sTextbox->portraits[a0];
 
     if (sub_809A8B8(a0, a1)) {
-        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], unkPtr->speciesID);
-        sub_80A8EC0(gFormatBuffer_Names[a0], unkPtr->unk0);
+        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], portrait->speciesID);
+        sub_80A8EC0(gFormatBuffer_Names[a0], portrait->unk0);
         return TRUE;
     }
     else {
@@ -673,24 +666,24 @@ bool8 sub_809AC18(s32 a0_, s32 a1_)
     }
 }
 
-bool8 sub_809AC7C(s32 a0_, s32 a1_, s32 a2_)
+bool8 sub_809AC7C(s32 portraitId_, s32 a1_, s32 placementId_)
 {
-    s32 a0 = (s16) a0_;
+    s32 portraitId = (s16) portraitId_;
     s32 r5 = (s8) a1_;
-    u8 a2 = (u8) a2_;
-    struct TextboxPortrait *unkPtr = &sTextbox->portraits[a0];
+    u8 placementId = (u8) placementId_;
+    struct TextboxPortrait *unkPtr = &sTextbox->portraits[portraitId];
 
     TRY_CLOSE_FILE_AND_SET_NULL(unkPtr->faceFile);
 
     if (unkPtr->speciesID >= 0 && r5 != -1 && unkPtr->speciesID != 0) {
-        if (a2 != 0x15) {
-            unkPtr->unk7 = a2;
+        if (placementId != PLACEMENT_COUNT) {
+            unkPtr->placementId = placementId;
             unkPtr->unk8.x = 0;
             unkPtr->unk8.y = 0;
         }
-        unkPtr->monPortrait.pos.x = gUnknown_8116040[unkPtr->unk7].x + unkPtr->unk8.x;
-        unkPtr->monPortrait.pos.y = gUnknown_8116040[unkPtr->unk7].y + unkPtr->unk8.y;
-        unkPtr->monPortrait.flip = gUnknown_8116040[unkPtr->unk7].flip;
+        unkPtr->monPortrait.pos.x = sPortraitPlacements[unkPtr->placementId].pos.x + unkPtr->unk8.x;
+        unkPtr->monPortrait.pos.y = sPortraitPlacements[unkPtr->placementId].pos.y + unkPtr->unk8.y;
+        unkPtr->monPortrait.flip = sPortraitPlacements[unkPtr->placementId].flip;
         unkPtr->monPortrait.unkE = 0;
         if (r5 == -2) {
             unkPtr->unk6 = r5;
@@ -749,7 +742,7 @@ bool8 sub_809AC7C(s32 a0_, s32 a1_, s32 a2_)
     }
 
     unkPtr->unk6 = 0xFF;
-    unkPtr->unk7 = 0;
+    unkPtr->placementId = 0;
     unkPtr->unk8.x = 0;
     unkPtr->unk8.y = 0;
     unkPtr->monPortrait.faceFile = NULL;
@@ -769,8 +762,8 @@ bool8 sub_809ADD8(s32 a0_, PixelPos *a1)
         return FALSE;
 
     unkPtr->unk8 = *a1;
-    unkPtr->monPortrait.pos.x = gUnknown_8116040[unkPtr->unk7].x + unkPtr->unk8.x;
-    unkPtr->monPortrait.pos.y = gUnknown_8116040[unkPtr->unk7].y + unkPtr->unk8.y;
+    unkPtr->monPortrait.pos.x = sPortraitPlacements[unkPtr->placementId].pos.x + unkPtr->unk8.x;
+    unkPtr->monPortrait.pos.y = sPortraitPlacements[unkPtr->placementId].pos.y + unkPtr->unk8.y;
     return TRUE;
 }
 
