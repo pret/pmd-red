@@ -76,7 +76,7 @@ static const struct ScriptCommand s_gs185_g1_s0_lives0_dlg0[] = { /* 0x8234d94 *
     { 0xe2, 0x00,  0x01d1,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     PORTRAIT(PLACEMENT_MIDDLE_LEFT, 0x0002, 0x00000000),
-    { 0x2f, 0x00,  0x0002,  0x00000000, -0x00000003, NULL },
+    PORTRAIT_POS(2, 0, -3),
     MSG_NPC(2, _(" Did you maybe come looking\nfor me?")),
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(16),

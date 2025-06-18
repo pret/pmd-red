@@ -753,7 +753,7 @@ bool8 ScriptSetPortraitInfo(s32 portraitId_, s32 spriteId_, s32 placementId_)
     return FALSE;
 }
 
-bool8 sub_809ADD8(s32 portraitId_, PixelPos *newPosDelta)
+bool8 ScriptSetPortraitPosDelta(s32 portraitId_, PixelPos *newPosDelta)
 {
     s32 portraitId = (s16) portraitId_;
     struct TextboxPortrait *portraitPtr = &sTextbox->portraits[portraitId];

@@ -84,7 +84,6 @@ void sub_80975A8(s16, bool8);
 u32 sub_809A6E4();
 u32 sub_809A6F8();
 u32 sub_809A768();
-u32 sub_809ADD8();
 bool8 sub_809AEEC(const char*);
 bool8 sub_809AF2C(const char*);
 bool8 sub_809AF6C(s16, const char*);
@@ -1942,7 +1941,7 @@ s32 ExecuteScriptCommand(Action *action)
                 PixelPos pos;
                 pos.x = curCmd.arg1;
                 pos.y = curCmd.arg2;
-                sub_809ADD8(curCmd.argShort, &pos);
+                ScriptSetPortraitPosDelta(curCmd.argShort, &pos);
                 break;
             }
             case 0x32 ... 0x38: {

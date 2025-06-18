@@ -41,6 +41,8 @@
 // Note for the spriteId: first 4 bits(0xF) are the actual spriteId, but sometimes a 0x40 flag is attached to it, but it has no practical use. Could be different in Blue?
 #define PORTRAIT(place, id, sprite)    { 0x2e, place, id, sprite, 0, NULL } // Sets up portrait data for the specified speaker
 #define PORTRAIT_REP(id, sprite)       { 0x2e, PLACEMENT_COUNT, id, sprite, 0, NULL } // Same as the above, but it assumes the last used placement for the speaker. Useful in long scripts, where you don't need to remember all the placements.
+
+#define PORTRAIT_POS(id, x, y)         { 0x2f, 0, id, x, y, NULL } // Sets portrait delta position, which modifies the portrait's position on the screen.
 // 30..39: various text printing
 #define MSG_NPC(id, msg)             { 0x34, 0, id, 0, 0, msg } // ID is portrait id of the npc. -1 means no portrait
 // 3a: yes/no choice (only used for saving)
