@@ -47,7 +47,7 @@ static const struct ScriptCommand s_gs221_g1_s0_lives0_dlg0[] = { /* 0x826d898 *
     { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
     MSG_NPC(2, _(" You're going to the\n{COLOR YELLOW_D}Murky Cave{RESET}?")),
     MSG_NPC(2, _(" Don't forget to take me,\nkekeh!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
     { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
     { 0x89, 0x50,  0x0080,  0x00000004,  0x00000000, NULL },

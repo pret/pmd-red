@@ -24,7 +24,7 @@ static const struct ScriptCommand s_gs177_g1_s0_station_sref_script[] = { /* 0x8
     WAIT(240),
     TEXTBOX_AUTO_PRESS(-1, -1),
     { 0x38, 0x00, -0x0001,  0x00000000,  0x00000000, _("\n") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     WAIT(1),
     { 0x23, 0x01,  0x0078,  0x00000000,  0x00000000, NULL },
     WAIT(90),
@@ -36,7 +36,7 @@ static const struct ScriptCommand s_gs177_g1_s0_station_sref_script[] = { /* 0x8
     { 0x39, 0x00,  0x001e,  0x00000000,  0x00000000, _("{CENTER_ALIGN}A new adventure begins!") },
     { 0x39, 0x00,  0x001e,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The legendary Pokémon are set\n{CENTER_ALIGN}to make their appearance!") },
     { 0x39, 0x00,  0x001e,  0x00000000,  0x00000000, _("{CENTER_ALIGN}Don't go away!") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(60),
@@ -49,7 +49,7 @@ static const struct ScriptCommand s_gs177_g1_s0_station_sref_script[] = { /* 0x8
   LABEL(0), /* = 0x00 */
     { 0x3c, 0x0e,  0x0000,  0x00000000,  0x00000000, NULL },
   LABEL(1), /* = 0x01 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     WAIT(60),
     RET,
 };

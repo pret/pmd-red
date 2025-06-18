@@ -55,7 +55,7 @@ static const struct ScriptCommand s_gs199_g0_s0_evt0_sref_script[] = { /* 0x824e
   LABEL(1), /* = 0x01 */
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     BGM_FADEOUT(60),
     { 0x02, 0x00,  0x001e,  0x0000000e,  0x00000000, NULL },
     COND_EQUAL(-1, /* to label */ 1),
@@ -73,7 +73,7 @@ static const struct ScriptCommand s_gs199_g0_s0_evt1_sref_script[] = { /* 0x824e
   LABEL(2), /* = 0x02 */
     JUMP_SCRIPT(END_TALK),
   LABEL(1), /* = 0x01 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     BGM_FADEOUT(30),
     { 0x23, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER4_FUNC),
@@ -87,7 +87,7 @@ static const struct ScriptCommand s_gs199_g0_s0_evt1_sref_script[] = { /* 0x824e
   LABEL(4), /* = 0x04 */
     JUMP_SCRIPT(END_TALK),
   LABEL(3), /* = 0x03 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x01, 0x00,  0x001e,  0x000000c6,  0x00000000, NULL },
     HALT,
 };
@@ -171,7 +171,7 @@ static const struct ScriptCommand s_gs199_g1_s0_lives0_dlg0[] = { /* 0x824eea4 *
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Hmm...{WAIT_PRESS}\nWell, that didn't go well.")),
     VARIANT_DEFAULT(_(" Hmm...{WAIT_PRESS}\nThat didn't work out...")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
     PORTRAIT_REP(0x0001, 0x00000000),
@@ -182,7 +182,7 @@ static const struct ScriptCommand s_gs199_g1_s0_lives0_dlg0[] = { /* 0x824eea4 *
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" But let's give it our best\nand get through this, {NAME_0}!")),
     VARIANT_DEFAULT(_(" But let's keep trying our\nbest and get through this, {NAME_0}!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
@@ -239,7 +239,7 @@ static const struct ScriptCommand s_gs199_g2_s0_lives0_dlg0[] = { /* 0x824f33c *
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Hmmm...{WAIT_PRESS}\nWell, that didn't go well.")),
     VARIANT_DEFAULT(_(" Hmm...{WAIT_PRESS}\nWe didn't do well at all...")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0x91, 0x04,  0x000a,  0x00000006,  0x00000000, NULL },
     PORTRAIT_REP(0x0001, 0x00000000),
@@ -250,7 +250,7 @@ static const struct ScriptCommand s_gs199_g2_s0_lives0_dlg0[] = { /* 0x824f33c *
     VARIANT_DEFAULT(_(" That Pokémon,\n{NAME_2}, is pretty tough.")),
     VARIANT_DEFAULT(_(" But why are we forbidden\nfrom entering this forest?")),
     VARIANT_DEFAULT(_(" It makes no difference.\n{NAME_0}, let's try our best!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },

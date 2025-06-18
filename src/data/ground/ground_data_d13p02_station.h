@@ -50,7 +50,7 @@ static const struct ScriptCommand s_gs208_g0_s0_evt0_sref_script[] = { /* 0x8261
   LABEL(1), /* = 0x01 */
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     BGM_FADEOUT(60),
     { 0x02, 0x00,  0x001e,  0x00000014,  0x00000000, NULL },
     COND_EQUAL(-1, /* to label */ 1),
@@ -67,7 +67,7 @@ static const struct ScriptCommand s_gs208_g0_s0_evt1_sref_script[] = { /* 0x8261
   LABEL(1), /* = 0x01 */
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     BGM_FADEOUT(30),
     { 0x23, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER4_FUNC),
@@ -159,7 +159,7 @@ static const struct ScriptCommand s_gs208_g1_s0_lives0_dlg0[] = { /* 0x8261b84 *
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" But we didn't have far to\ngo!{WAIT_PRESS}\nLet's give it our best!")),
     VARIANT_DEFAULT(_(" But we were very close!{WAIT_PRESS}\nLet's keep trying our best!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },

@@ -105,7 +105,6 @@ struct unkStruct_8096AF8
     /* 0x4 */ s16 targetSpecies;
 };
 
-void sub_809A62C(void);
 extern void sub_80A8EC0(u8 *, u32);
 Pokemon *sub_808D3BC(void);
 Pokemon *sub_808D3F8(void);
@@ -328,11 +327,11 @@ void TextboxInit(void)
 
 void TextboxFree(void)
 {
-    sub_809A62C();
+    TextboxResetAll();
     FREE_AND_SET_NULL(sTextbox);
 }
 
-void sub_809A62C(void)
+void TextboxResetAll(void)
 {
     s32 index;
 

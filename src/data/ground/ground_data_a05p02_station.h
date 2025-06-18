@@ -107,7 +107,7 @@ static const struct ScriptCommand s_gs176_g1_s0_eff1_script[] = { /* 0x822bb50 *
     { 0x39, 0x00,  0x005a,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you wish...\n{CENTER_ALIGN}And wish very strongly...") },
     WAIT(80),
     { 0x39, 0x00,  0x005a,  0x00000000,  0x00000000, _("{CENTER_ALIGN}Perhaps you will meet again.") },
-    { 0x31, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR2,
     WAIT(60),
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     HALT,

@@ -24,7 +24,7 @@ static const struct ScriptCommand s_gs163_g1_s0_station_sref_script[] = { /* 0x8
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("......") },
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("............") },
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("...Urgggh...{WAIT_PRESS} I feel horrible...") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     WAIT(10),
     SELECT_ENTITIES(-1, -1),
     BGM_FADEIN(120, 29),
@@ -48,7 +48,7 @@ static const struct ScriptCommand s_gs163_g1_s0_lives0_dlg0[] = { /* 0x8216594 *
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("This is a dream...{WAIT_PRESS} Isn't it...?") },
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("...But why...?{WAIT_PRESS}\nWhy do I feel this terrible...?") },
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("This is...{WAIT_PRESS} The first time...") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     HALT,
 };
@@ -79,7 +79,7 @@ static const struct ScriptCommand s_gs163_g2_s0_lives0_dlg0[] = { /* 0x8216758 *
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("..................") },
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("......The pain......") },
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("......It's going away............") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     HALT,
 };
@@ -111,7 +111,7 @@ static const struct ScriptCommand s_gs163_g3_s0_lives0_dlg0[] = { /* 0x8216954 *
     WAIT(30),
     { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you fail to draw out {NAME_2}'s\n{CENTER_ALIGN}true feelings...") },
     { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The curse will never be broken.") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     WAIT(10),
     FANFARE_PLAY2(465),
     { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
@@ -119,7 +119,7 @@ static const struct ScriptCommand s_gs163_g3_s0_lives0_dlg0[] = { /* 0x8216954 *
     PORTRAIT(PLACEMENT_RIGHT, 0x0002, 0x00000046),
     MSG_NPC(2, _(" Gegege!\nHey, {NAME_0}!")),
     MSG_NPC(2, _(" Don't you dare fool around!\nI'll make you pay for it!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     WAIT(10),
     { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}You have but one chance.{WAIT_PRESS}\n{CENTER_ALIGN}{NAME_0},\n{CENTER_ALIGN}do your best.") },
     { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}Fine...{WAIT_PRESS} It is time.") },
@@ -239,7 +239,7 @@ static const struct ScriptCommand s_gs163_g3_s0_lives0_dlg0[] = { /* 0x8216954 *
     JUMP_LABEL(29),
   LABEL(10), /* = 0x0a */
     { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}I understand now...\n{CENTER_ALIGN}My questions are finished.") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     HALT,
 };

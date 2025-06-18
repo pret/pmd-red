@@ -90,7 +90,6 @@ extern void AllocGroundEvents(void);
 extern void AllocGroundLives(void);
 extern void AllocGroundObjects(void);
 extern void AllocGroundEffects(void);
-extern void sub_809A62C(void);
 extern void nullsub_124(void);
 extern void GroundLives_Action(void);
 extern void GroundObject_Action(void);
@@ -193,7 +192,7 @@ u32 xxx_script_related_8098468(s32 param_1)
     AllocGroundLives();
     AllocGroundObjects();
     AllocGroundEffects();
-    sub_809A62C();
+    TextboxResetAll();
     gUnknown_203B49C = 0;
     gUnknown_203B49D = 0;
     gUnknown_20398A8 = 1;
@@ -298,7 +297,7 @@ u32 xxx_script_related_8098468(s32 param_1)
         sub_809D4B0();
         GroundSprite_Reset(-1);
         sub_809C63C();
-        sub_809A62C();
+        TextboxResetAll();
         GroundMap_Reset();
         sub_809D0BC();
         DeleteGroundEvents();

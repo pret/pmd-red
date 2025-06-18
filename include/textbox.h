@@ -14,7 +14,7 @@ enum
 
 void TextboxInit(void);
 void TextboxFree(void);
-
+void TextboxResetAll(void);
 void SetAutoPressTextboxFrames(s32 frames);
 void SetAutoPressTextboxMidEndMsgFrames(s32 endMsgFrames, s32 midMsgFrames);
 bool8 ScriptClearTextbox(void);

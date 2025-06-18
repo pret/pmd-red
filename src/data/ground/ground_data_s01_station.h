@@ -25,7 +25,7 @@ static const struct ScriptCommand s_gs223_g1_s0_station_sref_script[] = { /* 0x8
     { 0x37, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}I want you to answer them sincerely.") },
     { 0x37, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}Are you ready?") },
     { 0x37, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}OK...{WAIT_PRESS}\n{CENTER_ALIGN}Let the interview begin!") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(12),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
