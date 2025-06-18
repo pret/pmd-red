@@ -5,7 +5,7 @@
 typedef struct UnkDrawStringStruct
 {
     s16 x;
-    s16 unk2;
+    s16 y;
     s16 unk4;
     s16 unk6;
     s16 unk8;
@@ -15,8 +15,8 @@ typedef struct UnkDrawStringStruct
     u32 unk14;
     u32 unk18;
     u32 unk1C;
-    u8 unk20;
-    u8 unk21;
+    bool8 waitButtonPress;
+    bool8 waitFrames;
     u8 fill22;
     u8 fill23;
     const u8 * (*unk24)(const u8 *, const u8 *, struct UnkDrawStringStruct *);

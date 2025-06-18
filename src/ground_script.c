@@ -83,7 +83,6 @@ void sub_80973A8(s16, bool8);
 void sub_80975A8(s16, bool8);
 u32 sub_809A6E4();
 u32 sub_809A6F8();
-u32 sub_809A738();
 u32 sub_809A768();
 u32 sub_809AC7C();
 u32 sub_809ADD8();
@@ -1845,7 +1844,7 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x2b: {
-                sub_809A738(curCmd.arg1, curCmd.arg2);
+                SetAutoPressTextboxMidEndMsgFrames(curCmd.arg1, curCmd.arg2);
                 break;
             }
             case 0x2c: {

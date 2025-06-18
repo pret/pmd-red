@@ -73,8 +73,8 @@ struct Textbox
 {
     // size: 0x5A8
     u32 unk0;
-    u32 unk4;
-    u32 unk8;
+    s32 endMsgFrames;
+    s32 midMsgFrames;
     struct TextboxText unkC;
     u32 unk414;
     const struct unkStruct_3001B64_unk418 *unk418;
@@ -213,7 +213,12 @@ void sub_809C414(void);
 void sub_809C4B0(void);
 void sub_809C550(void);
 
-#define TEXTBOX_FLAG_INTANT_TEXT 0x20
+#define TEXTBOX_FLAG_UNUSED_x2 0x2 // Unused, but set for almost all flag sets
+#define TEXTBOX_FLAG_INSTANT_TEXT 0x20
+// Both need to be set to wait for the player's button press. One flag would be sufficient in my opinion, but what can you do?
+#define TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 0x40
+#define TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS 0x80
+
 #define TEXTBOX_FLAG_SPEAKER 0x100 // Speaker's name + dialogue sound
 #define TEXTBOX_FLAG_DIALOGUE_SOUND 0x200 // Only dialogue sound
 
@@ -275,10 +280,10 @@ static const u32 sTextboxTypes[] =
 
 static const u16 sFlagSets[] =
 {
-    0x02 | 0x40 | 0x80 | TEXTBOX_FLAG_INTANT_TEXT,
-    0x02 | 0x40 | 0x80,
-    0x02 | 0x40 | 0x80 | TEXTBOX_FLAG_SPEAKER,
-    0x02 | 0x40 | 0x80 | TEXTBOX_FLAG_DIALOGUE_SOUND,
+    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_INSTANT_TEXT,
+    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS,
+    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_SPEAKER,
+    TEXTBOX_FLAG_UNUSED_x2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_DIALOGUE_SOUND,
     0x01,
     // These are effectively unused
     0x121, 0x101, 0x10D, 0x105, 0
@@ -300,11 +305,11 @@ static void ResetTextbox(void);
 
 void TextboxInit(void)
 {
-    sub_8014144();
+    ResetDialogueBox();
     sTextbox = MemoryAlloc(sizeof(struct Textbox), 6);
     sTextbox->unk0 = 0;
-    sTextbox->unk4 = -1;
-    sTextbox->unk8 = -1;
+    sTextbox->endMsgFrames = -1;
+    sTextbox->midMsgFrames = -1;
     gUnknown_20399DC = 0;
     gUnknown_20399DE = 0;
     sub_80095CC(0,0x14);
@@ -335,8 +340,8 @@ void sub_809A62C(void)
     s32 index;
 
     sTextbox->unk0 = 0;
-    sTextbox->unk4 = -1;
-    sTextbox->unk8 = -1;
+    sTextbox->endMsgFrames = -1;
+    sTextbox->midMsgFrames = -1;
     gUnknown_20399DC = 0;
     gUnknown_20399DE = 0;
     for (index = 0; index < MAX_TEXTBOX_PORTRAITS; index++) {
@@ -393,18 +398,18 @@ UNUSED static void nullsub_209(void)
 {
 }
 
-void sub_809A71C(s32 param_1)
+void SetAutoPressTextboxFrames(s32 frames)
 {
-    sTextbox->unk4 = param_1;
-    sTextbox->unk8 = param_1;
-    sub_801416C(param_1, param_1);
+    sTextbox->endMsgFrames = frames;
+    sTextbox->midMsgFrames = frames;
+    SetDialogueBoxAutoPressFrames(frames, frames);
 }
 
-void sub_809A738(s32 param_1, s32 param_2)
+void SetAutoPressTextboxMidEndMsgFrames(s32 endMsgFrames, s32 midMsgFrames)
 {
-    sTextbox->unk4 = param_1;
-    sTextbox->unk8 = param_2;
-    sub_801416C(param_1, param_2);
+    sTextbox->endMsgFrames = endMsgFrames;
+    sTextbox->midMsgFrames = midMsgFrames;
+    SetDialogueBoxAutoPressFrames(endMsgFrames, midMsgFrames);
 }
 
 u8 IsTextboxOpen_809A750(void)
@@ -889,7 +894,7 @@ void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, c
     CreateMenuDialogueBoxAndPortrait(text, sub_809B428, a2, menuItems, 0, 4, 0, GetSpeakerPortrait(a4),
          ((sFlagSets[a3] & TEXTBOX_FLAG_SPEAKER) ? STR_FORMAT_FLAG_SPEAKER_NAME | STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
         | ((sFlagSets[a3] & TEXTBOX_FLAG_DIALOGUE_SOUND) ? STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
-        | ((sFlagSets[a3] & 0x20) ? 0x21 : 1)); // What an ugly way to get flags lol
+        | ((sFlagSets[a3] & TEXTBOX_FLAG_INSTANT_TEXT) ? STR_FORMAT_FLAG_INSTANT_TEXT | STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2 : STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2));
 
     if (sTextbox->unk424 & 2) {
         sub_809A6E4(1);
@@ -994,11 +999,11 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
          | ((flags & TEXTBOX_FLAG_DIALOGUE_SOUND) ? STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
          | ((sTextbox->unk0 == 3) ? 0x10 : 0)
          | ((sTextbox->unk0 == 2) ? 0x10 : 0)
-         | ((flags & TEXTBOX_FLAG_INTANT_TEXT) ? STR_FORMAT_FLAG_INSTANT_TEXT : 0)
-         | ((flags & 0x40) ? 0x1 : 0)
-         | ((flags & 0x80) ? 0x100 : 0)
+         | ((flags & TEXTBOX_FLAG_INSTANT_TEXT) ? STR_FORMAT_FLAG_INSTANT_TEXT : 0)
+         | ((flags & TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2) ? STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2 : 0)
+         | ((flags & TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS) ? STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS : 0)
          | ((flags & 0x4) ? 0x200 : 0)
-         | ((sTextbox->unk4 != -1) ? 0x2 : 0)
+         | ((sTextbox->endMsgFrames != -1) ? STR_FORMAT_FLAG_TIMED_AUTO_MSG_CLOSE : 0)
                                      );
 
     return TRUE;

@@ -96,7 +96,7 @@ static const struct ScriptCommand s_gs176_g1_s0_eff1_script[] = { /* 0x822bb50 *
     { 0x26, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(90),
-    { 0x2b, 0x00,  0x0000,  0x000000b4,  0x000000b4, NULL },
+    TEXTBOX_AUTO_PRESS(180, 180),
     WAIT(60),
     { 0x39, 0x00,  0x005a,  0x00000000,  0x00000000, _("{CENTER_ALIGN}Your friend is heartbroken...") },
     WAIT(80),

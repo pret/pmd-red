@@ -405,7 +405,7 @@ static const struct ScriptCommand s_gs209_g3_s0_station_sref_script[] = { /* 0x8
     { 0x28, 0x01,  0x0005,  0x0000003c,  0x00ffffff, NULL },
     WAIT(120),
     { 0x31, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x2b, 0x00,  0x0000, -0x00000001, -0x00000001, NULL },
+    TEXTBOX_AUTO_PRESS(-1, -1),
     WAIT(240),
     RET,
 };
@@ -419,7 +419,7 @@ static const struct ScriptCommand s_gs209_g3_s0_lives0_dlg0[] = { /* 0x8263a7c *
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(30),
     WAIT(30),
-    { 0x2b, 0x00,  0x0000,  0x0000000f,  0x0000000f, NULL },
+    TEXTBOX_AUTO_PRESS(15, 15),
     { 0x2e, 0x02,  0x0001,  0x0000000c,  0x00000000, NULL },
     { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Waaaaaaaaaaaaaaaaaah!") },
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },

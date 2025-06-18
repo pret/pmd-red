@@ -132,7 +132,7 @@ void GameLoop(void)
     NDS_DebugInit();
     ResetSoundEffectCounters();
     NDS_LoadOverlay_GroundMain();
-    sub_8014144();
+    ResetDialogueBox();
     LoadMonsterParameters();
     sub_8097670();
     InitializePlayTime();
@@ -356,7 +356,7 @@ static void QuickSave_Async(u32 mode)
     saveStatus = 0;
     counter = 0;
     UpdateFadeInTile(0);
-    sub_8014144();
+    ResetDialogueBox();
     InitFontPalette();
     sub_800CDA8(2);
     sub_80095CC(0, 20);
@@ -467,7 +467,7 @@ static void sub_80008C0_Async(u32 errorKind)
     s32 counter = 0;
 
     UpdateFadeInTile(0);
-    sub_8014144();
+    ResetDialogueBox();
     InitFontPalette();
     sub_800CDA8(2);
     sub_80095CC(0, 20);
@@ -888,7 +888,7 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
     sUnknown_203B03C = 1;
 
     sub_800A8F8(3);
-    sub_8014144();
+    ResetDialogueBox();
     sub_8043D50(&local_1c, &dungeonStructSize);
 
     setupStr->info.unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800

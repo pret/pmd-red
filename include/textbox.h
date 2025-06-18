@@ -4,6 +4,8 @@
 void TextboxInit(void);
 void TextboxFree(void);
 
+void SetAutoPressTextboxFrames(s32 frames);
+void SetAutoPressTextboxMidEndMsgFrames(s32 endMsgFrames, s32 midMsgFrames);
 bool8 ScriptClearTextbox(void);
 bool8 ScriptClearTextbox2(void);
 void ResetTextboxPortrait(s16 id_);

@@ -83,14 +83,14 @@ static EWRAM_DATA SpriteOAM sDialogueBoxArrowSprite = {0};
 // 't' - team name. This buffer seems wastefully large, given team name can be max 10(or so) characters.
 static EWRAM_DATA u8 sFormatBuffer_TeamName[FORMAT_BUFFER_LEN] = {0};
 
-static EWRAM_DATA s32 gUnknown_202E738 = 0;
-static EWRAM_DATA s32 gUnknown_202E73C = 0;
-static EWRAM_DATA s32 gUnknown_202E740 = 0;
+static EWRAM_DATA s32 sAutoPressNewTextboxFrames = 0;
+static EWRAM_DATA s32 sAutoPressMidTextboxFrames = 0;
+static EWRAM_DATA s32 sAutoPressFramesEndMsg = 0;
 static EWRAM_DATA s32 sPrintStringState = 0;
 static EWRAM_DATA UnkDrawStringStruct sTextPrintStruct = {0};
 static EWRAM_DATA u16 sStringFormatFlags = 0;
-static EWRAM_DATA s32 gUnknown_202E780 = 0;
-static EWRAM_DATA s32 gUnknown_202E784 = 0;
+static EWRAM_DATA s32 sAutoPressFrames = 0;
+static EWRAM_DATA s32 sDialoguePrintFrames = 0;
 static EWRAM_DATA s32 sTextPrintSpeed = 0;
 static EWRAM_DATA s32 sFramesBetweenCharPrints = 0;
 static EWRAM_DATA bool8 sInstantText = FALSE;
@@ -144,25 +144,40 @@ static EWRAM_INIT WindowTemplates sUnknown_203B198 = {
     }
 };
 
-void sub_8014144(void)
+enum
 {
-    sPrintStringState = 0;
-    gUnknown_202E738 = 60;
-    gUnknown_202E73C = 60;
-    gUnknown_202E740 = 0;
+    STATE_FINISHED,
+    STATE_PRINT_CHAR,
+    STATE_PRINT_CHAR_SOUND_WAIT,
+    STATE_PRINT_FINISHED_MENU,
+    STATE_4,
+    STATE_5,
+    STATE_PRINT_FINISHED,
+    // These 3 are the same
+    STATE_WAIT_FOR_BUTTON_MID_TEXTBOX,
+    STATE_WAIT_FOR_BUTTON_NEW_TEXTBOX,
+    STATE_WAIT_FOR_BUTTON_PRESS_END_MSG,
+};
+
+void ResetDialogueBox(void)
+{
+    sPrintStringState = STATE_FINISHED;
+    sAutoPressNewTextboxFrames = 60;
+    sAutoPressMidTextboxFrames = 60;
+    sAutoPressFramesEndMsg = 0;
 }
 
-void sub_801416C(s32 param_1,s32 param_2)
+void SetDialogueBoxAutoPressFrames(s32 endMsgFrames, s32 midMsgFrames)
 {
-    if (param_1 < -1) {
-        gUnknown_202E738 = param_2;
-        gUnknown_202E740 = -param_1;
+    if (endMsgFrames < -1) {
+        sAutoPressNewTextboxFrames = midMsgFrames;
+        sAutoPressFramesEndMsg = -endMsgFrames;
     }
     else {
-        gUnknown_202E738 = param_1;
-        gUnknown_202E740 = 0;
+        sAutoPressNewTextboxFrames = endMsgFrames;
+        sAutoPressFramesEndMsg = 0;
     }
-    gUnknown_202E73C = (param_2 < 0 ) ? 0 : param_2;
+    sAutoPressMidTextboxFrames = (midMsgFrames < 0 ) ? 0 : midMsgFrames;
 }
 
 void CreateDialogueBoxAndPortrait(const u8 *text, void *param_2, MonPortraitMsg *monPortraitPtr, u16 flags)
@@ -180,12 +195,9 @@ void CreateYesNoDialogueBoxAndPortrait_DefaultNo(const u8 *text, MonPortraitMsg 
     CreateMenuDialogueBoxAndPortrait(text, NULL, -1, sYesNoMenuItems_DefaultNo, NULL, 3, 0, monPortraitPtr, flags | 0x300);
 }
 
-enum
-{
-    STATE_FINISHED,
-    STATE_PRINT_CHAR,
-    STATE_PRINT_CHAR_SOUND_WAIT,
-};
+#define TEXTBOX_LINE_HEIGHT 11
+#define TEXTBOX_HEIGHT ((TEXTBOX_LINE_HEIGHT * 3) + 1)
+#define TEXTBOX_OUT_OF_SPACE(y)(y > TEXTBOX_HEIGHT)
 
 // arm9.bin::0201D700
 void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const MenuItem *menuItems, void *arg_0, u32 a5, u32 unknownUnused, MonPortraitMsg *monPortraitPtr, u16 flags)
@@ -237,12 +249,12 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B198, TRUE, TRUE);
     sTextPrintStruct.x = 4;
-    sTextPrintStruct.unk2 = 4;
+    sTextPrintStruct.y = 4;
     sTextPrintStruct.unk8 = 0x70;
-    sTextPrintStruct.unkA = (gWindows[0].y * 8) + 34;
+    sTextPrintStruct.unkA = (gWindows[0].y * 8) + TEXTBOX_HEIGHT;
     sTextPrintStruct.unk10 = 7;
     sTextPrintStruct.unk1C = 0;
-    sTextPrintStruct.unk20 = 0;
+    sTextPrintStruct.waitButtonPress = 0;
     SetCharacterMask((flags & 0x10) ? 8 : 3);
     sPrintStringState = 1;
     sStringFormatFlags = flags;
@@ -260,7 +272,7 @@ void CreateMenuDialogueBoxAndPortrait(const u8 *text, void *a1, u32 r9, const Me
     sFramesBetweenCharPrints = 1;
     UnpressButtons();
     sArrowFrames = 0;
-    gUnknown_202E784 = 0;
+    sDialoguePrintFrames = 0;
     if (portraitOn) {
         const u8 *data = monPortraitPtr->faceData->sprites[monPortraitPtr->spriteId].gfx;
 
@@ -294,7 +306,7 @@ void DrawDialogueBoxString(void)
 {
     bool8 keepLooping = TRUE;
 
-    gUnknown_202E784++;
+    sDialoguePrintFrames++;
     while (keepLooping) {
         switch (sPrintStringState) {
             case STATE_FINISHED: {
@@ -315,17 +327,17 @@ void DrawDialogueBoxString(void)
                 sub_80073B8(0);
                 while (txtSpeed > 0) {
                      str = HandleSpecialCharFormat(str, &sTextPrintStruct);
-                     if (sTextPrintStruct.unk21 != 0) {
+                     if (sTextPrintStruct.waitFrames) {
                         break;
                      }
-                     if (sTextPrintStruct.unk20 != 0) {
-                        if (sTextPrintStruct.unk2 > 34) {
-                            sPrintStringState = 8;
-                            gUnknown_202E780 = gUnknown_202E738;
+                     if (sTextPrintStruct.waitButtonPress) {
+                        if (TEXTBOX_OUT_OF_SPACE(sTextPrintStruct.y)) {
+                            sPrintStringState = STATE_WAIT_FOR_BUTTON_NEW_TEXTBOX;
+                            sAutoPressFrames = sAutoPressNewTextboxFrames;
                         }
                         else {
-                            sPrintStringState = 7;
-                            gUnknown_202E780 = gUnknown_202E73C;
+                            sPrintStringState = STATE_WAIT_FOR_BUTTON_MID_TEXTBOX;
+                            sAutoPressFrames = sAutoPressMidTextboxFrames;
                         }
                         sArrowFrames = 0;
                         break;
@@ -336,28 +348,28 @@ void DrawDialogueBoxString(void)
 
                      if (*str == '\r' || *str == '\n') {
                         sTextPrintStruct.x = 4;
-                        sTextPrintStruct.unk2 += 11;
+                        sTextPrintStruct.y += TEXTBOX_LINE_HEIGHT;
                         str++;
                      }
                      else {
                         u32 chr;
 
                         str = GetNextCharFromStr(str, &chr);
-                        sTextPrintStruct.x += DrawCharOnWindow(sTextPrintStruct.x, sTextPrintStruct.unk2, chr, sTextPrintStruct.unk10, 0);
+                        sTextPrintStruct.x += DrawCharOnWindow(sTextPrintStruct.x, sTextPrintStruct.y, chr, sTextPrintStruct.unk10, 0);
                         sTextPrintStruct.framesToWait = sFramesBetweenCharPrints;
                      }
 
-                     if (sTextPrintStruct.unk2 > 34) {
+                     if (TEXTBOX_OUT_OF_SPACE(sTextPrintStruct.y)) {
                         if (!(sStringFormatFlags & 0x10)) {
                             sTextPrintStruct.unk1C = 0;
-                            sTextPrintStruct.unk20 = 1;
-                            sPrintStringState = 8;
+                            sTextPrintStruct.waitButtonPress = TRUE;
+                            sPrintStringState = STATE_WAIT_FOR_BUTTON_NEW_TEXTBOX;
                             sArrowFrames = 0;
-                            gUnknown_202E780 = gUnknown_202E738;
+                            sAutoPressFrames = sAutoPressNewTextboxFrames;
                             break;
                         }
                         else {
-                            sTextPrintStruct.unk2 = 4;
+                            sTextPrintStruct.y = 4;
                         }
                      }
                      txtSpeed--;
@@ -367,20 +379,20 @@ void DrawDialogueBoxString(void)
                 ResetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput);
                 if (*sCurrStr == '\0') {
                     if (sDialogueMenuItems != NULL) {
-                        sPrintStringState = 3;
+                        sPrintStringState = STATE_PRINT_FINISHED_MENU;
                     }
                     else {
-                        sPrintStringState = 6;
+                        sPrintStringState = STATE_PRINT_FINISHED;
                     }
                     keepLooping = FALSE;
                 }
                 else {
                     sTextPrintStruct.currFrames = 0;
-                    if (sTextPrintStruct.unk20 != 0) {
-                        if (sPrintStringState == 1) {
+                    if (sTextPrintStruct.waitButtonPress) {
+                        if (sPrintStringState == STATE_PRINT_CHAR) {
                             sPrintStringState = 7;
                             sArrowFrames = 0;
-                            gUnknown_202E780 = gUnknown_202E738;
+                            sAutoPressFrames = sAutoPressNewTextboxFrames;
                         }
                         keepLooping = FALSE;
                     }
@@ -403,26 +415,26 @@ void DrawDialogueBoxString(void)
 
                 if (++sTextPrintStruct.currFrames > sTextPrintStruct.framesToWait) {
                     sPrintStringState = STATE_PRINT_CHAR;
-                    sTextPrintStruct.unk21 = 0;
+                    sTextPrintStruct.waitFrames = FALSE;
                 }
                 else {
                     keepLooping = FALSE;
                 }
             }
             break;
-            case 6: {
-                if (sStringFormatFlags & 0x100) {
-                    sPrintStringState = 9;
+            case STATE_PRINT_FINISHED: {
+                if (sStringFormatFlags & STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS) {
+                    sPrintStringState = STATE_WAIT_FOR_BUTTON_PRESS_END_MSG;
                     sArrowFrames = 0;
-                    if (gUnknown_202E740 > 0) {
-                        gUnknown_202E780 = gUnknown_202E740 - gUnknown_202E784;
-                        if (gUnknown_202E780 < 0) {
+                    if (sAutoPressFramesEndMsg > 0) {
+                        sAutoPressFrames = sAutoPressFramesEndMsg - sDialoguePrintFrames;
+                        if (sAutoPressFrames < 0) {
                             sPrintStringState = 11;
-                            gUnknown_202E780 = 0;
+                            sAutoPressFrames = 0;
                         }
                     }
                     else {
-                        gUnknown_202E780 = gUnknown_202E738;
+                        sAutoPressFrames = sAutoPressNewTextboxFrames;
                     }
                 }
                 else {
@@ -430,19 +442,19 @@ void DrawDialogueBoxString(void)
                 }
             }
             break;
-            case 7:
-            case 8:
-            case 9: {
+            case STATE_WAIT_FOR_BUTTON_MID_TEXTBOX:
+            case STATE_WAIT_FOR_BUTTON_NEW_TEXTBOX:
+            case STATE_WAIT_FOR_BUTTON_PRESS_END_MSG: {
                 bool8 buttonPress = FALSE;
-                sTextPrintStruct.unk20 = 0;
+                sTextPrintStruct.waitButtonPress = 0;
                 GetTouchScreenMenuInput(&sDialogueMenuTouchScreenInput, 0);
-                if (!(sStringFormatFlags & 1)) {
+                if (!(sStringFormatFlags & STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2)) {
                     buttonPress = TRUE;
                 }
                 else {
-                    if (sStringFormatFlags & 2) {
-                        if (gUnknown_202E780 > 0) {
-                            gUnknown_202E780--;
+                    if (sStringFormatFlags & STR_FORMAT_FLAG_TIMED_AUTO_MSG_CLOSE) {
+                        if (sAutoPressFrames > 0) {
+                            sAutoPressFrames--;
                         }
                         else {
                             buttonPress = TRUE;
@@ -461,7 +473,7 @@ void DrawDialogueBoxString(void)
 
                 if (!buttonPress) {
                     sArrowFrames++;
-                    if (!(sStringFormatFlags & 0x2) && sArrowFrames & 8) {
+                    if (!(sStringFormatFlags & STR_FORMAT_FLAG_TIMED_AUTO_MSG_CLOSE) && sArrowFrames & 8) {
                         SpriteSetAffine1(&sDialogueBoxArrowSprite, 0);
                         SpriteSetAffine2(&sDialogueBoxArrowSprite, 0);
                         SpriteSetObjMode(&sDialogueBoxArrowSprite, 0);
@@ -483,7 +495,7 @@ void DrawDialogueBoxString(void)
                             SpriteSetX(&sDialogueBoxArrowSprite, sTextPrintStruct.unk8);
                         }
 
-                        AddSprite(&sDialogueBoxArrowSprite, 0x100, NULL, NULL);
+                        AddSprite(&sDialogueBoxArrowSprite, 256, NULL, NULL);
                     }
                 }
                 else {
@@ -495,8 +507,8 @@ void DrawDialogueBoxString(void)
                     }
                     else if (sPrintStringState == 8) {
                         sTextPrintStruct.x = 4;
-                        if (sTextPrintStruct.unk2 > 34) {
-                            sTextPrintStruct.unk2 = 4;
+                        if (TEXTBOX_OUT_OF_SPACE(sTextPrintStruct.y)) {
+                            sTextPrintStruct.y = 4;
                             if (sStringFormatFlags & 0x10) {
                                 CallPrepareTextbox_8008C54(0);
                                 sPrintStringState = 1;
@@ -519,7 +531,7 @@ void DrawDialogueBoxString(void)
                     }
 
                     sTextPrintStruct.unk8 = 0x70;
-                    sTextPrintStruct.unkA = (gWindows[0].y * 8) + 34;
+                    sTextPrintStruct.unkA = (gWindows[0].y * 8) + TEXTBOX_HEIGHT;
                 }
                 keepLooping = FALSE;
             }
@@ -537,15 +549,15 @@ void DrawDialogueBoxString(void)
                 if (sStringFormatFlags & 0x200) {
                     ResetUnusedInputStruct();
                     ShowWindows(NULL, TRUE, TRUE);
-                    sPrintStringState = 0;
+                    sPrintStringState = STATE_FINISHED;
                 }
                 else {
-                    sPrintStringState = 0;
+                    sPrintStringState = STATE_FINISHED;
                 }
                 keepLooping = FALSE;
             }
             break;
-            case 3: {
+            case STATE_PRINT_FINISHED_MENU: {
                 sub_8014A88();
                 sPrintStringState = 4;
                 keepLooping = FALSE;

@@ -64,7 +64,6 @@ extern u16 gUnknown_2026E4E;
 extern void GroundSprite_Reset(s32);
 extern s16 sub_8098FCC(u32 unused);
 extern s16 sub_80A2654(s16 r0);
-extern void sub_809A71C(s32);
 extern bool8 sub_809AFAC(void);
 extern bool8 sub_80048BC(void);
 extern u8 sub_80023E4(u32);
@@ -206,7 +205,7 @@ u32 xxx_script_related_8098468(s32 param_1)
     gUnknown_20398C4 = -1;
     r7 = -1;
     while (gUnknown_20398A8 - 1 <= 1) {
-        sub_809A71C(-1);
+        SetAutoPressTextboxFrames(-1);
         ScriptClearTextbox();
         sub_809977C();
         switch (gUnknown_20398B4) {

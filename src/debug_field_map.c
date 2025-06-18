@@ -46,7 +46,7 @@ UNUSED static void DebugMapViewer(void)
     sub_8099648();
     sub_809975C();
     sub_809D0AC();
-    sub_8014144();
+    ResetDialogueBox();
     sub_8005838(NULL, 0);
     AllocGroundMapAction();
     while (1) {

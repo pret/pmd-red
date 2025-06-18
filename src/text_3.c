@@ -174,7 +174,7 @@ static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32
     u32 currChr;
 
     sp.x = x;
-    sp.unk2 = y;
+    sp.y = y;
     sp.unkC = x;
     sp.unk10 = 7;
     while (TRUE) {
@@ -194,17 +194,17 @@ static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32
         }
         else if (currChr == '\r' || currChr == '\n') {
             sp.x = sp.unkC;
-            sp.unk2 += lineSpacing;
+            sp.y += lineSpacing;
         }
         else if (currChr == '\x1D') { // ASCII group separator.
             sp.x = sp.unkC;
-            sp.unk2 += 5;
+            sp.y += 5;
         }
         else if (currChr == '`') {
             sp.x += 6;
         }
         else if (characterSpacing == 0) {
-            sp.x += DrawCharOnWindowInternal(windows, sp.x, sp.unk2, currChr, sp.unk10, windowId);
+            sp.x += DrawCharOnWindowInternal(windows, sp.x, sp.y, currChr, sp.unk10, windowId);
         }
         else {
             const unkChar *chrPtr = GetCharacter(currChr);
@@ -212,7 +212,7 @@ static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32
                 s32 x = sp.x;
                 s32 x2 = gCharacterSpacing + 10;
                 x +=((x2 - chrPtr->width) / 2);
-                DrawCharOnWindowInternal(windows, x, sp.unk2, currChr, sp.unk10, windowId);
+                DrawCharOnWindowInternal(windows, x, sp.y, currChr, sp.unk10, windowId);
                 sp.x += characterSpacing;
             }
         }
@@ -265,7 +265,7 @@ static const u8 *HandleCharFormatInternal(Window *windows, const u8 *str, UnkDra
             if (str[1] == '[') {
                 const u8 *strBefore = str;
                 str += 2;
-                sp->unk21 = 0;
+                sp->waitFrames = FALSE;
                 while (*str != '\0') {
                     if (*str == ']') {
                         str++;
@@ -279,7 +279,7 @@ static const u8 *HandleCharFormatInternal(Window *windows, const u8 *str, UnkDra
                         str = strNew;
                 }
 
-                if (sp->unk21 != 0)
+                if (sp->waitFrames)
                     break;
             }
             else if (str[1] == '=') {
@@ -289,7 +289,7 @@ static const u8 *HandleCharFormatInternal(Window *windows, const u8 *str, UnkDra
                     str++;
             }
             else if (str[1] == 'y') {
-                sp->unk2 = str[2];
+                sp->y = str[2];
                 str += 3;
                 if (*str == '.')
                     str++;
@@ -303,7 +303,7 @@ static const u8 *HandleCharFormatInternal(Window *windows, const u8 *str, UnkDra
             }
             else if (str[1] == 'n') {
                 sp->x = sp->unkC;
-                sp->unk2 += 11;
+                sp->y += 11;
                 str += 2;
             }
             else if (str[1] == ':') {
@@ -351,27 +351,27 @@ static const u8 *HandleCharFormatInternal(Window *windows, const u8 *str, UnkDra
             else if (str[1] == 'W') {
                 str += 2;
                 sp->unk8 = ((windows[0].x * 8) + sp->x) - 2;
-                sp->unkA = ((windows[0].y * 8) + sp->unk2) + 3;
-                sp->unk20 = 1;
+                sp->unkA = ((windows[0].y * 8) + sp->y) + 3;
+                sp->waitButtonPress = TRUE;
                 break;
             }
             else if (str[1] == 'P') {
                 str += 2;
-                sp->unk2 = 9999;
+                sp->y = 9999;
                 sp->unk1C = 0;
-                sp->unk20 = 1;
+                sp->waitButtonPress = TRUE;
                 break;
             }
             else if (str[1] == 'p') {
                 str += 2;
-                sp->unk2 = 9999;
+                sp->y = 9999;
                 sp->unk1C = 1;
-                sp->unk20 = 1;
+                sp->waitButtonPress = TRUE;
                 break;
             }
             else if (str[1] == '~') {
                 sp->framesToWait = str[2];
-                sp->unk21 = 1;
+                sp->waitFrames = TRUE;
                 str += 3;
             }
             else {

@@ -35,6 +35,7 @@
 // 20: execute script as parented object, maybe? Unused in ROM
 // 21: follow object/make object follow/get parented?
 // 22..2f: ???
+#define TEXTBOX_AUTO_PRESS(endF, midF) { 0x2b, 0, 0, endF, midF, NULL} // Waits specified number of frames, then automatically does a button press without waiting for player's input. -1 disables it.
 // 30..39: various text printing
 // 3a: yes/no choice (only used for saving)
 // 3b: uber command (conditional jump)

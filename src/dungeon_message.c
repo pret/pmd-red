@@ -234,7 +234,7 @@ void xxx_draw_string_80524F0(void)
                 const u8 *txtPtr = strPtr->unk0[id];
 
                 sp.x = 4;
-                sp.unk2 = strPtr->unk1C066;
+                sp.y = strPtr->unk1C066;
                 sp.unk10 = 7;
                 sub_80073B8(0);
                 if (strPtr->unk1C054[id] != 0 && strPtr->unk1C066 >= 8) {
@@ -250,7 +250,7 @@ void xxx_draw_string_80524F0(void)
                         sp.x += 6;
                     }
                     else {
-                        sp.x += DrawCharOnWindow(sp.x, sp.unk2, currChr, sp.unk10, 0);
+                        sp.x += DrawCharOnWindow(sp.x, sp.y, currChr, sp.unk10, 0);
                     }
                 }
                 sub_80073E0(0);
