@@ -484,7 +484,7 @@ static const struct ScriptCommand s_gs198_g5_s0_lives0_dlg0[] = { /* 0x824d980 *
     CALL_SCRIPT(NOTICE_FUNC),
     { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     { 0x2e, 0x02,  0x0001,  0x0000000c,  0x00000000, NULL },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" What the...?{WAIT_PRESS}\nIsn't this where we started from?!") },
+    MSG_NPC(1, _(" What the...?{WAIT_PRESS}\nIsn't this where we started from?!")),
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     FANFARE_PLAY2(468),
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },

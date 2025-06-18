@@ -1239,7 +1239,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives13_dlg2[] = { /* 0x81376f8 */
     CHOICE(/* label */  1, _("Effect 2")),
     CHOICE(/* label */  2, _("Effect 3")),
     CHOICE(/* label */  3, _("Effect 4")),
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Farewell.") },
+    MSG_NPC(1, _(" Farewell.")),
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },

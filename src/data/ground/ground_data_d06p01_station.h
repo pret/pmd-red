@@ -63,7 +63,7 @@ static const struct ScriptCommand s_gs188_g1_s0_lives0_dlg0[] = { /* 0x82392cc *
     VARIANT_DEFAULT(_(" {NAME_2}...{WAIT_PRESS}\nIt sounds very tough...")),
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0x2e, 0x15,  0x0001,  0x00000005,  0x00000000, NULL },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Brr... I'm shaking...") },
+    MSG_NPC(1, _(" Brr... I'm shaking...")),
     { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(30),
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
