@@ -9,7 +9,7 @@
 
 static const struct ScriptCommand s_gs207_g0_s0_station_sref_script[] = { /* 0x825ff68 */
     DEBUGINFO,
-    SELECT_MAP(207),
+    SELECT_MAP(MAP_SKY_TOWER_ENTRY),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
 };
@@ -20,7 +20,7 @@ static const struct ScriptCommand s_gs207_g1_s0_station_sref_script[] = { /* 0x8
     DEBUGINFO,
     BGM_FADEOUT(30),
     WAIT(60),
-    SELECT_MAP(207),
+    SELECT_MAP(MAP_SKY_TOWER_ENTRY),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(22),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -164,12 +164,12 @@ static const struct ScriptCommand s_gs207_g1_s0_lives2_dlg0[] = { /* 0x8260738 *
 
 static const struct ScriptCommand s_gs207_g2_s0_station_sref_script[] = { /* 0x82608a8 */
     DEBUGINFO,
-    SELECT_MAP(207),
+    SELECT_MAP(MAP_SKY_TOWER_ENTRY),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(22),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    NEXT_DUNGEON(30, 0x00000013),
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_SKY_TOWER),
     RET,
 };
 
@@ -230,12 +230,12 @@ static const struct ScriptCommand s_gs207_g2_s0_lives2_dlg0[] = { /* 0x8260c3c *
 
 static const struct ScriptCommand s_gs207_g3_s0_station_sref_script[] = { /* 0x8260cac */
     DEBUGINFO,
-    SELECT_MAP(207),
+    SELECT_MAP(MAP_SKY_TOWER_ENTRY),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(22),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    NEXT_DUNGEON(30, 0x00000013),
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_SKY_TOWER),
     RET,
 };
 

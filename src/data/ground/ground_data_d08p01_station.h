@@ -14,7 +14,7 @@ static const struct ScriptCommand s_gs193_g0_s0_station_sref_script[] = { /* 0x8
     JUMPIF_SCENARIOCHECK(5, /* to label */ 0),
     EXECUTE_STATION(12, 0, 0),
   LABEL(0), /* = 0x00 */
-    SELECT_MAP(193),
+    SELECT_MAP(MAP_LAPIS_CAVE_ENTRY),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_EQ, 11, /* to label */ 1),
     JUMP_LABEL(2),
@@ -124,13 +124,13 @@ static const struct ScriptCommand s_gs193_g0_s5_obj1_dlg2[] = { /* 0x8243080 */
 
 static const struct ScriptCommand s_gs193_g1_s0_station_sref_script[] = { /* 0x82430a0 */
     DEBUGINFO,
-    SELECT_MAP(193),
+    SELECT_MAP(MAP_LAPIS_CAVE_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(24),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    NEXT_DUNGEON(0, 0x0000000a),
+    NEXT_DUNGEON(0, SCRIPT_DUNGEON_LAPIS_CAVE),
     RET,
 };
 
@@ -233,7 +233,7 @@ static const struct ScriptCommand s_gs193_g1_s0_lives1_dlg0[] = { /* 0x824389c *
 
 static const struct ScriptCommand s_gs193_g2_s0_station_sref_script[] = { /* 0x8243a1c */
     DEBUGINFO,
-    SELECT_MAP(193),
+    SELECT_MAP(MAP_LAPIS_CAVE_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(102),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -434,7 +434,7 @@ static const struct ScriptCommand s_gs193_g3_s1_lives1_dlg0[] = { /* 0x8244648 *
 
 static const struct ScriptCommand s_gs193_g4_s0_station_sref_script[] = { /* 0x8244768 */
     DEBUGINFO,
-    SELECT_MAP(193),
+    SELECT_MAP(MAP_LAPIS_CAVE_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(102),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -501,7 +501,7 @@ static const struct ScriptCommand s_gs193_g4_s0_lives1_dlg0[] = { /* 0x8244bb4 *
 
 static const struct ScriptCommand s_gs193_g5_s0_station_sref_script[] = { /* 0x8244c94 */
     DEBUGINFO,
-    SELECT_MAP(193),
+    SELECT_MAP(MAP_LAPIS_CAVE_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(102),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },

@@ -12,7 +12,7 @@
 
 static const struct ScriptCommand s_gs204_g0_s0_station_sref_script[] = { /* 0x825ce34 */
     DEBUGINFO,
-    SELECT_MAP(204),
+    SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_EQ, 15, /* to label */ 0),
     JUMP_LABEL(1),
@@ -86,12 +86,12 @@ static const struct ScriptCommand s_gs204_g0_s4_lives1_dlg0[] = { /* 0x825d16c *
 
 static const struct ScriptCommand s_gs204_g1_s0_station_sref_script[] = { /* 0x825d19c */
     DEBUGINFO,
-    SELECT_MAP(204),
+    SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(108),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    NEXT_DUNGEON(30, 0x00000011),
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_MAGMA_CAVERN),
     RET,
 };
 
@@ -154,12 +154,12 @@ static const struct ScriptCommand s_gs204_g1_s0_lives1_dlg0[] = { /* 0x825d6dc *
 
 static const struct ScriptCommand s_gs204_g2_s0_station_sref_script[] = { /* 0x825d78c */
     DEBUGINFO,
-    SELECT_MAP(204),
+    SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(108),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    NEXT_DUNGEON(30, 0x00000011),
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_MAGMA_CAVERN),
     RET,
 };
 

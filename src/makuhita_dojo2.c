@@ -127,7 +127,7 @@ static void MakuhitaDojo_DrawCourseList(void)
 
     for (i = 0; i < sMakuhitaDojoWork2->s30.m.input.currPageEntries; i++) {
         iVar6 = sMakuhitaDojoWork2->unk0[sMakuhitaDojoWork2->s30.m.input.currPage * sMakuhitaDojoWork2->s30.m.input.entriesPerPage + i];
-        dungeonIndex = sub_80A2740(iVar6);
+        dungeonIndex = ScriptDungeonIdToDungeonId(iVar6);
 
         mazeIndex = sub_80A2668(iVar6);
 

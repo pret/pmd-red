@@ -13,7 +13,7 @@
 
 static const struct ScriptCommand s_gs191_g0_s0_station_sref_script[] = { /* 0x823d7dc */
     DEBUGINFO,
-    SELECT_MAP(191),
+    SELECT_MAP(MAP_GREAT_CANYON_ENTRY),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
 };
@@ -22,12 +22,12 @@ static const struct ScriptRef s_gs191_g0_s0_station_sref = { 404, 1, NULL /* ENT
 
 static const struct ScriptCommand s_gs191_g1_s0_station_sref_script[] = { /* 0x823d854 */
     DEBUGINFO,
-    SELECT_MAP(191),
+    SELECT_MAP(MAP_GREAT_CANYON_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(20),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    NEXT_DUNGEON(0, 0x00000009),
+    NEXT_DUNGEON(0, SCRIPT_DUNGEON_GREAT_CANYON),
     RET,
 };
 
@@ -89,12 +89,12 @@ static const struct ScriptCommand s_gs191_g1_s0_lives1_dlg0[] = { /* 0x823dc10 *
 
 static const struct ScriptCommand s_gs191_g2_s0_station_sref_script[] = { /* 0x823dd20 */
     DEBUGINFO,
-    SELECT_MAP(191),
+    SELECT_MAP(MAP_GREAT_CANYON_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(20),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    NEXT_DUNGEON(0, 0x00000009),
+    NEXT_DUNGEON(0, SCRIPT_DUNGEON_GREAT_CANYON),
     RET,
 };
 

@@ -11,7 +11,7 @@
 
 static const struct ScriptCommand s_gs186_g0_s0_station_sref_script[] = { /* 0x8235a04 */
     DEBUGINFO,
-    SELECT_MAP(186),
+    SELECT_MAP(MAP_SILENT_CHASM_ENTRY),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
 };
@@ -20,13 +20,13 @@ static const struct ScriptRef s_gs186_g0_s0_station_sref = { 404, 1, NULL /* ENT
 
 static const struct ScriptCommand s_gs186_g1_s0_station_sref_script[] = { /* 0x8235a7c */
     DEBUGINFO,
-    SELECT_MAP(186),
+    SELECT_MAP(MAP_SILENT_CHASM_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(113),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     { 0x23, 0x01,  0x0001,  0x00000000,  0x00000000, NULL },
-    NEXT_DUNGEON(0, 0x00000006),
+    NEXT_DUNGEON(0, SCRIPT_DUNGEON_SILENT_CHASM),
     RET,
 };
 

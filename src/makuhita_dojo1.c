@@ -193,7 +193,7 @@ static void MakuhitaDojo_UpdateDialogue(void)
             break;
         case 5:
             sMakuhitaDojoWork1->fallbackState = 13;
-            dLoc.id = sub_80A2740(sMakuhitaDojoWork1->unk10);
+            dLoc.id = ScriptDungeonIdToDungeonId(sMakuhitaDojoWork1->unk10);
             dLoc.floor = 1;
             PrintYellowDungeonNametoBuffer(gFormatBuffer_Monsters[0], &dLoc);
             CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_4], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);

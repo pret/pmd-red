@@ -618,23 +618,23 @@ static u32 RunGameMode_Async(u32 a0)
         else if (mode == MODE_DUNGEON_FROM_WORLD_MAP) {
             s32 i;
 
-            s32 dungId = (s16) GetScriptVarValue(NULL, DUNGEON_SELECT);
-            u8 r6 = sub_80A2740(dungId);
+            s32 scriptDungeonId = (s16) GetScriptVarValue(NULL, DUNGEON_SELECT);
+            u8 dungeonId = ScriptDungeonIdToDungeonId(scriptDungeonId);
             for (i = 0; i < WORLD_MAP_UNK_6D_COUNT; i++) {
                 worldMapSetup.info.unk6D[i] = sub_80A28F0(i);
             }
 
-            if (r6 == 99) {
+            if (dungeonId == DUNGEON_INVALID) {
                 mode = MODE_GROUND;
                 continue;
             }
 
             worldMapSetup.info.startLocation.id = DUNGEON_OUT_ON_RESCUE;
-            sub_80011CC(&worldMapSetup.info.unk4, r6);
+            sub_80011CC(&worldMapSetup.info.unk4, dungeonId);
             worldMapSetup.info.unk6C = worldMapSetup.info.unk4.unk5;
-            switch ((s16) sub_80A2750(dungId)) {
+            switch ((s16) sub_80A2750(scriptDungeonId)) {
                 case 1:
-                    if (sub_80990EC(&dungeonSetup.info, dungId)) {
+                    if (sub_80990EC(&dungeonSetup.info, scriptDungeonId)) {
                         worldMapSetup.info.unk4.unkC = dungeonSetup.info.sub0.unkC;
                         worldMapSetup.info.mon = dungeonSetup.info.mon;
                     }
@@ -656,7 +656,7 @@ static u32 RunGameMode_Async(u32 a0)
                 mode = MODE_GROUND;
                 continue;
             }
-            SetScriptVarValue(NULL, DUNGEON_ENTER, dungId);
+            SetScriptVarValue(NULL, DUNGEON_ENTER, scriptDungeonId);
             sUnknown_203B03C = 2;
             sub_800A8F8(4);
             r5 = xxx_script_related_8001334(5);
@@ -1025,7 +1025,7 @@ static u8 sub_8001170(void)
     u8 dungeonID = NUM_DUNGEONS + 1;
 
     if (sub_80992E0(&local_10, &auStack_e))
-        dungeonID = sub_80A2740(local_10);
+        dungeonID = ScriptDungeonIdToDungeonId(local_10);
     else if (!sub_8099328(&dungeonID) && !sub_8099360(&dungeonID) && sub_8099394(&auStack_b))
         dungeonID = DUNGEON_OUT_ON_RESCUE;
 

@@ -1918,7 +1918,7 @@ s32 ExecuteScriptCommand(Action *action)
                         break;
                     }
                     case 10: {
-                        u8 a = sub_80A2740((s16)curCmd.arg1);
+                        u8 a = ScriptDungeonIdToDungeonId((s16)curCmd.arg1);
                         s32 o = 0;
                         switch ((s16)curCmd.arg1) {
                             case 0: o = 1; break;
@@ -3146,7 +3146,7 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             }
             return 0;
         case 0xB:
-            return (CountJobsinDungeon(sub_80A2740(GetScriptVarValue(0, DUNGEON_ENTER_INDEX))) > 0);
+            return (CountJobsinDungeon(ScriptDungeonIdToDungeonId(GetScriptVarValue(0, DUNGEON_ENTER_INDEX))) > 0);
         case 0xC:
             {
                 u8 sp_104;

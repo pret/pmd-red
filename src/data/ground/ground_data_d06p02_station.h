@@ -52,7 +52,7 @@ static const struct ScriptCommand s_gs189_g0_s0_evt0_sref_script[] = { /* 0x823a
   LABEL(0), /* = 0x00 */
     TEXTBOX_CLEAR,
     BGM_FADEOUT(60),
-    NEXT_DUNGEON(30, 0x00000008),
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_MT_THUNDER_PEAK),
     COND_EQUAL(-1, /* to label */ 1),
     HALT,
 };

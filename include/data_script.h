@@ -1,7 +1,7 @@
 #include "constants/event_flag.h"
 #include "constants/item.h"
 #include "constants/ground_map.h"
-#include "constants/dungeon.h"
+#include "constants/script_dungeon_id.h"
 #include "portrait_placement.h"
 #include "structs/str_ground_script.h"
 #define LPARRAY(x) (ARRAY_COUNT(x)), x
@@ -10,7 +10,7 @@
 #define CPOS_CURRENT  0x4
 
 // 01..07: complex map/dungeon selection/check commands
-#define NEXT_DUNGEON(u, d)      { 0x02, 0, u, d, 0, NULL } // Seems to be a general command for setting up which dungeon to enter next. First argument is unknown.
+#define NEXT_DUNGEON(u, d)      { 0x02, 0, u, d, 0, NULL } // Seems to be a general command for setting up which dungeon to enter next. First argument is unknown. The second argument is script dungeon id(not the one in dungeon/constants.h). There's a different ordering and a table with the proper dungeon id.
 
 #define SELECT_MAP(m)           { 0x08, 0, 0, m, 0, NULL }
 #define SELECT_GROUND(m)        { 0x09, 0, 0, m, 0, NULL }

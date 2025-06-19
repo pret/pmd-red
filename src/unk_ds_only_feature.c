@@ -9,6 +9,7 @@
 #include "code_80A26CC.h"
 #include "constants/ground_map.h"
 #include "constants/friend_area.h"
+#include "constants/dungeon.h"
 
 // This file effectively does nothing on GBA. If I were to guess I'd say it's bottom/top screen related.
 
@@ -25,7 +26,7 @@ struct unkStruct_3001B68
      s16 mapId;
      s16 groundPlaceId;
      u8  friendAreaId;
-     u8  unk19;
+     u8  dungeonId;
      u32 unk1C;
      u8  unk20;
 };
@@ -58,7 +59,7 @@ void sub_809C5C4(void)
     sUnknown_3001B68->mapId = -1;
     sUnknown_3001B68->groundPlaceId = GROUND_PLACE_DIRECTION;
     sUnknown_3001B68->friendAreaId = 0;
-    sUnknown_3001B68->unk19 = 0x3f;
+    sUnknown_3001B68->dungeonId = DUNGEON_OUT_ON_RESCUE;
     sUnknown_3001B68->unk1C = 0;
     sUnknown_3001B68->unk20 = 0;
     nullsub_107();
@@ -164,8 +165,8 @@ void sub_809C760(void)
 void sub_809C770(s16 mapId_, s16 groundPlaceId_)
 {
     u8 friendAreaId;
-    u8 uVar3;
-    s32 iVar5;
+    u8 dungeonId;
+    s32 scriptDungeonId;
     u32 uVar6;
     s32 mapId = mapId_;
     s32 groundPlaceId = groundPlaceId_;
@@ -178,7 +179,7 @@ void sub_809C770(s16 mapId_, s16 groundPlaceId_)
         sub_809C6EC();
     }
     friendAreaId = sUnknown_3001B68->friendAreaId;
-    uVar3 = sUnknown_3001B68->unk19;
+    dungeonId = sUnknown_3001B68->dungeonId;
     switch (groundPlaceId) {
         case GROUND_PLACE_FRIEND_AREAS:
             friendAreaId = MapIdToFriendAreaId(mapId);
@@ -226,52 +227,52 @@ void sub_809C770(s16 mapId_, s16 groundPlaceId_)
         default:
             switch((s16)(groundPlaceId)) {
                 case GROUND_PLACE_TINY_WOODS:
-                    iVar5 = 0;
+                    scriptDungeonId = 0;
                     break;
                 case GROUND_PLACE_MT_THUNDER:
                 case GROUND_PLACE_MT_THUNDER_MID:
-                    iVar5 = 7;
+                    scriptDungeonId = 7;
                     break;
                 case GROUND_PLACE_GREAT_CANYON:
                 case GROUND_PLACE_HILL_OF_THE_ANCIENTS:
-                    iVar5 = 9;
+                    scriptDungeonId = 9;
                     break;
                 case GROUND_PLACE_LAPIS_CAVE:
-                    iVar5 = 10;
+                    scriptDungeonId = 10;
                     break;
                 case GROUND_PLACE_MT_BLAZE:
                 case GROUND_PLACE_MT_BLAZE_MID:
-                    iVar5 = 0xb;
+                    scriptDungeonId = 0xb;
                     break;
                 case GROUND_PLACE_FROSTY_FOREST:
                 case GROUND_PLACE_FROSTY_CLEARING:
-                    iVar5 = 0xd;
+                    scriptDungeonId = 0xd;
                     break;
                 case GROUND_PLACE_MT_FREEZE:
                 case GROUND_PLACE_MT_FREEZE_MID:
-                    iVar5 = 0xf;
+                    scriptDungeonId = 0xf;
                     break;
                 case GROUND_PLACE_MAGMA_CAVERN:
                 case GROUND_PLACE_MAGMA_CAVERN_MID:
-                    iVar5 = 0x11;
+                    scriptDungeonId = 0x11;
                     break;
                 case GROUND_PLACE_SKY_TOWER:
                 case GROUND_PLACE_SKY_TOWER_MID:
-                    iVar5 = 0x13;
+                    scriptDungeonId = 0x13;
                     break;
                 case GROUND_PLACE_WESTERN_CAVE:
-                    iVar5 = 0x20;
+                    scriptDungeonId = 0x20;
                     break;
                 case GROUND_PLACE_DUNGEON:
                 default:
-                    iVar5 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
+                    scriptDungeonId = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
                     break;
 
             }
-            if (iVar5 == -1) {
+            if (scriptDungeonId == -1) {
                 return;
             }
-            uVar3 = sub_80A2740(iVar5);
+            dungeonId = ScriptDungeonIdToDungeonId(scriptDungeonId);
             uVar6 = 2;
             break;
     }
@@ -294,7 +295,7 @@ void sub_809C770(s16 mapId_, s16 groundPlaceId_)
             }
         }
         else if (uVar6 == 2 &&
-            (uVar3 != sUnknown_3001B68->unk19 || (sUnknown_3001B68->groundPlaceId != groundPlaceId)))
+            (dungeonId != sUnknown_3001B68->dungeonId || (sUnknown_3001B68->groundPlaceId != groundPlaceId)))
         {
             sUnknown_3001B68->unkC = 1;
             sUnknown_3001B68->unk20 = 1;
@@ -306,7 +307,7 @@ void sub_809C770(s16 mapId_, s16 groundPlaceId_)
         sUnknown_3001B68->mapId = mapId;
         sUnknown_3001B68->groundPlaceId = groundPlaceId;
         sUnknown_3001B68->friendAreaId = friendAreaId;
-        sUnknown_3001B68->unk19 = uVar3;
+        sUnknown_3001B68->dungeonId = dungeonId;
         if (sUnknown_3001B68->unk8 != 4) {
             sUnknown_3001B68->unkC = 0;
             sUnknown_3001B68->unk20 = 0;
