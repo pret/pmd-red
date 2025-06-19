@@ -1422,13 +1422,13 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x02: {
-                s32 arg = (s16)curCmd.arg1;
-                if (arg == -1) arg = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
+                s32 dungeonId = (s16)curCmd.arg1;
+                if (dungeonId == -1) dungeonId = (s16)GetScriptVarValue(NULL, DUNGEON_ENTER);
                 if (ScriptLoggingEnabled(TRUE)) {
-                    Log(1, "    dungeon select %3d", arg);
+                    Log(1, "    dungeon select %3d", dungeonId);
                 }
-                if (arg != -1) {
-                    GroundMainRescueRequest(arg, curCmd.argShort);
+                if (dungeonId != -1) {
+                    GroundMainRescueRequest(dungeonId, curCmd.argShort);
                     action->scriptData.script.ptr = ResolveJump(action, 1);
                 } else {
                     action->scriptData.script.ptr = ResolveJump(action, 0);
@@ -1959,7 +1959,7 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x39: {
-                if ((s8)sub_809AF6C(curCmd.argShort, curCmd.argPtr) && curCmd.argShort >= 0) {
+                if ((s8)ScriptPrintTextOnBgAuto(curCmd.argShort, curCmd.argPtr) && curCmd.argShort >= 0) {
                     sub_80A87AC(0, 10);
                     if (GroundScriptCheckLockCondition(action, 0)) return 2;
                 }

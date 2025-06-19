@@ -60,11 +60,11 @@ static const struct ScriptCommand s_gs202_g0_s0_evt0_sref_script[] = { /* 0x8255
     TEXTBOX_CLEAR,
     BGM_FADEOUT(60),
     JUMPIF_ARRAY(RESCUE_SCENARIO_JOB_LIST, 29, /* to label */ 2),
-    { 0x02, 0x00,  0x001e,  0x00000010,  0x00000000, NULL },
+    NEXT_DUNGEON(30, 0x00000010),
     COND_EQUAL(-1, /* to label */ 1),
     HALT,
   LABEL(2), /* = 0x02 */
-    { 0x02, 0x00,  0x001e,  0x00000026,  0x00000000, NULL },
+    NEXT_DUNGEON(30, 0x00000026),
     COND_EQUAL(-1, /* to label */ 1),
     HALT,
 };

@@ -592,25 +592,21 @@ bool8 sub_8098DCC(u32 speed)
     return FALSE;
 }
 
-bool8 GroundMainRescueRequest(s32 r0, s32 r1)
+bool8 GroundMainRescueRequest(s32 dungeonId_, s32 r1)
 {
-    s32 r2 = (s16) r0;
-    s32 r5 = r2;
-    if(gUnknown_20398A8 == 0)
-    {
-        Log(0, "GroundMain recue request %3d %3d", r2, r1);
-        if(gUnknown_203B49D != 0)
-        {
+    // Needed to match
+    s32 dungeonId = (s16) dungeonId_;
+    s32 _dungeonId = dungeonId;
+    if (gUnknown_20398A8 == 0) {
+        Log(0, "GroundMain recue request %3d %3d", dungeonId, r1);
+        if (gUnknown_203B49D != 0) {
             gUnknown_20398A8 = 7;
         }
-        else
-        {
-            if(!gUnknown_203B49C)
-            {
-                gUnknown_20398C4 = r5;
+        else {
+            if (!gUnknown_203B49C) {
+                gUnknown_20398C4 = _dungeonId;
             }
-            switch(sub_80A2750(gUnknown_20398C4))
-            {
+            switch (sub_80A2750(gUnknown_20398C4)) {
                 case 4: gUnknown_20398A8 = 8; break;
                 case 1: gUnknown_20398A8 = 5; break;
                 case 2: gUnknown_20398A8 = 6; break;

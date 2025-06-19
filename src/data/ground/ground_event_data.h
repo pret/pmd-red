@@ -1995,7 +1995,7 @@ static const struct ScriptCommand s_script_EVENT_M01E02B_L004B[] = { /* 0x81256f
 static const struct ScriptCommand s_script_EVENT_M01E02B_L005[] = { /* 0x8125730 */
     DEBUGINFO,
     EXECUTE_SUBSTATION(182, 1, 0),
-    { 0x02, 0x00,  0x0000,  0x00000002,  0x00000000, NULL },
+    NEXT_DUNGEON(0, 0x00000002),
     RET,
 };
 
@@ -2008,7 +2008,7 @@ static const struct ScriptCommand s_script_EVENT_M01E02B_L006[] = { /* 0x8125770
 static const struct ScriptCommand s_script_EVENT_M01E02B_L007[] = { /* 0x81257a0 */
     DEBUGINFO,
     EXECUTE_SUBSTATION(182, 2, 0),
-    { 0x02, 0x00,  0x0000,  0x00000002,  0x00000000, NULL },
+    NEXT_DUNGEON(0, 0x00000002),
     RET,
 };
 
@@ -2168,7 +2168,7 @@ static const struct ScriptCommand s_script_EVENT_M01E04A_L004[] = { /* 0x8125de0
 
 static const struct ScriptCommand s_script_EVENT_M01E04A_L005[] = { /* 0x8125e20 */
     DEBUGINFO,
-    { 0x02, 0x00,  0x001e,  0x00000006,  0x00000000, NULL },
+    NEXT_DUNGEON(30, 0x00000006),
     RET,
 };
 
@@ -3842,7 +3842,7 @@ static const struct ScriptCommand s_script_EVENT_S09E01A_L004[] = { /* 0x812a2f4
 static const struct ScriptCommand s_script_EVENT_S09E01A_L004B[] = { /* 0x812a344 */
     DEBUGINFO,
     EXECUTE_SUBSTATION(201, 6, 0),
-    { 0x02, 0x00,  0x0000,  0x00000025,  0x00000000, NULL },
+    NEXT_DUNGEON(0, 0x00000025),
     RET,
 };
 
@@ -3876,7 +3876,7 @@ static const struct ScriptCommand s_script_EVENT_S09E01B_L001[] = { /* 0x812a454
 static const struct ScriptCommand s_script_EVENT_S09E01B_L001B[] = { /* 0x812a4a4 */
     DEBUGINFO,
     EXECUTE_SUBSTATION(221, 1, 0),
-    { 0x02, 0x00,  0x0000,  0x00000027,  0x00000000, NULL },
+    NEXT_DUNGEON(0, 0x00000027),
     RET,
 };
 
@@ -4026,7 +4026,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E02B[] = { /* 0x812ab34 */
     JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E02B_L006),
   LABEL(6), /* = 0x06 */
-    { 0x02, 0x00, -0x0001,  0x00000003,  0x00000000, NULL },
+    NEXT_DUNGEON(-1, 3),
     HALT,
   LABEL(1), /* = 0x01 */
     JUMPIF_EQUAL(SCENARIO_MAIN, 4, /* to label */ 7),
@@ -4050,7 +4050,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E02B[] = { /* 0x812ab34 */
   LABEL(11), /* = 0x0b */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(12), /* = 0x0c */
-    { 0x02, 0x00, -0x0001,  0x00000003,  0x00000000, NULL },
+    NEXT_DUNGEON(-1, 3),
     HALT,
   LABEL(3), /* = 0x03 */
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -4074,7 +4074,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E03A[] = { /* 0x812ae04 */
     JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E03A_L009),
   LABEL(6), /* = 0x06 */
-    { 0x02, 0x00, -0x0001,  0x00000005,  0x00000000, NULL },
+    NEXT_DUNGEON(-1, 5),
     HALT,
   LABEL(1), /* = 0x01 */
     JUMPIF_EQUAL(SCENARIO_MAIN, 5, /* to label */ 7),
@@ -4098,7 +4098,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E03A[] = { /* 0x812ae04 */
   LABEL(11), /* = 0x0b */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(12), /* = 0x0c */
-    { 0x02, 0x00, -0x0001,  0x00000005,  0x00000000, NULL },
+    NEXT_DUNGEON(-1, 5),
     HALT,
   LABEL(3), /* = 0x03 */
     JUMP_SCRIPT(EVENT_DIVIDE),

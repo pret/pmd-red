@@ -26,7 +26,7 @@
 
 static const struct ScriptCommand s_gs178_g0_s0_station_sref_script[] = { /* 0x822c248 */
     DEBUGINFO,
-    SELECT_MAP(178),
+    SELECT_MAP(MAP_TINY_WOODS_ENTRY),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
 };
@@ -39,7 +39,7 @@ static const struct ScriptCommand s_gs178_g1_s0_station_sref_script[] = { /* 0x8
     BGM_STOP,
     { 0x23, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x26, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
-    SELECT_MAP(178),
+    SELECT_MAP(MAP_TINY_WOODS_ENTRY),
     WAIT(100),
     MSG_ON_BG_AUTO(30, _("{CENTER_ALIGN}Where am I?")),
     MSG_ON_BG_AUTO(30, _("{CENTER_ALIGN}Am I dreaming this?")),
@@ -64,7 +64,7 @@ static const struct ScriptCommand s_gs178_g1_s0_station_sref_script[] = { /* 0x8
     { 0x3b, 0x39,  0x0004,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     BGM_FADEOUT(30),
-    { 0x02, 0x00,  0x001e,  0x00000000,  0x00000000, NULL },
+    NEXT_DUNGEON(30, DUNGEON_TINY_WOODS),
     RET,
 };
 
@@ -360,7 +360,7 @@ static const struct ScriptCommand s_gs178_g2_s0_station_sref_script[] = { /* 0x8
     { 0x3b, 0x39,  0x0001,  0x00000000,  0x00000000, NULL },
     BGM_STOP,
     WAIT(60),
-    SELECT_MAP(178),
+    SELECT_MAP(MAP_TINY_WOODS_ENTRY),
     { 0x2d, 0x09,  0x0000,  0x00000035,  0x00000000, NULL },
     { 0x2e, 0x0b,  0x0000, -0x00000002,  0x00000000, NULL },
     MSG_NPC(0, _(" ...Hello?{WAIT_PRESS}\nHello!")),
@@ -369,7 +369,7 @@ static const struct ScriptCommand s_gs178_g2_s0_station_sref_script[] = { /* 0x8
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     { 0x3b, 0x39,  0x0004,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    { 0x02, 0x00,  0x001e,  0x00000000,  0x00000000, NULL },
+    NEXT_DUNGEON(30, DUNGEON_TINY_WOODS),
     RET,
 };
 
@@ -517,7 +517,7 @@ static const struct ScriptCommand s_gs178_g2_s0_lives2_dlg0[] = { /* 0x822e89c -
 static const struct ScriptCommand s_gs178_g3_s0_station_sref_script[] = { /* 0x822e95c - PART 1 0:17:17-0:18:51 - Post-Tiny Woods cutscene */
     DEBUGINFO,
     { 0x3b, 0x39,  0x0004,  0x00000000,  0x00000000, NULL },
-    SELECT_MAP(178),
+    SELECT_MAP(MAP_TINY_WOODS_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(103),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },

@@ -169,7 +169,7 @@ static const struct ScriptCommand s_gs207_g2_s0_station_sref_script[] = { /* 0x8
     BGM_SWITCH(22),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    { 0x02, 0x00,  0x001e,  0x00000013,  0x00000000, NULL },
+    NEXT_DUNGEON(30, 0x00000013),
     RET,
 };
 
@@ -235,7 +235,7 @@ static const struct ScriptCommand s_gs207_g3_s0_station_sref_script[] = { /* 0x8
     BGM_SWITCH(22),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    { 0x02, 0x00,  0x001e,  0x00000013,  0x00000000, NULL },
+    NEXT_DUNGEON(30, 0x00000013),
     RET,
 };
 

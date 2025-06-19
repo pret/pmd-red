@@ -640,15 +640,15 @@ bool8 sub_809AB4C(s32 a0_, s32 a1_)
     }
 }
 
-bool8 sub_809ABB4(s32 a0_, s32 a1_)
+bool8 sub_809ABB4(s32 id_, s32 a1_)
 {
-    s32 a0 = (s16) a0_;
+    s32 id = (s16) id_;
     s32 a1 = (s16) a1_;
-    struct TextboxPortrait *portrait = &sTextbox->portraits[a0];
+    struct TextboxPortrait *portrait = &sTextbox->portraits[id];
 
-    if (sub_809A8B8(a0, a1)) {
-        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[a0], portrait->speciesID);
-        strcpy(gFormatBuffer_Names[a0], gFormatBuffer_Monsters[a0]);
+    if (sub_809A8B8(id, a1)) {
+        CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[id], portrait->speciesID);
+        strcpy(gFormatBuffer_Names[id], gFormatBuffer_Monsters[id]);
         return TRUE;
     }
     else {
@@ -837,7 +837,7 @@ bool8 ScriptPrintTextOnBg2(const char *text)
     }
 }
 
-bool8 sub_809AF6C(s32 unused, const char *text)
+bool8 ScriptPrintTextOnBgAuto(s32 unused, const char *text)
 {
     if (text == NULL) {
         return ScriptClearTextbox();
