@@ -23,5 +23,8 @@ void ResetTextboxPortrait(s16 id_);
 bool8 ScriptSetPortraitInfo(s32 portraitId_, s32 spriteId_, s32 placementId_);
 bool8 ScriptSetPortraitPosDelta(s32 portraitId_, PixelPos *newPosDelta);
 bool8 ScriptPrintText(s32 scriptMsgType, s32 speakerId_, const char *text);
+bool8 ScriptPrintTextOnBg(const char *text);
+bool8 ScriptPrintTextOnBg2(const char *text);
+bool8 sub_809AF6C(s32 unused, const char *text);
 
 #endif // GUARD_WONDER_MAIL_H

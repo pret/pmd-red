@@ -49,6 +49,9 @@
 #define MSG_INSTANT(msg)               { 0x32, 0, -1, 0, 0, msg }
 #define MSG_NPC(id, msg)               { 0x34, 0, id, 0, 0, msg } // ID is portrait id of the npc. -1 means no portrait
 #define MSG_LETTER(msg)                { 0x35, 0, -1, 0, 0, msg }
+#define MSG_ON_BG(msg)                 { 0x37, 0, -1, 0, 0, msg } // Prints raw text on bg without any windows. Used for the intro portal messages. To advance the text player needs to press a button.
+#define MSG_ON_BG2(msg)                { 0x38, 0, -1, 0, 0, msg } // Identical to the above, used literally once for just a newline.
+#define MSG_ON_BG_AUTO(u, msg)         { 0x39, 0, u, 0, 0, msg } // Similar to the above, but the message appears and fades automatically, without any player's input. Used for narration text. The short argument isn't really used, but needs to be greater than 0.
 // 3a: yes/no choice (only used for saving)
 // 3b: uber command (conditional jump)
 // 3c: unknown textbox-related cjump

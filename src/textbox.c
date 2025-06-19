@@ -73,6 +73,8 @@ struct unkStruct_3001B64_unk418
 
 enum {
     TEXTBOX_TYPE_NORMAL = 1,
+    TEXTBOX_TYPE_ON_BG_PRESS, // Prints text on a bg without window, waits for the player button press
+    TEXTBOX_TYPE_ON_BG_AUTO, // Prints text on a bg, waits 32 frames and then fades out the text
 };
 
 struct Textbox
@@ -301,7 +303,7 @@ EWRAM_DATA u16 gUnknown_20399DE = 0;
 
 static void ResetAllTextboxPortraits(void);
 static bool8 ScriptPrintTextInternal(struct TextboxText *ptr, u32 flags_, s32 a2_, const char *text);
-static u32 ResetTextboxType(u32 textboxType, bool8 unused);
+static u32 SetTextboxType(u32 textboxType, bool8 unused);
 static void ResetTextbox(void);
 
 void TextboxInit(void)
@@ -349,10 +351,10 @@ void TextboxResetAll(void)
         ResetTextboxPortrait(index);
     }
     sTextbox->unk414 = 0;
-    ResetTextboxType(0, TRUE);
+    SetTextboxType(0, TRUE);
 }
 
-static u32 ResetTextboxType(u32 textboxType, bool8 unused)
+static u32 SetTextboxType(u32 textboxType, bool8 unused)
 {
     switch (textboxType) {
         case 0:
@@ -362,10 +364,10 @@ static u32 ResetTextboxType(u32 textboxType, bool8 unused)
         case TEXTBOX_TYPE_NORMAL:
             ResetTextbox();
             break;
-        case 2:
+        case TEXTBOX_TYPE_ON_BG_PRESS:
             ResetTextbox();
             break;
-        case 3:
+        case TEXTBOX_TYPE_ON_BG_AUTO:
             ResetTextbox();
             break;
         case 4:
@@ -427,13 +429,13 @@ u32 sub_809A768(void)
 bool8 ScriptClearTextbox(void)
 {
     switch (sTextbox->type) {
-        case 3:
+        case TEXTBOX_TYPE_ON_BG_AUTO:
             return ScriptPrintTextInternal(&sTextbox->text,4,-1,0);
-        case 1:
-        case 2:
-            return ScriptPrintTextInternal(&sTextbox->text,0x84,-1,0);
+        case TEXTBOX_TYPE_NORMAL:
+        case TEXTBOX_TYPE_ON_BG_PRESS:
+            return ScriptPrintTextInternal(&sTextbox->text,TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | 0x4,-1,0);
         default:
-            ResetTextboxType(0, TRUE);
+            SetTextboxType(0, TRUE);
             return FALSE;
     }
 }
@@ -441,12 +443,12 @@ bool8 ScriptClearTextbox(void)
 bool8 ScriptClearTextbox2(void)
 {
     switch (sTextbox->type) {
-        case 3:
-        case 1:
-        case 2:
+        case TEXTBOX_TYPE_ON_BG_AUTO:
+        case TEXTBOX_TYPE_NORMAL:
+        case TEXTBOX_TYPE_ON_BG_PRESS:
             return ScriptPrintTextInternal(&sTextbox->text,4,-1,0);
         default:
-            ResetTextboxType(0, TRUE);
+            SetTextboxType(0, TRUE);
             return FALSE;
     }
 }
@@ -801,13 +803,13 @@ bool8 ScriptPrintText(s32 scriptMsgType, s32 speakerId_, const char *text)
         return ScriptClearTextbox2();
     }
     else {
-        ResetTextboxType(sScriptTextboxTypes[scriptMsgType], FALSE);
+        SetTextboxType(sScriptTextboxTypes[scriptMsgType], FALSE);
         return ScriptPrintTextInternal(&sTextbox->text, sScriptFlagSets[scriptMsgType], speakerId, text);
     }
 }
 
 // These 2 functions are identical.
-bool8 sub_809AEEC(const char *text)
+bool8 ScriptPrintTextOnBg(const char *text)
 {
     if (text == NULL) {
         return ScriptClearTextbox();
@@ -816,12 +818,12 @@ bool8 sub_809AEEC(const char *text)
         return ScriptClearTextbox();
     }
     else {
-        ResetTextboxType(2, TRUE);
+        SetTextboxType(TEXTBOX_TYPE_ON_BG_PRESS, TRUE);
         return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_UNUSED_x2, -1, text);
     }
 }
 
-bool8 sub_809AF2C(const char *text)
+bool8 ScriptPrintTextOnBg2(const char *text)
 {
     if (text == NULL) {
         return ScriptClearTextbox();
@@ -830,7 +832,7 @@ bool8 sub_809AF2C(const char *text)
         return ScriptClearTextbox();
     }
     else {
-        ResetTextboxType(2, TRUE);
+        SetTextboxType(TEXTBOX_TYPE_ON_BG_PRESS, TRUE);
         return ScriptPrintTextInternal(&sTextbox->text, TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS | TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2 | TEXTBOX_FLAG_UNUSED_x2, -1, text);
     }
 }
@@ -844,7 +846,7 @@ bool8 sub_809AF6C(s32 unused, const char *text)
         return ScriptClearTextbox();
     }
     else {
-        ResetTextboxType(3, TRUE);
+        SetTextboxType(TEXTBOX_TYPE_ON_BG_AUTO, TRUE);
         return ScriptPrintTextInternal(&sTextbox->text, 0x65, -1, text);
     }
 }
@@ -878,7 +880,7 @@ void sub_809B028(const MenuItem * menuItems, s32 a1_, s32 a2, s32 a3, s32 a4_, c
     s32 a1 = (u8) a1_;
     s32 a4 = (s16) a4_;
 
-    ResetTextboxType(sScriptTextboxTypes[a3], FALSE);
+    SetTextboxType(sScriptTextboxTypes[a3], FALSE);
     sTextbox->unk414 = 1;
     sTextbox->unk418 = NULL;
     sTextbox->unk41C = menuItems;
@@ -935,7 +937,7 @@ bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, u8 *a3)
             break;
     }
 
-    ResetTextboxType(4, FALSE);
+    SetTextboxType(4, FALSE);
     sTextbox->unk414 = a0;
     sTextbox->unk418 = NULL;
     sTextbox->unk41C = NULL;
@@ -978,7 +980,7 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
 
         if (flags & 4) {
             sub_8014490();
-            ResetTextboxType(0, TRUE);
+            SetTextboxType(0, TRUE);
         }
         return TRUE;
     }
@@ -993,7 +995,7 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
         }
     }
 
-    if (sTextbox->type == 3) {
+    if (sTextbox->type == TEXTBOX_TYPE_ON_BG_AUTO) {
         sprintfStatic(textboxText->buffer, _("%s#[I]{WAIT_FRAMES 0x20}{0x81}{0x40}{WAIT_PRESS}\n#[O]{WAIT_FRAMES 0x20}{0x81}{0x40}"), text); // #[I] and #[O] are text macros to be documented
         text = textboxText->buffer;
     }
@@ -1001,8 +1003,8 @@ static bool8 ScriptPrintTextInternal(struct TextboxText *textboxText, u32 flags_
     CreateMenuDialogueBoxAndPortrait(text, sub_809B428, -1, NULL, 0, 3, 0, GetSpeakerPortrait(speakerId),
          ((flags & TEXTBOX_FLAG_SPEAKER) ? STR_FORMAT_FLAG_SPEAKER_NAME | STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
          | ((flags & TEXTBOX_FLAG_DIALOGUE_SOUND) ? STR_FORMAT_FLAG_DIALOGUE_SOUND : 0)
-         | ((sTextbox->type == 3) ? STR_FORMAT_FLAG_ONLY_TEXT : 0)
-         | ((sTextbox->type == 2) ? STR_FORMAT_FLAG_ONLY_TEXT : 0)
+         | ((sTextbox->type == TEXTBOX_TYPE_ON_BG_AUTO) ? STR_FORMAT_FLAG_ONLY_TEXT : 0)
+         | ((sTextbox->type == TEXTBOX_TYPE_ON_BG_PRESS) ? STR_FORMAT_FLAG_ONLY_TEXT : 0)
          | ((flags & TEXTBOX_FLAG_INSTANT_TEXT) ? STR_FORMAT_FLAG_INSTANT_TEXT : 0)
          | ((flags & TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS_2) ? STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS_2 : 0)
          | ((flags & TEXTBOX_FLAG_WAIT_FOR_BUTTON_PRESS) ? STR_FORMAT_FLAG_WAIT_FOR_BUTTON_PRESS : 0)
@@ -1063,7 +1065,7 @@ void sub_809B474(void)
                 case 1:
                     if (!sub_809B648()) {
                         sTextbox->unk420 = 3;
-                        ResetTextboxType(0, TRUE);
+                        SetTextboxType(0, TRUE);
                         break;
                     }
 
@@ -1074,7 +1076,7 @@ void sub_809B474(void)
                             if (!unkStructPtr->unk4()) {
                                 sTextbox->unk430 = -1;
                                 sTextbox->unk420 = 3;
-                                ResetTextboxType(0, TRUE);
+                                SetTextboxType(0, TRUE);
                                 break;
                             }
                         }
@@ -1098,7 +1100,7 @@ void sub_809B474(void)
                         break;
                     }
                     sTextbox->unk420 = 3;
-                    ResetTextboxType(0, TRUE);
+                    SetTextboxType(0, TRUE);
                     break;
             }
             break;

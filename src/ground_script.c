@@ -84,9 +84,6 @@ void sub_80975A8(s16, bool8);
 u32 sub_809A6E4();
 u32 sub_809A6F8();
 u32 sub_809A768();
-bool8 sub_809AEEC(const char*);
-bool8 sub_809AF2C(const char*);
-bool8 sub_809AF6C(s16, const char*);
 void sub_809AFC8(bool8, s32, s32, const char*);
 u32 sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
 bool8 sub_809B1C0(s32, s32, char[12]);
@@ -1952,8 +1949,8 @@ s32 ExecuteScriptCommand(Action *action)
                     case 0x34: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_NPC, curCmd.argShort, curCmd.argPtr); break;
                     case 0x35: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_LETTER, curCmd.argShort, curCmd.argPtr); break;
                     case 0x36: ret = ScriptPrintText(SCRIPT_TEXT_TYPE_4, curCmd.argShort, curCmd.argPtr); break;
-                    case 0x37: ret = sub_809AEEC(curCmd.argPtr); break;
-                    case 0x38: ret = sub_809AF2C(curCmd.argPtr); break;
+                    case 0x37: ret = ScriptPrintTextOnBg(curCmd.argPtr); break;
+                    case 0x38: ret = ScriptPrintTextOnBg2(curCmd.argPtr); break;
                 }
                 if (ret) {
                     sub_80A87AC(0, 10);
