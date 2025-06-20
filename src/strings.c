@@ -202,7 +202,7 @@ const u8 *const gAbilityNames[NUM_ABILITIES] = {
     [ABILITY_SHIELD_DUST] = _("Shield Dust"),
 };
 
-const u8 *const AbilityDescriptions[NUM_ABILITIES] = {
+const u8 *const gAbilityDescriptions[NUM_ABILITIES] = {
     [ABILITY_UNKNOWN] = _("{color RED}-------"),
     [ABILITY_STENCH] = _("{color RED}Stench{reset}: May terrify an\nattacking foe."),
     [ABILITY_THICK_FAT] = _("{color RED}Thick Fat{reset}: Resistant to\nFire- and Ice-type moves."),
@@ -334,7 +334,7 @@ const u8 *const gRangeNames[49] = {
     [48] = _("48"),
 };
 
-const u8 *const gUnknown_810CF00 = _("Range{UNK_MACRO_3D M3D_64}{POKEMON_0} ");
+const u8 *const gUnknown_810CF00 = _("Range{MOVE_X_POSITION_BY_64}{POKEMON_0} ");
 const u8 *const gTextType = _("Type");
 const u8 *const gTextPower = _("Power");
 const u8 *const gStatusNames[89] = {
@@ -731,7 +731,7 @@ const DungeonName gDungeonNames[NUM_DUNGEONS] = {
     [DUNGEON_D54] = { _("D54"), _("D54")},
     [DUNGEON_POISON_MAZE] = { _("Fantasy Strait"), _("Fantasy Strait")},
     [DUNGEON_WATERFALL_POND] = { _("Waterfall Pond"), _("Waterfall Pond")},
-    [DUNGEON_UNKNOWN_RELIC] = { _("Unown Relic"), _("Unown Relic")},
+    [DUNGEON_UNOWN_RELIC] = { _("Unown Relic"), _("Unown Relic")},
     [DUNGEON_JOYOUS_TOWER] = { _("Joyous Tower"), _("Joyous Tower")},
     [DUNGEON_FAR_OFF_SEA] = { _("Far-off Sea"), _("Far-off Sea")},
     [DUNGEON_MT_FARAWAY] = { _("Mt. Faraway"), _("Mt. Faraway")},
@@ -918,7 +918,7 @@ const struct unkStruct_8113080 gSpecialDeathTexts[55] = {
 };
 
 const u8 *const gText_DeathToMove = _("{POKEMON_0}'s {MOVE_ITEM_0}.");
-const u8 *const gUnknown_8113850 = _("{CENTER_ALIGN}Place: {POKEMON_0}");
+const u8 *const gText_AlignPlaceX = _("{CENTER_ALIGN}Place: {POKEMON_0}");
 const u8 *const gText_Pokemon1WasDefeatedBy = _("{POKEMON_1} was defeated by");
 const u8 *const gText_Pokemon1 = _("{POKEMON_1}");
 const u8 *const gUnknown_8113898 = _("Level {UNK_MACRO_3E M3E_42}{VALUE_1}{UNK_MACRO_3E M3E_64}Exp. Pts. {VALUE_0} ");
@@ -933,7 +933,7 @@ const u8 *const gUnknown_8113974 = _("{UNK_MACRO_3E M3E_80}Defense{UNK_MACRO_3E 
 const u8 *const gUnknown_8113990 = _("Sp. Atk.{UNK_MACRO_3E M3E_42}{color RED}{VALUE_0}{reset}  ");
 const u8 *const gUnknown_81139B4 = _("{UNK_MACRO_3E M3E_80}Sp. Def.{UNK_MACRO_3E M3E_128}{color RED}{VALUE_1}{reset}  ");
 const u8 *const gUnknown_81139B8 = _("None");
-const u8 *const gUnknown_81139CC = _("Item:{UNK_MACRO_3E M3E_42}{MOVE_ITEM_0} ");
+const u8 *const gText_ItemAlignedX = _("Item:{UNK_MACRO_3E M3E_42}{MOVE_ITEM_0} ");
 const u8 *const gFriendAreaNames[NUM_FRIEND_AREAS] = {
     [FRIEND_AREA_NONE] = _("None"),
     [BOUNTIFUL_SEA] = _("Bountiful Sea"),

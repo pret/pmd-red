@@ -111,7 +111,7 @@ typedef struct GroundBg
     OpenedFile *unk438;
     OpenedFile *unk43C;
     OpenedFile *unk440;
-    s16 unk444;
+    s16 mapFileId;
     SubStruct_448 unk448;
     SubStruct_545 unk454;
     s16 unk464[2];

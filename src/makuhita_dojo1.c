@@ -1,11 +1,11 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/colors.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B60C.h"
 #include "code_80A26CC.h"
 #include "common_strings.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "input.h"
 #include "makuhita_dojo1.h"
 #include "makuhita_dojo2.h"
@@ -193,7 +193,7 @@ static void MakuhitaDojo_UpdateDialogue(void)
             break;
         case 5:
             sMakuhitaDojoWork1->fallbackState = 13;
-            dLoc.id = sub_80A2740(sMakuhitaDojoWork1->unk10);
+            dLoc.id = ScriptDungeonIdToDungeonId(sMakuhitaDojoWork1->unk10);
             dLoc.floor = 1;
             PrintYellowDungeonNametoBuffer(gFormatBuffer_Monsters[0], &dLoc);
             CreateDialogueBoxAndPortrait(gCommonMakuhita[sMakuhitaDojoWork1->dlgMode][MAKUHITA_DLG_4], 0, sMakuhitaDojoWork1->monPortraitPtr, 0x10D);

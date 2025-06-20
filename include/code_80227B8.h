@@ -18,7 +18,7 @@ typedef struct unkStruct_203B294
     /* 0x3C */ s32 availIQSkillPostGummi;
     s32 unk40; // Gummi eaten flag?
     /* 0x44 */ Gummi gummi;
-    /* 0x48 */ PokemonStruct1 *pokeStruct;
+    /* 0x48 */ Pokemon *pokeStruct;
     /* 0x4C */ u32 itemIndex;
     /* 0x50 */ Item item;
     MenuStruct unk54;
@@ -29,7 +29,7 @@ typedef struct unkStruct_203B294
     WindowTemplates windows;
 } unkStruct_203B294;
 
-bool8 sub_80227B8(PokemonStruct1 *pkmn);
+bool8 sub_80227B8(Pokemon *pkmn);
 u32 sub_8022860(void);
 void sub_8022908(void);
 

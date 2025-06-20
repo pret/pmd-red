@@ -4,12 +4,12 @@
 #include "dungeon_message_log.h"
 #include "structs/dungeon_entity.h"
 #include "bg_palette_buffer.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800D090.h"
 #include "code_800E9E4.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
 #include "dungeon_music.h"
@@ -35,7 +35,6 @@ static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2);
 extern bool8 sub_8045888(Entity *pokemon);
 extern void sub_805E804(void);
 extern void sub_8083E28(void);
-extern u32 sub_8014140(s32 a0, const void *a1);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 
@@ -234,8 +233,8 @@ void xxx_draw_string_80524F0(void)
             else {
                 const u8 *txtPtr = strPtr->unk0[id];
 
-                sp.unk0 = 4;
-                sp.unk2 = strPtr->unk1C066;
+                sp.x = 4;
+                sp.y = strPtr->unk1C066;
                 sp.unk10 = 7;
                 sub_80073B8(0);
                 if (strPtr->unk1C054[id] != 0 && strPtr->unk1C066 >= 8) {
@@ -243,15 +242,15 @@ void xxx_draw_string_80524F0(void)
                 }
 
                 while (1) {
-                    txtPtr = xxx_handle_format_global(txtPtr, &sp);
+                    txtPtr = HandleSpecialCharFormat(txtPtr, &sp);
                     if (*txtPtr == '\0' || *txtPtr == '\r' || *txtPtr == '\n')
                         break;
-                    txtPtr = xxx_get_next_char_from_string(txtPtr, &currChr);
+                    txtPtr = GetNextCharFromStr(txtPtr, &currChr);
                     if (currChr == '`') {
-                        sp.unk0 += 6;
+                        sp.x += 6;
                     }
                     else {
-                        sp.unk0 += DrawCharOnWindow(sp.unk0, sp.unk2, currChr, sp.unk10, 0);
+                        sp.x += DrawCharOnWindow(sp.x, sp.y, currChr, sp.unk10, 0);
                     }
                 }
                 sub_80073E0(0);
@@ -394,7 +393,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 
     if (leader != NULL) {
         EntityInfo *leaderInfo = GetEntInfo(leader);
-        PokemonStruct2 *monStruct2 = &gRecruitedPokemonRef->pokemon2[leaderInfo->teamIndex];
+        DungeonMon *monStruct2 = &gRecruitedPokemonRef->dungeonTeam[leaderInfo->teamIndex];
 
         sub_808DA0C(gFormatBuffer_Monsters[0], monStruct2);
         leaderId = leaderInfo->apparentID;
@@ -406,7 +405,7 @@ void DisplayDungeonDialogue(const struct DungeonDialogueStruct *dialogueInfo)
 
     if (partner != NULL) {
         EntityInfo *partnerInfo = GetEntInfo(partner);
-        PokemonStruct2 *monStruct2 = &gRecruitedPokemonRef->pokemon2[partnerInfo->teamIndex];
+        DungeonMon *monStruct2 = &gRecruitedPokemonRef->dungeonTeam[partnerInfo->teamIndex];
 
         sub_808DA0C(gFormatBuffer_Monsters[1], monStruct2);
         partnerId = partnerInfo->apparentID;

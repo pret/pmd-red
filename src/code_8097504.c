@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/dungeon.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "code_80A26CC.h"
 #include "code_80972F4.h"

@@ -4,14 +4,15 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
+#include "world_map_sound.h"
 #include "decompress_at.h"
 #include "decompress_sir.h"
 #include "def_filearchives.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "friend_area.h"
 #include "game_options.h"
 #include "input.h"
@@ -25,8 +26,6 @@
 #include "text_3.h"
 #include "world_map.h"
 
-extern void sub_801178C(void);
-extern void sub_80117C4(void);
 extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void CopyDungeonName1toBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 
@@ -81,7 +80,7 @@ void ShowWorldMap_Async(struct WorldMapSetupStruct *setupPtr)
     UpdateFadeInTile(2);
     sub_801059C();
     sub_8010494(&setupPtr->info);
-    sub_801178C();
+    PlayWorldMapBGM();
 
     // 60 frame delay
     for (i = 0; i < 60; i++)
@@ -102,15 +101,15 @@ void ShowWorldMap_Async(struct WorldMapSetupStruct *setupPtr)
         speciesId = 0;
     }
 
-    dungeonEnter = sub_809034C(setupPtr->info.unk4.unk0.id, speciesId, text, setupPtr->info.unk6C, FALSE);
-    if (dungeonEnter == 0) {
+    dungeonEnter = BufferDungeonRequirementsText(setupPtr->info.unk4.unk0.id, speciesId, text, setupPtr->info.unk6C, FALSE);
+    if (dungeonEnter == DUNGEON_REQUIREMENTS_PASS) {
         setupPtr->dungeonEntered = TRUE;
     }
-    else if (dungeonEnter == 1) {
+    else if (dungeonEnter == DUNGEON_REQUIREMENTS_FAIL) {
         PrintDialogueMessage_Async(text);
         setupPtr->dungeonEntered = FALSE;
     }
-    else if (dungeonEnter == 2) {
+    else if (dungeonEnter == DUNGEON_REQUIREMENTS_ASK) {
         if (PlayerEnterDungeonPrompt_Async(text)) {
             setupPtr->dungeonEntered = TRUE;
         }
@@ -183,7 +182,7 @@ static const DungeonPos gDungeonCoordinates[] =
     [DUNGEON_D54] = {474, 6},
     [DUNGEON_POISON_MAZE] = {183, 9},
     [DUNGEON_WATERFALL_POND] = {367, 214},
-    [DUNGEON_UNKNOWN_RELIC] = {278, 273},
+    [DUNGEON_UNOWN_RELIC] = {278, 273},
     [DUNGEON_JOYOUS_TOWER] = {68, 305},
     [DUNGEON_FAR_OFF_SEA] = {270, 33},
     [DUNGEON_MT_FARAWAY] = {33, 39},
@@ -277,7 +276,7 @@ static void sub_801059C(void)
     u8 filename[0xC];
     s32 i, size;
 
-    PokemonStruct1 *pokeStruct = GetPlayerPokemonStruct();
+    Pokemon *pokeStruct = GetPlayerPokemonStruct();
     OpenedFile *file = OpenFileAndGetFileDataPtr(gUnknown_80D4014[0], &gTitleMenuFileArchive);
     OpenedFile *file2 = OpenFileAndGetFileDataPtr(gUnknown_80D4014[1], &gTitleMenuFileArchive);
 
@@ -372,8 +371,8 @@ static void UpdateBg(void)
         y1++;
     }
 
-    sub_80098F8(2);
-    sub_80098F8(3);
+    ScheduleBgTilemapCopy(2);
+    ScheduleBgTilemapCopy(3);
 }
 
 static void nullsub_24(void)
@@ -386,7 +385,7 @@ static void FadeFromWorldMap_Async(void)
     s32 i;
 
     ClearWindows();
-    sub_80117C4();
+    FadeOutWorldMapBGM();
     for (i = 0; i < 60; i++) {
         sWorldMapPtr->brightness -= 2;
         WorldMap_RunFrameActions();
@@ -405,7 +404,7 @@ static void WorldMap_RunFrameActions(void)
     AnimateSprites(TRUE);
     FadeScreen();
     sub_8005838(NULL, 0);
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);
@@ -416,9 +415,9 @@ static void WorldMap_RunFrameActions(void)
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();
     nullsub_24();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     ResetSprites(FALSE);
 }
 
@@ -552,21 +551,21 @@ static bool8 PlayerEnterDungeonPrompt_Async(u8 *str)
     sub_80073E0(1);
 
     menuInput.menuIndex = 1;
-    menuInput.unk1A = 2;
-    menuInput.unk1C = 2;
-    menuInput.unk1E = 0;
-    menuInput.unk20 = 0;
+    menuInput.currPageEntries = 2;
+    menuInput.entriesPerPage = 2;
+    menuInput.currPage = 0;
+    menuInput.pagesCount = 0;
     menuInput.unk4 = 0;
     menuInput.firstEntryY = 0;
-    menuInput.unk0 = 1;
-    menuInput.unkC = 0;
-    menuInput.unkE = 0;
+    menuInput.windowId = 1;
+    menuInput.leftRightArrowsPos.x = 0;
+    menuInput.leftRightArrowsPos.y = 0;
     menuInput.unk14.x = 0;
     menuInput.unk14.y = 0;
-    menuInput.unk8.x = 8;
-    menuInput.unk8.y = 8;
+    menuInput.cursorArrowPos.x = 8;
+    menuInput.cursorArrowPos.y = 8;
     sub_80137B0(&menuInput, 24);
-    sub_801317C(&menuInput.unk28);
+    ResetTouchScreenMenuInput(&menuInput.touchScreen);
 
     while (TRUE) {
         AddMenuCursorSprite(&menuInput);
@@ -580,7 +579,7 @@ static bool8 PlayerEnterDungeonPrompt_Async(u8 *str)
             MoveMenuCursorUp(&menuInput);
             PlayCursorUpDownSoundEffect();
         }
-        if ((gRealInputs.pressed & A_BUTTON) || menuInput.unk28.a_button) {
+        if ((gRealInputs.pressed & A_BUTTON) || menuInput.touchScreen.a_button) {
             PlayAcceptSoundEffect();
             break;
         }

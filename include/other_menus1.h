@@ -25,9 +25,9 @@ typedef struct unkStruct_203B35C
     unkStruct_203B480 unk22C;
     unkStruct_203B480 unk25C;
     unkStruct_203B480 unk28C;
-    PokemonStruct1 unk2BC;
+    Pokemon unk2BC;
     unkStruct_203B480 unk314;
-    PokemonStruct1 unk344;
+    Pokemon unk344;
     u8 unk39C[0xB4]; // unkStruct_803B344?
     u8 unk450[0xB4]; // unkStruct_803B344?
 } unkStruct_203B35C;

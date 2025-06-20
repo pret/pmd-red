@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "other_random.h"
 
 EWRAM_INIT u16 gOtherRngState = {0x348C}; // NDS=020EAC58

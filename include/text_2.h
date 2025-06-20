@@ -19,6 +19,6 @@ void sub_80089AC(const WindowTemplate *r4, DungeonPos *r5_Str);
 u32 DrawCharOnWindow(s32 x, s32 y, u32 chr, u32 color, u32 windowId);
 bool8 xxx_call_update_bg_vram(void);
 u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, u32 windowId);
-const u8 *xxx_get_next_char_from_string(const u8 *a1, u32 *dstChr);
+const u8 *GetNextCharFromStr(const u8 *str, u32 *dstChr);
 
 #endif // GUARD_TEXT_2_H

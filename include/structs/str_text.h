@@ -66,7 +66,7 @@ typedef struct WindowTemplate
 
 #define WINDOW_TYPE_0                0
 #define WINDOW_TYPE_WITHOUT_BORDER   1
-#define WINDOW_TYPE_2                2
+#define WINDOW_TYPE_ONLY_TEXT        2 // No border, no fill, prints pure text on bg
 #define WINDOW_TYPE_NORMAL           3
 #define WINDOW_TYPE_4                4
 #define WINDOW_TYPE_FILL_TRANSPARENT 5

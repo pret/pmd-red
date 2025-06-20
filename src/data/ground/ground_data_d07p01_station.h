@@ -13,7 +13,7 @@
 
 static const struct ScriptCommand s_gs191_g0_s0_station_sref_script[] = { /* 0x823d7dc */
     DEBUGINFO,
-    SELECT_MAP(191),
+    SELECT_MAP(MAP_GREAT_CANYON_ENTRY),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
 };
@@ -22,12 +22,12 @@ static const struct ScriptRef s_gs191_g0_s0_station_sref = { 404, 1, NULL /* ENT
 
 static const struct ScriptCommand s_gs191_g1_s0_station_sref_script[] = { /* 0x823d854 */
     DEBUGINFO,
-    SELECT_MAP(191),
+    SELECT_MAP(MAP_GREAT_CANYON_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(20),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    { 0x02, 0x00,  0x0000,  0x00000009,  0x00000000, NULL },
+    NEXT_DUNGEON(0, SCRIPT_DUNGEON_GREAT_CANYON),
     RET,
 };
 
@@ -43,12 +43,12 @@ static const struct ScriptCommand s_gs191_g1_s0_lives0_dlg0[] = { /* 0x823d8e0 *
     WAIT(30),
     { 0x6b, 0x00,  0x0100,  0x00000001,  0x00000000, NULL },
     WAIT(30),
-    { 0x2e, 0x03,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" This is the {COLOR YELLOW_D}Great Canyon{RESET}...") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
+    MSG_NPC(1, _(" This is the {COLOR YELLOW_D}Great Canyon{RESET}...")),
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" The peak is called the\n{COLOR CYAN}Hill of the Ancients{RESET}.") },
+    MSG_NPC(1, _(" The peak is called the\n{COLOR CYAN}Hill of the Ancients{RESET}.")),
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     WAIT(10),
     { 0x91, 0x04,  0x0001,  0x00000003,  0x00000000, NULL },
@@ -58,7 +58,7 @@ static const struct ScriptCommand s_gs191_g1_s0_lives0_dlg0[] = { /* 0x823d8e0 *
     VARIANT(/* == */  1, _(" That's where we'll find\n{NAME_3}.{WAIT_PRESS}\n{NAME_0}, let's give it our best!")),
     VARIANT_DEFAULT(_(" According to {NAME_2},\nthe {COLOR CYAN}Hill of the Ancients{RESET} is on {VALUE_0}F.")),
     VARIANT_DEFAULT(_(" {NAME_3} should be\nthere.{WAIT_PRESS}\n{NAME_0}, let's do our best!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0x23, 0x00,  0x0028,  0x00000000,  0x00000000, NULL },
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
@@ -89,12 +89,12 @@ static const struct ScriptCommand s_gs191_g1_s0_lives1_dlg0[] = { /* 0x823dc10 *
 
 static const struct ScriptCommand s_gs191_g2_s0_station_sref_script[] = { /* 0x823dd20 */
     DEBUGINFO,
-    SELECT_MAP(191),
+    SELECT_MAP(MAP_GREAT_CANYON_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(20),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    { 0x02, 0x00,  0x0000,  0x00000009,  0x00000000, NULL },
+    NEXT_DUNGEON(0, SCRIPT_DUNGEON_GREAT_CANYON),
     RET,
 };
 
@@ -111,7 +111,7 @@ static const struct ScriptCommand s_gs191_g2_s0_lives0_dlg0[] = { /* 0x823ddac *
     { 0x6b, 0x00,  0x0100,  0x00000001,  0x00000000, NULL },
     WAIT(30),
     { 0x91, 0x04,  0x0001,  0x00000002,  0x00000000, NULL },
-    { 0x2e, 0x03,  0x0001,  0x00000000,  0x00000000, NULL },
+    PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" {NAME_0}!\nThis time we'll make it to the peak,\nall right?")),
     VARIANT(/* == */  1, _(" We'll meet {NAME_3}\nand ask about you, {NAME_0}.")),
@@ -119,7 +119,7 @@ static const struct ScriptCommand s_gs191_g2_s0_lives0_dlg0[] = { /* 0x823ddac *
     VARIANT_DEFAULT(_(" {NAME_0}!\nLet's make it to the peak this time!")),
     VARIANT_DEFAULT(_(" We have to meet\n{NAME_3} and get some information\non you, {NAME_0}.")),
     VARIANT_DEFAULT(_(" Let's do our best!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0x23, 0x00,  0x0028,  0x00000000,  0x00000000, NULL },
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },

@@ -460,7 +460,7 @@ R_BUTTON = 84 86
 ENVELOPE_CLOSED = 84 87
 
 ICON_BLANK = 87 40
-@ = 87 41 @ E
+ICON_SET = 87 41 @ E
 STAR_BULLET = 87 42
 @ = 87 43 @ Star with E
 ICON_STICKY = 87 44
@@ -524,7 +524,13 @@ TEAM_NAME = 24 74 @ $t
 @ case is insensitive but need different definitions to match
 
 CENTER_ALIGN = 23 2B @ #+
-UNK_MACRO_3D = 23 3D @ #= (Probably used to manually position text at an x coordinate)
+MOVE_X_POSITION = 23 3D @ #= (Used to manually position text at an x coordinate)
+@ The '.' doesn't do anything, it's specifically coded to not do anything
+MOVE_X_POSITION_BY_64 = 23 3D 40 2E @ .
+MOVE_X_POSITION_BY_80 = 23 3D 50 2E @ .
+MOVE_X_POSITION_BY_120 = 23 3D 78 2E @ .
+MOVE_X_POSITION_BY_136 = 23 3D 88 2E @ .
+MOVE_X_POSITION_BY_160 = 23 3D A0 2E @ .
 UNK_MACRO_3E = 23 3E @ #> (Seems to be an alignment operator)
 EXTRA_MSG  = 23 50   @ #P
 WAIT_PRESS = 23 57   @ #W
@@ -534,6 +540,7 @@ UNK_MACRO_5F_2 = 23 5F 02 2E
 UNK_MACRO_5F_3 = 23 5F 03 2E
 UNK_MACRO_5F_4 = 23 5F 04 2E
 UNK_MACRO_5F_5 = 23 5F 05 2E
+WAIT_FRAMES = 23 7E @ #~ Next char is the number of frames to wait before printing the next character
 
 @ COLOR FORMATTING MACROS
 @
@@ -574,15 +581,6 @@ DARK_GRAY = 39 @ 9 - unused
 GENDER_COLOR = 45 @ E - color 15
 COLOR15_S = 53 @ S - color 15 - unused
 COLOR15_T = 54 @ T - color 15 - unused
-
-
-@ FOR UNK_MACRO_3D
-UNK_MACRO_3D_50 = 23 3D 32 @ #2 (Unlike the other ones, this one is used without the '.')
-M3D_64 = 40 2E @ @.
-M3D_80 = 50 2E @ P.
-M3D_120 = 78 2E @ x.
-M3D_136 = 88 2E @ ˆ.
-M3D_160 = A0 2E @ \u00A0.
 
 @ FOR UNK_MACRO_3E
 M3E_22 = 32 32 2E @ 22.

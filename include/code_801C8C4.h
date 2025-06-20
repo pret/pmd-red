@@ -4,7 +4,7 @@
 #include "constants/item.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_3.h"
 
 // size: 0x554
 struct unkStruct_203B244
@@ -12,7 +12,7 @@ struct unkStruct_203B244
     u32 unk0;
     /* 0x4 */ u8 itemIDs[NUMBER_OF_ITEM_IDS];
     u32 unkF4[NUMBER_OF_ITEM_IDS];
-    /* 0x4B4 */ struct_Sub80095E4_2 unk4B4;
+    /* 0x4B4 */ MenuHeaderWindow unk4B4;
 };
 
 bool8 sub_801C8C4(s32, s32, DungeonPos *, u32);

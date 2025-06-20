@@ -1,9 +1,9 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/input.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_3.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "input.h"
 #include "items.h"
 #include "kecleon_bros3.h"
@@ -12,7 +12,7 @@
 #include "text_1.h"
 #include "text_2.h"
 
-static EWRAM_INIT struct_Sub80095E4_2 *gUnknown_203B21C = {NULL};
+static EWRAM_INIT MenuHeaderWindow *gUnknown_203B21C = {NULL};
 static EWRAM_INIT u16 gUnknown_203B220 = {0};
 
 #include "data/kecleon_bros3.h"
@@ -26,16 +26,16 @@ bool8 sub_801A20C(u32 r0)
         return FALSE;
 
     gUnknown_203B21C = MemoryAlloc(sizeof(*gUnknown_203B21C), 8);
-    gUnknown_203B21C->s0.winId = r0;
-    gUnknown_203B21C->s0.unk38 = &gUnknown_203B21C->s0.windows.id[gUnknown_203B21C->s0.winId];
-    RestoreSavedWindows(&gUnknown_203B21C->s0.windows);
-    gUnknown_203B21C->s0.windows.id[gUnknown_203B21C->s0.winId] = sUnknown_80DB914;
-    gUnknown_203B21C->s0.unk38->header = &gUnknown_203B21C->header;
+    gUnknown_203B21C->m.menuWinId = r0;
+    gUnknown_203B21C->m.menuWindow = &gUnknown_203B21C->m.windows.id[gUnknown_203B21C->m.menuWinId];
+    RestoreSavedWindows(&gUnknown_203B21C->m.windows);
+    gUnknown_203B21C->m.windows.id[gUnknown_203B21C->m.menuWinId] = sUnknown_80DB914;
+    gUnknown_203B21C->m.menuWindow->header = &gUnknown_203B21C->header;
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B21C->s0.windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B21C->s0.input, CountKecleonWareItems(), 10, r0);
-    gUnknown_203B21C->s0.input.menuIndex = gUnknown_203B220;
-    sub_8013984(&gUnknown_203B21C->s0.input);
+    ShowWindows(&gUnknown_203B21C->m.windows, TRUE, TRUE);
+    CreateMenuOnWindow(&gUnknown_203B21C->m.input, CountKecleonWareItems(), 10, r0);
+    gUnknown_203B21C->m.input.menuIndex = gUnknown_203B220;
+    MenuUpdatePagesData(&gUnknown_203B21C->m.input);
     sub_801A430();
     sub_801A4A4();
     return TRUE;
@@ -47,11 +47,11 @@ u32 sub_801A2A8(bool8 r0)
     BulkItem *item;
 
     if (!r0) {
-        sub_8013660(&gUnknown_203B21C->s0.input);
+        sub_8013660(&gUnknown_203B21C->m.input);
         return 0;
     }
 
-    switch (GetKeyPress(&gUnknown_203B21C->s0.input)) {
+    switch (GetKeyPress(&gUnknown_203B21C->m.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
@@ -70,7 +70,7 @@ u32 sub_801A2A8(bool8 r0)
             PlayMenuSoundEffect(4);
             return 4;
         default:
-            if (sub_80138B8(&gUnknown_203B21C->s0.input, 1) != 0) {
+            if (MenuCursorUpdate(&gUnknown_203B21C->m.input, 1) != 0) {
                 sub_801A430();
                 sub_801A4A4();
                 return 1;
@@ -82,30 +82,30 @@ u32 sub_801A2A8(bool8 r0)
 // arm9.bin::02025CC4
 u8 sub_801A37C(void)
 {
-    return (gUnknown_203B21C->s0.input.unk1E * gUnknown_203B21C->s0.input.unk1C) + gUnknown_203B21C->s0.input.menuIndex;
+    return GET_CURRENT_MENU_ENTRY(gUnknown_203B21C->m.input);
 }
 
 // arm9.bin::02025C64
 void sub_801A398(bool8 r0)
 {
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B21C->s0.windows, FALSE, FALSE);
-    gUnknown_203B21C->s0.input.unk22 = CountKecleonWareItems();
-    sub_8013984(&gUnknown_203B21C->s0.input);
+    ShowWindows(&gUnknown_203B21C->m.windows, FALSE, FALSE);
+    gUnknown_203B21C->m.input.totalEntriesCount = CountKecleonWareItems();
+    MenuUpdatePagesData(&gUnknown_203B21C->m.input);
     sub_801A430();
     sub_801A4A4();
     if (r0)
-        AddMenuCursorSprite(&gUnknown_203B21C->s0.input);
+        AddMenuCursorSprite(&gUnknown_203B21C->m.input);
 }
 
 // arm9.bin::02025BD4
 void sub_801A3DC(void)
 {
     if (gUnknown_203B21C != NULL) {
-        gUnknown_203B220 = gUnknown_203B21C->s0.input.menuIndex;
-        gUnknown_203B21C->s0.windows.id[gUnknown_203B21C->s0.winId] = sUnknown_80DB8FC;
+        gUnknown_203B220 = gUnknown_203B21C->m.input.menuIndex;
+        gUnknown_203B21C->m.windows.id[gUnknown_203B21C->m.menuWinId] = sUnknown_80DB8FC;
         ResetUnusedInputStruct();
-        ShowWindows(&gUnknown_203B21C->s0.windows, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B21C->m.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B21C);
         gUnknown_203B21C = NULL;
     }
@@ -113,12 +113,12 @@ void sub_801A3DC(void)
 
 static void sub_801A430(void)
 {
-    gUnknown_203B21C->header.count = gUnknown_203B21C->s0.input.unk20;
-    gUnknown_203B21C->header.currId = gUnknown_203B21C->s0.input.unk1E;
+    gUnknown_203B21C->header.count = gUnknown_203B21C->m.input.pagesCount;
+    gUnknown_203B21C->header.currId = gUnknown_203B21C->m.input.currPage;
     gUnknown_203B21C->header.width = 10;
     gUnknown_203B21C->header.f3 = 0;
 
-    SUB_80095E4_CALL(gUnknown_203B21C->s0);
+    UPDATE_MENU_WINDOW_HEIGHT(gUnknown_203B21C->m);
 }
 
 // arm9.bin::020259AC
@@ -134,12 +134,12 @@ void sub_801A4A4(void)
     Item item;
     u8 temp_calc;
 
-    CallPrepareTextbox_8008C54(gUnknown_203B21C->s0.winId);
-    sub_80073B8(gUnknown_203B21C->s0.winId);
-    PrintStringOnWindow(gUnknown_203B21C->s0.input.unk1E * 8 + 10, 0, sGoods, gUnknown_203B21C->s0.winId, 0);
+    CallPrepareTextbox_8008C54(gUnknown_203B21C->m.menuWinId);
+    sub_80073B8(gUnknown_203B21C->m.menuWinId);
+    PrintStringOnWindow(gUnknown_203B21C->m.input.currPage * 8 + 10, 0, sGoods, gUnknown_203B21C->m.menuWinId, 0);
 
-    for (index = 0; index < gUnknown_203B21C->s0.input.unk1A; index++) {
-        temp_calc = (gUnknown_203B21C->s0.input.unk1E * gUnknown_203B21C->s0.input.unk1C) + index;
+    for (index = 0; index < gUnknown_203B21C->m.input.currPageEntries; index++) {
+        temp_calc = (gUnknown_203B21C->m.input.currPage * gUnknown_203B21C->m.input.entriesPerPage) + index;
         heldItem = GetKecleonWareItem(temp_calc);
         item.id = heldItem->id;
         item.quantity = heldItem->quantity;
@@ -152,15 +152,15 @@ void sub_801A4A4(void)
         buyPrice = GetStackBuyPrice(&item);
 
         if (buyPrice <= gTeamInventoryRef->teamMoney) {
-            y = GetMenuEntryYCoord(&gUnknown_203B21C->s0.input, index);
-            PrintStringOnWindow(8, y, buffer1, gUnknown_203B21C->s0.winId, 0);
+            y = GetMenuEntryYCoord(&gUnknown_203B21C->m.input, index);
+            PrintStringOnWindow(8, y, buffer1, gUnknown_203B21C->m.menuWinId, 0);
         }
         else {
             sprintfStatic(buffer2, sFmtRed, buffer1);
-            y = GetMenuEntryYCoord(&gUnknown_203B21C->s0.input, index);
-            PrintStringOnWindow(8, y, buffer2, gUnknown_203B21C->s0.winId, 0);
+            y = GetMenuEntryYCoord(&gUnknown_203B21C->m.input, index);
+            PrintStringOnWindow(8, y, buffer2, gUnknown_203B21C->m.menuWinId, 0);
         }
     }
 
-    sub_80073E0(gUnknown_203B21C->s0.winId);
+    sub_80073E0(gUnknown_203B21C->m.menuWinId);
 }

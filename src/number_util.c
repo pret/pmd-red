@@ -1,4 +1,5 @@
 #include "global.h"
+#include "globaldata.h"
 #include "number_util.h"
 
 FixedPoint FixedPoint_Add(FixedPoint a, FixedPoint b)
@@ -126,3 +127,16 @@ s32 FixedPointToInt(FixedPoint a) // Always rounded up
     }
 }
 
+// arm9.bin::02064154
+void ReadBellyBits(DataSerializer *r0, FixedPoint *dst)
+{
+    ReadBits(r0, &dst->unk0, 16);
+    ReadBits(r0, &dst->unk2, 16);
+}
+
+// arm9.bin::02064124
+void WriteBellyBits(DataSerializer *r0, FixedPoint *src)
+{
+    WriteBits(r0, &src->unk0, 16);
+    WriteBits(r0, &src->unk2, 16);
+}

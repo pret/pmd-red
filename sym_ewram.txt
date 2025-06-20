@@ -8,7 +8,7 @@
     .include "src/sprite.o"
     .include "src/code_800558C.o"
     .include "src/text_1.o"
-    .include "src/code_8009804.o"
+    .include "src/graphics_memory.o"
     .include "src/file_system.o"
     .include "src/decompress_at.o"
     .include "src/main.o"
@@ -19,14 +19,15 @@
 	.space 4
     .include "src/code_800D090.o"
     .include "src/friend_areas_map.o"
-    .include "src/code_80118A4.o"
+    .include "src/music_util.o"
     .include "src/save.o"
 	.space 4
     .include "src/string_format.o"
 	.space 4
     .include "src/other_menus2.o"
     .include "src/rescue_password_menu.o"
-    .include "src/code_803DA7C.o"
+    .include "src/dungeon_name_banner.o"
+    .include "src/code_803DA7C_2.o"
     .include "src/dungeon_vram.o"
     .include "src/dungeon_tilemap.o"
     .include "src/dungeon_map.o"
@@ -78,9 +79,9 @@
     .space 4
     .include "src/ground_main.o"
 	.space 4
-    .include "src/code_8099360.o"
-    .include "src/code_809A560.o"
-    .include "src/code_809C5C4.o"
+    .include "src/palette_util.o"
+    .include "src/textbox.o"
+    .include "src/script_item.o"
 	.space 4
     .include "src/code_809D148.o"
     .include "src/ground_script.o"

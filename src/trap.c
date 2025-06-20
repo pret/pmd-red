@@ -18,6 +18,7 @@
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "dungeon_vram.h"
+#include "dungeon_spawns.h"
 #include "items.h"
 #include "move_effects_target.h"
 #include "moves.h"
@@ -34,7 +35,6 @@ extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 extern SpriteOAM gUnknown_202EDC0;
 
-s16 sub_803D970(u32);
 bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
 bool8 sub_8045888(Entity *);
@@ -45,7 +45,6 @@ void sub_806F480(Entity *, u32);
 void sub_804225C(Entity *, DungeonPos *, u8);
 void sub_8071DA4(Entity *);
 void sub_806A1E8(Entity *pokemon);
-u8 sub_803D6FC(void);
 Entity *sub_8045684(u8, DungeonPos *, u8);
 extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 
@@ -65,7 +64,7 @@ void sub_807FA18(void)
                     trapId = TRAP_WARP_TRAP;
                 }
                 else {
-                    trapId = sub_803D6FC();
+                    trapId = GetRandomFloorTrap();
                 }
 
                 if (trapId == TRAP_WONDER_TILE) {
@@ -162,7 +161,7 @@ bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3)
     tile = GetTileMut(pos->x, pos->y);
     if (TRAP_SPIKE_TRAP < trapID) {
         counter = 0;
-        while ((counter < 0x1e && (trapID = sub_803D6FC(), trapID == TRAP_WONDER_TILE))) {
+        while ((counter < 0x1e && (trapID = GetRandomFloorTrap(), trapID == TRAP_WONDER_TILE))) {
             counter++;
         }
         if (counter == 0x1e) {
@@ -633,7 +632,7 @@ void HandleSummonTrap(Entity *pokemon,DungeonPos *pos)
     if (pokemonSummonCount < r4) {
         for (i = 0; i < r4; i++)
         {
-            species = sub_803D970(0);
+            species = GetRandomFloorMonsterId(0);
             direction &= DIRECTION_MASK;
             stack.species = species;
             if (sub_806AA0C(stack.species,0)) {
@@ -795,7 +794,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
                         species = MONSTER_KECLEON;
                     }
                     else {
-                        species = (s16) sub_803D970(0);
+                        species = (s16) GetRandomFloorMonsterId(0);
                         ASM_MATCH_TRICK(species);
                     }
 

@@ -16,7 +16,7 @@ typedef struct unkStruct_203B22C
     /* 0x4C */ s32 monsAbleToLearnMove; // number of party members able to learn move
     /* 0x50 */ s16 unk50[MAX_TEAM_MEMBERS]; // species IDs of each member able to learn move
     /* 0x58 */ s16 chosenPokemon; // species of pokemon that will learn move
-    /* 0x5C */ PokemonStruct1 *pokeStruct; // PokemonStruct of said pokemon
+    /* 0x5C */ Pokemon *pokeStruct; // PokemonStruct of said pokemon
     u32 unk60;
     /* 0x64 */ MenuItem menuItems[8];
 } unkStruct_203B22C;

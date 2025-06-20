@@ -8,7 +8,7 @@
 #include "code_8094F88.h"
 #include "code_8097670.h"
 #include "def_filearchives.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "file_system.h"
 #include "ground_main.h"
@@ -253,11 +253,6 @@ u32 UpdateLoadScreenMenu(void)
   return nextMenu;
 }
 
-static inline u8 *DrawLoadScreenTextSub(u8 *teamNameBuffer) {
-  strcpy(teamNameBuffer,gNoTeamNamePlaceholder);
-  return teamNameBuffer;
-}
-
 void DrawLoadScreenText(void)
 {
   int iVar2;
@@ -270,9 +265,8 @@ void DrawLoadScreenText(void)
   u32 hours;
   u32 minutes;
   u32 seconds;
-  PokemonStruct1 *playerInfo;
+  Pokemon *playerInfo;
   unkStruct_203B484 *temp2;
-  u8 *r2;
 
   iVar2 = sub_8011FA8();
   CallPrepareTextbox_8008C54(0);
@@ -287,22 +281,20 @@ void DrawLoadScreenText(void)
   // Draw Team Name
   if (sub_80023E4(0)) {
     sub_80920D8(teamNameBuffer);
-    r2 = teamNameBuffer;
   }
   else {
-    // NOTE: static inline was needed here to match -jiang
-    r2 = DrawLoadScreenTextSub(teamNameBuffer);
+    InlineStrcpy(teamNameBuffer,gNoTeamNamePlaceholder);
   }
 
-  sprintfStatic(gLoadScreen->formattedTeamName,gUnknown_80E7804,r2);
+  sprintfStatic(gLoadScreen->formattedTeamName,gUnknown_80E7804,teamNameBuffer);
   PrintStringOnWindow(64,0,gLoadScreen->formattedTeamName,0,0);
 
   // Draw Player Name
   playerInfo = GetPlayerPokemonStruct();
   if (playerInfo == NULL)
-        sub_80922B4(playerName, gNoNamePlaceholder, POKEMON_NAME_LENGTH);
+        StrncpyCustom(playerName, gNoNamePlaceholder, POKEMON_NAME_LENGTH);
   else
-        sub_80922B4(playerName, playerInfo->name, POKEMON_NAME_LENGTH);
+        StrncpyCustom(playerName, playerInfo->name, POKEMON_NAME_LENGTH);
   sprintfStatic(gLoadScreen->formattedPlayerName,gUnknown_80E7804,playerName);
   PrintStringOnWindow(64,12,gLoadScreen->formattedPlayerName,0,0);
 
@@ -320,7 +312,7 @@ void DrawLoadScreenText(void)
             switch(GetScriptVarValue(NULL,START_MODE))
             {
                 default:
-                    sprintfStatic(auStack356,gUnknown_80E7804,sub_8098FB4());
+                    sprintfStatic(auStack356,gUnknown_80E7804,GetCurrentGroundPlaceName());
                     FormatString(auStack356,gLoadScreen->formattedLocation,gLoadScreen->formattedPlayTime,0);
                     break;
                 case 0x7:
@@ -358,7 +350,7 @@ void DrawLoadScreenText(void)
        temp2 =  gUnknown_203B484;
        if(temp2->unk4.speciesNum != MONSTER_NONE) {
             sub_808D930(speciesHelper,temp2->unk4.speciesNum);
-            sub_80922B4(nameHelper,temp2->unk4.name,POKEMON_NAME_LENGTH);
+            StrncpyCustom(nameHelper,temp2->unk4.name,POKEMON_NAME_LENGTH);
             sprintfStatic(gLoadScreen->formattedHelperInfo,gHelperInfoPlaceholder,nameHelper,speciesHelper); // %s (%s)
        }
        else

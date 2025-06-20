@@ -8,7 +8,7 @@
 
 static const struct ScriptCommand s_gs196_g0_s0_station_sref_script[] = { /* 0x8248a54 */
     DEBUGINFO,
-    SELECT_MAP(196),
+    SELECT_MAP(MAP_MT_BLAZE_MID),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_EQ, 12, /* to label */ 0),
     COND(JUDGE_GT, 17, /* to label */ 1),
@@ -55,9 +55,9 @@ static const struct ScriptCommand s_gs196_g0_s0_evt0_sref_script[] = { /* 0x8248
   LABEL(1), /* = 0x01 */
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     BGM_FADEOUT(60),
-    { 0x02, 0x00,  0x001e,  0x0000000c,  0x00000000, NULL },
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_MT_BLAZE_PEAK),
     COND_EQUAL(-1, /* to label */ 1),
     HALT,
 };
@@ -73,7 +73,7 @@ static const struct ScriptCommand s_gs196_g0_s0_evt1_sref_script[] = { /* 0x8248
   LABEL(2), /* = 0x02 */
     JUMP_SCRIPT(END_TALK),
   LABEL(1), /* = 0x01 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     BGM_FADEOUT(30),
     { 0x23, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER4_FUNC),
@@ -87,7 +87,7 @@ static const struct ScriptCommand s_gs196_g0_s0_evt1_sref_script[] = { /* 0x8248
   LABEL(4), /* = 0x04 */
     JUMP_SCRIPT(END_TALK),
   LABEL(3), /* = 0x03 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x01, 0x00,  0x001e,  0x000000c3,  0x00000000, NULL },
     HALT,
 };
@@ -142,11 +142,11 @@ static const struct ScriptCommand s_gs196_g0_s4_lives1_dlg0[] = { /* 0x82490d8 *
 static const struct ScriptCommand s_gs196_g1_s0_station_sref_script[] = { /* 0x8249108 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 196),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 196),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_MT_BLAZE_MID),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_MT_BLAZE_MID),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
-    SELECT_MAP(196),
+    SELECT_MAP(MAP_MT_BLAZE_MID),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(25),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -166,15 +166,15 @@ static const struct ScriptCommand s_gs196_g1_s0_lives0_dlg0[] = { /* 0x82491e4 *
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_LEFT_FUNC),
     { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
-    { 0x2e, 0x02,  0x0001,  0x00000002,  0x00000000, NULL },
+    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000002),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Hmm...{WAIT_PRESS}\nWell, that didn't go well.")),
     VARIANT_DEFAULT(_(" Hmm...{WAIT_PRESS}\nThat didn't work out...")),
-    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    PORTRAIT_REP(0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" But we almost made it.{WAIT_PRESS}\nLet's give it our best again!")),
     VARIANT_DEFAULT(_(" But we came close.{WAIT_PRESS}\nLet's keep doing our best!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },

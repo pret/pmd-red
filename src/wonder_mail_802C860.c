@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_802DE84.h"
 #include "code_803B050.h"
 #include "code_80958E8.h"

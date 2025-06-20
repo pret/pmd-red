@@ -164,9 +164,9 @@ static const struct ScriptCommand s_gs6_g1_s1_evt0_sref_script[] = { /* 0x819952
     { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}There appears to be no one inside.") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}............!{WAIT_PRESS}\n{CENTER_ALIGN}There is a notice posted in the back.") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}Under Construction - Keep Out\n{CENTER_ALIGN}- Makuhita Dojo -") },
+    MSG_INSTANT(_("{CENTER_ALIGN}There appears to be no one inside.")),
+    MSG_INSTANT(_("{CENTER_ALIGN}............!{WAIT_PRESS}\n{CENTER_ALIGN}There is a notice posted in the back.")),
+    MSG_INSTANT(_("{CENTER_ALIGN}Under Construction - Keep Out\n{CENTER_ALIGN}- Makuhita Dojo -")),
     JUMP_SCRIPT(END_TALK),
 };
 

@@ -1,11 +1,10 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/colors.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801AFA4.h"
 #include "code_801B3C0.h"
 #include "code_80227B8.h"
-#include "code_8098BDC.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "input.h"
@@ -15,6 +14,7 @@
 #include "pokemon_3.h"
 #include "string_format.h"
 #include "text_1.h"
+#include "unk_ds_only_feature.h"
 
 EWRAM_INIT static unkStruct_203B294 *sUnknown_203B294 = {NULL};
 
@@ -31,7 +31,7 @@ static void sub_80230E8(void);
 static void sub_8023104(void);
 static void sub_8023120(void);
 
-bool8 sub_80227B8(PokemonStruct1 *pkmn)
+bool8 sub_80227B8(Pokemon *pkmn)
 {
     ResetUnusedInputStruct();
     ShowWindows(NULL, TRUE, TRUE);

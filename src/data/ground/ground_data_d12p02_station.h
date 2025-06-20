@@ -8,7 +8,7 @@
 
 static const struct ScriptCommand s_gs205_g0_s0_station_sref_script[] = { /* 0x825dccc */
     DEBUGINFO,
-    SELECT_MAP(205),
+    SELECT_MAP(MAP_MAGMA_CAVERN_MID),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_GT, 17, /* to label */ 0),
     JUMP_LABEL(1),
@@ -50,9 +50,9 @@ static const struct ScriptCommand s_gs205_g0_s0_evt0_sref_script[] = { /* 0x825d
   LABEL(1), /* = 0x01 */
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     BGM_FADEOUT(60),
-    { 0x02, 0x00,  0x001e,  0x00000012,  0x00000000, NULL },
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_MAGMA_CAVERN_PIT),
     COND_EQUAL(-1, /* to label */ 1),
     HALT,
 };
@@ -67,7 +67,7 @@ static const struct ScriptCommand s_gs205_g0_s0_evt1_sref_script[] = { /* 0x825d
   LABEL(1), /* = 0x01 */
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     BGM_FADEOUT(30),
     { 0x23, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER4_FUNC),
@@ -126,11 +126,11 @@ static const struct ScriptCommand s_gs205_g0_s4_lives1_dlg0[] = { /* 0x825e238 *
 static const struct ScriptCommand s_gs205_g1_s0_station_sref_script[] = { /* 0x825e268 */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 205),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 205),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_MAGMA_CAVERN_MID),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_MAGMA_CAVERN_MID),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
-    SELECT_MAP(205),
+    SELECT_MAP(MAP_MAGMA_CAVERN_MID),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(108),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -150,15 +150,15 @@ static const struct ScriptCommand s_gs205_g1_s0_lives0_dlg0[] = { /* 0x825e344 *
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_LEFT_FUNC),
     { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
-    { 0x2e, 0x02,  0x0001,  0x00000002,  0x00000000, NULL },
+    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000002),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Hmm...{WAIT_PRESS}\nWell, that didn't go well.")),
     VARIANT_DEFAULT(_(" Hmm...{WAIT_PRESS}\nThat didn't work out...")),
-    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    PORTRAIT_REP(0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" But we didn't have far to\ngo!{WAIT_PRESS}\nLet's give it our best!")),
     VARIANT_DEFAULT(_(" But we were very close!{WAIT_PRESS}\nLet's keep trying our best!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },

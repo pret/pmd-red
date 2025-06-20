@@ -10,4 +10,10 @@ typedef struct DataSerializer
     /* 0xC */ u32 unkC; // Seems to be a temporary 32 bit storage
 } DataSerializer;
 
+void FinishBitSerializer(DataSerializer *seri);
+void InitBitReader(DataSerializer *seri, u8 *buffer, s32 bufLen);
+void InitBitWriter(DataSerializer *seri, u8 *buffer, s32 bufLen);
+void ReadBits(DataSerializer *seri, void *dst, s32 numBits);
+void WriteBits(DataSerializer *seri, void *src, s32 numBits);
+
 #endif // GUARD_DATA_SERIALIZER_H

@@ -7,6 +7,7 @@
 #include "ground_map_2.h"
 #include "ground_script.h"
 #include "memory.h"
+#include "ground_map_conversion_table.h"
 
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
@@ -178,31 +179,26 @@ bool8 GroundMapNotifyAll(s16 param_1)
 bool8 sub_80A4D48(s16 index)
 {
     if (index == -1) return TRUE;
-    if (gGroundConversion_811BAF4[index].unk0 == 5) return FALSE;
-    if (gGroundConversion_811BAF4[index].unk0 != 8) return TRUE;
+    if (gGroundMapConversionTable[index].unk0 == 5) return FALSE;
+    if (gGroundMapConversionTable[index].unk0 != 8) return TRUE;
     return FALSE;
 }
 
-s32 GetAdjustedGroundMap(s16 param_1)
+s16 GetAdjustedGroundMap(s32 mapId)
 {
-    s32 iVar5;
+    s32 retMapId = (s16) mapId;
 
-    iVar5 = param_1;
-
-    switch(iVar5)
-    {
-        case 9:
-        case 0xC:
-            iVar5 = (s16)(iVar5 + ((GetScriptVarValue(NULL, BASE_KIND) * 6) + GetScriptVarValue(NULL, BASE_LEVEL)));
+    switch (retMapId) {
+        case MAP_TEAM_BASE:
+        case MAP_TEAM_BASE_INSIDE:
+            retMapId = (s16)(retMapId + ((GetScriptVarValue(NULL, BASE_KIND) * TEAM_BASE_MAPS_PER_SPECIES) + GetScriptVarValue(NULL, BASE_LEVEL)));
             break;
-        case 2:
+        case MAP_WHISCASH_POND:
             if (sub_80023E4(6)) {
-                iVar5 = 3;
+                retMapId = MAP_WHISCASH_POND_OPEN;
             }
-            break;
-        default:
             break;
     }
 
-    return iVar5;
+    return retMapId;
 }

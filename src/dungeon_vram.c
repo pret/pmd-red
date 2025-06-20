@@ -6,9 +6,9 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_803E724.h"
 #include "dungeon_map.h"
 #include "dungeon_music.h"
@@ -210,7 +210,7 @@ static void sub_803E490(u32 unused)
     if(gDungeon->unk181e8.unk18215 != 0 && gDungeon->unk1BDD4.unk1C06C != 3)
         sub_8004AF0(gUnknown_203B40D, gUnknown_202EE8C, 0xA0, 0x20, gDungeonBrightness, gDungeon->colorRamp);
 
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     nullsub_12();
     sub_80060EC();
@@ -226,14 +226,14 @@ static void sub_803E490(u32 unused)
     nullsub_14();
 
     TransferBGPaletteBuffer();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_vram();
     CopyDungeonMapToVram();
     xxx_call_update_bg_sound_input();
 
     gDungeon->unk181e8.unk18213 = 0;
     UpdateDungeonMusic();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     TryResetDungeonMapTilesScheduledForCopy();
     ResetSprites(FALSE);
     nullsub_10(FALSE);
@@ -243,7 +243,7 @@ static void sub_803E490(u32 unused)
 void sub_803E668(u32 unused)
 {
     gUnknown_202EDD4++;
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     nullsub_12();
     sub_8005838(NULL, 0);
@@ -257,11 +257,11 @@ void sub_803E668(u32 unused)
     sub_8005304();
     nullsub_14();
     TransferBGPaletteBuffer();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_vram();
     xxx_call_update_bg_sound_input();
     gDungeon->unk181e8.unk18213 = 0;
-    sub_8011860();
+    UpdateSoundEffectCounters();
     ResetSprites(FALSE);
     nullsub_10(FALSE);
     gUnknown_202EDD4--;
@@ -648,12 +648,12 @@ void sub_803EAF0(u32 kind, u8 *name)
 
 static void sub_803EC94(void)
 {
-    gDungeonMenu.unk1E = 0;
-    gDungeonMenu.unk20 = 0;
-    gDungeonMenu.unkC = 0;
-    gDungeonMenu.unkE = 0;
+    gDungeonMenu.currPage = 0;
+    gDungeonMenu.pagesCount = 0;
+    gDungeonMenu.leftRightArrowsPos.x = 0;
+    gDungeonMenu.leftRightArrowsPos.y = 0;
     gDungeonMenu.unk14.x = 0;
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
 }
 
 void DungeonShowWindows(const WindowTemplates *winTemplates, bool8 a1)
@@ -672,7 +672,7 @@ void sub_803ECE0(void)
     if (gUnknown_202EDD8 > 11)
         gUnknown_202EDD8 = 0;
 
-    sub_80098BC((void *)VRAM + 0x14400, gUnknown_202EC94->unk4 + ((gUnknown_202EDD8 / 4) * 0x240), 0x240);
+    ScheduleMemCopy((void *)VRAM + 0x14400, gUnknown_202EC94->unk4 + ((gUnknown_202EDD8 / 4) * 0x240), 0x240);
 }
 
 void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
@@ -710,7 +710,7 @@ void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
         gUnknown_202EDE8.unk2 = a3;
     }
 
-    sub_80098BC((void *) VRAM + 0x142C0, gDungeon->unk18, 0x80);
+    ScheduleMemCopy((void *) VRAM + 0x142C0, gDungeon->unk18, 0x80);
 }
 
 void sub_803EDF0(void)

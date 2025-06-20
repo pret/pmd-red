@@ -4,7 +4,7 @@
 #include "structs/dungeon_entity.h"
 #include "structs/str_moves.h"
 #include "structs/str_pokemon.h"
-#include "pokemon_3.h"
+#include "pokemon_summary_window.h"
 
 struct unkStruct_8069D4C
 {
@@ -30,8 +30,8 @@ void sub_80687AC(void);
 OpenedFile *GetSpriteData(s32 _species);
 void LoadPokemonSprite(s32 _id, bool32 _ignoreDeoxys);
 void CloseAllSpriteFiles(void);
-void sub_806890C(void);
-void sub_8068A84(PokemonStruct1 *pokemon);
+void SetDungeonMonsFromTeam(void);
+void sub_8068A84(Pokemon *pokemon);
 void sub_8068BDC(bool8 a0);
 void sub_8068F28(void);
 void sub_8068F80(void);
@@ -42,7 +42,7 @@ Entity * sub_8069660(Entity *target);
 Entity * sub_80696A8(Entity *target);
 Entity * sub_80696FC(Entity *target);
 Entity * sub_806977C(Entity *target);
-void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target);
+void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target);
 bool8 sub_8069D18(DungeonPos *pos,Entity *entity);
 void sub_8069D4C(struct unkStruct_8069D4C *r0, Entity *target);
 void TargetTileInFront(Entity *pokemon);

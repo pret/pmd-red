@@ -730,12 +730,12 @@ void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2)
     stringPtr2 = gUnknown_80F913C;
     teamIndex = info2->teamIndex;
     if (teamIndex >= 0) {
-        PokemonStruct2 *pokeStruct = &gRecruitedPokemonRef->pokemon2[teamIndex];
-        if (sub_806A564(pokeStruct->unkA)) {
+        DungeonMon *pokeStruct = &gRecruitedPokemonRef->dungeonTeam[teamIndex];
+        if (sub_806A564(pokeStruct->recruitedPokemonId)) {
             stringPtr1 = gUnknown_80F9114;
             stringPtr2 = gMonDisappointedAndLeft;
         }
-        else if (sub_806A58C(pokeStruct->unkA)) {
+        else if (sub_806A58C(pokeStruct->recruitedPokemonId)) {
             if (IsMakuhitaTrainingMaze()) {
                 stringPtr1 = gSendMonBackQ;
             }

@@ -3,7 +3,7 @@
 #include "code_800D090.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_menu_recruitment.h"
 #include "dungeon_message.h"
 #include "dungeon_message_log.h"
@@ -22,7 +22,6 @@ extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern u16 GetLeaderActionId(void);
-extern u32 sub_8014140(s32 a0, const void *a1);
 extern u8 sub_806F9BC(s32);
 extern bool8 sub_80860A8(u8 id);
 extern bool8 sub_806A564(s32 r0);
@@ -78,7 +77,7 @@ static const WindowTemplates sRecruitmentSearchWindows = {
         }
 };
 
-static const u8 gUnknown_8106D68[] = {1, 0, 56, 0, 0, 0, 24, 0, 24, 0, 0, 0, 2, 0, 56, 0, 104, 0, 24, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+static const u8 sTouchScreenArrowPressData[] = {1, 0, 56, 0, 0, 0, 24, 0, 24, 0, 0, 0, 2, 0, 56, 0, 104, 0, 24, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 void ShowRecruitmentSearchMenu(void)
 {
@@ -100,32 +99,32 @@ void ShowRecruitmentSearchMenu(void)
 
             sRecruitmentWindowHeader.currId = currTabId;
             DungeonShowWindows(&sRecruitmentSearchWindows, TRUE);
-            gDungeonMenu.unk1A = 0;
+            gDungeonMenu.currPageEntries = 0;
             gDungeonMenu.menuIndex = 0;
-            gDungeonMenu.unk1C = 0;
-            gDungeonMenu.unk1E = currTabId;
-            gDungeonMenu.unk20 = 2;
+            gDungeonMenu.entriesPerPage = 0;
+            gDungeonMenu.currPage = currTabId;
+            gDungeonMenu.pagesCount = 2;
             gDungeonMenu.unk4 = 0;
             gDungeonMenu.firstEntryY = 16;
             gDungeonMenu.unk14.x = 0;
-            gDungeonMenu.unk0 = 0;
-            sub_801317C(&gDungeonMenu.unk28);
+            gDungeonMenu.windowId = 0;
+            ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
             sScrollId = 0;
             sScrollFlags = 0;
             PrintAvailableMons(currTabData, currTabId);
-            gDungeonMenu.unkC = (gWindows[0].x + 16) * 8;
-            gDungeonMenu.unkE = ((gWindows[0].y + 1) * 8) - 2;
+            gDungeonMenu.leftRightArrowsPos.x = (gWindows[0].x + 16) * 8;
+            gDungeonMenu.leftRightArrowsPos.y = ((gWindows[0].y + 1) * 8) - 2;
 
             while (1) {
-                s32 unkVar;
+                s32 touchScreenArrow;
                 bool8 scroll = FALSE;
 
                 sScrollFlags = 0;
-                unkVar = sub_8014140(0, gUnknown_8106D68);
-                if (TryScrollUp(currTabData, unkVar)) {
+                touchScreenArrow = GetTouchScreenArrowPress(0, sTouchScreenArrowPressData);
+                if (TryScrollUp(currTabData, touchScreenArrow)) {
                     scroll = TRUE;
                 }
-                if (TryScrollDown(currTabData, unkVar)) {
+                if (TryScrollDown(currTabData, touchScreenArrow)) {
                     scroll = TRUE;
                 }
 
@@ -141,7 +140,7 @@ void ShowRecruitmentSearchMenu(void)
                     CreateScrollingArrow(FALSE, 0x70);
                 }
 
-                if ((gRealInputs.pressed & (DPAD_LEFT | DPAD_RIGHT)) || gDungeonMenu.unk28.dpad_left || gDungeonMenu.unk28.dpad_right) {
+                if ((gRealInputs.pressed & (DPAD_LEFT | DPAD_RIGHT)) || gDungeonMenu.touchScreen.dpad_left || gDungeonMenu.touchScreen.dpad_right) {
                     PlayDungeonCursorSE(FALSE);
                     currTabId = (currTabId == 0) ? 1 : 0;
                     break;
@@ -149,7 +148,7 @@ void ShowRecruitmentSearchMenu(void)
 
                 if (sub_80048C8())
                     continue;
-                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                     PlayDungeonCancelSE();
                     closeWindow = TRUE;
                     break;
@@ -199,7 +198,7 @@ static void PrintAvailableMons(struct MonRecruitList *tabData, s32 tabId)
     sub_80073E0(0);
 }
 
-static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1)
+static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 touchScreenArrow)
 {
     s32 i;
     u8 text[64];
@@ -209,7 +208,7 @@ static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1)
 
     menuMonId--;
     sScrollFlags |= FLAG_CAN_SCROLL_UP;
-    if (!(gRealInputs.repeated & DPAD_UP) && a1 != 1) {
+    if (!(gRealInputs.repeated & DPAD_UP) && touchScreenArrow != TOUCH_SCREEN_ARROW_UP_PRESS) {
         return FALSE;
     }
     else {
@@ -230,7 +229,7 @@ static bool8 TryScrollUp(struct MonRecruitList *tabData, s32 a1)
     }
 }
 
-static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 a1)
+static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 touchScreenArrow)
 {
     s32 i;
     u8 text[64];
@@ -240,7 +239,7 @@ static bool8 TryScrollDown(struct MonRecruitList *tabData, s32 a1)
         return FALSE;
 
     sScrollFlags |= FLAG_CAN_SCROLL_DOWN;
-    if (!(gRealInputs.repeated & DPAD_DOWN) && a1 != 2) {
+    if (!(gRealInputs.repeated & DPAD_DOWN) && touchScreenArrow != TOUCH_SCREEN_ARROW_DOWN_PRESS) {
         return FALSE;
     }
     else {
@@ -294,16 +293,16 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
         spArray[i] = 0;
     }
 
-    for (id = 0; id < gDungeon->unk37E4; id++) {
+    for (id = 0; id < gDungeon->currFloorMonsterSpawnsCount; id++) {
         u8 byte = 1;
-        s32 val1 = gDungeon->unk343C[id].unk2[0];
-        s32 val2 = gDungeon->unk343C[id].unk2[1];
+        s32 val1 = gDungeon->monsterSpawns[id].randNum[0];
+        s32 val2 = gDungeon->monsterSpawns[id].randNum[1];
         if (val1 == 0) {
             if (val2 == 0)
                 continue;
             byte = 2;
         }
-        spArray[ExtractSpeciesIndex(&gDungeon->unk343C[id])] = byte;
+        spArray[ExtractSpeciesIndex(&gDungeon->monsterSpawns[id])] = byte;
     }
 
     if (gDungeon->unk644.unk2A) {
@@ -344,7 +343,7 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
             }
             else {
                 for (k = 0; k < NUM_MONSTERS; k++) {
-                    if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[k]) && gRecruitedPokemonRef->pokemon[k].speciesNum == speciesId)
+                    if (PokemonExists(&gRecruitedPokemonRef->pokemon[k]) && gRecruitedPokemonRef->pokemon[k].speciesNum == speciesId)
                         break;
                 }
                 if (k != NUM_MONSTERS) {
@@ -352,12 +351,12 @@ static void SetRecruitableMons(struct MonRecruitList *tabsData)
                 }
 
                 if (!monIsRecruited) {
-                    for (k = 0; k < 4; k++) {
-                        PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[k];
-                        if (PokemonFlag1Struct2(mon) && !sub_806A564(mon->unkA) && mon->speciesNum == speciesId)
+                    for (k = 0; k < MAX_TEAM_MEMBERS; k++) {
+                        DungeonMon *mon = &gRecruitedPokemonRef->dungeonTeam[k];
+                        if (DungeonMonExists(mon) && !sub_806A564(mon->recruitedPokemonId) && mon->speciesNum == speciesId)
                             break;
                     }
-                    if (k != 4) {
+                    if (k != MAX_TEAM_MEMBERS) {
                         monIsRecruited = TRUE;
                         monNameColor = 6;
                     }

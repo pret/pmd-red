@@ -42,6 +42,7 @@ typedef struct unkStruct_8090F58
 } unkStruct_8090F58;
 
 // size: R=0x4 | B=0x3
+// Used in Dungeon, has an additional flag field.
 typedef struct Item
 {
     /* 0x0 */ u8 flags;

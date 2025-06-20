@@ -1,5 +1,5 @@
 #include "global.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "cpu.h"
 #include "decompress_at.h"
 #include "text_1.h"
@@ -65,7 +65,7 @@ u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, 
     sp8 = sp0->unk0 - 3;
 
     if (gDrawTextShadow != 0) {
-        var_2C = (sp0->unkA >> 1) & 1;
+        var_2C = (sp0->unkA & 2) != 0;
     }
     else {
         var_2C = 0;
@@ -73,8 +73,8 @@ u32 DrawCharOnWindowInternal(Window *windows, s32 x, s32 y, u32 chr, u32 color, 
 
     if (sp0->unkA & 1) {
         r3 = window->unk18 + ((((y / 8) * window->width) + (x / 8)) * 8);
-        r3 += y - (y / 8 * 8);
-        shiftData = &gCharMasksOffsets[x - ((x / 8) * 8)];
+        r3 += y % 8;
+        shiftData = &gCharMasksOffsets[x % 8];
         xDiv8 = x / 8;
         yDiv8 = y / 8;
 
@@ -855,30 +855,30 @@ static s32 HexDigitValue(u8 chr)
 }
 
 // In NDS, this func is copied to 01FF8D80
-const u8 *xxx_get_next_char_from_string(const u8 *a1, u32 *dstChr)
+const u8 *GetNextCharFromStr(const u8 *str, u32 *dstChr)
 {
-    s32 currChr = *a1;
-    if (currChr == 0x7E) {
+    s32 currChr = *str;
+    if (currChr == '~') {
         s32 hexDigit;
 
-        a1++;
-        hexDigit = (HexDigitValue(a1[0]) << 4) + HexDigitValue(a1[1]);
-        if (*a1 != '\0') {
-            a1++;
-            if (*a1 != '\0') {
-                a1++;
+        str++;
+        hexDigit = (HexDigitValue(str[0]) << 4) + HexDigitValue(str[1]);
+        if (*str != '\0') {
+            str++;
+            if (*str != '\0') {
+                str++;
             }
         }
         *dstChr = hexDigit;
-        return a1;
+        return str;
     }
     else if ((currChr >= 0x81 && currChr <= 0x84) || currChr == 0x87) {
-        *dstChr = a1[1] | (a1[0] << 8);
-        return a1 + 2;
+        *dstChr = str[1] | (str[0] << 8);
+        return str + 2;
     }
     else {
         *dstChr = currChr;
-        return a1 + 1;
+        return str + 1;
     }
 }
 
@@ -1018,7 +1018,7 @@ bool8 xxx_call_update_bg_vram(void)
     bool8 ret = FALSE;
     if (gUnknown_20274A5 != 0) {
         gUnknown_20274A5 = FALSE;
-        sub_80099C0();
+        CopyBgTilemaps0And1();
     }
     ret = xxx_update_bg_vram(gWindows);
     return ret;

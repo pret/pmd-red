@@ -6,15 +6,14 @@
 #include "bg_control.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090_1.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "run_dungeon.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "code_8097670.h"
-#include "code_8099328.h"
 #include "code_8099360.h"
 #include "code_80A26CC.h"
 #include "cpu.h"
@@ -24,6 +23,7 @@
 #include "exclusive_pokemon.h"
 #include "friend_area.h"
 #include "game_options.h"
+#include "ground_main.h"
 #include "main_loops.h"
 #include "main_menu1.h"
 #include "main_menu2.h"
@@ -50,6 +50,7 @@
 #include "friend_areas_map.h"
 #include "structs/str_dungeon_setup.h"
 #include "constants/friend_area.h"
+#include "constants/ground_map.h"
 
 typedef struct unkTalkTable
 {
@@ -84,7 +85,7 @@ static u32 xxx_script_related_8001334(u32 r0);
 static void MainLoops_RunFrameActions(u32 unused);
 
 extern u8 sub_80990EC(DungeonSetupInfo *param_1, s32 param_2);
-extern bool8 sub_8096A08(u8 dungeon, PokemonStruct1 *pokemon);
+extern bool8 sub_8096A08(u8 dungeon, Pokemon *pokemon);
 extern u8 sub_80991E0(DungeonSetupInfo *param_1,short *param_2);
 extern u32 xxx_script_related_8098468(u32);
 extern void IncrementNumAdventures(void);
@@ -129,9 +130,9 @@ void GameLoop(void)
 
     InitHeap();
     NDS_DebugInit();
-    sub_801180C();
+    ResetSoundEffectCounters();
     NDS_LoadOverlay_GroundMain();
-    sub_8014144();
+    ResetDialogueBox();
     LoadMonsterParameters();
     sub_8097670();
     InitializePlayTime();
@@ -280,13 +281,13 @@ static void MainLoops_RunFrameActions(u32 unused)
 {
     DrawDialogueBoxString();
     sub_8005838(NULL, 0);
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
 
     sub_8005180();
     // Extra call here in blue. Seems to be for 2nd screen sprites
 
     sub_80060EC();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
 
@@ -296,7 +297,7 @@ static void MainLoops_RunFrameActions(u32 unused)
 
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
 
     ResetSprites(FALSE);
@@ -330,8 +331,8 @@ static void LoadTitleScreen(void)
         }
     }
 
-    sub_80098F8(2);
-    sub_80098F8(3);
+    ScheduleBgTilemapCopy(2);
+    ScheduleBgTilemapCopy(3);
 
     CpuCopy((u32 *)(VRAM + 0x8000), stru->vramStuff, sizeof(stru->vramStuff));
     CloseFile(bgFile);
@@ -355,7 +356,7 @@ static void QuickSave_Async(u32 mode)
     saveStatus = 0;
     counter = 0;
     UpdateFadeInTile(0);
-    sub_8014144();
+    ResetDialogueBox();
     InitFontPalette();
     sub_800CDA8(2);
     sub_80095CC(0, 20);
@@ -466,7 +467,7 @@ static void sub_80008C0_Async(u32 errorKind)
     s32 counter = 0;
 
     UpdateFadeInTile(0);
-    sub_8014144();
+    ResetDialogueBox();
     InitFontPalette();
     sub_800CDA8(2);
     sub_80095CC(0, 20);
@@ -566,7 +567,7 @@ static u32 RunGameMode_Async(u32 a0)
     s32 mode = GetScriptVarValue(NULL, START_MODE);
     bool8 ret = FALSE;
 
-    sub_801180C();
+    ResetSoundEffectCounters();
     FadeOutAllMusic(0x10);
     if (mode == MODE_CONTINUE_QUICKSAVE) {
         if (a0 == 2) {
@@ -592,23 +593,23 @@ static u32 RunGameMode_Async(u32 a0)
         s16 sp552;
 
         if (mode == MODE_FRIEND_AREAS) {
-            u8 mapId = sub_8002658(GetScriptVarValue(NULL,GROUND_ENTER));
+            u8 friendAreaId = MapIdToFriendAreaId(GetScriptVarValue(NULL,GROUND_ENTER));
 
             friendAreasSetup.friendAreasMapPtr = MemoryAlloc(sizeof(*friendAreasSetup.friendAreasMapPtr),8);
-            friendAreasSetup.startingFriendAreaId = mapId;
+            friendAreasSetup.startingFriendAreaId = friendAreaId;
             friendAreasSetup.unk5 = sub_80023E4(9);
             ShowFriendAreasMap_Async(&friendAreasSetup);
             MemoryFree(friendAreasSetup.friendAreasMapPtr);
             if (friendAreasSetup.chosenAreaId != NUM_FRIEND_AREAS) {
-                s32 val;
+                s32 mapId;
                 u32 areaId = friendAreasSetup.chosenAreaId;
                 if (areaId != FRIEND_AREA_NONE) {
-                    val = sub_8002694(areaId);
+                    mapId = FriendAreaIdToMapId(areaId);
                 }
                 else {
-                    val = 9;
+                    mapId = MAP_TEAM_BASE;
                 }
-                SetScriptVarValue(NULL,GROUND_ENTER,val);
+                SetScriptVarValue(NULL,GROUND_ENTER,mapId);
                 SetScriptVarValue(NULL,GROUND_ENTER_LINK,0);
             }
             mode = MODE_GROUND;
@@ -617,23 +618,23 @@ static u32 RunGameMode_Async(u32 a0)
         else if (mode == MODE_DUNGEON_FROM_WORLD_MAP) {
             s32 i;
 
-            s32 dungId = (s16) GetScriptVarValue(NULL, DUNGEON_SELECT);
-            u8 r6 = sub_80A2740(dungId);
+            s32 scriptDungeonId = (s16) GetScriptVarValue(NULL, DUNGEON_SELECT);
+            u8 dungeonId = ScriptDungeonIdToDungeonId(scriptDungeonId);
             for (i = 0; i < WORLD_MAP_UNK_6D_COUNT; i++) {
                 worldMapSetup.info.unk6D[i] = sub_80A28F0(i);
             }
 
-            if (r6 == 99) {
+            if (dungeonId == DUNGEON_INVALID) {
                 mode = MODE_GROUND;
                 continue;
             }
 
             worldMapSetup.info.startLocation.id = DUNGEON_OUT_ON_RESCUE;
-            sub_80011CC(&worldMapSetup.info.unk4, r6);
+            sub_80011CC(&worldMapSetup.info.unk4, dungeonId);
             worldMapSetup.info.unk6C = worldMapSetup.info.unk4.unk5;
-            switch ((s16) sub_80A2750(dungId)) {
+            switch ((s16) sub_80A2750(scriptDungeonId)) {
                 case 1:
-                    if (sub_80990EC(&dungeonSetup.info, dungId)) {
+                    if (sub_80990EC(&dungeonSetup.info, scriptDungeonId)) {
                         worldMapSetup.info.unk4.unkC = dungeonSetup.info.sub0.unkC;
                         worldMapSetup.info.mon = dungeonSetup.info.mon;
                     }
@@ -655,7 +656,7 @@ static u32 RunGameMode_Async(u32 a0)
                 mode = MODE_GROUND;
                 continue;
             }
-            SetScriptVarValue(NULL, DUNGEON_ENTER, dungId);
+            SetScriptVarValue(NULL, DUNGEON_ENTER, scriptDungeonId);
             sUnknown_203B03C = 2;
             sub_800A8F8(4);
             r5 = xxx_script_related_8001334(5);
@@ -887,7 +888,7 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
     sUnknown_203B03C = 1;
 
     sub_800A8F8(3);
-    sub_8014144();
+    ResetDialogueBox();
     sub_8043D50(&local_1c, &dungeonStructSize);
 
     setupStr->info.unk74 = MemoryAlloc(local_1c, 7); // size: 0x4800
@@ -904,14 +905,14 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
 
         quickSaveValid = IsQuickSaveValid();
         FinishQuickSaveRead();
-        sub_8011830();
+        StopBGMResetSoundEffectCounters();
 
         if (quickSaveValid)
             sub_80121E0(0xF1208);
         else
             sub_80121E0(0xF1209);
 
-        xxx_call_start_bg_music();
+        StartBGMusic();
     }
     else {
         GeneratePelipperJobs();
@@ -933,7 +934,7 @@ static void LoadAndRunQuickSaveDungeon_Async(DungeonSetupStruct *setupStr)
 
     if (setupStr->info.unk7C == 3 || setupStr->info.unk7C == -2) {
         SetDungeonLocationInfo(&setupStr->info.unk80);
-        xxx_call_stop_bgm();
+        StopBGMusic();
 
         if (setupStr->info.unk7C == -2)
             PrepareQuickSaveWrite(setupStr->info.unk74, local_1c, 1);
@@ -1024,7 +1025,7 @@ static u8 sub_8001170(void)
     u8 dungeonID = NUM_DUNGEONS + 1;
 
     if (sub_80992E0(&local_10, &auStack_e))
-        dungeonID = sub_80A2740(local_10);
+        dungeonID = ScriptDungeonIdToDungeonId(local_10);
     else if (!sub_8099328(&dungeonID) && !sub_8099360(&dungeonID) && sub_8099394(&auStack_b))
         dungeonID = DUNGEON_OUT_ON_RESCUE;
 
@@ -1073,8 +1074,8 @@ static void RemoveMoneyAndRandomItems(void)
     FillInventoryGaps();
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
-        if (PokemonFlag1(mon) && PokemonFlag2(mon))
+        Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
+        if (PokemonExists(mon) && PokemonFlag2(mon))
             mon->heldItem.id = ITEM_NOTHING;
     }
 
@@ -1093,8 +1094,8 @@ static void RemoveAllMoneyAndItems(void)
     FillInventoryGaps();
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        PokemonStruct1 *mon = &gRecruitedPokemonRef->pokemon[i];
-        if (PokemonFlag1(mon) && PokemonFlag2(mon))
+        Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
+        if (PokemonExists(mon) && PokemonFlag2(mon))
             mon->heldItem.id = ITEM_NOTHING;
     }
 

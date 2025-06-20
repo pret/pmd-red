@@ -2,10 +2,11 @@
 #include "globaldata.h"
 #include "constants/bg_music.h"
 #include "structs/menu.h"
-#include "code_80118A4.h"
-#include "dungeon.h"
+#include "music_util.h"
+#include "dungeon_info.h"
 #include "dungeon_music.h"
 #include "music.h"
+#include "run_dungeon.h"
 
 extern MenuInputStruct gDungeonMenu;
 
@@ -15,7 +16,7 @@ extern MenuInputStruct gDungeonMenu;
 
 void PlayDungeonCursorSE(bool8 checkMenuEntriesCount)
 {
-    if (!checkMenuEntriesCount || gDungeonMenu.unk1A > 1)
+    if (!checkMenuEntriesCount || gDungeonMenu.currPageEntries > 1)
         PlayFanfareSE(0x12d,MAX_VOLUME);
 }
 
@@ -124,7 +125,7 @@ void DungeonFadeOutBGM(u16 speed)
 void DungeonStopBGM(void)
 {
     StopDungeonBGM();
-    xxx_call_stop_bgm();
+    StopBGMusic();
 }
 
 u16 DungeonGetCurrentBGSong(void)

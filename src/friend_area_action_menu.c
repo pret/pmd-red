@@ -6,7 +6,6 @@
 #include "code_801EE10_mid.h"
 #include "friend_list.h"
 #include "code_8024458.h"
-#include "code_8098BDC.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "event_flag.h"
@@ -24,6 +23,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
+#include "unk_ds_only_feature.h"
 
 static EWRAM_INIT struct unkStruct_203B2BC *sUnknown_203B2BC = {NULL};
 
@@ -46,15 +46,15 @@ extern void sub_8027CA0();
 extern void sub_8027D00();
 extern void CreateFriendActionMenu();
 extern void sub_80276A8();
-bool8 sub_8027D9C(PokemonStruct1 *pokeStruct);
-extern u8 sub_8027DCC(PokemonStruct1 *);
+bool8 sub_8027D9C(Pokemon *pokeStruct);
+extern u8 sub_8027DCC(Pokemon *);
 extern void SetFriendAreaActionMenuState(u32);
 extern void PlaySound(u32);
-extern void sub_808D31C(PokemonStruct1 *);
+extern void sub_808D31C(Pokemon *);
 extern bool8 sub_808D750(s16 index_);
 
-u32 sub_8027E18(PokemonStruct1 *);
-u8 sub_8027E4C(PokemonStruct1 *r0);
+u32 sub_8027E18(Pokemon *);
+u8 sub_8027E4C(Pokemon *r0);
 void sub_8027EB8(void);
 
 #include "data/friend_area_action_menu.h"
@@ -202,7 +202,7 @@ void sub_8027274(void)
             sub_8012D60(&sUnknown_203B2BC->unk7C,sUnknown_203B2BC->menuItems,0,sUnknown_203B2BC->unk16C,sUnknown_203B2BC->menuAction2,2);
             break;
         case 0xd:
-            HeldItemToSlot(&slot, &sUnknown_203B2BC->itemToGive);
+            BulkItemToItem(&slot, &sUnknown_203B2BC->itemToGive);
             InitItemDescriptionWindow(&slot);
             break;
         case 0xe:
@@ -239,14 +239,13 @@ void CreateFriendActionMenu(void)
 {
   int index;
   s32 loopMax;
-  PokemonStruct1 *pokeStruct;
+  Pokemon *pokeStruct;
 
   loopMax = 0;
   pokeStruct = &gRecruitedPokemonRef->pokemon[sUnknown_203B2BC->targetPoke];
   MemoryFill16(sUnknown_203B2BC->unk16C,0,sizeof(sUnknown_203B2BC->unk16C));
 
-  if((pokeStruct->unk0 >> 1) % 2)
-  {
+  if (PokemonFlag2(pokeStruct)) {
       sUnknown_203B2BC->menuItems[loopMax].text = sStandBy;
       sUnknown_203B2BC->menuItems[loopMax].menuAction = FRIEND_AREA_ACTION_MENU_ACTION_STANDBY;
       if(!sub_8027D9C(pokeStruct))
@@ -381,7 +380,7 @@ void sub_8027794(void)
 
 void sub_80277FC(void)
 {
-  PokemonStruct1 *pokeStruct;
+  Pokemon *pokeStruct;
 
   switch(FriendList_HandleInput(TRUE)) {
       case 0:
@@ -412,8 +411,8 @@ void sub_80277FC(void)
 
 void sub_80278B4(void)
 {
-  PokemonStruct1 *playerStruct;
-  PokemonStruct1 *newLeader;
+  Pokemon *playerStruct;
+  Pokemon *newLeader;
   u32 menuAction;
 
   menuAction = 0;
@@ -431,7 +430,7 @@ void sub_80278B4(void)
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);
         break;
       case FRIEND_AREA_ACTION_MENU_ACTION_STANDBY:
-        sUnknown_203B2BC->pokeStruct->unk0 &= ~(FLAG_ON_TEAM);
+        sUnknown_203B2BC->pokeStruct->flags &= ~(POKEMON_FLAG_ON_TEAM);
         nullsub_104();
         sub_808ED00();
         SetFriendAreaActionMenuState(FRIEND_AREA_ACTION_MENU_MAIN_2);
@@ -686,7 +685,7 @@ void sub_8027D40(u32 r0, BulkItem *heldItem)
 
     CallPrepareTextbox_8008C54(r0);
     sub_80073B8(r0);
-    HeldItemToSlot(&slot, heldItem);
+    BulkItemToItem(&slot, heldItem);
     a3.unk0 = 0;
     a3.unk4 = 0;
     a3.unk8 = 1;
@@ -696,7 +695,7 @@ void sub_8027D40(u32 r0, BulkItem *heldItem)
     sub_80073E0(r0);
 }
 
-bool8 sub_8027D9C(PokemonStruct1 *pokeStruct)
+bool8 sub_8027D9C(Pokemon *pokeStruct)
 {
     u32 var1;
     if(!pokeStruct->isTeamLeader)
@@ -715,7 +714,7 @@ bool8 sub_8027D9C(PokemonStruct1 *pokeStruct)
     return TRUE;
 }
 
-bool8 sub_8027DCC(PokemonStruct1 *pokeStruct)
+bool8 sub_8027DCC(Pokemon *pokeStruct)
 {
     u32 var1;
     if(sub_808D3BC() != pokeStruct)
@@ -740,7 +739,7 @@ bool8 sub_8027DCC(PokemonStruct1 *pokeStruct)
     return FALSE;
 }
 
-u32 sub_8027E18(PokemonStruct1 *pokeStruct)
+u32 sub_8027E18(Pokemon *pokeStruct)
 {
     if(pokeStruct->heldItem.id == ITEM_NOTHING)
         return 0;
@@ -752,7 +751,7 @@ u32 sub_8027E18(PokemonStruct1 *pokeStruct)
         return 3;
 }
 
-bool8 sub_8027E4C(PokemonStruct1 *pokeStruct)
+bool8 sub_8027E4C(Pokemon *pokeStruct)
 {
     if(!IsNotMoneyOrUsedTMItem(pokeStruct->heldItem.id))
         return FALSE;

@@ -448,14 +448,14 @@ static void sub_80186F8(void)
             }
             else {
                 sUnknown_203B20C->id = sub_801CB24();
-                ItemIdToSlot(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
+                ItemIdToItem(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
                 sUnknown_203B20C->item.quantity = 1;
                 UpdateKangaskhanStorage2State(13);
             }
             break;
         case 4:
             sUnknown_203B20C->id = sub_801CB24();
-            ItemIdToSlot(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
+            ItemIdToItem(&sUnknown_203B20C->item, sUnknown_203B20C->id, 0);
             sUnknown_203B20C->item.quantity = 1;
             UpdateKangaskhanStorage2State(14);
             break;

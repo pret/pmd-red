@@ -21,7 +21,7 @@ typedef struct unkStruct_203B2B4
     u32 itemIndex;
     BulkItem item1;
     BulkItem item2;
-    /* 0x1C */ PokemonStruct1 *pokeStruct;
+    /* 0x1C */ Pokemon *pokeStruct;
     u32 moveIndex; // some sort of move index
     u16 moveID;
     Move moves[8];

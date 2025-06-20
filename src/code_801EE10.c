@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/input.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801EE10.h"
 #include "input.h"
 #include "items.h"
@@ -95,7 +95,7 @@ u8 sub_801EE10(u32 param_1, s16 species, Move *moves, u32 param_4, const u8 *tex
     sub_8012D08(&gUnknown_203B270->windows.id[gUnknown_203B270->unk50],iVar8);
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B270->windows, TRUE, TRUE);
-    sub_8013818(&gUnknown_203B270->input,iVar5,iVar5,param_6);
+    CreateMenuOnWindow(&gUnknown_203B270->input,iVar5,iVar5,param_6);
     sub_8013780(&gUnknown_203B270->input,0);
     sub_801F280(TRUE);
     return 1;
@@ -215,7 +215,7 @@ _134:
         {
             move =  &gUnknown_203B270->moves[index2];
             if ((move->moveFlags & MOVE_FLAG_EXISTS)) {
-                if ((move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN)) {
+                if (MOVE_FLAG_LINK_CHAIN(move)) {
                     gUnknown_203B270->fill14[index2] = 1;
                 }
                 else {
@@ -252,8 +252,8 @@ void sub_801F1B0(bool8 param_1, bool8 param_2)
         gUnknown_203B270->unk4 = param_2;
     ResetUnusedInputStruct();
     ShowWindows(&gUnknown_203B270->windows, TRUE, TRUE);
-    gUnknown_203B270->input.unk22 = sub_801F3F8();
-    sub_8013984(&gUnknown_203B270->input);
+    gUnknown_203B270->input.totalEntriesCount = sub_801F3F8();
+    MenuUpdatePagesData(&gUnknown_203B270->input);
     gUnknown_203B270->input.menuIndex = sub_8092F4C(gUnknown_203B270->moves, gUnknown_203B270->input.menuIndex);
     sub_801F280(TRUE);
     if(param_1)
@@ -276,7 +276,7 @@ void sub_801F214(void)
     }
 }
 
-extern void sub_80922B4(u8 *buffer, u8 *string, s32 size);
+extern void StrncpyCustom(u8 *buffer, u8 *string, s32 size);
 
 void sub_801F280(bool8 param_1)
 {
@@ -285,40 +285,40 @@ void sub_801F280(bool8 param_1)
 
     CallPrepareTextbox_8008C54(gUnknown_203B270->unk50);
     sub_80073B8(gUnknown_203B270->unk50);
-    sub_80922B4(buffer,gUnknown_203B270->pokeStruct->name,POKEMON_NAME_LENGTH);
+    StrncpyCustom(buffer,gUnknown_203B270->pokeStruct->name,POKEMON_NAME_LENGTH);
     strcpy(gFormatBuffer_Monsters[0],buffer);
     PrintFormattedStringOnWindow(0xc,0,gUnknown_80DC28C,gUnknown_203B270->unk50,0); // Move: {COLOR_1 YELLOW}{ARG_POKEMON_0){END_COLOR_TEXT_1}
 
-    for (i = 0; i < gUnknown_203B270->input.unk1A; i++) {
+    for (i = 0; i < gUnknown_203B270->input.currPageEntries; i++) {
         struct Move *move;
         bool8 linkChain;
         s32 x, y;
-        struct unkStruct_80928C0 uStack_30 = {0};
+        struct MoveBufferStruct uStack_30 = {0};
 
-        uStack_30.unk4 = 0x6a;
+        uStack_30.xPPCoord = X_PP_COORD_DEFAULT;
         move = &gUnknown_203B270->moves[i];
         if (MoveFlagExists(move)) {
             if (gUnknown_203B270->isTeamLeader) {
-                uStack_30.unk0 = 2;
+                uStack_30.style = BUFFER_MOVE_SET_ICON_POSITIONED_PP;
             }
             else {
-                uStack_30.unk0 = 4;
+                uStack_30.style = BUFFER_MOVE_STAR_ICON_POSITIONED_PP;
             }
 
             if (gUnknown_203B270->unk6) {
-                uStack_30.unk9 = 1;
+                uStack_30.useRedColorForChargingMoves = TRUE;
             }
             else {
-                uStack_30.unk9 = 0;
+                uStack_30.useRedColorForChargingMoves = FALSE;
             }
 
             if (i >= MAX_MON_MOVES) {
-                uStack_30.unk8 = 1;
+                uStack_30.redColor = TRUE;
             }
 
-            sub_80928A0(gFormatBuffer_Items[0],move,&uStack_30);
+            BufferDefaultMoveName(gFormatBuffer_Items[0],move,&uStack_30);
             y = GetMenuEntryYCoord(&gUnknown_203B270->input,i);
-            linkChain = MoveFlagLinkChain(move);
+            linkChain = MOVE_FLAG_LINK_CHAIN(move);
             x = !linkChain ? 0x8 : 0xD;
             if (!linkChain && i != 0) {
                 AddUnderScoreHighlight(gUnknown_203B270->unk50,0xc,y - 2,0x78,7);

@@ -3,7 +3,7 @@
 #include "constants/wonder_mail.h"
 #include "constants/colors.h"
 #include "structs/str_dungeon.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_803D0D8.h"
 #include "code_8094F88.h"
 #include "input.h"
@@ -18,7 +18,7 @@ struct unkStruct_203B334
 {
     // size: 0x7C
     u32 mailIndex;
-    MenuInputStructSub unk4;
+    TouchScreenMenuInput unk4;
     u32 unk10;
     WindowTemplate *unk14;
     WindowTemplates unk18;
@@ -58,7 +58,7 @@ bool8 sub_8031D70(u32 mailIndex, s32 param_2)
 {
   gUnknown_203B334 = MemoryAlloc(sizeof(struct unkStruct_203B334),8);
   gUnknown_203B334->mailIndex = mailIndex;
-  sub_801317C(&gUnknown_203B334->unk4);
+  ResetTouchScreenMenuInput(&gUnknown_203B334->unk4);
   gUnknown_203B334->unk10 = param_2;
   gUnknown_203B334->unk14 = &gUnknown_203B334->unk18.id[param_2];
   RestoreSavedWindows(&gUnknown_203B334->unk18);

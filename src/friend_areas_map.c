@@ -5,10 +5,10 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "decompress_sir.h"
 #include "friend_area.h"
 #include "friend_areas_map.h"
@@ -21,6 +21,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_3.h"
+#include "world_map_sound.h"
 
 EWRAM_INIT struct FriendAreasMap *gFriendAreasMapPtr = NULL;
 EWRAM_DATA static u8 sCurrDirection = 0;
@@ -50,7 +51,7 @@ void ShowFriendAreasMap_Async(struct FriendAreasMapSetupStruct *setupPtr)
     gFriendAreasMapPtr->locationIdOnBPress = gFriendAreasMapPtr->teamBaseLocationId;
     sCurrDirection = 0xff;
     sHeldDpadCounter = 0;
-    sub_8011760();
+    PlayFriendAreasMapBGM();
 
     while (TRUE) {
         s32 newLocationId = 0;
@@ -142,13 +143,13 @@ static bool8 ChooseAreaInLocation_Async(void)
             PlayCursorUpDownSoundEffect();
         }
 
-        if ((gRealInputs.pressed & A_BUTTON) || menuPtr->unk28.a_button) {
+        if ((gRealInputs.pressed & A_BUTTON) || menuPtr->touchScreen.a_button) {
             PlayAcceptSoundEffect();
             gFriendAreasMapPtr->chosenFriendAreaId = gFriendAreasMapPtr->displayedAreas[menuPtr->menuIndex];
             ret = TRUE;
             break;
         }
-        if ((gRealInputs.pressed & B_BUTTON) || menuPtr->unk28.b_button) {
+        if ((gRealInputs.pressed & B_BUTTON) || menuPtr->touchScreen.b_button) {
             PlayCancelSoundEffect();
             break;
         }
@@ -162,7 +163,7 @@ static void FriendAreasMap_FadeOut_Async(void)
     s32 i;
 
     FriendAreasMap_HideTextWindowAndArrows();
-    sub_80117AC();
+    FadeOutFriendAreasMapBGM();
 
     for (i = 0; i < 60; i++) {
         gFriendAreasMapPtr->brightness -= 2;

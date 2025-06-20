@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/colors.h"
 #include "constants/input.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -22,7 +22,7 @@ bool8 sub_801E198(GameOptions *optionsMenu)
 {
     sUnknown_203B260 = MemoryAlloc(sizeof(struct unkStruct_203B260), 8);
     sUnknown_203B260->optionsMenu = optionsMenu;
-    sub_801317C(&sUnknown_203B260->unk4);
+    ResetTouchScreenMenuInput(&sUnknown_203B260->unk4);
     sUnknown_203B260->unk44 = 0;
     sUnknown_203B260->unk48 = &sUnknown_203B260->unk4C.id[0];
     RestoreSavedWindows(&sUnknown_203B260->unk4C);
@@ -30,7 +30,7 @@ bool8 sub_801E198(GameOptions *optionsMenu)
     sub_8012D08(sUnknown_203B260->unk48, 1);
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B260->unk4C, TRUE, TRUE);
-    sub_8013818(&sUnknown_203B260->input, 1, 1, sUnknown_203B260->unk44);
+    CreateMenuOnWindow(&sUnknown_203B260->input, 1, 1, sUnknown_203B260->unk44);
     nullsub_38();
     CreateOptionsMenu();
     return TRUE;
@@ -74,7 +74,7 @@ u32 sub_801E218(void)
     }
 
     // == TRUE is needed for matching
-    if (sub_80138B8(&sUnknown_203B260->input, 1) || flag == TRUE) {
+    if (MenuCursorUpdate(&sUnknown_203B260->input, 1) || flag == TRUE) {
         nullsub_38();
         CreateOptionsMenu();
         return 1;
@@ -111,15 +111,15 @@ static void CreateOptionsMenu(void)
 
     switch (sUnknown_203B260->optionsMenu->windowColor) {
         case WINDOW_COLOR_BLUE:
-            length = sub_8008ED0(sBlue);
+            length = GetStringLineWidth(sBlue);
             AddDoubleUnderScoreHighlight(sUnknown_203B260->unk44, (sUnknown_203B260->optionsMenu->windowColor * 40) + 80, y + 10, length, COLOR_WHITE_2);
             break;
         case WINDOW_COLOR_RED:
-            length = sub_8008ED0(sRed);
+            length = GetStringLineWidth(sRed);
             AddDoubleUnderScoreHighlight(sUnknown_203B260->unk44, (sUnknown_203B260->optionsMenu->windowColor * 40) + 80, y + 10, length, COLOR_WHITE_2);
             break;
         case WINDOW_COLOR_GREEN:
-            length = sub_8008ED0(sGreen);
+            length = GetStringLineWidth(sGreen);
             AddDoubleUnderScoreHighlight(sUnknown_203B260->unk44, (sUnknown_203B260->optionsMenu->windowColor * 40) + 80, y + 10, length, COLOR_WHITE_2);
             break;
     }

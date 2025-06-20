@@ -9,13 +9,13 @@
 // size: 0x118
 struct unk_203B250
 {
-    /* 0x0 */ PokemonStruct1 *pokeStruct;
+    /* 0x0 */ Pokemon *pokeStruct;
     /* 0x4 */ s16 index;
     /* 0x6 */ u8 currFriendAreaLocation; // 0 when not in a friend area
     u8 unk7;
     u8 unk8;
     u8 unk9;
-    PokemonStruct1 *unkC;
+    Pokemon *unkC;
     /* 0x10 */ u32 state;
     /* 0x14 */ u32 menuAction;
     MenuStruct unk18;
@@ -31,7 +31,7 @@ struct TeamBadgeData
     /* 0x4 */ RGB *palette; // Pics share common palette
 };
 
-bool8 sub_801D014(PokemonStruct1 *);
+bool8 sub_801D014(Pokemon *);
 u32 sub_801D0DC(void);
 u32 sub_801D178(void);
 u8 sub_801D1D4(void);

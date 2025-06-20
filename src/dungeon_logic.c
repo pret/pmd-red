@@ -418,7 +418,7 @@ void SetMessageArgument_2(u8 *buffer, EntityInfo *param_2, s32 colorNum)
             }
             else
             {
-                sub_808D9DC(buffer, &gRecruitedPokemonRef->pokemon2[param_2->teamIndex],colorNum);
+                sub_808D9DC(buffer, &gRecruitedPokemonRef->dungeonTeam[param_2->teamIndex],colorNum);
             }
         }
     }
@@ -433,7 +433,7 @@ void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum)
         CopyCyanMonsterNametoBuffer(buffer, entityInfo->apparentID);
     }
     else {
-        sub_808D9DC(buffer, &gRecruitedPokemonRef->pokemon2[entityInfo->teamIndex], colorNum);
+        sub_808D9DC(buffer, &gRecruitedPokemonRef->dungeonTeam[entityInfo->teamIndex], colorNum);
     }
 }
 
@@ -458,7 +458,7 @@ void sub_80709C8(u8 *buffer, EntityInfo *entityInfo)
             }
             else
             {
-                sub_808DA0C(buffer, &gRecruitedPokemonRef->pokemon2[entityInfo->teamIndex]);
+                sub_808DA0C(buffer, &gRecruitedPokemonRef->dungeonTeam[entityInfo->teamIndex]);
             }
         }
     }

@@ -13,8 +13,8 @@ u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFla
 {
     EntityInfo *pokemonInfo = GetEntInfo(targetPokemon);
     s32 itemWeight = 0;
-    bool8 targetOther = itemTargetFlags & 1;
-    u16 targetAlly = (itemTargetFlags >> 1) & 1;
+    bool8 targetOther = (itemTargetFlags & 1) != 0;
+    u16 targetAlly = (itemTargetFlags & 2) != 0;
     s32 i;
     Move *move;
     Move *move2;

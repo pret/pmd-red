@@ -42,7 +42,7 @@ struct WorldMapInfo
 {
     DungeonLocation startLocation;
     DungeonSetupSubstruct unk4;
-    PokemonStruct1 mon;
+    Pokemon mon;
     u8 unk6C;
     u8 unk6D[WORLD_MAP_UNK_6D_COUNT];
 };

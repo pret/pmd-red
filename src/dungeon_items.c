@@ -74,7 +74,7 @@ void CreateItemWithStickyChance(Item *item, u8 itemID, u32 forceSticky)
 {
     bool8 stickyFlag;
 
-    ItemIdToSlot(item, itemID, FALSE);
+    ItemIdToItem(item, itemID, FALSE);
     stickyFlag = FALSE;
     if (IsNotSpecialItem(itemID)) {
         if (forceSticky == FORCE_STICKY_RANDOM) {
@@ -797,7 +797,7 @@ static void MusicBoxCreation(void)
             ZeroOutItem(&gTeamInventoryRef->teamItems[indexes[2]]);
 
             // init the music box
-            ItemIdToSlot(&gTeamInventoryRef->teamItems[indexes[0]], ITEM_MUSIC_BOX, 0);
+            ItemIdToItem(&gTeamInventoryRef->teamItems[indexes[0]], ITEM_MUSIC_BOX, 0);
         }
     } while (musicBoxOnce);
 
@@ -884,7 +884,7 @@ void AllItemsToPlainSeed(void)
     {
         Item *item = &gTeamInventoryRef->teamItems[i];
         if ((item->flags & ITEM_FLAG_EXISTS)) {
-            ItemIdToSlot(item, ITEM_PLAIN_SEED, FALSE);
+            ItemIdToItem(item, ITEM_PLAIN_SEED, FALSE);
         }
     }
     FillInventoryGaps();
@@ -895,7 +895,7 @@ void AllItemsToPlainSeed(void)
             EntityInfo *entityInfo = GetEntInfo(entity);
             Item *item = &entityInfo->heldItem;
             if ((item->flags & ITEM_FLAG_EXISTS)) {
-                ItemIdToSlot(item, ITEM_PLAIN_SEED, FALSE);
+                ItemIdToItem(item, ITEM_PLAIN_SEED, FALSE);
             }
         }
     }

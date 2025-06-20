@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/communication_error_codes.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "code_802F204.h"
@@ -1238,15 +1238,15 @@ void UpdateThankYouMailText(void)
   u8 buffer1 [80];
   u8 buffer2 [80];
   u8 mailIndex;
-  PokemonStruct1 *pokeStruct;
-  PokemonStruct1 *pokeStruct2;
+  Pokemon *pokeStruct;
+  Pokemon *pokeStruct2;
   s32 linkStatus;
   unkStruct_203B480 *mail;
 
   switch(sUnknown_203B2C4->state) {
     case 5:
         pokeStruct = GetPlayerPokemonStruct();
-        sub_80922B4(buffer1,pokeStruct->name, POKEMON_NAME_LENGTH);
+        StrncpyCustom(buffer1,pokeStruct->name, POKEMON_NAME_LENGTH);
         sprintfStatic(sUnknown_203B2C4->formattedString,gUnknown_80DF250,buffer1);
         CreateDialogueBoxAndPortrait(sUnknown_203B2C4->formattedString,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;
@@ -1289,7 +1289,7 @@ void UpdateThankYouMailText(void)
         break;
     case THANK_YOU_MAIL_COMMS_FINISHED:
         sUnknown_203B2C4->linkError = COMMS_GOOD;
-        sub_8011830();
+        StopBGMResetSoundEffectCounters();
         linkStatus = sub_8037B28(sUnknown_203B2C4->unk40);
         sUnknown_203B2C4->linkError = linkStatus;
         if (linkStatus == COMMS_GOOD)
@@ -1322,7 +1322,7 @@ void UpdateThankYouMailText(void)
                 }
             }
         }
-        xxx_call_start_bg_music();
+        StartBGMusic();
         break;
     case PROMPT_THANK_YOU_PASSWORD:
         // OK. Please enter the Thank-You Mail Password
@@ -1404,7 +1404,7 @@ void UpdateThankYouMailText(void)
         break;
     case THANK_YOU_MAIL_COMMS_CLEANUP:
         pokeStruct2 = GetPlayerPokemonStruct();
-        sub_80922B4(buffer2, pokeStruct2->name, POKEMON_NAME_LENGTH);
+        StrncpyCustom(buffer2, pokeStruct2->name, POKEMON_NAME_LENGTH);
         sprintfStatic(sUnknown_203B2C4->formattedString,gUnknown_80DF63C,buffer2);
         CreateDialogueBoxAndPortrait(sUnknown_203B2C4->formattedString,0,&sUnknown_203B2C4->monPortrait,0x10d);
         break;

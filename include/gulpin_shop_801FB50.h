@@ -14,7 +14,7 @@ typedef struct unkStruct_203B27C
     /* 0x4 */ s32 state;
     /* 0x8 */ u32 fallbackState;
     /* 0xC */ s16 speciesNum;
-    /* 0x10 */ PokemonStruct1 *pokeStruct;
+    /* 0x10 */ Pokemon *pokeStruct;
     /* 0x14 */ bool8 isNextMoveLinked;
     bool8 unk15;
     /* 0x16 */ bool8 isTeamLeader;

@@ -8,7 +8,7 @@
 
 static const struct ScriptCommand s_gs189_g0_s0_station_sref_script[] = { /* 0x8239e50 */
     DEBUGINFO,
-    SELECT_MAP(189),
+    SELECT_MAP(MAP_MT_THUNDER_MID),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_GT, 17, /* to label */ 0),
     JUMP_LABEL(1),
@@ -50,9 +50,9 @@ static const struct ScriptCommand s_gs189_g0_s0_evt0_sref_script[] = { /* 0x823a
   LABEL(1), /* = 0x01 */
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     BGM_FADEOUT(60),
-    { 0x02, 0x00,  0x001e,  0x00000008,  0x00000000, NULL },
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_MT_THUNDER_PEAK),
     COND_EQUAL(-1, /* to label */ 1),
     HALT,
 };
@@ -67,7 +67,7 @@ static const struct ScriptCommand s_gs189_g0_s0_evt1_sref_script[] = { /* 0x823a
   LABEL(1), /* = 0x01 */
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     BGM_FADEOUT(30),
     { 0x23, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER4_FUNC),
@@ -126,11 +126,11 @@ static const struct ScriptCommand s_gs189_g0_s4_lives1_dlg0[] = { /* 0x823a3cc *
 static const struct ScriptCommand s_gs189_g1_s0_station_sref_script[] = { /* 0x823a3fc */
     DEBUGINFO,
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 189),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 189),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_MT_THUNDER_MID),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_MT_THUNDER_MID),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
-    SELECT_MAP(189),
+    SELECT_MAP(MAP_MT_THUNDER_MID),
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(111),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -151,15 +151,15 @@ static const struct ScriptCommand s_gs189_g1_s0_lives0_dlg0[] = { /* 0x823a4d8 *
     CALL_SCRIPT(LOOK_AROUND_LEFT_FUNC),
     { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     WAIT(10),
-    { 0x2e, 0x02,  0x0001,  0x00000002,  0x00000000, NULL },
+    PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000002),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Hmm...{WAIT_PRESS}\nThings didn't go right for us...")),
     VARIANT_DEFAULT(_(" Hmm...{WAIT_PRESS}\nThings didn't turn out in our favor...")),
-    { 0x2e, 0x15,  0x0001,  0x00000000,  0x00000000, NULL },
+    PORTRAIT_REP(0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" But we should be getting\nclose.{WAIT_PRESS}\nLet's keep going hard at it!")),
     VARIANT_DEFAULT(_(" But we shouldn't be far.{WAIT_PRESS}\nLet's keep doing our best!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },

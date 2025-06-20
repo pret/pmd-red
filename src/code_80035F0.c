@@ -1,5 +1,5 @@
 #include "global.h"
-
+#include "globaldata.h"
 #include "bg_palette_buffer.h"
 #include "code_8002774.h"
 

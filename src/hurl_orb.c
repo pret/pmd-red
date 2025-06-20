@@ -11,7 +11,7 @@
 #include "constants/monster.h"
 #include "constants/type.h"
 #include "constants/weather.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_ai.h"
 #include "dungeon_config.h"
 #include "dungeon_generation.h"
