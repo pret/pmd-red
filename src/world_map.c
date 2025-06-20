@@ -101,15 +101,15 @@ void ShowWorldMap_Async(struct WorldMapSetupStruct *setupPtr)
         speciesId = 0;
     }
 
-    dungeonEnter = sub_809034C(setupPtr->info.unk4.unk0.id, speciesId, text, setupPtr->info.unk6C, FALSE);
-    if (dungeonEnter == 0) {
+    dungeonEnter = BufferDungeonRequirementsText(setupPtr->info.unk4.unk0.id, speciesId, text, setupPtr->info.unk6C, FALSE);
+    if (dungeonEnter == DUNGEON_REQUIREMENTS_PASS) {
         setupPtr->dungeonEntered = TRUE;
     }
-    else if (dungeonEnter == 1) {
+    else if (dungeonEnter == DUNGEON_REQUIREMENTS_FAIL) {
         PrintDialogueMessage_Async(text);
         setupPtr->dungeonEntered = FALSE;
     }
-    else if (dungeonEnter == 2) {
+    else if (dungeonEnter == DUNGEON_REQUIREMENTS_ASK) {
         if (PlayerEnterDungeonPrompt_Async(text)) {
             setupPtr->dungeonEntered = TRUE;
         }

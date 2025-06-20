@@ -18,7 +18,12 @@ void PrintYellowDungeonNametoBuffer(u8 *buffer, DungeonLocation *dungeonLocation
 void PrintDungeonLocationtoBuffer(u8 *buffer, DungeonLocation *dungeonLocation);
 
 void GeneralizeMazeDungeonLoc(DungeonLocation *dst, const DungeonLocation *src);
-u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_);
+
+#define DUNGEON_REQUIREMENTS_PASS 0
+#define DUNGEON_REQUIREMENTS_FAIL 1
+#define DUNGEON_REQUIREMENTS_ASK 2
+
+u32 BufferDungeonRequirementsText(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 param_4_, bool32 param_5_);
 u32 GetDungeonLocMissionDifficulty(DungeonLocation *dungeon);
 u8 GetRandomItemForValidDungeonLoc(DungeonLocation *dungeon, u32 param_2);
 bool8 IsNotValidDungeon(u8 dungeon);

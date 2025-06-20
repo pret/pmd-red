@@ -50,6 +50,11 @@ static inline u8 *InlineStrncpy(u8 *dst, const u8 *src, s32 n)
     return strncpy(dst, src, n);
 }
 
+static inline u8 *InlineStrcat(u8 *dst, u8 *src)
+{
+    return strcat(dst, src);
+}
+
 static inline bool8 AreStringsDifferent(const u8 *str1, const u8 *str2)
 {
     return strcmp(str1, str2) != 0;

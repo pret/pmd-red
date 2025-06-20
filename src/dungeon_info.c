@@ -2536,14 +2536,10 @@ bool8 DoEnemiesEvolveWhenKOed(u8 dungeon)
     return gDungeons[dungeon].enemiesEvolveWhenKOed;
 }
 
-// Needed to match.
-static inline void AddNewLine(const u8 *str, u8 *buffer, u8 *newLine)
-{
-    FormatString(str, buffer, newLine, 0);
-}
+#define TXT_BUFFER_LEN 200
 
-// I think this checks if the dungeon HM requirement is met
-u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, bool32 param_5_)
+// This checks if the dungeon requirements are met. (For example HMs)
+u32 BufferDungeonRequirementsText(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, bool32 param_5_)
 {
     s32 maxPartyMembers, i;
 
@@ -2554,9 +2550,9 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, 
     s32 numInvSlots = GetNumberOfFilledInventorySlots();
     s32 counter = 0;
     s32 sp_0xf0;
-    bool8 sp_0xf4 = FALSE;
-    bool8 r8 = FALSE;
-    u8 text[200];
+    bool8 requirementsAsk = FALSE;
+    bool8 requirementFailed = FALSE;
+    u8 text[TXT_BUFFER_LEN];
     u8 newLine[2];
 
     newLine[0] = '\n';
@@ -2581,22 +2577,22 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, 
     }
     if (counter > maxPartyMembers) {
         if (maxPartyMembers == 1) {
-            AddNewLine(gText_OnlyOneMonMayEnterDungeon,text,newLine);
+            FormatString(gText_OnlyOneMonMayEnterDungeon,text,&text[TXT_BUFFER_LEN], 0);
         }
         else {
             gFormatArgs[0] = counter - maxPartyMembers;
-            AddNewLine(gText_TooManyMembersToEnterDungeon,text,newLine);
+            FormatString(gText_TooManyMembersToEnterDungeon,text,&text[TXT_BUFFER_LEN], 0);
         }
         AppendWithNewLines(buffer,text);
-        r8 = TRUE;
+        requirementFailed = TRUE;
     }
 
     if (gDungeons[dungeonIndex].maxItemsAllowed != 0 && gDungeons[dungeonIndex].maxItemsAllowed < numInvSlots) {
         gFormatArgs[0] = gDungeons[dungeonIndex].maxItemsAllowed;
         gFormatArgs[1] = numInvSlots - gDungeons[dungeonIndex].maxItemsAllowed;
-        AddNewLine((!r8) ? gText_OnlyXItemsMayBeBroughtIntoDungeon : gText_AlsoOnlyXItemsMayBeBroughtIntoDungeon, text, newLine);
+        FormatString((requirementFailed) ? gText_AlsoOnlyXItemsMayBeBroughtIntoDungeon : gText_OnlyXItemsMayBeBroughtIntoDungeon, text, &text[TXT_BUFFER_LEN], 0);
         AppendWithNewLines(buffer,text);
-        r8 = TRUE;
+        requirementFailed = TRUE;
     }
 
     if (speciesId != MONSTER_NONE) {
@@ -2604,9 +2600,9 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, 
 
         CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[0],speciesId);
         if (counter > 3) {
-            AddNewLine((!r8) ? gText_ClientCouldNotJoinTooManyMembers : gText_AlsoClientCouldNotJoinTooManyMembers, text,newLine);
+            FormatString((requirementFailed) ? gText_AlsoClientCouldNotJoinTooManyMembers : gText_ClientCouldNotJoinTooManyMembers, text, &text[TXT_BUFFER_LEN], 0);
             AppendWithNewLines(buffer,text);
-            r8 = TRUE;
+            requirementFailed = TRUE;
         }
         bodySize = GetBodySize(speciesId);
         for (i = 0; i < NUM_MONSTERS; i++) {
@@ -2617,31 +2613,31 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, 
             }
         }
         if (bodySize > 6) {
-            AddNewLine((!r8) ? gText_ClientCouldNotJoinNoSpace : gText_AlsoClientCouldNotJoinNoSpace, text,newLine);
+            FormatString((requirementFailed) ? gText_AlsoClientCouldNotJoinNoSpace : gText_ClientCouldNotJoinNoSpace, text, &text[TXT_BUFFER_LEN], 0);
             AppendWithNewLines(buffer,text);
-            r8 = TRUE;
+            requirementFailed = TRUE;
         }
     }
 
     if (requireHm) {
         s32 i;
-        u16 movesNeeded[4] = {MOVE_FLY, MOVE_DIVE, MOVE_WATERFALL, MOVE_SURF};
-        u8 hmsNeeded[4] = {ITEM_HM_FLY, ITEM_HM_DIVE, ITEM_HM_WATERFALL, ITEM_HM_SURF};
+        u16 movesNeeded[MAX_MON_MOVES] = {MOVE_FLY, MOVE_DIVE, MOVE_WATERFALL, MOVE_SURF};
+        u8 hmsNeeded[MAX_MON_MOVES] = {ITEM_HM_FLY, ITEM_HM_DIVE, ITEM_HM_WATERFALL, ITEM_HM_SURF};
 
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < MAX_MON_MOVES; i++) {
             if ((((gDungeons[dungeonIndex].HMMask >> (i) & 1) != 0) && !TeamMonWithMove(movesNeeded[i])) && GetItemPossessionCount(hmsNeeded[i]) == 0) {
                 break;
             }
         }
 
-        if (i < 4) {
+        if (i < MAX_MON_MOVES) {
             struct Move move;
 
             InitPokemonMove(&move,movesNeeded[i]);
             BufferMoveName(gFormatBuffer_Items[0],&move,0);
-            AddNewLine((!r8) ? gText_MustHaveMonWithMove : gText_AlsoMustHaveMonWithMove, text,newLine);
+            FormatString((requirementFailed) ? gText_AlsoMustHaveMonWithMove : gText_MustHaveMonWithMove, text, &text[TXT_BUFFER_LEN], 0);
             AppendWithNewLines(buffer,text);
-            r8 = TRUE;
+            requirementFailed = TRUE;
         }
     }
 
@@ -2663,60 +2659,60 @@ u32 sub_809034C(u8 dungeonIndex, s32 speciesId_, u8 *buffer, bool32 requireHm_, 
                 }
             }
             if (otherSpeciesId == NUM_MONSTERS) {
-                AddNewLine((!r8) ? gText_MustHaveWaterTypeMon : gText_AlsoMustHaveWaterTypeMon, text,newLine);
+                FormatString((requirementFailed) ? gText_AlsoMustHaveWaterTypeMon : gText_MustHaveWaterTypeMon, text, &text[TXT_BUFFER_LEN], 0);
                 AppendWithNewLines(buffer,text);
-                r8 = TRUE;
+                requirementFailed = TRUE;
             }
         }
     }
 
-    if (r8) {
-        return 1;
+    if (requirementFailed) {
+        return DUNGEON_REQUIREMENTS_FAIL;
     }
 
     if ((!gDungeons[dungeonIndex].enterWithoutGameSave) || (param_5)) {
-        if (!sp_0xf4) {
+        if (!requirementsAsk) {
             strcpy(buffer,gText_IsOkToEnterWithFollowingRules);
             strcat(buffer,newLine);
-            sp_0xf4 = TRUE;
+            requirementsAsk = TRUE;
         }
         strcat(buffer,gText_GameWilllBeSavedBeforeEntering);
         strcat(buffer,newLine);
     }
     if (gDungeons[dungeonIndex].levelResetTo1) {
-        if (!sp_0xf4) {
+        if (!requirementsAsk) {
             strcpy(buffer,gText_IsOkToEnterWithFollowingRules);
             strcat(buffer,newLine);
-            sp_0xf4 = TRUE;
+            requirementsAsk = TRUE;
         }
         strcat(buffer,gText_TeamWillEnterAtLv1);
         strcat(buffer,newLine);
     }
     if ((gDungeons[dungeonIndex].maxItemsAllowed == 0) && (numInvSlots + sp_0xf0 != 0)) {
-        if (!sp_0xf4) {
+        if (!requirementsAsk) {
             strcpy(buffer,gText_IsOkToEnterWithFollowingRules);
             strcat(buffer,newLine);
-            sp_0xf4 = TRUE;
+            requirementsAsk = TRUE;
         }
         strcat(buffer,gText_AllItemsLostOnEntering);
         strcat(buffer,newLine);
     }
     if ((!gDungeons[dungeonIndex].keepMoney) && (gTeamInventoryRef->teamMoney != 0)) {
-        if (!sp_0xf4) {
+        if (!requirementsAsk) {
             strcpy(buffer,gText_IsOkToEnterWithFollowingRules);
             strcat(buffer,newLine);
-            sp_0xf4 = TRUE;
+            requirementsAsk = TRUE;
         }
         strcat(buffer, gText_AllMoneyLostOnEntering);
-        strcat(buffer,newLine);
+        InlineStrcat(buffer,newLine);
     }
 
-    if (sp_0xf4) {
-        return 2;
+    if (requirementsAsk) {
+        return DUNGEON_REQUIREMENTS_ASK;
     }
     else {
         sprintfStatic(buffer,_("No problem."));
-        return 0;
+        return DUNGEON_REQUIREMENTS_PASS;
     }
 }
 

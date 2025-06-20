@@ -1043,7 +1043,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                     s32 val;
                                     sub_8099220(&unkStruct, dungeonEnter);
                                     val = sub_80023E4(6);
-                                    res = sub_809034C(unkStruct.sub0.unk0.id, 0, gUnknown_203B4B0, val, 0);
+                                    res = BufferDungeonRequirementsText(unkStruct.sub0.unk0.id, 0, gUnknown_203B4B0, val, FALSE);
                                     gUnknown_2039DA4 = res;
                                     switch (res) {
                                         case 2: {
@@ -1085,7 +1085,7 @@ s16 HandleAction(Action *action, DebugLocation *debug)
                                 u32 res;
                                 ret = GetMailatIndex(GetScriptVarValue(NULL, 20));
                                 val = sub_80023E4(6);
-                                res = sub_809034C(ret->dungeonSeed.location.id, 0, gUnknown_203B4B0, val, 1);
+                                res = BufferDungeonRequirementsText(ret->dungeonSeed.location.id, 0, gUnknown_203B4B0, val, TRUE);
                                 gUnknown_2039DA4 = res;
                                 switch (res) {
                                     case 2: {
