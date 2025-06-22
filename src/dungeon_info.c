@@ -511,7 +511,7 @@ static const u8 sFloorMissionDifficulty_WaterfallPond[] = {
     [0] = 0,
     [1 ... 19] = 7,
 };
-static const u8 sFloorMissionDifficulty_UnknownRelic[] = {
+static const u8 sFloorMissionDifficulty_UnownRelic[] = {
     [0] = 0,
     [1 ... 11] = 7,
 };
@@ -624,7 +624,7 @@ static const u8 *const sDungeonMissionDifficulty[] = {
     [DUNGEON_D54] = sFloorMissionDifficulty_D54,
     [DUNGEON_POISON_MAZE] = sFloorMissionDifficulty_PoisonMaze,
     [DUNGEON_WATERFALL_POND] = sFloorMissionDifficulty_WaterfallPond,
-    [DUNGEON_UNOWN_RELIC] = sFloorMissionDifficulty_UnknownRelic,
+    [DUNGEON_UNOWN_RELIC] = sFloorMissionDifficulty_UnownRelic,
     [DUNGEON_JOYOUS_TOWER] = sFloorMissionDifficulty_JoyousTower,
     [DUNGEON_FAR_OFF_SEA] = sFloorMissionDifficulty_FarOffSea,
     [DUNGEON_MT_FARAWAY] = sFloorMissionDifficulty_MtFaraway,
