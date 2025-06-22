@@ -11,7 +11,7 @@
 typedef struct GroundObject {
     // size: 0x1C4
     u8 unk0[4];
-    s16 unk4;
+    s16 id;
     s16 unk6; // kind
     s16 unk8; // scriptID / group
     s8 unkA; // sector
@@ -24,13 +24,13 @@ typedef struct GroundObject {
     PixelPos unk30;
     Action unk38;
     u32 flags;
-    s8 unk120;
+    s8 direction;
     PixelPos unk124;
     PixelPos unk12C;
     PixelPos unk134;
-    u8 unk13C;
-    u16 unk13E;
-    u16 unk140;
+    u8 directionRelated;
+    s16 unk13E;
+    s16 unk140;
     struct UnkGroundSpriteStruct unk144;
 } GroundObject;
 
@@ -67,18 +67,18 @@ static void CallbackObjectSetHitboxPos(void *objectPtr_, PixelPos *posOrNull);
 static void CallbackObjectSetPositionBounds(void *objectPtr_, PixelPos *from, PixelPos *to);
 static void CallbackObjectGetHitboxCenter(void *objectPtr_, PixelPos *out);
 static s32 CallbackObjectMoveReal(void *objectPtr_, PixelPos *pos);
-extern void CallbackObjectGetPosHeightAndUnk(void *objectPtr_, u32 *height, u32 *unk);
-extern void CallbackObjectSetPosHeight(void *objectPtr_, u32 height);
-extern void CallbackObjectGetDirection(void *objectPtr_, s8 *dir);
-extern void CallbackObjectSetDirection(void *objectPtr_, s32 dir_);
-extern void CallbackObjectSetEventIndex(void *objectPtr_, u16 a1);
-extern void CallbackObjectSetUnk_80AC998(void *objectPtr_, s32 a1_, s32 a2);
-extern bool8 CallbackObjectSpriteRelatedCheck_80AC9B8(void *objectPtr_);
-extern bool8 CallbackObjectSpriteRelated_80AC9DC(void *objectPtr_);
-extern void CallbackObjectGetFlags(void *objectPtr_, u32 *flags);
-extern void CallbackObjectSetFlags(void *objectPtr_, u32 flags);
-extern void CallbackObjectClearFlags(void *objectPtr_, u32 flags);
-extern s32 CallbackObjectMoveRelative(void *objectPtr_, PixelPos *pos);
+static void CallbackObjectGetPosHeightAndUnk(void *objectPtr_, u32 *height, u32 *unk);
+static void CallbackObjectSetPosHeight(void *objectPtr_, u32 height);
+static void CallbackObjectGetDirection(void *objectPtr_, s8 *dir);
+static void CallbackObjectSetDirection(void *objectPtr_, s32 dir_);
+static void CallbackObjectSetEventIndex(void *objectPtr_, u16 a1);
+static void CallbackObjectSetUnk_80AC998(void *objectPtr_, s32 a1_, s32 a2);
+static bool8 CallbackObjectSpriteRelatedCheck_80AC9B8(void *objectPtr_);
+static bool8 CallbackObjectSpriteRelated_80AC9DC(void *objectPtr_);
+static void CallbackObjectGetFlags(void *objectPtr_, u32 *flags);
+static void CallbackObjectSetFlags(void *objectPtr_, u32 flags);
+static void CallbackObjectClearFlags(void *objectPtr_, u32 flags);
+static s32 CallbackObjectMoveRelative(void *objectPtr_, PixelPos *pos);
 
 
 static const CallbackData gGroundObjectCallbacks = {
@@ -155,7 +155,6 @@ const u8 gUnknown_8118334[];
 
 
 
-
 static const struct ScriptCommand gUnknown_81182F4[] = {
     DEBUGINFO, // Needs to be line 159
     LABEL(0),
@@ -171,8 +170,31 @@ static const struct ScriptCommand gUnknown_8118350[] = {
     JUMP_LABEL(0),
 };
 
-const u8 gUnknown_81183A0[] = {
-0xFF, 0xFF,  0x0,  0x8, 0x1,  0x8,  0x0, 0x10, 0x1, 0x10,  0x2, 0x10, 0x3, 0x10,  0x0,  0x8, 0x1,  0x8,  0x2,  0x8, 0x3,  0x8,  0x4,  0x8, 0x5,  0x8,  0x6,  0x8, 0x7,  0x8,  0x8,  0x8, 0x9,  0x8,  0xA,  0x8, 0xB,  0x8,  0xC,  0x8, 0xD,  0x8,  0xE,  0x8, 0xF,  0x8,  0x0,  0x0};
+const s16 gUnknown_81183A0[] = {
+0xFFFF,  
+0x800, 
+0x801,  
+0x1000, 
+0x1001,  
+0x1002,
+0x1003,
+0x800, 
+0x801,  
+0x802, 
+0x803,
+0x804, 
+0x805,  
+0x806, 
+0x807,
+0x808, 
+0x809,  
+0x80A, 
+0x80B,  
+0x80C, 
+0x80D,  
+0x80E, 
+0x80F,  
+0};
 
 void AllocGroundObjects(void) 
 {
@@ -369,7 +391,7 @@ s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 s
       parent = &gGroundObjects[id];
       Log(0,"GroundObject Add id %3d  kind %3d[%3d]  type %3d  group %3d  sector %3d",id,kind,objectData->kind,typeDataPtr->unk0,group,sector);
       bVar12 = (parent->unk6 == -1);
-      parent->unk4 = id;
+      parent->id = id;
       parent->unk6 = kind;
       parent->unk8 = group;
       parent->unkA = sector;
@@ -436,7 +458,7 @@ s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 s
       SetUnkInGroundEvent(&objectData->pos, &parent->unk20);
     
       if (bVar12) {
-        parent->unk120 = parent->unk1C;
+        parent->direction = parent->unk1C;
         parent->unk124.x = parent->unk20.x - parent->unk14.x;
         parent->unk12C.x = parent->unk20.x + parent->unk14.x;
         parent->unk124.y = parent->unk20.y - parent->unk14.y;
@@ -446,7 +468,7 @@ s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 s
       GetCurrentDungeonBounds(&parent->unk28,&parent->unk30);
       if (bVar12) {
         parent->unk13E = 0x800;
-        parent->unk13C = 1;
+        parent->directionRelated = 1;
         parent->unk140 = 0;
         sub_80A75CC(&(parent->unk144),id,parent->unk6, parent->flags);
       }
@@ -543,7 +565,7 @@ bool8 GroundObject_ExecuteScript(s32 index_, void *a1, ScriptInfoSmall *script)
     if(parent->unk6 != -1)
     {
         GroundScript_ExecutePP(&parent->unk38, (ActionUnkIds *)a1, script, DEBUG_LOC_PTR(gUnknown_8118334, 0x303, "GroundObject_ExecuteScript"));
-        parent->unk13C = 1;
+        parent->directionRelated = 1;
         return 1;
     }
     else {
@@ -778,87 +800,87 @@ s32 GetObjectCollision_80AC5F4(GroundObject *param_1, PixelPos *param_2, PixelPo
 
 s32 TryMoveObjectRelative_80AC6AC(GroundObject *param_1,PixelPos *param_2)
 {
-  PixelPos local_1c;
-  PixelPos local_14;
+    PixelPos local_1c;
+    PixelPos local_14;
 
-  local_1c.x = param_2->x - (param_1->unk14).x;
-  local_1c.y = param_2->y - (param_1->unk14).y;
-  local_14.x = param_2->x + (param_1->unk14).x;
-  local_14.y = param_2->y + (param_1->unk14).y;
-  if ((((local_1c.x < param_1->unk28.x) || (local_14.x >= param_1->unk30.x)) ||
-      (local_1c.y < param_1->unk28.y)) || (local_14.y >= param_1->unk30.y)) {
-    return 1;
-  }
-  else {
-    s32 ret = GetObjectCollision_80AC5F4(param_1,&local_1c,&local_14);
-    if (ret == 0) {
-      (param_1->unk124) = local_1c;
-      param_1->unk12C = local_14; 
-      return 0;
+    local_1c.x = param_2->x - (param_1->unk14).x;
+    local_1c.y = param_2->y - (param_1->unk14).y;
+    local_14.x = param_2->x + (param_1->unk14).x;
+    local_14.y = param_2->y + (param_1->unk14).y;
+    if ((((local_1c.x < param_1->unk28.x) || (local_14.x >= param_1->unk30.x)) ||
+        (local_1c.y < param_1->unk28.y)) || (local_14.y >= param_1->unk30.y)) {
+        return 1;
     }
-    return ret;
-  }
+    else {
+        s32 ret = GetObjectCollision_80AC5F4(param_1,&local_1c,&local_14);
+        if (ret == 0) {
+            (param_1->unk124) = local_1c;
+            param_1->unk12C = local_14; 
+            return 0;
+        }
+        return ret;
+    }
 }
 
 s32 TryMoveRelative_80AC720(GroundObject *param_1,PixelPos *param_2)
 {
-  s32 ret;
-  bool8 bVar1;
-  PixelPos iVar2;
-  PixelPos uVar4;
-  
-  iVar2.x = (param_1->unk124).x + param_2->x;
-  iVar2.y = (param_1->unk124).y + param_2->y;
-  uVar4.x = param_1->unk12C.x + param_2->x;
-  uVar4.y = param_1->unk12C.y + param_2->y;
-    
-  bVar1 = 0;
-    
+    s32 ret;
+    bool8 bVar1;
+    PixelPos iVar2;
+    PixelPos uVar4;
 
-  if (iVar2.x < param_1->unk28.x) {
-    iVar2.x = param_1->unk28.x;
-    uVar4.x = param_1->unk28.x + param_1->unkC.x;
-    bVar1 = 1;
-  }
-  else {
-    if (uVar4.x >= param_1->unk30.x) {
-       iVar2.x = param_1->unk30.x - param_1->unkC.x;
-       uVar4.x = param_1->unk30.x;
-       bVar1 = 1;
-    }
-  }
+    iVar2.x = (param_1->unk124).x + param_2->x;
+    iVar2.y = (param_1->unk124).y + param_2->y;
+    uVar4.x = param_1->unk12C.x + param_2->x;
+    uVar4.y = param_1->unk12C.y + param_2->y;
 
-  if (iVar2.y < param_1->unk28.y) {
-    iVar2.y = param_1->unk28.y;
-    uVar4.y = param_1->unk28.y + param_1->unkC.y;
-    bVar1 = 1;
-  }
-  else {
-    if (uVar4.y >= param_1->unk30.y){
-        iVar2.y = param_1->unk30.y - param_1->unkC.y;
-        uVar4.y = param_1->unk30.y;
+    bVar1 = 0;
+
+
+    if (iVar2.x < param_1->unk28.x) {
+        iVar2.x = param_1->unk28.x;
+        uVar4.x = param_1->unk28.x + param_1->unkC.x;
         bVar1 = 1;
     }
-  }
+    else {
+        if (uVar4.x >= param_1->unk30.x) {
+            iVar2.x = param_1->unk30.x - param_1->unkC.x;
+            uVar4.x = param_1->unk30.x;
+            bVar1 = 1;
+        }
+    }
 
-  ret = GetObjectCollision_80AC5F4(param_1,&iVar2,&uVar4);
-  if (ret == 0) {
-    (param_1->unk124) = iVar2;
-    param_1->unk12C = uVar4;
-    if (!bVar1) {
-      return 0;
+    if (iVar2.y < param_1->unk28.y) {
+        iVar2.y = param_1->unk28.y;
+        uVar4.y = param_1->unk28.y + param_1->unkC.y;
+        bVar1 = 1;
     }
     else {
-      return 1;
+        if (uVar4.y >= param_1->unk30.y){
+            iVar2.y = param_1->unk30.y - param_1->unkC.y;
+            uVar4.y = param_1->unk30.y;
+            bVar1 = 1;
+        }
     }
-  }
-  return ret;
+
+    ret = GetObjectCollision_80AC5F4(param_1,&iVar2,&uVar4);
+    if (ret == 0) {
+        (param_1->unk124) = iVar2;
+        param_1->unk12C = uVar4;
+        if (!bVar1) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
+    }
+    return ret;
 }
 
 static s16 CallbackObjectGetIndex(void *ptr) 
 {
     struct GroundObject *groundObject = ptr;
-    return groundObject->unk4;
+    return groundObject->id;
 }
 
 static void CallbackObjectGetSize(void *objectPtr_, PixelPos *out)
@@ -883,10 +905,10 @@ static void CallbackObjectSetHitboxPos(void *objectPtr_, PixelPos *posOrNull)
         objectPtr->unk124.y = objectPtr->unk20.y - objectPtr->unk14.y;
         objectPtr->unk12C.y = objectPtr->unk20.y + objectPtr->unk14.y;
         objectPtr->unk134.x = objectPtr->unk134.y = 0;
-        if (objectPtr->unk120 != objectPtr->unk1C) {
-            objectPtr->unk13C = TRUE;
+        if (objectPtr->direction != objectPtr->unk1C) {
+            objectPtr->directionRelated = TRUE;
         }
-        objectPtr->unk120 = objectPtr->unk1C;
+        objectPtr->direction = objectPtr->unk1C;
     }
 }
 
@@ -910,4 +932,164 @@ static s32 CallbackObjectMoveReal(void *objectPtr_, PixelPos *pos)
 {
     struct GroundObject *objectPtr = objectPtr_;
     return TryMoveObjectRelative_80AC6AC(objectPtr, pos);
+}
+
+static void CallbackObjectGetPosHeightAndUnk(void *objectPtr_, u32 *height, u32 *unk)
+{
+    struct GroundObject *objectPtr = objectPtr_;
+
+    *height = objectPtr->unk134.x;
+    *unk= objectPtr->unk134.y;
+}
+
+static void CallbackObjectSetPosHeight(void *objectPtr_, u32 height)
+{
+    struct GroundObject *objectPtr = objectPtr_;
+    objectPtr->unk134.x = height;
+
+}
+
+static void CallbackObjectGetDirection(void *objectPtr_, s8 *dir)
+{
+    struct GroundObject *objectPtr = objectPtr_;
+    *dir = objectPtr->direction;
+
+}
+
+static void CallbackObjectSetDirection(void *livesPtr_, s32 direction)
+{
+    struct GroundObject *livesPtr = livesPtr_;
+    s32 dir = (s8) direction;
+
+    if (dir != -1) {
+        livesPtr->direction = dir;
+    }
+}
+
+static void CallbackObjectSetEventIndex(void *livesPtr_, u16 a1) {
+    struct GroundObject *livesPtr = livesPtr_;
+
+    u32 r1;
+    u16 f1 = a1 & 0xFF;
+
+    if (f1 != 0)
+    {
+        r1 = gUnknown_81183A0[f1];
+    }
+    else
+    {
+         r1 = livesPtr->unk13E;
+    }
+
+    if(livesPtr->unk13E != (s16) r1)
+    {
+        livesPtr->unk13E = r1;
+        livesPtr->directionRelated = 1;
+    }
+    else if((livesPtr->unk13E & 0x1000))
+        livesPtr->directionRelated = 1;
+}
+
+
+static void CallbackObjectSetUnk_80AC998(void *objectPtr_, s32 a1_, s32 a2) {
+    struct GroundObject *livesPtr = objectPtr_;
+
+    s32 a1Match = (s16) a1_;
+    #ifndef NONMATCHING
+    register s16 a1 asm("r2") = a1Match;
+    #else
+    s32 a1 = a1Match;
+    #endif
+
+    if (a1Match == 0) {
+        a1 = 448;
+    }
+
+    livesPtr->unk140 = a1;
+}
+
+extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
+extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
+
+static bool8 CallbackObjectSpriteRelatedCheck_80AC9B8(void *objectPtr_)
+{
+    struct GroundObject *livesPtr = objectPtr_;
+
+    if (livesPtr->directionRelated) {
+        return TRUE;
+    }
+    else {
+        return sub_80A66F8(&livesPtr->unk144);
+    }
+}
+
+static bool8 CallbackObjectSpriteRelated_80AC9DC(void *objectPtr_)
+{
+    struct GroundObject *livesPtr = objectPtr_;
+
+    if (livesPtr->unk140 != 0) {
+        return TRUE;
+    }
+    else {
+        return sub_80A671C(&livesPtr->unk144);
+    }
+}
+
+static void CallbackObjectGetFlags(void *livesPtr_, u32 *flags)
+{
+    struct GroundObject *livesPtr = livesPtr_;
+
+    *flags = livesPtr->flags;
+}
+
+static void CallbackObjectSetFlags(void *livesPtr_, u32 flags)
+{
+    struct GroundObject *livesPtr = livesPtr_;
+
+    sub_80AC1B0(livesPtr->id, flags);
+}
+
+static void CallbackObjectClearFlags(void *livesPtr_, u32 flags)
+{
+    struct GroundObject *livesPtr = livesPtr_;
+
+    sub_80AC1F4(livesPtr->id, flags);
+}
+
+static s32 CallbackObjectMoveRelative(void *livesPtr_, PixelPos *pos)
+{
+    struct GroundObject *livesPtr = livesPtr_;
+
+    return TryMoveRelative_80AC720(livesPtr, pos);
+}
+
+extern DebugLocation gUnknown_8118524;
+extern DebugLocation gUnknown_8118530;
+extern s16 HandleAction(Action *action, DebugLocation *debug);
+
+void GroundObject_Action(void)
+{
+    GroundObject *objectPtr;
+    s32 i;
+
+    for (objectPtr = &gGroundObjects[0], i = 0; i < 0x10; i = (s16)(i + 1), objectPtr++)
+    {
+        if (objectPtr->unk6 != -1) {
+
+            switch(HandleAction(&objectPtr->unk38, &gUnknown_8118524))
+            {
+                case 4:
+                    GroundObject_Delete(i);
+                    continue;
+                case 0:
+                    ExecutePredefinedScript(&objectPtr->unk38, NULL, 1, &gUnknown_8118530);
+                    break;
+            }
+
+            if (objectPtr->directionRelated) {
+                objectPtr->directionRelated = FALSE;
+                sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1f00,(s8)objectPtr->unk13E);
+            }
+        }
+    }
 }
