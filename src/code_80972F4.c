@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "code_80958E8.h"

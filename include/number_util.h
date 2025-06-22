@@ -50,6 +50,10 @@ FixedPoint FixedPoint_SetFromUnk(s48_16* param_1);
 FixedPoint FixedPoint_Div(FixedPoint a, FixedPoint b);
 s32 FixedPointToInt(FixedPoint a); // Always rounded up
 
+#include "data_serializer.h"
+void ReadBellyBits(DataSerializer *r0, FixedPoint *dst);
+void WriteBellyBits(DataSerializer *r0, FixedPoint *src);
+
 // Sometimes it's used directly as opposed to calling IntToFixedPoint
 #define IntToFixedPointMacro(x) ((FixedPoint){x, 0})
 

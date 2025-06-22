@@ -3,7 +3,7 @@
 #include "weather.h"
 #include "code_804267C.h"
 #include "dungeon_vram.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_config.h"
 #include "dungeon_leader.h"
 #include "dungeon_music.h"

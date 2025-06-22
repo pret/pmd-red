@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/communication_error_codes.h"
 #include "constants/wonder_mail.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "code_803B050.h"
@@ -514,7 +514,7 @@ void WonderMailMainMenuCallback(void)
         break;
     case 9:
         gUnknown_203B3E8->wonderMailStatus = COMMS_GOOD;
-        sub_8011830();
+        StopBGMResetSoundEffectCounters();
         linkStatus = sub_8037B28(gUnknown_203B3E8->unk24C);
         gUnknown_203B3E8->wonderMailStatus = linkStatus;
         if (linkStatus == COMMS_GOOD) {
@@ -553,7 +553,7 @@ void WonderMailMainMenuCallback(void)
                 }
             }
         }
-        xxx_call_start_bg_music();
+        StartBGMusic();
         break;
     case PROMPT_PASSWORD_ENTRY:
         CreateDialogueBoxAndPortrait(gUnknown_80E7C98,0,0,0x101);

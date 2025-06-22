@@ -11,7 +11,7 @@ typedef struct unkStruct_203B3F8
     /* 0x0 */ u32 state;
     s16 unk4;
     u16 unk6;
-    /* 0x8 */ PokemonStruct1 *pokemon;
+    /* 0x8 */ Pokemon *pokemon;
     /* 0xC */ u32 menuAction;
     MenuStruct unk10;
     unkStructFor8013AA0 unk60;

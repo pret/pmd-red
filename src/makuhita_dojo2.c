@@ -3,10 +3,10 @@
 #include "constants/colors.h"
 #include "constants/input.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_80972F4.h"
 #include "code_80A26CC.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "input.h"
 #include "makuhita_dojo2.h"
 #include "memory.h"
@@ -31,19 +31,19 @@ bool8 sub_80302E8(s32 param_1, DungeonPos *param_2, u32 param_3)
     if (sMakuhitaDojoWork2 == NULL)
         sMakuhitaDojoWork2 = MemoryAlloc(sizeof(MakuhitaDojoWork2), 8);
 
-    sMakuhitaDojoWork2->s30.s0.winId = param_1;
-    sMakuhitaDojoWork2->s30.s0.unk38 = &sMakuhitaDojoWork2->s30.s0.windows.id[param_1];
-    RestoreSavedWindows(&sMakuhitaDojoWork2->s30.s0.windows);
-    sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.winId] = sUnknown_80E0804;
-    sMakuhitaDojoWork2->s30.s0.unk38->header = &sMakuhitaDojoWork2->s30.header;
+    sMakuhitaDojoWork2->s30.m.menuWinId = param_1;
+    sMakuhitaDojoWork2->s30.m.menuWindow = &sMakuhitaDojoWork2->s30.m.windows.id[param_1];
+    RestoreSavedWindows(&sMakuhitaDojoWork2->s30.m.windows);
+    sMakuhitaDojoWork2->s30.m.windows.id[sMakuhitaDojoWork2->s30.m.menuWinId] = sUnknown_80E0804;
+    sMakuhitaDojoWork2->s30.m.menuWindow->header = &sMakuhitaDojoWork2->s30.header;
 
     if (param_2 != NULL)
-        sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.winId].pos = *param_2;
+        sMakuhitaDojoWork2->s30.m.windows.id[sMakuhitaDojoWork2->s30.m.menuWinId].pos = *param_2;
 
-    sub_8012D08(sMakuhitaDojoWork2->s30.s0.unk38, param_3);
+    sub_8012D08(sMakuhitaDojoWork2->s30.m.menuWindow, param_3);
     ResetUnusedInputStruct();
-    ShowWindows(&sMakuhitaDojoWork2->s30.s0.windows, TRUE, TRUE);
-    sub_8013818(&sMakuhitaDojoWork2->s30.s0.input, sub_8030668(), param_3, param_1);
+    ShowWindows(&sMakuhitaDojoWork2->s30.m.windows, TRUE, TRUE);
+    CreateMenuOnWindow(&sMakuhitaDojoWork2->s30.m.input, sub_8030668(), param_3, param_1);
     sub_80304C8();
     MakuhitaDojo_DrawCourseList();
     return TRUE;
@@ -52,11 +52,11 @@ bool8 sub_80302E8(s32 param_1, DungeonPos *param_2, u32 param_3)
 u32 sub_80303AC(bool8 param_1)
 {
     if (param_1 == FALSE) {
-        sub_8013660(&sMakuhitaDojoWork2->s30.s0.input);
+        sub_8013660(&sMakuhitaDojoWork2->s30.m.input);
         return 0;
     }
 
-    switch (GetKeyPress(&sMakuhitaDojoWork2->s30.s0.input)) {
+    switch (GetKeyPress(&sMakuhitaDojoWork2->s30.m.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
@@ -64,7 +64,7 @@ u32 sub_80303AC(bool8 param_1)
             PlayMenuSoundEffect(0);
             return 3;
         default:
-            if (sub_80138B8(&sMakuhitaDojoWork2->s30.s0.input, 1)) {
+            if (MenuCursorUpdate(&sMakuhitaDojoWork2->s30.m.input, 1)) {
                 sub_80304C8();
                 MakuhitaDojo_DrawCourseList();
                 return 1;
@@ -76,25 +76,25 @@ u32 sub_80303AC(bool8 param_1)
 
 s16 sub_8030418(void)
 {
-    return sMakuhitaDojoWork2->unk0[(sMakuhitaDojoWork2->s30.s0.input.unk1E * sMakuhitaDojoWork2->s30.s0.input.unk1C) + sMakuhitaDojoWork2->s30.s0.input.menuIndex];
+    return sMakuhitaDojoWork2->unk0[GET_CURRENT_MENU_ENTRY(sMakuhitaDojoWork2->s30.m.input)];
 }
 
 UNUSED static void sub_8030444(bool8 a0)
 {
-    sMakuhitaDojoWork2->s30.s0.input.unk22 = sub_8030668();
-    sub_8013984(&sMakuhitaDojoWork2->s30.s0.input);
+    sMakuhitaDojoWork2->s30.m.input.totalEntriesCount = sub_8030668();
+    MenuUpdatePagesData(&sMakuhitaDojoWork2->s30.m.input);
     sub_80304C8();
     MakuhitaDojo_DrawCourseList();
     if (a0)
-        AddMenuCursorSprite(&sMakuhitaDojoWork2->s30.s0.input);
+        AddMenuCursorSprite(&sMakuhitaDojoWork2->s30.m.input);
 }
 
 void sub_8030480(void)
 {
     if (sMakuhitaDojoWork2 != NULL) {
-        sMakuhitaDojoWork2->s30.s0.windows.id[sMakuhitaDojoWork2->s30.s0.winId] = sUnknown_80E07EC;
+        sMakuhitaDojoWork2->s30.m.windows.id[sMakuhitaDojoWork2->s30.m.menuWinId] = sUnknown_80E07EC;
         ResetUnusedInputStruct();
-        ShowWindows(&sMakuhitaDojoWork2->s30.s0.windows, TRUE, TRUE);
+        ShowWindows(&sMakuhitaDojoWork2->s30.m.windows, TRUE, TRUE);
         MemoryFree(sMakuhitaDojoWork2);
         sMakuhitaDojoWork2 = NULL;
     }
@@ -107,7 +107,7 @@ static void sub_80304C8(void)
     sMakuhitaDojoWork2->s30.header.width = 8;
     sMakuhitaDojoWork2->s30.header.f3 = 0;
 
-    SUB_80095E4_CALL(sMakuhitaDojoWork2->s30.s0);
+    UPDATE_MENU_WINDOW_HEIGHT(sMakuhitaDojoWork2->s30.m);
 }
 
 static void MakuhitaDojo_DrawCourseList(void)
@@ -120,27 +120,27 @@ static void MakuhitaDojo_DrawCourseList(void)
     s32 i;
     u8 buffer[256];
 
-    CallPrepareTextbox_8008C54(sMakuhitaDojoWork2->s30.s0.winId);
-    sub_80073B8(sMakuhitaDojoWork2->s30.s0.winId);
-    PrintStringOnWindow(10, 0, sCourses, sMakuhitaDojoWork2->s30.s0.winId, 0);
-    sub_8012BC4((sMakuhitaDojoWork2->s30.header.width * 8) + 4, 0, sMakuhitaDojoWork2->s30.s0.input.unk1E + 1, 2, 7, sMakuhitaDojoWork2->s30.s0.winId);
+    CallPrepareTextbox_8008C54(sMakuhitaDojoWork2->s30.m.menuWinId);
+    sub_80073B8(sMakuhitaDojoWork2->s30.m.menuWinId);
+    PrintStringOnWindow(10, 0, sCourses, sMakuhitaDojoWork2->s30.m.menuWinId, 0);
+    PrintNumOnWindow((sMakuhitaDojoWork2->s30.header.width * 8) + 4, 0, sMakuhitaDojoWork2->s30.m.input.currPage + 1, 2, 7, sMakuhitaDojoWork2->s30.m.menuWinId);
 
-    for (i = 0; i < sMakuhitaDojoWork2->s30.s0.input.unk1A; i++) {
-        iVar6 = sMakuhitaDojoWork2->unk0[sMakuhitaDojoWork2->s30.s0.input.unk1E * sMakuhitaDojoWork2->s30.s0.input.unk1C + i];
-        dungeonIndex = sub_80A2740(iVar6);
+    for (i = 0; i < sMakuhitaDojoWork2->s30.m.input.currPageEntries; i++) {
+        iVar6 = sMakuhitaDojoWork2->unk0[sMakuhitaDojoWork2->s30.m.input.currPage * sMakuhitaDojoWork2->s30.m.input.entriesPerPage + i];
+        dungeonIndex = ScriptDungeonIdToDungeonId(iVar6);
 
         mazeIndex = sub_80A2668(iVar6);
 
-        y = GetMenuEntryYCoord(&sMakuhitaDojoWork2->s30.s0.input, i);
+        y = GetMenuEntryYCoord(&sMakuhitaDojoWork2->s30.m.input, i);
         color = COLOR_WHITE_2; // COLOR_WHITE again?
         if ((bool8)IsMazeCompleted(mazeIndex)) {
-            PrintStringOnWindow(8, y, sStarBullet, sMakuhitaDojoWork2->s30.s0.winId, 0);
+            PrintStringOnWindow(8, y, sStarBullet, sMakuhitaDojoWork2->s30.m.menuWinId, 0);
             color = COLOR_GREEN;
         }
         sprintfStatic(buffer, sFmtColor, color, GetDungeonName1(dungeonIndex));
-        PrintStringOnWindow(16, y, buffer, sMakuhitaDojoWork2->s30.s0.winId, 0);
+        PrintStringOnWindow(16, y, buffer, sMakuhitaDojoWork2->s30.m.menuWinId, 0);
     }
-    sub_80073E0(sMakuhitaDojoWork2->s30.s0.winId);
+    sub_80073E0(sMakuhitaDojoWork2->s30.m.menuWinId);
 }
 
 static s32 sub_8030668(void)

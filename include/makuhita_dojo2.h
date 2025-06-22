@@ -4,13 +4,13 @@
 #include "constants/dungeon.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_3.h"
 
 // size: 0xD0
 typedef struct MakuhitaDojoWork2
 {
     s16 unk0[NUM_DUNGEON_MAZE];
-    /* 0x30 */ struct_Sub80095E4_2 s30;
+    /* 0x30 */ MenuHeaderWindow s30;
 } MakuhitaDojoWork2;
 
 bool8 MakuhitaDojo_ReturnFalse(void);

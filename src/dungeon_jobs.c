@@ -10,6 +10,8 @@
 #include "string_format.h"
 #include "code_80958E8.h"
 #include "mailbox.h"
+#include "items.h"
+#include "pokemon.h"
 #include "structs/str_dungeon.h"
 #include "constants/dungeon.h"
 

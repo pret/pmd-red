@@ -38,7 +38,8 @@
 #include "move_orb_actions_4.h"
 #include "weather.h"
 #include "targeting_flags.h"
-#include "text_util.h"
+#include "pokemon_types.h"
+#include "dungeon_run_end.h"
 
 extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);
@@ -58,7 +59,6 @@ extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
 extern Entity *GetMonsterAtPos(DungeonPos *pos);
 extern s32 sub_800ED20(u16 param_1);
-extern s16 sub_8094828(u16, u8);
 struct UnkStruct_sub_800E308_1
 {
     s16 unk0;
@@ -200,7 +200,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
             break;
         if (++moveId >= MAX_MON_MOVES)
             break;
-        if (!MoveFlagLinkChain(&attackerInfo->moves.moves[moveId]))
+        if (!MOVE_FLAG_LINK_CHAIN(&attackerInfo->moves.moves[moveId]))
             break;
     }
 
@@ -1253,7 +1253,7 @@ bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
     Move *move = &pokemonInfo->moves.moves[moveIndex];
     if (!MoveFlagExists(move))
         return FALSE;
-    if (MoveFlagLinkChain(move) || MoveFlagDisabled(move) || MoveFlagSealed(move))
+    if (MOVE_FLAG_LINK_CHAIN(move) || MoveFlagDisabled(move) || MoveFlagSealed(move))
         return FALSE;
 
     for (i = 0; i < MAX_MON_MOVES; i++) {
@@ -1262,7 +1262,7 @@ bool8 CanAIUseMove(Entity *pokemon, s32 moveIndex, bool8 hasPPChecker)
         move++;
         if (move >= &pokemonInfo->moves.moves[MAX_MON_MOVES])
             break;
-        if (!(move->moveFlags & MOVE_FLAG_SUBSEQUENT_IN_LINK_CHAIN))
+        if (!MOVE_FLAG_LINK_CHAIN(move))
             break;
     }
 

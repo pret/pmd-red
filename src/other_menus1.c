@@ -5,9 +5,9 @@
 #include "structs/str_dungeon.h"
 #include "bg_palette_buffer.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "input.h"
 #include "items.h"
 #include "memory.h"
@@ -214,7 +214,7 @@ void sub_80373C4(void)
     LoadBufferedInputs();
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
     ResetSprites(FALSE);
 }
@@ -234,7 +234,7 @@ static void sub_8037400(void)
     r6 = NULL;
     r5 = NULL;
     sub_8037810();
-    sub_8011830();
+    StopBGMResetSoundEffectCounters();
     sUnknown_203B35C->linkStatus = sub_8037B28(sUnknown_203B35C->unk0);
     if (sUnknown_203B35C->linkStatus == COMMS_GOOD) {
         switch (sUnknown_203B35C->unk0) {
@@ -326,7 +326,7 @@ static void sub_8037400(void)
         }
     }
 
-    xxx_call_start_bg_music();
+    StartBGMusic();
 }
 
 static void sub_80376CC(void)
@@ -397,8 +397,8 @@ static void sub_8037810(void)
     MemoryFill8(&sUnknown_203B35C->unk25C, 0, sizeof(unkStruct_203B480));
     MemoryFill8(&sUnknown_203B35C->unk28C, 0, sizeof(unkStruct_203B480));
     MemoryFill8(&sUnknown_203B35C->unk314, 0, sizeof(unkStruct_203B480));
-    MemoryFill8(&sUnknown_203B35C->unk2BC, 0, sizeof(PokemonStruct1));
-    MemoryFill8(&sUnknown_203B35C->unk344, 0, sizeof(PokemonStruct1));
+    MemoryFill8(&sUnknown_203B35C->unk2BC, 0, sizeof(Pokemon));
+    MemoryFill8(&sUnknown_203B35C->unk344, 0, sizeof(Pokemon));
     MemoryFill8(sUnknown_203B35C->unk39C, 0, 0xb4); // unkStruct_803B344?
     MemoryFill8(sUnknown_203B35C->unk450, 0, 0xb4); // unkStruct_803B344?
 

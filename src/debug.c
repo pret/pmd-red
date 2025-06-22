@@ -1,8 +1,14 @@
 #include "global.h"
+#include "globaldata.h"
 #include "debug.h"
 
 EWRAM_INIT static bool32 gNDS_DebugEnabled = {0}; // NDS=020EACE4
-EWRAM_INIT static u8 gUnknown_203B150 = {0};
+EWRAM_INIT static u8 sUnknown_203B150 = {0};
+
+ALIGNED(4) UNUSED static const char debug_fill18[] = "pksdir0";
+
+UNUSED static const DebugLocation sUnusedDebugLoc1 = {"none", -1, "none"};
+UNUSED static const DebugLocation sUnusedDebugLoc2 = {"default", -1, "none"};
 
 ALIGNED(4) static const char gFuncFileLineString[] = "func = '%s'\nfile = '%s'  line = %5d";
 
@@ -11,9 +17,9 @@ ALIGNED(4) static const char gFuncFileLineStringWPrefix[] = "%sfunc = '%s'\nfile
 
 ALIGNED(4) static const char gFuncFileLineString2[] = "func = '%s'\nfile = '%s'  line = %5d\n";
 
-ALIGNED(4) static const char debug_fill14[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill14[] = "pksdir0";
 ALIGNED(4) static const char gDebugPrintPrefix[] = "  Print  ";
-ALIGNED(4) static const char debug_fill13[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill13[] = "pksdir0";
 
 EWRAM_INIT UNUSED static const char *sUnusedEwramDebugStrings[] =
 {
@@ -30,22 +36,22 @@ EWRAM_INIT UNUSED static const char *sUnusedEwramDebugStrings[] =
 };
 
 ALIGNED(4) static const char gNotMountText[] = "not mount log system";
-ALIGNED(4) static const char debug_fill9[] = "pksdir0";
-ALIGNED(4) static const char debug_fill10[] = "pksdir0";
-ALIGNED(4) static const char debug_fill11[] = "pksdir0";
-ALIGNED(4) static const char debug_fill12[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill9[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill10[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill11[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill12[] = "pksdir0";
 
 ALIGNED(4) static const char gFatalText[] = "!!!!! Fatal !!!!!\n";
 ALIGNED(4) static const char gFatalErrorBufferPlaceholder[] = "%s\n";
 
-ALIGNED(4) static const char debug_fill0[] = "pksdir0";
-ALIGNED(4) static const char debug_fill1[] = "pksdir0";
-ALIGNED(4) static const char debug_fill2[] = "pksdir0";
-ALIGNED(4) static const char debug_fill3[] = "pksdir0";
-ALIGNED(4) static const char debug_fill4[] = "pksdir0";
-ALIGNED(4) static const char debug_fill5[] = "pksdir0";
-ALIGNED(4) static const char debug_fill6[] = "pksdir0";
-ALIGNED(4) static const char debug_fill7[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill0[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill1[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill2[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill3[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill4[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill5[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill6[] = "pksdir0";
+ALIGNED(4) UNUSED static const char debug_fill7[] = "pksdir0";
 
 // NORETURN attribute required for Modern
 #ifdef MODERN
@@ -122,23 +128,23 @@ static void nullsub_27(void)
 
 UNUSED static void sub_8011B08(void)
 {
-    gUnknown_203B150 = 1;
+    sUnknown_203B150 = 1;
 }
 
 UNUSED static void sub_8011B14(void)
 {
-    gUnknown_203B150 = 0;
+    sUnknown_203B150 = 0;
 }
 
 UNUSED static u8 sub_8011B20(void)
 {
-    gUnknown_203B150 = !gUnknown_203B150;
-    return gUnknown_203B150;
+    sUnknown_203B150 = !sUnknown_203B150;
+    return sUnknown_203B150;
 }
 
 UNUSED static u8 sub_8011B3C(void)
 {
-    return gUnknown_203B150;
+    return sUnknown_203B150;
 }
 
 UNUSED static void nullsub_137(void)

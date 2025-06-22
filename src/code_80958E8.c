@@ -6,7 +6,7 @@
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"
 #include "constants/wonder_mail.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "random.h"
 #include "friend_area.h"
 #include "items.h"
@@ -1007,7 +1007,7 @@ s32 CountJobsinDungeon(u8 dungeon)
   return count;
 }
 
-bool8 sub_8096A08(u8 dungeon, PokemonStruct1 *pokemon)
+bool8 sub_8096A08(u8 dungeon, Pokemon *pokemon)
 {
   WonderMail *mail;
   s32 index;
@@ -1031,7 +1031,7 @@ bool8 sub_8096A08(u8 dungeon, PokemonStruct1 *pokemon)
                 temp = 0x100;
                 local_14 |= temp;
 
-                sub_808CFD0(pokemon,mail->clientSpecies,NULL,0,(DungeonLocation *) &local_14,NULL);
+                CreateLevel1Pokemon(pokemon,mail->clientSpecies,NULL,0,(DungeonLocation *) &local_14,NULL);
                 return TRUE;
             }
   }

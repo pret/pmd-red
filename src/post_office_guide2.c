@@ -3,11 +3,10 @@
 #include "constants/mailbox.h"
 #include "constants/wonder_mail.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_8094F88.h"
 #include "code_80958E8.h"
 #include "code_80972F4.h"
-#include "code_8099328.h"
 #include "code_8099360.h"
 #include "code_80A26CC.h"
 #include "input.h"
@@ -19,6 +18,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_3.h"
+#include "ground_main.h"
 
 static EWRAM_INIT unkStruct_203B330 *sUnknown_203B330 = {NULL};
 
@@ -34,7 +34,7 @@ bool8 sub_80319A4(u8 param_1, u8 dungeon, s32 param_3)
     sUnknown_203B330 = MemoryAlloc(sizeof(unkStruct_203B330), 8);
     sUnknown_203B330->unkC = param_1;
     sUnknown_203B330->dungeonIndex = dungeon;
-    sub_801317C(&sUnknown_203B330->input);
+    ResetTouchScreenMenuInput(&sUnknown_203B330->input);
     sUnknown_203B330->unk10 = param_3;
     sUnknown_203B330->unk14 = &sUnknown_203B330->unk18.id[param_3];
     sub_8031A2C();

@@ -15,7 +15,7 @@ struct unkStruct_203B2D4
     u32 unk20;
     u32 unk24;
     WindowTemplates unk28;
-    MenuInputStructSub unk88;
+    TouchScreenMenuInput unk88;
 };
 
 bool8 sub_802B9FC(u8 mailIndex);

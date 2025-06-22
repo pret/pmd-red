@@ -12,7 +12,7 @@
 
 static const struct ScriptCommand s_script_END_TALK[] = { /* 0x811ee64 */
     DEBUGINFO,
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
     RET,
 };
@@ -37,7 +37,7 @@ static const struct ScriptCommand s_script_WAIT_START_FUNC[] = { /* 0x811ef28 */
 
 static const struct ScriptCommand s_script_INCOMPLETE_TALK[] = { /* 0x811ef58 */
     DEBUGINFO,
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{COLOR RED_W}Unregistered dialog script{RESET}") },
+    MSG_INSTANT(_("{COLOR RED_W}Unregistered dialog script{RESET}")),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -75,8 +75,8 @@ static const struct ScriptCommand s_script_OBJECT_REPLY_NORMAL[] = { /* 0x811f0a
 
 static const struct ScriptCommand s_script_EXAMINE_MISS[] = { /* 0x811f0e8 */
     DEBUGINFO,
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{NAME_0} checked underfoot.") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("But there was nothing to be found...") },
+    MSG_INSTANT(_("{NAME_0} checked underfoot.")),
+    MSG_INSTANT(_("But there was nothing to be found...")),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -90,9 +90,9 @@ static const struct ScriptCommand s_script_UNIT_TALK[] = { /* 0x811f188 */
     { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x2e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
     { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _("Let's go.") },
+    MSG_NPC(1, _("Let's go.")),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -101,18 +101,18 @@ static const struct ScriptCommand s_script_HABITAT_TALK[] = { /* 0x811f214 */
     { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x2e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
     { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
     { 0x3b, 0x0a,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
     COND_EQUAL(2, /* to label */ 1),
     { 0xe3, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x3b, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
     RET,
   LABEL(0), /* = 0x00 */
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _("Pleased to meet you.") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_NPC(1, _("Pleased to meet you.")),
+    TEXTBOX_CLEAR,
     { 0x3b, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
     RET,
   LABEL(1), /* = 0x01 */
@@ -124,32 +124,32 @@ static const struct ScriptCommand s_script_HABITAT_TALK_S01E02A[] = { /* 0x811f3
     { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x2e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x2e, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
+    PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
+    PORTRAIT(PLACEMENT_LEFT, 0x0001, 0x00000000),
     JUMPIF_EQUAL(FLAG_KIND_CHANGE_REQUEST, 0, /* to label */ 0),
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I will dedicate myself to\ncreating a fantastic new design.\nPlease check the rescue team flag later!") },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If my design fails to\nimpress you, please let me know.") },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If so, I will change the\ndesign to one perhaps more to your liking.") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_NPC(1, _(" I will dedicate myself to\ncreating a fantastic new design.\nPlease check the rescue team flag later!")),
+    MSG_NPC(1, _(" If my design fails to\nimpress you, please let me know.")),
+    MSG_NPC(1, _(" If so, I will change the\ndesign to one perhaps more to your liking.")),
+    TEXTBOX_CLEAR,
     { 0x3b, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
     RET,
   LABEL(0), /* = 0x00 */
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Hello!") },
+    MSG_NPC(1, _(" Hello!")),
     ASK3(FALSE, /*default*/ 1, /* speaker */ 1, _(" Oh?{WAIT_PRESS} Did you perhaps wish\nto change the team flag's design?")),
     CHOICE(/* label */  1, _("No need to change.")),
     CHOICE(/* label */  2, _("Yes, please.")),
   LABEL(1), /* = 0x01 */
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I see.{WAIT_PRESS} If you would like the\nflag's design changed, please tell me.") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_NPC(1, _(" I see.{WAIT_PRESS} If you would like the\nflag's design changed, please tell me.")),
+    TEXTBOX_CLEAR,
     { 0x3b, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
     RET,
   LABEL(2), /* = 0x02 */
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Ah, very well!{WAIT_PRESS}\nI may be unknown, but nonetheless, I am\nan artist.") },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" I will do my best to create\na splendid design for you!\nPlease check the rescue team flag later!") },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If my design fails to\nimpress you, please let me know.") },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" If so, I will change the\ndesign to one perhaps more to your liking.") },
+    MSG_NPC(1, _(" Ah, very well!{WAIT_PRESS}\nI may be unknown, but nonetheless, I am\nan artist.")),
+    MSG_NPC(1, _(" I will do my best to create\na splendid design for you!\nPlease check the rescue team flag later!")),
+    MSG_NPC(1, _(" If my design fails to\nimpress you, please let me know.")),
+    MSG_NPC(1, _(" If so, I will change the\ndesign to one perhaps more to your liking.")),
     UPDATE_VARINT(CALC_SET, FLAG_KIND_CHANGE_REQUEST, 1),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x3b, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
     RET,
 };
@@ -527,8 +527,8 @@ static const struct ScriptCommand s_script_INIT_SLEEP_FUNC[] = { /* 0x81206e0 */
 
 static const struct ScriptCommand s_script_INIT_BASE_FUNC[] = { /* 0x8120770 */
     DEBUGINFO,
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     RET_DIRECT,
@@ -557,8 +557,8 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER_FUNC[] = { /* 
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
     { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_INSTANT(_("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.")),
+    TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
 };
@@ -569,8 +569,8 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER2_FUNC[] = { /*
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
     { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_INSTANT(_("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.")),
+    TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
 };
@@ -581,8 +581,8 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER3_FUNC[] = { /*
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
     { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_INSTANT(_("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.")),
+    TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
 };
@@ -593,8 +593,8 @@ static const struct ScriptCommand s_script_DISMISSAL_SALLY_MEMBER4_FUNC[] = { /*
     { 0x3b, 0x09,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(0, /* to label */ 0),
     { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}The rescue team member(s)\n{CENTER_ALIGN}dispersed to the Friend Area(s).") },
-    { 0x32, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_INSTANT(_("{CENTER_ALIGN}If you want to add members to\n{CENTER_ALIGN}the rescue team, go visit\n{CENTER_ALIGN}them in their Friend Areas.")),
+    TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
     RET_DIRECT,
 };
@@ -609,7 +609,7 @@ static const struct ScriptCommand s_script_NEXT_SAVE_FUNC[] = { /* 0x8120bdc */
   LABEL(0), /* = 0x00 */
     { 0x3c, 0x0e,  0x0000,  0x00000000,  0x00000000, NULL },
   LABEL(1), /* = 0x01 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     WAIT(60),
     RET_DIRECT,
 };
@@ -624,7 +624,7 @@ static const struct ScriptCommand s_script_NEXT_SAVE2_FUNC[] = { /* 0x8120cdc */
   LABEL(0), /* = 0x00 */
     { 0x3c, 0x0f,  0x0000,  0x00000000,  0x00000000, NULL },
   LABEL(1), /* = 0x01 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     WAIT(60),
     RET_DIRECT,
 };
@@ -636,7 +636,7 @@ static const struct ScriptCommand s_script_SAVE_POINT[] = { /* 0x8120db0 */
     { 0x3a, 0x00,  0x0000,  0x00000000, -0x00000001, _("Would you like to save your adventure?") },
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     CALL_SCRIPT(SAVE_START_FUNC),
     { 0x3c, 0x0e,  0x0000,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(SAVE_END_FUNC),
@@ -661,14 +661,14 @@ static const struct ScriptCommand s_script_SAVE_AND_WAREHOUSE_POINT[] = { /* 0x8
     CHOICE(/* label */  1, _("Save.")),
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0x3c, 0x11,  0x0000,  0x00000000,  0x00000000, NULL },
     JUMP_SCRIPT(END_TALK),
   LABEL(1), /* = 0x01 */
     { 0x3a, 0x00,  0x0002,  0x00000000, -0x00000001, _("Would you like to save your adventure?") },
     JUMP_SCRIPT(END_TALK),
   LABEL(2), /* = 0x02 */
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     CALL_SCRIPT(SAVE_START_FUNC),
     { 0x3c, 0x0e,  0x0000,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(SAVE_END_FUNC),
@@ -892,7 +892,7 @@ static const struct ScriptCommand s_script_GET_ITEM_FUNC[] = { /* 0x8121a54 */
     DEBUGINFO,
     FANFARE_PLAY(203),
     { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
-    { 0x31, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR2,
     RET_DIRECT,
 };
 
@@ -900,7 +900,7 @@ static const struct ScriptCommand s_script_GET_ITEM_WAIT_FUNC[] = { /* 0x8121aa4
     DEBUGINFO,
     FANFARE_PLAY(203),
     { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     RET_DIRECT,
 };
 
@@ -908,7 +908,7 @@ static const struct ScriptCommand s_script_GET_ITEM2_FUNC[] = { /* 0x8121af4 */
     DEBUGINFO,
     FANFARE_PLAY(203),
     { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
-    { 0x31, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR2,
     RET_DIRECT,
 };
 
@@ -916,7 +916,7 @@ static const struct ScriptCommand s_script_GET_ITEM2_WAIT_FUNC[] = { /* 0x8121b4
     DEBUGINFO,
     FANFARE_PLAY(203),
     { 0xe1, 0x00,  0x00cb,  0x00000000,  0x00000000, NULL },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     RET_DIRECT,
 };
 
@@ -924,7 +924,7 @@ static const struct ScriptCommand s_script_JOIN_FUNC[] = { /* 0x8121b94 */
     DEBUGINFO,
     FANFARE_PLAY(204),
     { 0xe1, 0x00,  0x00cc,  0x00000000,  0x00000000, NULL },
-    { 0x31, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR2,
     RET_DIRECT,
 };
 
@@ -1154,8 +1154,8 @@ static const struct ScriptCommand s_script_EVENT_DIVIDE_NEXT[] = { /* 0x81226e4 
 static const struct ScriptCommand s_script_EVENT_DIVIDE_INIT_FUNC[] = { /* 0x8122724 */
     DEBUGINFO,
     { 0xf2, 0x00,  0x0002,  0x00000000,  0x00000000, _("EVENT_DIVIDE_INIT_FUNC\n") },
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, GROUND_PLACE, 11),
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
     CLEAR_ARRAY(WARP_LIST),
@@ -1484,8 +1484,8 @@ static const struct ScriptCommand s_script_EVENT_DIVIDE_SECOND[] = { /* 0x8123a1
   LABEL(7), /* = 0x07 */
     SCENARIO_CALC(SCENARIO_MAIN, 11,  1),
     CALL_SCRIPT(EVENT_DIVIDE_INIT_FUNC),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 9),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 9),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE),
   LABEL(8), /* = 0x08 */
     JUMP_SCRIPT(EVENT_M01E07A_L001),
   LABEL(9), /* = 0x09 */
@@ -1768,27 +1768,27 @@ static const struct ScriptCommand s_script_EVENT_DIVIDE_WARP_LOCK_FUNC[] = { /* 
     VARIANT_DEFAULT(_(" Huh?\nYou want to go home already?")),
     VARIANT_DEFAULT(_(" We're already here.\nLet me show you around a bit more.")),
     VARIANT_DEFAULT(_(" Let's go to the {COLOR CYAN}Pelipper\nPost Office{RESET} at least.")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     RET_DIRECT,
   LABEL(1), /* = 0x01 */
     { 0x2d, 0x09,  0x0001,  0x00000022,  0x00000000, NULL },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh?\nYou want to go home already?") },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh?\nAre you ready to leave?") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_NPC(1, _(" Huh?\nYou want to go home already?")),
+    MSG_NPC(1, _(" Huh?\nAre you ready to leave?")),
+    TEXTBOX_CLEAR,
     RET_DIRECT,
   LABEL(2), /* = 0x02 */
     { 0x2d, 0x09,  0x0001,  0x00000022,  0x00000000, NULL },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh?\nAre you ready to leave?") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_NPC(1, _(" Huh?\nAre you ready to leave?")),
+    TEXTBOX_CLEAR,
     RET_DIRECT,
   LABEL(3), /* = 0x03 */
     { 0x2d, 0x09,  0x0001,  0x00000022,  0x00000000, NULL },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh?\nAre you ready to leave?") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_NPC(1, _(" Huh?\nAre you ready to leave?")),
+    TEXTBOX_CLEAR,
     RET_DIRECT,
     { 0x2d, 0x09,  0x0001,  0x00000022,  0x00000000, NULL },
-    { 0x34, 0x00,  0x0001,  0x00000000,  0x00000000, _(" Huh?\nAre you ready to leave?") },
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    MSG_NPC(1, _(" Huh?\nAre you ready to leave?")),
+    TEXTBOX_CLEAR,
     RET_DIRECT,
 };
 
@@ -1995,7 +1995,7 @@ static const struct ScriptCommand s_script_EVENT_M01E02B_L004B[] = { /* 0x81256f
 static const struct ScriptCommand s_script_EVENT_M01E02B_L005[] = { /* 0x8125730 */
     DEBUGINFO,
     EXECUTE_SUBSTATION(182, 1, 0),
-    { 0x02, 0x00,  0x0000,  0x00000002,  0x00000000, NULL },
+    NEXT_DUNGEON(0, SCRIPT_DUNGEON_MT_STEEL),
     RET,
 };
 
@@ -2008,7 +2008,7 @@ static const struct ScriptCommand s_script_EVENT_M01E02B_L006[] = { /* 0x8125770
 static const struct ScriptCommand s_script_EVENT_M01E02B_L007[] = { /* 0x81257a0 */
     DEBUGINFO,
     EXECUTE_SUBSTATION(182, 2, 0),
-    { 0x02, 0x00,  0x0000,  0x00000002,  0x00000000, NULL },
+    NEXT_DUNGEON(0, SCRIPT_DUNGEON_MT_STEEL),
     RET,
 };
 
@@ -2045,8 +2045,8 @@ static const struct ScriptCommand s_script_EVENT_M01E03A_L002[] = { /* 0x8125900
     SCENARIO_CALC(SCENARIO_MAIN,  5,  3),
     UPDATE_VARINT(CALC_SET, WARP_LOCK, 4),
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 9),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     { 0x01, 0x00, -0x0001,  0x00000001,  0x00000000, NULL },
@@ -2168,7 +2168,7 @@ static const struct ScriptCommand s_script_EVENT_M01E04A_L004[] = { /* 0x8125de0
 
 static const struct ScriptCommand s_script_EVENT_M01E04A_L005[] = { /* 0x8125e20 */
     DEBUGINFO,
-    { 0x02, 0x00,  0x001e,  0x00000006,  0x00000000, NULL },
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_SILENT_CHASM),
     RET,
 };
 
@@ -2934,8 +2934,8 @@ static const struct ScriptCommand s_script_EVENT_S00E01A_L001[] = { /* 0x8127c30
 static const struct ScriptCommand s_script_EVENT_S00E01A_L002[] = { /* 0x8127c80 */
     DEBUGINFO,
     EXECUTE_SUBSTATION(9, 6, 0),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
     SCENARIO_CALC(SCENARIO_SELECT, 57,  0),
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -2991,8 +2991,8 @@ static const struct ScriptCommand s_script_EVENT_S01E01A_L001[] = { /* 0x8127ea0
     SCENARIO_CALC(SCENARIO_MAIN, 15,  5),
     SCENARIO_CALC(SCENARIO_SUB1, 29,  1),
     SET_DUNGEON_RES(/* result */ 0, /* enter */ -1),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 9),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 2),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     EXECUTE_MAP_VAR(GROUND_ENTER),
@@ -3716,8 +3716,8 @@ static const struct ScriptCommand s_script_EVENT_S08E01A_L008[] = { /* 0x8129d40
     { 0xf2, 0x00,  0x0041,  0x00000000,  0x00000000, _("S08 SWITCH SELECT\n") },
     CJUMP_VAR(EVENT_S08E01),
     COND_EQUAL(2, /* to label */ 0),
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
@@ -3842,7 +3842,7 @@ static const struct ScriptCommand s_script_EVENT_S09E01A_L004[] = { /* 0x812a2f4
 static const struct ScriptCommand s_script_EVENT_S09E01A_L004B[] = { /* 0x812a344 */
     DEBUGINFO,
     EXECUTE_SUBSTATION(201, 6, 0),
-    { 0x02, 0x00,  0x0000,  0x00000025,  0x00000000, NULL },
+    NEXT_DUNGEON(0, SCRIPT_DUNGEON_MT_FREEZE_2),
     RET,
 };
 
@@ -3876,7 +3876,7 @@ static const struct ScriptCommand s_script_EVENT_S09E01B_L001[] = { /* 0x812a454
 static const struct ScriptCommand s_script_EVENT_S09E01B_L001B[] = { /* 0x812a4a4 */
     DEBUGINFO,
     EXECUTE_SUBSTATION(221, 1, 0),
-    { 0x02, 0x00,  0x0000,  0x00000027,  0x00000000, NULL },
+    NEXT_DUNGEON(0, SCRIPT_DUNGEON_MURKY_CAVE),
     RET,
 };
 
@@ -3922,8 +3922,8 @@ static const struct ScriptCommand s_script_EVENT_R00E01A_L001[] = { /* 0x812a604
     CJUMP_VAR(DUNGEON_ENTER_INDEX),
     COND_EQUAL(36, /* to label */ 3),
   LABEL(4), /* = 0x04 */
-    UPDATE_VARINT(CALC_SET, GROUND_ENTER, 12),
-    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, 12),
+    UPDATE_VARINT(CALC_SET, GROUND_ENTER, MAP_TEAM_BASE_INSIDE),
+    UPDATE_VARINT(CALC_SET, GROUND_GETOUT, MAP_TEAM_BASE_INSIDE),
     UPDATE_VARINT(CALC_SET, PARTNER1_KIND, 0),
     UPDATE_VARINT(CALC_SET, PARTNER2_KIND, 0),
     CALL_SCRIPT(DISMISSAL_SALLY_MEMBER_FUNC),
@@ -4026,7 +4026,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E02B[] = { /* 0x812ab34 */
     JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E02B_L006),
   LABEL(6), /* = 0x06 */
-    { 0x02, 0x00, -0x0001,  0x00000003,  0x00000000, NULL },
+    NEXT_DUNGEON(-1, SCRIPT_DUNGEON_3),
     HALT,
   LABEL(1), /* = 0x01 */
     JUMPIF_EQUAL(SCENARIO_MAIN, 4, /* to label */ 7),
@@ -4050,7 +4050,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E02B[] = { /* 0x812ab34 */
   LABEL(11), /* = 0x0b */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(12), /* = 0x0c */
-    { 0x02, 0x00, -0x0001,  0x00000003,  0x00000000, NULL },
+    NEXT_DUNGEON(-1, SCRIPT_DUNGEON_3),
     HALT,
   LABEL(3), /* = 0x03 */
     JUMP_SCRIPT(EVENT_DIVIDE),
@@ -4074,7 +4074,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E03A[] = { /* 0x812ae04 */
     JUMPIF_EQUAL(START_MODE, 10, /* to label */ 3),
     JUMP_SCRIPT(EVENT_M01E03A_L009),
   LABEL(6), /* = 0x06 */
-    { 0x02, 0x00, -0x0001,  0x00000005,  0x00000000, NULL },
+    NEXT_DUNGEON(-1, SCRIPT_DUNGEON_5),
     HALT,
   LABEL(1), /* = 0x01 */
     JUMPIF_EQUAL(SCENARIO_MAIN, 5, /* to label */ 7),
@@ -4098,7 +4098,7 @@ static const struct ScriptCommand s_script_GETOUT_M01E03A[] = { /* 0x812ae04 */
   LABEL(11), /* = 0x0b */
     JUMP_SCRIPT(GETOUT_R00E01A),
   LABEL(12), /* = 0x0c */
-    { 0x02, 0x00, -0x0001,  0x00000005,  0x00000000, NULL },
+    NEXT_DUNGEON(-1, SCRIPT_DUNGEON_5),
     HALT,
   LABEL(3), /* = 0x03 */
     JUMP_SCRIPT(EVENT_DIVIDE),

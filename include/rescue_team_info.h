@@ -30,7 +30,6 @@ void sub_80920D8(u8 *buffer);
 void SetRescueTeamName(u8 *buffer);
 s32 GetTeamRankPts(void);
 s32 GetPtsToNextRank(void);
-void SetTeamRankPoints(s32 newPts);
 void AddToTeamRankPts(s32 newPts);
 u8 GetRescueTeamRank(void);
 const u8 *GetTeamRankString(u32 index);

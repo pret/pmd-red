@@ -1,16 +1,13 @@
 #include "global.h"
+#include "globaldata.h"
 #include "constants/ability.h"
-#include "constants/colors.h"
 #include "constants/dungeon.h"
-#include "constants/evolve_type.h"
-#include "constants/evolution_status.h"
 #include "constants/iq_skill.h"
 #include "constants/tactic.h"
 #include "constants/type.h"
 #include "structs/sprite_oam.h"
 #include "structs/str_pokemon.h"
-#include "code_8097670.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "friend_area.h"
 #include "luminous_cave.h"
 #include "moves.h"
@@ -22,6 +19,7 @@
 #include "text_1.h"
 #include "text_util.h"
 #include "dungeon_data.h"
+#include "number_util.h"
 
 struct UnusedOffenseStruct
 {
@@ -33,32 +31,14 @@ struct UnusedOffenseStruct
     u8 spDefBoost;
 };
 
-extern u32 gIQSkillGroups[];
-
 extern SpriteOAM gShadowSprites[3]; // Shadow sprites of some kind
-extern const s16 gUnknown_810AC60; // 0xC
-extern const s16 gUnknown_810AC62; // 0xC
-extern const s16 gUnknown_810AC68; // 0x8
-extern const s16 gUnknown_810AC64; // 0x8
-extern const s16 gUnknown_810AC66; // 0x8
-extern u8 gUnknown_8107754[];
-extern u8 gUnknown_810775C[];
-extern u8 gUnknown_8107768[];
-extern u8 gUnknown_8107770[];
-extern u8 gUnknown_8107784[];
-extern u8 gUnknown_8107788[];
-extern u8 gUnknown_810778C[];
-extern u8 gUnknown_8107790[];
-extern u8 gUnknown_8107798[];
 
 extern void WriteDungeonLocationBits(DataSerializer*, DungeonLocation*);
 extern void WritePoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);
 void ReadDungeonLocationBits(DataSerializer*, DungeonLocation*);
 void ReadPoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);
 
-extern void WriteBellyBits(DataSerializer*, FixedPoint *src);
 extern void WriteHiddenPowerBits(DataSerializer*, HiddenPower*);
-extern void ReadBellyBits(DataSerializer*, FixedPoint *dst);
 extern void ReadHiddenPowerBits(DataSerializer*, HiddenPower*);
 s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1);
 
@@ -80,15 +60,15 @@ void GenerateHiddenPower(HiddenPower* a1)
 }
 
 // arm9.bin::02059F70
-bool8 HasRecruitedMon(s16 species)
+bool8 HasRecruitedMon(s32 species_)
 {
-    s32 species_s32 = species;
+    s32 species = (s16) species_;
     s32 i = 0;
-    PokemonStruct1 *pokemon = gRecruitedPokemonRef->pokemon;
+    Pokemon *pokemon = gRecruitedPokemonRef->pokemon;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        if (((u8)pokemon->unk0 & 1)) {
-            if (pokemon->speciesNum == species_s32)
+        if (PokemonExists(pokemon)) {
+            if (pokemon->speciesNum == species)
                 return TRUE;
         }
         pokemon++;
@@ -261,33 +241,34 @@ s32 GetUnownIndex(s16 index)
 }
 
 // arm9.bin::02059B98
-s16 ExtractSpeciesIndex(UnkDungeonGlobal_unk1CD98 *r0)
+s16 ExtractSpeciesIndex(SpawnPokemonData *data)
 {
-    return r0->unk0 & 0x000001ff;
+    return data->bits & PACKED_BITS_SPECIES;
 }
 
 // arm9.bin::02059B7C
-void sub_808E9C4(PokemonStruct1 *r0, s16 r1)
+void SetSpeciesToExtract(SpawnPokemonData *data, s32 species_)
 {
-    s32 r1_s32 = r1; // cast needed to match
-    r0->unk0 =  ((0xFE << 8) & r0->unk0) | r1_s32 ;
+    s32 species = (s16) species_;
+    data->bits &= (PACKED_BITS_LEVEL << PACKED_BITS_LEVEL_SHIFT);
+    data->bits |= species;
 }
 
 #if (GAME_VERSION == VERSION_RED)
-void SetSpeciesLevelToExtract(UnkDungeonGlobal_unk1CD98 *r0, s32 level, s32 species)
+void SetSpeciesLevelToExtract(SpawnPokemonData *data, s32 level, s32 species_)
 {
-    species = SpeciesId(species);
-    r0->unk0 = species | (level << 9) ;
+    s32 species = (s16) (species_);
+    data->bits = species | (level << PACKED_BITS_LEVEL_SHIFT) ;
 }
 #endif
 
 // arm9.bin::02059B6C
-s32 ExtractLevel(UnkDungeonGlobal_unk1CD98 *r0)
+s32 ExtractLevel(SpawnPokemonData *data)
 {
-    return (r0->unk0 >> 9);
+    return (data->bits >> PACKED_BITS_LEVEL_SHIFT) & PACKED_BITS_LEVEL;
 }
 
-UNUSED static void GetMonOffenseStats(PokemonStruct1 *mon, struct UnusedOffenseStruct *dst)
+UNUSED static void GetMonOffenseStats(Pokemon *mon, struct UnusedOffenseStruct *dst)
 {
     dst->att[0] = mon->offense.att[0];
     dst->att[1] = mon->offense.att[1];
@@ -324,11 +305,7 @@ UNUSED static void GetMonOffenseStats(PokemonStruct1 *mon, struct UnusedOffenseS
     }
 }
 
-
-// TODO: File boundary?
-
-
-
+// NOTE: File boundary is here in Blue, however pksdir string is missing, so we can't split here.
 const u8 *GetIQSkillName(u8 skill)
 {
     return gIQSkillNames[skill];
@@ -444,15 +421,42 @@ void ToggleIQSkill(IqSkillFlags *iq, u32 skillIndex)
     }
 }
 
+static const s32 sIQSkillGroups[NUM_IQ_SKILLS] = {
+    [IQ_NONE] = 9999,
+    [IQ_TYPE_ADVANTAGE_MASTER] = 4,
+    [IQ_ITEM_CATCHER] = 1,
+    [IQ_COURSE_CHECKER] = 2,
+    [IQ_SURE_HIT_ATTACKER] = 4,
+    [IQ_QUICK_DODGER] = 4,
+    [IQ_PP_CHECKER] = 6,
+    [IQ_NONTRAITOR] = 7,
+    [IQ_STATUS_CHECKER] = 8,
+    [IQ_EXP_GO_GETTER] = 9,
+    [IQ_EFFICIENCY_EXPERT] = 9,
+    [IQ_WEAK_TYPE_PICKER] = 9,
+    [IQ_ALL_TERRAIN_HIKER] = 10,
+    [IQ_SUPER_MOBILE] = 10,
+    [IQ_TRAP_AVOIDER] = 11,
+    [IQ_HOUSE_AVOIDER] = 11,
+    [IQ_ENERGY_SAVER] = 14,
+    [IQ_NONSLEEPER] = 14,
+    [IQ_SELF_CURER] = 14,
+    [IQ_TRAP_SEER] = 16,
+    [IQ_LAVA_EVADER] = 16,
+    [IQ_DEDICATED_TRAVELER] = 9,
+    [IQ_ITEM_MASTER] = 17,
+    [IQ_EXCLUSIVE_MOVE_USER] = 6,
+};
+
 void SetIQSkill(IqSkillFlags *iq, u32 skillIndex)
 {
     s32 iqSkill;
     s32 iqSkillGroup;
     s32 bit;
 
-    for (iqSkill = 0, iqSkillGroup = gIQSkillGroups[skillIndex]; iqSkill < NUM_IQ_SKILLS; iqSkill++) {
+    for (iqSkill = 0, iqSkillGroup = sIQSkillGroups[skillIndex]; iqSkill < NUM_IQ_SKILLS; iqSkill++) {
         // Turn off each IQ Skill that's in the same group as the chosen skill
-        if (iqSkillGroup == gIQSkillGroups[iqSkill]) {
+        if (iqSkillGroup == sIQSkillGroups[iqSkill]) {
             s32 bit = 1 << (iqSkill);
             iq->flags[0] &= ~(bit);
             iq->flags[1] &= ~(bit >> 8);
@@ -495,62 +499,54 @@ bool8 IsIQSkillSet(IqSkillFlags *iq, u32 IQSkillBit)
     }
 }
 
-u32 sub_808ECFC(void)
+UNUSED static u32 sub_808ECFC(void)
 {
     return 0;
 }
 
-void sub_808ED00()
+// This function does nothing in Blue
+void sub_808ED00(void)
 {
-    s32 team[4];
-    s32 i;
-    s32 length = sub_808D580(team);
+    if (GAME_VERSION == VERSION_RED) {
+        s32 team[4];
+        s32 i;
+        s32 length = sub_808D580(team);
 
-    for (i = 0; i < length; i++) {
-        gRecruitedPokemonRef->team[i] = gRecruitedPokemonRef->pokemon[team[i]];
-    }
+        for (i = 0; i < length; i++) {
+            gRecruitedPokemonRef->team[i] = gRecruitedPokemonRef->pokemon[team[i]];
+        }
 
-    for (; i < MAX_TEAM_MEMBERS; i++) {
-        gRecruitedPokemonRef->team[i].unk0 = FLAG_NONE;
+        for (; i < MAX_TEAM_MEMBERS; i++) {
+            gRecruitedPokemonRef->team[i].flags = POKEMON_FLAG_NONE;
+        }
     }
 }
-
-
-
-// File boundary here
-
-
 
 // arm9.bin::0205CC54
 s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
 {
-    u16 sixMons[6];
+    s16 sixMons[6];
     DataSerializer backup;
-    u8 data_u8;
     s16 teamLeader;
+    s32 minus1;
     s32 count;
     s32 i;
-    PokemonStruct1 *pokemon;
 
     InitBitWriter(&backup, a1, a2);
 
     for (i = 0; i < 6; i++)
         sixMons[i] = -1;
 
-    teamLeader = 1; // Maybe fakematch, should be -1
-    teamLeader = -teamLeader;
+    // s16 memes
+    minus1 = -1;
+    teamLeader = minus1;
     count = 0;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        // Fakematch, probably need the PokemonFlag2 inline
-        if (i) {
-            u8 unk = -unk;
-        }
+        Pokemon *pokemon = &gRecruitedPokemonRef->pokemon[i];
 
-        pokemon = &gRecruitedPokemonRef->pokemon[i];
-
-        if (PokemonFlag1(pokemon)) {
-            if (pokemon->unk0 & FLAG_ON_TEAM)
+        if (PokemonExists(pokemon)) {
+            if (pokemon->flags & POKEMON_FLAG_ON_TEAM)
                 sixMons[count++] = i;
 
             if (IsMonTeamLeader(pokemon))
@@ -564,7 +560,8 @@ s32 SaveRecruitedPokemon(u8 *a1, s32 a2)
 
     // Team members
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-        if (PokemonFlag1(&gRecruitedPokemonRef->team[i]))
+        u8 data_u8;
+        if (PokemonExists(&gRecruitedPokemonRef->team[i]))
             data_u8 = 0xFF;
         else
             data_u8 = 0;
@@ -603,16 +600,16 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
         ReadBits(&backup, &data_u8, 1);
         ReadPoke1Bits(&backup, &gRecruitedPokemonRef->team[i]);
         if (data_u8 & 1)
-            gRecruitedPokemonRef->team[i].unk0 = FLAG_ON_TEAM | FLAG_UNK_1;
+            gRecruitedPokemonRef->team[i].flags = POKEMON_FLAG_ON_TEAM | POKEMON_FLAG_EXISTS;
         else
-            gRecruitedPokemonRef->team[i].unk0 = FLAG_NONE;
+            gRecruitedPokemonRef->team[i].flags = POKEMON_FLAG_NONE;
     }
 
     // ???
     for (i = 0; i < 6; i++) {
         ReadBits(&backup, &data_s16, 16);
         if ((u16)data_s16 < NUM_MONSTERS)
-            gRecruitedPokemonRef->pokemon[data_s16].unk0 |= FLAG_ON_TEAM;
+            gRecruitedPokemonRef->pokemon[data_s16].flags |= POKEMON_FLAG_ON_TEAM;
     }
 
     // Team leader
@@ -625,7 +622,7 @@ s32 RestoreRecruitedPokemon(u8 *a1, s32 a2)
 }
 
 // arm9.bin::0205C9D4
-void WritePoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
+void WritePoke1Bits(DataSerializer* a1, Pokemon* pokemon)
 {
     WriteBits(a1, &pokemon->level, 7);
     WriteBits(a1, &pokemon->speciesNum, 9);
@@ -647,16 +644,16 @@ void WritePoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
 }
 
 // arm9.bin::0205C890
-void ReadPoke1Bits(DataSerializer* a1, PokemonStruct1* pokemon)
+void ReadPoke1Bits(DataSerializer* a1, Pokemon* pokemon)
 {
-    memset(pokemon, 0, sizeof(PokemonStruct1));
+    memset(pokemon, 0, sizeof(Pokemon));
 
-    pokemon->unk0 = FLAG_NONE;
+    pokemon->flags = POKEMON_FLAG_NONE;
     pokemon->isTeamLeader = FALSE;
 
     ReadBits(a1, &pokemon->level, 7);
     if (pokemon->level)
-        pokemon->unk0 |= FLAG_UNK_1;
+        pokemon->flags |= POKEMON_FLAG_EXISTS;
 
     ReadBits(a1, &pokemon->speciesNum, 9);
     ReadDungeonLocationBits(a1, &pokemon->dungeonLocation);
@@ -689,15 +686,15 @@ s32 SavePoke2s(u8* buffer, s32 size)
     data_u8_zero = 0;
 
     for (i = 0; i < 4; i++) {
-        PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
-        WriteBits(&backup, &pokemon2->unk0, 2);
+        DungeonMon* pokemon2 = &gRecruitedPokemonRef->dungeonTeam[i];
+        WriteBits(&backup, &pokemon2->flags, 2);
 
         WriteBits(&backup, pokemon2->isTeamLeader ? &data_u8_neg1 : &data_u8_zero, 1);
         WriteBits(&backup, &pokemon2->level, 7);
 
         WriteDungeonLocationBits(&backup, &pokemon2->dungeonLocation);
         WriteBits(&backup, &pokemon2->IQ, 10);
-        WriteBits(&backup, &pokemon2->unkA, 16);
+        WriteBits(&backup, &pokemon2->recruitedPokemonId, 16);
         WriteBits(&backup, &pokemon2->unkC, 16);
         WriteBits(&backup, &pokemon2->speciesNum, 9);
         WriteBits(&backup, &pokemon2->unk10, 10);
@@ -730,12 +727,12 @@ s32 RestorePoke2s(u8* a1, s32 size)
     InitBitReader(&backup, a1, size);
 
     for (i = 0; i < 4; i++) {
-        PokemonStruct2* pokemon2 = &gRecruitedPokemonRef->pokemon2[i];
+        DungeonMon* pokemon2 = &gRecruitedPokemonRef->dungeonTeam[i];
         u8 unk2;
 
-        memset(pokemon2, 0, sizeof(PokemonStruct2));
+        memset(pokemon2, 0, sizeof(DungeonMon));
 
-        ReadBits(&backup, &pokemon2->unk0, 2);
+        ReadBits(&backup, &pokemon2->flags, 2);
 
         ReadBits(&backup, &unk2, 1);
         if (unk2 & 1) {
@@ -748,7 +745,7 @@ s32 RestorePoke2s(u8* a1, s32 size)
 
         ReadDungeonLocationBits(&backup, &pokemon2->dungeonLocation);
         ReadBits(&backup, &pokemon2->IQ, 10);
-        ReadBits(&backup, &pokemon2->unkA, 16);
+        ReadBits(&backup, &pokemon2->recruitedPokemonId, 16);
         ReadBits(&backup, &pokemon2->unkC, 16);
         ReadBits(&backup, &pokemon2->speciesNum, 9);
         ReadBits(&backup, &pokemon2->unk10, 10);
@@ -796,539 +793,4 @@ void WriteHiddenPowerBits(DataSerializer* a1, HiddenPower* a2)
 {
     WriteBits(a1, &a2->hiddenPowerBasePower, 10);
     WriteBits(a1, &a2->hiddenPowerType, 5);
-}
-
-
-
-
-// File Boundary here
-
-
-
-void sub_808F468(struct PokemonStruct1 *pokemon,struct EvolveStatus *evolveStatus,bool8 param_3)
-{
-    struct FriendAreaCapacity friendAreaCapacity;
-    struct unkEvolve evolveConditions;
-    s32 index;
-
-    evolveStatus->evolutionConditionStatus = 0;
-    for (index = MONSTER_BULBASAUR; index < MONSTER_MAX; index++) {
-        s32 speciesId = (s16) index;
-        if (speciesId == MONSTER_ALAKAZAM) {
-            GetPokemonEvolveConditions(MONSTER_ALAKAZAM,&evolveConditions);
-        }
-        else {
-            GetPokemonEvolveConditions(speciesId,&evolveConditions);
-        }
-        if (evolveConditions.preEvolution.evolveType != 0 && pokemon->speciesNum == evolveConditions.preEvolution.evolveFrom)
-            break;
-    };
-
-    if (index == MONSTER_MAX) {
-        evolveStatus->evolutionConditionStatus = EVOLUTION_NO_MORE;
-        return;
-    }
-
-    for (index = MONSTER_BULBASAUR; index < MONSTER_MAX; index++) {
-        u8 evolvedMonFriendArea, monFriendArea;
-        bool8 cannotEvolve = FALSE;
-        s32 speciesId = (s16) (index);
-
-        GetPokemonEvolveConditions(speciesId, &evolveConditions);
-        if (evolveConditions.preEvolution.evolveType == 0 || pokemon->speciesNum != evolveConditions.preEvolution.evolveFrom)
-            continue;
-
-        evolvedMonFriendArea = GetFriendArea(speciesId);
-        monFriendArea = GetFriendArea(pokemon->speciesNum);
-        GetFriendAreaCapacity2(evolvedMonFriendArea,&friendAreaCapacity,0,0);
-        if (!friendAreaCapacity.hasFriendArea) {
-            evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_FRIEND_AREA;
-            cannotEvolve = TRUE;
-        }
-        else {
-            s32 currMonsNo = friendAreaCapacity.currNoPokemon;
-            if (evolvedMonFriendArea == monFriendArea) {
-                currMonsNo--;
-            }
-            if (friendAreaCapacity.maxPokemon <= currMonsNo) {
-                evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ROOM;
-                cannotEvolve = TRUE;
-            }
-         }
-
-        if (evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_LEVEL) {
-            if (evolveStatus->evolutionConditionStatus & 1)
-                continue;
-            if (pokemon->level < evolveConditions.evolutionRequirements.mainRequirement) {
-                evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_LEVEL;
-                cannotEvolve = TRUE;
-            }
-        }
-        else if (evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_IQ) {
-            if (pokemon->IQ < evolveConditions.evolutionRequirements.mainRequirement) {
-                evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_IQ;
-                cannotEvolve = TRUE;
-            }
-        }
-        else if (evolveConditions.preEvolution.evolveType == EVOLVE_TYPE_ITEM) {
-            if (param_3) {
-                if ((evolveStatus->evoItem1 != evolveConditions.evolutionRequirements.mainRequirement) &&
-                        (evolveStatus->evoItem2 != evolveConditions.evolutionRequirements.mainRequirement))
-                {
-                    evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ITEM;
-                    cannotEvolve = TRUE;
-                }
-            }
-            else if (FindItemInInventory(evolveConditions.evolutionRequirements.mainRequirement) < 0) {
-                evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ITEM;
-                cannotEvolve = TRUE;
-            }
-        }
-
-        if (evolveConditions.evolutionRequirements.additionalRequirement == 4) {
-            if (param_3) {
-                if ((evolveStatus->evoItem1 != ITEM_LINK_CABLE) && (evolveStatus->evoItem2 != ITEM_LINK_CABLE)) {
-                    evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ITEM;
-                    cannotEvolve = TRUE;
-                }
-            }
-            else if (FindItemInInventory(ITEM_LINK_CABLE) < 0) {
-                evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ITEM;
-                cannotEvolve = TRUE;
-            }
-        }
-        else if (evolveConditions.evolutionRequirements.additionalRequirement == 5) {
-            if (pokemon->offense.att[0] <= pokemon->offense.def[0]) {
-                cannotEvolve = TRUE;
-            }
-        }
-        else if (evolveConditions.evolutionRequirements.additionalRequirement == 6) {
-            if (pokemon->offense.att[0] >= pokemon->offense.def[0]) {
-                cannotEvolve = TRUE;
-            }
-        }
-        else if (evolveConditions.evolutionRequirements.additionalRequirement == 7) {
-            if (pokemon->offense.att[0] != pokemon->offense.def[0]) {
-                cannotEvolve = TRUE;
-            }
-        }
-        else if (evolveConditions.evolutionRequirements.additionalRequirement == 8) {
-            if (param_3) {
-                if ((evolveStatus->evoItem1 != ITEM_SUN_RIBBON) && (evolveStatus->evoItem2 != ITEM_SUN_RIBBON)) {
-                    evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ITEM;
-                    cannotEvolve = TRUE;
-                }
-            }
-            else if (FindItemInInventory(ITEM_SUN_RIBBON) < 0) {
-                evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ITEM;
-                cannotEvolve = TRUE;
-            }
-        }
-        else if (evolveConditions.evolutionRequirements.additionalRequirement == 9) {
-                if (param_3) {
-                    if ((evolveStatus->evoItem1 != ITEM_LUNAR_RIBBON) && (evolveStatus->evoItem2 != ITEM_LUNAR_RIBBON)) {
-                        evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ITEM;
-                        cannotEvolve = TRUE;
-                    }
-                }
-                else if (FindItemInInventory(ITEM_LUNAR_RIBBON) < 0) {
-                    evolveStatus->evolutionConditionStatus |= EVOLUTION_LACK_ITEM;
-                    cannotEvolve = TRUE;
-                }
-        }
-        else if (evolveConditions.evolutionRequirements.additionalRequirement == 0xb) {
-            if ((evolveStatus->wurmpleVal & 1)) {
-                cannotEvolve = TRUE;
-            }
-        }
-        else if (evolveConditions.evolutionRequirements.additionalRequirement == 0xc) {
-            if (!(evolveStatus->wurmpleVal & 1)) {
-                cannotEvolve = TRUE;
-            }
-        }
-        else if (evolveConditions.evolutionRequirements.additionalRequirement == 10) {
-            if (param_3 != 0) {
-                if ((evolveStatus->evoItem1 != ITEM_BEAUTY_SCARF) && (evolveStatus->evoItem2 != ITEM_BEAUTY_SCARF)) {
-                    cannotEvolve = TRUE;
-                }
-            }
-            else {
-                if (FindItemInInventory(ITEM_BEAUTY_SCARF) < 0) {
-                    cannotEvolve = TRUE;
-                }
-            }
-        }
-
-        if (!cannotEvolve) {
-            evolveStatus->evolutionConditionStatus |= EVOLUTION_GOOD;
-            evolveStatus->targetEvolveSpecies = speciesId;
-        }
-    }
-}
-
-s32 sub_808F700(PokemonStruct1 *pokemon)
-{
-    EvolveStatus evolveStatus;
-
-    sub_808F468(pokemon, &evolveStatus, 0);
-    if ((evolveStatus.evolutionConditionStatus & EVOLUTION_GOOD)) {
-        return 1;
-    }
-    else if ((evolveStatus.evolutionConditionStatus & EVOLUTION_NO_MORE)) {
-        return 2;
-    }
-    else {
-        return 0;
-    }
-}
-
-PokemonStruct1 *sub_808F734(PokemonStruct1 *pokemon, s16 _species)
-{
-    PokemonStruct1 *uVar1;
-    PokemonStruct1 *iVar3;
-    PokemonStruct1 pokeStruct;
-    s32 species = _species;
-
-    iVar3 = NULL;
-    pokeStruct = *pokemon;
-    uVar1 = sub_808F798(pokemon, species);
-    if (species == MONSTER_NINJASK) {
-        pokeStruct.isTeamLeader = FALSE;
-        pokeStruct.heldItem.id = ITEM_NOTHING;
-        BoundedCopyStringtoBuffer(pokeStruct.name, GetMonSpecies(MONSTER_SHEDINJA),POKEMON_NAME_LENGTH);
-        iVar3 = sub_808F798(&pokeStruct,MONSTER_SHEDINJA);
-    }
-    if (iVar3 != NULL) {
-        IncrementAdventureNumJoined();
-    }
-    return uVar1;
-}
-
-PokemonStruct1 *sub_808F798(PokemonStruct1 *pokemon, short _species)
-{
-    s32 r6;
-    s32 index;
-    PokemonStruct1 pokeStruct;
-    LevelData levelData;
-    u8 buffer [64];
-    s32 species = _species;
-    bool32 flag = TRUE;
-
-    pokeStruct = *pokemon;
-    r6 = pokeStruct.speciesNum;
-    GetPokemonLevelData(&levelData,species,pokeStruct.level);
-    pokeStruct.currExp = levelData.expRequired;
-    pokemon->unk0 = 0;
-    pokeStruct.speciesNum = species;
-    if (pokeStruct.unkC[0].level == 0) {
-        pokeStruct.unkC[0].level = pokeStruct.level;
-    }
-    else if (pokeStruct.unkC[1].level == 0) {
-        pokeStruct.unkC[1].level = pokeStruct.level;
-    }
-
-    CopyStringtoBuffer(buffer, GetMonSpecies(r6));
-
-    index = 0;
-    goto _start;
-    do
-    {
-        index++;
-_start:
-        if (index >= POKEMON_NAME_LENGTH) break;
-        if (buffer[index] != pokeStruct.name[index]) goto _end;
-        if (buffer[index] == 0) break;
-
-    } while(TRUE);
-    if (flag)
-        BoundedCopyStringtoBuffer(pokeStruct.name, GetMonSpecies(species), POKEMON_NAME_LENGTH);
-_end:
-    return sub_808D1DC(&pokeStruct);
-}
-
-UNUSED void sub_808F83C(PokemonStruct1 *pokemon, s16 species, u8 *r2)
-{
-    *r2 = 0;
-}
-
-void CreatePokemonInfoTabScreen(s32 param_1, s32 param_2, struct unkStruct_808FF20 *mon, struct UnkInfoTabStruct *param_4, u32 windowId)
-{
-    s32 i, y;
-    s32 j;
-
-    sub_80073B8(windowId);
-    strncpy(gFormatBuffer_Monsters[0],mon->nameBuffer,0x14);
-    y = 0x20;
-    switch (param_1) {
-        case 0:
-            break;
-        case 2: {
-            const u8 *str;
-            s32 iVar8;
-            LevelData levelData;
-
-            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gUnknown_8107754,windowId,'\0');
-            gFormatArgs[0] = mon->level;
-            gFormatArgs[1] = mon->exp;
-            PrintFormattedStringOnWindow(4,y,gText_LevelUnkMacro,windowId,'\0');
-            y += 0xA;
-            PrintFormattedStringOnWindow(4,y,gText_ExpPtsUnkMacro,windowId,'\0');
-            y += 0xA;
-            if (mon->level < 100) {
-                GetPokemonLevelData(&levelData,mon->species,mon->level + 1);
-                gFormatArgs[0] = levelData.expRequired - mon->exp;
-                PrintFormattedStringOnWindow(4,y,gText_ToNextLevel,windowId,'\0');
-            }
-            y += 0xC;
-            gFormatArgs[0] = mon->HP1;
-            gFormatArgs[1] = mon->HP2;
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DDD0,windowId,'\0');
-            y += 0xA;
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DDE4,windowId,'\0');
-            str = gUnknown_810DE0C;
-            gFormatArgs[0] = mon->offense.att[0];
-            if (mon->atkBoost != 0) {
-                gFormatArgs[0] = gFormatArgs[0] + mon->atkBoost;
-                str = gUnknown_810DE20;
-            }
-            PrintFormattedStringOnWindow(4,y,str,windowId,'\0');
-            if (mon->defBoost != 0) {
-                gFormatArgs[0] = mon->offense.def[0] + mon->defBoost;
-                PrintFormattedStringOnWindow(4,y,gUnknown_810DE4C,windowId,'\0');
-            }
-            else {
-                gFormatArgs[0] = mon->offense.def[0];
-                PrintFormattedStringOnWindow(4,y,gUnknown_810DE38,windowId,'\0');
-            }
-            y += 0xA;
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DDFC,windowId,'\0');
-            str = gUnknown_810DE24;
-            gFormatArgs[0] = mon->offense.att[1];
-            if (mon->spAtkBoost != 0) {
-                gFormatArgs[0] = gFormatArgs[0] + mon->spAtkBoost;
-                str = gUnknown_810DE28;
-            }
-            PrintFormattedStringOnWindow(4,y,str,windowId,'\0');
-            if (mon->spDefBoost != 0) {
-                gFormatArgs[0] = mon->offense.def[1] + mon->spDefBoost;
-                PrintFormattedStringOnWindow(4,y,gUnknown_810DE54,windowId,'\0');
-            }
-            else {
-                gFormatArgs[0] = mon->offense.def[1];
-                PrintFormattedStringOnWindow(4,y,gUnknown_810DE50,windowId,'\0');
-            }
-            y += 0xA;
-            if (ItemExists(&mon->item)) {
-                 sub_8090E14(gFormatBuffer_Items[0],&mon->item,0);
-            }
-            else {
-                strcpy(gFormatBuffer_Items[0],gUnknown_810DE58);
-            }
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DE6C,windowId,'\0');
-            y += 0xC;
-            gFormatArgs[0] = mon->IQ;
-            iVar8 = mon->IQ / 10;
-            if (iVar8 < 0) {
-                iVar8 = 0;
-            }
-            if (0x62 < iVar8) {
-                iVar8 = 99;
-            }
-
-            InlineStrcpy(gFormatBuffer_Monsters[0],gUnknown_8115718[iVar8]);
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DE80,windowId,'\0');
-            y += 0xA;
-            if (!mon->isTeamLeader)
-            {
-                CopyTacticsNameToBuffer(gFormatBuffer_Monsters[0],mon->tactic);
-                PrintFormattedStringOnWindow(4,y,gUnknown_810DE98,windowId,'\0');
-            }
-            y += 0xA;
-            break;
-        }
-     case 3: {
-            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gUnknown_810775C,windowId,'\0');
-            PrintFormattedStringOnWindow(4,y,gUnknown_8107768,windowId,'\0');
-            PrintFormattedStringOnWindow(0x38,y,GetFormattedTypeString(mon->types[0]),windowId,'\0');
-            if (mon->types[1] != TYPE_NONE) {
-                PrintFormattedStringOnWindow(0x60,y,GetFormattedTypeString(mon->types[1]),windowId,'\0');
-            }
-            y += 0xC;
-            PrintFormattedStringOnWindow(4,y,gUnknown_8107770,windowId,'\0');
-            y += 0xC;
-            PrintFormattedStringOnWindow2(4,y,GetAbilityDescription(mon->abilities[0]),windowId,'\0',0xb);
-            y += 0x21;
-            if (mon->abilities[1] != ABILITY_UNKNOWN) {
-                PrintFormattedStringOnWindow2(4,y,GetAbilityDescription(mon->abilities[1]),windowId,'\0',0xb);
-            }
-            break;
-        }
-        case 1: {
-            s32 iVar11;
-            bool8 bVar10;
-
-            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gUnknown_810DD58,windowId,'\0');
-            iVar11 = mon->unk56 - 1;
-            y -= 0xC;
-            bVar10 = FALSE;
-
-            for (i = 0; i < 9; i++) {
-                param_4->unkC[i] = 0;
-            }
-
-            for (j = 0; j < 10; j++, iVar11++, y += 0xC) {
-                if (-1 < iVar11) {
-                    if (0xb < iVar11)
-                        break;
-                    if (mon->unk58[iVar11] != 0) {
-                        bVar10 = TRUE;
-                        InlineStrncpy(gFormatBuffer_Items[1],gStatusNames[mon->unk58[iVar11]],0x50);
-                        PrintFormattedStringOnWindow(0xc,y,gUnknown_8107784,windowId,'\0');
-                        if (0 < j) {
-                            param_4->unkC[j - 1] = mon->unk58[iVar11];
-                        }
-                    }
-                }
-            }
-
-            if (!bVar10) {
-                PrintFormattedStringOnWindow(0xc,0x20,gUnknown_810DF78,windowId,'\0');
-            }
-            break;
-        }
-        case 4: {
-            s32 iVar13;
-            bool8 bVar11;
-            u8 iqSkillBuffer[24];
-
-            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gText_IqSkills,windowId,'\0');
-            GetNumAvailableIQSkills(iqSkillBuffer,mon->IQ);
-            iVar13 = mon->unk40 - 1;
-
-            for (i = 0; i < 9; i++) {
-                param_4->unk0[i] = 0;
-            }
-            y -= 0xC;
-            bVar11 = FALSE;
-
-            for(j = 0; j < 10; j++, iVar13++, y += 0xC) {
-                if (-1 < iVar13) {
-                    if (0x17 < iVar13)
-                        break;
-                    if (iqSkillBuffer[iVar13] != 0) {
-                        const u8 *iqSkillName;
-
-                        bVar11 = TRUE;
-                        iqSkillName = GetIQSkillName(iqSkillBuffer[iVar13]);
-                        strncpy(gFormatBuffer_Items[1],iqSkillName,0x50);
-                        if (IsIQSkillSet(&mon->IQSkills,1 << iqSkillBuffer[iVar13])) {
-                            strcpy(gFormatBuffer_Items[0],gUnknown_8107788);
-                        }
-                        else {
-                            strcpy(gFormatBuffer_Items[0],gUnknown_810778C);
-                        }
-                        if (j >= 1) {
-                            param_4->unk0[j - 1] = iqSkillBuffer[iVar13];
-                        }
-                        PrintFormattedStringOnWindow(0xc,y,gUnknown_8107790,windowId,'\0');
-                    }
-                }
-            }
-
-            if (!bVar11) {
-                PrintFormattedStringOnWindow(0xc,0x20,gUnknown_810DF84,windowId,'\0');
-            }
-            break;
-        }
-        case 5: {
-            PrintFormattedStringOnWindow(param_2 * 8 + 0x10,0,gUnknown_8107798,windowId,'\0');
-            CopyMonsterNameToBuffer(gFormatBuffer_Monsters[0],mon->species);
-            gFormatArgs[0] = mon->species;
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DEB4,windowId,'\0');
-            y += 0xA;
-            InlineStrncpy(gFormatBuffer_Items[0],GetFriendAreaName(GetFriendArea(mon->species)),0x50);
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DEC8,windowId,'\0');
-            y += 0xA;
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DEDC,windowId,'\0');
-            y += 0xD;
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DFB4,windowId,'\0');
-            y += 0xA;
-            PrintYellowDungeonNametoBuffer(gFormatBuffer_Items[0],&mon->dungeonLocation);
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DFC8,windowId,'\0');
-            y += 0xD;
-            strncpy(gFormatBuffer_Monsters[0],GetCategoryString(mon->species),0x14);
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DEF4,windowId,'\0');
-            y += 0xD;
-            strcpy(gFormatBuffer_Monsters[0],gUnknown_810E02C[GetBodySize(mon->species)]);
-            PrintFormattedStringOnWindow(4,y,gUnknown_810DF98,windowId,'\0');
-            y += 0xD;
-            PrintFormattedStringOnWindow(4,y,gEvolutionStrings[mon->unk4C],windowId,'\0');
-            break;
-        }
-    }
-    sub_80073E0(windowId);
-}
-
-
-void sub_808FF20(struct unkStruct_808FF20 *param_1, struct PokemonStruct1 *pokemon, bool8 param_3)
-{
-    s32 index;
-
-    PrintColoredPokeNameToBuffer(param_1->nameBuffer, pokemon, COLOR_WHITE);
-    param_1->species = pokemon->speciesNum;
-    param_1->HP1 = pokemon->pokeHP;
-    param_1->HP2 = pokemon->pokeHP;
-    param_1->level = pokemon->level;
-    param_1->exp = pokemon->currExp;
-    for(index = 0; index < 2; index++)
-    {
-        param_1->offense.att[index] = pokemon->offense.att[index];
-        param_1->offense.def[index] = pokemon->offense.def[index];
-        param_1->types[index] = GetPokemonType(pokemon->speciesNum,index);
-        param_1->abilities[index] = GetPokemonAbility(pokemon->speciesNum,index);
-    }
-    param_1->isTeamLeader = pokemon->isTeamLeader;
-    param_1->atkBoost = 0;
-    param_1->spAtkBoost = 0;
-    param_1->defBoost = 0;
-    param_1->spDefBoost = 0;
-
-    if (pokemon->heldItem.id != 0) {
-        if (pokemon->heldItem.id == ITEM_POWER_BAND) {
-            param_1->atkBoost += gUnknown_810AC60;
-        }
-        if (pokemon->heldItem.id == ITEM_SPECIAL_BAND) {
-            param_1->spAtkBoost+= gUnknown_810AC62;
-        }
-        if (pokemon->heldItem.id == ITEM_MUNCH_BELT) {
-            param_1->atkBoost += gUnknown_810AC68;
-        }
-        if (pokemon->heldItem.id == ITEM_MUNCH_BELT) {
-            param_1->spAtkBoost+= gUnknown_810AC68;
-        }
-        if (pokemon->heldItem.id == ITEM_DEF_SCARF) {
-            param_1->defBoost += gUnknown_810AC64;
-        }
-        if (pokemon->heldItem.id == ITEM_ZINC_BAND) {
-            param_1->spDefBoost += gUnknown_810AC66;
-        }
-    }
-    param_1->tactic = pokemon->tacticIndex;
-    HeldItemToSlot(&param_1->item,&pokemon->heldItem);
-    param_1->IQ = pokemon->IQ;
-    param_1->dungeonLocation = pokemon->dungeonLocation;
-    param_1->unk44[0] = pokemon->unkC[0];
-    param_1->unk44[1] = pokemon->unkC[1];
-    param_1->IQSkills = pokemon->IQSkills;
-    if (param_3) {
-        param_1->unk4C = sub_808F700(pokemon);
-    }
-    else {
-        param_1->unk4C = 3;
-    }
-
-    for(index = 0; index < 0xC; index++)
-    {
-        param_1->unk58[index] = 0;
-    }
 }

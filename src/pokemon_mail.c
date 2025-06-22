@@ -4,7 +4,7 @@
 #include "code_800D090.h"
 #include "code_803C1D0.h"
 #include "code_803D0D8.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "event_flag.h"
 #include "exclusive_pokemon.h"
 #include "items.h"
@@ -103,7 +103,7 @@ void CreateRescueTitle(unkStruct_802C39C *param_1)
         if (param_1->playerName == NULL)
             PrintStringOnWindow(178 - GetMaxPokeNameWidth(), param_1->y, GetMonSpecies(param_1->clientSpecies), param_1->unk0[0], 0);
         else {
-            sub_80922B4(buf_2, param_1->playerName, POKEMON_NAME_LENGTH);
+            StrncpyCustom(buf_2, param_1->playerName, POKEMON_NAME_LENGTH);
             PrintStringOnWindow(178 - GetMaxPokeNameWidth(), param_1->y, buf_2, param_1->unk0[0], 0);
         }
     }
@@ -266,7 +266,7 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
     if (param_1->playerName == NULL)
         PrintStringOnWindow(68, y, GetMonSpecies(param_1->clientSpecies), param_1->unk0[0], 0);
     else {
-        sub_80922B4(buf_3, param_1->playerName, POKEMON_NAME_LENGTH);
+        StrncpyCustom(buf_3, param_1->playerName, POKEMON_NAME_LENGTH);
         sub_808D930(buf_4, param_1->clientSpecies);
         sprintfStatic(buf_2, gUnknown_80E8AD0, buf_3, buf_4);
         PrintStringOnWindow(68, y, buf_2, param_1->unk0[0], 0);
@@ -406,7 +406,7 @@ bool8 sub_803C0DC(s16 species)
 
 bool8 sub_803C110(s16 index)
 {
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     const s16 *psVar5;
     const s16 *psVar6;
     s32 species_s32;

@@ -5,10 +5,10 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "code_800D090.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "decompress_at.h"
 #include "def_filearchives.h"
 #include "friend_area.h"
@@ -60,7 +60,7 @@ void FriendAreasMap_InitGfx(void)
     u8 filename[12];
     s32 i, size;
 
-    PokemonStruct1 *pokeStruct = GetPlayerPokemonStruct();
+    Pokemon *pokeStruct = GetPlayerPokemonStruct();
     OpenedFile *file = OpenFileAndGetFileDataPtr(gUnknown_80D408C[0], &gTitleMenuFileArchive);
     OpenedFile *file2 = OpenFileAndGetFileDataPtr(gUnknown_80D408C[1], &gTitleMenuFileArchive);
 
@@ -161,8 +161,8 @@ void FriendAreasMap_UpdateBg(void)
         y1++;
     }
 
-    sub_80098F8(2);
-    sub_80098F8(3);
+    ScheduleBgTilemapCopy(2);
+    ScheduleBgTilemapCopy(3);
 }
 
 void FriendAreasMap_HideTextWindowAndArrows(void)
@@ -324,21 +324,21 @@ void FriendAreasMap_PrintAvailableSubAreas(void)
     header.width = 18;
     header.f3 = 0;
     menuInput->menuIndex = 0;
-    menuInput->unk1A = count;
-    menuInput->unk1C = count;
-    menuInput->unk1E = 0;
-    menuInput->unk20 = 0;
+    menuInput->currPageEntries = count;
+    menuInput->entriesPerPage = count;
+    menuInput->currPage = 0;
+    menuInput->pagesCount = 0;
     menuInput->unk4 = 0;
     menuInput->firstEntryY = 16;
-    menuInput->unk0 = 0;
-    menuInput->unkC = 0;
-    menuInput->unkE = 0;
+    menuInput->windowId = 0;
+    menuInput->leftRightArrowsPos.x = 0;
+    menuInput->leftRightArrowsPos.y = 0;
     menuInput->unk14.x = 0;
     menuInput->unk14.y = 0;
-    menuInput->unk8.x = 8;
-    menuInput->unk8.y = 8;
-    sub_801317C(&menuInput->unk28);
-    var = sub_80095E4(menuInput->unk1C, 0);
+    menuInput->cursorArrowPos.x = 8;
+    menuInput->cursorArrowPos.y = 8;
+    ResetTouchScreenMenuInput(&menuInput->touchScreen);
+    var = CalcEntriesTotalHeight(menuInput->entriesPerPage, 0);
     windows.id[0].unk10 = windows.id[0].height = var + 2;
     sub_80137B0(menuInput, var * 8);
 
@@ -378,7 +378,7 @@ void FriendAreasMap_RunFrameActions(void)
     AnimateSprites();
     sub_8004AF0(FadeScreen(), gFriendAreasMapPtr->unk4C4C, 0xB0, 16, gFriendAreasMapPtr->brightness, NULL);
     sub_8005838(NULL, 0);
-    nullsub_8(gGameOptionsRef->unkA);
+    nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     sub_80060EC();
     IncrementPlayTime(gPlayTimeRef);
@@ -388,8 +388,8 @@ void FriendAreasMap_RunFrameActions(void)
     sub_8005304();
     TransferBGPaletteBuffer();
     xxx_call_update_bg_vram();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     ResetSprites(FALSE);
 }

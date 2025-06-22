@@ -162,7 +162,7 @@ void sub_808AE54(u8 param_1,u8 param_2,DungeonPos *param_3)
   if (!sub_8098100(0x22) && (param_2 == 0x2E) && (param_1 == 0x17)) {
     sub_808B1CC(ITEM_NOTHING);
     if (!sub_8098100(0x1d)) {
-      ItemIdToSlot(&item,ITEM_ROCK_PART,0);
+      ItemIdToItem(&item,ITEM_ROCK_PART,0);
       sub_80464C8(GetLeader(),param_3,&item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Regirock's body
@@ -184,7 +184,7 @@ void sub_808AEC8(u8 param_1,u8 param_2,DungeonPos *param_3)
   if (!sub_8098100(0x22) && (param_2 == 0x2F) && (param_1 == 0x18)) {
     sub_808B1CC(ITEM_NOTHING);
     if (!sub_8098100(0x1d)) {
-      ItemIdToSlot(&item,ITEM_ICE_PART,0);
+      ItemIdToItem(&item,ITEM_ICE_PART,0);
       sub_80464C8(GetLeader(),param_3,&item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Regice's body
@@ -206,7 +206,7 @@ void sub_808AF3C(u8 param_1,u8 param_2,DungeonPos *param_3)
   if (!sub_8098100(0x22) && (param_2 == 0x30) && (param_1 == 0x19)) {
     sub_808B1CC(ITEM_NOTHING);
     if (!sub_8098100(0x1d)) {
-      ItemIdToSlot(&item,ITEM_STEEL_PART,0);
+      ItemIdToItem(&item,ITEM_STEEL_PART,0);
       sub_80464C8(GetLeader(),param_3, &item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Registeel's body
@@ -329,7 +329,7 @@ static void sub_808B1CC(u8 itemID)
     tile->terrainType = tile->terrainType | TERRAIN_TYPE_STAIRS;
     if (((itemID != ITEM_NOTHING) && (sub_80860A8(itemID) == 0)) &&
         (sub_80860A8(ITEM_MUSIC_BOX) == 0)) {
-        ItemIdToSlot(&item,itemID,0);
+        ItemIdToItem(&item,itemID,0);
         pos.y--;
         AddItemToDungeonAt(&pos,&item,1);
     }

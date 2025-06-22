@@ -11,9 +11,11 @@
 
 enum PokemonUnk0Flags
 {
-    FLAG_NONE = 0,
-    FLAG_UNK_1 = 1 << 0,
-    FLAG_ON_TEAM = 1 << 1, // Mon is not on "standby"
+    POKEMON_FLAG_NONE = 0,
+    POKEMON_FLAG_EXISTS = 1 << 0,
+    POKEMON_FLAG_ON_TEAM = 1 << 1, // Mon is not on "standby"
+    POKEMON_FLAG_x4000 = 1 << 14,
+    POKEMON_FLAG_x8000 = 1 << 15,
 };
 
 // size: 0x1A4
@@ -41,13 +43,13 @@ u8 GetBodySize(s32 index);
 void CopyMonsterNameToBuffer(u8 * buffer, s32 index);
 void CopyYellowMonsterNametoBuffer(u8 *buffer, s16 index);
 void CopyCyanMonsterNametoBuffer(u8 *buffer, s32 index_);
-void PrintColoredPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon, s32 colorNum);
+void PrintColoredPokeNameToBuffer(u8 *buffer, Pokemon *pokemon, s32 colorNum);
 void sub_808D930(u8 *buffer, s32 index);
-void sub_808D9DC(u8 *buffer, PokemonStruct2 *, s32 colorNum);
-void sub_808DA0C(u8 *buffer, PokemonStruct2 *);
+void sub_808D9DC(u8 *buffer, DungeonMon *, s32 colorNum);
+void sub_808DA0C(u8 *buffer, DungeonMon *);
 void PeekPokemonItem(s16 index_, BulkItem* item);
 void GivePokemonItem(s16 index_, BulkItem* item);
-bool8 IsPokemonRenamed(PokemonStruct1* pokemon);
+bool8 IsPokemonRenamed(Pokemon* pokemon);
 bool8 CanMonLearnMove(u16 moveID, s16 _species);
 
 u8 *GetCategoryString(s16 index);
@@ -74,80 +76,84 @@ s16 GetRecruitRate(s16 index);
 s16 GetAlphabetParentNo(s16 index, s32 r1);
 s16 GetInternalNo(s16 index);
 s32 CalculateEXPGain(s16 index, s32 level);
-s16 GetPokemonEvolveConditons(s16 index, unkEvolve *);
+s16 GetPokemonEvolveConditions(s16 index, unkEvolve *r1);
 u8 GetPokemonOverworldPalette(s16 index, bool32 recolorShopKecleon);
 bool8 IsPokemonDialogueSpriteAvail(s16 index, s32 spriteId);
 OpenedFile *OpenPokemonDialogueSpriteFile(s16 index);
 OpenedFile *GetDialogueSpriteDataPtr(s32 index);
 s32 GetUnownIndex(s16 index);
 void GenerateHiddenPower(HiddenPower *);
-s32 GetEvolutionSequence(PokemonStruct1 *pokemon, EvolveStage *);
+s32 GetEvolutionSequence(Pokemon *pokemon, EvolveStage *);
 s32 sub_808E400(s32 _species, s16* _a2, bool32 _bodySizeCheck, bool32 _shedinjaCheck);
 void sub_808E490(Move* a1, s32 species);
-void xxx_pokemonstruct_to_pokemon2_808DE50(PokemonStruct2 *, PokemonStruct1 *, s32);
-void WritePoke1Bits(DataSerializer *, PokemonStruct1 *pokemon);
-void ReadPoke1Bits(DataSerializer *, PokemonStruct1 *);
-s32 sub_808E218(unkStruct_808E218_arg *, PokemonStruct1 *pokemon);
-void sub_808CFD0(PokemonStruct1 *pokemon, s16 _species, u8* name, u32 _itemID, DungeonLocation *location, u16 *moveID);
-void sub_808D0D8(PokemonStruct1 *pokemon);
-PokemonStruct1 *GetPlayerPokemonStruct(void);
-PokemonStruct1 *sub_808D1DC(PokemonStruct1*);
-PokemonStruct1 *sub_808D378(void);
-PokemonStruct1 *sub_808D3BC(void);
-PokemonStruct1 *sub_808D3F8(void);
-PokemonStruct1 * sub_808D434(s16 species, s32 param_2);
+void RecruitedPokemonToDungeonMon(DungeonMon *dst, u32 recruitedPokemonId);
+void PokemonToDungeonMon(DungeonMon *, Pokemon *, s32);
+void DungeonMonToRecruitedPokemon(s32 id, DungeonMon* src);
+void DungeonMonToPokemon(Pokemon* dst, DungeonMon* src);
+void WritePoke1Bits(DataSerializer *, Pokemon *pokemon);
+void ReadPoke1Bits(DataSerializer *, Pokemon *);
+s32 sub_808E218(unkStruct_808E218_arg *, Pokemon *pokemon);
+void CreateLevel1Pokemon(Pokemon *pokemon, s16 _species, u8* name, u32 _itemID, const DungeonLocation *location, u16 *moves);
+void sub_808D0D8(Pokemon *pokemon);
+Pokemon *TryAddLevel1PokemonToRecruited(s32 species, u8 *name, u32 _itemID, const DungeonLocation *location, u16 *moveID);
+Pokemon *GetPlayerPokemonStruct(void);
+Pokemon *TryAddPokemonToRecruited(Pokemon*);
+Pokemon *sub_808D378(void);
+Pokemon *sub_808D3BC(void);
+Pokemon *sub_808D3F8(void);
+Pokemon *GetRecruitedMonBySpecies(s16 species_, s32 sameSpeciesCounter);
 s32 GetFriendSum_808D480(void);
 bool8 sub_808D4B0(void);
 bool8 sub_808D500(void);
 s32 GetUnitSum_808D544(s32 *);
 s32 sub_808D580(s32 *);
 bool8 ComparePokemonNames(s16, s16);
-void PrintPokeNameToBuffer(u8 *buffer, PokemonStruct1 *pokemon);
+void PrintPokeNameToBuffer(u8 *buffer, Pokemon *pokemon);
 void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level);
 const u8* DecompressMoveID(const u8* a1, u16* moveID);
 bool8 sub_808DA44(s32, u32);
-void sub_808D144(PokemonStruct1 *pokemon, struct unkStruct_808D144 *r1);
+void ConvertStoryMonToPokemon(Pokemon *dst, const struct StoryMonData *src);
 void sub_808CE74(s16 _species, bool32 _isLeader, u8* name);
-PokemonStruct1 *sub_808D278(s32 species);
+Pokemon *sub_808D278(s32 species);
 
-static inline bool8 PokemonFlag1(PokemonStruct1 *mon)
+static inline bool8 PokemonExists(Pokemon *mon)
 {
-    return (mon->unk0 & FLAG_UNK_1) != 0;
+    return (mon->flags & POKEMON_FLAG_EXISTS) != 0;
 }
 
-static inline bool8 PokemonFlag1Struct2(PokemonStruct2 *mon)
+static inline bool8 DungeonMonExists(DungeonMon *mon)
 {
-    return (mon->unk0 & FLAG_UNK_1) != 0;
+    return (mon->flags & POKEMON_FLAG_EXISTS) != 0;
 }
 
-static inline bool8 PokemonFlag2(PokemonStruct1 *mon)
+static inline bool8 PokemonFlag2(Pokemon *mon)
 {
-    return (mon->unk0 & FLAG_ON_TEAM) != 0;
+    return (mon->flags & POKEMON_FLAG_ON_TEAM) != 0;
 }
 
-static inline bool8 PokemonFlag2Struct2(PokemonStruct2 *mon)
+static inline bool8 PokemonFlag2Struct2(DungeonMon *mon)
 {
-    return (mon->unk0 & FLAG_ON_TEAM) != 0;
+    return (mon->flags & POKEMON_FLAG_ON_TEAM) != 0;
 }
 
-static inline void SetPokemonFlag2(PokemonStruct1 *mon)
+static inline void SetPokemonFlag2(Pokemon *mon)
 {
-    mon->unk0 |= FLAG_ON_TEAM;
+    mon->flags |= POKEMON_FLAG_ON_TEAM;
 }
 
-static inline bool8 IsMonTeamLeader(PokemonStruct1 *pokemon)
+static inline bool8 IsMonTeamLeader(Pokemon *pokemon)
 {
     return pokemon->isTeamLeader != FALSE;
 }
 
 #include "constants/dungeon.h"
 
-static inline bool8 IsMonPartner(PokemonStruct1 *mon)
+static inline bool8 IsMonPartner(Pokemon *mon)
 {
     return (mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER);
 }
 
-static inline bool8 IsMonLeader(PokemonStruct1 *mon)
+static inline bool8 IsMonLeader(Pokemon *mon)
 {
     return (mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_LEADER);
 }

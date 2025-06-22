@@ -10,7 +10,7 @@
 
 static const struct ScriptCommand s_gs184_g0_s0_station_sref_script[] = { /* 0x82342f4 */
     DEBUGINFO,
-    SELECT_MAP(184),
+    SELECT_MAP(MAP_SINISTER_WOODS_ENTRY),
     BGM_STOP,
     JUMP_SCRIPT(COMMON_ENTER),
 };
@@ -19,12 +19,12 @@ static const struct ScriptRef s_gs184_g0_s0_station_sref = { 404, 1, NULL /* ENT
 
 static const struct ScriptCommand s_gs184_g1_s0_station_sref_script[] = { /* 0x823436c */
     DEBUGINFO,
-    SELECT_MAP(184),
+    SELECT_MAP(MAP_SINISTER_WOODS_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(15),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    { 0x02, 0x00,  0x001e,  0x00000004,  0x00000000, NULL },
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_SINISTER_WOODS),
     RET,
 };
 
@@ -41,7 +41,7 @@ static const struct ScriptCommand s_gs184_g1_s0_lives0_dlg0[] = { /* 0x82343f8 *
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
     WAIT(20),
-    { 0x2e, 0x03,  0x0001,  0x00000000,  0x00000000, NULL },
+    PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" This is it.\n{NAME_2} is lost in these woods.")),
     VARIANT(/* == */  1, _(" {NAME_3}'s crew\nshould have a head start on us.")),
@@ -52,7 +52,7 @@ static const struct ScriptCommand s_gs184_g1_s0_lives0_dlg0[] = { /* 0x82343f8 *
     VARIANT_DEFAULT(_(" This must be it.\n{NAME_2} is lost somewhere in these\nwoods.")),
     VARIANT_DEFAULT(_(" {NAME_3}'s gang should\nbe in there already.")),
     VARIANT_DEFAULT(_(" We need to hurry.")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0x23, 0x00,  0x003c,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
@@ -76,12 +76,12 @@ static const struct ScriptCommand s_gs184_g1_s0_lives1_dlg0[] = { /* 0x8234714 *
 
 static const struct ScriptCommand s_gs184_g2_s0_station_sref_script[] = { /* 0x82347a4 */
     DEBUGINFO,
-    SELECT_MAP(184),
+    SELECT_MAP(MAP_SINISTER_WOODS_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(15),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    { 0x02, 0x00,  0x001e,  0x00000004,  0x00000000, NULL },
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_SINISTER_WOODS),
     RET,
 };
 
@@ -94,7 +94,7 @@ static const struct ScriptCommand s_gs184_g2_s0_lives0_dlg0[] = { /* 0x8234830 *
     { 0x2d, 0x09,  0x0002,  0x0000005b,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(30),
-    { 0x2e, 0x03,  0x0001,  0x00000000,  0x00000000, NULL },
+    PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Let's move it, {NAME_0}!")),
     VARIANT(/* == */  1, _(" Even while we're dawdling\nhere, {NAME_2}'s team...")),
@@ -105,7 +105,7 @@ static const struct ScriptCommand s_gs184_g2_s0_lives0_dlg0[] = { /* 0x8234830 *
     VARIANT_DEFAULT(_(" Let's hustle, {NAME_0}!")),
     VARIANT_DEFAULT(_(" We're still stuck back here\nwhile {NAME_2}'s gang is...")),
     VARIANT_DEFAULT(_(" Come on, hurry!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0x23, 0x00,  0x003c,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },

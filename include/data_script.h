@@ -1,12 +1,17 @@
-#include "ground_script.h"
-#include "event_flag.h"
+#include "constants/event_flag.h"
 #include "constants/item.h"
-#define LPARRAY(x) (sizeof(x)/sizeof(*(x))), x
+#include "constants/ground_map.h"
+#include "constants/script_dungeon_id.h"
+#include "portrait_placement.h"
+#include "structs/str_ground_script.h"
+#define LPARRAY(x) (ARRAY_COUNT(x)), x
 
 #define CPOS_HALFTILE 0x2
 #define CPOS_CURRENT  0x4
 
 // 01..07: complex map/dungeon selection/check commands
+#define NEXT_DUNGEON(u, d)      { 0x02, 0, u, d, 0, NULL } // Seems to be a general command for setting up which dungeon to enter next. First argument is unknown. The second argument is script dungeon id(not the one in dungeon/constants.h). There's a different ordering and a table with the proper dungeon id.
+
 #define SELECT_MAP(m)           { 0x08, 0, 0, m, 0, NULL }
 #define SELECT_GROUND(m)        { 0x09, 0, 0, m, 0, NULL }
 #define SELECT_DUNGEON(m,d,f,b) { 0x0A, b, f, d, m, NULL }
@@ -34,7 +39,22 @@
 // 20: execute script as parented object, maybe? Unused in ROM
 // 21: follow object/make object follow/get parented?
 // 22..2f: ???
+#define TEXTBOX_AUTO_PRESS(endF, midF) { 0x2b, 0, 0, endF, midF, NULL} // Waits specified number of frames, then automatically does a button press without waiting for player's input. -1 disables it.
+
+// Note for the spriteId: first 4 bits(0xF) are the actual spriteId, but sometimes a 0x40 flag is attached to it, but it has no practical use. Could be different in Blue?
+#define PORTRAIT(place, id, sprite)    { 0x2e, place, id, sprite, 0, NULL } // Sets up portrait data for the specified speaker
+#define PORTRAIT_REP(id, sprite)       { 0x2e, PLACEMENT_COUNT, id, sprite, 0, NULL } // Same as the above, but it assumes the last used placement for the speaker. Useful in long scripts, where you don't need to remember all the placements.
+
+#define PORTRAIT_POS(id, x, y)         { 0x2f, 0, id, x, y, NULL } // Sets portrait delta position, which modifies the portrait's position on the screen.
 // 30..39: various text printing
+#define TEXTBOX_CLEAR                  { 0x30, 0, 0, 0, 0, NULL }
+#define TEXTBOX_CLEAR2                 { 0x31, 0, 0, 0, 0, NULL } // Used rarely, I don't think there's a functional difference between 0x30 and 0x31.
+#define MSG_INSTANT(msg)               { 0x32, 0, -1, 0, 0, msg }
+#define MSG_NPC(id, msg)               { 0x34, 0, id, 0, 0, msg } // ID is portrait id of the npc. -1 means no portrait
+#define MSG_LETTER(msg)                { 0x35, 0, -1, 0, 0, msg }
+#define MSG_ON_BG(msg)                 { 0x37, 0, -1, 0, 0, msg } // Prints raw text on bg without any windows. Used for the intro portal messages. To advance the text player needs to press a button.
+#define MSG_ON_BG2(msg)                { 0x38, 0, -1, 0, 0, msg } // Identical to the above, used literally once for just a newline.
+#define MSG_ON_BG_AUTO(u, msg)         { 0x39, 0, u, 0, 0, msg } // Similar to the above, but the message appears and fades automatically, without any player's input. Used for narration text. The short argument isn't really used, but needs to be greater than 0.
 // 3a: yes/no choice (only used for saving)
 // 3b: uber command (conditional jump)
 // 3c: unknown textbox-related cjump

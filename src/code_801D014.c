@@ -55,10 +55,10 @@ static void sub_801D85C(void);
 static void sub_801D878(void);
 static void sub_801D894(void);
 
-bool8 sub_801D014(PokemonStruct1 *a0)
+bool8 sub_801D014(Pokemon *a0)
 {
     s32 index;
-    PokemonStruct1 *pokemon;
+    Pokemon *pokemon;
     struct unk_203B250 *preload;
 
     ResetUnusedInputStruct();
@@ -82,7 +82,7 @@ bool8 sub_801D014(PokemonStruct1 *a0)
     else
         sUnknown_203B250->index = NUM_MONSTERS;
 
-    sUnknown_203B250->currFriendAreaLocation = sub_8002658(sub_80A5728());
+    sUnknown_203B250->currFriendAreaLocation = MapIdToFriendAreaId(sub_80A5728());
     sUnknown_203B250->unk8 = 0;
     sUnknown_203B250->unk9 = 0;
     sUnknown_203B250->unkC = GetPlayerPokemonStruct();
@@ -139,8 +139,6 @@ u32 sub_801D0DC(void)
 
 u32 sub_801D178(void)
 {
-    PokemonStruct1 *pokeStruct;
-
     if (sUnknown_203B250->unk9 != 0)
         return 2;
 
@@ -151,17 +149,15 @@ u32 sub_801D178(void)
         return 1;
 
     if (sUnknown_203B250->unkC != GetPlayerPokemonStruct())
-        goto _ret4;
+        return 4;
 
     if ((s16) sub_80A7AE8(7) < 0)
         return 0;
 
-    pokeStruct = sub_808D3F8();
-    if (!(pokeStruct->unk0 >> 1 & 1))
-_ret4:
-        return 4;
+    if (PokemonFlag2(sub_808D3F8()))
+        return 0;
 
-    return 0;
+    return 4;
 }
 
 u8 sub_801D1D4(void)
@@ -569,12 +565,12 @@ static void sub_801D894(void)
     u8 buffer[100]; // sp +4
 
     if (sUnknown_203B250->currFriendAreaLocation == FRIEND_AREA_NONE)
-        location = sub_8098FB4();
+        location = GetCurrentGroundPlaceName();
     else
         location = GetFriendAreaName(sUnknown_203B250->currFriendAreaLocation);
 
     FormatString(location, buffer, buffer + sizeof(buffer), 0);
-    location_length = sub_8008ED0(buffer);
+    location_length = GetStringLineWidth(buffer);
     x_coord = (128 - location_length) / 2; // Centers the location name
     CallPrepareTextbox_8008C54(1);
     sub_80073B8(1);

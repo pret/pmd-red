@@ -213,20 +213,13 @@ static void sub_803ABAC(void)
 
 static bool8 sub_803ABC8(void)
 {
-    PokemonStruct1 *mon;
     s32 i;
-    s32 mask;
 
-    for (i = 0, mask = 1; i < NUM_MONSTERS; i++) {
-        // Some check was optimized out. Needed for matching. Thanks kaz
-        if (i) {
-            u8 unk = -unk;
-        }
+    for (i = 0; i < NUM_MONSTERS; i++) {
+        Pokemon *mon = &gRecruitedPokemonRef->pokemon[i];
 
-        mon = &gRecruitedPokemonRef->pokemon[i];
-
-        if ((mask & mon->unk0) != 0
-            && ((mon->unk0 >> 1) & mask) != 0
+        if (PokemonExists(mon)
+            && PokemonFlag2(mon)
             && sUnknown_203B3F4->friendArea == GetFriendArea(mon->speciesNum))
             return FALSE;
 

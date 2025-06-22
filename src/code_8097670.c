@@ -229,7 +229,7 @@ void UpdateAdventureAchievements(void)
         SetAdventureAchievement(AA_ALL_FRIEND_AREAS);
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])) {
+        if (PokemonExists(&gRecruitedPokemonRef->pokemon[i])) {
             s32 species = gRecruitedPokemonRef->pokemon[i].speciesNum;
             gUnknown_203B494->unk1C[species / 32] |= 1 << species % 32;
 

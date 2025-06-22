@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "structs/menu.h"
 #include "structs/str_text.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "input.h"
 #include "memory.h"
 #include "menu_input.h"
@@ -12,7 +12,7 @@
 #include "text_1.h"
 #include "text_2.h"
 
-// TODO: UNIFY WITH struct_Sub80095E4
+// TODO: UNIFY WITH MenuWindow
 struct unkStruct_203B278
 {
     /* 0x0 */ s32 state;
@@ -27,7 +27,7 @@ struct unkStruct_203B278
     WindowTemplate *unk60;
     WindowTemplates windows;
     WindowHeader unkC4;
-    MenuInputStructSub unkC8;
+    TouchScreenMenuInput unkC8;
 };
 
 EWRAM_INIT struct unkStruct_203B278 *gUnknown_203B278 = {NULL};
@@ -66,8 +66,8 @@ bool8 sub_801F808(u16 *moveIDs)
     {
         if(gUnknown_203B278->moveIDs[index - 1] != 0) break;
     }
-    sub_8013818(&gUnknown_203B278->unk28,index,1,gUnknown_203B278->unk5C);
-    sub_801317C(&gUnknown_203B278->unkC8);
+    CreateMenuOnWindow(&gUnknown_203B278->unk28,index,1,gUnknown_203B278->unk5C);
+    ResetTouchScreenMenuInput(&gUnknown_203B278->unkC8);
     sub_801F918(0);
     return 1;
 }
@@ -116,8 +116,8 @@ void sub_801F930(void)
     {
         case 0:
             gUnknown_203B278->unk60->header = &gUnknown_203B278->unkC4;
-            gUnknown_203B278->unkC4.count = gUnknown_203B278->unk28.unk20;
-            gUnknown_203B278->unkC4.currId = gUnknown_203B278->unk28.unk1E;
+            gUnknown_203B278->unkC4.count = gUnknown_203B278->unk28.pagesCount;
+            gUnknown_203B278->unkC4.currId = gUnknown_203B278->unk28.currPage;
             gUnknown_203B278->unkC4.width = 0x10;
             gUnknown_203B278->unkC4.f3 = 0;
             ResetUnusedInputStruct();
@@ -137,8 +137,8 @@ void sub_801F9A4(void)
     switch (gUnknown_203B278->state) {
         case 0:
             CallPrepareTextbox_8008C54(gUnknown_203B278->unk5C);
-            gUnknown_203B278->selectedMoveID = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.unk1E];
-            gUnknown_203B278->unk10 = unk_MoveIDPrintMoveDescription(gUnknown_203B278->unk28.unk1E,gUnknown_203B278->selectedMoveID,gUnknown_203B278->unk5C, gUnknown_203B278->unk14);
+            gUnknown_203B278->selectedMoveID = gUnknown_203B278->moveIDs[gUnknown_203B278->unk28.currPage];
+            gUnknown_203B278->unk10 = unk_MoveIDPrintMoveDescription(gUnknown_203B278->unk28.currPage,gUnknown_203B278->selectedMoveID,gUnknown_203B278->unk5C, gUnknown_203B278->unk14);
             gUnknown_203B278->unk24 = 0;
             break;
         case 1:
@@ -183,7 +183,7 @@ void sub_801FA58(void)
             sub_801F918(2);
             break;
         default:
-            if(sub_8013938(&gUnknown_203B278->unk28))
+            if(MenuCursorUpdateOnlyLeftRight(&gUnknown_203B278->unk28))
             {
                 sub_801F918(0);
             }

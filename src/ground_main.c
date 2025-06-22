@@ -3,12 +3,13 @@
 #include "constants/move_id.h"
 #include "structs/str_wonder_mail.h"
 #include "structs/str_dungeon_setup.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800C9CC.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_80958E8.h"
 #include "code_8099360.h"
 #include "code_80A26CC.h"
+#include "ground_place.h"
 #include "debug.h"
 #include "event_flag.h"
 #include "ground_main.h"
@@ -16,7 +17,11 @@
 #include "play_time.h"
 #include "pokemon.h"
 #include "text_util.h"
-#include "code_80A26CC.h"
+#include "ground_map_conversion_table.h"
+#include "ground_lives_helper.h"
+#include "script_item.h"
+#include "unk_ds_only_feature.h"
+#include "textbox.h"
 
 EWRAM_DATA u32 gUnknown_20398A8 = {0};
 EWRAM_DATA s32 gUnknown_20398AC = {0};
@@ -36,8 +41,6 @@ EWRAM_DATA u8 gUnknown_2039950 = 0;
 EWRAM_INIT bool8 gUnknown_203B49C = {0};
 EWRAM_INIT u8 gUnknown_203B49D = {0};
 
-#include "data/ground_main.h"
-
 extern void sub_809B57C();
 extern void GroundScript_Unlock();
 extern void sub_809D25C();
@@ -51,10 +54,8 @@ extern void sub_809B638();
 extern void nullsub_106();
 extern void sub_80A73EC();
 
-extern void sub_809CB8C();
 extern void sub_8098CC8();
 extern void ClearAllItems_8091FB4();
-extern u8 sub_809C730();
 extern void sub_8095494(DungeonMailSeed *param_1, u8 index);
 
 extern u16 gUnknown_2026E4E;
@@ -63,22 +64,15 @@ extern u16 gUnknown_2026E4E;
 extern void GroundSprite_Reset(s32);
 extern s16 sub_8098FCC(u32 unused);
 extern s16 sub_80A2654(s16 r0);
-extern void sub_809A71C(s32);
 extern bool8 sub_809AFAC(void);
 extern bool8 sub_80048BC(void);
-void FadeOutAllMusic(u16 speed);
 extern u8 sub_80023E4(u32);
-extern bool8 sub_809C740(void);
 extern bool8 sub_8099B94(void);
 extern void FreeGroundMapAction(void);
-extern void nullsub_118(void);
 extern void FreeGroundLives(void);
 extern void FreeGroundObjects(void);
 extern void FreeGroundEffects(void);
 extern void FreeGroundEvents(void);
-extern void sub_809CB74(void);
-extern void sub_809A610(void);
-extern void sub_809C618(void);
 extern void sub_80A658C(void);
 extern void sub_809D508(void);
 extern void sub_80A7754(void);
@@ -91,55 +85,41 @@ extern void sub_809D0AC(void);
 extern void sub_80A7744(void);
 extern void sub_809D490(void);
 extern void sub_80A62F0(void);
-extern void sub_809C5C4(void);
-extern void sub_809A560(void);
-extern void sub_809CB50(void);
 extern void AllocGroundMapAction(void);
-extern void nullsub_117(void);
 extern void AllocGroundEvents(void);
 extern void AllocGroundLives(void);
 extern void AllocGroundObjects(void);
 extern void AllocGroundEffects(void);
-extern void sub_809A62C(void);
 extern void nullsub_124(void);
 extern void GroundLives_Action(void);
 extern void GroundObject_Action(void);
 extern void GroundEffect_Action(void);
-extern void nullsub_105(void);
 extern void sub_809B474(void);
 extern void GroundScript_Unlock();
 extern void sub_809D25C(void);
 extern void sub_80A59DC(void);
 extern void sub_809B614(void);
-extern void sub_809CA20(void);
 extern void sub_80A6E80(void);
 extern void sub_8099BE4(void);
 extern void sub_8099744(void);
-extern void sub_8011860(void);
-extern void IncrementPlayTime(struct PlayTimeStruct *);
 extern void WaitForNextFrameAndAdvanceRNG(void);
 extern void LoadBufferedInputs(void);
 extern void nullsub_120(void);
 extern void sub_80A5E70(void);
 extern void sub_809B638(void);
-extern void nullsub_106(void);
 extern void sub_80A73EC(void);
 extern void sub_8099750(void);
-extern void sub_8009908(void);
 extern void GroundMap_Reset(void);
 extern void sub_809D0BC(void);
 extern void DeleteGroundEvents(void);
 extern void DeleteGroundLives(void);
 extern void DeleteGroundObjects(void);
 extern void DeleteGroundEffects(void);
-extern void sub_809C658(void);
 extern void nullsub_16(void);
 extern void UpdateAdventureAchievements(void);
 extern void xxx_call_update_bg_sound_input(void);
 extern void sub_80A6E68(void);
 extern void sub_80060EC(void);
-extern void sub_801180C(void);
-extern void ScriptPrintNullTextbox(void);
 extern void sub_809977C(void);
 extern void GroundMap_ExecuteEvent(s32, u32);
 extern void UpdateFadeInTile(s32);
@@ -149,7 +129,6 @@ extern void sub_8001D88(void);
 extern u32 GroundMainGameCancelRequest(u32 r0);
 extern void sub_80999D4(s32);
 extern void sub_809D4B0(void);
-extern void sub_809C63C(void);
 extern void sub_8005838(s32, s32);
 
 u32 xxx_script_related_8098468(s32 param_1)
@@ -192,7 +171,7 @@ u32 xxx_script_related_8098468(s32 param_1)
         default:
             break;
     }
-    sub_801180C();
+    ResetSoundEffectCounters();
     if (gUnknown_20398B9 == 0 && !sub_80023E4(0xd)) {
         FadeOutAllMusic(0x10);
     }
@@ -205,15 +184,15 @@ u32 xxx_script_related_8098468(s32 param_1)
     sub_809D490();
     sub_80A62F0();
     sub_809C5C4();
-    sub_809A560();
-    sub_809CB50();
+    TextboxInit();
+    InitInternalScriptItemsData();
     AllocGroundMapAction();
     nullsub_117();
     AllocGroundEvents();
     AllocGroundLives();
     AllocGroundObjects();
     AllocGroundEffects();
-    sub_809A62C();
+    TextboxResetAll();
     gUnknown_203B49C = 0;
     gUnknown_203B49D = 0;
     gUnknown_20398A8 = 1;
@@ -225,8 +204,8 @@ u32 xxx_script_related_8098468(s32 param_1)
     gUnknown_20398C4 = -1;
     r7 = -1;
     while (gUnknown_20398A8 - 1 <= 1) {
-        sub_809A71C(-1);
-        ScriptPrintNullTextbox();
+        SetAutoPressTextboxFrames(-1);
+        ScriptClearTextbox();
         sub_809977C();
         switch (gUnknown_20398B4) {
             case 0:
@@ -318,7 +297,7 @@ u32 xxx_script_related_8098468(s32 param_1)
         sub_809D4B0();
         GroundSprite_Reset(-1);
         sub_809C63C();
-        sub_809A62C();
+        TextboxResetAll();
         GroundMap_Reset();
         sub_809D0BC();
         DeleteGroundEvents();
@@ -376,7 +355,7 @@ u32 xxx_script_related_8098468(s32 param_1)
             sub_80A6E80();
             sub_8099BE4();
             sub_8099744();
-            sub_8011860();
+            UpdateSoundEffectCounters();
             IncrementPlayTime(gPlayTimeRef);
             WaitForNextFrameAndAdvanceRNG();
             LoadBufferedInputs();
@@ -386,7 +365,7 @@ u32 xxx_script_related_8098468(s32 param_1)
             nullsub_106();
             sub_80A73EC();
             sub_8099750();
-            sub_8009908();
+            DoScheduledMemCopies();
         }
 
         GroundMap_Reset();
@@ -399,8 +378,8 @@ u32 xxx_script_related_8098468(s32 param_1)
     FreeGroundObjects();
     FreeGroundEffects();
     FreeGroundEvents();
-    sub_809CB74();
-    sub_809A610();
+    FreeInternalScriptItemsData();
+    TextboxFree();
     sub_809C618();
     sub_80A658C();
     sub_809D508();
@@ -489,7 +468,7 @@ void sub_8098BDC(void)
     sub_80A6E80();
     sub_8099BE4();
     sub_8099744();
-    sub_8011860();
+    UpdateSoundEffectCounters();
     IncrementPlayTime(gPlayTimeRef);
     WaitForNextFrameAndAdvanceRNG();
     LoadBufferedInputs();
@@ -499,7 +478,7 @@ void sub_8098BDC(void)
     nullsub_106();
     sub_80A73EC();
     sub_8099750();
-    sub_8009908();
+    DoScheduledMemCopies();
     xxx_call_update_bg_sound_input();
     sub_80A6E68();
     GroundMap_Action();
@@ -514,7 +493,7 @@ void sub_8098C58(void)
     s32 temp, temp2;
     ClearScriptVarArray(NULL, GROUND_LOCAL);
     ClearScriptVarArray(NULL, EVENT_LOCAL);
-    sub_809CB8C();
+    ClearScriptItemScriptVars();
     sub_8001D88();
 
     if (GetScriptVarValue(NULL, FLAG_KIND_CHANGE_REQUEST) != 0) {
@@ -567,7 +546,7 @@ bool8 GroundMainGroundRequest(s32 r0, s32 r1, s32 r2)
     s32 temp = (s16) r0; // force a asr shift
     if(gUnknown_20398A8 == 0)
     {
-        Log(0, sFmtGroundRequest, temp, r2);
+        Log(0, "GroundMain ground request %3d %3d", temp, r2);
         gUnknown_20398A8 = 1;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r2;
@@ -613,25 +592,21 @@ bool8 sub_8098DCC(u32 speed)
     return FALSE;
 }
 
-bool8 GroundMainRescueRequest(s32 r0, s32 r1)
+bool8 GroundMainRescueRequest(s32 dungeonId_, s32 r1)
 {
-    s32 r2 = (s16) r0;
-    s32 r5 = r2;
-    if(gUnknown_20398A8 == 0)
-    {
-        Log(0, sFmtRescueRequest, r2, r1);
-        if(gUnknown_203B49D != 0)
-        {
+    // Needed to match
+    s32 dungeonId = (s16) dungeonId_;
+    s32 _dungeonId = dungeonId;
+    if (gUnknown_20398A8 == 0) {
+        Log(0, "GroundMain recue request %3d %3d", dungeonId, r1);
+        if (gUnknown_203B49D != 0) {
             gUnknown_20398A8 = 7;
         }
-        else
-        {
-            if(!gUnknown_203B49C)
-            {
-                gUnknown_20398C4 = r5;
+        else {
+            if (!gUnknown_203B49C) {
+                gUnknown_20398C4 = _dungeonId;
             }
-            switch(sub_80A2750(gUnknown_20398C4))
-            {
+            switch (sub_80A2750(gUnknown_20398C4)) {
                 case 4: gUnknown_20398A8 = 8; break;
                 case 1: gUnknown_20398A8 = 5; break;
                 case 2: gUnknown_20398A8 = 6; break;
@@ -649,7 +624,7 @@ UNUSED static bool8 GroundMainUserRescueRequest(u32 r0)
 {
     if (gUnknown_20398A8 == 0) {
         if(gUnknown_203B49D != 0) {
-            Log(0, sFmtUserRescueRequest, r0);
+            Log(0, "GroundMain user rescue request %3d", r0);
             gUnknown_20398A8 = 7;
             gUnknown_20398AC = 1;
             gUnknown_20398B0 = r0;
@@ -663,7 +638,7 @@ UNUSED static bool8 GroundMainUserRescueRequest(u32 r0)
 bool32 GroundMainGameEndRequest(u32 r0)
 {
     if (gUnknown_20398A8 == 0) {
-        Log(0, sFmtGameEndRequest, r0);
+        Log(0, "GroundMain game end request %3d", r0);
         gUnknown_20398A8 = 9;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r0;
@@ -676,7 +651,7 @@ bool32 GroundMainGameEndRequest(u32 r0)
 bool32 GroundMainGameCancelRequest(u32 r0)
 {
     if (gUnknown_20398A8 == 0) {
-        Log(0, sFmtGameCancelRequest, r0);
+        Log(0, "GroundMain game cancel request %3d", r0);
         gUnknown_20398A8 = 10;
         gUnknown_20398AC = 1;
         gUnknown_20398B0 = r0;
@@ -696,14 +671,14 @@ bool8 GetScriptMode(void)
     return gScriptMode;
 }
 
-s16 sub_8098FA0(void)
+UNUSED static s16 sub_8098FA0(void)
 {
     return GetScriptVarValue(NULL, GROUND_PLACE);
 }
 
-const char *sub_8098FB4(void)
+const char *GetCurrentGroundPlaceName(void)
 {
-    return sub_80A2B18(GetScriptVarValue(NULL, GROUND_PLACE));
+    return GetGroundPlaceName(GetScriptVarValue(NULL, GROUND_PLACE));
 }
 
 s16 sub_8098FCC(u32 unused)
@@ -742,17 +717,14 @@ s16 sub_8098FCC(u32 unused)
     return iVar3->unk4;
 }
 
-const char *sub_80990B8(void)
+UNUSED static const char *sub_80990B8(void)
 {
-    s16 index;
-    index = sub_8098FCC(0xB);
-    if(index != -1)
-    {
-        return sub_80A2B18(gGroundConversion_811BAF4[index].unk2);
+    s16 index = sub_8098FCC(0xB);
+    if (index != -1) {
+        return GetGroundPlaceName(gGroundMapConversionTable[index].groundPlaceId);
     }
-    else
-    {
-        return sub_8098FB4();
+    else {
+        return GetCurrentGroundPlaceName();
     }
 }
 
@@ -784,30 +756,29 @@ u8 sub_80990EC(struct DungeonSetupInfo *param_1, s16 param_2)
     param_1->sub0.unk0.floor = 1;
     param_1->sub0.unkC = 0;
 
-    switch(sub_80A2750(param_2))
-    {
+    switch (sub_80A2750(param_2)) {
         case 1:
             if (sub_80990EC_sub(param_1, param_2)) {
                 param_1->sub0.unkC = 1;
                 sub_80A8EC0(auStack_98, 0x5b);
                 BoundedCopyStringtoBuffer(nameBuffer, auStack_98, POKEMON_NAME_LENGTH);
                 {
-                    struct unkStruct_808D144 stack =
-                        {
-                            .name = nameBuffer,
-                            .speciesNum = MONSTER_GENGAR,
-                            .itemID = ITEM_NOTHING,
-                            .dungeonLocation= {DUNGEON_RESCUE_TEAM_BASE, 0}, // DUNGEON_RESCUE_TEAM_BASE
-                            .moveID = {MOVE_SCRATCH, MOVE_LEER, MOVE_TAUNT, MOVE_QUICK_ATTACK},
-                            .pokeHP = 80,
-                            .level = 15,
-                            .IQ = 1,
-                            .offenseAtk = {25, 25},
-                            .offenseDef = {15, 15},
-                            .currExp = 25000,
-                        };
+                    struct StoryMonData gengarData =
+                    {
+                        .name = nameBuffer,
+                        .speciesNum = MONSTER_GENGAR,
+                        .itemID = ITEM_NOTHING,
+                        .dungeonLocation= {DUNGEON_RESCUE_TEAM_BASE, 0},
+                        .moveID = {MOVE_SCRATCH, MOVE_LEER, MOVE_TAUNT, MOVE_QUICK_ATTACK},
+                        .pokeHP = 80,
+                        .level = 15,
+                        .IQ = 1,
+                        .offenseAtk = {25, 25},
+                        .offenseDef = {15, 15},
+                        .currExp = 25000,
+                    };
 
-                    sub_808D144(&param_1->mon, &stack);
+                    ConvertStoryMonToPokemon(&param_1->mon, &gengarData);
                 }
             }
             break;
@@ -865,4 +836,82 @@ void sub_809927C(u8 param_1)
     gUnknown_20398C8.sub0.unkC = 0;
     gUnknown_20398C8.sub0.unk4 = 0;
     gUnknown_20398C8.sub0.unkD = 0;
+}
+
+bool8 sub_80992E0(s16 *param_1, s16 *param_2)
+{
+    s32 sVar2;
+
+    sVar2 = (s16)GetScriptVarValue(NULL,DUNGEON_ENTER);
+    if ((((sVar2 != -1) && (sVar2 != 0x50)) && (sVar2 != 0x51)) && (sVar2 != 0x52)) {
+        *param_1 = sVar2;
+        *param_2 = GetScriptVarValue(NULL,DUNGEON_ENTER_INDEX);
+        return TRUE;
+    }
+    else {
+        *param_1 = -1;
+        *param_2 = -1;
+        return FALSE;
+    }
+}
+
+bool8 sub_8099328(u8 *dungeonId)
+{
+    s16 script_disc;
+    const DungeonInfo* dungeonInfo;
+
+    script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
+    if (script_disc == 0x51) {
+        script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
+        dungeonInfo = GetDungeonInfo_80A2608(script_disc);
+        if (dungeonInfo->dungeonIndex < 0x3f) {
+            *dungeonId = dungeonInfo->dungeonIndex;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_8099360(u8 *dungeonId)
+{
+    s16 script_disc;
+    const DungeonInfo* dungeonInfo;
+
+    script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
+    if (script_disc == 0x52) {
+        script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
+        dungeonInfo = GetDungeonInfo_80A2608(script_disc);
+            *dungeonId = dungeonInfo->dungeonIndex;
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8099394(u8 *param)
+{
+    s16 script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER);
+    if (script_disc == 0x50) {
+        script_disc = GetScriptVarValue(NULL, DUNGEON_ENTER_INDEX);
+        *param = script_disc;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_80993C0(bool8 param)
+{
+    gUnknown_20398B8 = (param == FALSE);
+}
+
+extern void sub_80A4B38(void);
+extern void sub_80A4B54(void);
+
+void sub_80993D8(void)
+{
+    sub_80A4B38();
+}
+
+void sub_80993E4(void)
+{
+    sub_80A4B54();
 }

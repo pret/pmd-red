@@ -10,6 +10,7 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
+#include "text_3.h"
 
 static EWRAM_INIT unkStruct_203B3F0 *sUnknown_203B3F0 = {NULL};
 
@@ -129,7 +130,7 @@ static void sub_803A5A0(void)
             sub_803A690();
             break;
         case 4:
-            ItemIdToSlot(&item, sUnknown_203B3F0->id, 0);
+            ItemIdToItem(&item, sUnknown_203B3F0->id, 0);
             InitItemDescriptionWindow(&item);
             break;
         case 5:

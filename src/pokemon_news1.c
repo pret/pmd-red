@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/input.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_80958E8.h"
 #include "input.h"
 #include "pokemon_mail.h"
@@ -32,26 +32,26 @@ bool8 sub_802B640(u32 a0, DungeonPos *a1, u32 a2)
     if (sUnknown_203B2CC == NULL)
         sUnknown_203B2CC = MemoryAlloc(sizeof(struct unkStruct_203B2CC), 8);
 
-    sUnknown_203B2CC->s38.winId = a0;
-    sUnknown_203B2CC->s38.unk38 = &sUnknown_203B2CC->s38.windows.id[a0];
+    sUnknown_203B2CC->s38.menuWinId = a0;
+    sUnknown_203B2CC->s38.menuWindow = &sUnknown_203B2CC->s38.windows.id[a0];
 
     RestoreSavedWindows(&sUnknown_203B2CC->s38.windows);
 
-    sUnknown_203B2CC->s38.windows.id[sUnknown_203B2CC->s38.winId] = sUnknown_80DFBEC;
+    sUnknown_203B2CC->s38.windows.id[sUnknown_203B2CC->s38.menuWinId] = sUnknown_80DFBEC;
 
     if (a1 != NULL)
-        sUnknown_203B2CC->s38.windows.id[sUnknown_203B2CC->s38.winId].pos = *a1;
+        sUnknown_203B2CC->s38.windows.id[sUnknown_203B2CC->s38.menuWinId].pos = *a1;
 
-    sub_8012D08(sUnknown_203B2CC->s38.unk38, a2);
+    sub_8012D08(sUnknown_203B2CC->s38.menuWindow, a2);
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2CC->s38.windows, TRUE, TRUE);
 
-    sub_8013818(&sUnknown_203B2CC->s38.input, GetNumPKMNNews(), a2, a0);
+    CreateMenuOnWindow(&sUnknown_203B2CC->s38.input, GetNumPKMNNews(), a2, a0);
 
     sUnknown_203B2CC->s38.input.menuIndex = sUnknown_203B2D0;
-    sUnknown_203B2CC->s38.input.unk1E = sUnknown_203B2D2;
+    sUnknown_203B2CC->s38.input.currPage = sUnknown_203B2D2;
 
-    sub_8013984(&sUnknown_203B2CC->s38.input);
+    MenuUpdatePagesData(&sUnknown_203B2CC->s38.input);
     sub_802B880();
     CreatePKMNNewsMenu();
 
@@ -77,7 +77,7 @@ u32 sub_802B720(bool8 a0)
             return 4;
     }
 
-    if (sub_80138B8(&sUnknown_203B2CC->s38.input, 1)) {
+    if (MenuCursorUpdate(&sUnknown_203B2CC->s38.input, 1)) {
         sub_802B880();
         CreatePKMNNewsMenu();
         return 1;
@@ -87,7 +87,7 @@ u32 sub_802B720(bool8 a0)
 
 u8 GetPokemonNewsIndex(void)
 {
-    return sUnknown_203B2CC->receivedNewsletters[(sUnknown_203B2CC->s38.input.unk1E * sUnknown_203B2CC->s38.input.unk1C) + sUnknown_203B2CC->s38.input.menuIndex];
+    return sUnknown_203B2CC->receivedNewsletters[GET_CURRENT_MENU_ENTRY(sUnknown_203B2CC->s38.input)];
 }
 
 void sub_802B7D0(bool8 cursorSprite)
@@ -95,8 +95,8 @@ void sub_802B7D0(bool8 cursorSprite)
     ResetUnusedInputStruct();
     ShowWindows(&sUnknown_203B2CC->s38.windows, FALSE, FALSE);
 
-    sUnknown_203B2CC->s38.input.unk22 = GetNumPKMNNews();
-    sub_8013984(&sUnknown_203B2CC->s38.input);
+    sUnknown_203B2CC->s38.input.totalEntriesCount = GetNumPKMNNews();
+    MenuUpdatePagesData(&sUnknown_203B2CC->s38.input);
     sub_802B880();
     CreatePKMNNewsMenu();
 
@@ -109,9 +109,9 @@ void sub_802B81C(void)
     if (sUnknown_203B2CC != NULL) {
         sUnknown_203B2D0 = sUnknown_203B2CC->s38.input.menuIndex;
 
-        sUnknown_203B2D2 = sUnknown_203B2CC->s38.input.unk1E;
+        sUnknown_203B2D2 = sUnknown_203B2CC->s38.input.currPage;
 
-        sUnknown_203B2CC->s38.windows.id[sUnknown_203B2CC->s38.winId] = sUnknown_80DFBD0;
+        sUnknown_203B2CC->s38.windows.id[sUnknown_203B2CC->s38.menuWinId] = sUnknown_80DFBD0;
 
         ResetUnusedInputStruct();
         ShowWindows(&sUnknown_203B2CC->s38.windows, TRUE, TRUE);
@@ -123,7 +123,7 @@ void sub_802B81C(void)
 
 static void sub_802B880(void)
 {
-    SUB_80095E4_CALL(sUnknown_203B2CC->s38);
+    UPDATE_MENU_WINDOW_HEIGHT(sUnknown_203B2CC->s38);
 }
 
 static void CreatePKMNNewsMenu(void)
@@ -133,22 +133,22 @@ static void CreatePKMNNewsMenu(void)
     s32 new_index;
     u8 mailIndex;
 
-    CallPrepareTextbox_8008C54(sUnknown_203B2CC->s38.winId);
-    sub_80073B8(sUnknown_203B2CC->s38.winId);
-    PrintStringOnWindow(10, 0, sNewsList, sUnknown_203B2CC->s38.winId, 0);
+    CallPrepareTextbox_8008C54(sUnknown_203B2CC->s38.menuWinId);
+    sub_80073B8(sUnknown_203B2CC->s38.menuWinId);
+    PrintStringOnWindow(10, 0, sNewsList, sUnknown_203B2CC->s38.menuWinId, 0);
 
-    sub_8012BC4((sUnknown_80DFBE8.width * 8) + 4, 0, sUnknown_203B2CC->s38.input.unk1E + 1, 2, 7, sUnknown_203B2CC->s38.winId);
+    PrintNumOnWindow((sUnknown_80DFBE8.width * 8) + 4, 0, sUnknown_203B2CC->s38.input.currPage + 1, 2, 7, sUnknown_203B2CC->s38.menuWinId);
 
-    for (index = 0; index < sUnknown_203B2CC->s38.input.unk1A; index++) {
+    for (index = 0; index < sUnknown_203B2CC->s38.input.currPageEntries; index++) {
         y = GetMenuEntryYCoord(&sUnknown_203B2CC->s38.input, index);
-        new_index = (sUnknown_203B2CC->s38.input.unk1E * sUnknown_203B2CC->s38.input.unk1C) + index;
+        new_index = (sUnknown_203B2CC->s38.input.currPage * sUnknown_203B2CC->s38.input.entriesPerPage) + index;
         mailIndex = sUnknown_203B2CC->receivedNewsletters[new_index];
-        sub_803B6B0(10, y, 6, sUnknown_203B2CC->s38.winId);
+        sub_803B6B0(10, y, 6, sUnknown_203B2CC->s38.menuWinId);
         sub_802BC7C();
-        PrintFormattedStringOnWindow(21, y, GetPokemonMailHeadline(mailIndex), sUnknown_203B2CC->s38.winId, 0);
+        PrintFormattedStringOnWindow(21, y, GetPokemonMailHeadline(mailIndex), sUnknown_203B2CC->s38.menuWinId, 0);
     }
 
-    sub_80073E0(sUnknown_203B2CC->s38.winId);
+    sub_80073E0(sUnknown_203B2CC->s38.menuWinId);
 }
 
 static s32 GetNumPKMNNews(void)

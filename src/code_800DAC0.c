@@ -3,7 +3,7 @@
 #include "bg_control.h"
 #include "code_800DAC0.h"
 #include "code_800E9A8.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_803E724.h"
 #include "def_filearchives.h"
 #include "dungeon_map.h"

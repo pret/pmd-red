@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "constants/communication_error_codes.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801B3C0.h"
 #include "code_801C8C4.h"
 #include "cpu.h"
@@ -539,7 +539,7 @@ void sub_8036B28(void)
         sTradeItemsMenu->unk24C = tradeItemZeroed;
       }
 
-        sub_8011830();
+        StopBGMResetSoundEffectCounters();
         linkStatus = sub_8037B28(sTradeItemsMenu->itemMode);
         sTradeItemsMenu->linkStatus = linkStatus;
         if(linkStatus == COMMS_GOOD){
@@ -557,7 +557,7 @@ void sub_8036B28(void)
         if(sTradeItemsMenu->linkStatus == COMMS_GOOD && sTradeItemsMenu->itemMode <= 1){
             sTradeItemsMenu->linkStatus = sub_80381F4(sTradeItemsMenu->itemMode,&sTradeItemsMenu->unk244,&sTradeItemsMenu->unk24C);
         }
-        xxx_call_start_bg_music();
+        StartBGMusic();
         break;
     case 0xe:
         if (sTradeItemsMenu->unk24C.quantity == 0) {

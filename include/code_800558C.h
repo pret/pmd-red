@@ -2,7 +2,7 @@
 #define GUARD_CODE_800558C_H
 
 extern bool8 gUnknown_2026E38;
-extern u32 *gUnknown_2026E3C;
+extern s16 *gUnknown_2026E3C;
 extern s16 gUnknown_2026E4E;
 
 extern s16 *gUnknown_203B078;

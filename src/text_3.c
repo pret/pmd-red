@@ -3,7 +3,7 @@
 #include "text_2.h"
 #include "text_3.h"
 
-static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringStruct *sp);
+static const u8 *HandleCharFormatInternal(Window *windows, const u8 *str, UnkDrawStringStruct *sp);
 static s32 InterpretColorChar(u8 a0);
 static const u8 *sub_800915C(s16 *a0, const u8 *str);
 static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32 windowId, u32 terminatingChr, s32 characterSpacing, s32 lineSpacing);
@@ -82,7 +82,7 @@ UNUSED static void sub_8008E58(s32 a0, s32 a1, u8 *a2, s32 a3)
 #endif
 
 // arm9.bin::02003B34
-s32 sub_8008ED0(const u8 *str)
+s32 GetStringLineWidth(const u8 *str)
 {
     s32 ret = 0;
 
@@ -90,7 +90,7 @@ s32 sub_8008ED0(const u8 *str)
         const u8 *strPtr;
         u32 chr;
 
-        strPtr = xxx_get_next_char_from_string(str, &chr);
+        strPtr = GetNextCharFromStr(str, &chr);
         str = strPtr;
         if (chr == '\0')
             break;
@@ -173,13 +173,13 @@ static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32
     UnkDrawStringStruct sp;
     u32 currChr;
 
-    sp.unk0 = x;
-    sp.unk2 = y;
+    sp.x = x;
+    sp.y = y;
     sp.unkC = x;
     sp.unk10 = 7;
     while (TRUE) {
-        str = HandleTextFormat(windows, str, &sp);
-        str = xxx_get_next_char_from_string(str, &currChr);
+        str = HandleCharFormatInternal(windows, str, &sp);
+        str = GetNextCharFromStr(str, &currChr);
         if (currChr == '\0' || currChr == terminatingChr)
             break;
 
@@ -193,27 +193,27 @@ static void DrawStringInternal(Window *windows, s32 x, s32 y, const u8 *str, u32
             break;
         }
         else if (currChr == '\r' || currChr == '\n') {
-            sp.unk0 = sp.unkC;
-            sp.unk2 += lineSpacing;
+            sp.x = sp.unkC;
+            sp.y += lineSpacing;
         }
         else if (currChr == '\x1D') { // ASCII group separator.
-            sp.unk0 = sp.unkC;
-            sp.unk2 += 5;
+            sp.x = sp.unkC;
+            sp.y += 5;
         }
         else if (currChr == '`') {
-            sp.unk0 += 6;
+            sp.x += 6;
         }
         else if (characterSpacing == 0) {
-            sp.unk0 += DrawCharOnWindowInternal(windows, sp.unk0, sp.unk2, currChr, sp.unk10, windowId);
+            sp.x += DrawCharOnWindowInternal(windows, sp.x, sp.y, currChr, sp.unk10, windowId);
         }
         else {
             const unkChar *chrPtr = GetCharacter(currChr);
             if (chrPtr != NULL) {
-                s32 x = sp.unk0;
+                s32 x = sp.x;
                 s32 x2 = gCharacterSpacing + 10;
                 x +=((x2 - chrPtr->width) / 2);
-                DrawCharOnWindowInternal(windows, x, sp.unk2, currChr, sp.unk10, windowId);
-                sp.unk0 += characterSpacing;
+                DrawCharOnWindowInternal(windows, x, sp.y, currChr, sp.unk10, windowId);
+                sp.x += characterSpacing;
             }
         }
     }
@@ -245,9 +245,9 @@ static const u8 *sub_800915C(s16 *a0, const u8 *str)
 }
 
 // arm9.bin::02003844
-const u8 *xxx_handle_format_global(const u8 *str, UnkDrawStringStruct *unkStrPtr)
+const u8 *HandleSpecialCharFormat(const u8 *str, UnkDrawStringStruct *unkStrPtr)
 {
-    return HandleTextFormat(gWindows, str, unkStrPtr);
+    return HandleCharFormatInternal(gWindows, str, unkStrPtr);
 }
 
 #if (GAME_VERSION == VERSION_RED)
@@ -258,14 +258,14 @@ UNUSED static s32 sub_80091A8(s32 a0)
 #endif
 
 // arm9.bin::02003514
-static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringStruct *sp)
+static const u8 *HandleCharFormatInternal(Window *windows, const u8 *str, UnkDrawStringStruct *sp)
 {
     while (TRUE) {
         if (str[0] == '#') {
             if (str[1] == '[') {
                 const u8 *strBefore = str;
                 str += 2;
-                sp->unk21 = 0;
+                sp->waitFrames = FALSE;
                 while (*str != '\0') {
                     if (*str == ']') {
                         str++;
@@ -279,45 +279,45 @@ static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringS
                         str = strNew;
                 }
 
-                if (sp->unk21 != 0)
+                if (sp->waitFrames)
                     break;
             }
             else if (str[1] == '=') {
-                sp->unk0 = str[2];
+                sp->x = str[2];
                 str += 3;
                 if (*str == '.')
                     str++;
             }
             else if (str[1] == 'y') {
-                sp->unk2 = str[2];
+                sp->y = str[2];
                 str += 3;
                 if (*str == '.')
                     str++;
             }
             else if (str[1] == '>') {
-                str = sub_800915C(&sp->unk0, str + 2);
+                str = sub_800915C(&sp->x, str + 2);
             }
             else if (str[1] == '.') {
-                sp->unk0 += str[2];
+                sp->x += str[2];
                 str += 3;
             }
             else if (str[1] == 'n') {
-                sp->unk0 = sp->unkC;
-                sp->unk2 += 11;
+                sp->x = sp->unkC;
+                sp->y += 11;
                 str += 2;
             }
             else if (str[1] == ':') {
-                sp->unk4 = sp->unk0;
+                sp->unk4 = sp->x;
                 str += 2;
             }
             else if (str[1] == ';') {
-                sp->unk0 = sp->unk4 + str[2];
+                sp->x = sp->unk4 + str[2];
                 str += 3;
             }
             else if (str[1] == '+') {
                 str += 2;
-                sp->unk0 = (windows[0].width * 8) - sub_8008ED0(str);
-                sp->unk0 /= 2;
+                sp->x = (windows[0].width * 8) - GetStringLineWidth(str);
+                sp->x /= 2;
             }
             else if (str[1] == 'C') {
                 sp->unk14 = sp->unk10;
@@ -350,28 +350,28 @@ static const u8 *HandleTextFormat(Window *windows, const u8 *str, UnkDrawStringS
             }
             else if (str[1] == 'W') {
                 str += 2;
-                sp->unk8 = ((windows[0].x * 8) + sp->unk0) - 2;
-                sp->unkA = ((windows[0].y * 8) + sp->unk2) + 3;
-                sp->unk20 = 1;
+                sp->arrowSpritePosX = ((windows[0].x * 8) + sp->x) - 2;
+                sp->arrowSpritePosY = ((windows[0].y * 8) + sp->y) + 3;
+                sp->waitButtonPress = TRUE;
                 break;
             }
             else if (str[1] == 'P') {
                 str += 2;
-                sp->unk2 = 9999;
+                sp->y = 9999;
                 sp->unk1C = 0;
-                sp->unk20 = 1;
+                sp->waitButtonPress = TRUE;
                 break;
             }
             else if (str[1] == 'p') {
                 str += 2;
-                sp->unk2 = 9999;
+                sp->y = 9999;
                 sp->unk1C = 1;
-                sp->unk20 = 1;
+                sp->waitButtonPress = TRUE;
                 break;
             }
             else if (str[1] == '~') {
-                sp->unk2C = str[2];
-                sp->unk21 = 1;
+                sp->framesToWait = str[2];
+                sp->waitFrames = TRUE;
                 str += 3;
             }
             else {
@@ -487,32 +487,30 @@ UNUSED static void nullsub_174(void)
 #endif
 
 // arm9.bin::02003278
-s32 sub_80095E4(s32 a0, s32 a1)
+s32 CalcEntriesTotalHeight(s32 entriesCount, s32 entryHeight)
 {
-    s32 r1;
+    s32 totalHeight;
 
-    if (a1 == 0)
-        a1 = 10;
-    r1 = a0 * a1;
+    if (entryHeight == 0)
+        entryHeight = 10;
+    totalHeight = entriesCount * entryHeight;
 
-    if ((r1 % 8) != 0)
-        return (r1 / 8) + 1;
+    if ((totalHeight % 8) != 0)
+        return (totalHeight / 8) + 1;
     else
-        return r1 / 8;
+        return totalHeight / 8;
 }
 
 // arm9.bin::02003238
-// Same as sub_80095E4 except it doesn't check for a1 == 0
-s32 sub_8009614(s32 a0, s32 a1)
+// Same as CalcEntriesTotalHeight except it doesn't check for entryHeight == 0. Only called for menu windows which use TWO_LINES_MENU_ENTRY_HEIGHT
+s32 CalcTwoLinesEntriesTotalHeight(s32 entriesCount, s32 entryHeight)
 {
-    s32 r1;
+    s32 totalHeight = entriesCount * entryHeight;
 
-    r1 = a0 * a1;
-
-    if ((r1 % 8) != 0)
-        return (r1 / 8) + 1;
+    if ((totalHeight % 8) != 0)
+        return (totalHeight / 8) + 1;
     else
-        return r1 / 8;
+        return totalHeight / 8;
 }
 
 // arm9.bin::02003158

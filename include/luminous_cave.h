@@ -4,7 +4,7 @@
 #include "file_system.h"
 #include "items.h"
 #include "structs/menu.h"
-#include "pokemon_3.h"
+#include "pokemon_evolution.h"
 #include "structs/str_text.h"
 
 // size: 0x174
@@ -12,7 +12,7 @@ typedef struct LuminousCaveWork
 {
     /* 0x0 */ bool8 evolutionComplete;
     /* 0x4 */ EvolveStatus evolveStatus;
-    /* 0xC */ PokemonStruct1 *pokeStruct;
+    /* 0xC */ Pokemon *pokeStruct;
     /* 0x10 */ bool8 pokeRenamed;
     /* 0x14 */ u32 evoItem1_InvIndex; // inventory index of item
     /* 0x18 */ u32 evoItem2_InvIndex; // inventory index of item

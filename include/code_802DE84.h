@@ -8,7 +8,7 @@
 // size: 0x7C
 struct unkStruct_203B300
 {
-    MenuInputStructSub unk0;
+    TouchScreenMenuInput unk0;
     /* 0xC */ unkStruct_802C39C *mail;
     u32 unk10;
     WindowTemplate *unk14;

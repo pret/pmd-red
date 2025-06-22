@@ -8,6 +8,7 @@
 #include "file_system.h"
 #include "pokemon.h"
 #include "pokemon_3.h"
+#include "pokemon_evolution.h"
 #include "moves.h"
 #include "string_format.h"
 #include "friend_area.h"
@@ -33,7 +34,7 @@
 #include "dungeon_config.h"
 #include "game_options.h"
 #include "weather.h"
-#include "text_util.h"
+#include "pokemon_types.h"
 #include "dungeon_random.h"
 #include "position_util.h"
 #include "dungeon_ai_movement.h"
@@ -47,15 +48,12 @@ static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
 extern bool8 IsLevelResetTo1(u8 dungeon);
-extern void xxx_pokemonstruct_index_to_pokemon2_808DE30(void* r0, u32 r1);
 extern void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
 extern bool8 sub_806A58C(s16 r0);
 extern void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
 extern void sub_8078084(Entity * pokemon);
-extern void xxx_pokemon2_to_pokemonstruct_index_808DF2C(s32 a1, PokemonStruct2* a2);
-extern void sub_808DFDC(s32 a1, PokemonStruct2* a2);
-extern void xxx_pokemon2_to_pokemonstruct_808DF44(PokemonStruct1*, PokemonStruct2*);
-extern void sub_8067A80(u8 a0, s32 a1, s32 a2, PokemonStruct1 **a3);
+extern void sub_808DFDC(s32 a1, DungeonMon* a2);
+extern void sub_8067A80(u8 a0, s32 a1, s32 a2, Pokemon **a3);
 extern bool8 sub_8070F80(Entity * pokemon, s32 direction);
 extern s32 sub_806A4DC(EntityInfo *info);
 extern void sub_8042900(Entity *r0);
@@ -68,7 +66,6 @@ extern void sub_804178C(u32);
 extern void sub_803F508(Entity *);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
-extern s32 sub_803D808(UnkDungeonGlobal_unk1CD98 *strPtr, s32 id);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
 extern s16 sub_803D970(u32);
 extern bool8 sub_8083660(const DungeonPos *param_1);
@@ -123,9 +120,9 @@ void LoadDungeonPokemonSprites(void)
         gDungeon->sprites[index] = NULL;
     }
     LoadPokemonSprite(MONSTER_DECOY, TRUE);
-    for(index = 0; index < gDungeon->unk37E4; index++)
+    for(index = 0; index < gDungeon->currFloorMonsterSpawnsCount; index++)
     {
-        LoadPokemonSprite(ExtractSpeciesIndex(&gDungeon->unk343C[index]), TRUE);
+        LoadPokemonSprite(ExtractSpeciesIndex(&gDungeon->monsterSpawns[index]), TRUE);
     }
     if(gDungeon->unk644.unk44)
     {
@@ -133,8 +130,8 @@ void LoadDungeonPokemonSprites(void)
     }
     for(index = 0; index < 4; index++)
     {
-        PokemonStruct2 *ptr = &gRecruitedPokemonRef->pokemon2[index];
-        if(PokemonFlag1Struct2(ptr))
+        DungeonMon *ptr = &gRecruitedPokemonRef->dungeonTeam[index];
+        if(DungeonMonExists(ptr))
             if(PokemonFlag2Struct2(ptr))
                 LoadPokemonSprite(ptr->speciesNum, FALSE);
     }
@@ -142,8 +139,8 @@ void LoadDungeonPokemonSprites(void)
     {
         for(index = 0; index < MAX_TEAM_MEMBERS; index++)
         {
-            PokemonStruct1 *ptr = &gRecruitedPokemonRef->team[index];
-            if(PokemonFlag1(ptr))
+            Pokemon *ptr = &gRecruitedPokemonRef->team[index];
+            if(PokemonExists(ptr))
                 LoadPokemonSprite(ptr->speciesNum, TRUE);
         }
     }
@@ -225,52 +222,51 @@ void CloseAllSpriteFiles(void)
     }
 }
 
-void sub_806890C(void)
+void SetDungeonMonsFromTeam(void)
 {
     int index;
-    int speciesId;
+    int recruitedId;
 
     index = 0;
-    for (speciesId = 0; speciesId < NUM_MONSTERS; speciesId++) {
-        PokemonStruct1 stack;
-        PokemonStruct1 *pokeStruct = &gRecruitedPokemonRef->pokemon[speciesId];
-        if (PokemonFlag1(pokeStruct) && PokemonFlag2(pokeStruct)) {
-            xxx_pokemonstruct_index_to_pokemon2_808DE30(&gRecruitedPokemonRef->pokemon2[index],speciesId);
+    for (recruitedId = 0; recruitedId < NUM_MONSTERS; recruitedId++) {
+        Pokemon lvl1Mon;
+        Pokemon *pokeStruct = &gRecruitedPokemonRef->pokemon[recruitedId];
+        if (PokemonExists(pokeStruct) && PokemonFlag2(pokeStruct)) {
+            RecruitedPokemonToDungeonMon(&gRecruitedPokemonRef->dungeonTeam[index],recruitedId);
             if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
                 struct DungeonLocation dungeonLoc = {.id = DUNGEON_TINY_WOODS, .floor = 1};
-                sub_808CFD0(&stack,pokeStruct->speciesNum,0,0,&dungeonLoc,0);
-                gRecruitedPokemonRef->pokemon2[index].level = stack.level;
-                gRecruitedPokemonRef->pokemon2[index].IQ = stack.IQ;
-                gRecruitedPokemonRef->pokemon2[index].unk10 = stack.pokeHP;
-                gRecruitedPokemonRef->pokemon2[index].unk12 = stack.pokeHP;
-                gRecruitedPokemonRef->pokemon2[index].offense.att[0] = stack.offense.att[0];
-                gRecruitedPokemonRef->pokemon2[index].offense.att[1] = stack.offense.att[1];
-                gRecruitedPokemonRef->pokemon2[index].offense.def[0] = stack.offense.def[0];
-                gRecruitedPokemonRef->pokemon2[index].offense.def[1] = stack.offense.def[1];
-                gRecruitedPokemonRef->pokemon2[index].currExp = stack.currExp;
-                gRecruitedPokemonRef->pokemon2[index].IQSkills = stack.IQSkills;
-                gRecruitedPokemonRef->pokemon2[index].tacticIndex = stack.tacticIndex;
-                CopyAndResetMoves(&gRecruitedPokemonRef->pokemon2[index].moves, stack.moves);
+                CreateLevel1Pokemon(&lvl1Mon,pokeStruct->speciesNum,0,0,&dungeonLoc,0);
+                gRecruitedPokemonRef->dungeonTeam[index].level = lvl1Mon.level;
+                gRecruitedPokemonRef->dungeonTeam[index].IQ = lvl1Mon.IQ;
+                gRecruitedPokemonRef->dungeonTeam[index].unk10 = lvl1Mon.pokeHP;
+                gRecruitedPokemonRef->dungeonTeam[index].unk12 = lvl1Mon.pokeHP;
+                gRecruitedPokemonRef->dungeonTeam[index].offense.att[0] = lvl1Mon.offense.att[0];
+                gRecruitedPokemonRef->dungeonTeam[index].offense.att[1] = lvl1Mon.offense.att[1];
+                gRecruitedPokemonRef->dungeonTeam[index].offense.def[0] = lvl1Mon.offense.def[0];
+                gRecruitedPokemonRef->dungeonTeam[index].offense.def[1] = lvl1Mon.offense.def[1];
+                gRecruitedPokemonRef->dungeonTeam[index].currExp = lvl1Mon.currExp;
+                gRecruitedPokemonRef->dungeonTeam[index].IQSkills = lvl1Mon.IQSkills;
+                gRecruitedPokemonRef->dungeonTeam[index].tacticIndex = lvl1Mon.tacticIndex;
+                CopyAndResetMoves(&gRecruitedPokemonRef->dungeonTeam[index].moves, lvl1Mon.moves);
             }
-            gRecruitedPokemonRef->pokemon2[index].unkC = index;
-            index++;
-            if (index == 4)
+            gRecruitedPokemonRef->dungeonTeam[index].unkC = index;
+            if (++index == MAX_TEAM_MEMBERS)
                 break;
         }
     }
-    for (; index < 4; index++) {
-        gRecruitedPokemonRef->pokemon2[index].unk0 = 0;
+    for (; index < MAX_TEAM_MEMBERS; index++) {
+        gRecruitedPokemonRef->dungeonTeam[index].flags = 0;
     }
 }
 
-void sub_8068A84(PokemonStruct1 *pokemon)
+void sub_8068A84(Pokemon *pokemon)
 {
     s32 i, totalBodySize;
 
     totalBodySize = 0;
-    for (i = 0; i < 4; i++) {
-        PokemonStruct2 *ptr = &gRecruitedPokemonRef->pokemon2[i];
-        if (PokemonFlag1Struct2(ptr)) {
+    for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+        DungeonMon *ptr = &gRecruitedPokemonRef->dungeonTeam[i];
+        if (DungeonMonExists(ptr)) {
             totalBodySize += GetBodySize(ptr->speciesNum);
         }
     }
@@ -289,15 +285,15 @@ void sub_8068A84(PokemonStruct1 *pokemon)
         }
     }
     else {
-        for (i = 0; i < 4; i++) {
-            PokemonStruct2 *monPtr = &gRecruitedPokemonRef->pokemon2[i];
-            if (!PokemonFlag1Struct2(monPtr)) {
-                xxx_pokemonstruct_to_pokemon2_808DE50(monPtr,pokemon,0x55aa);
-                monPtr->unk0 |= 1;
+        for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
+            DungeonMon *monPtr = &gRecruitedPokemonRef->dungeonTeam[i];
+            if (!DungeonMonExists(monPtr)) {
+                PokemonToDungeonMon(monPtr,pokemon,0x55aa);
+                monPtr->flags |= POKEMON_FLAG_EXISTS;
                 if (monPtr->IQ < 0x1a) {
                     monPtr->IQ = 0x1a;
                 }
-                monPtr->unk0 |= 2;
+                monPtr->flags |= 2;
                 monPtr->unkC = i;
                 ZeroOutItem(&monPtr->itemSlot);
                 PrintColoredPokeNameToBuffer(gFormatBuffer_Monsters[0],pokemon,6);
@@ -337,8 +333,8 @@ static inline bool8 IsUnkDungeon(u8 joinedDungeon)
 void sub_8068BDC(bool8 a0)
 {
     bool8 spArr[NUM_FRIEND_AREAS];
-    PokemonStruct1 *monPointers[21];
-    PokemonStruct1 mon1Structs[MAX_TEAM_MEMBERS];
+    Pokemon *monPointers[21];
+    Pokemon mon1Structs[MAX_TEAM_MEMBERS];
     u16 arr2[18];
     FriendAreaCapacity areaCapacity;
     s32 i, j, id;
@@ -348,8 +344,8 @@ void sub_8068BDC(bool8 a0)
     }
 
     for (id = 0; id < MAX_TEAM_MEMBERS; id++) {
-        PokemonStruct2 *monPtr = &gRecruitedPokemonRef->pokemon2[id];
-        if (PokemonFlag1Struct2(monPtr) && !sub_806A564(monPtr->unkA)) {
+        DungeonMon *monPtr = &gRecruitedPokemonRef->dungeonTeam[id];
+        if (DungeonMonExists(monPtr) && !sub_806A564(monPtr->recruitedPokemonId)) {
             Item *monItem = &monPtr->itemSlot;
             if (ItemExists(monItem) && monItem->id == ITEM_POKE) {
                 AddToTeamMoney(GetMoneyValue(monItem));
@@ -359,18 +355,18 @@ void sub_8068BDC(bool8 a0)
     }
 
     for (id = 0; id < MAX_TEAM_MEMBERS; id++) {
-        PokemonStruct2 *monPtr = &gRecruitedPokemonRef->pokemon2[id];
-        if (PokemonFlag1Struct2(monPtr) && !sub_806A564(monPtr->unkA)) {
+        DungeonMon *monPtr = &gRecruitedPokemonRef->dungeonTeam[id];
+        if (DungeonMonExists(monPtr) && !sub_806A564(monPtr->recruitedPokemonId)) {
             if (IS_CASTFORM_FORM_MONSTER(monPtr->speciesNum)) {
                 monPtr->speciesNum = MONSTER_CASTFORM;
             }
 
-            if (sub_806A58C(monPtr->unkA)) {
+            if (sub_806A58C(monPtr->recruitedPokemonId)) {
                 if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
-                    sub_808DFDC(monPtr->unkA, monPtr);
+                    sub_808DFDC(monPtr->recruitedPokemonId, monPtr);
                 }
                 else {
-                    xxx_pokemon2_to_pokemonstruct_index_808DF2C(monPtr->unkA, monPtr);
+                    DungeonMonToRecruitedPokemon(monPtr->recruitedPokemonId, monPtr);
                 }
             }
             else {
@@ -393,11 +389,11 @@ void sub_8068BDC(bool8 a0)
         }
 
         for (id = 0; id < MAX_TEAM_MEMBERS; id++) {
-            PokemonStruct2 *monPtr = &gRecruitedPokemonRef->pokemon2[id];
-            if (PokemonFlag1Struct2(monPtr) && sub_806A5A4(monPtr->unkA) && GetFriendArea(monPtr->speciesNum) == friendAreaId && a0) {
+            DungeonMon *monPtr = &gRecruitedPokemonRef->dungeonTeam[id];
+            if (DungeonMonExists(monPtr) && sub_806A5A4(monPtr->recruitedPokemonId) && GetFriendArea(monPtr->speciesNum) == friendAreaId && a0) {
                 monPointers[j] = &mon1Structs[id];
-                xxx_pokemon2_to_pokemonstruct_808DF44(monPointers[j], monPtr);
-                monPointers[j]->unk0 |= 0x4000;
+                DungeonMonToPokemon(monPointers[j], monPtr);
+                monPointers[j]->flags |= POKEMON_FLAG_x4000;
                 monPointers[j]->unkC[0].level = 0;
                 monPointers[j]->unkC[1].level = 0;
                 j++;
@@ -407,8 +403,8 @@ void sub_8068BDC(bool8 a0)
         if (j <= areaCapacity.maxPokemon) {
             s32 k;
             for (k = 0; k < j; k++) {
-                if (monPointers[k]->unk0 & 0x4000) {
-                    sub_808D1DC(monPointers[k]);
+                if (monPointers[k]->flags & POKEMON_FLAG_x4000) {
+                    TryAddPokemonToRecruited(monPointers[k]);
                 }
             }
         }
@@ -418,8 +414,8 @@ void sub_8068BDC(bool8 a0)
             while (1) {
                 sub_8067A80(friendAreaId, j - areaCapacity.maxPokemon, j, monPointers);
                 for (id = 0; id < j; id++) {
-                    PokemonStruct1 *monPtr = monPointers[id];
-                    if (PokemonFlag1(monPtr) && (monPtr->unk0 & 0x8000)) {
+                    Pokemon *monPtr = monPointers[id];
+                    if (PokemonExists(monPtr) && (monPtr->flags & POKEMON_FLAG_x8000)) {
                         if (IsUnkDungeon(monPtr->dungeonLocation.id)) {
                             break;
                         }
@@ -433,14 +429,14 @@ void sub_8068BDC(bool8 a0)
             }
 
             for (id = 0; id < j; id++) {
-                if (PokemonFlag1(monPointers[id]) && (monPointers[id]->unk0 & 0x8000)) {
-                    monPointers[id]->unk0 = 0;
+                if (PokemonExists(monPointers[id]) && (monPointers[id]->flags & POKEMON_FLAG_x8000)) {
+                    monPointers[id]->flags = 0;
                 }
             }
             for (id = 0; id < j; id++) {
-                if (PokemonFlag1(monPointers[id]) && (monPointers[id]->unk0 & 0x4000)) {
-                    sub_808D1DC(monPointers[id]);
-                    monPointers[id]->unk0 = 0;
+                if (PokemonExists(monPointers[id]) && (monPointers[id]->flags & POKEMON_FLAG_x4000)) {
+                    TryAddPokemonToRecruited(monPointers[id]);
+                    monPointers[id]->flags = 0;
                 }
             }
         }
@@ -452,13 +448,13 @@ void sub_8068F28(void)
     s32 i;
 
     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
-        PokemonStruct2 *monStruct2Ptr = &gRecruitedPokemonRef->pokemon2[i];
-        if (PokemonFlag1Struct2(monStruct2Ptr)) {
-            if (sub_806A564(monStruct2Ptr->unkA)) {
-                monStruct2Ptr->unk0 = 0;
+        DungeonMon *monStruct2Ptr = &gRecruitedPokemonRef->dungeonTeam[i];
+        if (DungeonMonExists(monStruct2Ptr)) {
+            if (sub_806A564(monStruct2Ptr->recruitedPokemonId)) {
+                monStruct2Ptr->flags = 0;
             }
-            else if (sub_806A538(monStruct2Ptr->unkA)) {
-                monStruct2Ptr->unk0 = 0;
+            else if (sub_806A538(monStruct2Ptr->recruitedPokemonId)) {
+                monStruct2Ptr->flags = 0;
             }
         }
     }
@@ -481,12 +477,12 @@ void sub_8068F80(void)
     }
 }
 
-static inline void ClearOnTeamFlag(PokemonStruct1 *mon)
+static inline void ClearOnTeamFlag(Pokemon *mon)
 {
-    mon->unk0 &= ~(FLAG_ON_TEAM);
+    mon->flags &= ~(POKEMON_FLAG_ON_TEAM);
 }
 
-static inline void ClearMonItemId(PokemonStruct1 *mon)
+static inline void ClearMonItemId(Pokemon *mon)
 {
     mon->heldItem.id = ITEM_NOTHING;
 }
@@ -587,17 +583,17 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
                 }
             }
             if (partnerInfo != NULL) {
-                PokemonStruct2 *partnerStruct = &gRecruitedPokemonRef->pokemon2[partnerInfo->teamIndex];
+                DungeonMon *partnerStruct = &gRecruitedPokemonRef->dungeonTeam[partnerInfo->teamIndex];
                 sub_806C264(partnerInfo->teamIndex,partnerInfo);
-                if (sub_806A58C(partnerStruct->unkA) != 0) {
+                if (sub_806A58C(partnerStruct->recruitedPokemonId) != 0) {
                     if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id) == 0) {
-                        xxx_pokemon2_to_pokemonstruct_index_808DF2C(partnerStruct->unkA, partnerStruct);
+                        DungeonMonToRecruitedPokemon(partnerStruct->recruitedPokemonId, partnerStruct);
                     }
                     if (!IsMakuhitaTrainingMaze()) {
-                        ClearMonItemId(&gRecruitedPokemonRef->pokemon[partnerStruct->unkA]);
+                        ClearMonItemId(&gRecruitedPokemonRef->pokemon[partnerStruct->recruitedPokemonId]);
                     }
                 }
-                partnerStruct->unk0 = 0;
+                partnerStruct->flags = 0;
             }
         }
     }
@@ -633,16 +629,16 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
     }
 
     if (!entInfo->isNotTeamMember) {
-        PokemonStruct2 *mon2Ptr = &gRecruitedPokemonRef->pokemon2[entInfo->teamIndex];
+        DungeonMon *mon2Ptr = &gRecruitedPokemonRef->dungeonTeam[entInfo->teamIndex];
         sub_806C264(entInfo->teamIndex,entInfo);
-        if (sub_806A58C(mon2Ptr->unkA) != 0) {
+        if (sub_806A58C(mon2Ptr->recruitedPokemonId) != 0) {
             bool8 uVar10;
 
             if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id) == 0) {
-                xxx_pokemon2_to_pokemonstruct_index_808DF2C(mon2Ptr->unkA, mon2Ptr);
+                DungeonMonToRecruitedPokemon(mon2Ptr->recruitedPokemonId, mon2Ptr);
             }
             if (!IsMakuhitaTrainingMaze()) {
-                ClearMonItemId(&gRecruitedPokemonRef->pokemon[mon2Ptr->unkA]);
+                ClearMonItemId(&gRecruitedPokemonRef->pokemon[mon2Ptr->recruitedPokemonId]);
             }
 
             uVar10 = FALSE;
@@ -654,10 +650,10 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
             }
 
             if (!uVar10) {
-                ClearOnTeamFlag(&gRecruitedPokemonRef->pokemon[mon2Ptr->unkA]);
+                ClearOnTeamFlag(&gRecruitedPokemonRef->pokemon[mon2Ptr->recruitedPokemonId]);
             }
         }
-        mon2Ptr->unk0 = 0;
+        mon2Ptr->flags = 0;
     }
 
     DeletePokemonDungeonSprite(entInfo->dungeonSpriteId);
@@ -830,7 +826,7 @@ Entity * sub_806977C(Entity *target)
     return NULL;
 }
 
-void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target)
+void SetMonSummaryInfoFromEntity(struct MonSummaryInfo *param_1, Entity *target)
 {
     int index;
     u8 *atkPtr;
@@ -891,10 +887,10 @@ void sub_8069844(struct unkStruct_808FF20 *param_1, Entity *target)
     param_1->unk44[1].level = 0;
     param_1->IQSkills = info->IQSkillMenuFlags;
     if (gDungeon->unk644.unk16 != 0) {
-        param_1->unk4C = sub_806A4DC(info);
+        param_1->evoStringId = sub_806A4DC(info);
     }
     else {
-        param_1->unk4C = 3;
+        param_1->evoStringId = EVO_STRING_EMPTY;
     }
 
     uVar15 = 0;
@@ -1231,7 +1227,7 @@ void sub_806A120(Entity * pokemon, Entity * target, Move* move)
   if ((((EntityIsValid(pokemon)) && (EntityIsValid(target))) && (pokemon != target))
      && (entityInfo = GetEntInfo(target), entityInfo->reflectClassStatus.status == STATUS_CONVERSION2)) {
     moveType = GetMoveTypeForMonster(pokemon, move);
-    uVar2_u32 = sub_8092364(moveType);
+    uVar2_u32 = GetBestResistingType(moveType);
     if (uVar2_u32 != TYPE_NONE) {
       entityInfo->types[0] = uVar2_u32;
       entityInfo->types[1] = 0;
@@ -1398,13 +1394,13 @@ bool8 sub_806A458(Entity *pokemon)
 
 s32 sub_806A4DC(EntityInfo *info)
 {
-    PokemonStruct1 pokemon;
+    Pokemon pokemon;
     DungeonLocation loc;
 
     loc.id = 0;
     loc.floor = 1;
 
-    sub_808CFD0(&pokemon, info->id, NULL, 0, &loc, 0);
+    CreateLevel1Pokemon(&pokemon, info->id, NULL, 0, &loc, 0);
 
     pokemon.speciesNum = info->id;
     pokemon.level = info->level;
@@ -1412,15 +1408,15 @@ s32 sub_806A4DC(EntityInfo *info)
     pokemon.offense.att[0] = info->atk[0];
     pokemon.offense.def[0] = info->def[0];
 
-    return sub_808F700(&pokemon);
+    return GetMonSummaryScreenEvoStringId(&pokemon);
 }
 
 bool8 sub_806A538(s16 r0)
 {
     s32 r0_1 = Self_s16(r0);
-    if (r0 == 0x55AA)
+    if (r0 == UNK_RECRUITED_POKEMON_ID_55AA)
         return TRUE;
-    if (r0 == 0x5AA5)
+    if (r0 == UNK_RECRUITED_POKEMON_ID_5AA5)
         return TRUE;
 
     if (r0_1 >= 0)
@@ -1431,9 +1427,9 @@ bool8 sub_806A538(s16 r0)
 
 bool8 sub_806A564(s16 r0)
 {
-    if (r0 == 0x55AA)
+    if (r0 == UNK_RECRUITED_POKEMON_ID_55AA)
         return TRUE;
-    if (r0 == 0x5AA5)
+    if (r0 == UNK_RECRUITED_POKEMON_ID_5AA5)
         return TRUE;
 
     return FALSE;
@@ -1702,13 +1698,13 @@ void sub_806AA70(void)
             else {
                 if (teamIndex >= 0) {
                     bool8 unkBool = FALSE;
-                    PokemonStruct2 *monStruct2Ptr = &gRecruitedPokemonRef->pokemon2[teamIndex];
+                    DungeonMon *monStruct2Ptr = &gRecruitedPokemonRef->dungeonTeam[teamIndex];
 
                     if (gDungeon->unk11)
                         unkBool = TRUE;
-                    else if (sub_806A564(monStruct2Ptr->unkA))
+                    else if (sub_806A564(monStruct2Ptr->recruitedPokemonId))
                         unkBool = TRUE;
-                    else if (sub_806A58C(monStruct2Ptr->unkA))
+                    else if (sub_806A58C(monStruct2Ptr->recruitedPokemonId))
                         unkBool = TRUE;
 
                     if (unkBool) {

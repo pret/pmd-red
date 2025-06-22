@@ -8,7 +8,8 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "structs/str_text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_1.h"
+#include "text_3.h"
 #include "bg_control.h"
 #include "dungeon_move_util.h"
 #include "code_800D090.h"
@@ -355,7 +356,7 @@ void DungeonHandlePlayerInput(void)
                 break;
             }
 
-            if (gGameOptionsRef->unk9 == 0
+            if (gGameOptionsRef->controls == CONTROLS_GBA
                 && (gRealInputs.pressed & B_BUTTON || (!unkBool && bPress))
                 && unkPtr->unk1821A != 0)
             {
@@ -385,7 +386,7 @@ void DungeonHandlePlayerInput(void)
             }
 
             highlightTiles = FALSE;
-            if (gGameOptionsRef->unk9 == 0) {
+            if (gGameOptionsRef->controls == CONTROLS_GBA) {
                 if (gRealInputs.shortPress & R_BUTTON || rPress || gRealInputs.pressed & START_BUTTON) {
                     highlightTiles = TRUE;
                 }
@@ -1110,12 +1111,12 @@ void sub_805F02C(void)
         r8->isTeamLeader = TRUE;
         leaderInfo->isTeamLeader = FALSE;
         for (i = 0; i < 4; i++) {
-            PokemonStruct2 *mon = &gRecruitedPokemonRef->pokemon2[i];
-            PokemonStruct1 *r5 = NULL;
+            DungeonMon *mon = &gRecruitedPokemonRef->dungeonTeam[i];
+            Pokemon *r5 = NULL;
 
-            if ((u8)mon->unk0 & 1) {
-                if (!sub_806A538(mon->unkA)) {
-                    r5 = &gRecruitedPokemonRef->pokemon[mon->unkA];
+            if ((u8)mon->flags & 1) {
+                if (!sub_806A538(mon->recruitedPokemonId)) {
+                    r5 = &gRecruitedPokemonRef->pokemon[mon->recruitedPokemonId];
                 }
                 if (i == r8->teamIndex) {
                     mon->isTeamLeader = TRUE;
@@ -1207,7 +1208,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                     PlayDungeonCursorSE(1);
                     MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
                 }
-                if ((gRealInputs.pressed & A_BUTTON || gDungeonMenu.unk28.a_button)) {
+                if ((gRealInputs.pressed & A_BUTTON || gDungeonMenu.touchScreen.a_button)) {
                     if (gUnknown_202749A[gDungeonMenu.menuIndex + 1] == 7) {
                         PlayDungeonConfirmationSE();
                         chosenOption = gDungeonMenu.menuIndex;
@@ -1215,7 +1216,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                     }
                     PlayDungeonCancelSE();
                 }
-                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+                if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                     PlayDungeonCancelSE();
                     chosenOption = -1;
                     break;
@@ -1533,16 +1534,16 @@ static void PrintOnMainMenu(bool8 printAll)
     s32 i, x, y, yLoop;
 
     gDungeonMenu.menuIndex = 0;
-    gDungeonMenu.unk1A = 5;
-    gDungeonMenu.unk1C = 5;
-    gDungeonMenu.unk1E = 0;
+    gDungeonMenu.currPageEntries = 5;
+    gDungeonMenu.entriesPerPage = 5;
+    gDungeonMenu.currPage = 0;
     gDungeonMenu.unk4 = 0;
     gDungeonMenu.firstEntryY = 2;
-    gDungeonMenu.unkC = 0;
-    gDungeonMenu.unkE = 0;
-    gDungeonMenu.unk0 = 0;
+    gDungeonMenu.leftRightArrowsPos.x = 0;
+    gDungeonMenu.leftRightArrowsPos.y = 0;
+    gDungeonMenu.windowId = 0;
     gDungeonMenu.unk14.x = 0;
-    sub_801317C(&gDungeonMenu.unk28);
+    ResetTouchScreenMenuInput(&gDungeonMenu.touchScreen);
     sub_80137B0(&gDungeonMenu, 0x38);
     if (printAll) {
         sub_803EAF0(7, NULL);
@@ -1589,7 +1590,7 @@ static void PrintOnMainMenu(bool8 printAll)
         EntityInfo *leaderInfo = GetEntInfo(GetLeader());
         const u8 *dungeonName = GetCurrentDungeonName();
 
-        x = (136 - sub_8008ED0(dungeonName)) / 2;
+        x = (136 - GetStringLineWidth(dungeonName)) / 2;
         sub_80073B8(1);
         PrintStringOnWindow(x, 2, dungeonName, 1, 0);
         sub_80073E0(1);

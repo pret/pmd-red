@@ -75,7 +75,7 @@ static s32 mini_strlen(const char *s)
     return len;
 }
 
-static s32 mini_itoa(s32 value, u32 radix, s32 uppercase, bool32 unsig, char *buffer)
+static s32 mini_itoa(s32 value, u32 radix, s32 uppercase, bool32 unsig, bool32 plus_sign, char *buffer)
 {
     char *pbuffer = buffer;
     s32 negative = 0;
@@ -101,6 +101,8 @@ static s32 mini_itoa(s32 value, u32 radix, s32 uppercase, bool32 unsig, char *bu
 
     if (negative)
         *(pbuffer++) = '-';
+    else if (plus_sign && !negative)
+        *(pbuffer++) = '+';
 
     *(pbuffer) = '\0';
 
@@ -190,7 +192,7 @@ s32 mini_vpprintf(void *buf, const char *fmt, va_list va)
             s32 pad_to = 0;
             char l = 0;
             //char alt_form = 0;    // '#'
-            //char plus_sign = 0;   // '+'
+            bool8 plus_sign = FALSE;
             bool8 flagsDone = FALSE;
             char *ptr;
 
@@ -202,7 +204,7 @@ s32 mini_vpprintf(void *buf, const char *fmt, va_list va)
                 switch (ch)
                 {
                     //case '#': alt_form = 1; ch = *(fmt++); break;
-                    //case '+': plus_sign = 1; ch = *(fmt++); break;
+                    case '+': plus_sign = TRUE; ch = *(fmt++); break;
                     case '0': pad_char = '0'; ch = *(fmt++); break;
                     default: flagsDone = TRUE; break;
                 }
@@ -237,17 +239,17 @@ s32 mini_vpprintf(void *buf, const char *fmt, va_list va)
                 case 'd':
                     if(l)
                     {
-                        len = mini_itoa(va_arg(va, u32), 10, 0, (ch=='u'), bf2);
+                        len = mini_itoa(va_arg(va, u32), 10, 0, (ch=='u'), plus_sign, bf2);
                     }
                     else
                     {
                         if(ch == 'u')
                         {
-                            len = mini_itoa((u32) va_arg(va, u32), 10, 0, 1, bf2);
+                            len = mini_itoa((u32) va_arg(va, u32), 10, 0, 1, plus_sign, bf2);
                         }
                         else
                         {
-                            len = mini_itoa((s32) va_arg(va, s32), 10, 0, 0, bf2);
+                            len = mini_itoa((s32) va_arg(va, s32), 10, 0, 0, plus_sign, bf2);
                         }
                     }
                     len = mini_pad(bf2, len, pad_char, pad_to, bf);
@@ -258,11 +260,11 @@ s32 mini_vpprintf(void *buf, const char *fmt, va_list va)
                 case 'X':
                     if(l)
                     {
-                        len = mini_itoa(va_arg(va, u32), 16, (ch=='X'), 1, bf2);
+                        len = mini_itoa(va_arg(va, u32), 16, (ch=='X'), 1, plus_sign, bf2);
                     }
                     else
                     {
-                        len = mini_itoa((u32) va_arg(va, u32), 16, (ch=='X'), 1, bf2);
+                        len = mini_itoa((u32) va_arg(va, u32), 16, (ch=='X'), 1, plus_sign, bf2);
                     }
                     len = mini_pad(bf2, len, pad_char, pad_to, bf);
                     len = _putsAscii(bf, len, buf);

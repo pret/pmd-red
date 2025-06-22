@@ -3,7 +3,7 @@
 #include "constants/input.h"
 #include "structs/str_802C39C.h"
 #include "structs/str_wonder_mail.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_803B050.h"
 #include "code_80958E8.h"
 #include "input.h"
@@ -30,22 +30,22 @@ bool8 sub_802C4C8(s32 a0, DungeonPos *a1, u32 a2)
         return FALSE;
 
     gUnknown_203B2E8 = MemoryAlloc(sizeof(struct unkStruct_203B2E0), 8);
-    gUnknown_203B2E8->unk8.s0.winId = a0;
-    gUnknown_203B2E8->unk8.s0.unk38 = &gUnknown_203B2E8->unk8.s0.windows.id[a0];
-    RestoreSavedWindows(&gUnknown_203B2E8->unk8.s0.windows);
+    gUnknown_203B2E8->unk8.m.menuWinId = a0;
+    gUnknown_203B2E8->unk8.m.menuWindow = &gUnknown_203B2E8->unk8.m.windows.id[a0];
+    RestoreSavedWindows(&gUnknown_203B2E8->unk8.m.windows);
 
-    gUnknown_203B2E8->unk8.s0.windows.id[gUnknown_203B2E8->unk8.s0.winId] = sUnknown_80DFCFC;
-    gUnknown_203B2E8->unk8.s0.unk38->header = &gUnknown_203B2E8->unk8.header;
+    gUnknown_203B2E8->unk8.m.windows.id[gUnknown_203B2E8->unk8.m.menuWinId] = sUnknown_80DFCFC;
+    gUnknown_203B2E8->unk8.m.menuWindow->header = &gUnknown_203B2E8->unk8.header;
 
     if (a1 != NULL)
-        gUnknown_203B2E8->unk8.s0.windows.id[gUnknown_203B2E8->unk8.s0.winId].pos = *a1;
+        gUnknown_203B2E8->unk8.m.windows.id[gUnknown_203B2E8->unk8.m.menuWinId].pos = *a1;
 
-    sub_8012D34(gUnknown_203B2E8->unk8.s0.unk38, a2);
+    sub_8012D34(gUnknown_203B2E8->unk8.m.menuWindow, a2);
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B2E8->unk8.s0.windows, TRUE, TRUE);
-    sub_8013848(&gUnknown_203B2E8->unk8.s0.input, CountAcceptedJobs(), a2, a0);
-    gUnknown_203B2E8->unk8.s0.input.menuIndex = gUnknown_203B2EC;
-    sub_8013984(&gUnknown_203B2E8->unk8.s0.input);
+    ShowWindows(&gUnknown_203B2E8->unk8.m.windows, TRUE, TRUE);
+    CreateMenuOnWindowTwoLinesEntry(&gUnknown_203B2E8->unk8.m.input, CountAcceptedJobs(), a2, a0);
+    gUnknown_203B2E8->unk8.m.input.menuIndex = gUnknown_203B2EC;
+    MenuUpdatePagesData(&gUnknown_203B2E8->unk8.m.input);
     sub_802C6DC();
     DrawJobListMenu();
     return TRUE;
@@ -54,11 +54,11 @@ bool8 sub_802C4C8(s32 a0, DungeonPos *a1, u32 a2)
 u32 sub_802C598(bool8 a0)
 {
     if (!a0) {
-        sub_8013660(&gUnknown_203B2E8->unk8.s0.input);
+        sub_8013660(&gUnknown_203B2E8->unk8.m.input);
         return 0;
     }
 
-    switch (GetKeyPress(&gUnknown_203B2E8->unk8.s0.input)) {
+    switch (GetKeyPress(&gUnknown_203B2E8->unk8.m.input)) {
         case INPUT_B_BUTTON:
             PlayMenuSoundEffect(1);
             return 2;
@@ -70,7 +70,7 @@ u32 sub_802C598(bool8 a0)
             return 4;
     }
 
-    if (sub_80138B8(&gUnknown_203B2E8->unk8.s0.input, 1)) {
+    if (MenuCursorUpdate(&gUnknown_203B2E8->unk8.m.input, 1)) {
         sub_802C6DC();
         DrawJobListMenu();
         return 1;
@@ -80,29 +80,29 @@ u32 sub_802C598(bool8 a0)
 
 u8 GetPelipperBoardSlotIndex(void)
 {
-    return gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.unk1E * gUnknown_203B2E8->unk8.s0.input.unk1C) + gUnknown_203B2E8->unk8.s0.input.menuIndex];
+    return gUnknown_203B2E8->pelipperBoardSlots[GET_CURRENT_MENU_ENTRY(gUnknown_203B2E8->unk8.m.input)];
 }
 
 void sub_802C640(bool8 cursorSprite)
 {
     ResetUnusedInputStruct();
-    ShowWindows(&gUnknown_203B2E8->unk8.s0.windows, FALSE, FALSE);
-    gUnknown_203B2E8->unk8.s0.input.unk22 = CountAcceptedJobs();
-    sub_8013984(&gUnknown_203B2E8->unk8.s0.input);
+    ShowWindows(&gUnknown_203B2E8->unk8.m.windows, FALSE, FALSE);
+    gUnknown_203B2E8->unk8.m.input.totalEntriesCount = CountAcceptedJobs();
+    MenuUpdatePagesData(&gUnknown_203B2E8->unk8.m.input);
     sub_802C6DC();
     DrawJobListMenu();
 
     if (cursorSprite)
-        AddMenuCursorSprite(&gUnknown_203B2E8->unk8.s0.input);
+        AddMenuCursorSprite(&gUnknown_203B2E8->unk8.m.input);
 }
 
 void sub_802C688(void)
 {
     if (gUnknown_203B2E8 != NULL) {
-        gUnknown_203B2EC = gUnknown_203B2E8->unk8.s0.input.menuIndex;
-        gUnknown_203B2E8->unk8.s0.windows.id[gUnknown_203B2E8->unk8.s0.winId] = sUnknown_80DFCE4;
+        gUnknown_203B2EC = gUnknown_203B2E8->unk8.m.input.menuIndex;
+        gUnknown_203B2E8->unk8.m.windows.id[gUnknown_203B2E8->unk8.m.menuWinId] = sUnknown_80DFCE4;
         ResetUnusedInputStruct();
-        ShowWindows(&gUnknown_203B2E8->unk8.s0.windows, TRUE, TRUE);
+        ShowWindows(&gUnknown_203B2E8->unk8.m.windows, TRUE, TRUE);
         MemoryFree(gUnknown_203B2E8);
         gUnknown_203B2E8 = NULL;
     }
@@ -110,12 +110,12 @@ void sub_802C688(void)
 
 static void sub_802C6DC(void)
 {
-    gUnknown_203B2E8->unk8.header.count = gUnknown_203B2E8->unk8.s0.input.unk20;
-    gUnknown_203B2E8->unk8.header.currId = gUnknown_203B2E8->unk8.s0.input.unk1E;
+    gUnknown_203B2E8->unk8.header.count = gUnknown_203B2E8->unk8.m.input.pagesCount;
+    gUnknown_203B2E8->unk8.header.currId = gUnknown_203B2E8->unk8.m.input.currPage;
     gUnknown_203B2E8->unk8.header.width = 12;
     gUnknown_203B2E8->unk8.header.f3 = 0;
 
-    SUB_8009614_CALL(gUnknown_203B2E8->unk8.s0);
+    UPDATE_TWO_LINES_MENU_WINDOW_HEIGHT(gUnknown_203B2E8->unk8.m);
 }
 
 void DrawJobListMenu(void)
@@ -126,26 +126,26 @@ void DrawJobListMenu(void)
     s32 x;
     unkStruct_802C39C local;
 
-    CallPrepareTextbox_8008C54(gUnknown_203B2E8->unk8.s0.winId);
-    sub_80073B8(gUnknown_203B2E8->unk8.s0.winId);
-    r4 = gUnknown_203B2E8->unk8.s0.input.unk1E * 8;
+    CallPrepareTextbox_8008C54(gUnknown_203B2E8->unk8.m.menuWinId);
+    sub_80073B8(gUnknown_203B2E8->unk8.m.menuWinId);
+    r4 = gUnknown_203B2E8->unk8.m.input.currPage * 8;
     x = r4;
     x += 10;
-    PrintStringOnWindow(x, 0, sJobList, gUnknown_203B2E8->unk8.s0.winId, 0);
+    PrintStringOnWindow(x, 0, sJobList, gUnknown_203B2E8->unk8.m.menuWinId, 0);
 
     r4 += 4;
     x = r4 + (gUnknown_203B2E8->unk8.header.width * 8);
-    sub_8012BC4(x, 0, gUnknown_203B2E8->unk8.s0.input.unk1E + 1, 2, 7, gUnknown_203B2E8->unk8.s0.winId);
+    PrintNumOnWindow(x, 0, gUnknown_203B2E8->unk8.m.input.currPage + 1, 2, 7, gUnknown_203B2E8->unk8.m.menuWinId);
 
-    for (i = 0;  i < gUnknown_203B2E8->unk8.s0.input.unk1A; i++) {
-        mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.s0.input.unk1E * gUnknown_203B2E8->unk8.s0.input.unk1C) + i]);
-        local.unk0[0] = gUnknown_203B2E8->unk8.s0.winId;
-        local.y = GetMenuEntryYCoord(&gUnknown_203B2E8->unk8.s0.input, i);
+    for (i = 0;  i < gUnknown_203B2E8->unk8.m.input.currPageEntries; i++) {
+        mail = GetJobSlotInfo(gUnknown_203B2E8->pelipperBoardSlots[(gUnknown_203B2E8->unk8.m.input.currPage * gUnknown_203B2E8->unk8.m.input.entriesPerPage) + i]);
+        local.unk0[0] = gUnknown_203B2E8->unk8.m.menuWinId;
+        local.y = GetMenuEntryYCoord(&gUnknown_203B2E8->unk8.m.input, i);
         sub_803B35C(mail, &local);
         CreateRescueTitle(&local);
     }
 
-    sub_80073E0(gUnknown_203B2E8->unk8.s0.winId);
+    sub_80073E0(gUnknown_203B2E8->unk8.m.menuWinId);
 }
 
 static s32 CountAcceptedJobs(void)

@@ -21,7 +21,7 @@
 #include "items.h"
 #include "math.h"
 #include "sprite.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "run_dungeon.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"

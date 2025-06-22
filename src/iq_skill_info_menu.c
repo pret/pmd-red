@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_8097DD0.h"
 #include "input.h"
 #include "iq_skill_info_menu.h"
@@ -34,7 +34,7 @@ bool8 CreateIQSkillInfoMenu(u8 iqSkill)
 
     sIQSkillInfoMenu = MemoryAlloc(sizeof(struct IQSkillInfoMenu), 8);
     sIQSkillInfoMenu->chosenIQSkill = iqSkill;
-    sub_801317C(&sIQSkillInfoMenu->unk88);
+    ResetTouchScreenMenuInput(&sIQSkillInfoMenu->unk88);
     sIQSkillInfoMenu->unk24 = 0;
     sub_80140B4(&sIQSkillInfoMenu->unk28);
     ResetUnusedInputStruct();

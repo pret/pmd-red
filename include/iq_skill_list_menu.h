@@ -5,16 +5,16 @@
 #include "structs/menu.h"
 #include "pokemon.h"
 #include "structs/str_text.h"
-#include "structs/struct_sub80095e4.h"
+#include "text_3.h"
 
 // size: 0xC4
 struct IQSkillListMenu
 {
     /* 0x0 */ s16 species;
-    /* 0x4 */ PokemonStruct1 *pokeStruct;
+    /* 0x4 */ Pokemon *pokeStruct;
     /* 0x8 */ u8 iqSkills[NUM_IQ_SKILLS];
     /* 0x20 */ s32 numIQSkills;
-    /* 0x24 */ struct_Sub80095E4_2 s24;
+    /* 0x24 */ MenuHeaderWindow s24;
 };
 
 bool8 HasNoAvailIQSkills(s16 species);

@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "unk_dungeon_load.h"
 #include "memory.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "decompress_at.h"
 #include "def_filearchives.h"
 #include "file_system.h"
@@ -10,8 +10,6 @@
 #include "structs/dungeon_mapparam.h"
 
 extern bool8 IsWaterDungeon(u32 r0);
-
-extern const u8 gUnknown_8108EC0[];
 
 static s32 sub_80ADFB8(s32 a0, s32 a1, s32 a2, s32 a3, u16 *a4, s32 a5, u8 *a6, s32 a7);
 
@@ -29,7 +27,7 @@ void sub_80ADD9C(OpenedFile **a0, OpenedFile **a1, u32 *a2, void *a3, u16 *a4, D
     void *r10 = MemoryAlloc(0x930, 7);
     OpenedFile *mapParamFile = OpenFileAndGetFileDataPtr("mapparam", &gDungeonFileArchive);
 
-    sub_80901D8(&dungLoc, a5);
+    GeneralizeMazeDungeonLoc(&dungLoc, a5);
     dungId = dungLoc.id;
     dungFloor = dungLoc.floor;
     if (dungId > 62) {
@@ -44,7 +42,7 @@ void sub_80ADD9C(OpenedFile **a0, OpenedFile **a1, u32 *a2, void *a3, u16 *a4, D
     }
 
     strPtr = &((struct DungeonMapParam2 *)(mapParamFile->data))->unk0[dungId][dungFloor];
-    r8 = ((struct DungeonMapParam2 *)(mapParamFile->data))->unk4[strPtr->unk0].unk2;
+    r8 = ((struct DungeonMapParam2 *)(mapParamFile->data))->floorProperties[strPtr->unk0].unk2;
 
     CloseFile(mapParamFile);
 

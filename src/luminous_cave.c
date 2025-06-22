@@ -3,11 +3,10 @@
 #include "constants/bg_music.h"
 #include "constants/colors.h"
 #include "constants/evolution_status.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "code_8097670.h"
-#include "code_8098BDC.h"
 #include "code_8099360.h"
 #include "common_strings.h"
 #include "input.h"
@@ -20,6 +19,8 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "text_util.h"
+#include "pokemon_evolution.h"
+#include "unk_ds_only_feature.h"
 
 enum
 {
@@ -231,7 +232,7 @@ static void UpdateLuminousCaveDialogue(void)
             break;
         case LUMINOUS_CAVE_SHALL_RETURN:
             sLuminousCaveWork->fallbackState = 4;
-            xxx_call_fade_in_new_bgm(MUS_FILE_SELECT,0x3c);
+            FadeInNewBGM_(MUS_FILE_SELECT,0x3c);
             CreateDialogueBoxAndPortrait(sYeShallReturn,0,0,0x305);
             break;
         case LUMINOUS_CAVE_GIVE_ITEM_1:
@@ -296,7 +297,7 @@ static void UpdateLuminousCaveDialogue(void)
                 sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_LACK_ITEM;
             else
                 sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_CANT_EVOLVE_YET;
-            xxx_call_fade_out_bgm(0x3c);
+            FadeOutBGM_(0x3c);
             CreateDialogueBoxAndPortrait(sLetUsBegin,0,0,0x105);
             break;
         case LUMINOUS_CAVE_CHANGED_APPEARANCE:
@@ -322,7 +323,7 @@ static void UpdateLuminousCaveDialogue(void)
                 ClearItemSlotAt(sLuminousCaveWork->evoItem2_InvIndex);
             }
             FillInventoryGaps();
-            xxx_call_stop_fanfare_se(0x1ff);
+            StopSound(0x1ff);
             PlaySound(0xd2);
             if (sLuminousCaveWork->pokeRenamed) {
                     BoundedCopyStringtoBuffer(sLuminousCaveWork->pokeStruct->name,GetMonSpecies(sLuminousCaveWork->pokeStruct->speciesNum),POKEMON_NAME_LENGTH);
@@ -363,7 +364,7 @@ static void UpdateLuminousCaveDialogue(void)
             CreateDialogueBoxAndPortrait(sCannotEvolveYet,0,0,0x105);
             break;
         case LUMINOUS_CAVE_PROMPT_NAME:
-            xxx_call_fade_in_new_bgm(8,0x3c);
+            FadeInNewBGM_(8,0x3c);
             sLuminousCaveWork->fallbackState = LUMINOUS_CAVE_FINISH_NAME;
             CreateDialogueBoxAndPortrait(sMustGiveName,0,0,0x105);
             break;
@@ -733,24 +734,23 @@ static void sub_8025254(void)
     }
 
     sLuminousCaveWork->evolveStatus.wurmpleVal = RandInt(0xFF);
-    sub_808F468(sLuminousCaveWork->pokeStruct, &sLuminousCaveWork->evolveStatus, 1);
+    SetMonEvolveStatus(sLuminousCaveWork->pokeStruct, &sLuminousCaveWork->evolveStatus, 1);
 }
 
 static bool8 LuminousCave_HasOnly1Member(void)
 {
     s32 memberCount;
-    s32 index;
-    PokemonStruct1 *preload;
+    s32 i;
+    Pokemon *mon;
 
-    preload = &gRecruitedPokemonRef->pokemon[0];
+    mon = &gRecruitedPokemonRef->pokemon[0];
     memberCount = 0;
-    for(index = 0; index < NUM_MONSTERS; index++, preload++)
-    {
-        if((preload->unk0 >> 1) & 1)
+    for (i = 0; i < NUM_MONSTERS; i++, mon++) {
+        if (PokemonFlag2(mon))
             memberCount++;
     }
 
-    if(memberCount == 1)
+    if (memberCount == 1)
         return TRUE;
     else
         return FALSE;

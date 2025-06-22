@@ -13,8 +13,10 @@ typedef struct DebugLocation
 
 #define DEBUG_LOC_PTR(file, line, func)((&((DebugLocation){file, line, func})))
 
-#define FATAL_ERROR_ARGS(file, line, str, ...) FatalError(DEBUG_LOC_PTR(file, line, __func__), str, __VA_ARGS__ )
-#define FATAL_ERROR(str, ...) FATAL_ERROR_ARGS(__FILE__, __LINE__, str, __VA_ARGS__)
+#define FATAL_ERROR_ARGS(file, line, ...) FatalError(DEBUG_LOC_PTR(file, line, __func__), __VA_ARGS__ )
+// Custom function name instead of actual function's name.
+#define FATAL_ERROR_ARGS2(file, line, func, ...) FatalError(DEBUG_LOC_PTR(file, line, func), __VA_ARGS__ )
+#define FATAL_ERROR(...) FATAL_ERROR_ARGS(__FILE__, __LINE__, __VA_ARGS__)
 
 void FatalError(const DebugLocation *debug, const char *text, ...) NORETURN;
 void Log(u8 num, const u8 *text, ...);

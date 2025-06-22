@@ -1350,8 +1350,8 @@ ALIGNED(4) static const u8 sWondersText[] = _(
 ALIGNED(4) static const u8 sWondersHeadline[] = _("#16 Seven Wonders of Pokémon");
 
 ALIGNED(4) static const u8 sPollText[] = _(
-    "{COLOR YELLOW}First{UNK_MACRO_3D_50}Gravelerock{RESET}\n"
-    "{COLOR YELLOW}Second{UNK_MACRO_3D_50}Oran Berry{RESET}\n"
+    "{COLOR YELLOW}First{MOVE_X_POSITION}{50}Gravelerock{RESET}\n"
+    "{COLOR YELLOW}Second{MOVE_X_POSITION}{50}Oran Berry{RESET}\n"
     "In a nationwide survey involving rescue\n"
     "teams, the most popular item was found to\n"
     "be {COLOR GREEN}Gravelerocks{RESET}. According to Sudowoodo\n"

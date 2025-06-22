@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "dungeon_pokemon_sprites.h"
 #include "structs/sprite_oam.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "cpu.h"
 #include "memory.h"
 #include "sprite.h"
@@ -349,7 +349,7 @@ static void LoadStatusGraphics(s32 graphicIndex, bool8 queueLoad)
     const u8 *ptr = sStatusGfx + offset + (frame * size);
 
     if (queueLoad) {
-        sub_80098BC((void *)(VRAM + 0x10000 + vramIndex), (void *)ptr, size);
+        ScheduleMemCopy((void *)(VRAM + 0x10000 + vramIndex), (void *)ptr, size);
     }
     else {
         CpuCopy((void *)(VRAM + 0x10000 + vramIndex), ptr, size);

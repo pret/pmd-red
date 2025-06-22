@@ -1,12 +1,13 @@
 #include "global.h"
 #include "globaldata.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_strings.h"
 #include "dungeon_vram.h"
 #include "input.h"
 #include "text_1.h"
+#include "run_dungeon.h"
+#include "dungeon_run_end.h"
 
-extern void sub_8094558(u32 param_1, const u8 *param_2,UnkDungeonGlobal_unk1CE98_sub *param_3);
 extern void PlayDungeonCompleteBGM(void);
 extern void PlayDungeonFailBGM(void);
 extern void PlayDungeonConfirmationSE(void);
@@ -45,7 +46,7 @@ void ShowDungeonClearedWindow(void)
     else {
         PlayDungeonFailBGM();
     }
-    sub_8094558(0, gUnknown_80FE6E8,&gDungeon->unk1CE98); // The Last Outing
+    PrintOnDungeonFinishedWindow(0, gText_TheLastOuting,&gDungeon->unk1CE98);
     while(1) {
         sub_803E668(0x36);
         UpdateDungeonMusic();

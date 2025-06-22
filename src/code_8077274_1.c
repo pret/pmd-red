@@ -28,7 +28,7 @@
 #include "dungeon_strings.h"
 
 extern bool8 sub_806AA0C(s32, u32);
-extern s16 sub_803D970(u32);
+extern s16 GetRandomFloorMonsterId(u32);
 extern void sub_804178C(u32);
 
 void sub_807AA30(void)
@@ -169,7 +169,7 @@ void sub_807AB38(Entity *entity, bool8 forcedMonsterHouse)
         {
             struct unkStruct_806B7F8 spawnStruct;
 
-            spawnStruct.species = sub_803D970(1);
+            spawnStruct.species = GetRandomFloorMonsterId(1);
             spawnStruct.level = 0;
             spawnStruct.unk2 = 0;
             spawnStruct.unk4 = 0;

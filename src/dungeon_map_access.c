@@ -5,19 +5,18 @@
 #include "structs/str_dungeon.h"
 #include "run_dungeon.h"
 #include "code_8004AA0.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "decompress_at.h"
 #include "def_filearchives.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
 #include "dungeon_logic.h"
+#include "dungeon_info.h"
 #include "dungeon_util.h"
 #include "game_options.h"
 #include "random.h"
 #include "text_1.h"
 #include "code_806CD90.h"
-
-extern u8 gUnknown_8108EC0[];
 
 extern void sub_8042A14(DungeonPos *);
 
@@ -590,7 +589,7 @@ void sub_8049ED4(void)
         }
     }
 
-    sub_80098F8(3);
+    ScheduleBgTilemapCopy(3);
 }
 
 void sub_804A1F0(s32 a0, s32 a1)
@@ -692,7 +691,7 @@ void sub_804A1F0(s32 a0, s32 a1)
             }
         }
     }
-    sub_80098F8(3);
+    ScheduleBgTilemapCopy(3);
 }
 
 void sub_804A49C(s32 a0, s32 a1)
@@ -793,7 +792,7 @@ void sub_804A49C(s32 a0, s32 a1)
             }
         }
     }
-    sub_80098F8(3);
+    ScheduleBgTilemapCopy(3);
 }
 
 void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3)
@@ -917,7 +916,7 @@ void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3)
         }
     }
 
-    sub_80098F8(2);
+    ScheduleBgTilemapCopy(2);
 }
 
 void sub_804AA60(void)
@@ -931,7 +930,7 @@ void sub_804AA60(void)
             gBgTilemaps[2][i][j] = 0;
         }
     }
-    sub_80098F8(2);
+    ScheduleBgTilemapCopy(2);
     gDungeon->unk181e8.unk1821A = 0;
 }
 

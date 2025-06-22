@@ -4,7 +4,7 @@
 #include "code_803E724.h"
 #include "dungeon_action.h"
 #include "code_8097DD0.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_action.h"
 #include "dungeon_generation.h"
 #include "dungeon_map_access.h"
@@ -65,8 +65,8 @@ void ShowDungeonStairsMenu(Entity *mon)
         ShowAndPrintOnStairsMenu(&mon->pos, &windows, &header);
         DungeonRunFrameActions(0x2E);
         AddStairsSubMenuOptions(mon);
-        gDungeonMenu.unk8.x = 0;
-        gDungeonMenu.unk8.y = 0;
+        gDungeonMenu.cursorArrowPos.x = 0;
+        gDungeonMenu.cursorArrowPos.y = 0;
         CreateDungeonMenuSubWindow(&windows.id[0], 22);
 
         while (1) {
@@ -81,7 +81,7 @@ void ShowDungeonStairsMenu(Entity *mon)
                 MoveMenuCursorUpWrapAround(&gDungeonMenu, TRUE);
             }
 
-            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.unk28.a_button) {
+            if ((gRealInputs.pressed & A_BUTTON) || gDungeonMenu.touchScreen.a_button) {
                 if (gDungeonMenu.menuIndex == 1) {
                     PlayDungeonConfirmationSE();
                     ShowStairsDescription(&mon->pos);
@@ -104,7 +104,7 @@ void ShowDungeonStairsMenu(Entity *mon)
                 }
                 PlayDungeonCancelSE();
             }
-            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.unk28.b_button) {
+            if ((gRealInputs.pressed & B_BUTTON) || gDungeonMenu.touchScreen.b_button) {
                 PlayDungeonCancelSE();
                 inputAction = 1;
                 break;
@@ -162,7 +162,7 @@ static void ShowStairsDescription(DungeonPos *pos)
         u8 floorType;
         bool8 bPress;
         STATUSTEXTS(statuses);
-        MenuInputStructSub menuSub;
+        TouchScreenMenuInput menuSub;
         WindowHeader header;
         WindowTemplates windows = {
             .id = {
@@ -182,7 +182,7 @@ static void ShowStairsDescription(DungeonPos *pos)
         };
         s32 i, statusesCount;
 
-        sub_801317C(&menuSub);
+        ResetTouchScreenMenuInput(&menuSub);
         header.count = 1;
         header.currId = 0;
         header.width = 16;
@@ -199,7 +199,7 @@ static void ShowStairsDescription(DungeonPos *pos)
             if (statusesCount != 0) {
                 ShowStatusDescriptionMenuArrow();
             }
-            nullsub_34(&menuSub, 0);
+            GetTouchScreenMenuInput(&menuSub, 0);
             DungeonRunFrameActions(0x16);
             if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
                 PlayDungeonConfirmationSE();
@@ -221,7 +221,7 @@ static void ShowStairsDescription(DungeonPos *pos)
                 if (i < statusesCount - 1) {
                     ShowStatusDescriptionMenuArrow();
                 }
-                nullsub_34(&menuSub, 0);
+                GetTouchScreenMenuInput(&menuSub, 0);
                 DungeonRunFrameActions(0x16);
                 if ((gRealInputs.pressed & A_BUTTON) || menuSub.a_button) {
                     PlayDungeonConfirmationSE();

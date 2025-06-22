@@ -12,7 +12,7 @@
 
 static const struct ScriptCommand s_gs204_g0_s0_station_sref_script[] = { /* 0x825ce34 */
     DEBUGINFO,
-    SELECT_MAP(204),
+    SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     CJUMP_SCENARIO_0(SCENARIO_MAIN),
     COND(JUDGE_EQ, 15, /* to label */ 0),
     JUMP_LABEL(1),
@@ -86,12 +86,12 @@ static const struct ScriptCommand s_gs204_g0_s4_lives1_dlg0[] = { /* 0x825d16c *
 
 static const struct ScriptCommand s_gs204_g1_s0_station_sref_script[] = { /* 0x825d19c */
     DEBUGINFO,
-    SELECT_MAP(204),
+    SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(108),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    { 0x02, 0x00,  0x001e,  0x00000011,  0x00000000, NULL },
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_MAGMA_CAVERN),
     RET,
 };
 
@@ -116,7 +116,7 @@ static const struct ScriptCommand s_gs204_g1_s0_lives0_dlg0[] = { /* 0x825d228 *
     VARIANT_DEFAULT(_(" This must be it...{WAIT_PRESS}\n{NAME_2} is in this underground\ncavern.")),
     VARIANT_DEFAULT(_(" Whew...\nLook at the streams of lava.")),
     VARIANT_DEFAULT(_(" It's going to be scorching\nhot in the dungeon, I think.")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     WAIT(5),
     { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
@@ -128,7 +128,7 @@ static const struct ScriptCommand s_gs204_g1_s0_lives0_dlg0[] = { /* 0x825d228 *
     VARIANT(/* == */  3, _(" Let's get going and try our\nbest!")),
     VARIANT_DEFAULT(_(" There should be other\nrescue teams making their way through\neven now.")),
     VARIANT_DEFAULT(_(" Let's try our best like\nalways!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0x23, 0x00,  0x0050,  0x00000000,  0x00000000, NULL },
     WAIT(15),
@@ -154,12 +154,12 @@ static const struct ScriptCommand s_gs204_g1_s0_lives1_dlg0[] = { /* 0x825d6dc *
 
 static const struct ScriptCommand s_gs204_g2_s0_station_sref_script[] = { /* 0x825d78c */
     DEBUGINFO,
-    SELECT_MAP(204),
+    SELECT_MAP(MAP_MAGMA_CAVERN_ENTRY),
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(108),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
-    { 0x02, 0x00,  0x001e,  0x00000011,  0x00000000, NULL },
+    NEXT_DUNGEON(30, SCRIPT_DUNGEON_MAGMA_CAVERN),
     RET,
 };
 
@@ -177,7 +177,7 @@ static const struct ScriptCommand s_gs204_g2_s0_lives0_dlg0[] = { /* 0x825d818 *
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" This time, we'll rescue\n{NAME_2}'s team!\nLet's get it done!")),
     VARIANT_DEFAULT(_(" This time, we have to\nrescue {NAME_2}'s team!\nLet's not blow it!")),
-    { 0x30, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    TEXTBOX_CLEAR,
     { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
     { 0x23, 0x00,  0x0050,  0x00000000,  0x00000000, NULL },
     WAIT(15),

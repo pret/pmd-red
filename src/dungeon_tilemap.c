@@ -7,13 +7,13 @@
 #include "bg_palette_buffer.h"
 #include "code_8004AA0.h"
 #include "code_800558C.h"
-#include "code_8009804.h"
+#include "graphics_memory.h"
 #include "code_800E9E4.h"
 #include "code_801602C.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
 #include "code_806CD90.h"
-#include "dungeon.h"
+#include "dungeon_info.h"
 #include "dungeon_items.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
@@ -29,8 +29,9 @@
 #include "text_1.h"
 #include "play_time.h"
 #include "code_800C9CC.h"
-#include "code_80118A4.h"
+#include "music_util.h"
 #include "dungeon_strings.h"
+#include "run_dungeon.h"
 
 extern s32 gDungeonFramesCounter;
 
@@ -472,14 +473,14 @@ void sub_803FA4C(s32 a0, s32 a1, bool8 a2)
             r5 = 0;
         }
     }
-    sub_80098BC((void *) VRAM + 0x5980, gUnknown_3001018, sizeof(gUnknown_3001018));
+    ScheduleMemCopy((void *) VRAM + 0x5980, gUnknown_3001018, sizeof(gUnknown_3001018));
 }
 
 void sub_803FB74(void)
 {
     s32 i;
     u16 *arrPtr;
-    s32 r5, r6, unkFloor;
+    s32 r5, r6, currFloor;
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
     bool32 lowHp = FALSE;
     bool32 hungry = FALSE;
@@ -540,9 +541,9 @@ void sub_803FB74(void)
     }
 
     arrPtr = gBgTilemaps[0][0];
-    unkFloor = gDungeon->unk14 + gDungeon->unk644.dungeonLocation.floor;
-    if (strPtr->unk3A != unkFloor) {
-        strPtr->unk3A = unkFloor;
+    currFloor = gDungeon->startFloorId + gDungeon->unk644.dungeonLocation.floor;
+    if (strPtr->unk3A != currFloor) {
+        strPtr->unk3A = currFloor;
         if (IsStairDirectionUp(gDungeon->unk644.dungeonLocation.id)) {
             arrPtr[1] = 0;
         }
@@ -550,12 +551,12 @@ void sub_803FB74(void)
             arrPtr[1] = 0xF2BE;
         }
 
-        if (unkFloor < 10) {
-            sub_803FE30(unkFloor, &arrPtr[2], strPtr->unk18216, 1);
+        if (currFloor < 10) {
+            sub_803FE30(currFloor, &arrPtr[2], strPtr->unk18216, 1);
             arrPtr[3] = 0xF2B8;
         }
         else {
-            sub_803FE30(unkFloor, &arrPtr[2], strPtr->unk18216, 0);
+            sub_803FE30(currFloor, &arrPtr[2], strPtr->unk18216, 0);
             arrPtr[4] = 0xF2B8;
         }
     }
@@ -730,7 +731,7 @@ void sub_8040094(u8 r0)
     LoadBufferedInputs();
     xxx_call_update_bg_sound_input();
     UpdateDungeonMusic();
-    sub_8011860();
+    UpdateSoundEffectCounters();
 }
 
 static const s32 gUnknown_80F6568[] = {

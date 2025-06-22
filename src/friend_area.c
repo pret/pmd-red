@@ -1,6 +1,7 @@
 #include "global.h"
+#include "globaldata.h"
 #include "code_800D090.h"
-#include "code_8092334.h"
+#include "data_serializer.h"
 #include "constants/dungeon.h"
 #include "constants/friend_area.h"
 #include "friend_area.h"
@@ -12,10 +13,6 @@
 EWRAM_DATA static bool8 sBoughtFriendAreas[NUM_FRIEND_AREAS] = {0};
 
 EWRAM_INIT bool8 *gFriendAreas = {NULL};
-
-// data_8107010.s
-extern const u8 sUnknown_81098A4[];
-extern const u8 sUnknown_81098AC[];
 
 void LoadFriendAreas(void)
 {
@@ -56,7 +53,7 @@ void sub_8092404(u8 r0, u16 *r1, bool8 allowLeader, bool8 allowPartner)
 
     count = 0;
     for (i = 0; i < NUM_MONSTERS; i++) {
-        if (PokemonFlag1(&gRecruitedPokemonRef->pokemon[i])
+        if (PokemonExists(&gRecruitedPokemonRef->pokemon[i])
             && (!IsMonTeamLeader(&gRecruitedPokemonRef->pokemon[i]) || allowLeader)
             && (!IsMonPartner(&gRecruitedPokemonRef->pokemon[i]) || allowPartner)
             && sub_80923D4(i) == r0
@@ -79,13 +76,13 @@ void sub_809249C(u8 friendArea, bool8 clear)
         return;
 
     for (i = 0; i < NUM_MONSTERS; i++) {
-        PokemonStruct1 *pokemon = &gRecruitedPokemonRef->pokemon[i];
+        Pokemon *pokemon = &gRecruitedPokemonRef->pokemon[i];
 
-        if (PokemonFlag1(pokemon) && sub_80923D4(i) == friendArea) {
+        if (PokemonExists(pokemon) && sub_80923D4(i) == friendArea) {
             if (IsMonPartner(pokemon) || IsMonTeamLeader(pokemon))
                 clear = FALSE;
             else
-                pokemon->unk0 = 0;
+                pokemon->flags = 0;
         }
     }
 
@@ -110,7 +107,7 @@ s32 GetFriendAreaPrice(u8 index)
 
 void sub_8092558(u8 *buffer, u8 index)
 {
-    sprintfStatic(buffer, sUnknown_81098A4, gFriendAreaNames[index]);
+    sprintfStatic(buffer, _("{color GREEN_RAW}%s{reset}"), gFriendAreaNames[index]);
 }
 
 void WriteFriendAreaName(u8 *buffer, u8 index, bool8 printPrice)
@@ -120,7 +117,7 @@ void WriteFriendAreaName(u8 *buffer, u8 index, bool8 printPrice)
 
     if (printPrice) {
         WriteHighDecimal(gFriendAreaSettings[index].price, priceBuffer, 1);
-        sprintfStatic(buffer, sUnknown_81098AC, gFriendAreaNames[index], 96, priceBuffer);
+        sprintfStatic(buffer, _("%s{MOVE_X_POSITION}%c{COLOR GREEN_RAW}%s{RESET}"), gFriendAreaNames[index], 96, priceBuffer);
     }
     else
         strcpy(buffer, gFriendAreaNames[index]);
@@ -155,7 +152,7 @@ bool8 HasAllFriendAreas(void)
 
 void GetFriendAreaCapacity2(u8 friendArea, FriendAreaCapacity *dst, bool8 checkLeader, bool8 checkPartner)
 {
-    PokemonStruct1 *pokeStruct;
+    Pokemon *pokeStruct;
     s32 i;
     s32 iVar4;
 
@@ -174,7 +171,7 @@ void GetFriendAreaCapacity2(u8 friendArea, FriendAreaCapacity *dst, bool8 checkL
         for (i = 0; i < dst->maxPokemon; i++, iVar4++) {
             pokeStruct = &gRecruitedPokemonRef->pokemon[iVar4];
 
-            if (PokemonFlag1(pokeStruct) &&
+            if (PokemonExists(pokeStruct) &&
                 (!checkLeader || !IsMonTeamLeader(pokeStruct)) &&
                 (!checkPartner || pokeStruct->dungeonLocation.id != DUNGEON_JOIN_LOCATION_PARTNER)) {
                 dst->currNoPokemon++;
@@ -189,7 +186,7 @@ void GetFriendAreaCapacity2(u8 friendArea, FriendAreaCapacity *dst, bool8 checkL
 
 void GetFriendAreaCapacity(u8 areaId, FriendAreaCapacity *dst, bool8 checkPartner)
 {
-    PokemonStruct1 *mon;
+    Pokemon *mon;
     s32 r5;
     s32 i;
     s32 max;
@@ -209,7 +206,7 @@ void GetFriendAreaCapacity(u8 areaId, FriendAreaCapacity *dst, bool8 checkPartne
 
         for (i = 0; i < max; i++, r5++) {
             mon = &gRecruitedPokemonRef->pokemon[r5];
-            if (PokemonFlag1(mon)) {
+            if (PokemonExists(mon)) {
                 if (mon->isTeamLeader || (!checkPartner && mon->dungeonLocation.id == DUNGEON_JOIN_LOCATION_PARTNER))
                     dst->maxPokemon--;
                 else

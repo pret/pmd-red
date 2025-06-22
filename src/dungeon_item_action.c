@@ -797,7 +797,7 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
   Entity *entity;
   EntityInfo *pEVar6;
   s32 index;
-  PokemonStruct2 *pokemon;
+  DungeonMon *pokemon;
 
   if ((item->flags & ITEM_FLAG_STICKY)) {
     DisplayDungeonMessage(0,*gItemStickyDoesntWorkText,1);
@@ -821,8 +821,8 @@ bool8 sub_8048A68(Entity *param_1,Item *item)
              flag =  FALSE;
           else
           {
-             pokemon = &gRecruitedPokemonRef->pokemon2[pEVar6->teamIndex];
-             if (sub_806A538(pokemon->unkA))
+             pokemon = &gRecruitedPokemonRef->dungeonTeam[pEVar6->teamIndex];
+             if (sub_806A538(pokemon->recruitedPokemonId))
                  flag =  FALSE;
           }
 

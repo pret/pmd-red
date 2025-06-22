@@ -8,7 +8,7 @@
 struct unkStruct_203B260
 {
     /* 0x0 */ GameOptions *optionsMenu;
-    /* 0x4 */ MenuInputStructSub unk4;
+    /* 0x4 */ TouchScreenMenuInput unk4;
     /* 0x10 */ MenuInputStruct input;
     u32 unk44;
     WindowTemplate *unk48;
