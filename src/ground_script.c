@@ -139,31 +139,6 @@ extern void sub_809AB4C(s32, s32);
 extern void sub_809ABB4(s32, s32);
 extern void sub_809AC18(s32, s32);
 extern s16 sub_80A8BBC(s32 id_);
-extern char gUnknown_81165D4[];
-extern char gUnknown_81165F4[];
-extern char gUnknown_811660C[];
-extern char gUnknown_8116628[];
-extern char gUnknown_8116644[];
-extern char gUnknown_8116664[];
-extern char gUnknown_8116684[];
-extern char gUnknown_81166C0[];
-extern char gUnknown_81166D8[];
-
-extern const CallbackData gGroundScriptTriggerCallbacks;
-extern DebugLocation gUnknown_81166B4;
-extern DebugLocation gUnknown_81166F8;
-extern DebugLocation gUnknown_8116704;
-
-extern const DebugLocation gUnknown_8116588;
-extern const DebugLocation gUnknown_8116538;
-extern const DebugLocation gUnknown_8116560;
-extern u8 gUnknown_8116594[];
-extern u8 gUnknown_8116544[];
-extern u8 gUnknown_811656C[];
-
-extern DebugLocation gUnknown_81165C8;
-
-extern u8 gUnknown_8116848[];
 
 bool8 GroundLivesNotifyAll(s16);
 bool8 GroundObjectsNotifyAll(s16);

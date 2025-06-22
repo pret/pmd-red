@@ -171,7 +171,7 @@ static const struct ScriptCommand gUnknown_8118350[] = {
 };
 
 const s16 gUnknown_81183A0[] = {
-0xFFFF,  
+-1,  
 0x800, 
 0x801,  
 0x1000, 
