@@ -688,93 +688,26 @@ s32 sub_80AC4C8(s32 index, PixelPos *a0, PixelPos *a1) {
     return -1;
 }
 
+s32 sub_80AC554(s32 flag, PixelPos *param_2,PixelPos *param_3)
+{
+  s32 i;
+  GroundObject *parent;
+  
+  parent = &gGroundObjects[0];
+  for(i = 0; i < 0x10; i = (s16)(i + 1), parent++) {
+    if ((parent->unk6 != -1))
+    {
+        if((parent->flags & flag)) {
+            PixelPos pos = {(parent->unk124).x + (parent->unk14).x, (parent->unk124).y + (parent->unk14).y};
+          if ((pos.x < param_3->x) && (((pos.x > param_2->x))))
+              if(((pos.y < param_3->y)) && (pos.y > param_2->y)) {
+                return i;
+          }
+        }
+    }
 
-// https://decomp.me/scratch/VEJ5Z (96.09% matched)
-NAKED
-s32 sub_80AC554(s32 flag, PixelPos *param_2, PixelPos *param_3) {
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r7, r10\n"
-	"\tmov r6, r9\n"
-	"\tmov r5, r8\n"
-	"\tpush {r5-r7}\n"
-	"\tmov r8, r0\n"
-	"\tmov r10, r1\n"
-	"\tadds r4, r2, 0\n"
-	"\tldr r0, _080AC5C8\n"
-	"\tldr r0, [r0]\n"
-	"\tmov r12, r0\n"
-	"\tmovs r6, 0\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tmov r9, r0\n"
-	"\tmovs r7, 0x80\n"
-	"\tlsls r7, 9\n"
-"_080AC576:\n"
-	"\tmov r1, r12\n"
-	"\tmovs r2, 0x6\n"
-	"\tldrsh r0, [r1, r2]\n"
-	"\tcmp r0, r9\n"
-	"\tbeq _080AC5CC\n"
-	"\tmovs r0, 0x8E\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tldr r0, [r0]\n"
-	"\tmov r5, r8\n"
-	"\tands r0, r5\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _080AC5CC\n"
-	"\tmovs r0, 0x92\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tldr r1, [r0]\n"
-	"\tmov r5, r12\n"
-	"\tldr r0, [r5, 0x14]\n"
-	"\tadds r2, r1, r0\n"
-	"\tmovs r0, 0x94\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tldr r1, [r0]\n"
-	"\tldr r0, [r5, 0x18]\n"
-	"\tadds r3, r1, r0\n"
-	"\tldr r0, [r4]\n"
-	"\tcmp r2, r0\n"
-	"\tbge _080AC5CC\n"
-	"\tmov r1, r10\n"
-	"\tldr r0, [r1]\n"
-	"\tcmp r2, r0\n"
-	"\tble _080AC5CC\n"
-	"\tldr r0, [r4, 0x4]\n"
-	"\tcmp r3, r0\n"
-	"\tbge _080AC5CC\n"
-	"\tldr r0, [r1, 0x4]\n"
-	"\tcmp r3, r0\n"
-	"\tble _080AC5CC\n"
-	"\tadds r0, r6, 0\n"
-	"\tb _080AC5E4\n"
-	"\t.align 2, 0\n"
-"_080AC5C8: .4byte gGroundObjects\n"
-"_080AC5CC:\n"
-	"\tadds r0, r7, 0\n"
-	"\tmovs r2, 0x80\n"
-	"\tlsls r2, 9\n"
-	"\tadds r7, r2\n"
-	"\tasrs r6, r0, 16\n"
-	"\tmovs r5, 0xE2\n"
-	"\tlsls r5, 1\n"
-	"\tadd r12, r5\n"
-	"\tcmp r6, 0xF\n"
-	"\tble _080AC576\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-"_080AC5E4:\n"
-	"\tpop {r3-r5}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tmov r10, r5\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
+  }
+    return -1;
 }
 
 bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
