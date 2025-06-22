@@ -104,8 +104,8 @@ static const CallbackData gGroundObjectCallbacks = {
     .func4C_spriteRelatedCheck = CallbackObjectSpriteRelatedCheck_80AC9B8,
     .func50_spriteRelated = CallbackObjectSpriteRelated_80AC9DC,
 };
-const u8 gUnknown_8118334[];
-#define FAKE_FILENAME gUnknown_8118334 
+const u8 gGroundObjectFileName[];
+#define FAKE_FILENAME gGroundObjectFileName
  
 
 
@@ -161,7 +161,7 @@ static const struct ScriptCommand gUnknown_81182F4[] = {
     WAIT(0x78),
     JUMP_LABEL(0),
 };
-ALIGNED(4) const u8 gUnknown_8118334[] = "../ground/ground_object.c";
+ALIGNED(4) const u8 gGroundObjectFileName[] = "../ground/ground_object.c";
 static const struct ScriptCommand gUnknown_8118350[] = {
     DEBUGINFO, // Needs to be line 166
     { 0x54, 0, 1, 0, 0, NULL },
@@ -247,7 +247,7 @@ void GroundObject_Select(s32 scriptID, s32 group, s32 sector)
     scriptID_s32 = (s16)scriptID;
     group_s32 = (s16)group;
     sector_s32 = (s8)sector;
-    scriptPtr = GetGroundScript(scriptID_s32, DEBUG_LOC_PTR(gUnknown_8118334, 0x126, "GroundObject_Select"));
+    scriptPtr = GetGroundScript(scriptID_s32, DEBUG_LOC_PTR(gGroundObjectFileName, 0x126, "GroundObject_Select"));
     Log(0,"GroundObject Select %3d  %3d  %3d", scriptID_s32, group_s32, sector_s32);
 
     groupPtr = &scriptPtr->groups[group_s32];
@@ -485,7 +485,7 @@ s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 s
         
       if (objectData->scripts[0] != NULL) {
         SetPredefinedScript(&parent->unk38,0,objectData->scripts[0]);
-        ExecutePredefinedScript(&parent->unk38,NULL,0,DEBUG_LOC_PTR(gUnknown_8118334, 0x283, "GroundObject_Add"));
+        ExecutePredefinedScript(&parent->unk38,NULL,0,DEBUG_LOC_PTR(gGroundObjectFileName, 0x283, "GroundObject_Add"));
       }
       return id;
 }
@@ -564,7 +564,7 @@ bool8 GroundObject_ExecuteScript(s32 index_, void *a1, ScriptInfoSmall *script)
 
     if(parent->unk6 != -1)
     {
-        GroundScript_ExecutePP(&parent->unk38, (ActionUnkIds *)a1, script, DEBUG_LOC_PTR(gUnknown_8118334, 0x303, "GroundObject_ExecuteScript"));
+        GroundScript_ExecutePP(&parent->unk38, (ActionUnkIds *)a1, script, DEBUG_LOC_PTR(gGroundObjectFileName, 0x303, "GroundObject_ExecuteScript"));
         parent->directionRelated = 1;
         return 1;
     }
@@ -996,26 +996,25 @@ static s32 CallbackObjectMoveRelative(void *livesPtr_, PixelPos *pos)
     return TryMoveRelative_80AC720(livesPtr, pos);
 }
 
-extern DebugLocation gUnknown_8118524;
-extern DebugLocation gUnknown_8118530;
 extern s16 HandleAction(Action *action, DebugLocation *debug);
 
 void GroundObject_Action(void)
 {
     GroundObject *objectPtr;
     s32 i;
+    s32 ret;
 
     for (objectPtr = &gGroundObjects[0], i = 0; i < 0x10; i = (s16)(i + 1), objectPtr++)
     {
         if (objectPtr->unk6 != -1) {
-
-            switch(HandleAction(&objectPtr->unk38, &gUnknown_8118524))
+            ret = HandleAction(&objectPtr->unk38, DEBUG_LOC_PTR(gGroundObjectFileName, 0x60D, "GroundObject_Action"));
+            switch(ret)
             {
                 case 4:
                     GroundObject_Delete(i);
                     continue;
                 case 0:
-                    ExecutePredefinedScript(&objectPtr->unk38, NULL, 1, &gUnknown_8118530);
+                    ExecutePredefinedScript(&objectPtr->unk38, NULL, 1, DEBUG_LOC_PTR(gGroundObjectFileName, 0x617, "GroundObject_Action"));
                     break;
             }
 

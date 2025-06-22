@@ -2,22 +2,7 @@
 
 .align 2
 
-.global GroundObject_Action_Text
-GroundObject_Action_Text: @ Action
-.string "GroundObject_Action\0"
-.align 2,0
-
-.global gUnknown_8118524
-gUnknown_8118524: @ 8118524
-.4byte gUnknown_8118334
-.4byte 0x60D
-.4byte GroundObject_Action_Text
-
-.global gUnknown_8118530
-gUnknown_8118530: @ 8118530
-.4byte gUnknown_8118334
-.4byte 0x617
-.4byte GroundObject_Action_Text
+@ ground_effect.c
 .string "pksdir0\0"
 .align 2,0
 
