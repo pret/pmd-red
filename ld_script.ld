@@ -356,7 +356,6 @@ SECTIONS {
         src/ground_script_file.o(.text);
         src/ground_lives.o(.text);
         src/ground_object.o(.text);
-        asm/ground_object.o(.text);
         src/ground_effect.o(.text);
         asm/ground_effect.o(.text);
         src/ground_link.o(.text);
