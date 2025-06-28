@@ -12,17 +12,17 @@ typedef struct GroundObject {
     // size: 0x1C4
     u8 unk0[4];
     s16 id;
-    s16 unk6; // kind
-    s16 unk8; // scriptID / group
-    s8 unkA; // sector
-    u8 unkB;
+    s16 kind; // kind
+    s16 group; // scriptID / group
+    s8 sector; // sector
+    u8 unused;
     PixelPos unkC;
     PixelPos unk14;
-    s8 unk1C;
+    s8 direction1;
     PixelPos unk20;
     PixelPos unk28;
     PixelPos unk30;
-    Action unk38;
+    Action action;
     u32 flags;
     s8 direction;
     PixelPos unk124;
@@ -35,6 +35,7 @@ typedef struct GroundObject {
 } GroundObject;
 
 IWRAM_INIT GroundObject *gGroundObjects = NULL;
+#define NUM_GROUND_OBJECTS 0x10
 
 struct GroundObjectTypeData
 {
@@ -154,7 +155,6 @@ const u8 gGroundObjectFileName[];
 
 
 
-
 static const struct ScriptCommand gUnknown_81182F4[] = {
     DEBUGINFO, // Needs to be line 159
     LABEL(0),
@@ -202,11 +202,11 @@ void AllocGroundObjects(void)
     GroundObject *ptr;
     s32 index;
 
-    gGroundObjects = MemoryAlloc(sizeof(GroundObject) * 0x10, 6);
+    gGroundObjects = MemoryAlloc(sizeof(GroundObject) * NUM_GROUND_OBJECTS, 6);
    
-    for(index = 0,  ptr = &gGroundObjects[index]; index < 0x10; index = (s16)(index + 1), ptr++)
+    for(index = 0,  ptr = &gGroundObjects[index]; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), ptr++)
     {
-        ptr->unk6 |= -1;
+        ptr->kind |= -1;
     }
     DeleteGroundObjects();
 }
@@ -217,9 +217,9 @@ void DeleteGroundObjects(void)
     s32 index;
     
     ptr = &gGroundObjects[0];
-    for(index = 0; index < 0x10; index = (s16)(index + 1), ptr++)
+    for(index = 0; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), ptr++)
     {
-        if(ptr->unk6 != -1)
+        if(ptr->kind != -1)
             GroundObject_Delete(index);
     }
 }
@@ -276,10 +276,10 @@ void GroundObject_Cancel(s32 scriptID, s32 sector)
 
     index = 0;
     ptr = &gGroundObjects[0];
-    for(; index < 0x10; index = (s16)(index + 1), ptr++)
+    for(; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), ptr++)
     {
-        if((ptr->unk6 != -1) && (ptr->unk8 == scriptID_s32))
-            if(sector_s32 < 0 || ptr->unkA == sector_s32)
+        if((ptr->kind != -1) && (ptr->group == scriptID_s32))
+            if(sector_s32 < 0 || ptr->sector == sector_s32)
                 GroundObject_Delete(index);
     }
 }
@@ -294,9 +294,9 @@ void GroundObject_CancelBlank(void)
 
     index = 0;
     ptr = &gGroundObjects[0];
-    for(; index < 0x10; index = (s16)(index + 1), ptr++)
+    for(; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), ptr++)
     {
-        if(ptr->unk6 != -1)
+        if(ptr->kind != -1)
         {
             stack.x = ptr->unk124.x + ptr->unk14.x;
             stack.y = ptr->unk124.y + ptr->unk14.y;
@@ -306,18 +306,18 @@ void GroundObject_CancelBlank(void)
     }
 }
 
-s32 sub_80ABD48(s32 r0)
+static s32 GroundObject_Find(s32 kind)
 {
     s32 index;
     GroundObject *ptr;
 
-    s32 r0_s32 = (s16)r0;
+    s32 kind_s32 = (s16)kind;
 
     index = 0;
     ptr = &gGroundObjects[0];
-    for(; index < 0x10; index = (s16)(index + 1), ptr++)
+    for(; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), ptr++)
     {
-        if(ptr->unk6 == r0_s32) return index;
+        if(ptr->kind == kind_s32) return index;
     }
 
     return -1;
@@ -368,15 +368,15 @@ s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 s
           {
               case 0xD:
               case 0xE:
-                   id = sub_80ABD48(kind);
+                   id = GroundObject_Find(kind);
                     break;
                   
           }
             
         if (id < 0) {
-            for(index = 0, parent = gGroundObjects; index < 0x10; index = (s16)(index + 1), parent++)
+            for(index = 0, parent = gGroundObjects; index < NUM_GROUND_OBJECTS; index = (s16)(index + 1), parent++)
             {
-                if(parent->unk6 == -1)
+                if(parent->kind == -1)
                 {
                   id = index;
                   break;
@@ -390,11 +390,11 @@ s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 s
       }
       parent = &gGroundObjects[id];
       Log(0,"GroundObject Add id %3d  kind %3d[%3d]  type %3d  group %3d  sector %3d",id,kind,objectData->kind,typeDataPtr->unk0,group,sector);
-      bVar12 = (parent->unk6 == -1);
+      bVar12 = (parent->kind == -1);
       parent->id = id;
-      parent->unk6 = kind;
-      parent->unk8 = group;
-      parent->unkA = sector;
+      parent->kind = kind;
+      parent->group = group;
+      parent->sector = sector;
       switch(typeDataPtr->unk0) {
           case 1:
           case 0xB:
@@ -453,12 +453,12 @@ s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 s
       
       parent->unk14.x = parent->unkC.x / 2;
       parent->unk14.y = parent->unkC.y / 2;
-      parent->unk1C = objectData->unk1;
+      parent->direction1 = objectData->unk1;
     
       SetUnkInGroundEvent(&objectData->pos, &parent->unk20);
     
       if (bVar12) {
-        parent->direction = parent->unk1C;
+        parent->direction = parent->direction1;
         parent->unk124.x = parent->unk20.x - parent->unk14.x;
         parent->unk12C.x = parent->unk20.x + parent->unk14.x;
         parent->unk124.y = parent->unk20.y - parent->unk14.y;
@@ -470,22 +470,22 @@ s32 GroundObject_Add(s32 id_,const GroundObjectData *objectData,s32 group_,s32 s
         parent->unk13E = 0x800;
         parent->directionRelated = 1;
         parent->unk140 = 0;
-        sub_80A75CC(&(parent->unk144),id,parent->unk6, parent->flags);
+        sub_80A75CC(&(parent->unk144),id,parent->kind, parent->flags);
       }
     
-      InitActionWithParams(&parent->unk38,&gGroundObjectCallbacks,parent,group,sector);
+      InitActionWithParams(&parent->action,&gGroundObjectCallbacks,parent,group,sector);
         
        // What an ugly way of coding that...
-      SetPredefinedScript(&parent->unk38,1, (objectData->scripts[1] != NULL) ? objectData->scripts[1] 
+      SetPredefinedScript(&parent->action,1, (objectData->scripts[1] != NULL) ? objectData->scripts[1] 
           : (SpriteHasPokemonSize_80A66A4(&parent->unk144)) ? gUnknown_8118350 : gUnknown_81182F4);
-      SetPredefinedScript(&parent->unk38,2,(objectData->scripts[2] != NULL) ? objectData->scripts[2] 
+      SetPredefinedScript(&parent->action,2,(objectData->scripts[2] != NULL) ? objectData->scripts[2] 
           : gFunctionScriptTable[4].script);
-      SetPredefinedScript(&parent->unk38,3,(objectData->scripts[3] != NULL) ? objectData->scripts[3] 
+      SetPredefinedScript(&parent->action,3,(objectData->scripts[3] != NULL) ? objectData->scripts[3] 
           : gFunctionScriptTable[8].script);
         
       if (objectData->scripts[0] != NULL) {
-        SetPredefinedScript(&parent->unk38,0,objectData->scripts[0]);
-        ExecutePredefinedScript(&parent->unk38,NULL,0,DEBUG_LOC_PTR(gGroundObjectFileName, 0x283, "GroundObject_Add"));
+        SetPredefinedScript(&parent->action,0,objectData->scripts[0]);
+        ExecutePredefinedScript(&parent->action,NULL,0,DEBUG_LOC_PTR(gGroundObjectFileName, 0x283, "GroundObject_Add"));
       }
       return id;
 }
@@ -499,8 +499,8 @@ void GroundObject_Delete(s32 index_) {
     
     Log(0, "GroundObject Delete id %3d", index);
     sub_80A7658(&parent->unk144);
-    InitAction2(&parent->unk38);
-    parent->unk6 = -1;
+    InitAction2(&parent->action);
+    parent->kind = -1;
 }
 
 void sub_80AC1B0(s32 index_, s32 flag)
@@ -508,7 +508,7 @@ void sub_80AC1B0(s32 index_, s32 flag)
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
 
-    if(parent->unk6 != -1)
+    if(parent->kind != -1)
     {
         parent->flags |= flag;
         sub_80A6688(&parent->unk144, parent->flags);
@@ -520,20 +520,20 @@ void sub_80AC1F4(s32 index_, s32 flag)
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
 
-    if(parent->unk6 != -1)
+    if(parent->kind != -1)
     {
         parent->flags &= (0x337fffff ^ flag);
         sub_80A6688(&parent->unk144, parent->flags);
     }
 }
 
-Action *sub_80AC240(s32 index_)
+Action *GroundObject_GetAction(s32 index_)
 {
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
 
-    if(parent->unk6 != -1)
-        return &parent->unk38;
+    if(parent->kind != -1)
+        return &parent->action;
     else
         return NULL;
 }
@@ -541,14 +541,14 @@ Action *sub_80AC240(s32 index_)
 extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
 
 
-bool8 sub_80AC274(s32 index_, ScriptInfoSmall *scriptInfo, s32 a2_)
+bool8 GroundObject_GetScript(s32 index_, ScriptInfoSmall *scriptInfo, s32 a2_)
 {
     s32 index = (s16)index_;
     s32 a2 = (s16)a2_;
     GroundObject *parent = &gGroundObjects[index];
 
-    if(parent->unk6 != -1)
-        return GetPredefinedScript(&parent->unk38, scriptInfo, a2);
+    if(parent->kind != -1)
+        return GetPredefinedScript(&parent->action, scriptInfo, a2);
     else
         return FALSE;
 }
@@ -562,9 +562,9 @@ bool8 GroundObject_ExecuteScript(s32 index_, void *a1, ScriptInfoSmall *script)
 
     Log(0, "GroundObject Execute %3d  ", index);
 
-    if(parent->unk6 != -1)
+    if(parent->kind != -1)
     {
-        GroundScript_ExecutePP(&parent->unk38, (ActionUnkIds *)a1, script, DEBUG_LOC_PTR(gGroundObjectFileName, 0x303, "GroundObject_ExecuteScript"));
+        GroundScript_ExecutePP(&parent->action, (ActionUnkIds *)a1, script, DEBUG_LOC_PTR(gGroundObjectFileName, 0x303, "GroundObject_ExecuteScript"));
         parent->directionRelated = 1;
         return 1;
     }
@@ -580,10 +580,10 @@ bool8 GroundObjectsNotifyAll(s32 index_)
     GroundObject *parent = &gGroundObjects[0];
     bool8 flag = FALSE;
     
-    for(counter = 0; counter < 0x10; counter = (s16)(counter + 1), parent++)
+    for(counter = 0; counter < NUM_GROUND_OBJECTS; counter = (s16)(counter + 1), parent++)
     {
-        if(parent->unk6 != -1)
-            flag |= GroundScriptNotify(&parent->unk38, index);
+        if(parent->kind != -1)
+            flag |= GroundScriptNotify(&parent->action, index);
     }
 
     return flag;
@@ -595,10 +595,10 @@ bool8 GroundObjectsCancelAll(void)
     GroundObject *parent = &gGroundObjects[0];
     bool8 flag = FALSE;
     
-    for(counter = 0; counter < 0x10; counter = (s16)(counter + 1), parent++)
+    for(counter = 0; counter < NUM_GROUND_OBJECTS; counter = (s16)(counter + 1), parent++)
     {
-        if(parent->unk6 != -1)
-            flag |= GroundScript_Cancel(&parent->unk38);
+        if(parent->kind != -1)
+            flag |= GroundScript_Cancel(&parent->action);
     }
 
     return flag;
@@ -608,22 +608,22 @@ static UNUSED s16 sub_80AC3C0(s32 index_)
 {
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
-    return parent->unk6;
+    return parent->kind;
 }
 
-s16 sub_80AC3E0(s32 index_, s32 *a1)
+s16 GroundObject_GetFlags(s32 index_, s32 *flags)
 {
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
-    *a1 = parent->flags;
-    return parent->unk6;
+    *flags = parent->flags;
+    return parent->kind;
 }
 
 static UNUSED s16 sub_80AC408(s32 index_, PixelPos *a1)
 {
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
-    if(parent->unk6 == -1)
+    if(parent->kind == -1)
     {
         a1->x = 0;
         a1->y = 0;
@@ -632,7 +632,7 @@ static UNUSED s16 sub_80AC408(s32 index_, PixelPos *a1)
     {
         *a1 = parent->unkC;
     }
-    return parent->unk6;
+    return parent->kind;
 }
 
 s16 sub_80AC448(s32 index_, PixelPos *pos)
@@ -640,7 +640,7 @@ s16 sub_80AC448(s32 index_, PixelPos *pos)
     s32 index = (s16)index_;
     GroundObject *parent = &gGroundObjects[index];
 
-    if(parent->unk6 == -1)
+    if(parent->kind == -1)
     {
         pos->x = 0;
         pos->y = 0;
@@ -650,7 +650,7 @@ s16 sub_80AC448(s32 index_, PixelPos *pos)
        pos->y = parent->unk124.y + parent->unk14.y; 
     }
 
-    return parent->unk6;
+    return parent->kind;
 }
 
 extern s32 TryMoveObjectRelative_80AC6AC(GroundObject *, PixelPos *);
@@ -663,16 +663,16 @@ s16 sub_80AC49C(s32 index_, PixelPos *pos)
 
     TryMoveObjectRelative_80AC6AC(parent, pos);
     
-    return parent->unk6;
+    return parent->kind;
 }
 
 s32 sub_80AC4C8(s32 index, PixelPos *a0, PixelPos *a1) {
     GroundObject *parent = &gGroundObjects[0];
     s32 counter;
 
-    for(counter = 0; counter < 0x10; counter = (s16)(counter + 1), parent++)
+    for(counter = 0; counter < NUM_GROUND_OBJECTS; counter = (s16)(counter + 1), parent++)
     {
-        if(parent->unk6 != -1)
+        if(parent->kind != -1)
         {
             if(parent->flags & index)
             {
@@ -694,8 +694,8 @@ s32 sub_80AC554(s32 flag, PixelPos *param_2,PixelPos *param_3)
   GroundObject *parent;
   
   parent = &gGroundObjects[0];
-  for(i = 0; i < 0x10; i = (s16)(i + 1), parent++) {
-    if ((parent->unk6 != -1))
+  for(i = 0; i < NUM_GROUND_OBJECTS; i = (s16)(i + 1), parent++) {
+    if ((parent->kind != -1))
     {
         if((parent->flags & flag)) {
             PixelPos pos = {(parent->unk124).x + (parent->unk14).x, (parent->unk124).y + (parent->unk14).y};
@@ -838,10 +838,10 @@ static void CallbackObjectSetHitboxPos(void *objectPtr_, PixelPos *posOrNull)
         objectPtr->unk124.y = objectPtr->unk20.y - objectPtr->unk14.y;
         objectPtr->unk12C.y = objectPtr->unk20.y + objectPtr->unk14.y;
         objectPtr->unk134.x = objectPtr->unk134.y = 0;
-        if (objectPtr->direction != objectPtr->unk1C) {
+        if (objectPtr->direction != objectPtr->direction1) {
             objectPtr->directionRelated = TRUE;
         }
-        objectPtr->direction = objectPtr->unk1C;
+        objectPtr->direction = objectPtr->direction1;
     }
 }
 
@@ -1004,17 +1004,17 @@ void GroundObject_Action(void)
     s32 i;
     s32 ret;
 
-    for (objectPtr = &gGroundObjects[0], i = 0; i < 0x10; i = (s16)(i + 1), objectPtr++)
+    for (objectPtr = &gGroundObjects[0], i = 0; i < NUM_GROUND_OBJECTS; i = (s16)(i + 1), objectPtr++)
     {
-        if (objectPtr->unk6 != -1) {
-            ret = HandleAction(&objectPtr->unk38, DEBUG_LOC_PTR(gGroundObjectFileName, 0x60D, "GroundObject_Action"));
+        if (objectPtr->kind != -1) {
+            ret = HandleAction(&objectPtr->action, DEBUG_LOC_PTR(gGroundObjectFileName, 0x60D, "GroundObject_Action"));
             switch(ret)
             {
                 case 4:
                     GroundObject_Delete(i);
                     continue;
                 case 0:
-                    ExecutePredefinedScript(&objectPtr->unk38, NULL, 1, DEBUG_LOC_PTR(gGroundObjectFileName, 0x617, "GroundObject_Action"));
+                    ExecutePredefinedScript(&objectPtr->action, NULL, 1, DEBUG_LOC_PTR(gGroundObjectFileName, 0x617, "GroundObject_Action"));
                     break;
             }
 
@@ -1036,9 +1036,9 @@ void sub_80ACAD4(void)
     // s16 memes
     s32 minus1;
 
-    for (objectPtr = &gGroundObjects[0], i = 0, minus1 = -1; i < 0x10; i = (s16)(i + 1), objectPtr++) {
+    for (objectPtr = &gGroundObjects[0], i = 0, minus1 = -1; i < NUM_GROUND_OBJECTS; i = (s16)(i + 1), objectPtr++) {
         minus1 = (s16) minus1;
-        if (objectPtr->unk6 != (s16) minus1) {
+        if (objectPtr->kind != (s16) minus1) {
             PixelPos pos = {objectPtr->unk124.x + (objectPtr->unk14).x, objectPtr->unk124.y + (objectPtr->unk14).y};
             s32 num = objectPtr->unk134.x + objectPtr->unk134.y;        
             if ((sub_80A66D4(&objectPtr->unk144))) {

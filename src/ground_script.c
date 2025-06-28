@@ -133,7 +133,7 @@ extern u8 GroundEffectsCancelAll(void);
 extern u8 GroundLivesCancelAll(void);
 extern u8 IsTextboxOpen_809A750(void);
 extern Action *sub_80A882C(s32);
-extern Action *sub_80AC240(s32);
+extern Action *GroundObject_GetAction(s32);
 extern Action *sub_80AD158(s32);
 extern void sub_809AB4C(s32, s32);
 extern void sub_809ABB4(s32, s32);
@@ -265,7 +265,7 @@ static Action *sub_809D52C(ActionUnkIds *a0)
     switch (a0->unk0) {
         case 0: return 0;
         case 1: return sub_80A882C(a0->unk2);
-        case 2: return sub_80AC240(a0->unk2);
+        case 2: return GroundObject_GetAction(a0->unk2);
         case 3: return sub_80AD158(a0->unk2);
     }
     return NULL;

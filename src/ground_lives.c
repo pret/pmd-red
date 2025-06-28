@@ -114,7 +114,7 @@ extern void sub_80A6EC8(struct UnkGroundSpriteStruct *ptr, s32 a1);
 extern s32 sub_80AC554(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
 extern s32 sub_80AC448(s32 id_, PixelPos *pixelPos);
 extern bool8 sub_80A595C(u32 a0, PixelPos *pixelPosArg1, PixelPos *pixelPosArg2);
-extern void sub_80AC3E0(s32 id, s32 *a1);
+extern void GroundObject_GetFlags(s32 id, s32 *a1);
 extern PixelPos SetVecFromDirectionSpeed(s32 r1, u32 r2);
 extern u8 sub_80A5934(s32 param_1, PixelPos *, PixelPos *);
 extern bool8 CheckMapCollision_80A585C(PixelPos *, PixelPos *);
@@ -123,7 +123,7 @@ extern s32 sub_80AC4C8(u32 a0, PixelPos *, PixelPos *);
 extern bool8 sub_809B1C0(s32 a0, u32 kind, Pokemon *a2);
 extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
 extern bool8 sub_809D678(Action *action);
-extern bool8 sub_80AC274(s32 a0, ScriptInfoSmall *scriptInfo, s32 a2);
+extern bool8 GroundObject_GetScript(s32 a0, ScriptInfoSmall *scriptInfo, s32 a2);
 extern void GroundObject_ExecuteScript(s32, void *, ScriptInfoSmall *);
 extern bool8 sub_80ADC64(s32 id, ScriptInfoSmall *dst);
 extern bool8 GroundScriptNotify(Action *param_1, s32 param_2);
@@ -1132,11 +1132,11 @@ bool8 sub_80A8A5C(s32 id1_, s32 id2_)
         ScriptInfoSmall scriptInfo1;
         struct GroundLive *livesPtr1 = &gGroundLives->array[id1];
 
-        if (sub_80AC274(id2, &scriptInfo1, 2)) {
+        if (GroundObject_GetScript(id2, &scriptInfo1, 2)) {
             ScriptInfoSmall scriptInfo2;
             ActionUnkIds sp = {2, id2};
 
-            sub_80AC274(id2, &scriptInfo2, 3);
+            GroundObject_GetScript(id2, &scriptInfo2, 3);
             GroundObject_ExecuteScript(id2, &livesPtr1->action.unk8, &scriptInfo2);
             return _ExecutePlayerScript(livesPtr1, &sp, &scriptInfo1);
         }
@@ -1695,7 +1695,7 @@ s32 sub_80A95AC(struct GroundLive *livesPtr, PixelPos *posArg1, PixelPos *posArg
         if (id2 >= 0) {
             s32 sp;
 
-            sub_80AC3E0(id2, &sp);
+            GroundObject_GetFlags(id2, &sp);
             if ((sp & 0x40) && sub_80A8A5C(livesPtr->id, id2))
                 return 2;
             return 1;
