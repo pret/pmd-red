@@ -1029,102 +1029,27 @@ void GroundObject_Action(void)
 void sub_80A7664(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
 extern bool8 sub_80A66D4(struct UnkGroundSpriteStruct *ptr);
 
-// https://decomp.me/scratch/QjggT - 94.61% matched (Seth)
-NAKED
-void sub_80ACAD4(void) {
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r7, r9\n"
-	"\tmov r6, r8\n"
-	"\tpush {r6,r7}\n"
-	"\tsub sp, 0x8\n"
-	"\tldr r0, _080ACB8C\n"
-	"\tldr r6, [r0]\n"
-	"\tmovs r0, 0\n"
-	"\tmov r8, r0\n"
-	"\tmovs r1, 0x1\n"
-	"\tnegs r1, r1\n"
-	"\tmov r9, r1\n"
-	"\tmovs r2, 0x90\n"
-	"\tlsls r2, 1\n"
-	"\tadds r4, r6, r2\n"
-"_080ACAF2:\n"
-	"\tmovs r0, 0x6\n"
-	"\tldrsh r1, [r6, r0]\n"
-	"\tmov r2, r9\n"
-	"\tlsls r0, r2, 16\n"
-	"\tasrs r0, 16\n"
-	"\tcmp r1, r0\n"
-	"\tbeq _080ACB64\n"
-	"\tldr r0, [r4, 0x4]\n"
-	"\tldr r1, [r6, 0x14]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [sp]\n"
-	"\tldr r0, [r4, 0x8]\n"
-	"\tldr r1, [r6, 0x18]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [sp, 0x4]\n"
-	"\tldr r1, [r4, 0x14]\n"
-	"\tldr r0, [r4, 0x18]\n"
-	"\tadds r7, r1, r0\n"
-	"\tmovs r0, 0xA2\n"
-	"\tlsls r0, 1\n"
-	"\tadds r5, r6, r0\n"
-	"\tadds r0, r5, 0\n"
-	"\tbl sub_80A66D4\n"
-	"\tlsls r0, 24\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _080ACB40\n"
-	"\tmovs r0, 0\n"
-	"\tstrb r0, [r4, 0x1C]\n"
-	"\tldrh r2, [r4, 0x1E]\n"
-	"\tmovs r0, 0xF8\n"
-	"\tlsls r0, 5\n"
-	"\tadds r1, r0, 0\n"
-	"\tands r1, r2\n"
-	"\tlsls r2, 24\n"
-	"\tasrs r2, 24\n"
-	"\tadds r0, r5, 0\n"
-	"\tbl sub_80A6EFC\n"
-"_080ACB40:\n"
-	"\tmovs r1, 0x20\n"
-	"\tldrsh r0, [r4, r1]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _080ACB5A\n"
-	"\tadds r1, r0, 0\n"
-	"\tmovs r2, 0\n"
-	"\tldrsb r2, [r4, r2]\n"
-	"\tadds r0, r5, 0\n"
-	"\tmovs r3, 0\n"
-	"\tbl sub_80A7040\n"
-	"\tmovs r0, 0\n"
-	"\tstrh r0, [r4, 0x20]\n"
-"_080ACB5A:\n"
-	"\tadds r0, r5, 0\n"
-	"\tmov r1, sp\n"
-	"\tadds r2, r7, 0\n"
-	"\tbl sub_80A7664\n"
-"_080ACB64:\n"
-	"\tmov r0, r8\n"
-	"\tadds r0, 0x1\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r0, 16\n"
-	"\tmov r8, r0\n"
-	"\tmovs r0, 0xE2\n"
-	"\tlsls r0, 1\n"
-	"\tadds r4, r0\n"
-	"\tadds r6, r0\n"
-	"\tmov r1, r8\n"
-	"\tcmp r1, 0xF\n"
-	"\tble _080ACAF2\n"
-	"\tadd sp, 0x8\n"
-	"\tpop {r3,r4}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r0}\n"
-	"\tbx r0\n"
-	"\t.align 2, 0\n"
-"_080ACB8C: .4byte gGroundObjects");
-}
+void sub_80ACAD4(void) 
+{
+    GroundObject *objectPtr;
+    int i;
+    // s16 memes
+    s32 minus1;
 
+    for (objectPtr = &gGroundObjects[0], i = 0, minus1 = -1; i < 0x10; i = (s16)(i + 1), objectPtr++) {
+        minus1 = (s16) minus1;
+        if (objectPtr->unk6 != (s16) minus1) {
+            PixelPos pos = {objectPtr->unk124.x + (objectPtr->unk14).x, objectPtr->unk124.y + (objectPtr->unk14).y};
+            s32 num = objectPtr->unk134.x + objectPtr->unk134.y;        
+            if ((sub_80A66D4(&objectPtr->unk144))) {
+                objectPtr->directionRelated = 0;
+                sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1f00,(s8)objectPtr->unk13E);
+            }
+            if (objectPtr->unk140 != 0) {
+                sub_80A7040(&objectPtr->unk144,objectPtr->unk140,objectPtr->direction,0);
+                objectPtr->unk140 = 0;
+            }
+            sub_80A7664(&objectPtr->unk144,&pos,num);
+        }
+    }
+}
