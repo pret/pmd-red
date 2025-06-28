@@ -128,13 +128,13 @@ bool8 sub_809D234(void);
 s32 sub_80A14E8(Action *, u8, u32, s32);
 u8 sub_80990EC(struct DungeonSetupInfo *param_1, s32 param_2);
 
-extern u8 GroundObjectsCancellAll(void);
+extern u8 GroundObjectsCancelAll(void);
 extern u8 GroundEffectsCancelAll(void);
 extern u8 GroundLivesCancelAll(void);
 extern u8 IsTextboxOpen_809A750(void);
-extern Action *sub_80A882C(s16);
-extern Action *sub_80AC240(s16);
-extern Action *sub_80AD158(s16);
+extern Action *sub_80A882C(s32);
+extern Action *GroundObject_GetAction(s32);
+extern Action *sub_80AD158(s32);
 extern void sub_809AB4C(s32, s32);
 extern void sub_809ABB4(s32, s32);
 extern void sub_809AC18(s32, s32);
@@ -265,7 +265,7 @@ static Action *sub_809D52C(ActionUnkIds *a0)
     switch (a0->unk0) {
         case 0: return 0;
         case 1: return sub_80A882C(a0->unk2);
-        case 2: return sub_80AC240(a0->unk2);
+        case 2: return GroundObject_GetAction(a0->unk2);
         case 3: return sub_80AD158(a0->unk2);
     }
     return NULL;
@@ -528,7 +528,7 @@ u8 GroundCancelAllEntities(void)
     u8 ret;
 
     ret = GroundLivesCancelAll();
-    ret |= GroundObjectsCancellAll();
+    ret |= GroundObjectsCancelAll();
     ret |= GroundEffectsCancelAll();
     return ret;
 }
