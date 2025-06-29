@@ -604,8 +604,8 @@ struct DiagonalArrowInfo
 {
     s16 x;
     s16 y;
-    bool8 unk4;
-    bool8 unk5;
+    bool8 hFlip;
+    bool8 vFlip;
 };
 
 static const struct DiagonalArrowInfo sDiagonalArrowsInfo[] =
@@ -621,8 +621,8 @@ struct RotateArrowInfo
     s16 x;
     s16 y;
     u32 tilemapNum;
-    bool8 unk8;
-    bool8 unk9;
+    bool8 hFlip;
+    bool8 vFlip;
 };
 
 static const struct RotateArrowInfo sRotateArrowsInfo[] =
@@ -647,7 +647,7 @@ static void TryCreateModeArrows(Entity *leader)
         SpriteOAM sprite;
 
         for (i = 0; i < 4; i++) {
-            u32 matrixNum;
+            u32 flips;
             s32 x, xMul, x2;
             s32 y, yMul, y2;
 
@@ -658,12 +658,13 @@ static void TryCreateModeArrows(Entity *leader)
             SpriteSetBpp(&sprite, 0);
             SpriteSetShape(&sprite, 0);
 
-            matrixNum = (sDiagonalArrowsInfo[i].unk4) ? 8 : 0;
+            flips = 0;
+            if (sDiagonalArrowsInfo[i].hFlip)
+                flips += (1 << SPRITEOAM_SHIFT_H_FLIP_MATRIXNUM);
+            if (sDiagonalArrowsInfo[i].vFlip)
+                flips += (1 << SPRITEOAM_SHIFT_V_FLIP_MATRIXNUM);
 
-            if (sDiagonalArrowsInfo[i].unk5)
-                matrixNum += 16;
-
-            SpriteSetMatrixNum_UseLocalVar(&sprite, matrixNum);
+            SpriteSetMatrixNumFlips(&sprite, flips);
             SpriteSetSize(&sprite, 0);
 
             SpriteSetTileNum(&sprite, 0x213);
@@ -705,7 +706,7 @@ static void TryCreateModeArrows(Entity *leader)
             y2 = (sArrowsFrames / 2) & 7;
             y = (y2 * sRotateArrowsInfo[direction].y) + yMul + 82;
             for (i = 0; i < to; i++) {
-                u32 matrixNum;
+                u32 flips;
 
                 SpriteSetAffine1(&sprite, 0);
                 SpriteSetAffine2(&sprite, 0);
@@ -714,12 +715,13 @@ static void TryCreateModeArrows(Entity *leader)
                 SpriteSetBpp(&sprite, 0);
                 SpriteSetShape(&sprite, 0);
 
-                matrixNum = (sRotateArrowsInfo[direction].unk8 != 0) ? 8 : 0;
+                flips = 0;
+                if (sRotateArrowsInfo[direction].hFlip)
+                    flips += (1 << SPRITEOAM_SHIFT_H_FLIP_MATRIXNUM);
+                if (sRotateArrowsInfo[direction].vFlip)
+                    flips += (1 << SPRITEOAM_SHIFT_V_FLIP_MATRIXNUM);
 
-                if (sRotateArrowsInfo[direction].unk9)
-                    matrixNum += 16;
-
-                SpriteSetMatrixNum_UseLocalVar(&sprite, matrixNum);
+                SpriteSetMatrixNumFlips(&sprite, flips);
                 SpriteSetSize(&sprite, 0);
 
                 SpriteSetTileNum(&sprite, sRotateArrowsInfo[direction].tilemapNum);

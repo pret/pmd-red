@@ -129,7 +129,7 @@ extern const u8 *const gWhichTextPtr2;
 
 EWRAM_DATA s32 gTeamMenuChosenId = 0;
 static UNUSED EWRAM_DATA u8 sUnused[4] = {0};
-EWRAM_DATA static SpriteOAM gUnknown_202F268 = {0};
+EWRAM_DATA static SpriteOAM sOAMStatusDescriptionArrow = {0};
 EWRAM_DATA static WindowHeader sTeamWindowHeader = {0};
 
 struct UnkFieldTeamMenuStruct
@@ -1177,7 +1177,7 @@ static void ShowUpArrowSprite(void)
         SpriteSetMosaic(&sprite, 0);
         SpriteSetBpp(&sprite, 0);
         SpriteSetShape(&sprite, 1);
-        SpriteSetMatrixNum(&sprite, 16);
+        SpriteSetVFlip(&sprite, 1);
         SpriteSetSize(&sprite, 0);
         SpriteSetTileNum(&sprite, 0x3F0);
         SpriteSetPriority(&sprite, 0);
@@ -1202,7 +1202,7 @@ static void ShowDownArrowSprite(void)
         SpriteSetMosaic(&sprite, 0);
         SpriteSetBpp(&sprite, 0);
         SpriteSetShape(&sprite, 1);
-        SpriteSetMatrixNum(&sprite, 0);
+        SpriteSetVFlip(&sprite, 0);
         SpriteSetSize(&sprite, 0);
         SpriteSetTileNum(&sprite, 0x3F0);
         SpriteSetPriority(&sprite, 0);
@@ -1218,20 +1218,20 @@ void ShowStatusDescriptionMenuArrow(void)
     if ((gDungeonFramesCounter & 8) != 0) {
         Window *window = &gWindows[0];
 
-        SpriteSetAffine1(&gUnknown_202F268, 0);
-        SpriteSetAffine2(&gUnknown_202F268, 0);
-        SpriteSetObjMode(&gUnknown_202F268, 0);
-        SpriteSetMosaic(&gUnknown_202F268, 0);
-        SpriteSetBpp(&gUnknown_202F268, 0);
-        SpriteSetShape(&gUnknown_202F268, 1);
-        SpriteSetMatrixNum(&gUnknown_202F268, 0);
-        SpriteSetSize(&gUnknown_202F268, 0);
-        SpriteSetTileNum(&gUnknown_202F268, 0x3F0);
-        SpriteSetPriority(&gUnknown_202F268, 0);
-        SpriteSetPalNum(&gUnknown_202F268, 15);
-        SpriteSetY(&gUnknown_202F268, (window->y  * 8) + 0x60);
-        SpriteSetX(&gUnknown_202F268, 0x70);
-        AddSprite(&gUnknown_202F268,0x100,NULL,NULL);
+        SpriteSetAffine1(&sOAMStatusDescriptionArrow, 0);
+        SpriteSetAffine2(&sOAMStatusDescriptionArrow, 0);
+        SpriteSetObjMode(&sOAMStatusDescriptionArrow, 0);
+        SpriteSetMosaic(&sOAMStatusDescriptionArrow, 0);
+        SpriteSetBpp(&sOAMStatusDescriptionArrow, 0);
+        SpriteSetShape(&sOAMStatusDescriptionArrow, 1);
+        SpriteSetVFlip(&sOAMStatusDescriptionArrow, 0);
+        SpriteSetSize(&sOAMStatusDescriptionArrow, 0);
+        SpriteSetTileNum(&sOAMStatusDescriptionArrow, 0x3F0);
+        SpriteSetPriority(&sOAMStatusDescriptionArrow, 0);
+        SpriteSetPalNum(&sOAMStatusDescriptionArrow, 15);
+        SpriteSetY(&sOAMStatusDescriptionArrow, (window->y  * 8) + 0x60);
+        SpriteSetX(&sOAMStatusDescriptionArrow, 0x70);
+        AddSprite(&sOAMStatusDescriptionArrow,0x100,NULL,NULL);
     }
 }
 

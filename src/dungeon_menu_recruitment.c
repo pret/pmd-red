@@ -270,7 +270,7 @@ static void CreateScrollingArrow(bool8 upArrow, s32 y)
         SpriteSetObjMode(&sScrollingArrowOAM, 0);
         SpriteSetMosaic(&sScrollingArrowOAM, 0);
         SpriteSetBpp(&sScrollingArrowOAM, 0);
-        SpriteSetMatrixNum(&sScrollingArrowOAM, (upArrow != FALSE) ? (16) : 0);
+        SpriteSetVFlip(&sScrollingArrowOAM, (upArrow != FALSE));
         SpriteSetPalNum(&sScrollingArrowOAM, 15);
         SpriteSetY(&sScrollingArrowOAM, (window->y * 8) + y);
         SpriteSetX(&sScrollingArrowOAM, (window->x * 8) + 64);

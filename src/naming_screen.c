@@ -384,13 +384,13 @@ u32 NamingScreen_Init(u32 type, u8 *defaultText)
     SpriteSetY((SpriteOAM *) &sNamingScreen->spriteLetterCursor, DISPLAY_WIDTH);
 
     if (sNamingScreen->isPassword) {
-        SpriteSetMatrixNum((SpriteOAM *) &sNamingScreen->spriteLetterCursor, 0);
+        SpriteSetVFlip((SpriteOAM *) &sNamingScreen->spriteLetterCursor, 0);
         SpriteSetTileNum((SpriteOAM *) &sNamingScreen->spriteLetterCursor, 0x3F6);
         SpriteSetSize((SpriteOAM *) &sNamingScreen->spriteLetterCursor, 0);
         SpriteSetShape((SpriteOAM *) &sNamingScreen->spriteLetterCursor, 1);
     }
     else {
-        SpriteSetMatrixNum((SpriteOAM *) &sNamingScreen->spriteLetterCursor, 16);
+        SpriteSetVFlip((SpriteOAM *) &sNamingScreen->spriteLetterCursor, 1);
         SpriteSetTileNum((SpriteOAM *) &sNamingScreen->spriteLetterCursor, 0x3F0);
         SpriteSetSize((SpriteOAM *) &sNamingScreen->spriteLetterCursor, 0);
         SpriteSetShape((SpriteOAM *) &sNamingScreen->spriteLetterCursor, 1);

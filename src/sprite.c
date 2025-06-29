@@ -201,7 +201,7 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
     spPtr->unk0 = a0->sprite;
     spPtr->unk2 = a0->unk2;
 
-    spPtr->oam.attrib1 = a0->flags1 & ~(0x100 | 0x200);
+    spPtr->oam.attrib1 = a0->flags1 & ~((1 << SPRITEOAM_SHIFT_AFFINEMODE1) | (1 << SPRITEOAM_SHIFT_AFFINEMODE2));
     spPtr->oam.attrib2 = a0->flags2 & ~(0x200 | 0x400 | 0x800);
     spPtr->oam.attrib3 = a0->flags3;
     spPtr->oam.unk6 = ((a0->flags2 & (0x200 | 0x400 | 0x800)) >> 9) | ((a0->flags1 & (0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20 | 0x40 | 0x80 | 0x100 | 0x200)) << 4);
