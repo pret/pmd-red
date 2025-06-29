@@ -51,6 +51,7 @@ struct GroundEffectTypeData
 
 extern struct GroundEffectTypeData gGroundEffectTypes[];
 
+extern const s16 gUnknown_81185F2[];
 extern DebugLocation gUnknown_8118610;
 extern const u8 gUnknown_811861C[];
 extern const u8 gUnknown_8118640[];
@@ -75,25 +76,31 @@ void sub_80A7714(struct UnkGroundSpriteStruct *);
 void sub_80A6688(struct UnkGroundSpriteStruct *, s32);
 extern bool8 GroundScriptNotify(Action*, s32);
 extern bool8 GroundScript_Cancel(Action *r0);
+s32 sub_80AD3E0(GroundEffect *, PixelPos *);
+extern bool8 sub_80A66F8(struct UnkGroundSpriteStruct *ptr);
+extern bool8 sub_80A671C(struct UnkGroundSpriteStruct *ptr);
+bool8 sub_80A66D4(struct UnkGroundSpriteStruct *ptr);
+void sub_80A7720(struct UnkGroundSpriteStruct *ptr, PixelPos *pixelPos, s32 a2);
 
-extern s16 CallbackEffectGetIndex(void *ptr);
-extern void CallbackEffectGetSize(void *effectPtr_, PixelPos *out);
-extern void CallbackEffectSetHitboxPos(void *effectPtr_, PixelPos *posOrNull);
-extern void CallbackEffectSetPositionBounds(void *effectPtr_, PixelPos *from, PixelPos *to);
-extern void CallbackEffectGetHitboxCenter(void *effectPtr_, PixelPos *out);
-extern s32 CallbackEffectMoveReal(void *effectPtr_, PixelPos *pos);
-extern void CallbackEffectGetPosHeightAndUnk(void *effectPtr_, u32 *height, u32 *unk);
-extern void CallbackEffectSetPosHeight(void *effectPtr_, u32 height);
-extern void CallbackEffectGetDirection(void *effectPtr_, s8 *dir);
-extern void CallbackEffectSetDirection(void *effectPtr_, s32 dir_);
-extern void CallbackEffectSetEventIndex(void *effectPtr_, u16 a1);
-extern void CallbackEffectSetUnk_80AD670(void *effectPtr_, s32 a1_, s32 a2);
-extern bool8 CallbackEffectSpriteRelatedCheck_80AD690(void *effectPtr_);
-extern bool8 CallbackEffectSpriteRelated_80AD6B4(void *effectPtr_);
-extern void CallbackEffectGetFlags(void *effectPtr_, u32 *flags);
-extern void CallbackEffectSetFlags(void *effectPtr_, u32 flags);
-extern void CallbackEffectClearFlags(void *effectPtr_, u32 flags);
-extern s32 CallbackEffectMoveRelative(void *effectPtr_, PixelPos *pos);
+
+static s16 CallbackEffectGetIndex(void *ptr);
+static void CallbackEffectGetSize(void *effectPtr_, PixelPos *out);
+static void CallbackEffectSetHitboxPos(void *effectPtr_, PixelPos *posOrNull);
+static void CallbackEffectSetPositionBounds(void *effectPtr_, PixelPos *from, PixelPos *to);
+static void CallbackEffectGetHitboxCenter(void *effectPtr_, PixelPos *out);
+static s32 CallbackEffectMoveReal(void *effectPtr_, PixelPos *pos);
+static void CallbackEffectGetPosHeightAndUnk(void *effectPtr_, u32 *height, u32 *unk);
+static void CallbackEffectSetPosHeight(void *effectPtr_, u32 height);
+static void CallbackEffectGetDirection(void *effectPtr_, s8 *dir);
+static void CallbackEffectSetDirection(void *effectPtr_, s32 dir_);
+static void CallbackEffectSetEventIndex(void *effectPtr_, u16 a1);
+static void CallbackEffectSetUnk_80AD670(void *effectPtr_, s32 a1_, s32 a2);
+static bool8 CallbackEffectSpriteRelatedCheck_80AD690(void *effectPtr_);
+static bool8 CallbackEffectSpriteRelated_80AD6B4(void *effectPtr_);
+static void CallbackEffectGetFlags(void *effectPtr_, u32 *flags);
+static void CallbackEffectSetFlags(void *effectPtr_, u32 flags);
+static void CallbackEffectClearFlags(void *effectPtr_, u32 flags);
+static s32 CallbackEffectMoveRelative(void *effectPtr_, PixelPos *pos);
 
 static const CallbackData gGroundEffectCallbacks = {
     .maybeId = 3,
@@ -118,6 +125,40 @@ static const CallbackData gGroundEffectCallbacks = {
     .func4C_spriteRelatedCheck = CallbackEffectSpriteRelatedCheck_80AD690,
     .func50_spriteRelated = CallbackEffectSpriteRelated_80AD6B4,
 };
+extern const u8 gUnknown_81185D8[];
+#define FAKE_FILENAME gUnknown_81185D8
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static const struct ScriptCommand gUnusedScript[] = {
+    DEBUGINFO, // Needs to be line 155
+    LABEL(0),
+    WAIT(0x78),
+    JUMP_LABEL(0),
+};
+//ALIGNED(4) const u8 gUnknown_81185D8[] = "../ground/ground_effect.c";
+
 
 void AllocGroundEffects()
 {
@@ -765,9 +806,6 @@ s16 sub_80AD360(s32 index_, PixelPos *pos)
     return parent->kind;
 }
 
-extern s32 sub_80AD3E0(GroundEffect *, PixelPos *);
-
-
 s16 sub_80AD3B4(s32 index_, PixelPos *pos)
 {
     s32 index = (s16)index_;
@@ -778,3 +816,371 @@ s16 sub_80AD3B4(s32 index_, PixelPos *pos)
     return parent->kind;
 }
 
+NAKED
+s32 sub_80AD3E0(GroundEffect *r0, PixelPos *r1)
+{
+    asm_unified(
+	"\tpush {r4-r7,lr}\n"
+	"\tmov r12, r0\n"
+	"\tldr r3, [r1]\n"
+	"\tldr r2, [r0, 0x14]\n"
+	"\tsubs r6, r3, r2\n"
+	"\tldr r1, [r1, 0x4]\n"
+	"\tldr r0, [r0, 0x18]\n"
+	"\tsubs r7, r1, r0\n"
+	"\tadds r4, r3, r2\n"
+	"\tadds r5, r1, r0\n"
+	"\tmov r1, r12\n"
+	"\tldr r0, [r1, 0x28]\n"
+	"\tcmp r6, r0\n"
+	"\tblt _080AD40E\n"
+	"\tldr r0, [r1, 0x30]\n"
+	"\tcmp r4, r0\n"
+	"\tbge _080AD40E\n"
+	"\tldr r0, [r1, 0x2C]\n"
+	"\tcmp r7, r0\n"
+	"\tblt _080AD40E\n"
+	"\tldr r0, [r1, 0x34]\n"
+	"\tcmp r5, r0\n"
+	"\tblt _080AD412\n"
+"_080AD40E:\n"
+	"\tmovs r0, 0x1\n"
+	"\tb _080AD428\n"
+"_080AD412:\n"
+	"\tmovs r0, 0x92\n"
+	"\tlsls r0, 1\n"
+	"\tadd r0, r12\n"
+	"\tstr r6, [r0]\n"
+	"\tstr r7, [r0, 0x4]\n"
+	"\tmovs r0, 0x96\n"
+	"\tlsls r0, 1\n"
+	"\tadd r0, r12\n"
+	"\tstr r4, [r0]\n"
+	"\tstr r5, [r0, 0x4]\n"
+	"\tmovs r0, 0\n"
+"_080AD428:\n"
+	"\tpop {r4-r7}\n"
+	"\tpop {r1}\n"
+	"\tbx r1");
+}
+
+NAKED
+s32 sub_80AD430(GroundEffect *r0, PixelPos *r1)
+{
+    asm_unified(
+	"\tpush {r4-r6,lr}\n"
+	"\tmov r12, r0\n"
+	"\tmovs r0, 0x92\n"
+	"\tlsls r0, 1\n"
+	"\tadd r0, r12\n"
+	"\tldr r0, [r0]\n"
+	"\tldr r2, [r1]\n"
+	"\tadds r5, r0, r2\n"
+	"\tmovs r0, 0x94\n"
+	"\tlsls r0, 1\n"
+	"\tadd r0, r12\n"
+	"\tldr r0, [r0]\n"
+	"\tldr r1, [r1, 0x4]\n"
+	"\tadds r6, r0, r1\n"
+	"\tmovs r0, 0x96\n"
+	"\tlsls r0, 1\n"
+	"\tadd r0, r12\n"
+	"\tldr r0, [r0]\n"
+	"\tadds r3, r0, r2\n"
+	"\tmovs r0, 0x98\n"
+	"\tlsls r0, 1\n"
+	"\tadd r0, r12\n"
+	"\tldr r0, [r0]\n"
+	"\tadds r4, r0, r1\n"
+	"\tmov r0, r12\n"
+	"\tldr r1, [r0, 0x28]\n"
+	"\tcmp r5, r1\n"
+	"\tbge _080AD470\n"
+	"\tadds r5, r1, 0\n"
+	"\tldr r0, [r0, 0xC]\n"
+	"\tadds r3, r1, r0\n"
+	"\tb _080AD47E\n"
+"_080AD470:\n"
+	"\tmov r2, r12\n"
+	"\tldr r1, [r2, 0x30]\n"
+	"\tcmp r3, r1\n"
+	"\tblt _080AD47E\n"
+	"\tldr r0, [r2, 0xC]\n"
+	"\tsubs r5, r1, r0\n"
+	"\tadds r3, r1, 0\n"
+"_080AD47E:\n"
+	"\tmov r0, r12\n"
+	"\tldr r1, [r0, 0x2C]\n"
+	"\tcmp r6, r1\n"
+	"\tbge _080AD48E\n"
+	"\tadds r6, r1, 0\n"
+	"\tldr r0, [r0, 0x10]\n"
+	"\tadds r4, r1, r0\n"
+	"\tb _080AD49C\n"
+"_080AD48E:\n"
+	"\tmov r2, r12\n"
+	"\tldr r1, [r2, 0x34]\n"
+	"\tcmp r4, r1\n"
+	"\tblt _080AD49C\n"
+	"\tldr r0, [r2, 0x10]\n"
+	"\tsubs r6, r1, r0\n"
+	"\tadds r4, r1, 0\n"
+"_080AD49C:\n"
+	"\tmovs r0, 0x92\n"
+	"\tlsls r0, 1\n"
+	"\tadd r0, r12\n"
+	"\tstr r5, [r0]\n"
+	"\tstr r6, [r0, 0x4]\n"
+	"\tmovs r0, 0x96\n"
+	"\tlsls r0, 1\n"
+	"\tadd r0, r12\n"
+	"\tstr r3, [r0]\n"
+	"\tstr r4, [r0, 0x4]\n"
+	"\tmovs r0, 0\n"
+	"\tpop {r4-r6}\n"
+	"\tpop {r1}\n"
+	"\tbx r1");
+
+}
+
+static s16 CallbackEffectGetIndex(void *ptr) 
+{
+    struct GroundEffect *groundObject = ptr;
+    return groundObject->id;
+}
+
+static void CallbackEffectGetSize(void *objectPtr_, PixelPos *out)
+{
+    struct GroundEffect *objectPtr = objectPtr_;
+    *out = objectPtr->unkC;
+}
+
+static void CallbackEffectSetHitboxPos(void *objectPtr_, PixelPos *posOrNull)
+{
+    struct GroundEffect *objectPtr = objectPtr_;
+
+    if (posOrNull != NULL) {
+        objectPtr->unk124.x = posOrNull->x - objectPtr->unk14.x;
+        objectPtr->unk12C.x = posOrNull->x + objectPtr->unk14.x;
+        objectPtr->unk124.y = posOrNull->y - objectPtr->unk14.y;
+        objectPtr->unk12C.y = posOrNull->y + objectPtr->unk14.y;
+    }
+    else {
+        objectPtr->unk124.x = objectPtr->unk20.x - objectPtr->unk14.x;
+        objectPtr->unk12C.x = objectPtr->unk20.x + objectPtr->unk14.x;
+        objectPtr->unk124.y = objectPtr->unk20.y - objectPtr->unk14.y;
+        objectPtr->unk12C.y = objectPtr->unk20.y + objectPtr->unk14.y;
+        objectPtr->unk134.x = objectPtr->unk134.y = 0;
+        if (objectPtr->direction != objectPtr->direction1) {
+            objectPtr->directionRelated = TRUE;
+        }
+        objectPtr->direction = objectPtr->direction1;
+    }
+}
+
+static void CallbackEffectSetPositionBounds(void *objectPtr_, PixelPos *from, PixelPos *to)
+{
+    struct GroundEffect *objectPtr = objectPtr_;
+
+    objectPtr->unk28 = *from;
+    objectPtr->unk30 = *to;
+}
+
+static void CallbackEffectGetHitboxCenter(void *objectPtr_, PixelPos *out)
+{
+    struct GroundEffect *objectPtr = objectPtr_;
+
+    out->x = objectPtr->unk124.x + objectPtr->unk14.x;
+    out->y = objectPtr->unk124.y + objectPtr->unk14.y;
+}
+
+static s32 CallbackEffectMoveReal(void *objectPtr_, PixelPos *pos)
+{
+    struct GroundEffect *objectPtr = objectPtr_;
+    return sub_80AD3E0(objectPtr, pos);
+}
+
+static void CallbackEffectGetPosHeightAndUnk(void *objectPtr_, u32 *height, u32 *unk)
+{
+    struct GroundEffect *objectPtr = objectPtr_;
+
+    *height = objectPtr->unk134.x;
+    *unk= objectPtr->unk134.y;
+}
+
+static void CallbackEffectSetPosHeight(void *objectPtr_, u32 height)
+{
+    struct GroundEffect *objectPtr = objectPtr_;
+    objectPtr->unk134.x = height;
+
+}
+
+static void CallbackEffectGetDirection(void *objectPtr_, s8 *dir)
+{
+    struct GroundEffect *objectPtr = objectPtr_;
+    *dir = objectPtr->direction;
+
+}
+
+static void CallbackEffectSetDirection(void *livesPtr_, s32 direction)
+{
+    struct GroundEffect *livesPtr = livesPtr_;
+    s32 dir = (s8) direction;
+
+    if (dir != -1) {
+        livesPtr->direction = dir;
+    }
+}
+
+static void CallbackEffectSetEventIndex(void *livesPtr_, u16 a1) {
+    struct GroundEffect *livesPtr = livesPtr_;
+
+    u32 r1;
+    u16 f1 = a1 & 0xFF;
+
+    if (f1 != 0)
+    {
+        r1 = gUnknown_81185F2[f1];
+    }
+    else
+    {
+         r1 = livesPtr->unk13E;
+    }
+
+    if(livesPtr->unk13E != (s16) r1)
+    {
+        livesPtr->unk13E = r1;
+        livesPtr->directionRelated = 1;
+    }
+    else if((livesPtr->unk13E & 0x1000))
+        livesPtr->directionRelated = 1;
+}
+
+static void CallbackEffectSetUnk_80AD670(void *objectPtr_, s32 a1_, s32 a2) {
+    struct GroundEffect *livesPtr = objectPtr_;
+
+    s32 a1Match = (s16) a1_;
+    #ifndef NONMATCHING
+    register s16 a1 asm("r2") = a1Match;
+    #else
+    s32 a1 = a1Match;
+    #endif
+
+    if (a1Match == 0) {
+        a1 = 448;
+    }
+
+    livesPtr->unk140 = a1;
+}
+
+static bool8 CallbackEffectSpriteRelatedCheck_80AD690(void *objectPtr_)
+{
+    struct GroundEffect *livesPtr = objectPtr_;
+
+    if (livesPtr->directionRelated) {
+        return TRUE;
+    }
+    else {
+        return sub_80A66F8(&livesPtr->unk144);
+    }
+}
+
+static bool8 CallbackEffectSpriteRelated_80AD6B4(void *objectPtr_)
+{
+    struct GroundEffect *livesPtr = objectPtr_;
+
+    if (livesPtr->unk140 != 0) {
+        return TRUE;
+    }
+    else {
+        return sub_80A671C(&livesPtr->unk144);
+    }
+}
+
+static void CallbackEffectGetFlags(void *livesPtr_, u32 *flags)
+{
+    struct GroundEffect *livesPtr = livesPtr_;
+
+    *flags = livesPtr->flags;
+}
+
+static void CallbackEffectSetFlags(void *livesPtr_, u32 flags)
+{
+    struct GroundEffect *livesPtr = livesPtr_;
+
+    sub_80AD0C8(livesPtr->id, flags);
+}
+
+static void CallbackEffectClearFlags(void *livesPtr_, u32 flags)
+{
+    struct GroundEffect *livesPtr = livesPtr_;
+
+    sub_80AD10C(livesPtr->id, flags);
+}
+
+static s32 CallbackEffectMoveRelative(void *livesPtr_, PixelPos *pos)
+{
+    struct GroundEffect *livesPtr = livesPtr_;
+
+    return sub_80AD430(livesPtr, pos);
+}
+
+extern DebugLocation gUnknown_811874C;
+extern DebugLocation gUnknown_8118758;
+extern s16 HandleAction(Action *action, DebugLocation *debug);
+
+void GroundEffect_Action(void)
+{
+    GroundEffect *objectPtr;
+    s32 i;
+    s32 ret;
+
+    for (objectPtr = &gGroundEffects[0], i = 0; i < NUM_GROUND_EFFECTS; i = (s16)(i + 1), objectPtr++)
+    {
+        if (objectPtr->kind != -1) {
+            ret = HandleAction(&objectPtr->action, &gUnknown_811874C);
+            switch(ret)
+            {
+                case 4:
+                    GroundEffect_Delete(i);
+                    continue;
+                case 0:
+                    ExecutePredefinedScript(&objectPtr->action, NULL, 1, &gUnknown_8118758);
+                    break;
+            }
+
+            if (objectPtr->directionRelated) {
+                objectPtr->directionRelated = FALSE;
+                sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1f00,(s8)objectPtr->unk13E);
+            }
+        }
+    }
+}
+
+void sub_80AD7AC(void)
+{
+    GroundEffect *objectPtr;
+    s32 i;
+    s32 minus1;
+
+
+    for (objectPtr = &gGroundEffects[0], i = 0, minus1 = -1; i < NUM_GROUND_EFFECTS; i = (s16)(i + 1), objectPtr++)
+    {
+        minus1 = (s16)minus1;
+        if (objectPtr->kind != (s16)minus1) {
+
+            PixelPos pos = {objectPtr->unk124.x + (objectPtr->unk14).x, objectPtr->unk124.y + (objectPtr->unk14).y};
+            s32 num = objectPtr->unk134.x + objectPtr->unk134.y;        
+
+            if ((sub_80A66D4(&objectPtr->unk144))) {
+                objectPtr->directionRelated = 0;
+                sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1f00,(s8)objectPtr->unk13E);
+            }
+            if (objectPtr->unk140 != 0) {
+                sub_80A7040(&objectPtr->unk144,objectPtr->unk140,objectPtr->direction,0);
+                objectPtr->unk140 = 0;
+            }
+            sub_80A7720(&objectPtr->unk144, &pos, num);
+        }
+    }
+}
