@@ -157,10 +157,11 @@ static const struct ScriptCommand gUnusedScript[] = {
     WAIT(0x78),
     JUMP_LABEL(0),
 };
-//ALIGNED(4) const u8 gUnknown_81185D8[] = "../ground/ground_effect.c";
+const u8 gUnknown_81185D8[] = "../ground/ground_effect.c";
 
+const s16 gUnknown_81185F2[] = { -1, 0x800, 0x801, 0x1000, 0};
 
-void AllocGroundEffects()
+void AllocGroundEffects(void)
 {
     s32 index;
     GroundEffect* current;
@@ -209,8 +210,8 @@ void GroundEffect_Select(s32 scriptID, s32 group, s32 sector)
     scriptID_s32 = (s16)scriptID;
     group_s32 = (s16)group;
     sector_s32 = (s8)sector;
-    scriptPtr = GetGroundScript(scriptID_s32, &gUnknown_8118610);
-    Log('\0',gUnknown_811861C, scriptID_s32, group_s32, sector_s32);
+    scriptPtr = GetGroundScript(scriptID_s32, DEBUG_LOC_PTR(gUnknown_81185D8, 0x106, "GroundEffect_Select"));
+    Log(0,"GroundEffect Select %3d  %3d  %3d", scriptID_s32, group_s32, sector_s32);
 
     groupPtr = &scriptPtr->groups[group_s32];
     sectorPtr = &groupPtr->sectors[sector_s32];
@@ -234,7 +235,7 @@ void GroundEffect_Cancel(s32 scriptID, s32 sector)
     sector_s32 = (s8) sector;
 
 
-    Log('\0',gUnknown_8118640, scriptID_s32);
+    Log(0,"GroundEffect Cancel %3d", scriptID_s32);
 
     index = 0;
     ptr = &gGroundEffects[0];
@@ -246,13 +247,13 @@ void GroundEffect_Cancel(s32 scriptID, s32 sector)
     }
 }
 
-void GroundEffect_CancelBlank()
+void GroundEffect_CancelBlank(void)
 {
     s32 index;
     GroundEffect *ptr;
     PixelPos pos;
 
-    Log(0, gUnknown_8118658); // "GroundEffect CancelBlank"
+    Log(0, "GroundEffect CancelBlank");
 
     index = 0;
     ptr = &gGroundEffects[0];
@@ -270,8 +271,7 @@ void GroundEffect_CancelBlank()
     }
 }
 
-// Unused
-s32 GroundEffect_Find(s32 a0_) {
+UNUSED s32 GroundEffect_Find(s32 a0_) {
     s32 index;
     s32 a0;
     GroundEffect *ptr;
@@ -289,7 +289,6 @@ s32 GroundEffect_Find(s32 a0_) {
     return -1;
 }
 
-// https://decomp.me/scratch/3VqaG  - 99.68% matched (Seth)
 s32 GroundEffect_Add(s32 _id, const GroundEffectData *effectData,s32 _group,s32 _sector)
 {
     struct GroundEffectTypeData *puVar4;
@@ -323,7 +322,7 @@ s32 GroundEffect_Add(s32 _id, const GroundEffectData *effectData,s32 _group,s32 
     }  
 
     parent = &gGroundEffects[id];
-    Log(0,gUnknown_8118674,id,effectData->kind,puVar4->type,group,sector);
+    Log(0,"GroundEffect Add id %3d  kind %3d  type %3d  group %3d  sector %3d",id,effectData->kind,puVar4->type,group,sector);
     bVar10 = parent->kind == -1;
     parent->id = id;
     parent->kind = effectData->kind;
@@ -374,7 +373,7 @@ s32 GroundEffect_Add(s32 _id, const GroundEffectData *effectData,s32 _group,s32 
     GetCurrentDungeonBounds(&parent->unk28,&parent->unk30);
     if (bVar10) {
         parent->unk13E = 0x800;
-        parent->directionRelated = 1;
+        parent->directionRelated = TRUE;
         parent->unk140 = 0;
         sub_80A7688(&parent->unk144,id,parent->kind,parent->flags);
     }
@@ -389,7 +388,7 @@ s32 GroundEffect_Add(s32 _id, const GroundEffectData *effectData,s32 _group,s32 
             return id;
     }
     SetPredefinedScript(&parent->action,0,script);
-    ExecutePredefinedScript(&parent->action,NULL,0,&gUnknown_81186CC);
+    ExecutePredefinedScript(&parent->action,NULL,0,DEBUG_LOC_PTR(gUnknown_81185D8, 0x210, "GroundEffect_Add"));
 
     return id;
 }
@@ -399,7 +398,7 @@ void GroundEffect_Delete(s32 _id)
     s32 id = (s16)_id;
     GroundEffect *parent = &gGroundEffects[id];
 
-    Log(0, gUnknown_81186D8, id);
+    Log(0, "GroundEffect Delete id %3d", id);
     sub_80A7714(&parent->unk144);
 
     InitAction2(&parent->action);
@@ -418,7 +417,7 @@ void sub_80AD0C8(s32 _id, s32 flags)
     }
 }
 
-void sub_80AD10C(s32 index_, s32 flag)
+static void sub_80AD10C(s32 index_, s32 flag)
 {
     s32 index = (s16)index_;
     GroundEffect *parent = &gGroundEffects[index];
@@ -441,7 +440,7 @@ Action *sub_80AD158(s32 index_)
         return NULL;
 }
 
-bool8 sub_80AD18C(s32 index_, ScriptInfoSmall *scriptInfo, s32 a2_)
+UNUSED bool8 sub_80AD18C(s32 index_, ScriptInfoSmall *scriptInfo, s32 a2_)
 {
     s32 index = (s16)index_;
     s32 a2 = (s16)a2_;
@@ -458,16 +457,16 @@ bool8 GroundEffect_ExecuteScript(s32 index_, void *a1, ScriptInfoSmall *script)
     s32 index = (s16)index_;
     GroundEffect *parent = &gGroundEffects[index];
 
-    Log(0, gUnknown_81186F4, index);
+    Log(0, "GroundEffect Execute %3d  ", index);
 
     if(parent->kind != -1)
     {
-        GroundScript_ExecutePP(&parent->action, (ActionUnkIds *)a1, script, &gUnknown_811872C);
-        parent->directionRelated = 1;
-        return 1;
+        GroundScript_ExecutePP(&parent->action, (ActionUnkIds *)a1, script, DEBUG_LOC_PTR(gUnknown_81185D8, 0x290, "GroundEffect_ExecuteScript"));
+        parent->directionRelated = TRUE;
+        return TRUE;
     }
     else {
-        return 0;
+        return FALSE;
     }
 }
 
@@ -561,6 +560,7 @@ s16 sub_80AD3B4(s32 index_, PixelPos *pos)
     return parent->kind;
 }
 
+// https://decomp.me/scratch/X0Sfx  - 79.62% matched (Seth)
 NAKED
 s32 sub_80AD3E0(GroundEffect *r0, PixelPos *r1)
 {
@@ -609,6 +609,7 @@ s32 sub_80AD3E0(GroundEffect *r0, PixelPos *r1)
 	"\tbx r1");
 }
 
+// https://decomp.me/scratch/MUVaT - 98.53% matched (Seth)
 NAKED
 s32 sub_80AD430(GroundEffect *r0, PixelPos *r1)
 {
@@ -795,10 +796,10 @@ static void CallbackEffectSetEventIndex(void *livesPtr_, u16 a1) {
     if(livesPtr->unk13E != (s16) r1)
     {
         livesPtr->unk13E = r1;
-        livesPtr->directionRelated = 1;
+        livesPtr->directionRelated = TRUE;
     }
     else if((livesPtr->unk13E & 0x1000))
-        livesPtr->directionRelated = 1;
+        livesPtr->directionRelated = TRUE;
 }
 
 static void CallbackEffectSetUnk_80AD670(void *objectPtr_, s32 a1_, s32 a2) {
@@ -870,8 +871,6 @@ static s32 CallbackEffectMoveRelative(void *livesPtr_, PixelPos *pos)
     return sub_80AD430(livesPtr, pos);
 }
 
-extern DebugLocation gUnknown_811874C;
-extern DebugLocation gUnknown_8118758;
 extern s16 HandleAction(Action *action, DebugLocation *debug);
 
 void GroundEffect_Action(void)
@@ -883,14 +882,14 @@ void GroundEffect_Action(void)
     for (objectPtr = &gGroundEffects[0], i = 0; i < NUM_GROUND_EFFECTS; i = (s16)(i + 1), objectPtr++)
     {
         if (objectPtr->kind != -1) {
-            ret = HandleAction(&objectPtr->action, &gUnknown_811874C);
+            ret = HandleAction(&objectPtr->action, DEBUG_LOC_PTR(gUnknown_81185D8, 0x560, "GroundEffect_Action"));
             switch(ret)
             {
                 case 4:
                     GroundEffect_Delete(i);
                     continue;
                 case 0:
-                    ExecutePredefinedScript(&objectPtr->action, NULL, 1, &gUnknown_8118758);
+                    ExecutePredefinedScript(&objectPtr->action, NULL, 1, DEBUG_LOC_PTR(gUnknown_81185D8, 0x56A, "GroundEffect_Action"));
                     break;
             }
 
@@ -918,7 +917,7 @@ void sub_80AD7AC(void)
             s32 num = objectPtr->unk134.x + objectPtr->unk134.y;        
 
             if ((sub_80A66D4(&objectPtr->unk144))) {
-                objectPtr->directionRelated = 0;
+                objectPtr->directionRelated = FALSE;
                 sub_80A6EFC(&objectPtr->unk144,objectPtr->unk13E & 0x1f00,(s8)objectPtr->unk13E);
             }
             if (objectPtr->unk140 != 0) {
