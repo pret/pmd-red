@@ -43,7 +43,7 @@ IWRAM_INIT GroundEffect* gGroundEffects = NULL;  // size 16 array
 
 struct GroundEffectTypeData
 {
-    s16 unk0;
+    s16 type;
     u8 unk2;
     u8 unk3;
 };
@@ -290,363 +290,108 @@ s32 GroundEffect_Find(s32 a0_) {
 }
 
 // https://decomp.me/scratch/3VqaG  - 99.68% matched (Seth)
-NAKED
 s32 GroundEffect_Add(s32 _id, const GroundEffectData *effectData,s32 _group,s32 _sector)
 {
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r7, r10\n"
-	"\tmov r6, r9\n"
-	"\tmov r5, r8\n"
-	"\tpush {r5-r7}\n"
-	"\tsub sp, 0x10\n"
-	"\tadds r7, r1, 0\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r6, r0, 16\n"
-	"\tlsls r2, 16\n"
-	"\tasrs r2, 16\n"
-	"\tmov r10, r2\n"
-	"\tlsls r3, 24\n"
-	"\tasrs r3, 24\n"
-	"\tmov r9, r3\n"
-	"\tldrb r0, [r7]\n"
-	"\tlsls r0, 2\n"
-	"\tldr r1, _080ACE08\n"
-	"\tadds r0, r1\n"
-	"\tmov r8, r0\n"
-	"\tldr r3, _080ACE0C\n"
-	"\tcmp r6, 0\n"
-	"\tbge _080ACE38\n"
-	"\tmovs r2, 0\n"
-	"\tldr r5, [r3]\n"
-	"\tmovs r0, 0x6\n"
-	"\tldrsh r1, [r5, r0]\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tcmp r1, r0\n"
-	"\tbne _080ACE10\n"
-	"\tmovs r6, 0\n"
-	"\tb _080ACE38\n"
-	"\t.align 2, 0\n"
-"_080ACE08: .4byte gGroundEffectTypes\n"
-"_080ACE0C: .4byte gGroundEffects\n"
-"_080ACE10:\n"
-	"\tadds r0, r2, 0x1\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r2, r0, 16\n"
-	"\tmovs r1, 0xE2\n"
-	"\tlsls r1, 1\n"
-	"\tadds r5, r1\n"
-	"\tcmp r2, 0xF\n"
-	"\tbgt _080ACE2E\n"
-	"\tmovs r4, 0x6\n"
-	"\tldrsh r1, [r5, r4]\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tcmp r1, r0\n"
-	"\tbne _080ACE10\n"
-	"\tadds r6, r2, 0\n"
-"_080ACE2E:\n"
-	"\tcmp r6, 0\n"
-	"\tbge _080ACE38\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tb _080AD062\n"
-"_080ACE38:\n"
-	"\tlsls r0, r6, 3\n"
-	"\tsubs r0, r6\n"
-	"\tlsls r0, 4\n"
-	"\tadds r0, r6\n"
-	"\tlsls r0, 2\n"
-	"\tldr r1, [r3]\n"
-	"\tadds r5, r1, r0\n"
-	"\tldr r1, _080ACE9C\n"
-	"\tldrb r3, [r7]\n"
-	"\tmov r2, r8\n"
-	"\tmovs r4, 0\n"
-	"\tldrsh r0, [r2, r4]\n"
-	"\tstr r0, [sp]\n"
-	"\tmov r0, r10\n"
-	"\tstr r0, [sp, 0x4]\n"
-	"\tmov r2, r9\n"
-	"\tstr r2, [sp, 0x8]\n"
-	"\tmovs r0, 0\n"
-	"\tadds r2, r6, 0\n"
-	"\tbl Log\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r3, 0x6\n"
-	"\tldrsh r1, [r5, r3]\n"
-	"\tmovs r0, 0x1\n"
-	"\tnegs r0, r0\n"
-	"\tcmp r1, r0\n"
-	"\tbne _080ACE72\n"
-	"\tmovs r2, 0x1\n"
-"_080ACE72:\n"
-	"\tstr r2, [sp, 0xC]\n"
-	"\tstrh r6, [r5, 0x4]\n"
-	"\tldrb r0, [r7]\n"
-	"\tstrh r0, [r5, 0x6]\n"
-	"\tmov r4, r10\n"
-	"\tstrh r4, [r5, 0x8]\n"
-	"\tmov r0, r9\n"
-	"\tstrb r0, [r5, 0xA]\n"
-	"\tmov r1, r8\n"
-	"\tldrh r0, [r1]\n"
-	"\tsubs r0, 0x1\n"
-	"\tlsls r0, 16\n"
-	"\tasrs r0, 16\n"
-	"\tcmp r0, 0x4\n"
-	"\tbhi _080ACEEC\n"
-	"\tlsls r0, 2\n"
-	"\tldr r1, _080ACEA0\n"
-	"\tadds r0, r1\n"
-	"\tldr r0, [r0]\n"
-	"\tmov pc, r0\n"
-	"\t.align 2, 0\n"
-"_080ACE9C: .4byte gUnknown_8118674\n"
-"_080ACEA0: .4byte _080ACEA4\n"
-	"\t.align 2, 0\n"
-"_080ACEA4:\n"
-	"\t.4byte _080ACEB8\n"
-	"\t.4byte _080ACEEC\n"
-	"\t.4byte _080ACEC4\n"
-	"\t.4byte _080ACED0\n"
-	"\t.4byte _080ACEDC\n"
-"_080ACEB8:\n"
-	"\tmovs r2, 0x8E\n"
-	"\tlsls r2, 1\n"
-	"\tadds r1, r5, r2\n"
-	"\tmovs r0, 0x81\n"
-	"\tlsls r0, 22\n"
-	"\tb _080ACEF4\n"
-"_080ACEC4:\n"
-	"\tmovs r4, 0x8E\n"
-	"\tlsls r4, 1\n"
-	"\tadds r1, r5, r4\n"
-	"\tmovs r0, 0x83\n"
-	"\tlsls r0, 18\n"
-	"\tb _080ACEF4\n"
-"_080ACED0:\n"
-	"\tmovs r0, 0x8E\n"
-	"\tlsls r0, 1\n"
-	"\tadds r1, r5, r0\n"
-	"\tmovs r0, 0x88\n"
-	"\tlsls r0, 22\n"
-	"\tb _080ACEF4\n"
-"_080ACEDC:\n"
-	"\tmovs r2, 0x8E\n"
-	"\tlsls r2, 1\n"
-	"\tadds r1, r5, r2\n"
-	"\tldr r0, _080ACEE8\n"
-	"\tb _080ACEF4\n"
-	"\t.align 2, 0\n"
-"_080ACEE8: .4byte 0x22020000\n"
-"_080ACEEC:\n"
-	"\tmovs r3, 0x8E\n"
-	"\tlsls r3, 1\n"
-	"\tadds r1, r5, r3\n"
-	"\tldr r0, _080ACF08\n"
-"_080ACEF4:\n"
-	"\tstr r0, [r1]\n"
-	"\tmov r4, r8\n"
-	"\tldrb r0, [r4, 0x2]\n"
-	"\tcmp r0, 0\n"
-	"\tbne _080ACF0C\n"
-	"\tldrb r0, [r7, 0x2]\n"
-	"\tlsls r0, 11\n"
-	"\tstr r0, [r5, 0xC]\n"
-	"\tldrb r0, [r7, 0x3]\n"
-	"\tb _080ACF16\n"
-	"\t.align 2, 0\n"
-"_080ACF08: .4byte 0x220c0000\n"
-"_080ACF0C:\n"
-	"\tmov r1, r8\n"
-	"\tldrb r0, [r1, 0x2]\n"
-	"\tlsls r0, 11\n"
-	"\tstr r0, [r5, 0xC]\n"
-	"\tldrb r0, [r1, 0x3]\n"
-"_080ACF16:\n"
-	"\tlsls r0, 11\n"
-	"\tstr r0, [r5, 0x10]\n"
-	"\tldr r0, [r5, 0xC]\n"
-	"\tlsrs r1, r0, 31\n"
-	"\tadds r0, r1\n"
-	"\tasrs r0, 1\n"
-	"\tstr r0, [r5, 0x14]\n"
-	"\tldr r0, [r5, 0x10]\n"
-	"\tlsrs r1, r0, 31\n"
-	"\tadds r0, r1\n"
-	"\tasrs r0, 1\n"
-	"\tstr r0, [r5, 0x18]\n"
-	"\tldrb r0, [r7, 0x1]\n"
-	"\tstrb r0, [r5, 0x1C]\n"
-	"\tadds r2, r7, 0x4\n"
-	"\tadds r4, r5, 0\n"
-	"\tadds r4, 0x20\n"
-	"\tldrb r1, [r2, 0x2]\n"
-	"\tmovs r0, 0x4\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbne _080ACF5A\n"
-	"\tldrb r0, [r7, 0x4]\n"
-	"\tlsls r3, r0, 11\n"
-	"\tstr r3, [r5, 0x20]\n"
-	"\tldrb r1, [r2, 0x2]\n"
-	"\tmovs r0, 0x2\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _080ACF5A\n"
-	"\tmovs r1, 0x80\n"
-	"\tlsls r1, 3\n"
-	"\tadds r0, r3, r1\n"
-	"\tstr r0, [r5, 0x20]\n"
-"_080ACF5A:\n"
-	"\tldrb r1, [r2, 0x3]\n"
-	"\tmovs r0, 0x4\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbne _080ACF7C\n"
-	"\tldrb r0, [r2, 0x1]\n"
-	"\tlsls r3, r0, 11\n"
-	"\tstr r3, [r4, 0x4]\n"
-	"\tldrb r1, [r2, 0x3]\n"
-	"\tmovs r0, 0x2\n"
-	"\tands r0, r1\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _080ACF7C\n"
-	"\tmovs r2, 0x80\n"
-	"\tlsls r2, 3\n"
-	"\tadds r0, r3, r2\n"
-	"\tstr r0, [r4, 0x4]\n"
-"_080ACF7C:\n"
-	"\tldr r3, [sp, 0xC]\n"
-	"\tcmp r3, 0\n"
-	"\tbeq _080ACFD2\n"
-	"\tldrb r1, [r5, 0x1C]\n"
-	"\tmovs r4, 0x90\n"
-	"\tlsls r4, 1\n"
-	"\tadds r0, r5, r4\n"
-	"\tmovs r3, 0\n"
-	"\tstrb r1, [r0]\n"
-	"\tmovs r0, 0x92\n"
-	"\tlsls r0, 1\n"
-	"\tadds r2, r5, r0\n"
-	"\tldr r0, [r5, 0x20]\n"
-	"\tldr r1, [r5, 0x14]\n"
-	"\tsubs r0, r1\n"
-	"\tstr r0, [r2]\n"
-	"\tmovs r1, 0x96\n"
-	"\tlsls r1, 1\n"
-	"\tadds r2, r5, r1\n"
-	"\tldr r0, [r5, 0x20]\n"
-	"\tldr r1, [r5, 0x14]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r2]\n"
-	"\tadds r4, 0x8\n"
-	"\tadds r2, r5, r4\n"
-	"\tldr r0, [r5, 0x24]\n"
-	"\tldr r1, [r5, 0x18]\n"
-	"\tsubs r0, r1\n"
-	"\tstr r0, [r2]\n"
-	"\tmovs r0, 0x98\n"
-	"\tlsls r0, 1\n"
-	"\tadds r2, r5, r0\n"
-	"\tldr r0, [r5, 0x24]\n"
-	"\tldr r1, [r5, 0x18]\n"
-	"\tadds r0, r1\n"
-	"\tstr r0, [r2]\n"
-	"\tmovs r2, 0x9A\n"
-	"\tlsls r2, 1\n"
-	"\tadds r1, r5, r2\n"
-	"\tadds r4, 0x10\n"
-	"\tadds r0, r5, r4\n"
-	"\tstr r3, [r0]\n"
-	"\tstr r3, [r1]\n"
-"_080ACFD2:\n"
-	"\tadds r0, r5, 0\n"
-	"\tadds r0, 0x28\n"
-	"\tadds r1, r5, 0\n"
-	"\tadds r1, 0x30\n"
-	"\tbl GetCurrentDungeonBounds\n"
-	"\tldr r0, [sp, 0xC]\n"
-	"\tcmp r0, 0\n"
-	"\tbeq _080AD01A\n"
-	"\tmovs r2, 0x9F\n"
-	"\tlsls r2, 1\n"
-	"\tadds r1, r5, r2\n"
-	"\tmovs r2, 0\n"
-	"\tmovs r0, 0x80\n"
-	"\tlsls r0, 4\n"
-	"\tstrh r0, [r1]\n"
-	"\tmovs r3, 0x9E\n"
-	"\tlsls r3, 1\n"
-	"\tadds r1, r5, r3\n"
-	"\tmovs r0, 0x1\n"
-	"\tstrb r0, [r1]\n"
-	"\tmovs r4, 0xA0\n"
-	"\tlsls r4, 1\n"
-	"\tadds r0, r5, r4\n"
-	"\tstrh r2, [r0]\n"
-	"\tmovs r1, 0xA2\n"
-	"\tlsls r1, 1\n"
-	"\tadds r0, r5, r1\n"
-	"\tmovs r3, 0x6\n"
-	"\tldrsh r2, [r5, r3]\n"
-	"\tsubs r4, 0x24\n"
-	"\tadds r1, r5, r4\n"
-	"\tldr r3, [r1]\n"
-	"\tadds r1, r6, 0\n"
-	"\tbl sub_80A7688\n"
-"_080AD01A:\n"
-	"\tadds r4, r5, 0\n"
-	"\tadds r4, 0x38\n"
-	"\tldr r1, _080AD074\n"
-	"\tmov r0, r9\n"
-	"\tstr r0, [sp]\n"
-	"\tadds r0, r4, 0\n"
-	"\tadds r2, r5, 0\n"
-	"\tmov r3, r10\n"
-	"\tbl InitActionWithParams\n"
-	"\tldr r2, [r7, 0x8]\n"
-	"\tcmp r2, 0\n"
-	"\tbne _080AD04C\n"
-	"\tmov r1, r8\n"
-	"\tmovs r3, 0\n"
-	"\tldrsh r0, [r1, r3]\n"
-	"\tcmp r0, 0x1\n"
-	"\tbne _080AD048\n"
-	"\tldr r0, _080AD078\n"
-	"\tmovs r1, 0xB0\n"
-	"\tlsls r1, 2\n"
-	"\tadds r0, r1\n"
-	"\tldr r2, [r0]\n"
-"_080AD048:\n"
-	"\tcmp r2, 0\n"
-	"\tbeq _080AD060\n"
-"_080AD04C:\n"
-	"\tadds r0, r4, 0\n"
-	"\tmovs r1, 0\n"
-	"\tbl SetPredefinedScript\n"
-	"\tldr r3, _080AD07C\n"
-	"\tadds r0, r4, 0\n"
-	"\tmovs r1, 0\n"
-	"\tmovs r2, 0\n"
-	"\tbl ExecutePredefinedScript\n"
-"_080AD060:\n"
-	"\tadds r0, r6, 0\n"
-"_080AD062:\n"
-	"\tadd sp, 0x10\n"
-	"\tpop {r3-r5}\n"
-	"\tmov r8, r3\n"
-	"\tmov r9, r4\n"
-	"\tmov r10, r5\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r1}\n"
-	"\tbx r1\n"
-	"\t.align 2, 0\n"
-"_080AD074: .4byte gGroundEffectCallbacks\n"
-"_080AD078: .4byte gFunctionScriptTable\n"
-"_080AD07C: .4byte gUnknown_81186CC");
+    struct GroundEffectTypeData *puVar4;
+    s32 group;
+    const ScriptCommand *script;
+    s32 sector;
+    GroundEffect *parent;
+    s32 id;
+    bool8 bVar10;
+    s32 index;
+
+    id = (short)_id;
+    group = (short)_group;
+    sector = (s8)_sector;
+
+    puVar4 = &gGroundEffectTypes[effectData->kind];
+
+    if (id < 0) {
+        for(index = 0, parent = gGroundEffects; index < 0x10; index = (s16)(index + 1), parent++)
+        {
+            if(parent->kind == -1)
+            {
+                id = index;
+                break;
+            }
+        }
+
+    }
+    if (id < 0) {
+        return -1;
+    }  
+
+    parent = &gGroundEffects[id];
+    Log(0,gUnknown_8118674,id,effectData->kind,puVar4->type,group,sector);
+    bVar10 = parent->kind == -1;
+    parent->id = id;
+    parent->kind = effectData->kind;
+    parent->group = group;
+    parent->sector = sector;
+    switch(puVar4->type) {
+        case 1:
+            parent->flags = 0x20400000;
+            break;
+        case 2:
+            parent->flags = 0x220c0000;
+            break;
+        case 3:
+            parent->flags = 0x020c0000;
+            break;
+        case 4:
+            parent->flags = 0x22000000;
+            break;
+        case 5:
+            parent->flags = 0x22020000;
+            break;
+        default:
+            parent->flags = 0x220c0000;
+            break;
+    }
+    if (puVar4->unk2 == '\0') {
+        parent->unkC.x = effectData->width << 0xb;
+        parent->unkC.y = effectData->height << 0xB;
+    }
+    else {
+        parent->unkC.x = puVar4->unk2 << 0xb;
+        parent->unkC.y = puVar4->unk3 << 0xb;
+    }
+    parent->unk14.x = parent->unkC.x / 2;
+    parent->unk14.y = parent->unkC.y / 2;
+    parent->direction1 = effectData->unk1;
+
+    SetUnkInGroundEvent(&effectData->pos, &parent->unk20);
+
+    if (bVar10) {
+        parent->direction = parent->direction1;
+        parent->unk124.x = parent->unk20.x - parent->unk14.x;
+        parent->unk12C.x = parent->unk20.x + parent->unk14.x;
+        parent->unk124.y = parent->unk20.y - parent->unk14.y;
+        parent->unk12C.y = parent->unk20.y + parent->unk14.y;
+        parent->unk134.x = parent->unk134.y = 0;
+    }
+    GetCurrentDungeonBounds(&parent->unk28,&parent->unk30);
+    if (bVar10) {
+        parent->unk13E = 0x800;
+        parent->directionRelated = 1;
+        parent->unk140 = 0;
+        sub_80A7688(&parent->unk144,id,parent->kind,parent->flags);
+    }
+
+    InitActionWithParams(&parent->action,&gGroundEffectCallbacks,parent,group,sector);
+    script = effectData->script;
+    if (script == NULL) {
+        if (puVar4->type == 1) {
+            script = gFunctionScriptTable[58].script;
+        }
+        if (script == NULL) 
+            return id;
+    }
+    SetPredefinedScript(&parent->action,0,script);
+    ExecutePredefinedScript(&parent->action,NULL,0,&gUnknown_81186CC);
+
+    return id;
 }
 
 void GroundEffect_Delete(s32 _id)
