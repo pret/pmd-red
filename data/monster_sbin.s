@@ -57,16 +57,7 @@ ax_sprite 0, 0
 .endm
 
 @ It seems pksdir is put every 10 mons
-.include "data/ax/bulbasaur.inc"
-.include "data/ax/ivysaur.inc"
-.include "data/ax/venusaur.inc"
-.include "data/ax/charmander.inc"
-.include "data/ax/charmeleon.inc"
-.include "data/ax/charizard.inc"
-.include "data/ax/squirtle.inc"
-.include "data/ax/wartortle.inc"
-.include "data/ax/blastoise.inc"
-.include "data/ax/caterpie.inc"
+
 .string "pksdir0\0"
 .include "data/ax/metapod.inc"
 .include "data/ax/butterfree.inc"

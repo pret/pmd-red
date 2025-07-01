@@ -961,6 +961,8 @@ SECTIONS {
     ALIGN(4)
     {
         src/monster_sbin.o(.rodata);
+        src/monster_files_table.o(.rodata);
+        src/monster_gfx1.o(.rodata);
         data/monster_sbin.o(.rodata);
         src/monster_sbin_palet.o(.rodata);
     } > ROM =0
