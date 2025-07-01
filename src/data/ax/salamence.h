@@ -1226,6 +1226,7 @@ static const ax_pose sSalamencePose186[] = {
 static const ax_pose sSalamencePose187[] = {
 	AX_POSE(159, OAM1(225, ST_OAM_SQUARE     , 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(160, OAM1(225, ST_OAM_V_RECTANGLE, 1), OAM2(224, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(16, 3, 5)),
+	AX_POSE(-1, OAM1(225, ST_OAM_V_RECTANGLE, 1), OAM2(14, ST_OAM_SIZE_2, FLIP(1, 0), 0, 1), OAM3(16, 3, 5)),
 	AX_POSE(52, OAM1(249, ST_OAM_SQUARE     , 1), OAM2(247, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(24, 3, 5)),
 	AX_POSE_TERMINATOR
 };

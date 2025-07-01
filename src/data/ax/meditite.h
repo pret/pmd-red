@@ -485,21 +485,25 @@ static const ax_pose sMedititePose113[] = {
 };
 static const ax_pose sMedititePose114[] = {
 	AX_POSE(34, OAM1(242, ST_OAM_SQUARE     , 1), OAM2(249, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(242, ST_OAM_SQUARE     , 1), OAM2(255, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(0, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(1, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose115[] = {
 	AX_POSE(35, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(245, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(0, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose116[] = {
 	AX_POSE(36, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(245, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(0, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose117[] = {
 	AX_POSE(37, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(245, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(0, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 5)),
 	AX_POSE_TERMINATOR
 };
@@ -509,21 +513,25 @@ static const ax_pose sMedititePose118[] = {
 };
 static const ax_pose sMedititePose119[] = {
 	AX_POSE(34, OAM1(243, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(242, ST_OAM_SQUARE     , 1), OAM2(1, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(0, 3, 3)),
 	AX_POSE(3, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(1, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose120[] = {
 	AX_POSE(35, OAM1(239, ST_OAM_SQUARE     , 1), OAM2(247, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(253, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(3, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(4, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose121[] = {
 	AX_POSE(36, OAM1(239, ST_OAM_SQUARE     , 1), OAM2(247, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(253, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(3, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(4, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose122[] = {
 	AX_POSE(37, OAM1(239, ST_OAM_SQUARE     , 1), OAM2(247, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(253, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(3, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(4, 3, 5)),
 	AX_POSE_TERMINATOR
 };
@@ -534,21 +542,25 @@ static const ax_pose sMedititePose123[] = {
 static const ax_pose sMedititePose124[] = {
 	AX_POSE(34, OAM1(242, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(0, 3, 3)),
 	AX_POSE(6, OAM1(233, ST_OAM_V_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(1, 3, 5)),
+	AX_POSE(-1, OAM1(241, ST_OAM_SQUARE     , 1), OAM2(4, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(0, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose125[] = {
 	AX_POSE(35, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(252, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(6, OAM1(233, ST_OAM_V_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(4, 3, 5)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose126[] = {
 	AX_POSE(36, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(252, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(6, OAM1(233, ST_OAM_V_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(4, 3, 5)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose127[] = {
 	AX_POSE(37, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(252, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(6, OAM1(233, ST_OAM_V_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(4, 3, 5)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose128[] = {
@@ -558,21 +570,25 @@ static const ax_pose sMedititePose128[] = {
 static const ax_pose sMedititePose129[] = {
 	AX_POSE(9, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(34, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(241, ST_OAM_SQUARE     , 1), OAM2(4, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose130[] = {
 	AX_POSE(9, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(35, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose131[] = {
 	AX_POSE(9, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(36, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose132[] = {
 	AX_POSE(9, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(37, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose133[] = {
@@ -582,21 +598,25 @@ static const ax_pose sMedititePose133[] = {
 static const ax_pose sMedititePose134[] = {
 	AX_POSE(12, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(34, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(2, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose135[] = {
 	AX_POSE(12, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(35, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(242, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose136[] = {
 	AX_POSE(12, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(36, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(242, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose137[] = {
 	AX_POSE(12, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(37, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(242, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose138[] = {
@@ -606,21 +626,25 @@ static const ax_pose sMedititePose138[] = {
 static const ax_pose sMedititePose139[] = {
 	AX_POSE(9, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(34, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(255, ST_OAM_SIZE_0, FLIP(1, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(241, ST_OAM_SQUARE     , 1), OAM2(245, ST_OAM_SIZE_0, FLIP(1, 0), 2, 0), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose140[] = {
 	AX_POSE(9, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(35, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(241, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose141[] = {
 	AX_POSE(9, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(36, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(241, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose142[] = {
 	AX_POSE(9, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(37, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(16, 3, 3)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(241, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(16, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose143[] = {
@@ -630,21 +654,25 @@ static const ax_pose sMedititePose143[] = {
 static const ax_pose sMedititePose144[] = {
 	AX_POSE(34, OAM1(242, ST_OAM_SQUARE     , 1), OAM2(249, ST_OAM_SIZE_0, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(6, OAM1(233, ST_OAM_V_RECTANGLE, 1), OAM2(249, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(1, 3, 5)),
+	AX_POSE(-1, OAM1(241, ST_OAM_SQUARE     , 1), OAM2(245, ST_OAM_SIZE_0, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose145[] = {
 	AX_POSE(35, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(245, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(6, OAM1(233, ST_OAM_V_RECTANGLE, 1), OAM2(249, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 5)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(241, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose146[] = {
 	AX_POSE(36, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(245, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(6, OAM1(233, ST_OAM_V_RECTANGLE, 1), OAM2(249, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 5)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(241, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose147[] = {
 	AX_POSE(37, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(245, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(6, OAM1(233, ST_OAM_V_RECTANGLE, 1), OAM2(249, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 5)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(241, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose148[] = {
@@ -653,21 +681,25 @@ static const ax_pose sMedititePose148[] = {
 };
 static const ax_pose sMedititePose149[] = {
 	AX_POSE(34, OAM1(243, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_0, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(242, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(3, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(1, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose150[] = {
 	AX_POSE(35, OAM1(239, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(3, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose151[] = {
 	AX_POSE(36, OAM1(239, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(3, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMedititePose152[] = {
 	AX_POSE(37, OAM1(239, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
+	AX_POSE(-1, OAM1(238, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_1, FLIP(1, 0), 2, 0), OAM3(0, 3, 3)),
 	AX_POSE(3, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(244, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 5)),
 	AX_POSE_TERMINATOR
 };

@@ -407,6 +407,7 @@ static const ax_pose sDeoxysSpeedPose97[] = {
 };
 static const ax_pose sDeoxysSpeedPose98[] = {
 	AX_POSE(48, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(49, OAM1(243, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(1, 3, 9)),
 	AX_POSE(50, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(9, 3, 9)),
 	AX_POSE(51, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
@@ -415,6 +416,7 @@ static const ax_pose sDeoxysSpeedPose98[] = {
 };
 static const ax_pose sDeoxysSpeedPose99[] = {
 	AX_POSE(53, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(49, OAM1(243, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(1, 3, 9)),
 	AX_POSE(50, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(9, 3, 9)),
 	AX_POSE(51, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
@@ -423,6 +425,7 @@ static const ax_pose sDeoxysSpeedPose99[] = {
 };
 static const ax_pose sDeoxysSpeedPose100[] = {
 	AX_POSE(54, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(49, OAM1(243, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(50, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(51, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
@@ -431,6 +434,7 @@ static const ax_pose sDeoxysSpeedPose100[] = {
 };
 static const ax_pose sDeoxysSpeedPose101[] = {
 	AX_POSE(55, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(49, OAM1(243, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(50, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(51, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
@@ -439,6 +443,7 @@ static const ax_pose sDeoxysSpeedPose101[] = {
 };
 static const ax_pose sDeoxysSpeedPose102[] = {
 	AX_POSE(56, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(49, OAM1(243, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(50, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(51, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
@@ -447,6 +452,7 @@ static const ax_pose sDeoxysSpeedPose102[] = {
 };
 static const ax_pose sDeoxysSpeedPose103[] = {
 	AX_POSE(57, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(49, OAM1(243, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(50, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(51, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
@@ -466,6 +472,7 @@ static const ax_pose sDeoxysSpeedPose105[] = {
 };
 static const ax_pose sDeoxysSpeedPose106[] = {
 	AX_POSE(48, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(1, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(231, ST_OAM_SQUARE     , 1), OAM2(5, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE(58, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(1, 3, 9)),
 	AX_POSE(59, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(9, 3, 9)),
 	AX_POSE(60, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
@@ -475,6 +482,7 @@ static const ax_pose sDeoxysSpeedPose106[] = {
 };
 static const ax_pose sDeoxysSpeedPose107[] = {
 	AX_POSE(53, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(1, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(231, ST_OAM_SQUARE     , 1), OAM2(5, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE(58, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(1, 3, 9)),
 	AX_POSE(59, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(9, 3, 9)),
 	AX_POSE(60, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
@@ -484,6 +492,7 @@ static const ax_pose sDeoxysSpeedPose107[] = {
 };
 static const ax_pose sDeoxysSpeedPose108[] = {
 	AX_POSE(54, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(253, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(1, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE(58, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(59, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(60, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
@@ -493,6 +502,7 @@ static const ax_pose sDeoxysSpeedPose108[] = {
 };
 static const ax_pose sDeoxysSpeedPose109[] = {
 	AX_POSE(55, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(253, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(1, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE(58, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(59, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(60, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
@@ -502,6 +512,7 @@ static const ax_pose sDeoxysSpeedPose109[] = {
 };
 static const ax_pose sDeoxysSpeedPose110[] = {
 	AX_POSE(56, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(253, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(1, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE(58, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(59, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(60, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
@@ -511,6 +522,7 @@ static const ax_pose sDeoxysSpeedPose110[] = {
 };
 static const ax_pose sDeoxysSpeedPose111[] = {
 	AX_POSE(57, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(253, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(1, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE(58, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(59, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(251, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(60, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
@@ -536,6 +548,7 @@ static const ax_pose sDeoxysSpeedPose114[] = {
 	AX_POSE(64, OAM1(244, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(9, 3, 9)),
 	AX_POSE(65, OAM1(236, ST_OAM_H_RECTANGLE, 1), OAM2(239, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
 	AX_POSE(66, OAM1(220, ST_OAM_H_RECTANGLE, 1), OAM2(252, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(15, 3, 9)),
+	AX_POSE(-1, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(9, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose115[] = {
@@ -544,6 +557,7 @@ static const ax_pose sDeoxysSpeedPose115[] = {
 	AX_POSE(64, OAM1(244, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(9, 3, 9)),
 	AX_POSE(65, OAM1(236, ST_OAM_H_RECTANGLE, 1), OAM2(239, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
 	AX_POSE(66, OAM1(220, ST_OAM_H_RECTANGLE, 1), OAM2(252, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(15, 3, 9)),
+	AX_POSE(-1, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(9, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose116[] = {
@@ -552,6 +566,7 @@ static const ax_pose sDeoxysSpeedPose116[] = {
 	AX_POSE(64, OAM1(244, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(65, OAM1(236, ST_OAM_H_RECTANGLE, 1), OAM2(239, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
 	AX_POSE(66, OAM1(220, ST_OAM_H_RECTANGLE, 1), OAM2(252, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(18, 3, 9)),
+	AX_POSE(-1, OAM1(225, ST_OAM_SQUARE     , 1), OAM2(5, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose117[] = {
@@ -560,6 +575,7 @@ static const ax_pose sDeoxysSpeedPose117[] = {
 	AX_POSE(64, OAM1(244, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(65, OAM1(236, ST_OAM_H_RECTANGLE, 1), OAM2(239, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
 	AX_POSE(66, OAM1(220, ST_OAM_H_RECTANGLE, 1), OAM2(252, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(18, 3, 9)),
+	AX_POSE(-1, OAM1(225, ST_OAM_SQUARE     , 1), OAM2(5, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose118[] = {
@@ -568,6 +584,7 @@ static const ax_pose sDeoxysSpeedPose118[] = {
 	AX_POSE(64, OAM1(244, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(65, OAM1(236, ST_OAM_H_RECTANGLE, 1), OAM2(239, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
 	AX_POSE(66, OAM1(220, ST_OAM_H_RECTANGLE, 1), OAM2(252, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(18, 3, 9)),
+	AX_POSE(-1, OAM1(225, ST_OAM_SQUARE     , 1), OAM2(5, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose119[] = {
@@ -576,6 +593,7 @@ static const ax_pose sDeoxysSpeedPose119[] = {
 	AX_POSE(64, OAM1(244, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(65, OAM1(236, ST_OAM_H_RECTANGLE, 1), OAM2(239, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
 	AX_POSE(66, OAM1(220, ST_OAM_H_RECTANGLE, 1), OAM2(252, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(18, 3, 9)),
+	AX_POSE(-1, OAM1(225, ST_OAM_SQUARE     , 1), OAM2(5, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose120[] = {
@@ -594,6 +612,7 @@ static const ax_pose sDeoxysSpeedPose122[] = {
 	AX_POSE(68, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(251, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(8, 3, 9)),
 	AX_POSE(69, OAM1(235, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(10, 3, 9)),
 	AX_POSE(48, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(7, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(11, 3, 2)),
+	AX_POSE(-1, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(2, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(11, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose123[] = {
@@ -601,6 +620,7 @@ static const ax_pose sDeoxysSpeedPose123[] = {
 	AX_POSE(68, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(251, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(8, 3, 9)),
 	AX_POSE(69, OAM1(235, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(10, 3, 9)),
 	AX_POSE(53, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(7, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(11, 3, 2)),
+	AX_POSE(-1, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(2, ST_OAM_SIZE_0, FLIP(0, 0), 2, 1), OAM3(11, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose124[] = {
@@ -608,6 +628,7 @@ static const ax_pose sDeoxysSpeedPose124[] = {
 	AX_POSE(68, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(251, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(8, 3, 9)),
 	AX_POSE(69, OAM1(235, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(10, 3, 9)),
 	AX_POSE(54, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(3, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(11, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(11, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose125[] = {
@@ -615,6 +636,7 @@ static const ax_pose sDeoxysSpeedPose125[] = {
 	AX_POSE(68, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(251, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(8, 3, 9)),
 	AX_POSE(69, OAM1(235, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(10, 3, 9)),
 	AX_POSE(55, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(3, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(11, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(11, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose126[] = {
@@ -622,6 +644,7 @@ static const ax_pose sDeoxysSpeedPose126[] = {
 	AX_POSE(68, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(251, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(8, 3, 9)),
 	AX_POSE(69, OAM1(235, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(10, 3, 9)),
 	AX_POSE(56, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(3, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(11, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(11, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose127[] = {
@@ -629,6 +652,7 @@ static const ax_pose sDeoxysSpeedPose127[] = {
 	AX_POSE(68, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(251, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(8, 3, 9)),
 	AX_POSE(69, OAM1(235, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(10, 3, 9)),
 	AX_POSE(57, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(3, ST_OAM_SIZE_1, FLIP(0, 0), 2, 1), OAM3(11, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(11, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose128[] = {
@@ -648,6 +672,7 @@ static const ax_pose sDeoxysSpeedPose130[] = {
 	AX_POSE(73, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(74, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(15, 3, 9)),
 	AX_POSE(48, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
+	AX_POSE(-1, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose131[] = {
@@ -657,6 +682,7 @@ static const ax_pose sDeoxysSpeedPose131[] = {
 	AX_POSE(73, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(74, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(15, 3, 9)),
 	AX_POSE(53, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(254, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
+	AX_POSE(-1, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose132[] = {
@@ -666,6 +692,7 @@ static const ax_pose sDeoxysSpeedPose132[] = {
 	AX_POSE(73, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(74, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(15, 3, 9)),
 	AX_POSE(54, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose133[] = {
@@ -675,6 +702,7 @@ static const ax_pose sDeoxysSpeedPose133[] = {
 	AX_POSE(73, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(74, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(15, 3, 9)),
 	AX_POSE(55, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose134[] = {
@@ -684,6 +712,7 @@ static const ax_pose sDeoxysSpeedPose134[] = {
 	AX_POSE(73, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(74, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(15, 3, 9)),
 	AX_POSE(56, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose135[] = {
@@ -693,6 +722,7 @@ static const ax_pose sDeoxysSpeedPose135[] = {
 	AX_POSE(73, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(74, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(15, 3, 9)),
 	AX_POSE(57, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(250, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(16, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose136[] = {
@@ -714,6 +744,7 @@ static const ax_pose sDeoxysSpeedPose138[] = {
 	AX_POSE(78, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
 	AX_POSE(79, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(48, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(241, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
+	AX_POSE(-1, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(247, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose139[] = {
@@ -723,6 +754,7 @@ static const ax_pose sDeoxysSpeedPose139[] = {
 	AX_POSE(78, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
 	AX_POSE(79, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(53, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(241, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
+	AX_POSE(-1, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(247, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose140[] = {
@@ -732,6 +764,7 @@ static const ax_pose sDeoxysSpeedPose140[] = {
 	AX_POSE(78, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
 	AX_POSE(79, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(54, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose141[] = {
@@ -741,6 +774,7 @@ static const ax_pose sDeoxysSpeedPose141[] = {
 	AX_POSE(78, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
 	AX_POSE(79, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(55, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose142[] = {
@@ -750,6 +784,7 @@ static const ax_pose sDeoxysSpeedPose142[] = {
 	AX_POSE(78, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
 	AX_POSE(79, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(56, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose143[] = {
@@ -759,6 +794,7 @@ static const ax_pose sDeoxysSpeedPose143[] = {
 	AX_POSE(78, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
 	AX_POSE(79, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(0, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(14, 3, 9)),
 	AX_POSE(57, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
+	AX_POSE(-1, OAM1(219, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(15, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose144[] = {
@@ -779,6 +815,7 @@ static const ax_pose sDeoxysSpeedPose146[] = {
 	AX_POSE(81, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(9, 3, 9)),
 	AX_POSE(82, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
 	AX_POSE(83, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(15, 3, 9)),
+	AX_POSE(-1, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose147[] = {
@@ -787,6 +824,7 @@ static const ax_pose sDeoxysSpeedPose147[] = {
 	AX_POSE(81, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(9, 3, 9)),
 	AX_POSE(82, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(13, 3, 9)),
 	AX_POSE(83, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(15, 3, 9)),
+	AX_POSE(-1, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose148[] = {
@@ -795,6 +833,7 @@ static const ax_pose sDeoxysSpeedPose148[] = {
 	AX_POSE(81, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(82, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
 	AX_POSE(83, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(18, 3, 9)),
+	AX_POSE(-1, OAM1(225, ST_OAM_SQUARE     , 1), OAM2(235, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose149[] = {
@@ -803,6 +842,7 @@ static const ax_pose sDeoxysSpeedPose149[] = {
 	AX_POSE(81, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(82, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
 	AX_POSE(83, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(18, 3, 9)),
+	AX_POSE(-1, OAM1(225, ST_OAM_SQUARE     , 1), OAM2(235, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose150[] = {
@@ -811,6 +851,7 @@ static const ax_pose sDeoxysSpeedPose150[] = {
 	AX_POSE(81, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(82, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
 	AX_POSE(83, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(18, 3, 9)),
+	AX_POSE(-1, OAM1(225, ST_OAM_SQUARE     , 1), OAM2(235, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose151[] = {
@@ -819,6 +860,7 @@ static const ax_pose sDeoxysSpeedPose151[] = {
 	AX_POSE(81, OAM1(235, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(82, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(16, 3, 9)),
 	AX_POSE(83, OAM1(219, ST_OAM_H_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(18, 3, 9)),
+	AX_POSE(-1, OAM1(225, ST_OAM_SQUARE     , 1), OAM2(235, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sDeoxysSpeedPose152[] = {
@@ -834,6 +876,7 @@ static const ax_pose sDeoxysSpeedPose153[] = {
 };
 static const ax_pose sDeoxysSpeedPose154[] = {
 	AX_POSE(48, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(247, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(231, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(84, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(1, 3, 9)),
 	AX_POSE(85, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(9, 3, 9)),
 	AX_POSE(86, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(6, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(13, 3, 9)),
@@ -843,6 +886,7 @@ static const ax_pose sDeoxysSpeedPose154[] = {
 };
 static const ax_pose sDeoxysSpeedPose155[] = {
 	AX_POSE(53, OAM1(233, ST_OAM_SQUARE     , 1), OAM2(247, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(231, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_0, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(84, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(1, 3, 9)),
 	AX_POSE(85, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(9, 3, 9)),
 	AX_POSE(86, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(6, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(13, 3, 9)),
@@ -852,6 +896,7 @@ static const ax_pose sDeoxysSpeedPose155[] = {
 };
 static const ax_pose sDeoxysSpeedPose156[] = {
 	AX_POSE(54, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(84, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(85, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(86, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(6, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(16, 3, 9)),
@@ -861,6 +906,7 @@ static const ax_pose sDeoxysSpeedPose156[] = {
 };
 static const ax_pose sDeoxysSpeedPose157[] = {
 	AX_POSE(55, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(84, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(85, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(86, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(6, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(16, 3, 9)),
@@ -870,6 +916,7 @@ static const ax_pose sDeoxysSpeedPose157[] = {
 };
 static const ax_pose sDeoxysSpeedPose158[] = {
 	AX_POSE(56, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(84, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(85, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(86, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(6, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(16, 3, 9)),
@@ -879,6 +926,7 @@ static const ax_pose sDeoxysSpeedPose158[] = {
 };
 static const ax_pose sDeoxysSpeedPose159[] = {
 	AX_POSE(57, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(243, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
+	AX_POSE(-1, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(239, ST_OAM_SIZE_1, FLIP(0, 0), 2, 0), OAM3(0, 3, 2)),
 	AX_POSE(84, OAM1(242, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(4, 3, 9)),
 	AX_POSE(85, OAM1(226, ST_OAM_SQUARE     , 1), OAM2(246, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(12, 3, 9)),
 	AX_POSE(86, OAM1(234, ST_OAM_SQUARE     , 1), OAM2(6, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(16, 3, 9)),

@@ -1458,6 +1458,7 @@ static const ax_pose sLatiosPose195[] = {
 	AX_POSE(193, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(194, OAM1(223, ST_OAM_V_RECTANGLE, 1), OAM2(13, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(16, 3, 5)),
 	AX_POSE(195, OAM1(255, ST_OAM_SQUARE     , 1), OAM2(245, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(18, 3, 5)),
+	AX_POSE(-1, OAM1(255, ST_OAM_SQUARE     , 1), OAM2(4, ST_OAM_SIZE_0, FLIP(1, 0), 0, 1), OAM3(18, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sLatiosPose196[] = {
@@ -1488,6 +1489,7 @@ static const ax_pose sLatiosPose200[] = {
 	AX_POSE(193, OAM1(223, ST_OAM_SQUARE     , 1), OAM2(237, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(194, OAM1(223, ST_OAM_V_RECTANGLE, 1), OAM2(13, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(16, 3, 5)),
 	AX_POSE(195, OAM1(255, ST_OAM_SQUARE     , 1), OAM2(245, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(18, 3, 5)),
+	AX_POSE(-1, OAM1(255, ST_OAM_SQUARE     , 1), OAM2(4, ST_OAM_SIZE_0, FLIP(1, 0), 0, 1), OAM3(18, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sLatiosPose201[] = {

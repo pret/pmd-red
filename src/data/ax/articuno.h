@@ -562,6 +562,7 @@ static const ax_pose sArticunoPose76[] = {
 static const ax_pose sArticunoPose77[] = {
 	AX_POSE(67, OAM1(220, ST_OAM_V_RECTANGLE, 1), OAM2(249, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(68, OAM1(220, ST_OAM_SQUARE     , 1), OAM2(217, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(8, 3, 5)),
+	AX_POSE(-1, OAM1(220, ST_OAM_SQUARE     , 1), OAM2(8, ST_OAM_SIZE_2, FLIP(1, 0), 0, 1), OAM3(8, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sArticunoPose78[] = {
@@ -865,6 +866,7 @@ static const ax_pose sArticunoPose116[] = {
 static const ax_pose sArticunoPose117[] = {
 	AX_POSE(67, OAM1(220, ST_OAM_V_RECTANGLE, 1), OAM2(249, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 5)),
 	AX_POSE(68, OAM1(220, ST_OAM_SQUARE     , 1), OAM2(217, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(8, 3, 5)),
+	AX_POSE(-1, OAM1(220, ST_OAM_SQUARE     , 1), OAM2(8, ST_OAM_SIZE_2, FLIP(1, 0), 0, 1), OAM3(8, 3, 5)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sArticunoPose118[] = {

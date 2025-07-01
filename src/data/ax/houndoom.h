@@ -963,6 +963,7 @@ static const ax_pose sHoundoomPose150[] = {
 };
 static const ax_pose sHoundoomPose151[] = {
 	AX_POSE(108, OAM1(1, ST_OAM_SQUARE     , 2), OAM2(245, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(0, 3, 6)),
+	AX_POSE(-1, OAM1(1, ST_OAM_SQUARE     , 2), OAM2(2, ST_OAM_SIZE_0, FLIP(1, 0), 0, 1), OAM3(0, 3, 6)),
 	AX_POSE(109, OAM1(230, ST_OAM_V_RECTANGLE, 1), OAM2(241, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(1, 3, 6)),
 	AX_POSE(110, OAM1(230, ST_OAM_V_RECTANGLE, 1), OAM2(1, ST_OAM_SIZE_1, FLIP(0, 0), 0, 1), OAM3(9, 3, 6)),
 	AX_POSE_TERMINATOR

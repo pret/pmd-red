@@ -862,6 +862,7 @@ static const ax_pose sZapdosPose132[] = {
 	AX_POSE(105, OAM1(208, ST_OAM_V_RECTANGLE, 1), OAM2(233, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(0, 3, 4)),
 	AX_POSE(106, OAM1(240, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(8, 3, 4)),
 	AX_POSE(107, OAM1(208, ST_OAM_V_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(16, 3, 4)),
+	AX_POSE(-1, OAM1(208, ST_OAM_V_RECTANGLE, 1), OAM2(8, ST_OAM_SIZE_2, FLIP(0, 0), 0, 1), OAM3(0, 3, 4)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sZapdosPose133[] = {
@@ -1642,6 +1643,7 @@ static const ax_pose sZapdosPose243[] = {
 	AX_POSE(105, OAM1(208, ST_OAM_V_RECTANGLE, 1), OAM2(233, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(0, 3, 4)),
 	AX_POSE(106, OAM1(240, ST_OAM_H_RECTANGLE, 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(8, 3, 4)),
 	AX_POSE(107, OAM1(208, ST_OAM_V_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(16, 3, 4)),
+	AX_POSE(-1, OAM1(208, ST_OAM_V_RECTANGLE, 1), OAM2(8, ST_OAM_SIZE_2, FLIP(0, 0), 0, 1), OAM3(0, 3, 4)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sZapdosPose244[] = {
@@ -1760,6 +1762,7 @@ static const ax_pose sZapdosPose260[] = {
 	AX_POSE(198, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(231, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 4)),
 	AX_POSE(199, OAM1(227, ST_OAM_V_RECTANGLE, 1), OAM2(7, ST_OAM_SIZE_2, FLIP(0, 0), 0, 1), OAM3(16, 3, 4)),
 	AX_POSE(200, OAM1(235, ST_OAM_SQUARE     , 1), OAM2(23, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(24, 3, 4)),
+	AX_POSE(-1, OAM1(3, ST_OAM_SQUARE     , 2), OAM2(255, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(24, 3, 4)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sZapdosPose261[] = {
@@ -1773,6 +1776,7 @@ static const ax_pose sZapdosPose262[] = {
 	AX_POSE(198, OAM1(227, ST_OAM_SQUARE     , 1), OAM2(231, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 4)),
 	AX_POSE(199, OAM1(227, ST_OAM_V_RECTANGLE, 1), OAM2(7, ST_OAM_SIZE_2, FLIP(0, 0), 0, 1), OAM3(16, 3, 4)),
 	AX_POSE(200, OAM1(235, ST_OAM_SQUARE     , 1), OAM2(23, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(24, 3, 4)),
+	AX_POSE(-1, OAM1(3, ST_OAM_SQUARE     , 2), OAM2(255, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(24, 3, 4)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sZapdosPose263[] = {

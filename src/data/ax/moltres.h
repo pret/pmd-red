@@ -1718,6 +1718,7 @@ static const ax_pose sMoltresPose170[] = {
 static const ax_pose sMoltresPose171[] = {
 	AX_POSE(180, OAM1(216, ST_OAM_SQUARE     , 1), OAM2(208, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 0)),
 	AX_POSE(181, OAM1(216, ST_OAM_SQUARE     , 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(16, 3, 0)),
+	AX_POSE(-1, OAM1(216, ST_OAM_SQUARE     , 1), OAM2(15, ST_OAM_SIZE_2, FLIP(1, 0), 0, 1), OAM3(0, 3, 0)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMoltresPose172[] = {
@@ -1758,6 +1759,8 @@ static const ax_pose sMoltresPose174[] = {
 static const ax_pose sMoltresPose175[] = {
 	AX_POSE(136, OAM1(218, ST_OAM_H_RECTANGLE, 1), OAM2(208, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 0)),
 	AX_POSE(137, OAM1(234, ST_OAM_H_RECTANGLE, 1), OAM2(208, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(8, 3, 0)),
+	AX_POSE(-1, OAM1(218, ST_OAM_H_RECTANGLE, 1), OAM2(15, ST_OAM_SIZE_2, FLIP(1, 0), 0, 1), OAM3(0, 3, 0)),
+	AX_POSE(-1, OAM1(234, ST_OAM_H_RECTANGLE, 1), OAM2(15, ST_OAM_SIZE_1, FLIP(1, 0), 0, 1), OAM3(8, 3, 0)),
 	AX_POSE(138, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(12, 3, 0)),
 	AX_POSE(141, OAM1(250, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(28, 3, 0)),
 	AX_POSE_TERMINATOR
@@ -2132,6 +2135,7 @@ static const ax_pose sMoltresPose210[] = {
 static const ax_pose sMoltresPose211[] = {
 	AX_POSE(180, OAM1(216, ST_OAM_SQUARE     , 1), OAM2(208, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 0)),
 	AX_POSE(181, OAM1(216, ST_OAM_SQUARE     , 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(16, 3, 0)),
+	AX_POSE(-1, OAM1(216, ST_OAM_SQUARE     , 1), OAM2(15, ST_OAM_SIZE_2, FLIP(1, 0), 0, 1), OAM3(0, 3, 0)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sMoltresPose212[] = {
@@ -2172,6 +2176,8 @@ static const ax_pose sMoltresPose214[] = {
 static const ax_pose sMoltresPose215[] = {
 	AX_POSE(136, OAM1(218, ST_OAM_H_RECTANGLE, 1), OAM2(208, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 0)),
 	AX_POSE(137, OAM1(234, ST_OAM_H_RECTANGLE, 1), OAM2(208, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(8, 3, 0)),
+	AX_POSE(-1, OAM1(218, ST_OAM_H_RECTANGLE, 1), OAM2(15, ST_OAM_SIZE_2, FLIP(1, 0), 0, 1), OAM3(0, 3, 0)),
+	AX_POSE(-1, OAM1(234, ST_OAM_H_RECTANGLE, 1), OAM2(15, ST_OAM_SIZE_1, FLIP(1, 0), 0, 1), OAM3(8, 3, 0)),
 	AX_POSE(138, OAM1(218, ST_OAM_SQUARE     , 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(12, 3, 0)),
 	AX_POSE(141, OAM1(250, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(28, 3, 0)),
 	AX_POSE_TERMINATOR
@@ -2398,6 +2404,7 @@ static const ax_pose sMoltresPose235[] = {
 static const ax_pose sMoltresPose236[] = {
 	AX_POSE(221, OAM1(213, ST_OAM_SQUARE     , 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 0)),
 	AX_POSE(222, OAM1(213, ST_OAM_V_RECTANGLE, 1), OAM2(225, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(16, 3, 0)),
+	AX_POSE(-1, OAM1(213, ST_OAM_V_RECTANGLE, 1), OAM2(16, ST_OAM_SIZE_2, FLIP(0, 0), 0, 1), OAM3(16, 3, 0)),
 	AX_POSE(223, OAM1(245, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(24, 3, 0)),
 	AX_POSE(224, OAM1(253, ST_OAM_SQUARE     , 1), OAM2(8, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(28, 3, 0)),
 	AX_POSE_TERMINATOR
@@ -2405,6 +2412,7 @@ static const ax_pose sMoltresPose236[] = {
 static const ax_pose sMoltresPose237[] = {
 	AX_POSE(221, OAM1(213, ST_OAM_SQUARE     , 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 0)),
 	AX_POSE(222, OAM1(213, ST_OAM_V_RECTANGLE, 1), OAM2(225, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(16, 3, 0)),
+	AX_POSE(-1, OAM1(213, ST_OAM_V_RECTANGLE, 1), OAM2(16, ST_OAM_SIZE_2, FLIP(0, 0), 0, 1), OAM3(16, 3, 0)),
 	AX_POSE(223, OAM1(245, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(24, 3, 0)),
 	AX_POSE(224, OAM1(253, ST_OAM_SQUARE     , 1), OAM2(8, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(28, 3, 0)),
 	AX_POSE_TERMINATOR
@@ -2437,6 +2445,7 @@ static const ax_pose sMoltresPose241[] = {
 static const ax_pose sMoltresPose242[] = {
 	AX_POSE(221, OAM1(213, ST_OAM_SQUARE     , 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 0)),
 	AX_POSE(222, OAM1(213, ST_OAM_V_RECTANGLE, 1), OAM2(225, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(16, 3, 0)),
+	AX_POSE(-1, OAM1(213, ST_OAM_V_RECTANGLE, 1), OAM2(16, ST_OAM_SIZE_2, FLIP(0, 0), 0, 1), OAM3(16, 3, 0)),
 	AX_POSE(223, OAM1(245, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_1, FLIP(0, 0), 0, 0), OAM3(24, 3, 0)),
 	AX_POSE(224, OAM1(253, ST_OAM_SQUARE     , 1), OAM2(8, ST_OAM_SIZE_0, FLIP(0, 0), 0, 1), OAM3(28, 3, 0)),
 	AX_POSE_TERMINATOR

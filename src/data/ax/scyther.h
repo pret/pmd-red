@@ -235,6 +235,7 @@ static const ax_pose sScytherPose58[] = {
 };
 static const ax_pose sScytherPose59[] = {
 	AX_POSE(21, OAM1(231, ST_OAM_SQUARE     , 1), OAM2(248, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 8)),
+	AX_POSE(-1, OAM1(231, ST_OAM_SQUARE     , 1), OAM2(232, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(0, 3, 8)),
 	AX_POSE(15, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(16, 3, 8)),
 	AX_POSE_TERMINATOR
 };
@@ -308,8 +309,10 @@ static const ax_pose sScytherPose74[] = {
 };
 static const ax_pose sScytherPose75[] = {
 	AX_POSE(34, OAM1(243, ST_OAM_H_RECTANGLE, 1), OAM2(7, ST_OAM_SIZE_0, FLIP(1, 0), 0, 1), OAM3(0, 3, 8)),
+	AX_POSE(-1, OAM1(243, ST_OAM_H_RECTANGLE, 1), OAM2(233, ST_OAM_SIZE_0, FLIP(0, 0), 0, 0), OAM3(0, 3, 8)),
 	AX_POSE(19, OAM1(229, ST_OAM_SQUARE     , 1), OAM2(240, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(2, 3, 8)),
 	AX_POSE(35, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(249, ST_OAM_SIZE_2, FLIP(1, 0), 0, 0), OAM3(18, 3, 8)),
+	AX_POSE(-1, OAM1(227, ST_OAM_H_RECTANGLE, 1), OAM2(231, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(18, 3, 8)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sScytherPose76[] = {

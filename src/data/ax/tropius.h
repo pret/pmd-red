@@ -682,6 +682,7 @@ static const ax_pose sTropiusPose115[] = {
 static const ax_pose sTropiusPose116[] = {
 	AX_POSE(83, OAM1(229, ST_OAM_V_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 8)),
 	AX_POSE(84, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(3, ST_OAM_SIZE_1, FLIP(0, 0), 0, 1), OAM3(8, 3, 8)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(236, ST_OAM_SIZE_1, FLIP(1, 0), 0, 0), OAM3(8, 3, 8)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sTropiusPose117[] = {
@@ -934,6 +935,7 @@ static const ax_pose sTropiusPose157[] = {
 static const ax_pose sTropiusPose158[] = {
 	AX_POSE(83, OAM1(229, ST_OAM_V_RECTANGLE, 1), OAM2(248, ST_OAM_SIZE_2, FLIP(0, 0), 0, 0), OAM3(0, 3, 8)),
 	AX_POSE(84, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(3, ST_OAM_SIZE_1, FLIP(0, 0), 0, 1), OAM3(8, 3, 8)),
+	AX_POSE(-1, OAM1(237, ST_OAM_SQUARE     , 1), OAM2(236, ST_OAM_SIZE_1, FLIP(1, 0), 0, 0), OAM3(8, 3, 8)),
 	AX_POSE_TERMINATOR
 };
 static const ax_pose sTropiusPose159[] = {
