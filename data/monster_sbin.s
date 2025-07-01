@@ -2,64 +2,6 @@
     
 .align 2
 
-@ These macros correspond to structs defined in 'include/structs/axdata.h'
-
-.macro ax_siro ptr:req
-.string "SIRO"
-.4byte \ptr
-.word 0, 0
-.endm
-
-.macro ax_main poses:req, anims:req, animCount:req, sprites:req, positions:req
-.4byte \poses
-.4byte \anims
-.4byte \animCount
-.4byte \sprites
-.4byte \positions
-.endm
-
-.macro ax_pose_full spriteId:req, unk1AlwaysZero:req, unk2AlwaysZero:req, flags1:req, flags2:req, flags3:req
-.2byte \spriteId
-.byte \unk1AlwaysZero
-.byte \unk2AlwaysZero
-.2byte \flags1
-.2byte \flags2
-.2byte \flags3
-.endm
-
-.macro ax_pose spriteId:req, flags1:req, flags2:req, flags3:req
-ax_pose_full \spriteId, 0, 0, \flags1, \flags2, \flags3
-.endm
-
-.macro ax_pose_terminator
-ax_pose_full -1, -1, -1, -1, -1, -1
-.endm
-
-.macro ax_anim frames:req, unkFlags:req, poseId:req, offsetX:req, offsetY:req, shadowX:req, shadowY:req
-.byte \frames
-.byte \unkFlags
-.2byte \poseId
-.2byte \offsetX, \offsetY
-.2byte \shadowX, \shadowY
-.endm
-
-.macro ax_anim_terminator
-ax_anim 0, 0, 0, 0, 0, 0, 0
-.endm
-
-.macro ax_sprite ptr:req, size:req
-.4byte \ptr
-.4byte \size
-.endm
-
-.macro ax_sprite_terminator
-ax_sprite 0, 0
-.endm
-
-@ It seems pksdir is put every 10 mons
-
-
-
 .macro kao_siro ptr:req
 .string "SIRO"
 .4byte \ptr
