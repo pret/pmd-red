@@ -27,8 +27,7 @@ UNUSED EWRAM_DATA static u32 sUnused3 = {0}; // R=2026E34
 EWRAM_INIT static unkStruct_20266B0 *sUnknown_203B074 = {0};
 
 static void AxResInitUnoriented(axdata *, axmain *, u32, u32, u32, bool8);
-static void RegisterSpriteParts_80052BC(ax_sprite *);
-static void sub_800533C(ax_pose **, ax_sprite **, axdata1 *, unkStruct_2039DB0 *spriteMasks, bool8);
+static void RegisterSpriteParts_80052BC(const ax_sprite *spritesPtr);
 static void sub_800561C(const EfoFileData *, s32 vramIdx, s32 brightness, const RGB *ramp);
 
 // arm9.bin::0200265C
@@ -177,7 +176,7 @@ void sub_8004E8C(unkStruct_2039DB0 *a0)
 }
 
 // arm9.bin::020021C4
-void AddAxSprite(ax_pose *axPose, axdata1 *axData, ax_sprite *axSprite, unkStruct_2039DB0 *spriteMasks)
+void AddAxSprite(const ax_pose *axPose, const axdata1 *axData, const ax_sprite *axSprite, unkStruct_2039DB0 *spriteMasks)
 {
     // size: 0xC
     struct AxOAMPose
@@ -430,7 +429,7 @@ void BlinkSavingIcon(void)
 }
 
 // arm9.bin::02001E70
-static void RegisterSpriteParts_80052BC(ax_sprite *spritesPtr)
+static void RegisterSpriteParts_80052BC(const ax_sprite *spritesPtr)
 {
     while (spritesPtr->byteCount != 0) {
         if (sUnknown_203B074 >= &sUnknown_20266B0[UNK_20266B0_ARR_COUNT])
@@ -458,10 +457,10 @@ void sub_8005304(void)
 }
 
 // arm9.bin::02001D88
-static void sub_800533C(ax_pose **a0, ax_sprite **a1, axdata1 *a2, unkStruct_2039DB0 *spriteMasks, bool8 a4)
+static void sub_800533C(const ax_pose *const *a0, const ax_sprite *const *a1, axdata1 *a2, unkStruct_2039DB0 *spriteMasks, bool8 a4)
 {
-    ax_sprite *mem;
-    ax_pose *r4;
+    const ax_sprite *mem;
+    const ax_pose *r4;
 
     r4 = a0[a2->poseId];
     sCharMemCursor = OBJ_VRAM0 + (a2->vramTileOrMaybeAnimTimer * 0x20);
@@ -543,7 +542,7 @@ static inline s16 check_flag_for_80054BC(u16 flags)
 // arm9.bin::02001AC4
 void RunAxAnimationFrame(axdata *a0)
 {
-    ax_anim *aData;
+    const ax_anim *aData;
 
     if (!check_flag_for_80054BC(a0->flags))
         return;
@@ -657,7 +656,7 @@ void sub_800569C(DungeonPos *dstPos, axdata *axData, u8 setId)
         return;
 
     if (axData->positions != NULL) {
-        struct PositionSets *ptr = &axData->positions[axData->sub1.poseId];
+        const struct PositionSets *ptr = &axData->positions[axData->sub1.poseId];
         if (ptr->set[setId].x == 99 && ptr->set[setId].y == 99) {
             dstPos->x = 99;
             dstPos->y = 99;
@@ -682,7 +681,7 @@ void sub_8005700(DungeonPos *dstPos, axdata *axData)
         return;
 
     if (axData->positions != NULL) {
-        struct PositionSets *ptr = &axData->positions[axData->sub1.poseId];
+        const struct PositionSets *ptr = &axData->positions[axData->sub1.poseId];
         for (i = 0; i < AX_POSITION_SETS_COUNT; i++) {
             if (ptr->set[i].x == 99 && ptr->set[i].y == 99) {
                 dstPos->x = 99;

@@ -28,7 +28,7 @@ typedef struct unkStruct_20266B0
     /* 0x8 */ void *dest;
 } unkStruct_20266B0;
 
-void AddAxSprite(ax_pose *, axdata1 *, ax_sprite *, unkStruct_2039DB0 *spriteMasks);
+void AddAxSprite(const ax_pose *axPose, const axdata1 *axData, const ax_sprite *axSprite, unkStruct_2039DB0 *spriteMasks);
 void AddSprite(SpriteOAM *, s32, ax_sprite *, unkStruct_2039DB0 *spriteMasks);
 void AxResInit(axdata *, axmain *, u32, u32 direction, u32, u32 spriteAnimIndex, bool8);
 void AxResInitFile(axdata *, OpenedFile *, u32, u32, u32, u32 spriteAnimIndex, bool8);
