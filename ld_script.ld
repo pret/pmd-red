@@ -50,6 +50,7 @@ SECTIONS {
         src/arm_funcs.o(.text);
         src/main_loops.o(.text);
         src/event_flag.o(.text);
+        src/gba_color_util.o(.text);
         src/code_8002774.o(.text);
         src/memory.o(.text);
         src/code_80035F0.o(.text);
@@ -430,6 +431,7 @@ SECTIONS {
         src/main_loops.o(.rodata);
         src/event_flag.o(.rodata);
         src/script_vars_info.o(.rodata);
+        src/gba_color_util.o(.rodata);
         data/data.o(.rodata);
         src/code_8002774.o(.rodata);
         data/pksdir_5.o(.rodata);

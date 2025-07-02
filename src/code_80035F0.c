@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "bg_palette_buffer.h"
-#include "code_8002774.h"
+#include "gba_color_util.h"
 
 IWRAM_INIT bool8 gUnknown_3001B58 = FALSE;
 IWRAM_INIT u16 gUnknown_3001B5A = 0;
@@ -25,7 +25,7 @@ typedef struct unkStruct_3000C00
 // TODO: make static once whole file is decompiled
 #define UNK_3000400_ARR_COUNT 0x200
 #define UNK_3000C00_ARR_COUNT 0x21
-IWRAM_DATA struct S gUnknown_3000400[UNK_3000400_ARR_COUNT] = {0};
+IWRAM_DATA RGB_Union gUnknown_3000400[UNK_3000400_ARR_COUNT] = {0};
 IWRAM_DATA unkStruct_3000C00 gUnknown_3000C00[UNK_3000C00_ARR_COUNT] = {0};
 
 void sub_8003A34(u32, u32);
@@ -55,7 +55,7 @@ UNUSED static void sub_80035F8(void)
 void sub_8003600(void)
 {
     unkStruct_3000C00 *it1;
-    struct S *it2;
+    RGB_Union *it2;
     bool8 *r6;
     s32 i;
     s32 zero;
@@ -67,10 +67,10 @@ void sub_8003600(void)
 
     for (i = 0; i < UNK_3000400_ARR_COUNT; it2++, i++)
     {
-        it2->x0.x0[0] = zero;
-        it2->x0.x0[1] = zero;
-        it2->x0.x0[2] = zero;
-        it2->x0.x0[3] = zero;
+        it2->asArr.c[0] = zero;
+        it2->asArr.c[1] = zero;
+        it2->asArr.c[2] = zero;
+        it2->asArr.c[3] = zero;
     }
 
     for (i = 0; i < UNK_3000C00_ARR_COUNT; i++, it1++)
@@ -197,7 +197,7 @@ void sub_80037C8(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-void sub_8003810(u32 param_1, struct S param_2)
+void sub_8003810(u32 param_1, RGB_Union param_2)
 {
     u16 idx;
     unkStruct_3000C00 *a;
@@ -209,27 +209,22 @@ void sub_8003810(u32 param_1, struct S param_2)
     gUnknown_3001B58 = TRUE;
 }
 
-static UNUSED void sub_8003844(u32 param_1, u32 param_2)
+static UNUSED void sub_8003844(u16 idx1, u16 idx2)
 {
-    u16 idx1;
-    u16 idx2;
-    unkStruct_3000C00 *a;
-    idx1 = param_1;
-    idx2 = param_2;
-    a = &gUnknown_3000C00[idx1 / 16];
+    unkStruct_3000C00 *a = &gUnknown_3000C00[idx1 / 16];
     a->unk0 = TRUE;
 
-    gUnknown_3000400[idx1] = sub_80027A0(idx2);
+    gUnknown_3000400[idx1].asArr = GbaColorToRGB(idx2);
     gUnknown_3001B58 = TRUE;
 }
 
-void sub_800388C(u32 param_1, struct S *param_2, s32 param_3)
+void sub_800388C(u32 param_1, RGB_Union *param_2, s32 param_3)
 {
     u16 idx1;
     u16 idx2;
     s32 sVar1;
     u16 sVar2;
-    struct S *ptr1;
+    RGB_Union *ptr1;
     unkStruct_3000C00 *ptr3;
     s32 i;
 
@@ -265,7 +260,7 @@ static UNUSED void sub_80038F0(u32 param_1, s16 *param_2, s32 param_3)
     u16 idx1;
     u16 idx2;
     u16 uVar;
-    struct S *ptr1;
+    RGB_Union *ptr1;
     unkStruct_3000C00 *ptr2;
     s32 i;
 
@@ -276,7 +271,7 @@ static UNUSED void sub_80038F0(u32 param_1, s16 *param_2, s32 param_3)
 
     for (i = 0; i < param_3; i++)
     {
-        *ptr1 = sub_80027A0(*param_2++);
+        ptr1->asArr = GbaColorToRGB(*param_2++);
         ptr1++;
     }
 
@@ -290,24 +285,18 @@ static UNUSED void sub_80038F0(u32 param_1, s16 *param_2, s32 param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-static UNUSED struct S_sub sub_8003978(u32 param_1)
+static UNUSED RGB_Array sub_8003978(u16 idx)
 {
-    u16 idx;
-    idx = param_1;
-    return gUnknown_3000400[idx].x0;
+    return gUnknown_3000400[idx].asArr;
 }
 
-static UNUSED u16 sub_8003988(u32 param_1)
+static UNUSED u16 sub_8003988(u16 idx)
 {
-    u16 idx;
-    idx = param_1;
-    return sub_8002774(gUnknown_3000400[idx].x0);
+    return RGBToGbaColor(gUnknown_3000400[idx].asArr);
 }
 
-static UNUSED void sub_80039A4(u32 param_1)
+static UNUSED void sub_80039A4(u16 idx)
 {
-    u16 idx;
-    idx = param_1;
     gUnknown_3001B5A |= idx;
 }
 
@@ -350,7 +339,7 @@ void sub_80039B8(void)
 void sub_8003A34(u32 param_1, u32 param_2)
 {
     u16 idx;
-    struct S *ptr1;
+    RGB_Union *ptr1;
     u32 blue;
     u32 green;
     u32 red;
@@ -358,10 +347,10 @@ void sub_8003A34(u32 param_1, u32 param_2)
 
     idx = param_2;
     ptr1 = &gUnknown_3000400[idx];
-    blue = (ptr1->x0.x0[2] & 0xf8) << 7;
-    green = (ptr1->x0.x0[1] & 0xf8) << 2;
+    blue = (ptr1->asArr.c[2] & 0xf8) << 7;
+    green = (ptr1->asArr.c[1] & 0xf8) << 2;
     blue |= green;
-    red = (ptr1->x0.x0[0] & 0xf8) >> 3;
+    red = (ptr1->asArr.c[0] & 0xf8) >> 3;
     color = red | blue;
     SetBGPaletteBufferColor(idx, &color);
 }
@@ -369,7 +358,7 @@ void sub_8003A34(u32 param_1, u32 param_2)
 void sub_8003A74(u32 param_1)
 {
     u16 idx;
-    struct S *ptr1;
+    RGB_Union *ptr1;
     u32 red;
     u32 green;
     u32 blue;
@@ -381,10 +370,10 @@ void sub_8003A74(u32 param_1)
 
     for (i = 0; i < 16; ptr1++, i++)
     {
-        blue = (ptr1->x0.x0[2] & 0xf8) << 7;
-        green = (ptr1->x0.x0[1] & 0xf8) << 2;
+        blue = (ptr1->asArr.c[2] & 0xf8) << 7;
+        green = (ptr1->asArr.c[1] & 0xf8) << 2;
         blue |= green;
-        red = (ptr1->x0.x0[0] & 0xf8) >> 3;
+        red = (ptr1->asArr.c[0] & 0xf8) >> 3;
         color = red | blue;
         SetBGPaletteBufferColor(idx + i, &color);
     }

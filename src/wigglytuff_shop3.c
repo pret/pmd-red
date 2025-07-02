@@ -557,7 +557,7 @@ static void WigglytuffShop_GoToFallbackState(void)
 
 static void sub_80226F0(void)
 {
-    struct S_sub unkStr = {0x80, 0x80, 0x10, 0};
+    RGB_Array unkStr = {0x80, 0x80, 0x10, 0};
 
     if (sub_8099B94())
         return;
