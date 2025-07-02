@@ -22,7 +22,7 @@ static const WindowTemplate gUnknown_80E4A28 = {
     .header = NULL,
 };
 
-static const unkStruct_3000400 gUnknown_80E4A40 = {{0x18, 0x18, 0x38, 0}};
+static const struct S_sub gUnknown_80E4A40 = {{0x18, 0x18, 0x38, 0}};
 
 UNUSED static const u8 sUnknownUnusedData[][2] = {
     {0x21, 0xff},

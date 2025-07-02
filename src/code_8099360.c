@@ -13,7 +13,7 @@ extern u8 gUnknown_20398B8;
 
 extern void sub_8003600(void);
 extern s32 sub_800388C(u16, const u8 *, u8);
-extern void sub_8003810(u16 idx, unkStruct_3000400 param_2);
+extern void sub_8003810(u16 idx, struct S_sub param_2);
 
 void sub_8099648(void)
 {
@@ -72,12 +72,12 @@ void sub_8099690(u32 param_1)
     CloseFile(temp);
 }
 
-UNUSED static void sub_8099708(u16 a0, unkStruct_3000400 a1)
+UNUSED static void sub_8099708(u16 a0, struct S_sub a1)
 {
     sub_8003810(a0, a1);
 }
 
-void sub_809971C(u16 idx, unkStruct_3000400 *strPtrs, s32 n)
+void sub_809971C(u16 idx, struct S_sub *strPtrs, s32 n)
 {
     s32 i;
 

@@ -143,7 +143,7 @@ void sub_80036F4(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-UNUSED void sub_800373C(s32 param_1, s16 param_2, s32 param_3)
+static UNUSED void sub_800373C(s32 param_1, s16 param_2, s32 param_3)
 {
     u16 idx;
     unkStruct_3000C00 *ptr;
@@ -209,7 +209,7 @@ void sub_8003810(u32 param_1, struct S param_2)
     gUnknown_3001B58 = TRUE;
 }
 
-UNUSED void sub_8003844(u32 param_1, u32 param_2)
+static UNUSED void sub_8003844(u32 param_1, u32 param_2)
 {
     u16 idx1;
     u16 idx2;
@@ -260,7 +260,7 @@ void sub_800388C(u32 param_1, struct S *param_2, s32 param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-UNUSED void sub_80038F0(u32 param_1, s16 *param_2, s32 param_3)
+static UNUSED void sub_80038F0(u32 param_1, s16 *param_2, s32 param_3)
 {
     u16 idx1;
     u16 idx2;
@@ -290,21 +290,21 @@ UNUSED void sub_80038F0(u32 param_1, s16 *param_2, s32 param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-UNUSED struct S_sub sub_8003978(u32 param_1)
+static UNUSED struct S_sub sub_8003978(u32 param_1)
 {
     u16 idx;
     idx = param_1;
     return gUnknown_3000400[idx].x0;
 }
 
-UNUSED u16 sub_8003988(u32 param_1)
+static UNUSED u16 sub_8003988(u32 param_1)
 {
     u16 idx;
     idx = param_1;
     return sub_8002774(gUnknown_3000400[idx].x0);
 }
 
-UNUSED void sub_80039A4(u32 param_1)
+static UNUSED void sub_80039A4(u32 param_1)
 {
     u16 idx;
     idx = param_1;
