@@ -1037,6 +1037,12 @@ SECTIONS {
         src/ornament_files_table.o(.rodata);
         data/ornament_sbin.o(.rodata);
     } > ROM =0
+    
+    unk_9E7EB08_section :
+    ALIGN(4)
+    {
+        data/unk_9E7EB08.o(.rodata);
+    } > ROM =0
 
     sound_data :
     ALIGN(4)

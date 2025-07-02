@@ -6,19 +6,14 @@
 IWRAM_INIT bool8 gUnknown_3001B58 = FALSE;
 IWRAM_INIT u16 gUnknown_3001B5A = 0;
 
-typedef struct unkStruct_3000C00_sub
-{
-    u8 unk0[4];
-} unkStruct_3000C00_sub;
-
 typedef struct unkStruct_3000C00
 {
     bool8 unk0;
     u8 unk1;
     s16 unk2;
-    unkStruct_3000C00_sub unk4;
+    RGB_Array unk4;
     s32 unk8;
-    void (*unkC)(u32, u32);
+    void (*unkC)(u16, u16);
     void (*unk10)(u32);
 } unkStruct_3000C00;
 
@@ -28,13 +23,13 @@ typedef struct unkStruct_3000C00
 IWRAM_DATA RGB_Union gUnknown_3000400[UNK_3000400_ARR_COUNT] = {0};
 IWRAM_DATA unkStruct_3000C00 gUnknown_3000C00[UNK_3000C00_ARR_COUNT] = {0};
 
-void sub_8003A34(u32, u32);
-void sub_8003AC0(u32, u32);
-void sub_8003C18(u32, u32);
-void sub_8003E2C(u32, u32);
-void sub_8003F60(u32, u32);
-void sub_8004170(u32, u32);
-void sub_8004388(u32, u32);
+void sub_8003A34(u16 param_1, u16 idx);
+void sub_8003AC0(u16, u16);
+void sub_8003C18(u16, u16);
+void sub_8003E2C(u16, u16);
+void sub_8003F60(u16, u16);
+void sub_8004170(u16, u16);
+void sub_8004388(u16, u16);
 void sub_8003B50(u32);
 void sub_8003D00(u32);
 void sub_8003EC0(u32);
@@ -77,10 +72,10 @@ void sub_8003600(void)
     {
         it1->unk0 = FALSE;
         it1->unk2 = 0x100;
-        it1->unk4.unk0[0] = 0;
-        it1->unk4.unk0[1] = 0;
-        it1->unk4.unk0[2] = 0;
-        it1->unk4.unk0[3] = 0;
+        it1->unk4.c[0] = 0;
+        it1->unk4.c[1] = 0;
+        it1->unk4.c[2] = 0;
+        it1->unk4.c[3] = 0;
         it1->unk8 = 0;
         it1->unkC = &sub_8003A34;
         it1->unk10 = &sub_8003A74;
@@ -89,19 +84,16 @@ void sub_8003600(void)
     *r6 = TRUE;
 }
 
-void sub_8003664(s32 param_1, s16 param_2)
+void sub_8003664(u16 idx, s32 param_2)
 {
-    u16 idx;
-    unkStruct_3000C00 *ptr;
-    idx = param_1;
-    ptr = &gUnknown_3000C00[idx];
+    unkStruct_3000C00 *ptr = &gUnknown_3000C00[idx];
 
     ptr->unk0 = TRUE;
     ptr->unk2 = param_2;
-    ptr->unk4.unk0[0] = 0;
-    ptr->unk4.unk0[1] = 0;
-    ptr->unk4.unk0[2] = 0;
-    ptr->unk4.unk0[3] = 0;
+    ptr->unk4.c[0] = 0;
+    ptr->unk4.c[1] = 0;
+    ptr->unk4.c[2] = 0;
+    ptr->unk4.c[3] = 0;
     ptr->unk8 = 0;
     ptr->unkC = &sub_8003AC0;
     ptr->unk10 = &sub_8003B50;
@@ -109,12 +101,9 @@ void sub_8003664(s32 param_1, s16 param_2)
     gUnknown_3001B58 = TRUE;
 }
 
-void sub_80036AC(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
+void sub_80036AC(u16 idx, s32 param_2, RGB_Array param_3)
 {
-    u16 idx;
-    unkStruct_3000C00 *ptr;
-    idx = param_1;
-    ptr = &gUnknown_3000C00[idx];
+    unkStruct_3000C00 *ptr = &gUnknown_3000C00[idx];
 
     ptr->unk0 = TRUE;
     ptr->unk2 = param_2;
@@ -126,12 +115,9 @@ void sub_80036AC(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-void sub_80036F4(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
+void sub_80036F4(u16 idx, s32 param_2, RGB_Array param_3)
 {
-    u16 idx;
-    unkStruct_3000C00 *ptr;
-    idx = param_1;
-    ptr = &gUnknown_3000C00[idx];
+    unkStruct_3000C00 *ptr = &gUnknown_3000C00[idx];
 
     ptr->unk0 = TRUE;
     ptr->unk2 = param_2;
@@ -143,19 +129,16 @@ void sub_80036F4(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-static UNUSED void sub_800373C(s32 param_1, s16 param_2, s32 param_3)
+static UNUSED void sub_800373C(u16 idx, s32 param_2, s32 param_3)
 {
-    u16 idx;
-    unkStruct_3000C00 *ptr;
-    idx = param_1;
-    ptr = &gUnknown_3000C00[idx];
+    unkStruct_3000C00 *ptr = &gUnknown_3000C00[idx];
 
     ptr->unk0 = TRUE;
     ptr->unk2 = param_2;
-    ptr->unk4.unk0[0] = 0;
-    ptr->unk4.unk0[1] = 0;
-    ptr->unk4.unk0[2] = 0;
-    ptr->unk4.unk0[3] = 0;
+    ptr->unk4.c[0] = 0;
+    ptr->unk4.c[1] = 0;
+    ptr->unk4.c[2] = 0;
+    ptr->unk4.c[3] = 0;
     ptr->unk8 = param_3;
     ptr->unkC = &sub_8003F60;
     ptr->unk10 = &sub_8004034;
@@ -163,12 +146,9 @@ static UNUSED void sub_800373C(s32 param_1, s16 param_2, s32 param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-void sub_8003780(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
+void sub_8003780(u16 idx, s32 param_2, RGB_Array param_3)
 {
-    u16 idx;
-    unkStruct_3000C00 *ptr;
-    idx = param_1;
-    ptr = &gUnknown_3000C00[idx];
+    unkStruct_3000C00 *ptr = &gUnknown_3000C00[idx];
 
     ptr->unk0 = TRUE;
     ptr->unk2 = param_2;
@@ -180,12 +160,9 @@ void sub_8003780(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-void sub_80037C8(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
+void sub_80037C8(u16 idx, s32 param_2, RGB_Array param_3)
 {
-    u16 idx;
-    unkStruct_3000C00 *ptr;
-    idx = param_1;
-    ptr = &gUnknown_3000C00[idx];
+    unkStruct_3000C00 *ptr = &gUnknown_3000C00[idx];
 
     ptr->unk0 = TRUE;
     ptr->unk2 = param_2;
@@ -197,12 +174,9 @@ void sub_80037C8(s32 param_1, s16 param_2, unkStruct_3000C00_sub param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-void sub_8003810(u32 param_1, RGB_Union param_2)
+void sub_8003810(u16 idx, RGB_Union param_2)
 {
-    u16 idx;
-    unkStruct_3000C00 *a;
-    idx = (u16) param_1;
-    a = &gUnknown_3000C00[idx / 16];
+    unkStruct_3000C00 *a = &gUnknown_3000C00[idx / 16];
     a->unk0 = TRUE;
 
     gUnknown_3000400[idx] = param_2;
@@ -218,27 +192,13 @@ static UNUSED void sub_8003844(u16 idx1, u16 idx2)
     gUnknown_3001B58 = TRUE;
 }
 
-void sub_800388C(u32 param_1, RGB_Union *param_2, s32 param_3)
+void sub_800388C(u16 idx1, RGB_Union *param_2, s32 param_3)
 {
-    u16 idx1;
-    u16 idx2;
-    s32 sVar1;
-    u16 sVar2;
-    RGB_Union *ptr1;
     unkStruct_3000C00 *ptr3;
     s32 i;
-
-    idx1 = param_1;
-    idx2 = idx1 / 16;
-    sVar1 = idx1 + param_3 - 1;
-    if (sVar1 < 0)
-    {
-        sVar1 += 0xf;
-    }
-
-    sVar1 = (sVar1 << 0xc) >> 0x10;
-    sVar2 = sVar1;
-    ptr1 = &gUnknown_3000400[idx1];
+    u16 idx2 = idx1 / 16;
+    u16 sVar2 = (idx1 + param_3 - 1) / 16;
+    RGB_Union *ptr1 = &gUnknown_3000400[idx1];
 
     for (i = 0; i < param_3; param_2++, ptr1++, i++)
     {
@@ -336,16 +296,14 @@ void sub_80039B8(void)
     }
 }
 
-void sub_8003A34(u32 param_1, u32 param_2)
+void sub_8003A34(u16 param_1, u16 idx)
 {
-    u16 idx;
     RGB_Union *ptr1;
     u32 blue;
     u32 green;
     u32 red;
     u16 color;
 
-    idx = param_2;
     ptr1 = &gUnknown_3000400[idx];
     blue = (ptr1->asArr.c[2] & 0xf8) << 7;
     green = (ptr1->asArr.c[1] & 0xf8) << 2;

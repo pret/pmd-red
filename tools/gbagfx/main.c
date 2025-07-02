@@ -262,6 +262,14 @@ void HandleGbaToJascPaletteCommand(char *inputPath, char *outputPath, int argc U
     WriteJascPalette(outputPath, &palette);
 }
 
+void HandlePmdPaletteToJascCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+{
+    struct Palette palette = {};
+
+    ReadPmdPalette(inputPath, &palette);
+    WriteJascPalette(outputPath, &palette);
+}
+
 static void HandleJascToPaletteCommand(char *inputPath, char *outputPath, int argc, char **argv, bool isPmdPal)
 {
     int numColors = 0;
@@ -570,6 +578,7 @@ int main(int argc, char **argv)
         { "gbapal", "pal", HandleGbaToJascPaletteCommand },
         { "pal", "gbapal", HandleJascToGbaPaletteCommand },
         { "pal", "pmdpal", HandleJascToPmdPaletteCommand },
+        { "pmdpal", "pal", HandlePmdPaletteToJascCommand },
         { "latfont", "png", HandleLatinFontToPngCommand },
         { "png", "latfont", HandlePngToLatinFontCommand },
         { "hwjpnfont", "png", HandleHalfwidthJapaneseFontToPngCommand },

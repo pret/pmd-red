@@ -4,7 +4,7 @@
 .string "pksdir0\0"
 .global gUnknown_9E60560
 gUnknown_9E60560:
-.incbin "baserom.gba", 0x1E60560, 0x40
+.incbin "graphics/ornament/pal/flag00.pmdpal"
 .global gUnknown_9E605A0
 gUnknown_9E605A0:
 .string "SIRO"
@@ -116,7 +116,7 @@ gUnknown_9E60BB0:
 .incbin "baserom.gba", 0x1E60BC0, 0x4
 .global gUnknown_9E60BC4
 gUnknown_9E60BC4:
-.incbin "baserom.gba", 0x1E60BC4, 0x40
+.incbin "graphics/ornament/pal/flag01.pmdpal"
 .global gUnknown_9E60C04
 gUnknown_9E60C04:
 .string "SIRO"
@@ -253,7 +253,7 @@ gUnknown_9E61644:
 .incbin "baserom.gba", 0x1E61654, 0x4
 .global gUnknown_9E61658
 gUnknown_9E61658:
-.incbin "baserom.gba", 0x1E61658, 0x40
+.incbin "graphics/ornament/pal/flag02.pmdpal"
 .global gUnknown_9E61698
 gUnknown_9E61698:
 .string "SIRO"
@@ -360,7 +360,7 @@ gUnknown_9E62158:
 .incbin "baserom.gba", 0x1E62168, 0x4
 .global gUnknown_9E6216C
 gUnknown_9E6216C:
-.incbin "baserom.gba", 0x1E6216C, 0x40
+.incbin "graphics/ornament/pal/flag03.pmdpal"
 .global gUnknown_9E621AC
 gUnknown_9E621AC:
 .string "SIRO"
@@ -497,7 +497,7 @@ gUnknown_9E62BAC:
 .incbin "baserom.gba", 0x1E62BBC, 0x4
 .global gUnknown_9E62BC0
 gUnknown_9E62BC0:
-.incbin "baserom.gba", 0x1E62BC0, 0x40
+.incbin "graphics/ornament/pal/flag04.pmdpal"
 .global gUnknown_9E62C00
 gUnknown_9E62C00:
 .string "SIRO"
@@ -604,7 +604,7 @@ gUnknown_9E636C0:
 .incbin "baserom.gba", 0x1E636D0, 0x4
 .global gUnknown_9E636D4
 gUnknown_9E636D4:
-.incbin "baserom.gba", 0x1E636D4, 0x40
+.incbin "graphics/ornament/pal/flag05.pmdpal"
 .global gUnknown_9E63714
 gUnknown_9E63714:
 .string "SIRO"
@@ -711,7 +711,7 @@ gUnknown_9E641D4:
 .incbin "baserom.gba", 0x1E641E4, 0x4
 .global gUnknown_9E641E8
 gUnknown_9E641E8:
-.incbin "baserom.gba", 0x1E641E8, 0x40
+.incbin "graphics/ornament/pal/flag06.pmdpal"
 .global gUnknown_9E64228
 gUnknown_9E64228:
 .string "SIRO"
@@ -818,7 +818,7 @@ gUnknown_9E64CE8:
 .incbin "baserom.gba", 0x1E64CF8, 0x4
 .global gUnknown_9E64CFC
 gUnknown_9E64CFC:
-.incbin "baserom.gba", 0x1E64CFC, 0x40
+.incbin "graphics/ornament/pal/flag07.pmdpal"
 .global gUnknown_9E64D3C
 gUnknown_9E64D3C:
 .string "SIRO"
@@ -926,7 +926,7 @@ gUnknown_9E657FC:
 .string "pksdir0\0"
 .global gUnknown_9E65818
 gUnknown_9E65818:
-.incbin "baserom.gba", 0x1E65818, 0x40
+.incbin "graphics/ornament/pal/flag08.pmdpal"
 .global gUnknown_9E65858
 gUnknown_9E65858:
 .string "SIRO"
@@ -1033,7 +1033,7 @@ gUnknown_9E66318:
 .incbin "baserom.gba", 0x1E66328, 0x4
 .global gUnknown_9E6632C
 gUnknown_9E6632C:
-.incbin "baserom.gba", 0x1E6632C, 0x40
+.incbin "graphics/ornament/pal/flag09.pmdpal"
 .global gUnknown_9E6636C
 gUnknown_9E6636C:
 .string "SIRO"
@@ -1140,7 +1140,7 @@ gUnknown_9E66E2C:
 .incbin "baserom.gba", 0x1E66E3C, 0x4
 .global gUnknown_9E66E40
 gUnknown_9E66E40:
-.incbin "baserom.gba", 0x1E66E40, 0x40
+.incbin "graphics/ornament/pal/flag100.pmdpal"
 .global gUnknown_9E66E80
 gUnknown_9E66E80:
 .string "SIRO"
@@ -1247,7 +1247,7 @@ gUnknown_9E67940:
 .incbin "baserom.gba", 0x1E67950, 0x4
 .global gUnknown_9E67954
 gUnknown_9E67954:
-.incbin "baserom.gba", 0x1E67954, 0x40
+.incbin "graphics/ornament/pal/flag101.pmdpal"
 .global gUnknown_9E67994
 gUnknown_9E67994:
 .string "SIRO"
@@ -1354,7 +1354,7 @@ gUnknown_9E68454:
 .incbin "baserom.gba", 0x1E68464, 0x4
 .global gUnknown_9E68468
 gUnknown_9E68468:
-.incbin "baserom.gba", 0x1E68468, 0x40
+.incbin "graphics/ornament/pal/flag102.pmdpal"
 .global gUnknown_9E684A8
 gUnknown_9E684A8:
 .string "SIRO"
@@ -1461,7 +1461,7 @@ gUnknown_9E68F68:
 .incbin "baserom.gba", 0x1E68F78, 0x4
 .global gUnknown_9E68F7C
 gUnknown_9E68F7C:
-.incbin "baserom.gba", 0x1E68F7C, 0x40
+.incbin "graphics/ornament/pal/flag103.pmdpal"
 .global gUnknown_9E68FBC
 gUnknown_9E68FBC:
 .string "SIRO"
@@ -1568,7 +1568,7 @@ gUnknown_9E69A7C:
 .incbin "baserom.gba", 0x1E69A8C, 0x4
 .global gUnknown_9E69A90
 gUnknown_9E69A90:
-.incbin "baserom.gba", 0x1E69A90, 0x40
+.incbin "graphics/ornament/pal/flag104.pmdpal"
 .global gUnknown_9E69AD0
 gUnknown_9E69AD0:
 .string "SIRO"
@@ -1675,7 +1675,7 @@ gUnknown_9E6A590:
 .incbin "baserom.gba", 0x1E6A5A0, 0x4
 .global gUnknown_9E6A5A4
 gUnknown_9E6A5A4:
-.incbin "baserom.gba", 0x1E6A5A4, 0x40
+.incbin "graphics/ornament/pal/flag105.pmdpal"
 .global gUnknown_9E6A5E4
 gUnknown_9E6A5E4:
 .string "SIRO"
@@ -1782,7 +1782,7 @@ gUnknown_9E6B0A4:
 .incbin "baserom.gba", 0x1E6B0B4, 0xC
 .global gUnknown_9E6B0C0
 gUnknown_9E6B0C0:
-.incbin "baserom.gba", 0x1E6B0C0, 0x40
+.incbin "graphics/ornament/pal/flag106.pmdpal"
 .global gUnknown_9E6B100
 gUnknown_9E6B100:
 .string "SIRO"
@@ -1889,7 +1889,7 @@ gUnknown_9E6BBC0:
 .incbin "baserom.gba", 0x1E6BBD0, 0x4
 .global gUnknown_9E6BBD4
 gUnknown_9E6BBD4:
-.incbin "baserom.gba", 0x1E6BBD4, 0x40
+.incbin "graphics/ornament/pal/flag107.pmdpal"
 .global gUnknown_9E6BC14
 gUnknown_9E6BC14:
 .string "SIRO"
@@ -1996,7 +1996,7 @@ gUnknown_9E6C6D4:
 .incbin "baserom.gba", 0x1E6C6E4, 0x4
 .global gUnknown_9E6C6E8
 gUnknown_9E6C6E8:
-.incbin "baserom.gba", 0x1E6C6E8, 0x40
+.incbin "graphics/ornament/pal/flag108.pmdpal"
 .global gUnknown_9E6C728
 gUnknown_9E6C728:
 .string "SIRO"
@@ -2103,7 +2103,7 @@ gUnknown_9E6D1E8:
 .incbin "baserom.gba", 0x1E6D1F8, 0x4
 .global gUnknown_9E6D1FC
 gUnknown_9E6D1FC:
-.incbin "baserom.gba", 0x1E6D1FC, 0x40
+.incbin "graphics/ornament/pal/flag109.pmdpal"
 .global gUnknown_9E6D23C
 gUnknown_9E6D23C:
 .string "SIRO"
@@ -2210,7 +2210,7 @@ gUnknown_9E6DCFC:
 .incbin "baserom.gba", 0x1E6DD0C, 0x4
 .global gUnknown_9E6DD10
 gUnknown_9E6DD10:
-.incbin "baserom.gba", 0x1E6DD10, 0x40
+.incbin "graphics/ornament/pal/flag10.pmdpal"
 .global gUnknown_9E6DD50
 gUnknown_9E6DD50:
 .string "SIRO"
@@ -2317,7 +2317,7 @@ gUnknown_9E6E810:
 .incbin "baserom.gba", 0x1E6E820, 0x4
 .global gUnknown_9E6E824
 gUnknown_9E6E824:
-.incbin "baserom.gba", 0x1E6E824, 0x40
+.incbin "graphics/ornament/pal/flag110.pmdpal"
 .global gUnknown_9E6E864
 gUnknown_9E6E864:
 .string "SIRO"
@@ -2424,7 +2424,7 @@ gUnknown_9E6F324:
 .incbin "baserom.gba", 0x1E6F334, 0x4
 .global gUnknown_9E6F338
 gUnknown_9E6F338:
-.incbin "baserom.gba", 0x1E6F338, 0x40
+.incbin "graphics/ornament/pal/flag111.pmdpal"
 .global gUnknown_9E6F378
 gUnknown_9E6F378:
 .string "SIRO"
@@ -2531,7 +2531,7 @@ gUnknown_9E6FE38:
 .incbin "baserom.gba", 0x1E6FE48, 0x4
 .global gUnknown_9E6FE4C
 gUnknown_9E6FE4C:
-.incbin "baserom.gba", 0x1E6FE4C, 0x40
+.incbin "graphics/ornament/pal/flag112.pmdpal"
 .global gUnknown_9E6FE8C
 gUnknown_9E6FE8C:
 .string "SIRO"
@@ -2639,7 +2639,7 @@ gUnknown_9E7094C:
 .string "pksdir0\0"
 .global gUnknown_9E70968
 gUnknown_9E70968:
-.incbin "baserom.gba", 0x1E70968, 0x40
+.incbin "graphics/ornament/pal/flag113.pmdpal"
 .global gUnknown_9E709A8
 gUnknown_9E709A8:
 .string "SIRO"
@@ -2746,7 +2746,7 @@ gUnknown_9E71468:
 .incbin "baserom.gba", 0x1E71478, 0x4
 .global gUnknown_9E7147C
 gUnknown_9E7147C:
-.incbin "baserom.gba", 0x1E7147C, 0x40
+.incbin "graphics/ornament/pal/flag114.pmdpal"
 .global gUnknown_9E714BC
 gUnknown_9E714BC:
 .string "SIRO"
@@ -2853,7 +2853,7 @@ gUnknown_9E71F7C:
 .incbin "baserom.gba", 0x1E71F8C, 0x4
 .global gUnknown_9E71F90
 gUnknown_9E71F90:
-.incbin "baserom.gba", 0x1E71F90, 0x40
+.incbin "graphics/ornament/pal/flag11.pmdpal"
 .global gUnknown_9E71FD0
 gUnknown_9E71FD0:
 .string "SIRO"
@@ -2960,7 +2960,7 @@ gUnknown_9E72A90:
 .incbin "baserom.gba", 0x1E72AA0, 0x4
 .global gUnknown_9E72AA4
 gUnknown_9E72AA4:
-.incbin "baserom.gba", 0x1E72AA4, 0x40
+.incbin "graphics/ornament/pal/flag12.pmdpal"
 .global gUnknown_9E72AE4
 gUnknown_9E72AE4:
 .string "SIRO"
@@ -3067,7 +3067,7 @@ gUnknown_9E735A4:
 .incbin "baserom.gba", 0x1E735B4, 0x4
 .global gUnknown_9E735B8
 gUnknown_9E735B8:
-.incbin "baserom.gba", 0x1E735B8, 0x40
+.incbin "graphics/ornament/pal/flag13.pmdpal"
 .global gUnknown_9E735F8
 gUnknown_9E735F8:
 .string "SIRO"
@@ -3174,7 +3174,7 @@ gUnknown_9E740B8:
 .incbin "baserom.gba", 0x1E740C8, 0x4
 .global gUnknown_9E740CC
 gUnknown_9E740CC:
-.incbin "baserom.gba", 0x1E740CC, 0x40
+.incbin "graphics/ornament/pal/flag14.pmdpal"
 .global gUnknown_9E7410C
 gUnknown_9E7410C:
 .string "SIRO"
@@ -3301,7 +3301,7 @@ gUnknown_9E74B2C:
 .incbin "baserom.gba", 0x1E74B3C, 0x4
 .global gUnknown_9E74B40
 gUnknown_9E74B40:
-.incbin "baserom.gba", 0x1E74B40, 0x40
+.incbin "graphics/ornament/pal/flag15.pmdpal"
 .global gUnknown_9E74B80
 gUnknown_9E74B80:
 .string "SIRO"
@@ -3408,7 +3408,7 @@ gUnknown_9E75640:
 .incbin "baserom.gba", 0x1E75650, 0x4
 .global gUnknown_9E75654
 gUnknown_9E75654:
-.incbin "baserom.gba", 0x1E75654, 0x40
+.incbin "graphics/ornament/pal/flag16.pmdpal"
 .global gUnknown_9E75694
 gUnknown_9E75694:
 .string "SIRO"
@@ -4049,7 +4049,7 @@ gUnknown_9E77B1C:
 .incbin "baserom.gba", 0x1E77B2C, 0x4
 .global gUnknown_9E77B30
 gUnknown_9E77B30:
-.incbin "baserom.gba", 0x1E77B30, 0x40
+.incbin "graphics/ornament/pal/stoneim.pmdpal"
 .global gUnknown_9E77B70
 gUnknown_9E77B70:
 .string "SIRO"
@@ -4345,7 +4345,7 @@ gUnknown_9E7B820:
 .incbin "baserom.gba", 0x1E7B830, 0x4
 .global gUnknown_9E7B834
 gUnknown_9E7B834:
-.incbin "baserom.gba", 0x1E7B834, 0x40
+.incbin "graphics/ornament/pal/titlebg.pmdpal"
 .global gUnknown_9E7B874
 gUnknown_9E7B874:
 .string "SIRO"
@@ -5161,4 +5161,4 @@ gUnknown_9E7EAB4:
 .incbin "baserom.gba", 0x1E7EAC4, 0x4
 .global gUnknown_9E7EAC8
 gUnknown_9E7EAC8:
-.incbin "baserom.gba", 0x1E7EAC8, 0x1538
+.incbin "graphics/ornament/pal/titleop.pmdpal"
