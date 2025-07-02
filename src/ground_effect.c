@@ -6,10 +6,6 @@
 #include "debug.h"
 #include "memory.h"
 
-void DeleteGroundEffects(void);
-
-// size must be 0x1c4
-// NOTE: exact structure as GroundEffect
 typedef struct GroundEffect {
     // size: 0x1C4
     u8 unk0[4];
@@ -51,21 +47,10 @@ struct GroundEffectTypeData
 
 extern struct GroundEffectTypeData gGroundEffectTypes[];
 
-extern const s16 gUnknown_81185F2[];
-extern DebugLocation gUnknown_8118610;
-extern const u8 gUnknown_811861C[];
-extern const u8 gUnknown_8118640[];
-extern const u8 gUnknown_8118658[];
-extern const u8 gUnknown_8118674[];
-extern DebugLocation gUnknown_81186CC;
-extern const u8 gUnknown_81186D8[];
-extern const u8 gUnknown_81186F4[];
-extern DebugLocation gUnknown_811872C;
-
 extern bool8 GetPredefinedScript(Action *param_1, ScriptInfoSmall *script, s32 _index);
 
-
 void GroundEffect_Delete(s32);
+void DeleteGroundEffects(void);
 s32 GroundEffect_Add(s32 _id,const GroundEffectData *effectData,s32 _group,s32 _sector);
 
 const struct GroundScriptHeader *GetGroundScript(s16 a0, DebugLocation *);
@@ -128,6 +113,21 @@ static const CallbackData gGroundEffectCallbacks = {
 extern const u8 gUnknown_81185D8[];
 #define FAKE_FILENAME gUnknown_81185D8
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -440,7 +440,7 @@ Action *sub_80AD158(s32 index_)
         return NULL;
 }
 
-UNUSED bool8 sub_80AD18C(s32 index_, ScriptInfoSmall *scriptInfo, s32 a2_)
+UNUSED static bool8 sub_80AD18C(s32 index_, ScriptInfoSmall *scriptInfo, s32 a2_)
 {
     s32 index = (s16)index_;
     s32 a2 = (s16)a2_;
