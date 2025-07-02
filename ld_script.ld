@@ -1031,6 +1031,8 @@ SECTIONS {
     ornament_sbin_section :
     ALIGN(4)
     {
+        src/ornament_sbin.o(.rodata);
+        src/ornament_files_table.o(.rodata);
         data/ornament_sbin.o(.rodata);
     } > ROM =0
 
