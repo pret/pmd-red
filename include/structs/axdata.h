@@ -6,11 +6,11 @@
 #include "structs/str_position.h"
 
 // size: 0x8
-typedef struct UnkSpriteMem
+typedef struct ax_sprite
 {
-    /* 0x0 */ void *src;
+    /* 0x0 */ const void *gfx;
     /* 0x4 */ s32 byteCount;
-} UnkSpriteMem;
+} ax_sprite;
 
 // size: 0x20
 typedef struct axdata1
@@ -55,6 +55,13 @@ typedef struct ax_anim
     /* 0x8 */ DungeonPos shadow;
 } ax_anim;
 
+#define AX_POSITION_SETS_COUNT 4
+
+struct PositionSets
+{
+    DungeonPos set[AX_POSITION_SETS_COUNT];
+};
+
 // size: 0x3C
 typedef struct axdata
 {
@@ -63,21 +70,21 @@ typedef struct axdata
     /* 0x4 */ s16 animWaitFrames; // frames to not update the animation for
     /* 0x6 */ s16 totalFrames; // max 30000
     /* 0x8 */ axdata1 sub1;
-    /* 0x28 */ ax_anim *nextAnimData; // next animation data (if flags&0x1000)
-    /* 0x2C */ ax_anim *activeAnimData; // current animation data
-    /* 0x30 */ DungeonPos *positions;
-    /* 0x34 */ ax_pose **poseData;
-    /* 0x38 */ UnkSpriteMem **spriteData;
+    /* 0x28 */ const ax_anim *nextAnimData; // next animation data (if flags&0x1000)
+    /* 0x2C */ const ax_anim *activeAnimData; // current animation data
+    /* 0x30 */ const struct PositionSets *positions;
+    /* 0x34 */ const ax_pose *const *poseData;
+    /* 0x38 */ const ax_sprite *const *spriteData;
 } axdata;
 
 // size: 0x14
 typedef struct axmain
 {
-    /* 0x0 */ ax_pose **poses;
-    /* 0x4 */ ax_anim ***animations;
+    /* 0x0 */ const ax_pose *const *poses;
+    /* 0x4 */ const ax_anim *const *const *animations;
     /* 0x8 */ u32 animCount;
-    /* 0xC */ UnkSpriteMem **spriteData;
-    /* 0x10 */ DungeonPos *positions;
+    /* 0xC */ const ax_sprite *const *spriteData;
+    /* 0x10 */ const struct PositionSets *positions;
 } axmain;
 
 // size: 0x4C

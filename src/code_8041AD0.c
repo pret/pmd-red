@@ -1174,7 +1174,7 @@ void sub_8042390(Entity *entity, Item *item)
         local_14.y = (entity->pixelPos).y / 256;
 
         sVar1 = (local_14.y - gDungeon->unk181e8.cameraPixelPos.y) / 2 + 1;
-        sub_8005700(asStack_24,&entity->axObj);
+        sub_8005700(asStack_24,&entity->axObj.axdata);
         uVar6 = sub_800E49C(id,&local_14,asStack_24,0,sVar1);
         for (counter = 0; counter < 1000; counter++) {
             DungeonRunFrameActions(0x42);
@@ -1202,7 +1202,7 @@ void sub_804245C(Entity *entity, Item *item)
         local_14.y = (entity->pixelPos).y / 256;
 
         sVar1 = (local_14.y - gDungeon->unk181e8.cameraPixelPos.y) / 2 + 1;
-        sub_8005700(asStack_24,&entity->axObj);
+        sub_8005700(asStack_24,&entity->axObj.axdata);
         uVar6 = sub_800E49C(id,&local_14,asStack_24,1,sVar1);
         for (counter = 0; counter < 1000; counter++) {
             DungeonRunFrameActions(0x42);

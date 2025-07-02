@@ -11,4 +11,4 @@
 #define _(x) x
 #endif
 
-ALIGNED(4) static const u8 sFill[] = _("pksdir0");
+ALIGNED(4) static const u8 sPksDir0[] = _("pksdir0");

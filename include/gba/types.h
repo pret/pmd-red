@@ -74,6 +74,11 @@ struct OamData
 #define ST_OAM_H_RECTANGLE 1
 #define ST_OAM_V_RECTANGLE 2
 
+#define ST_OAM_SIZE_0   0
+#define ST_OAM_SIZE_1   1
+#define ST_OAM_SIZE_2   2
+#define ST_OAM_SIZE_3   3
+
 struct BgAffineSrcData
 {
     s32 texX;

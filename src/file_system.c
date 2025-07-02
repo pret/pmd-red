@@ -1,34 +1,12 @@
 #include "global.h"
+#include "globaldata.h"
 #include "decompress_sir.h"
 #include "file_system.h"
-
-// size: 0x8
-typedef struct UnkFileStruct
-{
-    /* 0x0 */ u32 unk0;
-    /* 0x4 */ u32 unk4;
-} UnkFileStruct;
 
 EWRAM_DATA u32 gUnknown_202D2A4 = {0};
 EWRAM_DATA OpenedFile gFileCache[64] = {0};
 
 static EWRAM_INIT u32 sFileCacheCursorPosition = {0};
-
-#include "data/file_system.h"
-
-UNUSED static void FP48_16_Log(UnkFileStruct *r0, s32 r1)
-{
-    s32 temp;
-
-    temp = r1;
-    if (temp < 1)
-        temp = 1;
-    if (temp > 299)
-        temp = 299;
-
-    r0->unk4 = gUnknown_80B96E4[temp];
-    r0->unk0 = 0;
-}
 
 void InitFileSystem(void)
 {
@@ -61,7 +39,7 @@ OpenedFile *OpenFile(const u8 *filename, const FileArchive *arc)
     const File *entries;
     const File *file;
 
-    magic = strcmp(arc->magic, gUnknown_80B9B94) != 0;
+    magic = AreStringsDifferent(arc->magic, sPksDir0);
 
     magicFound = 0;
 
@@ -92,7 +70,7 @@ OpenedFile *OpenFile(const u8 *filename, const FileArchive *arc)
     file = &entries[left];
 
     if (strcmp(file->name, filename)) {
-        sprintf(buffer, gUnknown_80B9B9C, filename);
+        sprintf(buffer, _("not find file [%s]\n"), filename);
         return NULL;
     }
 

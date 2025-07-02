@@ -222,7 +222,7 @@ void sub_806C51C(Entity *entity)
     pos1.x = entity->pixelPos.x / 256;
     pos1.y = ((entity->pixelPos.y - entity->unk1C.raw) - entInfo->unk174.raw) / 256;
 
-    sub_8005700(posArray, &entity->axObj);
+    sub_8005700(posArray, &entity->axObj.axdata);
     UpdateDungeonPokemonSprite2(entInfo->dungeonSpriteId, &pos1, posArray, gDungeon->unk181e8.priority);
 
     statusSprites = EntityGetStatusSprites(entity);

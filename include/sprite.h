@@ -24,12 +24,12 @@ typedef struct SpriteList
 typedef struct unkStruct_20266B0
 {
     /* 0x0 */ s32 byteCount;
-    /* 0x4 */ void *src;
+    /* 0x4 */ const void *src;
     /* 0x8 */ void *dest;
 } unkStruct_20266B0;
 
-void AddAxSprite(ax_pose *, axdata1 *, UnkSpriteMem *, unkStruct_2039DB0 *spriteMasks);
-void AddSprite(SpriteOAM *, s32, UnkSpriteMem *, unkStruct_2039DB0 *spriteMasks);
+void AddAxSprite(const ax_pose *axPose, const axdata1 *axData, const ax_sprite *axSprite, unkStruct_2039DB0 *spriteMasks);
+void AddSprite(SpriteOAM *, s32, ax_sprite *, unkStruct_2039DB0 *spriteMasks);
 void AxResInit(axdata *, axmain *, u32, u32 direction, u32, u32 spriteAnimIndex, bool8);
 void AxResInitFile(axdata *, OpenedFile *, u32, u32, u32, u32 spriteAnimIndex, bool8);
 void AxResInitUnorientedFile(axdata *, OpenedFile *, u32, u32, u32 spriteAnimIndex, bool8);
@@ -41,7 +41,7 @@ void nullsub_7(DungeonPos *);
 void nullsub_8(u32);
 void nullsub_9(void);
 void nullsub_10(bool8);
-void nullsub_11(SpriteOAM *, s32, UnkSpriteMem *, unkStruct_2039DB0 *);
+void nullsub_11(SpriteOAM *, s32, ax_sprite *, unkStruct_2039DB0 *);
 void nullsub_12(void);
 void nullsub_13(void);
 void nullsub_14(void);
@@ -54,7 +54,7 @@ void sub_8005304(void);
 void sub_8005610(OpenedFile *, s32 vramIdx, s32 brightness, const RGB *ramp);
 const RGB *sub_8005674(const EfoFileData *, s32 vramIdx);
 void sub_800569C(DungeonPos *, axdata *, u8);
-void sub_8005700(DungeonPos *, axObject *);
+void sub_8005700(DungeonPos *dstPos, axdata *axData);
 void sub_8005770(s32, const RGB *color, s32 brightness, const RGB *ramp);
 
 #endif // GUARD_SPRITE_H

@@ -27,8 +27,7 @@ UNUSED EWRAM_DATA static u32 sUnused3 = {0}; // R=2026E34
 EWRAM_INIT static unkStruct_20266B0 *sUnknown_203B074 = {0};
 
 static void AxResInitUnoriented(axdata *, axmain *, u32, u32, u32, bool8);
-static void RegisterSpriteParts_80052BC(UnkSpriteMem *);
-static void sub_800533C(ax_pose **, UnkSpriteMem **, axdata1 *, unkStruct_2039DB0 *spriteMasks, bool8);
+static void RegisterSpriteParts_80052BC(const ax_sprite *spritesPtr);
 static void sub_800561C(const EfoFileData *, s32 vramIdx, s32 brightness, const RGB *ramp);
 
 // arm9.bin::0200265C
@@ -177,36 +176,36 @@ void sub_8004E8C(unkStruct_2039DB0 *a0)
 }
 
 // arm9.bin::020021C4
-void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *spriteMasks)
+void AddAxSprite(const ax_pose *axPose, const axdata1 *axData, const ax_sprite *axSprite, unkStruct_2039DB0 *spriteMasks)
 {
     // size: 0xC
-    struct UnkStackFor8004EA8
+    struct AxOAMPose
     {
-        s16 unk0;
+        s16 spriteId;
         ax_pose_unk2 unk2;
         SpriteOAM oam;
-    } sp;
+    } axOamPose;
     SpriteOAM *sprite;
     s32 spriteId;
     s32 pos; // Has to be used for both x and y to match
-    struct UnkStackFor8004EA8 *spPtr;
+    struct AxOAMPose *axOamPosePtr;
 
-    if (a2 != NULL)
-        RegisterSpriteParts_80052BC(a2);
+    if (axSprite != NULL)
+        RegisterSpriteParts_80052BC(axSprite);
 
     if (sSpriteCount >= 128)
         return;
 
-    spPtr = &sp;
-    spPtr->unk0 = a0->sprite;
-    spPtr->unk2 = a0->unk2;
+    axOamPosePtr = &axOamPose;
+    axOamPosePtr->spriteId = axPose->sprite;
+    axOamPosePtr->unk2 = axPose->unk2;
 
-    spPtr->oam.attrib1 = a0->flags1 & ~(0x100 | 0x200);
-    spPtr->oam.attrib2 = a0->flags2 & ~(0x200 | 0x400 | 0x800);
-    spPtr->oam.attrib3 = a0->flags3;
-    spPtr->oam.unk6 = ((a0->flags2 & (0x200 | 0x400 | 0x800)) >> 9) | ((a0->flags1 & (0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20 | 0x40 | 0x80 | 0x100 | 0x200)) << 4);
+    axOamPosePtr->oam.attrib1 = axPose->flags1 & ~((1 << SPRITEOAM_SHIFT_AFFINEMODE1) | (1 << SPRITEOAM_SHIFT_AFFINEMODE2));
+    axOamPosePtr->oam.attrib2 = axPose->flags2 & ~(0x200 | 0x400 | 0x800);
+    axOamPosePtr->oam.attrib3 = axPose->flags3;
+    axOamPosePtr->oam.unk6 = ((axPose->flags2 & (0x200 | 0x400 | 0x800)) >> 9) | ((axPose->flags1 & (0x1 | 0x2 | 0x4 | 0x8 | 0x10 | 0x20 | 0x40 | 0x80 | 0x100 | 0x200)) << 4);
     sprite = &sUnknown_20262A8[sSpriteCount];
-    spriteId = a1->unk16 + sp.unk2.unk1;
+    spriteId = axData->unk16 + axOamPose.unk2.unk1;
 
     if (spriteId < 0)
         spriteId = 0;
@@ -214,23 +213,23 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
         spriteId = 255;
 
     if (spriteMasks == NULL) {
-        SpriteCopy(sprite, &spPtr->oam);
+        SpriteCopy(sprite, &axOamPosePtr->oam);
     }
     else {
-        SpriteCopyWithMasks(sprite, &spPtr->oam, spriteMasks);
+        SpriteCopyWithMasks(sprite, &axOamPosePtr->oam, spriteMasks);
     }
 
     // Set tileNum
-    if (sp.unk2.unk0 != 0 && sUnknown_2025672[sp.unk2.unk0] != 0) {
-        SpriteSetTileNum(sprite, sUnknown_2025672[sp.unk2.unk0]);
+    if (axOamPose.unk2.unk0 != 0 && sUnknown_2025672[axOamPose.unk2.unk0] != 0) {
+        SpriteSetTileNum(sprite, sUnknown_2025672[axOamPose.unk2.unk0]);
     }
     else {
         // Animations add to existing tileNum
-        SpriteAddTileNum(sprite, a1->vramTileOrMaybeAnimTimer);
+        SpriteAddTileNum(sprite, axData->vramTileOrMaybeAnimTimer);
     }
 
     pos = SpriteGetX(sprite);
-    pos += a1->pos.x - 0x100;
+    pos += axData->pos.x - 0x100;
 
     if (pos < -64)
         return;
@@ -240,7 +239,7 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
     SpriteSetX(sprite, pos);
 
     pos = SpriteGetY(sprite);
-    pos += a1->pos.y - 0x200;
+    pos += axData->pos.y - 0x200;
     if (pos < -64)
         return;
     if (pos >= DISPLAY_HEIGHT)
@@ -250,11 +249,11 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
 
     // Set paletteNum
     if (!SpriteGetUnk6_1(sprite)) {
-        SpriteSetPalNum(sprite, a1->paletteNum);
+        SpriteSetPalNum(sprite, axData->paletteNum);
     }
 
-    if (sp.unk2.unk0 != 0) {
-        SpriteSetPalNum(sprite, sUnknown_2025682[sp.unk2.unk0]);
+    if (axOamPose.unk2.unk0 != 0) {
+        SpriteSetPalNum(sprite, sUnknown_2025682[axOamPose.unk2.unk0]);
     }
 
     sUnknown_2025EA8[sSpriteCount].unk0 = sSpriteList.sprites[spriteId].unk0;
@@ -264,7 +263,7 @@ void AddAxSprite(ax_pose *a0, axdata1 *a1, UnkSpriteMem *a2, unkStruct_2039DB0 *
 
 // a2 and spriteMasks are always called with NULL lol
 // arm9.bin::02002088
-void AddSprite(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *spriteMasks)
+void AddSprite(SpriteOAM *a0, s32 a1, ax_sprite *a2, unkStruct_2039DB0 *spriteMasks)
 {
     s32 yPos;
     SpriteOAM *spr;
@@ -430,17 +429,17 @@ void BlinkSavingIcon(void)
 }
 
 // arm9.bin::02001E70
-static void RegisterSpriteParts_80052BC(UnkSpriteMem *a0)
+static void RegisterSpriteParts_80052BC(const ax_sprite *spritesPtr)
 {
-    while (a0->byteCount != 0) {
-        if ((uintptr_t)sUnknown_203B074 >= (uintptr_t)&sUnknown_20266B0[UNK_20266B0_ARR_COUNT])
+    while (spritesPtr->byteCount != 0) {
+        if (sUnknown_203B074 >= &sUnknown_20266B0[UNK_20266B0_ARR_COUNT])
             return;
-        sUnknown_203B074->byteCount = a0->byteCount;
-        sUnknown_203B074->src = a0->src;
+        sUnknown_203B074->byteCount = spritesPtr->byteCount;
+        sUnknown_203B074->src = spritesPtr->gfx;
         sUnknown_203B074->dest = sCharMemCursor;
-        sCharMemCursor += a0->byteCount;
+        sCharMemCursor += spritesPtr->byteCount;
         sUnknown_203B074++;
-        a0++;
+        spritesPtr++;
     }
 }
 
@@ -458,10 +457,10 @@ void sub_8005304(void)
 }
 
 // arm9.bin::02001D88
-static void sub_800533C(ax_pose **a0, UnkSpriteMem **a1, axdata1 *a2, unkStruct_2039DB0 *spriteMasks, bool8 a4)
+static void sub_800533C(const ax_pose *const *a0, const ax_sprite *const *a1, axdata1 *a2, unkStruct_2039DB0 *spriteMasks, bool8 a4)
 {
-    UnkSpriteMem *mem;
-    ax_pose *r4;
+    const ax_sprite *mem;
+    const ax_pose *r4;
 
     r4 = a0[a2->poseId];
     sCharMemCursor = OBJ_VRAM0 + (a2->vramTileOrMaybeAnimTimer * 0x20);
@@ -543,7 +542,7 @@ static inline s16 check_flag_for_80054BC(u16 flags)
 // arm9.bin::02001AC4
 void RunAxAnimationFrame(axdata *a0)
 {
-    ax_anim *aData;
+    const ax_anim *aData;
 
     if (!check_flag_for_80054BC(a0->flags))
         return;
@@ -648,65 +647,58 @@ const RGB *sub_8005674(const EfoFileData *a0, s32 vramIdx)
 }
 
 // arm9.bin::02001894
-void sub_800569C(DungeonPos *a0, axdata *a1, u8 a2)
+void sub_800569C(DungeonPos *dstPos, axdata *axData, u8 setId)
 {
-    DungeonPos *ptr;
-    DungeonPos *ptr2;
-    DungeonPos *ptr3;
+    dstPos->x = 0;
+    dstPos->y = 0;
 
-    a0->x = 0;
-    a0->y = 0;
-
-    if (!(a1->flags >> 15) || a2 >= 4)
+    if (!(axData->flags >> 15) || setId >= AX_POSITION_SETS_COUNT)
         return;
 
-    if (a1->positions != NULL) {
-        ptr = &((DungeonPos*)a1->positions)[a1->sub1.poseId * 4];
-        ptr2 = &ptr[a2];
-        if (*&ptr2->x == 99 && *&ptr2->y == 99) {
-            a0->x = 99;
-            a0->y = 99;
+    if (axData->positions != NULL) {
+        const struct PositionSets *ptr = &axData->positions[axData->sub1.poseId];
+        if (ptr->set[setId].x == 99 && ptr->set[setId].y == 99) {
+            dstPos->x = 99;
+            dstPos->y = 99;
         }
         else {
-            ptr3 = &ptr[a2];
-            a0->x = a1->sub1.offset.x + ptr3->x;
-            a0->y = a1->sub1.offset.y + ptr3->y;
+            dstPos->x = axData->sub1.offset.x + ptr->set[setId].x;
+            dstPos->y = axData->sub1.offset.y + ptr->set[setId].y;
         }
     }
     else {
-        a0->x = 99;
-        a0->y = 99;
+        dstPos->x = 99;
+        dstPos->y = 99;
     }
 }
 
 // arm9.bin::020017D4
-void sub_8005700(DungeonPos *a0, axObject *a1)
+void sub_8005700(DungeonPos *dstPos, axdata *axData)
 {
     s32 i;
-    DungeonPos *ptr;
 
-    if (!(a1->axdata.flags >> 15))
+    if (!(axData->flags >> 15))
         return;
 
-    if (a1->axdata.positions != NULL) {
-        ptr = &((DungeonPos*)a1->axdata.positions)[a1->axdata.sub1.poseId * 4];
-        for (i = 0; i < 4; i++) {
-            if (*&ptr[i].x == 99 && *&ptr[i].y == 99) {
-                a0->x = 99;
-                a0->y = 99;
+    if (axData->positions != NULL) {
+        const struct PositionSets *ptr = &axData->positions[axData->sub1.poseId];
+        for (i = 0; i < AX_POSITION_SETS_COUNT; i++) {
+            if (ptr->set[i].x == 99 && ptr->set[i].y == 99) {
+                dstPos->x = 99;
+                dstPos->y = 99;
             }
             else {
-                a0->x = a1->axdata.sub1.offset.x + ptr[i].x;
-                a0->y = a1->axdata.sub1.offset.y + ptr[i].y;
+                dstPos->x = axData->sub1.offset.x + ptr->set[i].x;
+                dstPos->y = axData->sub1.offset.y + ptr->set[i].y;
             }
-            a0++;
+            dstPos++;
         }
     }
     else {
-        for (i = 0; i < 4; i++) {
-            a0->x = 99;
-            a0->y = 99;
-            a0++;
+        for (i = 0; i < AX_POSITION_SETS_COUNT; i++) {
+            dstPos->x = 99;
+            dstPos->y = 99;
+            dstPos++;
         }
     }
 }
@@ -753,7 +745,7 @@ UNUSED static void nullsub_144(void)
 {
 }
 
-void nullsub_11(SpriteOAM *a0, s32 a1, UnkSpriteMem *a2, unkStruct_2039DB0 *a3)
+void nullsub_11(SpriteOAM *a0, s32 a1, ax_sprite *a2, unkStruct_2039DB0 *a3)
 {
 }
 

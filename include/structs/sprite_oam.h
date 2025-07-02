@@ -230,13 +230,22 @@ typedef struct SpriteOAM
     (spritePtr)->attrib2 |= _matrixNumVal;                        \
 }
 
-// Needed for TryCreateModeArrows. No difference to SpriteSetMatrixNum other than not creating one additional local variable.
-#define SpriteSetMatrixNum_UseLocalVar(spritePtr, _matrixNum)                \
+#define SPRITEOAM_SHIFT_H_FLIP_MATRIXNUM (3)
+#define SPRITEOAM_SHIFT_V_FLIP_MATRIXNUM (4)
+
+// Horizontal flip shares the same bits as matrixNum.
+#define SpriteSetVFlip(spritePtr, _flip)                \
 {                                                       \
-    _matrixNum &= SPRITEOAM_MAX_MATRIXNUM;                \
-    _matrixNum <<= SPRITEOAM_SHIFT_MATRIXNUM;                \
+    SpriteSetMatrixNum(spritePtr, (_flip << SPRITEOAM_SHIFT_V_FLIP_MATRIXNUM))         \
+}
+
+// Needed for TryCreateModeArrows. No difference to SpriteSetMatrixNum other than not creating one additional local variable.
+#define SpriteSetMatrixNumFlips(spritePtr, _flips)                \
+{                                                       \
+    _flips &= SPRITEOAM_MAX_MATRIXNUM;                \
+    _flips <<= SPRITEOAM_SHIFT_MATRIXNUM;                \
     (spritePtr)->attrib2 &= ~SPRITEOAM_MASK_MATRIXNUM;            \
-    (spritePtr)->attrib2 |= _matrixNum;                        \
+    (spritePtr)->attrib2 |= _flips;                        \
 }
 
 #define SpriteSetSize(spritePtr, _size)                \

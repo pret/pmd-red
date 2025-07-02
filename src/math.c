@@ -940,3 +940,14 @@ UNUSED void FP48_16_Hypot(s48_16 *dst, s48_16 *a, s48_16 *b)
 
     *dst = sp0;
 }
+
+UNUSED static void FP48_16_Log(s48_16 *dst, s32 a)
+{
+    if (a < 1)
+        a = 1;
+    if (a >= ARRAY_COUNT_INT(gUnknown_80B96E4))
+        a = ARRAY_COUNT_INT(gUnknown_80B96E4) - 1;
+
+    dst->lo = gUnknown_80B96E4[a];
+    dst->hi = 0;
+}
