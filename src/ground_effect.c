@@ -560,133 +560,48 @@ s16 sub_80AD3B4(s32 index_, PixelPos *pos)
     return parent->kind;
 }
 
-// https://decomp.me/scratch/X0Sfx  - 79.62% matched (Seth)
-NAKED
-s32 sub_80AD3E0(GroundEffect *r0, PixelPos *r1)
+s32 sub_80AD3E0(GroundEffect *param_1,PixelPos *param_2)
 {
-    asm_unified(
-	"\tpush {r4-r7,lr}\n"
-	"\tmov r12, r0\n"
-	"\tldr r3, [r1]\n"
-	"\tldr r2, [r0, 0x14]\n"
-	"\tsubs r6, r3, r2\n"
-	"\tldr r1, [r1, 0x4]\n"
-	"\tldr r0, [r0, 0x18]\n"
-	"\tsubs r7, r1, r0\n"
-	"\tadds r4, r3, r2\n"
-	"\tadds r5, r1, r0\n"
-	"\tmov r1, r12\n"
-	"\tldr r0, [r1, 0x28]\n"
-	"\tcmp r6, r0\n"
-	"\tblt _080AD40E\n"
-	"\tldr r0, [r1, 0x30]\n"
-	"\tcmp r4, r0\n"
-	"\tbge _080AD40E\n"
-	"\tldr r0, [r1, 0x2C]\n"
-	"\tcmp r7, r0\n"
-	"\tblt _080AD40E\n"
-	"\tldr r0, [r1, 0x34]\n"
-	"\tcmp r5, r0\n"
-	"\tblt _080AD412\n"
-"_080AD40E:\n"
-	"\tmovs r0, 0x1\n"
-	"\tb _080AD428\n"
-"_080AD412:\n"
-	"\tmovs r0, 0x92\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tstr r6, [r0]\n"
-	"\tstr r7, [r0, 0x4]\n"
-	"\tmovs r0, 0x96\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tstr r4, [r0]\n"
-	"\tstr r5, [r0, 0x4]\n"
-	"\tmovs r0, 0\n"
-"_080AD428:\n"
-	"\tpop {r4-r7}\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
+    PixelPos local_1c = {param_2->x - param_1->unk14.x, param_2->y - param_1->unk14.y};
+    PixelPos local_14 = {param_2->x + param_1->unk14.x, param_2->y + param_1->unk14.y};
+
+    if ((local_1c.x < param_1->unk28.x) || (local_14.x >= param_1->unk30.x) ||
+        (local_1c.y < param_1->unk28.y) || (local_14.y >= param_1->unk30.y)) {
+        return 1;
+    }
+    else {
+        param_1->unk124 = local_1c;
+        param_1->unk12C = local_14; 
+        return 0;
+    }
 }
 
-// https://decomp.me/scratch/MUVaT - 98.53% matched (Seth)
-NAKED
-s32 sub_80AD430(GroundEffect *r0, PixelPos *r1)
+s32 sub_80AD430(GroundEffect *param_1,PixelPos *param_2)
 {
-    asm_unified(
-	"\tpush {r4-r6,lr}\n"
-	"\tmov r12, r0\n"
-	"\tmovs r0, 0x92\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tldr r0, [r0]\n"
-	"\tldr r2, [r1]\n"
-	"\tadds r5, r0, r2\n"
-	"\tmovs r0, 0x94\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tldr r0, [r0]\n"
-	"\tldr r1, [r1, 0x4]\n"
-	"\tadds r6, r0, r1\n"
-	"\tmovs r0, 0x96\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tldr r0, [r0]\n"
-	"\tadds r3, r0, r2\n"
-	"\tmovs r0, 0x98\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tldr r0, [r0]\n"
-	"\tadds r4, r0, r1\n"
-	"\tmov r0, r12\n"
-	"\tldr r1, [r0, 0x28]\n"
-	"\tcmp r5, r1\n"
-	"\tbge _080AD470\n"
-	"\tadds r5, r1, 0\n"
-	"\tldr r0, [r0, 0xC]\n"
-	"\tadds r3, r1, r0\n"
-	"\tb _080AD47E\n"
-"_080AD470:\n"
-	"\tmov r2, r12\n"
-	"\tldr r1, [r2, 0x30]\n"
-	"\tcmp r3, r1\n"
-	"\tblt _080AD47E\n"
-	"\tldr r0, [r2, 0xC]\n"
-	"\tsubs r5, r1, r0\n"
-	"\tadds r3, r1, 0\n"
-"_080AD47E:\n"
-	"\tmov r0, r12\n"
-	"\tldr r1, [r0, 0x2C]\n"
-	"\tcmp r6, r1\n"
-	"\tbge _080AD48E\n"
-	"\tadds r6, r1, 0\n"
-	"\tldr r0, [r0, 0x10]\n"
-	"\tadds r4, r1, r0\n"
-	"\tb _080AD49C\n"
-"_080AD48E:\n"
-	"\tmov r2, r12\n"
-	"\tldr r1, [r2, 0x34]\n"
-	"\tcmp r4, r1\n"
-	"\tblt _080AD49C\n"
-	"\tldr r0, [r2, 0x10]\n"
-	"\tsubs r6, r1, r0\n"
-	"\tadds r4, r1, 0\n"
-"_080AD49C:\n"
-	"\tmovs r0, 0x92\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tstr r5, [r0]\n"
-	"\tstr r6, [r0, 0x4]\n"
-	"\tmovs r0, 0x96\n"
-	"\tlsls r0, 1\n"
-	"\tadd r0, r12\n"
-	"\tstr r3, [r0]\n"
-	"\tstr r4, [r0, 0x4]\n"
-	"\tmovs r0, 0\n"
-	"\tpop {r4-r6}\n"
-	"\tpop {r1}\n"
-	"\tbx r1");
+    PixelPos iVar2 = {param_1->unk124.x + param_2->x, param_1->unk124.y + param_2->y};
+    PixelPos uVar4 = {param_1->unk12C.x + param_2->x, param_1->unk12C.y + param_2->y};
 
+    if (iVar2.x < param_1->unk28.x) {
+        iVar2.x = param_1->unk28.x;
+        uVar4.x = param_1->unk28.x + param_1->unkC.x;
+    }
+    else if (uVar4.x >= param_1->unk30.x) {
+        iVar2.x = param_1->unk30.x - param_1->unkC.x;
+        uVar4.x = param_1->unk30.x;
+    }
+
+    if (iVar2.y < param_1->unk28.y) {
+        iVar2.y = param_1->unk28.y;
+        uVar4.y = param_1->unk28.y + param_1->unkC.y;
+    }
+    else if (uVar4.y >= param_1->unk30.y){
+        iVar2.y = param_1->unk30.y - param_1->unkC.y;
+        uVar4.y = param_1->unk30.y;
+    }
+
+    param_1->unk124 = iVar2;
+    param_1->unk12C = uVar4;
+    return 0;
 }
 
 static s16 CallbackEffectGetIndex(void *ptr) 
