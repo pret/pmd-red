@@ -1036,6 +1036,8 @@ SECTIONS {
         src/ornament_sbin.o(.rodata);
         src/ornament_files_table.o(.rodata);
         src/ornament_gfx1.o(.rodata);
+        src/ornament_gfx2.o(.rodata);
+        src/ornament_gfx3.o(.rodata);
         data/ornament_sbin.o(.rodata);
     } > ROM =0
     
