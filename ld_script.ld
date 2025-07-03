@@ -1038,7 +1038,8 @@ SECTIONS {
         src/ornament_gfx1.o(.rodata);
         src/ornament_gfx2.o(.rodata);
         src/ornament_gfx3.o(.rodata);
-        data/ornament_sbin.o(.rodata);
+        src/ornament_gfx4.o(.rodata);
+        src/ornament_gfx5.o(.rodata);
     } > ROM =0
     
     unk_9E7EB08_section :
