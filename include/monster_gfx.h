@@ -5,22 +5,6 @@
 #include "structs/axdata.h"
 #include "structs/sprite_oam.h"
 
-// Only Latios's pose 189 has these unk2 fields different. Actually, only unk2_1 is different. unk2_0 is still 0.
-#define AX_POSE_FULL(spriteId, unk2_0, unk2_1, f1, f2, f3){ .sprite = spriteId, .unk2 = {unk2_0, unk2_1}, .flags1 = f1, .flags2 = f2, .flags3 = f3 }
-#define AX_POSE(spriteId, f1, f2, f3) AX_POSE_FULL(spriteId, 0, 0, f1, f2, f3)
-#define AX_POSE_TERMINATOR { .sprite = -1, .unk2 = {-1, -1}, .flags1 = 0xFFFF, .flags2 = 0xFFFF, .flags3 = 0xFFFF }
-
-// The unk flag is unused(it's copied to SpriteOAM's unk6 field), but it's actually not part of OAM flags1.
-#define OAM1(y, shape, unk)((y & 0xFF) | ((shape & SPRITEOAM_MAX_SHAPE) << SPRITEOAM_SHIFT_SHAPE) | (unk << 8) )
-// unk1 and unk2 are not part of oam flags2.
-#define OAM2(x, size, flip, unk1, unk2)(((x & SPRITEOAM_MAX_X) << SPRITEOAM_SHIFT_X) | ((size & SPRITEOAM_MAX_SIZE) << SPRITEOAM_SHIFT_SIZE) | (flip << (SPRITEOAM_SHIFT_MATRIXNUM + SPRITEOAM_SHIFT_H_FLIP_MATRIXNUM)) | (unk1 << 9) | (unk2 << 8))
-#define FLIP(h, v)((0 | ((h) ? 1 : 0) | ((v) ? 2 : 0)))
-
-// It seems priority is always 3, palNum is the same as the overworld palette field in the monster data. Tilenum is 0 for normal sprites, and other values for stitched together sprites.
-#define OAM3(tileNum, prio, palNum)(((tileNum & SPRITEOAM_MAX_TILENUM) << SPRITEOAM_SHIFT_TILENUM) | ((prio & SPRITEOAM_MAX_PRIORITY) << SPRITEOAM_SHIFT_PRIORITY) | ((palNum & SPRITEOAM_MAX_PALETTENUM) << SPRITEOAM_SHIFT_PALETTENUM))
-
-#define AX_ANIM_TERMINATOR {0}
-
 extern const SiroArchive gAxBulbasaur;
 extern const SiroArchive gAxIvysaur;
 extern const SiroArchive gAxVenusaur;
