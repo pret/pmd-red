@@ -32,7 +32,7 @@ UNUSED static void ScaleRGBColor(RGB_Array *dst, s32 factor, RGB_Array *src)
 UNUSED static void InterpolateRGBColorGradient(RGB_Array *dst, s32 steps, RGB_Array *start, RGB_Array *end)
 {
     s32 i, j;
-    float spFloats[4];
+    float spFloats[RGB_FIELDS_COUNT];
     float floatsMul[4];
     float f0 = 1.0f / steps;
 
