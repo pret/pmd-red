@@ -553,8 +553,6 @@ bool8 GroundObject_GetScript(s32 index_, ScriptInfoSmall *scriptInfo, s32 a2_)
         return FALSE;
 }
 
-extern DebugLocation gUnknown_8118504;
-
 bool8 GroundObject_ExecuteScript(s32 index_, void *a1, ScriptInfoSmall *script)
 {
     s32 index = (s16)index_;

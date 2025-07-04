@@ -357,7 +357,6 @@ SECTIONS {
         src/ground_lives.o(.text);
         src/ground_object.o(.text);
         src/ground_effect.o(.text);
-        asm/ground_effect.o(.text);
         src/ground_link.o(.text);
         src/ground_event.o(.text);
         src/unk_dungeon_load_maybe.o(.text);
@@ -737,7 +736,7 @@ SECTIONS {
         src/ground_script_file.o(.rodata);
         src/ground_lives.o(.rodata);
         src/ground_object.o(.rodata);
-        data/data_8115F5C_1.o(.rodata);
+        src/ground_effect.o(.rodata);
         src/ground_link.o(.rodata);
         src/ground_event.o(.rodata);
         src/unk_dungeon_load_maybe.o(.rodata);
