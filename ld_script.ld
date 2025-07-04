@@ -1025,6 +1025,7 @@ SECTIONS {
     ALIGN(4)
     {
         src/ground_sbin.o(.rodata);
+        src/ground_files_table.o(.rodata);
         data/ground_sbin.o(.rodata);
     } > ROM =0
 
