@@ -33,7 +33,7 @@ UNUSED static void InterpolateRGBColorGradient(RGB_Array *dst, s32 steps, RGB_Ar
 {
     s32 i, j;
     float spFloats[RGB_FIELDS_COUNT];
-    float floatsMul[4];
+    float floatsMul[RGB_FIELDS_COUNT];
     float f0 = 1.0f / steps;
 
     for (i = 0; i < RGB_FIELDS_COUNT; i++) {
