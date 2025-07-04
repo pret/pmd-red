@@ -1,3 +1,4 @@
+static const axmain sAxMainTitlebg1;
 const SiroArchive gAxTitlebg1 = {"SIRO", &sAxMainTitlebg1};
 
 static const ax_pose sTitlebg1Pose1[] = {

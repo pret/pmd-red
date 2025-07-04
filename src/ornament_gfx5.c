@@ -8,7 +8,6 @@
 #include "data/ornament/npc03.h"
 #include "data/ornament/npc04.h"
 #include "data/ornament/stoneim.h"
-#include "data/ornament/titlebg1.h"
 #include "data/ornament/titlebg.h"
 #include "data/ornament/titleop1.h"
 #include "data/ornament/titleop2.h"
