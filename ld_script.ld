@@ -1018,6 +1018,8 @@ SECTIONS {
     effect_sbin_section :
     ALIGN(4)
     {
+        src/effect_sbin.o(.rodata);
+        src/effect_files_table.o(.rodata);
         data/effect_sbin.o(.rodata);
     } > ROM =0
 
