@@ -50,6 +50,7 @@ SECTIONS {
         src/arm_funcs.o(.text);
         src/main_loops.o(.text);
         src/event_flag.o(.text);
+        src/gba_color_util.o(.text);
         src/code_8002774.o(.text);
         src/memory.o(.text);
         src/code_80035F0.o(.text);
@@ -429,6 +430,7 @@ SECTIONS {
         src/main_loops.o(.rodata);
         src/event_flag.o(.rodata);
         src/script_vars_info.o(.rodata);
+        src/gba_color_util.o(.rodata);
         data/data.o(.rodata);
         src/code_8002774.o(.rodata);
         data/pksdir_5.o(.rodata);
@@ -1033,7 +1035,19 @@ SECTIONS {
     ornament_sbin_section :
     ALIGN(4)
     {
-        data/ornament_sbin.o(.rodata);
+        src/ornament_sbin.o(.rodata);
+        src/ornament_files_table.o(.rodata);
+        src/ornament_gfx1.o(.rodata);
+        src/ornament_gfx2.o(.rodata);
+        src/ornament_gfx3.o(.rodata);
+        src/ornament_gfx4.o(.rodata);
+        src/ornament_gfx5.o(.rodata);
+    } > ROM =0
+    
+    unk_9E7EB08_section :
+    ALIGN(4)
+    {
+        data/unk_9E7EB08.o(.rodata);
     } > ROM =0
 
     sound_data :

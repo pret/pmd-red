@@ -485,6 +485,31 @@ void ReadGbaPalette(char *path, struct Palette *palette)
 	free(data);
 }
 
+void ReadPmdPalette(char *path, struct Palette *palette)
+{
+    int fileSize;
+	unsigned char *data = ReadWholeFile(path, &fileSize);
+
+	if (fileSize % 2 != 0)
+		FATAL_ERROR("The file size (%d) is not a multiple of 2.\n", fileSize);
+
+	palette->numColors = fileSize / 4;
+
+	for (int i = 0; i < palette->numColors; i++) {
+		palette->colors[i].red = data[i * 4 + 0];
+		palette->colors[i].green = data[i * 4 + 1];
+		palette->colors[i].blue = data[i * 4 + 2];
+	}
+	// png can only accept 16 or 256 colors, so fill the remainder with black
+	if (palette->numColors > 16)
+    {
+	    memset(&palette->colors[palette->numColors], 0, (256 - palette->numColors) * sizeof(struct Color));
+	    palette->numColors = 256;
+    }
+
+	free(data);
+}
+
 void WriteGbaPalette(char *path, struct Palette *palette)
 {
 	FILE *fp = fopen(path, "wb");

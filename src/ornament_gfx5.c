@@ -1,0 +1,13 @@
+#include "global.h"
+#include "globaldata.h"
+#include "ornament_gfx.h"
+
+#include "data/ornament/item01.h"
+#include "data/ornament/npc01.h"
+#include "data/ornament/npc02.h"
+#include "data/ornament/npc03.h"
+#include "data/ornament/npc04.h"
+#include "data/ornament/stoneim.h"
+#include "data/ornament/titlebg.h"
+#include "data/ornament/titleop1.h"
+#include "data/ornament/titleop2.h"

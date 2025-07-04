@@ -5,11 +5,11 @@
 
 extern void sub_80039B8(void);
 extern void TransferBGPaletteBuffer(void);
-extern void sub_80037C8(u16, u32, unkStruct_3000400);
+extern void sub_80037C8(u16, u32, RGB_Array);
 extern void sub_8003664(u16 param_1, u16 param_2);
-extern void sub_80036AC(u16, u32, unkStruct_3000400);
-extern void sub_80036F4(u16, u32, unkStruct_3000400);
-extern void sub_8003780(u16, u32, unkStruct_3000400);
+extern void sub_80036AC(u16, u32, RGB_Array);
+extern void sub_80036F4(u16, u32, RGB_Array);
+extern void sub_8003780(u16, u32, RGB_Array);
 
 struct UnkStruct_2039958
 {
@@ -24,7 +24,7 @@ struct UnkStruct_2039958
 struct UnkStruct_2039978
 {
     u32 unk0;
-    unkStruct_3000400 unk4;
+    RGB_Array unk4;
     struct UnkStruct_2039958 unk8;
 };
 
@@ -41,7 +41,7 @@ static void sub_8099838(struct UnkStruct_2039958 *a0);
 static void sub_8099848(struct UnkStruct_2039958 *a0);
 static void sub_8099DD0(u16 a0);
 static void sub_8099E58(u16 a0);
-static void sub_8099E80(u16 a0, unkStruct_3000400 a1);
+static void sub_8099E80(u16 a0, RGB_Array a1);
 
 void sub_8099744(void)
 {
@@ -262,7 +262,7 @@ void sub_8099A48(s32 a0)
     sub_8099880(&gUnknown_2039968, a0);
 }
 
-void sub_8099A5C(s32 a0, s32 a1, unkStruct_3000400 a2)
+void sub_8099A5C(s32 a0, s32 a1, RGB_Array a2)
 {
     gUnknown_2039978.unk0 = a0;
     gUnknown_2039978.unk4 = a2;
@@ -288,7 +288,7 @@ void sub_8099A5C(s32 a0, s32 a1, unkStruct_3000400 a2)
     }
 }
 
-void sub_8099AFC(s32 a0, s32 a1, unkStruct_3000400 a2)
+void sub_8099AFC(s32 a0, s32 a1, RGB_Array a2)
 {
     gUnknown_2039978.unk0 = a0;
     gUnknown_2039978.unk4 = a2;
@@ -445,7 +445,7 @@ static void sub_8099E58(u16 a0)
     sub_8003664(31, a0);
 }
 
-static void sub_8099E80(u16 param_1,unkStruct_3000400 param_2)
+static void sub_8099E80(u16 param_1,RGB_Array param_2)
 {
     s32 i;
 
@@ -677,16 +677,16 @@ static void sub_8099E80(u16 param_1,unkStruct_3000400 param_2)
         case 14:
             switch (gUnknown_2039978.unk0) {
                 case 13:
-                    param_2.unk0[0] = 0x90;
-                    param_2.unk0[1] = 0x90;
-                    param_2.unk0[2] = 0xFF;
-                    param_2.unk0[3] = 0xFF;
+                    param_2.c[0] = 0x90;
+                    param_2.c[1] = 0x90;
+                    param_2.c[2] = 0xFF;
+                    param_2.c[3] = 0xFF;
                     break;
                 case 14:
-                    param_2.unk0[0] = 0xFF;
-                    param_2.unk0[1] = 0xC0;
-                    param_2.unk0[2] = 0x80;
-                    param_2.unk0[3] = 0xFF;
+                    param_2.c[0] = 0xFF;
+                    param_2.c[1] = 0xC0;
+                    param_2.c[2] = 0x80;
+                    param_2.c[3] = 0xFF;
                     break;
             }
         // NOTE: fallthrough needed here
