@@ -5,12 +5,11 @@
 #include "structs/sprite_oam.h"
 #include "structs/str_position.h"
 #include "structs/str_file_system.h"
+#include "structs/str_8009A7C.h"
 
 struct unkStruct_203B0CC_x94
 {
-    s32 unk0;
-    u16 **unk4;
-    u8 fill8[0x14-0x8];
+    struct Struct_8009A7C sub;
     s32 unk14;
     s32 unk18;
     s32 fill1C;
@@ -34,11 +33,13 @@ struct unkStruct_203B0CC_sub
     u32 unk34;
     u32 effectID;
     s32 paletteNum;
-    u8 fill40[0x4C - 0x40];
+    s32 unk40;
+    s32 unk44;
+    s32 unk48;
     u32 unk4C;
     s32 unk50;
     u8 unk54;
-    u8 fill55[0x58 - 0x55];
+    u8 unk55;
     axdata unk58;
     struct unkStruct_203B0CC_x94 unk94;
     OpenedFile *unkB8;

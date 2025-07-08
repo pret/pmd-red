@@ -10,7 +10,7 @@ typedef struct unkStruct_80B9CC4
     s32 animId;
     s32 unk10;
     s32 unk14;
-    s8 unk18;
+    u8 unk18;
     // padding: 3 bytes
     s32 unk1c;
     s8 unk20;

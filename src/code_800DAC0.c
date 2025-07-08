@@ -13,6 +13,8 @@
 #include "sprite.h"
 #include "bg_palette_buffer.h"
 #include "cpu.h"
+#include "code_800E9E4.h"
+#include "graphics_memory.h"
 
 EWRAM_INIT struct unkStruct_203B0CC *gUnknown_203B0CC = NULL;
 
@@ -176,6 +178,7 @@ void sub_800DCD0(struct unkStruct_203B0CC_sub *param_1)
 }
 
 #ifdef NONMATCHING
+// https://decomp.me/scratch/OBo48
 bool8 sub_800DD0C(struct unkStruct_203B0CC_sub *param_1, DungeonPos *posArg)
 {
     struct axObject *axObj = &param_1->unk58;
@@ -425,7 +428,6 @@ bool8 sub_800DE38(struct unkStruct_203B0CC_sub *a1)
 }
 
 extern s16 gUnknown_2026E4E;
-extern bool8 sub_8009A7C(void *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s32 *a5, s16 *a6);
 extern void sub_809971C(u16 a0, const RGB *a1, int a2);
 
 static inline const EfoFileData *GetFileEfo(struct unkStruct_203B0CC_sub *a0)
@@ -439,7 +441,7 @@ bool8 sub_800DE8C(struct unkStruct_203B0CC_sub *a0, DungeonPos *unused)
     struct unkStruct_203B0CC_x94 *r8 = &a0->unk94;
 
     if (r8->unk18 == 0) {
-        if (sub_8009A7C(r8, r8->unk14, 0, 0, TRUE, &r8->unk18, sp)) {
+        if (sub_8009A7C(&r8->sub, r8->unk14, 0, 0, TRUE, &r8->unk18, sp)) {
             if (sp[0] != 0) {
                 r8->unk20 = 1;
                 gUnknown_203B0CC->unk1A08 = 0;
@@ -508,6 +510,66 @@ bool8 sub_800DE8C(struct unkStruct_203B0CC_sub *a0, DungeonPos *unused)
 
     r8->unk18--;
     return TRUE;
+}
+
+s32 sub_800E2B8(OpenedFile *a0);
+
+void sub_800E0B4(struct unkStruct_203B0CC_sub *r5)
+{
+    s32 r2;
+    unkStruct_80B9CC4 *r6 = sub_800ECA4(r5->unkC);
+    r5->unk34 = r6->animType;
+    r5->effectID = r6->effectId;
+    r5->unk4C = r6->unk10;
+    r5->unk50 = r5->unk10 + r6->unk14;
+    r5->unk55 = r6->loop;
+    r5->unk54 = r6->unk20;
+    r2 = sub_800E2B8(r5->unkB8);
+    r5->unk8 = r2;
+    r5->unk40 = r6->animId;
+    if (r5->unk14 != -1 && (r2 % 8) == 0) {
+        r5->unk40 += r5->unk14;
+    }
+
+    switch (r5->unk34) {
+        case 3:
+            r5->unk48 = 0x370;
+            r5->paletteNum = r6->unk8;
+            r5->unk44 = -1;
+            break;
+        case 4:
+            r5->unk48 = -1;
+            r5->paletteNum = r6->unk8;
+            r5->unk44 = 3840;
+            gUnknown_203B0CC->unk1A08 = 0;
+            gUnknown_203B0CC->unk1A0C = 0;
+            gUnknown_203B0CC->unk1A10 = sub_800CDC8();
+            gUnknown_203B0CC->unk1A14 = gUnknown_2026E4E;
+            if (r6->unk18 != 0) {
+                sub_800CDA8(5);
+            }
+            break;
+        case 1:
+        case 2:
+            r5->unk48 = 0x248;
+            r5->paletteNum = r6->unk8;
+            r5->unk44 = -1;
+            break;
+    }
+
+    switch (r5->unk34) {
+        case 1:
+        case 2:
+            AxResInitUnorientedFile(&r5->unk58, r5->unkB8, r5->unk40, 0x248, 0, r5->unk55);
+            break;
+        case 3:
+            AxResInitUnorientedFile(&r5->unk58, r5->unkB8, r5->unk40, 0x370, 0, r5->unk55);
+            break;
+        case 4:
+            r5->unk94.sub = (*(struct Struct_8009A7C*)(r5->unkB8->data));
+            r5->unk94.unk20 = 0;
+            break;
+    }
 }
 
 //
