@@ -17,8 +17,8 @@ typedef struct subStruct_203B490
 struct unkStruct_8096AF8
 {
     bool8 unk0;
-    /* 0x2 */ u16 clientSpecies;
-    /* 0x4 */ u16 targetSpecies;
+    /* 0x2 */ s16 clientSpecies;
+    /* 0x4 */ s16 targetSpecies;
 };
 
 // size: 0x32C?
