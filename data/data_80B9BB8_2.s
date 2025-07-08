@@ -2,41 +2,6 @@
 
         .align 2,0
 
-        .string "pksdir0\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-        .string "MultiSio010918\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
-
-	.global gUnknown_80B9C60
-gUnknown_80B9C60: @ 80B9C60
-        .byte 0xFF, 0xFF, 0xFF, 0xFF
-        .byte 0xFF, 0xFF, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-gefob001_string:: @ 80B9C6C
-        .string "efob001\0"
-        .align 2,0
-
-gefob000_string:: @ 80B9C74
-        .string "efob000\0"
-        .align 2,0
-
-	.global gUnknown_80B9C7C
-gUnknown_80B9C7C: @ 80B9C7C
-        .byte 0xc0, 0xff, 0x0a, 0x00, 0xb8, 0xff, 0xe4, 0xff, 0xc4, 0xff, 0x32, 0x00, 0xbf, 0xff, 0xc4, 0xff, 0xb0, 0xff, 0x18, 0x00, 0xb0, 0xff, 0x46, 0x00, 0x9c, 0xff, 0x20, 0x00, 0x88, 0xff, 0xd0, 0xff
-
 	.global gUnknown_80B9C9C
 gUnknown_80B9C9C: @ 80B9C9C
         .byte 0x01, 0x00, 0x00, 0x00

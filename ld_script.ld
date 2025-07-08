@@ -452,6 +452,8 @@ SECTIONS {
         data/pksdir_8.o(.rodata);
         src/main.o(.rodata);
         src/reg_control.o(.rodata);
+        data/data_80B9BB0.o(.rodata);
+        src/code_800DAC0.o(.rodata)
         data/data_80B9BB8_2.o(.rodata);
         src/code_800F034.o(.rodata);
         src/dungeon_pokemon_sprites.o(.rodata);
