@@ -48,8 +48,11 @@ struct unkStruct_203B0CC_sub
     axdata unk58;
     struct unkStruct_203B0CC_x94 unk94;
     OpenedFile *unkB8;
-    u8 fillBC[0xCC - 0xBC];
-    s16 unkCC[2];
+    DungeonPos unkBC;
+    DungeonPos unkC0;
+    s16 unkC4;
+    DungeonPos unkC8;
+    DungeonPos unkCC;
 };
 
 #define UNK_203B0CC_ARR_COUNT 0x20

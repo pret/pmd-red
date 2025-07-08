@@ -25,7 +25,7 @@ struct unkStruct_800F18C
     u32 counter;
 };
 
-extern s32 sub_800E2C0(u32);
+extern s32 sub_800E2C0(s32);
 extern u32 sub_800E900(void);
 extern void sub_8009BE4(void);
 extern void sub_800F204(OpenedFile *file);
@@ -605,6 +605,118 @@ s32 sub_800E208(s32 a0, struct unkStruct_203B0CC_xC *a1)
     }
 
     return -1;
+}
+
+s32 sub_800E2B8(OpenedFile *a0)
+{
+    const EfoFileData *efo = a0->data;
+    return efo->animCount;
+}
+
+s32 sub_800E2C0(s32 a0)
+{
+    if (a0 != -1) {
+        s32 i;
+        struct unkStruct_203B0CC_sub *ptr = gUnknown_203B0CC->unk0;
+
+        for (i = 0; i < UNK_203B0CC_ARR_COUNT; i++, ptr++) {
+            if (ptr->unk4 == a0)
+                return i;
+        }
+    }
+    return -1;
+}
+
+s32 sub_800E2F0(void)
+{
+    s32 prev = gUnknown_203B0CC->unk1A00;
+    gUnknown_203B0CC->unk1A00++;
+    return prev;
+}
+
+struct UnkStruct_sub_800E308_1
+{
+    u16 unk0;
+    s16 unk2;
+    DungeonPos unk4;
+    DungeonPos unk8;
+    s32 unkC;
+    s32 unk10;
+};
+
+s32 sub_800E750(s32 a0, s32 a1);
+
+extern const unkStruct_2039DB0 gUnknown_80B9C60;
+
+s32 sub_800E308(struct UnkStruct_sub_800E308_1 *a0, DungeonPos *a1)
+{
+    s32 id;
+    struct unkStruct_203B0CC_xC sp = {
+        .unkC = sub_800ECB8(a0->unk0)->unk6,
+        .unk10 = a0->unk10,
+        .unk14 = a0->unkC,
+        .unk18 = a0->unk4,
+        .unk1c = a0->unk8,
+        .unk20 = sub_800E750(a0->unk2, a0->unk0),
+        .unk24 = 0xFFFF,
+        .spriteMasks = gUnknown_80B9C60,
+    };
+    s32 retVal = sub_800E208(2, &sp);
+
+    if (retVal == -1)
+        return -1;
+
+    id = sub_800E2C0(retVal);
+    if (id != -1) {
+        struct unkStruct_203B0CC_sub *ptr = &gUnknown_203B0CC->unk0[id];
+        ptr->unkBC = a0->unk4;
+        ptr->unkC0 = *a1;
+        ptr->unkC4 = a0->unk2;
+        ptr->unkC8 = ptr->unkC.unk1c;
+        return retVal;
+    }
+
+    return -1;
+}
+
+void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2)
+{
+    s32 val, valMinus1;
+    struct unkStruct_203B0CC_sub *ptr;
+    s32 id = sub_800E2C0(a0);
+
+    if (id == -1)
+        return;
+
+    ptr = &gUnknown_203B0CC->unk0[id];
+    ptr->unkC.unk18 = *pos;
+
+    val = max(abs(ptr->unkC0.x - ptr->unkBC.x), abs(ptr->unkC0.y - ptr->unkBC.y)) / 4;
+    valMinus1 = val - 1;
+
+    ptr->unkC.unk1c.y += 9;
+    ptr->unkC.unk1c.x *= valMinus1;
+    ptr->unkC.unk1c.y *= valMinus1;
+    ptr->unkC.unk1c.x /= val;
+    ptr->unkC.unk1c.y /= val;
+    ptr->unkC.unk1c.y -= 9;
+
+    ptr->unkC.unk24 = a2;
+}
+
+s32 sub_800E448(u8 a0, DungeonPos *pos)
+{
+    struct unkStruct_203B0CC_xC sp = {
+        .unkC = sub_800ECE4(a0),
+        .unk10 = 0,
+        .unk14 = -1,
+        .unk18 = *pos,
+        .unk1c = {0, 0},
+        .unk20 = -1,
+        .unk24 = 0xFFFF,
+        .spriteMasks = gUnknown_80B9C60,
+    };
+    return sub_800E208(3, &sp);
 }
 
 //
