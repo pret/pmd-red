@@ -6,6 +6,17 @@
 #include "structs/str_position.h"
 #include "structs/str_file_system.h"
 
+struct unkStruct_203B0CC_x94
+{
+    s32 unk0;
+    u16 **unk4;
+    u8 fill8[0x14-0x8];
+    s32 unk14;
+    s32 unk18;
+    s32 fill1C;
+    u8 unk20;
+};
+
 struct unkStruct_203B0CC_sub
 {
     // size: 0xD0
@@ -28,23 +39,25 @@ struct unkStruct_203B0CC_sub
     s32 unk50;
     u8 unk54;
     u8 fill55[0x58 - 0x55];
-    axObject unk58;
-    u8 fillA4[0xB8 - 0xA4];
+    axdata unk58;
+    struct unkStruct_203B0CC_x94 unk94;
     OpenedFile *unkB8;
     u8 fillBC[0xCC - 0xBC];
-    s16 unkCC[2]; // NOTE: might be DungeonPos
+    s16 unkCC[2];
 };
+
+#define UNK_203B0CC_ARR_COUNT 0x20
 
 struct unkStruct_203B0CC
 {
     // size: 0x1A18
-    struct unkStruct_203B0CC_sub unk0[0x20];
-    u32 unk1A00;
+    struct unkStruct_203B0CC_sub unk0[UNK_203B0CC_ARR_COUNT];
+    s32 unk1A00;
     /* 0x1A04 */ u32 fileSelection;
-    u32 unk1A08;
-    u32 unk1A0C;
-    u32 unk1A10;
-    u8 fill1A14[0x1A18 - 0x1A14];
+    s32 unk1A08;
+    s32 unk1A0C;
+    s32 unk1A10;
+    u16 unk1A14;
 };
 
 bool8 sub_800E9A8(s32 a0);

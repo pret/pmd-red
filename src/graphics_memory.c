@@ -257,7 +257,7 @@ struct Struct_8009A7C
     u16 **unk4;
 };
 
-bool8 sub_8009A7C(struct Struct_8009A7C *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s32 *a5, u16 *a6)
+bool8 sub_8009A7C(struct Struct_8009A7C *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s32 *a5, s16 *a6)
 {
     s32 countY;
     s32 yId;
