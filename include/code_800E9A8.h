@@ -16,12 +16,8 @@ struct unkStruct_203B0CC_x94
     u8 unk20;
 };
 
-struct unkStruct_203B0CC_sub
+struct unkStruct_203B0CC_xC
 {
-    // size: 0xD0
-    u32 unk0;
-    s32 unk4;
-    s32 unk8;
     s32 unkC;
     s32 unk10;
     s32 unk14;
@@ -30,6 +26,15 @@ struct unkStruct_203B0CC_sub
     s32 unk20;
     s32 unk24;
     unkStruct_2039DB0 spriteMasks;
+};
+
+struct unkStruct_203B0CC_sub
+{
+    // size: 0xD0
+    u32 unk0;
+    s32 unk4;
+    s32 unk8;
+    struct unkStruct_203B0CC_xC unkC;
     u32 unk34;
     u32 effectID;
     s32 paletteNum;

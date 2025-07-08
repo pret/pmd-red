@@ -80,15 +80,15 @@ void sub_800EAE4(s32 param_1, DungeonPos *param_2, DungeonPos *param_3)
     {
         struct unkStruct_203B0CC_sub *a;
         a = &gUnknown_203B0CC->unk0[idx];
-        a->unk18 = *param_2;
-        if (a->unk20 != -1)
+        a->unkC.unk18 = *param_2;
+        if (a->unkC.unk20 != -1)
         {
-            a->unk1c = *param_3;
+            a->unkC.unk1c = *param_3;
         }
         else
         {
-            a->unk1c.x = 0;
-            a->unk1c.y = 0;
+            a->unkC.unk1c.x = 0;
+            a->unkC.unk1c.y = 0;
         }
     }
 }
@@ -100,27 +100,27 @@ void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 r5, 
         struct unkStruct_203B0CC_sub *curStruct;
         curStruct = &gUnknown_203B0CC->unk0[idx];
         if (curStruct->unkCC[0] == 0 && curStruct->unkCC[1] == 0) {
-            curStruct->unk18 = *param_2;
+            curStruct->unkC.unk18 = *param_2;
         }
 
         if (curStruct->unk0 == 6) {
-            curStruct->unk24 = r5 + 1;
+            curStruct->unkC.unk24 = r5 + 1;
         }
         else if ((curStruct->unk8 & 0x7) == 0) {
             s32 newStruct[8];
             memcpy(newStruct, gUnknown_80B9C9C, sizeof(s32) * 8);
-            curStruct->unk24 = r5 + newStruct[r4 & 7];
+            curStruct->unkC.unk24 = r5 + newStruct[r4 & 7];
         }
         else {
-            curStruct->unk24 = r5 + 1;
+            curStruct->unkC.unk24 = r5 + 1;
         }
 
-        if (curStruct->unk20 != -1) {
-            curStruct->unk1c = *param_3;
+        if (curStruct->unkC.unk20 != -1) {
+            curStruct->unkC.unk1c = *param_3;
         }
         else {
-            curStruct->unk1c.x = 0;
-            curStruct->unk1c.y = 0;
+            curStruct->unkC.unk1c.x = 0;
+            curStruct->unkC.unk1c.y = 0;
         }
     }
 }
@@ -162,15 +162,15 @@ void sub_800EC28(u32 param_1, DungeonPos *param_2, DungeonPos *param_3)
     {
         struct unkStruct_203B0CC_sub *struct203B0CC;
         struct203B0CC = &gUnknown_203B0CC->unk0[idx];
-        struct203B0CC->unk18 = *param_2;
-        if (struct203B0CC->unk20 != -1)
+        struct203B0CC->unkC.unk18 = *param_2;
+        if (struct203B0CC->unkC.unk20 != -1)
         {
-            struct203B0CC->unk1c = *param_3;
+            struct203B0CC->unkC.unk1c = *param_3;
         }
         else
         {
-            struct203B0CC->unk1c.x = 0;
-            struct203B0CC->unk1c.y = 0;
+            struct203B0CC->unkC.unk1c.x = 0;
+            struct203B0CC->unkC.unk1c.y = 0;
         }
     }
 }

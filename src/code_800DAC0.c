@@ -15,6 +15,7 @@
 #include "cpu.h"
 #include "code_800E9E4.h"
 #include "graphics_memory.h"
+#include "structs/code_800E9E4.h"
 
 EWRAM_INIT struct unkStruct_203B0CC *gUnknown_203B0CC = NULL;
 
@@ -513,22 +514,24 @@ bool8 sub_800DE8C(struct unkStruct_203B0CC_sub *a0, DungeonPos *unused)
 }
 
 s32 sub_800E2B8(OpenedFile *a0);
+OpenedFile *sub_800F1C0(u32 animType, s32 effectID);
+s32 sub_800E2F0(void);
 
 void sub_800E0B4(struct unkStruct_203B0CC_sub *r5)
 {
     s32 r2;
-    unkStruct_80B9CC4 *r6 = sub_800ECA4(r5->unkC);
+    unkStruct_80B9CC4 *r6 = sub_800ECA4(r5->unkC.unkC);
     r5->unk34 = r6->animType;
     r5->effectID = r6->effectId;
     r5->unk4C = r6->unk10;
-    r5->unk50 = r5->unk10 + r6->unk14;
+    r5->unk50 = r5->unkC.unk10 + r6->unk14;
     r5->unk55 = r6->loop;
     r5->unk54 = r6->unk20;
     r2 = sub_800E2B8(r5->unkB8);
     r5->unk8 = r2;
     r5->unk40 = r6->animId;
-    if (r5->unk14 != -1 && (r2 % 8) == 0) {
-        r5->unk40 += r5->unk14;
+    if (r5->unkC.unk14 != -1 && (r2 % 8) == 0) {
+        r5->unk40 += r5->unkC.unk14;
     }
 
     switch (r5->unk34) {
@@ -570,6 +573,38 @@ void sub_800E0B4(struct unkStruct_203B0CC_sub *r5)
             r5->unk94.unk20 = 0;
             break;
     }
+}
+
+s32 sub_800E208(s32 a0, struct unkStruct_203B0CC_xC *a1)
+{
+    s32 i;
+    struct unkStruct_203B0CC_sub *ptr = gUnknown_203B0CC->unk0;
+
+    if (a1->unkC == 0)
+        return -1;
+
+    for (i = 0; i < UNK_203B0CC_ARR_COUNT; i++, ptr++) {
+        if (ptr->unk4 == -1) {
+            unkStruct_80B9CC4 *strPtr;
+
+            MemoryClear8(ptr, sizeof(*ptr));
+            strPtr = sub_800ECA4(a1->unkC);
+            if (strPtr->animType == 2 && gUnknown_203B0CC->fileSelection != 1)
+                return -1;
+            if (strPtr->animType == 1 && gUnknown_203B0CC->fileSelection != 0)
+                return -1;
+            ptr->unkB8 = sub_800F1C0(strPtr->animType, strPtr->effectId);
+            if (ptr->unkB8 == NULL)
+                return -1;
+            ptr->unk0 = a0;
+            ptr->unk4 = sub_800E2F0();
+            ptr->unkC = *a1;
+            sub_800E0B4(ptr);
+            return ptr->unk4;
+        }
+    }
+
+    return -1;
 }
 
 //

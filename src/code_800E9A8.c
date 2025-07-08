@@ -65,10 +65,10 @@ void sub_800E8AC(s32 a0, DungeonPos *a1, DungeonPos *a2, s32 a3, unkStruct_2039D
     {
         ptr = &gUnknown_203B0CC->unk0[index];
 
-        if(a1 != NULL) ptr->unk18 = *a1;
-        if(a2 != NULL) ptr->unk1c = *a2;
-        if(a3 != 0xFFFF) ptr->unk24 = a3;
-        if(a4 != NULL) ptr->spriteMasks = *a4;
+        if(a1 != NULL) ptr->unkC.unk18 = *a1;
+        if(a2 != NULL) ptr->unkC.unk1c = *a2;
+        if(a3 != 0xFFFF) ptr->unkC.unk24 = a3;
+        if(a4 != NULL) ptr->unkC.spriteMasks = *a4;
     }
 }
 
@@ -85,26 +85,20 @@ bool8 sub_800E90C(DungeonPos *param_1)
 
     flag = FALSE;
 
-    for(iVar1 = 0, ptr = &gUnknown_203B0CC->unk0[iVar1]; iVar1 < 0x20; iVar1++, ptr++)
-    {
-        if(ptr->unk4 != -1)
-        {
-            if(ptr->unk10 <= 0)
-            {
-                if(ptr->unk34 == 4)
-                {
+    for (iVar1 = 0, ptr = &gUnknown_203B0CC->unk0[iVar1]; iVar1 < 0x20; iVar1++, ptr++) {
+        if (ptr->unk4 != -1) {
+            if (ptr->unkC.unk10 <= 0) {
+                if (ptr->unk34 == 4) {
                     sub_800DE8C(ptr, param_1);
                 }
-                else
-                {
+                else {
                     sub_800DD0C(ptr, param_1);
                 }
-
             }
-            if(ptr->unk10 > 0)
-                ptr->unk10--;
+            if (ptr->unkC.unk10 > 0)
+                ptr->unkC.unk10--;
             sub_800DCD0(ptr);
-            if(ptr->unk54 == 0)
+            if (ptr->unk54 == 0)
                 flag = TRUE;
         }
     }
@@ -117,12 +111,10 @@ void sub_800E970(void)
     s32 iVar1;
     struct unkStruct_203B0CC_sub *ptr;
 
-    for(iVar1 = 0, ptr = &gUnknown_203B0CC->unk0[iVar1]; iVar1 < 0x20; iVar1++, ptr++)
-    {
-        if(ptr->unk4 != -1)
-            if(ptr->unk10 <= 0)
-                if(ptr->unk34 != 4)
-                    sub_800DE38(ptr);
+    for (iVar1 = 0, ptr = &gUnknown_203B0CC->unk0[iVar1]; iVar1 < 0x20; iVar1++, ptr++) {
+        if (ptr->unk4 != -1 && ptr->unkC.unk10 <= 0 && ptr->unk34 != 4) {
+            sub_800DE38(ptr);
+        }
     }
 }
 
