@@ -20,59 +20,6 @@ const PixelPos gVectorDirections[NUM_DIRECTIONS] = {
 
 static s8 VecDirection4Radial(PixelPos *pixelPos);
 
-u16 sub_8002774(struct S_sub s)
-{
-    return ((s.x0[2] & 0xF8) << 7) | ((s.x0[1] & 0xF8) << 2) | ((s.x0[0] & 0xF8) >> 3);
-}
-
-struct S sub_80027A0(u16 a0)
-{
-    struct S ret;
-
-    ret.x0.x0[0] = (a0 & 0x1F)      << 3 | ((a0 & 1)     ? 7 : 0);
-    ret.x0.x0[1] = (a0 & 0x3E0)     >> 2 | ((a0 & 0x20)  ? 7 : 0);
-    ret.x0.x0[2] = (a0 & 0x7C00)    >> 7 | ((a0 & 0x400) ? 7 : 0);
-    ret.x0.x0[3] = 0;
-    return ret;
-}
-
-UNUSED static void sub_8002804(struct S *r0, s32 r1, struct S *r2)
-{
-    s32 i;
-
-    for (i = 0; i < UNK_STRUCT_ARR_COUNT; i++) {
-        r0->x0.x0[i] = (r1 * r2->x0.x0[i]) / 256;
-    }
-}
-
-UNUSED static void sub_800282C(struct S *dst, s32 a1, struct S *a2, struct S *a3)
-{
-    s32 i, j;
-    float spFloats[4];
-    float floatsMul[4];
-    float f0 = 1.0f / a1;
-
-    for (i = 0; i < 4; i++) {
-        s8 asSigned = (s8) a2->x0.x0[i];
-        float f = (float)(asSigned);
-        if (asSigned < 0) {
-            f += 256.0f;
-        }
-        spFloats[i] = f;
-        floatsMul[i] = (float)(a3->x0.x0[i] - a2->x0.x0[i]) * f0;
-    }
-
-    *dst++ = *a2;
-    for (i = 1; i < a1 - 1; dst++, i++) {
-        for (j = 0; j < 4; j++) {
-            dst->x0.x0[j] = (unsigned int)((spFloats[j] += floatsMul[j]));
-        }
-    }
-
-    *dst = *a3;
-}
-
-
 
 // TODO: File split here
 

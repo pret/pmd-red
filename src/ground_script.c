@@ -1818,7 +1818,7 @@ s32 ExecuteScriptCommand(Action *action)
                 break;
             }
             case 0x27: case 0x28: {
-                unkStruct_3000400 color = { curCmd.arg2 >> 16, curCmd.arg2 >> 8, curCmd.arg2, 0 };
+                RGB_Array color = { curCmd.arg2 >> 16, curCmd.arg2 >> 8, curCmd.arg2, 0 };
                 switch (curCmd.op) {
                     case 0x27:
                         sub_8099A5C(curCmd.argShort, curCmd.arg1, color);

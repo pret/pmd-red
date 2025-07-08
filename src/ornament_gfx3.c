@@ -1,0 +1,12 @@
+#include "global.h"
+#include "globaldata.h"
+#include "ornament_gfx.h"
+
+#include "data/ornament/flag106.h"
+#include "data/ornament/flag107.h"
+#include "data/ornament/flag108.h"
+#include "data/ornament/flag109.h"
+#include "data/ornament/flag10.h"
+#include "data/ornament/flag110.h"
+#include "data/ornament/flag111.h"
+#include "data/ornament/flag112.h"

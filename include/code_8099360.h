@@ -15,12 +15,12 @@ extern void sub_8099690(u32);
 
 // code_8099360.s
 
-#include "structs/str_3000400.h"
+#include "structs/rgb.h"
 
 void sub_8099744(void);
 void sub_8099750(void);
-void sub_8099A5C(s32 a0, s32 a1, unkStruct_3000400 a2);
-void sub_8099AFC(s32 a0, s32 a1, unkStruct_3000400 a2);
+void sub_8099A5C(s32 a0, s32 a1, RGB_Array a2);
+void sub_8099AFC(s32 a0, s32 a1, RGB_Array a2);
 bool8 sub_8099B94(void);
 
 #endif //GUARD_CODE_8099360_H

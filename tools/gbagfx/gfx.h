@@ -48,6 +48,7 @@ void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int 
 void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
 void FreeImage(struct Image *image);
 void ReadGbaPalette(char *path, struct Palette *palette);
+void ReadPmdPalette(char *path, struct Palette *palette);
 void WriteGbaPalette(char *path, struct Palette *palette);
 void WritePmdPalette(char *path, struct Palette *palette);
 
