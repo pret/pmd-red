@@ -1,47 +1,7 @@
         .section .rodata
 
-@ code_803B050 #1
-        .align 2,0
-        .string "pksdir0\0"
-    .global gUnknown_80E7F3C
-gUnknown_80E7F3C: @ 80E7F3C
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x03, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
+@ code_803B344
 
-    .global gUnknown_80E7F54
-gUnknown_80E7F54: @ 80E7F54
-        .byte 0x00, 0x00, 0x00, 0x00
-        .byte 0x06, 0x00, 0x00, 0x00
-        .byte 0x02, 0x00, 0x02, 0x00
-        .byte 0x18, 0x00, 0x11, 0x00
-        .byte 0x11, 0x00, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
-
-    .global gUnknown_80E7F6C
-gUnknown_80E7F6C: @ 80E7F6C
-        .string "Script\0"
-
-@ code_803B050 #2
-        .align 2,0
-        .string "pksdir0\0"
-
-@ code_803B050 #3
-        .align 2,0
-        .string "pksdir0\0"
-
-@ code_803B050 #4
-        .align 2,0
-        .string "pksdir0\0"
-
-@ code_803B050 #5
-        .align 2,0
-        .string "pksdir0\0"
-
-        .align 2,0
 	.global gUnknown_80E7F94
 gUnknown_80E7F94: @ 80E7F94
 .macro st_80E7F94 a, b, c, e, f, g, h, i, j, k, m, n

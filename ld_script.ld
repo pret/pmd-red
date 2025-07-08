@@ -187,6 +187,7 @@ SECTIONS {
         src/debug_menu3.o(.text);
         src/debug_menu4.o(.text);
         src/code_803B050.o(.text);
+        src/code_803B344.o(.text);
         asm/code_803B050.o(.text);
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
@@ -563,6 +564,11 @@ SECTIONS {
         src/debug_menu2.o(.rodata);
         src/debug_menu3.o(.rodata);
         src/debug_menu4.o(.rodata);
+        src/code_803B050.o(.rodata);
+        src/code_803B050_unused1.o(.rodata);
+        src/code_803B050_unused2.o(.rodata);
+        src/code_803B050_unused3.o(.rodata);
+        src/code_803B344.o(.rodata);
         data/data_80E7D40.o(.rodata);
         src/pokemon_mail_pre.o(.rodata);
         src/pokemon_mail.o(.rodata);
