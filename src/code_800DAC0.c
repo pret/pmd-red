@@ -15,7 +15,7 @@
 #include "cpu.h"
 #include "code_800E9E4.h"
 #include "graphics_memory.h"
-#include "structs/code_800E9E4.h"
+#include "effect_anim_file.h"
 
 struct unkStruct_203B0CC_x94
 {
@@ -79,7 +79,6 @@ extern s16 gUnknown_2026E4E;
 
 
 extern void sub_8009BE4(void);
-extern void sub_800F204(OpenedFile *file);
 extern struct unkStruct_800F18C *sub_800F18C(s32);
 extern void sub_800F034(void);
 extern void sub_800ED38(u32);
@@ -89,7 +88,6 @@ extern void sub_800ED80();
 extern void sub_800F094();
 extern void sub_809971C(u16 a0, const RGB *a1, int a2);
 extern u32 sub_800F19C(s32);
-extern OpenedFile *sub_800F1C0(u32 animType, s32 effectID);
 extern void sub_800F15C(s32 effectID);
 
 s32 sub_800E700(s32);
@@ -222,7 +220,7 @@ static void sub_800DCA8(struct unkStruct_203B0CC_sub *param_1)
     param_1->unk4 = -1;
     param_1->unk54 = 0;
     if (param_1->unkB8 != NULL) {
-        sub_800F204(param_1->unkB8);
+        CloseEffectFile(param_1->unkB8);
         param_1->unkB8 = NULL;
     }
 }
@@ -649,7 +647,7 @@ static s32 sub_800E208(s32 a0, unkStruct_80416E0 *a1)
                 return -1;
             if (strPtr->animType == 1 && gUnknown_203B0CC->fileSelection != 0)
                 return -1;
-            ptr->unkB8 = sub_800F1C0(strPtr->animType, strPtr->effectId);
+            ptr->unkB8 = OpenEffectFile(strPtr->animType, strPtr->effectId);
             if (ptr->unkB8 == NULL)
                 return -1;
             ptr->unk0 = a0;

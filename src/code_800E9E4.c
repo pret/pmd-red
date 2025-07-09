@@ -5226,6 +5226,12 @@ static const unkStruct_80C183C gUnknown_80C183C[4336] = {
 };
 
 // Array of indexes into gUnknown_80B9CC4. One pair of indexes per entry
+typedef struct unkStruct_80CE37C
+{
+    s16 unk0;
+    s16 unk2;
+} unkStruct_80CE37C;
+
 static const unkStruct_80CE37C gUnknown_80CE37C[240] = {
     [0] = {.unk0 = 0, .unk2 = 8},
     [1] = {.unk0 = 0, .unk2 = 8},

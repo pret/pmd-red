@@ -1,8 +1,6 @@
 #ifndef GUARD_CODE_800E9E4_H
 #define GUARD_CODE_800E9E4_H
 
-#include "structs/code_800E9E4.h"
-
 typedef struct unkStruct_80B9CC4
 {
     // size: 0x24
@@ -36,6 +34,15 @@ typedef struct unkStruct_80BDBC4
     s32 unk1C; // Amount of gUnknown_80C183C entries to scan
     s32 unk20; // Index into gUnknown_80C183C
 } unkStruct_80BDBC4;
+
+typedef struct unkStruct_80C183C
+{
+    // size: 0xc
+    s16 unk0;
+    s16 unk2;
+    s32 unk4;
+    s32 unk8;
+} unkStruct_80C183C;
 
 const unkStruct_80B9CC4 *sub_800ECA4(s32 param_1);
 const unkStruct_80BDBC4 *sub_800ECB8(u16 param_1);

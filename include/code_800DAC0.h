@@ -3,7 +3,7 @@
 
 #include "structs/sprite_oam.h"
 #include "structs/str_position.h"
-#include "structs/code_800E9E4.h"
+#include "code_800E9E4.h"
 
 typedef struct unkStruct_80416E0
 {
@@ -16,6 +16,12 @@ typedef struct unkStruct_80416E0
     u32 unk18;
     unkStruct_2039DB0 spriteMasks;
 } unkStruct_80416E0;
+
+typedef struct unkStruct_800EA44
+{
+    s16 unk0;
+    s16 unk2;
+} unkStruct_800EA44;
 
 struct UnkStruct_8040094
 {
