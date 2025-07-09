@@ -8,7 +8,6 @@
 #include "structs/str_dungeon.h"
 #include "code_800558C.h"
 #include "code_800DAC0.h"
-#include "code_800E9A8.h"
 #include "code_800ED38.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
@@ -38,7 +37,6 @@ extern const u8 *gPtrFeralFoundItemMessage[];
 
 extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
 extern u32 sub_806F62C(u32);
-extern u32 sub_800DC9C(s32 a0);
 extern void PlaySoundEffect(u32);
 
 void EntityUpdateStatusSprites(Entity *entity);
@@ -49,13 +47,11 @@ extern void sub_800DBBC(void);
 extern void sub_803EA10(void);
 extern void sub_8042E98(void);
 extern void sub_800EF28(u8);
-extern u32 sub_800E448(u8, DungeonPos *);
 extern void sub_80429A0(Entity *);
 void sub_8042B34(s32 a0, s32 a1, s32 a2);
 extern bool8 sub_8042CC0(void);
 extern void sub_8042D7C(void);
 extern bool8 sub_8045888(Entity *);
-extern u32 sub_800E49C();
 extern void sub_800F15C(s32);
 extern void sub_800EF40(u8 r0, u8 r1);
 extern s32 sub_800E6D8(s32);
@@ -1556,7 +1552,7 @@ void sub_8042B20(Entity *entity)
     sub_8042A84(0x1BC, entity, 0xE);
 }
 
-static const unkStruct_2039DB0 gUnknown_80F683C = {0xFFFF, 0xFFFF, 0xFFFF, 0, 0, 0};
+static const unkStruct_2039DB0 gUnknown_80F683C = DEFAULT_UNK_2039DB0_MASKS;
 
 void sub_8042B34(s32 a0, s32 a1, s32 a2)
 {

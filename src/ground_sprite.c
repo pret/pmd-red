@@ -791,7 +791,7 @@ bool8 sub_80A7094(struct UnkGroundSpriteStruct *ptr, PixelPos *r10, PixelPos *po
             ptr->unk58 = 0;
         }
         else if (ptr->unk5C == -1) {
-            unkStruct_2039DB0 unkSubStruct = {0xFFFF, 0xFFFF, 0xFFFF, 0, 0, 0};
+            unkStruct_2039DB0 unkSubStruct = DEFAULT_UNK_2039DB0_MASKS;
             unkStruct_80416E0 unkStruct;
 
             sub_800EE5C(ptr->unk58);

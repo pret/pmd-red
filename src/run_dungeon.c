@@ -11,7 +11,6 @@
 #include "code_800558C.h"
 #include "graphics_memory.h"
 #include "code_800DAC0.h"
-#include "code_800E9A8.h"
 #include "code_800E9E4.h"
 #include "code_800ED38.h"
 #include "code_803D110.h"

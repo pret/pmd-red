@@ -26,7 +26,6 @@
 #include "math.h"
 #include "code_8004AA0.h"
 #include "bg_palette_buffer.h"
-#include "code_800E9A8.h"
 #include "items.h"
 #include "code_800DAC0.h"
 #include "code_800ED38.h"
@@ -1354,7 +1353,7 @@ u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 
     local_40.pos2.x = 0;
     local_40.pos2.y = 0;
     local_40.unk18 = 0xffff;
-    local_40.spriteMasks = (unkStruct_2039DB0) {0xFFFF, 0xFFFF, 0xFFFF, 0, 0, 0};
+    local_40.spriteMasks = DEFAULT_UNK_2039DB0_MASKS;
 
     uVar1 = sub_800E890(&local_40);
     if (param_5_bool8) {

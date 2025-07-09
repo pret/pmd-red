@@ -16,14 +16,7 @@
         .align 2,0
         .string "pksdir0\0"
         .align 2,0
-        .string "pksdir0\0"
-        .align 2,0
 
-	.global gUnknown_80B9C60
-gUnknown_80B9C60: @ 80B9C60
-        .byte 0xFF, 0xFF, 0xFF, 0xFF
-        .byte 0xFF, 0xFF, 0x00, 0x00
-        .byte 0x00, 0x00, 0x00, 0x00
 
 
 
