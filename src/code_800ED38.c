@@ -39,7 +39,7 @@ EWRAM_INIT void *gUnknown_203B0D4 = NULL; // TODO: figure out the actual struct
 OpenedFile *sub_800F1C0(s32, s32);
 s32 sub_800F0F4(s32, s32);
 void sub_800F204(OpenedFile *file);
-void sub_800F13C(s32, OpenedFile *, unkStruct_80B9CC4 *);
+void sub_800F13C(s32, OpenedFile *, const unkStruct_80B9CC4 *);
 void sub_800F15C(s32);
 
 extern void sub_809971C(u16 a0, const RGB *a1, int a2);
@@ -125,7 +125,7 @@ void sub_800EDF0(u32 r0, OpenedFile *file)
 
 void sub_800EE5C(s32 r0)
 {
-    unkStruct_80B9CC4 *ret;
+    const unkStruct_80B9CC4 *ret;
     OpenedFile *file;
     s32 ret2;
 
@@ -162,29 +162,25 @@ void sub_800EE5C(s32 r0)
 
 void sub_800EEC8(u16 r0)
 {
-    unkStruct_80BDBC4 *ret;
-    ret = sub_800ECB8(r0);
+    const unkStruct_80BDBC4 *ret = sub_800ECB8(r0);
     sub_800EE5C(ret->unk0);
 }
 
 void sub_800EEE0(u16 r0)
 {
-    unkStruct_80BDBC4 *ret;
-    ret = sub_800ECB8(r0);
+    const unkStruct_80BDBC4 *ret = sub_800ECB8(r0);
     sub_800EE5C(ret->unk4);
 }
 
 void sub_800EEF8(u16 r0)
 {
-    unkStruct_80BDBC4 *ret;
-    ret = sub_800ECB8(r0);
+    const unkStruct_80BDBC4 *ret = sub_800ECB8(r0);
     sub_800EE5C(ret->unk2);
 }
 
 void sub_800EF10(u16 r0)
 {
-    unkStruct_80BDBC4 *ret;
-    ret = sub_800ECB8(r0);
+    const unkStruct_80BDBC4 *ret = sub_800ECB8(r0);
     sub_800EE5C(ret->unk6);
 }
 

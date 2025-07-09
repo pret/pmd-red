@@ -91,7 +91,6 @@ extern void sub_809971C(u16 a0, const RGB *a1, int a2);
 extern u32 sub_800F19C(s32);
 extern OpenedFile *sub_800F1C0(u32 animType, s32 effectID);
 extern void sub_800F15C(s32 effectID);
-extern unkStruct_80C183C *sub_800ECD0(s32 param_1);
 
 s32 sub_800E700(s32);
 
@@ -577,7 +576,7 @@ static bool8 sub_800DE8C(struct unkStruct_203B0CC_sub *a0, DungeonPos *unused)
 static void sub_800E0B4(struct unkStruct_203B0CC_sub *r5)
 {
     s32 r2;
-    unkStruct_80B9CC4 *r6 = sub_800ECA4(r5->unkC.unk0);
+    const unkStruct_80B9CC4 *r6 = sub_800ECA4(r5->unkC.unk0);
     r5->unk34 = r6->animType;
     r5->effectID = r6->effectId;
     r5->unk4C = r6->unk10;
@@ -642,7 +641,7 @@ static s32 sub_800E208(s32 a0, unkStruct_80416E0 *a1)
 
     for (i = 0; i < UNK_203B0CC_ARR_COUNT; i++, ptr++) {
         if (ptr->unk4 == -1) {
-            unkStruct_80B9CC4 *strPtr;
+            const unkStruct_80B9CC4 *strPtr;
 
             MemoryClear8(ptr, sizeof(*ptr));
             strPtr = sub_800ECA4(a1->unk0);
@@ -837,7 +836,7 @@ s32 sub_800E52C(struct UnkStruct_8040094 *a0)
         }
 
         for (i = 0; i < 7; i++) {
-            unkStruct_80B9CC4 *ptr2 = sub_800ECA4(sub_800ECB8(a0->unk0)->unk2);
+            const unkStruct_80B9CC4 *ptr2 = sub_800ECA4(sub_800ECB8(a0->unk0)->unk2);
             sub_800F15C(ptr2->effectId);
         }
         return ret;
@@ -894,8 +893,8 @@ s32 sub_800E710(s32 a0_, s32 a1)
 {
     s32 i;
     s32 a0 = (s16) (a0_);
-    unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
-    unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
+    const unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
+    const unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
 
     for (i = 0; i < unkPtr1->unk1C; i++, unkPtr2++) {
         if (unkPtr2->unk0 == a0) {
@@ -910,8 +909,8 @@ static s32 sub_800E750(s32 a0_, s32 a1)
 {
     s32 i;
     s32 a0 = (s16) (a0_);
-    unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
-    unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
+    const unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
+    const unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
 
     for (i = 0; i < unkPtr1->unk1C; i++, unkPtr2++) {
         if (unkPtr2->unk0 == a0) {
@@ -926,8 +925,8 @@ s32 sub_800E790(s32 a0_, s32 a1)
 {
     s32 i;
     s32 a0 = (s16) (a0_);
-    unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
-    unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
+    const unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
+    const unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
 
     for (i = 0; i < unkPtr1->unk1C; i++, unkPtr2++) {
         if (unkPtr2->unk0 == a0) {
@@ -1081,8 +1080,8 @@ u8 sub_800EA44(unkStruct_800EA44 param_1, s32 param_2)
 {
     s32 i;
     s32 a = param_1.unk0;
-    unkStruct_80BDBC4 *ret = sub_800ECB8(param_2);
-    unkStruct_80C183C *unkStruct2 = sub_800ECD0(ret->unk20);
+    const unkStruct_80BDBC4 *ret = sub_800ECB8(param_2);
+    const unkStruct_80C183C *unkStruct2 = sub_800ECD0(ret->unk20);
 
     for (i = 0; i < ret->unk1C; i++, unkStruct2++) {
         if (unkStruct2->unk0 == a) {
@@ -1156,7 +1155,7 @@ void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 r5, 
 
 static s32 sub_800EBBC(s32 param_1)
 {
-    unkStruct_80B9CC4 *ret = sub_800ECA4(param_1);
+    const unkStruct_80B9CC4 *ret = sub_800ECA4(param_1);
     return ret->unk1c;
 }
 
@@ -1194,7 +1193,7 @@ UNUSED static void sub_800EC28(u32 param_1, DungeonPos *param_2, DungeonPos *par
 
 static s32 sub_800EC68(s32 param_1)
 {
-    unkStruct_80B9CC4 *ret = sub_800ECA4(param_1);
+    const unkStruct_80B9CC4 *ret = sub_800ECA4(param_1);
     return ret->unk1c;
 }
 
@@ -1205,12 +1204,12 @@ u8 sub_800EC74(void)
 
 u8 sub_800EC84(s32 param_1)
 {
-    unkStruct_80BDBC4 *ret = sub_800ECB8(param_1);
+    const unkStruct_80BDBC4 *ret = sub_800ECB8(param_1);
     return ret->unk8;
 }
 
 u8 sub_800EC94(s32 param_1)
 {
-    unkStruct_80BDBC4 *ret = sub_800ECB8(param_1);
+    const unkStruct_80BDBC4 *ret = sub_800ECB8(param_1);
     return ret->unk9;
 }

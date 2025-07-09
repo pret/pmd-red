@@ -29,10 +29,4 @@ typedef struct unkStruct_800EA44
     s16 unk2;
 } unkStruct_800EA44;
 
-typedef struct unkStruct_800E208
-{
-    s32 unk00[7];
-    unkStruct_80B9C60 unk1c;
-} unkStruct_800E208;
-
 #endif

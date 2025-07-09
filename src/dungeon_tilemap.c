@@ -32,6 +32,7 @@
 #include "music_util.h"
 #include "dungeon_strings.h"
 #include "run_dungeon.h"
+#include "code_800DAC0.h"
 
 extern s32 gDungeonFramesCounter;
 

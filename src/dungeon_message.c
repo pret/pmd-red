@@ -6,7 +6,7 @@
 #include "bg_palette_buffer.h"
 #include "graphics_memory.h"
 #include "code_800D090.h"
-#include "code_800E9E4.h"
+#include "code_800DAC0.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
 #include "dungeon_info.h"
