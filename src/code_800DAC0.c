@@ -26,14 +26,11 @@ struct unkStruct_800F18C
 };
 
 extern s32 sub_800E2C0(s32);
-extern u32 sub_800E900(void);
+extern s32 sub_800E900(s32 a0);
 extern void sub_8009BE4(void);
 extern void sub_800F204(OpenedFile *file);
 extern struct unkStruct_800F18C *sub_800F18C(s32);
 extern void sub_800DCA8(struct unkStruct_203B0CC_sub *);
-
-extern u8 gefob000_string[];
-extern u8 gefob001_string[];
 
 extern void sub_800F034(void);
 extern void sub_800ED38(u32);
@@ -62,14 +59,14 @@ void sub_800DAC0(u32 fileSelection)
 
     switch (gUnknown_203B0CC->fileSelection) {
         case 1:
-            filePtr = Call_OpenFileAndGetFileDataPtr(gefob001_string, &gEffectFileArchive);
+            filePtr = Call_OpenFileAndGetFileDataPtr("efob001", &gEffectFileArchive);
             if (filePtr != NULL) {
                 sub_8005610(filePtr,0x248,0x1f,0);
                 CloseFile(filePtr);
             }
             break;
         case 0:
-            filePtr = Call_OpenFileAndGetFileDataPtr(gefob000_string, &gEffectFileArchive);
+            filePtr = Call_OpenFileAndGetFileDataPtr("efob000", &gEffectFileArchive);
             if (filePtr != NULL) {
                 sub_8005610(filePtr,0x248,0x1f,0);
                 CloseFile(filePtr);
@@ -149,9 +146,9 @@ void sub_800DC14(s32 param_1)
     }
 }
 
-u32 sub_800DC9C(void)
+s32 sub_800DC9C(s32 a0)
 {
-    return sub_800E900();
+    return sub_800E900(a0);
 }
 
 void sub_800DCA8(struct unkStruct_203B0CC_sub *param_1)
@@ -828,6 +825,88 @@ s32 sub_800E52C(struct UnkStruct_8040094 *a0)
         };
         return sub_800E208(1, &sp);
     }
+}
+
+UNUSED static void sub_800E698(s32 a0, DungeonPos *pos1, DungeonPos *pos2)
+{
+    s32 id = sub_800E2C0(a0);
+    if (id != -1) {
+        struct unkStruct_203B0CC_sub *ptr = &gUnknown_203B0CC->unk0[id];
+        ptr->unkC.unk18 = *pos1;
+        if (ptr->unkC.unk20 != -1) {
+            ptr->unkC.unk1c = *pos2;
+        }
+        else {
+            ptr->unkC.unk1c.x = 0;
+            ptr->unkC.unk1c.y = 0;
+        }
+    }
+}
+
+s32 sub_800E6D8(s32 a0)
+{
+    s32 id = sub_800E2C0(a0);
+    if (id != -1) {
+        struct unkStruct_203B0CC_sub *ptr = &gUnknown_203B0CC->unk0[id];
+        return ptr->unkC.unk20;
+    }
+    else {
+        return -1;
+    }
+}
+
+s32 sub_800E700(s32 a0)
+{
+    return sub_800E900((s16) a0);
+}
+
+unkStruct_80C183C *sub_800ECD0(s32 param_1);
+
+s32 sub_800E710(s32 a0_, s32 a1)
+{
+    s32 i;
+    s32 a0 = (s16) (a0_);
+    unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
+    unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
+
+    for (i = 0; i < unkPtr1->unk1C; i++, unkPtr2++) {
+        if (unkPtr2->unk0 == a0) {
+            return unkPtr2->unk4;
+        }
+    }
+    return unkPtr1->unk14;
+}
+
+// Literally the same as the func above.
+s32 sub_800E750(s32 a0_, s32 a1)
+{
+    s32 i;
+    s32 a0 = (s16) (a0_);
+    unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
+    unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
+
+    for (i = 0; i < unkPtr1->unk1C; i++, unkPtr2++) {
+        if (unkPtr2->unk0 == a0) {
+            return unkPtr2->unk4;
+        }
+    }
+    return unkPtr1->unk14;
+}
+
+// Almost the same as the two funcs above, but returns different fields.
+s32 sub_800E790(s32 a0_, s32 a1)
+{
+    s32 i;
+    s32 a0 = (s16) (a0_);
+    unkStruct_80BDBC4 *unkPtr1 = sub_800ECB8(a1);
+    unkStruct_80C183C *unkPtr2 = sub_800ECD0(unkPtr1->unk20);
+
+    for (i = 0; i < unkPtr1->unk1C; i++, unkPtr2++) {
+        if (unkPtr2->unk0 == a0) {
+            return unkPtr2->unk8;
+        }
+    }
+    return unkPtr1->unk18;
 }
 
 //

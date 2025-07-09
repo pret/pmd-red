@@ -19,7 +19,8 @@ typedef struct unkStruct_80C183C
     // size: 0xc
     s16 unk0;
     s16 unk2;
-    u8 fill4[0xc - 0x4];
+    s32 unk4;
+    s32 unk8;
 } unkStruct_80C183C;
 
 typedef struct unkStruct_800EA44

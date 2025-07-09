@@ -30,7 +30,8 @@ typedef struct unkStruct_80BDBC4
     u8 fillA[0x0c - 0x0a];
     s32 unkC;
     s32 unk10;
-    u8 fill14[0x1c - 0x14];
+    s32 unk14;
+    s32 unk18;
     s32 unk1C;
     s32 unk20;
 } unkStruct_80BDBC4;
