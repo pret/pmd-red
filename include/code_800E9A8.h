@@ -16,17 +16,17 @@ struct unkStruct_203B0CC_x94
     u8 unk20;
 };
 
-struct unkStruct_203B0CC_xC
+typedef struct unkStruct_80416E0
 {
-    s32 unkC;
-    s32 unk10;
+    s32 unk0;
+    s32 unk4;
+    s32 dir;
+    DungeonPos pos1;
+    DungeonPos pos2;
     s32 unk14;
-    DungeonPos unk18;
-    DungeonPos unk1c;
-    s32 unk20;
-    s32 unk24;
+    u32 unk18;
     unkStruct_2039DB0 spriteMasks;
-};
+} unkStruct_80416E0;
 
 struct unkStruct_203B0CC_sub
 {
@@ -34,7 +34,7 @@ struct unkStruct_203B0CC_sub
     u32 unk0;
     s32 unk4;
     s32 unk8;
-    struct unkStruct_203B0CC_xC unkC;
+    unkStruct_80416E0 unkC;
     u32 unk34;
     u32 effectID;
     s32 paletteNum;

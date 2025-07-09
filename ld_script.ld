@@ -82,7 +82,6 @@ SECTIONS {
         src/code_800D090.o(.text);
         src/code_800D090_1.o(.text);
         src/code_800DAC0.o(.text);
-        src/code_800E9A8.o(.text);
         src/code_800E9E4.o(.text);
         src/code_800ED38.o(.text);
         src/code_800F034.o(.text);

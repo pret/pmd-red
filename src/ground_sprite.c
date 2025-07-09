@@ -799,13 +799,13 @@ bool8 sub_80A7094(struct UnkGroundSpriteStruct *ptr, PixelPos *r10, PixelPos *po
             unkStruct.unk0 = ptr->unk58;
             unkStruct.unk4 = 0;
             unkStruct.dir = (s8) ptr->unk5A;
-            unkStruct.x = posArg->x / 256;
-            unkStruct.y = posArg->y / 256;
-            unkStruct.unk10 = 0;
-            unkStruct.unk12 = 0;
+            unkStruct.pos1.x = posArg->x / 256;
+            unkStruct.pos1.y = posArg->y / 256;
+            unkStruct.pos2.x = 0;
+            unkStruct.pos2.y = 0;
             unkStruct.unk14 = -1;
             unkStruct.unk18 = 0;
-            unkStruct.unk1C = unkSubStruct;
+            unkStruct.spriteMasks = unkSubStruct;
             ptr->unk5C = sub_800E890(&unkStruct);
         }
         else if (!sub_800E9E4(ptr->unk5C)) {

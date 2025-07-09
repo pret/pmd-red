@@ -246,14 +246,14 @@ s32 sub_8041550(Entity *entity, s32 a1, u8 a2, u8 a3, s32 a4, u8 a5)
     sp.unk0 = a1;
     sp.unk4 = 0;
     sp.dir = -1;
-    sp.x = pixelPos.x / 256;
-    sp.y = pixelPos.y / 256;
+    sp.pos1.x = pixelPos.x / 256;
+    sp.pos1.y = pixelPos.y / 256;
     sp.unk14 = -1;
-    sp.unk10 = 0;
-    sp.unk12 = 0;
+    sp.pos2.x = 0;
+    sp.pos2.y = 0;
     sp.unk18 = var;
 
-    sub_8004E8C(&sp.unk1C);
+    sub_8004E8C(&sp.spriteMasks);
     r4 = sub_8041764(&sp, FALSE);
     if (a2) {
         for (i = 0; i < 100; i++) {
@@ -286,14 +286,14 @@ s32 sub_80416E0(PixelPos *pos, u32 param_2, bool8 param_3)
   auStack_10.unk4 = 0;
   auStack_10.dir = -1;
 
-  auStack_10.x = pos->x / 256;
-  auStack_10.y = pos->y / 256;
+  auStack_10.pos1.x = pos->x / 256;
+  auStack_10.pos1.y = pos->y / 256;
 
   auStack_10.unk14 = -1;
-  auStack_10.unk10 = 0;
-  auStack_10.unk12 = 0;
+  auStack_10.pos2.x = 0;
+  auStack_10.pos2.y = 0;
   auStack_10.unk18 = 0xffff;
-  sub_8004E8C(&auStack_10.unk1C);
+  sub_8004E8C(&auStack_10.spriteMasks);
   ret = sub_8041764(&auStack_10, FALSE);
   if (param_3) {
     counter = 0;
@@ -1232,13 +1232,13 @@ s32 sub_8042520(Entity *a0)
         local_58.unk0 = 357;
         local_58.unk4 = 0;
         local_58.dir = dir;
-        local_58.x = pos.x;
-        local_58.y = pos.y;
-        local_58.unk10 = 0;
-        local_58.unk12 = 0;
+        local_58.pos1.x = pos.x;
+        local_58.pos1.y = pos.y;
+        local_58.pos2.x = 0;
+        local_58.pos2.y = 0;
         local_58.unk14 = -1;
         local_58.unk18 = iVar8;
-        sub_8004E8C(&local_58.unk1C);
+        sub_8004E8C(&local_58.spriteMasks);
         uVar4 = sub_8041764(&local_58, 0);
 
         for (i = 0; i < 6; i++) {
@@ -1578,19 +1578,19 @@ void sub_8042B34(s32 a0, s32 a1, s32 a2)
         spStruct.unk0 = gUnknown_80F6624[gUnknown_203B414->unk0][r8].unk0;
         spStruct.unk4 = i;
         spStruct.dir = 0;
-        spStruct.x = leader->pixelPos.x / 256;
-        spStruct.y = leader->pixelPos.y / 256;
+        spStruct.pos1.x = leader->pixelPos.x / 256;
+        spStruct.pos1.y = leader->pixelPos.y / 256;
 
         rnd = RandInt(2);
         gUnknown_203B414->unk4C[i] = (gUnknown_80F6624[gUnknown_203B414->unk0][r8].unk4 * 2) + rnd;
         gUnknown_203B414->unk8C[i].x = RandInt(240) + 152;
         gUnknown_203B414->unk8C[i].y = RandInt(8 + (i * 2)) - (((i - (i / 4 * 4)) * 40) - 24);
 
-        spStruct.unk10 = gUnknown_203B414->unk8C[i].x;
-        spStruct.unk12 = gUnknown_203B414->unk8C[i].y;
+        spStruct.pos2.x = gUnknown_203B414->unk8C[i].x;
+        spStruct.pos2.y = gUnknown_203B414->unk8C[i].y;
         spStruct.unk14 = 4;
         spStruct.unk18 = 0xFFFF;
-        spStruct.unk1C = gUnknown_80F683C;
+        spStruct.spriteMasks = gUnknown_80F683C;
         gUnknown_203B414->unkC[i] = sub_800E890(&spStruct);
 
         r8++;

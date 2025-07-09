@@ -25,27 +25,7 @@ extern unkStruct_80C183C gUnknown_80C183C[4336];
 unkStruct_80C183C *sub_800ECD0(s32 param_1);
 
 
-u8 sub_800EA44(unkStruct_800EA44 param_1, s32 param_2)
-{
-    s32 a;
-    unkStruct_80BDBC4 *ret;
-    unkStruct_80C183C *unkStruct2;
-    s32 i;
 
-    a = (s32) param_1.unk0;
-    ret = sub_800ECB8(param_2);
-    unkStruct2 = sub_800ECD0(ret->unk20);
-
-    for (i = 0; i < ret->unk1C; i++, unkStruct2++)
-    {
-        if (unkStruct2->unk0 == a)
-        {
-            return unkStruct2->unk2;
-        }
-    }
-
-    return ret->unk10;
-}
 
 
 s32 sub_800E208(s32, unkStruct_800E208*);
@@ -73,22 +53,20 @@ s32 sub_800EA84(s32 *param_1)
     return sub_800E208(5, &stack[0]);
 }
 
-void sub_800EAE4(s32 param_1, DungeonPos *param_2, DungeonPos *param_3)
+UNUSED static void sub_800EAE4(s32 param_1, DungeonPos *param_2, DungeonPos *param_3)
 {
     s32 idx = sub_800E2C0(param_1);
     if (idx != -1)
     {
         struct unkStruct_203B0CC_sub *a;
         a = &gUnknown_203B0CC->unk0[idx];
-        a->unkC.unk18 = *param_2;
-        if (a->unkC.unk20 != -1)
-        {
-            a->unkC.unk1c = *param_3;
+        a->unkC.pos1 = *param_2;
+        if (a->unkC.unk14 != -1) {
+            a->unkC.pos2 = *param_3;
         }
-        else
-        {
-            a->unkC.unk1c.x = 0;
-            a->unkC.unk1c.y = 0;
+        else {
+            a->unkC.pos2.x = 0;
+            a->unkC.pos2.y = 0;
         }
     }
 }
@@ -97,30 +75,29 @@ void sub_800EB24(s32 param_1, DungeonPos *param_2, DungeonPos *param_3, s32 r5, 
 {
     s32 idx = sub_800E2C0(param_1);
     if (idx != -1) {
-        struct unkStruct_203B0CC_sub *curStruct;
-        curStruct = &gUnknown_203B0CC->unk0[idx];
+        struct unkStruct_203B0CC_sub *curStruct = &gUnknown_203B0CC->unk0[idx];
         if (curStruct->unkCC.x == 0 && curStruct->unkCC.y == 0) {
-            curStruct->unkC.unk18 = *param_2;
+            curStruct->unkC.pos1 = *param_2;
         }
 
         if (curStruct->unk0 == 6) {
-            curStruct->unkC.unk24 = r5 + 1;
+            curStruct->unkC.unk18 = r5 + 1;
         }
-        else if ((curStruct->unk8 & 0x7) == 0) {
+        else if ((curStruct->unk8 % 8) == 0) {
             s32 newStruct[8];
             memcpy(newStruct, gUnknown_80B9C9C, sizeof(s32) * 8);
-            curStruct->unkC.unk24 = r5 + newStruct[r4 & 7];
+            curStruct->unkC.unk18 = r5 + newStruct[r4 & 7];
         }
         else {
-            curStruct->unkC.unk24 = r5 + 1;
+            curStruct->unkC.unk18 = r5 + 1;
         }
 
-        if (curStruct->unkC.unk20 != -1) {
-            curStruct->unkC.unk1c = *param_3;
+        if (curStruct->unkC.unk14 != -1) {
+            curStruct->unkC.pos2 = *param_3;
         }
         else {
-            curStruct->unkC.unk1c.x = 0;
-            curStruct->unkC.unk1c.y = 0;
+            curStruct->unkC.pos2.x = 0;
+            curStruct->unkC.pos2.y = 0;
         }
     }
 }
@@ -154,7 +131,7 @@ s32 sub_800EBC8(s32 *param_1)
     return sub_800E208(6, &stack[0]);
 }
 
-void sub_800EC28(u32 param_1, DungeonPos *param_2, DungeonPos *param_3)
+UNUSED static void sub_800EC28(u32 param_1, DungeonPos *param_2, DungeonPos *param_3)
 {
     s32 idx;
     idx = sub_800E2C0(param_1);
@@ -162,15 +139,15 @@ void sub_800EC28(u32 param_1, DungeonPos *param_2, DungeonPos *param_3)
     {
         struct unkStruct_203B0CC_sub *struct203B0CC;
         struct203B0CC = &gUnknown_203B0CC->unk0[idx];
-        struct203B0CC->unkC.unk18 = *param_2;
-        if (struct203B0CC->unkC.unk20 != -1)
+        struct203B0CC->unkC.pos1 = *param_2;
+        if (struct203B0CC->unkC.unk14 != -1)
         {
-            struct203B0CC->unkC.unk1c = *param_3;
+            struct203B0CC->unkC.pos2 = *param_3;
         }
         else
         {
-            struct203B0CC->unkC.unk1c.x = 0;
-            struct203B0CC->unkC.unk1c.y = 0;
+            struct203B0CC->unkC.pos2.x = 0;
+            struct203B0CC->unkC.pos2.y = 0;
         }
     }
 }
@@ -188,17 +165,17 @@ u8 sub_800EC74(void)
 
 u8 sub_800EC84(s32 param_1)
 {
-    unkStruct_80BDBC4 *ret;
-    ret = sub_800ECB8(param_1);
+    unkStruct_80BDBC4 *ret = sub_800ECB8(param_1);
     return ret->unk8;
 }
 
 u8 sub_800EC94(s32 param_1)
 {
-    unkStruct_80BDBC4 *ret;
-    ret = sub_800ECB8(param_1);
+    unkStruct_80BDBC4 *ret = sub_800ECB8(param_1);
     return ret->unk9;
 }
+
+// FILE SPLIT
 
 unkStruct_80B9CC4 *sub_800ECA4(s32 param_1)
 {

@@ -25,19 +25,41 @@ struct unkStruct_800F18C
     u32 counter;
 };
 
+struct UnkStruct_8040094
+{
+    u16 unk0;
+    s16 unk2;
+    DungeonPos unk4;
+    DungeonPos unk8;
+    s32 unkC;
+    s32 unk10;
+};
+
+extern s16 gUnknown_2026E4E;
+
 extern s32 sub_800E2C0(s32);
 extern s32 sub_800E900(s32 a0);
 extern void sub_8009BE4(void);
 extern void sub_800F204(OpenedFile *file);
 extern struct unkStruct_800F18C *sub_800F18C(s32);
 extern void sub_800DCA8(struct unkStruct_203B0CC_sub *);
-
 extern void sub_800F034(void);
 extern void sub_800ED38(u32);
 extern void sub_800F078();
 extern void sub_800ED64();
 extern void sub_800ED80();
 extern void sub_800F094();
+extern void sub_809971C(u16 a0, const RGB *a1, int a2);
+
+s32 sub_800E2B8(OpenedFile *a0);
+OpenedFile *sub_800F1C0(u32 animType, s32 effectID);
+s32 sub_800E2F0(void);
+s32 sub_800E750(s32 a0, s32 a1);
+s32 sub_800E700(s32);
+void sub_800F15C(s32 effectID);
+unkStruct_80C183C *sub_800ECD0(s32 param_1);
+
+extern const unkStruct_2039DB0 gUnknown_80B9C60;
 
 void sub_800DAC0(u32 fileSelection)
 {
@@ -425,9 +447,6 @@ bool8 sub_800DE38(struct unkStruct_203B0CC_sub *a1)
     return TRUE;
 }
 
-extern s16 gUnknown_2026E4E;
-extern void sub_809971C(u16 a0, const RGB *a1, int a2);
-
 static inline const EfoFileData *GetFileEfo(struct unkStruct_203B0CC_sub *a0)
 {
     return a0->unkB8->data;
@@ -510,25 +529,21 @@ bool8 sub_800DE8C(struct unkStruct_203B0CC_sub *a0, DungeonPos *unused)
     return TRUE;
 }
 
-s32 sub_800E2B8(OpenedFile *a0);
-OpenedFile *sub_800F1C0(u32 animType, s32 effectID);
-s32 sub_800E2F0(void);
-
 void sub_800E0B4(struct unkStruct_203B0CC_sub *r5)
 {
     s32 r2;
-    unkStruct_80B9CC4 *r6 = sub_800ECA4(r5->unkC.unkC);
+    unkStruct_80B9CC4 *r6 = sub_800ECA4(r5->unkC.unk0);
     r5->unk34 = r6->animType;
     r5->effectID = r6->effectId;
     r5->unk4C = r6->unk10;
-    r5->unk50 = r5->unkC.unk10 + r6->unk14;
+    r5->unk50 = r5->unkC.unk4 + r6->unk14;
     r5->unk55 = r6->loop;
     r5->unk54 = r6->unk20;
     r2 = sub_800E2B8(r5->unkB8);
     r5->unk8 = r2;
     r5->unk40 = r6->animId;
-    if (r5->unkC.unk14 != -1 && (r2 % 8) == 0) {
-        r5->unk40 += r5->unkC.unk14;
+    if (r5->unkC.dir != -1 && (r2 % 8) == 0) {
+        r5->unk40 += r5->unkC.dir;
     }
 
     switch (r5->unk34) {
@@ -572,12 +587,12 @@ void sub_800E0B4(struct unkStruct_203B0CC_sub *r5)
     }
 }
 
-s32 sub_800E208(s32 a0, struct unkStruct_203B0CC_xC *a1)
+s32 sub_800E208(s32 a0, unkStruct_80416E0 *a1)
 {
     s32 i;
     struct unkStruct_203B0CC_sub *ptr = gUnknown_203B0CC->unk0;
 
-    if (a1->unkC == 0)
+    if (a1->unk0 == 0)
         return -1;
 
     for (i = 0; i < UNK_203B0CC_ARR_COUNT; i++, ptr++) {
@@ -585,7 +600,7 @@ s32 sub_800E208(s32 a0, struct unkStruct_203B0CC_xC *a1)
             unkStruct_80B9CC4 *strPtr;
 
             MemoryClear8(ptr, sizeof(*ptr));
-            strPtr = sub_800ECA4(a1->unkC);
+            strPtr = sub_800ECA4(a1->unk0);
             if (strPtr->animType == 2 && gUnknown_203B0CC->fileSelection != 1)
                 return -1;
             if (strPtr->animType == 1 && gUnknown_203B0CC->fileSelection != 0)
@@ -631,31 +646,17 @@ s32 sub_800E2F0(void)
     return prev;
 }
 
-struct UnkStruct_sub_800E308_1
-{
-    u16 unk0;
-    s16 unk2;
-    DungeonPos unk4;
-    DungeonPos unk8;
-    s32 unkC;
-    s32 unk10;
-};
-
-s32 sub_800E750(s32 a0, s32 a1);
-
-extern const unkStruct_2039DB0 gUnknown_80B9C60;
-
-s32 sub_800E308(struct UnkStruct_sub_800E308_1 *a0, DungeonPos *a1)
+s32 sub_800E308(struct UnkStruct_8040094 *a0, DungeonPos *a1)
 {
     s32 id;
-    struct unkStruct_203B0CC_xC sp = {
-        .unkC = sub_800ECB8(a0->unk0)->unk6,
-        .unk10 = a0->unk10,
-        .unk14 = a0->unkC,
-        .unk18 = a0->unk4,
-        .unk1c = a0->unk8,
-        .unk20 = sub_800E750(a0->unk2, a0->unk0),
-        .unk24 = 0xFFFF,
+    unkStruct_80416E0 sp = {
+        .unk0 = sub_800ECB8(a0->unk0)->unk6,
+        .unk4 = a0->unk10,
+        .dir = a0->unkC,
+        .pos1 = a0->unk4,
+        .pos2 = a0->unk8,
+        .unk14 = sub_800E750(a0->unk2, a0->unk0),
+        .unk18 = 0xFFFF,
         .spriteMasks = gUnknown_80B9C60,
     };
     s32 retVal = sub_800E208(2, &sp);
@@ -669,7 +670,7 @@ s32 sub_800E308(struct UnkStruct_sub_800E308_1 *a0, DungeonPos *a1)
         ptr->unkBC = a0->unk4;
         ptr->unkC0 = *a1;
         ptr->unkC4 = a0->unk2;
-        ptr->unkC8 = ptr->unkC.unk1c;
+        ptr->unkC8 = ptr->unkC.pos2;
         return retVal;
     }
 
@@ -686,81 +687,65 @@ void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2)
         return;
 
     ptr = &gUnknown_203B0CC->unk0[id];
-    ptr->unkC.unk18 = *pos;
+    ptr->unkC.pos1 = *pos;
 
     val = max(abs(ptr->unkC0.x - ptr->unkBC.x), abs(ptr->unkC0.y - ptr->unkBC.y)) / 4;
     valMinus1 = val - 1;
 
-    ptr->unkC.unk1c.y += 9;
-    ptr->unkC.unk1c.x *= valMinus1;
-    ptr->unkC.unk1c.y *= valMinus1;
-    ptr->unkC.unk1c.x /= val;
-    ptr->unkC.unk1c.y /= val;
-    ptr->unkC.unk1c.y -= 9;
+    ptr->unkC.pos2.y += 9;
+    ptr->unkC.pos2.x *= valMinus1;
+    ptr->unkC.pos2.y *= valMinus1;
+    ptr->unkC.pos2.x /= val;
+    ptr->unkC.pos2.y /= val;
+    ptr->unkC.pos2.y -= 9;
 
-    ptr->unkC.unk24 = a2;
+    ptr->unkC.unk18 = a2;
 }
 
 s32 sub_800E448(u8 a0, DungeonPos *pos)
 {
-    struct unkStruct_203B0CC_xC sp = {
-        .unkC = sub_800ECE4(a0),
-        .unk10 = 0,
+    unkStruct_80416E0 sp = {
+        .unk0 = sub_800ECE4(a0),
+        .unk4 = 0,
+        .dir = -1,
+        .pos1 = *pos,
+        .pos2 = {0, 0},
         .unk14 = -1,
-        .unk18 = *pos,
-        .unk1c = {0, 0},
-        .unk20 = -1,
-        .unk24 = 0xFFFF,
+        .unk18 = 0xFFFF,
         .spriteMasks = gUnknown_80B9C60,
     };
     return sub_800E208(3, &sp);
 }
 
-s32 sub_800E700(s32);
-
 s32 sub_800E49C(u8 a0, DungeonPos *pos, DungeonPos posArray[4], bool8 a3, s32 a4)
 {
     s32 r4 = a3 ? sub_800ECF8(a0) : sub_800ED0C(a0);
     s32 r5 = sub_800E700(r4);
-    struct unkStruct_203B0CC_xC sp = {
-        .unkC = r4,
-        .unk10 = 0,
+    unkStruct_80416E0 sp = {
+        .unk0 = r4,
+        .unk4 = 0,
+        .dir = -1,
+        .pos1 = *pos,
+        .pos2 = {0, 0},
         .unk14 = -1,
-        .unk18 = *pos,
-        .unk1c = {0, 0},
-        .unk20 = -1,
-        .unk24 = 0,
+        .unk18 = 0,
         .spriteMasks = gUnknown_80B9C60,
     };
 
-    sp.unk24 = a4;
+    sp.unk18 = a4;
     if (a3) {
         if (r5 != -1) {
-            sp.unk20 = r5;
-            sp.unk1c = posArray[r5];
+            sp.unk14 = r5;
+            sp.pos2 = posArray[r5];
         }
     }
     else {
-        sp.unk20 = 3;
-        sp.unk1c = posArray[3];
+        sp.unk14 = 3;
+        sp.pos2 = posArray[3];
     }
 
     return sub_800E208(4, &sp);
 }
-
-// TODO: MERGE WITH UnkStruct_sub_800E308_1
-
-struct UnkStruct_8040094
-{
-    u16 unk0;
-    s16 unk2;
-    DungeonPos unk4;
-    DungeonPos unk8;
-    s32 unkC;
-    s32 unk10;
-};
-
-void sub_800F15C(s32 effectID);
 
 s32 sub_800E52C(struct UnkStruct_8040094 *a0)
 {
@@ -777,23 +762,23 @@ s32 sub_800E52C(struct UnkStruct_8040094 *a0)
             { -100,  32 },
             { -120, -48 },
         };
-        struct unkStruct_203B0CC_xC sp[8];
+        unkStruct_80416E0 sp[8];
         s32 ret = 0;
         for (i = 0; i < 8; i++) {
             s32 possibleRet;
             s32 id;
-            struct unkStruct_203B0CC_xC *curr = &sp[i];
+            unkStruct_80416E0 *curr = &sp[i];
 
-            curr->unkC = sub_800ECB8(a0->unk0)->unk2;
-            curr->unk10 = a0->unk10;
-            curr->unk14 = a0->unkC;
-            curr->unk18 = a0->unk4;
-            curr->unk18.y += 64;
-            curr->unk1c = a0->unk8;
-            curr->unk1c.x += positions[i].x;
-            curr->unk1c.y += positions[i].y - 64;
-            curr->unk20 = sub_800E750(a0->unk2, a0->unk0);
-            curr->unk24 = 0xFFFF;
+            curr->unk0 = sub_800ECB8(a0->unk0)->unk2;
+            curr->unk4 = a0->unk10;
+            curr->dir = a0->unkC;
+            curr->pos1 = a0->unk4;
+            curr->pos1.y += 64;
+            curr->pos2 = a0->unk8;
+            curr->pos2.x += positions[i].x;
+            curr->pos2.y += positions[i].y - 64;
+            curr->unk14 = sub_800E750(a0->unk2, a0->unk0);
+            curr->unk18 = 0xFFFF;
             curr->spriteMasks = gUnknown_80B9C60;
             possibleRet = sub_800E208(1, curr);
             id = sub_800E2C0(possibleRet);
@@ -813,14 +798,14 @@ s32 sub_800E52C(struct UnkStruct_8040094 *a0)
         return ret;
     }
     else {
-        struct unkStruct_203B0CC_xC sp = {
-            .unkC = sub_800ECB8(a0->unk0)->unk2,
-            .unk10 = a0->unk10,
-            .unk14 = a0->unkC,
-            .unk18 = a0->unk4,
-            .unk1c = a0->unk8,
-            .unk20 = sub_800E750(a0->unk2, a0->unk0),
-            .unk24 = 0xFFFF,
+        unkStruct_80416E0 sp = {
+            .unk0 = sub_800ECB8(a0->unk0)->unk2,
+            .unk4 = a0->unk10,
+            .dir = a0->unkC,
+            .pos1 = a0->unk4,
+            .pos2 = a0->unk8,
+            .unk14 = sub_800E750(a0->unk2, a0->unk0),
+            .unk18 = 0xFFFF,
             .spriteMasks = gUnknown_80B9C60,
         };
         return sub_800E208(1, &sp);
@@ -832,13 +817,13 @@ UNUSED static void sub_800E698(s32 a0, DungeonPos *pos1, DungeonPos *pos2)
     s32 id = sub_800E2C0(a0);
     if (id != -1) {
         struct unkStruct_203B0CC_sub *ptr = &gUnknown_203B0CC->unk0[id];
-        ptr->unkC.unk18 = *pos1;
-        if (ptr->unkC.unk20 != -1) {
-            ptr->unkC.unk1c = *pos2;
+        ptr->unkC.pos1 = *pos1;
+        if (ptr->unkC.unk14 != -1) {
+            ptr->unkC.pos2 = *pos2;
         }
         else {
-            ptr->unkC.unk1c.x = 0;
-            ptr->unkC.unk1c.y = 0;
+            ptr->unkC.pos2.x = 0;
+            ptr->unkC.pos2.y = 0;
         }
     }
 }
@@ -848,7 +833,7 @@ s32 sub_800E6D8(s32 a0)
     s32 id = sub_800E2C0(a0);
     if (id != -1) {
         struct unkStruct_203B0CC_sub *ptr = &gUnknown_203B0CC->unk0[id];
-        return ptr->unkC.unk20;
+        return ptr->unkC.unk14;
     }
     else {
         return -1;
@@ -859,8 +844,6 @@ s32 sub_800E700(s32 a0)
 {
     return sub_800E900((s16) a0);
 }
-
-unkStruct_80C183C *sub_800ECD0(s32 param_1);
 
 s32 sub_800E710(s32 a0_, s32 a1)
 {
@@ -909,4 +892,159 @@ s32 sub_800E790(s32 a0_, s32 a1)
     return unkPtr1->unk18;
 }
 
-//
+bool8 sub_800E7D0(u16 *param_1)
+{
+    int local_1c [4];
+    bool8 flag;
+    s32 index;
+
+    flag = FALSE;
+    local_1c[0] = sub_800ECB8(*param_1)->unk0;
+    local_1c[1] = sub_800ECB8(*param_1)->unk2;
+    local_1c[2] = sub_800ECB8(*param_1)->unk4;
+    local_1c[3] = sub_800ECB8(*param_1)->unk6;
+    for(index = 0; index < 4; index++)
+    {
+        flag = (sub_800ECA4(local_1c[index])->animType == 4);
+        if(flag) break;
+    }
+    return flag;
+}
+
+bool8 sub_800E838(u16 *param_1, s32 param_2)
+{
+    s32 local_1c [4];
+
+    local_1c[0] = sub_800ECB8(*param_1)->unk0;
+    local_1c[1] = sub_800ECB8(*param_1)->unk2;
+    local_1c[2] = sub_800ECB8(*param_1)->unk4;
+    local_1c[3] = sub_800ECB8(*param_1)->unk6;
+    return sub_800ECA4(local_1c[param_2])->animType == 4;
+}
+
+s32 sub_800E890(unkStruct_80416E0 *param_1)
+{
+    param_1->unk14 = sub_800E900(param_1->unk0);
+    return sub_800E208(7, param_1);
+}
+
+void sub_800E8AC(s32 a0, DungeonPos *a1, DungeonPos *a2, s32 a3, unkStruct_2039DB0 *a4)
+{
+    s32 index = sub_800E2C0(a0);
+    if (index != -1) {
+        struct unkStruct_203B0CC_sub *ptr = &gUnknown_203B0CC->unk0[index];
+
+        if (a1 != NULL) ptr->unkC.pos1 = *a1;
+        if (a2 != NULL) ptr->unkC.pos2 = *a2;
+        if (a3 != 0xFFFF) ptr->unkC.unk18 = a3;
+        if (a4 != NULL) ptr->unkC.spriteMasks = *a4;
+    }
+}
+
+s32 sub_800E900(s32 r0)
+{
+    return sub_800ECA4(r0)->unk1c;
+}
+
+bool8 sub_800E90C(DungeonPos *param_1)
+{
+    s32 i;
+    struct unkStruct_203B0CC_sub *ptr;
+    bool8 flag = FALSE;
+
+    for (i = 0, ptr = &gUnknown_203B0CC->unk0[i]; i < UNK_203B0CC_ARR_COUNT; i++, ptr++) {
+        if (ptr->unk4 != -1) {
+            if (ptr->unkC.unk4 <= 0) {
+                if (ptr->unk34 == 4) {
+                    sub_800DE8C(ptr, param_1);
+                }
+                else {
+                    sub_800DD0C(ptr, param_1);
+                }
+            }
+            if (ptr->unkC.unk4 > 0)
+                ptr->unkC.unk4--;
+            sub_800DCD0(ptr);
+            if (ptr->unk54 == 0)
+                flag = TRUE;
+        }
+    }
+
+    return flag;
+}
+
+void sub_800E970(void)
+{
+    s32 i;
+    struct unkStruct_203B0CC_sub *ptr;
+
+    for (i = 0, ptr = &gUnknown_203B0CC->unk0[i]; i < UNK_203B0CC_ARR_COUNT; i++, ptr++) {
+        if (ptr->unk4 != -1 && ptr->unkC.unk4 <= 0 && ptr->unk34 != 4) {
+            sub_800DE38(ptr);
+        }
+    }
+}
+
+bool8 sub_800E9A8(s32 a0)
+{
+    s32 i;
+    struct unkStruct_203B0CC_sub *ptr;
+
+    if (a0 == -1)
+        return FALSE;
+
+    ptr = gUnknown_203B0CC->unk0;
+    for (i = 0; i < UNK_203B0CC_ARR_COUNT; i++, ptr++) {
+        if (ptr->unk4 == a0) {
+            if (ptr->unk54 != 0)
+                return FALSE;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 sub_800E9E4(u32 param_1)
+{
+    if (sub_800E2C0(param_1) != -1) {
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
+}
+
+bool8 sub_800E9FC(u8 a0)
+{
+    s32 i;
+    struct unkStruct_203B0CC_sub *ptr = gUnknown_203B0CC->unk0;
+    for (i = 0; i < UNK_203B0CC_ARR_COUNT; i++, ptr++) {
+        if (ptr->unk4 != -1) {
+            if (a0 != 0)
+                return TRUE;
+            if (ptr->unk54 == 0)
+                return TRUE;
+        }
+    }
+
+    if (sub_800EC74())
+        return TRUE;
+    return FALSE;
+}
+
+u8 sub_800EA44(unkStruct_800EA44 param_1, s32 param_2)
+{
+    s32 i;
+    s32 a = param_1.unk0;
+    unkStruct_80BDBC4 *ret = sub_800ECB8(param_2);
+    unkStruct_80C183C *unkStruct2 = sub_800ECD0(ret->unk20);
+
+    for (i = 0; i < ret->unk1C; i++, unkStruct2++) {
+        if (unkStruct2->unk0 == a) {
+            return unkStruct2->unk2;
+        }
+    }
+
+    return ret->unk10;
+}
