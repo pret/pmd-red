@@ -1,11 +1,12 @@
 #include "global.h"
 #include "globaldata.h"
+#include "effect_sub_1.h"
+#include "effect_sub_2.h"
 #include "bg_control.h"
 #include "structs/axdata.h"
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
-#include "code_800E9E4.h"
-#include "code_800ED38.h"
+#include "effect_data.h"
 #include "code_803E724.h"
 #include "dungeon_message.h"
 #include "file_system.h"
@@ -37,15 +38,11 @@ struct unkStruct_203B0D0 {
 
 static EWRAM_INIT struct unkStruct_203B0D0 *gUnknown_203B0D0 = NULL;
 
-s32 sub_800F0F4(s32, s32);
-void sub_800F13C(s32, OpenedFile *, const unkStruct_80B9CC4 *);
-void sub_800F15C(s32);
-
 extern void sub_809971C(u16 a0, const RGB *a1, int a2);
 
 void sub_800ED38(s32 r0)
 {
-    if (gUnknown_203B0D0 == 0) {
+    if (gUnknown_203B0D0 == NULL) {
         gUnknown_203B0D0 = MemoryAlloc(sizeof(struct unkStruct_203B0D0), 0xB);
         MemoryClear8(gUnknown_203B0D0, sizeof(struct unkStruct_203B0D0));
     }
@@ -71,7 +68,7 @@ void sub_800ED80(void)
     }
 }
 
-bool8 sub_800EDB0(struct unkStruct_203B0D0_sub *r0)
+static bool8 sub_800EDB0(struct unkStruct_203B0D0_sub *r0)
 {
     s32 index;
 
@@ -84,7 +81,7 @@ bool8 sub_800EDB0(struct unkStruct_203B0D0_sub *r0)
     return FALSE;
 }
 
-void sub_800EDF0(u32 r0, OpenedFile *file)
+static void sub_800EDF0(u32 r0, OpenedFile *file)
 {
     struct unkStruct_203B0D0_sub stack;
 

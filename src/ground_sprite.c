@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "structs/axdata.h"
-#include "code_800DAC0.h"
+#include "effect_main.h"
 #include "debug.h"
 #include "def_filearchives.h"
 #include "file_system.h"
@@ -10,7 +10,7 @@
 #include "ground_sprite_data.h"
 #include "memory.h"
 #include "sprite.h"
-#include "code_800ED38.h"
+#include "effect_sub_1.h"
 
 static IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
 

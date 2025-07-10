@@ -7,8 +7,8 @@
 #include "structs/sprite_oam.h"
 #include "structs/str_dungeon.h"
 #include "code_800558C.h"
-#include "code_800DAC0.h"
-#include "code_800ED38.h"
+#include "effect_main.h"
+#include "effect_sub_1.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
 #include "code_8041AD0.h"
@@ -29,7 +29,7 @@
 #include "memory.h"
 #include "random.h"
 #include "dungeon_util_1.h"
-#include "code_800E9E4.h"
+#include "effect_data.h"
 
 // Unknown dungeon file. File split is correct.
 

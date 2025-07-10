@@ -1,6 +1,8 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_800DAC0.h"
+#include "effect_main.h"
+#include "effect_sub_1.h"
+#include "effect_sub_2.h"
 #include "structs/axdata.h"
 #include "bg_control.h"
 #include "music_util.h"
@@ -13,7 +15,7 @@
 #include "sprite.h"
 #include "bg_palette_buffer.h"
 #include "cpu.h"
-#include "code_800E9E4.h"
+#include "effect_data.h"
 #include "graphics_memory.h"
 #include "effect_anim_file.h"
 
@@ -79,18 +81,7 @@ extern s16 gUnknown_2026E4E;
 
 
 extern void sub_8009BE4(void);
-extern struct unkStruct_800F18C *sub_800F18C(s32);
-extern void sub_800F034(void);
-extern void sub_800ED38(u32);
-extern void sub_800F078();
-extern void sub_800ED64();
-extern void sub_800ED80();
-extern void sub_800F094();
 extern void sub_809971C(u16 a0, const RGB *a1, int a2);
-extern u32 sub_800F19C(s32);
-extern void sub_800F15C(s32 effectID);
-
-s32 sub_800E700(s32);
 
 static s32 sub_800E900(s32 a0);
 static s32 sub_800E2C0(s32);

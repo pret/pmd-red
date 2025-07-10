@@ -1,9 +1,9 @@
-#ifndef GUARD_CODE_800DAC0_H
-#define GUARD_CODE_800DAC0_H
+#ifndef GUARD_EFFECT_MAIN_H
+#define GUARD_EFFECT_MAIN_H
 
 #include "structs/sprite_oam.h"
 #include "structs/str_position.h"
-#include "code_800E9E4.h"
+#include "effect_data.h"
 
 typedef struct unkStruct_80416E0
 {
@@ -65,4 +65,4 @@ u8 sub_800EC84(s32 param_1);
 u8 sub_800EC94(s32 param_1);
 
 
-#endif // GUARD_CODE_800DAC0_H
+#endif // GUARD_EFFECT_MAIN_H

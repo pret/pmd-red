@@ -7,7 +7,7 @@
 #include "bg_palette_buffer.h"
 #include "cpu.h"
 #include "graphics_memory.h"
-#include "code_800DAC0.h"
+#include "effect_main.h"
 #include "def_filearchives.h"
 #include "dungeon_info.h"
 #include "dungeon_generation.h"

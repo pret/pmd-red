@@ -1,5 +1,5 @@
-#ifndef GUARD_CODE_800E9E4_H
-#define GUARD_CODE_800E9E4_H
+#ifndef GUARD_EFFECT_DATA_H
+#define GUARD_EFFECT_DATA_H
 
 typedef struct unkStruct_80B9CC4
 {

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_800E9E4.h"
+#include "effect_sub_2.h"
+#include "effect_data.h"
 #include "memory.h"
 #include "file_system.h"
 
@@ -25,7 +26,7 @@ void sub_800F034(void)
         MemoryClear8(gUnknown_203B0D4, sizeof(struct unkStruct_203B0D4));
     }
 
-    for(index = 0; index < 2; index++) {
+    for (index = 0; index < 2; index++) {
         gUnknown_203B0D4->unk0[index].effectID = -1;
         gUnknown_203B0D4->unk0[index].counter = 0;
     }
@@ -69,7 +70,7 @@ s32 sub_800F0F4(s32 animType, s32 effectID)
     return -1;
 }
 
-void sub_800F13C(s32 index, OpenedFile *file, unkStruct_80B9CC4 *r2)
+void sub_800F13C(s32 index, OpenedFile *file, const unkStruct_80B9CC4 *r2)
 {
     if (gUnknown_203B0D4->unk0[index].counter == 0)
         gUnknown_203B0D4->unk0[index].effectID = r2->effectId;
@@ -94,7 +95,7 @@ struct unkStruct_800F18C *sub_800F18C(s32 index)
 
 s32 sub_800F19C(s32 index)
 {
-    if(gUnknown_203B0D4->unk0[index].counter == 0)
+    if (gUnknown_203B0D4->unk0[index].counter == 0)
         return 0;
     else
         return 1;

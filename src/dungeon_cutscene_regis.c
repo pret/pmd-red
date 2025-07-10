@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "code_800DAC0.h"
+#include "effect_main.h"
 #include "dungeon_vram.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
