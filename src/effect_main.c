@@ -234,9 +234,9 @@ static void sub_800DCD0(struct unkStruct_203B0CC_sub *param_1)
 // https://decomp.me/scratch/OBo48
 static bool8 sub_800DD0C(struct unkStruct_203B0CC_sub *param_1, DungeonPos *posArg)
 {
-    struct axObject *axObj = &param_1->unk58;
+    struct axdata *axData = &param_1->unk58;
 
-    if (!AxFlag8000_Not2000(&axObj->axdata)) {
+    if (!AxFlag8000_Not2000(axData)) {
         sub_800DCA8(param_1);
         if (param_1->unk34 == 3) {
             s32 i;
@@ -254,10 +254,10 @@ static bool8 sub_800DD0C(struct unkStruct_203B0CC_sub *param_1, DungeonPos *posA
         DungeonPos pos;
         s32 unkYAdd;
 
-        RunAxAnimationFrame(&axObj->axdata);
+        RunAxAnimationFrame(axData);
         unkYAdd = 0;
         if ((param_1->unk8 % 8) == 0) {
-            switch (param_1->unk14) {
+            switch (param_1->unkC.dir) {
                 case 3:
                 case 4:
                 case 5:
@@ -272,23 +272,23 @@ static bool8 sub_800DD0C(struct unkStruct_203B0CC_sub *param_1, DungeonPos *posA
             unkYAdd += 3;
         }
         pos = (DungeonPos) {0, 0};
-        if (param_1->unk20 != -1) {
-            pos.x = param_1->unk1c.x;
-            pos.y = param_1->unk1c.y;
+        if (param_1->unkC.unk14 != -1) {
+            pos.x = param_1->unkC.pos2.x;
+            pos.y = param_1->unkC.pos2.y;
         }
 
         if (pos.x != 99 && pos.y != 99) {
             s32 x, y;
-            s32 unkY = param_1->unk24;
+            s32 unkY = param_1->unkC.unk18;
             if (unkY == 0xffff) {
-                unkY = (param_1->unk18.y - posArg->y) / 2 + unkYAdd;
+                unkY = (param_1->unkC.pos1.y - posArg->y) / 2 + unkYAdd;
             }
-            x = param_1->unk18.x - posArg->x + pos.x;
-            y = param_1->unk18.y - posArg->y + pos.y;
-            param_1->unk18.x += param_1->unkCC[0];
-            param_1->unk18.y += param_1->unkCC[1];
+            x = param_1->unkC.pos1.x - posArg->x + pos.x;
+            y = param_1->unkC.pos1.y - posArg->y + pos.y;
+            param_1->unkC.pos1.x += param_1->unkCC.x;
+            param_1->unkC.pos1.y += param_1->unkCC.y;
             if (x > -64 && x < 304 && y > -64 && y < 224) {
-                DoAxFrame_800558C(&axObj->axdata,x,y,unkY,param_1->paletteNum,&param_1->spriteMasks);
+                DoAxFrame_800558C(axData,x,y,unkY,param_1->paletteNum,&param_1->unkC.spriteMasks);
             }
         }
         return TRUE;
