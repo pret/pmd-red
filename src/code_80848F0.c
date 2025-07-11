@@ -1499,7 +1499,7 @@ s32 sub_80861F8(s32 param_1,Entity *param_2,bool32 param_3)
     stack.pos2.y = pos.y;
     stack.unk14 = uStack_38;
     stack.unk18 = 0xffff;
-    stack.spriteMasks = (unkStruct_2039DB0) {0xFFFF, 0xFFFF, 0xFFFF, 0, 0};
+    stack.spriteMasks = DEFAULT_UNK_2039DB0_MASKS;
 
     uVar2 = sub_800E890(&stack);
     if (param_3_bool32) {
