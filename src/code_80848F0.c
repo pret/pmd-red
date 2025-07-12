@@ -1331,6 +1331,8 @@ void sub_8085EB0(void)
     gDungeon->unk181e8.unk18215 = 1;
 }
 
+static const unkStruct_2039DB0 sDefaultSpriteMasks = DEFAULT_UNK_2039DB0_MASKS;
+
 u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 param_5)
 {
     u32 uVar1;
@@ -1353,7 +1355,7 @@ u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 
     local_40.pos2.x = 0;
     local_40.pos2.y = 0;
     local_40.unk18 = 0xffff;
-    local_40.spriteMasks = DEFAULT_UNK_2039DB0_MASKS;
+    local_40.spriteMasks = sDefaultSpriteMasks;
 
     uVar1 = sub_800E890(&local_40);
     if (param_5_bool8) {
