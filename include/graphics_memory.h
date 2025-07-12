@@ -2,6 +2,7 @@
 #define GUARD_GRAPHICS_MEMORY_H
 
 #include "structs/axdata.h"
+#include "structs/str_8009A7C.h"
 
 extern RGB gFontPalette[128];
 
@@ -20,5 +21,6 @@ void ScheduleBgTilemapCopy(u32);
 void DoScheduledMemCopies(void);
 void CopyBgTilemaps0And1(void);
 void SetFontsBaseColor(RGB);
+bool8 sub_8009A7C(struct Struct_8009A7C *a0, s32 a1, s32 a2, s32 a3, bool8 a4, s32 *a5, s16 *a6);
 
 #endif // GUARD_GRAPHICS_MEMORY_H

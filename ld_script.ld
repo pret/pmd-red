@@ -82,12 +82,11 @@ SECTIONS {
         src/flash.o(.text);
         src/code_800D090.o(.text);
         src/code_800D090_1.o(.text);
-        src/code_800DAC0.o(.text);
-        asm/code_800DAC0.o(.text);
-        src/code_800E9A8.o(.text);
-        src/code_800E9E4.o(.text);
-        src/code_800ED38.o(.text);
-        src/code_800F034.o(.text);
+        src/effect_main.o(.text);
+        src/effect_data.o(.text);
+        src/effect_sub_1.o(.text);
+        src/effect_sub_2.o(.text);
+        src/effect_anim_file.o(.text);
         src/dungeon_pokemon_sprites.o(.text);
         src/friend_areas_map.o(.text);
         src/world_map.o(.text);
@@ -454,8 +453,12 @@ SECTIONS {
         data/pksdir_8.o(.rodata);
         src/main.o(.rodata);
         src/reg_control.o(.rodata);
-        data/data_80B9BB8_2.o(.rodata);
-        src/code_800F034.o(.rodata);
+        data/data_80B9BB0.o(.rodata);
+        src/effect_main.o(.rodata)
+        src/effect_data.o(.rodata)
+        src/effect_sub_1.o(.rodata)
+        src/effect_sub_2.o(.rodata);
+        src/effect_anim_file.o(.rodata);
         src/dungeon_pokemon_sprites.o(.rodata);
         src/friend_areas_map.o(.rodata);
         src/world_map.o(.rodata);

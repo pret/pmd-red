@@ -13,6 +13,8 @@ typedef struct unkStruct_2039DB0
     u16 unkA; // SpriteOAM attrib3 value
 } unkStruct_2039DB0;
 
+#define DEFAULT_UNK_2039DB0_MASKS (unkStruct_2039DB0) {0xFFFF, 0xFFFF, 0xFFFF, 0, 0, 0}
+
 // size: 0x8. Similar to struct OamData but unk6 is not copied to OAM
 typedef struct SpriteOAM
 {

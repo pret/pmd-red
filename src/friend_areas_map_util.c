@@ -25,11 +25,6 @@
 #include "text_2.h"
 #include "text_3.h"
 
-static inline bool8 CheckAxFlag8000(axdata *ptr)
-{
-    return (ptr->flags & 0x8000) != 0;
-}
-
 static inline bool8 ResetFlags(axdata *ptr)
 {
     return ptr->flags = 0;
@@ -124,7 +119,7 @@ static void AnimateSprites(void)
     }
 
     for (dir = 0; dir < NUM_DIRECTIONS; dir++) {
-        if (CheckAxFlag8000(&gFriendAreasMapPtr->arrowSprites[dir])) {
+        if (AxFlag8000(&gFriendAreasMapPtr->arrowSprites[dir])) {
             RunAxAnimationFrame(&gFriendAreasMapPtr->arrowSprites[dir]);
             // Hide non-diagonal arrows when R button is pressed.
             if ((gRealInputs.held & R_BUTTON) && (dir % 2) == 0)

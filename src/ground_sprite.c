@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "structs/axdata.h"
-#include "code_800DAC0.h"
+#include "effect_main.h"
 #include "debug.h"
 #include "def_filearchives.h"
 #include "file_system.h"
@@ -10,7 +10,7 @@
 #include "ground_sprite_data.h"
 #include "memory.h"
 #include "sprite.h"
-#include "code_800ED38.h"
+#include "effect_sub_1.h"
 
 static IWRAM_INIT unkStruct_3001B7C *gUnknown_3001B7C = {NULL};
 
@@ -791,7 +791,7 @@ bool8 sub_80A7094(struct UnkGroundSpriteStruct *ptr, PixelPos *r10, PixelPos *po
             ptr->unk58 = 0;
         }
         else if (ptr->unk5C == -1) {
-            unkStruct_2039DB0 unkSubStruct = {0xFFFF, 0xFFFF, 0xFFFF, 0, 0, 0};
+            unkStruct_2039DB0 unkSubStruct = DEFAULT_UNK_2039DB0_MASKS;
             unkStruct_80416E0 unkStruct;
 
             sub_800EE5C(ptr->unk58);
@@ -799,13 +799,13 @@ bool8 sub_80A7094(struct UnkGroundSpriteStruct *ptr, PixelPos *r10, PixelPos *po
             unkStruct.unk0 = ptr->unk58;
             unkStruct.unk4 = 0;
             unkStruct.dir = (s8) ptr->unk5A;
-            unkStruct.x = posArg->x / 256;
-            unkStruct.y = posArg->y / 256;
-            unkStruct.unk10 = 0;
-            unkStruct.unk12 = 0;
+            unkStruct.pos1.x = posArg->x / 256;
+            unkStruct.pos1.y = posArg->y / 256;
+            unkStruct.pos2.x = 0;
+            unkStruct.pos2.y = 0;
             unkStruct.unk14 = -1;
             unkStruct.unk18 = 0;
-            unkStruct.unk1C = unkSubStruct;
+            unkStruct.spriteMasks = unkSubStruct;
             ptr->unk5C = sub_800E890(&unkStruct);
         }
         else if (!sub_800E9E4(ptr->unk5C)) {

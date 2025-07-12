@@ -8,7 +8,7 @@
 #include "code_8004AA0.h"
 #include "code_800558C.h"
 #include "graphics_memory.h"
-#include "code_800E9E4.h"
+#include "effect_data.h"
 #include "code_801602C.h"
 #include "dungeon_vram.h"
 #include "code_803E724.h"
@@ -32,6 +32,7 @@
 #include "music_util.h"
 #include "dungeon_strings.h"
 #include "run_dungeon.h"
+#include "effect_main.h"
 
 extern s32 gDungeonFramesCounter;
 

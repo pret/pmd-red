@@ -531,20 +531,12 @@ static void AxResInitUnoriented(axdata *a0, axmain *a1, u32 a2, u32 a3, u32 spri
     a0->positions = NULL;
 }
 
-static inline s16 check_flag_for_80054BC(u16 flags)
-{
-    if (flags & 0x2000)
-        return 0;
-    else
-        return flags >> 15;
-}
-
 // arm9.bin::02001AC4
 void RunAxAnimationFrame(axdata *a0)
 {
     const ax_anim *aData;
 
-    if (!check_flag_for_80054BC(a0->flags))
+    if (!AxFlag8000_Not2000(a0))
         return;
 
     if (a0->sub1.poseId >= 0) {

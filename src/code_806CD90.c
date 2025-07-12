@@ -45,14 +45,6 @@ extern s32 gDungeonFramesCounter;
 
 extern void sub_8042EC8(Entity *a0, s32 a1);
 
-static inline u16 GetUnkFlag(Entity *entity)
-{
-    if ((entity->axObj.axdata.flags & 0x2000))
-        return 0;
-    else
-        return entity->axObj.axdata.flags >> 15;
-}
-
 void sub_806C51C(Entity *entity)
 {
     s32 x, y, y2;
@@ -82,7 +74,7 @@ void sub_806C51C(Entity *entity)
     if (entity->axObj.unk43_animId2 == entity->axObj.unk42_animId1 && entity->axObj.unk45_orientation == entity->axObj.unk44_direction1 && entity->axObj.unk47 == 0) {
         bool8 r2 = FALSE;
 
-        if (!GetUnkFlag(entity))
+        if (!AxFlag8000_Not2000(&entity->axObj.axdata))
             r2 = TRUE;
 
         if (r2) {
