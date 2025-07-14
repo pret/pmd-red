@@ -26,6 +26,7 @@
 #include "dungeon_config.h"
 #include "dungeon_logic.h"
 #include "dungeon_strings.h"
+#include "dungeon_pos_data.h"
 
 extern void ShowWholeRevealedDungeonMap();
 extern void EntityUpdateStatusSprites(Entity *);

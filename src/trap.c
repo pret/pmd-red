@@ -30,6 +30,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_strings.h"
 #include "sprite.h"
+#include "dungeon_pos_data.h"
 
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;

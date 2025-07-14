@@ -8,6 +8,7 @@
 #include "dungeon_util.h"
 #include "moves.h"
 #include "number_util.h"
+#include "dungeon_pos_data.h"
 
 u32 GetAIUseItemProbability(Entity *targetPokemon, Item *item, u32 itemTargetFlags)
 {

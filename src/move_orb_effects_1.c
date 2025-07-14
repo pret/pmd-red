@@ -33,6 +33,7 @@
 #include "dungeon_strings.h"
 #include "status.h"
 #include "dungeon_vram.h"
+#include "dungeon_pos_data.h"
 
 extern void sub_80420A0(Entity *);
 extern void sub_8041C58(Entity *r0);

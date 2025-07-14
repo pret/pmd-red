@@ -459,10 +459,10 @@ void sub_80464C8(Entity *entity, DungeonPos *pos, Item *item)
     y = ((pos->y * 24) + 4) << 8;
     SetEntityPixelPos(&itemEntity, x, y);
     itemEntity.spawnGenID = 0;
-    sub_804652C(entity, &itemEntity, item, TRUE, NULL);
+    SpawnDroppedItem(entity, &itemEntity, item, TRUE, NULL);
 }
 
-void sub_804652C(Entity *entity1, Entity *entity2, Item *item, bool8 a3, DungeonPos *pos)
+void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, DungeonPos *pos)
 {
     DungeonPos localPos;
     DungeonPos localPos2;

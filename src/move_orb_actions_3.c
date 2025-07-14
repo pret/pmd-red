@@ -39,6 +39,7 @@
 #include "pokemon_types.h"
 #include "trap.h"
 #include "weather.h"
+#include "dungeon_pos_data.h"
 
 extern u8 sub_8044B28(void);
 extern void sub_807EC28(bool8);
@@ -565,7 +566,7 @@ static void sub_805A7D4(Entity * pokemon, Entity * target, Item *item,
               (target->pos.y * 0x18 + 4) * 0x100);
   stackEntity.spawnGenID = 0;
   SubstitutePlaceholderStringTags(gFormatBuffer_Items[0],&stackEntity,0);
-  sub_804652C(pokemon,&stackEntity,item,1,0);
+  SpawnDroppedItem(pokemon,&stackEntity,item,1,0);
 }
 
 bool8 SplashMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)

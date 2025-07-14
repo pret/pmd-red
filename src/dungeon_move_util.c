@@ -40,6 +40,7 @@
 #include "targeting_flags.h"
 #include "pokemon_types.h"
 #include "dungeon_run_end.h"
+#include "dungeon_pos_data.h"
 
 extern void sub_80429C8(Entity *r0);
 extern bool8 sub_8045888(Entity *r0);

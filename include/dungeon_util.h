@@ -7,8 +7,6 @@
 #include "structs/str_traps.h"
 #include "structs/map.h"
 
-extern const DungeonPos gAdjacentTileOffsets[NUM_DIRECTIONS];
-
 static inline EntityInfo *GetEntInfo(Entity *entity)
 {
     return entity->axObj.info.monster;

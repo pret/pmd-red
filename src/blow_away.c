@@ -25,6 +25,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
+#include "dungeon_pos_data.h"
 
 void sub_804EB30();
 bool8 ExposeTrap(s32 x, s32 y);

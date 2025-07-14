@@ -16,6 +16,7 @@
 #include "structs/map.h"
 #include "dungeon_config.h"
 #include "dungeon_generation_fixed.h"
+#include "dungeon_pos_data.h"
 
 extern s32 sub_803DA20(s16 species);
 extern void sub_8049840(void);

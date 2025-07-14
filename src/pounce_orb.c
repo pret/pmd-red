@@ -25,6 +25,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
+#include "dungeon_pos_data.h"
 
 extern u8 sub_8045888(Entity *);
 extern void sub_807EC28(u32);

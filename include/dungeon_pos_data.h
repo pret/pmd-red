@@ -11,12 +11,12 @@ struct PositionArrayWithOffsets
     s16 yOffset;
 };
 
-extern const DungeonPos gAdjacentTileOffsets[];
+extern const DungeonPos gAdjacentTileOffsets[NUM_DIRECTIONS];
 extern const DungeonPos gUnknown_80F4468[76];
 extern const DungeonPos gUnknown_80F4598[158];
 extern const struct PositionArrayWithOffsets gUnknown_80F4CC4[NUM_DIRECTIONS];
 extern const s32 gFaceDirectionIncrements[];
 extern const DungeonPos gUnknown_80F4D44[];
-extern const u8 gUnknown_80F4D64[];
+extern const u8 gUnknown_80F4D64[NUM_DIRECTIONS][4];
 
 #endif

@@ -29,6 +29,7 @@
 #include "trap.h"
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
+#include "dungeon_pos_data.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F222;

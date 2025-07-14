@@ -35,6 +35,7 @@
 #include "code_80869E4.h"
 #include "pokemon_3.h"
 #include "dungeon_boss_dialogue.h"
+#include "dungeon_pos_data.h"
 
 struct RgbS16
 {

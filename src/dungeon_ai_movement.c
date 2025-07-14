@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_ai_movement.h"
-
+#include "dungeon_pos_data.h"
 #include "constants/direction.h"
 #include "constants/dungeon_action.h"
 #include "constants/status.h"
