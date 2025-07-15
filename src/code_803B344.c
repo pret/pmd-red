@@ -10,21 +10,21 @@ extern s32 sub_803B628(WonderMail *);
 extern s32 sub_803B66C(WonderMail *);
 
 
-NAKED
-unkStruct_803B344 *sub_803B344(u8 r0)
+typedef struct unkStruct_80E7F94
 {
-    asm_unified(
-	"\tadds r1, r0, 0\n"
-	"\tlsls r1, 24\n"
-	"\tlsrs r1, 24\n"
-	"\tlsls r0, r1, 3\n"
-	"\tsubs r0, r1\n"
-	"\tlsls r0, 2\n"
-	"\tldr r1, _0803B358\n"
-	"\tadds r0, r1\n"
-	"\tbx lr\n"
-	"\t.align 2, 0\n"
-"_0803B358: .4byte gUnknown_80E7F94");
+    /* 0x0 */ WonderMail mail;
+    u8 *unk14;
+    u8 *unk18;
+} unkStruct_80E7F94;
+
+extern unkStruct_80E7F94 gUnknown_80E7F94[5];
+
+// TODO: unkStruct_803B344 isn't what we thought it is
+unkStruct_80E7F94 *sub_803B344(s32 _r0)
+{
+    u32 r0 = (u8)_r0;
+    
+    return &gUnknown_80E7F94[r0];
 }
 
 void sub_803B35C(WonderMail *mail, unkStruct_802C39C *param_2)
