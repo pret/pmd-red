@@ -57,4 +57,17 @@ void sub_800569C(DungeonPos *, axdata *, u8);
 void sub_8005700(DungeonPos *dstPos, axdata *axData);
 void sub_8005770(s32, const RGB *color, s32 brightness, const RGB *ramp);
 
+static inline bool8 AxFlag8000(axdata *ax)
+{
+    return (ax->flags & 0x8000) != 0;
+}
+
+static inline bool8 AxFlag8000_Not2000(axdata *ax)
+{
+    if (ax->flags & 0x2000)
+        return FALSE;
+    else
+        return (ax->flags & 0x8000) != 0;
+}
+
 #endif // GUARD_SPRITE_H

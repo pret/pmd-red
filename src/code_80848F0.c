@@ -26,12 +26,11 @@
 #include "math.h"
 #include "code_8004AA0.h"
 #include "bg_palette_buffer.h"
-#include "code_800E9A8.h"
 #include "items.h"
-#include "code_800DAC0.h"
-#include "code_800ED38.h"
+#include "effect_main.h"
+#include "effect_sub_1.h"
 #include "sprite.h"
-#include "code_800E9E4.h"
+#include "effect_data.h"
 #include "code_80869E4.h"
 #include "pokemon_3.h"
 #include "dungeon_boss_dialogue.h"
@@ -1332,6 +1331,8 @@ void sub_8085EB0(void)
     gDungeon->unk181e8.unk18215 = 1;
 }
 
+static const unkStruct_2039DB0 sDefaultSpriteMasks = DEFAULT_UNK_2039DB0_MASKS;
+
 u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 param_5)
 {
     u32 uVar1;
@@ -1349,12 +1350,12 @@ u32 sub_8085EC8(s16 param_1,u32 param_2,u32 param_3,DungeonPos *param_4, bool32 
     local_40.unk0 = param_1;
     local_40.unk4 = param_2;
     local_40.dir = param_3;
-    local_40.x = param_4->x;
-    local_40.y = param_4->y;
-    local_40.unk10 = 0;
-    local_40.unk12 = 0;
+    local_40.pos1.x = param_4->x;
+    local_40.pos1.y = param_4->y;
+    local_40.pos2.x = 0;
+    local_40.pos2.y = 0;
     local_40.unk18 = 0xffff;
-    local_40.unk1C = (unkStruct_2039DB0) {0xFFFF, 0xFFFF, 0xFFFF, 0, 0, 0};
+    local_40.spriteMasks = sDefaultSpriteMasks;
 
     uVar1 = sub_800E890(&local_40);
     if (param_5_bool8) {
@@ -1493,14 +1494,14 @@ s32 sub_80861F8(s32 param_1,Entity *param_2,bool32 param_3)
     stack.unk0 = param_1Copy;
     stack.unk4 = 0;
     stack.dir = info->action.direction;
-    stack.x = (param_2->pixelPos).x / 256;
-    stack.y = (param_2->pixelPos).y / 256;
+    stack.pos1.x = (param_2->pixelPos).x / 256;
+    stack.pos1.y = (param_2->pixelPos).y / 256;
 
-    stack.unk10 = pos.x;
-    stack.unk12 = pos.y;
+    stack.pos2.x = pos.x;
+    stack.pos2.y = pos.y;
     stack.unk14 = uStack_38;
     stack.unk18 = 0xffff;
-    stack.unk1C = (unkStruct_2039DB0) {0xFFFF, 0xFFFF, 0xFFFF, 0, 0};
+    stack.spriteMasks = DEFAULT_UNK_2039DB0_MASKS;
 
     uVar2 = sub_800E890(&stack);
     if (param_3_bool32) {
