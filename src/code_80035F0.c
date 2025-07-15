@@ -12,7 +12,7 @@ typedef struct unkStruct_3000C00
     u8 unk1;
     s16 fadeFactor;
     RGB_Array unk4;
-    s32 unk8;
+    RGB_Array *unk8;
     void (*unkC)(u16, u16);
     void (*unk10)(u16);
 } unkStruct_3000C00;
@@ -28,7 +28,7 @@ void sub_8003AC0(u16, u16);
 void sub_8003C18(u16, u16);
 void sub_8003E2C(u16, u16);
 void sub_8003F60(u16, u16);
-void sub_8004170(u16, u16);
+void sub_8004170(u16 fadeIndex, u16);
 void sub_8004388(u16, u16);
 void sub_8003B50(u16);
 void sub_8003D00(u16);
@@ -129,7 +129,7 @@ void sub_80036F4(u16 idx, s32 fadeFactor, RGB_Array param_3)
     gUnknown_3001B58 = TRUE;
 }
 
-static UNUSED void sub_800373C(u16 idx, s32 fadeFactor, s32 param_3)
+static UNUSED void sub_800373C(u16 idx, s32 fadeFactor, RGB_Array *param_3)
 {
     unkStruct_3000C00 *ptr = &gUnknown_3000C00[idx];
 
@@ -391,4 +391,254 @@ void sub_8003C18(u16 fadeIdx, u16 paletteIdx)
     }
 
     SetBGPaletteBufferColor(paletteIdx, &color);
+}
+
+void sub_8003D00(u16 fadeIdx)
+{
+    s32 i;
+    u16 color;
+    unkStruct_3000C00 *fade = &gUnknown_3000C00[fadeIdx];
+    u16 fadeFactor = fade->fadeFactor;
+    RGB_Array fadeRGB = fade->unk4;
+    u16 basePaletteIdx = fadeIdx * 16;
+    RGB_Array *paletteRGB = &gUnknown_3000400[basePaletteIdx].asArr;
+
+    if (fadeFactor > 0xFF) {
+        // Just use the palette color directly
+        for (i = 0; i < 16; paletteRGB++, i++) {
+            color = RGB_TO_GBA(paletteRGB->c[RGB_R], paletteRGB->c[RGB_G], paletteRGB->c[RGB_B]);
+            SetBGPaletteBufferColor(basePaletteIdx + i, &color);
+        }
+    }
+    else if (fadeFactor == 0) {
+        // Fully faded to target color
+        color = RGB_TO_GBA2(fadeRGB.c[RGB_R], fadeRGB.c[RGB_G], fadeRGB.c[RGB_B]);
+        for (i = 0; i < 16; paletteRGB++, i++) {
+            SetBGPaletteBufferColor(basePaletteIdx + i, &color);
+        }
+    }
+    else {
+        // Blend
+        u16 invFade = 256 - fadeFactor;
+        s32 invFadeR = fadeRGB.c[RGB_R] * invFade;
+        s32 invFadeG = fadeRGB.c[RGB_G] * invFade;
+        s32 invFadeB = fadeRGB.c[RGB_B] * invFade;
+        for (i = 0; i < 16; paletteRGB++, i++) {
+            color = RGB_TO_GBA((paletteRGB->c[RGB_R] * fadeFactor + invFadeR) / 256,
+                                (paletteRGB->c[RGB_G] * fadeFactor + invFadeG) / 256,
+                                (paletteRGB->c[RGB_B] * fadeFactor + invFadeB) / 256);
+            SetBGPaletteBufferColor(basePaletteIdx + i, &color);
+        }
+    }
+}
+
+void sub_8003E2C(u16 fadeIdx, u16 targetIdx)
+{
+    u16 color;
+    unkStruct_3000C00 *fade = &gUnknown_3000C00[fadeIdx];
+    u16 fadeFactor = fade->fadeFactor;
+    RGB_Array fadeRGB = fade->unk4;
+
+    if (fadeFactor > 0xFF) {
+        color = RGB_TO_GBA2(fadeRGB.c[RGB_R], fadeRGB.c[RGB_G], fadeRGB.c[RGB_B]);
+    }
+    else if (fadeFactor == 0) {
+        color = RGB_BLACK;
+    }
+    else {
+        color = RGB_TO_GBA((fadeRGB.c[RGB_R] * fadeFactor) / 256,
+                            (fadeRGB.c[RGB_G] * fadeFactor) / 256,
+                            (fadeRGB.c[RGB_B] * fadeFactor) / 256);
+    }
+
+    SetBGPaletteBufferColor(targetIdx, &color);
+}
+
+void sub_8003EC0(u16 fadeIdx)
+{
+    u16 color;
+    s32 i;
+    unkStruct_3000C00 *fade = &gUnknown_3000C00[fadeIdx];
+    u16 fadeFactor = fade->fadeFactor;
+    RGB_Array fadeColor = fade->unk4;
+    u16 targetStartIdx = fadeIdx * 16;
+
+    if (fadeFactor > 0xFF) {
+        color = RGB_TO_GBA2(fadeColor.c[RGB_R], fadeColor.c[RGB_G], fadeColor.c[RGB_B]);
+    }
+    else if (fadeFactor == 0) {
+        color = RGB_BLACK;
+    }
+    else {
+        color = RGB_TO_GBA((fadeColor.c[RGB_R] * fadeFactor) / 256,
+                            (fadeColor.c[RGB_G] * fadeFactor) / 256,
+                            (fadeColor.c[RGB_B] * fadeFactor) / 256);
+    }
+
+    for (i = 0; i < 16; i++) {
+        SetBGPaletteBufferColor(targetStartIdx + i, &color);
+    }
+}
+
+void sub_8003F60(u16 fadeIdx, u16 targetIdx)
+{
+    u16 color;
+    unkStruct_3000C00 *fade = &gUnknown_3000C00[fadeIdx];
+    u16 fadeFactor = fade->fadeFactor;
+    RGB_Array *fadeSubColor = &fade->unk8[targetIdx % 16];
+    RGB_Array *baseColor = &gUnknown_3000400[targetIdx].asArr;
+
+    if (fadeFactor > 0xFF) {
+        color = RGB_TO_GBA2(baseColor->c[RGB_R], baseColor->c[RGB_G], baseColor->c[RGB_B]);
+    }
+    else if (fadeFactor == 0) {
+        color = RGB_TO_GBA2(fadeSubColor->c[RGB_R], fadeSubColor->c[RGB_G], fadeSubColor->c[RGB_B]);
+    }
+    else {
+        u16 invFade = 256 - fadeFactor;
+        s32 r = fadeSubColor->c[RGB_R] * invFade + baseColor->c[RGB_R] * fadeFactor;
+        s32 g = fadeSubColor->c[RGB_G] * invFade + baseColor->c[RGB_G] * fadeFactor;
+        s32 b = fadeSubColor->c[RGB_B] * invFade + baseColor->c[RGB_B] * fadeFactor;
+        color = RGB_TO_GBA2(r / 256, g / 256, b / 256);
+    }
+
+    SetBGPaletteBufferColor(targetIdx, &color);
+}
+
+void sub_8004034(u16 fadeIdx)
+{
+    u16 color;
+    s32 i;
+    unkStruct_3000C00 *fade = &gUnknown_3000C00[fadeIdx];
+    u16 fadeFactor = fade->fadeFactor;
+    RGB_Array *fadeColors = fade->unk8;
+    u16 targetStartIdx = fadeIdx * 16;
+    RGB_Array *baseColors = &gUnknown_3000400[targetStartIdx].asArr;
+
+    if (fadeFactor > 0xFF) {
+        // Fully use base palette
+        for (i = 0; i < 16; baseColors++, i++) {
+            color = RGB_TO_GBA(baseColors->c[RGB_R], baseColors->c[RGB_G], baseColors->c[RGB_B]);
+            ASM_MATCH_TRICK(i);
+            SetBGPaletteBufferColor(targetStartIdx + i, &color);
+        }
+    }
+    else if (fadeFactor == 0) {
+        // Fully use fade palette
+        for (i = 0; i < 16; fadeColors++, i++) {
+            color = RGB_TO_GBA(fadeColors->c[RGB_R], fadeColors->c[RGB_G], fadeColors->c[RGB_B]);
+            SetBGPaletteBufferColor(targetStartIdx + i, &color);
+        }
+    }
+    else {
+        // Blend fade and base
+        u16 invFade = 256 - fadeFactor;
+
+        for (i = 0; i < 16; baseColors++, fadeColors++, i++) {
+            s32 r = fadeColors->c[RGB_R] * invFade + baseColors->c[RGB_R] * fadeFactor;
+            s32 g = fadeColors->c[RGB_G] * invFade + baseColors->c[RGB_G] * fadeFactor;
+            s32 b = fadeColors->c[RGB_B] * invFade + baseColors->c[RGB_B] * fadeFactor;
+            color = RGB_TO_GBA(r / 256, g / 256, b / 256);
+            SetBGPaletteBufferColor(targetStartIdx + i, &color);
+        }
+    }
+}
+
+void sub_8004170(u16 fadeIndex, u16 targetIndex)
+{
+    u16 color;
+    unkStruct_3000C00 *fade = &gUnknown_3000C00[fadeIndex];
+    u16 fadeAmount = fade->fadeFactor;
+    RGB_Array fadeColor = fade->unk4;
+    RGB_Array *baseColor = &gUnknown_3000400[targetIndex].asArr;
+
+    if (fadeAmount > 0xFF) {
+        // No fade, just use base color
+        color = RGB_TO_GBA2(baseColor->c[RGB_R], baseColor->c[RGB_G], baseColor->c[RGB_B] );
+    }
+    else {
+        u16 r, g, b;
+        // Fading to black per channel
+
+        r = fadeColor.c[RGB_R] + ((255 - fadeColor.c[RGB_R]) * fadeAmount) / 256;
+        g = fadeColor.c[RGB_G] + ((255 - fadeColor.c[RGB_G]) * fadeAmount) / 256;
+        b = fadeColor.c[RGB_B] + ((255 - fadeColor.c[RGB_B]) * fadeAmount) / 256;
+
+        color = RGB_TO_GBA2((r * baseColor->c[RGB_R]) / 255, (g * baseColor->c[RGB_G]) / 255, (b * baseColor->c[RGB_B]) / 255);
+    }
+
+    SetBGPaletteBufferColor(targetIndex, &color);
+}
+
+void sub_8004264(u16 fadeIndex)
+{
+    s32 i;
+    u16 color;
+    unkStruct_3000C00 *fade = &gUnknown_3000C00[fadeIndex];
+    u16 fadeAmount = fade->fadeFactor;
+    RGB_Array fadeColor = fade->unk4;
+    u16 targetIndex = fadeIndex * 16;
+    RGB_Array *baseColor = &gUnknown_3000400[targetIndex].asArr;
+
+    if (fadeAmount > 0xFF) {
+        for (i = 0; i < 16; baseColor++, i++) {
+            // No fade, just use base color
+            color = RGB_TO_GBA(baseColor->c[RGB_R], baseColor->c[RGB_G], baseColor->c[RGB_B]);
+            SetBGPaletteBufferColor(targetIndex + i, &color);
+        }
+    }
+    else {
+        u16 r, g, b;
+        // Fading to black per channel
+
+        r = fadeColor.c[RGB_R] + ((255 - fadeColor.c[RGB_R]) * fadeAmount) / 256;
+        g = fadeColor.c[RGB_G] + ((255 - fadeColor.c[RGB_G]) * fadeAmount) / 256;
+        b = fadeColor.c[RGB_B] + ((255 - fadeColor.c[RGB_B]) * fadeAmount) / 256;
+        for (i = 0; i < 16; baseColor++, i++) {
+            color = RGB_TO_GBA((r * baseColor->c[RGB_R]) / 255, (g * baseColor->c[RGB_G]) / 255, (b * baseColor->c[RGB_B]) / 255);
+            SetBGPaletteBufferColor(targetIndex + i, &color);
+        }
+    }
+}
+
+void sub_8004388(u16 fadeIndex, u16 paletteIndex)
+{
+    u16 color;
+    u16 r, g, b;
+    unkStruct_3000C00 *fade = &gUnknown_3000C00[fadeIndex];
+    u16 fadeAmount = fade->fadeFactor;
+    RGB_Array fadeColor = fade->unk4;
+    RGB_Array *baseColor = &gUnknown_3000400[paletteIndex].asArr;
+
+    if (fadeAmount > 255)
+        fadeAmount = 256;
+
+    r = fadeColor.c[RGB_R] * fadeAmount / 256;
+    g = fadeColor.c[RGB_G] * fadeAmount / 256;
+    b = fadeColor.c[RGB_B] * fadeAmount / 256;
+    color = RGB_TO_GBA2((r * baseColor->c[RGB_R]) / 255, (g * baseColor->c[RGB_G]) / 255, (b * baseColor->c[RGB_B]) / 255);
+    SetBGPaletteBufferColor(paletteIndex, &color);
+}
+
+void sub_8004434(u16 fadeIndex)
+{
+    s32 i;
+    u16 color;
+    u16 r, g, b;
+    unkStruct_3000C00 *fade = &gUnknown_3000C00[fadeIndex];
+    u16 fadeAmount = fade->fadeFactor;
+    RGB_Array fadeColor = fade->unk4;
+    u16 paletteIndex = fadeIndex * 16;
+    RGB_Array *baseColors = &gUnknown_3000400[paletteIndex].asArr;
+
+    if (fadeAmount > 255)
+        fadeAmount = 256;
+
+    r = fadeColor.c[RGB_R] * fadeAmount / 256;
+    g = fadeColor.c[RGB_G] * fadeAmount / 256;
+    b = fadeColor.c[RGB_B] * fadeAmount / 256;
+    for (i = 0; i < 16; baseColors++, i++) {
+        color = RGB_TO_GBA2((r * baseColors->c[RGB_R]) / 255, (g * baseColors->c[RGB_G]) / 255, (b * baseColors->c[RGB_B]) / 255);
+        SetBGPaletteBufferColor(paletteIndex + i, &color);
+    }
 }
