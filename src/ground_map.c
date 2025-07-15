@@ -8,12 +8,19 @@
 #include "ground_script.h"
 #include "memory.h"
 #include "ground_map_conversion_table.h"
+#include "code_800558C.h"
+#include "constants/dungeon.h"
 
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
 
 extern GroundMapAction *gGroundMapAction;
 
+extern const SubStruct_52C gUnknown_8117324;
+extern const SubStruct_52C gUnknown_8117354;
+extern const SubStruct_52C gUnknown_811733C;
+extern const u8 gUnknown_81176A4[];
+extern const u8 gUnknown_8117700[];
 extern const u8 gUnknown_8117594[];
 extern const u8 gUnknown_81175EC[];
 extern const DebugLocation gUnknown_81175E0;
@@ -49,9 +56,8 @@ void FreeGroundMapAction(void)
 {
     GroundMap_Reset();
     sub_80A5EBC();
-    InitAction2((Action *)gGroundMapAction);
-    MemoryFree(gGroundMapAction);
-    gGroundMapAction = NULL;
+    InitAction2(&gGroundMapAction->action);
+    FREE_AND_SET_NULL(gGroundMapAction);
 }
 
 void GroundMap_Reset(void)
@@ -62,8 +68,7 @@ void GroundMap_Reset(void)
 
     if (gGroundMapDungeon_3001B70 != NULL) {
         GroundBg_FreeAll(gGroundMapDungeon_3001B70);
-        MemoryFree(gGroundMapDungeon_3001B70);
-        gGroundMapDungeon_3001B70 = NULL;
+        FREE_AND_SET_NULL(gGroundMapDungeon_3001B70);
     }
 
     sub_80A5EDC(0);
@@ -201,4 +206,176 @@ s16 GetAdjustedGroundMap(s32 mapId)
     }
 
     return retMapId;
+}
+
+struct MapToDungeonStruct
+{
+    s16 id;
+    DungeonLocation loc;
+    u32 unk8;
+};
+
+extern const struct MapToDungeonStruct gUnknown_81173C0[];
+extern const u8 gUnknown_81176DC[];
+extern const u8 gUnknown_8117740[];
+extern const DebugLocation gUnknown_81176D0;
+extern const DebugLocation gUnknown_8117734;
+extern const u32 gUnknown_81176F8[];
+extern const u32 gUnknown_8117754[];
+
+void GroundMap_SelectDungeon(s32 mapId, const DungeonLocation *loc, u32 param_2);
+void sub_80A56D8(const void *);
+
+void GroundMap_Select(s32 mapId_)
+{
+    const GroundConversionStruct *ptr;
+    s32 mapId = (s16) mapId_;
+
+    Log(0, gUnknown_81176A4,mapId);
+    ClearScriptVarArray(NULL, MAP_LOCAL);
+    ClearScriptVarArray(NULL, MAP_LOCAL_DOOR);
+    sub_80A5EDC(0);
+    if (gGroundMapDungeon_3001B70 != NULL) {
+        GroundBg_FreeAll(gGroundMapDungeon_3001B70);
+        FREE_AND_SET_NULL(gGroundMapDungeon_3001B70);
+    }
+    gGroundMapDungeon_3001B70 = MemoryAlloc(sizeof(*gGroundMapDungeon_3001B70),6);
+    gGroundMapAction->groundMapId = mapId;
+    if (mapId == -1) {
+        GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_8117324);
+        sub_80A2FBC(gGroundMapDungeon_3001B70, mapId);
+        return;
+    }
+
+    ptr = &gGroundMapConversionTable[mapId];
+    switch (ptr->unk0) {
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+            GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_811733C);
+            gUnknown_2026E4E = 0x1000;
+        break;
+        case 0xA:
+        case 0xB: {
+            const struct MapToDungeonStruct *mapToDungPtr = &gUnknown_81173C0[0];
+            while (mapToDungPtr->id != -1 && mapToDungPtr->id != mapId) {
+                mapToDungPtr++;
+            }
+            MemoryFree(gGroundMapDungeon_3001B70);
+            gGroundMapDungeon_3001B70 = NULL;
+            GroundMap_SelectDungeon(mapId, &mapToDungPtr->loc, mapToDungPtr->unk8);
+            return;
+        }
+        case -1:
+            FatalError(&gUnknown_81176D0,gUnknown_81176DC,mapId,ptr->unk0);
+            break;
+        default:
+            GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_8117324);
+            sub_80A5EDC(1);
+            break;
+    }
+
+    sub_80A2FBC(gGroundMapDungeon_3001B70, ptr->mapFileTableId);
+    gGroundMapAction->unkE8 = 0;
+    gGroundMapAction->unkEC = 0;
+    gGroundMapAction->unkF0 = 0;
+    gGroundMapAction->unkF4 = 0;
+    gGroundMapAction->unkF8.x = 0;
+    gGroundMapAction->unkF8.y = 0;
+    gGroundMapAction->unk100 = gGroundMapAction->unk104 = gGroundMapAction->unk108 = gGroundMapAction->unk10C = 0;
+
+    switch (gGroundMapAction->groundMapId) {
+        case MAP_PERSONALITY_TEST_CYAN:
+        case MAP_PERSONALITY_TEST_PURPLE:
+        case MAP_PERSONALITY_TEST_MULTICOLOR:
+            sub_80A3BB0(gGroundMapDungeon_3001B70,4);
+            gUnknown_2026E4E = 0x808;
+            break;
+        case MAP_FUGITIVES_BLIZZARD_ROAD:
+        case MAP_FUGITIVES_SNOW_ROAD:
+            sub_80A3BB0(gGroundMapDungeon_3001B70,1);
+            break;
+        case MAP_SUMMIT_SUNSET:
+            sub_80A3BB0(gGroundMapDungeon_3001B70,1);
+        case MAP_HILL_OF_THE_ANCIENTS:
+            sub_80A3B80(gGroundMapDungeon_3001B70,0,0);
+            break;
+        case MAP_COMET:
+            gUnknown_2026E4E = 0x1010;
+            break;
+        case MAP_NIGHTMARE:
+            sub_80A3BB0(gGroundMapDungeon_3001B70,4);
+            gUnknown_2026E4E = 0x80C;
+            break;
+        case MAP_NIGHT_SKY_2:
+            sub_80A3BB0(gGroundMapDungeon_3001B70,1);
+            break;
+        case MAP_SILENT_CHASM_ENTRY:
+            gUnknown_2026E4E = 0x1010;
+            sub_80A3BB0(gGroundMapDungeon_3001B70,4);
+            break;
+        case MAP_NIGHT_SKY_1:
+            sub_80A3BB0(gGroundMapDungeon_3001B70,4);
+            break;
+        case MAP_PELIPPER_POST_OFFICE:
+            sub_80A3BB0(gGroundMapDungeon_3001B70,3);
+            break;
+        case MAP_FRIEND_AREA_FINAL_ISLAND:
+            sub_80A3BB0(gGroundMapDungeon_3001B70,3);
+            break;
+        case MAP_TITLE_SCREEN:
+            sub_80A3BB0(gGroundMapDungeon_3001B70,3);
+        case MAP_INTRO:
+            sub_80A3B80(gGroundMapDungeon_3001B70,0,0);
+            break;
+    }
+
+    if (ptr->unk6 != -1) {
+        GroundWeather_Select(ptr->unk6);
+    }
+
+    sub_80A56D8(&gUnknown_81176F8);
+}
+
+void GroundMap_SelectDungeon(s32 mapId_, const DungeonLocation *loc, u32 param_2)
+{
+    const GroundConversionStruct *ptr;
+    s32 mapId = (s16) mapId_;
+
+    Log('\0', gUnknown_8117700, mapId);
+    ClearScriptVarArray(NULL, MAP_LOCAL);
+    ClearScriptVarArray(NULL, MAP_LOCAL_DOOR);
+    sub_80A5EDC('\0');
+    if (gGroundMapDungeon_3001B70 != NULL) {
+        GroundBg_FreeAll(gGroundMapDungeon_3001B70);
+        FREE_AND_SET_NULL(gGroundMapDungeon_3001B70);
+    }
+
+    gGroundMapDungeon_3001B70 = MemoryAlloc(sizeof(*gGroundMapDungeon_3001B70),6);
+    gGroundMapAction->groundMapId = mapId;
+    if (mapId == -1 || loc->id == DUNGEON_INVALID) {
+        GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_8117324);
+        sub_80A2FBC(gGroundMapDungeon_3001B70,-1);
+        return;
+    }
+
+    ptr = &gGroundMapConversionTable[mapId];
+    if (ptr->unk0 != 0xA && ptr->unk0 != 0xB) {
+        FatalError(&gUnknown_8117734, gUnknown_8117740, mapId);
+    }
+
+    GroundBg_Init(gGroundMapDungeon_3001B70, &gUnknown_8117354);
+    sub_80A5EDC(1);
+    sub_80A3440(gGroundMapDungeon_3001B70, ptr->mapFileTableId, loc, param_2);
+    gGroundMapAction->unkE8 = 0;
+    gGroundMapAction->unkEC = 0;
+    gGroundMapAction->unkF0 = 0;
+    gGroundMapAction->unkF4 = 0;
+    gGroundMapAction->unkF8.x = 0;
+    gGroundMapAction->unkF8.y = 0;
+    gGroundMapAction->unk100 = gGroundMapAction->unk104 = gGroundMapAction->unk108 = gGroundMapAction->unk10C = 0;
+
+    sub_80A56D8(&gUnknown_8117754);
 }

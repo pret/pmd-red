@@ -15,8 +15,6 @@ extern const s16 gUnknown_811E5F4[][2];
 extern const u8 gGroundWeatherSelect[];
 extern const s32 gUnknown_81177BC[];
 
-extern void sub_80A3BB0(GroundBg *, u32);
-extern void sub_80A2FBC(GroundBg *, u32);
 extern void sub_80A49E8(GroundBg *);
 extern void sub_80A456C(GroundBg *, u32, const s32 *);
 extern void sub_80A4580(GroundBg *, u32, s32 *);

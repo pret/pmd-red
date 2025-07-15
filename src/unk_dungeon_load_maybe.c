@@ -14,7 +14,7 @@ extern bool8 IsWaterDungeon(u32 r0);
 static s32 sub_80ADFB8(s32 a0, s32 a1, s32 a2, s32 a3, u16 *a4, s32 a5, u8 *a6, s32 a7);
 
 // This function is called when loading a transition between a dungeon and its summit, where the player can continue, save, or go back.
-void sub_80ADD9C(OpenedFile **a0, OpenedFile **a1, u32 *a2, void *a3, u16 *a4, DungeonLocation *a5, s32 a6, s32 a7, s32 a8, u16 *a9, s32 unused)
+void sub_80ADD9C(OpenedFile **a0, OpenedFile **a1, u32 *a2, void *a3, u16 *a4, const DungeonLocation *a5, s32 a6, s32 a7, s32 a8, u16 *a9, s32 unused)
 {
     OpenedFile *file;
     s32 r8;
