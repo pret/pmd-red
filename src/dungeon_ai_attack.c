@@ -31,7 +31,6 @@
 #include "dungeon_misc.h"
 #include "type_effectiveness.h"
 #include "dungeon_pos_data.h"
-#include "dungeon_pos_data.h"
 
 #define REGULAR_ATTACK_INDEX 4
 
