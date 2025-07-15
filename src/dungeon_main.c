@@ -54,6 +54,7 @@
 #include "string_format.h"
 #include "trap.h"
 #include "weather.h"
+#include "dungeon_pos_data.h"
 
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern bool8 sub_8048A68(Entity *param_1,Item *item);

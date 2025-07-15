@@ -26,6 +26,7 @@
 #include "structs/map.h"
 #include "structs/str_pokemon.h"
 #include "structs/str_806B7F8.h"
+#include "dungeon_pos_data.h"
 
 EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
 EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};

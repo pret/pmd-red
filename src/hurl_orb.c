@@ -38,6 +38,7 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "weather.h"
+#include "dungeon_pos_data.h"
 
 extern void sub_80833E8(DungeonPos *param_1, s32 *param_2);
 extern void sub_806A5B8(Entity *);

@@ -13,6 +13,7 @@
 #include "code_8077274_1.h"
 #include "code_806CD90.h"
 #include "status.h"
+#include "dungeon_pos_data.h"
 
 extern void sub_807F43C(Entity *, Entity *);
 extern u32 GetRandomFloorItem(u32);

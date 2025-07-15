@@ -26,6 +26,7 @@
 #include "structs/str_806B7F8.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
+#include "dungeon_pos_data.h"
 
 extern void sub_8041BD0(Entity *r0, u8 r1);
 extern void EntityUpdateStatusSprites(Entity *);

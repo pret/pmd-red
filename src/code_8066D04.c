@@ -37,6 +37,8 @@
 #include "string_format.h"
 #include "text_1.h"
 #include "trap.h"
+#include "dungeon_pos_data.h"
+#include "dungeon_projectile_throw.h"
 
 extern void sub_8071DA4(Entity *);
 extern void sub_8057588(Entity * pokemon, u8 param_2);
@@ -464,16 +466,7 @@ void sub_8067110(Entity *entity)
     }
 }
 
-struct UnkStruct_8067110
-{
-    u8 unk0;
-    u8 unk1;
-    s16 unk2;
-};
-
 extern void sub_8083904(DungeonPos *pos, Entity *entity);
-extern void sub_80475C4(Entity *entity, Item *item, DungeonPos *pos1, DungeonPos *pos2, struct UnkStruct_8067110 *);
-extern void sub_8047190(Entity *entity, Item *item, DungeonPos *pos1, s32 dir, struct UnkStruct_8067110 *);
 
 void sub_80671A0(Entity *entity)
 {
@@ -498,7 +491,7 @@ void sub_80671A0(Entity *entity)
         bool8 r7;
         Item newItem;
         DungeonPos pos;
-        struct UnkStruct_8067110 unkStruct;
+        struct ProjectileThrowInfo unkStruct;
 
         newItem = *item;
         newItem.flags &= ~(ITEM_FLAG_SET);
@@ -590,10 +583,10 @@ void sub_80671A0(Entity *entity)
 
         if (GetItemCategory(newItem.id) == CATEGORY_THROWN_ARC) {
             sub_8083904(&pos, entity);
-            sub_80475C4(entity, &newItem, &entity->pos, &pos, &unkStruct);
+            HandleCurvedProjectileThrow(entity, &newItem, &entity->pos, &pos, &unkStruct);
         }
         else {
-            sub_8047190(entity, &newItem, &entity->pos, info->action.direction, &unkStruct);
+            HandleStraightProjectileThrow(entity, &newItem, &entity->pos, info->action.direction, &unkStruct);
         }
 
         if (EntityIsValid(entity)) {

@@ -19,7 +19,7 @@ bool8 RemoveItemFromDungeonAt(DungeonPos *pos, bool8 a2);
 bool8 sub_80462AC(Entity * entity, u8 hallucinating, u8 a2, u8 a3, u8 a4);
 const u8 *sub_80464AC(Item *item);
 void sub_80464C8(Entity *entity, DungeonPos *pos, Item *item);
-void sub_804652C(Entity *entity1, Entity *entity2, Item *item, bool8 a3, DungeonPos *pos);
+void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, DungeonPos *pos);
 void sub_8046860(Entity *entity, DungeonPos *pos, Item *item, s32 a4);
 void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item, s32 count);
 bool8 HasHeldItem(Entity *pokemon, u8 id);

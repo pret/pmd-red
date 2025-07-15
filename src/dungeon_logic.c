@@ -28,6 +28,7 @@
 #include "pokemon_3.h"
 #include "pokemon.h"
 #include "dungeon_config.h"
+#include "dungeon_pos_data.h"
 
 // This file deals with things like controlling movement, walkable tiles, ai targeting, status checks and pokemon attributes.
 

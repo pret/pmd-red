@@ -180,7 +180,7 @@ extern const s16 gHailSandstormDmgValue;
 extern const s16 gBlowAwayDmgValue;
 extern const s16 gHurlOrbDmgValue;
 extern const s16 gMagnitudeDmgValues[7];
-extern const s16 gUnknownDungeonChance;
+extern const s16 gProjectileHitChance;
 extern const s16 gBlastSeedThrownDmgValue;
 extern const s16 gBlastSeedEatenDmgValue;
 extern const s16 gBlastSeedThrownBossDmgValue;

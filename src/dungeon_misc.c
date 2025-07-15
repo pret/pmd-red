@@ -43,6 +43,7 @@
 #include "code_803D110.h"
 #include "dungeon_strings.h"
 #include "dungeon_8083AB0.h"
+#include "dungeon_pos_data.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
@@ -468,7 +469,7 @@ void sub_8068F80(void)
     dungeon->unk644.unk28 = 0;
     dungeon->unk644.unk29 = 0;
     dungeon->unk644.unk2F = 0;
-    dungeon->unkC0 = 0;
+    dungeon->unkC0.type = ENTITY_NOTHING;
     if (leader != NULL) {
         bool8 isShop = (GetTileAtEntitySafe(leader)->terrainType & TERRAIN_TYPE_SHOP) != 0;
         dungeon->unk644.unk54 = isShop;

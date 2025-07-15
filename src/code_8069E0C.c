@@ -33,6 +33,7 @@
 #include "position_util.h"
 #include "weather.h"
 #include "dungeon_spawns.h"
+#include "dungeon_pos_data.h"
 
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);

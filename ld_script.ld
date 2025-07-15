@@ -206,8 +206,7 @@ SECTIONS {
         src/dungeon_action.o(.text);
         src/dungeon_util.o(.text);
         src/dungeon_items.o(.text);
-        asm/code_8046CE4.o(.text);
-        src/code_8046CE4.o(.text);
+        src/dungeon_projectile_throw.o(.text);
         src/dungeon_item_action.o(.text);
         src/dungeon_ai_item_weight.o(.text);
         src/dungeon_map_access.o(.text);
@@ -587,7 +586,7 @@ SECTIONS {
         data/pksdir_1.o(.rodata);
         src/dungeon_util.o(.text);
         src/dungeon_items.o(.rodata);
-        src/code_8046CE4.o(.rodata);
+        src/dungeon_projectile_throw.o(.rodata);
         src/dungeon_item_action.o(.rodata);
         src/dungeon_ai_item_weight.o(.rodata);
         src/dungeon_map_access.o(.rodata);

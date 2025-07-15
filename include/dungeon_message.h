@@ -3,6 +3,7 @@
 
 #include "structs/dungeon_entity.h"
 #include "string_format.h"
+#include "structs/str_dungeon.h"
 
 struct MonDialogueSpriteInfo
 {
@@ -54,5 +55,11 @@ void TryDisplayItemPickupTutorialMessage(u8 itemId);
 void DisplayYouReachedDestFloorStr(void);
 void sub_8052FB8(const u8 *str);
 const u8 *GetCurrentDungeonName(void);
+
+// Actual function in Sky.
+static inline void SetUnk1C05E(bool8 val)
+{
+    gDungeon->unk1BDD4.unk1C05E = val;
+}
 
 #endif // GUARD_DUNGEON_MESSAGE_H

@@ -30,6 +30,7 @@
 #include "random.h"
 #include "dungeon_util_1.h"
 #include "effect_data.h"
+#include "dungeon_pos_data.h"
 
 // Unknown dungeon file. File split is correct.
 
