@@ -1,5 +1,5 @@
 .include "src/m4a.o"
-.include "src/code_80035F0.o"
+.include "src/palette_fade_util.o"
 .include "src/text_1.o"
 .include "src/music.o"
 .include "src/dungeon_tilemap.o"
