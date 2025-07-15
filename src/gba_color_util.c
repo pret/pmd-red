@@ -3,10 +3,9 @@
 #include "gba_color_util.h"
 
 // Note: All of these functions are unused, because RGBToGbaColor and GbaColorToRGB are only called by unused functions. Could've been used for testing only?
-
 u16 RGBToGbaColor(RGB_Array s)
 {
-    return ((s.c[RGB_B] & 0xF8) << 7) | ((s.c[RGB_G] & 0xF8) << 2) | ((s.c[RGB_R] & 0xF8) >> 3);
+    return RGB_TO_GBA2(s.c[RGB_R], s.c[RGB_G], s.c[RGB_B]);
 }
 
 RGB_Array GbaColorToRGB(u16 color)
