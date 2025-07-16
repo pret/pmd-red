@@ -29,13 +29,13 @@
 
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
-extern void sub_806A2BC(Entity *a0, u8 a1);
+extern void TryPointCameraToMonster(Entity *a0, u8 a1);
 extern void SetLeaderActionToNothing(u8 a0);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
-extern void sub_803F508(Entity *);
+extern void PointCameraToMonster(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
@@ -184,7 +184,7 @@ bool8 ShowDungeonItemsMenu(Entity * a0, struct UnkMenuBitsStruct *a1)
         else {
             r4 = a0;
         }
-        sub_806A2BC(r4, 0);
+        TryPointCameraToMonster(r4, 0);
         ChangeDungeonCameraPos(&r4->pos, 0, 1, 1);
 
         while (1) {

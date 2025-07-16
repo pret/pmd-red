@@ -20,10 +20,10 @@ extern void sub_8044574(void);
 extern void sub_8044820(void);
 extern void sub_8044AB4(void);
 extern u8 DisplayActions(u32);
-extern void TickStatusHeal(Entity *);
+extern void TickStatusAndHealthRegen(Entity *);
 extern void sub_8086AC0(void);
 extern void EnemyEvolution(Entity *);
-extern void TriggerWeatherAbilities(void);
+extern void TryActivateArtificialWeatherAbilities(void);
 extern void DungeonHandlePlayerInput(void);
 extern void sub_805F02C(void);
 extern void sub_8074094(Entity *);
@@ -76,7 +76,7 @@ static bool8 RunLeaderTurn(bool8 param_1)
     if (entity == NULL)
         return FALSE;
 
-    TriggerWeatherAbilities();
+    TryActivateArtificialWeatherAbilities();
     movSpeed = CalcSpeedStage(entity);
     if (gSpeedTurns[movSpeed][gDungeon->unk644.fractionalTurn] == 0)
         return FALSE;
@@ -99,7 +99,7 @@ static bool8 RunLeaderTurn(bool8 param_1)
             param_1 = FALSE;
         }
         else {
-            TickStatusHeal(entity);
+            TickStatusAndHealthRegen(entity);
         }
 
         if (IsFloorOver())
@@ -154,7 +154,7 @@ static void sub_8044454(void)
       entity = gDungeon->activePokemon[index];
       if ((EntityIsValid(entity)) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
         if (IsFloorOver()) break;
-        TickStatusHeal(entity);
+        TickStatusAndHealthRegen(entity);
         if (EntityIsValid(entity)) {
           EnemyEvolution(entity);
           RunMonsterAI(entity, 0);
@@ -214,7 +214,7 @@ void sub_8044574(void)
                 if (IsFloorOver())
                     break;
                 gDungeon->unkB8 = teamMon;
-                TriggerWeatherAbilities();
+                TryActivateArtificialWeatherAbilities();
                 teamMonInfo->aiAllySkip = FALSE;
 
                 spdStage = CalcSpeedStage(teamMon);
@@ -227,7 +227,7 @@ void sub_8044574(void)
                     }
                     else {
                         teamMonInfo->recalculateFollow = FALSE;
-                        TickStatusHeal(teamMon);
+                        TickStatusAndHealthRegen(teamMon);
                         if (EntityIsValid(teamMon)) {
                             s32 j;
 
@@ -332,7 +332,7 @@ void sub_8044820(void)
       if (IsFloorOver()) break;
       entityInfo = GetEntInfo(entity);
       gDungeon->unkB8 = entity;
-      TriggerWeatherAbilities();
+      TryActivateArtificialWeatherAbilities();
       if ((entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY) == 0) {
         if ((u16)(entityInfo->flags & MOVEMENT_FLAG_UNK_14) != 0) {
             entityInfo->flags &= ~(MOVEMENT_FLAG_UNK_14);
@@ -345,7 +345,7 @@ void sub_8044820(void)
             if (!entityInfo->attacking) {
               entityInfo->flags &= ~(MOVEMENT_FLAG_UNK_14 | MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY);
               entityInfo->recalculateFollow = FALSE;
-              TickStatusHeal(entity);
+              TickStatusAndHealthRegen(entity);
               if (EntityIsValid(entity)) {
                 EnemyEvolution(entity);
                 RunMonsterAI(entity, 0);

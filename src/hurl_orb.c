@@ -240,7 +240,7 @@ void sub_807F9BC(Entity *entity)
         if (entInfo->isTeamLeader) {
             gDungeon->unk1 = 0;
             gDungeon->unk5C0 = -1;
-            sub_804AC20(&entity->pos);
+            DiscoverMinimap(&entity->pos);
             sub_807EC28(FALSE);
         }
         sub_806A5B8(entity);

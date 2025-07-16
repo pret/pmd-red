@@ -166,7 +166,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
                 sub_8049BB0(x,y);
             }
         }
-        ShowWholeRevealedDungeonMap();
+        UpdateMinimap();
         UpdateTrapsVisibility();
     }
 }

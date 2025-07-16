@@ -65,7 +65,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
         else {
             TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD0B8);
         }
-        ShowWholeRevealedDungeonMap();
+        UpdateMinimap();
         UpdateTrapsVisibility();
         return filledInTile;
     }

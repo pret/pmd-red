@@ -60,7 +60,7 @@ extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_806F500(void);
-extern void sub_803F508(Entity *);
+extern void PointCameraToMonster(Entity *);
 extern bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, struct DamageStruct *dmgStruct);
 extern void sub_8041B74(Entity *pokemon);
 extern void sub_8041B5C(Entity *pokemon);
@@ -1668,6 +1668,6 @@ void sub_806F63C(Entity *param_1)
     temp = &gDungeon->unk181e8;
 
     if (temp->cameraTarget == param_1) {
-        sub_803F508(temp->cameraTarget);
+        PointCameraToMonster(temp->cameraTarget);
     }
 }

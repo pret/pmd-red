@@ -34,7 +34,7 @@ u8 IsFloorOver(void);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);
-extern void sub_803F580(u32);
+extern void UpdateCamera(u32);
 bool8 sub_808384C(DungeonPos *, DungeonPos *);
 u8 sub_8083660(DungeonPos *);
 
@@ -144,7 +144,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
             if (GetEntInfo(target)->isTeamLeader) {
                 gDungeon->unk1 = 0;
                 gDungeon->unk5C0 = -1;
-                sub_804AC20(&target->pos);
+                DiscoverMinimap(&target->pos);
                 sub_807EC28(FALSE);
             }
             sub_806A5B8(target);

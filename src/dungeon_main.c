@@ -66,7 +66,7 @@ extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A6E8(Entity *);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 bool8 sub_807EF48(void);
-void sub_806A2BC(Entity *a0, u8 a1);
+void TryPointCameraToMonster(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
 void sub_8075680(u32);
 void sub_8094C88(void);
@@ -90,7 +90,7 @@ extern bool8 sub_8071A8C(Entity *pokemon);
 extern void GetWeatherName(u8 *dst, u8 weatherId);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 extern Entity *sub_80696A8(Entity *a0);
-extern void sub_803F508(Entity *);
+extern void PointCameraToMonster(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
@@ -160,7 +160,7 @@ void DungeonHandlePlayerInput(void)
     unkPtr = &gDungeon->unk181e8;
     var_38 = 3;
     gDungeon->unk12 = 0;
-    sub_806A2BC(GetLeader(), 1);
+    TryPointCameraToMonster(GetLeader(), 1);
     if (sub_80701A4(GetLeader())) {
         sub_803E708(60, 16);
         return;
@@ -210,7 +210,7 @@ void DungeonHandlePlayerInput(void)
         }
 
         frames = 0;
-        sub_8044C50(ACTION_NOTHING);
+        SetLeaderActionFields(ACTION_NOTHING);
         sShowThreeArrows1 = FALSE;
         sShowThreeArrows2 = FALSE;
 
@@ -242,7 +242,7 @@ void DungeonHandlePlayerInput(void)
             }
 
             if (gRealInputs.held & A_BUTTON && gRealInputs.held & B_BUTTON && FixedPointToInt(leaderInfo->belly) != 0) {
-                sub_8044C50(ACTION_PASS_TURN);
+                SetLeaderActionFields(ACTION_PASS_TURN);
                 gDungeon->unk644.unk2F = 1;
                 break;
             }
@@ -253,14 +253,14 @@ void DungeonHandlePlayerInput(void)
             if (gRealInputs.pressed & A_BUTTON) {
                 if (gRealInputs.held & B_BUTTON) {
                     if (FixedPointToInt(leaderInfo->belly) != 0) {
-                        sub_8044C50(ACTION_PASS_TURN);
+                        SetLeaderActionFields(ACTION_PASS_TURN);
                         gDungeon->unk644.unk2F = 1;
                         break;
                     }
                 }
                 else if (ShouldMonsterRunAwayAndShowEffect(leader, TRUE)) {
                     LogMessageByIdWithPopupCheckUser(leader, gUnknown_80FD4B0);
-                    sub_8044C50(ACTION_PASS_TURN);
+                    SetLeaderActionFields(ACTION_PASS_TURN);
                     gDungeon->unk644.unk2F = 1;
                     break;
                 }
@@ -410,7 +410,7 @@ void DungeonHandlePlayerInput(void)
                 s32 i;
                 for (i = 0; i < INVENTORY_SIZE; i++) {
                     if (ItemExists(&gTeamInventoryRef->teamItems[i]) && ItemSet(&gTeamInventoryRef->teamItems[i])) {
-                        sub_8044C50(ACTION_THROW_ITEM_PLAYER);
+                        SetLeaderActionFields(ACTION_THROW_ITEM_PLAYER);
                         leaderInfo->action.actionParameters[0].actionUseIndex = i +1;
                         leaderInfo->action.actionParameters[0].itemPos.x = 0;
                         leaderInfo->action.actionParameters[0].itemPos.y = 0;
@@ -431,7 +431,7 @@ void DungeonHandlePlayerInput(void)
                     sub_8094C88();
                 }
                 sub_8052210(1);
-                ShowWholeRevealedDungeonMap();
+                UpdateMinimap();
                 SetBGOBJEnableFlags(0x1E);
                 sub_803E708(0xA, 0x2F);
                 while (1) {
@@ -443,13 +443,13 @@ void DungeonHandlePlayerInput(void)
 
                     if (gRealInputs.pressed & A_BUTTON) {
                         gShowMonsterDotsInDungeonMap = (gShowMonsterDotsInDungeonMap == FALSE) ? TRUE : FALSE; // Flip
-                        ShowWholeRevealedDungeonMap();
+                        UpdateMinimap();
                     }
                 }
                 gDungeon->unk181e8.inFloorMapMode = FALSE;
                 gGameOptionsRef->mapOption = prevMapOption;
                 gShowMonsterDotsInDungeonMap = TRUE;
-                ShowWholeRevealedDungeonMap();
+                UpdateMinimap();
                 SetBGOBJEnableFlags(0);
                 DungeonRunFrameActions(0x2F);
                 DungeonRunFrameActions(0x2F);
@@ -526,11 +526,11 @@ void DungeonHandlePlayerInput(void)
                             if (immobilizedMsg != NULL) {
                                 LogMessageByIdWithPopupCheckUser(leader, immobilizedMsg);
                             }
-                            sub_8044C50(ACTION_PASS_TURN);
+                            SetLeaderActionFields(ACTION_PASS_TURN);
                             gDungeon->unk644.unk2F = 1;
                         }
                         else {
-                            sub_8044C50(ACTION_WALK);
+                            SetLeaderActionFields(ACTION_WALK);
                             if ((gRealInputs.held & B_BUTTON || bPress) && FixedPointToInt(leaderInfo->belly) != 0) {
                                 if (GetEntInfo(leader)->cringeClassStatus.status != STATUS_CONFUSED) {
                                     gDungeon->unk644.unk28 = 1;
@@ -560,7 +560,7 @@ void DungeonHandlePlayerInput(void)
             HandleTalkFieldAction(leader);
             if (IsFloorOver())
                 break;
-            sub_8044C50(ACTION_NOTHING);
+            SetLeaderActionFields(ACTION_NOTHING);
         }
         else if ((r6.a0_8) == 0) {
             gDungeon->unk644.unk29 = 0;
@@ -1137,7 +1137,7 @@ void sub_805F02C(void)
         }
         gLeaderPointer = NULL;
         r8->action = leaderInfo->action;
-        sub_803F508(r7);
+        PointCameraToMonster(r7);
         sub_8041AD0(leader);
         sub_8041AE0(GetLeader());
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], r7, 0);
@@ -1199,7 +1199,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             SetLeaderActionToNothing(TRUE);
             gTeamMenuChosenId = -1;
             PrintOnMainMenu(printAll);
-            sub_806A2BC(GetLeader(), 0);
+            TryPointCameraToMonster(GetLeader(), 0);
             while (1) {
                 AddMenuCursorSprite(&gDungeonMenu);
                 DungeonRunFrameActions(0x1D);
@@ -1324,7 +1324,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                         if (i == GetLeaderActionContainer()->actionParameters[0].actionUseIndex) {
                             gTeamMenuChosenId = count;
                             if (GetLeaderActionId() != ACTION_NOTHING) {
-                                sub_806A2BC(teamMon, 0);
+                                TryPointCameraToMonster(teamMon, 0);
                             }
                             break;
                         }
@@ -1372,7 +1372,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                     currEntity = GetLeader();
                 }
 
-                sub_806A2BC(currEntity, 0);
+                TryPointCameraToMonster(currEntity, 0);
                 ChangeDungeonCameraPos(&currEntity->pos, 0, 1, 1);
                 GetLeaderInfo()->action.actionParameters[0].actionUseIndex = currMonId;
                 SetLeaderActionToNothing(FALSE);
@@ -1431,7 +1431,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                     break;
                 }
             }
-            sub_806A2BC(GetLeader(), 0);
+            TryPointCameraToMonster(GetLeader(), 0);
             ChangeDungeonCameraPos(&GetLeader()->pos, 0, 1, 1);
             if (GetLeaderActionId() != ACTION_NOTHING)
                 break;
@@ -1522,7 +1522,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
             ResetUnusedInputStruct();
         }
         else {
-            sub_806A2BC(GetLeader(), 0);
+            TryPointCameraToMonster(GetLeader(), 0);
             break;
         }
     }

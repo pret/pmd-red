@@ -42,7 +42,7 @@ extern void BgColorCallNullsub4(void);
 extern void sub_8085EB0(void);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateMinimap(void);
 extern void sub_8086A54(Entity *);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_8041888(u32);
@@ -333,7 +333,7 @@ static void sub_808B1CC(u8 itemID)
         SpawnItem(&pos,&item,1);
     }
     UpdateTrapsVisibility();
-    ShowWholeRevealedDungeonMap();
+    UpdateMinimap();
 }
 
 static void SetupRegiFacingDirection(Entity *regiEntity)

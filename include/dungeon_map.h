@@ -14,9 +14,9 @@ void CloseDungeonMapFile(void);
 void LoadDungeonMapPalette(void);
 void DrawMinimapTile(s32 x, s32 y);
 void CopyDungeonMapToVram(void);
-void ShowPlayerDotOnMap(void);
+void FlashLeaderIcon(void);
 void ResetMapPlayerDotFrames(void);
-void ShowWholeRevealedDungeonMap(void);
+void UpdateMinimap(void);
 void UpdateBgTilemapForDungeonMap(bool8 a0);
 void TryResetDungeonMapTilesScheduledForCopy(void);
 

@@ -22,9 +22,9 @@
 
 extern void sub_8086AC0(void);
 extern void DisplayActions(u32);
-extern void TriggerWeatherAbilities(void);
+extern void TryActivateArtificialWeatherAbilities(void);
 extern void EnemyEvolution(Entity *);
-extern void TickStatusHeal(Entity *);
+extern void TickStatusAndHealthRegen(Entity *);
 
 EWRAM_DATA SubMenuAction gDungeonSubMenu[10] = {0};
 EWRAM_DATA s32 gDungeonSubMenuItemsCount = 0;
@@ -73,7 +73,7 @@ void SetLeaderActionToNothing(bool8 clearActionFields)
     }
 }
 
-void sub_8044C50(u16 action)
+void SetLeaderActionFields(u16 action)
 {
     EntityInfo * entityInfo = GetLeaderInfo();
 

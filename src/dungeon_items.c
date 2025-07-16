@@ -821,7 +821,7 @@ static void MusicBoxCreation(void)
         sub_803E708(10,0x41);
         sub_804178C(1);
         gDungeon->unk1356C = 0;
-        ShowWholeRevealedDungeonMap();
+        UpdateMinimap();
     }
 }
 

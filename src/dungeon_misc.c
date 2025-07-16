@@ -61,9 +61,9 @@ extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
 extern void EndAbilityImmuneStatus(Entity *, Entity *);
 extern void sub_8041BBC(Entity *r0);
-extern void sub_806A2BC(Entity *, u8);
+extern void TryPointCameraToMonster(Entity *, u8);
 extern void sub_804178C(u32);
-extern void sub_803F508(Entity *);
+extern void PointCameraToMonster(Entity *);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
@@ -79,8 +79,8 @@ extern s32 gDungeonFramesCounter;
 extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
-extern void sub_803F580(s32);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateCamera(s32);
+extern void UpdateMinimap(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
@@ -473,7 +473,7 @@ void sub_8068F80(void)
         bool8 isShop = (GetTileAtEntitySafe(leader)->terrainType & TERRAIN_TYPE_SHOP) != 0;
         dungeon->unk644.unk54 = isShop;
         dungeon->unk644.unk55 = isShop;
-        sub_804AC20(&leader->pos);
+        DiscoverMinimap(&leader->pos);
     }
 }
 
@@ -1096,7 +1096,7 @@ void sub_8069E0C(Entity *pokemon)
   gDungeon->unkC = 1;
 }
 
-void TriggerWeatherAbilities(void)
+void TryActivateArtificialWeatherAbilities(void)
 {
   Entity *entity;
   s32 index;
@@ -1262,7 +1262,7 @@ void sub_806A1E8(Entity *pokemon)
       bVar3 = FALSE;
     }
     if (bVar3 && (!ShouldDisplayEntity(pokemon))) {
-      sub_806A2BC(pokemon,1);
+      TryPointCameraToMonster(pokemon,1);
     }
   }
 }
@@ -1279,7 +1279,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
         isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
     if (isNotTeamMember && (!ShouldDisplayEntity(pokemon))) {
-        sub_806A2BC(pokemon,1);
+        TryPointCameraToMonster(pokemon,1);
         return;
     }
     else if (GetEntityType(target) == ENTITY_MONSTER) {
@@ -1287,12 +1287,12 @@ void sub_806A240(Entity *pokemon, Entity *target)
         isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
     if (isNotTeamMember && (!ShouldDisplayEntity(target))) {
-        sub_806A2BC(target,1);
+        TryPointCameraToMonster(target,1);
     }
   }
 }
 
-void sub_806A2BC(Entity *pokemon, u8 param_2)
+void TryPointCameraToMonster(Entity *pokemon, u8 param_2)
 {
   if ((EntityIsValid(pokemon)) && (GetEntityType(pokemon) == ENTITY_MONSTER) && (gDungeon->unk181e8.cameraTarget != pokemon)) {
     if (param_2 != '\0') {
@@ -1302,8 +1302,8 @@ void sub_806A2BC(Entity *pokemon, u8 param_2)
       }
     }
     sub_803E708(4,0x44);
-    sub_803F508(pokemon);
-    sub_804AC20(&pokemon->pos);
+    PointCameraToMonster(pokemon);
+    DiscoverMinimap(&pokemon->pos);
     gDungeon->unk12 = 0;
   }
 }
@@ -1523,8 +1523,8 @@ void sub_806A6E8(Entity *entity)
         }
         else {
             if (info->heldItem.id == ITEM_X_RAY_SPECS || info->unk64 == ITEM_X_RAY_SPECS) {
-                sub_803F580(1);
-                ShowWholeRevealedDungeonMap();
+                UpdateCamera(1);
+                UpdateMinimap();
             }
         }
         sub_807AA30();

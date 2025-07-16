@@ -80,9 +80,9 @@ extern void EnemyEvolution(Entity *);
 extern void sub_803E748(void);
 extern void sub_8083D68(void);
 extern void sub_803E7C8(void);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateMinimap(void);
 extern void sub_807E5AC(void);
-extern void TriggerWeatherAbilities(void);
+extern void TryActivateArtificialWeatherAbilities(void);
 extern void sub_807E88C(void);
 extern void nullsub_16(void);
 extern void sub_80521D0(void);
@@ -435,7 +435,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         sub_8040094(0);
         sub_803EAF0(0, NULL);
         InitDungeonMap(r6);
-        ShowWholeRevealedDungeonMap();
+        UpdateMinimap();
         gDungeon->unkB8 = NULL;
         gDungeon->unk644.unk28 = 0;
         gDungeon->unk644.unk29 = 0;
@@ -459,7 +459,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             }
             else {
                 sub_803F4A0(GetLeader());
-                ShowWholeRevealedDungeonMap();
+                UpdateMinimap();
             }
         }
 
@@ -472,7 +472,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             }
         }
         else {
-            TriggerWeatherAbilities();
+            TryActivateArtificialWeatherAbilities();
         }
 
         if (r6) {

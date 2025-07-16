@@ -36,15 +36,15 @@
 
 extern s32 gDungeonFramesCounter;
 
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateMinimap(void);
 extern void sub_80400D4(void);
 extern void sub_8041888(u8 param_1);
 extern void sub_803F7BC(void);
-extern void ShowWholeRevealedDungeonMap();
+extern void UpdateMinimap();
 
 void sub_803EC94(void);
 s32 sub_803EF90(s32 a0, u8 a1);
-void sub_803F580(u8 a0);
+void UpdateCamera(u8 a0);
 void sub_803F7BC(void);
 void sub_803F38C(void);
 void sub_803FB74(void);
@@ -157,7 +157,7 @@ void sub_803F4A0(Entity *a0)
         strPtr->unk18216 = 1;
     }
 
-    sub_803F580(0);
+    UpdateCamera(0);
     sub_803F38C();
     if (gDungeon->unk1356C == 0) {
         sub_806CD90();
@@ -165,7 +165,7 @@ void sub_803F4A0(Entity *a0)
 }
 
 // Very similar to the one above
-void sub_803F508(Entity *a0)
+void PointCameraToMonster(Entity *a0)
 {
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
 
@@ -180,16 +180,16 @@ void sub_803F508(Entity *a0)
     }
     strPtr->cameraTarget = a0;
 
-    sub_803F580(0);
+    UpdateCamera(0);
     sub_803F38C();
     if (gDungeon->unk1356C == 0) {
         sub_806CD90();
     }
     UpdateTrapsVisibility();
-    ShowWholeRevealedDungeonMap();
+    UpdateMinimap();
 }
 
-void sub_803F580(u8 a0)
+void UpdateCamera(u8 a0)
 {
     UnkDungeonGlobal_unk181E8_sub *strPtr = &gDungeon->unk181e8;
     Entity *cameraTarget = strPtr->cameraTarget;
@@ -266,7 +266,7 @@ void sub_803F580(u8 a0)
 
         if (before != strPtr->showInvisibleTrapsMonsters) {
             UpdateTrapsVisibility();
-            ShowWholeRevealedDungeonMap();
+            UpdateMinimap();
             sub_8041888(0);
         }
 
@@ -716,9 +716,9 @@ void HandleLuminousOrbAction(Entity *pokemon)
       mapTile->spawnOrVisibilityFlags |= VISIBILITY_FLAG_REVEALED;
     }
   }
-  sub_803F580(0);
+  UpdateCamera(0);
   UpdateTrapsVisibility();
-  ShowWholeRevealedDungeonMap();
+  UpdateMinimap();
   LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD040);
 }
 

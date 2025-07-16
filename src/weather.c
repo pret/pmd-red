@@ -64,7 +64,7 @@ void sub_807E5AC(void)
     if(weather == WEATHER_COUNT)
         weather = DungeonRandInt(WEATHER_COUNT);
     sub_807E5E4(weather);
-    TriggerWeatherAbilities();
+    TryActivateArtificialWeatherAbilities();
     sub_807EAA0(0, 1);
 }
 

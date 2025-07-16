@@ -256,7 +256,7 @@ void sub_807218C(Entity *pokemon)
     r6 = 0;
     info = GetEntInfo(pokemon);
 
-    sub_806A2BC(pokemon, 0);
+    TryPointCameraToMonster(pokemon, 0);
     SetMessageArgument_2(gFormatBuffer_Monsters[0], info, 0);
     if(sub_8070BC0(pokemon))
     {
@@ -322,7 +322,7 @@ void sub_807218C(Entity *pokemon)
     if(buffer[0])
         DisplayDungeonMessage(0, buffer, 1);
 
-    sub_806A2BC(GetLeader(), 0);
+    TryPointCameraToMonster(GetLeader(), 0);
 }
 
 void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
@@ -390,7 +390,7 @@ static bool8 LevelUp(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
         {
             if(!info->isNotTeamMember)
             {
-                sub_806A2BC(target, 0);
+                TryPointCameraToMonster(target, 0);
                 if(!flag)
                     sub_8083D58();
                 gFormatArgs[0] = level;

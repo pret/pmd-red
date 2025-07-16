@@ -19,7 +19,7 @@
 
 extern u8 DisplayActions(Entity *);
 extern void sub_805E804(void);
-void sub_806A2BC(Entity *pokemon, u8 param_2);
+void TryPointCameraToMonster(Entity *pokemon, u8 param_2);
 extern void nullsub_93(DungeonPos *);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_807EC28(bool8);
@@ -42,7 +42,7 @@ void sub_807E378(void)
     if (gDungeon->unk644.unk36 == 0) {
       if (gDungeon->unk644.windTurns < 0xfa) {
         sub_805E804();
-        sub_806A2BC(leader,1);
+        TryPointCameraToMonster(leader,1);
         DisplayActions(leader);
         if (IsFloorOver() == 0) {
           LogMessageByIdWithPopupCheckUser(leader,gUnknown_80F9C4C);
@@ -54,7 +54,7 @@ void sub_807E378(void)
     else if (gDungeon->unk644.unk36 == 1) {
       if (gDungeon->unk644.windTurns < 0x96) {
         sub_805E804();
-        sub_806A2BC(leader,1);
+        TryPointCameraToMonster(leader,1);
         DisplayActions(leader);
         if (IsFloorOver() == 0) {
           LogMessageByIdWithPopupCheckUser(leader,gUnknown_80F9C70);
@@ -66,7 +66,7 @@ void sub_807E378(void)
     else if (gDungeon->unk644.unk36 == 2) {
       if (gDungeon->unk644.windTurns < 0x32) {
         sub_805E804();
-        sub_806A2BC(leader,1);
+        TryPointCameraToMonster(leader,1);
         DisplayActions(leader);
         if (IsFloorOver() == 0) {
           LogMessageByIdWithPopupCheckUser(leader,gUnknown_80F9C8C);
@@ -77,7 +77,7 @@ void sub_807E378(void)
     }
     else if (gDungeon->unk644.windTurns < 1) {
       sub_805E804();
-      sub_806A2BC(leader,1);
+      TryPointCameraToMonster(leader,1);
       DisplayActions(leader);
       if (IsFloorOver() == 0) {
         LogMessageByIdWithPopupCheckUser(leader,gUnknown_80F9CBC);

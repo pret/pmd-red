@@ -29,13 +29,13 @@
 extern u32 gDungeonFramesCounter;
 
 bool8 ExposeTrap(s32 x, s32 y);
-void ShowWholeRevealedDungeonMap();
+void UpdateMinimap();
 void sub_807EC28(u32);
 u8 IsFloorOver(void);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);
-extern void sub_803F580(u32);
+extern void UpdateCamera(u32);
 bool8 sub_808384C(DungeonPos *, DungeonPos *);
 u8 sub_8083660(DungeonPos *);
 
@@ -116,7 +116,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
     sub_80694C0(target,local_2c.x,local_2c.y,1);
     UpdateEntityPixelPos(target,0);
     sub_807BB78(target);
-    sub_803F580(1);
+    UpdateCamera(1);
     if (ShouldDisplayEntity(target)) {
         direction = (info->action).direction;
         target->unk1C.raw = 0x9c00;
@@ -139,7 +139,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
         PetrifiedStatusTarget(pokemon,target);
     }
     if (info->isTeamLeader) {
-        sub_804AC20(&target->pos);
+        DiscoverMinimap(&target->pos);
         gDungeon->unk1 = 0;
         gDungeon->unk5C0 = -1;
         sub_807EC28(0);

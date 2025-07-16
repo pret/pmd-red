@@ -79,7 +79,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2)
         sub_806CE68(target, 8);
         if(info->isTeamLeader)
         {
-            sub_804AC20(&target->pos);
+            DiscoverMinimap(&target->pos);
             sub_807EC28(0);
         }
         sub_806A5B8(target);

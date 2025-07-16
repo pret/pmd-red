@@ -657,7 +657,7 @@ _0805AA5E:
         WarpTarget(pokemon,target,0,0);
       }
       if (GetEntInfo(target)->isTeamLeader) {
-        sub_804AC20(r9);
+        DiscoverMinimap(r9);
         sub_807EC28(FALSE);
       }
       sub_806A5B8(target);

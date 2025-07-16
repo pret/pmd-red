@@ -28,7 +28,7 @@
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
 
-extern void ShowWholeRevealedDungeonMap();
+extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
 extern void sub_807EC28(bool8);
@@ -60,7 +60,7 @@ extern void sub_8041E74(Entity *);
 extern void sub_8041E60(Entity *);
 extern void sub_8041E4C(Entity *);
 extern void sub_8041E3C(Entity *);
-extern void sub_803F580(u32);
+extern void UpdateCamera(u32);
 extern void sub_8041E1C(Entity *);
 extern void nullsub_89(Entity *);
 extern void nullsub_88(Entity *);
@@ -546,7 +546,7 @@ void SendEyesightEndMessage(Entity * pokemon,Entity * target)
   if (entityInfo->isTeamLeader) {
     DungeonRunFrameActions(0x31);
     UpdateTrapsVisibility();
-    ShowWholeRevealedDungeonMap();
+    UpdateMinimap();
   }
 }
 

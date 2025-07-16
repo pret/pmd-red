@@ -275,7 +275,7 @@ bool8 DisplayActions(Entity *a0)
             if (monInfo->flags & 0x2000) {
                 monInfo->flags &= ~(0x2000);
                 if (monInfo->isTeamLeader) {
-                    sub_804AC20(&mon->pos);
+                    DiscoverMinimap(&mon->pos);
                     sub_807EC28(FALSE);
                     CheckLeaderTile();
                 }

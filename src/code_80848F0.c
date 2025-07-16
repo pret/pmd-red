@@ -52,7 +52,7 @@ extern const u8 gUnknown_8107358[25];
 extern const DungeonPos gUnknown_80F4598[];
 
 extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateMinimap(void);
 extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F4A0(u32);
@@ -136,7 +136,7 @@ void sub_80847D4(void)
 
     gDungeon->unk3A0D = 0;
     gDungeon->unk1356C = 0;
-    ShowWholeRevealedDungeonMap();
+    UpdateMinimap();
     for(index = 0; index < 0x3e7 && gUnknown_8107234[index].unk0 != 0;  index++) {
         fixedRoomNumber = gDungeon->fixedRoomNumber;
         if (fixedRoomNumber - 0x1c < 0x16) {

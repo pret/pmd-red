@@ -72,6 +72,6 @@ void HandleDroughtOrbAction(Entity *pokemon, Entity *target)
 	}
 	gDungeon->unk644.unk2C = 1;
 	DetermineAllMonsterShadow();
-	ShowWholeRevealedDungeonMap();
+	UpdateMinimap();
 	UpdateTrapsVisibility();
 }

@@ -62,7 +62,7 @@ void sub_807D3CC(Entity *param_1)
     }
     if (flag) {
         LogMessageByIdWithPopupCheckUser(param_1,gUnknown_80FD2F8); // All traps were exposed
-        ShowWholeRevealedDungeonMap();
+        UpdateMinimap();
         UpdateTrapsVisibility();
     }
     else {

@@ -44,7 +44,7 @@ extern void BgColorCallNullsub4(void);
 extern void sub_8085EB0(void);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateMinimap(void);
 extern void sub_8086A54(Entity *);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_8041888(u32);
@@ -139,7 +139,7 @@ void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
             sub_808B50C();
         }
         gDungeon->unk1356C = uVar1;
-        ShowWholeRevealedDungeonMap();
+        UpdateMinimap();
     }
   }
 }
@@ -510,7 +510,7 @@ static void CreateJirachiWishWarpTile(void)
   sub_8049884();
   sub_8049B8C();
   UpdateTrapsVisibility();
-  ShowWholeRevealedDungeonMap();
+  UpdateMinimap();
 }
 
 static void EnableJirachiWishWarpTile(void)
@@ -526,7 +526,7 @@ static void EnableJirachiWishWarpTile(void)
   sub_8049884();
   sub_8049B8C();
   UpdateTrapsVisibility();
-  ShowWholeRevealedDungeonMap();
+  UpdateMinimap();
 }
 
 static u8 JirachiFriendAreaSearch(void)

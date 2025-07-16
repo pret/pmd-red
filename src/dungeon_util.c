@@ -398,7 +398,7 @@ void sub_80457DC(Entity* ent)
     ent->unk22 = 0;
 }
 
-bool8 sub_8045804(Entity *ent)
+bool8 ShouldMinimapDisplayEntity(Entity *ent)
 {
     UnkDungeonGlobal_unk181E8_sub* saveTyping;
     Entity* camTarget;

@@ -52,7 +52,7 @@ extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A6E8(Entity *);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 bool8 sub_807EF48(void);
-void sub_806A2BC(Entity *a0, u8 a1);
+void TryPointCameraToMonster(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
 bool8 sub_80701A4(Entity *a0);
 void sub_805E738(Entity *a0);
@@ -92,7 +92,7 @@ extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
-extern void sub_803F508(Entity *);
+extern void PointCameraToMonster(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
@@ -200,7 +200,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
             s32 id = sp.unk4[gDungeonMenu.menuIndex];
             if (id >= 0) {
                 Entity *teamMon = gDungeon->teamPokemon[id];
-                sub_806A2BC(teamMon, 0);
+                TryPointCameraToMonster(teamMon, 0);
                 ChangeDungeonCameraPos(&teamMon->pos, 0, 1, 1);
             }
 
@@ -240,7 +240,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
         id = sp.unk4[gDungeonMenu.menuIndex];
         if (id >= 0) {
             Entity *teamMon = gDungeon->teamPokemon[id];
-            sub_806A2BC(teamMon, 0);
+            TryPointCameraToMonster(teamMon, 0);
             ChangeDungeonCameraPos(&teamMon->pos, 0, 1, 1);
         }
 
@@ -298,7 +298,7 @@ bool8 ShowDungeonTeamMenu(Entity *a0)
     }
 
     if (ret) {
-        sub_806A2BC(GetLeader(), 0);
+        TryPointCameraToMonster(GetLeader(), 0);
     }
     sub_803EAF0(0, NULL);
     return ret;
@@ -1500,7 +1500,7 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
                 }
             }
             prevId = currId;
-            sub_806A2BC(entity, 0);
+            TryPointCameraToMonster(entity, 0);
             ChangeDungeonCameraPos(&entity->pos, 0, 1, 1);
         }
 
@@ -1532,7 +1532,7 @@ Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId)
     AddMenuCursorSprite(&gDungeonMenu);
     DungeonRunFrameActions(0x1B);
     sub_804AA60();
-    sub_806A2BC(GetLeader(), 0);
+    TryPointCameraToMonster(GetLeader(), 0);
     sub_803EAF0(0, NULL);
     sub_803E708(4, 0x3E);
     if (bPress) {

@@ -50,7 +50,7 @@ extern void nullsub_82(Entity *);
 extern void nullsub_83(Entity *);
 extern void nullsub_84(Entity *);
 extern void nullsub_85(Entity *);
-extern void ShowWholeRevealedDungeonMap();
+extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
 extern void sub_807EC28(bool8);
@@ -79,7 +79,7 @@ extern void sub_8041E74(Entity *);
 extern void sub_8041E60(Entity *);
 extern void sub_8041E4C(Entity *);
 extern void sub_8041E3C(Entity *);
-extern void sub_803F580(u32);
+extern void UpdateCamera(u32);
 extern void sub_8041E1C(Entity *);
 extern void nullsub_89(Entity *);
 extern void nullsub_88(Entity *);
@@ -88,8 +88,8 @@ extern void nullsub_86(Entity *);
 extern void sub_8041E0C(Entity *);
 extern void sub_8041DD8(Entity *r0, s32 r1); // NOTE: is s16 in another file
 extern bool8 sub_806AA0C(s32, u32);
-extern void sub_803F580(u32);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateCamera(u32);
+extern void UpdateMinimap(void);
 extern void sub_8041D9C(Entity *);
 extern void sub_8041DB0(Entity *pokemon);
 extern void sub_8041CA8(Entity *);
@@ -251,8 +251,8 @@ void HandleScannerOrb(Entity* pokemon, Entity* target)
         nullsub_75(target);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], target, 0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FAEA0); // Item locations became evident
-        sub_803F580(0);
-        ShowWholeRevealedDungeonMap();
+        UpdateCamera(0);
+        UpdateMinimap();
         EntityUpdateStatusSprites(target);
     }
   }
@@ -276,8 +276,8 @@ void HandleStairsOrb(Entity* pokemon, Entity* target)
             nullsub_76(target);
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
             TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FAEC8);
-            sub_803F580(0);
-            ShowWholeRevealedDungeonMap();
+            UpdateCamera(0);
+            UpdateMinimap();
             EntityUpdateStatusSprites(target);
         }
     }
@@ -296,8 +296,8 @@ void HandleRadarOrb(Entity* pokemon, Entity* target)
         nullsub_77(target);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],target,0);
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FAFAC);
-        sub_803F580(0);
-        ShowWholeRevealedDungeonMap();
+        UpdateCamera(0);
+        UpdateMinimap();
         EntityUpdateStatusSprites(target);
     }
   }
@@ -1059,7 +1059,7 @@ void BlindTarget(Entity *pokemon, Entity *target)
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB7F4);
         DungeonRunFrameActions(0x31);
         UpdateTrapsVisibility();
-        ShowWholeRevealedDungeonMap();
+        UpdateMinimap();
     }
     else
     {
@@ -1084,9 +1084,9 @@ void CrossEyeVisionTarget(Entity *pokemon, Entity *target)
             TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB834);
             entityInfo->blinkerClassStatus.status = STATUS_CROSS_EYED;
             entityInfo->blinkerClassStatus.turns = CalculateStatusTurns(target,gCrossEyedTurnRange, TRUE) + 1;
-            sub_803F580(0x1);
+            UpdateCamera(0x1);
             UpdateTrapsVisibility();
-            ShowWholeRevealedDungeonMap();
+            UpdateMinimap();
         }
         else
         {
@@ -1112,7 +1112,7 @@ void RestoreVisionTarget(Entity *pokemon, Entity *target)
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB880);
         DungeonRunFrameActions(0x31);
         UpdateTrapsVisibility();
-        ShowWholeRevealedDungeonMap();
+        UpdateMinimap();
     }
     else
     {

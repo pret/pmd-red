@@ -59,7 +59,7 @@ void HandleSwitcherOrb(Entity *pokemon,Entity *target)
 
     if (EntityIsValid(pokemon)) {
       if (GetEntInfo(pokemon)->isTeamLeader) {
-        sub_804AC20(&pokemon->pos);
+        DiscoverMinimap(&pokemon->pos);
         sub_807EC28(FALSE);
       }
       sub_806A5B8(pokemon);
@@ -68,7 +68,7 @@ void HandleSwitcherOrb(Entity *pokemon,Entity *target)
 
     if (EntityIsValid(target)) {
       if (GetEntInfo(target)->isTeamLeader) {
-        sub_804AC20(&target->pos);
+        DiscoverMinimap(&target->pos);
         sub_807EC28(FALSE);
       }
       sub_806A5B8(target);

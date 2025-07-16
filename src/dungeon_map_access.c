@@ -1016,7 +1016,7 @@ void sub_804AAD4(void)
     gDungeon->unk104C0 = maxRooms + 1;
 }
 
-void sub_804AC20(DungeonPos *pos)
+void DiscoverMinimap(DungeonPos *pos)
 {
     s32 y;
     const Tile *tile2;

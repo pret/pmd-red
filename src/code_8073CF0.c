@@ -398,7 +398,7 @@ void sub_8074094(Entity *entity)
         return;
 }
 
-void TickStatusHeal(Entity *entity)
+void TickStatusAndHealthRegen(Entity *entity)
 {
     s32 i;
     bool32 spdChange;
