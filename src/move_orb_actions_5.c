@@ -51,7 +51,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
                 for(x = -1; x < 2; x++)
                     sub_80498A8(tileCoords.x + x, tileCoords.y + y);
             filledInTile = TRUE;
-            sub_806CF60();
+            DetermineAllMonsterShadow();
         }
 
         for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
@@ -66,7 +66,7 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
             TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD0B8);
         }
         ShowWholeRevealedDungeonMap();
-        sub_8049ED4();
+        UpdateTrapsVisibility();
         return filledInTile;
     }
 }
@@ -93,8 +93,8 @@ bool8 ItemizeOrbAction(Entity *pokemon, Entity *target, Move *move, s32 param_4)
     {
         target->isVisible = FALSE;
         CreateItemWithStickyChance(&stack, GetRandomFloorItem(0), 0);
-        sub_80464C8(pokemon, &posStruct, &stack);
-        sub_8068FE0(target, 0x218, pokemon);
+        SpawnDroppedItemWrapper(pokemon, &posStruct, &stack);
+        HandleFaint(target, 0x218, pokemon);
         return TRUE;
     }
 }

@@ -690,7 +690,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 param_
             for (yCoord = bottomRightCornerY; yCoord <= topLeftCornerY; yCoord++) {
                 object = GetTileMut(xCoord, yCoord)->object;
                 if (((object != 0) && (GetEntityType(object) == ENTITY_TRAP)) &&
-                    (trapData = GetTrapData(object), trapData->id != TRAP_WONDER_TILE)) {
+                    (trapData = GetTrapInfo(object), trapData->id != TRAP_WONDER_TILE)) {
                     pos.y = yCoord;
                     pos.x = xCoord;
                     sub_807FE04(&pos, 0);
@@ -701,7 +701,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 param_
         if (foundTrap) {
             TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FD1B0);
             ShowWholeRevealedDungeonMap();
-            sub_8049ED4();
+            UpdateTrapsVisibility();
         }
         else {
             TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FD1CC);

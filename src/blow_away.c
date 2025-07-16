@@ -29,9 +29,8 @@
 
 void sub_804EB30();
 bool8 ExposeTrap(s32 x, s32 y);
-u8 sub_8045888(Entity *);
 void sub_807EC28(u32);
-u8 sub_8044B28(void);
+u8 IsFloorOver(void);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);
@@ -93,7 +92,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
                 for(iVar8 = 0; iVar8 < 6; iVar8++)
                 {
                     IncreaseEntityPixelPos(target,pos32.x,pos32.y);
-                    if (sub_8045888(target) != 0) {
+                    if (ShouldDisplayEntity(target) != 0) {
                         DungeonRunFrameActions(0x19);
                     }
                 }
@@ -118,7 +117,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
                 sub_807D068(target,&target->pos);
                 sub_806F370(pokemon,target,gBlowAwayDmgValue,0,0,0,0x219,0,0,0);
             }
-            if (sub_8044B28()) {
+            if (IsFloorOver()) {
                 return;
             }
             if (entity != NULL) {
@@ -128,7 +127,7 @@ void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
                     sub_806F370(pokemon,entity,gBlowAwayDmgValue,0,0,0,0x21a,0,0,0);
                 }
             }
-            if (sub_8044B28()) {
+            if (IsFloorOver()) {
                 return;
             }
             if (!EntityIsValid(target)) {
@@ -187,8 +186,8 @@ void sub_807D068(Entity *pokemon, DungeonPos *pos)
             local_34.x = pixelX;
             local_34.y = pixelY;
             pokemon->unk1C.raw = sin_4096(iVar8) * 0xc;
-            sub_804535C(pokemon, &local_34);
-            if (sub_8045888(pokemon)) {
+            UpdateEntityPixelPos(pokemon, &local_34);
+            if (ShouldDisplayEntity(pokemon)) {
                 DungeonRunFrameActions(0x1a);
             }
             iVar8 = iVar8 + 0xaa;
@@ -197,6 +196,6 @@ void sub_807D068(Entity *pokemon, DungeonPos *pos)
     local_34.x = posX;
     local_34.y = posY;
     pokemon->unk1C = IntToF248(0);
-    sub_804535C(pokemon,&local_34);
+    UpdateEntityPixelPos(pokemon,&local_34);
     DungeonRunFrameActions(0x1a);
 }

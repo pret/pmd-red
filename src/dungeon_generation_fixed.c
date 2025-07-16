@@ -36,7 +36,7 @@ static void SpawnItemAtPos(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
         item.quantity = quantity;
     }
 
-    AddItemToDungeonAt(&pos, &item, 1);
+    SpawnItem(&pos, &item, 1);
 }
 
 // s16 species memes strike again. Will the fix ever be discovered?
@@ -1049,7 +1049,7 @@ void sub_8051E7C(Entity *pokemon)
         tile->terrainType &= ~(TERRAIN_TYPE_IMPASSABLE_WALL | TERRAIN_TYPE_UNK_x1000);
         sub_80498A8(pokemon->pos.x, pokemon->pos.y - 1);
         sub_8049B8C();
-        sub_8049ED4();
+        UpdateTrapsVisibility();
         sub_80429FC(&pos);
         LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FDDD0); // The closed corridor was opened!
         sub_803E708(0x14, 0x3C);

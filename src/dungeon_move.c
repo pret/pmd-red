@@ -43,18 +43,17 @@
 #include "targeting_flags.h"
 #include "text_util.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_engine.h"
 
 extern void sub_80429C8(Entity *r0);
-extern bool8 sub_8045888(Entity *r0);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, s24_8, u16, u32);
 extern s16 sub_8057600(Move *move, s32 itemID);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_806A1E8(Entity *pokemon);
-extern bool8 sub_8044B28(void);
 extern void sub_804178C(u32);
-extern void sub_8071DA4(Entity *);
+extern void EnemyEvolution(Entity *);
 extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
@@ -168,7 +167,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                             direction2 &= DIRECTION_MASK;
                             tileEntity = GetTile(currTarget->pos.x + gAdjacentTileOffsets[direction2].x, currTarget->pos.y + gAdjacentTileOffsets[direction2].y)->monster;
                             if (EntityIsValid(tileEntity) && GetEntityType(tileEntity) == ENTITY_MONSTER) {
-                                if (sub_8045888(currTarget)) {
+                                if (ShouldDisplayEntity(currTarget)) {
                                     s32 k;
                                     for (k = 0; k < 24; k++) {
                                         sub_806CE68(currTarget, direction1);
@@ -290,7 +289,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                 moveHits = FALSE;
             }
 
-            if (sub_8045888(currTarget)) {
+            if (ShouldDisplayEntity(currTarget)) {
                 sub_803E708(4, 0x4A);
                 sub_8041168(attacker, currTarget, move, NULL);
             }
@@ -317,7 +316,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                     TryDisplayDungeonLoggableMessage3(attacker, currTarget, gUnknown_80F9364); // is unaffected!
                 }
 
-                if (sub_8045888(currTarget)) {
+                if (ShouldDisplayEntity(currTarget)) {
                     sub_803ED30(9999, currTarget, 1, -1);
                 }
 
@@ -330,7 +329,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                         break;
                 }
 
-                if (sub_8044B28())
+                if (IsFloorOver())
                     break; // breaks out of the loop
             }
             else {
@@ -1313,7 +1312,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
                         break;
                 }
 
-                if (sub_8044B28()) {
+                if (IsFloorOver()) {
                     break;
                 }
 
@@ -1347,7 +1346,7 @@ void UseMoveAgainstTargets(Entity **targetsArray, Entity *attacker, Move *move, 
         }
     }
 
-    if (!sub_8044B28()) {
+    if (!IsFloorOver()) {
         if (EntityIsValid(attacker) && GetEntInfo(attacker)->unk154 != 0) {
             GetEntInfo(attacker)->unk154 = 0;
             WarpTarget(attacker, attacker, 0, NULL);
@@ -1405,7 +1404,7 @@ static s32 TryHitTarget(Entity *attacker, Entity *target, Move *move, struct Dam
     }
     else {
         SetMessageArgument_2(gFormatBuffer_Monsters[1], GetEntInfo(target), 0);
-        if (sub_8045888(attacker) && sub_8045888(target)) {
+        if (ShouldDisplayEntity(attacker) && ShouldDisplayEntity(target)) {
             sub_803ED30(9999, target, 1, -1);
             TryDisplayDungeonLoggableMessage4(attacker, target, gUnknown_80F9688); // It took no damage!
             sub_8042238(attacker, target);

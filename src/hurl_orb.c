@@ -42,7 +42,6 @@
 
 extern void sub_80833E8(DungeonPos *param_1, s32 *param_2);
 extern void sub_806A5B8(Entity *);
-extern bool8 sub_8045888(Entity *ent);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_807D068(Entity *, DungeonPos *);
 extern void sub_807EC28(bool8 arg0);
@@ -145,7 +144,7 @@ void sub_807F43C(Entity *target, Entity *attacker)
 
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
     TryDisplayDungeonLoggableMessage3(target, attacker, gUnknown_80FE690); // m0 was sent flying!
-    if (sub_8045888(attacker)) {
+    if (ShouldDisplayEntity(attacker)) {
         PlaySoundEffect(0x1A3);
     }
 
@@ -169,8 +168,8 @@ void sub_807F43C(Entity *target, Entity *attacker)
     for (i = 0; i < r6; i++) {
         var_54.x += var_30;
         var_54.y += r10;
-        sub_804535C(attacker, &var_54);
-        if (sub_8045888(attacker)) {
+        UpdateEntityPixelPos(attacker, &var_54);
+        if (ShouldDisplayEntity(attacker)) {
             attacker->unk1C.raw = sin_4096(var_2C) << 5;
             DungeonRunFrameActions(0x3B);
             if (!(i & 3)) {
@@ -185,7 +184,7 @@ void sub_807F43C(Entity *target, Entity *attacker)
     var_54.x = pixelPosX;
     var_54.y = pixelPosY;
     attacker->unk1C.raw = 0;
-    sub_804535C(attacker, &var_54);
+    UpdateEntityPixelPos(attacker, &var_54);
     DungeonRunFrameActions(0x3B);
     GetEntInfo(attacker)->action.direction = attackerDirection & DIRECTION_MASK;
 

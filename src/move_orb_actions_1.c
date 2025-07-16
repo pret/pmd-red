@@ -35,7 +35,6 @@
 
 extern void sub_806A5B8(Entity *entity);
 void sub_8075900(Entity *pokemon, u8 r1);
-extern u8 sub_8044B28(void);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);

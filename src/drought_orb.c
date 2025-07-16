@@ -71,7 +71,7 @@ void HandleDroughtOrbAction(Entity *pokemon, Entity *target)
 		LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD060);
 	}
 	gDungeon->unk644.unk2C = 1;
-	sub_806CF60();
+	DetermineAllMonsterShadow();
 	ShowWholeRevealedDungeonMap();
-	sub_8049ED4();
+	UpdateTrapsVisibility();
 }

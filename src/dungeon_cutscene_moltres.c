@@ -49,7 +49,7 @@ extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
+extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_807EAA0(u32, u32);
@@ -101,7 +101,7 @@ void sub_8087848(void)
   sub_8085930(DIRECTION_WEST);
   sub_80855E4(sub_8086A3C);
   if (sub_8086AE4(MONSTER_MOLTRES)) {
-    sub_8068FE0(moltresEntity,0x21c,0);
+    HandleFaint(moltresEntity,0x21c,0);
   }
   else {
     sub_8072008(moltresEntity,moltresEntity,gMoltresConfigLevel,0,0);

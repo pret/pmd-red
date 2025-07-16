@@ -37,8 +37,7 @@ void sub_8083D78(void);
 void sub_8083D58(void);
 void sub_8072778(Entity *, Entity *, u8, u8);
 bool8 sub_80725A4(Entity *, Entity *);
-void GetAvailTacticsforLvl_Bool(u8 *tacticsBuffer, s32 pokeLevel);
-bool8 sub_80723D0(Entity *, Entity *, u8, u8);
+void GetUnlockedTacticFlags(u8 *tacticsBuffer, s32 pokeLevel);
 void sub_807218C(Entity *);
 
 extern void sub_8072B78(Entity *pokemon, Entity *target, s16 id);
@@ -52,6 +51,8 @@ static const u8 * const gUnknown_8107018[3] = {
     _("{WAIT_PRESS}\n"),
     _("\n"),
 };
+
+static bool8 LevelUp(Entity *, Entity *, u8, u8);
 
 void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
 {
@@ -75,7 +76,7 @@ void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
   }
 }
 
-void sub_8071DA4(Entity *entity)
+void EnemyEvolution(Entity *entity)
 {
   int counter;
   s16 *id;
@@ -116,7 +117,7 @@ void sub_8071DA4(Entity *entity)
           s32 expGained = info->expGainedInTurn;
           if (expGained != 0) {
             if (info->isTeamLeader) {
-              GetAvailTacticsforLvl_Bool(tacticsBuffer1, info->level);
+              GetUnlockedTacticFlags(tacticsBuffer1, info->level);
             }
             maxHP = info->maxHPStat;
             atk[0] = info->atk[0];
@@ -128,7 +129,7 @@ void sub_8071DA4(Entity *entity)
               gFormatArgs[0] = expGained;
               SetMessageArgument_2(gFormatBuffer_Monsters[0],info,0);
               TryDisplayDungeonLoggableMessage3(entityPtr,target,gUnknown_80F9E64); // $m0 gained $d0 Exp Points
-              flag = sub_80723D0(entityPtr,target,1,1);
+              flag = LevelUp(entityPtr,target,1,1);
             }
           }
           if (info->unk149 != 0) {
@@ -161,7 +162,7 @@ void sub_8071DA4(Entity *entity)
           if ((expGained != 0) && (info->isTeamLeader)) {
             s32 tacticIndex;
 
-            GetAvailTacticsforLvl_Bool(tacticsBuffer2,info->level);
+            GetUnlockedTacticFlags(tacticsBuffer2,info->level);
             for(tacticIndex = 0; tacticIndex < NUM_TACTICS; tacticIndex++)
             {
               if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
@@ -177,7 +178,6 @@ void sub_8071DA4(Entity *entity)
       }
     }
   }
-  return;
 }
 
 void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 param_5)
@@ -197,7 +197,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
         flag = 0;
         info = GetEntInfo(target);
         if (info->isTeamLeader) {
-            GetAvailTacticsforLvl_Bool(tacticsBuffer1,info->level);
+            GetUnlockedTacticFlags(tacticsBuffer1,info->level);
         }
         maxHP = info->maxHPStat;
         atk[0] = info->atk[0];
@@ -210,9 +210,9 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
                 newLevel = 100;
             }
             if (newLevel != info->level) {
-                GetPokemonLevelData(&leveldata,info->id,newLevel);
+                GetLvlUpEntry(&leveldata,info->id,newLevel);
                 info->exp = leveldata.expRequired;
-                flag |= (sub_80723D0(pokemon,target,param_4,param_5));
+                flag |= (LevelUp(pokemon,target,param_4,param_5));
                 if ((flag != 0) && (!info->isNotTeamMember)) {
                     gFormatArgs[0] = info->maxHPStat - maxHP;
                     gFormatArgs[1] = info->atk[0] - atk[0];
@@ -226,7 +226,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
             }
         }
         if (info->isTeamLeader) {
-            GetAvailTacticsforLvl_Bool(tacticsBuffer2,info->level);
+            GetUnlockedTacticFlags(tacticsBuffer2,info->level);
             for(tacticIndex = 0; tacticIndex < NUM_TACTICS; tacticIndex++)
             {
                 if ((tacticsBuffer1[tacticIndex] == 0) && (tacticsBuffer2[tacticIndex] == 1)) {
@@ -344,7 +344,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
 
             if(newLevel != info->level)
             {
-                GetPokemonLevelData(&leveldata, info->id, newLevel);
+                GetLvlUpEntry(&leveldata, info->id, newLevel);
                 info->exp = leveldata.expRequired;
                 flag |= sub_80725A4(pokemon, target);
             }
@@ -360,7 +360,7 @@ void LevelDownTarget(Entity *pokemon, Entity *target, u32 level)
     }
 }
 
-bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
+static bool8 LevelUp(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
 {
     EntityInfo *info;
     LevelData leveldata;
@@ -380,7 +380,7 @@ bool8 sub_80723D0(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
 
     for(level = info->level + 1; level <= 100; level++)
     {
-        GetPokemonLevelData(&leveldata, id, level);
+        GetLvlUpEntry(&leveldata, id, level);
         if(leveldata.expRequired > exp) break;
 
         info->level = level;
@@ -476,7 +476,7 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
 
     for(level = 1; level < info->level; level++)
     {
-        GetPokemonLevelData(&leveldata, id, level);
+        GetLvlUpEntry(&leveldata, id, level);
         if(leveldata.expRequired >= exp) break;
     }
 
@@ -486,7 +486,7 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
     {
         if(level < 100)
         {
-            GetPokemonLevelData(&leveldata, id, level + 1);
+            GetLvlUpEntry(&leveldata, id, level + 1);
             info->exp = leveldata.expRequired - 1;
         }
         else
@@ -496,7 +496,7 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
 
         if(oldLevel > level)
         {
-            GetPokemonLevelData(&leveldata, id, level + 1);
+            GetLvlUpEntry(&leveldata, id, level + 1);
 
             info->level = level;
 
@@ -789,7 +789,7 @@ void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
   CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[1],id_s32);
   file = GetSpriteData(id_s32);
   fu(entityInfo, id_s32);
-  GetPokemonLevelData(&levelData,id_s32,entityInfo->level);
+  GetLvlUpEntry(&levelData,id_s32,entityInfo->level);
   entityInfo->exp = levelData.expRequired;
   target->axObj.spriteFile = file;
   ResetMonEntityData(entityInfo,0);

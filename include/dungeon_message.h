@@ -35,7 +35,7 @@ void LogMessageByIdWithPopupCheckUser(Entity *pokemon, const u8 *str);
 void TryDisplayDungeonLoggableMessage2(Entity *pokemon, const u8 *str);
 void TryDisplayDungeonLoggableMessage3(Entity *attacker, Entity *target, const u8 *str);
 void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const u8 *str);
-void TryDisplayDungeonLoggableMessage5(Entity *pokemon, DungeonPos *pos, const u8 *str);
+void LogMessageByIdWithPopupCheckUserUnknown(Entity *pokemon, DungeonPos *pos, const u8 *str);
 
 // As opposed to the above - these always display the string and save it in the message log. False/True stand for an unknown argument. Not sure what the practical difference is between these.
 void DisplayDungeonLoggableMessage(Entity *pokemon, const u8 *str);
@@ -51,7 +51,7 @@ bool32 DisplayDungeonYesNoMessage(struct MonDialogueSpriteInfo *monSpriteInfo, c
 s32 DisplayDungeonMenuMessage(struct MonDialogueSpriteInfo *monSpriteInfo, const u8 *str, const MenuItem *menuItems, u16 unkArg);
 void sub_8052D44(s16 *ids, Entity *leader, Entity *partner);
 void TryDisplayGeneralTutorialMessage(void);
-void TryDisplayItemPickupTutorialMessage(u8 itemId);
+void DisplayItemTip(u8 itemId);
 void DisplayYouReachedDestFloorStr(void);
 void sub_8052FB8(const u8 *str);
 const u8 *GetCurrentDungeonName(void);

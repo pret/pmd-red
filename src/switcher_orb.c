@@ -54,8 +54,8 @@ void HandleSwitcherOrb(Entity *pokemon,Entity *target)
     nullsub_93(&targetPos);
     sub_80694C0(pokemon,targetPos.x,targetPos.y,1);
     sub_80694C0(target,pokemonPos.x,pokemonPos.y,1);
-    sub_804535C(pokemon,NULL);
-    sub_804535C(target,NULL);
+    UpdateEntityPixelPos(pokemon,NULL);
+    UpdateEntityPixelPos(target,NULL);
 
     if (EntityIsValid(pokemon)) {
       if (GetEntInfo(pokemon)->isTeamLeader) {

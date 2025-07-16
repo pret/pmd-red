@@ -109,7 +109,7 @@ s32 GetUnitSum_808D544(s32 *);
 s32 sub_808D580(s32 *);
 bool8 ComparePokemonNames(s16, s16);
 void PrintPokeNameToBuffer(u8 *buffer, Pokemon *pokemon);
-void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level);
+void GetLvlUpEntry(LevelData* a1, s32 _id, s32 level);
 const u8* DecompressMoveID(const u8* a1, u16* moveID);
 bool8 sub_808DA44(s32, u32);
 void ConvertStoryMonToPokemon(Pokemon *dst, const struct StoryMonData *src);

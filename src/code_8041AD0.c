@@ -52,7 +52,6 @@ extern void sub_80429A0(Entity *);
 void sub_8042B34(s32 a0, s32 a1, s32 a2);
 extern bool8 sub_8042CC0(void);
 extern void sub_8042D7C(void);
-extern bool8 sub_8045888(Entity *);
 extern void sub_800F15C(s32);
 extern void sub_800EF40(u8 r0, u8 r1);
 extern s32 sub_800E6D8(s32);
@@ -1220,7 +1219,7 @@ s32 sub_8042520(Entity *a0)
     unkStruct_80416E0 local_58;
     PixelPos local_2c;
 
-    if (sub_8045888(a0)) {
+    if (ShouldDisplayEntity(a0)) {
         dir = GetEntInfo(a0)->action.direction;
         pos.x = a0->pixelPos.x / 0x100;
         pos.y = a0->pixelPos.y / 0x100;
@@ -1327,7 +1326,7 @@ bool8 sub_8042768(Entity* pokemon)
         else
             return FALSE;
     }
-    return sub_8045888(pokemon);
+    return ShouldDisplayEntity(pokemon);
 }
 
 void sub_80427AC(void)

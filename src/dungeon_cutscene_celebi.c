@@ -49,7 +49,7 @@ extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
+extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_807EAA0(u32, u32);
@@ -100,7 +100,7 @@ void CelebiJoinDialogue(void)
     celebiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_CELEBI);
     if ((HasRecruitedMon(MONSTER_CELEBI)) || (!sub_806FD18(celebiEntity)))
     {
-        sub_8068FE0(celebiEntity,0x21c,0);
+        HandleFaint(celebiEntity,0x21c,0);
         SpriteLookAroundEffect(leaderEntity);
         sub_803E708(10,0x46);
         // .........

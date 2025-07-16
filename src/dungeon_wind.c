@@ -15,11 +15,11 @@
 #include "move_util.h"
 #include "moves.h"
 #include "structs/str_dungeon.h"
+#include "dungeon_engine.h"
 
-extern u8 UseAttack(Entity *);
+extern u8 DisplayActions(Entity *);
 extern void sub_805E804(void);
 void sub_806A2BC(Entity *pokemon, u8 param_2);
-extern u8 sub_8044B28(void);
 extern void nullsub_93(DungeonPos *);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_807EC28(bool8);
@@ -43,8 +43,8 @@ void sub_807E378(void)
       if (gDungeon->unk644.windTurns < 0xfa) {
         sub_805E804();
         sub_806A2BC(leader,1);
-        UseAttack(leader);
-        if (sub_8044B28() == 0) {
+        DisplayActions(leader);
+        if (IsFloorOver() == 0) {
           LogMessageByIdWithPopupCheckUser(leader,gUnknown_80F9C4C);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],0);
           gDungeon->unk644.unk36 = 1;
@@ -55,8 +55,8 @@ void sub_807E378(void)
       if (gDungeon->unk644.windTurns < 0x96) {
         sub_805E804();
         sub_806A2BC(leader,1);
-        UseAttack(leader);
-        if (sub_8044B28() == 0) {
+        DisplayActions(leader);
+        if (IsFloorOver() == 0) {
           LogMessageByIdWithPopupCheckUser(leader,gUnknown_80F9C70);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],1);
           gDungeon->unk644.unk36 = 2;
@@ -67,8 +67,8 @@ void sub_807E378(void)
       if (gDungeon->unk644.windTurns < 0x32) {
         sub_805E804();
         sub_806A2BC(leader,1);
-        UseAttack(leader);
-        if (sub_8044B28() == 0) {
+        DisplayActions(leader);
+        if (IsFloorOver() == 0) {
           LogMessageByIdWithPopupCheckUser(leader,gUnknown_80F9C8C);
           sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],2);
           gDungeon->unk644.unk36 = 3;
@@ -78,12 +78,12 @@ void sub_807E378(void)
     else if (gDungeon->unk644.windTurns < 1) {
       sub_805E804();
       sub_806A2BC(leader,1);
-      UseAttack(leader);
-      if (sub_8044B28() == 0) {
+      DisplayActions(leader);
+      if (IsFloorOver() == 0) {
         LogMessageByIdWithPopupCheckUser(leader,gUnknown_80F9CBC);
         sub_80426C8(gUnknown_80F5FAC[gDungeon->tileset],3);
         gDungeon->unk644.unk36 = 4;
-        sub_8068FE0(leader,0x21e,leader);
+        HandleFaint(leader,0x21e,leader);
       }
     }
   }

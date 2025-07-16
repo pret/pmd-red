@@ -475,7 +475,7 @@ static void PrintOnDungeonItemsMenu(s32 a0, Entity *a1, bool8 showWhichWindow, b
         break;
     case 2: {
             const Tile *tile = GetTile(a1->pos.x, a1->pos.y);
-            Item *item = GetItemData(tile->object);
+            Item *item = GetItemInfo(tile->object);
             PrintFormattedStringOnWindow(x, 0, gFieldItemMenuGroundTextPtr, 0, 0);
             if (item->flags & ITEM_FLAG_EXISTS) {
                 gDungeonMenu.currPageEntries++;

@@ -48,7 +48,7 @@
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
 
-extern bool8 IsLevelResetTo1(u8 dungeon);
+extern bool8 IsLevelResetDungeon(u8 dungeon);
 extern void sub_806C264(s32 teamIndex, EntityInfo *entInfo);
 extern bool8 sub_806A58C(s16 r0);
 extern void sub_8084E00(Entity *entity, u8 param_2, u8 param_3);
@@ -61,7 +61,6 @@ extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
 extern void EndAbilityImmuneStatus(Entity *, Entity *);
 extern void sub_8041BBC(Entity *r0);
-extern bool8 sub_8045888(Entity *);
 extern void sub_806A2BC(Entity *, u8);
 extern void sub_804178C(u32);
 extern void sub_803F508(Entity *);
@@ -234,7 +233,7 @@ void SetDungeonMonsFromTeam(void)
         Pokemon *pokeStruct = &gRecruitedPokemonRef->pokemon[recruitedId];
         if (PokemonExists(pokeStruct) && PokemonFlag2(pokeStruct)) {
             RecruitedPokemonToDungeonMon(&gRecruitedPokemonRef->dungeonTeam[index],recruitedId);
-            if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
+            if (IsLevelResetDungeon(gDungeon->unk644.dungeonLocation.id)) {
                 struct DungeonLocation dungeonLoc = {.id = DUNGEON_TINY_WOODS, .floor = 1};
                 CreateLevel1Pokemon(&lvl1Mon,pokeStruct->speciesNum,0,0,&dungeonLoc,0);
                 gRecruitedPokemonRef->dungeonTeam[index].level = lvl1Mon.level;
@@ -363,7 +362,7 @@ void sub_8068BDC(bool8 a0)
             }
 
             if (sub_806A58C(monPtr->recruitedPokemonId)) {
-                if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
+                if (IsLevelResetDungeon(gDungeon->unk644.dungeonLocation.id)) {
                     sub_808DFDC(monPtr->recruitedPokemonId, monPtr);
                 }
                 else {
@@ -488,7 +487,7 @@ static inline void ClearMonItemId(Pokemon *mon)
     mon->heldItem.id = ITEM_NOTHING;
 }
 
-void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
+void HandleFaint(Entity *entity, s32 param_2, Entity *param_3)
 {
     u16 joinId;
     Entity EStack_a4;
@@ -504,7 +503,7 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
         tile->monster = NULL;
     }
 
-    ShowDungeonMapAtPos(entity->pos.x,entity->pos.y);
+    DrawMinimapTile(entity->pos.x,entity->pos.y);
 
     for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
         Entity *mon = gDungeon->activePokemon[i];
@@ -587,7 +586,7 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
                 DungeonMon *partnerStruct = &gRecruitedPokemonRef->dungeonTeam[partnerInfo->teamIndex];
                 sub_806C264(partnerInfo->teamIndex,partnerInfo);
                 if (sub_806A58C(partnerStruct->recruitedPokemonId) != 0) {
-                    if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id) == 0) {
+                    if (IsLevelResetDungeon(gDungeon->unk644.dungeonLocation.id) == 0) {
                         DungeonMonToRecruitedPokemon(partnerStruct->recruitedPokemonId, partnerStruct);
                     }
                     if (!IsMakuhitaTrainingMaze()) {
@@ -625,7 +624,7 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
             gDungeon->deoxysDefeat = 1;
             DisplayDungeonLoggableMessageTrue(entity,gUnknown_80FA580);
             sub_803E178();
-            sub_8049ED4();
+            UpdateTrapsVisibility();
         }
     }
 
@@ -635,7 +634,7 @@ void sub_8068FE0(Entity *entity, s32 param_2, Entity *param_3)
         if (sub_806A58C(mon2Ptr->recruitedPokemonId) != 0) {
             bool8 uVar10;
 
-            if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id) == 0) {
+            if (IsLevelResetDungeon(gDungeon->unk644.dungeonLocation.id) == 0) {
                 DungeonMonToRecruitedPokemon(mon2Ptr->recruitedPokemonId, mon2Ptr);
             }
             if (!IsMakuhitaTrainingMaze()) {
@@ -685,7 +684,7 @@ void sub_80694C0(Entity *target,s32 x,s32 y,u8 param_4)
             if (tile2->monster == target) {
                 tile2->monster = NULL;
             }
-            ShowDungeonMapAtPos((target->pos).x,(target->pos).y);
+            DrawMinimapTile((target->pos).x,(target->pos).y);
         }
         (target->prevPos).x = (target->pos).x;
         (target->prevPos).y = (target->pos).y;
@@ -701,7 +700,7 @@ void sub_80694C0(Entity *target,s32 x,s32 y,u8 param_4)
             gUnknown_202EE0C.y = y;
             gDungeon->unk1 = 0;
         }
-        ShowDungeonMapAtPos(x,y);
+        DrawMinimapTile(x,y);
 
         switch(param_4)
         {
@@ -721,7 +720,7 @@ void sub_80694C0(Entity *target,s32 x,s32 y,u8 param_4)
                 break;
         }
         target->room = tile->room;
-        sub_806CF98(target);
+        DetermineMonsterShadow(target);
     }
     return;
 }
@@ -1058,7 +1057,7 @@ void sub_8069D4C(struct unkStruct_8069D4C *r0, Entity *target)
 
     r0->level = info->level;
 
-    GetPokemonLevelData(&leveldata, info->id, info->level);
+    GetLvlUpEntry(&leveldata, info->id, info->level);
     r0->exp = leveldata.expRequired;
     r0->att[0] = info->atk[0];
     r0->att[1] = info->atk[1];
@@ -1262,7 +1261,7 @@ void sub_806A1E8(Entity *pokemon)
     if (gGameOptionsRef->FarOffPals == '\0') {
       bVar3 = FALSE;
     }
-    if (bVar3 && (!sub_8045888(pokemon))) {
+    if (bVar3 && (!ShouldDisplayEntity(pokemon))) {
       sub_806A2BC(pokemon,1);
     }
   }
@@ -1279,7 +1278,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
         entityInfo = GetEntInfo(pokemon);
         isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
-    if (isNotTeamMember && (!sub_8045888(pokemon))) {
+    if (isNotTeamMember && (!ShouldDisplayEntity(pokemon))) {
         sub_806A2BC(pokemon,1);
         return;
     }
@@ -1287,7 +1286,7 @@ void sub_806A240(Entity *pokemon, Entity *target)
         entityInfo = GetEntInfo(target);
         isNotTeamMember = (!entityInfo->isNotTeamMember);
     }
-    if (isNotTeamMember && (!sub_8045888(target))) {
+    if (isNotTeamMember && (!ShouldDisplayEntity(target))) {
         sub_806A2BC(target,1);
     }
   }
@@ -1312,7 +1311,7 @@ void sub_806A2BC(Entity *pokemon, u8 param_2)
 void nullsub_95(void)
 {}
 
-void sub_806A338(void)
+void ReevaluateSnatchMonster(void)
 {
     s32 i;
 

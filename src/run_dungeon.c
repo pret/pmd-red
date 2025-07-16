@@ -76,7 +76,7 @@ extern void sub_80848F0(void);
 extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
 extern void DisplayPreFightDialogue(void);
-extern void sub_8071DA4(Entity *);
+extern void EnemyEvolution(Entity *);
 extern void sub_803E748(void);
 extern void sub_8083D68(void);
 extern void sub_803E7C8(void);
@@ -88,7 +88,6 @@ extern void nullsub_16(void);
 extern void sub_80521D0(void);
 extern void sub_803F27C(u8);
 extern void sub_807E7FC(u8);
-extern bool8 IsLevelResetTo1(u8 dungeon);
 extern void sub_8068A84(Pokemon *pokemon);
 extern void sub_807EAA0(u32, u32);
 extern void SetFloorItemMonsterSpawns(void);
@@ -101,20 +100,18 @@ extern void sub_806B678(void);
 extern void sub_806C3C0(void);
 extern void sub_806B168(void);
 extern void sub_806B6C4(void);
-extern void sub_806A338(void);
+extern void ReevaluateSnatchMonster(void);
 extern void sub_8051E3C(void);
 extern void sub_807FA18(void);
 extern void sub_806A974(void);
-extern void sub_806CF60(void);
+extern void DetermineAllMonsterShadow(void);
 extern void sub_8068F80(void);
 extern void sub_8042E98(void);
-extern bool8 sub_8044B28(void);
-extern bool8 sub_8043ED0(bool8);
+extern bool8 TryForcedLoss(bool8);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
 extern void sub_803F4A0(Entity *a0);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
-extern bool8 IsKeepMoney(u8 dungeon);
 extern void sub_8042B0C(Entity *);
 
 extern u8 gUnknown_202F32C;
@@ -133,6 +130,9 @@ extern OpenedFile *gDungeonNameBannerPalette;
 static const s16 sDeoxysForms[4] = {MONSTER_DEOXYS_NORMAL, MONSTER_DEOXYS_ATTACK, MONSTER_DEOXYS_DEFENSE, MONSTER_DEOXYS_SPEED};
 
 static void sub_8043CD8(void);
+
+// Actual function in Sky. Macro instead of static inline for matching
+#define GetForcedLossReason()(gDungeon->unk10)
 
 // This functions is the main 'loop' when the player is in a Dungeon. It runs from the moment the player enters a dungeon, until they leave(by completing or by fainting).
 // arm9.bin::0206A848
@@ -249,7 +249,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
 
     if (r10) {
         setupPtr->info.mon.heldItem.id = 0;
-        if (IsLevelResetTo1(gDungeon->unk644.dungeonLocation.id)) {
+        if (IsLevelResetDungeon(gDungeon->unk644.dungeonLocation.id)) {
             sub_808D0D8(&setupPtr->info.mon);
         }
         sub_8068A84(&setupPtr->info.mon);
@@ -400,17 +400,17 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             sub_804AAAC();
         }
         else {
-            sub_806A338();
+            ReevaluateSnatchMonster();
         }
         sub_8068F80();
         sub_8049884();
-        sub_8049ED4();
+        UpdateTrapsVisibility();
 
         if (!r6) {
             sub_806A914(TRUE, FALSE, FALSE);
         }
         else {
-            sub_806CF60();
+            DetermineAllMonsterShadow();
             sub_806A974();
         }
         sub_8041888(1);
@@ -494,16 +494,16 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
             do {
                 RunFractionalTurn(param);
                 param = FALSE;
-            } while (!sub_8044B28());
+            } while (!IsFloorOver());
         }
 
         leader = GetLeader();
         if (EntityIsValid(leader)) {
-            sub_8071DA4(leader);
+            EnemyEvolution(leader);
         }
 
         if (gDungeon->unk644.unk10 != 1) {
-            if (sub_8043ED0(TRUE)) {
+            if (TryForcedLoss(TRUE)) {
                 gDungeon->unk644.unk10 = 1;
             }
         }
@@ -542,7 +542,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         SetBGPaletteBufferColorRGB(253, &color, gDungeonBrightness, NULL);
         sub_8040094(1);
         gDungeon->unk181e8.unk18218 = 1;
-        if ((gDungeon->unk10 == 2 || gDungeon->unk10 == 3) && gDungeon->unk6 != 0) {
+        if ((GetForcedLossReason() == 2 || GetForcedLossReason() == 3) && gDungeon->unk6 != 0) {
             leader = GetLeader();
             DisplayDungeonMessage(0, gPtrClientFaintedMessage, 1);
             gDungeon->unk6 = 0;
@@ -757,7 +757,7 @@ void sub_8043D60(void)
                 unk = FALSE;
 
             if (unk) {
-                sub_8068FE0(mon, 0x207, mon);
+                HandleFaint(mon, 0x207, mon);
             }
         }
     }
@@ -790,7 +790,7 @@ void sub_8043D60(void)
         for (x = 0; x < 56; x++) {
             Entity *object = GetTileMut(x, y)->object;
             if (EntityIsValid(object) && GetEntityType(object) == ENTITY_TRAP) {
-                Trap *trapData = GetTrapData(object);
+                Trap *trapData = GetTrapInfo(object);
                 if (trapData->id == 27) {
                     trapData->id = TRAP_PITFALL_TRAP;
                 }
@@ -801,14 +801,14 @@ void sub_8043D60(void)
     ClearAllItemsWithFlag(ITEM_FLAG_IN_SHOP);
 }
 
-bool8 sub_8043ED0(bool8 a0)
+bool8 TryForcedLoss(bool8 a0)
 {
     bool8 ret = FALSE;
 
-    if (!a0 && sub_8044B28())
+    if (!a0 && IsFloorOver())
         return FALSE;
 
-    if (gDungeon->unk10 == 1) {
+    if (GetForcedLossReason() == 1) {
         Entity *leader = GetLeader();
         if (EntityIsValid(leader)) {
             if (!a0) {
@@ -816,11 +816,11 @@ bool8 sub_8043ED0(bool8 a0)
                 DisplayDungeonMessage(0, gUnknown_80F89B4, 1);
             }
             sub_8042B0C(leader);
-            sub_8068FE0(leader, 0x21F, leader);
+            HandleFaint(leader, 0x21F, leader);
             ret = TRUE;
         }
     }
-    else if (gDungeon->unk10 == 2) {
+    else if (GetForcedLossReason() == 2) {
         Entity *leader = GetLeader();
         if (EntityIsValid(leader)) {
             if (!a0) {
@@ -828,11 +828,11 @@ bool8 sub_8043ED0(bool8 a0)
                 DisplayDungeonMessage(0, gUnknown_80F89D4, 1);
             }
             sub_8042B0C(leader);
-            sub_8068FE0(leader, 0x222, leader);
+            HandleFaint(leader, 0x222, leader);
             ret = TRUE;
         }
     }
-    else if (gDungeon->unk10 == 3) {
+    else if (GetForcedLossReason() == 3) {
         Entity *leader = GetLeader();
         if (EntityIsValid(leader)) {
             if (!a0) {
@@ -840,7 +840,7 @@ bool8 sub_8043ED0(bool8 a0)
                 DisplayDungeonMessage(0, gUnknown_80F89D8, 1);
             }
             sub_8042B0C(leader);
-            sub_8068FE0(leader, 0x222, leader);
+            HandleFaint(leader, 0x222, leader);
             ret = TRUE;
         }
     }
@@ -865,7 +865,7 @@ static void sub_8043FD0(void)
                 vs32 atk, spAtk, def, spDef;
                 #endif // NONMATCHING
 
-                GetPokemonLevelData(&levelData, monStruct->speciesNum, level);
+                GetLvlUpEntry(&levelData, monStruct->speciesNum, level);
                 monStruct->level = level;
                 monStruct->currExp = levelData.expRequired;
                 monStruct->pokeHP += levelData.gainHP;
@@ -928,7 +928,7 @@ void EnforceMaxItemsAndMoney(void)
         }
     }
 
-    if (!IsKeepMoney(gDungeon->unk644.dungeonLocation.id)) {
+    if (!IsMoneyAllowed(gDungeon->unk644.dungeonLocation.id)) {
         gTeamInventoryRef->teamMoney = 0;
     }
 }

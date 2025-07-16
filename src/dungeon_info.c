@@ -2414,7 +2414,7 @@ u8 HasCheckpoint(u8 dungeon)
     return gDungeons[dungeon].hasCheckpoint;
 }
 
-bool8 IsLevelResetTo1(u8 dungeon)
+bool8 IsLevelResetDungeon(u8 dungeon)
 {
     return gDungeons[dungeon].levelResetTo1;
 }
@@ -2424,7 +2424,7 @@ u32 GetMaxItemsAllowed(u8 dungeon)
     return gDungeons[dungeon].maxItemsAllowed;
 }
 
-bool8 IsKeepMoney(u8 dungeon)
+bool8 IsMoneyAllowed(u8 dungeon)
 {
     return gDungeons[dungeon].keepMoney;
 }

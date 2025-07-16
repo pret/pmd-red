@@ -545,7 +545,7 @@ void SendEyesightEndMessage(Entity * pokemon,Entity * target)
   EntityUpdateStatusSprites(target);
   if (entityInfo->isTeamLeader) {
     DungeonRunFrameActions(0x31);
-    sub_8049ED4();
+    UpdateTrapsVisibility();
     ShowWholeRevealedDungeonMap();
   }
 }

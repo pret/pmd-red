@@ -269,7 +269,7 @@ void HandleMissionReward(void)
         {
             if (gUnknown_203B310->unk10->moneyReward == 0) {
                 item.id = itemID;
-                if (IsThrowableItem(item.id)) {
+                if (IsThrownItem(item.id)) {
                     item.quantity = gUnknown_203B310->unk10->quantity;
                 }
                 else {

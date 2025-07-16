@@ -94,7 +94,6 @@ extern void sub_8041D9C(Entity *);
 extern void sub_8041DB0(Entity *pokemon);
 extern void sub_8041CA8(Entity *);
 extern void sub_8041C94(Entity *);
-extern bool8 sub_8045888(Entity *r0);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8041BF8(Entity *);
 extern void sub_8041BE8(Entity *);
@@ -217,13 +216,13 @@ void HealTargetHP(Entity *pokemon, Entity *target, s32 param_3, s32 param_4, boo
     {
         r8 = 0;
         if (maxHPStat != 0) {
-            if (sub_8045888(target)) {
+            if (ShouldDisplayEntity(target)) {
                 r8 = maxHPStat;
             }
             TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB240); // m0$'s max HP rose by {VALUE_1}
         }
         if (HP != 0) {
-            if (sub_8045888(target)) {
+            if (ShouldDisplayEntity(target)) {
                 r8 = HP;
             }
             if (param_3 != 0) {
@@ -947,7 +946,7 @@ void TransformStatusTarget(Entity * pokemon, Entity * target)
                 target->axObj.spriteFile = sprite;
                 entityInfo->invisibleClassStatus.status = STATUS_TRANSFORMED;
                 entityInfo->invisibleClassStatus.turns = CalculateStatusTurns(target, gTransformedTurnRange, TRUE) + 1;
-                sub_806CF98(target);
+                DetermineMonsterShadow(target);
                 nullsub_87(target);
                 sub_806CCB4(target, sub_806CEBC(target));
                 CopyCyanMonsterNametoBuffer(gFormatBuffer_Monsters[1], entityInfo->apparentID);
@@ -1059,7 +1058,7 @@ void BlindTarget(Entity *pokemon, Entity *target)
         sub_8041E0C(target);
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB7F4);
         DungeonRunFrameActions(0x31);
-        sub_8049ED4();
+        UpdateTrapsVisibility();
         ShowWholeRevealedDungeonMap();
     }
     else
@@ -1086,7 +1085,7 @@ void CrossEyeVisionTarget(Entity *pokemon, Entity *target)
             entityInfo->blinkerClassStatus.status = STATUS_CROSS_EYED;
             entityInfo->blinkerClassStatus.turns = CalculateStatusTurns(target,gCrossEyedTurnRange, TRUE) + 1;
             sub_803F580(0x1);
-            sub_8049ED4();
+            UpdateTrapsVisibility();
             ShowWholeRevealedDungeonMap();
         }
         else
@@ -1112,7 +1111,7 @@ void RestoreVisionTarget(Entity *pokemon, Entity *target)
         sub_8041E3C(target);
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FB880);
         DungeonRunFrameActions(0x31);
-        sub_8049ED4();
+        UpdateTrapsVisibility();
         ShowWholeRevealedDungeonMap();
     }
     else

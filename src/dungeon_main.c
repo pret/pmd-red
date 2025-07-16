@@ -64,7 +64,7 @@ extern Item *sub_8044D90(Entity *, s32, u32);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A6E8(Entity *);
-extern void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
+extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 bool8 sub_807EF48(void);
 void sub_806A2BC(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
@@ -79,7 +79,7 @@ static void TryCreateModeArrows(Entity *leader);
 bool8 sub_8094C48(void);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
-bool8 sub_8044B28(void);
+bool8 IsFloorOver(void);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
@@ -558,7 +558,7 @@ void DungeonHandlePlayerInput(void)
 
         if (leaderInfo->action.action == 0x2D || leaderInfo->action.action == 0x13) {
             HandleTalkFieldAction(leader);
-            if (sub_8044B28())
+            if (IsFloorOver())
                 break;
             sub_8044C50(ACTION_NOTHING);
         }
@@ -581,7 +581,7 @@ void DungeonHandlePlayerInput(void)
             sInRotateMode = FALSE;
             unkPtr->unk1821A = 0;
             sub_804AA60();
-            if (sub_8044B28())
+            if (IsFloorOver())
                 break;
             if (leaderInfo->action.action != 0) {
                 if (leaderInfo->action.action == 0x2B) {
@@ -993,14 +993,14 @@ static bool8 sub_805EC4C(Entity *a0, u8 a1)
     return TRUE;
 }
 
-void sub_805EE30(void)
+void CheckLeaderTile(void)
 {
     Entity *tileObject;
     Tile *tile;
     Entity *leader = GetLeader();
     if (leader == NULL)
         return;
-    if (sub_8044B28())
+    if (IsFloorOver())
         return;
 
     tile = GetTileAtEntitySafe(leader);
@@ -1015,12 +1015,12 @@ void sub_805EE30(void)
     switch (GetEntityType(tileObject))
     {
         case ENTITY_TRAP: {
-            Trap *trap = GetTrapData(tileObject);
+            Trap *trap = GetTrapInfo(tileObject);
             bool32 r8 = FALSE;
             bool32 r7 = FALSE;
             if (IQSkillIsEnabled(leader, IQ_TRAP_SEER) && !tileObject->isVisible) {
                 tileObject->isVisible = TRUE;
-                sub_8049ED4();
+                UpdateTrapsVisibility();
                 r7 = TRUE;
             }
             if (trap->unk1 != 0) {
@@ -1032,14 +1032,14 @@ void sub_805EE30(void)
                     break;
             }
             if (!r7) {
-                HandleTrap(leader, &leader->pos, 0, 1);
+                TryTriggerTrap(leader, &leader->pos, 0, 1);
             }
         }
         break;
         case ENTITY_ITEM: {
-            Item *item = GetItemData(tileObject);
+            Item *item = GetItemInfo(tileObject);
             if (!(item->flags & ITEM_FLAG_IN_SHOP)) {
-                PickUpItemFromPos(&leader->pos, 1);
+                TryLeaderItemPickUp(&leader->pos, 1);
             }
             else {
                 gDungeon->unk5C0 = 4;

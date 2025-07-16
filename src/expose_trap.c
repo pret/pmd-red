@@ -63,7 +63,7 @@ void sub_807D3CC(Entity *param_1)
     if (flag) {
         LogMessageByIdWithPopupCheckUser(param_1,gUnknown_80FD2F8); // All traps were exposed
         ShowWholeRevealedDungeonMap();
-        sub_8049ED4();
+        UpdateTrapsVisibility();
     }
     else {
         LogMessageByIdWithPopupCheckUser(param_1,gUnknown_80FD320); // There appears to be no hidden traps.

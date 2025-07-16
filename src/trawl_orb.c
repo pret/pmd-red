@@ -118,8 +118,8 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
 
         for (i = 0; i < itemsCount; i++) {
             if (EntityIsValid(&itemEntities[i])) {
-                RemoveItemFromDungeonAt(&itemEntities[i].pos, 1);
-                ShowDungeonMapAtPos(itemEntities[i].pos.x, itemEntities[i].pos.y);
+                RemoveGroundItem(&itemEntities[i].pos, 1);
+                DrawMinimapTile(itemEntities[i].pos.x, itemEntities[i].pos.y);
                 itemVelocity[i].x = (((targetTilePos[i].x * 24 + 4) * 256) - itemEntities[i].pixelPos.x) / 60;
                 itemVelocity[i].y = (((targetTilePos[i].y * 24 + 4) * 256) - itemEntities[i].pixelPos.y) / 60;
             }
@@ -149,8 +149,8 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
 
         for (i = 0; i < itemsCount; i++) {
             if (targetTilePos[i].x >= 0) {
-                AddItemToDungeonAt(&targetTilePos[i], GetItemData(&itemEntities[i]), 1);
-                ShowDungeonMapAtPos(targetTilePos[i].x, targetTilePos[i].y);
+                SpawnItem(&targetTilePos[i], GetItemInfo(&itemEntities[i]), 1);
+                DrawMinimapTile(targetTilePos[i].x, targetTilePos[i].y);
                 hasTrawled = TRUE;
             }
         }

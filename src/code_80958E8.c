@@ -144,7 +144,7 @@ bool8 ValidateWonderMail(WonderMail *data)
 
         if(IsInvalidItemReward(data->targetItem))
             return FALSE;
-        if(IsThrowableItem(data->targetItem))
+        if(IsThrownItem(data->targetItem))
             return FALSE;
         if(!IsNotMoneyOrUsedTMItem(data->targetItem))
             return FALSE;
@@ -417,7 +417,7 @@ u8 sub_8095F28(u8 param_1)
   {
     if ((param_1 == 0x63) ||
        (xxx_bit_lut_lookup_8091E50(param_1, itemID) != 0)) {
-      if ((!IsThrowableItem(itemID)) && (IsNotMoneyOrUsedTMItem(itemID))) {
+      if ((!IsThrownItem(itemID)) && (IsNotMoneyOrUsedTMItem(itemID))) {
         itemStack[counter] = itemID;
         counter++;
       }

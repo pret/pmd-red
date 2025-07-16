@@ -30,9 +30,8 @@ extern u32 gDungeonFramesCounter;
 
 bool8 ExposeTrap(s32 x, s32 y);
 void ShowWholeRevealedDungeonMap();
-u8 sub_8045888(Entity *);
 void sub_807EC28(u32);
-u8 sub_8044B28(void);
+u8 IsFloorOver(void);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);
@@ -72,7 +71,7 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC584); // $m0 warped!
     TrySendImmobilizeSleepEndMsg(target,target);
     sub_80421AC(pokemon,target);
-    if (sub_8045888(target)) {
+    if (ShouldDisplayEntity(target)) {
         direction = (info->action).direction;
         target->unk1C.raw += + 0x800;
         while ( target->unk1C.raw < 0xa000) {
@@ -115,10 +114,10 @@ void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
     }
 
     sub_80694C0(target,local_2c.x,local_2c.y,1);
-    sub_804535C(target,0);
+    UpdateEntityPixelPos(target,0);
     sub_807BB78(target);
     sub_803F580(1);
-    if (sub_8045888(target)) {
+    if (ShouldDisplayEntity(target)) {
         direction = (info->action).direction;
         target->unk1C.raw = 0x9c00;
         do {

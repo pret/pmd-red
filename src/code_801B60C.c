@@ -41,7 +41,7 @@ bool8 sub_801B60C(u32 r0, u8 id, u8 quantity)
     sUnknown_203B234->unk0 = r0;
     sUnknown_203B234->unk10.id = id;
 
-    if (IsThrowableItem(sUnknown_203B234->unk10.id)) {
+    if (IsThrownItem(sUnknown_203B234->unk10.id)) {
         sUnknown_203B234->unk10.quantity = quantity;
         sUnknown_203B234->unkC = quantity;
     }

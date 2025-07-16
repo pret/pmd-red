@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_engine.h"
 #include "run_dungeon.h"
 #include "dungeon_vram.h"
 #include "constants/dungeon.h"
@@ -13,16 +14,15 @@
 #include "dungeon_logic.h"
 #include "menu_input.h"
 
-extern bool8 sub_8044B28(void);
 extern void TrySpawnMonsterAndActivatePlusMinus(void);
 extern void sub_807E378(void);
 extern void sub_8044574(void);
 extern void sub_8044820(void);
 extern void sub_8044AB4(void);
-extern u8 UseAttack(u32);
+extern u8 DisplayActions(u32);
 extern void TickStatusHeal(Entity *);
 extern void sub_8086AC0(void);
-extern void sub_8071DA4(Entity *);
+extern void EnemyEvolution(Entity *);
 extern void TriggerWeatherAbilities(void);
 extern void DungeonHandlePlayerInput(void);
 extern void sub_805F02C(void);
@@ -31,7 +31,7 @@ extern void sub_8071B48(void);
 extern void sub_807EAA0(u32, u32);
 
 static void sub_8044454(void);
-static bool8 xxx_dungeon_80442D0(bool8);
+static bool8 RunLeaderTurn(bool8);
 
 EWRAM_DATA DungeonPos gUnknown_202EE0C = {0};
 EWRAM_DATA MenuInputStruct gDungeonMenu = {0};
@@ -46,115 +46,98 @@ const s16 gSpeedTurns[NUM_SPEED_COUNTERS][25] = {
 
 void RunFractionalTurn(bool8 param_1)
 {
-  bool8 cVar2;
+    bool8 cVar2;
 
-  if (!sub_8044B28()) {
+    if (IsFloorOver()) return;
     TrySpawnMonsterAndActivatePlusMinus();
-    if (!sub_8044B28()) {
-      cVar2 = xxx_dungeon_80442D0(param_1);
-      if (!sub_8044B28()) {
-        if (cVar2 != 0) {
-          sub_807E378();
-          if (sub_8044B28()) {
-            return;
-          }
-        }
-        if (!sub_8044B28()) {
-          sub_8044574();
-          if (!sub_8044B28()) {
-            sub_8044820();
-            if (!sub_8044B28()) {
-              sub_8044AB4();
-              gDungeon->unk644.fractionalTurn++;
-              if (gDungeon->unk644.fractionalTurn == 24) {
-                 gDungeon->unk644.fractionalTurn = 0;
-              }
-            }
-          }
-        }
-      }
+    if (IsFloorOver()) return;
+    cVar2 = RunLeaderTurn(param_1);
+    if (IsFloorOver()) return;
+    if (cVar2) {
+        sub_807E378();
+        if (IsFloorOver()) return;
     }
-  }
+    if (IsFloorOver()) return;
+    sub_8044574();
+    if (IsFloorOver()) return;
+    sub_8044820();
+    if (IsFloorOver()) return;
+    sub_8044AB4();
+    if (++gDungeon->unk644.fractionalTurn == 24) {
+        gDungeon->unk644.fractionalTurn = 0;
+    }
 }
 
-static bool8 xxx_dungeon_80442D0(bool8 param_1)
+static bool8 RunLeaderTurn(bool8 param_1)
 {
-  EntityInfo *entityInfo;
-  Entity *entity;
-  s32 movSpeed;
+    EntityInfo *entityInfo;
+    s32 movSpeed;
+    Entity *entity = GetLeader();
+    if (entity == NULL)
+        return FALSE;
 
-  entity = GetLeader();
-  if (entity == NULL) {
-      return FALSE;
-  }
-  else
-  {
     TriggerWeatherAbilities();
     movSpeed = CalcSpeedStage(entity);
-    if (gSpeedTurns[movSpeed][gDungeon->unk644.fractionalTurn] == 0) {
+    if (gSpeedTurns[movSpeed][gDungeon->unk644.fractionalTurn] == 0)
         return FALSE;
-    }
-    else
-    {
-      if (GetEntInfo(entity)->attacking) {
-          return FALSE;
-      }
-      else
-      {
-        while (1) {
-          if(entity = GetLeader(), entity == NULL)
-          {
-              return FALSE;
-          }
-          else
-          {
-            if ((UseAttack(0) == 0) &&
-                ((gDungeon->unk644.unk28 != 0 ||
-                (gDungeon->unk644.unk2F != 0)))) {
-                DungeonRunFrameActions(0xc);
-            }
-            GetEntInfo(entity)->speedStageChanged = FALSE;
-            if (sub_8044B28()) return FALSE;
-            gDungeon->unkB8 = entity;
-            gDungeon->unkBC = 0;
-            if (param_1) {
-                param_1 = FALSE;
-            }
-            else {
-                TickStatusHeal(entity);
-            }
-            if (sub_8044B28()) return FALSE;
-            sub_8071DA4(entity);
-            gDungeon->noActionInProgress = TRUE;
-            DungeonHandlePlayerInput();
-            gDungeon->noActionInProgress = FALSE;
-            if (sub_8044B28()) break;
-            sub_8072CF4(entity);
-            sub_8086AC0();
-            sub_8043ED0(0);
-            if (sub_8044B28()) break;
-            entityInfo = GetEntInfo(entity);
-            if ((entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) {
-                GetEntInfo(entity)->flags = (entityInfo->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
-            }
-            if (sub_8044B28() ) break;
-            sub_8044454();
-            if (sub_8044B28()) break;
-            if (gDungeon->unkBC != 0) {
-                sub_805F02C();
-                gDungeon->unkBC = 0;
-                param_1 = TRUE;
-            }
-            else {
-                if (!GetEntInfo(entity)->speedStageChanged) break;
-                gDungeon->unk644.fractionalTurn = 0;
-            }
-          }
+    if (GetEntInfo(entity)->attacking)
+        return FALSE;
+
+    while (1) {
+        entity = GetLeader();
+        if (entity == NULL)
+            return FALSE;
+        if (DisplayActions(0) == 0 && (gDungeon->unk644.unk28 != 0 || (gDungeon->unk644.unk2F != 0))) {
+            DungeonRunFrameActions(0xc);
         }
-      }
+        GetEntInfo(entity)->speedStageChanged = FALSE;
+        if (IsFloorOver())
+            return FALSE;
+        gDungeon->unkB8 = entity;
+        gDungeon->unkBC = 0;
+        if (param_1) {
+            param_1 = FALSE;
+        }
+        else {
+            TickStatusHeal(entity);
+        }
+
+        if (IsFloorOver())
+            return FALSE;
+        EnemyEvolution(entity);
+        gDungeon->noActionInProgress = TRUE;
+        DungeonHandlePlayerInput();
+        gDungeon->noActionInProgress = FALSE;
+        if (IsFloorOver())
+            break;
+        sub_8072CF4(entity);
+        sub_8086AC0();
+        TryForcedLoss(0);
+        if (IsFloorOver())
+            break;
+        entityInfo = GetEntInfo(entity);
+        if (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY) {
+            GetEntInfo(entity)->flags = (entityInfo->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
+        }
+        if (IsFloorOver())
+            break;
+        sub_8044454();
+        if (IsFloorOver())
+            break;
+
+        if (gDungeon->unkBC != 0) {
+            sub_805F02C();
+            gDungeon->unkBC = 0;
+            param_1 = TRUE;
+        }
+        else {
+            if (!GetEntInfo(entity)->speedStageChanged)
+                break;
+            gDungeon->unk644.fractionalTurn = 0;
+        }
     }
-  }
-  return TRUE;
+
+    return TRUE;
 }
 
 static void sub_8044454(void)
@@ -170,14 +153,14 @@ static void sub_8044454(void)
     {
       entity = gDungeon->activePokemon[index];
       if ((EntityIsValid(entity)) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
-        if (sub_8044B28()) break;
+        if (IsFloorOver()) break;
         TickStatusHeal(entity);
         if (EntityIsValid(entity)) {
-          sub_8071DA4(entity);
+          EnemyEvolution(entity);
           RunMonsterAI(entity, 0);
           sub_8072CF4(entity);
           sub_8086AC0();
-          sub_8043ED0(0);
+          TryForcedLoss(0);
           entityInfo->flags = (entityInfo->flags & ~(MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY)) | MOVEMENT_FLAG_UNK_14;
         }
       }
@@ -198,11 +181,11 @@ void sub_80444F4(Entity *pokemon)
     {
       entity = gDungeon->activePokemon[index];
       if ((EntityIsValid(entity)) && (pokemon != entity) && (entityInfo = GetEntInfo(entity), (entityInfo->flags & MOVEMENT_FLAG_SWAPPING_PLACES_PETRIFIED_ALLY))) {
-        if (sub_8044B28()) break;
+        if (IsFloorOver()) break;
         RunMonsterAI(entity, 0);
         sub_8072CF4(entity);
         sub_8086AC0();
-        sub_8043ED0(0);
+        TryForcedLoss(0);
       }
     }
   }
@@ -228,7 +211,7 @@ void sub_8044574(void)
             if (!teamMonInfo->isTeamLeader) {
                 s32 spdStage;
 
-                if (sub_8044B28())
+                if (IsFloorOver())
                     break;
                 gDungeon->unkB8 = teamMon;
                 TriggerWeatherAbilities();
@@ -248,14 +231,14 @@ void sub_8044574(void)
                         if (EntityIsValid(teamMon)) {
                             s32 j;
 
-                            sub_8071DA4(teamMon);
+                            EnemyEvolution(teamMon);
                             for (j = 0; j < 3; j++) {
                                 RunMonsterAI(teamMon, 0);
-                                if (sub_8044B28() || !sub_8072CF4(teamMon))
+                                if (IsFloorOver() || !sub_8072CF4(teamMon))
                                     break;
                                 sub_8086AC0();
-                                sub_8043ED0(0);
-                                if (sub_8044B28())
+                                TryForcedLoss(0);
+                                if (IsFloorOver())
                                     break;
                             }
                         }
@@ -310,14 +293,14 @@ void sub_8044574(void)
                 RunMonsterAI(entity,1);
                 sub_8072CF4(entity);
                 sub_8086AC0();
-                sub_8043ED0(0);
+                TryForcedLoss(0);
                 EntityIsValid(entity); // Does nothing
             }
             ptr = ptr->next;
         }
     }
 
-    if (!sub_8044B28()) {
+    if (!IsFloorOver()) {
         for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
             Entity *teamMon = gDungeon->teamPokemon[i];
             if (EntityIsValid(teamMon)) {
@@ -325,7 +308,7 @@ void sub_8044574(void)
                 if (teamMonInfo->aiAllySkip) {
                     sub_8074094(teamMon);
                     if (EntityIsValid(teamMon)) {
-                        sub_8071DA4(teamMon);
+                        EnemyEvolution(teamMon);
                         teamMonInfo->aiAllySkip = FALSE;
                     }
                 }
@@ -346,7 +329,7 @@ void sub_8044820(void)
   for (index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++) {
     entity = gDungeon->wildPokemon[index];
     if (EntityIsValid(entity)) {
-      if (sub_8044B28()) break;
+      if (IsFloorOver()) break;
       entityInfo = GetEntInfo(entity);
       gDungeon->unkB8 = entity;
       TriggerWeatherAbilities();
@@ -364,13 +347,13 @@ void sub_8044820(void)
               entityInfo->recalculateFollow = FALSE;
               TickStatusHeal(entity);
               if (EntityIsValid(entity)) {
-                sub_8071DA4(entity);
+                EnemyEvolution(entity);
                 RunMonsterAI(entity, 0);
-                if (sub_8044B28()) break;
+                if (IsFloorOver()) break;
                 sub_8072CF4(entity);
                 sub_8086AC0();
-                sub_8043ED0(0);
-                if (sub_8044B28()) break;
+                TryForcedLoss(0);
+                if (IsFloorOver()) break;
               }
             }
           }
@@ -378,7 +361,7 @@ void sub_8044820(void)
       }
     }
   }
-  if (sub_8044B28() == 0) {
+  if (IsFloorOver() == 0) {
     for(index = 0; index < DUNGEON_MAX_WILD_POKEMON; index++)
     {
       entity2 = gDungeon->wildPokemon[index];
@@ -386,7 +369,7 @@ void sub_8044820(void)
       {
         sub_8074094(entity2);
         if (EntityIsValid(entity2)) {
-          sub_8071DA4(entity2);
+          EnemyEvolution(entity2);
           entityInfo2->aiAllySkip = FALSE;
         }
       }
@@ -437,7 +420,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
             }
         }
     }
-    sub_8043ED0(0);
+    TryForcedLoss(0);
   }
 }
 
@@ -448,17 +431,17 @@ void sub_8044AB4(void)
   if (gSpeedTurns[1][gDungeon->unk644.fractionalTurn + 1] != 0) {
     for (index = 0; index < DUNGEON_MAX_POKEMON; index++) {
       if (EntityIsValid(gDungeon->activePokemon[index])) {
-        UseAttack(0);
+        DisplayActions(0);
         break;
       }
     }
     sub_807EAA0(1,0);
     sub_8086AC0();
-    sub_8043ED0(0);
+    TryForcedLoss(0);
   }
 }
 
-bool8 sub_8044B28(void)
+bool8 IsFloorOver(void)
 {
     if (gDungeon->unk4 == 0) {
         if (GetLeader() == NULL) {
@@ -484,6 +467,6 @@ bool8 sub_8044B84(void)
         return TRUE;
     }
     else {
-        return sub_8044B28();
+        return IsFloorOver();
     }
 }

@@ -25,8 +25,8 @@
 #include "dungeon_misc.h"
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
+#include "dungeon_engine.h"
 
-extern u8 sub_8044B28(void);
 extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_804216C(Entity *pokemon, Entity *target, u32 r2);
 extern void sub_804218C(Entity *pokemon, Entity *target);
@@ -139,18 +139,18 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
                     }
                     entity2 = tile->object;
                     if (((entity2 != NULL) && (entity2 != target)) && (GetEntityType(entity2) == ENTITY_ITEM)) {
-                        RemoveItemFromDungeonAt(&pos, 0);
+                        RemoveGroundItem(&pos, 0);
                     }
                     entity2 = tile->monster;
                     if (((entity2 != NULL) && (entity2 != target)) && (GetEntityType(entity2) == ENTITY_MONSTER)) {
                         sub_807E1A0(pokemon,entity2,moveType,uStack_2c,gUnknown_203B444[param_4]);
-                        if (sub_8044B28()) break;
+                        if (IsFloorOver()) break;
                     }
                 }
                 posPtr++;
             }
         }
-        if (sub_8044B28()) {
+        if (IsFloorOver()) {
             return;
         }
         if (GetEntityType(target) == ENTITY_MONSTER) {
@@ -167,7 +167,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
             }
         }
         ShowWholeRevealedDungeonMap();
-        sub_8049ED4();
+        UpdateTrapsVisibility();
     }
 }
 

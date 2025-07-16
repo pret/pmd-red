@@ -61,7 +61,7 @@ u32 sub_801A2A8(bool8 r0)
             slot.id = item->id;
             slot.quantity = item->quantity;
 
-            if (GetStackBuyPrice(&slot) > gTeamInventoryRef->teamMoney)
+            if (GetActualBuyPrice(&slot) > gTeamInventoryRef->teamMoney)
                 PlayMenuSoundEffect(2);
             else
                 PlayMenuSoundEffect(0);
@@ -149,7 +149,7 @@ void sub_801A4A4(void)
         local_7c.unk6 = 88;
         local_7c.unk8 = 1;
         sub_8090E14(buffer1, &item, &local_7c);
-        buyPrice = GetStackBuyPrice(&item);
+        buyPrice = GetActualBuyPrice(&item);
 
         if (buyPrice <= gTeamInventoryRef->teamMoney) {
             y = GetMenuEntryYCoord(&gUnknown_203B21C->m.input, index);

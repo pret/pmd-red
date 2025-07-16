@@ -163,7 +163,7 @@ void LoadDungeonMapPalette(void)
     }
 }
 
-void ShowDungeonMapAtPos(s32 x, s32 y)
+void DrawMinimapTile(s32 x, s32 y)
 {
     s32 yAdd = 0;
     const Tile *tile;
@@ -282,7 +282,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
                 else {
                     if (entType == ENTITY_TRAP) {
                         if (entity->isVisible || showHiddenTraps) {
-                            Trap *trap = GetTrapData(entity);
+                            Trap *trap = GetTrapInfo(entity);
                             mapGfxType = sTrapToMapGfxId[trap->id];
                             lookForMapObject = FALSE;
                         }
@@ -530,7 +530,7 @@ void ShowWholeRevealedDungeonMap(void)
 
     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
         for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
-            ShowDungeonMapAtPos(x, y);
+            DrawMinimapTile(x, y);
         }
     }
 }

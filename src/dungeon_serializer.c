@@ -177,7 +177,7 @@ static void WriteDungeonItems(DataSerializer *seri)
         notEmpty = FALSE;
 
         if (entity != NULL && GetEntityType(entity) == ENTITY_ITEM) {
-            item = GetItemData(entity);
+            item = GetItemInfo(entity);
             WriteItem(seri, item); // 3 bytes
             WriteBytes(seri, &entity->pos.x, 1); // 1 byte
             WriteBytes(seri, &entity->pos.y, 1); // 1 byte
@@ -207,7 +207,7 @@ static void WriteDungeonTraps(DataSerializer *seri)
         notEmpty = FALSE;
 
         if (entity != NULL && GetEntityType(entity) == ENTITY_TRAP) {
-            trap = GetTrapData(entity);
+            trap = GetTrapInfo(entity);
             WriteBytes(seri, &trap->id, 1);
             WriteBytes(seri, &trap->unk1, 1);
             WriteBytes(seri, &entity->isVisible, 1);
@@ -873,7 +873,7 @@ static void ReadDungeonItems(DataSerializer *seri)
         ReadTilePos(seri, &pos);
 
         if (item.flags & ITEM_FLAG_EXISTS)
-            AddItemToDungeonAt(&pos, &item, 0);
+            SpawnItem(&pos, &item, 0);
     }
 }
 
@@ -1101,7 +1101,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
             }
 
             LoadIQSkills(mon);
-            sub_804535C(mon, NULL);
+            UpdateEntityPixelPos(mon, NULL);
         }
     }
 }

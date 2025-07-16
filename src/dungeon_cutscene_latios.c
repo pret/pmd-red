@@ -51,7 +51,7 @@ extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
+extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_807EAA0(u32, u32);
@@ -108,7 +108,7 @@ void sub_808AA94(void)
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
-  sub_8068FE0(LatiosEntity,0x21c,0);
+  HandleFaint(LatiosEntity,0x21c,0);
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
   CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_LATIOS);
 }

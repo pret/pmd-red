@@ -27,7 +27,6 @@
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
 
-extern u8 sub_8045888(Entity *);
 extern void sub_807EC28(u32);
 
 void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2)
@@ -67,8 +66,8 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2)
 
         sub_80694C0(target, pos.x, pos.y, 0);
 
-        sub_804535C(target, 0);
-        if(!sub_8045888(target)) continue;
+        UpdateEntityPixelPos(target, 0);
+        if(!ShouldDisplayEntity(target)) continue;
         DungeonRunFrameActions(0x3A);
     }
 

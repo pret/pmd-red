@@ -20,17 +20,14 @@
 #include "dungeon_engine.h"
 #include "run_dungeon.h"
 
-extern bool8 sub_8044B28(void);
 extern void sub_8086AC0(void);
-extern void UseAttack(u32);
+extern void DisplayActions(u32);
 extern void TriggerWeatherAbilities(void);
-extern void sub_8071DA4(Entity *);
+extern void EnemyEvolution(Entity *);
 extern void TickStatusHeal(Entity *);
 
 EWRAM_DATA SubMenuAction gDungeonSubMenu[10] = {0};
 EWRAM_DATA s32 gDungeonSubMenuItemsCount = 0;
-
-extern bool8 sub_8045888(Entity *);
 
 static const u16 gUnknown_80F6964[NUM_ITEM_CATEGORIES] = {
     [CATEGORY_THROWN_LINE] = 0,
@@ -127,7 +124,7 @@ Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3)
   }
   else if (param_2->actionUseIndex == 0x80) {
     tile = GetTile((param_2->itemPos).x,(param_2->itemPos).y);
-    item = GetItemData(tile->object);
+    item = GetItemInfo(tile->object);
   }
   else {
     if (param_2->actionUseIndex == 0x81) {
@@ -163,7 +160,7 @@ bool8 sub_8044D40(ActionContainer *param_1,s32 index)
     if (puVar1->actionUseIndex != 0x80) {
       return FALSE;
     }
-    RemoveItemFromDungeonAt(&puVar1->itemPos,1);
+    RemoveGroundItem(&puVar1->itemPos,1);
   }
   return TRUE;
 }
@@ -198,7 +195,7 @@ void sub_8044DF0(Entity *entity, s32 index, u32 unused)
   info = GetEntInfo(entity);
   item = sub_8044D90(entity,index,unused);
   if ((info->action).actionParameters[0].actionUseIndex == 0x80) {
-    RemoveItemFromDungeonAt(&(info->action).actionParameters[0].itemPos,1);
+    RemoveGroundItem(&(info->action).actionParameters[0].itemPos,1);
   }
   else {
     item->id = ITEM_NOTHING;
@@ -222,10 +219,10 @@ void sub_8044E24(Entity *entity,int index,u32 unused)
       if (info->action.actionParameters[index].actionUseIndex == 0x80) {
         item = *itemPtr;
         pos = &info->action.actionParameters[index].itemPos;
-        RemoveItemFromDungeonAt(pos,1);
+        RemoveGroundItem(pos,1);
         item.quantity = itemPtr->id - 125;
         item.id = ITEM_TM_USED_TM;
-        AddItemToDungeonAt(pos,&item,1);
+        SpawnItem(pos,&item,1);
       }
       else {
         itemPtr->quantity = itemPtr->id - 125;
@@ -315,7 +312,7 @@ bool8 IsNotAttacking(Entity *param_1, bool8 param_2)
 
     info = GetEntInfo(param_1);
     action = &(info->action).action;
-    if ((param_2 == 0) || (sub_8045888(param_1)))
+    if ((param_2 == 0) || (ShouldDisplayEntity(param_1)))
     {
         if(*action == ACTION_NOTHING)
             return TRUE;

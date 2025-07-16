@@ -185,7 +185,7 @@ void sub_803F508(Entity *a0)
     if (gDungeon->unk1356C == 0) {
         sub_806CD90();
     }
-    sub_8049ED4();
+    UpdateTrapsVisibility();
     ShowWholeRevealedDungeonMap();
 }
 
@@ -265,14 +265,14 @@ void sub_803F580(u8 a0)
         }
 
         if (before != strPtr->showInvisibleTrapsMonsters) {
-            sub_8049ED4();
+            UpdateTrapsVisibility();
             ShowWholeRevealedDungeonMap();
             sub_8041888(0);
         }
 
         if (a0 && strPtr->unk18213 == 0) {
             if (abs(strPtr->cameraPixelPosMirror.x - strPtr->cameraPixelPos.x) > 7 || abs(strPtr->cameraPixelPosMirror.y - strPtr->cameraPixelPos.y) > 7) {
-                sub_8049ED4();
+                UpdateTrapsVisibility();
                 strPtr->unk18213 = 1;
             }
             else {
@@ -296,7 +296,7 @@ void sub_803F580(u8 a0)
             for (i = 0; i < DUNGEON_MAX_POKEMON; i++) {
                 Entity *mon = gDungeon->activePokemon[i];
                 if (EntityIsValid(mon)) {
-                    ShowDungeonMapAtPos(mon->pos.x, mon->pos.y);
+                    DrawMinimapTile(mon->pos.x, mon->pos.y);
                 }
             }
         }
@@ -352,7 +352,7 @@ void sub_803F878(s32 a0, s32 a1)
     }
 
     if (abs(strPtr->cameraPixelPosMirror.x - strPtr->cameraPixelPos.x) > 7 || abs(strPtr->cameraPixelPosMirror.y - strPtr->cameraPixelPos.y) > 7) {
-        sub_8049ED4();
+        UpdateTrapsVisibility();
         strPtr->unk18213 = 1;
     }
     else {
@@ -717,7 +717,7 @@ void HandleLuminousOrbAction(Entity *pokemon)
     }
   }
   sub_803F580(0);
-  sub_8049ED4();
+  UpdateTrapsVisibility();
   ShowWholeRevealedDungeonMap();
   LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FD040);
 }

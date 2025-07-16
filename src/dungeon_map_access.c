@@ -475,7 +475,7 @@ static const s16 gUnknown_80F6C06[] = {
     60, 60, 60, 61, 61, 61, 62, 62, 62, 63, 63, 63
 };
 
-void sub_8049ED4(void)
+void UpdateTrapsVisibility(void)
 {
     bool32 hallucinating, showInvisibleTrapsMonsters;
     u16 *src;
@@ -1058,7 +1058,7 @@ void sub_804AC20(DungeonPos *pos)
             for (x = xMin; x <= xMax; x++) {
                 tile = GetTileMut(x,y);
                 tile->spawnOrVisibilityFlags |= 3;
-                ShowDungeonMapAtPos(x,y);
+                DrawMinimapTile(x,y);
             }
         }
     }
@@ -1112,7 +1112,7 @@ bool8 sub_804AD34(DungeonPos *pos)
       {
         sub_80498A8(x + pos->x, y + pos->y);
         sub_8049BB0(x + pos->x, y + pos->y);
-        ShowDungeonMapAtPos(x + pos->x, y + pos->y);
+        DrawMinimapTile(x + pos->x, y + pos->y);
       }
     }
   }
@@ -1121,10 +1121,10 @@ bool8 sub_804AD34(DungeonPos *pos)
     {
       entity = gDungeon->activePokemon[index];
       if (EntityIsValid(entity)) {
-        sub_806CF98(entity);
+        DetermineMonsterShadow(entity);
       }
     }
-    sub_8049ED4();
+    UpdateTrapsVisibility();
     sub_8042A14(pos);
   }
   return iVar8;
@@ -1174,7 +1174,7 @@ void sub_804AE84(DungeonPos *pos)
       for(x = -1; x < 2; x++)
       {
         sub_80498A8(x + pos->x, y + pos->y);
-        ShowDungeonMapAtPos(x + pos->x, y + pos->y);
+        DrawMinimapTile(x + pos->x, y + pos->y);
       }
     }
 
@@ -1182,10 +1182,10 @@ void sub_804AE84(DungeonPos *pos)
     {
       entity = gDungeon->activePokemon[index];
       if (EntityIsValid(entity)) {
-        sub_806CF98(entity);
+        DetermineMonsterShadow(entity);
       }
     }
-    sub_8049ED4();
+    UpdateTrapsVisibility();
     sub_8042A14(pos);
   }
 }

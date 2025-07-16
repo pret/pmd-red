@@ -49,7 +49,7 @@ extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
+extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_807EAA0(u32, u32);
@@ -73,7 +73,7 @@ void sub_808ACC0(void)
 
   if (HasRecruitedMon(MONSTER_REGIROCK)) {
     entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGIROCK);
-    sub_8068FE0(entity,0x21c,0);
+    HandleFaint(entity,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
     sub_808B1CC(ITEM_ROCK_PART);
@@ -100,7 +100,7 @@ void sub_808AD48(void)
 
   if (HasRecruitedMon(MONSTER_REGICE)) {
     entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGICE);
-    sub_8068FE0(entity,0x21c,0);
+    HandleFaint(entity,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
     sub_808B1CC(ITEM_ICE_PART);
@@ -128,7 +128,7 @@ void sub_808ADCC(void)
 
   if (HasRecruitedMon(MONSTER_REGISTEEL)) {
     entity = GetEntityFromMonsterBehavior(BEHAVIOR_REGISTEEL);
-    sub_8068FE0(entity,0x21c,0);
+    HandleFaint(entity,0x21c,0);
     sub_8097FA8(0x22);
     sub_8097FA8(0x1d);
     sub_808B1CC(ITEM_STEEL_PART);
@@ -162,7 +162,7 @@ void sub_808AE54(u8 param_1,u8 param_2,DungeonPos *param_3)
     sub_808B1CC(ITEM_NOTHING);
     if (!sub_8098100(0x1d)) {
       ItemIdToItem(&item,ITEM_ROCK_PART,0);
-      sub_80464C8(GetLeader(),param_3,&item);
+      SpawnDroppedItemWrapper(GetLeader(),param_3,&item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Regirock's body
       // Regirock was apparently guarding this item
@@ -184,7 +184,7 @@ void sub_808AEC8(u8 param_1,u8 param_2,DungeonPos *param_3)
     sub_808B1CC(ITEM_NOTHING);
     if (!sub_8098100(0x1d)) {
       ItemIdToItem(&item,ITEM_ICE_PART,0);
-      sub_80464C8(GetLeader(),param_3,&item);
+      SpawnDroppedItemWrapper(GetLeader(),param_3,&item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Regice's body
       // Regice was apparently guarding this item
@@ -206,7 +206,7 @@ void sub_808AF3C(u8 param_1,u8 param_2,DungeonPos *param_3)
     sub_808B1CC(ITEM_NOTHING);
     if (!sub_8098100(0x1d)) {
       ItemIdToItem(&item,ITEM_STEEL_PART,0);
-      sub_80464C8(GetLeader(),param_3, &item);
+      SpawnDroppedItemWrapper(GetLeader(),param_3, &item);
       DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
       // Something fell from Registeel's body
       // Registeel was apparently guarding this item
@@ -330,9 +330,9 @@ static void sub_808B1CC(u8 itemID)
         (sub_80860A8(ITEM_MUSIC_BOX) == 0)) {
         ItemIdToItem(&item,itemID,0);
         pos.y--;
-        AddItemToDungeonAt(&pos,&item,1);
+        SpawnItem(&pos,&item,1);
     }
-    sub_8049ED4();
+    UpdateTrapsVisibility();
     ShowWholeRevealedDungeonMap();
 }
 

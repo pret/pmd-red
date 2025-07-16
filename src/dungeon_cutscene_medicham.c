@@ -49,7 +49,7 @@ extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
+extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_807EAA0(u32, u32);
@@ -124,7 +124,7 @@ void MedichamRescueDialogue(void)
     sub_806CE68(medichamEntity, DIRECTION_SOUTH);
     sub_803E708(0x20, 0x46);
     sub_8042B0C(medichamEntity);
-    sub_8068FE0(medichamEntity, 0x21C, 0);
+    HandleFaint(medichamEntity, 0x21C, 0);
     gDungeon->unk4 = 1;
     gDungeon->unk11 = 4;
 }
@@ -139,7 +139,7 @@ void sub_808CB5C(void)
     DungeonStartNewBGM(MUS_IN_THE_DEPTHS_OF_THE_PIT);
     sub_80854D4();
     sub_8085930(DIRECTION_NORTH);
-    sub_8068FE0(medichamEntity, 0x21C, 0);
+    HandleFaint(medichamEntity, 0x21C, 0);
     sub_8085860(leaderEntity->pos.x, leaderEntity->pos.y);
     CopyMonsterNameToBuffer(gFormatBuffer_Monsters[2], MONSTER_MEDICHAM);
 }

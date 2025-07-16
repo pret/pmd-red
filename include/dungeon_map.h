@@ -12,7 +12,7 @@ void OpenDungeonMapFile(void);
 void InitDungeonMap(bool8 a0);
 void CloseDungeonMapFile(void);
 void LoadDungeonMapPalette(void);
-void ShowDungeonMapAtPos(s32 x, s32 y);
+void DrawMinimapTile(s32 x, s32 y);
 void CopyDungeonMapToVram(void);
 void ShowPlayerDotOnMap(void);
 void ResetMapPlayerDotFrames(void);

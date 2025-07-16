@@ -357,7 +357,7 @@ void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel)
 }
 
 // Instead of assigning the Tactic, a bool is assigned showing it is available
-void GetAvailTacticsforLvl_Bool(u8 *tacticsBuffer, s32 pokeLevel)
+void GetUnlockedTacticFlags(u8 *tacticsBuffer, s32 pokeLevel)
 {
     s32 tactic;
 
