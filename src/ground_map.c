@@ -263,8 +263,7 @@ void GroundMap_Select(s32 mapId_)
             while (mapToDungPtr->id != -1 && mapToDungPtr->id != mapId) {
                 mapToDungPtr++;
             }
-            MemoryFree(gGroundMapDungeon_3001B70);
-            gGroundMapDungeon_3001B70 = NULL;
+            FREE_AND_SET_NULL(gGroundMapDungeon_3001B70);
             GroundMap_SelectDungeon(mapId, &mapToDungPtr->loc, mapToDungPtr->unk8);
             return;
         }
