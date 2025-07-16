@@ -1,6 +1,6 @@
 	.align 2
 	
-.include "src/code_80035F0.o"
+.include "src/palette_fade_util.o"
 .include "src/code_8023144.o"
 .include "src/friend_list.o"
 .include "src/textbox.o"

@@ -2,14 +2,9 @@
 #include "globaldata.h"
 #include "palette_util.h"
 #include "bg_palette_buffer.h"
+#include "palette_fade_util.h"
 
-extern void sub_80039B8(void);
 extern void TransferBGPaletteBuffer(void);
-extern void sub_80037C8(u16, u32, RGB_Array);
-extern void sub_8003664(u16 param_1, u16 param_2);
-extern void sub_80036AC(u16, u32, RGB_Array);
-extern void sub_80036F4(u16, u32, RGB_Array);
-extern void sub_8003780(u16, u32, RGB_Array);
 
 struct UnkStruct_2039958
 {
@@ -45,7 +40,7 @@ static void sub_8099E80(u16 a0, RGB_Array a1);
 
 void sub_8099744(void)
 {
-    sub_80039B8();
+    RunPaletteFadeFunctions();
 }
 
 void sub_8099750(void)
@@ -419,30 +414,30 @@ static void sub_8099DD0(u16 a0)
 
     for (i = 0; i < 14; i++) {
         if (gUnknown_2039998[i] & 1) {
-            sub_8003664(i, 0x100);
+            SetPaletteFade_Brightness(i, 0x100);
         }
         else {
-            sub_8003664(i, a0);
+            SetPaletteFade_Brightness(i, a0);
         }
     }
 
     for (i = 16; i < 31; i++) {
         if (gUnknown_2039998[i] & 1) {
-            sub_8003664(i, 0x100);
+            SetPaletteFade_Brightness(i, 0x100);
         }
         else {
-            sub_8003664(i, a0);
+            SetPaletteFade_Brightness(i, a0);
         }
     }
 
-    sub_8003664(32, a0);
+    SetPaletteFade_Brightness(32, a0);
 }
 
 static void sub_8099E58(u16 a0)
 {
-    sub_8003664(15, a0);
-    sub_8003664(14, a0);
-    sub_8003664(31, a0);
+    SetPaletteFade_Brightness(15, a0);
+    SetPaletteFade_Brightness(14, a0);
+    SetPaletteFade_Brightness(31, a0);
 }
 
 static void sub_8099E80(u16 param_1,RGB_Array param_2)
@@ -455,221 +450,221 @@ static void sub_8099E80(u16 param_1,RGB_Array param_2)
         case 1:
             for (i = 0; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036AC(i,param_1,param_2);
+                    SetPaletteFade_Blend(i,param_1,param_2);
                 }
             }
 
             for (i = 16; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036AC(i,param_1,param_2);
+                    SetPaletteFade_Blend(i,param_1,param_2);
                 }
             }
             break;
         case 9:
             for (i = 14; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036AC(i,param_1,param_2);
+                    SetPaletteFade_Blend(i,param_1,param_2);
                 }
             }
 
             for (i = 31; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036AC(i,param_1,param_2);
+                    SetPaletteFade_Blend(i,param_1,param_2);
                 }
             }
             break;
          case 5:
             for (i = 0; i < 14; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036AC(i,param_1,param_2);
+                    SetPaletteFade_Blend(i,param_1,param_2);
                 }
             }
 
             for (i = 16; i < 31; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036AC(i,param_1,param_2);
+                    SetPaletteFade_Blend(i,param_1,param_2);
                 }
             }
             break;
         case 2:
             for (i = 0; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036F4(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
                 }
             }
 
             for (i = 16; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036F4(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
                 }
             }
             break;
         case 10:
             for (i = 14; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036F4(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
                 }
             }
 
             for (i = 31; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036F4(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
                 }
             }
             break;
         case 6:
             for (i = 0; i < 14; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036F4(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
                 }
             }
 
             for (i = 16; i < 31; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_80036F4(i,param_1,param_2);
+                    SetPaletteFade_FadeToBlack(i,param_1,param_2);
                 }
             }
             break;
         case 3:
             for (i = 0; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_8003780(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i,param_1,param_2);
                 }
             }
 
             for (i = 16; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_8003780(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i,param_1,param_2);
                 }
             }
             break;
         case 11:
             for (i = 14; i < 16; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_8003780(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i,param_1,param_2);
                 }
             }
 
             for (i = 31; i < 32; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_8003780(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i,param_1,param_2);
                 }
             }
             break;
         case 7:
             for (i = 0; i < 14; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_8003780(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i,param_1,param_2);
                 }
             }
 
             for (i = 16; i < 31; i++) {
                 if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else {
-                    sub_8003780(i,param_1,param_2);
+                    SetPaletteFade_Desaturate(i,param_1,param_2);
                 }
             }
             break;
          case 4:
             for (i = 0; i < 16; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,param_1);
+                    SetPaletteFade_Brightness(i,param_1);
                 }
                 else {
-                    sub_80037C8(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i,param_1,param_2);
                 }
             }
 
             for (i = 16; i < 32; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,param_1);
+                    SetPaletteFade_Brightness(i,param_1);
                 }
                 else {
-                    sub_80037C8(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i,param_1,param_2);
                 }
             }
             break;
         case 12:
             for (i = 14; i < 16; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,param_1);
+                    SetPaletteFade_Brightness(i,param_1);
                 }
                 else {
-                    sub_80037C8(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i,param_1,param_2);
                 }
             }
 
             for (i = 31; i < 32; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,param_1);
+                    SetPaletteFade_Brightness(i,param_1);
                 }
                 else {
-                    sub_80037C8(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i,param_1,param_2);
                 }
             }
             break;
@@ -693,25 +688,25 @@ static void sub_8099E80(u16 param_1,RGB_Array param_2)
         case 8:
             for (i = 0; i < 14; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,param_1);
+                    SetPaletteFade_Brightness(i,param_1);
                 }
                 else {
-                    sub_80037C8(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i,param_1,param_2);
                 }
             }
 
             for (i = 16; i < 31; i ++) {
                 if (gUnknown_2039998[i] & 1) {
-                    sub_8003664(i,0x100);
+                    SetPaletteFade_Brightness(i,0x100);
                 }
                 else if (gUnknown_2039998[i] & 2) {
-                    sub_8003664(i,param_1);
+                    SetPaletteFade_Brightness(i,param_1);
                 }
                 else {
-                    sub_80037C8(i,param_1,param_2);
+                    SetPaletteFade_Modulate(i,param_1,param_2);
                 }
             }
             break;

@@ -20,7 +20,6 @@ extern const FileArchive gGroundFileArchive;
 
 void sub_80A456C(GroundBg *groundBg, s32 id, const PixelPos *srcPos);
 static void CloseOpenedFiles(GroundBg *groundBg);
-void sub_80A3BB0(GroundBg *groundBg, s32 a0);
 static void sub_80A3EB0(SubStruct_488 *map488);
 static const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2, SubStruct_448 *a3);
 static void sub_80A37C4(void *vramDst, const u16 *src_, SubStruct_52C *a2, SubStruct_545 *a3);
@@ -402,7 +401,7 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
     groundBg->unk52A = 1;
 }
 
-void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, DungeonLocation *dungLoc, s32 a3)
+void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, const DungeonLocation *dungLoc, s32 a3)
 {
     SubStruct_0 *sub0Ptr;
     s32 i;

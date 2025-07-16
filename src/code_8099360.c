@@ -7,16 +7,13 @@
 #include "def_filearchives.h"
 #include "event_flag.h"
 #include "file_system.h"
+#include "palette_fade_util.h"
 
 extern u8 gUnknown_20398B8;
 
-extern void sub_8003600(void);
-extern s32 sub_800388C(u16, const u8 *, u8);
-extern void sub_8003810(u16 idx, RGB_Array param_2);
-
 void sub_8099648(void)
 {
-    sub_8003600();
+    InitPaletteFadeTable();
     sub_809965C();
 }
 
@@ -31,7 +28,7 @@ void sub_809965C(void)
 
     file = OpenFileAndGetFileDataPtr("fontsppa", &gSystemFileArchive);
 
-    sub_800388C(0x1f0, file->data, 0x10);
+    sub_800388C(0x1f0, (const RGB_Union *) file->data, 0x10);
     CloseFile(file);
 }
 
@@ -62,7 +59,7 @@ void sub_8099690(u32 param_1)
             break;
     }
 
-    sub_800388C(0xF0, (u8 *)pal, 0x10);
+    sub_800388C(0xF0, (const RGB_Union *)pal, 0x10);
     var2 = pal;
     for(index = 0; index < 0x10; index++)
     {
