@@ -78,7 +78,7 @@ void GroundBg_Init(GroundBg *groundBg, const SubStruct_52C *a1)
     groundBg->bmaHeader.mapWidthChunks = 0;
     groundBg->bmaHeader.mapHeightChunks = 0;
     unk0Ptr = &groundBg->unk0[0];
-    groundBg->unk46C = 0;
+    groundBg->animationSpecifications = 0;
     groundBg->unk470 = 0;
     groundBg->unk471 = 0;
 
@@ -172,7 +172,7 @@ void sub_80A2E64(GroundBg *groundBg)
     groundBg->bmaHeader.mapWidthChunks = 0;
     groundBg->bmaHeader.mapHeightChunks = 0;
     unk0Ptr = &groundBg->unk0[0];
-    groundBg->unk46C = 0;
+    groundBg->animationSpecifications = NULL;
     groundBg->unk470 = 0;
     groundBg->unk471 = 0;
 
@@ -308,17 +308,17 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
 
     sub0Ptr = groundBg->unk0;
     unk0Id = 0;
-    if (bplHeader->hasPalAnimations != 0) {
-        const s16 *r3 = bplData + (bplHeader->numPalettes * 60);
-        const void *r6 = &r3[bplHeader->numPalettes * 2];
+    if (bplHeader->hasPalAnimations) {
+        const AnimationSpecification *animSpecifications = bplData + (bplHeader->numPalettes * 60);
+        const RGB_Array *animationPalette = ((void *) animSpecifications) + bplHeader->numPalettes * 4;
 
-        groundBg->unk46C = r3;
+        groundBg->animationSpecifications = animSpecifications;
         groundBg->unk470 = 1;
         groundBg->unk471 = 1;
-        for (; unk0Id < bplHeader->numPalettes && unk0Id < groundBg->unk52C.unk2; unk0Id++, sub0Ptr++, r3 += 2) {
-            if (r3[1] > 0) {
-                sub0Ptr->unk4 = r6;
-                r6 += r3[1] * 60;
+        for (; unk0Id < bplHeader->numPalettes && unk0Id < groundBg->unk52C.unk2; unk0Id++, sub0Ptr++, animSpecifications++) {
+            if (animSpecifications->numFrames > 0) {
+                sub0Ptr->unk4 = animationPalette;
+                animationPalette += animSpecifications->numFrames * 15;
             }
             else {
                 sub0Ptr->unk4 = NULL;
@@ -329,7 +329,7 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
         }
     }
     else {
-        groundBg->unk46C = NULL;
+        groundBg->animationSpecifications = NULL;
         groundBg->unk470 = 0;
         groundBg->unk471 = 0;
     }
@@ -507,7 +507,7 @@ void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, const DungeonLocation *dung
     if (groundBg->unk440 != NULL) {
         sub_8004AA4(groundBg->unkE0, groundBg->unk440, UNK_E0_ARR_COUNT);
     }
-    groundBg->unk46C = NULL;
+    groundBg->animationSpecifications = NULL;
     groundBg->unk470 = 0;
     groundBg->unk471 = 0;
 
@@ -684,7 +684,7 @@ static const u8 *BmaLayerNrlDecompressor(u16 **dstArray, const void *bmaData, Su
 
 void sub_80A3B80(GroundBg *groundBg, u8 a1, u8 a2)
 {
-    if (groundBg->unk46C != NULL) {
+    if (groundBg->animationSpecifications != NULL) {
         groundBg->unk470 = a1;
         groundBg->unk471 = a2;
     }
@@ -1338,15 +1338,15 @@ void sub_80A4764(GroundBg *groundBg)
     if (groundBg->bplHeader.hasPalAnimations) {
         s32 i;
         SubStruct_0 *sub0Ptr = groundBg->unk0;
-        const s16 *ptr = groundBg->unk46C;
+        const AnimationSpecification *animSpecifications = groundBg->animationSpecifications;
         u16 r6 = groundBg->unk52C.unk0 * 16;
 
-        for (i = 0; i < groundBg->bplHeader.numPalettes; i++, sub0Ptr++, ptr += 2, r6 += 16) {
+        for (i = 0; i < groundBg->bplHeader.numPalettes; i++, sub0Ptr++, animSpecifications++, r6 += 16) {
             if (sub0Ptr->unk4 != NULL && --sub0Ptr->unk2 <= 0) {
                 if (--sub0Ptr->unk0 <= 0) {
                     if (groundBg->unk471) {
-                        sub0Ptr->unk2 = ptr[0];
-                        sub0Ptr->unk0 = ptr[1];
+                        sub0Ptr->unk2 = animSpecifications->durationPerFrame;
+                        sub0Ptr->unk0 = animSpecifications->numFrames;
                         sub0Ptr->unk8 = sub0Ptr->unk4;
                     }
                     else {
@@ -1356,7 +1356,7 @@ void sub_80A4764(GroundBg *groundBg)
                     }
                 }
                 else {
-                    sub0Ptr->unk2 = ptr[0];
+                    sub0Ptr->unk2 = animSpecifications->durationPerFrame;
                 }
 
                 if (sub0Ptr->unk8 != NULL) {

@@ -109,10 +109,19 @@ typedef struct LayerSpecs
     s16 numChunks; // Number of chunks in the tilemap + 1. The +1 is the null chunk at the beginning of tile mappings, that is not stored.
 } LayerSpecs;
 
+typedef struct AnimationSpecification
+{
+    s16 durationPerFrame; // Time in game frames to hold a single palette frame for
+    s16 numFrames; // Number of frames. This is also usually the length of frames in animation palette, but it can also be less.
+} AnimationSpecification;
+
 typedef struct BplHeader
 {
     s16 numPalettes;
     s16 hasPalAnimations;
+    // RGB palettes
+    // Animation Specification array
+    // Animation RGB palettes
 } BplHeader;
 
 // size: 0x55C
@@ -131,7 +140,7 @@ typedef struct GroundBg
     LayerSpecs layerSpecs;
     BplHeader bplHeader;
     const void *unk468;
-    const void *unk46C;
+    const AnimationSpecification *animationSpecifications;
     u8 unk470;
     u8 unk471;
     s32 unk474;
