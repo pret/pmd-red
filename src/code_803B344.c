@@ -201,3 +201,34 @@ static s32 sub_803B600(WonderMail *mail)
     return -1;
 }
 
+
+s32 sub_803B628(WonderMail *param_1) 
+{
+  const unkStruct_80E9F8C *ptr;
+  int i;
+  
+    ptr = &gUnknown_80E9F8C[0];
+    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80E9F8C); ptr++, i++) {
+        if (ptr->species.speciesA == param_1->clientSpecies && ptr->species.speciesB == param_1->targetSpecies)
+            return i;
+        if (ptr->species.speciesB == param_1->clientSpecies && ptr->species.speciesA == param_1->targetSpecies)
+            return i;
+    }
+    return -1;
+
+}
+
+s32 sub_803B66C(WonderMail *param_1) 
+{
+  const struct PokemonPair *ptr;
+  int i;
+  
+    ptr = &gUnknown_80E8168[0];
+    for (i = 0; i < ARRAY_COUNT_INT(gUnknown_80E8168); ptr++, i++) {
+        if (ptr->speciesA == param_1->clientSpecies && ptr->speciesB == param_1->targetSpecies)
+            return i;
+        if (ptr->speciesB == param_1->clientSpecies && ptr->speciesA == param_1->targetSpecies)
+            return i;
+    }
+    return -1;
+}

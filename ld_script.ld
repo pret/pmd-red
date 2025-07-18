@@ -188,7 +188,6 @@ SECTIONS {
         src/debug_menu4.o(.text);
         src/code_803B050.o(.text);
         src/code_803B344.o(.text);
-        asm/code_803B050.o(.text);
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
         src/personality_test1.o(.text);
