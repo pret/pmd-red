@@ -334,26 +334,26 @@ void CreateRescueDescription(unkStruct_802C39C *param_1)
     y += 12;
     PrintStringOnWindow(10, y, gRewardText, param_1->unk0[0], 0);
 
-    switch (param_1->rewardType) {
+    switch (param_1->unk18.rewardType) {
         case MONEY:
-            sprintfStatic(buf_1, gMissionRewardText[param_1->rewardType], param_1->unk30);
+            sprintfStatic(buf_1, gMissionRewardText[param_1->unk18.rewardType], param_1->unk18.moneyReward);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case MONEY_EXTRA:
-            sprintfStatic(buf_1, gMissionRewardText[param_1->rewardType], param_1->unk30);
+            sprintfStatic(buf_1, gMissionRewardText[param_1->unk18.rewardType], param_1->unk18.moneyReward);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case ITEM: // Item
         case ITEM_EXTRA: // Item + ?
-            BufferItemName(gFormatBuffer_Items[0], param_1->rewardItem, NULL);
-            sprintfStatic(buf_1, gMissionRewardText[param_1->rewardType], gFormatBuffer_Items[0]);
+            BufferItemName(gFormatBuffer_Items[0], param_1->unk18.itemRewards[0], NULL);
+            sprintfStatic(buf_1, gMissionRewardText[param_1->unk18.rewardType], gFormatBuffer_Items[0]);
             PrintStringOnWindow(68, y, buf_1, param_1->unk0[0], 0);
             break;
         case 4: // Friend Area
-            PrintStringOnWindow(68, y, gMissionRewardText[param_1->rewardType], param_1->unk0[0], 0);
+            PrintStringOnWindow(68, y, gMissionRewardText[param_1->unk18.rewardType], param_1->unk0[0], 0);
             break;
         default:
-            PrintStringOnWindow(68, y, gMissionRewardText[param_1->rewardType], param_1->unk0[0], 0);
+            PrintStringOnWindow(68, y, gMissionRewardText[param_1->unk18.rewardType], param_1->unk0[0], 0);
             break;
     }
 

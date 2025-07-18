@@ -129,11 +129,11 @@ void sub_8030E48(void)
   stack.targetSpecies = mail->clientSpecies;
   stack.targetItem = ITEM_NOTHING;
   if (mail->item.id == ITEM_NOTHING) {
-    stack.rewardType = MONEY1;
+    stack.unk18.rewardType = MONEY1;
   }
   else {
-    stack.rewardType = ITEM;
-    stack.rewardItem = mail->item.id;
+    stack.unk18.rewardType = ITEM;
+    stack.unk18.itemRewards[0] = mail->item.id;
   }
   switch(mail->mailType)
   {
