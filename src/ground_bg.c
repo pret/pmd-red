@@ -18,21 +18,21 @@
 
 extern const FileArchive gGroundFileArchive;
 
-void sub_80A456C(GroundBg *groundBg, s32 id, const PixelPos *srcPos);
+void SetCameraPositionForLayer(GroundBg *groundBg, s32 id, const PixelPos *srcPos);
 static void CloseOpenedFiles(GroundBg *groundBg);
-static void sub_80A3EB0(SubStruct_488 *map488);
+static void CallMapTilemapRenderFunc(MapRender *mapRender);
 static const u8 *BmaLayerNrlDecompressor(u16 **dstArray, const void *bmaData, SubStruct_52C *a2, BmaHeader *bmaHeader);
-static void sub_80A37C4(void *vramDst, const u16 *src_, SubStruct_52C *a2, LayerSpecs *a3);
+static void CopyBpcTilesToVram(void *vramDst, const u16 *src_, SubStruct_52C *a2, LayerSpecs *a3);
 static void _UncompressCell(void * a0, u16 *a1, const void * a2, SubStruct_52C *a3, LayerSpecs *a4);
-static void sub_80A3D40(SubStruct_488 *map488, GroundBg *groundBg, s32 a2, s32 a3, bool8 a4);
-static void sub_80A3E14(SubStruct_488 *map488, PixelPos *a1);
-static void sub_80A3EBC(SubStruct_488 *map488);
-static void sub_80A3EF4(SubStruct_488 *map488);
-static void sub_80A4088(SubStruct_488 *map488);
-static void sub_80A41C4(SubStruct_488 *map488);
-static void sub_80A3ED4(SubStruct_488 *map488);
-static void sub_80A3F94(SubStruct_488 *map488);
-static void sub_80A4358(SubStruct_488 *map488);
+static void InitMapTilemapRenderContext(MapRender *mapRender, GroundBg *groundBg, s32 a2, s32 numBgs, bool8 a4);
+static void UpdateMapCameraPosition(MapRender *mapRender, PixelPos *a1);
+static void ClearSingleBgTilemap(MapRender *mapRender);
+static void RenderChunksToBgTilemap_2x2(MapRender *mapRender);
+static void RenderChunksToBgTilemap_3x3(MapRender *mapRender);
+static void RenderChunksToBgTilemapWrapAround_3x3(MapRender *mapRender);
+static void ClearDoubleBgTilemaps(MapRender *mapRender);
+static void RenderChunksToBgTilemaps_2x2(MapRender *mapRender);
+static void RenderChunksToBgTilemaps_3x3(MapRender *mapRender);
 
 extern void sub_8003810(u16 param_1, RGB_Union param_2);
 extern void sub_809971C(u16 idx, const RGB_Array *strPtrs, s32 n);
@@ -46,14 +46,14 @@ void GroundBg_Init(GroundBg *groundBg, const SubStruct_52C *a1)
     s32 i;
 
     groundBg->unk52C = *a1;
-    groundBg->unk548 = MemoryAlloc(groundBg->unk52C.unk8 * 18, 6);
-    for (id = 0; id < groundBg->unk52C.unkC; id++) {
-        groundBg->unk554[id] = &gBgTilemaps[2 + groundBg->unk52C.unkA + id][0][0];
-        groundBg->unk54C[id] = MemoryAlloc(groundBg->unk52C.unk10 * 128, 6);
+    groundBg->tileMappings = MemoryAlloc(groundBg->unk52C.unk8 * 18, 6);
+    for (id = 0; id < groundBg->unk52C.numLayers; id++) {
+        groundBg->bgTilemaps[id] = &gBgTilemaps[2 + groundBg->unk52C.unkA + id][0][0];
+        groundBg->chunkMappings[id] = MemoryAlloc(groundBg->unk52C.unk10 * 128, 6);
     }
-    for (; id < UNK_54C_ARR_COUNT; id++) {
-        groundBg->unk554[id] = NULL;
-        groundBg->unk54C[id] = NULL;
+    for (; id < NUM_LAYERS; id++) {
+        groundBg->bgTilemaps[id] = NULL;
+        groundBg->chunkMappings[id] = NULL;
     }
 
     if (groundBg->unk52C.unk14 != NULL) {
@@ -106,7 +106,7 @@ void GroundBg_Init(GroundBg *groundBg, const SubStruct_52C *a1)
     }
 
     for (i = 0; i < 2; i++) {
-        sub_80A456C(groundBg, i, &sPositionZero);
+        SetCameraPositionForLayer(groundBg, i, &sPositionZero);
     }
 }
 
@@ -116,13 +116,13 @@ void GroundBg_FreeAll(GroundBg *groundBg)
 
     CloseOpenedFiles(groundBg);
     TRY_FREE_AND_SET_NULL(groundBg->unk544);
-    FREE_AND_SET_NULL(groundBg->unk548);
+    FREE_AND_SET_NULL(groundBg->tileMappings);
 
-    for (i = 0; i < UNK_54C_ARR_COUNT; i++) {
-        if (groundBg->unk554[i] != NULL) {
-            groundBg->unk554[i] = NULL;
+    for (i = 0; i < NUM_LAYERS; i++) {
+        if (groundBg->bgTilemaps[i] != NULL) {
+            groundBg->bgTilemaps[i] = NULL;
         }
-        TRY_FREE_AND_SET_NULL(groundBg->unk54C[i]);
+        TRY_FREE_AND_SET_NULL(groundBg->chunkMappings[i]);
     }
 }
 
@@ -164,7 +164,7 @@ void sub_80A2E64(GroundBg *groundBg)
 
     CloseOpenedFiles(groundBg);
     groundBg->mapFileId = -1;
-    groundBg->unk528 = 0;
+    groundBg->chunkDimensions = 0;
     groundBg->bmaHeader.mapWidthTiles = 0;
     groundBg->bmaHeader.mapHeightTiles = 0;
     groundBg->bmaHeader.tilingWidth = 0;
@@ -211,7 +211,7 @@ void sub_80A2E64(GroundBg *groundBg)
     }
 
     sub_80A3BB0(groundBg, 0);
-    sub_80A3EB0(groundBg->unk488);
+    CallMapTilemapRenderFunc(groundBg->mapRender);
     groundBg->unk52A = 1;
 }
 
@@ -257,8 +257,8 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
     bplHeader->numPalettes = *(u8 *)(bplData); bplData += 2;
     bplHeader->hasPalAnimations = *(u8 *)(bplData); bplData += 2;
 
-    layerSpecs->unk0 = *bpcData++;
-    layerSpecs->unk2 = *bpcData++;
+    layerSpecs->chunkWidth = *bpcData++;
+    layerSpecs->chunkHeight = *bpcData++;
     layerSpecs->numTiles = *bpcData++;
 
     sum = layerSpecs->numTiles;
@@ -298,9 +298,9 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
         }
     }
 
-    sub_80A37C4((void *)(VRAM + 0x8000 + groundBg->unk52C.unk4 * 32), bpcData, &groundBg->unk52C, &groundBg->layerSpecs);
-    _UncompressCell(groundBg->unk548, &groundBg->unk528, bpcData + ((layerSpecs->numTiles - 1) * 16), &groundBg->unk52C, &groundBg->layerSpecs);
-    bmaData = BmaLayerNrlDecompressor(groundBg->unk54C, bmaData, &groundBg->unk52C, &groundBg->bmaHeader);
+    CopyBpcTilesToVram((void *)(VRAM + 0x8000 + groundBg->unk52C.unk4 * 32), bpcData, &groundBg->unk52C, &groundBg->layerSpecs);
+    _UncompressCell(groundBg->tileMappings, &groundBg->chunkDimensions, bpcData + ((layerSpecs->numTiles - 1) * 16), &groundBg->unk52C, &groundBg->layerSpecs);
+    bmaData = BmaLayerNrlDecompressor(groundBg->chunkMappings, bmaData, &groundBg->unk52C, &groundBg->bmaHeader);
     groundBg->unk468 = bmaData;
     if (groundBg->unk544 != NULL) {
         groundBg->unk52C.unk14(groundBg->unk544, bmaData, bmaHeader, groundBg->unk52C.unkE);
@@ -396,7 +396,7 @@ void sub_80A2FBC(GroundBg *groundBg, s32 mapFileId_)
     }
 
     sub_80A3BB0(groundBg, 0);
-    sub_80A3EB0(groundBg->unk488);
+    CallMapTilemapRenderFunc(groundBg->mapRender);
     groundBg->unk52A = 1;
 }
 
@@ -437,8 +437,8 @@ void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, const DungeonLocation *dung
     bplHeader->numPalettes = *(u8 *)(bplData); bplData += 2;
     bplHeader->hasPalAnimations = *(u8 *)(bplData); bplData += 2;
 
-    layerSpecs->unk0 = *bpcData++;
-    layerSpecs->unk2 = *bpcData++;
+    layerSpecs->chunkWidth = *bpcData++;
+    layerSpecs->chunkHeight = *bpcData++;
     layerSpecs->numTiles = *bpcData++;
 
     for (i = 0; i < MAX_BPA_SLOTS; i++) {
@@ -460,7 +460,7 @@ void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, const DungeonLocation *dung
     unkPtrArray[1] = NULL;
     bmaData = BmaLayerNrlDecompressor(unkPtrArray, bmaData, &groundBg->unk52C, &groundBg->bmaHeader);
     groundBg->unk468 = bmaData;
-    sub_80ADD9C(&groundBg->unk43C, &groundBg->unk440, (void *)(VRAM + 0x8000), groundBg->unk548, groundBg->unk54C[0], dungLoc, a3, 0x40, bmaHeader->mapHeightChunks, groundBg->unk544, 0);
+    sub_80ADD9C(&groundBg->unk43C, &groundBg->unk440, (void *)(VRAM + 0x8000), groundBg->tileMappings, groundBg->chunkMappings[0], dungLoc, a3, 0x40, bmaHeader->mapHeightChunks, groundBg->unk544, 0);
     // Unused return values
     GetFileDataPtr(groundBg->unk43C, 0);
     GetFileDataPtr(groundBg->unk440, 0);
@@ -533,13 +533,14 @@ void sub_80A3440(GroundBg *groundBg, s32 mapFileId_, const DungeonLocation *dung
         sub3E0->unk24 = 0;
     }
     sub_80A3BB0(groundBg, 0);
-    sub_80A3EB0(groundBg->unk488);
+    CallMapTilemapRenderFunc(groundBg->mapRender);
     groundBg->unk52A = 1;
     // bad sp alloc for compiler generated variables...
     ASM_MATCH_TRICK(layerSpecs->bpaSlotNumTiles[0]);
 }
 
-void sub_80A37C4(void *vramDst, const u16 *src_, SubStruct_52C *a2, LayerSpecs *layerSpecs)
+// Note: these not compressed like in pmd-sky.
+static void CopyBpcTilesToVram(void *vramDst, const u16 *src_, SubStruct_52C *a2, LayerSpecs *layerSpecs)
 {
     const u16 *src = src_;
     u16 *dst = vramDst;
@@ -560,7 +561,7 @@ void sub_80A37C4(void *vramDst, const u16 *src_, SubStruct_52C *a2, LayerSpecs *
     }
 }
 
-static void _UncompressCell(void *dst_, u16 *a1, const void *src_, SubStruct_52C *a3, LayerSpecs *layerSpecs)
+static void _UncompressCell(void *dst_, u16 *chunkDimensions, const void *src_, SubStruct_52C *a3, LayerSpecs *layerSpecs)
 {
     s32 id, i;
     s32 n;
@@ -569,17 +570,17 @@ static void _UncompressCell(void *dst_, u16 *a1, const void *src_, SubStruct_52C
     u16 *dst = dst_;
     u16 r6 = (a3->unk0 << 12) | a3->unk4;
 
-    if (layerSpecs->unk0 == 2 && layerSpecs->unk2 == 2) {
-        *a1 = 1;
-        n = 4;
+    if (layerSpecs->chunkWidth == 2 && layerSpecs->chunkHeight == 2) {
+        *chunkDimensions = CHUNK_DIMENSIONS_2x2;
+        n = 2 * 2;
     }
-    else if (layerSpecs->unk0 == 3 && layerSpecs->unk2 == 3) {
-        *a1 = 2;
-        n = 9;
+    else if (layerSpecs->chunkWidth == 3 && layerSpecs->chunkHeight == 3) {
+        *chunkDimensions = CHUNK_DIMENSIONS_3x3;
+        n = 3 * 3;
     }
     else {
-        *a1 = 0;
-        FatalError(DEBUG_LOC_PTR("../ground/ground_bg.c", 1184, "_UncompressCell"), _("GroundBg cell type　error %d %d"), layerSpecs->unk0, layerSpecs->unk2);
+        *chunkDimensions = CHUNK_DIMENSIONS_INVALID;
+        FatalError(DEBUG_LOC_PTR("../ground/ground_bg.c", 1184, "_UncompressCell"), _("GroundBg cell type　error %d %d"), layerSpecs->chunkWidth, layerSpecs->chunkHeight);
     }
 
     for (i = 0; i < 9; i++) {
@@ -605,7 +606,7 @@ static const u8 *BmaLayerNrlDecompressor(u16 **dstArray, const void *bmaData, Su
     s32 i, j, k, l;
     const u8 *src = bmaData;
 
-    for (i = 0; i < a2->unkC; i++) {
+    for (i = 0; i < a2->numLayers; i++) {
         u16 *dst = dstArray[i];
 
         for (j = 0; j < bmaHeader->mapHeightChunks; j++) {
@@ -699,140 +700,141 @@ void sub_80A3BB0(GroundBg *groundBg, s32 a0_)
     s32 a0Match = (s16) a0_;
     s32 a0 = a0Match;
 
-    SubStruct_488 *map488 = groundBg->unk488;
+    MapRender *mapRender = groundBg->mapRender;
 
     switch (a0) {
         default:
         case 0:
         case 1:
             groundBg->unk474 = 1;
-            sub_80A3D40(&map488[0], groundBg, 0, groundBg->unk52C.unkC, (a0 == 1));
+            InitMapTilemapRenderContext(&mapRender[0], groundBg, 0, groundBg->unk52C.numLayers, (a0 == 1));
             break;
         case 2:
         case 3:
         case 4:
             groundBg->unk474 = 2;
-            sub_80A3D40(&map488[0], groundBg, 0, groundBg->unk52C.unkC - 1, (a0 == 4));
-            sub_80A3D40(&map488[1], groundBg, groundBg->unk52C.unkC - 1, 1, (a0 != 2));
+            InitMapTilemapRenderContext(&mapRender[0], groundBg, 0, groundBg->unk52C.numLayers - 1, (a0 == 4));
+            InitMapTilemapRenderContext(&mapRender[1], groundBg, groundBg->unk52C.numLayers - 1, 1, (a0 != 2));
             break;
     }
 
     for (i = 0; i < groundBg->unk474; i++) {
-        sub_80A456C(groundBg, i, &sUnknownPosition);
-        switch (map488[i].unk4) {
+        SetCameraPositionForLayer(groundBg, i, &sUnknownPosition);
+        switch (mapRender[i].numBgs) {
             default:
             case 1:
-                switch (map488[i].unk0) {
+                switch (mapRender[i].chunkDimensions) {
                     default:
-                    case 0:
-                        map488[i].unk18 = sub_80A3EBC;
+                    case CHUNK_DIMENSIONS_INVALID:
+                        mapRender[i].tilemapRenderFunc = ClearSingleBgTilemap;
                         break;
-                    case 1:
-                        map488[i].unk18 = sub_80A3EF4;
+                    case CHUNK_DIMENSIONS_2x2:
+                        mapRender[i].tilemapRenderFunc = RenderChunksToBgTilemap_2x2;
                         break;
-                    case 2:
-                        map488[i].unk18 = (map488[i].unk6 != FALSE) ? sub_80A41C4 : sub_80A4088;
+                    case CHUNK_DIMENSIONS_3x3:
+                        mapRender[i].tilemapRenderFunc = (mapRender[i].wrapAround != FALSE) ? RenderChunksToBgTilemapWrapAround_3x3 : RenderChunksToBgTilemap_3x3;
                         break;
                 }
                 break;
             case 2:
-                switch (map488[i].unk0) {
+                switch (mapRender[i].chunkDimensions) {
                     default:
-                    case 0:
-                        map488[i].unk18 = sub_80A3ED4;
+                    case CHUNK_DIMENSIONS_INVALID:
+                        mapRender[i].tilemapRenderFunc = ClearDoubleBgTilemaps;
                         break;
-                    case 1:
-                        map488[i].unk18 = sub_80A3F94;
+                    case CHUNK_DIMENSIONS_2x2:
+                        mapRender[i].tilemapRenderFunc = RenderChunksToBgTilemaps_2x2;
                         break;
-                    case 2:
-                        map488[i].unk18 = sub_80A4358;
+                    case CHUNK_DIMENSIONS_3x3:
+                        mapRender[i].tilemapRenderFunc = RenderChunksToBgTilemaps_3x3;
                         break;
                 }
                 break;
         }
-        sub_80A3E14(&map488[i], &groundBg->unk478[i]);
+        UpdateMapCameraPosition(&mapRender[i], &groundBg->cameraPixelPosition[i]);
     }
-    for (i = groundBg->unk474; i < UNK_54C_ARR_COUNT; i++) {
-        sub_80A456C(groundBg, i, &sUnknownPosition);
-        sub_80A3D40(&map488[i], groundBg, 0, 0, FALSE);
+
+    for (i = groundBg->unk474; i < NUM_LAYERS; i++) {
+        SetCameraPositionForLayer(groundBg, i, &sUnknownPosition);
+        InitMapTilemapRenderContext(&mapRender[i], groundBg, 0, 0, FALSE);
     }
 }
 
-static void sub_80A3D40(SubStruct_488 *map488, GroundBg *groundBg, s32 a2, s32 a3, bool8 a4)
+static void InitMapTilemapRenderContext(MapRender *mapRender, GroundBg *groundBg, s32 a2, s32 numBgs, bool8 wrapAround)
 {
     s32 i, j;
 
-    map488->unk0 = groundBg->unk528;
-    map488->unk2 = a2;
-    map488->unk4 = a3;
-    map488->unk6 = a4;
-    map488->unk8 = groundBg->bmaHeader.mapWidthChunks;
-    map488->unkC = groundBg->bmaHeader.mapHeightChunks;
-    map488->unk10.x = groundBg->bmaHeader.mapWidthTiles * 8;
-    map488->unk10.y = groundBg->bmaHeader.mapHeightTiles * 8;
-    map488->unk1C = groundBg->unk548;
+    mapRender->chunkDimensions = groundBg->chunkDimensions;
+    mapRender->unk2 = a2;
+    mapRender->numBgs = numBgs;
+    mapRender->wrapAround = wrapAround;
+    mapRender->widthChunks = groundBg->bmaHeader.mapWidthChunks;
+    mapRender->heightChunks = groundBg->bmaHeader.mapHeightChunks;
+    mapRender->mapSizePixels.x = groundBg->bmaHeader.mapWidthTiles * 8;
+    mapRender->mapSizePixels.y = groundBg->bmaHeader.mapHeightTiles * 8;
+    mapRender->tileMappings = groundBg->tileMappings;
 
-    for (i = 0, j = a2; i < a3 && j < groundBg->unk52C.unkC; i++, j++) {
-        map488->unk20[i] = groundBg->unk54C[j];
-        map488->unk28[i] = groundBg->unk554[j];
+    for (i = 0, j = a2; i < numBgs && j < groundBg->unk52C.numLayers; i++, j++) {
+        mapRender->chunkMappings[i] = groundBg->chunkMappings[j];
+        mapRender->bgTilemaps[i] = groundBg->bgTilemaps[j];
     }
-    for (; i < UNK_54C_ARR_COUNT; i++) {
-        map488->unk20[i] = NULL;
-        map488->unk28[i] = NULL;
+    for (; i < NUM_LAYERS; i++) {
+        mapRender->chunkMappings[i] = NULL;
+        mapRender->bgTilemaps[i] = NULL;
     }
 
-    sub_80A3E14(map488, &groundBg->unk478[0]);
+    UpdateMapCameraPosition(mapRender, &groundBg->cameraPixelPosition[0]);
 }
 
-void sub_80A3E14(SubStruct_488 *map488, PixelPos *a1)
+static void UpdateMapCameraPosition(MapRender *mapRender, PixelPos *cameraPos)
 {
-    map488->unk30.x = a1->x;
-    map488->unk38.x = map488->unk30.x / 8;
-    map488->unk30.y = a1->y;
-    map488->unk38.y = map488->unk30.y / 8;
+    mapRender->cameraPos.x = cameraPos->x;
+    mapRender->tilePos.x = mapRender->cameraPos.x / 8;
+    mapRender->cameraPos.y = cameraPos->y;
+    mapRender->tilePos.y = mapRender->cameraPos.y / 8;
 
-    switch (map488->unk0) {
-        case 0:
-            map488->unk40.x = 0;
-            map488->unk40.y = 0;
-            map488->bgRegOffsets.x = 0;
-            map488->bgRegOffsets.y = 0;
+    switch (mapRender->chunkDimensions) {
+        case CHUNK_DIMENSIONS_INVALID:
+            mapRender->chunkPos.x = 0;
+            mapRender->chunkPos.y = 0;
+            mapRender->bgRegOffsets.x = 0;
+            mapRender->bgRegOffsets.y = 0;
             break;
-        case 1:
-            map488->unk40.x = map488->unk38.x / 2;
-            map488->unk40.y = map488->unk38.y / 2;
-            map488->bgRegOffsets.x = map488->unk30.x % 16;
-            map488->bgRegOffsets.y = map488->unk30.y % 16;
+        case CHUNK_DIMENSIONS_2x2:
+            mapRender->chunkPos.x = mapRender->tilePos.x / 2;
+            mapRender->chunkPos.y = mapRender->tilePos.y / 2;
+            mapRender->bgRegOffsets.x = mapRender->cameraPos.x % 16;
+            mapRender->bgRegOffsets.y = mapRender->cameraPos.y % 16;
             break;
-        case 2:
-            map488->unk40.x = map488->unk38.x / 3;
-            map488->unk40.y = map488->unk38.y / 3;
-            map488->bgRegOffsets.x = map488->unk30.x % 8;
-            map488->bgRegOffsets.y = map488->unk30.y % 24;
+        case CHUNK_DIMENSIONS_3x3:
+            mapRender->chunkPos.x = mapRender->tilePos.x / 3;
+            mapRender->chunkPos.y = mapRender->tilePos.y / 3;
+            mapRender->bgRegOffsets.x = mapRender->cameraPos.x % 8;
+            mapRender->bgRegOffsets.y = mapRender->cameraPos.y % 24;
             break;
     }
 }
 
-static void sub_80A3EB0(SubStruct_488 *map488)
+static void CallMapTilemapRenderFunc(MapRender *mapRender)
 {
-    map488->unk18(map488);
+    mapRender->tilemapRenderFunc(mapRender);
 }
 
-static void sub_80A3EBC(SubStruct_488 *map488)
+static void ClearSingleBgTilemap(MapRender *mapRender)
 {
     s32 i;
-    u16 *dst = map488->unk28[0];
+    u16 *dst = mapRender->bgTilemaps[0];
 
     for (i = 0; i < 1024; i++) {
         *dst++ = 0;
     }
 }
 
-static void sub_80A3ED4(SubStruct_488 *map488)
+static void ClearDoubleBgTilemaps(MapRender *mapRender)
 {
     s32 i;
-    u16 *dst1 = map488->unk28[0];
-    u16 *dst2 = map488->unk28[1];
+    u16 *dst1 = mapRender->bgTilemaps[0];
+    u16 *dst2 = mapRender->bgTilemaps[1];
 
     for (i = 0; i < 1024; i++) {
         *dst1++ = 0;
@@ -840,130 +842,130 @@ static void sub_80A3ED4(SubStruct_488 *map488)
     }
 }
 
-static void sub_80A3EF4(SubStruct_488 *map488)
+static void RenderChunksToBgTilemap_2x2(MapRender *mapRender)
 {
     s32 arrPtrId;
     s32 i, j;
-    u16 *arrPtrs[2];
-    u16 *ptr = &map488->unk20[0][(map488->unk40.y * 64) + map488->unk40.x];
+    u16 *tilemapPtrs[2];
+    u16 *ptr = &mapRender->chunkMappings[0][(mapRender->chunkPos.y * 64) + mapRender->chunkPos.x];
     s32 unk28Id = 0;
 
     for (i = 0; i < 11; ptr += 64, i++) {
         u16 *currPtr = ptr;
 
         for (arrPtrId = 0; arrPtrId < 2; arrPtrId++) {
-            arrPtrs[arrPtrId] = &map488->unk28[0][unk28Id];
+            tilemapPtrs[arrPtrId] = &mapRender->bgTilemaps[0][unk28Id];
             unk28Id += 32;
         }
 
         for (j = 0; j < 16; j++) {
-            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            u16 *currSrc = &mapRender->tileMappings[*currPtr++ * 9];
             for (arrPtrId = 0; arrPtrId < 2; arrPtrId++) {
-                u16 *currDst = arrPtrs[arrPtrId];
+                u16 *currDst = tilemapPtrs[arrPtrId];
                 *currDst++ = *currSrc++;
                 *currDst++ = *currSrc++;
-                arrPtrs[arrPtrId] = currDst;
+                tilemapPtrs[arrPtrId] = currDst;
             }
         }
     }
 }
 
-static void sub_80A3F94(SubStruct_488 *map488)
+static void RenderChunksToBgTilemaps_2x2(MapRender *mapRender)
 {
     s32 arrPtrId;
     u16 *ptr1, *ptr2;
-    u16 *arrPtrs1[2];
-    u16 *arrPtrs2[2];
+    u16 *tilemapPtrs1[2];
+    u16 *tilemapPtrs2[2];
     s32 unk28Id;
     s32 i, j;
 
-    ptr1 = &map488->unk20[0][(map488->unk40.y * 64) + map488->unk40.x];
-    ptr2 = &map488->unk20[1][(map488->unk40.y * 64) + map488->unk40.x];
+    ptr1 = &mapRender->chunkMappings[0][(mapRender->chunkPos.y * 64) + mapRender->chunkPos.x];
+    ptr2 = &mapRender->chunkMappings[1][(mapRender->chunkPos.y * 64) + mapRender->chunkPos.x];
     unk28Id = 0;
     for (i = 0; i < 11; ptr1 += 64, ptr2 += 64, i++) {
         u16 *currPtr1 = ptr1;
         u16 *currPtr2 = ptr2;
 
         for (arrPtrId = 0; arrPtrId < 2; arrPtrId++) {
-            arrPtrs1[arrPtrId] = &map488->unk28[0][unk28Id];
-            arrPtrs2[arrPtrId] = &map488->unk28[1][unk28Id];
+            tilemapPtrs1[arrPtrId] = &mapRender->bgTilemaps[0][unk28Id];
+            tilemapPtrs2[arrPtrId] = &mapRender->bgTilemaps[1][unk28Id];
             unk28Id += 32;
         }
 
         for (j = 0; j < 16; j++) {
-            u16 *currSrc1 = &map488->unk1C[*currPtr1++ * 9];
-            u16 *currSrc2 = &map488->unk1C[*currPtr2++ * 9];
+            u16 *currSrc1 = &mapRender->tileMappings[*currPtr1++ * 9];
+            u16 *currSrc2 = &mapRender->tileMappings[*currPtr2++ * 9];
             for (arrPtrId = 0; arrPtrId < 2; arrPtrId++) {
-                u16 *currDst1 = arrPtrs1[arrPtrId];
-                u16 *currDst2 = arrPtrs2[arrPtrId];
+                u16 *currDst1 = tilemapPtrs1[arrPtrId];
+                u16 *currDst2 = tilemapPtrs2[arrPtrId];
                 *currDst1++ = *currSrc1++;
                 *currDst1++ = *currSrc1++;
                 *currDst2++ = *currSrc2++;
                 *currDst2++ = *currSrc2++;
-                arrPtrs1[arrPtrId] = currDst1;
-                arrPtrs2[arrPtrId] = currDst2;
+                tilemapPtrs1[arrPtrId] = currDst1;
+                tilemapPtrs2[arrPtrId] = currDst2;
             }
         }
     }
 }
 
-static void sub_80A4088(SubStruct_488 *map488)
+static void RenderChunksToBgTilemap_3x3(MapRender *mapRender)
 {
     s32 arrPtrId;
     s32 i, j;
-    u16 *arrPtrs[3];
-    s32 mod3 = map488->unk38.x % 3;
-    u16 *ptr = &map488->unk20[0][(map488->unk40.y * 64) + map488->unk40.x];
+    u16 *tilemapPtrs[3];
+    s32 mod3 = mapRender->tilePos.x % 3;
+    u16 *ptr = &mapRender->chunkMappings[0][(mapRender->chunkPos.y * 64) + mapRender->chunkPos.x];
     s32 unk28Id = 0;
 
     for (i = 0; i < 8; ptr += 64, i++) {
         u16 *currPtr = ptr;
 
         for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-            arrPtrs[arrPtrId] = &map488->unk28[0][unk28Id];
+            tilemapPtrs[arrPtrId] = &mapRender->bgTilemaps[0][unk28Id];
             unk28Id += 32;
         }
 
         if (mod3 != 0) {
-            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            u16 *currSrc = &mapRender->tileMappings[*currPtr++ * 9];
 
             if (mod3 == 1) {
                 currSrc++;
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                    u16 *currDst = arrPtrs[arrPtrId];
+                    u16 *currDst = tilemapPtrs[arrPtrId];
                     *currDst++ = currSrc[0];
                     *currDst++ = currSrc[1];
-                    arrPtrs[arrPtrId] = currDst;
+                    tilemapPtrs[arrPtrId] = currDst;
                     currSrc += 3;
                 }
             }
             else {
                 currSrc += 2;
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                    u16 *currDst = arrPtrs[arrPtrId];
+                    u16 *currDst = tilemapPtrs[arrPtrId];
                     *currDst++ = currSrc[0];
-                    arrPtrs[arrPtrId] = currDst;
+                    tilemapPtrs[arrPtrId] = currDst;
                     currSrc += 3;
                 }
             }
         }
 
         for (j = 0; j < 10; j++) {
-            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            u16 *currSrc = &mapRender->tileMappings[*currPtr++ * 9];
             for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                u16 *currDst = arrPtrs[arrPtrId];
+                u16 *currDst = tilemapPtrs[arrPtrId];
                 *currDst++ = *currSrc++;
                 *currDst++ = *currSrc++;
                 *currDst++ = *currSrc++;
-                arrPtrs[arrPtrId] = currDst;
+                tilemapPtrs[arrPtrId] = currDst;
             }
         }
 
         if (mod3 != 1) {
-            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            u16 *currSrc = &mapRender->tileMappings[*currPtr++ * 9];
             if (mod3 == 0) {
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                    u16 *currDst = arrPtrs[arrPtrId];
+                    u16 *currDst = tilemapPtrs[arrPtrId];
                     currDst[0] = currSrc[0];
                     currDst[1] = currSrc[1];
                     currSrc += 3;
@@ -971,7 +973,7 @@ static void sub_80A4088(SubStruct_488 *map488)
             }
             else {
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                    u16 *currDst = arrPtrs[arrPtrId];
+                    u16 *currDst = tilemapPtrs[arrPtrId];
                     currDst[0] = currSrc[0];
                     currSrc += 3;
                 }
@@ -980,12 +982,12 @@ static void sub_80A4088(SubStruct_488 *map488)
     }
 }
 
-static void sub_80A41C4(SubStruct_488 *map488)
+static void RenderChunksToBgTilemapWrapAround_3x3(MapRender *mapRender)
 {
     s32 mod3;
     s32 arrPtrId;
     u16 *ptr;
-    u16 *arrPtrs[3];
+    u16 *tilemapPtrs[3];
     s32 unk28Id;
     s32 i, j;
     s32 sub1, sub2;
@@ -993,11 +995,11 @@ static void sub_80A41C4(SubStruct_488 *map488)
     // Screw you agbcc...
     ASM_MATCH_TRICK(ptr);ASM_MATCH_TRICK(ptr);ASM_MATCH_TRICK(ptr);ASM_MATCH_TRICK(ptr);ASM_MATCH_TRICK(ptr);
 
-    mod3 = map488->unk38.x % 3;
-    ptr = &map488->unk20[0][(map488->unk40.y * 64) + map488->unk40.x];
+    mod3 = mapRender->tilePos.x % 3;
+    ptr = &mapRender->chunkMappings[0][(mapRender->chunkPos.y * 64) + mapRender->chunkPos.x];
     unk28Id = 0;
-    sub1 = map488->unkC - map488->unk40.y;
-    sub2 = map488->unk8 - map488->unk40.x;
+    sub1 = mapRender->heightChunks - mapRender->chunkPos.y;
+    sub2 = mapRender->widthChunks - mapRender->chunkPos.x;
 
     for (i = 0; i < 8; ptr += 64, i++) {
         u16 *currPtr;
@@ -1008,67 +1010,67 @@ static void sub_80A41C4(SubStruct_488 *map488)
             currPtr = ptr;
         }
         else {
-            sub1 = map488->unkC;
-            ptr = &map488->unk20[0][map488->unk40.x];
+            sub1 = mapRender->heightChunks;
+            ptr = &mapRender->chunkMappings[0][mapRender->chunkPos.x];
             currPtr = ptr;
         }
 
         for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-            arrPtrs[arrPtrId] = &map488->unk28[0][unk28Id];
+            tilemapPtrs[arrPtrId] = &mapRender->bgTilemaps[0][unk28Id];
             unk28Id += 32;
         }
 
         if (mod3 != 0) {
-            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            u16 *currSrc = &mapRender->tileMappings[*currPtr++ * 9];
 
             if (mod3 == 1) {
                 currSrc++;
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                    u16 *currDst = arrPtrs[arrPtrId];
+                    u16 *currDst = tilemapPtrs[arrPtrId];
                     *currDst++ = currSrc[0];
                     *currDst++ = currSrc[1];
-                    arrPtrs[arrPtrId] = currDst;
+                    tilemapPtrs[arrPtrId] = currDst;
                     currSrc += 3;
                 }
             }
             else {
                 currSrc += 2;
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                    *arrPtrs[arrPtrId]++ = *currSrc;
+                    *tilemapPtrs[arrPtrId]++ = *currSrc;
                     currSrc += 3;
                 }
             }
 
             currSub2--;
             if (currSub2 <= 0) {
-                currSub2 = map488->unk8;
+                currSub2 = mapRender->widthChunks;
                 currPtr -= currSub2;
             }
         }
 
         for (j = 0; j < 10; j++) {
-            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            u16 *currSrc = &mapRender->tileMappings[*currPtr++ * 9];
 
             for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                u16 *currDst = arrPtrs[arrPtrId];
+                u16 *currDst = tilemapPtrs[arrPtrId];
                 *currDst++ = *currSrc++;
                 *currDst++ = *currSrc++;
                 *currDst++ = *currSrc++;
-                arrPtrs[arrPtrId] = currDst;
+                tilemapPtrs[arrPtrId] = currDst;
             }
 
             if (--currSub2 <= 0) {
-                currSub2 = map488->unk8;
+                currSub2 = mapRender->widthChunks;
                 currPtr -= currSub2;
             }
         }
 
         // Interestingly enough this part is NOT present in Blue...
         if (mod3 != 1) {
-            u16 *currSrc = &map488->unk1C[*currPtr++ * 9];
+            u16 *currSrc = &mapRender->tileMappings[*currPtr++ * 9];
             if (mod3 == 0) {
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                    u16 *currDst = arrPtrs[arrPtrId];
+                    u16 *currDst = tilemapPtrs[arrPtrId];
                     currDst[0] = currSrc[0];
                     currDst[1] = currSrc[1];
                     currSrc += 3;
@@ -1076,7 +1078,7 @@ static void sub_80A41C4(SubStruct_488 *map488)
             }
             else {
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                    u16 *currDst = arrPtrs[arrPtrId];
+                    u16 *currDst = tilemapPtrs[arrPtrId];
                     currDst[0] = currSrc[0];
                     currSrc += 3;
                 }
@@ -1085,15 +1087,15 @@ static void sub_80A41C4(SubStruct_488 *map488)
     }
 }
 
-static void sub_80A4358(SubStruct_488 *map488)
+static void RenderChunksToBgTilemaps_3x3(MapRender *mapRender)
 {
     s32 arrPtrId;
     s32 i, j;
-    u16 *arrPtrs1[3];
-    u16 *arrPtrs2[3];
-    s32 mod3 = map488->unk38.x % 3;
-    u16 *ptr1 = &map488->unk20[0][(map488->unk40.y * 64) + map488->unk40.x];
-    u16 *ptr2 = &map488->unk20[1][(map488->unk40.y * 64) + map488->unk40.x];
+    u16 *tilemapPtrs1[3];
+    u16 *tilemapPtrs2[3];
+    s32 mod3 = mapRender->tilePos.x % 3;
+    u16 *ptr1 = &mapRender->chunkMappings[0][(mapRender->chunkPos.y * 64) + mapRender->chunkPos.x];
+    u16 *ptr2 = &mapRender->chunkMappings[1][(mapRender->chunkPos.y * 64) + mapRender->chunkPos.x];
     s32 unk28Id = 0;
 
     // Stack memes again...
@@ -1104,28 +1106,28 @@ static void sub_80A4358(SubStruct_488 *map488)
         u16 *currPtr2 = ptr2;
 
         for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-            arrPtrs1[arrPtrId] = &map488->unk28[0][unk28Id];
-            arrPtrs2[arrPtrId] = &map488->unk28[1][unk28Id];
+            tilemapPtrs1[arrPtrId] = &mapRender->bgTilemaps[0][unk28Id];
+            tilemapPtrs2[arrPtrId] = &mapRender->bgTilemaps[1][unk28Id];
             unk28Id += 32;
         }
 
         if (mod3 != 0) {
-            u16 *currSrc1 = &map488->unk1C[*currPtr1++ * 9];
-            u16 *currSrc2 = &map488->unk1C[*currPtr2++ * 9];
+            u16 *currSrc1 = &mapRender->tileMappings[*currPtr1++ * 9];
+            u16 *currSrc2 = &mapRender->tileMappings[*currPtr2++ * 9];
 
             if (mod3 == 1) {
                 currSrc1++;
                 currSrc2++;
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
                     u16 *currDst1, *currDst2;
-                    currDst1 = arrPtrs1[arrPtrId];
-                    currDst2 = arrPtrs2[arrPtrId];
+                    currDst1 = tilemapPtrs1[arrPtrId];
+                    currDst2 = tilemapPtrs2[arrPtrId];
                     *currDst1++ = currSrc1[0];
                     *currDst1++ = currSrc1[1];
                     *currDst2++ = currSrc2[0];
                     *currDst2++ = currSrc2[1];
-                    arrPtrs1[arrPtrId] = currDst1;
-                    arrPtrs2[arrPtrId] = currDst2;
+                    tilemapPtrs1[arrPtrId] = currDst1;
+                    tilemapPtrs2[arrPtrId] = currDst2;
                     currSrc1 += 3;
                     currSrc2 += 3;
                 }
@@ -1134,8 +1136,8 @@ static void sub_80A4358(SubStruct_488 *map488)
                 currSrc1 += 2;
                 currSrc2 += 2;
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                    *arrPtrs1[arrPtrId]++ = currSrc1[0];
-                    *arrPtrs2[arrPtrId]++ = currSrc2[0];
+                    *tilemapPtrs1[arrPtrId]++ = currSrc1[0];
+                    *tilemapPtrs2[arrPtrId]++ = currSrc2[0];
                     currSrc1 += 3;
                     currSrc2 += 3;
                 }
@@ -1143,29 +1145,29 @@ static void sub_80A4358(SubStruct_488 *map488)
         }
 
         for (j = 0; j < 10; j++) {
-            u16 *currSrc1 = &map488->unk1C[*currPtr1++ * 9];
-            u16 *currSrc2 = &map488->unk1C[*currPtr2++ * 9];
+            u16 *currSrc1 = &mapRender->tileMappings[*currPtr1++ * 9];
+            u16 *currSrc2 = &mapRender->tileMappings[*currPtr2++ * 9];
             for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                u16 *currDst1 = arrPtrs1[arrPtrId];
-                u16 *currDst2 = arrPtrs2[arrPtrId];
+                u16 *currDst1 = tilemapPtrs1[arrPtrId];
+                u16 *currDst2 = tilemapPtrs2[arrPtrId];
                 *currDst1++ = *currSrc1++;
                 *currDst1++ = *currSrc1++;
                 *currDst1++ = *currSrc1++;
                 *currDst2++ = *currSrc2++;
                 *currDst2++ = *currSrc2++;
                 *currDst2++ = *currSrc2++;
-                arrPtrs1[arrPtrId] = currDst1;
-                arrPtrs2[arrPtrId] = currDst2;
+                tilemapPtrs1[arrPtrId] = currDst1;
+                tilemapPtrs2[arrPtrId] = currDst2;
             }
         }
 
         if (mod3 != 1) {
-            u16 *currSrc1 = &map488->unk1C[*currPtr1++ * 9];
-            u16 *currSrc2 = &map488->unk1C[*currPtr2++ * 9];
+            u16 *currSrc1 = &mapRender->tileMappings[*currPtr1++ * 9];
+            u16 *currSrc2 = &mapRender->tileMappings[*currPtr2++ * 9];
             if (mod3 == 0) {
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
-                    u16 *currDst1 = arrPtrs1[arrPtrId];
-                    u16 *currDst2 = arrPtrs2[arrPtrId];
+                    u16 *currDst1 = tilemapPtrs1[arrPtrId];
+                    u16 *currDst2 = tilemapPtrs2[arrPtrId];
                     currDst1[0] = currSrc1[0];
                     currDst1[1] = currSrc1[1];
                     currDst2[0] = currSrc2[0];
@@ -1178,9 +1180,9 @@ static void sub_80A4358(SubStruct_488 *map488)
                 for (arrPtrId = 0; arrPtrId < 3; arrPtrId++) {
                     u16 *currDst1, *currDst2;
 
-                    currDst1 = arrPtrs1[arrPtrId];
+                    currDst1 = tilemapPtrs1[arrPtrId];
                     currDst1[0] = currSrc1[0];
-                    currDst2 = arrPtrs2[arrPtrId];
+                    currDst2 = tilemapPtrs2[arrPtrId];
                     currDst2[0] = currSrc2[0];
                     currSrc1 += 3;
                     currSrc2 += 3;
@@ -1190,59 +1192,59 @@ static void sub_80A4358(SubStruct_488 *map488)
     }
 }
 
-void sub_80A4558(GroundBg *groundBg, s32 id, PixelPos *dstPos)
+void GetCameraPositionForLayer(GroundBg *groundBg, s32 id, PixelPos *dstPos)
 {
-    *dstPos = groundBg->unk478[id];
+    *dstPos = groundBg->cameraPixelPosition[id];
 }
 
-void sub_80A456C(GroundBg *groundBg, s32 id, const PixelPos *srcPos)
+void SetCameraPositionForLayer(GroundBg *groundBg, s32 id, const PixelPos *srcPos)
 {
-    groundBg->unk478[id] = *srcPos;
+    groundBg->cameraPixelPosition[id] = *srcPos;
 }
 
 void sub_80A4580(GroundBg *groundBg, s32 id, PixelPos *pixPos)
 {
-    SubStruct_488 *map488 = &groundBg->unk488[id];
+    MapRender *mapRender = &groundBg->mapRender[id];
 
     if (pixPos->x < 0) {
-        if (map488->unk6) {
+        if (mapRender->wrapAround) {
             do {
-                pixPos->x += map488->unk10.x;
+                pixPos->x += mapRender->mapSizePixels.x;
             } while (pixPos->x < 0);
         }
         else {
             pixPos->x = 0;
         }
     }
-    else if (pixPos->x >= map488->unk10.x) {
-        if (map488->unk6) {
+    else if (pixPos->x >= mapRender->mapSizePixels.x) {
+        if (mapRender->wrapAround) {
             do {
-                pixPos->x -= map488->unk10.x;
-            } while (pixPos->x >= map488->unk10.x);
+                pixPos->x -= mapRender->mapSizePixels.x;
+            } while (pixPos->x >= mapRender->mapSizePixels.x);
         }
         else {
-            pixPos->x = map488->unk10.x - 1;
+            pixPos->x = mapRender->mapSizePixels.x - 1;
         }
     }
 
     if (pixPos->y < 0) {
-        if (map488->unk6) {
+        if (mapRender->wrapAround) {
             do {
-                pixPos->y += map488->unk10.y;
+                pixPos->y += mapRender->mapSizePixels.y;
             } while (pixPos->y < 0);
         }
         else {
             pixPos->y = 0;
         }
     }
-    else if (pixPos->y >= map488->unk10.y) {
-        if (map488->unk6) {
+    else if (pixPos->y >= mapRender->mapSizePixels.y) {
+        if (mapRender->wrapAround) {
             do {
-                pixPos->y -= map488->unk10.y;
-            } while (pixPos->y >= map488->unk10.y);
+                pixPos->y -= mapRender->mapSizePixels.y;
+            } while (pixPos->y >= mapRender->mapSizePixels.y);
         }
         else {
-            pixPos->y = map488->unk10.y - 1;
+            pixPos->y = mapRender->mapSizePixels.y - 1;
         }
     }
 }
@@ -1313,14 +1315,14 @@ u8 sub_80A46C0(GroundBg *groundBg, u8 bits, PixelPos *pixPos1, PixelPos *boundar
 
 u16 sub_80A4720(GroundBg *groundBg, s32 id, PixelPos *pixPos)
 {
-    u16 *ptr = groundBg->unk54C[id] + (pixPos->y * 64);
+    u16 *ptr = groundBg->chunkMappings[id] + (pixPos->y * 64);
     ptr += pixPos->x;
     return *ptr;
 }
 
 void sub_80A4740(GroundBg *groundBg, s32 id, PixelPos *pixPos, u32 dstVal)
 {
-    u16 *ptr = groundBg->unk54C[id] + (pixPos->y * 64);
+    u16 *ptr = groundBg->chunkMappings[id] + (pixPos->y * 64);
     ptr += pixPos->x;
     *ptr = dstVal;
 }
@@ -1329,7 +1331,7 @@ void sub_80A4764(GroundBg *groundBg)
 {
     s32 i, j;
     s32 unk3E0Id;
-    SubStruct_488 *map488;
+    MapRender *mapRender;
     PixelPos *map478;
 
     if (groundBg->mapFileId == -1)
@@ -1406,20 +1408,20 @@ void sub_80A4764(GroundBg *groundBg)
         }
     }
 
-    map488 = groundBg->unk488;
-    map478 = groundBg->unk478;
-    for (i = 0; i < groundBg->unk474; i++, map488++, map478++) {
+    mapRender = groundBg->mapRender;
+    map478 = groundBg->cameraPixelPosition;
+    for (i = 0; i < groundBg->unk474; i++, mapRender++, map478++) {
         s32 unk;
 
-        sub_80A3E14(map488, map478);
-        sub_80A3EB0(map488);
-        for (j = 0, unk = map488->unk2 + groundBg->unk52C.unkA; j < map488->unk4; j++, unk++) {
+        UpdateMapCameraPosition(mapRender, map478);
+        CallMapTilemapRenderFunc(mapRender);
+        for (j = 0, unk = mapRender->unk2 + groundBg->unk52C.unkA; j < mapRender->numBgs; j++, unk++) {
             switch (unk) {
                 case 0:
-                    SetBG2RegOffsets(map488->bgRegOffsets.x, map488->bgRegOffsets.y);
+                    SetBG2RegOffsets(mapRender->bgRegOffsets.x, mapRender->bgRegOffsets.y);
                     break;
                 case 1:
-                    SetBG3RegOffsets(map488->bgRegOffsets.x, map488->bgRegOffsets.y);
+                    SetBG3RegOffsets(mapRender->bgRegOffsets.x, mapRender->bgRegOffsets.y);
                     break;
             }
         }
@@ -1445,7 +1447,7 @@ void sub_80A49E8(GroundBg *groundBg)
 
     if (groundBg->unk52A) {
         s32 unk;
-        for (i = 0, unk = groundBg->unk52C.unkA; i < groundBg->unk52C.unkC; i++, unk++) {
+        for (i = 0, unk = groundBg->unk52C.unkA; i < groundBg->unk52C.numLayers; i++, unk++) {
             ScheduleBgTilemapCopy(unk + 2);
         }
         groundBg->unk52A = 0;

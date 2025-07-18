@@ -44,7 +44,7 @@ void GroundMap_Action(void)
 
 extern u8 sub_809D248(PixelPos *r0);
 extern void sub_80A4580(GroundBg *, u32, PixelPos *);
-extern void sub_80A456C(GroundBg *, u32, const PixelPos *);
+extern void SetCameraPositionForLayer(GroundBg *, u32, const PixelPos *);
 extern void sub_80A4764(GroundBg *);
 
 extern GroundMapAction *gGroundMapAction;
@@ -71,11 +71,11 @@ void sub_80A59DC(void)
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
                 pixPos2 = (PixelPos) { pixPos.x, pixPos.y + gGroundMapAction->unkF8.y };
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 pixPos2.x = pixPos.x;
                 pixPos2.y = pixPos.y - gGroundMapAction->unkF8.y;
                 sub_80A4580(gGroundMapDungeon_3001B70, 1, &pixPos2);
-                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
             case 0xA8:
@@ -88,7 +88,7 @@ void sub_80A59DC(void)
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
                 pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y };
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
             case 0xAE: {
@@ -100,21 +100,21 @@ void sub_80A59DC(void)
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
                 pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y };
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
-                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
             case 0xAB: {
                 PixelPos pixPos2 = pixPos;
 
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
             case 0xAF: {
                 PixelPos pixPos2;
 
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
                 gGroundMapAction->unkF0 += gGroundMapAction->unkE8;
                 gGroundMapAction->unkF4 += gGroundMapAction->unkEC;
                 gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
@@ -124,7 +124,7 @@ void sub_80A59DC(void)
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
                 pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y + gGroundMapAction->unkF8.y};
                 sub_80A4580(gGroundMapDungeon_3001B70, 1, &pixPos2);
-                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
             case 0xB0: {
@@ -139,57 +139,57 @@ void sub_80A59DC(void)
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
                 pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y + gGroundMapAction->unkF8.y};
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
             case 0xBA: {
                 PixelPos pixPos2;
 
-                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos);
                 gGroundMapAction->unkF0++;
                 gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 4;
                 gGroundMapAction->unkF0 &= 3;
                 sub_80A4580(gGroundMapDungeon_3001B70, 1, &gGroundMapAction->unkF8);
                 pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y};
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos2);
                 break;
             }
             case 4: {
                 PixelPos pixPos2;
 
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
                 gGroundMapAction->unkF0++;
                 gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
                 gGroundMapAction->unkF0 &= 7;
                 sub_80A4580(gGroundMapDungeon_3001B70, 1, &gGroundMapAction->unkF8);
                 pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y};
                 sub_80A4580(gGroundMapDungeon_3001B70, 1, &pixPos2);
-                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
             case 0xE0: {
                 PixelPos pixPos2;
 
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
                 gGroundMapAction->unkF0++;
                 gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
                 gGroundMapAction->unkF0 &= 7;
                 sub_80A4580(gGroundMapDungeon_3001B70, 1, &gGroundMapAction->unkF8);
                 pixPos2 = (PixelPos) { gGroundMapAction->unkF8.x, pixPos.y};
-                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
             case 0xA1: {
                 PixelPos pixPos2;
 
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
                 pixPos2 = (PixelPos) {0, 0};
-                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 1, &pixPos2);
                 break;
             }
             default:
-                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
+                SetCameraPositionForLayer(gGroundMapDungeon_3001B70, 0, &pixPos);
                 break;
         }
 

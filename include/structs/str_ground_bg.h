@@ -8,7 +8,7 @@
 #define UNK_0_ARR_COUNT 14
 #define UNK_E0_ARR_COUNT 32
 #define UNK_3E0_ARR_COUNT 2
-#define UNK_54C_ARR_COUNT 2
+#define NUM_LAYERS 2
 #define MAX_BPA_SLOTS 4
 
 typedef struct SubStruct_0
@@ -44,24 +44,24 @@ typedef struct SubStruct_3E0
     u32 unk24;
 } SubStruct_3E0;
 
-typedef struct SubStruct_488
+typedef struct MapRender
 {
-    s16 unk0;
+    s16 chunkDimensions;
     s16 unk2;
-    s16 unk4;
-    bool8 unk6;
-    s32 unk8;
-    s32 unkC;
-    PixelPos unk10;
-    void (*unk18)(struct SubStruct_488 *);
-    u16 *unk1C;
-    u16 *unk20[UNK_54C_ARR_COUNT];
-    u16 *unk28[UNK_54C_ARR_COUNT];
-    PixelPos unk30;
-    PixelPos unk38;
-    PixelPos unk40;
+    s16 numBgs;
+    bool8 wrapAround;
+    s32 widthChunks;
+    s32 heightChunks;
+    PixelPos mapSizePixels;
+    void (*tilemapRenderFunc)(struct MapRender *);
+    u16 *tileMappings;
+    u16 *chunkMappings[NUM_LAYERS];
+    u16 *bgTilemaps[NUM_LAYERS];
+    PixelPos cameraPos;
+    PixelPos tilePos;
+    PixelPos chunkPos;
     PixelPos bgRegOffsets; // Either bg2 or bg3
-} SubStruct_488;
+} MapRender;
 
 typedef struct BmaHeader
 {
@@ -91,7 +91,7 @@ typedef struct SubStruct_52C
     s16 unk6; // 0x532
     s16 unk8; // 0x534
     s16 unkA; // 0x536
-    s16 unkC; // 0x538
+    s16 numLayers; // 0x538
     s16 unkE; // 0x53A
     s16 unk10; // 0x53C
     s16 unk12; // 0x53E
@@ -101,8 +101,8 @@ typedef struct SubStruct_52C
 typedef struct LayerSpecs
 {
     // Apparently these two fields are not present in pmd-sky?
-    s16 unk0;
-    s16 unk2;
+    s16 chunkWidth; // Must be 2 or 3
+    s16 chunkHeight; // Must be 2 or 3
 
     s16 numTiles; // The number of tiles stored in the data + 1. The +1 is the null tile at the beginning of tiles.
     s16 bpaSlotNumTiles[MAX_BPA_SLOTS]; // The number of tiles in the BPA on this slot. 0 if no BPA is assigned.
@@ -124,6 +124,11 @@ typedef struct BplHeader
     // Animation RGB palettes
 } BplHeader;
 
+// Note: Always 3x3 in Sky
+#define CHUNK_DIMENSIONS_INVALID 0
+#define CHUNK_DIMENSIONS_2x2 1
+#define CHUNK_DIMENSIONS_3x3 2
+
 // size: 0x55C
 typedef struct GroundBg
 {
@@ -144,15 +149,15 @@ typedef struct GroundBg
     u8 unk470;
     u8 unk471;
     s32 unk474;
-    PixelPos unk478[UNK_54C_ARR_COUNT];
-    struct SubStruct_488 unk488[UNK_54C_ARR_COUNT];
-    u16 unk528;
+    PixelPos cameraPixelPosition[NUM_LAYERS];
+    struct MapRender mapRender[NUM_LAYERS];
+    u16 chunkDimensions;
     u8 unk52A;
     SubStruct_52C unk52C;
     u16 *unk544;
-    u16 *unk548;
-    u16 *unk54C[UNK_54C_ARR_COUNT];
-    u16 *unk554[UNK_54C_ARR_COUNT];
+    u16 *tileMappings;
+    u16 *chunkMappings[NUM_LAYERS];
+    u16 *bgTilemaps[NUM_LAYERS];
 } GroundBg;
 
 extern GroundBg *gGroundMapDungeon_3001B70;

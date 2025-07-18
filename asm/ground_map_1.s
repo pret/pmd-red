@@ -698,7 +698,7 @@ sub_80A56C0:
 	ldr r0, _080A56D4
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_80A4558
+	bl GetCameraPositionForLayer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -712,7 +712,7 @@ sub_80A56D8:
 	ldr r0, _080A56EC
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_80A456C
+	bl SetCameraPositionForLayer
 	pop {r0}
 	bx r0
 	.align 2, 0
