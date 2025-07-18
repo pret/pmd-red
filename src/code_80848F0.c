@@ -35,6 +35,7 @@
 #include "pokemon_3.h"
 #include "dungeon_boss_dialogue.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_engine.h"
 
 struct RgbS16
 {
@@ -51,7 +52,7 @@ extern const u8 gUnknown_8107358[25];
 extern const DungeonPos gUnknown_80F4598[];
 
 extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateMinimap(void);
 extern s32 GetCameraXPos(void);
 extern s32 GetCameraYPos(void);
 extern void sub_803F4A0(u32);
@@ -66,7 +67,6 @@ extern void sub_8085F44(s32);
 extern void sub_8052FB8(const u8 *);
 extern void BgColorCallNullsub4(void);
 extern void PlaySoundEffect(u32);
-extern u8 sub_8044B28(void);
 extern void sub_8085EB0(void);
 extern void sub_803E748(void);
 extern s32 GetCameraXPos(void);
@@ -136,7 +136,7 @@ void sub_80847D4(void)
 
     gDungeon->unk3A0D = 0;
     gDungeon->unk1356C = 0;
-    ShowWholeRevealedDungeonMap();
+    UpdateMinimap();
     for(index = 0; index < 0x3e7 && gUnknown_8107234[index].unk0 != 0;  index++) {
         fixedRoomNumber = gDungeon->fixedRoomNumber;
         if (fixedRoomNumber - 0x1c < 0x16) {
@@ -934,7 +934,7 @@ Entity *GetEntityFromMonsterBehavior(u8 entityType)
 void sub_80856C8(Entity * pokemon, s32 x, s32 y)
 {
     sub_80694C0(pokemon, x, y, 1);
-    sub_804535C(pokemon,NULL);
+    UpdateEntityPixelPos(pokemon,NULL);
 }
 
 void sub_80856E0(Entity * pokemon, s32 direction)
@@ -973,7 +973,7 @@ void sub_8085764(void)
     {
         entity = gDungeon->wildPokemon[index];
         if ((EntityIsValid(entity)) && (GetEntInfo(entity)->monsterBehavior == BEHAVIOR_ALLY)) {
-            sub_8068FE0(entity,0x207,&stackEntity);
+            HandleFaint(entity,0x207,&stackEntity);
         }
     }
 }
@@ -991,7 +991,7 @@ void sub_80857B8(void)
         if (EntityIsValid(entity)) {
             entityInfo = GetEntInfo(entity);
             if ((gDungeon->unk4 == 0) && (gDungeon->unk2 == 0)) {
-                sub_804535C(entity, 0);
+                UpdateEntityPixelPos(entity, 0);
                 entityInfo->unk15C = 0;
                 entityInfo->unkFE = 99;
                 direction = &entityInfo->action.direction;
@@ -1524,7 +1524,7 @@ static void sub_80862DC(Entity *entity)
     pos.x = entity->pixelPos.x;
     pos.y = entity->pixelPos.y + 0x3800;
 
-    sub_804535C(entity, &pos);
+    UpdateEntityPixelPos(entity, &pos);
     sub_806CDD4(entity, 0, DIRECTION_NORTH);
     sub_8086A54(entity);
 }
@@ -1535,7 +1535,7 @@ static void sub_8086310(Entity *entity)
     pos.x = entity->pixelPos.x;
     pos.y = entity->pixelPos.y + 0x9000;
 
-    sub_804535C(entity, &pos);
+    UpdateEntityPixelPos(entity, &pos);
     sub_806CE68(entity, DIRECTION_SOUTH);
     sub_8086A3C(entity);
     entity->isVisible = 0;
@@ -1547,7 +1547,7 @@ static void sub_8086348(Entity *entity)
     pos.x = entity->pixelPos.x + 0x7800;
     pos.y = entity->pixelPos.y - 0x2000;
 
-    sub_804535C(entity, &pos);
+    UpdateEntityPixelPos(entity, &pos);
     sub_806CDD4(entity, 0, DIRECTION_WEST);
     sub_8086A54(entity);
 }
@@ -1558,7 +1558,7 @@ static void sub_8086384(Entity *entity)
     pos.x = entity->pixelPos.x + 0x7800;
     pos.y = entity->pixelPos.y;
 
-    sub_804535C(entity, &pos);
+    UpdateEntityPixelPos(entity, &pos);
     sub_806CDD4(entity, 0, DIRECTION_WEST);
     sub_8086A54(entity);
 }
@@ -2000,7 +2000,7 @@ void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex)
 
 void sub_8086AC0(void)
 {
-    if(!sub_8044B28())
+    if(!IsFloorOver())
         if(gDungeon->unk2 == 0)
             sub_8097FF8();
 }

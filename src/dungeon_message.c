@@ -32,7 +32,6 @@ void sub_80526D0(s32 r0);
 static bool8 sub_8052DC0(Entity *);
 static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2);
 
-extern bool8 sub_8045888(Entity *pokemon);
 extern void sub_805E804(void);
 extern void sub_8083E28(void);
 extern void PlayDungeonCancelSE(void);
@@ -87,14 +86,14 @@ void sub_805229C(void)
 
 void LogMessageByIdWithPopupCheckUser(Entity *pokemon, const u8 *str)
 {
-    if (sub_8045888(pokemon)){
+    if (ShouldDisplayEntity(pokemon)){
         DisplayMessageAddToLog(pokemon, str, TRUE);
     }
 }
 
 UNUSED void TryDisplayDungeonLoggableMessage2(Entity *pokemon, const u8 *str)
 {
-    if (sub_8045888(pokemon)){
+    if (ShouldDisplayEntity(pokemon)){
         DisplayMessageAddToLog(pokemon, str, FALSE);
     }
 }
@@ -107,7 +106,7 @@ void DisplayDungeonLoggableMessageFalse(Entity *pokemon, const u8 *str)
 void TryDisplayDungeonLoggableMessage3(Entity *attacker, Entity *target, const u8 *str)
 {
     u8 flag;
-    flag = sub_8045888(attacker) ? TRUE : FALSE;
+    flag = ShouldDisplayEntity(attacker) ? TRUE : FALSE;
     if(sub_8052DC0(target) != 0)
     {
         flag = TRUE;
@@ -121,7 +120,7 @@ void TryDisplayDungeonLoggableMessage3(Entity *attacker, Entity *target, const u
 void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const u8 *str)
 {
     u8 flag;
-    flag = sub_8045888(attacker) ? TRUE : FALSE;
+    flag = ShouldDisplayEntity(attacker) ? TRUE : FALSE;
     if(sub_8052DC0(target) != 0)
     {
         flag = TRUE;
@@ -132,11 +131,11 @@ void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const u
     }
 }
 
-void TryDisplayDungeonLoggableMessage5(Entity *pokemon, DungeonPos *pos,
+void LogMessageByIdWithPopupCheckUserUnknown(Entity *pokemon, DungeonPos *pos,
                                        const u8 *str)
 {
     u8 flag;
-    flag = sub_8045888(pokemon) ? TRUE : FALSE;
+    flag = ShouldDisplayEntity(pokemon) ? TRUE : FALSE;
     if(sub_803F428(pos))
     {
         flag = TRUE;
@@ -604,7 +603,7 @@ void sub_8052D44(s16 *ids, Entity *leader, Entity *partner)
 
 static bool8 sub_8052DC0(Entity *entity)
 {
-    return sub_8045888(entity);
+    return ShouldDisplayEntity(entity);
 }
 
 static inline bool32 DislayTutorialMsg(Entity *leader, const struct TutorialFlagMsg *tutorial, bool32 unkFunctionCall)
@@ -641,7 +640,7 @@ void TryDisplayGeneralTutorialMessage(void)
     }
 }
 
-void TryDisplayItemPickupTutorialMessage(u8 itemId)
+void DisplayItemTip(u8 itemId)
 {
     u32 itemCategory = GetItemCategory(itemId);
 

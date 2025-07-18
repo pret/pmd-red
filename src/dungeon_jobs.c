@@ -127,7 +127,7 @@ void sub_8084448(Entity *pokemon)
 
     sub_80843BC(entInfo->id);
     sub_8042A34(&pokemon->pos);
-    sub_8068FE0(pokemon,0x21c,0);
+    HandleFaint(pokemon,0x21c,0);
     sub_804178C(1);
     while(1) {
         if (DisplayDungeonYesNoMessage(0,str,1) == 1) {
@@ -186,8 +186,8 @@ void sub_80845E0(Entity *pokemon)
     info2->joinedAt.id = gDungeon->unk644.dungeonLocation.id;
     sub_8042A34(&pokemon->pos);
     sub_8042A34(&entity->pos);
-    sub_8068FE0(pokemon,0x21c,0);
-    sub_8068FE0(entity,0x21c,0);
+    HandleFaint(pokemon,0x21c,0);
+    HandleFaint(entity,0x21c,0);
     sub_804178C(1);
     while(1) {
         if (DisplayDungeonYesNoMessage(0,gUnknown_80FA4D8,1) == 1) {

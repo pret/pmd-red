@@ -12,7 +12,7 @@ struct UnkMenuBitsStruct {
 
 void DungeonHandlePlayerInput(void);
 void sub_805E804(void);
-void sub_805EE30(void);
+void CheckLeaderTile(void);
 void sub_805EFB4(Entity *a0, bool8 a1);
 void sub_805F02C(void);
 ActionContainer *GetLeaderActionContainer(void);

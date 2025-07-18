@@ -611,7 +611,7 @@ static void sub_8017A1C(void)
             for (itemID = 0; itemID < NUMBER_OF_ITEM_IDS; itemID++) {
                 if (sub_801CFE0(itemID)) {
                     item.id = itemID;
-                    if (IsThrowableItem(item.id)) {
+                    if (IsThrownItem(item.id)) {
                         if (gTeamInventoryRef->teamStorage[item.id] > 99)
                             item.quantity = 99;
                         else
@@ -762,7 +762,7 @@ static void sub_8017D24(void)
                 sub_801CBB8();
                 UpdateKangaskhanStorageState(KANGASKHAN_STORAGE_TOO_MANY_ITEMS);
             }
-            else if (IsThrowableItem(gKangaskhanStorageWork->storedItem.id))
+            else if (IsThrownItem(gKangaskhanStorageWork->storedItem.id))
                 UpdateKangaskhanStorageState(24);
             else
                 UpdateKangaskhanStorageState(27);

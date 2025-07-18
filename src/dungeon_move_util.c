@@ -41,15 +41,14 @@
 #include "pokemon_types.h"
 #include "dungeon_run_end.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_engine.h"
 
 extern void sub_80429C8(Entity *r0);
-extern bool8 sub_8045888(Entity *r0);
 extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, s24_8, u16, u32);
 extern void sub_806A1E8(Entity *pokemon);
-extern bool8 sub_8044B28(void);
 extern void sub_804178C(u32);
-extern void sub_8071DA4(Entity *);
+extern void EnemyEvolution(Entity *);
 extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);
@@ -113,7 +112,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
 
     while (1) {
         Move *currMove = &attackerInfo->moves.moves[moveId];
-        if (!EntityIsValid(attacker) || sub_8044B28())
+        if (!EntityIsValid(attacker) || IsFloorOver())
             break;
 
         if (currMove->id == MOVE_SNORE || currMove->id == MOVE_SLEEP_TALK) {
@@ -186,7 +185,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
         }
 
         sub_804178C(1);
-        if (!EntityIsValid(attacker) || sub_8044B28())
+        if (!EntityIsValid(attacker) || IsFloorOver())
             break;
         if (++moveId >= MAX_MON_MOVES)
             break;
@@ -218,7 +217,7 @@ bool32 sub_8055A00(Entity *attacker, s32 firstMoveId, s32 var_34, s32 itemId, s3
     }
 
     if (EntityIsValid(attacker)) {
-        sub_8071DA4(attacker);
+        EnemyEvolution(attacker);
         if (EntityIsValid(attacker) && gUnknown_202F222 != 0) {
             gUnknown_202F222 = 0;
             if (EntityIsValid(attacker)) {
@@ -412,7 +411,7 @@ bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, 
         var_24 = 1;
         if (gUnknown_202F220 != 0 || gUnknown_202F221 != 0)
             break;
-        if (!EntityIsValid(attacker) || sub_8044B28())
+        if (!EntityIsValid(attacker) || IsFloorOver())
             return TRUE;
 
         entInfo = GetEntInfo(attacker);
@@ -487,14 +486,14 @@ bool8 sub_8056468(Entity *entity, Move *move, const u8 *str, Entity **unkArray, 
 {
     s32 i;
     bool8 ret = FALSE;
-    bool32 r7 = (sub_8045888(entity) != FALSE);
+    bool32 r7 = (ShouldDisplayEntity(entity) != FALSE);
 
     if (str != NULL) {
         for (i = 0; i < 65; i++) {
             if (unkArray[i] == NULL) {
                 break;
             }
-            if (sub_8045888(unkArray[i])) {
+            if (ShouldDisplayEntity(unkArray[i])) {
                 r7 = TRUE;
                 break;
             }
@@ -1194,7 +1193,7 @@ bool8 sub_80571F0(Entity * pokemon, Move *move)
 bool8 sub_805727C(Entity * pokemon, Entity * target, s32 chance)
 {
     bool8 uVar2;
-    if (sub_8044B28())
+    if (IsFloorOver())
         return FALSE;
     if (!EntityIsValid(pokemon) || !EntityIsValid(target))
         return FALSE;

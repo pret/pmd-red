@@ -422,7 +422,7 @@ static void sub_80186F8(void)
                     if (sub_801CFE0(itemID) != 0) {
                         item.id = itemID;
 
-                        if (IsThrowableItem(item.id)) {
+                        if (IsThrownItem(item.id)) {
                             if (gTeamInventoryRef->teamStorage[item.id] > 99)
                                 item.quantity = 99;
                             else
@@ -571,7 +571,7 @@ static void HandleKangaskhanStorage2TakeMenu(void)
         case TAKE_ACTION:
             if (GetNumberOfFilledInventorySlots() >= INVENTORY_SIZE)
                 sub_8012EA4(&sUnknown_203B20C->unk70, 1);
-            else if (IsThrowableItem(sUnknown_203B20C->item.id))
+            else if (IsThrownItem(sUnknown_203B20C->item.id))
                 UpdateKangaskhanStorage2State(12);
             else {
                 gTeamInventoryRef->teamStorage[sUnknown_203B20C->item.id] -= sUnknown_203B20C->item.quantity;

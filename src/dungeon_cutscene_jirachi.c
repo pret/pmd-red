@@ -44,14 +44,14 @@ extern void BgColorCallNullsub4(void);
 extern void sub_8085EB0(void);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateMinimap(void);
 extern void sub_8086A54(Entity *);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
+extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_807EAA0(u32, u32);
@@ -84,7 +84,7 @@ void sub_808B2F4(void)
   jirachiEntity = GetEntityFromMonsterBehavior(BEHAVIOR_JIRACHI);
   DungeonStartNewBGM(MUS_FRIEND_AREA_FOREST);
   CreateJirachiWishWarpTile();
-  sub_8049ED4();
+  UpdateTrapsVisibility();
   sub_80854D4();
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
@@ -106,13 +106,13 @@ void sub_808B35C(void)
   sub_8085930(DIRECTION_NORTH);
   sub_80855E4(sub_8086A3C);
   if (HasRecruitedMon(MONSTER_JIRACHI)) {
-    sub_8068FE0(jirachiEntity,0x21c,0);
+    HandleFaint(jirachiEntity,0x21c,0);
   }
   else {
     SetFacingDirection(jirachiEntity, DIRECTION_SOUTH);
     sub_8086A3C(jirachiEntity);
     CreateJirachiWishWarpTile();
-    sub_8049ED4();
+    UpdateTrapsVisibility();
 
   }
   sub_8085860(leaderEntity->pos.x,leaderEntity->pos.y - 3);
@@ -139,7 +139,7 @@ void sub_808B3E4(u8 param_1, u8 param_2, u8 param_3)
             sub_808B50C();
         }
         gDungeon->unk1356C = uVar1;
-        ShowWholeRevealedDungeonMap();
+        UpdateMinimap();
     }
   }
 }
@@ -509,8 +509,8 @@ static void CreateJirachiWishWarpTile(void)
   tile->terrainType &= ~TERRAIN_TYPE_STAIRS;
   sub_8049884();
   sub_8049B8C();
-  sub_8049ED4();
-  ShowWholeRevealedDungeonMap();
+  UpdateTrapsVisibility();
+  UpdateMinimap();
 }
 
 static void EnableJirachiWishWarpTile(void)
@@ -525,8 +525,8 @@ static void EnableJirachiWishWarpTile(void)
   tile->unk8 = 1;
   sub_8049884();
   sub_8049B8C();
-  sub_8049ED4();
-  ShowWholeRevealedDungeonMap();
+  UpdateTrapsVisibility();
+  UpdateMinimap();
 }
 
 static u8 JirachiFriendAreaSearch(void)

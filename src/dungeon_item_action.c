@@ -123,9 +123,9 @@ void BlinkerSeedItemAction(Entity *, Entity *);
 void DoomSeedItemAction(Entity *, Entity *);
 void sub_80482FC(Entity *, Entity *, u32, u8);
 
-extern void sub_8071DA4(Entity *);
+extern void EnemyEvolution(Entity *);
 extern void SetShopkeeperAggression(Entity *, Entity *);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
+extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void sub_806A6E8(Entity *);
 extern void sub_8042390(Entity *, Item *);
 
@@ -156,7 +156,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
       }
       if (flag && ((info->heldItem.flags & ITEM_FLAG_EXISTS) == 0)) {
         if (info->shopkeeper == TRUE) {
-          sub_80464C8(pokemon,&target->pos,item);
+          SpawnDroppedItemWrapper(pokemon,&target->pos,item);
           return;
         }
         PlaySoundEffect(0x14d);
@@ -178,7 +178,7 @@ void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity
     TryDisplayDungeonLoggableMessage3(pokemon,target,*gItemStickyDoesntWorkText);
     if (param_1 != '\0') {
       sub_806F370(pokemon,target,gUnknown_80F4FAE,1,&uStack_24,0,0x217,0,0,0);
-      sub_8071DA4(pokemon);
+      EnemyEvolution(pokemon);
       return;
     }
     else goto _jump;
@@ -407,7 +407,7 @@ _jump:
         break;
   }
 _080482B4:
-  sub_8071DA4(pokemon);
+  EnemyEvolution(pokemon);
 }
 
 UNUSED void nullsub_205(void) { }

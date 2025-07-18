@@ -274,7 +274,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
                 UnlockFriendArea(friendArea);
                 flag = TRUE;
             }
-            sub_8068FE0(entity2,500,entity1);
+            HandleFaint(entity2,500,entity1);
             pokeStruct2 = &gRecruitedPokemonRef->dungeonTeam[pokeIndex];
             pokeStruct2->flags = 3;
             pokeStruct2->isTeamLeader = FALSE;
@@ -441,7 +441,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
       flag = TRUE;
     }
     IncrementAdventureNumJoined();
-    sub_8068FE0(entity2,500,entity1);
+    HandleFaint(entity2,500,entity1);
     if (sub_806B8CC(local_74.id,local_74.pos.x,local_74.pos.y,pokeStruct2,&local_2c,0,0) == 0) {
       pokeStruct2->flags = 0;
     }

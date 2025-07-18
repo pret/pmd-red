@@ -40,9 +40,9 @@
 #include "code_8077274_1.h"
 #include "math.h"
 #include "dungeon_config.h"
+#include "dungeon_engine.h"
 
 extern void sub_8073D14(Entity *);
-extern bool8 sub_8044B28(void);
 extern void sub_8075708(Entity *entity);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern void sub_805229C(void);
@@ -54,14 +54,13 @@ extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);
 extern void sub_80838EC(u8 *a);
 extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
-extern bool8 sub_8045888(Entity *);
 extern void nullsub_97(Entity *entity);
-extern void sub_805EE30(void);
+extern void CheckLeaderTile(void);
 extern void sub_8086AC0(void);
 extern void sub_8085140(void);
 extern void sub_8075708(Entity *entity);
-extern void sub_8043ED0(u32);
-extern void sub_8071DA4(Entity *);
+extern void TryForcedLoss(u32);
+extern void EnemyEvolution(Entity *);
 extern void sub_8075900(Entity *pokemon, u8 r1);
 extern void sub_806A5B8(Entity *);
 extern void sub_807EC28(bool8);
@@ -157,7 +156,7 @@ void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr)
     }
 }
 
-bool8 UseAttack(Entity *a0)
+bool8 DisplayActions(Entity *a0)
 {
     s32 i, j, loop;
     Entity *savedEntityPtr;
@@ -193,11 +192,11 @@ bool8 UseAttack(Entity *a0)
                 monInfo->flags |= 0x2000;
                 pos.x = X_POS_TO_PIXELPOS(monInfo->unk184[0].previousTargetMovePosition2.x);
                 pos.y = Y_POS_TO_PIXELPOS(monInfo->unk184[0].previousTargetMovePosition2.y);
-                sub_804535C(mon, &pos);
+                UpdateEntityPixelPos(mon, &pos);
                 sub_806CDFC(mon, 0, monInfo->unk184[0].lastMoveDirection);
                 monInfo->notMoving = 0;
                 r7 = TRUE;
-                if (sub_8045888(mon))
+                if (ShouldDisplayEntity(mon))
                     r9 = TRUE;
             }
         }
@@ -230,7 +229,7 @@ bool8 UseAttack(Entity *a0)
 
                                 pos.x = X_POS_TO_PIXELPOS(monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.x);
                                 pos.y = Y_POS_TO_PIXELPOS(monInfo->unk184[monInfo->notMoving].previousTargetMovePosition2.y);
-                                sub_804535C(mon, &pos);
+                                UpdateEntityPixelPos(mon, &pos);
                                 sub_806CDFC(mon, 0, monInfo->unk184[monInfo->notMoving].lastMoveDirection);
                             }
                         }
@@ -247,7 +246,7 @@ bool8 UseAttack(Entity *a0)
             monInfo->numMoveTiles = 0;
             nullsub_97(mon);
             if (monInfo->flags & 0x2000) {
-                sub_804535C(mon, NULL);
+                UpdateEntityPixelPos(mon, NULL);
             }
         }
     }
@@ -261,7 +260,7 @@ bool8 UseAttack(Entity *a0)
 
             if (!EntityIsValid(mon))
                 continue;
-            if (sub_8044B28())
+            if (IsFloorOver())
                 break;
 
             monInfo = GetEntInfo(mon);
@@ -276,32 +275,32 @@ bool8 UseAttack(Entity *a0)
             if (monInfo->flags & 0x2000) {
                 monInfo->flags &= ~(0x2000);
                 if (monInfo->isTeamLeader) {
-                    sub_804AC20(&mon->pos);
+                    DiscoverMinimap(&mon->pos);
                     sub_807EC28(FALSE);
-                    sub_805EE30();
+                    CheckLeaderTile();
                 }
                 else {
                     sub_8075708(mon);
                 }
                 if (!EntityIsValid(mon))
                     continue;
-                if (sub_8044B28())
+                if (IsFloorOver())
                     break;
 
-                sub_8043ED0(0);
+                TryForcedLoss(0);
                 sub_8074094(mon);
                 if (!EntityIsValid(mon))
                     continue;
-                if (sub_8044B28())
+                if (IsFloorOver())
                     break;
 
-                sub_8071DA4(mon);
+                EnemyEvolution(mon);
                 sub_8046D20();
                 sub_8075900(mon, gDungeon->forceMonsterHouse);
             }
             if (!EntityIsValid(mon))
                 continue;
-            if (sub_8044B28())
+            if (IsFloorOver())
                 break;
 
             if (monPosBefore.x != mon->pos.x || monPosBefore.y != mon->pos.y)
@@ -315,7 +314,7 @@ bool8 UseAttack(Entity *a0)
     }
 
     sub_8086AC0();
-    if (!sub_8044B28()) {
+    if (!IsFloorOver()) {
         sub_8085140();
         gDungeon->unkB8 = savedEntityPtr;
     }
@@ -384,12 +383,12 @@ void sub_8075708(Entity *entity)
 
     switch(GetEntityType(trap)) {
         case ENTITY_TRAP:
-            trapData = GetTrapData(trap);
+            trapData = GetTrapInfo(trap);
             bVar1 = FALSE;
             bVar2 = FALSE;
             if ((IQSkillIsEnabled(entity, IQ_TRAP_SEER)) && (!trap->isVisible)) {
                 trap->isVisible = TRUE;
-                sub_8049ED4();
+                UpdateTrapsVisibility();
                 bVar2 = TRUE;
             }
 
@@ -412,7 +411,7 @@ void sub_8075708(Entity *entity)
             }
         _ret:
             if (!bVar2) {
-                HandleTrap(entity, &entity->pos, 0, 1);
+                TryTriggerTrap(entity, &entity->pos, 0, 1);
             }
             break;
         case ENTITY_ITEM:
@@ -453,7 +452,7 @@ u32 sub_8075818(Entity *entity)
                 case ENTITY_UNK_5:
                     break;
                 case ENTITY_TRAP:
-                    trapData = GetTrapData(subEntity);
+                    trapData = GetTrapInfo(subEntity);
                     r1 = 0;
                     if(trapData->unk1 == 0)
                     {
@@ -490,7 +489,7 @@ flag_check:
                                     break;
                                 else
                                 {
-                                    item = GetItemData(subEntity);
+                                    item = GetItemInfo(subEntity);
                                     if(!(item->flags & ITEM_FLAG_IN_SHOP))
                                     {
                                         return 1;
@@ -499,7 +498,7 @@ flag_check:
                             }
                             else
                             {
-                                item = GetItemData(subEntity);
+                                item = GetItemInfo(subEntity);
                                 if(!(item->flags & ITEM_FLAG_IN_SHOP))
                                 {
 error:
@@ -517,7 +516,6 @@ error:
 
 extern char *gPtrItsaMonsterHouseMessage;
 
-extern u8 sub_8044B28(void);
 extern void sub_807AB38(Entity *, u32);
 extern void sub_8041888(u32);
 
@@ -527,7 +525,7 @@ void sub_8075900(Entity *pokemon, u8 r1)
     {
         if(!GetEntInfo(pokemon)->isNotTeamMember)
         {
-            if(!sub_8044B28())
+            if(!IsFloorOver())
             {
                 if(!gDungeon->unk644.monsterHouseTriggered)
                 {

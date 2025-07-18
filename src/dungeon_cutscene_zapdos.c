@@ -42,14 +42,14 @@ extern void BgColorCallNullsub4(void);
 extern void sub_8085EB0(void);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateMinimap(void);
 extern void sub_8086A54(Entity *);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
+extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_807EAA0(u32, u32);
@@ -104,7 +104,7 @@ void sub_808729C(void)
   sub_8085930(4);
   sub_80855E4(sub_8086A3C);
   if (sub_8086AE4(0x91) != 0) {
-    sub_8068FE0(zapdosEntity,0x21c,0);
+    HandleFaint(zapdosEntity,0x21c,0);
   }
   else {
     sub_8072008(zapdosEntity,zapdosEntity,gZapdosConfigLevel,0,0);

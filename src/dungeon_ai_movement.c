@@ -125,7 +125,7 @@ bool8 CanTakeItem(Entity *pokemon)
             if (!pokemonInfo->isTeamLeader &&
                 !(pokemonInfo->heldItem.flags & ITEM_FLAG_EXISTS) &&
                 ((mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) || !pokemonInfo->isNotTeamMember) &&
-                !(GetItemData(object)->flags & ITEM_FLAG_IN_SHOP))
+                !(GetItemInfo(object)->flags & ITEM_FLAG_IN_SHOP))
             {
                 return TRUE;
             }

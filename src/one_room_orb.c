@@ -127,9 +127,9 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 	sub_804EB30();
 	sub_804AAD4();
 	sub_8049884();
-	sub_806CF60();
-	ShowWholeRevealedDungeonMap();
-	sub_8049ED4();
+	DetermineAllMonsterShadow();
+	UpdateMinimap();
+	UpdateTrapsVisibility();
 	LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD3A0);
 	sub_803E708(0x28,0x2b);
 	sub_8075900(pokemon,1);

@@ -6,8 +6,8 @@
 const Tile *GetTile(s32 x, s32 y);
 Tile *GetTileMut(s32 x, s32 y);
 
-void sub_8049ED4(void);
-void sub_804AC20(DungeonPos *pos);
+void UpdateTrapsVisibility(void);
+void DiscoverMinimap(DungeonPos *pos);
 
 void sub_80495E4(void);
 void LoadDungeonTilesetAssets(void);

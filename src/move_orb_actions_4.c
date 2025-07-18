@@ -39,7 +39,7 @@
 extern void sub_807F43C(Entity *, Entity *);
 extern void HandleOneRoomOrb(Entity *, Entity *);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateMinimap(void);
 extern void HandleDroughtOrbAction(Entity *);
 extern void HandleLuminousOrbAction(Entity *pokemon);
 extern void HandleTrawlOrbAction(Entity *, Entity *);
@@ -690,7 +690,7 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 param_
             for (yCoord = bottomRightCornerY; yCoord <= topLeftCornerY; yCoord++) {
                 object = GetTileMut(xCoord, yCoord)->object;
                 if (((object != 0) && (GetEntityType(object) == ENTITY_TRAP)) &&
-                    (trapData = GetTrapData(object), trapData->id != TRAP_WONDER_TILE)) {
+                    (trapData = GetTrapInfo(object), trapData->id != TRAP_WONDER_TILE)) {
                     pos.y = yCoord;
                     pos.x = xCoord;
                     sub_807FE04(&pos, 0);
@@ -700,8 +700,8 @@ bool8 TrapbustOrbAction(Entity * pokemon,Entity * target, Move *move, s32 param_
         }
         if (foundTrap) {
             TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FD1B0);
-            ShowWholeRevealedDungeonMap();
-            sub_8049ED4();
+            UpdateMinimap();
+            UpdateTrapsVisibility();
         }
         else {
             TryDisplayDungeonLoggableMessage3(pokemon, target, gUnknown_80FD1CC);

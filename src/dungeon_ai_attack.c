@@ -31,6 +31,7 @@
 #include "dungeon_misc.h"
 #include "type_effectiveness.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_engine.h"
 
 #define REGULAR_ATTACK_INDEX 4
 
@@ -45,14 +46,13 @@ EWRAM_DATA u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS] = {0};
 EWRAM_DATA s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS] = {0};
 EWRAM_DATA Entity *gPotentialTargets[NUM_DIRECTIONS] = {0};
 
-extern bool8 sub_8044B28(void);
 extern void sub_806A1B0(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8044D40(ActionContainer *, u32);
 extern void sub_8045BF8(u8 *, struct Item *);
 extern void sub_8044DF0(struct Entity *, u32, u32);
-extern void sub_8071DA4(struct Entity *);
-extern void sub_804AC20(DungeonPos *);
+extern void EnemyEvolution(struct Entity *);
+extern void DiscoverMinimap(DungeonPos *);
 extern void sub_807EC28(bool8);
 extern void sub_806A5B8(struct Entity *entity);
 
@@ -936,7 +936,7 @@ void HandleUseMoveAIAction(Entity *target)
         sub_8055A00(target, entityInfo->action.actionParameters[0].actionUseIndex, 1, 0, 0);
         if (!EntityIsValid(target))
             break;
-        if (sub_8044B28())
+        if (IsFloorOver())
             break;
         if (entityInfo->unk159)
             break;
@@ -1035,11 +1035,11 @@ void HandleUseOrbAction(Entity *pokemon)
         if (r4)
             sub_8044DF0(pokemon, 0, 122);
 
-        sub_8071DA4(pokemon);
+        EnemyEvolution(pokemon);
         sub_806CE68(pokemon, 8);
 
         if (entityInfo->isTeamLeader) {
-            sub_804AC20(&pokemon->pos);
+            DiscoverMinimap(&pokemon->pos);
             sub_807EC28(FALSE);
         }
 
@@ -1049,7 +1049,7 @@ void HandleUseOrbAction(Entity *pokemon)
     else if (r4)
         sub_8044D40(&act, 0);
 
-    if (!sub_8044B28())
+    if (!IsFloorOver())
         sub_806A1B0(pokemon);
 }
 

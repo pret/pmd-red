@@ -55,13 +55,12 @@ extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
 extern void sub_8078084(Entity * pokemon);
 extern void sub_800DBBC(void);
-extern void sub_80464C8(Entity *, DungeonPos *, Item *);
+extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
-extern bool8 sub_8045888(Entity *r0);
 extern void sub_806F500(void);
-extern void sub_803F508(Entity *);
+extern void PointCameraToMonster(Entity *);
 extern bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, struct DamageStruct *dmgStruct);
 extern void sub_8041B74(Entity *pokemon);
 extern void sub_8041B5C(Entity *pokemon);
@@ -349,7 +348,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], attacker, 0);
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], target, 0);
     if (dmgStruct->dmg == 0) {
-        if (sub_8045888(attacker) && sub_8045888(target)) {
+        if (ShouldDisplayEntity(attacker) && ShouldDisplayEntity(target)) {
             if (targetData->unk152 == 0) {
                 TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F9688);
             }
@@ -365,11 +364,11 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         return FALSE;
     }
     else if (dmgStruct->dmg == 9999) {
-        if (arg8 != 0 && sub_8045888(target)) {
+        if (arg8 != 0 && ShouldDisplayEntity(target)) {
             unkTile = GetTileAtEntitySafe(target);
             sub_803E708(0x14, 0x18);
             unkTile->spawnOrVisibilityFlags |= 4;
-            sub_8049ED4();
+            UpdateTrapsVisibility();
         }
         if (targetData->unk152 == 0) {
             TryDisplayDungeonLoggableMessage3(attacker, target, gUnknown_80F96A8);
@@ -388,7 +387,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         if (targetData->unkA0 > 999)
             targetData->unkA0 = 999;
 
-        if (sub_8045888(target)) {
+        if (ShouldDisplayEntity(target)) {
             if (dmgStruct->residualDmgType != 14) {
                 sub_803ED30(-dmgStruct->dmg, target, 1, -1);
             }
@@ -403,7 +402,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         }
     }
 
-    if ((dmgStruct->residualDmgType != 14 || targetData->HP <= 1) && unkTile == NULL && sub_8045888(target)) {
+    if ((dmgStruct->residualDmgType != 14 || targetData->HP <= 1) && unkTile == NULL && ShouldDisplayEntity(target)) {
         if ((attacker->pos.x != target->pos.x || attacker->pos.y != target->pos.y) && GetEntityType(attacker) == ENTITY_MONSTER) {
             bool32 unkBool = FALSE;
             if (targetData->isTeamLeader) {
@@ -466,7 +465,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         if (unkTile != NULL)
         {
             unkTile->spawnOrVisibilityFlags &= ~(0x4);
-            sub_8049ED4();
+            UpdateTrapsVisibility();
         }
         return FALSE;
     }
@@ -481,7 +480,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         target->unk22 = 2;
         sub_803E708(0xA, 0x18);
         unkTile->spawnOrVisibilityFlags &= ~(0x4);
-        sub_8049ED4();
+        UpdateTrapsVisibility();
     }
     else if (var_24) {
         target->unk22 = 1;
@@ -600,9 +599,9 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 sub_8042148(target);
 
                 monPos = teamMember->pos;
-                sub_8068FE0(teamMember, 0x221, target);
+                HandleFaint(teamMember, 0x221, target);
                 sub_80694C0(target, monPos.x, monPos.y, 1);
-                sub_804535C(target, NULL);
+                UpdateEntityPixelPos(target, NULL);
                 target->unk22 = 0;
                 targetData->HP = targetData->maxHPStat;
                 sub_8042A24(target);
@@ -688,7 +687,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     }
 
     if (!targetData->isTeamLeader && ItemExists(&targetData->heldItem)) {
-        sub_80464C8(target, &target->pos, &targetData->heldItem);
+        SpawnDroppedItemWrapper(target, &target->pos, &targetData->heldItem);
         ZeroOutItem(&targetData->heldItem);
     }
     if (targetData->bossFlag) {
@@ -751,18 +750,18 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         sub_8069D4C(&sp, target);
         if (sub_806F660(attacker, target)) {
             if (!sub_806FA5C(attacker, target, &sp)) {
-                sub_8068FE0(target, 0x1F5, attacker);
+                HandleFaint(target, 0x1F5, attacker);
             }
             else {
                 gUnknown_202F221 = 1;
             }
         }
         else {
-            sub_8068FE0(target, arg4, attacker);
+            HandleFaint(target, arg4, attacker);
         }
     }
     else {
-        sub_8068FE0(target, arg4, attacker);
+        HandleFaint(target, arg4, attacker);
     }
 
     return TRUE;
@@ -1669,6 +1668,6 @@ void sub_806F63C(Entity *param_1)
     temp = &gDungeon->unk181e8;
 
     if (temp->cameraTarget == param_1) {
-        sub_803F508(temp->cameraTarget);
+        PointCameraToMonster(temp->cameraTarget);
     }
 }

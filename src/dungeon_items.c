@@ -39,7 +39,6 @@ extern void sub_80855E4(void *);
 extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);
 extern void sub_804219C(PixelPos *pos);
-extern bool8 sub_8045888(Entity *);
 extern u32 GetRandomFloorItem(u32);
 
 static void MusicBoxCreation(void);
@@ -143,20 +142,20 @@ void CreateFloorItems(void)
                     }
                 }
                 itemID = GetRandomFloorItem(spawnType);
-                if (!CanSellItem(itemID)) {
+                if (!IsShoppableItem(itemID)) {
                     shopFlag = FALSE;
                 }
                 CreateItemWithStickyChance(&item,itemID,FORCE_STICKY_RANDOM);
                 if (shopFlag) {
                     item.flags |= flag;
                 }
-                AddItemToDungeonAt(&pos,&item,TRUE);
+                SpawnItem(&pos,&item,TRUE);
             }
         }
     }
 }
 
-void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
+void TryLeaderItemPickUp(struct DungeonPos *pos, bool8 printMsg)
 {
     Item *tileItem;
     int inventoryIds[INVENTORY_SIZE + 1];
@@ -171,7 +170,7 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
     if (GetEntityType(tileObject) != ENTITY_ITEM) {
         return;
     }
-    tileItem = GetItemData(tileObject);
+    tileItem = GetItemInfo(tileObject);
     if (leaderInfo->action.actionParameters[0].actionUseIndex == 0) {
         if (!printMsg) {
             return;
@@ -192,9 +191,9 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
         PlaySoundEffect(0x14c);
         AddToTeamMoney(GetMoneyValue(tileItem));
         sub_8045BF8(gFormatBuffer_Items[0],tileItem);
-        RemoveItemFromDungeonAt(pos,TRUE);
+        RemoveGroundItem(pos,TRUE);
         LogMessageByIdWithPopupCheckUser(leader,gPickedUpItem);
-        TryDisplayItemPickupTutorialMessage(tileItem->id);
+        DisplayItemTip(tileItem->id);
     }
     else {
         s32 i, maxItems;
@@ -259,7 +258,7 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
                     inventoryItems[index]->flags |= ITEM_FLAG_STICKY;
                 }
                 sub_8045BF8(gFormatBuffer_Items[0],tileItem);
-                RemoveItemFromDungeonAt(pos,TRUE);
+                RemoveGroundItem(pos,TRUE);
                 PlaySoundEffect(0x14a);
                 if (inventoryIds[index] < 0) {
                     LogMessageByIdWithPopupCheckUser(leader,gPickedUpItem2);
@@ -267,7 +266,7 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
                 else {
                     LogMessageByIdWithPopupCheckUser(leader,gPickedUpItemToolbox);
                 }
-                TryDisplayItemPickupTutorialMessage(tileItem->id);
+                DisplayItemTip(tileItem->id);
                 return;
             }
         }
@@ -290,7 +289,7 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
             if (inventoryIds[i] < 0) {
                 leaderInfo->heldItem = *tileItem;
                 sub_8045BF8(gFormatBuffer_Items[0],tileItem);
-                RemoveItemFromDungeonAt(pos,TRUE);
+                RemoveGroundItem(pos,TRUE);
                 LogMessageByIdWithPopupCheckUser(leader,gPickedUpItem2);
             }
             else if (AddItemToInventory(tileItem) != 0) {
@@ -299,19 +298,19 @@ void PickUpItemFromPos(struct DungeonPos *pos, bool8 printMsg)
             }
             else {
                 sub_8045BF8(gFormatBuffer_Items[0],tileItem);
-                RemoveItemFromDungeonAt(pos,TRUE);
+                RemoveGroundItem(pos,TRUE);
                 LogMessageByIdWithPopupCheckUser(leader,gPickedUpItemToolbox);
             }
-            TryDisplayItemPickupTutorialMessage(tileItem->id);
+            DisplayItemTip(tileItem->id);
          }
     }
 }
 
-bool8 AddItemToDungeonAt(DungeonPos *pos, Item *item, bool8 a2)
+bool8 SpawnItem(DungeonPos *pos, Item *item, bool8 a2)
 {
     s32 i, count;
     Tile *tile;
-    Entity *itemEntity = sub_8045708(pos);
+    Entity *itemEntity = SpawnItemEntity(pos);
 
     if (itemEntity == NULL)
         return FALSE;
@@ -320,14 +319,14 @@ bool8 AddItemToDungeonAt(DungeonPos *pos, Item *item, bool8 a2)
     itemEntity->isVisible = TRUE;
     tile = GetTileMut(pos->x, pos->y);
     tile->object = itemEntity;
-    if ((tile->terrainType & TERRAIN_TYPE_SHOP) && CanSellItem(item->id)) {
+    if ((tile->terrainType & TERRAIN_TYPE_SHOP) && IsShoppableItem(item->id)) {
         if (item->flags & ITEM_FLAG_IN_SHOP) {
             if (a2) {
-                gDungeon->unk644.unk48 += GetStackBuyPrice(item);
+                gDungeon->unk644.unk48 += GetActualBuyPrice(item);
             }
         }
         else {
-            gDungeon->unk644.unk4C += GetStackSellPrice(item);
+            gDungeon->unk644.unk4C += GetActualSellPrice(item);
         }
     }
 
@@ -341,7 +340,7 @@ bool8 AddItemToDungeonAt(DungeonPos *pos, Item *item, bool8 a2)
     return TRUE;
 }
 
-bool8 RemoveItemFromDungeonAt(DungeonPos *pos, bool8 a2)
+bool8 RemoveGroundItem(DungeonPos *pos, bool8 a2)
 {
     s32 i, count;
     Item *item;
@@ -350,15 +349,15 @@ bool8 RemoveItemFromDungeonAt(DungeonPos *pos, bool8 a2)
     if (tileObject == NULL || GetEntityType(tileObject) != ENTITY_ITEM)
         return FALSE;
 
-    item = GetItemData(tileObject);
-    if ((tile->terrainType & TERRAIN_TYPE_SHOP) && CanSellItem(item->id)) {
+    item = GetItemInfo(tileObject);
+    if ((tile->terrainType & TERRAIN_TYPE_SHOP) && IsShoppableItem(item->id)) {
         if (item->flags & ITEM_FLAG_IN_SHOP) {
             if (a2) {
-                gDungeon->unk644.unk48 -= GetStackBuyPrice(item);
+                gDungeon->unk644.unk48 -= GetActualBuyPrice(item);
             }
         }
         else {
-            gDungeon->unk644.unk4C -= GetStackSellPrice(item);
+            gDungeon->unk644.unk4C -= GetActualSellPrice(item);
         }
     }
 
@@ -397,7 +396,7 @@ bool8 sub_80462AC(Entity * entity, u8 hallucinating, u8 a2, u8 a3, u8 a4)
             objMode = 1;
         }
 
-        if (!sub_8045888(entity))
+        if (!ShouldDisplayEntity(entity))
             return FALSE;
     }
 
@@ -443,7 +442,7 @@ const u8 *sub_80464AC(Item *item)
     return gActions[GetItemActionType(item->id)].desc;
 }
 
-void sub_80464C8(Entity *entity, DungeonPos *pos, Item *item)
+void SpawnDroppedItemWrapper(Entity *entity, DungeonPos *pos, Item *item)
 {
     s32 x, y;
     Entity itemEntity;
@@ -500,7 +499,7 @@ void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Du
         if (GetTerrainType(tile) != TERRAIN_TYPE_WALL && !(tile->terrainType & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
             sub_8046734(entity2, &localPos);
             localPos2 = localPos;
-            if (GetTerrainType(tile) == (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL) || (AddItemToDungeonAt(&localPos, item, TRUE))) {
+            if (GetTerrainType(tile) == (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL) || (SpawnItem(&localPos, item, TRUE))) {
                 var_24 = TRUE;
             }
             break;
@@ -510,19 +509,19 @@ void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Du
 
     sub_8045BF8(gFormatBuffer_Items[0], item);
     if (var_24) {
-        ShowDungeonMapAtPos(localPos.x, localPos.y);
+        DrawMinimapTile(localPos.x, localPos.y);
         switch (GetTerrainType(GetTile(localPos.x, localPos.y))) {
             case TERRAIN_TYPE_NORMAL:
-                TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemFellOnGround);
+                LogMessageByIdWithPopupCheckUserUnknown(entity1, &localPos, gItemFellOnGround);
                 break;
             case TERRAIN_TYPE_SECONDARY:
-                TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemFellInWater);
+                LogMessageByIdWithPopupCheckUserUnknown(entity1, &localPos, gItemFellInWater);
                 break;
             case TERRAIN_TYPE_WALL:
-                TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemBuried);
+                LogMessageByIdWithPopupCheckUserUnknown(entity1, &localPos, gItemBuried);
                 break;
             case TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL:
-                TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemFellOutOfSight);
+                LogMessageByIdWithPopupCheckUserUnknown(entity1, &localPos, gItemFellOutOfSight);
                 break;
         }
     }
@@ -537,7 +536,7 @@ void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Du
         }
 
         sub_804219C(&pixelPos);
-        TryDisplayDungeonLoggableMessage5(entity1, &localPos, gItemLost);
+        LogMessageByIdWithPopupCheckUserUnknown(entity1, &localPos, gItemLost);
     }
 }
 
@@ -564,7 +563,7 @@ static void sub_8046734(Entity *entity, DungeonPos *pos)
             calcPixelPos.x += add.x;
             calcPixelPos.y += add.y;
             entity->unk1C.raw = sin_4096(sinVal) * 12;
-            sub_804535C(entity, &calcPixelPos);
+            UpdateEntityPixelPos(entity, &calcPixelPos);
             sub_80462AC(entity, hallucinating, 0, unk, 0);
             DungeonRunFrameActions(0x13);
             sinVal += 85;
@@ -697,7 +696,7 @@ void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item,
 
         for (i = 0; i < count; i++) {
             if (targetTilePos[i].x >= 0) {
-                AddItemToDungeonAt(&targetTilePos[i], &item[i], TRUE);
+                SpawnItem(&targetTilePos[i], &item[i], TRUE);
             }
         }
     }
@@ -822,7 +821,7 @@ static void MusicBoxCreation(void)
         sub_803E708(10,0x41);
         sub_804178C(1);
         gDungeon->unk1356C = 0;
-        ShowWholeRevealedDungeonMap();
+        UpdateMinimap();
     }
 }
 

@@ -24,11 +24,11 @@
 #include "dungeon_music.h"
 #include "dungeon_items.h"
 #include "constants/dungeon.h"
+#include "dungeon_engine.h"
 
 extern void sub_8045BF8(u8 *, Item *);
 extern void sub_8067110(Entity *);
 extern void sub_80671A0(Entity *);
-extern bool8 sub_8044B28(void);
 
 #define NUM_POTENTIAL_ROCK_TARGETS 20
 #define GROUND_ITEM_TOOLBOX_INDEX 0x80
@@ -152,7 +152,7 @@ void AIDecideUseItem(Entity *pokemon)
                     u32 objectType = GetEntityType(object);
                     if (objectType == ENTITY_ITEM)
                     {
-                        item = GetItemData(mapTile->object);
+                        item = GetItemInfo(mapTile->object);
                         selectedToolboxIndex = GROUND_ITEM_TOOLBOX_INDEX;
                     }
                     else
@@ -441,7 +441,7 @@ void sub_8073D14(Entity *entity)
     Entity *tileObject = GetTileAtEntitySafe(entity)->object;
     if (tileObject == NULL)
         return;
-    if (sub_8044B28())
+    if (IsFloorOver())
         return;
     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
     if (entityInfo->isTeamLeader)
@@ -454,7 +454,7 @@ void sub_8073D14(Entity *entity)
         return;
 
     _entityInfo = GetEntInfo(entity); // Reloaded as a new variable for some reason.
-    groundItem = GetItemData(tileObject);
+    groundItem = GetItemInfo(tileObject);
     if (groundItem->flags & ITEM_FLAG_IN_SHOP)
         return;
 
@@ -473,7 +473,7 @@ void sub_8073D14(Entity *entity)
         }
         AddToTeamMoney(GetMoneyValue(groundItem));
         sub_8045BF8(gFormatBuffer_Items[0], groundItem);
-        RemoveItemFromDungeonAt(&entity->pos, 1);
+        RemoveGroundItem(&entity->pos, 1);
         DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem);
     }
     else {
@@ -535,7 +535,7 @@ void sub_8073D14(Entity *entity)
                     carriedItems[newInventoryId]->flags |= ITEM_FLAG_STICKY;
 
                 sub_8045BF8(gFormatBuffer_Items[0], groundItem);
-                RemoveItemFromDungeonAt(&entity->pos, 1);
+                RemoveGroundItem(&entity->pos, 1);
                 PlaySoundEffect(0x14A);
                 if (inventoryIds[newInventoryId] <= -1)
                     DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
@@ -566,7 +566,7 @@ void sub_8073D14(Entity *entity)
             if (inventoryIds[i] <= -1) {
                 _entityInfo->heldItem = *groundItem;
                 sub_8045BF8(gFormatBuffer_Items[0], groundItem);
-                RemoveItemFromDungeonAt(&entity->pos, 1);
+                RemoveGroundItem(&entity->pos, 1);
                 DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItem2);
             }
             else if (AddItemToInventory(groundItem)) {
@@ -575,7 +575,7 @@ void sub_8073D14(Entity *entity)
             }
             else {
                 sub_8045BF8(gFormatBuffer_Items[0], groundItem);
-                RemoveItemFromDungeonAt(&entity->pos, 1);
+                RemoveGroundItem(&entity->pos, 1);
                 DisplayDungeonLoggableMessageTrue(entity, gMonPickedUpItemToolbox);
             }
         }

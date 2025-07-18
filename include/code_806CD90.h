@@ -17,7 +17,7 @@ u8 sub_806CEBC(Entity *entity);
 void sub_806CEFC(Entity *entity, u32 newDir);
 void sub_806CF18(Entity *entity);
 u8 sub_806CF54(Entity *entity);
-void sub_806CF60(void);
-u32 sub_806CF98(Entity *entity);
+void DetermineAllMonsterShadow(void);
+u32 DetermineMonsterShadow(Entity *entity);
 
 #endif // GUARD_CODE_806CD90_H

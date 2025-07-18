@@ -30,8 +30,8 @@
 #include "math.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
+#include "dungeon_engine.h"
 
-extern bool8 sub_8044B28(void);
 extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern void sub_805229C(void);
 extern void sub_807E8F0(Entity *);
@@ -42,19 +42,18 @@ extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);
 extern void sub_80838EC(u8 *a);
 extern bool8 TryUseChosenMove(struct Entity *, u32, u32, u32, u32, struct Move *);
-extern bool8 sub_8045888(Entity *);
 extern void nullsub_97(Entity *entity);
 extern void sub_805EE30(void);
 extern void sub_8086AC0(void);
 extern void sub_8085140(void);
 extern void sub_8075708(Entity *entity);
 extern void sub_8043ED0(u32);
-extern void sub_8071DA4(Entity *);
+extern void EnemyEvolution(Entity *);
 extern void sub_8075900(Entity *pokemon, u8 r1);
 extern void sub_806A5B8(Entity *);
 extern void sub_807EC28(bool8);
 
-bool8 UseAttack(Entity *a0);
+bool8 DisplayActions(Entity *a0);
 
 void sub_8074094(Entity *entity)
 {
@@ -63,7 +62,7 @@ void sub_8074094(Entity *entity)
 
     if (entity == NULL)
         return;
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     entityInfo = GetEntInfo(entity);
@@ -76,8 +75,8 @@ void sub_8074094(Entity *entity)
         if (DungeonRandInt(100) < gWarpScarfActivationChances[entityInfo->turnsSinceWarpScarfActivation]) {
             entityInfo->turnsSinceWarpScarfActivation = 0;
             sub_80444F4(entity);
-            UseAttack(NULL);
-            if (!EntityIsValid(entity) || sub_8044B28())
+            DisplayActions(NULL);
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             WarpTarget(entity, entity, 0, NULL);
             if (entityInfo->isTeamLeader) {
@@ -137,8 +136,8 @@ void sub_8074094(Entity *entity)
         if (FixedPointToInt(entityInfo->belly) == 0) {
             sub_805E804();
             sub_80444F4(entity);
-            UseAttack(NULL);
-            if (!EntityIsValid(entity) || sub_8044B28())
+            DisplayActions(NULL);
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             if (gDungeon->unk644.unk35 < 10)
                 gDungeon->unk644.unk35++;
@@ -167,7 +166,7 @@ void sub_8074094(Entity *entity)
         }
     }
 
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
     if (gDungeon->weather.weatherDamageCounter == 0) {
         if (GetApparentWeather(entity) == WEATHER_HAIL) {
@@ -180,15 +179,15 @@ void sub_8074094(Entity *entity)
                 DealDamageToEntity(entity, gHailSandstormDmgValue, 0x12, 0x220);
             }
         }
-        if (!EntityIsValid(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || IsFloorOver())
             return;
     }
 
 // Abilities check
     rand = DungeonRandInt(100);
     if (AbilityIsActive(entity, ABILITY_SHED_SKIN) && rand < gShedSkinActivateChance && HasNegativeStatus(entity)) {
-        UseAttack(NULL);
-        if (!EntityIsValid(entity) || sub_8044B28())
+        DisplayActions(NULL);
+        if (!EntityIsValid(entity) || IsFloorOver())
             return;
         sub_8079F20(entity, entity, 1, 0);
     }
@@ -202,35 +201,35 @@ void sub_8074094(Entity *entity)
 
 // Statuses
     if (entityInfo->sleepClassStatus.status == STATUS_YAWNING) {
-        UseAttack(NULL);
-        if (!EntityIsValid(entity) || sub_8044B28())
+        DisplayActions(NULL);
+        if (!EntityIsValid(entity) || IsFloorOver())
             return;
         sub_80420B8(entity);
     }
 
     if (entityInfo->burnClassStatus.status == STATUS_BURN) {
         if (entityInfo->burnClassStatus.damageCountdown == 0 || --entityInfo->burnClassStatus.damageCountdown == 0) {
-            UseAttack(NULL);
-            if (!EntityIsValid(entity) || sub_8044B28())
+            DisplayActions(NULL);
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             entityInfo->burnClassStatus.damageCountdown = gBurnDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gBurnDmgValue, 1, 0x208);
         }
-        if (!EntityIsValid(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || IsFloorOver())
             return;
     }
 
     if (entityInfo->burnClassStatus.status == STATUS_POISONED) {
         if (entityInfo->burnClassStatus.damageCountdown == 0 || --entityInfo->burnClassStatus.damageCountdown == 0) {
-            UseAttack(NULL);
-            if (!EntityIsValid(entity) || sub_8044B28())
+            DisplayActions(NULL);
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             entityInfo->burnClassStatus.damageCountdown = gPoisonDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gPoisonDmgValue, 3, 0x20A);
         }
-        if (!EntityIsValid(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || IsFloorOver())
             return;
     }
     else if (entityInfo->burnClassStatus.status == STATUS_BADLY_POISONED) {
@@ -242,46 +241,46 @@ void sub_8074094(Entity *entity)
             if (turns >= BAD_POISON_DMG_TURN_VALUES_COUNT - 1)
                 turns = BAD_POISON_DMG_TURN_VALUES_COUNT - 1;
 
-            UseAttack(NULL);
-            if (!EntityIsValid(entity) || sub_8044B28())
+            DisplayActions(NULL);
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gBadPoisonDmgValuesByTurn[turns], 3, 0x20A);
         }
-        if (!EntityIsValid(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || IsFloorOver())
             return;
     }
 
     if (entityInfo->frozenClassStatus.status == STATUS_CONSTRICTION) {
         if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
-            UseAttack(NULL);
-            if (!EntityIsValid(entity) || sub_8044B28())
+            DisplayActions(NULL);
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gConstrictionDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             sub_8041C4C(entity, entityInfo->frozenClassStatus.unk4);
             DealDamageToEntity(entity, gConstrictionDmgValue, 2, 0x209);
         }
-        if (!EntityIsValid(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || IsFloorOver())
             return;
     }
     else if (entityInfo->frozenClassStatus.status == STATUS_WRAPPED) {
         if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
-            UseAttack(NULL);
-            if (!EntityIsValid(entity) || sub_8044B28())
+            DisplayActions(NULL);
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gWrapDmgCountdown;
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, gWrapDmgValue, 5, 0x20B);
         }
-        if (!EntityIsValid(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || IsFloorOver())
             return;
     }
     else if (entityInfo->frozenClassStatus.status == STATUS_INGRAIN) {
         if (entityInfo->frozenClassStatus.damageCountdown == 0 || --entityInfo->frozenClassStatus.damageCountdown == 0) {
-            UseAttack(NULL);
-            if (!EntityIsValid(entity) || sub_8044B28())
+            DisplayActions(NULL);
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             entityInfo->frozenClassStatus.damageCountdown = gIngrainHealCountdown;
             HealTargetHP(entity, entity, gIngrainHealValue, 0, TRUE);
@@ -294,14 +293,14 @@ void sub_8074094(Entity *entity)
             if (dmg == 0)
                 dmg = 1;
             entityInfo->curseClassStatus.damageCountdown = gCurseDmgCountdown;
-            UseAttack(NULL);
-            if (!EntityIsValid(entity) || sub_8044B28())
+            DisplayActions(NULL);
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
 
             TrySendImmobilizeSleepEndMsg(entity, entity);
             DealDamageToEntity(entity, dmg, 7, 0x20C);
         }
-        if (!EntityIsValid(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || IsFloorOver())
             return;
     }
 
@@ -322,8 +321,8 @@ void sub_8074094(Entity *entity)
                 else {
                     bool8 dmgUser = AbilityIsActive(entity, ABILITY_LIQUID_OOZE);
                     sub_80444F4(entity);
-                    UseAttack(NULL);
-                    if (!EntityIsValid(entity) || !EntityIsValid(target) || sub_8044B28())
+                    DisplayActions(NULL);
+                    if (!EntityIsValid(entity) || !EntityIsValid(target) || IsFloorOver())
                         return;
 
                     if (entityInfo->frozenClassStatus.status != STATUS_FROZEN) {
@@ -340,15 +339,15 @@ void sub_8074094(Entity *entity)
                 }
             }
         }
-        if (!EntityIsValid(entity) || sub_8044B28())
+        if (!EntityIsValid(entity) || IsFloorOver())
             return;
     }
 
     if (entityInfo->perishSongTurns != 0) {
         sub_80838EC(&entityInfo->perishSongTurns);
         if (entityInfo->perishSongTurns == 0) {
-            UseAttack(NULL);
-            if (!EntityIsValid(entity) || sub_8044B28())
+            DisplayActions(NULL);
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[1], entity, 0);
             LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FEB30);
@@ -359,7 +358,7 @@ void sub_8074094(Entity *entity)
             else {
                 DealDamageToEntity(entity, 0x270F, 0xB, 0x20E);
             }
-            if (!EntityIsValid(entity) || sub_8044B28())
+            if (!EntityIsValid(entity) || IsFloorOver())
                 return;
         }
     }
@@ -371,18 +370,18 @@ void sub_8074094(Entity *entity)
             if (!CheckVariousStatuses2(entity, FALSE) && !CannotAttack(entity, FALSE) && !CheckVariousStatuses(entity)) {
                 Move bideMove;
 
-                UseAttack(NULL);
+                DisplayActions(NULL);
                 InitPokemonMove(&bideMove, MOVE_BIDE_2);
                 bideMove.moveFlags |= MOVE_FLAG_LAST_USED;
                 TryUseChosenMove(entity, 0, 0, 0, 0, &bideMove);
-                if (!EntityIsValid(entity) || sub_8044B28())
+                if (!EntityIsValid(entity) || IsFloorOver())
                     return;
                 entityInfo->unkA0 = 0;
             }
         }
     }
 
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->bideClassStatus.status == STATUS_ENRAGED) {
@@ -395,11 +394,11 @@ void sub_8074094(Entity *entity)
         }
     }
 
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 }
 
-void TickStatusHeal(Entity *entity)
+void TickStatusAndHealthRegen(Entity *entity)
 {
     s32 i;
     bool32 spdChange;
@@ -407,7 +406,7 @@ void TickStatusHeal(Entity *entity)
 
     if (entity == NULL)
         return;
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     sub_805229C();
@@ -450,7 +449,7 @@ void TickStatusHeal(Entity *entity)
             EndSleepClassStatus(entity, entity, TRUE, TRUE);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->burnClassStatus.status != 0) {
@@ -459,7 +458,7 @@ void TickStatusHeal(Entity *entity)
             EndBurnClassStatus(entity, entity);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->frozenClassStatus.status != 0) {
@@ -468,7 +467,7 @@ void TickStatusHeal(Entity *entity)
             EndFrozenClassStatus(entity, entity);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->cringeClassStatus.status != 0) {
@@ -477,7 +476,7 @@ void TickStatusHeal(Entity *entity)
             EndCringeClassStatus(entity, entity);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->reflectClassStatus.status != 0) {
@@ -486,7 +485,7 @@ void TickStatusHeal(Entity *entity)
             EndReflectClassStatus(entity, entity);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->curseClassStatus.status != 0) {
@@ -495,7 +494,7 @@ void TickStatusHeal(Entity *entity)
             EndCurseClassStatus(entity, entity, 0);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->leechSeedClassStatus.status != 0) {
@@ -504,7 +503,7 @@ void TickStatusHeal(Entity *entity)
             EndLeechSeedClassStatus(entity, entity);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->sureShotClassStatus.status != 0) {
@@ -513,7 +512,7 @@ void TickStatusHeal(Entity *entity)
             SendMoveEndMessage(entity, entity);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->invisibleClassStatus.status != 0) {
@@ -522,7 +521,7 @@ void TickStatusHeal(Entity *entity)
             SendTransformEndMessage(entity, entity);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->blinkerClassStatus.status != 0) {
@@ -531,7 +530,7 @@ void TickStatusHeal(Entity *entity)
             SendEyesightEndMessage(entity, entity);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->muzzled.muzzled != 0) {
@@ -540,7 +539,7 @@ void TickStatusHeal(Entity *entity)
             SendMuzzledEndMessage(entity, entity);
         }
     }
-    if (!EntityIsValid(entity) || sub_8044B28())
+    if (!EntityIsValid(entity) || IsFloorOver())
         return;
 
     if (entityInfo->terrifiedTurns != 0) {

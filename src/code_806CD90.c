@@ -486,7 +486,7 @@ u8 sub_806CF54(Entity *entity)
     return GetEntInfo(entity)->unk204;
 }
 
-void sub_806CF60(void)
+void DetermineAllMonsterShadow(void)
 {
     Entity *entity;
     s32 i;
@@ -495,11 +495,11 @@ void sub_806CF60(void)
         entity = gDungeon->activePokemon[i];
 
         if (EntityIsValid(entity))
-            sub_806CF98(entity);
+            DetermineMonsterShadow(entity);
     }
 }
 
-u32 sub_806CF98(Entity *entity)
+u32 DetermineMonsterShadow(Entity *entity)
 {
     const Tile *mapTile;
     u32 shadowSize;

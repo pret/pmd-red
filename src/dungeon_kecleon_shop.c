@@ -30,8 +30,7 @@
 #include "dungeon_misc.h"
 #include "sprite.h"
 #include "dungeon_strings.h"
-
-extern bool8 sub_8044B28(void);
+#include "dungeon_engine.h"
 
 bool8 sub_807EF48(void);
 void sub_807EFFC(bool8 arg0);
@@ -45,7 +44,7 @@ void sub_807EC28(bool8 arg0)
     bool32 prevTileWasShop;
     bool32 isShopTile;
 
-    if (sub_8044B28())
+    if (IsFloorOver())
         return;
 
     leader = GetLeader();
@@ -231,14 +230,14 @@ void sub_807EFFC(bool8 arg0)
                 pos.x = x;
                 tile = GetTile(x,y);
                 if (tile->terrainType & TERRAIN_TYPE_SHOP && tile->object != NULL && GetEntityType(tile->object) == ENTITY_ITEM) {
-                    Item *itemPtr = GetItemData(tile->object);
+                    Item *itemPtr = GetItemInfo(tile->object);
                     if (!ItemInShop(itemPtr)) {
                         Item item = *itemPtr;
-                        RemoveItemFromDungeonAt(&pos, 1);
-                        if (CanSellItem(item.id)) {
+                        RemoveGroundItem(&pos, 1);
+                        if (IsShoppableItem(item.id)) {
                             item.flags |= ITEM_FLAG_IN_SHOP;
                         }
-                        AddItemToDungeonAt(&pos, &item, 1);
+                        SpawnItem(&pos, &item, 1);
                     }
                 }
             }
@@ -278,8 +277,8 @@ s32 sub_807F19C(bool8 arg0)
             for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
                 const Tile *tile = GetTile(x, y);
                 if (!(tile->terrainType & TERRAIN_TYPE_SHOP) && tile->object != NULL && GetEntityType(tile->object) == ENTITY_ITEM) {
-                    Item *itemPtr = GetItemData(tile->object);
-                    if (CanSellItem(itemPtr->id)) {
+                    Item *itemPtr = GetItemInfo(tile->object);
+                    if (IsShoppableItem(itemPtr->id)) {
                         itemPtr->flags &= ~(ITEM_FLAG_IN_SHOP);
                     }
                 }
@@ -288,7 +287,7 @@ s32 sub_807F19C(bool8 arg0)
 
         for (i = 0; i < INVENTORY_SIZE; i++) {
             Item *item = &gTeamInventoryRef->teamItems[i];
-            if (ItemExists(item) && CanSellItem(item->id)) {
+            if (ItemExists(item) && IsShoppableItem(item->id)) {
                 item->flags &= ~(ITEM_FLAG_IN_SHOP);
             }
         }
@@ -298,7 +297,7 @@ s32 sub_807F19C(bool8 arg0)
             if (EntityIsValid(mon)) {
                 EntityInfo *monInfo = GetEntInfo(mon);
                 Item *item = &monInfo->heldItem;
-                if (ItemExists(item) && CanSellItem(item->id)) {
+                if (ItemExists(item) && IsShoppableItem(item->id)) {
                     item->flags &= ~(ITEM_FLAG_IN_SHOP);
                 }
             }
@@ -321,7 +320,7 @@ void sub_807F33C(void)
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
             const Tile *tile = GetTile(x,y);
             if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_ITEM) {
-                Item *item = GetItemData(tile->object);
+                Item *item = GetItemInfo(tile->object);
                 item->flags &= ~(ITEM_FLAG_IN_SHOP);
             }
         }

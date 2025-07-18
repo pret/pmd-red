@@ -757,7 +757,7 @@ bool8 sub_8027E4C(Pokemon *pokeStruct)
         return FALSE;
     else
     {
-        if(IsThrowableItem(pokeStruct->heldItem.id))
+        if(IsThrownItem(pokeStruct->heldItem.id))
         {
             if(gTeamInventoryRef->teamStorage[pokeStruct->heldItem.id] + pokeStruct->heldItem.quantity > 0x3e7)
                 return FALSE;
@@ -785,7 +785,7 @@ void sub_8027EB8(void)
             break;
         case 2:
             PlaySound(0x14d);
-            if(IsThrowableItem(sUnknown_203B2BC->item2.id))
+            if(IsThrownItem(sUnknown_203B2BC->item2.id))
                 gTeamInventoryRef->teamStorage[sUnknown_203B2BC->item2.id] += sUnknown_203B2BC->item2.quantity;
             else
                 gTeamInventoryRef->teamStorage[sUnknown_203B2BC->item2.id] += 1;

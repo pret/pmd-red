@@ -54,12 +54,12 @@ void HandleSwitcherOrb(Entity *pokemon,Entity *target)
     nullsub_93(&targetPos);
     sub_80694C0(pokemon,targetPos.x,targetPos.y,1);
     sub_80694C0(target,pokemonPos.x,pokemonPos.y,1);
-    sub_804535C(pokemon,NULL);
-    sub_804535C(target,NULL);
+    UpdateEntityPixelPos(pokemon,NULL);
+    UpdateEntityPixelPos(target,NULL);
 
     if (EntityIsValid(pokemon)) {
       if (GetEntInfo(pokemon)->isTeamLeader) {
-        sub_804AC20(&pokemon->pos);
+        DiscoverMinimap(&pokemon->pos);
         sub_807EC28(FALSE);
       }
       sub_806A5B8(pokemon);
@@ -68,7 +68,7 @@ void HandleSwitcherOrb(Entity *pokemon,Entity *target)
 
     if (EntityIsValid(target)) {
       if (GetEntInfo(target)->isTeamLeader) {
-        sub_804AC20(&target->pos);
+        DiscoverMinimap(&target->pos);
         sub_807EC28(FALSE);
       }
       sub_806A5B8(target);

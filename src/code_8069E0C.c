@@ -39,10 +39,9 @@ extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
 extern void EndAbilityImmuneStatus(Entity *, Entity *);
 void sub_8041BBC(Entity *r0);
-extern bool8 sub_8045888(Entity *);
-extern void sub_806A2BC(Entity *, u8);
+extern void TryPointCameraToMonster(Entity *, u8);
 extern void sub_804178C(u32);
-extern void sub_803F508(Entity *);
+extern void PointCameraToMonster(Entity *);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
@@ -56,8 +55,8 @@ extern u8 GetRandomFloorItem(s32 a0);
 extern void sub_80429E8(Entity *r0);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
-extern void sub_803F580(s32);
-extern void ShowWholeRevealedDungeonMap(void);
+extern void UpdateCamera(s32);
+extern void UpdateMinimap(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
@@ -742,7 +741,7 @@ void sub_806BC68(bool8 a0, Entity *entity, struct unkStruct_806B7F8 *structPtr, 
     entity->pos.y = -2;
 
     sub_80694C0(entity, structPtr->pos.x, structPtr->pos.y, 1);
-    sub_804535C(entity, NULL);
+    UpdateEntityPixelPos(entity, NULL);
 
     if (!a0) {
         if (structPtr->species == MONSTER_KECLEON
@@ -1057,7 +1056,7 @@ s32 sub_806C444(s32 _species, s32 level)
     s32 hpCount = GetBaseHP(species);
 
     for (i = 2; i <= level; i++) {
-        GetPokemonLevelData(&levelData, species, i);
+        GetLvlUpEntry(&levelData, species, i);
         hpCount += levelData.gainHP;
     }
 
@@ -1072,7 +1071,7 @@ s32 sub_806C488(s32 _species, s32 level, s32 categoryIndex)
     s32 offensiveCount = GetBaseOffensiveStat(species, categoryIndex);
 
     for (i = 2; i <= level; i++) {
-        GetPokemonLevelData(&levelData, species, i);
+        GetLvlUpEntry(&levelData, species, i);
         offensiveCount += levelData.gainAtt[categoryIndex];
     }
 
@@ -1087,7 +1086,7 @@ s32 sub_806C4D4(s32 _species, s32 level, s32 categoryIndex)
     s32 defensiveCount = GetBaseDefensiveStat(species, categoryIndex);
 
     for (i = 2; i <= level; i++) {
-        GetPokemonLevelData(&levelData, species, i);
+        GetLvlUpEntry(&levelData, species, i);
         defensiveCount += levelData.gainDef[categoryIndex];
     }
 
