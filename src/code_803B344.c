@@ -1,5 +1,10 @@
 #include "global.h"
 #include "globaldata.h"
+#include "constants/dungeon.h"
+#include "constants/friend_area.h"
+#include "constants/item.h"
+#include "constants/monster.h"
+#include "constants/wonder_mail.h"
 #include "structs/str_802C39C.h"
 #include "code_803C1D0.h"
 #include "code_80958E8.h"
@@ -17,10 +22,44 @@ typedef struct unkStruct_80E7F94
     u8 *unk18;
 } unkStruct_80E7F94;
 
-extern unkStruct_80E7F94 gUnknown_80E7F94[5];
+extern u8 sUnknown_80E8020[];
+extern u8 sUnknown_80E8038[];
+extern u8 sUnknown_80E8048[];
+extern u8 sUnknown_80E8060[];
+extern u8 sUnknown_80E8070[];
+extern u8 sUnknown_80E8088[];
+
+const unkStruct_80E7F94 gUnknown_80E7F94[5] = {
+
+    {
+        {0x5, MISSION_TYPE_FIND_ITEM, 0x4, DUNGEON_ODDITY_CAVE, 0xC, 0x123456, MONSTER_PIKACHU, MONSTER_CHIMECHO, ITEM_SITRUS_BERRY, ITEM1_EXTRA, ITEM_REVIVER_SEED, FRIEND_AREA_NONE},
+        sUnknown_80E8088,
+        sUnknown_80E8070,
+    },
+    {
+        {0x5, MISSION_TYPE_FIND_ITEM, 0x4, DUNGEON_REMAINS_ISLAND, 0x11, 0x123456,MONSTER_CHARMANDER, MONSTER_TREECKO, ITEM_SITRUS_BERRY, ITEM1_EXTRA, ITEM_REVIVER_SEED, FRIEND_AREA_NONE},
+        sUnknown_80E8060,
+        sUnknown_80E8048,
+    },
+    {
+        {0x5, MISSION_TYPE_FIND_ITEM, 0x4, DUNGEON_MARVELOUS_SEA, 0x11, 0x123456,MONSTER_BULBASAUR, MONSTER_TORCHIC, ITEM_SITRUS_BERRY, ITEM1_EXTRA, ITEM_REVIVER_SEED, FRIEND_AREA_NONE},
+        sUnknown_80E8038,
+        sUnknown_80E8020,
+    },
+    {
+        {0x5, MISSION_TYPE_FIND_ITEM, 0x0, DUNGEON_FANTASY_STRAIT, 0x1B, 0x123456, MONSTER_SQUIRTLE, MONSTER_CYNDAQUIL, ITEM_SITRUS_BERRY, ITEM1_EXTRA, ITEM_REVIVER_SEED, FRIEND_AREA_NONE},
+        NULL,
+        NULL,
+    },
+    {
+        {0x5, MISSION_TYPE_FIND_ITEM, 0x0, DUNGEON_SINISTER_WOODS, 0x9, 0x123456, MONSTER_CHIKORITA, MONSTER_TOTODILE, ITEM_SITRUS_BERRY, ITEM1_EXTRA, ITEM_REVIVER_SEED, FRIEND_AREA_NONE},
+        NULL,
+        NULL,
+    },
+};
 
 // TODO: unkStruct_803B344 isn't what we thought it is
-unkStruct_80E7F94 *sub_803B344(s32 _r0)
+const unkStruct_80E7F94 *sub_803B344(s32 _r0)
 {
     u32 r0 = (u8)_r0;
     
