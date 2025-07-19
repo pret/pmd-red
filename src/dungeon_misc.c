@@ -1453,13 +1453,13 @@ static bool8 sub_806A5A4(s16 r0)
 
 void sub_806A5B8(Entity *entity)
 {
-    s32 terrainFlags;
+    s32 terrainType;
 
     if (!EntityIsValid(entity))
         return;
 
-    terrainFlags = GetTerrainType(GetTileAtEntitySafe(entity));
-    if (terrainFlags == TERRAIN_TYPE_SECONDARY) {
+    terrainType = GetTerrainType(GetTileAtEntitySafe(entity));
+    if (terrainType == TERRAIN_TYPE_SECONDARY) {
         EntityInfo *info = GetEntInfo(entity);
         // If lava - defrost and burn
         if (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA) {
@@ -1482,7 +1482,7 @@ void sub_806A5B8(Entity *entity)
         }
     }
     // If wall - decrement belly by 5
-    else if (terrainFlags == TERRAIN_TYPE_WALL) {
+    else if (terrainType == TERRAIN_TYPE_WALL) {
         const u8 *str;
         EntityInfo *info = GetEntInfo(entity);
 

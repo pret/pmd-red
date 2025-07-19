@@ -169,7 +169,7 @@ void DrawMinimapTile(s32 x, s32 y)
     const Tile *tile;
     Dungeon *dungeon;
     bool8 blinded;
-    u32 terrainFlags;
+    u32 terrainType;
     bool8 hallucinating;
     bool8 showItems;
     bool8 showHiddenTraps;
@@ -210,7 +210,7 @@ void DrawMinimapTile(s32 x, s32 y)
     }
 
     tile = GetTile(x, y);
-    terrainFlags = GetTerrainType(tile);
+    terrainType = GetTerrainType(tile);
     hallucinating = gDungeon->unk181e8.hallucinating;
     blinded = gDungeon->unk181e8.blinded;
     showHiddenTraps = gDungeon->unk181e8.showInvisibleTrapsMonsters;
@@ -273,7 +273,7 @@ void DrawMinimapTile(s32 x, s32 y)
                 if (!tileKnown) {
                     mapGfxType = MAP_GFX_NOTHING;
                     if (entType == ENTITY_ITEM) {
-                        if ((showItems || (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)) && terrainFlags != TERRAIN_TYPE_WALL) {
+                        if ((showItems || (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)) && terrainType != TERRAIN_TYPE_WALL) {
                             mapGfxType = MAP_GFX_ITEM;
                         }
                     }
@@ -291,14 +291,14 @@ void DrawMinimapTile(s32 x, s32 y)
 
                 if (lookForMapObject) {
                     if (entType == ENTITY_ITEM) {
-                        if ((showItems || (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)) && terrainFlags != TERRAIN_TYPE_WALL) {
+                        if ((showItems || (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)) && terrainType != TERRAIN_TYPE_WALL) {
                             mapGfxType = MAP_GFX_ITEM;
                             lookForMapObject = FALSE;
                         }
                     }
                 }
                 if (lookForMapObject) {
-                    if (terrainFlags != TERRAIN_TYPE_NORMAL) {
+                    if (terrainType != TERRAIN_TYPE_NORMAL) {
                         mapGfxType = MAP_GFX_NOTHING;
                         lookForMapObject = FALSE;
                     }
@@ -340,7 +340,7 @@ void DrawMinimapTile(s32 x, s32 y)
             if (!tileKnown) {
                 mapGfxType = 1;
             }
-            else if (terrainFlags != TERRAIN_TYPE_NORMAL) {
+            else if (terrainType != TERRAIN_TYPE_NORMAL) {
                 mapGfxType = 1;
             }
             else {
