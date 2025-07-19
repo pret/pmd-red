@@ -122,13 +122,13 @@ void CreateFloorItems(void)
             }
             tile = GetTile(x,y);
 
-            if (!(tile->terrainType & TERRAIN_TYPE_STAIRS) && (tile->spawnOrVisibilityFlags & SPAWN_FLAG_ITEM)) {
+            if (!(tile->terrainFlags & TERRAIN_TYPE_STAIRS) && (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)) {
                 DungeonPos pos;
                 bool8 shopFlag = FALSE;
                 pos.x = x;
                 pos.y = y;
 
-                if (tile->terrainType & TERRAIN_TYPE_SHOP) {
+                if (tile->terrainFlags & TERRAIN_TYPE_SHOP) {
                     shopFlag = TRUE;
                     spawnType = ITEM_SPAWN_IN_SHOP;
                 }
@@ -138,7 +138,7 @@ void CreateFloorItems(void)
                         spawnType = ITEM_SPAWN_WALL;
                     }
                     else {
-                        spawnType = (tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE) ? ITEM_SPAWN_IN_MONSTER_HOUSE : ITEM_SPAWN_NORMAL;
+                        spawnType = (tile->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE) ? ITEM_SPAWN_IN_MONSTER_HOUSE : ITEM_SPAWN_NORMAL;
                     }
                 }
                 itemID = GetRandomFloorItem(spawnType);
@@ -319,7 +319,7 @@ bool8 SpawnItem(DungeonPos *pos, Item *item, bool8 a2)
     itemEntity->isVisible = TRUE;
     tile = GetTileMut(pos->x, pos->y);
     tile->object = itemEntity;
-    if ((tile->terrainType & TERRAIN_TYPE_SHOP) && IsShoppableItem(item->id)) {
+    if ((tile->terrainFlags & TERRAIN_TYPE_SHOP) && IsShoppableItem(item->id)) {
         if (item->flags & ITEM_FLAG_IN_SHOP) {
             if (a2) {
                 gDungeon->unk644.unk48 += GetActualBuyPrice(item);
@@ -350,7 +350,7 @@ bool8 RemoveGroundItem(DungeonPos *pos, bool8 a2)
         return FALSE;
 
     item = GetItemInfo(tileObject);
-    if ((tile->terrainType & TERRAIN_TYPE_SHOP) && IsShoppableItem(item->id)) {
+    if ((tile->terrainFlags & TERRAIN_TYPE_SHOP) && IsShoppableItem(item->id)) {
         if (item->flags & ITEM_FLAG_IN_SHOP) {
             if (a2) {
                 gDungeon->unk644.unk48 -= GetActualBuyPrice(item);
@@ -388,11 +388,11 @@ bool8 sub_80462AC(Entity * entity, u8 hallucinating, u8 a2, u8 a3, u8 a4)
         return FALSE;
 
     if (a2) {
-        s32 terrainType = GetTerrainType(GetTile(entity->pos.x, entity->pos.y));
+        s32 terrainFlags = GetTerrainType(GetTile(entity->pos.x, entity->pos.y));
 
-        if (terrainType == TERRAIN_TYPE_WALL)
+        if (terrainFlags == TERRAIN_TYPE_WALL)
             return FALSE;
-        if (terrainType == TERRAIN_TYPE_SECONDARY) {
+        if (terrainFlags == TERRAIN_TYPE_SECONDARY) {
             objMode = 1;
         }
 
@@ -496,7 +496,7 @@ void SpawnDroppedItem(Entity *entity1, Entity *entity2, Item *item, bool8 a3, Du
         localPos.x = entity2->pos.x + gUnknown_80F4468[i].x;
         localPos.y = entity2->pos.y + gUnknown_80F4468[i].y;
         tile = GetTile(localPos.x, localPos.y);
-        if (GetTerrainType(tile) != TERRAIN_TYPE_WALL && !(tile->terrainType & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
+        if (GetTerrainType(tile) != TERRAIN_TYPE_WALL && !(tile->terrainFlags & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
             sub_8046734(entity2, &localPos);
             localPos2 = localPos;
             if (GetTerrainType(tile) == (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL) || (SpawnItem(&localPos, item, TRUE))) {
@@ -617,7 +617,7 @@ void sub_804687C(Entity *entity, DungeonPos *pos1, DungeonPos *pos2, Item *item,
                 pos.y = pos2->y + gUnknown_80F4468[j].y;
 
                 tile = GetTile(pos.x, pos.y);
-                if (GetTerrainType(tile) != TERRAIN_TYPE_WALL && !(tile->terrainType & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
+                if (GetTerrainType(tile) != TERRAIN_TYPE_WALL && !(tile->terrainFlags & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
                     targetTilePos[i] = pos;
                     targetTileUsed[j] = TRUE;
                     foundTile = TRUE;

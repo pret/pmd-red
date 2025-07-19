@@ -501,15 +501,10 @@ void DetermineAllMonsterShadow(void)
 
 u32 DetermineMonsterShadow(Entity *entity)
 {
-    const Tile *mapTile;
-    u32 shadowSize;
-    u16 terrainType;
-    EntityInfo *entityInfo;
-
-    mapTile = GetTileAtEntitySafe(entity);
-    terrainType = mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    entityInfo = GetEntInfo(entity);
-    shadowSize = GetShadowSize(entityInfo->apparentID);
+    const Tile *mapTile = GetTileAtEntitySafe(entity);
+    u16 terrainType = GetTerrainType(mapTile);
+    EntityInfo *entityInfo = GetEntInfo(entity);
+    u32 shadowSize = GetShadowSize(entityInfo->apparentID);
 
     if (terrainType == (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))
         return 6;

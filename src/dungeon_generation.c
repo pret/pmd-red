@@ -333,7 +333,7 @@ void GenerateFloor(void)
                 for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
                     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
                         const Tile *tile = GetTile(x, y);
-                        if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL && tile->room <= 240) {
+                        if ((tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_NORMAL && tile->room <= 240) {
                             roomTiles++;
                             if (tile->room < 64) {
                                 rooms[tile->room] = TRUE;
@@ -431,7 +431,7 @@ static void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
             s32 unkCount = 0;
             Tile *tile = GetTileMut(x, y);
 
-            tile->terrainType &= ~(TERRAIN_TYPE_CORNER_CUTTABLE);
+            tile->terrainFlags &= ~(TERRAIN_TYPE_CORNER_CUTTABLE);
             if (tile->room == CORRIDOR_ROOM && (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL)) {
                 if (x > 0 && (GetTerrainType(GetTile(x - 1, y)) == TERRAIN_TYPE_NORMAL))
                     unkCount++;
@@ -444,7 +444,7 @@ static void sub_804B534(s32 xStart, s32 yStart, s32 maxX, s32 maxY)
                     unkCount++;
 
                 if (unkCount > 2) {
-                    tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
+                    tile->terrainFlags |= TERRAIN_TYPE_NATURAL_JUNCTION;
                 }
             }
         }
@@ -1317,7 +1317,7 @@ static void GenerateExtraHallways(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_
                 break;
             if (GetTerrainType(GetTile(currX, currY)) == TERRAIN_TYPE_NORMAL)
                 break;
-            if (GetTile(currX, currY)->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
+            if (GetTile(currX, currY)->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL)
                 break;
 
             willNotMakeSquare = TRUE;
@@ -2911,9 +2911,9 @@ static void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LE
                 SetTerrainWall(tile);
 
             	// Also remove any spawn flags
-            	tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_STAIRS);
-            	tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
-            	tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_TRAP);
+            	tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_STAIRS);
+            	tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_ITEM);
+            	tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_TRAP);
             }
 		}
 	}
@@ -2933,9 +2933,9 @@ static void EnsureConnectedGrid(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LE
             		SetTerrainWall(tile);
 
             		// Remove any spawn flags
-            		tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
-                    tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_STAIRS);
-                    tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_TRAP);
+            		tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_ITEM);
+                    tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_STAIRS);
+                    tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_TRAP);
 
             		// Set room index to 0xFF (not a room)
             		tile->room = CORRIDOR_ROOM;
@@ -3002,7 +3002,7 @@ static void FinalizeJunctions(void)
                 if (x > 0) {
                     Tile *tile = GetTileMut(x - 1, y);
                     if (tile->room != CORRIDOR_ROOM) {
-                        tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
+                        tile->terrainFlags |= TERRAIN_TYPE_NATURAL_JUNCTION;
 
                         // If there's any water/lava on the junction tile, remove it
                         if (GetTerrainType(tile) == TERRAIN_TYPE_SECONDARY) {
@@ -3015,8 +3015,8 @@ static void FinalizeJunctions(void)
                     Tile *tile = GetTileMut(x, y - 1);
                     if (tile->room != CORRIDOR_ROOM) {
                         // Yes, these |= have to be duplicated in order to match. Either it's an error and they wanted to use a different flag, or just copy-pasted it twice.
-                        tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
-                        tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
+                        tile->terrainFlags |= TERRAIN_TYPE_NATURAL_JUNCTION;
+                        tile->terrainFlags |= TERRAIN_TYPE_NATURAL_JUNCTION;
                         if (GetTerrainType(tile) == TERRAIN_TYPE_SECONDARY) {
                             SetTerrainType(tile, TERRAIN_TYPE_NORMAL);
                         }
@@ -3026,8 +3026,8 @@ static void FinalizeJunctions(void)
                 if (y < DUNGEON_MAX_SIZE_Y - 1) {
                     Tile *tile = GetTileMut(x, y + 1);
                     if (tile->room != CORRIDOR_ROOM) {
-                        tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
-                        tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
+                        tile->terrainFlags |= TERRAIN_TYPE_NATURAL_JUNCTION;
+                        tile->terrainFlags |= TERRAIN_TYPE_NATURAL_JUNCTION;
                         if (GetTerrainType(tile) == TERRAIN_TYPE_SECONDARY) {
                             SetTerrainType(tile, TERRAIN_TYPE_NORMAL);
                         }
@@ -3037,8 +3037,8 @@ static void FinalizeJunctions(void)
                 if (x < DUNGEON_MAX_SIZE_X - 1) {
                     Tile *tile = GetTileMut(x + 1, y);
                     if (tile->room != CORRIDOR_ROOM) {
-                        tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
-                        tile->terrainType |= TERRAIN_TYPE_NATURAL_JUNCTION;
+                        tile->terrainFlags |= TERRAIN_TYPE_NATURAL_JUNCTION;
+                        tile->terrainFlags |= TERRAIN_TYPE_NATURAL_JUNCTION;
                         if (GetTerrainType(tile) == TERRAIN_TYPE_SECONDARY) {
                             SetTerrainType(tile, TERRAIN_TYPE_NORMAL);
                         }
@@ -3066,7 +3066,7 @@ void sub_804EB30(void)
 
     for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
-            if (GetTile(x, y)->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION) {
+            if (GetTile(x, y)->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION) {
                 u32 roomIndex = GetTile(x, y)->room;
                 if (roomIndex < MAX_ROOM_COUNT && dungeon->naturalJunctionListCounts[roomIndex] < MAX_ROOM_COUNT) {
                     dungeon->naturalJunctionList[roomIndex][dungeon->naturalJunctionListCounts[roomIndex]].x = x;
@@ -3198,11 +3198,11 @@ static void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LE
             	for (curY = sKecleonShopPosition.minY; curY < sKecleonShopPosition.maxY; curY++) {
                     Tile *tile = GetTileMut(curX, curY);
 
-                    tile->terrainType |= TERRAIN_TYPE_SHOP;
+                    tile->terrainFlags |= TERRAIN_TYPE_SHOP;
 
             		// Restrict monsters and stairs from spawning here
-            		tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_MONSTER);
-            		tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_STAIRS);
+            		tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_MONSTER);
+            		tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_STAIRS);
 
             		// Ensure the borders are assigned properly
             		if (dungeon->kecleonShopPos.minX > curX) {
@@ -3226,7 +3226,7 @@ static void GenerateKecleonShop(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_LE
             // Sets an unknown spawn flag for all tiles in the room
             for (curX = grid[x][y].start.x; curX < grid[x][y].end.x; curX++) {
             	for (curY = grid[x][y].start.y; curY < grid[x][y].end.y; curY++) {
-                    GetTileMut(curX, curY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileMut(curX, curY)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_SPECIAL_TILE;
             	}
             }
 
@@ -3352,7 +3352,7 @@ static void GenerateMonsterHouse(struct GridCell grid[GRID_CELL_LEN][GRID_CELL_L
 
                 for (curX = grid[x][y].start.x; curX < grid[x][y].end.x; curX++) {
                     for (curY = grid[x][y].start.y; curY < grid[x][y].end.y; curY++) {
-                        GetTileMut(curX, curY)->terrainType |= TERRAIN_TYPE_IN_MONSTER_HOUSE;
+                        GetTileMut(curX, curY)->terrainFlags |= TERRAIN_TYPE_IN_MONSTER_HOUSE;
                         dungeon->monsterHouseRoom = GetTile(curX, curY)->room;
                     }
                 }
@@ -3658,7 +3658,7 @@ static void GenerateMazeLine(s32 x0, s32 y0, s32 xMin, s32 yMin, s32 xMax, s32 y
 static void SetTerrainSecondaryWithFlag(Tile *tile, u32 additionalFlag)
 {
     SetTerrainSecondary(tile);
-    tile->terrainType |= additionalFlag;
+    tile->terrainFlags |= additionalFlag;
 }
 
 /*
@@ -3670,7 +3670,7 @@ static void SetSpawnFlag5(struct GridCell *gridCell)
 
 	for (x = gridCell->start.x; x < gridCell->end.x; x++) {
 		for (y = gridCell->start.y; y < gridCell->end.y; y++) {
-            GetTileMut(x, y)->spawnOrVisibilityFlags |= SPAWN_FLAG_UNK5;
+            GetTileMut(x, y)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_UNK5;
 		}
 	}
 }
@@ -3739,7 +3739,7 @@ static void GenerateSecondaryStructure(struct GridCell *gridCell)
 
                         for (curX = gridCell->start.x; curX < middleX; curX++) {
                         	for (curY = gridCell->start.y; curY < gridCell->end.y; curY++) {
-                                GetTileMut(curX, curY)->terrainType |= TERRAIN_TYPE_UNK_7;
+                                GetTileMut(curX, curY)->terrainFlags |= TERRAIN_TYPE_UNK_7;
                         	}
                         }
 
@@ -3766,7 +3766,7 @@ static void GenerateSecondaryStructure(struct GridCell *gridCell)
 
                         for (curY = gridCell->start.y; curY < middleY; curY++) {
                             for (curX = gridCell->start.x; curX < gridCell->end.x; curX++) {
-                        		GetTileMut(curX, curY)->terrainType |= TERRAIN_TYPE_UNK_7;
+                        		GetTileMut(curX, curY)->terrainFlags |= TERRAIN_TYPE_UNK_7;
                         	}
                         }
 
@@ -3802,18 +3802,18 @@ static void GenerateSecondaryStructure(struct GridCell *gridCell)
                     SetTerrainSecondaryWithFlag(GetTileMut(middleX + 1, middleY + 1), TERRAIN_TYPE_CORNER_CUTTABLE);
 
                     // Trap
-                    GetTileMut(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_TRAP;
+                    GetTileMut(middleX - 1, middleY - 1)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_TRAP;
                     // Warp Tile ?
-                    GetTileMut(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_UNK6;
+                    GetTileMut(middleX - 1, middleY - 1)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_UNK6;
 
                     // Items
-                    GetTileMut(middleX, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
-                    GetTileMut(middleX - 1, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
-                    GetTileMut(middleX, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
-                    GetTileMut(middleX - 1, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
-                    GetTileMut(middleX, middleY - 1)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
-                    GetTileMut(middleX - 1, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
-                    GetTileMut(middleX, middleY)->spawnOrVisibilityFlags |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileMut(middleX, middleY - 1)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
+                    GetTileMut(middleX - 1, middleY)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
+                    GetTileMut(middleX, middleY)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
+                    GetTileMut(middleX - 1, middleY - 1)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileMut(middleX, middleY - 1)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileMut(middleX - 1, middleY)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_SPECIAL_TILE;
+                    GetTileMut(middleX, middleY)->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_SPECIAL_TILE;
 
                     gridCell->hasSecondaryStructure = TRUE;
                 }
@@ -3921,23 +3921,23 @@ static void ResolveInvalidSpawns(void)
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
             Tile *tile = GetTileMut(x, y);
             if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL) {
-                if (tile->terrainType & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL)) {
+                if (tile->terrainFlags & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL)) {
                     // This tile is an impassable obstacle, make sure no items spawn here
-                    tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
+                    tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_ITEM);
                 }
                 // This tile is an obstacle, make sure no traps spawn here
-                tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_TRAP);
+                tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_TRAP);
             }
 
-            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_STAIRS) {
+            if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_STAIRS) {
                 // This tile has the stairs, make sure the stairs bit is set and
             	// make sure no traps spawn here
-                tile->terrainType |= TERRAIN_TYPE_STAIRS;
-                tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_TRAP);
+                tile->terrainFlags |= TERRAIN_TYPE_STAIRS;
+                tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_TRAP);
             }
-            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_ITEM) {
+            if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM) {
                 //This tile is an item spawn, make sure no traps spawn here
-                tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_TRAP);
+                tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_TRAP);
             }
         }
     }
@@ -3966,7 +3966,7 @@ static void EnsureImpassableTilesAreWalls(void)
 
     for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
         for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
-            if (GetTile(x, y)->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) {
+            if (GetTile(x, y)->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL) {
                 SetTerrainWall(GetTileMut(x,y));
             }
         }
@@ -3975,8 +3975,8 @@ static void EnsureImpassableTilesAreWalls(void)
 
 static void ResetTile(Tile *tile)
 {
-    tile->terrainType = 0;
-    tile->spawnOrVisibilityFlags = 0;
+    tile->terrainFlags = 0;
+    tile->spawnOrVisibilityFlags.spawn = 0;
     tile->room = -1;
     tile->unk8 = 0;
     tile->walkableNeighborFlags[CROSSABLE_TERRAIN_REGULAR] = 0;
@@ -4020,7 +4020,7 @@ static void ResetFloor(void)
                 (PosIsOutOfBounds(x - 1, y))     ||
                 (PosIsOutOfBounds(x - 1, y - 1)))
             {
-                GetTileMut(x,y)->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+                GetTileMut(x,y)->terrainFlags |= TERRAIN_TYPE_IMPASSABLE_WALL;
             }
         }
     }
@@ -4102,15 +4102,15 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
                     continue;
                 if (tile->room == CORRIDOR_ROOM)
                     continue;
-                if (tile->terrainType & TERRAIN_TYPE_SHOP)
+                if (tile->terrainFlags & TERRAIN_TYPE_SHOP)
                     continue;
-                if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_MONSTER)
+                if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_MONSTER)
                     continue;
-                if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_SPECIAL_TILE)
+                if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_SPECIAL_TILE)
                     continue;
-                if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+                if (tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
                     continue;
-                if (tile->terrainType & TERRAIN_TYPE_UNBREAKABLE)
+                if (tile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE)
                     continue;
 
                 validSpawns[count].x = x;
@@ -4124,8 +4124,8 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
             s32 stairsIndex = DungeonRandInt(count);
             Tile *stairsTile = GetTileMut(validSpawns[stairsIndex].x, validSpawns[stairsIndex].y);
 
-            stairsTile->spawnOrVisibilityFlags |= SPAWN_FLAG_STAIRS;
-            stairsTile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
+            stairsTile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_STAIRS;
+            stairsTile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_ITEM);
             sStairsRoomIndex = stairsTile->room;
             dungeon->stairsSpawn.x = validSpawns[stairsIndex].x;
             dungeon->stairsSpawn.y = validSpawns[stairsIndex].y;
@@ -4137,7 +4137,7 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
                     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
                         Tile *tile = GetTileMut(x, y);
                         if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL && tile->room == stairsRoomIndex) {
-                            tile->terrainType |= TERRAIN_TYPE_IN_MONSTER_HOUSE;
+                            tile->terrainFlags |= TERRAIN_TYPE_IN_MONSTER_HOUSE;
                             dungeon->monsterHouseRoom = tile->room;
                         }
                     }
@@ -4164,13 +4164,13 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
                 continue;
             if (tile->room == CORRIDOR_ROOM)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_SHOP)
+            if (tile->terrainFlags & TERRAIN_TYPE_SHOP)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE)
+            if (tile->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+            if (tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_UNBREAKABLE)
+            if (tile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE)
                 continue;
 
             validSpawns[count].x = x;
@@ -4195,7 +4195,7 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
             randIndex = DungeonRandInt(count);
             for (i = 0; i < numItems; i++) {
             	Tile *tile = GetTileMut(validSpawns[randIndex].x, validSpawns[randIndex].y);
-                tile->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+                tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
 
                 randIndex++;
                 if (randIndex == count) {
@@ -4234,7 +4234,7 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
             randIndex = DungeonRandInt(count);
             for (i = 0; i < numItems; i++) {
             	Tile *tile = GetTileMut(validSpawns[randIndex].x, validSpawns[randIndex].y);
-                tile->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+                tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
 
                 randIndex++;
                 if (randIndex == count) {
@@ -4255,11 +4255,11 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
             	// - in a Monster House
             	// - not a junction (near a hallway)
             	const Tile *tile = GetTile(x, y);
-                if (tile->terrainType & TERRAIN_TYPE_SHOP)
+                if (tile->terrainFlags & TERRAIN_TYPE_SHOP)
                     continue;
-                if (!(tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
+                if (!(tile->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE))
                     continue;
-                if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+                if (tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
                     continue;
 
                 validSpawns[count].x = x;
@@ -4290,10 +4290,10 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
             // 50/50 chance of spawning an item or a trap
             if (DungeonRandInt(2) != 0) {
                 // Spawn an item
-                tile->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+                tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
             }
             else if (gDungeon->unk644.unk18) {
-                tile->spawnOrVisibilityFlags |= SPAWN_FLAG_TRAP;
+                tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_TRAP;
             }
 
             randIndex++;
@@ -4321,13 +4321,13 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
                 continue;
             if (tile->room == CORRIDOR_ROOM)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_SHOP)
+            if (tile->terrainFlags & TERRAIN_TYPE_SHOP)
                 continue;
-            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_ITEM)
+            if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+            if (tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_UNBREAKABLE)
+            if (tile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE)
                 continue;
 
             validSpawns[count].x = x;
@@ -4351,7 +4351,7 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
             trapIndex = DungeonRandInt(count);
             for (i = 0; i < numTraps; i++) {
             	Tile *tile = GetTileMut(validSpawns[trapIndex].x, validSpawns[trapIndex].y);
-                tile->spawnOrVisibilityFlags |= SPAWN_FLAG_TRAP;
+                tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_TRAP;
 
                 trapIndex++;
                 if (trapIndex == count) {
@@ -4380,17 +4380,17 @@ static void SpawnNonEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHou
                     continue;
                 if (tile->room == CORRIDOR_ROOM)
                     continue;
-                if (tile->terrainType & TERRAIN_TYPE_SHOP)
+                if (tile->terrainFlags & TERRAIN_TYPE_SHOP)
                     continue;
-                if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+                if (tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
                     continue;
-                if (tile->terrainType & TERRAIN_TYPE_UNBREAKABLE)
+                if (tile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE)
                     continue;
-                if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_ITEM)
+                if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)
                     continue;
-                if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_MONSTER)
+                if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_MONSTER)
                     continue;
-                if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_TRAP)
+                if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_TRAP)
                     continue;
 
                 validSpawns[count].x = x;
@@ -4450,15 +4450,15 @@ static void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
                 continue;
             if (tile->room == CORRIDOR_ROOM)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_SHOP)
+            if (tile->terrainFlags & TERRAIN_TYPE_SHOP)
                 continue;
-            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_ITEM)
+            if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)
                 continue;
-            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_STAIRS)
+            if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_STAIRS)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+            if (tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_UNBREAKABLE)
+            if (tile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE)
                 continue;
             if (x == dungeon->playerSpawn.x && y == dungeon->playerSpawn.y)
                 continue;
@@ -4482,7 +4482,7 @@ static void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
             for (i = 0; i < numEnemies; i++) {
                 Tile *tile = GetTileMut(validSpawns[randIndex].x, validSpawns[randIndex].y);
                  // Spawn an enemy here
-                tile->spawnOrVisibilityFlags |= SPAWN_FLAG_MONSTER;
+                tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_MONSTER;
 
                 randIndex++;
                 if (randIndex == count) {
@@ -4525,11 +4525,11 @@ static void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
                 continue;
             if (tile->room == CORRIDOR_ROOM)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_SHOP)
+            if (tile->terrainFlags & TERRAIN_TYPE_SHOP)
                 continue;
-            if (tile->terrainType & TERRAIN_TYPE_UNBREAKABLE)
+            if (tile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE)
                 continue;
-            if (!(tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
+            if (!(tile->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE))
                 continue;
             if (x == dungeon->playerSpawn.x && y == dungeon->playerSpawn.y)
                 continue;
@@ -4559,7 +4559,7 @@ static void SpawnEnemies(FloorProperties *floorProps, bool8 isEmptyMonsterHouse)
         for (i = 0; i < numEnemies; i++) {
             Tile *tile = GetTileMut(validSpawns[randIndex].x, validSpawns[randIndex].y);
              // Spawn an enemy here
-            tile->spawnOrVisibilityFlags |= SPAWN_FLAG_MONSTER;
+            tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_MONSTER;
 
             randIndex++;
             if (randIndex == count) {
@@ -4579,7 +4579,7 @@ void SetSecondaryTerrainOnWall(Tile *tile)
     bool8 isWall = TRUE;
     if (GetTerrainType(tile) != TERRAIN_TYPE_WALL)
         isWall = FALSE;
-    if (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
+    if (tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL)
         isWall = FALSE;
 
     if (isWall) {
@@ -4852,7 +4852,7 @@ static void GenerateSecondaryTerrainFormations(u32 flag, FloorProperties *floorP
             // This really shouldn't happen since we only place terrain on wall tiles to begin with,
             // but it provides additional safety
 
-            if (tile->terrainType & (TERRAIN_TYPE_SHOP | TERRAIN_TYPE_IN_MONSTER_HOUSE | TERRAIN_TYPE_UNBREAKABLE) || (tile->spawnOrVisibilityFlags & SPAWN_FLAG_STAIRS)) {
+            if (tile->terrainFlags & (TERRAIN_TYPE_SHOP | TERRAIN_TYPE_IN_MONSTER_HOUSE | TERRAIN_TYPE_UNBREAKABLE) || (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_STAIRS)) {
                 SetTerrainNormal(tile);
             }
             else {
@@ -5605,17 +5605,17 @@ bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable)
             test[x][y] = 0;
             if (markUnreachable) {
             	// Reset all unreachable flags on tiles, they'll be recomputed from scratch
-            	tile->terrainType &= ~(TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS);
+            	tile->terrainFlags &= ~(TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS);
             }
 
             if (terrain != TERRAIN_TYPE_NORMAL) {
-            	if (!(tile->terrainType & TERRAIN_TYPE_CORNER_CUTTABLE)) {
+            	if (!(tile->terrainFlags & TERRAIN_TYPE_CORNER_CUTTABLE)) {
             		test[x][y] |= STAIRS_FLAG_CANNOT_CORNER_CUT;
             	}
             }
 
             if (terrain == TERRAIN_TYPE_SECONDARY) {
-            	if (!(tile->terrainType & TERRAIN_TYPE_CORNER_CUTTABLE)) {
+            	if (!(tile->terrainFlags & TERRAIN_TYPE_CORNER_CUTTABLE)) {
             		test[x][y] |= STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT;
             	}
             }
@@ -5715,12 +5715,12 @@ bool8 StairsAlwaysReachable(s32 stairsX, s32 stairsY, bool8 markUnreachable)
             if (!(test[x][y] & (STAIRS_FLAG_CANNOT_CORNER_CUT | STAIRS_FLAG_SECONDARY_TERRAIN_CANNOT_CORNER_CUT | STAIRS_FLAG_UNKNOWN | STAIRS_FLAG_VISITED))) {
                 // This is an open tile that wasn't visited by BFS, which means it's unreachable from the starting stairs
                 if (markUnreachable) {
-                    tile->terrainType |= TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS;
+                    tile->terrainFlags |= TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS;
                 }
                 else {
                     // unbreakable tiles can't really be navigated onto anyways, so if
             		// we can ignore the tile (otherwise it's a problem!)
-            		if (!(tile->terrainType & TERRAIN_TYPE_UNBREAKABLE)) {
+            		if (!(tile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE)) {
                         return FALSE;
             		}
                 }
@@ -5882,7 +5882,7 @@ static u8 sub_80511F0(void)
 
 static bool8 sub_805124C(Tile *tile, u8 a1, s32 x, s32 y, bool8 spawnTrapOrItem)
 {
-    tile->terrainType |= TERRAIN_TYPE_UNBREAKABLE;
+    tile->terrainFlags |= TERRAIN_TYPE_UNBREAKABLE;
     tile->unkE = 0;
     return PlaceFixedRoomTile(tile, a1, x, y, spawnTrapOrItem);
 }
@@ -5913,7 +5913,7 @@ static void sub_8051288(s32 fixedRoomNumber)
         for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
             if (x <= 4 || x >= fixedRoomSizeX + 5 || y <= 4 || y >= fixedRoomSizeY + 5) {
                 Tile *tile = GetTileMut(x, y);
-                tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+                tile->terrainFlags |= TERRAIN_TYPE_IMPASSABLE_WALL;
                 if (gUnknown_202F1A8) {
                     SetTerrainType(tile, TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
                 }
@@ -5928,7 +5928,7 @@ static void sub_8051288(s32 fixedRoomNumber)
         for (y = 5; y < 17; y++) {
             for (x = 2; x < 5; x++) {
                 Tile *tile = GetTileMut(x, y);
-                tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+                tile->terrainFlags |= TERRAIN_TYPE_IMPASSABLE_WALL;
                 SetTerrainWall(tile);
             }
         }
@@ -5939,7 +5939,7 @@ static void sub_8051288(s32 fixedRoomNumber)
             for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
                 Tile *tile = GetTileMut(x, y);
                 if (GetTerrainType(tile) == TERRAIN_TYPE_WALL) {
-                    tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+                    tile->terrainFlags |= TERRAIN_TYPE_IMPASSABLE_WALL;
                 }
             }
         }
@@ -5977,7 +5977,7 @@ static void sub_8051438(struct GridCell *gridCell, s32 fixedRoomNumber)
                 roomId = tile->room;
                 *tile = dungeon->unkE27C[xIndex][yIndex];
                 if (x >= gridCell->start.x + 2 && x < gridCell->end.x - 2 && y >= gridCell->start.y + 2 && y < gridCell->end.y - 2) {
-                    tile->terrainType = TERRAIN_TYPE_IMPASSABLE_WALL | TERRAIN_TYPE_UNBREAKABLE;
+                    tile->terrainFlags = TERRAIN_TYPE_IMPASSABLE_WALL | TERRAIN_TYPE_UNBREAKABLE;
                     tile->unkE = 0xE;
                 }
                 tile->room = roomId;
@@ -6037,7 +6037,7 @@ static void sub_8051654(FloorProperties *floorProps)
         if (DungeonRandInt(100) < 50) {
             s32 y;
             for (y = sKecleonShopPosition.minY; y < sKecleonShopPosition.maxY; y++) {
-                GetTileMut(sKecleonShopPosition.minX, y)->terrainType &= ~(TERRAIN_TYPE_SHOP);
+                GetTileMut(sKecleonShopPosition.minX, y)->terrainFlags &= ~(TERRAIN_TYPE_SHOP);
             }
             sKecleonShopPosition.minX++;
         }
@@ -6045,7 +6045,7 @@ static void sub_8051654(FloorProperties *floorProps)
             s32 y;
             sKecleonShopPosition.maxX--;
             for (y = sKecleonShopPosition.minY; y < sKecleonShopPosition.maxY; y++) {
-                GetTileMut(sKecleonShopPosition.maxX, y)->terrainType &= ~(TERRAIN_TYPE_SHOP);
+                GetTileMut(sKecleonShopPosition.maxX, y)->terrainFlags &= ~(TERRAIN_TYPE_SHOP);
             }
         }
     }
@@ -6057,7 +6057,7 @@ static void sub_8051654(FloorProperties *floorProps)
         if (DungeonRandInt(100) < 50) {
             s32 x;
             for (x = sKecleonShopPosition.minX; x < sKecleonShopPosition.maxX; x++) {
-                GetTileMut(x, sKecleonShopPosition.minY)->terrainType &= ~(TERRAIN_TYPE_SHOP);
+                GetTileMut(x, sKecleonShopPosition.minY)->terrainFlags &= ~(TERRAIN_TYPE_SHOP);
             }
             sKecleonShopPosition.minY++;
         }
@@ -6065,7 +6065,7 @@ static void sub_8051654(FloorProperties *floorProps)
             s32 x;
             sKecleonShopPosition.maxY--;
             for (x = sKecleonShopPosition.minX; x < sKecleonShopPosition.maxX; x++) {
-                GetTileMut(x, sKecleonShopPosition.maxY)->terrainType &= ~(TERRAIN_TYPE_SHOP);
+                GetTileMut(x, sKecleonShopPosition.maxY)->terrainFlags &= ~(TERRAIN_TYPE_SHOP);
             }
         }
     }
@@ -6073,12 +6073,12 @@ static void sub_8051654(FloorProperties *floorProps)
     for (x = sKecleonShopPosition.minX; x < sKecleonShopPosition.maxX; x++) {
         for (y = sKecleonShopPosition.minY; y < sKecleonShopPosition.maxY; y++) {
             Tile *tile = GetTileMut(x, y);
-            if (!(tile->terrainType & TERRAIN_TYPE_SHOP))
+            if (!(tile->terrainFlags & TERRAIN_TYPE_SHOP))
                 continue;
-            if (!(tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION))
+            if (!(tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION))
                 continue;
 
-            tile->terrainType &= ~(TERRAIN_TYPE_SHOP);
+            tile->terrainFlags &= ~(TERRAIN_TYPE_SHOP);
         }
     }
 
@@ -6089,15 +6089,15 @@ static void sub_8051654(FloorProperties *floorProps)
         yIndex = 0;
         for (y = middleY; y < middleY + 3; y++, yIndex++) {
             Tile *tile = GetTileMut(x, y);
-            if (!(tile->terrainType & TERRAIN_TYPE_SHOP))
+            if (!(tile->terrainFlags & TERRAIN_TYPE_SHOP))
                 continue;
-            if ((tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
+            if ((tile->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE))
                 continue;
-            if ((tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION))
+            if ((tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION))
                 continue;
 
             if (sKecleonShopItemSpawnChances[floorProps->unk18][yIndex][xIndex] > DungeonRandInt(100)) {
-                tile->spawnOrVisibilityFlags |= SPAWN_FLAG_ITEM;
+                tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_ITEM;
             }
         }
     }
@@ -6117,13 +6117,13 @@ static void ResetInnerBoundaryTileRows(void)
         Tile *tile = GetTileMut(x, 1);
         ResetTile(tile);
         if (x == 0 || x == DUNGEON_MAX_SIZE_X - 1) {
-            tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            tile->terrainFlags |= TERRAIN_TYPE_IMPASSABLE_WALL;
         }
 
         tile = GetTileMut(x, 30);
         ResetTile(tile);
         if (x == 0 || x == DUNGEON_MAX_SIZE_X - 1) {
-            tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            tile->terrainFlags |= TERRAIN_TYPE_IMPASSABLE_WALL;
         }
     }
 }

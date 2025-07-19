@@ -217,7 +217,7 @@ void DrawMinimapTile(s32 x, s32 y)
     showItems = gDungeon->unk181e8.showAllFloorItems;
     allTilesRevealed = gDungeon->unk181e8.allTilesRevealed;
     if (blinded) {
-        tileKnown = tile->spawnOrVisibilityFlags & VISIBILITY_FLAG_REVEALED;
+        tileKnown = tile->spawnOrVisibilityFlags.visibility & VISIBILITY_FLAG_REVEALED;
         var_24 = FALSE;
     }
     else {
@@ -225,7 +225,7 @@ void DrawMinimapTile(s32 x, s32 y)
             tileKnown = TRUE;
         }
         else {
-            tileKnown = tile->spawnOrVisibilityFlags & VISIBILITY_FLAG_REVEALED;
+            tileKnown = tile->spawnOrVisibilityFlags.visibility & VISIBILITY_FLAG_REVEALED;
         }
 
         if (GetFloorType() == FLOOR_TYPE_NORMAL) {
@@ -273,7 +273,7 @@ void DrawMinimapTile(s32 x, s32 y)
                 if (!tileKnown) {
                     mapGfxType = MAP_GFX_NOTHING;
                     if (entType == ENTITY_ITEM) {
-                        if ((showItems || (tile->spawnOrVisibilityFlags & 2)) && terrainType != TERRAIN_TYPE_WALL) {
+                        if ((showItems || (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)) && terrainType != TERRAIN_TYPE_WALL) {
                             mapGfxType = MAP_GFX_ITEM;
                         }
                     }
@@ -291,7 +291,7 @@ void DrawMinimapTile(s32 x, s32 y)
 
                 if (lookForMapObject) {
                     if (entType == ENTITY_ITEM) {
-                        if ((showItems || (tile->spawnOrVisibilityFlags & 2)) && terrainType != TERRAIN_TYPE_WALL) {
+                        if ((showItems || (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)) && terrainType != TERRAIN_TYPE_WALL) {
                             mapGfxType = MAP_GFX_ITEM;
                             lookForMapObject = FALSE;
                         }
@@ -306,7 +306,7 @@ void DrawMinimapTile(s32 x, s32 y)
             }
             else {
                 if (!tileKnown) {
-                    if (var_24 && (tile->terrainType & TERRAIN_TYPE_STAIRS)) {
+                    if (var_24 && (tile->terrainFlags & TERRAIN_TYPE_STAIRS)) {
                         if (GetFloorType() == FLOOR_TYPE_NORMAL) {
                             mapGfxType = MAP_GFX_STAIRS;
                         }
@@ -317,7 +317,7 @@ void DrawMinimapTile(s32 x, s32 y)
                     }
                 }
                 else {
-                    if ((tile->terrainType & TERRAIN_TYPE_STAIRS)) {
+                    if ((tile->terrainFlags & TERRAIN_TYPE_STAIRS)) {
                         if (GetFloorType() == FLOOR_TYPE_NORMAL) {
                             mapGfxType = MAP_GFX_STAIRS;
                         }
@@ -371,7 +371,7 @@ void DrawMinimapTile(s32 x, s32 y)
                 }
 
                 mapGfxType = (s16) terrainLine;
-                if (tile->spawnOrVisibilityFlags & VISIBILITY_FLAG_VISITED) {
+                if (tile->spawnOrVisibilityFlags.visibility & VISIBILITY_FLAG_VISITED) {
                     mapGfxType = (s16) (mapGfxType + MAP_GFX_TERRAIN_TILES_VISITED);
                 }
                 else {

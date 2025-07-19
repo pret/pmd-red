@@ -713,7 +713,7 @@ void HandleLuminousOrbAction(Entity *pokemon)
     for(XCoord = 0; XCoord < DUNGEON_MAX_SIZE_X; XCoord++)
     {
       Tile *mapTile = GetTileMut(XCoord, YCoord);
-      mapTile->spawnOrVisibilityFlags |= VISIBILITY_FLAG_REVEALED;
+      mapTile->spawnOrVisibilityFlags.visibility |= VISIBILITY_FLAG_REVEALED;
     }
   }
   UpdateCamera(0);

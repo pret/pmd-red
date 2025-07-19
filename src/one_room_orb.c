@@ -58,14 +58,14 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 		{
 			bVar1 = 0;
 			tile = GetTileMut(x,y);
-			tile->terrainType &= ~(TERRAIN_TYPE_UNK_x400);
+			tile->terrainFlags &= ~(TERRAIN_TYPE_UNK_x400);
 			tile->room = 0;
-			if ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)
+			if ((tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)
 			{
-				if((tile->terrainType & TERRAIN_TYPE_UNBREAKABLE) == 0) {
-					tile->spawnOrVisibilityFlags |= SPAWN_FLAG_STAIRS | SPAWN_FLAG_ITEM;
-					tile->terrainType &= ~(TERRAIN_TYPE_NATURAL_JUNCTION);
-					if ((tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE)) {
+				if((tile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE) == 0) {
+					tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_STAIRS | SPAWN_FLAG_ITEM;
+					tile->terrainFlags &= ~(TERRAIN_TYPE_NATURAL_JUNCTION);
+					if ((tile->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE)) {
 						isMonsterHouse = TRUE;
 					}
 					if (GetTerrainType(tile) != TERRAIN_TYPE_SECONDARY)
@@ -80,7 +80,7 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 							else {
 								if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL) continue;
 								SetTerrainNormal(tile);
-								tile->terrainType |= TERRAIN_TYPE_UNK_x400;
+								tile->terrainFlags |= TERRAIN_TYPE_UNK_x400;
 							}
 						}
 				}
@@ -95,8 +95,8 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 			for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
 			{
 				tile = GetTileMut(x,y);
-				if (!(tile->terrainType & TERRAIN_TYPE_UNBREAKABLE))
-					if(((tile->terrainType & (TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS| TERRAIN_TYPE_UNK_x400)) == (TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS| TERRAIN_TYPE_UNK_x400))) {
+				if (!(tile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE))
+					if(((tile->terrainFlags & (TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS| TERRAIN_TYPE_UNK_x400)) == (TERRAIN_TYPE_UNREACHABLE_FROM_STAIRS| TERRAIN_TYPE_UNK_x400))) {
 						SetTerrainSecondary(tile);
 					}
 			}
@@ -111,7 +111,7 @@ void HandleOneRoomOrb(Entity *pokemon, Entity *target)
 		for(y = 0; y < DUNGEON_MAX_SIZE_Y; y++)
 		{
 			if (isMonsterHouse) {
-				GetTileMut(x,y)->terrainType |= TERRAIN_TYPE_IN_MONSTER_HOUSE;
+				GetTileMut(x,y)->terrainFlags |= TERRAIN_TYPE_IN_MONSTER_HOUSE;
 			}
 			sub_8049BB0(x,y);
 		}

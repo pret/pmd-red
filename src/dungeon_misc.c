@@ -470,7 +470,7 @@ void sub_8068F80(void)
     dungeon->unk644.unk2F = 0;
     dungeon->unkC0.type = ENTITY_NOTHING;
     if (leader != NULL) {
-        bool8 isShop = (GetTileAtEntitySafe(leader)->terrainType & TERRAIN_TYPE_SHOP) != 0;
+        bool8 isShop = (GetTileAtEntitySafe(leader)->terrainFlags & TERRAIN_TYPE_SHOP) != 0;
         dungeon->unk644.unk54 = isShop;
         dungeon->unk644.unk55 = isShop;
         DiscoverMinimap(&leader->pos);

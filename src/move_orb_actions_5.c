@@ -44,8 +44,8 @@ bool8 FillInOrbAction(Entity *pokemon,Entity *target, Move *move, s32 param_4)
 
         sub_8042A54(&tileCoords);
         tileToFill = GetTileMut(tileCoords.x,tileCoords.y);
-        if ((tileToFill->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY) {
-            tileToFill->terrainType = (tileToFill->terrainType & ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) | TERRAIN_TYPE_NORMAL;
+        if ((tileToFill->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY) {
+            tileToFill->terrainFlags = (tileToFill->terrainFlags & ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) | TERRAIN_TYPE_NORMAL;
 
             for(y = -1; y < 2; y++)
                 for(x = -1; x < 2; x++)

@@ -126,7 +126,7 @@ void HandleExplosion(Entity *pokemon,Entity *target,DungeonPos *param_3,s32 para
                     tile = GetTileMut(pos.x,pos.y);
                     if ((0 < pos.x) && (0 < pos.y && ((pos.x < (DUNGEON_MAX_SIZE_X - 1) && ((pos.y < (DUNGEON_MAX_SIZE_Y - 1)
                         && GetTerrainType(tile) == TERRAIN_TYPE_WALL)))
-                    )) && (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0) {
+                    )) && (tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL) == 0) {
                         SetTerrainNormal(tile);
                         for(y = -1; y < 2; y++)
                         {

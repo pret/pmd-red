@@ -316,7 +316,7 @@ void HandlePlaceItemAction(Entity *entity)
     }
     else {
         const Tile *tile = GetTile(entity->pos.x, entity->pos.y);
-        if ((tile->terrainType & TERRAIN_TYPE_STAIRS)) {
+        if ((tile->terrainFlags & TERRAIN_TYPE_STAIRS)) {
             LogMessageByIdWithPopupCheckUser(entity,gUnknown_80F8E04);
         }
         else if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL) {

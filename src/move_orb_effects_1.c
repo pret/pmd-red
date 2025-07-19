@@ -401,7 +401,7 @@ void BurnedStatusTarget(Entity * pokemon, Entity * target, u8 param_3, bool8 dis
       else
       {
         tile_1 = GetTileAtEntitySafe(target);
-        if (((tile_1->terrainType & (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) == TERRAIN_TYPE_SECONDARY) &&
+        if (((tile_1->terrainFlags & (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) == TERRAIN_TYPE_SECONDARY) &&
            (gDungeonWaterType[gDungeon->tileset] != DUNGEON_WATER_TYPE_LAVA)) {
                 if (displayMessage)
                     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FEBBC);
@@ -656,7 +656,7 @@ void FrozenStatusTarget(Entity * pokemon, Entity * target, bool8 displayMessage)
       else
       {
         tile = GetTileAtEntitySafe(target);
-        if (((tile->terrainType & (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) == TERRAIN_TYPE_SECONDARY) &&
+        if (((tile->terrainFlags & (TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) == TERRAIN_TYPE_SECONDARY) &&
            (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA)) {
                 if (displayMessage)
                     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FCE34);

@@ -273,7 +273,7 @@ bool8 CanUseOnSelfWithStatusChecker(Entity *pokemon, Move *move)
         case MOVE_DIG:
         {
             Tile *tile = GetTileAtEntitySafe(pokemon);
-            if (!IsTileGround(tile) || (tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL)
+            if (!IsTileGround(tile) || (tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL)
             {
                 return FALSE;
             }

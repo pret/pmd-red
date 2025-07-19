@@ -325,7 +325,7 @@ static void sub_808B1CC(u8 itemID)
     }
     sub_807FE04(&pos, 0);
     tile = GetTileMut(pos.x, pos.y);
-    tile->terrainType = tile->terrainType | TERRAIN_TYPE_STAIRS;
+    tile->terrainFlags = tile->terrainFlags | TERRAIN_TYPE_STAIRS;
     if (((itemID != ITEM_NOTHING) && (sub_80860A8(itemID) == 0)) &&
         (sub_80860A8(ITEM_MUSIC_BOX) == 0)) {
         ItemIdToItem(&item,itemID,0);

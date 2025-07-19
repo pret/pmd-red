@@ -688,8 +688,8 @@ static void WriteIQSkills(DataSerializer *seri, IqSkillFlags *src)
 
 static void WriteTile(DataSerializer *seri, Tile *src)
 {
-    WriteU16(seri, src->terrainType);
-    WriteU16(seri, src->spawnOrVisibilityFlags);
+    WriteU16(seri, src->terrainFlags);
+    WriteU16(seri, src->spawnOrVisibilityFlags.visibility);
     WriteBytes(seri, &src->room, 1);
     WriteBytes(seri, &src->unkE, 1);
 }
@@ -805,8 +805,8 @@ static void ReadTile(DataSerializer *seri, Tile *dst)
 {
     memset(dst, 0, sizeof(Tile));
 
-    dst->terrainType = ReadU16(seri);
-    dst->spawnOrVisibilityFlags = ReadU16(seri);
+    dst->terrainFlags = ReadU16(seri);
+    dst->spawnOrVisibilityFlags.visibility = ReadU16(seri);
 
     ReadBytes(seri, &dst->room, 1);
     ReadBytes(seri, &dst->unkE, 1);

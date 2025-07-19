@@ -906,7 +906,7 @@ bool8 IsTargetInRange(Entity *pokemon, Entity *targetPokemon, s32 direction, s32
             }
             while (0); // Extra label needed to swap branch locations in ASM.
             mapTile = GetTile(currentPosX, currentPosY);
-            if (!(mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+            if (!(mapTile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
             {
                 break;
             }

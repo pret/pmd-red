@@ -100,7 +100,7 @@ void HandleTrawlOrbAction(Entity *user, Entity *target)
                     pos.y = user->pos.y + gUnknown_80F4468[j].y;
 
                     tile = GetTile(pos.x, pos.y);
-                    if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL && !(tile->terrainType & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
+                    if (GetTerrainType(tile) == TERRAIN_TYPE_NORMAL && !(tile->terrainFlags & TERRAIN_TYPE_STAIRS) && tile->object == NULL) {
                         targetTilePos[i] = pos;
                         targetTileUsed[j] = TRUE;
                         foundTile = TRUE;

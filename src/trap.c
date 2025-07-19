@@ -56,11 +56,11 @@ void sub_807FA18(void)
         for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
             Tile *tile = GetTileMut(x, y);
 
-            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_TRAP) {
+            if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_TRAP) {
                 s32 trapId;
                 DungeonPos pos = {x, y};
 
-                if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_UNK6) {
+                if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_UNK6) {
                     trapId = TRAP_WARP_TRAP;
                 }
                 else {
@@ -99,7 +99,7 @@ void sub_807FA9C(void)
             if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_TRAP && (tile->object->isVisible || showInvisibles)) {
                 r6 = TRUE;
             }
-            if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+            if (tile->terrainFlags & TERRAIN_TYPE_STAIRS) {
                 r6 = TRUE;
             }
 
@@ -133,21 +133,28 @@ void sub_807FC3C(DungeonPos *pos, u32 trapID, u32 param_3)
 bool8 CanLayTrap(DungeonPos *pos)
 {
     Tile *tile = GetTileMut(pos->x, pos->y);
-    if (tile->terrainType & TERRAIN_TYPE_STAIRS ||
-        tile->room == CORRIDOR_ROOM ||
-        tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
-    {
+    if (tile->terrainFlags & TERRAIN_TYPE_STAIRS)
         return FALSE;
-    }
-    if (tile->terrainType & TERRAIN_TYPE_SHOP)
-    {
+
+    if (tile->room == CORRIDOR_ROOM)
         return FALSE;
-    }
-    if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL ||
-        (tile->object != NULL && GetEntityType(tile->object) != ENTITY_TRAP))
-    {
+
+    if (tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
         return FALSE;
+
+    if (tile->terrainFlags & TERRAIN_TYPE_SHOP)
+        return FALSE;
+
+    if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
+        return FALSE;
+
+    if (tile->object != NULL) {
+        if (GetEntityType(tile->object) != ENTITY_TRAP)
+            return FALSE;
+        else
+            return TRUE;
     }
+
     return TRUE;
 }
 
@@ -156,7 +163,7 @@ bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3)
     Tile *tile;
     Entity *entity;
     int counter;
-    u16 terrainType;
+    u16 terrainFlags;
 
     tile = GetTileMut(pos->x, pos->y);
     if (TRAP_SPIKE_TRAP < trapID) {
@@ -168,12 +175,12 @@ bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3)
             trapID = TRAP_CHESTNUT_TRAP;
         }
     }
-    terrainType = tile->terrainType;
-    if ((terrainType & TERRAIN_TYPE_STAIRS) != 0) goto _0807FD6E;
+    terrainFlags = tile->terrainFlags;
+    if ((terrainFlags & TERRAIN_TYPE_STAIRS) != 0) goto _0807FD6E;
     if (tile->room == CORRIDOR_ROOM) goto _0807FD6E;
-    if ((terrainType & TERRAIN_TYPE_NATURAL_JUNCTION) != 0) goto _0807FD6E;
-    if ((terrainType & TERRAIN_TYPE_SHOP) != 0) goto _0807FD6E;
-    if (((terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL)) goto _0807FD6E;
+    if ((terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION) != 0) goto _0807FD6E;
+    if ((terrainFlags & TERRAIN_TYPE_SHOP) != 0) goto _0807FD6E;
+    if (((terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL)) goto _0807FD6E;
     if (tile->object != NULL) {
         if (GetEntityType(tile->object) != ENTITY_TRAP) goto _0807FD6E;
         GetTrapInfo(tile->object)->id = trapID;
