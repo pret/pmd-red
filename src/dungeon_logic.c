@@ -65,9 +65,9 @@ u8 sub_807034C(s32 id, const Tile *tile)
 
   id_s32 = SpeciesId(id);
 
-  if ((tile->monster == NULL) && ((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) {
+  if ((tile->monster == NULL) && ((tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL) == 0)) {
       crossableTerrain = GetCrossableTerrain(id_s32);
-      tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+      tileFlags = tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
         switch(crossableTerrain)
         {
             case CROSSABLE_TERRAIN_LIQUID:
@@ -100,12 +100,12 @@ u8 sub_80703A0(Entity *pokemon, DungeonPos *pos)
         return TRUE;
     if (tile->monster != NULL)
         return TRUE;
-    if (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
+    if (tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL)
         return TRUE;
 
     if ((IsCurrentFixedRoomBossFight()) || ((entityInfo->invisibleClassStatus.status != STATUS_MOBILE && (!HasHeldItem(pokemon, ITEM_MOBILE_SCARF))))) {
         crossableTerrain = GetCrossableTerrain(entityInfo->id);
-        tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+        tileFlags = tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
         if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
         }
@@ -164,14 +164,14 @@ bool8 sub_807049C(Entity *pokemon, DungeonPos *pos)
         return TRUE;
     if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
         return TRUE;
-    if (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
+    if (tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL)
         return TRUE;
     if (tile->monster != NULL && GetEntityType(tile->monster) != ENTITY_MONSTER)
         return TRUE;
 
     if (IsCurrentFixedRoomBossFight() || (entityInfo->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
         crossableTerrain = GetCrossableTerrain(entityInfo->id);
-        tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+        tileFlags = tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
         if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
             crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
         }
@@ -211,7 +211,7 @@ bool8 sub_8070564(Entity *pokemon, DungeonPos *pos)
         return TRUE;
     if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
         return TRUE;
-    if (tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
+    if (tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL)
         return TRUE;
     if (tile->monster != NULL && GetEntityType(tile->monster) != ENTITY_MONSTER)
         return TRUE;
@@ -252,10 +252,10 @@ bool8 sub_80705F0(Entity *pokemon, DungeonPos *pos)
         return TRUE;
     if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
         return TRUE;
-    if (((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0) && (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
+    if (((tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL) == 0) && (tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))) {
         if (IsCurrentFixedRoomBossFight() || (entityInfo->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
-            tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+            tileFlags = tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
             if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
                 crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
             }
@@ -292,11 +292,11 @@ bool8 sub_80706A4(Entity *pokemon, DungeonPos *pos)
         return TRUE;
     if (pos->x >= DUNGEON_MAX_SIZE_X || pos->y >= DUNGEON_MAX_SIZE_Y)
         return TRUE;
-    if ((((tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) == 0))
+    if ((((tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL) == 0))
         && (tile->monster == NULL || ((GetEntityType(tile->monster) == ENTITY_MONSTER) && (GetEntInfo(tile->monster) == entityInfo)))) {
         if (IsCurrentFixedRoomBossFight() || (entityInfo->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(pokemon, ITEM_MOBILE_SCARF))) {
             crossableTerrain = GetCrossableTerrain(entityInfo->id);
-            tileFlags = tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+            tileFlags = tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
             if (IQSkillIsEnabled(pokemon, IQ_ALL_TERRAIN_HIKER)) {
                 crossableTerrain = CROSSABLE_TERRAIN_CREVICE;
             }
@@ -685,7 +685,7 @@ bool8 CanMoveInDirection(Entity *pokemon, u32 direction)
     const Tile *currentMapTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
         pokemon->pos.y + gAdjacentTileOffsets[direction].y);
 
-    if (currentMapTile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL || currentMapTile->monster != NULL)
+    if (currentMapTile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL || currentMapTile->monster != NULL)
         return FALSE;
 
     if (!IsCurrentFixedRoomBossFight())
@@ -718,7 +718,7 @@ bool8 sub_8070F3C(Entity * pokemon, DungeonPos *pos, s32 direction)
   terrain = GetCrossableTerrain(GetEntInfo(pokemon)->id);
 
   tile = GetTile(pos->x + gAdjacentTileOffsets[direction].x, pos->y + gAdjacentTileOffsets[direction].y);
-  if ((!(tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
+  if ((!(tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
      (((tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))))) {
     if (!IsCurrentFixedRoomBossFight())
     {
@@ -761,7 +761,7 @@ bool8 sub_8070F14(Entity * pokemon, s32 direction)
 
 
   tile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
-  if ((!(tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
+  if ((!(tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
      (((tile->monster == NULL)))) {
 
     tile = GetTile(pokemon->pos.x, pokemon->pos.y);
@@ -781,7 +781,7 @@ bool8 sub_8070F80(Entity * pokemon, s32 direction)
   terrain = GetCrossableTerrain(GetEntInfo(pokemon)->id);
 
   tile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
-  if ((!(tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
+  if ((!(tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
      (((tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER))))) {
     if (!IsCurrentFixedRoomBossFight())
     {
@@ -826,7 +826,7 @@ UNUSED static bool8 sub_8071058(Entity * pokemon, s32 direction)
   terrain = GetCrossableTerrain(GetEntInfo(pokemon)->id);
 
   tile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x, pokemon->pos.y + gAdjacentTileOffsets[direction].y);
-  if ((!(tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
+  if ((!(tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL)) &&
      (((tile->monster == NULL || (GetEntityType(tile->monster) == ENTITY_MONSTER)) ||
       (!GetEntInfo(tile->monster)->isNotTeamMember)))) {
     if (!IsCurrentFixedRoomBossFight())
@@ -873,7 +873,7 @@ bool8 CanAttackInDirection(Entity *pokemon, s32 direction)
     }
     tile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
         pokemon->pos.y + gAdjacentTileOffsets[direction].y);
-    if (!(tile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL) &&
+    if (!(tile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL) &&
         (tile->monster == NULL || GetEntityType(tile->monster) == ENTITY_MONSTER))
     {
         if (!IsCurrentFixedRoomBossFight())
@@ -918,11 +918,11 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
     *pokemonInFront = FALSE;
     frontTile = GetTile(pokemon->pos.x + gAdjacentTileOffsets[direction].x,
         pokemon->pos.y + gAdjacentTileOffsets[direction].y);
-    if (frontTile->terrainType & TERRAIN_TYPE_IMPASSABLE_WALL)
+    if (frontTile->terrainFlags & TERRAIN_TYPE_IMPASSABLE_WALL)
     {
         return FALSE;
     }
-    if (frontTile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE &&
+    if (frontTile->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE &&
         !gDungeon->unk644.monsterHouseTriggered &&
         IQSkillIsEnabled(pokemon, IQ_HOUSE_AVOIDER))
     {
@@ -935,7 +935,7 @@ bool8 CanAIMonsterMoveInDirection(Entity *pokemon, s32 direction, bool8 *pokemon
     {
         return FALSE;
     }
-    if ((frontTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY &&
+    if ((frontTile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY &&
         gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA &&
         IQSkillIsEnabled(pokemon, IQ_LAVA_EVADER))
     {

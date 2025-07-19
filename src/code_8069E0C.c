@@ -498,7 +498,7 @@ void sub_806B6C4(void)
             x++;
             if (x == DUNGEON_MAX_SIZE_X) {x = 0;}
 
-            if (GetTile(x, y)->spawnOrVisibilityFlags & 8) {
+            if (GetTile(x, y)->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_MONSTER) {
                 bool8 r6 = FALSE;
 
                 if (r8) {

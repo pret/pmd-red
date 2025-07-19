@@ -634,7 +634,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
         var_68.y += var_48;
         someCount++;
         tile = GetTile(var_68.x, var_68.y);
-        if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+        if (!(tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
             break;
         if (tile->monster != NULL && GetEntityType(tile->monster) == ENTITY_MONSTER)
             break;
@@ -713,7 +713,7 @@ void sub_80566F8(Entity *attacker, Move *move, s32 a2, bool8 a3, s32 itemId, s32
         }
 
         tile = GetTile(var_68.x, var_68.y);
-        if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+        if (!(tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
             break;
         if (tile->monster != NULL && GetEntityType(tile->monster) == ENTITY_MONSTER && !sub_80571F0(tile->monster, move)) {
             if (targetArrId <= 0) {

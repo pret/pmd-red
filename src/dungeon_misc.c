@@ -470,7 +470,7 @@ void sub_8068F80(void)
     dungeon->unk644.unk2F = 0;
     dungeon->unkC0.type = ENTITY_NOTHING;
     if (leader != NULL) {
-        bool8 isShop = (GetTileAtEntitySafe(leader)->terrainType & TERRAIN_TYPE_SHOP) != 0;
+        bool8 isShop = (GetTileAtEntitySafe(leader)->terrainFlags & TERRAIN_TYPE_SHOP) != 0;
         dungeon->unk644.unk54 = isShop;
         dungeon->unk644.unk55 = isShop;
         DiscoverMinimap(&leader->pos);
@@ -1453,13 +1453,13 @@ static bool8 sub_806A5A4(s16 r0)
 
 void sub_806A5B8(Entity *entity)
 {
-    s32 terrainType;
+    s32 terrainFlags;
 
     if (!EntityIsValid(entity))
         return;
 
-    terrainType = GetTerrainType(GetTileAtEntitySafe(entity));
-    if (terrainType == TERRAIN_TYPE_SECONDARY) {
+    terrainFlags = GetTerrainType(GetTileAtEntitySafe(entity));
+    if (terrainFlags == TERRAIN_TYPE_SECONDARY) {
         EntityInfo *info = GetEntInfo(entity);
         // If lava - defrost and burn
         if (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA) {
@@ -1482,7 +1482,7 @@ void sub_806A5B8(Entity *entity)
         }
     }
     // If wall - decrement belly by 5
-    else if (terrainType == TERRAIN_TYPE_WALL) {
+    else if (terrainFlags == TERRAIN_TYPE_WALL) {
         const u8 *str;
         EntityInfo *info = GetEntInfo(entity);
 

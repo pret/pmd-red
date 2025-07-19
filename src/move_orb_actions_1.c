@@ -131,7 +131,7 @@ bool8 DigMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_4)
 
     flag = FALSE;
     tile = GetTileAtEntitySafe(pokemon);
-    if ((!IsTileGround(tile)) || ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != 1)) {
+    if ((!IsTileGround(tile)) || ((tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != 1)) {
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FD14C); // It can only be used on land!
     }
     else {

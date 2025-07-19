@@ -821,7 +821,7 @@ static bool8 sub_805E874(void)
             return FALSE;
     }
     else {
-        if (leaderTile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+        if (leaderTile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
             return FALSE;
     }
 
@@ -829,7 +829,7 @@ static bool8 sub_805E874(void)
         const Tile *tile = GetTile(x + gAdjacentTileOffsets[(direction + j) & 7].x, y + gAdjacentTileOffsets[(direction + j) & 7].y);
         if (tile->monster != NULL)
             return FALSE;
-        if (tile->terrainType & TERRAIN_TYPE_STAIRS)
+        if (tile->terrainFlags & TERRAIN_TYPE_STAIRS)
             return FALSE;
     }
 
@@ -1006,7 +1006,7 @@ void CheckLeaderTile(void)
     tile = GetTileAtEntitySafe(leader);
     if (IQSkillIsEnabled(leader, IQ_SUPER_MOBILE) && GetEntInfo(leader)->invisibleClassStatus.status != STATUS_MOBILE && !HasHeldItem(leader, ITEM_MOBILE_SCARF))
         sub_804AE84(&leader->pos);
-    if (tile->terrainType & TERRAIN_TYPE_STAIRS)
+    if (tile->terrainFlags & TERRAIN_TYPE_STAIRS)
         gDungeon->unk1 = 1;
 
     tileObject = tile->object;
@@ -1491,7 +1491,7 @@ static void ShowMainMenu(bool8 fromBPress, bool8 a1)
                         break;
                 }
             }
-            else if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+            else if (tile->terrainFlags & TERRAIN_TYPE_STAIRS) {
                 SetLeaderActionToNothing(TRUE);
                 ShowDungeonStairsMenu(GetLeader());
                 if (GetLeaderActionId() != ACTION_NOTHING)

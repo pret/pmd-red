@@ -185,7 +185,7 @@ bool8 IsTargetTwoTilesAway(DungeonPos *pos1, DungeonPos *pos2)
                 y1--;
             }
             tile = GetTile(x1, y1);
-            if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0)
+            if ((tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0)
             {
                 return FALSE;
             }
@@ -213,7 +213,7 @@ bool8 IsTargetTwoTilesAway(DungeonPos *pos1, DungeonPos *pos2)
                 y2 = y2 - 1;
             }
             tile = GetTile(x2, y2);
-            if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0)
+            if ((tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == 0)
             {
                 return FALSE;
             }
@@ -362,7 +362,7 @@ bool8 sub_808384C(DungeonPos *posDst, const DungeonPos *posSrc)
         x = gUnknown_80F4468[i].x + posSrc->x;
         y = gUnknown_80F4468[i].y + posSrc->y;
         tile = GetTile(x, y);
-        if (!(tile->terrainType & TERRAIN_TYPE_UNK_x800)
+        if (!(tile->terrainFlags & TERRAIN_TYPE_UNK_x800)
             && GetTerrainType(tile) == TERRAIN_TYPE_NORMAL
             && tile->object == NULL
             && tile->monster == NULL)

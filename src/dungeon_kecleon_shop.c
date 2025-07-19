@@ -50,7 +50,7 @@ void sub_807EC28(bool8 arg0)
     leader = GetLeader();
     leaderInfo = GetEntInfo(leader);
     prevTileWasShop = gDungeon->unk644.unk54;
-    isShopTile = (GetTileAtEntitySafe(leader)->terrainType & TERRAIN_TYPE_SHOP) != 0;
+    isShopTile = (GetTileAtEntitySafe(leader)->terrainFlags & TERRAIN_TYPE_SHOP) != 0;
     gDungeon->unk644.unk54 = isShopTile;
     gDungeon->unk644.unk55 = isShopTile;
     if (gDungeon->unk644.unk2A || gDungeon->unk644.unk50 == 0)
@@ -187,7 +187,7 @@ void sub_807EF84(void)
     val = sub_807F19C(TRUE);
     if (val != 0) {
         Tile *tile = GetTileAtEntitySafe(GetLeader());
-        if (tile->terrainType & TERRAIN_TYPE_SHOP) {
+        if (tile->terrainFlags & TERRAIN_TYPE_SHOP) {
             if (val != 2) {
                 DisplayDungeonMessage(&dialogueInfo, gUnknown_80FE63C, 1); // This is very disappointing, please return any items before you leave.
             }
@@ -229,7 +229,7 @@ void sub_807EFFC(bool8 arg0)
                 pos.y = y;
                 pos.x = x;
                 tile = GetTile(x,y);
-                if (tile->terrainType & TERRAIN_TYPE_SHOP && tile->object != NULL && GetEntityType(tile->object) == ENTITY_ITEM) {
+                if (tile->terrainFlags & TERRAIN_TYPE_SHOP && tile->object != NULL && GetEntityType(tile->object) == ENTITY_ITEM) {
                     Item *itemPtr = GetItemInfo(tile->object);
                     if (!ItemInShop(itemPtr)) {
                         Item item = *itemPtr;
@@ -276,7 +276,7 @@ s32 sub_807F19C(bool8 arg0)
         for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
             for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
                 const Tile *tile = GetTile(x, y);
-                if (!(tile->terrainType & TERRAIN_TYPE_SHOP) && tile->object != NULL && GetEntityType(tile->object) == ENTITY_ITEM) {
+                if (!(tile->terrainFlags & TERRAIN_TYPE_SHOP) && tile->object != NULL && GetEntityType(tile->object) == ENTITY_ITEM) {
                     Item *itemPtr = GetItemInfo(tile->object);
                     if (IsShoppableItem(itemPtr->id)) {
                         itemPtr->flags &= ~(ITEM_FLAG_IN_SHOP);

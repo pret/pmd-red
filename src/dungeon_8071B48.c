@@ -69,7 +69,7 @@ void sub_8071B48(void)
         entity = dungeon->wildPokemon[index];
         if ((EntityIsValid(entity)) &&
            (tile = GetTile((entity->pos).x, (entity->pos).y),
-           (tile->terrainType & TERRAIN_TYPE_UNBREAKABLE) == 0)) {
+           (tile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE) == 0)) {
           counter++;
         }
       }

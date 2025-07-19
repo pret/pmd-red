@@ -439,7 +439,7 @@ u32 sub_8075818(Entity *entity)
     {
         tile = GetTileAtEntitySafe(entity);
         if(IQSkillIsEnabled(entity, IQ_SUPER_MOBILE))
-            if(!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+            if(!(tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
                 return 1;
         subEntity = tile->object;
         if(subEntity != NULL)
@@ -483,7 +483,7 @@ flag_check:
                     {
                         if(!(entityInfo->heldItem.flags & ITEM_FLAG_EXISTS))
                         {
-                            if(!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+                            if(!(tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
                             {
                                 if(entityInfo->isNotTeamMember)
                                     break;
@@ -529,7 +529,7 @@ void sub_8075900(Entity *pokemon, u8 r1)
             {
                 if(!gDungeon->unk644.monsterHouseTriggered)
                 {
-                    if((GetTileAtEntitySafe(pokemon)->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
+                    if((GetTileAtEntitySafe(pokemon)->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE))
                     {
                         // It's a monster house!
                         LogMessageByIdWithPopupCheckUser(GetLeader(), gPtrItsaMonsterHouseMessage);

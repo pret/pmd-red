@@ -503,22 +503,22 @@ u32 DetermineMonsterShadow(Entity *entity)
 {
     const Tile *mapTile;
     u32 shadowSize;
-    u16 terrainType;
+    u16 terrainFlags;
     EntityInfo *entityInfo;
 
     mapTile = GetTileAtEntitySafe(entity);
-    terrainType = mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    terrainFlags = mapTile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
     entityInfo = GetEntInfo(entity);
     shadowSize = GetShadowSize(entityInfo->apparentID);
 
-    if (terrainType == (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))
+    if (terrainFlags == (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))
         return 6;
 
-    if (terrainType == TERRAIN_TYPE_NORMAL) {
+    if (terrainFlags == TERRAIN_TYPE_NORMAL) {
         if (IsWaterTileset())
             shadowSize = gUnknown_8106EEF[shadowSize];
     }
-    else if (terrainType == TERRAIN_TYPE_SECONDARY && gDungeonWaterType[gDungeon->tileset] != DUNGEON_WATER_TYPE_LAVA)
+    else if (terrainFlags == TERRAIN_TYPE_SECONDARY && gDungeonWaterType[gDungeon->tileset] != DUNGEON_WATER_TYPE_LAVA)
         shadowSize = gUnknown_8106EEF[shadowSize];
 
     entityInfo->unk204 = shadowSize;

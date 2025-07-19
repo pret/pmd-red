@@ -367,7 +367,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         if (arg8 != 0 && ShouldDisplayEntity(target)) {
             unkTile = GetTileAtEntitySafe(target);
             sub_803E708(0x14, 0x18);
-            unkTile->spawnOrVisibilityFlags |= 4;
+            unkTile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_TRAP;
             UpdateTrapsVisibility();
         }
         if (targetData->unk152 == 0) {
@@ -464,7 +464,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
 
         if (unkTile != NULL)
         {
-            unkTile->spawnOrVisibilityFlags &= ~(0x4);
+            unkTile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_TRAP);
             UpdateTrapsVisibility();
         }
         return FALSE;
@@ -479,7 +479,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
         sub_803E708(0x14, 0x18);
         target->unk22 = 2;
         sub_803E708(0xA, 0x18);
-        unkTile->spawnOrVisibilityFlags &= ~(0x4);
+        unkTile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_TRAP);
         UpdateTrapsVisibility();
     }
     else if (var_24) {

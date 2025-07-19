@@ -258,7 +258,7 @@ static void JirachiWish(void)
         }
         pos.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
         pos.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
-        if ((GetTileMut(pos.x, pos.y)->terrainType & 3) != 0) {
+        if ((GetTileMut(pos.x, pos.y)->terrainFlags & 3) != 0) {
           PlaySoundEffect(0x14c);
           sub_808BB3C(&pos);
           sub_8046860(jirachiEntity,&pos,moneyItems,9);
@@ -284,7 +284,7 @@ static void JirachiWish(void)
         pos.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
         pos.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
 
-        if ((GetTileMut(pos.x, pos.y)->terrainType & 3) != 0) {
+        if ((GetTileMut(pos.x, pos.y)->terrainFlags & 3) != 0) {
           PlaySoundEffect(400);
           sub_808BB3C(&pos);
           sub_8046860(jirachiEntity,&pos,items,9);
@@ -341,7 +341,7 @@ static void JirachiWish(void)
           pos.x = (jirachiEntity->pos.x + DungeonRandInt(3) - 1);
           pos.y = (jirachiEntity->pos.y + DungeonRandInt(3) + -1);
 
-          if ((GetTileMut(pos.x, pos.y)->terrainType & 3) != 0) {
+          if ((GetTileMut(pos.x, pos.y)->terrainFlags & 3) != 0) {
             PlaySoundEffect(400);
             sub_808BB3C(&pos);
             sub_8046860(jirachiEntity,&pos,strengthItems,4);
@@ -504,9 +504,9 @@ static void CreateJirachiWishWarpTile(void)
   Tile *tile;
 
   tile = GetTileMut(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
-  tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-  tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
-  tile->terrainType &= ~TERRAIN_TYPE_STAIRS;
+  tile->terrainFlags &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+  tile->terrainFlags |= TERRAIN_TYPE_IMPASSABLE_WALL;
+  tile->terrainFlags &= ~TERRAIN_TYPE_STAIRS;
   sub_8049884();
   sub_8049B8C();
   UpdateTrapsVisibility();
@@ -518,10 +518,10 @@ static void EnableJirachiWishWarpTile(void)
   Tile *tile;
 
   tile = GetTileMut(gDungeon->unkE220[7].x, gDungeon->unkE220[7].y);
-  tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-  tile->terrainType |= TERRAIN_TYPE_NORMAL;
-  tile->terrainType &= ~TERRAIN_TYPE_IMPASSABLE_WALL;
-  tile->terrainType |= TERRAIN_TYPE_STAIRS;
+  tile->terrainFlags &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+  tile->terrainFlags |= TERRAIN_TYPE_NORMAL;
+  tile->terrainFlags &= ~TERRAIN_TYPE_IMPASSABLE_WALL;
+  tile->terrainFlags |= TERRAIN_TYPE_STAIRS;
   tile->unk8 = 1;
   sub_8049884();
   sub_8049B8C();

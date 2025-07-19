@@ -100,7 +100,7 @@ void sub_807AB38(Entity *entity, bool8 forcedMonsterHouse)
 
     if (GetEntInfo(entity)->isNotTeamMember)
         return;
-    if (!(GetTileAtEntitySafe(entity)->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE))
+    if (!(GetTileAtEntitySafe(entity)->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE))
         return;
 
     if (gDungeon->unk644.monsterHouseTriggered)
@@ -137,7 +137,7 @@ void sub_807AB38(Entity *entity, bool8 forcedMonsterHouse)
         for (y = yStart; y < yEnd; y++) {
             for (x = xStart; x < xEnd; x++) {
                 Tile *tile = GetTileMut(x, y);
-                if (tile->monster == NULL && GetTerrainType(tile) == TERRAIN_TYPE_NORMAL && tile->terrainType & TERRAIN_TYPE_IN_MONSTER_HOUSE && count < 100) {
+                if (tile->monster == NULL && GetTerrainType(tile) == TERRAIN_TYPE_NORMAL && tile->terrainFlags & TERRAIN_TYPE_IN_MONSTER_HOUSE && count < 100) {
                     positions[count].x = x;
                     positions[count].y = y;
                     count++;
