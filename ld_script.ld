@@ -1041,6 +1041,12 @@ SECTIONS {
         src/ground_map_files_9.o(.rodata);
         src/ground_map_files_10.o(.rodata);
     } > ROM =0
+    
+    unk_9D02950_section :
+    ALIGN(4)
+    {
+        data/unk_9D02950.o(.rodata);
+    } > ROM =0
 
     ornament_sbin_section :
     ALIGN(4)
