@@ -176,7 +176,7 @@ bool8 sub_803C45C(WonderMail *mail)
     counter = 0;
     ptr = &gUnknown_80E9F8C[0];
     for (id = 0; id < ARRAY_COUNT_INT(gUnknown_80E9F8C); ptr++, id++) {
-        if (sub_803C110(ptr->speciesA) && sub_803C110(ptr->speciesB)) {
+        if (sub_803C110(ptr->species.speciesA) && sub_803C110(ptr->species.speciesB)) {
             stack[counter++] = id;
         }
     }
@@ -186,12 +186,12 @@ bool8 sub_803C45C(WonderMail *mail)
         ptr = &gUnknown_80E9F8C[id];
 
         if ((Rand32Bit() & 0x10)) {
-            mail->clientSpecies = ptr->speciesA;
-            mail->targetSpecies = ptr->speciesB;
+            mail->clientSpecies = ptr->species.speciesA;
+            mail->targetSpecies = ptr->species.speciesB;
         }
         else {
-            mail->clientSpecies = ptr->speciesB;
-            mail->targetSpecies = ptr->speciesA;
+            mail->clientSpecies = ptr->species.speciesB;
+            mail->targetSpecies = ptr->species.speciesA;
         }
 
         mail->unk2 = 8;

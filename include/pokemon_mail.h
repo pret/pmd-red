@@ -2,6 +2,7 @@
 #define POKEMON_MAIL_H
 
 #include "structs/str_802C39C.h"
+#include "pokemon_mail_pre.h"
 
 // size: 0x8
 typedef struct PokemonMail
@@ -21,8 +22,7 @@ typedef struct unkStruct_80E9920
 // size: 0xC
 typedef struct unkStruct_80E9F8C
 {
-    /* 0x0 */ s16 speciesA;
-    /* 0x2 */ s16 speciesB;
+    /* 0x0 */ struct PokemonPair species;
     /* 0x4 */ const u8 *headline;
     /* 0x8 */ const u8 *text;
 } unkStruct_80E9F8C;
