@@ -22,7 +22,7 @@ static const struct ScriptCommand s_gs175_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     { 0x3b, 0x36,  0x0000, -0x00000002,  0x00000000, NULL },
     { 0x22, 0x01,  0x00b4,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     WAIT(0),
     { 0x28, 0x01,  0x0001,  0x0000001e,  0x00ffffff, NULL },
     WAIT(45),
@@ -55,7 +55,7 @@ static const struct ScriptCommand s_gs175_g1_s0_eff1_script[] = { /* 0x822b0f4 *
     TEXTBOX_AUTO_PRESS(-210, 50),
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("(Voices...{WAIT_PRESS}\nI hear voices...)") },
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(3),
     HALT,
 };
 
@@ -67,7 +67,7 @@ static const struct ScriptCommand s_gs175_g2_s0_station_sref_script[] = { /* 0x8
     { 0x3b, 0x36,  0x0000, -0x00000002,  0x00000000, NULL },
     BGM_STOP,
     { 0x22, 0x01,  0x00b4,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     { 0x28, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL },
     WAIT(170),
     { 0x28, 0x01,  0x0002,  0x0000003c,  0x00ffffff, NULL },
@@ -97,7 +97,7 @@ static const struct ScriptCommand s_gs175_g2_s0_eff1_script[] = { /* 0x822b3d0 *
     MSG_ON_BG_AUTO(30, _("\n{CENTER_ALIGN}Irreplaceable friend...")),
     WAIT(1),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(3),
     HALT,
 };
 

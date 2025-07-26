@@ -25,7 +25,7 @@ static const struct ScriptCommand s_gs181_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(114),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     BGM_FADEOUT(120),
     { 0x28, 0x01,  0x0001,  0x0000003c,  0x00ffffff, NULL },
     RET,
@@ -35,48 +35,48 @@ static const struct ScriptRef s_gs181_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs181_g1_s0_lives0_dlg0[] = { /* 0x8231d84 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
+    WALK_GRID(256, 0),
     WAIT(15),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" Oh, hey, there they are.\nLet's get them out.")),
     VARIANT_DEFAULT(_(" Oh, there they are!\nLet's get them out safely.")),
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
+    ALERT_CUE(3),
     WAIT(1),
-    { 0x6b, 0x00,  0x00cc,  0x00000001,  0x00000000, NULL },
-    { 0x91, 0x04,  0x000a,  0x00000003,  0x00000000, NULL },
+    WALK_GRID(204, 1),
+    ROTATE(4, 10, DIRECTION_NORTHEAST),
     HALT,
 };
 
 
 static const struct ScriptCommand s_gs181_g1_s0_lives1_dlg0[] = { /* 0x8231f0c */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0100,  0x00000002,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x00cc,  0x00000003,  0x00000000, NULL },
-    { 0x91, 0x04,  0x000a,  0x00000005,  0x00000000, NULL },
+    AWAIT_CUE(6),
+    WALK_GRID(256, 2),
+    AWAIT_CUE(6),
+    WALK_GRID(204, 3),
+    ROTATE(4, 10, DIRECTION_NORTHWEST),
     HALT,
 };
 
 static const struct ScriptCommand s_gs181_g1_s0_lives2_dlg0[] = { /* 0x8231f9c */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     HALT,
 };
 
 static const struct ScriptCommand s_gs181_g1_s0_lives3_dlg0[] = { /* 0x8231fdc */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0003,  0x00000000,  0x00000000, NULL },
     HALT,
 };

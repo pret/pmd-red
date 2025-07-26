@@ -21,7 +21,7 @@ static const struct ScriptCommand s_gs211_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(10),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     RET,
 };
@@ -30,7 +30,7 @@ static const struct ScriptRef s_gs211_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs211_g1_s0_lives0_dlg0[] = { /* 0x826425c */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(30),
@@ -60,7 +60,7 @@ static const struct ScriptCommand s_gs211_g1_s0_lives0_dlg0[] = { /* 0x826425c *
     MSG_INSTANT(_("{CENTER_ALIGN}Gained access to\n{CENTER_ALIGN}the {COLOR YELLOW_D}Northwind Field{RESET}!")),
     { 0xe1, 0x00,  0x00cd,  0x00000000,  0x00000000, NULL },
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(3),
     HALT,
 };
 
@@ -71,7 +71,7 @@ static const struct ScriptCommand s_gs211_g1_s0_lives0_dlg0[] = { /* 0x826425c *
 
 static const struct ScriptCommand s_gs211_g1_s0_lives1_dlg0[] = { /* 0x8264734 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     HALT,
 };

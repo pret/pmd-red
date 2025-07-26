@@ -29,7 +29,7 @@ static const struct ScriptCommand s_gs163_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, -1),
     BGM_FADEIN(120, 29),
     { 0x22, 0x01,  0x005a,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     { 0x23, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
     RET,
 };
@@ -40,7 +40,7 @@ static const struct ScriptRef s_gs163_g1_s0_station_sref = { 400, 7, NULL /* EVE
 static const struct ScriptCommand s_gs163_g1_s0_lives0_dlg0[] = { /* 0x8216594 */
     DEBUGINFO,
     { 0x53, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(6),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(60),
@@ -49,7 +49,7 @@ static const struct ScriptCommand s_gs163_g1_s0_lives0_dlg0[] = { /* 0x8216594 *
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("...But why...?{WAIT_PRESS}\nWhy do I feel this terrible...?") },
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("This is...{WAIT_PRESS} The first time...") },
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(3),
     HALT,
 };
 
@@ -59,7 +59,7 @@ static const struct ScriptCommand s_gs163_g2_s0_station_sref_script[] = { /* 0x8
     SELECT_MAP(163),
     SELECT_ENTITIES(-1, -1),
     { 0x22, 0x01,  0x003c,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     { 0x28, 0x01,  0x0005,  0x0000003c,  0x00ffffff, NULL },
     RET,
 };
@@ -69,7 +69,7 @@ static const struct ScriptRef s_gs163_g2_s0_station_sref = { 400, 7, NULL /* EVE
 static const struct ScriptCommand s_gs163_g2_s0_lives0_dlg0[] = { /* 0x8216758 */
     DEBUGINFO,
     { 0x53, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(6),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0001,  0x00000022,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -80,7 +80,7 @@ static const struct ScriptCommand s_gs163_g2_s0_lives0_dlg0[] = { /* 0x8216758 *
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("......The pain......") },
     { 0x33, 0x00,  0x0000,  0x00000000,  0x00000000, _("......It's going away............") },
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(3),
     HALT,
 };
 
@@ -91,7 +91,7 @@ static const struct ScriptCommand s_gs163_g3_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, -1),
     BGM_FADEIN(60, 37),
     { 0x22, 0x01,  0x005a,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     FANFARE_PLAY2(506),
     BGM_FADEOUT(90),
     { 0x28, 0x01,  0x0005,  0x0000001e,  0x00ffffff, NULL },
@@ -104,7 +104,7 @@ static const struct ScriptRef s_gs163_g3_s0_station_sref = { 400, 7, NULL /* EVE
 static const struct ScriptCommand s_gs163_g3_s0_lives0_dlg0[] = { /* 0x8216954 */
     DEBUGINFO,
     { 0x53, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0003,  0x00000052,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -114,8 +114,8 @@ static const struct ScriptCommand s_gs163_g3_s0_lives0_dlg0[] = { /* 0x8216954 *
     TEXTBOX_CLEAR,
     WAIT(10),
     FANFARE_PLAY2(465),
-    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(7),
+    AWAIT_CUE(5),
     PORTRAIT(PLACEMENT_RIGHT, 0x0002, 0x00000046),
     MSG_NPC(2, _(" Gegege!\nHey, {NAME_0}!")),
     MSG_NPC(2, _(" Don't you dare fool around!\nI'll make you pay for it!")),
@@ -240,7 +240,7 @@ static const struct ScriptCommand s_gs163_g3_s0_lives0_dlg0[] = { /* 0x8216954 *
   LABEL(10), /* = 0x0a */
     { 0x33, 0x00, -0x0001,  0x00000000,  0x00000000, _("{CENTER_ALIGN}I understand now...\n{CENTER_ALIGN}My questions are finished.") },
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(3),
     HALT,
 };
 
@@ -257,12 +257,12 @@ static const struct ScriptCommand s_gs163_g3_s0_lives0_dlg0[] = { /* 0x8216954 *
 
 static const struct ScriptCommand s_gs163_g3_s0_lives1_dlg0[] = { /* 0x8217f50 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(7),
     CALL_SCRIPT(SHOCK_FUNC),
-    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(5),
+    AWAIT_CUE(7),
     HALT,
 };
 

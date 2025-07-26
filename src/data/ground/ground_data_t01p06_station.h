@@ -44,14 +44,14 @@ static const struct ScriptRef s_gs7_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_N
 
 static const struct ScriptCommand s_gs7_g0_s1_lives0_dlg0[] = { /* 0x819a5bc */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs7_g0_s1_lives1_dlg0[] = { /* 0x819a5fc */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };

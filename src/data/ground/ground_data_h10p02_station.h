@@ -55,7 +55,7 @@ static const struct ScriptRef s_gs134_g0_s0_station_sref = { 404, 1, NULL /* ENT
 static const struct ScriptCommand s_gs134_g0_s1_lives0_dlg0[] = { /* 0x81ff510 */
     DEBUGINFO,
     { 0x52, 0x00,  0x0000,  0x00004000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
@@ -63,7 +63,7 @@ static const struct ScriptCommand s_gs134_g0_s1_lives0_dlg0[] = { /* 0x81ff510 *
 static const struct ScriptCommand s_gs134_g0_s1_lives1_dlg0[] = { /* 0x81ff560 */
     DEBUGINFO,
     { 0x52, 0x00,  0x0000,  0x00004000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
@@ -71,7 +71,7 @@ static const struct ScriptCommand s_gs134_g0_s1_lives1_dlg0[] = { /* 0x81ff560 *
 static const struct ScriptCommand s_gs134_g0_s3_lives0_dlg0[] = { /* 0x81ff5b0 */
     DEBUGINFO,
     { 0x52, 0x00,  0x0000,  0x00004000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
@@ -79,7 +79,7 @@ static const struct ScriptCommand s_gs134_g0_s3_lives0_dlg0[] = { /* 0x81ff5b0 *
 static const struct ScriptCommand s_gs134_g0_s3_lives1_dlg0[] = { /* 0x81ff600 */
     DEBUGINFO,
     { 0x52, 0x00,  0x0000,  0x00004000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };

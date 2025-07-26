@@ -70,28 +70,28 @@ static const struct ScriptRef s_gs128_g0_s0_evt3_sref = { 358, 2, NULL /* GETOUT
 
 static const struct ScriptCommand s_gs128_g0_s1_lives0_dlg0[] = { /* 0x81fbe58 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs128_g0_s1_lives1_dlg0[] = { /* 0x81fbe98 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs128_g0_s3_lives0_dlg0[] = { /* 0x81fbed8 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs128_g0_s3_lives1_dlg0[] = { /* 0x81fbf18 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };

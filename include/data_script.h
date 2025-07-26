@@ -1,3 +1,4 @@
+#include "constants/direction.h"
 #include "constants/event_flag.h"
 #include "constants/item.h"
 #include "constants/ground_map.h"
@@ -58,7 +59,9 @@
 // 3a: yes/no choice (only used for saving)
 // 3b: uber command (conditional jump)
 // 3c: unknown textbox-related cjump
-// 3d..3f: input boxes?
+#define RENAME_ALLY(id)         { 0x3D, 0, 0, id, 0, NULL }
+#define RENAME_TEAM             { 0x3E, 0, 0, 0, 0, NULL }
+// 3f: input box?
 // 40: unused?
 #define REMOVE_ITEMSTACK(i)     { 0x41, 0, i, 0, 0, NULL }
 #define MUSIC_STOP_ALL          { 0x42, 0, 0, 0, 0, NULL }
@@ -75,7 +78,14 @@
 #define FANFARE_STOP2(i)        { 0x4d, 0, 0, i, 0, NULL }
 #define FANFARE_FADEOUT2(f,i)   { 0x4e, 0, f, i, 0, NULL }
 // 4f..57: more movement/position? Some sprite stuff?
+#define SELECT_ANIMATION(id)    { 0x54, 0, id, 0, 0, NULL }
 // 58..95: position and movement-related
+// For WARP/WALK, every map has a list of predefined locations.
+#define WARP_WAYPOINT(u, w)     { 0x5B, u, 0, w, 0, NULL }
+#define WALK_RELATIVE(spd, h, v){ 0x6A, 0, spd, h, v, NULL }
+#define WALK_GRID(spd, w)       { 0x6B, 0, spd, w, 0, NULL }
+#define WALK_DIRECT(spd, w)     { 0x7A, 0, spd, w, 0, NULL }
+#define ROTATE(spd, d, o)       { 0x91, spd, d, o, 0, NULL } // d=cw/ccw/shortest, o=final orientation
 // 96: unused?
 // 97..9a: ??? (maybe more camera?)
 // 9b..a3: camera-related
@@ -137,6 +147,8 @@
 #define WAIT_RANDOM(a,b)        { 0xDC, 0, a, b, 0, NULL }
 // dd..e2 - various HandleAction commands
 // e3..e5 - locking/condvar commands
+#define AWAIT_CUE(id)           { 0xE3, 0, id, 0, 0, NULL }
+#define ALERT_CUE(id)           { 0xE4, 0, id, 0, 0, NULL }
 #define CALL_LABEL(x)           { 0xE6, 0, x, 0, 0, NULL }
 #define JUMP_LABEL(x)           { 0xE7, 0, x, 0, 0, NULL }
 #define CALL_SCRIPT(x)          { 0xE8, 0, x, 0, 0, NULL }

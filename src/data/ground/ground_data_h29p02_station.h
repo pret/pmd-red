@@ -52,28 +52,28 @@ static const struct ScriptRef s_gs159_g0_s0_station_sref = { 404, 1, NULL /* ENT
 
 static const struct ScriptCommand s_gs159_g0_s1_lives0_dlg0[] = { /* 0x820eca0 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs159_g0_s1_lives1_dlg0[] = { /* 0x820ece0 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs159_g0_s3_lives0_dlg0[] = { /* 0x820ed20 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs159_g0_s3_lives1_dlg0[] = { /* 0x820ed60 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
