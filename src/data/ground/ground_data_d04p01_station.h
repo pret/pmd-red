@@ -23,7 +23,7 @@ static const struct ScriptCommand s_gs184_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(15),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     NEXT_DUNGEON(30, SCRIPT_DUNGEON_SINISTER_WOODS),
     RET,
 };
@@ -32,13 +32,13 @@ static const struct ScriptRef s_gs184_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs184_g1_s0_lives0_dlg0[] = { /* 0x82343f8 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0002,  0x0000005e,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0003,  0x0000005b,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(30),
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
     WAIT(20),
     PORTRAIT(PLACEMENT_RIGHT, 0x0001, 0x00000000),
@@ -53,24 +53,24 @@ static const struct ScriptCommand s_gs184_g1_s0_lives0_dlg0[] = { /* 0x82343f8 *
     VARIANT_DEFAULT(_(" {NAME_3}'s gang should\nbe in there already.")),
     VARIANT_DEFAULT(_(" We need to hurry.")),
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     { 0x23, 0x00,  0x003c,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0180,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    WALK_GRID(384, 0),
+    ALERT_CUE(3),
     HALT,
 };
 
 
 static const struct ScriptCommand s_gs184_g1_s0_lives1_dlg0[] = { /* 0x8234714 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(6),
     { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(6),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0180,  0x00000001,  0x00000000, NULL },
+    WALK_GRID(384, 1),
     HALT,
 };
 
@@ -80,7 +80,7 @@ static const struct ScriptCommand s_gs184_g2_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(15),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     NEXT_DUNGEON(30, SCRIPT_DUNGEON_SINISTER_WOODS),
     RET,
 };
@@ -89,7 +89,7 @@ static const struct ScriptRef s_gs184_g2_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs184_g2_s0_lives0_dlg0[] = { /* 0x8234830 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0002,  0x0000005b,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -106,22 +106,22 @@ static const struct ScriptCommand s_gs184_g2_s0_lives0_dlg0[] = { /* 0x8234830 *
     VARIANT_DEFAULT(_(" We're still stuck back here\nwhile {NAME_2}'s gang is...")),
     VARIANT_DEFAULT(_(" Come on, hurry!")),
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     { 0x23, 0x00,  0x003c,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0180,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    WALK_GRID(384, 0),
+    ALERT_CUE(3),
     HALT,
 };
 
 
 static const struct ScriptCommand s_gs184_g2_s0_lives1_dlg0[] = { /* 0x8234ae8 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(6),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0180,  0x00000001,  0x00000000, NULL },
+    WALK_GRID(384, 1),
     HALT,
 };
 

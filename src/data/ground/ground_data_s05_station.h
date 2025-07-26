@@ -24,7 +24,7 @@ static const struct ScriptCommand s_gs227_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     WAIT(180),
-    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(4),
     { 0x3b, 0x40,  0x0001,  0x00000000,  0x00000000, NULL },
     WAIT(3600),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
@@ -36,11 +36,11 @@ static const struct ScriptRef s_gs227_g1_s0_station_sref = { 400, 7, NULL /* EVE
 static const struct ScriptCommand s_gs227_g1_s0_eff0_script[] = { /* 0x826f6e8 */
     DEBUGINFO,
     { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(4),
   LABEL(0), /* = 0x00 */
-    { 0x5b, 0x00,  0x0000,  0x00000001,  0x00000000, NULL },
+    WARP_WAYPOINT(0, 1),
     WAIT(20),
-    { 0x5b, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    WARP_WAYPOINT(0, 0),
     WAIT(20),
     JUMP_LABEL(0),
 };

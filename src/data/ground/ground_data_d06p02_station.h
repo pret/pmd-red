@@ -85,28 +85,28 @@ static const struct ScriptCommand s_gs189_g0_s0_obj0_dlg2[] = { /* 0x823a27c */
 
 static const struct ScriptCommand s_gs189_g0_s1_lives0_dlg0[] = { /* 0x823a29c */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs189_g0_s1_lives1_dlg0[] = { /* 0x823a2dc */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs189_g0_s3_lives0_dlg0[] = { /* 0x823a31c */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs189_g0_s3_lives1_dlg0[] = { /* 0x823a35c */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
@@ -134,7 +134,7 @@ static const struct ScriptCommand s_gs189_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(111),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     SELECT_EVENTS(0, 0),
     RET,
 };
@@ -146,10 +146,10 @@ static const struct ScriptCommand s_gs189_g1_s0_lives0_dlg0[] = { /* 0x823a4d8 *
     CALL_SCRIPT(INIT_SLEEP_FUNC),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_LEFT_FUNC),
-    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(5),
     WAIT(10),
     PORTRAIT(PLACEMENT_LEFT_, 0x0001, 0x00000002),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
@@ -161,9 +161,9 @@ static const struct ScriptCommand s_gs189_g1_s0_lives0_dlg0[] = { /* 0x823a4d8 *
     VARIANT_DEFAULT(_(" But we shouldn't be far.{WAIT_PRESS}\nLet's keep doing our best!")),
     TEXTBOX_CLEAR,
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(3),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     RET,
 };
 
@@ -171,12 +171,12 @@ static const struct ScriptCommand s_gs189_g1_s0_lives1_dlg0[] = { /* 0x823a72c *
     DEBUGINFO,
     CALL_SCRIPT(INIT_SLEEP_FUNC),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(6),
     WAIT(15),
     CALL_SCRIPT(WAKEUP_FUNC),
     CALL_SCRIPT(LOOK_AROUND_RIGHT_FUNC),
-    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(5),
+    AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     RET,
 };

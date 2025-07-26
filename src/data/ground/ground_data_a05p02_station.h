@@ -21,7 +21,7 @@ static const struct ScriptCommand s_gs176_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     { 0x3b, 0x36,  0x0000, -0x00000002,  0x00000000, NULL },
     { 0x27, 0x01,  0x0001,  0x0000001e,  0x00ffffff, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     { 0x28, 0x01,  0x0005,  0x00000078,  0x00ffffff, NULL },
     WAIT(90),
     { 0x25, 0x01,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -109,7 +109,7 @@ static const struct ScriptCommand s_gs176_g1_s0_eff1_script[] = { /* 0x822bb50 *
     MSG_ON_BG_AUTO(90, _("{CENTER_ALIGN}Perhaps you will meet again.")),
     TEXTBOX_CLEAR2,
     WAIT(60),
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(3),
     HALT,
 };
 

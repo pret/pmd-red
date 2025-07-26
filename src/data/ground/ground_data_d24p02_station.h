@@ -21,7 +21,7 @@ static const struct ScriptCommand s_gs221_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(21),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     RET,
 };
 
@@ -31,7 +31,7 @@ static const struct ScriptCommand s_gs221_g1_s0_eff0_script[] = { /* 0x826d828 *
     DEBUGINFO,
     { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(4),
     WAIT(20),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     END_DELETE,
@@ -39,29 +39,29 @@ static const struct ScriptCommand s_gs221_g1_s0_eff0_script[] = { /* 0x826d828 *
 
 static const struct ScriptCommand s_gs221_g1_s0_lives0_dlg0[] = { /* 0x826d898 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(7),
     { 0x89, 0x50,  0x0099,  0x00000004,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
-    { 0x91, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(5),
+    ROTATE(4, 10, DIRECTION_SOUTH),
     MSG_NPC(2, _(" You're going to the\n{COLOR YELLOW_D}Murky Cave{RESET}?")),
     MSG_NPC(2, _(" Don't forget to take me,\nkekeh!")),
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(4),
+    ALERT_CUE(7),
     { 0x89, 0x50,  0x0080,  0x00000004,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(3),
     HALT,
 };
 
 static const struct ScriptCommand s_gs221_g1_s0_lives1_dlg0[] = { /* 0x826d9d8 */
     DEBUGINFO,
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x89, 0x58,  0x0100,  0x00000004,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0007,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(5),
+    AWAIT_CUE(7),
     { 0x89, 0x40,  0x0080,  0x00000004,  0x00000000, NULL },
     HALT,
 };

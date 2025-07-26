@@ -38,7 +38,7 @@ static const struct ScriptCommand s_gs173_g1_s0_eff0_script[] = { /* 0x8229c80 *
     DEBUGINFO,
     { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(60),
-    { 0x6b, 0x00,  0x00b3,  0x00000000,  0x00000000, NULL },
+    WALK_GRID(179, 0),
     HALT,
 };
 
@@ -50,7 +50,7 @@ static const struct ScriptCommand s_gs173_g2_s0_station_sref_script[] = { /* 0x8
     FANFARE_PLAY2(508),
     { 0x97, 0x00,  0x0002,  0x00000001,  0x00000001, NULL },
     { 0x22, 0x01,  0x0010,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(5),
     WAIT(210),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     FANFARE_FADEOUT2(30, 508),
@@ -65,8 +65,8 @@ static const struct ScriptCommand s_gs173_g2_s0_eff0_script[] = { /* 0x8229d9c *
     WAIT(1),
     { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x89, 0x30,  0x0300,  0x00000004,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(5),
+    AWAIT_CUE(4),
     END_DELETE,
 };
 
@@ -77,7 +77,7 @@ static const struct ScriptCommand s_gs173_g3_s0_station_sref_script[] = { /* 0x8
     BGM_SWITCH(26),
     { 0x97, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
     { 0x27, 0x00,  0x0005,  0x00000010,  0x00ffffff, NULL },
-    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(5),
     WAIT(120),
     { 0x28, 0x01,  0x0005,  0x00000008,  0x00ffffff, NULL },
     WAIT(5),
@@ -100,8 +100,8 @@ static const struct ScriptCommand s_gs173_g3_s0_eff0_script[] = { /* 0x8229f58 *
     WAIT(1),
     { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x89, 0x18,  0x0400,  0x00000004,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(5),
+    AWAIT_CUE(4),
     END_DELETE,
 };
 
