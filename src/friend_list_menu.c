@@ -12,7 +12,7 @@
 #include "common_strings.h"
 #include "event_flag.h"
 #include "friend_list_menu.h"
-#include "ground_map_1.h"
+#include "ground_map.h"
 #include "input.h"
 #include "iq_skill_menu.h"
 #include "items.h"
@@ -62,7 +62,7 @@ bool8 CreateFriendListMenu(s32 param_1)
     gUnknown_203B2B4 = MemoryAlloc(sizeof(unkStruct_203B2B4),8);
     gUnknown_203B2B4->menuAction1 = 0;
     gUnknown_203B2B4->unk0 = param_1;
-    gUnknown_203B2B4->unkC = MapIdToFriendAreaId(sub_80A5728());
+    gUnknown_203B2B4->unkC = MapIdToFriendAreaId(GetGroundMapID());
     gUnknown_203B2B4->unkD = 0;
     if (gUnknown_203B2B4->unk0 == 2) {
       SetFriendListMenuState(0);

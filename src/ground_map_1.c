@@ -82,7 +82,7 @@ void sub_80A59DC(void)
             case 0xAA: {
                 PixelPos pixPos2;
 
-                gGroundMapAction->unkF0 += gGroundMapAction->unkE8;
+                gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
                 gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
                 gGroundMapAction->unkF0 %= 8;
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
@@ -94,7 +94,7 @@ void sub_80A59DC(void)
             case 0xAE: {
                 PixelPos pixPos2;
 
-                gGroundMapAction->unkF0 += gGroundMapAction->unkE8;
+                gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
                 gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
                 gGroundMapAction->unkF0 %= 8;
                 sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
@@ -115,8 +115,8 @@ void sub_80A59DC(void)
                 PixelPos pixPos2;
 
                 sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
-                gGroundMapAction->unkF0 += gGroundMapAction->unkE8;
-                gGroundMapAction->unkF4 += gGroundMapAction->unkEC;
+                gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
+                gGroundMapAction->unkF4 += gGroundMapAction->unkE8.y;
                 gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
                 gGroundMapAction->unkF8.y += gGroundMapAction->unkF4 / 8;
                 gGroundMapAction->unkF0 %= 8;
@@ -130,8 +130,8 @@ void sub_80A59DC(void)
             case 0xB0: {
                 PixelPos pixPos2;
 
-                gGroundMapAction->unkF0 += gGroundMapAction->unkE8;
-                gGroundMapAction->unkF4 += gGroundMapAction->unkEC;
+                gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
+                gGroundMapAction->unkF4 += gGroundMapAction->unkE8.y;
                 gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
                 gGroundMapAction->unkF8.y += gGroundMapAction->unkF4 / 8;
                 gGroundMapAction->unkF0 %= 8;

@@ -117,8 +117,7 @@ typedef struct GroundMapAction
     /* 0x00 */ Action action;
     /* 0xE4 */ s16 groundMapId;
                u16 fillE6;
-               u32 unkE8;
-               u32 unkEC;
+               PixelPos unkE8;
                s32 unkF0;
                s32 unkF4;
                PixelPos unkF8;

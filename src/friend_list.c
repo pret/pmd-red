@@ -14,7 +14,7 @@
 #include "rescue_team_info.h"
 #include "input.h"
 #include "memory.h"
-#include "ground_map_1.h"
+#include "ground_map.h"
 #include "constants/input.h"
 
 extern bool8 sub_808D750(s32 index_);
@@ -95,7 +95,7 @@ bool8 FriendList_Init(u32 r5, u32 windowId, DungeonPos *pos, u32 r10)
     }
 
     if (sFriendList->unk0 == 4) {
-        sFriendList->unk354 = MapIdToFriendAreaId(sub_80A5728());
+        sFriendList->unk354 = MapIdToFriendAreaId(GetGroundMapID());
     }
     else {
         sFriendList->unk354 = 0;

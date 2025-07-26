@@ -7,5 +7,6 @@ void FreeGroundMapAction(void);
 void sub_80A4B38(void);
 void sub_80A4B54(void);
 s16 GetAdjustedGroundMap(s32 mapId);
+s16 GetGroundMapID(void);
 
 #endif // GUARD_GROUND_MAP_H
