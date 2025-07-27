@@ -35,7 +35,7 @@ static const struct ScriptRef s_gs227_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs227_g1_s0_eff0_script[] = { /* 0x826f6e8 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     AWAIT_CUE(4),
   LABEL(0), /* = 0x00 */
     WARP_WAYPOINT(0, 1),

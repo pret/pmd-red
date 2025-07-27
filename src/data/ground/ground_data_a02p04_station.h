@@ -64,10 +64,10 @@ static const struct ScriptRef s_gs167_g2_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs167_g2_s0_eff0_script[] = { /* 0x8219b58 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     WALK_GRID(256, 0),
     AWAIT_CUE(4),
     WALK_GRID(153, 3),

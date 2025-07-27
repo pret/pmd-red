@@ -45,10 +45,10 @@ static const struct ScriptRef s_gs203_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs203_g1_s0_eff0_script[] = { /* 0x8256648 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     { 0x89, 0x28,  0x0100,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(4),
     { 0x89, 0x30,  0x0100,  0x00000004,  0x00000000, NULL },
@@ -321,7 +321,7 @@ static const struct ScriptRef s_gs203_g2_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs203_g2_s0_eff0_script[] = { /* 0x8257ea8 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     AWAIT_CUE(4),
     END_DELETE,
 };
@@ -498,7 +498,7 @@ static const struct ScriptCommand s_gs203_g2_s0_lives1_dlg0[] = { /* 0x8258a00 *
     SELECT_ANIMATION(2),
     ROTATE(4, 10, DIRECTION_NORTH),
     AWAIT_CUE(6),
-    { 0x86, 0x00,  0x004c,  0x00000006,  0x00000000, NULL },
+    CAMERA_PAN(76, 6),
     AWAIT_CUE(6),
     HALT,
 };
@@ -532,7 +532,7 @@ static const struct ScriptCommand s_gs203_g2_s0_lives2_dlg0[] = { /* 0x8258c30 *
     SELECT_ANIMATION(2),
     ROTATE(4, 10, DIRECTION_NORTH),
     AWAIT_CUE(6),
-    { 0x86, 0x00,  0x004c,  0x0000000c,  0x00000000, NULL },
+    CAMERA_PAN(76, 12),
     AWAIT_CUE(6),
     HALT,
 };
@@ -605,7 +605,7 @@ static const struct ScriptCommand s_gs203_g2_s1_lives1_dlg0[] = { /* 0x8259080 *
     SELECT_ANIMATION(2),
     ROTATE(4, 10, DIRECTION_SOUTHEAST),
     AWAIT_CUE(8),
-    { 0x86, 0x00,  0x004c,  0x00000008,  0x00000000, NULL },
+    CAMERA_PAN(76, 8),
     AWAIT_CUE(8),
     HALT,
 };
@@ -631,7 +631,7 @@ static const struct ScriptCommand s_gs203_g2_s1_lives2_dlg0[] = { /* 0x8259250 *
     SELECT_ANIMATION(2),
     ROTATE(4, 10, DIRECTION_SOUTHWEST),
     AWAIT_CUE(8),
-    { 0x86, 0x00,  0x004c,  0x0000000a,  0x00000000, NULL },
+    CAMERA_PAN(76, 10),
     AWAIT_CUE(8),
     HALT,
 };
@@ -1061,7 +1061,7 @@ static const struct ScriptCommand s_gs203_g3_s0_lives1_dlg0[] = { /* 0x825bcb4 *
     AWAIT_CUE(6),
     ROTATE(4, 2, DIRECTION_SOUTH),
     { 0x54, 0x00,  0x002e,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     ROTATE(4, 1, DIRECTION_WEST),
     AWAIT_CUE(6),

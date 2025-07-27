@@ -39,7 +39,7 @@ static const struct ScriptCommand s_gs213_g1_s0_eff0_script[] = { /* 0x8265764 *
 
 static const struct ScriptCommand s_gs213_g1_s0_obj0_dlg0[] = { /* 0x82657a4 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     HALT,
 };
 

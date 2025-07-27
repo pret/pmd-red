@@ -380,7 +380,7 @@ static const struct ScriptCommand s_gs2_g3_s0_lives0_dlg2[] = { /* 0x817e834 */
     MSG_NPC(1, _(" So be it.{WAIT_PRESS}\nYou may have this.")),
     TEXTBOX_CLEAR,
     WAIT(20),
-    { 0x3c, 0x2c,  0x0000,  0x000000e7,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_UNK_2C, 231, 0),
     WAIT(20),
     PORTRAIT_REP(0x0001, 0x00000000),
     MSG_NPC(1, _(" I understand that it is\na very rare item that was found in a place\ncalled the {COLOR YELLOW_D}Solar Cave{RESET}.")),
@@ -537,7 +537,7 @@ static const struct ScriptCommand s_gs2_g6_s0_eff0_script[] = { /* 0x817f8a0 */
     DEBUGINFO,
     AWAIT_CUE(4),
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     ALERT_CUE(5),
     AWAIT_CUE(4),
     HALT,
@@ -750,7 +750,7 @@ static const struct ScriptCommand s_gs2_g8_s0_eff0_script[] = { /* 0x8180614 */
     DEBUGINFO,
     AWAIT_CUE(4),
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     ALERT_CUE(5),
     END_DELETE,
 };
@@ -941,7 +941,7 @@ static const struct ScriptCommand s_gs2_g9_s1_eff0_script[] = { /* 0x81812bc */
     DEBUGINFO,
     AWAIT_CUE(4),
     { 0xa1, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     ALERT_CUE(5),
     END_DELETE,
 };
@@ -1367,8 +1367,8 @@ static const struct ScriptCommand s_gs2_g16_s0_lives2_dlg2[] = { /* 0x8182da0 */
 static const struct ScriptCommand s_gs2_g16_s0_eff0_script[] = { /* 0x8182e4c */
     DEBUGINFO,
     AWAIT_CUE(4),
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
+    CAMERA_END_PAN,
     AWAIT_CUE(4),
     END_DELETE,
 };
@@ -2118,7 +2118,7 @@ static const struct ScriptRef s_gs2_g28_s0_station_sref = { 400, 7, NULL /* EVEN
 
 static const struct ScriptCommand s_gs2_g28_s0_eff0_script[] = { /* 0x8186180 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     WALK_GRID(153, 14),
     HALT,
 };
@@ -2153,16 +2153,16 @@ static const struct ScriptRef s_gs2_g29_s0_station_sref = { 402, 7, NULL /* EVEN
 
 static const struct ScriptCommand s_gs2_g29_s0_eff0_script[] = { /* 0x818630c */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     WALK_GRID(256, 23),
     AWAIT_CUE(4),
-    { 0x86, 0x00,  0x0100,  0x00000018,  0x00000000, NULL },
+    CAMERA_PAN(256, 24),
     AWAIT_CUE(4),
-    { 0x86, 0x00,  0x0200,  0x00000019,  0x00000000, NULL },
+    CAMERA_PAN(512, 25),
     WAIT(150),
-    { 0x86, 0x00,  0x0200,  0x00000018,  0x00000000, NULL },
+    CAMERA_PAN(512, 24),
     ALERT_CUE(5),
     AWAIT_CUE(4),
     END_DELETE,

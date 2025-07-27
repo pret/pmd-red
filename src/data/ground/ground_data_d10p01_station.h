@@ -145,8 +145,8 @@ static const struct ScriptRef s_gs198_g1_s0_station_sref = { 402, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs198_g1_s0_eff0_script[] = { /* 0x824c210 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
+    CAMERA_INIT_PAN,
     { 0x89, 0xc8,  0x0100,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(5),
     AWAIT_CUE(4),
@@ -265,7 +265,7 @@ static const struct ScriptCommand s_gs198_g2_s1_lives0_dlg0[] = { /* 0x824c7d4 *
     { 0x23, 0x00,  0x0032,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     BGM_FADEOUT(120),
-    { 0x86, 0x00,  0x0080,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(128, 0),
     JUMP_LABEL(8),
   LABEL(7), /* = 0x07 */
     ALERT_CUE(6),
@@ -273,7 +273,7 @@ static const struct ScriptCommand s_gs198_g2_s1_lives0_dlg0[] = { /* 0x824c7d4 *
     WAIT(15),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     BGM_FADEOUT(120),
-    { 0x86, 0x00,  0x00b3,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(179, 0),
   LABEL(8), /* = 0x08 */
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     { 0x07, 0x00,  0x001e,  0x0000000d,  0x00000000, NULL },
@@ -292,7 +292,7 @@ static const struct ScriptCommand s_gs198_g2_s1_lives0_dlg0[] = { /* 0x824c7d4 *
     { 0x23, 0x00,  0x0032,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     BGM_FADEOUT(120),
-    { 0x86, 0x00,  0x0080,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(128, 0),
     JUMP_LABEL(10),
   LABEL(9), /* = 0x09 */
     ALERT_CUE(6),
@@ -300,7 +300,7 @@ static const struct ScriptCommand s_gs198_g2_s1_lives0_dlg0[] = { /* 0x824c7d4 *
     WAIT(15),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     BGM_FADEOUT(120),
-    { 0x86, 0x00,  0x00c0,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(192, 0),
   LABEL(10), /* = 0x0a */
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     { 0x06, 0x00,  0x001e,  0x0000004f,  0x00000000, NULL },
@@ -324,12 +324,12 @@ static const struct ScriptCommand s_gs198_g2_s1_lives1_dlg0[] = { /* 0x824cea4 *
     COND_EQUAL(7, /* to label */ 0),
     WAIT(15),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x86, 0x00,  0x0080,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(128, 0),
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     HALT,
   LABEL(0), /* = 0x00 */
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x86, 0x00,  0x00c0,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(192, 0),
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     HALT,
 };

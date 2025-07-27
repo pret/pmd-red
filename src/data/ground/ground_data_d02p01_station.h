@@ -34,7 +34,7 @@ static const struct ScriptRef s_gs180_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs180_g1_s0_eff0_script[] = { /* 0x82303fc */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
     WAIT(30),
@@ -66,7 +66,7 @@ static const struct ScriptCommand s_gs180_g1_s0_lives0_dlg0[] = { /* 0x823047c *
     { 0x93, 0x04,  0x000a,  0x00000022,  0x00000000, NULL },
     WAIT(30),
     { 0x54, 0x00,  0x002f,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     WAIT(15),
     ROTATE(8, 10, DIRECTION_NORTH),
@@ -95,7 +95,7 @@ static const struct ScriptCommand s_gs180_g1_s0_lives1_dlg0[] = { /* 0x8230758 *
     { 0x93, 0x04,  0x000a,  0x00000000,  0x00000000, NULL },
     WAIT(30),
     { 0x54, 0x00,  0x002f,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     WAIT(15),
     ROTATE(8, 10, DIRECTION_NORTH),
@@ -148,7 +148,7 @@ static const struct ScriptRef s_gs180_g2_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs180_g2_s0_eff0_script[] = { /* 0x8230a64 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
     WAIT(30),
@@ -297,9 +297,9 @@ static const struct ScriptCommand s_gs180_g3_s0_lives0_dlg0[] = { /* 0x8231020 *
     MSG_NPC(2, _(" YOU ARE OUR HERO.\nTHANK YOU. BZBZBZZ!")),
     TEXTBOX_CLEAR,
     WAIT(30),
-    { 0x3c, 0x2b,  0x0000,  0x00000003,  0x00000001, NULL },
-    { 0x3c, 0x2c,  0x0000,  0x0000003a,  0x00000001, NULL },
-    { 0x3c, 0x2c,  0x0000,  0x0000003f,  0x00000001, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_ITEM_REWARD, 3, 1),
+    SPECIAL_TEXT(SPECIAL_TEXT_UNK_2C, 58, 1),
+    SPECIAL_TEXT(SPECIAL_TEXT_UNK_2C, 63, 1),
     TEXTBOX_CLEAR,
     WAIT(30),
     ALERT_CUE(7),

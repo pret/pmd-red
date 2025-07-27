@@ -139,7 +139,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives0_dlg2[] = { /* 0x8132c08 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -148,7 +148,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives1_dlg2[] = { /* 0x8132c68 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -157,7 +157,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives2_dlg2[] = { /* 0x8132cc8 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -166,7 +166,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives3_dlg2[] = { /* 0x8132d28 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -175,7 +175,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives4_dlg2[] = { /* 0x8132d88 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -184,7 +184,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives5_dlg2[] = { /* 0x8132de8 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1a,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LUMINOUS_CAVE, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -193,7 +193,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives6_dlg2[] = { /* 0x8132e48 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1c,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_RESCUE, 0, 0),
     COND_EQUAL(1, /* to label */ 0),
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
@@ -206,7 +206,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives7_dlg2[] = { /* 0x8132ee8 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1e,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_THANK_YOU_MAIL, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -215,19 +215,19 @@ static const struct ScriptCommand s_gs0_g1_s0_lives8_dlg2[] = { /* 0x8132f48 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1d,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_UNK_1D, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
 static const struct ScriptCommand s_gs0_g1_s0_obj0_dlg2[] = { /* 0x8132fa8 */
     DEBUGINFO,
-    { 0x3c, 0x20,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BULLETIN_BOARD_JOBS, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
 static const struct ScriptCommand s_gs0_g1_s0_obj1_dlg2[] = { /* 0x8132fd8 */
     DEBUGINFO,
-    { 0x3c, 0x21,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BULLETIN_BOARD, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -236,7 +236,7 @@ static const struct ScriptCommand s_gs0_g1_s0_lives9_dlg2[] = { /* 0x8133008 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 

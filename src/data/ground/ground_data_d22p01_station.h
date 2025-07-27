@@ -129,7 +129,7 @@ static const struct ScriptCommand s_gs218_g1_s0_lives1_dlg0[] = { /* 0x826a408 *
     ROTATE(4, 2, DIRECTION_EAST),
     WAIT(30),
     SELECT_ANIMATION(22),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     AWAIT_CUE(7),
     { 0x59, 0x00,  0x0000, -0x000000c8,  0x00000000, NULL },
     HALT,

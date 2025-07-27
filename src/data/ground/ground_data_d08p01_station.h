@@ -196,7 +196,7 @@ static const struct ScriptCommand s_gs193_g1_s0_lives0_dlg0[] = { /* 0x824313c *
     TEXTBOX_CLEAR,
     ALERT_CUE(6),
     { 0x23, 0x00,  0x0050,  0x00000000,  0x00000000, NULL },
-    { 0x86, 0x00,  0x0100,  0x00000002,  0x00000000, NULL },
+    CAMERA_PAN(256, 2),
     ALERT_CUE(3),
     HALT,
 };
@@ -227,7 +227,7 @@ static const struct ScriptCommand s_gs193_g1_s0_lives1_dlg0[] = { /* 0x824389c *
     CALL_SCRIPT(JUMP_SURPRISE_FUNC),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    { 0x86, 0x00,  0x0100,  0x00000002,  0x00000000, NULL },
+    CAMERA_PAN(256, 2),
     HALT,
 };
 

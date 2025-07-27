@@ -58,7 +58,7 @@
 #define MSG_ON_BG_AUTO(u, msg)         { 0x39, 0, u, 0, 0, msg } // Similar to the above, but the message appears and fades automatically, without any player's input. Used for narration text. The short argument isn't really used, but needs to be greater than 0.
 // 3a: yes/no choice (only used for saving)
 // 3b: uber command (conditional jump)
-// 3c: unknown textbox-related cjump
+#define SPECIAL_TEXT(k, i, t)   { 0x3C, k, 0, i, t, NULL }
 #define RENAME_ALLY(id)         { 0x3D, 0, 0, id, 0, NULL }
 #define RENAME_TEAM             { 0x3E, 0, 0, 0, 0, NULL }
 // 3f: input box?
@@ -85,9 +85,13 @@
 #define WALK_RELATIVE(spd, h, v){ 0x6A, 0, spd, h, v, NULL }
 #define WALK_GRID(spd, w)       { 0x6B, 0, spd, w, 0, NULL }
 #define WALK_DIRECT(spd, w)     { 0x7A, 0, spd, w, 0, NULL }
+#define CAMERA_PAN(u1, u2)      { 0x86, 0, u1, u2, 0, NULL }
 #define ROTATE(spd, d, o)       { 0x91, spd, d, o, 0, NULL } // d=cw/ccw/shortest, o=final orientation
 // 96: unused?
-// 97..9a: ??? (maybe more camera?)
+// 97: ??? (maybe more camera?)
+#define CAMERA_INIT_PAN         { 0x98, 0, 0, 0, 0, NULL }
+#define CAMERA_END_PAN          { 0x99, 0, 0, 0, 0, NULL }
+// 9a: ??? (maybe more camera?)
 // 9b..a3: camera-related
 #define RESET_ARRAY(v)          { 0xA4, 0, v, 0, 0, NULL }
 #define CLEAR_ARRAY(v)          { 0xA5, 0, v, 0, 0, NULL }
@@ -145,7 +149,8 @@
 #define CHOICE(h,s)             { 0xD9, 0, h, 0, 0, s    }
 #define WAIT(f)                 { 0xDB, 0, f, 0, 0, NULL }
 #define WAIT_RANDOM(a,b)        { 0xDC, 0, a, b, 0, NULL }
-// dd..e2 - various HandleAction commands
+#define STOP_ANIMATION_ON_CURRENT_FRAME { 0xDD, 0, 0, 0, 0, NULL }
+// de..e2 - various HandleAction commands
 // e3..e5 - locking/condvar commands
 #define AWAIT_CUE(id)           { 0xE3, 0, id, 0, 0, NULL }
 #define ALERT_CUE(id)           { 0xE4, 0, id, 0, 0, NULL }
@@ -576,3 +581,51 @@
 #define ENTER_CONTROL 404
 #define SETUP_DEBUG_CAMERA 405
 #define MOVE_DEBUG_CAMERA 406
+
+#define SPECIAL_TEXT_UNK_0 0x0
+#define SPECIAL_TEXT_UNK_1 0x1
+#define SPECIAL_TEXT_WAITING 0x2
+#define SPECIAL_TEXT_UNK_3 0x3
+#define SPECIAL_TEXT_PLAYER_NAME_INPUT 0x4
+#define SPECIAL_TEXT_TEAM_NAME_INPUT 0x5
+#define SPECIAL_TEXT_PASSWORD_INPUT 0x6
+#define SPECIAL_TEXT_FRIEND_MENU 0x7
+#define SPECIAL_TEXT_MENU 0x8
+#define SPECIAL_TEXT_YES_NO_WITH_LARGE_BOX 0x9
+#define SPECIAL_TEXT_LARGE_TEXT_BOX 0xA
+#define SPECIAL_TEXT_BUY_FRIEND_AREAS 0xB
+#define SPECIAL_TEXT_DUNGEON_LIST 0xC
+#define SPECIAL_TEXT_DOJO_LIST 0xD
+#define SPECIAL_TEXT_SAVE_1 0xE
+#define SPECIAL_TEXT_SAVE_2 0xF
+#define SPECIAL_TEXT_STORAGE_WITH_DIALOG 0x10
+#define SPECIAL_TEXT_STORAGE 0x11
+#define SPECIAL_TEXT_UNK_12 0x12
+#define SPECIAL_TEXT_BANK 0x13
+#define SPECIAL_TEXT_UNK_14 0x14
+#define SPECIAL_TEXT_UNK_15 0x15
+#define SPECIAL_TEXT_FRIEND_AREA_SELECT 0x16
+#define SPECIAL_TEXT_GREEN_KECLEON_SHOP 0x17
+#define SPECIAL_TEXT_PURPLE_KECLEON_SHOP 0x18
+#define SPECIAL_TEXT_LINK_SHOP 0x19
+#define SPECIAL_TEXT_LUMINOUS_CAVE 0x1A
+#define SPECIAL_TEXT_FRIEND_SHOP 0x1B
+#define SPECIAL_TEXT_FRIEND_RESCUE 0x1C
+#define SPECIAL_TEXT_UNK_1D 0x1D
+#define SPECIAL_TEXT_THANK_YOU_MAIL 0x1E
+#define SPECIAL_TEXT_PPO_HELP_COUNTER 0x1F
+#define SPECIAL_TEXT_BULLETIN_BOARD_JOBS 0x20
+#define SPECIAL_TEXT_BULLETIN_BOARD 0x21
+#define SPECIAL_TEXT_UNK_22 0x22
+#define SPECIAL_TEXT_UNK_23 0x23
+#define SPECIAL_TEXT_DOJO_ENTER 0x24
+#define SPECIAL_TEXT_DOJO_SUCCESS 0x25
+#define SPECIAL_TEXT_DOJO_FAILURE 0x26
+#define SPECIAL_TEXT_DOJO_ALL_CLEARED 0x27
+#define SPECIAL_TEXT_PERSONALITY_QUIZ 0x28
+#define SPECIAL_TEXT_UNK_29 0x29
+#define SPECIAL_TEXT_SCRIPTING_MENU 0x2A
+#define SPECIAL_TEXT_ITEM_REWARD 0x2B
+#define SPECIAL_TEXT_UNK_2C 0x2C
+#define SPECIAL_TEXT_TOOL_BOX 0x2D
+#define SPECIAL_TEXT_CREDITS_NAME 0x2E

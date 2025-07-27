@@ -35,10 +35,10 @@ static const struct ScriptRef s_gs220_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs220_g1_s0_eff0_script[] = { /* 0x826ab30 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     { 0x89, 0x48,  0x0100,  0x00000004,  0x00000000, NULL },
     AWAIT_CUE(4),
     END_DELETE,
@@ -324,7 +324,7 @@ static const struct ScriptRef s_gs220_g2_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs220_g2_s0_eff0_script[] = { /* 0x826c238 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     AWAIT_CUE(4),
     HALT,
 };

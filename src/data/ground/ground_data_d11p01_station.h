@@ -359,7 +359,7 @@ static const struct ScriptCommand s_gs201_g2_s1_lives0_dlg0[] = { /* 0x8253910 *
     BGM_FADEOUT(120),
     { 0x23, 0x00,  0x0050,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x86, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(256, 0),
     JUMP_LABEL(8),
   LABEL(7), /* = 0x07 */
     ALERT_CUE(6),
@@ -367,7 +367,7 @@ static const struct ScriptCommand s_gs201_g2_s1_lives0_dlg0[] = { /* 0x8253910 *
     { 0x23, 0x00,  0x0050,  0x00000000,  0x00000000, NULL },
     WAIT(15),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x86, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(256, 0),
   LABEL(8), /* = 0x08 */
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     { 0x07, 0x00,  0x001e,  0x0000000f,  0x00000000, NULL },
@@ -387,7 +387,7 @@ static const struct ScriptCommand s_gs201_g2_s1_lives0_dlg0[] = { /* 0x8253910 *
     BGM_FADEOUT(120),
     { 0x23, 0x00,  0x0050,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x86, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(256, 0),
     JUMP_LABEL(10),
   LABEL(9), /* = 0x09 */
     ALERT_CUE(6),
@@ -395,7 +395,7 @@ static const struct ScriptCommand s_gs201_g2_s1_lives0_dlg0[] = { /* 0x8253910 *
     { 0x23, 0x00,  0x0050,  0x00000000,  0x00000000, NULL },
     WAIT(15),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x86, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(256, 0),
   LABEL(10), /* = 0x0a */
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     { 0x06, 0x00,  0x001e,  0x0000004f,  0x00000000, NULL },
@@ -421,13 +421,13 @@ static const struct ScriptCommand s_gs201_g2_s1_lives1_dlg0[] = { /* 0x8253f50 *
     WAIT(15),
     SELECT_ANIMATION(5),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x86, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(256, 0),
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     HALT,
   LABEL(0), /* = 0x00 */
     SELECT_ANIMATION(5),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x86, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(256, 0),
     { 0x52, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     HALT,
 };
@@ -641,7 +641,7 @@ static const struct ScriptRef s_gs201_g6_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs201_g6_s0_eff0_script[] = { /* 0x8254eb0 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
     WAIT(30),
@@ -675,7 +675,7 @@ static const struct ScriptCommand s_gs201_g6_s0_lives1_dlg0[] = { /* 0x825508c *
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
     SELECT_ANIMATION(2),
-    { 0x86, 0x00,  0x0100,  0x00000001,  0x00000000, NULL },
+    CAMERA_PAN(256, 1),
     ROTATE(4, 10, DIRECTION_NORTHEAST),
     ALERT_CUE(5),
     AWAIT_CUE(7),

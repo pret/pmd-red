@@ -86,7 +86,7 @@ static const struct ScriptCommand s_gs5_g1_s0_lives0_dlg2[] = { /* 0x8197d5c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1c,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_RESCUE, 0, 0),
     COND_EQUAL(1, /* to label */ 0),
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
@@ -103,7 +103,7 @@ static const struct ScriptCommand s_gs5_g1_s0_lives1_dlg2[] = { /* 0x8197e3c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1e,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_THANK_YOU_MAIL, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -112,7 +112,7 @@ static const struct ScriptCommand s_gs5_g1_s0_lives2_dlg2[] = { /* 0x8197e9c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1f,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PPO_HELP_COUNTER, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -145,7 +145,7 @@ static const struct ScriptCommand s_gs5_g2_s0_lives0_dlg0[] = { /* 0x8197fe8 */
     CALL_SCRIPT(WAIT_START_FUNC),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1d,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_UNK_1D, 0, 0),
     ALERT_CUE(3),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     ALERT_CUE(6),
@@ -293,11 +293,11 @@ static const struct ScriptRef s_gs5_g5_s0_station_sref = { 400, 7, NULL /* EVENT
 
 static const struct ScriptCommand s_gs5_g5_s0_eff0_script[] = { /* 0x8198874 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     AWAIT_CUE(4),
     WAIT(1),
     WALK_GRID(128, 0),
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     END_DELETE,
 };

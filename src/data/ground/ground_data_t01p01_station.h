@@ -515,7 +515,7 @@ static const struct ScriptCommand s_gs1_g1_s0_lives0_dlg2[] = { /* 0x8139520 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -524,7 +524,7 @@ static const struct ScriptCommand s_gs1_g1_s0_lives1_dlg2[] = { /* 0x8139580 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -533,7 +533,7 @@ static const struct ScriptCommand s_gs1_g1_s0_lives2_dlg2[] = { /* 0x81395e0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -542,7 +542,7 @@ static const struct ScriptCommand s_gs1_g1_s0_lives3_dlg2[] = { /* 0x8139640 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -551,7 +551,7 @@ static const struct ScriptCommand s_gs1_g1_s0_lives4_dlg2[] = { /* 0x81396a0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -560,7 +560,7 @@ static const struct ScriptCommand s_gs1_g1_s0_lives5_dlg2[] = { /* 0x8139700 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1000,7 +1000,7 @@ static const struct ScriptCommand s_gs1_g4_s3_lives0_dlg2[] = { /* 0x813b1ac */
     MSG_NPC(1, _(" R-really?!")),
     PORTRAIT_REP(0x0001, 0x00000041),
     MSG_NPC(1, _(" What kind food?!\nShow Munchlax! Show, show!")),
-    { 0x3c, 0x2d,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_TOOL_BOX, 0, 0),
     COND_EQUAL(-1, /* to label */ 2),
     JUMP_LABEL(3),
   LABEL(2), /* = 0x02 */
@@ -1042,7 +1042,7 @@ static const struct ScriptCommand s_gs1_g4_s3_lives0_dlg2[] = { /* 0x813b1ac */
     MSG_NPC(1, _(" Munchlax say thank you\nwith this.")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    { 0x3c, 0x2c,  0x0000,  0x0000002b,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_UNK_2C, 43, 0),
     WAIT(30),
     MSG_NPC(1, _(" Munchlax go now.")),
     TEXTBOX_CLEAR,
@@ -1196,11 +1196,11 @@ static const struct ScriptCommand s_gs1_g5_s1_lives2_dlg0[] = { /* 0x813beb8 */
     WAIT(8),
     { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     WAIT(60),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     ALERT_CUE(5),
     AWAIT_CUE(7),
     { 0x54, 0x00,  0x001a,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     WAIT(10),
     ALERT_CUE(5),
@@ -1432,7 +1432,7 @@ static const struct ScriptCommand s_gs1_g5_s4_lives0_dlg0[] = { /* 0x813c7e4 */
     MSG_NPC(2, _(" Munchlax say thank you\nwith this.")),
     TEXTBOX_CLEAR,
     WAIT(10),
-    { 0x3c, 0x2c,  0x0000,  0x0000002b,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_UNK_2C, 43, 0),
     WAIT(30),
     MSG_NPC(2, _(" Munchlax go now.")),
     TEXTBOX_CLEAR,
@@ -1589,22 +1589,22 @@ static const struct ScriptRef s_gs1_g6_s0_station_sref = { 402, 7, NULL /* EVENT
 
 static const struct ScriptCommand s_gs1_g6_s0_eff0_script[] = { /* 0x813d31c */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     AWAIT_CUE(4),
-    { 0x86, 0x00,  0x0200,  0x00000009,  0x00000000, NULL },
+    CAMERA_PAN(512, 9),
     ALERT_CUE(5),
     AWAIT_CUE(4),
-    { 0x86, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
+    CAMERA_PAN(512, 10),
     ALERT_CUE(5),
     AWAIT_CUE(4),
-    { 0x86, 0x00,  0x0200,  0x0000000b,  0x00000000, NULL },
+    CAMERA_PAN(512, 11),
     ALERT_CUE(5),
     AWAIT_CUE(4),
-    { 0x86, 0x00,  0x0200,  0x0000000c,  0x00000000, NULL },
+    CAMERA_PAN(512, 12),
     ALERT_CUE(5),
     AWAIT_CUE(4),
-    { 0x86, 0x00,  0x0200,  0x0000000d,  0x00000000, NULL },
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_PAN(512, 13),
+    CAMERA_END_PAN,
     WAIT(1),
     ALERT_CUE(5),
     END_DELETE,
@@ -1729,7 +1729,7 @@ static const struct ScriptCommand s_gs1_g7_s0_lives0_dlg2[] = { /* 0x813e134 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1738,7 +1738,7 @@ static const struct ScriptCommand s_gs1_g7_s0_lives1_dlg2[] = { /* 0x813e194 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1747,7 +1747,7 @@ static const struct ScriptCommand s_gs1_g7_s0_lives2_dlg2[] = { /* 0x813e1f4 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1756,7 +1756,7 @@ static const struct ScriptCommand s_gs1_g7_s0_lives3_dlg2[] = { /* 0x813e254 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1765,7 +1765,7 @@ static const struct ScriptCommand s_gs1_g7_s0_lives4_dlg2[] = { /* 0x813e2b4 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1896,7 +1896,7 @@ static const struct ScriptCommand s_gs1_g8_s0_lives0_dlg2[] = { /* 0x813ebe0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1905,7 +1905,7 @@ static const struct ScriptCommand s_gs1_g8_s0_lives1_dlg2[] = { /* 0x813ec40 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1914,7 +1914,7 @@ static const struct ScriptCommand s_gs1_g8_s0_lives2_dlg2[] = { /* 0x813eca0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1923,7 +1923,7 @@ static const struct ScriptCommand s_gs1_g8_s0_lives3_dlg2[] = { /* 0x813ed00 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1932,7 +1932,7 @@ static const struct ScriptCommand s_gs1_g8_s0_lives4_dlg2[] = { /* 0x813ed60 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -1942,7 +1942,7 @@ static const struct ScriptCommand s_gs1_g8_s0_lives5_dlg2[] = { /* 0x813edc0 */
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
     JUMPIF_SCENE_LT(SCENARIO_MAIN, 5, 4, /* to label */ 0),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
     EXECUTE_STATION(-1, 9, 0),
@@ -2081,7 +2081,7 @@ static const struct ScriptCommand s_gs1_g8_s2_lives8_dlg2[] = { /* 0x813f49c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -2090,7 +2090,7 @@ static const struct ScriptCommand s_gs1_g8_s2_lives9_dlg2[] = { /* 0x813f4fc */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -2314,7 +2314,7 @@ static const struct ScriptCommand s_gs1_g9_s0_lives2_dlg2[] = { /* 0x8140ae0 */
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
     JUMPIF_SCENE_LT(SCENARIO_MAIN, 5, 4, /* to label */ 0),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
     SCENARIO_CALC(SCENARIO_MAIN,  5,  4),
@@ -2414,7 +2414,7 @@ static const struct ScriptCommand s_gs1_g10_s0_eff0_script[] = { /* 0x814104c */
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(5),
     AWAIT_CUE(4),
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     { 0x89, 0x28,  0x0200,  0x00000002,  0x00000000, NULL },
     ALERT_CUE(5),
     AWAIT_CUE(4),
@@ -2463,7 +2463,7 @@ static const struct ScriptCommand s_gs1_g10_s0_lives2_dlg0[] = { /* 0x81412bc */
     BGM_FADEOUT(120),
     ALERT_CUE(4),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x86, 0x00,  0x0100,  0x00000016,  0x00000000, NULL },
+    CAMERA_PAN(256, 22),
     { 0x93, 0x04,  0x000b,  0x0000004e,  0x00000000, NULL },
     ALERT_CUE(6),
     WAIT(30),
@@ -2764,7 +2764,7 @@ static const struct ScriptCommand s_gs1_g10_s0_lives3_dlg0[] = { /* 0x8142cf4 */
     ALERT_CUE(5),
     AWAIT_CUE(6),
     { 0x53, 0x00,  0x0000,  0x0000001f,  0x00000000, NULL },
-    { 0x86, 0x00,  0x0100,  0x00000017,  0x00000000, NULL },
+    CAMERA_PAN(256, 23),
     { 0x8e, 0x01,  0x0000,  0x0000004e,  0x00000000, NULL },
     AWAIT_CUE(6),
     { 0x93, 0x04,  0x000b,  0x0000004d,  0x00000000, NULL },
@@ -3096,7 +3096,7 @@ static const struct ScriptCommand s_gs1_g10_s2_lives0_dlg0[] = { /* 0x8143f74 */
     ROTATE(10, 10, DIRECTION_SOUTH),
     WAIT(10),
     SELECT_ANIMATION(24),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     WAIT(20),
     ALERT_CUE(5),
@@ -3118,7 +3118,7 @@ static const struct ScriptCommand s_gs1_g11_s0_lives0_dlg2[] = { /* 0x81440a0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3127,7 +3127,7 @@ static const struct ScriptCommand s_gs1_g11_s0_lives1_dlg2[] = { /* 0x8144100 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3136,7 +3136,7 @@ static const struct ScriptCommand s_gs1_g11_s0_lives2_dlg2[] = { /* 0x8144160 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3145,7 +3145,7 @@ static const struct ScriptCommand s_gs1_g11_s0_lives3_dlg2[] = { /* 0x81441c0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3154,7 +3154,7 @@ static const struct ScriptCommand s_gs1_g11_s0_lives4_dlg2[] = { /* 0x8144220 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3163,7 +3163,7 @@ static const struct ScriptCommand s_gs1_g11_s0_lives5_dlg2[] = { /* 0x8144280 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3354,7 +3354,7 @@ static const struct ScriptCommand s_gs1_g13_s0_lives0_dlg2[] = { /* 0x8144f98 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3363,7 +3363,7 @@ static const struct ScriptCommand s_gs1_g13_s0_lives1_dlg2[] = { /* 0x8144ff8 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3372,7 +3372,7 @@ static const struct ScriptCommand s_gs1_g13_s0_lives2_dlg2[] = { /* 0x8145058 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3381,7 +3381,7 @@ static const struct ScriptCommand s_gs1_g13_s0_lives3_dlg2[] = { /* 0x81450b8 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3390,7 +3390,7 @@ static const struct ScriptCommand s_gs1_g13_s0_lives4_dlg2[] = { /* 0x8145118 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3399,7 +3399,7 @@ static const struct ScriptCommand s_gs1_g13_s0_lives5_dlg2[] = { /* 0x8145178 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3451,7 +3451,7 @@ static const struct ScriptCommand s_gs1_g14_s0_lives0_dlg2[] = { /* 0x8145494 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3460,7 +3460,7 @@ static const struct ScriptCommand s_gs1_g14_s0_lives1_dlg2[] = { /* 0x81454f4 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3469,7 +3469,7 @@ static const struct ScriptCommand s_gs1_g14_s0_lives2_dlg2[] = { /* 0x8145554 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3478,7 +3478,7 @@ static const struct ScriptCommand s_gs1_g14_s0_lives3_dlg2[] = { /* 0x81455b4 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3487,7 +3487,7 @@ static const struct ScriptCommand s_gs1_g14_s0_lives4_dlg2[] = { /* 0x8145614 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3496,7 +3496,7 @@ static const struct ScriptCommand s_gs1_g14_s0_lives5_dlg2[] = { /* 0x8145674 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3625,7 +3625,7 @@ static const struct ScriptCommand s_gs1_g15_s0_lives0_dlg2[] = { /* 0x8145da0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3634,7 +3634,7 @@ static const struct ScriptCommand s_gs1_g15_s0_lives1_dlg2[] = { /* 0x8145e00 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3643,7 +3643,7 @@ static const struct ScriptCommand s_gs1_g15_s0_lives2_dlg2[] = { /* 0x8145e60 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3652,7 +3652,7 @@ static const struct ScriptCommand s_gs1_g15_s0_lives3_dlg2[] = { /* 0x8145ec0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3661,7 +3661,7 @@ static const struct ScriptCommand s_gs1_g15_s0_lives4_dlg2[] = { /* 0x8145f20 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3670,7 +3670,7 @@ static const struct ScriptCommand s_gs1_g15_s0_lives5_dlg2[] = { /* 0x8145f80 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3741,7 +3741,7 @@ static const struct ScriptCommand s_gs1_g16_s0_lives0_dlg2[] = { /* 0x814638c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3750,7 +3750,7 @@ static const struct ScriptCommand s_gs1_g16_s0_lives1_dlg2[] = { /* 0x81463ec */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3759,7 +3759,7 @@ static const struct ScriptCommand s_gs1_g16_s0_lives2_dlg2[] = { /* 0x814644c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3768,7 +3768,7 @@ static const struct ScriptCommand s_gs1_g16_s0_lives3_dlg2[] = { /* 0x81464ac */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3777,7 +3777,7 @@ static const struct ScriptCommand s_gs1_g16_s0_lives4_dlg2[] = { /* 0x814650c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3786,7 +3786,7 @@ static const struct ScriptCommand s_gs1_g16_s0_lives5_dlg2[] = { /* 0x814656c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -3815,7 +3815,7 @@ static const struct ScriptCommand s_gs1_g17_s0_eff0_script[] = { /* 0x8146684 */
     AWAIT_CUE(4),
     { 0x9b, 0x00,  0x0180,  0x00000000,  0x00000000, NULL },
     WAIT(20),
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     ALERT_CUE(5),
     AWAIT_CUE(4),
     END_DELETE,
@@ -4029,7 +4029,7 @@ static const struct ScriptCommand s_gs1_g18_s0_lives0_dlg2[] = { /* 0x814765c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -4038,7 +4038,7 @@ static const struct ScriptCommand s_gs1_g18_s0_lives1_dlg2[] = { /* 0x81476bc */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -4047,7 +4047,7 @@ static const struct ScriptCommand s_gs1_g18_s0_lives2_dlg2[] = { /* 0x814771c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -4056,7 +4056,7 @@ static const struct ScriptCommand s_gs1_g18_s0_lives3_dlg2[] = { /* 0x814777c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -4065,7 +4065,7 @@ static const struct ScriptCommand s_gs1_g18_s0_lives4_dlg2[] = { /* 0x81477dc */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -4074,7 +4074,7 @@ static const struct ScriptCommand s_gs1_g18_s0_lives5_dlg2[] = { /* 0x814783c */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -4182,7 +4182,7 @@ static const struct ScriptRef s_gs1_g20_s0_station_sref = { 400, 7, NULL /* EVEN
 static const struct ScriptCommand s_gs1_g20_s0_eff0_script[] = { /* 0x8147eac */
     DEBUGINFO,
     WARP_WAYPOINT(0, 46),
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     AWAIT_CUE(4),
     WALK_DIRECT(180, 47),
     AWAIT_CUE(4),
@@ -4273,7 +4273,7 @@ static const struct ScriptRef s_gs1_g21_s0_station_sref = { 400, 7, NULL /* EVEN
 
 static const struct ScriptCommand s_gs1_g21_s0_eff0_script[] = { /* 0x8148404 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     AWAIT_CUE(4),
     WALK_RELATIVE(256, 34, 0),
     AWAIT_CUE(4),
@@ -5000,7 +5000,7 @@ static const struct ScriptCommand s_gs1_g21_s0_lives4_dlg0[] = { /* 0x814b6a0 */
     WALK_DIRECT(30, 55),
     { 0x57, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x54, 0x00,  0x000c,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x62, 0x00,  0x0080,  0x00000018,  0x00000000, NULL },
     { 0x57, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(2),
@@ -5477,7 +5477,7 @@ static const struct ScriptCommand s_gs1_g22_s0_lives0_dlg2[] = { /* 0x814d54c */
     WAIT(1),
     PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
     { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -5499,7 +5499,7 @@ static const struct ScriptCommand s_gs1_g22_s0_lives1_dlg2[] = { /* 0x814d61c */
     WAIT(1),
     PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
     { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -5521,7 +5521,7 @@ static const struct ScriptCommand s_gs1_g22_s0_lives2_dlg2[] = { /* 0x814d6ec */
     WAIT(1),
     PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
     { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -5543,7 +5543,7 @@ static const struct ScriptCommand s_gs1_g22_s0_lives3_dlg2[] = { /* 0x814d7bc */
     WAIT(1),
     PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
     { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -5565,7 +5565,7 @@ static const struct ScriptCommand s_gs1_g22_s0_lives4_dlg2[] = { /* 0x814d88c */
     WAIT(1),
     PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
     { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -5587,7 +5587,7 @@ static const struct ScriptCommand s_gs1_g22_s0_lives5_dlg2[] = { /* 0x814d95c */
     WAIT(1),
     PORTRAIT(PLACEMENT_LEFT, 0x0000, 0x00000000),
     { 0x2e, 0x00,  0x0001, -0x00000002,  0x00000000, NULL },
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -5621,10 +5621,10 @@ static const struct ScriptRef s_gs1_g23_s0_station_sref = { 400, 7, NULL /* EVEN
 
 static const struct ScriptCommand s_gs1_g23_s0_eff0_script[] = { /* 0x814db44 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     { 0x89, 0x20,  0x0100,  0x00000006,  0x00000000, NULL },
     AWAIT_CUE(4),
     { 0x89, 0x1c,  0x0100,  0x00000002,  0x00000000, NULL },
@@ -6433,7 +6433,7 @@ static const struct ScriptCommand s_gs1_g23_s0_lives5_dlg0[] = { /* 0x81516e8 */
     WAIT(15),
     ALERT_CUE(17),
     SELECT_ANIMATION(22),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(9),
     SELECT_ANIMATION(2),
@@ -6695,13 +6695,13 @@ static const struct ScriptCommand s_gs1_g23_s1_lives0_dlg0[] = { /* 0x8152988 */
     { 0x53, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
     FANFARE_PLAY2(451),
     SELECT_ANIMATION(23),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x8b, 0x00,  0x0001,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(23),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x8b, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(23),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     FANFARE_STOP2(451),
     END_DELETE,
 };
@@ -6762,7 +6762,7 @@ static const struct ScriptCommand s_gs1_g24_s0_lives0_dlg2[] = { /* 0x8152c74 */
     MSG_NPC(1, _(" I'll never give you my\nbusiness again!{WAIT_PRESS}\nI hope you won't say that.")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -6776,7 +6776,7 @@ static const struct ScriptCommand s_gs1_g24_s0_lives1_dlg2[] = { /* 0x8152e2c */
     EXECUTE_STATION(-1, 24, 1),
     HALT,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -6791,7 +6791,7 @@ static const struct ScriptCommand s_gs1_g24_s0_lives2_dlg2[] = { /* 0x8152edc */
     MSG_NPC(1, _(" I promise to satisfy all\nyour banking needs from now on.\nI hope you'll stay.")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -6806,7 +6806,7 @@ static const struct ScriptCommand s_gs1_g24_s0_lives3_dlg2[] = { /* 0x8153034 */
     MSG_NPC(1, _(" If you could wipe the slate\nclean, I will do my best to serve your\nlinking needs!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -6823,7 +6823,7 @@ static const struct ScriptCommand s_gs1_g24_s0_lives4_dlg2[] = { /* 0x8153174 */
     MSG_NPC(1, _(" I'll keep looking after your\nthings, dears! You can always count on me!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -6838,7 +6838,7 @@ static const struct ScriptCommand s_gs1_g24_s0_lives5_dlg2[] = { /* 0x8153334 */
     MSG_NPC(1, _(" Because you're my friend!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -6935,7 +6935,7 @@ static const struct ScriptCommand s_gs1_g24_s1_lives0_dlg0[] = { /* 0x8153894 */
     MSG_NPC(3, _(" We both promise, we will\nnot repeat the same mistake.")),
     MSG_NPC(3, _(" I will do my best to obtain\neven better Technical Machines and Orbs.\nI hope for your continued patronage!")),
     ALERT_CUE(3),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     TEXTBOX_CLEAR,
     SELECT_LIVES(-1, 0),
     RET,
@@ -6974,7 +6974,7 @@ static const struct ScriptCommand s_gs1_g24_s1_lives2_dlg2[] = { /* 0x8153cd4 */
     MSG_NPC(1, _(" I'll never give you my\nbusiness again!{WAIT_PRESS}\nI hope you won't say that.")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -7002,7 +7002,7 @@ static const struct ScriptCommand s_gs1_g24_s1_lives3_dlg2[] = { /* 0x8153e64 */
     EXECUTE_STATION(-1, 24, 1),
     HALT,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -7020,7 +7020,7 @@ static const struct ScriptCommand s_gs1_g25_s0_lives0_dlg2[] = { /* 0x8153f60 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -7029,7 +7029,7 @@ static const struct ScriptCommand s_gs1_g25_s0_lives1_dlg2[] = { /* 0x8153fc0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -7038,7 +7038,7 @@ static const struct ScriptCommand s_gs1_g25_s0_lives2_dlg2[] = { /* 0x8154020 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -7047,7 +7047,7 @@ static const struct ScriptCommand s_gs1_g25_s0_lives3_dlg2[] = { /* 0x8154080 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -7056,7 +7056,7 @@ static const struct ScriptCommand s_gs1_g25_s0_lives4_dlg2[] = { /* 0x81540e0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -7065,7 +7065,7 @@ static const struct ScriptCommand s_gs1_g25_s0_lives5_dlg2[] = { /* 0x8154140 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -7148,7 +7148,7 @@ static const struct ScriptRef s_gs1_g26_s0_station_sref = { 400, 7, NULL /* EVEN
 static const struct ScriptCommand s_gs1_g26_s0_eff0_script[] = { /* 0x8154684 */
     DEBUGINFO,
     { 0x59, 0x00, -0x0040,  0x00000000,  0x00000000, NULL },
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     AWAIT_CUE(4),
     WALK_RELATIVE(256, 64, 0),
     ALERT_CUE(5),
@@ -7902,7 +7902,7 @@ static const struct ScriptCommand s_gs1_g26_s0_lives7_dlg0[] = { /* 0x8157ee4 */
     { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
     WAIT(2),
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT_RANDOM(0, 60),
     SELECT_ANIMATION(2),
     AWAIT_CUE(20),
@@ -7973,7 +7973,7 @@ static const struct ScriptCommand s_gs1_g26_s0_lives8_dlg0[] = { /* 0x8158324 */
     { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
     WAIT(2),
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT_RANDOM(0, 60),
     SELECT_ANIMATION(2),
     AWAIT_CUE(20),
@@ -8093,7 +8093,7 @@ static const struct ScriptCommand s_gs1_g26_s0_lives10_dlg0[] = { /* 0x8158a44 *
     { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
     WAIT(2),
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT_RANDOM(0, 60),
     SELECT_ANIMATION(2),
     AWAIT_CUE(20),
@@ -8150,7 +8150,7 @@ static const struct ScriptCommand s_gs1_g26_s0_lives11_dlg0[] = { /* 0x8158da4 *
     { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
     WAIT(2),
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT_RANDOM(0, 60),
     SELECT_ANIMATION(2),
     AWAIT_CUE(20),
@@ -8207,7 +8207,7 @@ static const struct ScriptCommand s_gs1_g26_s0_lives12_dlg0[] = { /* 0x8159104 *
     { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
     WAIT(2),
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT_RANDOM(0, 60),
     SELECT_ANIMATION(2),
     AWAIT_CUE(20),
@@ -8264,7 +8264,7 @@ static const struct ScriptCommand s_gs1_g26_s0_lives13_dlg0[] = { /* 0x8159464 *
     { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
     WAIT(2),
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT_RANDOM(0, 60),
     SELECT_ANIMATION(2),
     AWAIT_CUE(20),
@@ -8376,7 +8376,7 @@ static const struct ScriptCommand s_gs1_g26_s0_lives15_dlg0[] = { /* 0x8159b04 *
     { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
     WAIT(2),
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT_RANDOM(0, 60),
     SELECT_ANIMATION(2),
     AWAIT_CUE(20),
@@ -8412,7 +8412,7 @@ static const struct ScriptCommand s_gs1_g26_s0_lives15_dlg0[] = { /* 0x8159b04 *
     CJUMP_VAR(EVENT_LOCAL),
     COND_EQUAL(1, /* to label */ 2),
     AWAIT_CUE(15),
-    { 0x86, 0x00,  0x0100,  0x0000005e,  0x00000000, NULL },
+    CAMERA_PAN(256, 94),
     ROTATE(4, 10, DIRECTION_NORTHEAST),
     AWAIT_CUE(20),
     { 0x56, 0x00,  0x0000,  0x0000005a,  0x00000000, NULL },
@@ -8505,7 +8505,7 @@ static const struct ScriptCommand s_gs1_g27_s0_lives0_dlg2[] = { /* 0x815a2a0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -8514,7 +8514,7 @@ static const struct ScriptCommand s_gs1_g27_s0_lives1_dlg2[] = { /* 0x815a300 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -8523,7 +8523,7 @@ static const struct ScriptCommand s_gs1_g27_s0_lives2_dlg2[] = { /* 0x815a360 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -8532,7 +8532,7 @@ static const struct ScriptCommand s_gs1_g27_s0_lives3_dlg2[] = { /* 0x815a3c0 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -8541,7 +8541,7 @@ static const struct ScriptCommand s_gs1_g27_s0_lives4_dlg2[] = { /* 0x815a420 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -8550,7 +8550,7 @@ static const struct ScriptCommand s_gs1_g27_s0_lives5_dlg2[] = { /* 0x815a480 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -8630,15 +8630,15 @@ static const struct ScriptRef s_gs1_g28_s0_station_sref = { 400, 7, NULL /* EVEN
 
 static const struct ScriptCommand s_gs1_g28_s0_eff0_script[] = { /* 0x815a9b0 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     AWAIT_CUE(4),
     WALK_GRID(256, 112),
     ALERT_CUE(5),
     AWAIT_CUE(4),
-    { 0x86, 0x00,  0x0100,  0x00000071,  0x00000000, NULL },
+    CAMERA_PAN(256, 113),
     ALERT_CUE(5),
     AWAIT_CUE(4),
-    { 0x86, 0x00,  0x0100,  0x00000070,  0x00000000, NULL },
+    CAMERA_PAN(256, 112),
     ALERT_CUE(5),
     AWAIT_CUE(4),
     WALK_GRID(256, 114),
@@ -9444,7 +9444,7 @@ static const struct ScriptCommand s_gs1_g28_s0_lives4_dlg0[] = { /* 0x815eaa8 */
     { 0x54, 0x00,  0x001a,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(10),
     SELECT_ANIMATION(23),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     ALERT_CUE(5),
     AWAIT_CUE(10),
@@ -9464,7 +9464,7 @@ static const struct ScriptCommand s_gs1_g28_s0_lives5_dlg0[] = { /* 0x815ebb8 */
     SELECT_ANIMATION(22),
     AWAIT_CUE(11),
     SELECT_ANIMATION(23),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     ROTATE(4, 10, DIRECTION_WEST),
     ALERT_CUE(5),
@@ -9479,7 +9479,7 @@ static const struct ScriptCommand s_gs1_g28_s0_lives6_dlg0[] = { /* 0x815ec78 */
     SELECT_ANIMATION(22),
     AWAIT_CUE(12),
     SELECT_ANIMATION(23),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     ROTATE(4, 10, DIRECTION_WEST),
     ALERT_CUE(5),
@@ -10093,7 +10093,7 @@ static const struct ScriptCommand s_gs1_g29_s0_lives0_dlg2[] = { /* 0x8161054 */
     MSG_NPC(1, _(" I will keep bringing in fine\nmerchandise!{WAIT_PRESS} This, I do for you!{WAIT_PRESS}\nSo...")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10107,7 +10107,7 @@ static const struct ScriptCommand s_gs1_g29_s0_lives1_dlg2[] = { /* 0x81611f0 */
     EXECUTE_STATION(-1, 29, 1),
     HALT,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10121,7 +10121,7 @@ static const struct ScriptCommand s_gs1_g29_s0_lives2_dlg2[] = { /* 0x81612a0 */
     MSG_NPC(1, _(" Aren't you remarkable?{WAIT_PRESS}\nYour money will be jealously guarded,\nso feel secure on your outings!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10137,7 +10137,7 @@ static const struct ScriptCommand s_gs1_g29_s0_lives3_dlg2[] = { /* 0x81613b4 */
     MSG_NPC(1, _(" You can count on me for all\nyour move-linking needs!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10153,7 +10153,7 @@ static const struct ScriptCommand s_gs1_g29_s0_lives4_dlg2[] = { /* 0x81614e0 */
     MSG_NPC(1, _(" I'll keep your valuables\nunder my watchful eye! You can go out and\nfight without worrying about them!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10168,7 +10168,7 @@ static const struct ScriptCommand s_gs1_g29_s0_lives5_dlg2[] = { /* 0x816167c */
     MSG_NPC(1, _(" Because {NAME_0}'s team\nare my friends!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10357,7 +10357,7 @@ static const struct ScriptCommand s_gs1_g29_s1_lives0_dlg0[] = { /* 0x8162190 */
     MSG_NPC(3, _(" I will do my best to obtain\neven better Technical Machines and Orbs.")),
     MSG_NPC(3, _(" All with the pride of a\nmerchant!")),
     ALERT_CUE(3),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     TEXTBOX_CLEAR,
     SELECT_LIVES(-1, 0),
     RET,
@@ -10396,7 +10396,7 @@ static const struct ScriptCommand s_gs1_g29_s1_lives2_dlg2[] = { /* 0x8162580 */
     MSG_NPC(1, _(" I will keep bringing in fine\nmerchandise!{WAIT_PRESS} This, I do for you!{WAIT_PRESS}\nSo...")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10424,7 +10424,7 @@ static const struct ScriptCommand s_gs1_g29_s1_lives3_dlg2[] = { /* 0x8162710 */
     EXECUTE_STATION(-1, 29, 1),
     HALT,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10450,7 +10450,7 @@ static const struct ScriptCommand s_gs1_g30_s0_lives0_dlg2[] = { /* 0x816280c */
     MSG_NPC(1, _(" I will keep bringing in fine\nmerchandise!{WAIT_PRESS} This, I do for you!{WAIT_PRESS}\nSo...")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10469,7 +10469,7 @@ static const struct ScriptCommand s_gs1_g30_s0_lives1_dlg2[] = { /* 0x816290c */
     EXECUTE_STATION(-1, 30, 1),
     HALT,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10483,7 +10483,7 @@ static const struct ScriptCommand s_gs1_g30_s0_lives2_dlg2[] = { /* 0x81629bc */
     MSG_NPC(1, _(" Aren't you remarkable?{WAIT_PRESS}\nYour money will be jealously guarded,\nso feel secure on your outings!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10499,7 +10499,7 @@ static const struct ScriptCommand s_gs1_g30_s0_lives3_dlg2[] = { /* 0x8162a6c */
     MSG_NPC(1, _(" You can count on me for all\nyour move-linking needs!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10515,7 +10515,7 @@ static const struct ScriptCommand s_gs1_g30_s0_lives4_dlg2[] = { /* 0x8162b3c */
     MSG_NPC(1, _(" I'll keep your valuables\nunder my watchful eye! You can go out and\nfight without worrying about them!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10530,7 +10530,7 @@ static const struct ScriptCommand s_gs1_g30_s0_lives5_dlg2[] = { /* 0x8162c3c */
     MSG_NPC(1, _(" Because {NAME_0}'s team\nare my friends!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10751,7 +10751,7 @@ static const struct ScriptCommand s_gs1_g30_s1_lives0_dlg0[] = { /* 0x8163b24 */
     MSG_NPC(3, _(" I will do my best to obtain\neven better Technical Machines and Orbs.")),
     MSG_NPC(3, _(" All with the pride of a\nmerchant!")),
     ALERT_CUE(3),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     TEXTBOX_CLEAR,
     SELECT_LIVES(-1, 0),
     RET,
@@ -10790,7 +10790,7 @@ static const struct ScriptCommand s_gs1_g30_s1_lives2_dlg2[] = { /* 0x8163dd4 */
     MSG_NPC(1, _(" I will keep bringing in fine\nmerchandise!{WAIT_PRESS} This, I do for you!{WAIT_PRESS}\nSo...")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10818,7 +10818,7 @@ static const struct ScriptCommand s_gs1_g30_s1_lives3_dlg2[] = { /* 0x8163f64 */
     EXECUTE_STATION(-1, 30, 1),
     HALT,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -10846,10 +10846,10 @@ static const struct ScriptRef s_gs1_g31_s0_station_sref = { 400, 7, NULL /* EVEN
 
 static const struct ScriptCommand s_gs1_g31_s0_eff0_script[] = { /* 0x8164138 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     WALK_GRID(256, 115),
     AWAIT_CUE(4),
     END_DELETE,
@@ -11852,7 +11852,7 @@ static const struct ScriptCommand s_gs1_g34_s0_lives1_dlg2[] = { /* 0x8168208 */
     MSG_NPC(1, _(" We hope you'll succeed!\nPlease don't give up!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -11866,7 +11866,7 @@ static const struct ScriptCommand s_gs1_g34_s0_lives2_dlg2[] = { /* 0x81682ec */
     MSG_NPC(1, _(" I also hope for your\nsuccess. Fight!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -11880,7 +11880,7 @@ static const struct ScriptCommand s_gs1_g34_s0_lives3_dlg2[] = { /* 0x81683c4 */
     MSG_NPC(1, _(" {NAME_0}, you're our\none hope!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -11894,7 +11894,7 @@ static const struct ScriptCommand s_gs1_g34_s0_lives4_dlg2[] = { /* 0x8168494 */
     MSG_NPC(1, _(" I'm rooting for your\nsuccess, {NAME_0}!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -11908,7 +11908,7 @@ static const struct ScriptCommand s_gs1_g34_s0_lives5_dlg2[] = { /* 0x816856c */
     MSG_NPC(1, _(" You'll do fine!{WAIT_PRESS}\nI'm sure you'll find success!\nHave confidence in yourselves!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -11923,7 +11923,7 @@ static const struct ScriptCommand s_gs1_g34_s0_lives6_dlg2[] = { /* 0x8168674 */
     MSG_NPC(1, _(" But with you, I know it can\nbecome a friend!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12032,7 +12032,7 @@ static const struct ScriptCommand s_gs1_g35_s0_lives0_dlg2[] = { /* 0x8168e64 */
     MSG_NPC(1, _(" I see you're heading out\nsoon.\nThe best of luck!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12046,7 +12046,7 @@ static const struct ScriptCommand s_gs1_g35_s0_lives1_dlg2[] = { /* 0x8168f48 */
     MSG_NPC(1, _(" Ah, you're leaving?\nGood luck!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12060,7 +12060,7 @@ static const struct ScriptCommand s_gs1_g35_s0_lives2_dlg2[] = { /* 0x816901c */
     MSG_NPC(1, _(" {NAME_0}, don't let us\ndown!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12074,7 +12074,7 @@ static const struct ScriptCommand s_gs1_g35_s0_lives3_dlg2[] = { /* 0x81690ec */
     MSG_NPC(1, _(" I'm rooting for you!\nGo get 'em, {NAME_0}!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12088,7 +12088,7 @@ static const struct ScriptCommand s_gs1_g35_s0_lives4_dlg2[] = { /* 0x81691cc */
     MSG_NPC(1, _(" This is it, isn't it?\nMake us proud!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12102,7 +12102,7 @@ static const struct ScriptCommand s_gs1_g35_s0_lives5_dlg2[] = { /* 0x81692a8 */
     MSG_NPC(1, _(" Are you heading out now?\nDon't give up!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12208,7 +12208,7 @@ static const struct ScriptCommand s_gs1_g36_s0_lives0_dlg2[] = { /* 0x81698f8 */
     MSG_NPC(1, _(" You still have everything\nto prove!\nThe best of luck!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12222,7 +12222,7 @@ static const struct ScriptCommand s_gs1_g36_s0_lives1_dlg2[] = { /* 0x81699e0 */
     MSG_NPC(1, _(" {NAME_0}, I'm certain\nthat you will succeed!\nGood luck!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12236,7 +12236,7 @@ static const struct ScriptCommand s_gs1_g36_s0_lives2_dlg2[] = { /* 0x8169ac8 */
     MSG_NPC(1, _(" It must be difficult, but\ndon't let us down!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12250,7 +12250,7 @@ static const struct ScriptCommand s_gs1_g36_s0_lives3_dlg2[] = { /* 0x8169bac */
     MSG_NPC(1, _(" You're not finished yet!\nI hope I can serve you in good stead!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12266,7 +12266,7 @@ static const struct ScriptCommand s_gs1_g36_s0_lives4_dlg2[] = { /* 0x8169ca0 */
     MSG_NPC(1, _(" Your fight's only begun!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12280,7 +12280,7 @@ static const struct ScriptCommand s_gs1_g36_s0_lives5_dlg2[] = { /* 0x8169dcc */
     MSG_NPC(1, _(" Everyone hopes you reach\nRayquaza.\nKeep it up!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12380,7 +12380,7 @@ static const struct ScriptRef s_gs1_g37_s0_station_sref = { 400, 7, NULL /* EVEN
 
 static const struct ScriptCommand s_gs1_g37_s0_eff0_script[] = { /* 0x816a44c */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     WALK_GRID(153, 135),
     HALT,
 };
@@ -12406,7 +12406,7 @@ static const struct ScriptCommand s_gs1_g38_s0_lives0_dlg2[] = { /* 0x816a4d8 */
     MSG_NPC(1, _(" Thank you so much!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12420,7 +12420,7 @@ static const struct ScriptCommand s_gs1_g38_s0_lives1_dlg2[] = { /* 0x816a628 */
     EXECUTE_STATION(-1, 38, 1),
     HALT,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12434,7 +12434,7 @@ static const struct ScriptCommand s_gs1_g38_s0_lives2_dlg2[] = { /* 0x816a6d8 */
     MSG_NPC(1, _(" Peace has returned!\nThank you, {NAME_0}!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12448,7 +12448,7 @@ static const struct ScriptCommand s_gs1_g38_s0_lives3_dlg2[] = { /* 0x816a7b0 */
     MSG_NPC(1, _(" Thank you so much!\nI can keep my shop running, thanks to you!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12462,7 +12462,7 @@ static const struct ScriptCommand s_gs1_g38_s0_lives4_dlg2[] = { /* 0x816a8a4 */
     MSG_NPC(1, _(" You did it! Good for you!\nThat is so cool!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12476,7 +12476,7 @@ static const struct ScriptCommand s_gs1_g38_s0_lives5_dlg2[] = { /* 0x816a980 */
     MSG_NPC(1, _(" It's peaceful again!\nThank you! I never expected less from\nyou, my friend!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12595,7 +12595,7 @@ static const struct ScriptCommand s_gs1_g38_s1_lives0_dlg0[] = { /* 0x816b150 */
     MSG_NPC(3, _(" {NAME_0} and\n{NAME_1}...{WAIT_PRESS}\nWe only have gratitude for you.")),
     MSG_NPC(3, _(" Thank you ever so much!")),
     ALERT_CUE(3),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     TEXTBOX_CLEAR,
     ALERT_CUE(7),
     ALERT_CUE(8),
@@ -12628,7 +12628,7 @@ static const struct ScriptCommand s_gs1_g38_s1_lives1_dlg2[] = { /* 0x816b4d4 */
     MSG_NPC(1, _(" Thank you ever so much!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12658,7 +12658,7 @@ static const struct ScriptCommand s_gs1_g38_s1_lives2_dlg2[] = { /* 0x816b6f0 */
     EXECUTE_STATION(-1, 38, 1),
     HALT,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12901,7 +12901,7 @@ static const struct ScriptCommand s_gs1_g42_s0_lives2_dlg2[] = { /* 0x816cc54 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12910,7 +12910,7 @@ static const struct ScriptCommand s_gs1_g42_s0_lives3_dlg2[] = { /* 0x816ccb4 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12919,7 +12919,7 @@ static const struct ScriptCommand s_gs1_g42_s0_lives4_dlg2[] = { /* 0x816cd14 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12928,7 +12928,7 @@ static const struct ScriptCommand s_gs1_g42_s0_lives5_dlg2[] = { /* 0x816cd74 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -12937,7 +12937,7 @@ static const struct ScriptCommand s_gs1_g42_s0_lives6_dlg2[] = { /* 0x816cdd4 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -13100,9 +13100,9 @@ static const struct ScriptCommand s_gs1_g43_s0_lives4_dlg0[] = { /* 0x816d56c */
     ROTATE(1, 10, DIRECTION_SOUTH),
     WAIT(10),
     { 0xe2, 0x00,  0x0329,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(22),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     FANFARE_PLAY2(510),
     WAIT(60),
     ALERT_CUE(5),
@@ -13238,7 +13238,7 @@ static const struct ScriptCommand s_gs1_g45_s1_lives1_dlg0[] = { /* 0x816e32c */
     SELECT_ANIMATION(4),
     WAIT(60),
     { 0x54, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     ALERT_CUE(5),
     AWAIT_CUE(7),
     { 0x3b, 0x23,  0x0000,  0x00000000,  0x00000000, NULL },
@@ -13252,12 +13252,12 @@ static const struct ScriptCommand s_gs1_g45_s1_lives1_dlg0[] = { /* 0x816e32c */
     SELECT_ANIMATION(4),
     WAIT(60),
     { 0x54, 0x00,  0x000f,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     ALERT_CUE(5),
     AWAIT_CUE(7),
     FANFARE_PLAY2(762),
     SELECT_ANIMATION(17),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0xe2, 0x00,  0x02fa,  0x00000000,  0x00000000, NULL },
     FANFARE_PLAY2(510),
     WAIT(60),
@@ -13279,7 +13279,7 @@ static const struct ScriptCommand s_gs1_g45_s1_lives1_dlg0[] = { /* 0x816e32c */
     SELECT_ANIMATION(4),
     WAIT(80),
     SELECT_ANIMATION(22),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     FANFARE_PLAY2(510),
     ALERT_CUE(5),
     AWAIT_CUE(7),
@@ -13336,7 +13336,7 @@ static const struct ScriptRef s_gs1_g46_s0_station_sref = { 400, 7, NULL /* EVEN
 
 static const struct ScriptCommand s_gs1_g46_s0_eff0_script[] = { /* 0x816e988 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     AWAIT_CUE(4),
     WALK_RELATIVE(256, -32, 0),
     ALERT_CUE(5),
@@ -13896,14 +13896,14 @@ static const struct ScriptCommand s_gs1_g46_s0_lives5_dlg0[] = { /* 0x817145c */
     { 0x93, 0x04,  0x000a,  0x0000004d,  0x00000000, NULL },
     AWAIT_CUE(10),
     SELECT_ANIMATION(19),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(10),
     SELECT_ANIMATION(2),
     ALERT_CUE(5),
     AWAIT_CUE(10),
     SELECT_ANIMATION(19),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(10),
     SELECT_ANIMATION(2),
@@ -13912,14 +13912,14 @@ static const struct ScriptCommand s_gs1_g46_s0_lives5_dlg0[] = { /* 0x817145c */
     { 0x93, 0x04,  0x000a,  0x0000004f,  0x00000000, NULL },
     AWAIT_CUE(10),
     SELECT_ANIMATION(19),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(10),
     SELECT_ANIMATION(2),
     ALERT_CUE(5),
     AWAIT_CUE(10),
     SELECT_ANIMATION(19),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(10),
     SELECT_ANIMATION(2),
@@ -13962,7 +13962,7 @@ static const struct ScriptCommand s_gs1_g46_s0_lives5_dlg0[] = { /* 0x817145c */
     { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(10),
     SELECT_ANIMATION(19),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0xe5, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
     AWAIT_CUE(10),
     SELECT_ANIMATION(2),
@@ -14040,14 +14040,14 @@ static const struct ScriptCommand s_gs1_g47_s0_eff0_script[] = { /* 0x8171ce8 */
     DEBUGINFO,
     AWAIT_CUE(4),
     { 0x9b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     ALERT_CUE(5),
     RET,
 };
 
 static const struct ScriptCommand s_gs1_g47_s0_lives0_dlg0[] = { /* 0x8171d48 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WALK_RELATIVE(256, 80, 0),
@@ -14352,7 +14352,7 @@ static const struct ScriptRef s_gs1_g48_s0_station_sref = { 400, 7, NULL /* EVEN
 
 static const struct ScriptCommand s_gs1_g48_s0_eff0_script[] = { /* 0x8173364 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     HALT,
 };
 
@@ -14732,7 +14732,7 @@ static const struct ScriptCommand s_gs1_g48_s0_lives5_dlg0[] = { /* 0x81754ac */
     ALERT_CUE(5),
     AWAIT_CUE(10),
     { 0x54, 0x00,  0x001b,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT(10),
     ALERT_CUE(5),
     AWAIT_CUE(10),
@@ -14752,7 +14752,7 @@ static const struct ScriptCommand s_gs1_g48_s0_lives5_dlg0[] = { /* 0x81754ac */
     SELECT_ANIMATION(25),
     AWAIT_CUE(10),
     { 0x54, 0x00,  0x001b,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT(30),
     { 0x54, 0x00,  0x001d,  0x00000000,  0x00000000, NULL },
     WAIT(30),
@@ -15093,7 +15093,7 @@ static const struct ScriptCommand s_gs1_g49_s0_lives2_dlg0[] = { /* 0x817708c */
   LABEL(1), /* = 0x01 */
     ROTATE(4, 2, DIRECTION_SOUTH),
     SELECT_ANIMATION(22),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     AWAIT_CUE(7),
     SELECT_ANIMATION(2),
     ROTATE(4, 1, DIRECTION_SOUTHWEST),
@@ -15126,7 +15126,7 @@ static const struct ScriptCommand s_gs1_g49_s0_lives3_dlg0[] = { /* 0x817725c */
   LABEL(1), /* = 0x01 */
     ROTATE(4, 2, DIRECTION_SOUTH),
     SELECT_ANIMATION(22),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     AWAIT_CUE(8),
     SELECT_ANIMATION(2),
     ROTATE(4, 1, DIRECTION_SOUTHWEST),
@@ -15180,7 +15180,7 @@ static const struct ScriptCommand s_gs1_g49_s0_lives5_dlg0[] = { /* 0x817755c */
     { 0x62, 0x00,  0x0200, -0x00000008,  0x00000000, NULL },
     ROTATE(4, 1, DIRECTION_NORTH),
     SELECT_ANIMATION(17),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     WAIT(10),
     ALERT_CUE(5),
@@ -15230,7 +15230,7 @@ static const struct ScriptCommand s_gs1_g49_s0_lives6_dlg0[] = { /* 0x817785c */
     ROTATE(4, 2, DIRECTION_SOUTH),
     FANFARE_PLAY2(455),
     SELECT_ANIMATION(17),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     AWAIT_CUE(11),
     { 0x62, 0x00,  0x0100,  0x00000008,  0x00000008, NULL },
@@ -15366,7 +15366,7 @@ static const struct ScriptCommand s_gs1_g50_s0_lives4_dlg2[] = { /* 0x8178410 */
     MSG_NPC(1, _(" And now...")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x17,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_GREEN_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -15382,7 +15382,7 @@ static const struct ScriptCommand s_gs1_g50_s0_lives5_dlg2[] = { /* 0x8178564 */
     MSG_NPC(1, _(" And now...")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x18,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_PURPLE_KECLEON_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -15397,7 +15397,7 @@ static const struct ScriptCommand s_gs1_g50_s0_lives6_dlg2[] = { /* 0x8178690 */
     MSG_NPC(1, _(" If you find a fortune in the\nrelic, save it here with me!")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x13,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_BANK, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -15412,7 +15412,7 @@ static const struct ScriptCommand s_gs1_g50_s0_lives7_dlg2[] = { /* 0x8178780 */
     MSG_NPC(1, _(" I wonder what kinds of\nfriends are in the {COLOR YELLOW_D}Buried Relic{RESET}?")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x1b,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_FRIEND_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -15429,7 +15429,7 @@ static const struct ScriptCommand s_gs1_g50_s0_lives8_dlg2[] = { /* 0x8178870 */
     MSG_NPC(1, _(" OK...")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x10,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE_WITH_DIALOG, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -15445,7 +15445,7 @@ static const struct ScriptCommand s_gs1_g50_s0_lives9_dlg2[] = { /* 0x81789bc */
     MSG_NPC(1, _(" It makes me drool thinking\nwhat I could swallow in a place like that.")),
     TEXTBOX_CLEAR,
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x19,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_LINK_SHOP, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 

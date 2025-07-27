@@ -336,7 +336,7 @@ static const struct ScriptCommand s_script_WAKEUP_FUNC[] = { /* 0x811ff00 */
     SELECT_ANIMATION(38),
     { 0x8b, 0x3c,  0x0000,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(39),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     WAIT(10),
     SELECT_ANIMATION(2),
     WAIT(40),
@@ -400,7 +400,7 @@ static const struct ScriptCommand s_script_JUMP_SURPRISE_FUNC[] = { /* 0x8120240
     { 0x70, 0x00,  0x0200,  0x0000000a,  0x00000000, NULL },
     WAIT(2),
     { 0x70, 0x00,  0x0200,  0x00000000,  0x00000000, NULL },
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     SELECT_ANIMATION(2),
     RET_DIRECT,
 };
@@ -546,7 +546,7 @@ static const struct ScriptCommand s_script_INIT_DEBUG_HABITAT[] = { /* 0x81207d0
 
 static const struct ScriptCommand s_script_NORMAL_CAMERA[] = { /* 0x8120840 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     END_DELETE,
 };
@@ -607,7 +607,7 @@ static const struct ScriptCommand s_script_NEXT_SAVE_FUNC[] = { /* 0x8120bdc */
     CHOICE(/* label */  1, _("*No")),
     JUMP_LABEL(1),
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x0e,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_SAVE_1, 0, 0),
   LABEL(1), /* = 0x01 */
     TEXTBOX_CLEAR,
     WAIT(60),
@@ -622,7 +622,7 @@ static const struct ScriptCommand s_script_NEXT_SAVE2_FUNC[] = { /* 0x8120cdc */
     CHOICE(/* label */  1, _("*No")),
     JUMP_LABEL(1),
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x0f,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_SAVE_2, 0, 0),
   LABEL(1), /* = 0x01 */
     TEXTBOX_CLEAR,
     WAIT(60),
@@ -638,7 +638,7 @@ static const struct ScriptCommand s_script_SAVE_POINT[] = { /* 0x8120db0 */
   LABEL(0), /* = 0x00 */
     TEXTBOX_CLEAR,
     CALL_SCRIPT(SAVE_START_FUNC),
-    { 0x3c, 0x0e,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_SAVE_1, 0, 0),
     CALL_SCRIPT(SAVE_END_FUNC),
     JUMP_SCRIPT(END_TALK),
 };
@@ -648,7 +648,7 @@ static const struct ScriptCommand s_script_WAREHOUSE_POINT[] = { /* 0x8120e60 */
     SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
-    { 0x3c, 0x11,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE, 0, 0),
     JUMP_SCRIPT(END_TALK),
 };
 
@@ -662,7 +662,7 @@ static const struct ScriptCommand s_script_SAVE_AND_WAREHOUSE_POINT[] = { /* 0x8
     JUMP_SCRIPT(END_TALK),
   LABEL(0), /* = 0x00 */
     TEXTBOX_CLEAR,
-    { 0x3c, 0x11,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_STORAGE, 0, 0),
     JUMP_SCRIPT(END_TALK),
   LABEL(1), /* = 0x01 */
     { 0x3a, 0x00,  0x0002,  0x00000000, -0x00000001, _("Would you like to save your adventure?") },
@@ -670,7 +670,7 @@ static const struct ScriptCommand s_script_SAVE_AND_WAREHOUSE_POINT[] = { /* 0x8
   LABEL(2), /* = 0x02 */
     TEXTBOX_CLEAR,
     CALL_SCRIPT(SAVE_START_FUNC),
-    { 0x3c, 0x0e,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_SAVE_1, 0, 0),
     CALL_SCRIPT(SAVE_END_FUNC),
     JUMP_SCRIPT(END_TALK),
 };
@@ -802,7 +802,7 @@ static const struct ScriptCommand s_script_LIVES_WARP_START_SUB[] = { /* 0x81215
     DEBUGINFO,
     { 0x60, 0x00,  0x0000,  0x00000060,  0x00000000, NULL },
     SELECT_ANIMATION(3),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     END_DELETE,
 };
 
@@ -884,7 +884,7 @@ static const struct ScriptCommand s_script_LIVES_WARP_ARRIVE_SUB[] = { /* 0x8121
     DEBUGINFO,
     { 0x60, 0x00,  0x0000,  0x00000060,  0x00000000, NULL },
     SELECT_ANIMATION(3),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     END_DELETE,
 };
 
@@ -1810,7 +1810,7 @@ static const struct ScriptCommand s_script_EVENT_RESCUE[] = { /* 0x8124fc0 */
 
 static const struct ScriptCommand s_script_DEBUG_SCRIPT[] = { /* 0x8125000 */
     DEBUGINFO,
-    { 0x3c, 0x2a,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_SCRIPTING_MENU, 0, 0),
     COND_EQUAL(-1, /* to label */ 0),
     HALT,
   LABEL(0), /* = 0x00 */
@@ -5254,7 +5254,7 @@ static const struct ScriptCommand s_script_SETUP_DEBUG_CAMERA[] = { /* 0x812f138
 
 static const struct ScriptCommand s_script_MOVE_DEBUG_CAMERA[] = { /* 0x812f198 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     { 0x3b, 0x3f,  0x0000,  0x00000000,  0x00000000, NULL },
     ALERT_CUE(4),
     { 0x9a, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },

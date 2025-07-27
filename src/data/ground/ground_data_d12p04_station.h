@@ -46,7 +46,7 @@ static const struct ScriptRef s_gs206_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs206_g1_s0_eff0_script[] = { /* 0x825ead8 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     END_DELETE,
 };

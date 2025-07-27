@@ -35,10 +35,10 @@ static const struct ScriptRef s_gs183_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs183_g1_s0_eff0_script[] = { /* 0x823335c */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     AWAIT_CUE(4),
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     { 0x89, 0x1c,  0x0100,  0x00000004,  0x00000000, NULL },
     ALERT_CUE(5),
     AWAIT_CUE(4),
@@ -183,7 +183,7 @@ static const struct ScriptCommand s_gs183_g1_s0_lives3_dlg0[] = { /* 0x8233e3c *
     AWAIT_CUE(8),
     FANFARE_PLAY2(459),
     SELECT_ANIMATION(23),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     { 0x53, 0x00,  0x0000,  0x01000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0003,  0x00000045,  0x00000000, NULL },
     ALERT_CUE(5),

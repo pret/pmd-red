@@ -32,7 +32,7 @@ static const struct ScriptRef s_gs214_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs214_g1_s0_eff0_script[] = { /* 0x82665f4 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     HALT,
 };
 
@@ -176,7 +176,7 @@ static const struct ScriptCommand s_gs214_g1_s0_lives1_dlg0[] = { /* 0x8266f30 *
     { 0xe2, 0x00,  0x0298,  0x00000000,  0x00000000, NULL },
     SELECT_ANIMATION(22),
     WAIT(10),
-    { 0xdd, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    STOP_ANIMATION_ON_CURRENT_FRAME,
     ALERT_CUE(5),
     SELECT_ANIMATION(2),
     HALT,

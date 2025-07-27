@@ -61,10 +61,10 @@ static const struct ScriptRef s_gs8_g1_s0_station_sref = { 402, 7, NULL /* EVENT
 
 static const struct ScriptCommand s_gs8_g1_s0_eff0_script[] = { /* 0x819a990 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     CALL_SCRIPT(WAIT_START_FUNC),
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x3c, 0x1a,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
+    SPECIAL_TEXT(SPECIAL_TEXT_LUMINOUS_CAVE, 0, 0),
     ALERT_CUE(3),
     ALERT_CUE(5),
     END_DELETE,

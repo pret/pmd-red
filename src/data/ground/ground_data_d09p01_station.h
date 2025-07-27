@@ -176,7 +176,7 @@ static const struct ScriptRef s_gs195_g1_s0_station_sref = { 402, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs195_g1_s0_eff0_script[] = { /* 0x8246504 */
     DEBUGINFO,
-    { 0x99, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_END_PAN,
     WAIT(1),
     END_DELETE,
 };
@@ -437,7 +437,7 @@ static const struct ScriptCommand s_gs195_g3_s0_lives0_dlg0[] = { /* 0x82474ec *
     MSG_NPC(1, _(" Ssh!{WAIT_PRESS}\nSomeone's coming.")),
     TEXTBOX_CLEAR,
     ALERT_CUE(6),
-    { 0x86, 0x00,  0x0200,  0x00000007,  0x00000000, NULL },
+    CAMERA_PAN(512, 7),
     WALK_GRID(512, 8),
     WAIT(30),
     MSG_NPC(-1, _(" Where are they?\n{NAME_0} and that sidekick.")),
@@ -502,7 +502,7 @@ static const struct ScriptCommand s_gs195_g3_s0_lives1_dlg0[] = { /* 0x8247b14 *
     ROTATE(4, 11, DIRECTION_EAST),
     ALERT_CUE(5),
     AWAIT_CUE(6),
-    { 0x86, 0x00,  0x0200,  0x00000009,  0x00000000, NULL },
+    CAMERA_PAN(512, 9),
     WALK_GRID(512, 10),
     AWAIT_CUE(6),
     WALK_GRID(512, 9),

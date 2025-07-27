@@ -42,7 +42,7 @@ static const struct ScriptRef s_gs226_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs226_g1_s0_eff0_script[] = { /* 0x826f348 */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
     { 0x22, 0x01,  0x0014,  0x00000000,  0x00000000, NULL },
     WAIT(60),
     { 0x23, 0x01,  0x0014,  0x00000000,  0x00000000, NULL },
@@ -70,7 +70,7 @@ static const struct ScriptCommand s_gs226_g1_s0_eff0_script[] = { /* 0x826f348 *
 
 static const struct ScriptCommand s_gs226_g1_s0_eff1_script[] = { /* 0x826f4d8 */
     DEBUGINFO,
-    { 0x3c, 0x29,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_UNK_29, 0, 0),
     END_DELETE,
 };
 
