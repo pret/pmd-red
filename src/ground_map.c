@@ -1113,3 +1113,38 @@ bool8 GetCurrentDungeonBounds(PixelPos *pos1, PixelPos *pos2)
     }
 }
 
+bool8 sub_80A579C(PixelPos *pos1, PixelPos *pos2)
+{
+    const GroundConversionStruct *convTable;
+
+    if(gGroundMapDungeon_3001B70 != NULL)
+    {
+        if(gGroundMapAction->groundMapId != -1)
+        {
+            convTable = &gGroundMapConversionTable[gGroundMapAction->groundMapId];
+            GetDungeonBounds(gGroundMapDungeon_3001B70, pos1, pos2);   
+
+            pos1->x += 0x7800;
+            pos1->y += 0x5000;
+            pos2->x -= 0x7800;
+            pos2->y -= 0x5000;
+
+            if(convTable->unk0 == 0xA)
+            {
+                pos1->x += 0x1800;
+                pos1->y += 0x1800;
+                pos2->x -= 0x1800;
+                pos2->y -= 0x1800;
+            }
+
+            if (pos1->x > pos2->x) {
+                pos2->x = pos1->x;
+            }
+            if (pos1->y > pos2->y) {
+                pos2->y = pos1->y;
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
