@@ -63,28 +63,28 @@ static const struct ScriptRef s_gs6_g0_s0_evt0_sref = { 357, 2, NULL /* GETOUT_N
 
 static const struct ScriptCommand s_gs6_g0_s1_lives0_dlg0[] = { /* 0x8199134 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs6_g0_s1_lives1_dlg0[] = { /* 0x8199174 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs6_g0_s2_lives0_dlg0[] = { /* 0x81991b4 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs6_g0_s2_lives1_dlg0[] = { /* 0x81991f4 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
@@ -130,7 +130,7 @@ static const struct ScriptCommand s_gs6_g1_s0_lives0_dlg1[] = { /* 0x81993ac */
 
 static const struct ScriptCommand s_gs6_g1_s0_lives0_dlg2[] = { /* 0x81993dc */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
     { 0x06, 0x00,  0x001e, -0x00000001,  0x00000000, NULL },
@@ -161,7 +161,7 @@ static const struct ScriptRef s_gs6_g1_s0_evt0_sref = { 357, 2, NULL /* GETOUT_N
 
 static const struct ScriptCommand s_gs6_g1_s1_evt0_sref_script[] = { /* 0x8199528 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
     MSG_INSTANT(_("{CENTER_ALIGN}There appears to be no one inside.")),
@@ -179,7 +179,7 @@ static const struct ScriptCommand s_gs6_g2_s0_station_sref_script[] = { /* 0x819
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(7),
     { 0x22, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     CALL_STATION(  1,  0),
     SELECT_EVENTS(0, 0),
     RET,
@@ -190,11 +190,11 @@ static const struct ScriptRef s_gs6_g2_s0_station_sref = { 402, 7, NULL /* EVENT
 static const struct ScriptCommand s_gs6_g2_s0_lives0_dlg0[] = { /* 0x81996f8 */
     DEBUGINFO,
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
     CALL_SCRIPT(WAIT_START_FUNC),
-    { 0x3c, 0x25,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_DOJO_SUCCESS, 0, 0),
     { 0x3b, 0x0e,  0x0000,  0x00000000,  0x00000000, NULL },
     COND_EQUAL(1, /* to label */ 0),
     COND_EQUAL(2, /* to label */ 0),
@@ -203,11 +203,11 @@ static const struct ScriptCommand s_gs6_g2_s0_lives0_dlg0[] = { /* 0x81996f8 */
     COND_EQUAL(5, /* to label */ 0),
     JUMP_LABEL(5),
   LABEL(0), /* = 0x00 */
-    { 0x3c, 0x2c,  0x0000,  0x00000049,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_UNK_2C, 73, 0),
   LABEL(5), /* = 0x05 */
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(3),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     RET,
 };
 
@@ -218,10 +218,10 @@ static const struct ScriptCommand s_gs6_g2_s0_lives0_dlg0[] = { /* 0x81996f8 */
 static const struct ScriptCommand s_gs6_g2_s0_lives1_dlg0[] = { /* 0x8199848 */
     DEBUGINFO,
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(WAIT_START_FUNC),
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     RET,
 };
@@ -232,7 +232,7 @@ static const struct ScriptCommand s_gs6_g2_s0_lives2_dlg0[] = { /* 0x81998c8 */
     CALL_SCRIPT(INIT_PLAZA_SLEEP_TALK_FUNC),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x8e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     RET,
 };
 
@@ -243,7 +243,7 @@ static const struct ScriptCommand s_gs6_g3_s0_station_sref_script[] = { /* 0x819
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(7),
     { 0x22, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     CALL_STATION(  1,  0),
     SELECT_EVENTS(0, 0),
     RET,
@@ -254,24 +254,24 @@ static const struct ScriptRef s_gs6_g3_s0_station_sref = { 402, 7, NULL /* EVENT
 static const struct ScriptCommand s_gs6_g3_s0_lives0_dlg0[] = { /* 0x81999e4 */
     DEBUGINFO,
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
     CALL_SCRIPT(WAIT_START_FUNC),
-    { 0x3c, 0x26,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_DOJO_FAILURE, 0, 0),
+    ALERT_CUE(3),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     RET,
 };
 
 static const struct ScriptCommand s_gs6_g3_s0_lives1_dlg0[] = { /* 0x8199a94 */
     DEBUGINFO,
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(WAIT_START_FUNC),
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     RET,
 };
@@ -282,7 +282,7 @@ static const struct ScriptCommand s_gs6_g3_s0_lives2_dlg0[] = { /* 0x8199b14 */
     CALL_SCRIPT(INIT_PLAZA_SLEEP_TALK_FUNC),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x8e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     RET,
 };
 
@@ -293,7 +293,7 @@ static const struct ScriptCommand s_gs6_g4_s0_station_sref_script[] = { /* 0x819
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(7),
     { 0x22, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     CALL_STATION(  1,  0),
     SELECT_EVENTS(0, 0),
     RET,
@@ -304,24 +304,24 @@ static const struct ScriptRef s_gs6_g4_s0_station_sref = { 402, 7, NULL /* EVENT
 static const struct ScriptCommand s_gs6_g4_s0_lives0_dlg0[] = { /* 0x8199c30 */
     DEBUGINFO,
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
     CALL_SCRIPT(WAIT_START_FUNC),
-    { 0x3c, 0x26,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_DOJO_FAILURE, 0, 0),
+    ALERT_CUE(3),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     RET,
 };
 
 static const struct ScriptCommand s_gs6_g4_s0_lives1_dlg0[] = { /* 0x8199ce0 */
     DEBUGINFO,
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(WAIT_START_FUNC),
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     RET,
 };
@@ -332,7 +332,7 @@ static const struct ScriptCommand s_gs6_g4_s0_lives2_dlg0[] = { /* 0x8199d60 */
     CALL_SCRIPT(INIT_PLAZA_SLEEP_TALK_FUNC),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x8e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     RET,
 };
 
@@ -343,7 +343,7 @@ static const struct ScriptCommand s_gs6_g5_s0_station_sref_script[] = { /* 0x819
     SELECT_ENTITIES(-1, -1),
     BGM_SWITCH(7),
     { 0x22, 0x01, -0x0001,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     CALL_STATION(  1,  0),
     SELECT_EVENTS(0, 0),
     RET,
@@ -354,24 +354,24 @@ static const struct ScriptRef s_gs6_g5_s0_station_sref = { 402, 7, NULL /* EVENT
 static const struct ScriptCommand s_gs6_g5_s0_lives0_dlg0[] = { /* 0x8199e7c */
     DEBUGINFO,
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(1),
     CALL_SCRIPT(WAIT_START_FUNC),
-    { 0x3c, 0x27,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_DOJO_ALL_CLEARED, 0, 0),
+    ALERT_CUE(3),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     RET,
 };
 
 static const struct ScriptCommand s_gs6_g5_s0_lives1_dlg0[] = { /* 0x8199f2c */
     DEBUGINFO,
     { 0x4f, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
     CALL_SCRIPT(WAIT_START_FUNC),
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(6),
     { 0x52, 0x00,  0x0000,  0x00001000,  0x00000000, NULL },
     RET,
 };
@@ -382,7 +382,7 @@ static const struct ScriptCommand s_gs6_g5_s0_lives2_dlg0[] = { /* 0x8199fac */
     CALL_SCRIPT(INIT_PLAZA_SLEEP_TALK_FUNC),
     { 0x2d, 0x07,  0x0002,  0x00000000,  0x00000000, NULL },
     { 0x8e, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     RET,
 };
 
