@@ -3,10 +3,10 @@
 
 struct MapFilesStruct
 {
-    /* 0x0 */ const u8 *fileName1;
-    /* 0x4 */ const u8 *fileName2;
-    /* 0x8 */ const u8 *fileName3;
-    /* 0xC */ const u8 *fileName4[4];
+    /* 0x0 */ const u8 *bplFileName;
+    /* 0x4 */ const u8 *bpcFileName;
+    /* 0x8 */ const u8 *bmaFileName;
+    /* 0xC */ const u8 *bpaFileNames[4];
 };
 
 enum {

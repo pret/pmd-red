@@ -16,7 +16,7 @@ extern const u8 gGroundWeatherSelect[];
 extern const s32 gUnknown_81177BC[];
 
 extern void sub_80A49E8(GroundBg *);
-extern void sub_80A456C(GroundBg *, u32, const s32 *);
+extern void SetCameraPositionForLayer(GroundBg *, u32, const s32 *);
 extern void sub_80A4580(GroundBg *, u32, s32 *);
 extern void sub_80A56C0(s32 *);
 extern void sub_80A4764(GroundBg *);
@@ -163,7 +163,7 @@ void sub_80A60D8(void)
             localArray[0] -= gUnknown_3001B74->unkC;
             localArray[1] += gUnknown_3001B74->unk10;
             sub_80A4580(gUnknown_3001B78, 0, localArray);
-            sub_80A456C(gUnknown_3001B78, 0, localArray);
+            SetCameraPositionForLayer(gUnknown_3001B78, 0, localArray);
             break;
         }
         case 11:
@@ -173,7 +173,7 @@ void sub_80A60D8(void)
             s32 localArray[2];
 
             sub_80A56C0(localArray);
-            sub_80A456C(gUnknown_3001B78,0,localArray);
+            SetCameraPositionForLayer(gUnknown_3001B78,0,localArray);
             break;
         }
         case 15: {
@@ -187,7 +187,7 @@ void sub_80A60D8(void)
             localArray[0] -= gUnknown_3001B74->unkC;
             localArray[1] = 0;
             sub_80A4580(gUnknown_3001B78, 0, localArray);
-            sub_80A456C(gUnknown_3001B78, 0, localArray);
+            SetCameraPositionForLayer(gUnknown_3001B78, 0, localArray);
             break;
         }
         case 16: {
@@ -201,7 +201,7 @@ void sub_80A60D8(void)
             localArray[0] -= gUnknown_3001B74->unkC;
             localArray[1] = 0;
             sub_80A4580(gUnknown_3001B78, 0, localArray);
-            sub_80A456C(gUnknown_3001B78, 0, localArray);
+            SetCameraPositionForLayer(gUnknown_3001B78, 0, localArray);
             break;
         }
         default: {
@@ -209,13 +209,13 @@ void sub_80A60D8(void)
             const s16 *puVar1 = gUnknown_811E5F4[gUnknown_3001B74->unk0];
             if (puVar1[0] == 0) {
                 sub_80A56C0(localArray);
-                sub_80A456C(gUnknown_3001B78,0,localArray);
+                SetCameraPositionForLayer(gUnknown_3001B78,0,localArray);
                 break;
             }
         }
         // NOTE: Fallthrough needed here.
         case 0:
-            sub_80A456C(gUnknown_3001B78, 0, gUnknown_81177BC);
+            SetCameraPositionForLayer(gUnknown_3001B78, 0, gUnknown_81177BC);
             break;
     }
 
