@@ -1,11 +1,31 @@
 #ifndef GUARD_GROUND_MAP_1_H
 #define GUARD_GROUND_MAP_1_H
 
-void GroundMap_ExecuteEnter(s16);
-void GroundMap_ExecuteEvent(s16 scriptIndex, u32);
-void GroundMap_ExecuteStation(s32 _map, s32 _group, s32 _sector, bool32 _setScriptState);
+// size: 0x24
+#include "structs/str_position.h"
 
-bool8 GroundMapNotifyAll(s16);
-bool8 sub_80A4D48(s16 index);
+typedef struct unkStruct_3001B74
+{
+    s16 unk0;
+    u8 unk2;
+    s32 unk4;
+    s32 unk8;
+    PixelPos unkC;
+    u32 unk14;
+    u32 unk18;
+    u32 unk1C;
+    u32 unk20;
+} unkStruct_3001B74;
+
+void GroundWeather_Select(s16);
+void nullsub_121(void);
+void nullsub_122(void);
+void nullsub_123(void);
+
+void sub_80A5E70(void);
+void sub_80A5E8C(u8);
+void sub_80A5EBC(void);
+void sub_80A5EDC(u8);
+void sub_80A60D8(void);
 
 #endif // GUARD_GROUND_MAP_1_H

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "debug.h"
 #include "map_script_table.h"
 
 static EWRAM_DATA s16 sScriptFileId = {0};
@@ -50,7 +51,7 @@ bool8 ChangeScriptFile(s16 a0)
 
 static const struct GroundScriptHeader sNullGroundScript = {0};
 
-const struct GroundScriptHeader *GetGroundScript(s16 mapId)
+const struct GroundScriptHeader *GetGroundScript(s16 mapId, const DebugLocation *unused)
 {
     if (mapId != -1)
         return gMapScriptTable[mapId];

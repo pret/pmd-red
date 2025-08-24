@@ -4,8 +4,9 @@
 #include "ground_bg.h"
 #include "ground_main.h"
 #include "ground_map.h"
-#include "ground_map_2.h"
+#include "ground_map_1.h"
 #include "ground_script.h"
+#include "ground_script_file.h"
 #include "memory.h"
 #include "ground_map_conversion_table.h"
 #include "code_800558C.h"
@@ -17,6 +18,16 @@ IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
 extern const SubStruct_52C gUnknown_8117324;
 extern const SubStruct_52C gUnknown_811733C;
 extern const SubStruct_52C gUnknown_8117354;
+
+struct MapToDungeonStruct
+{
+    s16 id;
+    DungeonLocation loc;
+    u32 unk8;
+};
+
+extern const struct MapToDungeonStruct gUnknown_81173C0[];
+
 extern const DebugLocation gUnknown_8117538[];
 extern const DebugLocation gUnknown_8117560;
 extern const u8 gUnknown_811756C[];
@@ -27,26 +38,30 @@ extern const DebugLocation gUnknown_8117644;
 extern const u8 gUnknown_8117650[];
 extern const DebugLocation gUnknown_8117698;
 extern const u8 gUnknown_81176A4[];
+extern const DebugLocation gUnknown_81176D0;
+extern const u8 gUnknown_81176DC[];
+extern const PixelPos gUnknown_81176F8;
 extern const u8 gUnknown_8117700[];
+extern const DebugLocation gUnknown_8117734;
+extern const u8 gUnknown_8117740[];
+extern const PixelPos gUnknown_8117754;
 extern const DebugLocation gUnknown_8117770;
 
 
-bool8 ChangeScriptFile(s32 a0);
-const struct GroundScriptHeader *GetGroundScript(s32 a0, const DebugLocation *);
-
-
-extern u8 sub_809D678(void *);
-extern bool8 GroundScriptNotify(void *, s32);
-
 extern const CallbackData gGroundScriptNullCallbacks;
 
-extern void sub_80A2D68(GroundBg *);
-extern void sub_80A2D88(GroundBg *);
-extern s16 HandleAction(Action *action, const DebugLocation *debug);
-extern void sub_80A4740(void *, s32, s32 *, u32);
-extern u32 sub_80A4720(void *, s32, s32 *);
+extern u8 sub_809D248(PixelPos *r0);
+
+extern bool8 sub_809D678(Action *);
+extern bool8 GroundScriptNotify(Action*, s32);
+
 extern u8 sub_80A46C0(GroundBg *, u32, s32, s32);
 extern u8 sub_80A4660(GroundBg *, u32, s32, s32);
+
+extern s16 HandleAction(Action *action, const DebugLocation *debug);
+
+void GroundMap_SelectDungeon(s32 mapId, const DungeonLocation *loc, u32 param_2);
+void sub_80A56D8(const PixelPos*);
 
 void AllocGroundMapAction(void)
 {
@@ -175,7 +190,7 @@ void GroundMap_ExecuteEnter(s16 param_1)
     GroundScript_ExecutePP(&gGroundMapAction->action, 0, &script, &gUnknown_8117698);
 }
 
-UNUSED static u8 sub_80A4D14(void)
+UNUSED static bool8 sub_80A4D14(void)
 {
     return sub_809D678(&gGroundMapAction->action);
 }
@@ -212,24 +227,6 @@ s16 GetAdjustedGroundMap(s32 mapId)
 
     return retMapId;
 }
-
-struct MapToDungeonStruct
-{
-    s16 id;
-    DungeonLocation loc;
-    u32 unk8;
-};
-
-extern const struct MapToDungeonStruct gUnknown_81173C0[];
-extern const u8 gUnknown_81176DC[];
-extern const u8 gUnknown_8117740[];
-extern const DebugLocation gUnknown_81176D0;
-extern const DebugLocation gUnknown_8117734;
-extern const PixelPos gUnknown_81176F8;
-extern const PixelPos gUnknown_8117754;
-
-void GroundMap_SelectDungeon(s32 mapId, const DungeonLocation *loc, u32 param_2);
-void sub_80A56D8(const PixelPos*);
 
 void GroundMap_Select(s32 mapId_)
 {
@@ -1063,8 +1060,6 @@ void sub_80A56C0(PixelPos *pos)
     sub_80A4558(gGroundMapDungeon_3001B70, 0, pos);
 }
 
-void sub_80A456C(GroundBg *groundBg, s32 id, const PixelPos *srcPos);
-
 void sub_80A56D8(const PixelPos *pos)
 {
     sub_80A456C(gGroundMapDungeon_3001B70, 0, pos);
@@ -1092,7 +1087,7 @@ UNUSED static const GroundConversionStruct *GetGroundConversionStruct(void)
     return &gGroundMapConversionTable[gGroundMapAction->groundMapId];
 }
 
-bool8 sub_80A5758(PixelPos *pos)
+UNUSED static bool8 sub_80A5758(PixelPos *pos)
 {
     if(gGroundMapDungeon_3001B70 != NULL)
     {
@@ -1214,12 +1209,12 @@ u8 sub_80A595C(s32 param_1, s32 param_2, s32 param_3)
     return sub_80A46C0(gGroundMapDungeon_3001B70, param_1_u32, param_2, param_3);
 }
 
-u16 sub_80A5984(s32 param_1, s32 *param_2)
+u16 sub_80A5984(s32 param_1, PixelPos *param_2)
 {
     return sub_80A4720(gGroundMapDungeon_3001B70, param_1, param_2);
 }
 
-void sub_80A59A0(s32 param_1, s32 *param_2, u32 param_3)
+void sub_80A59A0(s32 param_1, PixelPos *param_2, u32 param_3)
 {
     u32 param_3_u32 = (u16)param_3;
     sub_80A4740(gGroundMapDungeon_3001B70, param_1, param_2, param_3_u32);
@@ -1230,10 +1225,6 @@ void GroundMap_Action(void)
     nullsub_123();
     HandleAction((Action *)gGroundMapAction, &gUnknown_8117770);
 }
-
-extern u8 sub_809D248(PixelPos *r0);
-extern void sub_80A4580(GroundBg *, u32, PixelPos *);
-extern void sub_80A4764(GroundBg *);
 
 void sub_80A59DC(void)
 {
