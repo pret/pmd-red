@@ -18,7 +18,6 @@
 
 extern const FileArchive gGroundFileArchive;
 
-void sub_80A456C(GroundBg *groundBg, s32 id, const PixelPos *srcPos);
 static void CloseOpenedFiles(GroundBg *groundBg);
 static void sub_80A3EB0(SubStruct_488 *map488);
 static const u8 *sub_80A3908(u16 **dstArray, const void *src_, SubStruct_52C *a2, SubStruct_448 *a3);

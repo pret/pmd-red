@@ -6,7 +6,7 @@
 .include "src/textbox.o"
 .include "src/unk_ds_only_feature.o"
 .include "src/ground_map.o"
-.include "src/ground_map_2.o"
+.include "src/ground_map_1.o"
 .include "src/ground_sprite.o"
 .include "src/ground_lives.o"
 .include "src/ground_object.o"

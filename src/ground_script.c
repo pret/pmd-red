@@ -160,8 +160,8 @@ bool8 sub_80A87E0();
 s16 sub_80A8BFC(s16);
 void sub_80A8F50(const u8 *buffer, s32, s32 size);
 void sub_80A56A0(s32, s32);
-void sub_80A56F0(s32 *);
-void sub_80A5704(s32 *);
+void sub_80A56F0(PixelPos *);
+void sub_80A5704(PixelPos *);
 void sub_80A86C8(s16, s32);
 void sub_80AC1B0(s16, s32);
 void sub_80AD0C8(s16, s32);
@@ -3720,17 +3720,17 @@ s32 sub_80A14E8(Action *action, u8 idx, u32 r2, s32 r3)
             sub_80A56A0(0, 1);
             return 0;
         case 0x36: {
-            s32 sp_328[2];
-            sp_328[0] = r2;
-            sp_328[1] = r3;
-            sub_80A56F0(sp_328);
+            PixelPos sp_328;
+            sp_328.x = r2;
+            sp_328.y = r3;
+            sub_80A56F0(&sp_328);
             return 0;
         }
         case 0x37: {
-            s32 sp_330[2];
-            sp_330[0] = r2;
-            sp_330[1] = r3;
-            sub_80A5704(sp_330);
+            PixelPos sp_330;
+            sp_330.x = r2;
+            sp_330.y = r3;
+            sub_80A5704(&sp_330);
             return 0;
         }
         case 0x39:

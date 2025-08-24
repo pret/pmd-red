@@ -13,12 +13,14 @@
 #include "debug.h"
 #include "event_flag.h"
 #include "ground_main.h"
-#include "ground_map_2.h"
+#include "ground_map.h"
+#include "ground_map_1.h"
 #include "play_time.h"
 #include "pokemon.h"
 #include "text_util.h"
 #include "ground_map_conversion_table.h"
 #include "ground_lives_helper.h"
+#include "ground_script_file.h"
 #include "script_item.h"
 #include "unk_ds_only_feature.h"
 #include "textbox.h"
@@ -68,24 +70,20 @@ extern bool8 sub_809AFAC(void);
 extern bool8 sub_80048BC(void);
 extern u8 sub_80023E4(u32);
 extern bool8 sub_8099B94(void);
-extern void FreeGroundMapAction(void);
 extern void FreeGroundLives(void);
 extern void FreeGroundObjects(void);
 extern void FreeGroundEffects(void);
 extern void FreeGroundEvents(void);
 extern void sub_80A658C(void);
 extern void sub_809D508(void);
-extern void sub_80A7754(void);
 extern void nullsub_119(void);
 extern void sub_8099768(void);
 extern void nullsub_103(void);
 extern void sub_8099648(void);
 extern void sub_809975C(void);
 extern void sub_809D0AC(void);
-extern void sub_80A7744(void);
 extern void sub_809D490(void);
 extern void sub_80A62F0(void);
-extern void AllocGroundMapAction(void);
 extern void AllocGroundEvents(void);
 extern void AllocGroundLives(void);
 extern void AllocGroundObjects(void);
@@ -109,7 +107,6 @@ extern void sub_80A5E70(void);
 extern void sub_809B638(void);
 extern void sub_80A73EC(void);
 extern void sub_8099750(void);
-extern void GroundMap_Reset(void);
 extern void sub_809D0BC(void);
 extern void DeleteGroundEvents(void);
 extern void DeleteGroundLives(void);
@@ -121,9 +118,7 @@ extern void xxx_call_update_bg_sound_input(void);
 extern void sub_80A6E68(void);
 extern void sub_80060EC(void);
 extern void sub_809977C(void);
-extern void GroundMap_ExecuteEvent(s32, u32);
 extern void UpdateFadeInTile(s32);
-extern void GroundMap_Action(void);
 extern void sub_8098C58(void);
 extern void sub_8001D88(void);
 extern u32 GroundMainGameCancelRequest(u32 r0);

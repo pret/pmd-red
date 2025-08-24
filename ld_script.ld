@@ -45,7 +45,8 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        asm/crt0.o(.text);
+        src/rom_header.o(.text);
+        src/crt0.o(.text);
         src/code_80001DC.o(.text);
         src/arm_funcs.o(.text);
         src/main_loops.o(.text);
@@ -345,9 +346,7 @@ SECTIONS {
         src/ground_place.o(.text);
         src/ground_bg.o(.text);
         src/ground_map.o(.text);
-        asm/ground_map_1.o(.text);
         src/ground_map_1.o(.text);
-        src/ground_map_2.o(.text);
         src/ground_sprite.o(.text);
         src/ground_sprite_data.o(.text);
         src/ground_sprite_monster.o(.text);
