@@ -345,8 +345,6 @@ SECTIONS {
         src/ground_place.o(.text);
         src/ground_bg.o(.text);
         src/ground_map.o(.text);
-        asm/ground_map_1.o(.text);
-        src/ground_map_1.o(.text);
         src/ground_map_2.o(.text);
         src/ground_sprite.o(.text);
         src/ground_sprite_data.o(.text);

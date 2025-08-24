@@ -14,34 +14,39 @@
 IWRAM_INIT GroundMapAction *gGroundMapAction = {NULL};
 IWRAM_INIT GroundBg *gGroundMapDungeon_3001B70 = {NULL};
 
-extern GroundMapAction *gGroundMapAction;
-
 extern const SubStruct_52C gUnknown_8117324;
-extern const SubStruct_52C gUnknown_8117354;
 extern const SubStruct_52C gUnknown_811733C;
-extern const u8 gUnknown_81176A4[];
-extern const u8 gUnknown_8117700[];
+extern const SubStruct_52C gUnknown_8117354;
+extern const DebugLocation gUnknown_8117538[];
+extern const DebugLocation gUnknown_8117560;
+extern const u8 gUnknown_811756C[];
 extern const u8 gUnknown_8117594[];
-extern const u8 gUnknown_81175EC[];
 extern const DebugLocation gUnknown_81175E0;
+extern const u8 gUnknown_81175EC[];
 extern const DebugLocation gUnknown_8117644;
 extern const u8 gUnknown_8117650[];
 extern const DebugLocation gUnknown_8117698;
+extern const u8 gUnknown_81176A4[];
+extern const u8 gUnknown_8117700[];
+extern const DebugLocation gUnknown_8117770;
+
 
 bool8 ChangeScriptFile(s32 a0);
-const struct GroundScriptHeader *GetGroundScript(s32 a0, DebugLocation *);
+const struct GroundScriptHeader *GetGroundScript(s32 a0, const DebugLocation *);
 
-extern DebugLocation gUnknown_8117560;
-extern const u8 gUnknown_811756C[];
 
 extern u8 sub_809D678(void *);
 extern bool8 GroundScriptNotify(void *, s32);
 
 extern const CallbackData gGroundScriptNullCallbacks;
-extern const DebugLocation gUnknown_8117538[];
 
 extern void sub_80A2D68(GroundBg *);
 extern void sub_80A2D88(GroundBg *);
+extern s16 HandleAction(Action *action, const DebugLocation *debug);
+extern void sub_80A4740(void *, s32, s32 *, u32);
+extern u32 sub_80A4720(void *, s32, s32 *);
+extern u8 sub_80A46C0(GroundBg *, u32, s32, s32);
+extern u8 sub_80A4660(GroundBg *, u32, s32, s32);
 
 void AllocGroundMapAction(void)
 {
@@ -1148,3 +1153,235 @@ bool8 sub_80A579C(PixelPos *pos1, PixelPos *pos2)
     }
     return FALSE;
 }
+
+bool8 CheckMapCollision_80A585C(PixelPos *pixPos1,PixelPos *boundary)
+{
+    u8 *currPtr;
+    int i, j;
+    u8 *ptr;
+
+    ptr = (void *)gGroundMapDungeon_3001B70->unk544 + ((pixPos1->y * 256) + pixPos1->x + 0x405);
+
+    i = boundary->y;
+
+    if (gGroundMapDungeon_3001B70->unk544 == NULL) {
+        return TRUE;
+    }
+
+    for (i = boundary->y; i > 0; i--) {
+        for (j = boundary->x, currPtr = ptr; j > 0; j--) {
+            if ((*(currPtr++) & 0x80) != 0) 
+                return TRUE;
+        }
+        ptr += 256;
+    }
+    return FALSE;
+}
+
+bool8 sub_80A58C8(PixelPos *pixPos1,PixelPos *boundary)
+{
+    u8 *currPtr;
+    int i, j;
+    u8 *ptr;
+
+    ptr = (void *)gGroundMapDungeon_3001B70->unk544 + ((pixPos1->y * 256) + pixPos1->x + 0x405);
+
+    i = boundary->y;
+
+    if (gGroundMapDungeon_3001B70->unk544 == NULL) {
+        return TRUE;
+    }
+
+    for (i = boundary->y; i > 0; i--) {
+        for (j = boundary->x, currPtr = ptr; j > 0; j--) {
+            if ((*(currPtr++) & 0x40) != 0) 
+                return TRUE;
+        }
+        ptr += 256;
+    }
+    return FALSE;
+}
+
+u8 sub_80A5934(s32 param_1, s32 param_2, s32 param_3)
+{
+    u32 param_1_u32 = (u8)param_1;
+    return sub_80A4660(gGroundMapDungeon_3001B70, param_1_u32, param_2, param_3);
+}
+
+u8 sub_80A595C(s32 param_1, s32 param_2, s32 param_3)
+{
+    u32 param_1_u32 = (u8)param_1;
+    return sub_80A46C0(gGroundMapDungeon_3001B70, param_1_u32, param_2, param_3);
+}
+
+u16 sub_80A5984(s32 param_1, s32 *param_2)
+{
+    return sub_80A4720(gGroundMapDungeon_3001B70, param_1, param_2);
+}
+
+void sub_80A59A0(s32 param_1, s32 *param_2, u32 param_3)
+{
+    u32 param_3_u32 = (u16)param_3;
+    sub_80A4740(gGroundMapDungeon_3001B70, param_1, param_2, param_3_u32);
+}
+
+void GroundMap_Action(void)
+{
+    nullsub_123();
+    HandleAction((Action *)gGroundMapAction, &gUnknown_8117770);
+}
+
+extern u8 sub_809D248(PixelPos *r0);
+extern void sub_80A4580(GroundBg *, u32, PixelPos *);
+extern void sub_80A4764(GroundBg *);
+
+void sub_80A59DC(void)
+{
+    if (gGroundMapDungeon_3001B70 != NULL) {
+        PixelPos pixPos;
+
+        if (sub_809D248(&pixPos) == 0) {
+            pixPos.x = 0;
+            pixPos.y = 0;
+        }
+
+        switch (gGroundMapAction->groundMapId) {
+            case 0xA2:
+            case 0xA3:
+            case 0xDF: {
+                PixelPos pixPos2;
+
+                gGroundMapAction->unkF4 += 2;
+                gGroundMapAction->unkF8.y += gGroundMapAction->unkF4 / 4;
+                gGroundMapAction->unkF4 &= 3;
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
+                pixPos2 = (PixelPos) { pixPos.x, pixPos.y + gGroundMapAction->unkF8.y };
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                pixPos2.x = pixPos.x;
+                pixPos2.y = pixPos.y - gGroundMapAction->unkF8.y;
+                sub_80A4580(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                break;
+            }
+            case 0xA8:
+            case 0xAA: {
+                PixelPos pixPos2;
+
+                gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
+                gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
+                gGroundMapAction->unkF0 %= 8;
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
+                pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y };
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                break;
+            }
+            case 0xAE: {
+                PixelPos pixPos2;
+
+                gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
+                gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
+                gGroundMapAction->unkF0 %= 8;
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
+                pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y };
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                break;
+            }
+            case 0xAB: {
+                PixelPos pixPos2 = pixPos;
+
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                break;
+            }
+            case 0xAF: {
+                PixelPos pixPos2;
+
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
+                gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
+                gGroundMapAction->unkF4 += gGroundMapAction->unkE8.y;
+                gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
+                gGroundMapAction->unkF8.y += gGroundMapAction->unkF4 / 8;
+                gGroundMapAction->unkF0 %= 8;
+                gGroundMapAction->unkF4 %= 8;
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
+                pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y + gGroundMapAction->unkF8.y};
+                sub_80A4580(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                break;
+            }
+            case 0xB0: {
+                PixelPos pixPos2;
+
+                gGroundMapAction->unkF0 += gGroundMapAction->unkE8.x;
+                gGroundMapAction->unkF4 += gGroundMapAction->unkE8.y;
+                gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
+                gGroundMapAction->unkF8.y += gGroundMapAction->unkF4 / 8;
+                gGroundMapAction->unkF0 %= 8;
+                gGroundMapAction->unkF4 %= 8;
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &gGroundMapAction->unkF8);
+                pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y + gGroundMapAction->unkF8.y};
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                break;
+            }
+            case 0xBA: {
+                PixelPos pixPos2;
+
+                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos);
+                gGroundMapAction->unkF0++;
+                gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 4;
+                gGroundMapAction->unkF0 &= 3;
+                sub_80A4580(gGroundMapDungeon_3001B70, 1, &gGroundMapAction->unkF8);
+                pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y};
+                sub_80A4580(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos2);
+                break;
+            }
+            case 4: {
+                PixelPos pixPos2;
+
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
+                gGroundMapAction->unkF0++;
+                gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
+                gGroundMapAction->unkF0 &= 7;
+                sub_80A4580(gGroundMapDungeon_3001B70, 1, &gGroundMapAction->unkF8);
+                pixPos2 = (PixelPos) { pixPos.x + gGroundMapAction->unkF8.x, pixPos.y};
+                sub_80A4580(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                break;
+            }
+            case 0xE0: {
+                PixelPos pixPos2;
+
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
+                gGroundMapAction->unkF0++;
+                gGroundMapAction->unkF8.x += gGroundMapAction->unkF0 / 8;
+                gGroundMapAction->unkF0 &= 7;
+                sub_80A4580(gGroundMapDungeon_3001B70, 1, &gGroundMapAction->unkF8);
+                pixPos2 = (PixelPos) { gGroundMapAction->unkF8.x, pixPos.y};
+                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                break;
+            }
+            case 0xA1: {
+                PixelPos pixPos2;
+
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
+                pixPos2 = (PixelPos) {0, 0};
+                sub_80A456C(gGroundMapDungeon_3001B70, 1, &pixPos2);
+                break;
+            }
+            default:
+                sub_80A456C(gGroundMapDungeon_3001B70, 0, &pixPos);
+                break;
+        }
+
+        sub_80A4764(gGroundMapDungeon_3001B70);
+    }
+
+    sub_80A60D8();
+}
+
