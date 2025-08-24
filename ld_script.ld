@@ -45,7 +45,8 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        asm/crt0.o(.text);
+        src/rom_header.o(.text);
+        src/crt0.o(.text);
         src/code_80001DC.o(.text);
         src/arm_funcs.o(.text);
         src/main_loops.o(.text);

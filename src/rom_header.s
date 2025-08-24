@@ -1,4 +1,9 @@
-	.global RomHeaderNintendoLogo
+
+	.global Start
+Start: @ 8000000
+	b Init
+
+    .global RomHeaderNintendoLogo
 RomHeaderNintendoLogo:
 	.space 156
 
