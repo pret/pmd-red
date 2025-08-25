@@ -1035,7 +1035,22 @@ SECTIONS {
     {
         src/ground_sbin.o(.rodata);
         src/ground_files_table.o(.rodata);
-        data/ground_sbin.o(.rodata);
+        src/ground_map_files_1.o(.rodata);
+        src/ground_map_files_2.o(.rodata);
+        src/ground_map_files_3.o(.rodata);
+        src/ground_map_files_4.o(.rodata);
+        src/ground_map_files_5.o(.rodata);
+        src/ground_map_files_6.o(.rodata);
+        src/ground_map_files_7.o(.rodata);
+        src/ground_map_files_8.o(.rodata);
+        src/ground_map_files_9.o(.rodata);
+        src/ground_map_files_10.o(.rodata);
+    } > ROM =0
+    
+    unk_9D02950_section :
+    ALIGN(4)
+    {
+        data/unk_9D02950.o(.rodata);
     } > ROM =0
 
     ornament_sbin_section :

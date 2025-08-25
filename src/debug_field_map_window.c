@@ -135,7 +135,7 @@ static void PrintCurrentPageText(void)
         const struct MapFilesStruct *mapFilesPtr = &gMapFilesTable[mapConversionPtr->mapFileTableId];
 
         y = GetMenuEntryYCoord(&sDebugWindow->m.input, i);
-        PrintStringOnWindow(8, y, mapFilesPtr->fileName1, sDebugWindow->m.menuWinId, 0);
+        PrintStringOnWindow(8, y, mapFilesPtr->bplFileName, sDebugWindow->m.menuWinId, 0);
 
         y = GetMenuEntryYCoord(&sDebugWindow->m.input, i);
         PrintStringOnWindow(62, y, mapConversionPtr->text, sDebugWindow->m.menuWinId, 0);

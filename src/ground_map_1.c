@@ -157,7 +157,7 @@ void sub_80A60D8(void)
             localArray.x -= gUnknown_3001B74->unkC.x;
             localArray.y += gUnknown_3001B74->unkC.y;
             sub_80A4580(gUnknown_3001B78, 0, &localArray);
-            sub_80A456C(gUnknown_3001B78, 0, &localArray);
+            SetCameraPositionForLayer(gUnknown_3001B78, 0, &localArray);
             break;
         }
         case 11:
@@ -167,7 +167,7 @@ void sub_80A60D8(void)
             PixelPos localArray;
 
             sub_80A56C0(&localArray);
-            sub_80A456C(gUnknown_3001B78,0,&localArray);
+            SetCameraPositionForLayer(gUnknown_3001B78,0,&localArray);
             break;
         }
         case 15: {
@@ -181,7 +181,7 @@ void sub_80A60D8(void)
             localArray.x -= gUnknown_3001B74->unkC.x;
             localArray.y = 0;
             sub_80A4580(gUnknown_3001B78, 0, &localArray);
-            sub_80A456C(gUnknown_3001B78, 0, &localArray);
+            SetCameraPositionForLayer(gUnknown_3001B78, 0, &localArray);
             break;
         }
         case 16: {
@@ -195,7 +195,7 @@ void sub_80A60D8(void)
             localArray.x -= gUnknown_3001B74->unkC.x;
             localArray.y = 0;
             sub_80A4580(gUnknown_3001B78, 0, &localArray);
-            sub_80A456C(gUnknown_3001B78, 0, &localArray);
+            SetCameraPositionForLayer(gUnknown_3001B78, 0, &localArray);
             break;
         }
         default: {
@@ -203,13 +203,13 @@ void sub_80A60D8(void)
             const s16 *puVar1 = gUnknown_811E5F4[gUnknown_3001B74->unk0];
             if (puVar1[0] == 0) {
                 sub_80A56C0(&localArray);
-                sub_80A456C(gUnknown_3001B78,0,&localArray);
+                SetCameraPositionForLayer(gUnknown_3001B78,0,&localArray);
                 break;
             }
         }
         // NOTE: Fallthrough needed here.
         case 0:
-            sub_80A456C(gUnknown_3001B78, 0, &gUnknown_81177BC);
+            SetCameraPositionForLayer(gUnknown_3001B78, 0, &gUnknown_81177BC);
             break;
     }
 
