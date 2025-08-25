@@ -2,16 +2,8 @@
 
 	.syntax unified
 
-	.global Start
 
 	.text
-
-	.arm
-
-Start: @ 8000000
-	b Init
-
-	#include "rom_header.inc"
 
 	.arm
 	.align 2, 0

@@ -149,7 +149,7 @@ s32 GetNumberOfFilledInventorySlots(void)
 }
 
 // arm9.bin::02060FB0
-bool8 IsThrowableItem(u8 id)
+bool8 IsThrownItem(u8 id)
 {
   if ((GetItemCategory(id) != CATEGORY_THROWN_LINE) && (GetItemCategory(id) != CATEGORY_THROWN_ARC))
     return FALSE;
@@ -163,9 +163,9 @@ void ItemIdToItem(Item *item, u8 id, bool8 makeSticky)
     if (id != ITEM_NOTHING) {
         item->flags = ITEM_FLAG_EXISTS;
         item->id = id;
-        if (IsThrowableItem(id)) {
-            s32 min = GetSpawnAmountRange(id, MIN_SPAWN_AMOUNT);
-            s32 max = GetSpawnAmountRange(id, MAX_SPAWN_AMOUNT);
+        if (IsThrownItem(id)) {
+            s32 min = GetThrownItemQuantityLimit(id, MIN_SPAWN_AMOUNT);
+            s32 max = GetThrownItemQuantityLimit(id, MAX_SPAWN_AMOUNT);
             item->quantity = RandRange(min, max);
         }
         else if (GetItemCategory(id) == CATEGORY_POKE) {
@@ -187,13 +187,13 @@ void ItemIdToItem(Item *item, u8 id, bool8 makeSticky)
 }
 
 // arm9.bin::02060E80
-void ItemIdToBulkItem(BulkItem *dst, u8 id)
+void InitBulkItem(BulkItem *dst, u8 id)
 {
     if (id != ITEM_NOTHING) {
         dst->id = id;
-        if (IsThrowableItem(id)) {
-            s32 min = GetSpawnAmountRange(id, MIN_SPAWN_AMOUNT);
-            s32 max = GetSpawnAmountRange(id, MAX_SPAWN_AMOUNT);
+        if (IsThrownItem(id)) {
+            s32 min = GetThrownItemQuantityLimit(id, MIN_SPAWN_AMOUNT);
+            s32 max = GetThrownItemQuantityLimit(id, MAX_SPAWN_AMOUNT);
             dst->quantity = RandRange(min, max);
         }
         else if (GetItemCategory(id) == CATEGORY_POKE)
@@ -215,7 +215,7 @@ void BulkItemToItem(Item *dst, BulkItem *src)
     if (src->id != ITEM_NOTHING) {
         dst->flags = ITEM_FLAG_EXISTS;
         dst->id = src->id;
-        is_throwable = IsThrowableItem(dst->id);
+        is_throwable = IsThrownItem(dst->id);
         if (is_throwable != 0 || GetItemCategory(dst->id) == CATEGORY_POKE)
             dst->quantity = src->quantity;
         else if (dst->id == ITEM_TM_USED_TM)
@@ -251,7 +251,7 @@ s32 GetStackBuyValue(Item *param_1)
 {
     if (param_1->id == ITEM_POKE)
         return GetMoneyValue(param_1);
-    else if (IsThrowableItem(param_1->id))
+    else if (IsThrownItem(param_1->id))
         return gItemParametersData[param_1->id].buyPrice * param_1->quantity;
     else
         return gItemParametersData[param_1->id].buyPrice;
@@ -262,29 +262,29 @@ s32 GetStackSellValue(Item *param_1)
 {
     if (param_1->id == ITEM_POKE)
         return GetMoneyValue(param_1);
-    else if (IsThrowableItem(param_1->id))
+    else if (IsThrownItem(param_1->id))
         return gItemParametersData[param_1->id].sellPrice * param_1->quantity;
     else
         return gItemParametersData[param_1->id].sellPrice;
 }
 
 // arm9.bin::02060C7C
-s32 GetStackBuyPrice(Item *param_1)
+s32 GetActualBuyPrice(Item *param_1)
 {
-    if (!CanSellItem(param_1->id))
+    if (!IsShoppableItem(param_1->id))
         return 0;
-    else if (IsThrowableItem(param_1->id))
+    else if (IsThrownItem(param_1->id))
         return gItemParametersData[param_1->id].buyPrice * param_1->quantity;
     else
         return gItemParametersData[param_1->id].buyPrice;
 }
 
 // arm9.bin::02060C18
-s32 GetStackSellPrice(Item *param_1)
+s32 GetActualSellPrice(Item *param_1)
 {
-    if (!CanSellItem(param_1->id))
+    if (!IsShoppableItem(param_1->id))
         return 0;
-    else if (IsThrowableItem(param_1->id))
+    else if (IsThrownItem(param_1->id))
         return gItemParametersData[param_1->id].sellPrice * param_1->quantity;
     else
         return gItemParametersData[param_1->id].sellPrice;
@@ -321,7 +321,7 @@ u32 GetItemActionType(u8 id)
 }
 
 // arm9.bin::02060B84
-u32 GetSpawnAmountRange(u8 id, u32 rangeIndex)
+u32 GetThrownItemQuantityLimit(u8 id, u32 rangeIndex)
 {
     return gItemParametersData[id].spawnAmountRange[rangeIndex];
 }
@@ -757,7 +757,7 @@ u32 sub_80913E0(Item* slot, u32 windowId, STATUSTEXTS(statuses))
 }
 
 // arm9.bin::0205FF28
-bool8 CanSellItem(u32 id)
+bool8 IsShoppableItem(u32 id)
 {
     u8 id_;
     id = (u8)id;
@@ -975,7 +975,7 @@ bool8 HasGummiItem(void)
 // arm9.bin::0205FB18
 void MoveToStorage(Item* slot)
 {
-    if (IsThrowableItem(slot->id))
+    if (IsThrownItem(slot->id))
         gTeamInventoryRef->teamStorage[slot->id] += slot->quantity;
     else
         gTeamInventoryRef->teamStorage[slot->id]++;
@@ -1092,7 +1092,7 @@ bool8 AddKecleonShopItem(u8 itemIndex)
     BulkItem held;
     s32 i;
 
-    ItemIdToBulkItem(&held, itemIndex); // initialize
+    InitBulkItem(&held, itemIndex); // initialize
 
     for (i = 0; i < MAX_KECLEON_ITEM_SHOP_ITEMS; i++) {
         if (!gTeamInventoryRef->kecleonShopItems[i].id) {
@@ -1208,7 +1208,7 @@ static bool8 AddKecleonWareItem(u8 itemIndex)
     BulkItem held;
     s32 i;
 
-    ItemIdToBulkItem(&held, itemIndex); // initialize
+    InitBulkItem(&held, itemIndex); // initialize
 
     for (i = 0; i < MAX_KECLEON_WARE_SHOP_ITEMS; i++) {
         if (!gTeamInventoryRef->kecleonWareItems[i].id) {

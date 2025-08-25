@@ -39,10 +39,10 @@
 #include "trap.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_projectile_throw.h"
+#include "dungeon_engine.h"
 
-extern void sub_8071DA4(Entity *);
+extern void EnemyEvolution(Entity *);
 extern void sub_8057588(Entity * pokemon, u8 param_2);
-extern bool8 sub_8045888(Entity *);
 extern Item *sub_8044D90(Entity *, s32, u32);
 u8 sub_8048D50();
 void sub_8042208(Entity *pokemon, u8 r1);
@@ -51,7 +51,6 @@ void sub_80479B8();
 extern void sub_807AB38(Entity *, u32);
 extern Entity * sub_8044DA4(Entity *param_1,int param_2);
 extern void sub_8044DF0(Entity *, u32, u32);
-extern bool8 sub_8044B28(void);
 Entity *sub_806773C(Entity *entity);
 void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
 void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);
@@ -62,7 +61,7 @@ extern void sub_8084448(Entity *entity);
 void HandlePickUpPlayerAction(Entity *entity)
 {
   GetEntInfo(entity)->action.actionParameters[0].actionUseIndex = 1;
-  PickUpItemFromPos(&entity->pos,0);
+  TryLeaderItemPickUp(&entity->pos,0);
 }
 
 void HandleSetItemAction(Entity *param_1, bool8 param_2)
@@ -171,7 +170,7 @@ void HandleGiveItemAction(Entity *param_1)
       item2.flags &= ~(ITEM_FLAG_SET);
       sub_8044DF0(param_1,0,100);
       if (bVar3) {
-        AddItemToDungeonAt(&param_1->pos,&item1,1);
+        SpawnItem(&param_1->pos,&item1,1);
       }
       else {
         AddItemToInventory(&item1);
@@ -317,7 +316,7 @@ void HandlePlaceItemAction(Entity *entity)
     }
     else {
         const Tile *tile = GetTile(entity->pos.x, entity->pos.y);
-        if ((tile->terrainType & TERRAIN_TYPE_STAIRS)) {
+        if ((tile->terrainFlags & TERRAIN_TYPE_STAIRS)) {
             LogMessageByIdWithPopupCheckUser(entity,gUnknown_80F8E04);
         }
         else if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL) {
@@ -329,7 +328,7 @@ void HandlePlaceItemAction(Entity *entity)
         else {
             item->flags &= ~(ITEM_FLAG_SET);
             sub_8045BF8(gFormatBuffer_Items[0],item);
-            if (AddItemToDungeonAt(&entity->pos,item,1) == 0) {
+            if (SpawnItem(&entity->pos,item,1) == 0) {
                 LogMessageByIdWithPopupCheckUser(entity,gUnknown_80F8E04);
             }
             else {
@@ -375,9 +374,9 @@ void sub_8066E14(Entity *entity)
             newItems[0].flags &= ~(ITEM_FLAG_SET);
             newItems[1].flags &= ~(ITEM_FLAG_SET);
 
-            RemoveItemFromDungeonAt(&info->action.actionParameters[0].itemPos,1);
+            RemoveGroundItem(&info->action.actionParameters[0].itemPos,1);
             ZeroOutItem(item[1]);
-            if (!AddItemToDungeonAt(&info->action.actionParameters[0].itemPos,&newItems[1],1)) {
+            if (!SpawnItem(&info->action.actionParameters[0].itemPos,&newItems[1],1)) {
                 LogMessageByIdWithPopupCheckUser(entity,gNothingCanBePutDownHere);
             }
             else {
@@ -420,16 +419,16 @@ void sub_8066FA4(Entity *entity)
     else {
         Item newItems[2];
 
-        item[1] = GetItemData(tile->object);
+        item[1] = GetItemInfo(tile->object);
         sub_8045BF8(gFormatBuffer_Items[1],item[1]);
         newItems[0] = *item[0];
         newItems[1] = *item[1];
         newItems[0].flags &= ~(ITEM_FLAG_SET);
         newItems[1].flags &= ~(ITEM_FLAG_SET);
 
-        RemoveItemFromDungeonAt(&entity->pos,1);
+        RemoveGroundItem(&entity->pos,1);
         ZeroOutItem(item[0]);
-        if (!AddItemToDungeonAt(&entity->pos, &newItems[0],1)) {
+        if (!SpawnItem(&entity->pos, &newItems[0],1)) {
             LogMessageByIdWithPopupCheckUser(entity,gNothingCanBePutDownHere);
         }
         else {
@@ -498,7 +497,7 @@ void sub_80671A0(Entity *entity)
 
         if (info->action.actionParameters[0].actionUseIndex == 0x80) {
             item = NULL;
-            RemoveItemFromDungeonAt(&info->action.actionParameters[0].itemPos, 1);
+            RemoveGroundItem(&info->action.actionParameters[0].itemPos, 1);
         }
 
         r7 = TRUE;
@@ -515,7 +514,7 @@ void sub_80671A0(Entity *entity)
         else {
             if (info->action.actionParameters[0].actionUseIndex == 0x80) {
                 newItem.quantity--;
-                AddItemToDungeonAt(&info->action.actionParameters[0].itemPos, &newItem, 1);
+                SpawnItem(&info->action.actionParameters[0].itemPos, &newItem, 1);
             }
             else {
                 item->quantity--;
@@ -526,7 +525,7 @@ void sub_80671A0(Entity *entity)
             info->action.direction = DungeonRandInt(NUM_DIRECTIONS);
         }
 
-        if (sub_8045888(entity)) {
+        if (ShouldDisplayEntity(entity)) {
             s32 i;
             s32 dir = info->action.direction;
             sub_80421C0(entity, 0x164);
@@ -743,7 +742,7 @@ void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2)
         u8 tempText[64];
 
         strncpy(tempText, gFormatBuffer_Monsters[0], sizeof(tempText));
-        sub_8068FE0(targetEntity, 0x21D, 0);
+        HandleFaint(targetEntity, 0x21D, 0);
         strncpy(gFormatBuffer_Monsters[0], tempText, sizeof(tempText));
         DisplayDungeonMessage(NULL, stringPtr2, TRUE);
     }
@@ -757,7 +756,7 @@ void HandleUseMovePlayerAction(Entity *entity)
         EntityInfo *info = GetEntInfo(entity);
 
         sub_8055A00(entity, info->action.actionParameters[1].actionUseIndex, 1, 0, 0);
-        if (sub_8044B28()) {
+        if (IsFloorOver()) {
             break;
         }
         if (info->unk159 != 0) {
@@ -767,7 +766,7 @@ void HandleUseMovePlayerAction(Entity *entity)
     }
 
     sub_8057588(entity, 1);
-    if (!sub_8044B28()) {
+    if (!IsFloorOver()) {
         if (EntityIsValid(entity)) {
             sub_806A9B4(entity, GetEntInfo(entity)->action.actionParameters[1].actionUseIndex);
         }
@@ -826,7 +825,7 @@ void sub_8067904(Entity *entity, u16 moveId)
                 pos.y = entity->pos.y + gAdjacentTileOffsets[info->action.direction].y;
                 sub_807FE44(&pos, 1);
             }
-            sub_8071DA4(entity);
+            EnemyEvolution(entity);
         }
     }
 }

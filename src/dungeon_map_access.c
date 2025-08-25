@@ -183,7 +183,7 @@ void sub_80498A8(s32 x,s32 y)
     return;
   }
   r7 = 0;
-  sp_0x20 = GetTile(x, y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+  sp_0x20 = GetTile(x, y)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
   if (gDungeon->tileset >= 0x40) {
     if ((0x17 >= x) && (0x17 >= y)) {
         GetTileMut(x,y)->unk8 = gDungeon->unk12C24[y * 0x18 + x];
@@ -194,14 +194,14 @@ void sub_80498A8(s32 x,s32 y)
   }
   else
   {
-    sp_0x0 = GetTile(x,y + 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    sp_0x4 = GetTile(x + 1,y + 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    sp_0x8 = GetTile(x + 1,y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    sp_0xC = GetTile(x + 1,y -1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    sp_0x10 = GetTile(x, y -1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    sp_0x14 = GetTile(x - 1,y -1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    sp_0x18 = GetTile(x - 1, y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    r1 =  GetTile(x - 1,y + 1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x0 = GetTile(x,y + 1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x4 = GetTile(x + 1,y + 1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x8 = GetTile(x + 1,y)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0xC = GetTile(x + 1,y -1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x10 = GetTile(x, y -1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x14 = GetTile(x - 1,y -1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    sp_0x18 = GetTile(x - 1, y)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    r1 =  GetTile(x - 1,y + 1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
     sp_0x1C = r1;
     if (sp_0x20 == 1) {
       r7 = 0xFF;
@@ -351,15 +351,15 @@ void sub_8049BB0(s32 x, s32 y)
     flags[2] = 0;
     flags[3] = 0;
 
-    terrainFlags = GetTile(x,   y+1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    terrainFlags = GetTile(x,   y+1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
     var_4C[0] = terrainFlags;
-    var_4C[1] = GetTile(x+1, y+1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    var_4C[2] = GetTile(x+1, y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    var_4C[3] = GetTile(x+1, y-1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    var_4C[4] = GetTile(x,   y-1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    var_4C[5] = GetTile(x-1, y-1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    var_4C[6] = GetTile(x-1, y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    var_4C[7] = GetTile(x-1, y+1)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[1] = GetTile(x+1, y+1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[2] = GetTile(x+1, y)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[3] = GetTile(x+1, y-1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[4] = GetTile(x,   y-1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[5] = GetTile(x-1, y-1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[6] = GetTile(x-1, y)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    var_4C[7] = GetTile(x-1, y+1)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
 
     if (var_4C[0] == TERRAIN_TYPE_NORMAL)
         flags[CROSSABLE_TERRAIN_REGULAR] |= 1;
@@ -475,7 +475,7 @@ static const s16 gUnknown_80F6C06[] = {
     60, 60, 60, 61, 61, 61, 62, 62, 62, 63, 63, 63
 };
 
-void sub_8049ED4(void)
+void UpdateTrapsVisibility(void)
 {
     bool32 hallucinating, showInvisibleTrapsMonsters;
     u16 *src;
@@ -503,16 +503,16 @@ void sub_8049ED4(void)
         var_44 = gUnknown_80F6C06[30 + y];
         r7 = r10 + (r8 * 3);
         tile = GetTile(var_48, var_44);
-        if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
+        if (tile->terrainFlags & TERRAIN_TYPE_UNK_x1000) {
             src = &dungeon->unk12A18[26][r7];
         }
-        else if (tile->terrainType & TERRAIN_TYPE_SHOP) {
+        else if (tile->terrainFlags & TERRAIN_TYPE_SHOP) {
             src = &dungeon->unk12A18[25][r7];
         }
         else if (hallucinating) {
             src = &dungeon->unk11884[tile->unk8][r7];
         }
-        else if (tile->spawnOrVisibilityFlags & 4) {
+        else if (tile->spawnOrVisibilityFlags.visibility & 4) {
             src = &dungeon->unk12A18[27][r7];
         }
         else
@@ -527,7 +527,7 @@ void sub_8049ED4(void)
                     src = &dungeon->unk11884[tile->unk8][r7];
                 }
             }
-            else if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+            else if (tile->terrainFlags & TERRAIN_TYPE_STAIRS) {
                 src = &dungeon->unk12A18[dungeon->unk3A12][r7];
             }
             else {
@@ -548,16 +548,16 @@ void sub_8049ED4(void)
                 var_44++;
                 r7 = r10;
                 tile = GetTile(var_48, var_44);
-                if (tile->terrainType & TERRAIN_TYPE_SHOP) {
+                if (tile->terrainFlags & TERRAIN_TYPE_SHOP) {
                     src = &dungeon->unk12A18[25][r7];
                 }
-                else if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
+                else if (tile->terrainFlags & TERRAIN_TYPE_UNK_x1000) {
                     src = &dungeon->unk12A18[26][r7];
                 }
                 else if (hallucinating) {
                     src = &dungeon->unk11884[tile->unk8][r7];
                 }
-                else if (tile->spawnOrVisibilityFlags & 4) {
+                else if (tile->spawnOrVisibilityFlags.visibility & 4) {
                     src = &dungeon->unk12A18[27][r7];
                 }
                 else
@@ -572,7 +572,7 @@ void sub_8049ED4(void)
                             src = &dungeon->unk11884[tile->unk8][r7];
                         }
                     }
-                    else if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+                    else if (tile->terrainFlags & TERRAIN_TYPE_STAIRS) {
                         src = &dungeon->unk12A18[dungeon->unk3A12][r7];
                     }
                     else {
@@ -621,10 +621,10 @@ void sub_804A1F0(s32 a0, s32 a1)
     r10 = gUnknown_80F6C06[30 + y];
     r6 = var_28 + r8 * 3;
     tile = GetTile(var_2C, r10);
-    if (tile->terrainType & TERRAIN_TYPE_SHOP) {
+    if (tile->terrainFlags & TERRAIN_TYPE_SHOP) {
         src = &dungeon->unk12A18[25][r6];
     }
-    else if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
+    else if (tile->terrainFlags & TERRAIN_TYPE_UNK_x1000) {
         src = &dungeon->unk12A18[26][r6];
     }
     else if (hallucinating) {
@@ -642,7 +642,7 @@ void sub_804A1F0(s32 a0, s32 a1)
                 src = &dungeon->unk11884[tile->unk8][r6];
             }
         }
-        else if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+        else if (tile->terrainFlags & TERRAIN_TYPE_STAIRS) {
             src = &dungeon->unk12A18[dungeon->unk3A12][r6];
         }
         else {
@@ -662,10 +662,10 @@ void sub_804A1F0(s32 a0, s32 a1)
             r10++;
             r6 = var_28;
             tile = GetTile(var_2C, r10);
-            if (tile->terrainType & TERRAIN_TYPE_SHOP) {
+            if (tile->terrainFlags & TERRAIN_TYPE_SHOP) {
                 src = &dungeon->unk12A18[25][r6];
             }
-            else if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
+            else if (tile->terrainFlags & TERRAIN_TYPE_UNK_x1000) {
                 src = &dungeon->unk12A18[26][r6];
             }
             else if (hallucinating) {
@@ -683,7 +683,7 @@ void sub_804A1F0(s32 a0, s32 a1)
                         src = &dungeon->unk11884[tile->unk8][r6];
                     }
                 }
-                else if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+                else if (tile->terrainFlags & TERRAIN_TYPE_STAIRS) {
                     src = &dungeon->unk12A18[dungeon->unk3A12][r6];
                 }
                 else {
@@ -722,10 +722,10 @@ void sub_804A49C(s32 a0, s32 a1)
     var_2C = gUnknown_80F6C06[30 + y];
     r6 = r9 + var_28 * 3;
     tile = GetTile(r10, var_2C);
-    if (tile->terrainType & TERRAIN_TYPE_SHOP) {
+    if (tile->terrainFlags & TERRAIN_TYPE_SHOP) {
         src = &dungeon->unk12A18[25][r6];
     }
-    else if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
+    else if (tile->terrainFlags & TERRAIN_TYPE_UNK_x1000) {
         src = &dungeon->unk12A18[26][r6];
     }
     else if (hallucinating) {
@@ -743,7 +743,7 @@ void sub_804A49C(s32 a0, s32 a1)
                 src = &dungeon->unk11884[tile->unk8][r6];
             }
         }
-        else if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+        else if (tile->terrainFlags & TERRAIN_TYPE_STAIRS) {
             src = &dungeon->unk12A18[dungeon->unk3A12][r6];
         }
         else {
@@ -763,10 +763,10 @@ void sub_804A49C(s32 a0, s32 a1)
             r10++;
             r6 = var_28 * 3;
             tile = GetTile(r10, var_2C);
-            if (tile->terrainType & TERRAIN_TYPE_SHOP) {
+            if (tile->terrainFlags & TERRAIN_TYPE_SHOP) {
                 src = &dungeon->unk12A18[25][r6];
             }
-            else if (tile->terrainType & TERRAIN_TYPE_UNK_x1000) {
+            else if (tile->terrainFlags & TERRAIN_TYPE_UNK_x1000) {
                 src = &dungeon->unk12A18[26][r6];
             }
             else if (hallucinating) {
@@ -784,7 +784,7 @@ void sub_804A49C(s32 a0, s32 a1)
                         src = &dungeon->unk11884[tile->unk8][r6];
                     }
                 }
-                else if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+                else if (tile->terrainFlags & TERRAIN_TYPE_STAIRS) {
                     src = &dungeon->unk12A18[dungeon->unk3A12][r6];
                 }
                 else {
@@ -945,7 +945,7 @@ void sub_804AAAC(void)
         for(x = 0; x < DUNGEON_MAX_SIZE_X; x++)
         {
             tile = GetTileMut(x,y);
-            tile->spawnOrVisibilityFlags = 0;
+            tile->spawnOrVisibilityFlags.visibility = 0;
         }
     }
 }
@@ -1016,7 +1016,7 @@ void sub_804AAD4(void)
     gDungeon->unk104C0 = maxRooms + 1;
 }
 
-void sub_804AC20(DungeonPos *pos)
+void DiscoverMinimap(DungeonPos *pos)
 {
     s32 y;
     const Tile *tile2;
@@ -1057,8 +1057,8 @@ void sub_804AC20(DungeonPos *pos)
         for (y = yMin; y <= yMax; y++) {
             for (x = xMin; x <= xMax; x++) {
                 tile = GetTileMut(x,y);
-                tile->spawnOrVisibilityFlags |= 3;
-                ShowDungeonMapAtPos(x,y);
+                tile->spawnOrVisibilityFlags.visibility |= (VISIBILITY_FLAG_REVEALED | VISIBILITY_FLAG_VISITED);
+                DrawMinimapTile(x,y);
             }
         }
     }
@@ -1101,10 +1101,10 @@ bool8 sub_804AD34(DungeonPos *pos)
 
   iVar8 = 0;
   tile = GetTileMut(pos->x,pos->y);
-  if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
-    if(!(tile->terrainType & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL))){
+  if (!(tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+    if(!(tile->terrainFlags & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL))){
     iVar8 = 1;
-    tile->terrainType = (tile->terrainType & ~(TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) | TERRAIN_TYPE_NORMAL;
+    tile->terrainFlags = (tile->terrainFlags & ~(TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) | TERRAIN_TYPE_NORMAL;
 
     for(y = -1; y < 2; y++)
     {
@@ -1112,7 +1112,7 @@ bool8 sub_804AD34(DungeonPos *pos)
       {
         sub_80498A8(x + pos->x, y + pos->y);
         sub_8049BB0(x + pos->x, y + pos->y);
-        ShowDungeonMapAtPos(x + pos->x, y + pos->y);
+        DrawMinimapTile(x + pos->x, y + pos->y);
       }
     }
   }
@@ -1121,10 +1121,10 @@ bool8 sub_804AD34(DungeonPos *pos)
     {
       entity = gDungeon->activePokemon[index];
       if (EntityIsValid(entity)) {
-        sub_806CF98(entity);
+        DetermineMonsterShadow(entity);
       }
     }
-    sub_8049ED4();
+    UpdateTrapsVisibility();
     sub_8042A14(pos);
   }
   return iVar8;
@@ -1140,11 +1140,11 @@ bool8 sub_804AE08(DungeonPos *pos)
   uVar6 = FALSE;
   tile = GetTileMut(pos->x,pos->y);
 
-  if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
-    if(!(tile->terrainType & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL))) {
+  if (!(tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+    if(!(tile->terrainFlags & (TERRAIN_TYPE_UNBREAKABLE | TERRAIN_TYPE_IMPASSABLE_WALL))) {
         uVar6 = TRUE;
-        tile->terrainType = (tile->terrainType & ~(TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) | TERRAIN_TYPE_NORMAL;
-        tile->spawnOrVisibilityFlags = tile->spawnOrVisibilityFlags | 0x10;
+        tile->terrainFlags = (tile->terrainFlags & ~(TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL)) | TERRAIN_TYPE_NORMAL;
+        tile->spawnOrVisibilityFlags.visibility = tile->spawnOrVisibilityFlags.visibility | 0x10;
 
         for(y = -1; y < 2; y++)
         {
@@ -1166,15 +1166,15 @@ void sub_804AE84(DungeonPos *pos)
   s32 y;
 
   tile = GetTileMut(pos->x,pos->y);
-  if ((tile->spawnOrVisibilityFlags & 0x10) != 0) {
-    tile->spawnOrVisibilityFlags &= 0xffef;
+  if ((tile->spawnOrVisibilityFlags.visibility & 0x10) != 0) {
+    tile->spawnOrVisibilityFlags.visibility &= 0xffef;
 
     for(y = -1; y < 2; y++)
     {
       for(x = -1; x < 2; x++)
       {
         sub_80498A8(x + pos->x, y + pos->y);
-        ShowDungeonMapAtPos(x + pos->x, y + pos->y);
+        DrawMinimapTile(x + pos->x, y + pos->y);
       }
     }
 
@@ -1182,10 +1182,10 @@ void sub_804AE84(DungeonPos *pos)
     {
       entity = gDungeon->activePokemon[index];
       if (EntityIsValid(entity)) {
-        sub_806CF98(entity);
+        DetermineMonsterShadow(entity);
       }
     }
-    sub_8049ED4();
+    UpdateTrapsVisibility();
     sub_8042A14(pos);
   }
 }
@@ -1195,12 +1195,12 @@ bool8 IsTileGround(Tile *tile)
     bool8 isGround = FALSE;
     if (IsWaterTileset())
     {
-        if (!(tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
+        if (!(tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)))
         {
             isGround = TRUE;
         }
     }
-    else if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_SECONDARY ||
+    else if ((tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_SECONDARY ||
         gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA)
     {
         isGround = TRUE;

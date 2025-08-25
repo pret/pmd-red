@@ -55,15 +55,18 @@ enum SpawnFlags
 #define VISIBILITY_FLAG_REVEALED 1 // When using Luminous Orb - whole layout is shown, but grayed-out
 #define VISIBILITY_FLAG_VISITED 2 // Tile was visited, show filled/white layout
 
-// size: 0x18
+union SpawnOrVisibilityFlags
+{
+    u16 spawn; // Tracks the kinds of entities which should be spawned on this tile. See: SpawnFlags
+    u16 visibility;
+};
+
+// size: 0x18 Red, 0x14 Blue
 typedef struct Tile
 {
-    // Uses the TerrainType bit flags.
-    /* 0x0 */ u16 terrainType;
-    u8 fill2[0x4 - 0x2];
-    u16 spawnOrVisibilityFlags; // Tracks the kinds of entities which should be spawned on this tile. See: SpawnFlags
-    u16 unk6;
-    u8 unk8;
+    /* 0x0 */ u16 terrainFlags; // Uses the TerrainType bit flags.
+    /* 0x4 */ union SpawnOrVisibilityFlags spawnOrVisibilityFlags;  // Because of padding this field takes 6 bytes on gba and only 2 on DS.
+    /* 0x8 */ u8 unk8;
     /* 0x9 */ u8 room;
     // Bitwise flags for whether Pokémon can move to an adjacent tile. Bits correspond to directions in direction.h.
     // Different sets of flags are used for Pokémon that can cross special terrain, corresponding to the CrossableTerrain enum.
@@ -92,10 +95,10 @@ typedef struct RoomData
 } RoomData;
 
 // Helper functions for main terrain types.
-static inline void SetTerrainType(Tile *tile, u32 terrainType)
+static inline void SetTerrainType(Tile *tile, u32 terrainFlags)
 {
-    tile->terrainType &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    tile->terrainType |= terrainType;
+    tile->terrainFlags &= ~(TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    tile->terrainFlags |= terrainFlags;
 }
 
 static inline void SetTerrainNormal(Tile *tile)
@@ -115,7 +118,7 @@ static inline void SetTerrainWall(Tile *tile)
 
 static inline s32 GetTerrainType(const Tile *tile)
 {
-    return tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
+    return tile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
 }
 
 

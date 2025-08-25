@@ -177,7 +177,7 @@ static void WriteDungeonItems(DataSerializer *seri)
         notEmpty = FALSE;
 
         if (entity != NULL && GetEntityType(entity) == ENTITY_ITEM) {
-            item = GetItemData(entity);
+            item = GetItemInfo(entity);
             WriteItem(seri, item); // 3 bytes
             WriteBytes(seri, &entity->pos.x, 1); // 1 byte
             WriteBytes(seri, &entity->pos.y, 1); // 1 byte
@@ -207,7 +207,7 @@ static void WriteDungeonTraps(DataSerializer *seri)
         notEmpty = FALSE;
 
         if (entity != NULL && GetEntityType(entity) == ENTITY_TRAP) {
-            trap = GetTrapData(entity);
+            trap = GetTrapInfo(entity);
             WriteBytes(seri, &trap->id, 1);
             WriteBytes(seri, &trap->unk1, 1);
             WriteBytes(seri, &entity->isVisible, 1);
@@ -688,8 +688,8 @@ static void WriteIQSkills(DataSerializer *seri, IqSkillFlags *src)
 
 static void WriteTile(DataSerializer *seri, Tile *src)
 {
-    WriteU16(seri, src->terrainType);
-    WriteU16(seri, src->spawnOrVisibilityFlags);
+    WriteU16(seri, src->terrainFlags);
+    WriteU16(seri, src->spawnOrVisibilityFlags.visibility);
     WriteBytes(seri, &src->room, 1);
     WriteBytes(seri, &src->unkE, 1);
 }
@@ -805,8 +805,8 @@ static void ReadTile(DataSerializer *seri, Tile *dst)
 {
     memset(dst, 0, sizeof(Tile));
 
-    dst->terrainType = ReadU16(seri);
-    dst->spawnOrVisibilityFlags = ReadU16(seri);
+    dst->terrainFlags = ReadU16(seri);
+    dst->spawnOrVisibilityFlags.visibility = ReadU16(seri);
 
     ReadBytes(seri, &dst->room, 1);
     ReadBytes(seri, &dst->unkE, 1);
@@ -873,7 +873,7 @@ static void ReadDungeonItems(DataSerializer *seri)
         ReadTilePos(seri, &pos);
 
         if (item.flags & ITEM_FLAG_EXISTS)
-            AddItemToDungeonAt(&pos, &item, 0);
+            SpawnItem(&pos, &item, 0);
     }
 }
 
@@ -1101,7 +1101,7 @@ static void ReadMonster(DataSerializer *seri, bool8 isTeamMember, s32 index)
             }
 
             LoadIQSkills(mon);
-            sub_804535C(mon, NULL);
+            UpdateEntityPixelPos(mon, NULL);
         }
     }
 }

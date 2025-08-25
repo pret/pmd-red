@@ -21,9 +21,9 @@ static const struct ScriptCommand s_gs172_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     { 0x2d, 0x09,  0x0000,  0x00000022,  0x00000000, NULL },
     BGM_SWITCH(22),
-    { 0xe4, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(4),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(5),
     WAIT(30),
     MSG_NPC(0, _(" It's a huge tower of\nclouds...")),
     TEXTBOX_CLEAR,
@@ -36,11 +36,11 @@ static const struct ScriptRef s_gs172_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs172_g1_s0_eff0_script[] = { /* 0x8229a2c */
     DEBUGINFO,
-    { 0x98, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    CAMERA_INIT_PAN,
+    AWAIT_CUE(4),
     { 0x89, 0xe0,  0x004c,  0x00000004,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0005,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0004,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(5),
+    AWAIT_CUE(4),
     HALT,
 };
 

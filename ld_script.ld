@@ -45,7 +45,8 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        asm/crt0.o(.text);
+        src/rom_header.o(.text);
+        src/crt0.o(.text);
         src/code_80001DC.o(.text);
         src/arm_funcs.o(.text);
         src/main_loops.o(.text);
@@ -186,7 +187,8 @@ SECTIONS {
         src/debug_menu2.o(.text);
         src/debug_menu3.o(.text);
         src/debug_menu4.o(.text);
-        asm/code_803B050.o(.text);
+        src/code_803B050.o(.text);
+        src/code_803B344.o(.text);
         src/pokemon_mail.o(.text);
         src/code_803C1B4.o(.text);
         src/personality_test1.o(.text);
@@ -344,9 +346,7 @@ SECTIONS {
         src/ground_place.o(.text);
         src/ground_bg.o(.text);
         src/ground_map.o(.text);
-        asm/ground_map_1.o(.text);
         src/ground_map_1.o(.text);
-        src/ground_map_2.o(.text);
         src/ground_sprite.o(.text);
         src/ground_sprite_data.o(.text);
         src/ground_sprite_monster.o(.text);
@@ -562,6 +562,11 @@ SECTIONS {
         src/debug_menu2.o(.rodata);
         src/debug_menu3.o(.rodata);
         src/debug_menu4.o(.rodata);
+        src/code_803B050.o(.rodata);
+        src/code_803B050_unused1.o(.rodata);
+        src/code_803B050_unused2.o(.rodata);
+        src/code_803B050_unused3.o(.rodata);
+        src/code_803B344.o(.rodata);
         data/data_80E7D40.o(.rodata);
         src/pokemon_mail_pre.o(.rodata);
         src/pokemon_mail.o(.rodata);

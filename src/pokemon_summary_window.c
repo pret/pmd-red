@@ -40,7 +40,7 @@ void ShowPokemonSummaryWindow(s32 which, s32 currSubWindowId, struct MonSummaryI
             PrintFormattedStringOnWindow(4,y,gText_ExpPtsUnkMacro,windowId,'\0');
             y += 0xA;
             if (monInfo->level < 100) {
-                GetPokemonLevelData(&levelData,monInfo->species,monInfo->level + 1);
+                GetLvlUpEntry(&levelData,monInfo->species,monInfo->level + 1);
                 gFormatArgs[0] = levelData.expRequired - monInfo->exp;
                 PrintFormattedStringOnWindow(4,y,gText_ToNextLevel,windowId,'\0');
             }

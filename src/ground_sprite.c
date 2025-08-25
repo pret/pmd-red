@@ -5,7 +5,7 @@
 #include "debug.h"
 #include "def_filearchives.h"
 #include "file_system.h"
-#include "ground_map_1.h"
+#include "ground_map.h"
 #include "ground_sprite.h"
 #include "ground_sprite_data.h"
 #include "memory.h"

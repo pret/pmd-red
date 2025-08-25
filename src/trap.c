@@ -38,13 +38,12 @@ extern SpriteOAM gUnknown_202EDC0;
 
 bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
-bool8 sub_8045888(Entity *);
 u8 GetFloorType(void);
 void sub_8045BF8(u8 *, Item *);
 void DealDamageToEntity(Entity *,s16,u32,u32);
 void sub_806F480(Entity *, u32);
 void sub_804225C(Entity *, DungeonPos *, u8);
-void sub_8071DA4(Entity *);
+void EnemyEvolution(Entity *);
 void sub_806A1E8(Entity *pokemon);
 Entity *sub_8045684(u8, DungeonPos *, u8);
 extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
@@ -57,11 +56,11 @@ void sub_807FA18(void)
         for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
             Tile *tile = GetTileMut(x, y);
 
-            if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_TRAP) {
+            if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_TRAP) {
                 s32 trapId;
                 DungeonPos pos = {x, y};
 
-                if (tile->spawnOrVisibilityFlags & SPAWN_FLAG_UNK6) {
+                if (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_UNK6) {
                     trapId = TRAP_WARP_TRAP;
                 }
                 else {
@@ -100,7 +99,7 @@ void sub_807FA9C(void)
             if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_TRAP && (tile->object->isVisible || showInvisibles)) {
                 r6 = TRUE;
             }
-            if (tile->terrainType & TERRAIN_TYPE_STAIRS) {
+            if (tile->terrainFlags & TERRAIN_TYPE_STAIRS) {
                 r6 = TRUE;
             }
 
@@ -134,21 +133,28 @@ void sub_807FC3C(DungeonPos *pos, u32 trapID, u32 param_3)
 bool8 CanLayTrap(DungeonPos *pos)
 {
     Tile *tile = GetTileMut(pos->x, pos->y);
-    if (tile->terrainType & TERRAIN_TYPE_STAIRS ||
-        tile->room == CORRIDOR_ROOM ||
-        tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
-    {
+    if (tile->terrainFlags & TERRAIN_TYPE_STAIRS)
         return FALSE;
-    }
-    if (tile->terrainType & TERRAIN_TYPE_SHOP)
-    {
+
+    if (tile->room == CORRIDOR_ROOM)
         return FALSE;
-    }
-    if ((tile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL ||
-        (tile->object != NULL && GetEntityType(tile->object) != ENTITY_TRAP))
-    {
+
+    if (tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
         return FALSE;
+
+    if (tile->terrainFlags & TERRAIN_TYPE_SHOP)
+        return FALSE;
+
+    if (GetTerrainType(tile) != TERRAIN_TYPE_NORMAL)
+        return FALSE;
+
+    if (tile->object != NULL) {
+        if (GetEntityType(tile->object) != ENTITY_TRAP)
+            return FALSE;
+        else
+            return TRUE;
     }
+
     return TRUE;
 }
 
@@ -157,7 +163,7 @@ bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3)
     Tile *tile;
     Entity *entity;
     int counter;
-    u16 terrainType;
+    u16 terrainFlags;
 
     tile = GetTileMut(pos->x, pos->y);
     if (TRAP_SPIKE_TRAP < trapID) {
@@ -169,16 +175,16 @@ bool8 LayTrap(DungeonPos *pos, u8 trapID, u8 param_3)
             trapID = TRAP_CHESTNUT_TRAP;
         }
     }
-    terrainType = tile->terrainType;
-    if ((terrainType & TERRAIN_TYPE_STAIRS) != 0) goto _0807FD6E;
+    terrainFlags = tile->terrainFlags;
+    if ((terrainFlags & TERRAIN_TYPE_STAIRS) != 0) goto _0807FD6E;
     if (tile->room == CORRIDOR_ROOM) goto _0807FD6E;
-    if ((terrainType & TERRAIN_TYPE_NATURAL_JUNCTION) != 0) goto _0807FD6E;
-    if ((terrainType & TERRAIN_TYPE_SHOP) != 0) goto _0807FD6E;
-    if (((terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL)) goto _0807FD6E;
+    if ((terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION) != 0) goto _0807FD6E;
+    if ((terrainFlags & TERRAIN_TYPE_SHOP) != 0) goto _0807FD6E;
+    if (((terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) != TERRAIN_TYPE_NORMAL)) goto _0807FD6E;
     if (tile->object != NULL) {
         if (GetEntityType(tile->object) != ENTITY_TRAP) goto _0807FD6E;
-        GetTrapData(tile->object)->id = trapID;
-        GetTrapData(tile->object)->unk1 = param_3;
+        GetTrapInfo(tile->object)->id = trapID;
+        GetTrapInfo(tile->object)->unk1 = param_3;
         tile->object->isVisible = TRUE;
     }
     else {
@@ -207,12 +213,12 @@ bool8 sub_807FD84(Entity *entity)
         gDungeon->unk13570 = 0;
         flag = LayTrap(&gDungeon->trapPos,gDungeon->trapID,gDungeon->unk13579);
         if (flag) {
-            TryDisplayDungeonLoggableMessage5(entity,&gDungeon->trapPos,gUnknown_80FC5F8); // A trap was laid!
+            LogMessageByIdWithPopupCheckUserUnknown(entity,&gDungeon->trapPos,gUnknown_80FC5F8); // A trap was laid!
         }
         else {
-            TryDisplayDungeonLoggableMessage5(entity,&gDungeon->trapPos,gUnknown_80FC5FC); // A trap can't be laid here.
+            LogMessageByIdWithPopupCheckUserUnknown(entity,&gDungeon->trapPos,gUnknown_80FC5FC); // A trap can't be laid here.
         }
-        sub_8049ED4();
+        UpdateTrapsVisibility();
     }
     return flag;
 }
@@ -226,7 +232,7 @@ bool8 sub_807FE04(DungeonPos *pos, char param_2)
         tile->object->type = 0;
         tile->object = NULL;
         if (param_2 != 0) {
-            sub_8049ED4();
+            UpdateTrapsVisibility();
         }
         return TRUE;
     }
@@ -243,7 +249,7 @@ bool8 sub_807FE44(DungeonPos *pos, char param_2)
     if ((tile->object != NULL) && (GetEntityType(tile->object) == ENTITY_TRAP)) {
         tile->object->isVisible = TRUE;
         if (param_2 != 0) {
-            sub_8049ED4();
+            UpdateTrapsVisibility();
         }
         return TRUE;
     }
@@ -257,7 +263,7 @@ void GetTrapName(u8 *buffer, u8 trapIndex)
     strcpy(buffer, gTrapNames[trapIndex]);
 }
 
-void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
+void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
 {
     Tile *tile;
     bool8 flag1;
@@ -278,7 +284,7 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
     if (GetEntityType(entity) != ENTITY_TRAP) {
         return;
     }
-    trapData = GetTrapData(entity);
+    trapData = GetTrapInfo(entity);
     GetTrapName(gFormatBuffer_Monsters[0],trapData->id);
     target = tile->monster;
     if ((target != NULL) && (GetEntityType(target) != ENTITY_MONSTER)) {
@@ -300,7 +306,7 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
         }
         if (text != NULL) {
             if (sub_803F428(pos)) {
-                sub_8049ED4();
+                UpdateTrapsVisibility();
             }
             TryDisplayDungeonLoggableMessage3(pokemon,target,text);
             if (param_3 == 0) {
@@ -310,7 +316,7 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
     }
     if (sub_803F428(pos)) {
         sub_80421C0(0,0x15c);
-        sub_8049ED4();
+        UpdateTrapsVisibility();
         sub_804225C(pokemon,pos,trapData->id);
         if (gDungeon->unk181e8.blinded) {
             LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FD7F4);
@@ -396,7 +402,7 @@ void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
             }
     }
     if (EntityIsValid(target)) {
-        sub_8071DA4(target);
+        EnemyEvolution(target);
     }
     if (flag1) {
         sub_807FE04(pos,1);
@@ -577,7 +583,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
         else
         {
             info = GetEntInfo(target);
-            if (sub_8045888(target)) {
+            if (ShouldDisplayEntity(target)) {
                 SetTrap(tile, 0x1B);
                 flag = TRUE;
                 sub_80421C0(target,0x193);
@@ -603,7 +609,7 @@ void HandlePitfallTrap(Entity *pokemon, Entity *target, Tile *tile)
                 else {
                     DisplayDungeonLoggableMessageTrue(pokemon,gUnknown_80F970C); // $m0 fell into the pitfall!
                 }
-                sub_8068FE0(target,0x215,pokemon);
+                HandleFaint(target,0x215,pokemon);
             }
             if (flag) {
                 SetTrap(tile, TRAP_PITFALL_TRAP);
@@ -786,7 +792,7 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
     for (y = bottomY; y <= maxY; y++) {
         for (x = bottomX; x <= maxX; x++) {
             const Tile *tile = GetTile(x,y);
-            if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_ITEM && !(GetItemData(tile->object)->flags & ITEM_FLAG_IN_SHOP)) {
+            if (tile->object != NULL && GetEntityType(tile->object) == ENTITY_ITEM && !(GetItemInfo(tile->object)->flags & ITEM_FLAG_IN_SHOP)) {
                 s32 i, species;
 
                 local_50.species = MONSTER_KECLEON;
@@ -812,11 +818,11 @@ void HandlePokemonTrap(Entity *param_1,DungeonPos *pos)
                     local_50.unk4 = 0;
                     local_50.unk10 = 0;
                     if (sub_806B7F8(&local_50, TRUE) != 0) {
-                        RemoveItemFromDungeonAt(&local_50.pos,0);
+                        RemoveGroundItem(&local_50.pos,0);
                         counter++;
                     }
                 }
-                ShowDungeonMapAtPos(x,y);
+                DrawMinimapTile(x,y);
             }
         }
     }
@@ -862,9 +868,9 @@ void SetTrap(Tile *tile, u8 id)
     entity = tile->object;
     if (EntityIsValid(entity)) {
         if (GetEntityType(entity) == ENTITY_TRAP) {
-            trapData = GetTrapData(entity);
+            trapData = GetTrapInfo(entity);
             trapData->id = id;
         }
-        sub_8049ED4();
+        UpdateTrapsVisibility();
     }
 }

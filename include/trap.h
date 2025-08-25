@@ -12,7 +12,7 @@ bool8 sub_807FD84(Entity *entity);
 bool8 sub_807FE04(DungeonPos *pos, char param_2);
 bool8 sub_807FE44(DungeonPos *pos, char param_2);
 void GetTrapName(u8 *buffer, u8 trapIndex);
-void HandleTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
+void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 void HandleMudTrap(Entity *pokemon, Entity *target);
 void HandleStickyTrap(Entity *pokemon, Entity *target);
 void HandleGrimyTrap(Entity *pokemon, Entity *target);

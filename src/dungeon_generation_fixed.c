@@ -36,7 +36,7 @@ static void SpawnItemAtPos(u8 itemId, s32 x, s32 y, s32 quantity, u32 itemFlags)
         item.quantity = quantity;
     }
 
-    AddItemToDungeonAt(&pos, &item, 1);
+    SpawnItem(&pos, &item, 1);
 }
 
 // s16 species memes strike again. Will the fix ever be discovered?
@@ -865,7 +865,7 @@ bool8 PlaceFixedRoomTile(Tile *tile, u8 fixedRoomActionId, s32 x, s32 y, bool8 s
             break;
         case 1:
             SetTerrainWall(tile);
-            tile->terrainType &= ~(TERRAIN_TYPE_UNBREAKABLE);
+            tile->terrainFlags &= ~(TERRAIN_TYPE_UNBREAKABLE);
             tile->room = CORRIDOR_ROOM;
             break;
         case 4:
@@ -888,22 +888,22 @@ bool8 PlaceFixedRoomTile(Tile *tile, u8 fixedRoomActionId, s32 x, s32 y, bool8 s
             // fall through
         case 10:
             SetTerrainType(tile, TERRAIN_TYPE_SECONDARY | TERRAIN_TYPE_NORMAL);
-            tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            tile->terrainFlags |= TERRAIN_TYPE_IMPASSABLE_WALL;
             tile->room = CORRIDOR_ROOM;
             break;
         case 8:
         case 67:
             SetTerrainNormal(tile);
-            tile->spawnOrVisibilityFlags |= SPAWN_FLAG_STAIRS;
-            tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
+            tile->spawnOrVisibilityFlags.spawn |= SPAWN_FLAG_STAIRS;
+            tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_ITEM);
             tile->room = 0;
             gDungeon->stairsSpawn.x = x;
             gDungeon->stairsSpawn.y = y;
             break;
         case 68:
-            tile->terrainType |= TERRAIN_TYPE_UNK_x800;
+            tile->terrainFlags |= TERRAIN_TYPE_UNK_x800;
             SetTerrainNormal(tile);
-            tile->spawnOrVisibilityFlags &= ~(SPAWN_FLAG_ITEM);
+            tile->spawnOrVisibilityFlags.spawn &= ~(SPAWN_FLAG_ITEM);
             tile->room = 0;
             break;
         case 9:
@@ -912,21 +912,21 @@ bool8 PlaceFixedRoomTile(Tile *tile, u8 fixedRoomActionId, s32 x, s32 y, bool8 s
             break;
         case 11:
             SetTerrainNormal(tile);
-            tile->terrainType |= TERRAIN_TYPE_UNK_x800;
+            tile->terrainFlags |= TERRAIN_TYPE_UNK_x800;
             tile->room = 0;
             break;
         case 12:
             SetTerrainNormal(tile);
-            tile->terrainType |= TERRAIN_TYPE_UNK_x1000;
-            tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
-            tile->terrainType |= TERRAIN_TYPE_UNK_x800;
+            tile->terrainFlags |= TERRAIN_TYPE_UNK_x1000;
+            tile->terrainFlags |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            tile->terrainFlags |= TERRAIN_TYPE_UNK_x800;
             tile->room = 0;
             break;
         case 2:
         case 13:
         case 14:
             SetTerrainWall(tile);
-            tile->terrainType |= TERRAIN_TYPE_IMPASSABLE_WALL;
+            tile->terrainFlags |= TERRAIN_TYPE_IMPASSABLE_WALL;
             tile->room = CORRIDOR_ROOM;
             break;
         default:
@@ -990,7 +990,7 @@ void sub_8051E7C(Entity *pokemon)
 {
     Tile *tile = GetTileMut(pokemon->pos.x, pokemon->pos.y - 1);
 
-    if (!(tile->terrainType & TERRAIN_TYPE_UNK_x1000)) {
+    if (!(tile->terrainFlags & TERRAIN_TYPE_UNK_x1000)) {
         LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FDDF0); // It can't be used here!
     }
     else if (!gDungeon->unk3A09) {
@@ -1014,13 +1014,13 @@ void sub_8051E7C(Entity *pokemon)
                     continue;
 
                 loopTile = GetTileMut(x, y);
-                if (loopTile->terrainType & TERRAIN_TYPE_UNBREAKABLE) {
-                    loopTile->terrainType = gDungeon->unkE27C[xDiff][yDiff].terrainType;
-                    loopTile->spawnOrVisibilityFlags = gDungeon->unkE27C[xDiff][yDiff].spawnOrVisibilityFlags;
+                if (loopTile->terrainFlags & TERRAIN_TYPE_UNBREAKABLE) {
+                    loopTile->terrainFlags = gDungeon->unkE27C[xDiff][yDiff].terrainFlags;
+                    loopTile->spawnOrVisibilityFlags.visibility = gDungeon->unkE27C[xDiff][yDiff].spawnOrVisibilityFlags.visibility;
                 }
 
                 PlaceFixedRoomTile(loopTile, gDungeon->unkE87C[xDiff][yDiff], x, y, TRUE);
-                loopTile->spawnOrVisibilityFlags |= 3;
+                loopTile->spawnOrVisibilityFlags.visibility |= (VISIBILITY_FLAG_REVEALED | VISIBILITY_FLAG_VISITED);
                 if (roomId != CORRIDOR_ROOM) {
                     loopTile->room = roomId;
                 }
@@ -1046,10 +1046,10 @@ void sub_8051E7C(Entity *pokemon)
         }
 
         gDungeon->unk3A09 = TRUE;
-        tile->terrainType &= ~(TERRAIN_TYPE_IMPASSABLE_WALL | TERRAIN_TYPE_UNK_x1000);
+        tile->terrainFlags &= ~(TERRAIN_TYPE_IMPASSABLE_WALL | TERRAIN_TYPE_UNK_x1000);
         sub_80498A8(pokemon->pos.x, pokemon->pos.y - 1);
         sub_8049B8C();
-        sub_8049ED4();
+        UpdateTrapsVisibility();
         sub_80429FC(&pos);
         LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FDDD0); // The closed corridor was opened!
         sub_803E708(0x14, 0x3C);

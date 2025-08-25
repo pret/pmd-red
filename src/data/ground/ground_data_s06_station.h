@@ -20,7 +20,7 @@ static const struct ScriptCommand s_gs228_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_MAP(228),
     SELECT_ENTITIES(-1, -1),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0x3c, 0x02,  0x0000,  0x00000000,  0x00000000, NULL },
+    SPECIAL_TEXT(SPECIAL_TEXT_WAITING, 0, 0),
     { 0x23, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
     RET,
 };

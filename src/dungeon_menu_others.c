@@ -146,7 +146,7 @@ void ShowDungeonOthersMenu(void)
             break;
     }
 
-    ShowWholeRevealedDungeonMap();
+    UpdateMinimap();
     sub_803EAF0(0, NULL);
 }
 

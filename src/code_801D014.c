@@ -16,7 +16,7 @@
 #include "friend_list_menu.h"
 #include "ground_lives.h"
 #include "ground_main.h"
-#include "ground_map_1.h"
+#include "ground_map.h"
 #include "input.h"
 #include "iq_skill_menu.h"
 #include "memory.h"
@@ -82,7 +82,7 @@ bool8 sub_801D014(Pokemon *a0)
     else
         sUnknown_203B250->index = NUM_MONSTERS;
 
-    sUnknown_203B250->currFriendAreaLocation = MapIdToFriendAreaId(sub_80A5728());
+    sUnknown_203B250->currFriendAreaLocation = MapIdToFriendAreaId(GetGroundMapID());
     sUnknown_203B250->unk8 = 0;
     sUnknown_203B250->unk9 = 0;
     sUnknown_203B250->unkC = GetPlayerPokemonStruct();

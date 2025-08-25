@@ -48,7 +48,7 @@ extern OpenedFile *gUnknown_202EC9C;
 
 void xxx_draw_string_80524F0(void);
 void sub_8085F78(void);
-void sub_803F580(s32);
+void UpdateCamera(s32);
 void sub_806CC10();
 void sub_804522C();
 void sub_803F9CC();
@@ -176,7 +176,7 @@ static void sub_803E490(u32 unused)
     gUnknown_202EDD4++;
     xxx_draw_string_80524F0();
     sub_8085F78();
-    sub_803F580(1);
+    UpdateCamera(1);
 
     if(gDungeon->unk181e8.unk1821A)
     {
@@ -202,7 +202,7 @@ static void sub_803E490(u32 unused)
     sub_8042E5C();
 
     if(gUnknown_202EDD0 == 0 || gUnknown_202EDD0 == 3 || gGameOptionsRef->mapOption == TOP_MAP_AND_TEAM_NO_BOTTOM)
-        ShowPlayerDotOnMap();
+        FlashLeaderIcon();
     sub_803ECE0();
     sub_803EDF0();
 
@@ -571,7 +571,7 @@ void sub_803EAF0(u32 kind, u8 *name)
             sub_803EC94();
             ShowWindows(NULL, TRUE, TRUE);
             if (gUnknown_203B40C != 0) {
-                ShowWholeRevealedDungeonMap();
+                UpdateMinimap();
                 UpdateBgTilemapForDungeonMap(FALSE);
             }
             break;

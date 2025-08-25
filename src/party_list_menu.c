@@ -839,7 +839,7 @@ bool8 CanTakePokemonHeldItem(Pokemon *r0)
 {
     if(IsNotMoneyOrUsedTMItem(r0->heldItem.id))
     {
-        if(IsThrowableItem(r0->heldItem.id))
+        if(IsThrownItem(r0->heldItem.id))
         {
             if((gTeamInventoryRef->teamStorage[r0->heldItem.id] + r0->heldItem.quantity) > 999)
                 return FALSE;
@@ -870,7 +870,7 @@ void sub_8026FA4(void)
             break;
         case 2:
             PlaySound(0x14d);
-            if(IsThrowableItem(sUnknown_203B2B8->item2.id))
+            if(IsThrownItem(sUnknown_203B2B8->item2.id))
             {
                 gTeamInventoryRef->teamStorage[sUnknown_203B2B8->item2.id] += sUnknown_203B2B8->item2.quantity;
             }

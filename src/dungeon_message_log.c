@@ -16,7 +16,6 @@
 
 #define MESSAGE_LOG_ROW_COUNT 8 // How many log messages are shown
 
-extern bool8 sub_8045888(Entity *pokemon);
 extern void sub_805E804(void);
 extern void sub_8083E28(void);
 extern u32 GetTouchScreenArrowPress(s32 a0, const void *a1);

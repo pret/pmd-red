@@ -5,8 +5,17 @@
 #include "constants/monster.h"
 #include "code_800558C.h"
 #include "code_800D090.h"
+#include "code_801602C.h"
+#include "code_801B60C.h"
+#include "code_802DB28.h"
+#include "code_80958E8.h"
+#include "code_80A26CC.h"
+#include "luminous_cave.h"
+#include "makuhita_dojo1.h"
+#include "makuhita_dojo2.h"
 #include "music_util.h"
 #include "code_801D014.h"
+#include "code_803B050.h"
 #include "code_8099360.h"
 #include "credits2.h"
 #include "event_flag.h"
@@ -24,9 +33,11 @@
 #include "kecleon_bros4.h"
 #include "main_loops.h"
 #include "memory.h"
+#include "palette_util.h"
 #include "personality_test1.h"
 #include "portrait_placement.h"
 #include "pokemon.h"
+#include "save_write.h"
 #include "string_format.h"
 #include "text_1.h"
 #include "text_2.h"
@@ -102,91 +113,36 @@ static IWRAM_INIT struct Textbox *sTextbox = { NULL };
 
 extern bool8 sub_802FCF0(void);
 bool8 IsTextboxOpen_809B40C(struct TextboxText *);
-extern s32 sub_803B168(void);
-extern void sub_803B1BC(void);
-
-struct unkStruct_8096AF8
-{
-    bool8 unk0;
-    /* 0x2 */ s16 clientSpecies;
-    /* 0x4 */ s16 targetSpecies;
-};
 
 extern void sub_80A8EC0(u8 *, u32);
-Pokemon *sub_808D3BC(void);
-Pokemon *sub_808D3F8(void);
 Pokemon *sub_80A8D54(s16);
 void sub_80A7DDC(s16 *, s16*);
 u8 IsStarterMonster(s16);
 s16 sub_80A8BFC(s32);
 void sub_809B028(const MenuItem *, s32 a1_, s32 a2, s32 a3, s32 a4_, const char *text);
 bool8 sub_809B18C(s32 *sp);
-extern void sub_8099A34(s32 a0);
-extern void sub_8099A48(s32 a0);
 extern void GroundScriptLock(s16 index, s32 r1);
 extern void GroundScriptLockJumpZero(s16 index);
 extern u8 sub_802B2D4(void);
 extern void sub_802B3B8(void);
 extern u32 sub_802B358(void);
-void sub_8096AF8(struct unkStruct_8096AF8 *, u8 slotIndex, u8 dungeon);
-u8 sub_802DB28(u8, u8);
-void sub_8096BD0();
-void ScenarioCalc(s16 varId, s32 main, s32 sub);
-void MakuhitaDojo_Delete();
-u32 HandleMakuhitaDojoState();
-s16 sub_802FED0();
-u8 sub_801FB50();
-s32 sub_80160D8();
-s32 sub_801A8AC();
-void sub_801A928();
-s32 sub_8016080();
-void CleanConfirmNameMenu();
-u32 CreateConfirmNameMenu(u32 mode, u8 *name);
+void sub_8096BD0(void);
 bool8 DrawCredits(s32 creditsCategoryIndex, s32);
 u32 sub_8035574();
-void sub_803565C();
-u8 sub_8094D14();
-void sub_802465C();
-s32 sub_80246F0();
-s32 GetScriptVarValue(u8 *localVarBuf, s32 varId);
-bool8 HasEvolutionCompleted();
-void GroundMap_ExecuteEvent();
-void SetScriptVarValue(u8 *localVarBuf, s32 varId, s32 val);
-void CleanLuminousCave();
-u8 sub_80023E4();
-u8 CreateFriendListMenu();
-void PlayMenuSoundEffect();
+void sub_803565C(void);
+u8 sub_8094D14(void);
+void GroundMap_ExecuteEvent(s16, u32);
 bool8 sub_8015080(u8 *buffer, const MenuItem *menuItems);
 s32 sub_801516C();
 void sub_80151A4();
 s32 sub_8015198();
-u8 sub_80211AC();
-void sub_80213A0();
-u8 sub_802132C();
-u8 MakuhitaDojo_New();
-u8 sub_803B050();
-void sub_803B100();
-u8 sub_801B60C();
-u8 CreateKecleonBros();
-s16 sub_80A2654(s16);
 u8 sub_802F73C();
 u8 sub_802F848();
 s32 sub_802F8A0();
 void sub_802F974();
 s16 sub_802F90C();
-s16 sub_80A26B8();
-u8 sub_80302E8();
-s32 sub_80303AC();
-void sub_8030480();
-s16 sub_8030418();
-void PrepareSavePakWrite();
-u8 WriteSavePak();
-void FinishWriteSavePak();
-u8 CreateKangaskhanStorage();
-void sub_8011C28();
-u8 CreateHelperPelipperMenu();
-u8 CreateWigglytuffShop();
-u8 sub_8099328();
+void sub_8011C28(u32);
+bool8 CreateHelperPelipperMenu(s16);
 u32 sub_802E90C();
 void sub_802E918();
 u32 sub_80282DC(u8 *r0);
@@ -198,27 +154,15 @@ extern u8 sub_802DFB0(void);
 extern void CleanThankYouMailPelipper(void);
 extern void CleanHelperPelipper(void);
 extern void sub_802E06C(void);
-extern void sub_802DC00(void);
-extern void sub_801B72C(void);
 extern u32 ThankYouMailPelipperCallback(void);
 extern u32 HelperPelipperCallback(void);
 extern u32 sub_802E890(void);
 extern u32 sub_802DFD8(void);
-extern u32 sub_802DBD4(void);
-extern u32 sub_803B120(void);
-extern u32 sub_801B6AC(void);
-u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
-bool8 sub_809B648(void);
 void sub_809B57C(void);
 bool8 sub_809B1D4(s32 a0, u32 kind, s32 a2, u8 *a3);
-void sub_809C39C(void);
-void sub_809C3D8(void);
-void sub_809C504(void);
-void sub_809C464(void);
-void sub_809C478(void);
-void sub_809C414(void);
-void sub_809C4B0(void);
-void sub_809C550(void);
+
+u8 *sub_809B428(u8 *a0, s32 a1, u8 *a2);
+bool8 sub_809B648(void);
 
 #define TEXTBOX_FLAG_UNUSED_x2 0x2 // Unused, but set for almost all flag sets
 #define TEXTBOX_FLAG_INSTANT_TEXT 0x20
@@ -305,6 +249,14 @@ static void ResetAllTextboxPortraits(void);
 static bool8 ScriptPrintTextInternal(struct TextboxText *ptr, u32 flags_, s32 a2_, const char *text);
 static u32 SetTextboxType(u32 textboxType, bool8 unused);
 static void ResetTextbox(void);
+static void sub_809C39C(void);
+static void sub_809C3D8(void);
+static void sub_809C504(void);
+static void sub_809C464(void);
+static void sub_809C478(void);
+static void sub_809C414(void);
+static void sub_809C4B0(void);
+static void sub_809C550(void);
 
 void TextboxInit(void)
 {
@@ -1980,7 +1932,7 @@ bool8 sub_809B648(void)
     return 0;
 }
 
-void sub_809C39C(void)
+static void sub_809C39C(void)
 {
     sTextbox->unk430 = sub_801D178();
     if(sTextbox->unk430 == 3)
@@ -1988,7 +1940,7 @@ void sub_809C39C(void)
     sub_801D1E0();
 }
 
-void sub_809C3D8(void)
+static void sub_809C3D8(void)
 {
     sTextbox->unk430 = sub_801D178();
     if(sTextbox->unk430 == 3)
@@ -1996,7 +1948,7 @@ void sub_809C3D8(void)
     sub_801D1E0();
 }
 
-void sub_809C414(void)
+static void sub_809C414(void)
 {
     u8 val;
 
@@ -2015,14 +1967,14 @@ void sub_809C414(void)
 
 }
 
-void sub_809C464(void)
+static void sub_809C464(void)
 {
 	DeleteTestTracker();
 	sub_8001064();
 	sub_809965C();
 }
 
-void sub_809C478(void)
+static void sub_809C478(void)
 {
     s32 temp;
     s32 temp1;
@@ -2040,13 +1992,13 @@ void sub_809C478(void)
     sub_80993C0(0);
 }
 
-void sub_809C4B0(void)
+static void sub_809C4B0(void)
 {
     s16 scriptIndex_s16;
     s32 scriptIndex = -1;
 
     if (sTextbox->unk430 == 0) {
-        scriptIndex = (s16) sub_803B168();
+        scriptIndex = sub_803B168();
 
         ASM_MATCH_TRICK(sTextbox->unk5A4);
         scriptIndex_s16 = scriptIndex;
@@ -2064,7 +2016,7 @@ void sub_809C4B0(void)
         GroundMap_ExecuteEvent(scriptIndex, 0);
 }
 
-void sub_809C504(void)
+static void sub_809C504(void)
 {
     u8 temp;
 
@@ -2080,7 +2032,7 @@ void sub_809C504(void)
     sub_80282FC();
 }
 
-void sub_809C550(void)
+static void sub_809C550(void)
 {
     u32 ret;
     s32 val;

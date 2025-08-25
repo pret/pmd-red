@@ -486,7 +486,7 @@ u8 sub_806CF54(Entity *entity)
     return GetEntInfo(entity)->unk204;
 }
 
-void sub_806CF60(void)
+void DetermineAllMonsterShadow(void)
 {
     Entity *entity;
     s32 i;
@@ -495,21 +495,16 @@ void sub_806CF60(void)
         entity = gDungeon->activePokemon[i];
 
         if (EntityIsValid(entity))
-            sub_806CF98(entity);
+            DetermineMonsterShadow(entity);
     }
 }
 
-u32 sub_806CF98(Entity *entity)
+u32 DetermineMonsterShadow(Entity *entity)
 {
-    const Tile *mapTile;
-    u32 shadowSize;
-    u16 terrainType;
-    EntityInfo *entityInfo;
-
-    mapTile = GetTileAtEntitySafe(entity);
-    terrainType = mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY);
-    entityInfo = GetEntInfo(entity);
-    shadowSize = GetShadowSize(entityInfo->apparentID);
+    const Tile *mapTile = GetTileAtEntitySafe(entity);
+    u16 terrainType = GetTerrainType(mapTile);
+    EntityInfo *entityInfo = GetEntInfo(entity);
+    u32 shadowSize = GetShadowSize(entityInfo->apparentID);
 
     if (terrainType == (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY))
         return 6;

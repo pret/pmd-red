@@ -10,7 +10,7 @@
 #include "text_2.h"
 #include "text_3.h"
 #include "ground_map.h"
-#include "ground_map_2.h"
+#include "ground_map_1.h"
 #include "palette_util.h"
 #include "string_format.h"
 #include "sprite.h"

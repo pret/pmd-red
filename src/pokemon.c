@@ -151,7 +151,7 @@ void CreateLevel1Pokemon(Pokemon *pokemon, s16 _species, u8* name, u32 _itemID, 
     pokemon->offense.def[0] = GetBaseDefensiveStat(species, 0);
     pokemon->offense.def[1] = GetBaseDefensiveStat(species, 1);
     pokemon->speciesNum = species;
-    ItemIdToBulkItem(&pokemon->heldItem, itemID);
+    InitBulkItem(&pokemon->heldItem, itemID);
     pokemon->currExp = 0;
     pokemon->tacticIndex = TACTIC_LETS_GO_TOGETHER;
     pokemon->IQ = 1;
@@ -214,7 +214,7 @@ void ConvertStoryMonToPokemon(Pokemon *dst, const struct StoryMonData *src)
     dst->offense.def[0] = src->offenseDef[0];
     dst->offense.def[1] = src->offenseDef[1];
     dst->speciesNum = src->speciesNum;
-    ItemIdToBulkItem(&dst->heldItem, src->itemID);
+    InitBulkItem(&dst->heldItem, src->itemID);
     dst->currExp = src->currExp;
     dst->tacticIndex = TACTIC_LETS_GO_TOGETHER;
     dst->IQ = src->IQ;
@@ -1007,7 +1007,7 @@ void sub_808DFDC(s32 a1, DungeonMon* a2)
     }
 }
 
-void GetPokemonLevelData(LevelData* a1, s32 _id, s32 level)
+void GetLvlUpEntry(LevelData* a1, s32 _id, s32 level)
 {
   u8 buffer[12];
   s32 id = SpeciesId(_id);

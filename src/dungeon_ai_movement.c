@@ -124,8 +124,8 @@ bool8 CanTakeItem(Entity *pokemon)
         case ENTITY_ITEM:
             if (!pokemonInfo->isTeamLeader &&
                 !(pokemonInfo->heldItem.flags & ITEM_FLAG_EXISTS) &&
-                ((mapTile->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) || !pokemonInfo->isNotTeamMember) &&
-                !(GetItemData(object)->flags & ITEM_FLAG_IN_SHOP))
+                ((mapTile->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) || !pokemonInfo->isNotTeamMember) &&
+                !(GetItemInfo(object)->flags & ITEM_FLAG_IN_SHOP))
             {
                 return TRUE;
             }
@@ -551,7 +551,7 @@ bool8 AvoidEnemies(Entity *pokemon)
         if (room == closestTargetRoom && room != CORRIDOR_ROOM)
         {
             const Tile *tile = GetTile(pokemon->pos.x, pokemon->pos.y);
-            if (tile->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+            if (tile->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
             {
                 DungeonPos aiTargetPos;
                 s32 targetDir;
@@ -770,7 +770,7 @@ bool8 Wander(Entity *pokemon)
                 // it gives up and exits the way it came.
                 // This occurs normally for one-exit rooms, but can happen rarely for multi-exit rooms.
             }
-            if (GetTile(pokemon->pos.x, pokemon->pos.y)->terrainType & TERRAIN_TYPE_NATURAL_JUNCTION)
+            if (GetTile(pokemon->pos.x, pokemon->pos.y)->terrainFlags & TERRAIN_TYPE_NATURAL_JUNCTION)
             {
                 s32 i;
                 targetFacingDir = DungeonRandInt(NUM_DIRECTIONS);

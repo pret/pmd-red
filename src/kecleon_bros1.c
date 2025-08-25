@@ -740,7 +740,7 @@ static void HandleKecleonBrosSellAllItemsMenu(void)
                 for (slotIndex = 0; slotIndex < INVENTORY_SIZE; slotIndex++) {
                     item = &gTeamInventoryRef->teamItems[slotIndex];
 
-                    if ((item->flags & ITEM_FLAG_EXISTS) && CanSellItem(item->id))
+                    if ((item->flags & ITEM_FLAG_EXISTS) && IsShoppableItem(item->id))
                         ClearItemSlotAt(slotIndex);
                 }
 
@@ -781,7 +781,7 @@ static void sub_80199CC(void)
 
             ItemIdToItem(&sKecleonBrosWork1->soldItem, item->id, 0);
             sKecleonBrosWork1->soldItem.quantity = item->quantity;
-            sKecleonBrosWork1->itemSellPrice = GetStackBuyPrice(&sKecleonBrosWork1->soldItem);
+            sKecleonBrosWork1->itemSellPrice = GetActualBuyPrice(&sKecleonBrosWork1->soldItem);
             SetKecleonBrosState(20);
             break;
         case 4:
@@ -796,7 +796,7 @@ static void sub_80199CC(void)
 
             ItemIdToItem(&sKecleonBrosWork1->soldItem, item->id, 0);
             sKecleonBrosWork1->soldItem.quantity = item->quantity;
-            sKecleonBrosWork1->itemSellPrice = GetStackBuyPrice(&sKecleonBrosWork1->soldItem);
+            sKecleonBrosWork1->itemSellPrice = GetActualBuyPrice(&sKecleonBrosWork1->soldItem);
             SetKecleonBrosState(KECLEON_STORE_BUY_ITEM_INFO);
             break;
         case 2:
@@ -823,13 +823,13 @@ static void sub_8019B08(void)
         case 3:
             sKecleonBrosWork1->soldItemInventoryIndex = sub_801A8AC();
             sKecleonBrosWork1->soldItem = gTeamInventoryRef->teamItems[sKecleonBrosWork1->soldItemInventoryIndex];
-            sKecleonBrosWork1->itemSellPrice = GetStackSellPrice(&sKecleonBrosWork1->soldItem);
+            sKecleonBrosWork1->itemSellPrice = GetActualSellPrice(&sKecleonBrosWork1->soldItem);
             SetKecleonBrosState(28);
             break;
         case 4:
             sKecleonBrosWork1->soldItemInventoryIndex = sub_801A8AC();
             sKecleonBrosWork1->soldItem = gTeamInventoryRef->teamItems[sKecleonBrosWork1->soldItemInventoryIndex];
-            sKecleonBrosWork1->itemSellPrice = GetStackSellPrice(&sKecleonBrosWork1->soldItem);
+            sKecleonBrosWork1->itemSellPrice = GetActualSellPrice(&sKecleonBrosWork1->soldItem);
             sub_8099690(0);
             SetKecleonBrosState(KECLEON_STORE_SELL_ITEM_INFO);
             break;
@@ -892,7 +892,7 @@ static void HandleKecleonBrosSellItemMenu(void)
         case SELL_ACTION:
             sub_8099690(0);
 
-            if (!CanSellItem(sKecleonBrosWork1->soldItem.id))
+            if (!IsShoppableItem(sKecleonBrosWork1->soldItem.id))
                 SetKecleonBrosState(KECLEON_STORE_CANT_SELL_ITEM);
             else if (sKecleonBrosWork1->itemSellPrice + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY)
                 SetKecleonBrosState(KECLEON_STORE_SELL_ITEM_TOO_MUCH_MONEY);
@@ -969,8 +969,8 @@ static void KecleonCalcSellPriceForAllItems(void)
     for (index = 0; index < INVENTORY_SIZE; index++) {
         item = &gTeamInventoryRef->teamItems[index];
 
-        if ((item->flags & ITEM_FLAG_EXISTS) != 0 && CanSellItem(item->id)) {
-            sellPrice = GetStackSellPrice(item);
+        if ((item->flags & ITEM_FLAG_EXISTS) != 0 && IsShoppableItem(item->id)) {
+            sellPrice = GetActualSellPrice(item);
             sKecleonBrosWork1->inventoryItemSellPrice += sellPrice;
             sKecleonBrosWork1->numInventoryItemToSell++;
         }

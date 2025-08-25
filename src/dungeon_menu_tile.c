@@ -187,7 +187,7 @@ static void ShowTileDescription(DungeonPos *pos)
             break;
 
         DungeonShowWindows(&windows, FALSE);
-        trap = GetTrapData(object);
+        trap = GetTrapInfo(object);
         GetTrapName(trapName, trap->id);
         sub_80073B8(0);
         PrintStringOnWindow(16, 0, trapName, 0, '\0');

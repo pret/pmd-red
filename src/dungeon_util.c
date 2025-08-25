@@ -54,12 +54,12 @@ u8 GetEntityRoom(Entity *entity)
     return entity->room;
 }
 
-Trap* GetTrapData(Entity *entity)
+Trap* GetTrapInfo(Entity *entity)
 {
     return entity->axObj.info.trap;
 }
 
-Item* GetItemData(Entity *entity)
+Item* GetItemInfo(Entity *entity)
 {
     return entity->axObj.info.item;
 }
@@ -187,16 +187,16 @@ void sub_804522C(void)
     }
 }
 
-void sub_804535C(Entity *entity, PixelPos *pos)
+void UpdateEntityPixelPos(Entity *entity, PixelPos *pos)
 {
-  if (pos != NULL) {
-    entity->pixelPos.x = pos->x;
-    entity->pixelPos.y = pos->y;
-  }
-  else {
-    entity->pixelPos.x = X_POS_TO_PIXELPOS(entity->pos.x);
-    entity->pixelPos.y = Y_POS_TO_PIXELPOS(entity->pos.y);
-  }
+    if (pos != NULL) {
+        entity->pixelPos.x = pos->x;
+        entity->pixelPos.y = pos->y;
+    }
+    else {
+        entity->pixelPos.x = X_POS_TO_PIXELPOS(entity->pos.x);
+        entity->pixelPos.y = Y_POS_TO_PIXELPOS(entity->pos.y);
+    }
 }
 
 void SetEntityPixelPos(Entity *entity, s32 x, s32 y)
@@ -360,13 +360,13 @@ Entity *SpawnTrap(u8 trapID, DungeonPos *pos, u8 c)
     return NULL;
 }
 
-Entity *sub_8045708(DungeonPos *pos)
+Entity *SpawnItemEntity(DungeonPos *pos)
 {
     s32 i;
     Entity *ent;
 
     if (gDungeonWaterType[gDungeon->tileset] == DUNGEON_WATER_TYPE_LAVA
-        && (GetTileMut(pos->x, pos->y)->terrainType & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY) {
+        && (GetTileMut(pos->x, pos->y)->terrainFlags & (TERRAIN_TYPE_NORMAL | TERRAIN_TYPE_SECONDARY)) == TERRAIN_TYPE_SECONDARY) {
         return NULL;
     }
 
@@ -398,7 +398,7 @@ void sub_80457DC(Entity* ent)
     ent->unk22 = 0;
 }
 
-bool8 sub_8045804(Entity *ent)
+bool8 ShouldMinimapDisplayEntity(Entity *ent)
 {
     UnkDungeonGlobal_unk181E8_sub* saveTyping;
     Entity* camTarget;
@@ -438,7 +438,7 @@ bool8 sub_8045804(Entity *ent)
     }
 }
 
-bool8 sub_8045888(Entity *ent)
+bool8 ShouldDisplayEntity(Entity *ent)
 {
     if (ent->isVisible) {
         s32 x = (ent->pixelPos.x / 256) - gDungeon->unk181e8.cameraPixelPos.x;

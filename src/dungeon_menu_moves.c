@@ -39,7 +39,7 @@ extern void SetLeaderActionToNothing(u8 a0);
 extern void sub_806752C(ActionContainer *a0);
 extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
 extern void sub_8067768(ActionContainer *a0);
-extern void sub_806A2BC(Entity *a0, u8 a1);
+extern void TryPointCameraToMonster(Entity *a0, u8 a1);
 extern bool8 sub_8071A8C(Entity *pokemon);
 extern void sub_8083D1C(void);
 extern s32 ActionToDungeonSubMenuId(u16 param_1);
@@ -96,7 +96,7 @@ void ShowMovesFromTeamMenu(ActionContainer *a0)
             }
         }
 
-        sub_806A2BC(entityNew, 0);
+        TryPointCameraToMonster(entityNew, 0);
         ChangeDungeonCameraPos(&entityNew->pos, 0, 1, 1);
         SetLeaderActionToNothing(1);
         if (ShowDungeonMovesMenu(entityNew, 0, 1, countUntilId, count)) {
@@ -169,7 +169,7 @@ void ShowMovesFromTeamMenu(ActionContainer *a0)
             break;
     }
 
-    sub_806A2BC(entityOrg, 0);
+    TryPointCameraToMonster(entityOrg, 0);
     ChangeDungeonCameraPos(&entityOrg->pos, 0, 1, 1);
 }
 

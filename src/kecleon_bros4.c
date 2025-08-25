@@ -103,7 +103,7 @@ u32 sub_801A6E8(bool8 param_1)
                 case 4:
                     item = gTeamInventoryRef->teamItems[sub_801A8AC()];
 
-                    if (CanSellItem(item.id) && GetStackSellPrice(&item) + gTeamInventoryRef->teamMoney <= MAX_TEAM_MONEY)
+                    if (IsShoppableItem(item.id) && GetActualSellPrice(&item) + gTeamInventoryRef->teamMoney <= MAX_TEAM_MONEY)
                         PlayMenuSoundEffect(0);
                     else
                         PlayMenuSoundEffect(2);
@@ -260,7 +260,7 @@ void sub_801A9E0(void)
                 struct unkStruct_8090F58 thing; // sp6C
                 u8 buf2[80]; // sp78
 
-                if (CanSellItem(item.id)) {
+                if (IsShoppableItem(item.id)) {
                     thing.unk0 = 3;
                     thing.unk4 = 0;
                     thing.unk6 = 88;
@@ -268,7 +268,7 @@ void sub_801A9E0(void)
                     item.flags = 3;
                     sub_8090E14(buf1, &item, &thing);
 
-                    if (GetStackSellPrice(&item) + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY) {
+                    if (GetActualSellPrice(&item) + gTeamInventoryRef->teamMoney > MAX_TEAM_MONEY) {
                         sprintfStatic(buf2, sFmtRed, buf1);
                         PrintStringOnWindow(8, GetMenuEntryYCoord(&gUnknown_203B224->unk54.m.input, r7), buf2, gUnknown_203B224->unk54.m.menuWinId, 0);
                     }
@@ -336,7 +336,7 @@ bool8 sub_801ADA0(s32 param_1)
     if (!IsNotMoneyOrUsedTMItem(item.id))
         return FALSE;
 
-    if (IsThrowableItem(item.id)) {
+    if (IsThrownItem(item.id)) {
         uVar3_32 = sub_801AE24(item.id);
         sum1 = gTeamInventoryRef->teamStorage[item.id];
         uVar3 = uVar3_32;
@@ -368,7 +368,7 @@ static s32 sub_801AE24(u32 itemID)
             item = gTeamInventoryRef->teamItems[invIndex];
 
             if (item.id == itemID) {
-                if (IsThrowableItem(item.id))
+                if (IsThrownItem(item.id))
                     count += item.quantity;
                 else
                     count++;

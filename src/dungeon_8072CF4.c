@@ -30,6 +30,7 @@
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_engine.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F222;
@@ -70,8 +71,7 @@ void HandleTakeItemAction(Entity *);
 void HandleUseItemAction(Entity *);
 void sub_8066FA4(Entity *);
 void HandleUnsetItemAction(Entity *,bool8);
-extern u8 sub_8044B28(void);
-extern u8 UseAttack(Entity *);
+extern u8 DisplayActions(Entity *);
 void sub_806A1E8(Entity *pokemon);
 bool8 sub_804AE08(DungeonPos *pos);
 void HandlePickUpAIAction(Entity *pokemon);
@@ -79,7 +79,7 @@ void HandleThrowItemAIAction(Entity *pokemon);
 void HandleEatAIAction(Entity *pokemon);
 bool8 sub_8044B84(void);
 extern void sub_8074094(Entity *);
-extern void sub_8071DA4(Entity *);
+extern void EnemyEvolution(Entity *);
 u32 sub_8075818(Entity *entity);
 extern void MarkLastUsedMonMove(Entity *entity, Move *move);
 bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move);
@@ -125,8 +125,8 @@ bool8 sub_8072CF4(Entity *entity)
         }
     }
     if (!IsNotAttacking(entity, FALSE)) {
-        if (UseAttack(entity)) {
-            if (sub_8044B28()) {
+        if (DisplayActions(entity)) {
+            if (IsFloorOver()) {
                 return FALSE;
             }
             if (!EntityIsValid(entity)) {
@@ -280,7 +280,7 @@ bool8 sub_8072CF4(Entity *entity)
             sub_8067904(entity, MOVE_REGULAR_ATTACK);
             break;
         case ACTION_STEPPED_ON_TRAP:
-            HandleTrap(entity,&entity->pos,0,0);
+            TryTriggerTrap(entity,&entity->pos,0,0);
             break;
         case ACTION_PICK_UP_AI:
             HandlePickUpAIAction(entity);
@@ -345,7 +345,7 @@ bool8 sub_8072CF4(Entity *entity)
                         WarpTarget(entity,entity,0,0);
                     }
                     sub_8074094(entity);
-                    sub_8071DA4(entity);
+                    EnemyEvolution(entity);
                 }
             }
         }

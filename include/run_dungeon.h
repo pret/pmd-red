@@ -22,7 +22,7 @@ bool8 sub_8043CE4(s32 dungeonId);
 u8 GetFloorType(void);
 void sub_8043D50(s32 *a0, s32 *a1);
 void sub_8043D60(void);
-bool8 sub_8043ED0(bool8 a0);
+bool8 TryForcedLoss(bool8 a0);
 void EnforceMaxItemsAndMoney(void);
 bool8 IsBossFight(void);
 bool8 IsCurrentFixedRoomBossFight(void);

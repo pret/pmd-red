@@ -25,7 +25,7 @@ extern s32 gUnknown_202EDD0;
 
 extern u8 GetFloorType(void);
 extern bool8 sub_8094C48(void);
-extern bool8 sub_8045804(Entity *ent);
+extern bool8 ShouldMinimapDisplayEntity(Entity *ent);
 extern bool8 DoesNotHaveShadedMap(void);
 
 struct UnkStruct1
@@ -163,7 +163,7 @@ void LoadDungeonMapPalette(void)
     }
 }
 
-void ShowDungeonMapAtPos(s32 x, s32 y)
+void DrawMinimapTile(s32 x, s32 y)
 {
     s32 yAdd = 0;
     const Tile *tile;
@@ -217,7 +217,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
     showItems = gDungeon->unk181e8.showAllFloorItems;
     allTilesRevealed = gDungeon->unk181e8.allTilesRevealed;
     if (blinded) {
-        tileKnown = tile->spawnOrVisibilityFlags & VISIBILITY_FLAG_REVEALED;
+        tileKnown = tile->spawnOrVisibilityFlags.visibility & VISIBILITY_FLAG_REVEALED;
         var_24 = FALSE;
     }
     else {
@@ -225,7 +225,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
             tileKnown = TRUE;
         }
         else {
-            tileKnown = tile->spawnOrVisibilityFlags & VISIBILITY_FLAG_REVEALED;
+            tileKnown = tile->spawnOrVisibilityFlags.visibility & VISIBILITY_FLAG_REVEALED;
         }
 
         if (GetFloorType() == FLOOR_TYPE_NORMAL) {
@@ -242,7 +242,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
             Entity *entity = tile->monster;
             if (entity != NULL) {
                 s32 entType = GetEntityType(entity);
-                if (gShowMonsterDotsInDungeonMap && entType == ENTITY_MONSTER && sub_8045804(entity)) {
+                if (gShowMonsterDotsInDungeonMap && entType == ENTITY_MONSTER && ShouldMinimapDisplayEntity(entity)) {
                     EntityInfo *entInfo = GetEntInfo(entity);
                     if (IsExperienceLocked(entInfo->joinedAt.id) || entInfo->monsterBehavior == 1 || entInfo->monsterBehavior == 4) {
                         mapGfxType = MAP_GFX_ALLY;
@@ -273,7 +273,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
                 if (!tileKnown) {
                     mapGfxType = MAP_GFX_NOTHING;
                     if (entType == ENTITY_ITEM) {
-                        if ((showItems || (tile->spawnOrVisibilityFlags & 2)) && terrainType != TERRAIN_TYPE_WALL) {
+                        if ((showItems || (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)) && terrainType != TERRAIN_TYPE_WALL) {
                             mapGfxType = MAP_GFX_ITEM;
                         }
                     }
@@ -282,7 +282,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
                 else {
                     if (entType == ENTITY_TRAP) {
                         if (entity->isVisible || showHiddenTraps) {
-                            Trap *trap = GetTrapData(entity);
+                            Trap *trap = GetTrapInfo(entity);
                             mapGfxType = sTrapToMapGfxId[trap->id];
                             lookForMapObject = FALSE;
                         }
@@ -291,7 +291,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
 
                 if (lookForMapObject) {
                     if (entType == ENTITY_ITEM) {
-                        if ((showItems || (tile->spawnOrVisibilityFlags & 2)) && terrainType != TERRAIN_TYPE_WALL) {
+                        if ((showItems || (tile->spawnOrVisibilityFlags.spawn & SPAWN_FLAG_ITEM)) && terrainType != TERRAIN_TYPE_WALL) {
                             mapGfxType = MAP_GFX_ITEM;
                             lookForMapObject = FALSE;
                         }
@@ -306,7 +306,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
             }
             else {
                 if (!tileKnown) {
-                    if (var_24 && (tile->terrainType & TERRAIN_TYPE_STAIRS)) {
+                    if (var_24 && (tile->terrainFlags & TERRAIN_TYPE_STAIRS)) {
                         if (GetFloorType() == FLOOR_TYPE_NORMAL) {
                             mapGfxType = MAP_GFX_STAIRS;
                         }
@@ -317,7 +317,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
                     }
                 }
                 else {
-                    if ((tile->terrainType & TERRAIN_TYPE_STAIRS)) {
+                    if ((tile->terrainFlags & TERRAIN_TYPE_STAIRS)) {
                         if (GetFloorType() == FLOOR_TYPE_NORMAL) {
                             mapGfxType = MAP_GFX_STAIRS;
                         }
@@ -371,7 +371,7 @@ void ShowDungeonMapAtPos(s32 x, s32 y)
                 }
 
                 mapGfxType = (s16) terrainLine;
-                if (tile->spawnOrVisibilityFlags & VISIBILITY_FLAG_VISITED) {
+                if (tile->spawnOrVisibilityFlags.visibility & VISIBILITY_FLAG_VISITED) {
                     mapGfxType = (s16) (mapGfxType + MAP_GFX_TERRAIN_TILES_VISITED);
                 }
                 else {
@@ -479,7 +479,7 @@ void CopyDungeonMapToVram(void)
     dungeon->dungeonMap.scheduledVramCopiesCount = 0;
 }
 
-void ShowPlayerDotOnMap(void)
+void FlashLeaderIcon(void)
 {
     if (gDungeon->unk181e8.inFloorMapMode)
         return;
@@ -522,7 +522,7 @@ void ResetMapPlayerDotFrames(void)
     sPlayerDotFrames = 0;
 }
 
-void ShowWholeRevealedDungeonMap(void)
+void UpdateMinimap(void)
 {
     s32 x, y;
 
@@ -530,7 +530,7 @@ void ShowWholeRevealedDungeonMap(void)
 
     for (y = 0; y < DUNGEON_MAX_SIZE_Y; y++) {
         for (x = 0; x < DUNGEON_MAX_SIZE_X; x++) {
-            ShowDungeonMapAtPos(x, y);
+            DrawMinimapTile(x, y);
         }
     }
 }

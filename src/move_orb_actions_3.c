@@ -40,8 +40,8 @@
 #include "trap.h"
 #include "weather.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_engine.h"
 
-extern u8 sub_8044B28(void);
 extern void sub_807EC28(bool8);
 extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
@@ -622,9 +622,9 @@ _0805A8C2:
       if (sub_80571F0(entity,&stackMove) == 0) {
         sub_806F370(pokemon,entity,gSplashDmgValue,0,0,TYPE_NONE,sub_8057600(move, param_4),0,1,0);
       }
-      if ((sub_8044B28() == 0) && (EntityIsValid(pokemon))) {
+      if ((IsFloorOver() == 0) && (EntityIsValid(pokemon))) {
         sub_806F370(pokemon,pokemon,gSplashDmgValue,0,0,0,0x1fe,0,0,0);
-        if ((sub_8044B28() == 0) && (EntityIsValid(pokemon))) goto _0805A9FE;
+        if ((IsFloorOver() == 0) && (EntityIsValid(pokemon))) goto _0805A9FE;
       }
     }
     else {
@@ -651,13 +651,13 @@ _0805AA5E:
 #else
       DungeonPos *pos;
 #endif
-      sub_804535C(target, NULL);
+      UpdateEntityPixelPos(target, NULL);
       pos = r9;
       if (sub_80706A4(target, pos)) {
         WarpTarget(pokemon,target,0,0);
       }
       if (GetEntInfo(target)->isTeamLeader) {
-        sub_804AC20(r9);
+        DiscoverMinimap(r9);
         sub_807EC28(FALSE);
       }
       sub_806A5B8(target);
@@ -1031,7 +1031,7 @@ bool8 SpikesMoveAction(Entity * pokemon, Entity * target, Move *move, s32 param_
     {
         TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC5A8); // A trap can't be laid here!
     }
-    sub_8049ED4();
+    UpdateTrapsVisibility();
     return trapLaid;
 }
 

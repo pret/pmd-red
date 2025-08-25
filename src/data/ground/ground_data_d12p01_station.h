@@ -46,28 +46,28 @@ static const struct ScriptRef s_gs204_g0_s0_station_sref = { 404, 1, NULL /* ENT
 
 static const struct ScriptCommand s_gs204_g0_s1_lives0_dlg0[] = { /* 0x825d03c */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs204_g0_s1_lives1_dlg0[] = { /* 0x825d07c */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs204_g0_s3_lives0_dlg0[] = { /* 0x825d0bc */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
 
 static const struct ScriptCommand s_gs204_g0_s3_lives1_dlg0[] = { /* 0x825d0fc */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     CALL_SCRIPT(WAIT_START_FUNC),
     RET,
 };
@@ -90,7 +90,7 @@ static const struct ScriptCommand s_gs204_g1_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(108),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     NEXT_DUNGEON(30, SCRIPT_DUNGEON_MAGMA_CAVERN),
     RET,
 };
@@ -99,13 +99,13 @@ static const struct ScriptRef s_gs204_g1_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs204_g1_s0_lives0_dlg0[] = { /* 0x825d228 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0002,  0x00000067,  0x00000000, NULL },
     { 0xdf, 0x00,  0x0000,  0x00000000,  0x00000000, NULL },
     WAIT(30),
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
+    WALK_GRID(256, 0),
     WAIT(10),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
     WAIT(30),
@@ -117,7 +117,7 @@ static const struct ScriptCommand s_gs204_g1_s0_lives0_dlg0[] = { /* 0x825d228 *
     VARIANT_DEFAULT(_(" Whew...\nLook at the streams of lava.")),
     VARIANT_DEFAULT(_(" It's going to be scorching\nhot in the dungeon, I think.")),
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     WAIT(5),
     { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
     WAIT(15),
@@ -129,26 +129,26 @@ static const struct ScriptCommand s_gs204_g1_s0_lives0_dlg0[] = { /* 0x825d228 *
     VARIANT_DEFAULT(_(" There should be other\nrescue teams making their way through\neven now.")),
     VARIANT_DEFAULT(_(" Let's try our best like\nalways!")),
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     { 0x23, 0x00,  0x0050,  0x00000000,  0x00000000, NULL },
     WAIT(15),
-    { 0x6b, 0x00,  0x0100,  0x00000003,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    WALK_GRID(256, 3),
+    ALERT_CUE(3),
     HALT,
 };
 
 
 static const struct ScriptCommand s_gs204_g1_s0_lives1_dlg0[] = { /* 0x825d6dc */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0100,  0x00000001,  0x00000000, NULL },
+    AWAIT_CUE(6),
+    WALK_GRID(256, 1),
     CALL_SCRIPT(LOOK_AROUND_FUNC),
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(6),
     { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0100,  0x00000002,  0x00000000, NULL },
+    AWAIT_CUE(6),
+    WALK_GRID(256, 2),
     HALT,
 };
 
@@ -158,7 +158,7 @@ static const struct ScriptCommand s_gs204_g2_s0_station_sref_script[] = { /* 0x8
     SELECT_ENTITIES(-1, 0),
     BGM_SWITCH(108),
     { 0x22, 0x01,  0x001e,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    AWAIT_CUE(3),
     NEXT_DUNGEON(30, SCRIPT_DUNGEON_MAGMA_CAVERN),
     RET,
 };
@@ -167,35 +167,35 @@ static const struct ScriptRef s_gs204_g2_s0_station_sref = { 400, 7, NULL /* EVE
 
 static const struct ScriptCommand s_gs204_g2_s0_lives0_dlg0[] = { /* 0x825d818 */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0000,  0x00000000,  0x00000000, NULL },
     { 0x2d, 0x09,  0x0002,  0x00000058,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0100,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
+    WALK_GRID(256, 0),
     { 0x93, 0x04,  0x000b,  0x00000022,  0x00000000, NULL },
     WAIT(15),
     MSG_VAR(2, PARTNER_TALK_KIND, 1),
     VARIANT(/* == */  1, _(" This time, we'll rescue\n{NAME_2}'s team!\nLet's get it done!")),
     VARIANT_DEFAULT(_(" This time, we have to\nrescue {NAME_2}'s team!\nLet's not blow it!")),
     TEXTBOX_CLEAR,
-    { 0xe4, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
+    ALERT_CUE(6),
     { 0x23, 0x00,  0x0050,  0x00000000,  0x00000000, NULL },
     WAIT(15),
-    { 0x6b, 0x00,  0x0100,  0x00000003,  0x00000000, NULL },
-    { 0xe4, 0x00,  0x0003,  0x00000000,  0x00000000, NULL },
+    WALK_GRID(256, 3),
+    ALERT_CUE(3),
     HALT,
 };
 
 
 static const struct ScriptCommand s_gs204_g2_s0_lives1_dlg0[] = { /* 0x825d9bc */
     DEBUGINFO,
-    { 0x54, 0x00,  0x0002,  0x00000000,  0x00000000, NULL },
+    SELECT_ANIMATION(2),
     { 0x2d, 0x07,  0x0001,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0100,  0x00000001,  0x00000000, NULL },
+    AWAIT_CUE(6),
+    WALK_GRID(256, 1),
     { 0x93, 0x04,  0x000b,  0x00000000,  0x00000000, NULL },
-    { 0xe3, 0x00,  0x0006,  0x00000000,  0x00000000, NULL },
-    { 0x6b, 0x00,  0x0100,  0x00000002,  0x00000000, NULL },
+    AWAIT_CUE(6),
+    WALK_GRID(256, 2),
     HALT,
 };
 
