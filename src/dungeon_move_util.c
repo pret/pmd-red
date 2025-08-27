@@ -5,7 +5,6 @@
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "constants/weather.h"
-#include "structs/str_damage.h"
 #include "dungeon_move_util.h"
 #include "effect_main.h"
 #include "effect_data.h"
@@ -42,10 +41,9 @@
 #include "dungeon_run_end.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
+#include "dungeon_damage.h"
 
 extern void sub_80429C8(Entity *r0);
-extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
-extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, s24_8, u16, u32);
 extern void sub_806A1E8(Entity *pokemon);
 extern void sub_804178C(u32);
 extern void EnemyEvolution(Entity *);

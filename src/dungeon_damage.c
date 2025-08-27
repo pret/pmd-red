@@ -1,11 +1,12 @@
 #include "global.h"
+#include "globaldata.h"
+#include "dungeon_damage.h"
 #include "constants/ability.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_logic.h"
 #include "pokemon_types.h"
 #include "dungeon_message.h"
 #include "string_format.h"
-#include "type_effectiveness.h"
 #include "constants/move_id.h"
 #include "constants/monster.h"
 #include "constants/status.h"
@@ -16,7 +17,6 @@
 #include "status.h"
 #include "dungeon_random.h"
 #include "dungeon_items.h"
-#include "structs/str_damage.h"
 #include "dungeon_util.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
@@ -61,7 +61,6 @@ extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_806F500(void);
 extern void PointCameraToMonster(Entity *);
-extern bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, struct DamageStruct *dmgStruct);
 extern void sub_8041B74(Entity *pokemon);
 extern void sub_8041B5C(Entity *pokemon);
 extern void sub_8042940(Entity *r0);
@@ -87,6 +86,8 @@ extern const s16 gUnknown_810AC68;
 extern const s16 gUnknown_810AC62;
 
 static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8);
+static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct);
+
 void DealDamageToEntity(Entity *entity, s32 dmg, s32 r6, s32 r4);
 void sub_806F63C(Entity *param_1);
 
@@ -265,7 +266,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
     }
 }
 
-static inline u8 ItemId(Item *item)
+static inline u32 ItemId(Item *item)
 {
     return item->id;
 }
@@ -767,7 +768,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
     return TRUE;
 }
 
-bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct)
+static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct)
 {
   bool8 torrentFlag;
   bool8 overgrowFlag;

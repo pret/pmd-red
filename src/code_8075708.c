@@ -44,7 +44,6 @@
 
 extern void sub_8073D14(Entity *);
 extern void sub_8075708(Entity *entity);
-extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern void sub_805229C(void);
 extern void sub_807E8F0(Entity *);
 extern void sub_80444F4(Entity *pokemon);

@@ -31,8 +31,8 @@
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
 #include "dungeon_engine.h"
+#include "dungeon_damage.h"
 
-extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern void sub_805229C(void);
 extern void sub_807E8F0(Entity *);
 extern void sub_80444F4(Entity *pokemon);

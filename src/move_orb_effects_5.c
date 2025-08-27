@@ -27,6 +27,7 @@
 #include "dungeon_logic.h"
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_damage.h"
 
 extern void UpdateMinimap();
 extern void EntityUpdateStatusSprites(Entity *);
@@ -35,7 +36,6 @@ extern void sub_807EC28(bool8);
 extern s32 GetMonsterApparentID(Entity *param_1, s16 param_2);
 extern void sub_806A898(Entity *, u32, u32);
 extern void HealTargetHP(Entity *pokemon, Entity *r1, s16, s16, u32);
-extern void DealDamageToEntity(Entity *, s16, u32, u32);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);

@@ -31,6 +31,7 @@
 #include "dungeon_strings.h"
 #include "sprite.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_damage.h"
 
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
@@ -40,7 +41,6 @@ bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
 u8 GetFloorType(void);
 void sub_8045BF8(u8 *, Item *);
-void DealDamageToEntity(Entity *,s16,u32,u32);
 void sub_806F480(Entity *, u32);
 void sub_804225C(Entity *, DungeonPos *, u8);
 void EnemyEvolution(Entity *);
