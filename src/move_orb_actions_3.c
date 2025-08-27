@@ -35,7 +35,7 @@
 #include "move_orb_actions_4.h"
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
-#include "structs/str_dungeon.h"
+#include "dungeon_damage.h"
 #include "pokemon_types.h"
 #include "trap.h"
 #include "weather.h"
@@ -43,13 +43,10 @@
 #include "dungeon_engine.h"
 
 extern void sub_807EC28(bool8);
-extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 extern void MudWaterSportEffect(u32);
 extern void sub_806A6E8(Entity *);
 
-extern u8 sub_806F4A4(Entity *, u32);
 extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 extern void nullsub_92(Entity *);
 extern u8 sub_807EAA0(u32, u32);
@@ -78,7 +75,7 @@ bool8 JumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,s32 param_
   u32 movePower;
   u32 moveCritChance;
   bool8 flag;
-  s32 local_30 [4];
+  DamageStruct dmgStruct;
   u8 auStack_20;
 
   flag = FALSE;
@@ -89,14 +86,14 @@ bool8 JumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,s32 param_
     moveType = GetMoveTypeForMonster(pokemon,move);
     movePower = GetMovePower(pokemon,move);
     moveCritChance = GetMoveCritChance(move);
-    CalcDamage(pokemon,target,moveType,movePower,moveCritChance,local_30,0x100,move->id,0);
+    CalcDamage(pokemon,target,moveType,movePower,moveCritChance,&dmgStruct, IntToF248_2(1),move->id,0);
     SetMessageArgument_2(gFormatBuffer_Monsters[0],GetEntInfo(pokemon),0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC7C8);
-    local_30[0] = local_30[0] / 2;
-    if (local_30[0] == 0) {
-      local_30[0] = 1;
+    dmgStruct.dmg /= 2;
+    if (dmgStruct.dmg == 0) {
+      dmgStruct.dmg = 1;
     }
-    sub_806F370(pokemon,pokemon,local_30[0],0,&auStack_20,0,0x1f7,0x13,1,0);
+    sub_806F370(pokemon,pokemon,dmgStruct.dmg,0,&auStack_20,0,0x1f7,0x13,1,0);
   }
   return flag;
 }
@@ -128,7 +125,7 @@ bool8 HiJumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,s32 para
   u32 movePower;
   u32 moveCritChance;
   bool8 flag;
-  s32 local_30 [4];
+  DamageStruct dmgStruct;
   u8 auStack_20;
 
   flag = FALSE;
@@ -139,14 +136,14 @@ bool8 HiJumpKickMoveAction(Entity * pokemon,Entity * target,Move * move,s32 para
     moveType = GetMoveTypeForMonster(pokemon,move);
     movePower = GetMovePower(pokemon,move);
     moveCritChance = GetMoveCritChance(move);
-    CalcDamage(pokemon,target,moveType,movePower,moveCritChance,local_30,0x200,move->id,0);
+    CalcDamage(pokemon,target,moveType,movePower,moveCritChance,&dmgStruct,IntToF248_2(2),move->id,0);
     SetMessageArgument_2(gFormatBuffer_Monsters[0],GetEntInfo(pokemon),0);
     TryDisplayDungeonLoggableMessage3(pokemon,target,gUnknown_80FC7C8);
-    local_30[0] = local_30[0] / 2;
-    if (local_30[0] == 0) {
-      local_30[0] = 1;
+    dmgStruct.dmg /= 2;
+    if (dmgStruct.dmg == 0) {
+      dmgStruct.dmg = 1;
     }
-    sub_806F370(pokemon,pokemon,local_30[0],0,&auStack_20,0,0x1f8,0x13,1,0);
+    sub_806F370(pokemon,pokemon,dmgStruct.dmg,0,&auStack_20,0,0x1f8,0x13,1,0);
   }
   return flag;
 }

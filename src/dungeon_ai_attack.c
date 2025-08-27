@@ -29,9 +29,9 @@
 #include "structs/str_dungeon.h"
 #include "targeting_flags.h"
 #include "dungeon_misc.h"
-#include "type_effectiveness.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
+#include "dungeon_damage.h"
 
 #define REGULAR_ATTACK_INDEX 4
 

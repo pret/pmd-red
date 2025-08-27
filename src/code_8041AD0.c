@@ -31,13 +31,13 @@
 #include "dungeon_util_1.h"
 #include "effect_data.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_damage.h"
 
 // Unknown dungeon file. File split is correct.
 
 extern const u8 *gPtrFeralFoundItemMessage[];
 
 extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
-extern u32 sub_806F62C(u32);
 extern void PlaySoundEffect(u32);
 
 void EntityUpdateStatusSprites(Entity *entity);

@@ -32,7 +32,6 @@ bool8 ExposeTrap(s32 x, s32 y);
 void UpdateMinimap();
 void sub_807EC28(u32);
 u8 IsFloorOver(void);
-extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);
 extern void UpdateCamera(u32);

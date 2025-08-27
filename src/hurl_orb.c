@@ -39,10 +39,10 @@
 #include "structs/str_dungeon.h"
 #include "weather.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_damage.h"
 
 extern void sub_80833E8(DungeonPos *param_1, s32 *param_2);
 extern void sub_806A5B8(Entity *);
-extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_807D068(Entity *, DungeonPos *);
 extern void sub_807EC28(bool8 arg0);
 

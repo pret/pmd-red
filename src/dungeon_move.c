@@ -6,7 +6,6 @@
 #include "constants/iq_skill.h"
 #include "constants/status.h"
 #include "constants/weather.h"
-#include "structs/str_damage.h"
 #include "dungeon_move_util.h"
 #include "effect_main.h"
 #include "effect_data.h"
@@ -27,6 +26,7 @@
 #include "dungeon_random.h"
 #include "dungeon_strings.h"
 #include "dungeon_util.h"
+#include "dungeon_damage.h"
 #include "math.h"
 #include "move_effects_target.h"
 #include "move_orb_actions_1.h"
@@ -46,8 +46,6 @@
 #include "dungeon_engine.h"
 
 extern void sub_80429C8(Entity *r0);
-extern void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *dmgStruct, bool32 isFalseSwipe, bool32 giveExp, s16 arg4, bool32 arg8, s32 argC);
-extern void CalcDamage(Entity *, Entity *, u8, u32, u32, struct DamageStruct *dmgStruct, s24_8, u16, u32);
 extern s16 sub_8057600(Move *move, s32 itemID);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8042238(Entity *pokemon, Entity *target);
@@ -63,14 +61,11 @@ extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
 extern Entity *sub_80696A8(Entity *a0);
 extern Entity *GetMonsterAtPos(DungeonPos *pos);
-extern void sub_806F2BC(Entity *attacker, Entity *target, u8 moveType, s32 a2, struct DamageStruct *dmgStruct);
 extern s32 sub_800ED20(u16 param_1);
 extern void sub_8042930(Entity *r0);
 extern void sub_8041B48(Entity *pokemon);
 extern void sub_8041BA8(Entity *pokemon);
 extern void sub_8042950(Entity *r0);
-
-extern void SetShopkeeperAggression(Entity *, Entity *);
 
 extern const s32 gUnknown_8106A50;
 extern const s32 gUnknown_8106A4C;

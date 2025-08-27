@@ -32,18 +32,15 @@
 #include "dungeon_config.h"
 #include "dungeon_misc.h"
 #include "dungeon_strings.h"
+#include "dungeon_damage.h"
 
 extern void sub_806A5B8(Entity *entity);
 void sub_8075900(Entity *pokemon, u8 r1);
 extern void sub_807EC28(bool8);
-extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void MudWaterSportEffect(u32);
-extern void CalcDamage(Entity *, Entity *, u8, u32, u32, s32 *, u32, u16, u32);
 extern void sub_806A6E8(Entity *);
 
 extern void EndAbilityImmuneStatus(Entity *, Entity *);
-extern u8 sub_806F4A4(Entity *, u32);
 extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 extern void nullsub_92(Entity *);
 extern u8 sub_807EAA0(u32, u32);
@@ -53,8 +50,6 @@ extern bool8 sub_805727C(Entity *, Entity *, s32);
 bool8 RollSecondaryEffect(Entity *pokemon, s32 chance);
 bool8 sub_80571F0(Entity * pokemon, Move *move);
 
-extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-extern void DealDamageToEntity(Entity *, s32, u32, u32);
 extern s16 sub_8057600(Move *move, s32 itemID);
 
 // Note: For some reason I have to define these as an array of 1 to match asm.

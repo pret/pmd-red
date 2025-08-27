@@ -35,10 +35,10 @@
 #include "weather.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
+#include "dungeon_damage.h"
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void HandleOneRoomOrb(Entity *, Entity *);
-extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern void UpdateMinimap(void);
 extern void HandleDroughtOrbAction(Entity *);
 extern void HandleLuminousOrbAction(Entity *pokemon);
@@ -48,8 +48,6 @@ extern s16 GetRandomFloorMonsterId(u32);
 extern bool8 sub_806AA0C(s32, u32);
 extern void sub_806BB6C(Entity *, s32);
 extern void HandleSwitcherOrb(Entity *, Entity *, u32);
-
-extern void DealDamageToEntity(Entity *, s32, u32, u32);
 
 extern u32 gUnknown_8106A50;
 extern u32 gUnknown_8106A4C;
