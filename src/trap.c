@@ -41,7 +41,6 @@ bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
 u8 GetFloorType(void);
 void sub_8045BF8(u8 *, Item *);
-void sub_806F480(Entity *, u32);
 void sub_804225C(Entity *, DungeonPos *, u8);
 void EnemyEvolution(Entity *);
 void sub_806A1E8(Entity *pokemon);
@@ -327,10 +326,10 @@ void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4)
     }
     if (target != NULL) {
         if (trapData->unk1 == 2) {
-            sub_806F480(target,1);
+            sub_806F480(target,TRUE);
         }
         else if (trapData->unk1 == 1) {
-            sub_806F480(target,0);
+            sub_806F480(target,FALSE);
         }
     }
     switch(trapData->id) {

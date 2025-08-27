@@ -67,8 +67,6 @@ extern void sub_8041B48(Entity *pokemon);
 extern void sub_8041BA8(Entity *pokemon);
 extern void sub_8042950(Entity *r0);
 
-extern void SetShopkeeperAggression(Entity *, Entity *);
-
 extern const s32 gUnknown_8106A50;
 extern const s32 gUnknown_8106A4C;
 

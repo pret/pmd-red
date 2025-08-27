@@ -26,8 +26,8 @@
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
 #include "dungeon_engine.h"
+#include "dungeon_damage.h"
 
-extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_804216C(Entity *pokemon, Entity *target, u32 r2);
 extern void sub_804218C(Entity *pokemon, Entity *target);
 

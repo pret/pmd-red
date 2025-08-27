@@ -35,10 +35,7 @@
 #include "dungeon_strings.h"
 #include "dungeon_damage.h"
 
-extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
-
 extern void EndAbilityImmuneStatus(Entity *, Entity *);
-extern u8 sub_806F4A4(Entity *, u32);
 extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 extern void nullsub_92(Entity *);
 extern u8 sub_807EAA0(u32, u32);

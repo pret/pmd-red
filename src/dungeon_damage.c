@@ -4,6 +4,7 @@
 #include "constants/ability.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_logic.h"
+#include "dungeon_move.h"
 #include "pokemon_types.h"
 #include "dungeon_message.h"
 #include "string_format.h"
@@ -43,7 +44,6 @@ extern void sub_807F43C(Entity *, Entity *);
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);
 extern void sub_8041D00(Entity *pokemon, Entity *target);
-extern void SetShopkeeperAggression(Entity *, Entity *);
 extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern bool8 sub_806A458(Entity *);
@@ -55,11 +55,9 @@ extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
 extern void sub_8078084(Entity * pokemon);
 extern void sub_800DBBC(void);
-extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
-extern void sub_806F500(void);
 extern void PointCameraToMonster(Entity *);
 extern void sub_8041B74(Entity *pokemon);
 extern void sub_8041B5C(Entity *pokemon);
@@ -71,8 +69,6 @@ extern void sub_8042978(Entity *);
 extern void sub_804298C(Entity *);
 extern void sub_80428EC(Entity *);
 extern void ResetMonEntityData(EntityInfo *, u32);
-
-extern u8 gUnknown_202F221;
 
 extern const s32 gUnknown_8106A4C;
 extern const u8 *const gUnknown_8100548;
@@ -87,9 +83,8 @@ extern const s16 gUnknown_810AC62;
 
 static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struct DamageStruct *r5, bool32 isFalseSwipe, bool32 giveExp, s16 arg4_, s32 arg8);
 static bool8 sub_806E100(s48_16 *param_1, Entity *pokemon, Entity *target, u8 type, DamageStruct *dmgStruct);
-
-void DealDamageToEntity(Entity *entity, s32 dmg, s32 r6, s32 r4);
-void sub_806F63C(Entity *param_1);
+static void sub_806F500(void);
+static void sub_806F63C(Entity *param_1);
 
 static const u32 gUnknown_8106EFC[] = { 0, 0  };
 static const s48_16 gUnknown_8106F04 = { 0x0, 0x10000 };
@@ -1566,20 +1561,15 @@ void SetShopkeeperAggression(Entity *pokemon, Entity *target)
     }
 }
 
-void sub_806F480(Entity *pokemon, u8 r1)
+void sub_806F480(Entity *pokemon, bool8 attackEnemies)
 {
-    EntityInfo *info;
+    EntityInfo *info = GetEntInfo(pokemon);
 
-    info = GetEntInfo(pokemon);
-
-    if(info->shopkeeper != SHOPKEEPER_MODE_NORMAL)
-    {
-        if(r1)
-        {
+    if (info->shopkeeper != SHOPKEEPER_MODE_NORMAL) {
+        if (attackEnemies) {
             info->shopkeeper = SHOPKEEPER_MODE_ATTACK_ENEMIES;
         }
-        else
-        {
+        else {
             info->shopkeeper = SHOPKEEPER_MODE_ATTACK_TEAM;
         }
     }
@@ -1590,21 +1580,19 @@ u8 sub_806F4A4(Entity *pokemon, u8 type)
     EntityInfo *info = GetEntInfo(pokemon);
     s32 index;
 
-    if(MonsterIsType(pokemon, TYPE_GHOST))
-    {
-        if(type == TYPE_NORMAL || type == TYPE_FIGHTING)
-            if(!info->exposed)
+    if (MonsterIsType(pokemon, TYPE_GHOST)) {
+        if (type == TYPE_NORMAL || type == TYPE_FIGHTING)
+            if (!info->exposed)
                 return FALSE;
     }
-    for(index = 0; index < 2; index++)
-    {
-        if(gTypeEffectivenessChart[type][info->types[index]] == EFFECTIVENESS_IMMUNE)
+    for (index = 0; index < 2; index++) {
+        if (gTypeEffectivenessChart[type][info->types[index]] == EFFECTIVENESS_IMMUNE)
             return FALSE;
     }
     return TRUE;
 }
 
-void sub_806F500(void)
+static void sub_806F500(void)
 {
     struct unkStruct_Dungeon134_sub *temp;
 
@@ -1662,11 +1650,9 @@ s32 sub_806F62C(int param_1)
     return gUnknown_8106F7C[param_1];
 }
 
-void sub_806F63C(Entity *param_1)
+static void sub_806F63C(Entity *param_1)
 {
-    UnkDungeonGlobal_unk181E8_sub *temp;
-
-    temp = &gDungeon->unk181e8;
+    UnkDungeonGlobal_unk181E8_sub *temp = &gDungeon->unk181e8;
 
     if (temp->cameraTarget == param_1) {
         PointCameraToMonster(temp->cameraTarget);

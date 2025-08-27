@@ -21,7 +21,6 @@ extern u8 DisplayActions(Entity *);
 extern void sub_805E804(void);
 void TryPointCameraToMonster(Entity *pokemon, u8 param_2);
 extern void nullsub_93(DungeonPos *);
-extern void sub_806F370(Entity *pokemon, Entity *target, u32, u32, u8 *, u8 moveType, s32, u32, u32, u32);
 extern void sub_807EC28(bool8);
 extern void sub_806A5B8(Entity *);
 

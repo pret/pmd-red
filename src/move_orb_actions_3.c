@@ -43,12 +43,10 @@
 #include "dungeon_engine.h"
 
 extern void sub_807EC28(bool8);
-extern void sub_806F370(Entity *r0, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 extern void MudWaterSportEffect(u32);
 extern void sub_806A6E8(Entity *);
 
-extern u8 sub_806F4A4(Entity *, u32);
 extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 extern void nullsub_92(Entity *);
 extern u8 sub_807EAA0(u32, u32);

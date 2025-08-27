@@ -31,6 +31,7 @@
 #include "code_803E724.h"
 #include "dungeon_data.h"
 #include "dungeon_logic.h"
+#include "dungeon_damage.h"
 
 extern u8 *gUnknown_80F89F4[];
 extern u8 *gUnknown_80FB580[];
@@ -76,7 +77,6 @@ extern void sub_804245C(Entity *, Item *);
 extern u8 sub_8072938(Entity *, u16);
 extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
 extern void LevelDownTarget(Entity *pokemon, Entity *r1, u32 r2);
-extern void sub_806F370(Entity *pokemon, Entity *r1, u32, u32, u8 *, u8, s32, u32, u32, u32);
 extern s32 sub_8042520(Entity *);
 Entity *sub_80696FC(Entity *);
 extern void DisplayMsgIfNewIqSkillLearned(EntityInfo *, s32);
@@ -124,7 +124,6 @@ void DoomSeedItemAction(Entity *, Entity *);
 void sub_80482FC(Entity *, Entity *, u32, u8);
 
 extern void EnemyEvolution(Entity *);
-extern void SetShopkeeperAggression(Entity *, Entity *);
 extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void sub_806A6E8(Entity *);
 extern void sub_8042390(Entity *, Item *);
