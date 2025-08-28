@@ -18,7 +18,7 @@
 #include "constants/targeting.h"
 #include "dungeon_logic.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "move_util.h"
@@ -76,7 +76,6 @@ extern void EnemyEvolution(Entity *);
 u32 sub_8075818(Entity *entity);
 extern void MarkLastUsedMonMove(Entity *entity, Move *move);
 bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move);
-extern void sub_80838EC(u8 *a);
 
 EWRAM_DATA u8 gUnknown_202F32C = 0;
 EWRAM_DATA u8 gUnknown_202F32D = 0;

@@ -52,7 +52,8 @@ extern u8 sub_8072938(Entity *, u16);
 extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
 extern void LevelDownTarget(Entity *pokemon, Entity *r1, u32 r2);
 extern s32 sub_8042520(Entity *);
-Entity *sub_80696FC(Entity *);
+extern void EnemyEvolution(Entity *);
+extern void sub_8042390(Entity *, Item *);
 
 static void StunSeedItemAction(Entity *, Entity *);
 static void MaxElixirAction(Entity *, Entity *);
@@ -93,11 +94,6 @@ static void EyedropSeedItemAction(Entity *, Entity *);
 static void BlinkerSeedItemAction(Entity *, Entity *);
 static void DoomSeedItemAction(Entity *, Entity *);
 static void sub_80482FC(Entity *, Entity *, u32, u8);
-
-extern void EnemyEvolution(Entity *);
-extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
-extern void sub_806A6E8(Entity *);
-extern void sub_8042390(Entity *, Item *);
 
 void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item)
 {

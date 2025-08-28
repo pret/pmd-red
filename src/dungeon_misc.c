@@ -16,7 +16,7 @@
 #include "move_effects_target.h"
 #include "dungeon_map_access.h"
 #include "dungeon_map.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_message.h"
 #include "dungeon_message_log.h"
 #include "dungeon_logic.h"
@@ -69,7 +69,6 @@ extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
 extern s16 sub_803D970(u32);
-extern bool8 sub_8083660(const DungeonPos *param_1);
 extern bool8 sub_80860A8(u8 id);
 extern u8 sub_803D73C(s32 a0);
 extern void DeletePokemonDungeonSprite(s32 id);

@@ -27,11 +27,10 @@
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
 #include "dungeon_kecleon_shop.h"
+#include "dungeon_range.h"
 
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);
-bool8 sub_808384C(DungeonPos *, DungeonPos *);
-u8 sub_8083660(DungeonPos *);
 
 void WarpTarget(Entity *pokemon, Entity *target, u32 param_3, DungeonPos *pos)
 {

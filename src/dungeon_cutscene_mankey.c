@@ -12,7 +12,7 @@
 #include "constants/friend_area.h"
 #include "constants/weather.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_music.h"

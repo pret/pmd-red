@@ -6,7 +6,7 @@
 #include "dungeon_ai_leader.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_logic.h"
 #include "dungeon_generation.h"
 #include "dungeon_util.h"

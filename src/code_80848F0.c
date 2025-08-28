@@ -21,7 +21,7 @@
 #include "code_806CD90.h"
 #include "code_80861A8.h"
 #include "code_8085E98.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "random.h"
 #include "math.h"
 #include "code_8004AA0.h"

@@ -6,7 +6,7 @@
 #include "dungeon_tilemap.h"
 #include "dungeon_action.h"
 #include "dungeon_action.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_main.h"
 #include "dungeon_menu_moves.h"
 #include "dungeon_menu_team.h"

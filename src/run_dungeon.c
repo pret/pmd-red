@@ -26,7 +26,7 @@
 #include "dungeon_engine.h"
 #include "dungeon_generation.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"

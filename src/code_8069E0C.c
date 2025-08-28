@@ -15,7 +15,7 @@
 #include "code_8077274_1.h"
 #include "dungeon_config.h"
 #include "run_dungeon.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map_access.h"
 #include "dungeon_misc.h"
 #include "dungeon_logic.h"
@@ -44,7 +44,6 @@ extern void sub_804178C(u32);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
-extern bool8 sub_8083660(const DungeonPos *param_1);
 extern Entity *gLeaderPointer;
 extern DungeonPos gUnknown_202EE0C;
 extern bool8 sub_80860A8(u8 id);

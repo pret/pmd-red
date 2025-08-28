@@ -1,7 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_range.h"
-#include "dungeon_leader.h"
 #include "dungeon_random.h"
 #include "dungeon_logic.h"
 #include "dungeon_pos_data.h"

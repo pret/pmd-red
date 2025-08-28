@@ -9,7 +9,7 @@
 #include "dungeon_vram.h"
 #include "dungeon_info.h"
 #include "dungeon_config.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "pokemon.h"
@@ -38,7 +38,6 @@
 extern void sub_804178C(u32);
 extern s32 CalculateStatusTurns(Entity *target, const s16 *turnRange, bool8 factorCurerSkills);
 extern void sub_80429D8(Entity *r0);
-extern void sub_80838EC(u8 *a);
 
 extern OpenedFile *gUnknown_202ECA0;
 

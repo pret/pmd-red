@@ -14,7 +14,7 @@
 #include "dungeon_jobs.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_misc.h"
@@ -460,8 +460,6 @@ void sub_8067110(Entity *entity)
         sub_807AB38(entity,gDungeon->forceMonsterHouse);
     }
 }
-
-extern void sub_8083904(DungeonPos *pos, Entity *entity);
 
 void sub_80671A0(Entity *entity)
 {

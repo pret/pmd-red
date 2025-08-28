@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "blow_away.h"
 #include "constants/ability.h"
 #include "constants/weather.h"
 #include "dungeon_vram.h"
@@ -30,15 +31,10 @@
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_engine.h"
 
-void sub_804EB30();
-bool8 ExposeTrap(s32 x, s32 y);
-void sub_80421AC(Entity * pokemon, Entity * target);
-void sub_807BB78(Entity *pokemon);
-extern void UpdateCamera(u32);
-bool8 sub_808384C(DungeonPos *, DungeonPos *);
-u8 sub_8083660(DungeonPos *);
-
-void sub_807D068(Entity *pokemon, DungeonPos *pos);
+extern void sub_804EB30();
+extern bool8 ExposeTrap(s32 x, s32 y);
+extern void sub_80421AC(Entity * pokemon, Entity * target);
+extern void sub_807BB78(Entity *pokemon);
 
 void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)
 {

@@ -8,7 +8,7 @@
 #include "dungeon_info.h"
 #include "dungeon_8083AB0.h"
 #include "dungeon_action.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_main.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"

@@ -8,7 +8,7 @@
 #include "graphics_memory.h"
 #include "decompress_at.h"
 #include "def_filearchives.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map.h"
 #include "dungeon_logic.h"
 #include "dungeon_info.h"

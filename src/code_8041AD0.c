@@ -22,7 +22,7 @@
 #include "sprite.h"
 #include "dungeon_info.h"
 #include "run_dungeon.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map.h"
 #include "dungeon_message.h"
 #include "dungeon_music.h"

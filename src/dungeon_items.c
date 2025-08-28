@@ -4,7 +4,7 @@
 #include "code_8041AD0.h"
 #include "code_80861A8.h"
 #include "code_80869E4.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
 #include "pokemon.h"

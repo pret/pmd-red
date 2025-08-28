@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "constants/tactic.h"
 #include "dungeon_config.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_message.h"
 #include "code_8041AD0.h"
 #include "code_8077274_1.h"
@@ -16,12 +16,10 @@
 #include "structs/str_806B7F8.h"
 #include "dungeon_logic.h"
 #include "dungeon_spawns.h"
-
-extern u8 *gUnknown_80FED68[];
+#include "dungeon_strings.h"
 
 extern void sub_8042920(struct Entity *r0);
 extern bool8 sub_806AA0C(s32, u32);
-extern bool8 sub_8083660(DungeonPos *param_1);
 
 void sub_8071B48(void)
 {
@@ -88,7 +86,7 @@ void sub_8071B48(void)
 
       }
       if (entityPtr != NULL) {
-        DisplayDungeonLoggableMessageTrue(0,*gUnknown_80FED68);
+        DisplayDungeonLoggableMessageTrue(0,gUnknown_80FED68);
         sub_8042920(entityPtr);
       }
       if (dungeon->unk644.unk2A != 0) {

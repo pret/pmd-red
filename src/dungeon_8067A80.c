@@ -13,7 +13,7 @@
 #include "code_807CD9C.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
 #include "dungeon_misc.h"

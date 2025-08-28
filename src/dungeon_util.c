@@ -17,7 +17,7 @@
 #include "dungeon_logic.h"
 #include "dungeon_random.h"
 #include "dungeon_util.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_message.h"
 #include "dungeon_pokemon_sprites.h"
 #include "dungeon_music.h"

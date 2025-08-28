@@ -18,7 +18,7 @@
 #include "dungeon_ai_items.h"
 #include "dungeon_ai_movement.h"
 #include "dungeon_items.h"
-#include "dungeon_leader.h"
+#include "dungeon_range.h"
 #include "dungeon_map_access.h"
 #include "dungeon_logic.h"
 #include "dungeon_random.h"
