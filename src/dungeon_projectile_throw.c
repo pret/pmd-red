@@ -15,11 +15,11 @@
 #include "dungeon_message.h"
 #include "move_util.h"
 #include "dungeon_strings.h"
+#include "dungeon_item_action.h"
 #include "structs/dungeon_entity.h"
 #include "constants/move_id.h"
 
 extern bool8 sub_8083568(s32 inX, s32 inY, u8 index);
-extern void sub_80479B8(char param_1, char param_2, u8 param_3, Entity *pokemon, Entity *target, Item *item);
 
 static bool8 CanProjectileHitTarget(Entity *thrower, Entity *target);
 

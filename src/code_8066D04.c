@@ -41,13 +41,12 @@
 #include "dungeon_projectile_throw.h"
 #include "dungeon_engine.h"
 #include "dungeon_kecleon_shop.h"
+#include "dungeon_item_action.h"
 
 extern void EnemyEvolution(Entity *);
 extern void sub_8057588(Entity * pokemon, u8 param_2);
 extern Item *sub_8044D90(Entity *, s32, u32);
-u8 sub_8048D50();
 void sub_8042208(Entity *pokemon, u8 r1);
-void sub_80479B8();
 extern void sub_807AB38(Entity *, u32);
 extern Entity * sub_8044DA4(Entity *param_1,int param_2);
 extern void sub_8044DF0(Entity *, u32, u32);

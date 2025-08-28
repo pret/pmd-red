@@ -15,7 +15,6 @@
 #include "text_3.h"
 
 extern bool8 sub_80848EC(void);
-extern const u8 *GetDungeonName2(u8 dungeon);
 
 EWRAM_DATA OpenedFile *gDungeonNameBannerPalette = NULL;
 static EWRAM_DATA OpenedFile *gDungeonNameBannerFontFile = NULL;

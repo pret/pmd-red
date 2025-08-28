@@ -6,13 +6,12 @@
 #include "friend_area.h"
 #include "moves.h"
 #include "strings.h"
+#include "dungeon_info.h"
 
 static EWRAM_DATA struct unkStruct_203B494 sUnknown_2039778 = {0};
 
 EWRAM_INIT struct unkStruct_203B494 *gUnknown_203B494 = { NULL }; // NDS=20EB98C
 
-extern void WriteDungeonLocationBits(DataSerializer*, DungeonLocation*);
-extern void ReadDungeonLocationBits(DataSerializer*, DungeonLocation*);
 void ReadGameOptionsBits(DataSerializer *param_1);
 void ReadPlayTimeBits(DataSerializer *r0);
 void WriteGameOptionsBits(DataSerializer *param_1);

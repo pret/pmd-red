@@ -30,6 +30,7 @@
 #include "dungeon_submenu.h"
 #include "dungeon_util.h"
 #include "dungeon_strings.h"
+#include "dungeon_info.h"
 #include "input.h"
 #include "items.h"
 #include "menu_input.h"
@@ -44,9 +45,6 @@
 #include "text_2.h"
 #include "weather.h"
 
-extern bool8 sub_8048A68(Entity *param_1,Item *item);
-extern bool8 sub_8048950(Entity *param_1,Item *item);
-extern bool8 sub_8048B9C(Entity *param_1,Item *item);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
@@ -101,7 +99,6 @@ extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
 extern void sub_8045064(void);
 extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
-extern bool8 CanLeaderSwitch(u8 dungeon);
 extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);

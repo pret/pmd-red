@@ -27,6 +27,7 @@
 #include "main_loops.h"
 #include "main_menu1.h"
 #include "main_menu2.h"
+#include "dungeon_info.h"
 #include "memory.h"
 #include "moves.h"
 #include "music.h"
@@ -90,7 +91,6 @@ extern u8 sub_80991E0(DungeonSetupInfo *param_1,short *param_2);
 extern u32 xxx_script_related_8098468(u32);
 extern void IncrementNumAdventures(void);
 extern void sub_8096BD0(void);
-extern bool8 IsEnterWithoutGameSave(u8 dungeon);
 
 static const unkTalkTable sBaseKindTable[17] = {
     [0] = { .unk0 = 0, .species = MONSTER_PIKACHU },

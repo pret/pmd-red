@@ -58,7 +58,6 @@ EWRAM_INIT Dungeon *gDungeon = NULL;
 static EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
 
 extern void sub_8068BDC(u8 r0);
-extern s16 GetTurnLimit(u8 dungeon);
 extern void sub_8041888(u8 param_1);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);

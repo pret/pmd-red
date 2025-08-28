@@ -33,9 +33,7 @@ struct UnusedOffenseStruct
 
 extern SpriteOAM gShadowSprites[3]; // Shadow sprites of some kind
 
-extern void WriteDungeonLocationBits(DataSerializer*, DungeonLocation*);
 extern void WritePoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);
-void ReadDungeonLocationBits(DataSerializer*, DungeonLocation*);
 void ReadPoke1LevelBits(DataSerializer*, struct unkPokeSubStruct_C*);
 
 extern void WriteHiddenPowerBits(DataSerializer*, HiddenPower*);

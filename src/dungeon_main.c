@@ -57,11 +57,9 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_engine.h"
+#include "dungeon_item_action.h"
 
 extern void HandleUnsetItemAction(Entity *,bool8);
-extern bool8 sub_8048A68(Entity *param_1,Item *item);
-extern bool8 sub_8048950(Entity *param_1,Item *item);
-extern bool8 sub_8048B9C(Entity *param_1,Item *item);
 extern Item *sub_8044D90(Entity *, s32, u32);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);

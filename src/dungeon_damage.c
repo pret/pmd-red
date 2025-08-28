@@ -18,6 +18,7 @@
 #include "status.h"
 #include "dungeon_random.h"
 #include "dungeon_items.h"
+#include "dungeon_info.h"
 #include "dungeon_util.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
@@ -55,7 +56,6 @@ extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
 extern void sub_8078084(Entity * pokemon);
 extern void sub_800DBBC(void);
-extern bool8 DoEnemiesEvolveWhenKOed(u8 dungeon);
 extern bool8 sub_806FA5C(Entity *, Entity *, struct unkStruct_8069D4C *);
 extern void EntityUpdateStatusSprites(Entity *);
 extern void PointCameraToMonster(Entity *);

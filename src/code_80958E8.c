@@ -17,7 +17,6 @@
 #include "event_flag.h"
 #include "rescue_team_info.h"
 
-extern bool8 sub_809017C(DungeonLocation *);
 extern void sub_803C37C(struct DungeonLocation *, u8, u8 *);
 
 extern u8 sub_8097318(s16 param_1);
@@ -31,8 +30,6 @@ u8 sub_8095E78(void);
 bool8 sub_80963B4(void);
 s32 CalculateMailChecksum(WonderMail *mail);
 
-extern void WriteDungeonLocationBits(DataSerializer*, DungeonLocation*);
-extern void ReadDungeonLocationBits(DataSerializer*, DungeonLocation*);
 extern void sub_803C4F0(WonderMail *);
 extern void sub_803C3E0(WonderMail *);
 extern void sub_803C45C(WonderMail *);
