@@ -33,9 +33,6 @@ static bool8 sub_8052DC0(Entity *);
 static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2);
 
 extern void sub_805E804(void);
-extern void sub_8083E28(void);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
 
 extern u8 gUnknown_202EE01;
 

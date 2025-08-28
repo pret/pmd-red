@@ -28,8 +28,6 @@
 #include "text_2.h"
 #include "text_3.h"
 
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern void sub_8045064(void);
@@ -41,7 +39,6 @@ extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
 extern void sub_8067768(ActionContainer *a0);
 extern void TryPointCameraToMonster(Entity *a0, u8 a1);
 extern bool8 sub_8071A8C(Entity *pokemon);
-extern void sub_8083D1C(void);
 extern s32 ActionToDungeonSubMenuId(u16 param_1);
 
 extern s32 gDungeonSubMenuItemsCount;

@@ -24,12 +24,12 @@
 #include "math.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
+#include "dungeon_music.h"
 #include "string_format.h"
 
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
 
 u8 sub_806B8CC();
-void sub_8083D88();
 u8 sub_808529C(s32);
 void nullsub_96(Entity *pokemon,Entity *target);
 u8 sub_8097900(s16);

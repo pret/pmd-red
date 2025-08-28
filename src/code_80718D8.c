@@ -27,14 +27,13 @@
 #include "structs/str_pokemon.h"
 #include "structs/str_806B7F8.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_music.h"
 
 EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
 EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};
 
 extern void ResetMonEntityData(EntityInfo *, u32);
 void sub_8042A44(Entity *r0);
-void sub_8083D78(void);
-void sub_8083D58(void);
 void sub_8072778(Entity *, Entity *, u8, u8);
 bool8 sub_80725A4(Entity *, Entity *);
 void GetUnlockedTacticFlags(u8 *tacticsBuffer, s32 pokeLevel);

@@ -19,8 +19,6 @@
 #include "text_3.h"
 #include "trap.h"
 
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern void sub_8045064(void);
 

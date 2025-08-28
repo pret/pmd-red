@@ -27,8 +27,6 @@
 #include "dungeon_action.h"
 #include "code_801B3C0.h"
 
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
 extern void TryPointCameraToMonster(Entity *a0, u8 a1);
 extern void SetLeaderActionToNothing(u8 a0);
 extern Item *sub_8044D90(Entity *, s32, u32);

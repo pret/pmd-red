@@ -61,8 +61,6 @@
 
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern Item *sub_8044D90(Entity *, s32, u32);
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A6E8(Entity *);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 void TryPointCameraToMonster(Entity *a0, u8 a1);

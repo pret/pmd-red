@@ -52,6 +52,7 @@
 #include "dungeon_data.h"
 #include "dungeon_jobs.h"
 #include "dungeon_tilemap.h"
+#include "dungeon_cleared_window.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
@@ -64,7 +65,6 @@ extern void sub_804513C(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
 extern void IncrementThievingSuccesses(void);
-extern void ShowDungeonClearedWindow(void);
 extern void sub_8086130(void);
 extern void sub_80847D4(void);
 extern void sub_8043D60(void);
@@ -74,7 +74,6 @@ extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
 extern void DisplayPreFightDialogue(void);
 extern void EnemyEvolution(Entity *);
-extern void sub_8083D68(void);
 extern void UpdateMinimap(void);
 extern void sub_807E5AC(void);
 extern void TryActivateArtificialWeatherAbilities(void);

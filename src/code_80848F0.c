@@ -61,11 +61,9 @@ extern void sub_808A718(void);
 extern s32 sub_800E700(s32);
 extern void sub_8085F44(s32);
 extern void sub_8052FB8(const u8 *);
-extern void PlaySoundEffect(u32);
 extern void sub_8085EB0(void);
 extern void sub_8086A54(Entity *);
 extern void sub_8086A3C(Entity *);
-extern void PlaySoundEffect(u32);
 extern u32 sub_8002A70(u32, s32, u8);
 extern s8 sub_8002984(s8, u8);
 

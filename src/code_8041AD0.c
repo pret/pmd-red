@@ -36,7 +36,6 @@
 
 // Unknown dungeon file. File split is correct.
 
-extern void PlaySoundEffect(u32);
 
 void EntityUpdateStatusSprites(Entity *entity);
 

@@ -18,8 +18,6 @@
 #include "text_2.h"
 #include "text_3.h"
 
-extern void PlayDungeonCancelSE(void);
-extern void PlayDungeonConfirmationSE(void);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern u16 GetLeaderActionId(void);
 extern u8 sub_806F9BC(s32);

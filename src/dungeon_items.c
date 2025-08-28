@@ -31,7 +31,6 @@
 
 extern void sub_80416E0(PixelPos *r0, u32, bool8);
 extern void sub_80855E4(void *);
-extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);
 extern void sub_804219C(PixelPos *pos);
 
