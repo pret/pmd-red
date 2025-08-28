@@ -55,8 +55,6 @@ extern void sub_8044DF0(Entity *, u32, u32);
 Entity *sub_806773C(Entity *entity);
 void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
 void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);
-extern void sub_80845E0(Entity *entity);
-extern void sub_8084448(Entity *entity);
 
 void HandlePickUpPlayerAction(Entity *entity)
 {

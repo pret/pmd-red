@@ -25,8 +25,8 @@
 #include "string_format.h"
 #include "items.h"
 #include "trap.h"
-
-extern const u8 *gUnknown_80FE6F4[];
+#include "dungeon_data.h"
+#include "dungeon_strings.h"
 
 extern void sub_8045ACC(void);
 extern s32 GetMonsterApparentID(Entity *pokemon, s32 id);
@@ -618,7 +618,7 @@ void SubstitutePlaceholderStringTags(u8 *buffer, Entity *entity, u32 param_3)
         GetTrapName(buffer, GetTrapData_1(entity)->id);
         break;
     default:
-        strcpy(buffer, *gUnknown_80FE6F4);
+        strcpy(buffer, gUnknown_80FE6F4);
         break;
   }
 }

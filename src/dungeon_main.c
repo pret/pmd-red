@@ -56,6 +56,7 @@
 #include "weather.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_kecleon_shop.h"
+#include "dungeon_engine.h"
 
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern bool8 sub_8048A68(Entity *param_1,Item *item);
@@ -79,7 +80,6 @@ static void TryCreateModeArrows(Entity *leader);
 bool8 sub_8094C48(void);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
-bool8 IsFloorOver(void);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);

@@ -44,6 +44,7 @@
 #include "dungeon_strings.h"
 #include "dungeon_8083AB0.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_data.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
@@ -84,12 +85,6 @@ extern void UpdateMinimap(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
-
-extern const s16 gUnknown_810AC60; // 0xC
-extern const s16 gUnknown_810AC62; // 0xC
-extern const s16 gUnknown_810AC68; // 0x8
-extern const s16 gUnknown_810AC64; // 0x8
-extern const s16 gUnknown_810AC66; // 0x8
 
 extern Entity *gLeaderPointer;
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];

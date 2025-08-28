@@ -28,10 +28,10 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
 #include "dungeon_kecleon_shop.h"
+#include "dungeon_engine.h"
 
 void sub_804EB30();
 bool8 ExposeTrap(s32 x, s32 y);
-u8 IsFloorOver(void);
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);
 extern void UpdateCamera(u32);

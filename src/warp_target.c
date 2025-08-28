@@ -29,9 +29,6 @@
 
 extern u32 gDungeonFramesCounter;
 
-bool8 ExposeTrap(s32 x, s32 y);
-void UpdateMinimap();
-u8 IsFloorOver(void);
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);
 extern void UpdateCamera(u32);

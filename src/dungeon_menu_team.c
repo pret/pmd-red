@@ -29,6 +29,7 @@
 #include "dungeon_random.h"
 #include "dungeon_submenu.h"
 #include "dungeon_util.h"
+#include "dungeon_strings.h"
 #include "input.h"
 #include "items.h"
 #include "menu_input.h"
@@ -69,7 +70,6 @@ bool8 sub_8094C48(void);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
 void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
-bool8 IsFloorOver(void);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 void ShowMainMenu(bool8 fromBPress, bool8 a1);
 bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
@@ -114,16 +114,6 @@ extern Entity *gLeaderPointer;
 extern MenuInputStruct gDungeonMenu;
 extern s32 gDungeonFramesCounter;
 extern u8 gUnknown_202EE39;
-
-extern const u8 *gUnknown_80FE940;
-extern const u8 *const gUnknown_80FE954;
-extern const u8 gUnknown_8106BEC[];
-extern const u8 gUnknown_8106BF4[];
-extern const u8 *const gUnknown_80FE95C;
-extern const u8 *const gUnknown_80FE960;
-extern const u8 *const gUnknown_80FE964;
-extern const u8 *const gUnknown_80FE978;
-extern const u8 *const gWhichTextPtr2;
 
 EWRAM_DATA s32 gTeamMenuChosenId = 0;
 static UNUSED EWRAM_DATA u8 sUnused[4] = {0};

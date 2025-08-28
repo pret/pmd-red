@@ -1,5 +1,6 @@
 #include "global.h"
 #include "dungeon_map_access.h"
+#include "dungeon_data.h"
 
 bool8 IsWaterDungeon(u32 r0)
 {

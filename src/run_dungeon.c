@@ -49,6 +49,8 @@
 #include "text_1.h"
 #include "text_3.h"
 #include "weather.h"
+#include "dungeon_data.h"
+#include "dungeon_jobs.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
@@ -67,7 +69,6 @@ extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
 extern void IncrementThievingSuccesses(void);
 extern void ShowDungeonClearedWindow(void);
-extern void sub_8084424(void);
 extern void sub_8086130(void);
 extern void sub_80847D4(void);
 extern void sub_8043D60(void);
@@ -91,7 +92,6 @@ extern void sub_807E7FC(u8);
 extern void sub_8068A84(Pokemon *pokemon);
 extern void sub_807EAA0(u32, u32);
 extern void SetFloorItemMonsterSpawns(void);
-extern void sub_80842F0(void);
 extern void sub_80427AC(void);
 extern void sub_806AA70(void);
 extern void sub_806AD3C(void);

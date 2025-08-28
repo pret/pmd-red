@@ -14,11 +14,7 @@
 #include "dungeon_logic.h"
 #include "menu_input.h"
 
-extern void TrySpawnMonsterAndActivatePlusMinus(void);
 extern void sub_807E378(void);
-extern void sub_8044574(void);
-extern void sub_8044820(void);
-extern void sub_8044AB4(void);
 extern u8 DisplayActions(u32);
 extern void TickStatusAndHealthRegen(Entity *);
 extern void sub_8086AC0(void);
@@ -32,6 +28,10 @@ extern void sub_807EAA0(u32, u32);
 
 static void sub_8044454(void);
 static bool8 RunLeaderTurn(bool8);
+static void sub_8044574(void);
+static void sub_8044820(void);
+static void TrySpawnMonsterAndActivatePlusMinus(void);
+static void sub_8044AB4(void);
 
 EWRAM_DATA DungeonPos gUnknown_202EE0C = {0};
 EWRAM_DATA MenuInputStruct gDungeonMenu = {0};
@@ -197,7 +197,7 @@ struct Struct_8044574
     struct Struct_8044574 *next;
 };
 
-void sub_8044574(void)
+static void sub_8044574(void)
 {
     s32 i, id;
     struct Struct_8044574 sp0[4];
@@ -317,7 +317,7 @@ void sub_8044574(void)
     }
 }
 
-void sub_8044820(void)
+static void sub_8044820(void)
 {
   s32 movSpeed;
   EntityInfo *entityInfo;
@@ -377,7 +377,7 @@ void sub_8044820(void)
   }
 }
 
-void TrySpawnMonsterAndActivatePlusMinus(void)
+static void TrySpawnMonsterAndActivatePlusMinus(void)
 {
   EntityInfo * entityInfo;
   Entity *entity;
@@ -424,7 +424,7 @@ void TrySpawnMonsterAndActivatePlusMinus(void)
   }
 }
 
-void sub_8044AB4(void)
+static void sub_8044AB4(void)
 {
   s32 index;
 

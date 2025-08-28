@@ -35,7 +35,6 @@
 
 extern void sub_805229C(void);
 extern void sub_807E8F0(Entity *);
-extern void sub_80444F4(Entity *pokemon);
 extern void WarpTarget(Entity *pokemon, Entity *r1, u32 r2, DungeonPos *r3);
 extern void sub_80420B8(Entity *pokemon);
 extern void sub_8041C4C(Entity *pokemon, u32 r1);

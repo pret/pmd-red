@@ -20,6 +20,7 @@
 #include "dungeon_random.h"
 #include "dungeon_misc.h"
 #include "dungeon_util.h"
+#include "dungeon_data.h"
 #include "dungeon_pokemon_sprites.h"
 #include "exclusive_pokemon.h"
 #include "move_effects_target.h"

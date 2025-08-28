@@ -18,6 +18,7 @@
 #include "text_1.h"
 #include "code_806CD90.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_data.h"
 
 extern void sub_8042A14(DungeonPos *);
 

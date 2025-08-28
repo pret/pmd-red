@@ -12,14 +12,14 @@
 #include "dungeon_util.h"
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
+#include "dungeon_main.h"
+#include "dungeon_misc.h"
 #include "move_util.h"
 #include "moves.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_engine.h"
 
 extern u8 DisplayActions(Entity *);
-extern void sub_805E804(void);
-void TryPointCameraToMonster(Entity *pokemon, u8 param_2);
 
 void sub_807E378(void)
 {

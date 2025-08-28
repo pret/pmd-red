@@ -31,17 +31,11 @@
 #include "dungeon_misc.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
+#include "dungeon_strings.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F222;
 extern u8 gUnknown_203B434;
-
-extern u8 *gUnknown_80FA5B4[];
-extern u8 *gUnknown_80FCF50[];
-extern u8 *gUnknown_80FCF38[];
-extern u8 *gUnknown_80FD2CC[];
-extern u8 *gUnknown_80FE478[];
-extern u8 *gUnknown_80FE6D4[];
 
 void sub_8075BA4(Entity *param_1, u8 param_2);
 void sub_804178C(u8 param_1);
@@ -77,7 +71,6 @@ bool8 sub_804AE08(DungeonPos *pos);
 void HandlePickUpAIAction(Entity *pokemon);
 void HandleThrowItemAIAction(Entity *pokemon);
 void HandleEatAIAction(Entity *pokemon);
-bool8 sub_8044B84(void);
 extern void sub_8074094(Entity *);
 extern void EnemyEvolution(Entity *);
 u32 sub_8075818(Entity *entity);
@@ -206,7 +199,7 @@ bool8 sub_8072CF4(Entity *entity)
             break;
         case ACTION_STAIRS:
             if ((gDungeon->unk644.dungeonLocation.id == DUNGEON_METEOR_CAVE) && (!gDungeon->deoxysDefeat)) {
-                LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FA5B4); // It's impossible to go down the stairs now!
+                LogMessageByIdWithPopupCheckUser(entity,gUnknown_80FA5B4); // It's impossible to go down the stairs now!
             }
             else
             {
@@ -265,7 +258,7 @@ bool8 sub_8072CF4(Entity *entity)
                 break;
             }
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
-            LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FE6D4);
+            LogMessageByIdWithPopupCheckUser(entity,gUnknown_80FE6D4);
             break;
         case ACTION_TALK_FIELD:
             HandleTalkFieldAction(entity);
@@ -293,7 +286,7 @@ bool8 sub_8072CF4(Entity *entity)
             break;
         case ACTION_SECOND_THOUGHTS:
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],entity,0);
-            LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FE478);
+            LogMessageByIdWithPopupCheckUser(entity,gUnknown_80FE478);
             break;
         default:
             info->action.action = ACTION_PASS_TURN;
@@ -321,7 +314,7 @@ bool8 sub_8072CF4(Entity *entity)
                     }
                 }
                 if (bVar4) {
-                    LogMessageByIdWithPopupCheckUser(entity,*gUnknown_80FD2CC);
+                    LogMessageByIdWithPopupCheckUser(entity,gUnknown_80FD2CC);
                 }
             }
             sub_807360C();
@@ -409,7 +402,7 @@ void sub_80732F0(void)
                                 }
                             }
                             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-                            LogMessageByIdWithPopupCheckUser(entity, *gUnknown_80FCF38); // {ARG_POKEMON_0} uttered its sleep talk!
+                            LogMessageByIdWithPopupCheckUser(entity, gUnknown_80FCF38); // {ARG_POKEMON_0} uttered its sleep talk!
                             info->action.direction = sl & DIRECTION_MASK;
                             TryUseChosenMove(entity, 0, ITEM_NOTHING, 1, FALSE, &moveStack);
                             flag = TRUE;
@@ -475,7 +468,7 @@ void sub_807348C(void)
                         }
                     }
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],pokemon,0);
-                    LogMessageByIdWithPopupCheckUser(pokemon,*gUnknown_80FCF50);
+                    LogMessageByIdWithPopupCheckUser(pokemon,gUnknown_80FCF50);
                     info->action.direction = r8 & DIRECTION_MASK;
                     TryUseChosenMove(pokemon,0,ITEM_NOTHING,1,FALSE,&chosenMove);
                     info->unk165 |= 0xff;
