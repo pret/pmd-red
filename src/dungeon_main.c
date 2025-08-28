@@ -60,7 +60,6 @@
 #include "dungeon_item_action.h"
 
 extern void HandleUnsetItemAction(Entity *,bool8);
-extern Item *sub_8044D90(Entity *, s32, u32);
 extern void sub_806A6E8(Entity *);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
 void TryPointCameraToMonster(Entity *a0, u8 a1);
@@ -69,13 +68,11 @@ void sub_8075680(u32);
 void sub_8094C88(void);
 void ClearUnpaidFlagFromAllItems(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
-void SetLeaderActionToNothing(u8 a0);
 u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
 static void TryCreateModeArrows(Entity *leader);
 bool8 sub_8094C48(void);
 void HandleTalkFieldAction(Entity *);
-bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
 void sub_806752C(ActionContainer *a0);

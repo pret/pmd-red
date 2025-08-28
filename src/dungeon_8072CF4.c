@@ -31,6 +31,7 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
 #include "dungeon_strings.h"
+#include "dungeon_action.h"
 #include "warp_target.h"
 
 extern u8 gUnknown_202F221;
@@ -40,7 +41,6 @@ extern u8 gUnknown_203B434;
 void sub_8075BA4(Entity *param_1, u8 param_2);
 void sub_804178C(u8 param_1);
 void nullsub_95(Entity *);
-bool8 IsNotAttacking(Entity *, bool8);
 extern void sub_80671A0(Entity *);
 extern void sub_8067110(Entity *);
 void HandleUseMoveAIAction(Entity *target);

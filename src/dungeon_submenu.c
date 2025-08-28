@@ -3,6 +3,7 @@
 #include "code_800D090.h"
 #include "dungeon_submenu.h"
 #include "dungeon_vram.h"
+#include "dungeon_action.h"
 #include "menu_input.h"
 #include "text_1.h"
 #include "text_3.h"
@@ -10,10 +11,6 @@
 // The reason this short file(just 1 function) exists is because of the pksdir string which usually signifies the file's beginning.
 
 extern MenuInputStruct gDungeonMenu;
-extern s32 gDungeonSubMenuItemsCount;
-
-extern u8 *GetDungeonSubMenuItemString(s32 param_1);
-extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 
 void CreateDungeonMenuSubWindow(WindowTemplate *mainWindow, s32 subWindowX)
 {

@@ -38,15 +38,12 @@
 #include "dungeon_submenu.h"
 
 extern void sub_80684C4(void);
-void sub_8045064(void);
 extern void sub_8068344(void);
-bool8 CanSubMenuItemBeChosen(s32 param_1);
 void sub_8068310(s32 n, Pokemon **monPtrs);
 void sub_8067F00(u8 a0, Pokemon **a1, s32 a2, s32 a3, s32 a4);
 void sub_806806C(Pokemon *a0);
 
 extern MenuInputStruct gDungeonMenu;
-extern s32 gDungeonSubMenuItemsCount;
 
 static EWRAM_DATA WindowHeader gUnknown_202F308 = {0};
 static EWRAM_DATA s32 gUnknown_202F30C = 0;

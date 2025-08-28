@@ -45,11 +45,8 @@
 
 extern void EnemyEvolution(Entity *);
 extern void sub_8057588(Entity * pokemon, u8 param_2);
-extern Item *sub_8044D90(Entity *, s32, u32);
 void sub_8042208(Entity *pokemon, u8 r1);
 extern void sub_807AB38(Entity *, u32);
-extern Entity * sub_8044DA4(Entity *param_1,int param_2);
-extern void sub_8044DF0(Entity *, u32, u32);
 Entity *sub_806773C(Entity *entity);
 void sub_8067558(Entity *entity, Entity *targetEntity, s32 a2);
 void sub_8067794(Entity *entity, Entity *targetEntity, s32 a2);

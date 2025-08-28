@@ -33,14 +33,9 @@
 #include "dungeon_engine.h"
 #include "dungeon_damage.h"
 #include "dungeon_kecleon_shop.h"
+#include "dungeon_strings.h"
 
 #define REGULAR_ATTACK_INDEX 4
-
-extern const u8 *const gItemStickyDoesntWorkText[];
-extern const u8 *const gPtrMysteriousPowerPreventedUseMessage[];
-extern const u8 *const gUnknown_80FC6A8[];
-extern const u8 *const gUnknown_80FC714[];
-extern const u8 *const gUnknown_80FC718[];
 
 EWRAM_DATA bool8 gCanAttackInDirection[NUM_DIRECTIONS] = {0};
 EWRAM_DATA u8 gPotentialAttackTargetDirections[NUM_DIRECTIONS] = {0};
@@ -48,10 +43,7 @@ EWRAM_DATA s32 gPotentialAttackTargetWeights[NUM_DIRECTIONS] = {0};
 EWRAM_DATA Entity *gPotentialTargets[NUM_DIRECTIONS] = {0};
 
 extern void sub_806A1B0(Entity *);
-extern Item *sub_8044D90(Entity *, s32, u32);
-extern bool8 sub_8044D40(ActionContainer *, u32);
 extern void sub_8045BF8(u8 *, struct Item *);
-extern void sub_8044DF0(struct Entity *, u32, u32);
 extern void EnemyEvolution(struct Entity *);
 extern void DiscoverMinimap(DungeonPos *);
 extern void sub_807EC28(bool8);
@@ -967,14 +959,14 @@ void HandleUseOrbAction(Entity *pokemon)
 
     if (item->flags & ITEM_FLAG_STICKY) {
         sub_8045BF8(gFormatBuffer_Items[0], item);
-        LogMessageByIdWithPopupCheckUser(pokemon, *gItemStickyDoesntWorkText);
+        LogMessageByIdWithPopupCheckUser(pokemon, gItemStickyDoesntWorkText);
         return;
     }
 
     act = entityInfo->action;
 
     if (IsBossFight()) {
-        LogMessageByIdWithPopupCheckUser(pokemon, *gPtrMysteriousPowerPreventedUseMessage);
+        LogMessageByIdWithPopupCheckUser(pokemon, gPtrMysteriousPowerPreventedUseMessage);
         r4 = TRUE;
     }
     else {
@@ -994,20 +986,20 @@ void HandleUseOrbAction(Entity *pokemon)
 
         if (entityInfo->cringeClassStatus.status == 1) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
-            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FC714);
+            LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FC714);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->cringeClassStatus.status == 7) {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
-            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FC718);
+            LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FC718);
             r4 = FALSE;
             r8 = FALSE;
         }
         else if (entityInfo->burnClassStatus.status == 4)
         {
             SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], pokemon, 0);
-            LogMessageByIdWithPopupCheckUser(pokemon, *gUnknown_80FC6A8);
+            LogMessageByIdWithPopupCheckUser(pokemon, gUnknown_80FC6A8);
             r4 = FALSE;
             r8 = FALSE;
         }

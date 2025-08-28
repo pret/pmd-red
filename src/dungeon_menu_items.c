@@ -22,27 +22,19 @@
 #include "dungeon_map_access.h"
 #include "dungeon_items.h"
 #include "dungeon_range.h"
+#include "dungeon_misc.h"
 #include "menu_input.h"
 #include "text_1.h"
 #include "dungeon_action.h"
 #include "code_801B3C0.h"
 
-extern void TryPointCameraToMonster(Entity *a0, u8 a1);
-extern void SetLeaderActionToNothing(u8 a0);
-extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
-extern u8 *GetDungeonSubMenuItemString(s32 param_1);
-extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern s32 gDungeonSubMenuItemsCount;
 extern const u8 gUnknown_8106B50[];
-extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
-extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
-extern void sub_8045064(void);
 extern bool8 PosHasItem(DungeonPos *pos);
 
 extern u8 gUnknown_202EE00;

@@ -5,7 +5,7 @@
 #include "dungeon_vram.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_action.h"
-#include "dungeon_action.h"
+#include "dungeon_misc.h"
 #include "dungeon_range.h"
 #include "dungeon_main.h"
 #include "dungeon_menu_moves.h"
@@ -28,20 +28,13 @@
 #include "text_2.h"
 #include "text_3.h"
 
-extern u8 *GetDungeonSubMenuItemString(s32 param_1);
-extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern void sub_8045064(void);
 extern s32 GetTeamMemberEntityIndex(Entity *pokemon);
 extern void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
-extern void SetLeaderActionToNothing(u8 a0);
 extern void sub_806752C(ActionContainer *a0);
 extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
 extern void sub_8067768(ActionContainer *a0);
-extern void TryPointCameraToMonster(Entity *a0, u8 a1);
 extern bool8 sub_8071A8C(Entity *pokemon);
-extern s32 ActionToDungeonSubMenuId(u16 param_1);
 
-extern s32 gDungeonSubMenuItemsCount;
 extern MenuInputStruct gDungeonMenu;
 
 static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redColorForChargingMoves, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);

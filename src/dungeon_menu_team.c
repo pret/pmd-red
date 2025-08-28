@@ -45,10 +45,8 @@
 #include "text_2.h"
 #include "weather.h"
 
-extern Item *sub_8044D90(Entity *, s32, u32);
 extern void sub_806A6E8(Entity *);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
-void TryPointCameraToMonster(Entity *a0, u8 a1);
 bool8 sub_805E874(void);
 bool8 sub_80701A4(Entity *a0);
 void sub_805E738(Entity *a0);
@@ -59,13 +57,11 @@ void sub_8075680(u32);
 void sub_8094C88(void);
 void sub_8040A84(void);
 void sub_806A914(u8 a0, u8 a1, u8 a2);
-void SetLeaderActionToNothing(u8 a0);
 u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
 bool8 sub_8094C48(void);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
 void HandleTalkFieldAction(Entity *);
-bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 void ShowMainMenu(bool8 fromBPress, bool8 a1);
 bool8 sub_805EF60(Entity *a0, EntityInfo *a1);
 bool8 sub_8070F80(Entity * pokemon, s32 direction);
@@ -88,14 +84,7 @@ bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
-extern u8 *GetDungeonSubMenuItemString(s32 param_1);
-extern bool8 CanSubMenuItemBeChosen(s32 param_1);
-extern s32 gDungeonSubMenuItemsCount;
-extern const u8 gUnknown_8106B50[];
-extern Item * sub_8044CC8(Entity *param_1, ActionParameter *param_2, UNUSED s32 a3);
-extern u16 sub_8044DC8(Item *param_1);
 extern bool8 sub_8046F00(Item *item);
-extern void sub_8045064(void);
 extern void sub_8070968(u8 *buffer, EntityInfo *entityInfo, s32 colorNum);
 extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
 extern char* sub_808E4FC(s32 a1);
