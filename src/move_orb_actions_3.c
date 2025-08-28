@@ -45,9 +45,7 @@
 #include "warp_target.h"
 
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
-extern void MudWaterSportEffect(u32);
 extern void sub_806A6E8(Entity *);
-extern u8 sub_807EAA0(u32, u32);
 
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;

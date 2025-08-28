@@ -1649,11 +1649,11 @@ void sub_806A9B4(Entity *entity, s32 moveIndex)
 }
 
 // s16 again...
-bool8 sub_806AA0C(s16 _species, bool32 _a1)
+bool8 sub_806AA0C(s32 _species, bool32 _a1)
 {
-    s32 species = _species;
+    s32 species = (s16) _species;
     bool8 a1 = _a1;
-    if (!IsExclusivePokemonUnlocked(_species))
+    if (!IsExclusivePokemonUnlocked(species))
         return FALSE;
 
     if (gDungeon->unk37FD && GetBaseSpecies(species) == MONSTER_DEOXYS_NORMAL)

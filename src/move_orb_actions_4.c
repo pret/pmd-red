@@ -46,7 +46,6 @@
 #include "trawl_orb.h"
 
 extern void UpdateMinimap(void);
-extern bool8 sub_806AA0C(s32, u32);
 extern void sub_806BB6C(Entity *, s32);
 
 extern u32 gUnknown_8106A50;

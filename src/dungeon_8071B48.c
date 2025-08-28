@@ -17,9 +17,9 @@
 #include "dungeon_logic.h"
 #include "dungeon_spawns.h"
 #include "dungeon_strings.h"
+#include "dungeon_misc.h"
 
 extern void sub_8042920(struct Entity *r0);
-extern bool8 sub_806AA0C(s32, u32);
 
 void sub_8071B48(void)
 {

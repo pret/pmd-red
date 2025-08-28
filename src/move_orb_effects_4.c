@@ -57,14 +57,12 @@ extern void sub_8041E74(Entity *);
 extern void sub_8041E60(Entity *);
 extern void sub_8041E4C(Entity *);
 extern void sub_8041E3C(Entity *);
-extern void UpdateCamera(u32);
 extern void sub_8041E1C(Entity *);
 extern void nullsub_89(Entity *);
 extern void nullsub_88(Entity *);
 extern void nullsub_87(Entity *);
 extern void nullsub_86(Entity *);
 extern void sub_8041E0C(Entity *);
-extern bool8 sub_806AA0C(s32, u32);
 
 void CounterStatusTarget(Entity * pokemon, Entity * target, u8 newStatus)
 {

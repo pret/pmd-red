@@ -31,6 +31,7 @@
 #include "math.h"
 #include "dungeon_config.h"
 #include "dungeon_boss_dialogue.h"
+#include "weather.h"
 
 extern void sub_8042B0C(Entity *);
 extern u8 sub_806FD18(Entity *);
@@ -48,7 +49,6 @@ extern void sub_8052D44(s16 *, Entity *, Entity *);
 extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
-extern void sub_807EAA0(u32, u32);
 extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
 extern void sub_8085374(void);
 extern bool8 sub_8085B80(struct_8085B80 *);

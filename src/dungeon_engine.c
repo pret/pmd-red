@@ -13,6 +13,7 @@
 #include "constants/ability.h"
 #include "dungeon_logic.h"
 #include "menu_input.h"
+#include "weather.h"
 
 extern void sub_807E378(void);
 extern u8 DisplayActions(u32);
@@ -24,7 +25,6 @@ extern void DungeonHandlePlayerInput(void);
 extern void sub_805F02C(void);
 extern void sub_8074094(Entity *);
 extern void sub_8071B48(void);
-extern void sub_807EAA0(u32, u32);
 
 static void sub_8044454(void);
 static bool8 RunLeaderTurn(bool8);

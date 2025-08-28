@@ -26,9 +26,9 @@
 #include "dungeon_config.h"
 #include "dungeon_logic.h"
 #include "dungeon_strings.h"
+#include "dungeon_spawns.h"
+#include "dungeon_misc.h"
 
-extern bool8 sub_806AA0C(s32, u32);
-extern s16 GetRandomFloorMonsterId(u32);
 extern void sub_804178C(u32);
 
 void sub_807AA30(void)

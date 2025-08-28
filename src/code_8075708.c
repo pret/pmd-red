@@ -44,12 +44,11 @@
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_misc.h"
 #include "dungeon_pos_data.h"
+#include "warp_target.h"
 
 extern void sub_8073D14(Entity *);
 extern void sub_8075708(Entity *entity);
 extern void sub_805229C(void);
-extern void sub_807E8F0(Entity *);
-extern void WarpTarget(Entity *pokemon, Entity *r1, u32 r2, DungeonPos *r3);
 extern void sub_80420B8(Entity *pokemon);
 extern void sub_8041C4C(Entity *pokemon, u32 r1);
 extern void sub_805E804(void);

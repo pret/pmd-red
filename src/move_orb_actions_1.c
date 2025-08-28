@@ -34,10 +34,6 @@
 #include "dungeon_damage.h"
 #include "move_util.h"
 
-extern void sub_806A5B8(Entity *entity);
-void sub_8075900(Entity *pokemon, u8 r1);
-extern u8 sub_807EAA0(u32, u32);
-
 // Note: For some reason I have to define these as an array of 1 to match asm.
 const s32 gUnknown_8106A4C[1] = {0};
 const s32 gUnknown_8106A50[1] = {1};

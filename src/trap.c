@@ -38,7 +38,6 @@
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
 
-bool8 sub_806AA0C(s32, s32);
 void sub_80421EC(DungeonPos *, u32);
 u8 GetFloorType(void);
 void sub_8045BF8(u8 *, Item *);

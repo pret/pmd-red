@@ -84,7 +84,6 @@ void sub_806752C(ActionContainer *a0);
 void sub_8067768(ActionContainer *a0);
 void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern bool8 sub_8071A8C(Entity *pokemon);
-extern void GetWeatherName(u8 *dst, u8 weatherId);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 extern Entity *sub_80696A8(Entity *a0);
 extern void sub_8041AD0(Entity *pokemon);

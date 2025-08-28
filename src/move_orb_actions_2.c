@@ -38,7 +38,6 @@
 
 extern void EndAbilityImmuneStatus(Entity *, Entity *);
 extern void nullsub_92(Entity *);
-extern u8 sub_807EAA0(u32, u32);
 
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;

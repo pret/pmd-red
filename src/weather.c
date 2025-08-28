@@ -35,15 +35,9 @@
 #include "dungeon_strings.h"
 
 extern void sub_804178C(u32);
-extern s32 CalculateStatusTurns(Entity *target, const s16 *turnRange, bool8 factorCurerSkills);
 extern void sub_80429D8(Entity *r0);
 
 extern OpenedFile *gUnknown_202ECA0;
-
-void sub_807E7FC(bool8 arg0);
-void sub_807E8F0(Entity *pokemon);
-void GetWeatherName(u8 *buffer, u8 weather);
-bool8 sub_807EAA0(bool8 arg0, bool8 arg1);
 
 u8 GetApparentWeather(Entity *pokemon)
 {
@@ -91,7 +85,7 @@ void sub_807E5E4(u8 weather)
 }
 
 // Note: gUnknown_202ECA0 file's 2d array is read as 1d array in functions below, be careful!
-void sub_807E698(bool8 arg0)
+static void sub_807E698(bool8 arg0)
 {
     s32 i, j;
     s32 weatherArrId = GetApparentWeather(NULL) * COLOR_RAMP_COUNT;

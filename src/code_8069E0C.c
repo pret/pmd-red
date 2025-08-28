@@ -58,7 +58,6 @@ extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
 extern s32 GetMonsterApparentID(Entity *pokemon, s32 _id);
 extern void sub_806A898(Entity *entity, bool8 r7, bool8 showRunAwayEffect);
-extern bool8 sub_806AA0C(s16 _species, bool32 _a1);
 extern void sub_806A6E8(Entity *entity);
 
 s32 sub_806C444(s32 species, s32 level);
