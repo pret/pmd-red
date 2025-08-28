@@ -546,7 +546,7 @@ bool8 sub_808D6E8()
      s32 count = 0;
      s32 size_count = 0;
 
-     for (i = 0; i < 413; i++) {
+     for (i = 0; i < NUM_MONSTERS; i++) {
          pokemon = &gRecruitedPokemonRef->pokemon[i];
          if (PokemonExists(pokemon) && PokemonFlag2(pokemon)) {
              size_count += GetBodySize(pokemon->speciesNum);
