@@ -6,7 +6,6 @@
 #include "dungeon_tilemap.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/status.h"
@@ -34,9 +33,10 @@
 #include "dungeon_misc.h"
 #include "dungeon_strings.h"
 #include "dungeon_damage.h"
+#include "warp_target.h"
+#include "explosion.h"
 
 extern void EndAbilityImmuneStatus(Entity *, Entity *);
-extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 extern void nullsub_92(Entity *);
 extern u8 sub_807EAA0(u32, u32);
 

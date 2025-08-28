@@ -14,7 +14,6 @@
 #include "code_8041AD0.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "dungeon_logic.h"
 #include "dungeon_config.h"
@@ -44,6 +43,7 @@
 #include "text_util.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
+#include "warp_target.h"
 
 extern void sub_80429C8(Entity *r0);
 extern s16 sub_8057600(Move *move, s32 itemID);

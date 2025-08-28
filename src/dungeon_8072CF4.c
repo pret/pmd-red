@@ -8,7 +8,6 @@
 #include "code_8066D04.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
 #include "constants/iq_skill.h"
@@ -32,6 +31,7 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
 #include "dungeon_strings.h"
+#include "warp_target.h"
 
 extern u8 gUnknown_202F221;
 extern u8 gUnknown_202F222;

@@ -18,7 +18,6 @@
 #include "position_util.h"
 #include "dungeon_ai.h"
 #include "code_806CD90.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "code_805D8C8.h"
 #include "dungeon_items.h"
@@ -32,6 +31,7 @@
 #include "sprite.h"
 #include "dungeon_strings.h"
 #include "dungeon_engine.h"
+#include "warp_target.h"
 
 static void sub_807EFFC(bool8 arg0);
 static s32 sub_807F19C(bool8 arg0);

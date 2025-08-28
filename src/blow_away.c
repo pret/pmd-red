@@ -6,7 +6,6 @@
 #include "dungeon_vram.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
-#include "code_807CD9C.h"
 #include "structs/str_dungeon.h"
 #include "code_8077274_1.h"
 #include "dungeon_ai.h"
@@ -30,6 +29,7 @@
 #include "dungeon_damage.h"
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_engine.h"
+#include "warp_target.h"
 
 extern void sub_804EB30();
 extern bool8 ExposeTrap(s32 x, s32 y);

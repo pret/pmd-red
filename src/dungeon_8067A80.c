@@ -10,7 +10,6 @@
 #include "code_8066D04.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "run_dungeon.h"
 #include "dungeon_items.h"
 #include "dungeon_range.h"

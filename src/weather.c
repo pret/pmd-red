@@ -21,7 +21,6 @@
 #include "position_util.h"
 #include "dungeon_ai.h"
 #include "code_806CD90.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "code_805D8C8.h"
 #include "dungeon_items.h"

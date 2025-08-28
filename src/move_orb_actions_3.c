@@ -5,7 +5,6 @@
 #include "dungeon_tilemap.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "constants/ability.h"
 #include "constants/move_id.h"
@@ -42,13 +41,12 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
 #include "dungeon_kecleon_shop.h"
+#include "blow_away.h"
+#include "warp_target.h"
 
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 extern void MudWaterSportEffect(u32);
 extern void sub_806A6E8(Entity *);
-
-extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
-extern void nullsub_92(Entity *);
 extern u8 sub_807EAA0(u32, u32);
 
 extern u32 gUnknown_8106A4C;

@@ -4,7 +4,6 @@
 #include "code_8041AD0.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "constants/dungeon_action.h"
 #include "constants/dungeon.h"
@@ -35,6 +34,7 @@
 #include "dungeon_damage.h"
 #include "dungeon_strings.h"
 #include "dungeon_move.h"
+#include "warp_target.h"
 
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;

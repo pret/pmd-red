@@ -5,7 +5,6 @@
 #include "code_8041AD0.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
-#include "code_807CD9C.h"
 #include "dungeon_random.h"
 #include "code_806CD90.h"
 #include "constants/trap.h"
@@ -32,6 +31,9 @@
 #include "sprite.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "warp_target.h"
+#include "blow_away.h"
+#include "explosion.h"
 
 extern u32 gUnknown_8106A4C;
 extern u32 gUnknown_8106A50;
@@ -44,7 +46,6 @@ void sub_804225C(Entity *, DungeonPos *, u8);
 void EnemyEvolution(Entity *);
 void sub_806A1E8(Entity *pokemon);
 Entity *sub_8045684(u8, DungeonPos *, u8);
-extern void HandleExplosion(Entity *pokemon, Entity *target, DungeonPos *pos, u32, u8 moveType, s16);
 
 void sub_807FA18(void)
 {

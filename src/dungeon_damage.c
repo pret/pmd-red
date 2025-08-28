@@ -40,8 +40,8 @@
 #include "random.h"
 #include "sprite.h"
 #include "exclusive_pokemon.h"
+#include "hurl_orb.h"
 
-extern void sub_807F43C(Entity *, Entity *);
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);
 extern void sub_8041D00(Entity *pokemon, Entity *target);
@@ -124,7 +124,7 @@ void HandleDealingDamage(Entity *attacker, Entity *target, struct DamageStruct *
         && GetEntInfo(target)->reflectClassStatus.status == STATUS_VITAL_THROW)
     {
         sub_8042730(target, attacker);
-        sub_807F43C(target, attacker);
+        HandleHurlOrb(target, attacker);
     }
 
     if (GetEntInfo(target)->bideClassStatus.status == STATUS_ENRAGED) {

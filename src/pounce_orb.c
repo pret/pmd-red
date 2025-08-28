@@ -1,11 +1,11 @@
 #include "global.h"
 #include "globaldata.h"
+#include "pounce_orb.h"
 #include "constants/ability.h"
 #include "constants/weather.h"
 #include "dungeon_vram.h"
 #include "dungeon_message.h"
 #include "code_806CD90.h"
-#include "code_807CD9C.h"
 #include "structs/str_dungeon.h"
 #include "code_8077274_1.h"
 #include "dungeon_ai.h"
@@ -27,8 +27,9 @@
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_kecleon_shop.h"
+#include "warp_target.h"
 
-void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2)
+void HandlePounceOrb(Entity *pokemon, Entity *target, u8 r2)
 {
     EntityInfo *info;
     const Tile *tile;
