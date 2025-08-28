@@ -7,8 +7,7 @@
 #include "dungeon_info.h"
 #include "music.h"
 #include "run_dungeon.h"
-
-extern MenuInputStruct gDungeonMenu;
+#include "dungeon_engine.h"
 
 // Dungeon Music Player adds in this flag to tell
 // the system to fade in rather than immediately playing

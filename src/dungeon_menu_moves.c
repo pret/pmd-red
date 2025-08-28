@@ -17,6 +17,7 @@
 #include "dungeon_submenu.h"
 #include "dungeon_strings.h"
 #include "dungeon_util.h"
+#include "dungeon_engine.h"
 #include "input.h"
 #include "moves.h"
 #include "menu_input.h"
@@ -35,7 +36,6 @@ extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
 extern void sub_8067768(ActionContainer *a0);
 extern bool8 sub_8071A8C(Entity *pokemon);
 
-extern MenuInputStruct gDungeonMenu;
 
 static void ShowMovesMenuWindows(Entity *entity, EntityInfo *entInfo, bool8 redColorForChargingMoves, WindowTemplates *windows, WindowHeader *header, u8 *arg5, s32 arg6, s32 arg7);
 static void AddMovesSubMenuOptions(Entity *entity, bool8 addLinkOptions, bool8 addUseMove);

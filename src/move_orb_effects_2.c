@@ -87,7 +87,6 @@ extern void nullsub_87(Entity *);
 extern void nullsub_86(Entity *);
 extern void sub_8041E0C(Entity *);
 extern void sub_8041DD8(Entity *r0, s32 r1); // NOTE: is s16 in another file
-extern void UpdateMinimap(void);
 extern void sub_8041D9C(Entity *);
 extern void sub_8041DB0(Entity *pokemon);
 extern void sub_8041CA8(Entity *);

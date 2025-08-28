@@ -20,6 +20,7 @@
 #include "dungeon_range.h"
 #include "dungeon_message.h"
 #include "dungeon_pokemon_sprites.h"
+#include "dungeon_misc.h"
 #include "dungeon_music.h"
 #include "dungeon_map.h"
 #include "string_format.h"
@@ -27,10 +28,6 @@
 #include "trap.h"
 #include "dungeon_data.h"
 #include "dungeon_strings.h"
-
-extern void sub_8045ACC(void);
-extern s32 GetMonsterApparentID(Entity *pokemon, s32 id);
-extern void sub_8045BF8(u8 *, Item *);
 
 EWRAM_DATA u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE] = {0};
 EWRAM_DATA u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE] = {0};

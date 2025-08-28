@@ -74,7 +74,6 @@ extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
 extern void DisplayPreFightDialogue(void);
 extern void EnemyEvolution(Entity *);
-extern void UpdateMinimap(void);
 extern void sub_807E5AC(void);
 extern void TryActivateArtificialWeatherAbilities(void);
 extern void nullsub_16(void);

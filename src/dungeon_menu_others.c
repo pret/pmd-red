@@ -19,6 +19,7 @@
 #include "dungeon_music.h"
 #include "dungeon_strings.h"
 #include "dungeon_submenu.h"
+#include "dungeon_engine.h"
 #include "dungeon_util.h"
 #include "game_options.h"
 #include "input.h"
@@ -32,7 +33,6 @@
 extern bool8 IsBossFight(void);
 extern u16 GetLeaderActionId(void);
 
-extern MenuInputStruct gDungeonMenu;
 
 static void PrintOthersMenuOptions(void);
 static void ShowGameOptionsMenu(void);

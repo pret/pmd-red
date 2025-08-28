@@ -31,6 +31,7 @@
 #include "dungeon_util.h"
 #include "dungeon_strings.h"
 #include "dungeon_info.h"
+#include "dungeon_engine.h"
 #include "input.h"
 #include "items.h"
 #include "menu_input.h"
@@ -93,7 +94,6 @@ extern void sub_8045C18(u8 *buffer, Item *item);
 
 extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
-extern MenuInputStruct gDungeonMenu;
 extern u8 gUnknown_202EE39;
 
 EWRAM_DATA s32 gTeamMenuChosenId = 0;

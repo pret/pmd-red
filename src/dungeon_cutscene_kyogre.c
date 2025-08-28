@@ -32,7 +32,7 @@
 #include "dungeon_config.h"
 #include "dungeon_boss_dialogue.h"
 #include "dungeon_tilemap.h"
-
+#include "dungeon_map.h"
 
 extern void sub_8042B0C(Entity *);
 extern u8 sub_806FD18(Entity *);
@@ -40,7 +40,6 @@ extern void sub_806FDF4(Entity *, Entity *, Entity **);
 extern void sub_8085EB0(void);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
-extern void UpdateMinimap(void);
 extern void sub_8086A54(Entity *);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_8041888(u32);

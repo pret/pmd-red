@@ -46,6 +46,7 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_data.h"
 #include "dungeon_tilemap.h"
+#include "dungeon_engine.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
@@ -77,7 +78,6 @@ extern s32 sub_803DA20(s32 param_1);
 extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
-extern void UpdateMinimap(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
@@ -85,8 +85,6 @@ extern Entity *sub_80696A8(Entity *a0);
 extern Entity *gLeaderPointer;
 extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
 extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
-extern DungeonPos gPlayerDotMapPosition;
-extern DungeonPos gUnknown_202EE0C;
 extern u8 gUnknown_202F32C;
 
 bool8 sub_806A564(s16 r0);

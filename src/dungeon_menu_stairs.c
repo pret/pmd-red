@@ -15,14 +15,12 @@
 #include "dungeon_submenu.h"
 #include "dungeon_util.h"
 #include "dungeon_strings.h"
+#include "dungeon_engine.h"
+#include "run_dungeon.h"
 #include "input.h"
 #include "menu_input.h"
 #include "text_1.h"
 #include "text_3.h"
-
-extern u8 GetFloorType(void);
-
-extern MenuInputStruct gDungeonMenu;
 
 static void ShowAndPrintOnStairsMenu(DungeonPos *pos, WindowTemplates *windows, WindowHeader *header);
 static void AddStairsSubMenuOptions(Entity *mon);

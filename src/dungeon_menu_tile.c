@@ -6,6 +6,7 @@
 #include "code_8097DD0.h"
 #include "dungeon_info.h"
 #include "dungeon_action.h"
+#include "dungeon_engine.h"
 #include "dungeon_map_access.h"
 #include "dungeon_menu_moves.h"
 #include "dungeon_menu_team.h"
@@ -19,8 +20,6 @@
 #include "text_1.h"
 #include "text_3.h"
 #include "trap.h"
-
-extern MenuInputStruct gDungeonMenu;
 
 static void ShowAndPrintOnTileMenu(DungeonPos *pos, WindowTemplates *windows, WindowHeader *header);
 static void AddTileSubMenuOptions(Entity *mon);

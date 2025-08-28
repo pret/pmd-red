@@ -120,7 +120,6 @@ extern const u8 *const gUnknown_80F91E0;
 extern const u8 *const gUnknown_80F91A8;
 extern const u8 *const gUnknown_80FE954;
 
-extern MenuInputStruct gDungeonMenu;
 extern s32 gTeamMenuChosenId;
 
 static EWRAM_DATA bool8 sInDiagonalMode = 0;

@@ -34,7 +34,6 @@
 #include "effect_main.h"
 
 
-extern void UpdateMinimap(void);
 extern void sub_8041888(u8 param_1);
 extern void UpdateMinimap();
 

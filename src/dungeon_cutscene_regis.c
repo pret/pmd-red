@@ -31,6 +31,7 @@
 #include "math.h"
 #include "dungeon_config.h"
 #include "dungeon_boss_dialogue.h"
+#include "dungeon_map.h"
 
 extern void sub_8042B0C(Entity *);
 extern u8 sub_806FD18(Entity *);
@@ -38,14 +39,12 @@ extern void sub_806FDF4(Entity *, Entity *, Entity **);
 extern void sub_8085EB0(void);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
-extern void UpdateMinimap(void);
 extern void sub_8086A54(Entity *);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_8041888(u32);
 extern u32 sub_80861F8(u32, Entity *, u32);
 extern u8 sub_80860A8(u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
 extern void sub_8072008(Entity *, Entity *, s16, u32, u32);

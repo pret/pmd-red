@@ -29,6 +29,7 @@
 #include "menu_input.h"
 #include "code_801602C.h"
 #include "dungeon_tilemap.h"
+#include "dungeon_engine.h"
 
 // File split is correct. This technical file deals with windows, advancing frames(v-blanks) and vram / pal set-up.
 
@@ -42,7 +43,6 @@ extern struct DungeonPalFile *gDungeonPaletteFile;
 extern struct DungeonPalFile *gDungeonNameBannerPalette;
 extern struct DungeonPalFile *gUnknown_202EC94;
 extern RGB gUnknown_202ECA4[];
-extern MenuInputStruct gDungeonMenu;
 extern OpenedFile *gUnknown_202EC9C;
 
 void xxx_draw_string_80524F0(void);

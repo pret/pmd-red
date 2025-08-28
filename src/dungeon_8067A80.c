@@ -36,6 +36,7 @@
 #include "text_1.h"
 #include "trap.h"
 #include "dungeon_submenu.h"
+#include "dungeon_engine.h"
 
 extern void sub_80684C4(void);
 extern void sub_8068344(void);
@@ -43,7 +44,6 @@ void sub_8068310(s32 n, Pokemon **monPtrs);
 void sub_8067F00(u8 a0, Pokemon **a1, s32 a2, s32 a3, s32 a4);
 void sub_806806C(Pokemon *a0);
 
-extern MenuInputStruct gDungeonMenu;
 
 static EWRAM_DATA WindowHeader gUnknown_202F308 = {0};
 static EWRAM_DATA s32 gUnknown_202F30C = 0;

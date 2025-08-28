@@ -27,6 +27,7 @@
 #include "text_1.h"
 #include "dungeon_action.h"
 #include "code_801B3C0.h"
+#include "dungeon_engine.h"
 
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
@@ -40,7 +41,6 @@ extern bool8 PosHasItem(DungeonPos *pos);
 extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
 
-extern MenuInputStruct gDungeonMenu;
 
 extern const u8 *gUnknown_80F8B24;
 extern const u8 *gTeamToolboxAPtr;

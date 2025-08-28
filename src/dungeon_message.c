@@ -12,6 +12,7 @@
 #include "dungeon_info.h"
 #include "dungeon_range.h"
 #include "dungeon_map.h"
+#include "dungeon_main.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
 #include "dungeon_util_1.h"
@@ -28,18 +29,13 @@
 #include "dungeon_strings.h"
 #include "dungeon_portrait_placement.h"
 
-void sub_80526D0(s32 r0);
-static bool8 sub_8052DC0(Entity *);
-static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2);
-
-extern void sub_805E804(void);
-
-extern u8 gUnknown_202EE01;
-
 static EWRAM_DATA Entity *sLastLogMsgEntity = NULL;
 static UNUSED EWRAM_DATA u8 sUnused = 0;
 static EWRAM_DATA SpriteOAM sUnknown_202F1F0 = {0};
 EWRAM_INIT u8 gUnknown_203B434 = 1;
+
+static bool8 sub_8052DC0(Entity *);
+static void DisplayMessageAddToLog(Entity *pokemon, const u8 *str, bool8 r2);
 
 void sub_80521D0(void)
 {
@@ -125,8 +121,7 @@ void TryDisplayDungeonLoggableMessage4(Entity *attacker, Entity *target, const u
     }
 }
 
-void LogMessageByIdWithPopupCheckUserUnknown(Entity *pokemon, DungeonPos *pos,
-                                       const u8 *str)
+void LogMessageByIdWithPopupCheckUserUnknown(Entity *pokemon, DungeonPos *pos, const u8 *str)
 {
     u8 flag;
     flag = ShouldDisplayEntity(pokemon) ? TRUE : FALSE;

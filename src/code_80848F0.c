@@ -37,6 +37,7 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
 #include "dungeon_tilemap.h"
+#include "dungeon_map.h"
 
 struct RgbS16
 {
@@ -51,7 +52,6 @@ extern RGB gUnknown_202ECA4[];
 extern const u8 gUnknown_8107358[25];
 
 extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
-extern void UpdateMinimap(void);
 extern void sub_803F878(s32, s32);
 extern void sub_8085F44(s32);
 extern bool8 sub_800E90C(DungeonPos *);

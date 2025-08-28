@@ -37,6 +37,7 @@
 #include "dungeon_damage.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_spawns.h"
+#include "dungeon_map.h"
 #include "warp_target.h"
 #include "expose_trap.h"
 #include "one_room_orb.h"
@@ -45,7 +46,6 @@
 #include "switcher_orb.h"
 #include "trawl_orb.h"
 
-extern void UpdateMinimap(void);
 extern void sub_806BB6C(Entity *, s32);
 
 extern u32 gUnknown_8106A50;

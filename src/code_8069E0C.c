@@ -35,6 +35,7 @@
 #include "dungeon_spawns.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_tilemap.h"
+#include "dungeon_engine.h"
 
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
@@ -45,14 +46,12 @@ extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
 extern Entity *gLeaderPointer;
-extern DungeonPos gUnknown_202EE0C;
 extern bool8 sub_80860A8(u8 id);
 extern u8 gUnknown_202F32C;
 extern u8 GetRandomFloorItem(s32 a0);
 extern void sub_80429E8(Entity *r0);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
-extern void UpdateMinimap(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);

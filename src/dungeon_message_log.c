@@ -16,18 +16,14 @@
 
 #define MESSAGE_LOG_ROW_COUNT 8 // How many log messages are shown
 
-extern void sub_805E804(void);
-extern u32 GetTouchScreenArrowPress(s32 a0, const void *a1);
-
+static EWRAM_DATA s32 sMessageLogCursor = 0;
+static EWRAM_DATA u8 sMessageLogFlags = 0;
+static EWRAM_DATA SpriteOAM sMessageLogArrowSpriteOAM = {0};
 
 static void PutStringsOnMessageLog(void);
 static bool8 TryScrollLogDown(s32 a0);
 static bool8 TryScrollLogUp(s32 a0);
 static void CreateMessageLogArrow(bool8 upArrow, s32 y);
-
-static EWRAM_DATA s32 sMessageLogCursor = 0;
-static EWRAM_DATA u8 sMessageLogFlags = 0;
-static EWRAM_DATA SpriteOAM sMessageLogArrowSpriteOAM = {0};
 
 void ResetMessageLog(void)
 {
