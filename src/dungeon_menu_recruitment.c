@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "code_800D090.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_info.h"
 #include "dungeon_menu_recruitment.h"
 #include "dungeon_message.h"
@@ -27,7 +27,6 @@ extern bool8 sub_80860A8(u8 id);
 extern bool8 sub_806A564(s32 r0);
 
 extern MenuInputStruct gDungeonMenu;
-extern s32 gDungeonFramesCounter;
 
 struct MonRecruitList
 {

@@ -8,7 +8,7 @@
 #include "code_800D090.h"
 #include "effect_main.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_info.h"
 #include "dungeon_leader.h"
 #include "dungeon_map.h"
@@ -37,10 +37,7 @@ extern void sub_8083E28(void);
 extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 
-extern u32 gUnknown_202EDD0;
-extern u8 gUnknown_203B40C;
 extern u8 gUnknown_202EE01;
-extern s32 gDungeonFramesCounter;
 
 static EWRAM_DATA Entity *sLastLogMsgEntity = NULL;
 static UNUSED EWRAM_DATA u8 sUnused = 0;

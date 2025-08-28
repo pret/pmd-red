@@ -32,7 +32,6 @@
 #include "text_util.h"
 #include "sprite.h"
 #include "random.h"
-#include "structs/str_202ED28.h"
 
 const u8 gUnknown_8106EC8[][13] = {
     {0, 1, 7, 7, 7, 5, 6, 7, 7, 7, 7, 7, 7},
@@ -42,7 +41,6 @@ const u8 gUnknown_8106EC8[][13] = {
 
 const u8 gUnknown_8106EEF[] = {0x03, 0x04, 0x05, 0x0};
 
-extern s32 gDungeonFramesCounter;
 
 extern void sub_8042EC8(Entity *a0, s32 a1);
 

@@ -10,7 +10,7 @@
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_action.h"
 #include "code_806CD90.h"
 #include "code_8097DD0.h"
@@ -68,7 +68,6 @@ u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
 bool8 sub_8094C48(void);
 bool8 sub_805EC4C(Entity *a0, u8 a1);
-void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 void ShowMainMenu(bool8 fromBPress, bool8 a1);
@@ -91,7 +90,6 @@ extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4)
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
-extern void PointCameraToMonster(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
@@ -112,7 +110,6 @@ extern void sub_8045C18(u8 *buffer, Item *item);
 extern u8 gUnknown_202EE00;
 extern Entity *gLeaderPointer;
 extern MenuInputStruct gDungeonMenu;
-extern s32 gDungeonFramesCounter;
 extern u8 gUnknown_202EE39;
 
 EWRAM_DATA s32 gTeamMenuChosenId = 0;

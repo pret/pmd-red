@@ -34,28 +34,25 @@
 #include "weather.h"
 #include "dungeon_spawns.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_tilemap.h"
 
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
 extern void EndAbilityImmuneStatus(Entity *, Entity *);
 void sub_8041BBC(Entity *r0);
-extern void TryPointCameraToMonster(Entity *, u8);
 extern void sub_804178C(u32);
-extern void PointCameraToMonster(Entity *);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
 extern bool8 sub_8083660(const DungeonPos *param_1);
 extern Entity *gLeaderPointer;
 extern DungeonPos gUnknown_202EE0C;
-extern void sub_803F4A0(Entity *a0);
 extern bool8 sub_80860A8(u8 id);
 extern u8 gUnknown_202F32C;
 extern u8 GetRandomFloorItem(s32 a0);
 extern void sub_80429E8(Entity *r0);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
-extern void UpdateCamera(s32);
 extern void UpdateMinimap(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "globaldata.h"
 #include "dungeon_ai.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_message.h"
 #include "code_8077274_1.h"
 #include "dungeon_random.h"

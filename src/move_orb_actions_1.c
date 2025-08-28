@@ -3,7 +3,7 @@
 #include "move_orb_actions_1.h"
 #include "dungeon_move_util.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"

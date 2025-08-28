@@ -36,7 +36,6 @@
 #include "dungeon_strings.h"
 
 extern void sub_804178C(u32);
-extern void sub_803E874(bool8 r10, s32 r9);
 extern s32 CalculateStatusTurns(Entity *target, const s16 *turnRange, bool8 factorCurerSkills);
 extern void sub_80429D8(Entity *r0);
 extern void sub_80838EC(u8 *a);

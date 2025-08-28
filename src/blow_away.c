@@ -38,8 +38,6 @@ extern void UpdateCamera(u32);
 bool8 sub_808384C(DungeonPos *, DungeonPos *);
 u8 sub_8083660(DungeonPos *);
 
-extern u32 gDungeonFramesCounter;
-
 void sub_807D068(Entity *pokemon, DungeonPos *pos);
 
 void BlowAwayTarget(Entity *pokemon, Entity *target, u32 direction)

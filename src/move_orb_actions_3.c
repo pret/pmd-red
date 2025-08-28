@@ -2,7 +2,7 @@
 #include "globaldata.h"
 #include "dungeon_vram.h"
 #include "move_orb_actions_3.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
 #include "code_807CD9C.h"

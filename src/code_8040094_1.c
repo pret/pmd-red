@@ -20,6 +20,7 @@
 #include "sprite.h"
 #include "weather.h"
 #include "dungeon_map_access.h"
+#include "dungeon_strings.h"
 
 struct UnkStruct_8040094
 {
@@ -42,7 +43,6 @@ extern s32 sub_800E52C(struct UnkStruct_8040094 *a0);
 extern s32 sub_800EA84(struct UnkStruct_8040094 *a0);
 extern bool8 sub_800E838(struct UnkStruct_8040094 *a0, s32 a1);
 extern bool8 sub_800E9A8(s32 a0);
-extern void sub_803EA10(void);
 extern void sub_800EEF8(u16 a0);
 extern bool8 sub_803F428(DungeonPos *pos);
 extern void sub_800EEE0(u16 a0);
@@ -54,9 +54,6 @@ extern bool8 MoveMatchesBideClassStatus(Entity *pokemon, Move *move);
 extern bool8 IsSleeping(Entity *pokemon);
 extern void sub_80421C0(Entity *pokemon, u16);
 
-extern s32 gDungeonBrightness;
-
-extern const u8 *const gPtrMagnitudeMessage;
 extern const s32 gUnknown_8106A8C[];
 
 u16 sub_80412E0(u16 moveId, u8 weather, bool32 a2);

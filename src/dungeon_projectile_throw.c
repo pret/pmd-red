@@ -10,7 +10,7 @@
 #include "dungeon_config.h"
 #include "dungeon_pos_data.h"
 #include "code_8077274_1.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_806CD90.h"
 #include "dungeon_message.h"
 #include "move_util.h"

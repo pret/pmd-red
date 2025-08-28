@@ -2,8 +2,6 @@
 #include "globaldata.h"
 #include "dungeon_name_banner.h"
 #include "constants/dungeon.h"
-#include "structs/str_202ED28.h"
-#include "structs/str_202EDE8.h"
 #include "bg_palette_buffer.h"
 #include "code_800D090.h"
 #include "dungeon_vram.h"

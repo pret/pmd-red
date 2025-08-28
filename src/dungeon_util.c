@@ -8,7 +8,7 @@
 #include "code_806CD90.h"
 #include "dungeon_items.h"
 #include "dungeon_map_access.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_range.h"
 #include "pokemon.h"
 #include "code_805D8C8.h"

@@ -25,6 +25,7 @@
 #include "dungeon_random.h"
 #include "dungeon_misc.h"
 #include "dungeon_spawns.h"
+#include "dungeon_tilemap.h"
 #include "pokemon_3.h"
 
 extern u32 gUnknown_8106A4C;
@@ -79,7 +80,6 @@ extern void sub_8041E74(Entity *);
 extern void sub_8041E60(Entity *);
 extern void sub_8041E4C(Entity *);
 extern void sub_8041E3C(Entity *);
-extern void UpdateCamera(u32);
 extern void sub_8041E1C(Entity *);
 extern void nullsub_89(Entity *);
 extern void nullsub_88(Entity *);
@@ -88,13 +88,11 @@ extern void nullsub_86(Entity *);
 extern void sub_8041E0C(Entity *);
 extern void sub_8041DD8(Entity *r0, s32 r1); // NOTE: is s16 in another file
 extern bool8 sub_806AA0C(s32, u32);
-extern void UpdateCamera(u32);
 extern void UpdateMinimap(void);
 extern void sub_8041D9C(Entity *);
 extern void sub_8041DB0(Entity *pokemon);
 extern void sub_8041CA8(Entity *);
 extern void sub_8041C94(Entity *);
-extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8041BF8(Entity *);
 extern void sub_8041BE8(Entity *);
 extern void EntityUpdateStatusSprites(Entity *);

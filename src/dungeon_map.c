@@ -15,13 +15,12 @@
 #include "dungeon_map_access.h"
 #include "dungeon_music.h"
 #include "dungeon_util.h"
+#include "dungeon_vram.h"
 #include "file_system.h"
 #include "game_options.h"
 #include "sprite.h"
 #include "text_1.h"
 #include "trap.h"
-
-extern s32 gUnknown_202EDD0;
 
 extern u8 GetFloorType(void);
 extern bool8 sub_8094C48(void);

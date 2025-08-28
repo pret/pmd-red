@@ -10,7 +10,7 @@
 #include "effect_main.h"
 #include "effect_sub_1.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_806CD90.h"
@@ -32,20 +32,16 @@
 #include "effect_data.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "dungeon_strings.h"
 
 // Unknown dungeon file. File split is correct.
 
-extern const u8 *gPtrFeralFoundItemMessage[];
-
-extern void sub_803ED30(u8, Entity *pokemon, u8, u8);
 extern void PlaySoundEffect(u32);
 
 void EntityUpdateStatusSprites(Entity *entity);
 
-extern s32 gDungeonBrightness;
 
 extern void sub_800DBBC(void);
-extern void sub_803EA10(void);
 extern void sub_8042E98(void);
 extern void sub_800EF28(u8);
 extern void sub_80429A0(Entity *);
@@ -1344,7 +1340,7 @@ void sub_80427AC(void)
                 sub_80429A0(entity);
                 if (!enInfo->isNotTeamMember) {
                     SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0], entity, 0);
-                    DisplayDungeonLoggableMessageTrue(entity, *gPtrFeralFoundItemMessage);
+                    DisplayDungeonLoggableMessageTrue(entity, gPtrFeralFoundItemMessage);
                 }
             }
         }

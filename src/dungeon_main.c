@@ -16,7 +16,7 @@
 #include "code_801602C.h"
 #include "code_801B3C0.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_action.h"
 #include "code_8066D04.h"
 #include "code_806CD90.h"
@@ -78,7 +78,6 @@ u16 GetLeaderActionId(void);
 void sub_80978C8(s16 a0);
 static void TryCreateModeArrows(Entity *leader);
 bool8 sub_8094C48(void);
-void sub_803E724(s32 a0);
 void HandleTalkFieldAction(Entity *);
 bool8 IsNotAttacking(Entity *param_1, bool8 param_2);
 s32 GetTeamMemberEntityIndex(Entity *pokemon);
@@ -90,7 +89,6 @@ extern bool8 sub_8071A8C(Entity *pokemon);
 extern void GetWeatherName(u8 *dst, u8 weatherId);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 extern Entity *sub_80696A8(Entity *a0);
-extern void PointCameraToMonster(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);

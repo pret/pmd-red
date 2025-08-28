@@ -9,7 +9,7 @@
 #include "graphics_memory.h"
 #include "code_800C9CC.h"
 #include "music_util.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_map.h"
 #include "dungeon_music.h"
 #include "game_options.h"
@@ -18,8 +18,6 @@
 #include "sprite.h"
 #include "text_1.h"
 #include "text_2.h"
-#include "structs/str_202ED28.h"
-#include "structs/str_202EDE8.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
 #include "dungeon_message.h"
@@ -30,6 +28,7 @@
 #include "dungeon_pokemon_sprites.h"
 #include "menu_input.h"
 #include "code_801602C.h"
+#include "dungeon_tilemap.h"
 
 // File split is correct. This technical file deals with windows, advancing frames(v-blanks) and vram / pal set-up.
 
@@ -48,28 +47,26 @@ extern OpenedFile *gUnknown_202EC9C;
 
 void xxx_draw_string_80524F0(void);
 void sub_8085F78(void);
-void UpdateCamera(s32);
 void sub_806CC10();
 void sub_804522C();
 void sub_803F9CC();
-void sub_803ECE0();
-void sub_803EDF0();
 void sub_800E90C();
 void sub_8042E5C();
 
 static void sub_803E490(u32);
-static s32 sub_803EF90(s32 a0, u8 a1);
 static void sub_803EC94(void);
-void sub_803E874(bool8 r10, s32 r9);
+static void sub_803ECE0(void);
+static void sub_803EDF0(void);
+static s32 sub_803EF90(s32 a0, u8 a1);
 
 EWRAM_DATA struct unkStruct_202ED28 gUnknown_202ED28[2][6] = {0};
-EWRAM_DATA SpriteOAM gUnknown_202EDB8 = {0};
+static EWRAM_DATA SpriteOAM sUnknown_202EDB8 = {0};
 EWRAM_DATA SpriteOAM gUnknown_202EDC0 = {0};
 EWRAM_DATA s32 gDungeonBrightness = 0;
 EWRAM_DATA s32 gDungeonFramesCounter = 0;
 EWRAM_DATA s32 gUnknown_202EDD0 = 0;
-EWRAM_DATA s32 gUnknown_202EDD4 = 0;
-EWRAM_DATA s32 gUnknown_202EDD8 = 0;
+static EWRAM_DATA s32 sUnknown_202EDD4 = 0;
+static EWRAM_DATA s32 sUnknown_202EDD8 = 0;
 static EWRAM_DATA SpriteOAM gUnknown_202EDDC = {0};
 UNUSED static EWRAM_DATA s32 sUnused = 0;
 EWRAM_DATA struct UnkStruct_202EDE8 gUnknown_202EDE8 = {0};
@@ -99,7 +96,7 @@ void sub_803E250(void)
     s32 i, j;
 
     gUnknown_202EDD0 = 999;
-    gUnknown_202EDD4 = 0;
+    sUnknown_202EDD4 = 0;
     gUnknown_203B40D = 0;
     gUnknown_202EDE8.unk0 = 0;
 
@@ -120,22 +117,22 @@ void sub_803E250(void)
     SpriteSetUnk6_1(&gUnknown_202EDC0, 0);
     SpriteSetUnk6_2(&gUnknown_202EDC0, 0);
 
-    SpriteSetY(&gUnknown_202EDB8, 0);
-    SpriteSetAffine1(&gUnknown_202EDB8, 0);
-    SpriteSetAffine2(&gUnknown_202EDB8, 0);
-    SpriteSetObjMode(&gUnknown_202EDB8, 0);
-    SpriteSetMosaic(&gUnknown_202EDB8, 0);
-    SpriteSetBpp(&gUnknown_202EDB8, 0);
-    SpriteSetShape(&gUnknown_202EDB8, 0);
-    SpriteSetMatrixNum(&gUnknown_202EDB8, 0);
-    SpriteSetSize(&gUnknown_202EDB8, 0);
-    SpriteSetX(&gUnknown_202EDB8, 0);
-    SpriteSetTileNum(&gUnknown_202EDB8, 0);
-    SpriteSetPriority(&gUnknown_202EDB8, 3);
-    SpriteSetPalNum(&gUnknown_202EDB8, 5);
-    SpriteSetUnk6_0(&gUnknown_202EDB8, 0);
-    SpriteSetUnk6_1(&gUnknown_202EDB8, 0);
-    SpriteSetUnk6_2(&gUnknown_202EDB8, 0);
+    SpriteSetY(&sUnknown_202EDB8, 0);
+    SpriteSetAffine1(&sUnknown_202EDB8, 0);
+    SpriteSetAffine2(&sUnknown_202EDB8, 0);
+    SpriteSetObjMode(&sUnknown_202EDB8, 0);
+    SpriteSetMosaic(&sUnknown_202EDB8, 0);
+    SpriteSetBpp(&sUnknown_202EDB8, 0);
+    SpriteSetShape(&sUnknown_202EDB8, 0);
+    SpriteSetMatrixNum(&sUnknown_202EDB8, 0);
+    SpriteSetSize(&sUnknown_202EDB8, 0);
+    SpriteSetX(&sUnknown_202EDB8, 0);
+    SpriteSetTileNum(&sUnknown_202EDB8, 0);
+    SpriteSetPriority(&sUnknown_202EDB8, 3);
+    SpriteSetPalNum(&sUnknown_202EDB8, 5);
+    SpriteSetUnk6_0(&sUnknown_202EDB8, 0);
+    SpriteSetUnk6_1(&sUnknown_202EDB8, 0);
+    SpriteSetUnk6_2(&sUnknown_202EDB8, 0);
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 6; j++) {
@@ -173,7 +170,7 @@ void DungeonRunFrameActions(u32 a0)
 
 static void sub_803E490(u32 unused)
 {
-    gUnknown_202EDD4++;
+    sUnknown_202EDD4++;
     xxx_draw_string_80524F0();
     sub_8085F78();
     UpdateCamera(1);
@@ -237,12 +234,12 @@ static void sub_803E490(u32 unused)
     TryResetDungeonMapTilesScheduledForCopy();
     ResetSprites(FALSE);
     nullsub_10(FALSE);
-    gUnknown_202EDD4--;
+    sUnknown_202EDD4--;
 }
 
 void sub_803E668(u32 unused)
 {
-    gUnknown_202EDD4++;
+    sUnknown_202EDD4++;
     nullsub_8(gGameOptionsRef->touchScreen);
     sub_8005180();
     nullsub_12();
@@ -264,7 +261,7 @@ void sub_803E668(u32 unused)
     UpdateSoundEffectCounters();
     ResetSprites(FALSE);
     nullsub_10(FALSE);
-    gUnknown_202EDD4--;
+    sUnknown_202EDD4--;
 }
 
 void sub_803E708(s32 numFrames, u32 a1)
@@ -664,15 +661,15 @@ void DungeonShowWindows(const WindowTemplates *winTemplates, bool8 a1)
     ShowWindows(winTemplates, TRUE, a1);
 }
 
-void sub_803ECE0(void)
+static void sub_803ECE0(void)
 {
-    gUnknown_202EDD8++;
-    if (gUnknown_202EDD8 < 0)
-        gUnknown_202EDD8 = 0;
-    if (gUnknown_202EDD8 > 11)
-        gUnknown_202EDD8 = 0;
+    sUnknown_202EDD8++;
+    if (sUnknown_202EDD8 < 0)
+        sUnknown_202EDD8 = 0;
+    if (sUnknown_202EDD8 > 11)
+        sUnknown_202EDD8 = 0;
 
-    ScheduleMemCopy((void *)VRAM + 0x14400, gUnknown_202EC94->unk4 + ((gUnknown_202EDD8 / 4) * 0x240), 0x240);
+    ScheduleMemCopy((void *)VRAM + 0x14400, gUnknown_202EC94->unk4 + ((sUnknown_202EDD8 / 4) * 0x240), 0x240);
 }
 
 void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
@@ -713,7 +710,7 @@ void sub_803ED30(s32 a0, Entity *mon, u8 a2, s32 a3)
     ScheduleMemCopy((void *) VRAM + 0x142C0, gDungeon->unk18, 0x80);
 }
 
-void sub_803EDF0(void)
+static void sub_803EDF0(void)
 {
     EntityInfo *entInfo;
     s32 x, y, y1, y2;

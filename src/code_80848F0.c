@@ -36,6 +36,7 @@
 #include "dungeon_boss_dialogue.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
+#include "dungeon_tilemap.h"
 
 struct RgbS16
 {
@@ -45,16 +46,12 @@ struct RgbS16
 };
 
 extern OpenedFile *gDungeonPaletteFile;
-extern s32 gDungeonBrightness;
 extern RGB gUnknown_202ECA4[];
 
 extern const u8 gUnknown_8107358[25];
 
 extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
 extern void UpdateMinimap(void);
-extern s32 GetCameraXPos(void);
-extern s32 GetCameraYPos(void);
-extern void sub_803F4A0(u32);
 extern void sub_803F878(s32, s32);
 extern void sub_8085F44(s32);
 extern bool8 sub_800E90C(DungeonPos *);
@@ -64,12 +61,8 @@ extern void sub_808A718(void);
 extern s32 sub_800E700(s32);
 extern void sub_8085F44(s32);
 extern void sub_8052FB8(const u8 *);
-extern void BgColorCallNullsub4(void);
 extern void PlaySoundEffect(u32);
 extern void sub_8085EB0(void);
-extern void sub_803E748(void);
-extern s32 GetCameraXPos(void);
-extern s32 GetCameraYPos(void);
 extern void sub_8086A54(Entity *);
 extern void sub_8086A3C(Entity *);
 extern void PlaySoundEffect(u32);

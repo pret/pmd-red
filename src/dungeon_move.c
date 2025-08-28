@@ -10,7 +10,7 @@
 #include "effect_main.h"
 #include "effect_data.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"
@@ -47,7 +47,6 @@
 
 extern void sub_80429C8(Entity *r0);
 extern s16 sub_8057600(Move *move, s32 itemID);
-extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern void sub_8042238(Entity *pokemon, Entity *target);
 extern void sub_806A1E8(Entity *pokemon);
 extern void sub_804178C(u32);

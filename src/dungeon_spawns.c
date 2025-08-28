@@ -3,8 +3,6 @@
 #include "dungeon_spawns.h"
 #include "constants/dungeon.h"
 #include "constants/trap.h"
-#include "structs/str_202ED28.h"
-#include "structs/str_202EDE8.h"
 #include "bg_palette_buffer.h"
 #include "graphics_memory.h"
 #include "code_800D090.h"

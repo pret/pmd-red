@@ -4,7 +4,7 @@
 #include "constants/item.h"
 #include "constants/move_id.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "dungeon_action.h"
 #include "code_8066D04.h"
@@ -51,7 +51,6 @@ void CreateDungeonMenuSubWindow(WindowTemplates *a0, s32 a1);
 
 extern const s32 gUnknown_8106E80[];
 extern MenuInputStruct gDungeonMenu;
-extern u32 gDungeonFramesCounter;
 extern s32 gDungeonSubMenuItemsCount;
 
 static EWRAM_DATA WindowHeader gUnknown_202F308 = {0};

@@ -10,7 +10,7 @@
 #include "effect_data.h"
 #include "effect_sub_1.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_8041AD0.h"
 #include "code_806CD90.h"
 #include "code_8077274_1.h"

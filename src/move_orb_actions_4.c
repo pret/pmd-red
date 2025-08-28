@@ -36,12 +36,12 @@
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
 #include "dungeon_damage.h"
+#include "dungeon_tilemap.h"
 
 extern void sub_807F43C(Entity *, Entity *);
 extern void HandleOneRoomOrb(Entity *, Entity *);
 extern void UpdateMinimap(void);
 extern void HandleDroughtOrbAction(Entity *);
-extern void HandleLuminousOrbAction(Entity *pokemon);
 extern void HandleTrawlOrbAction(Entity *, Entity *);
 extern void HandlePounceOrbAction(Entity *, Entity *, s32);
 extern s16 GetRandomFloorMonsterId(u32);

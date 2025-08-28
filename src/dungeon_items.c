@@ -18,6 +18,8 @@
 #include "dungeon_logic.h"
 #include "dungeon_data.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_spawns.h"
+#include "dungeon_boss_dialogue.h"
 #include "string_format.h"
 #include "items.h"
 #include "structs/map.h"
@@ -27,19 +29,11 @@
 #include "dungeon_vram.h"
 #include "sprite.h"
 
-extern SpriteOAM gUnknown_202EDC0;
-
-extern const u8 *gUnknown_810531C[];
-extern const u8 *gUnknown_8105360[];
-extern const u8 *gUnknown_81053A8[];
-extern const u8 *gUnknown_8105434[];
-
 extern void sub_80416E0(PixelPos *r0, u32, bool8);
 extern void sub_80855E4(void *);
 extern void PlaySoundEffect(u32);
 extern void sub_804178C(u32);
 extern void sub_804219C(PixelPos *pos);
-extern u32 GetRandomFloorItem(u32);
 
 static void MusicBoxCreation(void);
 static u8 sub_8046D70(void);
@@ -806,18 +800,18 @@ static void MusicBoxCreation(void)
         Entity *leader = GetLeader();
         sub_80855E4(sub_80861A8);
         gDungeon->unk1356C = 1;
-        DisplayDungeonMessage(0,*gUnknown_810531C,1);
+        DisplayDungeonMessage(0,gUnknown_810531C,1);
         sub_803E708(0x3c,0x41);
-        DisplayDungeonMessage(0,*gUnknown_8105360,1);
+        DisplayDungeonMessage(0,gUnknown_8105360,1);
         sub_80869E4(leader,4,10,0);
         sub_80416E0(&leader->pixelPos,0x10c,FALSE);
         sub_80421C0(leader,0xd7);
         sub_803E708(0x3c,0x41);
         SubstitutePlaceholderStringTags(gFormatBuffer_Monsters[0],leader,0);
-        DisplayDungeonMessage(0,*gUnknown_81053A8,1);
+        DisplayDungeonMessage(0,gUnknown_81053A8,1);
         sub_803E708(10,0x41);
         PlaySoundEffect(0xd4);
-        DisplayDungeonMessage(0,*gUnknown_8105434,1);
+        DisplayDungeonMessage(0,gUnknown_8105434,1);
         sub_803E708(10,0x41);
         sub_804178C(1);
         gDungeon->unk1356C = 0;

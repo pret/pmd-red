@@ -17,7 +17,7 @@
 #include "dungeon_ai_movement.h"
 #include "string_format.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "trap.h"
 #include "dungeon_map_access.h"
 #include "dungeon_items.h"
@@ -35,7 +35,6 @@ extern Item *sub_8044D90(Entity *, s32, u32);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
 extern Entity *sub_80696A8(Entity *a0);
-extern void PointCameraToMonster(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);

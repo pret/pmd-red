@@ -14,7 +14,7 @@
 #include "effect_data.h"
 #include "code_803D110.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "code_805D8C8.h"
 #include "code_8094F88.h"
 #include "code_8099360.h"
@@ -51,20 +51,17 @@
 #include "weather.h"
 #include "dungeon_data.h"
 #include "dungeon_jobs.h"
+#include "dungeon_tilemap.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
 static EWRAM_INIT u8 *gSerializedData_203B41C = NULL;
 
-extern u8 gUnknown_203B40C;
-
-extern void sub_8040094(u8 r0);
 extern void sub_8068BDC(u8 r0);
 extern s16 GetTurnLimit(u8 dungeon);
 extern void sub_8041888(u8 param_1);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
-extern void sub_803E830(void);
 extern void sub_8068F28(void);
 extern void sub_806C1D8(void);
 extern void IncrementThievingSuccesses(void);
@@ -78,20 +75,16 @@ extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
 extern void DisplayPreFightDialogue(void);
 extern void EnemyEvolution(Entity *);
-extern void sub_803E748(void);
 extern void sub_8083D68(void);
-extern void sub_803E7C8(void);
 extern void UpdateMinimap(void);
 extern void sub_807E5AC(void);
 extern void TryActivateArtificialWeatherAbilities(void);
 extern void sub_807E88C(void);
 extern void nullsub_16(void);
 extern void sub_80521D0(void);
-extern void sub_803F27C(u8);
 extern void sub_807E7FC(u8);
 extern void sub_8068A84(Pokemon *pokemon);
 extern void sub_807EAA0(u32, u32);
-extern void SetFloorItemMonsterSpawns(void);
 extern void sub_80427AC(void);
 extern void sub_806AA70(void);
 extern void sub_806AD3C(void);
@@ -109,14 +102,12 @@ extern void sub_8068F80(void);
 extern void sub_8042E98(void);
 extern bool8 TryForcedLoss(bool8);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
-extern void sub_803F4A0(Entity *a0);
 extern void ResetMonEntityData(EntityInfo *, u32);
 extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 extern void sub_8042B0C(Entity *);
 
 extern u8 gUnknown_202F32C;
 extern u8 gUnknown_202F1A8;
-extern s32 gDungeonBrightness;
 extern Entity *gLeaderPointer;
 
 void EnforceMaxItemsAndMoney(void);

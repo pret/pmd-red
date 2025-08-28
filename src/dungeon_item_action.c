@@ -28,7 +28,7 @@
 #include "dungeon_menu_team.h"
 #include "dungeon_menu_moves.h"
 #include "dungeon_misc.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_data.h"
 #include "dungeon_logic.h"
 #include "dungeon_damage.h"

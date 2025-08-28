@@ -6,7 +6,7 @@
 #include "structs/axdata.h"
 #include "bg_control.h"
 #include "music_util.h"
-#include "code_803E724.h"
+#include "dungeon_vram.h"
 #include "def_filearchives.h"
 #include "dungeon_map.h"
 #include "file_system.h"

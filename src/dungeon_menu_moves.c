@@ -3,7 +3,7 @@
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
 #include "dungeon_vram.h"
-#include "code_803E724.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_action.h"
 #include "dungeon_action.h"
 #include "dungeon_leader.h"

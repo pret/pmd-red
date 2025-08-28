@@ -22,16 +22,14 @@
 #include "code_8041AD0.h"
 #include "weather.h"
 #include "dungeon_config.h"
+#include "dungeon_tilemap.h"
 #include "dungeon_misc.h"
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
 #include "dungeon_kecleon_shop.h"
 
-extern u32 gDungeonFramesCounter;
-
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);
-extern void UpdateCamera(u32);
 bool8 sub_808384C(DungeonPos *, DungeonPos *);
 u8 sub_8083660(DungeonPos *);
 

@@ -45,6 +45,7 @@
 #include "dungeon_8083AB0.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_data.h"
+#include "dungeon_tilemap.h"
 
 static void EnsureCastformLoaded(void);
 static void EnsureDeoxysLoaded(void);
@@ -64,23 +65,19 @@ extern void EndAbilityImmuneStatus(Entity *, Entity *);
 extern void sub_8041BBC(Entity *r0);
 extern void TryPointCameraToMonster(Entity *, u8);
 extern void sub_804178C(u32);
-extern void PointCameraToMonster(Entity *);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
 extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
 extern s16 sub_803D970(u32);
 extern bool8 sub_8083660(const DungeonPos *param_1);
-extern void sub_803F4A0(Entity *a0);
 extern bool8 sub_80860A8(u8 id);
 extern u8 sub_803D73C(s32 a0);
 extern void DeletePokemonDungeonSprite(s32 id);
 extern void sub_80429E8(Entity *r0);
 extern s32 sub_803DA20(s32 param_1);
-extern s32 gDungeonFramesCounter;
 extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
-extern void UpdateCamera(s32);
 extern void UpdateMinimap(void);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
