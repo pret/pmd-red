@@ -25,12 +25,12 @@
 #include "dungeon_misc.h"
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
+#include "dungeon_kecleon_shop.h"
 
 extern u32 gDungeonFramesCounter;
 
 bool8 ExposeTrap(s32 x, s32 y);
 void UpdateMinimap();
-void sub_807EC28(u32);
 u8 IsFloorOver(void);
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);

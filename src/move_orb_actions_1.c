@@ -36,7 +36,6 @@
 
 extern void sub_806A5B8(Entity *entity);
 void sub_8075900(Entity *pokemon, u8 r1);
-extern void sub_807EC28(bool8);
 extern void MudWaterSportEffect(u32);
 extern void sub_806A6E8(Entity *);
 

@@ -26,8 +26,7 @@
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
-
-extern void sub_807EC28(u32);
+#include "dungeon_kecleon_shop.h"
 
 void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2)
 {
@@ -80,7 +79,7 @@ void HandlePounceOrbAction(Entity *pokemon, Entity *target, u8 r2)
         if(info->isTeamLeader)
         {
             DiscoverMinimap(&target->pos);
-            sub_807EC28(0);
+            sub_807EC28(FALSE);
         }
         sub_806A5B8(target);
 

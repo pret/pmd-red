@@ -25,9 +25,8 @@
 #include "dungeon_misc.h"
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
-
-extern void sub_807EC28(u32);
-extern const DungeonPos gUnknown_80F4468[];
+#include "dungeon_pos_data.h"
+#include "dungeon_kecleon_shop.h"
 
 void HandleTrawlOrbAction(Entity *user, Entity *target)
 {

@@ -41,6 +41,9 @@
 #include "math.h"
 #include "dungeon_config.h"
 #include "dungeon_engine.h"
+#include "dungeon_kecleon_shop.h"
+#include "dungeon_misc.h"
+#include "dungeon_pos_data.h"
 
 extern void sub_8073D14(Entity *);
 extern void sub_8075708(Entity *entity);
@@ -61,15 +64,12 @@ extern void sub_8075708(Entity *entity);
 extern void TryForcedLoss(u32);
 extern void EnemyEvolution(Entity *);
 extern void sub_8075900(Entity *pokemon, u8 r1);
-extern void sub_806A5B8(Entity *);
 extern void sub_807EC28(bool8);
 extern void sub_8075050(EntityInfo *info, Unk_Entity_x184 *strPtr);
 extern void sub_8074094(Entity *entity);
 extern bool8 sub_803F428(DungeonPos *pos);
 
 extern u8 gUnknown_202F32D;
-
-extern const DungeonPos gUnknown_80F4D44[];
 
 static EWRAM_DATA s32 gUnknown_202F378 = 0;
 

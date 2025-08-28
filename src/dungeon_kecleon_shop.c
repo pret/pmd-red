@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_kecleon_shop.h"
 #include "weather.h"
 #include "code_804267C.h"
 #include "dungeon_vram.h"
@@ -32,10 +33,9 @@
 #include "dungeon_strings.h"
 #include "dungeon_engine.h"
 
-bool8 sub_807EF48(void);
-void sub_807EFFC(bool8 arg0);
-s32 sub_807F19C(bool8 arg0);
-void sub_807F33C(void);
+static void sub_807EFFC(bool8 arg0);
+static s32 sub_807F19C(bool8 arg0);
+static void sub_807F33C(void);
 
 void sub_807EC28(bool8 arg0)
 {
@@ -201,7 +201,7 @@ void sub_807EF84(void)
     }
 }
 
-void sub_807EFFC(bool8 arg0)
+static void sub_807EFFC(bool8 arg0)
 {
     struct MonDialogueSpriteInfo dialogueInfo;
 
@@ -248,7 +248,7 @@ void sub_807EFFC(bool8 arg0)
     }
 }
 
-s32 sub_807F19C(bool8 arg0)
+static s32 sub_807F19C(bool8 arg0)
 {
     s32 diff;
     struct MonDialogueSpriteInfo dialogueInfo;
@@ -309,7 +309,7 @@ s32 sub_807F19C(bool8 arg0)
     return 0;
 }
 
-void sub_807F33C(void)
+static void sub_807F33C(void)
 {
     s32 i, x, y;
 

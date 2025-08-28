@@ -51,7 +51,6 @@ extern void sub_8043ED0(u32);
 extern void EnemyEvolution(Entity *);
 extern void sub_8075900(Entity *pokemon, u8 r1);
 extern void sub_806A5B8(Entity *);
-extern void sub_807EC28(bool8);
 
 bool8 DisplayActions(Entity *a0);
 

@@ -27,10 +27,10 @@
 #include "dungeon_strings.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_damage.h"
+#include "dungeon_kecleon_shop.h"
 
 void sub_804EB30();
 bool8 ExposeTrap(s32 x, s32 y);
-void sub_807EC28(u32);
 u8 IsFloorOver(void);
 void sub_80421AC(Entity * pokemon, Entity * target);
 void sub_807BB78(Entity *pokemon);

@@ -16,6 +16,8 @@
 #include "dungeon_map.h"
 #include "dungeon_strings.h"
 #include "dungeon_logic.h"
+#include "dungeon_data.h"
+#include "dungeon_pos_data.h"
 #include "string_format.h"
 #include "items.h"
 #include "structs/map.h"
@@ -27,12 +29,10 @@
 
 extern SpriteOAM gUnknown_202EDC0;
 
-extern const s32 gUnknown_810A3F0[];
 extern const u8 *gUnknown_810531C[];
 extern const u8 *gUnknown_8105360[];
 extern const u8 *gUnknown_81053A8[];
 extern const u8 *gUnknown_8105434[];
-extern const DungeonPos gUnknown_80F4468[];
 
 extern void sub_80416E0(PixelPos *r0, u32, bool8);
 extern void sub_80855E4(void *);

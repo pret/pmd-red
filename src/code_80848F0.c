@@ -49,7 +49,6 @@ extern s32 gDungeonBrightness;
 extern RGB gUnknown_202ECA4[];
 
 extern const u8 gUnknown_8107358[25];
-extern const DungeonPos gUnknown_80F4598[];
 
 extern bool8 sub_8004C00(unkStruct_202EE8C *a0, s32 a1, s32 a2, s32 brightness, const RGB *ramp, struct RgbS16 *a5);
 extern void UpdateMinimap(void);

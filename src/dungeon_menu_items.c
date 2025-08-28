@@ -38,7 +38,6 @@ extern Entity *sub_80696A8(Entity *a0);
 extern void PointCameraToMonster(Entity *);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
-extern void sub_807EC28(bool8);
 extern u8 *GetDungeonSubMenuItemString(s32 param_1);
 extern bool8 CanSubMenuItemBeChosen(s32 param_1);
 extern s32 gDungeonSubMenuItemsCount;

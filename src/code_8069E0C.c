@@ -248,8 +248,6 @@ UNUSED static s32 sub_806B09C(SpawnPokemonData *unkPtr, bool8 a1)
     return count;
 }
 
-extern const DungeonPos gUnknown_80F4598[];
-
 void sub_806B168(void)
 {
     s32 count;

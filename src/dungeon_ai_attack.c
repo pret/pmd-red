@@ -32,6 +32,7 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
 #include "dungeon_damage.h"
+#include "dungeon_kecleon_shop.h"
 
 #define REGULAR_ATTACK_INDEX 4
 
@@ -54,7 +55,6 @@ extern void sub_8044DF0(struct Entity *, u32, u32);
 extern void EnemyEvolution(struct Entity *);
 extern void DiscoverMinimap(DungeonPos *);
 extern void sub_807EC28(bool8);
-extern void sub_806A5B8(struct Entity *entity);
 
 void ChooseAIMove(Entity *pokemon)
 {

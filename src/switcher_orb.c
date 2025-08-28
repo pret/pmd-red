@@ -25,8 +25,8 @@
 #include "dungeon_misc.h"
 #include "dungeon_items.h"
 #include "dungeon_strings.h"
+#include "dungeon_kecleon_shop.h"
 
-extern void sub_807EC28(bool8);
 extern void nullsub_93(DungeonPos *);
 
 void HandleSwitcherOrb(Entity *pokemon,Entity *target)

@@ -15,10 +15,7 @@
 #include "pokemon_types.h"
 #include "strings.h"
 #include "dungeon_info.h"
-
-extern const s32 gUnknown_810A3F0[100];
-extern const s16 gTypeGummiIQBoost[NUM_TYPES][NUMBER_OF_GUMMIS];
-extern u8 gInvalidItemIDs[0x10];
+#include "dungeon_data.h"
 
 EWRAM_DATA OpenedFile *gItemParametersFile = {NULL};
 EWRAM_DATA ItemDataEntry *gItemParametersData = {NULL}; // NDS=0213BEF0
@@ -27,7 +24,6 @@ EWRAM_INIT TeamInventory *gTeamInventoryRef = {NULL}; // NDS=020EAF98
 
 static void SortKecleonShopInventory(void);
 static bool8 AddKecleonWareItem(u8 itemIndex);
-
 static void sub_8090F58(u8 *, u8 *, Item *, const unkStruct_8090F58 *);
 
 #define UNK_8108F64_ARR_COUNT 64

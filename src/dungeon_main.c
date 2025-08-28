@@ -55,6 +55,7 @@
 #include "trap.h"
 #include "weather.h"
 #include "dungeon_pos_data.h"
+#include "dungeon_kecleon_shop.h"
 
 extern void HandleUnsetItemAction(Entity *,bool8);
 extern bool8 sub_8048A68(Entity *param_1,Item *item);
@@ -65,7 +66,6 @@ extern void PlayDungeonCancelSE(void);
 extern void PlayDungeonConfirmationSE(void);
 extern void sub_806A6E8(Entity *);
 extern void TryTriggerTrap(Entity *pokemon, DungeonPos *pos, int param_3, char param_4);
-bool8 sub_807EF48(void);
 void TryPointCameraToMonster(Entity *a0, u8 a1);
 bool8 sub_80701A4(Entity *a0);
 void sub_8075680(u32);

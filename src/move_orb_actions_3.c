@@ -41,8 +41,8 @@
 #include "weather.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
+#include "dungeon_kecleon_shop.h"
 
-extern void sub_807EC28(bool8);
 static void sub_805A7D4(Entity *, Entity *, Item *, DungeonPos *);
 extern void MudWaterSportEffect(u32);
 extern void sub_806A6E8(Entity *);
