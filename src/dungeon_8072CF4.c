@@ -32,6 +32,8 @@
 #include "dungeon_engine.h"
 #include "dungeon_strings.h"
 #include "dungeon_action.h"
+#include "dungeon_turn_effects.h"
+#include "dungeon_leveling.h"
 #include "warp_target.h"
 
 extern u8 gUnknown_202F221;
@@ -71,8 +73,6 @@ bool8 sub_804AE08(DungeonPos *pos);
 void HandlePickUpAIAction(Entity *pokemon);
 void HandleThrowItemAIAction(Entity *pokemon);
 void HandleEatAIAction(Entity *pokemon);
-extern void sub_8074094(Entity *);
-extern void EnemyEvolution(Entity *);
 u32 sub_8075818(Entity *entity);
 extern void MarkLastUsedMonMove(Entity *entity, Move *move);
 bool8 TryUseChosenMove(struct Entity *attacker, u32 r6, s32 itemId, u32 var_30, bool32 isLinkedMove, struct Move *move);
@@ -336,7 +336,7 @@ bool8 sub_8072CF4(Entity *entity)
                     if (sub_80706A4(entity,&entity->pos) != '\0') {
                         WarpTarget(entity,entity,0,0);
                     }
-                    sub_8074094(entity);
+                    ApplyEndOfTurnEffects(entity);
                     EnemyEvolution(entity);
                 }
             }

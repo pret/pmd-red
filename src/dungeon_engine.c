@@ -3,11 +3,15 @@
 #include "dungeon_engine.h"
 #include "run_dungeon.h"
 #include "dungeon_vram.h"
+#include "dungeon_main.h"
 #include "constants/dungeon.h"
 #include "dungeon_ai_leader.h"
 #include "dungeon_ai.h"
 #include "dungeon_range.h"
+#include "dungeon_misc.h"
 #include "dungeon_util.h"
+#include "dungeon_leveling.h"
+#include "dungeon_turn_effects.h"
 #include "structs/dungeon_entity.h"
 #include "structs/str_dungeon.h"
 #include "constants/ability.h"
@@ -17,13 +21,8 @@
 
 extern void sub_807E378(void);
 extern u8 DisplayActions(u32);
-extern void TickStatusAndHealthRegen(Entity *);
 extern void sub_8086AC0(void);
-extern void EnemyEvolution(Entity *);
-extern void TryActivateArtificialWeatherAbilities(void);
-extern void DungeonHandlePlayerInput(void);
 extern void sub_805F02C(void);
-extern void sub_8074094(Entity *);
 extern void sub_8071B48(void);
 
 static void sub_8044454(void);
@@ -306,7 +305,7 @@ static void sub_8044574(void)
             if (EntityIsValid(teamMon)) {
                 EntityInfo *teamMonInfo = GetEntInfo(teamMon);
                 if (teamMonInfo->aiAllySkip) {
-                    sub_8074094(teamMon);
+                    ApplyEndOfTurnEffects(teamMon);
                     if (EntityIsValid(teamMon)) {
                         EnemyEvolution(teamMon);
                         teamMonInfo->aiAllySkip = FALSE;
@@ -367,7 +366,7 @@ static void sub_8044820(void)
       entity2 = gDungeon->wildPokemon[index];
       if ((EntityIsValid(entity2)) && (entityInfo2 = GetEntInfo(entity2), entityInfo2->aiAllySkip))
       {
-        sub_8074094(entity2);
+        ApplyEndOfTurnEffects(entity2);
         if (EntityIsValid(entity2)) {
           EnemyEvolution(entity2);
           entityInfo2->aiAllySkip = FALSE;

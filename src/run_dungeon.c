@@ -26,6 +26,7 @@
 #include "dungeon_engine.h"
 #include "dungeon_generation.h"
 #include "dungeon_items.h"
+#include "dungeon_leveling.h"
 #include "dungeon_range.h"
 #include "dungeon_map.h"
 #include "dungeon_map_access.h"
@@ -73,9 +74,7 @@ extern void sub_80848F0(void);
 extern void IncrementAdventureFloorsExplored(void);
 extern void sub_806AB2C(void);
 extern void DisplayPreFightDialogue(void);
-extern void EnemyEvolution(Entity *);
 extern void sub_807E5AC(void);
-extern void TryActivateArtificialWeatherAbilities(void);
 extern void nullsub_16(void);
 extern void sub_80521D0(void);
 extern void sub_8068A84(Pokemon *pokemon);

@@ -41,9 +41,9 @@
 #include "dungeon_engine.h"
 #include "dungeon_kecleon_shop.h"
 #include "dungeon_item_action.h"
+#include "dungeon_leveling.h"
 #include "warp_target.h"
 
-extern void EnemyEvolution(Entity *);
 extern void sub_8057588(Entity * pokemon, u8 param_2);
 void sub_8042208(Entity *pokemon, u8 r1);
 extern void sub_807AB38(Entity *, u32);

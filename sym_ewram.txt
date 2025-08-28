@@ -52,10 +52,9 @@
     .include "src/code_8066D04.o"
     .include "src/dungeon_8067A80.o"
     .include "src/dungeon_logic.o"
-    .include "src/code_80718D8.o"
+    .include "src/dungeon_leveling.o"
     .include "src/dungeon_8072CF4.o"
     .include "src/dungeon_ai_items.o"
-    .include "src/code_8073CF0.o"
     .include "src/code_8075708.o"
 	.space 4
     .include "src/dungeon_ai_attack.o"

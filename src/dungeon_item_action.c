@@ -34,6 +34,7 @@
 #include "dungeon_damage.h"
 #include "dungeon_strings.h"
 #include "dungeon_move.h"
+#include "dungeon_leveling.h"
 #include "warp_target.h"
 
 extern u32 gUnknown_8106A4C;
@@ -45,11 +46,7 @@ extern void sub_8045BF8(u8 *, Item *);
 extern void ActionShowMoveInfo(ActionContainer *);
 extern void ActionLinkMoves(ActionContainer *);
 extern void sub_804245C(Entity *, Item *);
-extern u8 sub_8072938(Entity *, u16);
-extern void sub_8072008(Entity *pokemon, Entity *r1, u32 r2, u8 r3, u32);
-extern void LevelDownTarget(Entity *pokemon, Entity *r1, u32 r2);
 extern s32 sub_8042520(Entity *);
-extern void EnemyEvolution(Entity *);
 extern void sub_8042390(Entity *, Item *);
 
 static void StunSeedItemAction(Entity *, Entity *);
@@ -474,7 +471,7 @@ static void TotterSeedItemAction(Entity *pokemon, Entity *target)
 
 static void JoySeedItemAction(Entity *pokemon, Entity *target)
 {
-    sub_8072008(pokemon, target, 1, 1, 1);
+    LevelUpTarget(pokemon, target, 1, 1, 1);
 }
 
 static void StunSeedItemAction(Entity *pokemon, Entity *target)

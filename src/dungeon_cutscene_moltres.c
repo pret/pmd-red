@@ -32,6 +32,7 @@
 #include "dungeon_config.h"
 #include "dungeon_boss_dialogue.h"
 #include "dungeon_tilemap.h"
+#include "dungeon_leveling.h"
 
 extern void sub_8042B0C(Entity *);
 extern u8 sub_806FD18(Entity *);
@@ -48,7 +49,6 @@ extern void sub_8052D44(s16 *, Entity *, Entity *);
 extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
-extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
 extern void sub_8085374(void);
 extern bool8 sub_8085B80(struct_8085B80 *);
 extern void sub_8086A3C(Entity *pokemon);
@@ -98,7 +98,7 @@ void sub_8087848(void)
     HandleFaint(moltresEntity,0x21c,0);
   }
   else {
-    sub_8072008(moltresEntity,moltresEntity,gMoltresConfigLevel,0,0);
+    LevelUpTarget(moltresEntity,moltresEntity,gMoltresConfigLevel,0,0);
     SetFacingDirection(moltresEntity, DIRECTION_SOUTH);
     sub_8086A3C(moltresEntity);
   }

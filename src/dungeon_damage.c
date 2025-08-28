@@ -23,6 +23,7 @@
 #include "dungeon_config.h"
 #include "dungeon_strings.h"
 #include "dungeon_misc.h"
+#include "dungeon_leveling.h"
 #include "weather.h"
 #include "game_options.h"
 #include "code_8077274_1.h"
@@ -50,7 +51,6 @@ extern void sub_803ED30(s32, Entity *r0, u8, s32);
 extern bool8 sub_806A458(Entity *);
 extern bool8 sub_806F660(Entity *, Entity *);
 extern bool8 sub_806A58C(s16 a0);
-extern void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp);
 extern void sub_8042148(Entity *pokemon);
 extern void sub_8042A24(Entity *r0);
 extern void sub_806A390(Entity *r0);
@@ -455,7 +455,7 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
             sub_806CE68(target, 8);
         }
         if (HasHeldItem(target, ITEM_JOY_RIBBON) && hpChange > 0 && dmgStruct->dmg != 9999) {
-            sub_8071D4C(attacker, target, hpChange);
+            AddExpPoints(attacker, target, hpChange);
         }
 
         if (unkTile != NULL)
@@ -718,11 +718,11 @@ static bool8 HandleDealingDamageInternal(Entity *attacker, Entity *target, struc
                 if (targetData->isNotTeamMember) {
                     s32 i;
 
-                    sub_8071D4C(attacker, attacker, exp);
+                    AddExpPoints(attacker, attacker, exp);
                     for (i = 0; i < MAX_TEAM_MEMBERS; i++) {
                         Entity *teamMember = gDungeon->teamPokemon[i];
                         if (EntityIsValid(teamMember) && teamMember != attacker) {
-                            sub_8071D4C(attacker, teamMember, exp);
+                            AddExpPoints(attacker, teamMember, exp);
                         }
                     }
                     r10 = TRUE;

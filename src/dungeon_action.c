@@ -22,8 +22,6 @@
 
 extern void sub_8086AC0(void);
 extern void DisplayActions(u32);
-extern void TryActivateArtificialWeatherAbilities(void);
-extern void EnemyEvolution(Entity *);
 extern void TickStatusAndHealthRegen(Entity *);
 
 EWRAM_DATA SubMenuAction gDungeonSubMenu[10] = {0};

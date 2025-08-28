@@ -242,11 +242,11 @@ SECTIONS {
         src/status_checks.o(.text);
         src/dungeon_logic.o(.text);
         src/dungeon_8071B48.o(.text);
-        src/code_80718D8.o(.text);
+        src/dungeon_leveling.o(.text);
         src/dungeon_ai_leader.o(.text);
         src/dungeon_8072CF4.o(.text);
         src/dungeon_ai_items.o(.text);
-        src/code_8073CF0.o(.text);
+        src/dungeon_turn_effects.o(.text);
         src/code_8075708.o(.text);
         src/dungeon_ai.o(.text);
         src/move_orb_effects_1.o(.text);
@@ -627,11 +627,11 @@ SECTIONS {
         src/status_checks.o(.rodata);
         src/dungeon_logic.o(.rodata);
         src/dungeon_8071B48.o(.rodata);
-        src/code_80718D8.o(.rodata);
+        src/dungeon_leveling.o(.rodata);
         src/dungeon_ai_leader.o(.rodata);
         src/dungeon_8072CF4.o(.rodata);
         src/dungeon_ai_items.o(.rodata);
-        src/code_8073CF0.o(.rodata);
+        src/dungeon_turn_effects.o(.rodata);
         src/code_8075708.o(.rodata);
         src/dungeon_ai.o(.rodata);
         src/move_orb_effects_1.o(.rodata);

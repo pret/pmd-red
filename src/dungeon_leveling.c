@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_leveling.h"
 #include "constants/tactic.h"
 #include "dungeon_config.h"
 #include "dungeon_range.h"
@@ -29,20 +30,13 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_music.h"
 
-EWRAM_DATA s32 gUnknown_202F31C[2] = {0, 0};
-EWRAM_DATA s32 gUnknown_202F324[2] = {0, 0};
+static EWRAM_DATA s32 sNewAtkStats[2] = {0, 0};
+static EWRAM_DATA s32 sNewDefStats[2] = {0, 0};
 
 extern void ResetMonEntityData(EntityInfo *, u32);
 void sub_8042A44(Entity *r0);
-void sub_8072778(Entity *, Entity *, u8, u8);
-bool8 sub_80725A4(Entity *, Entity *);
-void GetUnlockedTacticFlags(u8 *tacticsBuffer, s32 pokeLevel);
-void sub_807218C(Entity *);
 
-extern void sub_8072B78(Entity *pokemon, Entity *target, s16 id);
 extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
-
-void sub_8072B24(Entity *entity, Move *moves);
 
 static const u8 gUnknown_8107010[8] = {0, 1, 1, 2, 1, 1, 0, 0};
 static const u8 * const gUnknown_8107018[3] = {
@@ -52,14 +46,18 @@ static const u8 * const gUnknown_8107018[3] = {
 };
 
 static bool8 LevelUp(Entity *, Entity *, u8, u8);
+static void sub_807218C(Entity *pokemon);
+static bool8 sub_80725A4(Entity *pokemon, Entity *target);
+static void sub_8072778(Entity *pokemon, Entity *target, u8 param_2, u8 param_3);
+static void sub_8072B24(Entity *entity, Move *moves);
+static void sub_8072B78(Entity *pokemon, Entity *target, s16 id);
 
-void sub_8071D4C(Entity *pokemon, Entity *target, s32 exp)
+void AddExpPoints(Entity *pokemon, Entity *target, s32 exp)
 {
   s32 newExp;
   s32 expDiff;
-  EntityInfo *info;
 
-  info = GetEntInfo(target);
+  EntityInfo *info = GetEntInfo(target);
   if (info->level != 100) {
     if (!IsExperienceLocked(info->joinedAt.id)) {
       newExp = info->exp + exp;
@@ -179,7 +177,7 @@ void EnemyEvolution(Entity *entity)
   }
 }
 
-void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 param_5)
+void LevelUpTarget(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 param_5)
 {
     bool8 flag;
     s32 newLevel;
@@ -244,7 +242,7 @@ void sub_8072008(Entity *pokemon, Entity *target, s32 level, u8 param_4, u8 para
     }
 }
 
-void sub_807218C(Entity *pokemon)
+static void sub_807218C(Entity *pokemon)
 {
     EntityInfo *info;
     u8 buffer [400];
@@ -419,33 +417,33 @@ static bool8 LevelUp(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
             info->HP = info->maxHPStat;
         }
 
-        gUnknown_202F31C[0] = info->atk[0];
-        gUnknown_202F31C[1] = info->atk[1];
-        gUnknown_202F324[0] = info->def[0];
-        gUnknown_202F324[1] = info->def[1];
+        sNewAtkStats[0] = info->atk[0];
+        sNewAtkStats[1] = info->atk[1];
+        sNewDefStats[0] = info->def[0];
+        sNewDefStats[1] = info->def[1];
 
-        gUnknown_202F31C[0] += leveldata.gainAtt[0];
-        gUnknown_202F31C[1] += leveldata.gainAtt[1];
-        gUnknown_202F324[0] += leveldata.gainDef[0];
-        gUnknown_202F324[1] += leveldata.gainDef[1];
+        sNewAtkStats[0] += leveldata.gainAtt[0];
+        sNewAtkStats[1] += leveldata.gainAtt[1];
+        sNewDefStats[0] += leveldata.gainDef[0];
+        sNewDefStats[1] += leveldata.gainDef[1];
 
-        if(gUnknown_202F31C[0] > 254)
-            gUnknown_202F31C[0] = 255;
-        if(gUnknown_202F31C[1] > 254)
-            gUnknown_202F31C[1] = 255;
-        if(gUnknown_202F324[0] > 254)
-            gUnknown_202F324[0] = 255;
-        if(gUnknown_202F324[1] > 254)
-            gUnknown_202F324[1] = 255;
+        if(sNewAtkStats[0] > 254)
+            sNewAtkStats[0] = 255;
+        if(sNewAtkStats[1] > 254)
+            sNewAtkStats[1] = 255;
+        if(sNewDefStats[0] > 254)
+            sNewDefStats[0] = 255;
+        if(sNewDefStats[1] > 254)
+            sNewDefStats[1] = 255;
 
 
         LoadIQSkills(target);
         sub_8079764(target);
 
-        info->atk[0] = gUnknown_202F31C[0];
-        info->atk[1] = gUnknown_202F31C[1];
-        info->def[0] = gUnknown_202F324[0];
-        info->def[1] = gUnknown_202F324[1];
+        info->atk[0] = sNewAtkStats[0];
+        info->atk[1] = sNewAtkStats[1];
+        info->def[0] = sNewDefStats[0];
+        info->def[1] = sNewDefStats[1];
 
         sub_8072778(pokemon, target, param_3, param_4);
     }
@@ -453,7 +451,7 @@ static bool8 LevelUp(Entity *pokemon, Entity *target, u8 param_3, u8 param_4)
     return flag;
 }
 
-bool8 sub_80725A4(Entity *pokemon, Entity *target)
+static bool8 sub_80725A4(Entity *pokemon, Entity *target)
 {
     EntityInfo *info;
     LevelData leveldata;
@@ -513,33 +511,33 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
                 info->HP = info->maxHPStat;
             }
 
-            gUnknown_202F31C[0] = info->atk[0];
-            gUnknown_202F31C[1] = info->atk[1];
-            gUnknown_202F324[0] = info->def[0];
-            gUnknown_202F324[1] = info->def[1];
+            sNewAtkStats[0] = info->atk[0];
+            sNewAtkStats[1] = info->atk[1];
+            sNewDefStats[0] = info->def[0];
+            sNewDefStats[1] = info->def[1];
 
-            gUnknown_202F31C[0] -= leveldata.gainAtt[0];
-            gUnknown_202F31C[1] -= leveldata.gainAtt[1];
-            gUnknown_202F324[0] -= leveldata.gainDef[0];
-            gUnknown_202F324[1] -= leveldata.gainDef[1];
+            sNewAtkStats[0] -= leveldata.gainAtt[0];
+            sNewAtkStats[1] -= leveldata.gainAtt[1];
+            sNewDefStats[0] -= leveldata.gainDef[0];
+            sNewDefStats[1] -= leveldata.gainDef[1];
 
-            if(gUnknown_202F31C[0] <= 1)
-                gUnknown_202F31C[0] = 1;
-            if(gUnknown_202F31C[1] <= 1)
-                gUnknown_202F31C[1] = 1;
-            if(gUnknown_202F324[0] <= 1)
-                gUnknown_202F324[0] = 1;
-            if(gUnknown_202F324[1] <= 1)
-                gUnknown_202F324[1] = 1;
+            if(sNewAtkStats[0] <= 1)
+                sNewAtkStats[0] = 1;
+            if(sNewAtkStats[1] <= 1)
+                sNewAtkStats[1] = 1;
+            if(sNewDefStats[0] <= 1)
+                sNewDefStats[0] = 1;
+            if(sNewDefStats[1] <= 1)
+                sNewDefStats[1] = 1;
 
 
             LoadIQSkills(target);
             sub_8079764(target);
 
-            info->atk[0] = gUnknown_202F31C[0];
-            info->atk[1] = gUnknown_202F31C[1];
-            info->def[0] = gUnknown_202F324[0];
-            info->def[1] = gUnknown_202F324[1];
+            info->atk[0] = sNewAtkStats[0];
+            info->atk[1] = sNewAtkStats[1];
+            info->def[0] = sNewDefStats[0];
+            info->def[1] = sNewDefStats[1];
         }
     }
 
@@ -560,7 +558,7 @@ bool8 sub_80725A4(Entity *pokemon, Entity *target)
     }
 }
 
-void sub_8072778(Entity *pokemon, Entity *target, u8 param_2, u8 param_3)
+static void sub_8072778(Entity *pokemon, Entity *target, u8 param_2, u8 param_3)
 {
     s32 i, j;
     u16 learnedMoves[16];
@@ -709,16 +707,14 @@ bool8 sub_8072938(Entity *target, u16 moveId)
     return TRUE;
 }
 
-void sub_8072AC8(s16 *param_1, s16 species, s32 param_3)
+void sub_8072AC8(s16 *param_1, s32 species, s32 param_3)
 {
   const u8 *levelUpMoves;
   s32 arrIndex;
   s32 counter;
   u16 moveIDs [2];
-  s32 species_s32;
   s32 index;
-
-  species_s32 = species;
+  s32 species_s32 = (s16) species;
 
   for(index = 0; index < MAX_MON_MOVES; index++) {
     param_1[index] = MOVE_NOTHING;
@@ -745,7 +741,7 @@ void sub_8072AC8(s16 *param_1, s16 species, s32 param_3)
   }
 }
 
-void sub_8072B24(Entity *entity, Move *moves)
+static void sub_8072B24(Entity *entity, Move *moves)
 {
     int index;
     int count;
@@ -772,7 +768,7 @@ static inline void fu(EntityInfo *entityInfo, s16 id)
   entityInfo->id = id;
 }
 
-void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
+static void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
 {
   OpenedFile *file;
   const Tile *tile;

@@ -36,6 +36,7 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_engine.h"
+#include "dungeon_leveling.h"
 
 extern void sub_8042900(Entity *r0);
 extern void sub_8042968(Entity *r0);
@@ -44,7 +45,6 @@ void sub_8041BBC(Entity *r0);
 extern void sub_804178C(u32);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
-extern void sub_8072AC8(u16 *param_1, s32 species, s32 param_3);
 extern Entity *gLeaderPointer;
 extern bool8 sub_80860A8(u8 id);
 extern u8 gUnknown_202F32C;
@@ -55,7 +55,6 @@ extern Entity *sub_80453AC(s16 id);
 extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
-extern s32 GetMonsterApparentID(Entity *pokemon, s32 _id);
 extern void sub_806A898(Entity *entity, bool8 r7, bool8 showRunAwayEffect);
 extern void sub_806A6E8(Entity *entity);
 

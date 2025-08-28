@@ -41,11 +41,11 @@
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
 #include "dungeon_damage.h"
+#include "dungeon_leveling.h"
 
 extern void sub_80429C8(Entity *r0);
 extern void sub_806A1E8(Entity *pokemon);
 extern void sub_804178C(u32);
-extern void EnemyEvolution(Entity *);
 extern void sub_80428A0(Entity *r0);
 extern bool8 sub_8040BB0(Entity *entity, Move *move, bool8);
 extern void sub_8040DA0(Entity *entity, Move *move);

@@ -48,7 +48,6 @@ extern void sub_8052D44(s16 *, Entity *, Entity *);
 extern void SpawnDroppedItemWrapper(Entity *, DungeonPos *, Item *);
 extern void SetDungeonBGColorRGB(u32, u32, u32, u32, u32);
 extern u32 sub_8085EC8(u32, u32, u32, DungeonPos *, u32);
-extern void sub_8072008(Entity *, Entity *, s16, u32, u32);
 extern void sub_8085374(void);
 extern bool8 sub_8085B80(struct_8085B80 *);
 extern void sub_8086A3C(Entity *pokemon);
