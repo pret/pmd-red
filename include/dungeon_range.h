@@ -16,4 +16,6 @@ bool8 sub_808384C(DungeonPos *posDst, const DungeonPos *posSrc);
 void sub_80838EC(u8 *a0);
 void sub_8083904(struct DungeonPos *posDst, struct Entity *entityArg);
 
+extern Entity *gLeaderPointer;
+
 #endif

@@ -29,7 +29,9 @@
 #include "menu_input.h"
 #include "code_801602C.h"
 #include "dungeon_tilemap.h"
+#include "dungeon_name_banner.h"
 #include "dungeon_engine.h"
+#include "effect_main.h"
 
 // File split is correct. This technical file deals with windows, advancing frames(v-blanks) and vram / pal set-up.
 
@@ -40,17 +42,13 @@ struct DungeonPalFile
 };
 
 extern struct DungeonPalFile *gDungeonPaletteFile;
-extern struct DungeonPalFile *gDungeonNameBannerPalette;
 extern struct DungeonPalFile *gUnknown_202EC94;
 extern RGB gUnknown_202ECA4[];
 extern OpenedFile *gUnknown_202EC9C;
 
-void xxx_draw_string_80524F0(void);
 void sub_8085F78(void);
 void sub_806CC10();
 void sub_804522C();
-void sub_803F9CC();
-void sub_800E90C();
 void sub_8042E5C();
 
 static void sub_803E490(u32);
@@ -391,7 +389,7 @@ void sub_803E874(bool8 r10, s32 r9)
 
     if (r10) {
         index = 224;
-        color = gDungeonNameBannerPalette->unk4;
+        color = gDungeonNameBannerPalette->data;
         count = 16;
         for (i = 0; i < count; i++) {
             SetBGPaletteBufferColorRGB(index, color, r9, NULL);

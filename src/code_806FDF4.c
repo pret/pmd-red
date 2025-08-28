@@ -27,8 +27,6 @@
 #include "dungeon_music.h"
 #include "string_format.h"
 
-extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
-
 u8 sub_806B8CC();
 u8 sub_808529C(s32);
 void nullsub_96(Entity *pokemon,Entity *target);

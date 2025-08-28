@@ -86,7 +86,6 @@ extern void sub_8041AE0(Entity *pokemon);
 extern void sub_807EC28(bool8);
 extern const u8 *GetCurrentDungeonName(void);
 
-extern Entity *gLeaderPointer;
 
 extern const u8 *gUnknown_80F8A84;
 extern const u8 *gUnknown_80F8A6C;

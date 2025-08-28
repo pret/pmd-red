@@ -39,7 +39,6 @@ extern bool8 sub_8046F00(Item *item);
 extern bool8 PosHasItem(DungeonPos *pos);
 
 extern u8 gUnknown_202EE00;
-extern Entity *gLeaderPointer;
 
 
 extern const u8 *gUnknown_80F8B24;

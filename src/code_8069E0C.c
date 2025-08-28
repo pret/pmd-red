@@ -45,7 +45,6 @@ void sub_8041BBC(Entity *r0);
 extern void sub_804178C(u32);
 extern void sub_8042B20(Entity *entity);
 extern void sub_8042B0C(Entity *entity);
-extern Entity *gLeaderPointer;
 extern bool8 sub_80860A8(u8 id);
 extern u8 gUnknown_202F32C;
 extern u8 GetRandomFloorItem(s32 a0);

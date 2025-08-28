@@ -101,7 +101,6 @@ extern void sub_8042B0C(Entity *);
 
 extern u8 gUnknown_202F32C;
 extern u8 gUnknown_202F1A8;
-extern Entity *gLeaderPointer;
 
 void EnforceMaxItemsAndMoney(void);
 static void sub_8043FD0(void);

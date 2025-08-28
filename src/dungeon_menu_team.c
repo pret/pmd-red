@@ -93,7 +93,6 @@ extern char* sub_808E51C(s32 a1);
 extern void sub_8045C18(u8 *buffer, Item *item);
 
 extern u8 gUnknown_202EE00;
-extern Entity *gLeaderPointer;
 extern u8 gUnknown_202EE39;
 
 EWRAM_DATA s32 gTeamMenuChosenId = 0;

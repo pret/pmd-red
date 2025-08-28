@@ -80,9 +80,6 @@ extern void sub_806B678(void);
 extern void EntityUpdateStatusSprites(Entity *);
 extern Entity *sub_80696A8(Entity *a0);
 
-extern Entity *gLeaderPointer;
-extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
-extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
 extern u8 gUnknown_202F32C;
 
 bool8 sub_806A564(s16 r0);

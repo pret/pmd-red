@@ -8,14 +8,11 @@
 #include "dungeon_map_access.h"
 #include "dungeon_logic.h"
 #include "dungeon_serializer.h"
+#include "dungeon_range.h"
 #include "dungeon_util.h"
 #include "dungeon_pokemon_sprites.h"
 #include "pokemon.h"
 
-extern u8 gUnknown_202EE70[MAX_TEAM_BODY_SIZE];
-extern u8 gUnknown_202EE76[DUNGEON_MAX_WILD_POKEMON_BODY_SIZE];
-
-extern Entity *gLeaderPointer; // 203B450
 
 #include "data/dungeon_serializer.h"
 
