@@ -28,25 +28,14 @@
 #include "dungeon_action.h"
 #include "code_801B3C0.h"
 #include "dungeon_engine.h"
+#include "dungeon_strings.h"
 
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
-extern Entity *sub_80696A8(Entity *a0);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
-extern const u8 gUnknown_8106B50[];
 extern bool8 sub_8046F00(Item *item);
-extern bool8 PosHasItem(DungeonPos *pos);
 
-extern u8 gUnknown_202EE00;
-
-
-extern const u8 *gUnknown_80F8B24;
-extern const u8 *gTeamToolboxAPtr;
-extern const u8 *gTeamToolboxBPtr;
-extern const u8 *gFieldItemMenuGroundTextPtr;
-extern const u8 *gUnknown_80FE940;
-extern const u8 *gWhichTextPtr1;
 
 static EWRAM_DATA ActionParameter sUnknownActionUnk4 = {0};
 static EWRAM_DATA s32 sUnknown_202F240 = 0;

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
+#include "dungeon_menu_team.h"
 #include "constants/tactic.h"
 #include "structs/map.h"
 #include "structs/str_dungeon.h"
@@ -21,7 +22,6 @@
 #include "dungeon_main.h"
 #include "dungeon_map_access.h"
 #include "dungeon_menu_moves.h"
-#include "dungeon_menu_team.h"
 #include "dungeon_message.h"
 #include "dungeon_misc.h"
 #include "dungeon_logic.h"
@@ -72,12 +72,9 @@ void sub_806752C(ActionContainer *a0);
 void ActionSetOrUnsetMove(ActionContainer *a0, bool8 a1);
 void ActionDelinkMoves(ActionContainer *a0, bool8 a1);
 void sub_8067768(ActionContainer *a0);
-void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern void sub_80643AC(Entity *pokemon);
-extern bool8 ShowDungeonMovesMenu(Entity * entity, u8 a1, u8 a2, s32 a3, s32 a4);
 extern bool8 sub_8070F14(Entity * pokemon, s32 direction);
 bool8 sub_805EC2C(Entity *a0, s32 x, s32 y);
-extern Entity *sub_80696A8(Entity *a0);
 extern void sub_8041AD0(Entity *pokemon);
 extern void sub_8041AE0(Entity *pokemon);
 extern bool8 sub_8046F00(Item *item);
@@ -86,9 +83,6 @@ extern void GetAvailTacticsforLvl(u8 *tacticsBuffer, s32 pokeLevel);
 extern char* sub_808E4FC(s32 a1);
 extern char* sub_808E51C(s32 a1);
 extern void sub_8045C18(u8 *buffer, Item *item);
-
-extern u8 gUnknown_202EE00;
-extern u8 gUnknown_202EE39;
 
 EWRAM_DATA s32 gTeamMenuChosenId = 0;
 static UNUSED EWRAM_DATA u8 sUnused[4] = {0};

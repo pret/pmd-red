@@ -75,7 +75,6 @@ extern void sub_8042EC8(Entity *a0, s32 a1);
 extern Entity *sub_804550C(s16 a);
 extern Entity *sub_80453AC(s16 id);
 extern void EntityUpdateStatusSprites(Entity *);
-extern Entity *sub_80696A8(Entity *a0);
 
 extern u8 gUnknown_202F32C;
 

@@ -18,6 +18,7 @@
 #include "dungeon_strings.h"
 #include "dungeon_util.h"
 #include "dungeon_engine.h"
+#include "dungeon_map_access.h"
 #include "input.h"
 #include "moves.h"
 #include "menu_input.h"
@@ -30,7 +31,6 @@
 #include "text_3.h"
 
 extern s32 GetTeamMemberEntityIndex(Entity *pokemon);
-extern void ChangeDungeonCameraPos(DungeonPos *pos, s32 a1, u8 a2, u8 a3);
 extern void sub_806752C(ActionContainer *a0);
 extern void ShowDungeonSummaryOrIQMenu(ActionContainer *a0, bool8 a1);
 extern void sub_8067768(ActionContainer *a0);

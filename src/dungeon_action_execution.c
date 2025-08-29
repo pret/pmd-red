@@ -37,6 +37,7 @@
 #include "dungeon_leveling.h"
 #include "dungeon_cutscene.h"
 #include "dungeon_move.h"
+#include "dungeon_map_access.h"
 #include "warp_target.h"
 
 void sub_8075BA4(Entity *param_1, u8 param_2);
@@ -63,7 +64,6 @@ void sub_8066FA4(Entity *);
 void HandleUnsetItemAction(Entity *,bool8);
 extern u8 DisplayActions(Entity *);
 void sub_806A1E8(Entity *pokemon);
-bool8 sub_804AE08(DungeonPos *pos);
 void HandlePickUpAIAction(Entity *pokemon);
 void HandleThrowItemAIAction(Entity *pokemon);
 void HandleEatAIAction(Entity *pokemon);

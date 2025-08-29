@@ -13,4 +13,6 @@ void ShowStatusesDescriptionMenu(s32 count, STATUSTEXTS(statuses));
 #define WHICH_MENU_ITEMS 2
 Entity *ShowDungeonToWhichMonMenu(s32 *teamId, s32 caseId);
 
+extern s32 gTeamMenuChosenId;
+
 #endif // GUARD_DUNGEON_MENU_TEAM_H

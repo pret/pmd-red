@@ -53,7 +53,6 @@ extern u16 sub_80412E0(u16 moveId, u8 weather, u8 a2);
 extern void sub_800EF10(u16 r0);
 extern void sub_800E3AC(s32 a0, DungeonPos *pos, s32 a2);
 extern void sub_8041168(Entity *entity, Entity *entity2, Move *,DungeonPos *);
-extern Entity *GetMonsterAtPos(DungeonPos *pos);
 
 static u8 ToItemID(u32 itemID);
 
