@@ -3,6 +3,7 @@
 
 #include "structs/str_position.h"
 #include "structs/dungeon_entity.h"
+#include "dungeon_message.h"
 
 typedef void (*DungeonCallback)(Entity *);
 typedef struct struct_8085B80 {
@@ -46,5 +47,34 @@ void sub_8086130(void);
 void sub_80861A8(Entity *a0);
 void sub_80861B8(Entity *a0, u8 r1, s32 direction);
 void sub_80861D4(Entity *a0, u8 r1, s32 direction);
+s32 sub_80861F8(s32 param_1,Entity *param_2,bool32 param_3);
+void SpriteShockEffect(Entity *entity);
+void sub_8086448(void);
+void sub_8086500(void);
+void sub_808654C(void);
+void sub_8086598(void);
+void sub_80865E8(void);
+void sub_808663C(void);
+void sub_8086690(void);
+void sub_80866C4(const struct DungeonDialogueStruct *dialogue);
+void sub_8086738(void);
+void sub_8086764(void);
+void sub_8086794(void);
+void sub_80867F4(void);
+void sub_808680C(void);
+void sub_808682C(void);
+void sub_8086838(u8 entity, u8 r1, u8 r2);
+void sub_8086848(u8 entity, u8 r1);
+void sub_8086854(void);
+void sub_80868F4(Entity *entity);
+void sub_8086910(Entity *entity);
+void sub_808692C(void);
+void SpriteLookAroundEffect(Entity *entity);
+void sub_80869E4(struct Entity *entity, s32 a1, u8 a2, s32 _someDirection);
+void sub_8086A3C(Entity *pokemon);
+void sub_8086A54(Entity *pokemon);
+void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex);
+void sub_8086AC0(void);
+u8 sub_8086AE4(s16 _index);
 
 #endif

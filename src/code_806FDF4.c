@@ -26,8 +26,8 @@
 #include "dungeon_music.h"
 #include "dungeon_cutscene.h"
 #include "string_format.h"
+#include "dungeon_mon_spawn.h"
 
-u8 sub_806B8CC();
 void nullsub_96(Entity *pokemon,Entity *target);
 u8 sub_8097900(s16);
 void sub_806F910(void);
@@ -303,7 +303,7 @@ bool8 sub_806FA5C(Entity *entity1, Entity *entity2, struct unkStruct_8069D4C *pa
 
             IncrementAdventureNumJoined();
 
-            if (sub_806B8CC(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
+            if (SpawnTeamMember(param_3->id,param_3->pos.x,param_3->pos.y,pokeStruct2,&local_2c,0,1) == 0) {
                 LogMessageByIdWithPopupCheckUser(entity1,gUnknown_80FA058);
                 pokeStruct2->flags = 0;
             }
@@ -439,7 +439,7 @@ bool8 sub_806FDF4(Entity *entity1,Entity *entity2,Entity **entityPtr)
     }
     IncrementAdventureNumJoined();
     HandleFaint(entity2,500,entity1);
-    if (sub_806B8CC(local_74.id,local_74.pos.x,local_74.pos.y,pokeStruct2,&local_2c,0,0) == 0) {
+    if (SpawnTeamMember(local_74.id,local_74.pos.x,local_74.pos.y,pokeStruct2,&local_2c,0,0) == 0) {
       pokeStruct2->flags = 0;
     }
     else {

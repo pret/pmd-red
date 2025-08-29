@@ -24,7 +24,7 @@
 #include "dungeon_strings.h"
 #include "dungeon_random.h"
 #include "dungeon_misc.h"
-#include "dungeon_spawns.h"
+#include "dungeon_floor_spawns.h"
 #include "dungeon_tilemap.h"
 #include "pokemon_3.h"
 
@@ -56,7 +56,6 @@ extern void EntityUpdateStatusSprites(Entity *);
 extern void sub_8042A74(Entity *r0);
 extern void sub_807EC28(bool8);
 extern void DealDamageToEntity(Entity *, s16, u32, u32);
-extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_80420C8(Entity *r0);
 extern void nullsub_68(Entity *);
 extern void nullsub_67(Entity *);

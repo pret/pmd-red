@@ -20,7 +20,6 @@
 #include "dungeon_engine.h"
 #include "run_dungeon.h"
 
-extern void sub_8086AC0(void);
 extern void DisplayActions(u32);
 extern void TickStatusAndHealthRegen(Entity *);
 

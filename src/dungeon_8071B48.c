@@ -13,11 +13,11 @@
 #include "dungeon_info.h"
 #include "pokemon_3.h"
 #include "code_805D8C8.h"
-#include "structs/str_806B7F8.h"
 #include "dungeon_logic.h"
-#include "dungeon_spawns.h"
+#include "dungeon_floor_spawns.h"
 #include "dungeon_strings.h"
 #include "dungeon_misc.h"
+#include "dungeon_mon_spawn.h"
 
 extern void sub_8042920(struct Entity *r0);
 
@@ -32,7 +32,7 @@ void sub_8071B48(void)
   struct Entity *entityPtr;
   s32 level;
   struct Dungeon *dungeon; // feels like a hack
-  struct unkStruct_806B7F8 local_2c;
+  struct MonSpawnInfo local_2c;
 
   entityPtr = NULL;
   dungeon = gDungeon;
@@ -113,7 +113,7 @@ void sub_8071B48(void)
             local_2c.unk4 = 0;
         }
         local_2c.unk10 = 0;
-        sub_806B7F8(&local_2c, FALSE);
+        SpawnWildMon(&local_2c, FALSE);
       }
   }
 }

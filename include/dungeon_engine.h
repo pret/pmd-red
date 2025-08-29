@@ -12,7 +12,7 @@ void sub_80444F4(Entity *pokemon);
 bool8 IsFloorOver(void);
 bool8 sub_8044B84(void);
 
-extern DungeonPos gUnknown_202EE0C;
+extern DungeonPos gLeaderPosition;
 extern MenuInputStruct gDungeonMenu;
 
 #endif

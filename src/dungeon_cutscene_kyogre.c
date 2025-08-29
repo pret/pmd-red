@@ -6,7 +6,6 @@
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_806CD90.h"
-#include "code_80869E4.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "constants/friend_area.h"
@@ -38,14 +37,8 @@ extern u8 sub_806FD18(Entity *);
 extern void sub_806FDF4(Entity *, Entity *, Entity **);
 extern void sub_8049884(void);
 extern void sub_8049B8C(void);
-extern void sub_8086A54(Entity *);
-extern void ResetMonEntityData(EntityInfo *, u32);
 extern void sub_8041888(u32);
-extern u32 sub_80861F8(u32, Entity *, u32);
 extern void sub_8052D44(s16 *, Entity *, Entity *);
-extern void sub_8086A3C(Entity *pokemon);
-extern void SetupBossFightHP(Entity *pokemon, s32 newHP, u16 songIndex);
-extern u8 sub_8086AE4(s16 _index);
 
 static void nullsub_99(void);
 static void KyogreScreenFlash(void);

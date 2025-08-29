@@ -14,7 +14,7 @@
 #include "code_806CD90.h"
 #include "status.h"
 #include "dungeon_pos_data.h"
-#include "dungeon_spawns.h"
+#include "dungeon_floor_spawns.h"
 #include "hurl_orb.h"
 
 extern void sub_807FC3C(DungeonPos *, u32, u32);

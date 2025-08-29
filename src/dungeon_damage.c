@@ -42,6 +42,7 @@
 #include "sprite.h"
 #include "exclusive_pokemon.h"
 #include "hurl_orb.h"
+#include "dungeon_mon_spawn.h"
 
 extern void sub_8041B18(Entity *pokemon);
 extern void sub_8041B90(Entity *pokemon);
@@ -68,7 +69,6 @@ extern void sub_80428D8(Entity *);
 extern void sub_8042978(Entity *);
 extern void sub_804298C(Entity *);
 extern void sub_80428EC(Entity *);
-extern void ResetMonEntityData(EntityInfo *, u32);
 
 extern const s32 gUnknown_8106A4C;
 extern const u8 *const gUnknown_8100548;

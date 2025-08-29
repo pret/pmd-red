@@ -16,12 +16,12 @@
 #include "structs/str_dungeon.h"
 #include "constants/ability.h"
 #include "dungeon_logic.h"
+#include "dungeon_cutscene.h"
 #include "menu_input.h"
 #include "weather.h"
 
 extern void sub_807E378(void);
 extern u8 DisplayActions(u32);
-extern void sub_8086AC0(void);
 extern void sub_805F02C(void);
 extern void sub_8071B48(void);
 
@@ -32,7 +32,7 @@ static void sub_8044820(void);
 static void TrySpawnMonsterAndActivatePlusMinus(void);
 static void sub_8044AB4(void);
 
-EWRAM_DATA DungeonPos gUnknown_202EE0C = {0};
+EWRAM_DATA DungeonPos gLeaderPosition = {0};
 EWRAM_DATA MenuInputStruct gDungeonMenu = {0};
 
 const s16 gSpeedTurns[NUM_SPEED_COUNTERS][25] = {

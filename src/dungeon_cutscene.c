@@ -6,7 +6,6 @@
 #include "constants/direction.h"
 #include "constants/dungeon.h"
 #include "structs/str_dungeon.h"
-#include "structs/str_806B7F8.h"
 #include "structs/sprite_oam.h"
 #include "dungeon_cutscenes.h"
 #include "dungeon_music.h"
@@ -29,13 +28,13 @@
 #include "effect_sub_1.h"
 #include "sprite.h"
 #include "effect_data.h"
-#include "code_80869E4.h"
 #include "pokemon_3.h"
 #include "dungeon_boss_dialogue.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_engine.h"
 #include "dungeon_tilemap.h"
 #include "dungeon_map.h"
+#include "dungeon_mon_spawn.h"
 
 struct RgbS16
 {
@@ -55,8 +54,6 @@ extern void sub_8088848(void);
 extern void sub_808A718(void);
 extern s32 sub_800E700(s32);
 extern void sub_8052FB8(const u8 *);
-extern void sub_8086A54(Entity *);
-extern void sub_8086A3C(Entity *);
 extern u32 sub_8002A70(u32, s32, u8);
 extern s8 sub_8002984(s8, u8);
 
@@ -69,6 +66,17 @@ struct unkData_8107234
     u8 unk4;
     u8 unk5;
 };
+
+// size: 0x8
+typedef struct unkStruct_202F3D0
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+} unkStruct_202F3D0;
 
 static void sub_8084854(const struct unkData_8107234 *);
 static void sub_8085764(void);
@@ -763,7 +771,7 @@ void sub_8085374(void)
         tile = GetTile(pos.x, pos.y);
         temp = sub_807034C(species, tile);
         if (temp == 0) {
-            struct unkStruct_806B7F8 local_30;
+            struct MonSpawnInfo local_30;
 
             local_30.species = species;
             local_30.level = 1;
@@ -771,7 +779,7 @@ void sub_8085374(void)
             local_30.pos = pos;
             local_30.unk4 = temp;
             local_30.unk10 = 0;
-            sub_806B7F8(&local_30, 1);
+            SpawnWildMon(&local_30, 1);
             break;
         }
         j++;

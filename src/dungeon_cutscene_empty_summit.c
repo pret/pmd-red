@@ -6,7 +6,6 @@
 #include "code_8041AD0.h"
 #include "code_804267C.h"
 #include "code_806CD90.h"
-#include "code_80869E4.h"
 #include "constants/bg_music.h"
 #include "constants/direction.h"
 #include "constants/friend_area.h"
@@ -31,7 +30,6 @@
 #include "dungeon_config.h"
 #include "dungeon_boss_dialogue.h"
 
-extern void sub_8086A3C(Entity *pokemon);
 
 void sub_80885A0(void)
 {

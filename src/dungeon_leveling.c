@@ -13,11 +13,10 @@
 #include "dungeon_random.h"
 #include "dungeon_vram.h"
 #include "dungeon_util.h"
-#include "dungeon_spawns.h"
+#include "dungeon_floor_spawns.h"
 #include "dungeon_info.h"
 #include "pokemon_3.h"
 #include "code_805D8C8.h"
-#include "structs/str_806B7F8.h"
 #include "dungeon_logic.h"
 #include "dungeon_strings.h"
 #include "dungeon_menu_moves.h"
@@ -26,14 +25,13 @@
 #include "structs/dungeon_entity.h"
 #include "structs/map.h"
 #include "structs/str_pokemon.h"
-#include "structs/str_806B7F8.h"
 #include "dungeon_pos_data.h"
 #include "dungeon_music.h"
+#include "dungeon_mon_spawn.h"
 
 static EWRAM_DATA s32 sNewAtkStats[2] = {0, 0};
 static EWRAM_DATA s32 sNewDefStats[2] = {0, 0};
 
-extern void ResetMonEntityData(EntityInfo *, u32);
 void sub_8042A44(Entity *r0);
 
 extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
@@ -776,7 +774,7 @@ static void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
   s32 id_s32;
   EntityInfo *entityInfo;
   LevelData levelData;
-  struct unkStruct_806B7F8 local_2c;
+  struct MonSpawnInfo local_2c;
 
   id_s32 = id;
   entityInfo = GetEntInfo(target);
@@ -806,7 +804,7 @@ static void sub_8072B78(Entity *pokemon, Entity *target, s16 id)
       local_2c.pos.y = gAdjacentTileOffsets[index].y + target->pos.y;
       local_2c.unk4 = 0;
       local_2c.unk10 = 0;
-      sub_806B7F8(&local_2c, TRUE);
+      SpawnWildMon(&local_2c, TRUE);
     }
   }
 }

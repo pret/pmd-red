@@ -194,7 +194,7 @@ SECTIONS {
         src/personality_test1.o(.text);
         src/personality_test2.o(.text);
         src/code_803D0D8.o(.text);
-        src/dungeon_spawns.o(.text);
+        src/dungeon_floor_spawns.o(.text);
         src/dungeon_name_banner.o(.text);
         src/code_803DA7C_2.o(.text);
         src/dungeon_vram.o(.text);
@@ -235,7 +235,7 @@ SECTIONS {
         src/code_8066D04.o(.text);
         src/dungeon_8067A80.o(.text);
         src/dungeon_misc.o(.text);
-        src/code_8069E0C.o(.text);
+        src/dungeon_mon_spawn.o(.text);
         src/code_806CD90.o(.text);
         src/dungeon_damage.o(.text);
         src/code_806FDF4.o(.text);
@@ -574,7 +574,7 @@ SECTIONS {
         src/personality_test2.o(.rodata);
         src/code_803D0D8.o(.rodata);
         src/dungeon_pos_data.o(.rodata);
-        src/dungeon_spawns.o(.rodata);
+        src/dungeon_floor_spawns.o(.rodata);
         src/dungeon_config.o(.rodata);
         src/dungeon_name_banner.o(.rodata);
         src/code_803DA7C_2.o(.rodata);
@@ -620,7 +620,7 @@ SECTIONS {
         src/code_8066D04.o(.rodata);
         src/dungeon_8067A80.o(.rodata);
         src/dungeon_misc.o(.rodata);
-        src/code_8069E0C.o(.rodata);
+        src/dungeon_mon_spawn.o(.rodata);
         src/code_806CD90.o(.rodata);
         src/dungeon_damage.o(.rodata);
         src/code_806FDF4.o(.rodata);

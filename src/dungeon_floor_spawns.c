@@ -1,6 +1,6 @@
 #include "global.h"
 #include "globaldata.h"
-#include "dungeon_spawns.h"
+#include "dungeon_floor_spawns.h"
 #include "constants/dungeon.h"
 #include "constants/trap.h"
 #include "bg_palette_buffer.h"

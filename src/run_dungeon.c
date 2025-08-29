@@ -35,7 +35,7 @@
 #include "dungeon_misc.h"
 #include "dungeon_music.h"
 #include "dungeon_name_banner.h"
-#include "dungeon_spawns.h"
+#include "dungeon_floor_spawns.h"
 #include "dungeon_pokemon_sprites.h"
 #include "dungeon_random.h"
 #include "dungeon_strings.h"
@@ -55,6 +55,7 @@
 #include "dungeon_tilemap.h"
 #include "dungeon_cleared_window.h"
 #include "dungeon_cutscene.h"
+#include "dungeon_mon_spawn.h"
 
 EWRAM_INIT struct UnkStruct_203B414 *gUnknown_203B414 = NULL;
 EWRAM_INIT Dungeon *gDungeon = NULL;
@@ -65,7 +66,6 @@ extern void sub_8041888(u8 param_1);
 extern void sub_803D4AC(void);
 extern void sub_804513C(void);
 extern void sub_8068F28(void);
-extern void sub_806C1D8(void);
 extern void IncrementThievingSuccesses(void);
 extern void sub_8043D60(void);
 extern void sub_80840A4(void);
@@ -77,12 +77,6 @@ extern void sub_80521D0(void);
 extern void sub_8068A84(Pokemon *pokemon);
 extern void sub_80427AC(void);
 extern void sub_806AA70(void);
-extern void sub_806AD3C(void);
-extern void sub_806C42C(void);
-extern void sub_806B678(void);
-extern void sub_806C3C0(void);
-extern void sub_806B168(void);
-extern void sub_806B6C4(void);
 extern void ReevaluateSnatchMonster(void);
 extern void sub_8051E3C(void);
 extern void sub_807FA18(void);
@@ -92,7 +86,6 @@ extern void sub_8068F80(void);
 extern void sub_8042E98(void);
 extern bool8 TryForcedLoss(bool8);
 extern void sub_806A914(bool8 a0, bool8 a1, bool8 showRunAwayEffect);
-extern void ResetMonEntityData(EntityInfo *, u32);
 extern s32 GetMovesLearnedAtLevel(u16* dst, s16 species, s32 level, s32 IQPoints);
 extern void sub_8042B0C(Entity *);
 
@@ -101,7 +94,6 @@ extern u8 gUnknown_202F1A8;
 
 void EnforceMaxItemsAndMoney(void);
 static void sub_8043FD0(void);
-void sub_806B404(void);
 
 extern OpenedFile *gDungeonNameBannerPalette;
 
@@ -359,7 +351,7 @@ void RunDungeon_Async(DungeonSetupStruct *setupPtr)
         if (!r6) {
             sub_806B168();
             sub_806C3C0();
-            sub_806B6C4();
+            SpawnWildMonsOnFloor();
         }
         else {
             sub_806B678();
